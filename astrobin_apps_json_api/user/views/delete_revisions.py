@@ -11,10 +11,15 @@ class DeleteRevisions(JsonRequestResponseMixin, LoginRequiredMixin, View):
         pks = self.request_json["revisions"]
 
         if len(pks) > 0:
-            revisions = ImageRevision.objects.filter(image__user=request.user, pk__in=pks)
+            revisions = ImageRevision.all_objects.filter(image__user=request.user, pk__in=pks)
 
             if len(pks) != revisions.count():
                 return self.render_bad_request_response()
+
+            for revision in revisions:
+                if revision.corrupted and revision.recovered:
+                    revision.corrupted = False
+                    revision.save(keep_deleted=True)
 
             revisions.delete()
 

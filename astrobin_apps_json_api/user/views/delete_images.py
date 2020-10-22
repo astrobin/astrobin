@@ -11,10 +11,15 @@ class DeleteImages(JsonRequestResponseMixin, LoginRequiredMixin, View):
         pks = self.request_json["images"]
 
         if len(pks) > 0:
-            images = Image.objects_including_wip.filter(user=request.user, pk__in=pks)
+            images = Image.all_objects.filter(user=request.user, pk__in=pks)
 
             if len(pks) != images.count():
                 return self.render_bad_request_response()
+
+            for image in images:
+                if image.corrupted and image.recovered:
+                    image.corrupted = False
+                    image.save(keep_deleted=True)
 
             images.delete()
 
