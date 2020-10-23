@@ -29,10 +29,8 @@ services:
           --timeout 300 \
           --graceful-timeout 300 \
           -k gevent
-    links:
-      - memcached
     ports:
-      - "8084:8084"
+      - "8083:8083"
     env_file:
       - ./astrobin.env
     environment:

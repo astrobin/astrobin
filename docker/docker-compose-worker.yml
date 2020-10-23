@@ -19,6 +19,10 @@ services:
       - POSTGRES_USER=astrobin
     volumes:
       - media:/media
+    deploy:
+      resources:
+        limits:
+          memory: 2g
 
 
   celery_email:
@@ -36,6 +40,10 @@ services:
       - POSTGRES_USER=astrobin
     volumes:
       - media:/media
+    deploy:
+      resources:
+        limits:
+          memory: 2g
 
 
   celery_thumbnails:
@@ -53,6 +61,10 @@ services:
       - POSTGRES_USER=astrobin
     volumes:
       - media:/media
+    deploy:
+      resources:
+        limits:
+          memory: 2g
 
 
   celery_haystack:
@@ -70,7 +82,10 @@ services:
       - POSTGRES_USER=astrobin
     volumes:
       - media:/media
-
+    deploy:
+      resources:
+        limits:
+          memory: 2g
 
 volumes:
   media: { }
