@@ -1174,7 +1174,8 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
             square_cropping = ImageService(revision.image).get_default_cropping(revision.label)
 
         return {
-            'square_cropping': square_cropping
+            'square_cropping': square_cropping,
+            'mouse_hover_image': revision.image.mouse_hover_image
         }
 
     def get_success_url(self):
