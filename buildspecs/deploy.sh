@@ -21,7 +21,7 @@ MODIFIED_DEFAULT_VERSION=$(aws ec2 modify-launch-template \
     --default-version ${NEW_VERSION_NUMBER}
 )
 AUTOSCALING_GROUP_DESCRIPTION=$(aws autoscaling describe-auto-scaling-groups \
-    --auto-scaling-group-names astrobin-autoscaling-group)
+    --auto-scaling-group-names $AUTOSCALING_GROUP_NAME)
 CURRENT_MIN_SIZE=$(echo "$AUTOSCALING_GROUP_DESCRIPTION" | jq -r ".AutoScalingGroups[0].MinSize")
 CURRENT_MAX_SIZE=$(echo "$AUTOSCALING_GROUP_DESCRIPTION" | jq -r ".AutoScalingGroups[0].MaxSize")
 CURRENT_DESIRED_CAPACITY=$(echo "$AUTOSCALING_GROUP_DESCRIPTION" | jq -r ".AutoScalingGroups[0].DesiredCapacity")
