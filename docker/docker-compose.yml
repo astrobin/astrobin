@@ -117,6 +117,7 @@ services:
     volumes:
       - media:/media
       - tmp:/tmp
+      - /astrobin-temporary-files:/astrobin-temporary-files
 
 
 volumes:
