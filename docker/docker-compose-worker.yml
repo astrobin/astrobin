@@ -1,17 +1,6 @@
 version: '3'
 
 services:
-  nginx:
-    image: astrobin/nginx-${NGINX_MODE}-20200605.1
-    links:
-      - astrobin
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - media:/media
-      - letsencrypt:/etc/letsencrypt
-
 
   celery_main:
     image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
@@ -30,6 +19,10 @@ services:
       - POSTGRES_USER=astrobin
     volumes:
       - media:/media
+    deploy:
+      resources:
+        limits:
+          memory: 2g
 
 
   celery_email:
@@ -47,6 +40,10 @@ services:
       - POSTGRES_USER=astrobin
     volumes:
       - media:/media
+    deploy:
+      resources:
+        limits:
+          memory: 2g
 
 
   celery_thumbnails:
@@ -64,6 +61,10 @@ services:
       - POSTGRES_USER=astrobin
     volumes:
       - media:/media
+    deploy:
+      resources:
+        limits:
+          memory: 2g
 
 
   celery_haystack:
@@ -81,48 +82,10 @@ services:
       - POSTGRES_USER=astrobin
     volumes:
       - media:/media
-
-
-  beat:
-    image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
-    command: bash -c "python manage.py collectstatic --noinput && celery -A astrobin beat -l debug --pidfile= --scheduler django_celery_beat.schedulers:DatabaseScheduler"
-    env_file:
-      - ./astrobin.env
-    environment:
-      - C_FORCE_ROOT=true
-      - PYTHONPATH=/usr/lib/python2.7/dist-packages
-      - DJANGO_SETTINGS_MODULE=astrobin.settings
-      - CELERY_RDB_HOST=0.0.0.0
-      - CELERY_RDB_PORT=6900
-      - POSTGRES_DB=astrobin
-      - POSTGRES_USER=astrobin
-    volumes:
-      - media:/media
-
-
-  astrobin:
-    image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
-    command: bash -c "./scripts/init.sh && gunicorn wsgi:application -w 4 -b :8083 --max-requests 500 --max-requests-jitter 50 --timeout 300 --graceful-timeout 300 -k gevent"
-    links:
-      - memcached
-    ports:
-      - "8084:8084"
-    env_file:
-      - ./astrobin.env
-    environment:
-      - PYTHONPATH=/usr/lib/python2.7/dist-packages
-      - DJANGO_SETTINGS_MODULE=astrobin.settings
-      - POSTGRES_DB=astrobin
-      - POSTGRES_USER=astrobin
-    volumes:
-      - media:/media
-      - tmp:/tmp
-      - /astrobin-temporary-files:/astrobin-temporary-files
-
+    deploy:
+      resources:
+        limits:
+          memory: 2g
 
 volumes:
-  postgres-data: {}
-  elasticsearch-data: {}
-  media: {}
-  letsencrypt: {}
-  tmp: {}
+  media: { }

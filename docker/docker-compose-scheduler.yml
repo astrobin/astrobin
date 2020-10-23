@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+
+  beat:
+    image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
+    command:
+      - bash
+      - -c
+      - |
+        python manage.py collectstatic --noinput && \
+        celery -A astrobin beat -l debug --pidfile= --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    env_file:
+      - ./astrobin.env
+    environment:
+      - C_FORCE_ROOT=true
+      - PYTHONPATH=/usr/lib/python2.7/dist-packages
+      - DJANGO_SETTINGS_MODULE=astrobin.settings
+      - CELERY_RDB_HOST=0.0.0.0
+      - CELERY_RDB_PORT=6900
+      - POSTGRES_DB=astrobin
+      - POSTGRES_USER=astrobin
+    volumes:
+      - media:/media
+
+
+volumes:
+  media: {}

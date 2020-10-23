@@ -3,7 +3,7 @@
 
 PATH=/usr/local/bin:/usr/bin:/bin
 
-if [ ! -f docker/docker-compose.yml ]; then
+if [ ! -f docker/docker-compose-app.yml ]; then
     echo "ERROR: Run this script from the root of the git repository."
     exit 1
 fi
@@ -36,7 +36,12 @@ case $yn in
 esac
 
 echo "Shutting down the development stack..."
-docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml down
+docker-compose \
+    -f docker/docker-compose-app.yml \
+    -f docker/docker-compose-worker.yml \
+    -f docker/docker-compose-scheduler.yml \
+    -f docker/docker-compose-local.yml \
+    down
 
 echo "Removing data volumes..."
 docker volume rm docker_media

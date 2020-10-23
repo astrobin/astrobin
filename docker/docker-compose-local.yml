@@ -21,8 +21,6 @@ services:
 
   redis:
     image: redis:6.0.8-alpine
-    expose:
-      - 6379
     ports:
       - "6379:6379"
 
@@ -43,11 +41,22 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
-    command: bash -c "./scripts/init.sh && ./manage.py collectstatic --noinput && gunicorn wsgi:application -w 4 -b :8083 --max-requests 1000 --max-requests-jitter 50 --timeout 300 --graceful-timeout 300 -k gevent"
+    command:
+      - bash
+      - -c
+      - |
+        ./scripts/init.sh && \
+        gunicorn wsgi:application \
+          -w 4 \
+          -b :8083 \
+          --max-requests 500 \
+          --max-requests-jitter 50 \
+          --timeout 300 \
+          --graceful-timeout 300 \
+          -k gevent
     ports:
       - "8083:8083"
       - "8084:8084"
-      - "4200:4200"
     volumes:
       - ..:/code
     links:
@@ -55,6 +64,7 @@ services:
       - postgres
       - elasticsearch
       - redis
+      - memcached
 
 
   celery_main:
@@ -112,3 +122,11 @@ services:
     command: python -m smtpd -n -c DebuggingServer 0.0.0.0:25
     ports:
       - "25"
+
+
+volumes:
+  postgres-data: { }
+  elasticsearch-data: { }
+  tmp: { }
+  media: { }
+  letsencrypt: { }
