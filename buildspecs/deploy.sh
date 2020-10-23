@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -ex
 
 RELEASE_TAG=${CODEBUILD_RESOLVED_SOURCE_VERSION}
 TEMPLATE_NAME=$1

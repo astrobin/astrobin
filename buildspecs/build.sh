@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -ex
 
 docker build \
     -t astrobin:$CODEBUILD_RESOLVED_SOURCE_VERSION \

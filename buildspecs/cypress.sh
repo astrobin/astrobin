@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -ex
 
 export NGINX_MODE=dev
 export ASTROBIN_BUILD=${CODEBUILD_RESOLVED_SOURCE_VERSION}
