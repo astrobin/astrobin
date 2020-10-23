@@ -7,7 +7,7 @@ export ASTROBIN_BUILD=${RELEASE_TAG}
 export ASTROBIN_TEMPORARY_FILES=/astrobin-temporary-files
 export USER=ubuntu
 export GROUP=ubuntu
-export NGINX_MODE=dev
+export NGINX_MODE=prod
 
 
 # Install efs-utils:
