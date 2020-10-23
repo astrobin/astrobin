@@ -37,7 +37,5 @@ if DEBUG:
     ]
 
     CELERY_ALWAYS_EAGER = True
-    CELERY_RESULT_BACKEND = 'cache'
-    CELERY_CACHE_BACKEND = 'memory'
 
     STATICFILES_STORAGE = 'pipeline.storage.NonPackagingPipelineStorage'
