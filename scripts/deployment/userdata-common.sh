@@ -10,13 +10,13 @@
 
 # Assumptions:
 #  - The astrobin repository is checked out at the root directory.
-#  - There is a file called /astrobin.env with the needed environment variables.
 
 export ASTROBIN_TEMPORARY_FILES=/astrobin-temporary-files
 export USER=ubuntu
 export GROUP=ubuntu
 export NGINX_MODE=prod
 export ASTROBIN_BUILD=$RELEASE_TAG
+export DISPLAY=:0
 
 # Get initial packages:
 
@@ -63,5 +63,4 @@ docker swarm init
 NODE_ID=$(docker node ls --format "{{.ID}}")
 docker node update --label-add default=true ${NODE_ID}
 docker node update --label-add app=true ${NODE_ID}
-cp /astrobin.env /astrobin/docker/astrobin.env
 docker stack deploy --compose-file docker/docker-compose.yml --compose-file docker/docker-compose.deploy.yml docker
