@@ -4743,5 +4743,11 @@ form.edit-thumbnails {
     background: $black;
     border: 1px solid $white;
     box-shadow: 0 0 1rem rgba(0,0,0,.5);
+
+    .alert {
+      max-width: 400px;
+      margin-top: 1.25rem;
+      text-align: left;
+    }
   }
 }
