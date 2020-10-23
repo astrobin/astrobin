@@ -79,12 +79,24 @@ installed.
 
 ## Step 4: Bring up the stack
 
-The `docker-compose.yml` file contains all the instructions needed to bring up the
+The `docker-compose-*.yml` files contain all the instructions needed to bring up the
 stack, including how to build the `astrobin`, `celery`, and `beat` containers.
+
+You may want to create an alias to reference all the docker-compose files needed in development:
+
+```bash
+alias compose="docker-compose \
+    -f docker/docker-compose-app.yml \
+    -f docker/docker-compose-worker.yml \
+    -f docker/docker-compose-scheduler.yml \
+    -f docker/docker-compose-local.yml"
+```
+
+And then bring up the stack:
 
 ```bash
 export NGINX_MODE=dev
-docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml up -d
+compose up -d
 ```
 
 ## Step 5: First-time setup
@@ -100,19 +112,19 @@ The `init.sh` script does some initial django initialization, like creating grou
 and the "site" configuration.
 
 ```bash
-docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml run --no-deps --rm astrobin ./scripts/init.sh
+compose run --no-deps --rm astrobin ./scripts/init.sh
 ```
 
 Then, to make all the static files (CSS, javascript, images, etc.) available to the app, run:
 
 ```bash
-docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml run --no-deps --rm astrobin python manage.py collectstatic --noinput
+compose run --no-deps --rm astrobin python manage.py collectstatic --noinput
 ```
 
 ## Step 6: Ensure services are running
 
 ```bash
-docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml ps
+compose ps
 ```
 
 This shows you the containers running.  Check the `State` column and make sure
@@ -146,16 +158,16 @@ database.  So a "lightweight" reset would be to do the following:
 
 ```bash
 # bring down the stack
-docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml down
+compose down
 
 # delete the postgresql volume
 docker volume rm docker_postgres-data
 
 # bring the stack back up
-docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml up -d
+compose up -d
 
 # re-initialize django
-docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml run --no-deps --rm astrobin ./scripts/init.sh
+compose run --no-deps --rm astrobin ./scripts/init.sh
 ```
 
 But if you *really* want to start from scratch, for example to do a final thorough build and test
@@ -250,7 +262,7 @@ Before you submit your code for review, you should run tests to ensure that your
 have not broken anything important.  Run the test script by executing:
 
 ```
-docker-compose -f docker/docker-compose.yml -f docker/docker-compose.build.yml run --no-deps --rm astrobin ./scripts/test.sh
+compose run --no-deps --rm astrobin ./scripts/test.sh
 ```
 
 # Postgresql
@@ -286,26 +298,20 @@ docker build -t astrobin/nginx-${ENV} \
 
 # Docker Swarm deployment
 
-To install on one or more servers and make a swarm out of it all, do the following on the swarm manager:
+To deploy with docker stack:
 
 ```bash
 export NGINX_MODE=dev # or prod
 docker swarm init
-docker node update --label-add default=true <manager-node-id> # docker node ls
-docker node update --label-add app=true <worker-node-id>
-docker swarm join-token worker # Take note of the output command
-docker stack deploy -c docker/docker-compose.yml -c docker/docker-compose.deploy.yml docker
-```
-
-And on a worker:
-
-```bash
-docker swarm join --token <token> <ip>:<port>
+docker stack deploy \
+    -c docker/docker-compose-app.yml \
+    -c docker/docker-compose-worker.yml \
+    -c docker/docker-compose-scheduler.yml \
+    -c docker/docker-compose-local.yml \
+    docker
 ```
 
 # Contributing
 
-AstroBin accepts contributions. Please fork the project and submit pull
-requests!
-If you need support, please use the [astrobin-dev Google
-Group](https://groups.google.com/forum/#!forum/astrobin-dev).
+AstroBin accepts contributions. Please fork the project and submit pull requests! If you need support, please use the
+[astrobin-dev Google Group](https://groups.google.com/forum/#!forum/astrobin-dev).

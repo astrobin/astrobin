@@ -11,12 +11,9 @@
 # Assumptions:
 #  - The astrobin repository is checked out at the root directory.
 
-export ASTROBIN_TEMPORARY_FILES=/astrobin-temporary-files
-export USER=ubuntu
-export GROUP=ubuntu
-export NGINX_MODE=prod
-export ASTROBIN_BUILD=$RELEASE_TAG
+
 export DISPLAY=:0
+export USER=ubuntu
 
 # Get initial packages:
 
@@ -46,21 +43,3 @@ rm /usr/bin/docker-credential-secretservice
 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${DOCKER_REGISTRY}
 docker pull ${DOCKER_REGISTRY}/astrobin:${RELEASE_TAG}
 
-# Install efs-utils:
-
-git clone https://github.com/aws/efs-utils && (cd efs-utils && ./build-deb.sh && apt-get -y install ./build/amazon-efs-utils*deb)
-
-# Mount EFS:
-
-mkdir ${ASTROBIN_TEMPORARY_FILES}
-mount -t efs -o tls ${EFS_FILE_SYSTEM}:/ ${ASTROBIN_TEMPORARY_FILES}
-mkdir -p ${ASTROBIN_TEMPORARY_FILES}/files
-chown ${USER}:${USER} ${ASTROBIN_TEMPORARY_FILES}/files
-
-# Create docker stack:
-
-docker swarm init
-NODE_ID=$(docker node ls --format "{{.ID}}")
-docker node update --label-add default=true ${NODE_ID}
-docker node update --label-add app=true ${NODE_ID}
-docker stack deploy --compose-file docker/docker-compose.yml --compose-file docker/docker-compose.deploy.yml docker

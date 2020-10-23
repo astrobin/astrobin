@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+
+  nginx:
+    image: astrobin/nginx-${NGINX_MODE}-20200605.1
+    links:
+      - astrobin
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - media:/media
+      - letsencrypt:/etc/letsencrypt
+
+
+  astrobin:
+    image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
+    command:
+      - bash
+      - -c
+      - |
+        ./scripts/init.sh && \
+        gunicorn wsgi:application \
+          -w 4 \
+          -b :8083 \
+          --max-requests 500 \
+          --max-requests-jitter 50 \
+          --timeout 300 \
+          --graceful-timeout 300 \
+          -k gevent
+    links:
+      - memcached
+    ports:
+      - "8084:8084"
+    env_file:
+      - ./astrobin.env
+    environment:
+      - PYTHONPATH=/usr/lib/python2.7/dist-packages
+      - DJANGO_SETTINGS_MODULE=astrobin.settings
+      - POSTGRES_DB=astrobin
+      - POSTGRES_USER=astrobin
+    volumes:
+      - media:/media
+      - tmp:/tmp
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+
+
+volumes:
+  media: { }
+  letsencrypt: { }
+  tmp: { }
