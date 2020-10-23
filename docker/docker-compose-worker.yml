@@ -22,7 +22,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2g
+          memory: 500m
 
 
   celery_email:
@@ -43,7 +43,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2g
+          memory: 500m
 
 
   celery_thumbnails:
@@ -64,7 +64,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2g
+          memory: 1g
 
 
   celery_haystack:
@@ -85,7 +85,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2g
+          memory: 1g
 
 volumes:
   media: { }

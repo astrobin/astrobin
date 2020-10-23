@@ -22,7 +22,10 @@ services:
       - POSTGRES_USER=astrobin
     volumes:
       - media:/media
-
+    deploy:
+      resources:
+        limits:
+          memory: 1g
 
 volumes:
   media: {}
