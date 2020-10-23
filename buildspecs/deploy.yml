@@ -8,6 +8,6 @@ phases:
 
   build:
     commands:
-      - buildpecs/deploy.sh astrobin-app-launch-template astrobin-app-autoscaling-group 540
-      - buildpecs/deploy.sh astrobin-worker-launch-template astrobin-worker-autoscaling-group 0
-      - buildpecs/deploy.sh astrobin-scheduler-launch-template astrobin-scheduler-autoscaling-group 0
+      - buildspecs/deploy.sh astrobin-app-launch-template astrobin-app-autoscaling-group 540
+      - buildspecs/deploy.sh astrobin-worker-launch-template astrobin-worker-autoscaling-group 0
+      - buildspecs/deploy.sh astrobin-scheduler-launch-template astrobin-scheduler-autoscaling-group 0
