@@ -2377,6 +2377,17 @@ class ImageTest(TestCase):
 
         self.client.logout()
 
+    def test_image_revision_keeps_mouse_hover_from_image(self):
+        image = Generators.image(user=self.user)
+        image.mouse_hover_image = 'INVERTED'
+        image.save(keep_deleted=True)
+
+        revision = Generators.imageRevision(image=image)
+
+        self.client.login(username='test', password='password')
+        response = self.client.get(reverse('image_edit_revision', args=(revision.pk,)))
+        self.assertContains(response, '<option value="INVERTED" selected>')
+
     def test_image_delete_has_permanently_deleted_text(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
