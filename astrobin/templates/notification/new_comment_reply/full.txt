@@ -1,2 +1,5 @@
 {% load i18n %}
-{% blocktrans %}{{user}} replied to your comment. Check it out at the following url: {{url}}{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    {{user}} replied to your comment. Check it out at the following url: {{url}}
+{% endblocktrans %}

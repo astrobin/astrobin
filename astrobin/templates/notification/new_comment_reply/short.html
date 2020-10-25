@@ -1,2 +1,5 @@
 {% load i18n %}
-{% blocktrans %}<a href="{{url}}"><strong>{{user}}</strong> replied to your comment.</a>{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    <a href="{{url}}"><strong>{{user}}</strong> replied to your comment.</a>
+{% endblocktrans %}
