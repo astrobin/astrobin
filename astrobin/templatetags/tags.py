@@ -17,7 +17,7 @@ from astrobin.models import GearUserInfo, UserProfile, Image
 from astrobin.utils import get_image_resolution, decimal_to_hours_minutes_seconds, decimal_to_degrees_minutes_seconds
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium_2020, is_premium, is_ultimate_2020, \
-    is_lite, is_any_ultimate
+    is_lite, is_any_ultimate, is_free
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from astrobin_apps_users.services import UserService
 
@@ -260,6 +260,42 @@ def show_ads(user):
         return False
 
     return True
+
+
+@register.simple_tag(takes_context=True)
+def show_ads_on_page(context):
+    request = context['request']
+
+    if not show_ads(request.user):
+        return False
+
+    if context.template_name == 'image/detail.html':
+        for data in context.dicts:
+            if 'image' in data:
+                return show_ads(request.user) and not is_any_ultimate(data['image'].user)
+    elif context.template_name in (
+        'user/profile.html',
+        'user_collections_list.html',
+        'user_collections_detail.html',
+        'user/bookmarks.html',
+        'user/liked.html',
+        'user/following.html',
+        'user/followers.html',
+        'user/plots.html',
+    ):
+        for data in context.dicts:
+            if 'requested_user' in data:
+                return show_ads(request.user) and not is_any_ultimate(data['requested_user'])
+    elif context.template_name == 'index/root.html':
+        return show_ads(request.user) and is_free(request.user)
+    elif context.template_name in (
+        'search/search.html',
+        'top_picks.html',
+        'astrobin_apps_iotd/iotd_archive.html'
+    ):
+        return show_ads(request.user) and (not request.user.is_authenticated() or is_free(request.user))
+
+    return False
 
 
 @register.simple_tag(takes_context=True)

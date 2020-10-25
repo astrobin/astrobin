@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'easy_thumbnails',
     'el_pagination',
-    'dfp',
     'django_user_agents',
     'pybb',
     'markup_deprecated',

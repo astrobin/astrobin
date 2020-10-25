@@ -44,9 +44,11 @@
     {% endif %}
 
 
-    <div class="visible-phone">
-        {% include 'image/detail/phone_ad.html' %}
-    </div>
+    {% if request.user_agent.is_mobile %}
+        {% with ad_container_classes='visible-phone' %}
+            {% include 'ads/wide_ad.html' %}
+        {% endwith %}
+    {% endif %}
 
     {% include 'image/detail/pending_moderation_banner.html' %}
     {% include 'image/detail/wip_banner.html' %}
