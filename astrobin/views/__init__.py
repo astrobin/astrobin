@@ -1498,6 +1498,47 @@ def user_page_followers(request, username, extra_context=None):
 
 
 @require_GET
+@page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key='users_page')
+def user_page_friends(request, username, extra_context=None):
+    user = get_object_or_404(UserProfile, user__username=username).user
+
+    user_ct = ContentType.objects.get_for_model(User)
+    friends = []
+    followers = [
+        x.user for x in
+        ToggleProperty.objects.filter(
+            property_type="follow",
+            object_id=user.pk,
+            content_type=user_ct)
+    ]
+
+    for follower in followers:
+        if ToggleProperty.objects.filter(
+                property_type="follow",
+                user=user,
+                object_id=follower.pk,
+                content_type=user_ct).exists():
+            friends.append(follower)
+
+    template_name = 'user/friends.html'
+    if request.is_ajax():
+        template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
+
+    response_dict = {
+        'request_user': UserProfile.objects.get(
+            user=request.user).user if request.user.is_authenticated() else None,
+        'requested_user': user,
+        'user_list': friends,
+        'view': request.GET.get('view', 'default'),
+        'private_message_form': PrivateMessageForm(),
+    }
+
+    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+
+    return render(request, template_name, response_dict)
+
+
+@require_GET
 def user_page_plots(request, username):
     """Shows the user's public page"""
     user = get_object_or_404(UserProfile, user__username=username).user
