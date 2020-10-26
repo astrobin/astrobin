@@ -1447,6 +1447,8 @@ def user_page_following(request, username, extra_context=None):
         except User.DoesNotExist:
             pass
 
+    followed_users.sort(key=lambda x: x.username)
+
     template_name = 'user/following.html'
     if request.is_ajax():
         template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
@@ -1478,6 +1480,8 @@ def user_page_followers(request, username, extra_context=None):
             object_id=user.pk,
             content_type=user_ct)
     ]
+
+    followers.sort(key=lambda x: x.username)
 
     template_name = 'user/followers.html'
     if request.is_ajax():
@@ -1519,6 +1523,8 @@ def user_page_friends(request, username, extra_context=None):
                 object_id=follower.pk,
                 content_type=user_ct).exists():
             friends.append(follower)
+
+    friends.sort(key=lambda x: x.username)
 
     template_name = 'user/friends.html'
     if request.is_ajax():

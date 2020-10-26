@@ -261,8 +261,8 @@ body.full {
   background-color: $orange;
 }
 
-li [class^="icon-"], .nav li [class^="icon-"],
-li [class*=" icon-"], .nav li [class*=" icon-"] {
+.nav li [class^="icon-"],
+.nav li [class*=" icon-"] {
   display: inline-block;
   width: 1.25em;
   text-align: center;
