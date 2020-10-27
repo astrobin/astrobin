@@ -1138,6 +1138,12 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
           }
         }
       }
+
+      i.icon {
+        width: 1.25em;
+        text-align: center;
+        display: inline-block;
+      }
     }
   }
 
