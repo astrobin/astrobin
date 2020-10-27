@@ -12,6 +12,7 @@ from .copy_gear_form import CopyGearForm
 from .deep_sky_acquisition_basic_form import DeepSky_AcquisitionBasicForm
 from .deep_sky_acquisition_form import DeepSky_AcquisitionForm
 from .default_license_form import DefaultImageLicenseForm
+from .delete_account_form import DeleteAccountForm
 from .demote_form import ImageDemoteForm
 from .edit_basic_form import ImageEditBasicForm
 from .edit_gear_form import ImageEditGearForm
