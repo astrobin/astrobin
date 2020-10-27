@@ -65,6 +65,9 @@ RUN sass astrobin/static/astrobin/scss/astrobin-mobile.scss astrobin/static/astr
 COPY docker/astrobin.logrotate.conf /etc/logrotate.d/astrobin
 RUN chown root:root /etc/logrotate.d/astrobin && chmod 644 /etc/logrotate.d/astrobin
 
+# Set up permissions for logging in DEBUG mode
+RUN touch debug.log && chmod 777 debug.log
+
 CMD python manage.py migrate --noinput && gunicorn wsgi:application -w 2 -b :8083
 EXPOSE 8083
 EXPOSE 8084
