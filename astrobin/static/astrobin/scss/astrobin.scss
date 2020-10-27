@@ -1138,6 +1138,12 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
           }
         }
       }
+
+      i.icon {
+        width: 1.25em;
+        text-align: center;
+        display: inline-block;
+      }
     }
   }
 
@@ -2770,6 +2776,12 @@ li.revisions {
     border-radius: 1.45rem;
     border: 1px solid rgba(255, 255, 255, .2);
 
+    [class^="icon-"] {
+      width: 1.25em;
+      text-align: center;
+      display: inline-block;
+    }
+
     * {
       font-size: 1rem;
     }
@@ -3480,7 +3492,7 @@ table#private-shared-folders tr:hover a.delete-folder {
   }
 }
 
-#profile-details {
+.profile-details {
   margin: 0;
   width: calc(100% - 24px);
   height: 20%;
@@ -3497,7 +3509,7 @@ table#private-shared-folders tr:hover a.delete-folder {
 
     li {
       float: left;
-      width: 33.33%;
+      width: calc(33.33% - 4px);
 
       > a {
         float: left;
@@ -3529,7 +3541,7 @@ table#private-shared-folders tr:hover a.delete-folder {
 }
 
 @media screen and (max-width: 979px) {
-  #profile-details {
+  .profile-details {
     ul > li > a {
       font-size: 6px;
     }
@@ -3537,27 +3549,33 @@ table#private-shared-folders tr:hover a.delete-folder {
 }
 
 @media screen and (max-width: 767px) {
-  .profile-meta {
-    .user-card, .stats {
-      width: calc(100% - 170px);
-      float: left;
-      height: 250px;
-    }
+  .user-card,
+  .stats {
+    width: calc(100% - 170px);
+    float: left;
+  }
 
-    .user-card {
-      width: 142px;
-      padding: 0 12px;
+  .user-card {
+    width: 142px;
+    padding: 0 12px;
+    border-radius: 0;
 
-      #profile-details {
-        bottom: 64px;
-        height: 42px;
-        width: calc(100% - 26px);
+    .avatar {
+      img {
+        border-radius: 0;
       }
     }
 
-    .stats {
-      font-size: 12px;
+    .profile-details {
+      bottom: 0;
+      height: 40px;
+      width: 100%;
+      border-radius: 0;
     }
+  }
+
+  .stats {
+    font-size: 12px;
   }
 }
 
@@ -3661,6 +3679,22 @@ ul.astrobin-users {
       height: 30px;
       text-align: center;
       line-height: 30px;
+    }
+
+    .badge-mutual-followers {
+      position: absolute;
+      right: 16px;
+      top: 50px;
+      font-size: 14px;
+      height: 26px;
+      width: 26px;
+      text-align: center;
+      padding: 0px;
+      line-height: 26px;
+      border-radius: 26px;
+      background: $grey-5;
+      border: 1px solid $white;
+      box-shadow: 0 0 8px rgba(0, 0, 0, .66);
     }
   }
 }

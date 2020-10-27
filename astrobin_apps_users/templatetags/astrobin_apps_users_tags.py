@@ -168,3 +168,13 @@ def astrobin_apps_users_list(context, user_list, **kwargs):
         'PREMIUM_ENABLED': context['PREMIUM_ENABLED'],
     }
 
+
+@register.filter
+def is_mutual_follower(a, b):
+    # type: (User, User) -> bool
+
+    user_ct = ContentType.objects.get_for_model(User)
+    a_b = ToggleProperty.objects.filter(property_type='follow', object_id=b.id, content_type=user_ct, user=a).exists()
+    b_a = ToggleProperty.objects.filter(property_type='follow', object_id=a.id, content_type=user_ct, user=b).exists()
+
+    return a_b and b_a
