@@ -1,4 +1,5 @@
 import datetime
+import logging
 
 from braces.views import (
     LoginRequiredMixin,
@@ -22,6 +23,8 @@ from astrobin.stories import add_story
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
 from toggleproperties.models import ToggleProperty
+
+log = logging.getLogger('apps')
 
 
 class ImageModerationListView(LoginRequiredMixin, GroupRequiredMixin, ListView):
@@ -98,6 +101,7 @@ class ImageModerationBanAllView(LoginRequiredMixin, SuperuserRequiredMixin, JSON
             i.user.userprofile.deleted_reason = UserProfile.DELETE_REASON_IMAGE_SPAM
             i.user.userprofile.save(keep_deleted=True)
             i.user.userprofile.delete()
+            log.info("User %s (%d) was deleted because of image spam" % (i.user.username, i.user.pk))
 
         return self.render_json_response({
             'status': 'OK',
@@ -116,9 +120,11 @@ class ForumModerationMarkAsSpamView(LoginRequiredMixin, GroupRequiredMixin, View
             try:
                 topic = Topic.objects.get(id=id)
                 user = topic.user
-                user.userprofile.deleted_reason = UserProfile.DELETE_REASON_FORM_SPAM
+                user.userprofile.deleted_reason = UserProfile.DELETE_REASON_FORUM_SPAM
                 user.userprofile.save(keep_deleted=True)
                 user.userprofile.delete()
+                log.info("User %s (%d) was deleted because of forum spam" % (user.username, user.pk))
+
             except Topic.DoesNotExist:
                 # Topic already deleted by deleting the user
                 pass
