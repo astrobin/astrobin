@@ -43,14 +43,10 @@ docker-compose \
     -f docker/docker-compose-local.yml \
     down
 
-echo "Removing data volumes..."
-docker volume rm docker_media
-docker volume rm docker_postgres-data
-docker volume rm docker_elasticsearch-data
-docker volume rm docker_letsencrypt
-
-echo "Removing container images..."
-for image in astrobin/nginx-dev astrobin/astrobin; do
-    echo "-- $image"
-    docker image rm $(docker image ls | grep $image | awk '{print $3}')
-done
+echo "Removing everything..."
+docker stop $(docker ps -aq)
+docker rm $(docker ps -aq)
+docker network prune -f
+docker rmi -f $(docker images --filter dangling=true -qa)
+docker volume rm $(docker volume ls --filter dangling=true -q)
+docker rmi -f $(docker images -qa)
