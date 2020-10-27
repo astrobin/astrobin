@@ -95,6 +95,8 @@ alias compose="docker-compose \
 And then bring up the stack:
 
 ```bash
+export DOCKER_REGISTRY=astrobin
+export ASTROBIN_BUILD=dev
 export NGINX_MODE=dev
 compose up -d
 ```
