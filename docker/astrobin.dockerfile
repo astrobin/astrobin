@@ -68,6 +68,9 @@ RUN chown root:root /etc/logrotate.d/astrobin && chmod 644 /etc/logrotate.d/astr
 # Set up permissions for logging in DEBUG mode
 RUN touch debug.log && chmod 777 debug.log
 
+# Create imagecache directory
+RUN mkdir -p /media/imagecache && chown nobody:nogroup /media/imagecache
+
 CMD python manage.py migrate --noinput && gunicorn wsgi:application -w 2 -b :8083
 EXPOSE 8083
 EXPOSE 8084
