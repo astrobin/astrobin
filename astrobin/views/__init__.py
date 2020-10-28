@@ -47,7 +47,7 @@ from astrobin.forms import ImageUploadForm, ImageLicenseForm, PrivateMessageForm
     MountEditForm, CameraEditForm, FocalReducerEditForm, SoftwareEditForm, FilterEditForm, AccessoryEditForm, \
     GearUserInfoForm, LocationEditForm, ImageEditWatermarkForm, DeepSky_AcquisitionForm, \
     UserProfileEditPreferencesForm, \
-    ImageRevisionUploadForm, UserProfileEditGearForm
+    ImageRevisionUploadForm, UserProfileEditGearForm, DeleteAccountForm
 from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import Image, UserProfile, Gear, Location, ImageRevision, DeepSky_Acquisition, \
     SolarSystem_Acquisition, GearUserInfo, Telescope, Mount, Camera, FocalReducer, Software, Filter, \
@@ -1381,7 +1381,10 @@ def user_ban(request, username):
     user = get_object_or_404(UserProfile, user__username=username).user
 
     if request.method == 'POST':
+        user.userprofile.deleted_reason = UserProfile.DELETE_REASON_BANNED
+        user.userprofile.save(keep_deleted=True)
         user.userprofile.delete()
+        log.info("User %s (%d) was banned" % (user.username, user.pk))
 
     return render(request, 'user/ban.html', {
         'user': user,
@@ -2096,10 +2099,28 @@ def user_profile_save_preferences(request):
 @login_required
 def user_profile_delete(request):
     if request.method == 'POST':
-        request.user.userprofile.delete()
-        auth.logout(request)
+        form = DeleteAccountForm(instance=request.user.userprofile, data=request.POST)
+        form.full_clean()
+        if form.is_valid():
+            request.user.userprofile.deleted_reason = form.cleaned_data.get('deleted_reason')
+            request.user.userprofile.deleted_reason_other = form.cleaned_data.get('deleted_reason_other')
+            request.user.userprofile.save(keep_deleted=True)
+            request.user.userprofile.delete()
 
-    return render(request, 'user/profile/delete.html', {})
+            log.info("User %s (%d) deleted their account with reason %s ('%s')" % (
+                request.user.username,
+                request.user.pk,
+                request.user.userprofile.deleted_reason,
+                request.user.userprofile.deleted_reason_other,
+            ))
+
+            auth.logout(request)
+
+            return render(request, 'user/profile/deleted.html', {})
+    elif request.method == 'GET':
+        form = DeleteAccountForm(instance=request.user.userprofile)
+
+    return render(request, 'user/profile/delete.html', {'form': form})
 
 
 @login_required

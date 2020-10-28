@@ -1968,6 +1968,25 @@ class UserProfile(SafeDeleteModel):
         'Accessory': 'accessories',
     }
 
+    DELETE_REASON_NOT_ACTIVE = 'NOT_ACTIVE'
+    DELETE_REASON_DID_NOT_MEET_EXPECTATIONS = 'DID_NOT_MEET_EXPECTATIONS'
+    DELETE_REASON_DOESNT_WORKE = 'DOESNT_WORK'
+    DELETE_REASON_TOO_EXPENSIVE = 'TOO_EXPENSIVE'
+    DELETE_REASON_PREFER_NOT_TO_SAY = 'PREFER_NOT_TO_SAY'
+    DELETE_REASON_OTHER = 'OTHER'
+    DELETE_REASON_IMAGE_SPAM = 'IMAGE_SPAM'
+    DELETE_REASON_FORUM_SPAM = 'FORUM_SPAM'
+    DELETE_REASON_BANNED = 'BANNED'
+
+    DELETE_REASON_CHOICES = (
+        (DELETE_REASON_NOT_ACTIVE, _('I am no longer active in astrophotography')),
+        (DELETE_REASON_DID_NOT_MEET_EXPECTATIONS, _('This website did not meet my expectations')),
+        (DELETE_REASON_DOESNT_WORKE, _('Something on this website doesn\'t work for me')),
+        (DELETE_REASON_TOO_EXPENSIVE, _('The paid subscriptions are too expensive')),
+        (DELETE_REASON_PREFER_NOT_TO_SAY, _('I prefer not to say')),
+        (DELETE_REASON_OTHER, _('Other')),
+    )
+
     user = models.OneToOneField(User, editable=False)
 
     updated = models.DateTimeField(
@@ -2025,6 +2044,23 @@ class UserProfile(SafeDeleteModel):
     shadow_bans = models.ManyToManyField(
         "self",
         symmetrical=False
+    )
+
+    delete_reason = models.CharField(
+        choices=DELETE_REASON_CHOICES,
+        max_length=32,
+        null=True,
+        blank=False,
+        verbose_name=_("Delete reason"),
+        help_text=_("Why are you deleting your AstroBin account?"),
+    )
+
+    delete_reason_other = models.CharField(
+        max_length=512,
+        null=True,
+        blank=True,
+        verbose_name=_("Other"),
+        help_text=_("Please tell us why you are deleting your account (minimum 30 characters). Thanks!"),
     )
 
     # Counter for uploaded images.

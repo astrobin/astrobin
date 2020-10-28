@@ -56,6 +56,12 @@
                 <i class="icon-chevron-right"></i>
             </a>
         </li>
+        <li class="{% current request '^/profile/delete/' %}">
+            <a href="{% url 'profile_delete' %}">
+                <i class="icon-remove"></i> {% trans "Delete account" %}
+                <i class="icon-chevron-right"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
