@@ -14,15 +14,16 @@ class TusHeadMixin(TusCacheMixin, object):
     def head(self, request, *args, **kwargs):
         # Validate tus header
         if not has_required_tus_header(request):
-            log.warning("Chunked uploader: missing Tus-Resumable header in upload attempt by %s" % request.user)
-            return Response('Missing "{}" header.'.format('Tus-Resumable'), status=status.HTTP_400_BAD_REQUEST)
+            msg = 'Missing "{}" header.'.format('Tus-Resumable')
+            log.warning("Chunked uploader (%s): %s" % (request.user, msg))
+            return Response(msg, status=status.HTTP_400_BAD_REQUEST)
 
         try:
             object = self.get_object()
         except Http404:
             # Instead of simply throwing a 404, we need to add a cache-control header to the response
             msg = 'Not found.'
-            log.warning("Chunked uploader: %s in upload attempt by %s" % (msg, request.user))
+            log.warning("Chunked uploader (%s): %s" % (request.user, msg))
             return Response(msg, headers={'Cache-Control': 'no-store'}, status=status.HTTP_404_NOT_FOUND)
 
         offset = self.get_cached_property("offset", object)

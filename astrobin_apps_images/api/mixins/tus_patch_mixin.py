@@ -46,14 +46,15 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
     def partial_update(self, request, *args, **kwargs):
         # Validate tus header
         if not has_required_tus_header(request):
-            log.warning("Chunked uploader: missing Tus-Resumable header in upload attempt by %s" % request.user)
-            return HttpResponse('Missing "{}" header.'.format('Tus-Resumable'), status=status.HTTP_400_BAD_REQUEST)
+            msg = 'Missing "{}" header.'.format('Tus-Resumable')
+            log.warning("Chunked uploader (%s): %s" % (request.user, msg))
+            return HttpResponse(msg, status=status.HTTP_400_BAD_REQUEST)
 
         # Validate content type
         if not self._is_valid_content_type(request):
             msg = 'Invalid value for "Content-Type" header: {}. Expected "{}".'.format(
                 request.META['CONTENT_TYPE'], TusUploadStreamParser.media_type)
-            log.warning("Chunked uploader: %s in upload attempt by %s" % (msg, request.user))
+            log.warning("Chunked uploader (%s): %s" % (request.user, msg))
             return HttpResponse(msg, status=status.HTTP_400_BAD_REQUEST)
 
         # Retrieve object
@@ -64,14 +65,14 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
 
         # Validate upload_offset
         if upload_offset != self.get_cached_property("offset", object):
-            log.warning("Chunked uploader: offset conflict in upload attempt by %s" % request.user)
+            log.warning("Chunked uploader (%s) (%d): offset conflict" % (request.user, object.pk))
             raise Conflict
 
         temporary_file = get_or_create_temporary_file(object)
         if not os.path.isfile(temporary_file):
             # Initial request in the series of PATCH request was handled on a different server instance.
             msg = 'Previous chunks not found on this server.'
-            log.warning("Chunked uploader: %s in upload attempt by %s" % (msg, request.user))
+            log.warning("Chunked uploader (%s) (%d): %s" % (request.user, object.pk, msg))
             return HttpResponse(msg, status=status.HTTP_400_BAD_REQUEST)
 
         # Get chunk from request
@@ -80,7 +81,7 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
         # Check for data
         if not chunk_bytes:
             msg = 'No data.'
-            log.warning("Chunked uploader: %s in upload attempt by %s" % (msg, request.user))
+            log.warning("Chunked uploader (%s) (%d): %s" % (request.user, object.pk, msg))
             return HttpResponse(msg, status=status.HTTP_400_BAD_REQUEST)
 
         # Check checksum (http://tus.io/protocols/resumable-upload.html#checksum)
@@ -88,11 +89,11 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
         if upload_checksum is not None:
             if upload_checksum[0] not in TUS_API_CHECKSUM_ALGORITHMS:
                 msg = 'Unsupported Checksum Algorithm: {}.'.format(upload_checksum[0])
-                log.warning("Chunked uploader: %s in upload attempt by %s" % (msg, request.user))
+                log.warning("Chunked uploader (%s) (%d): %s" % (request.user, object.pk, msg))
                 return HttpResponse(msg, status=status.HTTP_400_BAD_REQUEST)
             elif not checksum_matches(upload_checksum[0], upload_checksum[1], chunk_bytes):
                 msg = 'Checksum Mismatch.'
-                log.warning("Chunked uploader: %s in upload attempt by %s" % (msg, request.user))
+                log.warning("Chunked uploader (%s) (%d) : %s" % (request.user, object.pk, msg))
                 return HttpResponse(msg, status=460)
 
         # Run chunk validator
@@ -101,17 +102,16 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
         # Check for data
         if not chunk_bytes:
             msg = 'No data. Make sure "validate_chunk" returns data.'
-            log.warning("Chunked uploader: %s in upload attempt by %s" % (msg, request.user))
+            log.warning("Chunked uploader (%s) (%d): %s" % (request.user, object.pk, msg))
             return HttpResponse(msg, status=status.HTTP_400_BAD_REQUEST)
 
         # Write file
         try:
             write_data(object, chunk_bytes)
-            log.debug("Chunked uploader: wrote %d bytes for object %d and user %s" % (
-                len(chunk_bytes), object.pk, request.user))
+            log.debug("Chunked uploader (%s) (%d): wrote %d bytes" % (request.user, object.pk, len(chunk_bytes)))
         except Exception as e:
             msg = str(e)
-            log.warning("Chunked uploader: %s in upload attempt by %s" % (msg, request.user))
+            log.warning("Chunked uploader (%s) (%d): exception writing data: %s" % (request.user, object.pk, msg))
             return HttpResponse(msg, status=status.HTTP_400_BAD_REQUEST)
 
         headers = {
@@ -119,7 +119,7 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
         }
 
         if self.get_cached_property("upload-length", object) == self.get_cached_property("offset", object):
-            log.debug("Chunked uploader: chunks completed for object %d and user %s" % (object.pk, request.user))
+            log.debug("Chunked uploader (%s) (%d): chunks completed" % (request.user, object.pk))
 
             # Trigger signal
             signals.saving.send(object)
@@ -127,8 +127,8 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             # Save file
             temporary_file = get_or_create_temporary_file(object)
 
-            log.debug("Chunked uploader: saving object %d by user %s to temporary file %s" % (
-                object.pk, request.user, temporary_file))
+            log.debug("Chunked uploader (%s) (%d): saving object to temporary file %s" % (
+                request.user, object.pk, temporary_file))
 
             getattr(object, self.get_file_field_name()).save(
                 self.get_upload_path_function()(object, self.get_cached_property("name", object)),
@@ -141,7 +141,7 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             os.remove(temporary_file)
             signals.finished.send(object)
 
-            log.debug("Chunked uploader: finished for object %d and user %s" % (object.pk, request.user))
+            log.debug("Chunked uploader (%s) (%d): finished" % (request.user, object.pk))
 
         # Add upload expiry to headers
         add_expiry_header(self.get_cached_property("expires", object), headers)
