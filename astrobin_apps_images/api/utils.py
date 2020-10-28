@@ -173,16 +173,24 @@ def checksum_matches(checksum_algorithm, checksum, bytes):
 
 
 def get_or_create_temporary_file(image):
-    if not get_cached_property("temporary-file-path", image):
+    def create_temporary_file(image):
         directory = "/astrobin-temporary-files/files"
         if not os.path.exists(directory):
             os.makedirs(directory)
         fd, path = tempfile.mkstemp(prefix="tus-upload-", dir=directory)
         os.close(fd)
         set_cached_property("temporary-file-path", image, path)
+        return path
 
-    cached = get_cached_property("temporary-file-path", image)
-    return cached
+    if not get_cached_property("temporary-file-path", image):
+        path = create_temporary_file(image)
+        return path
+
+    path = get_cached_property("temporary-file-path", image)
+    if not os.path.isfile(path):
+        path = create_temporary_file(image)
+
+    return path
 
 
 def write_data(image, bytes):

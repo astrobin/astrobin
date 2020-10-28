@@ -1,4 +1,4 @@
-import json
+import logging
 
 from django.http import Http404
 from rest_framework import status
@@ -7,18 +7,23 @@ from rest_framework.response import Response
 from astrobin_apps_images.api.mixins import TusCacheMixin
 from astrobin_apps_images.api.utils import has_required_tus_header, add_expiry_header, encode_upload_metadata
 
+log = logging.getLogger('apps')
+
 
 class TusHeadMixin(TusCacheMixin, object):
     def head(self, request, *args, **kwargs):
         # Validate tus header
         if not has_required_tus_header(request):
+            log.warning("Chunked uploader: missing Tus-Resumable header in upload attempt by %s" % request.user)
             return Response('Missing "{}" header.'.format('Tus-Resumable'), status=status.HTTP_400_BAD_REQUEST)
 
         try:
             object = self.get_object()
         except Http404:
             # Instead of simply throwing a 404, we need to add a cache-control header to the response
-            return Response('Not found.', headers={'Cache-Control': 'no-store'}, status=status.HTTP_404_NOT_FOUND)
+            msg = 'Not found.'
+            log.warning("Chunked uploader: %s in upload attempt by %s" % (msg, request.user))
+            return Response(msg, headers={'Cache-Control': 'no-store'}, status=status.HTTP_404_NOT_FOUND)
 
         offset = self.get_cached_property("offset", object)
 
