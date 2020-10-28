@@ -51,12 +51,11 @@ from astrobin.forms import ImageUploadForm, ImageLicenseForm, PrivateMessageForm
 from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import Image, UserProfile, Gear, Location, ImageRevision, DeepSky_Acquisition, \
     SolarSystem_Acquisition, GearUserInfo, Telescope, Mount, Camera, FocalReducer, Software, Filter, \
-    Accessory, GearHardMergeRedirect, GlobalStat, App, GearMakeAutoRename, Acquisition
-from astrobin.shortcuts import ajax_response, ajax_success, ajax_fail
+    Accessory, GlobalStat, App, GearMakeAutoRename, Acquisition
+from astrobin.shortcuts import ajax_response, ajax_success
 from astrobin.templatetags.tags import in_upload_wizard
 from astrobin.utils import to_user_timezone, get_client_country_code
 from astrobin_apps_images.services import ImageService
-from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution, PlateSolvingAdvancedSettings
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_restore_from_trash, \
@@ -511,6 +510,8 @@ def image_upload_process(request):
     """Process the form"""
 
     from astrobin_apps_premium.utils import premium_used_percent
+
+    log.info("Classic uploader (%s): submitted" % request.user)
 
     used_percent = premium_used_percent(request.user)
     if used_percent >= 100:
@@ -2132,6 +2133,8 @@ def image_revision_upload_process(request):
         raise Http404
 
     image = get_image_or_404(Image.objects_including_wip, image_id)
+
+    log.info("Classic uploader (revision) (%s) (%d): submitted" % (request.user, image.pk))
 
     if settings.READONLY_MODE:
         messages.error(request, _(
