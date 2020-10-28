@@ -2731,105 +2731,106 @@ form.avatar-change label.control-label {
   }
 }
 
-li.revisions {
-  padding: 4px;
-}
 
 .revisions-container {
   overflow: visible;
-}
 
-.revision {
-  position: relative;
+  li.revisions {
+    padding: 4px;
 
-  .badges {
-    display: none;
-  }
+    .revision {
+      position: relative;
 
-  .final {
-    position: relative;
+      .badges {
+        display: none;
+      }
 
-    .text {
-      z-index: 1;
-      position: absolute;
-      border: 0;
-      margin: 0;
-      padding: $spacer-small $spacer-medium;
-      background-color: #111;
-      background-color: rgba(0, 0, 0, 0.6);
-      @include rounded-corners;
-      top: -10px;
-      left: -4px;
-      @include rotate(-8deg);
+      .final {
+        position: relative;
+
+        .text {
+          z-index: 1;
+          position: absolute;
+          border: 0;
+          margin: 0;
+          padding: $spacer-small $spacer-medium;
+          background-color: #111;
+          background-color: rgba(0, 0, 0, 0.6);
+          @include rounded-corners;
+          top: -10px;
+          left: -4px;
+          @include rotate(-8deg);
+        }
+      }
+
+      .contextual-menu {
+        visibility: hidden;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        z-index: 2;
+        font-size: 1.15rem;
+        padding: .25rem .33rem;
+        background: rgba(0, 0, 0, 0.75);
+        border-radius: 1.45rem;
+        border: 1px solid rgba(255, 255, 255, .2);
+
+        [class^="icon-"] {
+          width: 1.25em;
+          text-align: center;
+          display: inline-block;
+        }
+
+        * {
+          font-size: 1rem;
+        }
+      }
+
+      &:hover .contextual-menu {
+        visibility: visible;
+      }
+
+      .label {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
+        margin: 0;
+        padding: 2px 0;
+        width: 80px;
+
+        background: $grey-6-dark;
+        background-color: rgba(0, 0, 0, 0.3);
+        filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4c000000', endColorstr='#4c000000')";
+
+        text-align: center;
+        font-weight: bold;
+
+        @include rounded-corners(0 0 12px 12px);
+
+        &.active {
+          background: white;
+          background-color: rgba(255, 255, 255, 0.66);
+          color: #111;
+        }
+      }
     }
-  }
 
-  .contextual-menu {
-    visibility: hidden;
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    z-index: 2;
-    font-size: 1.15rem;
-    padding: .25rem .33rem;
-    background: rgba(0, 0, 0, 0.75);
-    border-radius: 1.45rem;
-    border: 1px solid rgba(255, 255, 255, .2);
+    .revision-description {
+      padding: 8px;
 
-    [class^="icon-"] {
-      width: 1.25em;
-      text-align: center;
-      display: inline-block;
+      h3 {
+        color: $strong-text-color;
+        font-size: 16px;
+        margin: 0 0 4px 0;
+      }
+
+      p {
+        color: #c3c3c3;
+        font-size: 13px;
+        line-height: 15px;
+      }
     }
-
-    * {
-      font-size: 1rem;
-    }
-  }
-
-  &:hover .contextual-menu {
-    visibility: visible;
-  }
-
-  .label {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-
-    margin: 0;
-    padding: 2px 0;
-    width: 80px;
-
-    background: $grey-6-dark;
-    background-color: rgba(0, 0, 0, 0.3);
-    filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4c000000', endColorstr='#4c000000')";
-
-    text-align: center;
-    font-weight: bold;
-
-    @include rounded-corners(0 0 12px 12px);
-
-    &.active {
-      background: white;
-      background-color: rgba(255, 255, 255, 0.66);
-      color: #111;
-    }
-  }
-}
-
-.revision-description {
-  padding: 8px;
-
-  h3 {
-    color: $strong-text-color;
-    font-size: 16px;
-    margin: 0 0 4px 0;
-  }
-
-  p {
-    color: #c3c3c3;
-    font-size: 13px;
-    line-height: 15px;
   }
 }
 
