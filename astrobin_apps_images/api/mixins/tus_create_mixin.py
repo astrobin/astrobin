@@ -1,4 +1,5 @@
 import json
+import logging
 
 import simplejson
 from django.http import HttpResponse
@@ -10,6 +11,8 @@ from astrobin_apps_images.api.mixins import TusCacheMixin
 from astrobin_apps_images.api.utils import has_required_tus_header, add_expiry_header, decode_upload_metadata, \
     apply_headers_to_response
 from astrobin_apps_premium.utils import premium_get_max_allowed_image_size
+
+log = logging.getLogger('apps')
 
 
 class TusCreateMixin(TusCacheMixin, mixins.CreateModelMixin):
@@ -24,23 +27,28 @@ class TusCreateMixin(TusCacheMixin, mixins.CreateModelMixin):
     def create(self, request, *args, **kwargs):
         # Validate tus header
         if not has_required_tus_header(request):
+            log.warning("Chunked uploader (%s): missing Tus-Resumable header" % request.user)
             return HttpResponse('Missing "{}" header.'.format('Tus-Resumable'), status=status.HTTP_400_BAD_REQUEST)
 
         # Get file size from request
         upload_length = int(request.META.get(constants.UPLOAD_LENGTH_FIELD_NAME, -1))
+        log.info("Chunked uploader (%s): initiated upload of file with size %d" % (request.user, upload_length))
 
         # Validate upload_length
         max_file_size = min(
             premium_get_max_allowed_image_size(request.user),
             getattr(self, 'max_file_size', constants.TUS_MAX_FILE_SIZE))
         if upload_length > max_file_size:
-            return HttpResponse('Invalid "Upload-Length". Maximum value: {}.'.format(max_file_size),
-                                status=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE)
+            msg = 'Invalid "Upload-Length". Maximum value: {}.'.format(max_file_size)
+            log.warning("Chunked uploader (%s): %s" % (request.user, msg))
+            return HttpResponse(msg, status=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE)
 
         # If upload_length is not given, we expect the defer header!
         if not upload_length or upload_length < 0:
             if getattr(request, constants.UPLOAD_DEFER_LENGTH_FIELD_NAME, -1) != 1:
-                return HttpResponse('Missing "{Upload-Defer-Length}" header.', status=status.HTTP_400_BAD_REQUEST)
+                msg = 'Missing "{Upload-Defer-Length}" header.'
+                log.warning("Chunked uploader (%s): %s" % (request.user, msg))
+                return HttpResponse(msg, status=status.HTTP_400_BAD_REQUEST)
 
         # Get metadata from request
         upload_metadata = decode_upload_metadata(request.META.get(constants.UPLOAD_METADATA_FIELD_NAME, {}))
@@ -63,6 +71,8 @@ class TusCreateMixin(TusCacheMixin, mixins.CreateModelMixin):
 
         # Get upload from serializer
         object = serializer.instance
+
+        log.debug("Chunked uploader (%s) (%d): created" % (request.user, object.pk))
 
         signals.receiving.send(object)
 

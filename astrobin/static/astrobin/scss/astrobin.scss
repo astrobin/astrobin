@@ -837,6 +837,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     }
 
     figcaption {
+      z-index: 3;
       position: absolute;
       left: 0;
       bottom: 0;
@@ -995,6 +996,159 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     border-left: 1px solid rgba(255, 255, 255, 0.2);
     border-right: 1px solid rgba(0, 0, 0, 0.2);
     z-index: -1;
+  }
+
+  .badges {
+    list-style-type: none;
+    margin: 0;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 2;
+
+    li {
+      margin-right: 3px;
+      float: left;
+
+      &.iotd-badge,
+      &.top-pick-badge,
+      &.wip-badge {
+        text-align: center;
+
+        h2 {
+          margin: 0;
+          padding: 0;
+          @include box-shadow;
+          @include rounded-corners(16px);
+          font-size: 16px;
+          height: 20px;
+          width: 20px;
+        }
+      }
+
+      &.wip-badge {
+        h2 {
+          background: $link-color;
+        }
+
+        .icon {
+          padding: 0;
+          position: absolute;
+          top: 2px;
+          left: 0;
+        }
+
+        &.wip-badge-large {
+          h2 {
+            font-size: 18px;
+            line-height: 12px;
+            padding: 4px;
+            @include rounded-corners(26px);
+          }
+
+          .icon {
+            top: 5px;
+            left: 3px;
+          }
+        }
+      }
+
+      &.iotd-badge {
+        h2 {
+          font-size: 12px;
+          color: $white;
+          background: #e3a936;
+
+          height: 20px;
+          width: 20px;
+          border: 1px solid white;
+
+          .icon {
+            padding: 0;
+            position: absolute;
+            top: 5px;
+            left: 3.5px;
+          }
+        }
+      }
+
+      &.top-pick-badge {
+        h2 {
+          font-size: 6px;
+          line-height: 4px;
+          color: #4a4a4a;
+          background: #c1c1c1;
+          border: 1px solid white;
+          padding: 0;
+          text-transform: uppercase;
+
+          span {
+            display: block;
+            margin-top: 2px;
+
+            &:first-child {
+              margin-top: 5px;
+            }
+          }
+        }
+
+        &.top-pick-badge-large {
+          h2 {
+            font-size: 8px;
+            line-height: 10px;
+            padding: 4px;
+            @include rounded-corners(26px);
+            text-align: center;
+
+            span {
+              margin: 0;
+            }
+          }
+        }
+      }
+
+      &.top100-badge {
+        text-align: center;
+
+        h2 {
+          margin: 0;
+          font-size: 6px;
+          line-height: 6px;
+
+          color: $white;
+          background: darkred;
+          @include box-shadow;
+          @include rounded-corners(16px);
+          border: 1px solid white;
+          padding: 4px;
+          text-transform: uppercase;
+
+          span {
+            display: block;
+          }
+        }
+
+        &.top100-badge-large {
+          h2 {
+            font-size: 16px;
+            line-height: 12px;
+            padding: 12px 8px;
+            @include rounded-corners(26px);
+            width: 34px;
+          }
+        }
+      }
+
+      i.icon {
+        width: 1.25em;
+        text-align: center;
+        display: inline-block;
+      }
+    }
+  }
+
+  &:hover .badges {
+    display: none;
   }
 }
 
@@ -2166,149 +2320,6 @@ form.avatar-change label.control-label {
   display: none;
 }
 
-.astrobin-image-container ul.badges {
-  list-style-type: none;
-  margin: 0;
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  z-index: 2;
-
-  li {
-    margin-right: 3px;
-    float: left;
-
-    &.iotd-badge,
-    &.top-pick-badge,
-    &.wip-badge {
-      text-align: center;
-
-      h2 {
-        margin: 0;
-        padding: 0;
-        @include box-shadow;
-        @include rounded-corners(16px);
-        font-size: 16px;
-        height: 20px;
-        width: 20px;
-      }
-    }
-
-    &.wip-badge {
-      h2 {
-        background: $link-color;
-      }
-
-      .icon {
-        padding: 0;
-        position: absolute;
-        top: 2px;
-        left: 0;
-      }
-
-      &.wip-badge-large {
-        h2 {
-          font-size: 18px;
-          line-height: 12px;
-          padding: 4px;
-          @include rounded-corners(26px);
-        }
-
-        .icon {
-          top: 5px;
-          left: 3px;
-        }
-      }
-    }
-
-    &.iotd-badge {
-      h2 {
-        font-size: 12px;
-        color: $white;
-        background: #e3a936;
-
-        height: 20px;
-        width: 20px;
-        border: 1px solid white;
-
-        .icon {
-          padding: 0;
-          position: absolute;
-          top: 5px;
-          left: 3.5px;
-        }
-      }
-    }
-
-    &.top-pick-badge {
-      h2 {
-        font-size: 6px;
-        line-height: 4px;
-        color: #4a4a4a;
-        background: #c1c1c1;
-        border: 1px solid white;
-        padding: 0;
-        text-transform: uppercase;
-
-        span {
-          display: block;
-          margin-top: 2px;
-
-          &:first-child {
-            margin-top: 5px;
-          }
-        }
-      }
-
-      &.top-pick-badge-large {
-        h2 {
-          font-size: 8px;
-          line-height: 10px;
-          padding: 4px;
-          @include rounded-corners(26px);
-          text-align: center;
-
-          span {
-            margin: 0;
-          }
-        }
-      }
-    }
-
-    &.top100-badge {
-      text-align: center;
-
-      h2 {
-        margin: 0;
-        font-size: 6px;
-        line-height: 6px;
-
-        color: $white;
-        background: darkred;
-        @include box-shadow;
-        @include rounded-corners(16px);
-        border: 1px solid white;
-        padding: 4px;
-        text-transform: uppercase;
-
-        span {
-          display: block;
-        }
-      }
-
-      &.top100-badge-large {
-        h2 {
-          font-size: 16px;
-          line-height: 12px;
-          padding: 12px 8px;
-          @include rounded-corners(26px);
-          width: 34px;
-        }
-      }
-    }
-  }
-}
-
 .iotd-ribbon-container {
   position: relative;
   min-height: 56px;
@@ -2769,6 +2780,12 @@ li.revisions {
     background: rgba(0, 0, 0, 0.75);
     border-radius: 1.45rem;
     border: 1px solid rgba(255, 255, 255, .2);
+
+    [class^="icon-"] {
+      width: 1.25em;
+      text-align: center;
+      display: inline-block;
+    }
 
     * {
       font-size: 1rem;
@@ -3480,7 +3497,7 @@ table#private-shared-folders tr:hover a.delete-folder {
   }
 }
 
-#profile-details {
+.profile-details {
   margin: 0;
   width: calc(100% - 24px);
   height: 20%;
@@ -3497,7 +3514,7 @@ table#private-shared-folders tr:hover a.delete-folder {
 
     li {
       float: left;
-      width: 33.33%;
+      width: calc(33.33% - 4px);
 
       > a {
         float: left;
@@ -3529,7 +3546,7 @@ table#private-shared-folders tr:hover a.delete-folder {
 }
 
 @media screen and (max-width: 979px) {
-  #profile-details {
+  .profile-details {
     ul > li > a {
       font-size: 6px;
     }
@@ -3537,27 +3554,33 @@ table#private-shared-folders tr:hover a.delete-folder {
 }
 
 @media screen and (max-width: 767px) {
-  .profile-meta {
-    .user-card, .stats {
-      width: calc(100% - 170px);
-      float: left;
-      height: 250px;
-    }
+  .user-card,
+  .stats {
+    width: calc(100% - 170px);
+    float: left;
+  }
 
-    .user-card {
-      width: 142px;
-      padding: 0 12px;
+  .user-card {
+    width: 142px;
+    padding: 0 12px;
+    border-radius: 0;
 
-      #profile-details {
-        bottom: 64px;
-        height: 42px;
-        width: calc(100% - 26px);
+    .avatar {
+      img {
+        border-radius: 0;
       }
     }
 
-    .stats {
-      font-size: 12px;
+    .profile-details {
+      bottom: 0;
+      height: 40px;
+      width: 100%;
+      border-radius: 0;
     }
+  }
+
+  .stats {
+    font-size: 12px;
   }
 }
 
@@ -3661,6 +3684,22 @@ ul.astrobin-users {
       height: 30px;
       text-align: center;
       line-height: 30px;
+    }
+
+    .badge-mutual-followers {
+      position: absolute;
+      right: 16px;
+      top: 50px;
+      font-size: 14px;
+      height: 26px;
+      width: 26px;
+      text-align: center;
+      padding: 0px;
+      line-height: 26px;
+      border-radius: 26px;
+      background: $grey-5;
+      border: 1px solid $white;
+      box-shadow: 0 0 8px rgba(0, 0, 0, .66);
     }
   }
 }
@@ -4747,7 +4786,7 @@ form.edit-thumbnails {
     right: 1rem;
     background: $black;
     border: 1px solid $white;
-    box-shadow: 0 0 1rem rgba(0,0,0,.5);
+    box-shadow: 0 0 1rem rgba(0, 0, 0, .5);
 
     .alert {
       max-width: 400px;

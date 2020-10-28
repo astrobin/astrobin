@@ -1,25 +1,79 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load staticfiles %}
 {% load tags %}
 {% load bootstrap_toolkit %}
+{% load common_tags %}
 
 {% block title %}AstroBin - {% trans "Delete account" %}{% endblock %}
+
 {% block content %}
+
     <div class="row">
+
         {% include 'user/profile/edit/navigation.html' %}
+
         <div class="span9">
             <h1>{% trans "Delete account" %}</h1>
-            {% if request.method == 'GET' %}
-                <p>
-                    {% trans "Are you sure you want to delete your account? This operation is irreversible and immediate. All traces of your activity on AstroBin will be erased forever!" %}
-                </p>
 
-                <form action="" method="post">{% csrf_token %}
-                    <input type="submit" value="{% trans 'Delete account' %}" class="btn btn-danger" />
-                </form>
-            {% else %}
-                <p>{% blocktrans %}Your account was deleted. Thanks for using AstroBin until now!{% endblocktrans %}</p>
-            {% endif %}
+            <div class="row section">
+                <div class="span9">
+                    <div class="alert alert-danger">
+                        {% blocktrans trimmed %}
+                            Are you sure you want to delete your account? This operation is irreversible and immediate.
+                            All traces of your activity on AstroBin will be erased forever!
+                        {% endblocktrans %}
+                    </div>
+                </div>
+            </div>
+
+            <form
+                action="{% url 'profile_delete' %}"
+                method="post"
+                class="form-horizontal form profile-delete"
+                style="display: none"
+                novalidate>{% csrf_token %}
+
+                {{ form|as_bootstrap }}
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-danger {% button_loading_class %}">
+                        {% trans 'Delete account' %}
+                        {% button_loading_indicator %}
+                    </button>
+                </div>
+            </form>
+
+            <div class="loading"><img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="" /></div>
+
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    var $form = $(".form.profile-delete");
+                    var $loading = $(".loading");
+
+                    function hide_show_delete_reason_other() {
+                        var $delete_reason_other_group = $('#id_delete_reason_other').closest('.control-group');
+                        var delete_reason = $('#id_delete_reason').val();
+
+                        if (['OTHER'].indexOf(delete_reason) === -1) {
+                            $delete_reason_other_group.hide();
+                            $('#id_delete_reason_other').val("");
+                        } else {
+                            $delete_reason_other_group.show();
+                        }
+                    }
+
+                    hide_show_delete_reason_other();
+                    $form.show();
+                    $loading.hide();
+
+                    $(document).on('change', '#id_delete_reason', function () {
+                        hide_show_delete_reason_other();
+                    });
+                });
+            </script>
+
         </div> <!-- span9 -->
     </div> <!-- row -->
+
 {% endblock %}

@@ -664,7 +664,7 @@ post_save.connect(user_post_save, sender=User)
 
 
 def userprofile_post_delete(sender, instance, **kwargs):
-    # Images are attached to the auth.User oject, and that's not really
+    # Images are attached to the auth.User object, and that's not really
     # deleted, so nothing is cascaded, hence the following line.
     instance.user.is_active = False
     instance.user.save()

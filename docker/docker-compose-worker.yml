@@ -4,7 +4,12 @@ services:
 
   celery_main:
     image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
-    command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q main -c 1 -l debug"
+    command:
+     - bash
+     - -c
+     - |
+       python manage.py collectstatic --noinput && \
+       celery worker -A astrobin -Q main -c 1 -l debug --uid=nobody --gid=nogroup
     links:
       - memcached
     env_file:
@@ -27,7 +32,12 @@ services:
 
   celery_email:
     image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
-    command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q email -c 1 -l debug"
+    command:
+      - bash
+      - -c
+      - |
+        python manage.py collectstatic --noinput && \
+        celery worker -A astrobin -Q email -c 1 -l debug --uid=nobody --gid=nogroup
     env_file:
       - ./astrobin.env
     environment:
@@ -48,7 +58,12 @@ services:
 
   celery_thumbnails:
     image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
-    command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q thumbnails -c 2 -l debug"
+    command:
+      - bash
+      - -c
+      - |
+        python manage.py collectstatic --noinput && \
+        celery worker -A astrobin -Q thumbnails -c 1 -l debug --uid=nobody --gid=nogroup
     env_file:
       - ./astrobin.env
     environment:
@@ -69,7 +84,12 @@ services:
 
   celery_haystack:
     image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
-    command: bash -c "python manage.py collectstatic --noinput && celery worker -A astrobin -Q haystack -c 2 -l debug"
+    command:
+      - bash
+      - -c
+      - |
+        python manage.py collectstatic --noinput && \
+        celery worker -A astrobin -Q haystack -c 1 -l debug --uid=nobody --gid=nogroup
     env_file:
       - ./astrobin.env
     environment:
@@ -88,4 +108,4 @@ services:
           memory: 1g
 
 volumes:
-  media: { }
+  media: {}

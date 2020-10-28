@@ -134,14 +134,21 @@
                 <li class="divider"></li>
                 <li>
                     <a href="{% url 'user_page_following' requested_user.username %}">
-                        <i class="icon-eye-open"></i>
+                        <i class="icon-rotate-right"></i>
                         {% trans "Following" %}
                     </a>
 
                 <li>
                     <a href="{% url 'user_page_followers' requested_user.username %}">
-                        <i class="icon-eye-open"></i>
+                        <i class="icon-rotate-left"></i>
                         {% trans "Followers" %}
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'user_page_friends' requested_user.username %}">
+                        <i class="icon-refresh"></i>
+                        {% trans "Friends" %}
                     </a>
                 </li>
             </ul>

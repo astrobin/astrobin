@@ -47,7 +47,7 @@ from astrobin.forms import ImageUploadForm, ImageLicenseForm, PrivateMessageForm
     MountEditForm, CameraEditForm, FocalReducerEditForm, SoftwareEditForm, FilterEditForm, AccessoryEditForm, \
     GearUserInfoForm, LocationEditForm, ImageEditWatermarkForm, DeepSky_AcquisitionForm, \
     UserProfileEditPreferencesForm, \
-    ImageRevisionUploadForm, UserProfileEditGearForm
+    ImageRevisionUploadForm, UserProfileEditGearForm, DeleteAccountForm
 from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import Image, UserProfile, Gear, Location, ImageRevision, DeepSky_Acquisition, \
     SolarSystem_Acquisition, GearUserInfo, Telescope, Mount, Camera, FocalReducer, Software, Filter, \
@@ -1381,7 +1381,10 @@ def user_ban(request, username):
     user = get_object_or_404(UserProfile, user__username=username).user
 
     if request.method == 'POST':
+        user.userprofile.deleted_reason = UserProfile.DELETE_REASON_BANNED
+        user.userprofile.save(keep_deleted=True)
         user.userprofile.delete()
+        log.info("User %s (%d) was banned" % (user.username, user.pk))
 
     return render(request, 'user/ban.html', {
         'user': user,
@@ -1447,6 +1450,8 @@ def user_page_following(request, username, extra_context=None):
         except User.DoesNotExist:
             pass
 
+    followed_users.sort(key=lambda x: x.username)
+
     template_name = 'user/following.html'
     if request.is_ajax():
         template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
@@ -1479,6 +1484,8 @@ def user_page_followers(request, username, extra_context=None):
             content_type=user_ct)
     ]
 
+    followers.sort(key=lambda x: x.username)
+
     template_name = 'user/followers.html'
     if request.is_ajax():
         template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
@@ -1488,6 +1495,49 @@ def user_page_followers(request, username, extra_context=None):
             user=request.user).user if request.user.is_authenticated() else None,
         'requested_user': user,
         'user_list': followers,
+        'view': request.GET.get('view', 'default'),
+        'private_message_form': PrivateMessageForm(),
+    }
+
+    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+
+    return render(request, template_name, response_dict)
+
+
+@require_GET
+@page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key='users_page')
+def user_page_friends(request, username, extra_context=None):
+    user = get_object_or_404(UserProfile, user__username=username).user
+
+    user_ct = ContentType.objects.get_for_model(User)
+    friends = []
+    followers = [
+        x.user for x in
+        ToggleProperty.objects.filter(
+            property_type="follow",
+            object_id=user.pk,
+            content_type=user_ct)
+    ]
+
+    for follower in followers:
+        if ToggleProperty.objects.filter(
+                property_type="follow",
+                user=user,
+                object_id=follower.pk,
+                content_type=user_ct).exists():
+            friends.append(follower)
+
+    friends.sort(key=lambda x: x.username)
+
+    template_name = 'user/friends.html'
+    if request.is_ajax():
+        template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
+
+    response_dict = {
+        'request_user': UserProfile.objects.get(
+            user=request.user).user if request.user.is_authenticated() else None,
+        'requested_user': user,
+        'user_list': friends,
         'view': request.GET.get('view', 'default'),
         'private_message_form': PrivateMessageForm(),
     }
@@ -2049,10 +2099,28 @@ def user_profile_save_preferences(request):
 @login_required
 def user_profile_delete(request):
     if request.method == 'POST':
-        request.user.userprofile.delete()
-        auth.logout(request)
+        form = DeleteAccountForm(instance=request.user.userprofile, data=request.POST)
+        form.full_clean()
+        if form.is_valid():
+            request.user.userprofile.deleted_reason = form.cleaned_data.get('deleted_reason')
+            request.user.userprofile.deleted_reason_other = form.cleaned_data.get('deleted_reason_other')
+            request.user.userprofile.save(keep_deleted=True)
+            request.user.userprofile.delete()
 
-    return render(request, 'user/profile/delete.html', {})
+            log.info("User %s (%d) deleted their account with reason %s ('%s')" % (
+                request.user.username,
+                request.user.pk,
+                request.user.userprofile.deleted_reason,
+                request.user.userprofile.deleted_reason_other,
+            ))
+
+            auth.logout(request)
+
+            return render(request, 'user/profile/deleted.html', {})
+    elif request.method == 'GET':
+        form = DeleteAccountForm(instance=request.user.userprofile)
+
+    return render(request, 'user/profile/delete.html', {'form': form})
 
 
 @login_required

@@ -172,26 +172,26 @@ def checksum_matches(checksum_algorithm, checksum, bytes):
     return bytes_checksum == checksum
 
 
-def get_or_create_temporary_file(image):
-    if not get_cached_property("temporary-file-path", image):
+def get_or_create_temporary_file(object):
+    if not get_cached_property("temporary-file-path", object):
         directory = "/astrobin-temporary-files/files"
         if not os.path.exists(directory):
             os.makedirs(directory)
         fd, path = tempfile.mkstemp(prefix="tus-upload-", dir=directory)
         os.close(fd)
-        set_cached_property("temporary-file-path", image, path)
+        set_cached_property("temporary-file-path", object, path)
 
-    cached = get_cached_property("temporary-file-path", image)
+    cached = get_cached_property("temporary-file-path", object)
     return cached
 
 
-def write_data(image, bytes):
-    temporary_file_path = get_cached_property("temporary-file-path", image)
-    upload_offset = get_cached_property("offset", image)
+def write_data(object, bytes):
+    temporary_file_path = get_cached_property("temporary-file-path", object)
+    upload_offset = get_cached_property("offset", object)
     num_bytes_written = write_bytes_to_file(temporary_file_path, upload_offset, bytes, makedirs=True)
 
     if num_bytes_written > 0:
-        set_cached_property("offset", image, upload_offset + num_bytes_written)
+        set_cached_property("offset", object, upload_offset + num_bytes_written)
 
 
 def apply_headers_to_response(response, headers):

@@ -61,11 +61,11 @@ LOGGING = {
             'propagate': False,
         },
         'apps': {
-            'handlers': ['console', 'logfile'],
+            'handlers': ['console'],
             'level': 'DEBUG',
         },
         'astrobin.tasks': {
-            'handlers': ['console', 'logfile'],
+            'handlers': ['console'],
             'level': 'DEBUG',
         },
         'django.request': {
@@ -80,6 +80,10 @@ LOGGING = {
         },
     }
 }
+
+if DEBUG:
+    LOGGING['loggers']['apps']['handlers'].append('logfile')
+    LOGGING['loggers']['astrobin.tasks']['handlers'].append('logfile')
 
 if AWS_ACCESS_KEY_ID != 'invalid' and AWS_SECRET_ACCESS_KEY != 'invalid' and 'localhost' not in BASE_URL:
     LOGGING['handlers']['watchtower'] = {
