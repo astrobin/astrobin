@@ -7,7 +7,7 @@
 {% show_ads_on_page as show_ads_on_page %}
 
 {% if show_ads_on_page %}
-    {% if request.user_agent.is_tablet or request.user_agent.is_pc %}
+    {% if not request.user_agent.is_mobile %}
         {% include 'ads/rectangular_ad.html' %}
     {% endif %}
 
