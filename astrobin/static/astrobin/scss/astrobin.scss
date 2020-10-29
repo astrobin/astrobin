@@ -1396,14 +1396,17 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     position: relative;
 
     h4 {
-      i {
-        margin-right: 8px;
-      }
-
       margin: 0;
       display: inline;
       text-overflow: clip;
       white-space: nowrap;
+
+      .actions {
+        a:not(:last-child),
+        > i {
+          margin-right: 8px;
+        }
+      }
     }
 
     .separator {
@@ -2169,7 +2172,10 @@ form.avatar-change label.control-label {
 
 .image-of-the-day {
   position: relative;
-  margin: 0 -29px 20px -29px;
+
+  @media screen and (min-width: 980px) {
+    margin: 0 -29px 20px -29px;
+  }
 
   .header {
     position: absolute;
@@ -2346,13 +2352,9 @@ form.avatar-change label.control-label {
       font-size: 14px;
       position: absolute;
       top: 15px;
-      right: 8px;
+      right: 12px;
     }
   }
-}
-
-.subtle-container h4 .actions {
-  top: 8px;
 }
 
 .index-recent-topics {

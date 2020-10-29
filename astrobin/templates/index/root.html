@@ -41,7 +41,11 @@
                 </h2>
             </div>
 
-            {% astrobin_image iotd.image 'iotd' %}
+            {% if request.user_agent.is_mobile %}
+                {% astrobin_image iotd.image 'iotd_mobile' %}
+            {% else %}
+                {% astrobin_image iotd.image 'iotd' %}
+            {% endif %}
         </div>
     {% endif %}
 
