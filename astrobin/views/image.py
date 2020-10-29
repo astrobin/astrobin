@@ -697,6 +697,7 @@ class ImageDetailView(ImageDetailViewBase):
                              (image.subject_type != SubjectType.DEEP_SKY),
             'subjects': subjects,
             'subject_type': ImageService(image).get_subject_type_label(),
+            'hemisphere': ImageService(image).get_hemisphere(r),
             'license_icon': static('astrobin/icons/%s' % licenses[image.license][1]),
             'license_title': licenses[image.license][2],
             'resolution': '%dx%d' % (w, h) if (w and h) else None,
