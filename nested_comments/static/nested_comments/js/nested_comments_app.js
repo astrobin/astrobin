@@ -121,6 +121,7 @@ $(function() {
         updated: null,
         deleted: null,
         parent: null,
+        depth: null,
 
         // Fields that we compute manually
         ready: false,
@@ -166,6 +167,10 @@ $(function() {
 
             return submitting || !hasText;
         }.property('submitting', 'html'),
+
+        shouldNotIndent: function () {
+            return this.depth > 10;
+        }.property('shouldNotIndent', 'number'),
 
         // Functions
         init: function() {
