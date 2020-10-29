@@ -1,0 +1,119 @@
+@import "variables";
+@import "mixins";
+
+.activity-actions {
+  .action {
+    position: relative;
+    margin-bottom: $spacer-large;
+    zoom: 1;
+    display: inline-block;
+    width: 460px;
+    height: 320px;
+
+    &:nth-child(odd) {
+      margin-right: 16px;
+    }
+
+    .toggleproperty-add-remove {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+      margin: 0;
+      width: 30px;
+
+      button {
+        font-size: 12px;
+        line-height: 12px;
+        padding: 6px;
+      }
+
+      .icon {
+        line-height: 26px;
+      }
+
+      .toggleproperties-label {
+        display: none;
+      }
+    }
+
+    .avatar {
+      max-width: 64px;
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      z-index: 2;
+      @include box-shadow;
+      @include rounded-corners(20px);
+    }
+
+    .action-object {
+      overflow: hidden;
+
+      .verb {
+        position: absolute;
+        bottom: 0;
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.45);
+        width: 100%;
+        max-height: 60px;
+
+        > .inner {
+          padding: 12px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          .detail {
+            font-size: 12px;
+            font-weight: normal;
+            font-style: italic;
+            color: $text-color;
+          }
+
+        }
+      }
+
+      .title {
+        position: absolute;
+        top: 0;
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.45);
+        width: 100%;
+        font-size: 14px;
+        font-weight: bold;
+        color: $strong-text-color;
+
+        > .inner {
+          padding: 12px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          a {
+            display: table;
+            font-weight: normal;
+          }
+        }
+      }
+
+      &.has-like-button .title .inner {
+        padding-right: 80px;
+      }
+
+      &.has-avatar .title .inner {
+        padding-left: 80px;
+      }
+
+      .astrobin-image-container {
+        a {
+          display: block;
+        }
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
