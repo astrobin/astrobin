@@ -59,6 +59,13 @@ class NestedComment(models.Model):
         default = False,
     )
 
+    @property
+    def depth(self):
+        value = 1
+        if self.parent:
+            return value + self.parent.depth
+        return value
+
     def __unicode__(self):
         return "Comment %d" % self.pk
 
@@ -66,7 +73,7 @@ class NestedComment(models.Model):
         object_url = self.content_type.get_object_for_this_type(id = self.object_id).get_absolute_url()
         return '%s#c%d' % (object_url, self.id)
 
-    def delete(self):
+    def delete(self, *args, **kwargs):
         if not self.deleted:
             self.deleted = True
             self.save()

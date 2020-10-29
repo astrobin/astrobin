@@ -151,7 +151,11 @@
                 </div>
             {{/if}}
 
-            <div class="children">
+            {{#if view.node.shouldNotIndent }}
+                <div class="children no-indentation">
+            {{else}}
+                <div class="children">
+            {{/if}}
                 {{#each view.node.children}}
                     {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
                 {{/each}}
