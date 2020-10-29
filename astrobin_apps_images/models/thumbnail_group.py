@@ -31,6 +31,7 @@ class ThumbnailGroup(models.Model):
     thumb = models.CharField(max_length=512, null=True, blank=True)
     histogram = models.CharField(max_length=512, null=True, blank=True)
     iotd = models.CharField(max_length=512, null=True, blank=True)
+    iotd_mobile = models.CharField(max_length=512, null=True, blank=True)
     iotd_candidate = models.CharField(max_length=512, null=True, blank=True)
     story = models.CharField(max_length=512, null=True, blank=True)
     duckduckgo = models.CharField(max_length=512, null=True, blank=True)
@@ -54,6 +55,7 @@ class ThumbnailGroup(models.Model):
             self.revision,
             self.histogram,
             self.iotd,
+            self.iotd_mobile,
             self.iotd_candidate,
             self.story,
             self.duckduckgo,
