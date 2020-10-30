@@ -561,8 +561,8 @@ $(function() {
             var self = this;
             setTimeout(function() {
                 $('html, body').animate({
-                    // 55 pixel is the fixed navigation bar
-                    scrollTop: self.$().offset().top - 55
+                    // 60 pixel is the fixed navigation bar
+                    scrollTop: self.$().offset().top - 60
                 }, 1000);
             }, 250);
         },

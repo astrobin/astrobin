@@ -15,6 +15,7 @@
 @import "ui-datepicker";
 
 @import "activity-actions";
+@import "breadcrumb";
 @import "comments";
 @import "forum";
 @import "search";
@@ -50,13 +51,13 @@ html, body {
 body {
   background: $light-panel-color url('../images/background-tile.png');
   @media screen and (min-width: 980px) {
-    padding-top: 55px;
+    padding-top: 60px;
   }
 }
 
 body.full {
   @media screen and (min-width: 980px) {
-    padding-top: 55px;
+    padding-top: 60px;
   }
 }
 
@@ -342,7 +343,7 @@ li.astrobin-thumbnail {
 .table tr th {
   border-top: 1px solid $link-color;
   border-bottom: 1px solid $link-color;
-  background-color: #272727;
+  background-color: $grey-7;
   padding-top: 16px;
   padding-bottom: 16px;
 
@@ -2660,38 +2661,6 @@ form.avatar-change label.control-label {
   }
 }
 
-#rawdata-file-drop-area {
-  min-height: 180px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border: 2px dashed $grey-5;
-  @include rounded-corners;
-  text-align: center;
-  color: #555;
-
-  h2 {
-    padding-top: 30px;
-    border-bottom: none;
-  }
-}
-
-#rawdata-filelist {
-  color: #e5e5e5;
-
-  th {
-    background: $grey-6-dark url('../images/darker-panel-tile.png');
-  }
-
-  .filename {
-    width: 80%;
-  }
-}
-
-#rawdata-eta {
-  color: #888;
-  font-size: smaller;
-}
-
 .subscription-plans-overview {
   .subtle-container {
     position: relative;
@@ -2974,96 +2943,6 @@ form.avatar-change label.control-label {
     line-height: 14px;
     color: #cdcdcd;
     text-align: center;
-  }
-}
-
-table.rawdata-browser {
-  font-size: 90%;
-
-  .download-link, .delete-link {
-    visibility: hidden;
-  }
-
-  tr:hover .download-link,
-  tr:hover .delete-link {
-    visibility: visible;
-  }
-
-  tbody tr:first-child td span {
-    margin-right: $spacer-medium;
-  }
-
-  td, th {
-    &.rawdata-browser-counter, &.rawdata-browser-action,
-    &.rawdata-browser-icon {
-      width: 20px;
-    }
-
-    &.rawdata-browser-size, &.rawdata-browser-type,
-    &.rawdata-browser-file-count, &.rawdata-browser-user,
-    &.rawdata-browser-uploaded {
-      width: 15%;
-    }
-
-    &.rawdata-browser-name {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: clip;
-    }
-
-    &.rawdata-browser-actions {
-      width: 40px;
-
-      li {
-        text-align: left;
-      }
-    }
-  }
-}
-
-table.rawdata-folder-table {
-  td, th {
-    &.rawdata-folder-delete-action {
-      width: 20px;
-    }
-
-    &.rawdata-folder-owner, &.rawdata-folder-files,
-    &.rawdata-folder-images, &.rawdata-folder-created {
-      text-align: center;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 10%;
-    }
-
-    &.rawdata-folder-created {
-      width: 20%;
-      text-align: right;
-    }
-
-    &.rawdata-folder-owner {
-      text-align: left;
-      width: 20%;
-    }
-  }
-}
-
-.rawdata-browser-breadcrumb {
-  display: inline-block;
-  margin-bottom: $spacer-medium;
-
-  a {
-    margin-right: $spacer-small;
-
-    i.icon-remove {
-      padding-left: 6px;
-      font-size: 9px;
-    }
-  }
-
-  .divider {
-    color: #777;
-    padding-right: 3px;
-    font-size: 12px;
   }
 }
 
@@ -3488,44 +3367,6 @@ img.flickr-photo-to-import-selected {
   }
 }
 
-.breadcrumb {
-  position: relative;
-  padding-left: 30px;
-  padding-right: 30px;
-  margin-left: -30px;
-  margin-bottom: 20px;
-  width: 100%;
-  background-color: #272727;
-  border-radius: 4px 0;
-  line-height: 26px;
-
-  > li {
-    text-shadow: none;
-
-    .divider {
-      color: #555;
-    }
-
-    &:last-of-type {
-      font-weight: bold;
-      color: white;
-      background: #3092d0;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-style: italic;
-      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
-    }
-  }
-
-  .pagination {
-    position: absolute;
-    margin: 0;
-    top: 6px;
-    right: 30px;
-  }
-}
-
 .field-errors {
   color: $red;
 }
@@ -3919,7 +3760,7 @@ ol.faq, .row.help {
 .anchor {
   display: block;
   position: relative;
-  top: -55px;
+  top: -60px;
   visibility: hidden;
 }
 
