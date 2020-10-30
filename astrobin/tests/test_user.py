@@ -9,8 +9,6 @@ from django_bouncy.models import Bounce
 from mock import patch
 
 from astrobin.enums import SubjectType
-from toggleproperties.models import ToggleProperty
-
 from astrobin.models import (
     Acquisition,
     Telescope,
@@ -19,6 +17,7 @@ from astrobin.models import (
     DataDownloadRequest)
 from astrobin.tests.generators import Generators
 from astrobin_apps_iotd.models import *
+from toggleproperties.models import ToggleProperty
 
 
 class UserTest(TestCase):
@@ -29,7 +28,6 @@ class UserTest(TestCase):
         self.user_2 = User.objects.create_user(
             username="user_2", email="user_2@example.com",
             password="password")
-
 
     def tearDown(self):
         self.user.delete()
@@ -491,6 +489,47 @@ class UserTest(TestCase):
         vote.delete()
 
         image.delete()
+
+    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_user_profile_banned_from_competitions(self, retrieve_primary_thumbnails):
+        self.client.login(username="user", password="password")
+        self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
+
+        image = Image.objects_including_wip.all()[0]
+
+        submitter = User.objects.create_user('submitter', 'submitter_1@test.com', 'password')
+        submitters = Group.objects.create(name='iotd_submitters')
+        submitters.user_set.add(submitter)
+        reviewer = User.objects.create_user('reviewer', 'reviewer_1@test.com', 'password')
+        reviewers = Group.objects.create(name='iotd_reviewers')
+        reviewers.user_set.add(reviewer)
+        judge = User.objects.create_user('judge', 'judge_1@test.com', 'password')
+        judges = Group.objects.create(name='iotd_judges')
+        judges.user_set.add(judge)
+        IotdSubmission.objects.create(submitter=submitter, image=image)
+        IotdVote.objects.create(reviewer=reviewer, image=image)
+        iotd = Iotd.objects.create(judge=judge, image=image, date=datetime.now().date())
+
+        profile = self.user.userprofile
+        profile.banned_from_competitions = datetime.now()
+        profile.save(keep_deleted=True)
+        image = Image.objects_including_wip.get(pk=image.pk)
+
+        # Check that the IOTD banner is still visible because the ban is not retroactive.
+        response = self.client.get(reverse('image_detail', args=(image.get_id(),)))
+        self.assertContains(response, "iotd-ribbon")
+
+        # Check that the IOTD badge is still not visible because the ban is not retroactive.
+        response = self.client.get(reverse('user_page', args=(self.user.username,)))
+        self.assertContains(response, 'iotd-badge')
+
+        # Check that the Top Pick badge is still visible because the ban is not retroactive.
+        iotd.delete()
+        response = self.client.get(reverse('user_page', args=(self.user.username,)))
+        self.assertContains(response, 'top-pick-badge')
+
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_corrupted_images_not_shown_to_others(self, retrieve_primary_thumbnails):

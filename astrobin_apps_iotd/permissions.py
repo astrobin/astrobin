@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 
 from django.conf import settings
-from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
 
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
@@ -22,6 +21,9 @@ def may_toggle_submission_image(user, image):
 
     if image.user.userprofile.exclude_from_competitions:
         return False, _("This user has chosen to be excluded from competitions.")
+
+    if image.user.userprofile.banned_from_competitions:
+        return False, _("This user has been banned from competitions.")
 
     days = settings.IOTD_SUBMISSION_WINDOW_DAYS
     if image.published < datetime.now() - timedelta(days):
@@ -67,6 +69,9 @@ def may_toggle_vote_image(user, image):
 
     if image.user.userprofile.exclude_from_competitions:
         return False, _("This user has chosen to be excluded from competitions.")
+
+    if image.user.userprofile.banned_from_competitions:
+        return False, _("This user has been banned from competitions.")
 
     # Import here to avoid circular dependency
     from astrobin_apps_iotd.models import IotdSubmission, IotdVote, Iotd
@@ -119,6 +124,9 @@ def may_elect_iotd(user, image):
 
     if image.user.userprofile.exclude_from_competitions:
         return False, _("This user has chosen to be excluded from competitions.")
+
+    if image.user.userprofile.banned_from_competitions:
+        return False, _("This user has been banned from competitions.")
 
     if settings.PREMIUM_RESTRICTS_IOTD:
         if is_free(image.user):
