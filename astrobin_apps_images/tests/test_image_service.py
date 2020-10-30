@@ -189,6 +189,16 @@ class TestImageService(TestCase):
 
         self.assertEquals(Image.HEMISPHERE_TYPE_UNKNOWN, ImageService(image).get_hemisphere())
 
+    def test_get_hemisphere_no_revision(self):
+        image = Generators.image()
+        solution = PlateSolvingGenerators.solution(image)
+
+        solution.dec = 0
+        solution.save()
+
+        self.assertEquals(Image.HEMISPHERE_TYPE_UNKNOWN, ImageService(image).get_hemisphere('z'))
+
+
     def test_get_hemisphere_no_declination(self):
         image = Generators.image()
         solution = PlateSolvingGenerators.solution(image)

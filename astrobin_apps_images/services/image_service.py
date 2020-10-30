@@ -187,7 +187,10 @@ class ImageService:
         if revision_label is None or revision_label == '0':
             target = self.image
         else:
-            target = self.get_revision(revision_label)
+            try:
+                target = self.get_revision(revision_label)
+            except ImageRevision.DoesNotExist:
+                return Image.HEMISPHERE_TYPE_UNKNOWN
 
         solution = target.solution  # type: Solution
 
