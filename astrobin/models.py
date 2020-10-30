@@ -787,6 +787,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         'accessories': Accessory,
     }
 
+    HEMISPHERE_TYPE_UNKNOWN = 'HEMISPHERE_TYPE_UNKNOWN'
+    HEMISPHERE_TYPE_NORTHERN = 'HEMISPHERE_TYPE_NORTHERN'
+    HEMISPHERE_TYPE_SOUTHERN = 'HEMISPHERE_TYPE_SOUTHERN'
+
     solutions = GenericRelation(Solution)
 
     corrupted = models.BooleanField(
