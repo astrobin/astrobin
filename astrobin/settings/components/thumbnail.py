@@ -59,6 +59,9 @@ THUMBNAIL_ALIASES = {
         # Duckduckgo
         'duckduckgo': {'size': (250, 200), 'crop': 'smart', 'quality': 80},
         'duckduckgo_small': {'size': (113, 90), 'crop': 'smart', 'quality': 80},
+
+        # Social
+        'instagram_story': {'size': (1080, 1920), 'crop': 'smart', 'quality': 80},
     },
 }
 THUMBNAIL_QUALITY = 100
