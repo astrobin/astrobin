@@ -2337,8 +2337,16 @@ form.avatar-change label.control-label {
       font-family: $regular_font;
       font-size: 14px;
       position: absolute;
-      top: 15px;
+      top: 8px;
       right: 12px;
+    }
+  }
+}
+
+.simple-container {
+  h4 {
+    .actions {
+      top: 15px;
     }
   }
 }
