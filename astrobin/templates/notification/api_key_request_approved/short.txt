@@ -1,2 +1,5 @@
 {% load i18n %}
-{% blocktrans %}API Key request approved{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Your request for an API Key has been approved!
+{% endblocktrans %}

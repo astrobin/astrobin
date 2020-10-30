@@ -1,2 +1,7 @@
 {% load i18n %}
-{% blocktrans %}<a href="{{url}}"><strong>{{user}}</strong> has added your image to their bookmarks!</a>{% endblocktrans %}
+
+<a href="{{ url }}">
+    {% blocktrans trimmed %}
+        <strong>{{user}}</strong> added your image "{{title}}" to their bookmarks!
+    {% endblocktrans %}
+</a>
