@@ -2101,6 +2101,12 @@ class UserProfile(SafeDeleteModel):
             "Check this box to be excluded from competitions and contests, such as the Image of the Day, the Top Picks, other custom contests. This will remove you from the leaderboards and hide your AstroBin Index."),
     )
 
+    banned_from_competitions = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
     # Gear
     telescopes = models.ManyToManyField(Telescope, blank=True, verbose_name=_("Telescopes and lenses"),
                                         related_name='telescopes')
@@ -2661,6 +2667,9 @@ class ImageOfTheDayCandidate(models.Model):
     def save(self, *args, **kwargs):
         if self.image.user.userprofile.exclude_from_competitions:
             raise ValidationError, "User is excluded from competitions"
+
+        if self.image.user.userprofile.banned_from_competitions:
+            raise ValidationError, "User is banned from competitions"
 
         super(ImageOfTheDayCandidate, self).save(*args, **kwargs)
 
