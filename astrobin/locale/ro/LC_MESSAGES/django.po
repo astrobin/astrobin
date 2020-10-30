@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:02+0000\n"
+"POT-Creation-Date: 2020-10-30 07:27+0000\n"
 "PO-Revision-Date: 2013-11-11 19:27+0000\n"
 "Last-Translator: gamangabriel <gamangabriel@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -761,35 +761,6 @@ msgstr "Zimbabwe"
 msgid "Users"
 msgstr "Utilizatori"
 
-msgid "Make"
-msgstr "Marcă"
-
-msgid "The make, brand, producer or developer of this product."
-msgstr "Marca, brandul, producătorul sau dezvoltatorul acestui produs."
-
-msgid "Name"
-msgstr "Nume"
-
-msgid "Merge"
-msgstr "Imbina"
-
-msgid ""
-"Use this field to mark that the item you are claiming really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"Utilizaţi acest câmp pentru a marca faptul că pretindeţi cu adevărat că este "
-"acelaşi produs (sau o variaţie a acestuia) a ceva ce ai pretins înainte."
-
-#, python-format
-msgid ""
-"You can't create more than %d claims. Consider upgrading your affiliation!"
-msgstr ""
-"Nu puteti crea mai mult de %d cereri. Luați în considerare modernizarea "
-"afilierei!"
-
-msgid "You have already claimed this product."
-msgstr "Ați susținut deja acest produs."
-
 msgid ""
 "Select a tag to order this collection by its value. If you see no options "
 "here, it's because none of the images in this collection have key/value "
@@ -938,14 +909,6 @@ msgid "Longitude (seconds)"
 msgstr "Longitudine (secunde)"
 
 msgid ""
-"Use this field to mark that the item you are merging really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"Utilizati acest câmp pentru a marca faptul că elementul pe care il imbinati "
-"este într-adevăr acelasi produs (sau o variantă a acestuia) a ceva ce ati "
-"sustinut inainte."
-
-msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
 "guiding, go here."
 msgstr ""
@@ -1015,9 +978,6 @@ msgstr "semn de carte"
 
 msgid "likes"
 msgstr ""
-
-msgid "has written a review on"
-msgstr "a scris o recenzie pe"
 
 #, fuzzy
 msgid "created a new public group"
@@ -1206,6 +1166,15 @@ msgstr "Centru jos"
 
 msgid "Bottom right"
 msgstr "Dreapta jos"
+
+msgid "Make"
+msgstr "Marcă"
+
+msgid "The make, brand, producer or developer of this product."
+msgstr "Marca, brandul, producătorul sau dezvoltatorul acestui produs."
+
+msgid "Name"
+msgstr "Nume"
 
 msgid ""
 "Just the name of this product, without any properties or personal "
@@ -1840,6 +1809,22 @@ msgid "Higher resolution"
 msgstr "Rezoluție mai mare"
 
 #, fuzzy
+msgid "I am no longer active in astrophotography"
+msgstr "Editaţi-vă echipamentul de astrofotografie"
+
+msgid "This website did not meet my expectations"
+msgstr ""
+
+msgid "Something on this website doesn't work for me"
+msgstr ""
+
+msgid "The paid subscriptions are too expensive"
+msgstr ""
+
+msgid "I prefer not to say"
+msgstr ""
+
+#, fuzzy
 msgid "Real name"
 msgstr "Nume adecvat"
 
@@ -1870,32 +1855,17 @@ msgstr "Despre tine"
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "Scrie ceva despre tine. Marcajele HTML sunt permise."
 
-msgid "Company name"
-msgstr "Numele companiei"
-
-msgid "The name of the company you represent on AstroBin."
-msgstr "Numele companiei pe care o reprezentaţi pe AstroBin."
-
-msgid "Company description"
-msgstr "Descrierea companiei"
-
 #, fuzzy
-msgid ""
-"A short description of the company you represent on AstroBin. You can use "
-"some <a href=\"/faq/#comments\">formatting rules</a>."
+msgid "Delete reason"
+msgstr "Stergeti conversatia"
+
+msgid "Why are you deleting your AstroBin account?"
 msgstr ""
-"O scurta descriere a companiei pe care o reprezentati pe AstroBin. Aveți "
-"posibilitatea să utilizați unele  <a href=\"/faq/#10\">norme de formatare</"
-"a>."
 
-msgid "Company website"
-msgstr "Site-ul web al companiei"
-
-msgid "The website of the company you represent on AstroBin."
-msgstr "Site-ul web al companiei pe care o reprezentaţi pe Astrobin."
-
-msgid "Country of operation"
-msgstr "Ţara de funcţionare"
+msgid ""
+"Please tell us why you are deleting your account (minimum 30 characters). "
+"Thanks!"
+msgstr ""
 
 msgid "I want to be excluded from competitions"
 msgstr ""
@@ -1991,6 +1961,18 @@ msgid ""
 "and this kind of support would be amazing. Thank you in advance!"
 msgstr ""
 
+#, fuzzy
+#| msgid "Total integration"
+msgid "Allow retailer integration"
+msgstr "Integrare totala"
+
+msgid ""
+"AstroBin may associate with retailers of astronomy and astrophotography "
+"equipment to enhance the display of equipment items with links to sponsoring "
+"partners. The integration is subtle and non intrusive, and it would help a "
+"lot if you didn't disable it. Thank you in advance!"
+msgstr ""
+
 msgid "Language"
 msgstr "Limbă"
 
@@ -2067,104 +2049,6 @@ msgid ""
 msgstr ""
 "Vă rugăm să explicați scopul cererii dumneavoastră, și modul în care "
 "intenționați să utilizați API."
-
-msgid "AUD - Australian dollars"
-msgstr "AUD - Dolari australieni"
-
-msgid "CAD - Canadian dollars"
-msgstr "CAD - Dolari canadieni"
-
-msgid "CHF - Swiss francs"
-msgstr "CHF - Franci elvețieni"
-
-msgid "EUR - Euros"
-msgstr "EUR - Euro"
-
-msgid "GPB - Pound stelings"
-msgstr "GPB - Lire sterline"
-
-msgid "PLN - Polish zloty"
-msgstr "PLN - Zlot polonez"
-
-msgid "SEK - Swedish krona"
-msgstr "SEK - Coroana suedeză"
-
-msgid "USD - American dollars"
-msgstr "USD - Dolari americani"
-
-msgid "Producer"
-msgstr "Producător"
-
-msgid "The link to this product's page on your website."
-msgstr "Link către pagina acestui produs pe site-ul tau."
-
-msgid "Price"
-msgstr "Preț"
-
-msgid "Currency"
-msgstr "Valută"
-
-msgid "Retailed gear items"
-msgstr "Articole de echipament vândute "
-
-msgid "Proper make"
-msgstr "Marca adecvată"
-
-msgid ""
-"Sometimes, product make/brand/producer/developer names are not written "
-"properly by the users. Write here the proper make/brand/producer/developer "
-"name."
-msgstr ""
-"Uneori, marca produsului/producătorul/numele dezvoltatorilor nu sunt scrise "
-"în mod corespunzător de către utilizatori. Scrieţi aici marca/producătorul/"
-"numele dezvoltatorului corespunzător. "
-
-msgid "Proper name"
-msgstr "Nume adecvat"
-
-msgid ""
-"Sometimes, product names are not written properly by the users. Write here "
-"the proper product name, not including the make/brand/producer/developer "
-"name.<br/>It is recommended that you try to group as many items as possible, "
-"so try to use a generic version of your product's name."
-msgstr ""
-"Uneori, numele produselor nu sunt scrise corespunzator de catre utilizatori. "
-"Scrieti aici numele corespunzator al produsului  neincluzand marca "
-"produsului/producătorul/numele dezvoltatorului. Este recomandat sa incercati "
-"gruparea a cat mai multor elemente posibile, asa incat incercati sa folositi "
-"o versiune generica a numelui produselor dumneavoastra.."
-
-msgid ""
-"The official, commercial image for this product. Upload an image via the "
-"regular uploading interface, set its subject type to \"Gear\", and then "
-"choose it from this list. If you upload several revisions, they will also "
-"appear in the commercial page."
-msgstr ""
-"Imaginea oficiala comerciala pentru acest produs. Incarcati o imagine prin "
-"interfata uzuala de incarcare, setandu-l la tipul \"Gear\" si alegandu-l din "
-"aceaasta lista. Daca incarcati diverse versiuni revizuite acestea vor aparea "
-"deasemeni in pagina comercial."
-
-msgid "Tagline"
-msgstr "Sloganul"
-
-msgid ""
-"A memorable phrase that will sum up this product, for marketing purposes."
-msgstr ""
-"O fraza memorabila care va insuma insusirile acestui produs, in sensul "
-"marketingului."
-
-#, fuzzy
-msgid ""
-"Here you can write the full commercial description of your product. You can "
-"use some <a href=\"/faq/#comments\">formatting rules</a>."
-msgstr ""
-"Aici puteti completa intreaga descriere comerciala a produsului "
-"dumneavoastra. Puteti utiliza reguli de formatare de tip <a href=\"/faq/"
-"\"10\">."
-
-msgid "Commercial gear items"
-msgstr "elemente comerciale pentru echipament"
 
 #, fuzzy
 #| msgid "Sending..."
@@ -2452,19 +2336,6 @@ msgstr "Avertizare!"
 msgid "Error!"
 msgstr "Eroare!"
 
-#, python-format
-msgid ""
-"As a producer and/or a retailer on AstroBin, it's very important that you "
-"fill in all of your company details! Click <a href=\"%(the_url)s\">here</a> "
-"to do it now."
-msgstr ""
-
-#, python-format
-msgid ""
-"As a retailer on AstroBin, it's very important that you fill in your country "
-"of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
-msgstr ""
-
 msgid "About"
 msgstr "Despre"
 
@@ -2546,6 +2417,20 @@ msgstr ""
 
 msgid "Contact us to resolve the issue"
 msgstr ""
+
+#, python-format
+msgid ""
+"<strong>Good news!</strong> AstroBin automatically recovered some of your "
+"images that were lost in the data loss incident of February 2020. Please "
+"review them to confirm the recovery. If you do nothing, your recovered "
+"images will be confirmed automatically starting from <strong>%(date)s</"
+"strong>."
+msgstr ""
+
+#, fuzzy
+#| msgid "Recent images"
+msgid "Review recovered images"
+msgstr "Imagini recente"
 
 msgid "Cancel"
 msgstr "Anulează"
@@ -2757,11 +2642,13 @@ msgstr "Descriere"
 msgid "My places"
 msgstr ""
 
-msgid "Commercial products"
-msgstr "Produse comerciale"
-
-msgid "Gallery"
+#, fuzzy
+#| msgid "Gallery"
+msgid "Public Gallery"
 msgstr "Galerie"
+
+msgid "Staging Area"
+msgstr ""
 
 msgid "Bookmarks"
 msgstr ""
@@ -2829,21 +2716,6 @@ msgid ""
 msgstr ""
 
 msgid "Custom e-mail change request on AstroBin"
-msgstr ""
-
-msgid "Edit commercial product"
-msgstr "Editati produsul comercial"
-
-msgid "Save"
-msgstr "Salveaza"
-
-msgid "Return to list"
-msgstr "Intoarcere la lista"
-
-msgid "View in new window"
-msgstr "Vizualizati intr-o noua fereastra"
-
-msgid "Edit retailed product"
 msgstr ""
 
 msgid ""
@@ -3019,77 +2891,6 @@ msgstr ""
 "Contributia dumneavoasta a fost foarte importanta, si toata comunitatea "
 "AstroBin va este recunoascatoare."
 
-msgid "by"
-msgstr "de"
-
-msgid "Other images"
-msgstr "Alte imagini"
-
-msgid "Some images"
-msgstr "Cateva imagini"
-
-msgid "(view more)"
-msgstr "(vizualizati mai mult)"
-
-msgid "Reviews"
-msgstr ""
-
-msgid "Rating"
-msgstr "Votari"
-
-msgid "There are no reviews yet."
-msgstr "Inca nu exista review-uri."
-
-msgid "Add your review"
-msgstr "Adaugati review-ul dumneavoastra"
-
-msgid ""
-"Please be fair, honest and polite when writing a review. Many people will "
-"read your review: all the users on AstroBin who own this piece of gear, will "
-"be notified of your review."
-msgstr ""
-"Va rugam sa fiti onest si politicos cand scrieti un review. Multi oameni vor "
-"citi review-ul dvs. Toti membrii AstroBin, posesori ai acestui tip de "
-"echipament vor fi notificati despre review-ul dumneavoastra."
-
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to write a review."
-msgstr ""
-"Va rugam <a href=\"/accounts/login/\">sa va logati</a>sau <a href=\"/"
-"accounts/register/\">sa va inregistrati</a> pentru a putea scrie un review."
-
-msgid "Comments"
-msgstr "Comentarii"
-
-msgid ""
-"Use this space to start a discussion, leave a comment or ask a question "
-"about this piece of gear. All the users on AstroBin who own one, will be "
-"notified and can join the discussion."
-msgstr ""
-"Utilizati acest spatiu pentru a purta o discutie, a lasa un comentariu sau a "
-"intreba despre echipamentul respectiv. Toti utilizatorii de pe AstroBin care "
-"au acest echipament vor fi notificati si pot participa la discutie."
-
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment."
-msgstr ""
-"Va rugam <a href=\"/accounts/login/\">sa va logati</a>sau <a href=\"/"
-"accounts/register/\">sa va inregistrati</a> pentru a lasa un comentariu"
-
-msgid "Buy it here"
-msgstr "Cumpara-l aici"
-
-msgid "Properties"
-msgstr "Proprietati"
-
-msgid "Owners"
-msgstr "Posesori"
-
-msgid "just now"
-msgstr "chiar acum"
-
 msgid "Additional information requested"
 msgstr "Este nevoie de informatii suplimentare."
 
@@ -3102,6 +2903,21 @@ msgstr ""
 
 msgid "Return to image"
 msgstr "Intoarcere la imagine"
+
+#, fuzzy
+#| msgid "Hemisphere:"
+msgid "Hemisphere"
+msgstr "Emisfera:"
+
+#, fuzzy
+#| msgid "North"
+msgid "Northern"
+msgstr "Nord"
+
+#, fuzzy
+#| msgid "South"
+msgid "Southern"
+msgstr "Sud"
 
 msgid "Contains"
 msgstr "Contine"
@@ -3119,6 +2935,9 @@ msgstr "Achiziționat după"
 msgid "Remove"
 msgstr "Inlaturati"
 
+msgid "Comments"
+msgstr "Comentarii"
+
 #, python-format
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
@@ -3131,9 +2950,6 @@ msgstr ""
 
 msgid "Comments are closed."
 msgstr ""
-
-msgid "Made possible by"
-msgstr "A fost posibil datorita"
 
 msgid "In these public groups"
 msgstr ""
@@ -3151,6 +2967,25 @@ msgstr "Descriere"
 
 msgid "Technical card"
 msgstr "Carte tehnică"
+
+msgid "Sponsored brands"
+msgstr ""
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr ""
+
+msgid "Sponsored items"
+msgstr ""
+
+#, fuzzy
+#| msgid "Total integration"
+msgid "Disable retailer integration"
+msgstr "Integrare totala"
+
+#, python-format
+msgid "Shop %(name)s at %(retailer)s"
+msgstr ""
 
 msgid "Frames"
 msgstr "Cadre"
@@ -3492,8 +3327,13 @@ msgid "The following people like this image"
 msgstr ""
 
 msgid ""
+"This will move this image to your public area, making it listed. As this "
+"image had already been published before, your followers will not be notified."
+msgstr ""
+
+msgid ""
 "This will move this image to your public area, making it listed and "
-"notifying your followers."
+"optionally notifying your followers."
 msgstr ""
 
 msgid ""
@@ -3594,8 +3434,7 @@ msgid ""
 "unless you give them one of the links you can find in the <em>Share</em> "
 "menu below. Use that link to post this image to Internet forums and get "
 "feedback on it. When you are satisfied, perhaps after uploading some "
-"revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
-"to the <a href=\"%(profile_url)s\">Public Area</a>."
+"revisions, promote it to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
 
 msgid "Oh no!"
@@ -3645,6 +3484,9 @@ msgstr ""
 
 msgid "Edit your image: acquisition details"
 msgstr "Editati imaginea: detalii de achizitie"
+
+msgid "Save"
+msgstr "Salveaza"
 
 msgid "Remove data"
 msgstr "Stergeti datele"
@@ -3861,9 +3703,6 @@ msgstr "Selectati latitudinea :"
 msgid "Galactic latitude"
 msgstr "Selectati latitudinea :"
 
-msgid "View page"
-msgstr "Vizualizati pagina"
-
 msgid "No gear yet."
 msgstr "Fara echipament, inca."
 
@@ -3875,6 +3714,17 @@ msgstr "Nu sunt imagini"
 
 msgid "Only you can see this"
 msgstr ""
+
+#, python-format
+msgid ""
+"Interested in <strong>%(brand)s</strong>? Our sponsor <strong>%(retailer)s</"
+"strong> sells this brand!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Sign up now!"
+msgid "Shop now"
+msgstr "Înregistrează-te acum!"
 
 msgid "Integration"
 msgstr "Integrare"
@@ -3937,11 +3787,8 @@ msgstr ""
 msgid "What is this site?"
 msgstr "Ce este acest site?"
 
-msgid "Commercial information"
-msgstr "Informații comerciale"
-
-msgid "Retailer information"
-msgstr ""
+msgid "Gallery"
+msgstr "Galerie"
 
 msgid "Blog"
 msgstr "Blog"
@@ -4425,7 +4272,7 @@ msgstr "%(user)s a comentat imaginea ta!"
 #| "%(url)s"
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it out "
-"at the following url: %(url)s"
+"at the following url: <a href=\"%(url)s\">%(url)s</a>"
 msgstr ""
 "%(user)s a răspuns la comentariul tău! Verifică următoarea adresă: %(url)s"
 
@@ -4485,28 +4332,6 @@ msgstr ""
 
 #, python-format
 msgid "%(user)s started a new discussion about a gear item you own!"
-msgstr ""
-
-#, python-format
-msgid ""
-"%(user)s wrote a review of a gear item you own! Read it at following url: <a "
-"href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-
-#, python-format
-msgid ""
-"%(user)s wrote a review of a gear item you own! Read it at following url: "
-"%(url)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear item "
-"you own!</a>"
-msgstr ""
-
-#, python-format
-msgid "%(user)s wrote a review of a gear item you own!"
 msgstr ""
 
 #, fuzzy, python-format
@@ -4769,6 +4594,11 @@ msgstr "Incarcarea anterioara"
 msgid "Next page"
 msgstr "Vizualizati pagina"
 
+#, fuzzy
+#| msgid "Additional information requested"
+msgid "No additional information available for this item."
+msgstr "Este nevoie de informatii suplimentare."
+
 msgid "Find images"
 msgstr "Cauta imagini"
 
@@ -4777,6 +4607,9 @@ msgstr "Ascensia Dreapta (RA)"
 
 msgid "Dec"
 msgstr "Declinatia"
+
+msgid "View page"
+msgstr "Vizualizati pagina"
 
 msgid "Member since"
 msgstr "Membru incepand din"
@@ -5311,6 +5144,9 @@ msgstr "Planete"
 msgid "Offer valid until"
 msgstr ""
 
+msgid "Price"
+msgstr "Preț"
+
 msgid "Validity"
 msgstr ""
 
@@ -5611,6 +5447,14 @@ msgid "%(user)s's followed users"
 msgstr "galeria lui %(utilizator)i"
 
 #, fuzzy, python-format
+msgid "%(user)s's friends"
+msgstr "galeria lui %(utilizator)i"
+
+#, python-format
+msgid "These are the users that follow %(user)s mutually."
+msgstr ""
+
+#, fuzzy, python-format
 msgid "%(user)s's liked images"
 msgstr "galeria lui %(utilizator)i"
 
@@ -5715,79 +5559,6 @@ msgstr ""
 "imagistice şi subiectele sunt minimul necesar. Datele de achiziţie sunt "
 "foarte importante deasemenea."
 
-#, python-format
-msgid "%(user)s's commercial products"
-msgstr "Produsele comerciale ale utilizatorului %(user)s"
-
-msgid ""
-"Please remember that you are only allowed to claim items that you really "
-"produce and/or retail."
-msgstr ""
-"Vă rugăm să rețineți că vă este permis sa revendicati doar ce produceti sau "
-"vindeti cu adevarat."
-
-msgid "As producer"
-msgstr "Ca producator"
-
-msgid "Gear IDs"
-msgstr "IDs echipament"
-
-msgid "You haven't claimed any commercial products yet."
-msgstr "Încă nu aţi susţinut nici un produs comercial."
-
-#, python-format
-msgid "%(user)s hasn't claimed any commercial products yet."
-msgstr "%(user)s nu a susţinut nici un produs comercial incă."
-
-msgid "As retailer"
-msgstr "Ca vanzator cu amanuntul"
-
-msgid "You haven't claimed any retailed products yet."
-msgstr "Tu nu ai sustinut inca niciun produs vandut cu amanuntul."
-
-#, python-format
-msgid "%(user)s hasn't claimed any retailed products yet."
-msgstr "%(user)s nu a revendicat vreun produs vandut cu amanuntul"
-
-msgid "Claim as producer"
-msgstr "Revendicare ca producator"
-
-msgid "Claim as retailer"
-msgstr "Revendicare ca vânzător cu amănuntul"
-
-msgid "Claim commercial product"
-msgstr "Revendicati produs comercial"
-
-msgid "Claim"
-msgstr "Revendicati"
-
-msgid "Select items to remove"
-msgstr "Selectati itemurile ce urmeaza a fi eliminate."
-
-msgid "Be careful if you try to remove all of these!"
-msgstr "Fiti atent daca incercati sa eliminati toate acestea !"
-
-msgid ""
-"All the properties, including the commercial description, of this claim will "
-"be deleted and cannot be recovered!"
-msgstr ""
-"Toate proprietățile, inclusiv denumirea comercială a acestei afirmatii vor "
-"fi sterse si nu pot fi recuperate."
-
-msgid "Select the product you want to merge to"
-msgstr "Selectaţi produsul pe care doriţi să îl imbinaţi "
-
-msgid "Are you sure?"
-msgstr "Sunteţi sigur?"
-
-msgid "Claim retailed product"
-msgstr "Revendicați produs de vânzare cu amănuntul"
-
-msgid ""
-"All the properties of this claim will be deleted and cannot be recovered!"
-msgstr ""
-"Toate proprietaţile acestei reclamaţii vor fi şterse şi nu pot fi recuperate."
-
 #, fuzzy
 msgid "Delete account"
 msgstr "Stergeti conversatia"
@@ -5798,14 +5569,19 @@ msgid ""
 "forever!"
 msgstr ""
 
-msgid "Your account was deleted. Thanks for using AstroBin until now!"
+#, fuzzy
+#| msgid "(comment deleted)"
+msgid "Account deleted"
+msgstr "(comentariul a fost sters)"
+
+msgid ""
+"\n"
+"            Your account was deleted. Thanks for using AstroBin until now!\n"
+"        "
 msgstr ""
 
 msgid "Edit your basic information"
 msgstr "Editaţi-vă informaţiile de bază"
-
-msgid "Edit your commercial information"
-msgstr "Editaţi-vă informaţiile comerciale"
 
 #, fuzzy
 #| msgid "Uploaded"
@@ -5920,9 +5696,6 @@ msgstr "Importa din Flickr"
 msgid "Edit your site preferences"
 msgstr "Editaţi preferinţele pentru site"
 
-msgid "Edit your retailer information"
-msgstr "Editează informaţiile vânzătorului tău"
-
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -5998,10 +5771,10 @@ msgstr "Multumesc pentru nominalizare !"
 msgid "Public Area"
 msgstr "Zona Publică"
 
-msgid "Staging Area"
+msgid "Corrupted"
 msgstr ""
 
-msgid "Corrupted"
+msgid "Recovered"
 msgstr ""
 
 msgid "Trash"
@@ -6015,6 +5788,9 @@ msgstr "Cauta imagini"
 #, fuzzy
 msgid "Following"
 msgstr "Urmăreşte"
+
+msgid "Friends"
+msgstr ""
 
 msgid "Lacking data"
 msgstr "Lipsă de date"
@@ -6033,6 +5809,97 @@ msgstr "Căutare rapidă"
 
 msgid "Key/value pairs"
 msgstr ""
+
+msgid "Please confirm your recovered images"
+msgstr ""
+
+#, python-format
+msgid ""
+"Following the <a href=\"%(url)s\" target=\"_blank\">data loss incident in "
+"February 2020</a>, these images <strong>were automatically recovered</"
+"strong>."
+msgstr ""
+
+msgid "Now you need to <strong>manually confirm or reject</strong> them."
+msgstr ""
+
+#, fuzzy
+#| msgid "Integration"
+msgid "Instructions"
+msgstr "Integrare"
+
+msgid ""
+"Below, you see the list of all your images impacted by the automatic "
+"recovery process."
+msgstr ""
+
+msgid ""
+"The big thumbnail represents the original upload, and the small thumbnails "
+"represent revisions."
+msgstr ""
+
+msgid ""
+"Click on a thumbnail once to mark it for recovery, again to mark it for "
+"deletion, once more to return to the \"do nothing\" state."
+msgstr ""
+
+msgid ""
+"You can also use the \"Recover all\" and \"Delete all\" buttons at the "
+"bottom."
+msgstr ""
+
+msgid ""
+"When you are ready, click on the \"Submit selected\" button to confirm your "
+"selection."
+msgstr ""
+
+msgid ""
+"You will return to this page, and the images for which you didn't make a "
+"selection will still be here."
+msgstr ""
+
+msgid ""
+"The recovered images will return to your gallery (public or staging, "
+"depending on where they were before the data loss)."
+msgstr ""
+
+#, fuzzy
+#| msgid "Original"
+msgid "Original upload"
+msgstr "Original"
+
+#, fuzzy
+msgid "Staging area"
+msgstr "Camere de imagistică"
+
+#, fuzzy
+#| msgid "Delete"
+msgid "Deleted"
+msgstr "Sterge"
+
+#, fuzzy
+msgid "Revision"
+msgstr "Înregistrare încheiată"
+
+msgid "Recover all"
+msgstr ""
+
+#, fuzzy
+#| msgid "Select all"
+msgid "Delete all"
+msgstr "Selectati tot"
+
+msgid "Reset"
+msgstr ""
+
+#, fuzzy
+msgid "Submit selected"
+msgstr "# selectat"
+
+#, fuzzy
+#| msgid "There are no reviews yet."
+msgid "There are no images to recover."
+msgstr "Inca nu exista review-uri."
 
 #, fuzzy
 msgid "Restore selected"
@@ -6131,6 +5998,11 @@ msgstr ""
 
 msgid "Award"
 msgstr ""
+
+#, fuzzy
+#| msgid "Public Area"
+msgid "Publication date range"
+msgstr "Zona Publică"
 
 msgid "Camera type"
 msgstr "Tipul camerei"
@@ -6411,9 +6283,6 @@ msgstr "Forumuri"
 msgid "Image uploaded. Thank you!"
 msgstr "Formă salvată. Mulțumesc!"
 
-msgid "You can't merge a product to itself."
-msgstr "nu puteti alipi o imagine, ei insasi."
-
 msgid "You already have a collection with that name"
 msgstr ""
 
@@ -6481,9 +6350,321 @@ msgid ""
 "in a while: the more images you have, the more time it will take."
 msgstr ""
 
+#~ msgid "Merge"
+#~ msgstr "Imbina"
+
+#~ msgid ""
+#~ "Use this field to mark that the item you are claiming really is the same "
+#~ "product (or a variation thereof) of something you have claimed before."
+#~ msgstr ""
+#~ "Utilizaţi acest câmp pentru a marca faptul că pretindeţi cu adevărat că "
+#~ "este acelaşi produs (sau o variaţie a acestuia) a ceva ce ai pretins "
+#~ "înainte."
+
+#~ msgid ""
+#~ "You can't create more than %d claims. Consider upgrading your affiliation!"
+#~ msgstr ""
+#~ "Nu puteti crea mai mult de %d cereri. Luați în considerare modernizarea "
+#~ "afilierei!"
+
+#~ msgid "You have already claimed this product."
+#~ msgstr "Ați susținut deja acest produs."
+
+#~ msgid ""
+#~ "Use this field to mark that the item you are merging really is the same "
+#~ "product (or a variation thereof) of something you have claimed before."
+#~ msgstr ""
+#~ "Utilizati acest câmp pentru a marca faptul că elementul pe care il "
+#~ "imbinati este într-adevăr acelasi produs (sau o variantă a acestuia) a "
+#~ "ceva ce ati sustinut inainte."
+
+#~ msgid "has written a review on"
+#~ msgstr "a scris o recenzie pe"
+
+#~ msgid "Company name"
+#~ msgstr "Numele companiei"
+
+#~ msgid "The name of the company you represent on AstroBin."
+#~ msgstr "Numele companiei pe care o reprezentaţi pe AstroBin."
+
+#~ msgid "Company description"
+#~ msgstr "Descrierea companiei"
+
 #, fuzzy
-#~ msgid "Revision"
-#~ msgstr "Înregistrare încheiată"
+#~ msgid ""
+#~ "A short description of the company you represent on AstroBin. You can use "
+#~ "some <a href=\"/faq/#comments\">formatting rules</a>."
+#~ msgstr ""
+#~ "O scurta descriere a companiei pe care o reprezentati pe AstroBin. Aveți "
+#~ "posibilitatea să utilizați unele  <a href=\"/faq/#10\">norme de "
+#~ "formatare</a>."
+
+#~ msgid "Company website"
+#~ msgstr "Site-ul web al companiei"
+
+#~ msgid "The website of the company you represent on AstroBin."
+#~ msgstr "Site-ul web al companiei pe care o reprezentaţi pe Astrobin."
+
+#~ msgid "Country of operation"
+#~ msgstr "Ţara de funcţionare"
+
+#~ msgid "AUD - Australian dollars"
+#~ msgstr "AUD - Dolari australieni"
+
+#~ msgid "CAD - Canadian dollars"
+#~ msgstr "CAD - Dolari canadieni"
+
+#~ msgid "CHF - Swiss francs"
+#~ msgstr "CHF - Franci elvețieni"
+
+#~ msgid "EUR - Euros"
+#~ msgstr "EUR - Euro"
+
+#~ msgid "GPB - Pound stelings"
+#~ msgstr "GPB - Lire sterline"
+
+#~ msgid "PLN - Polish zloty"
+#~ msgstr "PLN - Zlot polonez"
+
+#~ msgid "SEK - Swedish krona"
+#~ msgstr "SEK - Coroana suedeză"
+
+#~ msgid "USD - American dollars"
+#~ msgstr "USD - Dolari americani"
+
+#~ msgid "Producer"
+#~ msgstr "Producător"
+
+#~ msgid "The link to this product's page on your website."
+#~ msgstr "Link către pagina acestui produs pe site-ul tau."
+
+#~ msgid "Currency"
+#~ msgstr "Valută"
+
+#~ msgid "Retailed gear items"
+#~ msgstr "Articole de echipament vândute "
+
+#~ msgid "Proper make"
+#~ msgstr "Marca adecvată"
+
+#~ msgid ""
+#~ "Sometimes, product make/brand/producer/developer names are not written "
+#~ "properly by the users. Write here the proper make/brand/producer/"
+#~ "developer name."
+#~ msgstr ""
+#~ "Uneori, marca produsului/producătorul/numele dezvoltatorilor nu sunt "
+#~ "scrise în mod corespunzător de către utilizatori. Scrieţi aici marca/"
+#~ "producătorul/numele dezvoltatorului corespunzător. "
+
+#~ msgid "Proper name"
+#~ msgstr "Nume adecvat"
+
+#~ msgid ""
+#~ "Sometimes, product names are not written properly by the users. Write "
+#~ "here the proper product name, not including the make/brand/producer/"
+#~ "developer name.<br/>It is recommended that you try to group as many items "
+#~ "as possible, so try to use a generic version of your product's name."
+#~ msgstr ""
+#~ "Uneori, numele produselor nu sunt scrise corespunzator de catre "
+#~ "utilizatori. Scrieti aici numele corespunzator al produsului  neincluzand "
+#~ "marca produsului/producătorul/numele dezvoltatorului. Este recomandat sa "
+#~ "incercati gruparea a cat mai multor elemente posibile, asa incat "
+#~ "incercati sa folositi o versiune generica a numelui produselor "
+#~ "dumneavoastra.."
+
+#~ msgid ""
+#~ "The official, commercial image for this product. Upload an image via the "
+#~ "regular uploading interface, set its subject type to \"Gear\", and then "
+#~ "choose it from this list. If you upload several revisions, they will also "
+#~ "appear in the commercial page."
+#~ msgstr ""
+#~ "Imaginea oficiala comerciala pentru acest produs. Incarcati o imagine "
+#~ "prin interfata uzuala de incarcare, setandu-l la tipul \"Gear\" si "
+#~ "alegandu-l din aceaasta lista. Daca incarcati diverse versiuni revizuite "
+#~ "acestea vor aparea deasemeni in pagina comercial."
+
+#~ msgid "Tagline"
+#~ msgstr "Sloganul"
+
+#~ msgid ""
+#~ "A memorable phrase that will sum up this product, for marketing purposes."
+#~ msgstr ""
+#~ "O fraza memorabila care va insuma insusirile acestui produs, in sensul "
+#~ "marketingului."
+
+#, fuzzy
+#~ msgid ""
+#~ "Here you can write the full commercial description of your product. You "
+#~ "can use some <a href=\"/faq/#comments\">formatting rules</a>."
+#~ msgstr ""
+#~ "Aici puteti completa intreaga descriere comerciala a produsului "
+#~ "dumneavoastra. Puteti utiliza reguli de formatare de tip <a href=\"/faq/"
+#~ "\"10\">."
+
+#~ msgid "Commercial gear items"
+#~ msgstr "elemente comerciale pentru echipament"
+
+#~ msgid "Commercial products"
+#~ msgstr "Produse comerciale"
+
+#~ msgid "Edit commercial product"
+#~ msgstr "Editati produsul comercial"
+
+#~ msgid "Return to list"
+#~ msgstr "Intoarcere la lista"
+
+#~ msgid "View in new window"
+#~ msgstr "Vizualizati intr-o noua fereastra"
+
+#~ msgid "by"
+#~ msgstr "de"
+
+#~ msgid "Other images"
+#~ msgstr "Alte imagini"
+
+#~ msgid "Some images"
+#~ msgstr "Cateva imagini"
+
+#~ msgid "(view more)"
+#~ msgstr "(vizualizati mai mult)"
+
+#~ msgid "Rating"
+#~ msgstr "Votari"
+
+#~ msgid "Add your review"
+#~ msgstr "Adaugati review-ul dumneavoastra"
+
+#~ msgid ""
+#~ "Please be fair, honest and polite when writing a review. Many people will "
+#~ "read your review: all the users on AstroBin who own this piece of gear, "
+#~ "will be notified of your review."
+#~ msgstr ""
+#~ "Va rugam sa fiti onest si politicos cand scrieti un review. Multi oameni "
+#~ "vor citi review-ul dvs. Toti membrii AstroBin, posesori ai acestui tip de "
+#~ "echipament vor fi notificati despre review-ul dumneavoastra."
+
+#~ msgid ""
+#~ "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
+#~ "register/\">register</a> to write a review."
+#~ msgstr ""
+#~ "Va rugam <a href=\"/accounts/login/\">sa va logati</a>sau <a href=\"/"
+#~ "accounts/register/\">sa va inregistrati</a> pentru a putea scrie un "
+#~ "review."
+
+#~ msgid ""
+#~ "Use this space to start a discussion, leave a comment or ask a question "
+#~ "about this piece of gear. All the users on AstroBin who own one, will be "
+#~ "notified and can join the discussion."
+#~ msgstr ""
+#~ "Utilizati acest spatiu pentru a purta o discutie, a lasa un comentariu "
+#~ "sau a intreba despre echipamentul respectiv. Toti utilizatorii de pe "
+#~ "AstroBin care au acest echipament vor fi notificati si pot participa la "
+#~ "discutie."
+
+#~ msgid ""
+#~ "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
+#~ "register/\">register</a> to leave a comment."
+#~ msgstr ""
+#~ "Va rugam <a href=\"/accounts/login/\">sa va logati</a>sau <a href=\"/"
+#~ "accounts/register/\">sa va inregistrati</a> pentru a lasa un comentariu"
+
+#~ msgid "Buy it here"
+#~ msgstr "Cumpara-l aici"
+
+#~ msgid "Properties"
+#~ msgstr "Proprietati"
+
+#~ msgid "Owners"
+#~ msgstr "Posesori"
+
+#~ msgid "just now"
+#~ msgstr "chiar acum"
+
+#~ msgid "Made possible by"
+#~ msgstr "A fost posibil datorita"
+
+#~ msgid "Commercial information"
+#~ msgstr "Informații comerciale"
+
+#~ msgid "%(user)s's commercial products"
+#~ msgstr "Produsele comerciale ale utilizatorului %(user)s"
+
+#~ msgid ""
+#~ "Please remember that you are only allowed to claim items that you really "
+#~ "produce and/or retail."
+#~ msgstr ""
+#~ "Vă rugăm să rețineți că vă este permis sa revendicati doar ce produceti "
+#~ "sau vindeti cu adevarat."
+
+#~ msgid "As producer"
+#~ msgstr "Ca producator"
+
+#~ msgid "Gear IDs"
+#~ msgstr "IDs echipament"
+
+#~ msgid "You haven't claimed any commercial products yet."
+#~ msgstr "Încă nu aţi susţinut nici un produs comercial."
+
+#~ msgid "%(user)s hasn't claimed any commercial products yet."
+#~ msgstr "%(user)s nu a susţinut nici un produs comercial incă."
+
+#~ msgid "As retailer"
+#~ msgstr "Ca vanzator cu amanuntul"
+
+#~ msgid "You haven't claimed any retailed products yet."
+#~ msgstr "Tu nu ai sustinut inca niciun produs vandut cu amanuntul."
+
+#~ msgid "%(user)s hasn't claimed any retailed products yet."
+#~ msgstr "%(user)s nu a revendicat vreun produs vandut cu amanuntul"
+
+#~ msgid "Claim as producer"
+#~ msgstr "Revendicare ca producator"
+
+#~ msgid "Claim as retailer"
+#~ msgstr "Revendicare ca vânzător cu amănuntul"
+
+#~ msgid "Claim commercial product"
+#~ msgstr "Revendicati produs comercial"
+
+#~ msgid "Claim"
+#~ msgstr "Revendicati"
+
+#~ msgid "Select items to remove"
+#~ msgstr "Selectati itemurile ce urmeaza a fi eliminate."
+
+#~ msgid "Be careful if you try to remove all of these!"
+#~ msgstr "Fiti atent daca incercati sa eliminati toate acestea !"
+
+#~ msgid ""
+#~ "All the properties, including the commercial description, of this claim "
+#~ "will be deleted and cannot be recovered!"
+#~ msgstr ""
+#~ "Toate proprietățile, inclusiv denumirea comercială a acestei afirmatii "
+#~ "vor fi sterse si nu pot fi recuperate."
+
+#~ msgid "Select the product you want to merge to"
+#~ msgstr "Selectaţi produsul pe care doriţi să îl imbinaţi "
+
+#~ msgid "Are you sure?"
+#~ msgstr "Sunteţi sigur?"
+
+#~ msgid "Claim retailed product"
+#~ msgstr "Revendicați produs de vânzare cu amănuntul"
+
+#~ msgid ""
+#~ "All the properties of this claim will be deleted and cannot be recovered!"
+#~ msgstr ""
+#~ "Toate proprietaţile acestei reclamaţii vor fi şterse şi nu pot fi "
+#~ "recuperate."
+
+#~ msgid "Edit your commercial information"
+#~ msgstr "Editaţi-vă informaţiile comerciale"
+
+#~ msgid "Edit your retailer information"
+#~ msgstr "Editează informaţiile vânzătorului tău"
+
+#~ msgid "You can't merge a product to itself."
+#~ msgstr "nu puteti alipi o imagine, ei insasi."
 
 #, fuzzy
 #~ msgid "Imaging telescope or lens"
@@ -6491,13 +6672,6 @@ msgstr ""
 #~ msgstr[0] "Telescoape de imagistica si lentile"
 #~ msgstr[1] "Telescoape de imagistica si lentile"
 #~ msgstr[2] "Telescoape de imagistica si lentile"
-
-#, fuzzy
-#~ msgid "Imaging camera"
-#~ msgid_plural "Imaging cameras"
-#~ msgstr[0] "Camere de imagistică"
-#~ msgstr[1] "Camere de imagistică"
-#~ msgstr[2] "Camere de imagistică"
 
 #, fuzzy
 #~ msgid "Mount"
@@ -6608,9 +6782,6 @@ msgstr ""
 
 #~ msgid "So, what are you waiting for?"
 #~ msgstr "Deci, ce mai aștepți?"
-
-#~ msgid "Sign up now!"
-#~ msgstr "Înregistrează-te acum!"
 
 #, fuzzy
 #~ msgid "Send to public data pool"
@@ -7533,9 +7704,6 @@ msgstr ""
 #~ msgid "To latitude:"
 #~ msgstr "La latitudinea :"
 
-#~ msgid "Hemisphere:"
-#~ msgstr "Emisfera:"
-
 #~ msgid "Both"
 #~ msgstr "Ambele"
 
@@ -7629,9 +7797,6 @@ msgstr ""
 
 #~ msgid "You are now registered. Activation email sent."
 #~ msgstr "Acum sunteţi înregistrat. Email-ul de activare a fost trimis."
-
-#~ msgid "(comment deleted)"
-#~ msgstr "(comentariul a fost sters)"
 
 #~ msgid "Undelete"
 #~ msgstr "Restaurati ce ati sters"
