@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.http import Http404
+from hitcount.models import HitCount
 from persistent_messages.models import Message
 from tastypie import fields, http
 from tastypie.authentication import Authentication
@@ -194,6 +195,12 @@ class ImageResource(ModelResource):
     orientation = fields.DecimalField()
     radius = fields.DecimalField()
 
+    likes = fields.IntegerField()
+    bookmarks = fields.IntegerField()
+    comments = fields.IntegerField()
+    views = fields.IntegerField()
+
+
     class Meta:
         authentication = AppAuthentication()
         queryset = Image.objects.filter(corrupted=False, is_wip=False)
@@ -318,6 +325,24 @@ class ImageResource(ModelResource):
     def dehydrate_imaging_cameras(self, bundle):
         cameras = bundle.obj.imaging_cameras.all()
         return [unicode(x) for x in cameras]
+
+    def dehydrate_likes(self, bundle):
+        return ToggleProperty.objects.toggleproperties_for_object('like', bundle.obj).count()
+
+    def dehydrate_bookmarks(self, bundle):
+        return ToggleProperty.objects.toggleproperties_for_object('bookmark', bundle.obj).count()
+
+    def dehydrate_comments(self, bundle):
+        return bundle.obj.nested_comments.count()
+
+    def dehydrate_views(self, bundle):
+        try:
+            return HitCount.objects.get(
+                object_pk=bundle.obj.pk,
+                content_type=ContentType.objects.get_for_model(Image),
+            ).hits
+        except (HitCount.DoesNotExist, HitCount.MultipleObjectsReturned):
+            return 0
 
     def get_detail(self, request, **kwargs):
         """
