@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:02+0000\n"
+"POT-Creation-Date: 2020-10-30 07:27+0000\n"
 "PO-Revision-Date: 2019-04-12 02:32+0000\n"
 "Last-Translator: BG8JQT <BG8JQT@163.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -760,35 +760,6 @@ msgstr "ジンバブエ"
 msgid "Users"
 msgstr "ユーザー"
 
-msgid "Make"
-msgstr "製造者"
-
-msgid "The make, brand, producer or developer of this product."
-msgstr "この製品の製造者名やブランド名、開発者の名前。"
-
-msgid "Name"
-msgstr "名前"
-
-msgid "Merge"
-msgstr "結合"
-
-msgid ""
-"Use this field to mark that the item you are claiming really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"あなたが前に主張しているものと同じ製品 (またはその変形) であることを示すため"
-"に、このフィールドを使用します。"
-
-#, python-format
-msgid ""
-"You can't create more than %d claims. Consider upgrading your affiliation!"
-msgstr ""
-"あなたは%d以上の主張をすることはできません。あなたのアフィリエイトプログラム"
-"をアップグレードすることを考えてください。"
-
-msgid "You have already claimed this product."
-msgstr "あなたは既にこの製品を主張しています。"
-
 msgid ""
 "Select a tag to order this collection by its value. If you see no options "
 "here, it's because none of the images in this collection have key/value "
@@ -935,13 +906,6 @@ msgid "Longitude (seconds)"
 msgstr "経度 (秒)"
 
 msgid ""
-"Use this field to mark that the item you are merging really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"あなたがマージしたアイテムが、本当にあなたが前に主張しているものと同じ製品 "
-"(またはその変形) であることを示すために、この項目を使用します。"
-
-msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
 "guiding, go here."
 msgstr ""
@@ -1010,9 +974,6 @@ msgstr "がブックマークしました"
 
 msgid "likes"
 msgstr "がLikeしました"
-
-msgid "has written a review on"
-msgstr "レビューが記入された"
 
 #, fuzzy
 msgid "created a new public group"
@@ -1198,6 +1159,15 @@ msgstr "下部中央"
 
 msgid "Bottom right"
 msgstr "右下"
+
+msgid "Make"
+msgstr "製造者"
+
+msgid "The make, brand, producer or developer of this product."
+msgstr "この製品の製造者名やブランド名、開発者の名前。"
+
+msgid "Name"
+msgstr "名前"
 
 msgid ""
 "Just the name of this product, without any properties or personal "
@@ -1825,6 +1795,22 @@ msgstr "TIFF/FITS"
 msgid "Higher resolution"
 msgstr "高解像度"
 
+#, fuzzy
+msgid "I am no longer active in astrophotography"
+msgstr "あなたの天体写真機材を編集"
+
+msgid "This website did not meet my expectations"
+msgstr ""
+
+msgid "Something on this website doesn't work for me"
+msgstr ""
+
+msgid "The paid subscriptions are too expensive"
+msgstr ""
+
+msgid "I prefer not to say"
+msgstr ""
+
 msgid "Real name"
 msgstr "本名"
 
@@ -1855,30 +1841,17 @@ msgstr "あなたについて"
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "あなた自身について何かかいてください。HTMLタグが利用できます。"
 
-msgid "Company name"
-msgstr "会社名"
+#, fuzzy
+msgid "Delete reason"
+msgstr "会話を削除"
 
-msgid "The name of the company you represent on AstroBin."
-msgstr "AstroBinで表示するあなたの会社名。"
-
-msgid "Company description"
-msgstr "会社概要"
+msgid "Why are you deleting your AstroBin account?"
+msgstr ""
 
 msgid ""
-"A short description of the company you represent on AstroBin. You can use "
-"some <a href=\"/faq/#comments\">formatting rules</a>."
+"Please tell us why you are deleting your account (minimum 30 characters). "
+"Thanks!"
 msgstr ""
-"AstroBinでのあなたが表示する会社の概要。<a href=\"/faq/#comments\">フォーマッ"
-"トルール</a>を利用してください。"
-
-msgid "Company website"
-msgstr "会社のWebサイトのURL"
-
-msgid "The website of the company you represent on AstroBin."
-msgstr "AstroBin上であなたが表示する会社のWebサイトURL。"
-
-msgid "Country of operation"
-msgstr "利用している国"
 
 msgid "I want to be excluded from competitions"
 msgstr ""
@@ -1975,6 +1948,18 @@ msgid ""
 "and this kind of support would be amazing. Thank you in advance!"
 msgstr ""
 
+#, fuzzy
+#| msgid "Total integration"
+msgid "Allow retailer integration"
+msgstr "総露出時間"
+
+msgid ""
+"AstroBin may associate with retailers of astronomy and astrophotography "
+"equipment to enhance the display of equipment items with links to sponsoring "
+"partners. The integration is subtle and non intrusive, and it would help a "
+"lot if you didn't disable it. Thank you in advance!"
+msgstr ""
+
 msgid "Language"
 msgstr "言語"
 
@@ -2047,98 +2032,6 @@ msgid ""
 msgstr ""
 "あなたのアプリケーションの目的と、そのAPIをどのように使おうとしているのかを説"
 "明してください。"
-
-msgid "AUD - Australian dollars"
-msgstr "AUD - オーストラリアドル"
-
-msgid "CAD - Canadian dollars"
-msgstr "CAD - カナダ・ドル"
-
-msgid "CHF - Swiss francs"
-msgstr "CHF - スイス・フラン"
-
-msgid "EUR - Euros"
-msgstr "EUR - ユーロ"
-
-msgid "GPB - Pound stelings"
-msgstr "GPB - イギリス・ポンド"
-
-msgid "PLN - Polish zloty"
-msgstr "PLN - ポーランド・ズウォティ"
-
-msgid "SEK - Swedish krona"
-msgstr "SEK - スエーデン・コルナ"
-
-msgid "USD - American dollars"
-msgstr "USD - アメリカ・ドル"
-
-msgid "Producer"
-msgstr "製作者"
-
-msgid "The link to this product's page on your website."
-msgstr "あなたのWebサイトでの、このプロダクトのリンク先URLを記入してください。"
-
-msgid "Price"
-msgstr "価格"
-
-msgid "Currency"
-msgstr "通貨"
-
-msgid "Retailed gear items"
-msgstr "販売機材"
-
-msgid "Proper make"
-msgstr "正式な製品"
-
-msgid ""
-"Sometimes, product make/brand/producer/developer names are not written "
-"properly by the users. Write here the proper make/brand/producer/developer "
-"name."
-msgstr ""
-"時々、メーカー名やブランド名、製作者名、開発者名をユーザーが正確に記載してい"
-"ないことがあります。正確にブランド名、製作者名、開発者名を記入してください。"
-
-msgid "Proper name"
-msgstr "正式名称"
-
-msgid ""
-"Sometimes, product names are not written properly by the users. Write here "
-"the proper product name, not including the make/brand/producer/developer "
-"name.<br/>It is recommended that you try to group as many items as possible, "
-"so try to use a generic version of your product's name."
-msgstr ""
-"時々、製品名を正確に記載しないユーザーがいます。ここにはメーカー名やブランド"
-"名、製作者名、開発者名を含まない正式な製品名を記載してください。<br/>出来るだ"
-"け多くの製品をグループ化し、製品の一般的な名称を使ってもらおうと試みていま"
-"す。"
-
-msgid ""
-"The official, commercial image for this product. Upload an image via the "
-"regular uploading interface, set its subject type to \"Gear\", and then "
-"choose it from this list. If you upload several revisions, they will also "
-"appear in the commercial page."
-msgstr ""
-"この製品の公式もしくは商用の画像。定期的にアップロードするシステムを使って最"
-"新の画像を取得し、選択リストから題材を\"機材\"を設定します。複数のバージョン"
-"をアップロードする場合は、商用ページにそれらが表示されます。"
-
-msgid "Tagline"
-msgstr "タグライン"
-
-msgid ""
-"A memorable phrase that will sum up this product, for marketing purposes."
-msgstr ""
-"販売目的のために製品についていた記憶にのこるフレーズ（キャッチコピー）。"
-
-msgid ""
-"Here you can write the full commercial description of your product. You can "
-"use some <a href=\"/faq/#comments\">formatting rules</a>."
-msgstr ""
-"ここには、あなたの製品の商業的な説明を記載することができます。それには、<a "
-"href=\"/faq/#comments\">フォーマットルール</a>を利用することが可能です。"
-
-msgid "Commercial gear items"
-msgstr "商業的な機材"
 
 #, fuzzy
 #| msgid "Sending..."
@@ -2424,24 +2317,6 @@ msgstr "警告!"
 msgid "Error!"
 msgstr "エラー!"
 
-#, python-format
-msgid ""
-"As a producer and/or a retailer on AstroBin, it's very important that you "
-"fill in all of your company details! Click <a href=\"%(the_url)s\">here</a> "
-"to do it now."
-msgstr ""
-"AstroBinに登録する製造者もしくは小売り業者の方々は会社の詳細を記入する事がと"
-"ても大切です。いますぐ<a href=\"%(the_url)s\">ここを</a>クリックしてくださ"
-"い。"
-
-#, python-format
-msgid ""
-"As a retailer on AstroBin, it's very important that you fill in your country "
-"of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
-msgstr ""
-"AstroBinに小売業者として登録することは、あなたの国での営業にとても重要です。"
-"いますぐ<a href=\"%(the_url)s\">ここを</a>クリックしてください。"
-
 msgid "About"
 msgstr "AstroBinについて"
 
@@ -2521,6 +2396,20 @@ msgstr ""
 
 msgid "Contact us to resolve the issue"
 msgstr ""
+
+#, python-format
+msgid ""
+"<strong>Good news!</strong> AstroBin automatically recovered some of your "
+"images that were lost in the data loss incident of February 2020. Please "
+"review them to confirm the recovery. If you do nothing, your recovered "
+"images will be confirmed automatically starting from <strong>%(date)s</"
+"strong>."
+msgstr ""
+
+#, fuzzy
+#| msgid "Recent images"
+msgid "Review recovered images"
+msgstr "最新画像"
 
 msgid "Cancel"
 msgstr "キャンセル"
@@ -2732,11 +2621,13 @@ msgstr "登録プラン"
 msgid "My places"
 msgstr "自分の場所"
 
-msgid "Commercial products"
-msgstr "商業的製品"
-
-msgid "Gallery"
+#, fuzzy
+#| msgid "Gallery"
+msgid "Public Gallery"
 msgstr "ギャラリー"
+
+msgid "Staging Area"
+msgstr "ステージングエリア"
 
 msgid "Bookmarks"
 msgstr "ブックマーク"
@@ -2805,21 +2696,6 @@ msgstr ""
 
 msgid "Custom e-mail change request on AstroBin"
 msgstr ""
-
-msgid "Edit commercial product"
-msgstr "商業製品を編集"
-
-msgid "Save"
-msgstr "保存"
-
-msgid "Return to list"
-msgstr "リストに戻る"
-
-msgid "View in new window"
-msgstr "新しいウインドウで開く"
-
-msgid "Edit retailed product"
-msgstr "小売り製品を編集"
 
 msgid ""
 "Please contact us if you need any assistance, or want to report a problem, "
@@ -3017,77 +2893,6 @@ msgid ""
 msgstr ""
 "あなたの貢献はとても大事でした。全てのAstrobinコミュニティが感謝しています。"
 
-msgid "by"
-msgstr "by"
-
-msgid "Other images"
-msgstr "他の画像"
-
-msgid "Some images"
-msgstr "いくつかの画像"
-
-msgid "(view more)"
-msgstr "(さらにみる)"
-
-msgid "Reviews"
-msgstr "レビュー"
-
-msgid "Rating"
-msgstr "評価"
-
-msgid "There are no reviews yet."
-msgstr "まだレビューがありません"
-
-msgid "Add your review"
-msgstr "レビューを追加"
-
-msgid ""
-"Please be fair, honest and polite when writing a review. Many people will "
-"read your review: all the users on AstroBin who own this piece of gear, will "
-"be notified of your review."
-msgstr ""
-"レビューを書く時には公正、誠実かつ丁寧にお願いします。多くの人々はあなたのレ"
-"ビューを読むでしょう。おなじ機材を所有するAstroBinの全ての利用者に、あなたの"
-"レビューがあったことを通知されます。"
-
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to write a review."
-msgstr ""
-"レビューを書くには<a href=\"/accounts/login/\">ログイン</a>もしくは<a href="
-"\"/accounts/register/\">新規登録</a>してください。"
-
-msgid "Comments"
-msgstr "コメント"
-
-msgid ""
-"Use this space to start a discussion, leave a comment or ask a question "
-"about this piece of gear. All the users on AstroBin who own one, will be "
-"notified and can join the discussion."
-msgstr ""
-"議論を開始したり、コメントを残したり、機材の部品について質問をするために、こ"
-"のスペースを使使ってください。 それを所有しているAstroBinの全ての利用者に通知"
-"が行って、議論に参加できます。"
-
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment."
-msgstr ""
-"コメントを残すには<a href=\"/accounts/login/\">ログイン</a>もしくは<a href="
-"\"/accounts/register/\">新規登録</a>してください。"
-
-msgid "Buy it here"
-msgstr "ここで購入"
-
-msgid "Properties"
-msgstr "性能"
-
-msgid "Owners"
-msgstr "所有者"
-
-msgid "just now"
-msgstr "ちょうど今"
-
 msgid "Additional information requested"
 msgstr "追加情報を求めます"
 
@@ -3103,6 +2908,19 @@ msgstr ""
 
 msgid "Return to image"
 msgstr "画像に戻る"
+
+msgid "Hemisphere"
+msgstr ""
+
+#, fuzzy
+#| msgid "North"
+msgid "Northern"
+msgstr "北緯"
+
+#, fuzzy
+#| msgid "South"
+msgid "Southern"
+msgstr "南緯"
 
 msgid "Contains"
 msgstr "説明"
@@ -3120,6 +2938,9 @@ msgstr "後で撮影"
 msgid "Remove"
 msgstr "削除"
 
+msgid "Comments"
+msgstr "コメント"
+
 #, python-format
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
@@ -3132,9 +2953,6 @@ msgstr ""
 
 msgid "Comments are closed."
 msgstr "コメントは非表示"
-
-msgid "Made possible by"
-msgstr "によって可能になる"
 
 msgid "In these public groups"
 msgstr ""
@@ -3152,6 +2970,25 @@ msgstr "説明"
 
 msgid "Technical card"
 msgstr "Technical card"
+
+msgid "Sponsored brands"
+msgstr ""
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr ""
+
+msgid "Sponsored items"
+msgstr ""
+
+#, fuzzy
+#| msgid "Retailer information"
+msgid "Disable retailer integration"
+msgstr "小売り情報"
+
+#, python-format
+msgid "Shop %(name)s at %(retailer)s"
+msgstr ""
 
 msgid "Frames"
 msgstr "撮影フレーム"
@@ -3495,8 +3332,13 @@ msgid "The following people like this image"
 msgstr "フォローしている人々はこの画像にLikeしました"
 
 msgid ""
+"This will move this image to your public area, making it listed. As this "
+"image had already been published before, your followers will not be notified."
+msgstr ""
+
+msgid ""
 "This will move this image to your public area, making it listed and "
-"notifying your followers."
+"optionally notifying your followers."
 msgstr ""
 
 msgid ""
@@ -3602,8 +3444,7 @@ msgid ""
 "unless you give them one of the links you can find in the <em>Share</em> "
 "menu below. Use that link to post this image to Internet forums and get "
 "feedback on it. When you are satisfied, perhaps after uploading some "
-"revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
-"to the <a href=\"%(profile_url)s\">Public Area</a>."
+"revisions, promote it to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
 
 msgid "Oh no!"
@@ -3656,6 +3497,9 @@ msgstr ""
 
 msgid "Edit your image: acquisition details"
 msgstr "画像の編集（撮影情報の詳細）"
+
+msgid "Save"
+msgstr "保存"
 
 msgid "Remove data"
 msgstr "データの削除"
@@ -3889,9 +3733,6 @@ msgstr ""
 msgid "Galactic latitude"
 msgstr ""
 
-msgid "View page"
-msgstr "ページを表示"
-
 msgid "No gear yet."
 msgstr "まだ機材をもっていない"
 
@@ -3903,6 +3744,17 @@ msgstr "画像なし"
 
 msgid "Only you can see this"
 msgstr ""
+
+#, python-format
+msgid ""
+"Interested in <strong>%(brand)s</strong>? Our sponsor <strong>%(retailer)s</"
+"strong> sells this brand!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Sign up now!"
+msgid "Shop now"
+msgstr "いますぐ登録しよう！"
 
 msgid "Integration"
 msgstr "総露出時間"
@@ -3965,11 +3817,8 @@ msgstr "もしこの場所がまちがっていたり、不正確であれば、
 msgid "What is this site?"
 msgstr "このサイトとは？"
 
-msgid "Commercial information"
-msgstr "販売情報"
-
-msgid "Retailer information"
-msgstr "小売り情報"
+msgid "Gallery"
+msgstr "ギャラリー"
 
 msgid "Blog"
 msgstr "ブログ"
@@ -4468,7 +4317,7 @@ msgstr "%(user)sがあなたの画像にコメントしました!"
 #| "%(url)s"
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it out "
-"at the following url: %(url)s"
+"at the following url: <a href=\"%(url)s\">%(url)s</a>"
 msgstr ""
 "%(user)sがあなたのコメントに返信しました。以下のURLをチェックしてくださ"
 "い。%(url)s"
@@ -4551,37 +4400,6 @@ msgstr ""
 #, python-format
 msgid "%(user)s started a new discussion about a gear item you own!"
 msgstr "%(user)sはあなたが所有する機材についての新しい議論をスタートしました!"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "%(user)s wrote a review of a gear item you own! Read it at following url: "
-#| "%(url)s"
-msgid ""
-"%(user)s wrote a review of a gear item you own! Read it at following url: <a "
-"href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-"%(user)sが、あなたが所有する機材品のレビューを書きました。以下のURLで読んでく"
-"ださい。%(url)s"
-
-#, python-format
-msgid ""
-"%(user)s wrote a review of a gear item you own! Read it at following url: "
-"%(url)s"
-msgstr ""
-"%(user)sが、あなたが所有する機材品のレビューを書きました。以下のURLで読んでく"
-"ださい。%(url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear item "
-"you own!</a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong>が、あなたが所有する機材品のレ"
-"ビューを書きました!</a>"
-
-#, python-format
-msgid "%(user)s wrote a review of a gear item you own!"
-msgstr "%(user)sが、あなたが所有する機材品のレビューを書きました。"
 
 #, python-format
 msgid ""
@@ -4897,6 +4715,11 @@ msgstr "前にアップロードしたもの"
 msgid "Next page"
 msgstr "ページを表示"
 
+#, fuzzy
+#| msgid "Additional information requested"
+msgid "No additional information available for this item."
+msgstr "追加情報を求めます"
+
 msgid "Find images"
 msgstr "画像を検索"
 
@@ -4905,6 +4728,9 @@ msgstr "赤経"
 
 msgid "Dec"
 msgstr "赤緯"
+
+msgid "View page"
+msgstr "ページを表示"
 
 msgid "Member since"
 msgstr "メンバー登録日"
@@ -5443,6 +5269,9 @@ msgstr "計画"
 msgid "Offer valid until"
 msgstr ""
 
+msgid "Price"
+msgstr "価格"
+
 msgid "Validity"
 msgstr ""
 
@@ -5768,6 +5597,15 @@ msgstr "%(user)sのフォロワー"
 msgid "%(user)s's followed users"
 msgstr "%(user)sのフォロワー"
 
+#, fuzzy, python-format
+#| msgid "%(user)s's followers"
+msgid "%(user)s's friends"
+msgstr "%(user)sのフォロワー"
+
+#, python-format
+msgid "These are the users that follow %(user)s mutually."
+msgstr ""
+
 #, python-format
 msgid "%(user)s's liked images"
 msgstr "%(user)s喜欢图片"
@@ -5876,78 +5714,6 @@ msgstr ""
 "を本当に埋める必要があります。望遠鏡、カメラ、主題は最低限必要です。撮影日も"
 "とても重要です。"
 
-#, python-format
-msgid "%(user)s's commercial products"
-msgstr "%(user)sの商品"
-
-msgid ""
-"Please remember that you are only allowed to claim items that you really "
-"produce and/or retail."
-msgstr ""
-"あなたが本当に製造もしくは販売をしたアイテムだと主張することを許されている事"
-"を忘れないようにしてください。"
-
-msgid "As producer"
-msgstr "製造者として"
-
-msgid "Gear IDs"
-msgstr "機材ID"
-
-msgid "You haven't claimed any commercial products yet."
-msgstr "あなたはまだ、商品をひとつも主張していません。"
-
-#, python-format
-msgid "%(user)s hasn't claimed any commercial products yet."
-msgstr "%(user)sはまだ、商品をひとつも主張していません。"
-
-msgid "As retailer"
-msgstr "販売者として"
-
-msgid "You haven't claimed any retailed products yet."
-msgstr "あなたはまだ、販売製品をひとつも主張していません。"
-
-#, python-format
-msgid "%(user)s hasn't claimed any retailed products yet."
-msgstr "%(user)sはまだ、販売製品をひとつも主張していません。"
-
-msgid "Claim as producer"
-msgstr "製造者として主張"
-
-msgid "Claim as retailer"
-msgstr "製造者として主張"
-
-msgid "Claim commercial product"
-msgstr "商品にクレーム"
-
-msgid "Claim"
-msgstr "クレーム"
-
-msgid "Select items to remove"
-msgstr "削除するアイテムを選択"
-
-msgid "Be careful if you try to remove all of these!"
-msgstr "これらのすべてを削除しようする場合には注意してください！"
-
-msgid ""
-"All the properties, including the commercial description, of this claim will "
-"be deleted and cannot be recovered!"
-msgstr ""
-"このクレームによる商品説明を含む全ての項目は削除され、復元することはできませ"
-"ん!"
-
-msgid "Select the product you want to merge to"
-msgstr "に統合したい製品を選択"
-
-msgid "Are you sure?"
-msgstr "本当にいいですか?"
-
-msgid "Claim retailed product"
-msgstr "販売製品のクレーム"
-
-msgid ""
-"All the properties of this claim will be deleted and cannot be recovered!"
-msgstr "この主張の全ての項目は削除され、元に戻すことはできないでしょう。"
-
 #, fuzzy
 msgid "Delete account"
 msgstr "会話を削除"
@@ -5958,14 +5724,27 @@ msgid ""
 "forever!"
 msgstr ""
 
-msgid "Your account was deleted. Thanks for using AstroBin until now!"
+#, fuzzy
+msgid "Account deleted"
+msgstr "修正版を削除しました。"
+
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "                The 'Image of the day' was selected. Thank you for your "
+#| "help!\n"
+#| "            "
+msgid ""
+"\n"
+"            Your account was deleted. Thanks for using AstroBin until now!\n"
+"        "
 msgstr ""
+"\n"
+"Image of the dayが選ばれました。あなたの協力に感謝します。\n"
+"            "
 
 msgid "Edit your basic information"
 msgstr "あなたの基本情報を編集"
-
-msgid "Edit your commercial information"
-msgstr "あなたの商売情報を編集"
 
 #, fuzzy
 #| msgid "Uploaded"
@@ -6076,9 +5855,6 @@ msgstr "Flickrからインポートする"
 msgid "Edit your site preferences"
 msgstr "あなたのサイトの設定を編集"
 
-msgid "Edit your retailer information"
-msgstr "あなたの販売者情報を編集"
-
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -6154,10 +5930,10 @@ msgstr ""
 msgid "Public Area"
 msgstr "公開エリア"
 
-msgid "Staging Area"
-msgstr "ステージングエリア"
-
 msgid "Corrupted"
+msgstr ""
+
+msgid "Recovered"
 msgstr ""
 
 msgid "Trash"
@@ -6170,6 +5946,9 @@ msgstr "画像を検索"
 
 msgid "Following"
 msgstr "フォローする"
+
+msgid "Friends"
+msgstr ""
 
 msgid "Lacking data"
 msgstr "不足しているデータ"
@@ -6188,6 +5967,99 @@ msgstr "クイック検索"
 
 msgid "Key/value pairs"
 msgstr ""
+
+msgid "Please confirm your recovered images"
+msgstr ""
+
+#, python-format
+msgid ""
+"Following the <a href=\"%(url)s\" target=\"_blank\">data loss incident in "
+"February 2020</a>, these images <strong>were automatically recovered</"
+"strong>."
+msgstr ""
+
+msgid "Now you need to <strong>manually confirm or reject</strong> them."
+msgstr ""
+
+#, fuzzy
+#| msgid "Integration"
+msgid "Instructions"
+msgstr "総露出時間"
+
+msgid ""
+"Below, you see the list of all your images impacted by the automatic "
+"recovery process."
+msgstr ""
+
+msgid ""
+"The big thumbnail represents the original upload, and the small thumbnails "
+"represent revisions."
+msgstr ""
+
+msgid ""
+"Click on a thumbnail once to mark it for recovery, again to mark it for "
+"deletion, once more to return to the \"do nothing\" state."
+msgstr ""
+
+msgid ""
+"You can also use the \"Recover all\" and \"Delete all\" buttons at the "
+"bottom."
+msgstr ""
+
+msgid ""
+"When you are ready, click on the \"Submit selected\" button to confirm your "
+"selection."
+msgstr ""
+
+msgid ""
+"You will return to this page, and the images for which you didn't make a "
+"selection will still be here."
+msgstr ""
+
+msgid ""
+"The recovered images will return to your gallery (public or staging, "
+"depending on where they were before the data loss)."
+msgstr ""
+
+#, fuzzy
+#| msgid "Original"
+msgid "Original upload"
+msgstr "元画像"
+
+#, fuzzy
+#| msgid "Staging Area"
+msgid "Staging area"
+msgstr "ステージングエリア"
+
+#, fuzzy
+#| msgid "Delete"
+msgid "Deleted"
+msgstr "削除"
+
+#, fuzzy
+msgid "Revision"
+msgstr "レビュー"
+
+msgid "Recover all"
+msgstr ""
+
+#, fuzzy
+#| msgid "Select all"
+msgid "Delete all"
+msgstr "すべて選択"
+
+msgid "Reset"
+msgstr "リセット"
+
+#, fuzzy
+#| msgid "quote selected"
+msgid "Submit selected"
+msgstr "引用を選択済み"
+
+#, fuzzy
+#| msgid "There are no reviews yet."
+msgid "There are no images to recover."
+msgstr "まだレビューがありません"
 
 #, fuzzy
 #| msgid "quote selected"
@@ -6289,6 +6161,11 @@ msgstr ""
 
 msgid "Award"
 msgstr ""
+
+#, fuzzy
+#| msgid "Public data pools"
+msgid "Publication date range"
+msgstr "公開データ領域"
 
 msgid "Camera type"
 msgstr "カメラのタイプ"
@@ -6570,9 +6447,6 @@ msgstr "フォーラムの投稿"
 msgid "Image uploaded. Thank you!"
 msgstr "画像がアップロードされました。Thank you!"
 
-msgid "You can't merge a product to itself."
-msgstr "あなた自身で製品をマージすることはできません。"
-
 msgid "You already have a collection with that name"
 msgstr ""
 
@@ -6639,9 +6513,359 @@ msgid ""
 "in a while: the more images you have, the more time it will take."
 msgstr ""
 
-#, fuzzy
-#~ msgid "Revision"
+#~ msgid "Merge"
+#~ msgstr "結合"
+
+#~ msgid ""
+#~ "Use this field to mark that the item you are claiming really is the same "
+#~ "product (or a variation thereof) of something you have claimed before."
+#~ msgstr ""
+#~ "あなたが前に主張しているものと同じ製品 (またはその変形) であることを示すた"
+#~ "めに、このフィールドを使用します。"
+
+#~ msgid ""
+#~ "You can't create more than %d claims. Consider upgrading your affiliation!"
+#~ msgstr ""
+#~ "あなたは%d以上の主張をすることはできません。あなたのアフィリエイトプログラ"
+#~ "ムをアップグレードすることを考えてください。"
+
+#~ msgid "You have already claimed this product."
+#~ msgstr "あなたは既にこの製品を主張しています。"
+
+#~ msgid ""
+#~ "Use this field to mark that the item you are merging really is the same "
+#~ "product (or a variation thereof) of something you have claimed before."
+#~ msgstr ""
+#~ "あなたがマージしたアイテムが、本当にあなたが前に主張しているものと同じ製"
+#~ "品 (またはその変形) であることを示すために、この項目を使用します。"
+
+#~ msgid "has written a review on"
+#~ msgstr "レビューが記入された"
+
+#~ msgid "Company name"
+#~ msgstr "会社名"
+
+#~ msgid "The name of the company you represent on AstroBin."
+#~ msgstr "AstroBinで表示するあなたの会社名。"
+
+#~ msgid "Company description"
+#~ msgstr "会社概要"
+
+#~ msgid ""
+#~ "A short description of the company you represent on AstroBin. You can use "
+#~ "some <a href=\"/faq/#comments\">formatting rules</a>."
+#~ msgstr ""
+#~ "AstroBinでのあなたが表示する会社の概要。<a href=\"/faq/#comments\">フォー"
+#~ "マットルール</a>を利用してください。"
+
+#~ msgid "Company website"
+#~ msgstr "会社のWebサイトのURL"
+
+#~ msgid "The website of the company you represent on AstroBin."
+#~ msgstr "AstroBin上であなたが表示する会社のWebサイトURL。"
+
+#~ msgid "Country of operation"
+#~ msgstr "利用している国"
+
+#~ msgid "AUD - Australian dollars"
+#~ msgstr "AUD - オーストラリアドル"
+
+#~ msgid "CAD - Canadian dollars"
+#~ msgstr "CAD - カナダ・ドル"
+
+#~ msgid "CHF - Swiss francs"
+#~ msgstr "CHF - スイス・フラン"
+
+#~ msgid "EUR - Euros"
+#~ msgstr "EUR - ユーロ"
+
+#~ msgid "GPB - Pound stelings"
+#~ msgstr "GPB - イギリス・ポンド"
+
+#~ msgid "PLN - Polish zloty"
+#~ msgstr "PLN - ポーランド・ズウォティ"
+
+#~ msgid "SEK - Swedish krona"
+#~ msgstr "SEK - スエーデン・コルナ"
+
+#~ msgid "USD - American dollars"
+#~ msgstr "USD - アメリカ・ドル"
+
+#~ msgid "Producer"
+#~ msgstr "製作者"
+
+#~ msgid "The link to this product's page on your website."
+#~ msgstr ""
+#~ "あなたのWebサイトでの、このプロダクトのリンク先URLを記入してください。"
+
+#~ msgid "Currency"
+#~ msgstr "通貨"
+
+#~ msgid "Retailed gear items"
+#~ msgstr "販売機材"
+
+#~ msgid "Proper make"
+#~ msgstr "正式な製品"
+
+#~ msgid ""
+#~ "Sometimes, product make/brand/producer/developer names are not written "
+#~ "properly by the users. Write here the proper make/brand/producer/"
+#~ "developer name."
+#~ msgstr ""
+#~ "時々、メーカー名やブランド名、製作者名、開発者名をユーザーが正確に記載して"
+#~ "いないことがあります。正確にブランド名、製作者名、開発者名を記入してくださ"
+#~ "い。"
+
+#~ msgid "Proper name"
+#~ msgstr "正式名称"
+
+#~ msgid ""
+#~ "Sometimes, product names are not written properly by the users. Write "
+#~ "here the proper product name, not including the make/brand/producer/"
+#~ "developer name.<br/>It is recommended that you try to group as many items "
+#~ "as possible, so try to use a generic version of your product's name."
+#~ msgstr ""
+#~ "時々、製品名を正確に記載しないユーザーがいます。ここにはメーカー名やブラン"
+#~ "ド名、製作者名、開発者名を含まない正式な製品名を記載してください。<br/>出"
+#~ "来るだけ多くの製品をグループ化し、製品の一般的な名称を使ってもらおうと試み"
+#~ "ています。"
+
+#~ msgid ""
+#~ "The official, commercial image for this product. Upload an image via the "
+#~ "regular uploading interface, set its subject type to \"Gear\", and then "
+#~ "choose it from this list. If you upload several revisions, they will also "
+#~ "appear in the commercial page."
+#~ msgstr ""
+#~ "この製品の公式もしくは商用の画像。定期的にアップロードするシステムを使って"
+#~ "最新の画像を取得し、選択リストから題材を\"機材\"を設定します。複数のバー"
+#~ "ジョンをアップロードする場合は、商用ページにそれらが表示されます。"
+
+#~ msgid "Tagline"
+#~ msgstr "タグライン"
+
+#~ msgid ""
+#~ "A memorable phrase that will sum up this product, for marketing purposes."
+#~ msgstr ""
+#~ "販売目的のために製品についていた記憶にのこるフレーズ（キャッチコピー）。"
+
+#~ msgid ""
+#~ "Here you can write the full commercial description of your product. You "
+#~ "can use some <a href=\"/faq/#comments\">formatting rules</a>."
+#~ msgstr ""
+#~ "ここには、あなたの製品の商業的な説明を記載することができます。それには、"
+#~ "<a href=\"/faq/#comments\">フォーマットルール</a>を利用することが可能で"
+#~ "す。"
+
+#~ msgid "Commercial gear items"
+#~ msgstr "商業的な機材"
+
+#~ msgid ""
+#~ "As a producer and/or a retailer on AstroBin, it's very important that you "
+#~ "fill in all of your company details! Click <a href=\"%(the_url)s\">here</"
+#~ "a> to do it now."
+#~ msgstr ""
+#~ "AstroBinに登録する製造者もしくは小売り業者の方々は会社の詳細を記入する事が"
+#~ "とても大切です。いますぐ<a href=\"%(the_url)s\">ここを</a>クリックしてくだ"
+#~ "さい。"
+
+#~ msgid ""
+#~ "As a retailer on AstroBin, it's very important that you fill in your "
+#~ "country of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
+#~ msgstr ""
+#~ "AstroBinに小売業者として登録することは、あなたの国での営業にとても重要で"
+#~ "す。いますぐ<a href=\"%(the_url)s\">ここを</a>クリックしてください。"
+
+#~ msgid "Commercial products"
+#~ msgstr "商業的製品"
+
+#~ msgid "Edit commercial product"
+#~ msgstr "商業製品を編集"
+
+#~ msgid "Return to list"
+#~ msgstr "リストに戻る"
+
+#~ msgid "View in new window"
+#~ msgstr "新しいウインドウで開く"
+
+#~ msgid "Edit retailed product"
+#~ msgstr "小売り製品を編集"
+
+#~ msgid "by"
+#~ msgstr "by"
+
+#~ msgid "Other images"
+#~ msgstr "他の画像"
+
+#~ msgid "Some images"
+#~ msgstr "いくつかの画像"
+
+#~ msgid "(view more)"
+#~ msgstr "(さらにみる)"
+
+#~ msgid "Reviews"
 #~ msgstr "レビュー"
+
+#~ msgid "Rating"
+#~ msgstr "評価"
+
+#~ msgid "Add your review"
+#~ msgstr "レビューを追加"
+
+#~ msgid ""
+#~ "Please be fair, honest and polite when writing a review. Many people will "
+#~ "read your review: all the users on AstroBin who own this piece of gear, "
+#~ "will be notified of your review."
+#~ msgstr ""
+#~ "レビューを書く時には公正、誠実かつ丁寧にお願いします。多くの人々はあなたの"
+#~ "レビューを読むでしょう。おなじ機材を所有するAstroBinの全ての利用者に、あな"
+#~ "たのレビューがあったことを通知されます。"
+
+#~ msgid ""
+#~ "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
+#~ "register/\">register</a> to write a review."
+#~ msgstr ""
+#~ "レビューを書くには<a href=\"/accounts/login/\">ログイン</a>もしくは<a "
+#~ "href=\"/accounts/register/\">新規登録</a>してください。"
+
+#~ msgid ""
+#~ "Use this space to start a discussion, leave a comment or ask a question "
+#~ "about this piece of gear. All the users on AstroBin who own one, will be "
+#~ "notified and can join the discussion."
+#~ msgstr ""
+#~ "議論を開始したり、コメントを残したり、機材の部品について質問をするために、"
+#~ "このスペースを使使ってください。 それを所有しているAstroBinの全ての利用者"
+#~ "に通知が行って、議論に参加できます。"
+
+#~ msgid ""
+#~ "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
+#~ "register/\">register</a> to leave a comment."
+#~ msgstr ""
+#~ "コメントを残すには<a href=\"/accounts/login/\">ログイン</a>もしくは<a "
+#~ "href=\"/accounts/register/\">新規登録</a>してください。"
+
+#~ msgid "Buy it here"
+#~ msgstr "ここで購入"
+
+#~ msgid "Properties"
+#~ msgstr "性能"
+
+#~ msgid "Owners"
+#~ msgstr "所有者"
+
+#~ msgid "just now"
+#~ msgstr "ちょうど今"
+
+#~ msgid "Made possible by"
+#~ msgstr "によって可能になる"
+
+#~ msgid "Commercial information"
+#~ msgstr "販売情報"
+
+#, fuzzy
+#~| msgid ""
+#~| "%(user)s wrote a review of a gear item you own! Read it at following "
+#~| "url: %(url)s"
+#~ msgid ""
+#~ "%(user)s wrote a review of a gear item you own! Read it at following url: "
+#~ "<a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "%(user)sが、あなたが所有する機材品のレビューを書きました。以下のURLで読ん"
+#~ "でください。%(url)s"
+
+#~ msgid ""
+#~ "%(user)s wrote a review of a gear item you own! Read it at following url: "
+#~ "%(url)s"
+#~ msgstr ""
+#~ "%(user)sが、あなたが所有する機材品のレビューを書きました。以下のURLで読ん"
+#~ "でください。%(url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear "
+#~ "item you own!</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong>が、あなたが所有する機材品の"
+#~ "レビューを書きました!</a>"
+
+#~ msgid "%(user)s wrote a review of a gear item you own!"
+#~ msgstr "%(user)sが、あなたが所有する機材品のレビューを書きました。"
+
+#~ msgid "%(user)s's commercial products"
+#~ msgstr "%(user)sの商品"
+
+#~ msgid ""
+#~ "Please remember that you are only allowed to claim items that you really "
+#~ "produce and/or retail."
+#~ msgstr ""
+#~ "あなたが本当に製造もしくは販売をしたアイテムだと主張することを許されている"
+#~ "事を忘れないようにしてください。"
+
+#~ msgid "As producer"
+#~ msgstr "製造者として"
+
+#~ msgid "Gear IDs"
+#~ msgstr "機材ID"
+
+#~ msgid "You haven't claimed any commercial products yet."
+#~ msgstr "あなたはまだ、商品をひとつも主張していません。"
+
+#~ msgid "%(user)s hasn't claimed any commercial products yet."
+#~ msgstr "%(user)sはまだ、商品をひとつも主張していません。"
+
+#~ msgid "As retailer"
+#~ msgstr "販売者として"
+
+#~ msgid "You haven't claimed any retailed products yet."
+#~ msgstr "あなたはまだ、販売製品をひとつも主張していません。"
+
+#~ msgid "%(user)s hasn't claimed any retailed products yet."
+#~ msgstr "%(user)sはまだ、販売製品をひとつも主張していません。"
+
+#~ msgid "Claim as producer"
+#~ msgstr "製造者として主張"
+
+#~ msgid "Claim as retailer"
+#~ msgstr "製造者として主張"
+
+#~ msgid "Claim commercial product"
+#~ msgstr "商品にクレーム"
+
+#~ msgid "Claim"
+#~ msgstr "クレーム"
+
+#~ msgid "Select items to remove"
+#~ msgstr "削除するアイテムを選択"
+
+#~ msgid "Be careful if you try to remove all of these!"
+#~ msgstr "これらのすべてを削除しようする場合には注意してください！"
+
+#~ msgid ""
+#~ "All the properties, including the commercial description, of this claim "
+#~ "will be deleted and cannot be recovered!"
+#~ msgstr ""
+#~ "このクレームによる商品説明を含む全ての項目は削除され、復元することはできま"
+#~ "せん!"
+
+#~ msgid "Select the product you want to merge to"
+#~ msgstr "に統合したい製品を選択"
+
+#~ msgid "Are you sure?"
+#~ msgstr "本当にいいですか?"
+
+#~ msgid "Claim retailed product"
+#~ msgstr "販売製品のクレーム"
+
+#~ msgid ""
+#~ "All the properties of this claim will be deleted and cannot be recovered!"
+#~ msgstr "この主張の全ての項目は削除され、元に戻すことはできないでしょう。"
+
+#~ msgid "Edit your commercial information"
+#~ msgstr "あなたの商売情報を編集"
+
+#~ msgid "Edit your retailer information"
+#~ msgstr "あなたの販売者情報を編集"
+
+#~ msgid "You can't merge a product to itself."
+#~ msgstr "あなた自身で製品をマージすることはできません。"
 
 #~ msgid "created a new public data pool"
 #~ msgstr "新しい公開データ領域が作られた"
@@ -7237,9 +7461,6 @@ msgstr ""
 #~ msgid "So, what are you waiting for?"
 #~ msgstr "それでもあなたは、まだ何を待つのでしょう？"
 
-#~ msgid "Sign up now!"
-#~ msgstr "いますぐ登録しよう！"
-
 #~ msgid "Send to public data pool"
 #~ msgstr "公開データ領域に送る"
 
@@ -7561,9 +7782,6 @@ msgstr ""
 
 #~ msgid "Choose files"
 #~ msgstr "ファイルの選択"
-
-#~ msgid "Reset"
-#~ msgstr "リセット"
 
 #~ msgid "Start upload"
 #~ msgstr "アップロード開始"
@@ -7950,16 +8168,6 @@ msgstr ""
 
 #~ msgid "Yes, I'm sure"
 #~ msgstr "はい、もちろんです。"
-
-#~ msgid ""
-#~ "\n"
-#~ "                The 'Image of the day' was selected. Thank you for your "
-#~ "help!\n"
-#~ "            "
-#~ msgstr ""
-#~ "\n"
-#~ "Image of the dayが選ばれました。あなたの協力に感謝します。\n"
-#~ "            "
 
 #~ msgid "Leaderboard"
 #~ msgstr "Leaderboard"

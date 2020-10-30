@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:02+0000\n"
+"POT-Creation-Date: 2020-10-30 07:27+0000\n"
 "PO-Revision-Date: 2020-09-25 19:55+0000\n"
 "Last-Translator: DanielaDGR <danieladgr.5r@gmail.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
@@ -759,34 +759,6 @@ msgstr "Zimbabue"
 msgid "Users"
 msgstr "Usuarios"
 
-msgid "Make"
-msgstr "Fabricante"
-
-msgid "The make, brand, producer or developer of this product."
-msgstr "Marca, fabricante, productor o desarrollador de este producto."
-
-msgid "Name"
-msgstr "Nombre"
-
-msgid "Merge"
-msgstr "Anexar"
-
-msgid ""
-"Use this field to mark that the item you are claiming really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"Usa este campo para marcar que el elemento que estás reclamando es el mismo "
-"producto (o una variedad del mismo) que otro que ya has reclamado antes."
-
-#, python-format
-msgid ""
-"You can't create more than %d claims. Consider upgrading your affiliation!"
-msgstr ""
-"No puedes crear más de %d reclamos. ¡Considera el actualizar tu afiliación!"
-
-msgid "You have already claimed this product."
-msgstr "Ya has reclamado este producto."
-
 msgid ""
 "Select a tag to order this collection by its value. If you see no options "
 "here, it's because none of the images in this collection have key/value "
@@ -945,13 +917,6 @@ msgid "Longitude (seconds)"
 msgstr "Longitud (segundos)"
 
 msgid ""
-"Use this field to mark that the item you are merging really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"Usa este campo para marcar que el elemento que estás enlazando es el mismo "
-"producto (o una variante) que otro que ya has reclamado antes."
-
-msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
 "guiding, go here."
 msgstr ""
@@ -1016,9 +981,6 @@ msgstr "añadido a favoritos"
 
 msgid "likes"
 msgstr "le gusta"
-
-msgid "has written a review on"
-msgstr "ha escrito un análisis sobre"
 
 msgid "created a new public group"
 msgstr "nuevo grupo público creado"
@@ -1196,6 +1158,15 @@ msgstr "Abajo en el centro"
 
 msgid "Bottom right"
 msgstr "Abajo a la derecha"
+
+msgid "Make"
+msgstr "Fabricante"
+
+msgid "The make, brand, producer or developer of this product."
+msgstr "Marca, fabricante, productor o desarrollador de este producto."
+
+msgid "Name"
+msgstr "Nombre"
 
 msgid ""
 "Just the name of this product, without any properties or personal "
@@ -1805,6 +1776,25 @@ msgstr "TIFF/FITS"
 msgid "Higher resolution"
 msgstr "Resolución máxima"
 
+#, fuzzy
+#| msgid "Remote astrophotography"
+msgid "I am no longer active in astrophotography"
+msgstr "Astrofotografía remota"
+
+#, fuzzy
+#| msgid "This user does not have any collections."
+msgid "This website did not meet my expectations"
+msgstr "Este usuario no tiene colecciones."
+
+msgid "Something on this website doesn't work for me"
+msgstr ""
+
+msgid "The paid subscriptions are too expensive"
+msgstr ""
+
+msgid "I prefer not to say"
+msgstr ""
+
 msgid "Real name"
 msgstr "Nombre real"
 
@@ -1834,30 +1824,18 @@ msgstr "Sobre tí"
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "Escribe algo sobre tí mismo (las etiquetas HTML están permitidas)."
 
-msgid "Company name"
-msgstr "Nombre de la empresa"
+#, fuzzy
+#| msgid "Delete account"
+msgid "Delete reason"
+msgstr "Eliminar cuenta"
 
-msgid "The name of the company you represent on AstroBin."
-msgstr "Nombre de la empresa que representas en AstroBin."
-
-msgid "Company description"
-msgstr "Descripción de la empresa"
+msgid "Why are you deleting your AstroBin account?"
+msgstr ""
 
 msgid ""
-"A short description of the company you represent on AstroBin. You can use "
-"some <a href=\"/faq/#comments\">formatting rules</a>."
+"Please tell us why you are deleting your account (minimum 30 characters). "
+"Thanks!"
 msgstr ""
-"Una corta descripción de la empresa que representas en AstroBin. Puedes "
-"utilizar algunas <a href=\"/faq/#comments\">marcas de formato</a>."
-
-msgid "Company website"
-msgstr "Página web de la empresa"
-
-msgid "The website of the company you represent on AstroBin."
-msgstr "La página web de la empresa que representas en AstroBin."
-
-msgid "Country of operation"
-msgstr "País de operación"
 
 msgid "I want to be excluded from competitions"
 msgstr "Quiero ser excluido de las competencias"
@@ -1965,6 +1943,18 @@ msgstr ""
 "astronomía en este sitio web. AstroBin es una pequeña empresa dirigida por "
 "una sola persona, y este tipo de apoyo sería increíble. ¡Gracias de antemano!"
 
+#, fuzzy
+#| msgid "Total integration"
+msgid "Allow retailer integration"
+msgstr "Integración total"
+
+msgid ""
+"AstroBin may associate with retailers of astronomy and astrophotography "
+"equipment to enhance the display of equipment items with links to sponsoring "
+"partners. The integration is subtle and non intrusive, and it would help a "
+"lot if you didn't disable it. Thank you in advance!"
+msgstr ""
+
 msgid "Language"
 msgstr "Idioma"
 
@@ -2039,101 +2029,6 @@ msgid ""
 "the API."
 msgstr ""
 "Por favor, explica el propósito de tu aplicación y cómo piensas usar la API."
-
-msgid "AUD - Australian dollars"
-msgstr "AUD - Dólares australianos"
-
-msgid "CAD - Canadian dollars"
-msgstr "CAD - Dólares canadienses"
-
-msgid "CHF - Swiss francs"
-msgstr "CHF - Francos suizos"
-
-msgid "EUR - Euros"
-msgstr "EUR - Euros"
-
-msgid "GPB - Pound stelings"
-msgstr "GPB - Libras esterlinas"
-
-msgid "PLN - Polish zloty"
-msgstr "PLN - Dorados polacos"
-
-msgid "SEK - Swedish krona"
-msgstr "SEK - Coronas suizas"
-
-msgid "USD - American dollars"
-msgstr "USD - Dólares de los Estados Unidos"
-
-msgid "Producer"
-msgstr "Productor"
-
-msgid "The link to this product's page on your website."
-msgstr "Enlace a la página del producto en tu página web."
-
-msgid "Price"
-msgstr "Precio"
-
-msgid "Currency"
-msgstr "Moneda"
-
-msgid "Retailed gear items"
-msgstr "Elementos de instrumental a la venta"
-
-msgid "Proper make"
-msgstr "Marca correcta"
-
-msgid ""
-"Sometimes, product make/brand/producer/developer names are not written "
-"properly by the users. Write here the proper make/brand/producer/developer "
-"name."
-msgstr ""
-"En ocasiones los nombres de marca/productor/desarrollador no han sido "
-"escritas apropiadamente por los usuarios. Escribe aquí la marca/productora/"
-"desarrolladora correcta."
-
-msgid "Proper name"
-msgstr "Denominación correcta"
-
-msgid ""
-"Sometimes, product names are not written properly by the users. Write here "
-"the proper product name, not including the make/brand/producer/developer "
-"name.<br/>It is recommended that you try to group as many items as possible, "
-"so try to use a generic version of your product's name."
-msgstr ""
-"A veces los nombres de los productos no han sido escritos apropiadamente por "
-"los usuarios. Escribe aquí la denominación correcta del producto, sin "
-"incluir el nombre de la marca/productora/desarrolladora.<br />Se recomienda "
-"que intentes usar una versión genérica del nombre de tu producto."
-
-msgid ""
-"The official, commercial image for this product. Upload an image via the "
-"regular uploading interface, set its subject type to \"Gear\", and then "
-"choose it from this list. If you upload several revisions, they will also "
-"appear in the commercial page."
-msgstr ""
-"Imagen comercial oficial para este producto. Sube una imagen por medio del "
-"interfaz habitual, establece su tipo como \"Instrumental\", y después "
-"elígela desde esta lista. Si subes varias revisiones, también aparecerán en "
-"la página comercial."
-
-msgid "Tagline"
-msgstr "Lema"
-
-msgid ""
-"A memorable phrase that will sum up this product, for marketing purposes."
-msgstr ""
-"Una frase memorable que resuma este producto, según propósitos de "
-"mercadotecnia."
-
-msgid ""
-"Here you can write the full commercial description of your product. You can "
-"use some <a href=\"/faq/#comments\">formatting rules</a>."
-msgstr ""
-"Aquí puedes escribir la descripción comercial completa de tu producto. "
-"Puedes utilizar algunas <a href=\"/faq/#comments\">marcas de formato</a>."
-
-msgid "Commercial gear items"
-msgstr "Elementos de instrumental comerciales"
 
 msgid "Pending"
 msgstr "Enviando..."
@@ -2451,24 +2346,6 @@ msgstr "¡Atención!"
 msgid "Error!"
 msgstr "¡Error!"
 
-#, python-format
-msgid ""
-"As a producer and/or a retailer on AstroBin, it's very important that you "
-"fill in all of your company details! Click <a href=\"%(the_url)s\">here</a> "
-"to do it now."
-msgstr ""
-"¡Como productor y/o vendedor en AstroBin, es muy importante que rellenes "
-"todos los detalles de tu empresa! Haz clic <a href=\"%(the_url)s\">aquí</a> "
-"para hacerlo ahora."
-
-#, python-format
-msgid ""
-"As a retailer on AstroBin, it's very important that you fill in your country "
-"of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
-msgstr ""
-"¡Como vendedor en AstroBin, es muy importante que introduzcas tu país de "
-"operación! Haz clic <a href=\"%(the_url)s\">aquí</a> para hacerlo ahora."
-
 msgid "About"
 msgstr "Acerca de"
 
@@ -2557,6 +2434,20 @@ msgstr ""
 
 msgid "Contact us to resolve the issue"
 msgstr "Contáctenos para resolver el problema"
+
+#, python-format
+msgid ""
+"<strong>Good news!</strong> AstroBin automatically recovered some of your "
+"images that were lost in the data loss incident of February 2020. Please "
+"review them to confirm the recovery. If you do nothing, your recovered "
+"images will be confirmed automatically starting from <strong>%(date)s</"
+"strong>."
+msgstr ""
+
+#, fuzzy
+#| msgid "Recent images"
+msgid "Review recovered images"
+msgstr "Imágenes recientes"
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -2782,11 +2673,13 @@ msgstr "Planes de suscripción"
 msgid "My places"
 msgstr "Mis imágenes"
 
-msgid "Commercial products"
-msgstr "Productos comerciales"
-
-msgid "Gallery"
+#, fuzzy
+#| msgid "Gallery"
+msgid "Public Gallery"
 msgstr "Galería"
+
+msgid "Staging Area"
+msgstr "Área de Pruebas"
 
 msgid "Bookmarks"
 msgstr "Favoritos"
@@ -2872,21 +2765,6 @@ msgstr ""
 
 msgid "Custom e-mail change request on AstroBin"
 msgstr "Solicitud de cambio de correo electrónico personalizada en AstroBin"
-
-msgid "Edit commercial product"
-msgstr "Editar producto comercial"
-
-msgid "Save"
-msgstr "Guardar"
-
-msgid "Return to list"
-msgstr "Volver a la lista"
-
-msgid "View in new window"
-msgstr "Ver en una nueva ventana"
-
-msgid "Edit retailed product"
-msgstr "Editar producto en venta"
 
 msgid ""
 "Please contact us if you need any assistance, or want to report a problem, "
@@ -3102,77 +2980,6 @@ msgstr ""
 "Tu contribución ha sido muy importante y toda la comunidad de AstroBin te "
 "está agradecida."
 
-msgid "by"
-msgstr "por"
-
-msgid "Other images"
-msgstr "Otras imágenes"
-
-msgid "Some images"
-msgstr "Imágenes varias"
-
-msgid "(view more)"
-msgstr "(ver más...)"
-
-msgid "Reviews"
-msgstr "Análisis"
-
-msgid "Rating"
-msgstr "Puntuación"
-
-msgid "There are no reviews yet."
-msgstr "Todavía no hay análisis."
-
-msgid "Add your review"
-msgstr "Añade tu análisis"
-
-msgid ""
-"Please be fair, honest and polite when writing a review. Many people will "
-"read your review: all the users on AstroBin who own this piece of gear, will "
-"be notified of your review."
-msgstr ""
-"Por favor, sé justo, honesto y educado cuando escribas un análisis. Mucha "
-"gente lo leerá: todos los usuarios de AstroBin que tengan esta pieza de "
-"instrumental serán notificados sobre tu análisis."
-
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to write a review."
-msgstr ""
-"Por favor, <a href=\"/accounts/login/\">identifícate</a> o <a href=\"/"
-"accounts/register/\">regístrate</a> para escribir un análisis."
-
-msgid "Comments"
-msgstr "Comentarios"
-
-msgid ""
-"Use this space to start a discussion, leave a comment or ask a question "
-"about this piece of gear. All the users on AstroBin who own one, will be "
-"notified and can join the discussion."
-msgstr ""
-"Usa este espacio para comenzar un debate, dejar un comentario o preguntar "
-"algo sobre esta pieza de instrumental. Todos los usuarios de AstroBin que la "
-"tengan serán notificados y podrán unirse a la discusión. "
-
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment."
-msgstr ""
-"Por favor, <a href=\"/accounts/login/\">identifícate</a> o <a href=\"/"
-"accounts/register/\">regístrate</a> para dejar un comentario."
-
-msgid "Buy it here"
-msgstr "Cómpralo aquí"
-
-msgid "Properties"
-msgstr "Características"
-
-msgid "Owners"
-msgstr "Propietarios"
-
-msgid "just now"
-msgstr "ahora mismo"
-
 msgid "Additional information requested"
 msgstr "Solicitada información adicional"
 
@@ -3189,6 +2996,21 @@ msgstr ""
 msgid "Return to image"
 msgstr "Volver a la imagen"
 
+#, fuzzy
+#| msgid "Hemisphere:"
+msgid "Hemisphere"
+msgstr "Hemisferio:"
+
+#, fuzzy
+#| msgid "North"
+msgid "Northern"
+msgstr "Norte"
+
+#, fuzzy
+#| msgid "South"
+msgid "Southern"
+msgstr "Sur"
+
 msgid "Contains"
 msgstr "Contiene"
 
@@ -3200,6 +3022,9 @@ msgstr "Adquiridas en"
 
 msgid "Remove"
 msgstr "Quitar"
+
+msgid "Comments"
+msgstr "Comentarios"
 
 #, python-format
 msgid ""
@@ -3215,9 +3040,6 @@ msgstr ""
 msgid "Comments are closed."
 msgstr "Los comentarios están cerrados."
 
-msgid "Made possible by"
-msgstr "Posible gracias a"
-
 msgid "In these public groups"
 msgstr "En estos grupos públicos"
 
@@ -3232,6 +3054,29 @@ msgstr "Declinación"
 
 msgid "Technical card"
 msgstr "Ficha Técnica"
+
+#, fuzzy
+#| msgid "Sponsors"
+msgid "Sponsored brands"
+msgstr "Patrocinadores"
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr ""
+
+#, fuzzy
+#| msgid "Sponsors"
+msgid "Sponsored items"
+msgstr "Patrocinadores"
+
+#, fuzzy
+#| msgid "Retailer information"
+msgid "Disable retailer integration"
+msgstr "Información del vendedor"
+
+#, python-format
+msgid "Shop %(name)s at %(retailer)s"
+msgstr ""
 
 msgid "Frames"
 msgstr "Tomas"
@@ -3579,9 +3424,24 @@ msgstr ""
 msgid "The following people like this image"
 msgstr "Las siguientes personas votaron Me gusta a esta imagen"
 
+#, fuzzy
+#| msgid ""
+#| "This will move this image to your public area, making it listed and "
+#| "notifying your followers."
+msgid ""
+"This will move this image to your public area, making it listed. As this "
+"image had already been published before, your followers will not be notified."
+msgstr ""
+"Esto moverá esta imagen a tu área pública, poniéndola en la lista y "
+"notificando a tus seguidores."
+
+#, fuzzy
+#| msgid ""
+#| "This will move this image to your public area, making it listed and "
+#| "notifying your followers."
 msgid ""
 "This will move this image to your public area, making it listed and "
-"notifying your followers."
+"optionally notifying your followers."
 msgstr ""
 "Esto moverá esta imagen a tu área pública, poniéndola en la lista y "
 "notificando a tus seguidores."
@@ -3688,15 +3548,22 @@ msgstr "Original"
 msgid "Sky plot"
 msgstr "Carta celeste"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "This image is a <strong>work in progress</strong> from your <a href="
+#| "\"%(profile_url)s?staging\">Staging Area</a>. This means nobody can see "
+#| "it unless you give them one of the links you can find in the <em>Share</"
+#| "em> menu below. Use that link to post this image to Internet forums and "
+#| "get feedback on it. When you are satisfied, perhaps after uploading some "
+#| "revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</"
+#| "a> to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgid ""
 "This image is a <strong>work in progress</strong> from your <a href="
 "\"%(profile_url)s?staging\">Staging Area</a>. This means nobody can see it "
 "unless you give them one of the links you can find in the <em>Share</em> "
 "menu below. Use that link to post this image to Internet forums and get "
 "feedback on it. When you are satisfied, perhaps after uploading some "
-"revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
-"to the <a href=\"%(profile_url)s\">Public Area</a>."
+"revisions, promote it to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
 "Esta imagen es un <strong>trabajo en curso</strong> de tu <a href="
 "\"%(profile_url)s?staging\">Área de Pruebas</a>. Esto significa que nadie lo "
@@ -3761,6 +3628,9 @@ msgstr "AstroBin está procesando sus miniaturas."
 
 msgid "Edit your image: acquisition details"
 msgstr "Editar tu imagen: datos de adquisición"
+
+msgid "Save"
+msgstr "Guardar"
 
 msgid "Remove data"
 msgstr "Vaciar los datos"
@@ -3976,9 +3846,6 @@ msgstr "Longitud galáctica"
 msgid "Galactic latitude"
 msgstr "Latitud galáctica"
 
-msgid "View page"
-msgstr "Ver página"
-
 msgid "No gear yet."
 msgstr "No hay instrumental aun."
 
@@ -3990,6 +3857,17 @@ msgstr "No hay imágenes"
 
 msgid "Only you can see this"
 msgstr "Solo usted puede ver esto"
+
+#, python-format
+msgid ""
+"Interested in <strong>%(brand)s</strong>? Our sponsor <strong>%(retailer)s</"
+"strong> sells this brand!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Sign up now!"
+msgid "Shop now"
+msgstr "¡Registrate ahora!"
 
 msgid "Integration"
 msgstr "Tiempo de integración"
@@ -4050,11 +3928,8 @@ msgstr ""
 msgid "What is this site?"
 msgstr "¿Qué es este sitio?"
 
-msgid "Commercial information"
-msgstr "Información comercial"
-
-msgid "Retailer information"
-msgstr "Información del vendedor"
+msgid "Gallery"
+msgstr "Galería"
 
 msgid "Blog"
 msgstr "Blog in English"
@@ -4551,10 +4426,13 @@ msgstr ""
 msgid "%(user)s commented on your image!"
 msgstr "%(user)s ha comentado tu imagen."
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it "
+#| "out at the following url: %(url)s"
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it out "
-"at the following url: %(url)s"
+"at the following url: <a href=\"%(url)s\">%(url)s</a>"
 msgstr ""
 "<a href=\"%(user_url)s\">%(user)s</a> ha respondido a tu comentario. Echa un "
 "vistazo en el siguiente enlace: %(url)s"
@@ -4631,34 +4509,6 @@ msgstr ""
 msgid "%(user)s started a new discussion about a gear item you own!"
 msgstr ""
 "¡%(user)s inició un nuevo debate sobre un ítem de instrumental que tienes!"
-
-#, python-format
-msgid ""
-"%(user)s wrote a review of a gear item you own! Read it at following url: <a "
-"href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-"%(user)s ha escrito un análisis sobre un ítem de instrumental que tienes. "
-"Léelo en el siguiente enlace: <a href=\"%(url)s\">%(url)s</a>"
-
-#, python-format
-msgid ""
-"%(user)s wrote a review of a gear item you own! Read it at following url: "
-"%(url)s"
-msgstr ""
-"%(user)s ha escrito un análisis sobre un ítem de instrumental que tienes. "
-"Léelo en el siguiente enlace: %(url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear item "
-"you own!</a>"
-msgstr ""
-"¡<a href=\"%(url)s\"><strong>%(user)s</strong> escribió un análisis sobre un "
-"ítem de instrumental tuyo!</a>"
-
-#, python-format
-msgid "%(user)s wrote a review of a gear item you own!"
-msgstr "¡%(user)s escribió un análisis de un ítem de instrumental que posees!"
 
 #, python-format
 msgid ""
@@ -4974,6 +4824,11 @@ msgstr "Subidas previamente"
 msgid "Next page"
 msgstr "Siguiente página"
 
+#, fuzzy
+#| msgid "Additional information requested"
+msgid "No additional information available for this item."
+msgstr "Solicitada información adicional"
+
 msgid "Find images"
 msgstr "Encontrar imágenes"
 
@@ -4982,6 +4837,9 @@ msgstr "AR"
 
 msgid "Dec"
 msgstr "Dec"
+
+msgid "View page"
+msgstr "Ver página"
 
 msgid "Member since"
 msgstr "Registrado desde"
@@ -5502,6 +5360,9 @@ msgstr "Planes"
 msgid "Offer valid until"
 msgstr "Oferta válida hasta"
 
+msgid "Price"
+msgstr "Precio"
+
 msgid "Validity"
 msgstr "Validez"
 
@@ -5830,6 +5691,16 @@ msgstr "Seguidores de %(user)s"
 msgid "%(user)s's followed users"
 msgstr "Usuarios seguidos por %(user)s"
 
+#, fuzzy, python-format
+#| msgid "%(user)s's favorites"
+msgid "%(user)s's friends"
+msgstr "Favoritas de %(user)s"
+
+#, fuzzy, python-format
+#| msgid "These are the cities from which you usually image."
+msgid "These are the users that follow %(user)s mutually."
+msgstr "Estos son los lugares desde donde usualmente fotografías."
+
 #, python-format
 msgid "%(user)s's liked images"
 msgstr "%(user)s's le gustó las imágenes"
@@ -5963,80 +5834,6 @@ msgstr ""
 "algunos datos. Por lo memos telescopios, cámaras y nombres de objetos. "
 "También son muy importantes datos sobre su adquisición."
 
-#, python-format
-msgid "%(user)s's commercial products"
-msgstr "Productos comerciales de %(user)s"
-
-msgid ""
-"Please remember that you are only allowed to claim items that you really "
-"produce and/or retail."
-msgstr ""
-"Por favor, recuerda que sólo se te permite reclamar elementos que realmente "
-"produces y/o vendes."
-
-msgid "As producer"
-msgstr "Como productor"
-
-msgid "Gear IDs"
-msgstr "ID de equipo"
-
-msgid "You haven't claimed any commercial products yet."
-msgstr "Todavía no has reclamado ningún producto comercial."
-
-#, python-format
-msgid "%(user)s hasn't claimed any commercial products yet."
-msgstr "%(user)s todavía no ha reclamado ningún producto comercial."
-
-msgid "As retailer"
-msgstr "Como vendedor"
-
-msgid "You haven't claimed any retailed products yet."
-msgstr "No has reclamado todavía ningún producto de venta."
-
-#, python-format
-msgid "%(user)s hasn't claimed any retailed products yet."
-msgstr "%(user)s todavía no ha reclamado ningún producto de venta."
-
-msgid "Claim as producer"
-msgstr "Reclamar como productor"
-
-msgid "Claim as retailer"
-msgstr "Reclamar como vendedor"
-
-msgid "Claim commercial product"
-msgstr "Reclamar producto comercial"
-
-msgid "Claim"
-msgstr "Reclamar"
-
-msgid "Select items to remove"
-msgstr "Selecciona elementos para retirar"
-
-msgid "Be careful if you try to remove all of these!"
-msgstr "¡Ten cuidado si tratas de retirar todo esto!"
-
-msgid ""
-"All the properties, including the commercial description, of this claim will "
-"be deleted and cannot be recovered!"
-msgstr ""
-"¡Todas las características incluyendo la descripción comercial de este "
-"reclamo serán borradas y no podrán ser recuparadas!"
-
-msgid "Select the product you want to merge to"
-msgstr "Selecciona el producto al que lo quieres anexar"
-
-msgid "Are you sure?"
-msgstr "¿Estás seguro?"
-
-msgid "Claim retailed product"
-msgstr "Reclamar producto en venta"
-
-msgid ""
-"All the properties of this claim will be deleted and cannot be recovered!"
-msgstr ""
-"¡Todas las características de este reclamo serán borradas y no podrán ser "
-"recuperadas!"
-
 msgid "Delete account"
 msgstr "Eliminar cuenta"
 
@@ -6049,14 +5846,21 @@ msgstr ""
 "irreversible. ¡Todos los rastros de tu actividad en AstroBin serán borrados "
 "para siempre!"
 
-msgid "Your account was deleted. Thanks for using AstroBin until now!"
+#, fuzzy
+#| msgid "(comment deleted)"
+msgid "Account deleted"
+msgstr "(comentario borrado)"
+
+#, fuzzy
+#| msgid "Your account was deleted. Thanks for using AstroBin until now!"
+msgid ""
+"\n"
+"            Your account was deleted. Thanks for using AstroBin until now!\n"
+"        "
 msgstr "Tu cuenta fué eliminada. Gracias por haber usado AstroBin hasta hoy."
 
 msgid "Edit your basic information"
 msgstr "Edita tu información básica"
-
-msgid "Edit your commercial information"
-msgstr "Edita tu información comercial"
 
 msgid "Download your data"
 msgstr "Descargue sus datos"
@@ -6174,9 +5978,6 @@ msgstr "Importar desde Flickr"
 msgid "Edit your site preferences"
 msgstr "Editar tus preferencias"
 
-msgid "Edit your retailer information"
-msgstr "Edita tu información de vendedor"
-
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -6250,11 +6051,11 @@ msgstr "¡Gracias por tu apoyo!"
 msgid "Public Area"
 msgstr "Área Pública"
 
-msgid "Staging Area"
-msgstr "Área de Pruebas"
-
 msgid "Corrupted"
 msgstr "Corrupto"
+
+msgid "Recovered"
+msgstr ""
 
 msgid "Trash"
 msgstr "Papelera"
@@ -6264,6 +6065,9 @@ msgstr "Imágenes que te gustaron"
 
 msgid "Following"
 msgstr "Siguiendo"
+
+msgid "Friends"
+msgstr ""
 
 msgid "Lacking data"
 msgstr "Datos faltantes"
@@ -6279,6 +6083,98 @@ msgstr "Edición rápida"
 
 msgid "Key/value pairs"
 msgstr "Pares clave/de valor"
+
+msgid "Please confirm your recovered images"
+msgstr ""
+
+#, python-format
+msgid ""
+"Following the <a href=\"%(url)s\" target=\"_blank\">data loss incident in "
+"February 2020</a>, these images <strong>were automatically recovered</"
+"strong>."
+msgstr ""
+
+msgid "Now you need to <strong>manually confirm or reject</strong> them."
+msgstr ""
+
+#, fuzzy
+#| msgid "Integration"
+msgid "Instructions"
+msgstr "Tiempo de integración"
+
+msgid ""
+"Below, you see the list of all your images impacted by the automatic "
+"recovery process."
+msgstr ""
+
+msgid ""
+"The big thumbnail represents the original upload, and the small thumbnails "
+"represent revisions."
+msgstr ""
+
+msgid ""
+"Click on a thumbnail once to mark it for recovery, again to mark it for "
+"deletion, once more to return to the \"do nothing\" state."
+msgstr ""
+
+msgid ""
+"You can also use the \"Recover all\" and \"Delete all\" buttons at the "
+"bottom."
+msgstr ""
+
+msgid ""
+"When you are ready, click on the \"Submit selected\" button to confirm your "
+"selection."
+msgstr ""
+
+msgid ""
+"You will return to this page, and the images for which you didn't make a "
+"selection will still be here."
+msgstr ""
+
+msgid ""
+"The recovered images will return to your gallery (public or staging, "
+"depending on where they were before the data loss)."
+msgstr ""
+
+#, fuzzy
+#| msgid "Original"
+msgid "Original upload"
+msgstr "Original"
+
+#, fuzzy
+#| msgid "Staging Area"
+msgid "Staging area"
+msgstr "Área de Pruebas"
+
+#, fuzzy
+#| msgid "Delete"
+msgid "Deleted"
+msgstr "Borrar"
+
+msgid "Revision"
+msgstr "Revisión"
+
+msgid "Recover all"
+msgstr ""
+
+#, fuzzy
+#| msgid "Select all"
+msgid "Delete all"
+msgstr "Marcar todas"
+
+msgid "Reset"
+msgstr "Reiniciar"
+
+#, fuzzy
+#| msgid "quote selected"
+msgid "Submit selected"
+msgstr "cita seleccionada"
+
+#, fuzzy
+#| msgid "There are no reviews yet."
+msgid "There are no images to recover."
+msgstr "Todavía no hay análisis."
 
 msgid "Restore selected"
 msgstr "Restaurar seleccionados"
@@ -6364,6 +6260,11 @@ msgstr "Solo animado"
 
 msgid "Award"
 msgstr "Premio"
+
+#, fuzzy
+#| msgid "Public amateur data"
+msgid "Publication date range"
+msgstr "Carpetas públicas amateur"
 
 msgid "Camera type"
 msgstr "Tipo de cámara"
@@ -6588,9 +6489,6 @@ msgstr "Entradas del forum"
 msgid "Image uploaded. Thank you!"
 msgstr "Imagen subida. ¡Gracias!"
 
-msgid "You can't merge a product to itself."
-msgstr "No puedes anexar un producto a él mismo."
-
 msgid "You already have a collection with that name"
 msgstr "Usted ya posee una colección con ese nombre"
 
@@ -6653,8 +6551,360 @@ msgstr ""
 "AstroBin está preparando sus datos para la descarga. Por favor, revise esta "
 "página de nuevo en un tiempo: cuantas más imágenes tenga, más tiempo tomará."
 
-#~ msgid "Revision"
-#~ msgstr "Revisión"
+#~ msgid "Merge"
+#~ msgstr "Anexar"
+
+#~ msgid ""
+#~ "Use this field to mark that the item you are claiming really is the same "
+#~ "product (or a variation thereof) of something you have claimed before."
+#~ msgstr ""
+#~ "Usa este campo para marcar que el elemento que estás reclamando es el "
+#~ "mismo producto (o una variedad del mismo) que otro que ya has reclamado "
+#~ "antes."
+
+#~ msgid ""
+#~ "You can't create more than %d claims. Consider upgrading your affiliation!"
+#~ msgstr ""
+#~ "No puedes crear más de %d reclamos. ¡Considera el actualizar tu "
+#~ "afiliación!"
+
+#~ msgid "You have already claimed this product."
+#~ msgstr "Ya has reclamado este producto."
+
+#~ msgid ""
+#~ "Use this field to mark that the item you are merging really is the same "
+#~ "product (or a variation thereof) of something you have claimed before."
+#~ msgstr ""
+#~ "Usa este campo para marcar que el elemento que estás enlazando es el "
+#~ "mismo producto (o una variante) que otro que ya has reclamado antes."
+
+#~ msgid "has written a review on"
+#~ msgstr "ha escrito un análisis sobre"
+
+#~ msgid "Company name"
+#~ msgstr "Nombre de la empresa"
+
+#~ msgid "The name of the company you represent on AstroBin."
+#~ msgstr "Nombre de la empresa que representas en AstroBin."
+
+#~ msgid "Company description"
+#~ msgstr "Descripción de la empresa"
+
+#~ msgid ""
+#~ "A short description of the company you represent on AstroBin. You can use "
+#~ "some <a href=\"/faq/#comments\">formatting rules</a>."
+#~ msgstr ""
+#~ "Una corta descripción de la empresa que representas en AstroBin. Puedes "
+#~ "utilizar algunas <a href=\"/faq/#comments\">marcas de formato</a>."
+
+#~ msgid "Company website"
+#~ msgstr "Página web de la empresa"
+
+#~ msgid "The website of the company you represent on AstroBin."
+#~ msgstr "La página web de la empresa que representas en AstroBin."
+
+#~ msgid "Country of operation"
+#~ msgstr "País de operación"
+
+#~ msgid "AUD - Australian dollars"
+#~ msgstr "AUD - Dólares australianos"
+
+#~ msgid "CAD - Canadian dollars"
+#~ msgstr "CAD - Dólares canadienses"
+
+#~ msgid "CHF - Swiss francs"
+#~ msgstr "CHF - Francos suizos"
+
+#~ msgid "EUR - Euros"
+#~ msgstr "EUR - Euros"
+
+#~ msgid "GPB - Pound stelings"
+#~ msgstr "GPB - Libras esterlinas"
+
+#~ msgid "PLN - Polish zloty"
+#~ msgstr "PLN - Dorados polacos"
+
+#~ msgid "SEK - Swedish krona"
+#~ msgstr "SEK - Coronas suizas"
+
+#~ msgid "USD - American dollars"
+#~ msgstr "USD - Dólares de los Estados Unidos"
+
+#~ msgid "Producer"
+#~ msgstr "Productor"
+
+#~ msgid "The link to this product's page on your website."
+#~ msgstr "Enlace a la página del producto en tu página web."
+
+#~ msgid "Currency"
+#~ msgstr "Moneda"
+
+#~ msgid "Retailed gear items"
+#~ msgstr "Elementos de instrumental a la venta"
+
+#~ msgid "Proper make"
+#~ msgstr "Marca correcta"
+
+#~ msgid ""
+#~ "Sometimes, product make/brand/producer/developer names are not written "
+#~ "properly by the users. Write here the proper make/brand/producer/"
+#~ "developer name."
+#~ msgstr ""
+#~ "En ocasiones los nombres de marca/productor/desarrollador no han sido "
+#~ "escritas apropiadamente por los usuarios. Escribe aquí la marca/"
+#~ "productora/desarrolladora correcta."
+
+#~ msgid "Proper name"
+#~ msgstr "Denominación correcta"
+
+#~ msgid ""
+#~ "Sometimes, product names are not written properly by the users. Write "
+#~ "here the proper product name, not including the make/brand/producer/"
+#~ "developer name.<br/>It is recommended that you try to group as many items "
+#~ "as possible, so try to use a generic version of your product's name."
+#~ msgstr ""
+#~ "A veces los nombres de los productos no han sido escritos apropiadamente "
+#~ "por los usuarios. Escribe aquí la denominación correcta del producto, sin "
+#~ "incluir el nombre de la marca/productora/desarrolladora.<br />Se "
+#~ "recomienda que intentes usar una versión genérica del nombre de tu "
+#~ "producto."
+
+#~ msgid ""
+#~ "The official, commercial image for this product. Upload an image via the "
+#~ "regular uploading interface, set its subject type to \"Gear\", and then "
+#~ "choose it from this list. If you upload several revisions, they will also "
+#~ "appear in the commercial page."
+#~ msgstr ""
+#~ "Imagen comercial oficial para este producto. Sube una imagen por medio "
+#~ "del interfaz habitual, establece su tipo como \"Instrumental\", y después "
+#~ "elígela desde esta lista. Si subes varias revisiones, también aparecerán "
+#~ "en la página comercial."
+
+#~ msgid "Tagline"
+#~ msgstr "Lema"
+
+#~ msgid ""
+#~ "A memorable phrase that will sum up this product, for marketing purposes."
+#~ msgstr ""
+#~ "Una frase memorable que resuma este producto, según propósitos de "
+#~ "mercadotecnia."
+
+#~ msgid ""
+#~ "Here you can write the full commercial description of your product. You "
+#~ "can use some <a href=\"/faq/#comments\">formatting rules</a>."
+#~ msgstr ""
+#~ "Aquí puedes escribir la descripción comercial completa de tu producto. "
+#~ "Puedes utilizar algunas <a href=\"/faq/#comments\">marcas de formato</a>."
+
+#~ msgid "Commercial gear items"
+#~ msgstr "Elementos de instrumental comerciales"
+
+#~ msgid ""
+#~ "As a producer and/or a retailer on AstroBin, it's very important that you "
+#~ "fill in all of your company details! Click <a href=\"%(the_url)s\">here</"
+#~ "a> to do it now."
+#~ msgstr ""
+#~ "¡Como productor y/o vendedor en AstroBin, es muy importante que rellenes "
+#~ "todos los detalles de tu empresa! Haz clic <a href=\"%(the_url)s\">aquí</"
+#~ "a> para hacerlo ahora."
+
+#~ msgid ""
+#~ "As a retailer on AstroBin, it's very important that you fill in your "
+#~ "country of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
+#~ msgstr ""
+#~ "¡Como vendedor en AstroBin, es muy importante que introduzcas tu país de "
+#~ "operación! Haz clic <a href=\"%(the_url)s\">aquí</a> para hacerlo ahora."
+
+#~ msgid "Commercial products"
+#~ msgstr "Productos comerciales"
+
+#~ msgid "Edit commercial product"
+#~ msgstr "Editar producto comercial"
+
+#~ msgid "Return to list"
+#~ msgstr "Volver a la lista"
+
+#~ msgid "View in new window"
+#~ msgstr "Ver en una nueva ventana"
+
+#~ msgid "Edit retailed product"
+#~ msgstr "Editar producto en venta"
+
+#~ msgid "by"
+#~ msgstr "por"
+
+#~ msgid "Other images"
+#~ msgstr "Otras imágenes"
+
+#~ msgid "Some images"
+#~ msgstr "Imágenes varias"
+
+#~ msgid "(view more)"
+#~ msgstr "(ver más...)"
+
+#~ msgid "Reviews"
+#~ msgstr "Análisis"
+
+#~ msgid "Rating"
+#~ msgstr "Puntuación"
+
+#~ msgid "Add your review"
+#~ msgstr "Añade tu análisis"
+
+#~ msgid ""
+#~ "Please be fair, honest and polite when writing a review. Many people will "
+#~ "read your review: all the users on AstroBin who own this piece of gear, "
+#~ "will be notified of your review."
+#~ msgstr ""
+#~ "Por favor, sé justo, honesto y educado cuando escribas un análisis. Mucha "
+#~ "gente lo leerá: todos los usuarios de AstroBin que tengan esta pieza de "
+#~ "instrumental serán notificados sobre tu análisis."
+
+#~ msgid ""
+#~ "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
+#~ "register/\">register</a> to write a review."
+#~ msgstr ""
+#~ "Por favor, <a href=\"/accounts/login/\">identifícate</a> o <a href=\"/"
+#~ "accounts/register/\">regístrate</a> para escribir un análisis."
+
+#~ msgid ""
+#~ "Use this space to start a discussion, leave a comment or ask a question "
+#~ "about this piece of gear. All the users on AstroBin who own one, will be "
+#~ "notified and can join the discussion."
+#~ msgstr ""
+#~ "Usa este espacio para comenzar un debate, dejar un comentario o preguntar "
+#~ "algo sobre esta pieza de instrumental. Todos los usuarios de AstroBin que "
+#~ "la tengan serán notificados y podrán unirse a la discusión. "
+
+#~ msgid ""
+#~ "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
+#~ "register/\">register</a> to leave a comment."
+#~ msgstr ""
+#~ "Por favor, <a href=\"/accounts/login/\">identifícate</a> o <a href=\"/"
+#~ "accounts/register/\">regístrate</a> para dejar un comentario."
+
+#~ msgid "Buy it here"
+#~ msgstr "Cómpralo aquí"
+
+#~ msgid "Properties"
+#~ msgstr "Características"
+
+#~ msgid "Owners"
+#~ msgstr "Propietarios"
+
+#~ msgid "just now"
+#~ msgstr "ahora mismo"
+
+#~ msgid "Made possible by"
+#~ msgstr "Posible gracias a"
+
+#~ msgid "Commercial information"
+#~ msgstr "Información comercial"
+
+#~ msgid ""
+#~ "%(user)s wrote a review of a gear item you own! Read it at following url: "
+#~ "<a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "%(user)s ha escrito un análisis sobre un ítem de instrumental que tienes. "
+#~ "Léelo en el siguiente enlace: <a href=\"%(url)s\">%(url)s</a>"
+
+#~ msgid ""
+#~ "%(user)s wrote a review of a gear item you own! Read it at following url: "
+#~ "%(url)s"
+#~ msgstr ""
+#~ "%(user)s ha escrito un análisis sobre un ítem de instrumental que tienes. "
+#~ "Léelo en el siguiente enlace: %(url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear "
+#~ "item you own!</a>"
+#~ msgstr ""
+#~ "¡<a href=\"%(url)s\"><strong>%(user)s</strong> escribió un análisis sobre "
+#~ "un ítem de instrumental tuyo!</a>"
+
+#~ msgid "%(user)s wrote a review of a gear item you own!"
+#~ msgstr ""
+#~ "¡%(user)s escribió un análisis de un ítem de instrumental que posees!"
+
+#~ msgid "%(user)s's commercial products"
+#~ msgstr "Productos comerciales de %(user)s"
+
+#~ msgid ""
+#~ "Please remember that you are only allowed to claim items that you really "
+#~ "produce and/or retail."
+#~ msgstr ""
+#~ "Por favor, recuerda que sólo se te permite reclamar elementos que "
+#~ "realmente produces y/o vendes."
+
+#~ msgid "As producer"
+#~ msgstr "Como productor"
+
+#~ msgid "Gear IDs"
+#~ msgstr "ID de equipo"
+
+#~ msgid "You haven't claimed any commercial products yet."
+#~ msgstr "Todavía no has reclamado ningún producto comercial."
+
+#~ msgid "%(user)s hasn't claimed any commercial products yet."
+#~ msgstr "%(user)s todavía no ha reclamado ningún producto comercial."
+
+#~ msgid "As retailer"
+#~ msgstr "Como vendedor"
+
+#~ msgid "You haven't claimed any retailed products yet."
+#~ msgstr "No has reclamado todavía ningún producto de venta."
+
+#~ msgid "%(user)s hasn't claimed any retailed products yet."
+#~ msgstr "%(user)s todavía no ha reclamado ningún producto de venta."
+
+#~ msgid "Claim as producer"
+#~ msgstr "Reclamar como productor"
+
+#~ msgid "Claim as retailer"
+#~ msgstr "Reclamar como vendedor"
+
+#~ msgid "Claim commercial product"
+#~ msgstr "Reclamar producto comercial"
+
+#~ msgid "Claim"
+#~ msgstr "Reclamar"
+
+#~ msgid "Select items to remove"
+#~ msgstr "Selecciona elementos para retirar"
+
+#~ msgid "Be careful if you try to remove all of these!"
+#~ msgstr "¡Ten cuidado si tratas de retirar todo esto!"
+
+#~ msgid ""
+#~ "All the properties, including the commercial description, of this claim "
+#~ "will be deleted and cannot be recovered!"
+#~ msgstr ""
+#~ "¡Todas las características incluyendo la descripción comercial de este "
+#~ "reclamo serán borradas y no podrán ser recuparadas!"
+
+#~ msgid "Select the product you want to merge to"
+#~ msgstr "Selecciona el producto al que lo quieres anexar"
+
+#~ msgid "Are you sure?"
+#~ msgstr "¿Estás seguro?"
+
+#~ msgid "Claim retailed product"
+#~ msgstr "Reclamar producto en venta"
+
+#~ msgid ""
+#~ "All the properties of this claim will be deleted and cannot be recovered!"
+#~ msgstr ""
+#~ "¡Todas las características de este reclamo serán borradas y no podrán ser "
+#~ "recuperadas!"
+
+#~ msgid "Edit your commercial information"
+#~ msgstr "Edita tu información comercial"
+
+#~ msgid "Edit your retailer information"
+#~ msgstr "Edita tu información de vendedor"
+
+#~ msgid "You can't merge a product to itself."
+#~ msgstr "No puedes anexar un producto a él mismo."
 
 #~ msgid "Imaging telescope or lens"
 #~ msgid_plural "Imaging telescopes or lenses"
@@ -7332,9 +7582,6 @@ msgstr ""
 #~ msgid "So, what are you waiting for?"
 #~ msgstr "Entonces, ¿a qué estás esperando?"
 
-#~ msgid "Sign up now!"
-#~ msgstr "¡Registrate ahora!"
-
 #~ msgid "Send to public data pool"
 #~ msgstr "Enviar a la carpeta pública"
 
@@ -7818,9 +8065,6 @@ msgstr ""
 
 #~ msgid "Choose files"
 #~ msgstr "Seleccionar archivos"
-
-#~ msgid "Reset"
-#~ msgstr "Reiniciar"
 
 #~ msgid "Start upload"
 #~ msgstr "Empezar a subir"
@@ -9264,9 +9508,6 @@ msgstr ""
 #~ msgid "%(username)s didn't write anything about themselves."
 #~ msgstr "%(username)s no ha escrito nada sobre sí mismo."
 
-#~ msgid "%(user)s's favorites"
-#~ msgstr "Favoritas de %(user)s"
-
 #~ msgid "View your favorites"
 #~ msgstr "Ver tus favoritas"
 
@@ -9305,9 +9546,6 @@ msgstr ""
 
 #~ msgid "To latitude:"
 #~ msgstr "Hasta latitud:"
-
-#~ msgid "Hemisphere:"
-#~ msgstr "Hemisferio:"
 
 #~ msgid "Both"
 #~ msgstr "Ambos"
@@ -9452,9 +9690,6 @@ msgstr ""
 
 #~ msgid "You are now registered. Activation email sent."
 #~ msgstr "Has sido registrado. Se envió un corrreo para la activación."
-
-#~ msgid "(comment deleted)"
-#~ msgstr "(comentario borrado)"
 
 #~ msgid "Undelete"
 #~ msgstr "Recuperar"
@@ -9654,9 +9889,6 @@ msgstr ""
 
 #~ msgid "The places from which you have taken this image."
 #~ msgstr "Lugares desde los que has obtenido esta imagen."
-
-#~ msgid "These are the cities from which you usually image."
-#~ msgstr "Estos son los lugares desde donde usualmente fotografías."
 
 #~ msgid "For example: +12.44"
 #~ msgstr "Por ejemplo: +12.44"
