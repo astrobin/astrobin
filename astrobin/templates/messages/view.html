@@ -26,12 +26,6 @@
                     <span class="hidden-phone">{% trans "Back" %}</span>
                 </a>
             </li>
-            <li>
-                <a href="{% url 'messages_delete' thread.pk %}" class="danger">
-                    <i class="icon-trash icon-white"></i>
-                    <span class="hidden-phone">{% trans "Delete conversation" %}</span>
-                </a>
-            </li>
         </ul>
     </div>
 
@@ -69,6 +63,11 @@
                         <span class="text">{% trans "Reply" %}</span>
                         {% button_loading_indicator %}
                     </button>
+
+                    <a href="{% url 'messages_delete' thread.pk %}" class="btn btn-danger">
+                        <i class="icon-trash icon-white"></i>
+                        {% trans "Delete conversation" %}
+                    </a>
                 </div>
             </form>
         {% endif %} {# READONLY #}
