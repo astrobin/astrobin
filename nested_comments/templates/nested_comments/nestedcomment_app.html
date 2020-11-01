@@ -175,7 +175,7 @@
                     {{else}}
                         <a href="#"
                            class="label comment-unlike"
-                           {{ bindAttr class="view.node.unliking:unliking"}}
+                           {{bindAttr class="view.node.unliking:unliking"}}
                            {{action "unlike" target="view"}}>
                             {% trans "Unlike" %}
                         </a>
@@ -215,7 +215,7 @@
 
 
 {% handlebars "reply" %}
-    {{# if view.userIsAuthenticated}}
+    {{#if view.userIsAuthenticated}}
         {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
 
         {{view view.SaveReplyButtonView}}
