@@ -100,6 +100,7 @@ class ToggleProperty(models.Model):
         verbose_name = "Toggle property"
         verbose_name_plural = "Toggle properties"
         unique_together = (('property_type', 'user', 'content_type', 'object_id'),)
+        ordering = ('-created_on',)
 
     def __unicode__(self):
         return u"%s (%s) %s" % (self.user, self.property_type, self.content_object)

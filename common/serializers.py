@@ -1,17 +1,16 @@
-# Django
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 
-# Third party apps
 from avatar.utils import get_primary_avatar, get_default_avatar_url
 from rest_framework import serializers
 
-# AstroBin
 from rest_framework.fields import BooleanField, IntegerField, FloatField
 from rest_framework.relations import PrimaryKeyRelatedField
 from subscription.models import UserSubscription, Subscription
 
 from astrobin.models import UserProfile
+from astrobin_apps_users.services import UserService
+from toggleproperties.models import ToggleProperty
 
 
 class ContentTypeSerializer(serializers.ModelSerializer):
@@ -41,6 +40,27 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         exclude = ('password', 'email', 'last_name')
         depth = 1
+
+
+class TogglePropertySerializer(serializers.ModelSerializer):
+    def validate(self, data):
+        if data['property_type'] == 'like':
+            obj = data['content_type'].get_object_for_this_type(pk=data['object_id'])
+            if not UserService(data['user']).can_like(obj):
+                raise serializers.ValidationError('User does not have the required permissions to like this object')
+
+        return data
+
+    class Meta:
+        model = ToggleProperty
+        fields = (
+            'pk',
+            'property_type',
+            'user',
+            'content_type',
+            'object_id',
+            'created_on',
+        )
 
 
 class UserProfileSerializer(serializers.ModelSerializer):

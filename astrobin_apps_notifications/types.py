@@ -73,6 +73,12 @@ NOTICE_TYPES = (
         2,
     ),
     (
+        'new_comment_like',
+        _('Your comment was liked'),
+        '',
+        2,
+    ),
+    (
         'new_image_from_gear',
         _('New image with some gear you follow'),
         '',
@@ -176,8 +182,8 @@ NOTICE_TYPES = (
     ),
     (
         'never_activated_account',
-        _('Would you like to activate your account?"'),
+        _('Would you like to activate your account?'),
         '',
         2
-    )
+    ),
 )

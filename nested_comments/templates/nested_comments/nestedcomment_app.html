@@ -5,12 +5,14 @@
 {% load ember %}
 
 {% load common_tags %}
+{% load nestedcomments_tags %}
 
 
 <div id="nested-comments-user-id" data-value="{{request.user.id}}"></div>
 <div id="nested-comments-user-name" data-value="{{request.user.username}}"></div>
 <div id="nested-comments-user-is-authenticated" data-value="{{ request.user.is_authenticated.value }}"></div>
 <div id="nested-comments-user-is-superuser" data-value="{{ request.user.is_superuser }}"></div>
+<div id="nested-comments-comments-content-type-id" data-value="{% nestedcomments_content_type_id %}"></div>
 
 {% if image %}
     <div id="nested-comments-shadow-bans" data-value="{{ image.user.userprofile.shadow_bans.all|get_pks }}"></div>
@@ -52,10 +54,9 @@
 
 {% handlebars "comments" %}
     {{#if controller.ready}}
-        {{#if controller.content.length}}
-        {{else}}
+        {{#unless controller.content.length}}
            <p class="comment">{% trans "There are no comments yet." %}</p>
-        {{/if}}
+        {{/unless}}
 
         {{#each controller.content}}
             {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
@@ -86,7 +87,22 @@
                     {{view.node.author_username}}
                 </a>
             {{/if}}
+
             {{view NestedCommentsApp.TimeagoView valueBinding="view.node.updated"}}
+
+            &middot;
+
+            {{#if view.node.hasNoLikes}}
+                {{ view.node.likesCount }} {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" %}
+            {{/if}}
+
+            {{#if view.node.hasOneLike}}
+                {{ view.node.likesCount }} {% trans "like" context "Noun, e.g. 'This element has 1 like'" %}
+            {{/if}}
+
+            {{#if view.node.hasManyLikes}}
+                {{ view.node.likesCount }} {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" %}
+            {{/if}}
 
             {{#unless view.collapsed}}
                 <a href="#" class="collapse" {{action "collapse" target="view"}}>[-]</a>
@@ -108,7 +124,7 @@
                     {{#if view.editing}}
                         {{view view.EditView commentBinding="view.node"}}
                     {{else}}
-                        {{# if view.node.ready }}
+                        {{# if view.node.ready}}
                             {{{view.node.getHTML}}}
                         {{else}}
                             {{view NestedCommentsApp.LoaderView}}
@@ -118,47 +134,64 @@
             </div>
 
             <div class="links">
-                <a {{bindAttr href="view.node.url"}} {{action "link" target="view"}}>{% trans "Link" %}</a>
+                <a {{bindAttr href="view.node.url"}} {{action "link" target="view"}}>
+                    <i class="icon-link"></i> {% trans "Link" %}
+                </a>
 
                 {{#if view.node.authorIsRequestingUser}}
                     {{#if view.node.deleted}}
-                        <a href="#" {{action "undelete" target="view"}}>{% trans "Undelete" %}</a>
+                        <a href="#" {{action "undelete" target="view"}}>
+                            {% trans "Undelete" %}
+                        </a>
                     {{else}}
-                        <a href="#" {{action "delete_" target="view"}}>{% trans "Delete" %}</a>
+                        <a href="#" {{action "delete_" target="view"}}>
+                            <i class="icon-trash"></i> {% trans "Delete" %}
+                        </a>
                     {{/if}}
 
                     {{#if view.node.allowEditing}}
                         {{#unless view.editing}}
-                            <a href="#" {{action "edit" target="view"}}>{% trans "Edit" %}</a>
+                            <i class="icon-pencil"></i> <a href="#" {{action "edit" target="view"}}>{% trans "Edit" %}</a>
                         {{/unless}}
                     {{/if}}
 
-                    {{#if view.userIsSuperuser }}
-                        <a href="#" class="label label-important" {{ action "reply" target="view"}}>
-                            {% trans "Reply" %}
+                    {{#if view.userIsSuperuser}}
+                        <a href="#" class="label label-important" {{action "reply" target="view"}}>
+                            <i class="icon-reply"></i> {% trans "Reply" %}
                         </a>
                     {{/if}}
                 {{else}}
                     <a href="#" class="label label-important" {{action "reply" target="view"}}>
-                        {% trans "Reply" %}
+                        <i class="icon-reply"></i> {% trans "Reply" %}
                     </a>
+
+                    {{#unless view.node.liked}}
+                        <a href="#"
+                           class="label label-important comment-like"
+                           {{bindAttr class="view.node.liking:liking"}}
+                           {{action "like" target="view"}}>
+                            <i class="icon-thumbs-up"></i> {% trans "Like" %}
+                        </a>
+                    {{else}}
+                        <a href="#"
+                           class="label comment-unlike"
+                           {{bindAttr class="view.node.unliking:unliking"}}
+                           {{action "unlike" target="view"}}>
+                            {% trans "Unlike" %}
+                        </a>
+                    {{/unless}}
                 {{/if}}
             </div>
 
-            {{#if view.replying}}
-                <div class="reply">
-                    {{view view.ReplyView parentBinding="view.node.comment"}}
-                </div>
-            {{/if}}
-
-            {{#if view.node.shouldNotIndent }}
+            {{#if view.node.shouldNotIndent}}
                 <div class="children no-indentation">
             {{else}}
                 <div class="children">
             {{/if}}
-                {{#each view.node.children}}
-                    {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
-                {{/each}}
+
+            {{#each view.node.children}}
+                {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
+            {{/each}}
             </div>
         {{/unless}}
     </div>
@@ -182,7 +215,7 @@
 
 
 {% handlebars "reply" %}
-    {{# if view.userIsAuthenticated}}
+    {{#if view.userIsAuthenticated}}
         {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
 
         {{view view.SaveReplyButtonView}}

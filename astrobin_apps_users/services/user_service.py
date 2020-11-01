@@ -1,8 +1,10 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import QuerySet, Q
 
 from astrobin.models import Image
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 from toggleproperties.models import ToggleProperty
 
 
@@ -87,3 +89,23 @@ class UserService:
     def shadow_bans(self, other):
         # type: (User) -> bool
         return other.userprofile in self.user.userprofile.shadow_bans.all()
+
+    def can_like(self, obj):
+        if self.user.is_superuser:
+            return True
+
+        index = 0
+        min_index_to_like = settings.MIN_INDEX_TO_LIKE
+
+        if self.user.is_authenticated():
+            index = self.user.userprofile.get_scores()['user_scores_index']
+
+        if is_free(self.user) and index < min_index_to_like:
+            return False
+
+        if obj.__class__.__name__ == 'Image':
+            return self.user != obj.user
+        elif obj.__class__.__name__ == 'NestedComment':
+            return  self.user != obj.author
+
+        return False

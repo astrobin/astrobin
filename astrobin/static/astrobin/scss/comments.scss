@@ -1,3 +1,5 @@
+@import "variables";
+
 .nested-comments-container {
   overflow: visible !important;
 
@@ -153,6 +155,20 @@
 
         &.label-important {
           color: $strong-text-color;
+        }
+
+        &.comment-like,
+        &.comment-unlike {
+          &.liking,
+          &.unliking {
+            pointer-events: none;
+            cursor: not-allowed;
+            opacity: .5;
+          }
+        }
+
+        &.comment-unlike {
+          color: $white;
         }
       }
     }

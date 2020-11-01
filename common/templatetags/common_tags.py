@@ -1,7 +1,7 @@
-# Django
 import datetime
 
 from django import template
+from django.contrib.contenttypes.models import ContentType
 from django.template import Library, Node
 from django.template.defaultfilters import stringfilter
 from django.utils.encoding import force_unicode
@@ -191,3 +191,10 @@ def get_pks(qs):
 @register.filter
 def get_item(dictionary, key):
     return dictionary.get(key)
+
+
+@register.filter
+def content_type(obj):
+    if not obj:
+        return None
+    return ContentType.objects.get_for_model(obj)
