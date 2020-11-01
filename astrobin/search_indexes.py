@@ -4,6 +4,7 @@ import logging
 from celery_haystack.indexes import CelerySearchIndex
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.db.models.functions import Length
 from haystack.constants import Indexable
 from haystack.fields import CharField, IntegerField, FloatField, DateTimeField, BooleanField, MultiValueField
 from hitcount.models import HitCount
@@ -364,7 +365,9 @@ class UserIndex(CelerySearchIndex, Indexable):
             return index(normalized)
 
         def index_from_comments(user):
-            all_comments = NestedComment.objects.filter(deleted=False, author=user)
+            all_comments = NestedComment.objects \
+                .annotate(length=Length('text')) \
+                .filter(deleted=False, author=user, length__gte=150)
             all_comments_count = all_comments.count()
 
             if all_comments_count == 0:
@@ -387,6 +390,7 @@ class UserIndex(CelerySearchIndex, Indexable):
 
             return index(normalized)
 
+        print index_from_comments(obj)
         return index_from_images(obj) + index_from_comments(obj)
 
     def prepare_followers_6m(self, obj):
