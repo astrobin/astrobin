@@ -143,7 +143,8 @@ def never_activated_accounts():
     return User.objects.filter(
         is_active=False,
         date_joined__lt=two_weeks_ago,
-        userprofile__never_activated_account_reminder_sent=None
+        userprofile__never_activated_account_reminder_sent__isnull=True,
+        userprofile__deleted__isnull=True,
     )
 
 
@@ -154,8 +155,8 @@ def never_activated_accounts_to_be_deleted():
     return User.objects.filter(
         is_active=False,
         date_joined__lt=three_weeks_ago,
-    ).exclude(
-        userprofile__never_activated_account_reminder_sent=None
+        userprofile__never_activated_account_reminder_sent__isnull=False,
+        userprofile__deleted__isnull=True,
     )
 
 
