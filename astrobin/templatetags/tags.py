@@ -3,7 +3,6 @@ import math
 from datetime import datetime, date
 
 from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import Library
 from django.template.defaultfilters import timesince
@@ -418,24 +417,7 @@ def to_user_timezone(value, user):
 
 @register.filter
 def can_like(user, image):
-    from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
-
-    user_scores_index = 0
-    min_index_to_like = settings.MIN_INDEX_TO_LIKE
-
-    if user.is_authenticated():
-        user_scores_index = user.userprofile.get_scores()['user_scores_index']
-
-    if user.is_superuser:
-        return True
-
-    if user == image.user:
-        return False
-
-    if is_free(user) and user_scores_index < min_index_to_like:
-        return False
-
-    return True
+    return UserService(user).can_like(image)
 
 
 @register.filter

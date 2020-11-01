@@ -546,6 +546,15 @@ $(function() {
                 success: function (response) {
                     comment.set('liking', false);
                     comment.set('likes', comment.likes.concat([nc_app.userId]));
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    var errors = JSON.parse(XMLHttpRequest.responseText).non_field_errors;
+                    errors.forEach(function(error) {
+                        if (error === "User does not have the required permissions to like this object") {
+                            $('#cant-like').modal('show');
+                        }
+                    });
+                    comment.set('liking', false);
                 }
             });
         },
