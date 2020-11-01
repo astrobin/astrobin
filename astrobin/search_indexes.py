@@ -368,19 +368,21 @@ class UserIndex(CelerySearchIndex, Indexable):
             all_comments = NestedComment.objects \
                 .annotate(length=Length('text')) \
                 .filter(deleted=False, author=user, length__gte=150)
-            all_comments_count = all_comments.count()
+
+            all_comments_with_enough_likes = [x for x in all_comments if len(x.likes) >= 3]
+            all_comments_count = len(all_comments_with_enough_likes)
 
             if all_comments_count == 0:
                 return 0
 
             all_likes = 0
-            for comment in all_comments.iterator():
+            for comment in all_comments_with_enough_likes:
                 all_likes += len(comment.likes)
 
             average = all_likes / float(all_comments_count)
             normalized = []
 
-            for comment in all_comments.iterator():
+            for comment in all_comments_with_enough_likes:
                 likes = len(comment.likes)
                 if likes >= average:
                     normalized.append(likes)
