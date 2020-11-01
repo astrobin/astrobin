@@ -31,9 +31,6 @@ class ContentTypeDetail(generics.RetrieveAPIView):
 
 
 class UserList(generics.ListAPIView):
-    """
-    This view presents a list of all the users in the system.
-    """
     model = User
     serializer_class = UserSerializer
     permission_classes = (ReadOnly,)
@@ -42,9 +39,6 @@ class UserList(generics.ListAPIView):
 
 
 class UserDetail(generics.RetrieveAPIView):
-    """
-    This view presents a instance of one of the users in the system.
-    """
     model = User
     serializer_class = UserSerializer
     permission_classes = (ReadOnly,)
@@ -52,9 +46,6 @@ class UserDetail(generics.RetrieveAPIView):
 
 
 class TogglePropertyList(generics.ListCreateAPIView):
-    """
-    This view presents a list of all the users in the system.
-    """
     model = ToggleProperty
     serializer_class = TogglePropertySerializer
     queryset = ToggleProperty.objects.all()
@@ -69,9 +60,6 @@ class TogglePropertyList(generics.ListCreateAPIView):
 
 
 class TogglePropertyDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-    This view presents a instance of one of the users in the system.
-    """
     model = ToggleProperty
     serializer_class = TogglePropertySerializer
     queryset = ToggleProperty.objects.all()
@@ -81,9 +69,6 @@ class TogglePropertyDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class UserProfileList(generics.ListAPIView):
-    """
-    This view presents a list of all the user profiles in the system.
-    """
     model = UserProfile
     serializer_class = UserProfileSerializer
     permission_classes = (ReadOnly,)
@@ -92,9 +77,6 @@ class UserProfileList(generics.ListAPIView):
 
 
 class UserProfileDetail(generics.RetrieveAPIView):
-    """
-    This view presents a instance of one of the user profiles in the system.
-    """
     model = UserProfile
     permission_classes = (ReadOnly,)
     queryset = UserProfile.objects.all()
@@ -107,9 +89,6 @@ class UserProfileDetail(generics.RetrieveAPIView):
 
 
 class CurrentUserProfileDetail(generics.ListAPIView):
-    """
-    This view retrieves the user currently in the request.
-    """
     model = UserProfile
     permission_classes = (ReadOnly,)
     queryset = UserProfile.objects.all()
