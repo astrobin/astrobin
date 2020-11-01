@@ -183,6 +183,12 @@
                 {{/if}}
             </div>
 
+            {{#if view.replying}}
+                <div class="reply">
+                    {{view view.ReplyView parentBinding="view.node.comment"}}
+                </div>
+            {{/if}}
+
             {{#if view.node.shouldNotIndent}}
                 <div class="children no-indentation">
             {{else}}
