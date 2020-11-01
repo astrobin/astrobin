@@ -203,7 +203,7 @@ class UserIndex(CelerySearchIndex, Indexable):
     followers_1y = IntegerField()
     followers = IntegerField()
 
-    # Total user ingegration.
+    # Total user integration.
     integration_6m = FloatField()
     integration_1y = FloatField()
     integration = FloatField()
@@ -233,7 +233,7 @@ class UserIndex(CelerySearchIndex, Indexable):
 
     def prepare_images_6m(self, obj):
         # Logging here just because it's the first "prepare" function.
-        log.debug("Indexing user %s: %d" % (obj.__class__.__name__, obj.pk))
+        log.debug("Indexing %s: %s (%d)" % (obj.__class__.__name__, obj.username, obj.pk))
 
         return Image.objects.filter(user=obj).filter(
             uploaded__gte=_6m_ago()).count()
@@ -339,27 +339,55 @@ class UserIndex(CelerySearchIndex, Indexable):
         return index(norm)
 
     def prepare_normalized_likes(self, obj):
-        def average(values):
-            if len(values):
-                return sum(values) / float(len(values))
+        def avg(values):
+            length = len(values)
+            if length > 0:
+                return sum(values) / float(length)
             return 0
 
         def index(values):
             import math
-            return average(values) * math.log(len(values) + 1, 10)
+            return avg(values) * math.log(len(values) + 1, 10)
 
-        avg = self.prepare_average_likes(obj)
-        norm = []
+        def index_from_images(user):
+            average = self.prepare_average_likes(user)
+            normalized = []
 
-        for i in Image.objects.filter(user=obj):
-            likes = i.likes()
-            if likes >= avg:
-                norm.append(likes)
+            for i in Image.objects.filter(user=user).iterator():
+                likes = i.likes()
+                if likes >= average:
+                    normalized.append(likes)
 
-        if len(norm) == 0:
-            return 0
+            if len(normalized) == 0:
+                return 0
 
-        return index(norm)
+            return index(normalized)
+
+        def index_from_comments(user):
+            all_comments = NestedComment.objects.filter(deleted=False, author=user)
+            all_comments_count = all_comments.count()
+
+            if all_comments_count == 0:
+                return 0
+
+            all_likes = 0
+            for comment in all_comments.iterator():
+                all_likes += len(comment.likes)
+
+            average = all_likes / float(all_comments_count)
+            normalized = []
+
+            for comment in all_comments.iterator():
+                likes = len(comment.likes)
+                if likes >= average:
+                    normalized.append(likes)
+
+            if len(normalized) == 0:
+                return 0
+
+            return index(normalized)
+
+        return index_from_images(obj) + index_from_comments(obj)
 
     def prepare_followers_6m(self, obj):
         return ToggleProperty.objects.filter(
@@ -514,7 +542,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     def prepare_imaging_telescopes(self, obj):
         # Logging here just because it's the first "prepare" function.
-        log.debug("Indexing image %s: %d" % (obj.__class__.__name__, obj.pk))
+        log.debug("Indexing %s: %s" % (obj.__class__.__name__, obj.get_id()))
 
         return ["%s, %s" % (x.get("make"), x.get("name")) for x in obj.imaging_telescopes.all().values('make', 'name')]
 
