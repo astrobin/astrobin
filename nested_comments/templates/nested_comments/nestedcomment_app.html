@@ -93,15 +93,15 @@
             &middot;
 
             {{#if view.node.hasNoLikes}}
-                {{ view.node.likesCount }} {% trans "likes" context "Noun, e.g. 'This element has 10 likes" %}
+                {{ view.node.likesCount }} {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" %}
             {{/if}}
 
             {{#if view.node.hasOneLike}}
-                {{ view.node.likesCount }} {% trans "like" context "Noun, e.g. 'This element has 1 like" %}
+                {{ view.node.likesCount }} {% trans "like" context "Noun, e.g. 'This element has 1 like'" %}
             {{/if}}
 
             {{#if view.node.hasManyLikes}}
-                {{ view.node.likesCount }} {% trans "likes" context "Noun, e.g. 'This element has 10 likes" %}
+                {{ view.node.likesCount }} {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" %}
             {{/if}}
 
             {{#unless view.collapsed}}
