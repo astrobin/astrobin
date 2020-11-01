@@ -4,6 +4,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
+from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from subscription.models import Subscription, UserSubscription
 
@@ -59,7 +60,7 @@ class TogglePropertyList(generics.ListCreateAPIView):
         serializer.save(user=self.request.user)
 
 
-class TogglePropertyDetail(generics.RetrieveUpdateDestroyAPIView):
+class TogglePropertyDetail(generics.RetrieveDestroyAPIView):
     model = ToggleProperty
     serializer_class = TogglePropertySerializer
     queryset = ToggleProperty.objects.all()
@@ -67,6 +68,12 @@ class TogglePropertyDetail(generics.RetrieveUpdateDestroyAPIView):
         IsAuthenticatedOrReadOnly,
     ]
 
+    def perform_destroy(self, serializer):
+        if serializer.user == self.request.user:
+            instance = self.get_object()
+            return super(TogglePropertyDetail, self).perform_destroy(instance)
+
+        raise ValidationError('Cannot delete another user\'s toggleproperty')
 
 class UserProfileList(generics.ListAPIView):
     model = UserProfile
