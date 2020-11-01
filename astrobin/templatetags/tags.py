@@ -485,13 +485,6 @@ def gear_list_has_items(gear_list):
     return False
 
 
-@register.filter
-def content_type(obj):
-    if not obj:
-        return None
-    return ContentType.objects.get_for_model(obj)
-
-
 @register.inclusion_tag('inclusion_tags/private_abbr.html')
 def private_abbr():
     return None

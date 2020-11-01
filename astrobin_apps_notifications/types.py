@@ -179,5 +179,11 @@ NOTICE_TYPES = (
         _('Would you like to activate your account?"'),
         '',
         2
-    )
+    ),
+    (
+        'new_comment_like',
+        _('Your comment was liked'),
+        '',
+        2,
+    ),
 )

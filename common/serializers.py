@@ -12,6 +12,7 @@ from rest_framework.relations import PrimaryKeyRelatedField
 from subscription.models import UserSubscription, Subscription
 
 from astrobin.models import UserProfile
+from toggleproperties.models import ToggleProperty
 
 
 class ContentTypeSerializer(serializers.ModelSerializer):
@@ -41,6 +42,19 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         exclude = ('password', 'email', 'last_name')
         depth = 1
+
+
+class TogglePropertySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ToggleProperty
+        fields = (
+            'pk',
+            'property_type',
+            'user',
+            'content_type',
+            'object_id',
+            'created_on',
+        )
 
 
 class UserProfileSerializer(serializers.ModelSerializer):

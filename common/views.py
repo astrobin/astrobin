@@ -2,14 +2,16 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
-from rest_framework.filters import DjangoFilterBackend
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from subscription.models import Subscription, UserSubscription
 
 from astrobin.models import UserProfile
+from toggleproperties.models import ToggleProperty
 from .permissions import ReadOnly
 from .serializers import ContentTypeSerializer, UserSerializer, UserProfileSerializer, UserProfileSerializerPrivate, \
-    SubscriptionSerializer, UserSubscriptionSerializer
+    SubscriptionSerializer, UserSubscriptionSerializer, TogglePropertySerializer
 
 
 @method_decorator(cache_page(60 * 60 * 24), name='dispatch')
@@ -47,6 +49,35 @@ class UserDetail(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     permission_classes = (ReadOnly,)
     queryset = User.objects.all()
+
+
+class TogglePropertyList(generics.ListCreateAPIView):
+    """
+    This view presents a list of all the users in the system.
+    """
+    model = ToggleProperty
+    serializer_class = TogglePropertySerializer
+    queryset = ToggleProperty.objects.all()
+    permission_classes = [
+        IsAuthenticatedOrReadOnly,
+    ]
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ['property_type', 'object_id', 'content_type', 'user_id']
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class TogglePropertyDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    This view presents a instance of one of the users in the system.
+    """
+    model = ToggleProperty
+    serializer_class = TogglePropertySerializer
+    queryset = ToggleProperty.objects.all()
+    permission_classes = [
+        IsAuthenticatedOrReadOnly,
+    ]
 
 
 class UserProfileList(generics.ListAPIView):
