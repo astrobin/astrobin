@@ -1077,7 +1077,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
           background: -ms-linear-gradient(top, $silver, darken($silver, 10%));
           background: -o-linear-gradient(top, $silver, darken($silver, 10%));
           background-image: -ms-linear-gradient(top, $silver 0%, darken($silver, 10%) 100%);
-          color: $bronze;
+          color: lighten($silver, 10%);
+
+          .icon {
+            transform: rotate(25deg);
+          }
         }
       }
 
