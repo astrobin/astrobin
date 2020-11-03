@@ -1,0 +1,103 @@
+{% load i18n %}
+{% load common_tags %}
+
+<div class="subnav subnav-fixed">
+    <ul class="nav nav-pills">
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="icon-filter icon-white"></i>
+                <span class="hidden-phone">{% trans "Data source" %}</span>
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="{{ request.path }}{% query_string "source='backyard'" "" %}">
+                        <span class="bg-icon{% if source == 'backyard' %} icon-ok{% endif %}"></span>
+                        {% trans "Backyard" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ request.path }}{% query_string "source='traveller'" "" %}">
+                        <span class="bg-icon{% if source == 'traveller' %} icon-ok{% endif %}"></span>
+                        {% trans "Traveller" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ request.path }}{% query_string "source='own-remote'" "" %}">
+                        <span class="bg-icon{% if source == 'own-remote' %} icon-ok{% endif %}"></span>
+                        {% trans "Own remote observatory" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ request.path }}{% query_string "source='amateur-hosting'" "" %}">
+                        <span class="bg-icon{% if source == 'amateur-hosting' %} icon-ok{% endif %}"></span>
+                        {% trans "Amateur hosting facility" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ request.path }}{% query_string "source='public-amateur-data'" "" %}">
+                        <span class="bg-icon{% if source == 'public-amateur-data' %} icon-ok{% endif %}"></span>
+                        {% trans "Public amateur data" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ request.path }}{% query_string "source='pro-data'" "" %}">
+                        <span class="bg-icon{% if source == 'pro-data' %} icon-ok{% endif %}"></span>
+                        {% trans "Professional, scientific grade data" %}
+                    </a>
+                </li>
+
+                <li class="divider"></li>
+
+                <li class="bg-icon">
+                    <a href="{{ request.path }}{% query_string "" "source" %}">{% trans "All" %}</a>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="icon-filter icon-white"></i>
+                <span class="hidden-phone">{% trans "Acquisition type" %}</span>
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="{{ request.path }}{% query_string "acquisition_type='traditional'" "" %}">
+                        <span class="bg-icon{% if acquisition_type == 'traditional' %} icon-ok{% endif %}"></span>
+                        {% trans "Traditional" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ request.path }}{% query_string "acquisition_type='eaa'" "" %}">
+                        <span class="bg-icon{% if acquisition_type == 'eaa' %} icon-ok{% endif %}"></span>
+                        {% trans "Electronically-Assisted Astronomy (EAA)" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ request.path }}{% query_string "acquisition_type='lucky'" "" %}">
+                        <span class="bg-icon{% if acquisition_type == 'lucky' %} icon-ok{% endif %}"></span>
+                        {% trans "Lucky imaging" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ request.path }}{% query_string "acquisition_type='drawing'" "" %}">
+                        <span class="bg-icon{% if acquisition_type == 'drawing' %} icon-ok{% endif %}"></span>
+                        {% trans "Drawing/Sketch" %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ request.path }}{% query_string "acquisition_type='other'" "" %}">
+                        <span class="bg-icon{% if acquisition_type == 'other' %} icon-ok{% endif %}"></span>
+                        {% trans "Other/Unknown" %}
+                    </a>
+                </li>
+
+                <li class="divider"></li>
+
+                <li class="bg-icon">
+                    <a href="{{ request.path }}{% query_string "" "acquisition_type" %}">{% trans "All" %}</a>
+                </li>
+            </ul>
+        </li>
+    </ul> <!-- nav -->
+</div> <!-- subnav -->

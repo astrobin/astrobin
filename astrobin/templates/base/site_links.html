@@ -120,7 +120,13 @@
                 </li>
 
                 <li class="divider"></li>
-                <li class="exlore-menu-top-picks">
+                <li class="explore-menu-top-pick-nominations">
+                    <a href="{% url 'top_pick_nominations' %}">
+                        <i class="icon-arrow-up"></i>
+                        {% trans "Top pick nominations" %}
+                    </a>
+                </li>
+                <li class="explore-menu-top-picks">
                     <a href="{% url 'top_picks' %}">
                         <i class="icon-star"></i>
                         {% trans "Top picks" %}
