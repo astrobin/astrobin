@@ -38,7 +38,7 @@ def astrobin_username(context, user, **kwargs):
         user_metadata['is_iotd_reviewer'] = user.userprofile.is_iotd_reviewer()
         user_metadata['is_iotd_judge'] = user.userprofile.is_iotd_judge()
         user_metadata['is_premium'] = premium_user_has_valid_subscription(user)
-        cache.set(cache_key, user_metadata, 600)
+        cache.set(cache_key, user_metadata, 300)
     else:
         display_name = user_metadata['display_name']
         is_superuser = user_metadata['is_superuser']

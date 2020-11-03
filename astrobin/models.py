@@ -2380,7 +2380,7 @@ class UserProfile(SafeDeleteModel):
                 'user_scores_followers': user_search_result.followers,
             }
 
-            cache.set(cache_key, scores, 43200)
+            cache.set(cache_key, scores, 300)
 
         return scores
 

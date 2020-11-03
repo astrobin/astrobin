@@ -1346,7 +1346,7 @@ def user_page(request, username):
             (_('Likes (received)'), "%d" % UserService(user).received_likes_count()),
         )
 
-        cache.set(key, data, 84600)
+        cache.set(key, data, 300)
 
 
     response_dict = {
