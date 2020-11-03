@@ -51,6 +51,7 @@ def _get_integration(image):
 
     return integration
 
+
 def _prepare_comment_reputation(comments):
     min_comment_length = 150
     min_likes = 3
@@ -74,6 +75,42 @@ def _prepare_comment_reputation(comments):
 
     for comment in all_comments_with_enough_likes:
         likes = len(comment.likes)
+        if likes >= average:
+            normalized.append(likes)
+
+    if len(normalized) == 0:
+        return 0
+
+    return _astrobin_index(normalized)
+
+
+def _prepare_forum_post_reputation(posts):
+    min_post_length = 150
+    min_likes = 3
+
+    all_posts = posts \
+        .annotate(length=Length('body')) \
+        .filter(length__gte=min_post_length)
+
+    all_posts_with_enough_likes = [
+        x \
+        for x in all_posts \
+        if ToggleProperty.objects.toggleproperties_for_object('like', x).count() >= min_likes
+    ]
+    all_posts_count = len(all_posts_with_enough_likes)
+
+    if all_posts_count == 0:
+        return 0
+
+    all_likes = 0
+    for post in all_posts_with_enough_likes:
+        all_likes += ToggleProperty.objects.toggleproperties_for_object('like', post).count()
+
+    average = all_likes / float(all_posts_count)
+    normalized = []
+
+    for post in all_posts_with_enough_likes:
+        likes = ToggleProperty.objects.toggleproperties_for_object('like', post).count()
         if likes >= average:
             normalized.append(likes)
 
@@ -386,15 +423,19 @@ class UserIndex(CelerySearchIndex, Indexable):
         return result
 
     def prepare_reputation_6m(self, obj):
-        return _prepare_comment_reputation(NestedComment.objects.filter(author=obj, created__gte=_6m_ago()))
+        return _prepare_comment_reputation(NestedComment.objects.filter(author=obj, created__gte=_6m_ago())) + \
+               _prepare_forum_post_reputation(Post.objects.filter(user=obj, created__gte=_6m_ago()))
 
     def prepare_reputation_1y(self, obj):
-        return _prepare_comment_reputation(NestedComment.objects.filter(author=obj, created__gte=_1y_ago()))
+        return _prepare_comment_reputation(NestedComment.objects.filter(author=obj, created__gte=_1y_ago())) + \
+               _prepare_forum_post_reputation(Post.objects.filter(user=obj, created__gte=_1y_ago()))
 
     def prepare_reputation(self, obj):
-        result = _prepare_comment_reputation(NestedComment.objects.filter(author=obj))
-        log.debug("User %s (%d) has comment reputation: %.2f" % (obj, obj.pk, result))
-        return result
+        comments_reputation = _prepare_comment_reputation(NestedComment.objects.filter(author=obj))
+        forum_post_reputation = _prepare_forum_post_reputation(Post.objects.filter(user=obj))
+        log.debug("User %s (%d) has comment reputation: %.2f" % (obj, obj.pk, comments_reputation))
+        log.debug("User %s (%d) has forum post reputation: %.2f" % (obj, obj.pk, forum_post_reputation))
+        return comments_reputation + forum_post_reputation
 
     def prepare_followers_6m(self, obj):
         return ToggleProperty.objects.filter(
