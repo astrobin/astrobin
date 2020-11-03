@@ -152,10 +152,10 @@
 
                                 {% if badges %}
                                     <tr>
-                                        <th>
+                                        <th class="caption-badge">
                                             {% if 'iotd' in badges %}<i class="icon-trophy"></i>
-                                            {% elif 'top-pick' in badges %}<i class="icon-fire"></i>
-                                            {% elif 'top-pick-nomination' in badges %}<i class="icon-star"></i>
+                                            {% elif 'top-pick' in badges %}<i class="icon-star"></i>
+                                            {% elif 'top-pick-nomination' in badges %}<i class="icon-arrow-up"></i>
                                             {% elif 'wip' in badges %}<i class="icon-lock"></i>{% endif %}
                                         </th>
                                         <td colspan="3" class="caption-badge">

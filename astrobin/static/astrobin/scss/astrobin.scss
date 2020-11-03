@@ -1,6 +1,7 @@
 @import "elements";
 @import "variables";
 @import "mixins";
+@import "icons";
 
 @import "alert";
 @import "buttons";
@@ -897,16 +898,20 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         }
 
         th {
-          color: white;
+          color: $white;
           width: 16px;
         }
 
         td {
           color: $grey-2;
+        }
 
+        td,
+        th {
           &.caption-badge {
             line-height: 12px;
             padding-top: 4px;
+            padding-bottom: 4px;
           }
         }
       }
@@ -1106,10 +1111,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
           -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px, $bronze 0 0 10px;
           -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $bronze 0 0 10px;
           box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $bronze 0 0 10px;
-
-          .icon {
-            transform: rotate(25deg);
-          }
         }
       }
 
