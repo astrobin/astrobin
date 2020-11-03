@@ -1065,7 +1065,12 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
           background: -moz-linear-gradient(top, $gold, darken($gold, 10%));
           background: -ms-linear-gradient(top, $gold, darken($gold, 10%));
           background: -o-linear-gradient(top, $gold, darken($gold, 10%));
-          background-image: -ms-linear-gradient(top, $gold 0%, darken($gold, 10%) 100%);        }
+          background-image: -ms-linear-gradient(top, $gold 0%, darken($gold, 10%) 100%);
+
+          -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px, $gold 0 0 10px;
+          -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $gold 0 0 10px;
+          box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $gold 0 0 10px;
+        }
       }
 
       &.top-pick-badge {
@@ -1077,11 +1082,12 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
           background: -ms-linear-gradient(top, $silver, darken($silver, 10%));
           background: -o-linear-gradient(top, $silver, darken($silver, 10%));
           background-image: -ms-linear-gradient(top, $silver 0%, darken($silver, 10%) 100%);
+
           color: lighten($silver, 20%);
 
-          .icon {
-            transform: rotate(25deg);
-          }
+          -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px, $silver 0 0 10px;
+          -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $silver 0 0 10px;
+          box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $silver 0 0 10px;
         }
       }
 
@@ -1095,6 +1101,15 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
           background: -o-linear-gradient(top, $bronze, darken($bronze, 10%));
           background-image: -ms-linear-gradient(top, $bronze 0%, darken($bronze, 10%) 100%);
           color: $gold;
+
+
+          -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px, $bronze 0 0 10px;
+          -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $bronze 0 0 10px;
+          box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $bronze 0 0 10px;
+
+          .icon {
+            transform: rotate(25deg);
+          }
         }
       }
 
