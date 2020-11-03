@@ -2096,9 +2096,9 @@ form.avatar-change label.control-label {
 
     h1 {
       font-size: 20px !important;
-      color: #f5ddae;
-      text-shadow: #8f6b22 0 1px 0;
-      margin: 0px;
+      color: lighten($gold, 30%);
+      text-shadow: 1px 1px 1px rgba(0,0,0,.4);
+      margin: 0;
       padding: 5px 10px;
       border-bottom: none;
 
@@ -2108,7 +2108,7 @@ form.avatar-change label.control-label {
 
       .chosen-by {
         font-weight: normal;
-        font-style: italics;
+        font-style: italic;
         font-size: 70%;
       }
     }
@@ -2118,18 +2118,17 @@ form.avatar-change label.control-label {
       position: absolute;
       display: block;
       bottom: -1em;
-      border: 1.5em solid #ad7e21;
+      border: 1.5em solid darken($gold, 25%);
+      border-left-color: transparent;
       z-index: -1;
       left: -2em;
-      border-right-width: 1.5em;
-      border-left-color: transparent;
-      -webkit-box-shadow: rgba(000, 000, 000, 0.4) 1px 1px 1px;
-      -moz-box-shadow: rgba(000, 000, 000, 0.4) 1px 1px 1px;
-      box-shadow: rgba(000, 000, 000, 0.4) 1px 1px 1px;
+      -webkit-box-shadow: rgba(0, 0, 0, .4) 1px 1px 1px;
+      -moz-box-shadow: rgba(0, 0, 0, .4) 1px 1px 1px;
+      box-shadow: rgba(0, 0, 0, .4) 1px 1px 1px;
     }
 
     .ribbon-content:after {
-      border-color: #6b4e15 transparent transparent transparent;
+      border-color: darken($gold, 35%) transparent transparent transparent;
       position: absolute;
       display: block;
       border-style: solid;
@@ -2142,17 +2141,17 @@ form.avatar-change label.control-label {
     .ribbon-stitches-top {
       margin-top: 2px;
       border-top: 1px dashed rgba(0, 0, 0, 0.2);
-      -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
-      -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
-      box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.5);
+      -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+      -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
     }
 
     .ribbon-stitches-bottom {
       margin-bottom: 2px;
       border-top: 1px dashed rgba(0, 0, 0, 0.2);
-      -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
-      -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
-      box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.3);
+      -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+      -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
     }
   }
 }
