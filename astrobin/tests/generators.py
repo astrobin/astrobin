@@ -17,12 +17,20 @@ class Generators:
         return ''.join(random.choice(string.ascii_lowercase) for i in range(stringLength))
 
     @staticmethod
-    def user():
-        return User.objects.create_user(
-            email="%s@%s.com" % (Generators.randomString(), Generators.randomString()),
-            username=Generators.randomString(),
-            password="password"
+    def user(**kwargs):
+        user = User.objects.create_user(
+            email=kwargs.pop('email', "%s@%s.com" % (Generators.randomString(), Generators.randomString())),
+            username=kwargs.pop('username', Generators.randomString()),
+            password=kwargs.pop('password', 'password')
         )
+
+        group_names = kwargs.pop('groups', [])
+
+        for group_name in group_names:
+            group, created = Group.objects.get_or_create(name=group_name)
+            group.user_set.add(user)
+
+        return user
 
     @staticmethod
     def image(*args, **kwargs):

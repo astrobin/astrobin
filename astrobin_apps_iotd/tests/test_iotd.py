@@ -77,6 +77,10 @@ class IotdTest(TestCase):
         self.assertEqual(submission.submitter, self.submitter_1)
         self.assertEqual(submission.image, self.image)
 
+        # Badge is present
+        response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
+        self.assertContains(response, 'top-pick-nomination-badge')
+
         # Image cannot be submitted again
         with self.assertRaisesRegexp(ValidationError, "already exists"):
             IotdSubmission.objects.create(

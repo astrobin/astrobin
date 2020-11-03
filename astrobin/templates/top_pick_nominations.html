@@ -9,20 +9,16 @@
 {% load astrobin_apps_users_tags %}
 {% load common_tags %}
 
-{% block title %}{% trans "Top picks" %}{% endblock %}
+{% block title %}{% trans "Top pick nominations" %}{% endblock %}
 
 {% block extra_head %}
     {{ block.super }}
-    <link rel="alternate" type="application/rss+xml" title="AstroBin's Top Picks RSS feed"
-          href="{% url 'iotd_rss_top_picks' %}" />
-    <link rel="alternate" type="application/atom+xml" title="AstroBin's Top Picks Atom feed"
-          href="{% url 'iotd_atom_top_picks' %}" />
 {% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb_safe 'Explore' None %}
-    {% breadcrumb 'Top picks' None %}
+    {% breadcrumb 'Top pick nominations' None %}
 {% endblock %}
 
 {% block container_extra_classes %}has-subnav{% endblock %}
@@ -31,7 +27,7 @@
     {% include './_top_picks_subnav.html' %}
 
     <div class="top-picks">
-        {% cache 3600 top_picks source page_obj.number  %}
+        {% cache 3600 top_pick_nominations source page_obj.number  %}
             {% for image in object_list %}
                 <div class="top-picks-item">
                     {% astrobin_image image 'story' tooltip=False %}

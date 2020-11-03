@@ -117,13 +117,13 @@
 
     .header {
       h2 {
-        background: #e3a936;
-        background: -webkit-gradient(linear, left top, left bottom, from(#e3a936), to(#a87a25));
-        background: -webkit-linear-gradient(top, #e3a936, #a87a25);
-        background: -moz-linear-gradient(top, #e3a936, #a87a25);
-        background: -ms-linear-gradient(top, #e3a936, #a87a25);
-        background: -o-linear-gradient(top, #e3a936, #a87a25);
-        background-image: -ms-linear-gradient(top, #e3a936 0%, #a87a25 100%);
+        background: $gold;
+        background: -webkit-gradient(linear, left top, left bottom, from($gold), to(darken($gold, 10%)));
+        background: -webkit-linear-gradient(top, $gold, darken($gold, 10%));
+        background: -moz-linear-gradient(top, $gold, darken($gold, 10%));
+        background: -ms-linear-gradient(top, $gold, darken($gold, 10%));
+        background: -o-linear-gradient(top, $gold, darken($gold, 10%));
+        background-image: -ms-linear-gradient(top, $gold 0%, darken($gold, 10%) 100%);
         -webkit-box-shadow: rgba(000, 000, 000, 0.3) 0 1px 1px;
         -moz-box-shadow: rgba(000, 000, 000, 0.3) 0 1px 1px;
         box-shadow: rgba(000, 000, 000, 0.3) 0 1px 1px;
@@ -262,7 +262,7 @@
 
     .astrobin-image-container {
       padding-top: 0;
-      border-bottom: 8px solid #e3a936;
+      border-bottom: 8px solid $gold;
     }
   }
 

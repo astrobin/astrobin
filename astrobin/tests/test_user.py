@@ -469,26 +469,18 @@ class UserTest(TestCase):
         response = self.client.get(reverse('user_page', args=(self.user.username,)))
         self.assertNotContains(response, 'iotd-badge')
 
-        # Check that the Top Pick badge is not visible
+        # Check that the Top pick badge is not visible
         iotd.delete()
         response = self.client.get(reverse('user_page', args=(self.user.username,)))
         self.assertNotContains(response, 'top-pick-badge')
 
+        # Check that the Top pick nomination badge is not visible
+        vote.delete()
+        response = self.client.get(reverse('user_page', args=(self.user.username,)))
+        self.assertNotContains(response, 'top-pick-nomination-badge')
+
         # Check that the top100 badge is not visible
         self.assertNotContains(response, 'top100-badge')
-
-        submitter.delete()
-        reviewer.delete()
-        judge.delete()
-
-        submitters.delete()
-        reviewers.delete()
-        judges.delete()
-
-        submission.delete()
-        vote.delete()
-
-        image.delete()
 
     @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
@@ -509,7 +501,7 @@ class UserTest(TestCase):
         judges = Group.objects.create(name='iotd_judges')
         judges.user_set.add(judge)
         IotdSubmission.objects.create(submitter=submitter, image=image)
-        IotdVote.objects.create(reviewer=reviewer, image=image)
+        vote = IotdVote.objects.create(reviewer=reviewer, image=image)
         iotd = Iotd.objects.create(judge=judge, image=image, date=datetime.now().date())
 
         profile = self.user.userprofile
@@ -525,11 +517,15 @@ class UserTest(TestCase):
         response = self.client.get(reverse('user_page', args=(self.user.username,)))
         self.assertContains(response, 'iotd-badge')
 
-        # Check that the Top Pick badge is still visible because the ban is not retroactive.
+        # Check that the Top pick badge is still visible because the ban is not retroactive.
         iotd.delete()
         response = self.client.get(reverse('user_page', args=(self.user.username,)))
         self.assertContains(response, 'top-pick-badge')
 
+        # Check that the Top pick nomination badge is still visible because the ban is not retroactive.
+        vote.delete()
+        response = self.client.get(reverse('user_page', args=(self.user.username,)))
+        self.assertContains(response, 'top-pick-nomination-badge')
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_corrupted_images_not_shown_to_others(self, retrieve_primary_thumbnails):
