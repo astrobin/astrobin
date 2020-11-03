@@ -305,6 +305,9 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                         'comment': instance.content_object.text
                     })
 
+                # Trigger index update on the user, which will recalculate the reputation index.
+                instance.content_object.author.save()
+
             elif instance.content_type == ContentType.objects.get_for_model(Post):
                 push_notification(
                     [instance.content_object.user], 'new_forum_post_like',
@@ -315,6 +318,9 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                             'user_page', kwargs={'username': instance.user.username}),
                         'post': instance.content_object.topic.name
                     })
+
+                # Trigger index update on the user, which will recalculate the reputation index.
+                instance.content_object.user.save()
 
             if verb is not None:
                 add_story(instance.user,
