@@ -2362,6 +2362,7 @@ class UserProfile(SafeDeleteModel):
 
         scores = {
             'user_scores_index': 0,
+            'user_scores_reputation': 0,
             'user_scores_followers': 0,
         }
 
@@ -2375,14 +2376,17 @@ class UserProfile(SafeDeleteModel):
             except (IndexError, SearchFieldError):
                 return {
                     'user_scores_index': 0,
+                    'user_scores_reputation': 0,
                     'user_scores_followers': 0
                 }
 
             index = user_search_result.normalized_likes
+            reputation = user_search_result.reputation
             followers = user_search_result.followers
 
             scores = {}
             scores['user_scores_index'] = index
+            scores['user_scores_reputation'] = reputation
             scores['user_scores_followers'] = followers
             cache.set(cache_key, scores, 43200)
 

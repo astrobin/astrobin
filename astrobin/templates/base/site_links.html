@@ -158,6 +158,13 @@
                     </a>
                 </li>
 
+                <li class="explore-menu-reputation-leaderboard">
+                    <a href="{% url 'reputation_leaderboard' %}">
+                        <i class="icon-arrow-up"></i>
+                        {% trans "Reputation leaderboard" %}
+                    </a>
+                </li>
+
                 {% if request.user.is_superuser %}
                     <li class="divider"></li>
 

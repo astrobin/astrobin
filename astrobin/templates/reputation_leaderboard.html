@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+{% load common_tags %}
+{% load tags %}
+{% load cache %}
+{% load el_pagination_tags %}
+
+
+{% block title %}{% trans "Reputation leaderboard" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Explore' None %}
+    {% breadcrumb 'Reputation leaderboard' None %}
+{% endblock %}
+
+{% block content %}
+    <div class="filter-toggle-group">
+        <div class="filter-toggle">
+            <a href="{% url 'reputation_leaderboard' %}{% query_string "t='6m'" "" %}" {% if request.GET.t == '6m' %}class="active"{%endif %}>
+                {% trans "Last 6 months" %}
+            </a>
+        </div>
+
+        <span class="separator">/</span>
+
+        <div class="filter-toggle">
+            <a href="{% url 'reputation_leaderboard' %}{% query_string "t='1y'" "" %}" {% if request.GET.t == '1y' or 't' not in request.GET %}class="active"{%endif %}>
+                {% trans "Last year" %}
+            </a>
+        </div>
+
+        <span class="separator">/</span>
+
+        <div class="filter-toggle">
+            <a href="{% url 'reputation_leaderboard' %}{% query_string "t='all'" "" %}" {% if request.GET.t == 'all' %}class="active"{%endif %}>
+                {% trans "All time" %}
+            </a>
+        </div>
+    </div>
+
+    {% lazy_paginate 2 user_list using "page" %}
+    {% get_pages %}
+
+    <table class="reputation_leaderboard table striped">
+        <thead>
+            <tr>
+                <th class="reputation-leaderboard-position">#</th>
+                <th class="reputation-leaderboard-user">{% trans "User" %}</th>
+
+                <th class="reputation-leaderboard-reputation">
+                    <a href="{% url 'reputation_leaderboard' %}{% query_string "sort='reputation'" "" %}">
+                        {% trans "Reputation" %} <i class="icon-sort"></i>
+                    </a>
+                </th>
+            </tr>
+        </thead>
+
+        {% for u in user_list %}
+            <tr>
+                <td class="reputation-leaderboard-position">
+                    {% if pages.current.number > 1 %}
+                        {{ forloop.counter|add:pages.current.number }}
+                    {% else %}
+                        {{ forloop.counter }}
+                    {% endif %}
+                </td>
+
+                <td class="reputation-leaderboard-user">
+                    <a href="{% url 'user_page' u.username %}">
+                        {% if u.object %}
+                            {{u.object.userprofile}}
+                        {% else %}
+                            {{u.username}}
+                        {% endif %}
+                    </a>
+                </td>
+
+                <td class="reputation-leaderboard-reputation">
+                    {% if request.GET.t == '6m' %}
+                        {{u.reputation_6m|floatformat:2}}
+                    {% endif %}
+
+                    {% if request.GET.t == '1y' or 't' not in request.GET%}
+                        {{u.reputation_1y|floatformat:2}}
+                    {% endif %}
+
+                    {% if request.GET.t == 'all' %}
+                        {{u.reputation|floatformat:2}}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <div class="pagination pagination-centered">
+        {% show_pages %}
+    </div>
+{% endblock %}

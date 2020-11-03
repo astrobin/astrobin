@@ -28,7 +28,7 @@ from django.template import loader, RequestContext
 from django.template.defaultfilters import filesizeformat
 from django.template.loader import render_to_string
 from django.utils.datastructures import MultiValueDictKeyError
-from django.utils.translation import ngettext as _n, get_language
+from django.utils.translation import ngettext as _n
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
@@ -1363,8 +1363,8 @@ def user_page(request, username):
         'images_no': data['images'],
         'alias': 'gallery',
         'has_corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user).count() > 0,
-        'has_recovered_images': Image.objects_including_wip\
-                                    .filter(corrupted=True, user=user)\
+        'has_recovered_images': Image.objects_including_wip \
+                                    .filter(corrupted=True, user=user) \
                                     .exclude(recovered=None).count() > 0,
     }
 
@@ -2251,6 +2251,30 @@ def trending_astrophotographers(request):
         template_name='trending_astrophotographers.html',
         template_object_name='user',
         extra_context=response_dict,
+    )
+
+
+@require_GET
+def reputation_leaderboard(request):
+    sqs = SearchQuerySet()
+
+    sort = request.GET.get('sort', 'reputation')
+    if sort == 'reputation':
+        sort = '-reputation'
+    else:
+        sort = '-reputation'
+
+    t = request.GET.get('t', '1y')
+    if t not in ('', 'all', None):
+        sort += '_%s' % t
+
+    queryset = sqs.models(User).order_by(sort)
+
+    return object_list(
+        request,
+        queryset=queryset,
+        template_name='reputation_leaderboard.html',
+        template_object_name='user',
     )
 
 
