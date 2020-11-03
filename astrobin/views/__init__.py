@@ -1362,7 +1362,7 @@ def user_page(request, username):
         'subsection': subsection,
         'active': active,
         'menu': menu,
-        'stats': data['stats'],
+        'stats': data['stats'] if 'stats' in data else None,
         'images_no': data['images'],
         'alias': 'gallery',
         'has_corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user).count() > 0,
