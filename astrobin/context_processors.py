@@ -45,6 +45,7 @@ def user_profile(request):
 def user_scores(request):
     scores = {
         'user_scores_index': 0,
+        'user_scores_reputation': 0,
         'user_scores_followers': 0,
     }
 

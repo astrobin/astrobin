@@ -44,8 +44,8 @@
                                   {{user_scores_index|floatformat:2}}
                             </span> &bull;
                             {% endif %}
-                            <span rel="tooltip" data-placement="bottom" title="{% trans "Followers" %}">
-                                {{user_scores_followers}}
+                            <span rel="tooltip" data-placement="bottom" title="{% trans "Reputation" %}">
+                                {{ user_scores_reputation|floatformat:2}}
                             </span>
                         </span>
                     </a>

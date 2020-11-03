@@ -2256,19 +2256,25 @@ def trending_astrophotographers(request):
 
 @require_GET
 def reputation_leaderboard(request):
-    sqs = SearchQuerySet()
+    queryset = SearchQuerySet()
+    t = request.GET.get('t', '1y')
 
-    sort = request.GET.get('sort', 'reputation')
-    if sort == 'reputation':
+    if t not in ('all', '1y', '1m'):
+        raise Http404
+
+    if t == 'all':
         sort = '-reputation'
     else:
-        sort = '-reputation'
+        sort = '-reputation_%s' % t
 
-    t = request.GET.get('t', '1y')
-    if t not in ('', 'all', None):
-        sort += '_%s' % t
+    queryset = queryset.models(User).order_by(sort)
 
-    queryset = sqs.models(User).order_by(sort)
+    if t == '1y':
+        queryset = queryset.filter(reputation_1y__gt=1)
+    elif t == '6m':
+        queryset = queryset.filter(reputation_6m__gt=1)
+    else:
+        queryset = queryset.filter(reputation__gt=1)
 
     return object_list(
         request,

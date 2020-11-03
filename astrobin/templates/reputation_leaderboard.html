@@ -41,7 +41,7 @@
         </div>
     </div>
 
-    {% lazy_paginate 2 user_list using "page" %}
+    {% lazy_paginate 100 user_list using "page" %}
     {% get_pages %}
 
     <table class="reputation_leaderboard table striped">

@@ -52,8 +52,8 @@ def _get_integration(image):
     return integration
 
 def _prepare_comment_reputation(comments):
-    min_comment_length = 1
-    min_likes = 1
+    min_comment_length = 150
+    min_likes = 3
 
     all_comments = comments \
         .annotate(length=Length('text')) \
@@ -240,6 +240,11 @@ class UserIndex(CelerySearchIndex, Indexable):
     normalized_likes_6m = FloatField()
     normalized_likes_1y = FloatField()
     normalized_likes = FloatField()
+
+    # User reputation based on text content
+    reputation_6m = FloatField()
+    reputation_1y = FloatField()
+    reputation = FloatField()
 
     # Number of followers
     followers_6m = IntegerField()
