@@ -25,4 +25,4 @@ class IotdService:
             corrupted=False,
             iotdvote__isnull=True,
             iotdsubmission__isnull=False,
-        ).order_by('-published')
+        ).order_by('-published').distinct()
