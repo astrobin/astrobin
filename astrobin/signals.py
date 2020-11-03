@@ -305,6 +305,17 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                         'comment': instance.content_object.text
                     })
 
+            elif instance.content_type == ContentType.objects.get_for_model(Post):
+                push_notification(
+                    [instance.content_object.user], 'new_forum_post_like',
+                    {
+                        'url': settings.BASE_URL + instance.content_object.get_absolute_url(),
+                        'user': instance.user.userprofile.get_display_name(),
+                        'user_url': settings.BASE_URL + reverse_url(
+                            'user_page', kwargs={'username': instance.user.username}),
+                        'post': instance.content_object.topic.name
+                    })
+
             if verb is not None:
                 add_story(instance.user,
                           verb=verb,

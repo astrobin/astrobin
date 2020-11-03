@@ -79,6 +79,12 @@ NOTICE_TYPES = (
         2,
     ),
     (
+        'new_forum_post_like',
+        _('Your forum post was liked'),
+        '',
+        2,
+    ),
+    (
         'new_image_from_gear',
         _('New image with some gear you follow'),
         '',

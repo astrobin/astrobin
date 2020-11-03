@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    {{user}} likes your forum post!
+{% endblocktrans %}
