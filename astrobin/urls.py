@@ -248,6 +248,7 @@ urlpatterns += [
     ###########################################################################
 
     url(r'^explore/top-picks/$', explore_views.TopPicksView.as_view(), name='top_picks'),
+    url(r'^explore/top-pick-nominations/$', explore_views.TopPickNominationsView.as_view(), name='top_pick_nominations'),
 
     ###########################################################################
     ### USER VIEWS                                                          ###

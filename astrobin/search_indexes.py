@@ -504,6 +504,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     is_iotd = BooleanField()
     is_top_pick = BooleanField()
+    is_top_pick_nomination = BooleanField()
 
     license = IntegerField(model_attr='license')
 
@@ -621,6 +622,9 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     def prepare_is_top_pick(self, obj):
         return obj.iotdvote_set.count() > 0 and not hasattr(obj, 'iotd')
+
+    def prepare_is_top_pick_nomination(self, obj):
+        return obj.iotdsubmission_set.count() > 0 and obj.iotdvote_set.count() == 0
 
     def prepare_objects_in_field(self, obj):
         return obj.solution.objects_in_field if obj.solution else None

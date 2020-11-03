@@ -11,7 +11,7 @@ from common.feeds.extended_rss_feed import ExtendedRSSFeed
 
 class TopPickFeed(Feed):
     feed_type = ExtendedRSSFeed
-    title = "AstroBin's Top Pick feed"
+    title = "AstroBin's Top pick feed"
     link = reverse_lazy('top_picks')
     item_enclosure_length = 0  # Unknown
 

@@ -41,16 +41,23 @@
                             {% endif %}
 
                             {% if badge == 'top-pick' %}
-                                <li class="top-pick-badge{% if alias == 'regular' or alias == 'regular_sharpened' %} top-pick-badge-large{% endif %}">
+                                <li class="top-pick-badge">
                                     <h2>
-                                        <span>Top</span>
-                                        <span>pick</span>
+                                        <i class="icon icon-star"></i>
+                                    </h2>
+                                </li>
+                            {% endif %}
+
+                            {% if badge == 'top-pick-nomination' %}
+                                <li class="top-pick-nomination-badge">
+                                    <h2>
+                                        <i class="icon icon-arrow-up"></i>
                                     </h2>
                                 </li>
                             {% endif %}
 
                             {% if badge == 'wip' %}
-                                <li class="wip-badge{% if alias == 'regular' or alias == 'regular_sharpened' %} wip-badge-large{% endif %}">
+                                <li class="wip-badge">
                                     <h2>
                                         <i class="icon icon-lock" rel="tooltip" title="{% trans "Staging area" %}"></i>
                                     </h2>
@@ -142,6 +149,23 @@
                                     <th><i class="icon-th"></i></th>
                                     <td>{{ image.revisions.count }}</td>
                                 </tr>
+
+                                {% if badges %}
+                                    <tr>
+                                        <th class="caption-badge">
+                                            {% if 'iotd' in badges %}<i class="icon-trophy"></i>
+                                            {% elif 'top-pick' in badges %}<i class="icon-star"></i>
+                                            {% elif 'top-pick-nomination' in badges %}<i class="icon-arrow-up"></i>
+                                            {% elif 'wip' in badges %}<i class="icon-lock"></i>{% endif %}
+                                        </th>
+                                        <td colspan="3" class="caption-badge">
+                                            {% if 'iotd' in badges %}{% trans "Image of the day" %}
+                                            {% elif 'top-pick' in badges %}{% trans "Top pick" %}
+                                            {% elif 'top-pick-nomination' in badges %}{% trans "Top pick nomination" %}
+                                            {% elif 'wip' in badges %}{% trans "Staging area" %}{% endif %}
+                                        </td>
+                                    </tr>
+                                {% endif %}
                             </table>
                             {% endcache %}
                         {% endif %}
