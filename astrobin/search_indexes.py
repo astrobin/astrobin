@@ -82,6 +82,7 @@ def _prepare_comment_reputation(comments):
 
     return _astrobin_index(normalized)
 
+
 def _prepare_likes(obj):
     return ToggleProperty.objects.toggleproperties_for_object("like", obj).count()
 
@@ -380,7 +381,9 @@ class UserIndex(CelerySearchIndex, Indexable):
         if len(normalized) == 0:
             return 0
 
-        return _astrobin_index(normalized)
+        result = _astrobin_index(normalized)
+        log.debug("User %s (%d) has image index: %.2f" % (obj, obj.pk, result))
+        return result
 
     def prepare_reputation_6m(self, obj):
         return _prepare_comment_reputation(NestedComment.objects.filter(author=obj, created__gte=_6m_ago()))
@@ -389,7 +392,9 @@ class UserIndex(CelerySearchIndex, Indexable):
         return _prepare_comment_reputation(NestedComment.objects.filter(author=obj, created__gte=_1y_ago()))
 
     def prepare_reputation(self, obj):
-        return _prepare_comment_reputation(NestedComment.objects.filter(author=obj))
+        result = _prepare_comment_reputation(NestedComment.objects.filter(author=obj))
+        log.debug("User %s (%d) has comment reputation: %.2f" % (obj, obj.pk, result))
+        return result
 
     def prepare_followers_6m(self, obj):
         return ToggleProperty.objects.filter(
