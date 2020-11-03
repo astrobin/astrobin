@@ -2259,7 +2259,7 @@ def reputation_leaderboard(request):
     queryset = SearchQuerySet()
     t = request.GET.get('t', '1y')
 
-    if t not in ('all', '1y', '1m'):
+    if t not in ('all', '1y', '6m'):
         raise Http404
 
     if t == 'all':
