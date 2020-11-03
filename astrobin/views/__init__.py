@@ -28,7 +28,7 @@ from django.template import loader, RequestContext
 from django.template.defaultfilters import filesizeformat
 from django.template.loader import render_to_string
 from django.utils.datastructures import MultiValueDictKeyError
-from django.utils.translation import ngettext as _n, get_language
+from django.utils.translation import ngettext as _n
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
@@ -1336,15 +1336,18 @@ def user_page(request, username):
             data['integration'] = 0
             data['avg_integration'] = 0
 
+        data['stats'] = (
+            (_('Member since'), member_since),
+            (_('Last login'), last_login),
+            (_('Total integration time'), "%.1f %s" % (data['integration'], _("hours"))),
+            (_('Average integration time'), "%.1f %s" % (data['avg_integration'], _("hours"))),
+            (_('Forum posts'), "%d" % UserService(user).get_all_forum_posts().count()),
+            (_('Comments'), "%d" % UserService(user).get_all_comments().count()),
+            (_('Likes (received)'), "%d" % UserService(user).received_likes_count()),
+        )
+
         cache.set(key, data, 84600)
 
-    stats = (
-        (_('Member since'), member_since),
-        (_('Last login'), last_login),
-        (_('Total integration time'), "%.1f %s" % (data['integration'], _("hours"))),
-        (_('Average integration time'), "%.1f %s" % (data['avg_integration'], _("hours"))),
-        (_('Forum posts'), "%d" % Post.objects.filter(user=user).count()),
-    )
 
     response_dict = {
         'followers': followers,
@@ -1359,12 +1362,12 @@ def user_page(request, username):
         'subsection': subsection,
         'active': active,
         'menu': menu,
-        'stats': stats,
+        'stats': data['stats'],
         'images_no': data['images'],
         'alias': 'gallery',
         'has_corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user).count() > 0,
-        'has_recovered_images': Image.objects_including_wip\
-                                    .filter(corrupted=True, user=user)\
+        'has_recovered_images': Image.objects_including_wip \
+                                    .filter(corrupted=True, user=user) \
                                     .exclude(recovered=None).count() > 0,
     }
 
@@ -2251,6 +2254,36 @@ def trending_astrophotographers(request):
         template_name='trending_astrophotographers.html',
         template_object_name='user',
         extra_context=response_dict,
+    )
+
+
+@require_GET
+def reputation_leaderboard(request):
+    queryset = SearchQuerySet()
+    t = request.GET.get('t', '1y')
+
+    if t not in ('all', '1y', '6m'):
+        raise Http404
+
+    if t == 'all':
+        sort = '-reputation'
+    else:
+        sort = '-reputation_%s' % t
+
+    queryset = queryset.models(User).order_by(sort)
+
+    if t == '1y':
+        queryset = queryset.filter(reputation_1y__gt=1)
+    elif t == '6m':
+        queryset = queryset.filter(reputation_6m__gt=1)
+    else:
+        queryset = queryset.filter(reputation__gt=1)
+
+    return object_list(
+        request,
+        queryset=queryset,
+        template_name='reputation_leaderboard.html',
+        template_object_name='user',
     )
 
 

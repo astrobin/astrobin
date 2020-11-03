@@ -251,3 +251,36 @@ class TestUserService(TestCase):
         get_scores.return_value = {'user_scores_index': 2}
 
         self.assertTrue(UserService(user).can_like(comment))
+
+    @patch('astrobin_apps_premium.templatetags.astrobin_apps_premium_tags.is_free')
+    @patch('astrobin.models.UserProfile.get_scores')
+    def test_can_like_comment_same_user(self, get_scores, is_free):
+        user = Generators.user()
+        comment = NestedCommentsGenerators.comment(author=user)
+
+        is_free.return_value = False
+        get_scores.return_value = {'user_scores_index': 2}
+
+        self.assertFalse(UserService(user).can_like(comment))
+
+    @patch('astrobin_apps_premium.templatetags.astrobin_apps_premium_tags.is_free')
+    @patch('astrobin.models.UserProfile.get_scores')
+    def test_can_like_post_ok(self, get_scores, is_free):
+        user = Generators.user()
+        post = Generators.forum_post()
+
+        is_free.return_value = False
+        get_scores.return_value = {'user_scores_index': 2}
+
+        self.assertTrue(UserService(user).can_like(post))
+
+    @patch('astrobin_apps_premium.templatetags.astrobin_apps_premium_tags.is_free')
+    @patch('astrobin.models.UserProfile.get_scores')
+    def test_can_like_post_same_user(self, get_scores, is_free):
+        user = Generators.user()
+        post = Generators.forum_post(user=user)
+
+        is_free.return_value = False
+        get_scores.return_value = {'user_scores_index': 2}
+
+        self.assertFalse(UserService(user).can_like(post))

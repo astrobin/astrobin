@@ -2360,11 +2360,6 @@ class UserProfile(SafeDeleteModel):
         from haystack.exceptions import SearchFieldError
         from haystack.query import SearchQuerySet
 
-        scores = {
-            'user_scores_index': 0,
-            'user_scores_followers': 0,
-        }
-
         cache_key = "astrobin_user_score_%s" % self.user.username
         scores = cache.get(cache_key)
 
@@ -2375,15 +2370,16 @@ class UserProfile(SafeDeleteModel):
             except (IndexError, SearchFieldError):
                 return {
                     'user_scores_index': 0,
+                    'user_scores_reputation': 0,
                     'user_scores_followers': 0
                 }
 
-            index = user_search_result.normalized_likes
-            followers = user_search_result.followers
+            scores = {
+                'user_scores_index': user_search_result.normalized_likes,
+                'user_scores_reputation': user_search_result.reputation,
+                'user_scores_followers': user_search_result.followers,
+            }
 
-            scores = {}
-            scores['user_scores_index'] = index
-            scores['user_scores_followers'] = followers
             cache.set(cache_key, scores, 43200)
 
         return scores

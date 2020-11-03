@@ -116,6 +116,7 @@ from astrobin.views import (
 
     api_help,
     trending_astrophotographers,
+    reputation_leaderboard,
     stats,
 
     set_language
@@ -411,6 +412,9 @@ urlpatterns += [
     url(r'^trending-astrophotographers/',
         trending_astrophotographers,
         name='trending_astrophotographers'),
+    url(r'^reputation-leaderboard/',
+        reputation_leaderboard,
+        name='reputation_leaderboard'),
     url(r'^stats/', stats, name='stats'),
 
     ###########################################################################

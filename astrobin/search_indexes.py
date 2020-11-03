@@ -20,6 +20,18 @@ from toggleproperties.models import ToggleProperty
 log = logging.getLogger('apps')
 
 
+def _average(values):
+    length = len(values)
+    if length > 0:
+        return sum(values) / float(length)
+    return 0
+
+
+def _astrobin_index(values):
+    import math
+    return _average(values) * math.log(len(values) + 1, 10)
+
+
 def _get_integration(image):
     deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
     solar_system_acquisition = None
@@ -39,6 +51,36 @@ def _get_integration(image):
 
     return integration
 
+def _prepare_comment_reputation(comments):
+    min_comment_length = 150
+    min_likes = 3
+
+    all_comments = comments \
+        .annotate(length=Length('text')) \
+        .filter(deleted=False, length__gte=min_comment_length)
+
+    all_comments_with_enough_likes = [x for x in all_comments if len(x.likes) >= min_likes]
+    all_comments_count = len(all_comments_with_enough_likes)
+
+    if all_comments_count == 0:
+        return 0
+
+    all_likes = 0
+    for comment in all_comments_with_enough_likes:
+        all_likes += len(comment.likes)
+
+    average = all_likes / float(all_comments_count)
+    normalized = []
+
+    for comment in all_comments_with_enough_likes:
+        likes = len(comment.likes)
+        if likes >= average:
+            normalized.append(likes)
+
+    if len(normalized) == 0:
+        return 0
+
+    return _astrobin_index(normalized)
 
 def _prepare_likes(obj):
     return ToggleProperty.objects.toggleproperties_for_object("like", obj).count()
@@ -199,6 +241,11 @@ class UserIndex(CelerySearchIndex, Indexable):
     normalized_likes_1y = FloatField()
     normalized_likes = FloatField()
 
+    # User reputation based on text content
+    reputation_6m = FloatField()
+    reputation_1y = FloatField()
+    reputation = FloatField()
+
     # Number of followers
     followers_6m = IntegerField()
     followers_1y = IntegerField()
@@ -294,15 +341,6 @@ class UserIndex(CelerySearchIndex, Indexable):
         return likes / float(images) if images > 0 else 0
 
     def prepare_normalized_likes_6m(self, obj):
-        def average(values):
-            if len(values):
-                return sum(values) / float(len(values))
-            return 0
-
-        def index(values):
-            import math
-            return average(values) * math.log(len(values) + 1, 10)
-
         avg = self.prepare_average_likes_6m(obj)
         norm = []
 
@@ -314,18 +352,9 @@ class UserIndex(CelerySearchIndex, Indexable):
         if len(norm) == 0:
             return 0
 
-        return index(norm)
+        return _astrobin_index(norm)
 
     def prepare_normalized_likes_1y(self, obj):
-        def average(values):
-            if len(values):
-                return sum(values) / float(len(values))
-            return 0
-
-        def index(values):
-            import math
-            return average(values) * math.log(len(values) + 1, 10)
-
         avg = self.prepare_average_likes_1y(obj)
         norm = []
 
@@ -337,62 +366,30 @@ class UserIndex(CelerySearchIndex, Indexable):
         if len(norm) == 0:
             return 0
 
-        return index(norm)
+        return _astrobin_index(norm)
 
     def prepare_normalized_likes(self, obj):
-        def avg(values):
-            length = len(values)
-            if length > 0:
-                return sum(values) / float(length)
+        average = self.prepare_average_likes(obj)
+        normalized = []
+
+        for i in Image.objects.filter(user=obj).iterator():
+            likes = i.likes()
+            if likes >= average:
+                normalized.append(likes)
+
+        if len(normalized) == 0:
             return 0
 
-        def index(values):
-            import math
-            return avg(values) * math.log(len(values) + 1, 10)
+        return _astrobin_index(normalized)
 
-        def index_from_images(user):
-            average = self.prepare_average_likes(user)
-            normalized = []
+    def prepare_reputation_6m(self, obj):
+        return _prepare_comment_reputation(NestedComment.objects.filter(author=obj, created__gte=_6m_ago()))
 
-            for i in Image.objects.filter(user=user).iterator():
-                likes = i.likes()
-                if likes >= average:
-                    normalized.append(likes)
+    def prepare_reputation_1y(self, obj):
+        return _prepare_comment_reputation(NestedComment.objects.filter(author=obj, created__gte=_1y_ago()))
 
-            if len(normalized) == 0:
-                return 0
-
-            return index(normalized)
-
-        def index_from_comments(user):
-            all_comments = NestedComment.objects \
-                .annotate(length=Length('text')) \
-                .filter(deleted=False, author=user, length__gte=150)
-
-            all_comments_with_enough_likes = [x for x in all_comments if len(x.likes) >= 3]
-            all_comments_count = len(all_comments_with_enough_likes)
-
-            if all_comments_count == 0:
-                return 0
-
-            all_likes = 0
-            for comment in all_comments_with_enough_likes:
-                all_likes += len(comment.likes)
-
-            average = all_likes / float(all_comments_count)
-            normalized = []
-
-            for comment in all_comments_with_enough_likes:
-                likes = len(comment.likes)
-                if likes >= average:
-                    normalized.append(likes)
-
-            if len(normalized) == 0:
-                return 0
-
-            return index(normalized)
-
-        return index_from_images(obj) + index_from_comments(obj)
+    def prepare_reputation(self, obj):
+        return _prepare_comment_reputation(NestedComment.objects.filter(author=obj))
 
     def prepare_followers_6m(self, obj):
         return ToggleProperty.objects.filter(

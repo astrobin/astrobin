@@ -30,6 +30,7 @@
 {% handlebars "top-level" %}
     {{#if view.userIsAuthenticated}}
         {{#unless view.collapsed}}
+            {% include '_reputation_alert.html' %}
             <form>
                 {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
 
@@ -205,6 +206,7 @@
 
 
 {% handlebars "edit" %}
+    {% include '_reputation_alert.html' %}
     {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
 
     {{view view.SaveEditButtonView commentBinding="view.comment"}}
@@ -222,6 +224,7 @@
 
 {% handlebars "reply" %}
     {{#if view.userIsAuthenticated}}
+        {% include '_reputation_alert.html' %}
         {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
 
         {{view view.SaveReplyButtonView}}
