@@ -51,9 +51,7 @@
                 <th class="reputation-leaderboard-user">{% trans "User" %}</th>
 
                 <th class="reputation-leaderboard-reputation">
-                    <a href="{% url 'reputation_leaderboard' %}{% query_string "sort='reputation'" "" %}">
-                        {% trans "Reputation" %} <i class="icon-sort"></i>
-                    </a>
+                    {% trans "Reputation" %} <i class="icon-sort"></i>
                 </th>
             </tr>
         </thead>
