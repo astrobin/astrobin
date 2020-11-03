@@ -1336,15 +1336,18 @@ def user_page(request, username):
             data['integration'] = 0
             data['avg_integration'] = 0
 
+        data['stats'] = (
+            (_('Member since'), member_since),
+            (_('Last login'), last_login),
+            (_('Total integration time'), "%.1f %s" % (data['integration'], _("hours"))),
+            (_('Average integration time'), "%.1f %s" % (data['avg_integration'], _("hours"))),
+            (_('Forum posts'), "%d" % UserService(user).get_all_forum_posts().count()),
+            (_('Comments'), "%d" % UserService(user).get_all_comments().count()),
+            (_('Likes (received)'), "%d" % UserService(user).received_likes_count()),
+        )
+
         cache.set(key, data, 84600)
 
-    stats = (
-        (_('Member since'), member_since),
-        (_('Last login'), last_login),
-        (_('Total integration time'), "%.1f %s" % (data['integration'], _("hours"))),
-        (_('Average integration time'), "%.1f %s" % (data['avg_integration'], _("hours"))),
-        (_('Forum posts'), "%d" % Post.objects.filter(user=user).count()),
-    )
 
     response_dict = {
         'followers': followers,
@@ -1359,7 +1362,7 @@ def user_page(request, username):
         'subsection': subsection,
         'active': active,
         'menu': menu,
-        'stats': stats,
+        'stats': data['stats'],
         'images_no': data['images'],
         'alias': 'gallery',
         'has_corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user).count() > 0,

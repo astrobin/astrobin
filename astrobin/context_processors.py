@@ -130,6 +130,8 @@ def common_variables(request):
                    recovered__isnull=False).exists() \
             else None,
 
+        'min_index_to_like': settings.MIN_INDEX_TO_LIKE,
+
         'enums': {
             'SubjectType': SubjectType,
         },

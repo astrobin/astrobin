@@ -2,9 +2,11 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import QuerySet, Q
+from pybb.models import Post
 
 from astrobin.models import Image
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
+from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
 
@@ -107,5 +109,31 @@ class UserService:
             return self.user != obj.user
         elif obj.__class__.__name__ == 'NestedComment':
             return  self.user != obj.author
+        elif obj.__class__.__name__ == 'Post':
+            return self.user != obj.user
 
         return False
+
+    def get_all_comments(self):
+        return NestedComment.objects.filter(author=self.user, deleted=False)
+
+    def get_all_forum_posts(self):
+        return Post.objects.filter(user=self.user)
+
+    def received_likes_count(self):
+        likes = 0
+
+        for image in self.get_all_images().iterator():
+            likes += image.likes()
+
+        for comment in self.get_all_comments().iterator():
+            likes += len(comment.likes)
+
+        for post in self.get_all_forum_posts().iterator():
+            likes += ToggleProperty.objects.filter(
+                object_id=post.pk,
+                content_type=ContentType.objects.get_for_model(Post),
+                property_type='like'
+            ).count()
+
+        return likes
