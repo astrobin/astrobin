@@ -48,6 +48,8 @@ class TogglePropertySerializer(serializers.ModelSerializer):
             obj = data['content_type'].get_object_for_this_type(pk=data['object_id'])
             if not UserService(data['user']).can_like(obj):
                 raise serializers.ValidationError('User does not have the required permissions to like this object')
+        else:
+            raise serializers.ValidationError('This property_type is not allowed via the API at the moment')
 
         return data
 
