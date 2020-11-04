@@ -1318,7 +1318,7 @@ def user_page(request, username):
         user=user,
         content_type=user_ct).count()
 
-    key = "User.%d.Stats" % user.pk
+    key = "User.%d.Stats.%s" % (user.pk, getattr(request, 'LANGUAGE_CODE', 'en'))
     data = cache.get(key)
     if data is None:
         sqs = SearchQuerySet()
