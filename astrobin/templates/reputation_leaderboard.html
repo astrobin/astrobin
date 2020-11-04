@@ -17,6 +17,14 @@
 {% endblock %}
 
 {% block content %}
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
+        {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/features/reputation" target="_blank">' as _0 and '</a>' as _1 %}
+            The <strong>Reputation score</strong> is point based system to reward informative, constructive, and
+            valuable commentary on AstroBin. {{_0}}Learn more.{{_1}}
+        {% endblocktrans %}
+    </div>
+
     <div class="filter-toggle-group">
         <div class="filter-toggle">
             <a href="{% url 'reputation_leaderboard' %}{% query_string "t='6m'" "" %}" {% if request.GET.t == '6m' %}class="active"{%endif %}>
@@ -51,7 +59,7 @@
                 <th class="reputation-leaderboard-user">{% trans "User" %}</th>
 
                 <th class="reputation-leaderboard-reputation">
-                    {% trans "Reputation" %} <i class="icon-sort"></i>
+                    {% trans "Reputation" %}
                 </th>
             </tr>
         </thead>
