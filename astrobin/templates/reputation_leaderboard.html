@@ -52,14 +52,72 @@
     {% lazy_paginate 100 user_list using "page" %}
     {% get_pages %}
 
-    <table class="reputation_leaderboard table striped">
+    <table class="reputation-leaderboard table striped">
+        <colgroup class="hidden-phone">
+            <col span="2">
+            <col span="3" class="comments">
+            <col span="2" class="forum-posts">
+            <col span="1">
+        </colgroup>
         <thead>
+            <tr>
+                <th class="reputation-leaderboard-position"></th>
+                <th class="reputation-leaderboard-user"></th>
+
+                <th class="reputation-leaderboard-comment-likes hidden-phone" colspan="3">
+                    {% trans "Comments" %}
+                </th>
+    
+                <th class="reputation-leaderboard-forum-post-likes hidden-phone" colspan="2">
+                    {% trans "Forum posts" %}
+                </th>
+
+                <th class="reputation-leaderboard-reputation"></th>
+            </tr>
             <tr>
                 <th class="reputation-leaderboard-position">#</th>
                 <th class="reputation-leaderboard-user">{% trans "User" %}</th>
 
+                <!-- comments -->
+
+                <th class="reputation-leaderboard-written hidden-phone">
+                    <a href="{% url 'reputation_leaderboard' %}{% query_string "sort='-comments_written'" "" %}">
+                        {% trans "Written" %} <i class="icon-sort"></i>
+                    </a>
+                </th>
+
+                <th class="reputation-leaderboard-received hidden-phone">
+                    <a href="{% url 'reputation_leaderboard' %}{% query_string "sort='-comments'" "" %}">
+                        {% trans "Received" %} <i class="icon-sort"></i>
+                    </a>
+                </th>
+
+                <th class="reputation-leaderboard-likes-received hidden-phone">
+                    <a href="{% url 'reputation_leaderboard' %}{% query_string "sort='-comment_likes_received'" "" %}">
+                        {% trans "Likes" %} <i class="icon-sort"></i>
+                    </a>
+                </th>
+
+                <!-- forum posts -->
+
+                <th class="reputation-leaderboard-written hidden-phone">
+                    <a href="{% url 'reputation_leaderboard' %}{% query_string "sort='-forum_posts'" "" %}">
+                        {% trans "Written" %} <i class="icon-sort"></i>
+                    </a>
+                </th>
+
+                <th class="reputation-leaderboard-likes-received hidden-phone">
+                    <a href="{% url 'reputation_leaderboard' %}{% query_string "sort='-forum_post_likes_received'" "" %}">
+                        {% trans "Likes received" %} <i class="icon-sort"></i>
+                    </a>
+                </th>
+
+                <!-- reputation -->
+
                 <th class="reputation-leaderboard-reputation">
-                    {% trans "Reputation" %}
+                    <a href="{% url 'reputation_leaderboard' %}{% query_string "sort='-reputation'" "" %}">
+                        {% trans "Reputation" %} <i class="icon-sort"></i>
+                    </a>
                 </th>
             </tr>
         </thead>
@@ -84,23 +142,99 @@
                     </a>
                 </td>
 
-                <td class="reputation-leaderboard-reputation">
+                <!-- comments -->
+
+                <td class="reputation-leaderboard-comments-written hidden-phone">
                     {% if request.GET.t == '6m' %}
-                        {{u.reputation_6m|floatformat:2}}
+                        {{ u.comments_written_6m }}
                     {% endif %}
 
-                    {% if request.GET.t == '1y' or 't' not in request.GET%}
-                        {{u.reputation_1y|floatformat:2}}
+                    {% if request.GET.t == '1y' or 't' not in request.GET %}
+                        {{ u.comments_written_1y }}
                     {% endif %}
 
                     {% if request.GET.t == 'all' %}
-                        {{u.reputation|floatformat:2}}
+                        {{ u.comments_written }}
+                    {% endif %}
+                </td>
+
+                <td class="reputation-leaderboard-comments-received hidden-phone">
+                    {% if request.GET.t == '6m' %}
+                        {{ u.comments_6m }}
+                    {% endif %}
+
+                    {% if request.GET.t == '1y' or 't' not in request.GET %}
+                        {{ u.comments_1y }}
+                    {% endif %}
+
+                    {% if request.GET.t == 'all' %}
+                        {{ u.comments }}
+                    {% endif %}
+                </td>
+
+                <td class="reputation-leaderboard-comment-likes-received hidden-phone">
+                    {% if request.GET.t == '6m' %}
+                        {{ u.comment_likes_received_6m }}
+                    {% endif %}
+
+                    {% if request.GET.t == '1y' or 't' not in request.GET %}
+                        {{ u.comment_likes_received_1y }}
+                    {% endif %}
+
+                    {% if request.GET.t == 'all' %}
+                        {{ u.comment_likes_received }}
+                    {% endif %}
+                </td>
+
+                <!-- forum posts -->
+
+                <td class="reputation-leaderboard-forum-posts hidden-phone">
+                    {% if request.GET.t == '6m' %}
+                        {{ u.forum_posts_6m }}
+                    {% endif %}
+
+                    {% if request.GET.t == '1y' or 't' not in request.GET %}
+                        {{ u.forum_posts_1y }}
+                    {% endif %}
+
+                    {% if request.GET.t == 'all' %}
+                        {{ u.forum_posts }}
+                    {% endif %}
+                </td>
+
+                <td class="reputation-leaderboard-forum-post-likes-received hidden-phone">
+                    {% if request.GET.t == '6m' %}
+                        {{ u.forum_post_likes_received_6m }}
+                    {% endif %}
+
+                    {% if request.GET.t == '1y' or 't' not in request.GET %}
+                        {{ u.forum_post_likes_received_1y }}
+                    {% endif %}
+
+                    {% if request.GET.t == 'all' %}
+                        {{ u.forum_post_likes_received }}
+                    {% endif %}
+                </td>
+
+                <!-- reputation -->
+
+                <td class="reputation-leaderboard-reputation">
+                    {% if request.GET.t == '6m' %}
+                        {{ u.reputation_6m|floatformat:2 }}
+                    {% endif %}
+
+                    {% if request.GET.t == '1y' or 't' not in request.GET %}
+                        {{ u.reputation_1y|floatformat:2 }}
+                    {% endif %}
+
+                    {% if request.GET.t == 'all' %}
+                        {{ u.reputation|floatformat:2 }}
                     {% endif %}
                 </td>
             </tr>
         {% empty %}
             <tr>
-                <td colspan="3">
+                <td colspan="9">
                     {% trans "There isn't enough data yet, please come back later!" %}
                 </td>
             </tr>

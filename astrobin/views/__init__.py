@@ -1321,32 +1321,29 @@ def user_page(request, username):
     key = "User.%d.Stats.%s" % (user.pk, getattr(request, 'LANGUAGE_CODE', 'en'))
     data = cache.get(key)
     if data is None:
-        sqs = SearchQuerySet()
-        sqs = sqs.filter(username=user.username).models(Image)
-        sqs = sqs.order_by('-uploaded')
-
+        image_sqs = SearchQuerySet().models(Image).filter(username=user.username)
+        user_sqs = SearchQuerySet().models(User).filter(username=user.username)
         data = {}
-        try:
-            data['images'] = len(sqs)
-            integrated_images = len(sqs.filter(integration__gt=0))
-            data['integration'] = sum([x.integration for x in sqs]) / 3600.0
-            data['avg_integration'] = (data['integration'] / integrated_images) if integrated_images > 0 else 0
-        except SearchFieldError:
-            data['images'] = 0
-            data['integration'] = 0
-            data['avg_integration'] = 0
 
-        data['stats'] = (
-            (_('Member since'), member_since),
-            (_('Last login'), last_login),
-            (_('Total integration time'), "%.1f %s" % (data['integration'], _("hours"))),
-            (_('Average integration time'), "%.1f %s" % (data['avg_integration'], _("hours"))),
-            (_('Forum posts'), "%d" % UserService(user).get_all_forum_posts().count()),
-            (_('Comments'), "%d" % UserService(user).get_all_comments().count()),
-            (_('Likes (received)'), "%d" % UserService(user).received_likes_count()),
-        )
+        if user_sqs.count():
+            try:
+                integrated_images = len(image_sqs.filter(integration__gt=0))
+                integration = sum([x.integration for x in image_sqs]) / 3600.0
+                avg_integration = (integration / integrated_images) if integrated_images > 0 else 0
 
-        cache.set(key, data, 300)
+                data['stats'] = (
+                    (_('Member since'), member_since),
+                    (_('Last login'), last_login),
+                    (_('Total integration time'), "%.1f %s" % (integration, _("hours"))),
+                    (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
+                    (_('Forum posts'), "%d" % user_sqs[0].forum_posts),
+                    (_('Comments'), "%d" % user_sqs[0].comments),
+                    (_('Likes (received)'), "%d" % user_sqs[0].total_likes_received),
+                )
+            except SearchFieldError:
+                log.error("User page (%d): unable to get stats from search index" % user.pk)
+
+            cache.set(key, data, 300)
 
 
     response_dict = {
@@ -1363,7 +1360,6 @@ def user_page(request, username):
         'active': active,
         'menu': menu,
         'stats': data['stats'] if 'stats' in data else None,
-        'images_no': data['images'],
         'alias': 'gallery',
         'has_corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user).count() > 0,
         'has_recovered_images': Image.objects_including_wip \
@@ -2239,6 +2235,8 @@ def trending_astrophotographers(request):
         sort = '-integration'
     elif sort == 'images':
         sort = '-images'
+    elif sort == 'likes':
+        sort = '-likes'
     else:
         sort = '-normalized_likes'
 
@@ -2260,24 +2258,31 @@ def trending_astrophotographers(request):
 @require_GET
 def reputation_leaderboard(request):
     queryset = SearchQuerySet()
-    t = request.GET.get('t', '1y')
 
-    if t not in ('all', '1y', '6m'):
+    t = request.GET.get('t', '1y')
+    sort = request.GET.get('sort', '-reputation')
+
+    if t not in ('all', '1y', '6m') or sort not in (
+        'comments_written',
+        'comments',
+        'comment_likes_received',
+        'forum_posts',
+        'forum_post_likes_received',
+        'reputation',
+
+        '-comments_written',
+        '-comments',
+        '-comment_likes_received',
+        '-forum_posts',
+        '-forum_post_likes_received',
+        '-reputation'
+    ):
         raise Http404
 
-    if t == 'all':
-        sort = '-reputation'
-    else:
-        sort = '-reputation_%s' % t
+    if t != 'all':
+        sort += '_%s' % t
 
     queryset = queryset.models(User).order_by(sort)
-
-    if t == '1y':
-        queryset = queryset.filter(reputation_1y__gt=1)
-    elif t == '6m':
-        queryset = queryset.filter(reputation_6m__gt=1)
-    else:
-        queryset = queryset.filter(reputation__gt=1)
 
     return object_list(
         request,
