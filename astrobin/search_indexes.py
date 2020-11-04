@@ -319,7 +319,7 @@ class UserIndex(CelerySearchIndex, Indexable):
 
     def prepare_images_6m(self, obj):
         # Logging here just because it's the first "prepare" function.
-        log.debug("Indexing %s: %s (%d)" % (obj.__class__.__name__, obj.username, obj.pk))
+        log.debug("Indexing %s: (%d)" % (obj.__class__.__name__, obj.pk))
 
         return Image.objects.filter(user=obj).filter(
             uploaded__gte=_6m_ago()).count()
@@ -419,7 +419,7 @@ class UserIndex(CelerySearchIndex, Indexable):
             return 0
 
         result = _astrobin_index(normalized)
-        log.debug("User %s (%d) has image index: %.2f" % (obj, obj.pk, result))
+        log.debug("User %d has image index: %.2f" % (obj.pk, result))
         return result
 
     def prepare_reputation_6m(self, obj):
@@ -433,8 +433,8 @@ class UserIndex(CelerySearchIndex, Indexable):
     def prepare_reputation(self, obj):
         comments_reputation = _prepare_comment_reputation(NestedComment.objects.filter(author=obj))
         forum_post_reputation = _prepare_forum_post_reputation(Post.objects.filter(user=obj))
-        log.debug("User %s (%d) has comment reputation: %.2f" % (obj, obj.pk, comments_reputation))
-        log.debug("User %s (%d) has forum post reputation: %.2f" % (obj, obj.pk, forum_post_reputation))
+        log.debug("User %d has comment reputation: %.2f" % (obj.pk, comments_reputation))
+        log.debug("User %d has forum post reputation: %.2f" % (obj.pk, forum_post_reputation))
         return comments_reputation + forum_post_reputation
 
     def prepare_followers_6m(self, obj):
