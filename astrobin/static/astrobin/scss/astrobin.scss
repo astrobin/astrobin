@@ -3905,6 +3905,12 @@ table.search-table {
   }
 }
 
+.top-picks{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .top-picks-item {
   display: inline-block;
   position: relative;
