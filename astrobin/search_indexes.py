@@ -261,23 +261,62 @@ def _1y_ago():
 
 class UserIndex(CelerySearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
+
+    username = CharField(model_attr='username')
+    avg_integration = FloatField()
+
     images_6m = IntegerField()
     images_1y = IntegerField()
     images = IntegerField()
-    avg_integration = FloatField()
 
     # Total likes of all user's images.
+    likes_6m = IntegerField()
+    likes_1y = IntegerField()
     likes = IntegerField()
 
-    # Total likes of all user's images.
+    # Total likes given to images.
+    likes_given_6m = IntegerField()
+    likes_given_1y = IntegerField()
+    likes_given = IntegerField()
+
+    # Average likes of all user's images.
     average_likes_6m = FloatField()
     average_likes_1y = FloatField()
     average_likes = FloatField()
 
-    # Normalized likes (best images only)
+    # Normalized likes (AstroBin Index)
     normalized_likes_6m = FloatField()
     normalized_likes_1y = FloatField()
     normalized_likes = FloatField()
+
+    # Total likes given on comments.
+    comment_likes_given_6m = IntegerField()
+    comment_likes_given_1y = IntegerField()
+    comment_likes_given = IntegerField()
+
+    # Total likes received on comments.
+    comment_likes_received_6m = IntegerField()
+    comment_likes_received_1y = IntegerField()
+    comment_likes_received = IntegerField()
+
+    # Total likes given on forum posts.
+    forum_post_likes_given_6m = IntegerField()
+    forum_post_likes_given_1y = IntegerField()
+    forum_post_likes_given = IntegerField()
+
+    # Total likes received on forum posts.
+    forum_post_likes_received_6m = IntegerField()
+    forum_post_likes_received_1y = IntegerField()
+    forum_post_likes_received = IntegerField()
+
+    # Total number of likes on all "likeable" elements that can be associated to a user.
+    total_likes_received_6m = IntegerField()
+    total_likes_received_1y = IntegerField()
+    total_likes_received = IntegerField()
+
+    total_likes_given_6m = IntegerField()
+    total_likes_given_1y = IntegerField()
+    total_likes_given = IntegerField()
 
     # User reputation based on text content
     reputation_6m = FloatField()
@@ -303,10 +342,18 @@ class UserIndex(CelerySearchIndex, Indexable):
     # Number of bookmarks on own images
     bookmarks = IntegerField()
 
+    # Comments received on on own images
+    comments_6m = IntegerField()
+    comments_1y = IntegerField()
     comments = IntegerField()
+
+    comments_written_6m = IntegerField()
+    comments_written_1y = IntegerField()
     comments_written = IntegerField()
 
-    username = CharField(model_attr='username')
+    forum_posts_6m = IntegerField()
+    forum_posts_1y = IntegerField()
+    forum_posts = IntegerField()
 
     def index_queryset(self, using=None):
         return self.get_model().objects.all()
@@ -360,6 +407,21 @@ class UserIndex(CelerySearchIndex, Indexable):
             likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
         return likes
 
+    def prepare_likes_given_6m(self, obj):
+        return ToggleProperty.objects.toggleproperties_for_model(
+            'like', Image, obj
+        ).filter(created_on__gte=_6m_ago()).count()
+
+    def prepare_likes_given_1y(self, obj):
+        return ToggleProperty.objects.toggleproperties_for_model(
+            'like', Image, obj
+        ).filter(created_on__gte=_1y_ago()).count()
+
+    def prepare_likes_given(self, obj):
+        return ToggleProperty.objects.toggleproperties_for_model(
+            'like', Image, obj
+        ).count()
+    
     def prepare_average_likes_6m(self, obj):
         likes = self.prepare_likes_6m(obj)
         images = Image.objects.filter(user=obj, uploaded__gte=_6m_ago()).count()
@@ -422,6 +484,114 @@ class UserIndex(CelerySearchIndex, Indexable):
         log.debug("User %d has image index: %.2f" % (obj.pk, result))
         return result
 
+    def prepare_comment_likes_given_6m(self, obj):
+        return ToggleProperty.objects.toggleproperties_for_model(
+            'like', NestedComment, obj
+        ).filter(created_on__gte=_6m_ago()).count()
+
+    def prepare_comment_likes_given_1y(self, obj):
+        return ToggleProperty.objects.toggleproperties_for_model(
+            'like', NestedComment, obj
+        ).filter(created_on__gte=_1y_ago()).count()
+
+    def prepare_comment_likes_given(self, obj):
+        return ToggleProperty.objects.toggleproperties_for_model(
+            'like', NestedComment, obj
+        ).count()
+
+    def prepare_comment_likes_received_6m(self, obj):
+        comments = NestedComment.objects.filter(author=obj, created__gte=_6m_ago())
+        likes = 0
+        for comment in comments.iterator():
+            likes += ToggleProperty.objects.toggleproperties_for_object('like', comment).count()
+
+        return likes
+
+    def prepare_comment_likes_received_1y(self, obj):
+        comments = NestedComment.objects.filter(author=obj, created__gte=_1y_ago())
+        likes = 0
+        for comment in comments.iterator():
+            likes += ToggleProperty.objects.toggleproperties_for_object('like', comment).count()
+
+        return likes
+
+    def prepare_comment_likes_received(self, obj):
+        comments = NestedComment.objects.filter(author=obj)
+        likes = 0
+        for comment in comments.iterator():
+            likes += ToggleProperty.objects.toggleproperties_for_object('like', comment).count()
+
+        return likes
+
+    def prepare_forum_post_likes_given_6m(self, obj):
+        return ToggleProperty.objects.toggleproperties_for_model(
+            'like', Post, obj
+        ).filter(created_on__gte=_6m_ago()).count()
+
+    def prepare_forum_post_likes_given_1y(self, obj):
+        return ToggleProperty.objects.toggleproperties_for_model(
+            'like', Post, obj
+        ).filter(created_on__gte=_1y_ago()).count()
+
+    def prepare_forum_post_likes_given(self, obj):
+        return ToggleProperty.objects.toggleproperties_for_model(
+            'like', Post, obj
+        ).count()
+
+    def prepare_forum_post_likes_received_6m(self, obj):
+        posts = Post.objects.filter(user=obj, created__gte=_6m_ago())
+        likes = 0
+        for post in posts.iterator():
+            likes += ToggleProperty.objects.toggleproperties_for_object('like', post).count()
+
+        return likes
+
+    def prepare_forum_post_likes_received_1y(self, obj):
+        posts = Post.objects.filter(user=obj, created__gte=_1y_ago())
+        likes = 0
+        for post in posts.iterator():
+            likes += ToggleProperty.objects.toggleproperties_for_object('like', post).count()
+
+        return likes
+
+    def prepare_forum_post_likes_received(self, obj):
+        posts = Post.objects.filter(user=obj)
+        likes = 0
+        for post in posts.iterator():
+            likes += ToggleProperty.objects.toggleproperties_for_object('like', post).count()
+
+        return likes
+
+    def prepare_total_likes_received_6m(self, obj):
+        return self.prepare_likes_6m(obj) + \
+               self.prepare_comment_likes_received_6m(obj) + \
+               self.prepare_forum_post_likes_received_6m(obj)
+
+    def prepare_total_likes_received_1y(self, obj):
+        return self.prepare_likes_1y(obj) + \
+               self.prepare_comment_likes_received_1y(obj) + \
+               self.prepare_forum_post_likes_received_1y(obj)
+
+    def prepare_total_likes_received(self, obj):
+        return self.prepare_likes(obj) + \
+               self.prepare_comment_likes_received(obj) + \
+               self.prepare_forum_post_likes_received(obj)
+
+    def prepare_total_likes_given_6m(self, obj):
+        return self.prepare_likes_6m(obj) + \
+               self.prepare_comment_likes_given_6m(obj) + \
+               self.prepare_forum_post_likes_given_6m(obj)
+
+    def prepare_total_likes_given_1y(self, obj):
+        return self.prepare_likes_1y(obj) + \
+               self.prepare_comment_likes_given_1y(obj) + \
+               self.prepare_forum_post_likes_given_1y(obj)
+
+    def prepare_total_likes_given(self, obj):
+        return self.prepare_likes(obj) + \
+               self.prepare_comment_likes_given(obj) + \
+               self.prepare_forum_post_likes_given(obj)
+    
     def prepare_reputation_6m(self, obj):
         return _prepare_comment_reputation(NestedComment.objects.filter(author=obj, created__gte=_6m_ago())) + \
                _prepare_forum_post_reputation(Post.objects.filter(user=obj, created__gte=_6m_ago()))
@@ -499,14 +669,41 @@ class UserIndex(CelerySearchIndex, Indexable):
             bookmarks += _prepare_bookmarks(i)
         return bookmarks
 
+    def prepare_comments_6m(self, obj):
+        comments = 0
+        for i in Image.objects.filter(user=obj, published__gte=_6m_ago()):
+            comments += _prepare_comments(i)
+        return comments
+
+    def prepare_comments_1y(self, obj):
+        comments = 0
+        for i in Image.objects.filter(user=obj, published__gte=_1y_ago()):
+            comments += _prepare_comments(i)
+        return comments
+
     def prepare_comments(self, obj):
         comments = 0
         for i in Image.objects.filter(user=obj):
             comments += _prepare_comments(i)
         return comments
 
+    def prepare_comments_written_6m(self, obj):
+        return NestedComment.objects.filter(author=obj, deleted=False, created__gte=_6m_ago()).count()
+
+    def prepare_comments_written_1y(self, obj):
+        return NestedComment.objects.filter(author=obj, deleted=False, created__gte=_1y_ago()).count()
+
     def prepare_comments_written(self, obj):
         return NestedComment.objects.filter(author=obj, deleted=False).count()
+
+    def prepare_forum_posts_6m(self, obj):
+        return Post.objects.filter(user=obj, created__gte=_6m_ago()).count()
+
+    def prepare_forum_posts_1y(self, obj):
+        return Post.objects.filter(user=obj,created__gte=_1y_ago()).count()
+
+    def prepare_forum_posts(self, obj):
+        return Post.objects.filter(user=obj).count()
 
 
 class ImageIndex(CelerySearchIndex, Indexable):
