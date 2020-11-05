@@ -125,91 +125,31 @@
                 <!-- comments -->
 
                 <td class="reputation-leaderboard-comments-written hidden-phone">
-                    {% if request.GET.t == '6m' %}
-                        {{ u.comments_written_6m }}
-                    {% endif %}
-
-                    {% if request.GET.t == '1y' or 't' not in request.GET %}
-                        {{ u.comments_written_1y }}
-                    {% endif %}
-
-                    {% if request.GET.t == 'all' %}
-                        {{ u.comments_written }}
-                    {% endif %}
+                    {{ u.comments_written }}
                 </td>
 
                 <td class="reputation-leaderboard-comments-received hidden-phone">
-                    {% if request.GET.t == '6m' %}
-                        {{ u.comments_6m }}
-                    {% endif %}
-
-                    {% if request.GET.t == '1y' or 't' not in request.GET %}
-                        {{ u.comments_1y }}
-                    {% endif %}
-
-                    {% if request.GET.t == 'all' %}
-                        {{ u.comments }}
-                    {% endif %}
+                    {{ u.comments }}
                 </td>
 
                 <td class="reputation-leaderboard-comment-likes-received hidden-phone">
-                    {% if request.GET.t == '6m' %}
-                        {{ u.comment_likes_received_6m }}
-                    {% endif %}
-
-                    {% if request.GET.t == '1y' or 't' not in request.GET %}
-                        {{ u.comment_likes_received_1y }}
-                    {% endif %}
-
-                    {% if request.GET.t == 'all' %}
-                        {{ u.comment_likes_received }}
-                    {% endif %}
+                    {{ u.comment_likes_received }}
                 </td>
 
                 <!-- forum posts -->
 
                 <td class="reputation-leaderboard-forum-posts hidden-phone">
-                    {% if request.GET.t == '6m' %}
-                        {{ u.forum_posts_6m }}
-                    {% endif %}
-
-                    {% if request.GET.t == '1y' or 't' not in request.GET %}
-                        {{ u.forum_posts_1y }}
-                    {% endif %}
-
-                    {% if request.GET.t == 'all' %}
-                        {{ u.forum_posts }}
-                    {% endif %}
+                    {{ u.forum_posts }}
                 </td>
 
                 <td class="reputation-leaderboard-forum-post-likes-received hidden-phone">
-                    {% if request.GET.t == '6m' %}
-                        {{ u.forum_post_likes_received_6m }}
-                    {% endif %}
-
-                    {% if request.GET.t == '1y' or 't' not in request.GET %}
-                        {{ u.forum_post_likes_received_1y }}
-                    {% endif %}
-
-                    {% if request.GET.t == 'all' %}
-                        {{ u.forum_post_likes_received }}
-                    {% endif %}
+                    {{ u.forum_post_likes_received }}
                 </td>
 
                 <!-- reputation -->
 
                 <td class="reputation-leaderboard-reputation">
-                    {% if request.GET.t == '6m' %}
-                        {{ u.reputation_6m|floatformat:2 }}
-                    {% endif %}
-
-                    {% if request.GET.t == '1y' or 't' not in request.GET %}
-                        {{ u.reputation_1y|floatformat:2 }}
-                    {% endif %}
-
-                    {% if request.GET.t == 'all' %}
-                        {{ u.reputation|floatformat:2 }}
-                    {% endif %}
+                    {{ u.reputation|floatformat:2 }}
                 </td>
             </tr>
         {% empty %}
