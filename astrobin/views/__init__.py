@@ -1338,7 +1338,7 @@ def user_page(request, username):
                     (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
                     (_('Forum posts'), "%d" % user_sqs[0].forum_posts),
                     (_('Comments'), "%d" % user_sqs[0].comments),
-                    (_('Likes (received)'), "%d" % user_sqs[0].total_likes_received),
+                    (_('Likes'), "%d" % user_sqs[0].total_likes_received),
                 )
             except SearchFieldError:
                 log.error("User page (%d): unable to get stats from search index" % user.pk)
