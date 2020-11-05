@@ -3911,7 +3911,7 @@ table.search-table {
   justify-content: center;
 
   #hidden-placeholder {
-      width: 100%; 
+      width: 100% !important; 
       height: 100%;
       max-height: 320px;
       max-width: 460px;
