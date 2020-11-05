@@ -25,30 +25,6 @@
         {% endblocktrans %}
     </div>
 
-    <div class="filter-toggle-group">
-        <div class="filter-toggle">
-            <a href="{% url 'reputation_leaderboard' %}{% query_string "t='6m'" "" %}" {% if request.GET.t == '6m' %}class="active"{%endif %}>
-                {% trans "Last 6 months" %}
-            </a>
-        </div>
-
-        <span class="separator">/</span>
-
-        <div class="filter-toggle">
-            <a href="{% url 'reputation_leaderboard' %}{% query_string "t='1y'" "" %}" {% if request.GET.t == '1y' or 't' not in request.GET %}class="active"{%endif %}>
-                {% trans "Last year" %}
-            </a>
-        </div>
-
-        <span class="separator">/</span>
-
-        <div class="filter-toggle">
-            <a href="{% url 'reputation_leaderboard' %}{% query_string "t='all'" "" %}" {% if request.GET.t == 'all' %}class="active"{%endif %}>
-                {% trans "All time" %}
-            </a>
-        </div>
-    </div>
-
     {% lazy_paginate 100 user_list using "page" %}
     {% get_pages %}
 

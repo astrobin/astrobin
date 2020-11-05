@@ -2259,10 +2259,9 @@ def trending_astrophotographers(request):
 def reputation_leaderboard(request):
     queryset = SearchQuerySet()
 
-    t = request.GET.get('t', '1y')
     sort = request.GET.get('sort', '-reputation')
 
-    if t not in ('all', '1y', '6m') or sort not in (
+    if sort not in (
         'comments_written',
         'comments',
         'comment_likes_received',
@@ -2278,9 +2277,6 @@ def reputation_leaderboard(request):
         '-reputation'
     ):
         raise Http404
-
-    if t != 'all':
-        sort += '_%s' % t
 
     queryset = queryset.models(User).order_by(sort)
 
