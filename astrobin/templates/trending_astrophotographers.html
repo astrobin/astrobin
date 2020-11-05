@@ -60,6 +60,11 @@
                         {% trans "Images" %} <i class="icon-sort"></i>
                     </a>
                 </th>
+                <th class="trending-astrophotographers-likes hidden-phone">
+                    <a href="{% url 'trending_astrophotographers' %}{% query_string "sort='likes'" "" %}">
+                        {% trans "Likes" %} <i class="icon-sort"></i>
+                    </a>
+                </th>
                 <th class="trending-astrophotographers-integration hidden-phone">
                     <a href="{% url 'trending_astrophotographers' %}{% query_string "sort='integration'" "" %}">
                         {% trans "Total integration" %} <i class="icon-sort"></i>
@@ -123,6 +128,20 @@
                     {% endif %}
                 </td>
 
+                <td class="trending-astrophotographers-likes hidden-phone">
+                    {% if request.GET.t == '6m' %}
+                        {{ u.likes_6m }}
+                    {% endif %}
+
+                    {% if request.GET.t == '1y' or 't' not in request.GET %}
+                        {{ u.likes_1y }}
+                    {% endif %}
+
+                    {% if request.GET.t == 'all' %}
+                        {{ u.likes }}
+                    {% endif %}
+                </td>
+
                 <td class="trending-astrophotographers-integration hidden-phone">
                     {% if request.GET.t == '6m' %}
                         {{u.integration_6m|floatformat:2}}
@@ -135,6 +154,12 @@
                     {% if request.GET.t == 'all' %}
                         {{u.integration|floatformat:2}}
                     {% endif %}
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="7">
+                    {% trans "There isn't enough data yet, please come back later!" %}
                 </td>
             </tr>
         {% endfor %}

@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 # Third party
+from mock import patch
 from pybb.models import Post, Topic, Forum, Category
 from pybb.forms import PostForm
 from subscription.models import Subscription, UserSubscription
@@ -88,12 +89,16 @@ class ForumTest(TestCase):
         g.delete()
 
 
-    def test_create_post_high_index(self):
-        with self.settings(MIN_INDEX_TO_LIKE = 0):
-            form = self._get_post_form()
-            post, topic = form.save(commit = False)
+    @patch('astrobin.models.UserProfile.get_scores')
+    def test_create_post_high_index(self, get_scores):
+        get_scores.return_value = {
+            'user_scores_index': 1000
+        }
 
-            self.assertEqual(post.on_moderation, False)
+        form = self._get_post_form()
+        post, topic = form.save(commit = False)
+
+        self.assertEqual(post.on_moderation, False)
 
 
     def test_create_post_multiple_approved(self):
