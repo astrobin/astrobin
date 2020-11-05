@@ -2219,39 +2219,55 @@ def stats(request):
 
 @require_GET
 def trending_astrophotographers(request):
-    response_dict = {}
-
-    if 'page' in request.GET:
-        raise Http404
-
     sqs = SearchQuerySet()
 
-    sort = request.GET.get('sort', 'index')
-    if sort == 'index':
-        sort = '-normalized_likes'
-    elif sort == 'followers':
-        sort = '-followers'
-    elif sort == 'integration':
-        sort = '-integration'
-    elif sort == 'images':
-        sort = '-images'
-    elif sort == 'likes':
-        sort = '-likes'
-    else:
-        sort = '-normalized_likes'
+    default_sorting = [
+        '-normalized_likes',
+        '-likes',
+        '-images',
+    ]
 
+    sort = request.GET.get('sort', default_sorting)
     t = request.GET.get('t', '1y')
-    if t not in ('', 'all', None):
-        sort += '_%s' % t
 
-    queryset = sqs.models(User).order_by(sort)
+    if sort not in (
+        default_sorting,
+
+        'normalized_likes',
+        'followers',
+        'images',
+        'likes',
+        'integration',
+
+        '-normalized_likes',
+        '-followers',
+        '-images',
+        '-likes',
+        '-integration',
+    ) or t not in (
+        '',
+        'all',
+        '6m',
+        '1y'
+    ):
+        raise Http404
+
+    if not isinstance(sort, list):
+        sort = [sort, ]
+
+    if t not in ('', 'all', None):
+        sort = ['%s_%s' % (x, t) for x in sort]
+
+    queryset = sqs.models(User).order_by(*sort)
+
+    if 'q' in request.GET:
+        queryset = queryset.filter(text__contains=request.GET.get('q'))
 
     return object_list(
         request,
         queryset=queryset,
         template_name='trending_astrophotographers.html',
         template_object_name='user',
-        extra_context=response_dict,
     )
 
 
@@ -2259,9 +2275,19 @@ def trending_astrophotographers(request):
 def reputation_leaderboard(request):
     queryset = SearchQuerySet()
 
-    sort = request.GET.get('sort', '-reputation')
+    default_sorting = [
+        '-reputation',
+        '-comment_likes_received',
+        '-forum_post_likes_received',
+        '-comments_written',
+        '-forum_posts'
+    ]
+
+    sort = request.GET.get('sort', default_sorting)
 
     if sort not in (
+        default_sorting,
+
         'comments_written',
         'comments',
         'comment_likes_received',
@@ -2278,7 +2304,13 @@ def reputation_leaderboard(request):
     ):
         raise Http404
 
-    queryset = queryset.models(User).order_by(sort)
+    if not isinstance(sort, list):
+        sort = [sort,]
+
+    queryset = queryset.models(User).order_by(*sort)
+
+    if 'q' in request.GET:
+        queryset = queryset.filter(text__contains=request.GET.get('q'))
 
     return object_list(
         request,
