@@ -2369,9 +2369,9 @@ class UserProfile(SafeDeleteModel):
                     SearchQuerySet().models(User).filter(django_id=self.user.pk)[0]
             except (IndexError, SearchFieldError):
                 return {
-                    'user_scores_index': 0,
-                    'user_scores_reputation': 0,
-                    'user_scores_followers': 0
+                    'user_scores_index': None,
+                    'user_scores_reputation': None,
+                    'user_scores_followers': None
                 }
 
             scores = {

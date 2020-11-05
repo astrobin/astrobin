@@ -3957,6 +3957,7 @@ table.search-table {
   .trending-astrophotographers-index,
   .trending-astrophotographers-followers,
   .trending-astrophotographers-images,
+  .trending-astrophotographers-likes,
   .trending-astrophotographers-integration {
     text-align: center;
     width: 15%;
@@ -3968,7 +3969,24 @@ table.search-table {
 }
 
 .reputation-leaderboard {
-  .reputation-leaderboard-position {
+  table-layout: initial;
+
+  colgroup {
+    .comments {
+      background-color: $grey-5;
+    }
+
+    .forum-posts {
+      background-color: $grey-8;
+    }
+  }
+
+  th {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+    .reputation-leaderboard-position {
     width: 25px;
   }
 

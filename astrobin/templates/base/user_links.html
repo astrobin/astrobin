@@ -40,13 +40,30 @@
                         <span class="hidden-phone username">{{request.user.userprofile|truncatechars:"20"}}</span>
                         <span id="navbar-user-scores">
                             {% if not request.user.userprofile.exclude_from_competitions %}
-                            <span id="astrobin-index" rel="tooltip" data-placement="bottom" title="{% trans "AstroBin index" %}">
-                                  {{user_scores_index|floatformat:2}}
-                            </span> &bull;
+                                {% if user_scores_index is not None %}
+                                    <span id="astrobin-index" rel="tooltip" data-placement="bottom"
+                                          title="{% trans "AstroBin Index" %}">
+                                          {{user_scores_index|floatformat:2}}
+                                    </span> &middot;
+                                {% else %}
+                                    <span id="astrobin-index" rel="tooltip" data-placement="bottom"
+                                          title="{% trans "AstroBin Index" %} - {% trans "Data is refreshing..." %}">
+                                          {% trans "n/a" %}
+                                    </span> &middot;
+                                {% endif %}
                             {% endif %}
-                            <span rel="tooltip" data-placement="bottom" title="{% trans "Reputation" %}">
-                                {{ user_scores_reputation|floatformat:2}}
-                            </span>
+
+                            {% if user_scores_index is not None %}
+                                <span id="astrobin-reputation" rel="tooltip" data-placement="bottom"
+                                      title="{% trans "Reputation" %}">
+                                    {{ user_scores_reputation|floatformat:2}}
+                                </span>
+                            {% else %}
+                                <span id="astrobin-reputation" rel="tooltip" data-placement="bottom"
+                                      title="{% trans "Reputation" %} - {% trans "Data is refreshing..." %}">
+                                      {% trans "n/a" %}
+                                </span>
+                            {% endif %}
                         </span>
                     </a>
                     <a href="#" class="btn btn-primary dropdown-toggle user-dropdown" data-toggle="dropdown">
