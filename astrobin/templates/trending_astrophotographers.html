@@ -17,10 +17,20 @@
 
 {% block content %}
     <div id="trending-astrophotographers-page">
+        <div class="subtitle">
+            <i class="icon icon-info-sign"></i>
+            {% blocktrans trimmed with '<a class="btn btn-primary btn-mini" href="https://welcome.astrobin.com/features/index" target="_blank">' as _0 and '</a>' as _1 %}
+                The <strong>AstroBin Index</strong> is point based system based on likes received on image, that
+                incentivizes the most active and liked members of the community. {{ _0 }}Learn more.{{ _1 }}
+            {% endblocktrans %}
+        </div>
+
         <form id="trending-astrophotographers-search" class="form form-horizontal"
               method="get" action="{% url 'trending_astrophotographers' %}">
             <input type="text" id="trending-astrophotographers-search-input" name="q" placeholder="{% trans "Search" %}"
                    value="{% if 'q' in request.GET %}{{ request.GET.q }}{% endif %}" />
+            <input type="hidden" name="t" value="{% if 't' in request.GET %}{{ request.GET.t }}{% endif %}" />
+            <input type="hidden" name="sort" value="{% if 'sort' in request.GET %}{{ request.GET.sort }}{% endif %}" />
         </form>
 
         <div class="filter-toggle-group">

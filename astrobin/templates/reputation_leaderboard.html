@@ -20,14 +20,10 @@
     <div id="reputation-leaderboard-page">
         <div class="subtitle">
             <i class="icon icon-info-sign"></i>
-            {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/features/reputation" target="_blank">' as _0 and '</a>' as _1 %}
+            {% blocktrans trimmed with '<a class="btn btn-primary btn-mini" href="https://welcome.astrobin.com/features/reputation" target="_blank">' as _0 and '</a>' as _1 %}
                 The <strong>Reputation Score (beta)</strong> is point based system to reward informative, constructive, and
                 valuable commentary on AstroBin. {{_0}}Learn more.{{_1}}
             {% endblocktrans %}
-        </div>
-
-        <div class="alert alert-warning">
-            {% trans "Warning: data in this page is currently incomplete while it is still being populated." %}
         </div>
 
         <form id="reputation-leaderboard-search" class="form form-horizontal" method="get"
@@ -35,6 +31,7 @@
             <input type="text" id="reputation-leaderboard-search-input" name="q"
                    placeholder="{% trans "Search" %}"
                    value="{% if 'q' in request.GET %}{{ request.GET.q }}{% endif %}"/>
+            <input type="hidden" name="sort" value="{% if 'sort' in request.GET %}{{ request.GET.sort }}{% endif %}" />
         </form>
 
         {% lazy_paginate 100 user_list using "page" %}

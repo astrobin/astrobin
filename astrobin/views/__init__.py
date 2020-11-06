@@ -2230,6 +2230,9 @@ def trending_astrophotographers(request):
     sort = request.GET.get('sort', default_sorting)
     t = request.GET.get('t', '1y')
 
+    if sort == '':
+        sort = default_sorting
+
     if sort not in (
         default_sorting,
 
@@ -2284,6 +2287,9 @@ def reputation_leaderboard(request):
     ]
 
     sort = request.GET.get('sort', default_sorting)
+
+    if sort == '':
+        sort = default_sorting
 
     if sort not in (
         default_sorting,
