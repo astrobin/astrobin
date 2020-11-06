@@ -1,13 +1,28 @@
 {% load i18n %}
-{% with "https://www.astrobin.com/help/api/" as api_docs_url %}
-    {% blocktrans %}Your request for an API Key has been approved!
 
-    Your key: {{key}}
-    Your secret: {{secret}}
+{% blocktrans trimmed %}
+    Your request for an API Key has been approved!
+{% endblocktrans %}
 
-    Please read the API documentation at <a href="{{api_docs_url}}">{{api_docs_url}}</a>
+<br /><br />
 
-    You can review your API keys at <a href="{{api_keys_url}}">{{api_keys_url}}</a>
+{% trans "Your API key" %}: <strong>{{ key }}</strong><br />
+{% trans "Your API secret" %}: <strong>{{ secret }}</strong>
 
-    Thank you for using AstroBin's APIs!{% endblocktrans %}
-{% endwith %}
+<br /><br />
+
+{% blocktrans trimmed with '<a href="https://www.astrobin.com/help/api/">' as _0 and '</a>' as _1 %}
+    Please read the API documentation {{ _0 }}here{{ _1 }}.
+{% endblocktrans %}
+
+<br /><br />
+
+{% blocktrans trimmed %}
+    You can review your API keys at <a href="{{ api_keys_url }}">{{ api_keys_url }}</a>
+{% endblocktrans %}
+
+<br /><br />
+
+{% blocktrans trimmed%}
+    Thank you for using AstroBin's APIs!
+{% endblocktrans %}

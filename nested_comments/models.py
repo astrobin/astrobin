@@ -1,6 +1,8 @@
 # Django
 from django.contrib.auth.models import User
 
+from toggleproperties.models import ToggleProperty
+
 try:
     # Django < 1.10
     from django.contrib.contenttypes.generic import GenericForeignKey
@@ -59,6 +61,21 @@ class NestedComment(models.Model):
         default = False,
     )
 
+    @property
+    def depth(self):
+        value = 1
+        if self.parent:
+            return value + self.parent.depth
+        return value
+
+    @property
+    def likes(self):
+        return ToggleProperty.objects.filter(
+            object_id=self.pk,
+            content_type=ContentType.objects.get_for_model(NestedComment),
+            property_type='like'
+        ).values_list('user__pk', flat=True)
+
     def __unicode__(self):
         return "Comment %d" % self.pk
 
@@ -66,7 +83,7 @@ class NestedComment(models.Model):
         object_url = self.content_type.get_object_for_this_type(id = self.object_id).get_absolute_url()
         return '%s#c%d' % (object_url, self.id)
 
-    def delete(self):
+    def delete(self, *args, **kwargs):
         if not self.deleted:
             self.deleted = True
             self.save()

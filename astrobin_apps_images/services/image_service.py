@@ -17,6 +17,12 @@ class ImageService:
 
     def get_revision(self, label):
         # type: (str) -> ImageRevision
+        if label is None or label is 0 or label is '0':
+            raise ValueError("`label` must be a revision label (B or more)")
+
+        if label == 'final':
+            label = self.get_final_revision_label()
+
         return ImageRevision.objects.get(image=self.image, label=label)
 
     def get_final_revision_label(self):
@@ -172,3 +178,23 @@ class ImageService:
         return Image.objects_including_wip.filter(
             moderator_decision=0,
             uploaded__lt = datetime.now() - timedelta(minutes=10))
+
+    def get_hemisphere(self, revision_label=None):
+        # type: (str) -> str
+
+        target = None  # type: union[Image, ImageRevision]
+
+        if revision_label is None or revision_label == '0':
+            target = self.image
+        else:
+            try:
+                target = self.get_revision(revision_label)
+            except ImageRevision.DoesNotExist:
+                return Image.HEMISPHERE_TYPE_UNKNOWN
+
+        solution = target.solution  # type: Solution
+
+        if solution is None or solution.dec is None:
+            return Image.HEMISPHERE_TYPE_UNKNOWN
+
+        return Image.HEMISPHERE_TYPE_NORTHERN if solution.dec >= 0 else Image.HEMISPHERE_TYPE_SOUTHERN

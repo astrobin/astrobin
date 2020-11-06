@@ -50,6 +50,7 @@ THUMBNAIL_ALIASES = {
 
         # IOTD
         'iotd': {'size': (1000, 380), 'crop': 'smart', 'watermark': True, 'keep_icc_profile': True},
+        'iotd_mobile': {'size': (782, 480), 'crop': 'smart', 'watermark': True, 'keep_icc_profile': True},
         'iotd_candidate': {'size': (960, 0), 'crop': 'smart', 'watermark': False, 'keep_icc_profile': True},
 
         # Activity stream
@@ -58,6 +59,9 @@ THUMBNAIL_ALIASES = {
         # Duckduckgo
         'duckduckgo': {'size': (250, 200), 'crop': 'smart', 'quality': 80},
         'duckduckgo_small': {'size': (113, 90), 'crop': 'smart', 'quality': 80},
+
+        # Social
+        'instagram_story': {'size': (1080, 1920), 'crop': 'smart', 'quality': 80},
     },
 }
 THUMBNAIL_QUALITY = 100

@@ -1,0 +1,34 @@
+@import "variables";
+
+#reputation-leaderboard-page {
+  #reputation-leaderboard-search {
+    @media screen and (min-width: 768px) {
+      width: 300px;
+      float: right;
+      margin-bottom: 20px;
+    }
+  }
+
+  .reputation-leaderboard {
+    table-layout: initial;
+
+    colgroup {
+      .comments {
+        background-color: $grey-5;
+      }
+
+      .forum-posts {
+        background-color: $grey-8;
+      }
+    }
+
+    th {
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .reputation-leaderboard-position {
+      width: 25px;
+    }
+  }
+}

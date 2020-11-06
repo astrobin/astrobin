@@ -77,6 +77,10 @@ class IotdTest(TestCase):
         self.assertEqual(submission.submitter, self.submitter_1)
         self.assertEqual(submission.image, self.image)
 
+        # Badge is present
+        response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
+        self.assertContains(response, 'top-pick-nomination-badge')
+
         # Image cannot be submitted again
         with self.assertRaisesRegexp(ValidationError, "already exists"):
             IotdSubmission.objects.create(
@@ -121,7 +125,7 @@ class IotdTest(TestCase):
         self.image.is_wip = False
         self.image.save(keep_deleted=True)
 
-    def test_submission_model_image_owner_must_not_excluded_from_cometitions(self):
+    def test_submission_model_image_owner_must_not_be_excluded_from_cometitions(self):
         Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
         self.image.user.userprofile.exclude_from_competitions = True
         self.image.user.userprofile.save(keep_deleted=True)
@@ -130,6 +134,17 @@ class IotdTest(TestCase):
                 submitter=self.submitter_1,
                 image=self.image)
         self.image.user.userprofile.exclude_from_competitions = False
+        self.image.user.userprofile.save(keep_deleted=True)
+
+    def test_submission_model_image_owner_must_not_be_banned_from_cometitions(self):
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        self.image.user.userprofile.banned_from_competitions = datetime.now()
+        self.image.user.userprofile.save(keep_deleted=True)
+        with self.assertRaisesRegexp(ValidationError, "banned from competitions"):
+            IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+        self.image.user.userprofile.banned_from_competitions = None
         self.image.user.userprofile.save(keep_deleted=True)
 
     def test_submission_model_cannot_submit_own_image(self):
@@ -248,6 +263,16 @@ class IotdTest(TestCase):
                 submitter=self.submitter_1,
                 image=self.image)
         self.image.user.userprofile.exclude_from_competitions = False
+        self.image.user.userprofile.save(keep_deleted=True)
+
+    def test_vote_model_image_owner_must_not_be_banned_from_competitions(self):
+        self.image.user.userprofile.banned_from_competitions = datetime.now()
+        self.image.user.userprofile.save(keep_deleted=True)
+        with self.assertRaisesRegexp(ValidationError, "banned from competitions"):
+            IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+        self.image.user.userprofile.banned_from_competitions = None
         self.image.user.userprofile.save(keep_deleted=True)
 
     def test_vote_model_cannot_vote_own_image(self):
@@ -454,6 +479,16 @@ class IotdTest(TestCase):
                 submitter=self.submitter_1,
                 image=self.image)
         self.image.user.userprofile.exclude_from_competitions = False
+        self.image.user.userprofile.save(keep_deleted=True)
+
+        # Image owner must not be banned from competitions
+        self.image.user.userprofile.banned_from_competitions = datetime.now()
+        self.image.user.userprofile.save(keep_deleted=True)
+        with self.assertRaisesRegexp(ValidationError, "banned from competitions"):
+            IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+        self.image.user.userprofile.banned_from_competitions = None
         self.image.user.userprofile.save(keep_deleted=True)
 
         # Cannot elect own image

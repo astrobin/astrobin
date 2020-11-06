@@ -787,6 +787,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         'accessories': Accessory,
     }
 
+    HEMISPHERE_TYPE_UNKNOWN = 'HEMISPHERE_TYPE_UNKNOWN'
+    HEMISPHERE_TYPE_NORTHERN = 'HEMISPHERE_TYPE_NORTHERN'
+    HEMISPHERE_TYPE_SOUTHERN = 'HEMISPHERE_TYPE_SOUTHERN'
+
     solutions = GenericRelation(Solution)
 
     corrupted = models.BooleanField(
@@ -2097,6 +2101,12 @@ class UserProfile(SafeDeleteModel):
             "Check this box to be excluded from competitions and contests, such as the Image of the Day, the Top Picks, other custom contests. This will remove you from the leaderboards and hide your AstroBin Index."),
     )
 
+    banned_from_competitions = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
     # Gear
     telescopes = models.ManyToManyField(Telescope, blank=True, verbose_name=_("Telescopes and lenses"),
                                         related_name='telescopes')
@@ -2350,11 +2360,6 @@ class UserProfile(SafeDeleteModel):
         from haystack.exceptions import SearchFieldError
         from haystack.query import SearchQuerySet
 
-        scores = {
-            'user_scores_index': 0,
-            'user_scores_followers': 0,
-        }
-
         cache_key = "astrobin_user_score_%s" % self.user.username
         scores = cache.get(cache_key)
 
@@ -2364,17 +2369,18 @@ class UserProfile(SafeDeleteModel):
                     SearchQuerySet().models(User).filter(django_id=self.user.pk)[0]
             except (IndexError, SearchFieldError):
                 return {
-                    'user_scores_index': 0,
-                    'user_scores_followers': 0
+                    'user_scores_index': None,
+                    'user_scores_reputation': None,
+                    'user_scores_followers': None
                 }
 
-            index = user_search_result.normalized_likes
-            followers = user_search_result.followers
+            scores = {
+                'user_scores_index': user_search_result.normalized_likes,
+                'user_scores_reputation': user_search_result.reputation,
+                'user_scores_followers': user_search_result.followers,
+            }
 
-            scores = {}
-            scores['user_scores_index'] = index
-            scores['user_scores_followers'] = followers
-            cache.set(cache_key, scores, 43200)
+            cache.set(cache_key, scores, 300)
 
         return scores
 
@@ -2657,6 +2663,9 @@ class ImageOfTheDayCandidate(models.Model):
     def save(self, *args, **kwargs):
         if self.image.user.userprofile.exclude_from_competitions:
             raise ValidationError, "User is excluded from competitions"
+
+        if self.image.user.userprofile.banned_from_competitions:
+            raise ValidationError, "User is banned from competitions"
 
         super(ImageOfTheDayCandidate, self).save(*args, **kwargs)
 

@@ -675,7 +675,6 @@ class ImageDetailView(ImageDetailViewBase):
             'like_this': like_this,
             'user_can_like': can_like(self.request.user, image),
             'bookmarked_this': bookmarked_this,
-            'min_index_to_like': settings.MIN_INDEX_TO_LIKE,
 
             'comments_number': NestedComment.objects.filter(
                 deleted=False,
@@ -697,6 +696,7 @@ class ImageDetailView(ImageDetailViewBase):
                              (image.subject_type != SubjectType.DEEP_SKY),
             'subjects': subjects,
             'subject_type': ImageService(image).get_subject_type_label(),
+            'hemisphere': ImageService(image).get_hemisphere(r),
             'license_icon': static('astrobin/icons/%s' % licenses[image.license][1]),
             'license_title': licenses[image.license][2],
             'resolution': '%dx%d' % (w, h) if (w and h) else None,

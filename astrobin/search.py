@@ -125,6 +125,9 @@ class AstroBinSearchForm(SearchForm):
             if "top-pick" in types:
                 results = results.filter(is_top_pick=True)
 
+            if "top-pick-nomination" in types:
+                results = results.filter(is_top_pick_nomination=True)
+
         return results
 
     def filterByCameraType(self, results):

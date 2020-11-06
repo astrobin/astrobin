@@ -34,6 +34,18 @@ body.full {
   }
 }
 
+#user-scores-popover {
+  h4 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 12px;
+    line-height: 17px;
+    color: $grey-4;
+  }
+}
+
 .dropdown-backdrop {
   position: static;
 }
@@ -101,18 +113,16 @@ body.full {
 }
 
 .navbar-search {
-  margin-top: 7px;
-  margin-bottom: -6px;
-}
+  margin-top: 4px;
 
-.navbar input {
-  color: #b8b8b8;
-  background-color: #404040;
-  border-color: $grey-6;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
-  width: 120px;
+  input {
+    color: $grey-2;
+    background-color: $grey-5;
+    border-color: $grey-6;
+    border-radius: 8px;
+    width: 120px;
+    margin-bottom: 0;
+  }
 }
 
 .navbar .bubble input {
@@ -174,6 +184,10 @@ body.full {
   -moz-border-radius: 0;
   border-radius: 0;
   color: $strong-text-color;
+
+  @media screen and (min-width: 768px) {
+    padding-bottom: 6px;
+  }
 }
 
 .subnav .nav > li > a:hover, .subnav .nav > li > a:focus {
@@ -235,11 +249,11 @@ body.full {
   right: 0;
   z-index: 1020; /* 10 less than .navbar-fixed to prevent any overlap */
   @include rounded-corners-top;
-}
 
-.subnav-fixed .nav {
-  margin: 0 auto;
-  padding: 0 20px;
+  .nav {
+    margin: 0 auto;
+    padding: 0 20px;
+  }
 }
 
 .subnav .nav > li:first-child > a,

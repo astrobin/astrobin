@@ -10,7 +10,7 @@ BROKER_TRANSPORT_OPTIONS = {
 }
 CELERY_RESULT_BACKEND = BROKER_URL
 CELERY_IMPORTS = ('astrobin.tasks', 'djcelery_email.tasks')
-CELERY_DEFAULT_QUEUE = 'main'
+CELERY_DEFAULT_QUEUE = 'default'
 CELERY_HAYSTACK_QUEUE = 'haystack'
 CELERY_ACCEPT_CONTENT = ['json', 'pickle']
 CELERY_TASK_SERIALIZER = 'json'
@@ -19,11 +19,12 @@ CELERY_TIMEZONE = TIME_ZONE
 CELERY_WORKER_MAX_TASKS_PER_CHILD = 100
 
 CELERY_QUEUES = (
-    Queue('main', Exchange('main'), routing_key='main'),
+    Queue('default', Exchange('default'), routing_key='default'),
     Queue('email', Exchange('email'), routing_key='email'),
     Queue('haystack', Exchange('haystack'), routing_key='haystack'),
     Queue('thumbnails', Exchange('thumbnails'), routing_key='thumbnails'),
 )
+
 CELERY_ROUTES = {
     'astrobin.tasks.retrieve_thumbnail': {
         'queue': 'thumbnails',
@@ -49,5 +50,4 @@ CELERY_ROUTES = {
         'queue': 'email',
         'routing_key': 'email',
     },
-
 }

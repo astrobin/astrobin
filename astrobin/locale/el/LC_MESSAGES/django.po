@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:02+0000\n"
+"POT-Creation-Date: 2020-10-30 07:27+0000\n"
 "PO-Revision-Date: 2014-01-24 09:40+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -761,36 +761,6 @@ msgstr "Ζιμπάμπουε"
 msgid "Users"
 msgstr "Χρήστες"
 
-msgid "Make"
-msgstr "Μάρκα"
-
-msgid "The make, brand, producer or developer of this product."
-msgstr "Η κατασκευή, μάρκα, παραγωγός ή προγραμματιστής του προϊόντος."
-
-msgid "Name"
-msgstr "Όνομα"
-
-msgid "Merge"
-msgstr "Συγχώνευση"
-
-msgid ""
-"Use this field to mark that the item you are claiming really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"Χρησιμοποιείστε αυτό το πεδίο για να σημειώσετε ότι το αντικείμενο που "
-"διεκδικείτε είναι το ίδιο προϊόν (ή ως εκ τούτου μια παραλλαγή) ενός "
-"αντικειμένου που διεκδικήσατε παλαιότερα."
-
-#, python-format
-msgid ""
-"You can't create more than %d claims. Consider upgrading your affiliation!"
-msgstr ""
-"Δεν μπορείτε να δημιουργήσετε %d διεκδικήσεις. Σκεφτείτε να αναβαθμίσετε τον "
-"εμπορικό λογαριασμό σας!"
-
-msgid "You have already claimed this product."
-msgstr "Έχετε ήδη διεκδικήσει αυτό το προϊόν."
-
 msgid ""
 "Select a tag to order this collection by its value. If you see no options "
 "here, it's because none of the images in this collection have key/value "
@@ -937,14 +907,6 @@ msgid "Longitude (seconds)"
 msgstr "Γεωγραφικό μήκος (δευτερόλεπτα)"
 
 msgid ""
-"Use this field to mark that the item you are merging really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"Χρησιμοποιείστε αυτό το πεδίο για να σημειώσετε ότι το αντικείμενο που "
-"συγχωνεύετε είναι το ίδιο προϊον (ή ως εκ τούτου μια παραλλαγή) με κάποιο "
-"που έχετε διεκδικήσει παλαιότερα."
-
-msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
 "guiding, go here."
 msgstr ""
@@ -1012,9 +974,6 @@ msgstr "προστέθηκε στους σελιδοδείκτες"
 
 msgid "likes"
 msgstr "αρέσει"
-
-msgid "has written a review on"
-msgstr "έγραψε μια κριτική για"
 
 #, fuzzy
 msgid "created a new public group"
@@ -1201,6 +1160,15 @@ msgstr "Κάτω κέντρο"
 
 msgid "Bottom right"
 msgstr "Κάτω δεξιά"
+
+msgid "Make"
+msgstr "Μάρκα"
+
+msgid "The make, brand, producer or developer of this product."
+msgstr "Η κατασκευή, μάρκα, παραγωγός ή προγραμματιστής του προϊόντος."
+
+msgid "Name"
+msgstr "Όνομα"
 
 msgid ""
 "Just the name of this product, without any properties or personal "
@@ -1836,6 +1804,22 @@ msgstr "TIFF/FITS"
 msgid "Higher resolution"
 msgstr "Υψηλότερη ανάλυση"
 
+#, fuzzy
+msgid "I am no longer active in astrophotography"
+msgstr "Επεξεργαστία του εξοπλισμού αστροφωτογράφησής σας"
+
+msgid "This website did not meet my expectations"
+msgstr ""
+
+msgid "Something on this website doesn't work for me"
+msgstr ""
+
+msgid "The paid subscriptions are too expensive"
+msgstr ""
+
+msgid "I prefer not to say"
+msgstr ""
+
 msgid "Real name"
 msgstr "Πραγματικό όνομα"
 
@@ -1868,31 +1852,17 @@ msgstr "Σχετικά με εσάς"
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "Γράψτε κάτι για τον εαυτό σας. Επιτρέπονται HTML tags."
 
-msgid "Company name"
-msgstr "Όνομα εταιρίας"
+#, fuzzy
+msgid "Delete reason"
+msgstr "Διαγραφή συζήτησης"
 
-msgid "The name of the company you represent on AstroBin."
-msgstr "Το όνομα της εταιρίας που αντιπροσωπεύετε στο AstroBin."
-
-msgid "Company description"
-msgstr "Περιγραφή της εταιρίας"
+msgid "Why are you deleting your AstroBin account?"
+msgstr ""
 
 msgid ""
-"A short description of the company you represent on AstroBin. You can use "
-"some <a href=\"/faq/#comments\">formatting rules</a>."
+"Please tell us why you are deleting your account (minimum 30 characters). "
+"Thanks!"
 msgstr ""
-"Μια σύντομη περιγραφή της εταιρίας που αντιπροσωπεύετε στο AstroBin. "
-"Μπορείτε να χρησιμοποιήσετε μερικούς <a href=\"/faq/#10\">κανόνες "
-"μορφοποίησης</a>."
-
-msgid "Company website"
-msgstr "Ιστοσελίδα εταιρίας"
-
-msgid "The website of the company you represent on AstroBin."
-msgstr "Η ιστοσελίδα της εταιρίας που αντιπροσωπεύετε στο AstroBin."
-
-msgid "Country of operation"
-msgstr "Χώρα δραστηριότητας"
 
 msgid "I want to be excluded from competitions"
 msgstr ""
@@ -1991,6 +1961,18 @@ msgid ""
 "and this kind of support would be amazing. Thank you in advance!"
 msgstr ""
 
+#, fuzzy
+#| msgid "Total integration"
+msgid "Allow retailer integration"
+msgstr "Συνολική ολοκλήρωση"
+
+msgid ""
+"AstroBin may associate with retailers of astronomy and astrophotography "
+"equipment to enhance the display of equipment items with links to sponsoring "
+"partners. The integration is subtle and non intrusive, and it would help a "
+"lot if you didn't disable it. Thank you in advance!"
+msgstr ""
+
 msgid "Language"
 msgstr "Γλώσσα"
 
@@ -2069,105 +2051,6 @@ msgid ""
 msgstr ""
 "Παρακαλώ εξηγήστε τον σκοπό της εφαρμογής σας καθώς και πως πρόκειται να "
 "χρησιμοποιήσετε το ΑΡΙ."
-
-msgid "AUD - Australian dollars"
-msgstr "AUD - Αυστραλιανά δολάρια"
-
-msgid "CAD - Canadian dollars"
-msgstr "CAD - Καναδικά δολάρια"
-
-msgid "CHF - Swiss francs"
-msgstr "CHF - Ελβετικά φράγκα"
-
-msgid "EUR - Euros"
-msgstr "EUR - Ευρώ"
-
-msgid "GPB - Pound stelings"
-msgstr "GPB - Αγγλική λίρα"
-
-msgid "PLN - Polish zloty"
-msgstr "PLN - Πολωνικό ζλότυ"
-
-msgid "SEK - Swedish krona"
-msgstr "SEK - Κορώνα Σουηδίας"
-
-msgid "USD - American dollars"
-msgstr "USD - Αμερικανικό δολάριο"
-
-msgid "Producer"
-msgstr "Παραγωγός"
-
-msgid "The link to this product's page on your website."
-msgstr ""
-"Ο σύνδεσμος για την σελίδα αυτού του προϊόντος που βρίσκετε στην ιστοσελίδα "
-"σας."
-
-msgid "Price"
-msgstr "Τιμή"
-
-msgid "Currency"
-msgstr "Νόμισμα"
-
-msgid "Retailed gear items"
-msgstr "Αντικείμενα εξοπλισμού λιανικής πώλησης"
-
-msgid "Proper make"
-msgstr "Σωστό όνομα μάρκας"
-
-msgid ""
-"Sometimes, product make/brand/producer/developer names are not written "
-"properly by the users. Write here the proper make/brand/producer/developer "
-"name."
-msgstr ""
-"Μερικές φορές, το όνομα κατασκευής/μάρκας/παραγωγού/προγραμματιστή δεν "
-"αναγράφεται σωστά από τους χρήστες. Γράψτε εδώ το σωστό όνομα κατασκευής/"
-"μάρκας/παραγωγού/προγραμματιστή."
-
-msgid "Proper name"
-msgstr "Σωστό όνομα"
-
-msgid ""
-"Sometimes, product names are not written properly by the users. Write here "
-"the proper product name, not including the make/brand/producer/developer "
-"name.<br/>It is recommended that you try to group as many items as possible, "
-"so try to use a generic version of your product's name."
-msgstr ""
-"Μερικές φορές τα ονόματα προϊόντων δεν γράφονται σωστά από τους χρήστες. "
-"Γράψτε εδώ το σωστό όνομα του προϊόντος, χωρις να συμπεριλάβετε το όνομα "
-"κατασκευής/μάρκας/παραγωγού/προγραμματιστή<br/>Είναι προτιμώμενο να βάλετε "
-"σε ομάδα όσο πιο πολλά αντικείμενα μπορείτε, έτσι προσπαθήστε να "
-"χρησιμοποιήστε μια γενική έκδοση για το όνομα του προϊόντος σας."
-
-msgid ""
-"The official, commercial image for this product. Upload an image via the "
-"regular uploading interface, set its subject type to \"Gear\", and then "
-"choose it from this list. If you upload several revisions, they will also "
-"appear in the commercial page."
-msgstr ""
-"Η επίσημη, διαφημιστική εικόνα γι' αυτό το προϊόν. Ανεβάστε μια εικόνα μέσω "
-"της συνηθισμένης διεπαφής για ανέβασμα, θέστε τον τύπο του αντικειμένου στον "
-"\"Εξοπλισμό\" και μετά επιλέξτε το από την λίστα. Αν ανεβάσετε αρκετές "
-"εκδόσεις, θα εμφανιστούν επίσης στην εμπορική σελίδα."
-
-msgid "Tagline"
-msgstr "Σλόγκαν"
-
-msgid ""
-"A memorable phrase that will sum up this product, for marketing purposes."
-msgstr ""
-"Μια αξιοσημείωτη φράση η οποία θα περιγράφει το προϊόν, για διαφημιστικούς "
-"λόγους."
-
-msgid ""
-"Here you can write the full commercial description of your product. You can "
-"use some <a href=\"/faq/#comments\">formatting rules</a>."
-msgstr ""
-"Εδώ μπορείτε να γράψετε την πλήρη εμπορική περιγραφή του προϊόντος σας. "
-"Μπορείτε να χρησιμοποιήσετε μερικούς <a href=\"/faq/#10\">κανόνες "
-"μορφοποίησης</a>."
-
-msgid "Commercial gear items"
-msgstr "Εμπορικά αντικείμενα εξοπλισμού"
 
 #, fuzzy
 #| msgid "Sending..."
@@ -2457,25 +2340,6 @@ msgstr "Προειδοποίηση!"
 msgid "Error!"
 msgstr "Σφάλμα!"
 
-#, python-format
-msgid ""
-"As a producer and/or a retailer on AstroBin, it's very important that you "
-"fill in all of your company details! Click <a href=\"%(the_url)s\">here</a> "
-"to do it now."
-msgstr ""
-"Σαν παραγωγός και/ή έμπορος στο AstroBin, είναι πολύ σημαντικό να "
-"συμπληρώσετε όλες τις πληροφορίες της εταιρίας σας! Κάντε κλικ <a href="
-"\"%(the_url)s\">εδώ</a> για να το κάνετε τώρα."
-
-#, python-format
-msgid ""
-"As a retailer on AstroBin, it's very important that you fill in your country "
-"of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
-msgstr ""
-"Σαν έμπορος στο AstroBin, είναι πολύ σημαντικό να συμπληρώσετε την χώρα "
-"δραστηριότητας σας! Κάντε κλικ <a href=\"%(the_url)s\">εδώ</a> για να το "
-"κάνετε τώρα."
-
 msgid "About"
 msgstr "Σχετικά"
 
@@ -2559,6 +2423,20 @@ msgstr ""
 
 msgid "Contact us to resolve the issue"
 msgstr ""
+
+#, python-format
+msgid ""
+"<strong>Good news!</strong> AstroBin automatically recovered some of your "
+"images that were lost in the data loss incident of February 2020. Please "
+"review them to confirm the recovery. If you do nothing, your recovered "
+"images will be confirmed automatically starting from <strong>%(date)s</"
+"strong>."
+msgstr ""
+
+#, fuzzy
+#| msgid "Recent images"
+msgid "Review recovered images"
+msgstr "Πρόσφατες εικόνες"
 
 msgid "Cancel"
 msgstr "Άκυρο"
@@ -2773,11 +2651,13 @@ msgstr "Περιγραφή"
 msgid "My places"
 msgstr "Τα μέρη μου"
 
-msgid "Commercial products"
-msgstr "Εμπορικά προϊόντα"
-
-msgid "Gallery"
+#, fuzzy
+#| msgid "Gallery"
+msgid "Public Gallery"
 msgstr "Έκθεση εικόνων"
+
+msgid "Staging Area"
+msgstr "Περιοχή Επεξεργασίας"
 
 msgid "Bookmarks"
 msgstr "Αγαπημένα"
@@ -2846,21 +2726,6 @@ msgstr ""
 
 msgid "Custom e-mail change request on AstroBin"
 msgstr ""
-
-msgid "Edit commercial product"
-msgstr "Επεξεργασία εμπορικού προϊόντος"
-
-msgid "Save"
-msgstr "Σώσιμο"
-
-msgid "Return to list"
-msgstr "Επιστροφή στην λίστα"
-
-msgid "View in new window"
-msgstr "Προβολή σε νέο παράθυρο"
-
-msgid "Edit retailed product"
-msgstr "Επεξεργασία προϊόντος λιανικής πωλήσεως"
 
 msgid ""
 "Please contact us if you need any assistance, or want to report a problem, "
@@ -3068,79 +2933,6 @@ msgid ""
 msgstr ""
 "Η συμβολή σας είναι πολύτιμη και η κοινωνία του AstroBin είναι ευγνώμων."
 
-msgid "by"
-msgstr "από"
-
-msgid "Other images"
-msgstr "Άλλες εικόνες"
-
-msgid "Some images"
-msgstr "Μερικές εικόνες"
-
-msgid "(view more)"
-msgstr "(δείτε περισσότερα)"
-
-msgid "Reviews"
-msgstr "Κριτικές"
-
-msgid "Rating"
-msgstr "Βαθμολογία"
-
-msgid "There are no reviews yet."
-msgstr "Δεν υπάρχουν ακόμη κριτικές."
-
-msgid "Add your review"
-msgstr "Προσθέστε την κριτική σας."
-
-msgid ""
-"Please be fair, honest and polite when writing a review. Many people will "
-"read your review: all the users on AstroBin who own this piece of gear, will "
-"be notified of your review."
-msgstr ""
-"Παρακαλούμε να είστε δίκαιοι, ειλικρινείς και ευγενικοί όταν γράφετε μια "
-"κριτική. Πολλοί θα διαβάσουν την κριτική σας: όλοι οι χρήστες του AstroBin "
-"που έχουν αυτό το αντικείμενο εξοπλισμού, θα ειδοποιηθούν για την κριτική "
-"σας."
-
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to write a review."
-msgstr ""
-"Παρακαλώ <a href=\"/accounts/login/\">κάντε είσοδο</a> or <a href=\"/"
-"accounts/register/\">register</a> για να γράψετε μια κριτική."
-
-msgid "Comments"
-msgstr "Σχόλια"
-
-msgid ""
-"Use this space to start a discussion, leave a comment or ask a question "
-"about this piece of gear. All the users on AstroBin who own one, will be "
-"notified and can join the discussion."
-msgstr ""
-"Χρησιμοποιήστε το κενό για να ξεκινήσετε μαι συζήτηση, να αφήσετε ένα σχόλιο "
-"ή να κάνετε μια ερώτηση σχετικά με αυτό το αντικείμενο εξοπλισμού. Όλοι οι "
-"χρήστες του AstroBin που έχουν ένα, θα ειδοποιηθούν και θα μπορούν να "
-"συμμετάσχουν στην συζήτηση."
-
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment."
-msgstr ""
-"Παρακαλώ <a href=\"/accounts/login/\">κάντε είσοδο</a> or <a href=\"/"
-"accounts/register/\">register</a> για να αφήσετε σχόλιο."
-
-msgid "Buy it here"
-msgstr "Αγοράστε το εδώ"
-
-msgid "Properties"
-msgstr "Ιδιότητες"
-
-msgid "Owners"
-msgstr "Ιδιοκτήτες"
-
-msgid "just now"
-msgstr "μόλις τώρα"
-
 msgid "Additional information requested"
 msgstr "Χρειάζονται περισσότερες πληροφορίες"
 
@@ -3156,6 +2948,21 @@ msgstr ""
 
 msgid "Return to image"
 msgstr "Επιστροφή στην εικόνα"
+
+#, fuzzy
+#| msgid "Hemisphere:"
+msgid "Hemisphere"
+msgstr "Ημισφαίριο:"
+
+#, fuzzy
+#| msgid "North"
+msgid "Northern"
+msgstr "Βόρειo"
+
+#, fuzzy
+#| msgid "South"
+msgid "Southern"
+msgstr "Νότιo"
 
 msgid "Contains"
 msgstr "Περιέχει"
@@ -3173,6 +2980,9 @@ msgstr "Λήψη μετά από"
 msgid "Remove"
 msgstr "Αφαίρεση"
 
+msgid "Comments"
+msgstr "Σχόλια"
+
 #, python-format
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
@@ -3186,9 +2996,6 @@ msgstr ""
 
 msgid "Comments are closed."
 msgstr ""
-
-msgid "Made possible by"
-msgstr "Έγινε δυνατό από"
 
 msgid "In these public groups"
 msgstr ""
@@ -3206,6 +3013,25 @@ msgstr "Περιγραφή"
 
 msgid "Technical card"
 msgstr "Τεχνική κάρτα"
+
+msgid "Sponsored brands"
+msgstr ""
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr ""
+
+msgid "Sponsored items"
+msgstr ""
+
+#, fuzzy
+#| msgid "Retailer information"
+msgid "Disable retailer integration"
+msgstr "Πληροφορίες εμπόρου"
+
+#, python-format
+msgid "Shop %(name)s at %(retailer)s"
+msgstr ""
 
 msgid "Frames"
 msgstr "Καρέ"
@@ -3558,8 +3384,13 @@ msgid "The following people like this image"
 msgstr "Στα ακόλουθα άτομα αρέσει αυτή η εικόνα"
 
 msgid ""
+"This will move this image to your public area, making it listed. As this "
+"image had already been published before, your followers will not be notified."
+msgstr ""
+
+msgid ""
 "This will move this image to your public area, making it listed and "
-"notifying your followers."
+"optionally notifying your followers."
 msgstr ""
 
 msgid ""
@@ -3664,8 +3495,7 @@ msgid ""
 "unless you give them one of the links you can find in the <em>Share</em> "
 "menu below. Use that link to post this image to Internet forums and get "
 "feedback on it. When you are satisfied, perhaps after uploading some "
-"revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
-"to the <a href=\"%(profile_url)s\">Public Area</a>."
+"revisions, promote it to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
 "Αυτή η εικόνα είναι <strong>δουλειά σε εξέλιξη</strong> από την <a href="
 "\"%(profile_url)s?staging\">Περιοχή Επεξεργασίας</a> σας. Αυτό σημαίνει πως "
@@ -3725,6 +3555,9 @@ msgstr ""
 
 msgid "Edit your image: acquisition details"
 msgstr "Επεξεργασία της εικόνας σας: Λεπτομέρειες λήψης"
+
+msgid "Save"
+msgstr "Σώσιμο"
 
 msgid "Remove data"
 msgstr "Αφαίρεση δεδομένων"
@@ -3969,9 +3802,6 @@ msgstr "Επιλέξτε γεωγραφικό πλάτος"
 msgid "Galactic latitude"
 msgstr "Επιλέξτε γεωγραφικό πλάτος"
 
-msgid "View page"
-msgstr "Προβολή σελίδας"
-
 msgid "No gear yet."
 msgstr "Δεν υπάρχει εξοπλισμός ακόμα"
 
@@ -3983,6 +3813,17 @@ msgstr "Δεν υπάρχουν εικόνες"
 
 msgid "Only you can see this"
 msgstr ""
+
+#, python-format
+msgid ""
+"Interested in <strong>%(brand)s</strong>? Our sponsor <strong>%(retailer)s</"
+"strong> sells this brand!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Sign up now!"
+msgid "Shop now"
+msgstr "Εγγραφείτε τώρα!"
 
 msgid "Integration"
 msgstr "Ολοκλήρωση"
@@ -4048,11 +3889,8 @@ msgstr ""
 msgid "What is this site?"
 msgstr "Τι είναι αυτός ο ιστότοπος;"
 
-msgid "Commercial information"
-msgstr "Εμπορικές πληροφορίες"
-
-msgid "Retailer information"
-msgstr "Πληροφορίες εμπόρου"
+msgid "Gallery"
+msgstr "Έκθεση εικόνων"
 
 msgid "Blog"
 msgstr "Blog"
@@ -4563,7 +4401,7 @@ msgstr "Ο/Η %(user)s σχολίασε την εικόνα σας!"
 #| "%(url)s"
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it out "
-"at the following url: %(url)s"
+"at the following url: <a href=\"%(url)s\">%(url)s</a>"
 msgstr ""
 "Ο/Η %(user)s απάντησε στο σχόλιο σας. Δείτε την στο ακόλουθο url: %(url)s"
 
@@ -4644,38 +4482,6 @@ msgstr ""
 msgid "%(user)s started a new discussion about a gear item you own!"
 msgstr ""
 "Ο/Η %(user)s άρχισε νέα συζήτηση για ένα αντικείμενο εξοπλισμού που έχετε!"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "%(user)s wrote a review of a gear item you own! Read it at following url: "
-#| "%(url)s"
-msgid ""
-"%(user)s wrote a review of a gear item you own! Read it at following url: <a "
-"href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-"Ο/Η %(user)s έγραψε μια κριτική για ένα αντικείμενο εξοπλισμού που έχετε! "
-"Διαβάστε την στο ακόλουθο url: %(url)s"
-
-#, python-format
-msgid ""
-"%(user)s wrote a review of a gear item you own! Read it at following url: "
-"%(url)s"
-msgstr ""
-"Ο/Η %(user)s έγραψε μια κριτική για ένα αντικείμενο εξοπλισμού που έχετε! "
-"Διαβάστε την στο ακόλουθο url: %(url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear item "
-"you own!</a>"
-msgstr ""
-"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> έγραψε μια κριτική για ένα "
-"αντικείμενο εξοπλισμού που έχετε!</a>"
-
-#, python-format
-msgid "%(user)s wrote a review of a gear item you own!"
-msgstr ""
-"Ο/Η %(user)s έγραψε μια κριτική για ένα αντικείμενο εξοπλισμού που έχετε!"
 
 #, fuzzy, python-format
 msgid ""
@@ -5005,6 +4811,11 @@ msgstr "Ανεβασμένες εικόνες"
 msgid "Next page"
 msgstr "Προβολή σελίδας"
 
+#, fuzzy
+#| msgid "Additional information requested"
+msgid "No additional information available for this item."
+msgstr "Χρειάζονται περισσότερες πληροφορίες"
+
 msgid "Find images"
 msgstr "Εύρεση εικόνων"
 
@@ -5013,6 +4824,9 @@ msgstr "RA (ορθή αναφορά)"
 
 msgid "Dec"
 msgstr "Dec (απόκλιση)"
+
+msgid "View page"
+msgstr "Προβολή σελίδας"
 
 msgid "Member since"
 msgstr "Μέλος από τις"
@@ -5567,6 +5381,9 @@ msgstr "Πλανήτες"
 msgid "Offer valid until"
 msgstr ""
 
+msgid "Price"
+msgstr "Τιμή"
+
 msgid "Validity"
 msgstr ""
 
@@ -5895,6 +5712,16 @@ msgid "%(user)s's followed users"
 msgstr "Χρήστες που ακολουθεί ο/η %(user)s"
 
 #, fuzzy, python-format
+#| msgid "%(user)s's favorites"
+msgid "%(user)s's friends"
+msgstr "Τα αγαπημένα του/της %(user)s"
+
+#, fuzzy, python-format
+#| msgid "These are the cities from which you usually image."
+msgid "These are the users that follow %(user)s mutually."
+msgstr "Αυτές είναι οι πόλεις από τις οποίες καταγράφετε συνήθως."
+
+#, fuzzy, python-format
 #| msgid "%(user)s's followed users"
 msgid "%(user)s's liked images"
 msgstr "Χρήστες που ακολουθεί ο/η %(user)s"
@@ -6006,80 +5833,6 @@ msgstr ""
 "καθώς και το θέμα είναι τα ελάχιστα. Οι ημερομηνίες λήψης είναι επίσης "
 "σημαντικές."
 
-#, python-format
-msgid "%(user)s's commercial products"
-msgstr "Τα εμπορικά προϊόντα του/της %(user)s"
-
-msgid ""
-"Please remember that you are only allowed to claim items that you really "
-"produce and/or retail."
-msgstr ""
-"Πάρακαλω να θυμάστε ότι σας επιτρέπεται να διεκδικήσετε αντικείμενα τα οποία "
-"παράγετε και/ή εμπορεύεστε."
-
-msgid "As producer"
-msgstr "Σαν παραγωγός"
-
-msgid "Gear IDs"
-msgstr "Ταυτότητες εξοπλισμού"
-
-msgid "You haven't claimed any commercial products yet."
-msgstr "Δεν έχετε διεκδικήσει εμπορικά προϊόντα ακόμα."
-
-#, python-format
-msgid "%(user)s hasn't claimed any commercial products yet."
-msgstr "Ο/Η %(user)s δεν έχει διεκδικήσει εμπορικά προϊόντα ακόμα."
-
-msgid "As retailer"
-msgstr "Σαν έμπορος λιανικής πωλήσεως"
-
-msgid "You haven't claimed any retailed products yet."
-msgstr "Δεν έχετε διεκδικήσει προϊόντα λιανικής πώλησης ακόμα."
-
-#, python-format
-msgid "%(user)s hasn't claimed any retailed products yet."
-msgstr "Ο/Η %(user)s δεν έχει διεκδικήσει προϊόντα λιανικής ακόμα."
-
-msgid "Claim as producer"
-msgstr "Διεκδικήστε σαν παραγωγός"
-
-msgid "Claim as retailer"
-msgstr "Διεκδικήστε σαν έμπορος λιανικής πωλήσεως"
-
-msgid "Claim commercial product"
-msgstr "Διεκδικήστε εμπορικό προϊόν"
-
-msgid "Claim"
-msgstr "Διεκδίκηση"
-
-msgid "Select items to remove"
-msgstr "Επιλέξτε αντικείμενα για αφαίρεση"
-
-msgid "Be careful if you try to remove all of these!"
-msgstr "Να είστε προσεκτικοί αν προσπαθήσετε να αφαιρέσετε όλα αυτά!"
-
-msgid ""
-"All the properties, including the commercial description, of this claim will "
-"be deleted and cannot be recovered!"
-msgstr ""
-"Όλες οι ιδιότητες, συμπεριλαμβανομένου της εμπορικής περιγραφής, αυτής της "
-"διεκδίκησης θα διαγραφούν και δεν θα μπορούν να επανέλθουν!"
-
-msgid "Select the product you want to merge to"
-msgstr "Επιλέξτε το προϊόν που θέλετε να συγχωνεύσετε"
-
-msgid "Are you sure?"
-msgstr "Είστε σίγουροι;"
-
-msgid "Claim retailed product"
-msgstr "Διεκδικήστε προϊόν λιανικής πωλήσεως"
-
-msgid ""
-"All the properties of this claim will be deleted and cannot be recovered!"
-msgstr ""
-"Όλες οι ιδιότητες αυτής της διεκδίκησης θα διαγραφούν και δεν θα μπορούν να "
-"επανέλθουν!"
-
 #, fuzzy
 msgid "Delete account"
 msgstr "Διαγραφή συζήτησης"
@@ -6090,14 +5843,19 @@ msgid ""
 "forever!"
 msgstr ""
 
-msgid "Your account was deleted. Thanks for using AstroBin until now!"
+#, fuzzy
+#| msgid "(comment deleted)"
+msgid "Account deleted"
+msgstr "(σχόλιο διεγράφη)"
+
+msgid ""
+"\n"
+"            Your account was deleted. Thanks for using AstroBin until now!\n"
+"        "
 msgstr ""
 
 msgid "Edit your basic information"
 msgstr "Επεξεργασία των βασικών σας πληροφοριών"
-
-msgid "Edit your commercial information"
-msgstr "Επεξεργαστία των εμπορικών σας πληροφοριών"
 
 #, fuzzy
 #| msgid "Uploaded"
@@ -6214,9 +5972,6 @@ msgstr "Εισάγετε φωτογραφίες από το Flickr"
 msgid "Edit your site preferences"
 msgstr "Επεξεργασία ρυθμίσεων τοποθεσίας"
 
-msgid "Edit your retailer information"
-msgstr "Επεξεργασία των πληροφοριών σας λιανικής πωλήσεως"
-
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -6293,10 +6048,10 @@ msgstr "Ευχαριστούμε για την πρόταση σας"
 msgid "Public Area"
 msgstr "Περιοχή Προβολής"
 
-msgid "Staging Area"
-msgstr "Περιοχή Επεξεργασίας"
-
 msgid "Corrupted"
+msgstr ""
+
+msgid "Recovered"
 msgstr ""
 
 msgid "Trash"
@@ -6309,6 +6064,9 @@ msgstr "Εύρεση εικόνων"
 
 msgid "Following"
 msgstr "Ακολουθείτε"
+
+msgid "Friends"
+msgstr ""
 
 msgid "Lacking data"
 msgstr "Έχει έλλειψη δεδομένων"
@@ -6327,6 +6085,98 @@ msgstr "Γρήγορη αναζήτηση"
 
 msgid "Key/value pairs"
 msgstr ""
+
+msgid "Please confirm your recovered images"
+msgstr ""
+
+#, python-format
+msgid ""
+"Following the <a href=\"%(url)s\" target=\"_blank\">data loss incident in "
+"February 2020</a>, these images <strong>were automatically recovered</"
+"strong>."
+msgstr ""
+
+msgid "Now you need to <strong>manually confirm or reject</strong> them."
+msgstr ""
+
+#, fuzzy
+#| msgid "Integration"
+msgid "Instructions"
+msgstr "Ολοκλήρωση"
+
+msgid ""
+"Below, you see the list of all your images impacted by the automatic "
+"recovery process."
+msgstr ""
+
+msgid ""
+"The big thumbnail represents the original upload, and the small thumbnails "
+"represent revisions."
+msgstr ""
+
+msgid ""
+"Click on a thumbnail once to mark it for recovery, again to mark it for "
+"deletion, once more to return to the \"do nothing\" state."
+msgstr ""
+
+msgid ""
+"You can also use the \"Recover all\" and \"Delete all\" buttons at the "
+"bottom."
+msgstr ""
+
+msgid ""
+"When you are ready, click on the \"Submit selected\" button to confirm your "
+"selection."
+msgstr ""
+
+msgid ""
+"You will return to this page, and the images for which you didn't make a "
+"selection will still be here."
+msgstr ""
+
+msgid ""
+"The recovered images will return to your gallery (public or staging, "
+"depending on where they were before the data loss)."
+msgstr ""
+
+#, fuzzy
+#| msgid "Original"
+msgid "Original upload"
+msgstr "Αρχική"
+
+#, fuzzy
+#| msgid "Staging Area"
+msgid "Staging area"
+msgstr "Περιοχή Επεξεργασίας"
+
+#, fuzzy
+#| msgid "Delete"
+msgid "Deleted"
+msgstr "Διαγραφή"
+
+#, fuzzy
+msgid "Revision"
+msgstr "Κριτικές"
+
+msgid "Recover all"
+msgstr ""
+
+#, fuzzy
+#| msgid "Select all"
+msgid "Delete all"
+msgstr "Επιλογή όλων"
+
+msgid "Reset"
+msgstr "Επαναφορά"
+
+#, fuzzy
+msgid "Submit selected"
+msgstr "# έχουν επιλεχθεί"
+
+#, fuzzy
+#| msgid "There are no reviews yet."
+msgid "There are no images to recover."
+msgstr "Δεν υπάρχουν ακόμη κριτικές."
 
 #, fuzzy
 msgid "Restore selected"
@@ -6427,6 +6277,11 @@ msgstr ""
 
 msgid "Award"
 msgstr ""
+
+#, fuzzy
+#| msgid "Public data pools"
+msgid "Publication date range"
+msgstr "Δημόσιες περιοχές δεδομένων"
 
 msgid "Camera type"
 msgstr "Τύπος κάμερας"
@@ -6706,9 +6561,6 @@ msgstr "Forums"
 msgid "Image uploaded. Thank you!"
 msgstr "Η εικόνα φορτώθηκε. Ευχαριστούμε!"
 
-msgid "You can't merge a product to itself."
-msgstr "Δεν μπορείτε να συγχωνεύσετε ένα προϊόν με τον ευατό του."
-
 msgid "You already have a collection with that name"
 msgstr ""
 
@@ -6776,9 +6628,372 @@ msgid ""
 "in a while: the more images you have, the more time it will take."
 msgstr ""
 
-#, fuzzy
-#~ msgid "Revision"
+#~ msgid "Merge"
+#~ msgstr "Συγχώνευση"
+
+#~ msgid ""
+#~ "Use this field to mark that the item you are claiming really is the same "
+#~ "product (or a variation thereof) of something you have claimed before."
+#~ msgstr ""
+#~ "Χρησιμοποιείστε αυτό το πεδίο για να σημειώσετε ότι το αντικείμενο που "
+#~ "διεκδικείτε είναι το ίδιο προϊόν (ή ως εκ τούτου μια παραλλαγή) ενός "
+#~ "αντικειμένου που διεκδικήσατε παλαιότερα."
+
+#~ msgid ""
+#~ "You can't create more than %d claims. Consider upgrading your affiliation!"
+#~ msgstr ""
+#~ "Δεν μπορείτε να δημιουργήσετε %d διεκδικήσεις. Σκεφτείτε να αναβαθμίσετε "
+#~ "τον εμπορικό λογαριασμό σας!"
+
+#~ msgid "You have already claimed this product."
+#~ msgstr "Έχετε ήδη διεκδικήσει αυτό το προϊόν."
+
+#~ msgid ""
+#~ "Use this field to mark that the item you are merging really is the same "
+#~ "product (or a variation thereof) of something you have claimed before."
+#~ msgstr ""
+#~ "Χρησιμοποιείστε αυτό το πεδίο για να σημειώσετε ότι το αντικείμενο που "
+#~ "συγχωνεύετε είναι το ίδιο προϊον (ή ως εκ τούτου μια παραλλαγή) με κάποιο "
+#~ "που έχετε διεκδικήσει παλαιότερα."
+
+#~ msgid "has written a review on"
+#~ msgstr "έγραψε μια κριτική για"
+
+#~ msgid "Company name"
+#~ msgstr "Όνομα εταιρίας"
+
+#~ msgid "The name of the company you represent on AstroBin."
+#~ msgstr "Το όνομα της εταιρίας που αντιπροσωπεύετε στο AstroBin."
+
+#~ msgid "Company description"
+#~ msgstr "Περιγραφή της εταιρίας"
+
+#~ msgid ""
+#~ "A short description of the company you represent on AstroBin. You can use "
+#~ "some <a href=\"/faq/#comments\">formatting rules</a>."
+#~ msgstr ""
+#~ "Μια σύντομη περιγραφή της εταιρίας που αντιπροσωπεύετε στο AstroBin. "
+#~ "Μπορείτε να χρησιμοποιήσετε μερικούς <a href=\"/faq/#10\">κανόνες "
+#~ "μορφοποίησης</a>."
+
+#~ msgid "Company website"
+#~ msgstr "Ιστοσελίδα εταιρίας"
+
+#~ msgid "The website of the company you represent on AstroBin."
+#~ msgstr "Η ιστοσελίδα της εταιρίας που αντιπροσωπεύετε στο AstroBin."
+
+#~ msgid "Country of operation"
+#~ msgstr "Χώρα δραστηριότητας"
+
+#~ msgid "AUD - Australian dollars"
+#~ msgstr "AUD - Αυστραλιανά δολάρια"
+
+#~ msgid "CAD - Canadian dollars"
+#~ msgstr "CAD - Καναδικά δολάρια"
+
+#~ msgid "CHF - Swiss francs"
+#~ msgstr "CHF - Ελβετικά φράγκα"
+
+#~ msgid "EUR - Euros"
+#~ msgstr "EUR - Ευρώ"
+
+#~ msgid "GPB - Pound stelings"
+#~ msgstr "GPB - Αγγλική λίρα"
+
+#~ msgid "PLN - Polish zloty"
+#~ msgstr "PLN - Πολωνικό ζλότυ"
+
+#~ msgid "SEK - Swedish krona"
+#~ msgstr "SEK - Κορώνα Σουηδίας"
+
+#~ msgid "USD - American dollars"
+#~ msgstr "USD - Αμερικανικό δολάριο"
+
+#~ msgid "Producer"
+#~ msgstr "Παραγωγός"
+
+#~ msgid "The link to this product's page on your website."
+#~ msgstr ""
+#~ "Ο σύνδεσμος για την σελίδα αυτού του προϊόντος που βρίσκετε στην "
+#~ "ιστοσελίδα σας."
+
+#~ msgid "Currency"
+#~ msgstr "Νόμισμα"
+
+#~ msgid "Retailed gear items"
+#~ msgstr "Αντικείμενα εξοπλισμού λιανικής πώλησης"
+
+#~ msgid "Proper make"
+#~ msgstr "Σωστό όνομα μάρκας"
+
+#~ msgid ""
+#~ "Sometimes, product make/brand/producer/developer names are not written "
+#~ "properly by the users. Write here the proper make/brand/producer/"
+#~ "developer name."
+#~ msgstr ""
+#~ "Μερικές φορές, το όνομα κατασκευής/μάρκας/παραγωγού/προγραμματιστή δεν "
+#~ "αναγράφεται σωστά από τους χρήστες. Γράψτε εδώ το σωστό όνομα κατασκευής/"
+#~ "μάρκας/παραγωγού/προγραμματιστή."
+
+#~ msgid "Proper name"
+#~ msgstr "Σωστό όνομα"
+
+#~ msgid ""
+#~ "Sometimes, product names are not written properly by the users. Write "
+#~ "here the proper product name, not including the make/brand/producer/"
+#~ "developer name.<br/>It is recommended that you try to group as many items "
+#~ "as possible, so try to use a generic version of your product's name."
+#~ msgstr ""
+#~ "Μερικές φορές τα ονόματα προϊόντων δεν γράφονται σωστά από τους χρήστες. "
+#~ "Γράψτε εδώ το σωστό όνομα του προϊόντος, χωρις να συμπεριλάβετε το όνομα "
+#~ "κατασκευής/μάρκας/παραγωγού/προγραμματιστή<br/>Είναι προτιμώμενο να "
+#~ "βάλετε σε ομάδα όσο πιο πολλά αντικείμενα μπορείτε, έτσι προσπαθήστε να "
+#~ "χρησιμοποιήστε μια γενική έκδοση για το όνομα του προϊόντος σας."
+
+#~ msgid ""
+#~ "The official, commercial image for this product. Upload an image via the "
+#~ "regular uploading interface, set its subject type to \"Gear\", and then "
+#~ "choose it from this list. If you upload several revisions, they will also "
+#~ "appear in the commercial page."
+#~ msgstr ""
+#~ "Η επίσημη, διαφημιστική εικόνα γι' αυτό το προϊόν. Ανεβάστε μια εικόνα "
+#~ "μέσω της συνηθισμένης διεπαφής για ανέβασμα, θέστε τον τύπο του "
+#~ "αντικειμένου στον \"Εξοπλισμό\" και μετά επιλέξτε το από την λίστα. Αν "
+#~ "ανεβάσετε αρκετές εκδόσεις, θα εμφανιστούν επίσης στην εμπορική σελίδα."
+
+#~ msgid "Tagline"
+#~ msgstr "Σλόγκαν"
+
+#~ msgid ""
+#~ "A memorable phrase that will sum up this product, for marketing purposes."
+#~ msgstr ""
+#~ "Μια αξιοσημείωτη φράση η οποία θα περιγράφει το προϊόν, για "
+#~ "διαφημιστικούς λόγους."
+
+#~ msgid ""
+#~ "Here you can write the full commercial description of your product. You "
+#~ "can use some <a href=\"/faq/#comments\">formatting rules</a>."
+#~ msgstr ""
+#~ "Εδώ μπορείτε να γράψετε την πλήρη εμπορική περιγραφή του προϊόντος σας. "
+#~ "Μπορείτε να χρησιμοποιήσετε μερικούς <a href=\"/faq/#10\">κανόνες "
+#~ "μορφοποίησης</a>."
+
+#~ msgid "Commercial gear items"
+#~ msgstr "Εμπορικά αντικείμενα εξοπλισμού"
+
+#~ msgid ""
+#~ "As a producer and/or a retailer on AstroBin, it's very important that you "
+#~ "fill in all of your company details! Click <a href=\"%(the_url)s\">here</"
+#~ "a> to do it now."
+#~ msgstr ""
+#~ "Σαν παραγωγός και/ή έμπορος στο AstroBin, είναι πολύ σημαντικό να "
+#~ "συμπληρώσετε όλες τις πληροφορίες της εταιρίας σας! Κάντε κλικ <a href="
+#~ "\"%(the_url)s\">εδώ</a> για να το κάνετε τώρα."
+
+#~ msgid ""
+#~ "As a retailer on AstroBin, it's very important that you fill in your "
+#~ "country of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
+#~ msgstr ""
+#~ "Σαν έμπορος στο AstroBin, είναι πολύ σημαντικό να συμπληρώσετε την χώρα "
+#~ "δραστηριότητας σας! Κάντε κλικ <a href=\"%(the_url)s\">εδώ</a> για να το "
+#~ "κάνετε τώρα."
+
+#~ msgid "Commercial products"
+#~ msgstr "Εμπορικά προϊόντα"
+
+#~ msgid "Edit commercial product"
+#~ msgstr "Επεξεργασία εμπορικού προϊόντος"
+
+#~ msgid "Return to list"
+#~ msgstr "Επιστροφή στην λίστα"
+
+#~ msgid "View in new window"
+#~ msgstr "Προβολή σε νέο παράθυρο"
+
+#~ msgid "Edit retailed product"
+#~ msgstr "Επεξεργασία προϊόντος λιανικής πωλήσεως"
+
+#~ msgid "by"
+#~ msgstr "από"
+
+#~ msgid "Other images"
+#~ msgstr "Άλλες εικόνες"
+
+#~ msgid "Some images"
+#~ msgstr "Μερικές εικόνες"
+
+#~ msgid "(view more)"
+#~ msgstr "(δείτε περισσότερα)"
+
+#~ msgid "Reviews"
 #~ msgstr "Κριτικές"
+
+#~ msgid "Rating"
+#~ msgstr "Βαθμολογία"
+
+#~ msgid "Add your review"
+#~ msgstr "Προσθέστε την κριτική σας."
+
+#~ msgid ""
+#~ "Please be fair, honest and polite when writing a review. Many people will "
+#~ "read your review: all the users on AstroBin who own this piece of gear, "
+#~ "will be notified of your review."
+#~ msgstr ""
+#~ "Παρακαλούμε να είστε δίκαιοι, ειλικρινείς και ευγενικοί όταν γράφετε μια "
+#~ "κριτική. Πολλοί θα διαβάσουν την κριτική σας: όλοι οι χρήστες του "
+#~ "AstroBin που έχουν αυτό το αντικείμενο εξοπλισμού, θα ειδοποιηθούν για "
+#~ "την κριτική σας."
+
+#~ msgid ""
+#~ "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
+#~ "register/\">register</a> to write a review."
+#~ msgstr ""
+#~ "Παρακαλώ <a href=\"/accounts/login/\">κάντε είσοδο</a> or <a href=\"/"
+#~ "accounts/register/\">register</a> για να γράψετε μια κριτική."
+
+#~ msgid ""
+#~ "Use this space to start a discussion, leave a comment or ask a question "
+#~ "about this piece of gear. All the users on AstroBin who own one, will be "
+#~ "notified and can join the discussion."
+#~ msgstr ""
+#~ "Χρησιμοποιήστε το κενό για να ξεκινήσετε μαι συζήτηση, να αφήσετε ένα "
+#~ "σχόλιο ή να κάνετε μια ερώτηση σχετικά με αυτό το αντικείμενο εξοπλισμού. "
+#~ "Όλοι οι χρήστες του AstroBin που έχουν ένα, θα ειδοποιηθούν και θα "
+#~ "μπορούν να συμμετάσχουν στην συζήτηση."
+
+#~ msgid ""
+#~ "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
+#~ "register/\">register</a> to leave a comment."
+#~ msgstr ""
+#~ "Παρακαλώ <a href=\"/accounts/login/\">κάντε είσοδο</a> or <a href=\"/"
+#~ "accounts/register/\">register</a> για να αφήσετε σχόλιο."
+
+#~ msgid "Buy it here"
+#~ msgstr "Αγοράστε το εδώ"
+
+#~ msgid "Properties"
+#~ msgstr "Ιδιότητες"
+
+#~ msgid "Owners"
+#~ msgstr "Ιδιοκτήτες"
+
+#~ msgid "just now"
+#~ msgstr "μόλις τώρα"
+
+#~ msgid "Made possible by"
+#~ msgstr "Έγινε δυνατό από"
+
+#~ msgid "Commercial information"
+#~ msgstr "Εμπορικές πληροφορίες"
+
+#, fuzzy
+#~| msgid ""
+#~| "%(user)s wrote a review of a gear item you own! Read it at following "
+#~| "url: %(url)s"
+#~ msgid ""
+#~ "%(user)s wrote a review of a gear item you own! Read it at following url: "
+#~ "<a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "Ο/Η %(user)s έγραψε μια κριτική για ένα αντικείμενο εξοπλισμού που έχετε! "
+#~ "Διαβάστε την στο ακόλουθο url: %(url)s"
+
+#~ msgid ""
+#~ "%(user)s wrote a review of a gear item you own! Read it at following url: "
+#~ "%(url)s"
+#~ msgstr ""
+#~ "Ο/Η %(user)s έγραψε μια κριτική για ένα αντικείμενο εξοπλισμού που έχετε! "
+#~ "Διαβάστε την στο ακόλουθο url: %(url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear "
+#~ "item you own!</a>"
+#~ msgstr ""
+#~ "Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> έγραψε μια κριτική για "
+#~ "ένα αντικείμενο εξοπλισμού που έχετε!</a>"
+
+#~ msgid "%(user)s wrote a review of a gear item you own!"
+#~ msgstr ""
+#~ "Ο/Η %(user)s έγραψε μια κριτική για ένα αντικείμενο εξοπλισμού που έχετε!"
+
+#~ msgid "%(user)s's commercial products"
+#~ msgstr "Τα εμπορικά προϊόντα του/της %(user)s"
+
+#~ msgid ""
+#~ "Please remember that you are only allowed to claim items that you really "
+#~ "produce and/or retail."
+#~ msgstr ""
+#~ "Πάρακαλω να θυμάστε ότι σας επιτρέπεται να διεκδικήσετε αντικείμενα τα "
+#~ "οποία παράγετε και/ή εμπορεύεστε."
+
+#~ msgid "As producer"
+#~ msgstr "Σαν παραγωγός"
+
+#~ msgid "Gear IDs"
+#~ msgstr "Ταυτότητες εξοπλισμού"
+
+#~ msgid "You haven't claimed any commercial products yet."
+#~ msgstr "Δεν έχετε διεκδικήσει εμπορικά προϊόντα ακόμα."
+
+#~ msgid "%(user)s hasn't claimed any commercial products yet."
+#~ msgstr "Ο/Η %(user)s δεν έχει διεκδικήσει εμπορικά προϊόντα ακόμα."
+
+#~ msgid "As retailer"
+#~ msgstr "Σαν έμπορος λιανικής πωλήσεως"
+
+#~ msgid "You haven't claimed any retailed products yet."
+#~ msgstr "Δεν έχετε διεκδικήσει προϊόντα λιανικής πώλησης ακόμα."
+
+#~ msgid "%(user)s hasn't claimed any retailed products yet."
+#~ msgstr "Ο/Η %(user)s δεν έχει διεκδικήσει προϊόντα λιανικής ακόμα."
+
+#~ msgid "Claim as producer"
+#~ msgstr "Διεκδικήστε σαν παραγωγός"
+
+#~ msgid "Claim as retailer"
+#~ msgstr "Διεκδικήστε σαν έμπορος λιανικής πωλήσεως"
+
+#~ msgid "Claim commercial product"
+#~ msgstr "Διεκδικήστε εμπορικό προϊόν"
+
+#~ msgid "Claim"
+#~ msgstr "Διεκδίκηση"
+
+#~ msgid "Select items to remove"
+#~ msgstr "Επιλέξτε αντικείμενα για αφαίρεση"
+
+#~ msgid "Be careful if you try to remove all of these!"
+#~ msgstr "Να είστε προσεκτικοί αν προσπαθήσετε να αφαιρέσετε όλα αυτά!"
+
+#~ msgid ""
+#~ "All the properties, including the commercial description, of this claim "
+#~ "will be deleted and cannot be recovered!"
+#~ msgstr ""
+#~ "Όλες οι ιδιότητες, συμπεριλαμβανομένου της εμπορικής περιγραφής, αυτής "
+#~ "της διεκδίκησης θα διαγραφούν και δεν θα μπορούν να επανέλθουν!"
+
+#~ msgid "Select the product you want to merge to"
+#~ msgstr "Επιλέξτε το προϊόν που θέλετε να συγχωνεύσετε"
+
+#~ msgid "Are you sure?"
+#~ msgstr "Είστε σίγουροι;"
+
+#~ msgid "Claim retailed product"
+#~ msgstr "Διεκδικήστε προϊόν λιανικής πωλήσεως"
+
+#~ msgid ""
+#~ "All the properties of this claim will be deleted and cannot be recovered!"
+#~ msgstr ""
+#~ "Όλες οι ιδιότητες αυτής της διεκδίκησης θα διαγραφούν και δεν θα μπορούν "
+#~ "να επανέλθουν!"
+
+#~ msgid "Edit your commercial information"
+#~ msgstr "Επεξεργαστία των εμπορικών σας πληροφοριών"
+
+#~ msgid "Edit your retailer information"
+#~ msgstr "Επεξεργασία των πληροφοριών σας λιανικής πωλήσεως"
+
+#~ msgid "You can't merge a product to itself."
+#~ msgstr "Δεν μπορείτε να συγχωνεύσετε ένα προϊόν με τον ευατό του."
 
 #, fuzzy
 #~ msgid "Imaging telescope or lens"
@@ -7445,9 +7660,6 @@ msgstr ""
 #~ msgid "So, what are you waiting for?"
 #~ msgstr "Λοιπόν, τι περιμένετε;"
 
-#~ msgid "Sign up now!"
-#~ msgstr "Εγγραφείτε τώρα!"
-
 #~ msgid "Send to public data pool"
 #~ msgstr "Προώθηση στην κοινόχρηστη περιοχή δεδομένων"
 
@@ -7775,9 +7987,6 @@ msgstr ""
 
 #~ msgid "Choose files"
 #~ msgstr "Επιλέξτε αρχεία"
-
-#~ msgid "Reset"
-#~ msgstr "Επαναφορά"
 
 #~ msgid "Start upload"
 #~ msgstr "Εκκίνηση ανεβάσματος"
@@ -9123,9 +9332,6 @@ msgstr ""
 #~ msgid "%(username)s didn't write anything about themselves."
 #~ msgstr "Ο/Η %(username)s δεν έχει γράψει κάτι για τον εαυτό του/της."
 
-#~ msgid "%(user)s's favorites"
-#~ msgstr "Τα αγαπημένα του/της %(user)s"
-
 #~ msgid "View your favorites"
 #~ msgstr "Δείτε τα αγαπημένα σας"
 
@@ -9165,9 +9371,6 @@ msgstr ""
 
 #~ msgid "To latitude:"
 #~ msgstr "Έως γεωγραφικό πλάτος:"
-
-#~ msgid "Hemisphere:"
-#~ msgstr "Ημισφαίριο:"
 
 #~ msgid "Both"
 #~ msgstr "Και τα δυο"
@@ -9318,9 +9521,6 @@ msgstr ""
 #~ msgid "You are now registered. Activation email sent."
 #~ msgstr "Έχετε κάνει εγγραφή. Έγινε αποστολή email ενεργοποίησης."
 
-#~ msgid "(comment deleted)"
-#~ msgstr "(σχόλιο διεγράφη)"
-
 #~ msgid "Undelete"
 #~ msgstr "Επαναφορά"
 
@@ -9415,9 +9615,6 @@ msgstr ""
 
 #~ msgid "The places from which you have taken this image."
 #~ msgstr "Τα μέρη από τα οποία τραβήχτηκε η φωτογραφία."
-
-#~ msgid "These are the cities from which you usually image."
-#~ msgstr "Αυτές είναι οι πόλεις από τις οποίες καταγράφετε συνήθως."
 
 #~ msgid "For example: +12.44"
 #~ msgstr "Παράδειγμα: +12.44"

@@ -44,8 +44,9 @@ def user_profile(request):
 
 def user_scores(request):
     scores = {
-        'user_scores_index': 0,
-        'user_scores_followers': 0,
+        'user_scores_index': None,
+        'user_scores_reputation': None,
+        'user_scores_followers': None,
     }
 
     if request.user.is_authenticated():
@@ -131,6 +132,8 @@ def common_variables(request):
                    corrupted=True,
                    recovered__isnull=False).exists() \
             else None,
+
+        'min_index_to_like': settings.MIN_INDEX_TO_LIKE,
 
         'enums': {
             'SubjectType': SubjectType,

@@ -1,6 +1,7 @@
 @import "elements";
 @import "variables";
 @import "mixins";
+@import "icons";
 
 @import "alert";
 @import "buttons";
@@ -14,7 +15,12 @@
 @import "ui-tooltip";
 @import "ui-datepicker";
 
+@import "activity-actions";
+@import "breadcrumb";
+@import "comments";
 @import "forum";
+@import "reputation-leaderboard";
+@import "trending-astrophotographers";
 @import "search";
 
 strong, .strong {
@@ -48,13 +54,13 @@ html, body {
 body {
   background: $light-panel-color url('../images/background-tile.png');
   @media screen and (min-width: 980px) {
-    padding-top: 55px;
+    padding-top: 60px;
   }
 }
 
 body.full {
   @media screen and (min-width: 980px) {
-    padding-top: 55px;
+    padding-top: 60px;
   }
 }
 
@@ -241,6 +247,10 @@ li.astrobin-thumbnail {
       font-size: 11px;
     }
   }
+
+  &:hover .astrobin-image-container .badges {
+    display: none;
+  }
 }
 
 .page-header {
@@ -340,7 +350,7 @@ li.astrobin-thumbnail {
 .table tr th {
   border-top: 1px solid $link-color;
   border-bottom: 1px solid $link-color;
-  background-color: #272727;
+  background-color: $grey-7;
   padding-top: 16px;
   padding-bottom: 16px;
 
@@ -885,16 +895,26 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
           border-top: none;
           border-right: none;
           border-left: none;
-          border-bottom: 1px solid #363636;
+          border-bottom: 1px solid $grey-6;
+          line-height: 16px;
         }
 
         th {
-          color: white;
+          color: $white;
           width: 16px;
         }
 
         td {
           color: $grey-2;
+        }
+
+        td,
+        th {
+          &.caption-badge {
+            line-height: 12px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+          }
         }
       }
 
@@ -1012,6 +1032,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
       &.iotd-badge,
       &.top-pick-badge,
+      &.top-pick-nomination-badge,
       &.wip-badge {
         text-align: center;
 
@@ -1023,6 +1044,17 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
           font-size: 16px;
           height: 20px;
           width: 20px;
+          color: $white;
+          border: 1px solid $white;
+
+          .icon {
+            padding: 0;
+            position: absolute;
+            top: 4px;
+            left: 3px;
+            font-size: 13px;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, .4);
+          }
         }
       }
 
@@ -1030,111 +1062,73 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         h2 {
           background: $link-color;
         }
-
-        .icon {
-          padding: 0;
-          position: absolute;
-          top: 2px;
-          left: 0;
-        }
-
-        &.wip-badge-large {
-          h2 {
-            font-size: 18px;
-            line-height: 12px;
-            padding: 4px;
-            @include rounded-corners(26px);
-          }
-
-          .icon {
-            top: 5px;
-            left: 3px;
-          }
-        }
       }
 
       &.iotd-badge {
         h2 {
-          font-size: 12px;
-          color: $white;
-          background: #e3a936;
+          background: $gold;
+          background: -webkit-gradient(linear, left top, left bottom, from($gold), to(darken($gold, 10%)));
+          background: -webkit-linear-gradient(top, $gold, darken($gold, 10%));
+          background: -moz-linear-gradient(top, $gold, darken($gold, 10%));
+          background: -ms-linear-gradient(top, $gold, darken($gold, 10%));
+          background: -o-linear-gradient(top, $gold, darken($gold, 10%));
+          background-image: -ms-linear-gradient(top, $gold 0%, darken($gold, 10%) 100%);
 
-          height: 20px;
-          width: 20px;
-          border: 1px solid white;
-
-          .icon {
-            padding: 0;
-            position: absolute;
-            top: 5px;
-            left: 3.5px;
-          }
+          -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px, $gold 0 0 10px;
+          -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $gold 0 0 10px;
+          box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $gold 0 0 10px;
         }
       }
 
       &.top-pick-badge {
         h2 {
-          font-size: 6px;
-          line-height: 4px;
-          color: #4a4a4a;
-          background: #c1c1c1;
-          border: 1px solid white;
-          padding: 0;
-          text-transform: uppercase;
+          background: $silver;
+          background: -webkit-gradient(linear, left top, left bottom, from($silver), to(darken($silver, 10%)));
+          background: -webkit-linear-gradient(top, $silver, darken($silver, 10%));
+          background: -moz-linear-gradient(top, $silver, darken($silver, 10%));
+          background: -ms-linear-gradient(top, $silver, darken($silver, 10%));
+          background: -o-linear-gradient(top, $silver, darken($silver, 10%));
+          background-image: -ms-linear-gradient(top, $silver 0%, darken($silver, 10%) 100%);
 
-          span {
-            display: block;
-            margin-top: 2px;
+          color: lighten($silver, 20%);
 
-            &:first-child {
-              margin-top: 5px;
-            }
-          }
+          -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px, $silver 0 0 10px;
+          -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $silver 0 0 10px;
+          box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $silver 0 0 10px;
         }
+      }
 
-        &.top-pick-badge-large {
-          h2 {
-            font-size: 8px;
-            line-height: 10px;
-            padding: 4px;
-            @include rounded-corners(26px);
-            text-align: center;
+      &.top-pick-nomination-badge {
+        h2 {
+          background: $bronze;
+          background: -webkit-gradient(linear, left top, left bottom, from($bronze), to(darken($bronze, 10%)));
+          background: -webkit-linear-gradient(top, $bronze, darken($bronze, 10%));
+          background: -moz-linear-gradient(top, $bronze, darken($bronze, 10%));
+          background: -ms-linear-gradient(top, $bronze, darken($bronze, 10%));
+          background: -o-linear-gradient(top, $bronze, darken($bronze, 10%));
+          background-image: -ms-linear-gradient(top, $bronze 0%, darken($bronze, 10%) 100%);
+          color: $gold;
 
-            span {
-              margin: 0;
-            }
-          }
+
+          -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px, $bronze 0 0 10px;
+          -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $bronze 0 0 10px;
+          box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $bronze 0 0 10px;
         }
       }
 
       &.top100-badge {
-        text-align: center;
-
         h2 {
-          margin: 0;
           font-size: 6px;
           line-height: 6px;
 
           color: $white;
           background: darkred;
-          @include box-shadow;
-          @include rounded-corners(16px);
           border: 1px solid white;
           padding: 4px;
           text-transform: uppercase;
 
           span {
             display: block;
-          }
-        }
-
-        &.top100-badge-large {
-          h2 {
-            font-size: 16px;
-            line-height: 12px;
-            padding: 12px 8px;
-            @include rounded-corners(26px);
-            width: 34px;
           }
         }
       }
@@ -1145,10 +1139,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         display: inline-block;
       }
     }
-  }
-
-  &:hover .badges {
-    display: none;
   }
 }
 
@@ -1353,240 +1343,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
-.explore-comment-container {
-  width: 460px;
-  padding: $spacer-small;
-  display: inline-block;
-
-  .header {
-    color: $strong-text-color;
-    background: $grey-6-dark url('../images/darker-panel-tile.png');
-    padding: $spacer-medium $spacer-small;
-    @include stitched-box;
-    border-bottom: 0;
-    margin-bottom: 0;
-  }
-
-  .thumbnail {
-    float: left;
-    margin-right: $spacer-medium;
-    clear: both;
-    border: 0;
-    padding: 3px;
-  }
-
-  .comment {
-    height: 78px;
-  }
-}
-
-.nested-comments-container {
-  overflow: visible !important;
-}
-
-.comments {
-  margin-top: $spacer-large;
-  margin-left: $spacer-large;
-
-  .loader {
-    display: block;
-    text-align: center;
-  }
-
-  small {
-    font-size: 87.5%;
-    color: darken($text-color, 15%);
-  }
-}
-
-.comment {
-  position: relative;
-  font-size: 1em;
-  margin: 0;
-  padding: $spacer-medium 0;
-
-  .loader {
-    margin: 0;
-  }
-
-  .collapse {
-    font-family: monospace;
-    letter-spacing: -2px;
-  }
-
-  h3 {
-    color: $strong-text-color;
-    margin-bottom: $spacer-small;
-  }
-
-  .well {
-    margin-bottom: $spacer-small;
-  }
-
-  a.author {
-    margin-right: $spacer-medium;
-  }
-
-  p {
-    margin: 0;
-    padding: $spacer-small 0;
-  }
-
-  p.instructions {
-    font-size: 0.9em;
-
-    strong {
-      color: $strong-text-color;
-      font-weight: normal;
-      text-shadow: none;
-    }
-  }
-
-  .formatting-help {
-    font-size: 0.8em;
-  }
-
-  .loader {
-    display: inline-block;
-  }
-
-  .avatar {
-    float: left;
-    margin-right: $spacer-large;
-    margin-top: 3px;
-
-    img {
-      -webkit-box-shadow: 4px 4px 8px rgba(0, 0, 0, .4);
-      -moz-box-shadow: 4px 4px 8px rgba(0, 0, 0, .4);
-      box-shadow: 4px 4px 8px rgba(0, 0, 0, .4);
-    }
-
-    a {
-      margin: 0;
-    }
-  }
-
-  .comment-container {
-    display: inline-block;
-    width: calc(100% - 56px);
-
-    @media screen and (max-width: 979px) {
-      width: 100%;
-    }
-  }
-
-  .content {
-    padding: $spacer-medium 0;
-    color: $strong-text-color;
-
-    p {
-      line-height: 1.5em;
-      padding: 0;
-    }
-
-    blockquote {
-      margin: 0;
-      padding: 0 0 0 $spacer-small;
-      font-style: italic;
-      border-left: 2px solid ($border-top-color * $hilight-factor);
-
-      p {
-        color: $text-color;
-      }
-
-      br {
-        display: none;
-      }
-    }
-  }
-
-  .content.deleted {
-    p {
-      color: $text-color / $hilight-factor;
-      font-style: italic;
-    }
-  }
-
-  .meta, .links {
-    font-size: 0.85em;
-  }
-
-  .btn {
-    margin-top: $spacer-large;
-  }
-
-  .links {
-    padding: $spacer-small 0 $spacer-xlarge 0;
-    border-bottom: 1px dashed #555;
-
-    a {
-      text-transform: lowercase;
-      margin-right: $spacer-medium;
-      color: grey;
-
-      &.label-important {
-        color: $strong-text-color;
-      }
-    }
-  }
-
-  form {
-    textarea {
-      width: 98.75%;
-      margin-bottom: $spacer-medium;
-    }
-  }
-}
-
-.top-level {
-  margin-bottom: $spacer-xlarge;
-}
-
-.add-top-level {
-  height: 16px;
-  font-size: 14px;
-  padding: 8px;
-  margin-left: $spacer-large;
-}
-
-@keyframes bounceCommentIndicator {
-  from {
-    left: -30px;
-  }
-  to {
-    left: -50px
-  }
-}
-
-@keyframes pop-in {
-  0% {
-    transform: scale(0);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-.comment.newlyAdded, .comment.hilight {
-  &:before {
-    content: "\279F";
-    position: absolute;
-    left: -40px;
-    font-size: 20px;
-    top: 36px;
-    color: #949494;
-    animation: bounceCommentIndicator 0.5s cubic-bezier(0.75, 0.1, 0.9, 0.9);
-    animation-direction: alternate;
-    animation-iteration-count: infinite;
-  }
-
-  .content {
-    font-weight: bold;
-    color: yellow;
-  }
-}
-
 .index-section {
   margin-bottom: $spacer-xxxlarge;
 }
@@ -1629,14 +1385,17 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     position: relative;
 
     h4 {
-      i {
-        margin-right: 8px;
-      }
-
       margin: 0;
       display: inline;
       text-overflow: clip;
       white-space: nowrap;
+
+      .actions {
+        a:not(:last-child),
+        > i {
+          margin-right: 8px;
+        }
+      }
     }
 
     .separator {
@@ -2331,22 +2090,22 @@ form.avatar-change label.control-label {
     left: -46px;
     text-align: center;
     font-size: 16px !important;
-    background: #e3a936;
-    background: -webkit-gradient(linear, left top, left bottom, from(#e3a936), to(#a87a25));
-    background: -webkit-linear-gradient(top, #e3a936, #a87a25);
-    background: -moz-linear-gradient(top, #e3a936, #a87a25);
-    background: -ms-linear-gradient(top, #e3a936, #a87a25);
-    background: -o-linear-gradient(top, #e3a936, #a87a25);
-    background-image: -ms-linear-gradient(top, #e3a936 0%, #a87a25 100%);
+    background: $gold;
+    background: -webkit-gradient(linear, left top, left bottom, from($gold), to(darken($gold, 10%)));
+    background: -webkit-linear-gradient(top, $gold, darken($gold, 10%));
+    background: -moz-linear-gradient(top, $gold, darken($gold, 10%));
+    background: -ms-linear-gradient(top, $gold, darken($gold, 10%));
+    background: -o-linear-gradient(top, $gold, darken($gold, 10%));
+    background-image: -ms-linear-gradient(top, $gold 0%, darken($gold, 10%) 100%);
     -webkit-box-shadow: rgba(000, 000, 000, 0.3) 0 1px 1px;
     -moz-box-shadow: rgba(000, 000, 000, 0.3) 0 1px 1px;
     box-shadow: rgba(000, 000, 000, 0.3) 0 1px 1px;
 
     h1 {
       font-size: 20px !important;
-      color: #f5ddae;
-      text-shadow: #8f6b22 0 1px 0;
-      margin: 0px;
+      color: lighten($gold, 30%);
+      text-shadow: 1px 1px 1px rgba(0,0,0,.4);
+      margin: 0;
       padding: 5px 10px;
       border-bottom: none;
 
@@ -2356,7 +2115,7 @@ form.avatar-change label.control-label {
 
       .chosen-by {
         font-weight: normal;
-        font-style: italics;
+        font-style: italic;
         font-size: 70%;
       }
     }
@@ -2366,18 +2125,17 @@ form.avatar-change label.control-label {
       position: absolute;
       display: block;
       bottom: -1em;
-      border: 1.5em solid #ad7e21;
+      border: 1.5em solid darken($gold, 25%);
+      border-left-color: transparent;
       z-index: -1;
       left: -2em;
-      border-right-width: 1.5em;
-      border-left-color: transparent;
-      -webkit-box-shadow: rgba(000, 000, 000, 0.4) 1px 1px 1px;
-      -moz-box-shadow: rgba(000, 000, 000, 0.4) 1px 1px 1px;
-      box-shadow: rgba(000, 000, 000, 0.4) 1px 1px 1px;
+      -webkit-box-shadow: rgba(0, 0, 0, .4) 1px 1px 1px;
+      -moz-box-shadow: rgba(0, 0, 0, .4) 1px 1px 1px;
+      box-shadow: rgba(0, 0, 0, .4) 1px 1px 1px;
     }
 
     .ribbon-content:after {
-      border-color: #6b4e15 transparent transparent transparent;
+      border-color: darken($gold, 35%) transparent transparent transparent;
       position: absolute;
       display: block;
       border-style: solid;
@@ -2390,24 +2148,27 @@ form.avatar-change label.control-label {
     .ribbon-stitches-top {
       margin-top: 2px;
       border-top: 1px dashed rgba(0, 0, 0, 0.2);
-      -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
-      -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
-      box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.5);
+      -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+      -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
     }
 
     .ribbon-stitches-bottom {
       margin-bottom: 2px;
       border-top: 1px dashed rgba(0, 0, 0, 0.2);
-      -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
-      -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
-      box-shadow: 0px 0px 2px rgba(255, 255, 255, 0.3);
+      -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+      -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
     }
   }
 }
 
 .image-of-the-day {
   position: relative;
-  margin: 0 -29px 20px -29px;
+
+  @media screen and (min-width: 980px) {
+    margin: 0 -29px 20px -29px;
+  }
 
   .header {
     position: absolute;
@@ -2542,22 +2303,6 @@ form.avatar-change label.control-label {
   display: block;
 }
 
-.activity-stream, .blog-stream {
-  padding-top: 0;
-  min-height: 922px;
-  max-height: 922px;
-  overflow-y: hidden;
-
-  h3 {
-    background: $grey-6-dark url('../images/darker-panel-tile.png');
-    text-transform: uppercase;
-    font-size: 1.75em;
-    padding: $spacer-medium $spacer-large;
-    margin-top: 0;
-    text-align: center;
-  }
-}
-
 .simple-container {
   background: none;
   border: 0;
@@ -2583,136 +2328,22 @@ form.avatar-change label.control-label {
       font-family: $regular_font;
       font-size: 14px;
       position: absolute;
-      top: 15px;
-      right: 8px;
+      top: 8px;
+      right: 12px;
     }
   }
 }
 
-.subtle-container h4 .actions {
-  top: 8px;
+.simple-container {
+  h4 {
+    .actions {
+      top: 15px;
+    }
+  }
 }
 
 .index-recent-topics {
   margin-bottom: $spacer-large;
-}
-
-.activity-actions {
-  .action {
-    position: relative;
-    margin-bottom: $spacer-large;
-    overflow: hidden;
-    zoom: 1;
-    display: inline-block;
-    width: 460px;
-    height: 320px;
-
-    &:nth-child(odd) {
-      margin-right: 16px;
-    }
-
-    .toggleproperty-add-remove {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      z-index: 2;
-      margin: 0;
-      width: 30px;
-
-      button {
-        font-size: 12px;
-        line-height: 12px;
-        padding: 6px;
-      }
-
-      .icon {
-        line-height: 26px;
-      }
-
-      .toggleproperties-label {
-        display: none;
-      }
-    }
-
-    .avatar {
-      max-width: 64px;
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      z-index: 2;
-      @include box-shadow;
-      @include rounded-corners(20px);
-    }
-
-    .action-object {
-      overflow: hidden;
-
-      .verb {
-        position: absolute;
-        bottom: 0;
-        z-index: 1;
-        background-color: rgba(0, 0, 0, 0.45);
-        width: 100%;
-        max-height: 60px;
-
-        > .inner {
-          padding: 12px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-
-          .detail {
-            font-size: 12px;
-            font-weight: normal;
-            font-style: italic;
-            color: $text-color;
-          }
-
-        }
-      }
-
-      .title {
-        position: absolute;
-        top: 0;
-        z-index: 1;
-        background-color: rgba(0, 0, 0, 0.45);
-        width: 100%;
-        font-size: 14px;
-        font-weight: bold;
-        color: $strong-text-color;
-
-        > .inner {
-          padding: 12px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-
-          a {
-            display: table;
-            font-weight: normal;
-          }
-        }
-      }
-
-      &.has-like-button .title .inner {
-        padding-right: 80px;
-      }
-
-      &.has-avatar .title .inner {
-        padding-left: 80px;
-      }
-
-      .astrobin-image-container {
-        a {
-          display: block;
-        }
-
-        img {
-          width: 100%;
-        }
-      }
-    }
-  }
 }
 
 .notice-container {
@@ -2736,105 +2367,106 @@ form.avatar-change label.control-label {
   }
 }
 
-li.revisions {
-  padding: 4px;
-}
 
 .revisions-container {
   overflow: visible;
-}
 
-.revision {
-  position: relative;
+  li.revisions {
+    padding: 4px;
 
-  .badges {
-    display: none;
-  }
+    .revision {
+      position: relative;
 
-  .final {
-    position: relative;
+      .badges {
+        display: none;
+      }
 
-    .text {
-      z-index: 1;
-      position: absolute;
-      border: 0;
-      margin: 0;
-      padding: $spacer-small $spacer-medium;
-      background-color: #111;
-      background-color: rgba(0, 0, 0, 0.6);
-      @include rounded-corners;
-      top: -10px;
-      left: -4px;
-      @include rotate(-8deg);
+      .final {
+        position: relative;
+
+        .text {
+          z-index: 1;
+          position: absolute;
+          border: 0;
+          margin: 0;
+          padding: $spacer-small $spacer-medium;
+          background-color: #111;
+          background-color: rgba(0, 0, 0, 0.6);
+          @include rounded-corners;
+          top: -10px;
+          left: -4px;
+          @include rotate(-8deg);
+        }
+      }
+
+      .contextual-menu {
+        visibility: hidden;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        z-index: 2;
+        font-size: 1.15rem;
+        padding: .25rem .33rem;
+        background: rgba(0, 0, 0, 0.75);
+        border-radius: 1.45rem;
+        border: 1px solid rgba(255, 255, 255, .2);
+
+        [class^="icon-"] {
+          width: 1.25em;
+          text-align: center;
+          display: inline-block;
+        }
+
+        * {
+          font-size: 1rem;
+        }
+      }
+
+      &:hover .contextual-menu {
+        visibility: visible;
+      }
+
+      .label {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
+        margin: 0;
+        padding: 2px 0;
+        width: 80px;
+
+        background: $grey-6-dark;
+        background-color: rgba(0, 0, 0, 0.3);
+        filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4c000000', endColorstr='#4c000000')";
+
+        text-align: center;
+        font-weight: bold;
+
+        @include rounded-corners(0 0 12px 12px);
+
+        &.active {
+          background: white;
+          background-color: rgba(255, 255, 255, 0.66);
+          color: #111;
+        }
+      }
     }
-  }
 
-  .contextual-menu {
-    visibility: hidden;
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    z-index: 2;
-    font-size: 1.15rem;
-    padding: .25rem .33rem;
-    background: rgba(0, 0, 0, 0.75);
-    border-radius: 1.45rem;
-    border: 1px solid rgba(255, 255, 255, .2);
+    .revision-description {
+      padding: 8px;
 
-    [class^="icon-"] {
-      width: 1.25em;
-      text-align: center;
-      display: inline-block;
+      h3 {
+        color: $strong-text-color;
+        font-size: 16px;
+        margin: 0 0 4px 0;
+      }
+
+      p {
+        color: #c3c3c3;
+        font-size: 13px;
+        line-height: 15px;
+      }
     }
-
-    * {
-      font-size: 1rem;
-    }
-  }
-
-  &:hover .contextual-menu {
-    visibility: visible;
-  }
-
-  .label {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-
-    margin: 0;
-    padding: 2px 0;
-    width: 80px;
-
-    background: $grey-6-dark;
-    background-color: rgba(0, 0, 0, 0.3);
-    filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#4c000000', endColorstr='#4c000000')";
-
-    text-align: center;
-    font-weight: bold;
-
-    @include rounded-corners(0 0 12px 12px);
-
-    &.active {
-      background: white;
-      background-color: rgba(255, 255, 255, 0.66);
-      color: #111;
-    }
-  }
-}
-
-.revision-description {
-  padding: 8px;
-
-  h3 {
-    color: $strong-text-color;
-    font-size: 16px;
-    margin: 0 0 4px 0;
-  }
-
-  p {
-    color: #c3c3c3;
-    font-size: 13px;
-    line-height: 15px;
   }
 }
 
@@ -3026,38 +2658,6 @@ li.revisions {
   p {
     font-size: 87.5%;
   }
-}
-
-#rawdata-file-drop-area {
-  min-height: 180px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border: 2px dashed $grey-5;
-  @include rounded-corners;
-  text-align: center;
-  color: #555;
-
-  h2 {
-    padding-top: 30px;
-    border-bottom: none;
-  }
-}
-
-#rawdata-filelist {
-  color: #e5e5e5;
-
-  th {
-    background: $grey-6-dark url('../images/darker-panel-tile.png');
-  }
-
-  .filename {
-    width: 80%;
-  }
-}
-
-#rawdata-eta {
-  color: #888;
-  font-size: smaller;
 }
 
 .subscription-plans-overview {
@@ -3342,96 +2942,6 @@ li.revisions {
     line-height: 14px;
     color: #cdcdcd;
     text-align: center;
-  }
-}
-
-table.rawdata-browser {
-  font-size: 90%;
-
-  .download-link, .delete-link {
-    visibility: hidden;
-  }
-
-  tr:hover .download-link,
-  tr:hover .delete-link {
-    visibility: visible;
-  }
-
-  tbody tr:first-child td span {
-    margin-right: $spacer-medium;
-  }
-
-  td, th {
-    &.rawdata-browser-counter, &.rawdata-browser-action,
-    &.rawdata-browser-icon {
-      width: 20px;
-    }
-
-    &.rawdata-browser-size, &.rawdata-browser-type,
-    &.rawdata-browser-file-count, &.rawdata-browser-user,
-    &.rawdata-browser-uploaded {
-      width: 15%;
-    }
-
-    &.rawdata-browser-name {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: clip;
-    }
-
-    &.rawdata-browser-actions {
-      width: 40px;
-
-      li {
-        text-align: left;
-      }
-    }
-  }
-}
-
-table.rawdata-folder-table {
-  td, th {
-    &.rawdata-folder-delete-action {
-      width: 20px;
-    }
-
-    &.rawdata-folder-owner, &.rawdata-folder-files,
-    &.rawdata-folder-images, &.rawdata-folder-created {
-      text-align: center;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 10%;
-    }
-
-    &.rawdata-folder-created {
-      width: 20%;
-      text-align: right;
-    }
-
-    &.rawdata-folder-owner {
-      text-align: left;
-      width: 20%;
-    }
-  }
-}
-
-.rawdata-browser-breadcrumb {
-  display: inline-block;
-  margin-bottom: $spacer-medium;
-
-  a {
-    margin-right: $spacer-small;
-
-    i.icon-remove {
-      padding-left: 6px;
-      font-size: 9px;
-    }
-  }
-
-  .divider {
-    color: #777;
-    padding-right: 3px;
-    font-size: 12px;
   }
 }
 
@@ -3856,44 +3366,6 @@ img.flickr-photo-to-import-selected {
   }
 }
 
-.breadcrumb {
-  position: relative;
-  padding-left: 30px;
-  padding-right: 30px;
-  margin-left: -30px;
-  margin-bottom: 20px;
-  width: 100%;
-  background-color: #272727;
-  border-radius: 4px 0;
-  line-height: 26px;
-
-  > li {
-    text-shadow: none;
-
-    .divider {
-      color: #555;
-    }
-
-    &:last-of-type {
-      font-weight: bold;
-      color: white;
-      background: #3092d0;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-style: italic;
-      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
-    }
-  }
-
-  .pagination {
-    position: absolute;
-    margin: 0;
-    top: 6px;
-    right: 30px;
-  }
-}
-
 .field-errors {
   color: $red;
 }
@@ -4287,7 +3759,7 @@ ol.faq, .row.help {
 .anchor {
   display: block;
   position: relative;
-  top: -55px;
+  top: -60px;
   visibility: hidden;
 }
 
@@ -4468,44 +3940,6 @@ table.search-table {
         text-overflow: ellipsis;
       }
     }
-  }
-}
-
-.trending-astrophotographers {
-  .trending-astrophotographers-position {
-    width: 25px;
-  }
-
-  .trending-astrophotographers-index, .trending-astrophotographers-followers, .trending-astrophotographers-images,
-  .trending-astrophotographers-integration {
-    text-align: center;
-    width: 15%;
-  }
-
-  .trending-astrophotographers-integration {
-    text-align: right;
-  }
-}
-
-.filter-toggle-group {
-  text-align: right;
-  padding: 10px 10px 10px 0;
-  background-color: $grey-8;
-  background-color: rgba(0, 0, 0, 0.35);
-
-  .filter-toggle {
-    display: inline-block;
-    margin-left: 8px;
-
-    a.active {
-      cursor: default;
-      pointer-events: none;
-      color: $text-color;
-    }
-  }
-
-  .separator {
-    margin-left: 8px;
   }
 }
 

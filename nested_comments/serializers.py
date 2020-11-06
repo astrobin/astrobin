@@ -24,4 +24,6 @@ class NestedCommentSerializer(serializers.ModelSerializer):
             'updated',
             'deleted',
             'parent',
+            'depth',
+            'likes',
         )

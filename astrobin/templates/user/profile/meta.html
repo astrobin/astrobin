@@ -68,7 +68,6 @@
         </ul>
     {% endif %}
 
-    {% if stats %}
     <div class="subtle-container stats">
         <div class="header">
             <h4>
@@ -83,7 +82,16 @@
                     <strong>{{i.1}}</strong>
                 </p>
             {% endif %}
+        {% empty %}
+            <p>
+                {% blocktrans trimmed %}
+                    This data is currently not available and will be recalculate shortly.
+                {% endblocktrans %}
+
+                {% blocktrans trimmed %}
+                    Please check again in a bit, thanks!
+                {% endblocktrans %}
+            </p>
         {% endfor %}
     </div>
-    {% endif %}
 </div><!-- ./profile-meta -->

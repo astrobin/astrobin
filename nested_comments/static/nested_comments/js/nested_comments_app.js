@@ -11,6 +11,7 @@ $(function() {
 
         ready: function() {
             this.commentsApiUrl = this.baseApiUrl + 'nestedcomments/nestedcomments/';
+            this.togglepropertiesApiUrl = this.baseApiUrl + 'common/toggleproperties/';
             this.authorsApiUrl = this.baseApiUrl + 'common/users/';
             this.profilesApiUrl = this.baseApiUrl + 'common/userprofiles/';
             this.usersUrl = '/users/';
@@ -23,6 +24,7 @@ $(function() {
             this.page_url = $('#nested-comments-page-url').attr('data-value');
             this.loaderGif = $('#nested-comments-loaderGif-url').attr('data-value');
             this.contentTypeId = $(this.rootElement).attr('data-content-type-id');
+            this.nestedcommentsContentTypeId = $('#nested-comments-comments-content-type-id').attr('data-value');
             this.objectId = $(this.rootElement).attr('data-object-id');
 
             this.markdownConverter = new Markdown.Converter();
@@ -121,6 +123,8 @@ $(function() {
         updated: null,
         deleted: null,
         parent: null,
+        depth: null,
+        likes: [],
 
         // Fields that we compute manually
         ready: false,
@@ -166,6 +170,30 @@ $(function() {
 
             return submitting || !hasText;
         }.property('submitting', 'html'),
+
+        shouldNotIndent: function () {
+            return this.depth > 10;
+        }.property('depth'),
+
+        liked: function () {
+            return this.likes.indexOf(nc_app.userId) > -1;
+        }.property('likes'),
+
+        likesCount: function () {
+            return this.likes.length;
+        }.property('likes'),
+
+        hasNoLikes: function () {
+            return this.likes.length === 0;
+        }.property('likes'),
+
+        hasOneLike: function () {
+            return this.likes.length === 1;
+        }.property('likes'),
+
+        hasManyLikes: function () {
+            return this.likes.length > 1;
+        }.property('likes'),
 
         // Functions
         init: function() {
@@ -502,6 +530,64 @@ $(function() {
             });
         },
 
+        like: function(comment) {
+            comment.set('liking', true);
+
+            $.ajax({
+                type: 'post',
+                url: nc_app.togglepropertiesApiUrl,
+                data: {
+                    property_type: 'like',
+                    content_type: nc_app.nestedcommentsContentTypeId,
+                    object_id: comment.id,
+                    user: nc_app.userId
+                },
+                timeout: nc_app.ajaxTimeout,
+                success: function (response) {
+                    comment.set('liking', false);
+                    comment.set('likes', comment.likes.concat([nc_app.userId]));
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    var errors = JSON.parse(XMLHttpRequest.responseText).non_field_errors;
+                    errors.forEach(function(error) {
+                        if (error === "User does not have the required permissions to like this object") {
+                            $('#cant-like').modal('show');
+                        }
+                    });
+                    comment.set('liking', false);
+                }
+            });
+        },
+
+        unlike: function (comment) {
+            comment.set('unliking', true);
+
+            $.ajax({
+                type: 'get',
+                url: nc_app.togglepropertiesApiUrl +
+                    "?property_type=like" +
+                    "&content_type=" + nc_app.nestedcommentsContentTypeId +
+                    "&object_id=" + comment.id +
+                    "&user=" + nc_app.userId,
+                timeout: nc_app.ajaxTimeout,
+                success: function (response) {
+                    var togglePropertyId = response.results[0].pk;
+
+                    $.ajax({
+                        type: 'delete',
+                        url: nc_app.togglepropertiesApiUrl + togglePropertyId + "/",
+                        timeout: nc_app.ajaxTimeout,
+                        success: function () {
+                            comment.set('unliking', false);
+                            comment.set('likes', comment.likes.filter(function (userId) {
+                                return userId !== nc_app.userId
+                            }));
+                        }
+                    });
+                }
+            });
+        },
+
         saveNewComment: function(comment) {
             var self = this,
                 data = self.dump(comment);
@@ -556,8 +642,8 @@ $(function() {
             var self = this;
             setTimeout(function() {
                 $('html, body').animate({
-                    // 55 pixel is the fixed navigation bar
-                    scrollTop: self.$().offset().top - 55
+                    // 60 pixel is the fixed navigation bar
+                    scrollTop: self.$().offset().top - 60
                 }, 1000);
             }, 250);
         },
@@ -630,6 +716,14 @@ $(function() {
 
         reply: function() {
             nc_app.get('router.commentsController').startReplying(this.get('node'));
+        },
+
+        like: function () {
+            nc_app.get('router.commentsController').like(this.get('node'));
+        },
+
+        unlike: function () {
+            nc_app.get('router.commentsController').unlike(this.get('node'));
         },
 
         saveReply: function() {

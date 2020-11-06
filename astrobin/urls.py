@@ -116,6 +116,7 @@ from astrobin.views import (
 
     api_help,
     trending_astrophotographers,
+    reputation_leaderboard,
     stats,
 
     set_language
@@ -247,6 +248,7 @@ urlpatterns += [
     ###########################################################################
 
     url(r'^explore/top-picks/$', explore_views.TopPicksView.as_view(), name='top_picks'),
+    url(r'^explore/top-pick-nominations/$', explore_views.TopPickNominationsView.as_view(), name='top_pick_nominations'),
 
     ###########################################################################
     ### USER VIEWS                                                          ###
@@ -410,6 +412,9 @@ urlpatterns += [
     url(r'^trending-astrophotographers/',
         trending_astrophotographers,
         name='trending_astrophotographers'),
+    url(r'^reputation-leaderboard/',
+        reputation_leaderboard,
+        name='reputation_leaderboard'),
     url(r'^stats/', stats, name='stats'),
 
     ###########################################################################

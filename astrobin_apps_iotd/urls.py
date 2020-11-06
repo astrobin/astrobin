@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from astrobin_apps_iotd.feeds.iotd import IotdFeed, IotdAtomFeed
 from astrobin_apps_iotd.feeds.top_picks import TopPickFeed, TopPickAtomFeed
+from astrobin_apps_iotd.feeds.top_picks_instagram_story import TopPickInstagramStoryFeed, TopPickInstagramStoryAtomFeed
 from astrobin_apps_iotd.views import IotdToggleSubmissionAjaxView, IotdSubmissionQueueView, IotdToggleVoteAjaxView, \
     IotdReviewQueueView, IotdToggleJudgementAjaxView, IotdJudgementQueueView, IotdArchiveView, \
     IotdSubmittersForImageAjaxView, IotdReviewersForImageAjaxView
@@ -54,8 +55,10 @@ urlpatterns = (
         name='iotd_reviewers_for_image'),
 
     # Feeds
-    url(r'rss/iotd', IotdFeed(), name='iotd_rss_iotd'),
-    url(r'atom/iotd', IotdAtomFeed(), name='iotd_atom_iotd'),
-    url(r'rss/top-picks', TopPickFeed(), name='iotd_rss_top_picks'),
-    url(r'atom/top-picks', TopPickAtomFeed(), name='iotd_atom_top_picks')
+    url(r'rss/iotd$', IotdFeed(), name='iotd_rss_iotd'),
+    url(r'atom/iotd$', IotdAtomFeed(), name='iotd_atom_iotd'),
+    url(r'rss/top-picks$', TopPickFeed(), name='iotd_rss_top_picks'),
+    url(r'atom/top-picks$', TopPickAtomFeed(), name='iotd_atom_top_picks'),
+    url(r'rss/top-picks/instagram-story$', TopPickInstagramStoryFeed(), name = 'iotd_rss_top_picks_instagram_story'),
+    url(r'atom/top-picks/instagram-story$', TopPickInstagramStoryAtomFeed(), name='iotd_atom_top_picks_instagram_story')
 )

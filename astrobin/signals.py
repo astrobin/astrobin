@@ -16,6 +16,7 @@ from django.utils.translation import ugettext_lazy as _
 from gadjo.requestprovider.signals import get_request
 from pybb.models import Forum, Topic, Post
 from rest_framework.authtoken.models import Token
+from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete
 from subscription.models import UserSubscription, Subscription
 from subscription.signals import subscribed, paid, signed_up
@@ -250,7 +251,7 @@ def toggleproperty_post_delete(sender, instance, **kwargs):
         # This will trigger the auto_now fields in the content_object
         try:
             kwargs = {}
-            if hasattr(instance.content_object, 'deleted'):
+            if issubclass(type(instance.content_object), SafeDeleteModel):
                 kwargs['keep_deleted'] = True
             instance.content_object.save(**kwargs)
         except instance.content_object.DoesNotExist:
@@ -258,30 +259,31 @@ def toggleproperty_post_delete(sender, instance, **kwargs):
 
 
 post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
-
-
 def toggleproperty_post_save(sender, instance, created, **kwargs):
     if hasattr(instance.content_object, "updated"):
         # This will trigger the auto_now fields in the content_object
-        instance.content_object.save(keep_deleted=True)
+        kwargs = {}
+        if issubclass(type(instance.content_object), SafeDeleteModel):
+            kwargs['keep_deleted'] = True
+        instance.content_object.save(**kwargs)
 
     if created:
+        verb = None
+
         if instance.property_type in ("like", "bookmark"):
-            if instance.property_type == "like":
-                verb = 'VERB_LIKED_IMAGE'
-            elif instance.property_type == "bookmark":
-                verb = 'VERB_BOOKMARKED_IMAGE'
 
             if instance.content_type == ContentType.objects.get_for_model(Image):
                 image = instance.content_type.get_object_for_this_type(id=instance.object_id)
                 if image.is_wip:
                     return
 
-            add_story(instance.user,
-                      verb=verb,
-                      action_object=instance.content_object)
+                if instance.property_type == "like":
+                    verb = 'VERB_LIKED_IMAGE'
+                elif instance.property_type == "bookmark":
+                    verb = 'VERB_BOOKMARKED_IMAGE'
+                else:
+                    return
 
-            if instance.content_type == ContentType.objects.get_for_model(Image):
                 push_notification(
                     [instance.content_object.user], 'new_' + instance.property_type,
                     {
@@ -291,6 +293,39 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                         'user_url': settings.BASE_URL + reverse_url(
                             'user_page', kwargs={'username': instance.user.username}),
                     })
+
+            elif instance.content_type == ContentType.objects.get_for_model(NestedComment):
+                push_notification(
+                    [instance.content_object.author], 'new_comment_like',
+                    {
+                        'url': settings.BASE_URL + instance.content_object.get_absolute_url(),
+                        'user': instance.user.userprofile.get_display_name(),
+                        'user_url': settings.BASE_URL + reverse_url(
+                            'user_page', kwargs={'username': instance.user.username}),
+                        'comment': instance.content_object.text
+                    })
+
+                # Trigger index update on the user, which will recalculate the reputation index.
+                instance.content_object.author.save()
+
+            elif instance.content_type == ContentType.objects.get_for_model(Post):
+                push_notification(
+                    [instance.content_object.user], 'new_forum_post_like',
+                    {
+                        'url': settings.BASE_URL + instance.content_object.get_absolute_url(),
+                        'user': instance.user.userprofile.get_display_name(),
+                        'user_url': settings.BASE_URL + reverse_url(
+                            'user_page', kwargs={'username': instance.user.username}),
+                        'post': instance.content_object.topic.name
+                    })
+
+                # Trigger index update on the user, which will recalculate the reputation index.
+                instance.content_object.user.save()
+
+            if verb is not None:
+                add_story(instance.user,
+                          verb=verb,
+                          action_object=instance.content_object)
 
         elif instance.property_type == "follow":
             user_ct = ContentType.objects.get_for_model(User)

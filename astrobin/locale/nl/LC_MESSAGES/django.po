@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:02+0000\n"
+"POT-Creation-Date: 2020-10-30 07:27+0000\n"
 "PO-Revision-Date: 2015-12-30 11:27+0000\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -760,35 +760,6 @@ msgstr "Zimbabwe"
 msgid "Users"
 msgstr "Gebruikers"
 
-msgid "Make"
-msgstr "Merk"
-
-msgid "The make, brand, producer or developer of this product."
-msgstr "Het merk, de fabrikant, de producent of ontwikkelaar van dit produkt."
-
-msgid "Name"
-msgstr "Naam"
-
-msgid "Merge"
-msgstr "Samenvoegen"
-
-msgid ""
-"Use this field to mark that the item you are claiming really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"Gebruik dit veld om aan te geven dat het produkt dat je claimt effectief "
-"hetzelfde (of een variatie ervan) is van iets dat je eerder hebt geclaimd."
-
-#, python-format
-msgid ""
-"You can't create more than %d claims. Consider upgrading your affiliation!"
-msgstr ""
-"Je kan niet meer dan %d claims aanmaken. Overweeg om je peterschap up te "
-"graden!"
-
-msgid "You have already claimed this product."
-msgstr "Je hebt dit produkt al geclaimd."
-
 msgid ""
 "Select a tag to order this collection by its value. If you see no options "
 "here, it's because none of the images in this collection have key/value "
@@ -934,13 +905,6 @@ msgid "Longitude (seconds)"
 msgstr "Lengtegraad (seconden)"
 
 msgid ""
-"Use this field to mark that the item you are merging really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"Gebruik dit veld om aan te geven dat het produkt dat je samenvoegt effectief "
-"hetzelfde (of een variatie) is van iets dat je eerder hebt geclaimd."
-
-msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
 "guiding, go here."
 msgstr ""
@@ -1006,9 +970,6 @@ msgstr "van bladwijzer voorzien"
 
 msgid "likes"
 msgstr "likes"
-
-msgid "has written a review on"
-msgstr "heeft een review geschreven over"
 
 #, fuzzy
 msgid "created a new public group"
@@ -1195,6 +1156,15 @@ msgstr "Onderkant midden"
 
 msgid "Bottom right"
 msgstr "Onderkant rechts"
+
+msgid "Make"
+msgstr "Merk"
+
+msgid "The make, brand, producer or developer of this product."
+msgstr "Het merk, de fabrikant, de producent of ontwikkelaar van dit produkt."
+
+msgid "Name"
+msgstr "Naam"
 
 msgid ""
 "Just the name of this product, without any properties or personal "
@@ -1830,6 +1800,22 @@ msgstr "TIFF/FITS"
 msgid "Higher resolution"
 msgstr "Hogere resolutie"
 
+#, fuzzy
+msgid "I am no longer active in astrophotography"
+msgstr "Wijzig je astrofoto materiaal"
+
+msgid "This website did not meet my expectations"
+msgstr ""
+
+msgid "Something on this website doesn't work for me"
+msgstr ""
+
+msgid "The paid subscriptions are too expensive"
+msgstr ""
+
+msgid "I prefer not to say"
+msgstr ""
+
 msgid "Real name"
 msgstr "Echte naam"
 
@@ -1860,31 +1846,18 @@ msgstr "Over jezelf"
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "Vertel wat over jezelf. HTML tags zijn toegestaan."
 
-msgid "Company name"
-msgstr "Bedrijfsnaam"
+#, fuzzy
+#| msgid "Delete account"
+msgid "Delete reason"
+msgstr "Account verwijderen"
 
-msgid "The name of the company you represent on AstroBin."
-msgstr "De naam van het bedrijf dat je op AstroBin vertegenwoordigt."
-
-msgid "Company description"
-msgstr "Beschrijving bedrijf"
+msgid "Why are you deleting your AstroBin account?"
+msgstr ""
 
 msgid ""
-"A short description of the company you represent on AstroBin. You can use "
-"some <a href=\"/faq/#comments\">formatting rules</a>."
+"Please tell us why you are deleting your account (minimum 30 characters). "
+"Thanks!"
 msgstr ""
-"Een korte beschrijving van het bedrijf dat je op AstroBin vertegenwoordigt. "
-"Je kunt gebruik maken van enkele <a href=\"/faq/#comments"
-"\">formatteringsregels</a>."
-
-msgid "Company website"
-msgstr "Bedrijfswebsite"
-
-msgid "The website of the company you represent on AstroBin."
-msgstr "De website van het bedrijf dat je vertegenwoordigt op AstroBin."
-
-msgid "Country of operation"
-msgstr "Land van de bedrijfszetel"
 
 msgid "I want to be excluded from competitions"
 msgstr ""
@@ -1981,6 +1954,18 @@ msgid ""
 "and this kind of support would be amazing. Thank you in advance!"
 msgstr ""
 
+#, fuzzy
+#| msgid "Total integration"
+msgid "Allow retailer integration"
+msgstr "Totale integratietijd"
+
+msgid ""
+"AstroBin may associate with retailers of astronomy and astrophotography "
+"equipment to enhance the display of equipment items with links to sponsoring "
+"partners. The integration is subtle and non intrusive, and it would help a "
+"lot if you didn't disable it. Thank you in advance!"
+msgstr ""
+
 msgid "Language"
 msgstr "Taal"
 
@@ -2056,100 +2041,6 @@ msgid ""
 msgstr ""
 "Gelieve het doel van je toepassing te verduidelijken en hoe je de API gaat "
 "gebruiken."
-
-msgid "AUD - Australian dollars"
-msgstr "AUD - Australische dollar"
-
-msgid "CAD - Canadian dollars"
-msgstr "CAD - Canadese dollar"
-
-msgid "CHF - Swiss francs"
-msgstr "CHF - Zwitserse frank"
-
-msgid "EUR - Euros"
-msgstr "EUR - Euro"
-
-msgid "GPB - Pound stelings"
-msgstr "GBP - Britse pond"
-
-msgid "PLN - Polish zloty"
-msgstr "PLN - Poolse zloty"
-
-msgid "SEK - Swedish krona"
-msgstr "SEK - Zweedse kroon"
-
-msgid "USD - American dollars"
-msgstr "USD - Amerikaanse dollar"
-
-msgid "Producer"
-msgstr "Producent"
-
-msgid "The link to this product's page on your website."
-msgstr "De link van dit produkt op je website."
-
-msgid "Price"
-msgstr "Prijs"
-
-msgid "Currency"
-msgstr "Munteenheid"
-
-msgid "Retailed gear items"
-msgstr "Verkocht produkt"
-
-msgid "Proper make"
-msgstr "Correct merk"
-
-msgid ""
-"Sometimes, product make/brand/producer/developer names are not written "
-"properly by the users. Write here the proper make/brand/producer/developer "
-"name."
-msgstr ""
-"Soms wordt het merk/type/producent/ontwikkelaar van het produkt niet correct "
-"gespeld door de gebruikers. Schrijf hier de juiste manier."
-
-msgid "Proper name"
-msgstr "Correcte naam"
-
-msgid ""
-"Sometimes, product names are not written properly by the users. Write here "
-"the proper product name, not including the make/brand/producer/developer "
-"name.<br/>It is recommended that you try to group as many items as possible, "
-"so try to use a generic version of your product's name."
-msgstr ""
-"Soms word de produktnaam niet correct geschreven door de gebruikers. Schrijf "
-"hier de juiste produktnaam zonder vermelding van het merk/type/producent/"
-"ontwikkelaar. <br/>Het is aanbevolen dat je zoveel mogelijk artikelen "
-"groepeert, dus tracht een generieke versie van je produktnaam te gebruiken."
-
-msgid ""
-"The official, commercial image for this product. Upload an image via the "
-"regular uploading interface, set its subject type to \"Gear\", and then "
-"choose it from this list. If you upload several revisions, they will also "
-"appear in the commercial page."
-msgstr ""
-"De officiële commerciële foto van dit produkt. Upload de foto via de gewone "
-"interface maar gebruik \"materiaal\" als type onderwerp en kies ze van deze "
-"lijst. Als je verschillende revisies uploadt dan zullen deze ook verschijnen "
-"op de commerciële pagina."
-
-msgid "Tagline"
-msgstr "Slagzin"
-
-msgid ""
-"A memorable phrase that will sum up this product, for marketing purposes."
-msgstr ""
-"Een catchy zin die je produkt goed omschrijft. Voor marketing doeleinden."
-
-msgid ""
-"Here you can write the full commercial description of your product. You can "
-"use some <a href=\"/faq/#comments\">formatting rules</a>."
-msgstr ""
-"Hier kun je de volledige commerciële omschrijving van je produkt "
-"neerschrijven. Je kunt enkele <a href=\"/faq/#comments"
-"\">formatteringsregels</a> gebruiken."
-
-msgid "Commercial gear items"
-msgstr "Commercieel materiaal"
 
 #, fuzzy
 #| msgid "Sending..."
@@ -2443,24 +2334,6 @@ msgstr "Waarschuwing!"
 msgid "Error!"
 msgstr "Fout!"
 
-#, python-format
-msgid ""
-"As a producer and/or a retailer on AstroBin, it's very important that you "
-"fill in all of your company details! Click <a href=\"%(the_url)s\">here</a> "
-"to do it now."
-msgstr ""
-"Als fabrikant en/of distributeur op AstroBin is het belangrijk dat je alle "
-"bedrijfsdetails invult! Klik <a href=\"%(the_url)s\">hier</a> om dit nu te "
-"doen."
-
-#, python-format
-msgid ""
-"As a retailer on AstroBin, it's very important that you fill in your country "
-"of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
-msgstr ""
-"Als distributeur op AstroBin is het erg belangrijk dat je het land waar je "
-"opereert invult! Klik <a href=\"%(the_url)s\">hier</a> om dit nu te doen."
-
 msgid "About"
 msgstr "Over"
 
@@ -2542,6 +2415,20 @@ msgstr ""
 
 msgid "Contact us to resolve the issue"
 msgstr ""
+
+#, python-format
+msgid ""
+"<strong>Good news!</strong> AstroBin automatically recovered some of your "
+"images that were lost in the data loss incident of February 2020. Please "
+"review them to confirm the recovery. If you do nothing, your recovered "
+"images will be confirmed automatically starting from <strong>%(date)s</"
+"strong>."
+msgstr ""
+
+#, fuzzy
+#| msgid "Recent images"
+msgid "Review recovered images"
+msgstr "Recente foto's"
 
 msgid "Cancel"
 msgstr "Annuleren"
@@ -2753,11 +2640,13 @@ msgstr "Soorten abonnementen"
 msgid "My places"
 msgstr "Mijn paginas"
 
-msgid "Commercial products"
-msgstr "Commerciële produkten"
-
-msgid "Gallery"
+#, fuzzy
+#| msgid "Gallery"
+msgid "Public Gallery"
 msgstr "Galerij"
+
+msgid "Staging Area"
+msgstr "Ontwikkelingszone"
 
 msgid "Bookmarks"
 msgstr "Bladwijzers"
@@ -2826,21 +2715,6 @@ msgstr ""
 
 msgid "Custom e-mail change request on AstroBin"
 msgstr ""
-
-msgid "Edit commercial product"
-msgstr "Bewerk commerciëel produkt"
-
-msgid "Save"
-msgstr "Bewaren"
-
-msgid "Return to list"
-msgstr "Ga terug naar de lijst"
-
-msgid "View in new window"
-msgstr "Bekijk in een nieuw venster"
-
-msgid "Edit retailed product"
-msgstr "Bewerk te koop aangeboden produkt"
 
 msgid ""
 "Please contact us if you need any assistance, or want to report a problem, "
@@ -3053,79 +2927,6 @@ msgid ""
 msgstr ""
 "Uw bijdrage was erg belangrijk en daarom dankt de hele AstroBin cummunity u!"
 
-msgid "by"
-msgstr "door"
-
-msgid "Other images"
-msgstr "Andere beelden"
-
-msgid "Some images"
-msgstr "Enkele foto's"
-
-msgid "(view more)"
-msgstr "(meer zien)"
-
-msgid "Reviews"
-msgstr "Reviews"
-
-msgid "Rating"
-msgstr "Score"
-
-msgid "There are no reviews yet."
-msgstr "Tot nu toe heeft niemand reviews geschreven."
-
-msgid "Add your review"
-msgstr "Voeg je review toe"
-
-msgid ""
-"Please be fair, honest and polite when writing a review. Many people will "
-"read your review: all the users on AstroBin who own this piece of gear, will "
-"be notified of your review."
-msgstr ""
-"Gelieve rechtvaardig, eerlijk en vriendelijk te zijn als je een review "
-"schrijft. Veel mensen zullen hem lezen: alle leden op AstroBin die eigenaar "
-"zijn van dit type materiaal zullen een melding krijgen dat je een review "
-"hebt geschreven."
-
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to write a review."
-msgstr ""
-"Gelieve <a href=\"/accounts/login/\">in te loggen</a> of jezelf te <a href="
-"\"/accounts/register/\">registreren</a> om een review te schrijven."
-
-msgid "Comments"
-msgstr "Commentaar"
-
-msgid ""
-"Use this space to start a discussion, leave a comment or ask a question "
-"about this piece of gear. All the users on AstroBin who own one, will be "
-"notified and can join the discussion."
-msgstr ""
-"Gebruik deze plaats om een discussie te starten, een commentaar achter te "
-"laten of een vraag te stellen over dit type van materiaal. Alle AstroBin "
-"gebruikers die het item bezitten zullen een melding krijgen en kunnen dus "
-"meedoen aan de discussie."
-
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment."
-msgstr ""
-"Gelieve <a href=\"/accounts/login/\">in te loggen</a> of jezelf te <a href="
-"\"/accounts/register/\">registreren</a> om commentaar te kunnen geven."
-
-msgid "Buy it here"
-msgstr "Koop hier"
-
-msgid "Properties"
-msgstr "Eigenschappen"
-
-msgid "Owners"
-msgstr "Eigenaars"
-
-msgid "just now"
-msgstr "momenteel"
-
 msgid "Additional information requested"
 msgstr "Aanvragen bijkomende informatie"
 
@@ -3141,6 +2942,21 @@ msgstr ""
 
 msgid "Return to image"
 msgstr "Ga terug naar de foto"
+
+#, fuzzy
+#| msgid "Hemisphere:"
+msgid "Hemisphere"
+msgstr "Hemisfeer:"
+
+#, fuzzy
+#| msgid "North"
+msgid "Northern"
+msgstr "Noord"
+
+#, fuzzy
+#| msgid "South"
+msgid "Southern"
+msgstr "Zuid"
 
 msgid "Contains"
 msgstr "Bevat"
@@ -3158,6 +2974,9 @@ msgstr "Vastgelegd na"
 msgid "Remove"
 msgstr "Verwijderen"
 
+msgid "Comments"
+msgstr "Commentaar"
+
 #, python-format
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
@@ -3171,9 +2990,6 @@ msgstr ""
 
 msgid "Comments are closed."
 msgstr "De commentaren zijn afgesloten"
-
-msgid "Made possible by"
-msgstr "Mogelijk gemaakt door"
 
 msgid "In these public groups"
 msgstr ""
@@ -3191,6 +3007,25 @@ msgstr "Beschrijving"
 
 msgid "Technical card"
 msgstr "Technische fiche"
+
+msgid "Sponsored brands"
+msgstr ""
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr ""
+
+msgid "Sponsored items"
+msgstr ""
+
+#, fuzzy
+#| msgid "Retailer information"
+msgid "Disable retailer integration"
+msgstr "Informatie distributeur"
+
+#, python-format
+msgid "Shop %(name)s at %(retailer)s"
+msgstr ""
 
 msgid "Frames"
 msgstr "Sub-beelden"
@@ -3538,8 +3373,13 @@ msgid "The following people like this image"
 msgstr "De volgende mensen vinden deze foto leuk"
 
 msgid ""
+"This will move this image to your public area, making it listed. As this "
+"image had already been published before, your followers will not be notified."
+msgstr ""
+
+msgid ""
 "This will move this image to your public area, making it listed and "
-"notifying your followers."
+"optionally notifying your followers."
 msgstr ""
 
 msgid ""
@@ -3645,8 +3485,7 @@ msgid ""
 "unless you give them one of the links you can find in the <em>Share</em> "
 "menu below. Use that link to post this image to Internet forums and get "
 "feedback on it. When you are satisfied, perhaps after uploading some "
-"revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
-"to the <a href=\"%(profile_url)s\">Public Area</a>."
+"revisions, promote it to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
 "Deze foto is <strong>werk in uitvoering</strong> uit je <a href="
 "\"%(profile_url)s?staging\">Ontwikkelingszone</a>. Dit betekent dat niemand "
@@ -3707,6 +3546,9 @@ msgstr ""
 
 msgid "Edit your image: acquisition details"
 msgstr "Wijzig je foto: details ivm de realisatie"
+
+msgid "Save"
+msgstr "Bewaren"
 
 msgid "Remove data"
 msgstr "Verwijder gegevens"
@@ -3950,9 +3792,6 @@ msgstr "Selecteer breedte"
 msgid "Galactic latitude"
 msgstr "Selecteer breedte"
 
-msgid "View page"
-msgstr "Bekijk pagina"
-
 msgid "No gear yet."
 msgstr "Nog geen materiaal."
 
@@ -3964,6 +3803,17 @@ msgstr "Geen foto's"
 
 msgid "Only you can see this"
 msgstr ""
+
+#, python-format
+msgid ""
+"Interested in <strong>%(brand)s</strong>? Our sponsor <strong>%(retailer)s</"
+"strong> sells this brand!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Sign up now!"
+msgid "Shop now"
+msgstr "Registreer nu!"
 
 msgid "Integration"
 msgstr "Integratie"
@@ -4026,11 +3876,8 @@ msgstr ""
 msgid "What is this site?"
 msgstr "Wat is het doel van deze site?"
 
-msgid "Commercial information"
-msgstr "Commerciële informatie"
-
-msgid "Retailer information"
-msgstr "Informatie distributeur"
+msgid "Gallery"
+msgstr "Galerij"
 
 msgid "Blog"
 msgstr "Blog (Engelstalig)"
@@ -4551,7 +4398,7 @@ msgstr "%(user)s wilde iets kwijt over je foto!"
 #| "%(url)s"
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it out "
-"at the following url: %(url)s"
+"at the following url: <a href=\"%(url)s\">%(url)s</a>"
 msgstr ""
 "%(user)s heeft op je commentaar geantwoord. Je kan het hier lezen: %(url)s"
 
@@ -4633,37 +4480,6 @@ msgstr ""
 msgid "%(user)s started a new discussion about a gear item you own!"
 msgstr ""
 "%(user)s heeft een nieuwe discussie opgestart over een item dat jij bezit!"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "%(user)s wrote a review of a gear item you own! Read it at following url: "
-#| "%(url)s"
-msgid ""
-"%(user)s wrote a review of a gear item you own! Read it at following url: <a "
-"href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-"%(user)s heeft een review geschreven over een product dat jij ook bezit! "
-"Lees het op volgende URL: %(url)s"
-
-#, python-format
-msgid ""
-"%(user)s wrote a review of a gear item you own! Read it at following url: "
-"%(url)s"
-msgstr ""
-"%(user)s heeft een review geschreven over een product dat jij ook bezit! "
-"Lees het op volgende URL: %(url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear item "
-"you own!</a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> heeft een review geschreven "
-"over een product dat jij ook bezit!</a>"
-
-#, python-format
-msgid "%(user)s wrote a review of a gear item you own!"
-msgstr "%(user)s schreef een review over materiaal dat jij ook hebt!"
 
 #, fuzzy, python-format
 msgid ""
@@ -4991,6 +4807,11 @@ msgstr "Eerder upgeloade beelden"
 msgid "Next page"
 msgstr "Bekijk pagina"
 
+#, fuzzy
+#| msgid "Additional information requested"
+msgid "No additional information available for this item."
+msgstr "Aanvragen bijkomende informatie"
+
 msgid "Find images"
 msgstr "Vind foto's"
 
@@ -4999,6 +4820,9 @@ msgstr "RK"
 
 msgid "Dec"
 msgstr "Dec"
+
+msgid "View page"
+msgstr "Bekijk pagina"
 
 msgid "Member since"
 msgstr "Lid sinds"
@@ -5550,6 +5374,9 @@ msgstr "Formule"
 msgid "Offer valid until"
 msgstr ""
 
+msgid "Price"
+msgstr "Prijs"
+
 msgid "Validity"
 msgstr ""
 
@@ -5883,6 +5710,16 @@ msgid "%(user)s's followed users"
 msgstr "Gebruikers die %(user)s volgt"
 
 #, fuzzy, python-format
+#| msgid "%(user)s's favorites"
+msgid "%(user)s's friends"
+msgstr "%(user)s's favorieten"
+
+#, fuzzy, python-format
+#| msgid "These are the cities from which you usually image."
+msgid "These are the users that follow %(user)s mutually."
+msgstr "Dit zijn de plaatsen waar je meestal imaged"
+
+#, fuzzy, python-format
 #| msgid "%(user)s's followed users"
 msgid "%(user)s's liked images"
 msgstr "Gebruikers die %(user)s volgt"
@@ -5992,78 +5829,6 @@ msgstr ""
 "camera is het absolute minimum. De datums waarop de belichting is gebeurd "
 "zijn ook erg belangrijk."
 
-#, python-format
-msgid "%(user)s's commercial products"
-msgstr "%(user)s's commerciële produkten"
-
-msgid ""
-"Please remember that you are only allowed to claim items that you really "
-"produce and/or retail."
-msgstr ""
-"Denk eraan dat je enkel produkten mag claimen die je effectief produceert of "
-"distribueert."
-
-msgid "As producer"
-msgstr "Als producent"
-
-msgid "Gear IDs"
-msgstr "Materiaal identificaties"
-
-msgid "You haven't claimed any commercial products yet."
-msgstr "Je hebt nog geen commerciële produkten geclaimd."
-
-#, python-format
-msgid "%(user)s hasn't claimed any commercial products yet."
-msgstr "%(user)s heeft nog geen commerciële produkten geclaimd."
-
-msgid "As retailer"
-msgstr "Als distributeur"
-
-msgid "You haven't claimed any retailed products yet."
-msgstr "Je hebt nog geen produkten als distributeur geclaimd."
-
-#, python-format
-msgid "%(user)s hasn't claimed any retailed products yet."
-msgstr "%(user)s heeft nog geen gedistribueerde producten geclaimd."
-
-msgid "Claim as producer"
-msgstr "Claim als fabrikant"
-
-msgid "Claim as retailer"
-msgstr "Claim als distributeur"
-
-msgid "Claim commercial product"
-msgstr "Claim commercieel produkt"
-
-msgid "Claim"
-msgstr "Claim"
-
-msgid "Select items to remove"
-msgstr "Selecteer artikelen die verwijderd dienen te worden"
-
-msgid "Be careful if you try to remove all of these!"
-msgstr "Wees voorzichtig als je al deze zaken tracht te verwijderen!"
-
-msgid ""
-"All the properties, including the commercial description, of this claim will "
-"be deleted and cannot be recovered!"
-msgstr ""
-"Al de eigenschappen, inclusief de commerciële omschrijving van deze claim, "
-"zullen voorgoed worden verwijderd!"
-
-msgid "Select the product you want to merge to"
-msgstr "Selecteer het product waarmee je wil samenvoegen"
-
-msgid "Are you sure?"
-msgstr "Ben je zeker?"
-
-msgid "Claim retailed product"
-msgstr "Claim produkt als distributeur"
-
-msgid ""
-"All the properties of this claim will be deleted and cannot be recovered!"
-msgstr "Alle eigenschappen van deze claim worden onherroepelijk gewist!"
-
 msgid "Delete account"
 msgstr "Account verwijderen"
 
@@ -6076,14 +5841,21 @@ msgstr ""
 "die onmiddellijk wordt uitgevoerd en niet ongedaan kan worden gemaakt. Alle "
 "sporen van je activiteit op AstroBin worden definitief gewist!"
 
-msgid "Your account was deleted. Thanks for using AstroBin until now!"
+#, fuzzy
+#| msgid "(comment deleted)"
+msgid "Account deleted"
+msgstr "(commentaar gewist)"
+
+#, fuzzy
+#| msgid "Your account was deleted. Thanks for using AstroBin until now!"
+msgid ""
+"\n"
+"            Your account was deleted. Thanks for using AstroBin until now!\n"
+"        "
 msgstr "Je account werd gewist. Bedankt om AstroBin gebruikt te hebben!"
 
 msgid "Edit your basic information"
 msgstr "Wijzig je basisinformatie"
-
-msgid "Edit your commercial information"
-msgstr "Wijzig je commerciële informatie"
 
 #, fuzzy
 #| msgid "Uploaded"
@@ -6198,9 +5970,6 @@ msgstr "Importeren vanuit Flickr"
 msgid "Edit your site preferences"
 msgstr "Wijzig je voorkeuren voor deze site"
 
-msgid "Edit your retailer information"
-msgstr "Wijzig je informatie als distributeur"
-
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
@@ -6272,10 +6041,10 @@ msgstr "Bedankt voor je steun!"
 msgid "Public Area"
 msgstr "Publieke Zone"
 
-msgid "Staging Area"
-msgstr "Ontwikkelingszone"
-
 msgid "Corrupted"
+msgstr ""
+
+msgid "Recovered"
 msgstr ""
 
 msgid "Trash"
@@ -6288,6 +6057,9 @@ msgstr "Vind foto's"
 
 msgid "Following"
 msgstr "Volgen van"
+
+msgid "Friends"
+msgstr ""
 
 msgid "Lacking data"
 msgstr "Data onvolledig"
@@ -6306,6 +6078,99 @@ msgstr "Snelzoeken"
 
 msgid "Key/value pairs"
 msgstr ""
+
+msgid "Please confirm your recovered images"
+msgstr ""
+
+#, python-format
+msgid ""
+"Following the <a href=\"%(url)s\" target=\"_blank\">data loss incident in "
+"February 2020</a>, these images <strong>were automatically recovered</"
+"strong>."
+msgstr ""
+
+msgid "Now you need to <strong>manually confirm or reject</strong> them."
+msgstr ""
+
+#, fuzzy
+#| msgid "Integration"
+msgid "Instructions"
+msgstr "Integratie"
+
+msgid ""
+"Below, you see the list of all your images impacted by the automatic "
+"recovery process."
+msgstr ""
+
+msgid ""
+"The big thumbnail represents the original upload, and the small thumbnails "
+"represent revisions."
+msgstr ""
+
+msgid ""
+"Click on a thumbnail once to mark it for recovery, again to mark it for "
+"deletion, once more to return to the \"do nothing\" state."
+msgstr ""
+
+msgid ""
+"You can also use the \"Recover all\" and \"Delete all\" buttons at the "
+"bottom."
+msgstr ""
+
+msgid ""
+"When you are ready, click on the \"Submit selected\" button to confirm your "
+"selection."
+msgstr ""
+
+msgid ""
+"You will return to this page, and the images for which you didn't make a "
+"selection will still be here."
+msgstr ""
+
+msgid ""
+"The recovered images will return to your gallery (public or staging, "
+"depending on where they were before the data loss)."
+msgstr ""
+
+#, fuzzy
+#| msgid "Original"
+msgid "Original upload"
+msgstr "Origineel"
+
+#, fuzzy
+#| msgid "Staging Area"
+msgid "Staging area"
+msgstr "Ontwikkelingszone"
+
+#, fuzzy
+#| msgid "Delete"
+msgid "Deleted"
+msgstr "Wissen"
+
+#, fuzzy
+msgid "Revision"
+msgstr "Reviews"
+
+msgid "Recover all"
+msgstr ""
+
+#, fuzzy
+#| msgid "Select all"
+msgid "Delete all"
+msgstr "Alles selecteren"
+
+msgid "Reset"
+msgstr "Herstel"
+
+#, fuzzy
+#| msgid "quote selected"
+msgid "Submit selected"
+msgstr "geselecteerd citaat"
+
+#, fuzzy
+#| msgid "There are no reviews yet."
+msgid "There are no images to recover."
+msgstr "Tot nu toe heeft niemand reviews geschreven."
 
 #, fuzzy
 #| msgid "quote selected"
@@ -6407,6 +6272,11 @@ msgstr ""
 
 msgid "Award"
 msgstr ""
+
+#, fuzzy
+#| msgid "Public data pools"
+msgid "Publication date range"
+msgstr "Publieke gegevensbanken"
 
 msgid "Camera type"
 msgstr "Camera type"
@@ -6687,9 +6557,6 @@ msgstr "Forum berichten"
 msgid "Image uploaded. Thank you!"
 msgstr "De foto is opgeslagen. Hartelijk dank!"
 
-msgid "You can't merge a product to itself."
-msgstr "Je kan een produkt niet met zichzelf samenvoegen."
-
 msgid "You already have a collection with that name"
 msgstr ""
 
@@ -6757,9 +6624,365 @@ msgid ""
 "in a while: the more images you have, the more time it will take."
 msgstr ""
 
-#, fuzzy
-#~ msgid "Revision"
+#~ msgid "Merge"
+#~ msgstr "Samenvoegen"
+
+#~ msgid ""
+#~ "Use this field to mark that the item you are claiming really is the same "
+#~ "product (or a variation thereof) of something you have claimed before."
+#~ msgstr ""
+#~ "Gebruik dit veld om aan te geven dat het produkt dat je claimt effectief "
+#~ "hetzelfde (of een variatie ervan) is van iets dat je eerder hebt geclaimd."
+
+#~ msgid ""
+#~ "You can't create more than %d claims. Consider upgrading your affiliation!"
+#~ msgstr ""
+#~ "Je kan niet meer dan %d claims aanmaken. Overweeg om je peterschap up te "
+#~ "graden!"
+
+#~ msgid "You have already claimed this product."
+#~ msgstr "Je hebt dit produkt al geclaimd."
+
+#~ msgid ""
+#~ "Use this field to mark that the item you are merging really is the same "
+#~ "product (or a variation thereof) of something you have claimed before."
+#~ msgstr ""
+#~ "Gebruik dit veld om aan te geven dat het produkt dat je samenvoegt "
+#~ "effectief hetzelfde (of een variatie) is van iets dat je eerder hebt "
+#~ "geclaimd."
+
+#~ msgid "has written a review on"
+#~ msgstr "heeft een review geschreven over"
+
+#~ msgid "Company name"
+#~ msgstr "Bedrijfsnaam"
+
+#~ msgid "The name of the company you represent on AstroBin."
+#~ msgstr "De naam van het bedrijf dat je op AstroBin vertegenwoordigt."
+
+#~ msgid "Company description"
+#~ msgstr "Beschrijving bedrijf"
+
+#~ msgid ""
+#~ "A short description of the company you represent on AstroBin. You can use "
+#~ "some <a href=\"/faq/#comments\">formatting rules</a>."
+#~ msgstr ""
+#~ "Een korte beschrijving van het bedrijf dat je op AstroBin "
+#~ "vertegenwoordigt. Je kunt gebruik maken van enkele <a href=\"/faq/"
+#~ "#comments\">formatteringsregels</a>."
+
+#~ msgid "Company website"
+#~ msgstr "Bedrijfswebsite"
+
+#~ msgid "The website of the company you represent on AstroBin."
+#~ msgstr "De website van het bedrijf dat je vertegenwoordigt op AstroBin."
+
+#~ msgid "Country of operation"
+#~ msgstr "Land van de bedrijfszetel"
+
+#~ msgid "AUD - Australian dollars"
+#~ msgstr "AUD - Australische dollar"
+
+#~ msgid "CAD - Canadian dollars"
+#~ msgstr "CAD - Canadese dollar"
+
+#~ msgid "CHF - Swiss francs"
+#~ msgstr "CHF - Zwitserse frank"
+
+#~ msgid "EUR - Euros"
+#~ msgstr "EUR - Euro"
+
+#~ msgid "GPB - Pound stelings"
+#~ msgstr "GBP - Britse pond"
+
+#~ msgid "PLN - Polish zloty"
+#~ msgstr "PLN - Poolse zloty"
+
+#~ msgid "SEK - Swedish krona"
+#~ msgstr "SEK - Zweedse kroon"
+
+#~ msgid "USD - American dollars"
+#~ msgstr "USD - Amerikaanse dollar"
+
+#~ msgid "Producer"
+#~ msgstr "Producent"
+
+#~ msgid "The link to this product's page on your website."
+#~ msgstr "De link van dit produkt op je website."
+
+#~ msgid "Currency"
+#~ msgstr "Munteenheid"
+
+#~ msgid "Retailed gear items"
+#~ msgstr "Verkocht produkt"
+
+#~ msgid "Proper make"
+#~ msgstr "Correct merk"
+
+#~ msgid ""
+#~ "Sometimes, product make/brand/producer/developer names are not written "
+#~ "properly by the users. Write here the proper make/brand/producer/"
+#~ "developer name."
+#~ msgstr ""
+#~ "Soms wordt het merk/type/producent/ontwikkelaar van het produkt niet "
+#~ "correct gespeld door de gebruikers. Schrijf hier de juiste manier."
+
+#~ msgid "Proper name"
+#~ msgstr "Correcte naam"
+
+#~ msgid ""
+#~ "Sometimes, product names are not written properly by the users. Write "
+#~ "here the proper product name, not including the make/brand/producer/"
+#~ "developer name.<br/>It is recommended that you try to group as many items "
+#~ "as possible, so try to use a generic version of your product's name."
+#~ msgstr ""
+#~ "Soms word de produktnaam niet correct geschreven door de gebruikers. "
+#~ "Schrijf hier de juiste produktnaam zonder vermelding van het merk/type/"
+#~ "producent/ontwikkelaar. <br/>Het is aanbevolen dat je zoveel mogelijk "
+#~ "artikelen groepeert, dus tracht een generieke versie van je produktnaam "
+#~ "te gebruiken."
+
+#~ msgid ""
+#~ "The official, commercial image for this product. Upload an image via the "
+#~ "regular uploading interface, set its subject type to \"Gear\", and then "
+#~ "choose it from this list. If you upload several revisions, they will also "
+#~ "appear in the commercial page."
+#~ msgstr ""
+#~ "De officiële commerciële foto van dit produkt. Upload de foto via de "
+#~ "gewone interface maar gebruik \"materiaal\" als type onderwerp en kies ze "
+#~ "van deze lijst. Als je verschillende revisies uploadt dan zullen deze ook "
+#~ "verschijnen op de commerciële pagina."
+
+#~ msgid "Tagline"
+#~ msgstr "Slagzin"
+
+#~ msgid ""
+#~ "A memorable phrase that will sum up this product, for marketing purposes."
+#~ msgstr ""
+#~ "Een catchy zin die je produkt goed omschrijft. Voor marketing doeleinden."
+
+#~ msgid ""
+#~ "Here you can write the full commercial description of your product. You "
+#~ "can use some <a href=\"/faq/#comments\">formatting rules</a>."
+#~ msgstr ""
+#~ "Hier kun je de volledige commerciële omschrijving van je produkt "
+#~ "neerschrijven. Je kunt enkele <a href=\"/faq/#comments"
+#~ "\">formatteringsregels</a> gebruiken."
+
+#~ msgid "Commercial gear items"
+#~ msgstr "Commercieel materiaal"
+
+#~ msgid ""
+#~ "As a producer and/or a retailer on AstroBin, it's very important that you "
+#~ "fill in all of your company details! Click <a href=\"%(the_url)s\">here</"
+#~ "a> to do it now."
+#~ msgstr ""
+#~ "Als fabrikant en/of distributeur op AstroBin is het belangrijk dat je "
+#~ "alle bedrijfsdetails invult! Klik <a href=\"%(the_url)s\">hier</a> om dit "
+#~ "nu te doen."
+
+#~ msgid ""
+#~ "As a retailer on AstroBin, it's very important that you fill in your "
+#~ "country of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
+#~ msgstr ""
+#~ "Als distributeur op AstroBin is het erg belangrijk dat je het land waar "
+#~ "je opereert invult! Klik <a href=\"%(the_url)s\">hier</a> om dit nu te "
+#~ "doen."
+
+#~ msgid "Commercial products"
+#~ msgstr "Commerciële produkten"
+
+#~ msgid "Edit commercial product"
+#~ msgstr "Bewerk commerciëel produkt"
+
+#~ msgid "Return to list"
+#~ msgstr "Ga terug naar de lijst"
+
+#~ msgid "View in new window"
+#~ msgstr "Bekijk in een nieuw venster"
+
+#~ msgid "Edit retailed product"
+#~ msgstr "Bewerk te koop aangeboden produkt"
+
+#~ msgid "by"
+#~ msgstr "door"
+
+#~ msgid "Other images"
+#~ msgstr "Andere beelden"
+
+#~ msgid "Some images"
+#~ msgstr "Enkele foto's"
+
+#~ msgid "(view more)"
+#~ msgstr "(meer zien)"
+
+#~ msgid "Reviews"
 #~ msgstr "Reviews"
+
+#~ msgid "Rating"
+#~ msgstr "Score"
+
+#~ msgid "Add your review"
+#~ msgstr "Voeg je review toe"
+
+#~ msgid ""
+#~ "Please be fair, honest and polite when writing a review. Many people will "
+#~ "read your review: all the users on AstroBin who own this piece of gear, "
+#~ "will be notified of your review."
+#~ msgstr ""
+#~ "Gelieve rechtvaardig, eerlijk en vriendelijk te zijn als je een review "
+#~ "schrijft. Veel mensen zullen hem lezen: alle leden op AstroBin die "
+#~ "eigenaar zijn van dit type materiaal zullen een melding krijgen dat je "
+#~ "een review hebt geschreven."
+
+#~ msgid ""
+#~ "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
+#~ "register/\">register</a> to write a review."
+#~ msgstr ""
+#~ "Gelieve <a href=\"/accounts/login/\">in te loggen</a> of jezelf te <a "
+#~ "href=\"/accounts/register/\">registreren</a> om een review te schrijven."
+
+#~ msgid ""
+#~ "Use this space to start a discussion, leave a comment or ask a question "
+#~ "about this piece of gear. All the users on AstroBin who own one, will be "
+#~ "notified and can join the discussion."
+#~ msgstr ""
+#~ "Gebruik deze plaats om een discussie te starten, een commentaar achter te "
+#~ "laten of een vraag te stellen over dit type van materiaal. Alle AstroBin "
+#~ "gebruikers die het item bezitten zullen een melding krijgen en kunnen dus "
+#~ "meedoen aan de discussie."
+
+#~ msgid ""
+#~ "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
+#~ "register/\">register</a> to leave a comment."
+#~ msgstr ""
+#~ "Gelieve <a href=\"/accounts/login/\">in te loggen</a> of jezelf te <a "
+#~ "href=\"/accounts/register/\">registreren</a> om commentaar te kunnen "
+#~ "geven."
+
+#~ msgid "Buy it here"
+#~ msgstr "Koop hier"
+
+#~ msgid "Properties"
+#~ msgstr "Eigenschappen"
+
+#~ msgid "Owners"
+#~ msgstr "Eigenaars"
+
+#~ msgid "just now"
+#~ msgstr "momenteel"
+
+#~ msgid "Made possible by"
+#~ msgstr "Mogelijk gemaakt door"
+
+#~ msgid "Commercial information"
+#~ msgstr "Commerciële informatie"
+
+#, fuzzy
+#~| msgid ""
+#~| "%(user)s wrote a review of a gear item you own! Read it at following "
+#~| "url: %(url)s"
+#~ msgid ""
+#~ "%(user)s wrote a review of a gear item you own! Read it at following url: "
+#~ "<a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "%(user)s heeft een review geschreven over een product dat jij ook bezit! "
+#~ "Lees het op volgende URL: %(url)s"
+
+#~ msgid ""
+#~ "%(user)s wrote a review of a gear item you own! Read it at following url: "
+#~ "%(url)s"
+#~ msgstr ""
+#~ "%(user)s heeft een review geschreven over een product dat jij ook bezit! "
+#~ "Lees het op volgende URL: %(url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear "
+#~ "item you own!</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> heeft een review geschreven "
+#~ "over een product dat jij ook bezit!</a>"
+
+#~ msgid "%(user)s wrote a review of a gear item you own!"
+#~ msgstr "%(user)s schreef een review over materiaal dat jij ook hebt!"
+
+#~ msgid "%(user)s's commercial products"
+#~ msgstr "%(user)s's commerciële produkten"
+
+#~ msgid ""
+#~ "Please remember that you are only allowed to claim items that you really "
+#~ "produce and/or retail."
+#~ msgstr ""
+#~ "Denk eraan dat je enkel produkten mag claimen die je effectief produceert "
+#~ "of distribueert."
+
+#~ msgid "As producer"
+#~ msgstr "Als producent"
+
+#~ msgid "Gear IDs"
+#~ msgstr "Materiaal identificaties"
+
+#~ msgid "You haven't claimed any commercial products yet."
+#~ msgstr "Je hebt nog geen commerciële produkten geclaimd."
+
+#~ msgid "%(user)s hasn't claimed any commercial products yet."
+#~ msgstr "%(user)s heeft nog geen commerciële produkten geclaimd."
+
+#~ msgid "As retailer"
+#~ msgstr "Als distributeur"
+
+#~ msgid "You haven't claimed any retailed products yet."
+#~ msgstr "Je hebt nog geen produkten als distributeur geclaimd."
+
+#~ msgid "%(user)s hasn't claimed any retailed products yet."
+#~ msgstr "%(user)s heeft nog geen gedistribueerde producten geclaimd."
+
+#~ msgid "Claim as producer"
+#~ msgstr "Claim als fabrikant"
+
+#~ msgid "Claim as retailer"
+#~ msgstr "Claim als distributeur"
+
+#~ msgid "Claim commercial product"
+#~ msgstr "Claim commercieel produkt"
+
+#~ msgid "Claim"
+#~ msgstr "Claim"
+
+#~ msgid "Select items to remove"
+#~ msgstr "Selecteer artikelen die verwijderd dienen te worden"
+
+#~ msgid "Be careful if you try to remove all of these!"
+#~ msgstr "Wees voorzichtig als je al deze zaken tracht te verwijderen!"
+
+#~ msgid ""
+#~ "All the properties, including the commercial description, of this claim "
+#~ "will be deleted and cannot be recovered!"
+#~ msgstr ""
+#~ "Al de eigenschappen, inclusief de commerciële omschrijving van deze "
+#~ "claim, zullen voorgoed worden verwijderd!"
+
+#~ msgid "Select the product you want to merge to"
+#~ msgstr "Selecteer het product waarmee je wil samenvoegen"
+
+#~ msgid "Are you sure?"
+#~ msgstr "Ben je zeker?"
+
+#~ msgid "Claim retailed product"
+#~ msgstr "Claim produkt als distributeur"
+
+#~ msgid ""
+#~ "All the properties of this claim will be deleted and cannot be recovered!"
+#~ msgstr "Alle eigenschappen van deze claim worden onherroepelijk gewist!"
+
+#~ msgid "Edit your commercial information"
+#~ msgstr "Wijzig je commerciële informatie"
+
+#~ msgid "Edit your retailer information"
+#~ msgstr "Wijzig je informatie als distributeur"
+
+#~ msgid "You can't merge a product to itself."
+#~ msgstr "Je kan een produkt niet met zichzelf samenvoegen."
 
 #, fuzzy
 #~ msgid "Imaging telescope or lens"
@@ -7433,9 +7656,6 @@ msgstr ""
 #~ msgid "So, what are you waiting for?"
 #~ msgstr "Dus, waar wacht je nog op?"
 
-#~ msgid "Sign up now!"
-#~ msgstr "Registreer nu!"
-
 #~ msgid "Send to public data pool"
 #~ msgstr "Stuur naar een publieke gegevensbank"
 
@@ -7932,9 +8152,6 @@ msgstr ""
 
 #~ msgid "Choose files"
 #~ msgstr "Kies bestanden"
-
-#~ msgid "Reset"
-#~ msgstr "Herstel"
 
 #~ msgid "Start upload"
 #~ msgstr "Start met upload"
@@ -9404,9 +9621,6 @@ msgstr ""
 #~ msgid "%(username)s didn't write anything about themselves."
 #~ msgstr "%(username)s heeft niets over zichzelf vermeld."
 
-#~ msgid "%(user)s's favorites"
-#~ msgstr "%(user)s's favorieten"
-
 #~ msgid "View your favorites"
 #~ msgstr "Bekijk je favorieten"
 
@@ -9445,9 +9659,6 @@ msgstr ""
 
 #~ msgid "To latitude:"
 #~ msgstr "Naar breedte:"
-
-#~ msgid "Hemisphere:"
-#~ msgstr "Hemisfeer:"
 
 #~ msgid "Both"
 #~ msgstr "Beide"
@@ -9592,9 +9803,6 @@ msgstr ""
 
 #~ msgid "You are now registered. Activation email sent."
 #~ msgstr "Je bent nu ingeschreven. Er werd een email naar je gestuurd."
-
-#~ msgid "(comment deleted)"
-#~ msgstr "(commentaar gewist)"
 
 #~ msgid "Undelete"
 #~ msgstr "Wissen ongedaan maken"
@@ -9783,9 +9991,6 @@ msgstr ""
 
 #~ msgid "The places from which you have taken this image."
 #~ msgstr "De locaties van data acquisitie van het beeld."
-
-#~ msgid "These are the cities from which you usually image."
-#~ msgstr "Dit zijn de plaatsen waar je meestal imaged"
 
 #~ msgid "For example: +12.44"
 #~ msgstr "Bijvoorbeeld +12.44"

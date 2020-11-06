@@ -1,8 +1,10 @@
 from django.test import TestCase
 from mock import patch
 
+from astrobin.models import Image
 from astrobin.tests.generators import Generators
 from astrobin_apps_images.services import ImageService
+from astrobin_apps_platesolving.tests.platesolving_generators import PlateSolvingGenerators
 
 
 class TestImageService(TestCase):
@@ -180,3 +182,71 @@ class TestImageService(TestCase):
         image.w = image.h = 1000
         image.square_cropping = '450,450,550,550'
         self.assertEquals(ImageService(image).get_crop_box('regular'), None)
+
+    def test_get_hemisphere_no_solution(self):
+        image = Generators.image()
+        PlateSolvingGenerators.solution(image)
+
+        self.assertEquals(Image.HEMISPHERE_TYPE_UNKNOWN, ImageService(image).get_hemisphere())
+
+    def test_get_hemisphere_no_revision(self):
+        image = Generators.image()
+        solution = PlateSolvingGenerators.solution(image)
+
+        solution.dec = 0
+        solution.save()
+
+        self.assertEquals(Image.HEMISPHERE_TYPE_UNKNOWN, ImageService(image).get_hemisphere('z'))
+
+
+    def test_get_hemisphere_no_declination(self):
+        image = Generators.image()
+        solution = PlateSolvingGenerators.solution(image)
+
+        solution.dec = None
+        solution.save()
+
+        self.assertEquals(Image.HEMISPHERE_TYPE_UNKNOWN, ImageService(image).get_hemisphere())
+
+    def test_get_hemisphere_zero_declination(self):
+        image = Generators.image()
+        solution = PlateSolvingGenerators.solution(image)
+
+        solution.dec = 0
+        solution.save()
+
+        self.assertEquals(Image.HEMISPHERE_TYPE_NORTHERN, ImageService(image).get_hemisphere())
+
+    def test_get_hemisphere_positive_declination(self):
+        image = Generators.image()
+        solution = PlateSolvingGenerators.solution(image)
+
+        solution.dec = 1
+        solution.save()
+
+        self.assertEquals(Image.HEMISPHERE_TYPE_NORTHERN, ImageService(image).get_hemisphere())
+
+    def test_get_hemisphere_negative_declination(self):
+        image = Generators.image()
+        solution = PlateSolvingGenerators.solution(image)
+
+        solution.dec = -1
+        solution.save()
+
+        self.assertEquals(Image.HEMISPHERE_TYPE_SOUTHERN, ImageService(image).get_hemisphere())
+
+    def test_get_hemisphere_positive_declination_revision(self):
+        image = Generators.image()
+        image_solution = PlateSolvingGenerators.solution(image)
+
+        revision = Generators.imageRevision(image=image)
+        revision_solution = PlateSolvingGenerators.solution(revision)
+
+        image_solution.dec = 1
+        image_solution.save()
+
+        revision_solution.dec = -1
+        revision_solution.save()
+
+        self.assertEquals(Image.HEMISPHERE_TYPE_NORTHERN, ImageService(image).get_hemisphere())
+        self.assertEquals(Image.HEMISPHERE_TYPE_SOUTHERN, ImageService(image).get_hemisphere(revision.label))

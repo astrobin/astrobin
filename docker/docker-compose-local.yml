@@ -67,7 +67,7 @@ services:
       - memcached
 
 
-  celery_main:
+  celery_default:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile

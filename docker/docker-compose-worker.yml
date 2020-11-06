@@ -2,14 +2,14 @@ version: '3'
 
 services:
 
-  celery_main:
+  celery_default:
     image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
     command:
      - bash
      - -c
      - |
        python manage.py collectstatic --noinput && \
-       celery worker -A astrobin -Q main -c 1 -l debug --uid=nobody --gid=nogroup
+       celery worker -A astrobin -Q default -c 1 -l debug --uid=nobody --gid=nogroup
     links:
       - memcached
     env_file:
@@ -24,10 +24,6 @@ services:
       - POSTGRES_USER=astrobin
     volumes:
       - media:/media
-    deploy:
-      resources:
-        limits:
-          memory: 500m
 
 
   celery_email:
@@ -50,10 +46,6 @@ services:
       - POSTGRES_USER=astrobin
     volumes:
       - media:/media
-    deploy:
-      resources:
-        limits:
-          memory: 500m
 
 
   celery_thumbnails:
@@ -76,10 +68,6 @@ services:
       - POSTGRES_USER=astrobin
     volumes:
       - media:/media
-    deploy:
-      resources:
-        limits:
-          memory: 1g
 
 
   celery_haystack:
@@ -102,10 +90,7 @@ services:
       - POSTGRES_USER=astrobin
     volumes:
       - media:/media
-    deploy:
-      resources:
-        limits:
-          memory: 1g
+
 
 volumes:
   media: {}

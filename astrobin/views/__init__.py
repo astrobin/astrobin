@@ -28,7 +28,7 @@ from django.template import loader, RequestContext
 from django.template.defaultfilters import filesizeformat
 from django.template.loader import render_to_string
 from django.utils.datastructures import MultiValueDictKeyError
-from django.utils.translation import ngettext as _n, get_language
+from django.utils.translation import ngettext as _n
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
@@ -51,12 +51,11 @@ from astrobin.forms import ImageUploadForm, ImageLicenseForm, PrivateMessageForm
 from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import Image, UserProfile, Gear, Location, ImageRevision, DeepSky_Acquisition, \
     SolarSystem_Acquisition, GearUserInfo, Telescope, Mount, Camera, FocalReducer, Software, Filter, \
-    Accessory, GearHardMergeRedirect, GlobalStat, App, GearMakeAutoRename, Acquisition
-from astrobin.shortcuts import ajax_response, ajax_success, ajax_fail
+    Accessory, GlobalStat, App, GearMakeAutoRename, Acquisition
+from astrobin.shortcuts import ajax_response, ajax_success
 from astrobin.templatetags.tags import in_upload_wizard
 from astrobin.utils import to_user_timezone, get_client_country_code
 from astrobin_apps_images.services import ImageService
-from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution, PlateSolvingAdvancedSettings
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_restore_from_trash, \
@@ -511,6 +510,8 @@ def image_upload_process(request):
     """Process the form"""
 
     from astrobin_apps_premium.utils import premium_used_percent
+
+    log.info("Classic uploader (%s): submitted" % request.user)
 
     used_percent = premium_used_percent(request.user)
     if used_percent >= 100:
@@ -1317,33 +1318,33 @@ def user_page(request, username):
         user=user,
         content_type=user_ct).count()
 
-    key = "User.%d.Stats" % user.pk
+    key = "User.%d.Stats.%s" % (user.pk, getattr(request, 'LANGUAGE_CODE', 'en'))
     data = cache.get(key)
     if data is None:
-        sqs = SearchQuerySet()
-        sqs = sqs.filter(username=user.username).models(Image)
-        sqs = sqs.order_by('-uploaded')
-
+        image_sqs = SearchQuerySet().models(Image).filter(username=user.username)
+        user_sqs = SearchQuerySet().models(User).filter(username=user.username)
         data = {}
-        try:
-            data['images'] = len(sqs)
-            integrated_images = len(sqs.filter(integration__gt=0))
-            data['integration'] = sum([x.integration for x in sqs]) / 3600.0
-            data['avg_integration'] = (data['integration'] / integrated_images) if integrated_images > 0 else 0
-        except SearchFieldError:
-            data['images'] = 0
-            data['integration'] = 0
-            data['avg_integration'] = 0
 
-        cache.set(key, data, 84600)
+        if user_sqs.count():
+            try:
+                integrated_images = len(image_sqs.filter(integration__gt=0))
+                integration = sum([x.integration for x in image_sqs]) / 3600.0
+                avg_integration = (integration / integrated_images) if integrated_images > 0 else 0
 
-    stats = (
-        (_('Member since'), member_since),
-        (_('Last login'), last_login),
-        (_('Total integration time'), "%.1f %s" % (data['integration'], _("hours"))),
-        (_('Average integration time'), "%.1f %s" % (data['avg_integration'], _("hours"))),
-        (_('Forum posts'), "%d" % Post.objects.filter(user=user).count()),
-    )
+                data['stats'] = (
+                    (_('Member since'), member_since),
+                    (_('Last login'), last_login),
+                    (_('Total integration time'), "%.1f %s" % (integration, _("hours"))),
+                    (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
+                    (_('Forum posts'), "%d" % user_sqs[0].forum_posts if user_sqs[0].forum_posts else 0),
+                    (_('Comments'), "%d" % user_sqs[0].comments if user_sqs[0].comments else 0),
+                    (_('Likes'), "%d" % user_sqs[0].total_likes_received if user_sqs[0].total_likes_received else 0),
+                )
+            except SearchFieldError:
+                log.error("User page (%d): unable to get stats from search index" % user.pk)
+
+            cache.set(key, data, 300)
+
 
     response_dict = {
         'followers': followers,
@@ -1358,12 +1359,11 @@ def user_page(request, username):
         'subsection': subsection,
         'active': active,
         'menu': menu,
-        'stats': stats,
-        'images_no': data['images'],
+        'stats': data['stats'] if 'stats' in data else None,
         'alias': 'gallery',
         'has_corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user).count() > 0,
-        'has_recovered_images': Image.objects_including_wip\
-                                    .filter(corrupted=True, user=user)\
+        'has_recovered_images': Image.objects_including_wip \
+                                    .filter(corrupted=True, user=user) \
                                     .exclude(recovered=None).count() > 0,
     }
 
@@ -2133,6 +2133,8 @@ def image_revision_upload_process(request):
 
     image = get_image_or_404(Image.objects_including_wip, image_id)
 
+    log.info("Classic uploader (revision) (%s) (%d): submitted" % (request.user, image.pk))
+
     if settings.READONLY_MODE:
         messages.error(request, _(
             "AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"))
@@ -2217,37 +2219,112 @@ def stats(request):
 
 @require_GET
 def trending_astrophotographers(request):
-    response_dict = {}
-
-    if 'page' in request.GET:
-        raise Http404
-
     sqs = SearchQuerySet()
 
-    sort = request.GET.get('sort', 'index')
-    if sort == 'index':
-        sort = '-normalized_likes'
-    elif sort == 'followers':
-        sort = '-followers'
-    elif sort == 'integration':
-        sort = '-integration'
-    elif sort == 'images':
-        sort = '-images'
-    else:
-        sort = '-normalized_likes'
+    default_sorting = [
+        '-normalized_likes',
+        '-likes',
+        '-images',
+    ]
 
+    sort = request.GET.get('sort', default_sorting)
     t = request.GET.get('t', '1y')
-    if t not in ('', 'all', None):
-        sort += '_%s' % t
 
-    queryset = sqs.models(User).order_by(sort)
+    if sort in ('', 'default'):
+        sort = default_sorting
+
+    if t == '':
+        t = 'all'
+
+    if sort not in (
+        default_sorting,
+
+        'normalized_likes',
+        'followers',
+        'images',
+        'likes',
+        'integration',
+
+        '-normalized_likes',
+        '-followers',
+        '-images',
+        '-likes',
+        '-integration',
+    ) or t not in (
+        'all',
+        '6m',
+        '1y'
+    ):
+        raise Http404
+
+    if not isinstance(sort, list):
+        sort = [sort, ]
+
+    if t != 'all':
+        sort = ['%s_%s' % (x, t) for x in sort]
+
+    queryset = sqs.models(User).order_by(*sort)
+
+    if 'q' in request.GET:
+        queryset = queryset.filter(text__contains=request.GET.get('q'))
 
     return object_list(
         request,
         queryset=queryset,
         template_name='trending_astrophotographers.html',
         template_object_name='user',
-        extra_context=response_dict,
+    )
+
+
+@require_GET
+def reputation_leaderboard(request):
+    queryset = SearchQuerySet()
+
+    default_sorting = [
+        '-reputation',
+        '-comment_likes_received',
+        '-forum_post_likes_received',
+        '-comments_written',
+        '-forum_posts'
+    ]
+
+    sort = request.GET.get('sort', default_sorting)
+
+    if sort in ('', 'default'):
+        sort = default_sorting
+
+    if sort not in (
+        default_sorting,
+
+        'comments_written',
+        'comments',
+        'comment_likes_received',
+        'forum_posts',
+        'forum_post_likes_received',
+        'reputation',
+
+        '-comments_written',
+        '-comments',
+        '-comment_likes_received',
+        '-forum_posts',
+        '-forum_post_likes_received',
+        '-reputation'
+    ):
+        raise Http404
+
+    if not isinstance(sort, list):
+        sort = [sort,]
+
+    queryset = queryset.models(User).order_by(*sort)
+
+    if 'q' in request.GET:
+        queryset = queryset.filter(text__contains=request.GET.get('q'))
+
+    return object_list(
+        request,
+        queryset=queryset,
+        template_name='reputation_leaderboard.html',
+        template_object_name='user',
     )
 
 
