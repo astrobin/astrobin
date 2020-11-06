@@ -55,12 +55,12 @@
 
                             {% if user_scores_index is not None %}
                                 <span id="astrobin-reputation" rel="tooltip" data-placement="bottom"
-                                      title="{% trans "Reputation" %}">
+                                      title="{% trans "Reputation" %} {% trans "(beta)" %}">
                                     {{ user_scores_reputation|floatformat:2}}
                                 </span>
                             {% else %}
                                 <span id="astrobin-reputation" rel="tooltip" data-placement="bottom"
-                                      title="{% trans "Reputation" %} - {% trans "Data is refreshing..." %}">
+                                      title="{% trans "Reputation" %} {% trans "(beta)" %} - {% trans "Data is refreshing..." %}">
                                       {% trans "n/a" %}
                                 </span>
                             {% endif %}

@@ -5,6 +5,7 @@
 {% load common_tags %}
 {% load tags %}
 {% load cache %}
+{% load el_pagination_tags %}
 
 {% block title %}{% trans "Trending astrophotographers" %}{% endblock %}
 
@@ -15,153 +16,176 @@
 {% endblock %}
 
 {% block content %}
-    <div class="filter-toggle-group">
-        <div class="filter-toggle">
-            <a href="{% url 'trending_astrophotographers' %}{% query_string "t='6m'" "" %}" {% if request.GET.t == '6m' %}class="active"{%endif %}>
-                {% trans "Last 6 months" %}
-            </a>
+    <div id="trending-astrophotographers-page">
+        <form id="trending-astrophotographers-search" class="form form-horizontal"
+              method="get" action="{% url 'trending_astrophotographers' %}">
+            <input type="text" id="trending-astrophotographers-search-input" name="q" placeholder="{% trans "Search" %}"
+                   value="{% if 'q' in request.GET %}{{ request.GET.q }}{% endif %}" />
+        </form>
+
+        <div class="filter-toggle-group">
+            <div class="filter-toggle">
+                <a href="{% url 'trending_astrophotographers' %}{% query_string "t='6m'" "" %}" {% if request.GET.t == '6m' %}class="active"{%endif %}>
+                    {% trans "Last 6 months" %}
+                </a>
+            </div>
+
+            <span class="separator">/</span>
+
+            <div class="filter-toggle">
+                <a href="{% url 'trending_astrophotographers' %}{% query_string "t='1y'" "" %}" {% if request.GET.t == '1y' or 't' not in request.GET %}class="active"{%endif %}>
+                    {% trans "Last year" %}
+                </a>
+            </div>
+
+            <span class="separator">/</span>
+
+            <div class="filter-toggle">
+                <a href="{% url 'trending_astrophotographers' %}{% query_string "t='all'" "" %}" {% if request.GET.t == 'all' %}class="active"{%endif %}>
+                    {% trans "All time" %}
+                </a>
+            </div>
         </div>
 
-        <span class="separator">/</span>
+        <table class="trending-astrophotographers table striped">
+            <thead>
+                <tr>
+                    <th class="trending-astrophotographers-position">#</th>
+                    <th class="trending-astrophotographers-user">{% trans "User" %}</th>
 
-        <div class="filter-toggle">
-            <a href="{% url 'trending_astrophotographers' %}{% query_string "t='1y'" "" %}" {% if request.GET.t == '1y' or 't' not in request.GET %}class="active"{%endif %}>
-                {% trans "Last year" %}
-            </a>
-        </div>
+                    <th class="trending-astrophotographers-followers hidden-phone">
+                        <a href="{% url 'trending_astrophotographers' %}{% query_string "sort='-followers'" "" %}">
+                            {% trans "Followers" %} <i class="icon-sort"></i>
+                        </a>
+                    </th>
 
-        <span class="separator">/</span>
+                    <th class="trending-astrophotographers-images hidden-phone">
+                        <a href="{% url 'trending_astrophotographers' %}{% query_string "sort='-images'" "" %}">
+                            {% trans "Images" %} <i class="icon-sort"></i>
+                        </a>
+                    </th>
 
-        <div class="filter-toggle">
-            <a href="{% url 'trending_astrophotographers' %}{% query_string "t='all'" "" %}" {% if request.GET.t == 'all' %}class="active"{%endif %}>
-                {% trans "All time" %}
-            </a>
+                    <th class="trending-astrophotographers-likes hidden-phone">
+                        <a href="{% url 'trending_astrophotographers' %}{% query_string "sort='-likes'" "" %}">
+                            {% trans "Likes" %} <i class="icon-sort"></i>
+                        </a>
+                    </th>
+
+                    <th class="trending-astrophotographers-integration hidden-phone">
+                        <a href="{% url 'trending_astrophotographers' %}{% query_string "sort='-integration'" "" %}">
+                            {% trans "Total integration" %} <i class="icon-sort"></i>
+                        </a>
+                    </th>
+
+                    <th class="trending-astrophotographers-index">
+                        <a href="
+                                {% url 'trending_astrophotographers' %}{% query_string "sort='-normalized_likes'" "" %}">
+                            {% trans "AstroBin index" %} <i class="icon-sort"></i>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+
+            {% lazy_paginate 100 user_list using "page" %}
+            {% get_pages %}
+
+            {% for u in user_list %}
+                <tr>
+                    <td class="trending-astrophotographers-position">
+                        {% page_counter forloop.counter pages.current.number 100 %}
+                    </td>
+
+                    <td class="trending-astrophotographers-user">
+                        <a href="{% url 'user_page' u.username %}">
+                            {% if u.object %}
+                                {{u.object.userprofile}}
+                            {% else %}
+                                {{u.username}}
+                            {% endif %}
+                        </a>
+                    </td>
+
+                    <td class="trending-astrophotographers-followers hidden-phone">
+                        {% if request.GET.t == '6m' %}
+                            {{u.followers_6m}}
+                        {% endif %}
+
+                        {% if request.GET.t == '1y' or 't' not in request.GET %}
+                            {{u.followers_1y}}
+                        {% endif %}
+
+                        {% if request.GET.t == 'all' %}
+                            {{u.followers}}
+                        {% endif %}
+                    </td>
+
+                    <td class="trending-astrophotographers-images hidden-phone">
+                        {% if request.GET.t == '6m' %}
+                            {{u.images_6m}}
+                        {% endif %}
+
+                        {% if request.GET.t == '1y' or 't' not in request.GET %}
+                            {{u.images_1y}}
+                        {% endif %}
+
+                        {% if request.GET.t == 'all' %}
+                            {{u.images}}
+                        {% endif %}
+                    </td>
+
+                    <td class="trending-astrophotographers-likes hidden-phone">
+                        {% if request.GET.t == '6m' %}
+                            {{ u.likes_6m }}
+                        {% endif %}
+
+                        {% if request.GET.t == '1y' or 't' not in request.GET %}
+                            {{ u.likes_1y }}
+                        {% endif %}
+
+                        {% if request.GET.t == 'all' %}
+                            {{ u.likes }}
+                        {% endif %}
+                    </td>
+
+                    <td class="trending-astrophotographers-integration hidden-phone">
+                        {% if request.GET.t == '6m' %}
+                            {{u.integration_6m|floatformat:2}}
+                        {% endif %}
+
+                        {% if request.GET.t == '1y' or 't' not in request.GET %}
+                            {{u.integration_1y|floatformat:2}}
+                        {% endif %}
+
+                        {% if request.GET.t == 'all' %}
+                            {{u.integration|floatformat:2}}
+                        {% endif %}
+                    </td>
+
+                    <td class="trending-astrophotographers-index">
+                        {% if request.GET.t == '6m' %}
+                            {{ u.normalized_likes_6m|floatformat:2 }}
+                        {% endif %}
+
+                        {% if request.GET.t == '1y' or 't' not in request.GET %}
+                            {{ u.normalized_likes_1y|floatformat:2 }}
+                        {% endif %}
+
+                        {% if request.GET.t == 'all' %}
+                            {{ u.normalized_likes|floatformat:2 }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="7">
+                        {% trans "There isn't enough data yet, please come back later!" %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <div class="pagination pagination-centered">
+            {% show_pages %}
         </div>
     </div>
-
-    <table class="trending-astrophotographers table striped">
-        <thead>
-            <tr>
-                <th class="trending-astrophotographers-position">#</th>
-                <th class="trending-astrophotographers-user">{% trans "User" %}</th>
-
-                <th class="trending-astrophotographers-index">
-                    <a href="{% url 'trending_astrophotographers' %}{% query_string "sort='index'" "" %}">
-                        {% trans "AstroBin index" %} <i class="icon-sort"></i>
-                    </a>
-                </th>
-                <th class="trending-astrophotographers-followers hidden-phone">
-                    <a href="{% url 'trending_astrophotographers' %}{% query_string "sort='followers'" "" %}">
-                        {% trans "Followers" %} <i class="icon-sort"></i>
-                    </a>
-                </th>
-                <th class="trending-astrophotographers-images hidden-phone">
-                    <a href="{% url 'trending_astrophotographers' %}{% query_string "sort='images'" "" %}">
-                        {% trans "Images" %} <i class="icon-sort"></i>
-                    </a>
-                </th>
-                <th class="trending-astrophotographers-likes hidden-phone">
-                    <a href="{% url 'trending_astrophotographers' %}{% query_string "sort='likes'" "" %}">
-                        {% trans "Likes" %} <i class="icon-sort"></i>
-                    </a>
-                </th>
-                <th class="trending-astrophotographers-integration hidden-phone">
-                    <a href="{% url 'trending_astrophotographers' %}{% query_string "sort='integration'" "" %}">
-                        {% trans "Total integration" %} <i class="icon-sort"></i>
-                    </a>
-                </th>
-            </tr>
-        </thead>
-
-        {% for u in user_list|slice:":100" %}
-            <tr>
-                <td class="trending-astrophotographers-position">{{forloop.counter}}</td>
-                <td class="trending-astrophotographers-user">
-                    <a href="{% url 'user_page' u.username %}">
-                        {% if u.object %}
-                            {{u.object.userprofile}}
-                        {% else %}
-                            {{u.username}}
-                        {% endif %}
-                    </a>
-                </td>
-
-                <td class="trending-astrophotographers-index">
-                    {% if request.GET.t == '6m' %}
-                        {{u.normalized_likes_6m|floatformat:2}}
-                    {% endif %}
-
-                    {% if request.GET.t == '1y' or 't' not in request.GET%}
-                        {{u.normalized_likes_1y|floatformat:2}}
-                    {% endif %}
-
-                    {% if request.GET.t == 'all' %}
-                        {{u.normalized_likes|floatformat:2}}
-                    {% endif %}
-                </td>
-
-                <td class="trending-astrophotographers-followers hidden-phone">
-                    {% if request.GET.t == '6m' %}
-                        {{u.followers_6m}}
-                    {% endif %}
-
-                    {% if request.GET.t == '1y' or 't' not in request.GET %}
-                        {{u.followers_1y}}
-                    {% endif %}
-
-                    {% if request.GET.t == 'all' %}
-                        {{u.followers}}
-                    {% endif %}
-                </td>
-
-                <td class="trending-astrophotographers-images hidden-phone">
-                    {% if request.GET.t == '6m' %}
-                        {{u.images_6m}}
-                    {% endif %}
-
-                    {% if request.GET.t == '1y' or 't' not in request.GET %}
-                        {{u.images_1y}}
-                    {% endif %}
-
-                    {% if request.GET.t == 'all' %}
-                        {{u.images}}
-                    {% endif %}
-                </td>
-
-                <td class="trending-astrophotographers-likes hidden-phone">
-                    {% if request.GET.t == '6m' %}
-                        {{ u.likes_6m }}
-                    {% endif %}
-
-                    {% if request.GET.t == '1y' or 't' not in request.GET %}
-                        {{ u.likes_1y }}
-                    {% endif %}
-
-                    {% if request.GET.t == 'all' %}
-                        {{ u.likes }}
-                    {% endif %}
-                </td>
-
-                <td class="trending-astrophotographers-integration hidden-phone">
-                    {% if request.GET.t == '6m' %}
-                        {{u.integration_6m|floatformat:2}}
-                    {% endif %}
-
-                    {% if request.GET.t == '1y' or 't' not in request.GET %}
-                        {{u.integration_1y|floatformat:2}}
-                    {% endif %}
-
-                    {% if request.GET.t == 'all' %}
-                        {{u.integration|floatformat:2}}
-                    {% endif %}
-                </td>
-            </tr>
-        {% empty %}
-            <tr>
-                <td colspan="7">
-                    {% trans "There isn't enough data yet, please come back later!" %}
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
 {% endblock %}
