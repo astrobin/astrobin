@@ -152,11 +152,11 @@ $(function() {
         }.property('deleted'),
 
         getHTML: function() {
-            var updated = new Date(this.updated);
+            var created = new Date(this.created);
             var release = new Date(
                 astrobin_common.globals.BREAKAGE_DATES.COMMENTS_MARKDOWN);
 
-            if (updated > release) {
+            if (created > release) {
                 return this.get('html');
             }
 
