@@ -3,7 +3,6 @@ import os
 from split_settings.tools import optional, include
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 include(
     # Begin
     'components/basic.py',
@@ -28,13 +27,13 @@ include(
     'components/account.py',
     'components/avatar.py',
     'components/celery.py',
+    'components/forum.py',
     'components/haystack.py',
     'components/hitcount.py',
     'components/notification.py',
     'components/pagination.py',
     'components/pipeline.py',
     'components/privatebeta.py',
-    'components/pybb.py',
     'components/rest.py',
     'components/silky.py',
     'components/subscription.py',
@@ -55,3 +54,4 @@ include(
     # Locally overridden settings
     optional('local_settings.py')
 )
+
