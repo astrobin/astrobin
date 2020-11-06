@@ -1,0 +1,18 @@
+{% load i18n %}
+
+<div class="modal hide fade" id="cant-unlike">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3><i class="icon-frown"></i> {% trans "Sorry" %}</h3>
+    </div>
+
+    <div class="modal-body">
+            {% blocktrans trimmed %}
+                You cannot remove a like that you gave more than one hour ago.
+            {% endblocktrans %}
+    </div>
+
+    <div class="modal-footer">
+        <a class="btn btn-primary" data-dismiss="modal">{% trans "OK" %}</a>
+    </div>
+</div>
