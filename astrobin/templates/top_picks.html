@@ -29,6 +29,7 @@
 
 {% block content %}
     {% include './_top_picks_subnav.html' %}
+    {% include "ads/full_width_wide_ad.html" %}
 
     <div class="top-picks">
         {% cache 3600 top_picks source page_obj.number  %}

@@ -1,13 +1,14 @@
 {% load astrobin_apps_premium_tags %}
 {% load astrobin_apps_users_tags %}
 {% load common_tags %}
-{% load dfp_tags %}
 {% load tags %}
 
 {% load i18n %}
 
 <div class="profile-meta hidden-phone">
     {% astrobin_user requested_user view='default'%}
+
+    {% include 'ads/rectangular_ad.html' %}
 
     {% if PREMIUM_ENABLED and requested_user == request.user %}
     <div class="subtle-container">
@@ -65,22 +66,6 @@
                 </li>
             {% endfor %}
         </ul>
-    {% endif %}
-
-    {% if request.user|show_ads and not image.user|is_any_ultimate %}
-        <div class="subtle-container simple-container advertisement hidden-phone hidden-tablet">
-            <div class="header">
-                <h4><i class="icon-bullhorn"></i></h4>
-
-                {% if request.user|can_remove_ads %}
-                    <a class="remove" data-toggle="modal" href="#remove-ads-modal">
-                        <i class="icon-remove"></i>
-                    </a>
-                {% endif %}
-            </div>
-
-            {% dfp_tag '47890729/user-page' 220 600 brands='' %}
-        </div>
     {% endif %}
 
     <div class="subtle-container stats">

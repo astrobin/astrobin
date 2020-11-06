@@ -1443,9 +1443,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     border: none;
     @include no-box-shadow;
 
-    /* Hide by default, will be shown if ad is rendered. */
-    display: none;
-
     &.remote-source-affiliate {
       display: block;
     }
@@ -1467,9 +1464,17 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     }
 
     &.advertisement-frontpage {
-      padding-top: 12px;
+      margin-bottom: 24px;
+      .header {
+        margin-bottom: $spacer-large;
+      }
     }
   }
+}
+
+
+.advertisement.full-width-wide-ad {
+  margin: -20px -30px 30px;
 }
 
 .comment-author {
@@ -2338,7 +2343,7 @@ form.avatar-change label.control-label {
 }
 
 .index-recent-topics {
-  margin-bottom: 20px;
+  margin-bottom: $spacer-large;
 }
 
 .notice-container {
