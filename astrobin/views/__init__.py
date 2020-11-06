@@ -2230,8 +2230,11 @@ def trending_astrophotographers(request):
     sort = request.GET.get('sort', default_sorting)
     t = request.GET.get('t', '1y')
 
-    if sort == '':
+    if sort in ('', 'default'):
         sort = default_sorting
+
+    if t == '':
+        t = 'all'
 
     if sort not in (
         default_sorting,
@@ -2248,7 +2251,6 @@ def trending_astrophotographers(request):
         '-likes',
         '-integration',
     ) or t not in (
-        '',
         'all',
         '6m',
         '1y'
@@ -2258,7 +2260,7 @@ def trending_astrophotographers(request):
     if not isinstance(sort, list):
         sort = [sort, ]
 
-    if t not in ('', 'all', None):
+    if t != 'all':
         sort = ['%s_%s' % (x, t) for x in sort]
 
     queryset = sqs.models(User).order_by(*sort)
@@ -2288,7 +2290,7 @@ def reputation_leaderboard(request):
 
     sort = request.GET.get('sort', default_sorting)
 
-    if sort == '':
+    if sort in ('', 'default'):
         sort = default_sorting
 
     if sort not in (

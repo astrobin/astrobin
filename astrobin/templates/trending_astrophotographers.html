@@ -29,8 +29,10 @@
               method="get" action="{% url 'trending_astrophotographers' %}">
             <input type="text" id="trending-astrophotographers-search-input" name="q" placeholder="{% trans "Search" %}"
                    value="{% if 'q' in request.GET %}{{ request.GET.q }}{% endif %}" />
-            <input type="hidden" name="t" value="{% if 't' in request.GET %}{{ request.GET.t }}{% endif %}" />
-            <input type="hidden" name="sort" value="{% if 'sort' in request.GET %}{{ request.GET.sort }}{% endif %}" />
+            <input type="hidden" name="t"
+                   value="{% if 't' in request.GET %}{{ request.GET.t }}{% else %}1y{% endif %}" />
+            <input type="hidden" name="sort"
+                   value="{% if 'sort' in request.GET %}{{ request.GET.sort }}{% else %}default{% endif %}" />
         </form>
 
         <div class="filter-toggle-group">

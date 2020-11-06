@@ -31,7 +31,8 @@
             <input type="text" id="reputation-leaderboard-search-input" name="q"
                    placeholder="{% trans "Search" %}"
                    value="{% if 'q' in request.GET %}{{ request.GET.q }}{% endif %}"/>
-            <input type="hidden" name="sort" value="{% if 'sort' in request.GET %}{{ request.GET.sort }}{% endif %}" />
+            <input type="hidden" name="sort"
+                   value="{% if 'sort' in request.GET %}{{ request.GET.sort }}{% else %}default{% endif %}" />
         </form>
 
         {% lazy_paginate 100 user_list using "page" %}

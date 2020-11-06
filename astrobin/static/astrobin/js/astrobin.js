@@ -249,6 +249,27 @@ astrobin_common = {
     },
 
     setup_user_popovers: function() {
+        $('#navbar-user-scores').each(function () {
+            $(this).qtip({
+                position: {
+                    my: "top center",
+                    at: "bottom center"
+                },
+                show: {
+                    solo: true
+                },
+                hide: {
+                    fixed: true,
+                    delay: 1000
+                },
+                content: {
+                    text: function () {
+                        return $("#user-scores-popover");
+                    }
+                }
+            });
+        });
+
         $('.user-popover').each(function() {
             $(this).qtip({
                 position: {
