@@ -154,7 +154,7 @@
 
         <hr />
 
-        <h4>{% trans "Reputation" %}: {{ user_scores_reputation|floatformat:2|default:"n/a" }}</h4>
+        <h4>{% trans "Reputation" %} {% trans "(beta)" %}: {{ user_scores_reputation|floatformat:2|default:"n/a" }}</h4>
         <p>
             {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/features/reputation" target="_blank">' as _0 and '</a>' as _1 %}
                 The <strong>Reputation Score (beta)</strong> is point based system to reward informative, constructive,
