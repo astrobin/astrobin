@@ -110,7 +110,9 @@
                             </a>
                         </span>
                     {% else %}
-                        {% add_remove_toggleproperty "like" post request.user %}
+                        {% setvar request.user|can_like:post as can_like %}
+                        {% setvar request.user|can_unlike:post as can_unlike %}
+                        {% add_remove_toggleproperty "like" post request.user can_add=can_like can_remove=can_unlike %}
                     {% endif %}
                 {% endif %}
 
@@ -154,4 +156,5 @@
     </div>
 
     {% include 'image/detail/modals/cant_like.html' %}
+    {% include 'image/detail/modals/cant_unlike.html' %}
 {% endblock %}

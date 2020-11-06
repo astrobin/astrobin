@@ -9,6 +9,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from subscription.models import Subscription, UserSubscription
 
 from astrobin.models import UserProfile
+from astrobin_apps_users.services import UserService
 from toggleproperties.models import ToggleProperty
 from .permissions import ReadOnly
 from .serializers import ContentTypeSerializer, UserSerializer, UserProfileSerializer, UserProfileSerializerPrivate, \
@@ -71,6 +72,12 @@ class TogglePropertyDetail(generics.RetrieveDestroyAPIView):
     def perform_destroy(self, serializer):
         if serializer.user == self.request.user:
             instance = self.get_object()
+            is_like = instance.property_type == 'like'
+            can_unlike = UserService(self.request.user).can_unlike(serializer.content_object)
+
+            if is_like and not can_unlike:
+                raise ValidationError('Cannot remove this like')
+
             return super(TogglePropertyDetail, self).perform_destroy(instance)
 
         raise ValidationError('Cannot delete another user\'s toggleproperty')

@@ -452,8 +452,13 @@ def to_user_timezone(value, user):
 
 
 @register.filter
-def can_like(user, image):
-    return UserService(user).can_like(image)
+def can_like(user, target):
+    return UserService(user).can_like(target)
+
+
+@register.filter
+def can_unlike(user, target):
+    return UserService(user).can_unlike(target)
 
 
 @register.filter

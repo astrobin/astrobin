@@ -7,6 +7,7 @@ from pybb.models import Post, Category, Forum, Topic
 from subscription.models import Subscription, UserSubscription
 
 from astrobin.models import Image, ImageRevision, Telescope, Mount
+from toggleproperties.models import ToggleProperty
 
 
 class Generators:
@@ -132,6 +133,7 @@ class Generators:
             user=kwargs.pop('user', Generators.user()),
 
         )
+
     @staticmethod
     def forum_post(**kwargs):
         user = kwargs.pop('user', Generators.user())
@@ -141,3 +143,8 @@ class Generators:
             user=kwargs.pop('user', user),
             body=kwargs.pop('body', Generators.randomString(150)),
         )
+
+    @staticmethod
+    def like(target, **kwargs):
+        return ToggleProperty.objects.create_toggleproperty(
+            'like', target, kwargs.pop('user', Generators.user()))

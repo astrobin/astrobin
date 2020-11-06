@@ -582,6 +582,15 @@ $(function() {
                             comment.set('likes', comment.likes.filter(function (userId) {
                                 return userId !== nc_app.userId
                             }));
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            var errors = JSON.parse(XMLHttpRequest.responseText);
+                            errors.forEach(function (error) {
+                                if (error === "Cannot remove this like") {
+                                    $('#cant-unlike').modal('show');
+                                }
+                            });
+                            comment.set('unliking', false);
                         }
                     });
                 }
