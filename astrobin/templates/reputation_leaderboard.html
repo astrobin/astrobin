@@ -111,7 +111,9 @@
             {% for u in user_list %}
                 <tr>
                     <td class="reputation-leaderboard-position">
-                        {% page_counter forloop.counter pages.current.number 100 %}
+                        {% if 'q' not in request.GET or request.GET.q == '' %}
+                            {% page_counter forloop.counter pages.current.number 100 %}
+                        {% endif %}
                     </td>
 
                     <td class="reputation-leaderboard-user">
