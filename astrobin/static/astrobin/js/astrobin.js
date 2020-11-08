@@ -3,13 +3,13 @@
  *********************************************************************/
 astrobin_common = {
     config: {
-        image_detail_url           : '/',
+        image_detail_url: '/',
 
         /* Notifications */
-        notifications_base_url     : '/activity?id=notification_',
+        notifications_base_url: '/activity?id=notification_',
         notifications_element_empty: 'ul#notification-feed li#empty',
         notifications_element_image: 'img#notifications',
-        notifications_element_ul   : 'ul#notification-feed'
+        notifications_element_ul: 'ul#notification-feed'
     },
 
     globals: {
@@ -23,43 +23,42 @@ astrobin_common = {
     },
 
     utils: {
-        getParameterByName: function(name) {
-           name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-           var regexS = "[\\?&]" + name + "=([^&#]*)";
-           var regex = new RegExp(regexS);
-           var results = regex.exec(window.location.search);
-           if(results == null)
-               return "";
-           else
-               return decodeURIComponent(results[1].replace(/\+/g, " "));
+        getParameterByName: function (name) {
+            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var regexS = "[\\?&]" + name + "=([^&#]*)";
+            var regex = new RegExp(regexS);
+            var results = regex.exec(window.location.search);
+            if (results == null)
+                return "";
+            else
+                return decodeURIComponent(results[1].replace(/\+/g, " "));
         },
 
-        checkParameterExists: function(parameter) {
-           //Get Query String from url
-           fullQString = window.location.search.substring(1);
+        checkParameterExists: function (parameter) {
+            //Get Query String from url
+            fullQString = window.location.search.substring(1);
 
-           paramCount = 0;
-           queryStringComplete = "?";
+            paramCount = 0;
+            queryStringComplete = "?";
 
-           if(fullQString.length > 0)
-           {
-               //Split Query String into separate parameters
-               paramArray = fullQString.split("&");
+            if (fullQString.length > 0) {
+                //Split Query String into separate parameters
+                paramArray = fullQString.split("&");
 
-               //Loop through params, check if parameter exists.
-               for (i=0;i<paramArray.length;i++) {
-                   currentParameter = paramArray[i].split("=");
-                   if (currentParameter[0] == parameter) //Parameter already exists in current url
-                   {
-                       return true;
-                   }
-               }
-           }
+                //Loop through params, check if parameter exists.
+                for (i = 0; i < paramArray.length; i++) {
+                    currentParameter = paramArray[i].split("=");
+                    if (currentParameter[0] == parameter) //Parameter already exists in current url
+                    {
+                        return true;
+                    }
+                }
+            }
 
             return false;
         },
 
-        convertCurrency: function(amount, targetCurrency, precision) {
+        convertCurrency: function (amount, targetCurrency, precision) {
             // CHF is the base.
             var rates = {
                 USD: 1.03,
@@ -73,12 +72,177 @@ astrobin_common = {
 
             var converted = parseInt(amount, 10) * rates[targetCurrency];
             return (Math.round(converted * 100) / 100).toFixed(precision);
+        },
+
+        ckeditorOptions: function (context, language) {
+            if (!language) {
+                language = 'en';
+            }
+
+            var options = {
+                language: language,
+                contentsCss: '/static/astrobin/css/ckeditor_content.css',
+                extraPlugins: 'autocomplete,autolink,bbcode,editorplaceholder,help,mentions,SimpleLink,simpleuploads,textwatcher',
+                removePlugins: 'format,image,horizontalrule,pastetext,pastefromword,scayt,showborders,stylescombo,table,tabletools,tableselection,wsc,specialchar',
+                removeButtons: 'Anchor,BGColor,Font,Subscript,Superscript,JustifyBlock,Link',
+                disableObjectResizing: true,
+                toolbar: [
+                    {
+                        name: 'help',
+                        items: ['HelpButton']
+                    },
+                    {
+                        name: 'document',
+                        items: ['Source', 'Maximize']
+                    },
+                    {
+                        name: 'clipboard',
+                        items: ['Cut', 'Copy', 'Paste', 'Undo', 'Redo']
+                    },
+                    {
+                        name: 'basicstyles',
+                        items: ['Bold', 'Italic', 'Underline', 'Strike', 'RemoveFormat']
+                    },
+                    {
+                        name: 'paragraph',
+                        items: ['NumberedList', 'BulletedList', 'Blockquote']
+                    },
+                    {
+                        name: 'links',
+                        items: ['SimpleLink', 'Unlink']
+                    },
+                    {
+                        name: 'insert',
+                        items: ['addFile', 'addImage']
+                    }
+                ],
+                filebrowserUploadUrl: '/json-api/common/ckeditor-upload/',
+                mentions: [
+                    {
+                        feed: '/autocomplete_usernames/?q={encodedQuery}',
+                        marker: '@',
+                        itemTemplate: '<li data-id="{id}">' +
+                            '<img class="avatar" width="40" height="40" src="{avatar}" />' +
+                            '<strong class="realname">{realName}</strong><span class="username">({username})</span>' +
+                            '</li>',
+                        outputTemplate: '<a href="' + window.location.origin + '/users/{username}/">@{displayName}</a><span>&nbsp;</span>',
+                    },
+                    {
+                        feed: '/autocomplete_images/?q={encodedQuery}',
+                        marker: '#',
+                        minChars: 0,
+                        itemTemplate: '<li data-id="{id}">' +
+                            '<img class="image" width="40" height="40" src="{thumbnail}" />' +
+                            '<span class="title">{title}</span>' +
+                            '</li>',
+                        outputTemplate: '<br/><a href="{url}">' +
+                            '<img src="{thumbnail}"/><br/>' +
+                            '{title}' +
+                            '</a><br/>',
+                    }
+                ],
+                on: {
+                    change: function () {
+                        this.updateElement();
+                    }
+                }
+            }
+
+            switch (context) {
+                case "forum":
+                    options['height'] = 300;
+                    options['on']['instanceReady'] = function () {
+                        $(".post-form-loading").hide();
+                        $(".post-form").show();
+                    };
+                    break;
+                case "comments":
+                    options['height'] = 250;
+                    break;
+                case "private-message":
+                    options['height'] = 300;
+                    break;
+                default:
+                    console.error("Unhandled CkEditor options context");
+                    return {}
+            }
+
+            return options;
+        },
+
+        BBCodeToHtml: function (code) {
+            var fragment = CKEDITOR.htmlParser.fragment.fromBBCode(code);
+            var writer = new CKEDITOR.htmlParser.basicWriter();
+            var bbcodeFilter = new CKEDITOR.htmlParser.filter();
+
+            bbcodeFilter.addRules({
+                elements: {
+                    blockquote: function (element) {
+                        var quoted = new CKEDITOR.htmlParser.element('div');
+                        quoted.children = element.children;
+                        element.children = [quoted];
+                        var citeText = element.attributes.cite;
+                        if (citeText) {
+                            var cite = new CKEDITOR.htmlParser.element('cite');
+                            cite.add(new CKEDITOR.htmlParser.text(citeText.replace(/^"|"$/g, '')));
+                            delete element.attributes.cite;
+                            element.children.unshift(cite);
+                        }
+                    },
+                    span: function (element) {
+                        var bbcode;
+                        if ((bbcode = element.attributes.bbcode)) {
+                            if (bbcode === 'img') {
+                                element.name = 'img';
+                                element.attributes.src = element.children[0].value;
+                                element.children = [];
+                            } else if (bbcode === 'email') {
+                                element.name = 'a';
+                                element.attributes.href = 'mailto:' + element.children[0].value;
+                            }
+
+                            delete element.attributes.bbcode;
+                        }
+                    },
+                    ol: function (element) {
+                        if (element.attributes.listType) {
+                            if (element.attributes.listType !== 'decimal')
+                                element.attributes.style = 'list-style-type:' + element.attributes.listType;
+                        } else {
+                            element.name = 'ul';
+                        }
+
+                        delete element.attributes.listType;
+                    },
+                    a: function (element) {
+                        if (!element.attributes.href)
+                            element.attributes.href = element.children[0].value;
+                    },
+                    smiley: function (element) {
+                        element.name = 'img';
+
+                        var description = element.attributes.desc,
+                            image = config.smiley_images[CKEDITOR.tools.indexOf(config.smiley_descriptions, description)],
+                            src = CKEDITOR.tools.htmlEncode(config.smiley_path + image);
+
+                        element.attributes = {
+                            src: src,
+                            'data-cke-saved-src': src,
+                            title: description,
+                            alt: description
+                        };
+                    }
+                }
+            });
+
+            fragment.writeHtml(writer, bbcodeFilter);
+            return writer.getHtml(true);
         }
     },
 
-    listen_for_notifications: function(username, last_modified, etag) {
+    listen_for_notifications: function (username, last_modified, etag) {
         astrobin_common.globals.smart_ajax({
-            'beforeSend': function(xhr) {
+            'beforeSend': function (xhr) {
                 xhr.setRequestHeader("If-None-Match", etag);
                 xhr.setRequestHeader("If-Modified-Since", last_modified);
             },
@@ -86,7 +250,7 @@ astrobin_common = {
             dataType: 'text',
             type: 'get',
             cache: 'false',
-            success: function(data, textStatus, xhr) {
+            success: function (data, textStatus, xhr) {
                 etag = xhr.getResponseHeader('Etag');
                 last_modified = xhr.getResponseHeader('Last-Modified');
 
@@ -94,7 +258,7 @@ astrobin_common = {
 
                 $(astrobin_common.config.notifications_element_empty).remove();
                 $(astrobin_common.config.notifications_element_ul)
-                    .prepend('<li class="unread">'+json['message']+'</li>');
+                    .prepend('<li class="unread">' + json['message'] + '</li>');
 
                 /* Start the next long poll. */
                 astrobin_common.listen_for_notifications(username, last_modified, etag);
@@ -102,11 +266,11 @@ astrobin_common = {
         });
     },
 
-    start_listeners: function(username) {
-        astrobin_common.globals.smart_ajax = function(settings) {
+    start_listeners: function (username) {
+        astrobin_common.globals.smart_ajax = function (settings) {
             // override complete() operation
             var complete = settings.complete;
-            settings.complete = function(xhr) {
+            settings.complete = function (xhr) {
                 if (xhr) {
                     // xhr may be undefined, for example when downloading JavaScript
                     for (var i = 0, len = astrobin_common.globals.requests.length; i < len; ++i) {
@@ -131,21 +295,21 @@ astrobin_common = {
             return r;
         };
 
-        setTimeout(function() {
+        setTimeout(function () {
             astrobin_common.listen_for_notifications(username, '', '');
         }, 1000);
     },
 
-    clearText: function(field) {
+    clearText: function (field) {
         if (field.defaultValue == field.value) field.value = '';
         else if (field.value == '') field.value = field.defaultValue;
     },
 
-    showHideAdvancedSearch: function() {
+    showHideAdvancedSearch: function () {
     },
 
-    init_ajax_csrf_token: function() {
-        $(document).ajaxSend(function(event, xhr, settings) {
+    init_ajax_csrf_token: function () {
+        $(document).ajaxSend(function (event, xhr, settings) {
             function getCookie(name) {
                 var cookieValue = null;
                 if (document.cookie && document.cookie != '') {
@@ -185,8 +349,8 @@ astrobin_common = {
         });
     },
 
-    setup_gear_popovers: function() {
-        $('.gear-popover-label').each(function() {
+    setup_gear_popovers: function () {
+        $('.gear-popover-label').each(function () {
             $(this).qtip({
                 position: {
                     viewport: $(window)
@@ -204,11 +368,11 @@ astrobin_common = {
                     text: "...",
                     ajax: {
                         loading: false,
-                        url:  $(this).attr('data-load'),
+                        url: $(this).attr('data-load'),
                         type: 'GET',
                         dataType: 'json',
                         timeout: 5000,
-                        success: function(data, status) {
+                        success: function (data, status) {
                             this.set('content.text', data.html);
                         }
                     }
@@ -217,8 +381,8 @@ astrobin_common = {
         });
     },
 
-    setup_subject_popovers: function() {
-        $('.subject-popover').each(function() {
+    setup_subject_popovers: function () {
+        $('.subject-popover').each(function () {
             $(this).qtip({
                 position: {
                     my: "left center",
@@ -235,11 +399,11 @@ astrobin_common = {
                     text: "...",
                     ajax: {
                         loading: false,
-                        url:  $(this).attr('data-load'),
+                        url: $(this).attr('data-load'),
                         type: 'GET',
                         dataType: 'json',
                         timeout: 5000,
-                        success: function(data, status) {
+                        success: function (data, status) {
                             this.set('content.text', data.html);
                         }
                     }
@@ -248,7 +412,7 @@ astrobin_common = {
         });
     },
 
-    setup_user_popovers: function() {
+    setup_user_popovers: function () {
         $('#navbar-user-scores').each(function () {
             $(this).qtip({
                 position: {
@@ -270,7 +434,7 @@ astrobin_common = {
             });
         });
 
-        $('.user-popover').each(function() {
+        $('.user-popover').each(function () {
             $(this).qtip({
                 position: {
                     my: "left center",
@@ -287,11 +451,11 @@ astrobin_common = {
                     text: "...",
                     ajax: {
                         loading: false,
-                        url:  $(this).attr('data-load'),
+                        url: $(this).attr('data-load'),
                         type: 'GET',
                         dataType: 'json',
                         timeout: 5000,
-                        success: function(data, status) {
+                        success: function (data, status) {
                             this.set('content.text', data.html);
                         }
                     }
@@ -300,11 +464,11 @@ astrobin_common = {
         });
     },
 
-    mark_notification_as_read: function(notification_id) {
+    mark_notification_as_read: function (notification_id) {
         $.ajax({
             url: '/persistent_messages/mark_read/' + notification_id + '/',
             dataType: 'json',
-            success: function() {
+            success: function () {
                 var $row = $('#notifications-modal tr[data-id=' + notification_id + ']'),
                     $check_mark = $row.find('td.notification-mark-as-read a'),
                     $count_badge = $('#notifications_count'),
@@ -333,7 +497,7 @@ astrobin_common = {
         });
     },
 
-    init: function(current_username, config) {
+    init: function (current_username, config) {
         /* Init */
         astrobin_common.globals.current_username = current_username;
         $.extend(true, astrobin_common.config, config);
@@ -363,28 +527,23 @@ astrobin_common = {
             dividerLocation: 0.5
         });
 
-        $('textarea.bocde').wysibb({
-            buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
-        });
-
         astrobin_common.init_ajax_csrf_token();
-   }
+    }
 };
 
 /**********************************************************************
  * Stats
  *********************************************************************/
 astrobin_stats = {
-    config: {
-    },
+    config: {},
 
     globals: {
         previousPoint: null
     },
 
     /* Private */
-    _showTooltip: function(x, y, contents) {
-        $('<div id="stats-tooltip">' + contents + '</div>').css( {
+    _showTooltip: function (x, y, contents) {
+        $('<div id="stats-tooltip">' + contents + '</div>').css({
             position: 'absolute',
             display: 'none',
             top: y - 25,
@@ -398,7 +557,7 @@ astrobin_stats = {
     },
 
     /* Public */
-    enableTooltips: function(plot) {
+    enableTooltips: function (plot) {
         $(plot).bind("plothover", function (event, pos, item) {
             if (item) {
                 if (astrobin_stats.globals.previousPoint != item.dataIndex) {
@@ -410,22 +569,21 @@ astrobin_stats = {
 
                     astrobin_stats._showTooltip(item.pageX, item.pageY, y);
                 }
-            }
-            else {
+            } else {
                 $("#stats-tooltip").remove();
                 astrobin_stats.globals.previousPoint = null;
             }
         });
     },
 
-    plot: function(id, url, timeout, data, options) {
+    plot: function (id, url, timeout, data, options) {
         $.ajax({
             url: url,
             method: 'GET',
             dataType: 'json',
             timeout: timeout,
             cache: false,
-            success: function(series) {
+            success: function (series) {
                 $.plot(
                     $(id),
                     [{
@@ -438,14 +596,14 @@ astrobin_stats = {
         });
     },
 
-    plot_pie: function(id, url, timeout, data, options) {
+    plot_pie: function (id, url, timeout, data, options) {
         $.ajax({
             url: url,
             method: 'GET',
             dataType: 'json',
             timeout: timeout,
             cache: false,
-            success: function(series) {
+            success: function (series) {
                 $.plot(
                     $(id),
                     series['flot_data'],
@@ -455,7 +613,7 @@ astrobin_stats = {
     },
 
 
-    init: function(config) {
+    init: function (config) {
         /* Init */
         $.extend(true, astrobin_stats.config, config);
     }

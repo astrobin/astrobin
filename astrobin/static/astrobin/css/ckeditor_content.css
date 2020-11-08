@@ -1,0 +1,23 @@
+html, body {
+    background-color: #404040;
+    color: #f0f0f0;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 14px;
+}
+
+a {
+    color: #CC4B2E;
+}
+
+img {
+    max-width: 100%;
+    height: auto !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+blockquote {
+    border-left: 3px dashed #999;
+    margin-left: 20px;
+    padding-left: 10px;
+}

@@ -8,6 +8,7 @@
 {% load nestedcomments_tags %}
 
 
+<div id="nested-comments-language-code" data-value="{{LANGUAGE_CODE}}"></div>
 <div id="nested-comments-user-id" data-value="{{request.user.id}}"></div>
 <div id="nested-comments-user-name" data-value="{{request.user.username}}"></div>
 <div id="nested-comments-user-is-authenticated" data-value="{{ request.user.is_authenticated.value }}"></div>
@@ -113,7 +114,6 @@
         </div>
 
         {{#unless view.collapsed}}
-            <!-- Used to access a wisybb object and convert the bbcode to HTML. -->
             <div class="converter" style="display: none">
                 {{view Ember.TextArea rows=6 valueBinding="view.node.text"}}
             </div>

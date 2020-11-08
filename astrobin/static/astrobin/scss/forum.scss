@@ -73,6 +73,8 @@ th.forum-name {
 }
 
 .post-header {
+  text-align: left;
+
   th {
     position: relative;
     padding: 0 20px !important;
@@ -278,8 +280,13 @@ table.post th.post-avatar {
   width: 80px;
 }
 
+.post-form-loading {
+  margin: 0 0 30px;
+}
+
 .post-form {
   margin-top: 40px;
+  display: none;
 
   li {
     list-style: initial;
@@ -292,10 +299,10 @@ table.post th.post-avatar {
   input[type="submit"] {
     width: auto;
   }
+}
 
-  .submit {
-    margin-top: 24px;
-  }
+.submit {
+  margin-top: 24px;
 }
 
 .topic h1, .forum h1, .category h1 {

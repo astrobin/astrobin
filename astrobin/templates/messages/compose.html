@@ -36,14 +36,15 @@
 {% block extra_js %}
     <script type="text/javascript">
         $(document).ready(function() {
-            var textarea = $('#id_body');
-            textarea.wysibb({
-                buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
-            });
-
             {% if 'subject' in request.GET %}
-            $('input#id_subject').val("{{request.GET.subject}}");
+                $('input#id_subject').val("{{request.GET.subject}}");
             {% endif %}
+
+            var textarea = $('#id_body');
+            CKEDITOR.replace(
+                textarea.attr("id"),
+                astrobin_common.utils.ckeditorOptions("private-message", "{{ LANGUAGE_CODE }}")
+            );
 
             var recipients = $("#id_recipient").val().split(',');
             $("#id_recipient").val("");
