@@ -248,7 +248,7 @@ def send_never_activated_account_reminder():
         user.userprofile.never_activated_account_reminder_sent = timezone.now()
         user.userprofile.save()
 
-        logger.debug("Sent 'never activated account reminder' to %s" % user.username)
+        logger.debug("Sent 'never activated account reminder' to %d" % user.pk)
 
 
 @shared_task()

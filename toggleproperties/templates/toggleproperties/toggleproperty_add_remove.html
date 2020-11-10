@@ -3,9 +3,12 @@
             data-toggle="button"
             id="toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}"
             {% if has_tooltip %}
-            rel="tooltip"
+                rel="tooltip"
             {% endif %}
             title="{% if is_toggled %}{{ property_tooltip_on | safe }}{% else %}{{ property_tooltip_off | safe }}{% endif %}"
+            {% if disabled %}
+                disabled="disabled"
+            {% endif %}
     >
 
         {% if property_icon %}

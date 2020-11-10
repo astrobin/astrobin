@@ -16,6 +16,7 @@ $(function() {
             this.profilesApiUrl = this.baseApiUrl + 'common/userprofiles/';
             this.usersUrl = '/users/';
 
+            this.languagecode = $('#nested-comments-language-code').attr('data-value');
             this.userId = parseInt($('#nested-comments-user-id').attr('data-value'));
             this.username = $('#nested-comments-user-name').attr('data-value');
             this.userIsAuthenticated = $('#nested-comments-user-is-authenticated').attr('data-value') == "True";
@@ -51,8 +52,8 @@ $(function() {
         createSyncInterval: function() {
             var self = this;
             this.set('syncInterval', setInterval(function() {
-                self.sync();
-            }, 1000));
+                self.sync(true);
+            }, 200));
         },
 
         removeSyncInterval: function() {
@@ -67,7 +68,7 @@ $(function() {
         sync: function(syncTextarea) {
             try {
                 var textarea = this.$('textarea'),
-                    html = textarea.getHTML(),
+                    data = CKEDITOR.instances[textarea.attr('id')].getData(),
                     property = null;
 
                 switch (this.get('type')) {
@@ -80,11 +81,10 @@ $(function() {
                         break;
                 }
 
-                this.set(property + '.html', html);
+                this.set(property + '.html', astrobin_common.utils.BBCodeToHtml(data));
 
                 if (typeof syncTextarea !== 'undefined' && syncTextarea) {
-                    textarea.sync();
-                    this.set(property + '.text', textarea.val());
+                    this.set(property + '.text', data);
                 }
             } catch (TypeError) {
                 // textarea was not available, probably because the user is
@@ -97,12 +97,10 @@ $(function() {
 
             setTimeout(function() {
                 var textarea = self.$('textarea');
-
-                textarea.wysibb({
-                    buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
-                });
-                self.$('.wysibb-text-editor').focus();
-
+                CKEDITOR.replace(
+                    textarea.attr("id"),
+                    astrobin_common.utils.ckeditorOptions("comments", nc_app.languageCode)
+                );
                 self.createSyncInterval();
             }, 1);
         }
@@ -152,11 +150,11 @@ $(function() {
         }.property('deleted'),
 
         getHTML: function() {
-            var updated = new Date(this.updated);
+            var created = new Date(this.created);
             var release = new Date(
                 astrobin_common.globals.BREAKAGE_DATES.COMMENTS_MARKDOWN);
 
-            if (updated > release) {
+            if (created > release) {
                 return this.get('html');
             }
 
@@ -255,8 +253,15 @@ $(function() {
         },
 
         reset: function() {
+            var instance = CKEDITOR.instances[self.$('textarea').attr('id')];
+
+            if (instance) {
+                instance.setData('');
+            }
+
             var comment = nc_app.get('router.commentsController').createComment();
             this.set('comment', comment);
+
             this.removeSyncInterval();
         },
 
@@ -582,6 +587,15 @@ $(function() {
                             comment.set('likes', comment.likes.filter(function (userId) {
                                 return userId !== nc_app.userId
                             }));
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            var errors = JSON.parse(XMLHttpRequest.responseText);
+                            errors.forEach(function (error) {
+                                if (error === "Cannot remove this like") {
+                                    $('#cant-unlike').modal('show');
+                                }
+                            });
+                            comment.set('unliking', false);
                         }
                     });
                 }
@@ -666,16 +680,13 @@ $(function() {
                 self.scroll();
             }
 
-            if (hilighted_comment == self.get('node.cid')) {
+            if (hilighted_comment === self.get('node.cid')) {
                 self.hilight();
                 self.scroll();
             }
 
             setTimeout(function() {
-                self.$('textarea').wysibb({
-                    buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
-                });
-                self.set('node.html', self.$('textarea').getHTML());
+                self.set('node.html', astrobin_common.utils.BBCodeToHtml(self.$('textarea').val()));
                 self.set('node.ready', true);
             });
         },

@@ -511,7 +511,7 @@ def image_upload_process(request):
 
     from astrobin_apps_premium.utils import premium_used_percent
 
-    log.info("Classic uploader (%s): submitted" % request.user)
+    log.info("Classic uploader (%d): submitted" % request.user.pk)
 
     used_percent = premium_used_percent(request.user)
     if used_percent >= 100:
@@ -1384,7 +1384,7 @@ def user_ban(request, username):
         user.userprofile.deleted_reason = UserProfile.DELETE_REASON_BANNED
         user.userprofile.save(keep_deleted=True)
         user.userprofile.delete()
-        log.info("User %s (%d) was banned" % (user.username, user.pk))
+        log.info("User (%d) was banned" % user.pk)
 
     return render(request, 'user/ban.html', {
         'user': user,
@@ -1862,7 +1862,7 @@ def user_profile_flickr_import(request):
         'readonly': settings.READONLY_MODE
     }
 
-    log.debug("Flickr import (user %s): accessed view" % request.user.username)
+    log.debug("Flickr import (user %d): accessed view" % request.user.pk)
 
     if not request.user.is_superuser and is_free(request.user) or settings.READONLY_MODE:
         return render(request, "user/profile/flickr_import.html", response_dict)
@@ -1886,7 +1886,7 @@ def user_profile_flickr_import(request):
     if not flickr.token_valid(perms=u'read'):
         # We were never authenticated, or authentication expired. We need
         # to reauthenticate.
-        log.debug("Flickr import (user %s): token not valid" % request.user.username)
+        log.debug("Flickr import (user %d): token not valid" % request.user.pk)
         flickr.get_request_token(settings.BASE_URL + reverse('flickr_auth_callback'))
         authorize_url = flickr.auth_url(perms=u'read')
         request.session['request_token'] = flickr.flickr_oauth.resource_owner_key
@@ -1898,21 +1898,21 @@ def user_profile_flickr_import(request):
         # If we made it this far (it's a GET request), it means that we
         # are authenticated with flickr. Let's fetch the sets and send them to
         # the template.
-        log.debug("Flickr import (user %s): token valid, GET request, fetching sets" % request.user.username)
+        log.debug("Flickr import (user %d): token valid, GET request, fetching sets" % request.user.pk)
 
         # Does it have to be so insane to get the info on the
         # authenticated user?
         sets = flickr.photosets_getList().find('photosets').findall('photoset')
 
-        log.debug("Flickr import (user %s): token valid, fetched sets" % request.user.username)
+        log.debug("Flickr import (user %d): token valid, fetched sets" % request.user.pk)
         template_sets = {}
         for set in sets:
             template_sets[set.find('title').text] = set.attrib['id']
         response_dict['flickr_sets'] = template_sets
     else:
-        log.debug("Flickr import (user %s): token valid, POST request" % request.user.username)
+        log.debug("Flickr import (user %d): token valid, POST request" % request.user.pk)
         if 'id_flickr_set' in request.POST:
-            log.debug("Flickr import (user %s): set in POST request" % request.user.username)
+            log.debug("Flickr import (user %d): set in POST request" % request.user.pk)
             set_id = request.POST['id_flickr_set']
             urls_sq = {}
             for photo in flickr.walk_set(set_id, extras='url_sq'):
@@ -1923,7 +1923,7 @@ def user_profile_flickr_import(request):
             selected_photos = request.POST.getlist('flickr_selected_photos[]')
             # Starting the process of importing
             for index, photo_id in enumerate(selected_photos):
-                log.debug("Flickr import (user %s): iterating photo %s" % (request.user.username, photo_id))
+                log.debug("Flickr import (user %d): iterating photo %s" % (request.user.pk, photo_id))
                 sizes = flickr.photos_getSizes(photo_id=photo_id)
                 info = flickr.photos_getInfo(photo_id=photo_id).find('photo')
 
@@ -1957,7 +1957,7 @@ def user_profile_flickr_import(request):
                                   is_wip=True,
                                   license=profile.default_license)
                     image.save(keep_deleted=True)
-                    log.debug("Flickr import (user %s): saved image %d" % (request.user.username, image.pk))
+                    log.debug("Flickr import (user %d): saved image %d" % (request.user.pk, image.pk))
 
         log.debug("Flickr import (user %s): returning ajax response: %s" % (
             request.user.username, simplejson.dumps(response_dict)))
@@ -1967,7 +1967,7 @@ def user_profile_flickr_import(request):
 
 
 def flickr_auth_callback(request):
-    log.debug("Flickr import (user %s): received auth callback" % request.user.username)
+    log.debug("Flickr import (user %d): received auth callback" % request.user.pk)
     flickr = flickrapi.FlickrAPI(
         settings.FLICKR_API_KEY, settings.FLICKR_SECRET,
         username=request.user.username)
@@ -2133,7 +2133,7 @@ def image_revision_upload_process(request):
 
     image = get_image_or_404(Image.objects_including_wip, image_id)
 
-    log.info("Classic uploader (revision) (%s) (%d): submitted" % (request.user, image.pk))
+    log.info("Classic uploader (revision) (%d) (%d): submitted" % (request.user.pk, image.pk))
 
     if settings.READONLY_MODE:
         messages.error(request, _(
@@ -2219,39 +2219,60 @@ def stats(request):
 
 @require_GET
 def trending_astrophotographers(request):
-    response_dict = {}
-
-    if 'page' in request.GET:
-        raise Http404
-
     sqs = SearchQuerySet()
 
-    sort = request.GET.get('sort', 'index')
-    if sort == 'index':
-        sort = '-normalized_likes'
-    elif sort == 'followers':
-        sort = '-followers'
-    elif sort == 'integration':
-        sort = '-integration'
-    elif sort == 'images':
-        sort = '-images'
-    elif sort == 'likes':
-        sort = '-likes'
-    else:
-        sort = '-normalized_likes'
+    default_sorting = [
+        '-normalized_likes',
+        '-likes',
+        '-images',
+    ]
 
+    sort = request.GET.get('sort', default_sorting)
     t = request.GET.get('t', '1y')
-    if t not in ('', 'all', None):
-        sort += '_%s' % t
 
-    queryset = sqs.models(User).order_by(sort)
+    if sort in ('', 'default'):
+        sort = default_sorting
+
+    if t == '':
+        t = 'all'
+
+    if sort not in (
+        default_sorting,
+
+        'normalized_likes',
+        'followers',
+        'images',
+        'likes',
+        'integration',
+
+        '-normalized_likes',
+        '-followers',
+        '-images',
+        '-likes',
+        '-integration',
+    ) or t not in (
+        'all',
+        '6m',
+        '1y'
+    ):
+        raise Http404
+
+    if not isinstance(sort, list):
+        sort = [sort, ]
+
+    if t != 'all':
+        sort = ['%s_%s' % (x, t) for x in sort]
+
+    queryset = sqs.models(User).order_by(*sort)
+
+    if 'q' in request.GET:
+        queryset = queryset.filter(text__contains=request.GET.get('q'))
 
     return object_list(
         request,
         queryset=queryset,
         template_name='trending_astrophotographers.html',
         template_object_name='user',
-        extra_context=response_dict,
     )
 
 
@@ -2259,9 +2280,22 @@ def trending_astrophotographers(request):
 def reputation_leaderboard(request):
     queryset = SearchQuerySet()
 
-    sort = request.GET.get('sort', '-reputation')
+    default_sorting = [
+        '-reputation',
+        '-comment_likes_received',
+        '-forum_post_likes_received',
+        '-comments_written',
+        '-forum_posts'
+    ]
+
+    sort = request.GET.get('sort', default_sorting)
+
+    if sort in ('', 'default'):
+        sort = default_sorting
 
     if sort not in (
+        default_sorting,
+
         'comments_written',
         'comments',
         'comment_likes_received',
@@ -2278,7 +2312,13 @@ def reputation_leaderboard(request):
     ):
         raise Http404
 
-    queryset = queryset.models(User).order_by(sort)
+    if not isinstance(sort, list):
+        sort = [sort,]
+
+    queryset = queryset.models(User).order_by(*sort)
+
+    if 'q' in request.GET:
+        queryset = queryset.filter(text__contains=request.GET.get('q'))
 
     return object_list(
         request,

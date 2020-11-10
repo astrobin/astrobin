@@ -148,14 +148,14 @@
                     </a>
                 </li>
 
-                <li class="divider"></li>
-
                 <li class="explore-menu-remote-astrophotography">
                     <a href="https://welcome.astrobin.com/remote-astrophotography">
                         <i class="icon-laptop"></i>
                         {% trans "Remote astrophotography" %}
                     </a>
                 </li>
+
+                <li class="divider"></li>
 
                 <li class="explore-menu-trending-astrophotographers">
                     <a href="{% url 'trending_astrophotographers' %}">
@@ -167,7 +167,7 @@
                 <li class="explore-menu-reputation-leaderboard">
                     <a href="{% url 'reputation_leaderboard' %}">
                         <i class="icon-arrow-up"></i>
-                        {% trans "Reputation leaderboard" %}
+                        {% trans "Reputation leaderboard" %} {% trans "(beta)" %}
                     </a>
                 </li>
 

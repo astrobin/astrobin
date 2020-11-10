@@ -16,7 +16,7 @@ botocore==1.16.25
 ccy==1.2.0
 celery[redis]==4.4.7
 celery-haystack==0.10
-certifi==2020.6.20
+certifi==2020.11.8
 cffi==1.14.3
 chardet==3.0.4
 click==7.1.2
@@ -47,12 +47,11 @@ django-classy-tags==1.0.0
 django-contact-form-gv==0.7.0
 django-contrib-comments==1.9.2
 -e git+https://github.com/siovene/snakecheese.git@72c5c7be4a5ae19c9054f11c8cedb68dd661fd65#egg=django_contrib_requestprovider&subdirectory=gadjolib
-django-cookie-law==2.0.3
+django-cookie-law==2.0.4
 django-cors-middleware==1.5.0
 django-crispy-forms==1.7.0
 django-debug-toolbar==1.11
 django-debug-toolbar-template-timings==0.9
--e git+https://github.com/siovene/django-dfp.git@1da94954a6f2211538fcdde2b8e98497357220e9#egg=django_dfp
 django-easysettings==2.0.1
 django-el-pagination==3.2.4
 -e git+https://github.com/siovene/django-ember.git@b925ecd22c8008ccb339a4977d0081972c58f39f#egg=django_ember
@@ -207,4 +206,4 @@ xdis==5.0.5
 yolk==0.4.3
 zipp==1.2.0
 zope.event==4.5.0
-zope.interface==5.1.2
+zope.interface==5.2.0

@@ -5,6 +5,7 @@
 
 @import "alert";
 @import "buttons";
+@import "ckeditor";
 @import "forms";
 @import "modal";
 @import "multiselect";
@@ -19,6 +20,8 @@
 @import "breadcrumb";
 @import "comments";
 @import "forum";
+@import "reputation-leaderboard";
+@import "trending-astrophotographers";
 @import "search";
 
 strong, .strong {
@@ -1441,9 +1444,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     border: none;
     @include no-box-shadow;
 
-    /* Hide by default, will be shown if ad is rendered. */
-    display: none;
-
     &.remote-source-affiliate {
       display: block;
     }
@@ -1465,9 +1465,17 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     }
 
     &.advertisement-frontpage {
-      padding-top: 12px;
+      margin-bottom: 24px;
+      .header {
+        margin-bottom: $spacer-large;
+      }
     }
   }
+}
+
+
+.advertisement.full-width-wide-ad {
+  margin: -20px -30px 30px;
 }
 
 .comment-author {
@@ -2336,7 +2344,7 @@ form.avatar-change label.control-label {
 }
 
 .index-recent-topics {
-  margin-bottom: 20px;
+  margin-bottom: $spacer-large;
 }
 
 .notice-container {
@@ -3372,47 +3380,6 @@ pre {
   margin-top: 8px;
 }
 
-.wysibb {
-  color: $grey-2;
-  background: #404040 !important;
-  border: 1px solid $grey-7 !important;
-  @include rounded-corners(4px);
-
-  .wysibb-toolbar, .wysibb-toolbar-container {
-    border-bottom-color: #555 !important;
-    border-right-color: #555 !important;
-  }
-
-  .wysibb-toolbar-container:hover,
-  .wysibb-toolbar-container .wysibb-toolbar-btn:hover,
-  .wysibb-toolbar-container .wysibb-toolbar-btn .btn-text:hover {
-    color: $grey-6;
-  }
-
-  .wysibb-text-editor {
-    padding: 8px;
-    min-height: 150px !important;
-  }
-}
-
-.wbb-button {
-  background: $link-color !important;
-  border-color: darken($link-color, 10%) !important;
-
-  &:hover {
-    background: darken($link-color, 5%) !important;
-  }
-}
-
-#wbbmodal label, #wbbmodal .div-modal-text {
-  color: #666;
-}
-
-.wysibb .wysibb-toolbar .wysibb-toolbar-container .wysibb-toolbar-btn .fonticon {
-  color: $grey-2;
-  text-shadow: 0 1px 0 black;
-}
-
 .table.migrate-donations {
   margin-bottom: 30px;
 }
@@ -3933,75 +3900,6 @@ table.search-table {
         text-overflow: ellipsis;
       }
     }
-  }
-}
-
-.trending-astrophotographers {
-  .trending-astrophotographers-position {
-    width: 25px;
-  }
-
-  .trending-astrophotographers-index,
-  .trending-astrophotographers-followers,
-  .trending-astrophotographers-images,
-  .trending-astrophotographers-likes,
-  .trending-astrophotographers-integration {
-    text-align: center;
-    width: 15%;
-  }
-
-  .trending-astrophotographers-integration {
-    text-align: right;
-  }
-}
-
-.reputation-leaderboard {
-  table-layout: initial;
-
-  colgroup {
-    .comments {
-      background-color: $grey-5;
-    }
-
-    .forum-posts {
-      background-color: $grey-8;
-    }
-  }
-
-  th {
-    font-size: 12px;
-    white-space: nowrap;
-  }
-
-    .reputation-leaderboard-position {
-    width: 25px;
-  }
-
-  .reputation-leaderboard-reputation {
-    text-align: center;
-    width: 15%;
-  }
-}
-
-.filter-toggle-group {
-  text-align: right;
-  padding: 10px 10px 10px 0;
-  background-color: $grey-8;
-  background-color: rgba(0, 0, 0, 0.35);
-
-  .filter-toggle {
-    display: inline-block;
-    margin-left: 8px;
-
-    a.active {
-      cursor: default;
-      pointer-events: none;
-      color: $text-color;
-    }
-  }
-
-  .separator {
-    margin-left: 8px;
   }
 }
 

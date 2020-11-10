@@ -72,6 +72,7 @@ def common_variables(request):
         'True': True,
         'False': False,
 
+        'STATIC_URL': settings.STATIC_URL,
         'LANGUAGE_CODE': request.LANGUAGE_CODE if hasattr(request, "LANGUAGE_CODE") else "en",
         'DEBUG_MODE': settings.DEBUG,
         'REQUEST_COUNTRY': get_client_country_code(request),
@@ -80,6 +81,9 @@ def common_variables(request):
         'MEDIA_URL': settings.MEDIA_URL,
         'ADS_ENABLED': settings.ADS_ENABLED,
         'ADSENSE_ENABLED': settings.ADSENSE_ENABLED,
+        'ADMANAGER_PUBLISHER_ID': settings.ADMANAGER_PUBLISHER_ID,
+        'NATIVE_RESPONSIVE_WIDE_SLOT': settings.NATIVE_RESPONSIVE_WIDE_SLOT,
+        'NATIVE_RESPONSIVE_RECTANGULAR_SLOT': settings.NATIVE_RESPONSIVE_RECTANGULAR_SLOT,
         'DONATIONS_ENABLED': settings.DONATIONS_ENABLED,
 
         'PREMIUM_ENABLED': settings.PREMIUM_ENABLED,

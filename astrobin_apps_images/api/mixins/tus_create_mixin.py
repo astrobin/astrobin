@@ -27,12 +27,12 @@ class TusCreateMixin(TusCacheMixin, mixins.CreateModelMixin):
     def create(self, request, *args, **kwargs):
         # Validate tus header
         if not has_required_tus_header(request):
-            log.warning("Chunked uploader (%s): missing Tus-Resumable header" % request.user)
+            log.warning("Chunked uploader (%d): missing Tus-Resumable header" % request.user.pk)
             return HttpResponse('Missing "{}" header.'.format('Tus-Resumable'), status=status.HTTP_400_BAD_REQUEST)
 
         # Get file size from request
         upload_length = int(request.META.get(constants.UPLOAD_LENGTH_FIELD_NAME, -1))
-        log.info("Chunked uploader (%s): initiated upload of file with size %d" % (request.user, upload_length))
+        log.info("Chunked uploader (%d): initiated upload of file with size %d" % (request.user.pk, upload_length))
 
         # Validate upload_length
         max_file_size = min(
@@ -40,14 +40,14 @@ class TusCreateMixin(TusCacheMixin, mixins.CreateModelMixin):
             getattr(self, 'max_file_size', constants.TUS_MAX_FILE_SIZE))
         if upload_length > max_file_size:
             msg = 'Invalid "Upload-Length". Maximum value: {}.'.format(max_file_size)
-            log.warning("Chunked uploader (%s): %s" % (request.user, msg))
+            log.warning("Chunked uploader (%d): %s" % (request.user.pk, msg))
             return HttpResponse(msg, status=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE)
 
         # If upload_length is not given, we expect the defer header!
         if not upload_length or upload_length < 0:
             if getattr(request, constants.UPLOAD_DEFER_LENGTH_FIELD_NAME, -1) != 1:
                 msg = 'Missing "{Upload-Defer-Length}" header.'
-                log.warning("Chunked uploader (%s): %s" % (request.user, msg))
+                log.warning("Chunked uploader (%d): %s" % (request.user.pk, msg))
                 return HttpResponse(msg, status=status.HTTP_400_BAD_REQUEST)
 
         # Get metadata from request
@@ -65,7 +65,7 @@ class TusCreateMixin(TusCacheMixin, mixins.CreateModelMixin):
             serializer = self.get_object_serializer(request, filename, upload_length, upload_metadata)
         except KeyError as e:
             msg = 'Invalid data: %s' % e.message
-            log.warning("Chunked uploader (%s): %s" % (request.user, msg))
+            log.warning("Chunked uploader (%d): %s" % (request.user.pk, msg))
             return HttpResponse(msg, status=status.HTTP_400_BAD_REQUEST)
 
         # Validate serializer
@@ -77,7 +77,7 @@ class TusCreateMixin(TusCacheMixin, mixins.CreateModelMixin):
         # Get upload from serializer
         object = serializer.instance
 
-        log.debug("Chunked uploader (%s) (%d): created" % (request.user, object.pk))
+        log.debug("Chunked uploader (%d) (%d): created" % (request.user.pk, object.pk))
 
         signals.receiving.send(object)
 
