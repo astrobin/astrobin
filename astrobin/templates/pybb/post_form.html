@@ -4,6 +4,7 @@
 {% if READONLY_MODE %}
     {% include 'readonly_mode.html' %}
 {% else %}
+    <img class="post-form-loading" src="{% static "astrobin/images/ajax-loader.gif" %}" alt="{% trans "Loading" %}" />
     <form novalidate class="post-form" action="
         {% if forum %}
             {% url 'pybb:add_topic' forum.pk %}
@@ -24,7 +25,12 @@
                 {% if form.login %} {% include "pybb/form_field.html" with field=form.login %} {% endif %}
 
                 {% include '_reputation_alert.html' %}
-                {% if form.body %} {% include "pybb/form_field.html" with field=form.body %}  {% endif %}
+
+                {% if form.body %}
+                    {% include "pybb/form_field.html" with field=form.body %}
+                    {% include '_rich_content_editor_help.html' %}
+                {% endif %}
+
                 <div id='emoticons'>
                     {% for smile, url in form.available_smiles.items %}
                         <a href='#' title='{{ smile|safe }}'><img src='{% static form.smiles_prefix %}{{ url }}'></a>
@@ -55,15 +61,11 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var textarea = $('#id_body');
-            textarea.wysibb({
-                buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
-            });
 
-            $('#emoticons a').click(function () {
-                emoticon = $(this).attr("title");
-                textarea.insertAtCursor(' ' + emoticon + ' ');
-                return false;
-            });
+            CKEDITOR.replace(
+                textarea.attr("id"),
+                astrobin_common.utils.ckeditorOptions("forum", "{{ LANGUAGE_CODE }}")
+            );
 
             function getSelectedText() {
                 if (document.selection) {
@@ -79,10 +81,14 @@
                 $.get(
                     url,
                     function (data) {
-                        if (textarea.bbcode() !== "")
-                            textarea.insertAtCursor('\n');
-                        textarea.insertAtCursor(data);
-                        window.location.hash = '#id_body';
+                        var instance = CKEDITOR.instances[textarea.attr("id")];
+
+                        if (instance.mode === 'source') {
+                            window.alert("{% trans "Please first exit 'Source' mode to quote a message." %}");
+                        } else {
+                            instance.setData(instance.getData() + '\n' + data + '\n.')
+                            window.location.hash = '#cke_id_body';
+                        }
                     }
                 );
             });
@@ -95,15 +101,26 @@
                 var selectedText = getSelectedText();
                 if (selectedText !== '') {
                     var username = '';
-                    if ($(this).closest('.post').length === 1 &&
-                        $(this).closest('.post').find('.post-author a').length === 1) {
-                        username = $.trim($(this).closest('.post').find('.post-author a').text());
+                    var instance = CKEDITOR.instances[textarea.attr("id")];
+
+                    if (instance.mode === 'source') {
+                        window.alert("{% trans "Please first exit 'Source' mode to quote a message." %}");
+                    } else {
+                        if ($(this).closest('.post').length === 1 &&
+                            $(this).closest('.post').find('.post-author a').length === 1) {
+                            username = $.trim($(this).closest('.post').find('.post-author a').text());
+                        }
+                        instance.setData(
+                            instance.getData() + '\n' + window.pybb.markup.quote(selectedText, username) + '\n.');
+                        window.location.hash = '#cke_id_body';
                     }
-                    if (textarea.bbcode() !== "")
-                        textarea.insertAtCursor('\n');
-                    textarea.insertAtCursor(window.pybb.markup.quote(selectedText, username));
-                    window.location.hash = '#id_body';
                 }
+            });
+
+            $('#emoticons a').click(function () {
+                var emoticon = $(this).attr("title");
+                CKEDITOR.instances[textarea.attr("id")].insertText(' ' + emoticon + ' ');
+                return false;
             });
         });
     </script>

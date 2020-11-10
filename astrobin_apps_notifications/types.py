@@ -192,4 +192,16 @@ NOTICE_TYPES = (
         '',
         2
     ),
+    (
+        'new_forum_post_mention',
+        _('You were mentioned in a forum post'),
+        '',
+        2,
+    ),
+    (
+        'new_comment_mention',
+        _('You were mentioned in a comment'),
+        '',
+        2,
+    ),
 )

@@ -11,6 +11,7 @@ ASTROBIN_APPS = [
     'astrobin_apps_iotd',
     'astrobin_apps_remote_source_affiliation',
     'astrobin_apps_equipment',
+    'astrobin_apps_json_api',
     'toggleproperties'
 ]
 

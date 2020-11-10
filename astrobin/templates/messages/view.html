@@ -78,15 +78,17 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var textarea = $('#id_body');
-            textarea.wysibb({
-                buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
-            });
+
+            CKEDITOR.replace(
+                textarea.attr("id"),
+                astrobin_common.utils.ckeditorOptions("private-message", "{{ LANGUAGE_CODE }}")
+            );
 
             $('.reply-form').ajaxForm({
                 resetForm: true,
                 timeout: 5000,
                 beforeSubmit: function () {
-                    if ($('.reply-form #id_body').val() != '') {
+                    if ($('.reply-form #id_body').val() !== '') {
                         $('.reply-form .submit-button')
                             .attr('disabled', 'disabled')
                             .addClass('btn-disabled')
@@ -101,7 +103,7 @@
 
                     $container.append($new_message);
                     $('.message-list').append($container);
-                    $('.wysibb-body').text('');
+                    CKEDITOR.instances[textarea.attr("id")].setData('');
 
                     $('.reply-form .submit-button')
                         .removeAttr('disabled')

@@ -62,6 +62,7 @@ input:focus, textarea:focus {
   input[type=text],
   input[type=password],
   textarea,
+  .cke,
   .help-block {
     width: 610px;
     max-width: 96%;
@@ -79,11 +80,6 @@ input:focus, textarea:focus {
     &.checkbox {
       padding-left: 0;
     }
-  }
-
-  .wysibb {
-    width: 622px;
-    max-width: 98%;
   }
 
   .radio,

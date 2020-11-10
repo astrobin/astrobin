@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Simple Uploads plugin</title>
+<link href="styles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Simple Uploads Plugin for CKEditor</h1>
+
+<h2 id="contact">Author:</h2>
+<p><a href="mailto:amla70@gmail.com">Alfonso Mart&iacute;nez de Lizarrondo</a></p>
+
+<h2>Version history: </h2>
+<ol>
+	<li>1.0: 28-September-2011. First public version.</li>
+	<li>2.0: 10-June-2012. Included support for Drag&amp;drop. This version is not open source</li>
+	<li>2.1: 17-June-2012. Added pasting from clipboard in Chrome. Allow dropping multiple files. Clean up non-valid Safari images (webkit-fake-url)</li>
+	<li>2.2: 17-July-2012. Avoid problems in Macs pasting from MS Office into Chrome</li>
+	<li>2.3: 22-September-2012. Show a greyscale animation while uploading a picture (except if it's pasted in Firefox)<br>
+			Compatiblity with CKEditor 4 beta<br>
+			Disabled the check that prevented drops in Opera: if the browser doesn't support an API to detect the correct caret position we'll let it handle that part.</li>
+	<li>2.4: 25-November-2012: Polish the upload notification: show full color image as soon as it has been uploaded, show an overlay with the numeric percentage.<br>
+		Use upload progress also for pasting in Firefox<br>
+		Avoid extra body after pasting in Chrome<br>
+		Drag over effect to highlight the editor.</li>
+	<li>2.5: 20-February-2013. Integrate correctly with the Undo system.</li>
+	<li>2.6: 22-February-2013. More protections in case the user tries to mess with the editor while uploading a file.</li>
+	<li>2.7: 23-February-2013. Protection in case the user switches to Source mode while uploading<br>
+		Unification of code for pasting in Firefox and rest of cases<br>
+		Configuration options for the <a href="cssConfig">drag-over shadows</a>.<br>
+		Integration with CKEditor 4.1 data filtering</li>
+	<li>3.0: 26-April-2013. Two buttons for the toolbar to add files or images for those users that don't like to drag things :-).<br>
+			Fix problems in CKEditor 4 if setData is called on the editor<br>
+			Use correct URL for upload if it lacks query string parameters.
+			</li>
+	<li>3.1: 4-May-2013 Adjusted the ACF for IE8 and IE9<br>
+			The events have been renamed to "<a href='Install.html#startUpload'>simpleuploads.startUpload</a>" and "<a href='Install.html#endUpload'>simpleuploads.endUpload</a>" and now the startUpload can be used to cancel an upload</li>
+
+	<li>3.2: 1-June-2013 Adjusted the regexp for detection of uploads to take care of systems that lack the status message.<br>
+			Added a console warning if the upload url hasn't been set in the configuration of CKEditor.<br>
+			Add a space to separate links when dropping several files (not images).<br>
+			Fixed bug in IE10 on drop of multiple files.
+			</li>
+
+	<li>3.3.1: 23rd-July-2013 Changed the "100%" text after file has been sent to "Processing..." (it can be modified in the lang file)<br>
+			Readjusted the detection of file upload name to take into account apostrophes again<br>
+			Toolbar buttons didn't work correctly in IE8 since 3.1<br>
+			Fixed Strict mode problems<br>
+			Better detection of failed uploads</li>
+
+	<li>3.3.2: 2nd-August-2013 Compatibility with IE11: adjusted for keep on allowing upload by drag&amp;drop and added pasting from clipboard<br>
+			Add dimensions of the uploaded images as attributes to the created elements.
+	</li>
+	<li>3.3.3: 22-September-2013 Improve detection of failed uploads to correctly show the error message<br>
+			Allow the "<a href='Install.html#startUpload'>simpleuploads.startUpload</a>" event to modify the name of the uploaded file (except for uploads in old IEs). If you want full control the best option is to modify your upload script at the server.
+	<li>3.3.4: 5th-October-2013 New event "<a href='Install.html#finishedUpload'>simpleuploads.finishedUpload</a>" that it's fired after the final element has been inserted into the page (so you can add for example your custom class or modify any other attribute)
+	</li>
+	<li>3.4 Support for <a href="Install.html#CORS">Cross domain requests</a>. Now you can upload your files for example to http://media.example.com and edit the page from http://admin.example.com.</li>
+	<li>4.0: 18-November-2013<br>
+		Renamed from <b>imagepaste</b> to <b>simpleuploads</b><br>
+		According to your previous customizations, the <a href="upgrade.html">upgrade</a> can be very easy or require a little bit of attention.<br>
+		Added support to specify <a href="Install.html#extraFields">extra fields during uploads</a> (for example to support anti-CSRF tokens)<br>
+		Replace the QuickUpload buttons in all the CKEditor dialogs with one-click buttons<br>
+		Allow to drop files on the dialogs that have a quick upload of file browser options<br>
+		Those uploads provide an upload progress bar, cancel button and allow the same features as the rest of uploads (verify the file for size, extension, etc.. before starting the upload, modify the upload url, add extra fields...)<br>
+		Handle pasted images for Chrome and IE11 in the Paste dialog (remember that it's easier if you just Ctrl+V on the main document)<br>
+		Added cancel button for images dropped on the editor<br>
+		Added progress and cancel options for files dropped on the editor<br>
+		</li>
+	<li>4.0.1: 20-November-2013<br>
+		Fixed compatibility with IE 11<br>
+		Corrected cancel button for file uploads in IE<br>
+		Improved upload progress for files<br>
+		</li>
+
+	<li>4.0.2: 30-November-2013<br>
+		Support pasting text and images from MS Word in IE 11<br>
+		Avoid a problem with Chrome if the editor is empty and you drop a file below the highlighted body<br>
+		Support Firefox in the Paste dialog<br>
+		Improved compatibility with CKEditor 4.3 and the new Widgets<br>
+		Improved compatibility with IE 11 (several adjustments)<br>
+		</li>
+
+	<li>4.1.0: 7-December-2013<br>
+		Enhance the toolbar buttons to preserve better the existing content:<br>
+		<ul>
+			<li>If an image is selected, picking a new one will preserve its attributes</li>
+			<li>If the selection is in a link, picking a file will change only the href of the link</li>
+			<li>If there's some text selected, picking a file will convert it to a link</li>
+		</ul>
+		Apply similar checks on the drop target:<br>
+		<ul>
+			<li>If an image is dropped over an existing one, replace the source</li>
+			<li>If a file is dropped over a link, replace the href</li>
+		</ul>
+		During a drop, if the Shift key is pressed, create a link (a) instead of an image (img)<br>
+		Added new simpleuploads_hideImageProgress option to use always plain text for the uploads instead of the image preview<br>
+		Handle the third optional parameter in the upload callback for dialogs if it is a function (compatibility with the default uploads)<br>
+		Adjusted the htmlFilter that strips the temporary elements to deal with changes in CKEditor 4.3<br>
+		Don't break the table dialog if the plugin "dialogadvtab" is not included<br>
+		Corrected compatibility in dialogs with IE8<br>
+		Added German and Polish translations
+		</li>
+	<li>4.1.1: 8-January-2014<br>
+		Added validation of images for the toolbar button and image dialogs<br>
+		Adjusted regexp to parse results to handle better OTRS
+		</li>
+	<li>4.1.2: <br>
+		Allow to set "simpleuploads_imageExtensions" to false or an empty string so no file is inserted as image<br>
+		Correctly send extraFields when pasting an image in Firefox and IE11
+		</li>
+	<li>4.1.3: <br>
+		Modified the function in getTimeStampId to toISOString and the regexp to protect against third party libraries<br>
+		Handle pasting of images if forcePasteAsPlainText is enabled<br>
+		</li>
+	<li>4.1.4: 16-January-2014<br>
+		Readjusted for changes in the image2 widget<br>
+		</li>
+	<li>4.2.0: 2nd-march-2014<br>
+		New event simpleuploads.localImageReady that allows better checks on the selected images (not available for IE8 &amp; IE9).<br>
+		Based on this event, two new options are available, simpleuploads_convertBmp (removed in 4.5) and simpleuploads_maximumDimensions<br>
+		More features (local resizing) will be available in a future release.<br>
+		This event requires asynchronous processing, so maybe there are situations that I didn't test properly, please, cautious with this update
+		for a few days.<br>
+		-Fixed bug with the paste dialog due to recent changes in CKEditor
+		</li>
+	<li>4.2.1: 9-March-2014<br>
+		Fix <a href='http://ckeditor.com/comment/130803#comment-130803'>memory leak</a> by reference to the editor even after it has been destroyed<br>
+		Added new translations
+		</li>
+	<li>4.2.2: 13-March-2014<br>
+		If CKEditor was launched in a jQueryUI modal dialog, the file picker didn't work.
+		</li>
+	<li>4.2.3: 27-March-2014<br>
+		Detect the response sent after an upload even if it incorrectly has quotes around the funcNumber paramenter.
+		</li>
+	<li>4.2.4: 4-April-2014<br>
+		Prevent firing the "blur" event on the editor when clicking on the upload buttons with Chrome.<br>
+		Correct detection of the toolbar buttons in IE8.<br>
+		Avoid error when integrating with a dialog that lacks an onShow handler.
+		</li>
+	<li>4.2.5: 16-May-2014<br>
+		Allow to embed  the files as base64 data: URLs if the filebrowserUploadUrl is set to "<b>base64</b>"
+		</li>
+	<li>4.2.6: 19-May-2014<br>
+		Protection to avoid errors with the paste dialog in a smartgwt environment<br>
+		Disable upload buttons if base64 encoding has been selected for old IEs
+		</li>
+	<li>4.3.0: 12-June-2014<br>
+		Disable the sendAsBinary method in Firefox to avoid the compatibility warning<br>
+		New optional parameter that can be used to <a href="Install.html#extraHeaders">set custom http headers in the XHR</a><br>
+		Avoid temporary visible space while pasting an image with IE11 or Firefox<br>
+		Adjusted the regexp to handle new KCFinder<br>
+		Included the xhr and original data object in the simpleuploads.endUpload event<br>
+		</li>
+	<li>4.3.1: 22-June-2014<br>
+		Correct the API that handles modified images if a dialog is open
+		</li>
+	<li>4.3.2: 26-June-2014<br>
+		Try to parse correctly the url of the uploaded file if it contains escaped chars like \u00E6
+		</li>
+	<li>4.3.3: 27-June-2014<br>
+		Fix the previous two bugs when using the Upload button in the Image dialog
+		</li>
+	<li>4.3.4: 20-July-2014<br>
+		Pasting an image in Chrome placed it at the start of the content depending on the page.
+		</li>
+	<li>4.3.5: 2-September-2014<br>
+		Fixed regression of 4.3.4 for CKEditor 3.6
+		</li>
+	<li>4.3.6: 27-September-2014<br>
+		The toolbar buttons used an incorrect syntax in the requiredContent definition for the ACF.<br>
+		<a href='Install.html#serverResponse'>New event 'serverResponse'</a> to handle custom responses from the server
+		</li>
+	<li>4.3.7: 1-October-2014<br>
+		Images dropped in IE11 didn't have the correct location if used with the <a href="http://www.uritec.es/imagecrop">Image Crop</a> plugin<br>
+		</li>
+	<li>4.3.8: 21-November-2014<br>
+		Handle correctly dropped files when using the CKEDITOR.inline method with textareas<br>
+		</li>
+	<li>4.3.9: 2-December-2014<br>
+		New configuration option "simpleuploads_inputname" to specify the name of the input sent to the server with the file data<br>
+		Added protection against <a href="http://www.codecogs.com/pages/forums/pagegen.php?id=2803">overwritting the native URL object by the CodeCogs plugin</a><br>
+		Improvements to the usage of the "base64" upload option (Remember that we advice you to avoid this option unless you're really sure that this is the way to go, it's mostly unsupported and untested due to the lack of valid use cases so far)
+		</li>
+	<li>4.3.11: 11-December-2014<br>
+		(skipping 4.3.10 as the plugin.js in 4.3.9 already used that version)<br>
+		Fix upload for IE8 that were broken in 4.3.9
+	</li>
+	<li>4.3.12: 22-March-2015<br>
+		If an Image2 widget is selected, replace the image when using the toolbar button.
+	</li>
+	<li>4.3.13: 23-June-2015<br>
+		Allow dropping multiple files on dialogs<br>
+		Corrected the method fired on a dialog when a file is uploaded from "onFileSelect" to "filebrowse.onSelect"
+	</li>
+	<li>4.3.14: 27-June-2015<br>
+		If filebrowserImageUploadUrl is set but filebrowserUploadUrl is empty, dont' crash trying to upload a non-image file<br>
+		Optimized the pngs for the toolbar buttons
+	</li>
+	<li>4.3.15: 13-September-2015<br>
+		Unified formatting by Eslint<br>
+		Removed compatibility code for CKEditor 3.6, if you need it, please send me a mail<br>
+		Adjusted compatibility for CKEditor 4.5.2 <a href="http://dev.ckeditor.com/ticket/13184">to drop files on the dialogs</a>
+	</li>
+	<li>4.3.16: 13-September-2015<br>
+		Use "accept" attribute to show only images in the "add image" prompt (doesn't work for MS Edge, <a href="https://connect.microsoft.com/IE/feedback/details/1937551">bug report</a>)
+	</li>
+	<li>4.3.17: 8-November-2015<br>
+		If the 'notificationaggregator' plugin is loaded (introduced in CKEditor 4.5) use it to show the messages instead of window.alert except <a href="http://dev.ckeditor.com/ticket/13862">if there's a dialog shown</a><br>
+	</li>
+	<li>4.3.18: 22-November-2015<br>
+		If the added image is replacing an existing one, prevent Firefox and IE from caching the previous dimensions<br>
+	</li>
+	<li>4.3.19: 7-January-2016<br>
+		The simpleuploads_allowDropOutside option was preventing dragging inside Inline editors</li>
+	<li>4.3.20: 27-January-2016<br>
+		If multiple files are uploaded from a dialog (ex: the ImagesFromWord plugin), show a progress bar for each one</li>
+	<li>4.3.21: 4-February-2016<br>
+		Bugfix to show better multiple progress bars on a dialog</li>
+	<li>4.4.0: 8-February-2016<br>
+		Removed support for IE8<br>
+		Added some missing translations for error messages</li>
+	<li>4.4.1: 29-February-2016<br>
+		Bugfix for broken usage of error message.</li>
+	<li>4.4.2: 04-July-2016<br>
+		Protect the displayed filename to avoid self-XSS attacks.<br>
+		Don't replace new lines with &lt;br&gt; in messages if the 'notification' is not available<br>
+		Use the CSRF token introduced in CKEditor 4.5.6 to upload files to latest CKFinder
+		</li>
+	<li>4.4.3: 18-November-2016<br>
+		Avoid leaving the placeholder and not inserting the image if the upload is just too fast.<br>
+		Avoid problems with E10s in Firefox betas<br>
+		Use lowercase CSS class names to avoid bug with Chrome
+		</li>
+	<li>4.4.4: 20-December-2016<br>
+		Allow to create a customized XHR object in simpleuploads.startUpload and pass it in the data object.<br>
+		</li>
+	<li>4.5.0: 18-February-2017<br>
+		Get ready for allowing pasting of images in the upcoming Safari<br>
+		Adjust the regexp that removes useless webkit-fake-url images<br>
+		Added bunch of file error handling to take care of problems with Safari<br>
+		Http error status is checked only if there isn't a callback that handled the server response<br>
+		Adjusted linting mostly for XO<br>
+		Removed simpleuploads_convertBmp configuration option. Now it's handled automatically, as well as tiff files (for Safari)<br>
+		</li>
+	<li>4.5.1: 28/07/2017<br>
+		Pass the data object in the simpleuploads.finishedUpload event<br>
+		Enable pasting images in Chrome on MacOs from the desktop (Finder)<br>
+		Prevent duplicate images with latest CKEditor and Firefox
+		</li>
+	<li>4.5.2: 23/08/2017<br>
+		Enabled pasting of images when a dialog is open (ex: the ImagesFromWord plugin)
+		</li>
+	<li>4.5.3: 24/08/2017<br>
+		Prevent pasting an image if there's HTML in the clipboard
+		</li>
+
+	
+</ol>
+
+<h2>See also</h2>
+<p><a href="Install.html">Install and configuration instructions</a></p>
+<p><a href="http://alfonsoml.blogspot.com/search/label/SimpleUploads">More tips and configuration guides</a></p>
+<p><a href="http://alfonsoml.blogspot.com/2014/10/list-of-plugins-for-ckeditor.html">Other plugins</p>
+
+<h2>Disclaimers</h2>
+<p>CKEditor is  &copy; CKSource.com</p>
+<p>File and Image icons by the <a href='http://tango.freedesktop.org/Tango_Desktop_Project'>Tango Desktop Project</a></p>
+</body>
+</html>

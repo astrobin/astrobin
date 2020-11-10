@@ -1,0 +1,12 @@
+{% load i18n %}
+{% load common_tags %}
+
+<button type="submit" class="btn btn-primary btn-block-mobile {% button_loading_class %}">
+    {% if submit_text %}
+        {{ submit_text }}
+    {% else %}
+        {% trans 'Submit' %}
+    {% endif %}
+
+    {% button_loading_indicator %}
+</button>
