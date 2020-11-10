@@ -253,8 +253,14 @@ select.cke_dialog_ui_input_select {
 }
 
 .cke_autocomplete_panel {
+  width: auto !important;
+  max-width: 400px !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, .4);
   margin-right: $base-font-size;
+
+  @media screen and (max-width: 400px) {
+    max-width: 300px !important;
+  }
 
   li {
     .avatar,
