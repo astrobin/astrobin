@@ -194,6 +194,11 @@ def update_index():
 
 
 @shared_task()
+def update_index_images_1h():
+    call_command('update_index', 'astrobin.Image', '-k 4', '-b 100', '--remove', '--age=1')
+
+
+@shared_task()
 def send_missing_data_source_notifications():
     call_command("send_missing_data_source_notifications")
 
