@@ -256,13 +256,15 @@ select.cke_dialog_ui_input_select {
   width: auto !important;
   max-width: 400px !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, .4);
-  margin-right: $base-font-size;
+  margin-left: $base-font-size !important;
 
   @media screen and (max-width: 400px) {
     max-width: 300px !important;
   }
 
   li {
+    padding: 5px 15px !important;
+
     .avatar,
     .image {
       border-radius: 20px;
