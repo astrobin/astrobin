@@ -189,11 +189,6 @@ def retrieve_primary_thumbnails(pk, options):
 
 
 @shared_task()
-def update_index():
-    call_command('update_index', '-k 4', '-b 100', '--remove', '--age=24')
-
-
-@shared_task()
 def update_index_images_1h():
     call_command('update_index', 'astrobin.Image', '-k 4', '-b 100', '--remove', '--age=1')
 
