@@ -72,6 +72,7 @@ def common_variables(request):
         'True': True,
         'False': False,
 
+        'STATIC_URL': settings.STATIC_URL,
         'LANGUAGE_CODE': request.LANGUAGE_CODE if hasattr(request, "LANGUAGE_CODE") else "en",
         'DEBUG_MODE': settings.DEBUG,
         'REQUEST_COUNTRY': get_client_country_code(request),
