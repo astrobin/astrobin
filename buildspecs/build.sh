@@ -1,5 +1,6 @@
 #!/bin/bash -ex
 
+docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
 docker build \
     -t astrobin:$CODEBUILD_RESOLVED_SOURCE_VERSION \
     -t $DOCKER_REGISTRY/astrobin:$CODEBUILD_RESOLVED_SOURCE_VERSION \
