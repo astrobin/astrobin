@@ -730,7 +730,7 @@ def forum_post_post_save(sender, instance, created, **kwargs):
             push_notification(
                 [user], 'new_forum_post_mention',
                 {
-                    'url': instance.get_absolute_url(),
+                    'url': settings.BASE_URL + instance.get_absolute_url(),
                     'user': instance.user.userprofile.get_display_name(),
                     'user_url': settings.BASE_URL + reverse_url(
                         'user_page', kwargs={'username': instance.user}),
