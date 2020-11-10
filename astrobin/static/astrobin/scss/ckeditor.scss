@@ -273,3 +273,27 @@ select.cke_dialog_ui_input_select {
     }
   }
 }
+
+.cke_wysiwyg_frame,
+.cke_wysiwyg_div {
+  background-color: $grey-5 !important;
+  color: $grey-1 !important;
+  padding: 8px !important;
+
+  a {
+    color: $link-color !important;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  blockquote {
+    border-left: 3px dashed #999;
+    margin-left: 20px;
+    padding-left: 10px;
+  }
+}

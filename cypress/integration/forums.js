@@ -8,8 +8,8 @@ describe("Forums", () => {
     });
 
     it("should have default forum", () => {
-       cy.get(".forum-name").contains("AstroBin Meta Forums").should("exist");
-       cy.get(".forum-name a").contains("Announcements").should("exist");
+        cy.get(".forum-name").contains("AstroBin Meta Forums").should("exist");
+        cy.get(".forum-name a").contains("Announcements").should("exist");
     });
 
     it("should post", () => {
@@ -18,8 +18,8 @@ describe("Forums", () => {
         cy.url().should("contain", "/topic/add/");
 
         cy.get(".post-form input[name='name']").type("Test topic");
-        cy.get(".post-form textarea[name='body'] + .wysibb-text-editor").type("Hello, this is a test topic.");
-        cy.get(".post-form input[type='submit']").click();
+        cy.get("#cke_id_body .cke_wysiwyg_div").type("Hello, this is a test topic.");
+        cy.get(".post-form button[type='submit']").click();
 
         cy.url().should("contain", "/forum/c/astrobin/announcements/test-topic");
         cy.get(".topic h1").contains("Test topic").should("exist");
@@ -31,10 +31,10 @@ describe("Forums", () => {
         cy.url().should("match", /\/forum\/post\/\d+\/edit\//);
 
         cy.get(".post-form input[name='name']").clear().type("Edited test topic");
-        cy.get(".post-form textarea[name='body'] + .wysibb-text-editor")
+        cy.get("#cke_id_body .cke_wysiwyg_div")
             .clear()
             .type("Hello, this is an edited test topic.");
-        cy.get(".post-form input[type='submit']").click();
+        cy.get(".post-form button[type='submit']").click();
 
         cy.url().should("contain", "/forum/c/astrobin/announcements/test-topic");
         cy.get(".topic h1").contains("Edited test topic").should("exist");
@@ -42,8 +42,8 @@ describe("Forums", () => {
     });
 
     it("should reply", () => {
-        cy.get(".post-form textarea[name='body'] + .wysibb-text-editor").type("This is a reply.");
-        cy.get(".post-form input[type='submit']").click();
+        cy.get("#cke_id_body .cke_wysiwyg_div").type("This is a reply.");
+        cy.get(".post-form button[type='submit']").click();
 
         cy.url().should("contain", "/forum/c/astrobin/announcements/test-topic");
         cy.get(".post-content").contains("This is a reply.").should("exist");
@@ -51,9 +51,9 @@ describe("Forums", () => {
 
     it("should quote", () => {
         cy.get(".post-related").last().contains("quote").click();
-        cy
-            .get(".post-form textarea[name='body'] + .wysibb-text-editor")
-            .text()
-            .should("contain", "[quote=\"astrobin_dev\"]This is a reply.[/quote]");
+        cy.wait(1000);
+        cy.get(".cke_button__source").click();
+        cy.get("#cke_id_body textarea.cke_source")
+            .should("contain.value", "[quote=\"astrobin_dev\"]This is a reply.[/quote]");
     });
 });

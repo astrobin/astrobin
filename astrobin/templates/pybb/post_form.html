@@ -77,8 +77,13 @@
                     url,
                     function (data) {
                         var instance = CKEDITOR.instances[textarea.attr("id")];
-                        instance.setData(instance.getData() + '\n' + data + '\n.')
-                        window.location.hash = '#cke_id_body';
+
+                        if (instance.mode === 'source') {
+                            window.alert("{% trans "Please first exit 'Source' mode to quote a message." %}");
+                        } else {
+                            instance.setData(instance.getData() + '\n' + data + '\n.')
+                            window.location.hash = '#cke_id_body';
+                        }
                     }
                 );
             });
@@ -91,13 +96,19 @@
                 var selectedText = getSelectedText();
                 if (selectedText !== '') {
                     var username = '';
-                    if ($(this).closest('.post').length === 1 &&
-                        $(this).closest('.post').find('.post-author a').length === 1) {
-                        username = $.trim($(this).closest('.post').find('.post-author a').text());
-                    }
                     var instance = CKEDITOR.instances[textarea.attr("id")];
-                    instance.setData(instance.getData() + '\n' + window.pybb.markup.quote(selectedText, username) + '\n.');
-                    window.location.hash = '#cke_id_body';
+
+                    if (instance.mode === 'source') {
+                        window.alert("{% trans "Please first exit 'Source' mode to quote a message." %}");
+                    } else {
+                        if ($(this).closest('.post').length === 1 &&
+                            $(this).closest('.post').find('.post-author a').length === 1) {
+                            username = $.trim($(this).closest('.post').find('.post-author a').text());
+                        }
+                        instance.setData(
+                            instance.getData() + '\n' + window.pybb.markup.quote(selectedText, username) + '\n.');
+                        window.location.hash = '#cke_id_body';
+                    }
                 }
             });
 

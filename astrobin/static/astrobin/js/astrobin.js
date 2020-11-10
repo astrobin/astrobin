@@ -81,8 +81,7 @@ astrobin_common = {
 
             var options = {
                 language: language,
-                contentsCss: '/static/astrobin/css/ckeditor_content.css',
-                extraPlugins: 'autocomplete,autolink,bbcode,editorplaceholder,help,mentions,SimpleLink,simpleuploads,textwatcher',
+                extraPlugins: 'autocomplete,autolink,bbcode,divarea,editorplaceholder,help,mentions,SimpleLink,simpleuploads,textwatcher',
                 removePlugins: 'format,image,horizontalrule,pastetext,pastefromword,scayt,showborders,stylescombo,table,tabletools,tableselection,wsc,specialchar',
                 removeButtons: 'Anchor,BGColor,Font,Subscript,Superscript,JustifyBlock,Link',
                 disableObjectResizing: true,
