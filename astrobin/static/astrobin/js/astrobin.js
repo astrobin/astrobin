@@ -134,7 +134,7 @@ astrobin_common = {
                             '<img class="image" width="40" height="40" src="{thumbnail}" />' +
                             '<span class="title">{title}</span>' +
                             '</li>',
-                        outputTemplate: '<br/><a href="{url}">' +
+                        outputTemplate: '<br/><a href="' + window.location.origin + '{url}">' +
                             '<img src="{thumbnail}"/><br/>' +
                             '{title}' +
                             '</a><br/>',
