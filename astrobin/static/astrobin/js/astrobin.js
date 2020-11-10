@@ -84,6 +84,7 @@ astrobin_common = {
                 extraPlugins: 'autocomplete,autolink,bbcode,divarea,editorplaceholder,help,mentions,SimpleLink,simpleuploads,textwatcher',
                 removePlugins: 'format,image,horizontalrule,pastetext,pastefromword,scayt,showborders,stylescombo,table,tabletools,tableselection,wsc,specialchar',
                 removeButtons: 'Anchor,BGColor,Font,Subscript,Superscript,JustifyBlock,Link',
+                startupFocus: true,
                 disableObjectResizing: true,
                 toolbar: [
                     {
