@@ -1,5 +1,16 @@
 @import "variables";
 
+.rich-content-help {
+  margin-top: 0;
+  color: #866158;
+  font-style: italic;
+  margin-bottom: 16px;
+  background: $grey-5;
+  padding: 8px;
+  border-top: 1px solid #555;
+  font-size: 13px;
+}
+
 .cke_source {
   background: $grey-7 !important;
   color: $white !important;

@@ -34,6 +34,7 @@
             {% include '_reputation_alert.html' %}
             <form>
                 {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
+                {% include '_rich_content_editor_help.html' %}
 
                 {{view view.SaveCommentButtonView}}
                 <a class="btn btn-mini" href="#" {{action "collapse" target="view"}}>{% trans "Cancel" %}</a>
@@ -208,6 +209,7 @@
 {% handlebars "edit" %}
     {% include '_reputation_alert.html' %}
     {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
+    {% include '_rich_content_editor_help.html' %}
 
     {{view view.SaveEditButtonView commentBinding="view.comment"}}
     <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>{% trans "Cancel" %}</a>
@@ -226,6 +228,7 @@
     {{#if view.userIsAuthenticated}}
         {% include '_reputation_alert.html' %}
         {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
+        {% include '_rich_content_editor_help.html' %}
 
         {{view view.SaveReplyButtonView}}
         <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>{% trans "Cancel" %}</a>
