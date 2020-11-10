@@ -81,7 +81,7 @@ astrobin_common = {
 
             var options = {
                 language: language,
-                extraPlugins: 'autocomplete,autolink,bbcode,divarea,editorplaceholder,help,mentions,SimpleLink,simpleuploads,textwatcher',
+                extraPlugins: 'autocomplete,autolink,bbcode,divarea,editorplaceholder,help,mentions,SimpleLink,simpleuploads,smiley,textwatcher',
                 removePlugins: 'format,image,horizontalrule,pastetext,pastefromword,scayt,showborders,stylescombo,table,tabletools,tableselection,wsc,specialchar',
                 removeButtons: 'Anchor,BGColor,Font,Subscript,Superscript,JustifyBlock,Link',
                 startupFocus: true,
@@ -219,6 +219,20 @@ astrobin_common = {
                         if (!element.attributes.href)
                             element.attributes.href = element.children[0].value;
                     },
+                    smiley: function (element) {
+                        element.name = 'img';
+
+                        var description = element.attributes.desc,
+                            image = config.smiley_images[CKEDITOR.tools.indexOf(config.smiley_descriptions, description)],
+                            src = CKEDITOR.tools.htmlEncode(config.smiley_path + image);
+
+                        element.attributes = {
+                            src: src,
+                            'data-cke-saved-src': src,
+                            title: description,
+                            alt: description
+                        };
+                    }
                 }
             });
 
