@@ -121,6 +121,7 @@ astrobin_common = {
                     {
                         feed: '/autocomplete_usernames/?q={encodedQuery}',
                         marker: '@',
+                        pattern: new RegExp("\@[_a-zA-Z0-9À-ž ]{2,}"),
                         itemTemplate: '<li data-id="{id}">' +
                             '<img class="avatar" width="40" height="40" src="{avatar}" />' +
                             '<strong class="realname">{realName}</strong><span class="username">({username})</span>' +
@@ -130,7 +131,7 @@ astrobin_common = {
                     {
                         feed: '/autocomplete_images/?q={encodedQuery}',
                         marker: '#',
-                        minChars: 0,
+                        pattern: new RegExp("\#[_a-zA-Z0-9À-ž ]{0,}"),
                         itemTemplate: '<li data-id="{id}">' +
                             '<img class="image" width="40" height="40" src="{thumbnail}" />' +
                             '<span class="title">{title}</span>' +

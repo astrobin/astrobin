@@ -81,9 +81,12 @@ def autocomplete_usernames(request):
 
     q = request.GET['q']
 
+    # Replace non-breaking space with regular space
+    q = q.replace(unichr(160), ' ')
+
     users = UserProfile.objects.filter(
         Q(user__username__icontains=q) |
-        Q(user__userprofile__real_name__icontains=q)
+        Q(real_name__icontains=q)
     ).distinct()[:10]
 
     results = []
@@ -113,6 +116,9 @@ def autocomplete_images(request):
         HttpResponse(simplejson.dumps([]))
 
     q = request.GET['q']
+
+    # Replace non-breaking space with regular space
+    q = q.replace(unichr(160), ' ')
 
     images = Image.objects_including_wip.filter(user=request.user, title__icontains=q)[:10]
 
