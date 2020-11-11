@@ -127,8 +127,8 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             # Save file
             temporary_file = get_or_create_temporary_file(object)
 
-            log.debug("Chunked uploader (%s) (%d): saving object to temporary file %s" % (
-                request.user, object.pk, temporary_file))
+            log.debug("Chunked uploader (%d) (%d): saving object to temporary file %s" % (
+                request.user.pk, object.pk, temporary_file))
 
             getattr(object, self.get_file_field_name()).save(
                 self.get_upload_path_function()(object, self.get_cached_property("name", object)),
