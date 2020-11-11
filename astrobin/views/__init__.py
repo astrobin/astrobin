@@ -1298,7 +1298,6 @@ def user_page(request, username):
 
     # Calculate some stats
     from django.template.defaultfilters import timesince
-    from pybb.models import Post
 
     date_time = user.date_joined.replace(tzinfo=None)
     span = timesince(date_time)
@@ -1340,11 +1339,12 @@ def user_page(request, username):
                     (_('Comments'), "%d" % user_sqs[0].comments if user_sqs[0].comments else 0),
                     (_('Likes'), "%d" % user_sqs[0].total_likes_received if user_sqs[0].total_likes_received else 0),
                 )
-            except SearchFieldError:
-                log.error("User page (%d): unable to get stats from search index" % user.pk)
+            except Exception as e:
+                log.error("User page (%d): unable to get stats from search index: %s" % (user.pk, e.message))
 
             cache.set(key, data, 300)
-
+        else:
+            log.error("User page (%d): unable to get user's SearchQuerySet" % user.pk)
 
     response_dict = {
         'followers': followers,
