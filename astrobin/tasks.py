@@ -188,7 +188,7 @@ def retrieve_primary_thumbnails(pk, options):
         retrieve_thumbnail.delay(pk, alias, options)
 
 
-@shared_task()
+@shared_task(time_limit=120)
 def update_index_images_1h():
     call_command('update_index', 'astrobin.Image', '-b 100', '--age=1')
 
