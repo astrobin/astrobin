@@ -359,13 +359,22 @@ class UserIndex(CelerySearchIndex, Indexable):
         return ToggleProperty.objects.toggleproperties_for_model('like', Image, obj).count()
     
     def prepare_average_likes(self, obj):
-        likes = self.prepared_data.get('likes', self.prepare_likes(obj))
-        images = self.prepared_data.get('images', self.prepare_images(obj))
+        likes = self.prepared_data.get('likes')
+        if likes is None:
+            likes = self.prepare_likes(obj)
+
+        images = self.prepared_data.get('images')
+        if images is None:
+            images = self.prepare_images(obj)
 
         return likes / float(images) if images > 0 else 0
 
     def prepare_normalized_likes(self, obj):
-        average = self.prepared_data.get('average_likes', self.prepare_average_likes(obj))
+        average = self.prepared_data.get('average_likes')
+
+        if average is None:
+            average = self.prepare_average_likes(obj)
+
         normalized = []
 
         for i in Image.objects.filter(user=obj).iterator():
@@ -397,9 +406,19 @@ class UserIndex(CelerySearchIndex, Indexable):
         return likes
 
     def prepare_total_likes_received(self, obj):
-        return self.prepared_data.get('likes', self.prepare_likes(obj)) + \
-               self.prepared_data.get('comment_likes_received', self.prepare_comment_likes_received(obj)) + \
-               self.prepared_data.get('forum_post_likes_received', self.prepare_forum_post_likes_received(obj))
+        likes = self.prepared_data.get('likes')
+        if likes is None:
+            likes = self.prepare_likes(obj)
+
+        comment_likes_received = self.prepared_data.get('comment_likes_received')
+        if comment_likes_received is None:
+            comment_likes_received = self.prepare_comment_likes_received(obj)
+
+        forum_post_likes_received = self.prepared_data.get('forum_post_likes_received')
+        if forum_post_likes_received is None:
+            forum_post_likes_received = self.prepare_forum_post_likes_received(obj)
+
+        return likes + comment_likes_received + forum_post_likes_received
 
     def prepare_reputation(self, obj):
         comments_reputation = _prepare_comment_reputation(NestedComment.objects.filter(author=obj))
