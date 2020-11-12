@@ -93,6 +93,9 @@
                     </td>
                     <td class="topic-author hidden-phone hidden-tablet">
                         {% astrobin_username topic.user %}
+                        <span class="reputation" rel="tooltip" title="{% trans 'Reputation' %} {% trans '(beta)' %}">
+                            {{ topic.user|reputation|floatformat:2 }}
+                        </span>
                     </td>
 
                     {% if forum %}
