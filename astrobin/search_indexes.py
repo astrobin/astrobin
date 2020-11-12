@@ -251,42 +251,24 @@ def _prepare_comments(obj):
         deleted=False).count()
 
 
-def _6m_ago():
-    return datetime.datetime.now() - datetime.timedelta(183)
-
-
-def _1y_ago():
-    return datetime.datetime.now() - datetime.timedelta(365)
-
-
 class UserIndex(CelerySearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
 
     username = CharField(model_attr='username')
     avg_integration = FloatField()
 
-    images_6m = IntegerField()
-    images_1y = IntegerField()
     images = IntegerField()
 
     # Total likes of all user's images.
-    likes_6m = IntegerField()
-    likes_1y = IntegerField()
     likes = IntegerField()
 
     # Total likes given to images.
-    likes_given_6m = IntegerField()
-    likes_given_1y = IntegerField()
     likes_given = IntegerField()
 
     # Average likes of all user's images.
-    average_likes_6m = FloatField()
-    average_likes_1y = FloatField()
     average_likes = FloatField()
 
     # Normalized likes (AstroBin Index)
-    normalized_likes_6m = FloatField()
-    normalized_likes_1y = FloatField()
     normalized_likes = FloatField()
 
     # Total likes received on comments.
@@ -302,13 +284,9 @@ class UserIndex(CelerySearchIndex, Indexable):
     reputation = FloatField()
 
     # Number of followers
-    followers_6m = IntegerField()
-    followers_1y = IntegerField()
     followers = IntegerField()
 
     # Total user integration.
-    integration_6m = FloatField()
-    integration_1y = FloatField()
     integration = FloatField()
 
     # Average moon phase under which this user has operated.
@@ -336,17 +314,6 @@ class UserIndex(CelerySearchIndex, Indexable):
     def get_updated_field(self):
         return "userprofile__updated"
 
-    def prepare_images_6m(self, obj):
-        # Logging here just because it's the first "prepare" function.
-        log.debug("Indexing %s: (%d)" % (obj.__class__.__name__, obj.pk))
-
-        return Image.objects.filter(user=obj).filter(
-            uploaded__gte=_6m_ago()).count()
-
-    def prepare_images_1y(self, obj):
-        return Image.objects.filter(user=obj).filter(
-            uploaded__gte=_1y_ago()).count()
-
     def prepare_images(self, obj):
         return Image.objects.filter(user=obj).count()
 
@@ -367,78 +334,16 @@ class UserIndex(CelerySearchIndex, Indexable):
             likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
         return likes
 
-    def prepare_likes_6m(self, obj):
-        likes = 0
-        for i in Image.objects.filter(user=obj, uploaded__gte=_6m_ago()):
-            likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
-        return likes
-
-    def prepare_likes_1y(self, obj):
-        likes = 0
-        for i in Image.objects.filter(user=obj, uploaded__gte=_1y_ago()):
-            likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
-        return likes
-
-    def prepare_likes_given_6m(self, obj):
-        return ToggleProperty.objects.toggleproperties_for_model(
-            'like', Image, obj
-        ).filter(created_on__gte=_6m_ago()).count()
-
-    def prepare_likes_given_1y(self, obj):
-        return ToggleProperty.objects.toggleproperties_for_model(
-            'like', Image, obj
-        ).filter(created_on__gte=_1y_ago()).count()
-
     def prepare_likes_given(self, obj):
         return ToggleProperty.objects.toggleproperties_for_model(
             'like', Image, obj
         ).count()
     
-    def prepare_average_likes_6m(self, obj):
-        likes = self.prepare_likes_6m(obj)
-        images = Image.objects.filter(user=obj, uploaded__gte=_6m_ago()).count()
-
-        return likes / float(images) if images > 0 else 0
-
-    def prepare_average_likes_1y(self, obj):
-        likes = self.prepare_likes_1y(obj)
-        images = Image.objects.filter(user=obj, uploaded__gte=_1y_ago()).count()
-
-        return likes / float(images) if images > 0 else 0
-
     def prepare_average_likes(self, obj):
         likes = self.prepare_likes(obj)
         images = self.prepare_images(obj)
 
         return likes / float(images) if images > 0 else 0
-
-    def prepare_normalized_likes_6m(self, obj):
-        avg = self.prepare_average_likes_6m(obj)
-        norm = []
-
-        for i in Image.objects.filter(user=obj).filter(uploaded__gte=_6m_ago()):
-            likes = i.likes()
-            if likes >= avg:
-                norm.append(likes)
-
-        if len(norm) == 0:
-            return 0
-
-        return _astrobin_index(norm)
-
-    def prepare_normalized_likes_1y(self, obj):
-        avg = self.prepare_average_likes_1y(obj)
-        norm = []
-
-        for i in Image.objects.filter(user=obj).filter(uploaded__gte=_1y_ago()):
-            likes = i.likes()
-            if likes >= avg:
-                norm.append(likes)
-
-        if len(norm) == 0:
-            return 0
-
-        return _astrobin_index(norm)
 
     def prepare_normalized_likes(self, obj):
         average = self.prepare_average_likes(obj)
@@ -484,40 +389,12 @@ class UserIndex(CelerySearchIndex, Indexable):
         log.debug("User %d has forum post reputation: %.2f" % (obj.pk, forum_post_reputation))
         return comments_reputation + forum_post_reputation
 
-    def prepare_followers_6m(self, obj):
-        return ToggleProperty.objects.filter(
-            property_type="follow",
-            content_type=ContentType.objects.get_for_model(User),
-            object_id=obj.pk
-        ).filter(created_on__gte=_6m_ago()).count()
-
-    def prepare_followers_1y(self, obj):
-        return ToggleProperty.objects.filter(
-            property_type="follow",
-            content_type=ContentType.objects.get_for_model(User),
-            object_id=obj.pk
-        ).filter(created_on__gte=_1y_ago()).count()
-
     def prepare_followers(self, obj):
         return ToggleProperty.objects.filter(
             property_type="follow",
             content_type=ContentType.objects.get_for_model(User),
             object_id=obj.pk
         ).count()
-
-    def prepare_integration_6m(self, obj):
-        integration = 0
-        for i in Image.objects.filter(user=obj, uploaded__gte=_6m_ago()):
-            integration += _get_integration(i)
-
-        return integration / 3600.0
-
-    def prepare_integration_1y(self, obj):
-        integration = 0
-        for i in Image.objects.filter(user=obj, uploaded__gte=_1y_ago()):
-            integration += _get_integration(i)
-
-        return integration / 3600.0
 
     def prepare_integration(self, obj):
         integration = 0
