@@ -65,6 +65,29 @@
                         </a>
                     </th>
 
+                    <th class="trending-astrophotographers-top-pick-nominations hidden-phone">
+                        <a href="{% url 'trending_astrophotographers' %}{% query_string "sort='-top_pick_nominations'" "" %}">
+                            <i class="icon-arrow-up top-pick-nomination-badge badge"></i>
+                            <i class="icon-sort"></i>
+                        </a>
+                    </th>
+
+                    <th class="trending-astrophotographers-top-picks hidden-phone">
+                        <a href="
+                                {% url 'trending_astrophotographers' %}{% query_string "sort='-top_picks'" "" %}">
+                            <i class="icon-star top-pick-badge badge"></i>
+                            <i class="icon-sort"></i>
+                        </a>
+                    </th>
+
+                    <th class="trending-astrophotographers-iotds hidden-phone">
+                        <a href="
+                                {% url 'trending_astrophotographers' %}{% query_string "sort='-iotds'" "" %}">
+                            <i class="icon-trophy iotd-badge badge"></i>
+                            <i class="icon-sort"></i>
+                        </a>
+                    </th>
+
                     <th class="trending-astrophotographers-index">
                         <a href="
                                 {% url 'trending_astrophotographers' %}{% query_string "sort='-normalized_likes'" "" %}">
@@ -109,6 +132,18 @@
 
                     <td class="trending-astrophotographers-integration hidden-phone">
                         {{u.integration|floatformat:2}}
+                    </td>
+
+                    <td class="trending-astrophotographers-top-pick-nominations hidden-phone">
+                        {{ u.top_pick_nominations }}
+                    </td>
+
+                    <td class="trending-astrophotographers-top-picks hidden-phone">
+                        {{ u.top_picks }}
+                    </td>
+
+                    <td class="trending-astrophotographers-top-pick-iotds hidden-phone">
+                        {{ u.iotds }}
                     </td>
 
                     <td class="trending-astrophotographers-index">

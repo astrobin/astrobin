@@ -1,0 +1,98 @@
+@import 'variables';
+@import 'mixins';
+
+.table {
+  table-layout: fixed;
+  margin-bottom: 0;
+
+  &.table-bordered {
+    border-color: $grey-7;
+  }
+
+  .pagination {
+    td {
+      padding-top: 60px;
+      background-color: transparent !important;
+    }
+
+    a, span {
+      padding: 10px 20px;
+      background-color: #242424;
+      border: 1px solid #404040;
+      @include rounded-corners(3px);
+    }
+  }
+}
+
+.table caption {
+  font-size: 16px;
+  line-height: 32px;
+  font-weight: bold;
+  background: $grey-6-dark url('../images/darker-panel-tile.png');
+  padding: 4px 8px;
+}
+
+.table caption + thead tr:first-child th,
+.table caption + thead tr:first-child td,
+.table colgroup + thead tr:first-child th,
+.table colgroup + thead tr:first-child td,
+.table thead :first-child tr:first-child th,
+.table thead :first-child tr:first-child td,
+.table th {
+  border-top: 1px solid $link-color;
+  border-bottom: 1px solid $link-color;
+}
+
+.table th {
+  color: $strong-text-color;
+  vertical-align: middle;
+
+  a, button {
+    font-weight: normal;
+  }
+
+  .icon-sort {
+    margin-left: 2px;
+  }
+}
+
+.table th, .table td {
+  border-color: #363636;
+}
+
+.table tr th {
+  border-top: 1px solid $link-color;
+  border-bottom: 1px solid $link-color;
+  background-color: $grey-7;
+  padding-top: 16px;
+  padding-bottom: 16px;
+
+  span {
+    margin-right: $spacer-medium;
+  }
+}
+
+table tr th:last-child, table tr td:last-child {
+  text-align: right;
+}
+
+table tr th:only-child, table tr td:only-child {
+  text-align: inherit !important;
+}
+
+table td.empty-table {
+  text-align: left !important;
+}
+
+.table tbody tr:hover td, .table tbody tr:hover th {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.table tbody tr.active td, .table tbody tr.active th
+.table tbody tr.active:hover td, .table tbody tr.active:hover th {
+  background: #404040 url(../images/background-tile.png);
+}
+
+.table-striped tbody > tr:nth-child(odd) > td, .table-striped tbody > tr:nth-child(odd) > th {
+  background-color: rgba(0, 0, 0, 0.075);
+}
