@@ -20,7 +20,7 @@ from toggleproperties.models import ToggleProperty
 
 log = logging.getLogger('apps')
 
-PREPARED_FIELD_CACHE_EXPIRATION = 3600
+PREPARED_FIELD_CACHE_EXPIRATION = 120
 PREPARED_MOON_PHASE_CACHE_KEY = 'search_index_prepared_moon_phase.%d'
 PREPARED_VIEWS_CACHE_KEY = 'search_index_prepared_views.%d'
 PREPARED_BOOKMARKS_CACHE_KEY = 'search_index_prepared_bookmarks.%d'
@@ -131,6 +131,7 @@ def _prepare_forum_post_reputation(posts):
 
 def _prepare_likes(obj):
     result = ToggleProperty.objects.toggleproperties_for_object("like", obj).count()
+    log.debug("Prepared likes: %d" % result)
     cache.set(PREPARED_LIKES_CACHE_KEY % obj.pk, result, PREPARED_FIELD_CACHE_EXPIRATION)
     return result
 
@@ -322,7 +323,7 @@ class UserIndex(CelerySearchIndex, Indexable):
     forum_posts = IntegerField()
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.all()
+        return self.get_model().objects.filter(username="siovene")
 
     def get_model(self):
         return User
@@ -352,7 +353,10 @@ class UserIndex(CelerySearchIndex, Indexable):
         likes = 0
         for i in Image.objects.filter(user=obj):
             cached = cache.get(PREPARED_LIKES_CACHE_KEY, i.pk)
+            log.debug("Got prepared likes from cache: %d" % cached)
             likes += cached if cached is not None else _prepare_likes(i)
+
+        log.debug("Total likes: %d" % likes)
         return likes
 
     def prepare_likes_given(self, obj):
@@ -530,7 +534,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
     objects_in_field = CharField()
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(moderator_decision=1).exclude(corrupted=True)
+        return self.get_model().objects.filter(moderator_decision=1).exclude(corrupted=True).filter(username="siovene")
 
     def get_model(self):
         return Image
