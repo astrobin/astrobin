@@ -35,30 +35,6 @@
                    value="{% if 'sort' in request.GET %}{{ request.GET.sort }}{% else %}default{% endif %}" />
         </form>
 
-        <div class="filter-toggle-group">
-            <div class="filter-toggle">
-                <a href="{% url 'trending_astrophotographers' %}{% query_string "t='6m'" "" %}" {% if request.GET.t == '6m' %}class="active"{%endif %}>
-                    {% trans "Last 6 months" %}
-                </a>
-            </div>
-
-            <span class="separator">/</span>
-
-            <div class="filter-toggle">
-                <a href="{% url 'trending_astrophotographers' %}{% query_string "t='1y'" "" %}" {% if request.GET.t == '1y' or 't' not in request.GET %}class="active"{%endif %}>
-                    {% trans "Last year" %}
-                </a>
-            </div>
-
-            <span class="separator">/</span>
-
-            <div class="filter-toggle">
-                <a href="{% url 'trending_astrophotographers' %}{% query_string "t='all'" "" %}" {% if request.GET.t == 'all' %}class="active"{%endif %}>
-                    {% trans "All time" %}
-                </a>
-            </div>
-        </div>
-
         <table class="trending-astrophotographers table striped">
             <thead>
                 <tr>
@@ -120,73 +96,23 @@
                     </td>
 
                     <td class="trending-astrophotographers-followers hidden-phone">
-                        {% if request.GET.t == '6m' %}
-                            {{u.followers_6m}}
-                        {% endif %}
-
-                        {% if request.GET.t == '1y' or 't' not in request.GET %}
-                            {{u.followers_1y}}
-                        {% endif %}
-
-                        {% if request.GET.t == 'all' %}
-                            {{u.followers}}
-                        {% endif %}
+                        {{u.followers}}
                     </td>
 
                     <td class="trending-astrophotographers-images hidden-phone">
-                        {% if request.GET.t == '6m' %}
-                            {{u.images_6m}}
-                        {% endif %}
-
-                        {% if request.GET.t == '1y' or 't' not in request.GET %}
-                            {{u.images_1y}}
-                        {% endif %}
-
-                        {% if request.GET.t == 'all' %}
-                            {{u.images}}
-                        {% endif %}
+                        {{u.images}}
                     </td>
 
                     <td class="trending-astrophotographers-likes hidden-phone">
-                        {% if request.GET.t == '6m' %}
-                            {{ u.likes_6m }}
-                        {% endif %}
-
-                        {% if request.GET.t == '1y' or 't' not in request.GET %}
-                            {{ u.likes_1y }}
-                        {% endif %}
-
-                        {% if request.GET.t == 'all' %}
-                            {{ u.likes }}
-                        {% endif %}
+                        {{ u.likes }}
                     </td>
 
                     <td class="trending-astrophotographers-integration hidden-phone">
-                        {% if request.GET.t == '6m' %}
-                            {{u.integration_6m|floatformat:2}}
-                        {% endif %}
-
-                        {% if request.GET.t == '1y' or 't' not in request.GET %}
-                            {{u.integration_1y|floatformat:2}}
-                        {% endif %}
-
-                        {% if request.GET.t == 'all' %}
-                            {{u.integration|floatformat:2}}
-                        {% endif %}
+                        {{u.integration|floatformat:2}}
                     </td>
 
                     <td class="trending-astrophotographers-index">
-                        {% if request.GET.t == '6m' %}
-                            {{ u.normalized_likes_6m|floatformat:2 }}
-                        {% endif %}
-
-                        {% if request.GET.t == '1y' or 't' not in request.GET %}
-                            {{ u.normalized_likes_1y|floatformat:2 }}
-                        {% endif %}
-
-                        {% if request.GET.t == 'all' %}
-                            {{ u.normalized_likes|floatformat:2 }}
-                        {% endif %}
+                        {{ u.normalized_likes|floatformat:2 }}
                     </td>
                 </tr>
             {% empty %}

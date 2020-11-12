@@ -16,26 +16,4 @@
       width: 25px;
     }
   }
-
-  .filter-toggle-group {
-    clear: both;
-    text-align: right;
-    padding: 10px 10px 10px 0;
-    background-color: $grey-8;
-
-    .filter-toggle {
-      display: inline-block;
-      margin-left: 8px;
-
-      a.active {
-        cursor: default;
-        pointer-events: none;
-        color: $text-color;
-      }
-    }
-
-    .separator {
-      margin-left: 8px;
-    }
-  }
 }

@@ -2228,13 +2228,9 @@ def trending_astrophotographers(request):
     ]
 
     sort = request.GET.get('sort', default_sorting)
-    t = request.GET.get('t', '1y')
 
     if sort in ('', 'default'):
         sort = default_sorting
-
-    if t == '':
-        t = 'all'
 
     if sort not in (
         default_sorting,
@@ -2250,18 +2246,11 @@ def trending_astrophotographers(request):
         '-images',
         '-likes',
         '-integration',
-    ) or t not in (
-        'all',
-        '6m',
-        '1y'
     ):
         raise Http404
 
     if not isinstance(sort, list):
         sort = [sort, ]
-
-    if t != 'all':
-        sort = ['%s_%s' % (x, t) for x in sort]
 
     queryset = sqs.models(User).order_by(*sort)
 
