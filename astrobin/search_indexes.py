@@ -4,6 +4,7 @@ import logging
 from celery_haystack.indexes import CelerySearchIndex
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.core.cache import cache
 from django.db.models.functions import Length
 from haystack.constants import Indexable
 from haystack.fields import CharField, IntegerField, FloatField, DateTimeField, BooleanField, MultiValueField
@@ -19,6 +20,13 @@ from toggleproperties.models import ToggleProperty
 
 log = logging.getLogger('apps')
 
+PREPARED_FIELD_CACHE_EXPIRATION = 60
+PREPARED_MOON_PHASE_CACHE_KEY = 'search_index_prepared_moon_phase.%d'
+PREPARED_VIEWS_CACHE_KEY = 'search_index_prepared_views.%d'
+PREPARED_BOOKMARKS_CACHE_KEY = 'search_index_prepared_bookmarks.%d'
+PREPARED_LIKES_CACHE_KEY = 'search_index_prepared_likes.%d'
+PREPARED_COMMENTS_CACHE_KEY = 'search_index_prepared_comments.%d'
+PREPARED_INTEGRATION_CACHE_KEY = 'search_index_prepared_integration.%d'
 
 def _average(values):
     length = len(values)
@@ -32,14 +40,14 @@ def _astrobin_index(values):
     return _average(values) * math.log(len(values) + 1, 10)
 
 
-def _get_integration(image):
-    deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
+def _prepare_integration(obj):
+    deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj)
     solar_system_acquisition = None
     integration = 0
 
     try:
-        solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=image)
-    except:
+        solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=obj)
+    except SolarSystem_Acquisition.DoesNotExist:
         pass
 
     if deep_sky_acquisitions:
@@ -47,8 +55,9 @@ def _get_integration(image):
             if a.duration and a.number:
                 integration += (a.duration * a.number)
     elif solar_system_acquisition:
-        return 0
+        integration = 0
 
+    cache.set(PREPARED_INTEGRATION_CACHE_KEY % obj.pk, integration, PREPARED_FIELD_CACHE_EXPIRATION)
     return integration
 
 
@@ -121,11 +130,14 @@ def _prepare_forum_post_reputation(posts):
 
 
 def _prepare_likes(obj):
-    return ToggleProperty.objects.toggleproperties_for_object("like", obj).count()
-
+    result = ToggleProperty.objects.toggleproperties_for_object("like", obj).count()
+    cache.set(PREPARED_LIKES_CACHE_KEY % obj.pk, result, PREPARED_FIELD_CACHE_EXPIRATION)
+    return result
 
 def _prepare_bookmarks(obj):
-    return ToggleProperty.objects.toggleproperties_for_object("bookmark", obj).count()
+    result = ToggleProperty.objects.toggleproperties_for_object("bookmark", obj).count()
+    cache.set(PREPARED_BOOKMARKS_CACHE_KEY % obj.pk, result, PREPARED_FIELD_CACHE_EXPIRATION)
+    return result
 
 
 def _prepare_moon_phase(obj):
@@ -144,7 +156,9 @@ def _prepare_moon_phase(obj):
         # show up in any searches.
         return 0
 
-    return sum(moon_illuminated_list) / float(len(moon_illuminated_list))
+    result = sum(moon_illuminated_list) / float(len(moon_illuminated_list))
+    cache.set(PREPARED_MOON_PHASE_CACHE_KEY % obj.pk, result, PREPARED_FIELD_CACHE_EXPIRATION)
+    return result
 
 
 def _prepare_first_acquisition_date(obj):
@@ -192,13 +206,13 @@ def _prepare_last_acquisition_date(obj):
 
 
 def _prepare_views(obj, content_type):
-    views = 0
     try:
-        views = HitCount.objects.get(object_pk=obj.pk, content_type__name=content_type).hits
-    except:
-        pass
+        result = HitCount.objects.get(object_pk=obj.pk, content_type__name=content_type).hits
+    except Exception as e:
+        result = 0
 
-    return views
+    cache.set(PREPARED_VIEWS_CACHE_KEY % obj.pk, result, PREPARED_FIELD_CACHE_EXPIRATION)
+    return result
 
 
 def _prepare_min_aperture(obj):
@@ -245,10 +259,12 @@ def _prepare_camera_types(obj):
 
 def _prepare_comments(obj):
     ct = ContentType.objects.get(app_label='astrobin', model='image')
-    return NestedComment.objects.filter(
+    result = NestedComment.objects.filter(
         content_type=ct,
         object_id=obj.id,
         deleted=False).count()
+    cache.set(PREPARED_COMMENTS_CACHE_KEY % obj.pk, result, PREPARED_FIELD_CACHE_EXPIRATION)
+    return result
 
 
 class UserIndex(CelerySearchIndex, Indexable):
@@ -321,7 +337,8 @@ class UserIndex(CelerySearchIndex, Indexable):
         integration = 0
         images = 0
         for i in Image.objects.filter(user=obj):
-            image_integration = _get_integration(i)
+            cached = cache.get(PREPARED_INTEGRATION_CACHE_KEY, i.pk)
+            image_integration = cached if cached is not None else _prepare_integration(i)
             if image_integration:
                 images += 1
                 integration += image_integration
@@ -331,26 +348,26 @@ class UserIndex(CelerySearchIndex, Indexable):
     def prepare_likes(self, obj):
         likes = 0
         for i in Image.objects.filter(user=obj):
-            likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
+            cached = cache.get(PREPARED_LIKES_CACHE_KEY, i.pk)
+            likes += cached if cached is not None else _prepare_likes(i)
         return likes
 
     def prepare_likes_given(self, obj):
-        return ToggleProperty.objects.toggleproperties_for_model(
-            'like', Image, obj
-        ).count()
+        return ToggleProperty.objects.toggleproperties_for_model('like', Image, obj).count()
     
     def prepare_average_likes(self, obj):
-        likes = self.prepare_likes(obj)
-        images = self.prepare_images(obj)
+        likes = self.prepared_data.get('likes', self.prepare_likes(obj))
+        images = self.prepared_data.get('images', self.prepare_images(obj))
 
         return likes / float(images) if images > 0 else 0
 
     def prepare_normalized_likes(self, obj):
-        average = self.prepare_average_likes(obj)
+        average = self.prepared_data.get('average_likes', self.prepare_average_likes(obj))
         normalized = []
 
         for i in Image.objects.filter(user=obj).iterator():
-            likes = i.likes()
+            cached = cache.get(PREPARED_LIKES_CACHE_KEY, i.pk)
+            likes = cached if cached is not None else i.likes()
             if likes >= average:
                 normalized.append(likes)
 
@@ -358,7 +375,6 @@ class UserIndex(CelerySearchIndex, Indexable):
             return 0
 
         result = _astrobin_index(normalized)
-        log.debug("User %d has image index: %.2f" % (obj.pk, result))
         return result
 
     def prepare_comment_likes_received(self, obj):
@@ -378,15 +394,13 @@ class UserIndex(CelerySearchIndex, Indexable):
         return likes
 
     def prepare_total_likes_received(self, obj):
-        return self.prepare_likes(obj) + \
-               self.prepare_comment_likes_received(obj) + \
-               self.prepare_forum_post_likes_received(obj)
+        return self.prepared_data.get('likes', self.prepare_likes(obj)) + \
+               self.prepared_data.get('comment_likes_received', self.prepare_comment_likes_received(obj)) + \
+               self.prepared_data.get('forum_post_likes_received', self.prepare_forum_post_likes_received(obj))
 
     def prepare_reputation(self, obj):
         comments_reputation = _prepare_comment_reputation(NestedComment.objects.filter(author=obj))
         forum_post_reputation = _prepare_forum_post_reputation(Post.objects.filter(user=obj))
-        log.debug("User %d has comment reputation: %.2f" % (obj.pk, comments_reputation))
-        log.debug("User %d has forum post reputation: %.2f" % (obj.pk, forum_post_reputation))
         return comments_reputation + forum_post_reputation
 
     def prepare_followers(self, obj):
@@ -399,14 +413,16 @@ class UserIndex(CelerySearchIndex, Indexable):
     def prepare_integration(self, obj):
         integration = 0
         for i in Image.objects.filter(user=obj):
-            integration += _get_integration(i)
+            cached = cache.get(PREPARED_INTEGRATION_CACHE_KEY, i.pk)
+            integration += cached if cached is not None else _prepare_integration(i)
 
         return integration / 3600.0
 
     def prepare_moon_phase(self, obj):
         l = []
         for i in Image.objects.filter(user=obj):
-            l.append(_prepare_moon_phase(i))
+            cached = cache.get(PREPARED_MOON_PHASE_CACHE_KEY, i.pk)
+            l.append(cached if cached is not None else _prepare_moon_phase(i))
         if len(l) == 0:
             return 0
         return reduce(lambda x, y: x + y, l) / len(l)
@@ -414,19 +430,22 @@ class UserIndex(CelerySearchIndex, Indexable):
     def prepare_views(self, obj):
         views = 0
         for i in Image.objects.filter(user=obj):
-            views += _prepare_views(i, 'image')
+            cached = cache.get(PREPARED_VIEWS_CACHE_KEY, i.pk)
+            views += cached if cached is not None else _prepare_views(i, 'image')
         return views
 
     def prepare_bookmarks(self, obj):
         bookmarks = 0
         for i in Image.objects.filter(user=obj):
-            bookmarks += _prepare_bookmarks(i)
+            cached = cache.get(PREPARED_BOOKMARKS_CACHE_KEY, i.pk)
+            bookmarks += cached if cached is not None else _prepare_bookmarks(i)
         return bookmarks
 
     def prepare_comments(self, obj):
         comments = 0
         for i in Image.objects.filter(user=obj):
-            comments += _prepare_comments(i)
+            cached = cache.get(PREPARED_COMMENTS_CACHE_KEY, i.pk)
+            comments += cached if cached is not None else _prepare_comments(i)
         return comments
 
     def prepare_comments_written(self, obj):
@@ -564,7 +583,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return _prepare_likes(obj)
 
     def prepare_integration(self, obj):
-        return _get_integration(obj)
+        return _prepare_integration(obj)
 
     def prepare_moon_phase(self, obj):
         return _prepare_moon_phase(obj)
