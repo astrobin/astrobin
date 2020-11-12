@@ -534,7 +534,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
     objects_in_field = CharField()
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(moderator_decision=1).exclude(corrupted=True).filter(username="siovene")
+        return self.get_model().objects.filter(moderator_decision=1).exclude(corrupted=True).filter(user__username="siovene")
 
     def get_model(self):
         return Image
