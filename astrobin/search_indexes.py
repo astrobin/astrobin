@@ -14,6 +14,7 @@ from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.models import DeepSky_Acquisition
 from astrobin.models import Image
 from astrobin.models import SolarSystem_Acquisition
+from astrobin_apps_iotd.services import IotdService
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
@@ -327,6 +328,12 @@ class UserIndex(CelerySearchIndex, Indexable):
 
     forum_posts = IntegerField()
 
+    top_pick_nominations = IntegerField()
+
+    top_picks = IntegerField()
+
+    iotds = IntegerField()
+
     def index_queryset(self, using=None):
         return self.get_model().objects.all()
 
@@ -558,6 +565,14 @@ class UserIndex(CelerySearchIndex, Indexable):
     def prepare_forum_posts(self, obj):
         return Post.objects.filter(user=obj).count()
 
+    def prepare_top_pick_nominations(self, obj):
+        return IotdService().get_top_pick_nominations().filter(user=obj).count()
+
+    def prepare_top_picks(self, obj):
+        return IotdService().get_top_picks().filter(user=obj).count()
+
+    def prepare_iotds(self, obj):
+        return IotdService().get_iotds().filter(image__user=obj).count()
 
 class ImageIndex(CelerySearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
