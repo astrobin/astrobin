@@ -20,7 +20,7 @@ from toggleproperties.models import ToggleProperty
 
 log = logging.getLogger('apps')
 
-PREPARED_FIELD_CACHE_EXPIRATION = 60
+PREPARED_FIELD_CACHE_EXPIRATION = 3600
 PREPARED_MOON_PHASE_CACHE_KEY = 'search_index_prepared_moon_phase.%d'
 PREPARED_VIEWS_CACHE_KEY = 'search_index_prepared_views.%d'
 PREPARED_BOOKMARKS_CACHE_KEY = 'search_index_prepared_bookmarks.%d'
@@ -331,6 +331,9 @@ class UserIndex(CelerySearchIndex, Indexable):
         return "userprofile__updated"
 
     def prepare_images(self, obj):
+        # Logging here just because it's the first "prepare" function.
+        log.debug("Indexing %s: %d" % (obj.__class__.__name__, obj.pk))
+
         return Image.objects.filter(user=obj).count()
 
     def prepare_avg_integration(self, obj):
