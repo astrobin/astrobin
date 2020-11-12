@@ -2304,7 +2304,7 @@ def reputation_leaderboard(request):
     if not isinstance(sort, list):
         sort = [sort,]
 
-    queryset = queryset.models(User).order_by(*sort)
+    queryset = queryset.models(User).exclude(username="siovene").order_by(*sort)
 
     if 'q' in request.GET:
         queryset = queryset.filter(text__contains=request.GET.get('q'))
