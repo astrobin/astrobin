@@ -524,12 +524,12 @@ def image_upload_process(request):
     used_percent = premium_used_percent(request.user)
     if used_percent >= 100:
         messages.error(request, _("You have reached your image count limit. Please upgrade!"))
-        return HttpResponseRedirect('/upload/')
+        return HttpResponseRedirect('/upload/?forceClassicUploader')
 
     if settings.READONLY_MODE:
         messages.error(request, _(
             "AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"))
-        return HttpResponseRedirect('/upload/')
+        return HttpResponseRedirect('/upload/?forceClassicUploader')
 
     if 'image_file' not in request.FILES:
         return upload_error(request)
