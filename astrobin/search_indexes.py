@@ -353,7 +353,8 @@ class UserIndex(CelerySearchIndex, Indexable):
         likes = 0
         for i in Image.objects.filter(user=obj):
             cached = cache.get(PREPARED_LIKES_CACHE_KEY % i.pk)
-            log.debug("Got prepared likes from cache: %d" % cached)
+            if cached is not None:
+                log.debug("Got prepared likes from cache: %d" % cached)
             likes += cached if cached is not None else _prepare_likes(i)
 
         log.debug("Total likes: %d" % likes)
