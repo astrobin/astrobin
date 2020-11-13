@@ -106,7 +106,7 @@
             </ul>
         </li>
 
-        <li class="dropdown explore-menu {% current request "^/explore/|^/search/|^/stats/|^/trending-astrophotographers/" %}">
+        <li class="dropdown explore-menu {% current request "^/explore/|^/search/|^/stats/|^/astrophotographers-list/" %}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 {% trans "Explore" %}
                 <i class="icon-caret-down"></i>
@@ -159,17 +159,17 @@
                 {% if show_competitive_feature or request.user.is_superuser %}
                     <li class="divider"></li>
 
-                    <li class="explore-menu-trending-astrophotographers">
-                        <a href="{% url 'trending_astrophotographers' %}">
-                            <i class="icon-list-ol"></i>
-                            {% trans "Trending astrophotographers" %}
+                    <li class="explore-menu-astrophotographers-list">
+                        <a href="{% url 'astrophotographers_list' %}">
+                            <i class="icon-star-empty"></i>
+                            {% trans "Astrophotographers list" %}
                         </a>
                     </li>
 
-                    <li class="explore-menu-reputation-leaderboard">
-                        <a href="{% url 'reputation_leaderboard' %}">
-                            <i class="icon-arrow-up"></i>
-                            {% trans "Reputation leaderboard" %} {% trans "(beta)" %}
+                    <li class="explore-menu-contributors-list">
+                        <a href="{% url 'contributors_list' %}">
+                            <i class="icon-file-text"></i>
+                            {% trans "Contributors list" %} {% trans "(beta)" %}
                         </a>
                     </li>
                 {% endif %}

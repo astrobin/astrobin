@@ -7,27 +7,27 @@
 {% load cache %}
 {% load el_pagination_tags %}
 
-{% block title %}{% trans "Trending astrophotographers" %}{% endblock %}
+{% block title %}{% trans "Astrophotographers list" %}{% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb_safe 'Explore' None %}
-    {% breadcrumb 'Trending astrophotographers' None %}
+    {% breadcrumb 'Astrophotographers list' None %}
 {% endblock %}
 
 {% block content %}
-    <div id="trending-astrophotographers-page">
+    <div id="astrophotographers-list-page">
         <div class="subtitle">
             <i class="icon icon-info-sign"></i>
-            {% blocktrans trimmed with '<a class="btn btn-primary btn-mini" href="https://welcome.astrobin.com/features/index" target="_blank">' as _0 and '</a>' as _1 %}
-                The <strong>AstroBin Index</strong> is point based system based on likes received on images, that
+            {% blocktrans trimmed with '<a class="btn btn-primary btn-mini" href="https://welcome.astrobin.com/features/image-index" target="_blank">' as _0 and '</a>' as _1 %}
+                The <strong>Image Index</strong> is system based on likes received on images, that
                 incentivizes the most active and liked members of the community. {{ _0 }}Learn more.{{ _1 }}
             {% endblocktrans %}
         </div>
 
-        <form id="trending-astrophotographers-search" class="form form-horizontal"
-              method="get" action="{% url 'trending_astrophotographers' %}">
-            <input type="text" id="trending-astrophotographers-search-input" name="q" placeholder="{% trans "Search" %}"
+        <form id="astrophotographers-list-search" class="form form-horizontal"
+              method="get" action="{% url 'astrophotographers_list' %}">
+            <input type="text" id="astrophotographers-list-search-input" name="q" placeholder="{% trans "Search" %}"
                    value="{% if 'q' in request.GET %}{{ request.GET.q }}{% endif %}" />
             <input type="hidden" name="t"
                    value="{% if 't' in request.GET %}{{ request.GET.t }}{% else %}1y{% endif %}" />
@@ -35,63 +35,63 @@
                    value="{% if 'sort' in request.GET %}{{ request.GET.sort }}{% else %}default{% endif %}" />
         </form>
 
-        <table class="trending-astrophotographers table striped">
+        <table class="astrophotographers-list table striped">
             <thead>
                 <tr>
-                    <th class="trending-astrophotographers-position">#</th>
-                    <th class="trending-astrophotographers-user">{% trans "User" %}</th>
+                    <th class="astrophotographers-list-position">#</th>
+                    <th class="astrophotographers-list-user">{% trans "User" %}</th>
 
-                    <th class="trending-astrophotographers-followers hidden-phone">
-                        <a href="{% url 'trending_astrophotographers' %}{% query_string "sort='-followers'" "" %}">
+                    <th class="astrophotographers-list-followers hidden-phone">
+                        <a href="{% url 'astrophotographers_list' %}{% query_string "sort='-followers'" "" %}">
                             {% trans "Followers" %} <i class="icon-sort"></i>
                         </a>
                     </th>
 
-                    <th class="trending-astrophotographers-images hidden-phone">
-                        <a href="{% url 'trending_astrophotographers' %}{% query_string "sort='-images'" "" %}">
+                    <th class="astrophotographers-list-images hidden-phone">
+                        <a href="{% url 'astrophotographers_list' %}{% query_string "sort='-images'" "" %}">
                             {% trans "Images" %} <i class="icon-sort"></i>
                         </a>
                     </th>
 
-                    <th class="trending-astrophotographers-likes hidden-phone">
-                        <a href="{% url 'trending_astrophotographers' %}{% query_string "sort='-likes'" "" %}">
+                    <th class="astrophotographers-list-likes hidden-phone">
+                        <a href="{% url 'astrophotographers_list' %}{% query_string "sort='-likes'" "" %}">
                             {% trans "Likes" %} <i class="icon-sort"></i>
                         </a>
                     </th>
 
-                    <th class="trending-astrophotographers-integration hidden-phone">
-                        <a href="{% url 'trending_astrophotographers' %}{% query_string "sort='-integration'" "" %}">
+                    <th class="astrophotographers-list-integration hidden-phone">
+                        <a href="{% url 'astrophotographers_list' %}{% query_string "sort='-integration'" "" %}">
                             {% trans "Total integration" %} <i class="icon-sort"></i>
                         </a>
                     </th>
 
-                    <th class="trending-astrophotographers-top-pick-nominations hidden-phone">
-                        <a href="{% url 'trending_astrophotographers' %}{% query_string "sort='-top_pick_nominations'" "" %}">
+                    <th class="astrophotographers-list-top-pick-nominations hidden-phone">
+                        <a href="{% url 'astrophotographers_list' %}{% query_string "sort='-top_pick_nominations'" "" %}">
                             <i class="icon-arrow-up top-pick-nomination-badge badge"></i>
                             <i class="icon-sort"></i>
                         </a>
                     </th>
 
-                    <th class="trending-astrophotographers-top-picks hidden-phone">
+                    <th class="astrophotographers-list-top-picks hidden-phone">
                         <a href="
-                                {% url 'trending_astrophotographers' %}{% query_string "sort='-top_picks'" "" %}">
+                                {% url 'astrophotographers_list' %}{% query_string "sort='-top_picks'" "" %}">
                             <i class="icon-star top-pick-badge badge"></i>
                             <i class="icon-sort"></i>
                         </a>
                     </th>
 
-                    <th class="trending-astrophotographers-iotds hidden-phone">
+                    <th class="astrophotographers-list-iotds hidden-phone">
                         <a href="
-                                {% url 'trending_astrophotographers' %}{% query_string "sort='-iotds'" "" %}">
+                                {% url 'astrophotographers_list' %}{% query_string "sort='-iotds'" "" %}">
                             <i class="icon-trophy iotd-badge badge"></i>
                             <i class="icon-sort"></i>
                         </a>
                     </th>
 
-                    <th class="trending-astrophotographers-index">
+                    <th class="astrophotographers-list-index">
                         <a href="
-                                {% url 'trending_astrophotographers' %}{% query_string "sort='-normalized_likes'" "" %}">
-                            {% trans "AstroBin index" %} <i class="icon-sort"></i>
+                                {% url 'astrophotographers_list' %}{% query_string "sort='-normalized_likes'" "" %}">
+                            {% trans "Image Index" %} <i class="icon-sort"></i>
                         </a>
                     </th>
                 </tr>
@@ -102,13 +102,13 @@
 
             {% for u in user_list %}
                 <tr>
-                    <td class="trending-astrophotographers-position">
+                    <td class="astrophotographers-list-position">
                         {% if 'q' not in request.GET or request.GET.q == '' %}
                             {% page_counter forloop.counter pages.current.number 100 %}
                         {% endif %}
                     </td>
 
-                    <td class="trending-astrophotographers-user">
+                    <td class="astrophotographers-list-user">
                         <a href="{% url 'user_page' u.username %}">
                             {% if u.object %}
                                 {{u.object.userprofile}}
@@ -118,35 +118,35 @@
                         </a>
                     </td>
 
-                    <td class="trending-astrophotographers-followers hidden-phone">
+                    <td class="astrophotographers-list-followers hidden-phone">
                         {{u.followers}}
                     </td>
 
-                    <td class="trending-astrophotographers-images hidden-phone">
+                    <td class="astrophotographers-list-images hidden-phone">
                         {{u.images}}
                     </td>
 
-                    <td class="trending-astrophotographers-likes hidden-phone">
+                    <td class="astrophotographers-list-likes hidden-phone">
                         {{ u.likes }}
                     </td>
 
-                    <td class="trending-astrophotographers-integration hidden-phone">
+                    <td class="astrophotographers-list-integration hidden-phone">
                         {{u.integration|floatformat:2}}
                     </td>
 
-                    <td class="trending-astrophotographers-top-pick-nominations hidden-phone">
+                    <td class="astrophotographers-list-top-pick-nominations hidden-phone">
                         {{ u.top_pick_nominations }}
                     </td>
 
-                    <td class="trending-astrophotographers-top-picks hidden-phone">
+                    <td class="astrophotographers-list-top-picks hidden-phone">
                         {{ u.top_picks }}
                     </td>
 
-                    <td class="trending-astrophotographers-top-pick-iotds hidden-phone">
+                    <td class="astrophotographers-list-top-pick-iotds hidden-phone">
                         {{ u.iotds }}
                     </td>
 
-                    <td class="trending-astrophotographers-index">
+                    <td class="astrophotographers-list-index">
                         {{ u.normalized_likes|floatformat:2 }}
                     </td>
                 </tr>

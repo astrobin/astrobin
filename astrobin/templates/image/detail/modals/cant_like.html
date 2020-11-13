@@ -10,8 +10,8 @@
     <div class="modal-body">
         <div class="alert alert-error">
             {% blocktrans trimmed %}
-                We're really sorry, but giving likes requires an AstroBin Index of
-                <strong>{{min_index_to_like}}</strong> or greater.
+                We're really sorry, but giving likes requires an Image Index of <strong>{{min_index_to_like}}</strong>
+                or greater.
             {% endblocktrans %}
         </div>
 
@@ -24,13 +24,13 @@
 
         <p>
             {% blocktrans trimmed with user_scores_index|floatformat:2 as index %}
-                Currently, your AstroBin Index is <strong>{{index}}</strong>.
+                Currently, your Image Index is <strong>{{index}}</strong>.
             {% endblocktrans %}
         </p>
 
         <p>
-            {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/faq" target="_blank">' as _0 and '</a>' as _1 %}
-                To learn more about the AstroBin Index, please visit {{_0}}the FAQ page{{_1}}. Thanks!
+            {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/feature/index" target="_blank">' as _0 and '</a>' as _1 %}
+                To learn more about the Image Index, please visit {{_0}}the FAQ page{{_1}}. Thanks!
             {% endblocktrans %}
         </p>
     </div>

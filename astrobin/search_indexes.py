@@ -62,7 +62,7 @@ def _prepare_integration(obj):
     return integration
 
 
-def _prepare_comment_reputation(comments):
+def _prepare_comment_contribution_index(comments):
     min_comment_length = 150
     min_likes = 3
 
@@ -94,7 +94,7 @@ def _prepare_comment_reputation(comments):
     return _astrobin_index(normalized)
 
 
-def _prepare_forum_post_reputation(posts):
+def _prepare_forum_post_contribution_index(posts):
     min_post_length = 150
     min_likes = 3
 
@@ -287,7 +287,7 @@ class UserIndex(CelerySearchIndex, Indexable):
     # Average likes of all user's images.
     average_likes = FloatField()
 
-    # Normalized likes (AstroBin Index)
+    # Normalized likes (Image Index)
     normalized_likes = FloatField()
 
     # Total likes received on comments.
@@ -300,7 +300,11 @@ class UserIndex(CelerySearchIndex, Indexable):
     total_likes_received = IntegerField()
 
     # User reputation based on text content
+    # DEPRECATED: remove once contribution_index is populated
     reputation = FloatField()
+
+    # Index based on text content
+    contribution_index = FloatField()
 
     # Number of followers
     followers = IntegerField()
@@ -429,10 +433,16 @@ class UserIndex(CelerySearchIndex, Indexable):
 
         return likes + comment_likes_received + forum_post_likes_received
 
+    # DEPRECATED: remove once contribution_index is populated
     def prepare_reputation(self, obj):
-        comments_reputation = _prepare_comment_reputation(NestedComment.objects.filter(author=obj))
-        forum_post_reputation = _prepare_forum_post_reputation(Post.objects.filter(user=obj))
-        return comments_reputation + forum_post_reputation
+        comments_contribution_index = _prepare_comment_contribution_index(NestedComment.objects.filter(author=obj))
+        forum_post_contribution_index = _prepare_forum_post_contribution_index(Post.objects.filter(user=obj))
+        return comments_contribution_index + forum_post_contribution_index
+
+    def prepare_contribution_index(self, obj):
+        comments_contribution_index = _prepare_comment_contribution_index(NestedComment.objects.filter(author=obj))
+        forum_post_contribution_index = _prepare_forum_post_contribution_index(Post.objects.filter(user=obj))
+        return comments_contribution_index + forum_post_contribution_index
 
     def prepare_followers(self, obj):
         return ToggleProperty.objects.filter(

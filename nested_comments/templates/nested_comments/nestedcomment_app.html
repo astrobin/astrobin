@@ -31,7 +31,7 @@
 {% handlebars "top-level" %}
     {{#if view.userIsAuthenticated}}
         {{#unless view.collapsed}}
-            {% include '_reputation_alert.html' %}
+            {% include '_contribution_index_alert.html' %}
             <form>
                 {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
                 {% include '_rich_content_editor_help.html' %}
@@ -207,7 +207,7 @@
 
 
 {% handlebars "edit" %}
-    {% include '_reputation_alert.html' %}
+    {% include '_contribution_index_alert.html' %}
     {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
     {% include '_rich_content_editor_help.html' %}
 
@@ -226,7 +226,7 @@
 
 {% handlebars "reply" %}
     {{#if view.userIsAuthenticated}}
-        {% include '_reputation_alert.html' %}
+        {% include '_contribution_index_alert.html' %}
         {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
         {% include '_rich_content_editor_help.html' %}
 

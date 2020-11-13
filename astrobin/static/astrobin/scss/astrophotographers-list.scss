@@ -1,7 +1,7 @@
 @import "variables";
 
-#trending-astrophotographers-page {
-  #trending-astrophotographers-search {
+#astrophotographers-list-page {
+  #astrophotographers-list-search {
     @media screen and (min-width: 768px) {
       width: 300px;
       float: right;
@@ -9,10 +9,10 @@
     }
   }
 
-  .trending-astrophotographers {
+  .astrophotographers-list {
     table-layout: initial;
 
-    .trending-astrophotographers-position {
+    .astrophotographers-list-position {
       width: 25px;
     }
   }

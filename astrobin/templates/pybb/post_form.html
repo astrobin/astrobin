@@ -24,7 +24,7 @@
                 {% if form.slug %} {% include "pybb/form_field.html" with field=form.slug %} {% endif %}
                 {% if form.login %} {% include "pybb/form_field.html" with field=form.login %} {% endif %}
 
-                {% include '_reputation_alert.html' %}
+                {% include '_contribution_index_alert.html' %}
 
                 {% if form.body %}
                     {% include "pybb/form_field.html" with field=form.body %}
