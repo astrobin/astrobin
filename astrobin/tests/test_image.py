@@ -2839,7 +2839,7 @@ class ImageTest(TestCase):
         image.title = "TEST IMAGE"
         image.save(keep_deleted=True)
 
-        # As the test user does not have a high enough AstroBin Index, the
+        # As the test user does not have a high enough Image Index, the
         # iamge should be in the moderation queue.
         self.assertEquals(image.moderator_decision, 0)
         self.assertEquals(image.moderated_when, None)

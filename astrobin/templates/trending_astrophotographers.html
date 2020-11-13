@@ -20,7 +20,7 @@
         <div class="subtitle">
             <i class="icon icon-info-sign"></i>
             {% blocktrans trimmed with '<a class="btn btn-primary btn-mini" href="https://welcome.astrobin.com/features/index" target="_blank">' as _0 and '</a>' as _1 %}
-                The <strong>AstroBin Index</strong> is point based system based on likes received on images, that
+                The <strong>Image Index</strong> is point based system based on likes received on images, that
                 incentivizes the most active and liked members of the community. {{ _0 }}Learn more.{{ _1 }}
             {% endblocktrans %}
         </div>
@@ -91,7 +91,7 @@
                     <th class="trending-astrophotographers-index">
                         <a href="
                                 {% url 'trending_astrophotographers' %}{% query_string "sort='-normalized_likes'" "" %}">
-                            {% trans "AstroBin index" %} <i class="icon-sort"></i>
+                            {% trans "Image Index" %} <i class="icon-sort"></i>
                         </a>
                     </th>
                 </tr>

@@ -22,7 +22,7 @@
 @import "breadcrumb";
 @import "comments";
 @import "forum";
-@import "reputation-leaderboard";
+@import "contributors-list";
 @import "trending-astrophotographers";
 @import "search";
 
@@ -3780,7 +3780,7 @@ table.api-examples {
     background: #3092d1;
   }
 
-  + .reputation {
+  + .contribution-index {
     font-size: small;
     color: $grey-3;
     margin-left: $spacer-medium;

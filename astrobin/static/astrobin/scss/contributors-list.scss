@@ -1,7 +1,7 @@
 @import "variables";
 
-#reputation-leaderboard-page {
-  #reputation-leaderboard-search {
+#contributors-list-page {
+  #contributors-list-search {
     @media screen and (min-width: 768px) {
       width: 300px;
       float: right;
@@ -9,7 +9,7 @@
     }
   }
 
-  .reputation-leaderboard {
+  .contributors-list {
     table-layout: initial;
 
     colgroup {
@@ -27,7 +27,7 @@
       white-space: nowrap;
     }
 
-    .reputation-leaderboard-position {
+    .contributors-list-position {
       width: 25px;
     }
   }
