@@ -25,6 +25,13 @@
             {% endblocktrans %}
         </div>
 
+        <div class="alert alert-warning">
+            {% blocktrans trimmed %}
+                Data on this page is currently being refreshed so it may be incomplete for some users. Thanks for your
+                patience!
+            {% endblocktrans %}
+        </div>
+
         <form id="astrophotographers-list-search" class="form form-horizontal"
               method="get" action="{% url 'astrophotographers_list' %}">
             <input type="text" id="astrophotographers-list-search-input" name="q" placeholder="{% trans "Search" %}"
