@@ -187,10 +187,14 @@
         padding: 16px 24px;
       }
     }
+
+    img {
+      width: 354px !important;
+    }
   }
 
   .top-picks-item img, #hidden-placeholder{
-      width: 354px !important;
+    width: 354px !important;
   }
 }
 
@@ -366,12 +370,12 @@
     }
   }
 
-    .top-picks-item{
-        margin-right: 0 !important;
+    .iotd-queue-item, .top-picks-item{
+      margin-right: 0 !important;
     }
 
-    .top-picks-item img{
-        width: 100% !important;
+    .iotd-queue-item img, .top-picks-item img{
+      width: 100% !important;
     }
 }
 
