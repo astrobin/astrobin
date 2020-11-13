@@ -2257,6 +2257,18 @@ def trending_astrophotographers(request):
         '-images',
         '-likes',
         '-integration',
+        '-top_pick_nominations',
+        '-top_picks',
+        '-iotds',
+
+        'normalized_likes',
+        'followers',
+        'images',
+        'likes',
+        'integration',
+        'top_pick_nominations',
+        'top_picks',
+        'iotds',
     ):
         raise Http404
 

@@ -33,43 +33,27 @@
                     <ul class="badges">
                         {% for badge in badges %}
                             {% if badge == 'iotd' and alias != 'regular' and alias != 'regular_sharpened' %}
-                                <li class="iotd-badge">
-                                    <h2>
-                                        <i class="icon iotd-badge icon-trophy"></i>
-                                    </h2>
+                                <li>
+                                    <i class="icon-trophy iotd-badge badge"></i>
                                 </li>
                             {% endif %}
 
                             {% if badge == 'top-pick' %}
-                                <li class="top-pick-badge">
-                                    <h2>
-                                        <i class="icon icon-star"></i>
-                                    </h2>
+                                <li>
+                                    <i class="icon-star top-pick-badge badge"></i>
                                 </li>
                             {% endif %}
 
                             {% if badge == 'top-pick-nomination' %}
-                                <li class="top-pick-nomination-badge">
-                                    <h2>
-                                        <i class="icon icon-arrow-up"></i>
-                                    </h2>
+                                <li>
+                                    <i class="icon-arrow-up top-pick-nomination-badge badge"></i>
                                 </li>
                             {% endif %}
 
                             {% if badge == 'wip' %}
-                                <li class="wip-badge">
-                                    <h2>
-                                        <i class="icon icon-lock" rel="tooltip" title="{% trans "Staging area" %}"></i>
-                                    </h2>
-                                </li>
-                            {% endif %}
-
-                            {% if badge == 'top100' %}
-                                <li class="top100-badge{% if alias == 'regular' or alias == 'regular_sharpened' %} top100-badge-large{% endif %}">
-                                    <h2>
-                                        <span>Top</span>
-                                        <span>100</span>
-                                    </h2>
+                                <li>
+                                    <i class="icon-lock wip-badge badge"
+                                       rel="tooltip" title="{% trans "Staging area" %}"></i>
                                 </li>
                             {% endif %}
                         {% endfor %}
