@@ -607,3 +607,14 @@ def in_upload_wizard(image, request):
     return not image.title or \
            "upload" in request.GET or \
            "upload" in request.POST
+
+
+@register.simple_tag
+def show_competitive_feature(requesting_user, target_user):
+    if target_user and target_user.userprofile.exclude_from_competitions:
+        return False
+
+    if requesting_user.is_authenticated() and requesting_user.userprofile.exclude_from_competitions:
+        return False
+
+    return True

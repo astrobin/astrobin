@@ -34,7 +34,6 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
 from el_pagination.decorators import page_template
 from flickrapi.auth import FlickrAccessToken
-from haystack.exceptions import SearchFieldError
 from haystack.query import SearchQuerySet
 from silk.profiling.profiler import silk_profile
 
@@ -2230,6 +2229,11 @@ def stats(request):
 
 @require_GET
 def trending_astrophotographers(request):
+    if request.user.is_authenticated() and \
+            request.user.userprofile.exclude_from_competitions and \
+            not request.user.is_superuser:
+        return HttpResponseForbidden()
+
     sqs = SearchQuerySet()
 
     default_sorting = [
@@ -2244,38 +2248,38 @@ def trending_astrophotographers(request):
         sort = default_sorting
 
     if sort not in (
-        default_sorting,
+            default_sorting,
 
-        'normalized_likes',
-        'followers',
-        'images',
-        'likes',
-        'integration',
+            'normalized_likes',
+            'followers',
+            'images',
+            'likes',
+            'integration',
 
-        '-normalized_likes',
-        '-followers',
-        '-images',
-        '-likes',
-        '-integration',
-        '-top_pick_nominations',
-        '-top_picks',
-        '-iotds',
+            '-normalized_likes',
+            '-followers',
+            '-images',
+            '-likes',
+            '-integration',
+            '-top_pick_nominations',
+            '-top_picks',
+            '-iotds',
 
-        'normalized_likes',
-        'followers',
-        'images',
-        'likes',
-        'integration',
-        'top_pick_nominations',
-        'top_picks',
-        'iotds',
+            'normalized_likes',
+            'followers',
+            'images',
+            'likes',
+            'integration',
+            'top_pick_nominations',
+            'top_picks',
+            'iotds',
     ):
         raise Http404
 
     if not isinstance(sort, list):
         sort = [sort, ]
 
-    queryset = sqs.models(User).order_by(*sort)
+    queryset = sqs.models(User).exclude(exclude_from_competitions=True).order_by(*sort)
 
     if 'q' in request.GET:
         queryset = queryset.filter(text__contains=request.GET.get('q'))
@@ -2290,6 +2294,11 @@ def trending_astrophotographers(request):
 
 @require_GET
 def reputation_leaderboard(request):
+    if request.user.is_authenticated() and \
+            request.user.userprofile.exclude_from_competitions and \
+            not request.user.is_superuser:
+        return HttpResponseForbidden()
+
     queryset = SearchQuerySet()
 
     default_sorting = [
@@ -2306,28 +2315,28 @@ def reputation_leaderboard(request):
         sort = default_sorting
 
     if sort not in (
-        default_sorting,
+            default_sorting,
 
-        'comments_written',
-        'comments',
-        'comment_likes_received',
-        'forum_posts',
-        'forum_post_likes_received',
-        'reputation',
+            'comments_written',
+            'comments',
+            'comment_likes_received',
+            'forum_posts',
+            'forum_post_likes_received',
+            'reputation',
 
-        '-comments_written',
-        '-comments',
-        '-comment_likes_received',
-        '-forum_posts',
-        '-forum_post_likes_received',
-        '-reputation'
+            '-comments_written',
+            '-comments',
+            '-comment_likes_received',
+            '-forum_posts',
+            '-forum_post_likes_received',
+            '-reputation'
     ):
         raise Http404
 
     if not isinstance(sort, list):
-        sort = [sort,]
+        sort = [sort, ]
 
-    queryset = queryset.models(User).exclude(username="siovene").order_by(*sort)
+    queryset = queryset.models(User).exclude(exclude_from_competitions=True).order_by(*sort)
 
     if 'q' in request.GET:
         queryset = queryset.filter(text__contains=request.GET.get('q'))

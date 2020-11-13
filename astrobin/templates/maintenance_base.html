@@ -90,19 +90,23 @@
                                             {% trans "Advanced search" %}
                                         </a>
                                     </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="{% url 'stats' %}">
-                                            <i class="icon-bar-chart"></i>
-                                            {% trans "Stats" %}
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'trending_astrophotographers' %}">
-                                            <i class="icon-list-ol"></i>
-                                            {% trans "Trending astrophotographers" %}
-                                        </a>
-                                    </li>
+
+                                    {% show_competitive_feature request.user None as show_competitive_feature %}
+                                    {% if show_competitive_feature or request.user.is_superuser %}
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="{% url 'stats' %}">
+                                                <i class="icon-bar-chart"></i>
+                                                {% trans "Stats" %}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'trending_astrophotographers' %}">
+                                                <i class="icon-list-ol"></i>
+                                                {% trans "Trending astrophotographers" %}
+                                            </a>
+                                        </li>
+                                    {% endif %}
                                 </ul>
                             </li>
                             <li class="dropdown">

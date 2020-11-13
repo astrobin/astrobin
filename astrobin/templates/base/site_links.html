@@ -155,21 +155,24 @@
                     </a>
                 </li>
 
-                <li class="divider"></li>
+                {% show_competitive_feature request.user None as show_competitive_feature %}
+                {% if show_competitive_feature or request.user.is_superuser %}
+                    <li class="divider"></li>
 
-                <li class="explore-menu-trending-astrophotographers">
-                    <a href="{% url 'trending_astrophotographers' %}">
-                        <i class="icon-list-ol"></i>
-                        {% trans "Trending astrophotographers" %}
-                    </a>
-                </li>
+                    <li class="explore-menu-trending-astrophotographers">
+                        <a href="{% url 'trending_astrophotographers' %}">
+                            <i class="icon-list-ol"></i>
+                            {% trans "Trending astrophotographers" %}
+                        </a>
+                    </li>
 
-                <li class="explore-menu-reputation-leaderboard">
-                    <a href="{% url 'reputation_leaderboard' %}">
-                        <i class="icon-arrow-up"></i>
-                        {% trans "Reputation leaderboard" %} {% trans "(beta)" %}
-                    </a>
-                </li>
+                    <li class="explore-menu-reputation-leaderboard">
+                        <a href="{% url 'reputation_leaderboard' %}">
+                            <i class="icon-arrow-up"></i>
+                            {% trans "Reputation leaderboard" %} {% trans "(beta)" %}
+                        </a>
+                    </li>
+                {% endif %}
 
                 {% if request.user.is_superuser %}
                     <li class="divider"></li>
