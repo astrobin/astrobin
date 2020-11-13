@@ -6,6 +6,8 @@ from django.core.files import File
 from django.http import HttpResponse
 from rest_framework import mixins, status
 from rest_framework.exceptions import MethodNotAllowed
+from safedelete import HARD_DELETE
+from safedelete.models import SafeDeleteModel
 
 from astrobin_apps_images.api import constants, signals
 from astrobin_apps_images.api.constants import TUS_API_CHECKSUM_ALGORITHMS
@@ -130,10 +132,22 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             log.debug("Chunked uploader (%d) (%d): saving object to temporary file %s" % (
                 request.user.pk, object.pk, temporary_file))
 
-            getattr(object, self.get_file_field_name()).save(
-                self.get_upload_path_function()(object, self.get_cached_property("name", object)),
-                File(open(temporary_file))
-            )
+            try:
+                getattr(object, self.get_file_field_name()).save(
+                    self.get_upload_path_function()(object, self.get_cached_property("name", object)),
+                    File(open(temporary_file))
+                )
+            except Exception as e:
+                log.error("Chunked uploader (%d) (%d): exception: %s" % (
+                    request.user.pk, object.pk, e.message
+                ))
+                os.remove(temporary_file)
+
+                delete_kwargs = {}
+                if issubclass(type(object), SafeDeleteModel):
+                    delete_kwargs['force_policy'] = HARD_DELETE
+                object.delete(**delete_kwargs)
+                return HttpResponse(e.message, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
             signals.saved.send(object)
 
