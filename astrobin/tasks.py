@@ -188,9 +188,9 @@ def retrieve_primary_thumbnails(pk, options):
         retrieve_thumbnail.delay(pk, alias, options)
 
 
-@shared_task()
-def update_index():
-    call_command('update_index', '-k 4', '-b 100', '--remove', '--age=24')
+@shared_task(time_limit=120)
+def update_index_images_1h():
+    call_command('update_index', 'astrobin.Image', '-b 100', '--age=1')
 
 
 @shared_task()
@@ -248,7 +248,7 @@ def send_never_activated_account_reminder():
         user.userprofile.never_activated_account_reminder_sent = timezone.now()
         user.userprofile.save()
 
-        logger.debug("Sent 'never activated account reminder' to %s" % user.username)
+        logger.debug("Sent 'never activated account reminder' to %d" % user.pk)
 
 
 @shared_task()

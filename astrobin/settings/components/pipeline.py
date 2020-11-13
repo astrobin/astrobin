@@ -32,7 +32,6 @@ PIPELINE = {
                 'astrobin/js/jquery.stickytableheaders.js',
                 'astrobin/js/jquery.timeago.js',
                 'astrobin/js/respond.src.js',
-                'astrobin/wysibb/jquery.wysibb.js',
                 'astrobin/js/astrobin.js',
                 'astrobin/js/astrobin_trash.js',
                 'astrobin/js/astrobin_recovery_process.js'
@@ -50,8 +49,6 @@ PIPELINE = {
                 'astrobin/css/token-input.css',
                 'astrobin/css/jquery.multiselect.css',
                 'astrobin/css/jquery.qtip.css',
-
-                'astrobin/wysibb/theme/default/wbbtheme.css',
 
                 'astrobin_apps_donations/css/astrobin_apps_donations.css',
                 'astrobin_apps_premium/css/astrobin_apps_premium.css',

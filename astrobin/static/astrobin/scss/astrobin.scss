@@ -4,13 +4,16 @@
 @import "icons";
 
 @import "alert";
+@import "badges.scss";
 @import "buttons";
+@import "ckeditor";
 @import "forms";
 @import "modal";
 @import "multiselect";
 @import "nav";
 @import "progress";
 @import "select2";
+@import "tables";
 @import "uniform";
 @import "ui-tooltip";
 @import "ui-datepicker";
@@ -19,6 +22,8 @@
 @import "breadcrumb";
 @import "comments";
 @import "forum";
+@import "reputation-leaderboard";
+@import "trending-astrophotographers";
 @import "search";
 
 strong, .strong {
@@ -288,98 +293,6 @@ li.astrobin-thumbnail {
 .pagination > ul > li > .current,
 .pagination > ul > li > .ellipsis {
   font-weight: bold;
-}
-
-.table {
-  table-layout: fixed;
-  margin-bottom: 0;
-
-  &.table-bordered {
-    border-color: $grey-7;
-  }
-
-  .pagination {
-    td {
-      padding-top: 60px;
-      background-color: transparent !important;
-    }
-
-    a, span {
-      padding: 10px 20px;
-      background-color: #242424;
-      border: 1px solid #404040;
-      @include rounded-corners(3px);
-    }
-  }
-}
-
-.table caption {
-  font-size: 16px;
-  line-height: 32px;
-  font-weight: bold;
-  background: $grey-6-dark url('../images/darker-panel-tile.png');
-  padding: 4px 8px;
-}
-
-.table caption + thead tr:first-child th,
-.table caption + thead tr:first-child td,
-.table colgroup + thead tr:first-child th,
-.table colgroup + thead tr:first-child td,
-.table thead :first-child tr:first-child th,
-.table thead :first-child tr:first-child td,
-.table th {
-  border-top: 1px solid $link-color;
-  border-bottom: 1px solid $link-color;
-}
-
-.table th {
-  color: $strong-text-color;
-  vertical-align: middle;
-
-  a, button {
-    font-weight: normal;
-  }
-}
-
-.table th, .table td {
-  border-color: #363636;
-}
-
-.table tr th {
-  border-top: 1px solid $link-color;
-  border-bottom: 1px solid $link-color;
-  background-color: $grey-7;
-  padding-top: 16px;
-  padding-bottom: 16px;
-
-  span {
-    margin-right: $spacer-medium;
-  }
-}
-
-table tr th:last-child, table tr td:last-child {
-  text-align: right;
-}
-
-table tr th:only-child, table tr td:only-child {
-  text-align: inherit !important;
-}
-
-table td.empty-table {
-  text-align: left !important;
-}
-
-.table tbody tr:hover td, .table tbody tr:hover th {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.table tbody tr.active td, .table tbody tr.active th
-.table tbody tr.active:hover td, .table tbody tr.active:hover th {
-  background: #404040 url(../images/background-tile.png);
-}
-
-.table-striped tbody > tr:nth-child(odd) > td, .table-striped tbody > tr:nth-child(odd) > th {
-  background-color: rgba(0, 0, 0, 0.075);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1028,109 +941,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       margin-right: 3px;
       float: left;
 
-      &.iotd-badge,
-      &.top-pick-badge,
-      &.top-pick-nomination-badge,
-      &.wip-badge {
-        text-align: center;
-
-        h2 {
-          margin: 0;
-          padding: 0;
-          @include box-shadow;
-          @include rounded-corners(16px);
-          font-size: 16px;
-          height: 20px;
-          width: 20px;
-          color: $white;
-          border: 1px solid $white;
-
-          .icon {
-            padding: 0;
-            position: absolute;
-            top: 4px;
-            left: 3px;
-            font-size: 13px;
-            text-shadow: 1px 1px 1px rgba(0, 0, 0, .4);
-          }
-        }
-      }
-
-      &.wip-badge {
-        h2 {
-          background: $link-color;
-        }
-      }
-
-      &.iotd-badge {
-        h2 {
-          background: $gold;
-          background: -webkit-gradient(linear, left top, left bottom, from($gold), to(darken($gold, 10%)));
-          background: -webkit-linear-gradient(top, $gold, darken($gold, 10%));
-          background: -moz-linear-gradient(top, $gold, darken($gold, 10%));
-          background: -ms-linear-gradient(top, $gold, darken($gold, 10%));
-          background: -o-linear-gradient(top, $gold, darken($gold, 10%));
-          background-image: -ms-linear-gradient(top, $gold 0%, darken($gold, 10%) 100%);
-
-          -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px, $gold 0 0 10px;
-          -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $gold 0 0 10px;
-          box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $gold 0 0 10px;
-        }
-      }
-
-      &.top-pick-badge {
-        h2 {
-          background: $silver;
-          background: -webkit-gradient(linear, left top, left bottom, from($silver), to(darken($silver, 10%)));
-          background: -webkit-linear-gradient(top, $silver, darken($silver, 10%));
-          background: -moz-linear-gradient(top, $silver, darken($silver, 10%));
-          background: -ms-linear-gradient(top, $silver, darken($silver, 10%));
-          background: -o-linear-gradient(top, $silver, darken($silver, 10%));
-          background-image: -ms-linear-gradient(top, $silver 0%, darken($silver, 10%) 100%);
-
-          color: lighten($silver, 20%);
-
-          -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px, $silver 0 0 10px;
-          -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $silver 0 0 10px;
-          box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $silver 0 0 10px;
-        }
-      }
-
-      &.top-pick-nomination-badge {
-        h2 {
-          background: $bronze;
-          background: -webkit-gradient(linear, left top, left bottom, from($bronze), to(darken($bronze, 10%)));
-          background: -webkit-linear-gradient(top, $bronze, darken($bronze, 10%));
-          background: -moz-linear-gradient(top, $bronze, darken($bronze, 10%));
-          background: -ms-linear-gradient(top, $bronze, darken($bronze, 10%));
-          background: -o-linear-gradient(top, $bronze, darken($bronze, 10%));
-          background-image: -ms-linear-gradient(top, $bronze 0%, darken($bronze, 10%) 100%);
-          color: $gold;
-
-
-          -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px, $bronze 0 0 10px;
-          -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $bronze 0 0 10px;
-          box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $bronze 0 0 10px;
-        }
-      }
-
-      &.top100-badge {
-        h2 {
-          font-size: 6px;
-          line-height: 6px;
-
-          color: $white;
-          background: darkred;
-          border: 1px solid white;
-          padding: 4px;
-          text-transform: uppercase;
-
-          span {
-            display: block;
-          }
-        }
-      }
-
       i.icon {
         width: 1.25em;
         text-align: center;
@@ -1441,9 +1251,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     border: none;
     @include no-box-shadow;
 
-    /* Hide by default, will be shown if ad is rendered. */
-    display: none;
-
     &.remote-source-affiliate {
       display: block;
     }
@@ -1465,9 +1272,17 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     }
 
     &.advertisement-frontpage {
-      padding-top: 12px;
+      margin-bottom: 24px;
+      .header {
+        margin-bottom: $spacer-large;
+      }
     }
   }
+}
+
+
+.advertisement.full-width-wide-ad {
+  margin: -20px -30px 30px;
 }
 
 .comment-author {
@@ -2336,7 +2151,7 @@ form.avatar-change label.control-label {
 }
 
 .index-recent-topics {
-  margin-bottom: 20px;
+  margin-bottom: $spacer-large;
 }
 
 .notice-container {
@@ -3347,7 +3162,7 @@ img.flickr-photo-to-import-selected {
 }
 
 .image-navigation {
-  font-size: 18px;
+  font-size: 16px;
 
   &.disabled a {
     color: #D56D62 !important;
@@ -3370,47 +3185,6 @@ pre {
 
 .post-form #emoticons {
   margin-top: 8px;
-}
-
-.wysibb {
-  color: $grey-2;
-  background: #404040 !important;
-  border: 1px solid $grey-7 !important;
-  @include rounded-corners(4px);
-
-  .wysibb-toolbar, .wysibb-toolbar-container {
-    border-bottom-color: #555 !important;
-    border-right-color: #555 !important;
-  }
-
-  .wysibb-toolbar-container:hover,
-  .wysibb-toolbar-container .wysibb-toolbar-btn:hover,
-  .wysibb-toolbar-container .wysibb-toolbar-btn .btn-text:hover {
-    color: $grey-6;
-  }
-
-  .wysibb-text-editor {
-    padding: 8px;
-    min-height: 150px !important;
-  }
-}
-
-.wbb-button {
-  background: $link-color !important;
-  border-color: darken($link-color, 10%) !important;
-
-  &:hover {
-    background: darken($link-color, 5%) !important;
-  }
-}
-
-#wbbmodal label, #wbbmodal .div-modal-text {
-  color: #666;
-}
-
-.wysibb .wysibb-toolbar .wysibb-toolbar-container .wysibb-toolbar-btn .fonticon {
-  color: $grey-2;
-  text-shadow: 0 1px 0 black;
 }
 
 .table.migrate-donations {
@@ -3949,75 +3723,6 @@ table.search-table {
   }
 }
 
-.trending-astrophotographers {
-  .trending-astrophotographers-position {
-    width: 25px;
-  }
-
-  .trending-astrophotographers-index,
-  .trending-astrophotographers-followers,
-  .trending-astrophotographers-images,
-  .trending-astrophotographers-likes,
-  .trending-astrophotographers-integration {
-    text-align: center;
-    width: 15%;
-  }
-
-  .trending-astrophotographers-integration {
-    text-align: right;
-  }
-}
-
-.reputation-leaderboard {
-  table-layout: initial;
-
-  colgroup {
-    .comments {
-      background-color: $grey-5;
-    }
-
-    .forum-posts {
-      background-color: $grey-8;
-    }
-  }
-
-  th {
-    font-size: 12px;
-    white-space: nowrap;
-  }
-
-    .reputation-leaderboard-position {
-    width: 25px;
-  }
-
-  .reputation-leaderboard-reputation {
-    text-align: center;
-    width: 15%;
-  }
-}
-
-.filter-toggle-group {
-  text-align: right;
-  padding: 10px 10px 10px 0;
-  background-color: $grey-8;
-  background-color: rgba(0, 0, 0, 0.35);
-
-  .filter-toggle {
-    display: inline-block;
-    margin-left: 8px;
-
-    a.active {
-      cursor: default;
-      pointer-events: none;
-      color: $text-color;
-    }
-  }
-
-  .separator {
-    margin-left: 8px;
-  }
-}
-
 table.image-list {
   .title {
     width: 50%;
@@ -4086,6 +3791,14 @@ table.api-examples {
 
   &.astrobin-superuser {
     background: #3092d1;
+  }
+
+  + .reputation {
+    font-size: small;
+    color: $grey-3;
+    margin-left: $spacer-medium;
+    display: inline-block;
+    font-style: italic;
   }
 }
 

@@ -113,6 +113,14 @@
         padding: 0;
       }
 
+      ol {
+        list-style: decimal;
+      }
+
+      ul {
+        list-style: circle;
+      }
+
       blockquote {
         margin: 0;
         padding: 0 0 0 $spacer-small;

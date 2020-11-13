@@ -24,6 +24,12 @@
         </div>
         <div class="post-author">
             {% astrobin_username post.user %}
+            {% show_competitive_feature request.user post.user as show_competitive_feature %}
+            {% if show_competitive_feature or request.user.is_superuser %}
+                <span class="reputation" rel="tooltip" title="{% trans 'Reputation' %} {% trans '(beta)' %}">
+                    {{ post.user|reputation|floatformat:2 }}
+                </span>
+            {% endif %}
         </div>
         <div class="post-updated">
             <a class="permalink" href="{{ post.get_absolute_url }}">#</a>
@@ -110,7 +116,9 @@
                             </a>
                         </span>
                     {% else %}
-                        {% add_remove_toggleproperty "like" post request.user %}
+                        {% setvar request.user|can_like:post as can_like %}
+                        {% setvar request.user|can_unlike:post as can_unlike %}
+                        {% add_remove_toggleproperty "like" post request.user can_add=can_like can_remove=can_unlike %}
                     {% endif %}
                 {% endif %}
 
@@ -154,4 +162,5 @@
     </div>
 
     {% include 'image/detail/modals/cant_like.html' %}
+    {% include 'image/detail/modals/cant_unlike.html' %}
 {% endblock %}

@@ -1,4 +1,6 @@
-from datetime import datetime
+from datetime import datetime, timedelta
+
+from django.utils import timezone
 from mock import patch
 
 from django.test import TestCase
@@ -284,3 +286,45 @@ class TestUserService(TestCase):
         get_scores.return_value = {'user_scores_index': 2}
 
         self.assertFalse(UserService(user).can_like(post))
+
+    @patch('django.contrib.auth.models.User.is_authenticated')
+    def test_can_unlike_anon(self, is_authenticated):
+        is_authenticated.return_value = False
+
+        image = Generators.image()
+        like = Generators.like(image)
+
+        self.assertFalse(UserService(like.user).can_unlike(image))
+
+    @patch('django.contrib.auth.models.User.is_authenticated')
+    def test_can_unlike_never_liked(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image()
+        user = Generators.user()
+
+        self.assertFalse(UserService(user).can_unlike(image))
+
+    @patch('django.contrib.auth.models.User.is_authenticated')
+    def test_can_unlike_out_of_window(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image()
+        like = Generators.like(image)
+
+        like.created_on = timezone.now() - timedelta(hours=2)
+        like.save()
+
+        self.assertFalse(UserService(like.user).can_unlike(image))
+
+    @patch('django.contrib.auth.models.User.is_authenticated')
+    def test_can_unlike(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image()
+        like = Generators.like(image)
+
+        like.created_on = timezone.now() - timedelta(minutes=59)
+        like.save()
+
+        self.assertTrue(UserService(like.user).can_unlike(image))

@@ -59,9 +59,11 @@
     </div> <!-- subtitle -->
     {% endif %}
 
-    <div class="visible-phone">
-        {% include 'image/detail/phone_ad.html' %}
-    </div>
+    {% if request.user_agent.is_mobile %}
+        {% with ad_container_classes='visible-phone' %}
+            {% include 'ads/wide_ad.html' %}
+        {% endwith %}
+    {% endif %}
 
     {% include 'image/detail/pending_moderation_banner.html' %}
     {% include 'image/detail/wip_banner.html' %}
@@ -83,9 +85,11 @@
             {% include 'image/detail/like.html' %}
             {% include 'image/detail/bookmark.html' %}
 
-            <div class="hidden-phone">
-                {% include 'image/detail/ad.html' %}
-            </div>
+            {% if not request.user_agent.is_mobile %}
+                {% with ad_container_classes='hidden-phone' %}
+                    {% include 'image/detail/ad.html' %}
+                {% endwith %}
+            {% endif %}
 
             {% include 'image/detail/revisions.html' %}
             {% include 'image/detail/skyplot.html' %}
@@ -105,6 +109,7 @@
     {% include 'image/detail/modals/bookmarked_this.html' %}
     {% include 'image/detail/modals/send_to_group.html' %}
     {% include 'image/detail/modals/cant_like.html' %}
+    {% include 'image/detail/modals/cant_unlike.html' %}
     {% include 'image/detail/modals/flag_thumbnails.html' %}
     {% include 'image/detail/modals/demote.html' %}
     {% include 'image/detail/modals/promote.html' %}

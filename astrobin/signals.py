@@ -7,6 +7,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User, Group as DjangoGroup
 from django.contrib.contenttypes.models import ContentType
+from django.core.cache import cache
 from django.core.urlresolvers import reverse as reverse_url
 from django.db import IntegrityError
 from django.db import transaction
@@ -30,6 +31,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_lite, is_any_premium_subscription, is_lite_2020, is_any_ultimate, is_premium_2020, is_premium)
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from astrobin_apps_users.services import UserService
+from common.services.mentions_service import MentionsService
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 from .gear import get_correct_gear
@@ -160,11 +162,27 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
 post_save.connect(imagerevision_post_save, sender=ImageRevision)
 
 
+def nested_comment_pre_save(sender, instance, **kwargs):
+    if instance.pk:
+        try:
+            previous_mentions = MentionsService.get_mentions(sender.objects.get(pk=instance.pk).text)
+            current_mentions = MentionsService.get_mentions(instance.text)
+            mentions = [item for item in current_mentions if item not in previous_mentions]
+        except sender.DoesNotExist:
+            mentions = []
+
+        cache.set("user.%d.comment_pre_save_mentions" % instance.author.pk, mentions, 2)
+
+
+pre_save.connect(nested_comment_pre_save, sender=NestedComment)
+
+
 def nested_comment_post_save(sender, instance, created, **kwargs):
     if created:
         model_class = instance.content_type.model_class()
         obj = instance.content_type.get_object_for_this_type(id=instance.object_id)
         url = settings.BASE_URL + instance.get_absolute_url()
+        mentions = MentionsService.get_mentions(instance.text)
 
         if model_class == Image:
             image = instance.content_type.get_object_for_this_type(id=instance.object_id)
@@ -172,7 +190,8 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                 return
 
             if UserService(obj.user).shadow_bans(instance.author):
-                log.info("Skipping notification for comment because %s shadow-bans %s" % (obj.user, instance.author))
+                log.info("Skipping notification for comment because %d shadow-bans %d" % (
+                    obj.user.pk, instance.author.pk))
                 return
 
             if instance.author != obj.user:
@@ -241,7 +260,23 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
             # We do it only if created, because the content_object needs to
             # only be updated if the number of comments changes.
             instance.content_object.save(keep_deleted=True)
+    else:
+        mentions = cache.get("user.%d.comment_pre_save_mentions" % instance.author.pk, [])
 
+    for username in mentions:
+        try:
+            user = User.objects.get(username=username)
+            push_notification(
+                [user], 'new_comment_mention',
+                {
+                    'url': settings.BASE_URL + instance.get_absolute_url(),
+                    'user': instance.author.userprofile.get_display_name(),
+                    'user_url': settings.BASE_URL + reverse_url(
+                        'user_page', kwargs={'username': instance.author}),
+                }
+            )
+        except User.DoesNotExist:
+            pass
 
 post_save.connect(nested_comment_post_save, sender=NestedComment)
 
@@ -259,6 +294,8 @@ def toggleproperty_post_delete(sender, instance, **kwargs):
 
 
 post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
+
+
 def toggleproperty_post_save(sender, instance, created, **kwargs):
     if hasattr(instance.content_object, "updated"):
         # This will trigger the auto_now fields in the content_object
@@ -665,10 +702,43 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
 post_save.connect(forum_topic_post_save, sender=Topic)
 
 
-def forum_post_post_save(sender, instance, created, **kwargs):
-    if created and hasattr(instance.topic.forum, "group"):
-        instance.topic.forum.group.save()  # trigger date_updated update
+def forum_post_pre_save(sender, instance, **kwargs):
+    if instance.pk:
+        try:
+            previous_mentions = MentionsService.get_mentions(sender.objects.get(pk=instance.pk).body)
+            current_mentions = MentionsService.get_mentions(instance.body)
+            mentions = [item for item in current_mentions if item not in previous_mentions]
+        except sender.DoesNotExist:
+            mentions = []
 
+        cache.set("user.%d.forum_post_pre_save_mentions" % instance.user.pk, mentions, 2)
+
+pre_save.connect(forum_post_pre_save, sender=Post)
+
+
+def forum_post_post_save(sender, instance, created, **kwargs):
+    if created:
+        mentions = MentionsService.get_mentions(instance.body)
+        if hasattr(instance.topic.forum, 'group'):
+            instance.topic.forum.group.save()  # trigger date_updated update
+    else:
+        mentions = cache.get("user.%d.forum_post_pre_save_mentions" % instance.user.pk, [])
+
+    for username in mentions:
+        try:
+            user = User.objects.get(username=username)
+            push_notification(
+                [user], 'new_forum_post_mention',
+                {
+                    'url': settings.BASE_URL + instance.get_absolute_url(),
+                    'user': instance.user.userprofile.get_display_name(),
+                    'user_url': settings.BASE_URL + reverse_url(
+                        'user_page', kwargs={'username': instance.user}),
+                    'post': instance.topic.name,
+                }
+            )
+        except User.DoesNotExist:
+            pass
 
 post_save.connect(forum_post_post_save, sender=Post)
 

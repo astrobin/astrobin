@@ -34,7 +34,6 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
 from el_pagination.decorators import page_template
 from flickrapi.auth import FlickrAccessToken
-from haystack.exceptions import SearchFieldError
 from haystack.query import SearchQuerySet
 from silk.profiling.profiler import silk_profile
 
@@ -275,28 +274,36 @@ def upload_error(request, image=None, errors=None):
 
     messages.error(request, message)
 
-    if image is not None:
-        return HttpResponseRedirect(image.get_absolute_url())
+    log.warning("Upload error (%d): %s" % (request.user.pk, message))
 
-    return HttpResponseRedirect('/upload/')
+    if image is not None:
+        url = image.get_absolute_url()
+    else:
+        url = '/upload/?forceClassicUploader'
+
+    return HttpResponseRedirect(url)
 
 
 def upload_size_error(request, max_size, image=None):
     subscriptions_url = reverse('subscription_list')
     open_link = "<a href=\"%s\">" % subscriptions_url
     close_link = "</a>"
-    msg = "Sorry, but this image is too large. Under your current subscription plan, the maximum allowed image size is %(max_size)s. %(open_link)sWould you like to upgrade?%(close_link)s"
-
-    messages.error(request, _(msg) % {
+    msg = "Sorry, but this image is too large. Under your current subscription plan, the maximum allowed image size " \
+          "is %(max_size)s. %(open_link)sWould you like to upgrade?%(close_link)s"
+    compiled_msg = _(msg) % {
         "max_size": filesizeformat(max_size),
         "open_link": open_link,
         "close_link": close_link
-    })
+    }
+
+    messages.error(request, compiled_msg)
+
+    log.warning("Upload error (%d): %s" % (request.user.pk, compiled_msg))
 
     if image is not None:
         return HttpResponseRedirect(image.get_absolute_url())
 
-    return HttpResponseRedirect('/upload/')
+    return HttpResponseRedirect('/upload/?forceClassicUploader')
 
 
 def upload_max_revisions_error(request, max_revisions, image):
@@ -511,17 +518,17 @@ def image_upload_process(request):
 
     from astrobin_apps_premium.utils import premium_used_percent
 
-    log.info("Classic uploader (%s): submitted" % request.user)
+    log.info("Classic uploader (%d): submitted" % request.user.pk)
 
     used_percent = premium_used_percent(request.user)
     if used_percent >= 100:
         messages.error(request, _("You have reached your image count limit. Please upgrade!"))
-        return HttpResponseRedirect('/upload/')
+        return HttpResponseRedirect('/upload/?forceClassicUploader')
 
     if settings.READONLY_MODE:
         messages.error(request, _(
             "AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"))
-        return HttpResponseRedirect('/upload/')
+        return HttpResponseRedirect('/upload/?forceClassicUploader')
 
     if 'image_file' not in request.FILES:
         return upload_error(request)
@@ -549,9 +556,12 @@ def image_upload_process(request):
             image_file.file.seek(0)  # Because we opened it with PIL
 
             if ext == '.png' and trial_image.mode == 'I':
-                messages.warning(request, _(
-                    "You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
-        except:
+                indexed_png_error = "You uploaded an Indexed PNG file. AstroBin will need to lower the color count " \
+                                    "to 256 in order to work with it."
+                messages.warning(request, _(indexed_png_error))
+                log.warning("Upload error (%d): %s" % (request.user.pk, indexed_png_error))
+        except Exception as e:
+            log.warning("Upload error (%d): %s" % (request.user.pk, e.message))
             return upload_error(request)
 
     profile = request.user.userprofile
@@ -1298,7 +1308,6 @@ def user_page(request, username):
 
     # Calculate some stats
     from django.template.defaultfilters import timesince
-    from pybb.models import Post
 
     date_time = user.date_joined.replace(tzinfo=None)
     span = timesince(date_time)
@@ -1336,15 +1345,16 @@ def user_page(request, username):
                     (_('Last login'), last_login),
                     (_('Total integration time'), "%.1f %s" % (integration, _("hours"))),
                     (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
-                    (_('Forum posts'), "%d" % user_sqs[0].forum_posts),
-                    (_('Comments'), "%d" % user_sqs[0].comments),
-                    (_('Likes'), "%d" % user_sqs[0].total_likes_received),
+                    (_('Forum posts'), "%d" % user_sqs[0].forum_posts if user_sqs[0].forum_posts else 0),
+                    (_('Comments'), "%d" % user_sqs[0].comments if user_sqs[0].comments else 0),
+                    (_('Likes'), "%d" % user_sqs[0].total_likes_received if user_sqs[0].total_likes_received else 0),
                 )
-            except SearchFieldError:
-                log.error("User page (%d): unable to get stats from search index" % user.pk)
+            except Exception as e:
+                log.error("User page (%d): unable to get stats from search index: %s" % (user.pk, e.message))
 
             cache.set(key, data, 300)
-
+        else:
+            log.error("User page (%d): unable to get user's SearchQuerySet" % user.pk)
 
     response_dict = {
         'followers': followers,
@@ -1384,7 +1394,7 @@ def user_ban(request, username):
         user.userprofile.deleted_reason = UserProfile.DELETE_REASON_BANNED
         user.userprofile.save(keep_deleted=True)
         user.userprofile.delete()
-        log.info("User %s (%d) was banned" % (user.username, user.pk))
+        log.info("User (%d) was banned" % user.pk)
 
     return render(request, 'user/ban.html', {
         'user': user,
@@ -1862,7 +1872,7 @@ def user_profile_flickr_import(request):
         'readonly': settings.READONLY_MODE
     }
 
-    log.debug("Flickr import (user %s): accessed view" % request.user.username)
+    log.debug("Flickr import (user %d): accessed view" % request.user.pk)
 
     if not request.user.is_superuser and is_free(request.user) or settings.READONLY_MODE:
         return render(request, "user/profile/flickr_import.html", response_dict)
@@ -1886,7 +1896,7 @@ def user_profile_flickr_import(request):
     if not flickr.token_valid(perms=u'read'):
         # We were never authenticated, or authentication expired. We need
         # to reauthenticate.
-        log.debug("Flickr import (user %s): token not valid" % request.user.username)
+        log.debug("Flickr import (user %d): token not valid" % request.user.pk)
         flickr.get_request_token(settings.BASE_URL + reverse('flickr_auth_callback'))
         authorize_url = flickr.auth_url(perms=u'read')
         request.session['request_token'] = flickr.flickr_oauth.resource_owner_key
@@ -1898,21 +1908,21 @@ def user_profile_flickr_import(request):
         # If we made it this far (it's a GET request), it means that we
         # are authenticated with flickr. Let's fetch the sets and send them to
         # the template.
-        log.debug("Flickr import (user %s): token valid, GET request, fetching sets" % request.user.username)
+        log.debug("Flickr import (user %d): token valid, GET request, fetching sets" % request.user.pk)
 
         # Does it have to be so insane to get the info on the
         # authenticated user?
         sets = flickr.photosets_getList().find('photosets').findall('photoset')
 
-        log.debug("Flickr import (user %s): token valid, fetched sets" % request.user.username)
+        log.debug("Flickr import (user %d): token valid, fetched sets" % request.user.pk)
         template_sets = {}
         for set in sets:
             template_sets[set.find('title').text] = set.attrib['id']
         response_dict['flickr_sets'] = template_sets
     else:
-        log.debug("Flickr import (user %s): token valid, POST request" % request.user.username)
+        log.debug("Flickr import (user %d): token valid, POST request" % request.user.pk)
         if 'id_flickr_set' in request.POST:
-            log.debug("Flickr import (user %s): set in POST request" % request.user.username)
+            log.debug("Flickr import (user %d): set in POST request" % request.user.pk)
             set_id = request.POST['id_flickr_set']
             urls_sq = {}
             for photo in flickr.walk_set(set_id, extras='url_sq'):
@@ -1923,7 +1933,7 @@ def user_profile_flickr_import(request):
             selected_photos = request.POST.getlist('flickr_selected_photos[]')
             # Starting the process of importing
             for index, photo_id in enumerate(selected_photos):
-                log.debug("Flickr import (user %s): iterating photo %s" % (request.user.username, photo_id))
+                log.debug("Flickr import (user %d): iterating photo %s" % (request.user.pk, photo_id))
                 sizes = flickr.photos_getSizes(photo_id=photo_id)
                 info = flickr.photos_getInfo(photo_id=photo_id).find('photo')
 
@@ -1957,7 +1967,7 @@ def user_profile_flickr_import(request):
                                   is_wip=True,
                                   license=profile.default_license)
                     image.save(keep_deleted=True)
-                    log.debug("Flickr import (user %s): saved image %d" % (request.user.username, image.pk))
+                    log.debug("Flickr import (user %d): saved image %d" % (request.user.pk, image.pk))
 
         log.debug("Flickr import (user %s): returning ajax response: %s" % (
             request.user.username, simplejson.dumps(response_dict)))
@@ -1967,7 +1977,7 @@ def user_profile_flickr_import(request):
 
 
 def flickr_auth_callback(request):
-    log.debug("Flickr import (user %s): received auth callback" % request.user.username)
+    log.debug("Flickr import (user %d): received auth callback" % request.user.pk)
     flickr = flickrapi.FlickrAPI(
         settings.FLICKR_API_KEY, settings.FLICKR_SECRET,
         username=request.user.username)
@@ -2133,7 +2143,7 @@ def image_revision_upload_process(request):
 
     image = get_image_or_404(Image.objects_including_wip, image_id)
 
-    log.info("Classic uploader (revision) (%s) (%d): submitted" % (request.user, image.pk))
+    log.info("Classic uploader (revision) (%d) (%d): submitted" % (request.user.pk, image.pk))
 
     if settings.READONLY_MODE:
         messages.error(request, _(
@@ -2219,66 +2229,117 @@ def stats(request):
 
 @require_GET
 def trending_astrophotographers(request):
-    response_dict = {}
-
-    if 'page' in request.GET:
-        raise Http404
+    if request.user.is_authenticated() and \
+            request.user.userprofile.exclude_from_competitions and \
+            not request.user.is_superuser:
+        return HttpResponseForbidden()
 
     sqs = SearchQuerySet()
 
-    sort = request.GET.get('sort', 'index')
-    if sort == 'index':
-        sort = '-normalized_likes'
-    elif sort == 'followers':
-        sort = '-followers'
-    elif sort == 'integration':
-        sort = '-integration'
-    elif sort == 'images':
-        sort = '-images'
-    elif sort == 'likes':
-        sort = '-likes'
-    else:
-        sort = '-normalized_likes'
+    default_sorting = [
+        '-normalized_likes',
+        '-likes',
+        '-images',
+    ]
 
-    t = request.GET.get('t', '1y')
-    if t not in ('', 'all', None):
-        sort += '_%s' % t
+    sort = request.GET.get('sort', default_sorting)
 
-    queryset = sqs.models(User).order_by(sort)
+    if sort in ('', 'default'):
+        sort = default_sorting
+
+    if sort not in (
+            default_sorting,
+
+            'normalized_likes',
+            'followers',
+            'images',
+            'likes',
+            'integration',
+
+            '-normalized_likes',
+            '-followers',
+            '-images',
+            '-likes',
+            '-integration',
+            '-top_pick_nominations',
+            '-top_picks',
+            '-iotds',
+
+            'normalized_likes',
+            'followers',
+            'images',
+            'likes',
+            'integration',
+            'top_pick_nominations',
+            'top_picks',
+            'iotds',
+    ):
+        raise Http404
+
+    if not isinstance(sort, list):
+        sort = [sort, ]
+
+    queryset = sqs.models(User).exclude(exclude_from_competitions=True).order_by(*sort)
+
+    if 'q' in request.GET:
+        queryset = queryset.filter(text__contains=request.GET.get('q'))
 
     return object_list(
         request,
         queryset=queryset,
         template_name='trending_astrophotographers.html',
         template_object_name='user',
-        extra_context=response_dict,
     )
 
 
 @require_GET
 def reputation_leaderboard(request):
+    if request.user.is_authenticated() and \
+            request.user.userprofile.exclude_from_competitions and \
+            not request.user.is_superuser:
+        return HttpResponseForbidden()
+
     queryset = SearchQuerySet()
 
-    sort = request.GET.get('sort', '-reputation')
+    default_sorting = [
+        '-reputation',
+        '-comment_likes_received',
+        '-forum_post_likes_received',
+        '-comments_written',
+        '-forum_posts'
+    ]
+
+    sort = request.GET.get('sort', default_sorting)
+
+    if sort in ('', 'default'):
+        sort = default_sorting
 
     if sort not in (
-        'comments_written',
-        'comments',
-        'comment_likes_received',
-        'forum_posts',
-        'forum_post_likes_received',
-        'reputation',
+            default_sorting,
 
-        '-comments_written',
-        '-comments',
-        '-comment_likes_received',
-        '-forum_posts',
-        '-forum_post_likes_received',
-        '-reputation'
+            'comments_written',
+            'comments',
+            'comment_likes_received',
+            'forum_posts',
+            'forum_post_likes_received',
+            'reputation',
+
+            '-comments_written',
+            '-comments',
+            '-comment_likes_received',
+            '-forum_posts',
+            '-forum_post_likes_received',
+            '-reputation'
     ):
         raise Http404
 
-    queryset = queryset.models(User).order_by(sort)
+    if not isinstance(sort, list):
+        sort = [sort, ]
+
+    queryset = queryset.models(User).exclude(exclude_from_competitions=True).order_by(*sort)
+
+    if 'q' in request.GET:
+        queryset = queryset.filter(text__contains=request.GET.get('q'))
 
     return object_list(
         request,

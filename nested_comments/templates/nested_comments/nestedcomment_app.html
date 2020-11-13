@@ -8,6 +8,7 @@
 {% load nestedcomments_tags %}
 
 
+<div id="nested-comments-language-code" data-value="{{LANGUAGE_CODE}}"></div>
 <div id="nested-comments-user-id" data-value="{{request.user.id}}"></div>
 <div id="nested-comments-user-name" data-value="{{request.user.username}}"></div>
 <div id="nested-comments-user-is-authenticated" data-value="{{ request.user.is_authenticated.value }}"></div>
@@ -33,6 +34,7 @@
             {% include '_reputation_alert.html' %}
             <form>
                 {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
+                {% include '_rich_content_editor_help.html' %}
 
                 {{view view.SaveCommentButtonView}}
                 <a class="btn btn-mini" href="#" {{action "collapse" target="view"}}>{% trans "Cancel" %}</a>
@@ -89,7 +91,7 @@
                 </a>
             {{/if}}
 
-            {{view NestedCommentsApp.TimeagoView valueBinding="view.node.updated"}}
+            {{view NestedCommentsApp.TimeagoView valueBinding="view.node.created"}}
 
             &middot;
 
@@ -113,7 +115,6 @@
         </div>
 
         {{#unless view.collapsed}}
-            <!-- Used to access a wisybb object and convert the bbcode to HTML. -->
             <div class="converter" style="display: none">
                 {{view Ember.TextArea rows=6 valueBinding="view.node.text"}}
             </div>
@@ -208,6 +209,7 @@
 {% handlebars "edit" %}
     {% include '_reputation_alert.html' %}
     {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
+    {% include '_rich_content_editor_help.html' %}
 
     {{view view.SaveEditButtonView commentBinding="view.comment"}}
     <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>{% trans "Cancel" %}</a>
@@ -226,6 +228,7 @@
     {{#if view.userIsAuthenticated}}
         {% include '_reputation_alert.html' %}
         {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
+        {% include '_rich_content_editor_help.html' %}
 
         {{view view.SaveReplyButtonView}}
         <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>{% trans "Cancel" %}</a>
@@ -245,7 +248,7 @@
 
 
 {% handlebars "saveButton" %}
-    {% trans "Save" %}
+    {% trans "Submit" %}
 {% endhandlebars %}
 
 

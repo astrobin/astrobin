@@ -158,7 +158,7 @@ class ImageTest(TestCase):
         response = self._do_upload('astrobin/fixtures/invalid_file')
         self.assertRedirects(
             response,
-            reverse('image_upload'),
+            reverse('image_upload') + '?forceClassicUploader',
             status_code=302,
             target_status_code=200)
         self._assert_message(response, "error unread", "Invalid image")
@@ -167,7 +167,7 @@ class ImageTest(TestCase):
         response = self._do_upload('astrobin/fixtures/invalid_file.jpg')
         self.assertRedirects(
             response,
-            reverse('image_upload'),
+            reverse('image_upload') + '?forceClassicUploader',
             status_code=302,
             target_status_code=200)
         self._assert_message(response, "error unread", "Invalid image")
@@ -178,7 +178,7 @@ class ImageTest(TestCase):
         response = self._do_upload('astrobin/fixtures/test.jpg')
         self.assertRedirects(
             response,
-            reverse('image_upload'),
+            reverse('image_upload') + '?forceClassicUploader',
             status_code=302,
             target_status_code=200)
         self._assert_message(response, "error unread", "Please upgrade")
@@ -190,7 +190,7 @@ class ImageTest(TestCase):
             response = self._do_upload('astrobin/fixtures/test.jpg')
             self.assertRedirects(
                 response,
-                reverse('image_upload'),
+                reverse('image_upload') + '?forceClassicUploader',
                 status_code=302,
                 target_status_code=200)
             self._assert_message(response, "error unread", "read-only mode")
@@ -201,7 +201,7 @@ class ImageTest(TestCase):
             follow=True)
         self.assertRedirects(
             response,
-            reverse('image_upload'),
+            reverse('image_upload') + '?forceClassicUploader',
             status_code=302,
             target_status_code=200)
         self._assert_message(response, "error unread", "Invalid image")

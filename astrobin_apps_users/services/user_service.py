@@ -1,7 +1,10 @@
+from datetime import timedelta
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import QuerySet, Q
+from django.utils import timezone
 from pybb.models import Post
 
 from astrobin.models import Image
@@ -111,6 +114,17 @@ class UserService:
             return  self.user != obj.author
         elif obj.__class__.__name__ == 'Post':
             return self.user != obj.user
+
+        return False
+
+    def can_unlike(self, obj):
+        if not self.user.is_authenticated():
+            return False
+
+        property = ToggleProperty.objects.toggleproperties_for_object('like', obj, self.user)  # type: QuerySet
+        if property.exists():
+            one_hour_ago = timezone.now() - timedelta(hours=1)
+            return property.first().created_on > one_hour_ago
 
         return False
 

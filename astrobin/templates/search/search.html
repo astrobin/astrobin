@@ -113,6 +113,8 @@
         </div> <!-- subnav -->
     {% endif %}
 
+    {% include "ads/full_width_wide_ad.html" %}
+
     {% if not request.user|can_access_advanced_search %}
         <form action="{% url 'haystack_search' %}" method="get">
             <input type="text"
