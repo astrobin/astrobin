@@ -81,7 +81,8 @@ $(function() {
                         break;
                 }
 
-                this.set(property + '.html', astrobin_common.utils.BBCodeToHtml(data));
+                this.set(property + '.html', astrobin_common.utils.BBCodeToHtml(
+                    data, "comments", nc_app.languageCode));
 
                 if (typeof syncTextarea !== 'undefined' && syncTextarea) {
                     this.set(property + '.text', data);
@@ -686,7 +687,8 @@ $(function() {
             }
 
             setTimeout(function() {
-                self.set('node.html', astrobin_common.utils.BBCodeToHtml(self.$('textarea').val()));
+                self.set('node.html', astrobin_common.utils.BBCodeToHtml(
+                    self.$('textarea').val(), "comments", nc_app.languageCode));
                 self.set('node.ready', true);
             });
         },

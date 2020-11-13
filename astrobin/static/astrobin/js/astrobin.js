@@ -142,6 +142,53 @@ astrobin_common = {
                             '</a><br/>',
                     }
                 ],
+                smiley_path: '/static/astrobin/emoticons/',
+                smiley_descriptions: [
+                    'smiley',
+                    'sad',
+                    'wink',
+                    'laugh',
+                    'frown',
+                    'cheeky',
+                    'blush',
+                    'surprise',
+                    'indecision',
+                    'angry',
+                    'angel',
+                    'cool',
+                    'devil',
+                    'crying',
+                    'enlightened',
+                    'no',
+                    'yes',
+                    'heart',
+                    'broken heart',
+                    'kiss',
+                    'mail'
+                ],
+                smiley_images: [
+                    'smile.png',
+                    'sad.png',
+                    'wink.png',
+                    'grin.png',
+                    'smile.png',
+                    'tongue.png',
+                    'smile.png',
+                    'surprised.png',
+                    'smile.png',
+                    'smile.png',
+                    'smile.png',
+                    'sunglasses.png',
+                    'mad.png',
+                    'sad.png',
+                    'smile.png',
+                    'sad.png',
+                    'smile.png',
+                    'love.png',
+                    'sad.png',
+                    'love.png',
+                    'smile.png'
+                ],
                 on: {
                     change: function () {
                         this.updateElement();
@@ -171,7 +218,7 @@ astrobin_common = {
             return options;
         },
 
-        BBCodeToHtml: function (code) {
+        BBCodeToHtml: function (code, context, language) {
             var fragment = CKEDITOR.htmlParser.fragment.fromBBCode(code);
             var writer = new CKEDITOR.htmlParser.basicWriter();
             var bbcodeFilter = new CKEDITOR.htmlParser.filter();
@@ -222,9 +269,12 @@ astrobin_common = {
                     smiley: function (element) {
                         element.name = 'img';
 
+                        var editorConfig = astrobin_common.utils.ckeditorOptions(context, language);
+
                         var description = element.attributes.desc,
-                            image = config.smiley_images[CKEDITOR.tools.indexOf(config.smiley_descriptions, description)],
-                            src = CKEDITOR.tools.htmlEncode(config.smiley_path + image);
+                            image = editorConfig.smiley_images[
+                                CKEDITOR.tools.indexOf(editorConfig.smiley_descriptions, description)],
+                            src = CKEDITOR.tools.htmlEncode(editorConfig.smiley_path + image);
 
                         element.attributes = {
                             src: src,
