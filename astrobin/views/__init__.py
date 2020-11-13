@@ -275,28 +275,36 @@ def upload_error(request, image=None, errors=None):
 
     messages.error(request, message)
 
-    if image is not None:
-        return HttpResponseRedirect(image.get_absolute_url())
+    log.warning("Upload error (%d): %s" % (request.user.pk, message))
 
-    return HttpResponseRedirect('/upload/')
+    if image is not None:
+        url = image.get_absolute_url()
+    else:
+        url = '/upload/?forceClassicUploader'
+
+    return HttpResponseRedirect(url)
 
 
 def upload_size_error(request, max_size, image=None):
     subscriptions_url = reverse('subscription_list')
     open_link = "<a href=\"%s\">" % subscriptions_url
     close_link = "</a>"
-    msg = "Sorry, but this image is too large. Under your current subscription plan, the maximum allowed image size is %(max_size)s. %(open_link)sWould you like to upgrade?%(close_link)s"
-
-    messages.error(request, _(msg) % {
+    msg = "Sorry, but this image is too large. Under your current subscription plan, the maximum allowed image size " \
+          "is %(max_size)s. %(open_link)sWould you like to upgrade?%(close_link)s"
+    compiled_msg = _(msg) % {
         "max_size": filesizeformat(max_size),
         "open_link": open_link,
         "close_link": close_link
-    })
+    }
+
+    messages.error(request, compiled_msg)
+
+    log.warning("Upload error (%d): %s" % (request.user.pk, compiled_msg))
 
     if image is not None:
         return HttpResponseRedirect(image.get_absolute_url())
 
-    return HttpResponseRedirect('/upload/')
+    return HttpResponseRedirect('/upload/?forceClassicUploader')
 
 
 def upload_max_revisions_error(request, max_revisions, image):
@@ -516,12 +524,12 @@ def image_upload_process(request):
     used_percent = premium_used_percent(request.user)
     if used_percent >= 100:
         messages.error(request, _("You have reached your image count limit. Please upgrade!"))
-        return HttpResponseRedirect('/upload/')
+        return HttpResponseRedirect('/upload/?forceClassicUploader')
 
     if settings.READONLY_MODE:
         messages.error(request, _(
             "AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"))
-        return HttpResponseRedirect('/upload/')
+        return HttpResponseRedirect('/upload/?forceClassicUploader')
 
     if 'image_file' not in request.FILES:
         return upload_error(request)
@@ -549,9 +557,12 @@ def image_upload_process(request):
             image_file.file.seek(0)  # Because we opened it with PIL
 
             if ext == '.png' and trial_image.mode == 'I':
-                messages.warning(request, _(
-                    "You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
-        except:
+                indexed_png_error = "You uploaded an Indexed PNG file. AstroBin will need to lower the color count " \
+                                    "to 256 in order to work with it."
+                messages.warning(request, _(indexed_png_error))
+                log.warning("Upload error (%d): %s" % (request.user.pk, indexed_png_error))
+        except Exception as e:
+            log.warning("Upload error (%d): %s" % (request.user.pk, e.message))
             return upload_error(request)
 
     profile = request.user.userprofile
