@@ -2098,7 +2098,9 @@ class UserProfile(SafeDeleteModel):
         default=False,
         verbose_name=_("I want to be excluded from competitions"),
         help_text=_(
-            "Check this box to be excluded from competitions and contests, such as the Image of the Day, the Top Picks, other custom contests. This will remove you from the leaderboards and hide your AstroBin Index."),
+            "Check this box to be excluded from competitions and contests, such as the Image of the Day, the Top "
+            "Picks, other custom contests. This will remove you from the leaderboards and hide your AstroBin Index "
+            "and Reputation Score."),
     )
 
     banned_from_competitions = models.DateTimeField(

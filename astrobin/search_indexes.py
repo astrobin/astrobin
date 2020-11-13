@@ -272,6 +272,8 @@ class UserIndex(CelerySearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
 
     username = CharField(model_attr='username')
+    exclude_from_competitions = BooleanField(model_attr='userprofile__exclude_from_competitions')
+
     avg_integration = FloatField()
 
     images = IntegerField()

@@ -24,9 +24,12 @@
         </div>
         <div class="post-author">
             {% astrobin_username post.user %}
-            <span class="reputation" rel="tooltip" title="{% trans 'Reputation' %} {% trans '(beta)' %}">
-                {{ post.user|reputation|floatformat:2 }}
-            </span>
+            {% show_competitive_feature request.user post.user as show_competitive_feature %}
+            {% if show_competitive_feature or request.user.is_superuser %}
+                <span class="reputation" rel="tooltip" title="{% trans 'Reputation' %} {% trans '(beta)' %}">
+                    {{ post.user|reputation|floatformat:2 }}
+                </span>
+            {% endif %}
         </div>
         <div class="post-updated">
             <a class="permalink" href="{{ post.get_absolute_url }}">#</a>
