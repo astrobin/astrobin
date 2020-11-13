@@ -115,7 +115,7 @@ from astrobin.views import (
     stats_subject_integration_monthly_ajax,
 
     api_help,
-    trending_astrophotographers,
+    astrophotographers_list,
     contributors_list,
     stats,
 
@@ -410,9 +410,9 @@ urlpatterns += [
     ###########################################################################
 
     url(r'^help/api/$', api_help, name='api'),
-    url(r'^trending-astrophotographers/',
-        trending_astrophotographers,
-        name='trending_astrophotographers'),
+    url(r'^astrophotographers-list/',
+        astrophotographers_list,
+        name='astrophotographers_list'),
     url(r'^contribution_index-leaderboard/',
         contributors_list,
         name='contributors_list'),

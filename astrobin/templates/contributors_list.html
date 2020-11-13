@@ -27,7 +27,7 @@
         </div>
 
         <form id="contributors-list-search" class="form form-horizontal" method="get"
-              action="{% url 'contribution_index' %}">
+              action="{% url 'contributors_list' %}">
             <input type="text" id="contributors-list-search-input" name="q"
                    placeholder="{% trans "Search" %}"
                    value="{% if 'q' in request.GET %}{{ request.GET.q }}{% endif %}"/>

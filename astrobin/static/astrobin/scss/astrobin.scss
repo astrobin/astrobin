@@ -23,7 +23,7 @@
 @import "comments";
 @import "forum";
 @import "contributors-list";
-@import "trending-astrophotographers";
+@import "astrophotographers-list";
 @import "search";
 
 strong, .strong {
@@ -3454,7 +3454,7 @@ table.group-list, table.group-member-list {
     &.group-last-activity {
       width: 15%;
       overflow: hidden;
-      text-overflow: clilp;
+      text-overflow: clip;
     }
   }
 }
@@ -3559,7 +3559,7 @@ table.search-table {
 .iotd-promotion-queue {
   h1 > .todays-count {
     font-size: 22px;
-    font-style: italics;
+    font-style: italic;
     color: #ddd;
   }
 
