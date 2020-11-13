@@ -144,7 +144,7 @@
     <div id="user-scores-popover" style="display: none">
         <h4>{% trans "Image Index" %}: {{ user_scores_index|floatformat:2|default:"n/a" }}</h4>
         <p>
-            {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/features/index" target="_blank">' as _0 and '</a>' as _1 %}
+            {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/features/image-index" target="_blank">' as _0 and '</a>' as _1 %}
                 The <strong>Image Index</strong> is a system based on likes received on images, that
                 incentivizes the most active and liked members of the community. {{_0}}Learn more.{{_1}}
             {% endblocktrans %}
