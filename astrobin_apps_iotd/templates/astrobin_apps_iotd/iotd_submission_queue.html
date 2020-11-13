@@ -73,6 +73,8 @@
         {% empty %}
             {% trans "This queue is currently empty." %}
         {% endfor %}
+
+        <i id="hidden-placeholder" aria-hidden="true"></i>
     </div>
     {% endif %} {# READONLY #}
 {% endblock %}
