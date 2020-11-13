@@ -3972,6 +3972,14 @@ table.api-examples {
   &.astrobin-superuser {
     background: #3092d1;
   }
+
+  + .reputation {
+    font-size: small;
+    color: $grey-3;
+    margin-left: $spacer-medium;
+    display: inline-block;
+    font-style: italic;
+  }
 }
 
 .accordion {
