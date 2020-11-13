@@ -413,7 +413,7 @@ urlpatterns += [
     url(r'^astrophotographers-list/',
         astrophotographers_list,
         name='astrophotographers_list'),
-    url(r'^contribution_index-leaderboard/',
+    url(r'^contributors-list/',
         contributors_list,
         name='contributors_list'),
     url(r'^stats/', stats, name='stats'),
