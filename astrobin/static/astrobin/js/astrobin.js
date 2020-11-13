@@ -74,16 +74,67 @@ astrobin_common = {
             return (Math.round(converted * 100) / 100).toFixed(precision);
         },
 
-        ckeditorOptions: function (context, language) {
+        ckeditorOptions: function (context, language, placeholder) {
             if (!language) {
                 language = 'en';
             }
 
             var options = {
+                skin: 'minimalist',
                 language: language,
-                extraPlugins: 'autocomplete,autolink,bbcode,divarea,editorplaceholder,help,mentions,SimpleLink,simpleuploads,smiley,textwatcher',
-                removePlugins: 'format,image,horizontalrule,pastetext,pastefromword,scayt,showborders,stylescombo,table,tabletools,tableselection,wsc,specialchar',
-                removeButtons: 'Anchor,BGColor,Font,Subscript,Superscript,JustifyBlock,Link',
+                editorplaceholder: placeholder || '',
+                extraPlugins: '' +
+                    'ajax,' +
+                    'autocomplete,' +
+                    'autolink,' +
+                    'basicstyles,' +
+                    'bbcode,' +
+                    'blockquote,' +
+                    'button,' +
+                    'clipboard,' +
+                    'contextmenu,' +
+                    'dialog,' +
+                    'dialogui,' +
+                    'divarea,' +
+                    'editorplaceholder,' +
+                    'enterkey,' +
+                    'entities,' +
+                    'fakeobjects,' +
+                    'filebrowser,' +
+                    'filetools,' +
+                    'floatpanel,' +
+                    'floatingspace,' +
+                    'font,' +
+                    'help,' +
+                    'indent,' +
+                    'indentlist,' +
+                    'lineutils,' +
+                    'link,' +
+                    'list,' +
+                    'magicline,' +
+                    'maximize,' +
+                    'mentions,' +
+                    'menu,' +
+                    'notification,' +
+                    'notificationaggregator,' +
+                    'panel,' +
+                    'popup,' +
+                    'SimpleLink,' +
+                    'simpleuploads,' +
+                    'smiley,' +
+                    'sourcedialog,' +
+                    'specialchar,' +
+                    'table,' +
+                    'tableselection,' +
+                    'tabletools,' +
+                    'textmatch,' +
+                    'textwatcher,' +
+                    'toolbar,' +
+                    'undo,' +
+                    'uploadwidget,' +
+                    'widget,' +
+                    'widgetselection,' +
+                    'xml',
                 startupFocus: true,
                 disableObjectResizing: true,
                 toolbar: [
@@ -93,7 +144,7 @@ astrobin_common = {
                     },
                     {
                         name: 'document',
-                        items: ['Source', 'Maximize']
+                        items: ['Sourcedialog', 'Maximize']
                     },
                     {
                         name: 'clipboard',
@@ -101,7 +152,7 @@ astrobin_common = {
                     },
                     {
                         name: 'basicstyles',
-                        items: ['Bold', 'Italic', 'Underline', 'Strike', 'RemoveFormat']
+                        items: ['FontSize', 'Bold', 'Italic', 'Underline', 'Strike', 'RemoveFormat']
                     },
                     {
                         name: 'paragraph',
@@ -114,6 +165,10 @@ astrobin_common = {
                     {
                         name: 'insert',
                         items: ['addFile', 'addImage']
+                    },
+                    {
+                        name: 'special',
+                        items: ['SpecialChar', 'Smiley']
                     }
                 ],
                 filebrowserUploadUrl: '/json-api/common/ckeditor-upload/',
@@ -142,9 +197,145 @@ astrobin_common = {
                             '</a><br/>',
                     }
                 ],
+                smiley_columns: 10,
+                smiley_path: '/static/astrobin/emoticons/',
+                smiley_descriptions: [
+                    'angel',
+                    'angry-1',
+                    'angry',
+                    'arrogant',
+                    'bored',
+                    'confused',
+                    'cool-1',
+                    'cool',
+                    'crying-1',
+                    'crying-2',
+                    'crying',
+                    'cute',
+                    'embarrassed',
+                    'emoji',
+                    'greed',
+                    'happy-1',
+                    'happy-2',
+                    'happy-3',
+                    'happy-4',
+                    'happy-5',
+                    'happy-6',
+                    'happy-7',
+                    'happy',
+                    'in-love',
+                    'kiss-1',
+                    'kiss',
+                    'laughing-1',
+                    'laughing-2',
+                    'laughing',
+                    'muted',
+                    'nerd',
+                    'sad-1',
+                    'sad-2',
+                    'sad',
+                    'scare',
+                    'serious',
+                    'shocked',
+                    'sick',
+                    'sleepy',
+                    'smart',
+                    'surprised-1',
+                    'surprised-2',
+                    'surprised-3',
+                    'surprised-4',
+                    'surprised',
+                    'suspicious',
+                    'tongue',
+                    'vain',
+                    'wink-1',
+                    'wink'
+                ],
+                smiley_images: [
+                    'angel.png',
+                    'angry-1.png',
+                    'angry.png',
+                    'arrogant.png',
+                    'bored.png',
+                    'confused.png',
+                    'cool-1.png',
+                    'cool.png',
+                    'crying-1.png',
+                    'crying-2.png',
+                    'crying.png',
+                    'cute.png',
+                    'embarrassed.png',
+                    'emoji.png',
+                    'greed.png',
+                    'happy-1.png',
+                    'happy-2.png',
+                    'happy-3.png',
+                    'happy-4.png',
+                    'happy-5.png',
+                    'happy-6.png',
+                    'happy-7.png',
+                    'happy.png',
+                    'in-love.png',
+                    'kiss-1.png',
+                    'kiss.png',
+                    'laughing-1.png',
+                    'laughing-2.png',
+                    'laughing.png',
+                    'muted.png',
+                    'nerd.png',
+                    'sad-1.png',
+                    'sad-2.png',
+                    'sad.png',
+                    'scare.png',
+                    'serious.png',
+                    'shocked.png',
+                    'sick.png',
+                    'sleepy.png',
+                    'smart.png',
+                    'surprised-1.png',
+                    'surprised-2.png',
+                    'surprised-3.png',
+                    'surprised-4.png',
+                    'surprised.png',
+                    'suspicious.png',
+                    'tongue.png',
+                    'vain.png',
+                    'wink-1.png',
+                    'wink.png'
+                ],
+                specialChars: [
+                    '!', '&quot;', '#', '$', '%', '&amp;', "'", '(', ')', '*', '+', '-', '.', '/',
+                    '4', '5', '6', '7', '8', '9', ':', ';', '&lt;', '=', '&gt;', '?', '@',  '[', ']', '^', '_', '`',
+                    '{', '|', '}', '~', '&euro;', '&lsquo;', '&rsquo;', '&ldquo;', '&rdquo;', '&ndash;', '&mdash;',
+                    '&iexcl;', '&cent;', '&pound;', '&curren;', '&yen;', '&brvbar;', '&sect;', '&uml;', '&copy;',
+                    '&ordf;', '&laquo;', '&not;', '&reg;', '&macr;', '&deg;', '&sup2;', '&sup3;', '&acute;', '&micro;',
+                    '&para;', '&middot;', '&cedil;', '&sup1;', '&ordm;', '&raquo;', '&frac14;', '&frac12;', '&frac34;',
+                    '&iquest;', '&Agrave;', '&Aacute;', '&Acirc;', '&Atilde;', '&Auml;', '&Aring;', '&AElig;',
+                    '&Ccedil;', '&Egrave;', '&Eacute;', '&Ecirc;', '&Euml;', '&Igrave;', '&Iacute;', '&Icirc;',
+                    '&Iuml;', '&ETH;', '&Ntilde;', '&Ograve;', '&Oacute;', '&Ocirc;', '&Otilde;', '&Ouml;', '&times;',
+                    '&Oslash;', '&Ugrave;', '&Uacute;', '&Ucirc;', '&Uuml;', '&Yacute;', '&THORN;', '&alpha;',
+                    '&szlig;', '&agrave;', '&aacute;', '&acirc;', '&atilde;', '&auml;', '&aring;', '&aelig;',
+                    '&ccedil;', '&egrave;', '&eacute;', '&ecirc;', '&euml;', '&igrave;', '&iacute;', '&icirc;',
+                    '&iuml;', '&eth;', '&ntilde;', '&ograve;', '&oacute;', '&ocirc;', '&otilde;', '&ouml;', '&divide;',
+                    '&oslash;', '&ugrave;', '&uacute;', '&ucirc;', '&uuml;', '&yacute;', '&thorn;', '&yuml;', '&OElig;',
+                    '&oelig;', '&#372;', '&#374', '&#373', '&#375;', '&sbquo;', '&#8219;', '&bdquo;', '&hellip;',
+                    '&trade;', '&#9658;', '&bull;', '&rarr;', '&rArr;', '&hArr;', '&diams;', '&asymp;'
+                ],
+                fontSize_sizes: "50%/50%;100%/100%;200%/200%",
                 on: {
                     change: function () {
                         this.updateElement();
+                    },
+                    beforeCommandExec: function(event) {
+                        // Show the paste dialog for the paste buttons and right-click paste
+                        if (event.data.name === "paste") {
+                            event.editor._.forcePasteDialog = true;
+                        }
+
+                        // Don't show the paste dialog for Ctrl+Shift+V
+                        if (event.data.name === "pastetext" && event.data.commandData.from === "keystrokeHandler") {
+                            event.cancel();
+                        }
                     }
                 }
             }
@@ -171,7 +362,7 @@ astrobin_common = {
             return options;
         },
 
-        BBCodeToHtml: function (code) {
+        BBCodeToHtml: function (code, context, language) {
             var fragment = CKEDITOR.htmlParser.fragment.fromBBCode(code);
             var writer = new CKEDITOR.htmlParser.basicWriter();
             var bbcodeFilter = new CKEDITOR.htmlParser.filter();
@@ -222,13 +413,17 @@ astrobin_common = {
                     smiley: function (element) {
                         element.name = 'img';
 
+                        var editorConfig = astrobin_common.utils.ckeditorOptions(context, language);
+
                         var description = element.attributes.desc,
-                            image = config.smiley_images[CKEDITOR.tools.indexOf(config.smiley_descriptions, description)],
-                            src = CKEDITOR.tools.htmlEncode(config.smiley_path + image);
+                            image = editorConfig.smiley_images[
+                                CKEDITOR.tools.indexOf(editorConfig.smiley_descriptions, description)],
+                            src = CKEDITOR.tools.htmlEncode(editorConfig.smiley_path + image);
 
                         element.attributes = {
                             src: src,
                             'data-cke-saved-src': src,
+                            class: 'smiley',
                             title: description,
                             alt: description
                         };

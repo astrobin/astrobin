@@ -24,18 +24,12 @@
                 {% if form.slug %} {% include "pybb/form_field.html" with field=form.slug %} {% endif %}
                 {% if form.login %} {% include "pybb/form_field.html" with field=form.login %} {% endif %}
 
-                {% include '_reputation_alert.html' %}
+                {% include '_contribution_index_alert.html' %}
 
                 {% if form.body %}
                     {% include "pybb/form_field.html" with field=form.body %}
                     {% include '_rich_content_editor_help.html' %}
                 {% endif %}
-
-                <div id='emoticons'>
-                    {% for smile, url in form.available_smiles.items %}
-                        <a href='#' title='{{ smile|safe }}'><img src='{% static form.smiles_prefix %}{{ url }}'></a>
-                    {% endfor %}
-                </div>
 
                 {% if request.user|pybb_may_create_poll and form.poll_type %}
                     {% include "pybb/poll_edit_form.html" %}
@@ -64,7 +58,11 @@
 
             CKEDITOR.replace(
                 textarea.attr("id"),
-                astrobin_common.utils.ckeditorOptions("forum", "{{ LANGUAGE_CODE }}")
+                astrobin_common.utils.ckeditorOptions(
+                    "forum",
+                    "{{ LANGUAGE_CODE }}",
+                    "{% trans 'Type your forum post here...' %}"
+                )
             );
 
             function getSelectedText() {
@@ -86,7 +84,7 @@
                         if (instance.mode === 'source') {
                             window.alert("{% trans "Please first exit 'Source' mode to quote a message." %}");
                         } else {
-                            instance.setData(instance.getData() + '\n' + data + '\n.')
+                            instance.setData(instance.getData() + '\n' + data + '\n{% trans "*** Type your reply here ***" %}')
                             window.location.hash = '#cke_id_body';
                         }
                     }
@@ -111,16 +109,10 @@
                             username = $.trim($(this).closest('.post').find('.post-author a').text());
                         }
                         instance.setData(
-                            instance.getData() + '\n' + window.pybb.markup.quote(selectedText, username) + '\n.');
+                            instance.getData() + '\n' + window.pybb.markup.quote(selectedText, username) + '\n{% trans "*** Type your reply here ***" %}');
                         window.location.hash = '#cke_id_body';
                     }
                 }
-            });
-
-            $('#emoticons a').click(function () {
-                var emoticon = $(this).attr("title");
-                CKEDITOR.instances[textarea.attr("id")].insertText(' ' + emoticon + ' ');
-                return false;
             });
         });
     </script>

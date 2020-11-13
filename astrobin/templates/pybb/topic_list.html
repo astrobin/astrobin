@@ -95,8 +95,8 @@
                         {% astrobin_username topic.user %}
                         {% show_competitive_feature request.user post.user as show_competitive_feature %}
                         {% if show_competitive_feature or request.user.is_superuser %}
-                            <span class="reputation" rel="tooltip" title="{% trans 'Reputation' %} {% trans '(beta)' %}">
-                                {{ topic.user|reputation|floatformat:2 }}
+                            <span class="contribution-index" rel="tooltip" title="{% trans 'Contribution Index' %} {% trans '(beta)' %}">
+                                {{ topic.user|contribution_index|floatformat:2 }}
                             </span>
                         {% endif %}
                     </td>

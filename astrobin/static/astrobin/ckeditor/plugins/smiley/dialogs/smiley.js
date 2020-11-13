@@ -28,11 +28,10 @@ CKEDITOR.dialog.add( 'smiley', function( editor ) {
 			var img = editor.document.createElement( 'img', {
 				attributes: {
 					src: src,
+					class: 'smiley',
 					'data-cke-saved-src': src,
 					title: title,
-					alt: title,
-					width: target.$.width,
-					height: target.$.height
+					alt: title
 				}
 			} );
 
@@ -176,8 +175,8 @@ CKEDITOR.dialog.add( 'smiley', function( editor ) {
 
 	return {
 		title: editor.lang.smiley.title,
-		minWidth: 270,
-		minHeight: 120,
+		minWidth: 350,
+		minHeight: 210,
 		contents: [ {
 			id: 'tab1',
 			label: '',

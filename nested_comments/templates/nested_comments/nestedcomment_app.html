@@ -21,6 +21,11 @@
 
 <div id="nested-comments-page-url" data-value="{{request.get_full_path}}"></div>
 <div id="nested-comments-loaderGif-url" data-value="{% static 'astrobin/images/ajax-loader.gif' %}"></div>
+<div id="nested-comments-editor-placeholder" data-value="{% trans 'Type your comment here...' %}"></div>
+
+<div style="display: none">
+    <textarea id="hidden-textarea"></textarea>
+</div>
 
 {% handlebars "nested-comments" %}
     {{outlet top-level}}
@@ -31,7 +36,7 @@
 {% handlebars "top-level" %}
     {{#if view.userIsAuthenticated}}
         {{#unless view.collapsed}}
-            {% include '_reputation_alert.html' %}
+            {% include '_contribution_index_alert.html' %}
             <form>
                 {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
                 {% include '_rich_content_editor_help.html' %}
@@ -207,7 +212,7 @@
 
 
 {% handlebars "edit" %}
-    {% include '_reputation_alert.html' %}
+    {% include '_contribution_index_alert.html' %}
     {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
     {% include '_rich_content_editor_help.html' %}
 
@@ -226,7 +231,7 @@
 
 {% handlebars "reply" %}
     {{#if view.userIsAuthenticated}}
-        {% include '_reputation_alert.html' %}
+        {% include '_contribution_index_alert.html' %}
         {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
         {% include '_rich_content_editor_help.html' %}
 

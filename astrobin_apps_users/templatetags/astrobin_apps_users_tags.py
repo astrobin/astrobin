@@ -183,16 +183,18 @@ def is_mutual_follower(a, b):
 
 
 @register.filter
-def reputation(user):
-    cache_key = "user_reputation.%d" % user.pk
-    reputation = cache.get(cache_key)
+def contribution_index(user):
+    cache_key = "user_contribution_index.%d" % user.pk
+    contribution_index = cache.get(cache_key)
 
-    if reputation is None:
+    if contribution_index is None:
         results = SearchQuerySet().models(User).filter(django_id=user.pk)
         if not results.count():
-            log.warning("reputation filter: unable to get reputation for user %d" % user.pk)
+            log.warning("contribution_index filter: unable to get contribution_index for user %d" % user.pk)
             return None
-        reputation = results[0].reputation
-        cache.set(cache_key, reputation, 300)
 
-    return reputation
+        # DEPRECATED: remove once contribution_index is populated
+        contribution_index = results[0].reputation
+        cache.set(cache_key, contribution_index, 300)
+
+    return contribution_index

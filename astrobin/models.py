@@ -2099,8 +2099,8 @@ class UserProfile(SafeDeleteModel):
         verbose_name=_("I want to be excluded from competitions"),
         help_text=_(
             "Check this box to be excluded from competitions and contests, such as the Image of the Day, the Top "
-            "Picks, other custom contests. This will remove you from the leaderboards and hide your AstroBin Index "
-            "and Reputation Score."),
+            "Picks, other custom contests. This will remove you from the leaderboards and hide your Image Index "
+            "and Contribution Index."),
     )
 
     banned_from_competitions = models.DateTimeField(
@@ -2372,13 +2372,14 @@ class UserProfile(SafeDeleteModel):
             except (IndexError, SearchFieldError):
                 return {
                     'user_scores_index': None,
-                    'user_scores_reputation': None,
+                    'user_scores_contribution_index': None,
                     'user_scores_followers': None
                 }
 
             scores = {
                 'user_scores_index': user_search_result.normalized_likes,
-                'user_scores_reputation': user_search_result.reputation,
+                # DEPRECATED: remove once contribution_index is populated
+                'user_scores_contribution_index': user_search_result.reputation,
                 'user_scores_followers': user_search_result.followers,
             }
 

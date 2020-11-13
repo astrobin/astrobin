@@ -2228,7 +2228,7 @@ def stats(request):
 
 
 @require_GET
-def trending_astrophotographers(request):
+def astrophotographers_list(request):
     if request.user.is_authenticated() and \
             request.user.userprofile.exclude_from_competitions and \
             not request.user.is_superuser:
@@ -2287,13 +2287,13 @@ def trending_astrophotographers(request):
     return object_list(
         request,
         queryset=queryset,
-        template_name='trending_astrophotographers.html',
+        template_name='astrophotographers_list.html',
         template_object_name='user',
     )
 
 
 @require_GET
-def reputation_leaderboard(request):
+def contributors_list(request):
     if request.user.is_authenticated() and \
             request.user.userprofile.exclude_from_competitions and \
             not request.user.is_superuser:
@@ -2302,6 +2302,7 @@ def reputation_leaderboard(request):
     queryset = SearchQuerySet()
 
     default_sorting = [
+        # DEPRECATED: remove once contribution_index is populated
         '-reputation',
         '-comment_likes_received',
         '-forum_post_likes_received',
@@ -2322,6 +2323,7 @@ def reputation_leaderboard(request):
             'comment_likes_received',
             'forum_posts',
             'forum_post_likes_received',
+            # DEPRECATED: remove once contribution_index is populated
             'reputation',
 
             '-comments_written',
@@ -2329,6 +2331,7 @@ def reputation_leaderboard(request):
             '-comment_likes_received',
             '-forum_posts',
             '-forum_post_likes_received',
+            # DEPRECATED: remove once contribution_index is populated
             '-reputation'
     ):
         raise Http404
@@ -2344,7 +2347,7 @@ def reputation_leaderboard(request):
     return object_list(
         request,
         queryset=queryset,
-        template_name='reputation_leaderboard.html',
+        template_name='contributors_list.html',
         template_object_name='user',
     )
 

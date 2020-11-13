@@ -1,4 +1,7 @@
 $(function() {
+
+    var languageCode = $('#nested-comments-language-code').attr('data-value');
+
     /*******************************************************************
     * APP
     *******************************************************************/
@@ -9,14 +12,14 @@ $(function() {
 
         baseApiUrl: '/api/v2/',
 
-        ready: function() {
+        ready: function () {
             this.commentsApiUrl = this.baseApiUrl + 'nestedcomments/nestedcomments/';
             this.togglepropertiesApiUrl = this.baseApiUrl + 'common/toggleproperties/';
             this.authorsApiUrl = this.baseApiUrl + 'common/users/';
             this.profilesApiUrl = this.baseApiUrl + 'common/userprofiles/';
             this.usersUrl = '/users/';
 
-            this.languagecode = $('#nested-comments-language-code').attr('data-value');
+            this.languagecode = languageCode;
             this.userId = parseInt($('#nested-comments-user-id').attr('data-value'));
             this.username = $('#nested-comments-user-name').attr('data-value');
             this.userIsAuthenticated = $('#nested-comments-user-is-authenticated').attr('data-value') == "True";
@@ -24,6 +27,7 @@ $(function() {
             this.shadowBans = JSON.parse($('#nested-comments-shadow-bans').attr('data-value'));
             this.page_url = $('#nested-comments-page-url').attr('data-value');
             this.loaderGif = $('#nested-comments-loaderGif-url').attr('data-value');
+            this.editorPlaceholder = $('#nested-comments-editor-placeholder').attr('data-value');
             this.contentTypeId = $(this.rootElement).attr('data-content-type-id');
             this.nestedcommentsContentTypeId = $('#nested-comments-comments-content-type-id').attr('data-value');
             this.objectId = $(this.rootElement).attr('data-object-id');
@@ -34,8 +38,8 @@ $(function() {
     });
 
     /*******************************************************************
-    * BASE VIEWS
-    *******************************************************************/
+     * BASE VIEWS
+     *******************************************************************/
 
     // A view used to DRY the logic common to views with textareas (top
     // level, edit, reply).
@@ -49,14 +53,14 @@ $(function() {
         syncInterval: null,
         type: null,
 
-        createSyncInterval: function() {
+        createSyncInterval: function () {
             var self = this;
-            this.set('syncInterval', setInterval(function() {
+            this.set('syncInterval', setInterval(function () {
                 self.sync(true);
             }, 200));
         },
 
-        removeSyncInterval: function() {
+        removeSyncInterval: function () {
             if (this.get('syncInterval') === null) {
                 return;
             }
@@ -65,7 +69,7 @@ $(function() {
             this.set('syncInterval', null);
         },
 
-        sync: function(syncTextarea) {
+        sync: function (syncTextarea) {
             try {
                 var textarea = this.$('textarea'),
                     data = CKEDITOR.instances[textarea.attr('id')].getData(),
@@ -81,7 +85,8 @@ $(function() {
                         break;
                 }
 
-                this.set(property + '.html', astrobin_common.utils.BBCodeToHtml(data));
+                this.set(property + '.html', astrobin_common.utils.BBCodeToHtml(
+                    data, "comments", nc_app.languageCode));
 
                 if (typeof syncTextarea !== 'undefined' && syncTextarea) {
                     this.set(property + '.text', data);
@@ -92,14 +97,18 @@ $(function() {
             }
         },
 
-        initTextarea: function() {
+        initTextarea: function () {
             var self = this;
 
-            setTimeout(function() {
+            setTimeout(function () {
                 var textarea = self.$('textarea');
                 CKEDITOR.replace(
                     textarea.attr("id"),
-                    astrobin_common.utils.ckeditorOptions("comments", nc_app.languageCode)
+                    astrobin_common.utils.ckeditorOptions(
+                        "comments",
+                        nc_app.languageCode,
+                        nc_app.editorPlaceholder
+                    )
                 );
                 self.createSyncInterval();
             }, 1);
@@ -107,8 +116,8 @@ $(function() {
     });
 
     /*******************************************************************
-    * Models
-    *******************************************************************/
+     * Models
+     *******************************************************************/
 
     nc_app.Comment = Em.Object.extend({
         // Native fields
@@ -137,19 +146,19 @@ $(function() {
         html: null,
 
         // Computed properties
-        cid: function() {
+        cid: function () {
             return 'c' + this.get('id');
         }.property('id'),
 
-        url: function() {
+        url: function () {
             return nc_app.page_url + '#' + this.get('cid');
         }.property('id'),
 
-        allowEditing: function() {
-            return this.get('deleted') == false;
+        allowEditing: function () {
+            return this.get('deleted') === false;
         }.property('deleted'),
 
-        getHTML: function() {
+        getHTML: function () {
             var created = new Date(this.created);
             var release = new Date(
                 astrobin_common.globals.BREAKAGE_DATES.COMMENTS_MARKDOWN);
@@ -162,7 +171,7 @@ $(function() {
             return nc_app.markdownConverter.makeHtml(this.get('text'));
         }.property('html', 'text'),
 
-        disallowSaving: function() {
+        disallowSaving: function () {
             var submitting = this.get('submitting');
             var hasText = this.get('html') !== null && this.get('html').length > 0;
 
@@ -194,7 +203,7 @@ $(function() {
         }.property('likes'),
 
         // Functions
-        init: function() {
+        init: function () {
             this._super();
 
             this.deleted = false;
@@ -203,12 +212,12 @@ $(function() {
             this.editing = false;
             this.submitting = false;
         }
-     });
+    });
 
 
     /*******************************************************************
-    * Views and Controllers
-    *******************************************************************/
+     * Views and Controllers
+     *******************************************************************/
 
     nc_app.ApplicationController = Em.Controller.extend();
     nc_app.ApplicationView = Em.View.extend({
@@ -225,7 +234,7 @@ $(function() {
 
         disabledBinding: 'parentView.disallowSaving',
 
-        click: function(event) {
+        click: function (event) {
             this.get('parentView').save();
             event.preventDefault();
         }
@@ -242,17 +251,17 @@ $(function() {
         collapsed: true,
         syncInterval: null,
 
-        collapse: function() {
+        collapse: function () {
             this.set('collapsed', true);
             this.reset();
         },
 
-        uncollapse: function() {
+        uncollapse: function () {
             this.set('collapsed', false);
             this.initTextarea();
         },
 
-        reset: function() {
+        reset: function () {
             var instance = CKEDITOR.instances[self.$('textarea').attr('id')];
 
             if (instance) {
@@ -265,17 +274,17 @@ $(function() {
             this.removeSyncInterval();
         },
 
-        didInsertElement: function() {
+        didInsertElement: function () {
             this.set('type', this.TypeEnum.TOP_LEVEL);
             this.reset();
             this.set('userIsAuthenticated', nc_app.userIsAuthenticated);
         },
 
-        save: function() {
+        save: function () {
             var self = this;
             this.sync(true);
             nc_app.get('router.commentsController').saveNewComment(self.get('comment'))
-                .then(function(response, statusText, xhr) {
+                .then(function (response, statusText, xhr) {
                     self.reset();
                 });
         },
@@ -289,7 +298,7 @@ $(function() {
         ready: false,
         firstCommentAdded: false,
 
-        findCommentById: function(id, root) {
+        findCommentById: function (id, root) {
             var self = this;
 
             if (root === undefined) {
@@ -309,7 +318,7 @@ $(function() {
             }
         },
 
-        addComment: function(comment) {
+        addComment: function (comment) {
             var self = this;
 
             if (comment.get('parent') == null) {
@@ -323,7 +332,7 @@ $(function() {
             }
         },
 
-        createComment: function() {
+        createComment: function () {
             return nc_app.Comment.create({
                 author: nc_app.userId,
                 content_type: nc_app.contentTypeId,
@@ -332,14 +341,14 @@ $(function() {
             });
         },
 
-        fetchAuthor: function(comment) {
+        fetchAuthor: function (comment) {
             var url = nc_app.authorsApiUrl + comment.author + '/';
 
             $.ajax({
                 url: url,
                 timeout: nc_app.ajaxTimeout,
                 dataType: 'json',
-                success: function(response) {
+                success: function (response) {
                     comment.set('author_username', response.username);
                     comment.set('author_url', nc_app.usersUrl + response.username);
                     comment.set('author_avatar', response.avatar);
@@ -350,7 +359,7 @@ $(function() {
                             url: url,
                             timeout: nc_app.ajaxTimeout,
                             dataType: 'json',
-                            success: function(response) {
+                            success: function (response) {
                                 if (response.real_name !== null && response.real_name !== "") {
                                     comment.set('author_username', response.real_name);
                                 }
@@ -361,7 +370,7 @@ $(function() {
             });
         },
 
-        fetchComments: function(url, data) {
+        fetchComments: function (url, data) {
             var self = this;
 
             if (url != null) {
@@ -371,8 +380,8 @@ $(function() {
                     timeout: nc_app.ajaxTimeout,
                     dataType: 'json',
                     data: data,
-                    success: function(response) {
-                        $.each(response, function(i, nc_data) {
+                    success: function (response) {
+                        $.each(response, function (i, nc_data) {
                             var comment = nc_app.Comment.create(nc_data);
                             comment.set('authorIsRequestingUser', nc_app.userId == comment.get('author'));
                             comment.set('deleted', nc_data.deleted);
@@ -385,7 +394,7 @@ $(function() {
                                     return false;
                                 }
 
-                                var comments = nc_app.commentStore.filter(function(comment) {
+                                var comments = nc_app.commentStore.filter(function (comment) {
                                     return comment.id === commentId;
                                 });
 
@@ -417,7 +426,7 @@ $(function() {
             }
         },
 
-        find: function() {
+        find: function () {
             var self = this,
                 data = {
                     'content_type': nc_app.contentTypeId,
@@ -428,7 +437,7 @@ $(function() {
             return self.content;
         },
 
-        dump: function(comment) {
+        dump: function (comment) {
             data = {
                 id: comment.get('id'),
                 author: comment.get('author'),
@@ -444,18 +453,18 @@ $(function() {
             return data;
         },
 
-        delete_: function(comment) {
+        delete_: function (comment) {
             $.ajax({
                 type: 'delete',
                 url: nc_app.commentsApiUrl + comment.get('id') + '/',
                 timeout: nc_app.ajaxTimeout,
-                success: function() {
+                success: function () {
                     comment.set('deleted', true);
                 }
             });
         },
 
-        undelete: function(comment) {
+        undelete: function (comment) {
             var data = this.dump(comment);
 
             data.deleted = 'False';
@@ -465,24 +474,24 @@ $(function() {
                 url: nc_app.commentsApiUrl + data.id + '/',
                 data: data,
                 timeout: nc_app.ajaxTimeout,
-                success: function(response) {
+                success: function (response) {
                     comment.set('deleted', response.deleted);
                 }
             });
         },
 
-        startEditing: function(comment) {
+        startEditing: function (comment) {
             comment.set('original_text', comment.get('text'));
             comment.set('editing', true);
             comment.set('replying', false);
         },
 
-        cancelEditing: function(comment) {
+        cancelEditing: function (comment) {
             comment.set('text', comment.get('original_text'));
             comment.set('editing', false);
         },
 
-        saveEdit: function(comment) {
+        saveEdit: function (comment) {
             var data = this.dump(comment);
 
             comment.set('submitting', true);
@@ -491,23 +500,23 @@ $(function() {
                 url: nc_app.commentsApiUrl + data.id + '/',
                 data: data,
                 timeout: nc_app.ajaxTimeout,
-                success: function() {
+                success: function () {
                     comment.set('editing', false);
                     comment.set('submitting', false);
                 }
             });
         },
 
-        startReplying: function(comment) {
+        startReplying: function (comment) {
             comment.set('replying', true);
             comment.set('editing', false);
         },
 
-        cancelReplying: function(comment) {
+        cancelReplying: function (comment) {
             comment.set('replying', false);
         },
 
-        saveReply: function(comment, parent) {
+        saveReply: function (comment, parent) {
             var self = this,
                 data = self.dump(comment);
 
@@ -521,7 +530,7 @@ $(function() {
                 url: nc_app.commentsApiUrl,
                 data: data,
                 timeout: nc_app.ajaxTimeout,
-                success: function(response) {
+                success: function (response) {
                     parent.set('replying', false);
                     parent.set('submitting', false);
 
@@ -535,7 +544,7 @@ $(function() {
             });
         },
 
-        like: function(comment) {
+        like: function (comment) {
             comment.set('liking', true);
 
             $.ajax({
@@ -554,7 +563,7 @@ $(function() {
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     var errors = JSON.parse(XMLHttpRequest.responseText).non_field_errors;
-                    errors.forEach(function(error) {
+                    errors.forEach(function (error) {
                         if (error === "User does not have the required permissions to like this object") {
                             $('#cant-like').modal('show');
                         }
@@ -602,7 +611,7 @@ $(function() {
             });
         },
 
-        saveNewComment: function(comment) {
+        saveNewComment: function (comment) {
             var self = this,
                 data = self.dump(comment);
 
@@ -620,7 +629,7 @@ $(function() {
                 url: nc_app.commentsApiUrl,
                 data: data,
                 timeout: nc_app.ajaxTimeout,
-                success: function(response) {
+                success: function (response) {
                     comment.set('submitting', false);
 
                     var new_comment = nc_app.Comment.create(response);
@@ -650,11 +659,11 @@ $(function() {
         collapsed: false,
         userIsSuperuser: null,
 
-        scroll: function() {
+        scroll: function () {
             /* Using a timeout here, because the "reply" view is still
              * visible, so we give it time to hide before scrolling. */
             var self = this;
-            setTimeout(function() {
+            setTimeout(function () {
                 $('html, body').animate({
                     // 60 pixel is the fixed navigation bar
                     scrollTop: self.$().offset().top - 60
@@ -662,13 +671,13 @@ $(function() {
             }, 250);
         },
 
-        hilight: function() {
+        hilight: function () {
             // There can be only one.
             $('.comment.hilight').removeClass('hilight');
             this.$().addClass('hilight');
         },
 
-        didInsertElement: function() {
+        didInsertElement: function () {
             this.set('userIsSuperuser', nc_app.userIsSuperuser);
 
             var self = this,
@@ -685,47 +694,59 @@ $(function() {
                 self.scroll();
             }
 
-            setTimeout(function() {
-                self.set('node.html', astrobin_common.utils.BBCodeToHtml(self.$('textarea').val()));
-                self.set('node.ready', true);
-            });
+            function nodeReady() {
+                if (!!CKEDITOR.htmlParser.fragment.fromBBCode) {
+                    self.set('node.html', astrobin_common.utils.BBCodeToHtml(
+                        self.$('textarea').val(), "comments", nc_app.languageCode)
+                    );
+                    self.set('node.ready', true);
+                } else {
+                    setTimeout(function () {
+                        nodeReady();
+                    }, 100);
+                }
+            }
+
+            setTimeout(function () {
+                nodeReady();
+            }, 1);
         },
 
-        link: function() {
+        link: function () {
             this.hilight();
             window.location.href = '#' + this.get('node.cid');
             this.scroll();
         },
 
-        collapse: function() {
+        collapse: function () {
             this.set('collapsed', true);
         },
 
-        uncollapse: function() {
+        uncollapse: function () {
             this.set('collapsed', false);
         },
 
-        delete_: function() {
+        delete_: function () {
             nc_app.get('router.commentsController').delete_(this.get('node'));
         },
 
-        undelete: function() {
+        undelete: function () {
             nc_app.get('router.commentsController').undelete(this.get('node'));
         },
 
-        edit: function() {
+        edit: function () {
             nc_app.get('router.commentsController').startEditing(this.get('node'));
         },
 
-        saveEdit: function() {
+        saveEdit: function () {
             nc_app.get('router.commentsController').saveEdit(this.get('node'));
         },
 
-        cancelEditing: function() {
+        cancelEditing: function () {
             nc_app.get('router.commentsController').cancelEditing(this.get('node'));
         },
 
-        reply: function() {
+        reply: function () {
             nc_app.get('router.commentsController').startReplying(this.get('node'));
         },
 
@@ -737,13 +758,13 @@ $(function() {
             nc_app.get('router.commentsController').unlike(this.get('node'));
         },
 
-        saveReply: function() {
+        saveReply: function () {
             nc_app.get('router.commentsController').saveReply(
                 this.get('replyComment'),
                 this.get('node'));
         },
 
-        cancelReplying: function() {
+        cancelReplying: function () {
             nc_app.get('router.commentsController').cancelReplying(this.get('node'));
         },
 
@@ -753,18 +774,18 @@ $(function() {
             submittingBinding: 'parentView.submitting',
             disallowSavingBinding: 'parentView.disallowSaving',
 
-            didInsertElement: function() {
+            didInsertElement: function () {
                 this.set('type', this.TypeEnum.EDIT);
                 this.initTextarea();
             },
 
-            save: function() {
+            save: function () {
                 this.removeSyncInterval();
                 this.sync(true);
                 this.get('parentView').saveEdit();
             },
 
-            cancel: function() {
+            cancel: function () {
                 this.get('parentView').cancelEditing();
                 this.removeSyncInterval();
             },
@@ -779,7 +800,7 @@ $(function() {
             disallowSavingBinding: 'comment.disallowSaving',
             userIsAuthenticated: null,
 
-            didInsertElement: function() {
+            didInsertElement: function () {
                 this.set('userIsAuthenticated', nc_app.userIsAuthenticated);
 
                 var comment = this.get('parentView.controller').createComment();
@@ -791,12 +812,12 @@ $(function() {
                 this.initTextarea();
             },
 
-            cancel: function() {
+            cancel: function () {
                 this.get('parentView').cancelReplying();
                 this.removeSyncInterval();
             },
 
-            save: function() {
+            save: function () {
                 this.removeSyncInterval();
                 this.sync(true);
                 this.get('parentView').saveReply();
@@ -813,7 +834,7 @@ $(function() {
         attributeBindings: ['title'],
         titleBinding: "value",
 
-        didInsertElement: function() {
+        didInsertElement: function () {
             this._super();
             this.$().attr("title", this.$().attr("title") + " UTC");
             this.$().timeago();
@@ -826,15 +847,15 @@ $(function() {
         loaderUrl: null,
         templateName: 'loader',
 
-        didInsertElement: function() {
+        didInsertElement: function () {
             this.set('loaderUrl', nc_app.loaderGif);
         }
     });
 
 
     /*******************************************************************
-    * Router
-    *******************************************************************/
+     * Router
+     *******************************************************************/
 
     nc_app.Router = Em.Router.extend({
         location: 'none',
@@ -842,7 +863,7 @@ $(function() {
         root: Em.Route.extend({
             index: Em.Route.extend({
                 route: '/',
-                connectOutlets: function(router) {
+                connectOutlets: function (router) {
                     var ctrl = router.get('applicationController');
                     ctrl.connectOutlet('top-level', 'topLevel');
                     ctrl.connectOutlet('comments', 'comments');
@@ -854,4 +875,8 @@ $(function() {
     });
 
     window.NestedCommentsApp = nc_app;
+
+    // Initialize hidden CKEDITOR to access BBCode transformation methods.
+    ckeditorOptions = astrobin_common.utils.ckeditorOptions("comments", languageCode);
+    CKEDITOR.replace("hidden-textarea", ckeditorOptions);
 });

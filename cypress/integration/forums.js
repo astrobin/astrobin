@@ -17,6 +17,9 @@ describe("Forums", () => {
         cy.get("a").contains("New topic").click();
         cy.url().should("contain", "/topic/add/");
 
+        // Give the editor 10 seconds to appear
+        cy.get(".post-form input[name='name']", {timeout: 10000}).should('be.visible');
+
         cy.get(".post-form input[name='name']").type("Test topic");
         cy.get("#cke_id_body .cke_wysiwyg_div").type("Hello, this is a test topic.");
         cy.get(".post-form button[type='submit']").click();
@@ -29,6 +32,9 @@ describe("Forums", () => {
     it("should edit", () => {
         cy.get(".post-related a").contains("Edit").click();
         cy.url().should("match", /\/forum\/post\/\d+\/edit\//);
+
+        // Give the editor 10 seconds to appear
+        cy.get(".post-form input[name='name']", {timeout: 10000}).should('be.visible');
 
         cy.get(".post-form input[name='name']").clear().type("Edited test topic");
         cy.get("#cke_id_body .cke_wysiwyg_div")
@@ -52,8 +58,8 @@ describe("Forums", () => {
     it("should quote", () => {
         cy.get(".post-related").last().contains("quote").click();
         cy.wait(1000);
-        cy.get(".cke_button__source").click();
-        cy.get("#cke_id_body textarea.cke_source")
+        cy.get(".cke_button__sourcedialog").click();
+        cy.get("textarea.cke_source")
             .should("contain.value", "[quote=\"astrobin_dev\"]This is a reply.[/quote]");
     });
 });
