@@ -58,7 +58,11 @@
 
             CKEDITOR.replace(
                 textarea.attr("id"),
-                astrobin_common.utils.ckeditorOptions("forum", "{{ LANGUAGE_CODE }}")
+                astrobin_common.utils.ckeditorOptions(
+                    "forum",
+                    "{{ LANGUAGE_CODE }}",
+                    "{% trans 'Type your forum post here...' %}"
+                )
             );
 
             function getSelectedText() {

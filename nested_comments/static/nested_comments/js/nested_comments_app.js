@@ -27,6 +27,7 @@ $(function() {
             this.shadowBans = JSON.parse($('#nested-comments-shadow-bans').attr('data-value'));
             this.page_url = $('#nested-comments-page-url').attr('data-value');
             this.loaderGif = $('#nested-comments-loaderGif-url').attr('data-value');
+            this.editorPlaceholder = $('#nested-comments-editor-placeholder').attr('data-value');
             this.contentTypeId = $(this.rootElement).attr('data-content-type-id');
             this.nestedcommentsContentTypeId = $('#nested-comments-comments-content-type-id').attr('data-value');
             this.objectId = $(this.rootElement).attr('data-object-id');
@@ -103,7 +104,11 @@ $(function() {
                 var textarea = self.$('textarea');
                 CKEDITOR.replace(
                     textarea.attr("id"),
-                    astrobin_common.utils.ckeditorOptions("comments", nc_app.languageCode)
+                    astrobin_common.utils.ckeditorOptions(
+                        "comments",
+                        nc_app.languageCode,
+                        nc_app.editorPlaceholder
+                    )
                 );
                 self.createSyncInterval();
             }, 1);

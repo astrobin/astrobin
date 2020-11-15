@@ -74,7 +74,7 @@ astrobin_common = {
             return (Math.round(converted * 100) / 100).toFixed(precision);
         },
 
-        ckeditorOptions: function (context, language) {
+        ckeditorOptions: function (context, language, placeholder) {
             if (!language) {
                 language = 'en';
             }
@@ -82,6 +82,7 @@ astrobin_common = {
             var options = {
                 skin: 'minimalist',
                 language: language,
+                editorplaceholder: placeholder || '',
                 extraPlugins: '' +
                     'ajax,' +
                     'autocomplete,' +

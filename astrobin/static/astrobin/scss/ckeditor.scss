@@ -344,3 +344,9 @@ select.cke_dialog_ui_input_select {
     padding-left: 10px;
   }
 }
+
+[data-cke-editorplaceholder]::before {
+  margin-top: 0 !important;
+  color: $grey-4 !important;
+  opacity: .5 !important;
+}
