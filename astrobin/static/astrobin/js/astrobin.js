@@ -103,6 +103,7 @@ astrobin_common = {
                     'filetools,' +
                     'floatpanel,' +
                     'floatingspace,' +
+                    'font,' +
                     'help,' +
                     'indent,' +
                     'indentlist,' +
@@ -150,7 +151,7 @@ astrobin_common = {
                     },
                     {
                         name: 'basicstyles',
-                        items: ['Bold', 'Italic', 'Underline', 'Strike', 'RemoveFormat']
+                        items: ['FontSize', 'Bold', 'Italic', 'Underline', 'Strike', 'RemoveFormat']
                     },
                     {
                         name: 'paragraph',
@@ -319,6 +320,7 @@ astrobin_common = {
                     '&oelig;', '&#372;', '&#374', '&#373', '&#375;', '&sbquo;', '&#8219;', '&bdquo;', '&hellip;',
                     '&trade;', '&#9658;', '&bull;', '&rarr;', '&rArr;', '&hArr;', '&diams;', '&asymp;'
                 ],
+                fontSize_sizes: "50%/50%;100%/100%;200%/200%",
                 on: {
                     change: function () {
                         this.updateElement();
