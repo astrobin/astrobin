@@ -17,8 +17,8 @@ describe("Forums", () => {
         cy.get("a").contains("New topic").click();
         cy.url().should("contain", "/topic/add/");
 
-        // Wait a bit for the editor to be ready.
-        cy.wait(3000);
+        // Give the editor 10 seconds to appear
+        cy.get(".post-form input[name='name']", {timeout: 10000}).should('be.visible');
 
         cy.get(".post-form input[name='name']").type("Test topic");
         cy.get("#cke_id_body .cke_wysiwyg_div").type("Hello, this is a test topic.");
@@ -33,8 +33,8 @@ describe("Forums", () => {
         cy.get(".post-related a").contains("Edit").click();
         cy.url().should("match", /\/forum\/post\/\d+\/edit\//);
 
-        // Wait a bit for the editor to be ready.
-        cy.wait(3000);
+        // Give the editor 10 seconds to appear
+        cy.get(".post-form input[name='name']", {timeout: 10000}).should('be.visible');
 
         cy.get(".post-form input[name='name']").clear().type("Edited test topic");
         cy.get("#cke_id_body .cke_wysiwyg_div")
