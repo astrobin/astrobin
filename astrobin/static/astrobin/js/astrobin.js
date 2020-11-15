@@ -89,6 +89,7 @@ astrobin_common = {
                     'autolink,' +
                     'basicstyles,' +
                     'bbcode,' +
+                    'blockquote,' +
                     'button,' +
                     'clipboard,' +
                     'contextmenu,' +

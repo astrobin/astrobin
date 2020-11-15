@@ -84,7 +84,7 @@
                         if (instance.mode === 'source') {
                             window.alert("{% trans "Please first exit 'Source' mode to quote a message." %}");
                         } else {
-                            instance.setData(instance.getData() + '\n' + data + '\n.')
+                            instance.setData(instance.getData() + '\n' + data + '\n{% trans "*** Type your reply here ***" %}')
                             window.location.hash = '#cke_id_body';
                         }
                     }
@@ -109,7 +109,7 @@
                             username = $.trim($(this).closest('.post').find('.post-author a').text());
                         }
                         instance.setData(
-                            instance.getData() + '\n' + window.pybb.markup.quote(selectedText, username) + '\n.');
+                            instance.getData() + '\n' + window.pybb.markup.quote(selectedText, username) + '\n{% trans "*** Type your reply here ***" %}');
                         window.location.hash = '#cke_id_body';
                     }
                 }
