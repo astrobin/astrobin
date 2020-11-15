@@ -31,12 +31,6 @@
                     {% include '_rich_content_editor_help.html' %}
                 {% endif %}
 
-                <div id='emoticons'>
-                    {% for smile, url in form.available_smiles.items %}
-                        <a href='#' title='{{ smile|safe }}'><img src='{% static form.smiles_prefix %}{{ url }}'></a>
-                    {% endfor %}
-                </div>
-
                 {% if request.user|pybb_may_create_poll and form.poll_type %}
                     {% include "pybb/poll_edit_form.html" %}
                 {% endif %}
@@ -115,12 +109,6 @@
                         window.location.hash = '#cke_id_body';
                     }
                 }
-            });
-
-            $('#emoticons a').click(function () {
-                var emoticon = $(this).attr("title");
-                CKEDITOR.instances[textarea.attr("id")].insertText(' ' + emoticon + ' ');
-                return false;
             });
         });
     </script>

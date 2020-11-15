@@ -293,6 +293,27 @@ select.cke_dialog_ui_input_select {
   }
 }
 
+.cke_dark_background {
+  background: $grey-8 !important;
+}
+
+.cke_specialchar {
+  padding: 6px;
+
+  &:hover {
+    background: $grey-3;
+
+    span {
+      color: $grey-8;
+    }
+  }
+
+  span {
+    color: $grey-3;
+    font-size: 18px;
+  }
+}
+
 .cke_wysiwyg_frame,
 .cke_wysiwyg_div {
   background-color: $grey-5 !important;
@@ -308,6 +329,13 @@ select.cke_dialog_ui_input_select {
     height: auto !important;
     margin-top: 10px;
     margin-bottom: 10px;
+
+    &.smiley {
+      width: 18px;
+      height: 18px;
+      margin-left: 1px;
+      margin-right: 1px;
+    }
   }
 
   blockquote {

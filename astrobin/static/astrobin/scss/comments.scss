@@ -135,6 +135,15 @@
           display: none;
         }
       }
+
+      img {
+        &.smiley {
+          width: 18px;
+          height: 18px;
+          margin-left: 1px;
+          margin-right: 1px;
+        }
+      }
     }
 
     .content.deleted {
