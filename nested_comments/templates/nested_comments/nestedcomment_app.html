@@ -21,6 +21,11 @@
 
 <div id="nested-comments-page-url" data-value="{{request.get_full_path}}"></div>
 <div id="nested-comments-loaderGif-url" data-value="{% static 'astrobin/images/ajax-loader.gif' %}"></div>
+<div id="nested-comments-editor-placeholder" data-value="{% trans 'Type your comment here...' %}"></div>
+
+<div style="display: none">
+    <textarea id="hidden-textarea"></textarea>
+</div>
 
 {% handlebars "nested-comments" %}
     {{outlet top-level}}

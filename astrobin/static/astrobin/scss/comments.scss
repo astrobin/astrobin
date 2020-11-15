@@ -122,10 +122,22 @@
       }
 
       blockquote {
-        margin: 0;
-        padding: 0 0 0 $spacer-small;
-        font-style: italic;
-        border-left: 2px solid ($border-top-color * $hilight-factor);
+        background-color: $grey-8;
+        padding: 10px 20px 10px 60px;
+        border: 1px solid $grey-5;
+        position: relative;
+        min-height: 34px;
+
+        &::before {
+          display: block;
+          content: "\201C";
+          font-size: 120px;
+          position: absolute;
+          left: 4px;
+          top: 50px;
+          color: $grey-5;
+          font-family: Georgia, serif;
+        }
 
         p {
           color: $text-color;
@@ -133,6 +145,15 @@
 
         br {
           display: none;
+        }
+      }
+
+      img {
+        &.smiley {
+          width: 18px;
+          height: 18px;
+          margin-left: 1px;
+          margin-right: 1px;
         }
       }
     }

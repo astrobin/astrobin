@@ -293,6 +293,27 @@ select.cke_dialog_ui_input_select {
   }
 }
 
+.cke_dark_background {
+  background: $grey-8 !important;
+}
+
+.cke_specialchar {
+  padding: 6px;
+
+  &:hover {
+    background: $grey-3;
+
+    span {
+      color: $grey-8;
+    }
+  }
+
+  span {
+    color: $grey-3;
+    font-size: 18px;
+  }
+}
+
 .cke_wysiwyg_frame,
 .cke_wysiwyg_div {
   background-color: $grey-5 !important;
@@ -308,11 +329,55 @@ select.cke_dialog_ui_input_select {
     height: auto !important;
     margin-top: 10px;
     margin-bottom: 10px;
+
+    &.smiley {
+      width: 18px;
+      height: 18px;
+      margin-left: 1px;
+      margin-right: 1px;
+    }
   }
 
   blockquote {
-    border-left: 3px dashed #999;
-    margin-left: 20px;
-    padding-left: 10px;
+    background-color: $grey-8;
+    padding: 10px 20px 10px 60px;
+    border: 1px solid $grey-5;
+    position: relative;
+    min-height: 34px;
+
+    &::before {
+      display: block;
+      content: "\201C";
+      font-size: 120px;
+      position: absolute;
+      left: 4px;
+      top: 50px;
+      color: $grey-5;
+      font-family: Georgia, serif;
+    }
   }
+}
+
+[data-cke-editorplaceholder]::before {
+  margin-top: 0 !important;
+  color: $grey-4 !important;
+  opacity: .5 !important;
+}
+
+.cke_combo_button {
+  margin: 0 !important;
+  padding-top: 2px !important;
+
+  span {
+    color: $link-color !important;
+    text-shadow: none !important;
+
+    .cke_combo_arrow {
+      border-top-color: $link-color !important;
+    }
+  }
+}
+
+.cke_combo__fontsize .cke_combo_text {
+  overflow: visible !important;
 }

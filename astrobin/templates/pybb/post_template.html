@@ -3,6 +3,7 @@
 
 {% load avatar_tags %}
 {% load pybb_tags %}
+{% load bbcode_tags %}
 
 {% load astrobin_apps_users_tags %}
 {% load common_tags %}
@@ -57,7 +58,7 @@
     {% endif %}
     <tr class="post-row">
         <td class="post-content">
-            {{ post.body_html|safe }}
+            {{ post.body|bbcode|safe }}
 
             {% if not user.is_authenticated or user_profile.show_signatures %}
                 {% if post_user_profile.signature %}

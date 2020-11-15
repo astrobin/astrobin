@@ -81,7 +81,11 @@
 
             CKEDITOR.replace(
                 textarea.attr("id"),
-                astrobin_common.utils.ckeditorOptions("private-message", "{{ LANGUAGE_CODE }}")
+                astrobin_common.utils.ckeditorOptions(
+                    "private-message",
+                    "{{ LANGUAGE_CODE }}",
+                    "{% trans 'Type your message here...' %}"
+                )
             );
 
             $('.reply-form').ajaxForm({
