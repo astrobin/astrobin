@@ -7,6 +7,8 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
     image = serializers.PrimaryKeyRelatedField(queryset=Image.objects_including_wip)
     label = serializers.CharField(max_length=2)
     is_final = serializers.BooleanField(default=False)
+    w = serializers.IntegerField()
+    h = serializers.IntegerField()
 
     class Meta:
         model = ImageRevision

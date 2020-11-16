@@ -48,6 +48,14 @@ class ImageRevisionViewSet(TusCreateMixin,
         image_id = upload_metadata['image_id']
         image = Image.objects_including_wip.get(pk=image_id)
 
+        try:
+            width = int(upload_metadata['width'])
+            height = int(upload_metadata['height'])
+        except (KeyError, ValueError):
+            width = 0
+            height = 0
+
+
         return self.get_serializer(data={
             'upload_length': upload_length,
             'upload_metadata': json.dumps(upload_metadata),
@@ -59,6 +67,8 @@ class ImageRevisionViewSet(TusCreateMixin,
                 'mark_as_final'] if 'mark_as_final' in upload_metadata else False,
             'image': upload_metadata['image_id'],
             'label': ImageService(image).get_next_available_revision_label(),
+            'w': width,
+            'h': height,
         })
 
 
