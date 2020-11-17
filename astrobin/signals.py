@@ -121,7 +121,9 @@ def image_post_delete(sender, instance, **kwargs):
             user.userprofile.save(keep_deleted=True)
 
     try:
-        if is_lite(instance.user):
+        if instance.uploaded > datetime.datetime.now() - relativedelta(hours=24):
+            decrease_counter(instance.user)
+        elif is_lite(instance.user):
             usersub = premium_get_valid_usersubscription(instance.user)
             usersub_created = usersub.expires - relativedelta(years=1)
             dt = instance.uploaded.date() - usersub_created
