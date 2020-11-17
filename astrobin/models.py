@@ -814,6 +814,45 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         unique=True
     )
 
+    uploader_name = models.CharField(
+        max_length=256,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_upload_length = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_offset = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_expires = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_metadata = models.CharField(
+        max_length=512,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_temporary_file_path = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
     title = models.CharField(
         max_length=128,
         verbose_name=_("Title"),
@@ -1552,6 +1591,45 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         width_field='w',
         null=True,
         max_length=256,
+    )
+
+    uploader_name = models.CharField(
+        max_length=256,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_upload_length = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_offset = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_expires = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_metadata = models.CharField(
+        max_length=512,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_temporary_file_path = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+        editable=False,
     )
 
     square_cropping = ImageRatioField(

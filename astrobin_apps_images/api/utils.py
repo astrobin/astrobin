@@ -9,6 +9,7 @@ import tempfile
 
 import six
 from django.core.cache import cache
+from safedelete.models import SafeDeleteModel
 
 from astrobin_apps_images.api import constants
 from astrobin_apps_images.api.compat import encode_base64
@@ -202,8 +203,28 @@ def apply_headers_to_response(response, headers):
 
 
 def get_cached_property(property, object):
-    return cache.get("tus-uploads/{}/{}/{}".format(object.__class__.__name__, object.pk, property))
+    result =  cache.get("tus-uploads/{}/{}/{}".format(object.__class__.__name__, object.pk, property))
+
+    if result is None:
+        model_field = _get_model_field(property)
+        if hasattr(object, model_field):
+            result = getattr(object, model_field)
+
+    return result
 
 def set_cached_property(property, object, value):
     cache.set("tus-uploads/{}/{}/{}".format(
         object.__class__.__name__, object.pk, property), value, constants.TUS_CACHE_TIMEOUT)
+
+    model_field = _get_model_field(property)
+    if hasattr(object, model_field):
+        setattr(object, model_field, value)
+
+        kwargs = {}
+        if issubclass(type(object), SafeDeleteModel):
+            kwargs['keep_deleted'] = True
+
+        object.save(kwargs)
+
+def _get_model_field(property):
+    return 'uploader_%s' % property.replace('-', '_')

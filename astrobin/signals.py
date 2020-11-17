@@ -46,9 +46,12 @@ def image_pre_save(sender, instance, **kwargs):
         instance.published = datetime.datetime.now()
 
     try:
-        image = sender.objects.get(pk=instance.pk)
+        image = sender.objects_including_wip.get(pk=instance.pk)
     except sender.DoesNotExist:
-        pass
+        user_scores_index = instance.user.userprofile.get_scores()['user_scores_index']
+        if user_scores_index >= 1.00 or is_any_premium_subscription(instance.user):
+            instance.moderated_when = datetime.date.today()
+            instance.moderator_decision = 1
     else:
         if image.moderator_decision != 1 and instance.moderator_decision == 1:
             # This image is being approved
@@ -75,12 +78,6 @@ def image_post_save(sender, instance, created, **kwargs):
             group.images.add(instance)
 
     if created:
-        user_scores_index = instance.user.userprofile.get_scores()['user_scores_index']
-        if user_scores_index >= 1.00 or is_any_premium_subscription(instance.user):
-            instance.moderated_when = datetime.date.today()
-            instance.moderator_decision = 1
-            instance.save(keep_deleted=True)
-
         instance.user.userprofile.premium_counter += 1
         instance.user.userprofile.save(keep_deleted=True)
         profile_saved = True
@@ -108,7 +105,8 @@ def image_post_save(sender, instance, created, **kwargs):
             pass
 
     # Trigger real time search index
-    instance.user.save()
+    if instance.user.userprofile.updated < datetime.datetime.now() - datetime.timedelta(minutes=5):
+        instance.user.save()
 
 
 post_save.connect(image_post_save, sender=Image)
