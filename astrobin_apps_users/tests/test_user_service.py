@@ -328,3 +328,27 @@ class TestUserService(TestCase):
         like.save()
 
         self.assertTrue(UserService(like.user).can_unlike(image))
+
+    def test_get_recovered_images(self):
+        user = Generators.user()
+        image = Generators.image(
+            user=user,
+            corrupted=True,
+            recovered=datetime.now())
+
+        self.assertTrue(UserService(user).get_recovered_images().exists())
+
+        image.recovery_ignored = datetime.now()
+        image.save()
+
+        self.assertFalse(UserService(user).get_recovered_images().exists())
+
+        image.recovered = None
+        image.save()
+
+        self.assertFalse(UserService(user).get_recovered_images().exists())
+
+        image.corrupted = False
+        image.save()
+
+        self.assertFalse(UserService(user).get_recovered_images().exists())

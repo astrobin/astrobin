@@ -8,6 +8,7 @@ from astrobin.models import Image
 from astrobin.utils import get_client_country_code
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import get_unseen_notifications
+from astrobin_apps_users.services import UserService
 
 
 def notices_count(request):
@@ -119,10 +120,7 @@ def common_variables(request):
         'COUNTRIES': COUNTRIES,
         'COOKIELAW_ACCEPTED': request.COOKIES.get('cookielaw_accepted', False),
         'HAS_RECOVERED_IMAGES': request.user.is_authenticated() and \
-                                Image.all_objects.filter(
-                                    user=request.user,
-                                    corrupted=True,
-                                    recovered__isnull=False).exists(),
+                                UserService(request.user).get_recovered_images().exists(),
         'AUTOMATIC_RECOVERY_CONFIRMATION_BEGINS': Image.all_objects.filter(
             user=request.user,
             corrupted=True,
