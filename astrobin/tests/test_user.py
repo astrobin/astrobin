@@ -131,6 +131,7 @@ class UserTest(TestCase):
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_user_page_view(self, retrieve_primary_thumbnails):
+        now = datetime.now()
         today = date.today()
 
         # Test simple access
@@ -165,9 +166,9 @@ class UserTest(TestCase):
         # Test "upload time" sorting
         image1 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE1")
         image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
-        image1.uploaded = today
+        image1.uploaded = now
         image1.save(keep_deleted=True)
-        image2.uploaded = today + timedelta(1)
+        image2.uploaded = now + timedelta(hours=24)
         image2.save(keep_deleted=True)
 
         response = self.client.get(
@@ -184,7 +185,7 @@ class UserTest(TestCase):
         image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
         acquisition1 = Acquisition.objects.create(image=image1, date=today)
         acquisition2 = Acquisition.objects.create(
-            image=image2, date=today + timedelta(1))
+            image=image2, date=today + timedelta(days=1))
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=acquired")
         self.assertEquals(response.status_code, 200)
@@ -294,7 +295,7 @@ class UserTest(TestCase):
 
         acquisition1 = Acquisition.objects.create(image=image1, date=today)
         acquisition2 = Acquisition.objects.create(
-            image=image2, date=today - timedelta(365))
+            image=image2, date=today - timedelta(days=365))
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=year")
