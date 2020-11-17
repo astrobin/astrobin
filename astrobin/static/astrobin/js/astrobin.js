@@ -83,6 +83,7 @@ astrobin_common = {
                 skin: 'minimalist',
                 language: language,
                 editorplaceholder: placeholder || '',
+                disableNativeSpellChecker: false,
                 extraPlugins: '' +
                     'ajax,' +
                     'autocomplete,' +
@@ -92,7 +93,6 @@ astrobin_common = {
                     'blockquote,' +
                     'button,' +
                     'clipboard,' +
-                    'contextmenu,' +
                     'dialog,' +
                     'dialogui,' +
                     'divarea,' +
@@ -125,8 +125,6 @@ astrobin_common = {
                     'sourcedialog,' +
                     'specialchar,' +
                     'table,' +
-                    'tableselection,' +
-                    'tabletools,' +
                     'textmatch,' +
                     'textwatcher,' +
                     'toolbar,' +
