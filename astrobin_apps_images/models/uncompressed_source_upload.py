@@ -24,6 +24,45 @@ class UncompressedSourceUpload(models.Model):
         null=True,
     )
 
+    uploader_name = models.CharField(
+        max_length=256,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_upload_length = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_offset = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_expires = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_metadata = models.CharField(
+        max_length=512,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_temporary_file_path = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
     def __unicode__(self):
         return u"UncompressedSourceUpload for image %s: %s" % (self.image.pk, self.uncompressed_source_file)
 
