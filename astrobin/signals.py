@@ -36,6 +36,7 @@ from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 from .gear import get_correct_gear
 from .models import Image, ImageRevision, Gear, UserProfile
+from .search_indexes import ImageIndex, UserIndex
 from .stories import add_story
 
 log = logging.getLogger('apps')
@@ -117,6 +118,8 @@ def image_post_delete(sender, instance, **kwargs):
         user.userprofile.premium_counter -= 1
         with transaction.atomic():
             user.userprofile.save(keep_deleted=True)
+
+    ImageIndex().remove_object(instance)
 
     try:
         if instance.uploaded > datetime.datetime.now() - relativedelta(hours=24):
@@ -774,6 +777,7 @@ def userprofile_post_delete(sender, instance, **kwargs):
     instance.user.is_active = False
     instance.user.save()
     Image.objects_including_wip.filter(user=instance.user).delete()
+    UserIndex().remove_object(instance)
 
 
 post_softdelete.connect(userprofile_post_delete, sender=UserProfile)
