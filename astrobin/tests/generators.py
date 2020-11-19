@@ -42,6 +42,7 @@ class Generators:
             is_final=kwargs.pop('is_final', True),
             corrupted=kwargs.pop('corrupted', False),
             recovered=kwargs.pop('recovered', None),
+            recovery_ignored=kwargs.pop('recovery_ignored', None),
         )
 
     @staticmethod
@@ -56,6 +57,7 @@ class Generators:
             corrupted=kwargs.pop('corrupted', False),
             label=kwargs.pop('label', 'B'),
             description=kwargs.pop('description', None),
+            recovery_ignored=kwargs.pop('recovery_ignored', None),
         )
 
     @staticmethod

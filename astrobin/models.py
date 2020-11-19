@@ -802,11 +802,55 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         blank=True
     )
 
+    recovery_ignored = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
     hash = models.CharField(
         max_length=6,
         default=image_hash,
         null=True,
         unique=True
+    )
+
+    uploader_name = models.CharField(
+        max_length=256,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_upload_length = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_offset = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_expires = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_metadata = models.CharField(
+        max_length=512,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_temporary_file_path = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+        editable=False,
     )
 
     title = models.CharField(
@@ -1536,12 +1580,56 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         blank=True
     )
 
+    recovery_ignored = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
     image_file = models.ImageField(
         upload_to=image_upload_path,
         height_field='h',
         width_field='w',
         null=True,
         max_length=256,
+    )
+
+    uploader_name = models.CharField(
+        max_length=256,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_upload_length = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_offset = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_expires = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_metadata = models.CharField(
+        max_length=512,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_temporary_file_path = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+        editable=False,
     )
 
     square_cropping = ImageRatioField(
