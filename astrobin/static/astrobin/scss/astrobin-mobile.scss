@@ -193,7 +193,7 @@
     }
   }
 
-  .top-picks-item img, #hidden-placeholder{
+  .top-picks-item img{
     width: 354px !important;
   }
 }
@@ -372,10 +372,6 @@
 
   .top-picks, .iotd-promotion-queue {
     justify-content: center;
-  }
-
-  #hidden-placeholder {
-    display: none;
   }
 
   .iotd-queue-item, .top-picks-item{
