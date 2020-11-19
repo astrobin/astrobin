@@ -618,3 +618,19 @@ def show_competitive_feature(requesting_user, target_user):
         return False
 
     return True
+
+
+@register.simple_tag
+def get_actstream_action_template_fragment_cache_key(action, language_code):
+    cache_key = action.verb.replace('VERB_', '')
+
+    if action.actor:
+        cache_key += ".actor-%d" % action.actor.pk
+
+    if action.action_object:
+        cache_key += ".action-object-%d" % action.action_object.pk
+
+    if action.target:
+        cache_key += ".target-%d" % action.target.pk
+
+    return "%s.%s" % (cache_key, language_code)
