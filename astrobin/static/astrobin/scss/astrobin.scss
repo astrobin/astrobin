@@ -3675,23 +3675,10 @@ table.search-table {
   }
 }
 
-.top-picks {
+.top-picks, .iotd-promotion-queue {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-
-  #hidden-placeholder {
-      width: 100%; 
-      height: 100%;
-      max-height: 320px;
-      max-width: 460px;
-  }
-}
-
-.iotd-promotion-queue {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
 
   #hidden-placeholder {
       width: 100%; 

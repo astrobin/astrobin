@@ -370,6 +370,14 @@
     }
   }
 
+  .top-picks, .iotd-promotion-queue {
+    justify-content: center;
+  }
+
+  #hidden-placeholder {
+    display: none;
+  }
+
   .iotd-queue-item, .top-picks-item{
     margin-right: 0 !important;
   }
