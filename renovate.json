@@ -4,5 +4,19 @@
   ],
   "compatibility": {
     "python": "2.7"
-  }
+  },
+  "packageRules": [
+    {
+      "packageNames": [
+        "Django"
+      ],
+      "allowedVersions": "< 2"
+    },
+    {
+      "packageNames": [
+        "elasticsearch"
+      ],
+      "allowedVersions": "< 3"
+    }
+  ]
 }
