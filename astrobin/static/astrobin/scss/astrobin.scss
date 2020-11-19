@@ -3546,7 +3546,7 @@ table.search-table {
   margin-bottom: 22px;
   position: relative;
 
-  &:nth-of-type(even) {
+  &:nth-of-type(odd) {
     margin-right: 16px;
   }
 
@@ -3649,6 +3649,12 @@ table.search-table {
   .votes-count .badge {
     background-color: #e2bd35;
   }
+}
+
+.top-picks, .iotd-promotion-queue {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .top-picks-item {
