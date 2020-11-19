@@ -777,7 +777,7 @@ def userprofile_post_delete(sender, instance, **kwargs):
     instance.user.is_active = False
     instance.user.save()
     Image.objects_including_wip.filter(user=instance.user).delete()
-    UserIndex().remove_object(instance)
+    UserIndex().remove_object(instance.user)
 
 
 post_softdelete.connect(userprofile_post_delete, sender=UserProfile)
