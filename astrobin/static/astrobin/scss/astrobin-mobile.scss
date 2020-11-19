@@ -233,6 +233,10 @@
     padding: 0 4px;
   }
 
+  .subtle-container .header {
+    width: calc(100% - 12px);
+  }
+
   .subtle-container, .subtle-container .header, .subnav,
   footer .container {
     -webkit-border-radius: 0;

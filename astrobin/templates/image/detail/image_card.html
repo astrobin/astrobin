@@ -23,7 +23,7 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                             <i class="icon-shopping-cart"></i>
                                         </a>
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu pull-right">
                                             {% if image|gear_items_with_brand_listings:REQUEST_COUNTRY|length %}
                                                 <li class="nav-header">{% trans "Sponsored brands" %}</li>
                                                 {% with image|unique_equipment_brand_listings:REQUEST_COUNTRY as listings %}
