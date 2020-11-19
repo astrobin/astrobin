@@ -1695,40 +1695,16 @@ div.token-input-dropdown {
 }
 
 form.copy {
-  label {
-    float: left;
+  .control-group {
+    margin-bottom: 20px;
   }
 
-  #clip-container {
-    position: relative;
-    float: left;
-    display: inline-block;
-    margin-left: $spacer-small;
-
-    img {
-      cursor: hand;
-      cursor: pointer;
-    }
-
-    .flash-container {
-      position: absolute;
-      top: -3px;
-      @include opacity(0);
-      cursoer: hand;
-      cursor: pointer;
-    }
-
-    .clip-status {
-      position: absolute;
-      left: 25px;
-      top: -1px;
-      display: none;
-      padding: 0 6px;
-      background: $grey-8;
-      border: 1px solid #111;
-      color: $text-color;
-      font-size: 80%;
-    }
+  #sharing_code {
+    width: calc(100% - 60px);
+    resize: none;
+    background: $grey-9;
+    padding: 10px;
+    font-size: 14px;
   }
 }
 
