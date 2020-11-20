@@ -29,7 +29,7 @@
         {% endwith %}
     {% endif %}
 
-    {% cache 600 CACHE_KEY %}
+    {% cache 600 actstream_action CACHE_KEY %}
 
     {% if action.verb == 'VERB_UPLOADED_IMAGE' %}
         {% with image=action.action_object user=action.actor %}
