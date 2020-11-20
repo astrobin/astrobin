@@ -26,7 +26,7 @@ def user_language(request):
     }
     if request.user.is_authenticated():
         profile = request.user.userprofile
-        d['user_language'] = profile.language
+        d['user_language'] = profile.language if profile.language else "en"
 
     return d
 
