@@ -27,6 +27,8 @@
     <meta name="googlebot" content="noarchive" />
     <meta name="theme-color" content="#303030" />
 
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap2-toggle.min.css" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700|Noto+Serif:700|Roboto+Mono&subset=latin-ext"
           rel="stylesheet">
     {% stylesheet 'screen' %}
@@ -59,7 +61,9 @@
                             {% endif %}
 
                             {% url 'user_page' image.user.username as the_url %}
-                            {% blocktrans with user=image.user.userprofile %}by <a href="{{ the_url }}">{{ user }}</a>{% endblocktrans %}
+                            {% blocktrans trimmed with user=image.user.userprofile %}
+                                by <a href="{{ the_url }}">{{ user }}</a>
+                            {% endblocktrans %}
                             )
                         </span>
                     </div>
@@ -67,23 +71,40 @@
             </ul>
             <ul class="nav pull-right">
                 {% with request.GET.mod as mod %}
+                    {% if show_advanced_solution and not real %}
+                        <li>
+                            <form class="form-inline">
+                                <label for="enable-solution-overlay" class="hidden-phone hidden-tablet">{% trans "Plate-solution overlay" %}:</label>
+                                <label for="enable-solution-overlay" class="hidden-desktop"><i class="icon-target"></i></label>
+                                <input
+                                        id="enable-solution-overlay"
+                                        data-toggle="toggle"
+                                        type="checkbox"
+                                        {% if not request.user.userprofile.plate_solution_overlay_on_full_disabled %}
+                                            checked
+                                        {% endif %}
+                                />
+                            </form>
+                        </li>
+                    {% endif %}
+
                     <li>
                         {% if real %}
                             <a class="btn btn-primary navbar-btn" href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "real" %}{% endif %}">
                                 <i class="icon-resize-full"></i>
-                                {% trans "Fit to window" %}
+                                <span class="hidden-phone hidden-tablet">{% trans "Fit to window" %}</span>
                             </a>
                         {% elif request.user|can_see_real_resolution:image %}
                             <a class="btn btn-primary navbar-btn" href="{% get_image_url image revision_label 'full' %}{% query_string "mod=mod,real=''" "" %}">
                                 <i class="icon-fullscreen"></i>
-                                {% trans "Full resolution" %}
+                                <span class="hidden-phone hidden-tablet">{% trans "Full resolution" %}</span>
                             </a>
                         {% endif %}
                     </li>
                     <li>
                         <a class="btn navbar-btn" href=" {% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "real" %}{% endif %}">
                             <i class="icon-list-alt"></i>
-                            {% trans "Technical card" %}
+                            <span class="hidden-phone hidden-tablet">{% trans "Technical card" %}</span>
                         </a>
                     </li>
                 {% endwith %}
@@ -121,28 +142,30 @@
     {% endif %}
 </div>
 
-<div id="ra-dec-coordinates" class="full">
-    <div class="coordinates image-coordinates">
-        <abbr title="{% trans 'Abscissa ' %}" class="x"></abbr>
-        <abbr title="{% trans 'Ordinate' %}" class="y"></abbr>
-    </div>
-    <div class="coordinates equatorial-coordinates">
-        <abbr title="{% trans 'Right ascension' %}" class="alpha"></abbr>
-        <abbr title="{% trans 'Declination' %}" class="delta"></abbr>
-    </div>
-    <div class="coordinates ecliptic-coordinates">
-        <abbr title="{% trans 'Ecliptic longitude' %}" class="lambda"></abbr>
-        <abbr title="{% trans 'Ecliptic latitude' %}" class="beta"></abbr>
-    </div>
-    <div class="coordinates galactic-coordinates">
-        <abbr title="{% trans 'Galactic longitude' %}" class="l"></abbr>
-        <abbr title="{% trans 'Galactic latitude' %}" class="b"></abbr>
-    </div>
-    <div class="powered-by-pixinsight">
-        <span>Powered by</span>
-        <a href="https://pixinsight.com/" target="_blank">PixInsight</a>
-    </div>
+{% if show_advanced_solution and not real %}
+    <div id="ra-dec-coordinates" class="full hover-overlay">
+        <div class="coordinates image-coordinates">
+            <abbr title="{% trans 'Abscissa ' %}" class="x"></abbr>
+            <abbr title="{% trans 'Ordinate' %}" class="y"></abbr>
+        </div>
+        <div class="coordinates equatorial-coordinates">
+            <abbr title="{% trans 'Right ascension' %}" class="alpha"></abbr>
+            <abbr title="{% trans 'Declination' %}" class="delta"></abbr>
+        </div>
+        <div class="coordinates ecliptic-coordinates">
+            <abbr title="{% trans 'Ecliptic longitude' %}" class="lambda"></abbr>
+            <abbr title="{% trans 'Ecliptic latitude' %}" class="beta"></abbr>
+        </div>
+        <div class="coordinates galactic-coordinates">
+            <abbr title="{% trans 'Galactic longitude' %}" class="l"></abbr>
+            <abbr title="{% trans 'Galactic latitude' %}" class="b"></abbr>
+        </div>
+        <div class="powered-by-pixinsight">
+            <span>Powered by</span>
+            <a href="https://pixinsight.com/" target="_blank">PixInsight</a>
+        </div>
 </div>
+{% endif %}
 
 <script type="text/javascript" src="{% static 'common/js/jquery-1.8.3.js' %}"></script>
 <script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
@@ -150,12 +173,40 @@
 <script src="{% static 'astrobin_apps_platesolving/js/CoordinateInterpolation.js' %}"></script>
 <script src="{% static 'astrobin_apps_platesolving/js/astrobin_apps_platesolving_mousemove.js' %}"></script>
 <script type="text/javascript" src="{% static 'astrobin/js/astrobin.js' %}"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap2-toggle.min.js"></script>
 {% insert_hit_count_js_variables for image %}
 <script type="text/javascript">
     $(document).ready(function () {
         astrobin_common.init_ajax_csrf_token();
 
-        {% if instance_to_platesolve.solution|is_advanced_success_status %}
+        {% if show_advanced_solution and not real %}
+
+            if ($('#enable-solution-overlay').is(':checked')) {
+                $('.hover-overlay').removeClass('hover-overlay-disabled');
+            } else {
+                $('.hover-overlay').addClass('hover-overlay-disabled');
+            }
+
+            $('#enable-solution-overlay').change(function() {
+                if (this.checked) {
+                    $('.hover-overlay').removeClass('hover-overlay-disabled');
+                } else {
+                    $('.hover-overlay').addClass('hover-overlay-disabled');
+                }
+
+                {% if request.user.is_authenticated %}
+                    $.ajax({
+                        url: '/json-api/user/plate-solution-overlay-on-full/',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            status: this.checked
+                        }),
+                        timeout: 10000,
+                        dataType: 'json',
+                    });
+                {% endif %}
+            });
+
             new AstroBinPlatesolvingMouseMove(
                 '{{ instance_to_platesolve.solution.advanced_ra_matrix }}'.split(',').map(parseFloat),
                 '{{ instance_to_platesolve.solution.advanced_dec_matrix }}'.split(',').map(parseFloat),
