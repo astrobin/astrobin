@@ -341,20 +341,38 @@ body.full {
   box-shadow: 0 0 12px rgba(0, 0, 0, 1);
 }
 
-.navbar .nav > li > a {
-  color: $link-color;
-  padding: 12px 8px;
-  text-shadow: 0 1px 0 darken($link-color, 20%);
+.navbar .nav {
+  > li > a {
+    color: $link-color;
+    padding: 12px 8px;
+    text-shadow: 0 1px 0 darken($link-color, 20%);
 
-  &:hover {
-    color: darken($link-color, 5%);
+    &:hover {
+      color: darken($link-color, 5%);
+    }
   }
-}
 
-.navbar .nav > li.open > a {
-  text-shadow: 0 1px 0 darken($text-color, 20%);
-}
+  > li.open > a {
+    text-shadow: 0 1px 0 darken($text-color, 20%);
+  }
 
-.nav .language-switcher {
-  margin-right: .5rem;
+  .language-switcher {
+    margin-right: .5rem;
+  }
+
+  .form-inline {
+    @media screen and (min-width: 980px) {
+      margin-right: $spacer-large;
+      margin-top: $spacer-small;
+
+      label {
+        margin: $spacer-small $spacer-medium 0 0;
+        vertical-align: middle;
+      }
+    }
+
+    @media screen and (max-width: 979px) {
+      margin-top: -5px;
+    }
+  }
 }

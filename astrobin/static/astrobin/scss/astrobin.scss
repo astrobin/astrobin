@@ -14,6 +14,7 @@
 @import "progress";
 @import "select2";
 @import "tables";
+@import "toggle";
 @import "uniform";
 @import "ui-tooltip";
 @import "ui-datepicker";
@@ -866,7 +867,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       height: 100%;
     }
 
-    &.advanced-plate-solution a {
+    &.advanced-plate-solution:not(.hover-overlay-disabled) a {
       cursor: none;
     }
 
@@ -882,7 +883,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       pointer-events: none;
     }
 
-    &:hover {
+    &:hover:not(.hover-overlay-disabled) {
       img,
       object {
         @include opacity(1);
@@ -964,7 +965,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   z-index: 1;
   font-family: "Roboto Mono", monospace;
 
-  &:hover {
+  &:hover:not(.hover-overlay-disabled) {
     display: block !important;
     cursor: default;
   }

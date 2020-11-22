@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 from django.views import View
 
-from astrobin.models import Image, ImageRevision
+from astrobin.models import ImageRevision
 
 
 class DeleteRevisions(JsonRequestResponseMixin, LoginRequiredMixin, View):

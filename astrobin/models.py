@@ -2197,6 +2197,11 @@ class UserProfile(SafeDeleteModel):
         editable=False,
     )
 
+    plate_solution_overlay_on_full_disabled = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
     # Gear
     telescopes = models.ManyToManyField(Telescope, blank=True, verbose_name=_("Telescopes and lenses"),
                                         related_name='telescopes')
