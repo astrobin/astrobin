@@ -2,6 +2,7 @@
 @import "variables";
 @import "mixins";
 @import "icons";
+@import "animations";
 
 @import "alert";
 @import "badges.scss";
@@ -14,6 +15,7 @@
 @import "progress";
 @import "select2";
 @import "tables";
+@import "toast";
 @import "toggle";
 @import "uniform";
 @import "ui-tooltip";
@@ -1658,6 +1660,30 @@ div.token-input-dropdown {
   width: 95%;
   max-width: 1824px; // HD size
   margin: 0 auto;
+
+  .loading-zoom {
+    z-index: 1;
+    position: absolute;
+    top: $spacer-medium;
+    left: $spacer-medium;
+    font-style: italic;
+    color: $grey-9;
+    text-shadow: 0 1px 0 $white;
+    background: $grey-1;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px $black;
+    opacity: .5;
+
+    -webkit-animation: half-opacity-pulse 3s infinite ease-in-out;
+    -o-animation: half-opacity-pulse 3s infinite ease-in-out;
+    -ms-animation: half-opacity-pulse 3s infinite ease-in-out;
+    -moz-animation: half-opacity-pulse 3s infinite ease-in-out;
+    animation: half-opacity-pulse 3s infinite ease-in-out;
+  }
+
+  .zoomImg.zoomed-in {
+    cursor: move;
+  }
 
   &.real {
     width: auto;
