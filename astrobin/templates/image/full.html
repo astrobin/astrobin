@@ -217,7 +217,7 @@
                                         var contentLength = +jqXHR.getResponseHeader('content-length');
                                         if (contentLength > 0) {
                                             $('.zoom-image-content-length').text(
-                                                '(' + (contentLength / 1000).toFixed(2) + ' MB)');
+                                                '(' + (contentLength / 1024 / 1024).toFixed(2) + ' MB)');
                                         }
                                         resolve(response.url);
                                     },
