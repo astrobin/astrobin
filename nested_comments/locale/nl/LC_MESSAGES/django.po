@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-30 07:28+0000\n"
+"POT-Creation-Date: 2020-11-22 16:13+0000\n"
 "PO-Revision-Date: 2013-10-14 09:52+0100\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.1.6\n"
+
+msgid "Type your comment here..."
+msgstr ""
 
 msgid "Cancel"
 msgstr "Annuleren"
@@ -37,6 +40,14 @@ msgstr "Er zijn nog geen commentaren."
 msgid "(deleted)"
 msgstr "(gewist)"
 
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr ""
+
 msgid "Link"
 msgstr "Link"
 
@@ -52,11 +63,20 @@ msgstr "Bewerken"
 msgid "Reply"
 msgstr "Antwoorden"
 
+msgid "Like"
+msgstr ""
+
+msgid "Unlike"
+msgstr ""
+
 msgid "The comment cannot be empty."
 msgstr "Het commentaarveld mag niet leeg zijn."
 
-msgid "Save"
-msgstr "Bewaren"
+msgid "Submit"
+msgstr ""
+
+#~ msgid "Save"
+#~ msgstr "Bewaren"
 
 #~ msgid "(comment deleted)"
 #~ msgstr "(commentaar gewist)"

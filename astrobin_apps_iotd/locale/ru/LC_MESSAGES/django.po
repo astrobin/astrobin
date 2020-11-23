@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-30 07:33+0000\n"
+"POT-Creation-Date: 2020-11-22 16:21+0000\n"
 "PO-Revision-Date: 2019-02-25 18:41+0000\n"
 "Last-Translator: BG8JQT <BG8JQT@163.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,6 +30,11 @@ msgid "Images in the staging area cannot be submitted."
 msgstr "Изображения в Staging Area не могут быть номинированы."
 
 msgid "This user has chosen to be excluded from competitions."
+msgstr "Этот пользователь хочет быть исключенным из соревнования."
+
+#, fuzzy
+#| msgid "This user has chosen to be excluded from competitions."
+msgid "This user has been banned from competitions."
 msgstr "Этот пользователь хочет быть исключенным из соревнования."
 
 #, python-format

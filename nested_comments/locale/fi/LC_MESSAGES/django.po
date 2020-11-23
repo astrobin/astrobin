@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-30 07:28+0000\n"
+"POT-Creation-Date: 2020-11-22 16:13+0000\n"
 "PO-Revision-Date: 2020-11-01 13:16+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,9 @@ msgstr ""
 "X-Generator: Pootle 2.8\n"
 "X-POOTLE-MTIME: 1604236605.000000\n"
 
+msgid "Type your comment here..."
+msgstr ""
+
 msgid "Cancel"
 msgstr "Peruuta"
 
@@ -29,14 +32,22 @@ msgid ""
 "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
 "register/\">register</a> to leave a comment.</p>"
 msgstr ""
-"Ole hyvä ja <a href=\"/accounts/login\">kirjaudu sisään</a> tai <a href=\""
-"/accounts/register/\">rekisteröidy</a> jättääksesi kommentteja."
+"Ole hyvä ja <a href=\"/accounts/login\">kirjaudu sisään</a> tai <a href=\"/"
+"accounts/register/\">rekisteröidy</a> jättääksesi kommentteja."
 
 msgid "There are no comments yet."
 msgstr "Kommentteja ei ole vielä."
 
 msgid "(deleted)"
 msgstr "(poistettu)"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr ""
 
 msgid "Link"
 msgstr "Linkki"
@@ -53,11 +64,20 @@ msgstr "Muokkaa"
 msgid "Reply"
 msgstr "Vastaa"
 
+msgid "Like"
+msgstr ""
+
+msgid "Unlike"
+msgstr ""
+
 msgid "The comment cannot be empty."
 msgstr "Kommentti ei saa olla tyhjä."
 
-msgid "Save"
-msgstr "Tallenna"
+msgid "Submit"
+msgstr ""
+
+#~ msgid "Save"
+#~ msgstr "Tallenna"
 
 #~ msgid "(comment deleted)"
 #~ msgstr "(kommentti poistettu)"
