@@ -119,7 +119,7 @@
 <div id="full-size-image"{% if real %} class="real"{% endif %}>
     {% if image.w >= 1824 and not request.user_agent.is_touch_capable %}
         <div class="loading-zoom">
-            {% trans "Loading mouse-hover zoom..." %}
+            {% trans "Loading click-and-drag zoom..." %} <span class="zoom-image-content-length"></span>
         </div>
     {% endif %}
 
@@ -210,7 +210,21 @@
                                     resolve(getRealImage());
                                 }, 500);
                             } else {
-                                resolve(response.url);
+                                $.ajax({
+                                    url: response.url,
+                                    type: 'HEAD',
+                                    success: function (responseText, textStatus, jqXHR) {
+                                        var contentLength = +jqXHR.getResponseHeader('content-length');
+                                        if (contentLength > 0) {
+                                            $('.zoom-image-content-length').text(
+                                                '(' + (contentLength / 1000).toFixed(2) + ' MB)');
+                                        }
+                                        resolve(response.url);
+                                    },
+                                    error: function () {
+                                        resolve(response.url);
+                                    }
+                                });
                             }
                         }
                     });
@@ -226,7 +240,7 @@
                             $('.loading-zoom').hide();
                             if (!$.cookie('astrobin_click_and_drag_toast_seen')) {
                                 $.toast({
-                                    text: '{% trans "Click and drag anywhere on the image." %}',
+                                    text: '{% trans "Click-and-drag anywhere on the image." %}',
                                     heading: '{% trans "Want to zoom in?" %}',
                                     showHideTransition: 'slide',
                                     allowToastClose: true,
