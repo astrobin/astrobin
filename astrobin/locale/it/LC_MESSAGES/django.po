@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-22 16:12+0000\n"
-"PO-Revision-Date: 2020-10-30 07:56+0000\n"
+"POT-Creation-Date: 2020-11-23 21:53+0000\n"
+"PO-Revision-Date: 2020-11-23 09:02+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1604044571.000000\n"
+"X-POOTLE-MTIME: 1606122159.000000\n"
 
 msgid "United Kingdom"
 msgstr "Regno Unito"
@@ -4080,14 +4080,8 @@ msgstr "Approva selezione e banna il resto"
 msgid "There are no images in the spam list."
 msgstr "Non ci sono immagini nella lista dello spam."
 
-#, fuzzy
-#| msgid ""
-#| "<a href=\"%(api_keys_url)s\">Your request for an API Key has been "
-#| "approved!</a>"
 msgid "Your request for an API Key has been approved!"
-msgstr ""
-"<a href=\"%(api_keys_url)s\">La tua richiesta per una API Key è stata "
-"approvata!</a>"
+msgstr "La tua richiesta per una API Key è stata approvata!"
 
 #, fuzzy
 #| msgid "Your API Keys"
@@ -4103,16 +4097,13 @@ msgstr "Le tue API Keys"
 msgid "Please read the API documentation %(_0)shere%(_1)s."
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid ""
-#| "You don't have any API Keys. Please read the <a href=\"%(api_docs_url)s"
-#| "\">API documentation</a>."
+#, python-format
 msgid ""
 "You can review your API keys at <a href=\"%(api_keys_url)s\">"
 "%(api_keys_url)s</a>"
 msgstr ""
-"Non hai alcuna API Key. Letti la <a href=\"%(api_docs_url)s\">documentazione "
-"sulle API</a>."
+"Puoi vedere le tue API key a <a href=\"%(api_keys_url)s\">%(api_keys_url)s</"
+"a>"
 
 #, fuzzy
 #| msgid "Thank you for supporting AstroBin!"
@@ -4138,21 +4129,7 @@ msgstr "Cieli sereni"
 msgid "Follow AstroBin"
 msgstr "Segui AstroBin"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "Hi! You have a new notification on AstroBin:\n"
-#| "\n"
-#| "%(message)s\n"
-#| "\n"
-#| "To see all your notifications, please go to %(notices_url)s.\n"
-#| "\n"
-#| "If you don't want to receive emails anymore, edit your preferences by "
-#| "going to http://astrobin.com%(pref_url)s.\n"
-#| "\n"
-#| "PLEASE DO NOT REPLY TO THIS EMAIL\n"
-#| "\n"
-#| "Clear skies,\n"
-#| "AstroBin.\n"
+#, python-format
 msgid ""
 "Hi! You have a new notification on AstroBin:\n"
 "\n"
@@ -4172,12 +4149,12 @@ msgstr ""
 "\n"
 "%(message)s\n"
 "\n"
-"Per vedere tutte le tue notifiche, vai su %(notices_url)s.\n"
+"Per vedere tutte le tue notifiche, vai su %(base_url)s%(notices_url)s.\n"
 "\n"
 "NON RISPONDERE A QUESTA EMAIL\n"
 "\n"
-"Se non vuoi più ricevere email, modifica le opzioni andando su http://"
-"astrobin.com%(pref_url)s.\n"
+"Se non vuoi più ricevere email, modifica le opzioni andando su %(base_url)s"
+"%(pref_url)s.\n"
 "\n"
 "Cieli sereni,\n"
 "AstroBin.\n"
@@ -4460,27 +4437,26 @@ msgstr ""
 "<a href=\"%(user_url)s\">%(user)s</a> ha aggiunto la tua immagine ai suoi "
 "segnalibri: <a href=\"%(url)s\">%(title)s</a>."
 
-#, fuzzy, python-format
-#| msgid "%(user)s has added your image to their bookmarks: %(url)s"
+#, python-format
 msgid "%(user)s added your image \"%(title)s\" to their bookmarks: %(url)s"
-msgstr "%(user)s ha aggiunto la tua immagine ai suoi segnalibri: %(url)s"
+msgstr ""
+"%(user)s ha aggiunto la tua immagine  \"%(title)s\" ai suoi segnalibri: "
+"%(url)s"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "<a href=\"%(url)s\"><strong>%(user)s</strong> has added your image to "
-#| "their bookmarks!</a>"
+#, python-format
 msgid ""
 "<strong>%(user)s</strong> added your image \"%(title)s\" to their bookmarks!"
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> ha aggiunto la tua immagine ai "
-"suoi segnalibri!</a>"
+"<strong>%(user)s</strong> ha aggiunto la tua immagine \"%(title)s\" ai suoi "
+"segnalibri!"
 
-#, fuzzy, python-format
-#| msgid "%(user)s has added your image to their bookmarks: %(url)s"
+#, python-format
 msgid ""
 "\n"
 "    %(user)s added your image \"%(title)s\" to their bookmarks!\n"
-msgstr "%(user)s ha aggiunto la tua immagine ai suoi segnalibri: %(url)s"
+msgstr ""
+"\n"
+"    %(user)s ha aggiunto la tua immagine \"%(title)s\" ai suoi segnalibri!\n"
 
 #, python-format
 msgid ""
@@ -4508,43 +4484,34 @@ msgstr ""
 msgid "%(user)s commented on your image!"
 msgstr "%(user)s ha commentato la tua immagine!"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "<a href=\"%(user_url)s\">%(user)s</a> likes your image: <a href=\"%(url)s"
-#| "\">%(title)s</a>."
+#, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> likes your comment: <a href=\"%(url)s"
 "\">%(comment)s</a>."
 msgstr ""
-"A <a href=\"%(user_url)s\">%(user)s</a> piace la tua immagine: <a href="
-"\"%(url)s\">%(title)s</a>."
+"A <a href=\"%(user_url)s\">%(user)s</a> piace il tuo commento: <a href="
+"\"%(url)s\">%(comment)s</a>."
 
-#, fuzzy, python-format
-#| msgid "%(user)s likes your image: %(url)s"
+#, python-format
 msgid "%(user)s likes your comment: %(url)s %(comment)s"
-msgstr "A %(user)s piace la tua immagine: %(url)s"
+msgstr "A %(user)s piace il tuo commento: %(url)s %(comment)s"
 
-#, fuzzy, python-format
-#| msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+#, python-format
 msgid "<strong>%(user)s</strong> likes your comment!"
-msgstr ""
-"<a href=\"%(url)s\">A <strong>%(user)s</strong> piace la tua immagine!</a>"
+msgstr "A <strong>%(user)s</strong> piace il tuo commento!"
 
 #, fuzzy, python-format
 #| msgid "%(user)s replied to your comment."
 msgid "%(user)s likes your comment!"
 msgstr "%(user)s ha risposto al tuo commento."
 
-#, fuzzy, python-format
-#| msgid ""
-#| "<a href=\"%(user_url)s\">%(user)s</a> likes your image: <a href=\"%(url)s"
-#| "\">%(title)s</a>."
+#, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a comment: <a href="
 "\"%(url)s\">%(url)s</a>."
 msgstr ""
-"A <a href=\"%(user_url)s\">%(user)s</a> piace la tua immagine: <a href="
-"\"%(url)s\">%(title)s</a>."
+"A <a href=\"%(user_url)s\">%(user)s</a> piace il tuo commento: <a href="
+"\"%(url)s\">%(url)s</a>."
 
 #, fuzzy, python-format
 #| msgid "%(user)s likes your image: %(url)s"
@@ -4613,43 +4580,34 @@ msgstr ""
 msgid "You have a new follower!"
 msgstr "Una nuova persona ti segue!"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "<a href=\"%(user_url)s\">%(user)s</a> likes your image: <a href=\"%(url)s"
-#| "\">%(title)s</a>."
+#, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> likes your post on this forum topic: "
 "<a href=\"%(url)s\">%(post)s</a>."
 msgstr ""
-"A <a href=\"%(user_url)s\">%(user)s</a> piace la tua immagine: <a href="
-"\"%(url)s\">%(title)s</a>."
+"A <a href=\"%(user_url)s\">%(user)s</a> piace il tuo post sul forum: <a href="
+"\"%(url)s\">%(post)s</a>."
 
 #, fuzzy, python-format
 #| msgid "%(user)s likes your image: %(url)s"
 msgid "%(user)s likes your post on this forum topic: %(url)s"
 msgstr "A %(user)s piace la tua immagine: %(url)s"
 
-#, fuzzy, python-format
-#| msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+#, python-format
 msgid "<strong>%(user)s</strong> likes your forum post!"
-msgstr ""
-"<a href=\"%(url)s\">A <strong>%(user)s</strong> piace la tua immagine!</a>"
+msgstr "A <strong>%(user)s</strong> piace il tuo post sul forum!"
 
-#, fuzzy, python-format
-#| msgid "%(user)s likes your image: %(url)s"
+#, python-format
 msgid "%(user)s likes your forum post!"
-msgstr "A %(user)s piace la tua immagine: %(url)s"
+msgstr "A %(user)s piace il tuo post sul forum!"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "<a href=\"%(user_url)s\">%(user)s</a> added your image to their "
-#| "bookmarks: <a href=\"%(url)s\">%(title)s</a>."
+#, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a post on this forum "
 "topic: <a href=\"%(url)s\">%(post)s</a>."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user)s</a> ha aggiunto la tua immagine ai suoi "
-"segnalibri: <a href=\"%(url)s\">%(title)s</a>."
+"<a href=\"%(user_url)s\">%(user)s</a> ti ha menzionato in un post su questo "
+"forum: <a href=\"%(url)s\">%(post)s</a>."
 
 #, fuzzy, python-format
 #| msgid ""
@@ -4660,13 +4618,9 @@ msgstr ""
 "%(user)s ha commentato la immagine! Leggi il commento al seguente indirizzo: "
 "%(url)s"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "<strong>%(inviter)s</strong> invited you to join the group: "
-#| "\"%(group_name)s\""
+#, python-format
 msgid "<strong>%(user)s</strong> mentioned you in a forum post!"
-msgstr ""
-"<strong>%(inviter)s</strong> ti ha invitato al gruppo: \"%(group_name)s\""
+msgstr "<strong>%(user)s</strong> ti ha menzionato in un post sul forum!"
 
 #, fuzzy, python-format
 #| msgid "%(user)s commented on your image!"
