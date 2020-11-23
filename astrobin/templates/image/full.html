@@ -117,9 +117,11 @@
 </div>
 
 <div id="full-size-image"{% if real %} class="real"{% endif %}>
-    {% if image.w >= 1824 and not request.user_agent.is_touch_capable %}
+    {% if image.w >= 1824 and not request.user_agent.is_touch_capable and not request.user|is_free %}
         <div class="loading-zoom">
-            {% trans "Loading click-and-drag zoom..." %} <span class="zoom-image-content-length"></span>
+            <i class="icon-zoom-in"></i>
+            {% trans "Loading click-and-drag zoom..." %}
+            <span class="zoom-image-content-length"></span>
         </div>
     {% endif %}
 
@@ -231,7 +233,7 @@
                 });
             }
 
-            {% if image.w >= 1824 and not request.user_agent.is_touch_capable %}
+            {% if image.w >= 1824 and not request.user_agent.is_touch_capable and not request.user|is_free %}
                 getRealImage().then(function(url) {
                     $('#full-size-image').zoom({
                         on: 'grab',

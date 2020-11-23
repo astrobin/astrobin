@@ -1663,22 +1663,32 @@ div.token-input-dropdown {
 
   .loading-zoom {
     z-index: 1;
-    position: absolute;
-    top: $spacer-medium;
-    left: $spacer-medium;
+    position: fixed;
+    bottom: 25px;
+    right: 17px;
     font-style: italic;
     color: $grey-9;
     text-shadow: 0 1px 0 $white;
-    background: $grey-1;
+    background: $grey-2;
     padding: 10px 20px;
     box-shadow: 0 4px 8px $black;
-    opacity: .5;
+    border-radius: 12px;
+    width: 250px;
 
-    -webkit-animation: half-opacity-pulse 3s infinite ease-in-out;
-    -o-animation: half-opacity-pulse 3s infinite ease-in-out;
-    -ms-animation: half-opacity-pulse 3s infinite ease-in-out;
-    -moz-animation: half-opacity-pulse 3s infinite ease-in-out;
-    animation: half-opacity-pulse 3s infinite ease-in-out;
+    -webkit-animation: half-opacity-pulse 1.5s infinite ease-in-out;
+    -o-animation: half-opacity-pulse 1.5s infinite ease-in-out;
+    -ms-animation: half-opacity-pulse 1.5s infinite ease-in-out;
+    -moz-animation: half-opacity-pulse 1.5s infinite ease-in-out;
+    animation: half-opacity-pulse 1.5s infinite ease-in-out;
+
+    i {
+      margin-right: $spacer-medium;
+    }
+
+    .zoom-image-content-length {
+      font-weight: bold;
+      color: $black;
+    }
   }
 
   .zoomImg.zoomed-in {

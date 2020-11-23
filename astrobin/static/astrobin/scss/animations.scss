@@ -1,23 +1,23 @@
 @-webkit-keyframes half-opacity-pulse {
   0% {
-    opacity: .25;
+    opacity: .75;
   }
   50% {
-    opacity: .5;
+    opacity: 1;
   }
   100% {
-    opacity: .25;
+    opacity: .75;
   }
 }
 
 @keyframes half-opacity-pulse {
   0% {
-    opacity: .25;
+    opacity: .75;
   }
   50% {
-    opacity: .5;
+    opacity: 1;
   }
   100% {
-    opacity: .25;
+    opacity: .75;
   }
 }
