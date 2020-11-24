@@ -117,8 +117,8 @@
 </div>
 
 <div id="full-size-image"{% if real %} class="real"{% endif %}>
-    {% if image.w >= 1824 and not request.user_agent.is_touch_capable and not request.user|is_free %}
-        <div class="loading-zoom">
+    {% if request|show_click_and_drag_zoom:image %}
+        <div class="loading-zoom hidden">
             <i class="icon-zoom-in"></i>
             {% trans "Loading click-and-drag zoom..." %}
             <span class="zoom-image-content-length"></span>
@@ -233,13 +233,15 @@
                 });
             }
 
-            {% if image.w >= 1824 and not request.user_agent.is_touch_capable and not request.user|is_free %}
-                getRealImage().then(function(url) {
+            {% if request|show_click_and_drag_zoom:image %}
+                if(!('ontouchend' in document)) {
+                    $('.loading-zoom').removeClass('hidden');
+                    getRealImage().then(function(url) {
                     $('#full-size-image').zoom({
                         on: 'grab',
                         url: url,
                         callback: function () {
-                            $('.loading-zoom').hide();
+                            $('.loading-zoom').addClass('hidden');
                             if (!$.cookie('astrobin_click_and_drag_toast_seen')) {
                                 $.toast({
                                     text: '{% trans "Click-and-drag anywhere on the image." %}',
@@ -266,17 +268,18 @@
                         },
                         onZoomOut: function() {
                             $(this).removeClass('zoomed-in');
-                            $('.hover-overlay').show();
+                            $('.hover-overlay:not(.hover-overlay-disabled)').show();
                         }
                     });
                 });
+                }
             {% endif %}
         }
-
 
         {% if show_advanced_solution and not real %}
             if ($('#enable-solution-overlay').is(':checked')) {
                 $('.hover-overlay').removeClass('hover-overlay-disabled');
+                $('.hover-overlay').show();
             } else {
                 $('.hover-overlay').addClass('hover-overlay-disabled');
             }
@@ -284,6 +287,7 @@
             $('#enable-solution-overlay').change(function() {
                 if (this.checked) {
                     $('.hover-overlay').removeClass('hover-overlay-disabled');
+                    $('.hover-overlay').show();
                 } else {
                     $('.hover-overlay').addClass('hover-overlay-disabled');
                 }

@@ -273,14 +273,14 @@ def show_ads_on_page(context):
             if 'image' in data:
                 return show_ads(request.user) and not is_any_ultimate(data['image'].user)
     elif context.template_name in (
-        'user/profile.html',
-        'user_collections_list.html',
-        'user_collections_detail.html',
-        'user/bookmarks.html',
-        'user/liked.html',
-        'user/following.html',
-        'user/followers.html',
-        'user/plots.html',
+            'user/profile.html',
+            'user_collections_list.html',
+            'user_collections_detail.html',
+            'user/bookmarks.html',
+            'user/liked.html',
+            'user/following.html',
+            'user/followers.html',
+            'user/plots.html',
     ):
         for data in context.dicts:
             if 'requested_user' in data:
@@ -288,9 +288,9 @@ def show_ads_on_page(context):
     elif context.template_name == 'index/root.html':
         return show_ads(request.user) and is_free(request.user)
     elif context.template_name in (
-        'search/search.html',
-        'top_picks.html',
-        'astrobin_apps_iotd/iotd_archive.html'
+            'search/search.html',
+            'top_picks.html',
+            'astrobin_apps_iotd/iotd_archive.html'
     ):
         return show_ads(request.user) and (not request.user.is_authenticated() or is_free(request.user))
 
@@ -634,3 +634,13 @@ def get_actstream_action_template_fragment_cache_key(action, language_code):
         cache_key += ".target-%d" % action.target.pk
 
     return "%s.%s" % (cache_key, language_code)
+
+
+@register.filter
+def show_click_and_drag_zoom(request, image):
+    return (image.w >= 1824 and
+            not 'real' in request.GET and
+            not is_free(request.user) and
+            not (request.user_agent.is_touch_capable or
+                 request.user_agent.is_mobile or
+                 request.user_agent.is_tablet))
