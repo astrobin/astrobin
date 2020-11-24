@@ -17,6 +17,8 @@ describe("Forums", () => {
         cy.get("a").contains("New topic").click();
         cy.url().should("contain", "/topic/add/");
 
+        cy.get('#forum-usage-modal .btn-primary').click();
+
         // Give the editor 10 seconds to appear
         cy.get(".post-form input[name='name']", {timeout: 10000}).should('be.visible');
 
