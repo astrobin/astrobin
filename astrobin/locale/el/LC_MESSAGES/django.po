@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-30 07:27+0000\n"
+"POT-Creation-Date: 2020-11-23 21:53+0000\n"
 "PO-Revision-Date: 2014-01-24 09:40+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1870,7 +1870,7 @@ msgstr ""
 msgid ""
 "Check this box to be excluded from competitions and contests, such as the "
 "Image of the Day, the Top Picks, other custom contests. This will remove you "
-"from the leaderboards and hide your AstroBin Index."
+"from the leaderboards and hide your Image Index and Contribution Index."
 msgstr ""
 
 #, fuzzy
@@ -2176,6 +2176,28 @@ msgstr ""
 msgid "Come back soon!"
 msgstr "Να επιστρέψετε σύντομα!"
 
+#, python-format
+msgid ""
+"<strong>Please note:</strong> AstroBin is a community that values "
+"informative and constructive content. If you write something that other "
+"people find useful and valuable, the likes that you receive will contribute "
+"to your %(_0)sContribution Index (beta)%(_1)s."
+msgstr ""
+
+msgid "New!"
+msgstr "Νέο!"
+
+msgid "Use the <strong>@</strong> sign and start typing to mention any user."
+msgstr ""
+
+msgid ""
+"Use the <strong>#</strong> sign and start typing to insert an image from "
+"your gallery."
+msgstr ""
+
+msgid "All"
+msgstr "Όλα"
+
 msgid "AstroBin is in READ ONLY mode "
 msgstr ""
 
@@ -2259,6 +2281,11 @@ msgid ""
 "                        "
 msgstr ""
 
+#, fuzzy
+#| msgid "Remove data"
+msgid "Remove ads"
+msgstr "Αφαίρεση δεδομένων"
+
 msgid "Request an API key"
 msgstr "Ζητήστε κλειδί ΑΡΙ"
 
@@ -2298,6 +2325,40 @@ msgid ""
 msgstr ""
 "Θα λάβετε απάντηση μέσα σε 24 ώρες. Σας ευχαριστούμε για το ενδιαφέρον σας "
 "να χρησιμοποιήσετε τα ΑΡΙ του AstroBin!"
+
+#, fuzzy
+msgid "Astrophotographers list"
+msgstr "Επεξεργαστία του εξοπλισμού αστροφωτογράφησής σας"
+
+#, python-format
+msgid ""
+"The <strong>Image Index</strong> is system based on likes received on "
+"images, that incentivizes the most active and liked members of the "
+"community. %(_0)sLearn more.%(_1)s"
+msgstr ""
+
+msgid "Search"
+msgstr "Αναζήτηση"
+
+msgid "User"
+msgstr "Χρήστης"
+
+msgid "Followers"
+msgstr "Θαυμαστές"
+
+msgid "Likes"
+msgstr "Προτιμήσεις"
+
+msgid "Total integration"
+msgstr "Συνολική ολοκλήρωση"
+
+#, fuzzy
+#| msgid "Image mode"
+msgid "Image Index"
+msgstr "Εμφάνιση εικόνας"
+
+msgid "There isn't enough data yet, please come back later!"
+msgstr ""
 
 msgid "Avatar"
 msgstr "Avatar"
@@ -2344,15 +2405,9 @@ msgid "About"
 msgstr "Σχετικά"
 
 msgid ""
-"AstroBin is an image hosting website specifically targeted to "
-"astrophotographers: it's the first and the last place where you need to "
-"upload your astrophotography images. Made by an astrophotographer, for the "
-"astrophotographers."
+"AstroBin is an image hosting platform and social network for amateur "
+"astronomers and astrophotographers."
 msgstr ""
-"To AstroBin είναι ένας ιστότοπος αποθήκευσης εικόνων αποκλειστικά "
-"απευθυνόμενο σε αστροφωτογράφους: είναι το πρώτο και το τελευταίο μέρος που "
-"χρειάζεστε για να ανεβάσετε τις αστροφωτογραφίες σας. Φτιαγμένο από έναν "
-"αστροφωτογράφο, για τους αστροφωτογράφους."
 
 msgid "Site links"
 msgstr "Σύνδεσμοι ιστότοπου"
@@ -2379,11 +2434,17 @@ msgstr ""
 msgid "Source code"
 msgstr ""
 
+msgid "Platform updates"
+msgstr ""
+
 msgid "Thanks to"
 msgstr "Ευχαριστίες"
 
 msgid "The localization team"
 msgstr "Η ομάδα προγραμματισμού"
+
+msgid "Third party tools"
+msgstr ""
 
 msgid "Copyright"
 msgstr "Πνευματικά Δικαιώματα"
@@ -2603,6 +2664,11 @@ msgstr "Ο Μεγάλος Τοίχος"
 msgid "Advanced search"
 msgstr "Προχωρημένη αναζήτηση"
 
+#, fuzzy
+#| msgid "Basic information"
+msgid "Top pick nominations"
+msgstr "Βασικές πληροφορίες"
+
 msgid "Top picks"
 msgstr ""
 
@@ -2610,9 +2676,11 @@ msgstr ""
 msgid "Remote astrophotography"
 msgstr "Επεξεργαστία του εξοπλισμού αστροφωτογράφησής σας"
 
-#, fuzzy
-msgid "Trending astrophotographers"
-msgstr "Επεξεργαστία του εξοπλισμού αστροφωτογράφησής σας"
+msgid "Contributors list"
+msgstr ""
+
+msgid "(beta)"
+msgstr ""
 
 msgid "Stats"
 msgstr "Στατιστικά"
@@ -2623,14 +2691,8 @@ msgstr "Βοήθεια"
 msgid "Contact"
 msgstr "Επικοινωνία"
 
-msgid "User"
-msgstr "Χρήστης"
-
-msgid "AstroBin index"
-msgstr "Δείκτης AstroBin"
-
-msgid "Followers"
-msgstr "Θαυμαστές"
+msgid "n/a"
+msgstr ""
 
 msgid "Would you like to start using your real name on AstroBin?"
 msgstr "Θα θέλατε να χρησιμοποιήστε το πραγματικό σας όνομα στο AstroBin;"
@@ -2643,6 +2705,24 @@ msgstr "Είσοδος"
 
 msgid "Register"
 msgstr "Εγγραφή"
+
+#, python-format
+msgid ""
+"The <strong>Image Index</strong> is a system based on likes received on "
+"images, that incentivizes the most active and liked members of the "
+"community. %(_0)sLearn more.%(_1)s"
+msgstr ""
+
+#, fuzzy
+msgid "Contribution Index"
+msgstr "Δείκτης AstroBin"
+
+#, python-format
+msgid ""
+"The <strong>Contribution Index (beta)</strong> is system to reward "
+"informative, constructive, and valuable commentary on AstroBin. %(_0)sLearn "
+"more.%(_1)s"
+msgstr ""
 
 #, fuzzy
 msgid "Subscription plans"
@@ -2753,6 +2833,21 @@ msgstr "Ευχαριστούμε!"
 
 msgid "Thank you! Your message was sent successfully."
 msgstr "Ευχαριστούμε! Το μήνυμα σας στάλθηκε με επιτυχία."
+
+msgid "Comments"
+msgstr "Σχόλια"
+
+#, fuzzy
+msgid "Forum posts"
+msgstr "Forums"
+
+msgid "Written"
+msgstr ""
+
+#, fuzzy
+#| msgid "Recently liked"
+msgid "Received"
+msgstr "Προτιμήθηκε πρόσφατα"
 
 msgid "Cookie consent"
 msgstr ""
@@ -2968,20 +3063,12 @@ msgid "Contains"
 msgstr "Περιέχει"
 
 #, fuzzy
-#| msgid "Remove data"
-msgid "Remove ads"
-msgstr "Αφαίρεση δεδομένων"
-
-#, fuzzy
 #| msgid "Acquired after"
 msgid "Acquired at"
 msgstr "Λήψη μετά από"
 
 msgid "Remove"
 msgstr "Αφαίρεση"
-
-msgid "Comments"
-msgstr "Σχόλια"
 
 #, python-format
 msgid ""
@@ -3295,26 +3382,47 @@ msgstr "Γίνεται φόρτωση"
 msgid "Sorry"
 msgstr "Συγγνώμη"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "We're really sorry, but liking an image requires an AstroBin index of "
+#| "<strong>%(min_index_to_like)s</strong> or greater."
 msgid ""
-"We're really sorry, but liking an image requires an AstroBin index of "
-"<strong>%(min_index_to_like)s</strong> or greater."
+"We're really sorry, but giving likes requires an Image Index of <strong>"
+"%(min_index_to_like)s</strong> or greater."
 msgstr ""
 "Λυπούμαστε, αλλά για να προτιμήσετε μια εικόνα απαιτείται δείκτης του "
 "AstroBin <strong>%(min_index_to_like)s</strong> ή μεγαλύτερος"
 
+#, fuzzy
+#| msgid ""
+#| "Such limitation improves the website as a whole by discouraging people "
+#| "from creating fake accounts to like their own images. Thank you for "
+#| "understanding!"
 msgid ""
 "Such limitation improves the website as a whole by discouraging people from "
-"creating fake accounts to like their own images. Thank you for understanding!"
+"creating fake accounts to like their own content. Thank you for "
+"understanding!"
 msgstr ""
 "Αυτός ο περιορισμός βελτιώνει τον ιστότοπο σαν σύνολο με το να αποτρέπει "
 "άτομα να δημιουργούν ψεύτικους λογαριασμούς για να προτιμήσουν τις εικόνες "
 "τους. Ευχαριστούμε για την κατανόηση!"
 
-#, python-format
-msgid "Currently, your AstroBin index is <strong>%(index)s</strong>."
+#, fuzzy, python-format
+#| msgid "Currently, your AstroBin index is <strong>%(index)s</strong>."
+msgid "Currently, your Image Index is <strong>%(index)s</strong>."
 msgstr ""
 "Μέχρι στιγμής, ο δείκτης σας του AstroBin είναι <strong>%(index)s</strong>."
+
+#, python-format
+msgid ""
+"To learn more about the Image Index, please visit %(_0)sthe FAQ page%(_1)s. "
+"Thanks!"
+msgstr ""
+
+#, fuzzy
+#| msgid "You can't nominate the same image more than once."
+msgid "You cannot remove a like that you gave more than one hour ago."
+msgstr "Δεν μπορείτε να προτείνετε την ίδια εικόνα πάνω από μια φορά."
 
 msgid "Delete image and all its revisions?"
 msgstr "Διαγραφή της εικόνας και όλων των εκδόσεων της;"
@@ -3434,11 +3542,11 @@ msgstr "Πλήρης"
 msgid "Real"
 msgstr "Πραγματικό όνομα"
 
-msgid "Copy this"
-msgstr "Αντιγραφή αυτού"
-
 msgid "Image mode"
 msgstr "Εμφάνιση εικόνας"
+
+msgid "Copy this"
+msgstr "Αντιγραφή αυτού"
 
 #, fuzzy
 #| msgid ""
@@ -3775,6 +3883,11 @@ msgstr "Πλήρης ανάλυση"
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "από τον/την <a href=\"%(the_url)s\">%(user)s</a>"
 
+#, fuzzy
+#| msgid "Start plate-solving"
+msgid "Plate-solution overlay"
+msgstr "Εκκίνηση ανάλυσης"
+
 msgid "Fit to window"
 msgstr "Περιορισμός στο παράθυρο"
 
@@ -3827,9 +3940,6 @@ msgstr "Εγγραφείτε τώρα!"
 
 msgid "Integration"
 msgstr "Ολοκλήρωση"
-
-msgid "Likes"
-msgstr "Προτιμήσεις"
 
 msgid "Date joined"
 msgstr "Ημερομηνία εγγραφής"
@@ -3892,25 +4002,11 @@ msgstr "Τι είναι αυτός ο ιστότοπος;"
 msgid "Gallery"
 msgstr "Έκθεση εικόνων"
 
-msgid "Blog"
-msgstr "Blog"
-
-#, fuzzy
-#| msgid "Terms of Service"
-msgid "Terms of servic"
-msgstr "Όροι χρήσης"
-
-msgid ""
-"AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
-"Reserved. The images on this websites are copyright of their respective "
-"owners."
-msgstr ""
-"Το AstroBin είναι Πνευματικό Δικαίωμα &copy; του Salvatore Iovene 2010-2012, "
-"Όλα τα δικαιώματα προστατευμένα. Οι εικόνες σε αυτό τον ιστότοπο είναι "
-"πνευματικά δικαιώματα των αντίστοιχων ιδιοκτητών τους."
-
 msgid "Compose message"
 msgstr "Νέο μήνυμα"
+
+msgid "Type your message here..."
+msgstr ""
 
 msgid "Type in a search term"
 msgstr "Εισάγετε έναν όρο αναζήτησης"
@@ -3937,15 +4033,15 @@ msgstr "Κανένα μήνυμα"
 msgid "Back"
 msgstr ""
 
-msgid "Delete conversation"
-msgstr "Διαγραφή συζήτησης"
-
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
 msgstr "Μία συζήτηση μεταξύ <a href=\"%(sender_url)s\">εσάς</a> και"
 
 msgid "Reply"
 msgstr "Απάντηση"
+
+msgid "Delete conversation"
+msgstr "Διαγραφή συζήτησης"
 
 msgid "Sending..."
 msgstr "Γίνεται αποστολή..."
@@ -3979,76 +4075,46 @@ msgstr ""
 msgid "There are no images in the spam list."
 msgstr "Δεν υπάρχουν ακόμη σχόλια."
 
-#, fuzzy, python-format
+#, fuzzy
 #| msgid ""
-#| "Your request for an API Key has been approved!\n"
-#| "\n"
-#| "    Your key: %(key)s\n"
-#| "    Your secret: %(secret)s\n"
-#| "\n"
-#| "    Please read the API documentation at %(api_docs_url)s\n"
-#| "    \n"
-#| "    You can review your API keys at %(api_keys_url)s\n"
-#| "    \n"
-#| "    Thank you for using AstroBin's APIs!"
-msgid ""
-"Your request for an API Key has been approved!\n"
-"\n"
-"    Your key: %(key)s\n"
-"    Your secret: %(secret)s\n"
-"\n"
-"    Please read the API documentation at <a href=\"%(api_docs_url)s\">"
-"%(api_docs_url)s</a>\n"
-"\n"
-"    You can review your API keys at <a href=\"%(api_keys_url)s\">"
-"%(api_keys_url)s</a>\n"
-"\n"
-"    Thank you for using AstroBin's APIs!"
-msgstr ""
-"Η αιτηση σας για Κλειδί API έχει εγγριθεί!\n"
-"\n"
-"    Το κλειδί σας: %(key)s\n"
-"    Ο μυστικός σας κωδικός: %(secret)s\n"
-"\n"
-"    Παρακαλούμε διαβάστε το κείμενο για το API στο %(api_docs_url)s\n"
-"    \n"
-"    Μπορείτε να δείτε τα API κλείδια σας στο %(api_keys_url)s\n"
-"    \n"
-"    Σας ευχαριστούμε που χρησιμοποιείτε τα API του AstroBin!"
-
-#, python-format
-msgid ""
-"Your request for an API Key has been approved!\n"
-"\n"
-"    Your key: %(key)s\n"
-"    Your secret: %(secret)s\n"
-"\n"
-"    Please read the API documentation at %(api_docs_url)s\n"
-"    \n"
-"    You can review your API keys at %(api_keys_url)s\n"
-"    \n"
-"    Thank you for using AstroBin's APIs!"
-msgstr ""
-"Η αιτηση σας για Κλειδί API έχει εγγριθεί!\n"
-"\n"
-"    Το κλειδί σας: %(key)s\n"
-"    Ο μυστικός σας κωδικός: %(secret)s\n"
-"\n"
-"    Παρακαλούμε διαβάστε το κείμενο για το API στο %(api_docs_url)s\n"
-"    \n"
-"    Μπορείτε να δείτε τα API κλείδια σας στο %(api_keys_url)s\n"
-"    \n"
-"    Σας ευχαριστούμε που χρησιμοποιείτε τα API του AstroBin!"
-
-#, python-format
-msgid ""
-"<a href=\"%(api_keys_url)s\">Your request for an API Key has been approved!</"
-"a>"
+#| "<a href=\"%(api_keys_url)s\">Your request for an API Key has been "
+#| "approved!</a>"
+msgid "Your request for an API Key has been approved!"
 msgstr ""
 "<a href=\"%(api_keys_url)s\">Η αίτηση σας για Κλειδί API έχει εγκριθεί!</a>"
 
-msgid "API Key request approved"
-msgstr "Έγκριση Κλειδιού ΑΡΙ"
+#, fuzzy
+#| msgid "Your API Keys"
+msgid "Your API key"
+msgstr "Τα API Κλειδιά σας"
+
+#, fuzzy
+#| msgid "Your API Keys"
+msgid "Your API secret"
+msgstr "Τα API Κλειδιά σας"
+
+#, python-format
+msgid "Please read the API documentation %(_0)shere%(_1)s."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "You don't have any API Keys. Please read the <a href=\"%(api_docs_url)s"
+#| "\">API documentation</a>."
+msgid ""
+"You can review your API keys at <a href=\"%(api_keys_url)s\">"
+"%(api_keys_url)s</a>"
+msgstr ""
+"Δεν έχετε Κλειδιά API. Παρακαλώ διαβάστε το <a href=\"%(api_docs_url)s\"> "
+"κείμενο του API</a>."
+
+#, fuzzy
+msgid "Thank you for using AstroBin's APIs!"
+msgstr "Οι ακόλουθες εταιρίες υποστηρίζουν το AstroBin."
+
+#, python-format
+msgid "You can review your API keys at %(api_keys_url)s."
+msgstr ""
 
 #, fuzzy
 #| msgid "You have a new follower"
@@ -4080,10 +4146,10 @@ msgid ""
 "\n"
 "%(message)s\n"
 "\n"
-"To see all your notifications, please go to %(notices_url)s.\n"
+"To see all your notifications, please go to %(base_url)s%(notices_url)s.\n"
 "\n"
 "If you don't want to receive emails anymore, edit your preferences by going "
-"to http://astrobin.com%(pref_url)s.\n"
+"to %(base_url)s%(pref_url)s.\n"
 "\n"
 "PLEASE DO NOT REPLY TO THIS EMAIL\n"
 "\n"
@@ -4356,17 +4422,27 @@ msgstr ""
 "Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> έβαλε την εικόνα σας στα "
 "αγαπημένα του/της!</a>"
 
-#, python-format
-msgid "%(user)s has added your image to their bookmarks: %(url)s"
+#, fuzzy, python-format
+#| msgid "%(user)s has added your image to their bookmarks: %(url)s"
+msgid "%(user)s added your image \"%(title)s\" to their bookmarks: %(url)s"
 msgstr "Ο/Η %(user)s έβαλε την εικόνα σας στα αγαπημένα του/της: %(url)s"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "<a href=\"%(url)s\"><strong>%(user)s</strong> has added your image to "
+#| "their bookmarks!</a>"
 msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> has added your image to their "
-"bookmarks!</a>"
+"<strong>%(user)s</strong> added your image \"%(title)s\" to their bookmarks!"
 msgstr ""
 "Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> έβαλε την εικόνα σας στα "
 "αγαπημένα του/της!</a>"
+
+#, fuzzy, python-format
+#| msgid "%(user)s has added your image to their bookmarks: %(url)s"
+msgid ""
+"\n"
+"    %(user)s added your image \"%(title)s\" to their bookmarks!\n"
+msgstr "Ο/Η %(user)s έβαλε την εικόνα σας στα αγαπημένα του/της: %(url)s"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -4394,6 +4470,60 @@ msgstr ""
 #, python-format
 msgid "%(user)s commented on your image!"
 msgstr "Ο/Η %(user)s σχολίασε την εικόνα σας!"
+
+#, fuzzy, python-format
+#| msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> likes your comment: <a href=\"%(url)s"
+"\">%(comment)s</a>."
+msgstr ""
+"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> προτιμάει την εικόνα σας!</"
+"a>"
+
+#, fuzzy, python-format
+#| msgid "%(user)s likes your image: %(url)s"
+msgid "%(user)s likes your comment: %(url)s %(comment)s"
+msgstr "Ο/Η %(user)s προτιμάει την εικόνα σας: %(url)s"
+
+#, fuzzy, python-format
+#| msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+msgid "<strong>%(user)s</strong> likes your comment!"
+msgstr ""
+"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> προτιμάει την εικόνα σας!</"
+"a>"
+
+#, fuzzy, python-format
+#| msgid "%(user)s replied to your comment."
+msgid "%(user)s likes your comment!"
+msgstr "Ο/Η %(user)s απάντησε στο σχόλιο σας."
+
+#, fuzzy, python-format
+#| msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a comment: <a href="
+"\"%(url)s\">%(url)s</a>."
+msgstr ""
+"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> προτιμάει την εικόνα σας!</"
+"a>"
+
+#, fuzzy, python-format
+#| msgid "%(user)s likes your image: %(url)s"
+msgid "%(user)s mentioned you in a comment: %(url)s"
+msgstr "Ο/Η %(user)s προτιμάει την εικόνα σας: %(url)s"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published "
+#| "a new image</a>"
+msgid "<strong>%(user)s</strong> mentioned you in a comment!"
+msgstr ""
+"Ο/Η <a href=\"%(object_url)s\"><strong>%(originator)s</strong> ανέβασε μια "
+"νέα εικόνα</a>"
+
+#, fuzzy, python-format
+#| msgid "%(user)s replied to your comment."
+msgid "%(user)s mentioned you in a comment!"
+msgstr "Ο/Η %(user)s απάντησε στο σχόλιο σας."
 
 #, fuzzy, python-format
 #| msgid ""
@@ -4450,6 +4580,62 @@ msgstr ""
 
 msgid "You have a new follower!"
 msgstr "Έχετε νέο άτομο που σας ακολουθεί!"
+
+#, fuzzy, python-format
+#| msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> likes your post on this forum topic: "
+"<a href=\"%(url)s\">%(post)s</a>."
+msgstr ""
+"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> προτιμάει την εικόνα σας!</"
+"a>"
+
+#, fuzzy, python-format
+#| msgid "%(user)s likes your image: %(url)s"
+msgid "%(user)s likes your post on this forum topic: %(url)s"
+msgstr "Ο/Η %(user)s προτιμάει την εικόνα σας: %(url)s"
+
+#, fuzzy, python-format
+#| msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+msgid "<strong>%(user)s</strong> likes your forum post!"
+msgstr ""
+"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> προτιμάει την εικόνα σας!</"
+"a>"
+
+#, fuzzy, python-format
+#| msgid "%(user)s likes your image: %(url)s"
+msgid "%(user)s likes your forum post!"
+msgstr "Ο/Η %(user)s προτιμάει την εικόνα σας: %(url)s"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "<a href=\"%(url)s\"><strong>%(user)s</strong> has added your image to "
+#| "their bookmarks!</a>"
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a post on this forum "
+"topic: <a href=\"%(url)s\">%(post)s</a>."
+msgstr ""
+"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> έβαλε την εικόνα σας στα "
+"αγαπημένα του/της!</a>"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "%(user)s commented on your image! Check it out at the following url: "
+#| "%(url)s"
+msgid "%(user)s mentioned you in a post on this forum topic: %(url)s"
+msgstr ""
+"Ο/Η %(user)s σχολίασε την εικόνα σας! Δείτε το στο ακόλουθο url: %(url)s"
+
+#, fuzzy, python-format
+msgid "<strong>%(user)s</strong> mentioned you in a forum post!"
+msgstr ""
+"Ο/Η <strong>%(username)s</strong> έχει ζητήσει να δει τα αρχεία TIFF ή FITS "
+"της εικόνας σας."
+
+#, fuzzy, python-format
+#| msgid "%(user)s commented on your image!"
+msgid "%(user)s mentioned you in a forum post!"
+msgstr "Ο/Η %(user)s σχολίασε την εικόνα σας!"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -4893,6 +5079,27 @@ msgstr ""
 msgid "Please note: this post will be published only after moderation."
 msgstr ""
 
+msgid "Type your forum post here..."
+msgstr ""
+
+msgid "Please first exit 'Source' mode to quote a message."
+msgstr ""
+
+msgid "*** Type your reply here ***"
+msgstr ""
+
+#, fuzzy
+#| msgid "likes"
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr "αρέσει"
+
+#, fuzzy
+#| msgid "likes"
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr "αρέσει"
+
 msgid ""
 "Warning: this post awaits moderation and is not yet visible to everybody"
 msgstr ""
@@ -5076,9 +5283,6 @@ msgid ""
 msgstr ""
 "Με την εγγραφή σας στο AstroBin, συμφωνείτε με τους <a href=\"%(tos_url)s"
 "\">όρους χρήσης</a>."
-
-msgid "Search"
-msgstr "Αναζήτηση"
 
 msgid "Sort"
 msgstr "Ταξινόμηση ανά:"
@@ -5414,9 +5618,6 @@ msgctxt "At no cost"
 msgid "Free"
 msgstr ""
 
-msgid "n/a"
-msgstr ""
-
 msgid "Daily"
 msgstr "Ημερησίως"
 
@@ -5553,29 +5754,8 @@ msgstr ""
 "Έχετε μια απορία που δεν καλύπτετε εδώ; Παρακαλώ <a href=\"/contact/"
 "\">επικοινωνήστε μαζί μας</a>!"
 
-msgid "All"
-msgstr "Όλα"
-
-msgid "A collection of great images that were recently handpicked."
-msgstr ""
-
 msgid "This list is currently empty."
 msgstr ""
-
-#, fuzzy
-msgid "Last 6 months"
-msgstr "Ανατολικά ή Δυτικά"
-
-#, fuzzy
-msgid "Last year"
-msgstr "Τελευταίος αποστολέας"
-
-#, fuzzy
-msgid "All time"
-msgstr "Ώρα ανεβάσματος"
-
-msgid "Total integration"
-msgstr "Συνολική ολοκλήρωση"
 
 #, fuzzy
 msgid "Image upload"
@@ -6045,6 +6225,12 @@ msgstr "Μέγεθος εικόνας"
 msgid "Thanks for your support!"
 msgstr "Ευχαριστούμε για την πρόταση σας"
 
+msgid "This data is currently not available and will be recalculated shortly."
+msgstr ""
+
+msgid "Please check again in a bit, thanks!"
+msgstr ""
+
 msgid "Public Area"
 msgstr "Περιοχή Προβολής"
 
@@ -6325,8 +6511,13 @@ msgstr ""
 msgid "Image of the Day"
 msgstr "Εικόνα της ημέρας"
 
-msgid "Top Pick"
+msgid "Top pick"
 msgstr ""
+
+#, fuzzy
+#| msgid "Basic information"
+msgid "Top pick nomination"
+msgstr "Βασικές πληροφορίες"
 
 #, fuzzy
 #| msgid "Guider/Planetary"
@@ -6505,13 +6696,6 @@ msgid "You have reached your image count limit. Please upgrade!"
 msgstr ""
 
 msgid ""
-"You uploaded an Indexed PNG file. AstroBin will need to lower the color "
-"count to 256 in order to work with it."
-msgstr ""
-"Ανεβάσατε ένα αρχείο Indexed PNG. Το AstroBin θα χρειαστεί να χαμηλώσει την "
-"αναλύση χρώματος στα 256 για να μπορέσει να το επεξεργαστεί."
-
-msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
@@ -6554,9 +6738,12 @@ msgstr "ώρες"
 msgid "Average integration time"
 msgstr "Μέσος χρόνος ολοκλήρωσης"
 
-#, fuzzy
-msgid "Forum posts"
-msgstr "Forums"
+msgid ""
+"You uploaded an Indexed PNG file. AstroBin will need to lower the color "
+"count to 256 in order to work with it."
+msgstr ""
+"Ανεβάσατε ένα αρχείο Indexed PNG. Το AstroBin θα χρειαστεί να χαμηλώσει την "
+"αναλύση χρώματος στα 256 για να μπορέσει να το επεξεργαστεί."
 
 msgid "Image uploaded. Thank you!"
 msgstr "Η εικόνα φορτώθηκε. Ευχαριστούμε!"
@@ -6627,6 +6814,112 @@ msgid ""
 "AstroBin is preparing your data for download. Please check this page again "
 "in a while: the more images you have, the more time it will take."
 msgstr ""
+
+#~ msgid ""
+#~ "AstroBin is an image hosting website specifically targeted to "
+#~ "astrophotographers: it's the first and the last place where you need to "
+#~ "upload your astrophotography images. Made by an astrophotographer, for "
+#~ "the astrophotographers."
+#~ msgstr ""
+#~ "To AstroBin είναι ένας ιστότοπος αποθήκευσης εικόνων αποκλειστικά "
+#~ "απευθυνόμενο σε αστροφωτογράφους: είναι το πρώτο και το τελευταίο μέρος "
+#~ "που χρειάζεστε για να ανεβάσετε τις αστροφωτογραφίες σας. Φτιαγμένο από "
+#~ "έναν αστροφωτογράφο, για τους αστροφωτογράφους."
+
+#~ msgid "AstroBin index"
+#~ msgstr "Δείκτης AstroBin"
+
+#~ msgid "Blog"
+#~ msgstr "Blog"
+
+#, fuzzy
+#~| msgid "Terms of Service"
+#~ msgid "Terms of servic"
+#~ msgstr "Όροι χρήσης"
+
+#~ msgid ""
+#~ "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
+#~ "Reserved. The images on this websites are copyright of their respective "
+#~ "owners."
+#~ msgstr ""
+#~ "Το AstroBin είναι Πνευματικό Δικαίωμα &copy; του Salvatore Iovene "
+#~ "2010-2012, Όλα τα δικαιώματα προστατευμένα. Οι εικόνες σε αυτό τον "
+#~ "ιστότοπο είναι πνευματικά δικαιώματα των αντίστοιχων ιδιοκτητών τους."
+
+#, fuzzy
+#~| msgid ""
+#~| "Your request for an API Key has been approved!\n"
+#~| "\n"
+#~| "    Your key: %(key)s\n"
+#~| "    Your secret: %(secret)s\n"
+#~| "\n"
+#~| "    Please read the API documentation at %(api_docs_url)s\n"
+#~| "    \n"
+#~| "    You can review your API keys at %(api_keys_url)s\n"
+#~| "    \n"
+#~| "    Thank you for using AstroBin's APIs!"
+#~ msgid ""
+#~ "Your request for an API Key has been approved!\n"
+#~ "\n"
+#~ "    Your key: %(key)s\n"
+#~ "    Your secret: %(secret)s\n"
+#~ "\n"
+#~ "    Please read the API documentation at <a href=\"%(api_docs_url)s\">"
+#~ "%(api_docs_url)s</a>\n"
+#~ "\n"
+#~ "    You can review your API keys at <a href=\"%(api_keys_url)s\">"
+#~ "%(api_keys_url)s</a>\n"
+#~ "\n"
+#~ "    Thank you for using AstroBin's APIs!"
+#~ msgstr ""
+#~ "Η αιτηση σας για Κλειδί API έχει εγγριθεί!\n"
+#~ "\n"
+#~ "    Το κλειδί σας: %(key)s\n"
+#~ "    Ο μυστικός σας κωδικός: %(secret)s\n"
+#~ "\n"
+#~ "    Παρακαλούμε διαβάστε το κείμενο για το API στο %(api_docs_url)s\n"
+#~ "    \n"
+#~ "    Μπορείτε να δείτε τα API κλείδια σας στο %(api_keys_url)s\n"
+#~ "    \n"
+#~ "    Σας ευχαριστούμε που χρησιμοποιείτε τα API του AstroBin!"
+
+#~ msgid ""
+#~ "Your request for an API Key has been approved!\n"
+#~ "\n"
+#~ "    Your key: %(key)s\n"
+#~ "    Your secret: %(secret)s\n"
+#~ "\n"
+#~ "    Please read the API documentation at %(api_docs_url)s\n"
+#~ "    \n"
+#~ "    You can review your API keys at %(api_keys_url)s\n"
+#~ "    \n"
+#~ "    Thank you for using AstroBin's APIs!"
+#~ msgstr ""
+#~ "Η αιτηση σας για Κλειδί API έχει εγγριθεί!\n"
+#~ "\n"
+#~ "    Το κλειδί σας: %(key)s\n"
+#~ "    Ο μυστικός σας κωδικός: %(secret)s\n"
+#~ "\n"
+#~ "    Παρακαλούμε διαβάστε το κείμενο για το API στο %(api_docs_url)s\n"
+#~ "    \n"
+#~ "    Μπορείτε να δείτε τα API κλείδια σας στο %(api_keys_url)s\n"
+#~ "    \n"
+#~ "    Σας ευχαριστούμε που χρησιμοποιείτε τα API του AstroBin!"
+
+#~ msgid "API Key request approved"
+#~ msgstr "Έγκριση Κλειδιού ΑΡΙ"
+
+#, fuzzy
+#~ msgid "Last 6 months"
+#~ msgstr "Ανατολικά ή Δυτικά"
+
+#, fuzzy
+#~ msgid "Last year"
+#~ msgstr "Τελευταίος αποστολέας"
+
+#, fuzzy
+#~ msgid "All time"
+#~ msgstr "Ώρα ανεβάσματος"
 
 #~ msgid "Merge"
 #~ msgstr "Συγχώνευση"
@@ -8395,9 +8688,6 @@ msgstr ""
 #~ msgid "Excerpt"
 #~ msgstr "Απόσπασμα"
 
-#~ msgid "New!"
-#~ msgstr "Νέο!"
-
 #~ msgid "or return to messages"
 #~ msgstr "ή επιστροφή στα μηνύματα"
 
@@ -8409,9 +8699,6 @@ msgstr ""
 
 #~ msgid "Recently uploaded"
 #~ msgstr "Πρόσφατα ανεβασμένα"
-
-#~ msgid "Recently liked"
-#~ msgstr "Προτιμήθηκε πρόσφατα"
 
 #~ msgid "Recently bookmarked"
 #~ msgstr "Πρόσφατα στα αγαπημένα "
@@ -8884,10 +9171,6 @@ msgstr ""
 #~ msgid "Messier marathon"
 #~ msgstr "Μαραθώνιος Μessier"
 
-#, fuzzy
-#~ msgid "AstroBin Index"
-#~ msgstr "Δείκτης AstroBin"
-
 #~ msgid "Favorites"
 #~ msgstr "Αγαπημένα"
 
@@ -9064,9 +9347,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Αυτή η εικόνα περιέχει πολλαπλά αντικείμενα Messier. Παρακαλώ επιλέξτε το "
 #~ "ένα από αυτά που προτείνετε για την εικόνα."
-
-#~ msgid "You can't nominate the same image more than once."
-#~ msgstr "Δεν μπορείτε να προτείνετε την ίδια εικόνα πάνω από μια φορά."
 
 #~ msgid "Your nomination has been recorded, thank you!"
 #~ msgstr "Η πρόταση σας έχει καταγραφεί, ευχαριστούμε!"

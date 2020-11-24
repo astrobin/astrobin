@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-30 07:27+0000\n"
-"PO-Revision-Date: 2019-04-12 02:32+0000\n"
-"Last-Translator: BG8JQT <BG8JQT@163.com>\n"
+"POT-Creation-Date: 2020-11-23 21:53+0000\n"
+"PO-Revision-Date: 2020-11-20 08:52+0000\n"
+"Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1555036360.000000\n"
+"X-POOTLE-MTIME: 1605862331.000000\n"
 
 msgid "United Kingdom"
 msgstr "英国"
@@ -665,7 +665,7 @@ msgid "Syrian Arab Republic"
 msgstr "シリア"
 
 msgid "Taiwan"
-msgstr ""
+msgstr "台湾"
 
 msgid "Tajikistan"
 msgstr "タジキスタン"
@@ -766,6 +766,9 @@ msgid ""
 "tags. PS: Images that lack this tag will appear at the bottom of the "
 "collection."
 msgstr ""
+"その値でこのコレクションを並べ替えるためにタグを選択してください。ここにオプ"
+"ションが表示されない場合、このコレクションにはキー/値のタグがないためです。"
+"PS: このタグがない画像は、コレクションの一番下に表示されます。"
 
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "yyyy-mm-ddの形式を使ってください"
@@ -799,40 +802,43 @@ msgstr ""
 "ます。"
 
 msgid "Groups"
-msgstr ""
+msgstr "グループ"
 
-#, fuzzy
-#| msgid "How is the Image of the Day selected?"
 msgid "Submit this image to the selected groups."
-msgstr "Image of the Dayはどのように選ばれますか？"
+msgstr "この画像を選択したグループに登録します。"
 
-#, fuzzy
 msgid "Mouse hover image"
-msgstr "機材画像"
+msgstr "マウスオーバー用画像"
 
 msgid ""
 "Choose what will be displayed when somebody hovers the mouse over this "
 "image. Please note: only revisions with the same width and height of your "
 "original image can be considered."
 msgstr ""
+"この画像にマウスオーバーしたときに表示されるものを選択してください。注意：元"
+"の画像と同じ幅と高さのリビジョンのみが考慮されます。"
 
 msgid "Key/value tags"
-msgstr ""
+msgstr "Key/valueタグ"
 
 msgid ""
 "Provide a list of unique key/value pairs to tag this image with. Use the '=' "
 "symbol between key and value, and provide one pair per line. These tags can "
 "be used to sort images by arbitrary properties."
 msgstr ""
+"この画像にタグを付けるためのユニークなキーと値のペアのリストを提供してくださ"
+"い。キーと値の間には '=' 記号を用い、1 行に 1 組ずつ指定してください。これら"
+"のタグは、任意のプロパティによる画像の並べ替えに使用できます。"
 
 msgid "This field is required."
 msgstr "この項目は必須です。"
 
 msgid "Unable to parse."
-msgstr ""
+msgstr "解析できません。"
 
 msgid "Please select a remote source if this image was acquired remotely."
 msgstr ""
+"この画像がリモート撮影で取得された場合は、リモート元を選択してください。"
 
 msgid "Imaging telescopes or lenses"
 msgstr "望遠鏡／レンズ"
@@ -866,11 +872,11 @@ msgid ""
 "revision. Pleasenote: only revisions with the same width and height as this "
 "one can be considered."
 msgstr ""
+"このリビジョンにマウスオーバーしたときに表示されるものを選択してください。注"
+"意: このリビジョンと同じ幅と高さのリビジョンのみが考慮されます。"
 
-#, fuzzy
-#| msgid "Delete original image"
 msgid "Original image"
-msgstr "元画像を削除"
+msgstr "元画像"
 
 msgid "Opacity"
 msgstr "不透明度"
@@ -937,10 +943,8 @@ msgstr "あなたが個人サイトを持っているのであれば、そのURL
 msgid "Website"
 msgstr "ウェブサイト"
 
-#, fuzzy
-#| msgid "Mark as good"
 msgid "Mark as final"
-msgstr "goodとしてマーク"
+msgstr "最終版としてマーク"
 
 msgid "Please enter a value between 1 and 5."
 msgstr "1〜5の間の値を入力してください。"
@@ -975,12 +979,11 @@ msgstr "がブックマークしました"
 msgid "likes"
 msgstr "がLikeしました"
 
-#, fuzzy
 msgid "created a new public group"
-msgstr "新しい公開データ領域が作られた"
+msgstr "新しい公開領域が作成された"
 
 msgid "joined the public group"
-msgstr ""
+msgstr "公開グループに追加する"
 
 msgid "Remove from bookmarks"
 msgstr "ブックマークから削除"
@@ -1021,15 +1024,11 @@ msgstr "帰属-継承 Creative Commons"
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "帰属-改変禁止 Creative Commons"
 
-#, fuzzy
-#| msgid "English"
 msgid "English (US)"
-msgstr "英語"
+msgstr "英語 (US)"
 
-#, fuzzy
-#| msgid "English"
 msgid "English (GB)"
-msgstr "英語"
+msgstr "英語 (イギリス)"
 
 msgid "Italian"
 msgstr "イタリア語"
@@ -1058,10 +1057,8 @@ msgstr "アルバニア語"
 msgid "Polish"
 msgstr "ポーランド語"
 
-#, fuzzy
-#| msgid "Brazilian Portuguese"
 msgid "Portuguese"
-msgstr "ブラジル・ポルトガル語"
+msgstr "ポルトガル語"
 
 msgid "Greek"
 msgstr "ギリシア語"
@@ -1130,14 +1127,13 @@ msgid "Other"
 msgstr "その他"
 
 msgid "Small"
-msgstr ""
+msgstr "小"
 
 msgid "Medium"
-msgstr ""
+msgstr "中"
 
-#, fuzzy
 msgid "Large"
-msgstr "画像サイズ"
+msgstr "大"
 
 msgid "Center"
 msgstr "中央"
@@ -1257,10 +1253,8 @@ msgstr "カタディオプトリック式: シュミットカゼクレイン"
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgstr "カタディオプトリック式: ACF シュミットカゼクレイン"
 
-#, fuzzy
-#| msgid "Catadioptric: ACF Schmidt-Cassegrain"
 msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
-msgstr "カタディオプトリック式: ACF シュミットカゼクレイン"
+msgstr "カタディオプトリック式: RASA"
 
 msgid "Camera lens"
 msgstr "カメラレンズ"
@@ -1388,27 +1382,23 @@ msgstr "(nm)"
 msgid "nm"
 msgstr "nm"
 
-#, fuzzy
-#| msgid "Duration"
 msgid "Traditional"
-msgstr "露出時間"
+msgstr "伝統的"
 
 msgid "Electronically-Assisted Astronomy (EAA)"
-msgstr ""
+msgstr "Electronically-Assisted Astronomy (EAA)"
 
 msgid "Lucky imaging"
-msgstr ""
+msgstr "ラッキーイメージング"
 
 msgid "Drawing/Sketch"
-msgstr ""
+msgstr "お絵かき／スケッチ"
 
 msgid "Other/Unknown"
-msgstr ""
+msgstr "それ以外のもの／誰も知らないもの"
 
-#, fuzzy
-#| msgid "Deep sky object"
 msgid "Deep sky object or field"
-msgstr "遠距離天体"
+msgstr "遠距離天体もしくは星野"
 
 msgid "Solar system body or event"
 msgstr "太陽系内天体もしくはイベント"
@@ -1420,62 +1410,52 @@ msgid "Star trails"
 msgstr "星の軌跡"
 
 msgid "Northern lights"
-msgstr ""
+msgstr "オーロラ"
 
 msgid "Gear"
 msgstr "機材"
 
-#, fuzzy
-#| msgid "Acquired"
 msgid "Self acquired"
-msgstr "画像の取り込み済み"
+msgstr "自分で獲得"
 
 msgid "Backyard"
-msgstr ""
+msgstr "裏庭"
 
-#, fuzzy
-#| msgid "Gallery"
 msgid "Traveller"
-msgstr "ギャラリー"
+msgstr "遠征"
 
 msgid "Own remote observatory"
-msgstr ""
+msgstr "自己所有のリモート観測所"
 
-#, fuzzy
-#| msgid "Uploaded"
 msgid "Downloaded"
-msgstr "アップロード済み"
+msgstr "ダウンロード済"
 
 msgid "Amateur hosting facility"
-msgstr ""
+msgstr "アマチュアによるホスティング設備"
 
-#, fuzzy
-#| msgid "Public data pools"
 msgid "Public amateur data"
-msgstr "公開データ領域"
+msgstr "公開しているアマチュアデータ"
 
 msgid "Professional, scientific grade data"
-msgstr ""
+msgstr "プロフェッショナルもしくは科学的グレードのデータ"
 
 msgid "Mix of multiple sources"
-msgstr ""
+msgstr "いくつかのソースのミックス"
 
-#, fuzzy
-#| msgid "Image of the day"
 msgid "None of the above"
-msgstr "Image of the day"
+msgstr "上記以外"
 
 msgid "Unknown"
-msgstr ""
+msgstr "不明"
 
 msgid "Non-commercial independent facility"
-msgstr ""
+msgstr "非商用の独立した施設"
 
 msgid "Nothing"
-msgstr ""
+msgstr "なし"
 
 msgid "Plate-solution annotations (if available)"
-msgstr ""
+msgstr "PlateSolveの方法の注釈（可能なら）"
 
 msgid "Inverted monochrome"
 msgstr "モノクロに変換"
@@ -1483,28 +1463,25 @@ msgstr "モノクロに変換"
 msgid "Title"
 msgstr "タイトル"
 
-#, fuzzy
-#| msgid "Acquisition time"
 msgid "Acquisition type"
-msgstr "撮影時刻"
+msgstr "取得方法"
 
 msgid "Subject type"
 msgstr "題材のタイプ"
 
 msgid "Data source"
-msgstr ""
+msgstr "データソース"
 
 msgid "Where does the data for this image come from?"
-msgstr ""
+msgstr "この画像のデータはどこからきましたか？"
 
-#, fuzzy
-#| msgid "Remove data"
 msgid "Remote data source"
-msgstr "データの削除"
+msgstr "リモート撮影のデータソース"
 
 msgid ""
 "Which remote hosting facility did you use to acquire data for this image?"
 msgstr ""
+"この画像のデータ取得には、どのリモートホスティング施設を使用しましたか？"
 
 msgid "Main solar system subject"
 msgstr "メインの太陽系の題材"
@@ -1529,10 +1506,8 @@ msgstr "説明"
 msgid "HTML tags are allowed."
 msgstr "HTMLタグは許可されています。"
 
-#, fuzzy
-#| msgid "Upload complete!"
 msgid "Uncompressed source (max 100 MB)"
-msgstr "アップロード完了!"
+msgstr "非圧縮のソース（最大100MB）"
 
 msgid ""
 "You can store the final processed image that came out of your favorite image "
@@ -1540,24 +1515,25 @@ msgid ""
 "archival purposes. This file is stored privately and only you will have "
 "access to it."
 msgstr ""
+"お気に入りの画像編集ソフト（PixInsightやAdobe Photoshopなど）で加工した画像を"
+"AstroBinに保存しておくことができます。このファイルはプライベートに保存され、"
+"あなただけがアクセスできるようになっています。"
 
-#, fuzzy
-#| msgid "Thumbnail"
 msgid "Gallery thumbnail"
-msgstr "サムネイル"
+msgstr "サムネイルギャラリー"
 
 msgid "Select an area of the image to be used as thumbnail in your gallery."
-msgstr ""
+msgstr "あなたのギャラリーのサムネイルとして使用する画像を選択してください。"
 
-#, fuzzy
-#| msgid "Star trails"
 msgid "Sharpen thumbnails"
-msgstr "星の軌跡"
+msgstr "サムネイル をシャープ化"
 
 msgid ""
 "If selected, AstroBin will use a resizing algorithm that slightly sharpens "
 "the image's thumbnails. This setting applies to all revisions."
 msgstr ""
+"この設定を選択すると、AstroBinはリサイズアルゴリズムを使用して、画像のサムネ"
+"イルをわずかにシャープにします。この設定はすべてのリビジョンに適用されます。"
 
 msgid "Apply watermark to image"
 msgstr "著作権表記を画像に適用"
@@ -1569,7 +1545,7 @@ msgid "Size"
 msgstr "容量"
 
 msgid "The final font size will depend on how long your watermark is."
-msgstr ""
+msgstr "最終的なフォントサイズは、透かしの長さに依存します。"
 
 msgid "License"
 msgstr "ライセンス"
@@ -1577,34 +1553,29 @@ msgstr "ライセンス"
 msgid "Allow comments"
 msgstr "コメントを許可"
 
-#, fuzzy
-#| msgid "Notifications"
 msgid "Skip notifications"
-msgstr "通知"
+msgstr "通知をスキップ"
 
 msgid "Do not notify your followers about this image upload."
-msgstr ""
+msgstr "この画像のアップロードをフォロワーに通知しないでください。"
 
 msgid "(no title)"
 msgstr "(無題)"
 
 msgid "Mix of multiple source"
-msgstr ""
+msgstr "複数ソースのミックス"
 
 msgid "Do not notify your followers about this revision."
-msgstr ""
+msgstr "このリビジョンについてフォロアーに通知しないでください。"
 
 msgid "Images"
 msgstr "画像"
 
-#, fuzzy
 msgid "Cover image"
-msgstr "機材画像"
+msgstr "カバー画像"
 
-#, fuzzy
-#| msgid "Other images"
 msgid "Order by image tag"
-msgstr "他の画像"
+msgstr "画像のタグでソートする"
 
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "yyyy-mm-ddの形式を使用してください。"
@@ -1642,8 +1613,6 @@ msgstr "9 - 都心の夜空 (白)"
 msgid "Synthetic channel"
 msgstr "合成チャネル"
 
-#, fuzzy
-#| msgid "Filter"
 msgid "Filter"
 msgstr "フィルター"
 
@@ -1761,21 +1730,19 @@ msgstr "第3子午線の経度。"
 msgid "Seeing"
 msgstr "シーイング"
 
-#, fuzzy
-#| msgid "Your estimation of the seeing, on a scale from 1 to 5."
 msgid ""
 "Your estimation of the seeing, on a scale from 1 to 5. Larger is better."
-msgstr "あなたが見積もったシーイング（1〜5の間の整数を記入）。"
+msgstr ""
+"あなたが見積もったシーイング（1〜5の間の整数を記入し、大きいほど良いシーイン"
+"グ）。"
 
 msgid "Transparency"
 msgstr "透明度"
 
-#, fuzzy
-#| msgid "Your estimation of the transparency, on a scale from 1 to 10."
 msgid ""
 "Your estimation of the transparency, on a scale from 1 to 10. Larger is "
 "better."
-msgstr "あなたが見積もった透明度（1〜10の間の整数を記入）。"
+msgstr "あなたが見積もった透明度（1〜10の間の整数を記入、大きいほど良い）。"
 
 msgid "Time"
 msgstr "時刻"
@@ -1795,21 +1762,20 @@ msgstr "TIFF/FITS"
 msgid "Higher resolution"
 msgstr "高解像度"
 
-#, fuzzy
 msgid "I am no longer active in astrophotography"
-msgstr "あなたの天体写真機材を編集"
+msgstr "天体写真の活動を休止中"
 
 msgid "This website did not meet my expectations"
-msgstr ""
+msgstr "このサイトは私の期待に応えてくれませんでした"
 
 msgid "Something on this website doesn't work for me"
-msgstr ""
+msgstr "このウェブサイトの何かが上手く動作しません"
 
 msgid "The paid subscriptions are too expensive"
-msgstr ""
+msgstr "有料会員は高すぎた"
 
 msgid "I prefer not to say"
-msgstr ""
+msgstr "言わずもがな"
 
 msgid "Real name"
 msgstr "本名"
@@ -1841,46 +1807,48 @@ msgstr "あなたについて"
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "あなた自身について何かかいてください。HTMLタグが利用できます。"
 
-#, fuzzy
 msgid "Delete reason"
-msgstr "会話を削除"
+msgstr "理由を削除"
 
 msgid "Why are you deleting your AstroBin account?"
-msgstr ""
+msgstr "なぜ、あなたのアカウントを削除するのでしょうか？"
 
 msgid ""
 "Please tell us why you are deleting your account (minimum 30 characters). "
 "Thanks!"
-msgstr ""
+msgstr "アカウントを削除する理由を教えてください（最低30文字）。"
 
 msgid "I want to be excluded from competitions"
-msgstr ""
+msgstr "私は競争から抜けたかった"
 
+#, fuzzy
+#| msgid ""
+#| "Check this box to be excluded from competitions and contests, such as the "
+#| "Image of the Day, the Top Picks, other custom contests. This will remove "
+#| "you from the leaderboards and hide your AstroBin Index."
 msgid ""
 "Check this box to be excluded from competitions and contests, such as the "
 "Image of the Day, the Top Picks, other custom contests. This will remove you "
-"from the leaderboards and hide your AstroBin Index."
+"from the leaderboards and hide your Image Index and Contribution Index."
 msgstr ""
+"このボックスにチェックを入れると、Image of the Day、Top Picks、その他のカスタ"
+"ムコンテストなどのコンテストから除外されます。これにより、あなたはリーダー"
+"ボードから除外され、AstroBin Indexが非表示になります。"
 
-#, fuzzy
 msgid "Global stream"
-msgstr "全体の新着一覧"
+msgstr "全体での新着"
 
-#, fuzzy
 msgid "Personal stream"
-msgstr "パーソナル"
+msgstr "個人的な新着一覧"
 
-#, fuzzy
 msgid "All uploaded images"
-msgstr "が新しい画像をアップロードしました"
+msgstr "全てのアップロード画像"
 
-#, fuzzy
 msgid "All images uploaded by people you follow"
-msgstr "フォローしたユーザーの最新画像"
+msgstr "あなたがフォローしている人がアップロードした全画像"
 
-#, fuzzy
 msgid "Default front page view"
-msgstr "デフォルトのフロントページを変更しました。"
+msgstr "デフォルトのフロントページ表示"
 
 msgid "Upload time"
 msgstr "アップロード時間"
@@ -1891,21 +1859,23 @@ msgstr "撮影時刻"
 msgid "Year"
 msgstr "年"
 
-#, fuzzy
 msgid "Collections"
-msgstr "場所"
+msgstr "コレクション"
 
 msgid "Default gallery sorting"
-msgstr ""
+msgstr "デフォルトのギャラリーのソート方法"
 
 msgid "See your own Staging Area images on your gallery"
-msgstr ""
+msgstr "あなたのギャラリーでステージング領域の画像を見る"
 
 msgid ""
 "Select if you want your Staging Area images to appear on your own view of "
 "your gallery when you are logged. If you choose 'No', your Staging Area "
 "images can be located via the 'View' menu entry on your gallery page."
 msgstr ""
+"ログインしているときに、ステージングエリアの画像をギャラリーの自分のビューに"
+"表示するかどうかを選択してください。いいえ」を選択した場合、ステージングエリ"
+"アの画像は、ギャラリーページの「表示」メニューから表示することができます。"
 
 msgid "Default license"
 msgstr "デフォルトのライセンス"
@@ -1915,43 +1885,51 @@ msgid ""
 msgstr "全ての新しい画像に、選択したライセンスを自動的に適用します。"
 
 msgid "I accept to receive rare important communications via email"
-msgstr ""
+msgstr "重要なお知らせをメールで受け取ることを承諾します。"
 
 msgid ""
 "This is highly recommended. These are very rare and contain information that "
 "you probably want to have."
 msgstr ""
+"これは非常におすすめです。これらは非常にレアで、あなたが得たい情報が含まれて"
+"います。"
 
 msgid "I accept to receive occasional newsletters via email"
-msgstr ""
+msgstr "私は、メールでのニュースレターの受信を承諾します。"
 
 msgid ""
 "Newsletters do not have a fixed schedule, but in any case they are not sent "
 "out more often than once per month."
 msgstr ""
+"ニュースレターはスケジュールが決まっているわけではありませんが、いずれにして"
+"も月に1回以上の頻度で発信しているわけではありません。"
 
 msgid ""
 "I accept to receive occasional marketing and commercial material via email"
 msgstr ""
+"私は、メールでマーケティングや商業的な資料を時折、受け取ることを承諾します。"
 
 msgid ""
 "These emails may contain offers, commercial news, and promotions from "
 "AstroBin or its partners."
 msgstr ""
+"これらのメールには、AstroBinまたはそのパートナーからのオファー、コマーシャル"
+"ニュース、プロモーションが含まれている場合があります。"
 
 msgid "Allow astronomy ads from our partners"
-msgstr ""
+msgstr "我々のパートナーからの天文関係の広告を許可する"
 
 msgid ""
 "It would mean a lot if you chose to allow astronomy relevant, non intrusive "
 "ads on this website. AstroBin is a small business run by a single person, "
 "and this kind of support would be amazing. Thank you in advance!"
 msgstr ""
+"このウェブサイトで、天文に関連した押し付けがましくない広告を許可していただい"
+"た場合、それはたくさんのことを意味しています。AstroBinは一人で運営している小"
+"さなビジネスなので、このような広告費の支援は素晴らしいことだと思っています。"
 
-#, fuzzy
-#| msgid "Total integration"
 msgid "Allow retailer integration"
-msgstr "総露出時間"
+msgstr "小売店との連携を許可する"
 
 msgid ""
 "AstroBin may associate with retailers of astronomy and astrophotography "
@@ -1959,6 +1937,9 @@ msgid ""
 "partners. The integration is subtle and non intrusive, and it would help a "
 "lot if you didn't disable it. Thank you in advance!"
 msgstr ""
+"AstroBinは、パートナースポンサーへのリンクで機材の情報を強化するために、天体"
+"関係の小売店と提携することがあります。連携は特に押し付けがましくないので、無"
+"効にしないと非常に助かります。"
 
 msgid "Language"
 msgstr "言語"
@@ -1982,7 +1963,7 @@ msgid "Automatically subscribe to topics that you answer"
 msgstr "問い合わせの回答を自動承認"
 
 msgid "Receive e-mails from subscribed forum topics"
-msgstr ""
+msgstr "登録したフォーラムのトピックからのメールを受信する"
 
 msgid "A descriptive name, e.g. 'Home observatory' or 'Mount Whitney'."
 msgstr "別名（ベランダ撮影や光が丘など）。"
@@ -2033,26 +2014,20 @@ msgstr ""
 "あなたのアプリケーションの目的と、そのAPIをどのように使おうとしているのかを説"
 "明してください。"
 
-#, fuzzy
-#| msgid "Sending..."
 msgid "Pending"
-msgstr "送信中..."
+msgstr "保留中"
 
 msgid "Processing"
-msgstr ""
+msgstr "処理中"
 
-#, fuzzy
-#| msgid "Read all"
 msgid "Ready"
-msgstr "すべてを読む"
+msgstr "準備完了"
 
-#, fuzzy
-#| msgid "Error!"
 msgid "Error"
-msgstr "エラー!"
+msgstr "エラー"
 
 msgid "Expired"
-msgstr ""
+msgstr "期限切れ"
 
 msgid "Message sent"
 msgstr "メッセージを送信"
@@ -2135,9 +2110,8 @@ msgstr ""
 "例外が発生しました！我々は技術的な詳細をメールで受け取る事によって、それを出"
 "来るだけ早く解決するでしょう。不便をおかけして申し訳けございませんでした!"
 
-#, fuzzy
 msgid "Go back to the home page."
-msgstr "ホームページに戻る。"
+msgstr "ホームに戻る。"
 
 msgid "AstroBin in temporarily unavailable"
 msgstr "AstroBinは一時的に利用できません"
@@ -2156,8 +2130,30 @@ msgstr ""
 msgid "Come back soon!"
 msgstr "少々お待ちください"
 
-msgid "AstroBin is in READ ONLY mode "
+#, python-format
+msgid ""
+"<strong>Please note:</strong> AstroBin is a community that values "
+"informative and constructive content. If you write something that other "
+"people find useful and valuable, the likes that you receive will contribute "
+"to your %(_0)sContribution Index (beta)%(_1)s."
 msgstr ""
+
+msgid "New!"
+msgstr "新着!"
+
+msgid "Use the <strong>@</strong> sign and start typing to mention any user."
+msgstr ""
+
+msgid ""
+"Use the <strong>#</strong> sign and start typing to insert an image from "
+"your gallery."
+msgstr ""
+
+msgid "All"
+msgstr "すべて"
+
+msgid "AstroBin is in READ ONLY mode "
+msgstr "AstroBinはリードオンリーモードです"
 
 #, python-format
 msgid ""
@@ -2291,15 +2287,12 @@ msgstr ""
 msgid "After you submit a request, you will receive a reply within 24 hours."
 msgstr "リクエストを送信後、あなたは24時間以内に返事を受け取れる予定です。"
 
-#, fuzzy
-#| msgid ""
-#| "Please make sure you have read the section about APIs in the <a href="
-#| "\"%(tos_url)s\">Terms of Service</a>."
 msgid ""
 "Please make sure you have read the section about APIs in the <a href="
 "\"https://welcome.astrobin.com/terms-of-service\">Terms of Service</a>."
 msgstr ""
-"<a href=\"%(tos_url)s\">利用規約</a>のAPIについての記載を必ず読んでください。"
+"<a href=\"https://welcome.astrobin.com/terms-of-service\">サービス利用規約</"
+"a>のAPIについての記載を必ず読んでください。"
 
 msgid "Submit"
 msgstr "送信"
@@ -2313,6 +2306,41 @@ msgid ""
 msgstr ""
 "あなたは24時間以内に返事を受け取れる予定です。AstroBinのAPIに興味をもっても"
 "らってありがとう！"
+
+#, fuzzy
+#| msgid "Trending astrophotographers"
+msgid "Astrophotographers list"
+msgstr "トレンドの天体写真家"
+
+#, python-format
+msgid ""
+"The <strong>Image Index</strong> is system based on likes received on "
+"images, that incentivizes the most active and liked members of the "
+"community. %(_0)sLearn more.%(_1)s"
+msgstr ""
+
+msgid "Search"
+msgstr "検索"
+
+msgid "User"
+msgstr "ユーザー"
+
+msgid "Followers"
+msgstr "フォロワー"
+
+msgid "Likes"
+msgstr "Likes"
+
+msgid "Total integration"
+msgstr "総露出時間"
+
+#, fuzzy
+#| msgid "Image mode"
+msgid "Image Index"
+msgstr "画像モード"
+
+msgid "There isn't enough data yet, please come back later!"
+msgstr ""
 
 msgid "Avatar"
 msgstr "アバター"
@@ -2340,7 +2368,7 @@ msgid "Upload"
 msgstr "Upload"
 
 msgid "Please select the avatars that you would like to delete."
-msgstr ""
+msgstr "削除したいアバターを選択してください。"
 
 msgid "Hey!"
 msgstr "はじめまして!"
@@ -2358,14 +2386,9 @@ msgid "About"
 msgstr "AstroBinについて"
 
 msgid ""
-"AstroBin is an image hosting website specifically targeted to "
-"astrophotographers: it's the first and the last place where you need to "
-"upload your astrophotography images. Made by an astrophotographer, for the "
-"astrophotographers."
+"AstroBin is an image hosting platform and social network for amateur "
+"astronomers and astrophotographers."
 msgstr ""
-"AstroBinは天体写真家を特にターゲットにした画像ホスティングサイトです。あなた"
-"にとって、天体画像をアップロードする最初で最後の場所になるになるでしょう。天"
-"体写真家のために、天体写真家によって作られています。"
 
 msgid "Site links"
 msgstr "サイトリンク"
@@ -2386,16 +2409,22 @@ msgid "Guidelines"
 msgstr "ガイドライン"
 
 msgid "Sponsors"
-msgstr ""
+msgstr "スポンサー"
 
 msgid "Source code"
 msgstr "ソースコード"
+
+msgid "Platform updates"
+msgstr ""
 
 msgid "Thanks to"
 msgstr "Thanks to"
 
 msgid "The localization team"
 msgstr "ローカライズチーム"
+
+msgid "Third party tools"
+msgstr ""
 
 msgid "Copyright"
 msgstr "Copyright"
@@ -2410,29 +2439,34 @@ msgid ""
 "Please review your preferences about receiving important communications, "
 "newsletters, and marketing emails from AstroBin."
 msgstr ""
+"AstroBinからの重要なお知らせ、ニュースレター、マーケティングメールの受信に関"
+"する設定をご確認ください。"
 
 msgid "Preferences"
 msgstr "設定"
 
 msgid "Don't show again"
-msgstr ""
+msgstr "次回から表示しない"
 
 msgid ""
 "AstroBin is unable to deliver your emails, looks like your address is "
 "incorrect."
 msgstr ""
+"AstroBinからメールを配信できませんでした。メールアドレスが間違っているようで"
+"す。"
 
-#, fuzzy
 msgid "Change your e-mail"
-msgstr "パスワードを変更"
+msgstr "メールアドレスを変更"
 
 msgid ""
 "AstroBin is not delivering you emails because you have marked some of them "
 "as spam."
 msgstr ""
+"AstroBinでは、あなたのメールアドレスがスパムメールとしてマークされてしまった"
+"ために、あなたのメールが配信されません。"
 
 msgid "Contact us to resolve the issue"
-msgstr ""
+msgstr "問題解決のためのお問い合わせ"
 
 #, python-format
 msgid ""
@@ -2442,11 +2476,13 @@ msgid ""
 "images will be confirmed automatically starting from <strong>%(date)s</"
 "strong>."
 msgstr ""
+"<strong>グッドニュースです。</strong>AstroBinでは、2020年2月のデータ消失事故"
+"で消失した画像の一部を自動で復旧しました。復旧の確認のため、ご確認ください。"
+"もし、何もしなければ、<strong>%(date)s</strong>から、自動的に画像が復旧されま"
+"す。"
 
-#, fuzzy
-#| msgid "Recent images"
 msgid "Review recovered images"
-msgstr "最新画像"
+msgstr "復旧した画像をみる"
 
 msgid "Cancel"
 msgstr "キャンセル"
@@ -2466,51 +2502,42 @@ msgstr "上記のオプションから言語を選択してください。"
 msgid "Notifications"
 msgstr "通知"
 
-#, fuzzy
 msgid "View all"
-msgstr "ページを表示"
+msgstr "すべて表示"
 
-#, fuzzy
 msgid "Settings"
 msgstr "設定"
 
-#, fuzzy
 msgid "Mark all as read"
-msgstr "goodとしてマーク"
+msgstr "すべて既読としてマーク"
 
-#, fuzzy
-#| msgid "AstroBin index"
 msgid "AstroBin is in READ ONLY mode"
-msgstr "AstroBinインデックス"
+msgstr "現在AstroBinはリードオンリーモード中です"
 
-#, fuzzy
-#| msgid "Sorry"
 msgid "Sorry :-("
 msgstr "申し訳ありません"
 
-#, fuzzy
-#| msgid "Accessories"
 msgid "Access denied"
-msgstr "アクセサリ"
+msgstr "アクセスが拒否されました"
 
 msgid "This feature is only offered at higher membership levels."
-msgstr ""
+msgstr "この機能は、より高い会員レベルでのみ提供されます。"
 
 msgid ""
 "Would you be interested in upgrading? AstroBin is a very small business and "
 "your support would mean a lot!"
 msgstr ""
+"アップグレードに興味はありませんか？AstroBinは非常に小さなビジネスなので、あ"
+"なたのサポートは非常に意味があります。"
 
 msgid "No, thanks"
 msgstr "結構です"
 
 msgid "Tell me more!"
-msgstr ""
+msgstr "もっと教えてください！"
 
-#, fuzzy
-#| msgid "Are you sure?"
 msgid "Are you really sure?"
-msgstr "本当にいいですか?"
+msgstr "実行しますか？"
 
 msgid ""
 "We know, we're all used to the fact that ads on the Internet are\n"
@@ -2566,12 +2593,17 @@ msgid ""
 "If this user has been harassing you, and you shadow-ban them, all their "
 "activities on your content will be invisible to everyone except themselves."
 msgstr ""
+"このユーザーがあなたに嫌がらせをしていて、シャドウBAN禁止にした場合、あなたの"
+"コンテンツ上での彼らの活動はすべて、自分以外の誰からも見えなくなります。"
 
 msgid ""
 "They will not know that they have been shadow-banned, and the goal is that "
 "eventually they will get bored while having caused no harm, since nobody saw "
 "what they posted."
 msgstr ""
+"彼らは自分たちがシャドウBANされていることを知らないだろうし、自分たちが投稿し"
+"たものを誰も見ていないので、何の害も与えていないのに結局は飽きてしまうのが目"
+"的だ。"
 
 msgid "Continue"
 msgstr "続行"
@@ -2580,6 +2612,8 @@ msgid ""
 "You will remove your shadow-ban on this user, and their comments, messages, "
 "etc, will appear again on your content."
 msgstr ""
+"このユーザーのシャドウBANを解除すると、そのユーザーのコメントやメッセージなど"
+"があなたのコンテンツに再び表示されるようになります。"
 
 msgid "Quick search"
 msgstr "クイック検索"
@@ -2587,26 +2621,23 @@ msgstr "クイック検索"
 msgid "Moderate"
 msgstr ""
 
-#, fuzzy
 msgid "Image queue"
-msgstr "画像サイズ"
+msgstr "画像のキュー"
 
-#, fuzzy
 msgid "Spam list"
-msgstr "いくつかの画像"
+msgstr "スパムリスト"
 
 msgid "Image of the day"
 msgstr "Image of the day"
 
 msgid "Submission queue"
-msgstr ""
+msgstr "サブミットのキュー"
 
-#, fuzzy
 msgid "Review queue"
-msgstr "レビュー"
+msgstr "レビューのキュー"
 
 msgid "Judgement queue"
-msgstr ""
+msgstr "評価のキュー"
 
 msgid "Latest topics"
 msgstr "最後のトピックス"
@@ -2623,16 +2654,22 @@ msgstr "ビックウォール"
 msgid "Advanced search"
 msgstr "詳細検索"
 
+#, fuzzy
+#| msgid "Top picks"
+msgid "Top pick nominations"
+msgstr "Top picks"
+
 msgid "Top picks"
+msgstr "Top picks"
+
+msgid "Remote astrophotography"
+msgstr "リモート撮影による天体写真"
+
+msgid "Contributors list"
 msgstr ""
 
-#, fuzzy
-msgid "Remote astrophotography"
-msgstr "あなたの天体写真機材を編集"
-
-#, fuzzy
-msgid "Trending astrophotographers"
-msgstr "あなたの天体写真機材を編集"
+msgid "(beta)"
+msgstr ""
 
 msgid "Stats"
 msgstr "ステータス"
@@ -2643,14 +2680,8 @@ msgstr "ヘルプ"
 msgid "Contact"
 msgstr "連絡先"
 
-msgid "User"
-msgstr "ユーザー"
-
-msgid "AstroBin index"
-msgstr "AstroBinインデックス"
-
-msgid "Followers"
-msgstr "フォロワー"
+msgid "n/a"
+msgstr "利用不可能"
 
 msgid "Would you like to start using your real name on AstroBin?"
 msgstr "あなたの本当の名前を使ってAstroBinを始めようとしてますか?"
@@ -2664,16 +2695,33 @@ msgstr "ログイン"
 msgid "Register"
 msgstr "新規登録"
 
+#, python-format
+msgid ""
+"The <strong>Image Index</strong> is a system based on likes received on "
+"images, that incentivizes the most active and liked members of the "
+"community. %(_0)sLearn more.%(_1)s"
+msgstr ""
+
+#, fuzzy
+#| msgid "Instructions and examples"
+msgid "Contribution Index"
+msgstr "手順と例"
+
+#, python-format
+msgid ""
+"The <strong>Contribution Index (beta)</strong> is system to reward "
+"informative, constructive, and valuable commentary on AstroBin. %(_0)sLearn "
+"more.%(_1)s"
+msgstr ""
+
 msgid "Subscription plans"
 msgstr "登録プラン"
 
 msgid "My places"
 msgstr "自分の場所"
 
-#, fuzzy
-#| msgid "Gallery"
 msgid "Public Gallery"
-msgstr "ギャラリー"
+msgstr "公開ギャラリー"
 
 msgid "Staging Area"
 msgstr "ステージングエリア"
@@ -2696,36 +2744,36 @@ msgstr "設定"
 msgid "Logout"
 msgstr "ログアウト"
 
-#, fuzzy
 msgid "E-mail change confirmation"
-msgstr "通知"
+msgstr "メールアドレス変更の確認"
 
 msgid "Confirm deletion of e-mail change request"
-msgstr ""
+msgstr "メール変更依頼の削除確認"
 
 msgid ""
 "Please confirm that you want to delete the following e-mail change request."
-msgstr ""
+msgstr "以下のメール変更依頼を削除するかどうか確認してください。"
 
-#, fuzzy
-#| msgid "New Zealand"
 msgid "New e-mail"
-msgstr "ニュージーランド"
+msgstr "新しいメール"
 
 msgid "Confirm"
-msgstr ""
+msgstr "確認"
 
 msgid "E-mail change request"
-msgstr ""
+msgstr "メールアドレスの変更リクエスト"
 
 msgid ""
 "You already have a pending request to change your e-mail address. You should "
 "have received a confirmation e-mail with instructions about how to confirm "
 "this request. If not, please delete it and start a new one."
 msgstr ""
+"あなたのメールアドレスの変更依頼は保留状態です。確認方法を記載した確認メール"
+"が届いているはずです。もし届いていない場合は、一度削除してから新しいメールア"
+"ドレスを作成してください。"
 
 msgid "Delete and start new request"
-msgstr ""
+msgstr "削除して新規リクエストを開始"
 
 #, python-format
 msgid ""
@@ -2756,7 +2804,7 @@ msgstr ""
 "AstroBinチーム"
 
 msgid "Custom e-mail change request on AstroBin"
-msgstr ""
+msgstr "AstroBinのメールアドレス変更リクエスト依頼"
 
 msgid ""
 "Please contact us if you need any assistance, or want to report a problem, "
@@ -2774,6 +2822,11 @@ msgid ""
 "navigating to a user's gallery or an image, and selecting the \"User\" menu "
 "and then \"Send private message\"."
 msgstr ""
+"このフォームを使用することで、AstroBinのスタッフに連絡を取ることができます。"
+"ユーザーに連絡を取りたい場合は、プライベートメッセージ機能をご利用ください。"
+"ユーザーのギャラリーまたは画像に移動し、\"ユーザー\"メニューから \"プライベー"
+"トメッセージを送る \"を選択すると、プライベートメッセージを送信することができ"
+"ます。"
 
 msgid "Send"
 msgstr "送信"
@@ -2784,8 +2837,22 @@ msgstr "ありがとう!"
 msgid "Thank you! Your message was sent successfully."
 msgstr "ありがとう! あなたのメッセージの送信が成功しました。"
 
-msgid "Cookie consent"
+msgid "Comments"
+msgstr "コメント"
+
+msgid "Forum posts"
+msgstr "フォーラムの投稿"
+
+msgid "Written"
 msgstr ""
+
+#, fuzzy
+#| msgid "Recently liked"
+msgid "Received"
+msgstr "Likeされた最新画像"
+
+msgid "Cookie consent"
+msgstr "Cookie利用の同意"
 
 msgid ""
 "AstroBin saves small pieces of text information (cookies) on your device in "
@@ -2794,12 +2861,17 @@ msgid ""
 "browsing AstroBin without changing the browser settings, you grant us "
 "permission to store that information on your device."
 msgstr ""
+"AstroBinでは、より良いコンテンツを提供するため、また統計的な分析の目的のため"
+"に、お客様のデバイスに小さなテキスト情報（cookie）を保存しています。ブラウザ"
+"の設定を変更することで、cookieの使用を無効にすることができます。ブラウザの設"
+"定を変更せずにAstroBinを閲覧した場合、お客様はAstroBinがお客様のデバイスに情"
+"報を保存することを許可したことになります。"
 
 msgid "I agree"
-msgstr ""
+msgstr "同意する"
 
 msgid "More"
-msgstr ""
+msgstr "もっと"
 
 msgid "Instructions and examples"
 msgstr "手順と例"
@@ -2971,15 +3043,11 @@ msgid "Return to image"
 msgstr "画像に戻る"
 
 msgid "Hemisphere"
-msgstr ""
+msgstr "半球図"
 
-#, fuzzy
-#| msgid "North"
 msgid "Northern"
 msgstr "北緯"
 
-#, fuzzy
-#| msgid "South"
 msgid "Southern"
 msgstr "南緯"
 
@@ -2993,9 +3061,6 @@ msgstr "後で撮影"
 
 msgid "Remove"
 msgstr "削除"
-
-msgid "Comments"
-msgstr "コメント"
 
 #, python-format
 msgid ""
@@ -3011,46 +3076,42 @@ msgid "Comments are closed."
 msgstr "コメントは非表示"
 
 msgid "In these public groups"
-msgstr ""
+msgstr "これらの公開グルーブについて"
 
 msgid "Histogram"
 msgstr "ヒストグラム"
 
 msgid "Right ascension"
-msgstr ""
+msgstr "赤経"
 
-#, fuzzy
-#| msgid "Description"
 msgid "Declination"
-msgstr "説明"
+msgstr "赤緯"
 
 msgid "Technical card"
 msgstr "Technical card"
 
 msgid "Sponsored brands"
-msgstr ""
+msgstr "スポンサーのブランド"
 
 #, python-format
 msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
-msgstr ""
+msgstr "%(retailer)sの<strong>%(name)s</strong>"
 
 msgid "Sponsored items"
-msgstr ""
+msgstr "スポンサーの商品"
 
-#, fuzzy
-#| msgid "Retailer information"
 msgid "Disable retailer integration"
-msgstr "小売り情報"
+msgstr "小売店との連携を無効にする"
 
 #, python-format
 msgid "Shop %(name)s at %(retailer)s"
-msgstr ""
+msgstr "%(retailer)sの%(name)s"
 
 msgid "Frames"
 msgstr "撮影フレーム"
 
 msgid "Basic astrometry details"
-msgstr ""
+msgstr "基本的な天体的説明"
 
 msgid "RA center"
 msgstr "RA center"
@@ -3071,41 +3132,37 @@ msgid "Orientation"
 msgstr "方位"
 
 msgid "(flipped)"
-msgstr ""
+msgstr "反転"
 
 msgid "Field radius"
 msgstr "視野半径"
 
-#, fuzzy
-#| msgid "Commercial information"
 msgid "WCS transformation"
-msgstr "販売情報"
+msgstr "WCS変換"
 
 msgid "Resolution"
 msgstr "解像度"
 
 msgid "Uncompressed source file"
-msgstr ""
+msgstr "非圧縮のソースファイル"
 
-#, fuzzy
-#| msgid "Uploaded"
 msgid "Download"
-msgstr "アップロード済み"
+msgstr "ダウンロード"
 
 msgid "Remote source"
-msgstr ""
+msgstr "リモート撮影のソース"
 
 msgid "Author"
-msgstr ""
+msgstr "投稿者"
 
 msgid "chosen by"
-msgstr ""
+msgstr "によって選択"
 
 msgid "Actions"
 msgstr "アクション"
 
 msgid "Upload uncompressed source (XISF/FITS/PSD/TIFF)"
-msgstr ""
+msgstr "非圧縮ファイルをアップロード (XISF/FITS/PSD/TIFF)"
 
 msgid "Upload new revision"
 msgstr "新しい修正版をアップロード"
@@ -3120,11 +3177,10 @@ msgid "Move to staging area"
 msgstr "ステージングエリアに移す"
 
 msgid "Send to group"
-msgstr ""
+msgstr "グループに送信"
 
-#, fuzzy
 msgid "Delete image and all revisions"
-msgstr "画像や全ての修正版を削除しますか？"
+msgstr "全ての画像やリビジョンを削除"
 
 msgid "Delete"
 msgstr "削除"
@@ -3132,18 +3188,14 @@ msgstr "削除"
 msgid "Delete original image"
 msgstr "元画像を削除"
 
-#, fuzzy
 msgid "Delete this revision only"
-msgstr "この修正版を削除"
+msgstr "このリビジョンだけを削除"
 
-#, fuzzy
-#| msgid "Delete conversation"
 msgid "Delete all other versions"
-msgstr "会話を削除"
+msgstr "他のバージョンをすべて削除"
 
-#, fuzzy
 msgid "Delete all revisions"
-msgstr "画像や全ての修正版を削除しますか？"
+msgstr "全てのリビジョンを削除"
 
 msgid "Flag malfunctioning thumbnails"
 msgstr "問題のあるサムネイルにフラグを立てる"
@@ -3157,8 +3209,6 @@ msgstr "禁止ユーザー"
 msgid "Edit"
 msgstr "編集"
 
-#, fuzzy
-#| msgid "Thumbnail"
 msgid "Thumbnails"
 msgstr "サムネイル"
 
@@ -3172,42 +3222,34 @@ msgid "Acquisition details"
 msgstr "撮影詳細"
 
 msgid "Plate-solving settings"
-msgstr ""
+msgstr "Plate-solvingの設定"
 
-#, fuzzy
-#| msgid "Attempt to plate-solve again"
 msgid "Restart plate-solving"
-msgstr "星図化を再度試みる"
+msgstr "Plate-solvingをリトライ"
 
-#, fuzzy
 msgid "Advanced plate-solving settings"
-msgstr "画像の編集（撮影情報の詳細）"
+msgstr "高度なPlate-solving設定"
 
 msgid "Restart advanced plate-solving"
-msgstr ""
+msgstr "高度なPlate-solvingのリスタート"
 
-#, fuzzy
 msgid "Context"
-msgstr "連絡先"
+msgstr "コンテキスト"
 
 msgid "Navigation context"
-msgstr ""
+msgstr "ナビゲーションコンテキスト"
 
-#, fuzzy
 msgid "User gallery"
-msgstr "%(user)sのギャラリー"
+msgstr "ユーザーギャラリー"
 
-#, fuzzy
 msgid "User collection"
-msgstr "あなたの場所の編集"
+msgstr "ユーザーコレクション"
 
-#, fuzzy
 msgid "Public group"
-msgstr "公開エリア"
+msgstr "公開グループ"
 
-#, fuzzy
 msgid "All image uploads"
-msgstr "画像アップロード"
+msgstr "全ての画像をアプロード"
 
 msgid "Share"
 msgstr "共有"
@@ -3219,12 +3261,10 @@ msgid "Send private message"
 msgstr "プライベートメッセージを送信"
 
 msgid "Shadow-ban"
-msgstr ""
+msgstr "シャドウBAN"
 
-#, fuzzy
-#| msgid "Remove data"
 msgid "Remove shadow-ban"
-msgstr "データの削除"
+msgstr "シャドウBANを解除"
 
 msgid "View"
 msgstr "表示"
@@ -3238,13 +3278,11 @@ msgstr "注釈"
 msgid "Normal"
 msgstr "普通"
 
-#, fuzzy
 msgid "Large size"
-msgstr "画像サイズ"
+msgstr "大きいサイズ"
 
-#, fuzzy
 msgid "Full size"
-msgstr "ピクセルサイズ"
+msgstr "フルサイズ"
 
 msgid "Delete this revision?"
 msgstr "この修正版を削除しますか？"
@@ -3255,7 +3293,7 @@ msgid ""
 msgstr "この修正版は永遠に削除され、戻すことはできません。よろしいでしょうか？"
 
 msgid "Associate XISF/FITS file"
-msgstr ""
+msgstr "関連するXISF/FITSファイル"
 
 msgid ""
 "\n"
@@ -3269,6 +3307,14 @@ msgid ""
 "your image).\n"
 "                    "
 msgstr ""
+"\n"
+"星図化の精度をさらに向上させるには、\n"
+"データセットから XISF ファイルまたは FITS ファイルのいずれかをアップロードし"
+"てください。\n"
+"これらのファイルには通常、日付と時刻のヘッダが付いており、\n"
+"AstroBinが太陽系の天体暦を計算したり、\n"
+"画像内の惑星や小惑星を見つけたりすることができます（画像に位置情報を追加して"
+"おくと便利です）。"
 
 #, python-format
 msgid ""
@@ -3302,24 +3348,43 @@ msgstr "読み込み中"
 msgid "Sorry"
 msgstr "申し訳ありません"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "We're really sorry, but liking an image requires an AstroBin index of "
+#| "<strong>%(min_index_to_like)s</strong> or greater."
 msgid ""
-"We're really sorry, but liking an image requires an AstroBin index of "
-"<strong>%(min_index_to_like)s</strong> or greater."
+"We're really sorry, but giving likes requires an Image Index of <strong>"
+"%(min_index_to_like)s</strong> or greater."
 msgstr ""
 "ほんとうに申し訳ありません。しかし、画像をLikeするにはAstroBinインデックスが"
 "<strong>%(min_index_to_like)s</strong>以上必要です。"
 
+#, fuzzy
+#| msgid ""
+#| "Such limitation improves the website as a whole by discouraging people "
+#| "from creating fake accounts to like their own images. Thank you for "
+#| "understanding!"
 msgid ""
 "Such limitation improves the website as a whole by discouraging people from "
-"creating fake accounts to like their own images. Thank you for understanding!"
+"creating fake accounts to like their own content. Thank you for "
+"understanding!"
 msgstr ""
 "自分の画像にLikeするフェイクアカウントを生成するようなことで、このWebサイトの"
 "人々を落胆させることを、その制限で改善できます。理解をしてくれてありがとう!"
 
-#, python-format
-msgid "Currently, your AstroBin index is <strong>%(index)s</strong>."
+#, fuzzy, python-format
+#| msgid "Currently, your AstroBin index is <strong>%(index)s</strong>."
+msgid "Currently, your Image Index is <strong>%(index)s</strong>."
 msgstr "現在のあなたのAstroBinインデックスは<strong>%(index)s</strong>です。"
+
+#, python-format
+msgid ""
+"To learn more about the Image Index, please visit %(_0)sthe FAQ page%(_1)s. "
+"Thanks!"
+msgstr ""
+
+msgid "You cannot remove a like that you gave more than one hour ago."
+msgstr ""
 
 msgid "Delete image and all its revisions?"
 msgstr "画像や全ての修正版を削除しますか？"
@@ -3437,22 +3502,18 @@ msgstr "すべて"
 msgid "Real"
 msgstr "本名"
 
-msgid "Copy this"
-msgstr "これをコピー"
-
 msgid "Image mode"
 msgstr "画像モード"
 
-#, fuzzy
-#| msgid ""
-#| "Did you improve the post-processing of your image? Upload the new "
-#| "revision!"
+msgid "Copy this"
+msgstr "これをコピー"
+
 msgid ""
 "Did you improve the post-processing of your image? Upload the new\n"
 "                    revision!"
 msgstr ""
-"画像はその後の処理によって改良されましたか？新しい修正版をアップロードしま"
-"しょう!"
+"あなたの画像を再修正しましたか？\n"
+"それを新しいバーションとしてアップロードしよう！"
 
 #, python-format
 msgid "Over 100 MB? Try the <a href=\"%(url)s/%(id)s\">new beta uploader</a>!"
@@ -3627,28 +3688,22 @@ msgstr ""
 msgid "Edit your image: gear used"
 msgstr "画像の編集（使用機材）"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "Can't see anything here? Perhaps you should first add some gear in your "
-#| "<a href=\"%(the_url)s\">profile</a>!"
+#, python-format
 msgid ""
 "Can't see anything here? Perhaps you should first add some gear in your\n"
 "                <a href=\"%(the_url)s\">profile</a>!"
 msgstr ""
-"なにもありませんでした。あなたの<a href=\"%(the_url)s\">プロフィールに</a>、"
-"まずはじめに使用機材を追加すべきでしょう。"
+"なにもみつかりませんでした。\n"
+"あなたの<a href=\"%(the_url)s\">プロフィール</a>へ、まずは、あなたの機材を追"
+"加してください。"
 
-#, fuzzy
-#| msgid ""
-#| "To choose the gear used for this image, drag items from the right side to "
-#| "left side, or click the plus sign."
 msgid ""
 "To choose the gear used for this image, drag items from the right side to "
 "left side, or\n"
 "                click the plus sign."
 msgstr ""
-"画像の使用機材を選択するために、右側から左側にアイテムをドラック師、＋印をク"
-"リックしてください。"
+"画像の使用機材を選択するためには、\n"
+"右側から左側にアイテムをドラックし、＋印をクリックしてください。"
 
 msgid ""
 "Use this button to import the gear settings from another image of yours."
@@ -3665,17 +3720,14 @@ msgstr "撮影の詳細を編集"
 msgid "Copy gear"
 msgstr "機材をコピー"
 
-#, fuzzy
-#| msgid ""
-#| "Copying the gear from another image will populate the gear selection form "
-#| "for you, but you will still need to save it in the end."
 msgid ""
 "Copying the gear from another image will populate the gear selection form "
 "for you, but\n"
 "                    you will still need to save it in the end."
 msgstr ""
-"他の画像から機材をコピーすることで、あなたに機材選択フォームを何時も使うよう"
-"になるでしょう。しかし、最後にはそれを保存する必要がまだあります。"
+"他の画像の機材をコピーすることで、あなたの機材リストをいつも使えるようになり"
+"ます。\n"
+"ただし、最後にそれを保存してくださいね。"
 
 msgid "Copy"
 msgstr "コピー"
@@ -3768,6 +3820,11 @@ msgstr "最大解像度"
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "by <a href=\"%(the_url)s\">%(user)s</a>"
 
+#, fuzzy
+#| msgid "Plate-solution annotations (if available)"
+msgid "Plate-solution overlay"
+msgstr "PlateSolveの方法の注釈（可能なら）"
+
 msgid "Fit to window"
 msgstr "ウィンドウに合わせる"
 
@@ -3814,9 +3871,6 @@ msgstr "いますぐ登録しよう！"
 
 msgid "Integration"
 msgstr "総露出時間"
-
-msgid "Likes"
-msgstr "Likes"
 
 msgid "Date joined"
 msgstr "入会日"
@@ -3876,25 +3930,11 @@ msgstr "このサイトとは？"
 msgid "Gallery"
 msgstr "ギャラリー"
 
-msgid "Blog"
-msgstr "ブログ"
-
-#, fuzzy
-#| msgid "Terms of Service"
-msgid "Terms of servic"
-msgstr "利用規約"
-
-msgid ""
-"AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
-"Reserved. The images on this websites are copyright of their respective "
-"owners."
-msgstr ""
-"AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
-"Reserved. The images on this websites are copyright of their respective "
-"owners."
-
 msgid "Compose message"
 msgstr "メッセージの作成"
+
+msgid "Type your message here..."
+msgstr ""
 
 msgid "Type in a search term"
 msgstr "検索ワードを入力"
@@ -3921,15 +3961,15 @@ msgstr "メッセージなし"
 msgid "Back"
 msgstr ""
 
-msgid "Delete conversation"
-msgstr "会話を削除"
-
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
 msgstr "<a href=\"%(sender_url)s\">あなた</a>との会話"
 
 msgid "Reply"
 msgstr "返信"
+
+msgid "Delete conversation"
+msgstr "会話を削除"
 
 msgid "Sending..."
 msgstr "送信中..."
@@ -3963,76 +4003,47 @@ msgstr ""
 msgid "There are no images in the spam list."
 msgstr "まだレビューがありません"
 
-#, fuzzy, python-format
+#, fuzzy
 #| msgid ""
-#| "Your request for an API Key has been approved!\n"
-#| "\n"
-#| "    Your key: %(key)s\n"
-#| "    Your secret: %(secret)s\n"
-#| "\n"
-#| "    Please read the API documentation at %(api_docs_url)s\n"
-#| "    \n"
-#| "    You can review your API keys at %(api_keys_url)s\n"
-#| "    \n"
-#| "    Thank you for using AstroBin's APIs!"
-msgid ""
-"Your request for an API Key has been approved!\n"
-"\n"
-"    Your key: %(key)s\n"
-"    Your secret: %(secret)s\n"
-"\n"
-"    Please read the API documentation at <a href=\"%(api_docs_url)s\">"
-"%(api_docs_url)s</a>\n"
-"\n"
-"    You can review your API keys at <a href=\"%(api_keys_url)s\">"
-"%(api_keys_url)s</a>\n"
-"\n"
-"    Thank you for using AstroBin's APIs!"
-msgstr ""
-"あなたのAPIキーのリクエストがとどきました。\n"
-"\n"
-"    Your key: %(key)s\n"
-"    Your secret: %(secret)s\n"
-"\n"
-"    APIドキュメントを%(api_docs_url)sで読んでください。\n"
-"    \n"
-"    あなたのAPIキーを%(api_keys_url)sでお試しすることができます。\n"
-"    \n"
-"    AstroBin's APIsを使ってくれてありがとう!"
-
-#, python-format
-msgid ""
-"Your request for an API Key has been approved!\n"
-"\n"
-"    Your key: %(key)s\n"
-"    Your secret: %(secret)s\n"
-"\n"
-"    Please read the API documentation at %(api_docs_url)s\n"
-"    \n"
-"    You can review your API keys at %(api_keys_url)s\n"
-"    \n"
-"    Thank you for using AstroBin's APIs!"
-msgstr ""
-"あなたのAPIキーのリクエストがとどきました。\n"
-"\n"
-"    Your key: %(key)s\n"
-"    Your secret: %(secret)s\n"
-"\n"
-"    APIドキュメントを%(api_docs_url)sで読んでください。\n"
-"    \n"
-"    あなたのAPIキーを%(api_keys_url)sでお試しすることができます。\n"
-"    \n"
-"    AstroBin's APIsを使ってくれてありがとう!"
-
-#, python-format
-msgid ""
-"<a href=\"%(api_keys_url)s\">Your request for an API Key has been approved!</"
-"a>"
+#| "<a href=\"%(api_keys_url)s\">Your request for an API Key has been "
+#| "approved!</a>"
+msgid "Your request for an API Key has been approved!"
 msgstr ""
 "<a href=\"%(api_keys_url)s\">あなたのAPIキーのリクエストが許可されました!</a>"
 
-msgid "API Key request approved"
-msgstr "APIキーリクエストの許可"
+#, fuzzy
+#| msgid "Your API Keys"
+msgid "Your API key"
+msgstr "あなたのAPIキー"
+
+#, fuzzy
+#| msgid "Your API Keys"
+msgid "Your API secret"
+msgstr "あなたのAPIキー"
+
+#, python-format
+msgid "Please read the API documentation %(_0)shere%(_1)s."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "You don't have any API Keys. Please read the <a href=\"%(api_docs_url)s"
+#| "\">API documentation</a>."
+msgid ""
+"You can review your API keys at <a href=\"%(api_keys_url)s\">"
+"%(api_keys_url)s</a>"
+msgstr ""
+"あなたはAPIキーをもっていません。<a href=\"%(api_docs_url)s\">APIドキュメント"
+"を読んでください。</a>"
+
+#, fuzzy
+#| msgid "Thank you for supporting AstroBin!"
+msgid "Thank you for using AstroBin's APIs!"
+msgstr "AstoBinをサポートいただけてありがとうございます。"
+
+#, python-format
+msgid "You can review your API keys at %(api_keys_url)s."
+msgstr ""
 
 #, fuzzy
 #| msgid "You have a new follower"
@@ -4064,10 +4075,10 @@ msgid ""
 "\n"
 "%(message)s\n"
 "\n"
-"To see all your notifications, please go to %(notices_url)s.\n"
+"To see all your notifications, please go to %(base_url)s%(notices_url)s.\n"
 "\n"
 "If you don't want to receive emails anymore, edit your preferences by going "
-"to http://astrobin.com%(pref_url)s.\n"
+"to %(base_url)s%(pref_url)s.\n"
 "\n"
 "PLEASE DO NOT REPLY TO THIS EMAIL\n"
 "\n"
@@ -4145,17 +4156,7 @@ msgstr "<a href=\"%(object_url)s\">あなたの画像は図画化に成功しま
 msgid "Your image has been successfully plate-solved."
 msgstr "あなたの画像は図画化に成功しました。"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "You have %(number)s images with insufficient data.\n"
-#| "\n"
-#| "AstroBin relies on data to be a great service for you and every other "
-#| "user.\n"
-#| "Please fill in the data for your images at the following URL:\n"
-#| "\n"
-#| "%(url)s\n"
-#| "\n"
-#| "Thank you!"
+#, python-format
 msgid ""
 "You have %(number)s images with insufficient data.\n"
 "\n"
@@ -4166,15 +4167,15 @@ msgid ""
 "\n"
 "Thank you!"
 msgstr ""
-"不適当なデータをもつ画像が %(number)s枚あります。\n"
+"間違いのあるデータがある画像が %(number)s枚あります。\n"
 "\n"
-"AstroBinはあなたや全ての利用者にとって素晴らしいサービスにするためにデータに"
-"依存しています。\n"
-"以下のURLのあなたの画像のデータを埋めてください。:\n"
+"AstroBinはあなたを含む全ユーザーにとって素晴らしいサービスにするためにデータ"
+"に依存しています。\n"
+"以下のURLのあなたの画像のデータを埋めてください。\n"
 "\n"
-"%(url)s\n"
+"<a href=\"%(url)s\">%(url)s</a>\n"
 "\n"
-"ありがとうございました。"
+"よろしくおねがいします。"
 
 #, python-format
 msgid ""
@@ -4278,20 +4279,17 @@ msgstr ""
 msgid "Would you like to activate your account on AstroBin?"
 msgstr "あなたの本当の名前を使ってAstroBinを始めようとしてますか?"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "AstroBin has published a new blog entry: \"%(object)s\".\n"
-#| "\n"
-#| "Check it out at the following url: %(object_url)s"
+#, python-format
 msgid ""
 "AstroBin has published a new blog entry: \"%(object)s\".\n"
 "\n"
 "Check it out at the following url: <a href=\"%(object_url)s\">"
 "%(object_url)s</a>"
 msgstr ""
-"AstroBinは新しいブログ記事を公開しました。\"%(object)s\"\n"
+"AstroBinは新しいブログを公開しました。\"%(object)s\"\n"
 "\n"
-"以下のURLをクリックしてください。%(object_url)s"
+"以下のURLをクリックしてください。<a href=\"%(object_url)s\">%(object_url)s</"
+"a>"
 
 #, python-format
 msgid ""
@@ -4315,39 +4313,43 @@ msgstr ""
 msgid "AstroBin has publushed a new blog entry: %(object)s"
 msgstr "AstroBinは新しいブログ記事を公開しました。%(object)s"
 
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> added your image to their bookmarks: "
+"<a href=\"%(url)s\">%(title)s</a>."
+msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a>があなたの画像をプックマーク<a href="
+"\"%(url)s\">%(title)s</a>に追加しました！"
+
+#, fuzzy, python-format
+#| msgid "%(user)s has added your image to their bookmarks: %(url)s"
+msgid "%(user)s added your image \"%(title)s\" to their bookmarks: %(url)s"
+msgstr "%(user)sがあなたの画像をプックマークに追加しました。%(url)s"
+
 #, fuzzy, python-format
 #| msgid ""
 #| "<a href=\"%(url)s\"><strong>%(user)s</strong> has added your image to "
 #| "their bookmarks!</a>"
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> added your image to their bookmarks: "
-"<a href=\"%(url)s\">%(title)s</a>."
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong>があなたの画像をプックマークに追"
-"加しました!</a>"
-
-#, python-format
-msgid "%(user)s has added your image to their bookmarks: %(url)s"
-msgstr "%(user)sがあなたの画像をプックマークに追加しました。%(url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> has added your image to their "
-"bookmarks!</a>"
+"<strong>%(user)s</strong> added your image \"%(title)s\" to their bookmarks!"
 msgstr ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong>があなたの画像をプックマークに追"
 "加しました!</a>"
 
 #, fuzzy, python-format
-#| msgid ""
-#| "%(user)s commented on your image! Check it out at the following url: "
-#| "%(url)s"
+#| msgid "%(user)s has added your image to their bookmarks: %(url)s"
+msgid ""
+"\n"
+"    %(user)s added your image \"%(title)s\" to their bookmarks!\n"
+msgstr "%(user)sがあなたの画像をプックマークに追加しました。%(url)s"
+
+#, python-format
 msgid ""
 "%(user)s commented on your image! Check it out at the following url: <a href="
 "\"%(url)s\">%(url)s</a>"
 msgstr ""
-"%(user)sがあなたの画像にコメントしました。以下のURLをチェックしてくださ"
-"い。%(url)s"
+"%(user)sがあなたの画像にコメントしました。以下のURLをチェックしてください。"
+"<a href=\"%(url)s\">%(url)s</a>"
 
 #, python-format
 msgid ""
@@ -4369,14 +4371,65 @@ msgstr "%(user)sがあなたの画像にコメントしました!"
 
 #, fuzzy, python-format
 #| msgid ""
-#| "%(user)s replied to your comment. Check it out at the following url: "
-#| "%(url)s"
+#| "<a href=\"%(user_url)s\">%(user)s</a> likes your image: <a href=\"%(url)s"
+#| "\">%(title)s</a>."
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> likes your comment: <a href=\"%(url)s"
+"\">%(comment)s</a>."
+msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> は、あなたの画像<a href=\"%(url)s\">"
+"%(title)s</a>にLikeしました!"
+
+#, fuzzy, python-format
+#| msgid "%(user)s likes your image: %(url)s"
+msgid "%(user)s likes your comment: %(url)s %(comment)s"
+msgstr "%(user)sは、あなたの画像（%(url)s）にLikeした"
+
+#, fuzzy, python-format
+#| msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+msgid "<strong>%(user)s</strong> likes your comment!"
+msgstr ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong>は、あなたの画像にLikeしました!"
+"</a>"
+
+#, fuzzy, python-format
+#| msgid "%(user)s replied to your comment."
+msgid "%(user)s likes your comment!"
+msgstr "%(user)sがあなたのコメントに返信しました。"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "<a href=\"%(user_url)s\">%(user)s</a> likes your image: <a href=\"%(url)s"
+#| "\">%(title)s</a>."
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a comment: <a href="
+"\"%(url)s\">%(url)s</a>."
+msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> は、あなたの画像<a href=\"%(url)s\">"
+"%(title)s</a>にLikeしました!"
+
+#, fuzzy, python-format
+#| msgid "%(user)s likes your image: %(url)s"
+msgid "%(user)s mentioned you in a comment: %(url)s"
+msgstr "%(user)sは、あなたの画像（%(url)s）にLikeした"
+
+#, fuzzy, python-format
+#| msgid "<strong>%(user)s</strong> has published a new image"
+msgid "<strong>%(user)s</strong> mentioned you in a comment!"
+msgstr "<strong>%(user)s</strong>が新しい画像を公開しました！"
+
+#, fuzzy, python-format
+#| msgid "%(user)s replied to your comment."
+msgid "%(user)s mentioned you in a comment!"
+msgstr "%(user)sがあなたのコメントに返信しました。"
+
+#, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it out "
 "at the following url: <a href=\"%(url)s\">%(url)s</a>"
 msgstr ""
-"%(user)sがあなたのコメントに返信しました。以下のURLをチェックしてくださ"
-"い。%(url)s"
+"<a href=\"%(user_url)s\">%(user)s</a> があなたのコメントに返信しました。以下"
+"のURLをチェックしてください。<a href=\"%(url)s\">%(url)s</a>"
 
 #, python-format
 msgid ""
@@ -4396,16 +4449,13 @@ msgstr ""
 msgid "%(user)s replied to your comment."
 msgstr "%(user)sがあなたのコメントに返信しました。"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "User %(object)s is now following you. They will be notified when you "
-#| "publish new images."
+#, python-format
 msgid ""
 "User <a href=\"%(object_url)s\">%(object)s</a> is now following you. They "
 "will be notified when you publish new images."
 msgstr ""
-"利用者%(object)sはあなたをフォローしました。あなたが新しい画像を公開したとき"
-"に彼らに通知されます。"
+"<a href=\"%(object_url)s\">%(object)s</a>はあなたをフォローしました。あなたが"
+"新しい画像を公開したときに彼らに通知されます。"
 
 #, python-format
 msgid ""
@@ -4428,14 +4478,69 @@ msgstr "新しいフォロワーが加わりました!"
 
 #, fuzzy, python-format
 #| msgid ""
-#| "%(user)s started a new discussion about a gear item you own! Read it at "
-#| "following url: %(url)s"
+#| "<a href=\"%(user_url)s\">%(user)s</a> likes your image: <a href=\"%(url)s"
+#| "\">%(title)s</a>."
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> likes your post on this forum topic: "
+"<a href=\"%(url)s\">%(post)s</a>."
+msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> は、あなたの画像<a href=\"%(url)s\">"
+"%(title)s</a>にLikeしました!"
+
+#, fuzzy, python-format
+#| msgid "%(user)s likes your image: %(url)s"
+msgid "%(user)s likes your post on this forum topic: %(url)s"
+msgstr "%(user)sは、あなたの画像（%(url)s）にLikeした"
+
+#, fuzzy, python-format
+#| msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+msgid "<strong>%(user)s</strong> likes your forum post!"
+msgstr ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong>は、あなたの画像にLikeしました!"
+"</a>"
+
+#, fuzzy, python-format
+#| msgid "%(user)s likes your image: %(url)s"
+msgid "%(user)s likes your forum post!"
+msgstr "%(user)sは、あなたの画像（%(url)s）にLikeした"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "<a href=\"%(user_url)s\">%(user)s</a> added your image to their "
+#| "bookmarks: <a href=\"%(url)s\">%(title)s</a>."
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a post on this forum "
+"topic: <a href=\"%(url)s\">%(post)s</a>."
+msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a>があなたの画像をプックマーク<a href="
+"\"%(url)s\">%(title)s</a>に追加しました！"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "%(user)s commented on your image! Check it out at the following url: "
+#| "%(url)s"
+msgid "%(user)s mentioned you in a post on this forum topic: %(url)s"
+msgstr ""
+"%(user)sがあなたの画像にコメントしました。以下のURLをチェックしてくださ"
+"い。%(url)s"
+
+#, fuzzy, python-format
+#| msgid "<strong>%(user)s</strong> has published a new image"
+msgid "<strong>%(user)s</strong> mentioned you in a forum post!"
+msgstr "<strong>%(user)s</strong>が新しい画像を公開しました！"
+
+#, fuzzy, python-format
+#| msgid "%(user)s commented on your image!"
+msgid "%(user)s mentioned you in a forum post!"
+msgstr "%(user)sがあなたの画像にコメントしました!"
+
+#, python-format
 msgid ""
 "%(user)s started a new discussion about a gear item you own! Read it at "
 "following url: <a href=\"%(url)s\">%(url)s</a>"
 msgstr ""
-"%(user)sはあなたが所有する機材品についての新しい議論を開始しました。以下のURL"
-"でそれを読んでください。%(url)s"
+"%(user)sはあなたが所有する機材品についての新しいディスカッションを開始しまし"
+"た。以下のURLでそれを読むことができます。<a href=\"%(url)s\">%(url)s</a>"
 
 #, python-format
 msgid ""
@@ -4505,31 +4610,23 @@ msgstr ""
 msgid "%(requester)s requested to join the group: \"%(group_name)s\""
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid ""
-#| "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published "
-#| "a new image</a>"
+#, python-format
 msgid "<strong>%(user)s</strong> has published a new image"
-msgstr ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong>が新しい画像を公開"
-"しました！</a>"
+msgstr "<strong>%(user)s</strong>が新しい画像を公開しました！"
 
-#, fuzzy, python-format
-#| msgid "New image of %(subject)s"
+#, python-format
 msgid "New image by %(user)s"
-msgstr "%(subject)sの新着画像"
+msgstr "%(user)sの新着画像"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
-#| "Check it out at the following url: %(object_url)s"
+#, python-format
 msgid ""
 "New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
 "Check it out at the following url: <a href=\"%(object_url)s\">"
 "%(object_url)s</a>"
 msgstr ""
-"あなたのフォローする装備品（<strong>%(gear)s</strong>）の新しい写真が追加され"
-"ました。以下のURLをチェックしてください。%(object_url)s"
+"あなたのフォローする装備品<strong>%(gear)s</strong>による新しい写真が追加され"
+"ました。以下のURLをチェックしてください。<a href=\"%(object_url)s\">"
+"%(object_url)s</a>"
 
 #, python-format
 msgid ""
@@ -4551,16 +4648,14 @@ msgstr ""
 msgid "New image taken with a %(gear)s"
 msgstr "%(gear)sの新しい画像が追加"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
-#| "out at the following url: %(object_url)s"
+#, python-format
 msgid ""
 "New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
 "out at the following url: <a href=\"%(object_url)s\">%(object_url)s</a>"
 msgstr ""
-"あなたがフォローする主題（<strong>%(subject)s</strong>）の新しい画像が追加さ"
-"れました。以下のURLをチェックしてください。%(object_url)s"
+"あなたがフォローするタイトル（<strong>%(subject)s</strong>）の新しい画像が追"
+"加されました。以下のURLをチェックしてください。<a href=\"%(object_url)s\">"
+"%(object_url)s</a>"
 
 #, python-format
 msgid ""
@@ -4580,16 +4675,13 @@ msgstr ""
 msgid "New image of %(subject)s"
 msgstr "%(subject)sの新着画像"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "%(originator)s has published a new image revision! Check it out at the "
-#| "following url: %(object_url)s"
+#, python-format
 msgid ""
 "%(originator)s has published a new image revision! Check it out at the "
 "following url: <a href=\"%(object_url)s\">%(object_url)s</a>"
 msgstr ""
-"%(originator)sは新しい修正版画像を公開しました。以下のURLをチェックしてくださ"
-"い。%(object_url)s"
+"%(originator)sは新しい修正版を公開しました。以下のURLをチェックしてください。"
+"<a href=\"%(object_url)s\">%(object_url)s</a>"
 
 #, python-format
 msgid ""
@@ -4611,14 +4703,13 @@ msgstr ""
 msgid "New image revision by %(originator)s"
 msgstr "%(originator)sの新しい修正版画像"
 
-#, fuzzy, python-format
-#| msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+#, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> likes your image: <a href=\"%(url)s\">"
 "%(title)s</a>."
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong>は、あなたの画像にLikeしました!"
-"</a>"
+"<a href=\"%(user_url)s\">%(user)s</a> は、あなたの画像<a href=\"%(url)s\">"
+"%(title)s</a>にLikeしました!"
 
 #, python-format
 msgid "%(user)s likes your image: %(url)s"
@@ -4667,12 +4758,11 @@ msgid ""
 "View the group: %(group_url)s"
 msgstr ""
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<strong>%(user)s</strong> posted a new topic to the group: \"%(group_name)s\""
 msgstr ""
-"<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong>はデータ公開領域"
-"<strong>（\"%(pool_name)s\"）</strong>に新しいデータを追加しました。</a>"
+"<strong>%(user)s</strong>は%(group_name)sに新しいトピックスを投稿しました。"
 
 #, python-format
 msgid "%(user)s posted a new topic to the group: \"%(group_name)s\""
@@ -4686,12 +4776,6 @@ msgstr "通知"
 msgid "Notification Type"
 msgstr "通知"
 
-#, fuzzy
-#| msgid ""
-#| "You have received a private message on AstroBin!\n"
-#| "Read it at the following link:\n"
-#| "\n"
-#| "http://astrobin.com/messages/inbox/"
 msgid ""
 "You have received a private message on AstroBin!\n"
 "Read it at the following link:\n"
@@ -4702,7 +4786,8 @@ msgstr ""
 "AstroBinでプライベートメッセージが届いています!\n"
 "以下のリンクからそれを読んでください。\n"
 "\n"
-"http://astrobin.com/messages/inbox/"
+"<a href=\"https://www.astrobin.com/messages/inbox/\">https://www.astrobin."
+"com/messages/inbox/</a>"
 
 msgid ""
 "You have received a private message on AstroBin!\n"
@@ -4851,6 +4936,27 @@ msgstr "承認したフォーラムトピックからの新しい返信"
 
 msgid "Please note: this post will be published only after moderation."
 msgstr ""
+
+msgid "Type your forum post here..."
+msgstr ""
+
+msgid "Please first exit 'Source' mode to quote a message."
+msgstr ""
+
+msgid "*** Type your reply here ***"
+msgstr ""
+
+#, fuzzy
+#| msgid "likes"
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr "がLikeしました"
+
+#, fuzzy
+#| msgid "likes"
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr "がLikeしました"
 
 msgid ""
 "Warning: this post awaits moderation and is not yet visible to everybody"
@@ -5020,19 +5126,12 @@ msgstr ""
 msgid "Register with AstroBin"
 msgstr "Astrobinを登録"
 
-#, fuzzy
-#| msgid ""
-#| "By registering with AstroBin, you agree to our <a href=\"%(tos_url)s"
-#| "\">terms of service</a>."
 msgid ""
 "By registering with AstroBin, you agree to our <a href=\"https://welcome."
 "astrobin.com/terms-of-service\">terms of service</a>."
 msgstr ""
-"AstroBinに登録することで、あなたは我々の<a href=\"%(tos_url)s\">利用規約</a>"
-"に同意します。"
-
-msgid "Search"
-msgstr "検索"
+"AstroBinに登録することで、あなたは我々の<a href=\"https://welcome.astrobin."
+"com/terms-of-service\">サービス量規約</a>に同意することになります。"
 
 msgid "Sort"
 msgstr "並び替え"
@@ -5356,9 +5455,6 @@ msgctxt "At no cost"
 msgid "Free"
 msgstr ""
 
-msgid "n/a"
-msgstr "利用不可能"
-
 msgid "Daily"
 msgstr ""
 
@@ -5488,36 +5584,15 @@ msgstr ""
 msgid "Your inactive subscription plans"
 msgstr "AstroBin Raw Data"
 
-#, fuzzy
 msgid ""
 "PS: are you interested in larger plans?\n"
 "                <a href=\"/contact/\">Let us know!</a>"
 msgstr ""
-"ここで質問がカバーできない場合、我々に<a href=\"/contact/\">問合せ</a>してく"
-"ださい。"
-
-msgid "All"
-msgstr "すべて"
-
-msgid "A collection of great images that were recently handpicked."
-msgstr ""
+"PS: もっと興味がある場合、\n"
+"<a href=\"/contact/\">問合せ</a>してください。"
 
 msgid "This list is currently empty."
 msgstr ""
-
-#, fuzzy
-msgid "Last 6 months"
-msgstr "東経もしくは西経"
-
-msgid "Last year"
-msgstr ""
-
-#, fuzzy
-msgid "All time"
-msgstr "アップロード時間"
-
-msgid "Total integration"
-msgstr "総露出時間"
 
 msgid "Image upload"
 msgstr "画像アップロード"
@@ -5536,13 +5611,12 @@ msgid ""
 "<strong>%(max_allowed)s</strong>."
 msgstr ""
 
-#, fuzzy
 msgid ""
 "Thank you for being a premium member! Enjoy your unlimited images.\n"
 "                        "
 msgstr ""
-"プレミアムメンバーに登録してくれてありがとうございます。無制限のアップロード"
-"を楽しんでください。"
+"プレミアムメンバーに登録していただきありがとうございます。\n"
+"無制限の利用を楽しんでください。"
 
 #, fuzzy
 #| msgid "Would you like to upgrade?"
@@ -5561,11 +5635,6 @@ msgstr "製作中の作品としてアップロード"
 msgid "Uploading..."
 msgstr "アップロード中..."
 
-#, fuzzy
-#| msgid ""
-#| "Use this button to upload an image to the <strong>Staging Area</strong>. "
-#| "It's perfect for works in progress that you want to share on Internet "
-#| "forums. Read more in the <a href=\"%(faq_url)s#6\">FAQ</a>."
 msgid ""
 "Use this button to upload an image to the\n"
 "                                        <strong>Staging Area</strong>. It's "
@@ -5575,9 +5644,11 @@ msgid ""
 "                                        <a href=\"https://welcome.astrobin."
 "com/faq\">FAQ</a>."
 msgstr ""
-"<strong>ステージング領域</strong>にイメージをアップロードするためにこのボタン"
-"を使ってください。あなたがインターネット掲示板に共有したいような進行中の作品"
-"には最適です。 <a href=\"%(faq_url)s#6\">FAQ</a>に詳しい記載があります。"
+"<strong>ステージング環境</strong>に画像をアップロードするために以下のボタンを"
+"押してください。\n"
+"SNSなどで共有したいような進行中の作品には最適です。\n"
+"\n"
+"<a href=\"https://welcome.astrobin.com/faq\">FAQ</a>に詳しい説明があります。"
 
 msgid "Upload as a finished image"
 msgstr "最終化した画像としてアップロード"
@@ -5585,12 +5656,7 @@ msgstr "最終化した画像としてアップロード"
 msgid "Do not notify followers"
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid ""
-#| "Use this button to upload an image to the <strong>Public Area</strong>. "
-#| "It will be displayed in <a href=\"%(profile_url)s\">your profile</a> and "
-#| "here on the home page. You can <a href=\"%(flickr_url)s\">import from "
-#| "Flickr</a> too."
+#, python-format
 msgid ""
 "Use this button to upload an image to the\n"
 "                                        <strong>Public Area</strong>. It "
@@ -5600,10 +5666,12 @@ msgid ""
 "                                        <a href=\"%(flickr_url)s\">import "
 "from Flickr</a> too."
 msgstr ""
-"<strong>公開エリア</strong>に画像をアップロードするために、このボタンを使って"
-"ください。<a href=\"%(profile_url)s\">あなたのプロフィール</a>やホームページ"
-"に表示されます。<a href=\"%(flickr_url)s\">Flickrからインポート</a>を利用する"
-"こともできます。"
+"<strong>公開環境</strong>に画像をアップロードするために、次のボタンを押してく"
+"ださい。\n"
+"\n"
+"<a href=\"%(profile_url)s\">あなたのプロフィール</a>や画像がホームページに表"
+"示されます。\n"
+"<a href=\"%(flickr_url)s\">Flickrからインポート</a>を利用することもできます。"
 
 msgid "Your API Keys"
 msgstr "あなたのAPIキー"
@@ -5983,6 +6051,12 @@ msgstr "画像サイズ"
 msgid "Thanks for your support!"
 msgstr ""
 
+msgid "This data is currently not available and will be recalculated shortly."
+msgstr ""
+
+msgid "Please check again in a bit, thanks!"
+msgstr ""
+
 msgid "Public Area"
 msgstr "公開エリア"
 
@@ -6092,9 +6166,8 @@ msgstr "ステージングエリア"
 msgid "Deleted"
 msgstr "削除"
 
-#, fuzzy
 msgid "Revision"
-msgstr "レビュー"
+msgstr "リビジョン"
 
 msgid "Recover all"
 msgstr ""
@@ -6265,8 +6338,15 @@ msgstr ""
 msgid "Image of the Day"
 msgstr "Image of the day"
 
-msgid "Top Pick"
-msgstr ""
+#, fuzzy
+#| msgid "Top picks"
+msgid "Top pick"
+msgstr "Top picks"
+
+#, fuzzy
+#| msgid "Basic information"
+msgid "Top pick nomination"
+msgstr "基本情報"
 
 #, fuzzy
 #| msgid "Guider/Planetary"
@@ -6448,13 +6528,6 @@ msgstr ""
 "画像アップロード容量の上限に達しましたので、アップグレードしてください。"
 
 msgid ""
-"You uploaded an Indexed PNG file. AstroBin will need to lower the color "
-"count to 256 in order to work with it."
-msgstr ""
-"あなたはインデックスカラーPNGファイルをアップロードしましたが、それをAstroBin"
-"に取り込みためには256色以下に下げる必要があります。"
-
-msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
@@ -6497,8 +6570,12 @@ msgstr "時間"
 msgid "Average integration time"
 msgstr "平均露出時間"
 
-msgid "Forum posts"
-msgstr "フォーラムの投稿"
+msgid ""
+"You uploaded an Indexed PNG file. AstroBin will need to lower the color "
+"count to 256 in order to work with it."
+msgstr ""
+"あなたはインデックスカラーPNGファイルをアップロードしましたが、それをAstroBin"
+"に取り込みためには256色以下に下げる必要があります。"
 
 msgid "Image uploaded. Thank you!"
 msgstr "画像がアップロードされました。Thank you!"
@@ -6568,6 +6645,108 @@ msgid ""
 "AstroBin is preparing your data for download. Please check this page again "
 "in a while: the more images you have, the more time it will take."
 msgstr ""
+
+#~ msgid ""
+#~ "AstroBin is an image hosting website specifically targeted to "
+#~ "astrophotographers: it's the first and the last place where you need to "
+#~ "upload your astrophotography images. Made by an astrophotographer, for "
+#~ "the astrophotographers."
+#~ msgstr ""
+#~ "AstroBinは天体写真家を特にターゲットにした画像ホスティングサイトです。あな"
+#~ "たにとって、天体画像をアップロードする最初で最後の場所になるになるでしょ"
+#~ "う。天体写真家のために、天体写真家によって作られています。"
+
+#~ msgid "AstroBin index"
+#~ msgstr "AstroBinインデックス"
+
+#~ msgid "Blog"
+#~ msgstr "ブログ"
+
+#, fuzzy
+#~| msgid "Terms of Service"
+#~ msgid "Terms of servic"
+#~ msgstr "利用規約"
+
+#~ msgid ""
+#~ "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
+#~ "Reserved. The images on this websites are copyright of their respective "
+#~ "owners."
+#~ msgstr ""
+#~ "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
+#~ "Reserved. The images on this websites are copyright of their respective "
+#~ "owners."
+
+#~| msgid ""
+#~| "Your request for an API Key has been approved!\n"
+#~| "\n"
+#~| "    Your key: %(key)s\n"
+#~| "    Your secret: %(secret)s\n"
+#~| "\n"
+#~| "    Please read the API documentation at %(api_docs_url)s\n"
+#~| "    \n"
+#~| "    You can review your API keys at %(api_keys_url)s\n"
+#~| "    \n"
+#~| "    Thank you for using AstroBin's APIs!"
+#~ msgid ""
+#~ "Your request for an API Key has been approved!\n"
+#~ "\n"
+#~ "    Your key: %(key)s\n"
+#~ "    Your secret: %(secret)s\n"
+#~ "\n"
+#~ "    Please read the API documentation at <a href=\"%(api_docs_url)s\">"
+#~ "%(api_docs_url)s</a>\n"
+#~ "\n"
+#~ "    You can review your API keys at <a href=\"%(api_keys_url)s\">"
+#~ "%(api_keys_url)s</a>\n"
+#~ "\n"
+#~ "    Thank you for using AstroBin's APIs!"
+#~ msgstr ""
+#~ "あなたのAPIキーのリクエストがとどきました。\n"
+#~ "\n"
+#~ "    Your key: %(key)s\n"
+#~ "    Your secret: %(secret)s\n"
+#~ "\n"
+#~ "    APIドキュメントを<a href=\"%(api_docs_url)s\">%(api_docs_url)s</a>に用"
+#~ "意しています。\n"
+#~ "    \n"
+#~ "    また、あなたのAPIキーを <a href=\"%(api_keys_url)s\">"
+#~ "%(api_keys_url)s</a>でテストすることができます。\n"
+#~ "    \n"
+#~ "    AstroBin's APIsを便利につかってくださいね。"
+
+#~ msgid ""
+#~ "Your request for an API Key has been approved!\n"
+#~ "\n"
+#~ "    Your key: %(key)s\n"
+#~ "    Your secret: %(secret)s\n"
+#~ "\n"
+#~ "    Please read the API documentation at %(api_docs_url)s\n"
+#~ "    \n"
+#~ "    You can review your API keys at %(api_keys_url)s\n"
+#~ "    \n"
+#~ "    Thank you for using AstroBin's APIs!"
+#~ msgstr ""
+#~ "あなたのAPIキーのリクエストがとどきました。\n"
+#~ "\n"
+#~ "    Your key: %(key)s\n"
+#~ "    Your secret: %(secret)s\n"
+#~ "\n"
+#~ "    APIドキュメントを%(api_docs_url)sで読んでください。\n"
+#~ "    \n"
+#~ "    あなたのAPIキーを%(api_keys_url)sでお試しすることができます。\n"
+#~ "    \n"
+#~ "    AstroBin's APIsを使ってくれてありがとう!"
+
+#~ msgid "API Key request approved"
+#~ msgstr "APIキーリクエストの許可"
+
+#, fuzzy
+#~ msgid "Last 6 months"
+#~ msgstr "東経もしくは西経"
+
+#, fuzzy
+#~ msgid "All time"
+#~ msgstr "アップロード時間"
 
 #~ msgid "Merge"
 #~ msgstr "結合"
@@ -8251,9 +8430,6 @@ msgstr ""
 #~ msgid "Excerpt"
 #~ msgstr "引用"
 
-#~ msgid "New!"
-#~ msgstr "新着!"
-
 #~ msgid "or return to messages"
 #~ msgstr "またはメッセージに戻る"
 
@@ -8270,9 +8446,6 @@ msgstr ""
 
 #~ msgid "Recently uploaded"
 #~ msgstr "最新画像"
-
-#~ msgid "Recently liked"
-#~ msgstr "Likeされた最新画像"
 
 #~ msgid "Recently bookmarked"
 #~ msgstr "ブックマークされた最新画像"
