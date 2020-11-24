@@ -14,13 +14,13 @@
     <script type="text/javascript">
         $(document).ready(function () {
             if (!$.cookie('astrobin_forum_usage_modal_seen')) {
-                $('#form-usage-modal').modal({
+                $('#forum-usage-modal').modal({
                     backdrop: 'static',
                     show: true,
                     keyboard: false
                 });
 
-                $('#form-usage-modal').on('hidden', function () {
+                $('#forum-usage-modal').on('hidden', function () {
                     $.ajax({
                         url: '/json-api/user/mark-forum-usage-modal-as-seen/',
                         type: 'POST',
@@ -47,7 +47,7 @@
 
 
 {% block modals %}
-    <div class="modal hide fade" id="form-usage-modal">
+    <div class="modal hide fade" id="forum-usage-modal">
         <div class="modal-header">
             <h3>{% trans "Please note" %}</h3>
         </div>
