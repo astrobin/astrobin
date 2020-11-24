@@ -1,0 +1,93 @@
+{% extends 'pybb/base.html' %}
+
+{% load i18n pybb_tags staticfiles %}
+
+{% block title %}
+    {% if forum %}
+        {% trans 'New topic' %}
+    {% else %}
+        {% trans 'New reply' %}
+    {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (!$.cookie('astrobin_forum_usage_modal_seen')) {
+                $('#form-usage-modal').modal({
+                    backdrop: 'static',
+                    show: true,
+                    keyboard: false
+                });
+
+                $('#form-usage-modal').on('hidden', function () {
+                    $.ajax({
+                        url: '/json-api/user/mark-forum-usage-modal-as-seen/',
+                        type: 'POST',
+                        dataType: 'json',
+                        timeout: 5000
+                    });
+                });
+            }
+        });
+    </script>
+{% endblock %}
+
+{% block breadcrumb %}
+    {% if forum %}
+        {% with object=forum extra_crumb="New topic" %}
+            {% include 'pybb/breadcrumb.html' %}
+        {% endwith %}
+    {% else %}
+        {% with object=topic extra_crumb="New reply" %}
+            {% include 'pybb/breadcrumb.html' %}
+        {% endwith %}
+    {% endif %}
+{% endblock %}
+
+
+{% block modals %}
+    <div class="modal hide fade" id="form-usage-modal">
+        <div class="modal-header">
+            <h3>{% trans "Please note" %}</h3>
+        </div>
+
+        <div class="modal-body">
+            <div class="row-fluid">
+                <div class="span2 visible-desktop">
+                    <img src="{% static 'astrobin/images/attention.png' %}" alt="{% trans 'Please note' %}" />
+                </div>
+                <div class="span9 offset1">
+                    <p>
+                        {% url 'contact_form:contact' as contact_url %}
+                        {% blocktrans trimmed %}
+                            The AstroBin forums are a place to discuss astrophotography and astronomy. If you need help
+                            with AstroBin please use the <a href="{{ contact_url }}">contact form</a>.
+                        {% endblocktrans %}
+                    </p>
+                    <p>
+                        {% blocktrans trimmed %}
+                            User support posts, feature requests, issue reports, etc, will be deleted.
+                        {% endblocktrans %}
+                    </p>
+                    <p>
+                        {% blocktrans trimmed %}
+                            Thanks for your cooperation!
+                        {% endblocktrans %}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button data-dismiss="modal" class="btn btn-primary">{% trans "I understand" %}</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <h1>{% if forum %}{% trans 'New topic' %}{% else %}{% trans 'New reply' %}{% endif %}</h1>
+
+    {% include "pybb/post_form.html" %}
+{% endblock content %}
