@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-23 21:53+0000\n"
+"POT-Creation-Date: 2020-11-24 17:18+0000\n"
 "PO-Revision-Date: 2015-12-29 23:52+0000\n"
 "Last-Translator: bilgebay <bilgebay@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3793,6 +3793,9 @@ msgstr "Levha çözümlemeyi başlat"
 msgid "Fit to window"
 msgstr "Pencereye sığdır"
 
+msgid "Loading click-and-drag zoom..."
+msgstr ""
+
 msgid "Abscissa "
 msgstr ""
 
@@ -3816,6 +3819,12 @@ msgstr "Enlemi seçin"
 #| msgid "Select latitude"
 msgid "Galactic latitude"
 msgstr "Enlemi seçin"
+
+msgid "Click-and-drag anywhere on the image."
+msgstr ""
+
+msgid "Want to zoom in?"
+msgstr ""
 
 msgid "No gear yet."
 msgstr ""
@@ -4907,12 +4916,38 @@ msgstr "Tarihinden beri üye"
 msgid "This topic was closed by a moderator."
 msgstr ""
 
+msgid "New topic"
+msgstr ""
+
+#, fuzzy
+#| msgid "New Zealand"
+msgid "New reply"
+msgstr "Yeni Zelanda"
+
+msgid "Please note"
+msgstr ""
+
+#, python-format
+msgid ""
+"The AstroBin forums are a place to discuss astrophotography and astronomy. "
+"If you need help with AstroBin please use the <a href=\"%(contact_url)s"
+"\">contact form</a>."
+msgstr ""
+
+msgid ""
+"User support posts, feature requests, issue reports, etc, will be deleted."
+msgstr ""
+
+#, fuzzy
+msgid "Thanks for your cooperation!"
+msgstr "Aday gösterdiğiniz için teşekkürler"
+
+msgid "I understand"
+msgstr ""
+
 #, fuzzy
 msgid "Back to group"
 msgstr "En üste dön"
-
-msgid "New topic"
-msgstr ""
 
 msgid "Hidden"
 msgstr ""

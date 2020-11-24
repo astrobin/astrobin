@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-23 21:53+0000\n"
+"POT-Creation-Date: 2020-11-24 17:18+0000\n"
 "PO-Revision-Date: 2020-11-23 21:44+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: \n"
@@ -3947,6 +3947,9 @@ msgstr "Resolução de placas"
 msgid "Fit to window"
 msgstr "Ajustar à janela"
 
+msgid "Loading click-and-drag zoom..."
+msgstr ""
+
 msgid "Abscissa "
 msgstr "Abscissa "
 
@@ -3964,6 +3967,12 @@ msgstr "Longitude galática"
 
 msgid "Galactic latitude"
 msgstr "Latitude galática"
+
+msgid "Click-and-drag anywhere on the image."
+msgstr ""
+
+msgid "Want to zoom in?"
+msgstr ""
 
 msgid "No gear yet."
 msgstr "Ainda sem equipamentos."
@@ -5003,11 +5012,40 @@ msgstr "Membro desde"
 msgid "This topic was closed by a moderator."
 msgstr "Este tópico foi encerrado por um moderador."
 
-msgid "Back to group"
-msgstr "Voltar ao grupo"
-
 msgid "New topic"
 msgstr "Novo tópico"
+
+#, fuzzy
+#| msgid "New e-mail"
+msgid "New reply"
+msgstr "Novo e-mail"
+
+#, fuzzy
+#| msgid "Please note!"
+msgid "Please note"
+msgstr "Atenção!"
+
+#, python-format
+msgid ""
+"The AstroBin forums are a place to discuss astrophotography and astronomy. "
+"If you need help with AstroBin please use the <a href=\"%(contact_url)s"
+"\">contact form</a>."
+msgstr ""
+
+msgid ""
+"User support posts, feature requests, issue reports, etc, will be deleted."
+msgstr ""
+
+#, fuzzy
+#| msgid "Thanks for your support!"
+msgid "Thanks for your cooperation!"
+msgstr "Agradecemos o seu apoio!"
+
+msgid "I understand"
+msgstr ""
+
+msgid "Back to group"
+msgstr "Voltar ao grupo"
 
 msgid "Hidden"
 msgstr "Escondido"
