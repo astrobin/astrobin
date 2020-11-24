@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-30 07:28+0000\n"
+"POT-Creation-Date: 2020-11-23 21:54+0000\n"
 "PO-Revision-Date: 2018-12-05 20:30+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.8\n"
 "X-POOTLE-MTIME: 1544041817.000000\n"
+
+msgid "Type your comment here..."
+msgstr ""
 
 msgid "Cancel"
 msgstr "Annulla"
@@ -38,6 +41,14 @@ msgstr "Non ci sono ancora commenti."
 msgid "(deleted)"
 msgstr "(cancellato)"
 
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr ""
+
 msgid "Link"
 msgstr "Link"
 
@@ -53,11 +64,20 @@ msgstr "Modifica"
 msgid "Reply"
 msgstr "Rispondi"
 
+msgid "Like"
+msgstr ""
+
+msgid "Unlike"
+msgstr ""
+
 msgid "The comment cannot be empty."
 msgstr "Il commento non può essere vuoto."
 
-msgid "Save"
-msgstr "Salva"
+msgid "Submit"
+msgstr ""
+
+#~ msgid "Save"
+#~ msgstr "Salva"
 
 #~ msgid "(comment deleted)"
 #~ msgstr "(commento cancellato)"
