@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-23 21:53+0000\n"
+"POT-Creation-Date: 2020-11-24 17:18+0000\n"
 "PO-Revision-Date: 2014-01-24 09:40+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3891,6 +3891,9 @@ msgstr "Εκκίνηση ανάλυσης"
 msgid "Fit to window"
 msgstr "Περιορισμός στο παράθυρο"
 
+msgid "Loading click-and-drag zoom..."
+msgstr ""
+
 msgid "Abscissa "
 msgstr ""
 
@@ -3914,6 +3917,12 @@ msgstr "Επιλέξτε γεωγραφικό πλάτος"
 #| msgid "Select latitude"
 msgid "Galactic latitude"
 msgstr "Επιλέξτε γεωγραφικό πλάτος"
+
+msgid "Click-and-drag anywhere on the image."
+msgstr ""
+
+msgid "Want to zoom in?"
+msgstr ""
 
 msgid "No gear yet."
 msgstr "Δεν υπάρχει εξοπλισμός ακόμα"
@@ -5021,12 +5030,40 @@ msgid "This topic was closed by a moderator."
 msgstr ""
 
 #, fuzzy
-msgid "Back to group"
-msgstr "Πίσω στην κορυφή"
-
-#, fuzzy
 msgid "New topic"
 msgstr "Κλείσιμο"
+
+#, fuzzy
+#| msgid "New Zealand"
+msgid "New reply"
+msgstr "Νέα Ζηλανδία"
+
+#, fuzzy
+#| msgid "Please note!"
+msgid "Please note"
+msgstr "Παρακαλώ σημειώστε!"
+
+#, python-format
+msgid ""
+"The AstroBin forums are a place to discuss astrophotography and astronomy. "
+"If you need help with AstroBin please use the <a href=\"%(contact_url)s"
+"\">contact form</a>."
+msgstr ""
+
+msgid ""
+"User support posts, feature requests, issue reports, etc, will be deleted."
+msgstr ""
+
+#, fuzzy
+msgid "Thanks for your cooperation!"
+msgstr "Ευχαριστούμε για την πρόταση σας"
+
+msgid "I understand"
+msgstr ""
+
+#, fuzzy
+msgid "Back to group"
+msgstr "Πίσω στην κορυφή"
 
 msgid "Hidden"
 msgstr ""

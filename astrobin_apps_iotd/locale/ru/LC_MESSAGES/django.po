@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-23 22:06+0000\n"
-"PO-Revision-Date: 2019-02-25 18:41+0000\n"
-"Last-Translator: BG8JQT <BG8JQT@163.com>\n"
+"POT-Creation-Date: 2020-11-24 17:29+0000\n"
+"PO-Revision-Date: 2020-11-24 10:13+0000\n"
+"Last-Translator: NadirAstro <nadir_teymurov@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1551120112.000000\n"
+"X-POOTLE-MTIME: 1606212838.000000\n"
 
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "Вы не участник списка Номинирующих для Изображения Дня."
@@ -32,10 +32,8 @@ msgstr "Изображения в Staging Area не могут быть номи
 msgid "This user has chosen to be excluded from competitions."
 msgstr "Этот пользователь хочет быть исключенным из соревнования."
 
-#, fuzzy
-#| msgid "This user has chosen to be excluded from competitions."
 msgid "This user has been banned from competitions."
-msgstr "Этот пользователь хочет быть исключенным из соревнования."
+msgstr "Этот пользователь был заблокирован от участия в соревнованиях."
 
 #, python-format
 msgid ""
@@ -46,7 +44,7 @@ msgstr ""
 "%(max_days)s дней назад."
 
 msgid "Users with a Free membership cannot participate in the IOTD."
-msgstr ""
+msgstr "Пользователи с бесплатной подпиской не могут участвовать в IOTD."
 
 msgid "This image has already been an IOTD in the past"
 msgstr "Это изображение уже было Изображением Дня в прошлом"

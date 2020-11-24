@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-23 21:53+0000\n"
-"PO-Revision-Date: 2020-11-20 08:52+0000\n"
+"POT-Creation-Date: 2020-11-24 17:18+0000\n"
+"PO-Revision-Date: 2020-11-24 02:01+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ja\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1605862331.000000\n"
+"X-POOTLE-MTIME: 1606183317.000000\n"
 
 msgid "United Kingdom"
 msgstr "英国"
@@ -3828,6 +3828,9 @@ msgstr "PlateSolveの方法の注釈（可能なら）"
 msgid "Fit to window"
 msgstr "ウィンドウに合わせる"
 
+msgid "Loading click-and-drag zoom..."
+msgstr ""
+
 msgid "Abscissa "
 msgstr ""
 
@@ -3844,6 +3847,12 @@ msgid "Galactic longitude"
 msgstr ""
 
 msgid "Galactic latitude"
+msgstr ""
+
+msgid "Click-and-drag anywhere on the image."
+msgstr ""
+
+msgid "Want to zoom in?"
 msgstr ""
 
 msgid "No gear yet."
@@ -4003,13 +4012,8 @@ msgstr ""
 msgid "There are no images in the spam list."
 msgstr "まだレビューがありません"
 
-#, fuzzy
-#| msgid ""
-#| "<a href=\"%(api_keys_url)s\">Your request for an API Key has been "
-#| "approved!</a>"
 msgid "Your request for an API Key has been approved!"
-msgstr ""
-"<a href=\"%(api_keys_url)s\">あなたのAPIキーのリクエストが許可されました!</a>"
+msgstr "あなたのAPIキーのリクエストが許可されました"
 
 #, fuzzy
 #| msgid "Your API Keys"
@@ -4025,16 +4029,13 @@ msgstr "あなたのAPIキー"
 msgid "Please read the API documentation %(_0)shere%(_1)s."
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid ""
-#| "You don't have any API Keys. Please read the <a href=\"%(api_docs_url)s"
-#| "\">API documentation</a>."
+#, python-format
 msgid ""
 "You can review your API keys at <a href=\"%(api_keys_url)s\">"
 "%(api_keys_url)s</a>"
 msgstr ""
-"あなたはAPIキーをもっていません。<a href=\"%(api_docs_url)s\">APIドキュメント"
-"を読んでください。</a>"
+"あなたはAPIキーをこちらから確認できます。<a href=\"%(api_keys_url)s\">"
+"%(api_keys_url)s</a>"
 
 #, fuzzy
 #| msgid "Thank you for supporting AstroBin!"
@@ -4321,27 +4322,26 @@ msgstr ""
 "<a href=\"%(user_url)s\">%(user)s</a>があなたの画像をプックマーク<a href="
 "\"%(url)s\">%(title)s</a>に追加しました！"
 
-#, fuzzy, python-format
-#| msgid "%(user)s has added your image to their bookmarks: %(url)s"
+#, python-format
 msgid "%(user)s added your image \"%(title)s\" to their bookmarks: %(url)s"
-msgstr "%(user)sがあなたの画像をプックマークに追加しました。%(url)s"
+msgstr ""
+"%(user)sがあなたの画像をプックマークに追加しました。\"%(title)s\" to their "
+"bookmarks: %(url)s"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "<a href=\"%(url)s\"><strong>%(user)s</strong> has added your image to "
-#| "their bookmarks!</a>"
+#, python-format
 msgid ""
 "<strong>%(user)s</strong> added your image \"%(title)s\" to their bookmarks!"
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong>があなたの画像をプックマークに追"
-"加しました!</a>"
+"<strong>%(user)s</strong>があなたの画像\"%(title)s\"をプックマークに追加しま"
+"した"
 
-#, fuzzy, python-format
-#| msgid "%(user)s has added your image to their bookmarks: %(url)s"
+#, python-format
 msgid ""
 "\n"
 "    %(user)s added your image \"%(title)s\" to their bookmarks!\n"
-msgstr "%(user)sがあなたの画像をプックマークに追加しました。%(url)s"
+msgstr ""
+"\n"
+"%(user)sがあなたの画像 \"%(title)s\" をプックマークに追加しました。\n"
 
 #, python-format
 msgid ""
@@ -4369,44 +4369,34 @@ msgstr ""
 msgid "%(user)s commented on your image!"
 msgstr "%(user)sがあなたの画像にコメントしました!"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "<a href=\"%(user_url)s\">%(user)s</a> likes your image: <a href=\"%(url)s"
-#| "\">%(title)s</a>."
+#, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> likes your comment: <a href=\"%(url)s"
 "\">%(comment)s</a>."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user)s</a> は、あなたの画像<a href=\"%(url)s\">"
-"%(title)s</a>にLikeしました!"
+"<a href=\"%(user_url)s\">%(user)s</a> は、あなたのコメント<a href=\"%(url)s"
+"\">%(comment)s</a>にLikeしました"
 
-#, fuzzy, python-format
-#| msgid "%(user)s likes your image: %(url)s"
+#, python-format
 msgid "%(user)s likes your comment: %(url)s %(comment)s"
-msgstr "%(user)sは、あなたの画像（%(url)s）にLikeした"
+msgstr "%(user)sは、あなたのコメント%(url)s %(comment)sにLikeした"
 
-#, fuzzy, python-format
-#| msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+#, python-format
 msgid "<strong>%(user)s</strong> likes your comment!"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong>は、あなたの画像にLikeしました!"
-"</a>"
+msgstr "<strong>%(user)s</strong>は、あなたのコメントにLikeしました"
 
 #, fuzzy, python-format
 #| msgid "%(user)s replied to your comment."
 msgid "%(user)s likes your comment!"
 msgstr "%(user)sがあなたのコメントに返信しました。"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "<a href=\"%(user_url)s\">%(user)s</a> likes your image: <a href=\"%(url)s"
-#| "\">%(title)s</a>."
+#, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a comment: <a href="
 "\"%(url)s\">%(url)s</a>."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user)s</a> は、あなたの画像<a href=\"%(url)s\">"
-"%(title)s</a>にLikeしました!"
+"<a href=\"%(user_url)s\">%(user)s</a> は、あなたのコメント<a href=\"%(url)s"
+"\">%(url)s</a>に返信しました"
 
 #, fuzzy, python-format
 #| msgid "%(user)s likes your image: %(url)s"
@@ -4476,44 +4466,34 @@ msgstr ""
 msgid "You have a new follower!"
 msgstr "新しいフォロワーが加わりました!"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "<a href=\"%(user_url)s\">%(user)s</a> likes your image: <a href=\"%(url)s"
-#| "\">%(title)s</a>."
+#, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> likes your post on this forum topic: "
 "<a href=\"%(url)s\">%(post)s</a>."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user)s</a> は、あなたの画像<a href=\"%(url)s\">"
-"%(title)s</a>にLikeしました!"
+"<a href=\"%(user_url)s\">%(user)s</a> は、このフォーラムのトピックの投稿<a "
+"href=\"%(url)s\">%(post)s</a>にLikeしました!"
 
 #, fuzzy, python-format
 #| msgid "%(user)s likes your image: %(url)s"
 msgid "%(user)s likes your post on this forum topic: %(url)s"
 msgstr "%(user)sは、あなたの画像（%(url)s）にLikeした"
 
-#, fuzzy, python-format
-#| msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+#, python-format
 msgid "<strong>%(user)s</strong> likes your forum post!"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong>は、あなたの画像にLikeしました!"
-"</a>"
+msgstr "<strong>%(user)s</strong>は、あなたのフォーラムの投稿にLikeしました"
 
-#, fuzzy, python-format
-#| msgid "%(user)s likes your image: %(url)s"
+#, python-format
 msgid "%(user)s likes your forum post!"
-msgstr "%(user)sは、あなたの画像（%(url)s）にLikeした"
+msgstr "%(user)sは、あなたのフォーラムの投稿にLikeした"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "<a href=\"%(user_url)s\">%(user)s</a> added your image to their "
-#| "bookmarks: <a href=\"%(url)s\">%(title)s</a>."
+#, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a post on this forum "
 "topic: <a href=\"%(url)s\">%(post)s</a>."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user)s</a>があなたの画像をプックマーク<a href="
-"\"%(url)s\">%(title)s</a>に追加しました！"
+"<a href=\"%(user_url)s\">%(user)s</a>があなたのフォーラムの投稿<a href="
+"\"%(url)s\">%(post)s</a>.に返信しました"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -4880,12 +4860,39 @@ msgid "This topic was closed by a moderator."
 msgstr ""
 
 #, fuzzy
-msgid "Back to group"
-msgstr "Top に戻る"
-
-#, fuzzy
 msgid "New topic"
 msgstr "トピックを開く"
+
+#, fuzzy
+#| msgid "New e-mail"
+msgid "New reply"
+msgstr "新しいメール"
+
+#, fuzzy
+#| msgid "Please note!"
+msgid "Please note"
+msgstr "要注意"
+
+#, python-format
+msgid ""
+"The AstroBin forums are a place to discuss astrophotography and astronomy. "
+"If you need help with AstroBin please use the <a href=\"%(contact_url)s"
+"\">contact form</a>."
+msgstr ""
+
+msgid ""
+"User support posts, feature requests, issue reports, etc, will be deleted."
+msgstr ""
+
+msgid "Thanks for your cooperation!"
+msgstr ""
+
+msgid "I understand"
+msgstr ""
+
+#, fuzzy
+msgid "Back to group"
+msgstr "Top に戻る"
 
 msgid "Hidden"
 msgstr "隠す"

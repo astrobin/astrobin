@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-23 21:53+0000\n"
+"POT-Creation-Date: 2020-11-24 17:18+0000\n"
 "PO-Revision-Date: 2016-08-22 08:16+0000\n"
 "Last-Translator: Salvatore <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3789,6 +3789,9 @@ msgstr "شروع plate-solving"
 msgid "Fit to window"
 msgstr "برای پنجره، سازگار شود."
 
+msgid "Loading click-and-drag zoom..."
+msgstr ""
+
 msgid "Abscissa "
 msgstr ""
 
@@ -3812,6 +3815,12 @@ msgstr "عرض جغرافیایی را انتخاب کنید."
 #| msgid "Select latitude"
 msgid "Galactic latitude"
 msgstr "عرض جغرافیایی را انتخاب کنید."
+
+msgid "Click-and-drag anywhere on the image."
+msgstr ""
+
+msgid "Want to zoom in?"
+msgstr ""
 
 msgid "No gear yet."
 msgstr "هیچ چرخ دنده ای هنوز نیست."
@@ -4709,12 +4718,40 @@ msgid "This topic was closed by a moderator."
 msgstr ""
 
 #, fuzzy
-msgid "Back to group"
-msgstr "بازگشت به بالا"
-
-#, fuzzy
 msgid "New topic"
 msgstr "بستن"
+
+#, fuzzy
+#| msgid "New Zealand"
+msgid "New reply"
+msgstr "نیوزیلند"
+
+#, fuzzy
+#| msgid "Please note!"
+msgid "Please note"
+msgstr "لطفا توجه کنید!"
+
+#, python-format
+msgid ""
+"The AstroBin forums are a place to discuss astrophotography and astronomy. "
+"If you need help with AstroBin please use the <a href=\"%(contact_url)s"
+"\">contact form</a>."
+msgstr ""
+
+msgid ""
+"User support posts, feature requests, issue reports, etc, will be deleted."
+msgstr ""
+
+#, fuzzy
+msgid "Thanks for your cooperation!"
+msgstr "از نامزدی شما متشکریم."
+
+msgid "I understand"
+msgstr ""
+
+#, fuzzy
+msgid "Back to group"
+msgstr "بازگشت به بالا"
 
 msgid "Hidden"
 msgstr ""
