@@ -2164,6 +2164,7 @@ msgid ""
 msgstr ""
 "\n"
 "<a href=\"%(user_page)s\">%(user)s</a> は新しい画像をアップロードしました。\n"
+"                        "
 
 #, python-format
 msgid ""
@@ -2175,6 +2176,7 @@ msgstr ""
 "\n"
 "<a href=\"%(user_page)s\">%(user)s</a> 新しいリビジョン画像をアップロードしま"
 "した。\n"
+"                        "
 
 #, python-format
 msgid ""
@@ -2186,6 +2188,7 @@ msgstr ""
 "\n"
 "<a href=\"%(user_page)s\">%(user)s</a> と %(count)s 人がこの画像にLikeしまし"
 "た。\n"
+"                            "
 
 #, python-format
 msgid ""
@@ -2196,6 +2199,7 @@ msgid ""
 msgstr ""
 "\n"
 "<a href=\"%(user_page)s\">%(user)s</a> がこの画像をLikeしました。\n"
+"                            "
 
 #, python-format
 msgid ""
@@ -2207,6 +2211,7 @@ msgstr ""
 "\n"
 "<a href=\"%(user_page)s\">%(user)s</a> と %(count)s 人がこの画像をブックマー"
 "クしました。\n"
+"                            "
 
 #, python-format
 msgid ""
@@ -2217,6 +2222,7 @@ msgid ""
 msgstr ""
 "\n"
 "<a href=\"%(user_page)s\">%(user)s</a> がこの画像をブックマークしました。\n"
+"                            "
 
 #, python-format
 msgid ""
@@ -2228,6 +2234,7 @@ msgstr ""
 "\n"
 "<a href=\"%(user_page)s\">%(user)s</a> と %(count)s 人がこの画像にコメントし"
 "ました。\n"
+"                            "
 
 #, python-format
 msgid ""
@@ -2238,6 +2245,7 @@ msgid ""
 msgstr ""
 "\n"
 "<a href=\"%(user_page)s\">%(user)s</a> がこの画像にコメントしました。\n"
+"                            "
 
 #, python-format
 msgid ""
@@ -2248,6 +2256,7 @@ msgid ""
 msgstr ""
 "\n"
 "<a href=\"%(user_page)s\">%(user)s</a> が新しい公開グループを削除しました。\n"
+"                        "
 
 #, python-format
 msgid ""
@@ -2258,6 +2267,7 @@ msgid ""
 msgstr ""
 "\n"
 "<a href=\"%(user_page)s\">%(user)s</a> がグループに参加しました。\n"
+"                        "
 
 msgid "Remove ads"
 msgstr "広告の削除"
@@ -2532,14 +2542,14 @@ msgstr "実行しますか？"
 msgid ""
 "We know, we're all used to the fact that ads on the Internet are\n"
 "                    annoying."
-msgstr "ネット上の広告が迷惑なのは周知の事実ですが・・・・・・\n"
+msgstr "ネット上の広告が迷惑なのは周知の事実ですが・・・・・・"
 
 msgid ""
 "However, please let us offer you two good reasons to allow ads on\n"
 "                    AstroBin:"
 msgstr ""
 "しかし、AstroBinに広告を掲載することについては、あなたにとって以下の2つのよい"
-"理由があります。\n"
+"理由があります。"
 
 msgid ""
 "AstroBin is a one-person business. As of the time of writing, in early "
@@ -2554,7 +2564,7 @@ msgstr ""
 "執筆時点では、2020年初頭には私はAstroBinをフルタイムの仕事にしようとしていま"
 "すが、まだ実現していません。\n"
 "もしこの夢が実現すれば、私はAstroBinの開発にもっと多くの時間を投資することが"
-"でき、みんながアストロビンの恩恵を受けることができるでしょう。\n"
+"でき、みんながアストロビンの恩恵を受けることができるでしょう。"
 
 msgid ""
 "There are only astronomy ads on AstroBin, that are published after my review "
@@ -2565,7 +2575,7 @@ msgid ""
 msgstr ""
 "AstroBinに掲載されている広告は、私の審査と承認を経て掲載されている天文に関す"
 "る広告のみです。\n"
-"怪しいものや無関係のもの、個人情報を利用するようなものは一切ありません。\n"
+"怪しいものや無関係のもの、個人情報を利用するようなものは一切ありません。"
 
 #, python-format
 msgid ""
@@ -2574,7 +2584,7 @@ msgid ""
 "                    <a href=\"%(profile_url)s\">your settings page</a>."
 msgstr ""
 "それでも、これらの広告を見たくない場合は、<a href=\"%(profile_url)s\">設定"
-"ページ</a>でこれを変更することができます。\n"
+"ページ</a>でこれを変更することができます。"
 
 msgid "Thank you!"
 msgstr "致谢"
@@ -2791,7 +2801,7 @@ msgstr ""
 "この変更を要求していない場合は、このメッセージを無視しても問題ありません。\n"
 "\n"
 "快晴を共に！\n"
-"AstroBinチーム\n"
+"AstroBinチーム"
 
 msgid "Custom e-mail change request on AstroBin"
 msgstr "AstroBinのメールアドレス変更リクエスト依頼"
