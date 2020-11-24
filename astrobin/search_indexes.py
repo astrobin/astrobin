@@ -397,9 +397,9 @@ class UserIndex(CelerySearchIndex, Indexable):
                 normalized.append(likes)
 
         if len(normalized) == 0:
-            return 0
-
-        result = _astrobin_index(normalized)
+            result = 0
+        else:
+            result = _astrobin_index(normalized)
 
         if obj.userprofile.astrobin_index_bonus is not None:
             result += obj.userprofile.astrobin_index_bonus
