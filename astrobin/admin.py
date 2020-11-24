@@ -49,6 +49,7 @@ class UserProfileAdmin(admin.ModelAdmin):
         'accessories',
         'default_license',
         'language',
+        'astrobin_index_bonus',
     )
 
     list_display = (

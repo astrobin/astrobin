@@ -400,6 +400,10 @@ class UserIndex(CelerySearchIndex, Indexable):
             return 0
 
         result = _astrobin_index(normalized)
+
+        if obj.userprofile.astrobin_index_bonus is not None:
+            result += obj.userprofile.astrobin_index_bonus
+
         return result
 
     def prepare_comment_likes_received(self, obj):

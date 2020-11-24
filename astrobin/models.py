@@ -2197,6 +2197,11 @@ class UserProfile(SafeDeleteModel):
         editable=False,
     )
 
+    astrobin_index_bonus = models.SmallIntegerField(
+        null=True,
+        blank=True,
+    )
+
     plate_solution_overlay_on_full_disabled = models.DateTimeField(
         null=True,
         blank=True,
