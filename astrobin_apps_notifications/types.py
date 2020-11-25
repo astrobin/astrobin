@@ -175,6 +175,12 @@ NOTICE_TYPES = (
         2
     ),
     (
+        'expiring_subscription_autorenew_30d',
+        _('Your subscription will be renewed in one 30 days'),
+        '',
+        2
+    ),
+    (
         'missing_data_source',
         _('You have images with a missing "Data source"'),
         '',

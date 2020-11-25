@@ -34,3 +34,20 @@ class Command(BaseCommand):
                     'object_id': user_subscription.subscription.pk
                 })
             })
+
+        user_subscriptions = UserSubscription.objects \
+            .filter(
+            subscription__name__in=[
+                "AstroBin Lite (autorenew)",
+                "AstroBin Premium (autorenew)",
+            ],
+            expires=datetime.now() + timedelta(days=30)) \
+            .exclude(subscription__recurrence_unit=None)
+
+        for user_subscription in user_subscriptions:
+            push_notification([user_subscription.user], 'expiring_subscription_autorenew_30d', {
+                'user_subscription': user_subscription,
+                'url': settings.BASE_URL + reverse('subscription_detail', kwargs={
+                    'object_id': user_subscription.subscription.pk
+                })
+            })
