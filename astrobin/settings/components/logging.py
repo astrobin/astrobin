@@ -6,9 +6,9 @@ AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'invalid').strip()
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'invalid').strip()
 AWS_REGION_NAME = os.environ.get('AWS_REGION_NAME', 'us-east-1').strip()
 
-boto3_session = Session(aws_access_key_id=AWS_ACCESS_KEY_ID,
-                        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-                        region_name=AWS_REGION_NAME)
+# boto3_session = Session(aws_access_key_id=AWS_ACCESS_KEY_ID,
+#                         aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+#                         region_name=AWS_REGION_NAME)
 
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
@@ -85,16 +85,16 @@ if DEBUG:
     LOGGING['loggers']['apps']['handlers'].append('logfile')
     LOGGING['loggers']['astrobin.tasks']['handlers'].append('logfile')
 
-if AWS_ACCESS_KEY_ID != 'invalid' and AWS_SECRET_ACCESS_KEY != 'invalid' and 'localhost' not in BASE_URL:
-    LOGGING['handlers']['watchtower'] = {
-        'level': 'DEBUG',
-        'class': 'watchtower.CloudWatchLogHandler',
-        'boto3_session': boto3_session,
-        'log_group': 'astrobin',
-        'stream_name': BASE_URL.replace('https://', '').replace('http://', ''),
-        'formatter': 'aws',
-    }
-
-    LOGGING['loggers']['django']['handlers'].append('watchtower')
-    LOGGING['loggers']['apps']['handlers'].append('watchtower')
-    LOGGING['loggers']['astrobin.tasks']['handlers'].append('watchtower')
+# if AWS_ACCESS_KEY_ID != 'invalid' and AWS_SECRET_ACCESS_KEY != 'invalid' and 'localhost' not in BASE_URL:
+#     LOGGING['handlers']['watchtower'] = {
+#         'level': 'DEBUG',
+#         'class': 'watchtower.CloudWatchLogHandler',
+#         'boto3_session': boto3_session,
+#         'log_group': 'astrobin',
+#         'stream_name': BASE_URL.replace('https://', '').replace('http://', ''),
+#         'formatter': 'aws',
+#     }
+#
+#     LOGGING['loggers']['django']['handlers'].append('watchtower')
+#     LOGGING['loggers']['apps']['handlers'].append('watchtower')
+#     LOGGING['loggers']['astrobin.tasks']['handlers'].append('watchtower')
