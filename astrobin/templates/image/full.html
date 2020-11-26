@@ -125,7 +125,7 @@
         </div>
     {% endif %}
 
-    {% astrobin_image image alias revision=revision_label url_size='regular' %}
+    {% astrobin_image image alias revision=revision_label link=False %}
 
     {% if show_advanced_solution and not real %}
         <div
@@ -134,21 +134,18 @@
                     max-width: {{ instance_to_platesolve | thumbnail_width:'hd' }}px;
                     max-height: {{ instance_to_platesolve | thumbnail_height:'hd' }}px;
                 ">
-            <a class="advanced-plate-solution"
-               href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
-                <object
-                        id="advanced-plate-solution-svg"
-                        onload="AstroBinPlatesolving.advancedSvgLoaded()"
-                        type="image/svg+xml"
-                        data="{% url 'astrobin_apps_platesolving.serve_svg' instance_to_platesolve.solution.pk 'hd' %}"
-                        style="
-                                max-width: {{ instance_to_platesolve | thumbnail_width:'hd' }}px;
-                                max-height: {{ instance_to_platesolve | thumbnail_height:'hd' }}px;
-                        ">
-                </object>
-                <div id="x-ruler"></div>
-                <div id="y-ruler"></div>
-            </a>
+            <object
+                    id="advanced-plate-solution-svg"
+                    onload="AstroBinPlatesolving.advancedSvgLoaded()"
+                    type="image/svg+xml"
+                    data="{% url 'astrobin_apps_platesolving.serve_svg' instance_to_platesolve.solution.pk 'hd' %}"
+                    style="
+                            max-width: {{ instance_to_platesolve | thumbnail_width:'hd' }}px;
+                            max-height: {{ instance_to_platesolve | thumbnail_height:'hd' }}px;
+                    ">
+            </object>
+            <div id="x-ruler"></div>
+            <div id="y-ruler"></div>
         </div>
     {% endif %}
 </div>
