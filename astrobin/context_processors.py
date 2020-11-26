@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 from django.conf import settings
 
@@ -62,11 +62,20 @@ def common_variables(request):
 
     get_and_set_user_agent(request)
 
-    bounced = False
+    hard_bounces = None
+    soft_bounces = None
     complained = False
 
     if request.user.is_authenticated():
-        bounced = Bounce.objects.filter(address=request.user.email, bounce_type="Permanent").exists()
+        hard_bounces = Bounce.objects.filter(
+            hard=True,
+            address=request.user.email,
+            bounce_type="Permanent")
+        soft_bounces = Bounce.objects.filter(
+            hard=False,
+            address=request.user.email,
+            bounce_type="Transient",
+            created_at__gte=datetime.now() - timedelta(days=7))[:3]
         complained = Complaint.objects.filter(address=request.user.email).exists()
 
     d = {
@@ -115,7 +124,8 @@ def common_variables(request):
         'GOOGLE_ANALYTICS_ID': settings.GOOGLE_ANALYTICS_ID,
         'GOOGLE_ADS_ID': settings.GOOGLE_ADS_ID,
         'READONLY_MODE': settings.READONLY_MODE,
-        'HAS_BOUNCED_EMAILS': bounced,
+        'HARD_BOUNCES': hard_bounces,
+        'SOFT_BOUNCES': soft_bounces,
         'HAS_COMPLAINT': complained,
         'COUNTRIES': COUNTRIES,
         'COOKIELAW_ACCEPTED': request.COOKIES.get('cookielaw_accepted', False),

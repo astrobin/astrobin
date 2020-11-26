@@ -24,11 +24,56 @@
 {% endif %}
 
 
-{% if HAS_BOUNCED_EMAILS %}
-<div class="container alert alert-warning global-alert">
-    {% blocktrans %}AstroBin is unable to deliver your emails, looks like your address is incorrect.{% endblocktrans %}
-    <a href="{% url 'change_email_index' %}">{% trans "Change your e-mail" %}</a>.
-</div>
+{% if HARD_BOUNCES %}
+    <div class="container alert alert-warning global-alert">
+        <p>
+            {% blocktrans trimmed %}
+                AstroBin is unable to deliver your emails, and it won't try again until the issue is resolved.
+            {% endblocktrans %}
+            {% blocktrans trimmed %}
+                Your email provider recently reported the following error code(s):
+            {% endblocktrans %}
+        </p>
+        <p>
+            {{ HARD_BOUNCES.0.diagnostic_code }}
+        </p>
+        <p>
+            {% blocktrans trimmed %}
+                If you believe this is in error, please contact us. Otherwise please contact your email provider or
+                change your e-mail address on AstroBin.
+            {% endblocktrans %}
+        </p>
+
+        <a class="btn btn-primary" href="{% url 'change_email_index' %}">{% trans "Change your e-mail" %}</a>
+        <a class="btn" href="{% url 'contact_form:contact' %}">{% trans "Contact us" %}</a>
+    </div>
+{% elif SOFT_BOUNCES and SOFT_BOUNCES|length > 2 %}
+    <div class="container alert alert-warning global-alert">
+        <p>
+            {% blocktrans trimmed %}
+                AstroBin is unable to deliver your emails, and it will try again a week after the latest email bounce.
+            {% endblocktrans %}
+            {% blocktrans trimmed %}
+                Your email provider recently reported the following error code(s):
+            {% endblocktrans %}
+        </p>
+        <p>
+            <ul>
+                {% for bounce in SOFT_BOUNCES %}
+                    <li>{{ bounce.diagnostic_code }}</li>
+                {% endfor %}
+            </ul>
+        </p>
+        <p>
+            {% blocktrans trimmed %}
+                If you believe this is in error, please contact us. Otherwise please contact your email provider or
+                change your e-mail address on AstroBin.
+            {% endblocktrans %}
+        </p>
+
+        <a class="btn btn-primary" href="{% url 'change_email_index' %}">{% trans "Change your e-mail" %}</a>
+        <a class="btn" href="{% url 'contact_form:contact' %}">{% trans "Contact us" %}</a>
+    </div>
 {% endif %}
 
 {% if HAS_COMPLAINT %}
