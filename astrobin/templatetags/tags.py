@@ -13,6 +13,7 @@ from threaded_messages.models import Participant
 from astrobin.enums import SubjectType
 from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import GearUserInfo, UserProfile, Image
+from astrobin.services.utils_service import UtilsService
 from astrobin.utils import get_image_resolution, decimal_to_hours_minutes_seconds, decimal_to_degrees_minutes_seconds
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium_2020, is_premium, is_ultimate_2020, \
@@ -644,3 +645,9 @@ def show_click_and_drag_zoom(request, image):
             not (request.user_agent.is_touch_capable or
                  request.user_agent.is_mobile or
                  request.user_agent.is_tablet))
+
+
+@register.simple_tag
+def show_10_year_anniversary_logo():
+    # type: () -> bool
+    return UtilsService.show_10_year_anniversary_logo()

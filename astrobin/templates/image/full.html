@@ -47,9 +47,26 @@
 <div class="navbar navbar-fixed-top" id="top">
     <div class="navbar-inner">
         <div class="container-fluid">
-            <a class="brand" href="{% url 'index' %}">
-                <img src="{% static 'astrobin/images/astrobin-logo-small.png' %}" alt="AstroBin" />
-            </a>
+            {% show_10_year_anniversary_logo as show_10_year_anniversary_logo %}
+            {% if show_10_year_anniversary_logo %}
+                <a class="brand ten-year-anniversary hidden-phone hidden-tablet"
+                   href="https://welcome.astrobin.com/celebrating-10-years-of-astrobin" target="_blank">
+                    <img src="{% static 'astrobin/images/astrobin-logo-10-years.png' %}" alt="AstroBin" />
+                </a>
+
+                <a class="brand-mobile ten-year-anniversary hidden-desktop"
+                   href="https://welcome.astrobin.com/celebrating-10-years-of-astrobin" target="_blank">
+                    🎉
+                </a>
+            {% else %}
+                <a class="brand hidden-phone hidden-tablet" href="{% url 'index' %}">
+                    <img src="{% static 'astrobin/images/astrobin-logo-small.png' %}" alt="AstroBin" />
+                </a>
+
+                <a class="brand-mobile hidden-desktop" href="{% url 'index' %}">
+                    AstroBin
+                </a>
+            {% endif %}
 
             <ul class="nav">
                 <li>
