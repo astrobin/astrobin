@@ -126,7 +126,7 @@ class PremiumTest(TestCase):
             self.assertEqual(premium_us, premium_get_usersubscription(self.user))
             self.assertEqual(premium_us, premium_get_valid_usersubscription(self.user))
 
-            premium_us.active = False
+            premium_us.expires = date.today() - timedelta(1)
             premium_us.save()
             self.assertEqual(premium_autorenew_us, premium_get_valid_usersubscription(self.user))
 
@@ -171,7 +171,7 @@ class PremiumTest(TestCase):
             self.assertEqual(premium_2020_us, premium_get_usersubscription(self.user))
             self.assertEqual(premium_2020_us, premium_get_valid_usersubscription(self.user))
 
-            premium_2020_us.active = False
+            premium_2020_us.expires = date.today() - timedelta(1)
             premium_2020_us.save()
             self.assertEqual(premium_us, premium_get_valid_usersubscription(self.user))
 
@@ -225,7 +225,7 @@ class PremiumTest(TestCase):
             self.assertEqual(ultimate_2020_us, premium_get_usersubscription(self.user))
             self.assertEqual(ultimate_2020_us, premium_get_valid_usersubscription(self.user))
 
-            ultimate_2020_us.active = False
+            ultimate_2020_us.expires = date.today() - timedelta(1)
             ultimate_2020_us.save()
             self.assertEqual(premium_2020_us, premium_get_valid_usersubscription(self.user))
 
