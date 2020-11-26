@@ -1,4 +1,5 @@
 import logging
+from datetime import datetime, timedelta
 
 import persistent_messages
 from django.conf import settings
@@ -54,15 +55,21 @@ class PersistentMessagesBackend(BaseBackend):
 
 class EmailBackend(BaseEmailBackend):
     def can_send(self, user, notice_type):
-        bounces = Bounce.objects.filter(
+        hard_bounces = Bounce.objects.filter(
             hard=True,
             bounce_type="Permanent",
             address=user.email)
+        soft_bounces = Bounce.objects.filter(
+            hard=False,
+            bounce_type="Transient",
+            address=user.email,
+            created_at__gte=datetime.now() - timedelta(days=7))
         complaints = Complaint.objects.filter(
             address=user.email)
         deleted = user.userprofile.deleted is not None
+        ignored = 'ASTROBIN_IGNORE' in user.email
 
-        if deleted or bounces or complaints:
+        if deleted or hard_bounces.exists() or soft_bounces.count() > 2 or complaints or ignored:
             return False
 
         return super(EmailBackend, self).can_send(user, notice_type)
