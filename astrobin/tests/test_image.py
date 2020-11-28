@@ -142,9 +142,12 @@ class ImageTest(TestCase):
         if len(messages) == 0:
             self.assertEqual(False, True)
 
+        found = False
         for message in messages:
-            self.assertEqual(message.tags, tags)
-            self.assertTrue(content in message.message)
+            if message.tags == tags and content in message.message:
+                found = True
+
+        self.assertTrue(found)
 
     ###########################################################################
     # View tests                                                              #
