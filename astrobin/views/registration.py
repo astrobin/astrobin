@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 from django import forms
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from registration.backends.hmac.views import RegistrationView
 from registration.forms import (
@@ -10,6 +11,7 @@ from registration.forms import (
 from registration.signals import user_registered
 
 from astrobin.models import UserProfile
+from astrobin_apps_notifications.utils import push_notification
 
 
 class AstroBinRegistrationForm(RegistrationFormUniqueEmail,
@@ -71,6 +73,10 @@ def user_created(sender, user, request, **kwargs):
 
     if changed:
         profile.save(keep_deleted=True)
+
+    push_notification([user], 'welcome_to_astrobin', {
+        'BASE_URL': settings.BASE_URL,
+    })
 
 
 user_registered.connect(user_created)

@@ -28,3 +28,15 @@ def has_unseen_notifications(user):
     if not user.is_authenticated():
         return False
     return get_unseen_notifications(user, -1).count() > 0
+
+
+@register.filter
+def show_notice_settings(label):
+    # type: (str) -> bool
+
+    return label not in (
+        'test_notification',
+        'welcome_to_astrobin',
+        'congratulations_for_your_first_image',
+        'new_subscription',
+    )

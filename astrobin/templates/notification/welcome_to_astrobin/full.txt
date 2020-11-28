@@ -1,0 +1,61 @@
+{% load i18n %}
+
+
+{% blocktrans trimmed %}
+    Welcome to AstroBin!
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    I'm very excited that you joined, and I would like to give you a warm welcome to the community!
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    You will receive your activation link in a separate email.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Allow me to offer some tips to get you started:
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Have a look at our frequently asked questions:
+{% endblocktrans %}
+https://welcome.astrobin.com/faq
+
+{% blocktrans trimmed %}
+    Head over to your settings and configure your profile:
+{% endblocktrans %}
+{{ BASE_URL }}{% url 'profile_edit_basic' %}
+
+{% blocktrans trimmed %}
+    If you have astrophotography equipment, add it to your gear so that later you can associate it with the images you
+    upload:
+{% endblocktrans %}
+{{ BASE_URL }}{% url 'profile_edit_gear' %}
+
+{% blocktrans trimmed %}
+    If you want, why not introduce yourself on the forums?
+{% endblocktrans %}
+{{ BASE_URL|add:'/forum/c/off-topic/introduce-yourself/' }}
+
+{% blocktrans trimmed %}
+    Follow AstroBin on social networks! AstroBin posts quick announcements and reports there, in addition to
+    the Image of the Day, and Top Picks as stories!
+{% endblocktrans %}
+
+  * Instagram: https://www.instagram.com/astrobin_com/
+  * Facebook: https://www.facebook.com/astrobin/
+  * Twitter: https://twitter.com/AstroBin_com/
+
+{% blocktrans trimmed %}
+    Finally, should you need any support, simply use the contact form:
+{% endblocktrans %}
+{{ BASE_URL }}{% url 'contact_form:contact' %}
+
+{% blocktrans trimmed %}
+    Or send an email to support@astrobin.com.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Thanks again for joining and clear skies!
+{% endblocktrans %}

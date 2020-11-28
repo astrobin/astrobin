@@ -98,6 +98,12 @@ def image_post_save(sender, instance, created, **kwargs):
             if instance.moderator_decision == 1:
                 add_story(instance.user, verb='VERB_UPLOADED_IMAGE', action_object=instance)
 
+        if Image.all_objects.filter(user=instance.user).count() == 1:
+            push_notification([instance.user], 'congratulations_for_your_first_image', {
+                'BASE_URL': settings.BASE_URL,
+                'PREMIUM_MAX_IMAGES_FREE': settings.PREMIUM_MAX_IMAGES_FREE
+            })
+
     if not profile_saved:
         # Trigger update of auto_add fields
         try:
@@ -422,13 +428,13 @@ post_save.connect(solution_post_save, sender=Solution)
 
 def subscription_subscribed(sender, **kwargs):
     subscription = kwargs.get("subscription")
+    usersubscription = kwargs.get("usersubscription")
 
     if subscription.group.name in [
         'astrobin_lite', 'astrobin_premium',
         'astrobin_lite_2020', 'astrobin_premium_2020',
         'astrobin_ultimate_2020'
     ] and subscription.recurrence_unit is None:
-        usersubscription = kwargs.get("usersubscription")
         # AstroBin Premium/Lite/Ultimate are valid for 1 year
         usersubscription.expires = datetime.datetime.now()
         usersubscription.extend(datetime.timedelta(days=365.2425))
@@ -446,6 +452,11 @@ def subscription_subscribed(sender, **kwargs):
         profile = user.userprofile
         profile.premium_counter = 0
         profile.save(keep_deleted=True)
+
+    if subscription.category == 'premium':
+        push_notification([usersubscription.user], 'new_subscription', {
+            'BASE_URL': settings.BASE_URL
+        })
 
 
 subscribed.connect(subscription_subscribed)
