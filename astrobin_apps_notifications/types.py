@@ -212,8 +212,14 @@ NOTICE_TYPES = (
     ),
     (
         'welcome_to_astrobin',
-        _('Welcome to AstroBin'),
+        _('Welcome to AstroBin!'),
         '',
         2,
     ),
+    (
+        'congratulations_for_your_first_image',
+        _("Congratulations for your first image on AstroBin!"),
+        '',
+        2
+    )
 )

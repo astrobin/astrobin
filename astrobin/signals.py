@@ -98,6 +98,12 @@ def image_post_save(sender, instance, created, **kwargs):
             if instance.moderator_decision == 1:
                 add_story(instance.user, verb='VERB_UPLOADED_IMAGE', action_object=instance)
 
+        if Image.all_objects.filter(user=instance.user).count() == 1:
+            push_notification([instance.user], 'congratulations_for_your_first_image', {
+                'BASE_URL': settings.BASE_URL,
+                'PREMIUM_MAX_IMAGES_FREE': settings.PREMIUM_MAX_IMAGES_FREE
+            })
+
     if not profile_saved:
         # Trigger update of auto_add fields
         try:

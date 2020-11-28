@@ -1,0 +1,37 @@
+{% load i18n %}
+{% load static %}
+
+{% blocktrans trimmed %}
+    Good job with uploading your first image on AstroBin. I hope it's the first of many!
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Allow me to jump in and offer a few tips:
+{% endblocktrans %}
+
+{% blocktrans trimmed with max=PREMIUM_MAX_IMAGES_FREE %}
+    Keep in mind that AstroBin is not meant to be a free service. If you are still on a free account, you can
+    upload images {{ max }} times before you will be asked to upgrade. More info on the pricing page:
+{% endblocktrans %}
+https://welcome.astrobin.com/pricing
+
+{% blocktrans trimmed %}
+    New uploads go to your "staging area", where they are unlisted. You can still share the link to an
+    individual image in your staging area, and people with a link will be able to access it, but to make an
+    image public and listed on AstroBin, you need to promote it. Visit your staging area:
+{% endblocktrans %}
+{{ BASE_URL }}{% url 'me' %}?staging
+
+{% blocktrans trimmed %}
+    If you have any questions, have a look at the frequently asked questions:
+{% endblocktrans %}
+https://welcome.astrobin.com/faq
+
+{% blocktrans trimmed %}
+    Finally, should you need any support, simply use the contact form:
+{% endblocktrans %}
+{{ BASE_URL }}{% url 'contact_form:contact' %}
+
+{% blocktrans trimmed %}
+    Or send an email to support@astrobin.com.
+{% endblocktrans %}
