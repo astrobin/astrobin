@@ -221,5 +221,12 @@ NOTICE_TYPES = (
         _("Congratulations for your first image on AstroBin!"),
         '',
         2
+    ),
+
+    (
+        'new_subscription',
+        _("Thank you for getting a subscription!"),
+        '',
+        2
     )
 )

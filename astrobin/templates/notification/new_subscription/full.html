@@ -1,0 +1,58 @@
+{% load i18n %}
+{% load static %}
+
+<h1>
+    {% blocktrans trimmed %}
+       Thank you!
+    {% endblocktrans %}
+</h1>
+
+<div>
+    <img src="{{ BASE_URL }}{% static 'astrobin/images/welcome-to-astrobin.png'%}" alt="" />
+</div>
+
+<br /><br />
+
+<p>
+    {% blocktrans trimmed %}
+        I really appreciate your support for AstroBin, I hope you will enjoy your new subscription!
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        Allow me to jump in and offer a few tips:
+    {% endblocktrans %}
+</p>
+
+<ul>
+    <li>
+        {% blocktrans trimmed %}
+            AstroBin subscriptions are valid for 1 year. When a subscription expires, nothing happens to your content.
+            Nothing is deleted, hidden, held hostage or anything. In fact, you can leave it up forever even if you
+            stop being active as an astrophotographer.
+        {% endblocktrans %}
+    </li>
+
+    <li>
+        {% blocktrans trimmed %}
+            If at some point you want to upgrade your subscription, simply purchase the new one and then get in touch
+            so I can send you a partial refund for the unused time on your previous subscription, or extend the
+            expiration date of your new subscription with pro-rated time from your old one.
+        {% endblocktrans %}
+    </li>
+
+    <li>
+        {% blocktrans trimmed with url="https://welcome.astrobin.com/faq" %}
+            If you have any questions, have a look at the <a href="{{ url }}">frequently asked questions</a>.
+        {% endblocktrans %}
+    </li>
+
+    <li>
+        {% url 'contact_form:contact' as contact_url %}
+        {% blocktrans trimmed with url=BASE_URL|add:contact_url %}
+            Finally, should you need any support, simply use the <a href="{{ url }}">contact form</a> or send
+            an email to <a href="mailto:support@astrobin.com">support@astrobin.com</a>.
+        {% endblocktrans %}
+    </li>
+</ul>
