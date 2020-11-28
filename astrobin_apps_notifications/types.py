@@ -210,4 +210,10 @@ NOTICE_TYPES = (
         '',
         2,
     ),
+    (
+        'welcome_to_astrobin',
+        _('Welcome to AstroBin'),
+        '',
+        2,
+    ),
 )
