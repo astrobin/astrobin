@@ -34,6 +34,7 @@ include(
     'components/pagination.py',
     'components/pipeline.py',
     'components/privatebeta.py',
+    'components/recaptcha.py',
     'components/rest.py',
     'components/silky.py',
     'components/subscription.py',

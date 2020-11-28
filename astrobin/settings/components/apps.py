@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'progressbarupload',
     'cachalot',
+    'captcha',
 
     'astrobin.apps.AstroBinAppConfig',
 ]
