@@ -1,0 +1,10 @@
+import os
+
+from captcha.constants import TEST_PUBLIC_KEY, TEST_PRIVATE_KEY
+
+RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', TEST_PUBLIC_KEY)
+RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY', TEST_PRIVATE_KEY)
+RECAPTCHA_USE_SSL = True
+
+if DEBUG or TESTING:
+    SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
