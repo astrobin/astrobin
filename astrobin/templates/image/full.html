@@ -134,13 +134,11 @@
 </div>
 
 <div id="full-size-image"{% if real %} class="real"{% endif %}>
-    {% if request|show_click_and_drag_zoom:image %}
-        <div class="loading-zoom hidden">
-            <i class="icon-zoom-in"></i>
-            {% trans "Loading click-and-drag zoom..." %}
-            <span class="zoom-image-content-length"></span>
-        </div>
-    {% endif %}
+    <div class="loading-zoom hidden">
+        <i class="icon-zoom-in"></i>
+        {% trans "Loading click-and-drag zoom..." %}
+        <span class="zoom-image-content-length"></span>
+    </div>
 
     {% astrobin_image image alias revision=revision_label link=False %}
 
@@ -248,7 +246,7 @@
             }
 
             {% if request|show_click_and_drag_zoom:image %}
-                if(!('ontouchend' in document)) {
+                if(!('ontouchend' in document) && (window.innerWidth < {{ image.w }})) {
                     $('.loading-zoom').removeClass('hidden');
                     getRealImage().then(function(url) {
                     $('#full-size-image').zoom({
