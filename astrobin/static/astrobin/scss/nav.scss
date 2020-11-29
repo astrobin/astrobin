@@ -18,6 +18,14 @@ body.full {
   }
 }
 
+.navbar-static-top .container,
+.navbar-fixed-top .container,
+.navbar-fixed-bottom .container {
+  @media screen and (min-width: 1020px) {
+    width: 1000px;
+  }
+}
+
 .navbar .btn {
   padding: 4px 12px;
 }
@@ -141,6 +149,14 @@ body.full {
 /* Fixes dropdowns on IE */
 
 .user-nav {
+  > .nav {
+    margin: 0;
+
+    .upload-button {
+      margin-right: -10px;
+    }
+  }
+
   .user-dropdown {
     min-height: 20px;
   }
