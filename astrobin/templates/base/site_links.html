@@ -39,7 +39,7 @@
         {% if request.user|is_content_moderator %}
         <li class="dropdown moderate-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                {% trans "Moderate" %}
+                <i class="icon-legal"></i>
                 {% if images_pending_moderation_no > 0 %}
                     <div class="badge badge-warning">
                         !
