@@ -11,9 +11,11 @@
 # Assumptions:
 #  - The astrobin repository is checked out at the root directory.
 
-
 export DISPLAY=:0
 export USER=ubuntu
+export ASTROBIN_TEMPORARY_FILES=/astrobin-temporary-files
+export USER=ubuntu
+export GROUP=ubuntu
 
 # Get initial packages:
 
@@ -43,3 +45,13 @@ rm /usr/bin/docker-credential-secretservice
 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${DOCKER_REGISTRY}
 docker pull ${DOCKER_REGISTRY}/astrobin:${RELEASE_TAG}
 
+# Install efs-utils:
+
+git clone https://github.com/aws/efs-utils && (cd efs-utils && ./build-deb.sh && apt-get -y install ./build/amazon-efs-utils*deb)
+
+# Mount EFS:
+
+mkdir ${ASTROBIN_TEMPORARY_FILES}
+mount -t efs -o tls ${EFS_FILE_SYSTEM}:/ ${ASTROBIN_TEMPORARY_FILES}
+mkdir -p ${ASTROBIN_TEMPORARY_FILES}/files
+chown ${USER}:${GROUP} ${ASTROBIN_TEMPORARY_FILES}/files
