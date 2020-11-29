@@ -117,7 +117,7 @@ class UserService:
         elif obj.__class__.__name__ == 'NestedComment':
             return  self.user != obj.author
         elif obj.__class__.__name__ == 'Post':
-            return self.user != obj.user
+            return self.user != obj.user and not obj.topic.closed
 
         return False
 

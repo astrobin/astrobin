@@ -287,6 +287,20 @@ class TestUserService(TestCase):
 
         self.assertFalse(UserService(user).can_like(post))
 
+    @patch('astrobin_apps_premium.templatetags.astrobin_apps_premium_tags.is_free')
+    @patch('astrobin.models.UserProfile.get_scores')
+    def test_can_like_post_closed_topic(self, get_scores, is_free):
+        user = Generators.user()
+        post = Generators.forum_post()
+
+        post.topic.closed = True
+        post.topic.save()
+
+        is_free.return_value = False
+        get_scores.return_value = {'user_scores_index': 2}
+
+        self.assertFalse(UserService(user).can_like(post))
+
     @patch('django.contrib.auth.models.User.is_authenticated')
     def test_can_unlike_anon(self, is_authenticated):
         is_authenticated.return_value = False
