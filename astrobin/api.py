@@ -178,6 +178,8 @@ class ImageResource(ModelResource):
     updated = fields.DateField('updated')
 
     locations = fields.ToManyField(LocationResource, 'locations')
+    data_source = fields.CharField('data_source', null=True)
+    remote_source = fields.CharField('remote_source', null=True)
 
     url_thumb = fields.CharField()
     url_gallery = fields.CharField()
@@ -211,6 +213,8 @@ class ImageResource(ModelResource):
             'w',
             'h',
             'locations',
+            'data_source',
+            'remote_source',
 
             'url_thumb',
             'url_gallery',
@@ -253,6 +257,8 @@ class ImageResource(ModelResource):
             'imaging_cameras': ALL,
             'w': ALL,
             'h': ALL,
+            'data_source': ALL,
+            'remote_source': ALL,
         }
         ordering = ['uploaded']
 
