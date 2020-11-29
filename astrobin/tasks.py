@@ -110,6 +110,11 @@ def contain_imagecache_size():
     subprocess.call(['scripts/contain_directory_size.sh', '/media/imagecache', '120'])
 
 
+@shared_task()
+def contain_temporary_files_size():
+    subprocess.call(['scripts/contain_directory_size.sh', '/astrobin-temporary-files/files', '120'])
+
+
 """
 This task will delete all inactive accounts with bounced email
 addresses.
