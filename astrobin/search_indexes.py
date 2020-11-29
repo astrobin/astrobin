@@ -1,5 +1,4 @@
 import datetime
-import logging
 
 from celery_haystack.indexes import CelerySearchIndex
 from django.contrib.auth.models import User
@@ -18,8 +17,6 @@ from astrobin.models import SolarSystem_Acquisition
 from astrobin_apps_iotd.services import IotdService
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
-
-log = logging.getLogger('apps')
 
 PREPARED_FIELD_CACHE_EXPIRATION = 3600
 PREPARED_MOON_PHASE_CACHE_KEY = 'search_index_prepared_moon_phase.%d'
@@ -344,9 +341,6 @@ class UserIndex(CelerySearchIndex, Indexable):
         return "userprofile__updated"
 
     def prepare_images(self, obj):
-        # Logging here just because it's the first "prepare" function.
-        log.debug("Indexing %s: %d" % (obj.__class__.__name__, obj.pk))
-
         return Image.objects.filter(user=obj).count()
 
     def prepare_avg_integration(self, obj):
@@ -589,9 +583,6 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return "updated"
 
     def prepare_imaging_telescopes(self, obj):
-        # Logging here just because it's the first "prepare" function.
-        log.debug("Indexing %s: %s" % (obj.__class__.__name__, obj.get_id()))
-
         return ["%s, %s" % (x.get("make"), x.get("name")) for x in obj.imaging_telescopes.all().values('make', 'name')]
 
     def prepare_guiding_telescopes(self, obj):
