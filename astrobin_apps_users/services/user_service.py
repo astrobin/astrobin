@@ -21,6 +21,26 @@ class UserService:
         self.user = user
 
     @staticmethod
+    def get_case_insensitive(username):
+        case_insensitive_matches = User.objects \
+            .select_related('userprofile') \
+            .prefetch_related('groups') \
+            .filter(username__iexact=username)
+
+        count = case_insensitive_matches.count()
+
+        if count == 0:
+            raise User.DoesNotExist
+
+        if count == 1:
+            return case_insensitive_matches.first()
+
+        return User.objects \
+            .select_related('userprofile') \
+            .prefetch_related('groups') \
+            .get(username__exact=username)
+
+    @staticmethod
     def corrupted_query():
         # type: () -> Q
         return Q(corrupted=True, is_final=True) | \

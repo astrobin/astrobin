@@ -4,6 +4,7 @@ from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 from django import forms
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from registration.backends.hmac.views import RegistrationView
 from registration.forms import (
@@ -44,6 +45,15 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail,
             }
         )
     )
+
+    def clean(self):
+        username_value = self.cleaned_data.get(User.USERNAME_FIELD)
+        if username_value is not None and User.objects.filter(username__iexact=username_value).exists():
+            self.add_error(
+                User.USERNAME_FIELD,
+                _(u'Sorry, this username already exists with a different capitalization.'))
+
+        super(AstroBinRegistrationForm, self).clean()
 
 
 class AstroBinRegistrationView(RegistrationView):

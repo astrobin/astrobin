@@ -1066,9 +1066,14 @@ def me(request):
 @require_GET
 @silk_profile('User page')
 def user_page(request, username):
-    user = get_object_or_404(
-        User.objects.select_related('userprofile').prefetch_related('groups'),
-        username=username)
+    try:
+        user = UserService.get_case_insensitive(username)
+    except User.DoesNotExist:
+        raise Http404
+
+    if user.username != username:
+        return HttpResponseRedirect(reverse('user_page', args=(user.username,)))
+
     profile = user.userprofile
 
     if profile.deleted:
