@@ -1330,21 +1330,18 @@ def user_page(request, username):
     key = "User.%d.Stats.%s" % (user.pk, getattr(request, 'LANGUAGE_CODE', 'en'))
     data = cache.get(key)
     if data is None:
-        image_sqs = SearchQuerySet().models(Image).filter(username=user.username)
         user_sqs = SearchQuerySet().models(User).filter(username=user.username)
         data = {}
 
         if user_sqs.count():
             try:
-                integrated_images = len(image_sqs.filter(integration__gt=0))
-                integration = sum([x.integration for x in image_sqs]) / 3600.0
-                avg_integration = (integration / integrated_images) if integrated_images > 0 else 0
-
                 data['stats'] = (
                     (_('Member since'), member_since),
                     (_('Last login'), last_login),
-                    (_('Total integration time'), "%.1f %s" % (integration, _("hours"))),
-                    (_('Average integration time'), "%.1f %s" % (avg_integration, _("hours"))),
+                    (_('Total integration time'),
+                     "%.1f %s" % (user_sqs[0].integration, _("hours")) if user_sqs[0].integration else None),
+                    (_('Average integration time'),
+                     "%.1f %s" % (user_sqs[0].avg_integration, _("hours")) if user_sqs[0].avg_integration else None),
                     (_('Forum posts'), "%d" % user_sqs[0].forum_posts if user_sqs[0].forum_posts else 0),
                     (_('Comments'), "%d" % user_sqs[0].comments if user_sqs[0].comments else 0),
                     (_('Likes'), "%d" % user_sqs[0].total_likes_received if user_sqs[0].total_likes_received else 0),
