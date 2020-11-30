@@ -21,4 +21,5 @@ class ImageSerializer(serializers.HyperlinkedModelSerializer):
             'skip_notifications',
             'w',
             'h',
+            'license',
         )

@@ -77,6 +77,7 @@ class ImageViewSet(TusCreateMixin,
             'user_id': request.user.id,
             'w': width,
             'h': height,
+            'license': request.user.userprofile.default_license,
         })
 
     def get_success_headers(self, data):
