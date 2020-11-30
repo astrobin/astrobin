@@ -88,7 +88,6 @@ class Solver(AbstractPlateSolvingBackend):
             data = urlencode(data)
             headers = {}
 
-        log.debug("Astrometry.net: sending request to %s" % url)
         request = Request(url=url, headers=headers, data=data)
 
         response = urlopen(request)
