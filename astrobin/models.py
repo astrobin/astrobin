@@ -1423,8 +1423,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         from astrobin.s3utils import OverwritingFileSystemStorage
         from astrobin_apps_images.models import ThumbnailGroup
 
-        log.debug("Image %d: invalidating thumbnails for field / label: %s / %s" % (self.id, field, revision_label))
-
         thumbnailer = get_thumbnailer(field)
         local_filename = field.storage.generate_local_name(field.name)
         local_thumbnailer = get_thumbnailer(

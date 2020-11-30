@@ -156,11 +156,9 @@ def retrieve_thumbnail(pk, alias, options):
             field.name = 'images/' + field.name
         cache_key = image.thumbnail_cache_key(field, alias)
         cache.set(cache_key, url, 60 * 60 * 24 * 365)
-        logger.debug("Image %d: saved generated thumbnail in the cache." % image.pk)
         thumbnails, created = ThumbnailGroup.objects.get_or_create(image=image, revision=revision_label)
         setattr(thumbnails, alias, url)
         thumbnails.save()
-        logger.debug("Image %d: saved generated thumbnail in the database." % image.pk)
         cache.delete('%s.retrieve' % cache_key)
 
     if acquire_lock():
