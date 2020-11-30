@@ -1341,7 +1341,7 @@ def user_page(request, username):
                     (_('Total integration time'),
                      "%.1f %s" % (user_sqs[0].integration, _("hours")) if user_sqs[0].integration else None),
                     (_('Average integration time'),
-                     "%.1f %s" % (user_sqs[0].avg_integration, _("hours")) if user_sqs[0].avgintegration else None),
+                     "%.1f %s" % (user_sqs[0].avg_integration, _("hours")) if user_sqs[0].avg_integration else None),
                     (_('Forum posts'), "%d" % user_sqs[0].forum_posts if user_sqs[0].forum_posts else 0),
                     (_('Comments'), "%d" % user_sqs[0].comments if user_sqs[0].comments else 0),
                     (_('Likes'), "%d" % user_sqs[0].total_likes_received if user_sqs[0].total_likes_received else 0),
