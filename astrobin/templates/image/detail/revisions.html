@@ -43,6 +43,12 @@
                                             </span>
                                         </a>
                                     </li>
+
+                                    <li>
+                                        <a href="{{ image.image_file.url }}" target="_blank">
+                                            <i class="icon-download-alt"></i> {% trans "Download original file" %}
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         {% endif %}
@@ -101,6 +107,12 @@
                                             <span class="hidden-phone">
                                                 {% trans "Delete" %}
                                             </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{ r.image_file.url }}" target="_blank">
+                                            <i class="icon-download-alt"></i> {% trans "Download original file" %}
                                         </a>
                                     </li>
                                 </ul>

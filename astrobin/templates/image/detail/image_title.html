@@ -9,25 +9,43 @@
     </div>
 
     {% if image.link %}
-    <div class="row">
-        <div class="span8">
-            <strong>{% trans "Link" %}</strong>: <a href="{{image.link}}" target="_blank">{{image.link}}</a>
+        <div class="row">
+            <div class="span8">
+                <strong>{% trans "Link" %}</strong>: <a href="{{image.link}}" target="_blank">{{image.link}}</a>
+            </div>
         </div>
-    </div>
     {% endif %}
 
     {% if image.link_to_fits %}
-    <div class="row">
-        <div class="span8">
-            <strong>{% trans "Link to TIFF/FITS" %}</strong>: <a href="{{image.link_to_fits}}" target="_blank">{{image.link_to_fits}}</a>
+        <div class="row">
+            <div class="span8">
+                <strong>{% trans "Link to TIFF/FITS" %}</strong>: <a href="{{image.link_to_fits}}" target="_blank">{{image.link_to_fits}}</a>
+            </div>
         </div>
-    </div>
     {% endif %}
 
     {% if image.acquisition_type and image.acquisition_type != 'TRADITIONAL' and image.acquisition_type != 'OTHER' %}
         <div class="row">
             <div class="span8">
                 <strong>{% trans "Acquisition type" %}</strong>: {{ image.acquisition_type | humanize_image_acquisition_type }}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if request.user == image.user or request.user.is_superuser %}
+        <div class="row">
+            <div class="span8">
+                <strong>{% trans "Download original file" %}</strong>:
+
+                {% if revision_image %}
+                    <a href="{{ revision_image.image_file.url }}" target="_blank">
+                        {% private_abbr %} {{ revision_image.image_file.url }}
+                    </a>
+                {% else %}
+                    <a href="{{ image.image_file.url }}" target="_blank">
+                        {% private_abbr %} {{ image.image_file.url }}
+                    </a>
+                {% endif %}
             </div>
         </div>
     {% endif %}
