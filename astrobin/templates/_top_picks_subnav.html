@@ -62,9 +62,9 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="{{ request.path }}{% query_string "acquisition_type='traditional'" "" %}">
-                        <span class="bg-icon{% if acquisition_type == 'traditional' %} icon-ok{% endif %}"></span>
-                        {% trans "Traditional" %}
+                    <a href="{{ request.path }}{% query_string "acquisition_type='regular'" "" %}">
+                        <span class="bg-icon{% if acquisition_type == 'regular' %} icon-ok{% endif %}"></span>
+                        {% trans "Regular" %}
                     </a>
                 </li>
                 <li>

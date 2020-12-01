@@ -678,7 +678,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     )
 
     ACQUISITION_TYPES = (
-        'TRADITIONAL',
+        'REGULAR',
         'EAA',
         'LUCKY',
         'DRAWING',
@@ -686,8 +686,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     )
 
     ACQUISITION_TYPE_CHOICES = (
-        ('TRADITIONAL', _("Traditional")),
-        ('EAA', _("Electronically-Assisted Astronomy (EAA)")),
+        ('REGULAR', _("Regular (e.g. medium/long exposure with a CCD or DSLR)")),
+        ('EAA', _("Electronically-Assisted Astronomy (EAA, e.g. based on a live video feed)")),
         ('LUCKY', _("Lucky imaging")),
         ('DRAWING', _("Drawing/Sketch")),
         ('OTHER', _("Other/Unknown")),
@@ -870,7 +870,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         choices=ACQUISITION_TYPE_CHOICES,
         max_length=32,
         null=False,
-        default='TRADITIONAL'
+        default='REGULAR'
     )
 
     subject_type = models.CharField(

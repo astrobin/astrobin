@@ -293,7 +293,7 @@ class ImageTest(TestCase):
                 'title': "Test title",
                 'link': "http://www.example.com",
                 'link_to_fits': "http://www.example.com/fits",
-                'acquisition_type': 'TRADITIONAL',
+                'acquisition_type': 'REGULAR',
                 'subject_type': SubjectType.OTHER,
                 'locations': [location.pk],
                 'description': "Image description",
@@ -310,7 +310,7 @@ class ImageTest(TestCase):
                 'title': "Test title",
                 'link': "http://www.example.com",
                 'link_to_fits': "http://www.example.com/fits",
-                'acquisition_type': 'TRADITIONAL',
+                'acquisition_type': 'REGULAR',
                 'data_source': 'AMATEUR_HOSTING',
                 'subject_type': SubjectType.OTHER,
                 'locations': [location.pk],
@@ -327,7 +327,7 @@ class ImageTest(TestCase):
                 'title': "Test title",
                 'link': "http://www.example.com",
                 'link_to_fits': "http://www.example.com/fits",
-                'acquisition_type': 'TRADITIONAL',
+                'acquisition_type': 'REGULAR',
                 'data_source': 'OTHER',
                 'subject_type': SubjectType.OTHER,
                 'locations': [location.pk],
@@ -1733,7 +1733,7 @@ class ImageTest(TestCase):
 
         response = self.client.get(image.get_absolute_url())
         self.assertContains(response, "Acquisition type")
-        self.assertContains(response, "Electronically-Assisted Astronomy (EAA)")
+        self.assertContains(response, "Electronically-Assisted Astronomy (EAA, e.g. based on a live video feed)")
 
         data = post_data(image)
 
