@@ -1733,7 +1733,7 @@ class ImageTest(TestCase):
 
         response = self.client.get(image.get_absolute_url())
         self.assertContains(response, "Acquisition type")
-        self.assertContains(response, "Electronically-Assisted Astronomy (EAA)")
+        self.assertContains(response, "Electronically-Assisted Astronomy (EAA, e.g. based on a live video feed)")
 
         data = post_data(image)
 
