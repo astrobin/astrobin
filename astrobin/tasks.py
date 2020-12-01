@@ -265,7 +265,7 @@ def delete_never_activated_accounts():
 def prepare_download_data_archive(request_id):
     # type: (str) -> None
 
-    logger.debug("prepare_download_data_archive: called for request %d" % request_id)
+    logger.info("prepare_download_data_archive: called for request %d" % request_id)
 
     data_download_request = DataDownloadRequest.objects.get(id=request_id)
 
@@ -359,11 +359,11 @@ def prepare_download_data_archive(request_id):
                                     )
                                 )
                     except Exception as e:
-                        logger.exception("prepare_download_data_archive error: %s" % e.message)
+                        logger.warning("prepare_download_data_archive error: %s" % e.message)
                         logger.debug("prepare_download_data_archive: skipping revision %s" % label)
                         continue
             except Exception as e:
-                logger.exception("prepare_download_data_archive error: %s" % e.message)
+                logger.warning("prepare_download_data_archive error: %s" % e.message)
                 logger.debug("prepare_download_data_archive: skipping image %s" % id)
                 continue
 
@@ -414,7 +414,7 @@ def prepare_download_data_archive(request_id):
         data_download_request.file_size = sum([x.file_size for x in archive.infolist()])
         data_download_request.zip_file.save("", File(temp_zip))
 
-        logger.debug("prepare_download_data_archive: completed for request %d" % request_id)
+        logger.info("prepare_download_data_archive: completed for request %d" % request_id)
     except Exception as e:
         logger.exception("prepare_download_data_archive error: %s" % e.message)
         data_download_request.status = "ERROR"
