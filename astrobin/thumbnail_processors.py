@@ -67,10 +67,10 @@ def watermark(image, watermark=False, **kwargs):
             fontsize -= 1
             font = ImageFont.truetype(ttf, fontsize)
 
-            if position == 0:
-                pos = (image.size[0] * .5 - font.getsize(text)[0] * .5,
-                       image.size[1] * .5 - font.getsize(text)[1] * .5)
-            elif position == 1:
+            pos = (image.size[0] * .5 - font.getsize(text)[0] * .5,
+                   image.size[1] * .5 - font.getsize(text)[1] * .5)
+
+            if position == 1:
                 pos = (image.size[0] * .02,
                        image.size[1] * .02)
             elif position == 2:
@@ -90,7 +90,6 @@ def watermark(image, watermark=False, **kwargs):
                        image.size[1] * .98 - font.getsize(text)[1])
 
             # Draw shadow text
-            shadowcolor = 0x000000
             x = pos[0] + 1
             y = pos[1]
             draw_shadow.text((x, y), text, font=font, fill=(255, 0, 0, 255))
@@ -112,7 +111,7 @@ def watermark(image, watermark=False, **kwargs):
     return image
 
 
-# RGB Hitogram
+# RGB Histogram
 # This script will create a histogram image based on the RGB content of
 # an image. It uses PIL to do most of the donkey work but then we just
 # draw a pretty graph out of it.
