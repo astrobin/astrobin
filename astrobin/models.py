@@ -179,6 +179,13 @@ SOLAR_SYSTEM_SUBJECT_CHOICES = (
     (SolarSystemSubject.NEPTUNE, _("Neptune")),
     (SolarSystemSubject.MINOR_PLANET, _("Minor planet")),
     (SolarSystemSubject.COMET, _("Comet")),
+    (SolarSystemSubject.OCCULTATION, _("Occultation")),
+    (SolarSystemSubject.CONJUNCTION, _("Conjunction")),
+    (SolarSystemSubject.PARTIAL_LUNAR_ECLIPSE, _("Partial lunar eclipse")),
+    (SolarSystemSubject.TOTAL_LUNAR_ECLIPSE, _("Total lunar eclipse")),
+    (SolarSystemSubject.PARTIAL_SOLAR_ECLIPSE, _("Partial solar eclipse")),
+    (SolarSystemSubject.ANULAR_SOLAR_ECLIPSE, _("Anular solar eclipse")),
+    (SolarSystemSubject.TOTAL_SOLAR_ECLIPSE, _("Total solar eclipse")),
     (SolarSystemSubject.OTHER, _("Other")),
 )
 
@@ -897,7 +904,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             "If the main subject of your image is a body in the solar system, please select which (or which type) it is."),
         null=True,
         blank=True,
-        max_length=16,
+        max_length=32,
         choices=SOLAR_SYSTEM_SUBJECT_CHOICES,
     )
 
