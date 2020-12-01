@@ -7,11 +7,11 @@ MIDDLEWARE_CLASSES = [
     'silk.middleware.SilkyMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'astrobin.middleware.LastSeenMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
     'gadjo.requestprovider.middleware.RequestProvider',
     'pybb.middleware.PybbMiddleware',
-    'astrobin.middleware.LastSeenMiddleware',
 ]
 
 if not TESTING:
