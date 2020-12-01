@@ -1335,7 +1335,7 @@ def user_page(request, username):
     key = "User.%d.Stats.%s" % (user.pk, getattr(request, 'LANGUAGE_CODE', 'en'))
     data = cache.get(key)
     if data is None:
-        user_sqs = SearchQuerySet().models(User).filter(username=user.username)
+        user_sqs = SearchQuerySet().models(User).filter(django_id=user.pk)
         data = {}
 
         if user_sqs.count():
