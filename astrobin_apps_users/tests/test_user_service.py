@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 
+from django.contrib.auth.models import User
 from django.utils import timezone
 from mock import patch
 
@@ -12,6 +13,26 @@ from toggleproperties.models import ToggleProperty
 
 
 class TestUserService(TestCase):
+    def test_get_case_insensitive_none(self):
+        with self.assertRaises(User.DoesNotExist):
+            UserService.get_case_insensitive("foo")
+
+    def test_get_case_insensitive_one(self):
+        user = Generators.user(username="one")
+
+        self.assertEquals(user.username, UserService.get_case_insensitive("one").username)
+        self.assertEquals(user.username, UserService.get_case_insensitive("onE").username)
+
+    def test_get_case_insensitive_two(self):
+        user1 = Generators.user(username="one")
+        user2 = Generators.user(username="oNe")
+
+        self.assertEquals(user1.username, UserService.get_case_insensitive(user1.username).username)
+        self.assertEquals(user2.username, UserService.get_case_insensitive(user2.username).username)
+
+        with self.assertRaises(User.DoesNotExist):
+            UserService.get_case_insensitive("One")
+
     def test_get_all_images(self):
         user = Generators.user()
         image = Generators.image(user=user)
