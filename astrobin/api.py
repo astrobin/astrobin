@@ -69,6 +69,8 @@ class ImageRevisionResource(ModelResource):
     url_real = fields.CharField()
     url_duckduckgo = fields.CharField()
     url_duckduckgo_small = fields.CharField()
+    url_histogram = fields.CharField()
+    url_skyplot = fields.CharField()
 
     is_solved = fields.BooleanField()
 
@@ -95,6 +97,8 @@ class ImageRevisionResource(ModelResource):
             'url_real',
             'url_duckduckgo',
             'url_duckduckgo_small',
+            'url_histogram',
+            'url_skyplot',
 
             'is_final',
             'is_solved',
@@ -134,6 +138,14 @@ class ImageRevisionResource(ModelResource):
 
     def dehydrate_url_duckduckgo_small(self, bundle):
         return '%s/%s/%s/rawthumb/duckduckgo_small/' % (settings.BASE_URL, bundle.obj.image.get_id(), bundle.obj.label)
+
+    def dehydrate_url_histogram(self, bundle):
+        return '%s/%s/%s/rawthumb/histogram/' % (settings.BASE_URL, bundle.obj.image.get_id(), bundle.obj.label)
+
+    def dehydrate_url_skyplot(self, bundle):
+        return bundle.obj.solution.skyplot_zoom1.url \
+            if bundle.obj.solution and bundle.obj.solution.skyplot_zoom1 \
+            else None
 
     def dehydrate_is_solved(self, bundle):
         return bundle.obj.solution != None
@@ -188,6 +200,8 @@ class ImageResource(ModelResource):
     url_real = fields.CharField()
     url_duckduckgo = fields.CharField()
     url_duckduckgo_small = fields.CharField()
+    url_histogram = fields.CharField()
+    url_skyplot = fields.CharField()
 
     is_solved = fields.BooleanField()
 
@@ -223,6 +237,8 @@ class ImageResource(ModelResource):
             'url_real',
             'url_duckduckgo',
             'url_duckduckgo_small',
+            'url_histogram',
+            'url_skyplot',
 
             'uploaded',
             'published',
@@ -282,6 +298,14 @@ class ImageResource(ModelResource):
 
     def dehydrate_url_duckduckgo_small(self, bundle):
         return '%s/%s/0/rawthumb/duckduckgo_small/' % (settings.BASE_URL, bundle.obj.get_id())
+
+    def dehydrate_url_histogram(self, bundle):
+        return '%s/%s/0/rawthumb/histogram/' % (settings.BASE_URL, bundle.obj.get_id())
+
+    def dehydrate_url_skyplot(self, bundle):
+        return bundle.obj.solution.skyplot_zoom1.url \
+            if bundle.obj.solution and bundle.obj.solution.skyplot_zoom1 \
+            else None
 
     def dehydrate_is_solved(self, bundle):
         return bundle.obj.solution != None
