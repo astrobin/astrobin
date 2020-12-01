@@ -2093,6 +2093,12 @@ class UserProfile(SafeDeleteModel):
         blank=True,
     )
 
+    last_seen = models.DateTimeField(
+        editable=False,
+        null=True,
+        blank=True,
+    )
+
     # Basic Information
     real_name = models.CharField(
         verbose_name=_("Real name"),

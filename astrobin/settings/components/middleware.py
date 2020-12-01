@@ -11,6 +11,7 @@ MIDDLEWARE_CLASSES = [
     'maintenancemode.middleware.MaintenanceModeMiddleware',
     'gadjo.requestprovider.middleware.RequestProvider',
     'pybb.middleware.PybbMiddleware',
+    'astrobin.middleware.LastSeenMiddleware',
 ]
 
 if not TESTING:
