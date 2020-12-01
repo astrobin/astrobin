@@ -7,6 +7,7 @@ from haystack.generic_views import SearchView
 from haystack.query import SearchQuerySet
 from pybb.models import Post, Topic
 
+from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin_apps_equipment.models import EquipmentBrandListing
 from models import Image
 from nested_comments.models import NestedComment
@@ -278,44 +279,10 @@ class AstroBinSearchForm(SearchForm):
     def filterBySubjectType(self, results):
         subject_type = self.cleaned_data.get("subject_type")
 
-        if subject_type == "deep_sky":
-            results = results.filter(subject_type=100)
-        elif subject_type == "solar_system":
-            results = results.filter(subject_type=200)
-        elif subject_type == "wide":
-            results = results.filter(subject_type=300)
-        elif subject_type == "trails":
-            results = results.filter(subject_type=400)
-        elif subject_type == "aurora":
-            results = results.filter(subject_type=450)
-        elif subject_type == "gear":
-            results = results.filter(subject_type=500)
-        elif subject_type == "other":
-            results = results.filter(subject_type=600)
-        elif subject_type == "sun":
-            results = results.filter(solar_system_main_subject=0)
-        elif subject_type == "moon":
-            results = results.filter(solar_system_main_subject=1)
-        elif subject_type == "mercury":
-            results = results.filter(solar_system_main_subject=2)
-        elif subject_type == "venus":
-            results = results.filter(solar_system_main_subject=3)
-        elif subject_type == "mars":
-            results = results.filter(solar_system_main_subject=4)
-        elif subject_type == "jupiter":
-            results = results.filter(solar_system_main_subject=5)
-        elif subject_type == "saturn":
-            results = results.filter(solar_system_main_subject=6)
-        elif subject_type == "uranus":
-            results = results.filter(solar_system_main_subject=7)
-        elif subject_type == "neptune":
-            results = results.filter(solar_system_main_subject=8)
-        elif subject_type == "minor_planet":
-            results = results.filter(solar_system_main_subject=9)
-        elif subject_type == "comet":
-            results = results.filter(solar_system_main_subject=10)
-        elif subject_type == "other_solar_system":
-            results = results.filter(solar_system_main_subject=11)
+        if subject_type in vars(SubjectType).keys():
+            results = results.filter(subject_type_char=subject_type)
+        elif subject_type in vars(SolarSystemSubject).keys():
+            results = results.filter(solar_system_main_subject_char=subject_type)
 
         return results
 
