@@ -17,7 +17,7 @@ from astrobin.services.utils_service import UtilsService
 from astrobin.utils import get_image_resolution, decimal_to_hours_minutes_seconds, decimal_to_degrees_minutes_seconds
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium_2020, is_premium, is_ultimate_2020, \
-    is_lite, is_any_ultimate, is_free
+    is_lite, is_any_ultimate, is_free, is_lite_2020
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from astrobin_apps_users.services import UserService
 
@@ -650,3 +650,13 @@ def show_click_and_drag_zoom(request, image):
 def show_10_year_anniversary_logo():
     # type: () -> bool
     return UtilsService.show_10_year_anniversary_logo()
+
+
+@register.filter
+def show_images_used(user):
+    return is_lite_2020(user)
+
+
+@register.filter
+def show_uploads_used(user):
+    return is_free(user) or is_lite(user)

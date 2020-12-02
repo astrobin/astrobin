@@ -36,18 +36,27 @@
         </p>
         {% endif %}
 
-        <p>
-            {% trans "Images used" %}<br/>
-            <strong data-test="images-used">
-                {{requested_user.userprofile.premium_counter}} /
-                {% if requested_user|is_free %}{{PREMIUM_MAX_IMAGES_FREE_2020}}{% endif %}
-                {% if requested_user|is_lite %}{{PREMIUM_MAX_IMAGES_LITE}}{% endif %}
-                {% if requested_user|is_lite_2020 %}{{PREMIUM_MAX_IMAGES_LITE_2020}}{% endif %}
-                {% if requested_user|is_premium_2020 %}&infin;{% endif %}
-                {% if requested_user|is_premium %}&infin;{% endif %}
-                {% if requested_user|is_ultimate_2020 %}&infin;{% endif %}
-            </strong>
-        </p>
+        {% if requested_user|show_images_used %}
+            <p>
+                {% trans "Images used" %}<br />
+                <strong data-test="images-used">
+                    {# Lite 2020 is the only account with a limit on total images #}
+                    {{ requested_user.userprofile.premium_counter }} / {{ PREMIUM_MAX_IMAGES_LITE_2020 }}
+                </strong>
+            </p>
+        {% endif %}
+
+        {% if requested_user|show_uploads_used %}
+            <p>
+                {% trans "Images used" %}<br />
+                <strong data-test="uploads-used">
+                    {# Free and old Lite are the only accounts with a limit on upload count #}
+                    {{ requested_user.userprofile.premium_counter }} /
+                    {% if requested_user|is_free %}{{ PREMIUM_MAX_IMAGES_FREE_2020 }}{% endif %}
+                    {% if requested_user|is_lite %}{{ PREMIUM_MAX_IMAGES_LITE }}{% endif %}
+                </strong>
+            </p>
+        {% endif %}
 
         {% if requested_user|is_any_premium_subscription %}
         <p class="small"><em>{% trans "Thanks for your support!" %}</em></p>
