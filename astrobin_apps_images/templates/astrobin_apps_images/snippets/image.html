@@ -109,7 +109,7 @@
                         <h3>{{ image.title | escape | default:_("(no title)") }}</h3>
                         <h4>{% astrobin_username image.user link=False %}</h4>
                         {% if alias == 'gallery' %}
-                            {% cache 43200 astrobin_image_caption caption_cache_key %}
+                            {% cache 300 astrobin_image_caption caption_cache_key %}
                             <table class="table table-condensed">
                                 <tr>
                                     <th><i class="icon-calendar"></i></th>
