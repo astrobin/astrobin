@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-24 17:25+0000\n"
+"POT-Creation-Date: 2020-12-01 21:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -242,4 +242,13 @@ msgid "Thank you!"
 msgstr ""
 
 msgid "Your AstroBin subscription will be automatically renewed in one week"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will be "
+"automatically renewed in 30 days."
+msgstr ""
+
+msgid "Your AstroBin subscription will be automatically renewed in 30 days"
 msgstr ""

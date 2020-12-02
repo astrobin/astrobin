@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-24 17:18+0000\n"
+"POT-Creation-Date: 2020-12-01 21:40+0000\n"
 "PO-Revision-Date: 2015-12-30 11:27+0000\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -1123,6 +1123,30 @@ msgstr "Dwergplaneet"
 msgid "Comet"
 msgstr "Komeet"
 
+#, fuzzy
+#| msgid "Orientation"
+msgid "Occultation"
+msgstr "Oriëntatie"
+
+#, fuzzy
+msgid "Conjunction"
+msgstr "Locaties"
+
+msgid "Partial lunar eclipse"
+msgstr ""
+
+msgid "Total lunar eclipse"
+msgstr ""
+
+msgid "Partial solar eclipse"
+msgstr ""
+
+msgid "Anular solar eclipse"
+msgstr ""
+
+msgid "Total solar eclipse"
+msgstr ""
+
 msgid "Other"
 msgstr "Andere"
 
@@ -1388,12 +1412,11 @@ msgstr "(in nm)"
 msgid "nm"
 msgstr "nm"
 
-#, fuzzy
-#| msgid "Duration"
-msgid "Traditional"
-msgstr "Tijdsduur"
+msgid "Regular (e.g. medium/long exposure with a CCD or DSLR)"
+msgstr ""
 
-msgid "Electronically-Assisted Astronomy (EAA)"
+msgid ""
+"Electronically-Assisted Astronomy (EAA, e.g. based on a live video feed)"
 msgstr ""
 
 msgid "Lucky imaging"
@@ -2191,6 +2214,12 @@ msgstr ""
 msgid "All"
 msgstr "Alles"
 
+msgid "Regular"
+msgstr "Normaal"
+
+msgid "Electronically-Assisted Astronomy (EAA)"
+msgstr ""
+
 msgid "AstroBin is in READ ONLY mode "
 msgstr ""
 
@@ -2461,13 +2490,31 @@ msgid "Don't show again"
 msgstr ""
 
 msgid ""
-"AstroBin is unable to deliver your emails, looks like your address is "
-"incorrect."
+"AstroBin is unable to deliver your emails, and it won't try again until the "
+"issue is resolved."
+msgstr ""
+
+msgid "Your email provider recently reported the following error code(s):"
+msgstr ""
+
+msgid ""
+"If you believe this is in error, please contact us. Otherwise please contact "
+"your email provider or change your e-mail address on AstroBin."
 msgstr ""
 
 #, fuzzy
 msgid "Change your e-mail"
 msgstr "Wijzig je avatar"
+
+#, fuzzy
+#| msgid "Contact"
+msgid "Contact us"
+msgstr "Contact"
+
+msgid ""
+"AstroBin is unable to deliver your emails, and it will try again a week "
+"after the latest email bounce."
+msgstr ""
 
 msgid ""
 "AstroBin is not delivering you emails because you have marked some of them "
@@ -2614,9 +2661,6 @@ msgstr ""
 
 msgid "Quick search"
 msgstr "Snelzoeken"
-
-msgid "Moderate"
-msgstr ""
 
 #, fuzzy
 msgid "Image queue"
@@ -3163,6 +3207,11 @@ msgstr "Gepost op"
 msgid "Remote source"
 msgstr ""
 
+#, fuzzy
+#| msgid "Delete original image"
+msgid "Download original file"
+msgstr "Wis het originele beeld"
+
 msgid "Author"
 msgstr "Auteur"
 
@@ -3520,9 +3569,6 @@ msgstr "Neen"
 
 msgid "Image size"
 msgstr "Grootte foto"
-
-msgid "Regular"
-msgstr "Normaal"
 
 msgid "Full"
 msgstr "Volledig"
@@ -4042,6 +4088,9 @@ msgstr "Conversatie verwijderen"
 msgid "Sending..."
 msgstr "Bezig met versturen..."
 
+msgid "Moderate"
+msgstr ""
+
 msgid ""
 "Please click on the images that you want to mark as SPAM, then click on the "
 "Finish button below to approve all the others."
@@ -4111,6 +4160,70 @@ msgstr "Bedankt voor het ondersteunen van AstroBin!"
 
 #, python-format
 msgid "You can review your API keys at %(api_keys_url)s."
+msgstr ""
+
+msgid "Congratulations for your first image on AstroBin!"
+msgstr ""
+
+msgid ""
+"Good job with uploading your first image on AstroBin. I hope it's the first "
+"of many!"
+msgstr ""
+
+msgid "Allow me to jump in and offer a few tips:"
+msgstr ""
+
+#, python-format
+msgid ""
+"Keep in mind that AstroBin is not meant to be a free service. If you are "
+"still on a free account, you can upload images %(max)s times before you will "
+"be asked to upgrade. More info on the <a href=\"%(url)s\">pricing page</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"New uploads go to your \"staging area\", where they are unlisted. You can "
+"still share the link to an individual image in your staging area, and people "
+"with a link will be able to access it, but to make an image public and "
+"listed on AstroBin, you need to promote it. Visit <a href=\"%(url)s\">your "
+"staging area</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you have any questions, have a look at the <a href=\"%(url)s\">frequently "
+"asked questions</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"Finally, should you need any support, simply use the <a href=\"%(url)s"
+"\">contact form</a> or send an email to <a href=\"mailto:support@astrobin.com"
+"\">support@astrobin.com</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"Keep in mind that AstroBin is not meant to be a free service. If you are "
+"still on a free account, you can upload images %(max)s times before you will "
+"be asked to upgrade. More info on the pricing page:"
+msgstr ""
+
+msgid ""
+"New uploads go to your \"staging area\", where they are unlisted. You can "
+"still share the link to an individual image in your staging area, and people "
+"with a link will be able to access it, but to make an image public and "
+"listed on AstroBin, you need to promote it. Visit your staging area:"
+msgstr ""
+
+msgid ""
+"If you have any questions, have a look at the frequently asked questions:"
+msgstr ""
+
+msgid "Finally, should you need any support, simply use the contact form:"
+msgstr ""
+
+msgid "Or send an email to support@astrobin.com."
 msgstr ""
 
 #, fuzzy
@@ -4883,6 +4996,25 @@ msgstr ""
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
 msgstr ""
 
+msgid ""
+"I really appreciate your support for AstroBin, I hope you will enjoy your "
+"new subscription!"
+msgstr ""
+
+msgid ""
+"AstroBin subscriptions are valid for 1 year. When a subscription expires, "
+"nothing happens to your content. Nothing is deleted, hidden, held hostage or "
+"anything. In fact, you can leave it up forever even if you stop being active "
+"as an astrophotographer."
+msgstr ""
+
+msgid ""
+"If at some point you want to upgrade your subscription, simply purchase the "
+"new one and then get in touch so I can send you a partial refund for the "
+"unused time on your previous subscription, or extend the expiration date of "
+"your new subscription with pro-rated time from your old one."
+msgstr ""
+
 #, fuzzy, python-format
 msgid ""
 "%(user)s posted a new topic to the group: \"%(group_name)s\"\n"
@@ -4998,6 +5130,71 @@ msgstr ""
 
 #, python-format
 msgid "%(user)s joined the public group: \"%(group_name)s\""
+msgstr ""
+
+#, fuzzy
+#| msgid "Following"
+msgid "Welcome to AstroBin!"
+msgstr "Volgen van"
+
+msgid ""
+"I'm very excited that you joined, and I would like to give you a warm "
+"welcome to the community!"
+msgstr ""
+
+msgid "You will receive your activation link in a separate email."
+msgstr ""
+
+msgid "Allow me to offer some tips to get you started:"
+msgstr ""
+
+#, python-format
+msgid "Have a look at our <a href=\"%(url)s\">frequently asked questions</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"Head over to your settings and configure <a href=\"%(url)s\">your profile</"
+"a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you have astrophotography equipment, add it to <a href=\"%(url)s\">your "
+"gear</a> so that later you can associate it with the images you upload."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you want, why not <a href=\"%(url)s\">introduce yourself</a> on the "
+"forums?"
+msgstr ""
+
+msgid ""
+"Follow AstroBin on social networks! AstroBin posts quick announcements and "
+"reports there, in addition to the Image of the Day, and Top Picks as stories!"
+msgstr ""
+
+msgid "Thanks again for joining and clear skies!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Have a look at our frequently asked questions:"
+msgstr "FAQ = Meest gestelde vragen"
+
+msgid "Head over to your settings and configure your profile:"
+msgstr ""
+
+msgid ""
+"If you have astrophotography equipment, add it to your gear so that later "
+"you can associate it with the images you upload:"
+msgstr ""
+
+msgid "If you want, why not introduce yourself on the forums?"
+msgstr ""
+
+msgid "Welcome!"
 msgstr ""
 
 msgid "Object not found"
@@ -6861,6 +7058,19 @@ msgid ""
 "in a while: the more images you have, the more time it will take."
 msgstr ""
 
+#, fuzzy
+#| msgid "Are you sure?"
+msgid "Are you a robot?"
+msgstr "Ben je zeker?"
+
+msgid "Sorry, this username already exists with a different capitalization."
+msgstr ""
+
+#, fuzzy
+#~| msgid "Duration"
+#~ msgid "Traditional"
+#~ msgstr "Tijdsduur"
+
 #~ msgid ""
 #~ "AstroBin is an image hosting website specifically targeted to "
 #~ "astrophotographers: it's the first and the last place where you need to "
@@ -7308,9 +7518,6 @@ msgstr ""
 #~ msgid "Select the product you want to merge to"
 #~ msgstr "Selecteer het product waarmee je wil samenvoegen"
 
-#~ msgid "Are you sure?"
-#~ msgstr "Ben je zeker?"
-
 #~ msgid "Claim retailed product"
 #~ msgstr "Claim produkt als distributeur"
 
@@ -7389,9 +7596,6 @@ msgstr ""
 
 #~ msgid "Private shared folders"
 #~ msgstr "Gedeelde privéfolders"
-
-#~ msgid "Frequently Asked Questions"
-#~ msgstr "FAQ = Meest gestelde vragen"
 
 #~ msgid "Is this website for free?"
 #~ msgstr "Is deze website gratis te gebruiken?"
