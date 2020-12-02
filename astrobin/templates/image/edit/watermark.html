@@ -20,8 +20,13 @@
 
     <div class="subtitle">
         <i class="icon icon-info-sign"></i>
-        {% blocktrans %}AstroBin can protect your images from theft by applying a watermark to them. Be careful with your settings though: once a watermark has been applied, it cannot be removed (AstroBin won't store the non-watermarked version of your image, for your safety). If you don't like the watermark resulting from the following settings, your only choice is to delete the image and start over.{% endblocktrans %}
-        {% blocktrans %}Please note: animated GIFs cannot be watermarked at this time.{% endblocktrans %}
+        {% blocktrans trimmed %}
+            AstroBin can protect your images from theft by applying a watermark to them.
+        {% endblocktrans %}
+
+        {% blocktrans trimmed %}
+            Please note: animated GIFs cannot be watermarked at this time.
+        {% endblocktrans %}
     </div>
 
     <form
