@@ -9,8 +9,8 @@ class ImageEditWatermarkForm(forms.ModelForm):
 
     watermark_opacity = forms.IntegerField(
         label=_("Opacity"),
-        help_text=_(
-            "0 means invisible; 100 means completely opaque. Recommended values are: 10 if the watermark will appear on the dark sky background, 50 if on some bright object."),
+        help_text=_("0 means invisible; 100 means completely opaque. Recommended values are: 10 if the watermark will "
+                    "appear on the dark sky background, 50 if on some bright object."),
         min_value=0,
         max_value=100,
     )
@@ -23,7 +23,7 @@ class ImageEditWatermarkForm(forms.ModelForm):
         watermark = self.cleaned_data['watermark']
 
         if watermark and data == '':
-            raise forms.ValidationError(_("If you want to watermark this image, you must specify some text."));
+            raise forms.ValidationError(_("If you want to watermark this image, you must specify some text."))
 
         return data.strip() if data else data
 
