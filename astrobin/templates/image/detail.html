@@ -49,9 +49,19 @@
             <i class="icon icon-paperclip"></i>
             <strong>{% trans "Contains" %}:</strong>&nbsp;
             {% if image.subject_type == enums.SubjectType.DEEP_SKY %}
-                {% for s in subjects %}
-                    <a href="/search/?q={{s|escape}}">{{s|escape}}</a>{% if not forloop.last %},{% endif %}
+                {% for s in subjects|slice:":30" %}
+                    <a href="/search/?q={{s|escape}}">{{s|escape}}</a>
+                    {% if not forloop.last %}&nbsp;&middot;&nbsp;{% endif %}
                 {% endfor %}
+
+                {% if subjects|length > 30 %}
+                    &nbsp;&middot;&nbsp;
+                    <a href="#full-subject-list-modal" data-toggle="modal">
+                        {% blocktrans with count=subjects|length|add:"-30" %}
+                            And {{ count }} more.
+                        {% endblocktrans %}
+                    </a>
+                {% endif %}
             {% else %}
                 {{subject_type}}
             {% endif %}
@@ -113,6 +123,7 @@
     {% include 'image/detail/modals/flag_thumbnails.html' %}
     {% include 'image/detail/modals/demote.html' %}
     {% include 'image/detail/modals/promote.html' %}
+    {% include 'image/detail/modals/full-subject-list.html' %}
 {% endblock %}
 
 {% block extra_js %}
