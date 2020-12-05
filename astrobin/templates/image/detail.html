@@ -57,7 +57,7 @@
                 {% if subjects|length > 30 %}
                     &nbsp;&middot;&nbsp;
                     <a href="#full-subject-list-modal" data-toggle="modal">
-                        {% blocktrans with count=subjects|length|add:"-30" %}
+                        {% blocktrans trimmed with count=subjects|length|add:"-30" %}
                             And {{ count }} more.
                         {% endblocktrans %}
                     </a>
