@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-01 21:40+0000\n"
+"POT-Creation-Date: 2020-12-05 13:05+0000\n"
 "PO-Revision-Date: 2015-10-16 09:15+0000\n"
 "Last-Translator: VojtechKudela <vojtiik@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2919,6 +2919,10 @@ msgstr "Jiné"
 msgid "Contains"
 msgstr ""
 
+#, python-format
+msgid "And %(count)s more."
+msgstr ""
+
 msgid "Acquired at"
 msgstr ""
 
@@ -3283,6 +3287,9 @@ msgid ""
 "its revisions."
 msgstr ""
 
+msgid "Close"
+msgstr ""
+
 msgid "The following people like this image"
 msgstr ""
 
@@ -3575,11 +3582,7 @@ msgid "Apply a watermark to image"
 msgstr ""
 
 msgid ""
-"AstroBin can protect your images from theft by applying a watermark to them. "
-"Be careful with your settings though: once a watermark has been applied, it "
-"cannot be removed (AstroBin won't store the non-watermarked version of your "
-"image, for your safety). If you don't like the watermark resulting from the "
-"following settings, your only choice is to delete the image and start over."
+"AstroBin can protect your images from theft by applying a watermark to them."
 msgstr ""
 
 msgid "Please note: animated GIFs cannot be watermarked at this time."
@@ -5570,9 +5573,6 @@ msgid ""
 "the data is global and shared between all AstroBin users. Do not write any "
 "information in there that refers to your personal copy of this product, like "
 "\"modded\", \"sold\", \"broken\", \"a present from my aunt\" and so on. "
-msgstr ""
-
-msgid "Close"
 msgstr ""
 
 msgid ""
