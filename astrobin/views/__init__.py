@@ -285,8 +285,8 @@ def upload_error(request, image=None, errors=None):
 
 
 def upload_size_error(request, max_size, image=None):
-    subscriptions_url = "https://welcome.astrobin.com/pricing"
-    open_link = "<a href=\"%s\" target=\"blank\">" % subscriptions_url
+    subscriptions_url = reverse('subscription_list')
+    open_link = "<a href=\"%s\">" % subscriptions_url
     close_link = "</a>"
     msg = "Sorry, but this image is too large. Under your current subscription plan, the maximum allowed image size " \
           "is %(max_size)s. %(open_link)sWould you like to upgrade?%(close_link)s"
@@ -307,8 +307,8 @@ def upload_size_error(request, max_size, image=None):
 
 
 def upload_max_revisions_error(request, max_revisions, image):
-    subscriptions_url = "https://welcome.astrobin.com/pricing"
-    open_link = "<a href=\"%s\" target=\"_blank\">" % subscriptions_url
+    subscriptions_url = reverse('subscription_list')
+    open_link = "<a href=\"%s\">" % subscriptions_url
     close_link = "</a>"
     msg_singular = "Sorry, but you have reached the maximum amount of allowed image revisions. Under your current subscription, the limit is %(max_revisions)s revision per image. %(open_link)sWould you like to upgrade?%(close_link)s"
     msg_plural = "Sorry, but you have reached the maximum amount of allowed image revisions. Under your current subscription, the limit is %(max_revisions)s revisions per image. %(open_link)sWould you like to upgrade?%(close_link)s"

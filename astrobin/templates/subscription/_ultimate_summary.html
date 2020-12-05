@@ -1,0 +1,46 @@
+{% load i18n %}
+{% load tags %}
+{% load astrobin_apps_premium_tags %}
+
+
+{% get_subscription_by_name 'AstroBin Ultimate 2020+' as subscription %}
+
+<div class="subtle-container">
+    <div class="header">
+        <div class="subscription-name">Ultimate</div>
+        <div class="price">
+            {{ subscription.currency }}
+            <span class="number">{{ PREMIUM_PRICE_ULTIMATE_2020 }}</span> / {% trans "year" %}
+        </div>
+        {% include "subscription/_currency_conversion.html" %}
+        {% include 'subscription/_subscription_status_form.html' %}
+    </div>
+    <ul>
+        <li><i class="icon-ok"></i>{% trans "∞ images, ∞ size" %}</li>
+        <li><i class="icon-ok"></i>{% trans "View full res (incl. visitors)" %}</li>
+        <li><i class="icon-ok"></i>{% trans "View full image info" %}</li>
+        <li><i class="icon-ok"></i>{% trans "Full search" %}</li>
+        <li><i class="icon-ok"></i>{% trans "Social features" %}</li>
+        <li><i class="icon-ok"></i>{% trans "Unlimited revisions" %}</li>
+        <li><i class="icon-ok"></i>{% trans "Create/join Groups" %}</li>
+        <li><i class="icon-ok"></i>{% trans "Advanced plate-solving" %}</li>
+        <li><i class="icon-ok"></i>{% trans "IOTD / Top Picks" %}</li>
+        <li><i class="icon-ok"></i>{% trans "Bulk data export" %}</li>
+        <li><i class="icon-ok"></i>{% trans "Hide astronomy ads" %}</li>
+        <li><i class="icon-ok"></i>{% trans "No ads for others on your pages" %}</li>
+        <li><i class="icon-ok"></i>{% trans "Full-size annotations" %}</li>
+        <li><i class="icon-ok"></i>{% trans "Upload uncompressed source" %}</li>
+        <li><i class="icon-ok"></i>{% trans "Undelete images" %}</li>
+        <li><i class="icon-ok"></i><strong>{% trans "All future features" %}</strong></li>
+    </ul>
+</div>
+
+<div class="subtle-container in-the-future">
+    <div class="header">{% trans "In the future" %}</div>
+    <ul>
+        <li><i class="icon-ok"></i>{% trans "Sell in the Marketplace" %}</li>
+        <li><i class="icon-ok"></i>{% trans "Vote/enter contests" %}</li>
+        <li><i class="icon-ok"></i>{% trans "Advanced analytics" %}</li>
+        <li><i class="icon-ok"></i>{% trans "Bulk image editing" %}</li>
+    </ul>
+</div>

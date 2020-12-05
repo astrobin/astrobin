@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Subscription process canceled" %}{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>{% trans "Subscription process cancelled" %}</h1>
+    </div>
+
+    <div class="alert alert-error">
+        {% blocktrans %}Your transaction with PayPal has been cancelled, so no change in your subscription has occurred.{% endblocktrans %}
+    </div>
+
+    {% url 'subscription_list' as plans_url %}
+    {% blocktrans %}Return to the <a href="{{plans_url}}">plans page</a>.{% endblocktrans %}
+{% endblock %}

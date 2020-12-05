@@ -8,7 +8,6 @@ from django.utils.encoding import force_unicode
 from django.utils.functional import allow_lazy
 from django.utils.safestring import mark_safe
 
-from common.services import AppRedirectionService
 from common.services.pagination_service import PaginationService
 
 register = Library()
@@ -213,8 +212,3 @@ def content_type(obj):
 def page_counter(counter, page_number, items_per_page):
     # type: (int, int, int) -> int
     return PaginationService.page_counter(counter, page_number, items_per_page)
-
-
-@register.simple_tag
-def app_redirection_service(request, path):
-    return AppRedirectionService.redirect(request, path)

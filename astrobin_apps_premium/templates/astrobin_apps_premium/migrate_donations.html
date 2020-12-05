@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% load i18n %}
-{% load common_tags %}
 
 
 {% block title %}
@@ -38,7 +37,7 @@
         {% endif %}
     </div>
 
-    <a class="btn" href="{% app_redirection_service request '/subscriptions/options' %}">
+    <a class="btn" href="{% url 'subscription_list' %}">
         {% trans "View the subscription plans" %}
     </a>
 {% else %}
@@ -55,7 +54,7 @@
                         class="btn btn-primary"
                         type="submit"
                         value="{% trans "Migrate donations" %}"/>
-                    <a class="btn" href="https://welcome.astrobin.com/pricing" target="_blank">
+                    <a class="btn" href="{% url 'subscription_list' %}">
                         {% trans "No, I want to pay for Premium" %}
                     </a>
                 </div>

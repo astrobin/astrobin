@@ -1,0 +1,171 @@
+{% load i18n %}
+
+<div class="accordion" id="features-accordion">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#features-accordion" href="#features-body">
+                {% trans "View feature comparison" %} <i class="icon-caret-down"></i>
+            </a>
+        </div>
+        <div id="features-body" class="accordion-body collapse in">
+            <div class="accordion-inner">
+
+                <table class="table table-striped subscription-plans-features-table">
+                    <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>
+                            <span class="hidden-phone">Free</span>
+                            <span class="visible-phone">Fr</span>
+                        </th>
+                        <th>
+                            <span class="hidden-phone">Lite</span>
+                            <span class="visible-phone">Li</span>
+                        </th>
+                        <th>
+                            <span class="hidden-phone">Premium</span>
+                            <span class="visible-phone">Pr</span>
+                        </th>
+                        <th>
+                            <span class="hidden-phone">Ultimate</span>
+                            <span class="visible-phone">Ul</span>
+                        </th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <th>{% trans "Images" %}</th>
+                        <td class="free">{{ PREMIUM_MAX_IMAGES_FREE_2020 }} uploads*</td>
+                        <td class="lite">{{ PREMIUM_MAX_IMAGES_LITE_2020 }}</td>
+                        <td class="premium"><span class="infinity">&infin;</span></td>
+                        <td class="ultimate"><span class="infinity">&infin;</span></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Max size" %}</th>
+                        <td class="free">Max {{ PREMIUM_MAX_IMAGE_SIZE_FREE_2020 | filesizeformat }}</td>
+                        <td class="lite">Max {{ PREMIUM_MAX_IMAGE_SIZE_LITE_2020 | filesizeformat }}</td>
+                        <td class="premium">Max {{ PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020 | filesizeformat }}</td>
+                        <td class="ultimate"><span class="infinity">&infin;</span></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "View full res" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-ok"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "View full image info" %}</th>
+                        <td class="free"><i class="icon-ok"></i></td>
+                        <td class="lite"><i class="icon-ok"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Search" %}</th>
+                        <td class="free">{% trans "Basic" %}</td>
+                        <td class="lite"><span class="green">{% trans "Advanced" %}</span></td>
+                        <td class="premium"><span class="green">{% trans "Advanced" %}</span></td>
+                        <td class="ultimate">{% trans "Full" %}</td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Social features" %}</th>
+                        <td class="free"><i class="icon-ok"></i></td>
+                        <td class="lite"><i class="icon-ok"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Revisions" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite">{{ PREMIUM_MAX_REVISIONS_LITE_2020 }}</td>
+                        <td class="premium">{{ PREMIUM_MAX_REVISIONS_PREMIUM_2020 }}</td>
+                        <td class="ultimate"><span class="infinity">&infin;</span></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Groups" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-ok"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Plate-solving" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite">Basic</td>
+                        <td class="premium">Basic</td>
+                        <td class="ultimate">Advanced</td>
+                    </tr>
+                    <tr>
+                        <th>IOTD / Top Picks</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-ok"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Bulk data export" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Hide astronomy ads" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-ok"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "No ads on your pages" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-remove"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Non-members/free users can view your images in full res" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-remove"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Full size annotations" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-remove"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Upload uncompressed source" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-remove"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    <tr>
+                        <th>{% trans "Undelete images" %}</th>
+                        <td class="free"><i class="icon-remove"></i></td>
+                        <td class="lite"><i class="icon-remove"></i></td>
+                        <td class="premium"><i class="icon-remove"></i></td>
+                        <td class="ultimate"><i class="icon-ok"></i></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <p class="alert alert-info" style="margin-top: 2rem">
+                    <strong>*</strong>
+                    {% blocktrans trimmed %}
+                        The FREE account is to be considered a trial period. You can upload images 10 times, after which
+                        you can't upload anymore. Deleting images doesn't decrease your upload counter: the FREE account
+                        is not meant to be used as a way to keep your latest 10 images.
+                    {% endblocktrans %}
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
