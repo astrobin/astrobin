@@ -6,14 +6,14 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from subscription.models import Subscription, UserSubscription
+from subscription.models import Subscription, UserSubscription, Transaction
 
 from astrobin.models import UserProfile
 from astrobin_apps_users.services import UserService
 from toggleproperties.models import ToggleProperty
 from .permissions import ReadOnly
 from .serializers import ContentTypeSerializer, UserSerializer, UserProfileSerializer, UserProfileSerializerPrivate, \
-    SubscriptionSerializer, UserSubscriptionSerializer, TogglePropertySerializer
+    SubscriptionSerializer, UserSubscriptionSerializer, TogglePropertySerializer, PaymentSerializer
 
 
 @method_decorator(cache_page(60 * 60 * 24), name='dispatch')
@@ -154,3 +154,18 @@ class UserSubscriptionDetail(generics.RetrieveAPIView):
     serializer_class = UserSubscriptionSerializer
     permission_classes = (ReadOnly,)
     queryset = UserSubscription.objects.all()
+
+
+class PaymentList(generics.ListAPIView):
+    model = UserSubscription
+    serializer_class = PaymentSerializer
+    permission_classes = (ReadOnly,)
+    pagination_class = None
+    queryset = Transaction.objects.filter(event__in=['one-time payment', 'subscription payment'])
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('user',)
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated():
+            return self.queryset.filter(user=self.request.user)
+        return self.model.objects.none()
