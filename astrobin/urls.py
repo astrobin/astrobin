@@ -187,7 +187,7 @@ urlpatterns += [
     url(r'^forum/', include('pybb.urls', namespace='pybb')),
     url(r'hitcount/', include('hitcount.urls', namespace='hitcount')),
     url(r'^persistent_messages/', include('persistent_messages.urls')),
-    url(r'^subscriptions/', include('subscription.urls')),
+    url(r'^subscriptions/', RedirectView.as_view(url="https://app.astrobin.com/subscriptions/options", permanent=True)),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^bouncy/', include('django_bouncy.urls')),
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
@@ -221,6 +221,7 @@ urlpatterns += [
     url(r'^users_app/', include('astrobin_apps_users.urls')),
     url(r'^groups/', include('astrobin_apps_groups.urls')),
     url(r'^iotd/', include('astrobin_apps_iotd.urls')),
+    url(r'^payments/', include('astrobin_apps_payments.urls')),
 
     ###########################################################################
     ### HOME VIEWS                                                          ###

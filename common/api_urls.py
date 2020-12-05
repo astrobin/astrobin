@@ -3,7 +3,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 from common.views import ContentTypeList, ContentTypeDetail, UserList, UserDetail, UserProfileList, UserProfileDetail, \
     CurrentUserProfileDetail, SubscriptionList, SubscriptionDetail, UserSubscriptionList, UserSubscriptionDetail, \
-    TogglePropertyList, TogglePropertyDetail
+    TogglePropertyList, TogglePropertyDetail, PaymentList
 
 urlpatterns = (
     url(r'^contenttypes/$', ContentTypeList.as_view(), name='contenttype-list'),
@@ -25,6 +25,8 @@ urlpatterns = (
 
     url(r'^usersubscriptions/$', UserSubscriptionList.as_view(), name='usersubscription-list'),
     url(r'^usersubscriptions/(?P<pk>\d+)/$', UserSubscriptionDetail.as_view(), name='usersubscription-detail'),
+
+    url(r'^payments/$', PaymentList.as_view(), name='payment-list'),
 )
 
 # Format suffixes

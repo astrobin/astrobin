@@ -1,8 +1,9 @@
 {% load i18n %}
 {% load tags %}
+{% load common_tags %}
 
 <li>
-    <a href="{% url 'subscription_list' %}">
+    <a href="{% app_redirection_service request '/subscriptions/options' %}">
         <i class="icon-asterisk"></i>
         {% trans "Subscription plans" %}
     </a>
