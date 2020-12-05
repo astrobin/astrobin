@@ -26,6 +26,7 @@ class Command(BaseCommand):
                 "AstroBin Premium 2020+",
                 "AstroBin Ultimate 2020+",
             ],
+            active=True,
             expires = datetime.now() - timedelta(days = 1))
 
         for user_subscription in user_subscriptions:

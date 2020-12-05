@@ -24,6 +24,7 @@ class Command(BaseCommand):
                     "AstroBin Lite (autorenew)",
                     "AstroBin Premium (autorenew)",
                 ],
+                cancelled=False,
                 expires = datetime.now() + timedelta(days = 7))\
             .exclude(subscription__recurrence_unit = None)
 
@@ -41,6 +42,7 @@ class Command(BaseCommand):
                 "AstroBin Lite (autorenew)",
                 "AstroBin Premium (autorenew)",
             ],
+            cancelled=False,
             expires=datetime.now() + timedelta(days=30)) \
             .exclude(subscription__recurrence_unit=None)
 
