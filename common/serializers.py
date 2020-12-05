@@ -4,9 +4,9 @@ from django.contrib.contenttypes.models import ContentType
 from avatar.utils import get_primary_avatar, get_default_avatar_url
 from rest_framework import serializers
 
-from rest_framework.fields import BooleanField, IntegerField, FloatField
+from rest_framework.fields import BooleanField, IntegerField, FloatField, CharField
 from rest_framework.relations import PrimaryKeyRelatedField
-from subscription.models import UserSubscription, Subscription
+from subscription.models import UserSubscription, Subscription, Transaction
 
 from astrobin.models import UserProfile
 from astrobin_apps_users.services import UserService
@@ -95,3 +95,17 @@ class UserSubscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserSubscription
         fields = '__all__'
+
+
+class PaymentSerializer(serializers.ModelSerializer):
+    currency = CharField(read_only=True, source='subscription.currency')
+
+    class Meta:
+        model = Transaction
+        fields = (
+            'id',
+            'timestamp',
+            'event',
+            'amount',
+            'currency',
+        )
