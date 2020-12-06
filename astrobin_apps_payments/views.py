@@ -26,9 +26,6 @@ def stripe_config(request):
 @csrf_exempt
 @require_POST
 def create_checkout_session(request, user_pk, product):
-    if not request.is_ajax():
-        return HttpResponseBadRequest()
-
     stripe.api_key = settings.STRIPE_SECRET_KEY
     user = get_object_or_404(User, pk=user_pk)
 
