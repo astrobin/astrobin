@@ -6,8 +6,7 @@ import logging
 import stripe
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.http import JsonResponse, HttpResponseBadRequest, HttpResponse
-from django.shortcuts import get_object_or_404
+from django.http import JsonResponse, HttpResponseBadRequest, HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 from paypal.standard.ipn.models import PayPalIPN
@@ -27,7 +26,12 @@ def stripe_config(request):
 @require_POST
 def create_checkout_session(request, user_pk, product):
     stripe.api_key = settings.STRIPE_SECRET_KEY
-    user = get_object_or_404(User, pk=user_pk)
+
+    try:
+        user = User.objects.get(pk=user_pk)
+    except User.DoesNotExist:
+        log.error("create_checkout_session: %d, %s: %s" % (user_pk, product, "Invalid user"))
+        raise Http404
 
     if product == 'lite':
         price = settings.STRIPE_PRICE_LITE
@@ -36,6 +40,7 @@ def create_checkout_session(request, user_pk, product):
     elif product == 'ultimate':
         price = settings.STRIPE_PRICE_ULTIMATE
     else:
+        log.error("create_checkout_session: %d, %s: %s" % (user.pk, product, "Invalid product"))
         return HttpResponseBadRequest()
 
     log.info("create_checkout_session: %d, %s, %s" % (user.pk, product, price))
