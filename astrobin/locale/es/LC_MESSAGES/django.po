@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-05 13:05+0000\n"
+"POT-Creation-Date: 2020-12-06 18:30+0000\n"
 "PO-Revision-Date: 2020-11-23 21:43+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
@@ -5554,405 +5554,6 @@ msgstr "CCD vs DSLR: tendencia global"
 msgid "Global trend of telescope types"
 msgstr "Tendencia global de tipos de telescopio"
 
-msgctxt "approximately"
-msgid "about"
-msgstr "Acerca de"
-
-msgid "View feature comparison"
-msgstr "Ver comparación de característica"
-
-msgid "Max size"
-msgstr "Tamaño máximo"
-
-msgid "View full res"
-msgstr "Ver resolución completa"
-
-msgid "View full image info"
-msgstr "Ver información completa de la imagen"
-
-msgid "Basic"
-msgstr "Básico"
-
-msgid "Advanced"
-msgstr "Avanzado"
-
-msgid "Social features"
-msgstr "Funciones sociales"
-
-msgid "Plate-solving"
-msgstr "Plate-solving"
-
-msgid "Bulk data export"
-msgstr "Exportación masiva de datos"
-
-msgid "Hide astronomy ads"
-msgstr "Esconder publicidad de astronomía"
-
-msgid "No ads on your pages"
-msgstr "Sin publicidad en tus páginas"
-
-msgid "Non-members/free users can view your images in full res"
-msgstr ""
-"Los usuarios no miembros/libres pueden ver sus imágenes en resolución "
-"completa"
-
-msgid "Full size annotations"
-msgstr "Anotaciones en tamaño completo"
-
-msgid "Upload uncompressed source"
-msgstr "Subir fuente sin comprimir"
-
-msgid "Undelete images"
-msgstr "Restaurar imágenes"
-
-msgid ""
-"The FREE account is to be considered a trial period. You can upload images "
-"10 times, after which you can't upload anymore. Deleting images doesn't "
-"decrease your upload counter: the FREE account is not meant to be used as a "
-"way to keep your latest 10 images."
-msgstr ""
-"La cuenta GRATIS se considera periodo de prueba. Puede cargar imágenes 10 "
-"veces, después de lo cual no podrá subir más. Eliminar imágenes no "
-"disminuirá su contador de cargas: el objetivo de la cuenta GRATIS no es ser "
-"usada como una forma para conservar sus últimas 10 imágenes. "
-
-msgid "year"
-msgstr "año"
-
-#, python-format
-msgid ""
-"\n"
-"                %(number)s images, max %(size)s each"
-msgstr ""
-"\n"
-"                %(number)s imágenes, max %(size)s cada una"
-
-msgid "View in original resolution"
-msgstr "Ver en resolución original"
-
-#, python-format
-msgid ""
-"Up to %(number)s\n"
-"            revisions/image"
-msgstr ""
-"Hasta %(number)s\n"
-"            revisiones/imagen"
-
-msgid "Create/join Groups"
-msgstr "Crear/unirse a Grupos"
-
-msgid "Basic plate-solving"
-msgstr "Plate-solving básico"
-
-msgid "IOTD / Top Picks"
-msgstr "IOTD/Top de seleccionadas"
-
-msgid "No ads for others on your pages"
-msgstr "Sin publicidad para otros en tus páginas"
-
-msgid "Full-size annotations"
-msgstr "Anotaciones en tamaño completo"
-
-msgid "All future features"
-msgstr "Todas las futuras características"
-
-msgid "In the future"
-msgstr "en el futuro"
-
-msgid "Buy in the Marketplace"
-msgstr "Comprar en el Mercado"
-
-msgid "Vote in contests"
-msgstr "Votar en concurso"
-
-msgid "Analytics"
-msgstr "Analíticas"
-
-msgid "Bulk image editing"
-msgstr "Edición masiva de imágenes"
-
-msgid "Pay securely with PayPal"
-msgstr "Pagar de manera segura vía PayPal"
-
-msgid "Want to upgrade from a lower subscription tier?"
-msgstr "¿Desea subir de nivel desde un rango bajo de suscripción?"
-
-#, python-format
-msgid ""
-"AstroBin doesn't support subscription upgrades at the moment, but we're "
-"happy to make it happen manually. If you're on a lower subscription tier and "
-"would like to upgrade to <strong>%(name)s</strong>, please just buy it and "
-"then contact us at <a href=\"mailto:astrobin@astrobin.com"
-"\">astrobin@astrobin.com</a> to get a refund for the unused time on your old "
-"subscription. Thanks!"
-msgstr ""
-"AstroBin no admite actualizaciones de suscripción en este momento, pero "
-"estamos encantados de hacerlo realidad manualmente. Si usted está en un "
-"nivel de suscripción más bajo y le gustaría actualizar a <strong>%(name)s</"
-"strong> por favor cómprelo y luego póngase en contacto con nosotros en <a "
-"href=\"mailto:astrobin@astrobin.com\">astrobin@astrobin.com</a> para obtener "
-"un reembolso por el tiempo no utilizado en su suscripción anterior. ¡Gracias!"
-
-msgid "Pay with a bank transfer"
-msgstr "Pagar con una transferencia bancaria"
-
-#, python-format
-msgid ""
-"\n"
-"                Prefer to pay via bank transfer? Please make a deposit of "
-"%(currency)s %(amount)s to the following\n"
-"                bank details and then email us at %(email_prefix)s%(email)s"
-"%(email_postfix)s with your username so\n"
-"                we may upgrade your account manually. Thanks!\n"
-"            "
-msgstr ""
-"\n"
-"                ¿Prefiere pagar por transferencia bancaria? Por favor, haga "
-"un depósito de %(currency)s %(amount)s con los siguientes\n"
-"                detalles bancarios y luego escríbanos a %(email_prefix)s"
-"%(email)s%(email_postfix)s con su nombre de usuario\n"
-"                para que podamos subir de nivel su cuenta manualmente. "
-"¡Gracias!\n"
-"            "
-
-#, python-format
-msgid ""
-"\n"
-"                ∞ images, max %(size)s each"
-msgstr ""
-"\n"
-"                ∞ imágenes, max %(size)s cada una"
-
-msgid "Basic analytics"
-msgstr "Análisis básicos"
-
-msgid "Buy"
-msgstr "Comprar"
-
-msgid "You are already on this plan"
-msgstr "Ya estás en este plan"
-
-msgid "∞ images, ∞ size"
-msgstr "∞ imágenes, ∞ tamaño"
-
-msgid "View full res (incl. visitors)"
-msgstr "Ver resolución completa (incluye visitantes)"
-
-msgid "Full search"
-msgstr "Búsqueda completa"
-
-msgid "Unlimited revisions"
-msgstr "Revisiones ilimitadas"
-
-msgid "Advanced plate-solving"
-msgstr "Plate-solving avanzado"
-
-msgid "Sell in the Marketplace"
-msgstr "Vender en el Mercado"
-
-msgid "Vote/enter contests"
-msgstr "Votar/entrar en concursos"
-
-msgid "Advanced analytics"
-msgstr "Análisis avanzados"
-
-msgid "Subscription process canceled"
-msgstr "Proceso de suscripción cancelado"
-
-msgid "Subscription process cancelled"
-msgstr "Proceso de suscripción cancelado"
-
-msgid ""
-"Your transaction with PayPal has been cancelled, so no change in your "
-"subscription has occurred."
-msgstr ""
-"Tu transacción de PayPal ha sido cancelada, por tanto no ha habido ningún "
-"cambio en tu suscripción."
-
-#, python-format
-msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
-msgstr "Volver a la <a href=\"%(plans_url)s\">Página de Planes</a>."
-
-msgctxt "Subscription plan name"
-msgid "Plan"
-msgstr "Planes"
-
-msgid "Offer valid until"
-msgstr "Oferta válida hasta"
-
-msgid "Price"
-msgstr "Precio"
-
-msgid "Validity"
-msgstr "Validez"
-
-msgid "Autorenew"
-msgstr "Renovación automática"
-
-msgid "Trial period"
-msgstr "Periodo de prueba"
-
-msgid "day"
-msgstr "día"
-
-msgid "week"
-msgstr "semana"
-
-msgid "month"
-msgstr "mes"
-
-msgid "one time"
-msgstr "Una sola vez"
-
-msgctxt "At no cost"
-msgid "Free"
-msgstr "Gratis"
-
-msgid "Daily"
-msgstr "Diariamente"
-
-msgid "Weekly"
-msgstr "Semanalmente"
-
-msgid "Monthly"
-msgstr "Mensualmente"
-
-msgid "Yearly"
-msgstr "Anualmente"
-
-msgid "days"
-msgstr "días"
-
-msgid "weeks"
-msgstr "semanas"
-
-msgid "months"
-msgstr "meses"
-
-msgid "years"
-msgstr "años"
-
-msgid "No trial"
-msgstr "No de prueba"
-
-msgid "Switch to"
-msgstr "Cambiar a"
-
-msgid "Subscription changed"
-msgstr "Suscripción modificada"
-
-msgid ""
-"Your request for a change in your subscription has been processed "
-"successfully."
-msgstr ""
-"Tu solicitud de cambio en tu suscripción ha sido procesada "
-"satisfactoriamente."
-
-msgid "Subscription plan"
-msgstr "Plan de suscripción"
-
-msgid "Status"
-msgstr "Estatus"
-
-msgid "Subscribed"
-msgstr "Suscrito"
-
-msgid "Expires"
-msgstr "Caducidad"
-
-msgid "Invalid"
-msgstr "No válido"
-
-msgid "Cancelled"
-msgstr "Cancelada"
-
-msgid "Unavailable"
-msgstr "No disponible"
-
-msgid "Unsubscribed"
-msgstr "No suscrito"
-
-#, python-format
-msgid ""
-"This subscription is not offered anymore on AstroBin. Please visit the <a "
-"href=\"%(url)s\">subscriptions page</a> to see the available plans, thanks!"
-msgstr ""
-"Esta suscripción ya no se ofrece en AstroBin. Por favor, visite la <a href="
-"\"%(url)s\">subscriptions page</a>para ver los planes disponibles, ¡gracias!"
-
-msgid ""
-"If you would like to renew your subscription, please visit this page again "
-"after\n"
-"                        your current subscription's expiration date:"
-msgstr ""
-"Si quiere renovar su suscripción, por favor visite esta página nuevamente "
-"luego\n"
-"                        de la actual fecha de vencimiento de su suscripción:"
-
-msgid ""
-"Your subscription is either cancelled or not active yet. If you want to "
-"subscribe again, please wait until your subscription is expired. If you just "
-"subscribed, please wait a few minutes while PayPal contacts our server for "
-"the final transaction confirmation. Thank you!"
-msgstr ""
-"Tu suscripción está cancelada o no está activa aún. Si quieres suscribirte "
-"otra vez, por favor espera hasta que tu suscripción haya finalizado. Si te "
-"acabas de suscribir, espera unos minutos mientras PayPal contacta con "
-"nuestro servidor para confirmar la transacción. ¡Gracias!"
-
-msgid "By cancelling, you will revert to a free plan."
-msgstr "Al cancelar, regresaras a un plan gratuito."
-
-#, python-format
-msgid "Free plans are limited to <strong>%(max_allowed)s</strong> images."
-msgstr ""
-"Los planes gratuitos están limitados a <strong>%(max_allowed)s</strong> "
-"imágenes."
-
-msgid ""
-"However, your existing images will not be deleted or deactivated in any way! "
-"Simply, you will not be able to upload any more images unless you switch to "
-"a paid plan."
-msgstr ""
-"En cualquier caso, las imágenes que ya tienes no serán borradas ni "
-"desactivadas de ningún modo. Simplemente, no podrás subir más imágenes hasta "
-"que cambies a un plan de pago."
-
-msgid "Cancel via PayPal"
-msgstr "Cancelar via PayPal"
-
-msgid "You cannot switch to this plan."
-msgstr "No puedes cambiar a este plan."
-
-msgid "Back to the plans"
-msgstr "Volver a los planes"
-
-msgid "Subscription confirmed"
-msgstr "Suscripción confirmada"
-
-msgid ""
-"Your request has been received, and we are awaiting the final confirmation "
-"from PayPal. Your subscription should be active within a few minutes!"
-msgstr ""
-"Tu solicitud a sido recibida, estamos esperando la confirmación final desde "
-"PayPal. Tu suscripción se activará en unos pocos minutos."
-
-msgid "Thank you for supporting AstroBin!"
-msgstr "¡Gracias por apoyar a AstroBin!"
-
-msgid "Your active subscription plans"
-msgstr "Tus planes de suscripción activos"
-
-msgid "Your inactive subscription plans"
-msgstr "Tus planes de suscripción inactivos"
-
-msgid ""
-"PS: are you interested in larger plans?\n"
-"                <a href=\"/contact/\">Let us know!</a>"
-msgstr ""
-"PD: ¿Estás interesado en un plan más grande?\n"
-"                <a href=\"/contact/\">¡Déjenoslo saber!</a>"
-
 msgid "This list is currently empty."
 msgstr "Esta lista está actualmente vacía."
 
@@ -6280,6 +5881,9 @@ msgstr "No tienes peticiones."
 
 msgid "Request time"
 msgstr "Solicitar tiempo"
+
+msgid "Status"
+msgstr "Estatus"
 
 msgid "File size"
 msgstr "Tamaño de archivo"
@@ -6921,6 +6525,9 @@ msgstr "Fechas"
 msgid "Avg. Moon age"
 msgstr "Edad lunar media"
 
+msgid "days"
+msgstr "días"
+
 msgid "Avg. Moon phase"
 msgstr "Fase lunar media"
 
@@ -6963,6 +6570,397 @@ msgstr "¿Estás seguro?"
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgctxt "approximately"
+#~ msgid "about"
+#~ msgstr "Acerca de"
+
+#~ msgid "View feature comparison"
+#~ msgstr "Ver comparación de característica"
+
+#~ msgid "Max size"
+#~ msgstr "Tamaño máximo"
+
+#~ msgid "View full res"
+#~ msgstr "Ver resolución completa"
+
+#~ msgid "View full image info"
+#~ msgstr "Ver información completa de la imagen"
+
+#~ msgid "Basic"
+#~ msgstr "Básico"
+
+#~ msgid "Advanced"
+#~ msgstr "Avanzado"
+
+#~ msgid "Social features"
+#~ msgstr "Funciones sociales"
+
+#~ msgid "Plate-solving"
+#~ msgstr "Plate-solving"
+
+#~ msgid "Bulk data export"
+#~ msgstr "Exportación masiva de datos"
+
+#~ msgid "Hide astronomy ads"
+#~ msgstr "Esconder publicidad de astronomía"
+
+#~ msgid "No ads on your pages"
+#~ msgstr "Sin publicidad en tus páginas"
+
+#~ msgid "Non-members/free users can view your images in full res"
+#~ msgstr ""
+#~ "Los usuarios no miembros/libres pueden ver sus imágenes en resolución "
+#~ "completa"
+
+#~ msgid "Full size annotations"
+#~ msgstr "Anotaciones en tamaño completo"
+
+#~ msgid "Upload uncompressed source"
+#~ msgstr "Subir fuente sin comprimir"
+
+#~ msgid "Undelete images"
+#~ msgstr "Restaurar imágenes"
+
+#~ msgid ""
+#~ "The FREE account is to be considered a trial period. You can upload "
+#~ "images 10 times, after which you can't upload anymore. Deleting images "
+#~ "doesn't decrease your upload counter: the FREE account is not meant to be "
+#~ "used as a way to keep your latest 10 images."
+#~ msgstr ""
+#~ "La cuenta GRATIS se considera periodo de prueba. Puede cargar imágenes 10 "
+#~ "veces, después de lo cual no podrá subir más. Eliminar imágenes no "
+#~ "disminuirá su contador de cargas: el objetivo de la cuenta GRATIS no es "
+#~ "ser usada como una forma para conservar sus últimas 10 imágenes. "
+
+#~ msgid "year"
+#~ msgstr "año"
+
+#~ msgid ""
+#~ "\n"
+#~ "                %(number)s images, max %(size)s each"
+#~ msgstr ""
+#~ "\n"
+#~ "                %(number)s imágenes, max %(size)s cada una"
+
+#~ msgid "View in original resolution"
+#~ msgstr "Ver en resolución original"
+
+#~ msgid ""
+#~ "Up to %(number)s\n"
+#~ "            revisions/image"
+#~ msgstr ""
+#~ "Hasta %(number)s\n"
+#~ "            revisiones/imagen"
+
+#~ msgid "Create/join Groups"
+#~ msgstr "Crear/unirse a Grupos"
+
+#~ msgid "Basic plate-solving"
+#~ msgstr "Plate-solving básico"
+
+#~ msgid "IOTD / Top Picks"
+#~ msgstr "IOTD/Top de seleccionadas"
+
+#~ msgid "No ads for others on your pages"
+#~ msgstr "Sin publicidad para otros en tus páginas"
+
+#~ msgid "Full-size annotations"
+#~ msgstr "Anotaciones en tamaño completo"
+
+#~ msgid "All future features"
+#~ msgstr "Todas las futuras características"
+
+#~ msgid "In the future"
+#~ msgstr "en el futuro"
+
+#~ msgid "Buy in the Marketplace"
+#~ msgstr "Comprar en el Mercado"
+
+#~ msgid "Vote in contests"
+#~ msgstr "Votar en concurso"
+
+#~ msgid "Analytics"
+#~ msgstr "Analíticas"
+
+#~ msgid "Bulk image editing"
+#~ msgstr "Edición masiva de imágenes"
+
+#~ msgid "Pay securely with PayPal"
+#~ msgstr "Pagar de manera segura vía PayPal"
+
+#~ msgid "Want to upgrade from a lower subscription tier?"
+#~ msgstr "¿Desea subir de nivel desde un rango bajo de suscripción?"
+
+#~ msgid ""
+#~ "AstroBin doesn't support subscription upgrades at the moment, but we're "
+#~ "happy to make it happen manually. If you're on a lower subscription tier "
+#~ "and would like to upgrade to <strong>%(name)s</strong>, please just buy "
+#~ "it and then contact us at <a href=\"mailto:astrobin@astrobin.com"
+#~ "\">astrobin@astrobin.com</a> to get a refund for the unused time on your "
+#~ "old subscription. Thanks!"
+#~ msgstr ""
+#~ "AstroBin no admite actualizaciones de suscripción en este momento, pero "
+#~ "estamos encantados de hacerlo realidad manualmente. Si usted está en un "
+#~ "nivel de suscripción más bajo y le gustaría actualizar a <strong>"
+#~ "%(name)s</strong> por favor cómprelo y luego póngase en contacto con "
+#~ "nosotros en <a href=\"mailto:astrobin@astrobin.com\">astrobin@astrobin."
+#~ "com</a> para obtener un reembolso por el tiempo no utilizado en su "
+#~ "suscripción anterior. ¡Gracias!"
+
+#~ msgid "Pay with a bank transfer"
+#~ msgstr "Pagar con una transferencia bancaria"
+
+#~ msgid ""
+#~ "\n"
+#~ "                Prefer to pay via bank transfer? Please make a deposit of "
+#~ "%(currency)s %(amount)s to the following\n"
+#~ "                bank details and then email us at %(email_prefix)s"
+#~ "%(email)s%(email_postfix)s with your username so\n"
+#~ "                we may upgrade your account manually. Thanks!\n"
+#~ "            "
+#~ msgstr ""
+#~ "\n"
+#~ "                ¿Prefiere pagar por transferencia bancaria? Por favor, "
+#~ "haga un depósito de %(currency)s %(amount)s con los siguientes\n"
+#~ "                detalles bancarios y luego escríbanos a %(email_prefix)s"
+#~ "%(email)s%(email_postfix)s con su nombre de usuario\n"
+#~ "                para que podamos subir de nivel su cuenta manualmente. "
+#~ "¡Gracias!\n"
+#~ "            "
+
+#~ msgid ""
+#~ "\n"
+#~ "                ∞ images, max %(size)s each"
+#~ msgstr ""
+#~ "\n"
+#~ "                ∞ imágenes, max %(size)s cada una"
+
+#~ msgid "Basic analytics"
+#~ msgstr "Análisis básicos"
+
+#~ msgid "Buy"
+#~ msgstr "Comprar"
+
+#~ msgid "You are already on this plan"
+#~ msgstr "Ya estás en este plan"
+
+#~ msgid "∞ images, ∞ size"
+#~ msgstr "∞ imágenes, ∞ tamaño"
+
+#~ msgid "View full res (incl. visitors)"
+#~ msgstr "Ver resolución completa (incluye visitantes)"
+
+#~ msgid "Full search"
+#~ msgstr "Búsqueda completa"
+
+#~ msgid "Unlimited revisions"
+#~ msgstr "Revisiones ilimitadas"
+
+#~ msgid "Advanced plate-solving"
+#~ msgstr "Plate-solving avanzado"
+
+#~ msgid "Sell in the Marketplace"
+#~ msgstr "Vender en el Mercado"
+
+#~ msgid "Vote/enter contests"
+#~ msgstr "Votar/entrar en concursos"
+
+#~ msgid "Advanced analytics"
+#~ msgstr "Análisis avanzados"
+
+#~ msgid "Subscription process canceled"
+#~ msgstr "Proceso de suscripción cancelado"
+
+#~ msgid "Subscription process cancelled"
+#~ msgstr "Proceso de suscripción cancelado"
+
+#~ msgid ""
+#~ "Your transaction with PayPal has been cancelled, so no change in your "
+#~ "subscription has occurred."
+#~ msgstr ""
+#~ "Tu transacción de PayPal ha sido cancelada, por tanto no ha habido ningún "
+#~ "cambio en tu suscripción."
+
+#~ msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
+#~ msgstr "Volver a la <a href=\"%(plans_url)s\">Página de Planes</a>."
+
+#~ msgctxt "Subscription plan name"
+#~ msgid "Plan"
+#~ msgstr "Planes"
+
+#~ msgid "Offer valid until"
+#~ msgstr "Oferta válida hasta"
+
+#~ msgid "Price"
+#~ msgstr "Precio"
+
+#~ msgid "Validity"
+#~ msgstr "Validez"
+
+#~ msgid "Autorenew"
+#~ msgstr "Renovación automática"
+
+#~ msgid "Trial period"
+#~ msgstr "Periodo de prueba"
+
+#~ msgid "day"
+#~ msgstr "día"
+
+#~ msgid "week"
+#~ msgstr "semana"
+
+#~ msgid "month"
+#~ msgstr "mes"
+
+#~ msgid "one time"
+#~ msgstr "Una sola vez"
+
+#~ msgctxt "At no cost"
+#~ msgid "Free"
+#~ msgstr "Gratis"
+
+#~ msgid "Daily"
+#~ msgstr "Diariamente"
+
+#~ msgid "Weekly"
+#~ msgstr "Semanalmente"
+
+#~ msgid "Monthly"
+#~ msgstr "Mensualmente"
+
+#~ msgid "Yearly"
+#~ msgstr "Anualmente"
+
+#~ msgid "weeks"
+#~ msgstr "semanas"
+
+#~ msgid "months"
+#~ msgstr "meses"
+
+#~ msgid "years"
+#~ msgstr "años"
+
+#~ msgid "No trial"
+#~ msgstr "No de prueba"
+
+#~ msgid "Switch to"
+#~ msgstr "Cambiar a"
+
+#~ msgid "Subscription changed"
+#~ msgstr "Suscripción modificada"
+
+#~ msgid ""
+#~ "Your request for a change in your subscription has been processed "
+#~ "successfully."
+#~ msgstr ""
+#~ "Tu solicitud de cambio en tu suscripción ha sido procesada "
+#~ "satisfactoriamente."
+
+#~ msgid "Subscription plan"
+#~ msgstr "Plan de suscripción"
+
+#~ msgid "Subscribed"
+#~ msgstr "Suscrito"
+
+#~ msgid "Expires"
+#~ msgstr "Caducidad"
+
+#~ msgid "Invalid"
+#~ msgstr "No válido"
+
+#~ msgid "Cancelled"
+#~ msgstr "Cancelada"
+
+#~ msgid "Unavailable"
+#~ msgstr "No disponible"
+
+#~ msgid "Unsubscribed"
+#~ msgstr "No suscrito"
+
+#~ msgid ""
+#~ "This subscription is not offered anymore on AstroBin. Please visit the <a "
+#~ "href=\"%(url)s\">subscriptions page</a> to see the available plans, "
+#~ "thanks!"
+#~ msgstr ""
+#~ "Esta suscripción ya no se ofrece en AstroBin. Por favor, visite la <a "
+#~ "href=\"%(url)s\">subscriptions page</a>para ver los planes disponibles, "
+#~ "¡gracias!"
+
+#~ msgid ""
+#~ "If you would like to renew your subscription, please visit this page "
+#~ "again after\n"
+#~ "                        your current subscription's expiration date:"
+#~ msgstr ""
+#~ "Si quiere renovar su suscripción, por favor visite esta página nuevamente "
+#~ "luego\n"
+#~ "                        de la actual fecha de vencimiento de su "
+#~ "suscripción:"
+
+#~ msgid ""
+#~ "Your subscription is either cancelled or not active yet. If you want to "
+#~ "subscribe again, please wait until your subscription is expired. If you "
+#~ "just subscribed, please wait a few minutes while PayPal contacts our "
+#~ "server for the final transaction confirmation. Thank you!"
+#~ msgstr ""
+#~ "Tu suscripción está cancelada o no está activa aún. Si quieres "
+#~ "suscribirte otra vez, por favor espera hasta que tu suscripción haya "
+#~ "finalizado. Si te acabas de suscribir, espera unos minutos mientras "
+#~ "PayPal contacta con nuestro servidor para confirmar la transacción. "
+#~ "¡Gracias!"
+
+#~ msgid "By cancelling, you will revert to a free plan."
+#~ msgstr "Al cancelar, regresaras a un plan gratuito."
+
+#~ msgid "Free plans are limited to <strong>%(max_allowed)s</strong> images."
+#~ msgstr ""
+#~ "Los planes gratuitos están limitados a <strong>%(max_allowed)s</strong> "
+#~ "imágenes."
+
+#~ msgid ""
+#~ "However, your existing images will not be deleted or deactivated in any "
+#~ "way! Simply, you will not be able to upload any more images unless you "
+#~ "switch to a paid plan."
+#~ msgstr ""
+#~ "En cualquier caso, las imágenes que ya tienes no serán borradas ni "
+#~ "desactivadas de ningún modo. Simplemente, no podrás subir más imágenes "
+#~ "hasta que cambies a un plan de pago."
+
+#~ msgid "Cancel via PayPal"
+#~ msgstr "Cancelar via PayPal"
+
+#~ msgid "You cannot switch to this plan."
+#~ msgstr "No puedes cambiar a este plan."
+
+#~ msgid "Back to the plans"
+#~ msgstr "Volver a los planes"
+
+#~ msgid "Subscription confirmed"
+#~ msgstr "Suscripción confirmada"
+
+#~ msgid ""
+#~ "Your request has been received, and we are awaiting the final "
+#~ "confirmation from PayPal. Your subscription should be active within a few "
+#~ "minutes!"
+#~ msgstr ""
+#~ "Tu solicitud a sido recibida, estamos esperando la confirmación final "
+#~ "desde PayPal. Tu suscripción se activará en unos pocos minutos."
+
+#~ msgid "Thank you for supporting AstroBin!"
+#~ msgstr "¡Gracias por apoyar a AstroBin!"
+
+#~ msgid "Your active subscription plans"
+#~ msgstr "Tus planes de suscripción activos"
+
+#~ msgid "Your inactive subscription plans"
+#~ msgstr "Tus planes de suscripción inactivos"
+
+#~ msgid ""
+#~ "PS: are you interested in larger plans?\n"
+#~ "                <a href=\"/contact/\">Let us know!</a>"
+#~ msgstr ""
+#~ "PD: ¿Estás interesado en un plan más grande?\n"
+#~ "                <a href=\"/contact/\">¡Déjenoslo saber!</a>"
 
 #, fuzzy
 #~| msgid ""

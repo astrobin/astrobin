@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-05 13:05+0000\n"
-"PO-Revision-Date: 2020-11-23 21:41+0000\n"
-"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
+"POT-Creation-Date: 2020-12-06 18:30+0000\n"
+"PO-Revision-Date: 2020-12-06 18:07+0000\n"
+"Last-Translator: JeanBaptisteAuroux <jbauroux@bbox.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.8\n"
 "X-Poedit-Bookmarks: -1,319,-1,-1,-1,-1,-1,-1,-1,-1\n"
-"X-POOTLE-MTIME: 1606167716.000000\n"
+"X-POOTLE-MTIME: 1607278079.000000\n"
 
 msgid "United Kingdom"
 msgstr "Royaume-Uni"
@@ -1131,30 +1131,26 @@ msgstr "Planète mineure"
 msgid "Comet"
 msgstr "Comète"
 
-#, fuzzy
-#| msgid "Orientation"
 msgid "Occultation"
-msgstr "Orientation"
+msgstr "Occultation"
 
-#, fuzzy
-#| msgid "Collection"
 msgid "Conjunction"
-msgstr "Album"
+msgstr "Conjonction"
 
 msgid "Partial lunar eclipse"
-msgstr ""
+msgstr "Éclipse partielle de Lune"
 
 msgid "Total lunar eclipse"
-msgstr ""
+msgstr "Éclipse totale de Lune"
 
 msgid "Partial solar eclipse"
-msgstr ""
+msgstr "Éclipse partielle de Lune"
 
 msgid "Anular solar eclipse"
-msgstr ""
+msgstr "Eclipse annulaire de Soleil"
 
 msgid "Total solar eclipse"
-msgstr ""
+msgstr "Eclipse totale de Soleil"
 
 msgid "Other"
 msgstr "Autre"
@@ -1423,13 +1419,11 @@ msgid "nm"
 msgstr "nm"
 
 msgid "Regular (e.g. medium/long exposure with a CCD or DSLR)"
-msgstr ""
+msgstr "Classique (poses longues avec CCD ou APN)"
 
-#, fuzzy
-#| msgid "Electronically-Assisted Astronomy (EAA)"
 msgid ""
 "Electronically-Assisted Astronomy (EAA, e.g. based on a live video feed)"
-msgstr "Astronomie assistée électroniquement (EAA)"
+msgstr "Visuel assisté (EEA)"
 
 msgid "Lucky imaging"
 msgstr "Lucky imaging"
@@ -1616,7 +1610,7 @@ msgid "Mix of multiple source"
 msgstr "Mélange de sources multiples"
 
 msgid "Do not notify your followers about this revision."
-msgstr "N'informez pas vos abonnés de cette nouvelle version."
+msgstr "Ne pas informer vos abonnés de cette nouvelle version."
 
 msgid "Images"
 msgstr "Images"
@@ -1874,11 +1868,6 @@ msgstr ""
 msgid "I want to be excluded from competitions"
 msgstr "Je ne veux pas participer aux concours"
 
-#, fuzzy
-#| msgid ""
-#| "Check this box to be excluded from competitions and contests, such as the "
-#| "Image of the Day, the Top Picks, other custom contests. This will remove "
-#| "you from the leaderboards and hide your AstroBin Index."
 msgid ""
 "Check this box to be excluded from competitions and contests, such as the "
 "Image of the Day, the Top Picks, other custom contests. This will remove you "
@@ -1886,8 +1875,8 @@ msgid ""
 msgstr ""
 "Cochez cette case si vous ne souhaitez pas participer aux concours et aux "
 "compétitions, tels que l'Image du Jour, les Top Picks, ou les autres "
-"concours personnalisés. Vous n'apparaitrez pas dans classements et votre "
-"index AstroBin sera masqué."
+"concours personnalisés. Vous n'apparaitrez pas dans les classements et vos "
+"index Images et Contributions seront masqués."
 
 msgid "Global stream"
 msgstr "Flux global"
@@ -2209,17 +2198,23 @@ msgid ""
 "people find useful and valuable, the likes that you receive will contribute "
 "to your %(_0)sContribution Index (beta)%(_1)s."
 msgstr ""
+"<strong>Note :</strong> La communauté AstroBin favorise les contenus "
+"informatifs et constructifs. Si vous écrivez un commentaire que les autres "
+"utilisateurs apprécient, les \"j'aime\" que vous recevrez contribueront à "
+"augmenter votre %(_0)sContribution Index (beta)%(_1)s."
 
 msgid "New!"
 msgstr "Nouveau!"
 
 msgid "Use the <strong>@</strong> sign and start typing to mention any user."
-msgstr ""
+msgstr "Utilisez le symbole <strong>@</strong> pour mentionner un utilisateur."
 
 msgid ""
 "Use the <strong>#</strong> sign and start typing to insert an image from "
 "your gallery."
 msgstr ""
+"Utilisez le symbole <strong>#</strong> pour insérer une image de votre "
+"galerie."
 
 msgid "All"
 msgstr "Tout"
@@ -2277,8 +2272,8 @@ msgid ""
 "                            "
 msgstr ""
 "\n"
-"                                    <a href=\"%(user_page)s\">%(user)s</a> "
-"aime cette image.\n"
+"                                <a href=\"%(user_page)s\">%(user)s</a> aime "
+"cette image.\n"
 "                            "
 
 #, python-format
@@ -2393,8 +2388,6 @@ msgstr ""
 "Vous recevrez une réponse sous 24 heures. Merci de votre intérêt pour les "
 "API d'AstroBin !"
 
-#, fuzzy
-#| msgid "Trending astrophotographers"
 msgid "Astrophotographers list"
 msgstr "Liste des astrophotographes"
 
@@ -2404,6 +2397,9 @@ msgid ""
 "images, that incentivizes the most active and liked members of the "
 "community. %(_0)sLearn more.%(_1)s"
 msgstr ""
+"L'<strong>Image Index</strong> est basé sur les \"J'aime\" reçus sur vos "
+"images, qui favorise les utilisateurs les plus actifs et dont les images "
+"sont les plus appréciées par la communauté. %(_0)sLearn more.%(_1)s"
 
 msgid "Search"
 msgstr "Recherche"
@@ -2420,13 +2416,11 @@ msgstr "Likes"
 msgid "Total integration"
 msgstr "Intégration totale"
 
-#, fuzzy
-#| msgid "Image mode"
 msgid "Image Index"
-msgstr "Version de l'image"
+msgstr "Indice d'Imagerie"
 
 msgid "There isn't enough data yet, please come back later!"
-msgstr ""
+msgstr "Il n'y a pas encore assez de données, réessayez plus tard !"
 
 msgid "Avatar"
 msgstr "Avatar"
@@ -2474,6 +2468,8 @@ msgid ""
 "AstroBin is an image hosting platform and social network for amateur "
 "astronomers and astrophotographers."
 msgstr ""
+"AstroBin est une plateforme d'hébergement d'images et un réseau social pour "
+"astronomes et astrophotographes amateurs. "
 
 msgid "Site links"
 msgstr "Liens internes"
@@ -2500,7 +2496,7 @@ msgid "Source code"
 msgstr "Code source"
 
 msgid "Platform updates"
-msgstr ""
+msgstr "Mises à jour de la plateforme"
 
 msgid "Thanks to"
 msgstr "Remerciements"
@@ -2509,7 +2505,7 @@ msgid "The localization team"
 msgstr "Équipe de traduction"
 
 msgid "Third party tools"
-msgstr ""
+msgstr "Outils tiers"
 
 msgid "Copyright"
 msgstr "Copyright"
@@ -2535,43 +2531,38 @@ msgstr "Préférences"
 msgid "Don't show again"
 msgstr "Ne plus afficher à nouveau"
 
-#, fuzzy
-#| msgid ""
-#| "AstroBin is unable to deliver your emails, looks like your address is "
-#| "incorrect."
 msgid ""
 "AstroBin is unable to deliver your emails, and it won't try again until the "
 "issue is resolved."
 msgstr ""
-"AstroBin est incapable de vous adresser vos e-mails, il semble que votre "
-"adresse soit incorrecte."
+"AstroBin n'est pas en capacité de vous adresser vos courriels, et ne "
+"procédera pas à d'autres essais tant que le problème ne sera pas résolu."
 
 msgid "Your email provider recently reported the following error code(s):"
 msgstr ""
+"Votre fournisseur de courrier électronique a récemment reporté l'erreur "
+"suivante :"
 
 msgid ""
 "If you believe this is in error, please contact us. Otherwise please contact "
 "your email provider or change your e-mail address on AstroBin."
 msgstr ""
+"Si vous pensez qu'il s'agit d'une erreur, merci de nous contacter. A défaut, "
+"contactez votre fournisseur de courrier électronique ou modifiez votre "
+"adresse email dans AstroBin."
 
 msgid "Change your e-mail"
 msgstr "Modifier votre e-mail"
 
-#, fuzzy
-#| msgid "Contact"
 msgid "Contact us"
-msgstr "Contact"
+msgstr "Nous contacter"
 
-#, fuzzy
-#| msgid ""
-#| "AstroBin is unable to deliver your emails, looks like your address is "
-#| "incorrect."
 msgid ""
 "AstroBin is unable to deliver your emails, and it will try again a week "
 "after the latest email bounce."
 msgstr ""
-"AstroBin est incapable de vous adresser vos e-mails, il semble que votre "
-"adresse soit incorrecte."
+"AstroBin n'est pas en capacité de vous adresser vos courriels ; un nouvel "
+"essai sera effectué une semaine après le dernier échec."
 
 msgid ""
 "AstroBin is not delivering you emails because you have marked some of them "
@@ -2777,10 +2768,8 @@ msgstr "Le Grand Mur"
 msgid "Advanced search"
 msgstr "Recherche avancée"
 
-#, fuzzy
-#| msgid "Top picks"
 msgid "Top pick nominations"
-msgstr "Top Picks"
+msgstr "Nominations Top Picks"
 
 msgid "Top picks"
 msgstr "Top Picks"
@@ -2789,10 +2778,10 @@ msgid "Remote astrophotography"
 msgstr "Astrophotographie en remote"
 
 msgid "Contributors list"
-msgstr ""
+msgstr "Liste des contributeurs"
 
 msgid "(beta)"
-msgstr ""
+msgstr "(beta)"
 
 msgid "Stats"
 msgstr "Statistiques"
@@ -2824,11 +2813,12 @@ msgid ""
 "images, that incentivizes the most active and liked members of the "
 "community. %(_0)sLearn more.%(_1)s"
 msgstr ""
+"L'<strong>Image Index</strong>, calculé sur les \"J'aime\" reçus sur vos "
+"images, récompense les utilisateurs les plus actifs et dont les images sont "
+"les plus appréciées par la communauté. %(_0)sLearn more.%(_1)s"
 
-#, fuzzy
-#| msgid "AstroBin Index"
 msgid "Contribution Index"
-msgstr "Indice AstroBin"
+msgstr "Indice de Contribution"
 
 #, python-format
 msgid ""
@@ -2836,6 +2826,9 @@ msgid ""
 "informative, constructive, and valuable commentary on AstroBin. %(_0)sLearn "
 "more.%(_1)s"
 msgstr ""
+"L'<strong>Contribution Index (beta)</strong> est un système visant à "
+"favoriser les commentaires constructifs, informatifs et à valeur ajoutée "
+"pour la communauté AstroBin. %(_0)sLearn more.%(_1)s"
 
 msgid "Subscription plans"
 msgstr "Formules d'abonnement"
@@ -2972,12 +2965,10 @@ msgid "Forum posts"
 msgstr "Messages sur le Forum"
 
 msgid "Written"
-msgstr ""
+msgstr "Écrit"
 
-#, fuzzy
-#| msgid "Recently liked"
 msgid "Received"
-msgstr "Aimé récemment"
+msgstr "Reçu"
 
 msgid "Cookie consent"
 msgstr "Consentement aux cookies"
@@ -3201,7 +3192,7 @@ msgstr "Contient"
 
 #, python-format
 msgid "And %(count)s more."
-msgstr ""
+msgstr "Et %(count)s de plus."
 
 msgid "Acquired at"
 msgstr "Acquisitions réalisées à"
@@ -3300,10 +3291,8 @@ msgstr "Télécharger"
 msgid "Remote source"
 msgstr "Source remote"
 
-#, fuzzy
-#| msgid "Delete original image"
 msgid "Download original file"
-msgstr "Supprimer l'image originale"
+msgstr "Télécharger le fichier original"
 
 msgid "Author"
 msgstr "Auteur"
@@ -3524,46 +3513,39 @@ msgstr "Chargement en cours..."
 msgid "Sorry"
 msgstr "Désolé"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "We're really sorry, but liking an image requires an AstroBin index of "
-#| "<strong>%(min_index_to_like)s</strong> or greater."
+#, python-format
 msgid ""
 "We're really sorry, but giving likes requires an Image Index of <strong>"
 "%(min_index_to_like)s</strong> or greater."
 msgstr ""
-"Nous sommes désolés, mais cliquer sur \"J'aime\" requiert un index AstroBin "
+"Nous sommes désolés, mais cliquer sur \"J'aime\" requiert un Indice d'Image "
 "d'au moins <strong>%(min_index_to_like)s</strong>."
 
-#, fuzzy
-#| msgid ""
-#| "Such limitation improves the website as a whole by discouraging people "
-#| "from creating fake accounts to like their own images. Thank you for "
-#| "understanding!"
 msgid ""
 "Such limitation improves the website as a whole by discouraging people from "
 "creating fake accounts to like their own content. Thank you for "
 "understanding!"
 msgstr ""
-"Cette restriction améliore le site dans son ensemble en décourageant la "
-"création de faux comptes en vue de favoriser ses propres images. Merci pour "
-"votre compréhension !"
+"Cette restriction a pour but d'améliorer le site en décourageant la création "
+"de faux comptes destinés à favoriser ses propres images. Merci de votre "
+"compréhension !"
 
-#, fuzzy, python-format
-#| msgid "Currently, your AstroBin index is <strong>%(index)s</strong>."
+#, python-format
 msgid "Currently, your Image Index is <strong>%(index)s</strong>."
-msgstr "Votre index AstroBin est actuellement de <strong>%(index)s</strong>."
+msgstr ""
+"Votre Indice d'Imagerie est actuellement de <strong>%(index)s</strong>."
 
 #, python-format
 msgid ""
 "To learn more about the Image Index, please visit %(_0)sthe FAQ page%(_1)s. "
 "Thanks!"
 msgstr ""
+"Pour en savoir plus sur l'Indice d'Imagerie, consultez la %(_0)sthe FAQ page"
+"%(_1)s. Merci !"
 
-#, fuzzy
-#| msgid "You can't nominate the same image more than once."
 msgid "You cannot remove a like that you gave more than one hour ago."
-msgstr "Vous ne pouvez pas nominer la même image plusieurs fois."
+msgstr ""
+"Vous ne pouvez pas supprimer un \"J'aime\" donné il y a plus d'une heure."
 
 msgid "Delete image and all its revisions?"
 msgstr "Supprimer l'image et toutes ses versions ?"
@@ -4002,6 +3984,8 @@ msgstr "Appliquer un filigrane à l'image"
 msgid ""
 "AstroBin can protect your images from theft by applying a watermark to them."
 msgstr ""
+"AstroBin peut prévenir la reprise indélicate de vos images par l'application "
+"d'un filigrane. "
 
 msgid "Please note: animated GIFs cannot be watermarked at this time."
 msgstr ""
@@ -4021,16 +4005,14 @@ msgstr "Résolution maximale"
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "par <a href=\"%(the_url)s\">%(user)s</a>"
 
-#, fuzzy
-#| msgid "Plate-solving"
 msgid "Plate-solution overlay"
-msgstr "Réduction astrométrique"
+msgstr "Afficher la réduction astrométrique"
 
 msgid "Fit to window"
 msgstr "Zoom ajusté"
 
 msgid "Loading click-and-drag zoom..."
-msgstr ""
+msgstr "Chargement du zoom à la volée"
 
 msgid "Abscissa "
 msgstr "Abscissa "
@@ -4051,10 +4033,10 @@ msgid "Galactic latitude"
 msgstr "Latitude galactique"
 
 msgid "Click-and-drag anywhere on the image."
-msgstr ""
+msgstr "Cliquez pour zoomer en full n'importe où sur l'image."
 
 msgid "Want to zoom in?"
-msgstr ""
+msgstr "Zoomer à pleine résolution ?"
 
 msgid "No gear yet."
 msgstr "Pas d'équipement."
@@ -4140,7 +4122,7 @@ msgid "Compose message"
 msgstr "Ecrire un nouveau message"
 
 msgid "Type your message here..."
-msgstr ""
+msgstr "Ecrivez votre message ici..."
 
 msgid "Type in a search term"
 msgstr "Entrez un terme de recherche"
@@ -4214,45 +4196,43 @@ msgstr "Aucune image dans la liste des spams."
 msgid "Your request for an API Key has been approved!"
 msgstr "Votre demande de clé API a été acceptée !"
 
-#, fuzzy
-#| msgid "Your API Keys"
 msgid "Your API key"
 msgstr "Vos clés API"
 
-#, fuzzy
-#| msgid "Your API Keys"
 msgid "Your API secret"
-msgstr "Vos clés API"
+msgstr "Vos clés secrètes API"
 
 #, python-format
 msgid "Please read the API documentation %(_0)shere%(_1)s."
-msgstr ""
+msgstr "Merci de consulter la documentation API %(_0)shere%(_1)s."
 
 #, python-format
 msgid ""
 "You can review your API keys at <a href=\"%(api_keys_url)s\">"
 "%(api_keys_url)s</a>"
 msgstr ""
+"Vous pouvez vérifier vos clés API ici : <a href=\"%(api_keys_url)s\">"
+"%(api_keys_url)s</a>"
 
-#, fuzzy
-#| msgid "Thank you for supporting AstroBin!"
 msgid "Thank you for using AstroBin's APIs!"
-msgstr "Merci de soutenir AstroBin!"
+msgstr "Merci d'utiliser les APIs d'AstroBin !"
 
 #, python-format
 msgid "You can review your API keys at %(api_keys_url)s."
-msgstr ""
+msgstr "Vous pouvez vérifier vos clés API ici : %(api_keys_url)s."
 
 msgid "Congratulations for your first image on AstroBin!"
-msgstr ""
+msgstr "Félicitations pour votre première image sur AstroBin !"
 
 msgid ""
 "Good job with uploading your first image on AstroBin. I hope it's the first "
 "of many!"
 msgstr ""
+"Vous avez publié votre première image sur AstroBin, bien joué ! Nous "
+"espérons que ce soit la première d'une longue série !"
 
 msgid "Allow me to jump in and offer a few tips:"
-msgstr ""
+msgstr "Permettez-moi d'intervenir et de vous prodiguer quelques conseils :"
 
 #, python-format
 msgid ""
@@ -4260,6 +4240,10 @@ msgid ""
 "still on a free account, you can upload images %(max)s times before you will "
 "be asked to upgrade. More info on the <a href=\"%(url)s\">pricing page</a>."
 msgstr ""
+"Gardez à l'esprit qu'AstroBin n'a pas vocation à être un service totalement "
+"gratuit. Si vous disposez d'un abonnement gratuit, vous pouvez publier "
+"%(max)s images maximum avant de devoir passer à un abonnement supérieur. "
+"Plus d'informations sur la <a href=\"%(url)s\">Page des Tarifs</a>."
 
 #, python-format
 msgid ""
@@ -4269,12 +4253,17 @@ msgid ""
 "listed on AstroBin, you need to promote it. Visit <a href=\"%(url)s\">your "
 "staging area</a>."
 msgstr ""
+"Vos images nouvellement téléchargées sont automatiquement hébergées dans "
+"votre Zone Privée, et ne sont pas visibles par les autres utilisateurs. Vous "
+"pouvez les partager via un lien avec des utilisateurs déterminés, mais pour "
+"les rendre visibles par tous sur AstroBin, vous devrez la transférer dans "
+"votre Galerie Publique. Visitez votre <a href=\"%(url)s\">Zone Privée</a>."
 
 #, python-format
 msgid ""
 "If you have any questions, have a look at the <a href=\"%(url)s\">frequently "
 "asked questions</a>."
-msgstr ""
+msgstr "Pour toutes questions, consultez la <a href=\"%(url)s\">FAQ</a>."
 
 #, python-format
 msgid ""
@@ -4282,6 +4271,9 @@ msgid ""
 "\">contact form</a> or send an email to <a href=\"mailto:support@astrobin.com"
 "\">support@astrobin.com</a>."
 msgstr ""
+"Enfin, si vous avez besoin d'assistance, contactez-nous au moyen du <a href="
+"\"%(url)s\">formulaire de contact</a> ou envoyez-nous un courriel à <a href="
+"\"mailto:support@astrobin.com\">support@astrobin.com</a>."
 
 #, python-format
 msgid ""
@@ -4289,6 +4281,10 @@ msgid ""
 "still on a free account, you can upload images %(max)s times before you will "
 "be asked to upgrade. More info on the pricing page:"
 msgstr ""
+"Gardez à l'esprit qu'AstroBin n'a pas vocation à être un service totalement "
+"gratuit. Si vous disposez d'un abonnement gratuit, vous pouvez publier "
+"%(max)s images maximum avant de devoir passer à un abonnement supérieur. "
+"Plus d'informations sur la Page des Tarifs : "
 
 msgid ""
 "New uploads go to your \"staging area\", where they are unlisted. You can "
@@ -4296,16 +4292,24 @@ msgid ""
 "with a link will be able to access it, but to make an image public and "
 "listed on AstroBin, you need to promote it. Visit your staging area:"
 msgstr ""
+"Vos images nouvellement téléchargées sont automatiquement hébergées dans "
+"votre Zone Privée, et ne sont pas visibles par les autres utilisateurs. Vous "
+"pouvez les partager via un lien avec des utilisateurs déterminés, mais pour "
+"les rendre visibles par tous sur AstroBin, vous devrez la transférer dans "
+"votre Galerie Publique. Visitez votre Zone Privée :"
 
 msgid ""
 "If you have any questions, have a look at the frequently asked questions:"
-msgstr ""
+msgstr "Pour toute question, merci de vous référer à la FAQ :"
 
 msgid "Finally, should you need any support, simply use the contact form:"
 msgstr ""
+"Enfin, pour toute demande d'assistance, contactez-nous simplement via le "
+"formulaire suivant : "
 
 msgid "Or send an email to support@astrobin.com."
 msgstr ""
+"Ou envoyez-nous un courriel à l'adresse suivante : support@astrobin.com."
 
 msgid "You have a new notification on AstroBin"
 msgstr "Vous avez une nouvelle notification sur AstroBin"
@@ -4681,40 +4685,40 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> likes your comment: <a href=\"%(url)s"
 "\">%(comment)s</a>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> aime votre commentaire : <a href="
+"\"%(url)s\">%(comment)s</a>."
 
 #, python-format
 msgid "%(user)s likes your comment: %(url)s %(comment)s"
-msgstr ""
+msgstr "%(user)s aime votre commentaire : %(url)s %(comment)s"
 
 #, python-format
 msgid "<strong>%(user)s</strong> likes your comment!"
-msgstr ""
+msgstr "<strong>%(user)s</strong> aime votre commentaire !"
 
-#, fuzzy, python-format
-#| msgid "%(user)s replied to your comment."
+#, python-format
 msgid "%(user)s likes your comment!"
-msgstr "%(user)s a répondu à votre commentaire."
+msgstr "%(user)s aime votre commentaire !"
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a comment: <a href="
 "\"%(url)s\">%(url)s</a>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> vous a mentionné dans un commentaire : "
+"<a href=\"%(url)s\">%(url)s</a>."
 
-#, fuzzy, python-format
-#| msgid "%(user)s likes your image: %(url)s"
+#, python-format
 msgid "%(user)s mentioned you in a comment: %(url)s"
-msgstr "%(user)s aime votre image: %(url)s"
+msgstr "%(user)s vous a mentionné dans un commentaire : %(url)s"
 
-#, fuzzy, python-format
-#| msgid "<strong>%(user)s</strong> has published a new image"
+#, python-format
 msgid "<strong>%(user)s</strong> mentioned you in a comment!"
-msgstr "<strong>%(user)s</strong> a publié une nouvelle image"
+msgstr "<strong>%(user)s</strong> vous a mentionné dans un commentaire !"
 
-#, fuzzy, python-format
-#| msgid "%(user)s replied to your comment."
+#, python-format
 msgid "%(user)s mentioned you in a comment!"
-msgstr "%(user)s a répondu à votre commentaire."
+msgstr "%(user)s vous a mentionné dans un commentaire !"
 
 #, python-format
 msgid ""
@@ -4774,43 +4778,40 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> likes your post on this forum topic: "
 "<a href=\"%(url)s\">%(post)s</a>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> aime votre message dans la "
+"discussion : <a href=\"%(url)s\">%(post)s</a>."
 
-#, fuzzy, python-format
-#| msgid "%(user)s likes your image: %(url)s"
+#, python-format
 msgid "%(user)s likes your post on this forum topic: %(url)s"
-msgstr "%(user)s aime votre image: %(url)s"
+msgstr "%(user)s aime votre message dans la discussion : %(url)s"
 
 #, python-format
 msgid "<strong>%(user)s</strong> likes your forum post!"
-msgstr ""
+msgstr "<strong>%(user)s</strong> aime votre message !"
 
 #, python-format
 msgid "%(user)s likes your forum post!"
-msgstr ""
+msgstr "%(user)s aime votre message !"
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a post on this forum "
 "topic: <a href=\"%(url)s\">%(post)s</a>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> vous a mentionné dans un message dans "
+"la discussion : <a href=\"%(url)s\">%(post)s</a>."
 
-#, fuzzy, python-format
-#| msgid ""
-#| "%(user)s commented on your image! Check it out at the following url: "
-#| "%(url)s"
+#, python-format
 msgid "%(user)s mentioned you in a post on this forum topic: %(url)s"
-msgstr ""
-"%(user)s a commenté votre image ! Consultez son commentaire à l'adresse "
-"suivante: %(url)s"
+msgstr "%(user)s vous a mentionné dans la discussion : %(url)s"
 
 #, python-format
 msgid "<strong>%(user)s</strong> mentioned you in a forum post!"
-msgstr ""
+msgstr "<strong>%(user)s</strong> vous a mentionné dans une discussion !"
 
-#, fuzzy, python-format
-#| msgid "%(user)s commented on your image!"
+#, python-format
 msgid "%(user)s mentioned you in a forum post!"
-msgstr "%(user)s a commenté votre image !"
+msgstr "%(user)s vous a mentionné dans une discussion !"
 
 #, python-format
 msgid ""
@@ -5039,6 +5040,8 @@ msgid ""
 "I really appreciate your support for AstroBin, I hope you will enjoy your "
 "new subscription!"
 msgstr ""
+"Merci beaucoup pour votre soutien à AstroBin, j'espère que vous apprécierez "
+"votre abonnement !"
 
 msgid ""
 "AstroBin subscriptions are valid for 1 year. When a subscription expires, "
@@ -5046,6 +5049,10 @@ msgid ""
 "anything. In fact, you can leave it up forever even if you stop being active "
 "as an astrophotographer."
 msgstr ""
+"Les abonnements à AstroBin sont annuels. Au terme de votre abonnement, vos "
+"contenus ne seront pas affectés : rien n'est effacé, caché ou pris en "
+"otage... vous pouvez conserver ici vos images pour toujours même si vous "
+"n'êtes plus actif en astrophoto. "
 
 msgid ""
 "If at some point you want to upgrade your subscription, simply purchase the "
@@ -5053,6 +5060,11 @@ msgid ""
 "unused time on your previous subscription, or extend the expiration date of "
 "your new subscription with pro-rated time from your old one."
 msgstr ""
+"Si vous souhaitez à un quelconque moment souscrire à une formule "
+"d'abonnement supérieure, souscrivez-y simplement sur le site et contactez-"
+"nous afin d'obtenir un remboursement au prorata de la durée non-consommée "
+"sur votre abonnement précédent, ou étendre la durée de votre nouvel "
+"abonnement au prorata."
 
 #, python-format
 msgid ""
@@ -5171,70 +5183,80 @@ msgstr ""
 msgid "%(user)s joined the public group: \"%(group_name)s\""
 msgstr "%(user)s  a rejoint le groupe public : \"%(group_name)s"
 
-#, fuzzy
-#| msgid "Follow AstroBin"
 msgid "Welcome to AstroBin!"
-msgstr "Suivez AstroBin"
+msgstr "Bienvenue sur AstroBin !"
 
 msgid ""
 "I'm very excited that you joined, and I would like to give you a warm "
 "welcome to the community!"
 msgstr ""
+"Je suis très heureux que vous nous ayez rejoint, et je vous souhaite "
+"chaleureusement la bienvenue dans notre communauté !"
 
 msgid "You will receive your activation link in a separate email."
-msgstr ""
+msgstr "Vous allez recevoir votre lien d'activation dans un email distinct."
 
 msgid "Allow me to offer some tips to get you started:"
-msgstr ""
+msgstr "Voici quelques conseils pour bien commencer :"
 
 #, python-format
 msgid "Have a look at our <a href=\"%(url)s\">frequently asked questions</a>."
-msgstr ""
+msgstr "Consultez notre <a href=\"%(url)s\">FAQ</a>."
 
 #, python-format
 msgid ""
 "Head over to your settings and configure <a href=\"%(url)s\">your profile</"
 "a>."
 msgstr ""
+"Rendez-vous sur vos Paramètres et configurez <a href=\"%(url)s\">votre "
+"Profil</a>."
 
 #, python-format
 msgid ""
 "If you have astrophotography equipment, add it to <a href=\"%(url)s\">your "
 "gear</a> so that later you can associate it with the images you upload."
 msgstr ""
+"Si vous disposez d'équipements dédiés à l'astrophotographie, ajoutez-les à "
+"<a href=\"%(url)s\">votre Matériel</a> afin de pouvoir ensuite les associer "
+"à chacune de vos images. "
 
 #, python-format
 msgid ""
 "If you want, why not <a href=\"%(url)s\">introduce yourself</a> on the "
 "forums?"
 msgstr ""
+"Si vous le souhaitez, pourquoi ne pas <a href=\"%(url)s\">vous présenter</a> "
+"sur le Forum ?"
 
 msgid ""
 "Follow AstroBin on social networks! AstroBin posts quick announcements and "
 "reports there, in addition to the Image of the Day, and Top Picks as stories!"
 msgstr ""
+"Suivez AstroBin sur les réseaux sociaux ! AstroBin y publie régulièrement "
+"des annonces, actualités, ainsi que les Images du Jour ou des Top Picks !"
 
 msgid "Thanks again for joining and clear skies!"
-msgstr ""
+msgstr "Merci encore pour votre adhésion, et bon ciel ! "
 
-#, fuzzy
-#| msgid "Frequently Asked Questions"
 msgid "Have a look at our frequently asked questions:"
-msgstr "Foire Aux Questions"
+msgstr "Consultez notre FAQ :"
 
 msgid "Head over to your settings and configure your profile:"
-msgstr ""
+msgstr "Rendez-vous sur vos Paramètres et configurez votre Profil :"
 
 msgid ""
 "If you have astrophotography equipment, add it to your gear so that later "
 "you can associate it with the images you upload:"
 msgstr ""
+"Si vous disposez d'équipements dédiés à l'astrophotographie, ajoutez-les à "
+"\"votre matériel\" afin de pouvoir ensuite les associer à chacune de vos "
+"images : "
 
 msgid "If you want, why not introduce yourself on the forums?"
-msgstr ""
+msgstr "Si vous le souhaitez, pourquoi ne pas vous présenter sur le Forum ?"
 
 msgid "Welcome!"
-msgstr ""
+msgstr "Bienvenue !"
 
 msgid "Object not found"
 msgstr "Objet non trouvé"
@@ -5269,13 +5291,9 @@ msgstr "Cette discussion a été fermée par un modérateur."
 msgid "New topic"
 msgstr "Nouveau sujet"
 
-#, fuzzy
-#| msgid "New e-mail"
 msgid "New reply"
-msgstr "Nouvel e-mail"
+msgstr "Nouvelle réponse"
 
-#, fuzzy
-#| msgid "Please note!"
 msgid "Please note"
 msgstr "A noter !"
 
@@ -5285,18 +5303,22 @@ msgid ""
 "If you need help with AstroBin please use the <a href=\"%(contact_url)s"
 "\">contact form</a>."
 msgstr ""
+"Le Forum d'Astrobin est l'endroit idéal pour discuter astronomie et "
+"astrophoto avec les autres utilisateurs. Si vous avez besoin d'aide "
+"concernant AstroBin, merci d'utiliser plutôt le <a href=\"%(contact_url)s"
+"\">formulaire de contact</a>."
 
 msgid ""
 "User support posts, feature requests, issue reports, etc, will be deleted."
 msgstr ""
+"Les messages relatifs aux demandes d'assistance, aux fonctionnalités, aux "
+"problèmes rencontrés, etc. seront supprimés."
 
-#, fuzzy
-#| msgid "Thanks for your support!"
 msgid "Thanks for your cooperation!"
-msgstr "Merci pour votre soutien !"
+msgstr "Merci pour votre coopération !"
 
 msgid "I understand"
-msgstr ""
+msgstr "Je comprends"
 
 msgid "Back to group"
 msgstr "Retourner au groupe"
@@ -5356,22 +5378,18 @@ msgid "Please note: this post will be published only after moderation."
 msgstr "Veuillez remarquer que ce message ne sera publié qu'après modération."
 
 msgid "Type your forum post here..."
-msgstr ""
+msgstr "Ecrivez votre message ici..."
 
 msgid "Please first exit 'Source' mode to quote a message."
-msgstr ""
+msgstr "Veuillez d'abord quitter le mode \"Source\" pour citer un message."
 
 msgid "*** Type your reply here ***"
-msgstr ""
+msgstr "*** Ecrivez votre réponse ici ***"
 
-#, fuzzy
-#| msgid "likes"
 msgctxt "Noun, e.g. 'This element has 1 like'"
 msgid "like"
-msgstr "aime"
+msgstr "J'aime"
 
-#, fuzzy
-#| msgid "likes"
 msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr "aime"
@@ -5600,406 +5618,6 @@ msgstr "CCD vs APN : tendance globale"
 
 msgid "Global trend of telescope types"
 msgstr "Tendance globale des types d'instruments"
-
-msgctxt "approximately"
-msgid "about"
-msgstr "à propos"
-
-msgid "View feature comparison"
-msgstr "Voir la comparaison des caractéristiques"
-
-msgid "Max size"
-msgstr "Taille max"
-
-msgid "View full res"
-msgstr "Voir la résolution maximale"
-
-msgid "View full image info"
-msgstr "Voir l'ensemble des informations de l'image"
-
-msgid "Basic"
-msgstr "Basique"
-
-msgid "Advanced"
-msgstr "Avancé"
-
-msgid "Social features"
-msgstr "Caractéristiques sociales"
-
-msgid "Plate-solving"
-msgstr "Réduction astrométrique"
-
-msgid "Bulk data export"
-msgstr "Exportation de données en vrac"
-
-msgid "Hide astronomy ads"
-msgstr "Cacher les publicités d'astronomie"
-
-msgid "No ads on your pages"
-msgstr "Pas de publicité sur vos pages"
-
-msgid "Non-members/free users can view your images in full res"
-msgstr ""
-"Les non-membres/utilisateurs gratuits peuvent voir vos images en résolution "
-"maximale"
-
-msgid "Full size annotations"
-msgstr "Annotations sur version Full"
-
-msgid "Upload uncompressed source"
-msgstr "Télécharger une source non-compressée"
-
-msgid "Undelete images"
-msgstr "Images non supprimées"
-
-msgid ""
-"The FREE account is to be considered a trial period. You can upload images "
-"10 times, after which you can't upload anymore. Deleting images doesn't "
-"decrease your upload counter: the FREE account is not meant to be used as a "
-"way to keep your latest 10 images."
-msgstr ""
-"Le compte GRATUIT doit être considéré comme une période d'essai. Vous pouvez "
-"publier jusqu'à 10 images, après quoi vous ne pourrez plus en publier "
-"d'autres. Supprimer des images déjà publiées ne diminue pas ce compteur : le "
-"compte GRATUIT n'est pas destiné à être utilisé comme un moyen de conserver "
-"vos 10 dernières images."
-
-msgid "year"
-msgstr "année"
-
-#, python-format
-msgid ""
-"\n"
-"                %(number)s images, max %(size)s each"
-msgstr ""
-"\n"
-"                  %(number)s images, max %(size)s chacune"
-
-msgid "View in original resolution"
-msgstr "Voir en résolution native"
-
-#, python-format
-msgid ""
-"Up to %(number)s\n"
-"            revisions/image"
-msgstr ""
-"Jusqu'à %(number)s\n"
-"            nouvelles versions par image"
-
-msgid "Create/join Groups"
-msgstr "Créer/rejoindre des groupes"
-
-msgid "Basic plate-solving"
-msgstr "Réduction astrométrique basique"
-
-msgid "IOTD / Top Picks"
-msgstr "Image du Jour / Top Picks"
-
-msgid "No ads for others on your pages"
-msgstr "Pas de publicité visible sur vos pages pour les autres utilisateurs"
-
-msgid "Full-size annotations"
-msgstr "Annotations en format plein"
-
-msgid "All future features"
-msgstr "Toutes les fonctionnalités futures"
-
-msgid "In the future"
-msgstr "A l'avenir"
-
-msgid "Buy in the Marketplace"
-msgstr "Acheter sur le marché"
-
-msgid "Vote in contests"
-msgstr "Voter aux concours"
-
-msgid "Analytics"
-msgstr "Analyse de données"
-
-msgid "Bulk image editing"
-msgstr "Edition en masse des images"
-
-msgid "Pay securely with PayPal"
-msgstr "Payez en toute sécurité avec PayPal"
-
-msgid "Want to upgrade from a lower subscription tier?"
-msgstr "Vous désirez passer à une offre d'abonnement supérieure ?"
-
-#, python-format
-msgid ""
-"AstroBin doesn't support subscription upgrades at the moment, but we're "
-"happy to make it happen manually. If you're on a lower subscription tier and "
-"would like to upgrade to <strong>%(name)s</strong>, please just buy it and "
-"then contact us at <a href=\"mailto:astrobin@astrobin.com"
-"\">astrobin@astrobin.com</a> to get a refund for the unused time on your old "
-"subscription. Thanks!"
-msgstr ""
-"AstroBin ne gère pas automatiquement le passage à des offres d'abonnement "
-"supérieures pour le moment, mais nous pouvons y procéder à la demande avec "
-"plaisir. Si vous êtes abonné à une offre inférieure et que vous souhaitez "
-"passer à <strong>%(name)s</strong>, veuillez simplement y souscrire et nous "
-"contacter à <a href=\"mailto:astrobin@astrobin.com\">astrobin@astrobin.com</"
-"a> pour obtenir un remboursement au titre de la durée non-utilisée de votre "
-"ancien abonnement. Merci !"
-
-msgid "Pay with a bank transfer"
-msgstr "Payer par virement bancaire"
-
-#, python-format
-msgid ""
-"\n"
-"                Prefer to pay via bank transfer? Please make a deposit of "
-"%(currency)s %(amount)s to the following\n"
-"                bank details and then email us at %(email_prefix)s%(email)s"
-"%(email_postfix)s with your username so\n"
-"                we may upgrade your account manually. Thanks!\n"
-"            "
-msgstr ""
-"\n"
-"                Vous préférez payer par virement bancaire ? Merci de bien "
-"vouloir effectuer un virement de %(amount)s %(currency)s aux coordonnées "
-"bancaires suivantes\n"
-"               puis envoyez-nous un courriel à %(email_prefix)s%(email)s"
-"%(email_postfix)s en précisant votre nom d'utilisateur afin\n"
-"               que nous puissions actualiser votre compte manuellement. "
-"Merci ! \n"
-"            "
-
-#, python-format
-msgid ""
-"\n"
-"                ∞ images, max %(size)s each"
-msgstr ""
-"\n"
-"                ∞ images, max %(size)s chacune"
-
-msgid "Basic analytics"
-msgstr "Analyse de données basique"
-
-msgid "Buy"
-msgstr "Acheter"
-
-msgid "You are already on this plan"
-msgstr "Vous êtes déjà abonné(e) à cette offre"
-
-msgid "∞ images, ∞ size"
-msgstr "∞ images, ∞ taille"
-
-msgid "View full res (incl. visitors)"
-msgstr "Voir la résolution maximale (y compris pour les visiteurs)"
-
-msgid "Full search"
-msgstr "Recherche complète"
-
-msgid "Unlimited revisions"
-msgstr "Nouvelles versions illimitées"
-
-msgid "Advanced plate-solving"
-msgstr "Réduction astrométrique avancée"
-
-msgid "Sell in the Marketplace"
-msgstr "Vendre sur le marché"
-
-msgid "Vote/enter contests"
-msgstr "Participer/voter aux concours"
-
-msgid "Advanced analytics"
-msgstr "Analyse de données avancée"
-
-msgid "Subscription process canceled"
-msgstr "Processus d'abonnement annulé"
-
-msgid "Subscription process cancelled"
-msgstr "Processus d'abonnement annulé"
-
-msgid ""
-"Your transaction with PayPal has been cancelled, so no change in your "
-"subscription has occurred."
-msgstr ""
-"La transaction via PayPal a été annulée, votre abonnement n'a pas été "
-"modifié."
-
-#, python-format
-msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
-msgstr "Retourner aux <a href=\"%(plans_url)s\">formules d'abonnement</a>."
-
-msgctxt "Subscription plan name"
-msgid "Plan"
-msgstr "Formule"
-
-msgid "Offer valid until"
-msgstr "Offre valable jusqu'au"
-
-msgid "Price"
-msgstr "Prix"
-
-msgid "Validity"
-msgstr "Validité"
-
-msgid "Autorenew"
-msgstr "Renouvellement automatique"
-
-msgid "Trial period"
-msgstr "Période d'essai"
-
-msgid "day"
-msgstr "jour"
-
-msgid "week"
-msgstr "semaine"
-
-msgid "month"
-msgstr "mois"
-
-msgid "one time"
-msgstr "une fois"
-
-msgctxt "At no cost"
-msgid "Free"
-msgstr "Gratuit"
-
-msgid "Daily"
-msgstr "Quotidien"
-
-msgid "Weekly"
-msgstr "Hebdomadaire"
-
-msgid "Monthly"
-msgstr "Mensuel"
-
-msgid "Yearly"
-msgstr "Annuel"
-
-msgid "days"
-msgstr "jours"
-
-msgid "weeks"
-msgstr "semaines"
-
-msgid "months"
-msgstr "mois"
-
-msgid "years"
-msgstr "années"
-
-msgid "No trial"
-msgstr "non"
-
-msgid "Switch to"
-msgstr "Passer à"
-
-msgid "Subscription changed"
-msgstr "Abonnement modifié"
-
-msgid ""
-"Your request for a change in your subscription has been processed "
-"successfully."
-msgstr "Votre demande de changement d'abonnement a été traitée avec succès."
-
-msgid "Subscription plan"
-msgstr "Formule d'abonnement"
-
-msgid "Status"
-msgstr "Statut"
-
-msgid "Subscribed"
-msgstr "Abonné"
-
-msgid "Expires"
-msgstr "Expire"
-
-msgid "Invalid"
-msgstr "Non valable"
-
-msgid "Cancelled"
-msgstr "Annulé"
-
-msgid "Unavailable"
-msgstr "Indisponible"
-
-msgid "Unsubscribed"
-msgstr "Désabonné"
-
-#, python-format
-msgid ""
-"This subscription is not offered anymore on AstroBin. Please visit the <a "
-"href=\"%(url)s\">subscriptions page</a> to see the available plans, thanks!"
-msgstr ""
-"Cet abonnement n'est plus proposé sur AstroBin. Veuillez visiter la page <a "
-"href=\"%(url)s\">formules d'abonnement</a> pour voir les formules proposée, "
-"merci !"
-
-msgid ""
-"If you would like to renew your subscription, please visit this page again "
-"after\n"
-"                        your current subscription's expiration date:"
-msgstr ""
-"Si vous souhaitez renouveler votre abonnement, veuillez consulter à nouveau "
-"cette page après\n"
-"                        la date d'échéance de votre abonnement actuel :"
-
-msgid ""
-"Your subscription is either cancelled or not active yet. If you want to "
-"subscribe again, please wait until your subscription is expired. If you just "
-"subscribed, please wait a few minutes while PayPal contacts our server for "
-"the final transaction confirmation. Thank you!"
-msgstr ""
-"Votre abonnement est annulé ou pas encore actif. Si vous désirez vous "
-"abonner à nouveau, merci d'attendre l'échéance de votre abonnement en cours. "
-"Si vous venez de vous abonner, attendez quelques minutes afin que la "
-"transaction PayPal soit confirmée. Merci!"
-
-msgid "By cancelling, you will revert to a free plan."
-msgstr "En annulant, vous reviendrez à un abonnement gratuit."
-
-#, python-format
-msgid "Free plans are limited to <strong>%(max_allowed)s</strong> images."
-msgstr ""
-"L'abonnement gratuit est limité à <strong>%(max_allowed)s</strong> images."
-
-msgid ""
-"However, your existing images will not be deleted or deactivated in any way! "
-"Simply, you will not be able to upload any more images unless you switch to "
-"a paid plan."
-msgstr ""
-"Cependant, vos images existantes ne seront pas effacées ou désactivées. Vous "
-"ne pourrez simplement pas en publier davantage sans souscrire à un "
-"abonnement."
-
-msgid "Cancel via PayPal"
-msgstr "Annuler par PayPal"
-
-msgid "You cannot switch to this plan."
-msgstr "Vous ne pouvez pas passer à cet abonnement."
-
-msgid "Back to the plans"
-msgstr "Retourner aux formules d'abonnement"
-
-msgid "Subscription confirmed"
-msgstr "Abonnement confirmé"
-
-msgid ""
-"Your request has been received, and we are awaiting the final confirmation "
-"from PayPal. Your subscription should be active within a few minutes!"
-msgstr ""
-"Votre demande est en cours, nous attendons la confirmation de PayPal. Votre "
-"abonnement devrait être actif d'ici quelques minutes !"
-
-msgid "Thank you for supporting AstroBin!"
-msgstr "Merci de soutenir AstroBin!"
-
-msgid "Your active subscription plans"
-msgstr "Vos abonnements actifs"
-
-msgid "Your inactive subscription plans"
-msgstr "Vos abonnements inactifs"
-
-msgid ""
-"PS: are you interested in larger plans?\n"
-"                <a href=\"/contact/\">Let us know!</a>"
-msgstr ""
-"PS : vous êtes intéressé par des formules de plus grande envergure ? \n"
-"              <a href=\"/contact/\">Faites-le nous savoir !</a>"
 
 msgid "This list is currently empty."
 msgstr "Cette liste est vide pour le moment."
@@ -6326,6 +5944,9 @@ msgstr "Vos demandes antérieures"
 msgid "Request time"
 msgstr "Heure de la demande"
 
+msgid "Status"
+msgstr "Statut"
+
 msgid "File size"
 msgstr "Taille du fichier"
 
@@ -6491,9 +6112,11 @@ msgstr "Merci pour votre soutien !"
 
 msgid "This data is currently not available and will be recalculated shortly."
 msgstr ""
+"Cette information n'est pas accessible pour le moment et sera bientôt "
+"actualisée."
 
 msgid "Please check again in a bit, thanks!"
-msgstr ""
+msgstr "Merci de vérifier à nouveau dans un petit moment !"
 
 msgid "Public Area"
 msgstr "Galerie publique"
@@ -6753,15 +6376,11 @@ msgstr "Ajouter un filtre :"
 msgid "Image of the Day"
 msgstr "Image du Jour"
 
-#, fuzzy
-#| msgid "Top picks"
 msgid "Top pick"
-msgstr "Top Picks"
+msgstr "Top Pick"
 
-#, fuzzy
-#| msgid "By basic information"
 msgid "Top pick nomination"
-msgstr "Informations élémentaires"
+msgstr "Nominée Top Pick"
 
 msgid "Guider/planetary"
 msgstr "Guidage/planétaire"
@@ -6972,6 +6591,9 @@ msgstr "Dates"
 msgid "Avg. Moon age"
 msgstr "Âge de la Lune (moyen)"
 
+msgid "days"
+msgstr "jours"
+
 msgid "Avg. Moon phase"
 msgstr "Phase de la Lune (moyenne)"
 
@@ -7008,13 +6630,400 @@ msgstr ""
 "cette page dans quelques temps : plus vous avez d'images, plus cela prendra "
 "de temps."
 
-#, fuzzy
-#| msgid "Are you sure?"
 msgid "Are you a robot?"
-msgstr "Êtes-vous sûr(e)?"
+msgstr "Etes-vous un robot ?"
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+"Désolé, ce nom d'utilisateur existes déjà avec un mise en forme différente."
+
+#~ msgctxt "approximately"
+#~ msgid "about"
+#~ msgstr "à propos"
+
+#~ msgid "View feature comparison"
+#~ msgstr "Voir la comparaison des caractéristiques"
+
+#~ msgid "Max size"
+#~ msgstr "Taille max"
+
+#~ msgid "View full res"
+#~ msgstr "Voir la résolution maximale"
+
+#~ msgid "View full image info"
+#~ msgstr "Voir l'ensemble des informations de l'image"
+
+#~ msgid "Basic"
+#~ msgstr "Basique"
+
+#~ msgid "Advanced"
+#~ msgstr "Avancé"
+
+#~ msgid "Social features"
+#~ msgstr "Caractéristiques sociales"
+
+#~ msgid "Plate-solving"
+#~ msgstr "Réduction astrométrique"
+
+#~ msgid "Bulk data export"
+#~ msgstr "Exportation de données en vrac"
+
+#~ msgid "Hide astronomy ads"
+#~ msgstr "Cacher les publicités d'astronomie"
+
+#~ msgid "No ads on your pages"
+#~ msgstr "Pas de publicité sur vos pages"
+
+#~ msgid "Non-members/free users can view your images in full res"
+#~ msgstr ""
+#~ "Les non-membres/utilisateurs gratuits peuvent voir vos images en "
+#~ "résolution maximale"
+
+#~ msgid "Full size annotations"
+#~ msgstr "Annotations sur version Full"
+
+#~ msgid "Upload uncompressed source"
+#~ msgstr "Télécharger une source non-compressée"
+
+#~ msgid "Undelete images"
+#~ msgstr "Images non supprimées"
+
+#~ msgid ""
+#~ "The FREE account is to be considered a trial period. You can upload "
+#~ "images 10 times, after which you can't upload anymore. Deleting images "
+#~ "doesn't decrease your upload counter: the FREE account is not meant to be "
+#~ "used as a way to keep your latest 10 images."
+#~ msgstr ""
+#~ "Le compte GRATUIT doit être considéré comme une période d'essai. Vous "
+#~ "pouvez publier jusqu'à 10 images, après quoi vous ne pourrez plus en "
+#~ "publier d'autres. Supprimer des images déjà publiées ne diminue pas ce "
+#~ "compteur : le compte GRATUIT n'est pas destiné à être utilisé comme un "
+#~ "moyen de conserver vos 10 dernières images."
+
+#~ msgid "year"
+#~ msgstr "année"
+
+#~ msgid ""
+#~ "\n"
+#~ "                %(number)s images, max %(size)s each"
+#~ msgstr ""
+#~ "\n"
+#~ "                  %(number)s images, max %(size)s chacune"
+
+#~ msgid "View in original resolution"
+#~ msgstr "Voir en résolution native"
+
+#~ msgid ""
+#~ "Up to %(number)s\n"
+#~ "            revisions/image"
+#~ msgstr ""
+#~ "Jusqu'à %(number)s\n"
+#~ "            nouvelles versions par image"
+
+#~ msgid "Create/join Groups"
+#~ msgstr "Créer/rejoindre des groupes"
+
+#~ msgid "Basic plate-solving"
+#~ msgstr "Réduction astrométrique basique"
+
+#~ msgid "IOTD / Top Picks"
+#~ msgstr "Image du Jour / Top Picks"
+
+#~ msgid "No ads for others on your pages"
+#~ msgstr "Pas de publicité visible sur vos pages pour les autres utilisateurs"
+
+#~ msgid "Full-size annotations"
+#~ msgstr "Annotations en format plein"
+
+#~ msgid "All future features"
+#~ msgstr "Toutes les fonctionnalités futures"
+
+#~ msgid "In the future"
+#~ msgstr "A l'avenir"
+
+#~ msgid "Buy in the Marketplace"
+#~ msgstr "Acheter sur le marché"
+
+#~ msgid "Vote in contests"
+#~ msgstr "Voter aux concours"
+
+#~ msgid "Analytics"
+#~ msgstr "Analyse de données"
+
+#~ msgid "Bulk image editing"
+#~ msgstr "Edition en masse des images"
+
+#~ msgid "Pay securely with PayPal"
+#~ msgstr "Payez en toute sécurité avec PayPal"
+
+#~ msgid "Want to upgrade from a lower subscription tier?"
+#~ msgstr "Vous désirez passer à une offre d'abonnement supérieure ?"
+
+#~ msgid ""
+#~ "AstroBin doesn't support subscription upgrades at the moment, but we're "
+#~ "happy to make it happen manually. If you're on a lower subscription tier "
+#~ "and would like to upgrade to <strong>%(name)s</strong>, please just buy "
+#~ "it and then contact us at <a href=\"mailto:astrobin@astrobin.com"
+#~ "\">astrobin@astrobin.com</a> to get a refund for the unused time on your "
+#~ "old subscription. Thanks!"
+#~ msgstr ""
+#~ "AstroBin ne gère pas automatiquement le passage à des offres d'abonnement "
+#~ "supérieures pour le moment, mais nous pouvons y procéder à la demande "
+#~ "avec plaisir. Si vous êtes abonné à une offre inférieure et que vous "
+#~ "souhaitez passer à <strong>%(name)s</strong>, veuillez simplement y "
+#~ "souscrire et nous contacter à <a href=\"mailto:astrobin@astrobin.com"
+#~ "\">astrobin@astrobin.com</a> pour obtenir un remboursement au titre de la "
+#~ "durée non-utilisée de votre ancien abonnement. Merci !"
+
+#~ msgid "Pay with a bank transfer"
+#~ msgstr "Payer par virement bancaire"
+
+#~ msgid ""
+#~ "\n"
+#~ "                Prefer to pay via bank transfer? Please make a deposit of "
+#~ "%(currency)s %(amount)s to the following\n"
+#~ "                bank details and then email us at %(email_prefix)s"
+#~ "%(email)s%(email_postfix)s with your username so\n"
+#~ "                we may upgrade your account manually. Thanks!\n"
+#~ "            "
+#~ msgstr ""
+#~ "\n"
+#~ "                Vous préférez payer par virement bancaire ? Merci de bien "
+#~ "vouloir effectuer un virement de %(amount)s %(currency)s aux coordonnées "
+#~ "bancaires suivantes\n"
+#~ "               puis envoyez-nous un courriel à %(email_prefix)s%(email)s"
+#~ "%(email_postfix)s en précisant votre nom d'utilisateur afin\n"
+#~ "               que nous puissions actualiser votre compte manuellement. "
+#~ "Merci ! \n"
+#~ "            "
+
+#~ msgid ""
+#~ "\n"
+#~ "                ∞ images, max %(size)s each"
+#~ msgstr ""
+#~ "\n"
+#~ "                ∞ images, max %(size)s chacune"
+
+#~ msgid "Basic analytics"
+#~ msgstr "Analyse de données basique"
+
+#~ msgid "Buy"
+#~ msgstr "Acheter"
+
+#~ msgid "You are already on this plan"
+#~ msgstr "Vous êtes déjà abonné(e) à cette offre"
+
+#~ msgid "∞ images, ∞ size"
+#~ msgstr "∞ images, ∞ taille"
+
+#~ msgid "View full res (incl. visitors)"
+#~ msgstr "Voir la résolution maximale (y compris pour les visiteurs)"
+
+#~ msgid "Full search"
+#~ msgstr "Recherche complète"
+
+#~ msgid "Unlimited revisions"
+#~ msgstr "Nouvelles versions illimitées"
+
+#~ msgid "Advanced plate-solving"
+#~ msgstr "Réduction astrométrique avancée"
+
+#~ msgid "Sell in the Marketplace"
+#~ msgstr "Vendre sur le marché"
+
+#~ msgid "Vote/enter contests"
+#~ msgstr "Participer/voter aux concours"
+
+#~ msgid "Advanced analytics"
+#~ msgstr "Analyse de données avancée"
+
+#~ msgid "Subscription process canceled"
+#~ msgstr "Processus d'abonnement annulé"
+
+#~ msgid "Subscription process cancelled"
+#~ msgstr "Processus d'abonnement annulé"
+
+#~ msgid ""
+#~ "Your transaction with PayPal has been cancelled, so no change in your "
+#~ "subscription has occurred."
+#~ msgstr ""
+#~ "La transaction via PayPal a été annulée, votre abonnement n'a pas été "
+#~ "modifié."
+
+#~ msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
+#~ msgstr "Retourner aux <a href=\"%(plans_url)s\">formules d'abonnement</a>."
+
+#~ msgctxt "Subscription plan name"
+#~ msgid "Plan"
+#~ msgstr "Formule"
+
+#~ msgid "Offer valid until"
+#~ msgstr "Offre valable jusqu'au"
+
+#~ msgid "Price"
+#~ msgstr "Prix"
+
+#~ msgid "Validity"
+#~ msgstr "Validité"
+
+#~ msgid "Autorenew"
+#~ msgstr "Renouvellement automatique"
+
+#~ msgid "Trial period"
+#~ msgstr "Période d'essai"
+
+#~ msgid "day"
+#~ msgstr "jour"
+
+#~ msgid "week"
+#~ msgstr "semaine"
+
+#~ msgid "month"
+#~ msgstr "mois"
+
+#~ msgid "one time"
+#~ msgstr "une fois"
+
+#~ msgctxt "At no cost"
+#~ msgid "Free"
+#~ msgstr "Gratuit"
+
+#~ msgid "Daily"
+#~ msgstr "Quotidien"
+
+#~ msgid "Weekly"
+#~ msgstr "Hebdomadaire"
+
+#~ msgid "Monthly"
+#~ msgstr "Mensuel"
+
+#~ msgid "Yearly"
+#~ msgstr "Annuel"
+
+#~ msgid "weeks"
+#~ msgstr "semaines"
+
+#~ msgid "months"
+#~ msgstr "mois"
+
+#~ msgid "years"
+#~ msgstr "années"
+
+#~ msgid "No trial"
+#~ msgstr "non"
+
+#~ msgid "Switch to"
+#~ msgstr "Passer à"
+
+#~ msgid "Subscription changed"
+#~ msgstr "Abonnement modifié"
+
+#~ msgid ""
+#~ "Your request for a change in your subscription has been processed "
+#~ "successfully."
+#~ msgstr "Votre demande de changement d'abonnement a été traitée avec succès."
+
+#~ msgid "Subscription plan"
+#~ msgstr "Formule d'abonnement"
+
+#~ msgid "Subscribed"
+#~ msgstr "Abonné"
+
+#~ msgid "Expires"
+#~ msgstr "Expire"
+
+#~ msgid "Invalid"
+#~ msgstr "Non valable"
+
+#~ msgid "Cancelled"
+#~ msgstr "Annulé"
+
+#~ msgid "Unavailable"
+#~ msgstr "Indisponible"
+
+#~ msgid "Unsubscribed"
+#~ msgstr "Désabonné"
+
+#~ msgid ""
+#~ "This subscription is not offered anymore on AstroBin. Please visit the <a "
+#~ "href=\"%(url)s\">subscriptions page</a> to see the available plans, "
+#~ "thanks!"
+#~ msgstr ""
+#~ "Cet abonnement n'est plus proposé sur AstroBin. Veuillez visiter la page "
+#~ "<a href=\"%(url)s\">formules d'abonnement</a> pour voir les formules "
+#~ "proposée, merci !"
+
+#~ msgid ""
+#~ "If you would like to renew your subscription, please visit this page "
+#~ "again after\n"
+#~ "                        your current subscription's expiration date:"
+#~ msgstr ""
+#~ "Si vous souhaitez renouveler votre abonnement, veuillez consulter à "
+#~ "nouveau cette page après\n"
+#~ "                        la date d'échéance de votre abonnement actuel :"
+
+#~ msgid ""
+#~ "Your subscription is either cancelled or not active yet. If you want to "
+#~ "subscribe again, please wait until your subscription is expired. If you "
+#~ "just subscribed, please wait a few minutes while PayPal contacts our "
+#~ "server for the final transaction confirmation. Thank you!"
+#~ msgstr ""
+#~ "Votre abonnement est annulé ou pas encore actif. Si vous désirez vous "
+#~ "abonner à nouveau, merci d'attendre l'échéance de votre abonnement en "
+#~ "cours. Si vous venez de vous abonner, attendez quelques minutes afin que "
+#~ "la transaction PayPal soit confirmée. Merci!"
+
+#~ msgid "By cancelling, you will revert to a free plan."
+#~ msgstr "En annulant, vous reviendrez à un abonnement gratuit."
+
+#~ msgid "Free plans are limited to <strong>%(max_allowed)s</strong> images."
+#~ msgstr ""
+#~ "L'abonnement gratuit est limité à <strong>%(max_allowed)s</strong> images."
+
+#~ msgid ""
+#~ "However, your existing images will not be deleted or deactivated in any "
+#~ "way! Simply, you will not be able to upload any more images unless you "
+#~ "switch to a paid plan."
+#~ msgstr ""
+#~ "Cependant, vos images existantes ne seront pas effacées ou désactivées. "
+#~ "Vous ne pourrez simplement pas en publier davantage sans souscrire à un "
+#~ "abonnement."
+
+#~ msgid "Cancel via PayPal"
+#~ msgstr "Annuler par PayPal"
+
+#~ msgid "You cannot switch to this plan."
+#~ msgstr "Vous ne pouvez pas passer à cet abonnement."
+
+#~ msgid "Back to the plans"
+#~ msgstr "Retourner aux formules d'abonnement"
+
+#~ msgid "Subscription confirmed"
+#~ msgstr "Abonnement confirmé"
+
+#~ msgid ""
+#~ "Your request has been received, and we are awaiting the final "
+#~ "confirmation from PayPal. Your subscription should be active within a few "
+#~ "minutes!"
+#~ msgstr ""
+#~ "Votre demande est en cours, nous attendons la confirmation de PayPal. "
+#~ "Votre abonnement devrait être actif d'ici quelques minutes !"
+
+#~ msgid "Thank you for supporting AstroBin!"
+#~ msgstr "Merci de soutenir AstroBin !"
+
+#~ msgid "Your active subscription plans"
+#~ msgstr "Vos abonnements actifs"
+
+#~ msgid "Your inactive subscription plans"
+#~ msgstr "Vos abonnements inactifs"
+
+#~ msgid ""
+#~ "PS: are you interested in larger plans?\n"
+#~ "                <a href=\"/contact/\">Let us know!</a>"
+#~ msgstr ""
+#~ "PS : vous êtes intéressé par des formules de plus grande envergure ? \n"
+#~ "              <a href=\"/contact/\">Faites-le nous savoir !</a>"
 
 #, fuzzy
 #~| msgid ""

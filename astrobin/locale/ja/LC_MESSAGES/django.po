@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-05 13:05+0000\n"
+"POT-Creation-Date: 2020-12-06 18:30+0000\n"
 "PO-Revision-Date: 2020-11-27 01:58+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5400,404 +5400,6 @@ msgstr "CCD vs DLSRの全体の傾向"
 msgid "Global trend of telescope types"
 msgstr "望遠鏡タイプの全体の傾向"
 
-#, fuzzy
-#| msgid "About"
-msgctxt "approximately"
-msgid "about"
-msgstr "AstroBinについて"
-
-msgid "View feature comparison"
-msgstr ""
-
-#, fuzzy
-#| msgid "Pixel size"
-msgid "Max size"
-msgstr "ピクセルサイズ"
-
-#, fuzzy
-msgid "View full res"
-msgstr "ページを表示"
-
-msgid "View full image info"
-msgstr ""
-
-msgid "Basic"
-msgstr ""
-
-#, fuzzy
-#| msgid "Advanced search"
-msgid "Advanced"
-msgstr "詳細検索"
-
-#, fuzzy
-#| msgid "Commercial gear items"
-msgid "Social features"
-msgstr "商業的な機材"
-
-msgid "Plate-solving"
-msgstr ""
-
-#, fuzzy
-#| msgid "Public data pools"
-msgid "Bulk data export"
-msgstr "公開データ領域"
-
-msgid "Hide astronomy ads"
-msgstr ""
-
-msgid "No ads on your pages"
-msgstr ""
-
-msgid "Non-members/free users can view your images in full res"
-msgstr ""
-
-#, fuzzy
-#| msgid "Full resolution"
-msgid "Full size annotations"
-msgstr "最大解像度"
-
-#, fuzzy
-#| msgid "Upload complete!"
-msgid "Upload uncompressed source"
-msgstr "アップロード完了!"
-
-#, fuzzy
-#| msgid "Unlimited images"
-msgid "Undelete images"
-msgstr "無制限"
-
-msgid ""
-"The FREE account is to be considered a trial period. You can upload images "
-"10 times, after which you can't upload anymore. Deleting images doesn't "
-"decrease your upload counter: the FREE account is not meant to be used as a "
-"way to keep your latest 10 images."
-msgstr ""
-
-msgid "year"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                %(number)s images, max %(size)s each"
-msgstr ""
-
-#, fuzzy
-#| msgid "Higher resolution"
-msgid "View in original resolution"
-msgstr "高解像度"
-
-#, python-format
-msgid ""
-"Up to %(number)s\n"
-"            revisions/image"
-msgstr ""
-
-msgid "Create/join Groups"
-msgstr ""
-
-msgid "Basic plate-solving"
-msgstr ""
-
-msgid "IOTD / Top Picks"
-msgstr ""
-
-msgid "No ads for others on your pages"
-msgstr ""
-
-msgid "Full-size annotations"
-msgstr ""
-
-msgid "All future features"
-msgstr ""
-
-msgid "In the future"
-msgstr ""
-
-#, fuzzy
-#| msgid "Buy it here"
-msgid "Buy in the Marketplace"
-msgstr "ここで購入"
-
-msgid "Vote in contests"
-msgstr ""
-
-msgid "Analytics"
-msgstr ""
-
-msgid "Bulk image editing"
-msgstr ""
-
-msgid "Pay securely with PayPal"
-msgstr ""
-
-msgid "Want to upgrade from a lower subscription tier?"
-msgstr ""
-
-#, python-format
-msgid ""
-"AstroBin doesn't support subscription upgrades at the moment, but we're "
-"happy to make it happen manually. If you're on a lower subscription tier and "
-"would like to upgrade to <strong>%(name)s</strong>, please just buy it and "
-"then contact us at <a href=\"mailto:astrobin@astrobin.com"
-"\">astrobin@astrobin.com</a> to get a refund for the unused time on your old "
-"subscription. Thanks!"
-msgstr ""
-
-msgid "Pay with a bank transfer"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                Prefer to pay via bank transfer? Please make a deposit of "
-"%(currency)s %(amount)s to the following\n"
-"                bank details and then email us at %(email_prefix)s%(email)s"
-"%(email_postfix)s with your username so\n"
-"                we may upgrade your account manually. Thanks!\n"
-"            "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                ∞ images, max %(size)s each"
-msgstr ""
-
-#, fuzzy
-#| msgid "Basic information"
-msgid "Basic analytics"
-msgstr "基本情報"
-
-msgid "Buy"
-msgstr ""
-
-#, fuzzy
-#| msgid "You are not allowed to see this page."
-msgid "You are already on this plan"
-msgstr "このページの閲覧を許可されていません。"
-
-#, fuzzy
-#| msgid "Image size"
-msgid "∞ images, ∞ size"
-msgstr "画像サイズ"
-
-msgid "View full res (incl. visitors)"
-msgstr ""
-
-#, fuzzy
-msgid "Full search"
-msgstr "ピクセルサイズ"
-
-#, fuzzy
-msgid "Unlimited revisions"
-msgstr "あなたの場所の編集"
-
-#, fuzzy
-#| msgid "Attempt to plate-solve again"
-msgid "Advanced plate-solving"
-msgstr "星図化を再度試みる"
-
-msgid "Sell in the Marketplace"
-msgstr ""
-
-msgid "Vote/enter contests"
-msgstr ""
-
-#, fuzzy
-#| msgid "Advanced search"
-msgid "Advanced analytics"
-msgstr "詳細検索"
-
-msgid "Subscription process canceled"
-msgstr "登録処理はキャンセルされました"
-
-msgid "Subscription process cancelled"
-msgstr "登録処理はキャンセルされました"
-
-msgid ""
-"Your transaction with PayPal has been cancelled, so no change in your "
-"subscription has occurred."
-msgstr "PayPalでの処理がキャンセルされたので、登録変更は実施されませんでした。"
-
-#, python-format
-msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
-msgstr "<a href=\"%(plans_url)s\">計画ページ</a>に戻る"
-
-msgctxt "Subscription plan name"
-msgid "Plan"
-msgstr "計画"
-
-msgid "Offer valid until"
-msgstr ""
-
-msgid "Price"
-msgstr "価格"
-
-msgid "Validity"
-msgstr ""
-
-msgid "Autorenew"
-msgstr ""
-
-msgid "Trial period"
-msgstr "試用期間"
-
-#, fuzzy
-msgid "day"
-msgstr "日"
-
-msgid "week"
-msgstr ""
-
-msgid "month"
-msgstr ""
-
-#, fuzzy
-#| msgid "Upload time"
-msgid "one time"
-msgstr "アップロード時間"
-
-msgctxt "At no cost"
-msgid "Free"
-msgstr ""
-
-msgid "Daily"
-msgstr ""
-
-msgid "Weekly"
-msgstr ""
-
-#, fuzzy
-#| msgid "months"
-msgid "Monthly"
-msgstr "月"
-
-#, fuzzy
-#| msgid "Year"
-msgid "Yearly"
-msgstr "年"
-
-msgid "days"
-msgstr "日"
-
-msgid "weeks"
-msgstr ""
-
-msgid "months"
-msgstr "月"
-
-msgid "years"
-msgstr "年"
-
-msgid "No trial"
-msgstr "試用でない"
-
-msgid "Switch to"
-msgstr "切り替え"
-
-msgid "Subscription changed"
-msgstr "登録変更された"
-
-msgid ""
-"Your request for a change in your subscription has been processed "
-"successfully."
-msgstr ""
-
-#, fuzzy
-msgid "Subscription plan"
-msgstr "説明"
-
-msgid "Status"
-msgstr "ステータス"
-
-msgid "Subscribed"
-msgstr ""
-
-msgid "Expires"
-msgstr ""
-
-msgid "Invalid"
-msgstr ""
-
-#, fuzzy
-msgid "Cancelled"
-msgstr "キャンセル"
-
-msgid "Unavailable"
-msgstr ""
-
-msgid "Unsubscribed"
-msgstr ""
-
-#, python-format
-msgid ""
-"This subscription is not offered anymore on AstroBin. Please visit the <a "
-"href=\"%(url)s\">subscriptions page</a> to see the available plans, thanks!"
-msgstr ""
-
-msgid ""
-"If you would like to renew your subscription, please visit this page again "
-"after\n"
-"                        your current subscription's expiration date:"
-msgstr ""
-
-msgid ""
-"Your subscription is either cancelled or not active yet. If you want to "
-"subscribe again, please wait until your subscription is expired. If you just "
-"subscribed, please wait a few minutes while PayPal contacts our server for "
-"the final transaction confirmation. Thank you!"
-msgstr ""
-
-msgid "By cancelling, you will revert to a free plan."
-msgstr ""
-
-#, python-format
-msgid "Free plans are limited to <strong>%(max_allowed)s</strong> images."
-msgstr ""
-
-msgid ""
-"However, your existing images will not be deleted or deactivated in any way! "
-"Simply, you will not be able to upload any more images unless you switch to "
-"a paid plan."
-msgstr ""
-
-msgid "Cancel via PayPal"
-msgstr ""
-
-#, fuzzy
-msgid "You cannot switch to this plan."
-msgstr "このページの閲覧を許可されていません。"
-
-#, fuzzy
-msgid "Back to the plans"
-msgstr "Top に戻る"
-
-msgid "Subscription confirmed"
-msgstr ""
-
-msgid ""
-"Your request has been received, and we are awaiting the final confirmation "
-"from PayPal. Your subscription should be active within a few minutes!"
-msgstr ""
-
-msgid "Thank you for supporting AstroBin!"
-msgstr "AstoBinをサポートいただけてありがとうございます。"
-
-msgid "Your active subscription plans"
-msgstr ""
-
-#, fuzzy
-msgid "Your inactive subscription plans"
-msgstr "AstroBin Raw Data"
-
-msgid ""
-"PS: are you interested in larger plans?\n"
-"                <a href=\"/contact/\">Let us know!</a>"
-msgstr ""
-"PS: もっと興味がある場合、\n"
-"<a href=\"/contact/\">問合せ</a>をしてください。"
-
 msgid "This list is currently empty."
 msgstr ""
 
@@ -6098,6 +5700,9 @@ msgstr ""
 #| msgid "Request from"
 msgid "Request time"
 msgstr "からの依頼"
+
+msgid "Status"
+msgstr "ステータス"
 
 #, fuzzy
 msgid "File size"
@@ -6810,6 +6415,9 @@ msgstr "日付"
 msgid "Avg. Moon age"
 msgstr "平均月齢"
 
+msgid "days"
+msgstr "日"
+
 msgid "Avg. Moon phase"
 msgstr "平均月齢"
 
@@ -6853,6 +6461,183 @@ msgstr "本当にいいですか?"
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#, fuzzy
+#~| msgid "About"
+#~ msgctxt "approximately"
+#~ msgid "about"
+#~ msgstr "AstroBinについて"
+
+#, fuzzy
+#~| msgid "Pixel size"
+#~ msgid "Max size"
+#~ msgstr "ピクセルサイズ"
+
+#, fuzzy
+#~ msgid "View full res"
+#~ msgstr "ページを表示"
+
+#, fuzzy
+#~| msgid "Advanced search"
+#~ msgid "Advanced"
+#~ msgstr "詳細検索"
+
+#, fuzzy
+#~| msgid "Commercial gear items"
+#~ msgid "Social features"
+#~ msgstr "商業的な機材"
+
+#, fuzzy
+#~| msgid "Public data pools"
+#~ msgid "Bulk data export"
+#~ msgstr "公開データ領域"
+
+#, fuzzy
+#~| msgid "Full resolution"
+#~ msgid "Full size annotations"
+#~ msgstr "最大解像度"
+
+#, fuzzy
+#~| msgid "Upload complete!"
+#~ msgid "Upload uncompressed source"
+#~ msgstr "アップロード完了!"
+
+#, fuzzy
+#~| msgid "Unlimited images"
+#~ msgid "Undelete images"
+#~ msgstr "無制限"
+
+#, fuzzy
+#~| msgid "Higher resolution"
+#~ msgid "View in original resolution"
+#~ msgstr "高解像度"
+
+#, fuzzy
+#~| msgid "Buy it here"
+#~ msgid "Buy in the Marketplace"
+#~ msgstr "ここで購入"
+
+#, fuzzy
+#~| msgid "Basic information"
+#~ msgid "Basic analytics"
+#~ msgstr "基本情報"
+
+#, fuzzy
+#~| msgid "You are not allowed to see this page."
+#~ msgid "You are already on this plan"
+#~ msgstr "このページの閲覧を許可されていません。"
+
+#, fuzzy
+#~| msgid "Image size"
+#~ msgid "∞ images, ∞ size"
+#~ msgstr "画像サイズ"
+
+#, fuzzy
+#~ msgid "Full search"
+#~ msgstr "ピクセルサイズ"
+
+#, fuzzy
+#~ msgid "Unlimited revisions"
+#~ msgstr "あなたの場所の編集"
+
+#, fuzzy
+#~| msgid "Attempt to plate-solve again"
+#~ msgid "Advanced plate-solving"
+#~ msgstr "星図化を再度試みる"
+
+#, fuzzy
+#~| msgid "Advanced search"
+#~ msgid "Advanced analytics"
+#~ msgstr "詳細検索"
+
+#~ msgid "Subscription process canceled"
+#~ msgstr "登録処理はキャンセルされました"
+
+#~ msgid "Subscription process cancelled"
+#~ msgstr "登録処理はキャンセルされました"
+
+#~ msgid ""
+#~ "Your transaction with PayPal has been cancelled, so no change in your "
+#~ "subscription has occurred."
+#~ msgstr ""
+#~ "PayPalでの処理がキャンセルされたので、登録変更は実施されませんでした。"
+
+#~ msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
+#~ msgstr "<a href=\"%(plans_url)s\">計画ページ</a>に戻る"
+
+#~ msgctxt "Subscription plan name"
+#~ msgid "Plan"
+#~ msgstr "計画"
+
+#~ msgid "Price"
+#~ msgstr "価格"
+
+#~ msgid "Trial period"
+#~ msgstr "試用期間"
+
+#, fuzzy
+#~ msgid "day"
+#~ msgstr "日"
+
+#, fuzzy
+#~| msgid "Upload time"
+#~ msgid "one time"
+#~ msgstr "アップロード時間"
+
+#, fuzzy
+#~| msgid "months"
+#~ msgid "Monthly"
+#~ msgstr "月"
+
+#, fuzzy
+#~| msgid "Year"
+#~ msgid "Yearly"
+#~ msgstr "年"
+
+#~ msgid "months"
+#~ msgstr "月"
+
+#~ msgid "years"
+#~ msgstr "年"
+
+#~ msgid "No trial"
+#~ msgstr "試用でない"
+
+#~ msgid "Switch to"
+#~ msgstr "切り替え"
+
+#~ msgid "Subscription changed"
+#~ msgstr "登録変更された"
+
+#, fuzzy
+#~ msgid "Subscription plan"
+#~ msgstr "説明"
+
+#, fuzzy
+#~ msgid "Cancelled"
+#~ msgstr "キャンセル"
+
+#, fuzzy
+#~ msgid "You cannot switch to this plan."
+#~ msgstr "このページの閲覧を許可されていません。"
+
+#, fuzzy
+#~ msgid "Back to the plans"
+#~ msgstr "Top に戻る"
+
+#~ msgid "Thank you for supporting AstroBin!"
+#~ msgstr "AstoBinをサポートいただけてありがとうございます。"
+
+#, fuzzy
+#~ msgid "Your inactive subscription plans"
+#~ msgstr "AstroBin Raw Data"
+
+#~ msgid ""
+#~ "PS: are you interested in larger plans?\n"
+#~ "                <a href=\"/contact/\">Let us know!</a>"
+#~ msgstr ""
+#~ "PS: もっと興味がある場合、\n"
+#~ "<a href=\"/contact/\">問合せ</a>をしてください。"
 
 #, fuzzy
 #~| msgid ""
