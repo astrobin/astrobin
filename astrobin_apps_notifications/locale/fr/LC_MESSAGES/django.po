@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-05 13:15+0000\n"
-"PO-Revision-Date: 2020-11-15 09:04+0000\n"
+"POT-Creation-Date: 2020-12-06 18:40+0000\n"
+"PO-Revision-Date: 2020-12-06 11:54+0000\n"
 "Last-Translator: JeanBaptisteAuroux <jbauroux@bbox.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1605431055.000000\n"
+"X-POOTLE-MTIME: 1607255660.000000\n"
 
 msgid "Notifications"
 msgstr "Notifications"
@@ -61,15 +61,11 @@ msgstr "Votre image a été ajoutée en favori"
 msgid "Your image was liked"
 msgstr "Un utilisateur a aimé votre image"
 
-#, fuzzy
-#| msgid "Your image was liked"
 msgid "Your comment was liked"
-msgstr "Un utilisateur a aimé votre image"
+msgstr "Un utilisateur a aimé votre commentaire"
 
-#, fuzzy
-#| msgid "Your image was liked"
 msgid "Your forum post was liked"
-msgstr "Un utilisateur a aimé votre image"
+msgstr "Un utilisateur a aimé votre message"
 
 msgid "New image with some gear you follow"
 msgstr "Nouvelle image avec un équipement que vous suivez"
@@ -116,10 +112,8 @@ msgstr "Votre abonnement premium vient d'expirer"
 msgid "Your subscription will be renewed in one week"
 msgstr "Votre abonnement sera renouvelé dans une semaine"
 
-#, fuzzy
-#| msgid "Your subscription will be renewed in one week"
 msgid "Your subscription will be renewed in one 30 days"
-msgstr "Votre abonnement sera renouvelé dans une semaine"
+msgstr "Votre abonnement sera renouvelé dans 30 jours"
 
 msgid "You have images with a missing \"Data source\""
 msgstr "Certaines de vos images contiennent des données incomplètes"
@@ -128,29 +122,23 @@ msgid "You have images with a missing \"Remote source\""
 msgstr ""
 "Certaines de vos images ne précisent pas le service de \"remote\" utilisé"
 
-#, fuzzy
-#| msgid "Would you like to activate your account?\""
 msgid "Would you like to activate your account?"
 msgstr "Souhaitez-vous activer votre compte ?"
 
-#, fuzzy
-#| msgid "You are invited to a group"
 msgid "You were mentioned in a forum post"
-msgstr "Vous êtes invité à rejoindre un groupe"
+msgstr "Vous avez été mentionné dans un message"
 
-#, fuzzy
-#| msgid "Your image received a new comment"
 msgid "You were mentioned in a comment"
-msgstr "Votre image a reçu un nouveau commentaire"
+msgstr "Vous avez été mentionné dans un commentaire"
 
 msgid "Welcome to AstroBin!"
-msgstr ""
+msgstr "Bienvenue sur AstroBin !"
 
 msgid "Congratulations for your first image on AstroBin!"
-msgstr ""
+msgstr "Félicitations pour votre première image sur AstroBin !"
 
 msgid "Thank you for getting a subscription!"
-msgstr ""
+msgstr "Merci d'avoir souscrit à un abonnement !"
 
 #~ msgid "New review of a gear item you own"
 #~ msgstr "Nouvel examen d'un article d'équipement que vous détenez"
