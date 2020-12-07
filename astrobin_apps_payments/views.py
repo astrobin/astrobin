@@ -130,6 +130,7 @@ def stripe_webhook(request):
                 custom=user_pk,
                 item_number=subscription.pk,
                 mc_gross=subscription.price,
+                mc_currency=subscription.currency
             )
 
             handle_payment_was_successful(payment)
