@@ -24,26 +24,30 @@ def stripe_config(request):
 
 @csrf_exempt
 @require_POST
-def create_checkout_session(request, user_pk, product):
+def create_checkout_session(request, user_pk, product, currency):
     stripe.api_key = settings.STRIPE_SECRET_KEY
 
     try:
         user = User.objects.get(pk=user_pk)
     except User.DoesNotExist:
-        log.error("create_checkout_session: %d, %s: %s" % (user_pk, product, "Invalid user"))
+        log.error("create_checkout_session: %d, %s, %s: %s" % (user_pk, product, currency, "Invalid user"))
         raise Http404
 
-    if product == 'lite':
-        price = settings.STRIPE_PRICE_LITE
-    elif product == 'premium':
-        price = settings.STRIPE_PRICE_PREMIUM
-    elif product == 'ultimate':
-        price = settings.STRIPE_PRICE_ULTIMATE
-    else:
-        log.error("create_checkout_session: %d, %s: %s" % (user.pk, product, "Invalid product"))
+    if currency.upper() not in ["USD", "EUR", "GBP", "CAD", "AUD", "CHF"]:
+        log.error("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, "Invalid currency"))
         return HttpResponseBadRequest()
 
-    log.info("create_checkout_session: %d, %s, %s" % (user.pk, product, price))
+    if product == 'lite':
+        price = settings.STRIPE_PRICE_LITE[currency.upper()]
+    elif product == 'premium':
+        price = settings.STRIPE_PRICE_PREMIUM[currency.upper()]
+    elif product == 'ultimate':
+        price = settings.STRIPE_PRICE_ULTIMATE[currency.upper()]
+    else:
+        log.error("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, "Invalid product"))
+        return HttpResponseBadRequest()
+
+    log.info("create_checkout_session: %d, %s, %s, %s" % (user.pk, product, price, currency))
 
     try:
         customer_result = stripe.Customer.list(email=user.email, limit=1)
@@ -75,7 +79,7 @@ def create_checkout_session(request, user_pk, product):
         )
         return JsonResponse({'sessionId': checkout_session['id']})
     except Exception as e:
-        log.exception("create_checkout_session: %d, %s: %s" % (user.pk, product, str(e)))
+        log.exception("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, str(e)))
         return JsonResponse({'error': 'Internal error: %s' % str(e)})
 
 
