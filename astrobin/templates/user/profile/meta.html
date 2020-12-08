@@ -10,58 +10,73 @@
 
     {% include 'ads/rectangular_ad.html' %}
 
-    {% if PREMIUM_ENABLED and requested_user == request.user %}
-    <div class="subtle-container">
-        <div class="header">
-            <h4>{% trans "Subscription" %}</h4>
+    {% if PREMIUM_ENABLED and requested_user == request.user or request.user.is_superuser%}
+        <div class="subtle-container">
+            <div class="header">
+                <h4>{% trans "Subscription" %}</h4>
+            </div>
+            <p>
+                {% trans "Type" %}<br/>
+                <strong data-test="subscription-type">
+                    {% if requested_user|is_free %}AstroBin Free{% endif %}
+                    {% if requested_user|is_any_lite %}AstroBin Lite{% endif %}
+                    {% if requested_user|is_any_premium %}AstroBin Premium{% endif %}
+                    {% if requested_user|is_any_ultimate %}AstroBin Ultimate{% endif %}
+                </strong>
+            </p>
+
+            {% if not requested_user|is_free %}
+            <p>
+                {% trans "Expiration date" %}<br/>
+                <strong data-test="expiration-date">
+                    {% with expiration=requested_user|get_premium_subscription_expiration %}
+                        {{expiration|date:"SHORT_DATE_FORMAT"}}
+                    {% endwith %}
+                </strong>
+            </p>
+            {% endif %}
+
+            {% if requested_user|show_images_used %}
+                <p>
+                    {% trans "Images used" %}<br />
+                    <strong data-test="images-used">
+                        {# Lite 2020 is the only account with a limit on total images #}
+                        {{ requested_user.userprofile.premium_counter }} / {{ PREMIUM_MAX_IMAGES_LITE_2020 }}
+                    </strong>
+                </p>
+            {% endif %}
+
+            {% if requested_user|show_uploads_used %}
+                <p>
+                    {% trans "Images used" %}<br />
+                    <strong data-test="uploads-used">
+                        {# Free and old Lite are the only accounts with a limit on upload count #}
+                        {{ requested_user.userprofile.premium_counter }} /
+                        {% if requested_user|is_free %}{{ PREMIUM_MAX_IMAGES_FREE_2020 }}{% endif %}
+                        {% if requested_user|is_lite %}{{ PREMIUM_MAX_IMAGES_LITE }}{% endif %}
+                    </strong>
+                </p>
+            {% endif %}
+
+            {% if requested_user|is_any_premium_subscription %}
+                <p class="small">
+                    <em>{% trans "Thanks for your support!" %}</em>
+                </p>
+            {% endif %}
+
+            {% if request.user == requested_user %} {# superuser doesn't need to see these #}
+                <hr/>
+
+                <div class="btn-group btn-group-vertical btn-block">
+                    <a href="{% app_redirection_service request '/subscriptions/view' %}" class="btn">
+                        {% trans "Your subscriptions" %}
+                    </a>
+                    <a href="{% app_redirection_service request '/subscriptions/payments' %}" class="btn">
+                        {% trans "Your payments" %}
+                    </a>
+                </div>
+            {% endif %}
         </div>
-        <p>
-            {% trans "Type" %}<br/>
-            <strong data-test="subscription-type">
-                {% if requested_user|is_free %}AstroBin Free{% endif %}
-                {% if requested_user|is_any_lite %}AstroBin Lite{% endif %}
-                {% if requested_user|is_any_premium %}AstroBin Premium{% endif %}
-                {% if requested_user|is_any_ultimate %}AstroBin Ultimate{% endif %}
-            </strong>
-        </p>
-
-        {% if not requested_user|is_free %}
-        <p>
-            {% trans "Expiration date" %}<br/>
-            <strong data-test="expiration-date">
-                {% with expiration=requested_user|get_premium_subscription_expiration %}
-                    {{expiration|date:"SHORT_DATE_FORMAT"}}
-                {% endwith %}
-            </strong>
-        </p>
-        {% endif %}
-
-        {% if requested_user|show_images_used %}
-            <p>
-                {% trans "Images used" %}<br />
-                <strong data-test="images-used">
-                    {# Lite 2020 is the only account with a limit on total images #}
-                    {{ requested_user.userprofile.premium_counter }} / {{ PREMIUM_MAX_IMAGES_LITE_2020 }}
-                </strong>
-            </p>
-        {% endif %}
-
-        {% if requested_user|show_uploads_used %}
-            <p>
-                {% trans "Images used" %}<br />
-                <strong data-test="uploads-used">
-                    {# Free and old Lite are the only accounts with a limit on upload count #}
-                    {{ requested_user.userprofile.premium_counter }} /
-                    {% if requested_user|is_free %}{{ PREMIUM_MAX_IMAGES_FREE_2020 }}{% endif %}
-                    {% if requested_user|is_lite %}{{ PREMIUM_MAX_IMAGES_LITE }}{% endif %}
-                </strong>
-            </p>
-        {% endif %}
-
-        {% if requested_user|is_any_premium_subscription %}
-        <p class="small"><em>{% trans "Thanks for your support!" %}</em></p>
-        {% endif %}
-    </div>
     {% endif %}
 
     {% if menu %}
