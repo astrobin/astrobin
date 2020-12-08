@@ -306,7 +306,9 @@ def show_adsense_ads(context):
     is_anon = not context['request'].user.is_authenticated()
     image_owner_is_ultimate = False
 
-    if context.template_name == 'image/detail.html':
+    if context.template_name.startswith('registration/'):
+        return False
+    elif context.template_name == 'image/detail.html':
         for data in context.dicts:
             if 'image' in data:
                 image_owner_is_ultimate = is_any_ultimate(data['image'].user)
