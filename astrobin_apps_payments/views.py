@@ -33,7 +33,7 @@ def create_checkout_session(request, user_pk, product, currency):
         log.error("create_checkout_session: %d, %s, %s: %s" % (user_pk, product, currency, "Invalid user"))
         raise Http404
 
-    if currency.upper() not in ["USD", "EUR", "GBP", "CAD", "AUD", "CHF"]:
+    if currency.upper() not in settings.SUPPORTED_CURRENCIES:
         log.error("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, "Invalid currency"))
         return HttpResponseBadRequest()
 
