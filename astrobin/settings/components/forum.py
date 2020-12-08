@@ -75,9 +75,8 @@ PYBB_FORUM_PAGE_SIZE = 50
 
 def pybb_premoderation(user, post_content):
     # Paying members always approved
-    from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
-        is_lite, is_premium)
-    if is_lite(user) or is_premium(user):
+    from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
+    if not is_free(user):
         return True
 
     # Users with sufficient index are always approved
