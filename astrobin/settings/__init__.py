@@ -47,7 +47,7 @@ include(
     'components/iotd.py',
     'components/platesolving.py',
     'components/premium.py',
-    'components/stripe.py',
+    'components/payments.py',
 
     # Environments
     'environments/debug.py',
