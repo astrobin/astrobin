@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-06 18:30+0000\n"
-"PO-Revision-Date: 2020-12-05 13:31+0000\n"
+"POT-Creation-Date: 2020-12-10 21:47+0000\n"
+"PO-Revision-Date: 2020-12-08 20:16+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1607175101.000000\n"
+"X-POOTLE-MTIME: 1607458589.000000\n"
 
 msgid "United Kingdom"
 msgstr "Regno Unito"
@@ -6023,7 +6023,7 @@ msgid "Do not navigate away from this window: this might take a while!"
 msgstr "Non chiudere questa finestra: ci vorrà un po'!"
 
 msgid "Subscription"
-msgstr "Descrizione"
+msgstr "Abbonamento"
 
 msgid "Expiration date"
 msgstr "Data di scadenza"
@@ -6033,6 +6033,16 @@ msgstr "Immagini usate"
 
 msgid "Thanks for your support!"
 msgstr "Grazie per il supporto!"
+
+#, fuzzy
+#| msgid "Your active subscription plans"
+msgid "Your subscriptions"
+msgstr "I tuoi abbonamenti attivi"
+
+#, fuzzy
+#| msgid "Your past requests"
+msgid "Your payments"
+msgstr "Le tue richieste precedenti"
 
 msgid "This data is currently not available and will be recalculated shortly."
 msgstr ""
@@ -6929,9 +6939,6 @@ msgstr ""
 
 #~ msgid "Thank you for supporting AstroBin!"
 #~ msgstr "Grazie per il tuo supporto ad AstroBin!"
-
-#~ msgid "Your active subscription plans"
-#~ msgstr "I tuoi abbonamenti attivi"
 
 #~ msgid "Your inactive subscription plans"
 #~ msgstr "I tuoi abbonamenti inattivi"
