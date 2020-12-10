@@ -19,3 +19,4 @@ class ExchangeRate(models.Model):
 
     class Meta:
         app_label = 'astrobin_apps_payments'
+        ordering = ('-time',)
