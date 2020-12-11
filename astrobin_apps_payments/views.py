@@ -12,6 +12,8 @@ from django.views.decorators.http import require_GET, require_POST
 from paypal.standard.ipn.models import PayPalIPN
 from subscription.models import Subscription, handle_payment_was_successful
 
+from astrobin_apps_payments.models import ExchangeRate
+from astrobin_apps_payments.services.pricing_service import PricingService
 from common.services import AppRedirectionService
 
 log = logging.getLogger("apps")
@@ -37,17 +39,19 @@ def create_checkout_session(request, user_pk, product, currency):
         log.error("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, "Invalid currency"))
         return HttpResponseBadRequest()
 
-    if product == 'lite':
-        price = settings.STRIPE_PRICE_LITE[currency.upper()]
-    elif product == 'premium':
-        price = settings.STRIPE_PRICE_PREMIUM[currency.upper()]
-    elif product == 'ultimate':
-        price = settings.STRIPE_PRICE_ULTIMATE[currency.upper()]
-    else:
+    if product not in ('lite', 'premium', 'ultimate'):
         log.error("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, "Invalid product"))
         return HttpResponseBadRequest()
 
-    log.info("create_checkout_session: %d, %s, %s, %s" % (user.pk, product, price, currency))
+    stripe_products = {
+        'lite': settings.STRIPE_PRODUCT_LITE,
+        'premium': settings.STRIPE_PRODUCT_PREMIUM,
+        'ultimate': settings.STRIPE_PRODUCT_ULTIMATE
+    }
+
+    price = PricingService.get_price(product, currency.upper())
+
+    log.info("create_checkout_session: %d, %s, %s %.2f" % (user.pk, product, currency, price))
 
     try:
         customer_result = stripe.Customer.list(email=user.email, limit=1)
@@ -69,8 +73,12 @@ def create_checkout_session(request, user_pk, product, currency):
             submit_type='pay',
             line_items=[
                 {
-                    'price': price,
                     'quantity': 1,
+                    'price_data': {
+                        'currency': currency.lower(),
+                        'product': stripe_products[product],
+                        'unit_amount_decimal': price * 100, # Stripe uses cents
+                    }
                 }
             ],
             metadata={
@@ -92,9 +100,7 @@ def stripe_webhook(request):
     event = None
 
     try:
-        event = stripe.Webhook.construct_event(
-            payload, sig_header, endpoint_secret
-        )
+        event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
     except Exception as e:
         log.exception("stripe_webhook: %s" % str(e))
         return HttpResponseBadRequest()
