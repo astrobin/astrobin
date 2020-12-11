@@ -17,7 +17,7 @@ class PricingService:
         }
 
         base_price = subscriptions[product].price
-        exchange_rate = ExchangeRate.objects.get(target=currency.upper()).rate if currency.upper() != "CHF" else 1
+        exchange_rate = ExchangeRate.objects.filter(target=currency.upper()).first().rate if currency.upper() != "CHF" else 1
         exact_price = base_price * exchange_rate
         rounded_price = ceil(exact_price * 2) / 2
 
