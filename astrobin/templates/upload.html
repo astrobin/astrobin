@@ -94,7 +94,7 @@
                                 <form action="{% url 'image_upload_process' %}" method="post"
                                       enctype="multipart/form-data"> {% csrf_token %}
                                     <input type="file" name="image_file" class="file" id="id_file"
-                                           accept="jpg, .jpeg, .png, .gif" />
+                                           accept=".jpg, .jpeg, .png, .gif" />
                                     <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
                                     <input type="hidden" name="wip" value="" />
                                 </form>
@@ -118,7 +118,7 @@
                                     <div class="row-fluid">
                                         <div class="span12">
                                             <input type="file" name="image_file" class="file" id="id_file"
-                                                   accept="jpg, .jpeg, .png, .gif" />
+                                                   accept=".jpg, .jpeg, .png, .gif" />
                                             <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
                                         </div>
                                     </div>
