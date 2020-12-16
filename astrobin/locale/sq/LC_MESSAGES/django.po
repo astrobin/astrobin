@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:02+0000\n"
+"POT-Creation-Date: 2020-12-10 21:47+0000\n"
 "PO-Revision-Date: 2015-01-20 21:30+0000\n"
 "Last-Translator: jordi <jordi.inyigo@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -760,32 +760,6 @@ msgstr "Zimbabve"
 msgid "Users"
 msgstr "Perdoruesit"
 
-msgid "Make"
-msgstr "Bëj"
-
-msgid "The make, brand, producer or developer of this product."
-msgstr ""
-
-msgid "Name"
-msgstr "Emer"
-
-msgid "Merge"
-msgstr ""
-
-msgid ""
-"Use this field to mark that the item you are claiming really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-
-#, python-format
-msgid ""
-"You can't create more than %d claims. Consider upgrading your affiliation!"
-msgstr ""
-
-#, fuzzy
-msgid "You have already claimed this product."
-msgstr "E ke percaktuar nje here kete foto"
-
 msgid ""
 "Select a tag to order this collection by its value. If you see no options "
 "here, it's because none of the images in this collection have key/value "
@@ -933,11 +907,6 @@ msgid "Longitude (seconds)"
 msgstr "Gjatesia gjeografike (sekonda)"
 
 msgid ""
-"Use this field to mark that the item you are merging really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-
-msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
 "guiding, go here."
 msgstr ""
@@ -1004,9 +973,6 @@ msgid "bookmarked"
 msgstr ""
 
 msgid "likes"
-msgstr ""
-
-msgid "has written a review on"
 msgstr ""
 
 msgid "created a new public group"
@@ -1163,6 +1129,30 @@ msgstr "Planet i vogel"
 msgid "Comet"
 msgstr "Kometë"
 
+#, fuzzy
+#| msgid "Orientation"
+msgid "Occultation"
+msgstr "Orientimi"
+
+#, fuzzy
+msgid "Conjunction"
+msgstr "Vendndodhjet"
+
+msgid "Partial lunar eclipse"
+msgstr ""
+
+msgid "Total lunar eclipse"
+msgstr ""
+
+msgid "Partial solar eclipse"
+msgstr ""
+
+msgid "Anular solar eclipse"
+msgstr ""
+
+msgid "Total solar eclipse"
+msgstr ""
+
 msgid "Other"
 msgstr "Te tjerë"
 
@@ -1196,6 +1186,15 @@ msgstr "Ne fund ne qendër"
 
 msgid "Bottom right"
 msgstr "Ne fund djathtas"
+
+msgid "Make"
+msgstr "Bëj"
+
+msgid "The make, brand, producer or developer of this product."
+msgstr ""
+
+msgid "Name"
+msgstr "Emer"
 
 msgid ""
 "Just the name of this product, without any properties or personal "
@@ -1416,12 +1415,11 @@ msgstr "(në mm)"
 msgid "nm"
 msgstr ""
 
-#, fuzzy
-#| msgid "Duration"
-msgid "Traditional"
-msgstr "Kohezgjatja"
+msgid "Regular (e.g. medium/long exposure with a CCD or DSLR)"
+msgstr ""
 
-msgid "Electronically-Assisted Astronomy (EAA)"
+msgid ""
+"Electronically-Assisted Astronomy (EAA, e.g. based on a live video feed)"
 msgstr ""
 
 msgid "Lucky imaging"
@@ -1822,6 +1820,22 @@ msgstr "TIFF/FITS"
 msgid "Higher resolution"
 msgstr "Risolucion i larte"
 
+#, fuzzy
+msgid "I am no longer active in astrophotography"
+msgstr "Modifiko mekanizmin tend astrofotografik"
+
+msgid "This website did not meet my expectations"
+msgstr ""
+
+msgid "Something on this website doesn't work for me"
+msgstr ""
+
+msgid "The paid subscriptions are too expensive"
+msgstr ""
+
+msgid "I prefer not to say"
+msgstr ""
+
 msgid "Real name"
 msgstr ""
 
@@ -1852,28 +1866,16 @@ msgstr "Persa ju perket ju"
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "Shkruani dicka per veten. Kodet HTML lejohen."
 
-msgid "Company name"
-msgstr ""
-
-msgid "The name of the company you represent on AstroBin."
-msgstr ""
-
 #, fuzzy
-msgid "Company description"
-msgstr "Përshkrimi"
+msgid "Delete reason"
+msgstr "Fshini biiseden"
+
+msgid "Why are you deleting your AstroBin account?"
+msgstr ""
 
 msgid ""
-"A short description of the company you represent on AstroBin. You can use "
-"some <a href=\"/faq/#comments\">formatting rules</a>."
-msgstr ""
-
-msgid "Company website"
-msgstr ""
-
-msgid "The website of the company you represent on AstroBin."
-msgstr ""
-
-msgid "Country of operation"
+"Please tell us why you are deleting your account (minimum 30 characters). "
+"Thanks!"
 msgstr ""
 
 msgid "I want to be excluded from competitions"
@@ -1882,7 +1884,7 @@ msgstr ""
 msgid ""
 "Check this box to be excluded from competitions and contests, such as the "
 "Image of the Day, the Top Picks, other custom contests. This will remove you "
-"from the leaderboards and hide your AstroBin Index."
+"from the leaderboards and hide your Image Index and Contribution Index."
 msgstr ""
 
 #, fuzzy
@@ -1971,6 +1973,18 @@ msgid ""
 "and this kind of support would be amazing. Thank you in advance!"
 msgstr ""
 
+#, fuzzy
+#| msgid "Total integration"
+msgid "Allow retailer integration"
+msgstr "Integrimi total"
+
+msgid ""
+"AstroBin may associate with retailers of astronomy and astrophotography "
+"equipment to enhance the display of equipment items with links to sponsoring "
+"partners. The integration is subtle and non intrusive, and it would help a "
+"lot if you didn't disable it. Thank you in advance!"
+msgstr ""
+
 msgid "Language"
 msgstr "Gjuha"
 
@@ -2043,90 +2057,6 @@ msgid ""
 "Please explain the purpose of your application, and how you intend to use "
 "the API."
 msgstr ""
-
-msgid "AUD - Australian dollars"
-msgstr ""
-
-msgid "CAD - Canadian dollars"
-msgstr ""
-
-msgid "CHF - Swiss francs"
-msgstr ""
-
-msgid "EUR - Euros"
-msgstr ""
-
-msgid "GPB - Pound stelings"
-msgstr ""
-
-msgid "PLN - Polish zloty"
-msgstr ""
-
-msgid "SEK - Swedish krona"
-msgstr ""
-
-#, fuzzy
-msgid "USD - American dollars"
-msgstr "Samoa Amerikane"
-
-msgid "Producer"
-msgstr ""
-
-msgid "The link to this product's page on your website."
-msgstr ""
-
-msgid "Price"
-msgstr ""
-
-#, fuzzy
-msgid "Currency"
-msgstr "Transparenca"
-
-#, fuzzy
-msgid "Retailed gear items"
-msgstr "Modifiko mekanizmin e perdorur"
-
-msgid "Proper make"
-msgstr ""
-
-msgid ""
-"Sometimes, product make/brand/producer/developer names are not written "
-"properly by the users. Write here the proper make/brand/producer/developer "
-"name."
-msgstr ""
-
-msgid "Proper name"
-msgstr ""
-
-msgid ""
-"Sometimes, product names are not written properly by the users. Write here "
-"the proper product name, not including the make/brand/producer/developer "
-"name.<br/>It is recommended that you try to group as many items as possible, "
-"so try to use a generic version of your product's name."
-msgstr ""
-
-msgid ""
-"The official, commercial image for this product. Upload an image via the "
-"regular uploading interface, set its subject type to \"Gear\", and then "
-"choose it from this list. If you upload several revisions, they will also "
-"appear in the commercial page."
-msgstr ""
-
-msgid "Tagline"
-msgstr ""
-
-msgid ""
-"A memorable phrase that will sum up this product, for marketing purposes."
-msgstr ""
-
-msgid ""
-"Here you can write the full commercial description of your product. You can "
-"use some <a href=\"/faq/#comments\">formatting rules</a>."
-msgstr ""
-
-#, fuzzy
-msgid "Commercial gear items"
-msgstr "Modifiko mekanizmin e perdorur"
 
 #, fuzzy
 #| msgid "Sending..."
@@ -2252,6 +2182,34 @@ msgstr ""
 msgid "Come back soon!"
 msgstr ""
 
+#, python-format
+msgid ""
+"<strong>Please note:</strong> AstroBin is a community that values "
+"informative and constructive content. If you write something that other "
+"people find useful and valuable, the likes that you receive will contribute "
+"to your %(_0)sContribution Index (beta)%(_1)s."
+msgstr ""
+
+msgid "New!"
+msgstr "E re!"
+
+msgid "Use the <strong>@</strong> sign and start typing to mention any user."
+msgstr ""
+
+msgid ""
+"Use the <strong>#</strong> sign and start typing to insert an image from "
+"your gallery."
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "Regular"
+msgstr "Normale"
+
+msgid "Electronically-Assisted Astronomy (EAA)"
+msgstr ""
+
 msgid "AstroBin is in READ ONLY mode "
 msgstr ""
 
@@ -2335,6 +2293,11 @@ msgid ""
 "                        "
 msgstr ""
 
+#, fuzzy
+#| msgid "Remove data"
+msgid "Remove ads"
+msgstr "Hiqini te dhenet"
+
 msgid "Request an API key"
 msgstr ""
 
@@ -2365,6 +2328,40 @@ msgstr "Kerkesa juaj u plotësua"
 msgid ""
 "You will receive a reply within 24 hours. Thanks for your interest in using "
 "AstroBin's APIs!"
+msgstr ""
+
+#, fuzzy
+msgid "Astrophotographers list"
+msgstr "Modifiko mekanizmin tend astrofotografik"
+
+#, python-format
+msgid ""
+"The <strong>Image Index</strong> is system based on likes received on "
+"images, that incentivizes the most active and liked members of the "
+"community. %(_0)sLearn more.%(_1)s"
+msgstr ""
+
+msgid "Search"
+msgstr "Kërko"
+
+msgid "User"
+msgstr "Perdorues"
+
+#, fuzzy
+msgid "Followers"
+msgstr "Ndiq"
+
+msgid "Likes"
+msgstr ""
+
+msgid "Total integration"
+msgstr "Integrimi total"
+
+#, fuzzy
+msgid "Image Index"
+msgstr "Fotografi te ngarkuara"
+
+msgid "There isn't enough data yet, please come back later!"
 msgstr ""
 
 #, fuzzy
@@ -2414,31 +2411,13 @@ msgstr "Kujdes!"
 msgid "Error!"
 msgstr "Gabim"
 
-#, python-format
-msgid ""
-"As a producer and/or a retailer on AstroBin, it's very important that you "
-"fill in all of your company details! Click <a href=\"%(the_url)s\">here</a> "
-"to do it now."
-msgstr ""
-
-#, python-format
-msgid ""
-"As a retailer on AstroBin, it's very important that you fill in your country "
-"of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
-msgstr ""
-
 msgid "About"
 msgstr "Përreth"
 
 msgid ""
-"AstroBin is an image hosting website specifically targeted to "
-"astrophotographers: it's the first and the last place where you need to "
-"upload your astrophotography images. Made by an astrophotographer, for the "
-"astrophotographers."
+"AstroBin is an image hosting platform and social network for amateur "
+"astronomers and astrophotographers."
 msgstr ""
-"AstroBin eshte nje sit bartës fotografishë, i synuar per astrofotografët: "
-"është vendi i parë dhe i fundit ku ju do keni nevojë të ngarkoni astrofotot "
-"tuaja. I krijuar nga një astrofotograf, për astrofotografët."
 
 msgid "Site links"
 msgstr "Linket e sitit"
@@ -2464,11 +2443,17 @@ msgstr ""
 msgid "Source code"
 msgstr ""
 
+msgid "Platform updates"
+msgstr ""
+
 msgid "Thanks to"
 msgstr "Falenderime"
 
 msgid "The localization team"
 msgstr "Lokalizimi i skuadres tonë"
+
+msgid "Third party tools"
+msgstr ""
 
 msgid "Copyright"
 msgstr "Copyright"
@@ -2494,13 +2479,30 @@ msgid "Don't show again"
 msgstr ""
 
 msgid ""
-"AstroBin is unable to deliver your emails, looks like your address is "
-"incorrect."
+"AstroBin is unable to deliver your emails, and it won't try again until the "
+"issue is resolved."
+msgstr ""
+
+msgid "Your email provider recently reported the following error code(s):"
+msgstr ""
+
+msgid ""
+"If you believe this is in error, please contact us. Otherwise please contact "
+"your email provider or change your e-mail address on AstroBin."
 msgstr ""
 
 #, fuzzy
 msgid "Change your e-mail"
 msgstr "Ndërroni fjalëkalimin"
+
+#, fuzzy
+msgid "Contact us"
+msgstr "Permban"
+
+msgid ""
+"AstroBin is unable to deliver your emails, and it will try again a week "
+"after the latest email bounce."
+msgstr ""
 
 msgid ""
 "AstroBin is not delivering you emails because you have marked some of them "
@@ -2509,6 +2511,20 @@ msgstr ""
 
 msgid "Contact us to resolve the issue"
 msgstr ""
+
+#, python-format
+msgid ""
+"<strong>Good news!</strong> AstroBin automatically recovered some of your "
+"images that were lost in the data loss incident of February 2020. Please "
+"review them to confirm the recovery. If you do nothing, your recovered "
+"images will be confirmed automatically starting from <strong>%(date)s</"
+"strong>."
+msgstr ""
+
+#, fuzzy
+#| msgid "Recent images"
+msgid "Review recovered images"
+msgstr "Fotot e fundit"
 
 msgid "Cancel"
 msgstr "Fshi"
@@ -2629,9 +2645,6 @@ msgstr ""
 msgid "Quick search"
 msgstr "Kërkim i shpejtë"
 
-msgid "Moderate"
-msgstr ""
-
 #, fuzzy
 msgid "Image queue"
 msgstr "Foto"
@@ -2669,6 +2682,10 @@ msgstr "Muri i madh"
 msgid "Advanced search"
 msgstr ""
 
+#, fuzzy
+msgid "Top pick nominations"
+msgstr "Informacione bazë"
+
 msgid "Top picks"
 msgstr ""
 
@@ -2676,9 +2693,11 @@ msgstr ""
 msgid "Remote astrophotography"
 msgstr "Modifiko mekanizmin tend astrofotografik"
 
-#, fuzzy
-msgid "Trending astrophotographers"
-msgstr "Modifiko mekanizmin tend astrofotografik"
+msgid "Contributors list"
+msgstr ""
+
+msgid "(beta)"
+msgstr ""
 
 msgid "Stats"
 msgstr "Statistikat"
@@ -2690,16 +2709,8 @@ msgstr "Ndihmë"
 msgid "Contact"
 msgstr "Permban"
 
-msgid "User"
-msgstr "Perdorues"
-
-#, fuzzy
-msgid "AstroBin index"
-msgstr "AstroBin është shoqëror!"
-
-#, fuzzy
-msgid "Followers"
-msgstr "Ndiq"
+msgid "n/a"
+msgstr ""
 
 msgid "Would you like to start using your real name on AstroBin?"
 msgstr ""
@@ -2713,6 +2724,24 @@ msgstr "Hyrje"
 msgid "Register"
 msgstr "Regjistrohu"
 
+#, python-format
+msgid ""
+"The <strong>Image Index</strong> is a system based on likes received on "
+"images, that incentivizes the most active and liked members of the "
+"community. %(_0)sLearn more.%(_1)s"
+msgstr ""
+
+#, fuzzy
+msgid "Contribution Index"
+msgstr "AstroBin është shoqëror!"
+
+#, python-format
+msgid ""
+"The <strong>Contribution Index (beta)</strong> is system to reward "
+"informative, constructive, and valuable commentary on AstroBin. %(_0)sLearn "
+"more.%(_1)s"
+msgstr ""
+
 #, fuzzy
 msgid "Subscription plans"
 msgstr "Përshkrimi"
@@ -2721,11 +2750,13 @@ msgstr "Përshkrimi"
 msgid "My places"
 msgstr "Faqja ime"
 
-msgid "Commercial products"
-msgstr ""
-
-msgid "Gallery"
+#, fuzzy
+#| msgid "Gallery"
+msgid "Public Gallery"
 msgstr "Galeri"
+
+msgid "Staging Area"
+msgstr "Zona Punës"
 
 msgid "Bookmarks"
 msgstr ""
@@ -2796,22 +2827,6 @@ msgstr ""
 msgid "Custom e-mail change request on AstroBin"
 msgstr ""
 
-msgid "Edit commercial product"
-msgstr ""
-
-msgid "Save"
-msgstr "Ruaj"
-
-#, fuzzy
-msgid "Return to list"
-msgstr "Kthehu tek foto"
-
-msgid "View in new window"
-msgstr ""
-
-msgid "Edit retailed product"
-msgstr ""
-
 msgid ""
 "Please contact us if you need any assistance, or want to report a problem, "
 "give some feedback or suggestions, or simply want to get in touch!"
@@ -2837,6 +2852,19 @@ msgstr "Falenderime"
 #, fuzzy
 msgid "Thank you! Your message was sent successfully."
 msgstr "Foto juaj u zberthye me sukses."
+
+msgid "Comments"
+msgstr "Komentet"
+
+msgid "Forum posts"
+msgstr ""
+
+msgid "Written"
+msgstr ""
+
+#, fuzzy
+msgid "Received"
+msgstr "u ngarkua"
 
 msgid "Cookie consent"
 msgstr ""
@@ -2976,77 +3004,6 @@ msgid ""
 "grateful."
 msgstr ""
 
-msgid "by"
-msgstr ""
-
-#, fuzzy
-msgid "Other images"
-msgstr "Asnje foto"
-
-#, fuzzy
-msgid "Some images"
-msgstr "Asnje foto"
-
-msgid "(view more)"
-msgstr "(shiko me shume)"
-
-#, fuzzy
-msgid "Reviews"
-msgstr "Shikime"
-
-msgid "Rating"
-msgstr "Vleresimi"
-
-#, fuzzy
-msgid "There are no reviews yet."
-msgstr "Nuk ka asnje koment."
-
-#, fuzzy
-msgid "Add your review"
-msgstr "Shto me shume"
-
-msgid ""
-"Please be fair, honest and polite when writing a review. Many people will "
-"read your review: all the users on AstroBin who own this piece of gear, will "
-"be notified of your review."
-msgstr ""
-
-#, fuzzy
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to write a review."
-msgstr ""
-"Lutemi <a href=\"/accounts/login/\">hyni</a> ose <a href=\"/accounts/"
-"register/\">rregjistrohuni</a> qe te komentoni."
-
-msgid "Comments"
-msgstr "Komentet"
-
-msgid ""
-"Use this space to start a discussion, leave a comment or ask a question "
-"about this piece of gear. All the users on AstroBin who own one, will be "
-"notified and can join the discussion."
-msgstr ""
-
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment."
-msgstr ""
-"Lutemi <a href=\"/accounts/login/\">hyni</a> ose <a href=\"/accounts/"
-"register/\">rregjistrohuni</a> qe te komentoni."
-
-msgid "Buy it here"
-msgstr ""
-
-msgid "Properties"
-msgstr ""
-
-msgid "Owners"
-msgstr ""
-
-msgid "just now"
-msgstr "menjehere"
-
 msgid "Additional information requested"
 msgstr "Informacionet shtese u kerkuan"
 
@@ -3063,13 +3020,25 @@ msgstr ""
 msgid "Return to image"
 msgstr "Kthehu tek foto"
 
+msgid "Hemisphere"
+msgstr ""
+
+#, fuzzy
+#| msgid "North"
+msgid "Northern"
+msgstr "Veri"
+
+#, fuzzy
+#| msgid "South"
+msgid "Southern"
+msgstr "Jug"
+
 msgid "Contains"
 msgstr "Permban"
 
-#, fuzzy
-#| msgid "Remove data"
-msgid "Remove ads"
-msgstr "Hiqini te dhenet"
+#, python-format
+msgid "And %(count)s more."
+msgstr ""
 
 #, fuzzy
 #| msgid "Acquired after"
@@ -3094,9 +3063,6 @@ msgstr ""
 msgid "Comments are closed."
 msgstr ""
 
-msgid "Made possible by"
-msgstr ""
-
 msgid "In these public groups"
 msgstr ""
 
@@ -3113,6 +3079,24 @@ msgstr "Përshkrimi"
 
 msgid "Technical card"
 msgstr "Skeda teknike"
+
+msgid "Sponsored brands"
+msgstr ""
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr ""
+
+msgid "Sponsored items"
+msgstr ""
+
+#, fuzzy
+msgid "Disable retailer integration"
+msgstr "Informacione bazë"
+
+#, python-format
+msgid "Shop %(name)s at %(retailer)s"
+msgstr ""
 
 msgid "Frames"
 msgstr "Fotot"
@@ -3162,6 +3146,11 @@ msgstr "Ngarkuar"
 
 msgid "Remote source"
 msgstr ""
+
+#, fuzzy
+#| msgid "Delete original image"
+msgid "Download original file"
+msgstr "Fshije foton origjinale"
 
 msgid "Author"
 msgstr ""
@@ -3379,18 +3368,30 @@ msgstr ""
 
 #, python-format
 msgid ""
-"We're really sorry, but liking an image requires an AstroBin index of "
-"<strong>%(min_index_to_like)s</strong> or greater."
+"We're really sorry, but giving likes requires an Image Index of <strong>"
+"%(min_index_to_like)s</strong> or greater."
 msgstr ""
 
 msgid ""
 "Such limitation improves the website as a whole by discouraging people from "
-"creating fake accounts to like their own images. Thank you for understanding!"
+"creating fake accounts to like their own content. Thank you for "
+"understanding!"
 msgstr ""
 
 #, python-format
-msgid "Currently, your AstroBin index is <strong>%(index)s</strong>."
+msgid "Currently, your Image Index is <strong>%(index)s</strong>."
 msgstr ""
+
+#, python-format
+msgid ""
+"To learn more about the Image Index, please visit %(_0)sthe FAQ page%(_1)s. "
+"Thanks!"
+msgstr ""
+
+#, fuzzy
+#| msgid "You can't nominate the same image more than once."
+msgid "You cannot remove a like that you gave more than one hour ago."
+msgstr "Nuk mund te percaktoni te njejten foto me shume se nje here."
 
 msgid "Delete image and all its revisions?"
 msgstr "Fshi foton dhe gjithe rishikimet e saj?"
@@ -3454,12 +3455,20 @@ msgid ""
 "its revisions."
 msgstr ""
 
+msgid "Close"
+msgstr ""
+
 msgid "The following people like this image"
 msgstr ""
 
 msgid ""
+"This will move this image to your public area, making it listed. As this "
+"image had already been published before, your followers will not be notified."
+msgstr ""
+
+msgid ""
 "This will move this image to your public area, making it listed and "
-"notifying your followers."
+"optionally notifying your followers."
 msgstr ""
 
 msgid ""
@@ -3497,9 +3506,6 @@ msgstr "No."
 msgid "Image size"
 msgstr "Foto"
 
-msgid "Regular"
-msgstr "Normale"
-
 msgid "Full"
 msgstr ""
 
@@ -3507,12 +3513,12 @@ msgid "Real"
 msgstr ""
 
 #, fuzzy
-msgid "Copy this"
-msgstr "Kopjo"
-
-#, fuzzy
 msgid "Image mode"
 msgstr "Fotografi te ngarkuara"
+
+#, fuzzy
+msgid "Copy this"
+msgstr "Kopjo"
 
 #, fuzzy
 #| msgid ""
@@ -3568,8 +3574,7 @@ msgid ""
 "unless you give them one of the links you can find in the <em>Share</em> "
 "menu below. Use that link to post this image to Internet forums and get "
 "feedback on it. When you are satisfied, perhaps after uploading some "
-"revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
-"to the <a href=\"%(profile_url)s\">Public Area</a>."
+"revisions, promote it to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
 "Kjo foto eshte nje <strong>pune e pambaruar</strong> nga <a href="
 "\"%(profile_url)s?staging\">Zona Punes</a>. Kjo do te thote qe asnjeri nuk e "
@@ -3625,6 +3630,9 @@ msgstr ""
 
 msgid "Edit your image: acquisition details"
 msgstr "Modifikoni foton tuaj: detajet e sesionit"
+
+msgid "Save"
+msgstr "Ruaj"
 
 msgid "Remove data"
 msgstr "Hiqini te dhenet"
@@ -3801,17 +3809,8 @@ msgid "Apply a watermark to image"
 msgstr "Vendos nje watermark mbi foto"
 
 msgid ""
-"AstroBin can protect your images from theft by applying a watermark to them. "
-"Be careful with your settings though: once a watermark has been applied, it "
-"cannot be removed (AstroBin won't store the non-watermarked version of your "
-"image, for your safety). If you don't like the watermark resulting from the "
-"following settings, your only choice is to delete the image and start over."
+"AstroBin can protect your images from theft by applying a watermark to them."
 msgstr ""
-"AstroBin mund të mbrojë fotot tuaja nga vjedhja duke aplikuar një watermark. "
-"Kini kujdes me parametrat tuaj pasi: një herë qe aplikoni watermarkun, ajo "
-"nuk mund të hiqet me (AstroBin nuk e ruan versionin jo-watermarked te fotos "
-"tuaj, për sigurinë tuaj). Nëse nuk ju pëlqen watermark-u i mëposhtem, "
-"zgjedhja juaj e vetme është të fshini foton dhe ta filloni nga e para."
 
 msgid "Please note: animated GIFs cannot be watermarked at this time."
 msgstr "Vini re: GIF-et e animuara nuk mund ti vihet watermarku kesaj here."
@@ -3831,8 +3830,16 @@ msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "nga <a href=\"%(the_url)s\">%(user)s</a>"
 
 #, fuzzy
+#| msgid "Start plate-solving"
+msgid "Plate-solution overlay"
+msgstr "Fillo zberthimin"
+
+#, fuzzy
 msgid "Fit to window"
 msgstr "Pershtat fotot sipas gjeresise se dritares"
+
+msgid "Loading click-and-drag zoom..."
+msgstr ""
 
 msgid "Abscissa "
 msgstr ""
@@ -3855,9 +3862,11 @@ msgstr "Zgjidh liçencat"
 msgid "Galactic latitude"
 msgstr "Zgjidh liçencat"
 
-#, fuzzy
-msgid "View page"
-msgstr "Shiko profilin"
+msgid "Click-and-drag anywhere on the image."
+msgstr ""
+
+msgid "Want to zoom in?"
+msgstr ""
 
 msgid "No gear yet."
 msgstr ""
@@ -3871,11 +3880,19 @@ msgstr "Asnje foto"
 msgid "Only you can see this"
 msgstr ""
 
+#, python-format
+msgid ""
+"Interested in <strong>%(brand)s</strong>? Our sponsor <strong>%(retailer)s</"
+"strong> sells this brand!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Sign up now!"
+msgid "Shop now"
+msgstr "Rregjistrohu tani!"
+
 msgid "Integration"
 msgstr "Integrimi"
-
-msgid "Likes"
-msgstr ""
 
 msgid "Date joined"
 msgstr ""
@@ -3932,32 +3949,14 @@ msgstr "Nese vendndodhja ka detaje qe mungojne, ju lutemi sistemoheni."
 msgid "What is this site?"
 msgstr "Cfarë është ky sit?"
 
-#, fuzzy
-msgid "Commercial information"
-msgstr "Informacione shtese"
-
-#, fuzzy
-msgid "Retailer information"
-msgstr "Informacione bazë"
-
-msgid "Blog"
-msgstr "Blog in English"
-
-#, fuzzy
-#| msgid "Terms of Service"
-msgid "Terms of servic"
-msgstr "Rregullat e Shërbimit"
-
-msgid ""
-"AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
-"Reserved. The images on this websites are copyright of their respective "
-"owners."
-msgstr ""
-"AstroBin është Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
-"Reserved. Fotografitë ne këtë sit jane copyright i pronarëve përkates."
+msgid "Gallery"
+msgstr "Galeri"
 
 msgid "Compose message"
 msgstr "Shkruani meseazh"
+
+msgid "Type your message here..."
+msgstr ""
 
 msgid "Type in a search term"
 msgstr "Shkruaj ne nje term kerkues"
@@ -3984,9 +3983,6 @@ msgstr "Asnje mesazh"
 msgid "Back"
 msgstr ""
 
-msgid "Delete conversation"
-msgstr "Fshini biiseden"
-
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
 msgstr "Nje bisede midis <a href=\"%(sender_url)s\">juve</a> dhe"
@@ -3994,8 +3990,14 @@ msgstr "Nje bisede midis <a href=\"%(sender_url)s\">juve</a> dhe"
 msgid "Reply"
 msgstr "Pergjigju"
 
+msgid "Delete conversation"
+msgstr "Fshini biiseden"
+
 msgid "Sending..."
 msgstr "Duke derguar..."
+
+msgid "Moderate"
+msgstr ""
 
 msgid ""
 "Please click on the images that you want to mark as SPAM, then click on the "
@@ -4026,43 +4028,95 @@ msgstr ""
 msgid "There are no images in the spam list."
 msgstr "Nuk ka asnje koment."
 
-#, python-format
-msgid ""
-"Your request for an API Key has been approved!\n"
-"\n"
-"    Your key: %(key)s\n"
-"    Your secret: %(secret)s\n"
-"\n"
-"    Please read the API documentation at <a href=\"%(api_docs_url)s\">"
-"%(api_docs_url)s</a>\n"
-"\n"
-"    You can review your API keys at <a href=\"%(api_keys_url)s\">"
-"%(api_keys_url)s</a>\n"
-"\n"
-"    Thank you for using AstroBin's APIs!"
-msgstr ""
-
-#, python-format
-msgid ""
-"Your request for an API Key has been approved!\n"
-"\n"
-"    Your key: %(key)s\n"
-"    Your secret: %(secret)s\n"
-"\n"
-"    Please read the API documentation at %(api_docs_url)s\n"
-"    \n"
-"    You can review your API keys at %(api_keys_url)s\n"
-"    \n"
-"    Thank you for using AstroBin's APIs!"
-msgstr ""
-
-#, fuzzy, python-format
-msgid ""
-"<a href=\"%(api_keys_url)s\">Your request for an API Key has been approved!</"
-"a>"
+#, fuzzy
+msgid "Your request for an API Key has been approved!"
 msgstr "<a href=\"%(object_url)s\">Foto juaj u proçesua.</a>"
 
-msgid "API Key request approved"
+msgid "Your API key"
+msgstr ""
+
+msgid "Your API secret"
+msgstr ""
+
+#, python-format
+msgid "Please read the API documentation %(_0)shere%(_1)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"You can review your API keys at <a href=\"%(api_keys_url)s\">"
+"%(api_keys_url)s</a>"
+msgstr ""
+
+msgid "Thank you for using AstroBin's APIs!"
+msgstr ""
+
+#, python-format
+msgid "You can review your API keys at %(api_keys_url)s."
+msgstr ""
+
+msgid "Congratulations for your first image on AstroBin!"
+msgstr ""
+
+msgid ""
+"Good job with uploading your first image on AstroBin. I hope it's the first "
+"of many!"
+msgstr ""
+
+msgid "Allow me to jump in and offer a few tips:"
+msgstr ""
+
+#, python-format
+msgid ""
+"Keep in mind that AstroBin is not meant to be a free service. If you are "
+"still on a free account, you can upload images %(max)s times before you will "
+"be asked to upgrade. More info on the <a href=\"%(url)s\">pricing page</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"New uploads go to your \"staging area\", where they are unlisted. You can "
+"still share the link to an individual image in your staging area, and people "
+"with a link will be able to access it, but to make an image public and "
+"listed on AstroBin, you need to promote it. Visit <a href=\"%(url)s\">your "
+"staging area</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you have any questions, have a look at the <a href=\"%(url)s\">frequently "
+"asked questions</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"Finally, should you need any support, simply use the <a href=\"%(url)s"
+"\">contact form</a> or send an email to <a href=\"mailto:support@astrobin.com"
+"\">support@astrobin.com</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"Keep in mind that AstroBin is not meant to be a free service. If you are "
+"still on a free account, you can upload images %(max)s times before you will "
+"be asked to upgrade. More info on the pricing page:"
+msgstr ""
+
+msgid ""
+"New uploads go to your \"staging area\", where they are unlisted. You can "
+"still share the link to an individual image in your staging area, and people "
+"with a link will be able to access it, but to make an image public and "
+"listed on AstroBin, you need to promote it. Visit your staging area:"
+msgstr ""
+
+msgid ""
+"If you have any questions, have a look at the frequently asked questions:"
+msgstr ""
+
+msgid "Finally, should you need any support, simply use the contact form:"
+msgstr ""
+
+msgid "Or send an email to support@astrobin.com."
 msgstr ""
 
 #, fuzzy
@@ -4093,10 +4147,10 @@ msgid ""
 "\n"
 "%(message)s\n"
 "\n"
-"To see all your notifications, please go to %(notices_url)s.\n"
+"To see all your notifications, please go to %(base_url)s%(notices_url)s.\n"
 "\n"
 "If you don't want to receive emails anymore, edit your preferences by going "
-"to http://astrobin.com%(pref_url)s.\n"
+"to %(base_url)s%(pref_url)s.\n"
 "\n"
 "PLEASE DO NOT REPLY TO THIS EMAIL\n"
 "\n"
@@ -4363,16 +4417,22 @@ msgstr ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> ka komentuar foton tuaj!</a>"
 
 #, fuzzy, python-format
-msgid "%(user)s has added your image to their bookmarks: %(url)s"
+msgid "%(user)s added your image \"%(title)s\" to their bookmarks: %(url)s"
 msgstr ""
 "%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: %(url)s"
 
 #, fuzzy, python-format
 msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> has added your image to their "
-"bookmarks!</a>"
+"<strong>%(user)s</strong> added your image \"%(title)s\" to their bookmarks!"
 msgstr ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> ka komentuar foton tuaj!</a>"
+
+#, fuzzy, python-format
+msgid ""
+"\n"
+"    %(user)s added your image \"%(title)s\" to their bookmarks!\n"
+msgstr ""
+"%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: %(url)s"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -4401,12 +4461,60 @@ msgid "%(user)s commented on your image!"
 msgstr "%(user)s ka komentuar foton tuaj!"
 
 #, fuzzy, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> likes your comment: <a href=\"%(url)s"
+"\">%(comment)s</a>."
+msgstr ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> ka komentuar foton tuaj!</a>"
+
+#, fuzzy, python-format
+msgid "%(user)s likes your comment: %(url)s %(comment)s"
+msgstr ""
+"%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: %(url)s"
+
+#, fuzzy, python-format
+msgid "<strong>%(user)s</strong> likes your comment!"
+msgstr ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> ka komentuar foton tuaj!</a>"
+
+#, fuzzy, python-format
+#| msgid "%(user)s replied to your comment."
+msgid "%(user)s likes your comment!"
+msgstr "%(user)s ju pergjigj komentit tuaj."
+
+#, fuzzy, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a comment: <a href="
+"\"%(url)s\">%(url)s</a>."
+msgstr ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> ka komentuar foton tuaj!</a>"
+
+#, fuzzy, python-format
+msgid "%(user)s mentioned you in a comment: %(url)s"
+msgstr ""
+"%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: %(url)s"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published "
+#| "a new image</a>"
+msgid "<strong>%(user)s</strong> mentioned you in a comment!"
+msgstr ""
+"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> ka publikuar nje "
+"foto te re</a>"
+
+#, fuzzy, python-format
+#| msgid "%(user)s replied to your comment."
+msgid "%(user)s mentioned you in a comment!"
+msgstr "%(user)s ju pergjigj komentit tuaj."
+
+#, fuzzy, python-format
 #| msgid ""
 #| "%(user)s replied to your comment. Check it out at the following url: "
 #| "%(url)s"
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it out "
-"at the following url: %(url)s"
+"at the following url: <a href=\"%(url)s\">%(url)s</a>"
 msgstr ""
 "%(user)s ju pergjigj komentit tuaj. Hidhini nje sy ne linkun qe vijon: "
 "%(url)s"
@@ -4459,6 +4567,53 @@ msgstr "Ju keni nje ndjekes te ri!"
 
 #, fuzzy, python-format
 msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> likes your post on this forum topic: "
+"<a href=\"%(url)s\">%(post)s</a>."
+msgstr ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> ka komentuar foton tuaj!</a>"
+
+#, fuzzy, python-format
+msgid "%(user)s likes your post on this forum topic: %(url)s"
+msgstr ""
+"%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: %(url)s"
+
+#, fuzzy, python-format
+msgid "<strong>%(user)s</strong> likes your forum post!"
+msgstr ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> ka komentuar foton tuaj!</a>"
+
+#, fuzzy, python-format
+msgid "%(user)s likes your forum post!"
+msgstr ""
+"%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: %(url)s"
+
+#, fuzzy, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a post on this forum "
+"topic: <a href=\"%(url)s\">%(post)s</a>."
+msgstr ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> ka komentuar foton tuaj!</a>"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "%(user)s commented on your image! Check it out at the following url: "
+#| "%(url)s"
+msgid "%(user)s mentioned you in a post on this forum topic: %(url)s"
+msgstr ""
+"%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: %(url)s"
+
+#, fuzzy, python-format
+msgid "<strong>%(user)s</strong> mentioned you in a forum post!"
+msgstr ""
+"<strong>%(username)s</strong> ka kerkuar te shohe TIFF dhe FITS e fotos tuaj."
+
+#, fuzzy, python-format
+#| msgid "%(user)s commented on your image!"
+msgid "%(user)s mentioned you in a forum post!"
+msgstr "%(user)s ka komentuar foton tuaj!"
+
+#, fuzzy, python-format
+msgid ""
 "%(user)s started a new discussion about a gear item you own! Read it at "
 "following url: <a href=\"%(url)s\">%(url)s</a>"
 msgstr ""
@@ -4480,31 +4635,6 @@ msgstr ""
 
 #, python-format
 msgid "%(user)s started a new discussion about a gear item you own!"
-msgstr ""
-
-#, fuzzy, python-format
-msgid ""
-"%(user)s wrote a review of a gear item you own! Read it at following url: <a "
-"href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-"%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: %(url)s"
-
-#, fuzzy, python-format
-msgid ""
-"%(user)s wrote a review of a gear item you own! Read it at following url: "
-"%(url)s"
-msgstr ""
-"%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: %(url)s"
-
-#, fuzzy, python-format
-msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear item "
-"you own!</a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> ju pergjigj komentit tuaj.</a>"
-
-#, python-format
-msgid "%(user)s wrote a review of a gear item you own!"
 msgstr ""
 
 #, fuzzy, python-format
@@ -4696,6 +4826,25 @@ msgstr ""
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
 msgstr ""
 
+msgid ""
+"I really appreciate your support for AstroBin, I hope you will enjoy your "
+"new subscription!"
+msgstr ""
+
+msgid ""
+"AstroBin subscriptions are valid for 1 year. When a subscription expires, "
+"nothing happens to your content. Nothing is deleted, hidden, held hostage or "
+"anything. In fact, you can leave it up forever even if you stop being active "
+"as an astrophotographer."
+msgstr ""
+
+msgid ""
+"If at some point you want to upgrade your subscription, simply purchase the "
+"new one and then get in touch so I can send you a partial refund for the "
+"unused time on your previous subscription, or extend the expiration date of "
+"your new subscription with pro-rated time from your old one."
+msgstr ""
+
 #, fuzzy, python-format
 msgid ""
 "%(user)s posted a new topic to the group: \"%(group_name)s\"\n"
@@ -4809,6 +4958,70 @@ msgstr ""
 msgid "%(user)s joined the public group: \"%(group_name)s\""
 msgstr ""
 
+#, fuzzy
+msgid "Welcome to AstroBin!"
+msgstr "Ndiq"
+
+msgid ""
+"I'm very excited that you joined, and I would like to give you a warm "
+"welcome to the community!"
+msgstr ""
+
+msgid "You will receive your activation link in a separate email."
+msgstr ""
+
+msgid "Allow me to offer some tips to get you started:"
+msgstr ""
+
+#, python-format
+msgid "Have a look at our <a href=\"%(url)s\">frequently asked questions</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"Head over to your settings and configure <a href=\"%(url)s\">your profile</"
+"a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you have astrophotography equipment, add it to <a href=\"%(url)s\">your "
+"gear</a> so that later you can associate it with the images you upload."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you want, why not <a href=\"%(url)s\">introduce yourself</a> on the "
+"forums?"
+msgstr ""
+
+msgid ""
+"Follow AstroBin on social networks! AstroBin posts quick announcements and "
+"reports there, in addition to the Image of the Day, and Top Picks as stories!"
+msgstr ""
+
+msgid "Thanks again for joining and clear skies!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Have a look at our frequently asked questions:"
+msgstr "Pyetjet e Bëra Shpesh"
+
+msgid "Head over to your settings and configure your profile:"
+msgstr ""
+
+msgid ""
+"If you have astrophotography equipment, add it to your gear so that later "
+"you can associate it with the images you upload:"
+msgstr ""
+
+msgid "If you want, why not introduce yourself on the forums?"
+msgstr ""
+
+msgid "Welcome!"
+msgstr ""
+
 msgid "Object not found"
 msgstr "Objekti nuk gjindet"
 
@@ -4821,6 +5034,11 @@ msgid "Next page"
 msgstr "Shiko profilin"
 
 #, fuzzy
+#| msgid "Additional information requested"
+msgid "No additional information available for this item."
+msgstr "Informacionet shtese u kerkuan"
+
+#, fuzzy
 msgid "Find images"
 msgstr "Asnje foto"
 
@@ -4830,18 +5048,48 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
+#, fuzzy
+msgid "View page"
+msgstr "Shiko profilin"
+
 msgid "Member since"
 msgstr "Anëtar që"
 
 msgid "This topic was closed by a moderator."
 msgstr ""
 
+msgid "New topic"
+msgstr ""
+
+#, fuzzy
+#| msgid "New Zealand"
+msgid "New reply"
+msgstr "Zelanda e Re"
+
+msgid "Please note"
+msgstr ""
+
+#, python-format
+msgid ""
+"The AstroBin forums are a place to discuss astrophotography and astronomy. "
+"If you need help with AstroBin please use the <a href=\"%(contact_url)s"
+"\">contact form</a>."
+msgstr ""
+
+msgid ""
+"User support posts, feature requests, issue reports, etc, will be deleted."
+msgstr ""
+
+#, fuzzy
+msgid "Thanks for your cooperation!"
+msgstr "Faleminderit per percaktimin"
+
+msgid "I understand"
+msgstr ""
+
 #, fuzzy
 msgid "Back to group"
 msgstr "Mbrapa te maja"
-
-msgid "New topic"
-msgstr ""
 
 msgid "Hidden"
 msgstr ""
@@ -4891,6 +5139,23 @@ msgid "New reply to a forum topic you subscribe to"
 msgstr ""
 
 msgid "Please note: this post will be published only after moderation."
+msgstr ""
+
+msgid "Type your forum post here..."
+msgstr ""
+
+msgid "Please first exit 'Source' mode to quote a message."
+msgstr ""
+
+msgid "*** Type your reply here ***"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
 msgstr ""
 
 msgid ""
@@ -5068,9 +5333,6 @@ msgstr ""
 "Duke u rregjistruar me AstroBin, ju bini dakord me <a href=\"%(tos_url)s"
 "\">Rregulloren e sherbimit</a>."
 
-msgid "Search"
-msgstr "Kërko"
-
 #, fuzzy
 msgid "Sort"
 msgstr "Zgjidh për"
@@ -5130,419 +5392,8 @@ msgstr ""
 msgid "Global trend of telescope types"
 msgstr ""
 
-#, fuzzy
-#| msgid "About"
-msgctxt "approximately"
-msgid "about"
-msgstr "Përreth"
-
-msgid "View feature comparison"
-msgstr ""
-
-#, fuzzy
-#| msgid "Pixel size"
-msgid "Max size"
-msgstr "Madhesia e pikselave"
-
-#, fuzzy
-msgid "View full res"
-msgstr "Shiko profilin"
-
-#, fuzzy
-#| msgid "View your images"
-msgid "View full image info"
-msgstr "Shikoni astrofotot e juaja"
-
-msgid "Basic"
-msgstr ""
-
-msgid "Advanced"
-msgstr ""
-
-#, fuzzy
-msgid "Social features"
-msgstr "Modifiko mekanizmin e perdorur"
-
-#, fuzzy
-#| msgid "Start plate-solving"
-msgid "Plate-solving"
-msgstr "Fillo zberthimin"
-
-msgid "Bulk data export"
-msgstr ""
-
-msgid "Hide astronomy ads"
-msgstr ""
-
-msgid "No ads on your pages"
-msgstr ""
-
-msgid "Non-members/free users can view your images in full res"
-msgstr ""
-
-#, fuzzy
-msgid "Full size annotations"
-msgstr "Shiko me risolucion te plote"
-
-#, fuzzy
-msgid "Upload uncompressed source"
-msgstr "Koha ngarkimit"
-
-#, fuzzy
-msgid "Undelete images"
-msgstr "Shtetet e Bashkuara te Amerikes"
-
-msgid ""
-"The FREE account is to be considered a trial period. You can upload images "
-"10 times, after which you can't upload anymore. Deleting images doesn't "
-"decrease your upload counter: the FREE account is not meant to be used as a "
-"way to keep your latest 10 images."
-msgstr ""
-
-msgid "year"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                %(number)s images, max %(size)s each"
-msgstr ""
-
-#, fuzzy
-#| msgid "Higher resolution"
-msgid "View in original resolution"
-msgstr "Risolucion i larte"
-
-#, python-format
-msgid ""
-"Up to %(number)s\n"
-"            revisions/image"
-msgstr ""
-
-msgid "Create/join Groups"
-msgstr ""
-
-#, fuzzy
-#| msgid "Start plate-solving"
-msgid "Basic plate-solving"
-msgstr "Fillo zberthimin"
-
-msgid "IOTD / Top Picks"
-msgstr ""
-
-msgid "No ads for others on your pages"
-msgstr ""
-
-msgid "Full-size annotations"
-msgstr ""
-
-msgid "All future features"
-msgstr ""
-
-msgid "In the future"
-msgstr ""
-
-msgid "Buy in the Marketplace"
-msgstr ""
-
-msgid "Vote in contests"
-msgstr ""
-
-msgid "Analytics"
-msgstr ""
-
-msgid "Bulk image editing"
-msgstr ""
-
-msgid "Pay securely with PayPal"
-msgstr ""
-
-msgid "Want to upgrade from a lower subscription tier?"
-msgstr ""
-
-#, python-format
-msgid ""
-"AstroBin doesn't support subscription upgrades at the moment, but we're "
-"happy to make it happen manually. If you're on a lower subscription tier and "
-"would like to upgrade to <strong>%(name)s</strong>, please just buy it and "
-"then contact us at <a href=\"mailto:astrobin@astrobin.com"
-"\">astrobin@astrobin.com</a> to get a refund for the unused time on your old "
-"subscription. Thanks!"
-msgstr ""
-
-msgid "Pay with a bank transfer"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                Prefer to pay via bank transfer? Please make a deposit of "
-"%(currency)s %(amount)s to the following\n"
-"                bank details and then email us at %(email_prefix)s%(email)s"
-"%(email_postfix)s with your username so\n"
-"                we may upgrade your account manually. Thanks!\n"
-"            "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                ∞ images, max %(size)s each"
-msgstr ""
-
-#, fuzzy
-msgid "Basic analytics"
-msgstr "Informacione bazë"
-
-msgid "Buy"
-msgstr ""
-
-#, fuzzy
-#| msgid "You have already nominated this image"
-msgid "You are already on this plan"
-msgstr "E ke percaktuar nje here kete foto"
-
-#, fuzzy
-msgid "∞ images, ∞ size"
-msgstr "Foto"
-
-msgid "View full res (incl. visitors)"
-msgstr ""
-
-#, fuzzy
-msgid "Full search"
-msgstr "Përmasë e plote:"
-
-#, fuzzy
-msgid "Unlimited revisions"
-msgstr "Po, fshi rishikimin"
-
-#, fuzzy
-#| msgid "Start plate-solving"
-msgid "Advanced plate-solving"
-msgstr "Fillo zberthimin"
-
-msgid "Sell in the Marketplace"
-msgstr ""
-
-msgid "Vote/enter contests"
-msgstr ""
-
-msgid "Advanced analytics"
-msgstr ""
-
-msgid "Subscription process canceled"
-msgstr ""
-
-msgid "Subscription process cancelled"
-msgstr ""
-
-msgid ""
-"Your transaction with PayPal has been cancelled, so no change in your "
-"subscription has occurred."
-msgstr ""
-
-#, python-format
-msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
-msgstr ""
-
-#, fuzzy
-msgctxt "Subscription plan name"
-msgid "Plan"
-msgstr "Planete"
-
-msgid "Offer valid until"
-msgstr ""
-
-msgid "Validity"
-msgstr ""
-
-msgid "Autorenew"
-msgstr ""
-
-msgid "Trial period"
-msgstr ""
-
-#, fuzzy
-msgid "day"
-msgstr "ditët"
-
-msgid "week"
-msgstr ""
-
-#, fuzzy
-msgid "month"
-msgstr "Muaj"
-
-#, fuzzy
-#| msgid "Viewed one time"
-#| msgid_plural "Viewed %(counter)s times"
-msgid "one time"
-msgstr "E pare nje here"
-
-msgctxt "At no cost"
-msgid "Free"
-msgstr ""
-
-msgid "n/a"
-msgstr ""
-
-msgid "Daily"
-msgstr "Ditor"
-
-msgid "Weekly"
-msgstr ""
-
-msgid "Monthly"
-msgstr "Mujor"
-
-msgid "Yearly"
-msgstr "Vjetor"
-
-msgid "days"
-msgstr "ditët"
-
-msgid "weeks"
-msgstr ""
-
-#, fuzzy
-msgid "months"
-msgstr "Muaj"
-
-msgid "years"
-msgstr ""
-
-msgid "No trial"
-msgstr ""
-
-msgid "Switch to"
-msgstr ""
-
-msgid "Subscription changed"
-msgstr ""
-
-msgid ""
-"Your request for a change in your subscription has been processed "
-"successfully."
-msgstr ""
-
-#, fuzzy
-msgid "Subscription plan"
-msgstr "Përshkrimi"
-
-#, fuzzy
-msgid "Status"
-msgstr "Statistikat"
-
-msgid "Subscribed"
-msgstr ""
-
-msgid "Expires"
-msgstr ""
-
-msgid "Invalid"
-msgstr ""
-
-#, fuzzy
-msgid "Cancelled"
-msgstr "Fshi"
-
-msgid "Unavailable"
-msgstr ""
-
-msgid "Unsubscribed"
-msgstr ""
-
-#, python-format
-msgid ""
-"This subscription is not offered anymore on AstroBin. Please visit the <a "
-"href=\"%(url)s\">subscriptions page</a> to see the available plans, thanks!"
-msgstr ""
-
-msgid ""
-"If you would like to renew your subscription, please visit this page again "
-"after\n"
-"                        your current subscription's expiration date:"
-msgstr ""
-
-msgid ""
-"Your subscription is either cancelled or not active yet. If you want to "
-"subscribe again, please wait until your subscription is expired. If you just "
-"subscribed, please wait a few minutes while PayPal contacts our server for "
-"the final transaction confirmation. Thank you!"
-msgstr ""
-
-msgid "By cancelling, you will revert to a free plan."
-msgstr ""
-
-#, python-format
-msgid "Free plans are limited to <strong>%(max_allowed)s</strong> images."
-msgstr ""
-
-msgid ""
-"However, your existing images will not be deleted or deactivated in any way! "
-"Simply, you will not be able to upload any more images unless you switch to "
-"a paid plan."
-msgstr ""
-
-msgid "Cancel via PayPal"
-msgstr ""
-
-#, fuzzy
-msgid "You cannot switch to this plan."
-msgstr "Juve nuk ju lejohet te shihni kete faqe."
-
-#, fuzzy
-msgid "Back to the plans"
-msgstr "Mbrapa te maja"
-
-msgid "Subscription confirmed"
-msgstr ""
-
-msgid ""
-"Your request has been received, and we are awaiting the final confirmation "
-"from PayPal. Your subscription should be active within a few minutes!"
-msgstr ""
-
-msgid "Thank you for supporting AstroBin!"
-msgstr ""
-
-msgid "Your active subscription plans"
-msgstr ""
-
-#, fuzzy
-msgid "Your inactive subscription plans"
-msgstr "AstroBin është shoqëror!"
-
-#, fuzzy
-msgid ""
-"PS: are you interested in larger plans?\n"
-"                <a href=\"/contact/\">Let us know!</a>"
-msgstr ""
-"Keni ndonje kerkese qe nuk e gjeni ketu! Lutemi na dergoni nje e-mail tek:"
-
-msgid "All"
-msgstr ""
-
-msgid "A collection of great images that were recently handpicked."
-msgstr ""
-
 msgid "This list is currently empty."
 msgstr ""
-
-#, fuzzy
-msgid "Last 6 months"
-msgstr "Lindje ose Perëndim"
-
-msgid "Last year"
-msgstr ""
-
-#, fuzzy
-msgid "All time"
-msgstr "Koha ngarkimit"
-
-msgid "Total integration"
-msgstr "Integrimi total"
 
 #, fuzzy
 msgid "Image upload"
@@ -5672,6 +5523,14 @@ msgid "%(user)s's followed users"
 msgstr "Galeria e %(user)s"
 
 #, fuzzy, python-format
+msgid "%(user)s's friends"
+msgstr "%(user)s parcelat"
+
+#, python-format
+msgid "These are the users that follow %(user)s mutually."
+msgstr ""
+
+#, fuzzy, python-format
 msgid "%(user)s's liked images"
 msgstr "Galeria e %(user)s"
 
@@ -5782,79 +5641,6 @@ msgstr ""
 "subjektet jane minimumi. Te dhenat e fotografimit jane gjithashtu te "
 "rendesishme."
 
-#, fuzzy, python-format
-msgid "%(user)s's commercial products"
-msgstr "%(user)s parcelat"
-
-msgid ""
-"Please remember that you are only allowed to claim items that you really "
-"produce and/or retail."
-msgstr ""
-
-msgid "As producer"
-msgstr ""
-
-#, fuzzy
-msgid "Gear IDs"
-msgstr "Mekanizmi perdorur"
-
-msgid "You haven't claimed any commercial products yet."
-msgstr ""
-
-#, python-format
-msgid "%(user)s hasn't claimed any commercial products yet."
-msgstr ""
-
-msgid "As retailer"
-msgstr ""
-
-msgid "You haven't claimed any retailed products yet."
-msgstr ""
-
-#, python-format
-msgid "%(user)s hasn't claimed any retailed products yet."
-msgstr ""
-
-msgid "Claim as producer"
-msgstr ""
-
-msgid "Claim as retailer"
-msgstr ""
-
-msgid "Claim commercial product"
-msgstr ""
-
-msgid "Claim"
-msgstr ""
-
-msgid "Select items to remove"
-msgstr ""
-
-msgid "Be careful if you try to remove all of these!"
-msgstr ""
-
-msgid ""
-"All the properties, including the commercial description, of this claim will "
-"be deleted and cannot be recovered!"
-msgstr ""
-
-#, fuzzy
-msgid "Select the product you want to merge to"
-msgstr "Kliko per te zgjedhur fotot qe deshironi te importoni"
-
-msgid "Are you sure?"
-msgstr ""
-
-msgid "Claim retailed product"
-msgstr ""
-
-#, fuzzy
-msgid ""
-"All the properties of this claim will be deleted and cannot be recovered!"
-msgstr ""
-"Ky rishikim do fshihet perfundimisht dhe nuk mund te rikuperohet me. A jeni "
-"te sigurt?"
-
 #, fuzzy
 msgid "Delete account"
 msgstr "Fshini biiseden"
@@ -5865,14 +5651,18 @@ msgid ""
 "forever!"
 msgstr ""
 
-msgid "Your account was deleted. Thanks for using AstroBin until now!"
+#, fuzzy
+#| msgid "(comment deleted)"
+msgid "Account deleted"
+msgstr "(komenti u fshi)"
+
+msgid ""
+"\n"
+"            Your account was deleted. Thanks for using AstroBin until now!\n"
+"        "
 msgstr ""
 
 msgid "Edit your basic information"
-msgstr "Modifko informacionet baze personale"
-
-#, fuzzy
-msgid "Edit your commercial information"
 msgstr "Modifko informacionet baze personale"
 
 #, fuzzy
@@ -5899,6 +5689,10 @@ msgstr "Juve skeni asnje kerkese."
 #, fuzzy
 msgid "Request time"
 msgstr "Kerkese nga"
+
+#, fuzzy
+msgid "Status"
+msgstr "Statistikat"
 
 #, fuzzy
 msgid "File size"
@@ -5935,9 +5729,6 @@ msgid ""
 "the data is global and shared between all AstroBin users. Do not write any "
 "information in there that refers to your personal copy of this product, like "
 "\"modded\", \"sold\", \"broken\", \"a present from my aunt\" and so on. "
-msgstr ""
-
-msgid "Close"
 msgstr ""
 
 msgid ""
@@ -5980,10 +5771,6 @@ msgstr "Imposto nga Flickr"
 
 msgid "Edit your site preferences"
 msgstr "Modofiko preferencat e sitit"
-
-#, fuzzy
-msgid "Edit your retailer information"
-msgstr "Modifko informacionet baze personale"
 
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
@@ -6055,13 +5842,28 @@ msgstr "Foto"
 msgid "Thanks for your support!"
 msgstr "Faleminderit per percaktimin"
 
+#, fuzzy
+msgid "Your subscriptions"
+msgstr "Përshkrimi"
+
+#, fuzzy
+#| msgid "You have no requests."
+msgid "Your payments"
+msgstr "Juve skeni asnje kerkese."
+
+msgid "This data is currently not available and will be recalculated shortly."
+msgstr ""
+
+msgid "Please check again in a bit, thanks!"
+msgstr ""
+
 msgid "Public Area"
 msgstr "Zona Publike"
 
-msgid "Staging Area"
-msgstr "Zona Punës"
-
 msgid "Corrupted"
+msgstr ""
+
+msgid "Recovered"
 msgstr ""
 
 msgid "Trash"
@@ -6074,6 +5876,9 @@ msgstr "Asnje foto"
 #, fuzzy
 msgid "Following"
 msgstr "Ndiq"
+
+msgid "Friends"
+msgstr ""
 
 msgid "Lacking data"
 msgstr "Te dhënat që mungojnë"
@@ -6092,6 +5897,97 @@ msgstr "Kërkim i shpejtë"
 
 msgid "Key/value pairs"
 msgstr ""
+
+msgid "Please confirm your recovered images"
+msgstr ""
+
+#, python-format
+msgid ""
+"Following the <a href=\"%(url)s\" target=\"_blank\">data loss incident in "
+"February 2020</a>, these images <strong>were automatically recovered</"
+"strong>."
+msgstr ""
+
+msgid "Now you need to <strong>manually confirm or reject</strong> them."
+msgstr ""
+
+#, fuzzy
+#| msgid "Integration"
+msgid "Instructions"
+msgstr "Integrimi"
+
+msgid ""
+"Below, you see the list of all your images impacted by the automatic "
+"recovery process."
+msgstr ""
+
+msgid ""
+"The big thumbnail represents the original upload, and the small thumbnails "
+"represent revisions."
+msgstr ""
+
+msgid ""
+"Click on a thumbnail once to mark it for recovery, again to mark it for "
+"deletion, once more to return to the \"do nothing\" state."
+msgstr ""
+
+msgid ""
+"You can also use the \"Recover all\" and \"Delete all\" buttons at the "
+"bottom."
+msgstr ""
+
+msgid ""
+"When you are ready, click on the \"Submit selected\" button to confirm your "
+"selection."
+msgstr ""
+
+msgid ""
+"You will return to this page, and the images for which you didn't make a "
+"selection will still be here."
+msgstr ""
+
+msgid ""
+"The recovered images will return to your gallery (public or staging, "
+"depending on where they were before the data loss)."
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete original image"
+msgid "Original upload"
+msgstr "Fshije foton origjinale"
+
+#, fuzzy
+#| msgid "Staging Area"
+msgid "Staging area"
+msgstr "Zona Punës"
+
+#, fuzzy
+#| msgid "Delete"
+msgid "Deleted"
+msgstr "Fshi"
+
+#, fuzzy
+msgid "Revision"
+msgstr "Shikime"
+
+msgid "Recover all"
+msgstr ""
+
+#, fuzzy
+#| msgid "Select all"
+msgid "Delete all"
+msgstr "Zgjidh te gjitha"
+
+msgid "Reset"
+msgstr ""
+
+#, fuzzy
+msgid "Submit selected"
+msgstr "# e zgjedhur"
+
+#, fuzzy
+msgid "There are no images to recover."
+msgstr "Nuk ka asnje koment."
 
 #, fuzzy
 msgid "Restore selected"
@@ -6192,6 +6088,11 @@ msgid "Award"
 msgstr ""
 
 #, fuzzy
+#| msgid "Public Area"
+msgid "Publication date range"
+msgstr "Zona Publike"
+
+#, fuzzy
 msgid "Camera type"
 msgstr "Lentet e kamerës"
 
@@ -6233,8 +6134,12 @@ msgstr ""
 msgid "Image of the Day"
 msgstr "Fotografi te ngarkuara"
 
-msgid "Top Pick"
+msgid "Top pick"
 msgstr ""
+
+#, fuzzy
+msgid "Top pick nomination"
+msgstr "Informacione bazë"
 
 #, fuzzy
 #| msgid "Guider/Planetary"
@@ -6411,11 +6316,6 @@ msgid "You have reached your image count limit. Please upgrade!"
 msgstr ""
 
 msgid ""
-"You uploaded an Indexed PNG file. AstroBin will need to lower the color "
-"count to 256 in order to work with it."
-msgstr ""
-
-msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
@@ -6458,15 +6358,14 @@ msgstr "oret"
 msgid "Average integration time"
 msgstr "Koha mesatare e integrimit fotografik"
 
-msgid "Forum posts"
+msgid ""
+"You uploaded an Indexed PNG file. AstroBin will need to lower the color "
+"count to 256 in order to work with it."
 msgstr ""
 
 #, fuzzy
 msgid "Image uploaded. Thank you!"
 msgstr "Forma u shpetua. Faleminderit!"
-
-msgid "You can't merge a product to itself."
-msgstr ""
 
 msgid "You already have a collection with that name"
 msgstr ""
@@ -6496,6 +6395,9 @@ msgstr "Te dhenat"
 
 msgid "Avg. Moon age"
 msgstr "Mes. Mosha Hënës"
+
+msgid "days"
+msgstr "ditët"
 
 msgid "Avg. Moon phase"
 msgstr "Mes. Fazës Hënore"
@@ -6534,9 +6436,328 @@ msgid ""
 "in a while: the more images you have, the more time it will take."
 msgstr ""
 
+msgid "Are you a robot?"
+msgstr ""
+
+msgid "Sorry, this username already exists with a different capitalization."
+msgstr ""
+
 #, fuzzy
-#~ msgid "Revision"
+#~| msgid "About"
+#~ msgctxt "approximately"
+#~ msgid "about"
+#~ msgstr "Përreth"
+
+#, fuzzy
+#~| msgid "Pixel size"
+#~ msgid "Max size"
+#~ msgstr "Madhesia e pikselave"
+
+#, fuzzy
+#~ msgid "View full res"
+#~ msgstr "Shiko profilin"
+
+#, fuzzy
+#~| msgid "View your images"
+#~ msgid "View full image info"
+#~ msgstr "Shikoni astrofotot e juaja"
+
+#, fuzzy
+#~ msgid "Social features"
+#~ msgstr "Modifiko mekanizmin e perdorur"
+
+#, fuzzy
+#~| msgid "Start plate-solving"
+#~ msgid "Plate-solving"
+#~ msgstr "Fillo zberthimin"
+
+#, fuzzy
+#~ msgid "Full size annotations"
+#~ msgstr "Shiko me risolucion te plote"
+
+#, fuzzy
+#~ msgid "Upload uncompressed source"
+#~ msgstr "Koha ngarkimit"
+
+#, fuzzy
+#~ msgid "Undelete images"
+#~ msgstr "Shtetet e Bashkuara te Amerikes"
+
+#, fuzzy
+#~| msgid "Higher resolution"
+#~ msgid "View in original resolution"
+#~ msgstr "Risolucion i larte"
+
+#, fuzzy
+#~| msgid "Start plate-solving"
+#~ msgid "Basic plate-solving"
+#~ msgstr "Fillo zberthimin"
+
+#, fuzzy
+#~ msgid "Basic analytics"
+#~ msgstr "Informacione bazë"
+
+#, fuzzy
+#~| msgid "You have already nominated this image"
+#~ msgid "You are already on this plan"
+#~ msgstr "E ke percaktuar nje here kete foto"
+
+#, fuzzy
+#~ msgid "∞ images, ∞ size"
+#~ msgstr "Foto"
+
+#, fuzzy
+#~ msgid "Full search"
+#~ msgstr "Përmasë e plote:"
+
+#, fuzzy
+#~ msgid "Unlimited revisions"
+#~ msgstr "Po, fshi rishikimin"
+
+#, fuzzy
+#~| msgid "Start plate-solving"
+#~ msgid "Advanced plate-solving"
+#~ msgstr "Fillo zberthimin"
+
+#, fuzzy
+#~ msgctxt "Subscription plan name"
+#~ msgid "Plan"
+#~ msgstr "Planete"
+
+#, fuzzy
+#~ msgid "day"
+#~ msgstr "ditët"
+
+#, fuzzy
+#~ msgid "month"
+#~ msgstr "Muaj"
+
+#, fuzzy
+#~| msgid "Viewed one time"
+#~| msgid_plural "Viewed %(counter)s times"
+#~ msgid "one time"
+#~ msgstr "E pare nje here"
+
+#~ msgid "Daily"
+#~ msgstr "Ditor"
+
+#~ msgid "Monthly"
+#~ msgstr "Mujor"
+
+#~ msgid "Yearly"
+#~ msgstr "Vjetor"
+
+#, fuzzy
+#~ msgid "months"
+#~ msgstr "Muaj"
+
+#, fuzzy
+#~ msgid "Subscription plan"
+#~ msgstr "Përshkrimi"
+
+#, fuzzy
+#~ msgid "Cancelled"
+#~ msgstr "Fshi"
+
+#, fuzzy
+#~ msgid "You cannot switch to this plan."
+#~ msgstr "Juve nuk ju lejohet te shihni kete faqe."
+
+#, fuzzy
+#~ msgid "Back to the plans"
+#~ msgstr "Mbrapa te maja"
+
+#, fuzzy
+#~ msgid "Your inactive subscription plans"
+#~ msgstr "AstroBin është shoqëror!"
+
+#, fuzzy
+#~ msgid ""
+#~ "PS: are you interested in larger plans?\n"
+#~ "                <a href=\"/contact/\">Let us know!</a>"
+#~ msgstr ""
+#~ "Keni ndonje kerkese qe nuk e gjeni ketu! Lutemi na dergoni nje e-mail tek:"
+
+#~ msgid ""
+#~ "AstroBin can protect your images from theft by applying a watermark to "
+#~ "them. Be careful with your settings though: once a watermark has been "
+#~ "applied, it cannot be removed (AstroBin won't store the non-watermarked "
+#~ "version of your image, for your safety). If you don't like the watermark "
+#~ "resulting from the following settings, your only choice is to delete the "
+#~ "image and start over."
+#~ msgstr ""
+#~ "AstroBin mund të mbrojë fotot tuaja nga vjedhja duke aplikuar një "
+#~ "watermark. Kini kujdes me parametrat tuaj pasi: një herë qe aplikoni "
+#~ "watermarkun, ajo nuk mund të hiqet me (AstroBin nuk e ruan versionin jo-"
+#~ "watermarked te fotos tuaj, për sigurinë tuaj). Nëse nuk ju pëlqen "
+#~ "watermark-u i mëposhtem, zgjedhja juaj e vetme është të fshini foton dhe "
+#~ "ta filloni nga e para."
+
+#, fuzzy
+#~| msgid "Duration"
+#~ msgid "Traditional"
+#~ msgstr "Kohezgjatja"
+
+#~ msgid ""
+#~ "AstroBin is an image hosting website specifically targeted to "
+#~ "astrophotographers: it's the first and the last place where you need to "
+#~ "upload your astrophotography images. Made by an astrophotographer, for "
+#~ "the astrophotographers."
+#~ msgstr ""
+#~ "AstroBin eshte nje sit bartës fotografishë, i synuar per astrofotografët: "
+#~ "është vendi i parë dhe i fundit ku ju do keni nevojë të ngarkoni "
+#~ "astrofotot tuaja. I krijuar nga një astrofotograf, për astrofotografët."
+
+#, fuzzy
+#~ msgid "AstroBin index"
+#~ msgstr "AstroBin është shoqëror!"
+
+#~ msgid "Blog"
+#~ msgstr "Blog in English"
+
+#, fuzzy
+#~| msgid "Terms of Service"
+#~ msgid "Terms of servic"
+#~ msgstr "Rregullat e Shërbimit"
+
+#~ msgid ""
+#~ "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
+#~ "Reserved. The images on this websites are copyright of their respective "
+#~ "owners."
+#~ msgstr ""
+#~ "AstroBin është Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
+#~ "Reserved. Fotografitë ne këtë sit jane copyright i pronarëve përkates."
+
+#, fuzzy
+#~ msgid "Last 6 months"
+#~ msgstr "Lindje ose Perëndim"
+
+#, fuzzy
+#~ msgid "All time"
+#~ msgstr "Koha ngarkimit"
+
+#, fuzzy
+#~ msgid "You have already claimed this product."
+#~ msgstr "E ke percaktuar nje here kete foto"
+
+#, fuzzy
+#~ msgid "Company description"
+#~ msgstr "Përshkrimi"
+
+#, fuzzy
+#~ msgid "USD - American dollars"
+#~ msgstr "Samoa Amerikane"
+
+#, fuzzy
+#~ msgid "Currency"
+#~ msgstr "Transparenca"
+
+#, fuzzy
+#~ msgid "Retailed gear items"
+#~ msgstr "Modifiko mekanizmin e perdorur"
+
+#, fuzzy
+#~ msgid "Commercial gear items"
+#~ msgstr "Modifiko mekanizmin e perdorur"
+
+#, fuzzy
+#~ msgid "Return to list"
+#~ msgstr "Kthehu tek foto"
+
+#, fuzzy
+#~ msgid "Other images"
+#~ msgstr "Asnje foto"
+
+#, fuzzy
+#~ msgid "Some images"
+#~ msgstr "Asnje foto"
+
+#~ msgid "(view more)"
+#~ msgstr "(shiko me shume)"
+
+#, fuzzy
+#~ msgid "Reviews"
 #~ msgstr "Shikime"
+
+#~ msgid "Rating"
+#~ msgstr "Vleresimi"
+
+#, fuzzy
+#~ msgid "Add your review"
+#~ msgstr "Shto me shume"
+
+#, fuzzy
+#~ msgid ""
+#~ "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
+#~ "register/\">register</a> to write a review."
+#~ msgstr ""
+#~ "Lutemi <a href=\"/accounts/login/\">hyni</a> ose <a href=\"/accounts/"
+#~ "register/\">rregjistrohuni</a> qe te komentoni."
+
+#~ msgid ""
+#~ "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
+#~ "register/\">register</a> to leave a comment."
+#~ msgstr ""
+#~ "Lutemi <a href=\"/accounts/login/\">hyni</a> ose <a href=\"/accounts/"
+#~ "register/\">rregjistrohuni</a> qe te komentoni."
+
+#~ msgid "just now"
+#~ msgstr "menjehere"
+
+#, fuzzy
+#~ msgid "Commercial information"
+#~ msgstr "Informacione shtese"
+
+#, fuzzy
+#~ msgid ""
+#~ "%(user)s wrote a review of a gear item you own! Read it at following url: "
+#~ "<a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: "
+#~ "%(url)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "%(user)s wrote a review of a gear item you own! Read it at following url: "
+#~ "%(url)s"
+#~ msgstr ""
+#~ "%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: "
+#~ "%(url)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear "
+#~ "item you own!</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> ju pergjigj komentit tuaj.</"
+#~ "a>"
+
+#, fuzzy
+#~ msgid "%(user)s's commercial products"
+#~ msgstr "%(user)s parcelat"
+
+#, fuzzy
+#~ msgid "Gear IDs"
+#~ msgstr "Mekanizmi perdorur"
+
+#, fuzzy
+#~ msgid "Select the product you want to merge to"
+#~ msgstr "Kliko per te zgjedhur fotot qe deshironi te importoni"
+
+#, fuzzy
+#~ msgid ""
+#~ "All the properties of this claim will be deleted and cannot be recovered!"
+#~ msgstr ""
+#~ "Ky rishikim do fshihet perfundimisht dhe nuk mund te rikuperohet me. A "
+#~ "jeni te sigurt?"
+
+#, fuzzy
+#~ msgid "Edit your commercial information"
+#~ msgstr "Modifko informacionet baze personale"
+
+#, fuzzy
+#~ msgid "Edit your retailer information"
+#~ msgstr "Modifko informacionet baze personale"
 
 #, fuzzy
 #~ msgid "Imaging telescope or lens"
@@ -6581,9 +6802,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Raw data"
 #~ msgstr "Hiqini te dhenet"
-
-#~ msgid "Frequently Asked Questions"
-#~ msgstr "Pyetjet e Bëra Shpesh"
 
 #~ msgid "Is this website for free?"
 #~ msgstr "Në këtë sit falas?"
@@ -7103,9 +7321,6 @@ msgstr ""
 #~ msgid "So, what are you waiting for?"
 #~ msgstr "Pra, çfare po pret?"
 
-#~ msgid "Sign up now!"
-#~ msgstr "Rregjistrohu tani!"
-
 #, fuzzy
 #~ msgid "Send to public data pool"
 #~ msgstr "Reklamoje te zona publike"
@@ -7621,9 +7836,6 @@ msgstr ""
 #~ msgid "Change license"
 #~ msgstr "Nderro liçensen"
 
-#~ msgid "New!"
-#~ msgstr "E re!"
-
 #~ msgid "or return to messages"
 #~ msgstr "ose kthehuni te mesazhet"
 
@@ -7633,10 +7845,6 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "Recently uploaded"
-#~ msgstr "u ngarkua"
-
-#, fuzzy
-#~ msgid "Recently liked"
 #~ msgstr "u ngarkua"
 
 #, fuzzy
@@ -7913,10 +8121,6 @@ msgstr ""
 #~ msgstr "Maratona Messier"
 
 #, fuzzy
-#~ msgid "AstroBin Index"
-#~ msgstr "AstroBin është shoqëror!"
-
-#, fuzzy
 #~ msgid "Unfollow"
 #~ msgstr "Ndiq"
 
@@ -8025,9 +8229,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Kjo foto permban objekte te shumte Messier. Lutemi zgjidhni cilin prej "
 #~ "tyre deshironi te percaktoni."
-
-#~ msgid "You can't nominate the same image more than once."
-#~ msgstr "Nuk mund te percaktoni te njejten foto me shume se nje here."
 
 #~ msgid "Your nomination has been recorded, thank you!"
 #~ msgstr "Percaktimi juaj u rregjistrua, ju faleminderit!"
@@ -8268,10 +8469,6 @@ msgstr ""
 #~ msgstr "%(username)s nuk ka shkruar asgje per veten."
 
 #, fuzzy
-#~ msgid "%(user)s's favorites"
-#~ msgstr "%(user)s parcelat"
-
-#, fuzzy
 #~ msgid "View your favorites"
 #~ msgstr "Shikoni astrofotot e juaja"
 
@@ -8437,9 +8634,6 @@ msgstr ""
 
 #~ msgid "You are now registered. Activation email sent."
 #~ msgstr "Ju tani u rregjistruat. E-maili i aktivizimit u dërgua."
-
-#~ msgid "(comment deleted)"
-#~ msgstr "(komenti u fshi)"
 
 #~ msgid "Undelete"
 #~ msgstr "E pafshire"

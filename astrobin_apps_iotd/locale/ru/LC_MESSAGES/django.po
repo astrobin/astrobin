@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:22+0000\n"
-"PO-Revision-Date: 2019-02-25 18:41+0000\n"
-"Last-Translator: BG8JQT <BG8JQT@163.com>\n"
+"POT-Creation-Date: 2020-12-10 21:56+0000\n"
+"PO-Revision-Date: 2020-11-24 17:29+0000\n"
+"Last-Translator: NadirAstro <nadir_teymurov@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -18,19 +18,22 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1551120112.000000\n"
+"X-POOTLE-MTIME: 1606238989.000000\n"
 
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "Вы не участник списка Номинирующих для Изображения Дня."
 
 msgid "You cannot submit your own image."
-msgstr "您不能提交您的图像。"
+msgstr "Вы не можете отправить своё собственное изображение."
 
 msgid "Images in the staging area cannot be submitted."
-msgstr "Изображения в Staging Area не могут быть номинированы."
+msgstr "Изображения в студии не могут быть номинированы."
 
 msgid "This user has chosen to be excluded from competitions."
 msgstr "Этот пользователь хочет быть исключенным из соревнования."
+
+msgid "This user has been banned from competitions."
+msgstr "Этот пользователь был заблокирован от участия в соревнованиях."
 
 #, python-format
 msgid ""
@@ -41,7 +44,7 @@ msgstr ""
 "%(max_days)s дней назад."
 
 msgid "Users with a Free membership cannot participate in the IOTD."
-msgstr ""
+msgstr "Пользователи с бесплатной подпиской не могут участвовать в IOTD."
 
 msgid "This image has already been an IOTD in the past"
 msgstr "Это изображение уже было Изображением Дня в прошлом"
@@ -57,7 +60,7 @@ msgid "You cannot vote for your own image."
 msgstr "Вы не можете голосовать за собственные изображения."
 
 msgid "Images in the staging area cannot be voted for."
-msgstr "За изображения в Staging Area нельзя голосовать."
+msgstr "За изображения в студии нельзя голосовать."
 
 msgid "You cannot vote for an image that has not been submitted."
 msgstr "Вы не можете голосовать за изображения, которые не были номинированы."
@@ -84,7 +87,7 @@ msgid "You cannot elect your own image."
 msgstr "Вы не можете выбирать собственные изображения."
 
 msgid "Images in the staging area cannot be elected."
-msgstr "Изображения в Staging Area не могут быть выбраны."
+msgstr "Изображения в студии не могут быть выбраны."
 
 msgid "You cannot elect an image that has not been voted."
 msgstr "Вы не можете выбирать изображения за которые нет голосов."
@@ -145,7 +148,7 @@ msgid "by"
 msgstr "от"
 
 msgid "IOTD Judgement Queue"
-msgstr "IOTD 判断队列"
+msgstr "IOTD Очередь Решения"
 
 msgid ""
 "Please select the images that you want to elect to IOTD by clicking on them."
@@ -157,13 +160,13 @@ msgid "This queue is currently empty."
 msgstr "Пока эта очередь пуста."
 
 msgid "Reviewers"
-msgstr "审核人"
+msgstr "Обозреватели"
 
 msgid "Loading"
-msgstr "加载中"
+msgstr "Загрузка"
 
 msgid "Error"
-msgstr "错误"
+msgstr "Ошибка"
 
 msgid "IOTD Review Queue"
 msgstr "Рецензируемая очередь ИД"
@@ -176,10 +179,10 @@ msgstr ""
 "окончательного решения, нажав на них."
 
 msgid "Submitters"
-msgstr "提交者"
+msgstr "Отправители"
 
 msgid "IOTD Submission Queue"
-msgstr "IOTD 提交队列"
+msgstr "IOTD Очередь Отправления"
 
 msgid ""
 "Please select the images that you want to propose for IOTD consideration."

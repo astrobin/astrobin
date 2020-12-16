@@ -1,0 +1,36 @@
+{% load i18n %}
+{% load static %}
+
+{% blocktrans trimmed %}
+    Good job with uploading your first image on AstroBin. I hope it's the first of many!
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Allow me to jump in and offer a few tips:
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    AstroBin subscriptions are valid for 1 year. When a subscription expires, nothing happens to your content.
+    Nothing is deleted, hidden, held hostage or anything. In fact, you can leave it up forever even if you
+    stop being active as an astrophotographer.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    If at some point you want to upgrade your subscription, simply purchase the new one and then get in touch
+    so I can send you a partial refund for the unused time on your previous subscription, or extend the
+    expiration date of your new subscription with pro-rated time from your old one.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    If you have any questions, have a look at the frequently asked questions:
+{% endblocktrans %}
+https://welcome.astrobin.com/faq
+
+{% blocktrans trimmed %}
+    Finally, should you need any support, simply use the contact form:
+{% endblocktrans %}
+{{ BASE_URL }}{% url 'contact_form:contact' %}
+
+{% blocktrans trimmed %}
+    Or send an email to support@astrobin.com.
+{% endblocktrans %}

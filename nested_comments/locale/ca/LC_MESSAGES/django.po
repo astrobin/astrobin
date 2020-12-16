@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:06+0000\n"
+"POT-Creation-Date: 2020-12-10 21:48+0000\n"
 "PO-Revision-Date: 2014-01-29 01:49+0000\n"
 "Last-Translator: Bufot <bufote@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1390960156.180486\n"
+
+msgid "Type your comment here..."
+msgstr ""
 
 msgid "Cancel"
 msgstr "Cancel·lar"
@@ -38,6 +41,14 @@ msgstr "Encara no hi ha comentaris."
 msgid "(deleted)"
 msgstr "(esborrat)"
 
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr ""
+
 msgid "Link"
 msgstr "Enllaç"
 
@@ -53,17 +64,26 @@ msgstr "Editar"
 msgid "Reply"
 msgstr "Respondre"
 
+msgid "Like"
+msgstr ""
+
+msgid "Unlike"
+msgstr ""
+
 msgid "The comment cannot be empty."
 msgstr "El comentari no pot estar buit."
 
-msgid "Save"
-msgstr "Desar"
+msgid "Submit"
+msgstr ""
 
-msgid "(comment deleted)"
-msgstr "(comentari esborrat)"
+#~ msgid "Save"
+#~ msgstr "Desar"
 
-msgid "There doesn't seem to be anything here."
-msgstr "Sembla que aquí no hi ha res."
+#~ msgid "(comment deleted)"
+#~ msgstr "(comentari esborrat)"
+
+#~ msgid "There doesn't seem to be anything here."
+#~ msgstr "Sembla que aquí no hi ha res."
 
 #~ msgid "Formatting help"
 #~ msgstr "Ajuda amb el format"

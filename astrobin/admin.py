@@ -49,6 +49,7 @@ class UserProfileAdmin(admin.ModelAdmin):
         'accessories',
         'default_license',
         'language',
+        'astrobin_index_bonus',
     )
 
     list_display = (
@@ -243,7 +244,7 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
                 "Please select exactly one email",
                 messages.ERROR)
         elif recipients.count() > 0:
-            send_broadcast_email.delay(obj[0], recipients)
+            send_broadcast_email.delay(obj[0].id, list(recipients))
             self.message_user(
                 request,
                 "Email enqueued to be sent to %d users" % len(recipients))
@@ -315,6 +316,66 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
             .values_list('email', flat=True)
         self.submit_email(request, obj, recipients)
 
+    def submit_recovered_images_notice_de(self, request, obj):
+        recipients = User.objects \
+            .filter(userprofile__deleted=None, userprofile__language='de',
+                    userprofile__recovered_images_notice_sent=None,
+                    image__recovered__isnull=False) \
+            .distinct() \
+            .values_list('email', flat=True)
+        self.submit_email(request, obj, recipients)
+        UserProfile.objects.filter(user__email__in=recipients).update(recovered_images_notice_sent=datetime.now())
+
+    def submit_recovered_images_notice_en(self, request, obj):
+        recipients = User.objects \
+            .filter(userprofile__deleted=None, userprofile__recovered_images_notice_sent=None,
+                    image__recovered__isnull=False) \
+            .exclude(userprofile__language__in=['it', 'fr', 'de', 'es', 'pt']) \
+            .distinct() \
+            .values_list('email', flat=True)
+        self.submit_email(request, obj, recipients)
+        UserProfile.objects.filter(user__email__in=recipients).update(recovered_images_notice_sent=datetime.now())
+
+    def submit_recovered_images_notice_es(self, request, obj):
+        recipients = User.objects \
+            .filter(userprofile__deleted=None, userprofile__language='es',
+                    userprofile__recovered_images_notice_sent=None,
+                    image__recovered__isnull=False) \
+            .distinct() \
+            .values_list('email', flat=True)
+        self.submit_email(request, obj, recipients)
+        UserProfile.objects.filter(user__email__in=recipients).update(recovered_images_notice_sent=datetime.now())
+
+    def submit_recovered_images_notice_fr(self, request, obj):
+        recipients = User.objects \
+            .filter(userprofile__deleted=None, userprofile__language='fr',
+                    userprofile__recovered_images_notice_sent=None,
+                    image__recovered__isnull=False) \
+            .distinct() \
+            .values_list('email', flat=True)
+        self.submit_email(request, obj, recipients)
+        UserProfile.objects.filter(user__email__in=recipients).update(recovered_images_notice_sent=datetime.now())
+
+    def submit_recovered_images_notice_it(self, request, obj):
+        recipients = User.objects \
+            .filter(userprofile__deleted=None, userprofile__language='it',
+                    userprofile__recovered_images_notice_sent=None,
+                    image__recovered__isnull=False) \
+            .distinct() \
+            .values_list('email', flat=True)
+        self.submit_email(request, obj, recipients)
+        UserProfile.objects.filter(user__email__in=recipients).update(recovered_images_notice_sent=datetime.now())
+
+    def submit_recovered_images_notice_pt(self, request, obj):
+        recipients = User.objects \
+            .filter(userprofile__deleted=None, userprofile__language='pt',
+                    userprofile__recovered_images_notice_sent=None,
+                    image__recovered__isnull=False) \
+            .distinct() \
+            .values_list('email', flat=True)
+        self.submit_email(request, obj, recipients)
+        UserProfile.objects.filter(user__email__in=recipients).update(recovered_images_notice_sent=datetime.now())
+
     submit_mass_email.short_description = 'Submit mass email (select one only) - DO NOT ABUSE'
     submit_mass_email.allow_tags = True
 
@@ -342,6 +403,24 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
     submit_february_2020_data_loss_ultimate_upgrade.short_description = 'Submit February 2020 data loss Ultimate upgrade'
     submit_february_2020_data_loss_ultimate_upgrade.allow_tags = True
 
+    submit_recovered_images_notice_de.short_description = '[de] Submit recovered images notice'
+    submit_recovered_images_notice_de.allow_tags = True
+
+    submit_recovered_images_notice_en.short_description = '[en] Submit recovered images notice'
+    submit_recovered_images_notice_en.allow_tags = True
+
+    submit_recovered_images_notice_es.short_description = '[es] Submit recovered images notice'
+    submit_recovered_images_notice_es.allow_tags = True
+
+    submit_recovered_images_notice_fr.short_description = '[fr] Submit recovered images notice'
+    submit_recovered_images_notice_fr.allow_tags = True
+
+    submit_recovered_images_notice_it.short_description = '[it] Submit recovered images notice'
+    submit_recovered_images_notice_it.allow_tags = True
+
+    submit_recovered_images_notice_pt.short_description = '[pt] Submit recovered images notice'
+    submit_recovered_images_notice_pt.allow_tags = True
+
     actions = [
         'submit_mass_email',
         'submit_superuser_email',
@@ -352,8 +431,13 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
         'submit_inactive_email_reminder',
         'submit_february_2020_data_loss_premium_upgrade',
         'submit_february_2020_data_loss_ultimate_upgrade',
+        'submit_recovered_images_notice_de',
+        'submit_recovered_images_notice_en',
+        'submit_recovered_images_notice_es',
+        'submit_recovered_images_notice_fr',
+        'submit_recovered_images_notice_it',
+        'submit_recovered_images_notice_pt',
     ]
-
     list_display = ("subject", "created")
     search_fields = ['subject', ]
 

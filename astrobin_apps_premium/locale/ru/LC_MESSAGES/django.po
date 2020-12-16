@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:19+0000\n"
-"PO-Revision-Date: 2019-01-26 16:36+0000\n"
-"Last-Translator: sypai <sypai@mail.ru>\n"
+"POT-Creation-Date: 2020-12-10 21:53+0000\n"
+"PO-Revision-Date: 2020-12-03 05:46+0000\n"
+"Last-Translator: NadirAstro <nadir_teymurov@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -18,28 +18,31 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1548520563.000000\n"
+"X-POOTLE-MTIME: 1606974384.000000\n"
 
 msgid "I wasn't really affected by the data loss"
-msgstr ""
+msgstr "Меня не очень коснулась потеря данных"
 
 msgid "I don't require compensation: I want to support AstroBin"
-msgstr ""
+msgstr "Мне не нужна компенсация: Я хочу поддержать AstroBin"
 
 msgid "I would like to try AstroBin Ultimate for free for 1 month"
-msgstr ""
+msgstr "Я хочу попробовать подписку AstroBin Ultimate бесплатно на 1 месяц"
 
 msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
 msgstr ""
+"Я чувствую себя получившим право на AstroBin Ultimate бесплатно на 3 месяца"
 
 msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
 msgstr ""
+"Я чувствую себя получившим право на AstroBin Ultimate бесплатно на 6 месяцев"
 
 msgid "Requested compensation"
-msgstr ""
+msgstr "Запрашиваемая компенсация"
 
 msgid "Please indicate if and how much you would like to be compensated."
 msgstr ""
+"Пожалуйста укажите нужна ли вам компенсация и, если да, то каким образом."
 
 msgid "Your migration data"
 msgstr "Ваши данные для миграции"
@@ -72,74 +75,84 @@ msgid "Subscription"
 msgstr "Подписка"
 
 msgid "Data loss compensation request"
-msgstr ""
+msgstr "Запрос на компенсацию потери изображений"
 
 msgid ""
 "You are eligible for compensation due to the data loss that happened on "
 "February 16th, 2020."
 msgstr ""
+"Вы имеете право на компенсацию за потерю информации которая произошла 16-го "
+"Февраля 2020-го."
 
 msgid ""
 "If you haven't had the chance, please take a minute to read what happened at "
 "the following page:"
 msgstr ""
+"Если у вас ещё не было возможности, пожалуйста уделите минуту на прочтение "
+"того что произошло на след. странице:"
 
 msgid "Official statement and post-mortem"
-msgstr ""
+msgstr "Официальное заявление и последствия"
 
 msgid "Please accept our apology once more."
-msgstr ""
+msgstr "Пожалуйста примите наше извинение ещё раз."
 
 msgid "Please chooce your compensation from the list below"
-msgstr ""
+msgstr "Пожалуйста выберите ваш метод компенсации из списка ниже"
 
 msgid ""
 "Compensation is offered in the form of free time on the new AstroBin "
 "subscription tier called \"Ultimate\"."
 msgstr ""
+"Компенсация предлагается в форме бесплатного времени в новой подписке "
+"AstroBin которая называется \"Ultimate\"."
 
 #, python-format
 msgid ""
 "To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
 "target=\"_blank\">the pricing page</a>."
 msgstr ""
+"Чтобы узнать больше про AstroBin Ultimate, пожалуйста посетите <a href="
+"\"%(url)s\" target=\"_blank\">страницу цен</a>"
 
 msgid "Submit"
-msgstr ""
+msgstr "Отправить"
 
 msgid "Data loss compensation reauest"
-msgstr ""
+msgstr "Заявка на компенсацию за потерю информации"
 
 msgid "Already done"
-msgstr ""
+msgstr "Уже выполнено"
 
 msgid "Sorry, you can't do this again."
-msgstr ""
+msgstr "Извините, вы не можете сделать это ещё раз."
 
 msgid "Your preference was already recorded and cannot be changed."
-msgstr ""
+msgstr "Ваше предпочтение уже сохранено и не может быть изменено."
 
 msgid "Not eligible"
-msgstr ""
+msgstr "Не имеет права"
 
 msgid "It looks like you're not eligible"
-msgstr ""
+msgstr "Кажется вы не имеете права"
 
 msgid ""
 "Sorry, but this page is for people who were on AstroBin Premium on the day "
 "that the data loss incident happened, and it looks like you aren't among "
 "them."
 msgstr ""
+"Извините, но эта страница для пользователей у которых был AstroBin Premium в "
+"день когда случилась потеря информации, и кажется вы не один из них."
 
 msgid "Success"
 msgstr "Успешно"
 
 msgid "All done!"
-msgstr ""
+msgstr "Всё готово!"
 
 msgid ""
 "Your preference has been recorded and it has already been applied. Thank you!"
-msgstr ""
+msgstr "Ваше предпочтение было записано и уже применено. Спасибо!"
 
 msgid "Migrate donations"
 msgstr "Перевод взносов"
@@ -198,22 +211,12 @@ msgstr "Ваш перенос прошел успешно."
 msgid "Thanks for supporting AstroBin!"
 msgstr "Спасибо за поддержку AstroBin!"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "Your \"%(subscription_name)s\" subscription on AstroBin will expire in "
-#| "one week."
+#, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
 msgstr ""
-"Ваша \"%(subscription_name)s\" подписка на AstroBin истекает на неделе."
+"Ваша \"%(subscription_name)s\" подписка на AstroBin только что истекла."
 
-#, fuzzy
-#| msgid ""
-#| "When a Premium or Lite subscription on AstroBin expires, nothing happens "
-#| "to your images or any of your content. You are reverted to AstroBin Free "
-#| "and will not be able to upload new images until you renew, but you may "
-#| "continue to use AstroBin in all other aspects if you do not have any new "
-#| "images to share at the moment."
 msgid ""
 "When a subscription on AstroBin expires, nothing happens to your images or "
 "any of your content. You are reverted to AstroBin Free and will not be able "
@@ -221,9 +224,9 @@ msgid ""
 "in all other aspects if you do not have any new images to share at the "
 "moment."
 msgstr ""
-"Когда на AstroBin истекает Premium или Lite подписка, с вашими изображениями "
-"или любым содержимым ничего не случается. Вы возвращаетесь на AstroBin Free "
-"и не сможете загружать новые изображения пока не обновитесь, но вы сможете "
+"Когда на AstroBin истекает подписка, с вашими изображениями или любым "
+"содержимым ничего не случается. Вы возвращаетесь на AstroBin Free и не "
+"сможете загружать новые изображения пока не обновитесь, но вы сможете "
 "продолжить пользоваться AstroBin в других аспектах, если у вас нет новых "
 "изображений на данный момент."
 
@@ -233,10 +236,8 @@ msgid ""
 msgstr ""
 "Когда вы готовы обновить вашу подписку, пожалуйста посетите эту страницу:"
 
-#, fuzzy
-#| msgid "Your premium subscription will expire in one week"
 msgid "Your AstroBin subscription has just expired"
-msgstr "Ваша премиум подписка истекает на неделе."
+msgstr "Ваша AstroBin подписка только что истекла"
 
 #, python-format
 msgid ""
@@ -249,11 +250,11 @@ msgid ""
 "PLEASE NOTE! At the moment, you cannot renew a subscription while it is "
 "still ongoing. Please wait until it is expired. Thank you!"
 msgstr ""
+"ПОЖАЛУЙСТА УЧТИТЕ! Вы не можете обновить подписку пока она активна. "
+"Пожалуйста дождитесь пока она не истечёт. Спасибо!"
 
-#, fuzzy
-#| msgid "Your premium subscription will expire in one week"
 msgid "Your AstroBin subscription will expire in one week"
-msgstr "Ваша премиум подписка истекает на неделе."
+msgstr "Ваша AstroBin подписка истекает на неделе"
 
 #, python-format
 msgid ""
@@ -284,7 +285,16 @@ msgstr ""
 msgid "Thank you!"
 msgstr "Благодарим!"
 
-#, fuzzy
-#| msgid "Your premium subscription will be automatically renewed in one week"
 msgid "Your AstroBin subscription will be automatically renewed in one week"
-msgstr "Ваша премиум подписка будет автоматически обновлена на неделе."
+msgstr "Ваша AstroBin подписка будет автоматически обновлена на неделе"
+
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will be "
+"automatically renewed in 30 days."
+msgstr ""
+"Ваша \"%(subscription_name)s\" подписка на AstroBin будет автоматически "
+"обновлена в течении 30 дней."
+
+msgid "Your AstroBin subscription will be automatically renewed in 30 days"
+msgstr "Ваша AstroBin подписка будет автоматически обновлена в течении 30 дней"

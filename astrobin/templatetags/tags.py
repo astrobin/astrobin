@@ -3,7 +3,6 @@ import math
 from datetime import datetime, date
 
 from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import Library
 from django.template.defaultfilters import timesince
@@ -14,10 +13,11 @@ from threaded_messages.models import Participant
 from astrobin.enums import SubjectType
 from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import GearUserInfo, UserProfile, Image
+from astrobin.services.utils_service import UtilsService
 from astrobin.utils import get_image_resolution, decimal_to_hours_minutes_seconds, decimal_to_degrees_minutes_seconds
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium_2020, is_premium, is_ultimate_2020, \
-    is_lite, is_any_ultimate
+    is_lite, is_any_ultimate, is_free, is_lite_2020
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from astrobin_apps_users.services import UserService
 
@@ -263,6 +263,42 @@ def show_ads(user):
 
 
 @register.simple_tag(takes_context=True)
+def show_ads_on_page(context):
+    request = context['request']
+
+    if not show_ads(request.user):
+        return False
+
+    if context.template_name == 'image/detail.html':
+        for data in context.dicts:
+            if 'image' in data:
+                return show_ads(request.user) and not is_any_ultimate(data['image'].user)
+    elif context.template_name in (
+            'user/profile.html',
+            'user_collections_list.html',
+            'user_collections_detail.html',
+            'user/bookmarks.html',
+            'user/liked.html',
+            'user/following.html',
+            'user/followers.html',
+            'user/plots.html',
+    ):
+        for data in context.dicts:
+            if 'requested_user' in data:
+                return show_ads(request.user) and not is_any_ultimate(data['requested_user'])
+    elif context.template_name == 'index/root.html':
+        return show_ads(request.user) and is_free(request.user)
+    elif context.template_name in (
+            'search/search.html',
+            'top_picks.html',
+            'astrobin_apps_iotd/iotd_archive.html'
+    ):
+        return show_ads(request.user) and (not request.user.is_authenticated() or is_free(request.user))
+
+    return False
+
+
+@register.simple_tag(takes_context=True)
 def show_adsense_ads(context):
     if not settings.ADSENSE_ENABLED:
         return False
@@ -270,7 +306,9 @@ def show_adsense_ads(context):
     is_anon = not context['request'].user.is_authenticated()
     image_owner_is_ultimate = False
 
-    if context.template_name == 'image/detail.html':
+    if context.template_name.startswith('registration/'):
+        return False
+    elif context.template_name == 'image/detail.html':
         for data in context.dicts:
             if 'image' in data:
                 image_owner_is_ultimate = is_any_ultimate(data['image'].user)
@@ -417,25 +455,13 @@ def to_user_timezone(value, user):
 
 
 @register.filter
-def can_like(user, image):
-    from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
+def can_like(user, target):
+    return UserService(user).can_like(target)
 
-    user_scores_index = 0
-    min_index_to_like = settings.MIN_INDEX_TO_LIKE
 
-    if user.is_authenticated():
-        user_scores_index = user.userprofile.get_scores()['user_scores_index']
-
-    if user.is_superuser:
-        return True
-
-    if user == image.user:
-        return False
-
-    if is_free(user) and user_scores_index < min_index_to_like:
-        return False
-
-    return True
+@register.filter
+def can_unlike(user, target):
+    return UserService(user).can_unlike(target)
 
 
 @register.filter
@@ -483,13 +509,6 @@ def gear_list_has_items(gear_list):
             return True
 
     return False
-
-
-@register.filter
-def content_type(obj):
-    if not obj:
-        return None
-    return ContentType.objects.get_for_model(obj)
 
 
 @register.inclusion_tag('inclusion_tags/private_abbr.html')
@@ -591,3 +610,55 @@ def in_upload_wizard(image, request):
     return not image.title or \
            "upload" in request.GET or \
            "upload" in request.POST
+
+
+@register.simple_tag
+def show_competitive_feature(requesting_user, target_user):
+    if target_user and target_user.userprofile.exclude_from_competitions:
+        return False
+
+    if requesting_user.is_authenticated() and requesting_user.userprofile.exclude_from_competitions:
+        return False
+
+    return True
+
+
+@register.simple_tag
+def get_actstream_action_template_fragment_cache_key(action, language_code):
+    cache_key = action.verb.replace('VERB_', '')
+
+    if action.actor:
+        cache_key += ".actor-%d" % action.actor.pk
+
+    if action.action_object:
+        cache_key += ".action-object-%d" % action.action_object.pk
+
+    if action.target:
+        cache_key += ".target-%d" % action.target.pk
+
+    return "%s.%s" % (cache_key, language_code)
+
+
+@register.filter
+def show_click_and_drag_zoom(request, image):
+    return (not 'real' in request.GET and
+            not is_free(request.user) and
+            not (request.user_agent.is_touch_capable or
+                 request.user_agent.is_mobile or
+                 request.user_agent.is_tablet))
+
+
+@register.simple_tag
+def show_10_year_anniversary_logo():
+    # type: () -> bool
+    return UtilsService.show_10_year_anniversary_logo()
+
+
+@register.filter
+def show_images_used(user):
+    return is_lite_2020(user)
+
+
+@register.filter
+def show_uploads_used(user):
+    return is_free(user) or is_lite(user)

@@ -135,16 +135,21 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
         image = self.get_object()
 
         alias = kwargs.pop('alias')
-        r = kwargs.pop('r')
-        if r is None:
-            r = 'final'
+        revision_label = kwargs.pop('r', None)
 
         force = request.GET.get('force')
         if force is not None:
-            image.thumbnail_invalidate()
+            if revision_label in (None, 'None', 0, '0'):
+                image.thumbnail_invalidate()
+            else:
+                revision = ImageService(image).get_revision(revision_label)
+                revision.thumbnail_invalidate()
+
+        if revision_label is None:
+            revision_label = 'final'
 
         opts = {
-            'revision_label': r,
+            'revision_label': revision_label,
             'animated': 'animated' in self.request.GET,
             'insecure': 'insecure' in self.request.GET,
         }
@@ -158,7 +163,7 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
         return self.render_json_response({
             'id': image.pk,
             'alias': alias,
-            'revision': r,
+            'revision': revision_label,
             'url': iri_to_uri(url)
         })
 
@@ -171,16 +176,24 @@ class ImageRawThumbView(ImageDetailViewBase):
     def get(self, request, *args, **kwargs):
         image = self.get_object()
         alias = kwargs.pop('alias')
-        r = kwargs.pop('r')
-        opts = {
-            'revision_label': r,
-            'animated': 'animated' in self.request.GET,
-            'insecure': 'insecure' in self.request.GET,
-        }
+        revision_label = kwargs.pop('r', None)
 
         force = request.GET.get('force')
         if force is not None:
-            image.thumbnail_invalidate()
+            if revision_label in (None, 'None', 0, '0'):
+                image.thumbnail_invalidate()
+            else:
+                revision = ImageService(image).get_revision(revision_label)
+                revision.thumbnail_invalidate()
+
+        if revision_label is None:
+            revision_label = 'final'
+
+        opts = {
+            'revision_label': revision_label,
+            'animated': 'animated' in self.request.GET,
+            'insecure': 'insecure' in self.request.GET,
+        }
 
         sync = request.GET.get('sync')
         if sync is not None:
@@ -662,7 +675,6 @@ class ImageDetailView(ImageDetailViewBase):
             'like_this': like_this,
             'user_can_like': can_like(self.request.user, image),
             'bookmarked_this': bookmarked_this,
-            'min_index_to_like': settings.MIN_INDEX_TO_LIKE,
 
             'comments_number': NestedComment.objects.filter(
                 deleted=False,
@@ -675,6 +687,7 @@ class ImageDetailView(ImageDetailViewBase):
             'ssa': ssa,
             'deep_sky_data': deep_sky_data,
             'private_message_form': PrivateMessageForm(),
+            'promote_form': ImagePromoteForm(instance=image),
             'upload_revision_form': ImageRevisionUploadForm(),
             'upload_uncompressed_source_form': UncompressedSourceUploadForm(instance=image),
             'dates_label': _("Dates"),
@@ -683,6 +696,7 @@ class ImageDetailView(ImageDetailViewBase):
                              (image.subject_type != SubjectType.DEEP_SKY),
             'subjects': subjects,
             'subject_type': ImageService(image).get_subject_type_label(),
+            'hemisphere': ImageService(image).get_hemisphere(r),
             'license_icon': static('astrobin/icons/%s' % licenses[image.license][1]),
             'license_title': licenses[image.license][2],
             'resolution': '%dx%d' % (w, h) if (w and h) else None,
@@ -1008,11 +1022,12 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
     def post(self, request, *args, **kwargs):
         image = self.get_object()
         if image.is_wip:
+            skip_notifications = request.POST.get('skip_notifications', 'off').lower() == 'on'
             previously_published = image.published
             image.is_wip = False
             image.save(keep_deleted=True)
 
-            if not previously_published:
+            if not previously_published and not skip_notifications:
                 followers = [
                     x.user for x in
                     ToggleProperty.objects.toggleproperties_for_object(
@@ -1159,7 +1174,8 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
             square_cropping = ImageService(revision.image).get_default_cropping(revision.label)
 
         return {
-            'square_cropping': square_cropping
+            'square_cropping': square_cropping,
+            'mouse_hover_image': revision.image.mouse_hover_image
         }
 
     def get_success_url(self):

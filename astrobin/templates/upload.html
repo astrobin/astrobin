@@ -5,6 +5,7 @@
 {% load tags %}
 {% load astrobin_apps_premium_tags %}
 {% load staticfiles %}
+{% load common_tags %}
 
 {% block title %}{% trans "Upload" %}{% endblock %}
 
@@ -17,6 +18,29 @@
     {% if READONLY_MODE %}
         {% include 'readonly_mode.html' %}
     {% else %}
+        <div class="alert alert-warning">
+            <h4 class="alert-header">
+                <i class="icon-warning-sign"></i>
+                {% trans "Warning!" %}
+            </h4>
+
+            {% app_redirection_service request '/uploader' as beta_uploader_url %}
+            <p>
+                {% blocktrans trimmed with beta_uploader_url as url %}
+                    The classic uploader will be discontinued soon. If you are still using it, please begin using the
+                    <a href="{{ url }}">new uploader</a> instead.
+                {% endblocktrans %}
+            </p>
+
+            <p>
+                {% blocktrans trimmed with email="support@astrobin.com" %}
+                    If you experience any problems or need any help, please contact AstroBin at
+                    <a href="mailto:{{ email }}">{{ email }}</a>.
+                {% endblocktrans %}
+            </p>
+        </div>
+        <br/>
+
         <div class="page-header text-center">
             <h1>{% trans "Image upload" %}</h1>
         </div>
@@ -65,7 +89,7 @@
 
 
                     {% if not user|is_any_ultimate %}
-                        <a href="{% url 'subscription_list' %}">
+                        <a href="https://welcome.astrobin.com/pricing" target="_blank">
                             {% trans "Would you like to upgrade to a higher plan?" %}
                         </a>
                     {% endif %}
@@ -93,7 +117,8 @@
                                 </div>
                                 <form action="{% url 'image_upload_process' %}" method="post"
                                       enctype="multipart/form-data"> {% csrf_token %}
-                                    <input type="file" name="image_file" class="file" id="id_file" />
+                                    <input type="file" name="image_file" class="file" id="id_file"
+                                           accept=".jpg, .jpeg, .png, .gif" />
                                     <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
                                     <input type="hidden" name="wip" value="" />
                                 </form>
@@ -116,7 +141,8 @@
                                       enctype="multipart/form-data"> {% csrf_token %}
                                     <div class="row-fluid">
                                         <div class="span12">
-                                            <input type="file" name="image_file" class="file" id="id_file" />
+                                            <input type="file" name="image_file" class="file" id="id_file"
+                                                   accept=".jpg, .jpeg, .png, .gif" />
                                             <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
                                         </div>
                                     </div>

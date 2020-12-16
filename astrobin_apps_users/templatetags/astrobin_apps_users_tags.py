@@ -1,19 +1,21 @@
 # Django
-from django.conf import settings
-from django.core.cache import cache
+import logging
+
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.template import Library, Node
+from django.core.cache import cache
+from django.template import Library
 from django.utils.translation import ugettext_lazy as _
-
 # AstroBin apps
+from haystack.query import SearchQuerySet
+
 from astrobin.models import Image, UserProfile
 from astrobin_apps_premium.utils import premium_user_has_valid_subscription
-
 # Third party apps
 from astrobin_apps_users.services import UserService
 from toggleproperties.models import ToggleProperty
 
+log = logging.getLogger('apps')
 
 register = Library()
 
@@ -22,7 +24,7 @@ register = Library()
 def astrobin_username(context, user, **kwargs):
     if not hasattr(user, 'userprofile'):
         try:
-            user = UserProfile.objects.get(user__username = user).user
+            user = UserProfile.objects.get(user__username=user).user
         except UserProfile.DoesNotExist:
             return {'user': None}
 
@@ -38,7 +40,7 @@ def astrobin_username(context, user, **kwargs):
         user_metadata['is_iotd_reviewer'] = user.userprofile.is_iotd_reviewer()
         user_metadata['is_iotd_judge'] = user.userprofile.is_iotd_judge()
         user_metadata['is_premium'] = premium_user_has_valid_subscription(user)
-        cache.set(cache_key, user_metadata, 600)
+        cache.set(cache_key, user_metadata, 300)
     else:
         display_name = user_metadata['display_name']
         is_superuser = user_metadata['is_superuser']
@@ -91,20 +93,20 @@ def astrobin_username(context, user, **kwargs):
     return response
 
 
-@register.inclusion_tag('astrobin_apps_users/inclusion_tags/astrobin_user.html', takes_context = True)
+@register.inclusion_tag('astrobin_apps_users/inclusion_tags/astrobin_user.html', takes_context=True)
 def astrobin_user(context, user, **kwargs):
     request = context['request']
 
     user_ct = ContentType.objects.get_for_model(User)
-    images = Image.objects.filter(user = user)
+    images = Image.objects.filter(user=user)
     if request.user != user:
         images = images.exclude(UserService.corrupted_query())
 
     followers = ToggleProperty.objects.toggleproperties_for_object("follow", user).count()
     following = ToggleProperty.objects.filter(
-        property_type = "follow",
-        user = user,
-        content_type = user_ct).count()
+        property_type="follow",
+        user=user,
+        content_type=user_ct).count()
 
     request_user = None
     if request.user.is_authenticated():
@@ -138,7 +140,7 @@ def astrobin_user(context, user, **kwargs):
     }
 
 
-@register.inclusion_tag('astrobin_apps_users/inclusion_tags/user_list.html', takes_context = True)
+@register.inclusion_tag('astrobin_apps_users/inclusion_tags/user_list.html', takes_context=True)
 def astrobin_apps_users_list(context, user_list, **kwargs):
     request = context['request']
 
@@ -168,3 +170,31 @@ def astrobin_apps_users_list(context, user_list, **kwargs):
         'PREMIUM_ENABLED': context['PREMIUM_ENABLED'],
     }
 
+
+@register.filter
+def is_mutual_follower(a, b):
+    # type: (User, User) -> bool
+
+    user_ct = ContentType.objects.get_for_model(User)
+    a_b = ToggleProperty.objects.filter(property_type='follow', object_id=b.id, content_type=user_ct, user=a).exists()
+    b_a = ToggleProperty.objects.filter(property_type='follow', object_id=a.id, content_type=user_ct, user=b).exists()
+
+    return a_b and b_a
+
+
+@register.filter
+def contribution_index(user):
+    cache_key = "user_contribution_index.%d" % user.pk
+    contribution_index = cache.get(cache_key)
+
+    if contribution_index is None:
+        results = SearchQuerySet().models(User).filter(django_id=user.pk)
+        if not results.count():
+            log.warning("contribution_index filter: unable to get contribution_index for user %d" % user.pk)
+            return None
+
+        # DEPRECATED: remove once contribution_index is populated
+        contribution_index = results[0].reputation
+        cache.set(cache_key, contribution_index, 300)
+
+    return contribution_index

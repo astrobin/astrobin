@@ -118,6 +118,20 @@ class UtilsTest(TestCase):
 
         self.assertEquals(0, accounts.count())
 
+    def test_never_activated_accounts_to_be_deleted_userprofile_deleted(self):
+        u = Generators.user()
+        u.is_active = False
+        u.date_joined = timezone.now() - timedelta(22)
+        u.save()
+
+        u.userprofile.never_activated_account_reminder_sent = timezone.now()
+        u.userprofile.delete()
+        u.userprofile.save(keep_deleted=True)
+
+        accounts = utils.never_activated_accounts_to_be_deleted()
+
+        self.assertEquals(0, accounts.count())
+
     def test_never_activated_accounts_to_be_deleted_one_found(self):
         u = Generators.user()
         u.is_active = False

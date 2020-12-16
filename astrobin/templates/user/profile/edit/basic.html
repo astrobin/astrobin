@@ -29,7 +29,6 @@
                         {% comment %}We should use {% url 'password_change' %} or something.{% endcomment %}
                         <a class="btn btn-block-mobile" href="/accounts/password/change/">{% trans "Change your password" %}</a>
                         <a class="btn btn-block-mobile" href="{% url 'change_email_index' %}">{% trans "Change your e-mail" %}</a>
-                        <a class="btn btn-danger btn-block-mobile" href="{% url 'profile_delete' %}">{% trans "Delete account" %}</a>
                     </div>
                 </form>
             {% endif %} {# READONLY #}

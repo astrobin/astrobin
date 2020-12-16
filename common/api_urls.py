@@ -2,7 +2,8 @@ from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
 
 from common.views import ContentTypeList, ContentTypeDetail, UserList, UserDetail, UserProfileList, UserProfileDetail, \
-    CurrentUserProfileDetail, SubscriptionList, SubscriptionDetail, UserSubscriptionList, UserSubscriptionDetail
+    CurrentUserProfileDetail, SubscriptionList, SubscriptionDetail, UserSubscriptionList, UserSubscriptionDetail, \
+    TogglePropertyList, TogglePropertyDetail, PaymentList
 
 urlpatterns = (
     url(r'^contenttypes/$', ContentTypeList.as_view(), name='contenttype-list'),
@@ -10,6 +11,9 @@ urlpatterns = (
 
     url(r'^users/$', UserList.as_view(), name='user-list'),
     url(r'^users/(?P<pk>\d+)/$', UserDetail.as_view(), name='user-detail'),
+
+    url(r'^toggleproperties/$', TogglePropertyList.as_view(), name='toggleproperty-list'),
+    url(r'^toggleproperties/(?P<pk>\d+)/$', TogglePropertyDetail.as_view(), name='toggleproperty-detail'),
 
     # TODO: move these to AstroBin.
     url(r'^userprofiles/$', UserProfileList.as_view(), name='userprofile-list'),
@@ -21,6 +25,8 @@ urlpatterns = (
 
     url(r'^usersubscriptions/$', UserSubscriptionList.as_view(), name='usersubscription-list'),
     url(r'^usersubscriptions/(?P<pk>\d+)/$', UserSubscriptionDetail.as_view(), name='usersubscription-detail'),
+
+    url(r'^payments/$', PaymentList.as_view(), name='payment-list'),
 )
 
 # Format suffixes

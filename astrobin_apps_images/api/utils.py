@@ -9,6 +9,7 @@ import tempfile
 
 import six
 from django.core.cache import cache
+from safedelete.models import SafeDeleteModel
 
 from astrobin_apps_images.api import constants
 from astrobin_apps_images.api.compat import encode_base64
@@ -172,23 +173,26 @@ def checksum_matches(checksum_algorithm, checksum, bytes):
     return bytes_checksum == checksum
 
 
-def get_or_create_temporary_file(image):
-    if not get_cached_property("temporary-file-path", image):
-        fd, path = tempfile.mkstemp(prefix="tus-upload-")
+def get_or_create_temporary_file(object):
+    if not get_cached_property("temporary-file-path", object):
+        directory = "/astrobin-temporary-files/files"
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        fd, path = tempfile.mkstemp(prefix="tus-upload-", dir=directory)
         os.close(fd)
-        set_cached_property("temporary-file-path", image, path)
+        set_cached_property("temporary-file-path", object, path)
 
-    cached = get_cached_property("temporary-file-path", image)
+    cached = get_cached_property("temporary-file-path", object)
     return cached
 
 
-def write_data(image, bytes):
-    temporary_file_path = get_cached_property("temporary-file-path", image)
-    upload_offset = get_cached_property("offset", image)
+def write_data(object, bytes):
+    temporary_file_path = get_cached_property("temporary-file-path", object)
+    upload_offset = get_cached_property("offset", object)
     num_bytes_written = write_bytes_to_file(temporary_file_path, upload_offset, bytes, makedirs=True)
 
     if num_bytes_written > 0:
-        set_cached_property("offset", image, upload_offset + num_bytes_written)
+        set_cached_property("offset", object, upload_offset + num_bytes_written)
 
 
 def apply_headers_to_response(response, headers):
@@ -199,8 +203,28 @@ def apply_headers_to_response(response, headers):
 
 
 def get_cached_property(property, object):
-    return cache.get("tus-uploads/{}/{}/{}".format(object.__class__.__name__, object.pk, property))
+    result =  cache.get("tus-uploads/{}/{}/{}".format(object.__class__.__name__, object.pk, property))
+
+    if result is None:
+        model_field = _get_model_field(property)
+        if hasattr(object, model_field):
+            result = getattr(object, model_field)
+
+    return result
 
 def set_cached_property(property, object, value):
     cache.set("tus-uploads/{}/{}/{}".format(
         object.__class__.__name__, object.pk, property), value, constants.TUS_CACHE_TIMEOUT)
+
+    model_field = _get_model_field(property)
+    if hasattr(object, model_field):
+        setattr(object, model_field, value)
+
+        kwargs = {}
+        if issubclass(type(object), SafeDeleteModel):
+            kwargs['keep_deleted'] = True
+
+        object.save(kwargs)
+
+def _get_model_field(property):
+    return 'uploader_%s' % property.replace('-', '_')

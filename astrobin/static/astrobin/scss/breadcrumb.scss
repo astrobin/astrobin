@@ -1,0 +1,43 @@
+@import "variables";
+
+.breadcrumb {
+  position: relative;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-left: -30px;
+  margin-bottom: 20px;
+  width: 100%;
+  background-color: $grey-7;
+  border-radius: 6px 0;
+  line-height: 26px;
+
+  > li {
+    text-shadow: none;
+
+    .divider {
+      color: #555;
+    }
+
+    &:last-of-type {
+      font-weight: bold;
+      color: $white;
+      background: $blue;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-style: italic;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .pagination {
+    position: absolute;
+    margin: 0;
+    top: 6px;
+    right: 30px;
+  }
+}
+
+.has-subnav .breadcrumb {
+  border-radius: 0;
+}

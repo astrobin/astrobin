@@ -1,7 +1,12 @@
-# Python
 import datetime
+import logging
 
-# Django
+from braces.views import (
+    LoginRequiredMixin,
+    GroupRequiredMixin,
+    JSONResponseMixin,
+    SuperuserRequiredMixin,
+)
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -11,28 +16,22 @@ from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import View
 from django.views.generic.list import ListView
-
-# Third party
-from braces.views import (
-    LoginRequiredMixin,
-    GroupRequiredMixin,
-    JSONResponseMixin,
-    SuperuserRequiredMixin,
-)
 from pybb.models import Topic
+
+from astrobin.models import Image, UserProfile
+from astrobin.stories import add_story
+from astrobin_apps_images.services import ImageService
+from astrobin_apps_notifications.utils import push_notification
 from toggleproperties.models import ToggleProperty
 
-# AstroBin
-from astrobin.models import Image
-from astrobin.stories import add_story
-from astrobin_apps_notifications.utils import push_notification
+log = logging.getLogger('apps')
 
 
 class ImageModerationListView(LoginRequiredMixin, GroupRequiredMixin, ListView):
     group_required = "image_moderators"
     raise_exception = True
     model = Image
-    queryset = Image.objects_including_wip.filter(moderator_decision=0)
+    queryset = ImageService().get_images_pending_moderation()
     template_name = "moderation/image_list.html"
 
 
@@ -99,7 +98,10 @@ class ImageModerationBanAllView(LoginRequiredMixin, SuperuserRequiredMixin, JSON
     def post(self):
         images = Image.objects_including_wip.filter(moderator_decision=2)
         for i in images:
+            i.user.userprofile.deleted_reason = UserProfile.DELETE_REASON_IMAGE_SPAM
+            i.user.userprofile.save(keep_deleted=True)
             i.user.userprofile.delete()
+            log.info("User (%d) was deleted because of image spam" % i.user.pk)
 
         return self.render_json_response({
             'status': 'OK',
@@ -118,7 +120,11 @@ class ForumModerationMarkAsSpamView(LoginRequiredMixin, GroupRequiredMixin, View
             try:
                 topic = Topic.objects.get(id=id)
                 user = topic.user
+                user.userprofile.deleted_reason = UserProfile.DELETE_REASON_FORUM_SPAM
+                user.userprofile.save(keep_deleted=True)
                 user.userprofile.delete()
+                log.info("User (%d) was deleted because of forum spam" % user.pk)
+
             except Topic.DoesNotExist:
                 # Topic already deleted by deleting the user
                 pass

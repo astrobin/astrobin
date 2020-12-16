@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:06+0000\n"
+"POT-Creation-Date: 2020-12-10 21:48+0000\n"
 "PO-Revision-Date: 2020-05-30 22:21-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,6 +17,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3.1\n"
+
+msgid "Type your comment here..."
+msgstr ""
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -37,6 +40,14 @@ msgstr "Ainda não há comentários."
 msgid "(deleted)"
 msgstr "(excluído)"
 
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr ""
+
 msgid "Link"
 msgstr "Link"
 
@@ -52,14 +63,23 @@ msgstr "Editar"
 msgid "Reply"
 msgstr "Responder"
 
+msgid "Like"
+msgstr ""
+
+msgid "Unlike"
+msgstr ""
+
 msgid "The comment cannot be empty."
 msgstr "O comentário não pode estar vazio."
 
-msgid "Save"
-msgstr "Salvar"
+msgid "Submit"
+msgstr ""
 
-msgid "(comment deleted)"
-msgstr "(comentário excluído)"
+#~ msgid "Save"
+#~ msgstr "Salvar"
 
-msgid "There doesn't seem to be anything here."
-msgstr "Parece não haver nada aqui."
+#~ msgid "(comment deleted)"
+#~ msgstr "(comentário excluído)"
+
+#~ msgid "There doesn't seem to be anything here."
+#~ msgstr "Parece não haver nada aqui."

@@ -10,7 +10,7 @@ class ImageEditBasicFormTest(TestCase):
     def __get_valid_data(self, update={}):
         data = {
             "title": "My image",
-            "acquisition_type": "TRADITIONAL",
+            "acquisition_type": "REGULAR",
             "data_source": "BACKYARD",
             "subject_type": SubjectType.OTHER,
         }

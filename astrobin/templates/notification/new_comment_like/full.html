@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% blocktrans trimmed with comment=comment|truncatechars:100 %}
+    <a href="{{user_url}}">{{user}}</a> likes your comment: <a href="{{url}}">{{comment}}</a>.
+{% endblocktrans %}

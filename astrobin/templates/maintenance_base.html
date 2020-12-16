@@ -11,13 +11,7 @@
     <head>
         <title>{% block title %}AstroBin{% endblock %}</title>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <meta name="author" content="Salvatore Iovene - http://iovene.com/" />
-        <meta name="description" content="AstroBin is an image hosting website specifically targeted to astrophotographers: it's the first and the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." />
-        <meta name="keywords" content="astrophotography, astronomy, telescopes" />
-        <meta name="robots" content="index, follow, noarchive" />
-        <meta name="googlebot" content="noarchive" />
+        {% include "base/meta.html" %}
 
         <link rel="shortcut icon" href="{% static 'astrobin/favicon.ico' %}" type="image/x-icon">
         <link rel="icon" href="{% static 'astrobin/favicon.ico' %}" type="image/x-icon">
@@ -48,7 +42,7 @@
         {% include "base/ga.html" %}
     </head>
 
-    <body data-offset="55">
+    <body data-offset="60">
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
@@ -96,19 +90,23 @@
                                             {% trans "Advanced search" %}
                                         </a>
                                     </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="{% url 'stats' %}">
-                                            <i class="icon-bar-chart"></i>
-                                            {% trans "Stats" %}
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'trending_astrophotographers' %}">
-                                            <i class="icon-list-ol"></i>
-                                            {% trans "Trending astrophotographers" %}
-                                        </a>
-                                    </li>
+
+                                    {% show_competitive_feature request.user None as show_competitive_feature %}
+                                    {% if show_competitive_feature or request.user.is_superuser %}
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="{% url 'stats' %}">
+                                                <i class="icon-bar-chart"></i>
+                                                {% trans "Stats" %}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'astrophotographers_list' %}">
+                                                <i class="icon-list-ol"></i>
+                                                {% trans "Astrophotographers list" %}
+                                            </a>
+                                        </li>
+                                    {% endif %}
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -333,64 +331,7 @@
             {% block content %}{% endblock %}
         </div> <!-- container -->
 
-        <footer>
-            {% block footer %}
-            <div class="container">
-                <div class="row hidden-phone">
-                    <div class="span3">
-                        <h3>{% trans "About" %}</h3>
-                        <p>
-                        {% trans "AstroBin is an image hosting website specifically targeted to astrophotographers: it's the first and the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." %}
-                        </p>
-                    </div>
-                    <div class="span3">
-                        <h3>{% trans "Site links" %}</h3>
-                        <ul>
-                            <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
-                            <li><a href="/blog/">{% trans "Blog" %}</a></li>
-                            <li><a href="{% url 'pybb:index' %}">{% trans "Forum" %}</a></li>
-                            <li><a href="https://welcome.astrobin.com/about" target="_blank">{% trans "About" %}</a></li>
-                            <li><a href="https://welcome.astrobin.com/faq" target="_blank">{% trans "FAQ" %}</a></li>
-                            <li><a href="https://welcome.astrobin.com/terms-of-service" target="_blank">{% trans "Terms of servic" %}</a></li>
-                            <li><a href="https://welcome.astrobin.com/community-guidelines" target="_blank">{% trans "Guidelines" %}</a></li>
-                            <li><a href="https://welcome.astrobin.com/sponsors-and-partners" target="_blank">{% trans "Sponsors" %}</a></li>
-                            <li>
-                                <a href="https://bitbucket.org/siovene/astrobin/overview" target="_blank">
-                                    {% trans "Source code" %}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="span3">
-                        <h3>{% trans "Thanks to" %}</h3>
-                        <ul>
-                            <li>{% trans "The localization team" %}: <a href="/users/PepeChambo">Jos&eacute; J. Chamb&oacute;</a>, <a href="/users/Tannhauser">Jean-Charles Schmidt</a>, <a href="/users/OrionRider">Laurent Schmitz</a>, <a href="/users/Vostok/">Lauri Kangas</a>, <a href="/users/naavis/">Samuli Vuorinen</a>, <a href="/users/ketarax/">Jussi Kantola</a>, <a href="/users/KoenDierckens/">Koen Dierckens</a>, <a href="http://lambermont.dyndns.org/astro/" target="_blank">Hans Lambermont</a>, <a href="http://strehl1.de" target="_blank">Michael Wilk</a>, <a href="/users/stimpy/">Marc Demierre</a>, <a href="/users/kalle66/">Rinke Kallenkoot</a>, <a href="/users/leonh/">Leon Handreke</a>, <a href="/users/bilgebay/">Sedat Bilgebay</a>, <a href="/users/onuratilgan/">Onur Atilgan</a>, <a href="/users/guvenozkan/">Güven Özkan</a>, <a href="/users/castle/">Ahmet Kale</a>, <a href="/users/AstroAlb/">Ardian Xherrahi</a>, <a href="/users/milosz/">Milosz Wasilewski</a>, <a href="/users/GlaucoH/">Glauco Hass</a>, <a href="/users/kookoo_gr/">Konstantinos Stavropoulos</a>, <a href="/users/sypai/">Pavel Syrin</a>, <a href="/users/ohmishonin/">Ken-ichiro Tanaka</a>.</li>
-                            <li><a href="http://astrometry.net/" target="_blank">Astrometry.net</a></li>
-                        </ul>
-                    </div>
-                    <div class="span3">
-                        <h3>{% trans "Copyright" %}</h3>
-                        <p>
-                        {% blocktrans %}AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights Reserved. The images on this websites are copyright of their respective owners.{% endblocktrans %}
-                        </p>
-                    </div>
-                </div> <!-- row -->
-
-                <div class="row bottom">
-                    <div class="span8">
-                        <p>&copy; 2010-2012 <a href="/users/siovene/">Salvatore Iovene</a><br/>
-                    </div>
-                    <div class="span4">
-                        <a href="{% url 'index' %}">{% trans "Home" %}</a> /
-                        <a href="https://facebook.com/astrobin" target="_blank">Facebook</a> /
-                        <a href="https://instagram.com/astrobin_com" target="_blank">Instagram</a> /
-                        <a href="https://twitter.com/astrobin_com" target="_blank">Twitter</a> /
-                        <a href="#top" class="back-to-top">{% trans "Back to top" %}</a>
-                    </div>
-                </div> <!-- row -->
-            </div> <!-- container -->
-            {% endblock %}
-        </footer>
+        {% include "base/footer.html" %}
 
         {% block modals %}{% endblock %}
 

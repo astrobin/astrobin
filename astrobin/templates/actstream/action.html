@@ -7,10 +7,12 @@
 {% load common_tags %}
 {% load staticfiles %}
 
+{% get_current_language as LANGUAGE_CODE %}
+{% get_actstream_action_template_fragment_cache_key action LANGUAGE_CODE as CACHE_KEY %}
+
 {% if action.verb|startswith:"VERB_" and user.username != '' %}
 
-<div class="action"
-     id="{{action.verb}}.{{action.actor.pk}}.{{action.action_object.pk}}{% if action.target %}.{{action.target.pk}}{% endif %}">
+<div class="action" id="{{ CACHE_KEY }}">
 
     {% comment %}
       The like mini-button is outside of the cache section because we cache for all
@@ -21,15 +23,13 @@
         {% with image=action.action_object %}
             {% include 'actstream/_action_image_like.html' %}
         {% endwith %}
-    {% endif %}
-
-    {% if action.target|get_class == 'Image' %}
+    {% elif action.target|get_class == 'Image' %}
         {% with image=action.target %}
             {% include 'actstream/_action_image_like.html' %}
         {% endwith %}
     {% endif %}
 
-    {% cache 600 actstream_action action.verb action.actor action.action_object action.target user_language %}
+    {% cache 600 actstream_action CACHE_KEY %}
 
     {% if action.verb == 'VERB_UPLOADED_IMAGE' %}
         {% with image=action.action_object user=action.actor %}

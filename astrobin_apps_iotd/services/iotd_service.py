@@ -19,3 +19,10 @@ class IotdService:
             .filter(
             Q(iotd=None) |
             Q(iotd__date__gt=datetime.now().date())).order_by('-published')
+
+    def get_top_pick_nominations(self):
+        return Image.objects.filter(
+            corrupted=False,
+            iotdvote__isnull=True,
+            iotdsubmission__isnull=False,
+        ).order_by('-published').distinct()

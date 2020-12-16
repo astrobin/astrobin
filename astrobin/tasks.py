@@ -7,7 +7,6 @@ import tempfile
 import zipfile
 from StringIO import StringIO
 from datetime import datetime, timedelta
-from tempfile import _TemporaryFileWrapper
 from time import sleep
 from zipfile import ZipFile
 
@@ -111,6 +110,11 @@ def contain_imagecache_size():
     subprocess.call(['scripts/contain_directory_size.sh', '/media/imagecache', '120'])
 
 
+@shared_task()
+def contain_temporary_files_size():
+    subprocess.call(['scripts/contain_directory_size.sh', '/astrobin-temporary-files/files', '120'])
+
+
 """
 This task will delete all inactive accounts with bounced email
 addresses.
@@ -152,11 +156,9 @@ def retrieve_thumbnail(pk, alias, options):
             field.name = 'images/' + field.name
         cache_key = image.thumbnail_cache_key(field, alias)
         cache.set(cache_key, url, 60 * 60 * 24 * 365)
-        logger.debug("Image %d: saved generated thumbnail in the cache." % image.pk)
         thumbnails, created = ThumbnailGroup.objects.get_or_create(image=image, revision=revision_label)
         setattr(thumbnails, alias, url)
         thumbnails.save()
-        logger.debug("Image %d: saved generated thumbnail in the database." % image.pk)
         cache.delete('%s.retrieve' % cache_key)
 
     if acquire_lock():
@@ -189,9 +191,9 @@ def retrieve_primary_thumbnails(pk, options):
         retrieve_thumbnail.delay(pk, alias, options)
 
 
-@shared_task()
-def update_index():
-    call_command('update_index', '-k 4', '-b 100', '--remove', '--age=24')
+@shared_task(time_limit=120)
+def update_index_images_1h():
+    call_command('update_index', 'astrobin.Image', '-b 100', '--age=1')
 
 
 @shared_task()
@@ -204,24 +206,30 @@ def send_missing_remote_source_notifications():
     call_command("send_missing_remote_source_notifications")
 
 
-@shared_task(rate_limit="1/s")
-def send_broadcast_email(broadcastEmail, recipients):
-    for recipient in list(recipients):
+@shared_task(rate_limit="3/s")
+def send_broadcast_email(broadcast_email_id, recipients):
+    try:
+        broadcast_email = BroadcastEmail.objects.get(id=broadcast_email_id)
+    except BroadcastEmail.DoesNotExist:
+        logger.error("Attempted to send broadcast email that does not exist: %d" % broadcast_email_id)
+        return
+
+    for recipient in recipients:
         msg = EmailMultiAlternatives(
-            broadcastEmail.subject,
-            broadcastEmail.message,
+            broadcast_email.subject,
+            broadcast_email.message,
             settings.DEFAULT_FROM_EMAIL,
             [recipient])
-        msg.attach_alternative(broadcastEmail.message_html, "text/html")
+        msg.attach_alternative(broadcast_email.message_html, "text/html")
         msg.send()
-
+        logger.info("Email sent to %s: %s" % (recipient.email, broadcast_email.subject))
 
 @shared_task()
 def send_inactive_account_reminder():
     try:
         email = BroadcastEmail.objects.get(subject="We miss your astrophotographs!")
         recipients = inactive_accounts()
-        send_broadcast_email.delay(email, recipients.values_list('user__email', flat=True))
+        send_broadcast_email.delay(email, list(recipients.values_list('user__email', flat=True)))
         recipients.update(inactive_account_reminder_sent=timezone.now())
     except BroadcastEmail.DoesNotExist:
         pass
@@ -243,7 +251,7 @@ def send_never_activated_account_reminder():
         user.userprofile.never_activated_account_reminder_sent = timezone.now()
         user.userprofile.save()
 
-        logger.debug("Sent 'never activated account reminder' to %s" % user.username)
+        logger.debug("Sent 'never activated account reminder' to %d" % user.pk)
 
 
 @shared_task()
@@ -257,12 +265,12 @@ def delete_never_activated_accounts():
 def prepare_download_data_archive(request_id):
     # type: (str) -> None
 
-    logger.debug("prepare_download_data_archive: called for request %d" % request_id)
+    logger.info("prepare_download_data_archive: called for request %d" % request_id)
 
     data_download_request = DataDownloadRequest.objects.get(id=request_id)
 
     try:
-        temp_zip = tempfile.NamedTemporaryFile()  # type: _TemporaryFileWrapper
+        temp_zip = tempfile.NamedTemporaryFile()
         temp_csv = StringIO()  # type: StringIO
         archive = zipfile.ZipFile(temp_zip, 'w', zipfile.ZIP_DEFLATED, allowZip64=True)  # type: ZipFile
 
@@ -351,11 +359,11 @@ def prepare_download_data_archive(request_id):
                                     )
                                 )
                     except Exception as e:
-                        logger.exception("prepare_download_data_archive error: %s" % e.message)
+                        logger.warning("prepare_download_data_archive error: %s" % e.message)
                         logger.debug("prepare_download_data_archive: skipping revision %s" % label)
                         continue
             except Exception as e:
-                logger.exception("prepare_download_data_archive error: %s" % e.message)
+                logger.warning("prepare_download_data_archive error: %s" % e.message)
                 logger.debug("prepare_download_data_archive: skipping image %s" % id)
                 continue
 
@@ -406,7 +414,7 @@ def prepare_download_data_archive(request_id):
         data_download_request.file_size = sum([x.file_size for x in archive.infolist()])
         data_download_request.zip_file.save("", File(temp_zip))
 
-        logger.debug("prepare_download_data_archive: completed for request %d" % request_id)
+        logger.info("prepare_download_data_archive: completed for request %d" % request_id)
     except Exception as e:
         logger.exception("prepare_download_data_archive error: %s" % e.message)
         data_download_request.status = "ERROR"

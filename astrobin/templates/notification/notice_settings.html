@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
+{% load astrobin_apps_notifications_tags %}
 
 {% block title %}{% trans "Notification settings" %}{% endblock %}
 
@@ -27,7 +28,7 @@
             </thead>
             <tbody>
                 {% for row in notice_settings.rows %}
-                    {% if row.notice_type.label != 'test_notification' %}
+                    {% if row.notice_type.label|show_notice_settings %}
                         <tr class="notice-row">
                             <td class="notification-type">
                                 {% trans row.notice_type.display %}

@@ -1,12 +1,15 @@
 {% load i18n %}
+
 {% url 'astrobin_apps_notifications.settings' as pref_url %}
+{% url 'astrobin_apps_notifications.settings' as notices_url %}
+
 {% blocktrans %}Hi! You have a new notification on AstroBin:
 
 {{ message }}
 
-To see all your notifications, please go to {{notices_url}}.
+To see all your notifications, please go to {{base_url}}{{notices_url}}.
 
-If you don't want to receive emails anymore, edit your preferences by going to http://astrobin.com{{pref_url}}.
+If you don't want to receive emails anymore, edit your preferences by going to {{base_url}}{{pref_url}}.
 
 PLEASE DO NOT REPLY TO THIS EMAIL
 

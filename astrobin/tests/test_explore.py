@@ -124,7 +124,7 @@ class ExploreTest(TestCase):
         response = self.client.get(reverse_lazy('top_picks'))
         self.assertContains(response, self.image.title)
 
-        response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=traditional')
+        response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=regular')
         self.assertContains(response, self.image.title)
 
         response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=eaa')
@@ -134,26 +134,26 @@ class ExploreTest(TestCase):
         self.image.save(keep_deleted=True)
         response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=eaa')
         self.assertContains(response, self.image.title)
-        response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=traditional')
+        response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=regular')
         self.assertNotContains(response, self.image.title)
 
         self.image.acquisition_type = 'LUCKY'
         self.image.save(keep_deleted=True)
         response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=lucky')
         self.assertContains(response, self.image.title)
-        response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=traditional')
+        response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=regular')
         self.assertNotContains(response, self.image.title)
 
         self.image.acquisition_type = 'DRAWING'
         self.image.save(keep_deleted=True)
         response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=drawing')
         self.assertContains(response, self.image.title)
-        response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=traditional')
+        response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=regular')
         self.assertNotContains(response, self.image.title)
 
         self.image.acquisition_type = 'OTHER'
         self.image.save(keep_deleted=True)
         response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=other')
         self.assertContains(response, self.image.title)
-        response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=traditional')
+        response = self.client.get(reverse_lazy('top_picks') + '?acquisition_type=regular')
         self.assertNotContains(response, self.image.title)

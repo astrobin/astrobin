@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:06+0000\n"
+"POT-Creation-Date: 2020-12-10 21:48+0000\n"
 "PO-Revision-Date: 2014-01-27 06:19+0000\n"
 "Last-Translator: mychat_aa <mychat.aa@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1390803583.295336\n"
+
+msgid "Type your comment here..."
+msgstr ""
 
 msgid "Cancel"
 msgstr "取消"
@@ -37,6 +40,14 @@ msgstr "現在還沒有評論"
 msgid "(deleted)"
 msgstr "(已刪除)"
 
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr ""
+
 msgid "Link"
 msgstr "連結"
 
@@ -52,17 +63,26 @@ msgstr "編輯"
 msgid "Reply"
 msgstr "回覆"
 
+msgid "Like"
+msgstr ""
+
+msgid "Unlike"
+msgstr ""
+
 msgid "The comment cannot be empty."
 msgstr "評論不能是空的"
 
-msgid "Save"
-msgstr "儲存"
+msgid "Submit"
+msgstr ""
 
-msgid "(comment deleted)"
-msgstr "(評論已刪除)"
+#~ msgid "Save"
+#~ msgstr "儲存"
 
-msgid "There doesn't seem to be anything here."
-msgstr "似乎沒有任何東西在這裡。"
+#~ msgid "(comment deleted)"
+#~ msgstr "(評論已刪除)"
+
+#~ msgid "There doesn't seem to be anything here."
+#~ msgstr "似乎沒有任何東西在這裡。"
 
 #~ msgid "Formatting help"
 #~ msgstr "格式使用幫助"

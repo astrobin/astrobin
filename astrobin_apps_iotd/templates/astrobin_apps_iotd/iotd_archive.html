@@ -20,6 +20,9 @@
 
 {% block content %}
     <a class="anchor" name="page_anchor"></a>
+
+    {% include "ads/full_width_wide_ad.html" %}
+
     {% for iotd in object_list %}
         <div class="iotd-archive-image">
             {% astrobin_image iotd.image 'iotd' %}

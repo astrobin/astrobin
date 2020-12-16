@@ -1,10 +1,14 @@
+from datetime import timedelta, datetime
+
 from django.conf import settings
 
 from astrobin.enums import SubjectType
 from astrobin.fields import COUNTRIES
 from astrobin.models import Image
 from astrobin.utils import get_client_country_code
+from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import get_unseen_notifications
+from astrobin_apps_users.services import UserService
 
 
 def notices_count(request):
@@ -22,7 +26,7 @@ def user_language(request):
     }
     if request.user.is_authenticated():
         profile = request.user.userprofile
-        d['user_language'] = profile.language
+        d['user_language'] = profile.language if profile.language else "en"
 
     return d
 
@@ -41,8 +45,9 @@ def user_profile(request):
 
 def user_scores(request):
     scores = {
-        'user_scores_index': 0,
-        'user_scores_followers': 0,
+        'user_scores_index': None,
+        'user_scores_contribution_index': None,
+        'user_scores_followers': None,
     }
 
     if request.user.is_authenticated():
@@ -57,17 +62,27 @@ def common_variables(request):
 
     get_and_set_user_agent(request)
 
-    bounced = False
+    hard_bounces = None
+    soft_bounces = None
     complained = False
 
     if request.user.is_authenticated():
-        bounced = Bounce.objects.filter(address=request.user.email, bounce_type="Permanent").exists()
+        hard_bounces = Bounce.objects.filter(
+            hard=True,
+            address=request.user.email,
+            bounce_type="Permanent")
+        soft_bounces = Bounce.objects.filter(
+            hard=False,
+            address=request.user.email,
+            bounce_type="Transient",
+            created_at__gte=datetime.now() - timedelta(days=7))[:3]
         complained = Complaint.objects.filter(address=request.user.email).exists()
 
     d = {
         'True': True,
         'False': False,
 
+        'STATIC_URL': settings.STATIC_URL,
         'LANGUAGE_CODE': request.LANGUAGE_CODE if hasattr(request, "LANGUAGE_CODE") else "en",
         'DEBUG_MODE': settings.DEBUG,
         'REQUEST_COUNTRY': get_client_country_code(request),
@@ -76,6 +91,9 @@ def common_variables(request):
         'MEDIA_URL': settings.MEDIA_URL,
         'ADS_ENABLED': settings.ADS_ENABLED,
         'ADSENSE_ENABLED': settings.ADSENSE_ENABLED,
+        'ADMANAGER_PUBLISHER_ID': settings.ADMANAGER_PUBLISHER_ID,
+        'NATIVE_RESPONSIVE_WIDE_SLOT': settings.NATIVE_RESPONSIVE_WIDE_SLOT,
+        'NATIVE_RESPONSIVE_RECTANGULAR_SLOT': settings.NATIVE_RESPONSIVE_RECTANGULAR_SLOT,
         'DONATIONS_ENABLED': settings.DONATIONS_ENABLED,
 
         'PREMIUM_ENABLED': settings.PREMIUM_ENABLED,
@@ -106,10 +124,25 @@ def common_variables(request):
         'GOOGLE_ANALYTICS_ID': settings.GOOGLE_ANALYTICS_ID,
         'GOOGLE_ADS_ID': settings.GOOGLE_ADS_ID,
         'READONLY_MODE': settings.READONLY_MODE,
-        'HAS_BOUNCED_EMAILS': bounced,
+        'HARD_BOUNCES': hard_bounces,
+        'SOFT_BOUNCES': soft_bounces,
         'HAS_COMPLAINT': complained,
         'COUNTRIES': COUNTRIES,
         'COOKIELAW_ACCEPTED': request.COOKIES.get('cookielaw_accepted', False),
+        'HAS_RECOVERED_IMAGES': request.user.is_authenticated() and \
+                                UserService(request.user).get_recovered_images().exists(),
+        'AUTOMATIC_RECOVERY_CONFIRMATION_BEGINS': Image.all_objects.filter(
+            user=request.user,
+            corrupted=True,
+            recovered__isnull=False).order_by('recovered').first().recovered + timedelta(days=14) \
+            if request.user.is_authenticated() and \
+               Image.all_objects.filter(
+                   user=request.user,
+                   corrupted=True,
+                   recovered__isnull=False).exists() \
+            else None,
+
+        'min_index_to_like': settings.MIN_INDEX_TO_LIKE,
 
         'enums': {
             'SubjectType': SubjectType,
@@ -117,6 +150,6 @@ def common_variables(request):
     }
 
     if request.user.is_authenticated() and request.user.userprofile.is_image_moderator():
-        d['images_pending_moderation_no'] = Image.objects_including_wip.filter(moderator_decision=0).count()
+        d['images_pending_moderation_no'] = ImageService().get_images_pending_moderation().count()
 
     return d

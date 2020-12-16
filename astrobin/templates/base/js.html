@@ -45,6 +45,7 @@
 
     $(document).ready(function() {
         astrobin_common.init();
+        astrobin_common.setup_user_popovers();
 
         $('input:checkbox, input:radio, input:file').uniform(
             {fileDefaultText: '{% trans "No file selected" %}',

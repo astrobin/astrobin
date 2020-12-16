@@ -6,7 +6,13 @@
 {% load staticfiles %}
 
 {% if status != 'error' %}
-    <div class="astrobin-image-container{% if classes %} {{classes}}{% endif %}{% if image.is_wip %} wip{% endif %}">
+    <div class="astrobin-image-container
+            {% if classes %} {{classes}}{% endif %}
+            {% if image.is_wip %} wip{% endif %}
+            {% if corrupted %} corrupted{% endif %}
+            {% if recovered %} recovered{% endif %}
+            {% if is_revision %} revision{% endif %}"
+    >
         {% if error_message %}
             <div class="alert alert-error">
                 <h4 class="alert-heading">
@@ -27,36 +33,27 @@
                     <ul class="badges">
                         {% for badge in badges %}
                             {% if badge == 'iotd' and alias != 'regular' and alias != 'regular_sharpened' %}
-                                <li class="iotd-badge">
-                                    <h2>
-                                        <i class="icon iotd-badge icon-trophy"></i>
-                                    </h2>
+                                <li>
+                                    <i class="icon-trophy iotd-badge badge"></i>
                                 </li>
                             {% endif %}
 
                             {% if badge == 'top-pick' %}
-                                <li class="top-pick-badge{% if alias == 'regular' or alias == 'regular_sharpened' %} top-pick-badge-large{% endif %}">
-                                    <h2>
-                                        <span>Top</span>
-                                        <span>pick</span>
-                                    </h2>
+                                <li>
+                                    <i class="icon-star top-pick-badge badge"></i>
+                                </li>
+                            {% endif %}
+
+                            {% if badge == 'top-pick-nomination' %}
+                                <li>
+                                    <i class="icon-arrow-up top-pick-nomination-badge badge"></i>
                                 </li>
                             {% endif %}
 
                             {% if badge == 'wip' %}
-                                <li class="wip-badge{% if alias == 'regular' or alias == 'regular_sharpened' %} wip-badge-large{% endif %}">
-                                    <h2>
-                                        <i class="icon icon-lock" rel="tooltip" title="{% trans "Staging area" %}"></i>
-                                    </h2>
-                                </li>
-                            {% endif %}
-
-                            {% if badge == 'top100' %}
-                                <li class="top100-badge{% if alias == 'regular' or alias == 'regular_sharpened' %} top100-badge-large{% endif %}">
-                                    <h2>
-                                        <span>Top</span>
-                                        <span>100</span>
-                                    </h2>
+                                <li>
+                                    <i class="icon-lock wip-badge badge"
+                                       rel="tooltip" data-placement="right" title="{% trans "Staging area" %}"></i>
                                 </li>
                             {% endif %}
                         {% endfor %}
@@ -93,6 +90,9 @@
                      data-id="{{image.id}}"
                      data-alias="{{alias}}"
                      data-revision="{{revision}}"
+                     {% if is_revision %}
+                        data-revision-id="{{ revision_id }}"
+                     {% endif %}
                      data-get-thumb-url="{{get_thumb_url}}"
                      
                      data-hires-loaded="false"
@@ -109,7 +109,7 @@
                         <h3>{{ image.title | escape | default:_("(no title)") }}</h3>
                         <h4>{% astrobin_username image.user link=False %}</h4>
                         {% if alias == 'gallery' %}
-                            {% cache 43200 astrobin_image_caption caption_cache_key %}
+                            {% cache 300 astrobin_image_caption caption_cache_key %}
                             <table class="table table-condensed">
                                 <tr>
                                     <th><i class="icon-calendar"></i></th>
@@ -133,6 +133,23 @@
                                     <th><i class="icon-th"></i></th>
                                     <td>{{ image.revisions.count }}</td>
                                 </tr>
+
+                                {% if badges %}
+                                    <tr>
+                                        <th class="caption-badge">
+                                            {% if 'iotd' in badges %}<i class="icon-trophy"></i>
+                                            {% elif 'top-pick' in badges %}<i class="icon-star"></i>
+                                            {% elif 'top-pick-nomination' in badges %}<i class="icon-arrow-up"></i>
+                                            {% elif 'wip' in badges %}<i class="icon-lock"></i>{% endif %}
+                                        </th>
+                                        <td colspan="3" class="caption-badge">
+                                            {% if 'iotd' in badges %}{% trans "Image of the day" %}
+                                            {% elif 'top-pick' in badges %}{% trans "Top pick" %}
+                                            {% elif 'top-pick-nomination' in badges %}{% trans "Top pick nomination" %}
+                                            {% elif 'wip' in badges %}{% trans "Staging area" %}{% endif %}
+                                        </td>
+                                    </tr>
+                                {% endif %}
                             </table>
                             {% endcache %}
                         {% endif %}

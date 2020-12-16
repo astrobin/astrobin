@@ -1,32 +1,50 @@
 import datetime
-import logging
 
 from celery_haystack.indexes import CelerySearchIndex
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.core.cache import cache
+from django.db.models.functions import Length
 from haystack.constants import Indexable
 from haystack.fields import CharField, IntegerField, FloatField, DateTimeField, BooleanField, MultiValueField
 from hitcount.models import HitCount
 from pybb.models import Post, Topic
 
-from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.models import DeepSky_Acquisition
 from astrobin.models import Image
 from astrobin.models import SolarSystem_Acquisition
+from astrobin_apps_iotd.services import IotdService
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
-log = logging.getLogger('apps')
+PREPARED_FIELD_CACHE_EXPIRATION = 3600
+PREPARED_MOON_PHASE_CACHE_KEY = 'search_index_prepared_moon_phase.%d'
+PREPARED_VIEWS_CACHE_KEY = 'search_index_prepared_views.%d'
+PREPARED_BOOKMARKS_CACHE_KEY = 'search_index_prepared_bookmarks.%d'
+PREPARED_LIKES_CACHE_KEY = 'search_index_prepared_likes.%d'
+PREPARED_COMMENTS_CACHE_KEY = 'search_index_prepared_comments.%d'
+PREPARED_INTEGRATION_CACHE_KEY = 'search_index_prepared_integration.%d'
+
+def _average(values):
+    length = len(values)
+    if length > 0:
+        return sum(values) / float(length)
+    return 0
 
 
-def _get_integration(image):
-    deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
+def _astrobin_index(values):
+    import math
+    return _average(values) * math.log(len(values) + 1, 10)
+
+
+def _prepare_integration(obj):
+    deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj)
     solar_system_acquisition = None
     integration = 0
 
     try:
-        solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=image)
-    except:
+        solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=obj)
+    except SolarSystem_Acquisition.DoesNotExist:
         pass
 
     if deep_sky_acquisitions:
@@ -34,17 +52,89 @@ def _get_integration(image):
             if a.duration and a.number:
                 integration += (a.duration * a.number)
     elif solar_system_acquisition:
-        return 0
+        integration = 0
 
+    cache.set(PREPARED_INTEGRATION_CACHE_KEY % obj.pk, integration, PREPARED_FIELD_CACHE_EXPIRATION)
     return integration
 
 
-def _prepare_likes(obj):
-    return ToggleProperty.objects.toggleproperties_for_object("like", obj).count()
+def _prepare_comment_contribution_index(comments):
+    min_comment_length = 150
+    min_likes = 3
 
+    all_comments = comments \
+        .annotate(length=Length('text')) \
+        .filter(deleted=False, length__gte=min_comment_length)
+
+    all_comments_with_enough_likes = [x for x in all_comments if len(x.likes) >= min_likes]
+    all_comments_count = len(all_comments_with_enough_likes)
+
+    if all_comments_count == 0:
+        return 0
+
+    all_likes = 0
+    for comment in all_comments_with_enough_likes:
+        all_likes += len(comment.likes)
+
+    average = all_likes / float(all_comments_count)
+    normalized = []
+
+    for comment in all_comments_with_enough_likes:
+        likes = len(comment.likes)
+        if likes >= average:
+            normalized.append(likes)
+
+    if len(normalized) == 0:
+        return 0
+
+    return _astrobin_index(normalized)
+
+
+def _prepare_forum_post_contribution_index(posts):
+    min_post_length = 150
+    min_likes = 3
+
+    all_posts = posts \
+        .annotate(length=Length('body')) \
+        .filter(length__gte=min_post_length)
+
+    all_posts_with_enough_likes = [
+        x \
+        for x in all_posts \
+        if ToggleProperty.objects.toggleproperties_for_object('like', x).count() >= min_likes
+    ]
+    all_posts_count = len(all_posts_with_enough_likes)
+
+    if all_posts_count == 0:
+        return 0
+
+    all_likes = 0
+    for post in all_posts_with_enough_likes:
+        all_likes += ToggleProperty.objects.toggleproperties_for_object('like', post).count()
+
+    average = all_likes / float(all_posts_count)
+    normalized = []
+
+    for post in all_posts_with_enough_likes:
+        likes = ToggleProperty.objects.toggleproperties_for_object('like', post).count()
+        if likes >= average:
+            normalized.append(likes)
+
+    if len(normalized) == 0:
+        return 0
+
+    return _astrobin_index(normalized)
+
+
+def _prepare_likes(obj):
+    result = ToggleProperty.objects.toggleproperties_for_object("like", obj).count()
+    cache.set(PREPARED_LIKES_CACHE_KEY % obj.pk, result, PREPARED_FIELD_CACHE_EXPIRATION)
+    return result
 
 def _prepare_bookmarks(obj):
-    return ToggleProperty.objects.toggleproperties_for_object("bookmark", obj).count()
+    result = ToggleProperty.objects.toggleproperties_for_object("bookmark", obj).count()
+    cache.set(PREPARED_BOOKMARKS_CACHE_KEY % obj.pk, result, PREPARED_FIELD_CACHE_EXPIRATION)
+    return result
 
 
 def _prepare_moon_phase(obj):
@@ -63,7 +153,9 @@ def _prepare_moon_phase(obj):
         # show up in any searches.
         return 0
 
-    return sum(moon_illuminated_list) / float(len(moon_illuminated_list))
+    result = sum(moon_illuminated_list) / float(len(moon_illuminated_list))
+    cache.set(PREPARED_MOON_PHASE_CACHE_KEY % obj.pk, result, PREPARED_FIELD_CACHE_EXPIRATION)
+    return result
 
 
 def _prepare_first_acquisition_date(obj):
@@ -111,13 +203,13 @@ def _prepare_last_acquisition_date(obj):
 
 
 def _prepare_views(obj, content_type):
-    views = 0
     try:
-        views = HitCount.objects.get(object_pk=obj.pk, content_type__name=content_type).hits
-    except:
-        pass
+        result = HitCount.objects.get(object_pk=obj.pk, content_type__name=content_type).hits
+    except Exception as e:
+        result = 0
 
-    return views
+    cache.set(PREPARED_VIEWS_CACHE_KEY % obj.pk, result, PREPARED_FIELD_CACHE_EXPIRATION)
+    return result
 
 
 def _prepare_min_aperture(obj):
@@ -164,48 +256,56 @@ def _prepare_camera_types(obj):
 
 def _prepare_comments(obj):
     ct = ContentType.objects.get(app_label='astrobin', model='image')
-    return NestedComment.objects.filter(
+    result = NestedComment.objects.filter(
         content_type=ct,
         object_id=obj.id,
         deleted=False).count()
-
-
-def _6m_ago():
-    return datetime.datetime.now() - datetime.timedelta(183)
-
-
-def _1y_ago():
-    return datetime.datetime.now() - datetime.timedelta(365)
+    cache.set(PREPARED_COMMENTS_CACHE_KEY % obj.pk, result, PREPARED_FIELD_CACHE_EXPIRATION)
+    return result
 
 
 class UserIndex(CelerySearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
-    images_6m = IntegerField()
-    images_1y = IntegerField()
-    images = IntegerField()
+
+    username = CharField(model_attr='username')
+    exclude_from_competitions = BooleanField(model_attr='userprofile__exclude_from_competitions')
+
     avg_integration = FloatField()
+
+    images = IntegerField()
 
     # Total likes of all user's images.
     likes = IntegerField()
 
-    # Total likes of all user's images.
-    average_likes_6m = FloatField()
-    average_likes_1y = FloatField()
+    # Total likes given to images.
+    likes_given = IntegerField()
+
+    # Average likes of all user's images.
     average_likes = FloatField()
 
-    # Normalized likes (best images only)
-    normalized_likes_6m = FloatField()
-    normalized_likes_1y = FloatField()
+    # Normalized likes (Image Index)
     normalized_likes = FloatField()
 
+    # Total likes received on comments.
+    comment_likes_received = IntegerField()
+
+    # Total likes received on forum posts.
+    forum_post_likes_received = IntegerField()
+
+    # Total number of likes on all "likeable" elements that can be associated to a user.
+    total_likes_received = IntegerField()
+
+    # User reputation based on text content
+    # DEPRECATED: remove once contribution_index is populated
+    reputation = FloatField()
+
+    # Index based on text content
+    contribution_index = FloatField()
+
     # Number of followers
-    followers_6m = IntegerField()
-    followers_1y = IntegerField()
     followers = IntegerField()
 
-    # Total user ingegration.
-    integration_6m = FloatField()
-    integration_1y = FloatField()
+    # Total user integration.
     integration = FloatField()
 
     # Average moon phase under which this user has operated.
@@ -217,10 +317,18 @@ class UserIndex(CelerySearchIndex, Indexable):
     # Number of bookmarks on own images
     bookmarks = IntegerField()
 
+    # Comments received on on own images
     comments = IntegerField()
+
     comments_written = IntegerField()
 
-    username = CharField(model_attr='username')
+    forum_posts = IntegerField()
+
+    top_pick_nominations = IntegerField()
+
+    top_picks = IntegerField()
+
+    iotds = IntegerField()
 
     def index_queryset(self, using=None):
         return self.get_model().objects.all()
@@ -231,17 +339,6 @@ class UserIndex(CelerySearchIndex, Indexable):
     def get_updated_field(self):
         return "userprofile__updated"
 
-    def prepare_images_6m(self, obj):
-        # Logging here just because it's the first "prepare" function.
-        log.debug("Indexing user %s: %d" % (obj.__class__.__name__, obj.pk))
-
-        return Image.objects.filter(user=obj).filter(
-            uploaded__gte=_6m_ago()).count()
-
-    def prepare_images_1y(self, obj):
-        return Image.objects.filter(user=obj).filter(
-            uploaded__gte=_1y_ago()).count()
-
     def prepare_images(self, obj):
         return Image.objects.filter(user=obj).count()
 
@@ -249,7 +346,8 @@ class UserIndex(CelerySearchIndex, Indexable):
         integration = 0
         images = 0
         for i in Image.objects.filter(user=obj):
-            image_integration = _get_integration(i)
+            cached = cache.get(PREPARED_INTEGRATION_CACHE_KEY % i.pk)
+            image_integration = cached if cached is not None else _prepare_integration(i)
             if image_integration:
                 images += 1
                 integration += image_integration
@@ -259,121 +357,89 @@ class UserIndex(CelerySearchIndex, Indexable):
     def prepare_likes(self, obj):
         likes = 0
         for i in Image.objects.filter(user=obj):
-            likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
+            cached = cache.get(PREPARED_LIKES_CACHE_KEY % i.pk)
+            likes += cached if cached is not None else _prepare_likes(i)
         return likes
 
-    def prepare_likes_6m(self, obj):
-        likes = 0
-        for i in Image.objects.filter(user=obj, uploaded__gte=_6m_ago()):
-            likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
-        return likes
-
-    def prepare_likes_1y(self, obj):
-        likes = 0
-        for i in Image.objects.filter(user=obj, uploaded__gte=_1y_ago()):
-            likes += ToggleProperty.objects.toggleproperties_for_object("like", i).count()
-        return likes
-
-    def prepare_average_likes_6m(self, obj):
-        likes = self.prepare_likes_6m(obj)
-        images = Image.objects.filter(user=obj, uploaded__gte=_6m_ago()).count()
-
-        return likes / float(images) if images > 0 else 0
-
-    def prepare_average_likes_1y(self, obj):
-        likes = self.prepare_likes_1y(obj)
-        images = Image.objects.filter(user=obj, uploaded__gte=_1y_ago()).count()
-
-        return likes / float(images) if images > 0 else 0
-
+    def prepare_likes_given(self, obj):
+        return ToggleProperty.objects.toggleproperties_for_model('like', Image, obj).count()
+    
     def prepare_average_likes(self, obj):
-        likes = self.prepare_likes(obj)
-        images = self.prepare_images(obj)
+        likes = self.prepared_data.get('likes')
+        if likes is None:
+            likes = self.prepare_likes(obj)
+
+        images = self.prepared_data.get('images')
+        if images is None:
+            images = self.prepare_images(obj)
 
         return likes / float(images) if images > 0 else 0
-
-    def prepare_normalized_likes_6m(self, obj):
-        def average(values):
-            if len(values):
-                return sum(values) / float(len(values))
-            return 0
-
-        def index(values):
-            import math
-            return average(values) * math.log(len(values) + 1, 10)
-
-        avg = self.prepare_average_likes_6m(obj)
-        norm = []
-
-        for i in Image.objects.filter(user=obj).filter(uploaded__gte=_6m_ago()):
-            likes = i.likes()
-            if likes >= avg:
-                norm.append(likes)
-
-        if len(norm) == 0:
-            return 0
-
-        return index(norm)
-
-    def prepare_normalized_likes_1y(self, obj):
-        def average(values):
-            if len(values):
-                return sum(values) / float(len(values))
-            return 0
-
-        def index(values):
-            import math
-            return average(values) * math.log(len(values) + 1, 10)
-
-        avg = self.prepare_average_likes_1y(obj)
-        norm = []
-
-        for i in Image.objects.filter(user=obj).filter(uploaded__gte=_1y_ago()):
-            likes = i.likes()
-            if likes >= avg:
-                norm.append(likes)
-
-        if len(norm) == 0:
-            return 0
-
-        return index(norm)
 
     def prepare_normalized_likes(self, obj):
-        def average(values):
-            if len(values):
-                return sum(values) / float(len(values))
-            return 0
+        average = self.prepared_data.get('average_likes')
 
-        def index(values):
-            import math
-            return average(values) * math.log(len(values) + 1, 10)
+        if average is None:
+            average = self.prepare_average_likes(obj)
 
-        avg = self.prepare_average_likes(obj)
-        norm = []
+        normalized = []
 
-        for i in Image.objects.filter(user=obj):
-            likes = i.likes()
-            if likes >= avg:
-                norm.append(likes)
+        for i in Image.objects.filter(user=obj).iterator():
+            cached = cache.get(PREPARED_LIKES_CACHE_KEY % i.pk)
+            likes = cached if cached is not None else i.likes()
+            if likes >= average:
+                normalized.append(likes)
 
-        if len(norm) == 0:
-            return 0
+        if len(normalized) == 0:
+            result = 0
+        else:
+            result = _astrobin_index(normalized)
 
-        return index(norm)
+        if obj.userprofile.astrobin_index_bonus is not None:
+            result += obj.userprofile.astrobin_index_bonus
 
-    def prepare_followers_6m(self, obj):
-        return ToggleProperty.objects.filter(
-            property_type="follow",
-            content_type=ContentType.objects.get_for_model(User),
-            object_id=obj.pk
-        ).filter(created_on__gte=_6m_ago()).count()
+        return result
 
-    def prepare_followers_1y(self, obj):
-        return ToggleProperty.objects.filter(
-            property_type="follow",
-            content_type=ContentType.objects.get_for_model(User),
-            object_id=obj.pk
-        ).filter(created_on__gte=_1y_ago()).count()
+    def prepare_comment_likes_received(self, obj):
+        comments = NestedComment.objects.filter(author=obj)
+        likes = 0
+        for comment in comments.iterator():
+            likes += ToggleProperty.objects.toggleproperties_for_object('like', comment).count()
+
+        return likes
+
+    def prepare_forum_post_likes_received(self, obj):
+        posts = Post.objects.filter(user=obj)
+        likes = 0
+        for post in posts.iterator():
+            likes += ToggleProperty.objects.toggleproperties_for_object('like', post).count()
+
+        return likes
+
+    def prepare_total_likes_received(self, obj):
+        likes = self.prepared_data.get('likes')
+        if likes is None:
+            likes = self.prepare_likes(obj)
+
+        comment_likes_received = self.prepared_data.get('comment_likes_received')
+        if comment_likes_received is None:
+            comment_likes_received = self.prepare_comment_likes_received(obj)
+
+        forum_post_likes_received = self.prepared_data.get('forum_post_likes_received')
+        if forum_post_likes_received is None:
+            forum_post_likes_received = self.prepare_forum_post_likes_received(obj)
+
+        return likes + comment_likes_received + forum_post_likes_received
+
+    # DEPRECATED: remove once contribution_index is populated
+    def prepare_reputation(self, obj):
+        comments_contribution_index = _prepare_comment_contribution_index(NestedComment.objects.filter(author=obj))
+        forum_post_contribution_index = _prepare_forum_post_contribution_index(Post.objects.filter(user=obj))
+        return comments_contribution_index + forum_post_contribution_index
+
+    def prepare_contribution_index(self, obj):
+        comments_contribution_index = _prepare_comment_contribution_index(NestedComment.objects.filter(author=obj))
+        forum_post_contribution_index = _prepare_forum_post_contribution_index(Post.objects.filter(user=obj))
+        return comments_contribution_index + forum_post_contribution_index
 
     def prepare_followers(self, obj):
         return ToggleProperty.objects.filter(
@@ -382,31 +448,19 @@ class UserIndex(CelerySearchIndex, Indexable):
             object_id=obj.pk
         ).count()
 
-    def prepare_integration_6m(self, obj):
-        integration = 0
-        for i in Image.objects.filter(user=obj, uploaded__gte=_6m_ago()):
-            integration += _get_integration(i)
-
-        return integration / 3600.0
-
-    def prepare_integration_1y(self, obj):
-        integration = 0
-        for i in Image.objects.filter(user=obj, uploaded__gte=_1y_ago()):
-            integration += _get_integration(i)
-
-        return integration / 3600.0
-
     def prepare_integration(self, obj):
         integration = 0
         for i in Image.objects.filter(user=obj):
-            integration += _get_integration(i)
+            cached = cache.get(PREPARED_INTEGRATION_CACHE_KEY % i.pk)
+            integration += cached if cached is not None else _prepare_integration(i)
 
         return integration / 3600.0
 
     def prepare_moon_phase(self, obj):
         l = []
         for i in Image.objects.filter(user=obj):
-            l.append(_prepare_moon_phase(i))
+            cached = cache.get(PREPARED_MOON_PHASE_CACHE_KEY % i.pk)
+            l.append(cached if cached is not None else _prepare_moon_phase(i))
         if len(l) == 0:
             return 0
         return reduce(lambda x, y: x + y, l) / len(l)
@@ -414,24 +468,38 @@ class UserIndex(CelerySearchIndex, Indexable):
     def prepare_views(self, obj):
         views = 0
         for i in Image.objects.filter(user=obj):
-            views += _prepare_views(i, 'image')
+            cached = cache.get(PREPARED_VIEWS_CACHE_KEY % i.pk)
+            views += cached if cached is not None else _prepare_views(i, 'image')
         return views
 
     def prepare_bookmarks(self, obj):
         bookmarks = 0
         for i in Image.objects.filter(user=obj):
-            bookmarks += _prepare_bookmarks(i)
+            cached = cache.get(PREPARED_BOOKMARKS_CACHE_KEY % i.pk)
+            bookmarks += cached if cached is not None else _prepare_bookmarks(i)
         return bookmarks
 
     def prepare_comments(self, obj):
         comments = 0
         for i in Image.objects.filter(user=obj):
-            comments += _prepare_comments(i)
+            cached = cache.get(PREPARED_COMMENTS_CACHE_KEY % i.pk)
+            comments += cached if cached is not None else _prepare_comments(i)
         return comments
 
     def prepare_comments_written(self, obj):
         return NestedComment.objects.filter(author=obj, deleted=False).count()
 
+    def prepare_forum_posts(self, obj):
+        return Post.objects.filter(user=obj).count()
+
+    def prepare_top_pick_nominations(self, obj):
+        return IotdService().get_top_pick_nominations().filter(user=obj).count()
+
+    def prepare_top_picks(self, obj):
+        return IotdService().get_top_picks().filter(user=obj).count()
+
+    def prepare_iotds(self, obj):
+        return IotdService().get_iotds().filter(image__user=obj).count()
 
 class ImageIndex(CelerySearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
@@ -462,7 +530,6 @@ class ImageIndex(CelerySearchIndex, Indexable):
     last_acquisition_date = DateTimeField()
     views = IntegerField()
 
-    solar_system_main_subject = IntegerField(null=True)
     solar_system_main_subject_char = CharField(model_attr='solar_system_main_subject', null=True)
 
     is_deep_sky = BooleanField()
@@ -474,6 +541,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     is_iotd = BooleanField()
     is_top_pick = BooleanField()
+    is_top_pick_nomination = BooleanField()
 
     license = IntegerField(model_attr='license')
 
@@ -490,7 +558,6 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     comments = IntegerField()
 
-    subject_type = IntegerField()
     subject_type_char = CharField(model_attr='subject_type')
 
     acquisition_type = CharField(model_attr='acquisition_type')
@@ -513,9 +580,6 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return "updated"
 
     def prepare_imaging_telescopes(self, obj):
-        # Logging here just because it's the first "prepare" function.
-        log.debug("Indexing image %s: %d" % (obj.__class__.__name__, obj.pk))
-
         return ["%s, %s" % (x.get("make"), x.get("name")) for x in obj.imaging_telescopes.all().values('make', 'name')]
 
     def prepare_guiding_telescopes(self, obj):
@@ -560,7 +624,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return _prepare_likes(obj)
 
     def prepare_integration(self, obj):
-        return _get_integration(obj)
+        return _prepare_integration(obj)
 
     def prepare_moon_phase(self, obj):
         return _prepare_moon_phase(obj)
@@ -592,57 +656,14 @@ class ImageIndex(CelerySearchIndex, Indexable):
     def prepare_is_top_pick(self, obj):
         return obj.iotdvote_set.count() > 0 and not hasattr(obj, 'iotd')
 
+    def prepare_is_top_pick_nomination(self, obj):
+        return obj.iotdsubmission_set.count() > 0 and obj.iotdvote_set.count() == 0
+
     def prepare_objects_in_field(self, obj):
         return obj.solution.objects_in_field if obj.solution else None
 
     def prepare_countries(self, obj):
         return ' '.join([x.country for x in obj.locations.all() if x.country])
-
-    def prepare_subject_type(self, obj):
-        if obj.subject_type == SubjectType.DEEP_SKY:
-            return 100
-        if obj.subject_type == SubjectType.SOLAR_SYSTEM:
-            return 200
-        if obj.subject_type == SubjectType.WIDE_FIELD:
-            return 300
-        if obj.subject_type == SubjectType.STAR_TRAILS:
-            return 400
-        if obj.subject_type == SubjectType.NORTHERN_LIGHTS:
-            return 450
-        if obj.subject_type == SubjectType.GEAR:
-            return 500
-        if obj.subject_type == SubjectType.OTHER:
-            return 600
-
-        return 0
-
-    def prepare_solar_system_main_subject(self, obj):
-        if obj.solar_system_main_subject == SolarSystemSubject.SUN:
-            return 0
-        if obj.solar_system_main_subject == SolarSystemSubject.MOON:
-            return 1
-        if obj.solar_system_main_subject == SolarSystemSubject.MERCURY:
-            return 2
-        if obj.solar_system_main_subject == SolarSystemSubject.VENUS:
-            return 3
-        if obj.solar_system_main_subject == SolarSystemSubject.MARS:
-            return 4
-        if obj.solar_system_main_subject == SolarSystemSubject.JUPITER:
-            return 5
-        if obj.solar_system_main_subject == SolarSystemSubject.SATURN:
-            return 6
-        if obj.solar_system_main_subject == SolarSystemSubject.URANUS:
-            return 7
-        if obj.solar_system_main_subject == SolarSystemSubject.NEPTUNE:
-            return 8
-        if obj.solar_system_main_subject == SolarSystemSubject.MINOR_PLANET:
-            return 9
-        if obj.solar_system_main_subject == SolarSystemSubject.COMET:
-            return 10
-        if obj.solar_system_main_subject == SolarSystemSubject.OTHER:
-            return 11
-
-        return None
 
 
 class NestedCommentIndex(CelerySearchIndex, Indexable):

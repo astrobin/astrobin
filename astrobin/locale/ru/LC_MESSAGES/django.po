@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:02+0000\n"
-"PO-Revision-Date: 2020-07-31 14:28+0000\n"
-"Last-Translator: sypai <sypai@mail.ru>\n"
+"POT-Creation-Date: 2020-12-10 21:47+0000\n"
+"PO-Revision-Date: 2020-12-08 05:12+0000\n"
+"Last-Translator: NadirAstro <nadir_teymurov@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1596205682.000000\n"
+"X-POOTLE-MTIME: 1607404352.000000\n"
 
 msgid "United Kingdom"
 msgstr "Великобритания"
@@ -761,41 +761,16 @@ msgstr "Зимбабве"
 msgid "Users"
 msgstr "Пользователи"
 
-msgid "Make"
-msgstr "Изготовлено"
-
-msgid "The make, brand, producer or developer of this product."
-msgstr "Изготовитель, марка, производитель или разработчик данного продукта."
-
-msgid "Name"
-msgstr "Название"
-
-msgid "Merge"
-msgstr "Объединить"
-
-msgid ""
-"Use this field to mark that the item you are claiming really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"Используйте это поле, чтобы отметить, что пункт, который вы вносите, на "
-"самом деле тот же продукт (или его вариант), который вы заявляли ранее."
-
-#, python-format
-msgid ""
-"You can't create more than %d claims. Consider upgrading your affiliation!"
-msgstr ""
-"Вы не можете создавать более чем %d заявок. Рассмотрите апгрейд вашего "
-"членства!"
-
-msgid "You have already claimed this product."
-msgstr "Вы уже заявляли об этом продукте."
-
 msgid ""
 "Select a tag to order this collection by its value. If you see no options "
 "here, it's because none of the images in this collection have key/value "
 "tags. PS: Images that lack this tag will appear at the bottom of the "
 "collection."
 msgstr ""
+"Выберите тег, чтобы упорядочить эту коллекцию по ее значению. Если вы не "
+"видите здесь вариантов, это потому, что ни одно из изображений в этой "
+"коллекции не имеет тегов \"ключ-значение\". PS: изображения без этого тега "
+"появятся в нижней части коллекции."
 
 msgid "Please use the following format: yyyy-mm-dd"
 msgstr "Пожалуйста, используйте формат ГГГГ-ММ-ДД"
@@ -874,13 +849,13 @@ msgid "Guiding telescopes or lenses"
 msgstr "Гиды телескоп/объектив"
 
 msgid "Mounts"
-msgstr "Монтировка"
+msgstr "Монтировки"
 
 msgid "Imaging cameras"
 msgstr "Камеры для съемки"
 
 msgid "Guiding cameras"
-msgstr "Камера гида"
+msgstr "Камеры гида"
 
 msgid "Focal reducers"
 msgstr "Редукторы фокуса"
@@ -939,13 +914,6 @@ msgstr "Долгота (минуты)"
 
 msgid "Longitude (seconds)"
 msgstr "Долгота (секунды)"
-
-msgid ""
-"Use this field to mark that the item you are merging really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"Используйте это поле, чтобы отметить тот пункт, что вы объединяете "
-"действительно тот же продукт (или их вариации) или который вы вносили ранее."
 
 msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
@@ -1014,9 +982,6 @@ msgstr "в закладках"
 
 msgid "likes"
 msgstr "нравится"
-
-msgid "has written a review on"
-msgstr "написал обзор о"
 
 msgid "created a new public group"
 msgstr "создал новую общую группу"
@@ -1100,10 +1065,8 @@ msgstr "Албанский"
 msgid "Polish"
 msgstr "Польский"
 
-#, fuzzy
-#| msgid "Brazilian Portuguese"
 msgid "Portuguese"
-msgstr "Португальский (Бразилия)"
+msgstr "Португальский"
 
 msgid "Greek"
 msgstr "Греческий"
@@ -1168,6 +1131,27 @@ msgstr "Малая планета"
 msgid "Comet"
 msgstr "Комета"
 
+msgid "Occultation"
+msgstr "Затмение"
+
+msgid "Conjunction"
+msgstr "Соединение"
+
+msgid "Partial lunar eclipse"
+msgstr "Частное лунное затмение"
+
+msgid "Total lunar eclipse"
+msgstr "Полное лунное затмение"
+
+msgid "Partial solar eclipse"
+msgstr "Частное солнечное затмение"
+
+msgid "Anular solar eclipse"
+msgstr "Кольцевое солнечное затмение"
+
+msgid "Total solar eclipse"
+msgstr "Полное солнечное затмение"
+
 msgid "Other"
 msgstr "Иное"
 
@@ -1200,6 +1184,15 @@ msgstr "Внизу по центру"
 
 msgid "Bottom right"
 msgstr "Внизу справа"
+
+msgid "Make"
+msgstr "Изготовлено"
+
+msgid "The make, brand, producer or developer of this product."
+msgstr "Изготовитель, марка, производитель или разработчик данного продукта."
+
+msgid "Name"
+msgstr "Название"
 
 msgid ""
 "Just the name of this product, without any properties or personal "
@@ -1418,14 +1411,19 @@ msgstr "(в нм)"
 msgid "nm"
 msgstr "нм"
 
-msgid "Traditional"
-msgstr "Традиционный"
+msgid "Regular (e.g. medium/long exposure with a CCD or DSLR)"
+msgstr ""
+"Обычный (например, средняя/длинная экспозиция с помощью ПЗС или цифровой "
+"зеркальной камеры)"
 
-msgid "Electronically-Assisted Astronomy (EAA)"
-msgstr "Электронно-ассистированная астрономия (EAA)"
+msgid ""
+"Electronically-Assisted Astronomy (EAA, e.g. based on a live video feed)"
+msgstr ""
+"Астрономия с электронным управлением (EAA, например, на основе прямой "
+"видеотрансляции)"
 
 msgid "Lucky imaging"
-msgstr "Удачный кадр"
+msgstr "Лаки имейджинг"
 
 msgid "Drawing/Sketch"
 msgstr "Рисование/Набросок"
@@ -1434,13 +1432,13 @@ msgid "Other/Unknown"
 msgstr "Другое/Неизвестно"
 
 msgid "Deep sky object or field"
-msgstr "Объекты глубокого космоса"
+msgstr "Объект или поле глубокого космоса"
 
 msgid "Solar system body or event"
 msgstr "Объект или явление в Солнечной системе"
 
 msgid "Extremely wide field"
-msgstr "Широкое поле"
+msgstr "Экстремально широкое поле"
 
 msgid "Star trails"
 msgstr "Треки звезд"
@@ -1500,7 +1498,7 @@ msgid "Title"
 msgstr "Заголовок"
 
 msgid "Acquisition type"
-msgstr "Время накопления"
+msgstr "Тип съёмки"
 
 msgid "Subject type"
 msgstr "Тип объекта"
@@ -1543,10 +1541,8 @@ msgstr "Описание"
 msgid "HTML tags are allowed."
 msgstr "Допускаются HTML-теги."
 
-#, fuzzy
-#| msgid "Uncompressed source (max 200 MB)"
 msgid "Uncompressed source (max 100 MB)"
-msgstr "Несжатый исходник (макс. 200 МБ)"
+msgstr "Несжатый исходник (макс. 100 Мб)"
 
 msgid ""
 "You can store the final processed image that came out of your favorite image "
@@ -1554,12 +1550,18 @@ msgid ""
 "archival purposes. This file is stored privately and only you will have "
 "access to it."
 msgstr ""
+"Вы можете сохранить окончательно обработанное изображение, полученное из "
+"вашего любимого графического редактора (например, PixInsight, Adobe "
+"Photoshop и т.д.), здесь, в AstroBin, для архивных целей. Этот файл хранится "
+"в частном порядке, и только вы будете иметь к нему доступ."
 
 msgid "Gallery thumbnail"
 msgstr "Предосмотри галереи"
 
 msgid "Select an area of the image to be used as thumbnail in your gallery."
 msgstr ""
+"Выберите область изображения, которая будет использоваться в качестве эскиза "
+"в вашей галерее."
 
 msgid "Sharpen thumbnails"
 msgstr "Четкие эскизы"
@@ -1568,12 +1570,15 @@ msgid ""
 "If selected, AstroBin will use a resizing algorithm that slightly sharpens "
 "the image's thumbnails. This setting applies to all revisions."
 msgstr ""
+"Если этот параметр выбран, AstroBin будет использовать алгоритм изменения "
+"размера, который немного увеличивает резкость эскизов изображения. Этот "
+"параметр применяется ко всем редакциям."
 
 msgid "Apply watermark to image"
 msgstr "Разместить водяной знак на изображении"
 
 msgid "Position"
-msgstr "Расположение"
+msgstr "Положение"
 
 msgid "Size"
 msgstr "Размер"
@@ -1591,7 +1596,7 @@ msgid "Skip notifications"
 msgstr "Пропустить уведомления"
 
 msgid "Do not notify your followers about this image upload."
-msgstr ""
+msgstr "Не уведомлять ваших подписчиков о загрузке этого изображения."
 
 msgid "(no title)"
 msgstr "(без заголовка)"
@@ -1600,10 +1605,10 @@ msgid "Mix of multiple source"
 msgstr "Сочетание нескольких источников данных"
 
 msgid "Do not notify your followers about this revision."
-msgstr ""
+msgstr "Не уведомлять ваших подписчиков об этой редакции изображения."
 
 msgid "Images"
-msgstr "Изображения"
+msgstr "Изображений"
 
 msgid "Cover image"
 msgstr "Изображение обложки"
@@ -1647,9 +1652,6 @@ msgstr "9 - Центр города (белая зона)"
 msgid "Synthetic channel"
 msgstr "Синтезированный канал"
 
-#, fuzzy
-#| msgid "Filter"
-#| msgid_plural "Filters"
 msgid "Filter"
 msgstr "Фильтр"
 
@@ -1799,6 +1801,21 @@ msgstr "TIFF/FITS"
 msgid "Higher resolution"
 msgstr "Наивысшее разрешение"
 
+msgid "I am no longer active in astrophotography"
+msgstr "Я больше не активен в астрофотографии"
+
+msgid "This website did not meet my expectations"
+msgstr "Этот вебсайт не оправдал мои ожидания"
+
+msgid "Something on this website doesn't work for me"
+msgstr "Что-то на этом вебсайте не сработало для меня"
+
+msgid "The paid subscriptions are too expensive"
+msgstr "Платные подписки слишком дорогие"
+
+msgid "I prefer not to say"
+msgstr "Я предпочитаю не говорить"
+
 msgid "Real name"
 msgstr "Настоящее имя"
 
@@ -1829,31 +1846,18 @@ msgstr "О себе"
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "Напишите что-нибудь о себе. Разрешаются HTML-теги."
 
-msgid "Company name"
-msgstr "Название организации"
+msgid "Delete reason"
+msgstr "Причина удаления"
 
-msgid "The name of the company you represent on AstroBin."
-msgstr "Название организации, которую вы представляете в AstroBin."
-
-msgid "Company description"
-msgstr "Описание организации"
+msgid "Why are you deleting your AstroBin account?"
+msgstr "Почему вы удаляете вашу учётную запись AstroBin?"
 
 msgid ""
-"A short description of the company you represent on AstroBin. You can use "
-"some <a href=\"/faq/#comments\">formatting rules</a>."
+"Please tell us why you are deleting your account (minimum 30 characters). "
+"Thanks!"
 msgstr ""
-"Короткое описание организации, которую вы представляете на AstroBin. Вы "
-"можете использовать некоторые <a href=\"/faq/#comments\">правила "
-"форматирования</a>."
-
-msgid "Company website"
-msgstr "Веб-сайт организации"
-
-msgid "The website of the company you represent on AstroBin."
-msgstr "Веб-сайт организации, которую вы представляете на AstroBin."
-
-msgid "Country of operation"
-msgstr "Страна ведения деятельности"
+"Расскажите, пожалуйста, почему вы удаляете свою учетную запись (минимум 30 "
+"символов). Спасибо!"
 
 msgid "I want to be excluded from competitions"
 msgstr "Исключить меня из соревнований"
@@ -1861,10 +1865,10 @@ msgstr "Исключить меня из соревнований"
 msgid ""
 "Check this box to be excluded from competitions and contests, such as the "
 "Image of the Day, the Top Picks, other custom contests. This will remove you "
-"from the leaderboards and hide your AstroBin Index."
+"from the leaderboards and hide your Image Index and Contribution Index."
 msgstr ""
-"Отметьте здесь для чтого чтобы исключить себя из соревнований и конкурсов, "
-"таких как Изображения Дня, Рейтинг и прочее. Вы не будете отображаться в "
+"Отметьте здесь для чтобы исключить себя из соревнований и конкурсов, таких "
+"как Изображения Дня, Топовая Картинка и прочее. Вы не будете отображаться в "
 "рейтинге и ваш индекс AstroBin скроется."
 
 msgid "Global stream"
@@ -1898,13 +1902,17 @@ msgid "Default gallery sorting"
 msgstr "Сортировка галереи по умолчанию"
 
 msgid "See your own Staging Area images on your gallery"
-msgstr ""
+msgstr "Смотрите собственные изображения промежуточной зоны в вашей галерее"
 
 msgid ""
 "Select if you want your Staging Area images to appear on your own view of "
 "your gallery when you are logged. If you choose 'No', your Staging Area "
 "images can be located via the 'View' menu entry on your gallery page."
 msgstr ""
+"Выберите, хотите ли вы, чтобы изображения промежуточной области отображались "
+"в вашем собственном представлении галереи, когда вы вошли в систему. Если вы "
+"выберете «Нет», изображения промежуточной области можно будет найти через "
+"пункт меню «Просмотр» на странице галереи."
 
 msgid "Default license"
 msgstr "Лицензия по-умолчанию"
@@ -1947,25 +1955,43 @@ msgstr ""
 "материалы от AstroBin и его партнёров."
 
 msgid "Allow astronomy ads from our partners"
-msgstr ""
+msgstr "Разрешить рекламу астрономии от наших партнеров"
 
 msgid ""
 "It would mean a lot if you chose to allow astronomy relevant, non intrusive "
 "ads on this website. AstroBin is a small business run by a single person, "
 "and this kind of support would be amazing. Thank you in advance!"
 msgstr ""
+"Это будет много значить, если вы решите разрешить на этом веб-сайте "
+"релевантную астрономию, ненавязчивую рекламу. AstroBin - это небольшой "
+"бизнес, которым управляет один человек, и такая поддержка была бы "
+"потрясающей. Заранее спасибо!"
+
+msgid "Allow retailer integration"
+msgstr "Разрешить интеграцию с розничным продавцом"
+
+msgid ""
+"AstroBin may associate with retailers of astronomy and astrophotography "
+"equipment to enhance the display of equipment items with links to sponsoring "
+"partners. The integration is subtle and non intrusive, and it would help a "
+"lot if you didn't disable it. Thank you in advance!"
+msgstr ""
+"AstroBin может сотрудничать с розничными продавцами астрономического и "
+"астрофотографического оборудования, чтобы улучшить отображение предметов "
+"оборудования со ссылками на партнеров-спонсоров. Интеграция тонкая и "
+"ненавязчивая, и она очень поможет, если вы ее не отключите. Заранее спасибо!"
 
 msgid "Language"
 msgstr "Язык"
 
 msgid "Signature"
-msgstr "Сигнатура"
+msgstr "Подпись"
 
 msgid "Signature HTML Version"
 msgstr "Сигнатура версии HTML"
 
 msgid "Show signatures"
-msgstr "Показать сигнатуры"
+msgstr "Показать подписи"
 
 msgid "Post count"
 msgstr "Количество сообщений"
@@ -2028,101 +2054,6 @@ msgid ""
 msgstr ""
 "Пожалуйста, объясните назначение вашего приложения и то, как вы собираетесь "
 "использовать API."
-
-msgid "AUD - Australian dollars"
-msgstr "AUD - Австралийский доллар"
-
-msgid "CAD - Canadian dollars"
-msgstr "CAD - Канадский доллар"
-
-msgid "CHF - Swiss francs"
-msgstr "CHF - Швейцарский франк"
-
-msgid "EUR - Euros"
-msgstr "EUR - Евро"
-
-msgid "GPB - Pound stelings"
-msgstr "GPB - Фунт стерлингов"
-
-msgid "PLN - Polish zloty"
-msgstr "PLN - Польский злотый"
-
-msgid "SEK - Swedish krona"
-msgstr "SEK - Шведская крона"
-
-msgid "USD - American dollars"
-msgstr "USD - Американский доллар"
-
-msgid "Producer"
-msgstr "Производитель"
-
-msgid "The link to this product's page on your website."
-msgstr "Ссылка на страницу этого продукта на вашем веб-сайте."
-
-msgid "Price"
-msgstr "Стоимость"
-
-msgid "Currency"
-msgstr "Валюта"
-
-msgid "Retailed gear items"
-msgstr "Элементы оборудования в розницу"
-
-msgid "Proper make"
-msgstr "Правильное место изготовления"
-
-msgid ""
-"Sometimes, product make/brand/producer/developer names are not written "
-"properly by the users. Write here the proper make/brand/producer/developer "
-"name."
-msgstr ""
-"Иногда, для продукта место изготовления/производитель/разработчик "
-"пользователями пишется неверно. Напишите правильное название места "
-"изготовления/марку/производителя/разработчика."
-
-msgid "Proper name"
-msgstr "Правильное название"
-
-msgid ""
-"Sometimes, product names are not written properly by the users. Write here "
-"the proper product name, not including the make/brand/producer/developer "
-"name.<br/>It is recommended that you try to group as many items as possible, "
-"so try to use a generic version of your product's name."
-msgstr ""
-"Иногда пользователи неправильно пишут названия продуктов. Напишите "
-"правильное имя продукта, не включая названия места производства/марки/"
-"производителя/разработчика.<br/>Желательно, чтобы вы попытались "
-"сгруппировать так много продуктов, как сможете, поэтому постарайтесь "
-"использовать общую версию имени вашего продукта."
-
-msgid ""
-"The official, commercial image for this product. Upload an image via the "
-"regular uploading interface, set its subject type to \"Gear\", and then "
-"choose it from this list. If you upload several revisions, they will also "
-"appear in the commercial page."
-msgstr ""
-"Официальное, коммерческое изображение для этого продукта. Закачайте "
-"изображение через обычный диалог загрузки, установить его тип как "
-"«Оборудование», и затем выберите его из списка. Если вы закачиваете "
-"несколько версий, они так же отобразятся на рекламной странице."
-
-msgid "Tagline"
-msgstr "Слоган"
-
-msgid ""
-"A memorable phrase that will sum up this product, for marketing purposes."
-msgstr ""
-"Запоминающаяся фраза, которая подчеркивает продукт, в целях маркетинга."
-
-msgid ""
-"Here you can write the full commercial description of your product. You can "
-"use some <a href=\"/faq/#comments\">formatting rules</a>."
-msgstr ""
-"Здесь вы можете дать подробное описание вашего продукта. Вы можете "
-"использовать некоторые <a href=\"/faq/#comments\">правила форматирования</a>."
-
-msgid "Commercial gear items"
-msgstr "Рекламные элементы оборудования"
 
 msgid "Pending"
 msgstr "Ожидание"
@@ -2242,6 +2173,42 @@ msgstr ""
 msgid "Come back soon!"
 msgstr "Возвращайтесь скорее!"
 
+#, python-format
+msgid ""
+"<strong>Please note:</strong> AstroBin is a community that values "
+"informative and constructive content. If you write something that other "
+"people find useful and valuable, the likes that you receive will contribute "
+"to your %(_0)sContribution Index (beta)%(_1)s."
+msgstr ""
+"<strong>Обратите внимание:</strong> AstroBin - это сообщество, которое ценит "
+"информативный и конструктивный контент. Если вы напишете что-то, что другие "
+"люди сочтут полезным и ценным, ваши лайки повлияют на ваш %(_0)sContribution "
+"Index (beta)%(_1)s."
+
+msgid "New!"
+msgstr "Новый!"
+
+msgid "Use the <strong>@</strong> sign and start typing to mention any user."
+msgstr ""
+"Используйте знак <strong>@</strong> и начните печатать, чтобы упомянуть "
+"любого пользователя."
+
+msgid ""
+"Use the <strong>#</strong> sign and start typing to insert an image from "
+"your gallery."
+msgstr ""
+"Используйте знак <strong>#</strong> и начните вводить текст, чтобы вставить "
+"изображение из своей галереи."
+
+msgid "All"
+msgstr "Все"
+
+msgid "Regular"
+msgstr "Обычный"
+
+msgid "Electronically-Assisted Astronomy (EAA)"
+msgstr "Электронно-ассистированная астрономия (EAA)"
+
 msgid "AstroBin is in READ ONLY mode "
 msgstr "AstroBin в режиме ТОЛЬКО ЧТЕНИЕ"
 
@@ -2359,6 +2326,9 @@ msgstr ""
 "<a href=\"%(user_page)s\">%(user)s</a> вступил в группу.\n"
 "                        "
 
+msgid "Remove ads"
+msgstr "Убрать рекламу"
+
 msgid "Request an API key"
 msgstr "Запрос API-ключа"
 
@@ -2394,6 +2364,40 @@ msgid ""
 msgstr ""
 "Вы получите ответ в течение 24 часов. Спасибо за желание использовать API от "
 "AstroBin!"
+
+msgid "Astrophotographers list"
+msgstr "Список астрофотографов"
+
+#, python-format
+msgid ""
+"The <strong>Image Index</strong> is system based on likes received on "
+"images, that incentivizes the most active and liked members of the "
+"community. %(_0)sLearn more.%(_1)s"
+msgstr ""
+"<strong>Image Index</strong> - это система, основанная на количестве лайков, "
+"полученных изображениями, которая стимулирует наиболее активных и "
+"понравившихся членов сообщества. %(_0)sLearn more.%(_1)s"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "User"
+msgstr "Пользователь"
+
+msgid "Followers"
+msgstr "Подписчики"
+
+msgid "Likes"
+msgstr "Нравится"
+
+msgid "Total integration"
+msgstr "Общее накопление"
+
+msgid "Image Index"
+msgstr "Индекс изображения"
+
+msgid "There isn't enough data yet, please come back later!"
+msgstr "Данных пока недостаточно, вернитесь позже!"
 
 msgid "Avatar"
 msgstr "Аватар"
@@ -2434,36 +2438,15 @@ msgstr "Внимание!"
 msgid "Error!"
 msgstr "Ошибка!"
 
-#, python-format
-msgid ""
-"As a producer and/or a retailer on AstroBin, it's very important that you "
-"fill in all of your company details! Click <a href=\"%(the_url)s\">here</a> "
-"to do it now."
-msgstr ""
-"Как производитель и/или продавец на AstroBin, очень важно чтобы вы заполнили "
-"все детали о вашей организации! Щёлкните <a href=\"%(the_url)s\">здесь</a> "
-"чтобы сделать это."
-
-#, python-format
-msgid ""
-"As a retailer on AstroBin, it's very important that you fill in your country "
-"of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
-msgstr ""
-"Как продавец на AstroBin, очень важно чтобы вы указали страну вашей "
-"деятельности! Щёлкните <a href=\"%(the_url)s\">здесь</a> чтобы сделать это."
-
 msgid "About"
 msgstr "Описание"
 
 msgid ""
-"AstroBin is an image hosting website specifically targeted to "
-"astrophotographers: it's the first and the last place where you need to "
-"upload your astrophotography images. Made by an astrophotographer, for the "
-"astrophotographers."
+"AstroBin is an image hosting platform and social network for amateur "
+"astronomers and astrophotographers."
 msgstr ""
-"AstroBin это хостинг изображений, ориентированный на астрофотографов: это "
-"единственное достойное место для закачки ваших астрофото. Сделано "
-"астрофотографом для астрофотографов."
+"AstroBin - это платформа для размещения изображений и социальная сеть для "
+"астрономов-любителей и астрофотографов."
 
 msgid "Site links"
 msgstr "Ссылки по сайту"
@@ -2489,11 +2472,17 @@ msgstr "Спонсоры"
 msgid "Source code"
 msgstr "Исходный код"
 
+msgid "Platform updates"
+msgstr "Обновления платформы"
+
 msgid "Thanks to"
 msgstr "Благодарности:"
 
 msgid "The localization team"
 msgstr "Команда локализации"
+
+msgid "Third party tools"
+msgstr "Сторонние инструменты"
 
 msgid "Copyright"
 msgstr "Авторское право"
@@ -2520,14 +2509,37 @@ msgid "Don't show again"
 msgstr "Не показывать"
 
 msgid ""
-"AstroBin is unable to deliver your emails, looks like your address is "
-"incorrect."
+"AstroBin is unable to deliver your emails, and it won't try again until the "
+"issue is resolved."
 msgstr ""
-"AstroBin не может доставлять ваши письма, похоже ваш электронный адрес "
-"неверен."
+"AstroBin не может доставить ваши электронные письма и не будет пытаться "
+"снова, пока проблема не будет решена."
+
+msgid "Your email provider recently reported the following error code(s):"
+msgstr ""
+"Ваш поставщик услуг электронной почты недавно сообщил о следующих кодах "
+"ошибок:"
+
+msgid ""
+"If you believe this is in error, please contact us. Otherwise please contact "
+"your email provider or change your e-mail address on AstroBin."
+msgstr ""
+"Если вы считаете, что это ошибка, свяжитесь с нами. В противном случае "
+"обратитесь к своему провайдеру электронной почты или измените адрес "
+"электронной почты на AstroBin."
 
 msgid "Change your e-mail"
 msgstr "Изменить ваш e-mail"
+
+msgid "Contact us"
+msgstr "Свяжитесь с нами"
+
+msgid ""
+"AstroBin is unable to deliver your emails, and it will try again a week "
+"after the latest email bounce."
+msgstr ""
+"AstroBin не может доставить ваши электронные письма, и он попытается снова "
+"через неделю после последнего возврата электронного письма."
 
 msgid ""
 "AstroBin is not delivering you emails because you have marked some of them "
@@ -2538,6 +2550,23 @@ msgstr ""
 
 msgid "Contact us to resolve the issue"
 msgstr "Свяжитесь с нами для решение этой проблемы"
+
+#, python-format
+msgid ""
+"<strong>Good news!</strong> AstroBin automatically recovered some of your "
+"images that were lost in the data loss incident of February 2020. Please "
+"review them to confirm the recovery. If you do nothing, your recovered "
+"images will be confirmed automatically starting from <strong>%(date)s</"
+"strong>."
+msgstr ""
+"<strong>Хорошие новости!</strong> AstroBin автоматически восстановил "
+"некоторые из ваших изображений, которые были потеряны в результате потери "
+"данных в феврале 2020 года. Просмотрите их, чтобы подтвердить "
+"восстановление. Если вы ничего не сделаете, ваши восстановленные изображения "
+"будут подтверждены автоматически, начиная с <strong>%(date)s</strong>."
+
+msgid "Review recovered images"
+msgstr "Просмотрите восстановленные изображения"
 
 msgid "Cancel"
 msgstr "Отмена"
@@ -2576,18 +2605,20 @@ msgid "Access denied"
 msgstr "Доступ запрещен"
 
 msgid "This feature is only offered at higher membership levels."
-msgstr ""
+msgstr "Эта функция доступна только на более высоких уровнях подписки."
 
 msgid ""
 "Would you be interested in upgrading? AstroBin is a very small business and "
 "your support would mean a lot!"
 msgstr ""
+"Вы были бы заинтересованы в обновлении? AstroBin - это очень маленький "
+"бизнес, и ваша поддержка будет много значить!"
 
 msgid "No, thanks"
 msgstr "Нет, спасибо"
 
 msgid "Tell me more!"
-msgstr ""
+msgstr "Расскажи подробнее!"
 
 msgid "Are you really sure?"
 msgstr "Вы точно уверены?"
@@ -2596,11 +2627,16 @@ msgid ""
 "We know, we're all used to the fact that ads on the Internet are\n"
 "                    annoying."
 msgstr ""
+"Мы знаем, все привыкли, что реклама в Интернете\n"
+"                    раздражает."
 
 msgid ""
 "However, please let us offer you two good reasons to allow ads on\n"
 "                    AstroBin:"
 msgstr ""
+"Однако позвольте нам предложить вам две веские причины разрешить показ "
+"рекламы на\n"
+"                    AstroBin:"
 
 msgid ""
 "AstroBin is a one-person business. As of the time of writing, in early "
@@ -2611,6 +2647,13 @@ msgid ""
 "the development of AstroBin, and everybody\n"
 "                        would benefit from it!"
 msgstr ""
+"AstroBin - это бизнес одного человека. На момент написания, в начале 2020 "
+"года,\n"
+"                        Я пытаюсь сделать AstroBin работой на полную ставку, "
+"но этого еще не произошло. Если бы этот сон мог бы\n"
+"                        стать реальностью, я мог бы потратить намного больше "
+"времени на разработку AstroBin и все\n"
+"                        выиграли бы от этого!"
 
 msgid ""
 "There are only astronomy ads on AstroBin, that are published after my review "
@@ -2619,6 +2662,11 @@ msgid ""
 "nothing that will use any of your private\n"
 "                        information."
 msgstr ""
+"На AstroBin есть только объявления по астрономии, которые публикуются после "
+"моего обзора и\n"
+"                        утверждения. Ничего подозрительного, ничего не по "
+"теме и ничего, что могло бы использовать ваши личные данные\n"
+"                        информация."
 
 #, python-format
 msgid ""
@@ -2626,6 +2674,9 @@ msgid ""
 "this on\n"
 "                    <a href=\"%(profile_url)s\">your settings page</a>."
 msgstr ""
+"Если вы все еще чувствуете, что не хотите видеть эту рекламу, вы можете "
+"изменить это на\n"
+"                     <a href=\"%(profile_url)s\">странице настроек</a>."
 
 msgid "Thank you!"
 msgstr "Спасибо!"
@@ -2634,12 +2685,18 @@ msgid ""
 "If this user has been harassing you, and you shadow-ban them, all their "
 "activities on your content will be invisible to everyone except themselves."
 msgstr ""
+"Если этот пользователь преследовал вас, и вы заблокировали его теневым "
+"баном, все его действия с вашим контентом будут невидимы для всех, кроме них "
+"самих."
 
 msgid ""
 "They will not know that they have been shadow-banned, and the goal is that "
 "eventually they will get bored while having caused no harm, since nobody saw "
 "what they posted."
 msgstr ""
+"Они не будут знать, что их наложили теневой бан, и цель состоит в том, чтобы "
+"в конечном итоге им надоест, не причинив никакого вреда, поскольку никто не "
+"видел того, что они опубликовали."
 
 msgid "Continue"
 msgstr "Продолжить"
@@ -2648,12 +2705,11 @@ msgid ""
 "You will remove your shadow-ban on this user, and their comments, messages, "
 "etc, will appear again on your content."
 msgstr ""
+"Вы снимете теневой бан с этого пользователя, и его комментарии, сообщения и "
+"т.д. снова появятся в вашем контенте."
 
 msgid "Quick search"
 msgstr "Быстрый поиск"
-
-msgid "Moderate"
-msgstr "Модерировать"
 
 msgid "Image queue"
 msgstr "Очередь изображений"
@@ -2688,16 +2744,20 @@ msgstr "Большая Стена"
 msgid "Advanced search"
 msgstr "Расширенный поиск"
 
+msgid "Top pick nominations"
+msgstr "Номинации на лучшие изображения"
+
 msgid "Top picks"
 msgstr "Лучшие изображения"
 
-#, fuzzy
-#| msgid "Home of Astrophotography"
 msgid "Remote astrophotography"
-msgstr "Уголок Астрофотографии"
+msgstr "Удалённая астрофотография"
 
-msgid "Trending astrophotographers"
-msgstr "Ведущие астрофотографы"
+msgid "Contributors list"
+msgstr "Список авторов"
+
+msgid "(beta)"
+msgstr "(бета)"
 
 msgid "Stats"
 msgstr "Статистика"
@@ -2708,14 +2768,8 @@ msgstr "Справка"
 msgid "Contact"
 msgstr "Контакты"
 
-msgid "User"
-msgstr "Пользователь"
-
-msgid "AstroBin index"
-msgstr "Индекс AstroBin"
-
-msgid "Followers"
-msgstr "Подписчики"
+msgid "n/a"
+msgstr "н/д"
 
 msgid "Would you like to start using your real name on AstroBin?"
 msgstr "Хотите начать использовать своё настоящее имя на AstroBin?"
@@ -2729,17 +2783,40 @@ msgstr "Войти"
 msgid "Register"
 msgstr "Регистрация"
 
+#, python-format
+msgid ""
+"The <strong>Image Index</strong> is a system based on likes received on "
+"images, that incentivizes the most active and liked members of the "
+"community. %(_0)sLearn more.%(_1)s"
+msgstr ""
+"<strong>Image Index</strong> - это система, основанная на количестве лайков, "
+"полученных изображениями, которая стимулирует наиболее активных и "
+"понравившихся членов сообщества. %(_0)sLearn more.%(_1)s"
+
+msgid "Contribution Index"
+msgstr "Индекс вклада"
+
+#, python-format
+msgid ""
+"The <strong>Contribution Index (beta)</strong> is system to reward "
+"informative, constructive, and valuable commentary on AstroBin. %(_0)sLearn "
+"more.%(_1)s"
+msgstr ""
+"<strong>Contribution Index (beta)</strong> - это система вознаграждения за "
+"информативные, конструктивные и ценные комментарии к AstroBin. %(_0)sLearn "
+"more.%(_1)s"
+
 msgid "Subscription plans"
 msgstr "Планы подписки"
 
 msgid "My places"
 msgstr "Мои места"
 
-msgid "Commercial products"
-msgstr "Рекламные продукты"
+msgid "Public Gallery"
+msgstr "Публичная Галерея"
 
-msgid "Gallery"
-msgstr "Галерея"
+msgid "Staging Area"
+msgstr "Студия"
 
 msgid "Bookmarks"
 msgstr "Закладки"
@@ -2823,21 +2900,6 @@ msgstr ""
 msgid "Custom e-mail change request on AstroBin"
 msgstr "Пользовательский запрос на изменение e-mail на AstroBin"
 
-msgid "Edit commercial product"
-msgstr "Редактировать рекламный продукт"
-
-msgid "Save"
-msgstr "Сохранить"
-
-msgid "Return to list"
-msgstr "Вернуться в список"
-
-msgid "View in new window"
-msgstr "Открыть в новом окне"
-
-msgid "Edit retailed product"
-msgstr "Редактировать продаваемый продукт"
-
 msgid ""
 "Please contact us if you need any assistance, or want to report a problem, "
 "give some feedback or suggestions, or simply want to get in touch!"
@@ -2867,6 +2929,18 @@ msgstr "Спасибо!"
 
 msgid "Thank you! Your message was sent successfully."
 msgstr "Спасибо! Ваше сообщение было успешно отправлено!"
+
+msgid "Comments"
+msgstr "Комментарии"
+
+msgid "Forum posts"
+msgstr "Сообщения на форуме"
+
+msgid "Written"
+msgstr "Написано"
+
+msgid "Received"
+msgstr "Получено"
 
 msgid "Cookie consent"
 msgstr "Согласие на использование куки"
@@ -3047,77 +3121,6 @@ msgid ""
 "grateful."
 msgstr "Ваш вклад очень важен, и всё сообщество AstroBin благодарно."
 
-msgid "by"
-msgstr "от"
-
-msgid "Other images"
-msgstr "Другие изображения"
-
-msgid "Some images"
-msgstr "Некоторые изображения"
-
-msgid "(view more)"
-msgstr "(смотреть ещё)"
-
-msgid "Reviews"
-msgstr "Обзоры"
-
-msgid "Rating"
-msgstr "Оценка"
-
-msgid "There are no reviews yet."
-msgstr "Ещё нет обзоров."
-
-msgid "Add your review"
-msgstr "Добавить свой обзор"
-
-msgid ""
-"Please be fair, honest and polite when writing a review. Many people will "
-"read your review: all the users on AstroBin who own this piece of gear, will "
-"be notified of your review."
-msgstr ""
-"Будьте честны, справедливы и вежливы когда пишете обзор. Многие прочтут его: "
-"все пользователи, у кого есть часть этого оборудования, будут уведомлены о "
-"вашем обзоре."
-
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to write a review."
-msgstr ""
-"Пожалуйста, <a href=\"/accounts/login/\">войдите</a> или <a href=\"/accounts/"
-"register/\">зарегистрируйтесь</a>, чтобы написать обзор."
-
-msgid "Comments"
-msgstr "Комментарии"
-
-msgid ""
-"Use this space to start a discussion, leave a comment or ask a question "
-"about this piece of gear. All the users on AstroBin who own one, will be "
-"notified and can join the discussion."
-msgstr ""
-"Используйте это место для начала обсуждения, оставьте комментарий или "
-"задайте вопрос об этом оборудовании. Все пользователи на AstrоBin, у кого "
-"оно есть, будут уведомлены и смогут присоединиться к обсуждению."
-
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment."
-msgstr ""
-"Пожалуйста, <a href=\"/accounts/login/\">войдите</a> или <a href=\"/accounts/"
-"register/\">зарегистрируйтесь</a>, чтобы оставить комментарий."
-
-msgid "Buy it here"
-msgstr "Купить это здесь"
-
-msgid "Properties"
-msgstr "Свойства"
-
-msgid "Owners"
-msgstr "Владельцы"
-
-msgid "just now"
-msgstr "только сейчас"
-
 msgid "Additional information requested"
 msgstr "Требуется дополнительная информация"
 
@@ -3134,16 +3137,24 @@ msgstr ""
 msgid "Return to image"
 msgstr "Вернуться к изображению"
 
+msgid "Hemisphere"
+msgstr "Полушарие"
+
+msgid "Northern"
+msgstr "Северный"
+
+msgid "Southern"
+msgstr "Южный"
+
 msgid "Contains"
 msgstr "Содержит"
 
-msgid "Remove ads"
-msgstr "Убрать рекламу"
+#, python-format
+msgid "And %(count)s more."
+msgstr "И %(count)s дальше."
 
-#, fuzzy
-#| msgid "Acquired after"
 msgid "Acquired at"
-msgstr "Снято после"
+msgstr "Снято в"
 
 msgid "Remove"
 msgstr "Убрать"
@@ -3161,9 +3172,6 @@ msgstr ""
 msgid "Comments are closed."
 msgstr "Оставлять комментарии запрещено."
 
-msgid "Made possible by"
-msgstr "Сделано с помощью"
-
 msgid "In these public groups"
 msgstr "В этих открытых группах"
 
@@ -3171,13 +3179,30 @@ msgid "Histogram"
 msgstr "Гистограмма"
 
 msgid "Right ascension"
-msgstr ""
+msgstr "Прямое восхождение"
 
 msgid "Declination"
 msgstr "Наклонение"
 
 msgid "Technical card"
 msgstr "Техническая карточка"
+
+msgid "Sponsored brands"
+msgstr "Спонсируемые фирмы"
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr "Закупайтесь <strong>%(name)s</strong> в %(retailer)s"
+
+msgid "Sponsored items"
+msgstr "Спонсируемые товары"
+
+msgid "Disable retailer integration"
+msgstr "Отключить интеграцию с розничным продавцом"
+
+#, python-format
+msgid "Shop %(name)s at %(retailer)s"
+msgstr "Закупайтесь %(name)s в %(retailer)s"
 
 msgid "Frames"
 msgstr "Кадры"
@@ -3186,13 +3211,13 @@ msgid "Basic astrometry details"
 msgstr "Основные детали астрометрии"
 
 msgid "RA center"
-msgstr "RA центр"
+msgstr "Центр П.В."
 
 msgid "degrees"
 msgstr "градусов"
 
 msgid "DEC center"
-msgstr "DEC центр"
+msgstr "Центр Скл"
 
 msgid "Pixel scale"
 msgstr "Пиксельный масштаб"
@@ -3204,7 +3229,7 @@ msgid "Orientation"
 msgstr "Направление"
 
 msgid "(flipped)"
-msgstr ""
+msgstr "(перевёрнутый)"
 
 msgid "Field radius"
 msgstr "Радиус поля"
@@ -3216,13 +3241,16 @@ msgid "Resolution"
 msgstr "Разрешение"
 
 msgid "Uncompressed source file"
-msgstr ""
+msgstr "Несжатый исходный файл"
 
 msgid "Download"
 msgstr "Загрузить"
 
 msgid "Remote source"
 msgstr "Удаленный источник"
+
+msgid "Download original file"
+msgstr "Скачать исходный файл"
 
 msgid "Author"
 msgstr "Автор"
@@ -3234,7 +3262,7 @@ msgid "Actions"
 msgstr "Действия"
 
 msgid "Upload uncompressed source (XISF/FITS/PSD/TIFF)"
-msgstr ""
+msgstr "Загрузить несжатый источник (XISF/FITS/PSD/TIFF)"
 
 msgid "Upload new revision"
 msgstr "Загрузить другую версию"
@@ -3246,7 +3274,7 @@ msgid "Promote to public area"
 msgstr "Перенести в Public Area"
 
 msgid "Move to staging area"
-msgstr "Переместить в Staging Area"
+msgstr "Переместить в студию"
 
 msgid "Send to group"
 msgstr "Отправить в группу"
@@ -3263,15 +3291,11 @@ msgstr "Удалить оригинальное изображение"
 msgid "Delete this revision only"
 msgstr "Удалить только эту версию"
 
-#, fuzzy
-#| msgid "Delete conversation"
 msgid "Delete all other versions"
-msgstr "Удалить разговор"
+msgstr "Удалить все остальные версии"
 
-#, fuzzy
-#| msgid "Delete image and all revisions"
 msgid "Delete all revisions"
-msgstr "Удалить изображение и все его версии"
+msgstr "Удалить все версии"
 
 msgid "Flag malfunctioning thumbnails"
 msgstr "Отметить повреждённые миниатюры"
@@ -3307,7 +3331,7 @@ msgid "Advanced plate-solving settings"
 msgstr "Продвинутое определение"
 
 msgid "Restart advanced plate-solving"
-msgstr ""
+msgstr "Перезапустить продвинутый плейтсолв"
 
 msgid "Context"
 msgstr "Контекст"
@@ -3337,12 +3361,10 @@ msgid "Send private message"
 msgstr "Отправить личное сообщение"
 
 msgid "Shadow-ban"
-msgstr ""
+msgstr "Теневой бан"
 
-#, fuzzy
-#| msgid "Remove ads"
 msgid "Remove shadow-ban"
-msgstr "Убрать рекламу"
+msgstr "Удалить теневой бан"
 
 msgid "View"
 msgstr "Просмотр"
@@ -3371,7 +3393,7 @@ msgid ""
 msgstr "Эта версия будет полностью удалено и невосстановимо. Вы уверены?"
 
 msgid "Associate XISF/FITS file"
-msgstr ""
+msgstr "Связанный файл XISF/FITS"
 
 msgid ""
 "\n"
@@ -3385,6 +3407,16 @@ msgid ""
 "your image).\n"
 "                    "
 msgstr ""
+"\n"
+"                        Чтобы еще больше повысить точность решения для "
+"планшетов, загрузите один из XISF или\n"
+"                        FITS файлы из вашего набора данных. Такие файлы "
+"обычно имеют заголовки даты и времени, что позволяет\n"
+"                        AstroBin для расчета эфемерид тела солнечной системы "
+"и поиска планет и астероидов в вашем\n"
+"                        изображение (при условии, что вы также добавили к "
+"изображению информацию о местоположении)\n"
+"                    "
 
 #, python-format
 msgid ""
@@ -3395,6 +3427,12 @@ msgid ""
 "target=\"_blank\">%(xisf_url)s</a>\n"
 "                    "
 msgstr ""
+"\n"
+"                        Для максимальной точности рекомендуется использовать "
+"собственный и открытый формат PixInsight XISF.\n"
+"                        Узнайте больше о XISF здесь: <a href=\"%(xisf_url)s"
+"\" target=\"_blank\">%(xisf_url)s</a>\n"
+"                    "
 
 msgid ""
 "\n"
@@ -3408,6 +3446,15 @@ msgid ""
 "it.\n"
 "                    "
 msgstr ""
+"\n"
+"                         <strong>Обратите внимание:</strong>очень важно, "
+"чтобы загружаемый вами файл XISF или FITS было\n"
+"                        выровнено по обработанному изображению, иначе "
+"аннотации объектов не будут совпадать. \n"
+"                        Чтобы повысить свои шансы на получение точного "
+"раствора для планшетов, откалибруйте файл обычным способом\n"
+"                        путь (дарк/биас/флэт), но растягивать его не нужно.\n"
+"                        "
 
 msgid "The following people bookmarked this image"
 msgstr "Следующие люди добавили в закладки это изображение"
@@ -3420,24 +3467,37 @@ msgstr "Извините"
 
 #, python-format
 msgid ""
-"We're really sorry, but liking an image requires an AstroBin index of "
-"<strong>%(min_index_to_like)s</strong> or greater."
+"We're really sorry, but giving likes requires an Image Index of <strong>"
+"%(min_index_to_like)s</strong> or greater."
 msgstr ""
-"Мы очень извиняемся, но нажимать Нравится вы можете только если ваш AstroBin "
-"индекс <strong>%(min_index_to_like)s</strong> или выше."
+"Сожалеем, но для получения лайков требуется индекс изображения <strong>"
+"%(min_index_to_like)s</strong> или выше."
 
 msgid ""
 "Such limitation improves the website as a whole by discouraging people from "
-"creating fake accounts to like their own images. Thank you for understanding!"
+"creating fake accounts to like their own content. Thank you for "
+"understanding!"
 msgstr ""
-"Такое ограничение улучшает веб-сайт в целом, отбивая у людей, создающих "
-"ложные аккаунты для оценок своих собственных изображений. Спасибо за "
-"понимание!"
+"Такое ограничение улучшает работу веб-сайта в целом, не позволяя людям "
+"создавать фальшивые учетные записи, чтобы им нравился их собственный "
+"контент. Спасибо за понимание!"
 
 #, python-format
-msgid "Currently, your AstroBin index is <strong>%(index)s</strong>."
+msgid "Currently, your Image Index is <strong>%(index)s</strong>."
 msgstr ""
-"На данный момент, ваш AstroBin индекс равен <strong>%(index)s</strong>."
+"В настоящее время ваш индекс изображения составляет <strong>%(index)s</"
+"strong>."
+
+#, python-format
+msgid ""
+"To learn more about the Image Index, please visit %(_0)sthe FAQ page%(_1)s. "
+"Thanks!"
+msgstr ""
+"Чтобы узнать больше об индексе изображений, посетите %(_0)sthe FAQ page"
+"%(_1)s. Спасибо!"
+
+msgid "You cannot remove a like that you gave more than one hour ago."
+msgstr "Вы не можете удалить лайк, сделанный более часа назад."
 
 msgid "Delete image and all its revisions?"
 msgstr "Удалить изображение и все его версии?"
@@ -3466,34 +3526,34 @@ msgstr ""
 "Это изображение будет полностью удалено и невосстановимо. Его версии не "
 "будут удалены. Вы уверены?"
 
-#, fuzzy
-#| msgid "Delete this revision?"
 msgid "Delete all other versions?"
-msgstr "Удалить эту версию?"
+msgstr "Удалить все другие версии?"
 
 msgid ""
 "You will delete all other revisions (if any), and the originally uploaded "
 "image, leaving the current revision as the final and only version of this "
 "image."
 msgstr ""
+"Вы удалите все другие редакции (если таковые имеются) и первоначально "
+"загруженное изображение, оставив текущую редакцию в качестве окончательной и "
+"единственной версии этого изображения."
 
-#, fuzzy
-#| msgid "Delete this revision?"
 msgid "Delete all revisions?"
-msgstr "Удалить эту версию?"
+msgstr "Удалить все ревизии?"
 
 msgid ""
 "You will delete all revisions, leaving the originally uploaded image as the "
 "final and only version of this image."
 msgstr ""
+"Вы удалите все версии, оставив исходно загруженное изображение в качестве "
+"последней и единственной версии этого изображения."
 
 msgid ""
 "This will move this image to your staging area, making it unlisted. The "
 "image will be accessible by anyone with a direct link."
 msgstr ""
-"Это действие перенесет изображение в вашу Staging Area и скроет его из "
-"вашего списка работ. Изображение останется доступным для всех по прямой "
-"ссылке."
+"Это действие перенесет изображение в вашу студию и скроет его из вашего "
+"списка работ. Изображение останется доступным для всех по прямой ссылке."
 
 msgid ""
 "This will trigger the regeneration of all thumbnails for this image and all "
@@ -3502,22 +3562,33 @@ msgstr ""
 "Это заставит переобновиться миниатюры для этого изображения и всех его "
 "версий."
 
+msgid "Close"
+msgstr "Закрыть"
+
 msgid "The following people like this image"
 msgstr "Следующим пользователям нравится это изображение"
 
 msgid ""
-"This will move this image to your public area, making it listed and "
-"notifying your followers."
+"This will move this image to your public area, making it listed. As this "
+"image had already been published before, your followers will not be notified."
 msgstr ""
-"Это действие перенесет изображение в вашу Public Area, добавит его к списку "
-"ваших работ и уведомит ваших подписчиков."
+"Это переместит это изображение в вашу общедоступную зону и внесет его в "
+"список. Поскольку это изображение уже было опубликовано ранее, ваши "
+"подписчики не будут уведомлены."
+
+msgid ""
+"This will move this image to your public area, making it listed and "
+"optionally notifying your followers."
+msgstr ""
+"Это переместит это изображение в вашу общедоступную зону, внесет его в "
+"список и при необходимости уведомит ваших подписчиков."
 
 msgid ""
 "Sorry, you cannot send images from your Staging Area to a group. You need to "
 "first promote this image to your Public Area, if you want to do that."
 msgstr ""
-"Извините, но отправить изображение из Staging Area в группу невозможно. "
-"Сначала вы должны перенести его в Public Area."
+"Извините, но отправить изображение из студии в группу невозможно. Сначала вы "
+"должны перенести его в открытую область."
 
 msgid ""
 "Use this form to select one of your groups. The list includes all public and "
@@ -3548,20 +3619,17 @@ msgstr "Нет"
 msgid "Image size"
 msgstr "Размер изображения"
 
-msgid "Regular"
-msgstr "Обычный"
-
 msgid "Full"
 msgstr "Полный"
 
 msgid "Real"
-msgstr "Настоящее"
-
-msgid "Copy this"
-msgstr "Скопировать"
+msgstr "Настоящий"
 
 msgid "Image mode"
 msgstr "Режим изображения"
+
+msgid "Copy this"
+msgstr "Скопировать"
 
 msgid ""
 "Did you improve the post-processing of your image? Upload the new\n"
@@ -3573,18 +3641,24 @@ msgstr ""
 #, python-format
 msgid "Over 100 MB? Try the <a href=\"%(url)s/%(id)s\">new beta uploader</a>!"
 msgstr ""
+"Более 100 МБ? Попробуйте <a href=\"%(url)s/%(id)s\">new beta uploader</a>!"
 
 msgid ""
 "Please note: AstroBin is not officially a backup service. So please also "
 "keep additional copies of your file. However, by storing your work here, you "
 "can have some additional peace of mind."
 msgstr ""
+"Обратите внимание: AstroBin официально не является сервисом резервного "
+"копирования. Поэтому, пожалуйста, также сохраните дополнительные копии "
+"вашего файла. Однако, сохраняя здесь свою работу, вы можете быть спокойны."
 
 #, python-format
 msgid ""
 "Read about how AstroBin stores your files safely on the <a href=\"%(faq_url)s"
 "\">FAQ page</a>."
 msgstr ""
+"Прочтите о том, как AstroBin безопасно хранит ваши файлы на <a href="
+"\"%(faq_url)s\">FAQ page</a>."
 
 msgid "Clear"
 msgstr "Очистить"
@@ -3615,19 +3689,17 @@ msgid ""
 "unless you give them one of the links you can find in the <em>Share</em> "
 "menu below. Use that link to post this image to Internet forums and get "
 "feedback on it. When you are satisfied, perhaps after uploading some "
-"revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
-"to the <a href=\"%(profile_url)s\">Public Area</a>."
+"revisions, promote it to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
 "Это изображение <strong>в работе</strong> из вашей<a href=\"%(profile_url)s?"
-"staging\">Staging Area</a>. Это означает, что никто не сможет увидеть его "
-"пока вы не дадите на него прямую ссылку с помощью функции <em>Поделиться</"
-"em>. Используйте эту ссылку, чтобы публиковать изображения на форумах и "
-"получать отзывы. Когда вас все устроит, возможно, после загрузки нескольких "
-"версий, <a href=\"#promote-modal\" data-toggle=\"modal\">переместите его</a> "
-"в <a href=\"%(profile_url)s\">Public Area</a>."
+"staging\">Студии</a>. Это означает, что никто не сможет увидеть его пока вы "
+"не дадите на него прямую ссылку с помощью функции <em>Поделиться</em>. "
+"Используйте эту ссылку, чтобы публиковать изображения на форумах и получать "
+"отзывы. Когда вас все устроит, возможно, после загрузки нескольких версий, "
+"переместите его в <a href=\"%(profile_url)s\">Public Area</a>."
 
 msgid "Oh no!"
-msgstr ""
+msgstr "О, нет!"
 
 msgid ""
 "\n"
@@ -3638,6 +3710,13 @@ msgid ""
 "            this form should provide you with enough context).\n"
 "        "
 msgstr ""
+"\n"
+"«Нам очень, очень жаль, но похоже, что ваше изображение было потеряно из-за "
+"катастрофической потери\n"
+"             данных, и ее нельзя восстановить. Надеюсь, у вас все еще есть "
+"файл (информация на\n"
+"            этой форме должна предоставить вам достаточно контекста).\n"
+"            "
 
 msgid ""
 "\n"
@@ -3647,6 +3726,12 @@ msgid ""
 "is still here.\n"
 "        "
 msgstr ""
+"\n"
+"            Пожалуйста, используйте указанный ниже файл, чтобы загрузить его "
+"снова, а затем нажмите кнопку Сохранить\n"
+"            ниже. Все данные, которые вы ранее связали с вашим изображением, "
+"все еще здесь.\n"
+"        "
 
 msgid "Here's some detail about the image to give you some context."
 msgstr "Еще несколько деталей об изображении для контекста"
@@ -3664,10 +3749,13 @@ msgid "Please wait..."
 msgstr "Пожалуйста, ждите..."
 
 msgid "AstroBin is processing your thumbnails."
-msgstr ""
+msgstr "AstroBin обрабатывает ваши эскизы."
 
 msgid "Edit your image: acquisition details"
 msgstr "Правка вашего изображения: детали получения"
+
+msgid "Save"
+msgstr "Сохранить"
 
 msgid "Remove data"
 msgstr "Удалить данные"
@@ -3733,10 +3821,8 @@ msgstr "Загрузка…"
 msgid "Next step: gear used"
 msgstr "Далее: используемое оборудование"
 
-#, fuzzy
-#| msgid "Sponsors"
 msgid "sponsor"
-msgstr "Спонсоры"
+msgstr "спонсор"
 
 msgid "Edit your image: gear used"
 msgstr "Правка вашего изображения: используемое оборудование"
@@ -3838,18 +3924,10 @@ msgid "Apply a watermark to image"
 msgstr "Применить водяной знак к изображению"
 
 msgid ""
-"AstroBin can protect your images from theft by applying a watermark to them. "
-"Be careful with your settings though: once a watermark has been applied, it "
-"cannot be removed (AstroBin won't store the non-watermarked version of your "
-"image, for your safety). If you don't like the watermark resulting from the "
-"following settings, your only choice is to delete the image and start over."
+"AstroBin can protect your images from theft by applying a watermark to them."
 msgstr ""
-"AstroBin может защитить ваши изображения от вороства, применяя к ним водяной "
-"знак. Будьте осторожны с вашими настройками к ним: применённый однажды "
-"водяной знак нельзя отменить (AstroBin не будет хранить не-маркированные "
-"версии ваших изображений, для вашей безопасности). Если вам не нравится "
-"окончательный водяной знак из имеющихся настроек, вам остаётся только "
-"удалить изображение и начать снова."
+"AstroBin может защитить ваши изображения от кражи, нанеся на них водяной "
+"знак."
 
 msgid "Please note: animated GIFs cannot be watermarked at this time."
 msgstr ""
@@ -3869,29 +3947,38 @@ msgstr "Полное разрешение"
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "от <a href=\"%(the_url)s\">%(user)s</a>"
 
+msgid "Plate-solution overlay"
+msgstr "Наложение распознавания"
+
 msgid "Fit to window"
 msgstr "Под размеры окна"
 
+msgid "Loading click-and-drag zoom..."
+msgstr "Загрузка масштабирования щелчком и перетаскиванием..."
+
 msgid "Abscissa "
-msgstr ""
+msgstr "Абсцисса"
 
 msgid "Ordinate"
-msgstr ""
+msgstr "Ордината"
 
 msgid "Ecliptic longitude"
-msgstr ""
+msgstr "Долгота эклиптики"
 
 msgid "Ecliptic latitude"
-msgstr ""
+msgstr "Широта эклиптики"
 
 msgid "Galactic longitude"
-msgstr ""
+msgstr "Галактическая долгота"
 
 msgid "Galactic latitude"
-msgstr ""
+msgstr "Галактическая широта"
 
-msgid "View page"
-msgstr "Подробнее"
+msgid "Click-and-drag anywhere on the image."
+msgstr "Щелкните и перетащите в любое место на изображении."
+
+msgid "Want to zoom in?"
+msgstr "Хотите увеличить?"
 
 msgid "No gear yet."
 msgstr "Ещё нет оборудования."
@@ -3903,13 +3990,21 @@ msgid "No images"
 msgstr "Нет изображений"
 
 msgid "Only you can see this"
+msgstr "Только вы можете видеть это"
+
+#, python-format
+msgid ""
+"Interested in <strong>%(brand)s</strong>? Our sponsor <strong>%(retailer)s</"
+"strong> sells this brand!"
 msgstr ""
+"Заинтересованы в <strong>%(brand)s</strong>? Наш спонсор <strong>"
+"%(retailer)s</strong> продает этот бренд!"
+
+msgid "Shop now"
+msgstr "Купить сейчас"
 
 msgid "Integration"
 msgstr "Накопление"
-
-msgid "Likes"
-msgstr "Нравится"
 
 msgid "Date joined"
 msgstr "Дата присоединения"
@@ -3921,7 +4016,7 @@ msgid "link"
 msgstr "ссылка"
 
 msgid "Comment of deleted image not shown."
-msgstr ""
+msgstr "Комментарий к удаленному изображению не отображается."
 
 msgid "No results. Sorry."
 msgstr "Безрезультатно. Извините."
@@ -3963,28 +4058,14 @@ msgstr ""
 msgid "What is this site?"
 msgstr "Что это за сайт?"
 
-msgid "Commercial information"
-msgstr "Рекламная информация"
-
-msgid "Retailer information"
-msgstr "Информация о продавце"
-
-msgid "Blog"
-msgstr "Дневник"
-
-msgid "Terms of servic"
-msgstr "Условия предоставления услуг"
-
-msgid ""
-"AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
-"Reserved. The images on this websites are copyright of their respective "
-"owners."
-msgstr ""
-"Авторские права AstroBin &copy; 2010-2012 Salvatore Iovene, Все Права "
-"Защищены. Изображения на этом сайте принадлежат их уважаемым владельцам."
+msgid "Gallery"
+msgstr "Галерея"
 
 msgid "Compose message"
 msgstr "Создать сообщение"
+
+msgid "Type your message here..."
+msgstr "Напишите здесь ваше сообщение..."
 
 msgid "Type in a search term"
 msgstr "Введите условия поиска"
@@ -4010,9 +4091,6 @@ msgstr "Нет сообщений"
 msgid "Back"
 msgstr "Назад"
 
-msgid "Delete conversation"
-msgstr "Удалить разговор"
-
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
 msgstr "Разговор между <a href=\"%(sender_url)s\">вами</a> и"
@@ -4020,8 +4098,14 @@ msgstr "Разговор между <a href=\"%(sender_url)s\">вами</a> и"
 msgid "Reply"
 msgstr "Ответить"
 
+msgid "Delete conversation"
+msgstr "Удалить разговор"
+
 msgid "Sending..."
 msgstr "Отправка..."
+
+msgid "Moderate"
+msgstr "Модерировать"
 
 msgid ""
 "Please click on the images that you want to mark as SPAM, then click on the "
@@ -4031,7 +4115,7 @@ msgstr ""
 "нажмите кнопку Подтвердить чтобы одобрить все остальные."
 
 msgid "Finish"
-msgstr "Финский"
+msgstr "Готово"
 
 msgid "The moderation queue is empty, hooray! Come back later."
 msgstr "Ура! Очередь на модерацию пуста. Возвращайтесь позже."
@@ -4052,66 +4136,124 @@ msgstr "Подтвердить выбранные и забанить остал
 msgid "There are no images in the spam list."
 msgstr "В спам листе пока нет изображений."
 
+msgid "Your request for an API Key has been approved!"
+msgstr "Ваш запрос на API-ключ был одобрен!"
+
+msgid "Your API key"
+msgstr "Ваш API-ключ"
+
+msgid "Your API secret"
+msgstr "Ваш API-секрет"
+
+#, python-format
+msgid "Please read the API documentation %(_0)shere%(_1)s."
+msgstr "Прочтите документацию по API %(_0)shere%(_1)s."
+
 #, python-format
 msgid ""
-"Your request for an API Key has been approved!\n"
-"\n"
-"    Your key: %(key)s\n"
-"    Your secret: %(secret)s\n"
-"\n"
-"    Please read the API documentation at <a href=\"%(api_docs_url)s\">"
-"%(api_docs_url)s</a>\n"
-"\n"
-"    You can review your API keys at <a href=\"%(api_keys_url)s\">"
-"%(api_keys_url)s</a>\n"
-"\n"
-"    Thank you for using AstroBin's APIs!"
+"You can review your API keys at <a href=\"%(api_keys_url)s\">"
+"%(api_keys_url)s</a>"
 msgstr ""
-"Ваш запрос API-ключа был одобрен!\n"
-"\n"
-"    Ваш ключ: %(key)s\n"
-"    Секретный код: %(secret)s\n"
-"\n"
-"    Пожалуйста, прочтите документацию на API по адресу <a href="
-"\"%(api_docs_url)s\">%(api_docs_url)s</a>\n"
-"    \n"
-"    Вы можете посмотреть свои API-ключи по адресу <a href=\"%(api_keys_url)s"
-"\">%(api_keys_url)s</a>\n"
-"    \n"
-"    Спасибо за использование API от AstroBin!"
+"Вы можете просмотреть свои ключи API на странице <a href=\"%(api_keys_url)s"
+"\">%(api_keys_url)s</a>"
+
+msgid "Thank you for using AstroBin's APIs!"
+msgstr "Спасибо за использование AstroBin API !"
 
 #, python-format
+msgid "You can review your API keys at %(api_keys_url)s."
+msgstr "Вы можете просмотреть свои ключи API на странице %(api_keys_url)s."
+
+msgid "Congratulations for your first image on AstroBin!"
+msgstr "Поздравляем с вашим первым изображением на AstroBin!"
+
 msgid ""
-"Your request for an API Key has been approved!\n"
-"\n"
-"    Your key: %(key)s\n"
-"    Your secret: %(secret)s\n"
-"\n"
-"    Please read the API documentation at %(api_docs_url)s\n"
-"    \n"
-"    You can review your API keys at %(api_keys_url)s\n"
-"    \n"
-"    Thank you for using AstroBin's APIs!"
+"Good job with uploading your first image on AstroBin. I hope it's the first "
+"of many!"
 msgstr ""
-"Ваш запрос API-ключа был одобрен!\n"
-"\n"
-"    Ваш ключ: %(key)s\n"
-"    Секретный код: %(secret)s\n"
-"\n"
-"    Пожалуйста, прочтите документацию на API по адресу %(api_docs_url)s\n"
-"    \n"
-"    Вы можете посмотреть свои API-ключи по адресу %(api_keys_url)s\n"
-"    \n"
-"    Спасибо за использование API от AstroBin!"
+"Хорошая работа с загрузкой вашего первого изображения на AstroBin. Надеюсь, "
+"это первый из многих!"
+
+msgid "Allow me to jump in and offer a few tips:"
+msgstr "Позвольте мне сразу же предложить несколько советов:"
 
 #, python-format
 msgid ""
-"<a href=\"%(api_keys_url)s\">Your request for an API Key has been approved!</"
-"a>"
-msgstr "<a href=\"%(api_keys_url)s\">Ваш запрос на API-ключ был одобрен!</a>"
+"Keep in mind that AstroBin is not meant to be a free service. If you are "
+"still on a free account, you can upload images %(max)s times before you will "
+"be asked to upgrade. More info on the <a href=\"%(url)s\">pricing page</a>."
+msgstr ""
+"Имейте в виду, что AstroBin не является бесплатным сервисом. Если у вас все "
+"еще есть бесплатная учетная запись, вы можете загружать изображения %(max)s "
+"раз, прежде чем вам будет предложено обновить. Дополнительная информация на "
+"<a href=\"%(url)s\">pricing page</a>."
 
-msgid "API Key request approved"
-msgstr "Запрос API-ключа одобрен"
+#, python-format
+msgid ""
+"New uploads go to your \"staging area\", where they are unlisted. You can "
+"still share the link to an individual image in your staging area, and people "
+"with a link will be able to access it, but to make an image public and "
+"listed on AstroBin, you need to promote it. Visit <a href=\"%(url)s\">your "
+"staging area</a>."
+msgstr ""
+"Новые загрузки попадают в вашу «студию», где их нет в списке. Вы по-прежнему "
+"можете поделиться ссылкой на отдельное изображение в своей области "
+"подготовки, и люди, у которых есть ссылка, смогут получить к нему доступ, но "
+"чтобы сделать изображение общедоступным и внесенным в список на AstroBin, "
+"вам необходимо его продвигать. Посетите <a href=\"%(url)s\">вашу студию</a>."
+
+#, python-format
+msgid ""
+"If you have any questions, have a look at the <a href=\"%(url)s\">frequently "
+"asked questions</a>."
+msgstr ""
+"Если у вас есть какие-либо вопросы, просмотрите <a href=\"%(url)s\">часто "
+"задаваемые вопросы</a>."
+
+#, python-format
+msgid ""
+"Finally, should you need any support, simply use the <a href=\"%(url)s"
+"\">contact form</a> or send an email to <a href=\"mailto:support@astrobin.com"
+"\">support@astrobin.com</a>."
+msgstr ""
+"Наконец, если вам понадобится поддержка, просто используйте <a href=\"%(url)s"
+"\">контактную форму</a> или отправьте электронное письмо по адресу <a href="
+"\"mailto:support@astrobin.com\">support@astrobin.com</a>."
+
+#, python-format
+msgid ""
+"Keep in mind that AstroBin is not meant to be a free service. If you are "
+"still on a free account, you can upload images %(max)s times before you will "
+"be asked to upgrade. More info on the pricing page:"
+msgstr ""
+"Имейте в виду, что AstroBin не является бесплатным сервисом. Если у вас все "
+"еще есть бесплатная учетная запись, вы можете загружать изображения %(max)s "
+"раз, прежде чем вам будет предложено обновить. Более подробная информация на "
+"странице цен:"
+
+msgid ""
+"New uploads go to your \"staging area\", where they are unlisted. You can "
+"still share the link to an individual image in your staging area, and people "
+"with a link will be able to access it, but to make an image public and "
+"listed on AstroBin, you need to promote it. Visit your staging area:"
+msgstr ""
+"Новые загрузки попадают в вашу «студию», где их нет в списке. Вы по-прежнему "
+"можете поделиться ссылкой на отдельное изображение в своей области "
+"подготовки, и люди, у которых есть ссылка, смогут получить к нему доступ, но "
+"чтобы сделать изображение общедоступным и внесенным в список на AstroBin, "
+"вам необходимо его продвигать. Посетите свою студию:"
+
+msgid ""
+"If you have any questions, have a look at the frequently asked questions:"
+msgstr ""
+"Если у вас есть какие-либо вопросы, просмотрите часто задаваемые вопросы:"
+
+msgid "Finally, should you need any support, simply use the contact form:"
+msgstr ""
+"Наконец, если вам понадобится поддержка, просто используйте контактную форму:"
+
+msgid "Or send an email to support@astrobin.com."
+msgstr "Или отправьте электронное письмо на адрес support@astrobin.com."
 
 msgid "You have a new notification on AstroBin"
 msgstr "У вас новое уведомление"
@@ -4134,10 +4276,10 @@ msgid ""
 "\n"
 "%(message)s\n"
 "\n"
-"To see all your notifications, please go to %(notices_url)s.\n"
+"To see all your notifications, please go to %(base_url)s%(notices_url)s.\n"
 "\n"
 "If you don't want to receive emails anymore, edit your preferences by going "
-"to http://astrobin.com%(pref_url)s.\n"
+"to %(base_url)s%(pref_url)s.\n"
 "\n"
 "PLEASE DO NOT REPLY TO THIS EMAIL\n"
 "\n"
@@ -4148,10 +4290,11 @@ msgstr ""
 "\n"
 "%(message)s\n"
 "\n"
-"Чтобы увидеть все ваши уведомления, перейдите по ссылке %(notices_url)s.\n"
+"Чтобы увидеть все ваши уведомления, перейдите по ссылке %(base_url)s"
+"%(notices_url)s.\n"
 "\n"
-"Если вы не хотите больше получать письма, поправьте ваши настройки по "
-"адресу  http://astrobin.com%(pref_url)s.\n"
+"Если вы не хотите больше получать письма, поправьте ваши настройки по адресу "
+"%(base_url)s%(pref_url)s.\n"
 "\n"
 "Пожалуйста, не отвечайте на это письмо\n"
 "\n"
@@ -4333,7 +4476,7 @@ msgstr ""
 "\"Удалённым источникам\""
 
 msgid "Hi!"
-msgstr ""
+msgstr "Привет!"
 
 #, python-format
 msgid ""
@@ -4341,28 +4484,33 @@ msgid ""
 "AstroBin, the image hosting service and social community for "
 "astrophotographers, but never got the chance to activate it."
 msgstr ""
+"Мы заметили, что в <strong>%(date)s GMT</strong> вы создали учетную запись "
+"на AstroBin, службе хостинга изображений и социальном сообществе для "
+"астрофотографов, но так и не смогли активировать ее."
 
 msgid "The account that you created has the following username:"
-msgstr ""
+msgstr "Созданная вами учетная запись имеет следующее имя пользователя:"
 
 msgid ""
 "If you would like to activate it now, please click on the following link:"
-msgstr ""
+msgstr "Если вы хотите активировать его сейчас, нажмите на следующую ссылку:"
 
-#, fuzzy
-#| msgid "Delete account"
 msgid "Activate my account"
-msgstr "Удалить аккаунт"
+msgstr "Активировать мой аккаунт"
 
 msgid ""
 "If you don't, we will delete this account in a week. But don't worry, you're "
 "always welcome to join again!"
 msgstr ""
+"Если вы этого не сделаете, мы удалим этот аккаунт через неделю. Но не "
+"волнуйтесь, вы всегда можете присоединиться снова!"
 
 msgid ""
 "If you already have another active account on AstroBin, please feel free to "
 "ignore this message."
 msgstr ""
+"Если у вас уже есть еще одна активная учетная запись на AstroBin, не "
+"обращайте внимания на это сообщение."
 
 #, python-format
 msgid ""
@@ -4370,11 +4518,12 @@ msgid ""
 "image hosting service and social community for astrophotographers, but never "
 "got the chance to activate it."
 msgstr ""
+"Мы заметили, что в %(date)s GMT вы создали учетную запись в AstroBin, "
+"сервисе хостинга изображений и социальном сообществе для астрофотографов, но "
+"так и не смогли активировать ее."
 
-#, fuzzy
-#| msgid "Would you like to start using your real name on AstroBin?"
 msgid "Would you like to activate your account on AstroBin?"
-msgstr "Хотите начать использовать своё настоящее имя на AstroBin?"
+msgstr "Хотели бы вы активировать свою учетную запись на AstroBin?"
 
 #, python-format
 msgid ""
@@ -4419,16 +4568,24 @@ msgstr ""
 "\"%(url)s\">%(title)s</a>."
 
 #, python-format
-msgid "%(user)s has added your image to their bookmarks: %(url)s"
-msgstr "%(user)s добавил ваше изображение в свои закладки: %(url)s"
+msgid "%(user)s added your image \"%(title)s\" to their bookmarks: %(url)s"
+msgstr ""
+"%(user)s добавил ваше изображение \"%(title)s\" в свои закладки: %(url)s"
 
 #, python-format
 msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> has added your image to their "
-"bookmarks!</a>"
+"<strong>%(user)s</strong> added your image \"%(title)s\" to their bookmarks!"
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> добавил ваше изображение в "
-"свои закладки!</a>"
+"<strong>%(user)s</strong> добавил ваше изображение \"%(title)s\" в свои "
+"закладки!"
+
+#, python-format
+msgid ""
+"\n"
+"    %(user)s added your image \"%(title)s\" to their bookmarks!\n"
+msgstr ""
+"\n"
+"    %(user)s добавил ваше изображение \"%(title)s\" в свои закладки!\n"
 
 #, python-format
 msgid ""
@@ -4457,11 +4614,51 @@ msgstr "%(user)s прокомментировал ваше изображени�
 
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it out "
-"at the following url: %(url)s"
+"<a href=\"%(user_url)s\">%(user)s</a> likes your comment: <a href=\"%(url)s"
+"\">%(comment)s</a>."
 msgstr ""
-"Ответ <a href=\"%(user_url)s\">%(user)s</a> на ваш комментарий. По ссылке: "
-"%(url)s"
+"<a href=\"%(user_url)s\">%(user)s</a> нравится ваше изображение: <a href="
+"\"%(url)s\">%(comment)s</a>."
+
+#, python-format
+msgid "%(user)s likes your comment: %(url)s %(comment)s"
+msgstr "%(user)s нравится ваше изображение: %(url)s %(comment)s"
+
+#, python-format
+msgid "<strong>%(user)s</strong> likes your comment!"
+msgstr "<strong>%(user)s</strong> нравится ваш комментарий!"
+
+#, python-format
+msgid "%(user)s likes your comment!"
+msgstr "%(user)s нравится ваш комментарий!"
+
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a comment: <a href="
+"\"%(url)s\">%(url)s</a>."
+msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> упомянул вас в комментарии: <a href="
+"\"%(url)s\">%(url)s</a>."
+
+#, python-format
+msgid "%(user)s mentioned you in a comment: %(url)s"
+msgstr "%(user)s упомянул вас в комментарии: %(url)s"
+
+#, python-format
+msgid "<strong>%(user)s</strong> mentioned you in a comment!"
+msgstr "<strong>%(user)s</strong> упомянул вас в комментарии!"
+
+#, python-format
+msgid "%(user)s mentioned you in a comment!"
+msgstr "%(user)s упомянул вас в комментарии!"
+
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it out "
+"at the following url: <a href=\"%(url)s\">%(url)s</a>"
+msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> ответил на ваш комментарий. Проверьте "
+"его по след. ссылке: <a href=\"%(url)s\">%(url)s</a>"
 
 #, python-format
 msgid ""
@@ -4507,6 +4704,46 @@ msgstr "У вас есть подписчик!"
 
 #, python-format
 msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> likes your post on this forum topic: "
+"<a href=\"%(url)s\">%(post)s</a>."
+msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> нравится ваше сообщение на форуме: <a "
+"href=\"%(url)s\">%(post)s</a>."
+
+#, python-format
+msgid "%(user)s likes your post on this forum topic: %(url)s"
+msgstr "%(user)s нравится ваше сообщение в этой теме форума: %(url)s"
+
+#, python-format
+msgid "<strong>%(user)s</strong> likes your forum post!"
+msgstr "<strong>%(user)s</strong> нравится ваше сообщение на форуме!"
+
+#, python-format
+msgid "%(user)s likes your forum post!"
+msgstr "%(user)s нравится ваше сообщение на форуме!"
+
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a post on this forum "
+"topic: <a href=\"%(url)s\">%(post)s</a>."
+msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> упомянул вас в сообщении на след. теме "
+"форума: <a href=\"%(url)s\">%(post)s</a>."
+
+#, python-format
+msgid "%(user)s mentioned you in a post on this forum topic: %(url)s"
+msgstr "%(user)s упомянул вас в сообщении в этой теме форума: %(url)s"
+
+#, python-format
+msgid "<strong>%(user)s</strong> mentioned you in a forum post!"
+msgstr "<strong>%(user)s</strong> упомянул вас в сообщении на форуме!"
+
+#, python-format
+msgid "%(user)s mentioned you in a forum post!"
+msgstr "%(user)s упомянул вас в сообщении в этой теме форума!"
+
+#, python-format
+msgid ""
 "%(user)s started a new discussion about a gear item you own! Read it at "
 "following url: <a href=\"%(url)s\">%(url)s</a>"
 msgstr ""
@@ -4532,34 +4769,6 @@ msgstr ""
 #, python-format
 msgid "%(user)s started a new discussion about a gear item you own!"
 msgstr "%(user)s начал обсуждение оборудования, которое есть у вас!"
-
-#, python-format
-msgid ""
-"%(user)s wrote a review of a gear item you own! Read it at following url: <a "
-"href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-"%(user)s написал обзор на оборудование которое есть у вас! Прочесть можно "
-"тут: <a href=\"%(url)s\">%(url)s</a>"
-
-#, python-format
-msgid ""
-"%(user)s wrote a review of a gear item you own! Read it at following url: "
-"%(url)s"
-msgstr ""
-"%(user)s написал обзор на оборудование которое есть у вас! Прочесть можно "
-"тут: %(url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear item "
-"you own!</a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> написал обзор элемента "
-"оборудования, который у вас есть!</a>"
-
-#, python-format
-msgid "%(user)s wrote a review of a gear item you own!"
-msgstr "%(user)s написал обзор на элемент оборудования, который у вас есть!"
 
 #, python-format
 msgid ""
@@ -4753,6 +4962,36 @@ msgstr ""
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
 msgstr "%(creator)s создал новую открытую группу: \"%(group_name)s\""
 
+msgid ""
+"I really appreciate your support for AstroBin, I hope you will enjoy your "
+"new subscription!"
+msgstr ""
+"Я очень ценю вашу поддержку AstroBin, надеюсь, вам понравится ваша новая "
+"подписка!"
+
+msgid ""
+"AstroBin subscriptions are valid for 1 year. When a subscription expires, "
+"nothing happens to your content. Nothing is deleted, hidden, held hostage or "
+"anything. In fact, you can leave it up forever even if you stop being active "
+"as an astrophotographer."
+msgstr ""
+"Подписки AstroBin действительны в течение 1 года. По истечении срока "
+"подписки с вашим контентом ничего не происходит. Ничего не удалено, не "
+"скрыто, не заложено или что-то еще. Фактически, вы можете оставить это "
+"навсегда, даже если перестанете быть астрофотографом."
+
+msgid ""
+"If at some point you want to upgrade your subscription, simply purchase the "
+"new one and then get in touch so I can send you a partial refund for the "
+"unused time on your previous subscription, or extend the expiration date of "
+"your new subscription with pro-rated time from your old one."
+msgstr ""
+"Если в какой-то момент вы захотите обновить подписку, просто купите новую, а "
+"затем свяжитесь с нами, чтобы я мог отправить вам частичное возмещение за "
+"неиспользованное время по вашей предыдущей подписке или продлить срок "
+"действия вашей новой подписки с помощью оценки времени по сравнению со "
+"старым."
+
 #, python-format
 msgid ""
 "%(user)s posted a new topic to the group: \"%(group_name)s\"\n"
@@ -4869,6 +5108,82 @@ msgstr ""
 msgid "%(user)s joined the public group: \"%(group_name)s\""
 msgstr "%(user)s вступил в открытую группу: \"%(group_name)s\""
 
+msgid "Welcome to AstroBin!"
+msgstr "Добро пожаловать в AstroBin!"
+
+msgid ""
+"I'm very excited that you joined, and I would like to give you a warm "
+"welcome to the community!"
+msgstr ""
+"Я очень рад, что вы присоединились, и хотел бы тепло поприветствовать вас в "
+"сообществе!"
+
+msgid "You will receive your activation link in a separate email."
+msgstr "Вы получите ссылку для активации в отдельном электронном письме."
+
+msgid "Allow me to offer some tips to get you started:"
+msgstr "Позвольте мне дать вам несколько советов для начала:"
+
+#, python-format
+msgid "Have a look at our <a href=\"%(url)s\">frequently asked questions</a>."
+msgstr ""
+"Ознакомьтесь с нашими <a href=\"%(url)s\">часто задаваемыми вопросами</a>."
+
+#, python-format
+msgid ""
+"Head over to your settings and configure <a href=\"%(url)s\">your profile</"
+"a>."
+msgstr ""
+"Перейдите к своим настройкам и настройте <a href=\"%(url)s\">свой профиль</"
+"a>."
+
+#, python-format
+msgid ""
+"If you have astrophotography equipment, add it to <a href=\"%(url)s\">your "
+"gear</a> so that later you can associate it with the images you upload."
+msgstr ""
+"Если у вас есть астрофотографическое оборудование, добавьте его к <a href="
+"\"%(url)s\">своему оборудованию</a>, чтобы впоследствии вы могли связать его "
+"с загружаемыми изображениями."
+
+#, python-format
+msgid ""
+"If you want, why not <a href=\"%(url)s\">introduce yourself</a> on the "
+"forums?"
+msgstr ""
+"Если хотите, почему бы не <a href=\"%(url)s\">представиться</a> на форумах?"
+
+msgid ""
+"Follow AstroBin on social networks! AstroBin posts quick announcements and "
+"reports there, in addition to the Image of the Day, and Top Picks as stories!"
+msgstr ""
+"Следите за AstroBin в социальных сетях! AstroBin публикует там быстрые "
+"объявления и отчеты, а также изображение дня и лучшие изображения в качестве "
+"историй!"
+
+msgid "Thanks again for joining and clear skies!"
+msgstr "Еще раз спасибо за присоединение и ясного неба!"
+
+msgid "Have a look at our frequently asked questions:"
+msgstr "Взгляните на наши часто задаваемые вопросы:"
+
+msgid "Head over to your settings and configure your profile:"
+msgstr "Зайдите в настройки и настройте свой профиль:"
+
+msgid ""
+"If you have astrophotography equipment, add it to your gear so that later "
+"you can associate it with the images you upload:"
+msgstr ""
+"Если у вас есть оборудование для астрофотографии, добавьте его к своему "
+"снаряжению, чтобы впоследствии вы могли связать его с загружаемыми "
+"изображениями:"
+
+msgid "If you want, why not introduce yourself on the forums?"
+msgstr "Если хотите, почему бы не представиться на форумах?"
+
+msgid "Welcome!"
+msgstr "Добро пожаловать!"
+
 msgid "Object not found"
 msgstr "Объект не найден"
 
@@ -4878,14 +5193,20 @@ msgstr "Пред. стр."
 msgid "Next page"
 msgstr "След. стр."
 
+msgid "No additional information available for this item."
+msgstr "Дополнительная информация по этому элементу недоступна."
+
 msgid "Find images"
 msgstr "Найти изображения"
 
 msgid "RA"
-msgstr "RA"
+msgstr "П.В."
 
 msgid "Dec"
-msgstr "Dec"
+msgstr "Скл"
+
+msgid "View page"
+msgstr "Подробнее"
 
 msgid "Member since"
 msgstr "Давность регистрации"
@@ -4893,11 +5214,39 @@ msgstr "Давность регистрации"
 msgid "This topic was closed by a moderator."
 msgstr "Тема закрыта модератором."
 
-msgid "Back to group"
-msgstr "Назад в группу"
-
 msgid "New topic"
 msgstr "Создать тему"
+
+msgid "New reply"
+msgstr "Новый ответ"
+
+msgid "Please note"
+msgstr "Пожалуйста, обратите внимание"
+
+#, python-format
+msgid ""
+"The AstroBin forums are a place to discuss astrophotography and astronomy. "
+"If you need help with AstroBin please use the <a href=\"%(contact_url)s"
+"\">contact form</a>."
+msgstr ""
+"Форумы AstroBin - это место для обсуждения астрофотографии и астрономии. "
+"Если вам нужна помощь с AstroBin, воспользуйтесь <a href=\"%(contact_url)s"
+"\">contact form</a>."
+
+msgid ""
+"User support posts, feature requests, issue reports, etc, will be deleted."
+msgstr ""
+"Сообщения службы поддержки пользователей, запросы функций, отчеты о "
+"проблемах и т.д. будут удалены."
+
+msgid "Thanks for your cooperation!"
+msgstr "Спасибо за вашу поддержку!"
+
+msgid "I understand"
+msgstr "Я понимаю"
+
+msgid "Back to group"
+msgstr "Назад в группу"
 
 msgid "Hidden"
 msgstr "Скрытое"
@@ -4952,6 +5301,25 @@ msgstr "Новый ответ в теме, на которую вы подпис
 msgid "Please note: this post will be published only after moderation."
 msgstr "Обратите внимание: этот пост будет опубликован только после модерации."
 
+msgid "Type your forum post here..."
+msgstr "Напишите здесь сообщение на форуме ..."
+
+msgid "Please first exit 'Source' mode to quote a message."
+msgstr ""
+"Пожалуйста, сначала выйдите из режима «Источник», чтобы процитировать "
+"сообщение."
+
+msgid "*** Type your reply here ***"
+msgstr "*** Введите свой ответ здесь ***"
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr "нравится"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr "нравится"
+
 msgid ""
 "Warning: this post awaits moderation and is not yet visible to everybody"
 msgstr "Внимание: это сообщение ждет модерации и пока не отображается"
@@ -4975,6 +5343,8 @@ msgstr "Подтвердить сообщение"
 msgid ""
 "Editing a post is only allowed within %(minutes)s minutes after creating it."
 msgstr ""
+"Редактировать сообщение можно только в течение %(minutes)s минут после его "
+"создания."
 
 msgid "Topics you subscribe to"
 msgstr "Темы, на которые вы подписаны"
@@ -5123,9 +5493,6 @@ msgstr ""
 "Регистрируясь на AstroBin, вы соглашаетесь с нашими <a href=\"https://"
 "welcome.astrobin.com/terms-of-service\">условиями предоставления услуг</a>."
 
-msgid "Search"
-msgstr "Поиск"
-
 msgid "Sort"
 msgstr "Упорядочить"
 
@@ -5175,394 +5542,8 @@ msgstr "ПЗС против DSLR-камер: глобальная тенденц
 msgid "Global trend of telescope types"
 msgstr "Общая тенденция по типам телескопов"
 
-msgctxt "approximately"
-msgid "about"
-msgstr "описание"
-
-msgid "View feature comparison"
-msgstr ""
-
-msgid "Max size"
-msgstr "Макс размер"
-
-msgid "View full res"
-msgstr "Полный размер"
-
-msgid "View full image info"
-msgstr ""
-
-msgid "Basic"
-msgstr ""
-
-msgid "Advanced"
-msgstr "Расширенный"
-
-msgid "Social features"
-msgstr "Общественные особенности"
-
-msgid "Plate-solving"
-msgstr "Определение "
-
-msgid "Bulk data export"
-msgstr "Массовый экспорт данных"
-
-msgid "Hide astronomy ads"
-msgstr ""
-
-msgid "No ads on your pages"
-msgstr ""
-
-msgid "Non-members/free users can view your images in full res"
-msgstr ""
-
-msgid "Full size annotations"
-msgstr "Описание полного размера"
-
-msgid "Upload uncompressed source"
-msgstr "Закачать несжатый исходник"
-
-msgid "Undelete images"
-msgstr "Отменить удаление"
-
-msgid ""
-"The FREE account is to be considered a trial period. You can upload images "
-"10 times, after which you can't upload anymore. Deleting images doesn't "
-"decrease your upload counter: the FREE account is not meant to be used as a "
-"way to keep your latest 10 images."
-msgstr ""
-
-msgid "year"
-msgstr "год"
-
-#, python-format
-msgid ""
-"\n"
-"                %(number)s images, max %(size)s each"
-msgstr ""
-
-msgid "View in original resolution"
-msgstr "Оригинальное разрешение"
-
-#, python-format
-msgid ""
-"Up to %(number)s\n"
-"            revisions/image"
-msgstr ""
-
-msgid "Create/join Groups"
-msgstr ""
-
-msgid "Basic plate-solving"
-msgstr ""
-
-msgid "IOTD / Top Picks"
-msgstr "Изображение дня"
-
-msgid "No ads for others on your pages"
-msgstr ""
-
-msgid "Full-size annotations"
-msgstr ""
-
-msgid "All future features"
-msgstr ""
-
-msgid "In the future"
-msgstr ""
-
-msgid "Buy in the Marketplace"
-msgstr "Купить онлайн"
-
-msgid "Vote in contests"
-msgstr ""
-
-msgid "Analytics"
-msgstr ""
-
-msgid "Bulk image editing"
-msgstr ""
-
-msgid "Pay securely with PayPal"
-msgstr "Оплатить через PayPal"
-
-msgid "Want to upgrade from a lower subscription tier?"
-msgstr ""
-
-#, python-format
-msgid ""
-"AstroBin doesn't support subscription upgrades at the moment, but we're "
-"happy to make it happen manually. If you're on a lower subscription tier and "
-"would like to upgrade to <strong>%(name)s</strong>, please just buy it and "
-"then contact us at <a href=\"mailto:astrobin@astrobin.com"
-"\">astrobin@astrobin.com</a> to get a refund for the unused time on your old "
-"subscription. Thanks!"
-msgstr ""
-
-msgid "Pay with a bank transfer"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                Prefer to pay via bank transfer? Please make a deposit of "
-"%(currency)s %(amount)s to the following\n"
-"                bank details and then email us at %(email_prefix)s%(email)s"
-"%(email_postfix)s with your username so\n"
-"                we may upgrade your account manually. Thanks!\n"
-"            "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                ∞ images, max %(size)s each"
-msgstr ""
-
-msgid "Basic analytics"
-msgstr "Основная аналитика"
-
-msgid "Buy"
-msgstr "Оплатить"
-
-msgid "You are already on this plan"
-msgstr "У вас уже этот план"
-
-msgid "∞ images, ∞ size"
-msgstr "∞ изобр., ∞ размер"
-
-msgid "View full res (incl. visitors)"
-msgstr ""
-
-msgid "Full search"
-msgstr "Полный поиск"
-
-msgid "Unlimited revisions"
-msgstr "Нелимитированные версии"
-
-msgid "Advanced plate-solving"
-msgstr "Продвинутое определение"
-
-msgid "Sell in the Marketplace"
-msgstr ""
-
-msgid "Vote/enter contests"
-msgstr ""
-
-msgid "Advanced analytics"
-msgstr "Продвинутая аналитика"
-
-msgid "Subscription process canceled"
-msgstr "Процесс подписки отменён"
-
-msgid "Subscription process cancelled"
-msgstr "Процесс подписки отменён"
-
-msgid ""
-"Your transaction with PayPal has been cancelled, so no change in your "
-"subscription has occurred."
-msgstr ""
-"Ваша транзакция через PayPal была отменена, так что никаких изменений в "
-"подписке не произошло."
-
-# Предлагаю RAW-данные. Самый точный перевод и имя продукта вроде тоже подходящее. Смысл не теряется.
-#, python-format
-msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
-msgstr "Вернуться к <a href=\"%(plans_url)s\">странице планов</a>."
-
-msgctxt "Subscription plan name"
-msgid "Plan"
-msgstr "План"
-
-msgid "Offer valid until"
-msgstr ""
-
-msgid "Validity"
-msgstr "Период действия"
-
-msgid "Autorenew"
-msgstr "Автообновление"
-
-msgid "Trial period"
-msgstr "Пробный период"
-
-msgid "day"
-msgstr "день"
-
-msgid "week"
-msgstr "неделя"
-
-msgid "month"
-msgstr "месяц"
-
-msgid "one time"
-msgstr "один раз"
-
-msgctxt "At no cost"
-msgid "Free"
-msgstr "Бесплатный"
-
-msgid "n/a"
-msgstr "н/д"
-
-msgid "Daily"
-msgstr "Ежедневно"
-
-msgid "Weekly"
-msgstr "Еженедельно"
-
-msgid "Monthly"
-msgstr "Ежемесячно"
-
-msgid "Yearly"
-msgstr "Ежегодно"
-
-msgid "days"
-msgstr "дней"
-
-msgid "weeks"
-msgstr "недель"
-
-msgid "months"
-msgstr "месяцев"
-
-msgid "years"
-msgstr "лет"
-
-msgid "No trial"
-msgstr "Не пробный"
-
-msgid "Switch to"
-msgstr "Переключиться на"
-
-msgid "Subscription changed"
-msgstr "Подписка изменена"
-
-msgid ""
-"Your request for a change in your subscription has been processed "
-"successfully."
-msgstr "Ваш запрос на изменение подписки был успешно совершён."
-
-msgid "Subscription plan"
-msgstr "План подписки"
-
-msgid "Status"
-msgstr "Состояние"
-
-msgid "Subscribed"
-msgstr "Подписано"
-
-msgid "Expires"
-msgstr "Истекает"
-
-msgid "Invalid"
-msgstr "Неверно"
-
-msgid "Cancelled"
-msgstr "Отменено"
-
-msgid "Unavailable"
-msgstr "Недоступно"
-
-msgid "Unsubscribed"
-msgstr "Отменена подписка"
-
-#, python-format
-msgid ""
-"This subscription is not offered anymore on AstroBin. Please visit the <a "
-"href=\"%(url)s\">subscriptions page</a> to see the available plans, thanks!"
-msgstr ""
-"Это подписка больше не предлагается на AstroBin. Пожалуйста, посетите <a "
-"href=\"%(url)s\">страницу планов подписки</a> чтобы увидеть доступные, "
-"спасибо!"
-
-msgid ""
-"If you would like to renew your subscription, please visit this page again "
-"after\n"
-"                        your current subscription's expiration date:"
-msgstr ""
-
-msgid ""
-"Your subscription is either cancelled or not active yet. If you want to "
-"subscribe again, please wait until your subscription is expired. If you just "
-"subscribed, please wait a few minutes while PayPal contacts our server for "
-"the final transaction confirmation. Thank you!"
-msgstr ""
-"Ваша подписка либо отменена, либо еще не активна. Если вы хотите оформить "
-"новую подписку, пожалуйста, подождите пока закончится текущая. Если вы "
-"только что оформили подписку, пожалуйста, подождите несколько минут пока "
-"PayPal соединяется с нашим сервером для подтверждения транзакции. Спасибо!"
-
-msgid "By cancelling, you will revert to a free plan."
-msgstr "Отменив, вы будете возвращены в бесплатный план."
-
-#, python-format
-msgid "Free plans are limited to <strong>%(max_allowed)s</strong> images."
-msgstr "Бесплатные планы ограничены до <strong>%(max_allowed)s</strong> изобр."
-
-msgid ""
-"However, your existing images will not be deleted or deactivated in any way! "
-"Simply, you will not be able to upload any more images unless you switch to "
-"a paid plan."
-msgstr ""
-"Впрочем, ваши существующие изображения не будут удалены или деактивированы в "
-"любом случае! Просто, вы не сможете добавлять больше изображений пока не "
-"переключитесь на платный план."
-
-msgid "Cancel via PayPal"
-msgstr "Отмена через PayPal"
-
-msgid "You cannot switch to this plan."
-msgstr "Вы не можете переключиться на этот план."
-
-msgid "Back to the plans"
-msgstr "Обратно к планам"
-
-msgid "Subscription confirmed"
-msgstr "Подписка подтверждена"
-
-msgid ""
-"Your request has been received, and we are awaiting the final confirmation "
-"from PayPal. Your subscription should be active within a few minutes!"
-msgstr ""
-"Ваш запрос отправлен, и мы ожидаем окончательного подтверждения от PayPal. "
-"Ваша подписка будет активирована в течение нескольких минут!"
-
-msgid "Thank you for supporting AstroBin!"
-msgstr "Спасибо за поддержку AstroBin!"
-
-msgid "Your active subscription plans"
-msgstr "Ваши активные планы подписки"
-
-msgid "Your inactive subscription plans"
-msgstr "Ваши неактивные планы подписки"
-
-msgid ""
-"PS: are you interested in larger plans?\n"
-"                <a href=\"/contact/\">Let us know!</a>"
-msgstr ""
-"PS: Вы заинтересованы в продвинутых планах? \n"
-"                <a href=\"/contact/\">Дайте нам знать!</a>"
-
-msgid "All"
-msgstr "Все"
-
-msgid "A collection of great images that were recently handpicked."
-msgstr "Коллекция великолепных изображений, недавно отобранных."
-
 msgid "This list is currently empty."
 msgstr "Этот список пока пуст."
-
-msgid "Last 6 months"
-msgstr "За 6 месяцев"
-
-msgid "Last year"
-msgstr "За год"
-
-msgid "All time"
-msgstr "Всё время"
-
-msgid "Total integration"
-msgstr "Общее накопление"
 
 msgid "Image upload"
 msgstr "Загрузка изображения"
@@ -5599,6 +5580,8 @@ msgid ""
 "Try the <a href=\"%(url)s\">new beta uploader</a>: robust, with real "
 "progress bar, and 4 GB file size limit!"
 msgstr ""
+"Попробуйте <a href=\"%(url)s\">new beta uploader</a>: надежный, с реальной "
+"полосой выполнения и ограничением размера файла 4 ГБ!"
 
 msgid "Upload as a work in progress"
 msgstr "Закачать как работу в процессе"
@@ -5627,7 +5610,7 @@ msgid "Upload as a finished image"
 msgstr "Закачать как окончательное изображение"
 
 msgid "Do not notify followers"
-msgstr ""
+msgstr "Не уведомлять подписчиков"
 
 #, python-format
 msgid ""
@@ -5697,6 +5680,14 @@ msgid "%(user)s's followed users"
 msgstr "%(user)s's подписанные пользователи"
 
 #, python-format
+msgid "%(user)s's friends"
+msgstr "друзья %(user)s"
+
+#, python-format
+msgid "These are the users that follow %(user)s mutually."
+msgstr "Это пользователи, которые взаимно подписаны на %(user)s."
+
+#, python-format
 msgid "%(user)s's liked images"
 msgstr "Понравившиеся изображения у %(user)s's"
 
@@ -5753,6 +5744,9 @@ msgid ""
 "images you want to\n"
 "            restore, and then use the button below to confirm."
 msgstr ""
+"Это ваши «удаленные» изображения: этот список можете видеть только вы. "
+"Щелкните изображения, которые вы хотите\n"
+"            восстановить, а затем нажмите кнопку ниже для подтверждения."
 
 #, python-format
 msgid ""
@@ -5763,6 +5757,12 @@ msgid ""
 "href=\"%(data_corruption_url)s\">here</a>.\n"
 "                "
 msgstr ""
+"\n"
+"                    Нам очень, очень жаль, но похоже, что некоторые из ваших "
+"изображений имеют катастрофическую потерю\n"
+"                    данных и не подлежит восстановлению. Подробнее читайте "
+"<a href=\"%(data_corruption_url)s\">here</a>.\n"
+"                "
 
 msgid ""
 "\n"
@@ -5772,6 +5772,12 @@ msgid ""
 "again.\n"
 "                "
 msgstr ""
+"\n"
+"                    Пожалуйста, нажмите на миниатюры со значком песочных "
+"часов, чтобы загрузить файлы изображений, которые вы\n"
+"                    все еще есть на вашем компьютере или резервные копии на "
+"их страницах снова.\n"
+"                "
 
 msgid ""
 "\n"
@@ -5781,6 +5787,12 @@ msgid ""
 "intact and safe.\n"
 "                "
 msgstr ""
+"\n"
+"                    Данные, связанные с вашими затронутыми изображениями, "
+"такие как название, описание, используемое оборудование, приобретение\n"
+"                    детали, комментарии, лайки, закладки и т.д., все еще "
+"нетронутые и безопасные.\n"
+"                "
 
 msgid ""
 "\n"
@@ -5788,6 +5800,9 @@ msgid ""
 "apologies. :(\n"
 "                "
 msgstr ""
+"\n"
+"                    AstroBin приносит вам свои искренние извинения. :(\n"
+"                "
 
 msgid "Okay, don't show this again"
 msgstr "OK, не показывать больше."
@@ -5805,79 +5820,6 @@ msgstr ""
 "камеры, использованные для съемки, и объекты - это как минимум. Даты съемок "
 "также очень важны."
 
-#, python-format
-msgid "%(user)s's commercial products"
-msgstr "%(user)s's  рекламные продукты"
-
-msgid ""
-"Please remember that you are only allowed to claim items that you really "
-"produce and/or retail."
-msgstr ""
-"Пожалуйста, помните, что вы можете заявлять только те вещи, которые "
-"действительно производите и/или продаете."
-
-msgid "As producer"
-msgstr "Как производитель"
-
-msgid "Gear IDs"
-msgstr "Идентификаторы оборудования"
-
-msgid "You haven't claimed any commercial products yet."
-msgstr "Вы еще не заявляли ни одного коммерческого продукта."
-
-#, python-format
-msgid "%(user)s hasn't claimed any commercial products yet."
-msgstr "%(user)s не заявлял ни одного коммерческого продукта."
-
-msgid "As retailer"
-msgstr "Как продавец"
-
-msgid "You haven't claimed any retailed products yet."
-msgstr "Вы еще не заявляли ни одного продаваемого продукта."
-
-#, python-format
-msgid "%(user)s hasn't claimed any retailed products yet."
-msgstr "%(user)s не заявлял еще ни одного продаваемого продукта."
-
-# наверно таки они привлекают внимание к своим штучкам)
-msgid "Claim as producer"
-msgstr "Заявить как производитель"
-
-msgid "Claim as retailer"
-msgstr "Заявить как продавец"
-
-msgid "Claim commercial product"
-msgstr "Заявить коммерческий продукт"
-
-msgid "Claim"
-msgstr "Заявить"
-
-msgid "Select items to remove"
-msgstr "Выбрать пункты для удаления"
-
-msgid "Be careful if you try to remove all of these!"
-msgstr "Будьте осторожны если будете это убирать!"
-
-msgid ""
-"All the properties, including the commercial description, of this claim will "
-"be deleted and cannot be recovered!"
-msgstr ""
-"Все свойства, включая рекламное описание, данной заявки будут удалены без "
-"возможности восстановления!"
-
-msgid "Select the product you want to merge to"
-msgstr "Выберите продукт для объединения"
-
-msgid "Are you sure?"
-msgstr "Вы уверены?"
-
-msgid "Claim retailed product"
-msgstr "Заявить продаваемый продукт"
-
-msgid ""
-"All the properties of this claim will be deleted and cannot be recovered!"
-msgstr "Все свойства этой заявки будут удалены без возможности восстановления!"
-
 msgid "Delete account"
 msgstr "Удалить аккаунт"
 
@@ -5889,14 +5831,20 @@ msgstr ""
 "Вы уверены, что хотите удалить свой аккаунт? Эта операция необратима и "
 "мгновенна. Все следы ваших действий на AstroBin будут удалены навсегда!"
 
-msgid "Your account was deleted. Thanks for using AstroBin until now!"
-msgstr "Ваш аккаунт удален. Спасибо что использовали AstroBin!"
+msgid "Account deleted"
+msgstr "Учётная запись удалена"
+
+msgid ""
+"\n"
+"            Your account was deleted. Thanks for using AstroBin until now!\n"
+"        "
+msgstr ""
+"\n"
+"            Ваш аккаунт удалён. Спасибо что использовали AstroBin!\n"
+"        "
 
 msgid "Edit your basic information"
 msgstr "Править вашу основную информацию"
-
-msgid "Edit your commercial information"
-msgstr "Править вашу коммерческую информацию"
 
 msgid "Download your data"
 msgstr "Загрузить ваши данные"
@@ -5906,24 +5854,30 @@ msgid ""
 "revisions, and information such as description, gear used, acquisition "
 "details, and so on."
 msgstr ""
+"Вы можете загрузить все свои данные с AstroBin, включая исходные загрузки, "
+"все изменения и информацию, такую как описание, используемое оборудование, "
+"сведения о приобретении и т.д."
 
 msgid "Request download"
 msgstr "Запросить скачивание"
 
 msgid "Your past requests"
-msgstr ""
+msgstr "Ваши прошлые запросы"
 
 msgid "Request time"
 msgstr "Время запроса"
+
+msgid "Status"
+msgstr "Состояние"
 
 msgid "File size"
 msgstr "Размер файла"
 
 msgid "There doesn't seem to be anything here."
-msgstr ""
+msgstr "Кажется, здесь ничего нет."
 
 msgid "Quota exceeded"
-msgstr ""
+msgstr "Квота превышена"
 
 msgid ""
 "To prevent excessive usage of server resources, you can only request one "
@@ -5931,12 +5885,19 @@ msgid ""
 "please email us at <a href=\"mailto:astrobin@astrobin.com"
 "\">astrobin@astrobin.com</a>."
 msgstr ""
+"Чтобы предотвратить чрезмерное использование ресурсов сервера, вы можете "
+"запрашивать только одну загрузку данных за 24 часа. Если вы считаете, что "
+"загрузка зависла, напишите нам по адресу <a href=\"mailto:astrobin@astrobin."
+"com\">astrobin@astrobin.com</a>."
 
 msgid ""
 "Please keep in mind that it could take several hours for your download to be "
 "ready, depending on the number and size of your images, and how busy the "
 "servers are at the moment."
 msgstr ""
+"Помните, что загрузка может занять несколько часов, в зависимости от "
+"количества и размера ваших изображений, а также от того, насколько загружены "
+"серверы в данный момент."
 
 msgid "Edit your astrophotography gear"
 msgstr "Править ваше астрофотографическое оборудование"
@@ -5954,9 +5915,6 @@ msgstr ""
 "продукта, это изменение распространяется на всех пользователей AstroBin. Не "
 "пишите никаких пометок, относящихся только к вашему экземпляру продукта, "
 "типа «модифицирован», «продан», «сломан», «подарен тётушкой» и прочее."
-
-msgid "Close"
-msgstr "Закрыть"
 
 msgid ""
 "The following information, instead, is personal, and may refer to your copy "
@@ -6000,9 +5958,6 @@ msgstr "Импортировать из Flickr"
 
 msgid "Edit your site preferences"
 msgstr "Редактируйте настройки вашего сайта"
-
-msgid "Edit your retailer information"
-msgstr "Редактировать информацию вашего продавца"
 
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
@@ -6074,23 +6029,44 @@ msgstr "Использованные изображения"
 msgid "Thanks for your support!"
 msgstr "Спасибо за вашу поддержку!"
 
-msgid "Public Area"
-msgstr "Public Area"
+#, fuzzy
+#| msgid "Your active subscription plans"
+msgid "Your subscriptions"
+msgstr "Ваши активные планы подписки"
 
-msgid "Staging Area"
-msgstr "Staging Area"
+#, fuzzy
+#| msgid "Your past requests"
+msgid "Your payments"
+msgstr "Ваши прошлые запросы"
+
+msgid "This data is currently not available and will be recalculated shortly."
+msgstr ""
+"Эти данные в настоящее время недоступны и будут пересчитаны в ближайшее "
+"время."
+
+msgid "Please check again in a bit, thanks!"
+msgstr "Пожалуйста, проверьте еще раз, спасибо!"
+
+msgid "Public Area"
+msgstr "Открытая область"
 
 msgid "Corrupted"
-msgstr ""
+msgstr "Испорченный"
+
+msgid "Recovered"
+msgstr "Восстановленный"
 
 msgid "Trash"
-msgstr ""
+msgstr "Корзина"
 
 msgid "Liked images"
 msgstr "Понравившиеся изображения"
 
 msgid "Following"
-msgstr "Подписка"
+msgstr "Подписки"
+
+msgid "Friends"
+msgstr "Друзья"
 
 msgid "Lacking data"
 msgstr "Недостаток данных"
@@ -6105,7 +6081,102 @@ msgid "Quick edit"
 msgstr "Быстрая правка"
 
 msgid "Key/value pairs"
+msgstr "Пары ключ/значение"
+
+msgid "Please confirm your recovered images"
+msgstr "Подтвердите восстановленные изображения"
+
+#, python-format
+msgid ""
+"Following the <a href=\"%(url)s\" target=\"_blank\">data loss incident in "
+"February 2020</a>, these images <strong>were automatically recovered</"
+"strong>."
 msgstr ""
+"После <a href=\"%(url)s\" target=\"_blank\">data loss incident in February "
+"2020</a> эти изображения <strong>были автоматически восстановлены</strong>."
+
+msgid "Now you need to <strong>manually confirm or reject</strong> them."
+msgstr ""
+"Теперь вам нужно <strong>вручную подтвердить или отклонить</strong> их."
+
+msgid "Instructions"
+msgstr "Инструкции"
+
+msgid ""
+"Below, you see the list of all your images impacted by the automatic "
+"recovery process."
+msgstr ""
+"Ниже вы видите список всех ваших изображений, на которые влияет процесс "
+"автоматического восстановления."
+
+msgid ""
+"The big thumbnail represents the original upload, and the small thumbnails "
+"represent revisions."
+msgstr ""
+"Большой эскиз представляет исходную загрузку, а маленькие эскизы - "
+"исправления."
+
+msgid ""
+"Click on a thumbnail once to mark it for recovery, again to mark it for "
+"deletion, once more to return to the \"do nothing\" state."
+msgstr ""
+"Щелкните миниатюру один раз, чтобы пометить ее для восстановления, еще раз, "
+"чтобы отметить ее для удаления, еще раз, чтобы вернуться в состояние «ничего "
+"не делать»."
+
+msgid ""
+"You can also use the \"Recover all\" and \"Delete all\" buttons at the "
+"bottom."
+msgstr ""
+"Вы также можете использовать кнопки «Восстановить все» и «Удалить все» внизу."
+
+msgid ""
+"When you are ready, click on the \"Submit selected\" button to confirm your "
+"selection."
+msgstr ""
+"Когда вы будете готовы, нажмите кнопку «Отправить выбранное», чтобы "
+"подтвердить свой выбор."
+
+msgid ""
+"You will return to this page, and the images for which you didn't make a "
+"selection will still be here."
+msgstr ""
+"Вы вернетесь на эту страницу, и изображения, для которых вы не сделали "
+"выбор, все еще будут здесь."
+
+msgid ""
+"The recovered images will return to your gallery (public or staging, "
+"depending on where they were before the data loss)."
+msgstr ""
+"Восстановленные изображения вернутся в вашу галерею (общедоступную или "
+"промежуточную, в зависимости от того, где они были до потери данных)."
+
+msgid "Original upload"
+msgstr "Оригинал"
+
+msgid "Staging area"
+msgstr "Студия"
+
+msgid "Deleted"
+msgstr "Удалено"
+
+msgid "Revision"
+msgstr "Версия"
+
+msgid "Recover all"
+msgstr "Восстановить всё"
+
+msgid "Delete all"
+msgstr "Удалить всё"
+
+msgid "Reset"
+msgstr "Сбросить"
+
+msgid "Submit selected"
+msgstr "Отправить выбранное"
+
+msgid "There are no images to recover."
+msgstr "Нет изображений для восстановления."
 
 msgid "Restore selected"
 msgstr "Восстановить выбранное"
@@ -6134,6 +6205,9 @@ msgid ""
 "The following images do not have the key/value tag chosen to order this "
 "collection, so they are shown as unsorted here."
 msgstr ""
+"Следующие изображения не имеют тега \"ключ-значение\", выбранного для "
+"упорядочивания этой коллекции, поэтому они показаны здесь как "
+"несортированные."
 
 msgid "This collection contains no images."
 msgstr "Эта коллекция не содержит изображений."
@@ -6157,7 +6231,7 @@ msgid "This user does not have any collections."
 msgstr "У этого пользователя нет ни одной коллекции."
 
 msgid "Quick edit: key/value tags"
-msgstr ""
+msgstr "Быстрое редактирование: теги \"ключ-значение\""
 
 msgid "Edit collection"
 msgstr "Править коллекцию"
@@ -6185,10 +6259,13 @@ msgid "Search by"
 msgstr "Поиск по"
 
 msgid "Only animated"
-msgstr "Анимация"
+msgstr "Только анимация"
 
 msgid "Award"
 msgstr "Награда"
+
+msgid "Publication date range"
+msgstr "Диапазон дат публикации"
 
 msgid "Camera type"
 msgstr "Тип камеры"
@@ -6214,6 +6291,8 @@ msgid ""
 "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Ultimate</a> "
 "subscription."
 msgstr ""
+"К сожалению, для этого фильтра требуется подписка на <a href=\"%(url)s"
+"\">AstroBin Ultimate</a>."
 
 msgid "Select"
 msgstr "Выбрать"
@@ -6224,8 +6303,11 @@ msgstr "Добавить фильтр:"
 msgid "Image of the Day"
 msgstr "Изображение Дня"
 
-msgid "Top Pick"
-msgstr "Лучший Выбор"
+msgid "Top pick"
+msgstr "Лучшее изображение"
+
+msgid "Top pick nomination"
+msgstr "Номинация на лучшее изображение"
 
 msgid "Guider/planetary"
 msgstr "Гид/планетная"
@@ -6327,7 +6409,7 @@ msgid "ACF Schmidt-Cassegrain"
 msgstr "Шмидт-Кассегрен свободный от комы (ACF)"
 
 msgid "Rowe-Ackermann Schmidt astrograph"
-msgstr ""
+msgstr "Астрограф Шмидта Роув-Акерманн"
 
 msgid "minutes"
 msgstr "минут"
@@ -6350,13 +6432,6 @@ msgstr ""
 msgid "You have reached your image count limit. Please upgrade!"
 msgstr ""
 "Вы достигли вашего лимита на загрузку изображений. Пожалуйста, смените тариф!"
-
-msgid ""
-"You uploaded an Indexed PNG file. AstroBin will need to lower the color "
-"count to 256 in order to work with it."
-msgstr ""
-"Вы загрузили индексированный PNG-файл. AstroBin вынужден уменьшить "
-"количество цветов до 256 для работы с ним."
 
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
@@ -6386,7 +6461,7 @@ msgid "Gear images"
 msgstr "Изображения оборудования"
 
 msgid "No subjects specified"
-msgstr "Не указана тема"
+msgstr "Не указаны темы"
 
 msgid "No acquisition details specified"
 msgstr "Не указаны данные съёмки"
@@ -6398,19 +6473,20 @@ msgid "Total integration time"
 msgstr "Накоплено сигнала"
 
 msgid "hours"
-msgstr "часы"
+msgstr "часов"
 
 msgid "Average integration time"
 msgstr "Среднее накопление"
 
-msgid "Forum posts"
-msgstr "Сообщения на форуме"
+msgid ""
+"You uploaded an Indexed PNG file. AstroBin will need to lower the color "
+"count to 256 in order to work with it."
+msgstr ""
+"Вы загрузили индексированный PNG-файл. AstroBin вынужден уменьшить "
+"количество цветов до 256 для работы с ним."
 
 msgid "Image uploaded. Thank you!"
 msgstr "Изображение загружено. Спасибо!"
-
-msgid "You can't merge a product to itself."
-msgstr "Вы можете присоединить продукт к себе."
 
 msgid "You already have a collection with that name"
 msgstr "У вас уже есть коллекция с таким названием"
@@ -6429,20 +6505,20 @@ msgid ""
 msgstr ""
 "Спасибо за указание на проблему. Все эскизы будут заново сгенерированы."
 
-#, fuzzy
-#| msgid "Accessory"
-#| msgid_plural "Accessories"
 msgid "Accessory"
-msgstr "Принадлежности"
+msgstr "Аксессуар"
 
 msgid "Dates"
 msgstr "Даты"
 
 msgid "Avg. Moon age"
-msgstr "Сред. Возраст Луны"
+msgstr "Сред. возраст Луны"
+
+msgid "days"
+msgstr "дней"
 
 msgid "Avg. Moon phase"
-msgstr "Средн. Фаза Луны"
+msgstr "Средн. фаза Луны"
 
 msgid "Mean SQM"
 msgstr "Средний SQM"
@@ -6460,23 +6536,892 @@ msgid "Original version deleted!"
 msgstr "Оригинальная версия удалена!"
 
 msgid "Image moved to the staging area."
-msgstr "Изображение перемещено в Staging Area."
+msgstr "Изображение перемещено в студию."
 
 msgid "Image moved to the public area."
-msgstr "Изображение перемещено в Public Area."
+msgstr "Изображение перемещено в публичную зону."
 
 #, python-format
 msgid "%s topics deleted"
-msgstr ""
+msgstr "%s темы удалены"
 
 msgid ""
 "AstroBin is preparing your data for download. Please check this page again "
 "in a while: the more images you have, the more time it will take."
 msgstr ""
+"AstroBin готовит ваши данные для загрузки. Пожалуйста, проверьте эту "
+"страницу еще раз через некоторое время: чем больше у вас будет изображений, "
+"тем больше времени потребуется."
 
-#~| msgid "Revisions"
-#~ msgid "Revision"
-#~ msgstr "Версия"
+msgid "Are you a robot?"
+msgstr "Вы робот?"
+
+msgid "Sorry, this username already exists with a different capitalization."
+msgstr "Извините, это имя пользователя уже существует с другим регистром."
+
+#~ msgctxt "approximately"
+#~ msgid "about"
+#~ msgstr "описание"
+
+#~ msgid "View feature comparison"
+#~ msgstr "Посмотреть сравнение функций"
+
+#~ msgid "Max size"
+#~ msgstr "Макс размер"
+
+#~ msgid "View full res"
+#~ msgstr "Полный размер"
+
+#~ msgid "View full image info"
+#~ msgstr "Посмотреть полную информацию об изображении"
+
+#~ msgid "Basic"
+#~ msgstr "Основной"
+
+#~ msgid "Advanced"
+#~ msgstr "Расширенный"
+
+#~ msgid "Social features"
+#~ msgstr "Общественные особенности"
+
+#~ msgid "Plate-solving"
+#~ msgstr "Распознавание"
+
+#~ msgid "Bulk data export"
+#~ msgstr "Массовый экспорт данных"
+
+#~ msgid "Hide astronomy ads"
+#~ msgstr "Скрыть рекламу астрономии"
+
+#~ msgid "No ads on your pages"
+#~ msgstr "На ваших страницах нет рекламы"
+
+#~ msgid "Non-members/free users can view your images in full res"
+#~ msgstr ""
+#~ "Не-члены/бесплатные пользователи могут просматривать ваши изображения в "
+#~ "полном разрешении"
+
+#~ msgid "Full size annotations"
+#~ msgstr "Описание полного размера"
+
+#~ msgid "Upload uncompressed source"
+#~ msgstr "Закачать несжатый исходник"
+
+#~ msgid "Undelete images"
+#~ msgstr "Отменить удаление"
+
+#~ msgid ""
+#~ "The FREE account is to be considered a trial period. You can upload "
+#~ "images 10 times, after which you can't upload anymore. Deleting images "
+#~ "doesn't decrease your upload counter: the FREE account is not meant to be "
+#~ "used as a way to keep your latest 10 images."
+#~ msgstr ""
+#~ "БЕСПЛАТНАЯ учетная запись считается пробным периодом. Вы можете загружать "
+#~ "изображения 10 раз, после чего больше не можете загружать. Удаление "
+#~ "изображений не уменьшает ваш счетчик загрузок: БЕСПЛАТНАЯ учетная запись "
+#~ "не предназначена для использования в качестве способа хранения ваших "
+#~ "последних 10 изображений."
+
+#~ msgid "year"
+#~ msgstr "год"
+
+#~ msgid ""
+#~ "\n"
+#~ "                %(number)s images, max %(size)s each"
+#~ msgstr ""
+#~ "\n"
+#~ "                %(number)s изображений, макс. %(size)s каждое"
+
+#~ msgid "View in original resolution"
+#~ msgstr "Оригинальное разрешение"
+
+#~ msgid ""
+#~ "Up to %(number)s\n"
+#~ "            revisions/image"
+#~ msgstr ""
+#~ "Вплоть до %(number)s\n"
+#~ "            доработок/изображений"
+
+#~ msgid "Create/join Groups"
+#~ msgstr "Создать/присоединиться к группам"
+
+#~ msgid "Basic plate-solving"
+#~ msgstr "Базовое распознавание"
+
+#~ msgid "IOTD / Top Picks"
+#~ msgstr "Изображение Дня / Лучшие Изображения"
+
+#~ msgid "No ads for others on your pages"
+#~ msgstr "На ваших страницах нет рекламы для других"
+
+#~ msgid "Full-size annotations"
+#~ msgstr "Полноразмерные аннотации"
+
+#~ msgid "All future features"
+#~ msgstr "Все будущие функции"
+
+#~ msgid "In the future"
+#~ msgstr "В будущем"
+
+#~ msgid "Buy in the Marketplace"
+#~ msgstr "Купить онлайн"
+
+#~ msgid "Vote in contests"
+#~ msgstr "Голосование в конкурсах"
+
+#~ msgid "Analytics"
+#~ msgstr "Аналитика"
+
+#~ msgid "Bulk image editing"
+#~ msgstr "Массовое редактирование изображений"
+
+#~ msgid "Pay securely with PayPal"
+#~ msgstr "Оплатить через PayPal"
+
+#~ msgid "Want to upgrade from a lower subscription tier?"
+#~ msgstr "Хотите перейти с более низкого уровня подписки?"
+
+#~ msgid ""
+#~ "AstroBin doesn't support subscription upgrades at the moment, but we're "
+#~ "happy to make it happen manually. If you're on a lower subscription tier "
+#~ "and would like to upgrade to <strong>%(name)s</strong>, please just buy "
+#~ "it and then contact us at <a href=\"mailto:astrobin@astrobin.com"
+#~ "\">astrobin@astrobin.com</a> to get a refund for the unused time on your "
+#~ "old subscription. Thanks!"
+#~ msgstr ""
+#~ "AstroBin в настоящее время не поддерживает обновление подписки, но мы "
+#~ "рады сделать это вручную. Если у вас более низкий уровень подписки и вы "
+#~ "хотите перейти на <strong>%(name)s</strong>, просто купите его и "
+#~ "свяжитесь с нами по <a href=\"mailto:astrobin@astrobin.com"
+#~ "\">astrobin@astrobin.com</a>, чтобы получить возмещение за "
+#~ "неиспользованное время по старой подписке. Спасибо!"
+
+#~ msgid "Pay with a bank transfer"
+#~ msgstr "Оплата банковским переводом"
+
+#~ msgid ""
+#~ "\n"
+#~ "                Prefer to pay via bank transfer? Please make a deposit of "
+#~ "%(currency)s %(amount)s to the following\n"
+#~ "                bank details and then email us at %(email_prefix)s"
+#~ "%(email)s%(email_postfix)s with your username so\n"
+#~ "                we may upgrade your account manually. Thanks!\n"
+#~ "            "
+#~ msgstr ""
+#~ "\n"
+#~ "                 Предпочитаете платить банковским переводом? Пожалуйста, "
+#~ "внесите депозит в %(currency)s %(amount)s на следующие\n"
+#~ "                банковские реквизиты, а затем напишите нам по адресу "
+#~ "%(email_prefix)s%(email)s%(email_postfix)s с вашим именем пользователя, "
+#~ "так что\n"
+#~ "                мы могли обновить вашу учетную запись вручную. Спасибо! \n"
+#~ "            "
+
+#~ msgid ""
+#~ "\n"
+#~ "                ∞ images, max %(size)s each"
+#~ msgstr ""
+#~ "\n"
+#~ "                ∞ изображений, макс. %(size)s каждое"
+
+#~ msgid "Basic analytics"
+#~ msgstr "Основная аналитика"
+
+#~ msgid "Buy"
+#~ msgstr "Оплатить"
+
+#~ msgid "You are already on this plan"
+#~ msgstr "У вас уже этот план"
+
+#~ msgid "∞ images, ∞ size"
+#~ msgstr "∞ изобр., ∞ размер"
+
+#~ msgid "View full res (incl. visitors)"
+#~ msgstr "Посмотреть полное разрешение (вкл. посетителей)"
+
+#~ msgid "Full search"
+#~ msgstr "Полный поиск"
+
+#~ msgid "Unlimited revisions"
+#~ msgstr "Нелимитированные версии"
+
+#~ msgid "Advanced plate-solving"
+#~ msgstr "Продвинутое распознавание"
+
+#~ msgid "Sell in the Marketplace"
+#~ msgstr "Продать на торговой площадке"
+
+#~ msgid "Vote/enter contests"
+#~ msgstr "Голосовать/участвовать в конкурсах"
+
+#~ msgid "Advanced analytics"
+#~ msgstr "Продвинутая аналитика"
+
+#~ msgid "Subscription process canceled"
+#~ msgstr "Процесс подписки отменён"
+
+#~ msgid "Subscription process cancelled"
+#~ msgstr "Процесс подписки отменён"
+
+#~ msgid ""
+#~ "Your transaction with PayPal has been cancelled, so no change in your "
+#~ "subscription has occurred."
+#~ msgstr ""
+#~ "Ваша транзакция через PayPal была отменена, так что никаких изменений в "
+#~ "подписке не произошло."
+
+# Предлагаю RAW-данные. Самый точный перевод и имя продукта вроде тоже подходящее. Смысл не теряется.
+#~ msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
+#~ msgstr "Вернуться к <a href=\"%(plans_url)s\">странице планов</a>."
+
+#~ msgctxt "Subscription plan name"
+#~ msgid "Plan"
+#~ msgstr "План"
+
+#~ msgid "Offer valid until"
+#~ msgstr "Предложение действительно до"
+
+#~ msgid "Price"
+#~ msgstr "Стоимость"
+
+#~ msgid "Validity"
+#~ msgstr "Период действия"
+
+#~ msgid "Autorenew"
+#~ msgstr "Автообновление"
+
+#~ msgid "Trial period"
+#~ msgstr "Пробный период"
+
+#~ msgid "day"
+#~ msgstr "день"
+
+#~ msgid "week"
+#~ msgstr "неделя"
+
+#~ msgid "month"
+#~ msgstr "месяц"
+
+#~ msgid "one time"
+#~ msgstr "один раз"
+
+#~ msgctxt "At no cost"
+#~ msgid "Free"
+#~ msgstr "Бесплатный"
+
+#~ msgid "Daily"
+#~ msgstr "Ежедневно"
+
+#~ msgid "Weekly"
+#~ msgstr "Еженедельно"
+
+#~ msgid "Monthly"
+#~ msgstr "Ежемесячно"
+
+#~ msgid "Yearly"
+#~ msgstr "Ежегодно"
+
+#~ msgid "weeks"
+#~ msgstr "недель"
+
+#~ msgid "months"
+#~ msgstr "месяцев"
+
+#~ msgid "years"
+#~ msgstr "лет"
+
+#~ msgid "No trial"
+#~ msgstr "Не пробный"
+
+#~ msgid "Switch to"
+#~ msgstr "Переключиться на"
+
+#~ msgid "Subscription changed"
+#~ msgstr "Подписка изменена"
+
+#~ msgid ""
+#~ "Your request for a change in your subscription has been processed "
+#~ "successfully."
+#~ msgstr "Ваш запрос на изменение подписки был успешно совершён."
+
+#~ msgid "Subscription plan"
+#~ msgstr "План подписки"
+
+#~ msgid "Subscribed"
+#~ msgstr "Подписано"
+
+#~ msgid "Expires"
+#~ msgstr "Истекает"
+
+#~ msgid "Invalid"
+#~ msgstr "Неверно"
+
+#~ msgid "Cancelled"
+#~ msgstr "Отменено"
+
+#~ msgid "Unavailable"
+#~ msgstr "Недоступно"
+
+#~ msgid "Unsubscribed"
+#~ msgstr "Отменена подписка"
+
+#~ msgid ""
+#~ "This subscription is not offered anymore on AstroBin. Please visit the <a "
+#~ "href=\"%(url)s\">subscriptions page</a> to see the available plans, "
+#~ "thanks!"
+#~ msgstr ""
+#~ "Это подписка больше не предлагается на AstroBin. Пожалуйста, посетите <a "
+#~ "href=\"%(url)s\">страницу планов подписки</a> чтобы увидеть доступные, "
+#~ "спасибо!"
+
+#~ msgid ""
+#~ "If you would like to renew your subscription, please visit this page "
+#~ "again after\n"
+#~ "                        your current subscription's expiration date:"
+#~ msgstr ""
+#~ "Если вы хотите продлить подписку, посетите эту страницу еще раз после\n"
+#~ "                         срок действия вашей текущей подписки:"
+
+#~ msgid ""
+#~ "Your subscription is either cancelled or not active yet. If you want to "
+#~ "subscribe again, please wait until your subscription is expired. If you "
+#~ "just subscribed, please wait a few minutes while PayPal contacts our "
+#~ "server for the final transaction confirmation. Thank you!"
+#~ msgstr ""
+#~ "Ваша подписка либо отменена, либо еще не активна. Если вы хотите оформить "
+#~ "новую подписку, пожалуйста, подождите пока закончится текущая. Если вы "
+#~ "только что оформили подписку, пожалуйста, подождите несколько минут пока "
+#~ "PayPal соединяется с нашим сервером для подтверждения транзакции. Спасибо!"
+
+#~ msgid "By cancelling, you will revert to a free plan."
+#~ msgstr "Отменив, вы будете возвращены в бесплатный план."
+
+#~ msgid "Free plans are limited to <strong>%(max_allowed)s</strong> images."
+#~ msgstr ""
+#~ "Бесплатные планы ограничены до <strong>%(max_allowed)s</strong> изобр."
+
+#~ msgid ""
+#~ "However, your existing images will not be deleted or deactivated in any "
+#~ "way! Simply, you will not be able to upload any more images unless you "
+#~ "switch to a paid plan."
+#~ msgstr ""
+#~ "Впрочем, ваши существующие изображения не будут удалены или "
+#~ "деактивированы в любом случае! Просто, вы не сможете добавлять больше "
+#~ "изображений пока не переключитесь на платный план."
+
+#~ msgid "Cancel via PayPal"
+#~ msgstr "Отмена через PayPal"
+
+#~ msgid "You cannot switch to this plan."
+#~ msgstr "Вы не можете переключиться на этот план."
+
+#~ msgid "Back to the plans"
+#~ msgstr "Обратно к планам"
+
+#~ msgid "Subscription confirmed"
+#~ msgstr "Подписка подтверждена"
+
+#~ msgid ""
+#~ "Your request has been received, and we are awaiting the final "
+#~ "confirmation from PayPal. Your subscription should be active within a few "
+#~ "minutes!"
+#~ msgstr ""
+#~ "Ваш запрос отправлен, и мы ожидаем окончательного подтверждения от "
+#~ "PayPal. Ваша подписка будет активирована в течение нескольких минут!"
+
+#~ msgid "Thank you for supporting AstroBin!"
+#~ msgstr "Спасибо за поддержку AstroBin!"
+
+#~ msgid "Your inactive subscription plans"
+#~ msgstr "Ваши неактивные планы подписки"
+
+#~ msgid ""
+#~ "PS: are you interested in larger plans?\n"
+#~ "                <a href=\"/contact/\">Let us know!</a>"
+#~ msgstr ""
+#~ "PS: Вы заинтересованы в продвинутых планах? \n"
+#~ "                <a href=\"/contact/\">Дайте нам знать!</a>"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "                            <a href=\"%(user_page)s\">%(user)s</a> "
+#~| "joined a group.\n"
+#~| "                        "
+#~ msgid ""
+#~ "\n"
+#~ "                            And %(count)s more.\n"
+#~ "                        "
+#~ msgstr ""
+#~ "\n"
+#~ "<a href=\"%(user_page)s\">%(user)s</a> вступил в группу.\n"
+#~ "                        "
+
+#~ msgid ""
+#~ "AstroBin can protect your images from theft by applying a watermark to "
+#~ "them. Be careful with your settings though: once a watermark has been "
+#~ "applied, it cannot be removed (AstroBin won't store the non-watermarked "
+#~ "version of your image, for your safety). If you don't like the watermark "
+#~ "resulting from the following settings, your only choice is to delete the "
+#~ "image and start over."
+#~ msgstr ""
+#~ "AstroBin может защитить ваши изображения от вороства, применяя к ним "
+#~ "водяной знак. Будьте осторожны с вашими настройками к ним: применённый "
+#~ "однажды водяной знак нельзя отменить (AstroBin не будет хранить не-"
+#~ "маркированные версии ваших изображений, для вашей безопасности). Если вам "
+#~ "не нравится окончательный водяной знак из имеющихся настроек, вам "
+#~ "остаётся только удалить изображение и начать снова."
+
+#~ msgid "Traditional"
+#~ msgstr "Традиционный"
+
+#~ msgid ""
+#~ "AstroBin is an image hosting website specifically targeted to "
+#~ "astrophotographers: it's the first and the last place where you need to "
+#~ "upload your astrophotography images. Made by an astrophotographer, for "
+#~ "the astrophotographers."
+#~ msgstr ""
+#~ "AstroBin это хостинг изображений, ориентированный на астрофотографов: это "
+#~ "единственное достойное место для закачки ваших астрофото. Сделано "
+#~ "астрофотографом для астрофотографов."
+
+#~ msgid "AstroBin index"
+#~ msgstr "Индекс AstroBin"
+
+#~ msgid "Blog"
+#~ msgstr "Дневник"
+
+#~ msgid "Terms of servic"
+#~ msgstr "Условия предоставления услуг"
+
+#~ msgid ""
+#~ "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
+#~ "Reserved. The images on this websites are copyright of their respective "
+#~ "owners."
+#~ msgstr ""
+#~ "Авторские права AstroBin &copy; 2010-2012 Salvatore Iovene, Все Права "
+#~ "Защищены. Изображения на этом сайте принадлежат их уважаемым владельцам."
+
+#~ msgid ""
+#~ "Your request for an API Key has been approved!\n"
+#~ "\n"
+#~ "    Your key: %(key)s\n"
+#~ "    Your secret: %(secret)s\n"
+#~ "\n"
+#~ "    Please read the API documentation at <a href=\"%(api_docs_url)s\">"
+#~ "%(api_docs_url)s</a>\n"
+#~ "\n"
+#~ "    You can review your API keys at <a href=\"%(api_keys_url)s\">"
+#~ "%(api_keys_url)s</a>\n"
+#~ "\n"
+#~ "    Thank you for using AstroBin's APIs!"
+#~ msgstr ""
+#~ "Ваш запрос API-ключа был одобрен!\n"
+#~ "\n"
+#~ "    Ваш ключ: %(key)s\n"
+#~ "    Секретный код: %(secret)s\n"
+#~ "\n"
+#~ "    Пожалуйста, прочтите документацию на API по адресу <a href="
+#~ "\"%(api_docs_url)s\">%(api_docs_url)s</a>\n"
+#~ "    \n"
+#~ "    Вы можете посмотреть свои API-ключи по адресу <a href="
+#~ "\"%(api_keys_url)s\">%(api_keys_url)s</a>\n"
+#~ "    \n"
+#~ "    Спасибо за использование API от AstroBin!"
+
+#~ msgid ""
+#~ "Your request for an API Key has been approved!\n"
+#~ "\n"
+#~ "    Your key: %(key)s\n"
+#~ "    Your secret: %(secret)s\n"
+#~ "\n"
+#~ "    Please read the API documentation at %(api_docs_url)s\n"
+#~ "    \n"
+#~ "    You can review your API keys at %(api_keys_url)s\n"
+#~ "    \n"
+#~ "    Thank you for using AstroBin's APIs!"
+#~ msgstr ""
+#~ "Ваш запрос API-ключа был одобрен!\n"
+#~ "\n"
+#~ "    Ваш ключ: %(key)s\n"
+#~ "    Секретный код: %(secret)s\n"
+#~ "\n"
+#~ "    Пожалуйста, прочтите документацию на API по адресу %(api_docs_url)s\n"
+#~ "    \n"
+#~ "    Вы можете посмотреть свои API-ключи по адресу %(api_keys_url)s\n"
+#~ "    \n"
+#~ "    Спасибо за использование API от AstroBin!"
+
+#~ msgid "API Key request approved"
+#~ msgstr "Запрос API-ключа одобрен"
+
+#~ msgid "A collection of great images that were recently handpicked."
+#~ msgstr "Коллекция великолепных изображений, недавно отобранных."
+
+#~ msgid "Last 6 months"
+#~ msgstr "За 6 месяцев"
+
+#~ msgid "Last year"
+#~ msgstr "За год"
+
+#~ msgid "All time"
+#~ msgstr "Всё время"
+
+#~ msgid "Top Pick"
+#~ msgstr "Лучший Выбор"
+
+#~ msgid "Merge"
+#~ msgstr "Объединить"
+
+#~ msgid ""
+#~ "Use this field to mark that the item you are claiming really is the same "
+#~ "product (or a variation thereof) of something you have claimed before."
+#~ msgstr ""
+#~ "Используйте это поле, чтобы отметить, что пункт, который вы вносите, на "
+#~ "самом деле тот же продукт (или его вариант), который вы заявляли ранее."
+
+#~ msgid ""
+#~ "You can't create more than %d claims. Consider upgrading your affiliation!"
+#~ msgstr ""
+#~ "Вы не можете создавать более чем %d заявок. Рассмотрите апгрейд вашего "
+#~ "членства!"
+
+#~ msgid "You have already claimed this product."
+#~ msgstr "Вы уже заявляли об этом продукте."
+
+#~ msgid ""
+#~ "Use this field to mark that the item you are merging really is the same "
+#~ "product (or a variation thereof) of something you have claimed before."
+#~ msgstr ""
+#~ "Используйте это поле, чтобы отметить тот пункт, что вы объединяете "
+#~ "действительно тот же продукт (или их вариации) или который вы вносили "
+#~ "ранее."
+
+#~ msgid "has written a review on"
+#~ msgstr "написал обзор о"
+
+#~ msgid "Company name"
+#~ msgstr "Название организации"
+
+#~ msgid "The name of the company you represent on AstroBin."
+#~ msgstr "Название организации, которую вы представляете в AstroBin."
+
+#~ msgid "Company description"
+#~ msgstr "Описание организации"
+
+#~ msgid ""
+#~ "A short description of the company you represent on AstroBin. You can use "
+#~ "some <a href=\"/faq/#comments\">formatting rules</a>."
+#~ msgstr ""
+#~ "Короткое описание организации, которую вы представляете на AstroBin. Вы "
+#~ "можете использовать некоторые <a href=\"/faq/#comments\">правила "
+#~ "форматирования</a>."
+
+#~ msgid "Company website"
+#~ msgstr "Веб-сайт организации"
+
+#~ msgid "The website of the company you represent on AstroBin."
+#~ msgstr "Веб-сайт организации, которую вы представляете на AstroBin."
+
+#~ msgid "Country of operation"
+#~ msgstr "Страна ведения деятельности"
+
+#~ msgid "AUD - Australian dollars"
+#~ msgstr "AUD - Австралийский доллар"
+
+#~ msgid "CAD - Canadian dollars"
+#~ msgstr "CAD - Канадский доллар"
+
+#~ msgid "CHF - Swiss francs"
+#~ msgstr "CHF - Швейцарский франк"
+
+#~ msgid "EUR - Euros"
+#~ msgstr "EUR - Евро"
+
+#~ msgid "GPB - Pound stelings"
+#~ msgstr "GPB - Фунт стерлингов"
+
+#~ msgid "PLN - Polish zloty"
+#~ msgstr "PLN - Польский злотый"
+
+#~ msgid "SEK - Swedish krona"
+#~ msgstr "SEK - Шведская крона"
+
+#~ msgid "USD - American dollars"
+#~ msgstr "USD - Американский доллар"
+
+#~ msgid "Producer"
+#~ msgstr "Производитель"
+
+#~ msgid "The link to this product's page on your website."
+#~ msgstr "Ссылка на страницу этого продукта на вашем веб-сайте."
+
+#~ msgid "Currency"
+#~ msgstr "Валюта"
+
+#~ msgid "Retailed gear items"
+#~ msgstr "Элементы оборудования в розницу"
+
+#~ msgid "Proper make"
+#~ msgstr "Правильное место изготовления"
+
+#~ msgid ""
+#~ "Sometimes, product make/brand/producer/developer names are not written "
+#~ "properly by the users. Write here the proper make/brand/producer/"
+#~ "developer name."
+#~ msgstr ""
+#~ "Иногда, для продукта место изготовления/производитель/разработчик "
+#~ "пользователями пишется неверно. Напишите правильное название места "
+#~ "изготовления/марку/производителя/разработчика."
+
+#~ msgid "Proper name"
+#~ msgstr "Правильное название"
+
+#~ msgid ""
+#~ "Sometimes, product names are not written properly by the users. Write "
+#~ "here the proper product name, not including the make/brand/producer/"
+#~ "developer name.<br/>It is recommended that you try to group as many items "
+#~ "as possible, so try to use a generic version of your product's name."
+#~ msgstr ""
+#~ "Иногда пользователи неправильно пишут названия продуктов. Напишите "
+#~ "правильное имя продукта, не включая названия места производства/марки/"
+#~ "производителя/разработчика.<br/>Желательно, чтобы вы попытались "
+#~ "сгруппировать так много продуктов, как сможете, поэтому постарайтесь "
+#~ "использовать общую версию имени вашего продукта."
+
+#~ msgid ""
+#~ "The official, commercial image for this product. Upload an image via the "
+#~ "regular uploading interface, set its subject type to \"Gear\", and then "
+#~ "choose it from this list. If you upload several revisions, they will also "
+#~ "appear in the commercial page."
+#~ msgstr ""
+#~ "Официальное, коммерческое изображение для этого продукта. Закачайте "
+#~ "изображение через обычный диалог загрузки, установить его тип как "
+#~ "«Оборудование», и затем выберите его из списка. Если вы закачиваете "
+#~ "несколько версий, они так же отобразятся на рекламной странице."
+
+#~ msgid "Tagline"
+#~ msgstr "Слоган"
+
+#~ msgid ""
+#~ "A memorable phrase that will sum up this product, for marketing purposes."
+#~ msgstr ""
+#~ "Запоминающаяся фраза, которая подчеркивает продукт, в целях маркетинга."
+
+#~ msgid ""
+#~ "Here you can write the full commercial description of your product. You "
+#~ "can use some <a href=\"/faq/#comments\">formatting rules</a>."
+#~ msgstr ""
+#~ "Здесь вы можете дать подробное описание вашего продукта. Вы можете "
+#~ "использовать некоторые <a href=\"/faq/#comments\">правила форматирования</"
+#~ "a>."
+
+#~ msgid "Commercial gear items"
+#~ msgstr "Рекламные элементы оборудования"
+
+#~ msgid ""
+#~ "As a producer and/or a retailer on AstroBin, it's very important that you "
+#~ "fill in all of your company details! Click <a href=\"%(the_url)s\">here</"
+#~ "a> to do it now."
+#~ msgstr ""
+#~ "Как производитель и/или продавец на AstroBin, очень важно чтобы вы "
+#~ "заполнили все детали о вашей организации! Щёлкните <a href=\"%(the_url)s"
+#~ "\">здесь</a> чтобы сделать это."
+
+#~ msgid ""
+#~ "As a retailer on AstroBin, it's very important that you fill in your "
+#~ "country of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
+#~ msgstr ""
+#~ "Как продавец на AstroBin, очень важно чтобы вы указали страну вашей "
+#~ "деятельности! Щёлкните <a href=\"%(the_url)s\">здесь</a> чтобы сделать "
+#~ "это."
+
+#~ msgid "Commercial products"
+#~ msgstr "Рекламные продукты"
+
+#~ msgid "Edit commercial product"
+#~ msgstr "Редактировать рекламный продукт"
+
+#~ msgid "Return to list"
+#~ msgstr "Вернуться в список"
+
+#~ msgid "View in new window"
+#~ msgstr "Открыть в новом окне"
+
+#~ msgid "Edit retailed product"
+#~ msgstr "Редактировать продаваемый продукт"
+
+#~ msgid "by"
+#~ msgstr "от"
+
+#~ msgid "Other images"
+#~ msgstr "Другие изображения"
+
+#~ msgid "Some images"
+#~ msgstr "Некоторые изображения"
+
+#~ msgid "(view more)"
+#~ msgstr "(смотреть ещё)"
+
+#~ msgid "Reviews"
+#~ msgstr "Обзоры"
+
+#~ msgid "Rating"
+#~ msgstr "Оценка"
+
+#~ msgid "Add your review"
+#~ msgstr "Добавить свой обзор"
+
+#~ msgid ""
+#~ "Please be fair, honest and polite when writing a review. Many people will "
+#~ "read your review: all the users on AstroBin who own this piece of gear, "
+#~ "will be notified of your review."
+#~ msgstr ""
+#~ "Будьте честны, справедливы и вежливы когда пишете обзор. Многие прочтут "
+#~ "его: все пользователи, у кого есть часть этого оборудования, будут "
+#~ "уведомлены о вашем обзоре."
+
+#~ msgid ""
+#~ "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
+#~ "register/\">register</a> to write a review."
+#~ msgstr ""
+#~ "Пожалуйста, <a href=\"/accounts/login/\">войдите</a> или <a href=\"/"
+#~ "accounts/register/\">зарегистрируйтесь</a>, чтобы написать обзор."
+
+#~ msgid ""
+#~ "Use this space to start a discussion, leave a comment or ask a question "
+#~ "about this piece of gear. All the users on AstroBin who own one, will be "
+#~ "notified and can join the discussion."
+#~ msgstr ""
+#~ "Используйте это место для начала обсуждения, оставьте комментарий или "
+#~ "задайте вопрос об этом оборудовании. Все пользователи на AstrоBin, у кого "
+#~ "оно есть, будут уведомлены и смогут присоединиться к обсуждению."
+
+#~ msgid ""
+#~ "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
+#~ "register/\">register</a> to leave a comment."
+#~ msgstr ""
+#~ "Пожалуйста, <a href=\"/accounts/login/\">войдите</a> или <a href=\"/"
+#~ "accounts/register/\">зарегистрируйтесь</a>, чтобы оставить комментарий."
+
+#~ msgid "Buy it here"
+#~ msgstr "Купить это здесь"
+
+#~ msgid "Properties"
+#~ msgstr "Свойства"
+
+#~ msgid "Owners"
+#~ msgstr "Владельцы"
+
+#~ msgid "just now"
+#~ msgstr "только сейчас"
+
+#~ msgid "Made possible by"
+#~ msgstr "Сделано с помощью"
+
+#~ msgid "Commercial information"
+#~ msgstr "Рекламная информация"
+
+#~ msgid ""
+#~ "%(user)s wrote a review of a gear item you own! Read it at following url: "
+#~ "<a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "%(user)s написал обзор на оборудование которое есть у вас! Прочесть можно "
+#~ "тут: <a href=\"%(url)s\">%(url)s</a>"
+
+#~ msgid ""
+#~ "%(user)s wrote a review of a gear item you own! Read it at following url: "
+#~ "%(url)s"
+#~ msgstr ""
+#~ "%(user)s написал обзор на оборудование которое есть у вас! Прочесть можно "
+#~ "тут: %(url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear "
+#~ "item you own!</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> написал обзор элемента "
+#~ "оборудования, который у вас есть!</a>"
+
+#~ msgid "%(user)s wrote a review of a gear item you own!"
+#~ msgstr "%(user)s написал обзор на элемент оборудования, который у вас есть!"
+
+#~ msgid "%(user)s's commercial products"
+#~ msgstr "%(user)s's  рекламные продукты"
+
+#~ msgid ""
+#~ "Please remember that you are only allowed to claim items that you really "
+#~ "produce and/or retail."
+#~ msgstr ""
+#~ "Пожалуйста, помните, что вы можете заявлять только те вещи, которые "
+#~ "действительно производите и/или продаете."
+
+#~ msgid "As producer"
+#~ msgstr "Как производитель"
+
+#~ msgid "Gear IDs"
+#~ msgstr "Идентификаторы оборудования"
+
+#~ msgid "You haven't claimed any commercial products yet."
+#~ msgstr "Вы еще не заявляли ни одного коммерческого продукта."
+
+#~ msgid "%(user)s hasn't claimed any commercial products yet."
+#~ msgstr "%(user)s не заявлял ни одного коммерческого продукта."
+
+#~ msgid "As retailer"
+#~ msgstr "Как продавец"
+
+#~ msgid "You haven't claimed any retailed products yet."
+#~ msgstr "Вы еще не заявляли ни одного продаваемого продукта."
+
+#~ msgid "%(user)s hasn't claimed any retailed products yet."
+#~ msgstr "%(user)s не заявлял еще ни одного продаваемого продукта."
+
+# наверно таки они привлекают внимание к своим штучкам)
+#~ msgid "Claim as producer"
+#~ msgstr "Заявить как производитель"
+
+#~ msgid "Claim as retailer"
+#~ msgstr "Заявить как продавец"
+
+#~ msgid "Claim commercial product"
+#~ msgstr "Заявить коммерческий продукт"
+
+#~ msgid "Claim"
+#~ msgstr "Заявить"
+
+#~ msgid "Select items to remove"
+#~ msgstr "Выбрать пункты для удаления"
+
+#~ msgid "Be careful if you try to remove all of these!"
+#~ msgstr "Будьте осторожны если будете это убирать!"
+
+#~ msgid ""
+#~ "All the properties, including the commercial description, of this claim "
+#~ "will be deleted and cannot be recovered!"
+#~ msgstr ""
+#~ "Все свойства, включая рекламное описание, данной заявки будут удалены без "
+#~ "возможности восстановления!"
+
+#~ msgid "Select the product you want to merge to"
+#~ msgstr "Выберите продукт для объединения"
+
+#~ msgid "Claim retailed product"
+#~ msgstr "Заявить продаваемый продукт"
+
+#~ msgid ""
+#~ "All the properties of this claim will be deleted and cannot be recovered!"
+#~ msgstr ""
+#~ "Все свойства этой заявки будут удалены без возможности восстановления!"
+
+#~ msgid "Edit your commercial information"
+#~ msgstr "Править вашу коммерческую информацию"
+
+#~ msgid "Edit your retailer information"
+#~ msgstr "Редактировать информацию вашего продавца"
+
+#~ msgid "You can't merge a product to itself."
+#~ msgstr "Вы можете присоединить продукт к себе."
 
 #~ msgid "Imaging telescope or lens"
 #~ msgid_plural "Imaging telescopes or lenses"
@@ -6573,9 +7518,6 @@ msgstr ""
 
 #~ msgid "Private shared folders"
 #~ msgstr "Личные каталоги"
-
-#~ msgid "Frequently Asked Questions"
-#~ msgstr "Часто задаваемые вопросы"
 
 #~ msgid "Is this website for free?"
 #~ msgstr "Этот веб-сайт бесплатен?"
@@ -7201,9 +8143,6 @@ msgstr ""
 #~ msgid "So, what are you waiting for?"
 #~ msgstr "Так чего вы ждёте?"
 
-#~ msgid "Sign up now!"
-#~ msgstr "Присоединяйтесь сейчас!"
-
 #~ msgid "Send to public data pool"
 #~ msgstr "Отправить в общее хранилище"
 
@@ -7804,9 +8743,6 @@ msgstr ""
 #~ msgid "Choose files"
 #~ msgstr "Выбрать файлы"
 
-#~ msgid "Reset"
-#~ msgstr "Сбросить"
-
 #~ msgid "Start upload"
 #~ msgstr "Начать закачку"
 
@@ -8256,9 +9192,6 @@ msgstr ""
 #~ msgid "Excerpt"
 #~ msgstr "Выдержка"
 
-#~ msgid "New!"
-#~ msgstr "Новый!"
-
 #~ msgid "or return to messages"
 #~ msgstr "или вернуться к сообщениям"
 
@@ -8282,9 +9215,6 @@ msgstr ""
 
 #~ msgid "Recently uploaded"
 #~ msgstr "Недавно закачанные"
-
-#~ msgid "Recently liked"
-#~ msgstr "Недавно понравившиеся"
 
 #~ msgid "Recently bookmarked"
 #~ msgstr "Недавно в закладках"

@@ -94,7 +94,9 @@
             </div>
             {% endif %}
 
-            {% if section == 'trash' %}
+            {% if section == 'recovered' %}
+                {% include "user/profile/recovered_image_list.html" %}
+            {% elif section == 'trash' %}
                 {% include "user/profile/trash_image_list.html" %}
             {% else %}
                 {% image_list image_list nav_ctx='user' %}

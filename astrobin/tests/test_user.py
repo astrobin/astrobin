@@ -9,8 +9,6 @@ from django_bouncy.models import Bounce
 from mock import patch
 
 from astrobin.enums import SubjectType
-from toggleproperties.models import ToggleProperty
-
 from astrobin.models import (
     Acquisition,
     Telescope,
@@ -19,6 +17,7 @@ from astrobin.models import (
     DataDownloadRequest)
 from astrobin.tests.generators import Generators
 from astrobin_apps_iotd.models import *
+from toggleproperties.models import ToggleProperty
 
 
 class UserTest(TestCase):
@@ -29,7 +28,6 @@ class UserTest(TestCase):
         self.user_2 = User.objects.create_user(
             username="user_2", email="user_2@example.com",
             password="password")
-
 
     def tearDown(self):
         self.user.delete()
@@ -133,6 +131,7 @@ class UserTest(TestCase):
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_user_page_view(self, retrieve_primary_thumbnails):
+        now = datetime.now()
         today = date.today()
 
         # Test simple access
@@ -167,9 +166,9 @@ class UserTest(TestCase):
         # Test "upload time" sorting
         image1 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE1")
         image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
-        image1.uploaded = today
+        image1.uploaded = now
         image1.save(keep_deleted=True)
-        image2.uploaded = today + timedelta(1)
+        image2.uploaded = now + timedelta(hours=24)
         image2.save(keep_deleted=True)
 
         response = self.client.get(
@@ -186,7 +185,7 @@ class UserTest(TestCase):
         image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
         acquisition1 = Acquisition.objects.create(image=image1, date=today)
         acquisition2 = Acquisition.objects.create(
-            image=image2, date=today + timedelta(1))
+            image=image2, date=today + timedelta(days=1))
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=acquired")
         self.assertEquals(response.status_code, 200)
@@ -296,7 +295,7 @@ class UserTest(TestCase):
 
         acquisition1 = Acquisition.objects.create(image=image1, date=today)
         acquisition2 = Acquisition.objects.create(
-            image=image2, date=today - timedelta(365))
+            image=image2, date=today - timedelta(days=365))
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=year")
@@ -471,26 +470,63 @@ class UserTest(TestCase):
         response = self.client.get(reverse('user_page', args=(self.user.username,)))
         self.assertNotContains(response, 'iotd-badge')
 
-        # Check that the Top Pick badge is not visible
+        # Check that the Top pick badge is not visible
         iotd.delete()
         response = self.client.get(reverse('user_page', args=(self.user.username,)))
         self.assertNotContains(response, 'top-pick-badge')
 
+        # Check that the Top pick nomination badge is not visible
+        vote.delete()
+        response = self.client.get(reverse('user_page', args=(self.user.username,)))
+        self.assertNotContains(response, 'top-pick-nomination-badge')
+
         # Check that the top100 badge is not visible
         self.assertNotContains(response, 'top100-badge')
 
-        submitter.delete()
-        reviewer.delete()
-        judge.delete()
+    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
+    @patch("astrobin.tasks.retrieve_primary_thumbnails")
+    def test_user_profile_banned_from_competitions(self, retrieve_primary_thumbnails):
+        self.client.login(username="user", password="password")
+        self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
 
-        submitters.delete()
-        reviewers.delete()
-        judges.delete()
+        image = Image.objects_including_wip.all()[0]
 
-        submission.delete()
+        submitter = User.objects.create_user('submitter', 'submitter_1@test.com', 'password')
+        submitters = Group.objects.create(name='iotd_submitters')
+        submitters.user_set.add(submitter)
+        reviewer = User.objects.create_user('reviewer', 'reviewer_1@test.com', 'password')
+        reviewers = Group.objects.create(name='iotd_reviewers')
+        reviewers.user_set.add(reviewer)
+        judge = User.objects.create_user('judge', 'judge_1@test.com', 'password')
+        judges = Group.objects.create(name='iotd_judges')
+        judges.user_set.add(judge)
+        IotdSubmission.objects.create(submitter=submitter, image=image)
+        vote = IotdVote.objects.create(reviewer=reviewer, image=image)
+        iotd = Iotd.objects.create(judge=judge, image=image, date=datetime.now().date())
+
+        profile = self.user.userprofile
+        profile.banned_from_competitions = datetime.now()
+        profile.save(keep_deleted=True)
+        image = Image.objects_including_wip.get(pk=image.pk)
+
+        # Check that the IOTD banner is still visible because the ban is not retroactive.
+        response = self.client.get(reverse('image_detail', args=(image.get_id(),)))
+        self.assertContains(response, "iotd-ribbon")
+
+        # Check that the IOTD badge is still not visible because the ban is not retroactive.
+        response = self.client.get(reverse('user_page', args=(self.user.username,)))
+        self.assertContains(response, 'iotd-badge')
+
+        # Check that the Top pick badge is still visible because the ban is not retroactive.
+        iotd.delete()
+        response = self.client.get(reverse('user_page', args=(self.user.username,)))
+        self.assertContains(response, 'top-pick-badge')
+
+        # Check that the Top pick nomination badge is still visible because the ban is not retroactive.
         vote.delete()
-
-        image.delete()
+        response = self.client.get(reverse('user_page', args=(self.user.username,)))
+        self.assertContains(response, 'top-pick-nomination-badge')
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_corrupted_images_not_shown_to_others(self, retrieve_primary_thumbnails):
@@ -770,7 +806,7 @@ class UserTest(TestCase):
         self.assertContains(response, "<h4>Subscription</h4>", html=True)
         self.assertContains(response, "<strong data-test='subscription-type'>AstroBin Free</strong>", html=True)
         self.assertNotContains(response, "data-test=\"expiration-date\"")
-        self.assertContains(response, "<strong data-test='images-used'>0 / 123</strong>", html=True)
+        self.assertContains(response, "<strong data-test='uploads-used'>0 / 123</strong>", html=True)
 
         self.client.logout()
         image.delete()
@@ -795,7 +831,7 @@ class UserTest(TestCase):
             formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
             "</strong>",
             html=True)
-        self.assertContains(response, "<strong data-test='images-used'>0 / 123</strong>", html=True)
+        self.assertContains(response, "<strong data-test='uploads-used'>0 / 123</strong>", html=True)
 
         self.client.logout()
         us.delete()
@@ -846,7 +882,6 @@ class UserTest(TestCase):
             formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
             "</strong>",
             html=True)
-        self.assertContains(response, "<strong data-test='images-used'>0 / &infin;</strong>", html=True)
 
         self.client.logout()
         us.delete()
@@ -872,7 +907,6 @@ class UserTest(TestCase):
             formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
             "</strong>",
             html=True)
-        self.assertContains(response, "<strong data-test='images-used'>0 / &infin;</strong>", html=True)
 
         self.client.logout()
         us.delete()
@@ -897,7 +931,6 @@ class UserTest(TestCase):
             formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
             "</strong>",
             html=True)
-        self.assertContains(response, "<strong data-test='images-used'>0 / &infin;</strong>", html=True)
 
         self.client.logout()
         us.delete()

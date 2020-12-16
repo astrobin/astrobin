@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:02+0000\n"
+"POT-Creation-Date: 2020-12-10 21:47+0000\n"
 "PO-Revision-Date: 2015-12-30 10:50+0000\n"
 "Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -760,35 +760,6 @@ msgstr "Zimbabwe"
 msgid "Users"
 msgstr "Käyttäjät"
 
-msgid "Make"
-msgstr "Merkki"
-
-msgid "The make, brand, producer or developer of this product."
-msgstr "Tuotteen valmistaja tai merkki."
-
-msgid "Name"
-msgstr "Nimi"
-
-msgid "Merge"
-msgstr "Yhdistä"
-
-msgid ""
-"Use this field to mark that the item you are claiming really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"Käytä tätä kenttää merkitäksesi tuotteen samaksi (tai sen muunnokseksi) kuin "
-"aiemmin merkitsemäsi tuote."
-
-#, python-format
-msgid ""
-"You can't create more than %d claims. Consider upgrading your affiliation!"
-msgstr ""
-"Et voi merkitä enempää kuin %d tuotetta. Harkitse käyttäjätilisi "
-"päivittämistä!"
-
-msgid "You have already claimed this product."
-msgstr "Olet jo ilmoittautunut tämän tuotteen valmistajaksi."
-
 msgid ""
 "Select a tag to order this collection by its value. If you see no options "
 "here, it's because none of the images in this collection have key/value "
@@ -931,13 +902,6 @@ msgid "Longitude (seconds)"
 msgstr "Pituusaste (sekuntia)"
 
 msgid ""
-"Use this field to mark that the item you are merging really is the same "
-"product (or a variation thereof) of something you have claimed before."
-msgstr ""
-"Käytä tätä kenttää merkitsemään, että tuotteesi on sama (tai sen muunnos) "
-"kuin se johon yrität yhdistää tuotetta."
-
-msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
 "guiding, go here."
 msgstr ""
@@ -1006,9 +970,6 @@ msgstr "merkitty muistiin"
 
 msgid "likes"
 msgstr "tykkää"
-
-msgid "has written a review on"
-msgstr "on kirjoittanut arvostelun"
 
 #, fuzzy
 msgid "created a new public group"
@@ -1161,6 +1122,30 @@ msgstr "Pikkuplaneetta"
 msgid "Comet"
 msgstr "Komeetta"
 
+#, fuzzy
+#| msgid "Orientation"
+msgid "Occultation"
+msgstr "Kuvan asento"
+
+#, fuzzy
+msgid "Conjunction"
+msgstr "Sijainnit"
+
+msgid "Partial lunar eclipse"
+msgstr ""
+
+msgid "Total lunar eclipse"
+msgstr ""
+
+msgid "Partial solar eclipse"
+msgstr ""
+
+msgid "Anular solar eclipse"
+msgstr ""
+
+msgid "Total solar eclipse"
+msgstr ""
+
 msgid "Other"
 msgstr "Muu"
 
@@ -1194,6 +1179,15 @@ msgstr "Alakeskus"
 
 msgid "Bottom right"
 msgstr "Alaoikea"
+
+msgid "Make"
+msgstr "Merkki"
+
+msgid "The make, brand, producer or developer of this product."
+msgstr "Tuotteen valmistaja tai merkki."
+
+msgid "Name"
+msgstr "Nimi"
 
 msgid ""
 "Just the name of this product, without any properties or personal "
@@ -1412,12 +1406,11 @@ msgstr "(nm)"
 msgid "nm"
 msgstr "nm"
 
-#, fuzzy
-#| msgid "Duration"
-msgid "Traditional"
-msgstr "Valotusaika"
+msgid "Regular (e.g. medium/long exposure with a CCD or DSLR)"
+msgstr ""
 
-msgid "Electronically-Assisted Astronomy (EAA)"
+msgid ""
+"Electronically-Assisted Astronomy (EAA, e.g. based on a live video feed)"
 msgstr ""
 
 msgid "Lucky imaging"
@@ -1822,6 +1815,22 @@ msgstr "TIFF/FITS"
 msgid "Higher resolution"
 msgstr "Suurempi resoluutio"
 
+#, fuzzy
+msgid "I am no longer active in astrophotography"
+msgstr "Muokkaa tähtikuvauslaitteitasi"
+
+msgid "This website did not meet my expectations"
+msgstr ""
+
+msgid "Something on this website doesn't work for me"
+msgstr ""
+
+msgid "The paid subscriptions are too expensive"
+msgstr ""
+
+msgid "I prefer not to say"
+msgstr ""
+
 msgid "Real name"
 msgstr "Oikea nimi"
 
@@ -1852,30 +1861,17 @@ msgstr "Tietoja sinusta"
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "Kerro itsestäsi. HTML-tagit sallittu."
 
-msgid "Company name"
-msgstr "Yrityksen nimi"
+#, fuzzy
+msgid "Delete reason"
+msgstr "Poista keskustelu"
 
-msgid "The name of the company you represent on AstroBin."
-msgstr "Yrityksen nimi, jota edustat AstroBin:ssa"
-
-msgid "Company description"
-msgstr "Yrityksen kuvaus"
+msgid "Why are you deleting your AstroBin account?"
+msgstr ""
 
 msgid ""
-"A short description of the company you represent on AstroBin. You can use "
-"some <a href=\"/faq/#comments\">formatting rules</a>."
+"Please tell us why you are deleting your account (minimum 30 characters). "
+"Thanks!"
 msgstr ""
-"Lyhyt kuvaus AstroBinissa edustamastasi yrityksestä. Voit käyttää joitakin "
-"<a href=\"/faq/#comments\">muotoiluja</a>."
-
-msgid "Company website"
-msgstr "Yrityksen kotisivu"
-
-msgid "The website of the company you represent on AstroBin."
-msgstr "AstroBin:ssa edustamasi yrityksen sivusto."
-
-msgid "Country of operation"
-msgstr "Maa, jossa yritys toimii"
 
 msgid "I want to be excluded from competitions"
 msgstr ""
@@ -1883,7 +1879,7 @@ msgstr ""
 msgid ""
 "Check this box to be excluded from competitions and contests, such as the "
 "Image of the Day, the Top Picks, other custom contests. This will remove you "
-"from the leaderboards and hide your AstroBin Index."
+"from the leaderboards and hide your Image Index and Contribution Index."
 msgstr ""
 
 #, fuzzy
@@ -1973,6 +1969,18 @@ msgid ""
 "and this kind of support would be amazing. Thank you in advance!"
 msgstr ""
 
+#, fuzzy
+#| msgid "Total integration"
+msgid "Allow retailer integration"
+msgstr "Kokonaisvalotusaika"
+
+msgid ""
+"AstroBin may associate with retailers of astronomy and astrophotography "
+"equipment to enhance the display of equipment items with links to sponsoring "
+"partners. The integration is subtle and non intrusive, and it would help a "
+"lot if you didn't disable it. Thank you in advance!"
+msgstr ""
+
 msgid "Language"
 msgstr "Kieli"
 
@@ -2044,99 +2052,6 @@ msgid ""
 "the API."
 msgstr ""
 "Selitä ohjelman tarkoitus, ja miten aiot hyödyntää AstroBinin rajapintoja."
-
-msgid "AUD - Australian dollars"
-msgstr "AUD - Australian dollari"
-
-msgid "CAD - Canadian dollars"
-msgstr "CAD - Kanadan dollari"
-
-msgid "CHF - Swiss francs"
-msgstr "CHF - Sveitsin frangi"
-
-msgid "EUR - Euros"
-msgstr "EUR - Euro"
-
-msgid "GPB - Pound stelings"
-msgstr "GBP - Englannin punta"
-
-msgid "PLN - Polish zloty"
-msgstr "PLN - Puolan zloty"
-
-msgid "SEK - Swedish krona"
-msgstr "SEK - Ruotsin kruunu"
-
-msgid "USD - American dollars"
-msgstr "USD - Amerikan dollari"
-
-msgid "Producer"
-msgstr "Valmistaja"
-
-msgid "The link to this product's page on your website."
-msgstr "Linkki tämän tuotteen sivuun sivustollasi."
-
-msgid "Price"
-msgstr "Hinta"
-
-msgid "Currency"
-msgstr "Valuutta"
-
-msgid "Retailed gear items"
-msgstr "Myytävät laitteet"
-
-msgid "Proper make"
-msgstr "Varsinainen valmistaja"
-
-msgid ""
-"Sometimes, product make/brand/producer/developer names are not written "
-"properly by the users. Write here the proper make/brand/producer/developer "
-"name."
-msgstr ""
-"Joskus käyttäjät eivät kirjoita tuotteiden mallia/merkkiä/valmistaja/"
-"kehittäjää oikein. Kirjoita tähän oikea malli/merkki/valmistaja/kehittäjä."
-
-msgid "Proper name"
-msgstr "Varsinainen nimi"
-
-msgid ""
-"Sometimes, product names are not written properly by the users. Write here "
-"the proper product name, not including the make/brand/producer/developer "
-"name.<br/>It is recommended that you try to group as many items as possible, "
-"so try to use a generic version of your product's name."
-msgstr ""
-"Joskus käyttäjät eivät kirjoita tuotteiden nimiä oikein. Kirjoita tähän "
-"tuotteen virallinen nimi, poislukien valmistajan/brändin/kehittäjän/"
-"tuottajan nimi.<br/>On myös suositeltavaa, että mahdollisimman monta "
-"tuoteversiota voidaan niputtaa yhteen, joten pyri käyttämään mahdollisimman "
-"geneeristä versiota tuotenimestä."
-
-msgid ""
-"The official, commercial image for this product. Upload an image via the "
-"regular uploading interface, set its subject type to \"Gear\", and then "
-"choose it from this list. If you upload several revisions, they will also "
-"appear in the commercial page."
-msgstr ""
-"Tuotteen virallinen mainoskuva. Lataa kuva normaalisti "
-"kuvanlatauskäyttöliittymän kautta, merkitse kohteen tyypiksi \"Laite\", ja "
-"valitse kuva listasta. Jos lataat kuvasta useita versioita, ne kaikki "
-"näkyvät tuotteen sivulla."
-
-msgid "Tagline"
-msgstr "Iskulause"
-
-msgid ""
-"A memorable phrase that will sum up this product, for marketing purposes."
-msgstr "Helposti muistettava yhteenveto tuotteesta markkinointitarkoituksiin."
-
-msgid ""
-"Here you can write the full commercial description of your product. You can "
-"use some <a href=\"/faq/#comments\">formatting rules</a>."
-msgstr ""
-"Tähän voit kirjoittaa täyden kuvauksen tuotteestasi. Voit käyttää joitakin "
-"<a href=\"/faq/#comments\">muotoiluja</a>."
-
-msgid "Commercial gear items"
-msgstr "Kaupalliset laitteet"
 
 #, fuzzy
 #| msgid "Sending..."
@@ -2262,6 +2177,34 @@ msgstr ""
 msgid "Come back soon!"
 msgstr "Tule pian takaisin!"
 
+#, python-format
+msgid ""
+"<strong>Please note:</strong> AstroBin is a community that values "
+"informative and constructive content. If you write something that other "
+"people find useful and valuable, the likes that you receive will contribute "
+"to your %(_0)sContribution Index (beta)%(_1)s."
+msgstr ""
+
+msgid "New!"
+msgstr "Uutta!"
+
+msgid "Use the <strong>@</strong> sign and start typing to mention any user."
+msgstr ""
+
+msgid ""
+"Use the <strong>#</strong> sign and start typing to insert an image from "
+"your gallery."
+msgstr ""
+
+msgid "All"
+msgstr "Kaikki"
+
+msgid "Regular"
+msgstr "Normaali"
+
+msgid "Electronically-Assisted Astronomy (EAA)"
+msgstr ""
+
 msgid "AstroBin is in READ ONLY mode "
 msgstr ""
 
@@ -2345,6 +2288,11 @@ msgid ""
 "                        "
 msgstr ""
 
+#, fuzzy
+#| msgid "Remove data"
+msgid "Remove ads"
+msgstr "Poista tiedot"
+
 msgid "Request an API key"
 msgstr "Pyydä API-Avainta"
 
@@ -2383,6 +2331,40 @@ msgid ""
 msgstr ""
 "Saat vastauksen 24 tunnin sisällä. Kiitos mielenkiinnosta AstroBinin "
 "rajapinta-avainta kohtaan!"
+
+#, fuzzy
+msgid "Astrophotographers list"
+msgstr "Muokkaa tähtikuvauslaitteitasi"
+
+#, python-format
+msgid ""
+"The <strong>Image Index</strong> is system based on likes received on "
+"images, that incentivizes the most active and liked members of the "
+"community. %(_0)sLearn more.%(_1)s"
+msgstr ""
+
+msgid "Search"
+msgstr "Etsi"
+
+msgid "User"
+msgstr "Käyttäjä"
+
+msgid "Followers"
+msgstr "Seuraajat"
+
+msgid "Likes"
+msgstr "Tykkäykset"
+
+msgid "Total integration"
+msgstr "Kokonaisvalotusaika"
+
+#, fuzzy
+#| msgid "Image mode"
+msgid "Image Index"
+msgstr "Kuvan tila"
+
+msgid "There isn't enough data yet, please come back later!"
+msgstr ""
 
 msgid "Avatar"
 msgstr "Profiilikuva"
@@ -2425,35 +2407,13 @@ msgstr "Huomio!"
 msgid "Error!"
 msgstr "Virhe!"
 
-#, python-format
-msgid ""
-"As a producer and/or a retailer on AstroBin, it's very important that you "
-"fill in all of your company details! Click <a href=\"%(the_url)s\">here</a> "
-"to do it now."
-msgstr ""
-"Tuottajana ja/tai myyjänä AstroBinissä on hyvin tärkeää ilmoittaa kaikki "
-"yritystiedot! Klikkaa <a href=\"%(the_url)s\">tästä</a> tehdäksesi niin heti."
-
-#, python-format
-msgid ""
-"As a retailer on AstroBin, it's very important that you fill in your country "
-"of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
-msgstr ""
-"Myyntiedustajana AstroBinissä on tärkeää, että merkitset toimintamaasi. "
-"Klikkaa <a href=\"%(the_url)s\">tästä</a> tehdäksi sen saman tien."
-
 msgid "About"
 msgstr "Tietoja AstroBinistä"
 
 msgid ""
-"AstroBin is an image hosting website specifically targeted to "
-"astrophotographers: it's the first and the last place where you need to "
-"upload your astrophotography images. Made by an astrophotographer, for the "
-"astrophotographers."
+"AstroBin is an image hosting platform and social network for amateur "
+"astronomers and astrophotographers."
 msgstr ""
-"AstroBin on erityisesti tähtikuvaajille suunnattu kuvien julkaisusivusto: "
-"ensimmäinen ja viimeinen paikka jonne kuvasi tarvitsee ladata. Tähtikuvaajan "
-"tähtikuvaajille tekemä."
 
 msgid "Site links"
 msgstr "Linkit"
@@ -2479,11 +2439,17 @@ msgstr ""
 msgid "Source code"
 msgstr "Lähdekoodi"
 
+msgid "Platform updates"
+msgstr ""
+
 msgid "Thanks to"
 msgstr "Kiitokset"
 
 msgid "The localization team"
 msgstr "Kääntäjätiimi"
+
+msgid "Third party tools"
+msgstr ""
 
 msgid "Copyright"
 msgstr "Tekijänoikeus"
@@ -2508,13 +2474,31 @@ msgid "Don't show again"
 msgstr ""
 
 msgid ""
-"AstroBin is unable to deliver your emails, looks like your address is "
-"incorrect."
+"AstroBin is unable to deliver your emails, and it won't try again until the "
+"issue is resolved."
+msgstr ""
+
+msgid "Your email provider recently reported the following error code(s):"
+msgstr ""
+
+msgid ""
+"If you believe this is in error, please contact us. Otherwise please contact "
+"your email provider or change your e-mail address on AstroBin."
 msgstr ""
 
 #, fuzzy
 msgid "Change your e-mail"
 msgstr "Vaihda avataria."
+
+#, fuzzy
+#| msgid "Contact"
+msgid "Contact us"
+msgstr "Ota yhteyttä"
+
+msgid ""
+"AstroBin is unable to deliver your emails, and it will try again a week "
+"after the latest email bounce."
+msgstr ""
 
 msgid ""
 "AstroBin is not delivering you emails because you have marked some of them "
@@ -2523,6 +2507,20 @@ msgstr ""
 
 msgid "Contact us to resolve the issue"
 msgstr ""
+
+#, python-format
+msgid ""
+"<strong>Good news!</strong> AstroBin automatically recovered some of your "
+"images that were lost in the data loss incident of February 2020. Please "
+"review them to confirm the recovery. If you do nothing, your recovered "
+"images will be confirmed automatically starting from <strong>%(date)s</"
+"strong>."
+msgstr ""
+
+#, fuzzy
+#| msgid "Recent images"
+msgid "Review recovered images"
+msgstr "Uusimpia kuvia"
 
 msgid "Cancel"
 msgstr "Peruuta"
@@ -2650,9 +2648,6 @@ msgstr ""
 msgid "Quick search"
 msgstr "Pikahaku"
 
-msgid "Moderate"
-msgstr ""
-
 #, fuzzy
 msgid "Image queue"
 msgstr "Kuvan koko"
@@ -2689,6 +2684,11 @@ msgstr "Suuri Kuvaseinä"
 msgid "Advanced search"
 msgstr "Laajennettu haku"
 
+#, fuzzy
+#| msgid "Basic information"
+msgid "Top pick nominations"
+msgstr "Perustiedot"
+
 msgid "Top picks"
 msgstr ""
 
@@ -2696,9 +2696,11 @@ msgstr ""
 msgid "Remote astrophotography"
 msgstr "Muokkaa tähtikuvauslaitteitasi"
 
-#, fuzzy
-msgid "Trending astrophotographers"
-msgstr "Muokkaa tähtikuvauslaitteitasi"
+msgid "Contributors list"
+msgstr ""
+
+msgid "(beta)"
+msgstr ""
 
 msgid "Stats"
 msgstr "Tilastot"
@@ -2709,14 +2711,8 @@ msgstr "Ohjeita"
 msgid "Contact"
 msgstr "Ota yhteyttä"
 
-msgid "User"
-msgstr "Käyttäjä"
-
-msgid "AstroBin index"
-msgstr "AstroBin-indeksi"
-
-msgid "Followers"
-msgstr "Seuraajat"
+msgid "n/a"
+msgstr ""
 
 msgid "Would you like to start using your real name on AstroBin?"
 msgstr "Haluaisitko käyttää AstroBinissä oikeaa nimeäsi?"
@@ -2730,6 +2726,24 @@ msgstr "Kirjaudu sisään"
 msgid "Register"
 msgstr "Rekisteröidy"
 
+#, python-format
+msgid ""
+"The <strong>Image Index</strong> is a system based on likes received on "
+"images, that incentivizes the most active and liked members of the "
+"community. %(_0)sLearn more.%(_1)s"
+msgstr ""
+
+#, fuzzy
+msgid "Contribution Index"
+msgstr "AstroBin on sosiaalinen!"
+
+#, python-format
+msgid ""
+"The <strong>Contribution Index (beta)</strong> is system to reward "
+"informative, constructive, and valuable commentary on AstroBin. %(_0)sLearn "
+"more.%(_1)s"
+msgstr ""
+
 #, fuzzy
 msgid "Subscription plans"
 msgstr "Kuvaus"
@@ -2737,11 +2751,13 @@ msgstr "Kuvaus"
 msgid "My places"
 msgstr "Omat paikat"
 
-msgid "Commercial products"
-msgstr "Kaupalliset tuotteet"
-
-msgid "Gallery"
+#, fuzzy
+#| msgid "Gallery"
+msgid "Public Gallery"
 msgstr "Galleria"
+
+msgid "Staging Area"
+msgstr "Tilapäinen alue"
 
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
@@ -2811,21 +2827,6 @@ msgstr ""
 msgid "Custom e-mail change request on AstroBin"
 msgstr ""
 
-msgid "Edit commercial product"
-msgstr "Muokkaa kaupallista tuotetta"
-
-msgid "Save"
-msgstr "Tallenna"
-
-msgid "Return to list"
-msgstr "Palaa listaan"
-
-msgid "View in new window"
-msgstr "Avaa uudessa ikkunassa"
-
-msgid "Edit retailed product"
-msgstr ""
-
 msgid ""
 "Please contact us if you need any assistance, or want to report a problem, "
 "give some feedback or suggestions, or simply want to get in touch!"
@@ -2851,6 +2852,20 @@ msgstr "Kiitokset!"
 
 msgid "Thank you! Your message was sent successfully."
 msgstr "Kiitos!  Viestisi lähetettiin onnistuneesti."
+
+msgid "Comments"
+msgstr "Kommentit"
+
+msgid "Forum posts"
+msgstr "Foorumiviestit"
+
+msgid "Written"
+msgstr ""
+
+#, fuzzy
+#| msgid "Recently liked"
+msgid "Received"
+msgstr "Viime aikoina tykätyt"
 
 msgid "Cookie consent"
 msgstr ""
@@ -3028,75 +3043,6 @@ msgid ""
 "grateful."
 msgstr "Panoksesi on hyvin tärkeä, ja koko AstroBin-yhteisö on kiitollinen."
 
-msgid "by"
-msgstr "käyttäjältä"
-
-msgid "Other images"
-msgstr "Muita kuvia"
-
-msgid "Some images"
-msgstr "Kuvia"
-
-msgid "(view more)"
-msgstr "(näytä lisää...)"
-
-msgid "Reviews"
-msgstr "Arvostelut"
-
-msgid "Rating"
-msgstr "Arviointi"
-
-#, fuzzy
-msgid "There are no reviews yet."
-msgstr "Ei kommentteja."
-
-msgid "Add your review"
-msgstr "Kirjoita arvostelu"
-
-msgid ""
-"Please be fair, honest and polite when writing a review. Many people will "
-"read your review: all the users on AstroBin who own this piece of gear, will "
-"be notified of your review."
-msgstr ""
-"Ole reilu, rehellinen ja kohtelias kirjoittaessasi arvostelua. Monet ihmiset "
-"tulevat lukemaan arvostelusi: kaikille AstroBinissä olevilla laitteen "
-"omistajille tullaan ilmoittamaan tekemästäsi arvostelusta."
-
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to write a review."
-msgstr ""
-"Ole hyvä ja <a href=\"/accounts/login/\">kirjaudu sisään</a> tai <a href=\"/"
-"accounts/register/\">rekisteröidy</a> kirjoittaaksesi arvostelun."
-
-msgid "Comments"
-msgstr "Kommentit"
-
-msgid ""
-"Use this space to start a discussion, leave a comment or ask a question "
-"about this piece of gear. All the users on AstroBin who own one, will be "
-"notified and can join the discussion."
-msgstr ""
-
-msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment."
-msgstr ""
-"Ole hyvä ja <a href=\"/accounts/login/\">kirjaudu sisään</a> tai <a href=\"/"
-"accounts/register/\">rekisteröidy</a> kirjoittaaksesi kommentin."
-
-msgid "Buy it here"
-msgstr "Osta tuote tästä"
-
-msgid "Properties"
-msgstr "Ominaisuudet"
-
-msgid "Owners"
-msgstr "Omistajat"
-
-msgid "just now"
-msgstr "juuri äsken"
-
 msgid "Additional information requested"
 msgstr "Kaipaa lisätietoja"
 
@@ -3113,13 +3059,27 @@ msgstr ""
 msgid "Return to image"
 msgstr "Palaa kuvaan"
 
+#, fuzzy
+#| msgid "Hemisphere:"
+msgid "Hemisphere"
+msgstr "Pallonpuolisko (E tai P):"
+
+#, fuzzy
+#| msgid "North"
+msgid "Northern"
+msgstr "Pohjoinen"
+
+#, fuzzy
+#| msgid "South"
+msgid "Southern"
+msgstr "Etelä"
+
 msgid "Contains"
 msgstr "Sisältää"
 
-#, fuzzy
-#| msgid "Remove data"
-msgid "Remove ads"
-msgstr "Poista tiedot"
+#, python-format
+msgid "And %(count)s more."
+msgstr ""
 
 #, fuzzy
 #| msgid "Acquired after"
@@ -3142,9 +3102,6 @@ msgstr ""
 msgid "Comments are closed."
 msgstr ""
 
-msgid "Made possible by"
-msgstr ""
-
 msgid "In these public groups"
 msgstr ""
 
@@ -3161,6 +3118,25 @@ msgstr "Kuvaus"
 
 msgid "Technical card"
 msgstr "Tekniset tiedot"
+
+msgid "Sponsored brands"
+msgstr ""
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr ""
+
+msgid "Sponsored items"
+msgstr ""
+
+#, fuzzy
+#| msgid "Retailer information"
+msgid "Disable retailer integration"
+msgstr "Kauppiaan tiedot"
+
+#, python-format
+msgid "Shop %(name)s at %(retailer)s"
+msgstr ""
 
 msgid "Frames"
 msgstr "Ruutuja"
@@ -3211,6 +3187,11 @@ msgstr "Ladattu"
 
 msgid "Remote source"
 msgstr ""
+
+#, fuzzy
+#| msgid "Delete original image"
+msgid "Download original file"
+msgstr "Poista alkuperäinen kuva"
 
 msgid "Author"
 msgstr ""
@@ -3426,25 +3407,46 @@ msgstr "Ladataan..."
 msgid "Sorry"
 msgstr "Pahoittelut"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "We're really sorry, but liking an image requires an AstroBin index of "
+#| "<strong>%(min_index_to_like)s</strong> or greater."
 msgid ""
-"We're really sorry, but liking an image requires an AstroBin index of "
-"<strong>%(min_index_to_like)s</strong> or greater."
+"We're really sorry, but giving likes requires an Image Index of <strong>"
+"%(min_index_to_like)s</strong> or greater."
 msgstr ""
 "Pahoittelut, mutta kuvasta tykkääminen vaatii AstroBin-indeksiksi <strong>"
 "%(min_index_to_like)s</strong> tai enemmän."
 
+#, fuzzy
+#| msgid ""
+#| "Such limitation improves the website as a whole by discouraging people "
+#| "from creating fake accounts to like their own images. Thank you for "
+#| "understanding!"
 msgid ""
 "Such limitation improves the website as a whole by discouraging people from "
-"creating fake accounts to like their own images. Thank you for understanding!"
+"creating fake accounts to like their own content. Thank you for "
+"understanding!"
 msgstr ""
 "Rajoitus parantaa sivustoa kokonaisuutena estämällä ihmisiä luomasta "
 "ylimääräisiä käyttäjätilejä, joilla lisätä omien kuviensa tykkäysmääriä. "
 "Kiitos ymmärryksestä!"
 
-#, python-format
-msgid "Currently, your AstroBin index is <strong>%(index)s</strong>."
+#, fuzzy, python-format
+#| msgid "Currently, your AstroBin index is <strong>%(index)s</strong>."
+msgid "Currently, your Image Index is <strong>%(index)s</strong>."
 msgstr "AstroBin-indeksisi on tällä hetkellä <strong>%(index)s</strong>."
+
+#, python-format
+msgid ""
+"To learn more about the Image Index, please visit %(_0)sthe FAQ page%(_1)s. "
+"Thanks!"
+msgstr ""
+
+#, fuzzy
+#| msgid "You can't nominate the same image more than once."
+msgid "You cannot remove a like that you gave more than one hour ago."
+msgstr "Et voi ehdottaa samaa kuvaa useampaan kertaan."
 
 msgid "Delete image and all its revisions?"
 msgstr "Poista kuva kaikkine versioineen?"
@@ -3508,12 +3510,20 @@ msgid ""
 "its revisions."
 msgstr ""
 
+msgid "Close"
+msgstr "Sulje"
+
 msgid "The following people like this image"
 msgstr "Seuraavat ihmiset ovat tykänneet tästä kuvasta"
 
 msgid ""
+"This will move this image to your public area, making it listed. As this "
+"image had already been published before, your followers will not be notified."
+msgstr ""
+
+msgid ""
 "This will move this image to your public area, making it listed and "
-"notifying your followers."
+"optionally notifying your followers."
 msgstr ""
 
 msgid ""
@@ -3547,9 +3557,6 @@ msgstr "Ei"
 msgid "Image size"
 msgstr "Kuvan koko"
 
-msgid "Regular"
-msgstr "Normaali"
-
 msgid "Full"
 msgstr "Täysi"
 
@@ -3557,11 +3564,11 @@ msgstr "Täysi"
 msgid "Real"
 msgstr "Oikea nimi"
 
-msgid "Copy this"
-msgstr "Kopioi"
-
 msgid "Image mode"
 msgstr "Kuvan tila"
+
+msgid "Copy this"
+msgstr "Kopioi"
 
 #, fuzzy
 #| msgid ""
@@ -3618,8 +3625,7 @@ msgid ""
 "unless you give them one of the links you can find in the <em>Share</em> "
 "menu below. Use that link to post this image to Internet forums and get "
 "feedback on it. When you are satisfied, perhaps after uploading some "
-"revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
-"to the <a href=\"%(profile_url)s\">Public Area</a>."
+"revisions, promote it to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
 "Tämä on <strong>keskeneräinen</strong> kuva <a href=\"%(profile_url)s?staging"
 "\">tilapäiseltä alueelta</a>. Se tarkoittaa, ettei kukaan näe kuvaasi ellet "
@@ -3678,6 +3684,9 @@ msgstr ""
 
 msgid "Edit your image: acquisition details"
 msgstr "Muokkaa kuvaasi: tekniset yksityiskohdat"
+
+msgid "Save"
+msgstr "Tallenna"
 
 msgid "Remove data"
 msgstr "Poista tiedot"
@@ -3857,17 +3866,8 @@ msgid "Apply a watermark to image"
 msgstr "Lisää kuvaan vesileima"
 
 msgid ""
-"AstroBin can protect your images from theft by applying a watermark to them. "
-"Be careful with your settings though: once a watermark has been applied, it "
-"cannot be removed (AstroBin won't store the non-watermarked version of your "
-"image, for your safety). If you don't like the watermark resulting from the "
-"following settings, your only choice is to delete the image and start over."
+"AstroBin can protect your images from theft by applying a watermark to them."
 msgstr ""
-"AstroBin voi suojata kuvasi varkaudelta lisäämällä niihin vesileiman. Ole "
-"varovainen asetusten kanssa: kun vesileima on kerran lisätty, sitä ei voi "
-"poistaa (AstroBin ei tallenna vesileimatonta versiota kuvastasi, "
-"varkausriskin pienentämiseksi). Jos et pidä asetusten tuottamasta "
-"vesileimasta, ainoa vaihtoehto on poistaa kuva ja lisätä se uudestaan."
 
 msgid "Please note: animated GIFs cannot be watermarked at this time."
 msgstr ""
@@ -3886,8 +3886,16 @@ msgstr "Katso täydessä koossa"
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "käyttäjältä <a href=\"%(the_url)s\">%(user)s</a>"
 
+#, fuzzy
+#| msgid "Start plate-solving"
+msgid "Plate-solution overlay"
+msgstr "Käynnistä kentän ratkaisu"
+
 msgid "Fit to window"
 msgstr "Sovita kuva ikkunaan"
+
+msgid "Loading click-and-drag zoom..."
+msgstr ""
 
 msgid "Abscissa "
 msgstr ""
@@ -3913,8 +3921,11 @@ msgstr "Valitse leveyspiiri (latitudi)"
 msgid "Galactic latitude"
 msgstr "Valitse leveyspiiri (latitudi)"
 
-msgid "View page"
-msgstr "Katso sivu"
+msgid "Click-and-drag anywhere on the image."
+msgstr ""
+
+msgid "Want to zoom in?"
+msgstr ""
 
 msgid "No gear yet."
 msgstr ""
@@ -3928,11 +3939,19 @@ msgstr "Ei kuvia"
 msgid "Only you can see this"
 msgstr ""
 
+#, python-format
+msgid ""
+"Interested in <strong>%(brand)s</strong>? Our sponsor <strong>%(retailer)s</"
+"strong> sells this brand!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Sign up now!"
+msgid "Shop now"
+msgstr "Rekisteröidy nyt!"
+
 msgid "Integration"
 msgstr "Valotusaika"
-
-msgid "Likes"
-msgstr "Tykkäykset"
 
 msgid "Date joined"
 msgstr "Liittymispäivämäärä"
@@ -3992,31 +4011,14 @@ msgstr ""
 msgid "What is this site?"
 msgstr "Mikä on AstroBin?"
 
-msgid "Commercial information"
-msgstr "Kaupallista tietoa"
-
-msgid "Retailer information"
-msgstr "Kauppiaan tiedot"
-
-msgid "Blog"
-msgstr "Blog in English"
-
-#, fuzzy
-#| msgid "Terms of Service"
-msgid "Terms of servic"
-msgstr "Käyttöehdot"
-
-msgid ""
-"AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
-"Reserved. The images on this websites are copyright of their respective "
-"owners."
-msgstr ""
-"AstroBin Copyright &copy; 2011-2012 Salvatore Iovene, kaikki oikeudet "
-"pidätetään. Sivustolla julkaistujen kuvien tekijänoikeudet kuuluvat kuvan "
-"julkaisijalle."
+msgid "Gallery"
+msgstr "Galleria"
 
 msgid "Compose message"
 msgstr "Kirjoita viesti"
+
+msgid "Type your message here..."
+msgstr ""
 
 msgid "Type in a search term"
 msgstr "Syötä hakusana"
@@ -4043,9 +4045,6 @@ msgstr "Ei viestejä"
 msgid "Back"
 msgstr ""
 
-msgid "Delete conversation"
-msgstr "Poista keskustelu"
-
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
 msgstr "Keskustelijat: <a href=\"%(sender_url)s\">sinä</a> ja"
@@ -4053,8 +4052,14 @@ msgstr "Keskustelijat: <a href=\"%(sender_url)s\">sinä</a> ja"
 msgid "Reply"
 msgstr "Vastaa"
 
+msgid "Delete conversation"
+msgstr "Poista keskustelu"
+
 msgid "Sending..."
 msgstr "Lähetetään..."
+
+msgid "Moderate"
+msgstr ""
 
 msgid ""
 "Please click on the images that you want to mark as SPAM, then click on the "
@@ -4086,76 +4091,111 @@ msgstr ""
 msgid "There are no images in the spam list."
 msgstr "Ei kommentteja."
 
-#, fuzzy, python-format
+#, fuzzy
 #| msgid ""
-#| "Your request for an API Key has been approved!\n"
-#| "\n"
-#| "    Your key: %(key)s\n"
-#| "    Your secret: %(secret)s\n"
-#| "\n"
-#| "    Please read the API documentation at %(api_docs_url)s\n"
-#| "    \n"
-#| "    You can review your API keys at %(api_keys_url)s\n"
-#| "    \n"
-#| "    Thank you for using AstroBin's APIs!"
-msgid ""
-"Your request for an API Key has been approved!\n"
-"\n"
-"    Your key: %(key)s\n"
-"    Your secret: %(secret)s\n"
-"\n"
-"    Please read the API documentation at <a href=\"%(api_docs_url)s\">"
-"%(api_docs_url)s</a>\n"
-"\n"
-"    You can review your API keys at <a href=\"%(api_keys_url)s\">"
-"%(api_keys_url)s</a>\n"
-"\n"
-"    Thank you for using AstroBin's APIs!"
-msgstr ""
-"Rajapinta-avainpyyntösi on hyväksytty!\n"
-"\n"
-"API-avain: %(key)s\n"
-"Salasana: %(secret)s\n"
-"\n"
-"Luethan API-dokumenaation %(api_docs_url)s\n"
-"\n"
-"Voit katsella API-avaimiasi osoitteessa %(api_keys_url)s\n"
-"\n"
-"Kiitos kun käytät AstroBin'in rajapintoja!"
-
-#, python-format
-msgid ""
-"Your request for an API Key has been approved!\n"
-"\n"
-"    Your key: %(key)s\n"
-"    Your secret: %(secret)s\n"
-"\n"
-"    Please read the API documentation at %(api_docs_url)s\n"
-"    \n"
-"    You can review your API keys at %(api_keys_url)s\n"
-"    \n"
-"    Thank you for using AstroBin's APIs!"
-msgstr ""
-"Rajapinta-avainpyyntösi on hyväksytty!\n"
-"\n"
-"API-avain: %(key)s\n"
-"Salasana: %(secret)s\n"
-"\n"
-"Luethan API-dokumenaation %(api_docs_url)s\n"
-"\n"
-"Voit katsella API-avaimiasi osoitteessa %(api_keys_url)s\n"
-"\n"
-"Kiitos kun käytät AstroBin'in rajapintoja!"
-
-#, python-format
-msgid ""
-"<a href=\"%(api_keys_url)s\">Your request for an API Key has been approved!</"
-"a>"
+#| "<a href=\"%(api_keys_url)s\">Your request for an API Key has been "
+#| "approved!</a>"
+msgid "Your request for an API Key has been approved!"
 msgstr ""
 "<a href=\"%(api_keys_url)s\">Rajapinta-avainpyyntösi on hyväksytty!</a>"
 
-msgid "API Key request approved"
-msgstr "Rajapinta-avain myönnetty"
+#, fuzzy
+#| msgid "Your API Keys"
+msgid "Your API key"
+msgstr "Rajapinta-avaimesi"
+
+#, fuzzy
+#| msgid "Your API Keys"
+msgid "Your API secret"
+msgstr "Rajapinta-avaimesi"
+
+#, python-format
+msgid "Please read the API documentation %(_0)shere%(_1)s."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid ""
+#| "You don't have any API Keys. Please read the <a href=\"%(api_docs_url)s"
+#| "\">API documentation</a>."
+msgid ""
+"You can review your API keys at <a href=\"%(api_keys_url)s\">"
+"%(api_keys_url)s</a>"
+msgstr ""
+"Sinulla ei ole rajapinta-avaimia.  Lue <a href=\"%(api_docs_url)s\">API-"
+"dokumentaatio</a>."
+
+#, fuzzy
+#| msgid "Thank you for supporting AstroBin!"
+msgid "Thank you for using AstroBin's APIs!"
+msgstr "Kiitos Astrobinin tukemisesta!"
+
+#, python-format
+msgid "You can review your API keys at %(api_keys_url)s."
+msgstr ""
+
+msgid "Congratulations for your first image on AstroBin!"
+msgstr ""
+
+msgid ""
+"Good job with uploading your first image on AstroBin. I hope it's the first "
+"of many!"
+msgstr ""
+
+msgid "Allow me to jump in and offer a few tips:"
+msgstr ""
+
+#, python-format
+msgid ""
+"Keep in mind that AstroBin is not meant to be a free service. If you are "
+"still on a free account, you can upload images %(max)s times before you will "
+"be asked to upgrade. More info on the <a href=\"%(url)s\">pricing page</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"New uploads go to your \"staging area\", where they are unlisted. You can "
+"still share the link to an individual image in your staging area, and people "
+"with a link will be able to access it, but to make an image public and "
+"listed on AstroBin, you need to promote it. Visit <a href=\"%(url)s\">your "
+"staging area</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you have any questions, have a look at the <a href=\"%(url)s\">frequently "
+"asked questions</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"Finally, should you need any support, simply use the <a href=\"%(url)s"
+"\">contact form</a> or send an email to <a href=\"mailto:support@astrobin.com"
+"\">support@astrobin.com</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"Keep in mind that AstroBin is not meant to be a free service. If you are "
+"still on a free account, you can upload images %(max)s times before you will "
+"be asked to upgrade. More info on the pricing page:"
+msgstr ""
+
+msgid ""
+"New uploads go to your \"staging area\", where they are unlisted. You can "
+"still share the link to an individual image in your staging area, and people "
+"with a link will be able to access it, but to make an image public and "
+"listed on AstroBin, you need to promote it. Visit your staging area:"
+msgstr ""
+
+msgid ""
+"If you have any questions, have a look at the frequently asked questions:"
+msgstr ""
+
+msgid "Finally, should you need any support, simply use the contact form:"
+msgstr ""
+
+msgid "Or send an email to support@astrobin.com."
+msgstr ""
 
 #, fuzzy
 #| msgid "You have a new follower"
@@ -4187,10 +4227,10 @@ msgid ""
 "\n"
 "%(message)s\n"
 "\n"
-"To see all your notifications, please go to %(notices_url)s.\n"
+"To see all your notifications, please go to %(base_url)s%(notices_url)s.\n"
 "\n"
 "If you don't want to receive emails anymore, edit your preferences by going "
-"to http://astrobin.com%(pref_url)s.\n"
+"to %(base_url)s%(pref_url)s.\n"
 "\n"
 "PLEASE DO NOT REPLY TO THIS EMAIL\n"
 "\n"
@@ -4464,16 +4504,21 @@ msgstr ""
 "a>"
 
 #, fuzzy, python-format
-msgid "%(user)s has added your image to their bookmarks: %(url)s"
+msgid "%(user)s added your image \"%(title)s\" to their bookmarks: %(url)s"
 msgstr "%(user)s merkkasi kuvasi suosikikseen: %(url)s"
 
 #, fuzzy, python-format
 msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> has added your image to their "
-"bookmarks!</a>"
+"<strong>%(user)s</strong> added your image \"%(title)s\" to their bookmarks!"
 msgstr ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> merkkasi kuvasi suosikikseen!</"
 "a>"
+
+#, fuzzy, python-format
+msgid ""
+"\n"
+"    %(user)s added your image \"%(title)s\" to their bookmarks!\n"
+msgstr "%(user)s merkkasi kuvasi suosikikseen: %(url)s"
 
 #, fuzzy, python-format
 #| msgid ""
@@ -4501,12 +4546,58 @@ msgid "%(user)s commented on your image!"
 msgstr "%(user)s kommentoi kuvaasi!"
 
 #, fuzzy, python-format
+#| msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> likes your comment: <a href=\"%(url)s"
+"\">%(comment)s</a>."
+msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> tykkäsi kuvastasi!</a>"
+
+#, fuzzy, python-format
+msgid "%(user)s likes your comment: %(url)s %(comment)s"
+msgstr "%(user)s merkkasi kuvasi suosikikseen: %(url)s"
+
+#, fuzzy, python-format
+#| msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+msgid "<strong>%(user)s</strong> likes your comment!"
+msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> tykkäsi kuvastasi!</a>"
+
+#, fuzzy, python-format
+#| msgid "%(user)s replied to your comment."
+msgid "%(user)s likes your comment!"
+msgstr "%(user)s vastasi kommenttiisi."
+
+#, fuzzy, python-format
+#| msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a comment: <a href="
+"\"%(url)s\">%(url)s</a>."
+msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> tykkäsi kuvastasi!</a>"
+
+#, fuzzy, python-format
+msgid "%(user)s mentioned you in a comment: %(url)s"
+msgstr "%(user)s merkkasi kuvasi suosikikseen: %(url)s"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published "
+#| "a new image</a>"
+msgid "<strong>%(user)s</strong> mentioned you in a comment!"
+msgstr ""
+"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> on julkaissut "
+"uuden kuvan</a>"
+
+#, fuzzy, python-format
+#| msgid "%(user)s replied to your comment."
+msgid "%(user)s mentioned you in a comment!"
+msgstr "%(user)s vastasi kommenttiisi."
+
+#, fuzzy, python-format
 #| msgid ""
 #| "%(user)s replied to your comment. Check it out at the following url: "
 #| "%(url)s"
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it out "
-"at the following url: %(url)s"
+"at the following url: <a href=\"%(url)s\">%(url)s</a>"
 msgstr ""
 "%(user)s vastasi kommenttiisi. Lue vastaus seuraavassa osoitteessa: %(url)s"
 
@@ -4556,6 +4647,53 @@ msgid "You have a new follower!"
 msgstr "Sinulla on uusi seuraaja!"
 
 #, fuzzy, python-format
+#| msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> likes your post on this forum topic: "
+"<a href=\"%(url)s\">%(post)s</a>."
+msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> tykkäsi kuvastasi!</a>"
+
+#, fuzzy, python-format
+msgid "%(user)s likes your post on this forum topic: %(url)s"
+msgstr "%(user)s merkkasi kuvasi suosikikseen: %(url)s"
+
+#, fuzzy, python-format
+#| msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+msgid "<strong>%(user)s</strong> likes your forum post!"
+msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> tykkäsi kuvastasi!</a>"
+
+#, fuzzy, python-format
+msgid "%(user)s likes your forum post!"
+msgstr "%(user)s merkkasi kuvasi suosikikseen: %(url)s"
+
+#, fuzzy, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a post on this forum "
+"topic: <a href=\"%(url)s\">%(post)s</a>."
+msgstr ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> merkkasi kuvasi suosikikseen!</"
+"a>"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "%(user)s commented on your image! Check it out at the following url: "
+#| "%(url)s"
+msgid "%(user)s mentioned you in a post on this forum topic: %(url)s"
+msgstr ""
+"%(user)s kommentoi kuvaasi! Lue kommentti seuraavassa osoitteessa: %(url)s"
+
+#, fuzzy, python-format
+msgid "<strong>%(user)s</strong> mentioned you in a forum post!"
+msgstr ""
+"<strong>%(username)s</strong> on pyytänyt nähdä kuvasi TIFF tai FITS -"
+"tiedostona."
+
+#, fuzzy, python-format
+#| msgid "%(user)s commented on your image!"
+msgid "%(user)s mentioned you in a forum post!"
+msgstr "%(user)s kommentoi kuvaasi!"
+
+#, fuzzy, python-format
 msgid ""
 "%(user)s started a new discussion about a gear item you own! Read it at "
 "following url: <a href=\"%(url)s\">%(url)s</a>"
@@ -4580,31 +4718,6 @@ msgstr ""
 #, python-format
 msgid "%(user)s started a new discussion about a gear item you own!"
 msgstr "%(user)s aloitti uuden keskustelun omistamastasi laitteesta!"
-
-#, fuzzy, python-format
-msgid ""
-"%(user)s wrote a review of a gear item you own! Read it at following url: <a "
-"href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-"%(user)s kommentoi kuvaasi! Lue kommentti seuraavassa osoitteessa: %(url)s"
-
-#, fuzzy, python-format
-msgid ""
-"%(user)s wrote a review of a gear item you own! Read it at following url: "
-"%(url)s"
-msgstr ""
-"%(user)s kommentoi kuvaasi! Lue kommentti seuraavassa osoitteessa: %(url)s"
-
-#, fuzzy, python-format
-msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear item "
-"you own!</a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> vastasi kommenttiisi.</a>"
-
-#, python-format
-msgid "%(user)s wrote a review of a gear item you own!"
-msgstr "%(user)s kirjoitti arvostelun omistamastasi laitteesta!\""
 
 #, fuzzy, python-format
 msgid ""
@@ -4803,6 +4916,25 @@ msgstr ""
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
 msgstr ""
 
+msgid ""
+"I really appreciate your support for AstroBin, I hope you will enjoy your "
+"new subscription!"
+msgstr ""
+
+msgid ""
+"AstroBin subscriptions are valid for 1 year. When a subscription expires, "
+"nothing happens to your content. Nothing is deleted, hidden, held hostage or "
+"anything. In fact, you can leave it up forever even if you stop being active "
+"as an astrophotographer."
+msgstr ""
+
+msgid ""
+"If at some point you want to upgrade your subscription, simply purchase the "
+"new one and then get in touch so I can send you a partial refund for the "
+"unused time on your previous subscription, or extend the expiration date of "
+"your new subscription with pro-rated time from your old one."
+msgstr ""
+
 #, fuzzy, python-format
 msgid ""
 "%(user)s posted a new topic to the group: \"%(group_name)s\"\n"
@@ -4919,6 +5051,71 @@ msgstr ""
 msgid "%(user)s joined the public group: \"%(group_name)s\""
 msgstr ""
 
+#, fuzzy
+#| msgid "Follow AstroBin on Twitter"
+msgid "Welcome to AstroBin!"
+msgstr "Seuraa AstroBiniä Twitterissä"
+
+msgid ""
+"I'm very excited that you joined, and I would like to give you a warm "
+"welcome to the community!"
+msgstr ""
+
+msgid "You will receive your activation link in a separate email."
+msgstr ""
+
+msgid "Allow me to offer some tips to get you started:"
+msgstr ""
+
+#, python-format
+msgid "Have a look at our <a href=\"%(url)s\">frequently asked questions</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"Head over to your settings and configure <a href=\"%(url)s\">your profile</"
+"a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you have astrophotography equipment, add it to <a href=\"%(url)s\">your "
+"gear</a> so that later you can associate it with the images you upload."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you want, why not <a href=\"%(url)s\">introduce yourself</a> on the "
+"forums?"
+msgstr ""
+
+msgid ""
+"Follow AstroBin on social networks! AstroBin posts quick announcements and "
+"reports there, in addition to the Image of the Day, and Top Picks as stories!"
+msgstr ""
+
+msgid "Thanks again for joining and clear skies!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Frequently Asked Questions"
+msgid "Have a look at our frequently asked questions:"
+msgstr "Usein kysytyt kysymykset"
+
+msgid "Head over to your settings and configure your profile:"
+msgstr ""
+
+msgid ""
+"If you have astrophotography equipment, add it to your gear so that later "
+"you can associate it with the images you upload:"
+msgstr ""
+
+msgid "If you want, why not introduce yourself on the forums?"
+msgstr ""
+
+msgid "Welcome!"
+msgstr ""
+
 msgid "Object not found"
 msgstr "Kohdetta ei löytynyt"
 
@@ -4932,6 +5129,11 @@ msgstr "Aiemmin ladattuja"
 msgid "Next page"
 msgstr "Katso sivu"
 
+#, fuzzy
+#| msgid "Additional information requested"
+msgid "No additional information available for this item."
+msgstr "Kaipaa lisätietoja"
+
 msgid "Find images"
 msgstr "Etsi kuvia"
 
@@ -4941,6 +5143,9 @@ msgstr "RA"
 msgid "Dec"
 msgstr "Dec"
 
+msgid "View page"
+msgstr "Katso sivu"
+
 msgid "Member since"
 msgstr "Liittynyt"
 
@@ -4948,12 +5153,40 @@ msgid "This topic was closed by a moderator."
 msgstr ""
 
 #, fuzzy
-msgid "Back to group"
-msgstr "Takaisin ylös"
-
-#, fuzzy
 msgid "New topic"
 msgstr "Sulje"
+
+#, fuzzy
+#| msgid "New Zealand"
+msgid "New reply"
+msgstr "Uusi Seelanti"
+
+#, fuzzy
+#| msgid "Please note!"
+msgid "Please note"
+msgstr "Huomaa!"
+
+#, python-format
+msgid ""
+"The AstroBin forums are a place to discuss astrophotography and astronomy. "
+"If you need help with AstroBin please use the <a href=\"%(contact_url)s"
+"\">contact form</a>."
+msgstr ""
+
+msgid ""
+"User support posts, feature requests, issue reports, etc, will be deleted."
+msgstr ""
+
+#, fuzzy
+msgid "Thanks for your cooperation!"
+msgstr "Kiitos ehdotuksestasi"
+
+msgid "I understand"
+msgstr ""
+
+#, fuzzy
+msgid "Back to group"
+msgstr "Takaisin ylös"
 
 msgid "Hidden"
 msgstr ""
@@ -5005,6 +5238,27 @@ msgstr "Uusi vastaus seuraamaasi foorumiketjuun"
 
 msgid "Please note: this post will be published only after moderation."
 msgstr ""
+
+msgid "Type your forum post here..."
+msgstr ""
+
+msgid "Please first exit 'Source' mode to quote a message."
+msgstr ""
+
+msgid "*** Type your reply here ***"
+msgstr ""
+
+#, fuzzy
+#| msgid "likes"
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr "tykkää"
+
+#, fuzzy
+#| msgid "likes"
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr "tykkää"
 
 msgid ""
 "Warning: this post awaits moderation and is not yet visible to everybody"
@@ -5190,9 +5444,6 @@ msgstr ""
 "Rekisteröitymällä AstroBiniin hyväksyt <a href=\"%(tos_url)s\">käyttöehdot</"
 "a>."
 
-msgid "Search"
-msgstr "Etsi"
-
 msgid "Sort"
 msgstr "Järjestä"
 
@@ -5251,435 +5502,8 @@ msgstr "CCD vs DSLR: maailmanlaajuinen kehityssuunta"
 msgid "Global trend of telescope types"
 msgstr "Maailmanlaajuinen kehityssuunta kaukoputkityypeissä"
 
-#, fuzzy
-#| msgid "About"
-msgctxt "approximately"
-msgid "about"
-msgstr "Tietoja AstroBinistä"
-
-msgid "View feature comparison"
-msgstr ""
-
-#, fuzzy
-#| msgid "Pixel size"
-msgid "Max size"
-msgstr "Pikselin koko"
-
-#, fuzzy
-msgid "View full res"
-msgstr "Katso sivu"
-
-#, fuzzy
-#| msgid "View your images"
-msgid "View full image info"
-msgstr "Katso kuviasi"
-
-msgid "Basic"
-msgstr ""
-
-#, fuzzy
-#| msgid "Advanced search"
-msgid "Advanced"
-msgstr "Laajennettu haku"
-
-#, fuzzy
-#| msgid "Commercial gear items"
-msgid "Social features"
-msgstr "Kaupalliset laitteet"
-
-#, fuzzy
-#| msgid "Start plate-solving"
-msgid "Plate-solving"
-msgstr "Käynnistä kentän ratkaisu"
-
-#, fuzzy
-#| msgid "Public data pools"
-msgid "Bulk data export"
-msgstr "Julkiset datakirjastot"
-
-msgid "Hide astronomy ads"
-msgstr ""
-
-msgid "No ads on your pages"
-msgstr ""
-
-msgid "Non-members/free users can view your images in full res"
-msgstr ""
-
-#, fuzzy
-#| msgid "Full resolution"
-msgid "Full size annotations"
-msgstr "Katso täydessä koossa"
-
-#, fuzzy
-#| msgid "Upload complete!"
-msgid "Upload uncompressed source"
-msgstr "Lataus on valmis!"
-
-#, fuzzy
-msgid "Undelete images"
-msgstr "Ladatut kuvat"
-
-msgid ""
-"The FREE account is to be considered a trial period. You can upload images "
-"10 times, after which you can't upload anymore. Deleting images doesn't "
-"decrease your upload counter: the FREE account is not meant to be used as a "
-"way to keep your latest 10 images."
-msgstr ""
-
-msgid "year"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                %(number)s images, max %(size)s each"
-msgstr ""
-
-#, fuzzy
-#| msgid "Higher resolution"
-msgid "View in original resolution"
-msgstr "Suurempi resoluutio"
-
-#, python-format
-msgid ""
-"Up to %(number)s\n"
-"            revisions/image"
-msgstr ""
-
-msgid "Create/join Groups"
-msgstr ""
-
-#, fuzzy
-#| msgid "Start plate-solving"
-msgid "Basic plate-solving"
-msgstr "Käynnistä kentän ratkaisu"
-
-msgid "IOTD / Top Picks"
-msgstr ""
-
-msgid "No ads for others on your pages"
-msgstr ""
-
-msgid "Full-size annotations"
-msgstr ""
-
-msgid "All future features"
-msgstr ""
-
-msgid "In the future"
-msgstr ""
-
-#, fuzzy
-#| msgid "Buy it here"
-msgid "Buy in the Marketplace"
-msgstr "Osta tuote tästä"
-
-msgid "Vote in contests"
-msgstr ""
-
-msgid "Analytics"
-msgstr ""
-
-msgid "Bulk image editing"
-msgstr ""
-
-msgid "Pay securely with PayPal"
-msgstr ""
-
-msgid "Want to upgrade from a lower subscription tier?"
-msgstr ""
-
-#, python-format
-msgid ""
-"AstroBin doesn't support subscription upgrades at the moment, but we're "
-"happy to make it happen manually. If you're on a lower subscription tier and "
-"would like to upgrade to <strong>%(name)s</strong>, please just buy it and "
-"then contact us at <a href=\"mailto:astrobin@astrobin.com"
-"\">astrobin@astrobin.com</a> to get a refund for the unused time on your old "
-"subscription. Thanks!"
-msgstr ""
-
-msgid "Pay with a bank transfer"
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                Prefer to pay via bank transfer? Please make a deposit of "
-"%(currency)s %(amount)s to the following\n"
-"                bank details and then email us at %(email_prefix)s%(email)s"
-"%(email_postfix)s with your username so\n"
-"                we may upgrade your account manually. Thanks!\n"
-"            "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                ∞ images, max %(size)s each"
-msgstr ""
-
-#, fuzzy
-#| msgid "Basic information"
-msgid "Basic analytics"
-msgstr "Perustiedot"
-
-msgid "Buy"
-msgstr ""
-
-#, fuzzy
-#| msgid "You have already nominated this image"
-msgid "You are already on this plan"
-msgstr "Olet jo ehdottanut tätä kuvaa"
-
-#, fuzzy
-#| msgid "Image size"
-msgid "∞ images, ∞ size"
-msgstr "Kuvan koko"
-
-msgid "View full res (incl. visitors)"
-msgstr ""
-
-#, fuzzy
-msgid "Full search"
-msgstr "Täysikokoinen:"
-
-#, fuzzy
-msgid "Unlimited revisions"
-msgstr "Kyllä, poista kuvaversio"
-
-#, fuzzy
-#| msgid "Start plate-solving"
-msgid "Advanced plate-solving"
-msgstr "Käynnistä kentän ratkaisu"
-
-msgid "Sell in the Marketplace"
-msgstr ""
-
-msgid "Vote/enter contests"
-msgstr ""
-
-#, fuzzy
-#| msgid "Advanced search"
-msgid "Advanced analytics"
-msgstr "Laajennettu haku"
-
-msgid "Subscription process canceled"
-msgstr ""
-
-msgid "Subscription process cancelled"
-msgstr ""
-
-msgid ""
-"Your transaction with PayPal has been cancelled, so no change in your "
-"subscription has occurred."
-msgstr ""
-
-#, python-format
-msgid "Return to the <a href=\"%(plans_url)s\">plans page</a>."
-msgstr ""
-
-#, fuzzy
-msgctxt "Subscription plan name"
-msgid "Plan"
-msgstr "Planeetat"
-
-msgid "Offer valid until"
-msgstr ""
-
-msgid "Validity"
-msgstr ""
-
-msgid "Autorenew"
-msgstr ""
-
-msgid "Trial period"
-msgstr ""
-
-#, fuzzy
-msgid "day"
-msgstr "vuorokautta"
-
-msgid "week"
-msgstr ""
-
-#, fuzzy
-msgid "month"
-msgstr "Kuukausittain"
-
-#, fuzzy
-#| msgid "Viewed one time"
-#| msgid_plural "Viewed %(counter)s times"
-msgid "one time"
-msgstr "Katsottu yhden kerran"
-
-msgctxt "At no cost"
-msgid "Free"
-msgstr ""
-
-msgid "n/a"
-msgstr ""
-
-msgid "Daily"
-msgstr "Päivittäin"
-
-msgid "Weekly"
-msgstr ""
-
-msgid "Monthly"
-msgstr "Kuukausittain"
-
-msgid "Yearly"
-msgstr "Vuosittain"
-
-msgid "days"
-msgstr "vuorokautta"
-
-msgid "weeks"
-msgstr ""
-
-#, fuzzy
-msgid "months"
-msgstr "Kuukausittain"
-
-msgid "years"
-msgstr ""
-
-msgid "No trial"
-msgstr ""
-
-msgid "Switch to"
-msgstr ""
-
-msgid "Subscription changed"
-msgstr ""
-
-msgid ""
-"Your request for a change in your subscription has been processed "
-"successfully."
-msgstr ""
-
-#, fuzzy
-msgid "Subscription plan"
-msgstr "Kuvaus"
-
-msgid "Status"
-msgstr "Status"
-
-msgid "Subscribed"
-msgstr ""
-
-msgid "Expires"
-msgstr ""
-
-#, fuzzy
-#| msgid "Invalid image."
-msgid "Invalid"
-msgstr "Virheellinen kuva."
-
-#, fuzzy
-msgid "Cancelled"
-msgstr "Peruuta"
-
-msgid "Unavailable"
-msgstr ""
-
-msgid "Unsubscribed"
-msgstr ""
-
-#, python-format
-msgid ""
-"This subscription is not offered anymore on AstroBin. Please visit the <a "
-"href=\"%(url)s\">subscriptions page</a> to see the available plans, thanks!"
-msgstr ""
-
-msgid ""
-"If you would like to renew your subscription, please visit this page again "
-"after\n"
-"                        your current subscription's expiration date:"
-msgstr ""
-
-msgid ""
-"Your subscription is either cancelled or not active yet. If you want to "
-"subscribe again, please wait until your subscription is expired. If you just "
-"subscribed, please wait a few minutes while PayPal contacts our server for "
-"the final transaction confirmation. Thank you!"
-msgstr ""
-
-msgid "By cancelling, you will revert to a free plan."
-msgstr ""
-
-#, python-format
-msgid "Free plans are limited to <strong>%(max_allowed)s</strong> images."
-msgstr ""
-
-msgid ""
-"However, your existing images will not be deleted or deactivated in any way! "
-"Simply, you will not be able to upload any more images unless you switch to "
-"a paid plan."
-msgstr ""
-
-msgid "Cancel via PayPal"
-msgstr ""
-
-#, fuzzy
-msgid "You cannot switch to this plan."
-msgstr "Pääsysi tälle sivulle on estetty."
-
-#, fuzzy
-msgid "Back to the plans"
-msgstr "Takaisin ylös"
-
-msgid "Subscription confirmed"
-msgstr ""
-
-msgid ""
-"Your request has been received, and we are awaiting the final confirmation "
-"from PayPal. Your subscription should be active within a few minutes!"
-msgstr ""
-
-msgid "Thank you for supporting AstroBin!"
-msgstr "Kiitos Astrobinin tukemisesta!"
-
-msgid "Your active subscription plans"
-msgstr ""
-
-#, fuzzy
-msgid "Your inactive subscription plans"
-msgstr "AstroBin on sosiaalinen!"
-
-#, fuzzy
-msgid ""
-"PS: are you interested in larger plans?\n"
-"                <a href=\"/contact/\">Let us know!</a>"
-msgstr ""
-"Etkö löytänyt vastausta kysymykseesi? <a href=\"/contact\">Ota meihin "
-"yhteyttä</a>!"
-
-msgid "All"
-msgstr "Kaikki"
-
-msgid "A collection of great images that were recently handpicked."
-msgstr ""
-
 msgid "This list is currently empty."
 msgstr ""
-
-#, fuzzy
-msgid "Last 6 months"
-msgstr "Itä tai länsi"
-
-#, fuzzy
-msgid "Last year"
-msgstr "Viimeisin lähettäjä"
-
-#, fuzzy
-msgid "All time"
-msgstr "Latausaika"
-
-msgid "Total integration"
-msgstr "Kokonaisvalotusaika"
 
 msgid "Image upload"
 msgstr "Kuvan lataus"
@@ -5815,6 +5639,16 @@ msgid "%(user)s's followed users"
 msgstr "Käyttäjän %(user)s seuraamat käyttäjät"
 
 #, fuzzy, python-format
+#| msgid "%(user)s's favorites"
+msgid "%(user)s's friends"
+msgstr "Käyttäjän %(user)s suosikit"
+
+#, fuzzy, python-format
+#| msgid "These are the cities from which you usually image."
+msgid "These are the users that follow %(user)s mutually."
+msgstr "Näiltä paikkakunnilta kuvaat kaikkein useimmin."
+
+#, fuzzy, python-format
 msgid "%(user)s's liked images"
 msgstr "Käyttäjän %(user)s seuraamat käyttäjät"
 
@@ -5920,79 +5754,6 @@ msgstr ""
 "kaukoputket, kamerat ja kohteiden nimet ovat minimivaatimus. "
 "Kuvausajankohdat ovat myös tärkeitä."
 
-#, fuzzy, python-format
-msgid "%(user)s's commercial products"
-msgstr "Käyttäjän %(user)s tilastot"
-
-msgid ""
-"Please remember that you are only allowed to claim items that you really "
-"produce and/or retail."
-msgstr ""
-
-msgid "As producer"
-msgstr ""
-
-#, fuzzy
-msgid "Gear IDs"
-msgstr "Käytetyt laitteet"
-
-msgid "You haven't claimed any commercial products yet."
-msgstr ""
-
-#, python-format
-msgid "%(user)s hasn't claimed any commercial products yet."
-msgstr ""
-
-msgid "As retailer"
-msgstr ""
-
-msgid "You haven't claimed any retailed products yet."
-msgstr ""
-
-#, python-format
-msgid "%(user)s hasn't claimed any retailed products yet."
-msgstr ""
-
-msgid "Claim as producer"
-msgstr ""
-
-msgid "Claim as retailer"
-msgstr ""
-
-msgid "Claim commercial product"
-msgstr ""
-
-msgid "Claim"
-msgstr ""
-
-msgid "Select items to remove"
-msgstr ""
-
-msgid "Be careful if you try to remove all of these!"
-msgstr ""
-
-msgid ""
-"All the properties, including the commercial description, of this claim will "
-"be deleted and cannot be recovered!"
-msgstr ""
-
-#, fuzzy
-msgid "Select the product you want to merge to"
-msgstr "Klikkaa valitaksesi kuvat, jotka haluat tuoda"
-
-msgid "Are you sure?"
-msgstr "Oletko varma?"
-
-msgid "Claim retailed product"
-msgstr ""
-
-#, fuzzy
-msgid ""
-"All the properties of this claim will be deleted and cannot be recovered!"
-msgstr ""
-"Tämä versio kuvasta poistetaan pysyvästi eikä sitä voi palauttaa. Oletko "
-"varma?"
-
 #, fuzzy
 msgid "Delete account"
 msgstr "Poista keskustelu"
@@ -6003,14 +5764,27 @@ msgid ""
 "forever!"
 msgstr ""
 
-msgid "Your account was deleted. Thanks for using AstroBin until now!"
-msgstr ""
-
-msgid "Edit your basic information"
-msgstr "Muokkaa perustietojasi"
+#, fuzzy
+#| msgid "(comment deleted)"
+msgid "Account deleted"
+msgstr "(kommentti poistettu)"
 
 #, fuzzy
-msgid "Edit your commercial information"
+#| msgid ""
+#| "\n"
+#| "                The 'Image of the day' was selected. Thank you for your "
+#| "help!\n"
+#| "            "
+msgid ""
+"\n"
+"            Your account was deleted. Thanks for using AstroBin until now!\n"
+"        "
+msgstr ""
+"\n"
+"                Päivän kuva on valittu. Kiitos avustasi!\n"
+"            "
+
+msgid "Edit your basic information"
 msgstr "Muokkaa perustietojasi"
 
 #, fuzzy
@@ -6037,6 +5811,9 @@ msgstr "Sinulla ei ole pyyntöjä."
 #, fuzzy
 msgid "Request time"
 msgstr "Pyyntö käyttäjältä"
+
+msgid "Status"
+msgstr "Status"
 
 #, fuzzy
 msgid "File size"
@@ -6074,9 +5851,6 @@ msgid ""
 "information in there that refers to your personal copy of this product, like "
 "\"modded\", \"sold\", \"broken\", \"a present from my aunt\" and so on. "
 msgstr ""
-
-msgid "Close"
-msgstr "Sulje"
 
 msgid ""
 "The following information, instead, is personal, and may refer to your copy "
@@ -6118,10 +5892,6 @@ msgstr "Tuo Flickristä"
 
 msgid "Edit your site preferences"
 msgstr "Muokkaa asetuksiasi"
-
-#, fuzzy
-msgid "Edit your retailer information"
-msgstr "Muokkaa perustietojasi"
 
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
@@ -6195,13 +5965,28 @@ msgstr "Kuvan koko"
 msgid "Thanks for your support!"
 msgstr "Kiitos ehdotuksestasi"
 
+#, fuzzy
+msgid "Your subscriptions"
+msgstr "Kuvaus"
+
+#, fuzzy
+#| msgid "You have no requests."
+msgid "Your payments"
+msgstr "Sinulla ei ole pyyntöjä."
+
+msgid "This data is currently not available and will be recalculated shortly."
+msgstr ""
+
+msgid "Please check again in a bit, thanks!"
+msgstr ""
+
 msgid "Public Area"
 msgstr "Julkinen alue"
 
-msgid "Staging Area"
-msgstr "Tilapäinen alue"
-
 msgid "Corrupted"
+msgstr ""
+
+msgid "Recovered"
 msgstr ""
 
 msgid "Trash"
@@ -6215,6 +6000,9 @@ msgstr "Etsi kuvia"
 #, fuzzy
 msgid "Following"
 msgstr "Seuraa"
+
+msgid "Friends"
+msgstr ""
 
 msgid "Lacking data"
 msgstr "Puuttuvat tiedot"
@@ -6233,6 +6021,98 @@ msgstr "Pikahaku"
 
 msgid "Key/value pairs"
 msgstr ""
+
+msgid "Please confirm your recovered images"
+msgstr ""
+
+#, python-format
+msgid ""
+"Following the <a href=\"%(url)s\" target=\"_blank\">data loss incident in "
+"February 2020</a>, these images <strong>were automatically recovered</"
+"strong>."
+msgstr ""
+
+msgid "Now you need to <strong>manually confirm or reject</strong> them."
+msgstr ""
+
+#, fuzzy
+#| msgid "Integration"
+msgid "Instructions"
+msgstr "Valotusaika"
+
+msgid ""
+"Below, you see the list of all your images impacted by the automatic "
+"recovery process."
+msgstr ""
+
+msgid ""
+"The big thumbnail represents the original upload, and the small thumbnails "
+"represent revisions."
+msgstr ""
+
+msgid ""
+"Click on a thumbnail once to mark it for recovery, again to mark it for "
+"deletion, once more to return to the \"do nothing\" state."
+msgstr ""
+
+msgid ""
+"You can also use the \"Recover all\" and \"Delete all\" buttons at the "
+"bottom."
+msgstr ""
+
+msgid ""
+"When you are ready, click on the \"Submit selected\" button to confirm your "
+"selection."
+msgstr ""
+
+msgid ""
+"You will return to this page, and the images for which you didn't make a "
+"selection will still be here."
+msgstr ""
+
+msgid ""
+"The recovered images will return to your gallery (public or staging, "
+"depending on where they were before the data loss)."
+msgstr ""
+
+#, fuzzy
+#| msgid "Original"
+msgid "Original upload"
+msgstr "Alkuperäinen"
+
+#, fuzzy
+#| msgid "Staging Area"
+msgid "Staging area"
+msgstr "Tilapäinen alue"
+
+#, fuzzy
+#| msgid "Delete"
+msgid "Deleted"
+msgstr "Poista"
+
+#, fuzzy
+msgid "Revision"
+msgstr "Arvostelut"
+
+msgid "Recover all"
+msgstr ""
+
+#, fuzzy
+#| msgid "Select all"
+msgid "Delete all"
+msgstr "Valitse kaikki"
+
+msgid "Reset"
+msgstr "Palauta oletus"
+
+# Leave the # sign the same! This refers to the number of selected item in a list.
+#, fuzzy
+msgid "Submit selected"
+msgstr "# valittu"
+
+#, fuzzy
+msgid "There are no images to recover."
+msgstr "Ei kommentteja."
 
 # Leave the # sign the same! This refers to the number of selected item in a list.
 #, fuzzy
@@ -6335,6 +6215,11 @@ msgstr ""
 msgid "Award"
 msgstr ""
 
+#, fuzzy
+#| msgid "Public data pools"
+msgid "Publication date range"
+msgstr "Julkiset datakirjastot"
+
 msgid "Camera type"
 msgstr "Kameran tyyppi"
 
@@ -6376,8 +6261,13 @@ msgstr ""
 msgid "Image of the Day"
 msgstr "Päivän kuva"
 
-msgid "Top Pick"
+msgid "Top pick"
 msgstr ""
+
+#, fuzzy
+#| msgid "Basic information"
+msgid "Top pick nomination"
+msgstr "Perustiedot"
 
 #, fuzzy
 #| msgid "Guider/Planetary"
@@ -6557,13 +6447,6 @@ msgstr ""
 "Olet saavuttanut kuvien lataamismäärän ylärajan. Ole hyvä ja päivitä tilisi!"
 
 msgid ""
-"You uploaded an Indexed PNG file. AstroBin will need to lower the color "
-"count to 256 in order to work with it."
-msgstr ""
-"Olet lähettänyt indeksoidun PNG-tiedoston. AstroBinin on pakko pienentää "
-"värien määrää 256 kappaleeseen, jotta kuva toimisi."
-
-msgid ""
 "There was one or more errors processing the form. You may need to scroll "
 "down to see them."
 msgstr ""
@@ -6606,14 +6489,15 @@ msgstr "tuntia"
 msgid "Average integration time"
 msgstr "Keskimääräinen valotusaika"
 
-msgid "Forum posts"
-msgstr "Foorumiviestit"
+msgid ""
+"You uploaded an Indexed PNG file. AstroBin will need to lower the color "
+"count to 256 in order to work with it."
+msgstr ""
+"Olet lähettänyt indeksoidun PNG-tiedoston. AstroBinin on pakko pienentää "
+"värien määrää 256 kappaleeseen, jotta kuva toimisi."
 
 msgid "Image uploaded. Thank you!"
 msgstr "Tallennettu. Kiitos!"
-
-msgid "You can't merge a product to itself."
-msgstr "Et voi yhdistää tuotetta itseensä."
 
 msgid "You already have a collection with that name"
 msgstr ""
@@ -6644,6 +6528,9 @@ msgstr "Päivämäärät"
 
 msgid "Avg. Moon age"
 msgstr "Keskimääräinen kuun ikä"
+
+msgid "days"
+msgstr "vuorokautta"
 
 msgid "Avg. Moon phase"
 msgstr "Kuun vaiheen keskiarvo"
@@ -6682,8 +6569,595 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#~ msgid "Revision"
+#| msgid "Are you sure?"
+msgid "Are you a robot?"
+msgstr "Oletko varma?"
+
+msgid "Sorry, this username already exists with a different capitalization."
+msgstr ""
+
+#, fuzzy
+#~| msgid "About"
+#~ msgctxt "approximately"
+#~ msgid "about"
+#~ msgstr "Tietoja AstroBinistä"
+
+#, fuzzy
+#~| msgid "Pixel size"
+#~ msgid "Max size"
+#~ msgstr "Pikselin koko"
+
+#, fuzzy
+#~ msgid "View full res"
+#~ msgstr "Katso sivu"
+
+#, fuzzy
+#~| msgid "View your images"
+#~ msgid "View full image info"
+#~ msgstr "Katso kuviasi"
+
+#, fuzzy
+#~| msgid "Advanced search"
+#~ msgid "Advanced"
+#~ msgstr "Laajennettu haku"
+
+#, fuzzy
+#~| msgid "Commercial gear items"
+#~ msgid "Social features"
+#~ msgstr "Kaupalliset laitteet"
+
+#, fuzzy
+#~| msgid "Start plate-solving"
+#~ msgid "Plate-solving"
+#~ msgstr "Käynnistä kentän ratkaisu"
+
+#, fuzzy
+#~| msgid "Public data pools"
+#~ msgid "Bulk data export"
+#~ msgstr "Julkiset datakirjastot"
+
+#, fuzzy
+#~| msgid "Full resolution"
+#~ msgid "Full size annotations"
+#~ msgstr "Katso täydessä koossa"
+
+#, fuzzy
+#~| msgid "Upload complete!"
+#~ msgid "Upload uncompressed source"
+#~ msgstr "Lataus on valmis!"
+
+#, fuzzy
+#~ msgid "Undelete images"
+#~ msgstr "Ladatut kuvat"
+
+#, fuzzy
+#~| msgid "Higher resolution"
+#~ msgid "View in original resolution"
+#~ msgstr "Suurempi resoluutio"
+
+#, fuzzy
+#~| msgid "Start plate-solving"
+#~ msgid "Basic plate-solving"
+#~ msgstr "Käynnistä kentän ratkaisu"
+
+#, fuzzy
+#~| msgid "Buy it here"
+#~ msgid "Buy in the Marketplace"
+#~ msgstr "Osta tuote tästä"
+
+#, fuzzy
+#~| msgid "Basic information"
+#~ msgid "Basic analytics"
+#~ msgstr "Perustiedot"
+
+#, fuzzy
+#~| msgid "You have already nominated this image"
+#~ msgid "You are already on this plan"
+#~ msgstr "Olet jo ehdottanut tätä kuvaa"
+
+#, fuzzy
+#~| msgid "Image size"
+#~ msgid "∞ images, ∞ size"
+#~ msgstr "Kuvan koko"
+
+#, fuzzy
+#~ msgid "Full search"
+#~ msgstr "Täysikokoinen:"
+
+#, fuzzy
+#~ msgid "Unlimited revisions"
+#~ msgstr "Kyllä, poista kuvaversio"
+
+#, fuzzy
+#~| msgid "Start plate-solving"
+#~ msgid "Advanced plate-solving"
+#~ msgstr "Käynnistä kentän ratkaisu"
+
+#, fuzzy
+#~| msgid "Advanced search"
+#~ msgid "Advanced analytics"
+#~ msgstr "Laajennettu haku"
+
+#, fuzzy
+#~ msgctxt "Subscription plan name"
+#~ msgid "Plan"
+#~ msgstr "Planeetat"
+
+#~ msgid "Price"
+#~ msgstr "Hinta"
+
+#, fuzzy
+#~ msgid "day"
+#~ msgstr "vuorokautta"
+
+#, fuzzy
+#~ msgid "month"
+#~ msgstr "Kuukausittain"
+
+#, fuzzy
+#~| msgid "Viewed one time"
+#~| msgid_plural "Viewed %(counter)s times"
+#~ msgid "one time"
+#~ msgstr "Katsottu yhden kerran"
+
+#~ msgid "Daily"
+#~ msgstr "Päivittäin"
+
+#~ msgid "Monthly"
+#~ msgstr "Kuukausittain"
+
+#~ msgid "Yearly"
+#~ msgstr "Vuosittain"
+
+#, fuzzy
+#~ msgid "months"
+#~ msgstr "Kuukausittain"
+
+#, fuzzy
+#~ msgid "Subscription plan"
+#~ msgstr "Kuvaus"
+
+#, fuzzy
+#~| msgid "Invalid image."
+#~ msgid "Invalid"
+#~ msgstr "Virheellinen kuva."
+
+#, fuzzy
+#~ msgid "Cancelled"
+#~ msgstr "Peruuta"
+
+#, fuzzy
+#~ msgid "You cannot switch to this plan."
+#~ msgstr "Pääsysi tälle sivulle on estetty."
+
+#, fuzzy
+#~ msgid "Back to the plans"
+#~ msgstr "Takaisin ylös"
+
+#~ msgid "Thank you for supporting AstroBin!"
+#~ msgstr "Kiitos Astrobinin tukemisesta!"
+
+#, fuzzy
+#~ msgid "Your inactive subscription plans"
+#~ msgstr "AstroBin on sosiaalinen!"
+
+#, fuzzy
+#~ msgid ""
+#~ "PS: are you interested in larger plans?\n"
+#~ "                <a href=\"/contact/\">Let us know!</a>"
+#~ msgstr ""
+#~ "Etkö löytänyt vastausta kysymykseesi? <a href=\"/contact\">Ota meihin "
+#~ "yhteyttä</a>!"
+
+#~ msgid ""
+#~ "AstroBin can protect your images from theft by applying a watermark to "
+#~ "them. Be careful with your settings though: once a watermark has been "
+#~ "applied, it cannot be removed (AstroBin won't store the non-watermarked "
+#~ "version of your image, for your safety). If you don't like the watermark "
+#~ "resulting from the following settings, your only choice is to delete the "
+#~ "image and start over."
+#~ msgstr ""
+#~ "AstroBin voi suojata kuvasi varkaudelta lisäämällä niihin vesileiman. Ole "
+#~ "varovainen asetusten kanssa: kun vesileima on kerran lisätty, sitä ei voi "
+#~ "poistaa (AstroBin ei tallenna vesileimatonta versiota kuvastasi, "
+#~ "varkausriskin pienentämiseksi). Jos et pidä asetusten tuottamasta "
+#~ "vesileimasta, ainoa vaihtoehto on poistaa kuva ja lisätä se uudestaan."
+
+#, fuzzy
+#~| msgid "Duration"
+#~ msgid "Traditional"
+#~ msgstr "Valotusaika"
+
+#~ msgid ""
+#~ "AstroBin is an image hosting website specifically targeted to "
+#~ "astrophotographers: it's the first and the last place where you need to "
+#~ "upload your astrophotography images. Made by an astrophotographer, for "
+#~ "the astrophotographers."
+#~ msgstr ""
+#~ "AstroBin on erityisesti tähtikuvaajille suunnattu kuvien julkaisusivusto: "
+#~ "ensimmäinen ja viimeinen paikka jonne kuvasi tarvitsee ladata. "
+#~ "Tähtikuvaajan tähtikuvaajille tekemä."
+
+#~ msgid "AstroBin index"
+#~ msgstr "AstroBin-indeksi"
+
+#~ msgid "Blog"
+#~ msgstr "Blog in English"
+
+#, fuzzy
+#~| msgid "Terms of Service"
+#~ msgid "Terms of servic"
+#~ msgstr "Käyttöehdot"
+
+#~ msgid ""
+#~ "AstroBin is Copyright &copy; 2010-2012 Salvatore Iovene, All Rights "
+#~ "Reserved. The images on this websites are copyright of their respective "
+#~ "owners."
+#~ msgstr ""
+#~ "AstroBin Copyright &copy; 2011-2012 Salvatore Iovene, kaikki oikeudet "
+#~ "pidätetään. Sivustolla julkaistujen kuvien tekijänoikeudet kuuluvat kuvan "
+#~ "julkaisijalle."
+
+#, fuzzy
+#~| msgid ""
+#~| "Your request for an API Key has been approved!\n"
+#~| "\n"
+#~| "    Your key: %(key)s\n"
+#~| "    Your secret: %(secret)s\n"
+#~| "\n"
+#~| "    Please read the API documentation at %(api_docs_url)s\n"
+#~| "    \n"
+#~| "    You can review your API keys at %(api_keys_url)s\n"
+#~| "    \n"
+#~| "    Thank you for using AstroBin's APIs!"
+#~ msgid ""
+#~ "Your request for an API Key has been approved!\n"
+#~ "\n"
+#~ "    Your key: %(key)s\n"
+#~ "    Your secret: %(secret)s\n"
+#~ "\n"
+#~ "    Please read the API documentation at <a href=\"%(api_docs_url)s\">"
+#~ "%(api_docs_url)s</a>\n"
+#~ "\n"
+#~ "    You can review your API keys at <a href=\"%(api_keys_url)s\">"
+#~ "%(api_keys_url)s</a>\n"
+#~ "\n"
+#~ "    Thank you for using AstroBin's APIs!"
+#~ msgstr ""
+#~ "Rajapinta-avainpyyntösi on hyväksytty!\n"
+#~ "\n"
+#~ "API-avain: %(key)s\n"
+#~ "Salasana: %(secret)s\n"
+#~ "\n"
+#~ "Luethan API-dokumenaation %(api_docs_url)s\n"
+#~ "\n"
+#~ "Voit katsella API-avaimiasi osoitteessa %(api_keys_url)s\n"
+#~ "\n"
+#~ "Kiitos kun käytät AstroBin'in rajapintoja!"
+
+#~ msgid ""
+#~ "Your request for an API Key has been approved!\n"
+#~ "\n"
+#~ "    Your key: %(key)s\n"
+#~ "    Your secret: %(secret)s\n"
+#~ "\n"
+#~ "    Please read the API documentation at %(api_docs_url)s\n"
+#~ "    \n"
+#~ "    You can review your API keys at %(api_keys_url)s\n"
+#~ "    \n"
+#~ "    Thank you for using AstroBin's APIs!"
+#~ msgstr ""
+#~ "Rajapinta-avainpyyntösi on hyväksytty!\n"
+#~ "\n"
+#~ "API-avain: %(key)s\n"
+#~ "Salasana: %(secret)s\n"
+#~ "\n"
+#~ "Luethan API-dokumenaation %(api_docs_url)s\n"
+#~ "\n"
+#~ "Voit katsella API-avaimiasi osoitteessa %(api_keys_url)s\n"
+#~ "\n"
+#~ "Kiitos kun käytät AstroBin'in rajapintoja!"
+
+#~ msgid "API Key request approved"
+#~ msgstr "Rajapinta-avain myönnetty"
+
+#, fuzzy
+#~ msgid "Last 6 months"
+#~ msgstr "Itä tai länsi"
+
+#, fuzzy
+#~ msgid "Last year"
+#~ msgstr "Viimeisin lähettäjä"
+
+#, fuzzy
+#~ msgid "All time"
+#~ msgstr "Latausaika"
+
+#~ msgid "Merge"
+#~ msgstr "Yhdistä"
+
+#~ msgid ""
+#~ "Use this field to mark that the item you are claiming really is the same "
+#~ "product (or a variation thereof) of something you have claimed before."
+#~ msgstr ""
+#~ "Käytä tätä kenttää merkitäksesi tuotteen samaksi (tai sen muunnokseksi) "
+#~ "kuin aiemmin merkitsemäsi tuote."
+
+#~ msgid ""
+#~ "You can't create more than %d claims. Consider upgrading your affiliation!"
+#~ msgstr ""
+#~ "Et voi merkitä enempää kuin %d tuotetta. Harkitse käyttäjätilisi "
+#~ "päivittämistä!"
+
+#~ msgid "You have already claimed this product."
+#~ msgstr "Olet jo ilmoittautunut tämän tuotteen valmistajaksi."
+
+#~ msgid ""
+#~ "Use this field to mark that the item you are merging really is the same "
+#~ "product (or a variation thereof) of something you have claimed before."
+#~ msgstr ""
+#~ "Käytä tätä kenttää merkitsemään, että tuotteesi on sama (tai sen muunnos) "
+#~ "kuin se johon yrität yhdistää tuotetta."
+
+#~ msgid "has written a review on"
+#~ msgstr "on kirjoittanut arvostelun"
+
+#~ msgid "Company name"
+#~ msgstr "Yrityksen nimi"
+
+#~ msgid "The name of the company you represent on AstroBin."
+#~ msgstr "Yrityksen nimi, jota edustat AstroBin:ssa"
+
+#~ msgid "Company description"
+#~ msgstr "Yrityksen kuvaus"
+
+#~ msgid ""
+#~ "A short description of the company you represent on AstroBin. You can use "
+#~ "some <a href=\"/faq/#comments\">formatting rules</a>."
+#~ msgstr ""
+#~ "Lyhyt kuvaus AstroBinissa edustamastasi yrityksestä. Voit käyttää "
+#~ "joitakin <a href=\"/faq/#comments\">muotoiluja</a>."
+
+#~ msgid "Company website"
+#~ msgstr "Yrityksen kotisivu"
+
+#~ msgid "The website of the company you represent on AstroBin."
+#~ msgstr "AstroBin:ssa edustamasi yrityksen sivusto."
+
+#~ msgid "Country of operation"
+#~ msgstr "Maa, jossa yritys toimii"
+
+#~ msgid "AUD - Australian dollars"
+#~ msgstr "AUD - Australian dollari"
+
+#~ msgid "CAD - Canadian dollars"
+#~ msgstr "CAD - Kanadan dollari"
+
+#~ msgid "CHF - Swiss francs"
+#~ msgstr "CHF - Sveitsin frangi"
+
+#~ msgid "EUR - Euros"
+#~ msgstr "EUR - Euro"
+
+#~ msgid "GPB - Pound stelings"
+#~ msgstr "GBP - Englannin punta"
+
+#~ msgid "PLN - Polish zloty"
+#~ msgstr "PLN - Puolan zloty"
+
+#~ msgid "SEK - Swedish krona"
+#~ msgstr "SEK - Ruotsin kruunu"
+
+#~ msgid "USD - American dollars"
+#~ msgstr "USD - Amerikan dollari"
+
+#~ msgid "Producer"
+#~ msgstr "Valmistaja"
+
+#~ msgid "The link to this product's page on your website."
+#~ msgstr "Linkki tämän tuotteen sivuun sivustollasi."
+
+#~ msgid "Currency"
+#~ msgstr "Valuutta"
+
+#~ msgid "Retailed gear items"
+#~ msgstr "Myytävät laitteet"
+
+#~ msgid "Proper make"
+#~ msgstr "Varsinainen valmistaja"
+
+#~ msgid ""
+#~ "Sometimes, product make/brand/producer/developer names are not written "
+#~ "properly by the users. Write here the proper make/brand/producer/"
+#~ "developer name."
+#~ msgstr ""
+#~ "Joskus käyttäjät eivät kirjoita tuotteiden mallia/merkkiä/valmistaja/"
+#~ "kehittäjää oikein. Kirjoita tähän oikea malli/merkki/valmistaja/kehittäjä."
+
+#~ msgid "Proper name"
+#~ msgstr "Varsinainen nimi"
+
+#~ msgid ""
+#~ "Sometimes, product names are not written properly by the users. Write "
+#~ "here the proper product name, not including the make/brand/producer/"
+#~ "developer name.<br/>It is recommended that you try to group as many items "
+#~ "as possible, so try to use a generic version of your product's name."
+#~ msgstr ""
+#~ "Joskus käyttäjät eivät kirjoita tuotteiden nimiä oikein. Kirjoita tähän "
+#~ "tuotteen virallinen nimi, poislukien valmistajan/brändin/kehittäjän/"
+#~ "tuottajan nimi.<br/>On myös suositeltavaa, että mahdollisimman monta "
+#~ "tuoteversiota voidaan niputtaa yhteen, joten pyri käyttämään "
+#~ "mahdollisimman geneeristä versiota tuotenimestä."
+
+#~ msgid ""
+#~ "The official, commercial image for this product. Upload an image via the "
+#~ "regular uploading interface, set its subject type to \"Gear\", and then "
+#~ "choose it from this list. If you upload several revisions, they will also "
+#~ "appear in the commercial page."
+#~ msgstr ""
+#~ "Tuotteen virallinen mainoskuva. Lataa kuva normaalisti "
+#~ "kuvanlatauskäyttöliittymän kautta, merkitse kohteen tyypiksi \"Laite\", "
+#~ "ja valitse kuva listasta. Jos lataat kuvasta useita versioita, ne kaikki "
+#~ "näkyvät tuotteen sivulla."
+
+#~ msgid "Tagline"
+#~ msgstr "Iskulause"
+
+#~ msgid ""
+#~ "A memorable phrase that will sum up this product, for marketing purposes."
+#~ msgstr ""
+#~ "Helposti muistettava yhteenveto tuotteesta markkinointitarkoituksiin."
+
+#~ msgid ""
+#~ "Here you can write the full commercial description of your product. You "
+#~ "can use some <a href=\"/faq/#comments\">formatting rules</a>."
+#~ msgstr ""
+#~ "Tähän voit kirjoittaa täyden kuvauksen tuotteestasi. Voit käyttää "
+#~ "joitakin <a href=\"/faq/#comments\">muotoiluja</a>."
+
+#~ msgid "Commercial gear items"
+#~ msgstr "Kaupalliset laitteet"
+
+#~ msgid ""
+#~ "As a producer and/or a retailer on AstroBin, it's very important that you "
+#~ "fill in all of your company details! Click <a href=\"%(the_url)s\">here</"
+#~ "a> to do it now."
+#~ msgstr ""
+#~ "Tuottajana ja/tai myyjänä AstroBinissä on hyvin tärkeää ilmoittaa kaikki "
+#~ "yritystiedot! Klikkaa <a href=\"%(the_url)s\">tästä</a> tehdäksesi niin "
+#~ "heti."
+
+#~ msgid ""
+#~ "As a retailer on AstroBin, it's very important that you fill in your "
+#~ "country of operation! Click <a href=\"%(the_url)s\">here</a> to do it now."
+#~ msgstr ""
+#~ "Myyntiedustajana AstroBinissä on tärkeää, että merkitset toimintamaasi. "
+#~ "Klikkaa <a href=\"%(the_url)s\">tästä</a> tehdäksi sen saman tien."
+
+#~ msgid "Commercial products"
+#~ msgstr "Kaupalliset tuotteet"
+
+#~ msgid "Edit commercial product"
+#~ msgstr "Muokkaa kaupallista tuotetta"
+
+#~ msgid "Return to list"
+#~ msgstr "Palaa listaan"
+
+#~ msgid "View in new window"
+#~ msgstr "Avaa uudessa ikkunassa"
+
+#~ msgid "by"
+#~ msgstr "käyttäjältä"
+
+#~ msgid "Other images"
+#~ msgstr "Muita kuvia"
+
+#~ msgid "Some images"
+#~ msgstr "Kuvia"
+
+#~ msgid "(view more)"
+#~ msgstr "(näytä lisää...)"
+
+#~ msgid "Reviews"
 #~ msgstr "Arvostelut"
+
+#~ msgid "Rating"
+#~ msgstr "Arviointi"
+
+#~ msgid "Add your review"
+#~ msgstr "Kirjoita arvostelu"
+
+#~ msgid ""
+#~ "Please be fair, honest and polite when writing a review. Many people will "
+#~ "read your review: all the users on AstroBin who own this piece of gear, "
+#~ "will be notified of your review."
+#~ msgstr ""
+#~ "Ole reilu, rehellinen ja kohtelias kirjoittaessasi arvostelua. Monet "
+#~ "ihmiset tulevat lukemaan arvostelusi: kaikille AstroBinissä olevilla "
+#~ "laitteen omistajille tullaan ilmoittamaan tekemästäsi arvostelusta."
+
+#~ msgid ""
+#~ "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
+#~ "register/\">register</a> to write a review."
+#~ msgstr ""
+#~ "Ole hyvä ja <a href=\"/accounts/login/\">kirjaudu sisään</a> tai <a href="
+#~ "\"/accounts/register/\">rekisteröidy</a> kirjoittaaksesi arvostelun."
+
+#~ msgid ""
+#~ "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
+#~ "register/\">register</a> to leave a comment."
+#~ msgstr ""
+#~ "Ole hyvä ja <a href=\"/accounts/login/\">kirjaudu sisään</a> tai <a href="
+#~ "\"/accounts/register/\">rekisteröidy</a> kirjoittaaksesi kommentin."
+
+#~ msgid "Buy it here"
+#~ msgstr "Osta tuote tästä"
+
+#~ msgid "Properties"
+#~ msgstr "Ominaisuudet"
+
+#~ msgid "Owners"
+#~ msgstr "Omistajat"
+
+#~ msgid "just now"
+#~ msgstr "juuri äsken"
+
+#~ msgid "Commercial information"
+#~ msgstr "Kaupallista tietoa"
+
+#, fuzzy
+#~ msgid ""
+#~ "%(user)s wrote a review of a gear item you own! Read it at following url: "
+#~ "<a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "%(user)s kommentoi kuvaasi! Lue kommentti seuraavassa osoitteessa: %(url)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "%(user)s wrote a review of a gear item you own! Read it at following url: "
+#~ "%(url)s"
+#~ msgstr ""
+#~ "%(user)s kommentoi kuvaasi! Lue kommentti seuraavassa osoitteessa: %(url)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> wrote a review of a gear "
+#~ "item you own!</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> vastasi kommenttiisi.</a>"
+
+#~ msgid "%(user)s wrote a review of a gear item you own!"
+#~ msgstr "%(user)s kirjoitti arvostelun omistamastasi laitteesta!\""
+
+#, fuzzy
+#~ msgid "%(user)s's commercial products"
+#~ msgstr "Käyttäjän %(user)s tilastot"
+
+#, fuzzy
+#~ msgid "Gear IDs"
+#~ msgstr "Käytetyt laitteet"
+
+#, fuzzy
+#~ msgid "Select the product you want to merge to"
+#~ msgstr "Klikkaa valitaksesi kuvat, jotka haluat tuoda"
+
+#, fuzzy
+#~ msgid ""
+#~ "All the properties of this claim will be deleted and cannot be recovered!"
+#~ msgstr ""
+#~ "Tämä versio kuvasta poistetaan pysyvästi eikä sitä voi palauttaa. Oletko "
+#~ "varma?"
+
+#, fuzzy
+#~ msgid "Edit your commercial information"
+#~ msgstr "Muokkaa perustietojasi"
+
+#, fuzzy
+#~ msgid "Edit your retailer information"
+#~ msgstr "Muokkaa perustietojasi"
+
+#~ msgid "You can't merge a product to itself."
+#~ msgstr "Et voi yhdistää tuotetta itseensä."
 
 #, fuzzy
 #~ msgid "Imaging telescope or lens"
@@ -6749,9 +7223,6 @@ msgstr ""
 
 #~ msgid "Private shared folders"
 #~ msgstr "Jaetut yksityiskansiot"
-
-#~ msgid "Frequently Asked Questions"
-#~ msgstr "Usein kysytyt kysymykset"
 
 #~ msgid "Is this website for free?"
 #~ msgstr "Onko sivuston käyttö ilmaista?"
@@ -7316,9 +7787,6 @@ msgstr ""
 #~ msgid "So, what are you waiting for?"
 #~ msgstr "Mitä siis vielä odotat?"
 
-#~ msgid "Sign up now!"
-#~ msgstr "Rekisteröidy nyt!"
-
 #, fuzzy
 #~ msgid "Send to public data pool"
 #~ msgstr "Nosta julkiselle alueelle"
@@ -7561,9 +8029,6 @@ msgstr ""
 
 #~ msgid "Choose files"
 #~ msgstr "Valitse tiedostot"
-
-#~ msgid "Reset"
-#~ msgstr "Palauta oletus"
 
 #~ msgid "Start upload"
 #~ msgstr "Käynnistä lähetys"
@@ -7933,16 +8398,6 @@ msgstr ""
 #~ msgid "Yes, I'm sure"
 #~ msgstr "Kyllä, olen varma"
 
-#~ msgid ""
-#~ "\n"
-#~ "                The 'Image of the day' was selected. Thank you for your "
-#~ "help!\n"
-#~ "            "
-#~ msgstr ""
-#~ "\n"
-#~ "                Päivän kuva on valittu. Kiitos avustasi!\n"
-#~ "            "
-
 #~ msgid "Leaderboard"
 #~ msgstr "Johtotähdet"
 
@@ -7970,9 +8425,6 @@ msgstr ""
 #~ msgid "Excerpt"
 #~ msgstr "Ote"
 
-#~ msgid "New!"
-#~ msgstr "Uutta!"
-
 #~ msgid "or return to messages"
 #~ msgstr "tai palaa takaisin viesteihin"
 
@@ -7986,9 +8438,6 @@ msgstr ""
 
 #~ msgid "Recently uploaded"
 #~ msgstr "ladattu"
-
-#~ msgid "Recently liked"
-#~ msgstr "Viime aikoina tykätyt"
 
 #, fuzzy
 #~ msgid "Recently bookmarked"
@@ -8313,10 +8762,6 @@ msgstr ""
 #~ msgid "Messier marathon"
 #~ msgstr "Messier-maraton"
 
-#, fuzzy
-#~ msgid "AstroBin Index"
-#~ msgstr "AstroBin on sosiaalinen!"
-
 #~ msgid "Favorites"
 #~ msgstr "Suosikit"
 
@@ -8441,9 +8886,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Tässä kuvassa on monta Messier-kohdetta. Valitse mille niistä haluat "
 #~ "ehdottaa tätä kuvaa."
-
-#~ msgid "You can't nominate the same image more than once."
-#~ msgstr "Et voi ehdottaa samaa kuvaa useampaan kertaan."
 
 #~ msgid "Your nomination has been recorded, thank you!"
 #~ msgstr "Ehdotuksesi on tallennettu, kiitos!"
@@ -8692,9 +9134,6 @@ msgstr ""
 #~ msgid "%(username)s didn't write anything about themselves."
 #~ msgstr "%(username)s ei ole kirjoittanut mitään itsestään."
 
-#~ msgid "%(user)s's favorites"
-#~ msgstr "Käyttäjän %(user)s suosikit"
-
 #~ msgid "View your favorites"
 #~ msgstr "Katso suosikkejasi"
 
@@ -8732,9 +9171,6 @@ msgstr ""
 
 #~ msgid "To latitude:"
 #~ msgstr "Leveyspiirille (latitudille):"
-
-#~ msgid "Hemisphere:"
-#~ msgstr "Pallonpuolisko (E tai P):"
 
 #~ msgid "Both"
 #~ msgstr "Molemmat"
@@ -8867,9 +9303,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Olet nyt rekisteröitynyt. Linkki tilin aktivoimiseksi on lähetetty "
 #~ "sähköpostiisi."
-
-#~ msgid "(comment deleted)"
-#~ msgstr "(kommentti poistettu)"
 
 #~ msgid "Undelete"
 #~ msgstr "Peru poisto"
@@ -9059,9 +9492,6 @@ msgstr ""
 
 #~ msgid "The places from which you have taken this image."
 #~ msgstr "Paikat, joista kuva on otettu."
-
-#~ msgid "These are the cities from which you usually image."
-#~ msgstr "Näiltä paikkakunnilta kuvaat kaikkein useimmin."
 
 #~ msgid "For example: +12.44"
 #~ msgstr "Esimerkiksi: +12.44"

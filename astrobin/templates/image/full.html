@@ -25,12 +25,19 @@
     <meta name="keywords" content="astrophotography, astronomy, telescopes" />
     <meta name="robots" content="index, follow, noarchive" />
     <meta name="googlebot" content="noarchive" />
+    <meta name="theme-color" content="#303030" />
+
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap2-toggle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css"
+          integrity="sha512-wJgJNTBBkLit7ymC6vvzM1EcSWeM9mmOu+1USHaRBbHkm6W9EgM0HY27+UtUaprntaYQJF75rc8gjxllKs5OIQ=="
+          crossorigin="anonymous" />
 
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700|Noto+Serif:700|Roboto+Mono&subset=latin-ext"
           rel="stylesheet">
     {% stylesheet 'screen' %}
 
     {% include "base/ga.html" %}
+    {% include "base/facebook.html" %}
 
     <script src="{% static 'astrobin_apps_platesolving/js/astrobin_apps_platesolving.js' %}"></script>
 </head>
@@ -41,9 +48,26 @@
 <div class="navbar navbar-fixed-top" id="top">
     <div class="navbar-inner">
         <div class="container-fluid">
-            <a class="brand" href="{% url 'index' %}">
-                <img src="{% static 'astrobin/images/astrobin-logo-small.png' %}" alt="AstroBin" />
-            </a>
+            {% show_10_year_anniversary_logo as show_10_year_anniversary_logo %}
+            {% if show_10_year_anniversary_logo %}
+                <a class="brand ten-year-anniversary hidden-phone hidden-tablet"
+                   href="https://welcome.astrobin.com/blog/celebrating-10-years-of-astrobin" target="_blank">
+                    <img src="{% static 'astrobin/images/astrobin-logo-10-years.png' %}" alt="AstroBin" />
+                </a>
+
+                <a class="brand-mobile ten-year-anniversary hidden-desktop"
+                   href="https://welcome.astrobin.com/celebrating-10-years-of-astrobin" target="_blank">
+                    🎉
+                </a>
+            {% else %}
+                <a class="brand hidden-phone hidden-tablet" href="{% url 'index' %}">
+                    <img src="{% static 'astrobin/images/astrobin-logo-small.png' %}" alt="AstroBin" />
+                </a>
+
+                <a class="brand-mobile hidden-desktop" href="{% url 'index' %}">
+                    AstroBin
+                </a>
+            {% endif %}
 
             <ul class="nav">
                 <li>
@@ -58,7 +82,9 @@
                             {% endif %}
 
                             {% url 'user_page' image.user.username as the_url %}
-                            {% blocktrans with user=image.user.userprofile %}by <a href="{{ the_url }}">{{ user }}</a>{% endblocktrans %}
+                            {% blocktrans trimmed with user=image.user.userprofile %}
+                                by <a href="{{ the_url }}">{{ user }}</a>
+                            {% endblocktrans %}
                             )
                         </span>
                     </div>
@@ -66,23 +92,40 @@
             </ul>
             <ul class="nav pull-right">
                 {% with request.GET.mod as mod %}
+                    {% if show_advanced_solution and not real %}
+                        <li>
+                            <form class="form-inline">
+                                <label for="enable-solution-overlay" class="hidden-phone hidden-tablet">{% trans "Plate-solution overlay" %}:</label>
+                                <label for="enable-solution-overlay" class="hidden-desktop"><i class="icon-target"></i></label>
+                                <input
+                                        id="enable-solution-overlay"
+                                        data-toggle="toggle"
+                                        type="checkbox"
+                                        {% if not request.user.userprofile.plate_solution_overlay_on_full_disabled %}
+                                            checked
+                                        {% endif %}
+                                />
+                            </form>
+                        </li>
+                    {% endif %}
+
                     <li>
                         {% if real %}
                             <a class="btn btn-primary navbar-btn" href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "real" %}{% endif %}">
                                 <i class="icon-resize-full"></i>
-                                {% trans "Fit to window" %}
+                                <span class="hidden-phone hidden-tablet">{% trans "Fit to window" %}</span>
                             </a>
                         {% elif request.user|can_see_real_resolution:image %}
                             <a class="btn btn-primary navbar-btn" href="{% get_image_url image revision_label 'full' %}{% query_string "mod=mod,real=''" "" %}">
                                 <i class="icon-fullscreen"></i>
-                                {% trans "Full resolution" %}
+                                <span class="hidden-phone hidden-tablet">{% trans "Full resolution" %}</span>
                             </a>
                         {% endif %}
                     </li>
                     <li>
                         <a class="btn navbar-btn" href=" {% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "real" %}{% endif %}">
                             <i class="icon-list-alt"></i>
-                            {% trans "Technical card" %}
+                            <span class="hidden-phone hidden-tablet">{% trans "Technical card" %}</span>
                         </a>
                     </li>
                 {% endwith %}
@@ -92,7 +135,13 @@
 </div>
 
 <div id="full-size-image"{% if real %} class="real"{% endif %}>
-    {% astrobin_image image alias revision=revision_label url_size='regular' %}
+    <div class="loading-zoom hidden">
+        <i class="icon-zoom-in"></i>
+        {% trans "Loading click-and-drag zoom..." %}
+        <span class="zoom-image-content-length"></span>
+    </div>
+
+    {% astrobin_image image alias revision=revision_label link=False %}
 
     {% if show_advanced_solution and not real %}
         <div
@@ -101,60 +150,174 @@
                     max-width: {{ instance_to_platesolve | thumbnail_width:'hd' }}px;
                     max-height: {{ instance_to_platesolve | thumbnail_height:'hd' }}px;
                 ">
-            <a class="advanced-plate-solution"
-               href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "" %}{% endif %}">
-                <object
-                        id="advanced-plate-solution-svg"
-                        onload="AstroBinPlatesolving.advancedSvgLoaded()"
-                        type="image/svg+xml"
-                        data="{% url 'astrobin_apps_platesolving.serve_svg' instance_to_platesolve.solution.pk 'hd' %}"
-                        style="
-                                max-width: {{ instance_to_platesolve | thumbnail_width:'hd' }}px;
-                                max-height: {{ instance_to_platesolve | thumbnail_height:'hd' }}px;
-                        ">
-                </object>
-                <div id="x-ruler"></div>
-                <div id="y-ruler"></div>
-            </a>
+            <object
+                    id="advanced-plate-solution-svg"
+                    onload="AstroBinPlatesolving.advancedSvgLoaded()"
+                    type="image/svg+xml"
+                    data="{% url 'astrobin_apps_platesolving.serve_svg' instance_to_platesolve.solution.pk 'hd' %}"
+                    style="
+                            max-width: {{ instance_to_platesolve | thumbnail_width:'hd' }}px;
+                            max-height: {{ instance_to_platesolve | thumbnail_height:'hd' }}px;
+                    ">
+            </object>
+            <div id="x-ruler"></div>
+            <div id="y-ruler"></div>
         </div>
     {% endif %}
 </div>
 
-<div id="ra-dec-coordinates" class="full">
-    <div class="coordinates image-coordinates">
-        <abbr title="{% trans 'Abscissa ' %}" class="x"></abbr>
-        <abbr title="{% trans 'Ordinate' %}" class="y"></abbr>
-    </div>
-    <div class="coordinates equatorial-coordinates">
-        <abbr title="{% trans 'Right ascension' %}" class="alpha"></abbr>
-        <abbr title="{% trans 'Declination' %}" class="delta"></abbr>
-    </div>
-    <div class="coordinates ecliptic-coordinates">
-        <abbr title="{% trans 'Ecliptic longitude' %}" class="lambda"></abbr>
-        <abbr title="{% trans 'Ecliptic latitude' %}" class="beta"></abbr>
-    </div>
-    <div class="coordinates galactic-coordinates">
-        <abbr title="{% trans 'Galactic longitude' %}" class="l"></abbr>
-        <abbr title="{% trans 'Galactic latitude' %}" class="b"></abbr>
-    </div>
-    <div class="powered-by-pixinsight">
-        <span>Powered by</span>
-        <a href="https://pixinsight.com/" target="_blank">PixInsight</a>
-    </div>
+{% if show_advanced_solution and not real %}
+    <div id="ra-dec-coordinates" class="full hover-overlay">
+        <div class="coordinates image-coordinates">
+            <abbr title="{% trans 'Abscissa ' %}" class="x"></abbr>
+            <abbr title="{% trans 'Ordinate' %}" class="y"></abbr>
+        </div>
+        <div class="coordinates equatorial-coordinates">
+            <abbr title="{% trans 'Right ascension' %}" class="alpha"></abbr>
+            <abbr title="{% trans 'Declination' %}" class="delta"></abbr>
+        </div>
+        <div class="coordinates ecliptic-coordinates">
+            <abbr title="{% trans 'Ecliptic longitude' %}" class="lambda"></abbr>
+            <abbr title="{% trans 'Ecliptic latitude' %}" class="beta"></abbr>
+        </div>
+        <div class="coordinates galactic-coordinates">
+            <abbr title="{% trans 'Galactic longitude' %}" class="l"></abbr>
+            <abbr title="{% trans 'Galactic latitude' %}" class="b"></abbr>
+        </div>
+        <div class="powered-by-pixinsight">
+            <span>Powered by</span>
+            <a href="https://pixinsight.com/" target="_blank">PixInsight</a>
+        </div>
 </div>
+{% endif %}
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.7.2/bluebird.min.js"></script>
 <script type="text/javascript" src="{% static 'common/js/jquery-1.8.3.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+        integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
+        crossorigin="anonymous"></script>
 <script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
 <script type="text/javascript" src="{% static 'astrobin_apps_images/js/astrobin_apps_images.js' %}"></script>
 <script src="{% static 'astrobin_apps_platesolving/js/CoordinateInterpolation.js' %}"></script>
 <script src="{% static 'astrobin_apps_platesolving/js/astrobin_apps_platesolving_mousemove.js' %}"></script>
 <script type="text/javascript" src="{% static 'astrobin/js/astrobin.js' %}"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap2-toggle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js"
+        integrity="sha512-m5kAjE5cCBN5pwlVFi4ABsZgnLuKPEx0fOnzaH5v64Zi3wKnhesNUYq4yKmHQyTa3gmkR6YeSKW1S+siMvgWtQ=="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"
+        integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw=="
+        crossorigin="anonymous"></script>
 {% insert_hit_count_js_variables for image %}
 <script type="text/javascript">
     $(document).ready(function () {
         astrobin_common.init_ajax_csrf_token();
 
-        {% if instance_to_platesolve.solution|is_advanced_success_status %}
+        function zoom() {
+            function getRealImage() {
+                return new Promise(function(resolve) {
+                    $.ajax({
+                        url: '{% url "image_thumb" image.get_id revision_label "real" %}',
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.url.indexOf('placeholder') > -1) {
+                                setTimeout(function() {
+                                    resolve(getRealImage());
+                                }, 500);
+                            } else {
+                                $.ajax({
+                                    url: response.url,
+                                    type: 'HEAD',
+                                    success: function (responseText, textStatus, jqXHR) {
+                                        var contentLength = +jqXHR.getResponseHeader('content-length');
+                                        if (contentLength > 0) {
+                                            $('.zoom-image-content-length').text(
+                                                '(' + (contentLength / 1024 / 1024).toFixed(2) + ' MB)');
+                                        }
+                                        resolve(response.url);
+                                    },
+                                    error: function () {
+                                        resolve(response.url);
+                                    }
+                                });
+                            }
+                        }
+                    });
+                });
+            }
+
+            {% if request|show_click_and_drag_zoom:image %}
+                if(!('ontouchend' in document) && (window.innerWidth < {{ image.w }})) {
+                    $('.loading-zoom').removeClass('hidden');
+                    getRealImage().then(function(url) {
+                    $('#full-size-image').zoom({
+                        on: 'grab',
+                        url: url,
+                        callback: function () {
+                            $('.loading-zoom').addClass('hidden');
+                            if (!$.cookie('astrobin_click_and_drag_toast_seen')) {
+                                $.toast({
+                                    text: "{% trans "Click-and-drag anywhere on the image." %}",
+                                    heading: "{% trans "Want to zoom in?" %}",
+                                    showHideTransition: 'slide',
+                                    allowToastClose: true,
+                                    hideAfter: false,
+                                    position: 'bottom-right',
+                                    loader: true,
+                                    afterHidden: function () {
+                                        $.ajax({
+                                            url: '/json-api/user/mark-click-and-drag-toast-as-seen/',
+                                            type: 'POST',
+                                            dataType: 'json',
+                                            timeout: 5000
+                                        });
+                                    }
+                                });
+                            }
+                        },
+                        onZoomIn: function() {
+                            $(this).addClass('zoomed-in');
+                            $('.hover-overlay').hide();
+                        },
+                        onZoomOut: function() {
+                            $(this).removeClass('zoomed-in');
+                            $('.hover-overlay:not(.hover-overlay-disabled)').show();
+                        }
+                    });
+                });
+                }
+            {% endif %}
+        }
+
+        {% if show_advanced_solution and not real %}
+            if ($('#enable-solution-overlay').is(':checked')) {
+                $('.hover-overlay').removeClass('hover-overlay-disabled');
+                $('.hover-overlay').show();
+            } else {
+                $('.hover-overlay').addClass('hover-overlay-disabled');
+            }
+
+            $('#enable-solution-overlay').change(function() {
+                if (this.checked) {
+                    $('.hover-overlay').removeClass('hover-overlay-disabled');
+                    $('.hover-overlay').show();
+                } else {
+                    $('.hover-overlay').addClass('hover-overlay-disabled');
+                }
+
+                {% if request.user.is_authenticated %}
+                    $.ajax({
+                        url: '/json-api/user/plate-solution-overlay-on-full/',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            status: this.checked
+                        }),
+                        timeout: 10000,
+                        dataType: 'json',
+                    });
+                {% endif %}
+            });
+
             new AstroBinPlatesolvingMouseMove(
                 '{{ instance_to_platesolve.solution.advanced_ra_matrix }}'.split(',').map(parseFloat),
                 '{{ instance_to_platesolve.solution.advanced_dec_matrix }}'.split(',').map(parseFloat),
@@ -164,6 +327,8 @@
                 {{ instance_to_platesolve | thumbnail_height:'hd' }}
             );
         {% endif %}
+
+        zoom();
     });
 </script>
 </body>

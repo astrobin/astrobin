@@ -1,7 +1,6 @@
 {% load astrobin_apps_premium_tags %}
 {% load astrobin_apps_users_tags %}
 {% load common_tags %}
-{% load dfp_tags %}
 {% load tags %}
 
 {% load i18n %}
@@ -9,49 +8,75 @@
 <div class="profile-meta hidden-phone">
     {% astrobin_user requested_user view='default'%}
 
-    {% if PREMIUM_ENABLED and requested_user == request.user %}
-    <div class="subtle-container">
-        <div class="header">
-            <h4>{% trans "Subscription" %}</h4>
+    {% include 'ads/rectangular_ad.html' %}
+
+    {% if PREMIUM_ENABLED and requested_user == request.user or request.user.is_superuser%}
+        <div class="subtle-container">
+            <div class="header">
+                <h4>{% trans "Subscription" %}</h4>
+            </div>
+            <p>
+                {% trans "Type" %}<br/>
+                <strong data-test="subscription-type">
+                    {% if requested_user|is_free %}AstroBin Free{% endif %}
+                    {% if requested_user|is_any_lite %}AstroBin Lite{% endif %}
+                    {% if requested_user|is_any_premium %}AstroBin Premium{% endif %}
+                    {% if requested_user|is_any_ultimate %}AstroBin Ultimate{% endif %}
+                </strong>
+            </p>
+
+            {% if not requested_user|is_free %}
+            <p>
+                {% trans "Expiration date" %}<br/>
+                <strong data-test="expiration-date">
+                    {% with expiration=requested_user|get_premium_subscription_expiration %}
+                        {{expiration|date:"SHORT_DATE_FORMAT"}}
+                    {% endwith %}
+                </strong>
+            </p>
+            {% endif %}
+
+            {% if requested_user|show_images_used %}
+                <p>
+                    {% trans "Images used" %}<br />
+                    <strong data-test="images-used">
+                        {# Lite 2020 is the only account with a limit on total images #}
+                        {{ requested_user.userprofile.premium_counter }} / {{ PREMIUM_MAX_IMAGES_LITE_2020 }}
+                    </strong>
+                </p>
+            {% endif %}
+
+            {% if requested_user|show_uploads_used %}
+                <p>
+                    {% trans "Images used" %}<br />
+                    <strong data-test="uploads-used">
+                        {# Free and old Lite are the only accounts with a limit on upload count #}
+                        {{ requested_user.userprofile.premium_counter }} /
+                        {% if requested_user|is_free %}{{ PREMIUM_MAX_IMAGES_FREE_2020 }}{% endif %}
+                        {% if requested_user|is_lite %}{{ PREMIUM_MAX_IMAGES_LITE }}{% endif %}
+                    </strong>
+                </p>
+            {% endif %}
+
+            {% if requested_user|is_any_premium_subscription %}
+                <p class="small">
+                    <em>{% trans "Thanks for your support!" %}</em>
+                </p>
+            {% endif %}
+
+            {% if request.user == requested_user %} {# superuser doesn't need to see these #}
+                <hr/>
+
+                <div class="btn-group btn-group-vertical btn-block">
+                    <a href="{% app_redirection_service request '/subscriptions/view' %}" class="btn">
+                        {% trans "Your subscriptions" %}
+                    </a>
+                    <a href="{% app_redirection_service request '/subscriptions/payments' %}" class="btn">
+                        {% trans "Your payments" %}
+                    </a>
+                </div>
+            {% endif %}
         </div>
-        <p>
-            {% trans "Type" %}<br/>
-            <strong data-test="subscription-type">
-                {% if requested_user|is_free %}AstroBin Free{% endif %}
-                {% if requested_user|is_any_lite %}AstroBin Lite{% endif %}
-                {% if requested_user|is_any_premium %}AstroBin Premium{% endif %}
-                {% if requested_user|is_any_ultimate %}AstroBin Ultimate{% endif %}
-            </strong>
-        </p>
-
-        {% if not requested_user|is_free %}
-        <p>
-            {% trans "Expiration date" %}<br/>
-            <strong data-test="expiration-date">
-                {% with expiration=requested_user|get_premium_subscription_expiration %}
-                    {{expiration|date:"SHORT_DATE_FORMAT"}}
-                {% endwith %}
-            </strong>
-        </p>
-        {% endif %}
-
-        <p>
-            {% trans "Images used" %}<br/>
-            <strong data-test="images-used">
-                {{requested_user.userprofile.premium_counter}} /
-                {% if requested_user|is_free %}{{PREMIUM_MAX_IMAGES_FREE_2020}}{% endif %}
-                {% if requested_user|is_lite %}{{PREMIUM_MAX_IMAGES_LITE}}{% endif %}
-                {% if requested_user|is_lite_2020 %}{{PREMIUM_MAX_IMAGES_LITE_2020}}{% endif %}
-                {% if requested_user|is_premium_2020 %}&infin;{% endif %}
-                {% if requested_user|is_premium %}&infin;{% endif %}
-                {% if requested_user|is_ultimate_2020 %}&infin;{% endif %}
-            </strong>
-        </p>
-
-        {% if requested_user|is_any_premium_subscription %}
-        <p class="small"><em>{% trans "Thanks for your support!" %}</em></p>
-        {% endif %}
-    </div>
     {% endif %}
 
     {% if menu %}
@@ -67,23 +92,6 @@
         </ul>
     {% endif %}
 
-    {% if request.user|show_ads and not image.user|is_any_ultimate %}
-        <div class="subtle-container simple-container advertisement hidden-phone hidden-tablet">
-            <div class="header">
-                <h4><i class="icon-bullhorn"></i></h4>
-
-                {% if request.user|can_remove_ads %}
-                    <a class="remove" data-toggle="modal" href="#remove-ads-modal">
-                        <i class="icon-remove"></i>
-                    </a>
-                {% endif %}
-            </div>
-
-            {% dfp_tag '47890729/user-page' 220 600 brands='' %}
-        </div>
-    {% endif %}
-
-    {% if stats %}
     <div class="subtle-container stats">
         <div class="header">
             <h4>
@@ -98,7 +106,16 @@
                     <strong>{{i.1}}</strong>
                 </p>
             {% endif %}
+        {% empty %}
+            <p>
+                {% blocktrans trimmed %}
+                    This data is currently not available and will be recalculated shortly.
+                {% endblocktrans %}
+
+                {% blocktrans trimmed %}
+                    Please check again in a bit, thanks!
+                {% endblocktrans %}
+            </p>
         {% endfor %}
     </div>
-    {% endif %}
 </div><!-- ./profile-meta -->

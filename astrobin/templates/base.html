@@ -2,7 +2,6 @@
 {% load astrobin_apps_donations_tags %}
 {% load astrobin_apps_premium_tags %}
 {% load pipeline %}
-{% load dfp_tags %}
 {% load django_bootstrap_breadcrumbs %}
 {% load cookielaw_tags %}
 {% load i18n %}
@@ -18,7 +17,6 @@
 <html lang="{% if request.user.is_authenticated and user_language %}{{user_language}}{% else %}en{% endif %}">
     <head>
         <title>{% block title %}{% endblock %} - AstroBin</title>
-        <base href="{% block base_href %}/{% endblock %}">
 
         {% include "base/meta.html" %}
         {% block extra_meta %}{% endblock %}
@@ -44,6 +42,8 @@
 
         {% include "base/noscript.html" %}
         {% include "base/ga.html" %}
+        {% include "base/facebook.html" %}
+        {% include "base/admanager.html" %}
 
         {% block extra_gtag %}{% endblock %}
 
@@ -56,7 +56,7 @@
     </head>
 
     {% show_adsense_ads as show_adsense_ads %}
-    <body id="{% block page_body_id %}none{% endblock %}" data-offset="55"
+    <body id="{% block page_body_id %}none{% endblock %}" data-offset="60"
           {% if show_adsense_ads %}
               class="with-ads-sidebar"
           {% endif %}>
@@ -138,10 +138,6 @@
         {% include "base/js.html" %}
 
         {% block extra_js %}{% endblock %}
-
-        {% if request.user|show_ads and not image.user|is_any_ultimate %}
-            {% dfp_footer %}
-        {% endif %}
 
         <!-- used to figure out how many users use ad blocking software -->
         <script type="text/javascript">

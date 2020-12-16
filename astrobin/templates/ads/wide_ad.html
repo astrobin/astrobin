@@ -1,0 +1,32 @@
+{% load i18n %}
+{% load tags %}
+{% load astrobin_apps_premium_tags %}
+
+{% show_ads_on_page as show_ads_on_page %}
+
+{% if show_ads_on_page %}
+    <div class="subtle-container advertisement {{ ad_container_classes }}">
+        <div class="header">
+            <h4><i class="icon-bullhorn"></i></h4>
+
+            <a class="remove" data-toggle="modal"
+                    {% if request.user|can_remove_ads %}
+               href="#remove-ads-modal"
+                    {% else %}
+               href="#feature-restricted-modal"
+                    {% endif %}
+            >
+                {% trans "Remove ads" %} <i class="icon-remove"></i>
+            </a>
+        </div>
+
+        <div id='{{ NATIVE_RESPONSIVE_WIDE_SLOT }}'>
+            <script>
+                googletag.cmd.push(function () {
+                    googletag.display('{{ NATIVE_RESPONSIVE_WIDE_SLOT }}');
+                });
+            </script>
+        </div>
+    </div>
+{% endif %}
+

@@ -1,0 +1,74 @@
+@import 'variables';
+@import 'mixins';
+
+[class^="icon-"].badge:empty {
+  display: inline-block;
+}
+
+.wip-badge,
+.iotd-badge,
+.top-pick-badge,
+.top-pick-nomination-badge {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  @include box-shadow;
+  @include rounded-corners(16px);
+  height: 20px;
+  width: 20px;
+  color: $white;
+  border: 1px solid $white;
+  font-size: 12px;
+  line-height: 20px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .4);
+}
+
+.wip-badge {
+  background: $link-color;
+}
+
+.iotd-badge {
+  background: $gold;
+  background: -webkit-gradient(linear, left top, left bottom, from($gold), to(darken($gold, 10%)));
+  background: -webkit-linear-gradient(top, $gold, darken($gold, 10%));
+  background: -moz-linear-gradient(top, $gold, darken($gold, 10%));
+  background: -ms-linear-gradient(top, $gold, darken($gold, 10%));
+  background: -o-linear-gradient(top, $gold, darken($gold, 10%));
+  background-image: -ms-linear-gradient(top, $gold 0%, darken($gold, 10%) 100%);
+
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px, $gold 0 0 10px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $gold 0 0 10px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $gold 0 0 10px;
+}
+
+.top-pick-badge {
+  background: $silver;
+  background: -webkit-gradient(linear, left top, left bottom, from($silver), to(darken($silver, 10%)));
+  background: -webkit-linear-gradient(top, $silver, darken($silver, 10%));
+  background: -moz-linear-gradient(top, $silver, darken($silver, 10%));
+  background: -ms-linear-gradient(top, $silver, darken($silver, 10%));
+  background: -o-linear-gradient(top, $silver, darken($silver, 10%));
+  background-image: -ms-linear-gradient(top, $silver 0%, darken($silver, 10%) 100%);
+
+  color: lighten($silver, 20%);
+
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px, $silver 0 0 10px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $silver 0 0 10px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $silver 0 0 10px;
+}
+
+.top-pick-nomination-badge {
+  background: $bronze;
+  background: -webkit-gradient(linear, left top, left bottom, from($bronze), to(darken($bronze, 10%)));
+  background: -webkit-linear-gradient(top, $bronze, darken($bronze, 10%));
+  background: -moz-linear-gradient(top, $bronze, darken($bronze, 10%));
+  background: -ms-linear-gradient(top, $bronze, darken($bronze, 10%));
+  background: -o-linear-gradient(top, $bronze, darken($bronze, 10%));
+  background-image: -ms-linear-gradient(top, $bronze 0%, darken($bronze, 10%) 100%);
+  color: $gold;
+
+
+  -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px, $bronze 0 0 10px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $bronze 0 0 10px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 1px 5px $bronze 0 0 10px;
+}

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:06+0000\n"
+"POT-Creation-Date: 2020-12-10 21:48+0000\n"
 "PO-Revision-Date: 2013-10-20 22:13+0100\n"
 "Last-Translator: VojtechKudela <vojtiik@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Pootle 2.1.6\n"
+
+msgid "Type your comment here..."
+msgstr ""
 
 msgid "Cancel"
 msgstr "Zrušit"
@@ -37,6 +40,14 @@ msgstr "Zatím nikdo žádný komentář nevložil."
 msgid "(deleted)"
 msgstr "(smazáno)"
 
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr ""
+
 msgid "Link"
 msgstr "Odkaz"
 
@@ -52,17 +63,26 @@ msgstr "Upravit"
 msgid "Reply"
 msgstr "Odpovědět"
 
+msgid "Like"
+msgstr ""
+
+msgid "Unlike"
+msgstr ""
+
 msgid "The comment cannot be empty."
 msgstr "Není možné vložit prázdný komentář."
 
-msgid "Save"
-msgstr "Uložit"
+msgid "Submit"
+msgstr ""
 
-msgid "(comment deleted)"
-msgstr "(komentář byl smazán)"
+#~ msgid "Save"
+#~ msgstr "Uložit"
 
-msgid "There doesn't seem to be anything here."
-msgstr "Nic tady není."
+#~ msgid "(comment deleted)"
+#~ msgstr "(komentář byl smazán)"
+
+#~ msgid "There doesn't seem to be anything here."
+#~ msgstr "Nic tady není."
 
 #~ msgid "Formatting help"
 #~ msgstr "Nápověda k formátování"

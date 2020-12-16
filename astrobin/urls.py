@@ -63,6 +63,7 @@ from astrobin.views import (
     user_page_liked,
     user_page_followers,
     user_page_following,
+    user_page_friends,
     user_page_plots,
     user_profile_stats_get_integration_hours_ajax,
     user_profile_stats_get_integration_hours_by_gear_ajax,
@@ -114,7 +115,8 @@ from astrobin.views import (
     stats_subject_integration_monthly_ajax,
 
     api_help,
-    trending_astrophotographers,
+    astrophotographers_list,
+    contributors_list,
     stats,
 
     set_language
@@ -185,7 +187,8 @@ urlpatterns += [
     url(r'^forum/', include('pybb.urls', namespace='pybb')),
     url(r'hitcount/', include('hitcount.urls', namespace='hitcount')),
     url(r'^persistent_messages/', include('persistent_messages.urls')),
-    url(r'^subscriptions/', include('subscription.urls')),
+    url(r'^subscriptions/paypal/$', include('paypal.standard.ipn.urls')),
+    url(r'^subscriptions/', RedirectView.as_view(url="https://app.astrobin.com/subscriptions/options", permanent=True)),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^bouncy/', include('django_bouncy.urls')),
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
@@ -206,6 +209,7 @@ urlpatterns += [
     url(r'^api/v2/platesolving/', include('astrobin_apps_platesolving.api_urls')),
     url(r'^api/v2/notifications/', include('astrobin_apps_notifications.api.urls')),
     url(r'^api/v2/images/', include('astrobin_apps_images.api.urls', namespace="astrobin_apps_images")),
+    url(r'^api/v2/payments/', include('astrobin_apps_payments.api.urls', namespace="astrobin_apps_payments")),
 
     ###########################################################################
     ### OWN APPS VIEWS                                                      ###
@@ -219,6 +223,7 @@ urlpatterns += [
     url(r'^users_app/', include('astrobin_apps_users.urls')),
     url(r'^groups/', include('astrobin_apps_groups.urls')),
     url(r'^iotd/', include('astrobin_apps_iotd.urls')),
+    url(r'^payments/', include('astrobin_apps_payments.urls')),
 
     ###########################################################################
     ### HOME VIEWS                                                          ###
@@ -246,6 +251,7 @@ urlpatterns += [
     ###########################################################################
 
     url(r'^explore/top-picks/$', explore_views.TopPicksView.as_view(), name='top_picks'),
+    url(r'^explore/top-pick-nominations/$', explore_views.TopPickNominationsView.as_view(), name='top_pick_nominations'),
 
     ###########################################################################
     ### USER VIEWS                                                          ###
@@ -275,6 +281,7 @@ urlpatterns += [
     url(r'^users/(?P<username>[\w.@+-]*)/liked/$', user_page_liked, name='user_page_liked'),
     url(r'^users/(?P<username>[\w.@+-]*)/followers/$', user_page_followers, name='user_page_followers'),
     url(r'^users/(?P<username>[\w.@+-]*)/following/$', user_page_following, name='user_page_following'),
+    url(r'^users/(?P<username>[\w.@+-]*)/friends/$', user_page_friends, name='user_page_friends'),
     url(r'^users/(?P<username>[\w.@+-]*)/plots/$', user_page_plots, name='user_page_plots'),
     url(r'^users/(?P<username>[\w.@+-]*)/stats/integration_hours/(?P<period>\w+)/(?P<since>\d+)/$',
         user_profile_stats_get_integration_hours_ajax, name='stats_integration_hours'),
@@ -318,6 +325,7 @@ urlpatterns += [
     url(r'^autocomplete/(?P<what>\w+)/$', lookups.autocomplete, name='autocomplete'),
     url(r'^autocomplete_user/(?P<what>\w+)/$', lookups.autocomplete_user, name='autocomplete_user'),
     url(r'^autocomplete_usernames/$', lookups.autocomplete_usernames, name='autocomplete_usernames'),
+    url(r'^autocomplete_images/$', lookups.autocomplete_images, name='autocomplete_images'),
 
     ###########################################################################
     ### GEAR VIEWS                                                          ###
@@ -405,9 +413,12 @@ urlpatterns += [
     ###########################################################################
 
     url(r'^help/api/$', api_help, name='api'),
-    url(r'^trending-astrophotographers/',
-        trending_astrophotographers,
-        name='trending_astrophotographers'),
+    url(r'^astrophotographers-list/',
+        astrophotographers_list,
+        name='astrophotographers_list'),
+    url(r'^contributors-list/',
+        contributors_list,
+        name='contributors_list'),
     url(r'^stats/', stats, name='stats'),
 
     ###########################################################################

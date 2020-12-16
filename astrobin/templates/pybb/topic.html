@@ -14,16 +14,6 @@
     {% endif %}
 {% endblock %}
 
-{% block extra_head %}
-    {{ block.super }}
-    {{ form.media.css }}
-{% endblock %}
-{% block extra_script %}
-    {{ block.super }}
-    {{ form.media.js }}
-    <script type="text/javascript" src="{% static 'pybb/js/jquery.formset.min.js' %}"></script>
-{% endblock %}
-
 {% block breadcrumb %}
     {% with object=topic %}
         {% include "pybb/breadcrumb.html" %}

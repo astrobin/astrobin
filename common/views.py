@@ -2,14 +2,18 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
-from rest_framework.filters import DjangoFilterBackend
-from subscription.models import Subscription, UserSubscription
+from rest_framework.exceptions import ValidationError
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from subscription.models import Subscription, UserSubscription, Transaction
 
 from astrobin.models import UserProfile
+from astrobin_apps_users.services import UserService
+from toggleproperties.models import ToggleProperty
 from .permissions import ReadOnly
 from .serializers import ContentTypeSerializer, UserSerializer, UserProfileSerializer, UserProfileSerializerPrivate, \
-    SubscriptionSerializer, UserSubscriptionSerializer
+    SubscriptionSerializer, UserSubscriptionSerializer, TogglePropertySerializer, PaymentSerializer
 
 
 @method_decorator(cache_page(60 * 60 * 24), name='dispatch')
@@ -29,9 +33,6 @@ class ContentTypeDetail(generics.RetrieveAPIView):
 
 
 class UserList(generics.ListAPIView):
-    """
-    This view presents a list of all the users in the system.
-    """
     model = User
     serializer_class = UserSerializer
     permission_classes = (ReadOnly,)
@@ -40,19 +41,48 @@ class UserList(generics.ListAPIView):
 
 
 class UserDetail(generics.RetrieveAPIView):
-    """
-    This view presents a instance of one of the users in the system.
-    """
     model = User
     serializer_class = UserSerializer
     permission_classes = (ReadOnly,)
     queryset = User.objects.all()
 
 
+class TogglePropertyList(generics.ListCreateAPIView):
+    model = ToggleProperty
+    serializer_class = TogglePropertySerializer
+    queryset = ToggleProperty.objects.all()
+    permission_classes = [
+        IsAuthenticatedOrReadOnly,
+    ]
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ['property_type', 'object_id', 'content_type', 'user_id']
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class TogglePropertyDetail(generics.RetrieveDestroyAPIView):
+    model = ToggleProperty
+    serializer_class = TogglePropertySerializer
+    queryset = ToggleProperty.objects.all()
+    permission_classes = [
+        IsAuthenticatedOrReadOnly,
+    ]
+
+    def perform_destroy(self, serializer):
+        if serializer.user == self.request.user:
+            instance = self.get_object()
+            is_like = instance.property_type == 'like'
+            can_unlike = UserService(self.request.user).can_unlike(serializer.content_object)
+
+            if is_like and not can_unlike:
+                raise ValidationError('Cannot remove this like')
+
+            return super(TogglePropertyDetail, self).perform_destroy(instance)
+
+        raise ValidationError('Cannot delete another user\'s toggleproperty')
+
 class UserProfileList(generics.ListAPIView):
-    """
-    This view presents a list of all the user profiles in the system.
-    """
     model = UserProfile
     serializer_class = UserProfileSerializer
     permission_classes = (ReadOnly,)
@@ -61,9 +91,6 @@ class UserProfileList(generics.ListAPIView):
 
 
 class UserProfileDetail(generics.RetrieveAPIView):
-    """
-    This view presents a instance of one of the user profiles in the system.
-    """
     model = UserProfile
     permission_classes = (ReadOnly,)
     queryset = UserProfile.objects.all()
@@ -76,9 +103,6 @@ class UserProfileDetail(generics.RetrieveAPIView):
 
 
 class CurrentUserProfileDetail(generics.ListAPIView):
-    """
-    This view retrieves the user currently in the request.
-    """
     model = UserProfile
     permission_classes = (ReadOnly,)
     queryset = UserProfile.objects.all()
@@ -130,3 +154,18 @@ class UserSubscriptionDetail(generics.RetrieveAPIView):
     serializer_class = UserSubscriptionSerializer
     permission_classes = (ReadOnly,)
     queryset = UserSubscription.objects.all()
+
+
+class PaymentList(generics.ListAPIView):
+    model = UserSubscription
+    serializer_class = PaymentSerializer
+    permission_classes = (ReadOnly,)
+    pagination_class = None
+    queryset = Transaction.objects.filter(event__in=['one-time payment', 'subscription payment'])
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('user',)
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated():
+            return self.queryset.filter(user=self.request.user)
+        return self.model.objects.none()

@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load common_tags %}
 {% load tags %}
 {% load toggleproperty_tags %}
 
@@ -22,7 +23,9 @@
             </a>
         </span>
     {% else %}
-        {% add_remove_toggleproperty "like" image request.user %}
+        {% setvar request.user|can_like:image as can_like %}
+        {% setvar request.user|can_unlike:image as can_unlike %}
+        {% add_remove_toggleproperty "like" image request.user can_add=can_like can_remove=can_unlike %}
     {% endif %}
 {% endif %}
 

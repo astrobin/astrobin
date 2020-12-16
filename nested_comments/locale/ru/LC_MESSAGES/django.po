@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:06+0000\n"
-"PO-Revision-Date: 2019-01-25 14:24+0000\n"
-"Last-Translator: sypai <sypai@mail.ru>\n"
+"POT-Creation-Date: 2020-12-10 21:48+0000\n"
+"PO-Revision-Date: 2020-11-24 09:47+0000\n"
+"Last-Translator: NadirAstro <nadir_teymurov@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,10 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1548426244.000000\n"
+"X-POOTLE-MTIME: 1606211249.000000\n"
+
+msgid "Type your comment here..."
+msgstr "Введите ваш комментарий здесь..."
 
 msgid "Cancel"
 msgstr "Отмена"
@@ -39,6 +42,14 @@ msgstr "Пока ещё нет комментариев."
 msgid "(deleted)"
 msgstr "(удалено)"
 
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr "понравилось"
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr "нравится"
+
 msgid "Link"
 msgstr "Ссылка"
 
@@ -54,17 +65,26 @@ msgstr "Правка"
 msgid "Reply"
 msgstr "Ответ"
 
+msgid "Like"
+msgstr "Нравится"
+
+msgid "Unlike"
+msgstr "Не нравится"
+
 msgid "The comment cannot be empty."
 msgstr "Комментарий не может быть пустым."
 
-msgid "Save"
-msgstr "Сохранить"
+msgid "Submit"
+msgstr "Отправить"
 
-msgid "(comment deleted)"
-msgstr "(комментарий удален)"
+#~ msgid "Save"
+#~ msgstr "Сохранить"
 
-msgid "There doesn't seem to be anything here."
-msgstr "Кажется, здесь ничего нет."
+#~ msgid "(comment deleted)"
+#~ msgstr "(комментарий удален)"
+
+#~ msgid "There doesn't seem to be anything here."
+#~ msgstr "Кажется, здесь ничего нет."
 
 #~ msgid "Formatting help"
 #~ msgstr "Справка по форматированию"

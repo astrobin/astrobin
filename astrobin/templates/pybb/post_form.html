@@ -4,6 +4,7 @@
 {% if READONLY_MODE %}
     {% include 'readonly_mode.html' %}
 {% else %}
+    <img class="post-form-loading" src="{% static "astrobin/images/ajax-loader.gif" %}" alt="{% trans "Loading" %}" />
     <form novalidate class="post-form" action="
         {% if forum %}
             {% url 'pybb:add_topic' forum.pk %}
@@ -14,32 +15,36 @@
                 {% url 'pybb:edit_post' pk=object.pk %}
             {% endif %}
         {% endif %}" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <fieldset>
-        {% include "pybb/form_errors.html" %}
-        {% if form.name %} {% include "pybb/form_field.html" with field=form.name %} {% endif %}
-        {% if form.slug %} {% include "pybb/form_field.html" with field=form.slug %} {% endif %}
-        {% if form.login %} {% include "pybb/form_field.html" with field=form.login %}  {% endif %}
-        {% if form.body %} {% include "pybb/form_field.html" with field=form.body %}  {% endif %}
-        <div id='emoticons'>
-          {% for smile, url in form.available_smiles.items %}
-            <a href='#' title='{{ smile|safe }}'><img src='{% static form.smiles_prefix %}{{ url }}'></a>
-          {% endfor %}
-        </div>
+        {% csrf_token %}
 
-        {% if request.user|pybb_may_create_poll and form.poll_type %}
-          {% include "pybb/poll_edit_form.html" %}
-        {% endif %}
-        {% include "pybb/attachments_formset.html" %}
-        <p class="submit">{% include "pybb/_button_submit.html" %}</p>
-      </fieldset>
+        {% with True as hide_labels %}
+            <fieldset>
+                {% include "pybb/form_errors.html" %}
+                {% if form.name %} {% include "pybb/form_field.html" with field=form.name %} {% endif %}
+                {% if form.slug %} {% include "pybb/form_field.html" with field=form.slug %} {% endif %}
+                {% if form.login %} {% include "pybb/form_field.html" with field=form.login %} {% endif %}
+
+                {% include '_contribution_index_alert.html' %}
+
+                {% if form.body %}
+                    {% include "pybb/form_field.html" with field=form.body %}
+                    {% include '_rich_content_editor_help.html' %}
+                {% endif %}
+
+                {% if request.user|pybb_may_create_poll and form.poll_type %}
+                    {% include "pybb/poll_edit_form.html" %}
+                {% endif %}
+                {% include "pybb/attachments_formset.html" %}
+                <p class="submit">{% include "pybb/_button_submit.html" %}</p>
+            </fieldset>
+        {% endwith %}
     </form>
 
     {% if user_scores_index < 1 %}
         <div class="alert alert-warning">
             <p>
-            <strong><i class="icon icon-warning-sign"></i></strong>
-            {% blocktrans %}Please note: this post will be published only after moderation.{% endblocktrans %}
+                <strong><i class="icon icon-warning-sign"></i></strong>
+                {% blocktrans %}Please note: this post will be published only after moderation.{% endblocktrans %}
             </p>
         </div>
     {% endif %}
@@ -47,59 +52,68 @@
 
 
 {% block extra_js %}
-    <script language="javascript">
-    $(document).ready(function() {
-        var textarea = $('#id_body');
-        textarea.wysibb({
-            buttons: "bold,italic,underline,|,img,link,|,bullist,numlist,|,code"
-        });
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var textarea = $('#id_body');
 
-        $('#emoticons a').click(function() {
-            emoticon = $(this).attr("title");
-            textarea.insertAtCursor(' ' + emoticon + ' ');
-            return false;
-        });
-
-        function getSelectedText() {
-            if (document.selection) {
-                return document.selection.createRange().text;
-            } else {
-                return window.getSelection().toString();
-            }
-        }
-
-        $('.bb-quote-link').on('click', function (e) {
-            e.preventDefault();
-            var url = $(this).attr('href');
-            $.get(
-                url,
-                function (data) {
-                    if (textarea.bbcode() != "")
-                        textarea.insertAtCursor('\n');
-                    textarea.insertAtCursor(data);
-                    window.location.hash = '#id_body';
-                }
+            CKEDITOR.replace(
+                textarea.attr("id"),
+                astrobin_common.utils.ckeditorOptions(
+                    "forum",
+                    "{{ LANGUAGE_CODE }}",
+                    "{% trans 'Type your forum post here...' %}"
+                )
             );
-        });
 
-        $('.bb-quote-selected-link').on('click', function (e) {
-            if (!window.pybb.markup) {
-                return true;
-            }
-            e.preventDefault();
-            var selectedText = getSelectedText();
-            if (selectedText != '') {
-                var username = '';
-                if ($(this).closest('.post').length == 1 &&
-                    $(this).closest('.post').find('.post-author a').length == 1) {
-                    username = $.trim($(this).closest('.post').find('.post-author a').text());
+            function getSelectedText() {
+                if (document.selection) {
+                    return document.selection.createRange().text;
+                } else {
+                    return window.getSelection().toString();
                 }
-                if (textarea.bbcode() != "")
-                    textarea.insertAtCursor('\n');
-                textarea.insertAtCursor(window.pybb.markup.quote(selectedText, username));
-                window.location.hash = '#id_body';
             }
+
+            $('.bb-quote-link').on('click', function (e) {
+                e.preventDefault();
+                var url = $(this).attr('href');
+                $.get(
+                    url,
+                    function (data) {
+                        var instance = CKEDITOR.instances[textarea.attr("id")];
+
+                        if (instance.mode === 'source') {
+                            window.alert("{% trans "Please first exit 'Source' mode to quote a message." %}");
+                        } else {
+                            instance.setData(instance.getData() + '\n' + data + '\n{% trans "*** Type your reply here ***" %}')
+                            window.location.hash = '#cke_id_body';
+                        }
+                    }
+                );
+            });
+
+            $('.bb-quote-selected-link').on('click', function (e) {
+                if (!window.pybb.markup) {
+                    return true;
+                }
+                e.preventDefault();
+                var selectedText = getSelectedText();
+                if (selectedText !== '') {
+                    var username = '';
+                    var instance = CKEDITOR.instances[textarea.attr("id")];
+
+                    if (instance.mode === 'source') {
+                        window.alert("{% trans "Please first exit 'Source' mode to quote a message." %}");
+                    } else {
+                        if ($(this).closest('.post').length === 1 &&
+                            $(this).closest('.post').find('.post-author a').length === 1) {
+                            username = $.trim($(this).closest('.post').find('.post-author a').text());
+                        }
+                        instance.setData(
+                            instance.getData() + '\n' + window.pybb.markup.quote(selectedText, username) + '\n{% trans "*** Type your reply here ***" %}');
+                        window.location.hash = '#cke_id_body';
+                    }
+                }
+            });
         });
-    });
     </script>
 {% endblock %}

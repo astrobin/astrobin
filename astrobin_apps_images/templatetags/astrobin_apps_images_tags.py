@@ -86,7 +86,7 @@ def astrobin_image(context, image, alias, **kwargs):
     else:
         mod = None
 
-    size  = settings.THUMBNAIL_ALIASES[''][alias]['size']
+    size = settings.THUMBNAIL_ALIASES[''][alias]['size']
 
     if image is None or not isinstance(image, Image):
         return {
@@ -100,13 +100,16 @@ def astrobin_image(context, image, alias, **kwargs):
             'nav_ctx': nav_ctx,
             'nav_ctx_extra': nav_ctx_extra,
             'classes': classes,
+            'corrupted': False,
+            'recovered': False,
+            'is_revision': False,
         }
 
     # Old images might not have a size in the database, let's fix it.
     image_revision = image
     if revision not in [0, '0', 'final']:
         try:
-            image_revision = image.revisions.get(label = revision)
+            image_revision = image.revisions.get(label=revision)
         except ImageRevision.DoesNotExist:
             # Image revision was deleted
             pass
@@ -131,13 +134,13 @@ def astrobin_image(context, image, alias, **kwargs):
             h = size[1] if size[1] > 0 else w
 
     if alias in ('regular', 'regular_inverted', 'regular_sharpened',
-                 'hd'     , 'hd_inverted',      'hd_sharpened',
-                 'real'   , 'real_inverted'):
+                 'hd', 'hd_inverted', 'hd_sharpened',
+                 'real', 'real_inverted'):
         size = (size[0], int(size[0] / (w / float(h))))
         response_dict['provide_size'] = False
 
     placehold_size = [size[0], size[1]]
-    for i in range(0,2):
+    for i in range(0, 2):
         if placehold_size[i] > 1920:
             placehold_size[i] = 1920
 
@@ -165,6 +168,9 @@ def astrobin_image(context, image, alias, **kwargs):
                 'nav_ctx': nav_ctx,
                 'nav_ctx_extra': nav_ctx_extra,
                 'classes': classes,
+                'corrupted': False,
+                'recovered': False,
+                'is_revision': False,
             }
 
         try:
@@ -181,7 +187,6 @@ def astrobin_image(context, image, alias, **kwargs):
         'thumb',
     ))
 
-
     ##########
     # BADGES #
     ##########
@@ -192,16 +197,23 @@ def astrobin_image(context, image, alias, **kwargs):
             'thumb', 'gallery', 'gallery_inverted',
             'regular', 'regular_inverted', 'regular_sharpened'):
         if (hasattr(image, 'iotd') and
-            image.iotd is not None and
-            image.iotd.date <= datetime.now().date() and
-            not image.user.userprofile.exclude_from_competitions):
+                image.iotd is not None and
+                image.iotd.date <= datetime.now().date() and
+                not image.user.userprofile.exclude_from_competitions):
             badges.append('iotd')
 
-        if  ((not hasattr(image, 'iotd') or image.iotd.date > datetime.now().date()) and
-            hasattr(image, 'iotdvote_set') and
-            image.iotdvote_set.count() > 0 and
-            not image.user.userprofile.exclude_from_competitions):
+        if ((not hasattr(image, 'iotd') or image.iotd.date > datetime.now().date()) and
+                hasattr(image, 'iotdvote_set') and
+                image.iotdvote_set.count() > 0 and
+                not image.user.userprofile.exclude_from_competitions):
             badges.append('top-pick')
+
+        if ((not hasattr(image, 'iotd') or image.iotd.date > datetime.now().date()) and
+                (not hasattr(image, 'iotdvote_set') or image.iotdvote_set.count() == 0) and
+                hasattr(image, 'iotdsubmission_set') and
+                image.iotdsubmission_set.count() > 0 and
+                not image.user.userprofile.exclude_from_competitions):
+            badges.append('top-pick-nomination')
 
         if image.is_wip:
             badges.append('wip')
@@ -216,7 +228,6 @@ def astrobin_image(context, image, alias, **kwargs):
         elif image.pk in top100_ids:
             badges.append('top100')
         """
-
 
     cache_key = image.thumbnail_cache_key(field, alias)
     if animated:
@@ -244,12 +255,12 @@ def astrobin_image(context, image, alias, **kwargs):
         if revision is None or revision != 'final':
             get_thumb_kwargs['r'] = revision
 
-        get_thumb_url = reverse('image_thumb', kwargs = get_thumb_kwargs)
+        get_thumb_url = reverse('image_thumb', kwargs=get_thumb_kwargs)
         if animated:
             get_thumb_url += '?animated'
-        
+
     get_enhanced_thumb_url = None
-    enhanced_thumb_url = None        
+    enhanced_thumb_url = None
     if alias == 'regular' or alias == 'regular_sharpened':
         enhanced_alias = 'hd' if alias == 'regular' else 'hd_sharpened'
         cache_key = image.thumbnail_cache_key(field, enhanced_alias)
@@ -266,7 +277,7 @@ def astrobin_image(context, image, alias, **kwargs):
             enhanced_thumb = image.thumbnail_raw(enhanced_alias, {'revision_label': revision})
             if enhanced_thumb:
                 enhanced_thumb_url = enhanced_thumb.url
-        
+
         if enhanced_thumb_url is None:
             get_enhanced_thumb_kwargs = {
                 'id': image.hash if image.hash else image.id,
@@ -276,46 +287,49 @@ def astrobin_image(context, image, alias, **kwargs):
             if revision is None or revision != 'final':
                 get_enhanced_thumb_kwargs['r'] = revision
 
-            get_enhanced_thumb_url = reverse('image_thumb', kwargs = get_enhanced_thumb_kwargs)
+            get_enhanced_thumb_url = reverse('image_thumb', kwargs=get_enhanced_thumb_kwargs)
             if animated:
                 get_enhanced_thumb_url += '?animated'
 
     return dict(response_dict.items() + {
-        'status'        : 'success',
-        'image'         : image,
-        'alias'         : alias,
-        'mod'           : mod,
-        'revision'      : revision,
-        'size_x'        : size[0],
-        'size_y'        : size[1],
+        'status': 'success',
+        'image': image,
+        'alias': alias,
+        'mod': mod,
+        'revision': revision,
+        'size_x': size[0],
+        'size_y': size[1],
         'placehold_size': "%sx%s" % (placehold_size[0], placehold_size[1]),
-        'real'          : alias in ('real', 'real_inverted'),
-        'url'           : url,
-        'show_tooltip'  : show_tooltip,
-        'request'       : request,
+        'real': alias in ('real', 'real_inverted'),
+        'url': url,
+        'show_tooltip': show_tooltip,
+        'request': request,
         'caption_cache_key': "%d_%s_%s_%s" % (
             image.id, revision, alias, request.LANGUAGE_CODE if hasattr(request, "LANGUAGE_CODE") else "en"),
-        'badges'        : badges,
-        'animated'      : animated,
-        'get_thumb_url' : get_thumb_url,
-        'thumb_url'     : thumb_url,
-        'link'          : link,
-        'nav_ctx'       : nav_ctx,
-        'nav_ctx_extra' : nav_ctx_extra,
-        'classes'       : classes,
-        'enhanced_thumb_url' : enhanced_thumb_url,
-        'get_enhanced_thumb_url' : get_enhanced_thumb_url,
+        'badges': badges,
+        'animated': animated,
+        'get_thumb_url': get_thumb_url,
+        'thumb_url': thumb_url,
+        'link': link,
+        'nav_ctx': nav_ctx,
+        'nav_ctx_extra': nav_ctx_extra,
+        'classes': classes,
+        'enhanced_thumb_url': enhanced_thumb_url,
+        'get_enhanced_thumb_url': get_enhanced_thumb_url,
+        'corrupted': image_revision.corrupted,
+        'recovered': image_revision.recovered is not None,
+        'is_revision': hasattr(image_revision, 'label'),
+        'revision_id': image_revision.pk,
     }.items())
+
+
 register.inclusion_tag(
     'astrobin_apps_images/snippets/image.html',
-    takes_context = True)(astrobin_image)
+    takes_context=True)(astrobin_image)
 
 
-@register.simple_tag(takes_context = True)
-def random_id(context, size = 8, chars = string.ascii_uppercase + string.digits):
+@register.simple_tag(takes_context=True)
+def random_id(context, size=8, chars=string.ascii_uppercase + string.digits):
     id = ''.join(random.choice(chars) for x in range(size))
     context['randomid'] = id
     return ''
-
-
-

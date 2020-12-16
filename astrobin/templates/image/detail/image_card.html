@@ -23,13 +23,13 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                             <i class="icon-shopping-cart"></i>
                                         </a>
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu pull-right">
                                             {% if image|gear_items_with_brand_listings:REQUEST_COUNTRY|length %}
                                                 <li class="nav-header">{% trans "Sponsored brands" %}</li>
                                                 {% with image|unique_equipment_brand_listings:REQUEST_COUNTRY as listings %}
                                                     {% for listing in listings %}
                                                         <li>
-                                                            <a href="{{ listing.url }}?{% equipment_listing_utm_tags %}"
+                                                            <a href="{% equipment_listing_url_with_utm_tags listing.url %}"
                                                                onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')"
                                                                target="_blank">
                                                                {% blocktrans trimmed with name=listing.brand retailer=listing.retailer %}
@@ -51,7 +51,7 @@
                                                 {% with image|unique_equipment_item_listings:REQUEST_COUNTRY as listings %}
                                                     {% for listing in listings %}
                                                         <li>
-                                                            <a href="{{ listing.url }}?{% equipment_listing_utm_tags %}"
+                                                            <a href="{% equipment_listing_url_with_utm_tags listing.url %}"
                                                                onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')"
                                                                target="_blank">
                                                                 {% blocktrans trimmed with name=listing.name retailer=listing.retailer %}
@@ -102,7 +102,7 @@
                                                     {% with g|equipment_item_listings:REQUEST_COUNTRY as listings %}
                                                         {% with url=listings.all.0.url %}
                                                             <a class="retailer-affiliate-cart-link"
-                                                               href="{{ url }}?{% equipment_listing_utm_tags %}"
+                                                               href="{% equipment_listing_url_with_utm_tags url %}"
                                                                onclick="getOutboundLink('{{ url }}', '{{ request.path }}')"
                                                                target="_blank">
                                                                 <i class="icon-shopping-cart" rel="tooltip"
@@ -119,7 +119,7 @@
                                                         {% with url=listings.all.0.url %}
                                                             <a
                                                                 class="retailer-affiliate-cart-link"
-                                                                href="{{ url }}?{% equipment_listing_utm_tags %}"
+                                                                href="{% equipment_listing_url_with_utm_tags url %}"
                                                                 onclick="getOutboundLink('{{ url }}', '{{ request.path }}')"
                                                                 target="_blank">
                                                                 <i class="icon-shopping-cart" rel="tooltip"

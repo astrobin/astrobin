@@ -19,8 +19,8 @@ class EmailBackendTest(TransactionTestCase):
     def tearDown(self):
         self.user.delete()
 
-    def test_can_send_with_bounce(self):
-        bounce = Bounce.objects.create(
+    def test_can_send_with_hard_bounce(self):
+        Bounce.objects.create(
             hard=True,
             bounce_type="Permanent",
             address=self.user.email,
@@ -29,17 +29,55 @@ class EmailBackendTest(TransactionTestCase):
 
         self.assertFalse(EmailBackend(1).can_send(self.user, self.notice_type))
 
-        bounce.delete()
+    def test_can_send_with_two_soft_bounces(self):
+        Bounce.objects.create(
+            hard=False,
+            bounce_type="Transient",
+            address=self.user.email,
+            mail_timestamp=datetime.datetime.now()
+        )
 
-    def test_can_send_with_complaint(self):
-        complaint = Complaint.objects.create(
+        Bounce.objects.create(
+            hard=False,
+            bounce_type="Transient",
+            address=self.user.email,
+            mail_timestamp=datetime.datetime.now()
+        )
+
+        self.assertTrue(EmailBackend(1).can_send(self.user, self.notice_type))
+
+    def test_can_send_with_three_soft_bounces(self):
+        Bounce.objects.create(
+            hard=False,
+            bounce_type="Transient",
+            address=self.user.email,
+            mail_timestamp=datetime.datetime.now()
+        )
+
+        Bounce.objects.create(
+            hard=False,
+            bounce_type="Transient",
+            address=self.user.email,
+            mail_timestamp=datetime.datetime.now()
+        )
+
+        Bounce.objects.create(
+            hard=False,
+            bounce_type="Transient",
             address=self.user.email,
             mail_timestamp=datetime.datetime.now()
         )
 
         self.assertFalse(EmailBackend(1).can_send(self.user, self.notice_type))
 
-        complaint.delete()
+    def test_can_send_with_complaint(self):
+        Complaint.objects.create(
+            address=self.user.email,
+            mail_timestamp=datetime.datetime.now()
+        )
+
+        self.assertFalse(EmailBackend(1).can_send(self.user, self.notice_type))
+
 
     def test_can_send_to_deleted_user(self):
         self.user.userprofile.deleted = datetime.datetime.now()

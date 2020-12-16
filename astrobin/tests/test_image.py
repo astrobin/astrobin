@@ -142,9 +142,12 @@ class ImageTest(TestCase):
         if len(messages) == 0:
             self.assertEqual(False, True)
 
+        found = False
         for message in messages:
-            self.assertEqual(message.tags, tags)
-            self.assertTrue(content in message.message)
+            if message.tags == tags and content in message.message:
+                found = True
+
+        self.assertTrue(found)
 
     ###########################################################################
     # View tests                                                              #
@@ -158,7 +161,7 @@ class ImageTest(TestCase):
         response = self._do_upload('astrobin/fixtures/invalid_file')
         self.assertRedirects(
             response,
-            reverse('image_upload'),
+            reverse('image_upload') + '?forceClassicUploader',
             status_code=302,
             target_status_code=200)
         self._assert_message(response, "error unread", "Invalid image")
@@ -167,7 +170,7 @@ class ImageTest(TestCase):
         response = self._do_upload('astrobin/fixtures/invalid_file.jpg')
         self.assertRedirects(
             response,
-            reverse('image_upload'),
+            reverse('image_upload') + '?forceClassicUploader',
             status_code=302,
             target_status_code=200)
         self._assert_message(response, "error unread", "Invalid image")
@@ -178,7 +181,7 @@ class ImageTest(TestCase):
         response = self._do_upload('astrobin/fixtures/test.jpg')
         self.assertRedirects(
             response,
-            reverse('image_upload'),
+            reverse('image_upload') + '?forceClassicUploader',
             status_code=302,
             target_status_code=200)
         self._assert_message(response, "error unread", "Please upgrade")
@@ -190,7 +193,7 @@ class ImageTest(TestCase):
             response = self._do_upload('astrobin/fixtures/test.jpg')
             self.assertRedirects(
                 response,
-                reverse('image_upload'),
+                reverse('image_upload') + '?forceClassicUploader',
                 status_code=302,
                 target_status_code=200)
             self._assert_message(response, "error unread", "read-only mode")
@@ -201,7 +204,7 @@ class ImageTest(TestCase):
             follow=True)
         self.assertRedirects(
             response,
-            reverse('image_upload'),
+            reverse('image_upload') + '?forceClassicUploader',
             status_code=302,
             target_status_code=200)
         self._assert_message(response, "error unread", "Invalid image")
@@ -290,7 +293,7 @@ class ImageTest(TestCase):
                 'title': "Test title",
                 'link': "http://www.example.com",
                 'link_to_fits': "http://www.example.com/fits",
-                'acquisition_type': 'TRADITIONAL',
+                'acquisition_type': 'REGULAR',
                 'subject_type': SubjectType.OTHER,
                 'locations': [location.pk],
                 'description': "Image description",
@@ -307,7 +310,7 @@ class ImageTest(TestCase):
                 'title': "Test title",
                 'link': "http://www.example.com",
                 'link_to_fits': "http://www.example.com/fits",
-                'acquisition_type': 'TRADITIONAL',
+                'acquisition_type': 'REGULAR',
                 'data_source': 'AMATEUR_HOSTING',
                 'subject_type': SubjectType.OTHER,
                 'locations': [location.pk],
@@ -324,7 +327,7 @@ class ImageTest(TestCase):
                 'title': "Test title",
                 'link': "http://www.example.com",
                 'link_to_fits': "http://www.example.com/fits",
-                'acquisition_type': 'TRADITIONAL',
+                'acquisition_type': 'REGULAR',
                 'data_source': 'OTHER',
                 'subject_type': SubjectType.OTHER,
                 'locations': [location.pk],
@@ -1152,7 +1155,7 @@ class ImageTest(TestCase):
 
         def get_expected_url(image):
             thumb = image.thumbnail_raw(opts['alias'], {
-                'revision_label': 0,
+                'revision_label': 'final',
                 'animated': False,
                 'insecure': False
             })
@@ -1730,7 +1733,7 @@ class ImageTest(TestCase):
 
         response = self.client.get(image.get_absolute_url())
         self.assertContains(response, "Acquisition type")
-        self.assertContains(response, "Electronically-Assisted Astronomy (EAA)")
+        self.assertContains(response, "Electronically-Assisted Astronomy (EAA, e.g. based on a live video feed)")
 
         data = post_data(image)
 
@@ -2377,6 +2380,17 @@ class ImageTest(TestCase):
 
         self.client.logout()
 
+    def test_image_revision_keeps_mouse_hover_from_image(self):
+        image = Generators.image(user=self.user)
+        image.mouse_hover_image = 'INVERTED'
+        image.save(keep_deleted=True)
+
+        revision = Generators.imageRevision(image=image)
+
+        self.client.login(username='test', password='password')
+        response = self.client.get(reverse('image_edit_revision', args=(revision.pk,)))
+        self.assertContains(response, '<option value="INVERTED" selected>')
+
     def test_image_delete_has_permanently_deleted_text(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -2724,7 +2738,8 @@ class ImageTest(TestCase):
 
         # Test public image
         self.client.login(username='test', password='password')
-        response = self.client.post(post_url((public_image.get_id(),)))
+        response = self.client.post(post_url((public_image.get_id(),)), follow=True)
+        self.assertEqual(response.status_code, 200)
         image = Image.objects.get(pk=public_image.pk)
         self.assertEquals(image.is_wip, False)
         self.assertEquals(len(get_unseen_notifications(self.user2)), 0)
@@ -2732,7 +2747,8 @@ class ImageTest(TestCase):
         # Test WIP image
         self.assertIsNone(wip_image.published)
         self.assertTrue(wip_image.is_wip)
-        response = self.client.post(post_url((wip_image.get_id(),)))
+        response = self.client.post(post_url((wip_image.get_id(),)), follow=True)
+        self.assertEqual(response.status_code, 200)
         wip_image = Image.objects.get(pk=wip_image.pk)
         self.assertFalse(wip_image.is_wip)
         self.assertIsNotNone(wip_image.published)
@@ -2743,7 +2759,18 @@ class ImageTest(TestCase):
         # Test that previously published images don't trigger a notification
         wip_image.is_wip = True
         wip_image.save(keep_deleted=True)
-        response = self.client.post(post_url((wip_image.get_id(),)))
+        response = self.client.post(post_url((wip_image.get_id(),)), follow=True)
+        self.assertEqual(response.status_code, 200)
+        wip_image = Image.objects.get(pk=wip_image.pk)
+        self.assertFalse(wip_image.is_wip)
+        self.assertIsNotNone(wip_image.published)
+        self.assertEquals(len(get_unseen_notifications(self.user2)), 1)  # Same as before
+
+        # Test that skip_notifications doesn't trigger a notification
+        wip_image.is_wip = True
+        wip_image.save(keep_deleted=True)
+        response = self.client.post(post_url((wip_image.get_id(),)), data={'skip_notifications': 'on'}, follow=True)
+        self.assertEqual(response.status_code, 200)
         wip_image = Image.objects.get(pk=wip_image.pk)
         self.assertFalse(wip_image.is_wip)
         self.assertIsNotNone(wip_image.published)
@@ -2815,7 +2842,7 @@ class ImageTest(TestCase):
         image.title = "TEST IMAGE"
         image.save(keep_deleted=True)
 
-        # As the test user does not have a high enough AstroBin Index, the
+        # As the test user does not have a high enough Image Index, the
         # iamge should be in the moderation queue.
         self.assertEquals(image.moderator_decision, 0)
         self.assertEquals(image.moderated_when, None)

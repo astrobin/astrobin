@@ -60,14 +60,24 @@ class ImageViewSet(TusCreateMixin,
         return image_upload_path
 
     def get_object_serializer(self, request, filename, upload_length, upload_metadata):
+        try:
+            width = int(upload_metadata['width'])
+            height = int(upload_metadata['height'])
+        except (KeyError, ValueError):
+            width = 0
+            height = 0
+
         return self.get_serializer(data={
             'upload_length': upload_length,
             'upload_metadata': json.dumps(upload_metadata),
             'filename': filename,
             'title': upload_metadata['title'],
             'is_wip': True,
-            'skip_notifications': True,
+            'skip_notifications': False,
             'user_id': request.user.id,
+            'w': width,
+            'h': height,
+            'license': request.user.userprofile.default_license,
         })
 
     def get_success_headers(self, data):

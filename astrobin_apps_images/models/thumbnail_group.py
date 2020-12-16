@@ -31,10 +31,12 @@ class ThumbnailGroup(models.Model):
     thumb = models.CharField(max_length=512, null=True, blank=True)
     histogram = models.CharField(max_length=512, null=True, blank=True)
     iotd = models.CharField(max_length=512, null=True, blank=True)
+    iotd_mobile = models.CharField(max_length=512, null=True, blank=True)
     iotd_candidate = models.CharField(max_length=512, null=True, blank=True)
     story = models.CharField(max_length=512, null=True, blank=True)
     duckduckgo = models.CharField(max_length=512, null=True, blank=True)
     duckduckgo_small = models.CharField(max_length=512, null=True, blank=True)
+    instagram_story = models.CharField(max_length=512, null=True, blank=True)
 
     def get_all_urls(self):
         # type: () -> list[basestring]
@@ -54,10 +56,12 @@ class ThumbnailGroup(models.Model):
             self.revision,
             self.histogram,
             self.iotd,
+            self.iotd_mobile,
             self.iotd_candidate,
             self.story,
             self.duckduckgo,
-            self.duckduckgo_small
+            self.duckduckgo_small,
+            self.instagram_story,
         ]
 
     def __unicode__(self):

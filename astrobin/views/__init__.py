@@ -28,13 +28,12 @@ from django.template import loader, RequestContext
 from django.template.defaultfilters import filesizeformat
 from django.template.loader import render_to_string
 from django.utils.datastructures import MultiValueDictKeyError
-from django.utils.translation import ngettext as _n, get_language
+from django.utils.translation import ngettext as _n
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
 from el_pagination.decorators import page_template
 from flickrapi.auth import FlickrAccessToken
-from haystack.exceptions import SearchFieldError
 from haystack.query import SearchQuerySet
 from silk.profiling.profiler import silk_profile
 
@@ -47,16 +46,15 @@ from astrobin.forms import ImageUploadForm, ImageLicenseForm, PrivateMessageForm
     MountEditForm, CameraEditForm, FocalReducerEditForm, SoftwareEditForm, FilterEditForm, AccessoryEditForm, \
     GearUserInfoForm, LocationEditForm, ImageEditWatermarkForm, DeepSky_AcquisitionForm, \
     UserProfileEditPreferencesForm, \
-    ImageRevisionUploadForm, UserProfileEditGearForm
+    ImageRevisionUploadForm, UserProfileEditGearForm, DeleteAccountForm
 from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import Image, UserProfile, Gear, Location, ImageRevision, DeepSky_Acquisition, \
     SolarSystem_Acquisition, GearUserInfo, Telescope, Mount, Camera, FocalReducer, Software, Filter, \
-    Accessory, GearHardMergeRedirect, GlobalStat, App, GearMakeAutoRename, Acquisition
-from astrobin.shortcuts import ajax_response, ajax_success, ajax_fail
+    Accessory, GlobalStat, App, GearMakeAutoRename, Acquisition
+from astrobin.shortcuts import ajax_response, ajax_success
 from astrobin.templatetags.tags import in_upload_wizard
 from astrobin.utils import to_user_timezone, get_client_country_code
 from astrobin_apps_images.services import ImageService
-from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution, PlateSolvingAdvancedSettings
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_restore_from_trash, \
@@ -276,33 +274,41 @@ def upload_error(request, image=None, errors=None):
 
     messages.error(request, message)
 
-    if image is not None:
-        return HttpResponseRedirect(image.get_absolute_url())
+    log.warning("Upload error (%d): %s" % (request.user.pk, message))
 
-    return HttpResponseRedirect('/upload/')
+    if image is not None:
+        url = image.get_absolute_url()
+    else:
+        url = '/upload/?forceClassicUploader'
+
+    return HttpResponseRedirect(url)
 
 
 def upload_size_error(request, max_size, image=None):
-    subscriptions_url = reverse('subscription_list')
-    open_link = "<a href=\"%s\">" % subscriptions_url
+    subscriptions_url = "https://welcome.astrobin.com/pricing"
+    open_link = "<a href=\"%s\" target=\"blank\">" % subscriptions_url
     close_link = "</a>"
-    msg = "Sorry, but this image is too large. Under your current subscription plan, the maximum allowed image size is %(max_size)s. %(open_link)sWould you like to upgrade?%(close_link)s"
-
-    messages.error(request, _(msg) % {
+    msg = "Sorry, but this image is too large. Under your current subscription plan, the maximum allowed image size " \
+          "is %(max_size)s. %(open_link)sWould you like to upgrade?%(close_link)s"
+    compiled_msg = _(msg) % {
         "max_size": filesizeformat(max_size),
         "open_link": open_link,
         "close_link": close_link
-    })
+    }
+
+    messages.error(request, compiled_msg)
+
+    log.warning("Upload error (%d): %s" % (request.user.pk, compiled_msg))
 
     if image is not None:
         return HttpResponseRedirect(image.get_absolute_url())
 
-    return HttpResponseRedirect('/upload/')
+    return HttpResponseRedirect('/upload/?forceClassicUploader')
 
 
 def upload_max_revisions_error(request, max_revisions, image):
-    subscriptions_url = reverse('subscription_list')
-    open_link = "<a href=\"%s\">" % subscriptions_url
+    subscriptions_url = "https://welcome.astrobin.com/pricing"
+    open_link = "<a href=\"%s\" target=\"_blank\">" % subscriptions_url
     close_link = "</a>"
     msg_singular = "Sorry, but you have reached the maximum amount of allowed image revisions. Under your current subscription, the limit is %(max_revisions)s revision per image. %(open_link)sWould you like to upgrade?%(close_link)s"
     msg_plural = "Sorry, but you have reached the maximum amount of allowed image revisions. Under your current subscription, the limit is %(max_revisions)s revisions per image. %(open_link)sWould you like to upgrade?%(close_link)s"
@@ -512,15 +518,17 @@ def image_upload_process(request):
 
     from astrobin_apps_premium.utils import premium_used_percent
 
+    log.info("Classic uploader (%d): submitted" % request.user.pk)
+
     used_percent = premium_used_percent(request.user)
     if used_percent >= 100:
         messages.error(request, _("You have reached your image count limit. Please upgrade!"))
-        return HttpResponseRedirect('/upload/')
+        return HttpResponseRedirect('/upload/?forceClassicUploader')
 
     if settings.READONLY_MODE:
         messages.error(request, _(
             "AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"))
-        return HttpResponseRedirect('/upload/')
+        return HttpResponseRedirect('/upload/?forceClassicUploader')
 
     if 'image_file' not in request.FILES:
         return upload_error(request)
@@ -548,9 +556,12 @@ def image_upload_process(request):
             image_file.file.seek(0)  # Because we opened it with PIL
 
             if ext == '.png' and trial_image.mode == 'I':
-                messages.warning(request, _(
-                    "You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
-        except:
+                indexed_png_error = "You uploaded an Indexed PNG file. AstroBin will need to lower the color count " \
+                                    "to 256 in order to work with it."
+                messages.warning(request, _(indexed_png_error))
+                log.warning("Upload error (%d): %s" % (request.user.pk, indexed_png_error))
+        except Exception as e:
+            log.warning("Upload error (%d): %s" % (request.user.pk, e.message))
             return upload_error(request)
 
     profile = request.user.userprofile
@@ -1049,16 +1060,20 @@ def image_edit_save_license(request):
 @login_required
 @require_GET
 def me(request):
-    return HttpResponseRedirect(
-        '/users/%s/%s' % (request.user.username, '?staging' if 'staging' in request.GET else ''))
+    return HttpResponseRedirect('/users/%s/?%s' % (request.user.username, request.META['QUERY_STRING']))
 
 
 @require_GET
 @silk_profile('User page')
 def user_page(request, username):
-    user = get_object_or_404(
-        User.objects.select_related('userprofile').prefetch_related('groups'),
-        username=username)
+    try:
+        user = UserService.get_case_insensitive(username)
+    except User.DoesNotExist:
+        raise Http404
+
+    if user.username != username:
+        return HttpResponseRedirect(reverse('user_page', args=(user.username,)))
+
     profile = user.userprofile
 
     if profile.deleted:
@@ -1103,6 +1118,7 @@ def user_page(request, username):
         qs = UserService(user).get_public_images()
     wip_qs = UserService(user).get_wip_images()
     corrupted_qs = UserService(user).get_corrupted_images()
+    recovered_qs = UserService(user).get_recovered_images()
 
     if request.user != user:
         qs = qs \
@@ -1126,6 +1142,12 @@ def user_page(request, username):
             return HttpResponseForbidden()
         qs = corrupted_qs
         section = 'corrupted'
+        subsection = None
+    elif 'recovered' in request.GET:
+        if request.user != user and not request.user.is_superuser:
+            return HttpResponseForbidden()
+        qs = recovered_qs
+        section = 'recovered'
         subsection = None
     else:
         #########
@@ -1291,7 +1313,6 @@ def user_page(request, username):
 
     # Calculate some stats
     from django.template.defaultfilters import timesince
-    from pybb.models import Post
 
     date_time = user.date_joined.replace(tzinfo=None)
     span = timesince(date_time)
@@ -1311,33 +1332,31 @@ def user_page(request, username):
         user=user,
         content_type=user_ct).count()
 
-    key = "User.%d.Stats" % user.pk
+    key = "User.%d.Stats.%s" % (user.pk, getattr(request, 'LANGUAGE_CODE', 'en'))
     data = cache.get(key)
     if data is None:
-        sqs = SearchQuerySet()
-        sqs = sqs.filter(username=user.username).models(Image)
-        sqs = sqs.order_by('-uploaded')
-
+        user_sqs = SearchQuerySet().models(User).filter(django_id=user.pk)
         data = {}
-        try:
-            data['images'] = len(sqs)
-            integrated_images = len(sqs.filter(integration__gt=0))
-            data['integration'] = sum([x.integration for x in sqs]) / 3600.0
-            data['avg_integration'] = (data['integration'] / integrated_images) if integrated_images > 0 else 0
-        except SearchFieldError:
-            data['images'] = 0
-            data['integration'] = 0
-            data['avg_integration'] = 0
 
-        cache.set(key, data, 84600)
+        if user_sqs.count():
+            try:
+                data['stats'] = (
+                    (_('Member since'), member_since),
+                    (_('Last login'), last_login),
+                    (_('Total integration time'),
+                     "%.1f %s" % (user_sqs[0].integration, _("hours")) if user_sqs[0].integration else None),
+                    (_('Average integration time'),
+                     "%.1f %s" % (user_sqs[0].avg_integration, _("hours")) if user_sqs[0].avg_integration else None),
+                    (_('Forum posts'), "%d" % user_sqs[0].forum_posts if user_sqs[0].forum_posts else 0),
+                    (_('Comments'), "%d" % user_sqs[0].comments if user_sqs[0].comments else 0),
+                    (_('Likes'), "%d" % user_sqs[0].total_likes_received if user_sqs[0].total_likes_received else 0),
+                )
+            except Exception as e:
+                log.error("User page (%d): unable to get stats from search index: %s" % (user.pk, e.message))
 
-    stats = (
-        (_('Member since'), member_since),
-        (_('Last login'), last_login),
-        (_('Total integration time'), "%.1f %s" % (data['integration'], _("hours"))),
-        (_('Average integration time'), "%.1f %s" % (data['avg_integration'], _("hours"))),
-        (_('Forum posts'), "%d" % Post.objects.filter(user=user).count()),
-    )
+            cache.set(key, data, 300)
+        else:
+            log.error("User page (%d): unable to get user's SearchQuerySet" % user.pk)
 
     response_dict = {
         'followers': followers,
@@ -1352,11 +1371,12 @@ def user_page(request, username):
         'subsection': subsection,
         'active': active,
         'menu': menu,
-        'stats': stats,
-        'images_no': data['images'],
+        'stats': data['stats'] if 'stats' in data else None,
         'alias': 'gallery',
-        'has_corrupted_images': Image.objects_including_wip.filter(
-            corrupted=True, user=user).count() > 0,
+        'has_corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user).count() > 0,
+        'has_recovered_images': Image.objects_including_wip \
+                                    .filter(corrupted=True, user=user) \
+                                    .exclude(recovered=None).count() > 0,
     }
 
     response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
@@ -1373,7 +1393,10 @@ def user_ban(request, username):
     user = get_object_or_404(UserProfile, user__username=username).user
 
     if request.method == 'POST':
+        user.userprofile.deleted_reason = UserProfile.DELETE_REASON_BANNED
+        user.userprofile.save(keep_deleted=True)
         user.userprofile.delete()
+        log.info("User (%d) was banned" % user.pk)
 
     return render(request, 'user/ban.html', {
         'user': user,
@@ -1439,6 +1462,8 @@ def user_page_following(request, username, extra_context=None):
         except User.DoesNotExist:
             pass
 
+    followed_users.sort(key=lambda x: x.username)
+
     template_name = 'user/following.html'
     if request.is_ajax():
         template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
@@ -1471,6 +1496,8 @@ def user_page_followers(request, username, extra_context=None):
             content_type=user_ct)
     ]
 
+    followers.sort(key=lambda x: x.username)
+
     template_name = 'user/followers.html'
     if request.is_ajax():
         template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
@@ -1480,6 +1507,49 @@ def user_page_followers(request, username, extra_context=None):
             user=request.user).user if request.user.is_authenticated() else None,
         'requested_user': user,
         'user_list': followers,
+        'view': request.GET.get('view', 'default'),
+        'private_message_form': PrivateMessageForm(),
+    }
+
+    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+
+    return render(request, template_name, response_dict)
+
+
+@require_GET
+@page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key='users_page')
+def user_page_friends(request, username, extra_context=None):
+    user = get_object_or_404(UserProfile, user__username=username).user
+
+    user_ct = ContentType.objects.get_for_model(User)
+    friends = []
+    followers = [
+        x.user for x in
+        ToggleProperty.objects.filter(
+            property_type="follow",
+            object_id=user.pk,
+            content_type=user_ct)
+    ]
+
+    for follower in followers:
+        if ToggleProperty.objects.filter(
+                property_type="follow",
+                user=user,
+                object_id=follower.pk,
+                content_type=user_ct).exists():
+            friends.append(follower)
+
+    friends.sort(key=lambda x: x.username)
+
+    template_name = 'user/friends.html'
+    if request.is_ajax():
+        template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
+
+    response_dict = {
+        'request_user': UserProfile.objects.get(
+            user=request.user).user if request.user.is_authenticated() else None,
+        'requested_user': user,
+        'user_list': friends,
         'view': request.GET.get('view', 'default'),
         'private_message_form': PrivateMessageForm(),
     }
@@ -1804,7 +1874,7 @@ def user_profile_flickr_import(request):
         'readonly': settings.READONLY_MODE
     }
 
-    log.debug("Flickr import (user %s): accessed view" % request.user.username)
+    log.debug("Flickr import (user %d): accessed view" % request.user.pk)
 
     if not request.user.is_superuser and is_free(request.user) or settings.READONLY_MODE:
         return render(request, "user/profile/flickr_import.html", response_dict)
@@ -1828,7 +1898,7 @@ def user_profile_flickr_import(request):
     if not flickr.token_valid(perms=u'read'):
         # We were never authenticated, or authentication expired. We need
         # to reauthenticate.
-        log.debug("Flickr import (user %s): token not valid" % request.user.username)
+        log.debug("Flickr import (user %d): token not valid" % request.user.pk)
         flickr.get_request_token(settings.BASE_URL + reverse('flickr_auth_callback'))
         authorize_url = flickr.auth_url(perms=u'read')
         request.session['request_token'] = flickr.flickr_oauth.resource_owner_key
@@ -1840,21 +1910,21 @@ def user_profile_flickr_import(request):
         # If we made it this far (it's a GET request), it means that we
         # are authenticated with flickr. Let's fetch the sets and send them to
         # the template.
-        log.debug("Flickr import (user %s): token valid, GET request, fetching sets" % request.user.username)
+        log.debug("Flickr import (user %d): token valid, GET request, fetching sets" % request.user.pk)
 
         # Does it have to be so insane to get the info on the
         # authenticated user?
         sets = flickr.photosets_getList().find('photosets').findall('photoset')
 
-        log.debug("Flickr import (user %s): token valid, fetched sets" % request.user.username)
+        log.debug("Flickr import (user %d): token valid, fetched sets" % request.user.pk)
         template_sets = {}
         for set in sets:
             template_sets[set.find('title').text] = set.attrib['id']
         response_dict['flickr_sets'] = template_sets
     else:
-        log.debug("Flickr import (user %s): token valid, POST request" % request.user.username)
+        log.debug("Flickr import (user %d): token valid, POST request" % request.user.pk)
         if 'id_flickr_set' in request.POST:
-            log.debug("Flickr import (user %s): set in POST request" % request.user.username)
+            log.debug("Flickr import (user %d): set in POST request" % request.user.pk)
             set_id = request.POST['id_flickr_set']
             urls_sq = {}
             for photo in flickr.walk_set(set_id, extras='url_sq'):
@@ -1865,7 +1935,7 @@ def user_profile_flickr_import(request):
             selected_photos = request.POST.getlist('flickr_selected_photos[]')
             # Starting the process of importing
             for index, photo_id in enumerate(selected_photos):
-                log.debug("Flickr import (user %s): iterating photo %s" % (request.user.username, photo_id))
+                log.debug("Flickr import (user %d): iterating photo %s" % (request.user.pk, photo_id))
                 sizes = flickr.photos_getSizes(photo_id=photo_id)
                 info = flickr.photos_getInfo(photo_id=photo_id).find('photo')
 
@@ -1899,7 +1969,7 @@ def user_profile_flickr_import(request):
                                   is_wip=True,
                                   license=profile.default_license)
                     image.save(keep_deleted=True)
-                    log.debug("Flickr import (user %s): saved image %d" % (request.user.username, image.pk))
+                    log.debug("Flickr import (user %d): saved image %d" % (request.user.pk, image.pk))
 
         log.debug("Flickr import (user %s): returning ajax response: %s" % (
             request.user.username, simplejson.dumps(response_dict)))
@@ -1909,7 +1979,7 @@ def user_profile_flickr_import(request):
 
 
 def flickr_auth_callback(request):
-    log.debug("Flickr import (user %s): received auth callback" % request.user.username)
+    log.debug("Flickr import (user %d): received auth callback" % request.user.pk)
     flickr = flickrapi.FlickrAPI(
         settings.FLICKR_API_KEY, settings.FLICKR_SECRET,
         username=request.user.username)
@@ -2041,10 +2111,28 @@ def user_profile_save_preferences(request):
 @login_required
 def user_profile_delete(request):
     if request.method == 'POST':
-        request.user.userprofile.delete()
-        auth.logout(request)
+        form = DeleteAccountForm(instance=request.user.userprofile, data=request.POST)
+        form.full_clean()
+        if form.is_valid():
+            request.user.userprofile.deleted_reason = form.cleaned_data.get('deleted_reason')
+            request.user.userprofile.deleted_reason_other = form.cleaned_data.get('deleted_reason_other')
+            request.user.userprofile.save(keep_deleted=True)
+            request.user.userprofile.delete()
 
-    return render(request, 'user/profile/delete.html', {})
+            log.info("User %s (%d) deleted their account with reason %s ('%s')" % (
+                request.user.username,
+                request.user.pk,
+                request.user.userprofile.deleted_reason,
+                request.user.userprofile.deleted_reason_other,
+            ))
+
+            auth.logout(request)
+
+            return render(request, 'user/profile/deleted.html', {})
+    elif request.method == 'GET':
+        form = DeleteAccountForm(instance=request.user.userprofile)
+
+    return render(request, 'user/profile/delete.html', {'form': form})
 
 
 @login_required
@@ -2056,6 +2144,8 @@ def image_revision_upload_process(request):
         raise Http404
 
     image = get_image_or_404(Image.objects_including_wip, image_id)
+
+    log.info("Classic uploader (revision) (%d) (%d): submitted" % (request.user.pk, image.pk))
 
     if settings.READONLY_MODE:
         messages.error(request, _(
@@ -2140,38 +2230,127 @@ def stats(request):
 
 
 @require_GET
-def trending_astrophotographers(request):
-    response_dict = {}
-
-    if 'page' in request.GET:
-        raise Http404
+def astrophotographers_list(request):
+    if request.user.is_authenticated() and \
+            request.user.userprofile.exclude_from_competitions and \
+            not request.user.is_superuser:
+        return HttpResponseForbidden()
 
     sqs = SearchQuerySet()
 
-    sort = request.GET.get('sort', 'index')
-    if sort == 'index':
-        sort = '-normalized_likes'
-    elif sort == 'followers':
-        sort = '-followers'
-    elif sort == 'integration':
-        sort = '-integration'
-    elif sort == 'images':
-        sort = '-images'
-    else:
-        sort = '-normalized_likes'
+    default_sorting = [
+        '-normalized_likes',
+        '-likes',
+        '-images',
+    ]
 
-    t = request.GET.get('t', '1y')
-    if t not in ('', 'all', None):
-        sort += '_%s' % t
+    sort = request.GET.get('sort', default_sorting)
 
-    queryset = sqs.models(User).order_by(sort)
+    if sort in ('', 'default'):
+        sort = default_sorting
+
+    if sort not in (
+            default_sorting,
+
+            'normalized_likes',
+            'followers',
+            'images',
+            'likes',
+            'integration',
+
+            '-normalized_likes',
+            '-followers',
+            '-images',
+            '-likes',
+            '-integration',
+            '-top_pick_nominations',
+            '-top_picks',
+            '-iotds',
+
+            'normalized_likes',
+            'followers',
+            'images',
+            'likes',
+            'integration',
+            'top_pick_nominations',
+            'top_picks',
+            'iotds',
+    ):
+        raise Http404
+
+    if not isinstance(sort, list):
+        sort = [sort, ]
+
+    queryset = sqs.models(User).exclude(exclude_from_competitions=True).order_by(*sort)
+
+    if 'q' in request.GET:
+        queryset = queryset.filter(text__contains=request.GET.get('q'))
 
     return object_list(
         request,
         queryset=queryset,
-        template_name='trending_astrophotographers.html',
+        template_name='astrophotographers_list.html',
         template_object_name='user',
-        extra_context=response_dict,
+    )
+
+
+@require_GET
+def contributors_list(request):
+    if request.user.is_authenticated() and \
+            request.user.userprofile.exclude_from_competitions and \
+            not request.user.is_superuser:
+        return HttpResponseForbidden()
+
+    queryset = SearchQuerySet()
+
+    default_sorting = [
+        # DEPRECATED: remove once contribution_index is populated
+        '-reputation',
+        '-comment_likes_received',
+        '-forum_post_likes_received',
+        '-comments_written',
+        '-forum_posts'
+    ]
+
+    sort = request.GET.get('sort', default_sorting)
+
+    if sort in ('', 'default'):
+        sort = default_sorting
+
+    if sort not in (
+            default_sorting,
+
+            'comments_written',
+            'comments',
+            'comment_likes_received',
+            'forum_posts',
+            'forum_post_likes_received',
+            # DEPRECATED: remove once contribution_index is populated
+            'reputation',
+
+            '-comments_written',
+            '-comments',
+            '-comment_likes_received',
+            '-forum_posts',
+            '-forum_post_likes_received',
+            # DEPRECATED: remove once contribution_index is populated
+            '-reputation'
+    ):
+        raise Http404
+
+    if not isinstance(sort, list):
+        sort = [sort, ]
+
+    queryset = queryset.models(User).exclude(exclude_from_competitions=True).order_by(*sort)
+
+    if 'q' in request.GET:
+        queryset = queryset.filter(text__contains=request.GET.get('q'))
+
+    return object_list(
+        request,
+        queryset=queryset,
+        template_name='contributors_list.html',
+        template_object_name='user',
     )
 
 

@@ -23,27 +23,31 @@ class HomeTest(TestCase):
         response, image = test_utils_upload_image(self)
         test_utils_approve_image(image)
         response = self.client.get(url)
-        self.assertContains(response, 'VERB_UPLOADED_IMAGE.%d.%d' % (self.user.pk, image.pk))
+        self.assertContains(response, 'UPLOADED_IMAGE.actor-%d.action-object-%d.en-us' % (self.user.pk, image.pk))
 
         # Uploading another image shows up in the stream too
         response, image2 = test_utils_upload_image(self)
         test_utils_approve_image(image2)
         response = self.client.get(url)
-        self.assertContains(response, 'VERB_UPLOADED_IMAGE.%d.%d' % (self.user.pk, image2.pk))
+        self.assertContains(response, 'UPLOADED_IMAGE.actor-%d.action-object-%d.en-us' % (self.user.pk, image2.pk))
 
         # Uploading a revision removes the action about the image upload
         response, revision = test_utils_upload_revision(self, image)
         response = self.client.get(url)
-        self.assertNotContains(response, 'VERB_UPLOADED_IMAGE.%d.%d' % (self.user.pk, image.pk))
+        self.assertNotContains(response, 'UPLOADED_IMAGE.actor-%d.action-object-%d.en-us' % (self.user.pk, image.pk))
         # Still contains action for image2 tho
-        self.assertContains(response, 'VERB_UPLOADED_IMAGE.%d.%d' % (self.user.pk, image2.pk))
-        self.assertContains(response, 'VERB_UPLOADED_REVISION.%d.%d' % (self.user.pk, revision.pk))
+        self.assertContains(response, 'UPLOADED_IMAGE.actor-%d.action-object-%d.en-us' % (self.user.pk, image2.pk))
+        self.assertContains(response, 'UPLOADED_REVISION.actor-%d.action-object-%d.target-%d.en-us' % (self.user.pk,
+                                                                                                       revision.pk,
+                                                                                                       image.pk))
 
         # Uploading another revision removes the previous revisions' stream actions
         response, revision2 = test_utils_upload_revision(self, image)
         response = self.client.get(url)
-        self.assertNotContains(response, 'VERB_UPLOADED_REVISION.%d.%d' % (self.user.pk, revision.pk))
-        self.assertContains(response, 'VERB_UPLOADED_REVISION.%d.%d' % (self.user.pk, revision2.pk))
+        self.assertNotContains(response, 'UPLOADED_IMAGE.actor-%d.action-object-%d.en-us' % (self.user.pk, revision.pk))
+        self.assertContains(response, 'UPLOADED_REVISION.actor-%d.action-object-%d.target-%d.en-us' % (self.user.pk,
+                                                                                                       revision2.pk,
+                                                                                                       image.pk))
 
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_complaint_alert(self, retrieve_primary_thumbnails):

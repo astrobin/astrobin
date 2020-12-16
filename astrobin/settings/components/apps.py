@@ -11,6 +11,8 @@ ASTROBIN_APPS = [
     'astrobin_apps_iotd',
     'astrobin_apps_remote_source_affiliation',
     'astrobin_apps_equipment',
+    'astrobin_apps_json_api',
+    'astrobin_apps_payments',
     'toggleproperties'
 ]
 
@@ -49,7 +51,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'easy_thumbnails',
     'el_pagination',
-    'dfp',
     'django_user_agents',
     'pybb',
     'markup_deprecated',
@@ -69,6 +70,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'progressbarupload',
     'cachalot',
+    'captcha',
 
     'astrobin.apps.AstroBinAppConfig',
 ]

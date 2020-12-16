@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:06+0000\n"
+"POT-Creation-Date: 2020-12-10 21:48+0000\n"
 "PO-Revision-Date: 2014-02-03 01:56+0000\n"
 "Last-Translator: Omar <thekingosm168@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,9 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1391392614.329083\n"
+
+msgid "Type your comment here..."
+msgstr ""
 
 msgid "Cancel"
 msgstr "إلغاء"
@@ -39,6 +42,14 @@ msgstr "لا توجد تعليقات حتى الآن."
 msgid "(deleted)"
 msgstr "(تم الحذف)"
 
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr ""
+
 msgid "Link"
 msgstr "رابط"
 
@@ -54,17 +65,26 @@ msgstr "تحرير"
 msgid "Reply"
 msgstr "رد"
 
+msgid "Like"
+msgstr ""
+
+msgid "Unlike"
+msgstr ""
+
 msgid "The comment cannot be empty."
 msgstr "التعليق لا يمكن أن يكون فارغا."
 
-msgid "Save"
-msgstr "احفظ"
+msgid "Submit"
+msgstr ""
 
-msgid "(comment deleted)"
-msgstr "(تم حذف التعليق)"
+#~ msgid "Save"
+#~ msgstr "احفظ"
 
-msgid "There doesn't seem to be anything here."
-msgstr "يبدو أنه لا يوجد شيئ هنا."
+#~ msgid "(comment deleted)"
+#~ msgstr "(تم حذف التعليق)"
+
+#~ msgid "There doesn't seem to be anything here."
+#~ msgstr "يبدو أنه لا يوجد شيئ هنا."
 
 #~ msgid "Formatting help"
 #~ msgstr "المساعدة في التنسيق "

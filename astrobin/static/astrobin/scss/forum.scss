@@ -73,6 +73,8 @@ th.forum-name {
 }
 
 .post-header {
+  text-align: left;
+
   th {
     position: relative;
     padding: 0 20px !important;
@@ -89,12 +91,23 @@ th.forum-name {
   .post-author {
     font-size: 16px;
     line-height: 18px;
+    display: inline-block;
   }
 
   .post-updated {
     color: $grey-4;
     font-size: 11px;
     font-weight: normal;
+    display: inline-block;
+    margin-left: .5rem;
+  }
+
+  .post-likes {
+    color: $white;
+    font-size: 11px;
+    font-weight: normal;
+    display: inline-block;
+    margin-left: .5rem;
   }
 }
 
@@ -152,6 +165,13 @@ th.forum-name {
     color: $grey-5;
     font-family: Georgia;
   }
+
+  img[alt='smile'] {
+    width: 18px;
+    height: 18px;
+    margin-left: 1px;
+    margin-right: 1px;
+  }
 }
 
 .post-signature {
@@ -165,13 +185,23 @@ th.forum-name {
   margin-top: 20px;
 
   .btn {
-    font-size: 10px;
+    font-size: 11px;
     text-transform: uppercase;
     font-style: italic;
     background: #3C3C3C;
     border: 1px solid #323232;
     color: #B0B0B0;
-    text-shadow: 0 0 2px black;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .4);
+    padding: $spacer-small $spacer-medium;
+    border-radius: 6px;
+
+    &:not(:last-child) {
+      margin-right: $spacer-small;
+    }
+
+    [class^="icon-"] {
+      margin-right: $spacer-small;
+    }
   }
 
   .btn-primary {
@@ -181,7 +211,22 @@ th.forum-name {
 
   .btn-danger {
     color: white;
-    background: red;
+    background: $red;
+  }
+
+  .toggleproperty-add-remove {
+    width: auto !important;
+
+    .btn {
+      width: auto;
+      line-height: 18px;
+      font-size: 11px;
+      padding: $spacer-small $spacer-medium;
+
+      &.active {
+        background: $grey-4;
+      }
+    }
   }
 }
 
@@ -242,8 +287,13 @@ table.post th.post-avatar {
   width: 80px;
 }
 
+.post-form-loading {
+  margin: 0 0 30px;
+}
+
 .post-form {
   margin-top: 40px;
+  display: none;
 
   li {
     list-style: initial;
@@ -256,10 +306,10 @@ table.post th.post-avatar {
   input[type="submit"] {
     width: auto;
   }
+}
 
-  .submit {
-    margin-top: 24px;
-  }
+.submit {
+  margin-top: 24px;
 }
 
 .topic h1, .forum h1, .category h1 {

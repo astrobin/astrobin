@@ -1,8 +1,9 @@
 {% load i18n %}
 {% load tags %}
+{% load common_tags %}
 
 <li>
-    <a href="{% url 'subscription_list' %}">
+    <a href="{% app_redirection_service request '/subscriptions/options' %}">
         <i class="icon-asterisk"></i>
         {% trans "Subscription plans" %}
     </a>
@@ -20,7 +21,14 @@
 <li>
     <a href="{% url 'user_page' request.user.username %}">
         <i class="icon-picture"></i>
-        {% trans "Gallery" %}
+        {% trans "Public Gallery" %}
+    </a>
+</li>
+
+<li>
+    <a href="{% url 'user_page' request.user.username %}?staging">
+        <i class="icon-lock"></i>
+        {% trans "Staging Area" %}
     </a>
 </li>
 

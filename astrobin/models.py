@@ -179,6 +179,13 @@ SOLAR_SYSTEM_SUBJECT_CHOICES = (
     (SolarSystemSubject.NEPTUNE, _("Neptune")),
     (SolarSystemSubject.MINOR_PLANET, _("Minor planet")),
     (SolarSystemSubject.COMET, _("Comet")),
+    (SolarSystemSubject.OCCULTATION, _("Occultation")),
+    (SolarSystemSubject.CONJUNCTION, _("Conjunction")),
+    (SolarSystemSubject.PARTIAL_LUNAR_ECLIPSE, _("Partial lunar eclipse")),
+    (SolarSystemSubject.TOTAL_LUNAR_ECLIPSE, _("Total lunar eclipse")),
+    (SolarSystemSubject.PARTIAL_SOLAR_ECLIPSE, _("Partial solar eclipse")),
+    (SolarSystemSubject.ANULAR_SOLAR_ECLIPSE, _("Anular solar eclipse")),
+    (SolarSystemSubject.TOTAL_SOLAR_ECLIPSE, _("Total solar eclipse")),
     (SolarSystemSubject.OTHER, _("Other")),
 )
 
@@ -671,7 +678,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     )
 
     ACQUISITION_TYPES = (
-        'TRADITIONAL',
+        'REGULAR',
         'EAA',
         'LUCKY',
         'DRAWING',
@@ -679,8 +686,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     )
 
     ACQUISITION_TYPE_CHOICES = (
-        ('TRADITIONAL', _("Traditional")),
-        ('EAA', _("Electronically-Assisted Astronomy (EAA)")),
+        ('REGULAR', _("Regular (e.g. medium/long exposure with a CCD or DSLR)")),
+        ('EAA', _("Electronically-Assisted Astronomy (EAA, e.g. based on a live video feed)")),
         ('LUCKY', _("Lucky imaging")),
         ('DRAWING', _("Drawing/Sketch")),
         ('OTHER', _("Other/Unknown")),
@@ -741,6 +748,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("DSC", "DeepSkyChile"),
         ("DSW", "DeepSkyWest"),
         ("eEyE", "e-EyE Extremadura"),
+        ("EITS", "Eye In The Sky"),
         ("GFA", "Goldfield Astronomical Observatory"),
         ("GMO", "Grand Mesa Observatory"),
         ("HMO", "Heaven's Mirror Observatory"),
@@ -761,7 +769,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("SPVO", "San Pedro Valley Observatory"),
         ("SRO", "Sierra Remote Observatories"),
         ("SRO2", "Sky Ranch Observatory"),
-        ("SPOO", "SkyPi Online Observatory"),
+        ("SPOO", "SkyPi Remote Observatory"),
         ("SLO", "Slooh"),
         ("SSLLC", "Stellar Skies LLC"),
 
@@ -786,10 +794,24 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         'accessories': Accessory,
     }
 
+    HEMISPHERE_TYPE_UNKNOWN = 'HEMISPHERE_TYPE_UNKNOWN'
+    HEMISPHERE_TYPE_NORTHERN = 'HEMISPHERE_TYPE_NORTHERN'
+    HEMISPHERE_TYPE_SOUTHERN = 'HEMISPHERE_TYPE_SOUTHERN'
+
     solutions = GenericRelation(Solution)
 
     corrupted = models.BooleanField(
         default=False
+    )
+
+    recovered = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
+    recovery_ignored = models.DateTimeField(
+        null=True,
+        blank=True
     )
 
     hash = models.CharField(
@@ -797,6 +819,45 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         default=image_hash,
         null=True,
         unique=True
+    )
+
+    uploader_name = models.CharField(
+        max_length=256,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_upload_length = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_offset = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_expires = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_metadata = models.CharField(
+        max_length=512,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_temporary_file_path = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+        editable=False,
     )
 
     title = models.CharField(
@@ -809,7 +870,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         choices=ACQUISITION_TYPE_CHOICES,
         max_length=32,
         null=False,
-        default='TRADITIONAL'
+        default='REGULAR'
     )
 
     subject_type = models.CharField(
@@ -843,7 +904,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             "If the main subject of your image is a body in the solar system, please select which (or which type) it is."),
         null=True,
         blank=True,
-        max_length=16,
+        max_length=32,
         choices=SOLAR_SYSTEM_SUBJECT_CHOICES,
     )
 
@@ -1163,22 +1224,13 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         return field
 
-    def get_final_revision_label(self):
-        # Avoid hitting the db by potentially exiting early
-        if self.is_final:
-            return '0'
-
-        for r in self.revisions.all():
-            if r.is_final:
-                return r.label
-
-        return '0'
 
     def thumbnail_raw(self, alias, thumbnail_settings={}):
         import urllib2
         from django.core.files.base import ContentFile
         from easy_thumbnails.files import get_thumbnailer
         from astrobin.s3utils import OverwritingFileSystemStorage
+        from astrobin_apps_images.services import ImageService
 
         revision_label = thumbnail_settings.get('revision_label', 'final')
 
@@ -1191,26 +1243,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         options = dict(settings.THUMBNAIL_ALIASES[''][alias].copy(), **thumbnail_settings)
 
-        if alias in ("gallery", "gallery_inverted", "collection", "thumb"):
-            if revision_label == '0':
-                if self.square_cropping:
-                    options['box'] = self.square_cropping
-                    options['crop'] = True
-            elif revision_label == 'final':
-                try:
-                    revision = ImageRevision.objects.get(image=self, label=self.get_final_revision_label())
-                    if revision.square_cropping:
-                        options['box'] = revision.square_cropping
-                        options['crop'] = True
-                except ImageRevision.DoesNotExist:
-                    if self.square_cropping:
-                        options['box'] = self.square_cropping
-                        options['crop'] = True
-            else:
-                revision = ImageRevision.objects.get(image=self, label=revision_label)
-                if revision.square_cropping:
-                    options['box'] = revision.square_cropping
-                    options['crop'] = True
+        crop_box = ImageService(self).get_crop_box(alias, revision_label=revision_label)
+        if crop_box and alias not in ('real', 'real_inverted'):
+            options['box'] = crop_box
+            options['crop'] = True
 
         field = self.get_thumbnail_field(revision_label)
         if not field.name:
@@ -1323,7 +1359,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             alias = 'thumb'
 
         if revision_label in (None, 'None', 'final'):
-            revision_label = self.get_final_revision_label()
+            from astrobin_apps_images.services import ImageService
+            revision_label = ImageService(self).get_final_revision_label()
             options['revision_label'] = revision_label
 
         cache_key = self.thumbnail_cache_key(field, alias)
@@ -1393,8 +1430,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         from astrobin.s3utils import OverwritingFileSystemStorage
         from astrobin_apps_images.models import ThumbnailGroup
 
-        log.debug("Image %d: invalidating thumbnails for field / label: %s / %s" % (self.id, field, revision_label))
-
         thumbnailer = get_thumbnailer(field)
         local_filename = field.storage.generate_local_name(field.name)
         local_thumbnailer = get_thumbnailer(
@@ -1438,7 +1473,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 try:
                     os.remove(os.path.join(field.storage.local_storage.location, local_filename))
                 except OSError:
-                    log.debug("Image %d: locally cached file not found." % self.id)
+                    pass
 
                 # Then we purge the Cloudflare cache
                 try:
@@ -1545,12 +1580,61 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         default=False
     )
 
+    recovered = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
+    recovery_ignored = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
     image_file = models.ImageField(
         upload_to=image_upload_path,
         height_field='h',
         width_field='w',
         null=True,
         max_length=256,
+    )
+
+    uploader_name = models.CharField(
+        max_length=256,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_upload_length = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_offset = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_expires = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_metadata = models.CharField(
+        max_length=512,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_temporary_file_path = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+        editable=False,
     )
 
     square_cropping = ImageRatioField(
@@ -1981,11 +2065,36 @@ class UserProfile(SafeDeleteModel):
         'Accessory': 'accessories',
     }
 
+    DELETE_REASON_NOT_ACTIVE = 'NOT_ACTIVE'
+    DELETE_REASON_DID_NOT_MEET_EXPECTATIONS = 'DID_NOT_MEET_EXPECTATIONS'
+    DELETE_REASON_DOESNT_WORKE = 'DOESNT_WORK'
+    DELETE_REASON_TOO_EXPENSIVE = 'TOO_EXPENSIVE'
+    DELETE_REASON_PREFER_NOT_TO_SAY = 'PREFER_NOT_TO_SAY'
+    DELETE_REASON_OTHER = 'OTHER'
+    DELETE_REASON_IMAGE_SPAM = 'IMAGE_SPAM'
+    DELETE_REASON_FORUM_SPAM = 'FORUM_SPAM'
+    DELETE_REASON_BANNED = 'BANNED'
+
+    DELETE_REASON_CHOICES = (
+        (DELETE_REASON_NOT_ACTIVE, _('I am no longer active in astrophotography')),
+        (DELETE_REASON_DID_NOT_MEET_EXPECTATIONS, _('This website did not meet my expectations')),
+        (DELETE_REASON_DOESNT_WORKE, _('Something on this website doesn\'t work for me')),
+        (DELETE_REASON_TOO_EXPENSIVE, _('The paid subscriptions are too expensive')),
+        (DELETE_REASON_PREFER_NOT_TO_SAY, _('I prefer not to say')),
+        (DELETE_REASON_OTHER, _('Other')),
+    )
+
     user = models.OneToOneField(User, editable=False)
 
     updated = models.DateTimeField(
         editable=False,
         auto_now=True,
+        null=True,
+        blank=True,
+    )
+
+    last_seen = models.DateTimeField(
+        editable=False,
         null=True,
         blank=True,
     )
@@ -2040,6 +2149,23 @@ class UserProfile(SafeDeleteModel):
         symmetrical=False
     )
 
+    delete_reason = models.CharField(
+        choices=DELETE_REASON_CHOICES,
+        max_length=32,
+        null=True,
+        blank=False,
+        verbose_name=_("Delete reason"),
+        help_text=_("Why are you deleting your AstroBin account?"),
+    )
+
+    delete_reason_other = models.CharField(
+        max_length=512,
+        null=True,
+        blank=True,
+        verbose_name=_("Other"),
+        help_text=_("Please tell us why you are deleting your account (minimum 30 characters). Thanks!"),
+    )
+
     # Counter for uploaded images.
     premium_counter = models.PositiveIntegerField(
         default=0,
@@ -2071,7 +2197,25 @@ class UserProfile(SafeDeleteModel):
         default=False,
         verbose_name=_("I want to be excluded from competitions"),
         help_text=_(
-            "Check this box to be excluded from competitions and contests, such as the Image of the Day, the Top Picks, other custom contests. This will remove you from the leaderboards and hide your AstroBin Index."),
+            "Check this box to be excluded from competitions and contests, such as the Image of the Day, the Top "
+            "Picks, other custom contests. This will remove you from the leaderboards and hide your Image Index "
+            "and Contribution Index."),
+    )
+
+    banned_from_competitions = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    astrobin_index_bonus = models.SmallIntegerField(
+        null=True,
+        blank=True,
+    )
+
+    plate_solution_overlay_on_full_disabled = models.DateTimeField(
+        null=True,
+        blank=True,
     )
 
     # Gear
@@ -2210,6 +2354,10 @@ class UserProfile(SafeDeleteModel):
         null=True
     )
 
+    recovered_images_notice_sent = models.DateTimeField(
+        null=True
+    )
+
     # Preferences (notification preferences are stored in the django
     # notification model)
     language = models.CharField(
@@ -2286,6 +2434,18 @@ class UserProfile(SafeDeleteModel):
         _('Receive e-mails from subscribed forum topics'),
         default=True)
 
+    image_recovery_process_started = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    image_recovery_process_completed = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
     def get_display_name(self):
         return self.real_name if self.real_name else self.user.__unicode__()
 
@@ -2311,11 +2471,6 @@ class UserProfile(SafeDeleteModel):
         from haystack.exceptions import SearchFieldError
         from haystack.query import SearchQuerySet
 
-        scores = {
-            'user_scores_index': 0,
-            'user_scores_followers': 0,
-        }
-
         cache_key = "astrobin_user_score_%s" % self.user.username
         scores = cache.get(cache_key)
 
@@ -2325,17 +2480,19 @@ class UserProfile(SafeDeleteModel):
                     SearchQuerySet().models(User).filter(django_id=self.user.pk)[0]
             except (IndexError, SearchFieldError):
                 return {
-                    'user_scores_index': 0,
-                    'user_scores_followers': 0
+                    'user_scores_index': None,
+                    'user_scores_contribution_index': None,
+                    'user_scores_followers': None
                 }
 
-            index = user_search_result.normalized_likes
-            followers = user_search_result.followers
+            scores = {
+                'user_scores_index': user_search_result.normalized_likes,
+                # DEPRECATED: remove once contribution_index is populated
+                'user_scores_contribution_index': user_search_result.reputation,
+                'user_scores_followers': user_search_result.followers,
+            }
 
-            scores = {}
-            scores['user_scores_index'] = index
-            scores['user_scores_followers'] = followers
-            cache.set(cache_key, scores, 43200)
+            cache.set(cache_key, scores, 300)
 
         return scores
 
@@ -2618,6 +2775,9 @@ class ImageOfTheDayCandidate(models.Model):
     def save(self, *args, **kwargs):
         if self.image.user.userprofile.exclude_from_competitions:
             raise ValidationError, "User is excluded from competitions"
+
+        if self.image.user.userprofile.banned_from_competitions:
+            raise ValidationError, "User is banned from competitions"
 
         super(ImageOfTheDayCandidate, self).save(*args, **kwargs)
 

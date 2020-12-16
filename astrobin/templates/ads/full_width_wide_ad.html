@@ -1,0 +1,18 @@
+{% load i18n %}
+{% load tags %}
+{% load astrobin_apps_premium_tags %}
+
+{% show_ads_on_page as show_ads_on_page %}
+
+{% if show_ads_on_page %}
+    <div class="advertisement full-width-wide-ad {{ ad_container_classes }}">
+        <div id='{{ NATIVE_RESPONSIVE_WIDE_SLOT }}'>
+            <script>
+                googletag.cmd.push(function () {
+                    googletag.display('{{ NATIVE_RESPONSIVE_WIDE_SLOT }}');
+                });
+            </script>
+        </div>
+    </div>
+{% endif %}
+

@@ -1,2 +1,7 @@
 {% load i18n %}
-{% blocktrans %}<a href="{{url}}"><strong>{{user}}</strong> likes your image!</a>{% endblocktrans %}
+
+<a href="{{ url }}">
+    {% blocktrans trimmed %}
+        {{user}} likes your image: {{title}}
+    {% endblocktrans %}
+</a>

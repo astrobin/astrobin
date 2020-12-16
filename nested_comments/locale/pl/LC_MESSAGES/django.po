@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:06+0000\n"
+"POT-Creation-Date: 2020-12-10 21:48+0000\n"
 "PO-Revision-Date: 2014-06-11 19:14+0000\n"
 "Last-Translator: jcbo <jcbo@wp.pl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,9 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1402514072.668022\n"
+
+msgid "Type your comment here..."
+msgstr ""
 
 msgid "Cancel"
 msgstr "Anuluj"
@@ -39,6 +42,14 @@ msgstr "Nie ma jeszcze komentarzy."
 msgid "(deleted)"
 msgstr "(usunięty)"
 
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr ""
+
 msgid "Link"
 msgstr "Łącze"
 
@@ -54,17 +65,26 @@ msgstr "Edytuj"
 msgid "Reply"
 msgstr "Odpowiedz"
 
+msgid "Like"
+msgstr ""
+
+msgid "Unlike"
+msgstr ""
+
 msgid "The comment cannot be empty."
 msgstr "Komentarz nie może być pusty"
 
-msgid "Save"
-msgstr "Zapisz"
+msgid "Submit"
+msgstr ""
 
-msgid "(comment deleted)"
-msgstr "(komentarz usunięty)"
+#~ msgid "Save"
+#~ msgstr "Zapisz"
 
-msgid "There doesn't seem to be anything here."
-msgstr "Nic tu nie ma."
+#~ msgid "(comment deleted)"
+#~ msgstr "(komentarz usunięty)"
+
+#~ msgid "There doesn't seem to be anything here."
+#~ msgstr "Nic tu nie ma."
 
 #~ msgid "Formatting help"
 #~ msgstr "Pomoc na temat formatowania"

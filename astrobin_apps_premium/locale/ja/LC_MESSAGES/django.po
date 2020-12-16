@@ -3,71 +3,72 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:19+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2020-12-10 21:53+0000\n"
+"PO-Revision-Date: 2020-11-25 07:49+0000\n"
+"Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1606290596.000000\n"
 
 msgid "I wasn't really affected by the data loss"
-msgstr ""
+msgstr "データ消失の影響はあまりなかったのですが"
 
 msgid "I don't require compensation: I want to support AstroBin"
-msgstr ""
+msgstr "補償は必要ありません、私はAstroBinをサポートしたいのです。"
 
 msgid "I would like to try AstroBin Ultimate for free for 1 month"
-msgstr ""
+msgstr "AstroBin Ultimateを1ヶ月間無料で試してみたい。"
 
 msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
-msgstr ""
+msgstr "AstroBin Ultimateを3ヶ月間無料で使ってみたいと感じている"
 
 msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
-msgstr ""
+msgstr "AstroBin Ultimateを6ヶ月間無料で使ってみたいと感じている"
 
 msgid "Requested compensation"
-msgstr ""
+msgstr "依頼された補償"
 
 msgid "Please indicate if and how much you would like to be compensated."
-msgstr ""
+msgstr "補償をご希望の場合は、その内容と金額をご記入ください。"
 
 msgid "Your migration data"
-msgstr ""
+msgstr "あなたの移行データ"
 
 msgid "Total amount donated last year"
-msgstr ""
+msgstr "昨年の全寄付金額"
 
 msgid "First payment"
-msgstr ""
+msgstr "最初の支払い"
 
 msgid "Price for Premium"
-msgstr ""
+msgstr "プレミアムの価格"
 
 msgid "Days covered"
 msgstr ""
 
 msgid "Premium expiration"
-msgstr ""
+msgstr "プレミアム期間終了"
 
 msgid "Your donations last year"
-msgstr ""
+msgstr "あなたの昨年の寄付金額"
 
 msgid "Amount"
-msgstr ""
+msgstr "総計"
 
 msgid "Date"
-msgstr ""
+msgstr "日付"
 
 msgid "Subscription"
-msgstr ""
+msgstr "申し込み"
 
 msgid "Data loss compensation request"
 msgstr ""
@@ -243,4 +244,13 @@ msgid "Thank you!"
 msgstr ""
 
 msgid "Your AstroBin subscription will be automatically renewed in one week"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will be "
+"automatically renewed in 30 days."
+msgstr ""
+
+msgid "Your AstroBin subscription will be automatically renewed in 30 days"
 msgstr ""

@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.http import Http404
+from hitcount.models import HitCount
 from persistent_messages.models import Message
 from tastypie import fields, http
 from tastypie.authentication import Authentication
@@ -68,6 +69,8 @@ class ImageRevisionResource(ModelResource):
     url_real = fields.CharField()
     url_duckduckgo = fields.CharField()
     url_duckduckgo_small = fields.CharField()
+    url_histogram = fields.CharField()
+    url_skyplot = fields.CharField()
 
     is_solved = fields.BooleanField()
 
@@ -94,6 +97,8 @@ class ImageRevisionResource(ModelResource):
             'url_real',
             'url_duckduckgo',
             'url_duckduckgo_small',
+            'url_histogram',
+            'url_skyplot',
 
             'is_final',
             'is_solved',
@@ -133,6 +138,14 @@ class ImageRevisionResource(ModelResource):
 
     def dehydrate_url_duckduckgo_small(self, bundle):
         return '%s/%s/%s/rawthumb/duckduckgo_small/' % (settings.BASE_URL, bundle.obj.image.get_id(), bundle.obj.label)
+
+    def dehydrate_url_histogram(self, bundle):
+        return '%s/%s/%s/rawthumb/histogram/' % (settings.BASE_URL, bundle.obj.image.get_id(), bundle.obj.label)
+
+    def dehydrate_url_skyplot(self, bundle):
+        return bundle.obj.solution.skyplot_zoom1.url \
+            if bundle.obj.solution and bundle.obj.solution.skyplot_zoom1 \
+            else None
 
     def dehydrate_is_solved(self, bundle):
         return bundle.obj.solution != None
@@ -177,6 +190,8 @@ class ImageResource(ModelResource):
     updated = fields.DateField('updated')
 
     locations = fields.ToManyField(LocationResource, 'locations')
+    data_source = fields.CharField('data_source', null=True)
+    remote_source = fields.CharField('remote_source', null=True)
 
     url_thumb = fields.CharField()
     url_gallery = fields.CharField()
@@ -185,6 +200,8 @@ class ImageResource(ModelResource):
     url_real = fields.CharField()
     url_duckduckgo = fields.CharField()
     url_duckduckgo_small = fields.CharField()
+    url_histogram = fields.CharField()
+    url_skyplot = fields.CharField()
 
     is_solved = fields.BooleanField()
 
@@ -193,6 +210,12 @@ class ImageResource(ModelResource):
     pixscale = fields.DecimalField()
     orientation = fields.DecimalField()
     radius = fields.DecimalField()
+
+    likes = fields.IntegerField()
+    bookmarks = fields.IntegerField()
+    comments = fields.IntegerField()
+    views = fields.IntegerField()
+
 
     class Meta:
         authentication = AppAuthentication()
@@ -204,6 +227,8 @@ class ImageResource(ModelResource):
             'w',
             'h',
             'locations',
+            'data_source',
+            'remote_source',
 
             'url_thumb',
             'url_gallery',
@@ -212,6 +237,8 @@ class ImageResource(ModelResource):
             'url_real',
             'url_duckduckgo',
             'url_duckduckgo_small',
+            'url_histogram',
+            'url_skyplot',
 
             'uploaded',
             'published',
@@ -246,6 +273,8 @@ class ImageResource(ModelResource):
             'imaging_cameras': ALL,
             'w': ALL,
             'h': ALL,
+            'data_source': ALL,
+            'remote_source': ALL,
         }
         ordering = ['uploaded']
 
@@ -269,6 +298,14 @@ class ImageResource(ModelResource):
 
     def dehydrate_url_duckduckgo_small(self, bundle):
         return '%s/%s/0/rawthumb/duckduckgo_small/' % (settings.BASE_URL, bundle.obj.get_id())
+
+    def dehydrate_url_histogram(self, bundle):
+        return '%s/%s/0/rawthumb/histogram/' % (settings.BASE_URL, bundle.obj.get_id())
+
+    def dehydrate_url_skyplot(self, bundle):
+        return bundle.obj.solution.skyplot_zoom1.url \
+            if bundle.obj.solution and bundle.obj.solution.skyplot_zoom1 \
+            else None
 
     def dehydrate_is_solved(self, bundle):
         return bundle.obj.solution != None
@@ -318,6 +355,24 @@ class ImageResource(ModelResource):
     def dehydrate_imaging_cameras(self, bundle):
         cameras = bundle.obj.imaging_cameras.all()
         return [unicode(x) for x in cameras]
+
+    def dehydrate_likes(self, bundle):
+        return ToggleProperty.objects.toggleproperties_for_object('like', bundle.obj).count()
+
+    def dehydrate_bookmarks(self, bundle):
+        return ToggleProperty.objects.toggleproperties_for_object('bookmark', bundle.obj).count()
+
+    def dehydrate_comments(self, bundle):
+        return bundle.obj.nested_comments.count()
+
+    def dehydrate_views(self, bundle):
+        try:
+            return HitCount.objects.get(
+                object_pk=bundle.obj.pk,
+                content_type=ContentType.objects.get_for_model(Image),
+            ).hits
+        except (HitCount.DoesNotExist, HitCount.MultipleObjectsReturned):
+            return 0
 
     def get_detail(self, request, **kwargs):
         """

@@ -1,0 +1,19 @@
+{% load i18n %}
+
+<div class="modal hide fade" id="full-subject-list-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>{% trans "Contains" %}</h3>
+    </div>
+
+    <div class="modal-body">
+        {% for s in subjects %}
+            <a href="/search/?q={{ s|escape }}">{{ s|escape }}</a>
+            {% if not forloop.last %}&nbsp;&middot;&nbsp;{% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="modal-footer">
+        <a class="btn" data-dismiss="modal">{% trans "Close" %}</a>
+    </div>
+</div>

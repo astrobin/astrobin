@@ -73,6 +73,18 @@ NOTICE_TYPES = (
         2,
     ),
     (
+        'new_comment_like',
+        _('Your comment was liked'),
+        '',
+        2,
+    ),
+    (
+        'new_forum_post_like',
+        _('Your forum post was liked'),
+        '',
+        2,
+    ),
+    (
         'new_image_from_gear',
         _('New image with some gear you follow'),
         '',
@@ -163,6 +175,12 @@ NOTICE_TYPES = (
         2
     ),
     (
+        'expiring_subscription_autorenew_30d',
+        _('Your subscription will be renewed in one 30 days'),
+        '',
+        2
+    ),
+    (
         'missing_data_source',
         _('You have images with a missing "Data source"'),
         '',
@@ -176,7 +194,38 @@ NOTICE_TYPES = (
     ),
     (
         'never_activated_account',
-        _('Would you like to activate your account?"'),
+        _('Would you like to activate your account?'),
+        '',
+        2
+    ),
+    (
+        'new_forum_post_mention',
+        _('You were mentioned in a forum post'),
+        '',
+        2,
+    ),
+    (
+        'new_comment_mention',
+        _('You were mentioned in a comment'),
+        '',
+        2,
+    ),
+    (
+        'welcome_to_astrobin',
+        _('Welcome to AstroBin!'),
+        '',
+        2,
+    ),
+    (
+        'congratulations_for_your_first_image',
+        _("Congratulations for your first image on AstroBin!"),
+        '',
+        2
+    ),
+
+    (
+        'new_subscription',
+        _("Thank you for getting a subscription!"),
         '',
         2
     )

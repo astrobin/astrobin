@@ -29,24 +29,51 @@
 {% endblock %}
 
 {% block content %}
-    {% if show_contains %}
+    {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" or show_contains %}
     <div class="subtitle">
-        <i class="icon icon-paperclip"></i>
-        <strong>{% trans "Contains" %}:</strong>&nbsp;
-        {% if image.subject_type == enums.SubjectType.DEEP_SKY %}
-            {% for s in subjects %}
-                <a href="/search/?q={{s|escape}}">{{s|escape}}</a>{% if not forloop.last %},{% endif %}
-            {% endfor %}
-        {% else %}
-            {{subject_type}}
+        {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" %}
+            <i class="icon icon-globe"></i>
+            <strong>{% trans "Hemisphere" %}:</strong>&nbsp;
+            {% if hemisphere == "HEMISPHERE_TYPE_NORTHERN" %}
+                {% trans "Northern" %}
+            {% else %}
+                {% trans "Southern" %}
+            {% endif %}
+
+            {% if show_contains %}
+                &nbsp;&middot;&nbsp;
+            {% endif %}
+        {% endif %}
+
+        {% if show_contains %}
+            <i class="icon icon-paperclip"></i>
+            <strong>{% trans "Contains" %}:</strong>&nbsp;
+            {% if image.subject_type == enums.SubjectType.DEEP_SKY %}
+                {% for s in subjects|slice:":30" %}
+                    <a href="/search/?q={{s|escape}}">{{s|escape}}</a>
+                    {% if not forloop.last %}&nbsp;&middot;&nbsp;{% endif %}
+                {% endfor %}
+
+                {% if subjects|length > 30 %}
+                    &nbsp;&middot;&nbsp;
+                    <a href="#full-subject-list-modal" data-toggle="modal">
+                        {% blocktrans trimmed with count=subjects|length|add:"-30" %}
+                            And {{ count }} more.
+                        {% endblocktrans %}
+                    </a>
+                {% endif %}
+            {% else %}
+                {{subject_type}}
+            {% endif %}
         {% endif %}
     </div> <!-- subtitle -->
     {% endif %}
 
-
-    <div class="visible-phone">
-        {% include 'image/detail/phone_ad.html' %}
-    </div>
+    {% if request.user_agent.is_mobile %}
+        {% with ad_container_classes='visible-phone' %}
+            {% include 'ads/wide_ad.html' %}
+        {% endwith %}
+    {% endif %}
 
     {% include 'image/detail/pending_moderation_banner.html' %}
     {% include 'image/detail/wip_banner.html' %}
@@ -68,9 +95,11 @@
             {% include 'image/detail/like.html' %}
             {% include 'image/detail/bookmark.html' %}
 
-            <div class="hidden-phone">
-                {% include 'image/detail/ad.html' %}
-            </div>
+            {% if not request.user_agent.is_mobile %}
+                {% with ad_container_classes='hidden-phone' %}
+                    {% include 'image/detail/ad.html' %}
+                {% endwith %}
+            {% endif %}
 
             {% include 'image/detail/revisions.html' %}
             {% include 'image/detail/skyplot.html' %}
@@ -90,9 +119,11 @@
     {% include 'image/detail/modals/bookmarked_this.html' %}
     {% include 'image/detail/modals/send_to_group.html' %}
     {% include 'image/detail/modals/cant_like.html' %}
+    {% include 'image/detail/modals/cant_unlike.html' %}
     {% include 'image/detail/modals/flag_thumbnails.html' %}
     {% include 'image/detail/modals/demote.html' %}
     {% include 'image/detail/modals/promote.html' %}
+    {% include 'image/detail/modals/full-subject-list.html' %}
 {% endblock %}
 
 {% block extra_js %}

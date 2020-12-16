@@ -7,6 +7,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User, Group as DjangoGroup
 from django.contrib.contenttypes.models import ContentType
+from django.core.cache import cache
 from django.core.urlresolvers import reverse as reverse_url
 from django.db import IntegrityError
 from django.db import transaction
@@ -16,6 +17,7 @@ from django.utils.translation import ugettext_lazy as _
 from gadjo.requestprovider.signals import get_request
 from pybb.models import Forum, Topic, Post
 from rest_framework.authtoken.models import Token
+from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete
 from subscription.models import UserSubscription, Subscription
 from subscription.signals import subscribed, paid, signed_up
@@ -29,10 +31,12 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_lite, is_any_premium_subscription, is_lite_2020, is_any_ultimate, is_premium_2020, is_premium)
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from astrobin_apps_users.services import UserService
+from common.services.mentions_service import MentionsService
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 from .gear import get_correct_gear
 from .models import Image, ImageRevision, Gear, UserProfile
+from .search_indexes import ImageIndex, UserIndex
 from .stories import add_story
 
 log = logging.getLogger('apps')
@@ -43,9 +47,12 @@ def image_pre_save(sender, instance, **kwargs):
         instance.published = datetime.datetime.now()
 
     try:
-        image = sender.objects.get(pk=instance.pk)
+        image = sender.objects_including_wip.get(pk=instance.pk)
     except sender.DoesNotExist:
-        pass
+        user_scores_index = instance.user.userprofile.get_scores()['user_scores_index']
+        if user_scores_index >= 1.00 or is_any_premium_subscription(instance.user):
+            instance.moderated_when = datetime.date.today()
+            instance.moderator_decision = 1
     else:
         if image.moderator_decision != 1 and instance.moderator_decision == 1:
             # This image is being approved
@@ -72,12 +79,6 @@ def image_post_save(sender, instance, created, **kwargs):
             group.images.add(instance)
 
     if created:
-        user_scores_index = instance.user.userprofile.get_scores()['user_scores_index']
-        if user_scores_index >= 1.00 or is_any_premium_subscription(instance.user):
-            instance.moderated_when = datetime.date.today()
-            instance.moderator_decision = 1
-            instance.save(keep_deleted=True)
-
         instance.user.userprofile.premium_counter += 1
         instance.user.userprofile.save(keep_deleted=True)
         profile_saved = True
@@ -97,6 +98,12 @@ def image_post_save(sender, instance, created, **kwargs):
             if instance.moderator_decision == 1:
                 add_story(instance.user, verb='VERB_UPLOADED_IMAGE', action_object=instance)
 
+        if Image.all_objects.filter(user=instance.user).count() == 1:
+            push_notification([instance.user], 'congratulations_for_your_first_image', {
+                'BASE_URL': settings.BASE_URL,
+                'PREMIUM_MAX_IMAGES_FREE': settings.PREMIUM_MAX_IMAGES_FREE
+            })
+
     if not profile_saved:
         # Trigger update of auto_add fields
         try:
@@ -105,7 +112,8 @@ def image_post_save(sender, instance, created, **kwargs):
             pass
 
     # Trigger real time search index
-    instance.user.save()
+    if instance.user.userprofile.updated < datetime.datetime.now() - datetime.timedelta(minutes=5):
+        instance.user.save()
 
 
 post_save.connect(image_post_save, sender=Image)
@@ -117,8 +125,12 @@ def image_post_delete(sender, instance, **kwargs):
         with transaction.atomic():
             user.userprofile.save(keep_deleted=True)
 
+    ImageIndex().remove_object(instance)
+
     try:
-        if is_lite(instance.user):
+        if instance.uploaded > datetime.datetime.now() - relativedelta(hours=24):
+            decrease_counter(instance.user)
+        elif is_lite(instance.user):
             usersub = premium_get_valid_usersubscription(instance.user)
             usersub_created = usersub.expires - relativedelta(years=1)
             dt = instance.uploaded.date() - usersub_created
@@ -159,11 +171,27 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
 post_save.connect(imagerevision_post_save, sender=ImageRevision)
 
 
+def nested_comment_pre_save(sender, instance, **kwargs):
+    if instance.pk:
+        try:
+            previous_mentions = MentionsService.get_mentions(sender.objects.get(pk=instance.pk).text)
+            current_mentions = MentionsService.get_mentions(instance.text)
+            mentions = [item for item in current_mentions if item not in previous_mentions]
+        except sender.DoesNotExist:
+            mentions = []
+
+        cache.set("user.%d.comment_pre_save_mentions" % instance.author.pk, mentions, 2)
+
+
+pre_save.connect(nested_comment_pre_save, sender=NestedComment)
+
+
 def nested_comment_post_save(sender, instance, created, **kwargs):
     if created:
         model_class = instance.content_type.model_class()
         obj = instance.content_type.get_object_for_this_type(id=instance.object_id)
         url = settings.BASE_URL + instance.get_absolute_url()
+        mentions = MentionsService.get_mentions(instance.text)
 
         if model_class == Image:
             image = instance.content_type.get_object_for_this_type(id=instance.object_id)
@@ -171,7 +199,8 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                 return
 
             if UserService(obj.user).shadow_bans(instance.author):
-                log.info("Skipping notification for comment because %s shadow-bans %s" % (obj.user, instance.author))
+                log.info("Skipping notification for comment because %d shadow-bans %d" % (
+                    obj.user.pk, instance.author.pk))
                 return
 
             if instance.author != obj.user:
@@ -240,7 +269,23 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
             # We do it only if created, because the content_object needs to
             # only be updated if the number of comments changes.
             instance.content_object.save(keep_deleted=True)
+    else:
+        mentions = cache.get("user.%d.comment_pre_save_mentions" % instance.author.pk, [])
 
+    for username in mentions:
+        try:
+            user = User.objects.get(username=username)
+            push_notification(
+                [user], 'new_comment_mention',
+                {
+                    'url': settings.BASE_URL + instance.get_absolute_url(),
+                    'user': instance.author.userprofile.get_display_name(),
+                    'user_url': settings.BASE_URL + reverse_url(
+                        'user_page', kwargs={'username': instance.author}),
+                }
+            )
+        except User.DoesNotExist:
+            pass
 
 post_save.connect(nested_comment_post_save, sender=NestedComment)
 
@@ -249,7 +294,10 @@ def toggleproperty_post_delete(sender, instance, **kwargs):
     if hasattr(instance.content_object, "updated"):
         # This will trigger the auto_now fields in the content_object
         try:
-            instance.content_object.save(keep_deleted=True)
+            kwargs = {}
+            if issubclass(type(instance.content_object), SafeDeleteModel):
+                kwargs['keep_deleted'] = True
+            instance.content_object.save(**kwargs)
         except instance.content_object.DoesNotExist:
             pass
 
@@ -260,25 +308,28 @@ post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
 def toggleproperty_post_save(sender, instance, created, **kwargs):
     if hasattr(instance.content_object, "updated"):
         # This will trigger the auto_now fields in the content_object
-        instance.content_object.save(keep_deleted=True)
+        kwargs = {}
+        if issubclass(type(instance.content_object), SafeDeleteModel):
+            kwargs['keep_deleted'] = True
+        instance.content_object.save(**kwargs)
 
     if created:
+        verb = None
+
         if instance.property_type in ("like", "bookmark"):
-            if instance.property_type == "like":
-                verb = 'VERB_LIKED_IMAGE'
-            elif instance.property_type == "bookmark":
-                verb = 'VERB_BOOKMARKED_IMAGE'
 
             if instance.content_type == ContentType.objects.get_for_model(Image):
                 image = instance.content_type.get_object_for_this_type(id=instance.object_id)
                 if image.is_wip:
                     return
 
-            add_story(instance.user,
-                      verb=verb,
-                      action_object=instance.content_object)
+                if instance.property_type == "like":
+                    verb = 'VERB_LIKED_IMAGE'
+                elif instance.property_type == "bookmark":
+                    verb = 'VERB_BOOKMARKED_IMAGE'
+                else:
+                    return
 
-            if instance.content_type == ContentType.objects.get_for_model(Image):
                 push_notification(
                     [instance.content_object.user], 'new_' + instance.property_type,
                     {
@@ -288,6 +339,39 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                         'user_url': settings.BASE_URL + reverse_url(
                             'user_page', kwargs={'username': instance.user.username}),
                     })
+
+            elif instance.content_type == ContentType.objects.get_for_model(NestedComment):
+                push_notification(
+                    [instance.content_object.author], 'new_comment_like',
+                    {
+                        'url': settings.BASE_URL + instance.content_object.get_absolute_url(),
+                        'user': instance.user.userprofile.get_display_name(),
+                        'user_url': settings.BASE_URL + reverse_url(
+                            'user_page', kwargs={'username': instance.user.username}),
+                        'comment': instance.content_object.text
+                    })
+
+                # Trigger index update on the user, which will recalculate the Contribution Index.
+                instance.content_object.author.save()
+
+            elif instance.content_type == ContentType.objects.get_for_model(Post):
+                push_notification(
+                    [instance.content_object.user], 'new_forum_post_like',
+                    {
+                        'url': settings.BASE_URL + instance.content_object.get_absolute_url(),
+                        'user': instance.user.userprofile.get_display_name(),
+                        'user_url': settings.BASE_URL + reverse_url(
+                            'user_page', kwargs={'username': instance.user.username}),
+                        'post': instance.content_object.topic.name
+                    })
+
+                # Trigger index update on the user, which will recalculate the Contribution Index.
+                instance.content_object.user.save()
+
+            if verb is not None:
+                add_story(instance.user,
+                          verb=verb,
+                          action_object=instance.content_object)
 
         elif instance.property_type == "follow":
             user_ct = ContentType.objects.get_for_model(User)
@@ -344,13 +428,13 @@ post_save.connect(solution_post_save, sender=Solution)
 
 def subscription_subscribed(sender, **kwargs):
     subscription = kwargs.get("subscription")
+    usersubscription = kwargs.get("usersubscription")
 
     if subscription.group.name in [
         'astrobin_lite', 'astrobin_premium',
         'astrobin_lite_2020', 'astrobin_premium_2020',
         'astrobin_ultimate_2020'
     ] and subscription.recurrence_unit is None:
-        usersubscription = kwargs.get("usersubscription")
         # AstroBin Premium/Lite/Ultimate are valid for 1 year
         usersubscription.expires = datetime.datetime.now()
         usersubscription.extend(datetime.timedelta(days=365.2425))
@@ -368,6 +452,11 @@ def subscription_subscribed(sender, **kwargs):
         profile = user.userprofile
         profile.premium_counter = 0
         profile.save(keep_deleted=True)
+
+    if subscription.category == 'premium':
+        push_notification([usersubscription.user], 'new_subscription', {
+            'BASE_URL': settings.BASE_URL
+        })
 
 
 subscribed.connect(subscription_subscribed)
@@ -627,10 +716,43 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
 post_save.connect(forum_topic_post_save, sender=Topic)
 
 
-def forum_post_post_save(sender, instance, created, **kwargs):
-    if created and hasattr(instance.topic.forum, "group"):
-        instance.topic.forum.group.save()  # trigger date_updated update
+def forum_post_pre_save(sender, instance, **kwargs):
+    if instance.pk:
+        try:
+            previous_mentions = MentionsService.get_mentions(sender.objects.get(pk=instance.pk).body)
+            current_mentions = MentionsService.get_mentions(instance.body)
+            mentions = [item for item in current_mentions if item not in previous_mentions]
+        except sender.DoesNotExist:
+            mentions = []
 
+        cache.set("user.%d.forum_post_pre_save_mentions" % instance.user.pk, mentions, 2)
+
+pre_save.connect(forum_post_pre_save, sender=Post)
+
+
+def forum_post_post_save(sender, instance, created, **kwargs):
+    if created:
+        mentions = MentionsService.get_mentions(instance.body)
+        if hasattr(instance.topic.forum, 'group'):
+            instance.topic.forum.group.save()  # trigger date_updated update
+    else:
+        mentions = cache.get("user.%d.forum_post_pre_save_mentions" % instance.user.pk, [])
+
+    for username in mentions:
+        try:
+            user = User.objects.get(username=username)
+            push_notification(
+                [user], 'new_forum_post_mention',
+                {
+                    'url': settings.BASE_URL + instance.get_absolute_url(),
+                    'user': instance.user.userprofile.get_display_name(),
+                    'user_url': settings.BASE_URL + reverse_url(
+                        'user_page', kwargs={'username': instance.user}),
+                    'post': instance.topic.name,
+                }
+            )
+        except User.DoesNotExist:
+            pass
 
 post_save.connect(forum_post_post_save, sender=Post)
 
@@ -661,11 +783,12 @@ post_save.connect(user_post_save, sender=User)
 
 
 def userprofile_post_delete(sender, instance, **kwargs):
-    # Images are attached to the auth.User oject, and that's not really
+    # Images are attached to the auth.User object, and that's not really
     # deleted, so nothing is cascaded, hence the following line.
     instance.user.is_active = False
     instance.user.save()
     Image.objects_including_wip.filter(user=instance.user).delete()
+    UserIndex().remove_object(instance.user)
 
 
 post_softdelete.connect(userprofile_post_delete, sender=UserProfile)

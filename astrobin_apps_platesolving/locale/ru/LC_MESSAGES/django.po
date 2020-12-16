@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:16+0000\n"
-"PO-Revision-Date: 2019-01-25 14:30+0000\n"
-"Last-Translator: sypai <sypai@mail.ru>\n"
+"POT-Creation-Date: 2020-12-10 21:51+0000\n"
+"PO-Revision-Date: 2020-11-24 17:25+0000\n"
+"Last-Translator: NadirAstro <nadir_teymurov@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1548426645.000000\n"
+"X-POOTLE-MTIME: 1606238752.000000\n"
 
 msgid "Perform a blind solve"
 msgstr "Выполнить определение \"вслепую\""
@@ -55,10 +55,10 @@ msgid "Estimate the upper bound for the width of this field."
 msgstr "Определите верхнюю границу ширины этого поля."
 
 msgid "Center RA"
-msgstr "Центр RA"
+msgstr "Центр П.В."
 
 msgid "Center RA of the field in degrees, 0.000 to 360.000"
-msgstr "Центр RA поля в градусах, 0.000 до 360.000"
+msgstr "Центр П.В. поля в градусах, 0.000 до 360.000"
 
 msgid "Center dec"
 msgstr "Центр скл"
@@ -77,16 +77,16 @@ msgstr ""
 "прямому восхождению и склонению."
 
 msgid "Small"
-msgstr ""
+msgstr "Маленький"
 
 msgid "Medium"
-msgstr ""
+msgstr "Средний"
 
 msgid "Large"
-msgstr ""
+msgstr "Большой"
 
 msgid "Sample raw frame (max 100 MB)"
-msgstr ""
+msgstr "Пример сырого кадра (макс. 100 Мб)"
 
 msgid ""
 "To improve the accuracy of your plate-solution even further, please upload "
@@ -102,94 +102,97 @@ msgid ""
 "match. To improve your chances at a successful accurate plate-solution, "
 "calibrate your file the usual way (dark/bias/flats) but do not stretch it."
 msgstr ""
+"Чтобы еще больше повысить точность плейтсолва, загрузите один из файлов XISF "
+"или FITS из своего набора данных. Такие файлы обычно имеют заголовки даты и "
+"времени, которые позволяют AstroBin вычислять эфемериды тел Солнечной "
+"системы и находить планеты и астероиды на вашем изображении (при условии, "
+"что вы также добавляете к нему информацию о местоположении). <br/> <br/> Для "
+"максимальной точности рекомендуется использовать собственный и открытый "
+"формат PixInsight XISF. Узнайте больше о XISF здесь: <br/> <br/> <a href="
+"\"https://pixinsight.com/xisf/\" target=\"_blank\"> https://pixinsight.com/"
+"xisf/ </a> <br/> <br/> <strong> Обратите внимание: </strong> очень важно, "
+"чтобы загружаемый файл XISF или FITS был выровнен с обработанным "
+"изображением, в противном случае аннотации объектов не будут совпадать. "
+"Чтобы повысить ваши шансы на получение точного раствора для планшета, "
+"откалибруйте файл обычным способом (темный / смещенный / плоский), но не "
+"растягивайте его."
 
 msgid "Scaled font size"
-msgstr ""
+msgstr "Масштабированный размер шрифта"
 
 msgid "Font size of the annotations on your main image page"
-msgstr ""
+msgstr "Размер шрифта аннотаций на главной странице изображения"
 
 msgid "Show equatorial grid"
-msgstr ""
+msgstr "Показывать экваториальную сетку"
 
 msgid "Show constellation borders"
-msgstr ""
+msgstr "Показывать границы созвездий"
 
 msgid "Show constellation lines"
-msgstr ""
+msgstr "Показывать линии созвездий"
 
 msgid "Show named stars"
-msgstr ""
+msgstr "Показывать названные звёзды"
 
 msgid "Show Messier objects"
-msgstr ""
+msgstr "Показывать объекты Мессье"
 
 msgid "Show NGC and IC objects"
-msgstr ""
+msgstr "Показывать NGC и IC объекты"
 
 msgid "Show VdB objects"
-msgstr ""
+msgstr "Показывать VdB объекты"
 
 msgid "Show Sharpless objects"
-msgstr ""
+msgstr "Показывать Sharpless объекты"
 
 msgid "Show Barnard objects"
-msgstr ""
+msgstr "Показывать Barnard объекты"
 
 msgid "Show PGC objects"
-msgstr ""
+msgstr "Показывать PGC объекты"
 
 msgid "Show planets"
-msgstr ""
+msgstr "Показывать планеты"
 
 msgid ""
 "Only available if your image at least an acquisition time and an accurate "
 "location"
 msgstr ""
+"Доступно только в том случае, если у вашего изображения хотя бы время "
+"получения и точное местоположение"
 
 msgid "Show asteroids"
-msgstr ""
+msgstr "Показывать астероиды"
 
 msgid "Show GCVS stars"
-msgstr ""
+msgstr "Показывать GCVS звёзды"
 
 msgid "General Catalog of Variable Stars"
-msgstr ""
+msgstr "Общий каталог переменных звёзд"
 
 msgid "Show Tycho-2 catalog"
-msgstr ""
+msgstr "Показывать Tycho-2 каталог"
 
 msgid "Show CGPN objects"
-msgstr ""
+msgstr "Показывать CGPN объекты"
 
 msgid "Getting plate-solving status, please wait..."
 msgstr "Получение статуса для размещения координат, пожалуйста ждите..."
 
-#, fuzzy
-#| msgid "Plate-solving process starting, please do not leave this page..."
 msgid "Plate-solving starting, please do not leave this page..."
-msgstr ""
-"Размещение по координатам началось, пожалуйста не покидайте эту страницу..."
+msgstr "Плейтсолв начинается, пожалуйста не покидайте эту страницу..."
 
-#, fuzzy
-#| msgid "Plate-solving process starting, please do not leave this page..."
 msgid "Advanced plate-solving starting, please do not leave this page..."
 msgstr ""
-"Размещение по координатам началось, пожалуйста не покидайте эту страницу..."
+"Продвинутый плейтсолв начинается, пожалуйста не покидайте эту страницу..."
 
-#, fuzzy
-#| msgid "Plate-solving started in the background. You may leave this page."
 msgid "Plate-solving started. You may leave this page."
-msgstr ""
-"Размещение по координатам началось в фоновом режиме. Можете покинуть эту "
-"страницу."
+msgstr "Плейтсолв начался. Вы можете покинуть эту страницу."
 
-#, fuzzy
-#| msgid "Plate-solving started in the background. You may leave this page."
 msgid "Advanced plate-solving started. You may leave this page."
-msgstr ""
-"Размещение по координатам началось в фоновом режиме. Можете покинуть эту "
-"страницу."
+msgstr "Продвинутый плейтсолв начался. Вы можете покинуть эту страницу."
 
 msgid "Plate-solving almost ready, please do not leave this page..."
 msgstr ""
@@ -200,22 +203,14 @@ msgid "This image could not be plate-solved."
 msgstr "Это изображение не может быть размещено по координатам."
 
 msgid "The advanced plate-solving failed."
-msgstr ""
+msgstr "Продвинутый плейтсолв провалился."
 
-#, fuzzy
-#| msgid ""
-#| "This image has been successfully plate-solved. Please refresh the page to "
-#| "see the new data."
 msgid "This image has been plate-solved. Refresh the page to see new data!"
 msgstr ""
-"Это изображение успешно размещено по координатам. Пожалуйста обновите "
-"страницу, чтобы увидеть новые данные."
+"Плейтсолв этого изображения проведено успешно. Пожалуйста обновите страницу, "
+"чтобы увидеть новые данные."
 
-#, fuzzy
-#| msgid ""
-#| "This image has been successfully plate-solved. Please refresh the page to "
-#| "see the new data."
 msgid "The advanced plate-solved finished. Refresh the page to see new data!"
 msgstr ""
-"Это изображение успешно размещено по координатам. Пожалуйста обновите "
-"страницу, чтобы увидеть новые данные."
+"Продвинутый плейтсолв этого изображения завершено. Пожалуйста обновите "
+"страницу, чтобы увидеть новые данные!"
