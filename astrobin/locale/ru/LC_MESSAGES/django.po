@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-10 21:47+0000\n"
-"PO-Revision-Date: 2020-12-08 05:12+0000\n"
+"POT-Creation-Date: 2020-12-17 16:53+0000\n"
+"PO-Revision-Date: 2020-12-11 10:48+0000\n"
 "Last-Translator: NadirAstro <nadir_teymurov@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1607404352.000000\n"
+"X-POOTLE-MTIME: 1607683721.000000\n"
 
 msgid "United Kingdom"
 msgstr "Великобритания"
@@ -5545,6 +5545,18 @@ msgstr "Общая тенденция по типам телескопов"
 msgid "This list is currently empty."
 msgstr "Этот список пока пуст."
 
+#, python-format
+msgid ""
+"The classic uploader will be discontinued soon. If you are still using it, "
+"please begin using the <a href=\"%(url)s\">new uploader</a> instead."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you experience any problems or need any help, please contact AstroBin at "
+"<a href=\"mailto:%(email)s\">%(email)s</a>."
+msgstr ""
+
 msgid "Image upload"
 msgstr "Загрузка изображения"
 
@@ -6029,15 +6041,11 @@ msgstr "Использованные изображения"
 msgid "Thanks for your support!"
 msgstr "Спасибо за вашу поддержку!"
 
-#, fuzzy
-#| msgid "Your active subscription plans"
 msgid "Your subscriptions"
-msgstr "Ваши активные планы подписки"
+msgstr "Ваши подписки"
 
-#, fuzzy
-#| msgid "Your past requests"
 msgid "Your payments"
-msgstr "Ваши прошлые запросы"
+msgstr "Ваши платежи"
 
 msgid "This data is currently not available and will be recalculated shortly."
 msgstr ""

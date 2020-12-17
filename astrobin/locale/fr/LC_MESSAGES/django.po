@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-10 21:47+0000\n"
-"PO-Revision-Date: 2020-12-10 14:25+0000\n"
-"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
+"POT-Creation-Date: 2020-12-17 16:53+0000\n"
+"PO-Revision-Date: 2020-12-17 01:49+0000\n"
+"Last-Translator: JeanBaptisteAuroux <jbauroux@bbox.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.8\n"
 "X-Poedit-Bookmarks: -1,319,-1,-1,-1,-1,-1,-1,-1,-1\n"
-"X-POOTLE-MTIME: 1607610330.000000\n"
+"X-POOTLE-MTIME: 1608169748.000000\n"
 
 msgid "United Kingdom"
 msgstr "Royaume-Uni"
@@ -5621,6 +5621,18 @@ msgstr "Tendance globale des types d'instruments"
 msgid "This list is currently empty."
 msgstr "Cette liste est vide pour le moment."
 
+#, python-format
+msgid ""
+"The classic uploader will be discontinued soon. If you are still using it, "
+"please begin using the <a href=\"%(url)s\">new uploader</a> instead."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you experience any problems or need any help, please contact AstroBin at "
+"<a href=\"mailto:%(email)s\">%(email)s</a>."
+msgstr ""
+
 msgid "Image upload"
 msgstr "Publication d'images"
 
@@ -6109,15 +6121,11 @@ msgstr "Images utilisées"
 msgid "Thanks for your support!"
 msgstr "Merci pour votre soutien !"
 
-#, fuzzy
-#| msgid "Your active subscription plans"
 msgid "Your subscriptions"
-msgstr "Vos abonnements actifs"
+msgstr "Vos abonnements"
 
-#, fuzzy
-#| msgid "Your past requests"
 msgid "Your payments"
-msgstr "Vos demandes antérieures"
+msgstr "Vos paiements"
 
 msgid "This data is currently not available and will be recalculated shortly."
 msgstr ""

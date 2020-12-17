@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-10 21:47+0000\n"
+"POT-Creation-Date: 2020-12-17 16:53+0000\n"
 "PO-Revision-Date: 2015-11-10 11:53+0000\n"
 "Last-Translator: Xavier <bufote@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5110,6 +5110,18 @@ msgid "Global trend of telescope types"
 msgstr "Tendència global dels tipus de telescopi"
 
 msgid "This list is currently empty."
+msgstr ""
+
+#, python-format
+msgid ""
+"The classic uploader will be discontinued soon. If you are still using it, "
+"please begin using the <a href=\"%(url)s\">new uploader</a> instead."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you experience any problems or need any help, please contact AstroBin at "
+"<a href=\"mailto:%(email)s\">%(email)s</a>."
 msgstr ""
 
 #, fuzzy
