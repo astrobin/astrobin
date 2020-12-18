@@ -393,6 +393,12 @@
   .avatar-block .avatar {
     margin: 0 $spacer-medium;
   }
+
+  .technical-card {
+    .astrometry-header {
+      padding: 0 $spacer-large;
+    }
+  }
 }
 
 
