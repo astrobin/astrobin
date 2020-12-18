@@ -1267,6 +1267,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       .remove {
         float: right;
         margin-left: $spacer-medium;
+        margin-right: $spacer-medium;
         padding: 0 2px;
         font-size: 90%;
         color: #505050;
@@ -1472,7 +1473,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   padding: 3px 4px;
   @include rounded-corners(6px);
   @include box-shadow;
-  z-index: 9999;
+  z-index: 1049;
 }
 
 .message-container {
@@ -1587,7 +1588,7 @@ ul.token-input-list {
 }
 
 div.token-input-dropdown {
-  z-index: 9999;
+  z-index: 1049;
   background-color: $strong-text-color;
   color: $background-color;
 

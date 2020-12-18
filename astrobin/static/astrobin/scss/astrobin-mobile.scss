@@ -15,13 +15,11 @@
   }
 
   .brand-mobile {
-    font: 40px "LeagueGothicRegular";
-    text-transform: uppercase;
     position: absolute;
-    top: 11px;
-    left: 60px;
-    color: $grey-8;
-    text-shadow: 0 -1px 0 $black, 0 1px 0 $grey-6;
+    top: 25px;
+    left: 70px;
+    opacity: .25;
+
 
     &:hover, &:focus, &:active {
       color: $grey-2;
@@ -57,7 +55,7 @@
     .btn-navbar {
       margin: 0;
       position: absolute;
-      top: 20px;
+      top: 24px;
       left: 12px;
 
       .text {
@@ -390,6 +388,10 @@
 
   .iotd-queue-item img, .top-picks-item img{
     width: 100% !important;
+  }
+
+  .avatar-block .avatar {
+    margin: 0 $spacer-medium;
   }
 }
 
