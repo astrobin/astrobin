@@ -1,10 +1,9 @@
 from datetime import datetime, timedelta
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
+from django.test import TestCase
 from django.utils import timezone
 from mock import patch
-
-from django.test import TestCase
 
 from astrobin.tests.generators import Generators
 from astrobin_apps_users.services import UserService
@@ -244,7 +243,7 @@ class TestUserService(TestCase):
 
     @patch('astrobin_apps_premium.templatetags.astrobin_apps_premium_tags.is_free')
     @patch('astrobin.models.UserProfile.get_scores')
-    def test_can_like_image_ok(self, get_scores,  is_free):
+    def test_can_like_image_ok(self, get_scores, is_free):
         user = Generators.user()
         image = Generators.image()
 
@@ -387,3 +386,37 @@ class TestUserService(TestCase):
         image.save()
 
         self.assertFalse(UserService(user).get_recovered_images().exists())
+
+    def test_get_users_in_group_sample_no_users(self):
+        group = Group.objects.create(name='test_group')
+
+        self.assertEquals(0, len(UserService.get_users_in_group_sample(group.name, 10)))
+
+    def test_get_users_in_group_sample_one_user(self):
+        group = Group.objects.create(name='test_group')
+        user = Generators.user()
+        user.groups.add(group)
+
+        self.assertEquals(1, len(UserService.get_users_in_group_sample(group.name, 10)))
+        self.assertEquals(1, len(UserService.get_users_in_group_sample(group.name, 50)))
+        self.assertEquals(1, len(UserService.get_users_in_group_sample(group.name, 100)))
+
+    def test_get_users_in_group_sample_many_users(self):
+        group = Group.objects.create(name='test_group')
+        for i in range(100):
+            user = Generators.user()
+            user.groups.add(group)
+
+        self.assertEquals(10, len(UserService.get_users_in_group_sample(group.name, 10)))
+        self.assertEquals(50, len(UserService.get_users_in_group_sample(group.name, 50)))
+        self.assertEquals(100, len(UserService.get_users_in_group_sample(group.name, 100)))
+
+    def test_get_users_in_group_sample_odd_users(self):
+        group = Group.objects.create(name='test_group')
+        for i in range(9):
+            user = Generators.user()
+            user.groups.add(group)
+
+        self.assertEquals(1, len(UserService.get_users_in_group_sample(group.name, 10)))
+        self.assertEquals(5, len(UserService.get_users_in_group_sample(group.name, 50)))
+        self.assertEquals(9, len(UserService.get_users_in_group_sample(group.name, 100)))

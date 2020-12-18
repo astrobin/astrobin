@@ -3483,3 +3483,25 @@ class ImageTest(TestCase):
 
         telescope.delete()
         image.delete()
+
+    def test_image_designated_iotd_submitters(self):
+        group = Group.objects.create(name='iotd_submitters')
+
+        for i in range(10):
+            user = Generators.user()
+            user.groups.add(group)
+
+        image = Generators.image()
+
+        self.assertEquals(1, image.designated_iotd_submitters.count())
+
+    def test_image_designated_iotd_reviewers(self):
+        group = Group.objects.create(name='iotd_reviewers')
+
+        for i in range(10):
+            user = Generators.user()
+            user.groups.add(group)
+
+        image = Generators.image()
+
+        self.assertEquals(1, image.designated_iotd_reviewers.count())
