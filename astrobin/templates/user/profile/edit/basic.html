@@ -26,9 +26,6 @@
                     {{form|as_bootstrap}}
                     <div class="form-actions">
                         <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %}" />
-                        {% comment %}We should use {% url 'password_change' %} or something.{% endcomment %}
-                        <a class="btn btn-block-mobile" href="/accounts/password/change/">{% trans "Change your password" %}</a>
-                        <a class="btn btn-block-mobile" href="{% url 'change_email_index' %}">{% trans "Change your e-mail" %}</a>
                     </div>
                 </form>
             {% endif %} {# READONLY #}
