@@ -972,6 +972,18 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     published = models.DateTimeField(editable=False, null=True, blank=True)
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
 
+    designated_iotd_submitters = models.ManyToManyField(
+        User,
+        related_name='designated_images_as_submitter',
+        editable=False
+    )
+
+    designated_iotd_reviewers = models.ManyToManyField(
+        User,
+        related_name='designated_images_as_reviewer',
+        editable=False
+    )
+
     # For likes, bookmarks, and perhaps more.
     toggleproperties = GenericRelation(ToggleProperty)
 

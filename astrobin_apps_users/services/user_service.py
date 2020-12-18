@@ -1,7 +1,9 @@
+import math
 from datetime import timedelta
 
+import numpy as np
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import QuerySet, Q
 from django.utils import timezone
@@ -45,6 +47,15 @@ class UserService:
         # type: () -> Q
         return Q(corrupted=True, is_final=True) | \
                Q(revisions__corrupted=True, revisions__is_final=True, revisions__deleted=None)
+
+    @staticmethod
+    def get_users_in_group_sample(group_name, percent):
+        # type: (str, int) -> list[User]
+        try:
+            users = User.objects.filter(groups=Group.objects.get(name=group_name))
+            return np.random.choice(list(users), int(math.ceil(users.count() / 100.0 * percent)), replace=False)
+        except Group.DoesNotExist:
+            return []
 
     def get_all_images(self):
         # type: () -> QuerySet

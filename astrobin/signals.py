@@ -83,6 +83,12 @@ def image_post_save(sender, instance, created, **kwargs):
         instance.user.userprofile.save(keep_deleted=True)
         profile_saved = True
 
+        if not instance.user.userprofile.exclude_from_competitions:
+            instance.designated_iotd_submitters.add(*UserService.get_users_in_group_sample(
+                'iotd_submitters', settings.IOTD_DESIGNATED_SUBMITTERS_PERCENTAGE))
+            instance.designated_iotd_reviewers.add(*UserService.get_users_in_group_sample(
+                'iotd_reviewers', settings.IOTD_DESIGNATED_REVIEWERS_PERCENTAGE))
+
         if not instance.is_wip and not instance.skip_notifications:
             followers = [x.user for x in ToggleProperty.objects.filter(
                 property_type="follow",
