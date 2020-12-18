@@ -72,16 +72,19 @@ body.full {
 
 .cookielaw-banner {
   position: fixed;
-  padding: 40px 0;
+  width: 300px;
+  padding: 30px;
   bottom: 0;
-  left: 0;
   right: 0;
+  transform: scale(.85);
   z-index: 1021;
-  background: #111 url(../images/darker-panel-tile.png);
-  color: #a0a0a0;
+  background: $grey-2;
+  border: 1px solid $grey-4;
+  color: $grey-9;
+  box-shadow: 8px 8px 16px rgba(0,0,0,.667);
 
   h6 {
-    color: $strong-text-color;
+    color: $grey-9;
     font-size: 16px;
     margin: 0 0 20px 0;
   }
