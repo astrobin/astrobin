@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     'gunicorn',
     'django_comments',
     'tagging',
-    'mptt',
     'tinymce',
     'hitcount',
     'avatar',
