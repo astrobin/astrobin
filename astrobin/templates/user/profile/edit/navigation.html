@@ -30,7 +30,7 @@
         </li>
         <li class="last {% current request '^/profile/edit/flickr/$' %}">
             <a href="{% url 'profile_flickr_import' %}">
-                <i class="icon-download-alt"></i> {% trans "Import from Flickr" %}
+                <i class="icon-flickr"></i> {% trans "Import from Flickr" %}
                 <i class="icon-chevron-right"></i>
             </a>
         </li>
@@ -46,13 +46,13 @@
             {% else %}
                 <a href="#feature-restricted-modal" data-toggle="modal">
             {% endif %}
-                <i class="icon-user"></i> {% trans "Download your data" %}
+                <i class="icon-download-alt"></i> {% trans "Download your data" %}
                 <i class="icon-chevron-right"></i>
             </a>
         </li>
         <li class="{% current request '^/avatar/' %}">
             <a href="{% url 'avatar_change' %}">
-                <i class="icon-user"></i> {% trans "Avatar" %}
+                <i class="icon-camera"></i> {% trans "Avatar" %}
                 <i class="icon-chevron-right"></i>
             </a>
         </li>
