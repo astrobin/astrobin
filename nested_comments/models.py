@@ -95,6 +95,3 @@ class NestedComment(models.Model):
 
     class Meta:
         app_label = 'nested_comments'
-
-    class MPTTMeta:
-        order_insertion_bu = ['created']
