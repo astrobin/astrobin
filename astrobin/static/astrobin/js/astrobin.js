@@ -614,11 +614,12 @@ astrobin_common = {
                     at: "bottom center"
                 },
                 show: {
-                    solo: true
+                    solo: true,
+                    delay: 500
                 },
                 hide: {
                     fixed: true,
-                    delay: 1000
+                    delay: 200
                 },
                 content: {
                     text: function () {
