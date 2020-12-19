@@ -68,7 +68,9 @@
         </noscript>
         <!-- End Google Tag Manager (noscript) -->
 
-        {% cookielaw_banner %}
+        {% if request|show_cookie_banner %}
+            {% cookielaw_banner %}
+        {% endif %}
 
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">

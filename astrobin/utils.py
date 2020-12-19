@@ -110,6 +110,36 @@ def get_client_country_code(request):
     except:
         return "UNKNOWN"
 
+def get_european_union_country_codes():
+    return (
+        'at',
+        'be',
+        'bg',
+        'cy',
+        'cz',
+        'de',
+        'dk',
+        'ee',
+        'es',
+        'fi',
+        'fr',
+        'gr',
+        'hr',
+        'hu',
+        'ie',
+        'it',
+        'lt',
+        'lu',
+        'lv',
+        'mt',
+        'nl',
+        'po',
+        'pt',
+        'ro',
+        'se',
+        'si',
+        'sk',
+    )
 
 def inactive_accounts():
     """Gets all the user profiles of users with at least one image, who haven't uploaded in over 2 months"""

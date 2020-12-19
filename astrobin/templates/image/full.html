@@ -43,7 +43,10 @@
 </head>
 
 <body class="full">
-{% cookielaw_banner %}
+
+{% if request|show_cookie_banner %}
+    {% cookielaw_banner %}
+{% endif %}
 
 <div class="navbar navbar-fixed-top" id="top">
     <div class="navbar-inner">
