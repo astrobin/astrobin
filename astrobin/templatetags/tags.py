@@ -10,6 +10,7 @@ from django.utils.translation import ugettext as _
 from subscription.models import UserSubscription, Subscription
 from threaded_messages.models import Participant
 
+from astrobin import utils
 from astrobin.enums import SubjectType
 from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import GearUserInfo, UserProfile, Image
@@ -662,3 +663,9 @@ def show_images_used(user):
 @register.filter
 def show_uploads_used(user):
     return is_free(user) or is_lite(user)
+
+
+@register.filter
+def show_cookie_banner(request):
+    country = utils.get_client_country_code(request)
+    return country.lower() in utils.get_european_union_country_codes()
