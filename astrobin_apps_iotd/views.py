@@ -45,25 +45,7 @@ class IotdSubmissionQueueView(
     template_name = 'astrobin_apps_iotd/iotd_submission_queue.html'
 
     def get_queryset(self):
-        def can_add(image):
-            # type: (Image) -> bool
-
-            # Since the introduction of the 2020 plans, Free users cannot participate in the IOTD/TP.
-            user_is_free = is_free(image.user)  # type: bool
-            already_iotd = Iotd.objects.filter(image=image, date__lte=datetime.now().date()).exists()  # type: bool
-
-            return not user_is_free and not already_iotd
-
-        images = self.model.objects.filter(
-            moderator_decision=1,
-            published__gte=datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
-        ).exclude(
-            subject_type__in=(SubjectType.GEAR, SubjectType.OTHER)
-        ).order_by(
-            '-published'
-        )
-
-        return [x for x in images if can_add(x)]
+        return IotdService().get_submission_queue()
 
 
 class IotdToggleSubmissionAjaxView(
