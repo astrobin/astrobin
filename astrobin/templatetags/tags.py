@@ -668,4 +668,4 @@ def show_uploads_used(user):
 @register.filter
 def show_cookie_banner(request):
     country = utils.get_client_country_code(request)
-    return country.lower() in utils.get_european_union_country_codes()
+    return country is None or country.lower() in utils.get_european_union_country_codes()

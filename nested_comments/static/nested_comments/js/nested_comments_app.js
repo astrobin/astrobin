@@ -19,6 +19,7 @@ $(function() {
             this.profilesApiUrl = this.baseApiUrl + 'common/userprofiles/';
             this.usersUrl = '/users/';
 
+            this.path = $('#nested-comments-path').attr('data-value');
             this.languagecode = languageCode;
             this.userId = parseInt($('#nested-comments-user-id').attr('data-value'));
             this.username = $('#nested-comments-user-name').attr('data-value');
@@ -563,11 +564,18 @@ $(function() {
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     var errors = JSON.parse(XMLHttpRequest.responseText).non_field_errors;
-                    errors.forEach(function (error) {
-                        if (error === "User does not have the required permissions to like this object") {
-                            $('#cant-like').modal('show');
-                        }
-                    });
+
+                    if (!!errors) {
+                        errors.forEach(function (error) {
+                            if (error === "User does not have the required permissions to like this object") {
+                                $('#cant-like').modal('show');
+                            }
+                        });
+                    } else if (XMLHttpRequest.status === 401) {
+                        window.location.href = "/accounts/login/?next=" + encodeURI(nc_app.path + '#c' + comment.id);
+                        return;
+                    }
+
                     comment.set('liking', false);
                 }
             });
