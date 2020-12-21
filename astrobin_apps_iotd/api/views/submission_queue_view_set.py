@@ -12,6 +12,8 @@ from common.permissions import ReadOnly
 
 class SubmissionQueueViewSet(viewsets.ModelViewSet):
     serializer_class = SubmissionQueueSerializer
-    queryset = IotdService().get_submission_queue()
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     permission_classes = [ReadOnly]
+
+    def get_queryset(self):
+        return IotdService().get_submission_queue()

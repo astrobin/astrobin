@@ -22,6 +22,8 @@ class ThumbnailGroup(models.Model):
     hd_sharpened = models.CharField(max_length=512, null=True, blank=True)
     hd_sharpened_inverted = models.CharField(max_length=512, null=True, blank=True)
     regular = models.CharField(max_length=512, null=True, blank=True)
+    regular_anonymized = models.CharField(max_length=512, null=True, blank=True)
+    regular_crop_anonymized = models.CharField(max_length=512, null=True, blank=True)
     regular_inverted = models.CharField(max_length=512, null=True, blank=True)
     regular_sharpened = models.CharField(max_length=512, null=True, blank=True)
     regular_sharpened_inverted = models.CharField(max_length=512, null=True, blank=True)
@@ -48,6 +50,8 @@ class ThumbnailGroup(models.Model):
             self.hd_anonymized,
             self.hd_inverted,
             self.regular,
+            self.regular_anonymized,
+            self.regular_crop_anonymized,
             self.real_inverted,
             self.gallery,
             self.gallery_inverted,

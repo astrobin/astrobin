@@ -35,6 +35,8 @@ THUMBNAIL_ALIASES = {
         'hd_sharpened_inverted': {'size': (1824, 0), 'crop': 'smart', 'watermark': True, 'detail': True, 'invert': True},
 
         'regular': {'size': (620, 0), 'crop': 'smart', 'watermark': True, 'keep_icc_profile': True},
+        'regular_anonymized': {'size': (620, 0), 'crop': 'smart', 'watermark': False, 'keep_icc_profile': True},
+        'regular_crop_anonymized': {'size': (620, 0), 'crop': (620, 0), 'watermark': False, 'keep_icc_profile': True},
         'regular_inverted': {'size': (620, 0), 'crop': 'smart', 'invert': True, 'watermark': True},
         'regular_sharpened': {'size': (620, 0), 'crop': 'smart', 'watermark': True, 'detail': True,
                               'keep_icc_profile': True},
