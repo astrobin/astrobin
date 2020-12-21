@@ -323,10 +323,10 @@ class TestUserService(TestCase):
 
     @patch('django.contrib.auth.models.User.is_authenticated')
     def test_can_unlike_anon(self, is_authenticated):
-        is_authenticated.return_value = False
-
         image = Generators.image()
         like = Generators.like(image)
+
+        is_authenticated.return_value = False
 
         self.assertFalse(UserService(like.user).can_unlike(image))
 
