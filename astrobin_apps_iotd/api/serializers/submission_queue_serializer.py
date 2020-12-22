@@ -7,6 +7,8 @@ class SubmissionQueueSerializer(serializers.HyperlinkedModelSerializer):
     hash = serializers.PrimaryKeyRelatedField(read_only=True)
     w = serializers.IntegerField()
     h = serializers.IntegerField()
+    imaging_telescopes = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    imaging_cameras = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Image
@@ -18,4 +20,6 @@ class SubmissionQueueSerializer(serializers.HyperlinkedModelSerializer):
             'image_file',
             'w',
             'h',
+            'imaging_telescopes',
+            'imaging_cameras',
         )
