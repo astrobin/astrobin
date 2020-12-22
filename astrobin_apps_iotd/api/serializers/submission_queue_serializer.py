@@ -3,7 +3,7 @@ from rest_framework import serializers
 from astrobin.models import Image
 
 
-class SubmissionQueueSerializer(serializers.HyperlinkedModelSerializer):
+class SubmissionQueueSerializer(serializers.ModelSerializer):
     hash = serializers.PrimaryKeyRelatedField(read_only=True)
     w = serializers.IntegerField()
     h = serializers.IntegerField()
