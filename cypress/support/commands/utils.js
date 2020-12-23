@@ -15,4 +15,3 @@ Cypress.Commands.add('bypassReCAPTCHA', () => {
             .click();
     });
 });
-  
