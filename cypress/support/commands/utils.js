@@ -4,3 +4,15 @@ Cypress.Commands.add("select2", (selector, option) => {
         cy.get("#select2-" + id + "-results .select2-results__option").contains(option).click();
     });
 });
+
+Cypress.Commands.add('bypassReCAPTCHA', () => {
+    cy.wait(3000);
+    cy.get('#id_recaptcha iframe').then(iframe => {
+        const body = iframe.contents().find('body');
+        cy.wrap(body)
+            .find('.recaptcha-checkbox-border')
+            .should('be.visible')
+            .click();
+    });
+});
+  
