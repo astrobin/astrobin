@@ -1,5 +1,6 @@
 from braces.views import JSONResponseMixin, LoginRequiredMixin
 from django.contrib import messages
+from django.http import HttpResponseForbidden
 from django.urls import reverse
 from django.utils.translation import ugettext as _
 from django.views.generic import UpdateView
@@ -39,7 +40,8 @@ class GroupAddRemoveImages(
                     messages.error(request, _("You cannot add images that are not yours!"))
                     return super(GroupAddRemoveImages, self).post(request, *args, **kwargs)
 
-                return self.render_json_response({
-                    'images': ','.join([str(x.pk) for x in group.images.filter(user=request.user)]),
-                })
-        return super(GroupAddRemoveImages, self).post(request, *args, **kwargs)
+            return self.render_json_response({
+                'images': ','.join([str(x.pk) for x in group.images.filter(user=request.user)]),
+            })
+
+        return HttpResponseForbidden()
