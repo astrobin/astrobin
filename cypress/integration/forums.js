@@ -64,4 +64,26 @@ describe("Forums", () => {
         cy.get("textarea.cke_source")
             .should("contain.value", "[quote=\"astrobin_dev\"]This is a reply.[/quote]");
     });
+
+    it("should like", () => {
+        cy.login({
+            next: "/forum/c/astrobin/announcements/test-topic",
+            username: "astrobin_dev2",
+            password: "astrobin_dev2"
+        });
+
+        let btn = cy.get(".post-related").first().find("button");
+
+        btn.contains("Like").click();
+        btn.contains("Unlike").should("be.visible");
+    });
+
+    it("should unlike", () => {
+        let btn = cy.get(".post-related").first().find("button");
+
+        btn.contains("Unlike").click();
+        btn.contains("Like").should("be.visible");
+    });
+
+
 });
