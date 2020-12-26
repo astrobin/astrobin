@@ -91,5 +91,10 @@ describe("Forums", () => {
         cy.get("#cke_1_contents").find(".smiley").should("be.visible");
     });
 
+    it("should insert bold", () => { 
+        cy.get("#cke_22").click();
+        cy.get("#cke_id_body .cke_wysiwyg_div strong");
+    });
+
 
 });
