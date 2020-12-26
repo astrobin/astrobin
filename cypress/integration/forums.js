@@ -85,5 +85,11 @@ describe("Forums", () => {
         btn.contains("Like").should("be.visible");
     });
 
+    it("should insert smiley", () => {
+        cy.get("#cke_37").click();
+        cy.get(".cke_dark_background a").first().click();
+        cy.get("#cke_1_contents").find(".smiley").should("be.visible");
+    });
+
 
 });
