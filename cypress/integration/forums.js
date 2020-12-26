@@ -96,5 +96,10 @@ describe("Forums", () => {
         cy.get("#cke_id_body .cke_wysiwyg_div strong");
     });
 
+    it("should insert italic", () => {
+        cy.get("#cke_23").click();
+        cy.get("#cke_id_body .cke_wysiwyg_div em");
+    });
+
 
 });
