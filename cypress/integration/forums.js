@@ -101,5 +101,11 @@ describe("Forums", () => {
         cy.get("#cke_id_body .cke_wysiwyg_div em");
     });
 
-
+    it("should insert link", () => { 
+        cy.get("#cke_30").click();
+        cy.get(".cke_dialog_ui_input_text input").first().type("https://astrobin.com");
+        cy.get(".cke_dialog_ui_input_text input").last().type("Astrobin");
+        cy.get(".cke_dialog_ui_button_ok").click();
+        cy.get("#cke_id_body .cke_wysiwyg_div a").should("contain", "Astrobin");
+    });
 });
