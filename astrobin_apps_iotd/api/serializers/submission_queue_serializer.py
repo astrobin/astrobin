@@ -22,4 +22,5 @@ class SubmissionQueueSerializer(serializers.ModelSerializer):
             'h',
             'imaging_telescopes',
             'imaging_cameras',
+            'published',
         )
