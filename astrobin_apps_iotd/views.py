@@ -15,7 +15,6 @@ from django.views.generic import (
     ListView)
 from django.views.generic.base import View
 
-from astrobin.enums import SubjectType
 from astrobin.models import Image
 from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote
 from astrobin_apps_iotd.permissions import may_elect_iotd
@@ -24,7 +23,6 @@ from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import (
     iotd_submissions_today,
     iotd_votes_today,
     iotd_elections_today)
-from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 
 log = logging.getLogger('apps')
 
@@ -194,7 +192,7 @@ class IotdToggleJudgementAjaxView(
                                 judge=request.user,
                                 image=image,
                                 date=date)
-                            log.info("User %d added IOTD for image %s" % ( request.user.pk, image.get_id()))
+                            log.info("User %d added IOTD for image %s" % (request.user.pk, image.get_id()))
                             ret = {
                                 'iotd': iotd.pk,
                                 'date': formats.date_format(iotd.date, "SHORT_DATE_FORMAT"),

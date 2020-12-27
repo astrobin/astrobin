@@ -6,7 +6,6 @@ from rest_framework import viewsets
 from rest_framework.renderers import BrowsableAPIRenderer
 
 from astrobin.api2.serializers.camera_serializer import CameraSerializer
-from astrobin.api2.serializers.telescope_serializer import TelescopeSerializer
 from astrobin.models import Telescope, Camera
 from common.permissions import ReadOnly
 
