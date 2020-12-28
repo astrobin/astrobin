@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseForbidden
+from django.utils.translation import ugettext_lazy as _
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
@@ -32,3 +33,12 @@ class SubmissionViewSet(viewsets.ModelViewSet):
             return super(viewsets.ModelViewSet, self).create(request, *args, **kwargs)
         except ValidationError as e:
             return HttpResponseForbidden(e.messages)
+
+    def destroy(self, request, *args, **kwargs):
+        submission = self.get_object()  # type: IotdSubmission
+        deadline = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
+
+        if submission.date < deadline or submission.image.published < deadline:
+            return HttpResponseForbidden([_("Sorry, it's now too late to retract this submission.")])
+
+        return super(viewsets.ModelViewSet, self).destroy(request, *args, **kwargs)
