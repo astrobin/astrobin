@@ -2,6 +2,7 @@
 {% load tags %}
 {% load astrobin_apps_iotd_tags %}
 {% load staticfiles %}
+{% load common_tags %}
 
 <button class="btn btn-navbar" data-toggle="collapse" data-target=".site-nav">
     <span class="icon-bar"></span>
@@ -77,7 +78,7 @@
 
                 {% if request.user|is_iotd_submitter %}
                     <li>
-                        <a href="{% url 'iotd_submission_queue' %}">
+                        <a href="{% app_redirection_service request '/iotd/submission-queue' %}">
                             <i class="icon-upload"></i>
                             {% trans "Submission queue" %}
                         </a>
