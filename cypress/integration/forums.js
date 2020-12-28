@@ -86,23 +86,23 @@ describe("Forums", () => {
     });
 
     it("should insert smiley", () => {
-        cy.get("#cke_37").click();
+        cy.get(".cke_button__smiley").click();
         cy.get(".cke_dark_background a").first().click();
-        cy.get("#cke_1_contents").find(".smiley").should("be.visible");
+        cy.get("#cke_id_body .cke_wysiwyg_div").find(".smiley").should("be.visible");
     });
 
     it("should insert bold", () => { 
-        cy.get("#cke_22").click();
+        cy.get(".cke_button__bold").click();
         cy.get("#cke_id_body .cke_wysiwyg_div strong");
     });
 
     it("should insert italic", () => {
-        cy.get("#cke_23").click();
+        cy.get(".cke_button__italic").click();
         cy.get("#cke_id_body .cke_wysiwyg_div em");
     });
 
     it("should insert link", () => { 
-        cy.get("#cke_30").click();
+        cy.get(".cke_button__simplelink").click();
         cy.get(".cke_dialog_ui_input_text input").first().type("https://astrobin.com");
         cy.get(".cke_dialog_ui_input_text input").last().type("Astrobin");
         cy.get(".cke_dialog_ui_button_ok").click();
