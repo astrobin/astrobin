@@ -26,6 +26,7 @@ THUMBNAIL_ALIASES = {
     '': {
         # Main image thumbnails
         'real': {'size': (16536, 16536), 'watermark': True, 'keep_icc_profile': True},
+        'real_anonymized': {'size': (16536, 16536), 'watermark': False, 'keep_icc_profile': True},
         'real_inverted': {'size': (16536, 16536), 'invert': True, 'watermark': True},
 
         'hd': {'size': (1824, 0), 'crop': 'smart', 'watermark': True, 'keep_icc_profile': True},

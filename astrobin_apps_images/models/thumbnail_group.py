@@ -15,6 +15,7 @@ class ThumbnailGroup(models.Model):
     )
 
     real = models.CharField(max_length=512, null=True, blank=True)
+    real_anonymized = models.CharField(max_length=512, null=True, blank=True)
     real_inverted = models.CharField(max_length=512, null=True, blank=True)
     hd = models.CharField(max_length=512, null=True, blank=True)
     hd_anonymized = models.CharField(max_length=512, null=True, blank=True)
@@ -45,6 +46,7 @@ class ThumbnailGroup(models.Model):
 
         return [
             self.real,
+            self.real_anonymized,
             self.real_inverted,
             self.hd,
             self.hd_anonymized,
