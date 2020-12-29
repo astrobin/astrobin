@@ -1,4 +1,5 @@
 from models import DeepSky_Acquisition, Image, UserProfile, Gear, User, Camera, Telescope
+from utils import unique_items
 
 from django.utils.translation import ugettext as _
 from django.db.models import Q
@@ -12,21 +13,13 @@ import unicodedata
 from collections import defaultdict
 import operator
 
-def unique_items(l):
-    found = []
-    for i in l:
-        if i not in found:
-            found.append(i)
-
-    return found
-
 
 def daterange(start, end):
     r = (end + timedelta(days=1) - start).days
     return [start + timedelta(days=i) for i in range(r)]
 
 
-def integration_hours(user, period = 'monthly', since = 0):
+def integration_hours(user, period='monthly', since=0):
     _map = {
         'yearly' : (_("Integration hours, yearly") , '%Y'),
         'monthly': (_("Integration hours, monthly"), '%Y-%m'),

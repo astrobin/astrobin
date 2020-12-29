@@ -11,12 +11,11 @@ from django.db.models import Count
 from django.utils import timezone
 
 
-def unique_items(l):
-    found = []
-    for i in l:
-        if i not in found:
-            found.append(i)
-    return found
+def unique_items(list_with_possible_duplicates):
+    """
+    Given an initial list, returns a list but without duplicates
+    """
+    return list(set(list_with_possible_duplicates))
 
 
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -110,6 +109,7 @@ def get_client_country_code(request):
     except:
         return "UNKNOWN"
 
+
 def get_european_union_country_codes():
     return (
         'at',
@@ -140,6 +140,7 @@ def get_european_union_country_codes():
         'si',
         'sk',
     )
+
 
 def inactive_accounts():
     """Gets all the user profiles of users with at least one image, who haven't uploaded in over 2 months"""
@@ -258,7 +259,7 @@ def degrees_minutes_seconds_to_decimal_degrees(degrees, minutes, seconds, direct
     if degrees is None:
         degrees = 0
 
-    dd = float(degrees) + float(minutes) / 60 + float(seconds) / (60 * 60);
+    dd = float(degrees) + float(minutes) / 60 + float(seconds) / (60 * 60)
 
     if direction == 'E' or direction == 'N':
         dd *= -1

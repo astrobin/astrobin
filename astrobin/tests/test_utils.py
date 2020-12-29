@@ -166,3 +166,9 @@ class UtilsTest(TestCase):
         accounts = utils.never_activated_accounts_to_be_deleted()
 
         self.assertEquals(2, accounts.count())
+
+    def test_unique_items(self):
+        list_with_duplicates = ['foo', 'bar', 'baz', 'foo', 2, 6, 10, 2]
+        expected_result = ['foo', 'bar', 'baz', 2, 6, 10]
+
+        self.assertEqual(sorted(expected_result), sorted(utils.unique_items(list_with_duplicates)))
