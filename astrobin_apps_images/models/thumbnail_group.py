@@ -24,7 +24,6 @@ class ThumbnailGroup(models.Model):
     hd_sharpened_inverted = models.CharField(max_length=512, null=True, blank=True)
     regular = models.CharField(max_length=512, null=True, blank=True)
     regular_anonymized = models.CharField(max_length=512, null=True, blank=True)
-    regular_crop_anonymized = models.CharField(max_length=512, null=True, blank=True)
     regular_inverted = models.CharField(max_length=512, null=True, blank=True)
     regular_sharpened = models.CharField(max_length=512, null=True, blank=True)
     regular_sharpened_inverted = models.CharField(max_length=512, null=True, blank=True)
@@ -37,6 +36,7 @@ class ThumbnailGroup(models.Model):
     iotd_mobile = models.CharField(max_length=512, null=True, blank=True)
     iotd_candidate = models.CharField(max_length=512, null=True, blank=True)
     story = models.CharField(max_length=512, null=True, blank=True)
+    story_crop = models.CharField(max_length=512, null=True, blank=True)
     duckduckgo = models.CharField(max_length=512, null=True, blank=True)
     duckduckgo_small = models.CharField(max_length=512, null=True, blank=True)
     instagram_story = models.CharField(max_length=512, null=True, blank=True)
@@ -53,7 +53,6 @@ class ThumbnailGroup(models.Model):
             self.hd_inverted,
             self.regular,
             self.regular_anonymized,
-            self.regular_crop_anonymized,
             self.real_inverted,
             self.gallery,
             self.gallery_inverted,
@@ -65,6 +64,7 @@ class ThumbnailGroup(models.Model):
             self.iotd_mobile,
             self.iotd_candidate,
             self.story,
+            self.story_crop,
             self.duckduckgo,
             self.duckduckgo_small,
             self.instagram_story,
