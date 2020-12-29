@@ -64,4 +64,48 @@ describe("Forums", () => {
         cy.get("textarea.cke_source")
             .should("contain.value", "[quote=\"astrobin_dev\"]This is a reply.[/quote]");
     });
+
+    it("should like", () => {
+        cy.login({
+            next: "/forum/c/astrobin/announcements/test-topic",
+            username: "astrobin_dev2",
+            password: "astrobin_dev2"
+        });
+
+        let btn = cy.get(".post-related").first().find("button");
+
+        btn.contains("Like").click();
+        btn.contains("Unlike").should("be.visible");
+    });
+
+    it("should unlike", () => {
+        let btn = cy.get(".post-related").first().find("button");
+
+        btn.contains("Unlike").click();
+        btn.contains("Like").should("be.visible");
+    });
+
+    it("should insert smiley", () => {
+        cy.get(".cke_button__smiley").click();
+        cy.get(".cke_dark_background a").first().click();
+        cy.get("#cke_id_body .cke_wysiwyg_div").find(".smiley").should("be.visible");
+    });
+
+    it("should insert bold", () => { 
+        cy.get(".cke_button__bold").click();
+        cy.get("#cke_id_body .cke_wysiwyg_div strong");
+    });
+
+    it("should insert italic", () => {
+        cy.get(".cke_button__italic").click();
+        cy.get("#cke_id_body .cke_wysiwyg_div em");
+    });
+
+    it("should insert link", () => { 
+        cy.get(".cke_button__simplelink").click();
+        cy.get(".cke_dialog_ui_input_text input").first().type("https://astrobin.com");
+        cy.get(".cke_dialog_ui_input_text input").last().type("Astrobin");
+        cy.get(".cke_dialog_ui_button_ok").click();
+        cy.get("#cke_id_body .cke_wysiwyg_div a").should("contain", "Astrobin");
+    });
 });
