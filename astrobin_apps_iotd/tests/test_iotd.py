@@ -615,6 +615,7 @@ class IotdTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<span class="used">0</span>', html=True)
 
+        self.image.designated_iotd_submitters.add(self.submitter_1)
         # Check that images from a free user are not rendered
         response = self.client.get(url)
         self.assertNotContains(response, 'data-id="%s"' % self.image.pk)
@@ -765,6 +766,7 @@ class IotdTest(TestCase):
         self.assertContains(response, '<span class="used">0</span>', html=True)
 
         # Check that images are rendered
+        self.image.designated_iotd_reviewers.add(self.reviewer_1)
         submission_1 = IotdSubmission.objects.create(submitter=self.submitter_1, image=self.image)
         response = self.client.get(url)
         self.assertContains(response, 'data-id="%s"' % self.image.pk)
