@@ -5,23 +5,18 @@ from django.core.management.base import BaseCommand
 from django.db.models import Q, Count
 
 from astrobin.models import Gear
+from astrobin.utils import unique_items
+
 
 class Command(BaseCommand):
     help = "Rename makes."
 
     def handle(self, *args, **options):
-        def unique_items(l):
-            found = []
-            for i in l:
-                if i not in found:
-                    found.append(i)
-            return found
-
         seen = []
         all_makes = sorted(unique_items(Gear.objects.exclude(
-            Q(make = None) |
-            Q(make = '') |
-            Q(make__in = seen)).values_list('make', flat = True)))
+            Q(make=None) |
+            Q(make='') |
+            Q(make__in=seen)).values_list('make', flat=True)))
 
         print "Total makes: %d." % len(all_makes)
 

@@ -6,24 +6,20 @@ from django.core.management.base import BaseCommand
 from django.db.models import Q
 
 from astrobin.models import Gear
+from astrobin.utils import unique_items
+
 
 class Command(BaseCommand):
     help = "Merges similar make names."
 
     def handle(self, *args, **options):
-        def unique_items(l):
-            found = []
-            for i in l:
-                if i not in found:
-                    found.append(i)
-            return found
 
         seen = []
         while True:
             number_merged = 0
 
-            queryset = Gear.objects.exclude(Q(make = None) | Q(make = '') | Q(make__in = seen))
-            all_makes = [x.make for x in Gear.objects.exclude(Q(make = None) | Q(make = ''))]
+            queryset = Gear.objects.exclude(Q(make=None) | Q(make='') | Q(make__in=seen))
+            all_makes = [x.make for x in Gear.objects.exclude(Q(make=None) | Q(make=''))]
 
             item = queryset[0]
             matches = unique_items(difflib.get_close_matches(item.make, all_makes))
@@ -50,7 +46,7 @@ class Command(BaseCommand):
             if new_make == '':
                 new_make = item.make
 
-            masters = Gear.objects.filter(make = item.make)
+            masters = Gear.objects.filter(make=item.make)
             for master in masters:
                 master.make = new_make
                 master.save()
