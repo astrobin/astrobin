@@ -485,7 +485,6 @@ urlpatterns += [
     url(r'^json-api/', include('astrobin_apps_json_api.urls')),
 ]
 
-
 urlpatterns += [url(r'^silk/', include('silk.urls', namespace='silk'))]
 
 if not settings.AWS_S3_ENABLED:
