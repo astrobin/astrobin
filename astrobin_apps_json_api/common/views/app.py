@@ -33,7 +33,9 @@ class AppConfig(JSONResponseMixin, View):
             u"PREMIUM_PRICE_ULTIMATE_2020": settings.PREMIUM_PRICE_ULTIMATE_2020,
             u"MAX_IMAGE_PIXELS": Image.MAX_IMAGE_PIXELS,
             u"GOOGLE_ADS_ID": settings.GOOGLE_ADS_ID,
-            u"REQUEST_COUNTRY": utils.get_client_country_code(request)
+            u"REQUEST_COUNTRY": utils.get_client_country_code(request),
+            u"THUMBNAIL_ALIASES": settings.THUMBNAIL_ALIASES[''],
+            u"IOTD_SUBMISSION_MAX_PER_DAY": settings.IOTD_SUBMISSION_MAX_PER_DAY,
         })
 
     def __get_i18n_hash__(self):

@@ -142,7 +142,6 @@ if settings.DEBUG or settings.TESTING:
 
     urlpatterns += [url(r'^__debug__/', include(debug_toolbar.urls))]
     INTERNAL_IPS = ["*"]
-
 urlpatterns += [
     ###########################################################################
     ### DJANGO VIEWS                                                        ###
@@ -205,11 +204,13 @@ urlpatterns += [
     url(r'^api/v2/api-auth-token/', obtain_auth_token),
     url(r'^api/v2/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/v2/common/', include('common.api_urls')),
+    url(r'^api/v2/astrobin/', include('astrobin.api2.urls'  )),
     url(r'^api/v2/nestedcomments/', include('nested_comments.api_urls')),
     url(r'^api/v2/platesolving/', include('astrobin_apps_platesolving.api_urls')),
     url(r'^api/v2/notifications/', include('astrobin_apps_notifications.api.urls')),
     url(r'^api/v2/images/', include('astrobin_apps_images.api.urls', namespace="astrobin_apps_images")),
     url(r'^api/v2/payments/', include('astrobin_apps_payments.api.urls', namespace="astrobin_apps_payments")),
+    url(r'^api/v2/iotd/', include('astrobin_apps_iotd.api.urls', namespace="astrobin_apps_iotd")),
 
     ###########################################################################
     ### OWN APPS VIEWS                                                      ###
