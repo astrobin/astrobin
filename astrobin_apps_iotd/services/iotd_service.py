@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.db.models import Q
 
 from astrobin.enums import SubjectType
@@ -30,8 +31,8 @@ class IotdService:
             iotdsubmission__isnull=False,
         ).order_by('-published').distinct()
 
-    def get_submission_queue(self):
-        # type: () -> list[Image]
+    def get_submission_queue(self, submitter):
+        # type: (User) -> list[Image]
 
         def can_add(image):
             # type: (Image) -> bool
@@ -44,7 +45,8 @@ class IotdService:
 
         images = Image.objects.filter(
             moderator_decision=1,
-            published__gte=datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
+            published__gte=datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS),
+            designated_iotd_submitters=submitter
         ).exclude(
             subject_type__in=(SubjectType.GEAR, SubjectType.OTHER)
         ).order_by(

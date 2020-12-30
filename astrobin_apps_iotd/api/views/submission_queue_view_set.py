@@ -16,4 +16,4 @@ class SubmissionQueueViewSet(viewsets.ModelViewSet):
     permission_classes = [ReadOnly]
 
     def get_queryset(self):
-        return IotdService().get_submission_queue()
+        return IotdService().get_submission_queue(self.request.user)

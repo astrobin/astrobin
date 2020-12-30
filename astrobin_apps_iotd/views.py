@@ -43,7 +43,7 @@ class IotdSubmissionQueueView(
     template_name = 'astrobin_apps_iotd/iotd_submission_queue.html'
 
     def get_queryset(self):
-        return IotdService().get_submission_queue()
+        return IotdService().get_submission_queue(self.request.user)
 
 
 class IotdToggleSubmissionAjaxView(
@@ -89,7 +89,7 @@ class IotdReviewQueueView(
         cutoff = datetime.now() - timedelta(days)
         return sorted(list(set([
             x.image
-            for x in self.model.objects.filter(date__gte=cutoff)
+            for x in self.model.objects.filter(date__gte=cutoff, image__designated_iotd_reviewers=self.request.user)
             if not Iotd.objects.filter(
                 image=x.image,
                 date__lte=datetime.now().date()).exists()
