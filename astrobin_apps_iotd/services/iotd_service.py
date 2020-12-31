@@ -43,7 +43,9 @@ class IotdService:
 
             return not user_is_free and not already_iotd
 
-        images = Image.objects.filter(
+        images = Image.objects.exclude(
+            user=submitter
+        ).filter(
             moderator_decision=1,
             published__gte=datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS),
             designated_iotd_submitters=submitter
