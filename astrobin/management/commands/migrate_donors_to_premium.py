@@ -12,7 +12,7 @@ class Command(BaseCommand):
 
     def process_user(self, user, amount, first_payment):
         price = 36.0
-        days_paid = int(float(amount)/price * 365.25)
+        days_paid = int(float(amount)/price * 365.2425)
         expires = (first_payment + timedelta(days_paid)).date()
 
         if expires > date.today():
