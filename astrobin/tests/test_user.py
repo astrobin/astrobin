@@ -293,9 +293,11 @@ class UserTest(TestCase):
         image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
         image3 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE3")
 
+        today = date.today()
+        one_year_ago = datetime(today.year - 1,today.month, today.day, 0, 0, 0)
         acquisition1 = Acquisition.objects.create(image=image1, date=today)
         acquisition2 = Acquisition.objects.create(
-            image=image2, date=today - timedelta(days=365))
+            image=image2, date=one_year_ago)
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=year")
