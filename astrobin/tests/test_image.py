@@ -3493,7 +3493,7 @@ class ImageTest(TestCase):
 
         image = Generators.image()
 
-        self.assertEquals(1, image.designated_iotd_submitters.count())
+        self.assertEquals(2, image.designated_iotd_submitters.count())
 
     def test_image_designated_iotd_reviewers(self):
         group = Group.objects.create(name='iotd_reviewers')
@@ -3504,4 +3504,4 @@ class ImageTest(TestCase):
 
         image = Generators.image()
 
-        self.assertEquals(1, image.designated_iotd_reviewers.count())
+        self.assertEquals(2, image.designated_iotd_reviewers.count())
