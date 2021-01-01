@@ -1,6 +1,7 @@
 import sys
 from datetime import date, timedelta, datetime
 
+from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
 from django.test import TestCase, override_settings
@@ -506,6 +507,9 @@ class UserTest(TestCase):
         IotdSubmission.objects.create(submitter=submitter, image=image)
         vote = IotdVote.objects.create(reviewer=reviewer, image=image)
         iotd = Iotd.objects.create(judge=judge, image=image, date=datetime.now().date())
+
+        image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        image.save()
 
         profile = self.user.userprofile
         profile.banned_from_competitions = datetime.now()
