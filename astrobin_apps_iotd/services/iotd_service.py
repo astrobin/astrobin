@@ -14,10 +14,13 @@ class IotdService:
     def get_iotds(self):
         return Iotd.objects \
             .filter(date__lte=datetime.now().date(), image__deleted=None) \
-            .exclude(image__corrupted=True)
+            .exclude(image__corrupted=True, image__user__userprofile__exclude_from_competitions = True)
 
     def get_top_picks(self):
-        return Image.objects.exclude(Q(iotdvote=None) | Q(corrupted=True)).filter(
+        return Image.objects.exclude(
+            Q(iotdvote=None) | Q(corrupted=True) |
+            Q(image__user__userprofile__exclude_from_competitions=True)
+        ).filter(
             Q(published__lt=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)) &
             Q(Q(iotd=None) | Q(iotd__date__gt=datetime.now().date()))
         ).order_by('-published')
@@ -27,7 +30,8 @@ class IotdService:
             corrupted=False,
             iotdvote__isnull=True,
             iotdsubmission__isnull=False,
-            published__lt=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)
+            published__lt=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS),
+            user__userprofile__exclude_from_competitions=False
         ).order_by('-published').distinct()
 
     def get_submission_queue(self, submitter):

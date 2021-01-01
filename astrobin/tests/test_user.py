@@ -465,6 +465,8 @@ class UserTest(TestCase):
         profile.save(keep_deleted=True)
         image = Image.objects_including_wip.get(pk=image.pk)
 
+        image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+
         # Check that the IOTD banner is not visible
         response = self.client.get(reverse('image_detail', args=(image.get_id(),)))
         self.assertNotContains(response, "iotd-ribbon")
