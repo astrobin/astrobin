@@ -4,8 +4,7 @@ from astrobin_apps_iotd.feeds.iotd import IotdFeed, IotdAtomFeed
 from astrobin_apps_iotd.feeds.top_picks import TopPickFeed, TopPickAtomFeed
 from astrobin_apps_iotd.feeds.top_picks_instagram_story import TopPickInstagramStoryFeed, TopPickInstagramStoryAtomFeed
 from astrobin_apps_iotd.views import IotdToggleSubmissionAjaxView, IotdSubmissionQueueView, IotdToggleVoteAjaxView, \
-    IotdReviewQueueView, IotdToggleJudgementAjaxView, IotdJudgementQueueView, IotdArchiveView, \
-    IotdSubmittersForImageAjaxView, IotdReviewersForImageAjaxView
+    IotdReviewQueueView, IotdToggleJudgementAjaxView, IotdJudgementQueueView, IotdArchiveView
 
 urlpatterns = (
     # Submissions
