@@ -1,4 +1,7 @@
 # Python
+from datetime import datetime, timedelta
+
+from django.conf import settings
 from mock import patch
 
 # Django
@@ -72,6 +75,9 @@ class ExploreTest(TestCase):
         IotdSubmission.objects.create(submitter=self.submitter, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer, image=self.image)
 
+        self.image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.save()
+
         response = self.client.get(reverse_lazy('top_picks'))
         self.assertContains(response, self.image.title)
 
@@ -120,6 +126,9 @@ class ExploreTest(TestCase):
     def test_top_picks_acquisition_type_filter(self):
         IotdSubmission.objects.create(submitter=self.submitter, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer, image=self.image)
+
+        self.image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.save()
 
         response = self.client.get(reverse_lazy('top_picks'))
         self.assertContains(response, self.image.title)

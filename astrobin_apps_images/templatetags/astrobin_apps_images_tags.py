@@ -12,6 +12,7 @@ from django.template import Library
 from django.utils.translation import ugettext as _
 
 from astrobin.models import Image, ImageRevision
+from astrobin_apps_iotd.services import IotdService
 
 register = Library()
 
@@ -196,26 +197,14 @@ def astrobin_image(context, image, alias, **kwargs):
     if alias in (
             'thumb', 'gallery', 'gallery_inverted',
             'regular', 'regular_inverted', 'regular_sharpened'):
-        if (hasattr(image, 'iotd') and
-                image.iotd is not None and
-                image.iotd.date <= datetime.now().date() and
-                not image.user.userprofile.exclude_from_competitions):
+
+        if IotdService().get_iotds().filter(image__pk=image.pk).exists():
             badges.append('iotd')
-
-        if ((not hasattr(image, 'iotd') or image.iotd.date > datetime.now().date()) and
-                hasattr(image, 'iotdvote_set') and
-                image.iotdvote_set.count() > 0 and
-                not image.user.userprofile.exclude_from_competitions):
+        elif IotdService().get_top_picks().filter(pk=image.pk).exists():
             badges.append('top-pick')
-
-        if ((not hasattr(image, 'iotd') or image.iotd.date > datetime.now().date()) and
-                (not hasattr(image, 'iotdvote_set') or image.iotdvote_set.count() == 0) and
-                hasattr(image, 'iotdsubmission_set') and
-                image.iotdsubmission_set.count() > 0 and
-                not image.user.userprofile.exclude_from_competitions):
+        elif IotdService().get_top_pick_nominations().filter(pk=image.pk).exists():
             badges.append('top-pick-nomination')
-
-        if image.is_wip:
+        elif image.is_wip:
             badges.append('wip')
 
         # Temporarily disable this because it hogs the default celery queue.

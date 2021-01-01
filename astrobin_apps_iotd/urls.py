@@ -4,8 +4,7 @@ from astrobin_apps_iotd.feeds.iotd import IotdFeed, IotdAtomFeed
 from astrobin_apps_iotd.feeds.top_picks import TopPickFeed, TopPickAtomFeed
 from astrobin_apps_iotd.feeds.top_picks_instagram_story import TopPickInstagramStoryFeed, TopPickInstagramStoryAtomFeed
 from astrobin_apps_iotd.views import IotdToggleSubmissionAjaxView, IotdSubmissionQueueView, IotdToggleVoteAjaxView, \
-    IotdReviewQueueView, IotdToggleJudgementAjaxView, IotdJudgementQueueView, IotdArchiveView, \
-    IotdSubmittersForImageAjaxView, IotdReviewersForImageAjaxView
+    IotdReviewQueueView, IotdToggleJudgementAjaxView, IotdJudgementQueueView, IotdArchiveView
 
 urlpatterns = (
     # Submissions
@@ -43,16 +42,6 @@ urlpatterns = (
         r'^archive/$',
         IotdArchiveView.as_view(),
         name='iotd_archive'),
-
-    # Utils
-    url(
-        r'^submitters-for-image-ajax/(?P<pk>\d+)/$',
-        IotdSubmittersForImageAjaxView.as_view(),
-        name='iotd_submitters_for_image'),
-    url(
-        r'^reviewers-for-image-ajax/(?P<pk>\d+)/$',
-        IotdReviewersForImageAjaxView.as_view(),
-        name='iotd_reviewers_for_image'),
 
     # Feeds
     url(r'rss/iotd$', IotdFeed(), name='iotd_rss_iotd'),

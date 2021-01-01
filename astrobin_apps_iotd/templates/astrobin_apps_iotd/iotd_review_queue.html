@@ -34,18 +34,6 @@
             <div class="iotd-queue-item
                        {% if request.user|may_toggle_vote:image %} may-select{% else %}may-not-select{% endif %}
                        {% if request.user|has_voted:image %} selected{% endif %}">
-                {% with count=image|submissions_count %}
-                    <div class="submissions-count">
-                        <a class="badge"
-                           href="#submitters-modal"
-                           data-toggle="modal"
-                           data-image="{{image.pk}}"
-                           rel="tooltip"
-                           title="{{count}}">
-                            #
-                        </a>
-                    </div>
-                {% endwith %}
 
                 <a href="#" class="select" data-toggle-url="{% url 'iotd_toggle_vote_ajax' image.pk %}">
                     {% astrobin_image image 'story' link=False tooltip=False %}
@@ -90,30 +78,6 @@
     {% endif %} {# READONLY #}
 {% endblock %}
 
-{% block modals %}
-    <div id="submitters-modal" class="modal hide fade">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h3>{% trans "Submitters" %}</h3>
-        </div>
-
-        <div class="modal-body">
-            <img src="{% static "astrobin/images/ajax-loader.gif" %}" alt="{% trans "Loading" %}" />
-        </div>
-    </div>
-
-    <div id="error-modal" class="modal hide fade">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h3>{% trans "Error" %}</h3>
-        </div>
-
-        <div class="modal-body">
-            <p class="error-message">
-            </p>
-        </div>
-    </div>
-{% endblock %}
 
 {% block extra_js %}
     <script type="text/javascript">
@@ -122,23 +86,6 @@
                 type: 'image'
             });
 
-            $('.badge').on('click', function() {
-                var $modal = $('#submitters-modal'),
-                    pk = $(this).data('image');
-
-                $.ajax({
-                    url: '/iotd/submitters-for-image-ajax/' + pk,
-                    timeout: 0,
-                    success: function(data, textStatus, jqXHR) {
-                        $modal.find('.modal-body').html(data);
-                    }
-                });
-            });
-
-            $('#submitters-modal').on('hidden', function() {
-                $(this).find('.modal-body').html(
-                    '<img src="{% static "astrobin/images/ajax-loader.gif" %}" alt="{% trans "Loading" %}" />');
-            });
 
             $('.iotd-queue-item a.select').click(function(e) {
                 var $item = $(this).closest('.iotd-queue-item'),

@@ -77,6 +77,9 @@ class IotdTest(TestCase):
         self.assertEqual(submission.submitter, self.submitter_1)
         self.assertEqual(submission.image, self.image)
 
+        self.image.published = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.save()
+
         # Badge is present
         response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertContains(response, 'top-pick-nomination-badge')
@@ -341,6 +344,9 @@ class IotdTest(TestCase):
             image=submission_1.image)
         self.assertEqual(vote.reviewer, self.reviewer_1)
         self.assertEqual(vote.image, submission_1.image)
+
+        self.image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.save()
 
         # Badge is present
         response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
@@ -777,10 +783,6 @@ class IotdTest(TestCase):
         bss = BSS(response.content)
         self.assertEqual(len(bss('.astrobin-image-container')), 1)
 
-        # Check for count badge
-        self.assertEqual(bss('.iotd-queue-item .badge')[0].attrMap['title'], '2')
-        submission_2.delete()
-
         # Check for may-not-select class
         submission_1.submitter = self.reviewer_1
         self.submitters.user_set.add(self.reviewer_1)
@@ -899,9 +901,6 @@ class IotdTest(TestCase):
         bss = BSS(response.content)
         self.assertEqual(len(bss('.astrobin-image-container')), 1)
 
-        # Check for count badge
-        self.assertEqual(bss('.iotd-queue-item .badge')[0].attrMap['title'], '2')
-        vote_2.delete()
 
         # Check for may-not-select class
         self.reviewers.user_set.add(self.judge_1)

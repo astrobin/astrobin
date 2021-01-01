@@ -222,39 +222,3 @@ class IotdArchiveView(ListView):
 
     def get_queryset(self):
         return IotdService().get_iotds()
-
-
-class IotdSubmittersForImageAjaxView(
-    LoginRequiredMixin, GroupRequiredMixin, View):
-    group_required = 'iotd_reviewers'
-
-    def get(self, request, *args, **kwargs):
-        if request.is_ajax():
-            image = get_object_or_404(Image, pk=kwargs['pk'])
-            submitters = [x.submitter for x in IotdSubmission.objects.filter(image=image)]
-
-            return render(request, 'astrobin_apps_users/inclusion_tags/user_list.html', {
-                'view': 'table',
-                'layout': 'compact',
-                'user_list': submitters,
-            })
-
-        return HttpResponseForbidden()
-
-
-class IotdReviewersForImageAjaxView(
-    LoginRequiredMixin, GroupRequiredMixin, View):
-    group_required = 'iotd_judges'
-
-    def get(self, request, *args, **kwargs):
-        if request.is_ajax():
-            image = get_object_or_404(Image, pk=kwargs['pk'])
-            reviewers = [x.reviewer for x in IotdVote.objects.filter(image=image)]
-
-            return render(request, 'astrobin_apps_users/inclusion_tags/user_list.html', {
-                'view': 'table',
-                'layout': 'compact',
-                'user_list': reviewers,
-            })
-
-        return HttpResponseForbidden()
