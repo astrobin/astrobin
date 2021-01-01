@@ -94,16 +94,6 @@ def is_submitted_by(image, user):
 
 
 @register.filter
-def submissions_count(image):
-    return IotdSubmission.objects.filter(image = image).count()
-
-
-@register.filter
-def votes_count(image):
-    return IotdVote.objects.filter(image = image).count()
-
-
-@register.filter
 def is_iotd(image):
     return Iotd.objects.filter(image = image).exists()
 

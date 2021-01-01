@@ -44,16 +44,6 @@ urlpatterns = (
         IotdArchiveView.as_view(),
         name='iotd_archive'),
 
-    # Utils
-    url(
-        r'^submitters-for-image-ajax/(?P<pk>\d+)/$',
-        IotdSubmittersForImageAjaxView.as_view(),
-        name='iotd_submitters_for_image'),
-    url(
-        r'^reviewers-for-image-ajax/(?P<pk>\d+)/$',
-        IotdReviewersForImageAjaxView.as_view(),
-        name='iotd_reviewers_for_image'),
-
     # Feeds
     url(r'rss/iotd$', IotdFeed(), name='iotd_rss_iotd'),
     url(r'atom/iotd$', IotdAtomFeed(), name='iotd_atom_iotd'),
