@@ -17,18 +17,17 @@ class IotdService:
             .exclude(image__corrupted=True)
 
     def get_top_picks(self):
-        return Image.objects \
-            .exclude(
-            Q(iotdvote=None) | Q(corrupted=True)) \
-            .filter(
-            Q(iotd=None) |
-            Q(iotd__date__gt=datetime.now().date())).order_by('-published')
+        return Image.objects.exclude(Q(iotdvote=None) | Q(corrupted=True)).filter(
+            Q(published__lt=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)) &
+            Q(Q(iotd=None) | Q(iotd__date__gt=datetime.now().date()))
+        ).order_by('-published')
 
     def get_top_pick_nominations(self):
         return Image.objects.filter(
             corrupted=False,
             iotdvote__isnull=True,
             iotdsubmission__isnull=False,
+            published__lt=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)
         ).order_by('-published').distinct()
 
     def get_submission_queue(self, submitter):
