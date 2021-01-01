@@ -45,6 +45,8 @@ class IotdServiceTest(TestCase):
         IotdGenerators.vote(image=iotd_image)
         IotdGenerators.iotd(image=iotd_image)
 
+
+
         iotds = IotdService().get_iotds()
 
         self.assertEquals(0, iotds.count())

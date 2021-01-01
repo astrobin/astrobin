@@ -13,13 +13,14 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_fre
 class IotdService:
     def get_iotds(self):
         return Iotd.objects \
-            .filter(date__lte=datetime.now().date(), image__deleted=None) \
-            .exclude(image__corrupted=True, image__user__userprofile__exclude_from_competitions = True)
+            .filter(date__lte=datetime.now().date(), image__deleted=None,
+                    image__user__userprofile__exclude_from_competitions=False) \
+            .exclude(image__corrupted=True)
 
     def get_top_picks(self):
         return Image.objects.exclude(
             Q(iotdvote=None) | Q(corrupted=True) |
-            Q(image__user__userprofile__exclude_from_competitions=True)
+            Q(user__userprofile__exclude_from_competitions=True)
         ).filter(
             Q(published__lt=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)) &
             Q(Q(iotd=None) | Q(iotd__date__gt=datetime.now().date()))
