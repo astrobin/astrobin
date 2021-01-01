@@ -11,11 +11,28 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_fre
 
 
 class IotdService:
+    def is_iotd(self, image):
+        # type: (Image) -> bool
+        return \
+            hasattr(image, 'iotd') and \
+            image.iotd is not None and \
+            image.iotd.date <= datetime.now().date() and \
+            not image.user.userprofile.exclude_from_competitions
+
     def get_iotds(self):
         return Iotd.objects \
             .filter(date__lte=datetime.now().date(), image__deleted=None,
                     image__user__userprofile__exclude_from_competitions=False) \
             .exclude(image__corrupted=True)
+
+    def is_top_pick(self, image):
+        # type: (Image) -> bool
+        return \
+            (not hasattr(image, 'iotd') or image.iotd.date > datetime.now().date()) and \
+            hasattr(image, 'iotdvote_set') and \
+            image.iotdvote_set.count() > 0 and \
+            not image.user.userprofile.exclude_from_competitions and \
+            image.published < datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)
 
     def get_top_picks(self):
         return Image.objects.exclude(
@@ -25,6 +42,16 @@ class IotdService:
             Q(published__lt=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)) &
             Q(Q(iotd=None) | Q(iotd__date__gt=datetime.now().date()))
         ).order_by('-published')
+
+    def is_top_pick_nomination(self, image):
+        # type: (Image) -> bool
+        return \
+            (not hasattr(image, 'iotd') or image.iotd.date > datetime.now().date()) and \
+            (not hasattr(image, 'iotdvote_set') or image.iotdvote_set.count() == 0) and \
+            hasattr(image, 'iotdsubmission_set') and \
+            image.iotdsubmission_set.count() > 0 and \
+            not image.user.userprofile.exclude_from_competitions and \
+            image.published < datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)
 
     def get_top_pick_nominations(self):
         return Image.objects.filter(

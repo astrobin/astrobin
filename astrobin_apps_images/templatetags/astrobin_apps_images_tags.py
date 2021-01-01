@@ -1,7 +1,6 @@
 import random
 import string
 import zlib
-from datetime import datetime
 
 from PIL import Image as PILImage
 from PIL.Image import DecompressionBombError
@@ -198,11 +197,11 @@ def astrobin_image(context, image, alias, **kwargs):
             'thumb', 'gallery', 'gallery_inverted',
             'regular', 'regular_inverted', 'regular_sharpened'):
 
-        if IotdService().get_iotds().filter(image__pk=image.pk).exists():
+        if IotdService().is_iotd(image):
             badges.append('iotd')
-        elif IotdService().get_top_picks().filter(pk=image.pk).exists():
+        elif IotdService().is_top_pick(image):
             badges.append('top-pick')
-        elif IotdService().get_top_pick_nominations().filter(pk=image.pk).exists():
+        elif IotdService().is_top_pick_nomination(image):
             badges.append('top-pick-nomination')
         elif image.is_wip:
             badges.append('wip')
