@@ -78,7 +78,7 @@
 
                 {% if request.user|is_iotd_submitter %}
                     <li>
-                        <a href="{% url 'iotd_submission_queue' %}">
+                        <a href="{% app_redirection_service request '/iotd/submission-queue' %}">
                             <i class="icon-upload"></i>
                             {% trans "Submission queue" %}
                         </a>
@@ -87,7 +87,7 @@
 
                 {% if request.user|is_iotd_reviewer %}
                     <li>
-                        <a href="{% url 'iotd_review_queue' %}">
+                        <a href="{% app_redirection_service request '/iotd/review-queue' %}">
                             <i class="icon-star"></i>
                             {% trans "Review queue" %}
                         </a>
