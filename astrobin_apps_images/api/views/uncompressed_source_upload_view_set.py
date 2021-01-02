@@ -39,6 +39,7 @@ class UncompressedSourceUploadViewSet(TusCreateMixin,
         HasUploaderAccessOrReadOnly,
         IsImageOwnerOrReadOnly
     ]
+    http_method_names = ['get', 'post', 'head', 'put', 'patch']
 
     def get_file_field_name(self):
         return "uncompressed_source_file"

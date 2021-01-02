@@ -38,6 +38,9 @@ class SubmissionViewSet(viewsets.ModelViewSet):
         submission = self.get_object()  # type: IotdSubmission
         deadline = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
 
+        if submission.submitter != request.user:
+            return HttpResponseForbidden([_("You cannot delete another user's submission.")])
+
         if submission.date < deadline or submission.image.published < deadline:
             return HttpResponseForbidden([_("Sorry, it's now too late to retract this submission.")])
 

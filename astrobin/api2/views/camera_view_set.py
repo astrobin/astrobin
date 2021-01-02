@@ -14,6 +14,7 @@ class CameraViewSet(viewsets.ModelViewSet):
     serializer_class = CameraSerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     permission_classes = [ReadOnly]
+    http_method_names = ['get', 'head']
 
     def get_queryset(self):
         return Camera.objects.all()

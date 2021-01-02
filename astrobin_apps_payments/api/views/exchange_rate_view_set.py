@@ -21,3 +21,4 @@ class ExchangeRateViewSet(viewsets.ModelViewSet):
     permission_classes = [
         ReadOnly,
     ]
+    http_method_names = ['get', 'head']

@@ -14,6 +14,7 @@ class TelescopeViewSet(viewsets.ModelViewSet):
     serializer_class = TelescopeSerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     permission_classes = [ReadOnly]
+    http_method_names = ['get', 'head']
 
     def get_queryset(self):
         return Telescope.objects.all()

@@ -14,6 +14,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [CamelCaseJSONParser]
+    http_method_names = ['get', 'post', 'head', 'put']
 
     def get_queryset(self):
         return Message.objects.filter(user=self.request.user).order_by('-created')

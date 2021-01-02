@@ -20,6 +20,7 @@ class ThumbnailGroupViewSet(viewsets.ModelViewSet):
     parser_classes = [CamelCaseJSONParser]
     permission_classes = [ReadOnly]
     filter_classes = [ThumbnailGroupFilter]
+    http_method_names = ['get', 'post', 'head', 'put', 'patch']
 
     def get_queryset(self):
         objects =  ThumbnailGroup.objects.all()  # type: QuerySet
