@@ -85,15 +85,7 @@ class IotdReviewQueueView(
     template_name = 'astrobin_apps_iotd/iotd_review_queue.html'
 
     def get_queryset(self):
-        days = settings.IOTD_REVIEW_WINDOW_DAYS
-        cutoff = datetime.now() - timedelta(days)
-        return sorted(list(set([
-            x.image
-            for x in self.model.objects.filter(date__gte=cutoff, image__designated_iotd_reviewers=self.request.user)
-            if not Iotd.objects.filter(
-                image=x.image,
-                date__lte=datetime.now().date()).exists()
-        ])), key=lambda x: x.published, reverse=True)
+        return IotdService.get_review_queue(self.request.user)
 
 
 class IotdToggleVoteAjaxView(

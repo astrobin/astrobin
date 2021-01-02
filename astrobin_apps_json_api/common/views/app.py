@@ -36,6 +36,7 @@ class AppConfig(JSONResponseMixin, View):
             u"REQUEST_COUNTRY": utils.get_client_country_code(request),
             u"THUMBNAIL_ALIASES": settings.THUMBNAIL_ALIASES[''],
             u"IOTD_SUBMISSION_MAX_PER_DAY": settings.IOTD_SUBMISSION_MAX_PER_DAY,
+            u"IOTD_REVIEW_MAX_PER_DAY": settings.IOTD_REVIEW_MAX_PER_DAY,
         })
 
     def __get_i18n_hash__(self):
