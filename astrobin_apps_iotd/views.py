@@ -85,7 +85,7 @@ class IotdReviewQueueView(
     template_name = 'astrobin_apps_iotd/iotd_review_queue.html'
 
     def get_queryset(self):
-        return IotdService.get_review_queue(self.request.user)
+        return IotdService().get_review_queue(self.request.user)
 
 
 class IotdToggleVoteAjaxView(
