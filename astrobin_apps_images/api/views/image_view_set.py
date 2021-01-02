@@ -52,6 +52,7 @@ class ImageViewSet(TusCreateMixin,
     permission_classes = [
         IsAuthenticatedOrReadOnly,
     ]
+    http_method_names = ['get', 'post', 'head', 'put', 'patch']
 
     def get_file_field_name(self):
         return "image_file"
