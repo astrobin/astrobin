@@ -26,7 +26,7 @@ class SubmissionViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.model.objects.filter(
             submitter=self.request.user,
-            date__gte=datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS))
+            date__contains=datetime.now().date())
 
     def create(self, request, *args, **kwargs):
         try:

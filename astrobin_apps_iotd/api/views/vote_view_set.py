@@ -26,7 +26,7 @@ class VoteViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.model.objects.filter(
             reviewer=self.request.user,
-            date__gte=datetime.now() - timedelta(days=settings.IOTD_REVIEW_WINDOW_DAYS))
+            date__contains=datetime.now().date())
 
     def create(self, request, *args, **kwargs):
         try:
