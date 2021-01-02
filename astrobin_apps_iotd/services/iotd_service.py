@@ -6,7 +6,7 @@ from django.db.models import Q
 
 from astrobin.enums import SubjectType
 from astrobin.models import Image
-from astrobin_apps_iotd.models import Iotd
+from astrobin_apps_iotd.models import Iotd, IotdSubmission
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 
 
@@ -87,3 +87,17 @@ class IotdService:
         )
 
         return [x for x in images if can_add(x)]
+
+    def get_review_queue(self, reviewer):
+        days = settings.IOTD_REVIEW_WINDOW_DAYS
+        cutoff = datetime.now() - timedelta(days)
+        return sorted(list(set([
+            x.image
+            for x in IotdSubmission.objects
+                .filter(date__gte=cutoff, image__designated_iotd_reviewers=reviewer)
+                .exclude(submitter=reviewer)
+                .exclude(image__user=reviewer)
+            if not Iotd.objects.filter(
+                image=x.image,
+                date__lte=datetime.now().date()).exists()
+        ])), key=lambda x: x.published, reverse=True)

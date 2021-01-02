@@ -12,20 +12,20 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 
-from astrobin_apps_iotd.api.serializers.submission_serializer import SubmissionSerializer
-from astrobin_apps_iotd.models import IotdSubmission
+from astrobin_apps_iotd.api.serializers.vote_serializer import VoteSerializer
+from astrobin_apps_iotd.models import IotdVote
 
 
-class SubmissionViewSet(viewsets.ModelViewSet):
-    serializer_class = SubmissionSerializer
+class VoteViewSet(viewsets.ModelViewSet):
+    serializer_class = VoteSerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     pagination_class = None
     permission_classes = [IsAuthenticated]
-    model = IotdSubmission
+    model = IotdVote
 
     def get_queryset(self):
         return self.model.objects.filter(
-            submitter=self.request.user,
+            reviewer=self.request.user,
             date__contains=datetime.now().date())
 
     def create(self, request, *args, **kwargs):
@@ -35,13 +35,13 @@ class SubmissionViewSet(viewsets.ModelViewSet):
             return HttpResponseForbidden(e.messages)
 
     def destroy(self, request, *args, **kwargs):
-        submission = self.get_object()  # type: IotdSubmission
-        deadline = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
+        vote = self.get_object()  # type: IotdVote
+        deadline = datetime.now() - timedelta(days=settings.IOTD_REVIEW_WINDOW_DAYS)
 
-        if submission.submitter != request.user:
-            return HttpResponseForbidden([_("You cannot delete another user's submission.")])
+        if vote.reviewer != request.user:
+            return HttpResponseForbidden([_("You cannot delete another user's vote.")])
 
-        if submission.date < deadline or submission.image.published < deadline:
-            return HttpResponseForbidden([_("Sorry, it's now too late to retract this submission.")])
+        if vote.date < deadline or vote.image.published < deadline:
+            return HttpResponseForbidden([_("Sorry, it's now too late to retract this vote.")])
 
         return super(viewsets.ModelViewSet, self).destroy(request, *args, **kwargs)
