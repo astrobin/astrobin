@@ -18,7 +18,7 @@ from astrobin_apps_notifications.utils import push_notification
 class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTermsOfService):
     referral_code = forms.fields.CharField(
         required=False,
-        label=_(u'Referral code'),
+        label=_(u'Referral code (optional)'),
     )
 
     important_communications = forms.fields.BooleanField(
