@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -74,14 +74,15 @@ class IotdService:
 
             return not user_is_free and not already_iotd
 
-        images = Image.objects.exclude(
-            user=submitter
-        ).filter(
+        images = Image.objects \
+            .filter(
             moderator_decision=1,
             published__gte=datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS),
-            designated_iotd_submitters=submitter
-        ).exclude(
-            subject_type__in=(SubjectType.GEAR, SubjectType.OTHER)
+            designated_iotd_submitters=submitter) \
+            .exclude(
+            Q(user=submitter) |
+            Q(subject_type__in=(SubjectType.GEAR, SubjectType.OTHER)) |
+            Q(Q(iotdsubmission__submitter=submitter) & Q(iotdsubmission__date__lt=date.today()))
         ).order_by(
             '-published'
         )
@@ -95,8 +96,7 @@ class IotdService:
             x.image
             for x in IotdSubmission.objects
                 .filter(date__gte=cutoff, image__designated_iotd_reviewers=reviewer)
-                .exclude(submitter=reviewer)
-                .exclude(image__user=reviewer)
+                .exclude(Q(submitter=reviewer) | Q(image__user=reviewer))
             if not Iotd.objects.filter(
                 image=x.image,
                 date__lte=datetime.now().date()).exists()

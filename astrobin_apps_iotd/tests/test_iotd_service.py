@@ -3,7 +3,9 @@ from datetime import timedelta, date, datetime
 from django.conf import settings
 from django.test import TestCase
 
+from astrobin.enums import SubjectType
 from astrobin.tests.generators import Generators
+from astrobin_apps_iotd.models import IotdSubmission
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.tests.iotd_generators import IotdGenerators
 
@@ -195,3 +197,95 @@ class IotdServiceTest(TestCase):
         nominations = IotdService().get_top_pick_nominations()
 
         self.assertEquals(0, nominations.count())
+
+    def test_get_submission_queue_different_submitter(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+
+        submitter1 = Generators.user(groups=['iotd_submitters'])
+        submitter2 = Generators.user(groups=['iotd_submitters'])
+        image = Generators.image(user=user)
+        image.designated_iotd_submitters.add(submitter1)
+
+        self.assertEquals(0, len(IotdService().get_submission_queue(submitter2)))
+
+    def test_get_submission_queue_spam(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+        image = Generators.image(user=user)
+        image.designated_iotd_submitters.add(submitter)
+        image.moderator_decision = 2
+        image.save()
+
+        self.assertEquals(0, len(IotdService().get_submission_queue(submitter)))
+
+    def test_get_submission_queue_spam_published_too_long_ago(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+        image = Generators.image(user=user)
+        image.designated_iotd_submitters.add(submitter)
+        image.published = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(hours=1)
+        image.save()
+
+        self.assertEquals(0, len(IotdService().get_submission_queue(submitter)))
+
+    def test_get_submission_queue_spam_other_type(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+        image = Generators.image(user=user)
+        image.designated_iotd_submitters.add(submitter)
+        image.subject_type = SubjectType.OTHER
+        image.save()
+
+        self.assertEquals(0, len(IotdService().get_submission_queue(submitter)))
+
+    def test_get_submission_queue_spam_gear_type(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+        image = Generators.image(user=user)
+        image.designated_iotd_submitters.add(submitter)
+        image.subject_type = SubjectType.GEAR
+        image.save()
+
+        self.assertEquals(0, len(IotdService().get_submission_queue(submitter)))
+
+    def test_get_submission_queue_already_submitted_today(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+        image = Generators.image(user=user)
+        image.designated_iotd_submitters.add(submitter)
+
+        IotdSubmission.objects.create(
+            submitter=submitter,
+            image=image
+        )
+
+        self.assertEquals(1, len(IotdService().get_submission_queue(submitter)))
+
+    def test_get_submission_queue_already_submitted_yesterday(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+        image = Generators.image(user=user)
+        image.designated_iotd_submitters.add(submitter)
+
+        IotdSubmission.objects.create(
+            submitter=submitter,
+            image=image
+        )
+
+        image.published = datetime.now() - timedelta(hours=24)
+        image.save()
+
+        self.assertEquals(0, len(IotdService().get_submission_queue(submitter)))
