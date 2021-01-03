@@ -107,6 +107,16 @@ services:
       - redis
 
 
+  celery_monitor:
+    build:
+      context: ../
+      dockerfile: docker/astrobin.dockerfile
+    links:
+      - postgres
+      - elasticsearch
+      - redis
+
+
   beat:
     build:
       context: ../
