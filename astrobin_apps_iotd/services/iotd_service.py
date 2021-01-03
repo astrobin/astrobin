@@ -76,13 +76,16 @@ class IotdService:
 
         images = Image.objects \
             .filter(
-            moderator_decision=1,
-            published__gte=datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS),
-            designated_iotd_submitters=submitter) \
-            .exclude(
-            Q(user=submitter) |
-            Q(subject_type__in=(SubjectType.GEAR, SubjectType.OTHER)) |
-            Q(Q(iotdsubmission__submitter=submitter) & Q(iotdsubmission__date__lt=date.today()))
+            Q(
+                Q(moderator_decision=1) &
+                Q(published__gte=datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)) &
+                Q(designated_iotd_submitters=submitter)
+            ) &
+            ~Q(
+                Q(user=submitter) |
+                Q(subject_type__in=(SubjectType.GEAR, SubjectType.OTHER)) |
+                Q(Q(iotdsubmission__submitter=submitter) & Q(iotdsubmission__date__lt=date.today()))
+            )
         ).order_by(
             '-published'
         )

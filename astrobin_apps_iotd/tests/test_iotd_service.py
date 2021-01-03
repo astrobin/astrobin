@@ -198,17 +198,6 @@ class IotdServiceTest(TestCase):
 
         self.assertEquals(0, nominations.count())
 
-    def test_get_submission_queue_different_submitter(self):
-        user = Generators.user()
-        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
-
-        submitter1 = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        image = Generators.image(user=user)
-        image.designated_iotd_submitters.add(submitter1)
-
-        self.assertEquals(0, len(IotdService().get_submission_queue(submitter2)))
-
     def test_get_submission_queue_spam(self):
         user = Generators.user()
         Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
