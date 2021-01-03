@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-17 17:04+0000\n"
+"POT-Creation-Date: 2021-01-03 21:27+0000\n"
 "PO-Revision-Date: 2020-05-15 20:18+0000\n"
 "Last-Translator: DanielaDGR <danieladgr.5r@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.8\n"
 "X-POOTLE-MTIME: 1589573930.000000\n"
+
+#, fuzzy
+#| msgid "You cannot elect your own submission."
+msgid "You cannot delete another user's submission."
+msgstr "No puede elegir su propia publicación."
+
+msgid "Sorry, it's now too late to retract this submission."
+msgstr ""
+
+#, fuzzy
+#| msgid "You cannot elect an image you voted for."
+msgid "You cannot delete another user's vote."
+msgstr "No puede elegir una imagen por la que votó."
+
+msgid "Sorry, it's now too late to retract this vote."
+msgstr ""
 
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "Usted no es miembro de la junta de remitentes del IOTD."
@@ -161,15 +177,6 @@ msgstr ""
 msgid "This queue is currently empty."
 msgstr "Esta cola está vacía actualmente."
 
-msgid "Reviewers"
-msgstr "Revisores"
-
-msgid "Loading"
-msgstr "Cargando"
-
-msgid "Error"
-msgstr "Error"
-
 msgid "IOTD Review Queue"
 msgstr "Cola de Revisión IOTD"
 
@@ -180,9 +187,6 @@ msgstr ""
 "Por favor seleccione las imágenes que usted desea promover para una "
 "evaluación final haciendo clic sobre estas."
 
-msgid "Submitters"
-msgstr "Remitentes"
-
 msgid "IOTD Submission Queue"
 msgstr "Cola de envío IOTD"
 
@@ -192,9 +196,21 @@ msgstr ""
 "Por favor, seleccione las imágenes que usted desea proponer para "
 "consideración del IOTD."
 
+msgid "Error"
+msgstr "Error"
+
 msgid "You cannot unelect an IOTD elected by another judge."
 msgstr "No puede anular un IOTD elegido por otro juez."
 
 #, python-format
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr "Todos los puestos IOTD para los próximos %(days)s días están llenos."
+
+#~ msgid "Reviewers"
+#~ msgstr "Revisores"
+
+#~ msgid "Loading"
+#~ msgstr "Cargando"
+
+#~ msgid "Submitters"
+#~ msgstr "Remitentes"

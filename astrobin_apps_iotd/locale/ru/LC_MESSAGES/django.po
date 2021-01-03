@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-17 17:04+0000\n"
+"POT-Creation-Date: 2021-01-03 21:27+0000\n"
 "PO-Revision-Date: 2020-11-24 17:29+0000\n"
 "Last-Translator: NadirAstro <nadir_teymurov@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,22 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
 "X-POOTLE-MTIME: 1606238989.000000\n"
+
+#, fuzzy
+#| msgid "You cannot elect your own submission."
+msgid "You cannot delete another user's submission."
+msgstr "Вы не можете выбрать собственную заявку."
+
+msgid "Sorry, it's now too late to retract this submission."
+msgstr ""
+
+#, fuzzy
+#| msgid "You cannot elect a judge's image."
+msgid "You cannot delete another user's vote."
+msgstr "Вы не можете выбирать изображения судей."
+
+msgid "Sorry, it's now too late to retract this vote."
+msgstr ""
 
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "Вы не участник списка Номинирующих для Изображения Дня."
@@ -159,15 +175,6 @@ msgstr ""
 msgid "This queue is currently empty."
 msgstr "Пока эта очередь пуста."
 
-msgid "Reviewers"
-msgstr "Обозреватели"
-
-msgid "Loading"
-msgstr "Загрузка"
-
-msgid "Error"
-msgstr "Ошибка"
-
 msgid "IOTD Review Queue"
 msgstr "Рецензируемая очередь ИД"
 
@@ -178,9 +185,6 @@ msgstr ""
 "Пожалуйста, отметьте изображения, которые вы хотите продвинуть для "
 "окончательного решения, нажав на них."
 
-msgid "Submitters"
-msgstr "Отправители"
-
 msgid "IOTD Submission Queue"
 msgstr "IOTD Очередь Отправления"
 
@@ -190,6 +194,9 @@ msgstr ""
 "Пожалуйста, отметьте изображения, которые вы хотите номинировать на "
 "рассмотрение в качестве ИД."
 
+msgid "Error"
+msgstr "Ошибка"
+
 msgid "You cannot unelect an IOTD elected by another judge."
 msgstr "Вы не можете отменить выбор ИД от другого судьи."
 
@@ -197,14 +204,20 @@ msgstr "Вы не можете отменить выбор ИД от друго�
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr "Все места для ИД на следующие %(days)s дней уже заполнены."
 
+#~ msgid "Reviewers"
+#~ msgstr "Обозреватели"
+
+#~ msgid "Loading"
+#~ msgstr "Загрузка"
+
+#~ msgid "Submitters"
+#~ msgstr "Отправители"
+
 #~ msgid "You cannot submit a judge's image."
 #~ msgstr "Вы не можете номинировать изображения судей."
 
 #~ msgid "You cannot vote for a judge's image."
 #~ msgstr "Вы не можете голосовать за изображения судей."
-
-#~ msgid "You cannot elect a judge's image."
-#~ msgstr "Вы не можете выбирать изображения судей."
 
 #~ msgid "No images uploaded on this day."
 #~ msgstr "Нет изображений для этого дня."

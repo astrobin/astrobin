@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-17 17:04+0000\n"
+"POT-Creation-Date: 2021-01-03 21:27+0000\n"
 "PO-Revision-Date: 2020-12-06 11:27+0000\n"
 "Last-Translator: JeanBaptisteAuroux <jbauroux@bbox.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.8\n"
 "X-POOTLE-MTIME: 1607254047.000000\n"
+
+#, fuzzy
+#| msgid "You cannot elect your own submission."
+msgid "You cannot delete another user's submission."
+msgstr ""
+"Vous ne pouvez pas élire une image que vous avez préalablement sélectionnée."
+
+msgid "Sorry, it's now too late to retract this submission."
+msgstr ""
+
+#, fuzzy
+#| msgid "You cannot elect a judge's image."
+msgid "You cannot delete another user's vote."
+msgstr "Vous ne pouvez pas élire l'image d'un juge."
+
+msgid "Sorry, it's now too late to retract this vote."
+msgstr ""
 
 msgid "You are not a member of the IOTD Submitters board."
 msgstr ""
@@ -171,15 +188,6 @@ msgstr ""
 msgid "This queue is currently empty."
 msgstr "La liste est actuellement vide."
 
-msgid "Reviewers"
-msgstr "Examinateurs"
-
-msgid "Loading"
-msgstr "Chargement en cours..."
-
-msgid "Error"
-msgstr "Erreur"
-
 msgid "IOTD Review Queue"
 msgstr "Tableau de bord des Examinateurs"
 
@@ -190,9 +198,6 @@ msgstr ""
 "Sélectionnez les images que vous souhaitez soumettre au jugement final pour "
 "l'Image du Jour en cliquant dessus."
 
-msgid "Submitters"
-msgstr "Sélectionneurs"
-
 msgid "IOTD Submission Queue"
 msgstr "Tableau de bord des Sélectionneurs"
 
@@ -202,6 +207,9 @@ msgstr ""
 "Veuillez sélectionner les images que vous souhaitez proposer pour le "
 "concours de l'Image du Jour."
 
+msgid "Error"
+msgstr "Erreur"
+
 msgid "You cannot unelect an IOTD elected by another judge."
 msgstr "Vous ne pouvez pas écarter une Image du Jour élue par un autre juge."
 
@@ -209,14 +217,20 @@ msgstr "Vous ne pouvez pas écarter une Image du Jour élue par un autre juge."
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr "Les Images du Jour des %(days)s prochains jours sont déjà désignées."
 
+#~ msgid "Reviewers"
+#~ msgstr "Examinateurs"
+
+#~ msgid "Loading"
+#~ msgstr "Chargement en cours..."
+
+#~ msgid "Submitters"
+#~ msgstr "Sélectionneurs"
+
 #~ msgid "You cannot submit a judge's image."
 #~ msgstr "Vous ne pouvez pas soumettre l'image d'un juge."
 
 #~ msgid "You cannot vote for a judge's image."
 #~ msgstr "Vous ne pouvez pas voter pour l'image d'un juge."
-
-#~ msgid "You cannot elect a judge's image."
-#~ msgstr "Vous ne pouvez pas élire l'image d'un juge."
 
 #~ msgid "No images uploaded on this day."
 #~ msgstr "Aucune image n'a été téléchargée ce jour-là."
