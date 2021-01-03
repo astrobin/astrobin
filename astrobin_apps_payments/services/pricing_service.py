@@ -71,10 +71,10 @@ class PricingService:
         customer = PricingService.get_stripe_customer(user)
 
         if coupon is None:
-            return None
+            return []
 
         if customer is not None and not PricingService.is_new_customer(customer['id']):
-            return None
+            return []
 
         return [{"coupon": coupon['id']}]
 
