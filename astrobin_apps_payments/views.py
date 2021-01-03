@@ -53,10 +53,10 @@ def create_checkout_session(request, user_pk, product, currency):
     log.info("create_checkout_session: %d, %s, %s %.2f" % (user.pk, product, currency, price))
 
     try:
-        customer_result = stripe.Customer.list(email=user.email, limit=1)
-        customer = None
-        if len(customer_result['data']) == 1:
-            customer = customer_result['data'][0]['id']
+        customer = PricingService.get_stripe_customer(user)
+        customer_id = None
+        if customer:
+            customer_id = customer['id']
 
         discounts = PricingService.get_stripe_discounts(user)
 
@@ -68,8 +68,8 @@ def create_checkout_session(request, user_pk, product, currency):
             'mode': 'payment',
             'payment_method_types': ['card'],
             'client_reference_id': user.pk,
-            'customer': customer if customer else None,
-            'customer_email': user.email if not customer else None,
+            'customer': customer_id if customer_id else None,
+            'customer_email': user.email if not customer_id else None,
             'submit_type': 'pay',
             'line_items': [
                 {

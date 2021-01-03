@@ -41,19 +41,25 @@ class PricingService:
         return rounded_price
 
     @staticmethod
-    def get_discount_amount(product, currency, user=None, ):
-        # type: (unicode, unicode) -> float
+    def get_discount_amount(product, currency, user=None):
+        # type: (unicode, unicode, User) -> float
 
         price = PricingService.get_full_price(product, currency)
 
         if user and user.is_authenticated():
-            coupon = PricingService._get_stripe_coupon(user)
+            coupon = PricingService.get_stripe_coupon(user)
+            customer = PricingService.get_stripe_customer(user)
 
-            if coupon:
-                if coupon['amount_off']:
-                    return coupon['amount_off']
-                elif coupon['percent_off']:
-                    return price / 100 * coupon['percent_off']
+            if coupon is None:
+                return 0
+
+            if customer is not None and not PricingService.is_new_customer(customer['id']):
+                return 0
+
+            if coupon['amount_off']:
+                return coupon['amount_off']
+            elif coupon['percent_off']:
+                return price / 100 * coupon['percent_off']
 
         return 0
 
@@ -61,12 +67,42 @@ class PricingService:
     def get_stripe_discounts(user):
         # type: (User) -> object
 
-        coupon = PricingService._get_stripe_coupon(user)
+        coupon = PricingService.get_stripe_coupon(user)
+        customer = PricingService.get_stripe_customer(user)
+
+        if coupon is None:
+            return None
+
+        if customer is not None and not PricingService.is_new_customer(customer['id']):
+            return None
 
         return [{"coupon": coupon['id']}]
 
     @staticmethod
-    def _get_stripe_coupon(user):
+    def get_stripe_customer(user):
+        # type: (User) -> object
+
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        customer = stripe.Customer.list(email=user.email, limit=1)
+        if len(customer['data']) == 1:
+            return customer['data'][0]
+
+        return None
+
+    @staticmethod
+    def is_new_customer(customer_id):
+        # type: (unicode) -> bool
+
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        charges = stripe.Charge.list(customer=customer_id, limit=1)
+
+        if len(charges['data']) > 0:
+            return False
+
+        return True
+
+    @staticmethod
+    def get_stripe_coupon(user):
         # type: (User) -> object
 
         referral_code = user.userprofile.referral_code
