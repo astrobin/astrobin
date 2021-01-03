@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-17 17:04+0000\n"
+"POT-Creation-Date: 2021-01-03 21:27+0000\n"
 "PO-Revision-Date: 2020-05-30 21:25-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,6 +17,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3.1\n"
+
+#, fuzzy
+#| msgid "You cannot elect your own submission."
+msgid "You cannot delete another user's submission."
+msgstr "Você não pode eleger seu próprio envio."
+
+msgid "Sorry, it's now too late to retract this submission."
+msgstr ""
+
+#, fuzzy
+#| msgid "You cannot elect an image you voted for."
+msgid "You cannot delete another user's vote."
+msgstr "Você não pode eleger uma imagem em que votou."
+
+msgid "Sorry, it's now too late to retract this vote."
+msgstr ""
 
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "Você não é membro do quadro de Enviantes da IDD."
@@ -159,15 +175,6 @@ msgstr ""
 msgid "This queue is currently empty."
 msgstr "Esta fila está atualmente vazia."
 
-msgid "Reviewers"
-msgstr "Revisores"
-
-msgid "Loading"
-msgstr "Carregando"
-
-msgid "Error"
-msgstr "Erro"
-
 msgid "IOTD Review Queue"
 msgstr "Fila de Revisão da IDD"
 
@@ -178,9 +185,6 @@ msgstr ""
 "Por favor selecione as imagens que você deseja promover para julgamento "
 "final clicando nelas."
 
-msgid "Submitters"
-msgstr "Enviadores"
-
 msgid "IOTD Submission Queue"
 msgstr "Fila de Envio da IDD"
 
@@ -190,6 +194,9 @@ msgstr ""
 "Por favor selecione as imagens que você deseja propor para serem "
 "consideradas como IDD."
 
+msgid "Error"
+msgstr "Erro"
+
 msgid "You cannot unelect an IOTD elected by another judge."
 msgstr "Você não pode deseleger uma IDD eleita por outro juiz."
 
@@ -197,3 +204,12 @@ msgstr "Você não pode deseleger uma IDD eleita por outro juiz."
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr ""
 "Todos os espaços de IDD para os próximos %(days)s dias já estão preenchidos."
+
+#~ msgid "Reviewers"
+#~ msgstr "Revisores"
+
+#~ msgid "Loading"
+#~ msgstr "Carregando"
+
+#~ msgid "Submitters"
+#~ msgstr "Enviadores"

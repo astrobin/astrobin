@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-17 17:04+0000\n"
+"POT-Creation-Date: 2021-01-03 21:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+msgid "You cannot delete another user's submission."
+msgstr ""
+
+msgid "Sorry, it's now too late to retract this submission."
+msgstr ""
+
+msgid "You cannot delete another user's vote."
+msgstr ""
+
+msgid "Sorry, it's now too late to retract this vote."
+msgstr ""
 
 msgid "You are not a member of the IOTD Submitters board."
 msgstr ""
@@ -147,15 +159,6 @@ msgstr ""
 msgid "This queue is currently empty."
 msgstr ""
 
-msgid "Reviewers"
-msgstr ""
-
-msgid "Loading"
-msgstr ""
-
-msgid "Error"
-msgstr ""
-
 msgid "IOTD Review Queue"
 msgstr ""
 
@@ -164,14 +167,14 @@ msgid ""
 "clicking on them."
 msgstr ""
 
-msgid "Submitters"
-msgstr ""
-
 msgid "IOTD Submission Queue"
 msgstr ""
 
 msgid ""
 "Please select the images that you want to propose for IOTD consideration."
+msgstr ""
+
+msgid "Error"
 msgstr ""
 
 msgid "You cannot unelect an IOTD elected by another judge."

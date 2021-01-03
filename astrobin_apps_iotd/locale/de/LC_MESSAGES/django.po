@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-17 17:04+0000\n"
+"POT-Creation-Date: 2021-01-03 21:27+0000\n"
 "PO-Revision-Date: 2020-05-22 13:47+0000\n"
 "Last-Translator: Hartmuth <hk@kinconsult.de>\n"
 "Language-Team: \n"
@@ -18,6 +18,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.8\n"
 "X-POOTLE-MTIME: 1590155251.000000\n"
+
+#, fuzzy
+#| msgid "You cannot elect your own submission."
+msgid "You cannot delete another user's submission."
+msgstr "Du kannst Deine eigene Einreichung nicht selbst wählen."
+
+msgid "Sorry, it's now too late to retract this submission."
+msgstr ""
+
+#, fuzzy
+#| msgid "You cannot elect a judge's image."
+msgid "You cannot delete another user's vote."
+msgstr "Du kannst nicht das Bild eines Richters wählen."
+
+msgid "Sorry, it's now too late to retract this vote."
+msgstr ""
 
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "Du bist kein Mitglied des IOTD-Einreichungs-Teams."
@@ -167,15 +183,6 @@ msgstr ""
 msgid "This queue is currently empty."
 msgstr "Diese Liste ist derzeit leer."
 
-msgid "Reviewers"
-msgstr "Rezensenten"
-
-msgid "Loading"
-msgstr "Wird geladen"
-
-msgid "Error"
-msgstr "Fehler"
-
 # its not the 1:1 translation but it hits the meaning of the list to select Top picks and suggest IOTD.
 msgid "IOTD Review Queue"
 msgstr "IOTD/TopPick-Auswahlliste"
@@ -187,9 +194,6 @@ msgstr ""
 "Bitte wähle die Bilder, die du zur endgültigen Beurteilung bewerben möchtest "
 "aus, indem Du sie anklickst."
 
-msgid "Submitters"
-msgstr "Einreicher"
-
 msgid "IOTD Submission Queue"
 msgstr "IOTD-Vorschlagsliste"
 
@@ -197,6 +201,9 @@ msgid ""
 "Please select the images that you want to propose for IOTD consideration."
 msgstr ""
 "Bitte wähle die Bilder aus, die Du für die IOTD-Auswahl vorschlagen möchtest."
+
+msgid "Error"
+msgstr "Fehler"
 
 msgid "You cannot unelect an IOTD elected by another judge."
 msgstr ""
@@ -207,14 +214,20 @@ msgstr ""
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr "Alle IOTD-Plätze für die nächsten %(days)s Tage sind bereits besetzt."
 
+#~ msgid "Reviewers"
+#~ msgstr "Rezensenten"
+
+#~ msgid "Loading"
+#~ msgstr "Wird geladen"
+
+#~ msgid "Submitters"
+#~ msgstr "Einreicher"
+
 #~ msgid "You cannot submit a judge's image."
 #~ msgstr "Du kannst das Bild eines Richters nicht einreichen."
 
 #~ msgid "You cannot vote for a judge's image."
 #~ msgstr "Du kannst nicht für das Bild eines Richters stimmen."
-
-#~ msgid "You cannot elect a judge's image."
-#~ msgstr "Du kannst nicht das Bild eines Richters wählen."
 
 #~ msgid "No images uploaded on this day."
 #~ msgstr "An diesem Tag wurden keine Bilder hochgeladen."

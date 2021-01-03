@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-17 17:04+0000\n"
+"POT-Creation-Date: 2021-01-03 21:27+0000\n"
 "PO-Revision-Date: 2020-05-18 11:06+0000\n"
 "Last-Translator: Milosz Wasilewski <milosz.wasilewski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,22 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
 "X-POOTLE-MTIME: 1589799990.000000\n"
+
+#, fuzzy
+#| msgid "You cannot elect your own submission."
+msgid "You cannot delete another user's submission."
+msgstr "Nie możesz wybrać zdjęcia które sam wysłałeś."
+
+msgid "Sorry, it's now too late to retract this submission."
+msgstr ""
+
+#, fuzzy
+#| msgid "You cannot elect a judge's image."
+msgid "You cannot delete another user's vote."
+msgstr "Nie możesz wybrać zdjęcia innego jurora."
+
+msgid "Sorry, it's now too late to retract this vote."
+msgstr ""
 
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "Nie jesteś członkiem zespołu wybierającego IOTD"
@@ -161,15 +177,6 @@ msgstr ""
 msgid "This queue is currently empty."
 msgstr "Ta kolejka jest obecnie pusta."
 
-msgid "Reviewers"
-msgstr "Recenzenci"
-
-msgid "Loading"
-msgstr "Ładowanie"
-
-msgid "Error"
-msgstr "Błąd"
-
 msgid "IOTD Review Queue"
 msgstr "Kolejka pretendentów do IOTD"
 
@@ -178,9 +185,6 @@ msgid ""
 "clicking on them."
 msgstr "Proszę zaznaczyć zdjęcia do finalnej oceny przez kliknięcie w nie."
 
-msgid "Submitters"
-msgstr "Wysyłający"
-
 msgid "IOTD Submission Queue"
 msgstr "Kolejka zdjęć zgłoszonych do przeglądu w ramach IOTD"
 
@@ -188,6 +192,9 @@ msgid ""
 "Please select the images that you want to propose for IOTD consideration."
 msgstr ""
 "Wybierz zdjęcia które proponujesz do wyboru jako IOTD przez kliknięcie w nie."
+
+msgid "Error"
+msgstr "Błąd"
 
 msgid "You cannot unelect an IOTD elected by another judge."
 msgstr "Nie możesz odznaczyć zdjęcia wybranego przez innego jurora."
@@ -198,14 +205,20 @@ msgstr ""
 "Wszystkie miejsca do następnego wyboru IOTD na następne %(days)s dni są już "
 "zapełnione"
 
+#~ msgid "Reviewers"
+#~ msgstr "Recenzenci"
+
+#~ msgid "Loading"
+#~ msgstr "Ładowanie"
+
+#~ msgid "Submitters"
+#~ msgstr "Wysyłający"
+
 #~ msgid "You cannot submit a judge's image."
 #~ msgstr "Nie możesz zgłosić zdjęcia innego oceniającego."
 
 #~ msgid "You cannot vote for a judge's image."
 #~ msgstr "Nie możesz głosować na zdjęcie innego oceniającego."
-
-#~ msgid "You cannot elect a judge's image."
-#~ msgstr "Nie możesz wybrać zdjęcia innego jurora."
 
 #~ msgid "No images uploaded on this day."
 #~ msgstr "Żadne zdjęcia nie zostały dzisiaj dodane."
