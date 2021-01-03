@@ -89,7 +89,7 @@ def create_checkout_session(request, user_pk, product, currency):
         if discounts != []:
             kwargs['discounts'] = discounts
         else:
-            kwargs['allow_promotion_codes'] = True
+            kwargs['allow_promotion_codes'] = False
 
         checkout_session = stripe.checkout.Session.create(**kwargs)
 
