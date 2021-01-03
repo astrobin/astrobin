@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'progressbarupload',
     'cachalot',
     'captcha',
+    'django_celery_monitor',
 
     'astrobin.apps.AstroBinAppConfig',
 ]
