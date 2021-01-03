@@ -4,6 +4,7 @@ from braces.views import JSONResponseMixin
 from django.conf import settings
 from django.http import HttpResponseBadRequest
 from django.views import View
+from rest_framework.authtoken.models import Token
 
 from astrobin_apps_payments.services.pricing_service import PricingService
 
@@ -22,7 +23,15 @@ class PricingView(JSONResponseMixin, View):
             log.error('pricing_view: invalid currency: %s' % currency)
             return HttpResponseBadRequest("Unsupported currency")
 
+        user = None
+        if 'HTTP_AUTHORIZATION' in request.META:
+            token_in_header = request.META['HTTP_AUTHORIZATION'].replace('Token ', '')
+            token = Token.objects.get(key=token_in_header)
+            user = token.user
+
         return self.render_json_response({
-            'price': PricingService.get_price(product.lower(), currency.upper())
+            'fullPrice': PricingService.get_full_price(product.lower(), currency.upper()),
+            'discount': PricingService.get_discount_amount(product.lower(), currency.upper(), user=user),
+            'price': PricingService.get_price(product.lower(), currency.upper(), user=user)
         })
 
