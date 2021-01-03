@@ -12,7 +12,6 @@ from django.views.decorators.http import require_GET, require_POST
 from paypal.standard.ipn.models import PayPalIPN
 from subscription.models import Subscription, handle_payment_was_successful
 
-from astrobin_apps_payments.models import ExchangeRate
 from astrobin_apps_payments.services.pricing_service import PricingService
 from common.services import AppRedirectionService
 
@@ -49,7 +48,7 @@ def create_checkout_session(request, user_pk, product, currency):
         'ultimate': settings.STRIPE_PRODUCT_ULTIMATE
     }
 
-    price = PricingService.get_price(product, currency.upper())
+    price = PricingService.get_full_price(product, currency.upper())
 
     log.info("create_checkout_session: %d, %s, %s %.2f" % (user.pk, product, currency, price))
 
@@ -59,32 +58,41 @@ def create_checkout_session(request, user_pk, product, currency):
         if len(customer_result['data']) == 1:
             customer = customer_result['data'][0]['id']
 
-        checkout_session = stripe.checkout.Session.create(
-            success_url=AppRedirectionService.redirect(
+        discounts = PricingService.get_stripe_discounts(user)
+
+        kwargs = {
+            'success_url': AppRedirectionService.redirect(
                 request,
                 '/subscriptions/success?product=' + product + '&session_id={CHECKOUT_SESSION_ID}'),
-            cancel_url=AppRedirectionService.redirect(request, '/subscriptions/cancelled/'),
-            mode='payment',
-            payment_method_types=['card'],
-            client_reference_id=user.pk,
-            customer=customer if customer else None,
-            customer_email=user.email if not customer else None,
-            allow_promotion_codes=True,
-            submit_type='pay',
-            line_items=[
+            'cancel_url': AppRedirectionService.redirect(request, '/subscriptions/cancelled/'),
+            'mode': 'payment',
+            'payment_method_types': ['card'],
+            'client_reference_id': user.pk,
+            'customer': customer if customer else None,
+            'customer_email': user.email if not customer else None,
+            'submit_type': 'pay',
+            'line_items': [
                 {
                     'quantity': 1,
                     'price_data': {
                         'currency': currency.lower(),
                         'product': stripe_products[product],
-                        'unit_amount_decimal': price * 100, # Stripe uses cents
+                        'unit_amount_decimal': price * 100,  # Stripe uses cents
                     }
                 }
             ],
-            metadata={
+            'metadata': {
                 'product': product
-            }
-        )
+            },
+        }
+
+        if discounts != []:
+            kwargs['discounts'] = discounts
+        else:
+            kwargs['allow_promotion_codes'] = True
+
+        checkout_session = stripe.checkout.Session.create(**kwargs)
+
         return JsonResponse({'sessionId': checkout_session['id']})
     except Exception as e:
         log.exception("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, str(e)))

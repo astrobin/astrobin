@@ -2322,6 +2322,12 @@ class UserProfile(SafeDeleteModel):
         default=False
     )
 
+    referral_code = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True,
+    )
+
     receive_important_communications = models.BooleanField(
         default=False,
         verbose_name=_(u'I accept to receive rare important communications via email'),

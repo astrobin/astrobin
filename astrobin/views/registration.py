@@ -15,8 +15,12 @@ from astrobin.models import UserProfile
 from astrobin_apps_notifications.utils import push_notification
 
 
-class AstroBinRegistrationForm(RegistrationFormUniqueEmail,
-                               RegistrationFormTermsOfService):
+class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTermsOfService):
+    referral_code = forms.fields.CharField(
+        required=False,
+        label=_(u'Referral code'),
+    )
+
     important_communications = forms.fields.BooleanField(
         widget=forms.CheckboxInput,
         required=False,
@@ -64,6 +68,10 @@ def user_created(sender, user, request, **kwargs):
     form = AstroBinRegistrationForm(request.POST)
     profile, created = UserProfile.objects.get_or_create(user=user)
     changed = False
+
+    if 'referral_code' in form.data and form.data['referral_code'] != u'':
+        profile.referral_code = form.data['referral_code']
+        changed = True
 
     if 'tos' in form.data:
         profile.accept_tos = form.data['tos'] == "on"
