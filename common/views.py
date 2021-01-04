@@ -3,9 +3,11 @@ from django.contrib.contenttypes.models import ContentType
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django_filters.rest_framework import DjangoFilterBackend
+from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import generics
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.renderers import BrowsableAPIRenderer
 from subscription.models import Subscription, UserSubscription, Transaction
 
 from astrobin.models import UserProfile
@@ -20,9 +22,12 @@ from .serializers import ContentTypeSerializer, UserSerializer, UserProfileSeria
 class ContentTypeList(generics.ListAPIView):
     model = ContentType
     serializer_class = ContentTypeSerializer
+    renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     permission_classes = (ReadOnly,)
     pagination_class = None
     filter_fields = ('app_label', 'model',)
+    http_method_names = ['get', 'head']
+    queryset = ContentType.objects.all()
 
 
 class ContentTypeDetail(generics.RetrieveAPIView):
