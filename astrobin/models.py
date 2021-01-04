@@ -1418,7 +1418,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         task_id_cache_key = '%s.retrieve' % cache_key
         task_id = cache.get(task_id_cache_key)
         if task_id is None:
-            result = retrieve_thumbnail.apply_async(args=(self.pk, alias, options), task_id=cache_key)
+            result = retrieve_thumbnail.apply_async(args=(self.pk, alias, options))
             cache.set(task_id_cache_key, result.task_id)
 
             try:
@@ -1432,7 +1432,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             except ThumbnailGroup.DoesNotExist:
                 pass
         else:
-            AsyncResult(task_id_cache_key)
+            AsyncResult(task_id)
 
         return static('astrobin/images/placeholder-gallery.jpg')
 

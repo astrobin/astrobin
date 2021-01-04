@@ -35,7 +35,7 @@ services:
       - -c
       - |
         python manage.py collectstatic --noinput && \
-        celery -A astrobin events -l info --camera django_celery_monitor.camera.Camera --frequency=2.0 \
+        celery -A astrobin events -l debug --camera django_celery_monitor.camera.Camera --frequency=2.0 \
         --gid=nogroup --uid=nobody
     env_file:
       - ./astrobin.env
