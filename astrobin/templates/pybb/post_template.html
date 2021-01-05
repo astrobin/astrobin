@@ -83,7 +83,7 @@
                 {% endif %}
 
                 {% if post|pybb_posted_by:user or user.is_moderator %}
-                    {% if  post.created|more_recent_than:300 or user.is_moderator %}
+                    {% if  post.created|more_recent_than:900 or user.is_moderator %}
                         <a href="{% url 'pybb:edit_post' pk=post.id %}"
                            class="btn btn-mini btn-primary">
                             <i class="icon-pencil"></i> {% trans "Edit" %}
@@ -156,7 +156,7 @@
             <h3>{% trans "Sorry :-(" %}</h3>
         </div>
         <div class="modal-body">
-            {% blocktrans trimmed with minutes=5 %}
+            {% blocktrans trimmed with minutes=15 %}
                 Editing a post is only allowed within {{ minutes }} minutes after creating it.
             {% endblocktrans %}
         </div>
