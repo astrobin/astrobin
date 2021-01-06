@@ -27,13 +27,13 @@ modified Oct 2012 by Chris Wallace to replace the older DateTime module with the
 
 """
 
-from math import sin, cos, floor, sqrt, pi, tan, atan # asin, atan2
+from math import sin, cos, floor, sqrt, pi, tan, atan  # asin, atan2
 import bisect
 import datetime
 __TODO__ = [
     'Add command-line interface.',
     'Make front-end modules for ASCII and various GUIs.',
-    ]
+]
 
 # Precision used when describing the moon's phase in textual format,
 # in phase_string().
@@ -532,4 +532,4 @@ if __name__ == '__main__':
     m = MoonPhase()
     s = """The moon is %s, %.1f%% illuminated, %.1f days old.""" %\
         (m.phase_text, m.illuminated * 100, m.age)
-    print (s)
+    print(s)

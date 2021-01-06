@@ -51,6 +51,6 @@ class Command(BaseCommand):
                 count += 1
 
         if options.get('dry_run'):
-            print "Would have upgraded %d accounts." % count
+            print("Would have upgraded %d accounts." % count)
         else:
-            print "Upgraded %d accounts." % count
+            print("Upgraded %d accounts." % count)

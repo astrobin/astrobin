@@ -29,11 +29,11 @@ class Command(BaseCommand):
             if len(matches) == 1 and matches[0] == item.make:
                 continue
 
-            print item.make
+            print(item.make)
 
             for i in range(0, len(matches)):
                 if matches[i] != item.make:
-                    print '\t%d. %s' % (i, matches[i])
+                    print('\t%d. %s' % (i, matches[i]))
 
             to_merge = raw_input("Which ones do I merge [space separated, or q]? ")
 
@@ -53,10 +53,10 @@ class Command(BaseCommand):
                 number_merged += 1
 
             for i in shlex.split(to_merge):
-                slaves = Gear.objects.filter(make = matches[int(i)])
+                slaves = Gear.objects.filter(make=matches[int(i)])
                 for slave in slaves:
                     slave.make = new_make
                     slave.save()
                     number_merged += 1
 
-            print "Merged %d makes." % number_merged
+            print("Merged %d makes." % number_merged)
