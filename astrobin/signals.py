@@ -1,5 +1,6 @@
 import datetime
 import logging
+import re
 from itertools import chain
 
 from dateutil.relativedelta import relativedelta
@@ -13,7 +14,7 @@ from django.db import IntegrityError
 from django.db import transaction
 from django.db.models.signals import (
     pre_save, post_save, post_delete, m2m_changed)
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, gettext, override
 from gadjo.requestprovider.signals import get_request
 from pybb.models import Forum, Topic, Post
 from rest_framework.authtoken.models import Token
@@ -292,6 +293,7 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
             )
         except User.DoesNotExist:
             pass
+
 
 post_save.connect(nested_comment_post_save, sender=NestedComment)
 
@@ -733,6 +735,27 @@ def forum_post_pre_save(sender, instance, **kwargs):
 
         cache.set("user.%d.forum_post_pre_save_mentions" % instance.user.pk, mentions, 2)
 
+    for attribute in ['body', 'body_text', 'body_html']:
+        for language in settings.LANGUAGES:
+            with override(language[0]):
+                for message in [
+                    '*** Type your message here ***',
+                    '*** Type your forum post here ***',
+                    '*** Type your reply here ***',
+                ]:
+                    translated = gettext(message).decode('utf-8')
+                    content = getattr(instance, attribute)
+                    setattr(
+                        instance,
+                        attribute,
+                        content.replace(translated, '')
+                    )
+
+        content = getattr(instance, attribute)
+        re.sub(r'\n+', '\n', content).strip()
+        setattr(instance, attribute, content)
+
+
 pre_save.connect(forum_post_pre_save, sender=Post)
 
 
@@ -759,6 +782,7 @@ def forum_post_post_save(sender, instance, created, **kwargs):
             )
         except User.DoesNotExist:
             pass
+
 
 post_save.connect(forum_post_post_save, sender=Post)
 
