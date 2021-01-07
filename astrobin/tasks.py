@@ -238,7 +238,12 @@ def send_inactive_account_reminder():
 @shared_task()
 def send_never_activated_account_reminder():
     users = never_activated_accounts()
+
     for user in users:
+        if not hasattr(user, 'userprofile'):
+            user.delete()
+            continue
+
         push_notification([user], 'never_activated_account', {
             'date': user.date_joined,
             'username': user.username,
