@@ -683,6 +683,9 @@ class NestedCommentIndex(SearchIndex, Indexable):
     def index_queryset(self, using=None):
         return self.get_model().objects.filter(deleted=False, image__deleted=None)
 
+    def get_updated_field(self):
+        return "updated"
+
 
 class ForumTopicIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
@@ -695,6 +698,9 @@ class ForumTopicIndex(SearchIndex, Indexable):
     def index_queryset(self, using=None):
         return self.get_model().objects.filter(on_moderation=False)
 
+    def get_updated_field(self):
+        return "updated"
+
 
 class ForumPostIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
@@ -706,3 +712,6 @@ class ForumPostIndex(SearchIndex, Indexable):
 
     def index_queryset(self, using=None):
         return self.get_model().objects.filter(on_moderation=False)
+
+    def get_updated_field(self):
+        return "updated"
