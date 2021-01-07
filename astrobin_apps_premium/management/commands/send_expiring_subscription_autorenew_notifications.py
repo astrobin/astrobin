@@ -31,9 +31,6 @@ class Command(BaseCommand):
         for user_subscription in user_subscriptions:
             push_notification([user_subscription.user], 'expiring_subscription_autorenew', {
                 'user_subscription': user_subscription,
-                'url': settings.BASE_URL + reverse('subscription_detail', kwargs = {
-                    'object_id': user_subscription.subscription.pk
-                })
             })
 
         user_subscriptions = UserSubscription.objects \
@@ -49,7 +46,4 @@ class Command(BaseCommand):
         for user_subscription in user_subscriptions:
             push_notification([user_subscription.user], 'expiring_subscription_autorenew_30d', {
                 'user_subscription': user_subscription,
-                'url': settings.BASE_URL + reverse('subscription_detail', kwargs={
-                    'object_id': user_subscription.subscription.pk
-                })
             })
