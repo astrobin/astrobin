@@ -28,7 +28,6 @@ INSTALLED_APPS = [
     'haystack',
     'notification',
     'persistent_messages',
-    'celery_haystack',
     'gunicorn',
     'django_comments',
     'tagging',

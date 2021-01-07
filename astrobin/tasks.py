@@ -192,8 +192,8 @@ def retrieve_primary_thumbnails(pk, options):
 
 
 @shared_task(time_limit=120)
-def update_index_images_1h():
-    call_command('update_index', 'astrobin.Image', '-b 100', '--age=1')
+def update_index(model, age):
+    call_command('update_index', model, '-b 100', '--age=%d' % age)
 
 
 @shared_task()

@@ -11,7 +11,6 @@ BROKER_TRANSPORT_OPTIONS = {
 CELERY_RESULT_BACKEND = BROKER_URL
 CELERY_IMPORTS = ('astrobin.tasks', 'djcelery_email.tasks')
 CELERY_DEFAULT_QUEUE = 'default'
-CELERY_HAYSTACK_QUEUE = 'haystack'
 CELERY_ACCEPT_CONTENT = ['json', 'pickle']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_ENABLE_UTC = True
@@ -39,14 +38,6 @@ CELERY_ROUTES = {
         'routing_key': 'email',
     },
     'astrobin.tasks.update_index_images_1h': {
-        'queue': 'haystack',
-        'routing_key': 'haystack',
-    },
-    'celery_haystack.tasks.CeleryHaystackSignalHandler': {
-        'queue': 'haystack',
-        'routing_key': 'haystack',
-    },
-    'celery_haystack.tasks.CeleryHaystackUpdateIndex': {
         'queue': 'haystack',
         'routing_key': 'haystack',
     },

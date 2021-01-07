@@ -1,13 +1,13 @@
 import datetime
 import logging
 
-from celery_haystack.indexes import CelerySearchIndex
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.db.models.functions import Length
 from haystack.constants import Indexable
 from haystack.fields import CharField, IntegerField, FloatField, DateTimeField, BooleanField, MultiValueField
+from haystack.indexes import SearchIndex
 from hitcount.models import HitCount
 from pybb.models import Post, Topic
 
@@ -269,7 +269,7 @@ def _prepare_comments(obj):
     return result
 
 
-class UserIndex(CelerySearchIndex, Indexable):
+class UserIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
 
     username = CharField(model_attr='username')
@@ -507,7 +507,7 @@ class UserIndex(CelerySearchIndex, Indexable):
     def prepare_iotds(self, obj):
         return IotdService().get_iotds().filter(image__user=obj).count()
 
-class ImageIndex(CelerySearchIndex, Indexable):
+class ImageIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
 
     title = CharField(model_attr='title')
@@ -672,7 +672,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return ' '.join([x.country for x in obj.locations.all() if x.country])
 
 
-class NestedCommentIndex(CelerySearchIndex, Indexable):
+class NestedCommentIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
     created = DateTimeField(model_attr='created')
     updated = DateTimeField(model_attr='updated')
@@ -684,7 +684,7 @@ class NestedCommentIndex(CelerySearchIndex, Indexable):
         return self.get_model().objects.filter(deleted=False, image__deleted=None)
 
 
-class ForumTopicIndex(CelerySearchIndex, Indexable):
+class ForumTopicIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
     created = DateTimeField(model_attr='created')
     updated = DateTimeField(model_attr='updated', null=True)
@@ -696,7 +696,7 @@ class ForumTopicIndex(CelerySearchIndex, Indexable):
         return self.get_model().objects.filter(on_moderation=False)
 
 
-class ForumPostIndex(CelerySearchIndex, Indexable):
+class ForumPostIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
     created = DateTimeField(model_attr='created')
     updated = DateTimeField(model_attr='updated', null=True)
