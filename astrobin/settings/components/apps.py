@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'threaded_messages',
     'bootstrap_toolkit',
-    'contact_form',
     'pipeline',
     'tastypie',
     'actstream',

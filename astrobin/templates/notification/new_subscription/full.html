@@ -49,7 +49,7 @@
     </li>
 
     <li>
-        {% url 'contact_form:contact' as contact_url %}
+        {% url 'contact' as contact_url %}
         {% blocktrans trimmed with url=BASE_URL|add:contact_url %}
             Finally, should you need any support, simply use the <a href="{{ url }}">contact form</a> or send
             an email to <a href="mailto:support@astrobin.com">support@astrobin.com</a>.

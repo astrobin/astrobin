@@ -182,7 +182,7 @@ urlpatterns += [
     url(r'^activity/', include('actstream.urls')),
     url(r'^avatar/', include('avatar.urls')),
     url(r'^comments/', include('django_comments.urls')),
-    url(r'^contact/', include("contact_form.urls", namespace="contact_form")),
+    url(r'^contact/', RedirectView.as_view(url='https://welcome.astrobin.com/contact', permanent=True), name='contact'),
     url(r'^forum/', include('pybb.urls', namespace='pybb')),
     url(r'hitcount/', include('hitcount.urls', namespace='hitcount')),
     url(r'^persistent_messages/', include('persistent_messages.urls')),
@@ -204,7 +204,7 @@ urlpatterns += [
     url(r'^api/v2/api-auth-token/', obtain_auth_token),
     url(r'^api/v2/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/v2/common/', include('common.api_urls')),
-    url(r'^api/v2/astrobin/', include('astrobin.api2.urls'  )),
+    url(r'^api/v2/astrobin/', include('astrobin.api2.urls')),
     url(r'^api/v2/nestedcomments/', include('nested_comments.api_urls')),
     url(r'^api/v2/platesolving/', include('astrobin_apps_platesolving.api_urls')),
     url(r'^api/v2/notifications/', include('astrobin_apps_notifications.api.urls')),
@@ -252,7 +252,8 @@ urlpatterns += [
     ###########################################################################
 
     url(r'^explore/top-picks/$', explore_views.TopPicksView.as_view(), name='top_picks'),
-    url(r'^explore/top-pick-nominations/$', explore_views.TopPickNominationsView.as_view(), name='top_pick_nominations'),
+    url(r'^explore/top-pick-nominations/$', explore_views.TopPickNominationsView.as_view(),
+        name='top_pick_nominations'),
 
     ###########################################################################
     ### USER VIEWS                                                          ###
@@ -435,7 +436,8 @@ urlpatterns += [
     url(r'^delete/(?P<id>\w+)/$', image_views.ImageDeleteView.as_view(), name='image_delete'),
     url(r'^delete/original/(?P<id>\w+)/$', image_views.ImageDeleteOriginalView.as_view(), name='image_delete_original'),
     url(r'^delete/revision/(?P<id>\w+)/$', image_views.ImageRevisionDeleteView.as_view(), name='image_delete_revision'),
-    url(r'^delete/other-versions/(?P<id>\w+)/$', image_views.ImageDeleteOtherVersionsView.as_view(), name='image_delete_other_versions'),
+    url(r'^delete/other-versions/(?P<id>\w+)/$', image_views.ImageDeleteOtherVersionsView.as_view(),
+        name='image_delete_other_versions'),
     url(r'^demote/(?P<id>\w+)/$', image_views.ImageDemoteView.as_view(), name='image_demote'),
     url(r'^edit/acquisition/(?P<id>\w+)/$', image_edit_acquisition, name='image_edit_acquisition'),
     url(r'^edit/acquisition/reset/(?P<id>\w+)/$', image_edit_acquisition_reset, name='image_edit_acquisition_reset'),
