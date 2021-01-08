@@ -19,6 +19,8 @@ default_url = 'http://nova.astrometry.net/api/'
 
 log = logging.getLogger('apps')
 
+# TODO: for python3 compat, StringIO must be imported differently (from io module)
+
 
 class Solver(AbstractPlateSolvingBackend):
     def __init__(self, api_url=default_url):
@@ -67,10 +69,10 @@ class Solver(AbstractPlateSolvingBackend):
                     # doesn't provide the flexibility to override, so we
                     # have to copy-n-paste-n-modify.
                     for h, v in msg.items():
-                        print >> self._fp, ('%s: %s\r\n' % (h, v)),
+                        self._fp.write('%s: %s\r\n' % (h, v))
 
                     # A blank line always separates headers from body
-                    print >> self._fp, '\r\n',
+                    self._fp.write('\r\n')
 
                 # The _write_multipart method calls "clone" for the
                 # sub-parts.  We hijack that, setting root=False.

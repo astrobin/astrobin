@@ -19,6 +19,6 @@ class Command(BaseCommand):
 
             i.save(keep_deleted=True)
 
-            print "Image %d: type %s." % (i.pk, i.subject_type)
+            print("Image %d: type %s." % (i.pk, i.subject_type))
 
-        print "Processed %d images." % images.count()
+        print("Processed %d images." % images.count())

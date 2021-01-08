@@ -8,10 +8,12 @@ from django.db.models import Q
 # AstroBin
 from astrobin.models import Gear
 
+
 class Command(BaseCommand):
     help = "Merges gear items with the same make/name."
 
     def handle(self, *args, **options):
+        # TODO: this escaped #1770, go back and replace in a new PR
         def unique_items(l):
             found = []
             for i in l:
@@ -33,18 +35,18 @@ class Command(BaseCommand):
             seen.append(item)
 
             twins = Gear.objects\
-                .filter(Q(make = item.make) & Q(name = item.name))\
-                .exclude(id = item.id)
+                .filter(Q(make=item.make) & Q(name=item.name))\
+                .exclude(id=item.id)
 
             if twins:
-                print "Examining item %d/%d: [%d] %s" % (current, count, item.id, item),
-                print "... found %d twins." % twins.count()
+                print("Examining item %d/%d: [%d] %s" % (current, count, item.id, item))
+                print("... found %d twins." % twins.count())
 
             for twin in twins:
                 if twin in seen:
                     continue
 
-                print "\tMerging [%d]..." % twin.id
+                print("\tMerging [%d]..." % twin.id)
                 item.hard_merge(twin)
                 total_merges += 1
                 if twin not in seen:
@@ -52,4 +54,4 @@ class Command(BaseCommand):
 
             current += 1
 
-        print "Performed %d merges." % total_merges
+        print("Performed %d merges." % total_merges)
