@@ -2356,7 +2356,7 @@ def contributors_list(request):
 
 @require_GET
 def api_help(request):
-    return render(request, 'api.html')
+    return HttpResponseRedirect('https://welcome.astrobin.com/application-programming-interface')
 
 
 @login_required
