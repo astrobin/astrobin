@@ -191,7 +191,7 @@ def retrieve_primary_thumbnails(pk, options):
         retrieve_thumbnail.delay(pk, alias, options)
 
 
-@shared_task(time_limit=300)
+@shared_task(time_limit=600)
 def update_index(model, age_in_minutes, batch_size):
     start = datetime.now() - timedelta(minutes=age_in_minutes)
     call_command(
