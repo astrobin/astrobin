@@ -29,7 +29,7 @@ https://welcome.astrobin.com/faq
 {% blocktrans trimmed %}
     Finally, should you need any support, simply use the contact form:
 {% endblocktrans %}
-{{ BASE_URL }}{% url 'contact_form:contact' %}
+{{ BASE_URL }}{% url 'contact' %}
 
 {% blocktrans trimmed %}
     Or send an email to support@astrobin.com.

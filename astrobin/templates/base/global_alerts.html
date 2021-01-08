@@ -45,7 +45,7 @@
         </p>
 
         <a class="btn btn-primary" href="{% url 'change_email_index' %}">{% trans "Change your e-mail" %}</a>
-        <a class="btn" href="{% url 'contact_form:contact' %}">{% trans "Contact us" %}</a>
+        <a class="btn" href="{% url 'contact' %}">{% trans "Contact us" %}</a>
     </div>
 {% elif SOFT_BOUNCES and SOFT_BOUNCES|length > 2 %}
     <div class="container alert alert-warning global-alert">
@@ -72,14 +72,14 @@
         </p>
 
         <a class="btn btn-primary" href="{% url 'change_email_index' %}">{% trans "Change your e-mail" %}</a>
-        <a class="btn" href="{% url 'contact_form:contact' %}">{% trans "Contact us" %}</a>
+        <a class="btn" href="{% url 'contact' %}">{% trans "Contact us" %}</a>
     </div>
 {% endif %}
 
 {% if HAS_COMPLAINT %}
     <div class="container alert alert-warning global-alert">
         {% blocktrans %}AstroBin is not delivering you emails because you have marked some of them as spam.{% endblocktrans %}
-        <a href="{% url 'contact_form:contact' %}">
+        <a href="{% url 'contact' %}">
             {% trans "Contact us to resolve the issue" %}
         </a>.
     </div>
