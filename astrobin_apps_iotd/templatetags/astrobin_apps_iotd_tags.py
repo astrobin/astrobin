@@ -78,20 +78,6 @@ def may_not_unelect_reason(user, image):
 
 # Statuses
 
-@register.filter
-def has_submitted(user, image):
-    return IotdSubmission.objects.filter(image = image, submitter = user).exists()
-
-
-@register.filter
-def has_voted(user, image):
-    return IotdVote.objects.filter(image = image, reviewer = user).exists()
-
-
-@register.filter
-def is_submitted_by(image, user):
-    return IotdSubmission.objects.filter(image = image, submitter = user).exists()
-
 
 @register.filter
 def is_iotd(image):
@@ -101,16 +87,6 @@ def is_iotd(image):
 @register.filter
 def is_current_or_past_iotd(image):
     return Iotd.objects.filter(image = image, date__lte = datetime.now().date())
-
-
-@register.filter
-def iotd_submissions_today(user):
-    return IotdSubmission.objects.filter(submitter = user, date__contains = datetime.now().date()).count()
-
-
-@register.filter
-def iotd_votes_today(user):
-    return IotdVote.objects.filter(reviewer = user, date__contains = datetime.now().date()).count()
 
 
 @register.filter

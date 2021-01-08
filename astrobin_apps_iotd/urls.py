@@ -3,25 +3,17 @@ from django.conf.urls import url
 from astrobin_apps_iotd.feeds.iotd import IotdFeed, IotdAtomFeed
 from astrobin_apps_iotd.feeds.top_picks import TopPickFeed, TopPickAtomFeed
 from astrobin_apps_iotd.feeds.top_picks_instagram_story import TopPickInstagramStoryFeed, TopPickInstagramStoryAtomFeed
-from astrobin_apps_iotd.views import IotdToggleSubmissionAjaxView, IotdSubmissionQueueView, IotdToggleVoteAjaxView, \
-    IotdReviewQueueView, IotdToggleJudgementAjaxView, IotdJudgementQueueView, IotdArchiveView
+from astrobin_apps_iotd.views import IotdToggleJudgementAjaxView, IotdJudgementQueueView, IotdArchiveView, \
+    IotdSubmissionQueueView, IotdReviewQueueView
 
 urlpatterns = (
     # Submissions
-    url(
-        r'^toggle-submission-ajax/(?P<pk>\d+)/$',
-        IotdToggleSubmissionAjaxView.as_view(),
-        name='iotd_toggle_submission_ajax'),
     url(
         r'^submission-queue/$',
         IotdSubmissionQueueView.as_view(),
         name='iotd_submission_queue'),
 
     # Votes
-    url(
-        r'^toggle-vote-ajax/(?P<pk>\d+)/$',
-        IotdToggleVoteAjaxView.as_view(),
-        name='iotd_toggle_vote_ajax'),
     url(
         r'^review-queue/$',
         IotdReviewQueueView.as_view(),
