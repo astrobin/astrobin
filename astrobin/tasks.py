@@ -192,12 +192,11 @@ def retrieve_primary_thumbnails(pk, options):
 
 
 @shared_task(time_limit=300)
-def update_index(model, age_in_minutes, concurrency, batch_size):
+def update_index(model, age_in_minutes, batch_size):
     start = datetime.now() - timedelta(minutes=age_in_minutes)
     call_command(
         'update_index',
         model,
-        '-k %d' % concurrency,
         '-b %d'  % batch_size,
         '--start=%s' % start.strftime("%Y-%m-%dT%H:%M:%S"))
 
