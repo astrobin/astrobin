@@ -77,7 +77,7 @@ services:
       - -c
       - |
         python manage.py collectstatic --noinput && \
-        celery worker -A astrobin -Q haystack -c 1 -l debug -E --uid=nobody --gid=nogroup
+        celery worker -A astrobin -Q haystack -c 2 -l debug -E --uid=nobody --gid=nogroup
     env_file:
       - ./astrobin.env
     environment:
