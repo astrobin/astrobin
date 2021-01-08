@@ -28,7 +28,7 @@ class IotdService:
     def is_top_pick(self, image):
         # type: (Image) -> bool
         return \
-            (not hasattr(image, 'iotd') or image.iotd.date > datetime.now().date()) and \
+            not self.is_iotd(image) and \
             hasattr(image, 'iotdvote_set') and \
             image.iotdvote_set.count() > 0 and \
             not image.user.userprofile.exclude_from_competitions and \
@@ -46,8 +46,7 @@ class IotdService:
     def is_top_pick_nomination(self, image):
         # type: (Image) -> bool
         return \
-            (not hasattr(image, 'iotd') or image.iotd.date > datetime.now().date()) and \
-            (not hasattr(image, 'iotdvote_set') or image.iotdvote_set.count() == 0) and \
+            not self.is_top_pick(image) and \
             hasattr(image, 'iotdsubmission_set') and \
             image.iotdsubmission_set.count() > 0 and \
             not image.user.userprofile.exclude_from_competitions and \
