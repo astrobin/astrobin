@@ -6,9 +6,8 @@ from braces.views import (
     JSONResponseMixin,
     LoginRequiredMixin)
 from django.conf import settings
-from django.core.exceptions import ValidationError
-from django.http import HttpResponseForbidden
-from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseForbidden, HttpResponsePermanentRedirect
+from django.shortcuts import get_object_or_404
 from django.utils import formats
 from django.utils.translation import ugettext
 from django.views.generic import (
@@ -16,13 +15,11 @@ from django.views.generic import (
 from django.views.generic.base import View
 
 from astrobin.models import Image
-from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote
+from astrobin_apps_iotd.models import Iotd, IotdVote
 from astrobin_apps_iotd.permissions import may_elect_iotd
 from astrobin_apps_iotd.services import IotdService
-from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import (
-    iotd_submissions_today,
-    iotd_votes_today,
-    iotd_elections_today)
+from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import iotd_elections_today
+from common.services import AppRedirectionService
 
 log = logging.getLogger('apps')
 
@@ -30,94 +27,18 @@ log = logging.getLogger('apps')
 class IotdBaseQueueView(View):
     def get_context_data(self, **kwargs):
         context = super(IotdBaseQueueView, self).get_context_data(**kwargs)
-        context['MAX_SUBMISSIONS_PER_DAY'] = settings.IOTD_SUBMISSION_MAX_PER_DAY
-        context['MAX_VOTES_PER_DAY'] = settings.IOTD_REVIEW_MAX_PER_DAY
         context['MAX_ELECTIONS_PER_DAY'] = settings.IOTD_JUDGEMENT_MAX_PER_DAY
         return context
 
 
-class IotdSubmissionQueueView(
-    LoginRequiredMixin, GroupRequiredMixin, IotdBaseQueueView, ListView):
-    group_required = ['iotd_submitters']
-    model = Image
-    template_name = 'astrobin_apps_iotd/iotd_submission_queue.html'
-
-    def get_queryset(self):
-        return IotdService().get_submission_queue(self.request.user)
+class IotdSubmissionQueueView(View):
+    def dispatch(self, request, *args, **kwargs):
+        return HttpResponsePermanentRedirect(AppRedirectionService.redirect(request, '/iotd/submission-queue'))
 
 
-class IotdToggleSubmissionAjaxView(
-    JSONResponseMixin, LoginRequiredMixin, GroupRequiredMixin, View):
-    group_required = 'iotd_submitters'
-    http_method_names = ['post']
-
-    def post(self, request, *args, **kwargs):
-        if request.is_ajax():
-            image = Image.objects.get(pk=kwargs.get('pk'))
-            try:
-                submission, created = IotdSubmission.objects.get_or_create(
-                    submitter=request.user,
-                    image=image)
-                if not created:
-                    submission.delete()
-                    log.info("User %d deleted IOTD submission for image %s" % (request.user.pk, image.get_id()))
-                    return self.render_json_response({
-                        'used_today': iotd_submissions_today(request.user),
-                    })
-                else:
-                    log.info("User %d added IOTD submission for image %s" % (request.user.pk, image.get_id()))
-                    return self.render_json_response({
-                        'submission': submission.pk,
-                        'used_today': iotd_submissions_today(request.user),
-                    })
-            except ValidationError as e:
-                return self.render_json_response({
-                    'error': ';'.join(e.messages),
-                })
-
-        return HttpResponseForbidden()
-
-
-class IotdReviewQueueView(
-    LoginRequiredMixin, GroupRequiredMixin, IotdBaseQueueView, ListView):
-    group_required = ['iotd_reviewers']
-    model = IotdSubmission
-    template_name = 'astrobin_apps_iotd/iotd_review_queue.html'
-
-    def get_queryset(self):
-        return IotdService().get_review_queue(self.request.user)
-
-
-class IotdToggleVoteAjaxView(
-    JSONResponseMixin, LoginRequiredMixin, GroupRequiredMixin, View):
-    group_required = 'iotd_reviewers'
-    http_method_names = ['post']
-
-    def post(self, request, *args, **kwargs):
-        if request.is_ajax():
-            image = get_object_or_404(Image, pk=kwargs.get('pk'))
-            try:
-                vote, created = IotdVote.objects.get_or_create(
-                    reviewer=request.user,
-                    image=image)
-                if not created:
-                    vote.delete()
-                    log.info("User %d deleted IOTD vote for image %s" % (request.user.pk, image.get_id()))
-                    return self.render_json_response({
-                        'used_today': iotd_votes_today(request.user),
-                    })
-                else:
-                    log.info("User %d added IOTD vote for image %s" % (request.user.pk, image.get_id()))
-                    return self.render_json_response({
-                        'vote': vote.pk,
-                        'used_today': iotd_votes_today(request.user),
-                    })
-            except ValidationError as e:
-                return self.render_json_response({
-                    'error': ';'.join(e.messages),
-                })
-
-        return HttpResponseForbidden()
+class IotdReviewQueueView(View):
+    def dispatch(self, request, *args, **kwargs):
+        return HttpResponsePermanentRedirect(AppRedirectionService.redirect(request, '/iotd/review-queue'))
 
 
 class IotdJudgementQueueView(
