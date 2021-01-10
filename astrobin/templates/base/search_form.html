@@ -1,13 +1,19 @@
 {% load i18n %}
 
-<form class="navbar-search pull-left hidden-phone hidden-tablet" id="quick-search" action="{% url 'haystack_search' %}" method="get" >
-    <input class="tbox"
-           id="q"
-           type="text"
-           name="q"
-           value="{{ request.GET.q }}"
-           placeholder="{% trans "Quick search" %}"
-           onfocus="astrobin_common.clearText(this)"
-           onblur="astrobin_common.clearText(this)"/>
+<form
+        id="quick-search"
+        class="navbar-search pull-left hidden-phone hidden-tablet"
+        action="{% url 'haystack_search' %}"
+        method="get"
+        autocomplete="off">
+    <input
+            id="q"
+            class="tbox"
+            type="text"
+            name="q"
+            value="{{ request.GET.q }}"
+            placeholder="{% trans "Quick search" %}"
+            onfocus="astrobin_common.clearText(this)"
+            onblur="astrobin_common.clearText(this)"/>
 </form>
 
