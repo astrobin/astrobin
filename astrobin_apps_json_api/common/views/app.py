@@ -1,13 +1,15 @@
 import hashlib
 from os.path import join
 
-from PIL import Image
+from PIL import Image as PILImage
 from braces.views import JSONResponseMixin
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.views.generic.base import View
 
 from astrobin import utils
+from astrobin.models import Image
 from common.utils import get_project_root
 
 
@@ -31,9 +33,10 @@ class AppConfig(JSONResponseMixin, View):
             u"PREMIUM_PRICE_LITE_2020": settings.PREMIUM_PRICE_LITE_2020,
             u"PREMIUM_PRICE_PREMIUM_2020": settings.PREMIUM_PRICE_PREMIUM_2020,
             u"PREMIUM_PRICE_ULTIMATE_2020": settings.PREMIUM_PRICE_ULTIMATE_2020,
-            u"MAX_IMAGE_PIXELS": Image.MAX_IMAGE_PIXELS,
+            u"MAX_IMAGE_PIXELS": PILImage.MAX_IMAGE_PIXELS,
             u"GOOGLE_ADS_ID": settings.GOOGLE_ADS_ID,
             u"REQUEST_COUNTRY": utils.get_client_country_code(request),
+            u"IMAGE_CONTENT_TYPE_ID": ContentType.objects.get_for_model(Image).id,
             u"THUMBNAIL_ALIASES": settings.THUMBNAIL_ALIASES[''],
             u"IOTD_SUBMISSION_MAX_PER_DAY": settings.IOTD_SUBMISSION_MAX_PER_DAY,
             u"IOTD_REVIEW_MAX_PER_DAY": settings.IOTD_REVIEW_MAX_PER_DAY,
