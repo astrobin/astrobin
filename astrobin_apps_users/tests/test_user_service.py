@@ -401,6 +401,13 @@ class TestUserService(TestCase):
         self.assertEquals(1, len(UserService.get_users_in_group_sample(group.name, 50)))
         self.assertEquals(1, len(UserService.get_users_in_group_sample(group.name, 100)))
 
+    def test_get_users_in_group_sample_with_exclude(self):
+        group = Group.objects.create(name='test_group')
+        user = Generators.user()
+        user.groups.add(group)
+
+        self.assertEquals(0, len(UserService.get_users_in_group_sample(group.name, 10,  user)))
+
     def test_get_users_in_group_sample_many_users(self):
         group = Group.objects.create(name='test_group')
         for i in range(100):
