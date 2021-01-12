@@ -49,10 +49,13 @@ class UserService:
                Q(revisions__corrupted=True, revisions__is_final=True, revisions__deleted=None)
 
     @staticmethod
-    def get_users_in_group_sample(group_name, percent):
-        # type: (str, int) -> list[User]
+    def get_users_in_group_sample(group_name, percent, exclude=None):
+        # type: (str, int, User) -> list[User]
         try:
             users = User.objects.filter(groups=Group.objects.get(name=group_name))
+            if exclude:
+                users = users.exclude(pk=exclude.pk)
+
             return np.random.choice(list(users), int(math.ceil(users.count() / 100.0 * percent)), replace=False)
         except Group.DoesNotExist:
             return []
