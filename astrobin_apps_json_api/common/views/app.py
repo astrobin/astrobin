@@ -40,6 +40,7 @@ class AppConfig(JSONResponseMixin, View):
             u"THUMBNAIL_ALIASES": settings.THUMBNAIL_ALIASES[''],
             u"IOTD_SUBMISSION_MAX_PER_DAY": settings.IOTD_SUBMISSION_MAX_PER_DAY,
             u"IOTD_REVIEW_MAX_PER_DAY": settings.IOTD_REVIEW_MAX_PER_DAY,
+            u"IOTD_QUEUES_PAGE_SIZE": settings.IOTD_QUEUES_PAGE_SIZE
         })
 
     def __get_i18n_hash__(self):
