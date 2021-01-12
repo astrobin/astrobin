@@ -1,5 +1,4 @@
 import logging
-from datetime import datetime, timedelta
 
 import persistent_messages
 from django.conf import settings
@@ -8,10 +7,11 @@ from django.template import TemplateDoesNotExist
 from django.template.loader import get_template, render_to_string
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext
-from django_bouncy.models import Bounce, Complaint
 from gadjo.requestprovider.signals import get_request
 from notification.backends import BaseBackend
 from notification.backends.email import EmailBackend as BaseEmailBackend
+
+from common.services.email_service import EmailService
 
 log = logging.getLogger('apps')
 
@@ -55,21 +55,15 @@ class PersistentMessagesBackend(BaseBackend):
 
 class EmailBackend(BaseEmailBackend):
     def can_send(self, user, notice_type):
-        hard_bounces = Bounce.objects.filter(
-            hard=True,
-            bounce_type="Permanent",
-            address=user.email)
-        soft_bounces = Bounce.objects.filter(
-            hard=False,
-            bounce_type="Transient",
-            address=user.email,
-            created_at__gte=datetime.now() - timedelta(days=7))
-        complaints = Complaint.objects.filter(
-            address=user.email)
         deleted = user.userprofile.deleted is not None
+
         ignored = 'ASTROBIN_IGNORE' in user.email
 
-        if deleted or hard_bounces.exists() or soft_bounces.count() > 2 or complaints or ignored:
+        if deleted or \
+                EmailService.hard_bounces(user.email).exists() or \
+                EmailService.soft_bounces(user.email).count() > 2 or \
+                EmailService.complaints(user.email).exists() or \
+                ignored:
             return False
 
         return super(EmailBackend, self).can_send(user, notice_type)
