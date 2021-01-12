@@ -42,8 +42,8 @@ GOOGLE_ADS_ID = os.environ.get('GOOGLE_ADS_ID', 'invalid').strip()
 
 ROOT_URLCONF = 'astrobin.urls'
 
-ALLOWED_IMAGE_EXTENSIONS = ('.jpg', '.jpeg', '.png', '.gif')
+ALLOWED_IMAGE_EXTENSIONS = ('.jpg', '.jpeg', '.png', '.gif', '.tif', '.tiff')
 ALLOWED_FITS_IMAGE_EXTENSIONS = ('xisf', 'fits', 'fit', 'fts')
-ALLOWED_UNCOMPRESSED_SOURCE_EXTENSIONS = ALLOWED_FITS_IMAGE_EXTENSIONS + ('psd', 'tiff')
+ALLOWED_UNCOMPRESSED_SOURCE_EXTENSIONS = ALLOWED_FITS_IMAGE_EXTENSIONS + ('psd', 'tif', 'tiff')
 
 GEOIP_PATH = os.path.abspath(os.path.dirname(__name__)) + "/astrobin/geoip2"
