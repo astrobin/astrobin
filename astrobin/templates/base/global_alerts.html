@@ -59,7 +59,7 @@
         </p>
         <p>
             <ul>
-                {% for bounce in SOFT_BOUNCES %}
+                {% for bounce in SOFT_BOUNCES | slice:":3" %}
                     <li>{{ bounce.diagnostic_code }}</li>
                 {% endfor %}
             </ul>
