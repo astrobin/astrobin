@@ -9,6 +9,7 @@ from rest_framework.exceptions import MethodNotAllowed
 from safedelete import HARD_DELETE
 from safedelete.models import SafeDeleteModel
 
+from astrobin.models import Image
 from astrobin_apps_images.api import constants, signals
 from astrobin_apps_images.api.constants import TUS_API_CHECKSUM_ALGORITHMS
 from astrobin_apps_images.api.exceptions import Conflict
@@ -154,6 +155,10 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             # Clean up
             os.remove(temporary_file)
             signals.finished.send(object)
+
+            if isinstance(object, Image):
+                from astrobin.tasks import retrieve_primary_thumbnails
+                retrieve_primary_thumbnails.delay(object.pk, {'revision_label': '0'})
 
             log.debug("Chunked uploader (%d) (%d): finished" % (request.user.pk, object.pk))
 
