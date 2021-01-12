@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 from django.conf import settings
 
@@ -9,7 +9,6 @@ from astrobin.utils import get_client_country_code
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import get_unseen_notifications
 from astrobin_apps_users.services import UserService
-from common.services.email_service import EmailService
 
 
 def notices_count(request):
@@ -59,17 +58,25 @@ def user_scores(request):
 
 def common_variables(request):
     from django_user_agents.utils import get_and_set_user_agent
+    from django_bouncy.models import Bounce, Complaint
 
     get_and_set_user_agent(request)
 
     hard_bounces = None
     soft_bounces = None
-    has_complaints = False
+    complained = False
 
     if request.user.is_authenticated():
-        hard_bounces = EmailService.hard_bounces(request.user.email)
-        soft_bounces = EmailService.soft_bounces(request.user.email)
-        has_complaints = EmailService.complaints(request.user.email).exists()
+        hard_bounces = Bounce.objects.filter(
+            hard=True,
+            address=request.user.email,
+            bounce_type="Permanent")
+        soft_bounces = Bounce.objects.filter(
+            hard=False,
+            address=request.user.email,
+            bounce_type="Transient",
+            created_at__gte=datetime.now() - timedelta(days=7))[:3]
+        complained = Complaint.objects.filter(address=request.user.email).exists()
 
     d = {
         'True': True,
@@ -119,7 +126,7 @@ def common_variables(request):
         'READONLY_MODE': settings.READONLY_MODE,
         'HARD_BOUNCES': hard_bounces,
         'SOFT_BOUNCES': soft_bounces,
-        'HAS_COMPLAINT': has_complaints,
+        'HAS_COMPLAINT': complained,
         'COUNTRIES': COUNTRIES,
         'COOKIELAW_ACCEPTED': request.COOKIES.get('cookielaw_accepted', False),
         'HAS_RECOVERED_IMAGES': request.user.is_authenticated() and \
