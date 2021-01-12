@@ -5,6 +5,7 @@ from django_filters import rest_framework as filters
 
 from astrobin.models import Image
 from astrobin_apps_platesolving.models import Solution
+from common.filters.list_filter import ListFilter
 
 
 def filter_image_object_id(queryset, name, value):
@@ -31,11 +32,13 @@ def filter_image_object_id(queryset, name, value):
     return queryset.filter(reduce(operator.or_, or_queries))
 
 
-class ImageObjectIdFilter(filters.FilterSet):
+class SolutionListFilter(filters.FilterSet):
     object_id = filters.CharFilter(method=filter_image_object_id, name='object_id')
+    object_ids = ListFilter(name='object_id', lookup_expr='in')
 
     class Meta:
         model = Solution
         fields = [
-            'object_id'
+            'object_id',
+            'content_type'
         ]

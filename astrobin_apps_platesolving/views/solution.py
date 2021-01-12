@@ -16,14 +16,13 @@ from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import base
-from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework import permissions
 
 from astrobin.models import DeepSky_Acquisition
 from astrobin.utils import degrees_minutes_seconds_to_decimal_degrees
 from astrobin_apps_platesolving.annotate import Annotator
-from astrobin_apps_platesolving.api_filters.image_object_id_filter import ImageObjectIdFilter
+from astrobin_apps_platesolving.api_filters.solution_list_filter import SolutionListFilter
 from astrobin_apps_platesolving.models import PlateSolvingAdvancedSettings, PlateSolvingAdvancedTask
 from astrobin_apps_platesolving.models import PlateSolvingSettings
 from astrobin_apps_platesolving.models import Solution
@@ -373,9 +372,7 @@ class SolutionList(generics.ListCreateAPIView):
     queryset = Solution.objects.order_by('pk')
     serializer_class = SolutionSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('content_type', 'object_id',)
-    filter_class = ImageObjectIdFilter
+    filter_class = SolutionListFilter
     pagination_class = None
 
 
