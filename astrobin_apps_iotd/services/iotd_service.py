@@ -6,7 +6,7 @@ from django.db.models import Q
 
 from astrobin.enums import SubjectType
 from astrobin.models import Image
-from astrobin_apps_iotd.models import Iotd, IotdSubmission
+from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 
 
@@ -99,7 +99,13 @@ class IotdService:
             for x in IotdSubmission.objects
                 .filter(date__gte=cutoff, image__designated_iotd_reviewers=reviewer)
                 .exclude(Q(submitter=reviewer) | Q(image__user=reviewer))
-            if not Iotd.objects.filter(
+            if (
+                    not Iotd.objects.filter(
+                        image=x.image,
+                        date__lte=datetime.now().date()).exists()
+                    and not IotdVote.objects.filter(
+                reviewer=reviewer,
                 image=x.image,
-                date__lte=datetime.now().date()).exists()
+                date__lt=date.today()).exists()
+            )
         ])), key=lambda x: x.published, reverse=True)
