@@ -2166,8 +2166,15 @@ form.avatar-change label.control-label {
   }
 }
 
-.index-recent-topics {
+.index-recent-topics.topic-list {
   margin-bottom: $spacer-large;
+
+  .topic-name > a:first-child {
+    font-size: inherit;
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
 }
 
 .notice-container {

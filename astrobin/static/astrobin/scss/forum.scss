@@ -1,6 +1,20 @@
 @import 'variables';
 
 table.forums, table.topic-list {
+  table-layout: auto;
+
+  a {
+    color: #bbb;
+
+    &:hover {
+      color: $link-color;
+    }
+  }
+
+  th {
+    white-space: nowrap;
+  }
+
   td {
     @media screen and (min-width: 980px) {
       white-space: nowrap;
@@ -10,21 +24,25 @@ table.forums, table.topic-list {
   }
 
   td, th {
-    &.forum-topic-count, &.forum-post-count, &.topic-post-count, &.topic-view-count {
-      width: 10%;
-    }
-
-    &.forum-last-post, &.topic-last-post, &.topic-author {
-      width: 15%;
-    }
+    vertical-align: middle;
   }
 
-  .topic-name {
+  td.topic-name {
     text-align: left !important;
+    line-height: 24px;
+    width: 99%;
+    color: #666;
+
+    > a:first-child {
+      font-size: 16px;
+      border-bottom: 1px solid transparentize($link-color, .75);
+      padding: 0 6px 0 0;
+      margin-bottom: 2px;
+      display: inline-block;
+    }
   }
 
   .topic-forum {
-    width: 20%;
     padding-right: 20px;
   }
 
@@ -35,6 +53,7 @@ table.forums, table.topic-list {
 
 th.forum-name {
   font-size: 18px;
+  line-height: 32px;
 }
 
 .forum-description {
@@ -52,20 +71,13 @@ th.forum-name {
 
 .forum-last-post, .topic-last-post {
   text-align: right !important;
+  white-space: nowrap;
 }
 
 .first-unread-post-link {
-  color: lighten($link-color, 40%);
+  color: $link-color !important;
   text-decoration: none;
-  font-weight: bold;
-  padding-right: 4px;
-}
-
-.first-unread-post-link {
-  color: lighten($link-color, 10%);
-}
-
-.posts {
+  padding-left: 8px;
 }
 
 .post {
@@ -130,6 +142,8 @@ th.forum-name {
 }
 
 .post-content {
+  font-size: 14.5px;
+  line-height: 20px;
   padding: 18px !important;
 
   /* These are technically the same, but use both */
@@ -145,32 +159,78 @@ th.forum-name {
 
   ul, ol {
     list-style: initial;
+    margin: 15px 30px;
   }
 
   blockquote {
     background-color: $grey-8;
-    padding: 10px 20px 10px 60px;
+    padding: 20px 20px 20px 60px;
     border: 1px solid #555;
     position: relative;
     min-height: 34px;
+
+    + br,
+    + br + br,
+    + br + br + br {
+      content: "";
+    }
+
+    @media screen and (max-width: 767px) {
+      padding-left: 40px;
+    }
+
+    @media screen and (max-width: 479px) {
+      padding-left: 20px;
+    }
   }
 
   blockquote:before {
     display: block;
     content: "\201C";
-    font-size: 120px;
+    font-size: 90px;
     position: absolute;
-    left: 4px;
+    left: 8px;
     top: 50px;
     color: $grey-5;
-    font-family: Georgia;
+    font-family: Georgia, serif;
+
+    @media screen and (max-width: 767px) {
+      font-size: 60px;
+      top: 38px;
+    }
+
+    @media screen and (max-width: 479px) {
+      font-size: 30px;
+      top: 28px;
+      left: 4px;
+    }
   }
 
-  img[alt='smile'] {
-    width: 18px;
-    height: 18px;
-    margin-left: 1px;
-    margin-right: 1px;
+  img {
+    &[alt='smile'] {
+      width: 18px;
+      height: 18px;
+      margin-left: 1px;
+      margin-right: 1px;
+    }
+
+    &:not([alt='smile']) {
+      margin: 15px 0;
+    }
+  }
+
+  ul,
+  ol {
+    + br + img:not([alt='smile']) {
+    margin-top: -19px;
+    }
+  }
+
+  img:not([alt='smile']) + br {
+    + ul,
+    + ol {
+      margin-top: 0;
+    }
   }
 }
 
@@ -256,7 +316,7 @@ th.forum-name {
 }
 
 .topic-unread, .forum-unread, .message-unread {
-  a {
+  a:first-child {
     font-weight: bold;
   }
 
@@ -278,6 +338,14 @@ th.forum-name {
 .mini-pagination {
   padding: 3px 0 3px 10px;
   font-size: $base-font-size - 2;
+
+  .page {
+    margin-right: 2px;
+
+    a {
+      color: $link-color;
+    }
+  }
 }
 
 .topic-select, .topic-state, .forum-status, .notification-state, .message-state {
@@ -324,12 +392,17 @@ table.post th.post-avatar {
   margin-top: 20px;
 }
 
+.forums .forum-name,
+.forum .topic-name {
+  width: 99%;
+}
 
 .forums .forum-name,
 .forum .topic-forum,
 .forum .topic-name {
-  > a {
-    color: $text-color;
+
+  > a:first-child {
+    color: $white;
     padding-top: 6px;
     padding-bottom: 6px;
 

@@ -1,5 +1,15 @@
 {% load pybb_tags %}
 
 {% if topic.updated %}
-    {% pybb_time topic.updated %}
+    {% with topic.last_post as last_post %}
+        <a href="{% url 'user_page' last_post.user %}">
+            {{ last_post.user.userprofile.get_display_name }}
+        </a>
+
+        <br />
+
+        <a href="{{ last_post.get_absolute_url }}">
+            {% pybb_time topic.updated %}
+        </a>
+    {% endwith %}
 {% endif %}
