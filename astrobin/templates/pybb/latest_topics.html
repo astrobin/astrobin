@@ -38,7 +38,11 @@
             </div>
         {% endif %}
 
+        {% include 'pybb/_forum_tools.html' %}
         {% include "pybb/topic_list.html" %}
-        {% include "pagination_simple.html" %}
+
+        <div class="forum-tools">
+            {% include "pagination_simple.html" %}
+        </div>
     </div>
 {% endblock content %}
