@@ -94,3 +94,16 @@ class Iotd(models.Model):
         # Force validation on save
         self.full_clean()
         return super(Iotd, self).save(*args, **kwargs)
+
+
+class IotdHiddenImage(models.Model):
+    user = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, null=False, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created']
+        unique_together = ('user', 'image')
+
+    def __unicode__(self):
+        return "IOTD hidden image: %d / %s" % (self.user.pk, self.image.get_id())
