@@ -29,20 +29,14 @@
                     {% trans "Topic" %}
                 {% endif %}
             </th>
-            <th class="topic-author hidden-phone hidden-tablet">
-                {% trans "Author" %}
-            </th>
 
             {% if forum %}
-                <th class="topic-post-count hidden-phone">
-                    {% trans "Posts" %}
-                </th>
-                <th class="topic-view-count hidden-phone">
-                    {% trans "Views" %}
+                <th class="topic-post-count hidden-tablet hidden-phone">
+                    {% trans "Posts" %} / {% trans "Views" %}
                 </th>
             {% endif %}
 
-            <th class="topic-last-post hidden-phone hidden-tablet">
+            <th class="topic-last-post hidden-phone ">
                 {% trans "Last post" %}
             </th>
         </tr>
@@ -64,16 +58,29 @@
                     {% if not forum %}
                         <td class="topic-forum hidden-phone">
                             <a href="{{ topic.forum.get_absolute_url }}">
-                                [{{ topic.forum.name }}]
+                                {{ topic.forum.name }}
                             </a>
                         </td>
                     {% endif %}
 
                     <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
-                        <a href="{{ topic.get_absolute_url }}?first-unread=1" class="first-unread-post-link">&#8680;</a>
                         <a href="{{ topic.get_absolute_url }}">{{ topic.name|truncatewords:10 }}</a>
+
                         {% if topic.sticky %} &nbsp;[{% trans "Sticky" %}] {% endif %}
+
                         {% if topic.closed %} &nbsp;[{% trans "Closed" %}] {% endif %}
+
+                        <br/>
+
+                        {% if not forum %}
+                            <a href="{{ topic.forum.get_absolute_url }}" class="visible-phone">
+                                {{ topic.forum.name }}
+                            </a>
+                        {% endif %}
+
+                        <a href="{% url 'user_page' topic.user %}">{{ topic.user.userprofile.get_display_name }}</a>,
+                        {% pybb_time topic.created %}
+
                         {% with topic|pybb_topic_inline_pagination as pages %}
                             {% if pages|length > 1 %}
                                 <span class="mini-pagination">
@@ -90,27 +97,16 @@
                             </span>
                             {% endif %}
                         {% endwith %}
-                    </td>
-                    <td class="topic-author hidden-phone hidden-tablet">
-                        {% astrobin_username topic.user %}
-                        {% show_competitive_feature request.user post.user as show_competitive_feature %}
-                        {% if show_competitive_feature or request.user.is_superuser %}
-                            <span class="contribution-index" rel="tooltip" title="{% trans 'Contribution Index' %} {% trans '(beta)' %}">
-                                {{ topic.user|contribution_index|floatformat:2 }}
-                            </span>
-                        {% endif %}
+                        <a href="{{ topic.get_absolute_url }}?first-unread=1" class="first-unread-post-link">&#8680;</a>
                     </td>
 
                     {% if forum %}
-                        <td class="topic-post-count hidden-phone">
-                            {{ topic.post_count }}
-                        </td>
-                        <td class="topic-view-count hidden-phone">
-                            {{ topic|pybbm_calc_topic_views }}
+                        <td class="topic-post-count hidden-tablet hidden-phone">
+                            {{ topic.post_count }} / {{ topic|pybbm_calc_topic_views }}
                         </td>
                     {% endif %}
 
-                    <td class="topic-last-post hidden-phone hidden-tablet">
+                    <td class="topic-last-post hidden-phone">
                         {% include "pybb/topic_last_message_info.html" %}
                     </td>
                 </tr>
