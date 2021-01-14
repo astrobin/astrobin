@@ -342,7 +342,32 @@ th.forum-name {
   }
 }
 
-/* --- Mini pagination --- */
+.forum-tools {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 1em;
+
+  .forum-search {
+    margin-bottom: 0;
+    margin-right: 1rem;
+
+    input {
+      margin-bottom: 0;
+    }
+  }
+
+  .btn {
+    margin-right: 1rem;
+  }
+
+  .pagination {
+    margin: 0;
+    text-align: right !important;
+    display: inline-flex;
+  }
+}
+
 .mini-pagination {
   padding: 3px 0 3px 10px;
   font-size: $base-font-size - 2;

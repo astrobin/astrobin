@@ -1,0 +1,55 @@
+{% load i18n %}
+{% load static %}
+
+<div class="forum-tools">
+    <form class="forum-search" action="{% url 'haystack_search' %}" method="get" autocomplete="off">
+        <input id="q" class="tbox" type="text" name="q" value="{{ request.GET.q }}"
+               placeholder="{% trans "Search all forums and comments" %}" />
+        <input type="hidden" name="d" value="cf" />
+    </form>
+
+    {% if forum %}
+        <a class="btn btn-primary" href="{% url 'pybb:add_topic' forum.id %}">
+            <i class="icon-plus icon-white"></i>
+            {% trans "New topic" %}
+        </a>
+    {% else %}
+        <a class="btn btn-primary" href="#select-forum-modal" data-toggle="modal">
+            <i class="icon-plus icon-white"></i>
+            {% trans "New topic" %}
+        </a>
+    {% endif %}
+
+    {% include "pagination_simple.html" %}
+</div>
+
+
+{% block modals %}
+    <div class="modal hide fade" id="select-forum-modal">
+        <div class="modal-header">
+            <h3>{% trans "Please select a forum" %}</h3>
+        </div>
+
+        <div class="modal-body">
+            <div class="row-fluid">
+                <div class="span2 visible-desktop">
+                    <img src="{% static 'astrobin/images/attention.png' %}" alt="{% trans 'Please note' %}" />
+                </div>
+                <div class="span9 offset1">
+                    <p>
+                        {% blocktrans trimmed %}
+                            To post a new topic, please first go to the forum that is most relevant to your topic.
+                        {% endblocktrans %}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button data-dismiss="modal" class="btn btn-secondary">{% trans "Cancel" %}</button>
+            <a class="btn btn-primary" href="{% url 'pybb:index' %}">
+                {% trans "View forums" %}
+            </a>
+        </div>
+    </div>
+{% endblock %}
