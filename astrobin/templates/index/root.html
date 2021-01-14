@@ -71,33 +71,34 @@
                             <div class="state-indicator"></div>
                         </td>
 
-                        <td class="topic-forum hidden-phone">
-                            <a href="{{topic.forum.get_absolute_url}}">
-                                {{topic.forum.name}}
-                            </a>
-                        </td>
-
                         <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
-                            <a href="{{topic.get_absolute_url}}">{{topic.name|truncatewords:10}}</a>
+                            <a href="{{topic.get_absolute_url}}">{{topic.name|truncatechars:90}}</a>
 
-                            {% if topic.sticky %} &nbsp;[{% trans "Sticky" %}] {% endif %}
+                            <br />
 
-                            {% if topic.closed %} &nbsp;[{% trans "Closed" %}] {% endif %}
+                            <a href="{{ topic.forum.get_absolute_url }}">
+                                {{ topic.forum.name }}
+                            </a>
+                            &middot;
+                            <a href="{% url 'user_page' topic.user %}">{{ topic.user.userprofile.get_display_name|truncatechars:30 }}</a>
+                            &middot;
+                            {% pybb_time topic.created %}
 
                             {% with topic|pybb_topic_inline_pagination as pages %}
                                 {% if pages|length > 1 %}
-                                <span class="mini-pagination">
-                                    {% trans "pages" %}:
-                                    {% for page in pages %}
-                                    <span class="page">
-                                        {% if page == "..." %}
-                                        ...
-                                        {% else %}
-                                        <a href="{{ topic.get_absolute_url }}?page={{ page }}">{{ page }}</a>
-                                        {% endif %}
+                                    <span class="mini-pagination">
+                                        {% for page in pages %}
+                                            <span class="page">
+                                                {% if page == "..." %}
+                                                    ...
+                                                {% else %}
+                                                    <a href="{{ topic.get_absolute_url }}?page={{ page }}">
+                                                        {{ page }}
+                                                    </a>
+                                                {% endif %}
+                                            </span>
+                                        {% endfor %}
                                     </span>
-                                    {% endfor %}
-                                </span>
                                 {% endif %}
                             {% endwith %}
 
@@ -107,19 +108,7 @@
                         </td>
 
                         <td class="topic-last-post hidden-phone hidden-tablet">
-                            {% if topic.updated %}
-                                {% with topic.last_post as last_post %}
-                                    <a href="{% url 'user_page' last_post.user %}">
-                                        {{ last_post.user.userprofile.get_display_name|truncatechars:30 }}
-                                    </a>
-
-                                    &middot;
-
-                                    <a href="{{ last_post.get_absolute_url }}">
-                                        {% pybb_time topic.updated %}
-                                    </a>
-                                {% endwith %}
-                            {% endif %}
+                            {% include "pybb/topic_last_message_info.html" %}
                         </td>
                     </tr>
                 {% endfor %}
