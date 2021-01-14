@@ -142,6 +142,8 @@ class UserService:
 
         if self.user.is_authenticated():
             index = self.user.userprofile.get_scores()['user_scores_index']
+        else:
+            return False, "ANONYMOUS"
 
         if is_free(self.user) and index < min_index_to_like:
             return False, "INDEX"

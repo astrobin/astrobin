@@ -126,6 +126,16 @@
                                     </span>
                                 </a>
                             </span>
+                        {% elif user|can_like_reason:post == "ANONYMOUS" %}
+                            <span class="toggleproperty-add-remove property-like">
+                                <a class="btn btn-primary disabled"
+                                   href="{% url 'auth_login' %}?next={{ request.path }}">
+                                    <i class="icon-thumbs-up"></i>
+                                    <span class="toggleproperties-label">
+                                        {% trans "Like" %}
+                                    </span>
+                                </a>
+                            </span>
                         {% endif %}
                     {% else %}
                         {% setvar request.user|can_like:post as can_like %}
