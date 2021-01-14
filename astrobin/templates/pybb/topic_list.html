@@ -16,12 +16,6 @@
                 &nbsp;
             </th>
 
-            {% if not forum %}
-                <th class="topic-forum hidden-phone">
-                    {% trans "Forum" %}
-                </th>
-            {% endif %}
-
             <th class="topic-name">
                 {% if forum %}
                     {{ forum.name }}
@@ -55,17 +49,9 @@
                         <div class="state-indicator"></div>
                     </td>
 
-                    {% if not forum %}
-                        <td class="topic-forum hidden-phone">
-                            <a href="{{ topic.forum.get_absolute_url }}">
-                                {{ topic.forum.name }}
-                            </a>
-                        </td>
-                    {% endif %}
 
                     <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
-                        <a href="{{ topic.get_absolute_url }}">{{ topic.name|truncatewords:10 }}</a>
-
+                        <a href="{{ topic.get_absolute_url }}">{{ topic.name|truncatechars:120 }}</a>
                         {% if topic.sticky %} &nbsp;[{% trans "Sticky" %}] {% endif %}
 
                         {% if topic.closed %} &nbsp;[{% trans "Closed" %}] {% endif %}
@@ -73,12 +59,13 @@
                         <br/>
 
                         {% if not forum %}
-                            <a href="{{ topic.forum.get_absolute_url }}" class="visible-phone">
+                            <a href="{{ topic.forum.get_absolute_url }}">
                                 {{ topic.forum.name }}
-                            </a>
+                            </a> &middot;
                         {% endif %}
 
-                        <a href="{% url 'user_page' topic.user %}">{{ topic.user.userprofile.get_display_name }}</a>,
+                        <a href="{% url 'user_page' topic.user %}">{{ topic.user.userprofile.get_display_name }}</a>
+                        &middot;
                         {% pybb_time topic.created %}
 
                         {% with topic|pybb_topic_inline_pagination as pages %}

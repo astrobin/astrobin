@@ -3,7 +3,7 @@
 {% if topic.updated %}
     {% with topic.last_post as last_post %}
         <a href="{% url 'user_page' last_post.user %}">
-            {{ last_post.user.userprofile.get_display_name }}
+            {{ last_post.user.userprofile.get_display_name|truncatechars:30 }}
         </a>
 
         <br />
