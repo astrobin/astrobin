@@ -108,14 +108,25 @@
                             </a>
                         </span>
                     {% elif not user|can_like:post %}
-                        <span class="toggleproperty-add-remove property-like">
-                            <a class="btn btn-primary disabled" data-toggle="modal" href="#cant-like">
-                                <i class="icon-thumbs-up"></i>
-                                <span class="toggleproperties-label">
-                                    {% trans "Like" %}
-                                </span>
-                            </a>
-                        </span>
+                        {% if user|can_like_reason:post == "INDEX" %}
+                            <span class="toggleproperty-add-remove property-like">
+                                <a class="btn btn-primary disabled" data-toggle="modal" href="#cant-like">
+                                    <i class="icon-thumbs-up"></i>
+                                    <span class="toggleproperties-label">
+                                        {% trans "Like" %}
+                                    </span>
+                                </a>
+                            </span>
+                        {% elif user|can_like_reason:post == "TOPIC_CLOSED" %}
+                            <span class="toggleproperty-add-remove property-like">
+                                <a class="btn btn-primary disabled" data-toggle="modal" href="#cant-like-topic-closed">
+                                    <i class="icon-thumbs-up"></i>
+                                    <span class="toggleproperties-label">
+                                        {% trans "Like" %}
+                                    </span>
+                                </a>
+                            </span>
+                        {% endif %}
                     {% else %}
                         {% setvar request.user|can_like:post as can_like %}
                         {% setvar request.user|can_unlike:post as can_unlike %}
@@ -159,6 +170,23 @@
             {% blocktrans trimmed with minutes=15 %}
                 Editing a post is only allowed within {{ minutes }} minutes after creating it.
             {% endblocktrans %}
+        </div>
+    </div>
+
+    <div class="modal hide fade" id="cant-like-topic-closed">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3><i class="icon-frown"></i> {% trans "Sorry" %}</h3>
+        </div>
+
+        <div class="modal-body">
+            {% blocktrans trimmed %}
+                You cannot Like this post because the topic is closed.
+            {% endblocktrans %}
+        </div>
+
+        <div class="modal-footer">
+            <a class="btn btn-primary" data-dismiss="modal">{% trans "OK" %}</a>
         </div>
     </div>
 

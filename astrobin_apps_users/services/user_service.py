@@ -133,9 +133,9 @@ class UserService:
         # type: (User) -> bool
         return other.userprofile in self.user.userprofile.shadow_bans.all()
 
-    def can_like(self, obj):
+    def _real_can_like(self, obj):
         if self.user.is_superuser:
-            return True
+            return True, None
 
         index = 0
         min_index_to_like = settings.MIN_INDEX_TO_LIKE
@@ -144,16 +144,26 @@ class UserService:
             index = self.user.userprofile.get_scores()['user_scores_index']
 
         if is_free(self.user) and index < min_index_to_like:
-            return False
+            return False, "INDEX"
 
         if obj.__class__.__name__ == 'Image':
-            return self.user != obj.user
+            return self.user != obj.user, "OWNER"
         elif obj.__class__.__name__ == 'NestedComment':
-            return  self.user != obj.author
+            return  self.user != obj.author, "OWNER"
         elif obj.__class__.__name__ == 'Post':
-            return self.user != obj.user and not obj.topic.closed
+            if self.user == obj.user:
+                return False, "OWNER"
+            if obj.topic.closed:
+                return False, "TOPIC_CLOSED"
+            return True, None
 
-        return False
+        return False, "UNKNOWN"
+
+    def can_like(self, obj):
+        return self._real_can_like(obj)[0]
+
+    def can_like_reason(self, obj):
+        return self._real_can_like(obj)[1]
 
     def can_unlike(self, obj):
         if not self.user.is_authenticated():
