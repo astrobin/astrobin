@@ -64,24 +64,23 @@
                             </a> &middot;
                         {% endif %}
 
-                        <a href="{% url 'user_page' topic.user %}">{{ topic.user.userprofile.get_display_name }}</a>
+                        <a href="{% url 'user_page' topic.user %}">{{ topic.user.userprofile.get_display_name|truncatechars:30 }}</a>
                         &middot;
                         {% pybb_time topic.created %}
 
                         {% with topic|pybb_topic_inline_pagination as pages %}
                             {% if pages|length > 1 %}
                                 <span class="mini-pagination">
-                                {% trans "pages" %}:
                                     {% for page in pages %}
                                         <span class="page">
-                                    {% if page == "..." %}
-                                        ...
-                                    {% else %}
-                                        <a href="{{ topic.get_absolute_url }}?page={{ page }}">{{ page }}</a>
-                                    {% endif %}
-                                    </span>
+                                            {% if page == "..." %}
+                                                ...
+                                            {% else %}
+                                                <a href="{{ topic.get_absolute_url }}?page={{ page }}">{{ page }}</a>
+                                            {% endif %}
+                                        </span>
                                     {% endfor %}
-                            </span>
+                                </span>
                             {% endif %}
                         {% endwith %}
                         <a href="{{ topic.get_absolute_url }}?first-unread=1" class="first-unread-post-link">&#8680;</a>
