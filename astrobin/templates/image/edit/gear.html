@@ -122,6 +122,17 @@
             $('form .loading').hide();
             $('form .ui-multiselect').show();
 
+            setTimeout(function() {
+                $(".ui-multiselect").each(function () {
+                    var selectedHeight = $(this).find("ul.available li.ui-element").length * 21;
+                    var availableHeight = $(this).find("ul.available li.ui-element").length * 21;
+                    var height = Math.max(selectedHeight, availableHeight);
+
+                    $(this).find("ul.selected").height(height);
+                    $(this).find("ul.available").height(height);
+                });
+            }, 300);
+
             function selectGearItem($select, text) {
                 $select.multiselect('select', text);
             }
