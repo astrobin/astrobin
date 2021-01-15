@@ -85,13 +85,18 @@ def pybb_premoderation(user, post_content):
     if index >= settings.MIN_INDEX_TO_LIKE:
         return True
 
-    # Users that have had 5 messages approved before are always approved
-    from pybb.models import Post
-    posts = Post.objects.filter(user = user, on_moderation = False)
-    if posts.count() >= 5:
+    from pybb.models import Post, Topic
+
+    # Users that have had 5 posts approved before are always approved
+    if Post.objects.filter(user=user, on_moderation=False).count() >= 5:
+        return True
+
+    # Users that have had topic approved in the same topic are always approved
+    if Topic.objects.filter(user=user, on_moderation=False).exists():
         return True
 
     return False
+
 PYBB_PREMODERATION = pybb_premoderation
 
 SANITIZER_ALLOWED_TAGS = ['b', 'i', 'strong', 'em', 'a', 'img']
