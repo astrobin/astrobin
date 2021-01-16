@@ -5,7 +5,7 @@ from django.test import TestCase
 
 from astrobin.enums import SubjectType
 from astrobin.tests.generators import Generators
-from astrobin_apps_iotd.models import IotdSubmission, IotdVote, Iotd
+from astrobin_apps_iotd.models import IotdSubmission, IotdVote, Iotd, IotdDismissedImage
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.tests.iotd_generators import IotdGenerators
 
@@ -361,6 +361,16 @@ class IotdServiceTest(TestCase):
         submitter = Generators.user(groups=['iotd_submitters'])
         image = Generators.image(user=user)
         image.designated_iotd_submitters.add(submitter)
+
+        self.assertEquals(1, len(IotdService().get_submission_queue(submitter)))
+
+    def test_get_submission_queue(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+        image = Generators.image(user=user)
+        image.designated_iotd_submitters.add(submitter)
         image.moderator_decision = 2
         image.save()
 
@@ -432,6 +442,21 @@ class IotdServiceTest(TestCase):
 
         image.published = datetime.now() - timedelta(hours=24)
         image.save()
+
+        self.assertEquals(0, len(IotdService().get_submission_queue(submitter)))
+
+    def test_get_submission_queue_dismissed(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+        image = Generators.image(user=user)
+        image.designated_iotd_submitters.add(submitter)
+
+        IotdDismissedImage.objects.create(
+            user=submitter,
+            image=image
+        )
 
         self.assertEquals(0, len(IotdService().get_submission_queue(submitter)))
 
@@ -652,5 +677,28 @@ class IotdServiceTest(TestCase):
 
         vote.date = datetime.now() - timedelta(days=1)
         vote.save()
+
+        self.assertEquals(0, len(IotdService().get_review_queue(reviewer)))
+
+    def test_get_review_queue_dismissed(self):
+        uploader = Generators.user()
+        submitter = Generators.user(groups=['iotd_submitters'])
+        reviewer = Generators.user(groups=['iotd_reviewers'])
+
+        Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
+
+        image = Generators.image(user=uploader)
+        image.designated_iotd_submitters.add(submitter)
+        image.designated_iotd_reviewers.add(reviewer)
+
+        IotdSubmission.objects.create(
+            submitter=submitter,
+            image=image
+        )
+
+        IotdDismissedImage.objects.create(
+            user=reviewer,
+            image=image
+        )
 
         self.assertEquals(0, len(IotdService().get_review_queue(reviewer)))
