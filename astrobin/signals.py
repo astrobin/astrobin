@@ -29,14 +29,14 @@ from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
-    is_lite, is_any_premium_subscription, is_lite_2020, is_any_ultimate, is_premium_2020, is_premium)
+    is_lite, is_any_premium_subscription, is_lite_2020, is_any_ultimate, is_premium_2020, is_premium, is_free)
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from astrobin_apps_users.services import UserService
 from common.services.mentions_service import MentionsService
 from nested_comments.models import NestedComment
+from nested_comments.services.comment_notifications_service import CommentNotificationsService
 from toggleproperties.models import ToggleProperty
-from .gear import get_correct_gear
-from .models import Image, ImageRevision, Gear, UserProfile
+from .models import Image, ImageRevision, UserProfile
 from .search_indexes import ImageIndex, UserIndex
 from .stories import add_story
 
@@ -188,6 +188,10 @@ def nested_comment_pre_save(sender, instance, **kwargs):
             mentions = []
 
         cache.set("user.%d.comment_pre_save_mentions" % instance.author.pk, mentions, 2)
+    else:
+        user_scores_index = instance.author.userprofile.get_scores()['user_scores_index']
+        if user_scores_index < 1.00 and is_free(instance.author):
+            instance.pending_moderation = True
 
 
 pre_save.connect(nested_comment_pre_save, sender=NestedComment)
@@ -195,81 +199,9 @@ pre_save.connect(nested_comment_pre_save, sender=NestedComment)
 
 def nested_comment_post_save(sender, instance, created, **kwargs):
     if created:
-        model_class = instance.content_type.model_class()
-        obj = instance.content_type.get_object_for_this_type(id=instance.object_id)
-        url = settings.BASE_URL + instance.get_absolute_url()
         mentions = MentionsService.get_mentions(instance.text)
 
-        if model_class == Image:
-            image = instance.content_type.get_object_for_this_type(id=instance.object_id)
-            if image.is_wip:
-                return
-
-            if UserService(obj.user).shadow_bans(instance.author):
-                log.info("Skipping notification for comment because %d shadow-bans %d" % (
-                    obj.user.pk, instance.author.pk))
-                return
-
-            if instance.author != obj.user:
-                push_notification(
-                    [obj.user], 'new_comment',
-                    {
-                        'url': url,
-                        'user': instance.author.userprofile.get_display_name(),
-                        'user_url': settings.BASE_URL + reverse_url(
-                            'user_page', kwargs={'username': instance.author.username}),
-                    }
-                )
-
-            if instance.parent and instance.parent.author != instance.author:
-                push_notification(
-                    [instance.parent.author], 'new_comment_reply',
-                    {
-                        'url': url,
-                        'user': instance.author.userprofile.get_display_name(),
-                        'user_url': settings.BASE_URL + reverse_url(
-                            'user_page', kwargs={'username': instance.author.username}),
-                    }
-                )
-
-            add_story(instance.author,
-                      verb='VERB_COMMENTED_IMAGE',
-                      action_object=instance,
-                      target=obj)
-
-        elif model_class == Gear:
-            if not instance.parent:
-                gear, gear_type = get_correct_gear(obj.id)
-                user_attr_lookup = {
-                    'Telescope': 'telescopes',
-                    'Camera': 'cameras',
-                    'Mount': 'mounts',
-                    'FocalReducer': 'focal_reducers',
-                    'Software': 'software',
-                    'Filter': 'filters',
-                    'Accessory': 'accessories',
-                }
-
-                recipients = [x.user for x in UserProfile.objects.filter(
-                    **{user_attr_lookup[gear_type]: gear})]
-                notification = 'new_gear_discussion'
-            else:
-                notification = 'new_comment_reply'
-                recipients = [instance.parent.author]
-
-            push_notification(
-                recipients, notification,
-                {
-                    'url': url,
-                    'user': instance.author.userprofile.get_display_name(),
-                    'user_url': settings.BASE_URL + reverse_url(
-                        'user_page', kwargs={'username': instance.author.username}),
-                })
-
-            add_story(instance.author,
-                      verb='VERB_COMMENTED_GEAR',
-                      action_object=instance,
-                      target=gear)
+        CommentNotificationsService(instance).send_notifications()
 
         if hasattr(instance.content_object, "updated"):
             # This will trigger the auto_now fields in the content_object

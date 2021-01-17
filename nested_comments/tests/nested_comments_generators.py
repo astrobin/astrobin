@@ -10,15 +10,15 @@ class NestedCommentsGenerators:
 
     @staticmethod
     def comment(**kwargs):
-        author = kwargs.pop('author', Generators.user())
         target = kwargs.pop('target', None)
-
         if target is None:
             target = Generators.image()
 
         return NestedComment.objects.create(
-            author=author,
+            author=kwargs.pop('author', Generators.user()),
             content_type=ContentType.objects.get_for_model(target),
             object_id=target.id,
             text=Generators.randomString(),
+            parent=kwargs.pop('parent', None),
+            pending_moderation=kwargs.pop('pending_moderation', None)
         )

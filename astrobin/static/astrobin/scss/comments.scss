@@ -88,6 +88,7 @@
     .comment-container {
       display: inline-block;
       width: calc(100% - 56px);
+      border-bottom: 1px dashed #555;
 
       @media screen and (max-width: 979px) {
         width: 100%;
@@ -107,6 +108,11 @@
     .content {
       padding: $spacer-medium 0;
       color: $strong-text-color;
+
+      &.pending-moderation {
+        color: $grey-3;
+        padding: $spacer-large 0 $spacer-xxxlarge 0;
+      }
 
       p {
         line-height: 1.5em;
@@ -175,7 +181,6 @@
 
     .links {
       padding: $spacer-small 0 $spacer-xlarge 0;
-      border-bottom: 1px dashed #555;
 
       a {
         text-transform: lowercase;

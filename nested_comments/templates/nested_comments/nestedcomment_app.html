@@ -87,127 +87,134 @@
             </a>
         </div>
     {{/unless}}
-    <div class="comment-container" {{bindAttr id="view.node.cid"}}>
-        <div class="meta">
-            {{#if view.node.deleted}}
-                {% trans "(deleted)" %}
-            {{else}}
-                <a class="author" {{bindAttr href="view.node.author_url"}}>
-                    {{view.node.author_username}}
-                </a>
-            {{/if}}
 
-            {{view NestedCommentsApp.TimeagoView valueBinding="view.node.created"}}
+    <div class="comment-container" {{ bindAttr id="view.node.cid"}}>
+        {{#if view.node.pending_moderation}}
+            <div class="content pending-moderation">
+                <em>{% trans "This comment is pending moderation and will be reviewed shortly." %}</em>
+            </div>
+        {{else}}
+            <div class="meta">
+                {{#if view.node.deleted}}
+                    {% trans "(deleted)" %}
+                {{else}}
+                    <a class="author" {{bindAttr href="view.node.author_url"}}>
+                        {{view.node.author_username}}
+                    </a>
+                {{/if}}
 
-            &middot;
+                {{view NestedCommentsApp.TimeagoView valueBinding="view.node.created"}}
 
-            {{#if view.node.hasNoLikes}}
-                {{ view.node.likesCount }} {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" %}
-            {{/if}}
+                &middot;
 
-            {{#if view.node.hasOneLike}}
-                {{ view.node.likesCount }} {% trans "like" context "Noun, e.g. 'This element has 1 like'" %}
-            {{/if}}
+                {{#if view.node.hasNoLikes}}
+                    {{ view.node.likesCount }} {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" %}
+                {{/if}}
 
-            {{#if view.node.hasManyLikes}}
-                {{ view.node.likesCount }} {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" %}
-            {{/if}}
+                {{#if view.node.hasOneLike}}
+                    {{ view.node.likesCount }} {% trans "like" context "Noun, e.g. 'This element has 1 like'" %}
+                {{/if}}
+
+                {{#if view.node.hasManyLikes}}
+                    {{ view.node.likesCount }} {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" %}
+                {{/if}}
+
+                {{#unless view.collapsed}}
+                    <a href="#" class="collapse" {{action "collapse" target="view"}}>[-]</a>
+                {{else}}
+                    <a href="#" class="collapse" {{action "uncollapse" target="view"}}>[+]</a>
+                {{/unless}}
+            </div>
 
             {{#unless view.collapsed}}
-                <a href="#" class="collapse" {{action "collapse" target="view"}}>[-]</a>
-            {{else}}
-                <a href="#" class="collapse" {{action "uncollapse" target="view"}}>[+]</a>
-            {{/unless}}
-        </div>
+                <div class="converter" style="display: none">
+                    {{view Ember.TextArea rows=6 valueBinding="view.node.text"}}
+                </div>
 
-        {{#unless view.collapsed}}
-            <div class="converter" style="display: none">
-                {{view Ember.TextArea rows=6 valueBinding="view.node.text"}}
-            </div>
-
-            <div class="content">
-                {{#if view.node.deleted}}
-                    <p>{% trans "(deleted)" %}</p>
-                {{else}}
-                    {{#if view.editing}}
-                        {{view view.EditView commentBinding="view.node"}}
+                <div class="content">
+                    {{#if view.node.deleted}}
+                        <p>{% trans "(deleted)" %}</p>
                     {{else}}
-                        {{# if view.node.ready}}
-                            {{{view.node.getHTML}}}
+                        {{#if view.editing}}
+                            {{view view.EditView commentBinding="view.node"}}
                         {{else}}
-                            {{view NestedCommentsApp.LoaderView}}
+                            {{# if view.node.ready}}
+                                {{{view.node.getHTML}}}
+                            {{else}}
+                                {{view NestedCommentsApp.LoaderView}}
+                            {{/if}}
                         {{/if}}
                     {{/if}}
-                {{/if}}
-            </div>
+                </div>
 
-            <div class="links">
-                <a {{bindAttr href="view.node.url"}} {{action "link" target="view"}}>
-                    <i class="icon-link"></i> {% trans "Link" %}
-                </a>
+                <div class="links">
+                    <a {{bindAttr href="view.node.url"}} {{action "link" target="view"}}>
+                        <i class="icon-link"></i> {% trans "Link" %}
+                    </a>
 
-                {{#if view.node.authorIsRequestingUser}}
-                    {{#if view.node.deleted}}
-                        <a href="#" {{action "undelete" target="view"}}>
-                            {% trans "Undelete" %}
-                        </a>
+                    {{#if view.node.authorIsRequestingUser}}
+                        {{#if view.node.deleted}}
+                            <a href="#" {{action "undelete" target="view"}}>
+                                {% trans "Undelete" %}
+                            </a>
+                        {{else}}
+                            <a href="#" {{action "delete_" target="view"}}>
+                                <i class="icon-trash"></i> {% trans "Delete" %}
+                            </a>
+                        {{/if}}
+
+                        {{#if view.node.allowEditing}}
+                            {{#unless view.editing}}
+                                <i class="icon-pencil"></i> <a href="#" {{action "edit" target="view"}}>{% trans "Edit" %}</a>
+                            {{/unless}}
+                        {{/if}}
+
+                        {{#if view.userIsSuperuser}}
+                            <a href="#" class="label label-important" {{action "reply" target="view"}}>
+                                <i class="icon-reply"></i> {% trans "Reply" %}
+                            </a>
+                        {{/if}}
                     {{else}}
-                        <a href="#" {{action "delete_" target="view"}}>
-                            <i class="icon-trash"></i> {% trans "Delete" %}
-                        </a>
-                    {{/if}}
-
-                    {{#if view.node.allowEditing}}
-                        {{#unless view.editing}}
-                            <i class="icon-pencil"></i> <a href="#" {{action "edit" target="view"}}>{% trans "Edit" %}</a>
-                        {{/unless}}
-                    {{/if}}
-
-                    {{#if view.userIsSuperuser}}
                         <a href="#" class="label label-important" {{action "reply" target="view"}}>
                             <i class="icon-reply"></i> {% trans "Reply" %}
                         </a>
+
+                        {{#unless view.node.liked}}
+                            <a href="#"
+                               class="label label-important comment-like"
+                               {{bindAttr class="view.node.liking:liking"}}
+                               {{action "like" target="view"}}>
+                                <i class="icon-thumbs-up"></i> {% trans "Like" %}
+                            </a>
+                        {{else}}
+                            <a href="#"
+                               class="label comment-unlike"
+                               {{bindAttr class="view.node.unliking:unliking"}}
+                               {{action "unlike" target="view"}}>
+                                {% trans "Unlike" %}
+                            </a>
+                        {{/unless}}
                     {{/if}}
-                {{else}}
-                    <a href="#" class="label label-important" {{action "reply" target="view"}}>
-                        <i class="icon-reply"></i> {% trans "Reply" %}
-                    </a>
-
-                    {{#unless view.node.liked}}
-                        <a href="#"
-                           class="label label-important comment-like"
-                           {{bindAttr class="view.node.liking:liking"}}
-                           {{action "like" target="view"}}>
-                            <i class="icon-thumbs-up"></i> {% trans "Like" %}
-                        </a>
-                    {{else}}
-                        <a href="#"
-                           class="label comment-unlike"
-                           {{bindAttr class="view.node.unliking:unliking"}}
-                           {{action "unlike" target="view"}}>
-                            {% trans "Unlike" %}
-                        </a>
-                    {{/unless}}
-                {{/if}}
-            </div>
-
-            {{#if view.replying}}
-                <div class="reply">
-                    {{view view.ReplyView parentBinding="view.node.comment"}}
                 </div>
-            {{/if}}
 
-            {{#if view.node.shouldNotIndent}}
-                <div class="children no-indentation">
-            {{else}}
-                <div class="children">
-            {{/if}}
+                {{#if view.replying}}
+                    <div class="reply">
+                        {{view view.ReplyView parentBinding="view.node.comment"}}
+                    </div>
+                {{/if}}
 
-            {{#each view.node.children}}
-                {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
-            {{/each}}
-            </div>
-        {{/unless}}
+                {{#if view.node.shouldNotIndent}}
+                    <div class="children no-indentation">
+                {{else}}
+                    <div class="children">
+                {{/if}}
+
+                {{#each view.node.children}}
+                    {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
+                {{/each}}
+                </div>
+            {{/unless}}
+        {{/if}}
     </div>
 {% endhandlebars %}
 

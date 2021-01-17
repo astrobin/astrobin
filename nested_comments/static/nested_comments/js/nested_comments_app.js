@@ -130,6 +130,7 @@ $(function() {
         created: null,
         updated: null,
         deleted: null,
+        pending_moderation: null,
         parent: null,
         depth: null,
         likes: [],
@@ -448,6 +449,7 @@ $(function() {
                 created: comment.get('created'),
                 updated: comment.get('updated'),
                 deleted: comment.get('deleted') ? 'True' : 'False',
+                pending_moderation: comment.get('pending_moderation') ? 'True' : 'False',
                 parent: comment.get('parent')
             };
 
