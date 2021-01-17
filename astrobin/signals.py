@@ -190,7 +190,7 @@ def nested_comment_pre_save(sender, instance, **kwargs):
         cache.set("user.%d.comment_pre_save_mentions" % instance.author.pk, mentions, 2)
     else:
         user_scores_index = instance.author.userprofile.get_scores()['user_scores_index']
-        if user_scores_index < 1.00 and is_free(instance.user):
+        if user_scores_index < 1.00 and is_free(instance.author):
             instance.pending_moderation = True
 
 
