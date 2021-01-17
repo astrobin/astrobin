@@ -83,7 +83,8 @@ class IotdService:
             ~Q(
                 Q(user=submitter) |
                 Q(subject_type__in=(SubjectType.GEAR, SubjectType.OTHER)) |
-                Q(Q(iotdsubmission__submitter=submitter) & Q(iotdsubmission__date__lt=date.today()))
+                Q(Q(iotdsubmission__submitter=submitter) & Q(iotdsubmission__date__lt=date.today())) |
+                Q(iotddismissedimage__user=submitter)
             )
         ).order_by(
             '-published'
@@ -98,7 +99,9 @@ class IotdService:
             x.image
             for x in IotdSubmission.objects
                 .filter(date__gte=cutoff, image__designated_iotd_reviewers=reviewer)
-                .exclude(Q(submitter=reviewer) | Q(image__user=reviewer))
+                .exclude(Q(submitter=reviewer) |
+                         Q(image__user=reviewer) |
+                         Q(image__iotddismissedimage__user=reviewer))
             if (
                     not Iotd.objects.filter(
                         image=x.image,
