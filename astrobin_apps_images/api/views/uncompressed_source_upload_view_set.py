@@ -57,6 +57,9 @@ class UncompressedSourceUploadViewSet(TusCreateMixin,
         except (TypeError, KeyError):
             return {}
 
+    def verify_file(self, f):
+        return True
+
 
 @receiver(signals.saved)
 def uncompresed_source_upload_saved(sender, **kwargs):
