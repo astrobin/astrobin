@@ -4,7 +4,7 @@ Cypress.Commands.add("visitImage", (options = {}) => {
     cy.get(".main-image").should("be.visible");
 });
 
-Cypress.Commands.add("imageLike", (options = {}) => {
+Cypress.Commands.add("likeImage", (options = {}) => {
     cy.visitImage();
     cy.url().then(url => {
         cy.login({

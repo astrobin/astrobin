@@ -9,7 +9,7 @@ describe("Image features", () => {
     });
 
     it("should like and unlike an image", () => {
-        cy.imageLike();
+        cy.likeImage();
     });
 
     it("should comment on an image", () => {
