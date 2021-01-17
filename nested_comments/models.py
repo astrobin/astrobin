@@ -33,32 +33,43 @@ class NestedComment(models.Model):
 
     author = models.ForeignKey(
         User,
-        on_delete = models.SET(get_sentinel_user),
-        editable = False,
+        related_name="comments",
+        on_delete=models.SET(get_sentinel_user),
+        editable=False,
     )
 
     text = models.TextField()
 
     created = models.DateTimeField(
-        auto_now_add = True,
-        editable = False,
+        auto_now_add=True,
+        editable=False,
     )
 
     updated = models.DateTimeField(
-        auto_now = True,
-        editable = False,
+        auto_now=True,
+        editable=False,
     )
 
     parent = models.ForeignKey(
         'self',
-        null = True,
-        blank = True,
-        related_name = 'children',
-        on_delete = models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='children',
+        on_delete=models.SET_NULL,
     )
 
     deleted = models.BooleanField(
-        default = False,
+        default=False,
+    )
+
+    pending_moderation = models.NullBooleanField()
+
+    moderator = models.ForeignKey(
+        User,
+        related_name="moderated_comments",
+        null=True,
+        default=None,
+        on_delete=models.SET_NULL
     )
 
     @property
@@ -80,7 +91,7 @@ class NestedComment(models.Model):
         return "Comment %d" % self.pk
 
     def get_absolute_url(self):
-        object_url = self.content_type.get_object_for_this_type(id = self.object_id).get_absolute_url()
+        object_url = self.content_type.get_object_for_this_type(id=self.object_id).get_absolute_url()
         return '%s#c%d' % (object_url, self.id)
 
     def delete(self, *args, **kwargs):
@@ -89,7 +100,7 @@ class NestedComment(models.Model):
             self.save()
 
     def clean(self, *args, **kwargs):
-        obj = self.content_type.get_object_for_this_type(pk = self.object_id)
+        obj = self.content_type.get_object_for_this_type(pk=self.object_id)
         if hasattr(obj, 'allow_comments') and obj.allow_comments is False:
             raise ValidationError('Comments are closed')
 
