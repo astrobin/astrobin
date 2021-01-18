@@ -69,6 +69,8 @@ class IotdTest(TestCase):
 
     # Models
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
+    @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_submission_model(self):
         Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
         submission = IotdSubmission.objects.create(
@@ -356,6 +358,8 @@ class IotdTest(TestCase):
         submission_1.submitter = self.submitter_1
         submission_1.save()
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
+    @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_vote_model(self):
         Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
 

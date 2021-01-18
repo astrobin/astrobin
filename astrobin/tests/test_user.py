@@ -489,6 +489,8 @@ class UserTest(TestCase):
         self.assertNotContains(response, 'top100-badge')
 
     @override_settings(PREMIUM_RESTRICTS_IOTD=False)
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
+    @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_user_profile_banned_from_competitions(self, retrieve_primary_thumbnails):
         self.client.login(username="user", password="password")

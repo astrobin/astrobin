@@ -1,7 +1,7 @@
 from datetime import timedelta, date, datetime
 
 from django.conf import settings
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
 from astrobin.enums import SubjectType
 from astrobin.tests.generators import Generators
@@ -66,6 +66,8 @@ class IotdServiceTest(TestCase):
 
         self.assertFalse(IotdService().is_top_pick(image))
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
+    @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_is_top_pick_true(self):
         image = Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
@@ -101,6 +103,8 @@ class IotdServiceTest(TestCase):
 
         self.assertFalse(IotdService().is_top_pick(image))
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
+    @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_is_top_picks_true_future_iotd(self):
         image = Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
@@ -139,6 +143,7 @@ class IotdServiceTest(TestCase):
 
         self.assertFalse(IotdService().is_top_pick_nomination(image))
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     def test_is_top_pick_nomination_true(self):
         image = Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
@@ -170,6 +175,7 @@ class IotdServiceTest(TestCase):
 
         self.assertFalse(IotdService().is_top_pick_nomination(image))
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     def test_is_top_pick_nomination_true_future_top_pick(self):
         image = Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
@@ -311,6 +317,8 @@ class IotdServiceTest(TestCase):
 
         self.assertEquals(0, top_picks.count())
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1)
+    @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_get_top_picks_is_future_iotd(self):
         image = Generators.image()
         Generators.image()
@@ -344,6 +352,7 @@ class IotdServiceTest(TestCase):
 
         self.assertEquals(0, nominations.count())
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     def test_get_top_pick_nominations(self):
         image = Generators.image()
 

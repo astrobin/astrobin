@@ -61,6 +61,8 @@ class ExploreTest(TestCase):
         self.image.save()
 
     @override_settings(PREMIUM_RESTRICTS_IOTD=False)
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
+    @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_top_picks_data_source_filter(self):
         IotdSubmission.objects.create(submitter=self.submitter, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer, image=self.image)
@@ -114,6 +116,8 @@ class ExploreTest(TestCase):
         self.assertNotContains(response, self.image.title)
 
     @override_settings(PREMIUM_RESTRICTS_IOTD=False)
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
+    @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_top_picks_acquisition_type_filter(self):
         IotdSubmission.objects.create(submitter=self.submitter, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer, image=self.image)
