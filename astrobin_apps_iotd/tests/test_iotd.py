@@ -16,6 +16,9 @@ from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_iotd.models import *
 
 
+@override_settings(
+    IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(days=365)
+)
 class IotdTest(TestCase):
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def setUp(self, retrieve_primary_thumbnails):
@@ -650,7 +653,11 @@ class IotdTest(TestCase):
 
     # Views
 
-    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
+    @override_settings(
+        PREMIUM_RESTRICTS_IOTD=False,
+        IOTD_SUBMISSION_MIN_PROMOTIONS=1,
+        IOTD_REVIEW_MIN_PROMOTIONS=1
+    )
     def test_judgement_queue_view(self):
         url = reverse_lazy('iotd_judgement_queue')
 
