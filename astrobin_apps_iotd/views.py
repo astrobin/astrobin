@@ -48,7 +48,7 @@ class IotdJudgementQueueView(
     template_name = 'astrobin_apps_iotd/iotd_judgement_queue.html'
 
     def get_queryset(self):
-        return IotdService.get_judgement_queue()
+        return IotdService().get_judgement_queue()
 
 
 class IotdToggleJudgementAjaxView(
