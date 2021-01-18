@@ -498,16 +498,20 @@ class UserTest(TestCase):
         image = Image.objects_including_wip.all()[0]
 
         submitter = User.objects.create_user('submitter', 'submitter_1@test.com', 'password')
+        submitter2 = User.objects.create_user('submitter2', 'submitter_2@test.com', 'password')
         submitters = Group.objects.create(name='iotd_submitters')
-        submitters.user_set.add(submitter)
+        submitters.user_set.add(submitter, submitter2)
         reviewer = User.objects.create_user('reviewer', 'reviewer_1@test.com', 'password')
+        reviewer2 = User.objects.create_user('reviewer2', 'reviewer_2@test.com', 'password')
         reviewers = Group.objects.create(name='iotd_reviewers')
-        reviewers.user_set.add(reviewer)
+        reviewers.user_set.add(reviewer, reviewer2)
         judge = User.objects.create_user('judge', 'judge_1@test.com', 'password')
         judges = Group.objects.create(name='iotd_judges')
         judges.user_set.add(judge)
         IotdSubmission.objects.create(submitter=submitter, image=image)
+        IotdSubmission.objects.create(submitter=submitter2, image=image)
         vote = IotdVote.objects.create(reviewer=reviewer, image=image)
+        vote = IotdVote.objects.create(reviewer=reviewer2, image=image)
         iotd = Iotd.objects.create(judge=judge, image=image, date=datetime.now().date())
 
         image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
