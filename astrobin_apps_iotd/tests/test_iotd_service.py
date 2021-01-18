@@ -15,6 +15,8 @@ class IotdServiceTest(TestCase):
         image = Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
         IotdGenerators.submission(image=image)
+        IotdGenerators.submission(image=image)
+        IotdGenerators.vote(image=image)
         IotdGenerators.vote(image=image)
         IotdGenerators.iotd(image=image)
 
@@ -24,6 +26,7 @@ class IotdServiceTest(TestCase):
         image = Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
         IotdGenerators.submission(image=image)
+        IotdGenerators.submission(image=image)
         IotdGenerators.vote(image=image)
 
         self.assertFalse(IotdService().is_iotd(image))
@@ -32,14 +35,16 @@ class IotdServiceTest(TestCase):
         image = Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
         IotdGenerators.submission(image=image)
+        IotdGenerators.submission(image=image)
         IotdGenerators.vote(image=image)
-        iotd = IotdGenerators.iotd(image=image, date=date.today() + timedelta(days=1))
+        IotdGenerators.iotd(image=image, date=date.today() + timedelta(days=1))
 
         self.assertFalse(IotdService().is_iotd(image))
 
     def test_is_iotd_false_excluded(self):
         image = Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
+        IotdGenerators.submission(image=image)
         IotdGenerators.submission(image=image)
         IotdGenerators.vote(image=image)
         IotdGenerators.iotd(image=image)
@@ -49,10 +54,24 @@ class IotdServiceTest(TestCase):
 
         self.assertFalse(IotdService().is_iotd(image))
 
+    def test_is_top_pick_false_only_one_vote(self):
+        image = Generators.image()
+        Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
+        IotdGenerators.submission(image=image)
+        IotdGenerators.submission(image=image)
+        IotdGenerators.vote(image=image)
+
+        image.published = datetime.now() - timedelta(days=settings.IOTD_REVIEW_WINDOW_DAYS)
+        image.save()
+
+        self.assertFalse(IotdService().is_top_pick(image))
+
     def test_is_top_pick_true(self):
         image = Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
         IotdGenerators.submission(image=image)
+        IotdGenerators.submission(image=image)
+        IotdGenerators.vote(image=image)
         IotdGenerators.vote(image=image)
 
         image.published = datetime.now() - timedelta(days=settings.IOTD_REVIEW_WINDOW_DAYS)
@@ -86,6 +105,8 @@ class IotdServiceTest(TestCase):
         image = Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
         IotdGenerators.submission(image=image)
+        IotdGenerators.submission(image=image)
+        IotdGenerators.vote(image=image)
         IotdGenerators.vote(image=image)
         IotdGenerators.iotd(image=image, date=date.today() + timedelta(days=1))
 
@@ -108,9 +129,20 @@ class IotdServiceTest(TestCase):
 
         self.assertFalse(IotdService().is_top_pick(image))
 
+    def test_is_top_pick_nomination_false_only_one_submission(self):
+        image = Generators.image()
+        Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
+        IotdGenerators.submission(image=image)
+
+        image.published = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
+        image.save()
+
+        self.assertFalse(IotdService().is_top_pick_nomination(image))
+
     def test_is_top_pick_nomination_true(self):
         image = Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
+        IotdGenerators.submission(image=image)
         IotdGenerators.submission(image=image)
 
         image.published = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
@@ -141,6 +173,7 @@ class IotdServiceTest(TestCase):
     def test_is_top_pick_nomination_true_future_top_pick(self):
         image = Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
+        IotdGenerators.submission(image=image)
         IotdGenerators.submission(image=image)
         IotdGenerators.vote(image=image)
 
@@ -285,6 +318,7 @@ class IotdServiceTest(TestCase):
 
         IotdGenerators.submission(image=image)
         IotdGenerators.vote(image=image)
+        IotdGenerators.vote(image=image)
         IotdGenerators.iotd(image=image, date=date.today() + timedelta(days=1))
 
         image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
@@ -295,12 +329,28 @@ class IotdServiceTest(TestCase):
         self.assertEquals(1, top_picks.count())
         self.assertEquals(image, top_picks.first())
 
+    def test_get_top_pick_nominations_only_one_submission(self):
+        image = Generators.image()
+
+        Generators.image()
+        Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
+
+        IotdGenerators.submission(image=image)
+
+        image.published = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(hours=1)
+        image.save()
+
+        nominations = IotdService().get_top_pick_nominations()
+
+        self.assertEquals(0, nominations.count())
+
     def test_get_top_pick_nominations(self):
         image = Generators.image()
 
         Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
 
+        IotdGenerators.submission(image=image)
         IotdGenerators.submission(image=image)
 
         image.published = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(hours=1)
