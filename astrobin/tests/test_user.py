@@ -488,9 +488,12 @@ class UserTest(TestCase):
         # Check that the top100 badge is not visible
         self.assertNotContains(response, 'top100-badge')
 
-    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
-    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
-    @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
+    @override_settings(
+        PREMIUM_RESTRICTS_IOTD=False,
+        IOTD_SUBMISSION_MIN_PROMOTIONS=2,
+        IOTD_REVIEW_MIN_PROMOTIONS=2,
+        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(days=365)
+    )
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_user_profile_banned_from_competitions(self, retrieve_primary_thumbnails):
         self.client.login(username="user", password="password")
@@ -512,7 +515,7 @@ class UserTest(TestCase):
         judges.user_set.add(judge)
         IotdSubmission.objects.create(submitter=submitter, image=image)
         IotdSubmission.objects.create(submitter=submitter2, image=image)
-        vote = IotdVote.objects.create(reviewer=reviewer, image=image)
+        IotdVote.objects.create(reviewer=reviewer, image=image)
         vote = IotdVote.objects.create(reviewer=reviewer2, image=image)
         iotd = Iotd.objects.create(judge=judge, image=image, date=datetime.now().date())
 

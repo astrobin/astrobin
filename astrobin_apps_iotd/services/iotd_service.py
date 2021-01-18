@@ -32,10 +32,10 @@ class IotdService:
             hasattr(image, 'iotdvote_set') and \
             (
                 image.iotdvote_set.count() >= settings.IOTD_REVIEW_MIN_PROMOTIONS or \
-                image.published < settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START
+                (image.published and image.published < settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
              ) and \
             not image.user.userprofile.exclude_from_competitions and \
-            image.published < datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)
+            (image.published and image.published < datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS))
 
     def get_top_picks(self):
         return Image.objects.annotate(
@@ -59,10 +59,10 @@ class IotdService:
             hasattr(image, 'iotdsubmission_set') and \
             (
                 image.iotdsubmission_set.count() >= settings.IOTD_SUBMISSION_MIN_PROMOTIONS or \
-                image.published < settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START
+                (image.published and image.published < settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
             ) and \
             not image.user.userprofile.exclude_from_competitions and \
-            image.published < datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)
+            (image.published and image.published < datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS))
 
     def get_top_pick_nominations(self):
         return Image.objects.annotate(
