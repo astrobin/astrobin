@@ -15,12 +15,4 @@ describe("Image features", () => {
     it("should comment on an image", () => {
         cy.comment();
     });
-
-    it("should edit a comment", () => {
-        cy.editComment();
-    });
-
-    it("should delete a comment", () => {
-        cy.deleteComment();
-    });
 });

@@ -28,19 +28,5 @@ Cypress.Commands.add("comment", (options = {}) => {
     cy.get(".uncollapse").click();
     cy.get(".cke_wysiwyg_div").first().type("hello world");
     cy.get(".ember-view button").click();
-    cy.get(".comment-container").should("contain", "hello world");
-});
-
-Cypress.Commands.add("editComment", (options = {}) => {
-    cy.visitImage();
-    cy.get(".links a").eq(2).click();
-    cy.get(".cke_wysiwyg_div").first().type("(new edit)");
-    cy.get(".ember-view button").click();
-    cy.get(".comment-container").should("contain", "(new edit)");
-});
-
-Cypress.Commands.add("deleteComment", (options = {}) => {
-    cy.visitImage();
-    cy.get(".links a").eq(1).click();
-    cy.get(".comment-container").should("contain", "(deleted)");
+    cy.get(".comment-container").should("be.visible");
 });
