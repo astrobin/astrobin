@@ -681,7 +681,7 @@ class IotdServiceTest(TestCase):
         image.published = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(1)
         image.save()
 
-        self.assertEquals(1, len(IotdService().get_review_queue(reviewer)))
+        self.assertEquals(0, len(IotdService().get_review_queue(reviewer)))
 
     def test_get_review_queue_not_designated(self):
         uploader = Generators.user()
@@ -1219,4 +1219,4 @@ class IotdServiceTest(TestCase):
         image.published = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(hours=1)
         image.save()
 
-        self.assertEquals(1, len(IotdService().get_judgement_queue()))
+        self.assertEquals(0, len(IotdService().get_judgement_queue()))

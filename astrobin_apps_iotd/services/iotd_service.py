@@ -27,15 +27,27 @@ class IotdService:
 
     def is_top_pick(self, image):
         # type: (Image) -> bool
-        return \
-            not self.is_iotd(image) and \
+
+        not_iotd = not self.is_iotd(image)
+        has_promotions = \
             hasattr(image, 'iotdvote_set') and \
-            (
-                image.iotdvote_set.count() >= settings.IOTD_REVIEW_MIN_PROMOTIONS or \
-                (image.published and image.published < settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
-             ) and \
-            not image.user.userprofile.exclude_from_competitions and \
-            (image.published and image.published < datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS))
+            image.iotdsubmission_set.count() > 0
+        has_enough_promotions = \
+            hasattr(image, 'iotdvote_set') and \
+            image.iotdvote_set.count() >= settings.IOTD_REVIEW_MIN_PROMOTIONS
+        published_before_multiple_promotions_requirement = \
+            image.published and \
+            image.published < settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START
+        not_excluded = not image.user.userprofile.exclude_from_competitions
+        published_within_window = \
+            image.published and \
+            image.published < datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)
+
+        return \
+            not_iotd and \
+            (has_enough_promotions or (has_promotions and published_before_multiple_promotions_requirement)) and \
+            not_excluded and \
+            published_within_window
 
     def get_top_picks(self):
         return Image.objects.annotate(
@@ -54,15 +66,27 @@ class IotdService:
 
     def is_top_pick_nomination(self, image):
         # type: (Image) -> bool
-        return \
-            not self.is_top_pick(image) and \
+
+        not_top_pick = not self.is_top_pick(image)
+        has_promotions = \
             hasattr(image, 'iotdsubmission_set') and \
-            (
-                image.iotdsubmission_set.count() >= settings.IOTD_SUBMISSION_MIN_PROMOTIONS or \
-                (image.published and image.published < settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
-            ) and \
-            not image.user.userprofile.exclude_from_competitions and \
-            (image.published and image.published < datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS))
+            image.iotdsubmission_set.count() > 0
+        has_enough_promotions = \
+            hasattr(image, 'iotdsubmission_set') and \
+            image.iotdsubmission_set.count() >= settings.IOTD_SUBMISSION_MIN_PROMOTIONS
+        published_before_multiple_promotions_requirement = \
+            image.published and \
+            image.published < settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START
+        not_excluded = not image.user.userprofile.exclude_from_competitions
+        published_within_window = \
+            image.published and \
+            image.published < datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)
+
+        return \
+            not_top_pick and \
+            (has_enough_promotions or (has_promotions and published_before_multiple_promotions_requirement)) and \
+            not_excluded and \
+            published_within_window
 
     def get_top_pick_nominations(self):
         return Image.objects.annotate(
@@ -119,10 +143,7 @@ class IotdService:
             ).filter(
                 Q(date__gte=cutoff) &
                 Q(image__designated_iotd_reviewers=reviewer) &
-                Q(
-                    Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) |
-                    Q(image__published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
-                )
+                Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS)
             ).exclude(
                 Q(submitter=reviewer) |
                 Q(image__user=reviewer) |
@@ -148,10 +169,7 @@ class IotdService:
                 num_votes=Count('image__iotdvote')
             ).filter(
                 Q(date__gte=cutoff) &
-                Q(
-                    Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) |
-                    Q(image__published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
-                )
+                Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS)
             )
             if not Iotd.objects.filter(
                 image=x.image,
