@@ -143,10 +143,7 @@ class IotdService:
             ).filter(
                 Q(date__gte=cutoff) &
                 Q(image__designated_iotd_reviewers=reviewer) &
-                Q(
-                    Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) |
-                    Q(image__published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
-                )
+                Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS)
             ).exclude(
                 Q(submitter=reviewer) |
                 Q(image__user=reviewer) |
@@ -172,10 +169,7 @@ class IotdService:
                 num_votes=Count('image__iotdvote')
             ).filter(
                 Q(date__gte=cutoff) &
-                Q(
-                    Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) |
-                    Q(image__published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
-                )
+                Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS)
             )
             if not Iotd.objects.filter(
                 image=x.image,
