@@ -58,10 +58,7 @@ class IotdService:
         ).filter(
             Q(published__lt=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)) &
             Q(Q(iotd=None) | Q(iotd__date__gt=datetime.now().date())) &
-            Q(
-                Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) |
-                Q(published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
-            )
+            Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS)
         ).order_by('-published')
 
     def is_top_pick_nomination(self, image):
