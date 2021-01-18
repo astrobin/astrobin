@@ -102,11 +102,17 @@ class IotdService:
         cutoff = datetime.now() - timedelta(days)
         return sorted(list(set([
             x.image
-            for x in IotdSubmission.objects
-                .filter(date__gte=cutoff, image__designated_iotd_reviewers=reviewer)
-                .exclude(Q(submitter=reviewer) |
-                         Q(image__user=reviewer) |
-                         Q(image__iotddismissedimage__user=reviewer))
+            for x in IotdSubmission.objects.annotate(
+                num_submissions=Count('image__iotdsubmission')
+            ).filter(
+                date__gte=cutoff,
+                image__designated_iotd_reviewers=reviewer,
+                num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS
+            ).exclude(
+                Q(submitter=reviewer) |
+                Q(image__user=reviewer) |
+                Q(image__iotddismissedimage__user=reviewer)
+            )
             if (
                     not Iotd.objects.filter(
                         image=x.image,
@@ -116,4 +122,20 @@ class IotdService:
                 image=x.image,
                 date__lt=date.today()).exists()
             )
+        ])), key=lambda x: x.published, reverse=True)
+
+    def get_judgement_queue(self):
+        days = settings.IOTD_JUDGEMENT_WINDOW_DAYS
+        cutoff = datetime.now() - timedelta(days)
+        return sorted(list(set([
+            x.image
+            for x in IotdVote.objects.annotate(
+                num_votes=Count('image__iotdvote')
+            ).filter(
+                date__gte=cutoff,
+                num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS
+            )
+            if not Iotd.objects.filter(
+                image=x.image,
+                date__lte=datetime.now().date()).exists()
         ])), key=lambda x: x.published, reverse=True)
