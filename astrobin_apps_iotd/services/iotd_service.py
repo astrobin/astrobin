@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, date
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.db.models import Q
+from django.db.models import Q, Count
 
 from astrobin.enums import SubjectType
 from astrobin.models import Image
@@ -30,17 +30,20 @@ class IotdService:
         return \
             not self.is_iotd(image) and \
             hasattr(image, 'iotdvote_set') and \
-            image.iotdvote_set.count() > 0 and \
+            image.iotdvote_set.count() >= settings.IOTD_REVIEW_MIN_PROMOTIONS and \
             not image.user.userprofile.exclude_from_competitions and \
             image.published < datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)
 
     def get_top_picks(self):
-        return Image.objects.exclude(
-            Q(iotdvote=None) | Q(corrupted=True) |
+        return Image.objects.annotate(
+            num_votes=Count('iotdvote')
+        ).exclude(
+            Q(corrupted=True) |
             Q(user__userprofile__exclude_from_competitions=True)
         ).filter(
             Q(published__lt=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)) &
-            Q(Q(iotd=None) | Q(iotd__date__gt=datetime.now().date()))
+            Q(Q(iotd=None) | Q(iotd__date__gt=datetime.now().date())) &
+            Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS)
         ).order_by('-published')
 
     def is_top_pick_nomination(self, image):
@@ -48,15 +51,17 @@ class IotdService:
         return \
             not self.is_top_pick(image) and \
             hasattr(image, 'iotdsubmission_set') and \
-            image.iotdsubmission_set.count() > 0 and \
+            image.iotdsubmission_set.count() >= settings.IOTD_SUBMISSION_MIN_PROMOTIONS and \
             not image.user.userprofile.exclude_from_competitions and \
             image.published < datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)
 
     def get_top_pick_nominations(self):
-        return Image.objects.filter(
+        return Image.objects.annotate(
+            num_submissions=Count('iotdsubmission')
+        ).filter(
             corrupted=False,
             iotdvote__isnull=True,
-            iotdsubmission__isnull=False,
+            num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS,
             published__lt=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS),
             user__userprofile__exclude_from_competitions=False
         ).order_by('-published').distinct()

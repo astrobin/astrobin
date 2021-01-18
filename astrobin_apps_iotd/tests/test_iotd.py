@@ -69,6 +69,8 @@ class IotdTest(TestCase):
 
     # Models
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
+    @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_submission_model(self):
         Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
         submission = IotdSubmission.objects.create(
@@ -80,9 +82,33 @@ class IotdTest(TestCase):
         self.image.published = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(hours=1)
         self.image.save()
 
+        # Badge is not present with just one submission
+        response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
+        self.assertNotContains(response, 'top-pick-nomination-badge')
+
+        # Image is not in Top Picks Nominations page with just one vote
+        response = self.client.get(reverse_lazy('top_pick_nominations'))
+        self.assertNotContains(response, self.image.title)
+        cache.clear()
+
+        self.image.published = datetime.now()
+        self.image.save()
+
+        IotdSubmission.objects.create(
+            submitter=self.submitter_2,
+            image=self.image)
+
+        self.image.published = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.save()
+
         # Badge is present
         response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertContains(response, 'top-pick-nomination-badge')
+
+        # Image is in Top Picks Nominations page
+        response = self.client.get(reverse_lazy('top_pick_nominations'))
+        self.assertContains(response, self.image.title)
+        cache.clear()
 
         # Image cannot be submitted again
         with self.assertRaisesRegexp(ValidationError, "already exists"):
@@ -332,6 +358,8 @@ class IotdTest(TestCase):
         submission_1.submitter = self.submitter_1
         submission_1.save()
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
+    @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_vote_model(self):
         Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
 
@@ -344,6 +372,25 @@ class IotdTest(TestCase):
             image=submission_1.image)
         self.assertEqual(vote.reviewer, self.reviewer_1)
         self.assertEqual(vote.image, submission_1.image)
+
+        self.image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.save()
+
+        # Badge is not present with just one vote
+        response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
+        self.assertNotContains(response, 'top-pick-badge')
+
+        # Image is not in Top Picks page with just one vote
+        response = self.client.get(reverse_lazy('top_picks'))
+        self.assertNotContains(response, self.image.title)
+        cache.clear()
+
+        self.image.published = datetime.now()
+        self.image.save()
+
+        IotdVote.objects.create(
+            reviewer=self.reviewer_2,
+            image=submission_1.image)
 
         self.image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
         self.image.save()
