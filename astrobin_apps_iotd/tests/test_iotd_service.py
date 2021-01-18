@@ -150,6 +150,9 @@ class IotdServiceTest(TestCase):
 
         self.assertFalse(IotdService().is_top_pick(image))
 
+    @override_settings(
+        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS - 1)
+    )
     def test_is_top_pick_nomination_false_only_one_submission_after_cutoff(self):
         image = Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
@@ -160,12 +163,15 @@ class IotdServiceTest(TestCase):
 
         self.assertFalse(IotdService().is_top_pick_nomination(image))
 
+    @override_settings(
+        IOTD_SUBMISSION_MIN_PROMOTIONS=2,
+        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + 1))
     def test_is_top_pick_nomination_true_only_one_submission_before_cutoff(self):
         image = Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
         IotdGenerators.submission(image=image)
 
-        image.published = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(1)
+        image.published = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(minutes=1)
         image.save()
 
         self.assertTrue(IotdService().is_top_pick_nomination(image))
@@ -182,6 +188,9 @@ class IotdServiceTest(TestCase):
 
         self.assertTrue(IotdService().is_top_pick_nomination(image))
 
+    @override_settings(
+        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS - 1)
+    )
     def test_is_top_pick_nomination_false(self):
         image = Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
@@ -630,7 +639,10 @@ class IotdServiceTest(TestCase):
 
         self.assertEquals(1, len(IotdService().get_review_queue(reviewer)))
 
-    def test_get_review_queue_not_enough_submissions(self):
+    @override_settings(
+        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS + 1)
+    )
+    def test_get_review_queue_not_enough_submissions_after_cutoff(self):
         uploader = Generators.user()
         submitter = Generators.user(groups=['iotd_submitters'])
         reviewer = Generators.user(groups=['iotd_reviewers'])
@@ -645,6 +657,8 @@ class IotdServiceTest(TestCase):
             submitter=submitter,
             image=image
         )
+
+        image.published = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START + timedelta(hours=1)
 
         self.assertEquals(0, len(IotdService().get_review_queue(reviewer)))
 
