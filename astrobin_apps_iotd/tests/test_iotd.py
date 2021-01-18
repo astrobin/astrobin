@@ -653,7 +653,11 @@ class IotdTest(TestCase):
 
     # Views
 
-    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
+    @override_settings(
+        PREMIUM_RESTRICTS_IOTD=False,
+        IOTD_SUBMISSION_MIN_PROMOTIONS=1,
+        IOTD_REVIEW_MIN_PROMOTIONS=1
+    )
     def test_judgement_queue_view(self):
         url = reverse_lazy('iotd_judgement_queue')
 
