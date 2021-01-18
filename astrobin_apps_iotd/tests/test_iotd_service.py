@@ -95,6 +95,9 @@ class IotdServiceTest(TestCase):
 
         self.assertTrue(IotdService().is_top_pick(image))
 
+    @override_settings(
+        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS + 1)
+    )
     def test_is_top_pick_false(self):
         image = Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
