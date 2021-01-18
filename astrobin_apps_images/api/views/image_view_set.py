@@ -18,6 +18,7 @@ from astrobin_apps_images.api.mixins import TusPatchMixin, TusHeadMixin, TusTerm
     TusCreateMixin
 from astrobin_apps_images.api.parsers import TusUploadStreamParser
 from astrobin_apps_images.api.serializers import ImageSerializer
+from astrobin_apps_images.services import ImageService
 from common.upload_paths import image_upload_path
 
 
@@ -86,3 +87,6 @@ class ImageViewSet(TusCreateMixin,
             return {'Location': reverse('astrobin_apps_images:image-detail', kwargs={'pk': data['pk']})}
         except (TypeError, KeyError):
             return {}
+
+    def verify_file(self, path):
+        return ImageService.verify_file(path)
