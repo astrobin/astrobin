@@ -34,7 +34,7 @@ class IotdService:
             image.iotdsubmission_set.count() > 0
         has_enough_promotions = \
             hasattr(image, 'iotdvote_set') and \
-            image.iotdsubmission_set.count() >= settings.IOTD_REVIEW_MIN_PROMOTIONS
+            image.iotdvote_set.count() >= settings.IOTD_REVIEW_MIN_PROMOTIONS
         published_before_multiple_promotions_requirement = \
             image.published and \
             image.published < settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START
