@@ -6,6 +6,7 @@ describe("Image features", () => {
 
     beforeEach(() => {
         Cypress.Cookies.preserveOnce("sessionid", "csrftoken", "astrobin_lang", "cookielaw_accepted");
+        cy.visitImage();
     });
 
     it("should like and unlike an image", () => {

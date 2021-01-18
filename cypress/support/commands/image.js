@@ -5,7 +5,6 @@ Cypress.Commands.add("visitImage", (options = {}) => {
 });
 
 Cypress.Commands.add("likeImage", (options = {}) => {
-    cy.visitImage();
     cy.url().then(url => {
         cy.login({
             next: url,
@@ -24,7 +23,6 @@ Cypress.Commands.add("likeImage", (options = {}) => {
 });
 
 Cypress.Commands.add("comment", (options = {}) => {
-    cy.visitImage();
     cy.get(".uncollapse").click();
     cy.get(".cke_wysiwyg_div").first().type("hello world");
     cy.get(".ember-view button").click();
