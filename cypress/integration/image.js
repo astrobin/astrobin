@@ -9,8 +9,12 @@ describe("Image features", () => {
         cy.visitImage();
     });
 
-    it("should like and unlike an image", () => {
+    it("should like an image", () => {
         cy.likeImage();
+    });
+
+    it("should unlike an image", () => {
+        cy.unlikeImage();
     });
 
     it("should comment on an image", () => {

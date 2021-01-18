@@ -22,6 +22,21 @@ Cypress.Commands.add("likeImage", (options = {}) => {
     });
 });
 
+Cypress.Commands.add("unlikeImage", (options = {}) => {
+    cy.url().then(url => {
+        cy.login({
+            next: url,
+            username: "astrobin_dev2",
+            password: "astrobin_dev2"
+        });
+    
+        let btn = cy.get(".property-like");
+    
+        btn.click();
+        btn.should("contain", "Like");
+    });
+});
+
 Cypress.Commands.add("comment", (options = {}) => {
     cy.get(".uncollapse").click();
     cy.get(".cke_wysiwyg_div").first().type("hello world");
