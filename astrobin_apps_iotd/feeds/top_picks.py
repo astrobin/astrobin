@@ -19,34 +19,34 @@ class TopPickFeed(Feed):
         return IotdService().get_top_picks()[:10]
 
     def item_guid(self, item):
-        return "%d" % item.pk
+        return "%d" % item.image.pk
 
     def item_title(self, item):
-        return item.title.encode('ascii', 'ignore').decode('ascii')
+        return item.image.title.encode('ascii', 'ignore').decode('ascii')
 
     def item_description(self, item):
         self.item_thumbnail_url(item)
 
     def item_link(self, item):
         return settings.BASE_URL + reverse('image_detail', kwargs={
-            'id': item.get_id()
+            'id': item.image.get_id()
         })
 
     def item_author_name(self, item):
-        name = item.user.userprofile.get_display_name().encode('ascii', 'ignore').decode('ascii')
+        name = item.image.user.userprofile.get_display_name().encode('ascii', 'ignore').decode('ascii')
         if name == u'':
-            name = item.user.username.encode('ascii', 'ignore').decode('ascii')
+            name = item.image.user.username.encode('ascii', 'ignore').decode('ascii')
 
         return name
 
     def item_author_link(self, item):
-        return settings.BASE_URL + reverse('user_page', args=(item.user.username,))
+        return settings.BASE_URL + reverse('user_page', args=(item.image.user.username,))
 
     def item_pubdate(self, item):
-        return item.published
+        return item.image.published
 
     def item_thumbnail_url(self, item):
-        return item.thumbnail('hd', {'sync': True})
+        return item.image.thumbnail('hd', {'sync': True})
 
     def item_enclosure_url(self, item):
         return self.item_thumbnail_url(item)
@@ -72,9 +72,9 @@ class TopPickFeed(Feed):
             url,
             self.item_title(item),
             self.item_title(item),
-            reverse('user_page', args=(item.user.username,)),
+            reverse('user_page', args=(item.image.user.username,)),
             self.item_author_name(item),
-            item.description.encode('ascii', 'ignore').decode('ascii')
+            item.image.description.encode('ascii', 'ignore').decode('ascii')
         )
 
     def item_extra_kwargs(self, item):

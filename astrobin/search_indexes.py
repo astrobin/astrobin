@@ -499,10 +499,10 @@ class UserIndex(SearchIndex, Indexable):
         return Post.objects.filter(user=obj).count()
 
     def prepare_top_pick_nominations(self, obj):
-        return IotdService().get_top_pick_nominations().filter(user=obj).count()
+        return IotdService().get_top_pick_nominations().filter(image__user=obj).count()
 
     def prepare_top_picks(self, obj):
-        return IotdService().get_top_picks().filter(user=obj).count()
+        return IotdService().get_top_picks().filter(image__user=obj).count()
 
     def prepare_iotds(self, obj):
         return IotdService().get_iotds().filter(image__user=obj).count()

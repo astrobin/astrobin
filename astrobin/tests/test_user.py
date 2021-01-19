@@ -18,6 +18,7 @@ from astrobin.models import (
     DataDownloadRequest)
 from astrobin.tests.generators import Generators
 from astrobin_apps_iotd.models import *
+from astrobin_apps_iotd.services import IotdService
 from toggleproperties.models import ToggleProperty
 
 
@@ -527,6 +528,9 @@ class UserTest(TestCase):
         profile.save(keep_deleted=True)
         image = Image.objects_including_wip.get(pk=image.pk)
 
+        IotdService().update_top_pick_nomination_archive()
+        IotdService().update_top_pick_archive()
+
         # Check that the IOTD banner is still visible because the ban is not retroactive.
         response = self.client.get(reverse('image_detail', args=(image.get_id(),)))
         self.assertContains(response, "iotd-ribbon")
@@ -537,11 +541,15 @@ class UserTest(TestCase):
 
         # Check that the Top pick badge is still visible because the ban is not retroactive.
         iotd.delete()
+        IotdService().update_top_pick_nomination_archive()
+        IotdService().update_top_pick_archive()
         response = self.client.get(reverse('user_page', args=(self.user.username,)))
         self.assertContains(response, 'top-pick-badge')
 
         # Check that the Top pick nomination badge is still visible because the ban is not retroactive.
-        vote.delete()
+        IotdVote.objects.all().delete()
+        IotdService().update_top_pick_nomination_archive()
+        IotdService().update_top_pick_archive()
         response = self.client.get(reverse('user_page', args=(self.user.username,)))
         self.assertContains(response, 'top-pick-nomination-badge')
 

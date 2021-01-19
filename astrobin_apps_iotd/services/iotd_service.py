@@ -2,12 +2,11 @@ from datetime import datetime, timedelta, date
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.cache import cache
 from django.db.models import Q, Count
 
 from astrobin.enums import SubjectType
 from astrobin.models import Image
-from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote
+from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 
 
@@ -28,102 +27,17 @@ class IotdService:
 
     def is_top_pick(self, image):
         # type: (Image) -> bool
-
-        not_iotd = not self.is_iotd(image)
-        has_promotions = \
-            hasattr(image, 'iotdvote_set') and \
-            image.iotdvote_set.count() > 0
-        has_enough_promotions = \
-            hasattr(image, 'iotdvote_set') and \
-            image.iotdvote_set.count() >= settings.IOTD_REVIEW_MIN_PROMOTIONS
-        published_before_multiple_promotions_requirement = \
-            image.published and \
-            image.published < settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START
-        not_excluded = not image.user.userprofile.exclude_from_competitions
-        published_within_window = \
-            image.published and \
-            image.published < datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)
-
-        return \
-            not_iotd and \
-            (has_enough_promotions or (has_promotions and published_before_multiple_promotions_requirement)) and \
-            not_excluded and \
-            published_within_window
+        return TopPickArchive.objects.filter(image=image).exists()
 
     def get_top_picks(self):
-        cache_key = "get_top_picks"
-        top_picks = cache.get(cache_key)
-
-        if top_picks is None:
-            top_picks = Image.objects.annotate(
-                num_votes=Count('iotdvote', distinct=True)
-            ).exclude(
-                Q(corrupted=True) |
-                Q(user__userprofile__exclude_from_competitions=True)
-            ).filter(
-                Q(published__lt=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)) &
-                Q(Q(iotd=None) | Q(iotd__date__gt=datetime.now().date())) &
-                Q(
-                    Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) |
-                    Q(
-                        Q(num_votes__gt=0) &
-                        Q(published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
-                    )
-                )
-            ).order_by('-published')
-
-            cache.set(cache_key, top_picks, 600)
-
-        return top_picks
+        return TopPickArchive.objects.all()
 
     def is_top_pick_nomination(self, image):
         # type: (Image) -> bool
-
-        not_top_pick = not self.is_top_pick(image)
-        has_promotions = \
-            hasattr(image, 'iotdsubmission_set') and \
-            image.iotdsubmission_set.count() > 0
-        has_enough_promotions = \
-            hasattr(image, 'iotdsubmission_set') and \
-            image.iotdsubmission_set.count() >= settings.IOTD_SUBMISSION_MIN_PROMOTIONS
-        published_before_multiple_promotions_requirement = \
-            image.published and \
-            image.published < settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START
-        not_excluded = not image.user.userprofile.exclude_from_competitions
-        published_within_window = \
-            image.published and \
-            image.published < datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)
-
-        return \
-            not_top_pick and \
-            (has_enough_promotions or (has_promotions and published_before_multiple_promotions_requirement)) and \
-            not_excluded and \
-            published_within_window
+        return TopPickNominationsArchive.objects.filter(image=image).exists()
 
     def get_top_pick_nominations(self):
-        cache_key = "get_top_picks_nominations"
-        top_picks_nominations = cache.get(cache_key)
-
-        if top_picks_nominations is None:
-            top_picks_nominations = Image.objects.annotate(
-                num_submissions=Count('iotdsubmission', distinct=True)
-            ).filter(
-                Q(corrupted=False) &
-                Q(iotdvote__isnull=True) &
-                Q(
-                    Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) |
-                    Q(
-                        Q(num_submissions__gt=0) &
-                        Q(published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
-                    )
-                ) &
-                Q(published__lt=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)) &
-                Q(user__userprofile__exclude_from_competitions=False)
-            ).order_by('-published').distinct()
-
-            cache.set(cache_key, top_picks_nominations, 600)
-
-        return top_picks_nominations
+        return TopPickNominationsArchive.objects.all()
 
     def get_submission_queue(self, submitter):
         # type: (User) -> list[Image]
@@ -198,3 +112,48 @@ class IotdService:
                 image=x.image,
                 date__lte=datetime.now().date()).exists()
         ])), key=lambda x: x.published, reverse=True)
+
+    def update_top_pick_nomination_archive(self):
+        TopPickNominationsArchive.objects.all().delete()
+
+        items = Image.objects.annotate(
+            num_submissions=Count('iotdsubmission', distinct=True)
+        ).filter(
+            Q(corrupted=False) &
+            Q(iotdvote__isnull=True) &
+            Q(
+                Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) |
+                Q(
+                    Q(num_submissions__gt=0) &
+                    Q(published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
+                )
+            ) &
+            Q(published__lt=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)) &
+            Q(user__userprofile__exclude_from_competitions=False)
+        ).order_by('-published').distinct()
+
+        for item in items:
+            TopPickNominationsArchive.objects.create(image=item)
+
+    def update_top_pick_archive(self):
+        TopPickArchive.objects.all().delete()
+
+        items = Image.objects.annotate(
+            num_votes=Count('iotdvote', distinct=True)
+        ).exclude(
+            Q(corrupted=True) |
+            Q(user__userprofile__exclude_from_competitions=True)
+        ).filter(
+            Q(published__lt=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)) &
+            Q(Q(iotd=None) | Q(iotd__date__gt=datetime.now().date())) &
+            Q(
+                Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) |
+                Q(
+                    Q(num_votes__gt=0) &
+                    Q(published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
+                )
+            )
+        ).order_by('-published')
+
+        for item in items:
+            TopPickArchive.objects.create(image=item)

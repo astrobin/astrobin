@@ -1,11 +1,12 @@
 from django.views.generic import ListView
 
 from astrobin.models import Image
+from astrobin_apps_iotd.models import TopPickArchive
 from astrobin_apps_iotd.services import IotdService
 
 
 class TopPicksView(ListView):
-    model = Image
+    model = TopPickArchive
     template_name = 'top_picks.html'
     paginate_by = 30
 
@@ -14,7 +15,7 @@ class TopPicksView(ListView):
         if data_source is not None:
             data_source = data_source.upper().replace('-', '_')
             if data_source in Image.DATA_SOURCE_TYPES:
-                queryset = queryset.filter(data_source=data_source)
+                queryset = queryset.filter(image__data_source=data_source)
 
         return queryset
 
@@ -23,7 +24,7 @@ class TopPicksView(ListView):
         if acquisition_type is not None:
             acquisition_type = acquisition_type.upper().replace('-', '_')
             if acquisition_type in Image.ACQUISITION_TYPES:
-                queryset = queryset.filter(acquisition_type=acquisition_type)
+                queryset = queryset.filter(image__acquisition_type=acquisition_type)
 
         return queryset
 
@@ -42,6 +43,7 @@ class TopPicksView(ListView):
 
 class TopPickNominationsView(TopPicksView):
     template_name = 'top_pick_nominations.html'
+    model = TopPickArchive
 
     def get_queryset(self):
         queryset = IotdService().get_top_pick_nominations()
