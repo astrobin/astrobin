@@ -1,7 +1,10 @@
 describe("Image features", () => {
     before(() => {
         cy.clearCookies();
-        cy.login();
+        cy.login({
+            username: "astrobin_dev2",
+            password: "astrobin_dev2"
+        });
     });
 
     beforeEach(() => {

@@ -5,38 +5,22 @@ Cypress.Commands.add("visitImage", (options = {}) => {
 });
 
 Cypress.Commands.add("likeImage", (options = {}) => {
-    cy.url().then(url => {
-        cy.login({
-            next: url,
-            username: "astrobin_dev2",
-            password: "astrobin_dev2"
-        });
-    
-        let btn = cy.get(".property-like");
-    
-        btn.click();
-        btn.should("contain", "Unlike");
-    });
+    let btn = cy.get(".property-like");
+
+    btn.click();
+    btn.should("contain", "Unlike");
 });
 
 Cypress.Commands.add("unlikeImage", (options = {}) => {
-    cy.url().then(url => {
-        cy.login({
-            next: url,
-            username: "astrobin_dev2",
-            password: "astrobin_dev2"
-        });
-    
-        let btn = cy.get(".property-like");
-    
-        btn.click();
-        btn.should("contain", "Like");
-    });
+    let btn = cy.get(".property-like");
+
+    btn.click();
+    btn.should("contain", "Like");
 });
 
 Cypress.Commands.add("comment", (options = {}) => {
-    cy.get(".uncollapse").click();
-    cy.get(".cke_wysiwyg_div").first().type("hello world");
+    cy.get(".comment .uncollapse").click();
+    cy.get(".cke_contents .cke_wysiwyg_div").first().type("hello world");
     cy.get(".ember-view button").click();
-    cy.get(".comment-container").should("be.visible");
+    cy.get(".comment .comment-container").should("be.visible");
 });
