@@ -31,7 +31,7 @@ class IotdService:
         not_iotd = not self.is_iotd(image)
         has_promotions = \
             hasattr(image, 'iotdvote_set') and \
-            image.iotdsubmission_set.count() > 0
+            image.iotdvote_set.count() > 0
         has_enough_promotions = \
             hasattr(image, 'iotdvote_set') and \
             image.iotdvote_set.count() >= settings.IOTD_REVIEW_MIN_PROMOTIONS
@@ -51,14 +51,28 @@ class IotdService:
 
     def get_top_picks(self):
         return Image.objects.annotate(
-            num_votes=Count('iotdvote')
+            num_submissions=Count('iotdsubmission', distinct=True),
+            num_votes=Count('iotdvote', distinct=True)
         ).exclude(
             Q(corrupted=True) |
             Q(user__userprofile__exclude_from_competitions=True)
         ).filter(
             Q(published__lt=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)) &
             Q(Q(iotd=None) | Q(iotd__date__gt=datetime.now().date())) &
-            Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS)
+            Q(
+                Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) |
+                Q(
+                    Q(num_submissions__gt=0) &
+                    Q(published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
+                )
+            ) &
+            Q(
+                Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) |
+                Q(
+                    Q(num_votes__gt=0) &
+                    Q(published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
+                )
+            )
         ).order_by('-published')
 
     def is_top_pick_nomination(self, image):
@@ -87,13 +101,16 @@ class IotdService:
 
     def get_top_pick_nominations(self):
         return Image.objects.annotate(
-            num_submissions=Count('iotdsubmission')
+            num_submissions=Count('iotdsubmission', distinct=True)
         ).filter(
             Q(corrupted=False) &
             Q(iotdvote__isnull=True) &
             Q(
                 Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) |
-                Q(published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
+                Q(
+                    Q(num_submissions__gt=0) &
+                    Q(published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
+                )
             ) &
             Q(published__lt=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)) &
             Q(user__userprofile__exclude_from_competitions=False)
@@ -136,7 +153,7 @@ class IotdService:
         return sorted(list(set([
             x.image
             for x in IotdSubmission.objects.annotate(
-                num_submissions=Count('image__iotdsubmission')
+                num_submissions=Count('image__iotdsubmission', distinct=True)
             ).filter(
                 Q(date__gte=cutoff) &
                 Q(image__designated_iotd_reviewers=reviewer) &
@@ -163,7 +180,7 @@ class IotdService:
         return sorted(list(set([
             x.image
             for x in IotdVote.objects.annotate(
-                num_votes=Count('image__iotdvote')
+                num_votes=Count('image__iotdvote', distinct=True)
             ).filter(
                 Q(date__gte=cutoff) &
                 Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS)

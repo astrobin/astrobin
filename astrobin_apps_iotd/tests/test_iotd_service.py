@@ -284,12 +284,14 @@ class IotdServiceTest(TestCase):
 
         self.assertEquals(0, iotds.count())
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_get_top_picks(self):
         top_pick_image = Generators.image()
         Generators.image()
         Generators.premium_subscription(top_pick_image.user, 'AstroBin Ultimate 2020+')
 
+        IotdGenerators.submission(image=top_pick_image)
         IotdGenerators.submission(image=top_pick_image)
         IotdGenerators.vote(image=top_pick_image)
         IotdGenerators.vote(image=top_pick_image)
@@ -411,7 +413,7 @@ class IotdServiceTest(TestCase):
         top_pick_image.published = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(hours=1)
         top_pick_image.save()
 
-        self.assertEquals(0, IotdService().get_top_picks().count())
+        self.assertEquals(1, IotdService().get_top_picks().count())
 
     @override_settings(
         IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
