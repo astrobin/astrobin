@@ -2,6 +2,7 @@ from datetime import datetime, timedelta, date
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.db import IntegrityError
 from django.db.models import Q, Count
 
 from astrobin.enums import SubjectType
@@ -117,7 +118,7 @@ class IotdService:
         ])), key=lambda x: x.published, reverse=True)
 
     def update_top_pick_nomination_archive(self):
-        TopPickNominationsArchive.objects.all().delete()
+        latest = TopPickNominationsArchive.objects.first()
 
         items = Image.objects.annotate(
             num_submissions=Count('iotdsubmission', distinct=True)
@@ -132,13 +133,19 @@ class IotdService:
                 )
             ) &
             Q(published__lt=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS))
-        ).order_by('-published').distinct()
+        ).order_by('-published')
 
-        for item in items:
-            TopPickNominationsArchive.objects.create(image=item)
+        if latest:
+            items = items.filter(published__gt=latest.image.published)
+
+        for item in items.iterator():
+            try:
+                TopPickNominationsArchive.objects.create(image=item)
+            except IntegrityError:
+                continue
 
     def update_top_pick_archive(self):
-        TopPickArchive.objects.all().delete()
+        latest = TopPickArchive.objects.first()
 
         items = Image.objects.annotate(
             num_votes=Count('iotdvote', distinct=True)
@@ -155,5 +162,11 @@ class IotdService:
             )
         ).order_by('-published')
 
-        for item in items:
-            TopPickArchive.objects.create(image=item)
+        if latest:
+            items = items.filter(published__gt=latest.image.published)
+
+        for item in items.iterator():
+            try:
+                TopPickArchive.objects.create(image=item)
+            except IntegrityError:
+                continue
