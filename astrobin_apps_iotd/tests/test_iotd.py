@@ -373,6 +373,10 @@ class IotdTest(TestCase):
             submitter=self.submitter_1,
             image=self.image)
 
+        IotdSubmission.objects.create(
+            submitter=self.submitter_2,
+            image=self.image)
+
         vote = IotdVote.objects.create(
             reviewer=self.reviewer_1,
             image=submission_1.image)
