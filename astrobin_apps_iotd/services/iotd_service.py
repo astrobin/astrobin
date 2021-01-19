@@ -82,6 +82,7 @@ class IotdService:
             for x in IotdSubmission.objects.annotate(
                 num_submissions=Count('image__iotdsubmission', distinct=True)
             ).filter(
+                Q(image__deleted__isnull=True),
                 Q(date__gte=cutoff) &
                 Q(image__designated_iotd_reviewers=reviewer) &
                 Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS)
@@ -109,6 +110,7 @@ class IotdService:
             for x in IotdVote.objects.annotate(
                 num_votes=Count('image__iotdvote', distinct=True)
             ).filter(
+                Q(image__deleted__isnull=True),
                 Q(date__gte=cutoff) &
                 Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS)
             )

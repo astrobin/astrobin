@@ -656,6 +656,33 @@ class IotdServiceTest(TestCase):
 
         self.assertEquals(1, len(IotdService().get_review_queue(reviewer)))
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
+    def test_get_review_queue_deleted(self):
+        uploader = Generators.user()
+        submitter = Generators.user(groups=['iotd_submitters'])
+        submitter2 = Generators.user(groups=['iotd_submitters'])
+        reviewer = Generators.user(groups=['iotd_reviewers'])
+
+        Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
+
+        image = Generators.image(user=uploader)
+        image.designated_iotd_submitters.add(submitter, submitter2)
+        image.designated_iotd_reviewers.add(reviewer)
+
+        IotdSubmission.objects.create(
+            submitter=submitter,
+            image=image
+        )
+
+        IotdSubmission.objects.create(
+            submitter=submitter2,
+            image=image
+        )
+
+        image.delete()
+
+        self.assertEquals(0, len(IotdService().get_review_queue(reviewer)))
+
     @override_settings(
         IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS + 1)
     )
@@ -990,6 +1017,45 @@ class IotdServiceTest(TestCase):
         )
 
         self.assertEquals(1, len(IotdService().get_judgement_queue()))
+
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
+    @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
+    def test_get_judgement_queue_deleted(self):
+        uploader = Generators.user()
+        submitter = Generators.user(groups=['iotd_submitters'])
+        submitter2 = Generators.user(groups=['iotd_submitters'])
+        reviewer = Generators.user(groups=['iotd_reviewers'])
+        reviewer2 = Generators.user(groups=['iotd_reviewers'])
+
+        Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
+
+        image = Generators.image(user=uploader)
+        image.designated_iotd_submitters.add(submitter, submitter2)
+        image.designated_iotd_reviewers.add(reviewer, reviewer2)
+
+        IotdSubmission.objects.create(
+            submitter=submitter,
+            image=image
+        )
+
+        IotdSubmission.objects.create(
+            submitter=submitter2,
+            image=image
+        )
+
+        IotdVote.objects.create(
+            reviewer=reviewer,
+            image=image
+        )
+
+        IotdVote.objects.create(
+            reviewer=reviewer2,
+            image=image
+        )
+
+        image.delete()
+
+        self.assertEquals(0, len(IotdService().get_judgement_queue()))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
