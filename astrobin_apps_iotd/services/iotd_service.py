@@ -2,6 +2,7 @@ from datetime import datetime, timedelta, date
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.db.models import Q, Count
 
 from astrobin.enums import SubjectType
@@ -50,22 +51,30 @@ class IotdService:
             published_within_window
 
     def get_top_picks(self):
-        return Image.objects.annotate(
-            num_votes=Count('iotdvote', distinct=True)
-        ).exclude(
-            Q(corrupted=True) |
-            Q(user__userprofile__exclude_from_competitions=True)
-        ).filter(
-            Q(published__lt=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)) &
-            Q(Q(iotd=None) | Q(iotd__date__gt=datetime.now().date())) &
-            Q(
-                Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) |
+        cache_key = "get_top_picks"
+        top_picks = cache.get(cache_key)
+
+        if top_picks is None:
+            top_picks = Image.objects.annotate(
+                num_votes=Count('iotdvote', distinct=True)
+            ).exclude(
+                Q(corrupted=True) |
+                Q(user__userprofile__exclude_from_competitions=True)
+            ).filter(
+                Q(published__lt=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)) &
+                Q(Q(iotd=None) | Q(iotd__date__gt=datetime.now().date())) &
                 Q(
-                    Q(num_votes__gt=0) &
-                    Q(published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
+                    Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) |
+                    Q(
+                        Q(num_votes__gt=0) &
+                        Q(published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
+                    )
                 )
-            )
-        ).order_by('-published')
+            ).order_by('-published')
+
+            cache.set(cache_key, top_picks, 600)
+
+        return top_picks
 
     def is_top_pick_nomination(self, image):
         # type: (Image) -> bool
@@ -92,21 +101,29 @@ class IotdService:
             published_within_window
 
     def get_top_pick_nominations(self):
-        return Image.objects.annotate(
-            num_submissions=Count('iotdsubmission', distinct=True)
-        ).filter(
-            Q(corrupted=False) &
-            Q(iotdvote__isnull=True) &
-            Q(
-                Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) |
+        cache_key = "get_top_picks_nominations"
+        top_picks_nominations = cache.get(cache_key)
+
+        if top_picks_nominations is None:
+            top_picks_nominations = Image.objects.annotate(
+                num_submissions=Count('iotdsubmission', distinct=True)
+            ).filter(
+                Q(corrupted=False) &
+                Q(iotdvote__isnull=True) &
                 Q(
-                    Q(num_submissions__gt=0) &
-                    Q(published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
-                )
-            ) &
-            Q(published__lt=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)) &
-            Q(user__userprofile__exclude_from_competitions=False)
-        ).order_by('-published').distinct()
+                    Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) |
+                    Q(
+                        Q(num_submissions__gt=0) &
+                        Q(published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
+                    )
+                ) &
+                Q(published__lt=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)) &
+                Q(user__userprofile__exclude_from_competitions=False)
+            ).order_by('-published').distinct()
+
+            cache.set(cache_key, top_picks_nominations, 600)
+
+        return top_picks_nominations
 
     def get_submission_queue(self, submitter):
         # type: (User) -> list[Image]
