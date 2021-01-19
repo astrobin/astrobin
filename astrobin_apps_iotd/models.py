@@ -8,7 +8,7 @@ from astrobin_apps_iotd.permissions import may_toggle_submission_image, may_togg
 
 
 class IotdSubmission(models.Model):
-    submitter = models.ForeignKey(User)
+    submitter = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     image = models.ForeignKey(Image)
     date = models.DateTimeField(auto_now_add=True)
 
@@ -43,7 +43,7 @@ class IotdSubmission(models.Model):
 
 
 class IotdVote(models.Model):
-    reviewer = models.ForeignKey(User)
+    reviewer = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     image = models.ForeignKey(Image)
     date = models.DateTimeField(auto_now_add=True)
 
