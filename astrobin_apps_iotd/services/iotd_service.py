@@ -27,14 +27,16 @@ class IotdService:
 
     def is_top_pick(self, image):
         # type: (Image) -> bool
-        return TopPickArchive.objects.filter(image=image).exists()
+        return TopPickArchive.objects.filter(image=image).exists() and \
+               image.user.userprofile.exclude_from_competitions != True
 
     def get_top_picks(self):
         return TopPickArchive.objects.all()
 
     def is_top_pick_nomination(self, image):
         # type: (Image) -> bool
-        return TopPickNominationsArchive.objects.filter(image=image).exists()
+        return TopPickNominationsArchive.objects.filter(image=image).exists() and \
+               image.user.userprofile.exclude_from_competitions != True
 
     def get_top_pick_nominations(self):
         return TopPickNominationsArchive.objects.all()
