@@ -499,10 +499,10 @@ class UserIndex(SearchIndex, Indexable):
         return Post.objects.filter(user=obj).count()
 
     def prepare_top_pick_nominations(self, obj):
-        return IotdService().get_top_pick_nominations().filter(user=obj).count()
+        return IotdService().get_top_pick_nominations().filter(image__user=obj).count()
 
     def prepare_top_picks(self, obj):
-        return IotdService().get_top_picks().filter(user=obj).count()
+        return IotdService().get_top_picks().filter(image__user=obj).count()
 
     def prepare_iotds(self, obj):
         return IotdService().get_iotds().filter(image__user=obj).count()
@@ -657,13 +657,15 @@ class ImageIndex(SearchIndex, Indexable):
         return _prepare_comments(obj)
 
     def prepare_is_iotd(self, obj):
-        return hasattr(obj, 'iotd')
+        return IotdService().is_iotd(obj)
 
     def prepare_is_top_pick(self, obj):
-        return obj.iotdvote_set.count() > 0 and not hasattr(obj, 'iotd')
+        return IotdService().is_top_pick(obj) and not IotdService().is_iotd(obj)
 
     def prepare_is_top_pick_nomination(self, obj):
-        return obj.iotdsubmission_set.count() > 0 and obj.iotdvote_set.count() == 0
+        return IotdService().is_top_pick_nomination(obj) and \
+               not IotdService().is_top_pick(obj) and \
+               not IotdService().is_iotd(obj)
 
     def prepare_objects_in_field(self, obj):
         return obj.solution.objects_in_field if obj.solution else None

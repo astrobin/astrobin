@@ -4,16 +4,14 @@ from datetime import datetime, timedelta
 from django.conf import settings
 from mock import patch
 
-# Django
 from django.contrib.auth.models import User, Group
 from django.core.urlresolvers import reverse_lazy
 from django.test import TestCase, override_settings
 
-# Other apps
 from astrobin_apps_iotd.models import IotdSubmission, IotdVote
 
-# AstroBin
 from astrobin.models import Image
+from astrobin_apps_iotd.services import IotdService
 
 
 class ExploreTest(TestCase):
@@ -55,6 +53,8 @@ class ExploreTest(TestCase):
         self.image.corrupted = True
         self.image.save()
 
+        IotdService().update_top_pick_archive()
+
         response = self.client.get(reverse_lazy('top_picks'))
         self.assertNotContains(response, self.image.title)
 
@@ -72,6 +72,8 @@ class ExploreTest(TestCase):
 
         self.image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
         self.image.save()
+
+        IotdService().update_top_pick_archive()
 
         response = self.client.get(reverse_lazy('top_picks'))
         self.assertContains(response, self.image.title)
@@ -128,6 +130,8 @@ class ExploreTest(TestCase):
 
         self.image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
         self.image.save()
+
+        IotdService().update_top_pick_archive()
 
         response = self.client.get(reverse_lazy('top_picks'))
         self.assertContains(response, self.image.title)

@@ -120,3 +120,16 @@ class IotdDismissedImage(models.Model):
 
     def __unicode__(self):
         return "IOTD dismissed image: %d / %s" % (self.user.pk, self.image.get_id())
+
+
+class TopPickNominationsArchive(models.Model):
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, unique=True)
+
+    class Meta:
+        ordering = ['-image__published']
+
+class TopPickArchive(models.Model):
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, unique=True)
+
+    class Meta:
+        ordering = ['-image__published']
