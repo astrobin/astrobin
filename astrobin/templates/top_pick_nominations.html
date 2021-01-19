@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 
-{% load cache %}
 {% load i18n %}
 {% load static %}
 {% load django_bootstrap_breadcrumbs %}
@@ -28,21 +27,19 @@
     {% include "ads/full_width_wide_ad.html" %}
 
     <div class="top-picks">
-        {% cache 3600 top_pick_nominations source page_obj.number  %}
-            {% for image in object_list %}
-                <div class="top-picks-item">
-                    {% astrobin_image image 'story' tooltip=False %}
-                    <div class="overlay">
-                        <div class="inner">
-                            <div class="image-title">{{image.title|default:_("(no title)")}}</div>
-                            <div class="image-author">{% astrobin_username image.user %}</div>
-                        </div>
+        {% for object in object_list %}
+            <div class="top-picks-item">
+                {% astrobin_image object.image 'story' tooltip=False %}
+                <div class="overlay">
+                    <div class="inner">
+                        <div class="image-title">{{object.image.title|default:_("(no title)")}}</div>
+                        <div class="image-author">{% astrobin_username object.image.user %}</div>
                     </div>
                 </div>
-            {% empty %}
-                {% trans "This list is currently empty." %}
-            {% endfor %}
-        {% endcache %}
+            </div>
+        {% empty %}
+            {% trans "This list is currently empty." %}
+        {% endfor %}
     </div>
 
     {% include 'pagination_simple.html' %}

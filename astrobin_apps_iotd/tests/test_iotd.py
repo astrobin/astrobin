@@ -14,6 +14,7 @@ from astrobin.enums import SubjectType
 from astrobin.tests.generators import Generators
 from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_iotd.models import *
+from astrobin_apps_iotd.services import IotdService
 
 
 @override_settings(
@@ -85,6 +86,8 @@ class IotdTest(TestCase):
         self.image.published = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(hours=1)
         self.image.save()
 
+        IotdService().update_top_pick_nomination_archive()
+
         # Badge is not present with just one submission
         response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertNotContains(response, 'top-pick-nomination-badge')
@@ -103,6 +106,8 @@ class IotdTest(TestCase):
 
         self.image.published = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(hours=1)
         self.image.save()
+
+        IotdService().update_top_pick_nomination_archive()
 
         # Badge is present
         response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
@@ -386,6 +391,8 @@ class IotdTest(TestCase):
         self.image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
         self.image.save()
 
+        IotdService().update_top_pick_archive()
+
         # Badge is not present with just one vote
         response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertNotContains(response, 'top-pick-badge')
@@ -405,6 +412,8 @@ class IotdTest(TestCase):
         self.image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
         self.image.save()
 
+        IotdService().update_top_pick_archive()
+
         # Badge is present
         response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertContains(response, 'top-pick-badge')
@@ -414,11 +423,14 @@ class IotdTest(TestCase):
         self.assertContains(response, self.image.title)
         cache.clear()
 
-        # Badge is still present if image is future IOTD
         iotd = Iotd.objects.create(
             judge=self.judge_1,
             image=self.image,
             date=datetime.now().date() + timedelta(1))
+
+        IotdService().update_top_pick_archive()
+
+        # Badge is still present if image is future IOTD
         response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertContains(response, 'top-pick-badge')
 
@@ -430,6 +442,8 @@ class IotdTest(TestCase):
         # Badge is gone if image is present IOTD
 
         Iotd.objects.filter(pk=iotd.pk).update(date=datetime.now().date())
+        IotdService().update_top_pick_archive()
+
         response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertNotContains(response, 'top-pick-badge')
 
@@ -440,6 +454,8 @@ class IotdTest(TestCase):
 
         # Badge is gone is image is past IOTD
         Iotd.objects.filter(pk=iotd.pk).update(date=datetime.now().date() - timedelta(1))
+        IotdService().update_top_pick_archive()
+
         response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertNotContains(response, 'top-pick-badge')
 
