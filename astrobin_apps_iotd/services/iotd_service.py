@@ -51,7 +51,6 @@ class IotdService:
 
     def get_top_picks(self):
         return Image.objects.annotate(
-            num_submissions=Count('iotdsubmission', distinct=True),
             num_votes=Count('iotdvote', distinct=True)
         ).exclude(
             Q(corrupted=True) |
@@ -59,13 +58,6 @@ class IotdService:
         ).filter(
             Q(published__lt=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)) &
             Q(Q(iotd=None) | Q(iotd__date__gt=datetime.now().date())) &
-            Q(
-                Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) |
-                Q(
-                    Q(num_submissions__gt=0) &
-                    Q(published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
-                )
-            ) &
             Q(
                 Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) |
                 Q(
