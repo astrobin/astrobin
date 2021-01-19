@@ -20,8 +20,9 @@ class ExploreTest(TestCase):
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def setUp(self, retrieve_primary_thumbnails):
         self.submitter = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
+        self.submitter2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
         self.submitters = Group.objects.create(name='iotd_submitters')
-        self.submitters.user_set.add(self.submitter)
+        self.submitters.user_set.add(self.submitter, self.submitter2)
 
         self.reviewer = User.objects.create_user('reviewer_1', 'reviewer_1@test.com', 'password')
         self.reviewer2 = User.objects.create_user('reviewer_2', 'reviewer_2@test.com', 'password')
@@ -65,6 +66,7 @@ class ExploreTest(TestCase):
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_top_picks_data_source_filter(self):
         IotdSubmission.objects.create(submitter=self.submitter, image=self.image)
+        IotdSubmission.objects.create(submitter=self.submitter2, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer2, image=self.image)
 
@@ -120,6 +122,7 @@ class ExploreTest(TestCase):
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_top_picks_acquisition_type_filter(self):
         IotdSubmission.objects.create(submitter=self.submitter, image=self.image)
+        IotdSubmission.objects.create(submitter=self.submitter2, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer2, image=self.image)
 
