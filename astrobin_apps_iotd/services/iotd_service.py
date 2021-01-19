@@ -124,7 +124,6 @@ class IotdService:
             num_submissions=Count('iotdsubmission', distinct=True)
         ).filter(
             ~Q(corrupted=True) &
-            Q(iotdvote__isnull=True) &
             Q(
                 Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) |
                 Q(
