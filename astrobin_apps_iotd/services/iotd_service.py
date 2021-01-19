@@ -23,7 +23,7 @@ class IotdService:
     def get_iotds(self):
         return Iotd.objects.filter(
             Q(date__lte=datetime.now().date()) &
-            Q(image__deleted_isnull=True) &
+            Q(image__deleted__isnull=True) &
             ~Q(image__corrupted=True))
 
     def is_top_pick(self, image):
