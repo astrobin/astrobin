@@ -21,10 +21,10 @@ class IotdService:
             not image.user.userprofile.exclude_from_competitions
 
     def get_iotds(self):
-        return Iotd.objects \
-            .filter(date__lte=datetime.now().date(), image__deleted=None,
-                    image__user__userprofile__exclude_from_competitions=False) \
-            .exclude(image__corrupted=True)
+        return Iotd.objects.filter(
+            Q(date__lte=datetime.now().date()) &
+            Q(image__deleted_isnull=True) &
+            ~Q(image__corrupted=True))
 
     def is_top_pick(self, image):
         # type: (Image) -> bool
@@ -57,10 +57,8 @@ class IotdService:
         if top_picks is None:
             top_picks = Image.objects.annotate(
                 num_votes=Count('iotdvote', distinct=True)
-            ).exclude(
-                Q(corrupted=True) |
-                Q(user__userprofile__exclude_from_competitions=True)
             ).filter(
+                ~Q(corrupted=True) &
                 Q(published__lt=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)) &
                 Q(Q(iotd=None) | Q(iotd__date__gt=datetime.now().date())) &
                 Q(
@@ -108,7 +106,7 @@ class IotdService:
             top_picks_nominations = Image.objects.annotate(
                 num_submissions=Count('iotdsubmission', distinct=True)
             ).filter(
-                Q(corrupted=False) &
+                ~Q(corrupted=True) &
                 Q(iotdvote__isnull=True) &
                 Q(
                     Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) |
@@ -117,8 +115,7 @@ class IotdService:
                         Q(published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
                     )
                 ) &
-                Q(published__lt=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS)) &
-                Q(user__userprofile__exclude_from_competitions=False)
+                Q(published__lt=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS))
             ).order_by('-published').distinct()
 
             cache.set(cache_key, top_picks_nominations, 600)
@@ -145,6 +142,7 @@ class IotdService:
                 Q(designated_iotd_submitters=submitter)
             ) &
             ~Q(
+                Q(user__userprofile__exclude_from_competitions=True) |
                 Q(user=submitter) |
                 Q(subject_type__in=(SubjectType.GEAR, SubjectType.OTHER)) |
                 Q(Q(iotdsubmission__submitter=submitter) & Q(iotdsubmission__date__lt=date.today())) |
