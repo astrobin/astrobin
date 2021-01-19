@@ -447,9 +447,9 @@ class IotdTest(TestCase):
         response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertNotContains(response, 'top-pick-badge')
 
-        # Image is gone from Top Picks page
+        # Image is still from Top Picks page. It did earn that badge after all
         response = self.client.get(reverse_lazy('top_picks'))
-        self.assertNotContains(response, self.image.title)
+        self.assertContains(response, self.image.title)
         cache.clear()
 
         # Badge is gone is image is past IOTD
@@ -459,9 +459,9 @@ class IotdTest(TestCase):
         response = self.client.get(reverse_lazy('image_detail', args=(self.image.get_id(),)))
         self.assertNotContains(response, 'top-pick-badge')
 
-        # Image is still gone from Top Picks page
+        # Image is still not gone from Top Picks page
         response = self.client.get(reverse_lazy('top_picks'))
-        self.assertNotContains(response, self.image.title)
+        self.assertContains(response, self.image.title)
         cache.clear()
 
         iotd.delete()
