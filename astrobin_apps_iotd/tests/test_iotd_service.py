@@ -148,22 +148,6 @@ class IotdServiceTest(TestCase):
 
         self.assertTrue(IotdService().is_top_pick(image))
 
-    def test_is_top_pick_false_excluded(self):
-        image = Generators.image()
-        Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
-        IotdGenerators.submission(image=image)
-        IotdGenerators.vote(image=image)
-
-        image.published = datetime.now() - timedelta(days=settings.IOTD_REVIEW_WINDOW_DAYS)
-        image.save()
-
-        image.user.userprofile.exclude_from_competitions = True
-        image.user.userprofile.save()
-
-        IotdService().update_top_pick_archive()
-
-        self.assertFalse(IotdService().is_top_pick(image))
-
     @override_settings(
         IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS - 1)
     )
@@ -253,21 +237,6 @@ class IotdServiceTest(TestCase):
         image = Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
         IotdGenerators.submission(image=image)
-
-        self.assertFalse(IotdService().is_top_pick_nomination(image))
-
-    def test_is_top_pick_nomination_false_excluded(self):
-        image = Generators.image()
-        Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
-        IotdGenerators.submission(image=image)
-
-        image.published = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)
-        image.save()
-
-        image.user.userprofile.exclude_from_competitions = True
-        image.user.userprofile.save()
-
-        IotdService().update_top_pick_nomination_archive()
 
         self.assertFalse(IotdService().is_top_pick_nomination(image))
 
