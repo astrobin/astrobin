@@ -528,6 +528,8 @@ class UserTest(TestCase):
         profile.save(keep_deleted=True)
         image = Image.objects_including_wip.get(pk=image.pk)
 
+        TopPickArchive.objects.all().delete()
+        TopPickNominationsArchive.objects.all().delete()
         IotdService().update_top_pick_nomination_archive()
         IotdService().update_top_pick_archive()
 
@@ -541,6 +543,8 @@ class UserTest(TestCase):
 
         # Check that the Top pick badge is still visible because the ban is not retroactive.
         iotd.delete()
+        TopPickArchive.objects.all().delete()
+        TopPickNominationsArchive.objects.all().delete()
         IotdService().update_top_pick_nomination_archive()
         IotdService().update_top_pick_archive()
         response = self.client.get(reverse('user_page', args=(self.user.username,)))
@@ -548,6 +552,8 @@ class UserTest(TestCase):
 
         # Check that the Top pick nomination badge is still visible because the ban is not retroactive.
         IotdVote.objects.all().delete()
+        TopPickArchive.objects.all().delete()
+        TopPickNominationsArchive.objects.all().delete()
         IotdService().update_top_pick_nomination_archive()
         IotdService().update_top_pick_archive()
         response = self.client.get(reverse('user_page', args=(self.user.username,)))
