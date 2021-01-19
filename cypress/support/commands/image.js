@@ -16,9 +16,6 @@ Cypress.Commands.add("likeImage", (options = {}) => {
     
         btn.click();
         btn.should("contain", "Unlike");
-    
-        btn.click();
-        btn.should("contain", "Like");
     });
 });
 
