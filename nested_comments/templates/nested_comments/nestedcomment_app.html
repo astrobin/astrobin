@@ -56,7 +56,12 @@
             </a>
         {{/unless}}
     {{else}}
-        <p>{% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.</p>{% endblocktrans %}
+        <p>
+            {% url 'auth_login' as login_url %}
+            {% blocktrans trimmed with signup_url="https://welcome.astrobin.com/pricing" %}
+                Please <a href="{{login_url}}">log in</a> or <a href="{{signup_url}}">sign up</a> to leave a comment.
+            {% endblocktrans %}
+        </p>
     {{/if}}
 {% endhandlebars %}
 
@@ -250,7 +255,12 @@
             {{view NestedCommentsApp.LoaderView}}
         {{/if}}
     {{else}}
-        <p>{% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.</p>{% endblocktrans %}
+        <p>
+            {% url 'auth_login' as login_url %}
+            {% blocktrans trimmed with signup_url="https://welcome.astrobin.com/pricing" %}
+                Please <a href="{{ login_url }}">log in</a> or <a href="{{ signup_url }}">sign up</a> to leave a comment.
+            {% endblocktrans %}
+        </p>
     {{/if}}
 {% endhandlebars %}
 
