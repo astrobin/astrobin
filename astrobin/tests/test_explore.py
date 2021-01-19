@@ -20,12 +20,14 @@ class ExploreTest(TestCase):
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def setUp(self, retrieve_primary_thumbnails):
         self.submitter = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
+        self.submitter2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
         self.submitters = Group.objects.create(name='iotd_submitters')
-        self.submitters.user_set.add(self.submitter)
+        self.submitters.user_set.add(self.submitter, self.submitter2)
 
         self.reviewer = User.objects.create_user('reviewer_1', 'reviewer_1@test.com', 'password')
+        self.reviewer2 = User.objects.create_user('reviewer_2', 'reviewer_2@test.com', 'password')
         self.reviewers = Group.objects.create(name='iotd_reviewers')
-        self.reviewers.user_set.add(self.reviewer)
+        self.reviewers.user_set.add(self.reviewer, self.reviewer2)
 
         self.judges = Group.objects.create(name = 'iotd_judges')
 
@@ -44,22 +46,11 @@ class ExploreTest(TestCase):
         self.image.data_source = "BACKYARD"
         self.image.save(keep_deleted=True)
 
-    def tearDown(self):
-        self.submitters.delete()
-        self.submitter.delete()
-
-        self.reviewers.delete()
-        self.reviewer.delete()
-
-        self.judges.delete()
-
-        self.image.delete()
-        self.user.delete()
-
     @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_top_picks_excludes_corrupted(self):
         IotdSubmission.objects.create(submitter=self.submitter, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer, image=self.image)
+        IotdVote.objects.create(reviewer=self.reviewer2, image=self.image)
 
         self.image.corrupted = True
         self.image.save()
@@ -71,9 +62,13 @@ class ExploreTest(TestCase):
         self.image.save()
 
     @override_settings(PREMIUM_RESTRICTS_IOTD=False)
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
+    @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_top_picks_data_source_filter(self):
         IotdSubmission.objects.create(submitter=self.submitter, image=self.image)
+        IotdSubmission.objects.create(submitter=self.submitter2, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer, image=self.image)
+        IotdVote.objects.create(reviewer=self.reviewer2, image=self.image)
 
         self.image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
         self.image.save()
@@ -123,9 +118,13 @@ class ExploreTest(TestCase):
         self.assertNotContains(response, self.image.title)
 
     @override_settings(PREMIUM_RESTRICTS_IOTD=False)
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
+    @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_top_picks_acquisition_type_filter(self):
         IotdSubmission.objects.create(submitter=self.submitter, image=self.image)
+        IotdSubmission.objects.create(submitter=self.submitter2, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer, image=self.image)
+        IotdVote.objects.create(reviewer=self.reviewer2, image=self.image)
 
         self.image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
         self.image.save()

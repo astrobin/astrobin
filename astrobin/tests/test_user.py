@@ -488,7 +488,12 @@ class UserTest(TestCase):
         # Check that the top100 badge is not visible
         self.assertNotContains(response, 'top100-badge')
 
-    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
+    @override_settings(
+        PREMIUM_RESTRICTS_IOTD=False,
+        IOTD_SUBMISSION_MIN_PROMOTIONS=2,
+        IOTD_REVIEW_MIN_PROMOTIONS=2,
+        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(days=365)
+    )
     @patch("astrobin.tasks.retrieve_primary_thumbnails")
     def test_user_profile_banned_from_competitions(self, retrieve_primary_thumbnails):
         self.client.login(username="user", password="password")
@@ -498,16 +503,20 @@ class UserTest(TestCase):
         image = Image.objects_including_wip.all()[0]
 
         submitter = User.objects.create_user('submitter', 'submitter_1@test.com', 'password')
+        submitter2 = User.objects.create_user('submitter2', 'submitter_2@test.com', 'password')
         submitters = Group.objects.create(name='iotd_submitters')
-        submitters.user_set.add(submitter)
+        submitters.user_set.add(submitter, submitter2)
         reviewer = User.objects.create_user('reviewer', 'reviewer_1@test.com', 'password')
+        reviewer2 = User.objects.create_user('reviewer2', 'reviewer_2@test.com', 'password')
         reviewers = Group.objects.create(name='iotd_reviewers')
-        reviewers.user_set.add(reviewer)
+        reviewers.user_set.add(reviewer, reviewer2)
         judge = User.objects.create_user('judge', 'judge_1@test.com', 'password')
         judges = Group.objects.create(name='iotd_judges')
         judges.user_set.add(judge)
         IotdSubmission.objects.create(submitter=submitter, image=image)
-        vote = IotdVote.objects.create(reviewer=reviewer, image=image)
+        IotdSubmission.objects.create(submitter=submitter2, image=image)
+        IotdVote.objects.create(reviewer=reviewer, image=image)
+        vote = IotdVote.objects.create(reviewer=reviewer2, image=image)
         iotd = Iotd.objects.create(judge=judge, image=image, date=datetime.now().date())
 
         image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)

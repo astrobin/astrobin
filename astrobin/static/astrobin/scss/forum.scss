@@ -177,12 +177,6 @@ th.forum-name {
     position: relative;
     min-height: 34px;
 
-    + br,
-    + br + br,
-    + br + br + br {
-      content: "";
-    }
-
     @media screen and (max-width: 767px) {
       padding-left: 40px;
     }

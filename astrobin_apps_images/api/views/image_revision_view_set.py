@@ -78,3 +78,6 @@ class ImageRevisionViewSet(TusCreateMixin,
             return {'Location': reverse('astrobin_apps_images:image-revision-detail', kwargs={'pk': data['pk']})}
         except (TypeError, KeyError):
             return {}
+
+    def verify_file(self, path):
+        return ImageService.verify_file(path)

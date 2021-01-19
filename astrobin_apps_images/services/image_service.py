@@ -198,3 +198,16 @@ class ImageService:
             return Image.HEMISPHERE_TYPE_UNKNOWN
 
         return Image.HEMISPHERE_TYPE_NORTHERN if solution.dec >= 0 else Image.HEMISPHERE_TYPE_SOUTHERN
+
+    @staticmethod
+    def verify_file(path):
+        try:
+            with open(path) as f:
+                from PIL import Image as PILImage
+                trial_image = PILImage.open(f)
+                trial_image.verify()
+                f.seek(0)  # Because we opened it with PIL
+        except Exception as e:
+            return False
+
+        return True

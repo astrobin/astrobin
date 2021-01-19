@@ -130,6 +130,12 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             # Save file
             temporary_file = get_or_create_temporary_file(object)
 
+            if not self.verify_file(temporary_file):
+                os.remove(temporary_file)
+                msg = "file verification failed"
+                log.warning("Chunked uploader (%d) (%d): %s" % (request.user.pk, object.pk, msg))
+                return HttpResponse(msg, status=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
+
             log.debug("Chunked uploader (%d) (%d): saving object to temporary file %s" % (
                 request.user.pk, object.pk, temporary_file))
 
