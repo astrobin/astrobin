@@ -32,30 +32,30 @@
       return rv;
     }
 
-    {% cache 600 hotjar_identify user.id request.LANGUAGE_CODE %}
-    function initHotjarIdentify() {
-        if (window.hj !== undefined) {
-            var userId = "{{ request.user.id }}";
-
-            window.hj("identify", userId, {
-                "Date joined": new Date("{{ request.user.date_joined|date:"Y-m-d" }}").toISOString(),
-                "Language": "{{ request.LANGUAGE_CODE }}",
-                "Images": {{ request.user.image_set.count }},
-                "Is Free": "{{ request.user|is_free }}" === "True",
-                "Is Lite": "{{ request.user|is_any_lite }}" === "True",
-                "Is Premium": "{{ request.user|is_any_premium }}" === "True",
-                "Is Ultimate": "{{ request.user|is_any_ultimate }}" === "True",
-
-            });
-        } else {
-            setTimeout(function() {
-                initHotjarIdentify();
-            }, 500);
-        }
-    }
-    {% endcache %}
-
     {% if request.user.is_authenticated %}
+        {% cache 600 hotjar_identify user.id request.LANGUAGE_CODE %}
+            function initHotjarIdentify() {
+                if (window.hj !== undefined) {
+                    var userId = "{{ request.user.id }}";
+
+                    window.hj("identify", userId, {
+                        "Registration date": new Date("{{ request.user.date_joined|date:"Y-m-d" }}").toISOString(),
+                        "Language": "{{ request.LANGUAGE_CODE }}",
+                        "Images": {{ request.user.image_set.count }},
+                        "Is Free": "{{ request.user|is_free }}" === "True",
+                        "Is Lite": "{{ request.user|is_any_lite }}" === "True",
+                        "Is Premium": "{{ request.user|is_any_premium }}" === "True",
+                        "Is Ultimate": "{{ request.user|is_any_ultimate }}" === "True",
+
+                    });
+                } else {
+                    setTimeout(function() {
+                        initHotjarIdentify();
+                    }, 500);
+                }
+            }
+        {% endcache %}
+
         initHotjarIdentify();
     {% endif %}
 
