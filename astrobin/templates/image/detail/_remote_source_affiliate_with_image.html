@@ -1,0 +1,26 @@
+{% load i18n %}
+{% load tags %}
+{% load astrobin_apps_premium_tags %}
+{% load astrobin_apps_remote_source_affiliation_tags %}
+
+<div class="subtle-container advertisement remote-source-affiliate with-image">
+    <div class="header">
+        <h4><i class="icon-star"></i> {% trans "Acquired at" %}</h4>
+
+        <a class="remove" data-toggle="modal"
+                {% if request.user|can_remove_ads %}
+           href="#remove-ads-modal"
+                {% else %}
+           href="#feature-restricted-modal"
+                {% endif %}
+        >
+            {% trans "Remove" %} <i class="icon-remove"></i>
+        </a>
+    </div>
+
+    <a href="{{ image.remote_source|remote_source_affiliate_url }}?{% remote_source_affiliate_utm_tags %}"
+       onclick="getOutboundLink('{{ image.remote_source|remote_source_affiliate_url }}', '{{ request.path }}')"
+       target="_blank">
+        <img src="{{ image.remote_source|remote_source_affiliate_image }}" />
+    </a>
+</div>

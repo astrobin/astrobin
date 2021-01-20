@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% if not image.animated %}
-    <div class="subtle-container hidden-phone">
+    <div class="subtle-container">
         <div class="header"><h4><i class="icon-bar-chart"></i> {% trans "Histogram" %}</h4></div>
         {% astrobin_image image 'histogram' revision=revision_label %}
     </div>

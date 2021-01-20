@@ -20,6 +20,8 @@ from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium_2020, is_premium, is_ultimate_2020, \
     is_lite, is_any_ultimate, is_free, is_lite_2020
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
+from astrobin_apps_remote_source_affiliation.services.remote_source_affiliation_service import \
+    RemoteSourceAffiliationService
 from astrobin_apps_users.services import UserService
 
 register = Library()
@@ -297,6 +299,16 @@ def show_ads_on_page(context):
         return show_ads(request.user) and (not request.user.is_authenticated() or is_free(request.user))
 
     return False
+
+
+@register.filter()
+def image_ad_key_value_pairs(image):
+    if RemoteSourceAffiliationService.is_remote_source_affiliate(image.remote_source):
+        return {
+            "exclude-category": "remote-hosting"
+        }
+
+    return None
 
 
 @register.simple_tag(takes_context=True)

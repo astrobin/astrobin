@@ -1,0 +1,21 @@
+{% load astrobin_apps_premium_tags %}
+{% load astrobin_apps_remote_source_affiliation_tags %}
+{% load tags %}
+
+{% show_ads_on_page as show_ads_on_page %}
+
+{% if show_ads_on_page %}
+
+    {% if image.remote_source|is_remote_source_affiliate %}
+        {% if image.remote_source|remote_source_affiliate_image %}
+            {% include "image/detail/_remote_source_affiliate_with_image.html" %}
+        {% else %}
+            {% include "image/detail/_remote_source_affiliate_without_image.html" %}
+        {% endif %}
+    {% endif %}
+
+{% else %}
+
+    {% include "image/detail/_remote_source_affiliate_without_image.html" %}
+
+{% endif %}

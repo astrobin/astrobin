@@ -1,55 +1,11 @@
-{% load astrobin_apps_donations_tags %}
-{% load astrobin_apps_premium_tags %}
-{% load astrobin_apps_remote_source_affiliation_tags %}
-{% load i18n %}
 {% load tags %}
 
 {% show_ads_on_page as show_ads_on_page %}
 
 {% if show_ads_on_page %}
     {% if not request.user_agent.is_mobile %}
-        {% include 'ads/rectangular_ad.html' %}
+        {% with image|image_ad_key_value_pairs as key_value_pairs %}
+            {% include 'ads/rectangular_ad.html' %}
+        {% endwith %}
     {% endif %}
-
-    {% if image.remote_source|is_remote_source_affiliate and image.remote_source|remote_source_affiliate_image %}
-
-        <div class="subtle-container advertisement remote-source-affiliate">
-            <div class="header">
-                <h4><i class="icon-star"></i> {% trans "Acquired at" %}</h4>
-
-                <a class="remove" data-toggle="modal"
-                        {% if request.user|can_remove_ads %}
-                   href="#remove-ads-modal"
-                        {% else %}
-                   href="#feature-restricted-modal"
-                        {% endif %}
-                >
-                    {% trans "Remove" %} <i class="icon-remove"></i>
-                </a>
-            </div>
-
-            <a href="{{ image.remote_source|remote_source_affiliate_url }}?{% remote_source_affiliate_utm_tags %}"
-               onclick="getOutboundLink('{{ image.remote_source|remote_source_affiliate_url }}', '{{ request.path }}')"
-               target="_blank">
-                <img width="300" height="125" src="{{ image.remote_source|remote_source_affiliate_image }}" />
-            </a>
-        </div>
-    {% endif %}
-
-{% else %}
-
-    {% if image.remote_source|is_remote_source_affiliate %}
-        <div class="subtle-container remote-source-affiliate">
-            <div class="header">
-                <h4><i class="icon-star"></i> {% trans "Acquired at" %}</h4>
-            </div>
-
-            <a href="{{ image.remote_source|remote_source_affiliate_url }}?{% remote_source_affiliate_utm_tags %}"
-               onclick="getOutboundLink('{{ image.remote_source|remote_source_affiliate_url }}', '{{ request.path }}')"
-               target="_blank">
-                {{ image.get_remote_source }}
-            </a>
-        </div>
-    {% endif %}
-
 {% endif %}

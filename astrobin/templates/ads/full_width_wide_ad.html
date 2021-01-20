@@ -9,6 +9,11 @@
         <div id='{{ NATIVE_RESPONSIVE_WIDE_SLOT }}'>
             <script>
                 googletag.cmd.push(function () {
+                    {% if key_value_pairs %}
+                        {% for key, value in key_value_pairs.items %}
+                            googletag.pubads().setTargeting("{{ key }}", "{{ value }}");
+                        {% endfor %}
+                    {% endif %}
                     googletag.display('{{ NATIVE_RESPONSIVE_WIDE_SLOT }}');
                 });
             </script>
