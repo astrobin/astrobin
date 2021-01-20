@@ -38,7 +38,7 @@
             var userId = "{{ request.user.id }}";
 
             window.hj("identify", userId, {
-                "Date joined": "{{ request.user.date_joined|date:"SHORT_DATE_FORMAT" }}",
+                "Date joined": new Date("{{ request.user.date_joined|date:"Y-m-d" }}").toISOString(),
                 "Language": "{{ request.LANGUAGE_CODE }}",
                 "Images": {{ request.user.image_set.count }},
                 "Is Free": "{{ request.user|is_free }}" === "True",
