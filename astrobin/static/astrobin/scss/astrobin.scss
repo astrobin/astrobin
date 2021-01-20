@@ -1259,6 +1259,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
     &.remote-source-affiliate {
       display: block;
+
+      &:not(.with-image) .header + a {
+        display: block;
+        padding: 16px;
+      }
     }
 
     .header {

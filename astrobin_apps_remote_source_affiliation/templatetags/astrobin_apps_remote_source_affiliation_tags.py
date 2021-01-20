@@ -3,7 +3,8 @@ from django.template import Library
 from django.utils.safestring import mark_safe
 
 from astrobin_apps_remote_source_affiliation.models import RemoteSourceAffiliate
-from common.services import DateTimeService
+from astrobin_apps_remote_source_affiliation.services.remote_source_affiliation_service import \
+    RemoteSourceAffiliationService
 
 register = Library()
 
@@ -16,14 +17,7 @@ def remote_source_affiliates():
 @register.filter
 def is_remote_source_affiliate(code):
     # type: (unicode) -> bool
-
-    remote_source = get_object_or_None(RemoteSourceAffiliate, code=code)  # type: RemoteSourceAffiliate
-
-    if remote_source is None:
-        return False
-
-    return remote_source.affiliation_start is not None and \
-           remote_source.affiliation_expiration >= DateTimeService.today()
+   return RemoteSourceAffiliationService.is_remote_source_affiliate(code)
 
 
 @register.filter
@@ -47,7 +41,10 @@ def remote_source_affiliate_image(code):
     if remote_source is None:
         return None
 
-    return remote_source.image_file.url
+    try:
+        return remote_source.image_file.url
+    except ValueError:
+        return None
 
 
 @register.simple_tag
