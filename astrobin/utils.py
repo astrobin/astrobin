@@ -15,7 +15,15 @@ def unique_items(list_with_possible_duplicates):
     """
     Given an initial list, returns a list but without duplicates
     """
-    return list(set(list_with_possible_duplicates))
+    try:
+        return list(set(list_with_possible_duplicates))
+    except TypeError:
+        # We have a list which is not flat, use the old way to remove duplicates
+        found = []
+        for i in list_with_possible_duplicates:
+            if i not in found:
+                found.append(i)
+        return found
 
 
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
