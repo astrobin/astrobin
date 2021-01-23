@@ -598,7 +598,7 @@ def get_language_name(language_code):
         'pt-br': 'Português',
         'ru': 'Русский',
         'sq': 'Shqipe',
-        'tr': 'Türk',
+        'tr': 'Türkçe',
     }
 
     try:
