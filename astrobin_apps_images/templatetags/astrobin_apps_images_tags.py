@@ -25,12 +25,12 @@ def get_image_url(image, revision='final', size='regular'):
 
 @register.filter
 def gallery_thumbnail(image, revision_label):
-    return image.thumbnail('gallery', {'revision_label': revision_label})
+    return image.thumbnail('gallery', revision_label)
 
 
 @register.filter
 def gallery_thumbnail_inverted(image, revision_label):
-    return image.thumbnail('gallery_inverted', {'revision_label': revision_label})
+    return image.thumbnail('gallery_inverted', revision_label)
 
 
 # Renders an linked image tag with a placeholder and async loading of the

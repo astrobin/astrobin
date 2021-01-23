@@ -106,11 +106,6 @@ def hitcount_cleanup():
 
 
 @shared_task()
-def contain_imagecache_size():
-    subprocess.call(['scripts/contain_directory_size.sh', '/media/imagecache', '120'])
-
-
-@shared_task()
 def contain_temporary_files_size():
     subprocess.call(['scripts/contain_directory_size.sh', '/astrobin-temporary-files/files', '120'])
 
@@ -132,16 +127,9 @@ def delete_inactive_bounced_accounts():
     bounces.delete()
 
 
-"""
-This task gets the raw thumbnail data and sets the cache and ThumbnailGroup object.
-"""
-
-
 @shared_task()
-def retrieve_thumbnail(pk, alias, options):
+def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     from astrobin.models import Image
-
-    revision_label = options.get('revision_label', 'final')
 
     LOCK_EXPIRE = 1
     lock_id = 'retrieve_thumbnail_%d_%s_%s' % (pk, revision_label, alias)
@@ -155,7 +143,7 @@ def retrieve_thumbnail(pk, alias, options):
         if not field.name.startswith('images/'):
             field.name = 'images/' + field.name
         cache_key = image.thumbnail_cache_key(field, alias)
-        cache.set(cache_key, url, 60 * 60 * 24 * 365)
+        cache.set(cache_key, url, 60 * 60 * 24)
         thumbnails, created = ThumbnailGroup.objects.get_or_create(image=image, revision=revision_label)
         setattr(thumbnails, alias, url)
         thumbnails.save()
@@ -164,7 +152,7 @@ def retrieve_thumbnail(pk, alias, options):
     if acquire_lock():
         try:
             image = Image.all_objects.get(pk=pk)
-            thumb = image.thumbnail_raw(alias, options)
+            thumb = image.thumbnail_raw(alias, revision_label, thumbnail_settings=thumbnail_settings)
 
             if thumb:
                 set_thumb()
@@ -177,18 +165,6 @@ def retrieve_thumbnail(pk, alias, options):
         return
 
     logger.debug('retrieve_thumbnail task is already running')
-
-
-"""
-This task retrieves all thumbnail data.
-"""
-
-
-@shared_task()
-def retrieve_primary_thumbnails(pk, options):
-    for alias in ('story', 'thumb', 'gallery', 'regular', 'hd', 'real'):
-        logger.debug("Starting retrieve thumbnail for %d:%s" % (pk, alias))
-        retrieve_thumbnail.delay(pk, alias, options)
 
 
 @shared_task(time_limit=600)

@@ -45,29 +45,8 @@ class OverwritingFileSystemStorage(FileSystemStorage):
         return super(OverwritingFileSystemStorage, self)._save(name, content)
 
 
-class CachedS3BotoStorage(S3BotoStorage):
-    def __init__(self, *args, **kwargs):
-        super(CachedS3BotoStorage, self).__init__()
-        self.local_storage = OverwritingFileSystemStorage(location = settings.IMAGE_CACHE_DIRECTORY)
-
-    def generate_local_name(self, name):
-        local_name = hashlib.md5(unidecode(name)).hexdigest()
-        return local_name
-
-    def _save(self, name, content):
-        name = super(CachedS3BotoStorage, self)._save(name, content)
-
-        try:
-            local_name = self.generate_local_name(name)
-            self.local_storage._save(local_name, content)
-        except (OSError, UnicodeEncodeError) as e:
-            # Probably the filename was too long for the local storage.
-            pass
-
-        return name
-
 if settings.AWS_S3_ENABLED:
-    ImageStorage = lambda: CachedS3BotoStorage()
+    ImageStorage = lambda: S3BotoStorage()
 else:
     ImageStorage = lambda: OverwritingFileSystemStorage(location=settings.UPLOADS_DIRECTORY)
 

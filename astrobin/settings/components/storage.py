@@ -19,6 +19,7 @@ if AWS_S3_ENABLED:
     AWS_STORAGE_BUCKET_CNAME = AWS_STORAGE_BUCKET_NAME
     AWS_S3_SECURE_URLS = True
     AWS_QUERYSTRING_AUTH = False
+    AWS_DEFAULT_ACL = 'public-read'
 
     AWS_S3_CALLING_FORMAT = 'boto.s3.connection.OrdinaryCallingFormat'
     AWS_S3_HOST = 's3.amazonaws.com'
@@ -39,7 +40,6 @@ if not MEDIA_URL.endswith('/'):
     MEDIA_URL = '%s/' % MEDIA_URL
 
 IMAGES_URL = MEDIA_URL
-IMAGE_CACHE_DIRECTORY = '/media/imagecache/'
 UPLOADS_DIRECTORY = MEDIA_ROOT
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 

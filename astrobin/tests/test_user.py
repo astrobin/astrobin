@@ -43,7 +43,6 @@ class UserTest(TestCase):
         if wip:
             data['wip'] = True
 
-        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
         self.client.post(
             reverse('image_upload_process'),
             data,
@@ -131,8 +130,8 @@ class UserTest(TestCase):
         response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
         self.assertEquals(response.status_code, 200)
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_user_page_view(self, retrieve_primary_thumbnails):
+
+    def test_user_page_view(self):
         now = datetime.now()
         today = date.today()
 
@@ -428,8 +427,8 @@ class UserTest(TestCase):
         image.delete()
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_user_page_view_wip_image_not_visible_by_others(self, retrieve_primary_thumbnails):
+
+    def test_user_page_view_wip_image_not_visible_by_others(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST STAGING IMAGE", True)
 
@@ -440,8 +439,8 @@ class UserTest(TestCase):
         self.assertEquals(image.title in response.content, False)
 
     @override_settings(PREMIUM_RESTRICTS_IOTD=False)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_user_profile_exclude_from_competitions(self, retrieve_primary_thumbnails):
+
+    def test_user_profile_exclude_from_competitions(self):
         self.client.login(username="user", password="password")
         self._do_upload('astrobin/fixtures/test.jpg')
         self.client.logout()
@@ -495,8 +494,8 @@ class UserTest(TestCase):
         IOTD_REVIEW_MIN_PROMOTIONS=2,
         IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(days=365)
     )
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_user_profile_banned_from_competitions(self, retrieve_primary_thumbnails):
+
+    def test_user_profile_banned_from_competitions(self):
         self.client.login(username="user", password="password")
         self._do_upload('astrobin/fixtures/test.jpg')
         self.client.logout()
@@ -559,8 +558,8 @@ class UserTest(TestCase):
         response = self.client.get(reverse('user_page', args=(self.user.username,)))
         self.assertContains(response, 'top-pick-nomination-badge')
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_corrupted_images_not_shown_to_others(self, retrieve_primary_thumbnails):
+
+    def test_corrupted_images_not_shown_to_others(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST IMAGE")
         image.corrupted = True
@@ -571,8 +570,8 @@ class UserTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, "data-id=\"%d\"" % image.pk)
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_corrupted_images_shown_to_owner(self, retrieve_primary_thumbnails):
+
+    def test_corrupted_images_shown_to_owner(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST IMAGE")
         image.corrupted = True
@@ -588,8 +587,8 @@ class UserTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_liked(self, retrieve_primary_thumbnails):
+
+    def test_liked(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST IMAGE")
         self.client.logout()
@@ -613,8 +612,8 @@ class UserTest(TestCase):
         profile = UserProfile.objects.get(user=self.user)
         self.assertNotEquals(updated, profile.updated)
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_profile_updated_when_image_saved(self, retrieve_primary_thumbnails):
+
+    def test_profile_updated_when_image_saved(self):
         updated = self.user.userprofile.updated
 
         self.client.login(username="user", password="password")

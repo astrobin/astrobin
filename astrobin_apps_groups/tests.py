@@ -99,9 +99,8 @@ class GroupsTest(TestCase):
         self.group.public = True
         self.group.save()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_group_detail_view(self, retrieve_primary_thumbnails):
-        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
+
+    def test_group_detail_view(self):
         # Everything okay when it's empty
         response = self.client.get(reverse('group_detail', kwargs = {'pk': self.group.pk}))
         self.assertEqual(response.status_code, 200)
@@ -228,9 +227,8 @@ class GroupsTest(TestCase):
 
         us.delete()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_group_update_view(self, retrieve_primary_thumbnails):
-        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
+
+    def test_group_update_view(self):
         url = reverse('group_update', kwargs = {'pk': self.group.pk})
         response = self.client.get(url)
         self.assertEqual(response.status_code, 302)
@@ -406,9 +404,8 @@ class GroupsTest(TestCase):
         us1.delete()
         us2.delete()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_group_leave_view(self, retrieve_primary_thumbnails):
-        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
+
+    def test_group_leave_view(self):
         url = reverse('group_leave', kwargs = {'pk': self.group.pk})
 
         # Login required
@@ -585,9 +582,8 @@ class GroupsTest(TestCase):
 
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_group_add_remove_images_view(self, retrieve_primary_thumbnails):
-        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
+
+    def test_group_add_remove_images_view(self):
         url = reverse('group_add_remove_images', kwargs = {'pk': self.group.pk})
 
         # Login required
@@ -658,9 +654,8 @@ class GroupsTest(TestCase):
         self.group.autosubmission = True
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_group_add_image_view(self, retrieve_primary_thumbnails):
-        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
+
+    def test_group_add_image_view(self):
         url = reverse('group_add_image', kwargs = {'pk': self.group.pk})
 
         # Login required
@@ -1070,11 +1065,10 @@ class GroupsTest(TestCase):
         self.assertTrue(len(get_unseen_notifications(self.user2)) > 0)
         self.assertIn("REJECTED", get_unseen_notifications(self.user2)[0].message)
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_group_autosubmission_sync(self, retrieve_primary_thumbnails):
+
+    def test_group_autosubmission_sync(self):
         def _upload():
             self.client.login(username = 'user2', password = 'password')
-            patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
             self.client.post(
                 reverse('image_upload_process'),
                 { 'image_file': open('astrobin/fixtures/test.jpg', 'rb') },

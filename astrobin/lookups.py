@@ -128,7 +128,7 @@ def autocomplete_images(request):
         results.append({
             'id': image.get_id(),
             'title': image.title,
-            'thumbnail': image.thumbnail('gallery', {'sync': True}),
+            'thumbnail': image.thumbnail('gallery', None, sync=True),
             'url': image.get_absolute_url(),
         })
 

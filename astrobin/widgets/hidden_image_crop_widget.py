@@ -1,5 +1,7 @@
 import image_cropping
 from django.conf import settings
+from easy_thumbnails.files import get_thumbnailer
+from image_cropping.backends.easy_thumbs import EasyThumbnailsBackend
 from image_cropping.widgets import HiddenImageCropWidget as BaseHiddenImageCropWidget
 
 from astrobin.models import Image, ImageRevision
@@ -17,17 +19,19 @@ def _s3_get_attrs(image, name):
     try:
         astrobin_image = Image.all_objects.get(image_file=image)
         width, height = astrobin_image.w, astrobin_image.h
+        url = astrobin_image.thumbnail_raw('regular', None, sync=True).url
     except Image.DoesNotExist:
         try:
             astrobin_image = ImageRevision.objects.get(image_file=image)
             width, height = astrobin_image.w, astrobin_image.h
+            url = astrobin_image.thumbnail_raw('regular', sync=True).url
         except ImageRevision.DoesNotExist:
             return {}
 
     if width and height:
         return {
             'class': "crop-thumb",
-            'data-thumbnail-url': astrobin_image.thumbnail_raw('regular').url,
+            'data-thumbnail-url': url,
             'data-field-name': name,
             'data-org-width': width,
             'data-org-height': height,
@@ -40,6 +44,21 @@ def _s3_get_attrs(image, name):
 
 if settings.AWS_S3_ENABLED:
     image_cropping.widgets.get_attrs = _s3_get_attrs
+
+
+class EasyThumbnailsBackend(EasyThumbnailsBackend):
+    def get_thumbnail_url(self, path, thumbnail_options):
+        try:
+            target = Image.all_objects.get(image_file=path)
+        except Image.DoesNotExist:
+            try:
+                target = ImageRevision.all_objects.get(image_file=path)
+            except ImageRevision.DoesNotExist:
+                return None
+
+        thumb = get_thumbnailer(target.image_file.file, path)
+
+        return thumb.get_thumbnail(settings.THUMBNAIL_ALIASES['']['regular']).url
 
 
 class HiddenImageCropWidget(BaseHiddenImageCropWidget):

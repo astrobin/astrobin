@@ -149,9 +149,7 @@ class Annotator:
                 base = Image \
                     .open(get_from_storage(
                     self.solution.content_object,
-                    'hd',
-                    '0' if not hasattr(self.solution.content_object, 'label')
-                    else self.solution.content_object.label)) \
+                    'hd')) \
                     .convert('RGBA')
             except ThumbnailNotReadyException as e:
                 log.warning("annotate.py: ThumbnailNotReadyException when trying to open the image: %s" % e.message)

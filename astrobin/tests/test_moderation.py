@@ -32,7 +32,6 @@ class ModerationTest(TestCase):
         if wip:
             data['wip'] = True
 
-        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
         return self.client.post(
             reverse('image_upload_process'),
             data,
@@ -42,8 +41,8 @@ class ModerationTest(TestCase):
         return Image.objects_including_wip.all().order_by('-id')[0]
 
     @patch("astrobin.models.UserProfile.get_scores")
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_image_moderation_queue_view(self, retrieve_primary_thumbnails, get_scores):
+
+    def test_image_moderation_queue_view(self, get_scores):
         get_scores.return_value = {
             'user_scores_index': None,
             'user_scores_contribution_index': None,
@@ -102,8 +101,8 @@ class ModerationTest(TestCase):
 
         image.delete()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_spam_user_gallery(self, retrieve_primary_thumbnails):
+
+    def test_spam_user_gallery(self):
         self.client.login(username='user', password='password')
         response = self.client.get(reverse('user_page', args=('user',)))
         self.assertEquals(response.status_code, 200)

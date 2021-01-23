@@ -15,8 +15,8 @@ from astrobin_apps_iotd.services import IotdService
 
 
 class ExploreTest(TestCase):
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def setUp(self, retrieve_primary_thumbnails):
+
+    def setUp(self):
         self.submitter = User.objects.create_user('submitter_1', 'submitter_1@test.com', 'password')
         self.submitter2 = User.objects.create_user('submitter_2', 'submitter_2@test.com', 'password')
         self.submitters = Group.objects.create(name='iotd_submitters')

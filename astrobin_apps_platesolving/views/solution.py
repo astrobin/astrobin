@@ -51,10 +51,10 @@ class SolveView(base.View):
             solver = Solver()
 
             try:
-                url = target.thumbnail('hd_sharpened' if image.sharpen_thumbnails else 'hd', {
-                    'sync': True,
-                    'revision_label': '0' if target._meta.model_name == u'image' else target.label
-                })
+                url = image.thumbnail(
+                    'hd_sharpened' if image.sharpen_thumbnails else 'hd',
+                    '0' if target._meta.model_name == u'image' else target.label,
+                    sync=True)
 
                 if solution.settings.blind:
                     submission = solver.solve(url)
@@ -71,8 +71,8 @@ class SolveView(base.View):
                 solution.status = Solver.PENDING
                 solution.submission_id = submission
                 solution.save()
-            except Exception, e:
-                log.error(e)
+            except Exception as e:
+                log.error("Error during basic plate-solving: %s" % e.message)
                 solution.status = Solver.MISSING
                 solution.submission_id = None
                 solution.save()
@@ -100,7 +100,7 @@ class SolveAdvancedView(base.View):
                         latest_settings = image.solution.advanced_settings
                         break
             elif target.image.solution and target.image.solution.advanced_settings:
-                    latest_settings = target.image.solution.advanced_settings
+                latest_settings = target.image.solution.advanced_settings
 
             if latest_settings is not None:
                 latest_settings.pk = None
@@ -128,10 +128,10 @@ class SolveAdvancedView(base.View):
                 if solution.advanced_settings.sample_raw_frame_file:
                     url = solution.advanced_settings.sample_raw_frame_file.url
                 else:
-                    url = target.thumbnail('hd_sharpened' if image.sharpen_thumbnails else 'hd', {
-                        'sync': True,
-                        'revision_label': '0' if target._meta.model_name == u'image' else target.label
-                    })
+                    url = target.thumbnail(
+                        'hd_sharpened' if image.sharpen_thumbnails else 'hd',
+                        '0' if target._meta.model_name == u'image' else target.label,
+                        sync=True)
 
                 acquisitions = DeepSky_Acquisition.objects.filter(image=image)
                 if acquisitions.count() > 0 and acquisitions[0].date:

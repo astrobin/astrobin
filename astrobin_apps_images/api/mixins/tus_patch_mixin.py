@@ -162,10 +162,6 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             os.remove(temporary_file)
             signals.finished.send(object)
 
-            if isinstance(object, Image):
-                from astrobin.tasks import retrieve_primary_thumbnails
-                retrieve_primary_thumbnails.delay(object.pk, {'revision_label': '0'})
-
             log.debug("Chunked uploader (%d) (%d): finished" % (request.user.pk, object.pk))
 
         # Add upload expiry to headers

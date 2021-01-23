@@ -361,8 +361,8 @@ class PremiumTest(TestCase):
         self.assertEqual(premium_get_valid_usersubscription(self.user), premium)
         self.assertEqual(premium_get_invalid_usersubscription(self.user), expired_ultimate)
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_upload_limits_free_recent_upload(self, retrieve_primary_thumbnails):
+
+    def test_upload_limits_free_recent_upload(self):
         """
         Free accounts can upload up to PREMIUM_MAX_IMAGES_FREE images.
         The counter does not decrease when deleting images.
@@ -396,8 +396,8 @@ class PremiumTest(TestCase):
 
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_upload_limits_free(self, retrieve_primary_thumbnails):
+
+    def test_upload_limits_free(self):
         """
         Free accounts can upload up to PREMIUM_MAX_IMAGES_FREE images.
         The counter does not decrease when deleting images.
@@ -437,8 +437,8 @@ class PremiumTest(TestCase):
 
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_upload_limits_lite(self, retrieve_primary_thumbnails):
+
+    def test_upload_limits_lite(self):
         """
         Lite accounts (pre 2020, non-autorenew) can upload up to PREMIUM_MAX_IMAGES_LITE images per year.
         The counter decreases only when you delete an image uploaded during the current subscription period.
@@ -494,8 +494,8 @@ class PremiumTest(TestCase):
 
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_upload_limits_premium(self, retrieve_primary_thumbnails):
+
+    def test_upload_limits_premium(self):
         """
         Premium accounts (pre 2020, non-autorenew) can upload infinite images.
         The counter decreases, tho it's inconsequential.
@@ -545,8 +545,8 @@ class PremiumTest(TestCase):
 
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_upload_limits_lite_autorenew(self, retrieve_primary_thumbnails):
+
+    def test_upload_limits_lite_autorenew(self):
         """
         Lite accounts (pre 2020, autorenew) can upload up to PREMIUM_MAX_IMAGES_LITE images per year.
         The counter decreases only when you delete an image uploaded during the current subscription period.
@@ -602,8 +602,8 @@ class PremiumTest(TestCase):
 
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_upload_limits_premium_autorenew(self, retrieve_primary_thumbnails):
+
+    def test_upload_limits_premium_autorenew(self):
         """
         Premium accounts (pre 2020, autorenew) can upload infinite images.
         The counter decreases, tho it's inconsequential.
@@ -653,8 +653,8 @@ class PremiumTest(TestCase):
 
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_upload_limits_lite_2020(self, retrieve_primary_thumbnails):
+
+    def test_upload_limits_lite_2020(self):
         """
         Lite 2020+ can upload up to PREMIUM_MAX_IMAGES_LITE_2020 images.
         The counter decreases on deletions.
@@ -710,8 +710,8 @@ class PremiumTest(TestCase):
 
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_upload_limits_premium_2020(self, retrieve_primary_thumbnails):
+
+    def test_upload_limits_premium_2020(self):
         """
         Premium 2020+ can upload unlimited images.
         The counter decreases.
@@ -760,8 +760,8 @@ class PremiumTest(TestCase):
 
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_upload_limits_ultimate_2020(self, retrieve_primary_thumbnails):
+
+    def test_upload_limits_ultimate_2020(self):
         """
         Ultimate 2020+ can upload infinite images.
         The counter decreases, even tho it's inconsequential.

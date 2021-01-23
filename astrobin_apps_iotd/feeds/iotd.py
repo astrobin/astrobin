@@ -47,7 +47,7 @@ class IotdFeed(Feed):
         return datetime(item.date.year, item.date.month, item.date.day)
 
     def item_thumbnail_url(self, item):
-        return item.image.thumbnail('hd', {'sync': True})
+        return item.image.thumbnail('hd', None, sync=True)
 
     def item_enclosure_url(self, item):
         return self.item_thumbnail_url(item)
