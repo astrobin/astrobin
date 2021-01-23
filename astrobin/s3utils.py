@@ -1,18 +1,11 @@
-# Python
-import hashlib
 import logging
 import os
-from unidecode import unidecode
 
-# Django
 from django.conf import settings
 from django.contrib.staticfiles.storage import ManifestFilesMixin
 from django.core.files.storage import FileSystemStorage
-
-# Third party
-from storages.backends.s3boto import S3BotoStorage
 from pipeline.storage import PipelineMixin
-
+from storages.backends.s3boto3 import S3Boto3Storage
 
 log = logging.getLogger('apps')
 
@@ -46,17 +39,22 @@ class OverwritingFileSystemStorage(FileSystemStorage):
 
 
 if settings.AWS_S3_ENABLED:
-    ImageStorage = lambda: S3BotoStorage()
+    ImageStorage = lambda: S3Boto3Storage()
 else:
     ImageStorage = lambda: OverwritingFileSystemStorage(location=settings.UPLOADS_DIRECTORY)
 
 
-class S3PipelineStorage(PipelineMixin, ManifestFilesMixin, S3BotoStorage):
+class S3PipelineStorage(PipelineMixin, ManifestFilesMixin, S3Boto3Storage):
     pass
+
+
 StaticRootS3BotoStorage = lambda: S3PipelineStorage(location=settings.STATIC_ROOT)
+
 
 class LocalPipelineStorage(PipelineMixin, ManifestFilesMixin, FileSystemStorage):
     pass
+
+
 StaticRootLocalStorage = lambda: LocalPipelineStorage(
     location=settings.STATIC_ROOT,
     base_url=settings.STATIC_ROOT)

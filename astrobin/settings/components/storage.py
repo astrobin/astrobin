@@ -20,14 +20,10 @@ if AWS_S3_ENABLED:
     AWS_S3_SECURE_URLS = True
     AWS_QUERYSTRING_AUTH = False
     AWS_DEFAULT_ACL = 'public-read'
-
-    AWS_S3_CALLING_FORMAT = 'boto.s3.connection.OrdinaryCallingFormat'
-    AWS_S3_HOST = 's3.amazonaws.com'
-
-    # see http://developer.yahoo.com/performance/rules.html#expires
-    AWS_HEADERS = {
+    AWS_S3_OBJECT_PARAMETERS = {
         'Expires': 'Wed, 31 Dec 2036 23:59:59 GMT'
     }
+    AWS_S3_ENDPOINT_URL = 's3.amazonaws.com'
 else:
     MEDIA_ROOT = '/media/'
     MEDIA_URL = BASE_URL + MEDIA_ROOT
