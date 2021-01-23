@@ -128,7 +128,7 @@ class SolveAdvancedView(base.View):
                 if solution.advanced_settings.sample_raw_frame_file:
                     url = solution.advanced_settings.sample_raw_frame_file.url
                 else:
-                    url = target.thumbnail(
+                    url = image.thumbnail(
                         'hd_sharpened' if image.sharpen_thumbnails else 'hd',
                         '0' if target._meta.model_name == u'image' else target.label,
                         sync=True)
