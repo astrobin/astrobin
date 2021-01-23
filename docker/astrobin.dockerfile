@@ -45,7 +45,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 RUN mkdir /code
 COPY requirements.txt /code
 WORKDIR /code
-RUN python -m pip install --upgrade pip && \
+RUN python -m pip install pip==20.3.4 && \
     apt-get purge -y python-pip && \
     python -m pip install "setuptools<45" && \
     pip install --no-deps -r requirements.txt --src /src
