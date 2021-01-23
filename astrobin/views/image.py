@@ -13,7 +13,7 @@ from django.core.files.images import get_image_dimensions
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.db.models import Q
 from django.db.models.query import QuerySet
-from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest, HttpResponseForbidden
+from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest, HttpResponseForbidden, HttpResponse
 from django.shortcuts import redirect
 from django.utils.encoding import iri_to_uri, smart_unicode
 from django.utils.translation import ugettext as _
@@ -188,7 +188,8 @@ class ImageRawThumbView(ImageDetailViewBase):
 
             if thumb:
                 return redirect(thumb.url)
-            return None
+
+            return HttpResponse(status=500)
 
         url = image.thumbnail(
             alias, revision_label, animated='animated' in self.request.GET, insecure='insecure' in self.request.GET,

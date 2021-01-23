@@ -1154,11 +1154,7 @@ class ImageTest(TestCase):
         }
 
         def get_expected_url(image):
-            thumb = image.thumbnail_raw(opts['alias'], {
-                'revision_label': 'final',
-                'animated': False,
-                'insecure': False
-            })
+            thumb = image.thumbnail_raw(opts['alias'], 'final', animated=False, insecure=False)
             return thumb.url
 
         response = self.client.get(reverse('image_rawthumb', kwargs=opts), follow=True)
