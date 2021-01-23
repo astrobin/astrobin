@@ -12,6 +12,7 @@ from django.core.cache import cache
 from django.core.urlresolvers import reverse as reverse_url
 from django.db import IntegrityError
 from django.db import transaction
+from django.db.models import Q
 from django.db.models.signals import (
     pre_save, post_save, post_delete, m2m_changed)
 from django.utils.translation import ugettext_lazy as _, gettext, override
@@ -189,8 +190,13 @@ def nested_comment_pre_save(sender, instance, **kwargs):
 
         cache.set("user.%d.comment_pre_save_mentions" % instance.author.pk, mentions, 2)
     else:
-        user_scores_index = instance.author.userprofile.get_scores()['user_scores_index']
-        if user_scores_index < 1.00 and is_free(instance.author):
+        insufficient_index = instance.author.userprofile.get_scores()['user_scores_index'] < 1.00
+        free_account = is_free(instance.author)
+        insufficient_previous_approvals = NestedComment.objects.filter(
+            Q(author=instance.author) & ~Q(pending_moderation=True)
+        ).count() < 3
+
+        if insufficient_index and free_account and insufficient_previous_approvals:
             instance.pending_moderation = True
 
 
