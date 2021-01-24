@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-03 21:13+0000\n"
-"PO-Revision-Date: 2020-12-18 08:00+0000\n"
+"POT-Creation-Date: 2021-01-24 21:14+0000\n"
+"PO-Revision-Date: 2021-01-04 13:40+0000\n"
 "Last-Translator: JeanBaptisteAuroux <jbauroux@bbox.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.8\n"
 "X-Poedit-Bookmarks: -1,319,-1,-1,-1,-1,-1,-1,-1,-1\n"
-"X-POOTLE-MTIME: 1608278414.000000\n"
+"X-POOTLE-MTIME: 1609767647.000000\n"
 
 msgid "United Kingdom"
 msgstr "Royaume-Uni"
@@ -2926,38 +2926,6 @@ msgstr ""
 msgid "Custom e-mail change request on AstroBin"
 msgstr "Demande de modification personnalisée d'e-mail sur AstroBin"
 
-msgid ""
-"Please contact us if you need any assistance, or want to report a problem, "
-"give some feedback or suggestions, or simply want to get in touch!"
-msgstr ""
-"N'hésitez pas à nous contacter si vous avez besoin d'aide, pour signaler un "
-"problème, donner votre avis ou apporter vos suggestions, ou tout simplement "
-"pour entrer en relation !"
-
-msgid "Please note!"
-msgstr "A noter !"
-
-msgid ""
-"By using this form, you will reach the AstroBin staff. To contact a user "
-"instead, please use the private messaging functionality. It's available by "
-"navigating to a user's gallery or an image, and selecting the \"User\" menu "
-"and then \"Send private message\"."
-msgstr ""
-"En utilisant ce formulaire, vous prendrez contact avec l'équipe d'AstroBin. "
-"Si vous souhaitez plutôt contacter un utilisateur, veuillez utiliser la "
-"fonctionnalité de messagerie privée. Celle-ci est disponible en naviguant "
-"dans la galerie d'un utilisateur ou sur une image, en sélectionnant le menu "
-"\"Utilisateur\" puis \"Envoyer un message privé\"."
-
-msgid "Send"
-msgstr "Envoyer"
-
-msgid "Thanks!"
-msgstr "Merci !"
-
-msgid "Thank you! Your message was sent successfully."
-msgstr "Merci ! Votre message a bien été envoyé."
-
 msgid "Comments"
 msgstr "Commentaires"
 
@@ -3154,6 +3122,9 @@ msgstr "Passer"
 
 msgid "Enough for now"
 msgstr "Assez pour l'instant"
+
+msgid "Thanks!"
+msgstr "Merci !"
 
 msgid ""
 "Your contribute was very important, and the whole AstroBin community is "
@@ -3646,6 +3617,9 @@ msgstr ""
 "comporte tous les groupes publics et privés à soumission d'image sélective "
 "dont vous êtes le créateur ou un membre."
 
+msgid "Send"
+msgstr "Envoyer"
+
 msgid "Sharing mode"
 msgstr "Format de partage"
 
@@ -4086,15 +4060,6 @@ msgstr "Le temple de l'astrophotographie"
 
 msgid "Latest from the forums"
 msgstr "Récemment dans le forum"
-
-msgid "Sticky"
-msgstr "Épinglé"
-
-msgid "Closed"
-msgstr "Fermé"
-
-msgid "pages"
-msgstr "pages"
 
 msgid "Recent images"
 msgstr "Images récentes"
@@ -5284,17 +5249,33 @@ msgstr "Voir la page"
 msgid "Member since"
 msgstr "Membre depuis"
 
-msgid "This topic was closed by a moderator."
-msgstr "Cette discussion a été fermée par un modérateur."
+msgid "Search all forums and comments"
+msgstr ""
 
 msgid "New topic"
 msgstr "Nouveau sujet"
 
-msgid "New reply"
-msgstr "Nouvelle réponse"
+msgid "Please select a forum"
+msgstr ""
 
 msgid "Please note"
 msgstr "A noter !"
+
+msgid ""
+"To post a new topic, please first go to the forum that is most relevant to "
+"your topic."
+msgstr ""
+
+#, fuzzy
+#| msgid "View full res"
+msgid "View forums"
+msgstr "Voir la résolution maximale"
+
+msgid "This topic was closed by a moderator."
+msgstr "Cette discussion a été fermée par un modérateur."
+
+msgid "New reply"
+msgstr "Nouvelle réponse"
 
 #, python-format
 msgid ""
@@ -5421,6 +5402,9 @@ msgstr ""
 "La modification d'un message n'est autorisée que dans les %(minutes)s "
 "minutes qui suivent sa création."
 
+msgid "You cannot Like this post because the topic is closed."
+msgstr ""
+
 msgid "Topics you subscribe to"
 msgstr "Sujets auxquels vous êtes abonné(e)"
 
@@ -5450,6 +5434,12 @@ msgstr "Sujet"
 
 msgid "Last post"
 msgstr "Dernier message"
+
+msgid "Sticky"
+msgstr "Épinglé"
+
+msgid "Closed"
+msgstr "Fermé"
 
 msgid "This forum does not have any topics."
 msgstr "Ce forum ne contient aucun sujet."
@@ -5999,6 +5989,9 @@ msgstr "Modifier votre matériel d'astrophotographie"
 msgid "Edit gear item"
 msgstr "Modifier le matériel"
 
+msgid "Please note!"
+msgstr "A noter !"
+
 msgid ""
 "When you add or edit the make, the name, and the properties of this product, "
 "the data is global and shared between all AstroBin users. Do not write any "
@@ -6053,10 +6046,8 @@ msgstr ""
 msgid "Import from Flickr"
 msgstr "Importer depuis Flickr"
 
-#, fuzzy
-#| msgid "Change your e-mail"
 msgid "Change your username"
-msgstr "Modifier votre e-mail"
+msgstr "Modifier votre nom d'utilisateur"
 
 msgid "Edit your site preferences"
 msgstr "Modifier vos préférences du site"
@@ -6658,7 +6649,7 @@ msgstr ""
 "de temps."
 
 msgid "Referral code (optional)"
-msgstr ""
+msgstr "Code de référence (facultatif)"
 
 msgid "Are you a robot?"
 msgstr "Etes-vous un robot ?"
@@ -6666,6 +6657,33 @@ msgstr "Etes-vous un robot ?"
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
 "Désolé, ce nom d'utilisateur existes déjà avec un mise en forme différente."
+
+#~ msgid ""
+#~ "Please contact us if you need any assistance, or want to report a "
+#~ "problem, give some feedback or suggestions, or simply want to get in "
+#~ "touch!"
+#~ msgstr ""
+#~ "N'hésitez pas à nous contacter si vous avez besoin d'aide, pour signaler "
+#~ "un problème, donner votre avis ou apporter vos suggestions, ou tout "
+#~ "simplement pour entrer en relation !"
+
+#~ msgid ""
+#~ "By using this form, you will reach the AstroBin staff. To contact a user "
+#~ "instead, please use the private messaging functionality. It's available "
+#~ "by navigating to a user's gallery or an image, and selecting the \"User\" "
+#~ "menu and then \"Send private message\"."
+#~ msgstr ""
+#~ "En utilisant ce formulaire, vous prendrez contact avec l'équipe "
+#~ "d'AstroBin. Si vous souhaitez plutôt contacter un utilisateur, veuillez "
+#~ "utiliser la fonctionnalité de messagerie privée. Celle-ci est disponible "
+#~ "en naviguant dans la galerie d'un utilisateur ou sur une image, en "
+#~ "sélectionnant le menu \"Utilisateur\" puis \"Envoyer un message privé\"."
+
+#~ msgid "Thank you! Your message was sent successfully."
+#~ msgstr "Merci ! Votre message a bien été envoyé."
+
+#~ msgid "pages"
+#~ msgstr "pages"
 
 #~ msgctxt "approximately"
 #~ msgid "about"
@@ -6676,9 +6694,6 @@ msgstr ""
 
 #~ msgid "Max size"
 #~ msgstr "Taille max"
-
-#~ msgid "View full res"
-#~ msgstr "Voir la résolution maximale"
 
 #~ msgid "View full image info"
 #~ msgstr "Voir l'ensemble des informations de l'image"

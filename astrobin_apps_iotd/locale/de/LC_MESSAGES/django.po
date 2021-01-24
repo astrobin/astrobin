@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-03 21:27+0000\n"
+"POT-Creation-Date: 2021-01-24 21:27+0000\n"
 "PO-Revision-Date: 2020-05-22 13:47+0000\n"
 "Last-Translator: Hartmuth <hk@kinconsult.de>\n"
 "Language-Team: \n"
@@ -18,6 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.8\n"
 "X-POOTLE-MTIME: 1590155251.000000\n"
+
+#, fuzzy
+#| msgid "You cannot unelect an image elected by another judge."
+msgid "You cannot unhide an image on behalf of another user."
+msgstr "Du kannst ein von einem anderen Richter gewähltes Bild nicht abwählen."
 
 #, fuzzy
 #| msgid "You cannot elect your own submission."
@@ -150,21 +155,6 @@ msgid "You cannot unelect a past or current IOTD."
 msgstr ""
 "Du kannst ein vergangenes oder aktuelles Bild des Tages nicht abwählen."
 
-msgid "Submit for IOTD"
-msgstr "Als Bild des Tages einreichen"
-
-msgid ""
-"You will submit this image to the IOTD Submissions Queue. From there, a "
-"member of the IOTD Reviewers Board will consider promoting it for final "
-"evaluation from an IOTD Judge"
-msgstr ""
-"Du wirst dieses Bild an die IOTD-Vorschlagsliste senden. Von dort aus wird "
-"ein Mitglied des Rezensenten-Teams erwägen, es für die abschließende "
-"Beurteilung durch einen IOTD-Richter weiter zu leiten."
-
-msgid "Submit"
-msgstr "Absenden"
-
 msgid "Image of the day"
 msgstr "Bild des Tages"
 
@@ -183,25 +173,6 @@ msgstr ""
 msgid "This queue is currently empty."
 msgstr "Diese Liste ist derzeit leer."
 
-# its not the 1:1 translation but it hits the meaning of the list to select Top picks and suggest IOTD.
-msgid "IOTD Review Queue"
-msgstr "IOTD/TopPick-Auswahlliste"
-
-msgid ""
-"Please select the images that you want to promote for final judgement by "
-"clicking on them."
-msgstr ""
-"Bitte wähle die Bilder, die du zur endgültigen Beurteilung bewerben möchtest "
-"aus, indem Du sie anklickst."
-
-msgid "IOTD Submission Queue"
-msgstr "IOTD-Vorschlagsliste"
-
-msgid ""
-"Please select the images that you want to propose for IOTD consideration."
-msgstr ""
-"Bitte wähle die Bilder aus, die Du für die IOTD-Auswahl vorschlagen möchtest."
-
 msgid "Error"
 msgstr "Fehler"
 
@@ -213,6 +184,41 @@ msgstr ""
 #, python-format
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr "Alle IOTD-Plätze für die nächsten %(days)s Tage sind bereits besetzt."
+
+#~ msgid "Submit for IOTD"
+#~ msgstr "Als Bild des Tages einreichen"
+
+#~ msgid ""
+#~ "You will submit this image to the IOTD Submissions Queue. From there, a "
+#~ "member of the IOTD Reviewers Board will consider promoting it for final "
+#~ "evaluation from an IOTD Judge"
+#~ msgstr ""
+#~ "Du wirst dieses Bild an die IOTD-Vorschlagsliste senden. Von dort aus "
+#~ "wird ein Mitglied des Rezensenten-Teams erwägen, es für die abschließende "
+#~ "Beurteilung durch einen IOTD-Richter weiter zu leiten."
+
+#~ msgid "Submit"
+#~ msgstr "Absenden"
+
+# its not the 1:1 translation but it hits the meaning of the list to select Top picks and suggest IOTD.
+#~ msgid "IOTD Review Queue"
+#~ msgstr "IOTD/TopPick-Auswahlliste"
+
+#~ msgid ""
+#~ "Please select the images that you want to promote for final judgement by "
+#~ "clicking on them."
+#~ msgstr ""
+#~ "Bitte wähle die Bilder, die du zur endgültigen Beurteilung bewerben "
+#~ "möchtest aus, indem Du sie anklickst."
+
+#~ msgid "IOTD Submission Queue"
+#~ msgstr "IOTD-Vorschlagsliste"
+
+#~ msgid ""
+#~ "Please select the images that you want to propose for IOTD consideration."
+#~ msgstr ""
+#~ "Bitte wähle die Bilder aus, die Du für die IOTD-Auswahl vorschlagen "
+#~ "möchtest."
 
 #~ msgid "Reviewers"
 #~ msgstr "Rezensenten"

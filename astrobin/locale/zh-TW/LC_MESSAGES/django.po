@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-03 21:13+0000\n"
+"POT-Creation-Date: 2021-01-24 21:14+0000\n"
 "PO-Revision-Date: 2015-12-30 10:07+0000\n"
 "Last-Translator: marmotstar <marmot.subaru@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2696,30 +2696,6 @@ msgstr ""
 msgid "Custom e-mail change request on AstroBin"
 msgstr ""
 
-msgid ""
-"Please contact us if you need any assistance, or want to report a problem, "
-"give some feedback or suggestions, or simply want to get in touch!"
-msgstr ""
-
-msgid "Please note!"
-msgstr ""
-
-msgid ""
-"By using this form, you will reach the AstroBin staff. To contact a user "
-"instead, please use the private messaging functionality. It's available by "
-"navigating to a user's gallery or an image, and selecting the \"User\" menu "
-"and then \"Send private message\"."
-msgstr ""
-
-msgid "Send"
-msgstr ""
-
-msgid "Thanks!"
-msgstr ""
-
-msgid "Thank you! Your message was sent successfully."
-msgstr ""
-
 msgid "Comments"
 msgstr ""
 
@@ -2862,6 +2838,9 @@ msgid "Skip"
 msgstr ""
 
 msgid "Enough for now"
+msgstr ""
+
+msgid "Thanks!"
 msgstr ""
 
 msgid ""
@@ -3292,6 +3271,9 @@ msgid ""
 "private non-autosubmission groups of which you are the owner or a member."
 msgstr ""
 
+msgid "Send"
+msgstr ""
+
 msgid "Sharing mode"
 msgstr ""
 
@@ -3659,16 +3641,6 @@ msgstr ""
 
 msgid "Latest from the forums"
 msgstr ""
-
-msgid "Sticky"
-msgstr ""
-
-msgid "Closed"
-msgstr ""
-
-#, fuzzy
-msgid "pages"
-msgstr "影像"
 
 msgid "Recent images"
 msgstr ""
@@ -4599,19 +4571,33 @@ msgstr ""
 msgid "Member since"
 msgstr ""
 
-msgid "This topic was closed by a moderator."
+msgid "Search all forums and comments"
 msgstr ""
 
 msgid "New topic"
+msgstr ""
+
+msgid "Please select a forum"
+msgstr ""
+
+msgid "Please note"
+msgstr ""
+
+msgid ""
+"To post a new topic, please first go to the forum that is most relevant to "
+"your topic."
+msgstr ""
+
+msgid "View forums"
+msgstr ""
+
+msgid "This topic was closed by a moderator."
 msgstr ""
 
 #, fuzzy
 #| msgid "New Zealand"
 msgid "New reply"
 msgstr "紐西蘭"
-
-msgid "Please note"
-msgstr ""
 
 #, python-format
 msgid ""
@@ -4725,6 +4711,9 @@ msgid ""
 "Editing a post is only allowed within %(minutes)s minutes after creating it."
 msgstr ""
 
+msgid "You cannot Like this post because the topic is closed."
+msgstr ""
+
 msgid "Topics you subscribe to"
 msgstr ""
 
@@ -4753,6 +4742,12 @@ msgid "Topic"
 msgstr ""
 
 msgid "Last post"
+msgstr ""
+
+msgid "Sticky"
+msgstr ""
+
+msgid "Closed"
 msgstr ""
 
 msgid "This forum does not have any topics."
@@ -5204,6 +5199,9 @@ msgid "Edit your astrophotography gear"
 msgstr ""
 
 msgid "Edit gear item"
+msgstr ""
+
+msgid "Please note!"
 msgstr ""
 
 msgid ""
@@ -5830,6 +5828,10 @@ msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#, fuzzy
+#~ msgid "pages"
+#~ msgstr "影像"
 
 #, fuzzy
 #~| msgid "Djibouti"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-03 21:13+0000\n"
+"POT-Creation-Date: 2021-01-24 21:14+0000\n"
 "PO-Revision-Date: 2014-02-05 12:48+0000\n"
 "Last-Translator: Omar <thekingosm168@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2827,32 +2827,6 @@ msgstr ""
 msgid "Custom e-mail change request on AstroBin"
 msgstr ""
 
-msgid ""
-"Please contact us if you need any assistance, or want to report a problem, "
-"give some feedback or suggestions, or simply want to get in touch!"
-msgstr ""
-"من فضلك قم بمراسلتنا إذا احتجت إلي أي مساعدة ، أو إذا أردت التبليغ عن مشكلة "
-"ما أو تعطنا بعض آراء أو مقترحاتك أو كنت تريد التواصل فقط!"
-
-msgid "Please note!"
-msgstr "لاحظ من فضلك!"
-
-msgid ""
-"By using this form, you will reach the AstroBin staff. To contact a user "
-"instead, please use the private messaging functionality. It's available by "
-"navigating to a user's gallery or an image, and selecting the \"User\" menu "
-"and then \"Send private message\"."
-msgstr ""
-
-msgid "Send"
-msgstr "إرسال"
-
-msgid "Thanks!"
-msgstr "شكرًا!"
-
-msgid "Thank you! Your message was sent successfully."
-msgstr "شكرا لك! لقد تم إرسال رسالتك بنجاح."
-
 msgid "Comments"
 msgstr "التعليقات"
 
@@ -3019,6 +2993,9 @@ msgstr "تخطّي"
 
 msgid "Enough for now"
 msgstr "يكفي هذا حالياً"
+
+msgid "Thanks!"
+msgstr "شكرًا!"
 
 msgid ""
 "Your contribute was very important, and the whole AstroBin community is "
@@ -3503,6 +3480,9 @@ msgid ""
 "private non-autosubmission groups of which you are the owner or a member."
 msgstr ""
 
+msgid "Send"
+msgstr "إرسال"
+
 msgid "Sharing mode"
 msgstr "طريقة المشاركة"
 
@@ -3934,17 +3914,6 @@ msgstr "تعديل أجهزتك للتصوير الفلكي"
 #, fuzzy
 msgid "Latest from the forums"
 msgstr "ما هو الخطأ في المنتديات؟"
-
-msgid "Sticky"
-msgstr ""
-
-#, fuzzy
-msgid "Closed"
-msgstr "إغلاق"
-
-#, fuzzy
-msgid "pages"
-msgstr "الصور"
 
 msgid "Recent images"
 msgstr "الصور الحديثة"
@@ -5081,22 +5050,37 @@ msgstr "عرض الصفحة"
 msgid "Member since"
 msgstr "عضو منذ"
 
-msgid "This topic was closed by a moderator."
+msgid "Search all forums and comments"
 msgstr ""
 
 #, fuzzy
 msgid "New topic"
 msgstr "إغلاق"
 
-#, fuzzy
-#| msgid "New Zealand"
-msgid "New reply"
-msgstr "نيوزيلندا"
+msgid "Please select a forum"
+msgstr ""
 
 #, fuzzy
 #| msgid "Please note!"
 msgid "Please note"
 msgstr "لاحظ من فضلك!"
+
+msgid ""
+"To post a new topic, please first go to the forum that is most relevant to "
+"your topic."
+msgstr ""
+
+#, fuzzy
+msgid "View forums"
+msgstr "عرض الصفحة"
+
+msgid "This topic was closed by a moderator."
+msgstr ""
+
+#, fuzzy
+#| msgid "New Zealand"
+msgid "New reply"
+msgstr "نيوزيلندا"
 
 #, python-format
 msgid ""
@@ -5218,6 +5202,9 @@ msgid ""
 "Editing a post is only allowed within %(minutes)s minutes after creating it."
 msgstr ""
 
+msgid "You cannot Like this post because the topic is closed."
+msgstr ""
+
 msgid "Topics you subscribe to"
 msgstr ""
 
@@ -5249,6 +5236,13 @@ msgstr ""
 #, fuzzy
 msgid "Last post"
 msgstr "شرق أو غرب"
+
+msgid "Sticky"
+msgstr ""
+
+#, fuzzy
+msgid "Closed"
+msgstr "إغلاق"
 
 #, fuzzy
 msgid "This forum does not have any topics."
@@ -5769,6 +5763,9 @@ msgstr "تعديل أجهزتك للتصوير الفلكي"
 
 msgid "Edit gear item"
 msgstr "تعديل الجهاز"
+
+msgid "Please note!"
+msgstr "لاحظ من فضلك!"
 
 msgid ""
 "When you add or edit the make, the name, and the properties of this product, "
@@ -6502,6 +6499,21 @@ msgstr "هل أنت متأكد؟"
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
 
+#~ msgid ""
+#~ "Please contact us if you need any assistance, or want to report a "
+#~ "problem, give some feedback or suggestions, or simply want to get in "
+#~ "touch!"
+#~ msgstr ""
+#~ "من فضلك قم بمراسلتنا إذا احتجت إلي أي مساعدة ، أو إذا أردت التبليغ عن "
+#~ "مشكلة ما أو تعطنا بعض آراء أو مقترحاتك أو كنت تريد التواصل فقط!"
+
+#~ msgid "Thank you! Your message was sent successfully."
+#~ msgstr "شكرا لك! لقد تم إرسال رسالتك بنجاح."
+
+#, fuzzy
+#~ msgid "pages"
+#~ msgstr "الصور"
+
 #, fuzzy
 #~| msgid "About"
 #~ msgctxt "approximately"
@@ -6512,10 +6524,6 @@ msgstr ""
 #~| msgid "Pixel size"
 #~ msgid "Max size"
 #~ msgstr "حجم البكسل"
-
-#, fuzzy
-#~ msgid "View full res"
-#~ msgstr "عرض الصفحة"
 
 #, fuzzy
 #~| msgid "Advanced search"

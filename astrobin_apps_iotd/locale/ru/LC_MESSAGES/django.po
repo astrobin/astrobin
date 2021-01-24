@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-03 21:27+0000\n"
-"PO-Revision-Date: 2020-11-24 17:29+0000\n"
+"POT-Creation-Date: 2021-01-24 21:27+0000\n"
+"PO-Revision-Date: 2021-01-06 19:09+0000\n"
 "Last-Translator: NadirAstro <nadir_teymurov@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -18,23 +18,24 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1606238989.000000\n"
+"X-POOTLE-MTIME: 1609960177.000000\n"
 
 #, fuzzy
-#| msgid "You cannot elect your own submission."
+#| msgid "You cannot unelect an image elected by another judge."
+msgid "You cannot unhide an image on behalf of another user."
+msgstr "Вы не можете отменить выбор изображения другого судьи."
+
 msgid "You cannot delete another user's submission."
-msgstr "Вы не можете выбрать собственную заявку."
+msgstr "Вы не можете удалить заявку другого пользователя."
 
 msgid "Sorry, it's now too late to retract this submission."
-msgstr ""
+msgstr "Извините, уже слишком поздно отменять эту заявку."
 
-#, fuzzy
-#| msgid "You cannot elect a judge's image."
 msgid "You cannot delete another user's vote."
-msgstr "Вы не можете выбирать изображения судей."
+msgstr "Вы не можете удалить голос другого пользователя."
 
 msgid "Sorry, it's now too late to retract this vote."
-msgstr ""
+msgstr "Извините, уже слишком поздно отменять этот голос."
 
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "Вы не участник списка Номинирующих для Изображения Дня."
@@ -142,21 +143,6 @@ msgstr "Вы не можете отменить выбор изображени�
 msgid "You cannot unelect a past or current IOTD."
 msgstr "Вы не можете переизбрать прошлые или текущие Изображения Дня."
 
-msgid "Submit for IOTD"
-msgstr "Номинировать на ИД"
-
-msgid ""
-"You will submit this image to the IOTD Submissions Queue. From there, a "
-"member of the IOTD Reviewers Board will consider promoting it for final "
-"evaluation from an IOTD Judge"
-msgstr ""
-"Вы номинируете это изображение в очередь заявок на Изображение Дня (ИД). "
-"После этого участник списка Рецензентов ИД рассмотрит вопрос о его "
-"продвижении для окончательной оценки Судьей ИД."
-
-msgid "Submit"
-msgstr "Номинировать"
-
 msgid "Image of the day"
 msgstr "Изображение Дня"
 
@@ -175,25 +161,6 @@ msgstr ""
 msgid "This queue is currently empty."
 msgstr "Пока эта очередь пуста."
 
-msgid "IOTD Review Queue"
-msgstr "Рецензируемая очередь ИД"
-
-msgid ""
-"Please select the images that you want to promote for final judgement by "
-"clicking on them."
-msgstr ""
-"Пожалуйста, отметьте изображения, которые вы хотите продвинуть для "
-"окончательного решения, нажав на них."
-
-msgid "IOTD Submission Queue"
-msgstr "IOTD Очередь Отправления"
-
-msgid ""
-"Please select the images that you want to propose for IOTD consideration."
-msgstr ""
-"Пожалуйста, отметьте изображения, которые вы хотите номинировать на "
-"рассмотрение в качестве ИД."
-
 msgid "Error"
 msgstr "Ошибка"
 
@@ -203,6 +170,40 @@ msgstr "Вы не можете отменить выбор ИД от друго�
 #, python-format
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr "Все места для ИД на следующие %(days)s дней уже заполнены."
+
+#~ msgid "Submit for IOTD"
+#~ msgstr "Номинировать на ИД"
+
+#~ msgid ""
+#~ "You will submit this image to the IOTD Submissions Queue. From there, a "
+#~ "member of the IOTD Reviewers Board will consider promoting it for final "
+#~ "evaluation from an IOTD Judge"
+#~ msgstr ""
+#~ "Вы номинируете это изображение в очередь заявок на Изображение Дня (ИД). "
+#~ "После этого участник списка Рецензентов ИД рассмотрит вопрос о его "
+#~ "продвижении для окончательной оценки Судьей ИД."
+
+#~ msgid "Submit"
+#~ msgstr "Номинировать"
+
+#~ msgid "IOTD Review Queue"
+#~ msgstr "Рецензируемая очередь ИД"
+
+#~ msgid ""
+#~ "Please select the images that you want to promote for final judgement by "
+#~ "clicking on them."
+#~ msgstr ""
+#~ "Пожалуйста, отметьте изображения, которые вы хотите продвинуть для "
+#~ "окончательного решения, нажав на них."
+
+#~ msgid "IOTD Submission Queue"
+#~ msgstr "IOTD Очередь Отправления"
+
+#~ msgid ""
+#~ "Please select the images that you want to propose for IOTD consideration."
+#~ msgstr ""
+#~ "Пожалуйста, отметьте изображения, которые вы хотите номинировать на "
+#~ "рассмотрение в качестве ИД."
 
 #~ msgid "Reviewers"
 #~ msgstr "Обозреватели"

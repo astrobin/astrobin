@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-03 21:13+0000\n"
+"POT-Creation-Date: 2021-01-24 21:14+0000\n"
 "PO-Revision-Date: 2020-10-26 10:36+0000\n"
 "Last-Translator: Łukasz Sujka <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2842,32 +2842,6 @@ msgstr ""
 msgid "Custom e-mail change request on AstroBin"
 msgstr "Wniosek o zmianę adresu e-mail na AstroBin"
 
-msgid ""
-"Please contact us if you need any assistance, or want to report a problem, "
-"give some feedback or suggestions, or simply want to get in touch!"
-msgstr ""
-"Skontaktuj się z nami jeżeli potrzebujesz pomocy, chcesz zgłosić problem, "
-"wysłać opinię lub sugestię."
-
-msgid "Please note!"
-msgstr "Uwaga!"
-
-msgid ""
-"By using this form, you will reach the AstroBin staff. To contact a user "
-"instead, please use the private messaging functionality. It's available by "
-"navigating to a user's gallery or an image, and selecting the \"User\" menu "
-"and then \"Send private message\"."
-msgstr ""
-
-msgid "Send"
-msgstr "Wyślij"
-
-msgid "Thanks!"
-msgstr "Dziękujemy!"
-
-msgid "Thank you! Your message was sent successfully."
-msgstr "Dziękujemy! Twoja wiadomość została wysłana."
-
 msgid "Comments"
 msgstr "Komentarze"
 
@@ -3046,6 +3020,9 @@ msgstr "Pomiń"
 
 msgid "Enough for now"
 msgstr "Na razie wystarczy"
+
+msgid "Thanks!"
+msgstr "Dziękujemy!"
 
 msgid ""
 "Your contribute was very important, and the whole AstroBin community is "
@@ -3567,6 +3544,9 @@ msgstr ""
 "Użyj tej formatki żeby wybrać jedną z Twoich grup. Lista zawiera wszystkie "
 "publiczne oraz prywatne grupy których jesteś właścicielem lub członkiem."
 
+msgid "Send"
+msgstr "Wyślij"
+
 msgid "Sharing mode"
 msgstr "Tryb udostępniania"
 
@@ -4007,15 +3987,6 @@ msgstr "Dom dla Astrofotografii"
 
 msgid "Latest from the forums"
 msgstr "Najnowsze wpisy z forum"
-
-msgid "Sticky"
-msgstr "Przyklejone"
-
-msgid "Closed"
-msgstr "Zamknięte"
-
-msgid "pages"
-msgstr "strony"
 
 msgid "Recent images"
 msgstr "Najnowsze zdjęcia"
@@ -5187,21 +5158,37 @@ msgstr "Zobacz stronę"
 msgid "Member since"
 msgstr "Członek od"
 
-msgid "This topic was closed by a moderator."
+msgid "Search all forums and comments"
 msgstr ""
 
 msgid "New topic"
 msgstr "Otwórz nowy temat"
 
-#, fuzzy
-#| msgid "New e-mail"
-msgid "New reply"
-msgstr "Nowy adres e-mail"
+msgid "Please select a forum"
+msgstr ""
 
 #, fuzzy
 #| msgid "Please note!"
 msgid "Please note"
 msgstr "Uwaga!"
+
+msgid ""
+"To post a new topic, please first go to the forum that is most relevant to "
+"your topic."
+msgstr ""
+
+#, fuzzy
+#| msgid "View all"
+msgid "View forums"
+msgstr "Zobacz wszystkie"
+
+msgid "This topic was closed by a moderator."
+msgstr ""
+
+#, fuzzy
+#| msgid "New e-mail"
+msgid "New reply"
+msgstr "Nowy adres e-mail"
 
 #, python-format
 msgid ""
@@ -5319,6 +5306,9 @@ msgid ""
 "Editing a post is only allowed within %(minutes)s minutes after creating it."
 msgstr ""
 
+msgid "You cannot Like this post because the topic is closed."
+msgstr ""
+
 msgid "Topics you subscribe to"
 msgstr "Tematy które subskrybujesz"
 
@@ -5348,6 +5338,12 @@ msgstr "Temat"
 
 msgid "Last post"
 msgstr "Ostatni wpis"
+
+msgid "Sticky"
+msgstr "Przyklejone"
+
+msgid "Closed"
+msgstr "Zamknięte"
 
 #, fuzzy
 msgid "This forum does not have any topics."
@@ -5878,6 +5874,9 @@ msgstr "Edytuj swój sprzęt astrofotograficzny"
 
 msgid "Edit gear item"
 msgstr "Edytuj informacje o sprzęcie"
+
+msgid "Please note!"
+msgstr "Uwaga!"
 
 msgid ""
 "When you add or edit the make, the name, and the properties of this product, "
@@ -6625,6 +6624,20 @@ msgstr "Czy jesteś pewny?"
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
 
+#~ msgid ""
+#~ "Please contact us if you need any assistance, or want to report a "
+#~ "problem, give some feedback or suggestions, or simply want to get in "
+#~ "touch!"
+#~ msgstr ""
+#~ "Skontaktuj się z nami jeżeli potrzebujesz pomocy, chcesz zgłosić problem, "
+#~ "wysłać opinię lub sugestię."
+
+#~ msgid "Thank you! Your message was sent successfully."
+#~ msgstr "Dziękujemy! Twoja wiadomość została wysłana."
+
+#~ msgid "pages"
+#~ msgstr "strony"
+
 #, fuzzy
 #~| msgid "About"
 #~ msgctxt "approximately"
@@ -6635,11 +6648,6 @@ msgstr ""
 #~| msgid "Pixel size"
 #~ msgid "Max size"
 #~ msgstr "Rozmiar pixela"
-
-#, fuzzy
-#~| msgid "View all"
-#~ msgid "View full res"
-#~ msgstr "Zobacz wszystkie"
 
 #, fuzzy
 #~| msgid "View your images"
