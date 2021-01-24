@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-03 21:13+0000\n"
+"POT-Creation-Date: 2021-01-24 21:14+0000\n"
 "PO-Revision-Date: 2014-01-24 09:40+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2851,33 +2851,6 @@ msgstr ""
 msgid "Custom e-mail change request on AstroBin"
 msgstr ""
 
-msgid ""
-"Please contact us if you need any assistance, or want to report a problem, "
-"give some feedback or suggestions, or simply want to get in touch!"
-msgstr ""
-"Παρακαλώ επικοινωνήστε μαζί μας αν χρειάζεστε βοήθεια, ή αν θέλετε να "
-"αναφέρετε ένα πρόβλημα, να μας δώσετε σχόλια ή προτάσεις ή αν θέλετε απλά να "
-"είστε σε επαφή!"
-
-msgid "Please note!"
-msgstr "Παρακαλώ σημειώστε!"
-
-msgid ""
-"By using this form, you will reach the AstroBin staff. To contact a user "
-"instead, please use the private messaging functionality. It's available by "
-"navigating to a user's gallery or an image, and selecting the \"User\" menu "
-"and then \"Send private message\"."
-msgstr ""
-
-msgid "Send"
-msgstr "Αποστολή"
-
-msgid "Thanks!"
-msgstr "Ευχαριστούμε!"
-
-msgid "Thank you! Your message was sent successfully."
-msgstr "Ευχαριστούμε! Το μήνυμα σας στάλθηκε με επιτυχία."
-
 msgid "Comments"
 msgstr "Σχόλια"
 
@@ -3065,6 +3038,9 @@ msgstr "Παράληψη"
 
 msgid "Enough for now"
 msgstr "Αρκετά προς το παρόν"
+
+msgid "Thanks!"
+msgstr "Ευχαριστούμε!"
 
 msgid ""
 "Your contribute was very important, and the whole AstroBin community is "
@@ -3567,6 +3543,9 @@ msgid ""
 "private non-autosubmission groups of which you are the owner or a member."
 msgstr ""
 
+msgid "Send"
+msgstr "Αποστολή"
+
 msgid "Sharing mode"
 msgstr "Τρόπος κοινοποίησης"
 
@@ -4017,17 +3996,6 @@ msgstr "Επεξεργαστία του εξοπλισμού αστροφωτο�
 #, fuzzy
 msgid "Latest from the forums"
 msgstr "Ποιο είναι το κακό με τα forums;"
-
-msgid "Sticky"
-msgstr ""
-
-#, fuzzy
-msgid "Closed"
-msgstr "Κλείσιμο"
-
-#, fuzzy
-msgid "pages"
-msgstr "Εικόνες"
 
 msgid "Recent images"
 msgstr "Πρόσφατες εικόνες"
@@ -5219,22 +5187,37 @@ msgstr "Προβολή σελίδας"
 msgid "Member since"
 msgstr "Μέλος από τις"
 
-msgid "This topic was closed by a moderator."
+msgid "Search all forums and comments"
 msgstr ""
 
 #, fuzzy
 msgid "New topic"
 msgstr "Κλείσιμο"
 
-#, fuzzy
-#| msgid "New Zealand"
-msgid "New reply"
-msgstr "Νέα Ζηλανδία"
+msgid "Please select a forum"
+msgstr ""
 
 #, fuzzy
 #| msgid "Please note!"
 msgid "Please note"
 msgstr "Παρακαλώ σημειώστε!"
+
+msgid ""
+"To post a new topic, please first go to the forum that is most relevant to "
+"your topic."
+msgstr ""
+
+#, fuzzy
+msgid "View forums"
+msgstr "Προβολή σελίδας"
+
+msgid "This topic was closed by a moderator."
+msgstr ""
+
+#, fuzzy
+#| msgid "New Zealand"
+msgid "New reply"
+msgstr "Νέα Ζηλανδία"
 
 #, python-format
 msgid ""
@@ -5358,6 +5341,9 @@ msgid ""
 "Editing a post is only allowed within %(minutes)s minutes after creating it."
 msgstr ""
 
+msgid "You cannot Like this post because the topic is closed."
+msgstr ""
+
 msgid "Topics you subscribe to"
 msgstr ""
 
@@ -5389,6 +5375,13 @@ msgstr ""
 #, fuzzy
 msgid "Last post"
 msgstr "Ανατολικά ή Δυτικά"
+
+msgid "Sticky"
+msgstr ""
+
+#, fuzzy
+msgid "Closed"
+msgstr "Κλείσιμο"
 
 #, fuzzy
 msgid "This forum does not have any topics."
@@ -5928,6 +5921,9 @@ msgstr "Επεξεργαστία του εξοπλισμού αστροφωτο�
 
 msgid "Edit gear item"
 msgstr "Επεξεργασία αντικειμένου εξοπλισμού"
+
+msgid "Please note!"
+msgstr "Παρακαλώ σημειώστε!"
 
 msgid ""
 "When you add or edit the make, the name, and the properties of this product, "
@@ -6676,6 +6672,22 @@ msgstr "Είστε σίγουροι;"
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
 
+#~ msgid ""
+#~ "Please contact us if you need any assistance, or want to report a "
+#~ "problem, give some feedback or suggestions, or simply want to get in "
+#~ "touch!"
+#~ msgstr ""
+#~ "Παρακαλώ επικοινωνήστε μαζί μας αν χρειάζεστε βοήθεια, ή αν θέλετε να "
+#~ "αναφέρετε ένα πρόβλημα, να μας δώσετε σχόλια ή προτάσεις ή αν θέλετε απλά "
+#~ "να είστε σε επαφή!"
+
+#~ msgid "Thank you! Your message was sent successfully."
+#~ msgstr "Ευχαριστούμε! Το μήνυμα σας στάλθηκε με επιτυχία."
+
+#, fuzzy
+#~ msgid "pages"
+#~ msgstr "Εικόνες"
+
 #, fuzzy
 #~| msgid "About"
 #~ msgctxt "approximately"
@@ -6686,10 +6698,6 @@ msgstr ""
 #~| msgid "Pixel size"
 #~ msgid "Max size"
 #~ msgstr "Μέγεθος πίξελ"
-
-#, fuzzy
-#~ msgid "View full res"
-#~ msgstr "Προβολή σελίδας"
 
 #, fuzzy
 #~| msgid "View your images"

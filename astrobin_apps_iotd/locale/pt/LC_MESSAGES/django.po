@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-03 21:27+0000\n"
+"POT-Creation-Date: 2021-01-24 21:27+0000\n"
 "PO-Revision-Date: 2020-05-30 21:25-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,6 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3.1\n"
+
+#, fuzzy
+#| msgid "You cannot unelect an image elected by another judge."
+msgid "You cannot unhide an image on behalf of another user."
+msgstr "Você não pode deseleger uma imagem eleita por outro juiz."
 
 #, fuzzy
 #| msgid "You cannot elect your own submission."
@@ -142,21 +147,6 @@ msgstr "Você não pode deseleger uma imagem eleita por outro juiz."
 msgid "You cannot unelect a past or current IOTD."
 msgstr "Você não pode deseleger uma IDD passada ou atual."
 
-msgid "Submit for IOTD"
-msgstr "Enviar para IDD"
-
-msgid ""
-"You will submit this image to the IOTD Submissions Queue. From there, a "
-"member of the IOTD Reviewers Board will consider promoting it for final "
-"evaluation from an IOTD Judge"
-msgstr ""
-"Você enviará esta imagem para a fila de envios da IDD. A partir daí, um "
-"membro do Quadro de Revisores da IDD considerará promovê-la para a avaliação "
-"final de um Juiz da IDD"
-
-msgid "Submit"
-msgstr "Enviar"
-
 msgid "Image of the day"
 msgstr "Imagem do dia"
 
@@ -175,25 +165,6 @@ msgstr ""
 msgid "This queue is currently empty."
 msgstr "Esta fila está atualmente vazia."
 
-msgid "IOTD Review Queue"
-msgstr "Fila de Revisão da IDD"
-
-msgid ""
-"Please select the images that you want to promote for final judgement by "
-"clicking on them."
-msgstr ""
-"Por favor selecione as imagens que você deseja promover para julgamento "
-"final clicando nelas."
-
-msgid "IOTD Submission Queue"
-msgstr "Fila de Envio da IDD"
-
-msgid ""
-"Please select the images that you want to propose for IOTD consideration."
-msgstr ""
-"Por favor selecione as imagens que você deseja propor para serem "
-"consideradas como IDD."
-
 msgid "Error"
 msgstr "Erro"
 
@@ -204,6 +175,40 @@ msgstr "Você não pode deseleger uma IDD eleita por outro juiz."
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr ""
 "Todos os espaços de IDD para os próximos %(days)s dias já estão preenchidos."
+
+#~ msgid "Submit for IOTD"
+#~ msgstr "Enviar para IDD"
+
+#~ msgid ""
+#~ "You will submit this image to the IOTD Submissions Queue. From there, a "
+#~ "member of the IOTD Reviewers Board will consider promoting it for final "
+#~ "evaluation from an IOTD Judge"
+#~ msgstr ""
+#~ "Você enviará esta imagem para a fila de envios da IDD. A partir daí, um "
+#~ "membro do Quadro de Revisores da IDD considerará promovê-la para a "
+#~ "avaliação final de um Juiz da IDD"
+
+#~ msgid "Submit"
+#~ msgstr "Enviar"
+
+#~ msgid "IOTD Review Queue"
+#~ msgstr "Fila de Revisão da IDD"
+
+#~ msgid ""
+#~ "Please select the images that you want to promote for final judgement by "
+#~ "clicking on them."
+#~ msgstr ""
+#~ "Por favor selecione as imagens que você deseja promover para julgamento "
+#~ "final clicando nelas."
+
+#~ msgid "IOTD Submission Queue"
+#~ msgstr "Fila de Envio da IDD"
+
+#~ msgid ""
+#~ "Please select the images that you want to propose for IOTD consideration."
+#~ msgstr ""
+#~ "Por favor selecione as imagens que você deseja propor para serem "
+#~ "consideradas como IDD."
 
 #~ msgid "Reviewers"
 #~ msgstr "Revisores"

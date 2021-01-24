@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-03 21:27+0000\n"
+"POT-Creation-Date: 2021-01-24 21:27+0000\n"
 "PO-Revision-Date: 2020-05-18 11:06+0000\n"
 "Last-Translator: Milosz Wasilewski <milosz.wasilewski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,11 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
 "X-POOTLE-MTIME: 1589799990.000000\n"
+
+#, fuzzy
+#| msgid "You cannot unelect an image elected by another judge."
+msgid "You cannot unhide an image on behalf of another user."
+msgstr "Nie możesz odznaczyć zdjęcia wybranego przez innego jurora."
 
 #, fuzzy
 #| msgid "You cannot elect your own submission."
@@ -145,20 +150,6 @@ msgstr "Nie możesz odznaczyć zdjęcia wybranego przez innego jurora."
 msgid "You cannot unelect a past or current IOTD."
 msgstr "Nie możesz odznaczyć bieżącego lub poprzednich zdjęć IOTD"
 
-msgid "Submit for IOTD"
-msgstr "Wyślij jako IOTD"
-
-msgid ""
-"You will submit this image to the IOTD Submissions Queue. From there, a "
-"member of the IOTD Reviewers Board will consider promoting it for final "
-"evaluation from an IOTD Judge"
-msgstr ""
-"Wyślesz to zdjęcie do kolejki. Tam członek wybierający IOTD rozważy "
-"przesłanie go do finałowej oceny i wyboru IOTD"
-
-msgid "Submit"
-msgstr "Wyślij"
-
 msgid "Image of the day"
 msgstr "Zdjęcie dnia"
 
@@ -177,22 +168,6 @@ msgstr ""
 msgid "This queue is currently empty."
 msgstr "Ta kolejka jest obecnie pusta."
 
-msgid "IOTD Review Queue"
-msgstr "Kolejka pretendentów do IOTD"
-
-msgid ""
-"Please select the images that you want to promote for final judgement by "
-"clicking on them."
-msgstr "Proszę zaznaczyć zdjęcia do finalnej oceny przez kliknięcie w nie."
-
-msgid "IOTD Submission Queue"
-msgstr "Kolejka zdjęć zgłoszonych do przeglądu w ramach IOTD"
-
-msgid ""
-"Please select the images that you want to propose for IOTD consideration."
-msgstr ""
-"Wybierz zdjęcia które proponujesz do wyboru jako IOTD przez kliknięcie w nie."
-
 msgid "Error"
 msgstr "Błąd"
 
@@ -204,6 +179,37 @@ msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr ""
 "Wszystkie miejsca do następnego wyboru IOTD na następne %(days)s dni są już "
 "zapełnione"
+
+#~ msgid "Submit for IOTD"
+#~ msgstr "Wyślij jako IOTD"
+
+#~ msgid ""
+#~ "You will submit this image to the IOTD Submissions Queue. From there, a "
+#~ "member of the IOTD Reviewers Board will consider promoting it for final "
+#~ "evaluation from an IOTD Judge"
+#~ msgstr ""
+#~ "Wyślesz to zdjęcie do kolejki. Tam członek wybierający IOTD rozważy "
+#~ "przesłanie go do finałowej oceny i wyboru IOTD"
+
+#~ msgid "Submit"
+#~ msgstr "Wyślij"
+
+#~ msgid "IOTD Review Queue"
+#~ msgstr "Kolejka pretendentów do IOTD"
+
+#~ msgid ""
+#~ "Please select the images that you want to promote for final judgement by "
+#~ "clicking on them."
+#~ msgstr "Proszę zaznaczyć zdjęcia do finalnej oceny przez kliknięcie w nie."
+
+#~ msgid "IOTD Submission Queue"
+#~ msgstr "Kolejka zdjęć zgłoszonych do przeglądu w ramach IOTD"
+
+#~ msgid ""
+#~ "Please select the images that you want to propose for IOTD consideration."
+#~ msgstr ""
+#~ "Wybierz zdjęcia które proponujesz do wyboru jako IOTD przez kliknięcie w "
+#~ "nie."
 
 #~ msgid "Reviewers"
 #~ msgstr "Recenzenci"
