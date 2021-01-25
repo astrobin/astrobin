@@ -186,7 +186,7 @@ urlpatterns += [
     url(r'^forum/', include('pybb.urls', namespace='pybb')),
     url(r'hitcount/', include('hitcount.urls', namespace='hitcount')),
     url(r'^persistent_messages/', include('persistent_messages.urls')),
-    url(r'^subscriptions/paypal/$', include('paypal.standard.ipn.urls')),
+    url(r'^subscriptions/paypal/', include('paypal.standard.ipn.urls')),
     url(r'^subscriptions/', RedirectView.as_view(url="https://app.astrobin.com/subscriptions/options", permanent=True)),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^bouncy/', include('django_bouncy.urls')),

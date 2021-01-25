@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-03 21:13+0000\n"
+"POT-Creation-Date: 2021-01-24 21:14+0000\n"
 "PO-Revision-Date: 2015-12-29 23:52+0000\n"
 "Last-Translator: bilgebay <bilgebay@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2818,33 +2818,6 @@ msgstr ""
 msgid "Custom e-mail change request on AstroBin"
 msgstr ""
 
-msgid ""
-"Please contact us if you need any assistance, or want to report a problem, "
-"give some feedback or suggestions, or simply want to get in touch!"
-msgstr ""
-"Her hangi bir desteğe ihtiyacınız varsa ya da bir problem raporlamak, geri "
-"bildirim ya da öneri vermek ya da basitçe temasa geçmek istiyorsanız, lütfen "
-"bizimle iletişime geçin."
-
-msgid "Please note!"
-msgstr ""
-
-msgid ""
-"By using this form, you will reach the AstroBin staff. To contact a user "
-"instead, please use the private messaging functionality. It's available by "
-"navigating to a user's gallery or an image, and selecting the \"User\" menu "
-"and then \"Send private message\"."
-msgstr ""
-
-msgid "Send"
-msgstr "Gönder"
-
-msgid "Thanks!"
-msgstr "Teşekkürler!"
-
-msgid "Thank you! Your message was sent successfully."
-msgstr "Teşekkürler! Mesajınız başarıyla iletildi."
-
 msgid "Comments"
 msgstr "Yorumlar"
 
@@ -2990,6 +2963,9 @@ msgstr "Atla"
 
 msgid "Enough for now"
 msgstr "Şimdilik yeterli"
+
+msgid "Thanks!"
+msgstr "Teşekkürler!"
 
 msgid ""
 "Your contribute was very important, and the whole AstroBin community is "
@@ -3474,6 +3450,9 @@ msgid ""
 "private non-autosubmission groups of which you are the owner or a member."
 msgstr ""
 
+msgid "Send"
+msgstr "Gönder"
+
 msgid "Sharing mode"
 msgstr "Paylaşım modu"
 
@@ -3919,16 +3898,6 @@ msgstr "Astrofotoğrafi ekipmanlarınızı düzenleyin"
 
 msgid "Latest from the forums"
 msgstr ""
-
-msgid "Sticky"
-msgstr ""
-
-msgid "Closed"
-msgstr ""
-
-#, fuzzy
-msgid "pages"
-msgstr "Resim sayısı"
 
 msgid "Recent images"
 msgstr "Yeni resimler"
@@ -5106,19 +5075,34 @@ msgstr "Sayfaya gözat"
 msgid "Member since"
 msgstr "Tarihinden beri üye"
 
-msgid "This topic was closed by a moderator."
+msgid "Search all forums and comments"
 msgstr ""
 
 msgid "New topic"
+msgstr ""
+
+msgid "Please select a forum"
+msgstr ""
+
+msgid "Please note"
+msgstr ""
+
+msgid ""
+"To post a new topic, please first go to the forum that is most relevant to "
+"your topic."
+msgstr ""
+
+#, fuzzy
+msgid "View forums"
+msgstr "Sayfaya gözat"
+
+msgid "This topic was closed by a moderator."
 msgstr ""
 
 #, fuzzy
 #| msgid "New Zealand"
 msgid "New reply"
 msgstr "Yeni Zelanda"
-
-msgid "Please note"
-msgstr ""
 
 #, python-format
 msgid ""
@@ -5238,6 +5222,9 @@ msgid ""
 "Editing a post is only allowed within %(minutes)s minutes after creating it."
 msgstr ""
 
+msgid "You cannot Like this post because the topic is closed."
+msgstr ""
+
 msgid "Topics you subscribe to"
 msgstr ""
 
@@ -5268,6 +5255,12 @@ msgstr ""
 #, fuzzy
 msgid "Last post"
 msgstr "Doğu ya da Batı"
+
+msgid "Sticky"
+msgstr ""
+
+msgid "Closed"
+msgstr ""
 
 #, fuzzy
 msgid "This forum does not have any topics."
@@ -5789,6 +5782,9 @@ msgstr "Astrofotoğrafi ekipmanlarınızı düzenleyin"
 #, fuzzy
 msgid "Edit gear item"
 msgstr "Kullanılan donanımları düzenle"
+
+msgid "Please note!"
+msgstr ""
 
 msgid ""
 "When you add or edit the make, the name, and the properties of this product, "
@@ -6516,6 +6512,22 @@ msgstr ""
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
 
+#~ msgid ""
+#~ "Please contact us if you need any assistance, or want to report a "
+#~ "problem, give some feedback or suggestions, or simply want to get in "
+#~ "touch!"
+#~ msgstr ""
+#~ "Her hangi bir desteğe ihtiyacınız varsa ya da bir problem raporlamak, "
+#~ "geri bildirim ya da öneri vermek ya da basitçe temasa geçmek "
+#~ "istiyorsanız, lütfen bizimle iletişime geçin."
+
+#~ msgid "Thank you! Your message was sent successfully."
+#~ msgstr "Teşekkürler! Mesajınız başarıyla iletildi."
+
+#, fuzzy
+#~ msgid "pages"
+#~ msgstr "Resim sayısı"
+
 #, fuzzy
 #~| msgid "About"
 #~ msgctxt "approximately"
@@ -6526,10 +6538,6 @@ msgstr ""
 #~| msgid "Pixel size"
 #~ msgid "Max size"
 #~ msgstr "Piksel boyutu"
-
-#, fuzzy
-#~ msgid "View full res"
-#~ msgstr "Sayfaya gözat"
 
 #, fuzzy
 #~| msgid "View your images"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-03 21:13+0000\n"
+"POT-Creation-Date: 2021-01-24 21:14+0000\n"
 "PO-Revision-Date: 2015-12-30 11:27+0000\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -2841,33 +2841,6 @@ msgstr ""
 msgid "Custom e-mail change request on AstroBin"
 msgstr ""
 
-msgid ""
-"Please contact us if you need any assistance, or want to report a problem, "
-"give some feedback or suggestions, or simply want to get in touch!"
-msgstr ""
-"Gelieve ons te contacteren voor eender welke vraag om hulp, eender welk "
-"probleem, voor feedback of suggesties, of gewoon om te vertellen wat je "
-"kwijt wil!"
-
-msgid "Please note!"
-msgstr "Attentie!"
-
-msgid ""
-"By using this form, you will reach the AstroBin staff. To contact a user "
-"instead, please use the private messaging functionality. It's available by "
-"navigating to a user's gallery or an image, and selecting the \"User\" menu "
-"and then \"Send private message\"."
-msgstr ""
-
-msgid "Send"
-msgstr "Verstuur"
-
-msgid "Thanks!"
-msgstr "Bedankt!"
-
-msgid "Thank you! Your message was sent successfully."
-msgstr "Dank u! Je vraag werd met succes verzonden."
-
 msgid "Comments"
 msgstr "Commentaar"
 
@@ -3059,6 +3032,9 @@ msgstr "Overslaan"
 
 msgid "Enough for now"
 msgstr "Genoeg voor vandaag"
+
+msgid "Thanks!"
+msgstr "Bedankt!"
 
 msgid ""
 "Your contribute was very important, and the whole AstroBin community is "
@@ -3556,6 +3532,9 @@ msgid ""
 "private non-autosubmission groups of which you are the owner or a member."
 msgstr ""
 
+msgid "Send"
+msgstr "Verstuur"
+
 msgid "Sharing mode"
 msgstr "Manier van delen"
 
@@ -4007,15 +3986,6 @@ msgstr "Wijzig je astrofoto materiaal"
 
 msgid "Latest from the forums"
 msgstr "Laatste nieuws van de fora"
-
-msgid "Sticky"
-msgstr "Vastgezet"
-
-msgid "Closed"
-msgstr "Gesloten"
-
-msgid "pages"
-msgstr "pagina's"
 
 msgid "Recent images"
 msgstr "Recente foto's"
@@ -5227,22 +5197,37 @@ msgstr "Bekijk pagina"
 msgid "Member since"
 msgstr "Lid sinds"
 
-msgid "This topic was closed by a moderator."
+msgid "Search all forums and comments"
 msgstr ""
 
 #, fuzzy
 msgid "New topic"
 msgstr "Onderwerp openen"
 
-#, fuzzy
-#| msgid "New Zealand"
-msgid "New reply"
-msgstr "Nieuw-Zeeland"
+msgid "Please select a forum"
+msgstr ""
 
 #, fuzzy
 #| msgid "Please note!"
 msgid "Please note"
 msgstr "Attentie!"
+
+msgid ""
+"To post a new topic, please first go to the forum that is most relevant to "
+"your topic."
+msgstr ""
+
+#, fuzzy
+msgid "View forums"
+msgstr "Bekijk pagina"
+
+msgid "This topic was closed by a moderator."
+msgstr ""
+
+#, fuzzy
+#| msgid "New Zealand"
+msgid "New reply"
+msgstr "Nieuw-Zeeland"
 
 #, python-format
 msgid ""
@@ -5362,6 +5347,9 @@ msgid ""
 "Editing a post is only allowed within %(minutes)s minutes after creating it."
 msgstr ""
 
+msgid "You cannot Like this post because the topic is closed."
+msgstr ""
+
 msgid "Topics you subscribe to"
 msgstr "Onderwerpen waarop je je hebt geabonneerd"
 
@@ -5391,6 +5379,12 @@ msgstr "Onderwerp"
 
 msgid "Last post"
 msgstr "Laatste bericht"
+
+msgid "Sticky"
+msgstr "Vastgezet"
+
+msgid "Closed"
+msgstr "Gesloten"
 
 #, fuzzy
 msgid "This forum does not have any topics."
@@ -5936,6 +5930,9 @@ msgstr "Wijzig je astrofoto materiaal"
 
 msgid "Edit gear item"
 msgstr "Wijzigen van het materiaal"
+
+msgid "Please note!"
+msgstr "Attentie!"
 
 msgid ""
 "When you add or edit the make, the name, and the properties of this product, "
@@ -6682,6 +6679,21 @@ msgstr "Ben je zeker?"
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
 
+#~ msgid ""
+#~ "Please contact us if you need any assistance, or want to report a "
+#~ "problem, give some feedback or suggestions, or simply want to get in "
+#~ "touch!"
+#~ msgstr ""
+#~ "Gelieve ons te contacteren voor eender welke vraag om hulp, eender welk "
+#~ "probleem, voor feedback of suggesties, of gewoon om te vertellen wat je "
+#~ "kwijt wil!"
+
+#~ msgid "Thank you! Your message was sent successfully."
+#~ msgstr "Dank u! Je vraag werd met succes verzonden."
+
+#~ msgid "pages"
+#~ msgstr "pagina's"
+
 #, fuzzy
 #~| msgid "About"
 #~ msgctxt "approximately"
@@ -6692,10 +6704,6 @@ msgstr ""
 #~| msgid "Pixel size"
 #~ msgid "Max size"
 #~ msgstr "Pixel grootte"
-
-#, fuzzy
-#~ msgid "View full res"
-#~ msgstr "Bekijk pagina"
 
 #, fuzzy
 #~| msgid "View your images"

@@ -123,13 +123,13 @@ class IotdDismissedImage(models.Model):
 
 
 class TopPickNominationsArchive(models.Model):
-    image = models.ForeignKey(Image, on_delete=models.CASCADE, unique=True)
+    image = models.OneToOneField(Image, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['-image__published']
 
 class TopPickArchive(models.Model):
-    image = models.ForeignKey(Image, on_delete=models.CASCADE, unique=True)
+    image = models.OneToOneField(Image, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['-image__published']

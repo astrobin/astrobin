@@ -5,3 +5,4 @@ import "./login";
 import "./register";
 import "./image-upload";
 import "./utils";
+import "./image";

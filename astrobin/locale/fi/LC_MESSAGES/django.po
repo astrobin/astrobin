@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-03 21:13+0000\n"
+"POT-Creation-Date: 2021-01-24 21:14+0000\n"
 "PO-Revision-Date: 2015-12-30 10:50+0000\n"
 "Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -2827,32 +2827,6 @@ msgstr ""
 msgid "Custom e-mail change request on AstroBin"
 msgstr ""
 
-msgid ""
-"Please contact us if you need any assistance, or want to report a problem, "
-"give some feedback or suggestions, or simply want to get in touch!"
-msgstr ""
-"Ota meihin yhteyttä jos tarvitset apua, tai haluat ilmoittaa ongelmasta, "
-"antaa palautetta tai ehdotuksia, tai jos sinulla on mitä tahansa muuta asiaa!"
-
-msgid "Please note!"
-msgstr "Huomaa!"
-
-msgid ""
-"By using this form, you will reach the AstroBin staff. To contact a user "
-"instead, please use the private messaging functionality. It's available by "
-"navigating to a user's gallery or an image, and selecting the \"User\" menu "
-"and then \"Send private message\"."
-msgstr ""
-
-msgid "Send"
-msgstr "Lähetä"
-
-msgid "Thanks!"
-msgstr "Kiitokset!"
-
-msgid "Thank you! Your message was sent successfully."
-msgstr "Kiitos!  Viestisi lähetettiin onnistuneesti."
-
 msgid "Comments"
 msgstr "Kommentit"
 
@@ -3037,6 +3011,9 @@ msgstr "Hyppää yli"
 
 msgid "Enough for now"
 msgstr "Lopeta toistaiseksi"
+
+msgid "Thanks!"
+msgstr "Kiitokset!"
 
 msgid ""
 "Your contribute was very important, and the whole AstroBin community is "
@@ -3536,6 +3513,9 @@ msgid ""
 "private non-autosubmission groups of which you are the owner or a member."
 msgstr ""
 
+msgid "Send"
+msgstr "Lähetä"
+
 msgid "Sharing mode"
 msgstr "Jakamistapa"
 
@@ -3978,17 +3958,6 @@ msgstr "Muokkaa tähtikuvauslaitteitasi"
 #, fuzzy
 msgid "Latest from the forums"
 msgstr "Mitä vikaa foorumeissa on?"
-
-msgid "Sticky"
-msgstr ""
-
-#, fuzzy
-msgid "Closed"
-msgstr "Sulje"
-
-#, fuzzy
-msgid "pages"
-msgstr "Kuvia"
 
 msgid "Recent images"
 msgstr "Uusimpia kuvia"
@@ -5149,22 +5118,37 @@ msgstr "Katso sivu"
 msgid "Member since"
 msgstr "Liittynyt"
 
-msgid "This topic was closed by a moderator."
+msgid "Search all forums and comments"
 msgstr ""
 
 #, fuzzy
 msgid "New topic"
 msgstr "Sulje"
 
-#, fuzzy
-#| msgid "New Zealand"
-msgid "New reply"
-msgstr "Uusi Seelanti"
+msgid "Please select a forum"
+msgstr ""
 
 #, fuzzy
 #| msgid "Please note!"
 msgid "Please note"
 msgstr "Huomaa!"
+
+msgid ""
+"To post a new topic, please first go to the forum that is most relevant to "
+"your topic."
+msgstr ""
+
+#, fuzzy
+msgid "View forums"
+msgstr "Katso sivu"
+
+msgid "This topic was closed by a moderator."
+msgstr ""
+
+#, fuzzy
+#| msgid "New Zealand"
+msgid "New reply"
+msgstr "Uusi Seelanti"
 
 #, python-format
 msgid ""
@@ -5289,6 +5273,9 @@ msgid ""
 "Editing a post is only allowed within %(minutes)s minutes after creating it."
 msgstr ""
 
+msgid "You cannot Like this post because the topic is closed."
+msgstr ""
+
 msgid "Topics you subscribe to"
 msgstr ""
 
@@ -5320,6 +5307,13 @@ msgstr ""
 #, fuzzy
 msgid "Last post"
 msgstr "Itä tai länsi"
+
+msgid "Sticky"
+msgstr ""
+
+#, fuzzy
+msgid "Closed"
+msgstr "Sulje"
 
 #, fuzzy
 msgid "This forum does not have any topics."
@@ -5856,6 +5850,9 @@ msgstr "Muokkaa tähtikuvauslaitteitasi"
 #, fuzzy
 msgid "Edit gear item"
 msgstr "Muokkaa käytettyjä laitteita"
+
+msgid "Please note!"
+msgstr "Huomaa!"
 
 msgid ""
 "When you add or edit the make, the name, and the properties of this product, "
@@ -6595,6 +6592,22 @@ msgstr "Oletko varma?"
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
 
+#~ msgid ""
+#~ "Please contact us if you need any assistance, or want to report a "
+#~ "problem, give some feedback or suggestions, or simply want to get in "
+#~ "touch!"
+#~ msgstr ""
+#~ "Ota meihin yhteyttä jos tarvitset apua, tai haluat ilmoittaa ongelmasta, "
+#~ "antaa palautetta tai ehdotuksia, tai jos sinulla on mitä tahansa muuta "
+#~ "asiaa!"
+
+#~ msgid "Thank you! Your message was sent successfully."
+#~ msgstr "Kiitos!  Viestisi lähetettiin onnistuneesti."
+
+#, fuzzy
+#~ msgid "pages"
+#~ msgstr "Kuvia"
+
 #, fuzzy
 #~| msgid "About"
 #~ msgctxt "approximately"
@@ -6605,10 +6618,6 @@ msgstr ""
 #~| msgid "Pixel size"
 #~ msgid "Max size"
 #~ msgstr "Pikselin koko"
-
-#, fuzzy
-#~ msgid "View full res"
-#~ msgstr "Katso sivu"
 
 #, fuzzy
 #~| msgid "View your images"

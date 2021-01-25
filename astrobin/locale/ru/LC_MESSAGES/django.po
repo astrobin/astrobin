@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-03 21:13+0000\n"
-"PO-Revision-Date: 2020-12-22 08:19+0000\n"
+"POT-Creation-Date: 2021-01-24 21:14+0000\n"
+"PO-Revision-Date: 2021-01-06 19:13+0000\n"
 "Last-Translator: NadirAstro <nadir_teymurov@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1608625160.000000\n"
+"X-POOTLE-MTIME: 1609960434.000000\n"
 
 msgid "United Kingdom"
 msgstr "Великобритания"
@@ -2900,36 +2900,6 @@ msgstr ""
 msgid "Custom e-mail change request on AstroBin"
 msgstr "Пользовательский запрос на изменение e-mail на AstroBin"
 
-msgid ""
-"Please contact us if you need any assistance, or want to report a problem, "
-"give some feedback or suggestions, or simply want to get in touch!"
-msgstr ""
-"Пожалуйста, свяжитесь с нами если вам нужна помощь, или вы хотите сообщить о "
-"проблеме, оставить отзыв или предложение, или просто хотите законтачить!"
-
-msgid "Please note!"
-msgstr "Пожалуйста, запишите!"
-
-msgid ""
-"By using this form, you will reach the AstroBin staff. To contact a user "
-"instead, please use the private messaging functionality. It's available by "
-"navigating to a user's gallery or an image, and selecting the \"User\" menu "
-"and then \"Send private message\"."
-msgstr ""
-"Используя эту форму, вы свяжетесь с персоналом AstroBin. Чтобы связаться с "
-"пользователем, используйте функцию личных сообщений. Это доступно в галерее "
-"пользователя или любое изображение, и выбрав меню «Пользователь», а затем "
-"«Отправить личное сообщение»."
-
-msgid "Send"
-msgstr "Отправить"
-
-msgid "Thanks!"
-msgstr "Спасибо!"
-
-msgid "Thank you! Your message was sent successfully."
-msgstr "Спасибо! Ваше сообщение было успешно отправлено!"
-
 msgid "Comments"
 msgstr "Комментарии"
 
@@ -3115,6 +3085,9 @@ msgstr "Пропустить"
 
 msgid "Enough for now"
 msgstr "Достаточно на сегодня"
+
+msgid "Thanks!"
+msgstr "Спасибо!"
 
 msgid ""
 "Your contribute was very important, and the whole AstroBin community is "
@@ -3598,6 +3571,9 @@ msgstr ""
 "все открытые и закрытые группы без автодобавления в которых вы являетесь "
 "владельцем или участником."
 
+msgid "Send"
+msgstr "Отправить"
+
 msgid "Sharing mode"
 msgstr "Способ поделиться"
 
@@ -4029,15 +4005,6 @@ msgstr "Уголок Астрофотографии"
 
 msgid "Latest from the forums"
 msgstr "Новое на форуме"
-
-msgid "Sticky"
-msgstr "Прикрепленный"
-
-msgid "Closed"
-msgstr "Закрыто"
-
-msgid "pages"
-msgstr "страницы"
 
 msgid "Recent images"
 msgstr "Недавние изображения"
@@ -5211,17 +5178,33 @@ msgstr "Подробнее"
 msgid "Member since"
 msgstr "Давность регистрации"
 
-msgid "This topic was closed by a moderator."
-msgstr "Тема закрыта модератором."
+msgid "Search all forums and comments"
+msgstr ""
 
 msgid "New topic"
 msgstr "Создать тему"
 
-msgid "New reply"
-msgstr "Новый ответ"
+msgid "Please select a forum"
+msgstr ""
 
 msgid "Please note"
 msgstr "Пожалуйста, обратите внимание"
+
+msgid ""
+"To post a new topic, please first go to the forum that is most relevant to "
+"your topic."
+msgstr ""
+
+#, fuzzy
+#| msgid "View full res"
+msgid "View forums"
+msgstr "Полный размер"
+
+msgid "This topic was closed by a moderator."
+msgstr "Тема закрыта модератором."
+
+msgid "New reply"
+msgstr "Новый ответ"
 
 #, python-format
 msgid ""
@@ -5346,6 +5329,9 @@ msgstr ""
 "Редактировать сообщение можно только в течение %(minutes)s минут после его "
 "создания."
 
+msgid "You cannot Like this post because the topic is closed."
+msgstr ""
+
 msgid "Topics you subscribe to"
 msgstr "Темы, на которые вы подписаны"
 
@@ -5375,6 +5361,12 @@ msgstr "Темы"
 
 msgid "Last post"
 msgstr "Последнее сообщение"
+
+msgid "Sticky"
+msgstr "Прикрепленный"
+
+msgid "Closed"
+msgstr "Закрыто"
 
 msgid "This forum does not have any topics."
 msgstr "В этом форуме нет ни одной темы."
@@ -5922,6 +5914,9 @@ msgstr "Править ваше астрофотографическое обо�
 msgid "Edit gear item"
 msgstr "Править элемент оборудования"
 
+msgid "Please note!"
+msgstr "Пожалуйста, запишите!"
+
 msgid ""
 "When you add or edit the make, the name, and the properties of this product, "
 "the data is global and shared between all AstroBin users. Do not write any "
@@ -5973,10 +5968,8 @@ msgstr "AstroBin не делится вашим местоположением �
 msgid "Import from Flickr"
 msgstr "Импортировать из Flickr"
 
-#, fuzzy
-#| msgid "Change your e-mail"
 msgid "Change your username"
-msgstr "Изменить ваш e-mail"
+msgstr "Изменить вашего пользователя"
 
 msgid "Edit your site preferences"
 msgstr "Редактируйте настройки вашего сайта"
@@ -6572,13 +6565,39 @@ msgstr ""
 "тем больше времени потребуется."
 
 msgid "Referral code (optional)"
-msgstr ""
+msgstr "Код реферала (опционально)"
 
 msgid "Are you a robot?"
 msgstr "Вы робот?"
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr "Извините, это имя пользователя уже существует с другим регистром."
+
+#~ msgid ""
+#~ "Please contact us if you need any assistance, or want to report a "
+#~ "problem, give some feedback or suggestions, or simply want to get in "
+#~ "touch!"
+#~ msgstr ""
+#~ "Пожалуйста, свяжитесь с нами если вам нужна помощь, или вы хотите "
+#~ "сообщить о проблеме, оставить отзыв или предложение, или просто хотите "
+#~ "законтачить!"
+
+#~ msgid ""
+#~ "By using this form, you will reach the AstroBin staff. To contact a user "
+#~ "instead, please use the private messaging functionality. It's available "
+#~ "by navigating to a user's gallery or an image, and selecting the \"User\" "
+#~ "menu and then \"Send private message\"."
+#~ msgstr ""
+#~ "Используя эту форму, вы свяжетесь с персоналом AstroBin. Чтобы связаться "
+#~ "с пользователем, используйте функцию личных сообщений. Это доступно в "
+#~ "галерее пользователя или любое изображение, и выбрав меню «Пользователь», "
+#~ "а затем «Отправить личное сообщение»."
+
+#~ msgid "Thank you! Your message was sent successfully."
+#~ msgstr "Спасибо! Ваше сообщение было успешно отправлено!"
+
+#~ msgid "pages"
+#~ msgstr "страницы"
 
 #~ msgctxt "approximately"
 #~ msgid "about"
@@ -6589,9 +6608,6 @@ msgstr "Извините, это имя пользователя уже суще
 
 #~ msgid "Max size"
 #~ msgstr "Макс размер"
-
-#~ msgid "View full res"
-#~ msgstr "Полный размер"
 
 #~ msgid "View full image info"
 #~ msgstr "Посмотреть полную информацию об изображении"

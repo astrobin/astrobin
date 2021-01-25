@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-03 21:13+0000\n"
+"POT-Creation-Date: 2021-01-24 21:14+0000\n"
 "PO-Revision-Date: 2012-11-25 18:36+0100\n"
 "Last-Translator: strugar <strugar@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2738,33 +2738,6 @@ msgstr ""
 msgid "Custom e-mail change request on AstroBin"
 msgstr ""
 
-msgid ""
-"Please contact us if you need any assistance, or want to report a problem, "
-"give some feedback or suggestions, or simply want to get in touch!"
-msgstr ""
-"Molimo Vas da nas kontaktirate ako Vam treba bilo kakva pomoć, ili želite da "
-"prijavite problem, pošaljete povratnu informaciju ili sugestije, ili prosto "
-"želite da stupite u kontakt."
-
-msgid "Please note!"
-msgstr ""
-
-msgid ""
-"By using this form, you will reach the AstroBin staff. To contact a user "
-"instead, please use the private messaging functionality. It's available by "
-"navigating to a user's gallery or an image, and selecting the \"User\" menu "
-"and then \"Send private message\"."
-msgstr ""
-
-msgid "Send"
-msgstr "Pošaljite"
-
-msgid "Thanks!"
-msgstr ""
-
-msgid "Thank you! Your message was sent successfully."
-msgstr "Hvala Vam! Vaša poruka je uspešno poslata."
-
 msgid "Comments"
 msgstr ""
 
@@ -2911,6 +2884,9 @@ msgid "Skip"
 msgstr ""
 
 msgid "Enough for now"
+msgstr ""
+
+msgid "Thanks!"
 msgstr ""
 
 msgid ""
@@ -3351,6 +3327,9 @@ msgid ""
 "private non-autosubmission groups of which you are the owner or a member."
 msgstr ""
 
+msgid "Send"
+msgstr "Pošaljite"
+
 msgid "Sharing mode"
 msgstr ""
 
@@ -3734,15 +3713,6 @@ msgstr "Savršen dom za Vašu astrofotografiju."
 #, fuzzy
 msgid "Latest from the forums"
 msgstr "Šta ne valja na forumima?"
-
-msgid "Sticky"
-msgstr ""
-
-msgid "Closed"
-msgstr ""
-
-msgid "pages"
-msgstr ""
 
 msgid "Recent images"
 msgstr "Skorašnje slike"
@@ -4680,16 +4650,31 @@ msgstr ""
 msgid "Member since"
 msgstr ""
 
-msgid "This topic was closed by a moderator."
+msgid "Search all forums and comments"
 msgstr ""
 
 msgid "New topic"
 msgstr ""
 
-msgid "New reply"
+msgid "Please select a forum"
 msgstr ""
 
 msgid "Please note"
+msgstr ""
+
+msgid ""
+"To post a new topic, please first go to the forum that is most relevant to "
+"your topic."
+msgstr ""
+
+#, fuzzy
+msgid "View forums"
+msgstr "Pregleda, dnevno"
+
+msgid "This topic was closed by a moderator."
+msgstr ""
+
+msgid "New reply"
 msgstr ""
 
 #, python-format
@@ -4807,6 +4792,9 @@ msgid ""
 "Editing a post is only allowed within %(minutes)s minutes after creating it."
 msgstr ""
 
+msgid "You cannot Like this post because the topic is closed."
+msgstr ""
+
 msgid "Topics you subscribe to"
 msgstr ""
 
@@ -4837,6 +4825,12 @@ msgstr ""
 #, fuzzy
 msgid "Last post"
 msgstr "Istok ili zapad"
+
+msgid "Sticky"
+msgstr ""
+
+msgid "Closed"
+msgstr ""
 
 msgid "This forum does not have any topics."
 msgstr ""
@@ -5311,6 +5305,9 @@ msgid "Edit your astrophotography gear"
 msgstr ""
 
 msgid "Edit gear item"
+msgstr ""
+
+msgid "Please note!"
 msgstr ""
 
 msgid ""
@@ -5949,9 +5946,17 @@ msgstr ""
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
 
-#, fuzzy
-#~ msgid "View full res"
-#~ msgstr "Pregleda, dnevno"
+#~ msgid ""
+#~ "Please contact us if you need any assistance, or want to report a "
+#~ "problem, give some feedback or suggestions, or simply want to get in "
+#~ "touch!"
+#~ msgstr ""
+#~ "Molimo Vas da nas kontaktirate ako Vam treba bilo kakva pomoć, ili želite "
+#~ "da prijavite problem, pošaljete povratnu informaciju ili sugestije, ili "
+#~ "prosto želite da stupite u kontakt."
+
+#~ msgid "Thank you! Your message was sent successfully."
+#~ msgstr "Hvala Vam! Vaša poruka je uspešno poslata."
 
 #, fuzzy
 #~| msgid "Commercial gear items"
