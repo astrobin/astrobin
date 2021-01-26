@@ -19,8 +19,12 @@ def _get_image_dimensions(self):
             if isinstance(width, Number) and isinstance(height, Number) and width > 0 and height > 0:
                 self._dimensions_cache = (width, height)
             else:
-                self.open()
-                self._dimensions_cache = get_image_dimensions(self, close=close)
+                try:
+                    self.open()
+                    self._dimensions_cache = get_image_dimensions(self, close=close)
+                except IOError as e:
+                    logger.error("_get_image_dimensions: IOError %s" % str(e))
+                    return 0, 0
         else:
             self.open()
             self._dimensions_cache = get_image_dimensions(self, close=close)
