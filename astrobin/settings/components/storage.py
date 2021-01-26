@@ -13,6 +13,7 @@ if AWS_S3_ENABLED:
     STATIC_URL = MEDIA_URL + 'static/'
 
     S3_URL = 's3.amazonaws.com'
+    AWS_DEFAULT_REGION = 'us-east-1'
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'invalid').strip()
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'invalid').strip()
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', 'cdn.astrobin.com').strip()
@@ -23,7 +24,7 @@ if AWS_S3_ENABLED:
     AWS_S3_OBJECT_PARAMETERS = {
         'Expires': 'Wed, 31 Dec 2036 23:59:59 GMT'
     }
-    AWS_S3_ENDPOINT_URL = 's3.amazonaws.com'
+    AWS_S3_ENDPOINT_URL = 'https://s3.amazonaws.com'
 else:
     MEDIA_ROOT = '/media/'
     MEDIA_URL = BASE_URL + MEDIA_ROOT
