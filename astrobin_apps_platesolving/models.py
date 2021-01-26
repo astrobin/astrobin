@@ -477,6 +477,11 @@ class Solution(models.Model):
                 Solver.ADVANCED_FAILED)):
             self.content_object.save(keep_deleted=True)
 
+    def delete(self, *args, **kwargs):
+        self.image_file.delete()
+        self.skyplot_zoom1.delete()
+        super(Solution, self).delete(*args, **kwargs)
+
     def _do_clear_basic(self):
         self.status = Solver.MISSING
         self.submission_id = None
