@@ -478,8 +478,8 @@ class Solution(models.Model):
             self.content_object.save(keep_deleted=True)
 
     def delete(self, *args, **kwargs):
-        self.image_file.delete()
-        self.skyplot_zoom1.delete()
+        self._do_clear_basic()
+        self._do_clear_advanced()
         super(Solution, self).delete(*args, **kwargs)
 
     def _do_clear_basic(self):
