@@ -1,3 +1,4 @@
+import logging
 import re
 
 from braces.views import (
@@ -61,6 +62,8 @@ from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
+
+logger = logging.getLogger("apps")
 
 
 class ImageSingleObjectMixin(SingleObjectMixin):
@@ -1104,7 +1107,8 @@ class ImageEditBasicView(ImageEditBaseView):
         if new_url != previous_url:
             try:
                 image.w, image.h = get_image_dimensions(image.image_file)
-            except TypeError:
+            except TypeError as e:
+                logger.warning("ImageEditBaseView: unable to get image dimensions for %d: %s" % (image.pk, str(e)))
                 pass
 
             image.square_cropping = ImageService(image).get_default_cropping()
@@ -1205,7 +1209,9 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
         if new_url != previous_url:
             try:
                 revision.w, revision.h = get_image_dimensions(revision.image_file)
-            except TypeError:
+            except TypeError as e:
+                logger.warning(
+                    "ImageEditRevisionView: unable to get image dimensions for %d: %s" % (revision.pk, str(e)))
                 pass
 
             revision.square_cropping = ImageService(revision.image).get_default_cropping(revision.label)

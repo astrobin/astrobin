@@ -1,3 +1,5 @@
+import logging
+
 import image_cropping
 from django.conf import settings
 from easy_thumbnails.files import get_thumbnailer
@@ -6,6 +8,7 @@ from image_cropping.widgets import HiddenImageCropWidget as BaseHiddenImageCropW
 
 from astrobin.models import Image, ImageRevision
 
+logger = logging.getLogger("apps")
 _original_get_attrs = image_cropping.widgets.get_attrs
 
 def _s3_get_attrs(image, name):
@@ -19,12 +22,13 @@ def _s3_get_attrs(image, name):
     try:
         astrobin_image = Image.all_objects.get(image_file=image)
         width, height = astrobin_image.w, astrobin_image.h
-        url = astrobin_image.thumbnail_raw('regular', None, sync=True).url
+        url = astrobin_image.thumbnail('regular', None, sync=True)
+        logger.info("Got URL %s: " % url)
     except Image.DoesNotExist:
         try:
             astrobin_image = ImageRevision.objects.get(image_file=image)
             width, height = astrobin_image.w, astrobin_image.h
-            url = astrobin_image.thumbnail_raw('regular', sync=True).url
+            url = astrobin_image.thumbnail('regular', sync=True)
         except ImageRevision.DoesNotExist:
             return {}
 
@@ -39,6 +43,7 @@ def _s3_get_attrs(image, name):
             'data-max-height': height,
         }
 
+    logger.warning('Unable to generate image crop thumbnail due to image w/h being 0. Image: %d' % astrobin_image.pk)
     return {}
 
 

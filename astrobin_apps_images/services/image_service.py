@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime, timedelta
 
 from django.conf import settings
@@ -7,6 +8,7 @@ from django.db.models import Q
 from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
 from astrobin.utils import base26_encode, base26_decode
 
+logger = logging.getLogger("apps")
 
 class ImageService:
     image = None  # type: Image
@@ -75,7 +77,10 @@ class ImageService:
             if w == 0 or h == 0:
                 try:
                     (w, h) = get_image_dimensions(self.image.image_file.file)
-                except (ValueError, IOError):
+                except (ValueError, IOError) as e:
+                    logger.warning(
+                        "ImageService.get_default_cropping: unable to get image dimensions for %d: %s" % (
+                            self.image.pk, str(e)))
                     return '0,0,0,0'
         else:
             try:
@@ -86,7 +91,13 @@ class ImageService:
             w, h = revision.w, revision.h
 
             if w == 0 or h == 0:
-                (w, h) = get_image_dimensions(revision.image_file.file)
+                try:
+                    (w, h) = get_image_dimensions(revision.image_file.file)
+                except (ValueError, IOError) as e:
+                    logger.warning(
+                        "ImageService.get_default_cropping: unable to get image dimensions for %d: %s" % (
+                            self.image.pk, str(e)))
+                    return '0,0,0,0'
 
         shorter_size = min(w, h)  # type: int
         x1 = int(w / 2.0 - shorter_size / 2.0)  # type: int
@@ -119,7 +130,9 @@ class ImageService:
         if w == 0 or h == 0:
             try:
                 (w, h) = get_image_dimensions(target.image_file.file)
-            except (ValueError, IOError):
+            except (ValueError, IOError) as e:
+                logger.warning("ImageService.get_crop_box: unable to get image dimensions for %d: %s" % (
+                    target.pk, str(e)))
                 return None
 
         crop_width = settings.THUMBNAIL_ALIASES[''][alias]['size'][0]

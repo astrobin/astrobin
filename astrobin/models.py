@@ -1621,7 +1621,8 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         if self.w == 0 or self.h == 0:
             try:
                 self.w, self.h = get_image_dimensions(self.image_file.file)
-            except:
+            except Exception as e:
+                log.warning("ImageRevision.save: unable to get image dimensions for %d: %s" % (self.pk, str(e)))
                 pass
 
         if self.w == self.image.w and self.h == self.image.h and not self.square_cropping:

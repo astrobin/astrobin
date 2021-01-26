@@ -1,3 +1,4 @@
+import logging
 import random
 import string
 import zlib
@@ -14,7 +15,7 @@ from astrobin.models import Image, ImageRevision
 from astrobin_apps_iotd.services import IotdService
 
 register = Library()
-
+logger = logging.getLogger('apps')
 
 # Returns the URL of an image, taking into account the fact that it might be
 # a commercial gear image.
@@ -124,14 +125,18 @@ def astrobin_image(context, image, alias, **kwargs):
             image_revision.w = w
             image_revision.h = h
             image_revision.save(keep_deleted=True)
-        except (IOError, ValueError, DecompressionBombError):
+        except (IOError, ValueError, DecompressionBombError) as e:
             w = size[0]
             h = size[1] if size[1] > 0 else w
+            logger.warning("astrobin_image tag: unable to get image dimensions for revision %d: %s" % (
+                image_revision.pk, str(e)))
             response_dict['status'] = 'error'
             response_dict['error_message'] = _("Data corruption. Please upload this image again. Sorry!")
-        except (TypeError, zlib.error):
+        except (TypeError, zlib.error) as e:
             w = size[0]
             h = size[1] if size[1] > 0 else w
+            logger.warning("astrobin_image tag: unable to get image dimensions for revision %d: %s" % (
+                image_revision.pk, str(e)))
 
     if alias in ('regular', 'regular_inverted', 'regular_sharpened',
                  'hd', 'hd_inverted', 'hd_sharpened',
