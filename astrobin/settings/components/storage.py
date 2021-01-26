@@ -22,7 +22,8 @@ if AWS_S3_ENABLED:
     AWS_QUERYSTRING_AUTH = False
     AWS_DEFAULT_ACL = 'public-read'
     AWS_S3_OBJECT_PARAMETERS = {
-        'Expires': 'Wed, 31 Dec 2036 23:59:59 GMT'
+        'Expires': 'Wed, 31 Dec 2036 23:59:59 GMT',
+        'StorageClass': 'INTELLIGENT_TIERING',
     }
     AWS_S3_ENDPOINT_URL = 'https://s3.amazonaws.com'
 else:
