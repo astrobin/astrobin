@@ -14,8 +14,8 @@ class HomeTest(TestCase):
         self.user.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=2)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_global_stream(self, retrieve_primary_thumbnails):
+
+    def test_global_stream(self):
         url = reverse('index') + '?s=global'
         self.client.login(username='test', password='password')
 
@@ -49,8 +49,8 @@ class HomeTest(TestCase):
                                                                                                        revision2.pk,
                                                                                                        image.pk))
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_complaint_alert(self, retrieve_primary_thumbnails):
+
+    def test_complaint_alert(self):
         self.client.login(username='test', password='password')
         complaint = Complaint.objects.create(
             address=self.user.email,

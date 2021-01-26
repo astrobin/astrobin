@@ -21,15 +21,15 @@ class ImageRetailerAffiliatesWhenOwnerIsUltimate2020AndAllowsTest(TestCase):
         self.image.imaging_telescopes.add(telescope)
 
     @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_anon(self, retrieve_primary_thumbnails):
+
+    def test_anon(self):
         response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
         self.assertContains(response, "dropdown retailer-affiliate-products-lite")
         self.assertNotContains(response, "retailer-affiliate-cart-link")
 
     @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_free(self, retrieve_primary_thumbnails):
+
+    def test_free(self):
         user = Generators.user()
         self.client.login(username=user.username, password="password")
 
@@ -45,8 +45,8 @@ class ImageRetailerAffiliatesWhenOwnerIsUltimate2020AndAllowsTest(TestCase):
         self.assertNotContains(response, "retailer-affiliate-cart-link")
 
     @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_lite_2020(self, retrieve_primary_thumbnails):
+
+    def test_lite_2020(self):
         user = Generators.user()
         self.client.login(username=user.username, password="password")
         Generators.premium_subscription(user, "AstroBin Lite 2020+")
@@ -63,8 +63,8 @@ class ImageRetailerAffiliatesWhenOwnerIsUltimate2020AndAllowsTest(TestCase):
         self.assertNotContains(response, "retailer-affiliate-cart-link")
 
     @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_lite(self, retrieve_primary_thumbnails):
+
+    def test_lite(self):
         user = Generators.user()
         self.client.login(username=user.username, password="password")
         Generators.premium_subscription(user, "AstroBin Lite")
@@ -81,8 +81,8 @@ class ImageRetailerAffiliatesWhenOwnerIsUltimate2020AndAllowsTest(TestCase):
         self.assertNotContains(response, "retailer-affiliate-cart-link")
 
     @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_lite_autorenew(self, retrieve_primary_thumbnails):
+
+    def test_lite_autorenew(self):
         user = Generators.user()
         self.client.login(username=user.username, password="password")
         Generators.premium_subscription(user, "AstroBin Lite (autorenew)")
@@ -99,8 +99,8 @@ class ImageRetailerAffiliatesWhenOwnerIsUltimate2020AndAllowsTest(TestCase):
         self.assertNotContains(response, "retailer-affiliate-cart-link")
 
     @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_premium_2020(self, retrieve_primary_thumbnails):
+
+    def test_premium_2020(self):
         user = Generators.user()
         self.client.login(username=user.username, password="password")
         Generators.premium_subscription(user, "AstroBin Premium 2020+")
@@ -117,8 +117,8 @@ class ImageRetailerAffiliatesWhenOwnerIsUltimate2020AndAllowsTest(TestCase):
         self.assertNotContains(response, "retailer-affiliate-cart-link")
 
     @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_premium(self, retrieve_primary_thumbnails):
+
+    def test_premium(self):
         user = Generators.user()
         self.client.login(username=user.username, password="password")
         Generators.premium_subscription(user, "AstroBin Premium")
@@ -135,8 +135,8 @@ class ImageRetailerAffiliatesWhenOwnerIsUltimate2020AndAllowsTest(TestCase):
         self.assertNotContains(response, "retailer-affiliate-cart-link")
 
     @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_premium_autorenew(self, retrieve_primary_thumbnails):
+
+    def test_premium_autorenew(self):
         user = Generators.user()
         self.client.login(username=user.username, password="password")
         Generators.premium_subscription(user, "AstroBin Premium (autorenew)")
@@ -153,8 +153,8 @@ class ImageRetailerAffiliatesWhenOwnerIsUltimate2020AndAllowsTest(TestCase):
         self.assertNotContains(response, "retailer-affiliate-cart-link")
 
     @override_settings(ADS_ENABLED=True)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_ultimate_2020(self, retrieve_primary_thumbnails):
+
+    def test_ultimate_2020(self):
         user = Generators.user()
         self.client.login(username=user.username, password="password")
         Generators.premium_subscription(user, "AstroBin Ultimate 2020+")

@@ -1,3 +1,4 @@
+import logging
 import re
 
 from braces.views import (
@@ -13,7 +14,7 @@ from django.core.files.images import get_image_dimensions
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.db.models import Q
 from django.db.models.query import QuerySet
-from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest, HttpResponseForbidden
+from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest, HttpResponseForbidden, HttpResponse
 from django.shortcuts import redirect
 from django.utils.encoding import iri_to_uri, smart_unicode
 from django.utils.translation import ugettext as _
@@ -61,6 +62,8 @@ from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
+
+logger = logging.getLogger("apps")
 
 
 class ImageSingleObjectMixin(SingleObjectMixin):
@@ -148,17 +151,9 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
         if revision_label is None:
             revision_label = 'final'
 
-        opts = {
-            'revision_label': revision_label,
-            'animated': 'animated' in self.request.GET,
-            'insecure': 'insecure' in self.request.GET,
-        }
-
-        sync = request.GET.get('sync')
-        if sync is not None:
-            opts['sync'] = True
-
-        url = image.thumbnail(alias, opts)
+        url = image.thumbnail(
+            alias, revision_label, animated='animated' in self.request.GET, insecure='insecure' in self.request.GET,
+            sync=request.GET.get('sync') is not None)
 
         return self.render_json_response({
             'id': image.pk,
@@ -189,23 +184,19 @@ class ImageRawThumbView(ImageDetailViewBase):
         if revision_label is None:
             revision_label = 'final'
 
-        opts = {
-            'revision_label': revision_label,
-            'animated': 'animated' in self.request.GET,
-            'insecure': 'insecure' in self.request.GET,
-        }
-
-        sync = request.GET.get('sync')
-        if sync is not None:
-            opts['sync'] = True
-
         if settings.TESTING:
-            thumb = image.thumbnail_raw(alias, opts)
+            thumb = image.thumbnail_raw(
+                alias, revision_label, animated='animated' in self.request.GET, insecure='insecure' in self.request.GET,
+                sync=request.GET.get('sync') is not None)
+
             if thumb:
                 return redirect(thumb.url)
-            return None
 
-        url = image.thumbnail(alias, opts)
+            return HttpResponse(status=500)
+
+        url = image.thumbnail(
+            alias, revision_label, animated='animated' in self.request.GET, insecure='insecure' in self.request.GET,
+            sync=request.GET.get('sync') is not None)
         return redirect(smart_unicode(url))
 
 
@@ -820,7 +811,12 @@ class ImageDeleteView(LoginRequiredMixin, ImageDeleteViewBase):
         return reverse_lazy('user_page', args=(self.request.user,))
 
     def post(self, *args, **kwargs):
-        self.get_object().thumbnail_invalidate()
+        image = self.get_object()
+
+        image.thumbnail_invalidate()
+        for revision in image.revisions.all():
+            revision.thumbnail_invalidate()
+
         messages.success(self.request, _("Image deleted."))
         return super(ImageDeleteView, self).post(args, kwargs)
 
@@ -837,8 +833,7 @@ class ImageRevisionDeleteView(LoginRequiredMixin, DeleteView):
         except ImageRevision.DoesNotExist:
             raise Http404
 
-        if request.user.is_authenticated() and \
-                request.user != revision.image.user:
+        if request.user.is_authenticated() and request.user != revision.image.user:
             raise PermissionDenied
 
         # Save this so it's accessible in get_success_url
@@ -939,6 +934,7 @@ class ImageDeleteOtherVersionsView(LoginRequiredMixin, View):
             # Delete all other revisions, and original.
             revision = ImageRevision.objects.get(image=image, label=revision_label)  # type: ImageRevision
 
+            image.thumbnail_invalidate()
             image.image_file = revision.image_file
             image.updated = revision.uploaded
             image.w = revision.w
@@ -955,7 +951,9 @@ class ImageDeleteOtherVersionsView(LoginRequiredMixin, View):
                 solution.content_object = image
                 solution.save()
 
-        ImageRevision.objects.filter(image=image).delete()
+        for revision in ImageRevision.all_objects.filter(image=image).iterator():
+            revision.thumbnail_invalidate()
+            revision.delete()
 
         if not image.is_final:
             image.is_final = True
@@ -1035,7 +1033,7 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
                         UserProfile.objects.get(user__pk=request.user.pk).user)
                 ]
 
-                thumb = image.thumbnail_raw('gallery', {'sync': True})
+                thumb = image.thumbnail_raw('gallery', None, sync=True)
                 push_notification(followers, 'new_image', {
                     'image': image,
                     'image_thumbnail': thumb.url if thumb else None
@@ -1109,7 +1107,8 @@ class ImageEditBasicView(ImageEditBaseView):
         if new_url != previous_url:
             try:
                 image.w, image.h = get_image_dimensions(image.image_file)
-            except TypeError:
+            except TypeError as e:
+                logger.warning("ImageEditBaseView: unable to get image dimensions for %d: %s" % (image.pk, str(e)))
                 pass
 
             image.square_cropping = ImageService(image).get_default_cropping()
@@ -1210,7 +1209,9 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
         if new_url != previous_url:
             try:
                 revision.w, revision.h = get_image_dimensions(revision.image_file)
-            except TypeError:
+            except TypeError as e:
+                logger.warning(
+                    "ImageEditRevisionView: unable to get image dimensions for %d: %s" % (revision.pk, str(e)))
                 pass
 
             revision.square_cropping = ImageService(revision.image).get_default_cropping(revision.label)

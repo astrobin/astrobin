@@ -9,7 +9,9 @@ import string
 import unicodedata
 import uuid
 from datetime import datetime
+from urlparse import urlparse
 
+import boto3
 from django.core.files.images import get_image_dimensions
 from image_cropping import ImageRatioField
 
@@ -34,7 +36,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
-from django.core.validators import MaxLengthValidator
 from django.db import IntegrityError, models
 from django.db.models import Q
 from django.db.models.signals import post_save
@@ -1236,22 +1237,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         return field
 
-
-    def thumbnail_raw(self, alias, thumbnail_settings={}):
-        import urllib2
-        from django.core.files.base import ContentFile
-        from easy_thumbnails.files import get_thumbnailer
-        from astrobin.s3utils import OverwritingFileSystemStorage
+    def get_thumbnail_options(self, alias, revision_label, thumbnail_settings):
         from astrobin_apps_images.services import ImageService
-
-        revision_label = thumbnail_settings.get('revision_label', 'final')
-
-        if revision_label is None:
-            revision_label = 'final'
-
-        # Compatibility
-        if alias in ('revision', 'runnerup'):
-            alias = 'thumb'
 
         options = dict(settings.THUMBNAIL_ALIASES[''][alias].copy(), **thumbnail_settings)
 
@@ -1259,6 +1246,30 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if crop_box and alias not in ('real', 'real_inverted'):
             options['box'] = crop_box
             options['crop'] = True
+
+        if self.watermark and 'watermark' in options:
+            options['watermark_text'] = self.watermark_text
+            options['watermark_position'] = self.watermark_position
+            options['watermark_size'] = self.watermark_size
+            options['watermark_opacity'] = self.watermark_opacity
+
+        # Make sure this is in because easy-thumbnails adds it in same cases.
+        options['subsampling'] = 2
+
+        return options
+
+    def thumbnail_raw(self, alias, revision_label, **kwargs):
+        from easy_thumbnails.files import get_thumbnailer
+        from astrobin.s3utils import OverwritingFileSystemStorage
+
+        thumbnail_settings = kwargs.pop('thumbnail_settings', {})
+
+        if revision_label is None:
+            revision_label = 'final'
+
+        # Compatibility
+        if alias in ('revision', 'runnerup'):
+            alias = 'thumb'
 
         field = self.get_thumbnail_field(revision_label)
         if not field.name:
@@ -1268,68 +1279,14 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if not field.name.startswith('images/'):
             field.name = 'images/' + field.name
 
-        local_path = None
-        name = field.name
-
         if settings.AWS_S3_ENABLED:
-            name_hash = field.storage.generate_local_name(name)
-
-            # Try to generate the thumbnail starting from the file cache locally.
-            if local_path is None:
-                local_path = field.storage.local_storage.path(name_hash)
-
-            try:
-                size = os.path.getsize(local_path)
-                if size == 0:
-                    raise IOError("Empty file")
-
-                with open(local_path):
-                    thumbnailer = get_thumbnailer(
-                        OverwritingFileSystemStorage(location=settings.IMAGE_CACHE_DIRECTORY),
-                        name_hash)
-            except (OSError, IOError, UnicodeEncodeError) as e:
-                # If things go awry, fallback to getting the file from the remote
-                # storage. But download it locally first if it doesn't exist, so
-                # it can be used again later.
-
-                # First try to get the file via URL, because that might hit the CloudFlare cache.
-                url = settings.IMAGES_URL + name
-                headers = {'User-Agent': 'Mozilla/5.0'}
-                req = urllib2.Request(url, None, headers)
-
-                try:
-                    remote_file = ContentFile(urllib2.urlopen(req).read())
-                except (urllib2.HTTPError, urllib2.URLError):
-                    remote_file = None
-
-                # If that didn't work, we'll get the file regularly via django-storages.
-                if remote_file is None:
-                    try:
-                        remote_file = field.storage._open(name)
-                    except IOError:
-                        # The remote file doesn't exist?
-                        log.error("Image %d: the remote file doesn't exist?" % self.id)
-                        return None
-
-                try:
-                    field.storage.local_storage._save(name_hash, remote_file)
-                    thumbnailer = get_thumbnailer(
-                        OverwritingFileSystemStorage(location=settings.IMAGE_CACHE_DIRECTORY),
-                        name_hash)
-                except (OSError, UnicodeEncodeError):
-                    pass
+            thumbnailer = get_thumbnailer(field.file, field.name)
         else:
-            thumbnailer = get_thumbnailer(OverwritingFileSystemStorage(
-                location=os.path.join(settings.UPLOADS_DIRECTORY)), name)
-
-        if self.watermark and 'watermark' in options:
-            options['watermark_text'] = self.watermark_text
-            options['watermark_position'] = self.watermark_position
-            options['watermark_size'] = self.watermark_size
-            options['watermark_opacity'] = self.watermark_opacity
+            storage = OverwritingFileSystemStorage(location=os.path.join(settings.UPLOADS_DIRECTORY))
+            thumbnailer = get_thumbnailer(storage, field.name)
 
         try:
-            thumb = thumbnailer.get_thumbnail(options)
+            thumb = thumbnailer.get_thumbnail(self.get_thumbnail_options(alias, revision_label, thumbnail_settings))
         except Exception as e:
             log.error("Image %d: unable to generate thumbnail: %s." % (self.id, e.message))
             return None
@@ -1349,7 +1306,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         from hashlib import sha256
         return sha256(cache_key).hexdigest()
 
-    def thumbnail(self, alias, thumbnail_settings={}):
+    def thumbnail(self, alias, revision_label, **kwargs):
         def normalize_url_security(url, thumbnail_settings):
             insecure = 'insecure' in thumbnail_settings and thumbnail_settings['insecure'] == True
             if insecure and url.startswith('https'):
@@ -1359,12 +1316,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         from astrobin_apps_images.models import ThumbnailGroup
 
-        options = thumbnail_settings.copy()
-
-        revision_label = options.get('revision_label', 'final')
-        field = self.get_thumbnail_field(revision_label)
-        if not field.name.startswith('images/'):
-            field.name = 'images/' + field.name
+        thumbnail_settings = kwargs.pop('thumbnail_settings', {})
+        sync = kwargs.pop('sync', False)
 
         # For compatibility:
         if alias in ('revision', 'runnerup'):
@@ -1373,17 +1326,23 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if revision_label in (None, 'None', 'final'):
             from astrobin_apps_images.services import ImageService
             revision_label = ImageService(self).get_final_revision_label()
-            options['revision_label'] = revision_label
+
+        field = self.get_thumbnail_field(revision_label)
+        if not field.name.startswith('images/'):
+            field.name = 'images/' + field.name
+
+        options = self.get_thumbnail_options(alias, revision_label, thumbnail_settings)
 
         cache_key = self.thumbnail_cache_key(field, alias)
 
         # If this is an animated gif, let's just return the full size URL
         # because right now we can't thumbnail gifs preserving animation
-        if 'animated' in options and options['animated'] == True:
-            if alias in ('regular', 'regular_sharpened', 'hd', 'hd_sharpened', 'real'):
-                url = settings.IMAGES_URL + field.name
-                cache.set(cache_key + '_animated', url, 60 * 60 * 24 * 365)
-                return normalize_url_security(url, thumbnail_settings)
+        if 'animated' in options \
+                and options['animated'] == True and \
+                alias in ('regular', 'regular_sharpened', 'hd', 'hd_sharpened', 'real'):
+            url = settings.IMAGES_URL + field.name
+            cache.set(cache_key + '_animated', url, 60 * 60 * 24)
+            return normalize_url_security(url, thumbnail_settings)
 
         url = cache.get(cache_key)
         if url:
@@ -1394,7 +1353,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             thumbnails = self.thumbnails.get(revision=revision_label)
             url = getattr(thumbnails, alias)
             if url:
-                cache.set(cache_key, url, 60 * 60 * 24 * 365)
+                cache.set(cache_key, url, 60 * 60 * 24)
                 return normalize_url_security(url, thumbnail_settings)
         except ThumbnailGroup.DoesNotExist:
             try:
@@ -1405,8 +1364,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         from .tasks import retrieve_thumbnail
 
-        if "sync" in thumbnail_settings and thumbnail_settings["sync"] is True:
-            retrieve_thumbnail.apply(args=(self.pk, alias, options))
+        if sync:
+            retrieve_thumbnail.apply(args=(self.pk, alias, revision_label, options))
             try:
                 thumbnails = self.thumbnails.get(revision=revision_label)
                 url = getattr(thumbnails, alias)
@@ -1418,7 +1377,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         task_id_cache_key = '%s.retrieve' % cache_key
         task_id = cache.get(task_id_cache_key)
         if task_id is None:
-            result = retrieve_thumbnail.apply_async(args=(self.pk, alias, options))
+            result = retrieve_thumbnail.apply_async(args=(self.pk, alias, revision_label, options))
             cache.set(task_id_cache_key, result.task_id)
 
             try:
@@ -1436,77 +1395,32 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         return static('astrobin/images/placeholder-gallery.jpg')
 
-    def thumbnail_invalidate_real(self, field, revision_label, delete_remote=False):
-        from easy_thumbnails.files import get_thumbnailer
-
-        from astrobin.s3utils import OverwritingFileSystemStorage
+    def thumbnail_invalidate_real(self, field, revision_label, delete=True):
         from astrobin_apps_images.models import ThumbnailGroup
 
-        thumbnailer = get_thumbnailer(field)
-        local_filename = field.storage.generate_local_name(field.name)
-        local_thumbnailer = get_thumbnailer(
-            OverwritingFileSystemStorage(location=settings.IMAGE_CACHE_DIRECTORY),
-            local_filename)
-
-        aliases = settings.THUMBNAIL_ALIASES['']
-        for alias, thumbnail_settings in aliases.iteritems():
-            options = settings.THUMBNAIL_ALIASES[''][alias].copy()
-            if self.watermark and 'watermark' in options:
-                options['watermark_text'] = self.watermark_text
-                options['watermark_position'] = self.watermark_position
-                options['watermark_size'] = self.watermark_size
-                options['watermark_opacity'] = self.watermark_opacity
-
-            # First we delete it from the cache
+        for alias, thumbnail_settings in settings.THUMBNAIL_ALIASES[''].iteritems():
             cache_key = self.thumbnail_cache_key(field, alias)
             if cache.get(cache_key):
                 cache.delete(cache_key)
+                cache.delete('%s.retrieve' % cache_key)
 
-            # Then we delete the remote thumbnail
-            if delete_remote:
-                filename1 = thumbnailer.get_thumbnail_name(options)
-                filename2 = thumbnailer.get_thumbnail_name(options, transparent=True)
-                field.storage.delete(filename1)
-                field.storage.delete(filename2)
-
-                filename1 = local_thumbnailer.get_thumbnail_name(options)
-                filename2 = local_thumbnailer.get_thumbnail_name(options, transparent=True)
-                field.storage.delete(filename1)
-                field.storage.delete(filename2)
-
-                # Then delete local static storage image
-                filenameLocal = os.path.join(field.storage.location, local_filename)
-                field.storage.delete(filenameLocal)
-
-            # Then we delete the local file cache
-            if settings.AWS_S3_ENABLED:
-                field.storage.local_storage.delete(local_filename)
-
-                try:
-                    os.remove(os.path.join(field.storage.local_storage.location, local_filename))
-                except OSError:
-                    pass
-
-                # Then we purge the Cloudflare cache
-                try:
-                    thumbnail_group = self.thumbnails.get(revision=revision_label)  # type: ThumbnailGroup
-                    all_urls = [x for x in thumbnail_group.get_all_urls() if x]
-
-                    cloudflare_service = CloudflareService()
-
-                    for url in all_urls:
-                        cloudflare_service.purge_resource(url)
-                except ThumbnailGroup.DoesNotExist:
-                    pass
-
-        # Then we remove the database entries
         try:
-            thumbnailgroup = self.thumbnails.get(revision=revision_label).delete()
+            thumbnail_group = self.thumbnails.get(revision=revision_label)  # type: ThumbnailGroup
+            all_urls = [x for x in thumbnail_group.get_all_urls() if x and x.startswith('http')]
+
+            cloudflare_service = CloudflareService()
+
+            for url in all_urls:
+                cloudflare_service.purge_resource(url)
+                s3 = boto3.client('s3')
+                s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=urlparse(url).path.strip('/'))
+
+            self.thumbnails.get(revision=revision_label).delete()
         except ThumbnailGroup.DoesNotExist:
             pass
 
-    def thumbnail_invalidate(self, delete_remote=False):
-        return self.thumbnail_invalidate_real(self.image_file, '0', delete_remote)
+    def thumbnail_invalidate(self, delete=True):
+        return self.thumbnail_invalidate_real(self.image_file, '0', delete)
 
     def get_data_source(self):
         LOOKUP = {
@@ -1707,7 +1621,9 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         if self.w == 0 or self.h == 0:
             try:
                 self.w, self.h = get_image_dimensions(self.image_file.file)
-            except:
+            except Exception as e:
+                log.warning("ImageRevision.save: unable to get image dimensions for %d: %s" % (
+                    self.pk if self.pk else 0, str(e)))
                 pass
 
         if self.w == self.image.w and self.h == self.image.h and not self.square_cropping:
@@ -1732,15 +1648,14 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
 
         return '/%s/%s/' % (self.image.get_id(), self.label)
 
-    def thumbnail_raw(self, alias, thumbnail_settings={}):
-        return self.image.thumbnail_raw(alias,
-                                        dict(thumbnail_settings.items() + {'revision_label': self.label}.items()))
+    def thumbnail_raw(self, alias, **kwargs):
+        return self.image.thumbnail_raw(alias, self.label, **kwargs)
 
-    def thumbnail(self, alias, thumbnail_settings={}):
-        return self.image.thumbnail(alias, dict(thumbnail_settings.items() + {'revision_label': self.label}.items()))
+    def thumbnail(self, alias, **kwargs):
+        return self.image.thumbnail(alias, self.label, **kwargs)
 
-    def thumbnail_invalidate(self, delete_remote=False):
-        return self.image.thumbnail_invalidate_real(self.image_file, self.label, delete_remote)
+    def thumbnail_invalidate(self, delete=True):
+        return self.image.thumbnail_invalidate_real(self.image_file, self.label, delete)
 
 
 class Collection(models.Model):

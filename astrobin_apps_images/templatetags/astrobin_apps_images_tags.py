@@ -1,3 +1,4 @@
+import logging
 import random
 import string
 import zlib
@@ -14,7 +15,7 @@ from astrobin.models import Image, ImageRevision
 from astrobin_apps_iotd.services import IotdService
 
 register = Library()
-
+logger = logging.getLogger('apps')
 
 # Returns the URL of an image, taking into account the fact that it might be
 # a commercial gear image.
@@ -25,12 +26,12 @@ def get_image_url(image, revision='final', size='regular'):
 
 @register.filter
 def gallery_thumbnail(image, revision_label):
-    return image.thumbnail('gallery', {'revision_label': revision_label})
+    return image.thumbnail('gallery', revision_label)
 
 
 @register.filter
 def gallery_thumbnail_inverted(image, revision_label):
-    return image.thumbnail('gallery_inverted', {'revision_label': revision_label})
+    return image.thumbnail('gallery_inverted', revision_label)
 
 
 # Renders an linked image tag with a placeholder and async loading of the
@@ -124,14 +125,18 @@ def astrobin_image(context, image, alias, **kwargs):
             image_revision.w = w
             image_revision.h = h
             image_revision.save(keep_deleted=True)
-        except (IOError, ValueError, DecompressionBombError):
+        except (IOError, ValueError, DecompressionBombError) as e:
             w = size[0]
             h = size[1] if size[1] > 0 else w
+            logger.warning("astrobin_image tag: unable to get image dimensions for revision %d: %s" % (
+                image_revision.pk, str(e)))
             response_dict['status'] = 'error'
             response_dict['error_message'] = _("Data corruption. Please upload this image again. Sorry!")
-        except (TypeError, zlib.error):
+        except (TypeError, zlib.error) as e:
             w = size[0]
             h = size[1] if size[1] > 0 else w
+            logger.warning("astrobin_image tag: unable to get image dimensions for revision %d: %s" % (
+                image_revision.pk, str(e)))
 
     if alias in ('regular', 'regular_inverted', 'regular_sharpened',
                  'hd', 'hd_inverted', 'hd_sharpened',
@@ -229,7 +234,7 @@ def astrobin_image(context, image, alias, **kwargs):
     # If we're testing, we want to bypass the placeholder thing and force-get
     # the thumb url.
     if thumb_url is None and settings.TESTING:
-        thumb = image.thumbnail_raw(alias, {'revision_label': revision})
+        thumb = image.thumbnail_raw(alias, revision)
         if thumb:
             thumb_url = thumb.url
 
@@ -262,7 +267,7 @@ def astrobin_image(context, image, alias, **kwargs):
         # If we're testing, we want to bypass the placeholder thing and force-get
         # the enhanced thumb url.
         if enhanced_thumb_url is None and settings.TESTING:
-            enhanced_thumb = image.thumbnail_raw(enhanced_alias, {'revision_label': revision})
+            enhanced_thumb = image.thumbnail_raw(enhanced_alias, revision)
             if enhanced_thumb:
                 enhanced_thumb_url = enhanced_thumb.url
 

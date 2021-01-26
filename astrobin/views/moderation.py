@@ -78,7 +78,7 @@ class ImageModerationMarkAsHamView(LoginRequiredMixin, GroupRequiredMixin, JSONR
                     content_type=ContentType.objects.get_for_model(User),
                     object_id=image.user.pk)]
 
-                thumb = image.thumbnail_raw('gallery', {'sync': True})
+                thumb = image.thumbnail_raw('gallery', None, sync=True)
                 push_notification(followers, 'new_image', {
                     'image': image,
                     'image_thumbnail': thumb.url if thumb else None

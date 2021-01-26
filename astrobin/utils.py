@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
-import sys
+import logging
 
 import pytz
 from django.conf import settings
@@ -10,6 +10,7 @@ from django.core.files.images import get_image_dimensions
 from django.db.models import Count
 from django.utils import timezone
 
+logger = logging.getLogger('apps')
 
 def unique_items(list_with_possible_duplicates):
     """
@@ -223,8 +224,9 @@ def get_image_resolution(image):
         w, h = image.w, image.h
         if not (w and h):
             w, h = get_image_dimensions(image.image_file)
-    except TypeError:
+    except TypeError as e:
         # This might happen in unit tests
+        logger.warning("utils.get_image_resolution: unable to get image dimensions for %d: %s" % (image.pk, str(e)))
         w, h = 0, 0
 
     return w, h

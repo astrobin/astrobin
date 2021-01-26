@@ -32,7 +32,6 @@ class CollectionTest(TestCase):
         if wip:
             data['wip'] = True
 
-        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
         return self.client.post(
             reverse('image_upload_process'),
             data,
@@ -58,8 +57,7 @@ class CollectionTest(TestCase):
     # View tests                                                              #
     ###########################################################################
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_collections_list_view(self, retrieve_primary_thumbnails):
+    def test_collections_list_view(self):
         # Anon user, no collections
         response = self.client.get(reverse('user_collections_list', args=(self.user.username,)))
         self.assertContains(response, "This user does not have any collections")
@@ -94,8 +92,7 @@ class CollectionTest(TestCase):
         image.delete()
         collection.delete()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_collection_update_view(self, retrieve_primary_thumbnails):
+    def test_collection_update_view(self):
         self.client.login(username='test', password='password')
         self._create_collection(self.user, 'test_collection', 'test_description')
         collection = self._get_last_collection()
@@ -134,8 +131,7 @@ class CollectionTest(TestCase):
         image2.delete()
         collection.delete()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_collection_delete_view(self, retrieve_primary_thumbnails):
+    def test_collection_delete_view(self):
         # Create a collection
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -149,8 +145,7 @@ class CollectionTest(TestCase):
 
         image.delete()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_collection_add_remove_images_view(self, retrieve_primary_thumbnails):
+    def test_collection_add_remove_images_view(self):
         # Create a collection
         self.client.login(username='test', password='password')
         self._create_collection(self.user, 'test_collection', 'test_description')
@@ -179,8 +174,8 @@ class CollectionTest(TestCase):
         image2.delete()
         collection.delete()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_collection_order_by_tag(self, retrieve_primary_thumbnails):
+
+    def test_collection_order_by_tag(self):
         self.client.login(username='test', password='password')
         self._create_collection(self.user, 'test_collection', 'test_description')
 
@@ -227,8 +222,8 @@ class CollectionTest(TestCase):
         image2.delete()
         collection.delete()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_collection_quick_edit_key_value_tags(self, retrieve_primary_thumbnails):
+
+    def test_collection_quick_edit_key_value_tags(self):
         self.client.login(username='test', password='password')
         self._create_collection(self.user, 'test_collection', 'test_description')
 
@@ -279,8 +274,8 @@ class CollectionTest(TestCase):
         image2.delete()
         collection.delete()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_collection_navigation_links(self, retrieve_primary_thumbnails):
+
+    def test_collection_navigation_links(self):
         self.client.login(username='test', password='password')
         self._create_collection(self.user, 'test_collection', 'test_description')
 

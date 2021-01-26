@@ -574,9 +574,6 @@ def image_upload_process(request):
 
     image.save(keep_deleted=True)
 
-    from astrobin.tasks import retrieve_primary_thumbnails
-    retrieve_primary_thumbnails.delay(image.pk, {'revision_label': '0'})
-
     return HttpResponseRedirect(reverse('image_edit_thumbnails', kwargs={'id': image.get_id()}))
 
 
