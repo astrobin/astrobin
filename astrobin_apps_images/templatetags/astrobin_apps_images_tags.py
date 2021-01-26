@@ -155,35 +155,11 @@ def astrobin_image(context, image, alias, **kwargs):
 
     # Determine whether this is an animated gif, and we should show it as such
     field = image.get_thumbnail_field(revision)
-    animated = False
     if not field.name.startswith('images/'):
         field.name = 'images/' + field.name
-    if field.name.lower().endswith('.gif') and alias in ('regular', 'regular_sharpened', 'hd', 'hd_sharpened', 'real'):
-        try:
-            gif = PILImage.open(field.file)
-        except IOError:
-            return {
-                'status': 'failure',
-                'image': '',
-                'alias': alias,
-                'revision': revision,
-                'size_x': size[0],
-                'size_y': size[1],
-                'caption_cache_key': 'astrobin_image_no_image',
-                'nav_ctx': nav_ctx,
-                'nav_ctx_extra': nav_ctx_extra,
-                'classes': classes,
-                'corrupted': False,
-                'recovered': False,
-                'is_revision': False,
-            }
 
-        try:
-            gif.seek(1)
-        except EOFError:
-            animated = False
-        else:
-            animated = True
+    animated = field.name.lower().endswith('.gif') and \
+               alias in ('regular', 'regular_sharpened', 'hd', 'hd_sharpened', 'real')
 
     url = get_image_url(image, url_revision, url_size)
 
