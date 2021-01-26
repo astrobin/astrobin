@@ -88,7 +88,6 @@
     .comment-container {
       display: inline-block;
       width: calc(100% - 56px);
-      border-bottom: 1px dashed #555;
 
       @media screen and (max-width: 979px) {
         width: 100%;
@@ -181,6 +180,7 @@
 
     .links {
       padding: $spacer-small 0 $spacer-xlarge 0;
+      border-bottom: 1px dashed #4C4C4C;
 
       a {
         text-transform: lowercase;
