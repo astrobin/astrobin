@@ -1,6 +1,7 @@
 from django.conf.urls import url
 
-from astrobin_apps_users.views import TogglePropertyUsersAjaxView, UserSearchView
+from astrobin_apps_users.views import TogglePropertyUsersAjaxView, UserSearchView, BounceIgnoreAndRetryView, \
+    ComplaintRemove
 
 urlpatterns = (
     url(
@@ -11,4 +12,13 @@ urlpatterns = (
         r'user_search_ajax/$',
         UserSearchView.as_view(),
         name='astrobin_apps_users.user_search_ajax'),
+    url(
+        r'bounce_ignore_and_retry/$',
+        BounceIgnoreAndRetryView.as_view(),
+        name='astrobin_apps_users.bounce_ignore_and_retry'),
+
+    url(
+        r'complaint_remove/$',
+        ComplaintRemove.as_view(),
+        name='astrobin_apps_users.complaint_remove'),
 )
