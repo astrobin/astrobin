@@ -4,6 +4,7 @@
 @import "icons";
 @import "animations";
 
+@import "accordion";
 @import "alert";
 @import "badges.scss";
 @import "buttons";
@@ -3821,27 +3822,6 @@ table.api-examples {
     margin-left: $spacer-medium;
     display: inline-block;
     font-style: italic;
-  }
-}
-
-.accordion {
-  .accordion-group {
-    border-color: #393939;
-  }
-
-  .accordion-heading {
-    background-color: $grey-8;
-  }
-
-  .accordion-inner {
-    border: 0;
-  }
-
-  .accordion-footer {
-    background: $grey-8;
-    margin: 15px -15px -27px -15px;
-    padding: 10px 15px;
-    border-radius: 0 0 4px 4px;
   }
 }
 
