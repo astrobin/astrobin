@@ -133,7 +133,7 @@ class ImageService:
         if w == 0 or h == 0:
             try:
                 (w, h) = get_image_dimensions(target.image_file.file)
-            except (ValueError, IOError) as e:
+            except (ValueError, IOError, TypeError) as e:
                 logger.warning("ImageService.get_crop_box: unable to get image dimensions for %d: %s" % (
                     target.pk, str(e)))
                 return None
