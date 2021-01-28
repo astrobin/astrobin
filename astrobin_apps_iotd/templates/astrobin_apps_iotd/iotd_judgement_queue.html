@@ -6,6 +6,7 @@
 {% load astrobin_apps_iotd_tags %}
 {% load astrobin_apps_images_tags %}
 {% load common_tags %}
+{% load humanize %}
 
 {% block title %}{% trans "IOTD Judgement Queue" %}{% endblock %}
 
@@ -30,6 +31,18 @@
     </div>
 
     <div class="iotd-promotion-queue">
+        {% with reason=user|judge_cannot_select_now_reason next_available_time=user|get_next_available_selection_time_for_judge %}
+            {% if reason and next_available_time|is_future %}
+                <div class="alert alert-warning">
+                    <i class="icon-warning-sign"></i>
+                    {% blocktrans trimmed with time=next_available_time|naturaltime %}
+                        Sorry, you cannot select an IOTD right now: {{ reason }}. Please try again in
+                        <strong>{{ time }}</strong>.
+                    {% endblocktrans %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
         {% for image in object_list %}
             <div class="iotd-queue-item
                        {% if request.user|may_elect:image and request.user|may_unelect:image %} may-select{% else %}may-not-select{% endif %}
@@ -77,7 +90,9 @@
                 </div>
             </div>
         {% empty %}
-            {% trans "This queue is currently empty." %}
+            <p>
+                {% trans "This queue is currently empty." %}
+            </p>
         {% endfor %}
     </div>
     {% endif %} {# READONLY #}
