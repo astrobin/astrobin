@@ -113,7 +113,10 @@ class ImageService:
         elif revision_label == 'final':
             target = self.get_final_revision()
         else:
-            target = self.get_revision(label=revision_label)
+            try:
+                target = self.get_revision(label=revision_label)
+            except ImageRevision.DoesNotExist:
+                target = self.get_final_revision()
 
         square_cropping = target.square_cropping if target.square_cropping else self.get_default_cropping(
             revision_label)
