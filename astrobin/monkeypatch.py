@@ -22,12 +22,16 @@ def _get_image_dimensions(self):
                 try:
                     self.open()
                     self._dimensions_cache = get_image_dimensions(self, close=close)
-                except IOError as e:
-                    logger.error("_get_image_dimensions: IOError %s" % str(e))
-                    return 0, 0
+                except Exception as e:
+                    logger.error("_get_image_dimensions: %s" % str(e))
+                    self._dimensions_cache = 0, 0
         else:
-            self.open()
-            self._dimensions_cache = get_image_dimensions(self, close=close)
+            try:
+                self.open()
+                self._dimensions_cache = get_image_dimensions(self, close=close)
+            except Exception as e:
+                logger.error("_get_image_dimensions: %s" % str(e))
+                self._dimensions_cache = 0, 0
 
     if self._dimensions_cache[0] == 0 or self._dimensions_cache[1] == 0:
         logger.error("_get_image_dimensions: got 0 width or height")
