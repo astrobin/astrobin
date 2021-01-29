@@ -4,11 +4,13 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.db.models import Q, Count
+from django.utils.translation import gettext
 
 from astrobin.enums import SubjectType
 from astrobin.models import Image
 from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
+from common.services import DateTimeService
 
 
 class IotdService:
@@ -118,6 +120,56 @@ class IotdService:
                 image=x.image,
                 date__lte=datetime.now().date()).exists()
         ])), key=lambda x: x.published, reverse=True)
+
+    def judge_cannot_select_now_reason(self, judge):
+        # type: (User) -> Union[str, None]
+
+        if Iotd.objects.filter(
+                judge=judge,
+                date=DateTimeService.today()).count() >= settings.IOTD_JUDGEMENT_MAX_PER_DAY:
+            return gettext("you already selected %s IOTD today (UTC)" % settings.IOTD_JUDGEMENT_MAX_PER_DAY)
+
+        if Iotd.objects.filter(
+                judge=judge,
+                date__gt=DateTimeService.today()).count() >= settings.IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE:
+            return gettext("you already selected %s scheduled IOTDs" % settings.IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE)
+
+        if Iotd.objects.filter(date__gt=DateTimeService.today()).count() >= settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS:
+            return gettext("there are already %s scheduled IOTDs" % settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS)
+
+        return None
+
+    def get_next_available_selection_time_for_judge(self, judge):
+        # type: (User) -> datetime
+
+        today = DateTimeService.today()  # date
+        now = DateTimeService.now()  # datetime
+
+        next_time_due_to_max_per_day = \
+            DateTimeService.next_midnight() if \
+                Iotd.objects.filter(
+                    judge=judge,
+                    date=today).count() >= settings.IOTD_JUDGEMENT_MAX_PER_DAY \
+                else now  # datetime
+
+        latest_scheduled = Iotd.objects.filter(judge=judge).order_by('-date').first()  # Iotd
+        next_time_due_to_max_scheduled_per_judge = \
+            DateTimeService.next_midnight(latest_scheduled.date) if \
+                Iotd.objects.filter(
+                    judge=judge,
+                    date__gt=today).count() >= settings.IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE \
+                else now
+
+        next_time_due_to_max_scheduled = \
+            DateTimeService.next_midnight() if \
+                Iotd.objects.filter(date__gt=today).count() >= settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS \
+            else now
+
+        return max(
+            next_time_due_to_max_per_day,
+            next_time_due_to_max_scheduled_per_judge,
+            next_time_due_to_max_scheduled
+        )
 
     def update_top_pick_nomination_archive(self):
         latest = TopPickNominationsArchive.objects.first()

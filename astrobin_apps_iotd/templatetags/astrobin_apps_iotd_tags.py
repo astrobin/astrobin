@@ -1,10 +1,12 @@
 from datetime import datetime
 
+from django.contrib.auth.models import User
 from django.template import Library
 
 from astrobin_apps_iotd.models import IotdSubmission, IotdVote, Iotd
 from astrobin_apps_iotd.permissions import may_toggle_submission_image, may_toggle_vote_image, may_elect_iotd, \
     may_unelect_iotd
+from astrobin_apps_iotd.services import IotdService
 
 register = Library()
 
@@ -110,3 +112,13 @@ def get_iotd():
     if iotds:
         return iotds[0]
     return None
+
+@register.filter
+def judge_cannot_select_now_reason(judge):
+    # type: (User) -> Union[str, None]
+    return IotdService().judge_cannot_select_now_reason(judge)
+
+@register.filter
+def get_next_available_selection_time_for_judge(judge):
+    # type: (User) -> datetime
+    return IotdService().get_next_available_selection_time_for_judge(judge)

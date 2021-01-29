@@ -3587,6 +3587,10 @@ table.search-table {
 }
 
 .iotd-promotion-queue {
+  > .alert {
+    width: 100%;
+  }
+
   h1 > .todays-count {
     font-size: 22px;
     font-style: italic;

@@ -2,15 +2,28 @@ from datetime import timedelta, date, datetime
 
 from django.conf import settings
 from django.test import TestCase, override_settings
+from mock import patch
 
 from astrobin.enums import SubjectType
 from astrobin.tests.generators import Generators
 from astrobin_apps_iotd.models import IotdSubmission, IotdVote, Iotd, IotdDismissedImage
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.tests.iotd_generators import IotdGenerators
+from common.services import DateTimeService
 
 
 class IotdServiceTest(TestCase):
+    def _create_iotd(self, **kwargs):
+        judge = kwargs.pop('judge', Generators.user(groups=['iotd_judges']))
+        when = kwargs.pop('date', date.today())
+
+        user = Generators.user()
+        Generators.premium_subscription(user, 'AstroBin Ultimate 2020+')
+        image = Generators.image(user=user)
+        IotdGenerators.submission(image=image)
+        IotdGenerators.vote(image=image)
+        return IotdGenerators.iotd(judge=judge, image=image, date=when)
+
     def test_is_iotd_true(self):
         image = Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
@@ -1303,3 +1316,59 @@ class IotdServiceTest(TestCase):
         image.save()
 
         self.assertEquals(0, len(IotdService().get_judgement_queue()))
+
+    @patch('common.services.DateTimeService.now')
+    def test_judge_cannot_select_now_reason_none_no_iotds(self, now):
+        now.return_value = datetime.now()
+        judge = Generators.user(groups=['iotd_judges'])
+        self.assertIsNone(IotdService().judge_cannot_select_now_reason(judge))
+        self.assertEquals(IotdService().get_next_available_selection_time_for_judge(judge), DateTimeService.now())
+
+    @patch('common.services.DateTimeService.now')
+    def test_judge_cannot_select_now_reason_none_no_scheduled_iotds(self, now):
+        now.return_value = datetime.now()
+        iotd = self._create_iotd(date=date.today() - timedelta(1))
+        self.assertIsNone(IotdService().judge_cannot_select_now_reason(iotd.judge))
+        self.assertEquals(IotdService().get_next_available_selection_time_for_judge(iotd.judge), DateTimeService.now())
+
+    @override_settings(IOTD_JUDGEMENT_MAX_PER_DAY=1)
+    @patch('common.services.DateTimeService.now')
+    def test_judge_cannot_select_now_reason_already_selected_today(self, now):
+        now.return_value = datetime.now()
+        iotd = self._create_iotd(date=date.today())
+        reason = IotdService().judge_cannot_select_now_reason(iotd.judge)
+        self.assertIsNotNone(reason)
+        self.assertTrue('you already selected 1 IOTD today' in reason)
+        self.assertEquals(
+            IotdService().get_next_available_selection_time_for_judge(iotd.judge),
+            DateTimeService.next_midnight())
+
+    @override_settings(IOTD_JUDGEMENT_MAX_PER_DAY=2, IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE=2)
+    @patch('common.services.DateTimeService.now')
+    def test_judge_cannot_select_now_reason_already_2_scheduled(self, now):
+        now.return_value = datetime.now()
+        iotd = self._create_iotd(date=date.today() + timedelta(1))
+        self._create_iotd(judge=iotd.judge, date=date.today() + timedelta(2))
+        reason = IotdService().judge_cannot_select_now_reason(iotd.judge)
+        self.assertIsNotNone(reason)
+        self.assertTrue('you already selected 2 scheduled IOTDs' in reason)
+        self.assertEquals(
+            IotdService().get_next_available_selection_time_for_judge(iotd.judge),
+            DateTimeService.next_midnight(iotd.date))
+
+    @override_settings(
+        IOTD_JUDGEMENT_MAX_PER_DAY=2,
+        IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE=3,
+        IOTD_JUDGEMENT_MAX_FUTURE_DAYS=2
+    )
+    @patch('common.services.DateTimeService.now')
+    def test_judge_cannot_select_now_reason_already_2_scheduled(self, now):
+        now.return_value = datetime.now()
+        iotd = self._create_iotd(date=date.today() + timedelta(1))
+        self._create_iotd(judge=iotd.judge, date=date.today() + timedelta(2))
+        reason = IotdService().judge_cannot_select_now_reason(iotd.judge)
+        self.assertIsNotNone(reason)
+        self.assertTrue('there are already 2 scheduled IOTDs' in reason)
+        self.assertEquals(
+            IotdService().get_next_available_selection_time_for_judge(iotd.judge),
+            DateTimeService.next_midnight())
