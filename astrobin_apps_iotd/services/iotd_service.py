@@ -134,7 +134,7 @@ class IotdService:
                 date__gt=DateTimeService.today()).count() >= settings.IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE:
             return gettext("you already selected %s scheduled IOTDs" % settings.IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE)
 
-        if Iotd.objects.filter(date__gt=DateTimeService.today()).count() >= settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS:
+        if Iotd.objects.filter(date__gte=DateTimeService.today()).count() >= settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS:
             return gettext("there are already %s scheduled IOTDs" % settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS)
 
         return None
@@ -162,7 +162,7 @@ class IotdService:
 
         next_time_due_to_max_scheduled = \
             DateTimeService.next_midnight() if \
-                Iotd.objects.filter(date__gt=today).count() >= settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS \
+                Iotd.objects.filter(date__gte=today).count() >= settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS \
             else now
 
         return max(
