@@ -91,7 +91,7 @@ class SolveAdvancedView(base.View):
         solution = get_solution(kwargs.get('object_id'), kwargs.get('content_type_id'))
 
         if solution.advanced_settings is None:
-            latest_settings = None
+            latest_settings = None  # type: PlateSolvingAdvancedSettings
 
             if target._meta.model_name == u'image':
                 images = target._meta.model.objects.filter(user=target.user).order_by('-pk')
@@ -104,6 +104,7 @@ class SolveAdvancedView(base.View):
 
             if latest_settings is not None:
                 latest_settings.pk = None
+                latest_settings.sample_raw_frame_file = None
                 latest_settings.save()
             else:
                 latest_settings = PlateSolvingAdvancedSettings.objects.create()
