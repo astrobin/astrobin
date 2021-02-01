@@ -120,10 +120,14 @@ class ImageService:
 
         square_cropping = target.square_cropping if target.square_cropping else self.get_default_cropping(
             revision_label)
-        square_cropping_x0 = int(square_cropping.split(',')[0])
-        square_cropping_y0 = int(square_cropping.split(',')[1])
-        square_cropping_x1 = int(square_cropping.split(',')[2])
-        square_cropping_y1 = int(square_cropping.split(',')[3])
+        try:
+            square_cropping_x0 = int(square_cropping.split(',')[0])
+            square_cropping_y0 = int(square_cropping.split(',')[1])
+            square_cropping_x1 = int(square_cropping.split(',')[2])
+            square_cropping_y1 = int(square_cropping.split(',')[3])
+        except (IndexError, ValueError) as e:
+            return None
+
         point_of_interest = {
             'x': int((square_cropping_x1 + square_cropping_x0) / 2),
             'y': int((square_cropping_y1 + square_cropping_y0) / 2),
