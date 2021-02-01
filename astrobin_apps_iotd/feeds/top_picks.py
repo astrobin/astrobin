@@ -74,7 +74,7 @@ class TopPickFeed(Feed):
             self.item_title(item),
             reverse('user_page', args=(item.image.user.username,)),
             self.item_author_name(item),
-            item.image.description.encode('ascii', 'ignore').decode('ascii')
+            item.image.description.encode('ascii', 'ignore').decode('ascii') if item.image.description else ""
         )
 
     def item_extra_kwargs(self, item):
