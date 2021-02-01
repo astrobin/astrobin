@@ -56,7 +56,8 @@ from astrobin.templatetags.tags import in_upload_wizard
 from astrobin.utils import to_user_timezone, get_client_country_code
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
-from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution, PlateSolvingAdvancedSettings
+from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
+from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_restore_from_trash, \
     can_perform_advanced_platesolving
 from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, premium_get_max_allowed_revisions, \
@@ -808,17 +809,20 @@ def image_edit_platesolving_advanced_settings(request, id, revision_label):
         solution, created = Solution.objects.get_or_create(
             content_type=ContentType.objects.get_for_model(Image),
             object_id=image.pk)
+        advanced_settings = solution.advanced_settings
+        if advanced_settings is None:
+            solution.advanced_settings, created = SolutionService.get_or_create_advanced_settings(image)
+            solution.save()
     else:
         return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
         revision = ImageRevision.objects.get(image=image, label=revision_label)
         solution, created = Solution.objects.get_or_create(
             content_type=ContentType.objects.get_for_model(ImageRevision),
             object_id=revision.pk)
-
-    advanced_settings = solution.advanced_settings
-    if advanced_settings is None:
-        solution.advanced_settings = PlateSolvingAdvancedSettings.objects.create()
-        solution.save()
+        advanced_settings = solution.advanced_settings
+        if advanced_settings is None:
+            solution.advanced_settings, created = SolutionService.get_or_create_advanced_settings(revision)
+            solution.save()
 
     if request.method == 'GET':
         form = PlateSolvingAdvancedSettingsForm(instance=advanced_settings)
