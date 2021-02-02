@@ -1360,21 +1360,14 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 # Race condition
                 pass
 
-        from .tasks import retrieve_thumbnail
-
         if sync:
-            retrieve_thumbnail.apply(args=(self.pk, alias, revision_label, options))
-            try:
-                thumbnails = self.thumbnails.get(revision=revision_label)
-                url = getattr(thumbnails, alias)
-                return url
-            except ThumbnailGroup.DoesNotExist:
-                return None
+            return self.thumbnail_raw(alias, revision_label, thumbnail_settings=options)
 
         # If we got down here, we don't have an url yet, so we start an asynchronous task and return a placeholder.
         task_id_cache_key = '%s.retrieve' % cache_key
         task_id = cache.get(task_id_cache_key)
         if task_id is None:
+            from .tasks import retrieve_thumbnail
             result = retrieve_thumbnail.apply_async(args=(self.pk, alias, revision_label, options))
             cache.set(task_id_cache_key, result.task_id)
 
