@@ -1315,6 +1315,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             return url
 
         from astrobin_apps_images.models import ThumbnailGroup
+        from astrobin_apps_images.services import ImageService
 
         thumbnail_settings = kwargs.pop('thumbnail_settings', {})
         sync = kwargs.pop('sync', False)
@@ -1324,7 +1325,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             alias = 'thumb'
 
         if revision_label in (None, 'None', 'final'):
-            from astrobin_apps_images.services import ImageService
             revision_label = ImageService(self).get_final_revision_label()
 
         field = self.get_thumbnail_field(revision_label)
@@ -1363,6 +1363,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if sync:
             thumb = self.thumbnail_raw(alias, revision_label, thumbnail_settings=options)
             if thumb:
+                ImageService(self).set_thumb(alias, revision_label, thumb.url)
                 return thumb.url
             return None
 
