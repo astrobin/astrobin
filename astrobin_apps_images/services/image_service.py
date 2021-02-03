@@ -2,11 +2,13 @@ import logging
 from datetime import datetime, timedelta
 
 from django.conf import settings
+from django.core.cache import cache
 from django.core.files.images import get_image_dimensions
 from django.db.models import Q
 
 from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
 from astrobin.utils import base26_encode, base26_decode
+from astrobin_apps_images.models import ThumbnailGroup
 
 logger = logging.getLogger("apps")
 
@@ -218,6 +220,17 @@ class ImageService:
             return Image.HEMISPHERE_TYPE_UNKNOWN
 
         return Image.HEMISPHERE_TYPE_NORTHERN if solution.dec >= 0 else Image.HEMISPHERE_TYPE_SOUTHERN
+
+    def set_thumb(self, alias, revision_label, url):
+        # type: (str, str, str) -> None
+
+        field = self.image.get_thumbnail_field(revision_label)
+        cache_key = self.image.thumbnail_cache_key(field, alias)
+        cache.set(cache_key, url, 60 * 60 * 24)
+
+        thumbnails, created = ThumbnailGroup.objects.get_or_create(image=self.image, revision=revision_label)
+        setattr(thumbnails, alias, url)
+        thumbnails.save()
 
     @staticmethod
     def verify_file(path):

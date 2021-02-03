@@ -138,15 +138,11 @@ def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     release_lock = lambda: cache.delete(lock_id)
 
     def set_thumb():
-        url = thumb.url
         field = image.get_thumbnail_field(revision_label)
-        if not field.name.startswith('images/'):
-            field.name = 'images/' + field.name
         cache_key = image.thumbnail_cache_key(field, alias)
-        cache.set(cache_key, url, 60 * 60 * 24)
-        thumbnails, created = ThumbnailGroup.objects.get_or_create(image=image, revision=revision_label)
-        setattr(thumbnails, alias, url)
-        thumbnails.save()
+
+        ImageService(image).set_thumb(alias, revision_label, thumb.url)
+
         cache.delete('%s.retrieve' % cache_key)
 
     if acquire_lock():
