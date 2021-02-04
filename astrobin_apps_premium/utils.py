@@ -30,7 +30,7 @@ def _compareValidity(a, b):
 
 def _compareNames(a, b):
     """
-    This function is used to determin the "weight" of each Premium subscription. When a user has multiple, only the
+    This function is used to determine the "weight" of each Premium subscription. When a user has multiple, only the
     heaviest one gets considered throughout the website.
     :param a: left operand.
     :param b: right operand.

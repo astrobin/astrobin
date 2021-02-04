@@ -1,6 +1,45 @@
 {% load common_tags %}
 {% load i18n %}
+{% load astrobin_apps_premium_tags %}
 
+<div id="global-alerts">
+
+{% if request.user.is_authenticated and request.user|has_an_expired_premium_subscription %}
+
+    <div class="accordion container" id="expired-subscription-accordion">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle show-caret collapsed" data-toggle="collapse"
+                   data-parent="#expired-subscription-accordion" href="#expired-subscription-accordion-content">
+                    <i class="icon-info-sign"></i>
+                    {% blocktrans trimmed %}
+                        Your AstroBin subscription is expired.
+                    {% endblocktrans %}
+                </a>
+            </div>
+            <div id="expired-subscription-accordion-content" class="accordion-body collapse">
+                <div class="accordion-inner alert alert-info global-alert">
+                    <p>
+                        {% blocktrans trimmed %}
+                            That's okay: we don't EVER delete your images if your subscription expires.
+                        {% endblocktrans %}
+
+                        {% blocktrans trimmed %}
+                            However, it would be great if you considered renewing: it's inexpensive and it goes a long
+                            way to support the AstroBin project!
+                        {% endblocktrans %}
+                    </p>
+
+                    <a class="btn btn-small btn-primary"
+                       href="{% app_redirection_service request '/subscriptions/options' %}">
+                        {% trans "Subscription plans" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
 
 {% if HARD_BOUNCES %}
 
@@ -137,3 +176,5 @@
         </a>
     </div>
 {% endif %}
+
+</div>
