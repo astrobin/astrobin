@@ -14,6 +14,7 @@ class ImageFilter(FilterSet):
         fields = {
             'ids': (),
             'hashes': (),
+            'user': ('exact',),
             'uploaded': ('lt', 'lte', 'exact', 'gt', 'gte'),
             'published': ('lt', 'lte', 'exact', 'gt', 'gte'),
         }
