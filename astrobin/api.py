@@ -556,7 +556,6 @@ class UserProfileResource(ModelResource):
             'receive_important_communications',
             'receive_marketing_and_commercial_material',
             'receive_newsletter',
-            'seen_email_permissions',
             'seen_realname',
             'show_signatures',
             'signature',

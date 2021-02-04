@@ -2012,16 +2012,6 @@ def user_profile_seen_realname(request):
 
 @login_required
 @require_POST
-def user_profile_seen_email_permissions(request):
-    profile = request.user.userprofile
-    profile.seen_email_permissions = True
-    profile.save(keep_deleted=True)
-
-    return HttpResponseRedirect(request.POST.get('next', '/'))
-
-
-@login_required
-@require_POST
 def user_profile_shadow_ban(request):
     user_pk = request.POST.get('userPk')
 
