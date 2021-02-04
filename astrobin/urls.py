@@ -85,7 +85,6 @@ from astrobin.views import (
     user_profile_save_locations,
     user_profile_save_preferences,
     user_profile_seen_realname,
-    user_profile_seen_email_permissions,
     user_profile_shadow_ban,
     user_profile_remove_shadow_ban,
 
@@ -315,8 +314,6 @@ urlpatterns += [
     url(r'^profile/save/locations/$', user_profile_save_locations, name='profile_save_locations'),
     url(r'^profile/save/preferences/$', user_profile_save_preferences, name='profile_save_preferences'),
     url(r'^profile/seen/realname/$', user_profile_seen_realname, name='profile_seen_realname'),
-    url(r'^profile/seen/email-permissions/$', user_profile_seen_email_permissions,
-        name='profile_seen_email_permissions'),
     url(r'^profile/shadow-ban/', user_profile_shadow_ban, name='profile_shadow_ban'),
     url(r'^profile/remove-shadow-ban/', user_profile_remove_shadow_ban, name='profile_remove_shadow_ban'),
 

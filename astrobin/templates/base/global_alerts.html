@@ -1,28 +1,6 @@
 {% load common_tags %}
 {% load i18n %}
 
-{% if request.user.is_authenticated and not request.user.userprofile.seen_email_permissions %}
-<div class="container alert alert-warning global-alert">
-    <div class="row">
-        <div class="span9">
-            <p>
-                {% blocktrans %}Please review your preferences about receiving important communications, newsletters, and marketing emails from AstroBin.{% endblocktrans %}
-            </p>
-        </div>
-        <div class="span3">
-            <form action="{% url 'profile_seen_email_permissions' %}" method="post">{% csrf_token %}
-                <input type="hidden" name="next" value="{% url 'profile_edit_preferences' %}" />
-                <input class="btn btn-primary" type="submit" value="{% trans "Preferences" %} &rarr;" />
-            </form>
-            <form action="{% url 'profile_seen_email_permissions' %}" method="post">{% csrf_token %}
-                <input type="hidden" name="next" value="{{request.path}}" />
-                <input class="btn" type="submit" value="{% trans "Don't show again" %}" />
-            </form>
-        </div>
-    </div> <!-- row -->
-</div>
-{% endif %}
-
 
 {% if HARD_BOUNCES %}
 

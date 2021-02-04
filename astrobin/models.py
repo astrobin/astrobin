@@ -2302,11 +2302,6 @@ class UserProfile(SafeDeleteModel):
         editable=False,
     )
 
-    seen_email_permissions = models.BooleanField(
-        default=False,
-        editable=False,
-    )
-
     # PYBBM proxy fields
     @property
     def time_zone(self):
