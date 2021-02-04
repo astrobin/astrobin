@@ -4,9 +4,10 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models import QuerySet
 from django.template import Library
-from subscription.models import Subscription
+from subscription.models import Subscription, UserSubscription
 
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
+from common.services import DateTimeService
 
 register = Library()
 
@@ -65,9 +66,9 @@ def is_any_ultimate(user):
 
 @register.filter
 def is_ultimate_2020(user):
-    userSubscription = premium_get_valid_usersubscription(user)
-    if userSubscription:
-        return userSubscription.subscription.group.name == "astrobin_ultimate_2020"
+    user_subscription = premium_get_valid_usersubscription(user)
+    if user_subscription:
+        return user_subscription.subscription.group.name == "astrobin_ultimate_2020"
     return False
 
 
@@ -78,17 +79,17 @@ def is_any_premium(user):
 
 @register.filter
 def is_premium_2020(user):
-    userSubscription = premium_get_valid_usersubscription(user)
-    if userSubscription:
-        return userSubscription.subscription.group.name == "astrobin_premium_2020"
+    user_subscription = premium_get_valid_usersubscription(user)
+    if user_subscription:
+        return user_subscription.subscription.group.name == "astrobin_premium_2020"
     return False
 
 
 @register.filter
 def is_premium(user):
-    userSubscription = premium_get_valid_usersubscription(user)
-    if userSubscription:
-        return userSubscription.subscription.group.name == "astrobin_premium"
+    user_subscription = premium_get_valid_usersubscription(user)
+    if user_subscription:
+        return user_subscription.subscription.group.name == "astrobin_premium"
     return False
 
 
@@ -99,17 +100,17 @@ def is_any_lite(user):
 
 @register.filter
 def is_lite_2020(user):
-    userSubscription = premium_get_valid_usersubscription(user)
-    if userSubscription:
-        return userSubscription.subscription.group.name == "astrobin_lite_2020"
+    user_subscription = premium_get_valid_usersubscription(user)
+    if user_subscription:
+        return user_subscription.subscription.group.name == "astrobin_lite_2020"
     return False
 
 
 @register.filter
 def is_lite(user):
-    userSubscription = premium_get_valid_usersubscription(user)
-    if userSubscription:
-        return userSubscription.subscription.group.name == "astrobin_lite"
+    user_subscription = premium_get_valid_usersubscription(user)
+    if user_subscription:
+        return user_subscription.subscription.group.name == "astrobin_lite"
     return False
 
 
@@ -127,10 +128,24 @@ def is_any_premium_subscription(user):
         is_premium_2020(user) or \
         is_ultimate_2020(user)
 
+
 @register.filter
-def is_usersubscription_current(userSubscription):
+def has_an_expired_premium_subscription(user):
+    if is_any_premium_subscription(user):
+        return False
+
+    return UserSubscription.objects.filter(
+        user=user,
+        expires__lt=DateTimeService.today(),
+        subscription__category__contains="premium"
+    ).exists()
+
+
+@register.filter
+def is_usersubscription_current(user_subscription):
     # type: (UserSubscription) -> bool
-    return userSubscription and userSubscription.active and userSubscription.expires >= datetime.date.today()
+    return user_subscription and user_subscription.active and user_subscription.expires >= datetime.date.today()
+
 
 @register.filter
 def has_valid_premium_offer(user):

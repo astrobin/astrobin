@@ -1,5 +1,15 @@
 @import "variables";
 
+#global-alerts {
+  > .container {
+    margin-bottom: 0;
+
+    &:last-child {
+      margin-bottom: 12px;
+    }
+  }
+}
+
 .alert {
   form {
     margin-bottom: $spacer-small;
