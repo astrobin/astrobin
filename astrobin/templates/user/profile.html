@@ -37,7 +37,7 @@
         </div>
     {% endif %}
 
-    {% if requested_user == request.user and has_corrupted_images and section == 'corrupted' and not request.COOKIES.astrobin_corrupted_images_banner_seen %}
+    {% if requested_user == request.user and section == 'corrupted' and not request.COOKIES.astrobin_corrupted_images_banner_seen and corrupted_images|length > 0  %}
         <div class="alert alert-warning corrupted-images-banner">
             <button class="close" data-dismiss="alert">&times;</button>
 

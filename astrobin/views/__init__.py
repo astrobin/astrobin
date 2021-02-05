@@ -1374,10 +1374,7 @@ def user_page(request, username):
         'menu': menu,
         'stats': data['stats'] if 'stats' in data else None,
         'alias': 'gallery',
-        'has_corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user).count() > 0,
-        'has_recovered_images': Image.objects_including_wip \
-                                    .filter(corrupted=True, user=user) \
-                                    .exclude(recovered=None).count() > 0,
+        'corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user)
     }
 
     response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
