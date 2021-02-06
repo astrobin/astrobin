@@ -1,0 +1,11 @@
+{% load i18n %}
+{% load static %}
+
+{% blocktrans trimmed %}
+   Thank you!
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    I really appreciate your support for AstroBin, thank you so much for renewing!
+{% endblocktrans %}
+
