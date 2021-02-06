@@ -222,10 +222,15 @@ NOTICE_TYPES = (
         '',
         2
     ),
-
     (
         'new_subscription',
         _("Thank you for getting a subscription!"),
+        '',
+        2
+    ),
+    (
+        'new_payment',
+        _("Thank you for your payment!"),
         '',
         2
     )
