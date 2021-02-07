@@ -1,10 +1,15 @@
 {% load pybb_tags %}
+{% load i18n %}
 
 {% if topic.updated %}
     {% with topic.last_post as last_post %}
-        <a href="{% url 'user_page' last_post.user %}">
-            {{ last_post.user.userprofile.get_display_name|truncatechars:30 }}
-        </a>
+        {% if not last_post.user.userprofile.deleted %}
+            <a href="{% url 'user_page' last_post.user %}">
+                {{ last_post.user.userprofile.get_display_name|truncatechars:30 }}
+            </a>
+        {% else %}
+            {% trans "(deleted)" %}
+        {% endif %}
 
         <br />
 
