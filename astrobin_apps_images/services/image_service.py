@@ -241,6 +241,7 @@ class ImageService:
                 trial_image.verify()
                 f.seek(0)  # Because we opened it with PIL
         except Exception as e:
+            logger.warning("Unable to read image file %s with PIL: %s" % (path, str(e)))
             return False
 
         return True
