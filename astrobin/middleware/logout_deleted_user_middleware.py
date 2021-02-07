@@ -7,7 +7,7 @@ class LogoutDeletedUserMiddleware(object):
                 hasattr(request, 'user') and
                 request.user.is_authenticated() and
                 hasattr(request.user, 'userprofile') and
-                request.user.userprofile is not None
+                request.user.userprofile.deleted is not None
         )
 
     def process_response(self, request, response):
