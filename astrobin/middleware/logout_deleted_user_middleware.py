@@ -1,7 +1,5 @@
 from django.contrib.auth import logout
 
-LAST_SEEN_COOKIE = 'astrobin_last_seen_set'
-
 
 class LogoutDeletedUserMiddleware(object):
     def _process(self, request):
