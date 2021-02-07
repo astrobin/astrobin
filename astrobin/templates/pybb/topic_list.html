@@ -37,8 +37,7 @@
         </thead>
         <tbody>
         {% for topic in topic_list|pybb_topic_unread:user %}
-            {% if not topic.user.userprofile.deleted %}
-                <tr class="topic-row {% if topic.sticky %} sticky {% endif %} {% cycle "odd" "even" %} {% if topic.on_moderation %} on-moderation {% endif %}">
+            <tr class="topic-row {% if topic.sticky %} sticky {% endif %} {% cycle "odd" "even" %} {% if topic.on_moderation %} on-moderation {% endif %}">
                     {% if request.user|is_forum_moderator %}
                         <td class="topic-select">
                             <input type="checkbox" name="topic-ids[]" value="{{ topic.id }}">
@@ -64,7 +63,13 @@
                             </a> &middot;
                         {% endif %}
 
-                        <a href="{% url 'user_page' topic.user %}">{{ topic.user.userprofile.get_display_name|truncatechars:30 }}</a>
+                        {% if not topic.user.userprofile.deleted %}
+                            <a href="{% url 'user_page' topic.user %}">
+                                {{ topic.user.userprofile.get_display_name|truncatechars:30 }}
+                            </a>
+                        {% else %}
+                            {% trans "(deleted)" %}
+                        {% endif %}
                         &middot;
                         {% pybb_time topic.created %}
 
@@ -96,7 +101,6 @@
                         {% include "pybb/topic_last_message_info.html" %}
                     </td>
                 </tr>
-            {% endif %}
         {% empty %}
             <tr>
                 <td class="topic-state"></td>
