@@ -52,6 +52,14 @@ git clone https://github.com/aws/efs-utils && (cd efs-utils && ./build-deb.sh &&
 # Mount EFS:
 
 mkdir ${ASTROBIN_TEMPORARY_FILES}
-mount -t efs -o tls ${EFS_FILE_SYSTEM}:/ ${ASTROBIN_TEMPORARY_FILES}
+
+tries=0
+until [ "$tries" -ge 6 ]
+do
+   mount -t efs -o tls ${EFS_FILE_SYSTEM}:/ ${ASTROBIN_TEMPORARY_FILES} && break
+   tries=$((tries+1))
+   sleep 10
+done
+
 mkdir -p ${ASTROBIN_TEMPORARY_FILES}/files
 chown ${USER}:${GROUP} ${ASTROBIN_TEMPORARY_FILES}/files
