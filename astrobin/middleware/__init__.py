@@ -1,2 +1,3 @@
 from .last_seen_middleware import LastSeenMiddleware
+from .logout_deleted_user_middleware import LogoutDeletedUserMiddleware
 from .profile_middleware import ProfileMiddleware

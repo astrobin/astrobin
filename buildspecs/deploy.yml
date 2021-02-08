@@ -3,6 +3,8 @@ version: 0.2
 phases:
   install:
     commands:
+      - # https://github.com/yarnpkg/yarn/issues/7866
+      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
       - apt-get -y update
       - apt-get -y install jq
 

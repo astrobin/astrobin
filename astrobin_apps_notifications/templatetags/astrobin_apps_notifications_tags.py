@@ -39,4 +39,5 @@ def show_notice_settings(label):
         'welcome_to_astrobin',
         'congratulations_for_your_first_image',
         'new_subscription',
+        'new_payment',
     )

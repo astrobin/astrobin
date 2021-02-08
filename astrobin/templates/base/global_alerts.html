@@ -1,28 +1,45 @@
 {% load common_tags %}
 {% load i18n %}
+{% load astrobin_apps_premium_tags %}
 
-{% if request.user.is_authenticated and not request.user.userprofile.seen_email_permissions %}
-<div class="container alert alert-warning global-alert">
-    <div class="row">
-        <div class="span9">
-            <p>
-                {% blocktrans %}Please review your preferences about receiving important communications, newsletters, and marketing emails from AstroBin.{% endblocktrans %}
-            </p>
+<div id="global-alerts">
+
+{% if request.user.is_authenticated and request.user|has_an_expired_premium_subscription %}
+
+    <div class="accordion container" id="expired-subscription-accordion">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle show-caret collapsed" data-toggle="collapse"
+                   data-parent="#expired-subscription-accordion" href="#expired-subscription-accordion-content">
+                    <i class="icon-info-sign"></i>
+                    {% blocktrans trimmed %}
+                        Your AstroBin subscription is expired.
+                    {% endblocktrans %}
+                </a>
+            </div>
+            <div id="expired-subscription-accordion-content" class="accordion-body collapse">
+                <div class="accordion-inner alert alert-info global-alert">
+                    <p>
+                        {% blocktrans trimmed %}
+                            That's okay: we don't EVER delete your images if your subscription expires.
+                        {% endblocktrans %}
+
+                        {% blocktrans trimmed %}
+                            However, it would be great if you considered renewing: it's inexpensive and it goes a long
+                            way to support the AstroBin project!
+                        {% endblocktrans %}
+                    </p>
+
+                    <a class="btn btn-small btn-primary"
+                       href="{% app_redirection_service request '/subscriptions/options' %}">
+                        {% trans "Subscription plans" %}
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="span3">
-            <form action="{% url 'profile_seen_email_permissions' %}" method="post">{% csrf_token %}
-                <input type="hidden" name="next" value="{% url 'profile_edit_preferences' %}" />
-                <input class="btn btn-primary" type="submit" value="{% trans "Preferences" %} &rarr;" />
-            </form>
-            <form action="{% url 'profile_seen_email_permissions' %}" method="post">{% csrf_token %}
-                <input type="hidden" name="next" value="{{request.path}}" />
-                <input class="btn" type="submit" value="{% trans "Don't show again" %}" />
-            </form>
-        </div>
-    </div> <!-- row -->
-</div>
+    </div>
+
 {% endif %}
-
 
 {% if HARD_BOUNCES %}
 
@@ -144,18 +161,4 @@
     
 {% endif %}
 
-{% if HAS_RECOVERED_IMAGES %}
-    <div class="container alert alert-info global-alert">
-        <p>
-            {% blocktrans trimmed with date=AUTOMATIC_RECOVERY_CONFIRMATION_BEGINS|date:"SHORT_DATE_FORMAT" %}
-                <strong>Good news!</strong> AstroBin automatically recovered some of your images that were lost in the
-                data loss incident of February 2020. Please review them to confirm the recovery. If you do nothing, your
-                recovered images will be confirmed automatically starting from <strong>{{ date }}</strong>.
-            {% endblocktrans %}
-        </p>
-
-        <a class="btn btn-primary" href="{% url 'me' %}?recovered">
-            {% trans "Review recovered images" %}
-        </a>
-    </div>
-{% endif %}
+</div>

@@ -1,11 +1,10 @@
-# Django
+import json
+
 from django.contrib.auth.models import User, Group
 from django.test import TestCase
-# Third party
 from django.urls import reverse
 from subscription.models import Subscription, UserSubscription
 
-# AstroBin
 from astrobin.templatetags.tags import (
     valid_subscriptions,
     has_valid_subscription,
@@ -13,6 +12,7 @@ from astrobin.templatetags.tags import (
     get_premium_subscription_expiration,
     has_subscription_by_name,
     get_usersubscription_by_name)
+from astrobin.tests.generators import Generators
 
 
 class SubscriptionsTest(TestCase):
@@ -43,6 +43,15 @@ class SubscriptionsTest(TestCase):
             s.delete()
             g.delete()
             u.delete()
+
+    def test_usersubscription_api(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+        self.client.login(username=user.username, password=user.password)
+        response = self.client.get('%s?user=%d' % (reverse('usersubscription-list'), user.pk))
+        response_json = json.loads(response.content)
+        self.assertEquals(1, len(response_json))
+        self.assertEquals(user.pk, response_json[0]['user'])
 
     def test_offer_subscription_validity(self):
         with self.settings(PREMIUM_ENABLED=True):

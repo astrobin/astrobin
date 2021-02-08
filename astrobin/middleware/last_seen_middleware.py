@@ -19,7 +19,7 @@ class LastSeenMiddleware(object):
             try:
                 profile = UserProfile.objects.get(user=request.user)
                 profile.last_seen = datetime.now()
-                profile.save()
+                profile.save(keep_deleted=True)
 
                 max_age = 60 * 60 * 24
                 expires = datetime.strftime(datetime.utcnow() + timedelta(seconds=max_age), "%a, %d-%b-%Y %H:%M:%S GMT")

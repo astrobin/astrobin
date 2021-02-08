@@ -2,11 +2,13 @@ import logging
 from datetime import datetime, timedelta
 
 from django.conf import settings
+from django.core.cache import cache
 from django.core.files.images import get_image_dimensions
 from django.db.models import Q
 
 from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
 from astrobin.utils import base26_encode, base26_decode
+from astrobin_apps_images.models import ThumbnailGroup
 
 logger = logging.getLogger("apps")
 
@@ -120,10 +122,14 @@ class ImageService:
 
         square_cropping = target.square_cropping if target.square_cropping else self.get_default_cropping(
             revision_label)
-        square_cropping_x0 = int(square_cropping.split(',')[0])
-        square_cropping_y0 = int(square_cropping.split(',')[1])
-        square_cropping_x1 = int(square_cropping.split(',')[2])
-        square_cropping_y1 = int(square_cropping.split(',')[3])
+        try:
+            square_cropping_x0 = int(square_cropping.split(',')[0])
+            square_cropping_y0 = int(square_cropping.split(',')[1])
+            square_cropping_x1 = int(square_cropping.split(',')[2])
+            square_cropping_y1 = int(square_cropping.split(',')[3])
+        except (IndexError, ValueError) as e:
+            return None
+
         point_of_interest = {
             'x': int((square_cropping_x1 + square_cropping_x0) / 2),
             'y': int((square_cropping_y1 + square_cropping_y0) / 2),
@@ -215,6 +221,17 @@ class ImageService:
 
         return Image.HEMISPHERE_TYPE_NORTHERN if solution.dec >= 0 else Image.HEMISPHERE_TYPE_SOUTHERN
 
+    def set_thumb(self, alias, revision_label, url):
+        # type: (str, str, str) -> None
+
+        field = self.image.get_thumbnail_field(revision_label)
+        cache_key = self.image.thumbnail_cache_key(field, alias)
+        cache.set(cache_key, url, 60 * 60 * 24)
+
+        thumbnails, created = ThumbnailGroup.objects.get_or_create(image=self.image, revision=revision_label)
+        setattr(thumbnails, alias, url)
+        thumbnails.save()
+
     @staticmethod
     def verify_file(path):
         try:
@@ -224,6 +241,7 @@ class ImageService:
                 trial_image.verify()
                 f.seek(0)  # Because we opened it with PIL
         except Exception as e:
+            logger.warning("Unable to read image file %s with PIL: %s" % (path, str(e)))
             return False
 
         return True

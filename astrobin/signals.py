@@ -21,8 +21,8 @@ from pybb.models import Forum, Topic, Post
 from rest_framework.authtoken.models import Token
 from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete
-from subscription.models import UserSubscription, Subscription
-from subscription.signals import subscribed, paid, signed_up
+from subscription.models import UserSubscription, Subscription, Transaction
+from subscription.signals import paid, signed_up
 from threaded_messages.models import Thread
 
 from astrobin_apps_groups.models import Group
@@ -33,6 +33,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_lite, is_any_premium_subscription, is_lite_2020, is_any_ultimate, is_premium_2020, is_premium, is_free)
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from astrobin_apps_users.services import UserService
+from common.services import DateTimeService
 from common.services.mentions_service import MentionsService
 from nested_comments.models import NestedComment
 from nested_comments.services.comment_notifications_service import CommentNotificationsService
@@ -372,42 +373,55 @@ def solution_post_save(sender, instance, created, **kwargs):
 post_save.connect(solution_post_save, sender=Solution)
 
 
-def subscription_subscribed(sender, **kwargs):
-    subscription = kwargs.get("subscription")
-    usersubscription = kwargs.get("usersubscription")
-
-    if subscription.group.name in [
-        'astrobin_lite', 'astrobin_premium',
-        'astrobin_lite_2020', 'astrobin_premium_2020',
-        'astrobin_ultimate_2020'
-    ] and subscription.recurrence_unit is None:
-        # AstroBin Premium/Lite/Ultimate are valid for 1 year
-        usersubscription.expires = datetime.datetime.now()
-        usersubscription.extend(datetime.timedelta(days=365.2425))
-        usersubscription.save()
-
-        # Invalidate other premium subscriptions
-        UserSubscription.active_objects \
-            .filter(user=usersubscription.user,
-                    subscription__category__startswith='premium') \
-            .exclude(pk=usersubscription.pk) \
-            .update(active=False)
+def subscription_paid(sender, **kwargs):
+    subscription = kwargs.get('subscription')
+    user = kwargs.get('user')
 
     if subscription.group.name == 'astrobin_lite':
-        user = kwargs.get("user")
         profile = user.userprofile
         profile.premium_counter = 0
         profile.save(keep_deleted=True)
 
-    if subscription.category == 'premium':
-        push_notification([usersubscription.user], 'new_subscription', {
-            'BASE_URL': settings.BASE_URL
-        })
+    if 'premium' in subscription.category and Transaction.objects.filter(
+            user=user,
+            event='new usersubscription',
+            timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)):
+        push_notification([user], 'new_subscription', {'BASE_URL': settings.BASE_URL})
+    else:
+        push_notification([user], 'new_payment', {'BASE_URL': settings.BASE_URL})
 
 
-subscribed.connect(subscription_subscribed)
-paid.connect(subscription_subscribed)
-signed_up.connect(subscription_subscribed)
+paid.connect(subscription_paid)
+
+
+def subscription_signed_up(sender, **kwargs):
+    subscription = kwargs.get('subscription')
+    user_subscription = kwargs.get('usersubscription')
+    user = kwargs.get('user')
+
+    if 'premium' in subscription.category:
+        if user_subscription.expires is None:
+            user_subscription.expires = DateTimeService.today()
+        user_subscription.extend(datetime.timedelta(days=365.2425))
+        user_subscription.save()
+
+        # Invalidate other premium subscriptions
+        UserSubscription.active_objects \
+            .filter(user=user_subscription.user,
+                    subscription__category__startswith='premium') \
+            .exclude(pk=user_subscription.pk) \
+            .update(active=False)
+
+        if Transaction.objects.filter(
+                user=user,
+                event='new usersubscription',
+                timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)):
+            push_notification([user], 'new_subscription', {'BASE_URL': settings.BASE_URL})
+        else:
+            push_notification([user], 'new_payment', {'BASE_URL': settings.BASE_URL})
+
+
+signed_up.connect(subscription_signed_up)
 
 
 def reset_lite_and_premium_counter(sender, **kwargs):

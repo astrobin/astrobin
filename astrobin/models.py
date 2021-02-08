@@ -1315,6 +1315,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             return url
 
         from astrobin_apps_images.models import ThumbnailGroup
+        from astrobin_apps_images.services import ImageService
 
         thumbnail_settings = kwargs.pop('thumbnail_settings', {})
         sync = kwargs.pop('sync', False)
@@ -1324,7 +1325,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             alias = 'thumb'
 
         if revision_label in (None, 'None', 'final'):
-            from astrobin_apps_images.services import ImageService
             revision_label = ImageService(self).get_final_revision_label()
 
         field = self.get_thumbnail_field(revision_label)
@@ -1360,21 +1360,18 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 # Race condition
                 pass
 
-        from .tasks import retrieve_thumbnail
-
         if sync:
-            retrieve_thumbnail.apply(args=(self.pk, alias, revision_label, options))
-            try:
-                thumbnails = self.thumbnails.get(revision=revision_label)
-                url = getattr(thumbnails, alias)
-                return url
-            except ThumbnailGroup.DoesNotExist:
-                return None
+            thumb = self.thumbnail_raw(alias, revision_label, thumbnail_settings=options)
+            if thumb:
+                ImageService(self).set_thumb(alias, revision_label, thumb.url)
+                return thumb.url
+            return None
 
         # If we got down here, we don't have an url yet, so we start an asynchronous task and return a placeholder.
         task_id_cache_key = '%s.retrieve' % cache_key
         task_id = cache.get(task_id_cache_key)
         if task_id is None:
+            from .tasks import retrieve_thumbnail
             result = retrieve_thumbnail.apply_async(args=(self.pk, alias, revision_label, options))
             cache.set(task_id_cache_key, result.task_id)
 
@@ -2301,11 +2298,6 @@ class UserProfile(SafeDeleteModel):
     # One time notifications that won't disappear until marked as seen.
 
     seen_realname = models.BooleanField(
-        default=False,
-        editable=False,
-    )
-
-    seen_email_permissions = models.BooleanField(
         default=False,
         editable=False,
     )
