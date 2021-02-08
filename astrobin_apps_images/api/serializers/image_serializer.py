@@ -31,4 +31,6 @@ class ImageSerializer(serializers.HyperlinkedModelSerializer):
             'acquisition_type',
             'subject_type',
             'solar_system_main_subject',
+            'data_source',
+            'remote_source',
         )

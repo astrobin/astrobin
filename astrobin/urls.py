@@ -210,6 +210,8 @@ urlpatterns += [
     url(r'^api/v2/images/', include('astrobin_apps_images.api.urls', namespace="astrobin_apps_images")),
     url(r'^api/v2/payments/', include('astrobin_apps_payments.api.urls', namespace="astrobin_apps_payments")),
     url(r'^api/v2/iotd/', include('astrobin_apps_iotd.api.urls', namespace="astrobin_apps_iotd")),
+    url(r'^api/v2/remote-source-affiliation/', include('astrobin_apps_remote_source_affiliation.api.urls',
+                                                       namespace="astrobin_apps_remote_source_affiliation")),
 
     ###########################################################################
     ### OWN APPS VIEWS                                                      ###
