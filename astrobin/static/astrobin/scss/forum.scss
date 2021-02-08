@@ -209,15 +209,13 @@ th.forum-name {
   }
 
   img {
-    &[alt='smile'] {
+    margin: 15px 0;
+
+    &[alt='smile'],
+    &[src*='precise_bbcode']{
       width: 18px;
       height: 18px;
-      margin-left: 1px;
-      margin-right: 1px;
-    }
-
-    &:not([alt='smile']) {
-      margin: 15px 0;
+      margin: 0 1px;
     }
   }
 
