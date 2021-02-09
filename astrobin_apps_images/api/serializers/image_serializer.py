@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from astrobin.models import Image
+from astrobin_apps_images.models import KeyValueTag
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -8,6 +9,10 @@ class ImageSerializer(serializers.ModelSerializer):
     hash = serializers.PrimaryKeyRelatedField(read_only=True)
     w = serializers.IntegerField()
     h = serializers.IntegerField()
+    key_value_tags = serializers.SerializerMethodField()
+
+    def get_key_value_tags(self, image):
+        return '\n'.join(["%s=%s" % (x.key, x.value) for x in KeyValueTag.objects.filter(image=image)])
 
     class Meta:
         model = Image
@@ -34,4 +39,7 @@ class ImageSerializer(serializers.ModelSerializer):
             'data_source',
             'remote_source',
             'part_of_group_set',
+            'key_value_tags',
+            'mouse_hover_image',
+            'allow_comments',
         )
