@@ -1,5 +1,6 @@
 import logging
 import re
+import six
 
 from braces.views import (
     JSONResponseMixin,
@@ -16,7 +17,12 @@ from django.db.models import Q
 from django.db.models.query import QuerySet
 from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest, HttpResponseForbidden, HttpResponse
 from django.shortcuts import redirect
-from django.utils.encoding import iri_to_uri, smart_unicode
+from django.utils.encoding import iri_to_uri
+# Temp compat fix, drop when moved to python3
+if six.PY2:
+    from django.utils.encoding import smart_unicode
+else:
+    from django.utils.encoding import smart_text as smart_unicode
 from django.utils.translation import ugettext as _
 from django.views.generic import (
     DeleteView,

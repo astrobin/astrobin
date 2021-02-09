@@ -9,7 +9,7 @@ from pybb.models import Post, Topic
 
 from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin_apps_equipment.models import EquipmentBrandListing
-from models import Image
+from .models import Image
 from nested_comments.models import NestedComment
 
 FIELDS = (
