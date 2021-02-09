@@ -3,6 +3,7 @@ from django.apps import AppConfig
 from PIL import Image
 Image.MAX_IMAGE_PIXELS = 16536*16536
 
+
 class AstroBinAppConfig(AppConfig):
     name = 'astrobin'
     verbose_name = 'AstroBin'
@@ -25,8 +26,8 @@ class AstroBinAppConfig(AppConfig):
         registry.register('astrobin_apps_groups.group')
 
     def ready(self):
-        from astrobin.signals import *
-        from astrobin_apps_notifications.signals import *
+        from astrobin import signals
+        from astrobin_apps_notifications import signals
         from astrobin.locale_extras import LOCALE_EXTRAS
 
         self.registerActStreamModels()
