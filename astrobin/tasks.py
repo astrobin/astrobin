@@ -1,11 +1,15 @@
 from __future__ import absolute_import
+import six
 
 import csv
 import ntpath
 import subprocess
 import tempfile
 import zipfile
-from StringIO import StringIO
+if six.PY2:
+    from StringIO import StringIO
+else:
+    from io import StringIO
 from datetime import datetime, timedelta
 from time import sleep
 from zipfile import ZipFile

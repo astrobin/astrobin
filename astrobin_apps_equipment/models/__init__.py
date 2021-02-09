@@ -1,3 +1,3 @@
-from equipment_brand_listing import EquipmentBrandListing
-from equipment_brand import EquipmentBrand
-from equipment_retailer import EquipmentRetailer
+from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
+from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
+from astrobin_apps_equipment.models.equipment_retailer import EquipmentRetailer
