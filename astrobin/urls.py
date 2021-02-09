@@ -212,6 +212,7 @@ urlpatterns += [
     url(r'^api/v2/iotd/', include('astrobin_apps_iotd.api.urls', namespace="astrobin_apps_iotd")),
     url(r'^api/v2/remote-source-affiliation/', include('astrobin_apps_remote_source_affiliation.api.urls',
                                                        namespace="astrobin_apps_remote_source_affiliation")),
+    url(r'^api/v2/groups/', include('astrobin_apps_groups.api.urls', namespace="astrobin_apps_groups")),
 
     ###########################################################################
     ### OWN APPS VIEWS                                                      ###

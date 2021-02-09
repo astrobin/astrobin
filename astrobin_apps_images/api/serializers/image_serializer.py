@@ -3,7 +3,7 @@ from rest_framework import serializers
 from astrobin.models import Image
 
 
-class ImageSerializer(serializers.HyperlinkedModelSerializer):
+class ImageSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
     hash = serializers.PrimaryKeyRelatedField(read_only=True)
     w = serializers.IntegerField()
@@ -33,4 +33,5 @@ class ImageSerializer(serializers.HyperlinkedModelSerializer):
             'solar_system_main_subject',
             'data_source',
             'remote_source',
+            'part_of_group_set',
         )
