@@ -92,7 +92,7 @@ class Solver(AbstractPlateSolvingBackend):
 
         request = Request(url=url, headers=headers, data=data)
 
-        response = urlopen(request)
+        response = urlopen(request, timeout=30)
         text = response.read()
         result = json2python(text)
         status = result.get('status')
