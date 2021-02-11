@@ -61,14 +61,18 @@
                         self.onStarted();
                     }
 
-                    if (!self.connectionRefusedErrorShown &&
-                        data.error && (
-                            data.error.indexOf("Connection refused") || data.error.indexOf("timed out")
-                        )
-                    ) {
+                    if (!self.connectionRefusedErrorShown && data.error) {
+                        var message = "";
+
+                        if (data.error.indexOf("Connection refused") > -1 || data.error.indexOf("timed out") > -1) {
+                            message = self.i18n.connectionRefused;
+                        } else if (data.error.indexOf("500") > -1) {
+                            message = self.i18n.internalError;
+                        }
+
                         $.toast({
                             heading: self.i18n.error,
-                            text: self.i18n.connectionRefused,
+                            text: message,
                             showHideTransition: 'slide',
                             allowToastClose: true,
                             position: 'top-right',
