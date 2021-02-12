@@ -216,7 +216,6 @@ class ImageResource(ModelResource):
     comments = fields.IntegerField()
     views = fields.IntegerField()
 
-
     class Meta:
         authentication = AppAuthentication()
         queryset = Image.objects.filter(corrupted=False, is_wip=False)
@@ -528,39 +527,45 @@ class UserProfileResource(ModelResource):
         authentication = AppAuthentication()
         allowed_methods = ["get"]
         queryset = UserProfile.objects.all()
-        filtering = {
-            "username": ALL
-        }
-        excludes = (
-            'accept_tos',
-            'autosubscribe',
-            'company_description',
-            'company_name',
-            'company_website',
-            'default_frontpage_section',
-            'default_gallery_sorting',
-            'default_license',
-            'default_watermark',
-            'default_watermark_opacity',
-            'default_watermark_position',
-            'default_watermark_size',
-            'default_watermark_text',
-            'deleted',
-            'exclude_from_competitions',
-            'inactive_account_reminder_sent',
-            'premium_counter',
-            'premium_offer',
-            'premium_offer_expiration',
-            'premium_offer_sent',
-            'receive_forum_emails',
-            'receive_important_communications',
-            'receive_marketing_and_commercial_material',
-            'receive_newsletter',
-            'seen_realname',
-            'show_signatures',
-            'signature',
-            'signature_html',
-        )
+        fields = [
+            'about',
+            'allow_astronomy_ads',
+            'allow_retailer_integration',
+            'astrobin_index_bonus',
+            'avatar',
+            'banned_from_competitions',
+            'date_joined',
+            'delete_reason',
+            'delete_reason_other',
+            'display_wip_images_on_public_gallery',
+            'followers_count',
+            'following_count',
+            'hobbies',
+            'id',
+            'image_count',
+            'image_recovery_process_completed',
+            'image_recovery_process_started',
+            'job',
+            'language',
+            'last_login',
+            'last_seen',
+            'never_activated_account_reminder_sent',
+            'plate_solution_overlay_on_full_disabled',
+            'post_count',
+            'premium_subscription',
+            'premium_subscription_expiration',
+            'real_name',
+            'received_likes_count',
+            'recovered_images_notice_sent',
+            'referral_code',
+            'resource_uri',
+            'timezone',
+            'total_notifications_count',
+            'unread_notifications_count',
+            'updated',
+            'username',
+            'website',
+        ]
         ordering = ['-date_joined']
 
     def dehydrate_image_count(self, bundle):
@@ -598,3 +603,20 @@ class UserProfileResource(ModelResource):
     def dehydrate_premium_subscription_expiration(self, bundle):
         user_subscription = premium_get_valid_usersubscription(bundle.obj.user)
         return user_subscription.expires if user_subscription else None
+
+    def build_filters(self, filters=None, ignore_bad_filters=False):
+        if filters is None:
+            filters = {}
+
+        username = None
+
+        if 'username' in filters:
+            username = filters['username']
+            del filters['username']
+
+        orm_filters = super(UserProfileResource, self).build_filters(filters)
+
+        if username:
+            orm_filters['user__username'] = username
+
+        return orm_filters

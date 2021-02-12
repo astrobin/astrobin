@@ -15,7 +15,7 @@ botocore==1.16.25
 ccy==1.2.0
 celery[redis]==4.4.7
 certifi==2020.12.5
-cffi==1.14.4
+cffi==1.14.5
 chardet==4.0.0
 click==7.1.2
 Coffin==2.0.1
@@ -104,6 +104,7 @@ fuzzywuzzy[speedup]==0.18
 geoip2==3.0.0
 gevent==20.6.0
 gprof2dot==2019.11.30
+greenlet==0.4.16
 gunicorn==19.10.0
 gunicorn-console==0.1.16
 html5lib==1.1
