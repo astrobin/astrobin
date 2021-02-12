@@ -1,4 +1,4 @@
-FROM nginx:1.15
+FROM arm64v8/nginx:1.18-alpine
 
 COPY docker/localhost.crt /etc/ssl/certs/localhost.crt
 COPY docker/localhost.key /etc/ssl/private/localhost.key

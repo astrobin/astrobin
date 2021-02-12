@@ -3,7 +3,7 @@ version: '3'
 services:
 
   nginx:
-    image: astrobin/nginx-${NGINX_MODE}-20200605.1
+    image: astrobin/nginx-${NGINX_MODE}-arm-20200605.1
     links:
       - astrobin
     ports:

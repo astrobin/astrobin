@@ -292,10 +292,10 @@ the number of CPUs in your server.
 
 ```bash
 export ENV=prod
-docker build -t astrobin/nginx-${ENV} \
+docker build -t astrobin/nginx-${ENV}-arm-20200605.1 \
     --build-arg ENV=${ENV} \
     -f docker/nginx.${ENV}.dockerfile . \
-    && docker push astrobin/nginx-${ENV}
+    && docker push astrobin/nginx-${ENV}-arm-20200605.1
 ```
 
 # Docker Swarm deployment

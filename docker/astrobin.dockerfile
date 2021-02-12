@@ -1,5 +1,5 @@
 # Get the base
-FROM ubuntu:16.04
+FROM arm64v8/ubuntu:16.04
 MAINTAINER Salvatore Iovene <salvatore@astrobin.com>
 
 # Install build prerequisites
