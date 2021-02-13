@@ -17,6 +17,7 @@ describe("Forums", () => {
         cy.get("a").contains("New topic").click();
         cy.url().should("contain", "/topic/add/");
 
+        cy.get('#i-have-read').click();
         cy.get('#forum-usage-modal .btn-primary').click();
 
         // Give the editor 10 seconds to appear
