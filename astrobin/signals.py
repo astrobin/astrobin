@@ -26,6 +26,7 @@ from subscription.signals import paid, signed_up
 from threaded_messages.models import Thread
 
 from astrobin_apps_groups.models import Group
+from astrobin_apps_notifications.tasks import push_notification_for_new_image
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
@@ -93,17 +94,7 @@ def image_post_save(sender, instance, created, **kwargs):
                 'iotd_reviewers', settings.IOTD_DESIGNATED_REVIEWERS_PERCENTAGE, instance.user))
 
         if not instance.is_wip and not instance.skip_notifications:
-            followers = [x.user for x in ToggleProperty.objects.filter(
-                property_type="follow",
-                content_type=ContentType.objects.get_for_model(User),
-                object_id=instance.user.pk)]
-
-            thumb = instance.thumbnail_raw('gallery', None, sync=True)
-            push_notification(followers, 'new_image', {
-                'image': instance,
-                'image_thumbnail': thumb.url if thumb else None
-            })
-
+            push_notification_for_new_image.apply_async(args=(instance.user.pk, instance.pk,))
             if instance.moderator_decision == 1:
                 add_story(instance.user, verb='VERB_UPLOADED_IMAGE', action_object=instance)
 
