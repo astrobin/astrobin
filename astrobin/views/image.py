@@ -62,12 +62,11 @@ from astrobin.utils import to_user_timezone, get_image_resolution
 from astrobin_apps_groups.forms import GroupSelectForm
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
-from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_notifications.tasks import push_notification_for_new_image
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
 from nested_comments.models import NestedComment
-from toggleproperties.models import ToggleProperty
 
 logger = logging.getLogger("apps")
 
@@ -1032,19 +1031,7 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
             image.save(keep_deleted=True)
 
             if not previously_published and not skip_notifications:
-                followers = [
-                    x.user for x in
-                    ToggleProperty.objects.toggleproperties_for_object(
-                        "follow",
-                        UserProfile.objects.get(user__pk=request.user.pk).user)
-                ]
-
-                thumb = image.thumbnail_raw('gallery', None, sync=True)
-                push_notification(followers, 'new_image', {
-                    'image': image,
-                    'image_thumbnail': thumb.url if thumb else None
-                })
-
+                push_notification_for_new_image.apply_async(args=(request.user.pk, image.pk,))
                 add_story(image.user, verb='VERB_UPLOADED_IMAGE', action_object=image)
 
             messages.success(request, _("Image moved to the public area."))
