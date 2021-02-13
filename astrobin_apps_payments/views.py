@@ -60,13 +60,20 @@ def create_checkout_session(request, user_pk, product, currency):
 
         discounts = PricingService.get_stripe_discounts(user)
 
+        if currency.upper() == 'EUR':
+            payment_method_types = ['card', 'sepa_debit']
+        elif currency.upper() == 'CNY':
+            payment_method_types = ['alipay', 'card']
+        else:
+            payment_method_types = ['card']
+
         kwargs = {
             'success_url': AppRedirectionService.redirect(
                 request,
                 '/subscriptions/success?product=' + product + '&session_id={CHECKOUT_SESSION_ID}'),
             'cancel_url': AppRedirectionService.redirect(request, '/subscriptions/cancelled/'),
             'mode': 'payment',
-            'payment_method_types': ['card'],
+            'payment_method_types': payment_method_types,
             'client_reference_id': user.pk,
             'customer': customer_id if customer_id else None,
             'customer_email': user.email if not customer_id else None,
