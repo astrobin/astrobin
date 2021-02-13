@@ -32,6 +32,14 @@
                         timeout: 5000
                     });
                 });
+
+                $('#i-have-read').on('change', function () {
+                    if ($('#i-have-read').is(':checked'))
+                        $('#forum-usage-modal .btn-primary').removeAttr('disabled');
+                    else {
+                        $('#forum-usage-modal .btn-primary').attr('disabled', 'disabled');
+                    }
+                });
             }
         });
     </script>
@@ -78,9 +86,9 @@
                         {% url 'contact' as contact_url %}
                         {% blocktrans trimmed %}
                             Posts about AstroBin itself, such as questions or comments about the IOTD/TP process, or
-                            the AstroBin Index, or the forums themselves, are also considered off-topic and will be
-                            deleted. If you want to provide feedback or ask a question about AstroBin, please
-                            <a href="{{ contact_url }}">contact us</a>: we really value your input!
+                            the AstroBin Index, AstroBin "likes", or the forums themselves, are also considered
+                            off-topic and will be deleted. If you want to provide feedback or ask a question about
+                            AstroBin, please <a href="{{ contact_url }}">contact us</a>: we really value your input!
                         {% endblocktrans %}
                     </p>
                     <p>
@@ -92,14 +100,17 @@
             </div>
         </div>
 
-        <div class="modal-footer">
-            <button data-dismiss="modal" class="btn btn-primary">{% trans "I understand" %}</button>
+        <div class="modal-footer" style="display:flex; align-items:center; justify-content:space-between">
+            <div class="i-have-read form-inline" style="margin: 0; text-align: left; flex: 1">
+                <input type="checkbox" id="i-have-read" name="i-have-read" />
+                <label for="i-have-read">{% trans "I have read the text above" %}</label>
+            </div>
+            <button data-dismiss="modal" class="btn btn-primary" disabled="disabled">{% trans "I understand" %}</button>
         </div>
     </div>
 {% endblock %}
 
 {% block content %}
-
     <h1>{% if forum %}{% trans 'New topic' %}{% else %}{% trans 'New reply' %}{% endif %}</h1>
 
     {% include "pybb/post_form.html" %}
