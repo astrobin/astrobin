@@ -1,8 +1,12 @@
+from datetime import timedelta
+
 from celery import shared_task
 from django.core.management import call_command
+from django_bouncy.models import Delivery, Bounce, Complaint
 
 from astrobin.models import UserProfile, Image
 from astrobin_apps_notifications.utils import push_notification
+from common.services import DateTimeService
 from toggleproperties.models import ToggleProperty
 
 
@@ -34,3 +38,10 @@ def push_notification_for_new_image(user_pk, image_pk):
             'image': image,
             'image_thumbnail': thumb.url if thumb else None
         })
+
+
+@shared_task()
+def clear_old_bouncy_objects():
+    Delivery.objects.filter(created_at__lte=DateTimeService.now() - timedelta(7)).delete()
+    Bounce.objects.filter(created_at__lte=DateTimeService.now() - timedelta(30)).delete()
+    Complaint.objects.filter(created_at__lte=DateTimeService.now() - timedelta(90)).delete()
