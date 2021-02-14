@@ -152,6 +152,8 @@ urlpatterns += [
     ### THIRD PARTY APPS VIEWS                                              ###
     ###########################################################################
 
+    url(r'^silk/', include('silk.urls', namespace='silk')),
+
     # override the default urls
     url(r'^accounts/password/change/$',
         auth_views.password_change,
@@ -483,8 +485,6 @@ urlpatterns += [
 
     url(r'^json-api/', include('astrobin_apps_json_api.urls')),
 ]
-
-urlpatterns += [url(r'^silk/', include('silk.urls', namespace='silk'))]
 
 if not settings.AWS_S3_ENABLED:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
