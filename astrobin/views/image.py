@@ -1,7 +1,7 @@
 import logging
 import re
-import six
 
+import six
 from braces.views import (
     JSONResponseMixin,
     LoginRequiredMixin,
@@ -18,6 +18,7 @@ from django.db.models.query import QuerySet
 from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest, HttpResponseForbidden, HttpResponse
 from django.shortcuts import redirect
 from django.utils.encoding import iri_to_uri
+
 # Temp compat fix, drop when moved to python3
 if six.PY2:
     from django.utils.encoding import smart_unicode
@@ -52,17 +53,16 @@ from astrobin.models import (
     Image, ImageRevision,
     DeepSky_Acquisition,
     SolarSystem_Acquisition,
-    UserProfile,
     LANGUAGES,
     LICENSE_CHOICES,
 )
 from astrobin.stories import add_story
+from astrobin_apps_notifications.tasks import push_notification_for_new_image
 from astrobin.templatetags.tags import can_like
 from astrobin.utils import to_user_timezone, get_image_resolution
 from astrobin_apps_groups.forms import GroupSelectForm
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
-from astrobin_apps_notifications.tasks import push_notification_for_new_image
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
@@ -415,7 +415,8 @@ class ImageDetailView(ImageDetailViewBase):
                     dsa_data['frames'][key]['filter'] = a.filter if a.filter is not None else ''
                     dsa_data['frames'][key]['iso'] = 'ISO%d' % a.iso if a.iso is not None else ''
                     dsa_data['frames'][key]['gain'] = '(gain: %.2f)' % a.gain if a.gain is not None else ''
-                    dsa_data['frames'][key]['sensor_cooling'] = '%dC' % a.sensor_cooling if a.sensor_cooling is not None else ''
+                    dsa_data['frames'][key][
+                        'sensor_cooling'] = '%dC' % a.sensor_cooling if a.sensor_cooling is not None else ''
                     dsa_data['frames'][key]['binning'] = 'bin %sx%s' % (a.binning, a.binning) if a.binning else ''
                     dsa_data['frames'][key]['integration'] = '%sx%s"' % (current_number + a.number, a.duration)
 

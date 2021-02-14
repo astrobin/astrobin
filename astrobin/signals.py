@@ -26,7 +26,7 @@ from subscription.signals import paid, signed_up
 from threaded_messages.models import Thread
 
 from astrobin_apps_groups.models import Group
-from astrobin_apps_notifications.tasks import push_notification_for_new_image
+from astrobin_apps_notifications.tasks import push_notification_for_new_image, push_notification_for_new_image_revision
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
@@ -151,17 +151,7 @@ post_softdelete.connect(image_post_delete, sender=Image)
 
 def imagerevision_post_save(sender, instance, created, **kwargs):
     if created and not instance.image.is_wip and not instance.skip_notifications:
-        followers = [x.user for x in ToggleProperty.objects.filter(
-            property_type="follow",
-            content_type=ContentType.objects.get_for_model(User),
-            object_id=instance.image.user.pk)]
-
-        push_notification(followers, 'new_image_revision',
-                          {
-                              'object_url': settings.BASE_URL + instance.get_absolute_url(),
-                              'originator': instance.image.user.userprofile.get_display_name(),
-                          })
-
+        push_notification_for_new_image_revision.apply_async(args=(instance.pk,))
         add_story(instance.image.user,
                   verb='VERB_UPLOADED_REVISION',
                   action_object=instance,

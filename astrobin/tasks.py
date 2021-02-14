@@ -6,6 +6,7 @@ import ntpath
 import subprocess
 import tempfile
 import zipfile
+
 if six.PY2:
     from StringIO import StringIO
 else:
@@ -33,7 +34,6 @@ from requests import Response
 
 from astrobin.models import BroadcastEmail, Image, DataDownloadRequest, ImageRevision
 from astrobin.utils import inactive_accounts, never_activated_accounts, never_activated_accounts_to_be_deleted
-from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
 

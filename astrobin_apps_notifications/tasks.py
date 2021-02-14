@@ -1,10 +1,13 @@
 from datetime import timedelta
 
 from celery import shared_task
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.core.management import call_command
 from django_bouncy.models import Delivery, Bounce, Complaint
 
-from astrobin.models import UserProfile, Image
+from astrobin.models import Image, UserProfile, ImageRevision
 from astrobin_apps_notifications.utils import push_notification
 from common.services import DateTimeService
 from toggleproperties.models import ToggleProperty
@@ -38,6 +41,27 @@ def push_notification_for_new_image(user_pk, image_pk):
             'image': image,
             'image_thumbnail': thumb.url if thumb else None
         })
+
+
+@shared_task()
+def push_notification_for_new_image_revision(revision_pk):
+    try:
+        revision = ImageRevision.objects.get(pk=revision_pk)
+    except ImageRevision.DoesNotExist:
+        return
+
+    if revision.skip_notifications or revision.image.is_wip:
+        return
+
+    followers = [x.user for x in ToggleProperty.objects.filter(
+        property_type="follow",
+        content_type=ContentType.objects.get_for_model(User),
+        object_id=revision.image.user.pk)]
+
+    push_notification(followers, 'new_image_revision', {
+        'object_url': settings.BASE_URL + revision.get_absolute_url(),
+        'originator': revision.image.user.userprofile.get_display_name(),
+    })
 
 
 @shared_task()
