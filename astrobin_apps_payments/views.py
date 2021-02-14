@@ -62,8 +62,6 @@ def create_checkout_session(request, user_pk, product, currency):
 
         if currency.upper() == 'EUR':
             payment_method_types = ['card', 'sepa_debit']
-        elif currency.upper() == 'CNY':
-            payment_method_types = ['alipay', 'card']
         else:
             payment_method_types = ['card']
 
