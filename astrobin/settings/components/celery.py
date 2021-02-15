@@ -9,7 +9,13 @@ BROKER_TRANSPORT_OPTIONS = {
     'fanout_patterns': True,
 }
 CELERY_RESULT_BACKEND = BROKER_URL
-CELERY_IMPORTS = ('astrobin.tasks', 'djcelery_email.tasks')
+CELERY_IMPORTS = (
+    'astrobin.tasks',
+    'astrobin_apps_iotd.tasks',
+    'astrobin_apps_notifications.tasks',
+    'astrobin_apps_payments.tasks',
+    'djcelery_email.tasks'
+)
 CELERY_DEFAULT_QUEUE = 'default'
 CELERY_ACCEPT_CONTENT = ['json', 'pickle']
 CELERY_TASK_SERIALIZER = 'json'
