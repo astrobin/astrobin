@@ -12,6 +12,7 @@ from django_bouncy.models import Bounce, Complaint
 from gadjo.requestprovider.signals import get_request
 from notification.backends import BaseBackend
 from notification.backends.email import EmailBackend as BaseEmailBackend
+from persistent_messages.models import Message
 
 log = logging.getLogger('apps')
 
@@ -31,26 +32,22 @@ class PersistentMessagesBackend(BaseBackend):
     spam_sensitivity = 1
 
     def deliver(self, recipient, sender, notice_type, extra_context):
-        try:
-            request = get_request()
-        except IndexError:
-            # This may happen during unit testing
-            return
-
         context = self.default_context()
         context.update(extra_context)
 
         if shadow_ban_applies(notice_type, recipient, context):
             return
 
-        messages = self.get_formatted_messages(
-            ['notice.html'],
-            notice_type.label, context)
-        persistent_messages.add_message(
-            request,
-            persistent_messages.INFO,
-            messages['notice.html'],
-            user=recipient)
+        template = 'notice.html'
+        message = self.get_formatted_messages([template], notice_type.label, context)[template]
+        level = persistent_messages.INFO
+
+        try:
+            request = get_request()
+            persistent_messages.add_message(request, level, message, user=recipient)
+        except IndexError:
+            persistent_message = Message(user=recipient, level=level, message=message)
+            persistent_message.save()
 
 
 class EmailBackend(BaseEmailBackend):
