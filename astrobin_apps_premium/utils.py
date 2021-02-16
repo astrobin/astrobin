@@ -85,17 +85,15 @@ def premium_get_valid_usersubscription(user):
     )]
 
     if len(us) == 0:
-        return None
+        result = None
+    elif len(us) == 1:
+        result = us[0]
+    else:
+        sortedByName = sorted(us, cmp=_compareNames)
+        sortedByValidity = sorted(sortedByName, cmp=_compareValidity)
+        result = sortedByName[0]
 
-    if len(us) == 1:
-        return us[0]
-
-    sortedByName = sorted(us, cmp=_compareNames)
-    sortedByValidity = sorted(sortedByName, cmp=_compareValidity)
-
-    result = sortedByName[0]
-
-    cache.set(cache_key, result, 1)
+    cache.set(cache_key, result, 300)
 
     return result
 

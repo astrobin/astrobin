@@ -70,11 +70,12 @@ def is_donor(user):
             ))
 
         if not us.exists():
-            return False
+            result = False
+        else:
+            us = us[0]
+            result = us.active and us.expires >= date.today()
 
-        us = us[0]
-        result = us.active and us.expires >= date.today()
-        cache.set(cache_key, result, 1)
+        cache.set(cache_key, result, 300)
         return result
 
     return False

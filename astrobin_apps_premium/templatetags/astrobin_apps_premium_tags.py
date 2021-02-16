@@ -2,6 +2,7 @@ import datetime
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.db.models import QuerySet, Q
 from django.template import Library
 from subscription.models import Subscription, UserSubscription
@@ -19,45 +20,6 @@ def premium_badge(user, size='large'):
         'size': size,
     }
 
-
-@register.filter
-def show_renew_message(usersubscription):
-    # type: (UserSubscription) -> bool
-    return usersubscription is not None and usersubscription.valid() and usersubscription.subscription.name in [
-        "AstroBin Lite",
-        "AstroBin Lite 2020+",
-        "AstroBin Premium",
-        "AstroBin Premium 2020+",
-        "AstroBin Ultimate 2020+"
-    ]
-
-@register.simple_tag
-def offered_subscriptions():
-    # type: () -> QuerySet
-    return Subscription.objects.filter(name__in=[
-        "AstroBin Lite 2020+",
-        "AstroBin Premium 2020+",
-        "AstroBin Ultimate 2020+",
-
-        "AstroBin Raw Data Meteor 2020+",
-        "AstroBin Raw Data Luna 2020+",
-        "AstroBin Raw Data Sol 2020+",
-
-        "AstroBin Donor Bronze Monthly",
-        "AstroBin Donor Silver Monthly",
-        "AstroBin Gold Silver Monthly",
-        "AstroBin Platinum Silver Monthly",
-
-        "AstroBin Donor Bronze Yearly",
-        "AstroBin Donor Silver Yearly",
-        "AstroBin Gold Silver Yearly",
-        "AstroBin Platinum Silver Yearly",
-    ])
-
-@register.filter
-def is_subscription_offered(subscription):
-    # type: (Subscription) -> bool
-    return subscription in offered_subscriptions()
 
 @register.filter
 def is_any_ultimate(user):
@@ -131,28 +93,47 @@ def is_any_premium_subscription(user):
 
 @register.filter
 def has_an_expired_premium_subscription(user):
-    if is_any_premium_subscription(user):
-        return False
+    cache_key = "has_an_expired_premium_subscription_%d" % user.pk
 
-    return UserSubscription.objects.filter(
-        user=user,
-        expires__lt=DateTimeService.today(),
-        subscription__category__contains="premium"
-    ).exists()
+    cached = cache.get(cache_key)
+    if cached is not None:
+        return cached
+
+    if is_any_premium_subscription(user):
+        result = False
+    else:
+        result = UserSubscription.objects.filter(
+            user=user,
+            expires__lt=DateTimeService.today(),
+            subscription__category__contains="premium"
+        ).exists()
+
+    cache.set(cache_key, result, 300)
+    return result
 
 
 @register.filter
 def has_premium_subscription_near_expiration(user, days):
-    if has_an_expired_premium_subscription(user):
-        return False
+    cache_key = "has_premium_subscription_near_expiration_%d" % user.pk
 
-    return UserSubscription.objects.filter(
-        Q(user=user) &
-        Q(active=True) &
-        Q(expires__lt=DateTimeService.today() + datetime.timedelta(days)) &
-        Q(expires__gt=DateTimeService.today()) &
-        Q(subscription__category__contains="premium")
-    ).exists()
+    cached = cache.get(cache_key)
+    if cached is not None:
+        return cached
+
+    if has_an_expired_premium_subscription(user):
+        result = False
+    else:
+        result = UserSubscription.objects.filter(
+            Q(user=user) &
+            Q(active=True) &
+            Q(expires__lt=DateTimeService.today() + datetime.timedelta(days)) &
+            Q(expires__gt=DateTimeService.today()) &
+            Q(subscription__category__contains="premium")
+        ).exists()
+
+    cache.set(cache_key, result, 300)
+    return result
+
 
 @register.filter
 def is_usersubscription_current(user_subscription):

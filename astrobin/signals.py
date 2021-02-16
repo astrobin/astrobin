@@ -30,6 +30,7 @@ from astrobin_apps_notifications.tasks import push_notification_for_new_image, p
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
+from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_lite, is_any_premium_subscription, is_lite_2020, is_any_ultimate, is_premium_2020, is_premium, is_free)
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
@@ -358,6 +359,8 @@ def subscription_paid(sender, **kwargs):
     subscription = kwargs.get('subscription')
     user = kwargs.get('user')
 
+    PremiumService.clear_subscription_status_cache_keys(user.pk)
+
     if subscription.group.name == 'astrobin_lite':
         profile = user.userprofile
         profile.premium_counter = 0
@@ -379,6 +382,8 @@ def subscription_signed_up(sender, **kwargs):
     subscription = kwargs.get('subscription')
     user_subscription = kwargs.get('usersubscription')
     user = kwargs.get('user')
+
+    PremiumService.clear_subscription_status_cache_keys(user.pk)
 
     if 'premium' in subscription.category:
         if user_subscription.expires is None:
