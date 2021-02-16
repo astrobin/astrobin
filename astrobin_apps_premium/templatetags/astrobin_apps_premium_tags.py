@@ -2,7 +2,7 @@ import datetime
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.db.models import QuerySet
+from django.db.models import QuerySet, Q
 from django.template import Library
 from subscription.models import Subscription, UserSubscription
 
@@ -140,6 +140,19 @@ def has_an_expired_premium_subscription(user):
         subscription__category__contains="premium"
     ).exists()
 
+
+@register.filter
+def has_premium_subscription_near_expiration(user, days):
+    if has_an_expired_premium_subscription(user):
+        return False
+
+    return UserSubscription.objects.filter(
+        Q(user=user) &
+        Q(active=True) &
+        Q(expires__lt=DateTimeService.today() + datetime.timedelta(days)) &
+        Q(expires__gt=DateTimeService.today()) &
+        Q(subscription__category__contains="premium")
+    ).exists()
 
 @register.filter
 def is_usersubscription_current(user_subscription):
