@@ -7,5 +7,4 @@ class PremiumService:
         cache.delete("has_an_expired_premium_subscription_%d" % user_pk)
         cache.delete("has_premium_subscription_near_expiration_%d" % user_pk)
         cache.delete("astrobin_is_donor_%d" % user_pk)
-        cache.delete("is_any_ultimate_%d" % user_pk)
         cache.delete("astrobin_valid_usersubscription_%d" % user_pk)
