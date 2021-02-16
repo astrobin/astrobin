@@ -55,12 +55,17 @@
 }
 
 .alert-info {
+  background-color: $grey-7;
+  color: $text-color;
+  border-color: $grey-8;
+  text-shadow: none;
+
   h3 {
-    color: $black;
+    color: $white;
   }
 
   strong {
-    color: $background-color;
+    color: $white;
   }
 }
 

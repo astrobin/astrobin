@@ -34,6 +34,53 @@
                        href="{% app_redirection_service request '/subscriptions/options' %}">
                         {% trans "Subscription plans" %}
                     </a>
+
+                    <a class="btn btn-small"
+                       href="{% app_redirection_service request '/subscriptions/view' %}">
+                        {% trans "Your subscriptions" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+
+{% if request.user.is_authenticated and request.user|has_premium_subscription_near_expiration:7 %}
+
+    <div class="accordion container" id="expired-subscription-accordion">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle show-caret collapsed" data-toggle="collapse"
+                   data-parent="#expired-subscription-accordion" href="#expired-subscription-accordion-content">
+                    <i class="icon-info-sign"></i>
+                    {% blocktrans trimmed %}
+                        Your AstroBin subscription about to expire.
+                    {% endblocktrans %}
+                </a>
+            </div>
+            <div id="expired-subscription-accordion-content" class="accordion-body collapse">
+                <div class="accordion-inner alert alert-info global-alert">
+                    <p>
+                        {% blocktrans trimmed %}
+                            That's okay: we don't EVER delete your images if your subscription expires.
+                        {% endblocktrans %}
+
+                        {% blocktrans trimmed %}
+                            However, it would be great if you considered renewing: it's inexpensive and it goes a
+                            long way to support the AstroBin project!
+                        {% endblocktrans %}
+                    </p>
+
+                    <a class="btn btn-small btn-primary"
+                       href="{% app_redirection_service request '/subscriptions/options' %}">
+                        {% trans "Subscription plans" %}
+                    </a>
+
+
+                    <a class="btn btn-small" href="{% app_redirection_service request '/subscriptions/view' %}">
+                        {% trans "Your subscriptions" %}
+                    </a>
                 </div>
             </div>
         </div>
