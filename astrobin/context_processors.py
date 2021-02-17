@@ -1,6 +1,7 @@
 from datetime import timedelta, datetime
 
 from django.conf import settings
+from django.core.cache import cache
 
 from astrobin.enums import SubjectType
 from astrobin.fields import COUNTRIES
@@ -8,7 +9,6 @@ from astrobin.models import Image
 from astrobin.utils import get_client_country_code
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import get_unseen_notifications
-from astrobin_apps_users.services import UserService
 
 
 def notices_count(request):
@@ -67,16 +67,30 @@ def common_variables(request):
     complained = False
 
     if request.user.is_authenticated():
-        hard_bounces = Bounce.objects.filter(
-            hard=True,
-            address=request.user.email,
-            bounce_type="Permanent")
-        soft_bounces = Bounce.objects.filter(
-            hard=False,
-            address=request.user.email,
-            bounce_type="Transient",
-            created_at__gte=datetime.now() - timedelta(days=7))[:3]
-        complained = Complaint.objects.filter(address=request.user.email).exists()
+        cache_key = 'hard_bounces_%d' % request.user.pk
+        hard_bounces = cache.get(cache_key)
+        if hard_bounces is None:
+            hard_bounces = Bounce.objects.filter(
+                hard=True,
+                address=request.user.email,
+                bounce_type="Permanent")
+            cache.set(cache_key, hard_bounces, 3600)
+
+        cache_key = 'soft_bounces_%d' % request.user.pk
+        soft_bounces = cache.get(cache_key)
+        if soft_bounces is None:
+            soft_bounces = Bounce.objects.filter(
+                hard=False,
+                address=request.user.email,
+                bounce_type="Transient",
+                created_at__gte=datetime.now() - timedelta(days=7))[:3]
+            cache.set(cache_key, soft_bounces, 3600)
+
+        cache_key = 'complained_%d' % request.user.pk
+        complained = cache.get(cache_key)
+        if complained is None:
+            complained = Complaint.objects.filter(address=request.user.email).exists()
+            cache.set(cache_key, complained, 3600)
 
     d = {
         'True': True,
