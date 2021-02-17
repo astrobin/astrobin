@@ -61,9 +61,9 @@
             </h4>
         </div>
 
-        {% pybb_get_latest_topics cnt=6 as topic_list %}
-
-        <table class="table table-striped topic-list index-recent-topics">
+        {% cache 120 home_page_latest_from_forums request.user.pk LANGUAGE_CODE %}
+            {% pybb_get_latest_topics cnt=6 as topic_list %}
+            <table class="table table-striped topic-list index-recent-topics">
             <tbody>
                 {% for topic in topic_list|pybb_topic_unread:request.user %}
                     <tr class="topic-row{% if topic.on_moderation %} on-moderation{% endif %}">
@@ -114,6 +114,7 @@
                 {% endfor %}
             </tbody>
         </table>
+        {% endcache %}
     </div>
 
     {% with ad_container_classes='advertisement-frontpage' %}
@@ -182,10 +183,20 @@
             </h4>
         </div>
 
-        {% if section == 'global' or section == 'personal' %}
+        {% if section == 'global' %}
             <div class="activity-actions">
                 <div class="endless">
-                    {% include 'index/stream_page.html' %}
+                    {% cache 120 home_page_global_stream LANGUAGE_CODE %}
+                        {% include 'index/stream_page.html' %}
+                    {% endcache %}
+                </div> <!-- endless -->
+            </div> <!-- activity stream container -->
+        {% elif section == 'personal' %} %}
+            <div class="activity-actions">
+                <div class="endless">
+                    {% cache 120 home_page_personal_stream request.user.pk LANGUAGE_CODE %}
+                        {% include 'index/stream_page.html' %}
+                    {% endcache %}
                 </div> <!-- endless -->
             </div> <!-- activity stream container -->
         {% else %}

@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User, Group as DjangoGroup
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
 from django.core.urlresolvers import reverse as reverse_url
 from django.db import IntegrityError
 from django.db import transaction
@@ -17,7 +18,7 @@ from django.db.models.signals import (
     pre_save, post_save, post_delete, m2m_changed)
 from django.utils.translation import ugettext_lazy as _, gettext, override
 from gadjo.requestprovider.signals import get_request
-from pybb.models import Forum, Topic, Post
+from pybb.models import Forum, Topic, Post, TopicReadTracker
 from rest_framework.authtoken.models import Token
 from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete
@@ -658,6 +659,11 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
             },
         )
 
+    cache_key = make_template_fragment_key(
+        'home_page_latest_from_forums',
+        (instance.user.pk, instance.user.userprofile.language))
+    cache.delete(cache_key)
+
 
 post_save.connect(forum_topic_post_save, sender=Topic)
 
@@ -721,8 +727,22 @@ def forum_post_post_save(sender, instance, created, **kwargs):
         except User.DoesNotExist:
             pass
 
+    cache_key = make_template_fragment_key(
+        'home_page_latest_from_forums',
+        (instance.user.pk, instance.user.userprofile.language))
+    cache.delete(cache_key)
 
 post_save.connect(forum_post_post_save, sender=Post)
+
+
+def topic_read_tracker_post_save(sender, instance, created, **kwargs):
+    cache_key = make_template_fragment_key(
+        'home_page_latest_from_forums',
+        (instance.user.pk, instance.user.userprofile.language))
+    cache.delete(cache_key)
+
+
+post_save.connect(topic_read_tracker_post_save, sender=TopicReadTracker)
 
 
 def threaded_messages_thread_post_save(sender, instance, created, **kwargs):
