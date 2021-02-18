@@ -183,20 +183,10 @@
             </h4>
         </div>
 
-        {% if section == 'global' %}
+        {% if section == 'global' or section == 'personal' %}
             <div class="activity-actions">
                 <div class="endless">
-                    {% cache 120 home_page_global_stream LANGUAGE_CODE %}
-                        {% include 'index/stream_page.html' %}
-                    {% endcache %}
-                </div> <!-- endless -->
-            </div> <!-- activity stream container -->
-        {% elif section == 'personal' %} %}
-            <div class="activity-actions">
-                <div class="endless">
-                    {% cache 120 home_page_personal_stream request.user.pk LANGUAGE_CODE %}
-                        {% include 'index/stream_page.html' %}
-                    {% endcache %}
+                    {% include 'index/stream_page.html' %}
                 </div> <!-- endless -->
             </div> <!-- activity stream container -->
         {% else %}
