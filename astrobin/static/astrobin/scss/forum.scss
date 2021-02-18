@@ -356,7 +356,7 @@ th.forum-name {
     @media screen and (max-width: 579px) {
       min-width: unset;
       margin: 0 0 .5rem 0;
-      width: calc(100% + .5rem);
+      width: calc(100% - -.5rem);
     }
 
     input {
