@@ -2,6 +2,7 @@
 
 export NGINX_MODE=dev
 export ASTROBIN_BUILD=${CODEBUILD_RESOLVED_SOURCE_VERSION}
+export ASTROBIN_GUNICORN_WORKERS=1
 
 npm ci &
 docker-compose \
