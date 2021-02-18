@@ -340,23 +340,44 @@ th.forum-name {
   align-items: center;
   margin-bottom: 1em;
 
+  @media screen and (max-width: 579px) {
+    flex-direction: column;
+  }
+
+  @media screen and (max-width: 767px) {
+    padding: 0 1rem;
+  }
+
   .forum-search {
     margin-bottom: 0;
     margin-right: 1rem;
+    min-width: 300px;
+
+    @media screen and (max-width: 579px) {
+      min-width: unset;
+      margin: 0 0 .5rem 0;
+      width: calc(100% + .5rem);
+    }
 
     input {
       margin-bottom: 0;
+      width: calc(100% - 1rem);
     }
   }
 
   .btn {
-    margin-right: 1rem;
+    white-space: nowrap;
+
+    @media screen and (max-width: 579px) {
+      width: calc(100% - 2rem);
+    }
   }
 
   .pagination {
-    margin: 0;
+    margin: 0 0 0 1rem;
     text-align: right !important;
     display: inline-flex;
+    min-width: 74px;
   }
 }
 
