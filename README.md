@@ -97,6 +97,7 @@ And then bring up the stack:
 ```bash
 export DOCKER_REGISTRY=astrobin
 export ASTROBIN_BUILD=dev
+export ASTROBIN_GUNICORN_WORKERS=1
 export NGINX_MODE=dev
 compose up -d
 ```
@@ -304,6 +305,7 @@ To deploy with docker stack:
 
 ```bash
 export NGINX_MODE=dev # or prod
+export ASTROBIN_GUNICORN_WORKERS=1 # or number of CPU cores + 1
 docker swarm init
 docker stack deploy \
     -c docker/docker-compose-app.yml \
