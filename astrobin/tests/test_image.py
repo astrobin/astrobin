@@ -81,19 +81,6 @@ class ImageTest(TestCase):
         profile.filters = self.filters
         profile.accessories = self.accessories
 
-    def tearDown(self):
-        for i in self.imaging_telescopes: i.delete()
-        for i in self.guiding_telescopes: i.delete()
-        for i in self.mounts: i.delete()
-        for i in self.imaging_cameras: i.delete()
-        for i in self.guiding_cameras: i.delete()
-        for i in self.focal_reducers: i.delete()
-        for i in self.software: i.delete()
-        for i in self.filters: i.delete()
-        for i in self.accessories: i.delete()
-
-        self.user.delete()
-        self.user2.delete()
 
     ###########################################################################
     # HELPERS                                                                 #
@@ -1017,6 +1004,29 @@ class ImageTest(TestCase):
         g.delete()
 
         image.delete()
+
+    def test_image_detail_view_revision_redirect_to_original_if_no_revisions(self):
+        image = Generators.image()
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': 'B'}))
+        self.assertRedirects(response, "/%s/0/" % image.hash)
+
+
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
+    def test_image_detail_view_revision_redirect_to_final_revision_if_missing(self):
+        image = Generators.image(is_final=False)
+        b = Generators.imageRevision(image=image, is_final=True)
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': 'C'}))
+        self.assertRedirects(response, "/%s/%s/" % (image.hash, b.label))
+
+
+    @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
+    def test_image_detail_view_revision_redirect_to_final_revision_if_deleted(self):
+        image = Generators.image(is_final=False)
+        b = Generators.imageRevision(image=image, is_final=False)
+        c = Generators.imageRevision(image=image, is_final=True, label='C')
+        b.delete()
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': b.label}))
+        self.assertRedirects(response, "/%s/%s/" % (image.hash, c.label))
 
 
     def test_image_7_digit_gain(self):
