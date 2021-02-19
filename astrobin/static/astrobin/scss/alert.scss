@@ -55,17 +55,22 @@
 }
 
 .alert-info {
-  background-color: $grey-7;
+  background-color: $grey-8;
   color: $text-color;
-  border-color: $grey-8;
+  border-color: $grey-9;
   text-shadow: none;
 
-  h3 {
+  h3, h4 {
     color: $white;
   }
 
   strong {
     color: $white;
+  }
+
+  .close {
+    color: $white;
+    text-shadow: none;
   }
 }
 
