@@ -235,21 +235,28 @@ class ImageDetailView(ImageDetailViewBase):
             else:
                 raise Http404
 
-        if revision_label != '0':
+        if revision_label is not None and revision_label != '0':
             try:
-                revision = image.revisions.get(label=revision_label)
+                revision = ImageService(image).get_revisions(include_corrupted=True).get(label=revision_label)
                 if revision.corrupted:
                     if request.user == image.user:
                         return redirect(reverse('image_edit_revision', args=(revision.pk,)) + '?corrupted')
                     else:
                         raise Http404
             except ImageRevision.DoesNotExist:
-                pass
+                revision = ImageService(image).get_final_revision()
+                redirect_revision_label = revision.label if hasattr(revision, 'label') else '0'
+                if request.user.is_authenticated:
+                    messages.info(request, _(
+                        "You requested revision %s, but it doesn't exist or it was deleted. We redirected you to the "
+                        "revision currently marked as final." % revision_label
+                    ))
+                return redirect(reverse('image_detail', args=(image.get_id(), redirect_revision_label,)))
 
         if revision_label is None:
             # No revision specified, let's see if we need to redirect to the
             # final.
-            if image.is_final == False:
+            if not image.is_final:
                 final = image.revisions.filter(is_final=True)
                 if final.count() > 0:
                     url = reverse_lazy(
