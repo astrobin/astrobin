@@ -9,7 +9,7 @@
         <ul class="thumbnails astrobin-thumbnails">
             {% if not image.corrupted %}
                 <li class="thumbnail astrobin-thumbnail revisions">
-                    <div class="revision">
+                    <div class="revision{% if revision_label == '0' or revision_label == None %} current{% endif %}">
                         {% if image.is_final %}
                             <div class="final">
                                 <span class="text">
@@ -66,7 +66,7 @@
 
             {% for r in revisions %}
                 <li class="thumbnail astrobin-thumbnail revisions">
-                    <div class="revision">
+                    <div class="revision{% if r.label == revision_label %} current{% endif %}">
                         {% if r.is_final %}
                             <div class="final">
                                 <span class="text">
