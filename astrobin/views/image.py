@@ -881,48 +881,13 @@ class ImageDeleteOriginalView(ImageDeleteView):
         return self.image.get_absolute_url()
 
     def post(self, *args, **kwargs):
-        image = self.get_object()
-        revisions = ImageRevision.all_objects.filter(image=image)
+        self.image = self.get_object()
 
-        if not revisions:
+        revisions = ImageService(self.image).get_revisions()
+        if not revisions.exists():
             return HttpResponseBadRequest()
 
-        final = None
-        if image.is_final:
-            final = revisions[0]
-        else:
-            for r in revisions:
-                if r.is_final:
-                    final = r
-
-        if final is None:
-            # Fallback to the most recent revision.
-            final = revisions[0]
-
-        image.thumbnail_invalidate()
-
-        image.image_file = final.image_file
-        image.updated = final.uploaded
-        image.w = final.w
-        image.h = final.h
-        image.is_final = True
-
-        if image.solution:
-            image.solution.delete()
-
-        image.save(keep_deleted=True)
-
-        if final.solution:
-            # Get the solution this way, I don't know why it wouldn't work otherwise
-            content_type = ContentType.objects.get_for_model(ImageRevision)
-            solution = Solution.objects.get(content_type=content_type, object_id=final.pk)
-            solution.content_object = image
-            solution.save()
-
-        image.thumbnails.filter(revision=final.label).update(revision='0')
-        self.image = image
-        final.delete()
-
+        ImageService(self.image).delete_original()
         messages.success(self.request, _("Original version deleted!"));
         # We do not call super, because that would delete the Image
         return HttpResponseRedirect(self.get_success_url())
@@ -933,7 +898,7 @@ class ImageDeleteOtherVersionsView(LoginRequiredMixin, View):
         image = Image.objects_including_wip.get(pk=kwargs.get('id'))  # type: Image
 
         if self.request.user != image.user and not self.request.user.is_superuser:
-            return HttpResponseForbidden();
+            return HttpResponseForbidden()
 
         revisions = ImageRevision.all_objects.filter(image=image)
 

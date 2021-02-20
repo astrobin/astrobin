@@ -38,6 +38,7 @@ class Generators:
     def image(*args, **kwargs):
         return Image.objects.create(
             user=kwargs.pop('user', Generators.user()),
+            image_file=kwargs.pop('image_file', 'images/foo.jpg'),
             is_wip=kwargs.pop('is_wip', False),
             is_final=kwargs.pop('is_final', True),
             corrupted=kwargs.pop('corrupted', False),
@@ -53,6 +54,7 @@ class Generators:
 
         return ImageRevision.objects.create(
             image=image,
+            image_file=kwargs.pop('image_file', 'images/foo.jpg'),
             is_final=kwargs.pop('is_final', False),
             corrupted=kwargs.pop('corrupted', False),
             label=kwargs.pop('label', 'B'),
