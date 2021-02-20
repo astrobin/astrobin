@@ -2,6 +2,7 @@ import logging
 from datetime import datetime, timedelta
 
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.files.images import get_image_dimensions
 from django.db.models import Q
@@ -9,6 +10,7 @@ from django.db.models import Q
 from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
 from astrobin.utils import base26_encode, base26_decode
 from astrobin_apps_images.models import ThumbnailGroup
+from astrobin_apps_platesolving.models import Solution
 
 logger = logging.getLogger("apps")
 
@@ -231,6 +233,38 @@ class ImageService:
         thumbnails, created = ThumbnailGroup.objects.get_or_create(image=self.image, revision=revision_label)
         setattr(thumbnails, alias, url)
         thumbnails.save()
+
+    def delete_original(self):
+        image = self.image
+        revisions = self.get_revisions()
+
+        image.thumbnail_invalidate()
+
+        if image.solution:
+            image.solution.delete()
+
+        if not revisions.exists():
+            image.delete()
+            return
+
+        new_original = revisions.first()
+
+        image.image_file = new_original.image_file
+        image.updated = new_original.uploaded
+        image.w = new_original.w
+        image.h = new_original.h
+        image.is_final = image.is_final or new_original.is_final
+        image.save(keep_deleted=True)
+
+        if new_original.solution:
+            # Get the solution this way, I don't know why it wouldn't work otherwise
+            content_type = ContentType.objects.get_for_model(ImageRevision)
+            solution = Solution.objects.get(content_type=content_type, object_id=new_original.pk)
+            solution.content_object = image
+            solution.save()
+
+        image.thumbnails.filter(revision=new_original.label).update(revision='0')
+        new_original.delete()
 
     @staticmethod
     def verify_file(path):

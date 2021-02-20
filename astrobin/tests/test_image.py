@@ -2847,7 +2847,7 @@ class ImageTest(TestCase):
         image.save(keep_deleted=True)
 
         # As the test user does not have a high enough Image Index, the
-        # iamge should be in the moderation queue.
+        # image should be in the moderation queue.
         self.assertEquals(image.moderator_decision, 0)
         self.assertEquals(image.moderated_when, None)
         self.assertEquals(image.moderated_by, None)
