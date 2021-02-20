@@ -156,7 +156,7 @@
                                         <strong class="card-label">{{ data.0 }}:</strong>
                                         {% if data.0 == dates_label %}
                                             {% for date in data.1 %}
-                                                <a href="/search/{% query_string "q=, start_date=date, end_date=date" "plate_solving_started, r, mod" %}">{{ date|date:"DATE_FORMAT" }}</a>
+                                                <a href="/search/{% query_string "q=, date_acquired_min=date, date_acquired_max=date, d=i, t=all" "plate_solving_started, r, mod" %}">{{ date|date:"DATE_FORMAT" }}</a>
                                                 {% if not forloop.last %},&nbsp;{% endif %}
                                             {% endfor %}
                                         {% else %}
