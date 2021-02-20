@@ -2293,6 +2293,16 @@ form.avatar-change label.control-label {
           color: #111;
         }
       }
+
+      &.current {
+        box-shadow: 0 0 1rem $link-color;
+        border-radius: 12px;
+
+        .label {
+          background-color: $link-color;
+          color: $white;
+        }
+      }
     }
 
     .revision-description {
