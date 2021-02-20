@@ -2838,8 +2838,10 @@ class ImageTest(TestCase):
         self.client.logout()
         image.delete()
 
+    @patch('astrobin.models.UserProfile.get_scores')
+    def test_image_moderation(self, get_scores):
+        get_scores.return_value = {'user_scores_index': 0}
 
-    def test_image_moderation(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
