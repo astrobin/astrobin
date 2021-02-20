@@ -1,0 +1,28 @@
+<script type="text/x-template" id="date-acquired-filter-template">
+    <div class="form-group date-acquired-filter" :class="{highlighted: highlighted}">
+        <input id="date-acquired-min-value" name="date_acquired_min" autocomplete="off" class="datepickerclass"
+               type="text" :value="dateAcquiredMin" />
+        <input id="date-acquired-max-value" name="date_acquired_max" autocomplete="off" class="datepickerclass"
+               type="text" :value="dateAcquiredMax" />
+    </div>
+</script>
+
+<script>
+    Vue.component("date-acquired-filter", {
+        template: "#date-acquired-filter-template",
+        props: [
+            "dateAcquiredMin",
+            "dateAcquiredMax"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        mounted() {
+            $('.date-acquired-filter .datepickerclass').datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true
+            });
+        }
+    });
+</script>

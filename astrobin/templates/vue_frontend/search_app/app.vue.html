@@ -56,6 +56,10 @@
                                         :date-published-min="datePublishedMin"
                                         :date-published-max="datePublishedMax"></date-published-filter>
 
+                                <date-acquired-filter v-if="filter.name === 'date_acquired'"
+                                       :date-acquired-min="dateAcquiredMin"
+                                       :date-acquired-max="dateAcquiredMax"></date-acquired-filter>
+                
                                 <camera-type-filter
                                         v-if="filter.name === 'camera_type'"
                                         :camera-type="cameraType"></camera-type-filter>
@@ -199,6 +203,18 @@
             datePublishedMax:
                 {% if "date_published_max" in request.GET %}
                     "{{ request.GET.date_published_max }}"
+                {% else %}
+                    new Date().toISOString().split('T')[0]
+                {% endif %},
+            dateAcquiredMin:
+                {% if "date_acquired_min" in request.GET %}
+                    "{{ request.GET.date_acquired_min }}"
+                {% else %}
+                    "1900-01-01"
+                {% endif %},
+            dateAcquiredMax:
+                {% if "date_acquired_max" in request.GET %}
+                    "{{ request.GET.date_acquired_max }}"
                 {% else %}
                     new Date().toISOString().split('T')[0]
                 {% endif %},
@@ -347,6 +363,11 @@
                     removable: true
                 },
                 {
+                    name: "date_acquired",
+                    label: "{% trans "Acquisition date range" %}",
+                    removable: true
+                },
+                {
                     name: "camera_type",
                     label: "{% trans "Camera type" %}",
                     removable: true
@@ -445,6 +466,10 @@
 
             if (this.datePublishedMin || this.datePublishedMax) {
                 this.enabledFilters.push(this.getFilterByName("date_published"));
+            }
+
+            if (this.dateAcquiredMin || this.dateAcquiredMax) {
+                this.enabledFilters.push(this.getFilterByName("date_acquired"));
             }
 
             if (this.cameraType) {
