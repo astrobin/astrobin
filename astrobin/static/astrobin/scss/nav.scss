@@ -8,24 +8,30 @@ body.full {
       border-bottom-right-radius: 0;
     }
 
-    .nav.buttons > li .btn {
-      color: $black;
-      background-color: $grey-2;
-      padding: 6px;
-      margin-left: 6px;
-      text-shadow: none;
+    .nav.buttons > li {
+      .btn {
+        color: $black;
+        background-color: $grey-2;
+        padding: 6px;
+        margin-left: 6px;
+        text-shadow: none;
 
-      &.btn-primary {
-        color: white;
-        background-color: $link-color;
+        &.btn-primary {
+          color: white;
+          background-color: $link-color;
 
-        &:hover {
+          &:hover {
+            background-position: initial;
+          }
+        }
+
+        &:hover, &:focus {
           background-position: initial;
         }
       }
 
-      &:hover, &:focus {
-        background-position: initial;
+      .enable-solution-overlay-form {
+        margin-top: 1.5px;
       }
     }
   }
