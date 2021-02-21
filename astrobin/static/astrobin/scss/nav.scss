@@ -36,9 +36,14 @@ body.full {
     display: flex;
 
     .btn {
-      line-height: 20px;
+      line-height: 18px;
       padding: 5px 10px;
       font-size: 13px;
+
+      &.active {
+        opacity: .75;
+        color: lighten($link-color, 20%) !important;
+      }
     }
   }
 }
