@@ -78,7 +78,6 @@
                     <div class="full-title">
                         <span class="title">{{ image.title|escape|default:_("(no title)") }}</span>
                         <span class="subtitle">
-                            (
                             {% if image.published %}
                                 {{ image.published }}
                             {% else %}
@@ -89,7 +88,6 @@
                             {% blocktrans trimmed with user=image.user.userprofile %}
                                 by <a href="{{ the_url }}">{{ user }}</a>
                             {% endblocktrans %}
-                            )
                         </span>
                     </div>
                 </li>
