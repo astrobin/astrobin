@@ -4,13 +4,19 @@
 body.full {
   .navbar {
     .nav.buttons > li > a.btn {
-      color: black;
+      color: $black;
+      background-color: $grey-2;
       padding: 6px;
       margin-left: 6px;
       text-shadow: none;
 
       &.btn-primary {
         color: white;
+        background-color: $link-color;
+
+        &:hover {
+          background-position: initial;
+        }
       }
 
       &:hover, &:focus {
