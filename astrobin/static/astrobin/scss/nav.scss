@@ -3,6 +3,11 @@
 
 body.full {
   .navbar {
+    .navbar-inner {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
     .nav.buttons > li > a.btn {
       color: $black;
       background-color: $grey-2;
