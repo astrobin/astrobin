@@ -411,26 +411,6 @@ def subscription_signed_up(sender, **kwargs):
 signed_up.connect(subscription_signed_up)
 
 
-def reset_lite_and_premium_counter(sender, **kwargs):
-    subscription = kwargs.get("subscription")  # type: Subscription
-    usersubscription = kwargs.get("usersubscription")  # type: UserSubscription
-    user = usersubscription.user  # type: User
-
-    if subscription.group.name in ('astrobin_lite_2020', 'astrobin_premium_2020'):
-        previous = UserSubscription.objects.filter(
-            user__username=user.username,
-            subscription__name__in=("AstroBin Premium", "AstroBin Lite"),
-            expires__gte=datetime.date.today() - datetime.timedelta(days=180)
-        )
-
-        if previous:
-            user.userprofile.premium_counter = 0
-            user.userprofile.save()
-
-
-signed_up.connect(reset_lite_and_premium_counter)
-
-
 def group_pre_save(sender, instance, **kwargs):
     try:
         group = sender.objects.get(pk=instance.pk)
