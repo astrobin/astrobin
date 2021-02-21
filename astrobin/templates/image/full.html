@@ -39,6 +39,7 @@
     {% include "base/ga.html" %}
     {% include "base/facebook.html" %}
 
+    <script type="text/javascript" src="{% static 'common/js/jquery-1.8.3.js' %}"></script>
     <script src="{% static 'astrobin_apps_platesolving/js/astrobin_apps_platesolving.js' %}"></script>
 </head>
 
@@ -48,7 +49,7 @@
     {% cookielaw_banner %}
 {% endif %}
 
-<div class="navbar navbar-fixed-top" id="top">
+<div class="navbar" id="top">
     <div class="navbar-inner">
         <div class="container-fluid">
             {% show_10_year_anniversary_logo as show_10_year_anniversary_logo %}
@@ -72,12 +73,11 @@
                 </a>
             {% endif %}
 
-            <ul class="nav">
+            <ul class="nav nav-title">
                 <li>
                     <div class="full-title">
                         <span class="title">{{ image.title|escape|default:_("(no title)") }}</span>
                         <span class="subtitle">
-                            (
                             {% if image.published %}
                                 {{ image.published }}
                             {% else %}
@@ -88,16 +88,15 @@
                             {% blocktrans trimmed with user=image.user.userprofile %}
                                 by <a href="{{ the_url }}">{{ user }}</a>
                             {% endblocktrans %}
-                            )
                         </span>
                     </div>
                 </li>
             </ul>
-            <ul class="nav pull-right">
+            <ul class="nav buttons">
                 {% with request.GET.mod as mod %}
                     {% if show_advanced_solution and not real %}
                         <li>
-                            <form class="form-inline">
+                            <form class="form-inline enable-solution-overlay-form">
                                 <label for="enable-solution-overlay" class="hidden-phone hidden-tablet">{% trans "Plate-solution overlay" %}:</label>
                                 <label for="enable-solution-overlay" class="hidden-desktop"><i class="icon-target"></i></label>
                                 <input
@@ -112,6 +111,9 @@
                         </li>
                     {% endif %}
 
+                    <li>
+                        {% include 'image/detail/like.html' %}
+                    </li>
                     <li>
                         {% if real %}
                             <a class="btn btn-primary navbar-btn" href="{% get_image_url image revision_label 'full' %}{% if mod %}{% query_string "mod=mod" "real" %}{% endif %}">
@@ -194,8 +196,10 @@
 </div>
 {% endif %}
 
+{% include 'image/detail/modals/cant_like.html' %}
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.7.2/bluebird.min.js"></script>
-<script type="text/javascript" src="{% static 'common/js/jquery-1.8.3.js' %}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
         integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
         crossorigin="anonymous"></script>

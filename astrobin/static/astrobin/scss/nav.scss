@@ -2,18 +2,54 @@
 @import "mixins";
 
 body.full {
-  .navbar .nav.pull-right > li > a.btn {
-    color: black;
-    padding: 6px;
-    margin-left: 6px;
-    text-shadow: none;
-
-    &.btn-primary {
-      color: white;
+  .navbar {
+    .navbar-inner {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
     }
 
-    &:hover, &:focus {
-      background-position: initial;
+    .nav.buttons > li {
+      .btn {
+        color: $black;
+        background-color: $grey-2;
+        padding: 6px;
+        margin-left: 6px;
+        text-shadow: none;
+
+        &.btn-primary {
+          color: white;
+          background-color: $link-color;
+
+          &:hover {
+            background-position: initial;
+          }
+        }
+
+        &:hover, &:focus {
+          background-position: initial;
+        }
+      }
+
+      .enable-solution-overlay-form {
+        margin-top: 1.5px;
+      }
+    }
+  }
+
+  .property-like {
+    width: auto;
+    margin: 0;
+    display: flex;
+
+    .btn {
+      line-height: 18px;
+      padding: 5px 10px;
+      font-size: 13px;
+
+      &.active {
+        opacity: .75;
+        color: lighten($link-color, 20%) !important;
+      }
     }
   }
 }
