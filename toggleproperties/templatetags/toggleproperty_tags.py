@@ -44,7 +44,6 @@ def add_remove_toggleproperty(context, property_type, target, user, can_add=True
 
             "property_tooltip_on": settings_dict.get('property_tooltip_on'),
             "property_tooltip_off": settings_dict.get('property_tooltip_off'),
-            "has_tooltip": settings_dict.get('property_tooltip_as_bootstrap'),
 
             "property_label_on": settings_dict.get('property_label_on'),
             "property_label_off": settings_dict.get('property_label_off'),

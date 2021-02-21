@@ -66,8 +66,38 @@ body {
 }
 
 body.full {
-  @media screen and (min-width: 980px) {
-    padding-top: 60px;
+  padding-top: 0;
+
+  .navbar {
+    margin-bottom: 1rem;
+
+    .container-fluid {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+
+      .brand,
+      .brand-mobile {
+        img {
+          max-width: unset;
+        }
+      }
+
+      .brand-mobile {
+        position: initial;
+        margin-right: 1rem;
+        top: unset;
+        left: unset;
+      }
+
+      .nav-title {
+        flex: 1;
+
+        .title {
+          line-height: 26px;
+        }
+      }
+    }
   }
 }
 
@@ -82,7 +112,7 @@ body.full {
   background: $grey-2;
   border: 1px solid $grey-4;
   color: $grey-9;
-  box-shadow: 8px 8px 16px rgba(0,0,0,.667);
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, .667);
 
   h6 {
     color: $grey-9;
@@ -1026,10 +1056,15 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
   .image-title {
     margin-bottom: 0;
+    line-height: 26px;
   }
 
   .image-license {
     text-align: right;
+  }
+
+  .download-original {
+    margin-top: 1rem;
   }
 }
 
@@ -1286,6 +1321,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
     &.advertisement-frontpage {
       margin-bottom: 24px;
+
       .header {
         margin-bottom: $spacer-large;
       }
@@ -1934,7 +1970,7 @@ form.avatar-change label.control-label {
     h1 {
       font-size: 20px !important;
       color: lighten($gold, 30%);
-      text-shadow: 1px 1px 1px rgba(0,0,0,.4);
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, .4);
       margin: 0;
       padding: 5px 10px;
       border-bottom: none;

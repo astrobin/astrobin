@@ -2,18 +2,32 @@
 @import "mixins";
 
 body.full {
-  .navbar .nav.pull-right > li > a.btn {
-    color: black;
-    padding: 6px;
-    margin-left: 6px;
-    text-shadow: none;
+  .navbar {
+    .nav.buttons > li > a.btn {
+      color: black;
+      padding: 6px;
+      margin-left: 6px;
+      text-shadow: none;
 
-    &.btn-primary {
-      color: white;
+      &.btn-primary {
+        color: white;
+      }
+
+      &:hover, &:focus {
+        background-position: initial;
+      }
     }
+  }
 
-    &:hover, &:focus {
-      background-position: initial;
+  .property-like {
+    width: auto;
+    margin: 0;
+    display: flex;
+
+    .btn {
+      line-height: 20px;
+      padding: 5px 10px;
+      font-size: 13px;
     }
   }
 }
