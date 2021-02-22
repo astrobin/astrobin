@@ -61,6 +61,15 @@ class ImageViewSet(TusCreateMixin,
     def get_upload_path_function(self):
         return image_upload_path
 
+    def get_upload_in_progress_object(self):
+        _queryset = self.queryset
+
+        self.queryset = Image.uploads_in_progress.all()
+        obj = self.get_object()
+
+        self.queryset = _queryset
+        return obj
+
     def get_object_serializer(self, request, filename, upload_length, upload_metadata):
         try:
             width = int(upload_metadata['width'])
@@ -80,6 +89,7 @@ class ImageViewSet(TusCreateMixin,
             'w': width,
             'h': height,
             'license': request.user.userprofile.default_license,
+            'uploader_in_progress': True,
         })
 
     def get_success_headers(self, data):
