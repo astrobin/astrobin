@@ -847,8 +847,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         editable=False,
     )
 
-    uploader_metadata = models.CharField(
-        max_length=512,
+    uploader_metadata = models.TextField(
         null=True,
         blank=True,
         editable=False,
@@ -1544,8 +1543,7 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         editable=False,
     )
 
-    uploader_metadata = models.CharField(
-        max_length=512,
+    uploader_metadata = models.TextField(
         null=True,
         blank=True,
         editable=False,
