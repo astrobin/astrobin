@@ -62,7 +62,8 @@ except:
     # Django >= 1.10
     from timezones.zones import PRETTY_TIMEZONE_CHOICES
 
-from astrobin_apps_images.managers import ImagesManager, PublicImagesManager, WipImagesManager
+from astrobin_apps_images.managers import ImagesManager, PublicImagesManager, WipImagesManager, ImageRevisionsManager, \
+    UploadsInProgressImagesManager, UploadsInProgressImageRevisionsManager
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from nested_comments.models import NestedComment
@@ -822,6 +823,11 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         unique=True
     )
 
+    uploader_in_progress = models.NullBooleanField(
+        default=None,
+        editable=False
+    )
+
     uploader_name = models.CharField(
         max_length=256,
         null=True,
@@ -1105,6 +1111,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     objects = PublicImagesManager()
     objects_including_wip = ImagesManager()
     wip = WipImagesManager()
+    uploads_in_progress = UploadsInProgressImagesManager()
 
     def __unicode__(self):
         return self.title if self.title is not None else _("(no title)")
@@ -1518,6 +1525,11 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         max_length=256,
     )
 
+    uploader_in_progress = models.NullBooleanField(
+        default=None,
+        editable=False
+    )
+
     uploader_name = models.CharField(
         max_length=256,
         null=True,
@@ -1606,6 +1618,11 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         app_label = 'astrobin'
         ordering = ('uploaded', '-id')
         unique_together = ('image', 'label')
+
+
+    objects = ImageRevisionsManager()
+    uploads_in_progress = UploadsInProgressImageRevisionsManager()
+
 
     def __unicode__(self):
         return self.image.title

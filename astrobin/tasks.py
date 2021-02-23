@@ -7,6 +7,8 @@ import subprocess
 import tempfile
 import zipfile
 
+from common.services import DateTimeService
+
 if six.PY2:
     from StringIO import StringIO
 else:
@@ -417,3 +419,12 @@ def expire_download_data_requests():
         .exclude(status="EXPIRED") \
         .filter(created__lt=datetime.now() - timedelta(days=7)) \
         .update(status="EXPIRED")
+
+
+@shared_task()
+def purge_expired_incomplete_uploads():
+    deleted, _ = Image.uploads_in_progress.filter(uploader_expires__lt=DateTimeService.now()).delete()
+    logger.info("Purged %d expired incomplete image uploads." % deleted)
+
+    deleted, _ = ImageRevision.uploads_in_progress.filter(uploader_expires__lt=DateTimeService.now()).delete()
+    logger.info("Purged %d expired incomplete image revision uploads." % deleted)

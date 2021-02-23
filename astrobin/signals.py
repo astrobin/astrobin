@@ -75,19 +75,9 @@ pre_save.connect(image_pre_save, sender=Image)
 def image_post_save(sender, instance, created, **kwargs):
     # type: (object, Image, bool, object) -> None
 
-    profile_saved = False
-
-    groups = instance.user.joined_group_set.filter(autosubmission=True)
-    for group in groups:
-        if instance.is_wip:
-            group.images.remove(instance)
-        else:
-            group.images.add(instance)
-
     if created:
         instance.user.userprofile.premium_counter += 1
         instance.user.userprofile.save(keep_deleted=True)
-        profile_saved = True
 
         if not instance.user.userprofile.exclude_from_competitions:
             instance.designated_iotd_submitters.add(*UserService.get_users_in_group_sample(
@@ -106,17 +96,20 @@ def image_post_save(sender, instance, created, **kwargs):
                 'PREMIUM_MAX_IMAGES_FREE': settings.PREMIUM_MAX_IMAGES_FREE
             })
 
-    if not profile_saved:
-        # Trigger update of auto_add fields
+    if not instance.uploader_in_progress:
+        groups = instance.user.joined_group_set.filter(autosubmission=True)
+        for group in groups:
+            if instance.is_wip:
+                group.images.remove(instance)
+            else:
+                group.images.add(instance)
+
+    if instance.user.userprofile.updated < datetime.datetime.now() - datetime.timedelta(minutes=5):
+        instance.user.save()
         try:
             instance.user.userprofile.save(keep_deleted=True)
         except UserProfile.DoesNotExist:
             pass
-
-    # Trigger real time search index
-    if instance.user.userprofile.updated < datetime.datetime.now() - datetime.timedelta(minutes=5):
-        instance.user.save()
-
 
 post_save.connect(image_post_save, sender=Image)
 

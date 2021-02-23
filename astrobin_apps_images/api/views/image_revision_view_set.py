@@ -45,6 +45,15 @@ class ImageRevisionViewSet(TusCreateMixin,
     def get_upload_path_function(self):
         return image_upload_path
 
+    def get_upload_in_progress_object(self):
+        _queryset = self.queryset
+
+        self.queryset = ImageRevision.uploads_in_progress.all()
+        obj = self.get_object()
+
+        self.queryset = _queryset
+        return obj
+
     def get_object_serializer(self, request, filename, upload_length, upload_metadata):
         image_id = upload_metadata['image_id']
         image = Image.objects_including_wip.get(pk=image_id)
@@ -70,6 +79,7 @@ class ImageRevisionViewSet(TusCreateMixin,
             'label': ImageService(image).get_next_available_revision_label(),
             'w': width,
             'h': height,
+            'uploader_in_progress': True,
         })
 
 

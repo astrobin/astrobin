@@ -8,6 +8,7 @@ class ImageSerializer(serializers.HyperlinkedModelSerializer):
     hash = serializers.PrimaryKeyRelatedField(read_only=True)
     w = serializers.IntegerField()
     h = serializers.IntegerField()
+    uploader_in_progress = serializers.NullBooleanField()
 
     class Meta:
         model = Image
@@ -22,4 +23,5 @@ class ImageSerializer(serializers.HyperlinkedModelSerializer):
             'w',
             'h',
             'license',
+            'uploader_in_progress',
         )

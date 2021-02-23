@@ -9,7 +9,6 @@ from rest_framework.exceptions import MethodNotAllowed
 from safedelete import HARD_DELETE
 from safedelete.models import SafeDeleteModel
 
-from astrobin.models import Image
 from astrobin_apps_images.api import constants, signals
 from astrobin_apps_images.api.constants import TUS_API_CHECKSUM_ALGORITHMS
 from astrobin_apps_images.api.exceptions import Conflict
@@ -61,7 +60,7 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             return HttpResponse(msg, status=status.HTTP_400_BAD_REQUEST)
 
         # Retrieve object
-        object = self.get_object()
+        object = self.get_upload_in_progress_object() if self.get_upload_in_progress_object else self.get_object()
 
         # Get upload_offset
         upload_offset = int(request.META.get(constants.UPLOAD_OFFSET_NAME, 0))
@@ -144,6 +143,10 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
                     self.get_upload_path_function()(object, self.get_cached_property("name", object)),
                     File(open(temporary_file))
                 )
+
+                if hasattr(object, 'uploader_in_progress'):
+                    object.uploader_in_progress = None
+                    object.save(keep_deleted=True)
             except Exception as e:
                 log.error("Chunked uploader (%d) (%d): exception: %s" % (
                     request.user.pk, object.pk, e.message
