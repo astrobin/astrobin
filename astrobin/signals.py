@@ -104,12 +104,12 @@ def image_post_save(sender, instance, created, **kwargs):
             else:
                 group.images.add(instance)
 
-    if instance.user.userprofile.updated < datetime.datetime.now() - datetime.timedelta(minutes=5):
-        instance.user.save()
-        try:
-            instance.user.userprofile.save(keep_deleted=True)
-        except UserProfile.DoesNotExist:
-            pass
+        if instance.user.userprofile.updated < datetime.datetime.now() - datetime.timedelta(minutes=5):
+            instance.user.save()
+            try:
+                instance.user.userprofile.save(keep_deleted=True)
+            except UserProfile.DoesNotExist:
+                pass
 
 post_save.connect(image_post_save, sender=Image)
 
