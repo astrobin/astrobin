@@ -210,13 +210,13 @@
                 {% if "date_acquired_min" in request.GET %}
                     "{{ request.GET.date_acquired_min }}"
                 {% else %}
-                    "1900-01-01"
+                    undefined
                 {% endif %},
             dateAcquiredMax:
                 {% if "date_acquired_max" in request.GET %}
                     "{{ request.GET.date_acquired_max }}"
                 {% else %}
-                    new Date().toISOString().split('T')[0]
+                    undefined
                 {% endif %},
             cameraType:
                 {% if "camera_type" in request.GET and request.GET.camera_type %}
