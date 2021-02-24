@@ -49,6 +49,9 @@ log = logging.getLogger('apps')
 
 
 def image_pre_save(sender, instance, **kwargs):
+    if instance.uploader_in_progress:
+        return
+
     if not instance.pk and not instance.is_wip:
         instance.published = datetime.datetime.now()
 
