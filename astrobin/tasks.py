@@ -42,7 +42,7 @@ from astrobin_apps_notifications.utils import push_notification
 logger = get_task_logger(__name__)
 
 
-@shared_task()
+@shared_task(time_limit=20)
 def test_task():
     logger.info('Test task begins')
     sleep(15)
@@ -76,7 +76,7 @@ def update_top100_ids():
         'Top100 ids task is already being run by another worker')
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def global_stats():
     from astrobin.models import Image, GlobalStat
     sqs = SearchQuerySet()
@@ -96,22 +96,22 @@ def global_stats():
     gs.save()
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def sync_iotd_api():
     call_command("image_of_the_day")
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def merge_gear():
     call_command("merge_gear")
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def hitcount_cleanup():
     call_command("hitcount_cleanup")
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def contain_temporary_files_size():
     subprocess.call(['scripts/contain_directory_size.sh', '/astrobin-temporary-files/files', '120'])
 
@@ -122,7 +122,7 @@ addresses.
 """
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def delete_inactive_bounced_accounts():
     bounces = Bounce.objects.filter(
         hard=True,
@@ -133,7 +133,7 @@ def delete_inactive_bounced_accounts():
     bounces.delete()
 
 
-@shared_task()
+@shared_task(time_limit=120)
 def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     from astrobin.models import Image
 
@@ -183,17 +183,17 @@ def update_index(model, age_in_minutes, batch_size):
     )
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def send_missing_data_source_notifications():
     call_command("send_missing_data_source_notifications")
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def send_missing_remote_source_notifications():
     call_command("send_missing_remote_source_notifications")
 
 
-@shared_task(rate_limit="3/s")
+@shared_task(rate_limit="3/s", time_limit=600)
 def send_broadcast_email(broadcast_email_id, recipients):
     try:
         broadcast_email = BroadcastEmail.objects.get(id=broadcast_email_id)
@@ -211,7 +211,8 @@ def send_broadcast_email(broadcast_email_id, recipients):
         msg.send()
         logger.info("Email sent to %s: %s" % (recipient.email, broadcast_email.subject))
 
-@shared_task()
+
+@shared_task(time_limit=60)
 def send_inactive_account_reminder():
     try:
         email = BroadcastEmail.objects.get(subject="We miss your astrophotographs!")
@@ -222,7 +223,7 @@ def send_inactive_account_reminder():
         pass
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def send_never_activated_account_reminder():
     users = never_activated_accounts()
 
@@ -246,14 +247,15 @@ def send_never_activated_account_reminder():
         logger.debug("Sent 'never activated account reminder' to %d" % user.pk)
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def delete_never_activated_accounts():
     users = never_activated_accounts_to_be_deleted()
     count = users.count()
     users.delete()
     logger.debug("Deleted %d inactive accounts" % count)
 
-@shared_task()
+
+@shared_task(time_limit=600)
 def prepare_download_data_archive(request_id):
     # type: (str) -> None
 
@@ -413,7 +415,7 @@ def prepare_download_data_archive(request_id):
         data_download_request.save()
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def expire_download_data_requests():
     DataDownloadRequest.objects \
         .exclude(status="EXPIRED") \
@@ -421,7 +423,7 @@ def expire_download_data_requests():
         .update(status="EXPIRED")
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def purge_expired_incomplete_uploads():
     deleted, _ = Image.uploads_in_progress.filter(uploader_expires__lt=DateTimeService.now()).delete()
     logger.info("Purged %d expired incomplete image uploads." % deleted)
