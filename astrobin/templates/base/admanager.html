@@ -9,10 +9,17 @@
                 ['fluid'],
                 '{{ NATIVE_RESPONSIVE_WIDE_SLOT }}'
             ).setTargeting('format', ['wide']).addService(googletag.pubads());
+
             googletag.defineSlot(
                 '/{{ ADMANAGER_PUBLISHER_ID }}/astrobin-native-responsive-rectangular',
                 ['fluid'],
                 '{{ NATIVE_RESPONSIVE_RECTANGULAR_SLOT }}'
+            ).setTargeting('format', ['rectangular']).addService(googletag.pubads());
+
+            googletag.defineSlot(
+                '/{{ ADMANAGER_PUBLISHER_ID }}/astrobin-native-responsive-rectangular-2',
+                ['fluid'],
+                '{{ NATIVE_RESPONSIVE_RECTANGULAR_SLOT_2 }}'
             ).setTargeting('format', ['rectangular']).addService(googletag.pubads());
 
             googletag.enableServices();

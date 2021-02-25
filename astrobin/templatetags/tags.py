@@ -301,6 +301,40 @@ def show_ads_on_page(context):
     return False
 
 
+@register.simple_tag(takes_context=True)
+def show_secondary_ad_on_page(context):
+    request = context['request']
+
+    if not show_ads(request.user):
+        return False
+
+    country = utils.get_client_country_code(request)
+    if country.lower() not in ('us', 'ca'):
+        return False
+
+    if context.template_name == 'image/detail.html':
+        for data in context.dicts:
+            if 'image' in data:
+                return (not request.user.is_authenticated() or is_free(request.user)) and \
+                       not is_any_ultimate(data['image'].user)
+    elif context.template_name in (
+            'user/profile.html',
+            'user_collections_list.html',
+            'user_collections_detail.html',
+            'user/bookmarks.html',
+            'user/liked.html',
+            'user/following.html',
+            'user/followers.html',
+            'user/plots.html',
+    ):
+        for data in context.dicts:
+            if 'requested_user' in data:
+                return (not request.user.is_authenticated() or is_free(request.user)) and \
+                       not is_any_ultimate(data['requested_user'])
+
+    return False
+
+
 @register.filter()
 def image_ad_key_value_pairs(image):
     if RemoteSourceAffiliationService.is_remote_source_affiliate(image.remote_source):
@@ -471,9 +505,11 @@ def to_user_timezone(value, user):
 def can_like(user, target):
     return UserService(user).can_like(target)
 
+
 @register.filter
 def can_like_reason(user, target):
     return UserService(user).can_like_reason(target)
+
 
 @register.filter
 def can_unlike(user, target):
