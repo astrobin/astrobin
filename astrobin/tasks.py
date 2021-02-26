@@ -1,4 +1,8 @@
 from __future__ import absolute_import
+
+import json
+import uuid
+
 import six
 
 import csv
@@ -430,3 +434,146 @@ def purge_expired_incomplete_uploads():
 
     deleted, _ = ImageRevision.uploads_in_progress.filter(uploader_expires__lt=DateTimeService.now()).delete()
     logger.info("Purged %d expired incomplete image revision uploads." % deleted)
+
+
+@shared_task(time_limit=60)
+def perform_wise_payouts(
+        wise_token, account_id, min_payout_amount, max_payout_amount, expenses_balance, expenses_buffer):
+    BASE_URL = 'https://api.transferwise.com'
+    HEADERS = {'Authorization': 'Bearer %s' % wise_token}
+
+    def get_profiles():
+        result = requests.get('%s/v1/profiles' % BASE_URL, headers=HEADERS)
+        result_json = result.json()
+
+        logger.debug(result.headers)
+        logger.debug(json.dumps(result_json, indent=4, sort_keys=True))
+        logger.info('Wise Payout: got profiles')
+
+        return result_json
+
+    def get_profile_id(profiles):
+        return [x for x in profiles if x['type'] == u'business' and x['details']['name'] == u'AstroBin'][0]['id']
+
+    def get_accounts(profile_id):
+        result = requests.get('%s/v1/borderless-accounts?profileId=%d' % (BASE_URL, profile_id), headers=HEADERS)
+        result_json = result.json()
+
+        logger.debug(result.headers)
+        logger.debug(json.dumps(result_json, indent=4, sort_keys=True))
+        logger.info('Wise Payout: got accounts')
+
+        return result_json
+
+    def create_quote(profile_id, currency, value):
+        def get_source_amount(currency, value):
+            # Always leave `expenses_buffer` in the `expenses_balance` account for expenses.
+            if currency == expenses_balance:
+                if value < expenses_buffer:
+                    # Skip to the next balance.
+                    return 0
+                result = value - expenses_buffer
+            else:
+                result = value
+            return result
+
+        source_amount = get_source_amount(currency, value)
+
+        if source_amount < min_payout_amount:
+            logger.info('Wise Payout: amount is %d < %d, bailing.' % (source_amount, min_payout_amount))
+            return None
+
+        result = requests.post('%s/v2/quotes' % BASE_URL, json={
+            'profile': profile_id,
+            'sourceCurrency': currency,
+            'sourceAmount': min(max_payout_amount, source_amount),
+            'targetCurrency': 'CHF',
+        }, headers=HEADERS)
+        result_json = result.json()
+
+        logger.debug(result.headers)
+        logger.debug(json.dumps(result_json, indent=4, sort_keys=True))
+
+        if 'errors' not in result_json:
+            logger.info('Wise Payout: created quote %s' % result_json['id'])
+            return result_json
+
+        for error in result_json['errors']:
+            logger.error("Wise Payout: error %s" % error['message'])
+
+        return None
+
+    def create_transfer(account_id, quote_id, transactionId=None):
+        result = requests.post('%s/v1/transfers' % BASE_URL, json={
+            'targetAccount': account_id,
+            'quoteUuid': quote_id,
+            'customerTransactionId': transactionId if transactionId else str(uuid.uuid4())
+        }, headers=HEADERS)
+        result_json = result.json()
+
+        logger.debug(result.headers)
+        logger.debug(json.dumps(result_json, indent=4, sort_keys=True))
+
+        if 'errors' not in result_json:
+            logger.info('Wise Payout: created transfer %d' % result_json['id'])
+            return result_json
+
+        for error in result_json['errors']:
+            logger.error("Wise Payout: error %s" % error['message'])
+
+        return None
+
+    def create_fund(profile_id, transfer_id):
+        result = requests.post(
+            '%s/v3/profiles/%d/transfers/%d/payments' % (BASE_URL, profile_id, transfer_id),
+            json={
+                'type': 'BALANCE'
+            }, headers=HEADERS)
+        result_json = result.json()
+
+        logger.debug(result.headers)
+        logger.debug(json.dumps(result_json, indent=4, sort_keys=True))
+        logger.info('Wise Payout: created fund %d' % result_json['balanceTransactionId'])
+
+        return result_json
+
+    def process_wise_payouts():
+        profiles = get_profiles()
+        profile_id = get_profile_id(profiles)
+
+        logger.info('Wise Payout: beginning for profile %d' % profile_id)
+
+        accounts = get_accounts(profile_id)
+
+        for account in accounts:
+            logger.info('Wise Payout: processing account %d' % account['id'])
+
+            for balance in account['balances']:
+                balance_id = balance['id']
+                currency = balance['currency']
+                value = balance['amount']['value']
+
+                logger.info('Wise Payout: processing balance (%d, %s, %.2f)' % (balance_id, currency, value))
+
+                quote = create_quote(profile_id, currency, value)
+
+                if quote is None:
+                    logger.warning("Wise Payout: unable to create quote")
+                    continue
+
+                transfer = create_transfer(account_id, quote['id'])
+
+                if transfer is None:
+                    logger.warning("Wise Payout: unable to create transfer")
+                    continue
+
+                fund = create_fund(profile_id, transfer['id'])
+
+                if fund is None:
+                    logger.warning("Wise Payout: unable to create fund")
+                    continue
+
+                logger.info('Wise Payout: done processing balance (%d, %s, %.2f)' % (balance_id, currency, value))
+
+    process_wise_payouts()
+
