@@ -1,0 +1,10 @@
+<div class="page hero has-breadcrumb">
+  <div class="welcome hero-image"></div>
+
+  <h1>
+    {{ "Welcome!" | translate }}
+  </h1>
+  <p>{{ "You have been logged in." | translate }}</p>
+
+  <div class="text-center text-muted" [innerHTML]="redirectionMessage(seconds)"></div>
+</div>

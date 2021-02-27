@@ -1,0 +1,30 @@
+@import "../../../../styles/variables";
+
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+
+  > div {
+    flex-grow: 1;
+    height: 14px;
+  }
+
+  .loading {
+    display: inline-block;
+    height: 100%;
+
+    @media (max-width: $xs-max) {
+      width: auto;
+      padding: 0.375rem 1rem;
+    }
+  }
+
+  .progress {
+    height: 14px;
+    width: 75px;
+    margin: 0 auto;
+  }
+}

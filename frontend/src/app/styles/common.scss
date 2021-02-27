@@ -1,0 +1,72 @@
+@import "variables";
+@import "animations";
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  background: url("/assets/images/main-background.png") repeat;
+  font-size: 16px;
+}
+
+.app-loading {
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  z-index: -1;
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  left: calc(50% - 1rem);
+  top: calc(50% - 1rem);
+
+  &::after {
+    content: " ";
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 1px;
+    border-radius: 50%;
+    border: 1px solid $white;
+    border-color: $white transparent $white transparent;
+    animation: spin 1.2s linear infinite;
+  }
+}
+
+astrobin-root:empty + .app-loading,
+.app-loading.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.container {
+  @media screen and (min-width: 1200px) {
+    // Match the classic AstroBin frontend on Bootstrap 2.
+    // TODO: get rid of this eventually.
+    max-width: 1034px;
+  }
+}
+
+a {
+  color: $accent-color;
+
+  &:hover {
+    color: lighten($accent-color, 5%);
+  }
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(128, 128, 128, 0.75), rgba(0, 0, 0, 0));
+  margin: 1rem;
+  width: calc(100% - 2rem);
+}
+
+.dark-box {
+  padding: 1rem;
+  background-color: $dark-grey;
+  color: $lighter-grey;
+}

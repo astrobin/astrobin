@@ -1,0 +1,114 @@
+<div
+  class="row no-gutters promotion-queue-entry"
+  *ngIf="(isDismissed$(entry.pk) | async) === false"
+  [class.promoted]="(isPromoted$(entry.pk) | async) === true"
+  [class.hidden]="(isHidden$(entry.pk) | async) === true">
+
+  <div class="hidden-overlay">
+    <button class="btn btn-outline-primary" [class.loading]="loadingService.isLoading()" (click)="show(entry.pk)">
+      <fa-icon icon="eye"></fa-icon>
+      {{ "Show" | translate }}
+    </button>
+  </div>
+
+  <astrobin-fullscreen-image-viewer [id]="entry.pk"></astrobin-fullscreen-image-viewer>
+
+  <div class="col-12 col-image">
+    <astrobin-image
+      class="promotion-image"
+      [alias]="ImageAlias.HD_ANONYMIZED"
+      [id]="entry.pk"
+      (click)="viewFullscreen(entry.pk)">
+    </astrobin-image>
+  </div>
+
+  <div class="col-12 col-tools">
+    <div class="row align-items-end dark-box">
+      <div class="col-12 col-md-5 col-gear">
+        <p>
+          <strong>{{ "Title" | translate }}:</strong>
+          {{ entry.title }}
+        </p>
+
+        <p>
+          <strong>{{ "Imaging telescopes" | translate }}:</strong>
+          <ng-container *ngIf="entry.imagingTelescopes?.length > 0; else noneSpecified">
+            <astrobin-telescope
+              *ngFor="let telescope of entry.imagingTelescopes"
+              [id]="telescope">
+            </astrobin-telescope>
+          </ng-container>
+        </p>
+
+        <p>
+          <strong>{{ "Imaging cameras" | translate }}:</strong>
+          <ng-container *ngIf="entry.imagingCameras?.length > 0; else noneSpecified">
+            <astrobin-camera
+              *ngFor="let camera of entry.imagingCameras"
+              [id]="camera">
+            </astrobin-camera>
+          </ng-container>
+        </p>
+
+        <p *ngIf="solution$ | async as solution">
+          <strong>{{ "Objects in field" | translate }}:</strong>&nbsp;
+          <ng-container *ngIf="!!solution; else notAvailable">
+            <astrobin-objects-in-field [solution]="solution"></astrobin-objects-in-field>
+          </ng-container>
+        </p>
+
+        <p>
+          <strong>{{ "Published" | translate }}:</strong>
+          {{ entry.published | timeago:true }}
+        </p>
+      </div>
+
+      <div class="col-12 col-md-7">
+        <div class="text-right form-actions mt-0 d-sm-flex justify-content-sm-end">
+          <button class="btn btn-secondary" (click)="viewFullscreen(entry.pk)">
+            <fa-icon icon="search-plus"></fa-icon>
+            {{ "View large" | translate }}
+          </button>
+
+          <button class="btn btn-danger" [disabled]="alreadyPromoted$(entry.pk) | async"
+                  [class.loading]="loadingService.isLoading()" (click)="dismiss(entry.pk)">
+            <fa-icon icon="ban"></fa-icon>
+            {{ "Dismiss" | translate }}
+          </button>
+
+           <button class="btn btn-secondary" [disabled]="alreadyPromoted$(entry.pk) | async"
+                   [class.loading]="loadingService.isLoading()" (click)="hide(entry.pk)">
+            <fa-icon icon="eye-slash"></fa-icon>
+             {{ "Hide" | translate }}
+          </button>
+
+          <button class="btn btn-primary"
+                  *ngIf="(isPromoted$(entry.pk) | async) === false; else retract"
+                  (click)="promote(entry.pk)"
+                  [class.loading]="loadingService.isLoading()">
+            <fa-icon icon="star"></fa-icon>
+            {{ "Promote" | translate }}
+          </button>
+
+          <ng-template #retract>
+            <button class="btn btn-danger"
+                    (click)="retractPromotion(entry.pk)"
+                    [class.loading]="loadingService.isLoading()">
+              <fa-icon icon="undo"></fa-icon>
+              {{ "Retract promotion" | translate }}
+            </button>
+          </ng-template>
+
+        </div> <!-- form-actions -->
+      </div> <!-- col -->
+    </div> <!-- row -->
+  </div> <!-- col -->
+</div> <!-- row -->
+
+<ng-template #noneSpecified>
+  {{ "None specified" | translate }}
+</ng-template>
+
+<ng-template #notAvailable>
+  {{ "n/a" | translate }}
+</ng-template>

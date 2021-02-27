@@ -1,0 +1,7 @@
+<ng-wizard>
+  <ng-wizard-step
+    *ngFor="let step of field.fieldGroup; let index = index; let last = last"
+    [title]="getStepTitle(index + 1)" [description]="step.templateOptions.label">
+      <formly-field [field]="step"></formly-field>
+  </ng-wizard-step>
+</ng-wizard>

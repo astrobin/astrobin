@@ -1,0 +1,154 @@
+@import "variables";
+
+.btn {
+  font-size: 0.85rem;
+
+  @media (max-width: $xs-max) {
+    display: block;
+    width: 100%;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+
+    &:not(:last-child) {
+      margin-bottom: .5rem;
+    }
+  }
+
+  img.icon,
+  fa-icon {
+    margin-right: .25rem;
+    fill: currentColor;
+
+    &:last-of-type {
+      margin-right: .5rem;
+    }
+  }
+
+  &.btn-lg {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+
+  &.btn-xl {
+    padding: .75rem 1.5rem;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+  }
+
+  &.loading {
+    background: url("/assets/images/white-loader.svg") transparent no-repeat center !important;
+    background-size: 1rem !important;
+    color: transparent !important;
+    text-shadow: none !important;
+    pointer-events: none !important;
+    opacity: .65 !important;
+
+    .icons {
+      visibility: hidden;
+    }
+  }
+
+  &.btn-primary {
+    &:not(:disabled):not(.disabled) {
+      background: $accent-color linear-gradient(
+          to bottom,
+          lighten($accent-color, 7.5%),
+          darken($accent-color, 7.5%)
+      );
+      border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+      color: $white;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+
+      &:hover {
+        background: $accent-color linear-gradient(
+            to bottom,
+            lighten($accent-color, 10%),
+            darken($accent-color, 5%)
+        );
+      }
+
+      &:active {
+        background: $accent-color linear-gradient(
+            to top,
+            lighten($accent-color, 10%),
+            darken($accent-color, 5%)
+        );
+      }
+    }
+
+    &.loading {
+      background: url("/assets/images/white-loader.svg") $accent-color no-repeat center !important;
+      background-size: 1rem !important;
+    }
+  }
+
+  &.btn-secondary {
+    &:not(:disabled):not(.disabled) {
+      background: $white linear-gradient(
+          to bottom,
+          $white,
+          darken($white, 10%)
+      );
+      border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+      color: $darker-grey;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+
+      &:hover {
+        background: $white linear-gradient(
+            to bottom,
+            lighten($white, 5%),
+            darken($white, 5%)
+        );
+      }
+
+      &:active {
+        background: $white linear-gradient(
+            to top,
+            lighten($white, 5%),
+            darken($white, 5%)
+        );
+        color: $darker-grey;
+      }
+    }
+
+    &.loading {
+      background: url("/assets/images/white-loader.svg") $white no-repeat center !important;
+      background-size: 1rem !important;
+    }
+  }
+
+  &.btn-danger {
+    &:not(:disabled):not(.disabled) {
+      background: $error-red linear-gradient(
+          to bottom,
+          $error-red,
+          darken($error-red, 10%)
+      );
+      border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+      color: $white;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+
+      &:hover {
+        background: $error-red linear-gradient(
+            to bottom,
+            lighten($error-red, 5%),
+            darken($error-red, 5%)
+        );
+      }
+
+      &:active {
+        background: $error-red linear-gradient(
+            to top,
+            lighten($error-red, 5%),
+            darken($error-red, 5%)
+        );
+        color: $white;
+      }
+    }
+
+    &.loading {
+      background: url("/assets/images/white-loader.svg") $error-red no-repeat center !important;
+      background-size: 1rem !important;
+    }
+  }
+}

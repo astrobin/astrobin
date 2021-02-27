@@ -1,0 +1,257 @@
+[
+  {
+    "id": 1,
+    "name": "AstroBin Lite",
+    "description": "",
+    "price": "18.00",
+    "currency": "USD",
+    "trial_period": 0,
+    "trial_unit": null,
+    "recurrence_period": 0,
+    "recurrence_unit": null,
+    "category": "premium",
+    "group": {
+      "id": 1,
+      "name": "astrobin_lite",
+      "permissions": []
+    }
+  },
+  {
+    "id": 2,
+    "name": "AstroBin Lite (autorenew)",
+    "description": "",
+    "price": "18.00",
+    "currency": "USD",
+    "trial_period": 0,
+    "trial_unit": null,
+    "recurrence_period": 1,
+    "recurrence_unit": "Y",
+    "category": "premium_autorenew",
+    "group": {
+      "id": 1,
+      "name": "astrobin_lite",
+      "permissions": []
+    }
+  },
+  {
+    "id": 3,
+    "name": "AstroBin Lite 2020+",
+    "description": "",
+    "price": "20.00",
+    "currency": "CHF",
+    "trial_period": 0,
+    "trial_unit": null,
+    "recurrence_period": 0,
+    "recurrence_unit": null,
+    "category": "premium",
+    "group": {
+      "id": 2,
+      "name": "astrobin_lite_2020",
+      "permissions": []
+    }
+  },
+  {
+    "id": 4,
+    "name": "AstroBin Premium",
+    "description": "",
+    "price": "36.00",
+    "currency": "USD",
+    "trial_period": 0,
+    "trial_unit": null,
+    "recurrence_period": 0,
+    "recurrence_unit": null,
+    "category": "premium",
+    "group": {
+      "id": 3,
+      "name": "astrobin_premium",
+      "permissions": []
+    }
+  },
+  {
+    "id": 5,
+    "name": "AstroBin Premium (autorenew)",
+    "description": "",
+    "price": "36.00",
+    "currency": "USD",
+    "trial_period": 0,
+    "trial_unit": null,
+    "recurrence_period": 1,
+    "recurrence_unit": "Y",
+    "category": "premium_autorenew",
+    "group": {
+      "id": 3,
+      "name": "astrobin_premium",
+      "permissions": []
+    }
+  },
+  {
+    "id": 6,
+    "name": "AstroBin Premium 2020+",
+    "description": "",
+    "price": "40.00",
+    "currency": "CHF",
+    "trial_period": 0,
+    "trial_unit": null,
+    "recurrence_period": 0,
+    "recurrence_unit": null,
+    "category": "premium",
+    "group": {
+      "id": 4,
+      "name": "astrobin_premium_2020",
+      "permissions": []
+    }
+  },
+  {
+    "id": 7,
+    "name": "AstroBin Ultimate 2020+",
+    "description": "",
+    "price": "60.00",
+    "currency": "CHF",
+    "trial_period": 0,
+    "trial_unit": null,
+    "recurrence_period": 0,
+    "recurrence_unit": null,
+    "category": "premium",
+    "group": {
+      "id": 5,
+      "name": "astrobin_ultimate_2020",
+      "permissions": []
+    }
+  },
+  {
+    "id": 8,
+    "name": "AstroBin Donor Bronze Monthly",
+    "description": "",
+    "price": "2.50",
+    "currency": "CHF",
+    "trial_period": 0,
+    "trial_unit": null,
+    "recurrence_period": 1,
+    "recurrence_unit": "M",
+    "category": "donor",
+    "group": {
+      "id": 6,
+      "name": "astrobin-donor-bronze-monthly",
+      "permissions": []
+    }
+  },
+  {
+    "id": 9,
+    "name": "AstroBin Donor Silver Monthly",
+    "description": "",
+    "price": "5.00",
+    "currency": "CHF",
+    "trial_period": 0,
+    "trial_unit": null,
+    "recurrence_period": 1,
+    "recurrence_unit": "M",
+    "category": "donor",
+    "group": {
+      "id": 7,
+      "name": "astrobin-donor-silver-monthly",
+      "permissions": []
+    }
+  },
+  {
+    "id": 10,
+    "name": "AstroBin Donor Gold Monthly",
+    "description": "",
+    "price": "10.00",
+    "currency": "CHF",
+    "trial_period": 0,
+    "trial_unit": null,
+    "recurrence_period": 1,
+    "recurrence_unit": "M",
+    "category": "donor",
+    "group": {
+      "id": 8,
+      "name": "astrobin-donor-gold-monthly",
+      "permissions": []
+    }
+  },
+  {
+    "id": 11,
+    "name": "AstroBin Donor Platinum Monthly",
+    "description": "",
+    "price": "20.00",
+    "currency": "CHF",
+    "trial_period": 0,
+    "trial_unit": null,
+    "recurrence_period": 1,
+    "recurrence_unit": "M",
+    "category": "donor",
+    "group": {
+      "id": 9,
+      "name": "astrobin-donor-platinum-monthly",
+      "permissions": []
+    }
+  },
+  {
+    "id": 12,
+    "name": "AstroBin Donor Bronze Yearly",
+    "description": "",
+    "price": "27.50",
+    "currency": "CHF",
+    "trial_period": 0,
+    "trial_unit": null,
+    "recurrence_period": 1,
+    "recurrence_unit": "Y",
+    "category": "donor",
+    "group": {
+      "id": 10,
+      "name": "astrobin-donor-bronze-yearly",
+      "permissions": []
+    }
+  },
+  {
+    "id": 13,
+    "name": "AstroBin Donor Silver Yearly",
+    "description": "",
+    "price": "55.00",
+    "currency": "CHF",
+    "trial_period": 0,
+    "trial_unit": null,
+    "recurrence_period": 1,
+    "recurrence_unit": "Y",
+    "category": "donor",
+    "group": {
+      "id": 11,
+      "name": "astrobin-donor-silver-yearly",
+      "permissions": []
+    }
+  },
+  {
+    "id": 14,
+    "name": "AstroBin Donor Gold Yearly",
+    "description": "",
+    "price": "110.00",
+    "currency": "CHF",
+    "trial_period": 0,
+    "trial_unit": null,
+    "recurrence_period": 1,
+    "recurrence_unit": "Y",
+    "category": "donor",
+    "group": {
+      "id": 12,
+      "name": "astrobin-donor-gold-yearly",
+      "permissions": []
+    }
+  },
+  {
+    "id": 15,
+    "name": "AstroBin Donor Platinum Yearly",
+    "description": "",
+    "price": "220.00",
+    "currency": "CHF",
+    "trial_period": 0,
+    "trial_unit": null,
+    "recurrence_period": 1,
+    "recurrence_unit": "Y",
+    "category": "donor",
+    "group": {
+      "id": 13,
+      "name": "astrobin-donor-platinum-yearly",
+      "permissions": []
+    }
+  }
+]

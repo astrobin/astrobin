@@ -1,0 +1,13 @@
+.footer {
+  background: url("/assets/images/darkest-background.png") repeat;
+  color: #999;
+  padding: 1rem 0;
+  color: #b0b0b0; }
+
+.build-date {
+  color: #333; }
+  @media (min-width: 768px) {
+    .build-date {
+      text-align: right; } }
+
+/*# sourceMappingURL=footer.component.css.map */

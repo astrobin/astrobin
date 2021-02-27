@@ -1,0 +1,36 @@
+<h3 translate>Your subscriptions</h3>
+
+<table class="table table-striped" *ngIf="userSubscriptions$ | async as userSubscriptions">
+  <thead>
+    <tr>
+      <th scope="col" translate>Name</th>
+      <th scope="col" translate>Expiration date</th>
+      <th scope="col" translate>Cancelled</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="userSubscriptions.length > 0; else noUserSubscriptions">
+      <tr *ngFor="let userSubscription of userSubscriptions">
+        <ng-container *ngIf="userSubscriptionService.getSubscription(userSubscription) | async as subscription">
+          <th scope="row">{{ subscription.name }}</th>
+          <td>{{ userSubscription.expires | date }}</td>
+          <td>
+            <ng-container *ngIf="subscription.recurrence_unit; else cancelledNotApplicable">
+              {{ userSubscription.cancelled | yesNo | translate}}
+            </ng-container>
+            <ng-template #cancelledNotApplicable>
+              {{ "n/a" | translate }}
+            </ng-template>
+          </td>
+        </ng-container>
+      </tr>
+    </ng-container>
+    <ng-template #noUserSubscriptions>
+      <tr>
+        <td class="empty-table" colspan="3">
+          <astrobin-empty-list></astrobin-empty-list>
+        </td>
+      </tr>
+    </ng-template>
+  </tbody>
+</table>

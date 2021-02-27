@@ -1,0 +1,33 @@
+@import "../../../../styles/variables";
+@import "../../../../styles/mixins";
+
+h1 {
+  .badge {
+    font-size: 1rem;
+    transform: translateY(-2rem);
+  }
+
+  .btn {
+    @media screen and (max-width: $xs-max) {
+      margin-top: 1rem;
+    }
+  }
+}
+
+.table {
+  .read-indicator {
+    cursor: pointer;
+
+    &.read .read-icon {
+      color: $light-grey;
+    }
+
+    &.unread .read-icon {
+      color: $accent-color;
+    }
+  }
+
+  ::ng-deep a {
+    @include subtle-accent-link;
+  }
+}

@@ -1,0 +1,112 @@
+<div class="text-center">
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-4 box-shadow">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">Free</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled mt-3 mb-4">
+            <li class="price">
+              {{ 0 | currency:this.subscriptionsService.currency:'symbol':'1.2-2':translate.currentLang }}
+            </li>
+            <li [innerHTML]="subscriptionsService.maxUploadsMessage(10)"></li>
+            <li [innerHTML]="subscriptionsService.maxSizeMessage(25)"></li>
+            <li [innerHTML]="subscriptionsService.maxRevisionsMessage(0)"></li>
+            <li>{{ "Basic search" | translate }}</li>
+            <li>{{ "No plate-solving" | translate }}</li>
+            <li>&nbsp;</li>
+          </ul>
+          <a [href]="classicRoutesService.PRICING" class="btn btn-lg btn-block btn-outline-primary" type="button">
+            {{ "Learn more" | translate }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card mb-4 box-shadow">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">Lite</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled mt-3 mb-4">
+            <li class="price" *ngIf="litePricing$ | async as pricing">
+              <span class="full-price" *ngIf="pricing.discount > 0">
+                {{ pricing.fullPrice | currency:this.subscriptionsService.currency:'symbol':'1.2-2':translate.currentLang }}
+              </span>
+              {{ pricing.price | currency:this.subscriptionsService.currency:'symbol':'1.2-2':translate.currentLang }}
+              <small class="text-muted">/ {{ "year" | translate }}</small>
+            </li>
+            <li [innerHTML]="subscriptionsService.maxImagesMessage(50)"></li>
+            <li [innerHTML]="subscriptionsService.maxSizeMessage(25)"></li>
+            <li [innerHTML]="subscriptionsService.maxRevisionsMessage(1)"></li>
+            <li>{{ "Advanced search" | translate }}</li>
+            <li>{{ "Basic plate-solving" | translate }}</li>
+            <li>&hellip;</li>
+          </ul>
+          <a [href]="classicRoutesService.PRICING" class="btn btn-lg btn-block btn-outline-primary" type="button">
+            {{ "Learn more" | translate }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card mb-4 box-shadow">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">Premium</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled mt-3 mb-4">
+            <li class="price" *ngIf="premiumPricing$ | async as pricing">
+              <span class="full-price" *ngIf="pricing.discount > 0">
+                {{ pricing.fullPrice | currency:this.subscriptionsService.currency:'symbol':'1.2-2':translate.currentLang }}
+              </span>
+              {{ pricing.price | currency:this.subscriptionsService.currency:'symbol':'1.2-2':translate.currentLang }}              <small class="text-muted">/ {{ "year" | translate }}</small>
+            </li>
+            <li>{{ "Unlimited images" | translate }}</li>
+            <li [innerHTML]="subscriptionsService.maxSizeMessage(50)"></li>
+            <li [innerHTML]="subscriptionsService.maxRevisionsMessage(5)"></li>
+            <li>{{ "Advanced search" | translate }}</li>
+            <li>{{ "Basic plate-solving" | translate }}</li>
+            <li>&hellip;</li>
+          </ul>
+          <a [href]="classicRoutesService.PRICING" class="btn btn-lg btn-block btn-outline-primary" type="button">
+            {{ "Learn more" | translate }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card mb-4 box-shadow">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">Ultimate</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled mt-3 mb-4">
+            <li class="price" *ngIf="ultimatePricing$ | async as pricing">
+              <span class="full-price" *ngIf="pricing.discount > 0">
+                {{ pricing.fullPrice | currency:this.subscriptionsService.currency:'symbol':'1.2-2':translate.currentLang }}
+              </span>
+              {{ pricing.price | currency:this.subscriptionsService.currency:'symbol':'1.2-2':translate.currentLang }}
+              <small class="text-muted">/ {{ "year" | translate }}</small>
+            </li>
+            <li>{{ "Unlimited images" | translate }}</li>
+            <li>{{ "Unlimited size" | translate }}</li>
+            <li>{{ "Unlimited revisions" | translate }}</li>
+            <li>{{ "Full search" | translate }}</li>
+            <li>{{ "Advanced plate-solving" | translate }}</li>
+            <li><em>{{ "And much more!" | translate }}</em></li>
+          </ul>
+          <a [href]="classicRoutesService.PRICING" class="btn btn-lg btn-block btn-outline-primary" type="button">
+            {{ "Learn more" | translate }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

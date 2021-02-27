@@ -1,0 +1,55 @@
+<div class="page has-breadcrumb">
+
+  <div class="row">
+
+    <div class="col-md-3">
+      <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+
+        <li ngbNavItem="options">
+          <a ngbNavLink routerLink="options" translate>Subscription plans</a>
+        </li>
+
+        <li ngbNavItem="separator">
+          &nbsp;
+        </li>
+
+        <li ngbNavItem="lite">
+          <a ngbNavLink routerLink="lite">
+            <fa-icon icon="shopping-cart" class="mr-2"></fa-icon>AstroBin Lite
+          </a>
+        </li>
+        <li ngbNavItem="premium">
+          <a ngbNavLink routerLink="premium">
+            <fa-icon icon="shopping-cart" class="mr-2"></fa-icon>AstroBin Premium
+          </a>
+        </li>
+        <li ngbNavItem="ultimate">
+          <a ngbNavLink routerLink="ultimate">
+            <fa-icon icon="shopping-cart" class="mr-2"></fa-icon>AstroBin Ultimate
+          </a>
+        </li>
+
+        <li ngbNavItem="separator">
+          &nbsp;
+        </li>
+
+        <li ngbNavItem="view" *ngIf="authService.isAuthenticated() | async">
+          <a ngbNavLink routerLink="view" translate>Your subscriptions</a>
+        </li>
+        <li ngbNavItem="payments" *ngIf="authService.isAuthenticated() | async">
+          <a ngbNavLink routerLink="payments" translate>Your payments</a>
+        </li>
+
+        <li ngbNavItem="separator">
+          &nbsp;
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="col-md-9">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</div>

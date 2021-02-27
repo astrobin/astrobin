@@ -1,0 +1,27 @@
+@import "variables";
+
+.pagination {
+  justify-content: flex-end;
+
+  .page-item {
+    .page-link {
+      background-color: rgba(0, 0, 0, .1);
+      color: $accent-color;
+      border-color: $grey;
+    }
+
+    &.disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    &.active {
+      pointer-events: none;
+
+      .page-link {
+        font-weight: bold;
+        border-bottom-color: $accent-color;
+      }
+    }
+  }
+}

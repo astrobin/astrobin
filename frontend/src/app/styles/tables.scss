@@ -1,0 +1,21 @@
+@import "variables";
+
+.table {
+  thead {
+    th {
+      background: $dark-grey;
+
+      .help-tooltip {
+        color: $lighter-grey;
+        border-bottom-color: $lighter-grey;
+        margin-left: .5rem;
+      }
+    }
+  }
+
+  td.fit,
+  th.fit {
+    white-space: nowrap;
+    width: 1%;
+  }
+}

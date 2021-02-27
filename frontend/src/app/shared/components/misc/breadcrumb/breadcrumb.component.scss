@@ -1,0 +1,19 @@
+@import "../../../../styles/variables";
+
+.breadcrumb {
+  margin-top: 1rem;
+  margin-bottom: 0;
+  background: url("/assets/images/darker-background.png") repeat;
+  border-radius: .25rem .25rem 0 0;
+  padding: .65rem 1rem;
+  position: relative;
+  z-index: 1;
+  font-size: .85rem;
+
+  > .breadcrumb-item:last-child > span {
+    color: $white;
+    background: $secondary-accent-color;
+    padding: .25rem .5rem;
+    border-radius: .25rem;
+  }
+}

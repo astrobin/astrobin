@@ -1,0 +1,7 @@
+<ng-container *ngIf="telescope$ | async as telescope; else loading">
+  {{ gearService.getDisplayName(telescope.make, telescope.name) }}
+</ng-container>
+
+<ng-template #loading>
+  <astrobin-text-loading-indicator></astrobin-text-loading-indicator>
+</ng-template>

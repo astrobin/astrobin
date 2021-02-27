@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ "Log in" | translate }}</h4>
+  <button (click)="activeModal.dismiss('Cross click')" aria-label="Close" class="close" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <astrobin-login-form #loginForm (loginSuccessful)="activeModal.close()"></astrobin-login-form>
+</div>
+
+<div class="modal-footer">
+  <button [class.loading]="loadingService.isLoading()" [disabled]="!loginForm.form.valid || loadingService.isLoading()"
+    (click)="loginForm.login()" class="btn btn-primary">
+    {{ "Log in" | translate }}
+
+  </button>
+
+  <a [attr.href]="classicRoutesService.REGISTER" class="btn btn-secondary">
+    {{ "Register" | translate }}
+  </a>
+
+  <a [attr.href]="classicRoutesService.RESET_PASSWORD" class="btn btn-secondary">
+    {{ "Reset password" | translate }}
+  </a>
+</div>

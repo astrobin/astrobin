@@ -1,0 +1,67 @@
+<div class="page has-breadcrumb">
+  <h1 class="d-sm-flex justify-content-between align-items-center">
+    <span class="flex-fill">
+      {{ pageTitle }}
+      <span *ngIf="notificationsService.unreadCount$ | async as unreadCount" class="badge badge-danger badge-pill"
+        id="unread-notifications-count">
+        {{ unreadCount }}
+      </span>
+    </span>
+    <ng-container [ngTemplateOutlet]="markAllAsReadButton"></ng-container>
+  </h1>
+
+  <ng-container *ngIf="notificationsService.notifications$ | async as notifications; else loading">
+    <ng-container *ngIf="notifications.count > 0; else noNotifications">
+      <ngb-pagination (pageChange)="pageChange($event)" [(page)]="page" [collectionSize]="notifications.count">
+      </ngb-pagination>
+
+      <table class="table table-striped table-borderless table-responsive-md notifications-table">
+        <tbody>
+          <tr *ngFor="let notification of notifications.results" id="notification-{{notification.id}}">
+            <td [class.read]="notification.read" [class.unread]="!notification.read" class="read-indicator fit">
+              <fa-icon (click)="toggleRead(notification)" class="read-icon" icon="eye">
+              </fa-icon>
+            </td>
+            <td class="messages">
+              <span [innerHTML]="notification.message | normalizeNotificationLink"></span>
+            </td>
+            <td class="created fit text-right">
+              <abbr [attr.title]="notification.created | localDate">
+                {{ notification.created | localDate | timeago:true}}
+              </abbr>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ngb-pagination (pageChange)="pageChange($event)" [(page)]="page" [collectionSize]="notifications.count">
+      </ngb-pagination>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #noNotifications>
+    <astrobin-empty-list></astrobin-empty-list>
+  </ng-template>
+
+  <ng-template #loading>
+    <div *ngIf="notificationsService.loading$ | async" class="app-loading active"></div>
+  </ng-template>
+
+  <div class="buttons-area">
+    <ng-container [ngTemplateOutlet]="markAllAsReadButton"></ng-container>
+    <a [attr.href]="classicRoutesService.NOTIFICATION_SETTINGS" class="btn btn-secondary">
+      {{"Settings"|translate}}
+    </a>
+  </div>
+</div>
+
+<ng-template #markAllAsReadButton>
+  <button
+    (click)="markAllAsRead()"
+    [class.loading]="notificationsService.loading$ | async"
+    [disabled]="(notificationsService.unreadCount$ | async) === 0"
+    class="btn btn-primary"
+    id="mark-all-as-read">
+  {{"Mark all as read" | translate}}
+  </button>
+</ng-template>

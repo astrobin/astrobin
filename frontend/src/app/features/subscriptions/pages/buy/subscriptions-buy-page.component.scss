@@ -1,0 +1,43 @@
+@import "../../../../styles/variables";
+
+.price {
+  .full-price {
+    color: $light-grey;
+    text-decoration: line-through;
+    margin-right: .5rem;
+  }
+
+  font-size: 2.5rem;
+  color: $gold;
+}
+
+.already-subscribed,
+.already-subscribed-higher,
+.info {
+  display: block;
+  margin-bottom: 3rem;
+}
+
+.btn.buy {
+  font-weight: bold;
+
+  .icons {
+    display: inline-block;
+    margin-left: .75rem;
+
+    .icon {
+      height: 1.5rem;
+    }
+  }
+
+  .stripe-info {
+    font-size: .75rem;
+    opacity: .5;
+    display: block;
+    margin-top: .5rem;
+  }
+}
+
+#bank-location-selector {
+  margin-bottom: 1rem;
+}

@@ -1,0 +1,22 @@
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-items: center;
+  align-items: center; }
+  :host > div {
+    flex-grow: 1;
+    height: 14px; }
+  :host .loading {
+    display: inline-block;
+    height: 100%; }
+    @media (max-width: 575.98px) {
+      :host .loading {
+        width: auto;
+        padding: 0.375rem 1rem; } }
+  :host .progress {
+    height: 14px;
+    width: 75px;
+    margin: 0 auto; }
+
+/*# sourceMappingURL=loading-indicator.component.css.map */

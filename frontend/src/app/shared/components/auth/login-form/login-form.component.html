@@ -1,0 +1,19 @@
+<form [formGroup]="form" id="login-form">
+  <div *ngIf="error" class="form-group error">
+    {{ "We could not log you in. Please check your credentials and try again." | translate }}
+  </div>
+
+  <div class="form-group">
+    <label for="handle"> {{ "Username" | translate }}/{{ "Email" | translate }} </label>
+    <input aria-describedby="handle-help" class="form-control" formControlName="handle" id="handle"
+      placeholder="example@gmail.com" type="text" />
+    <small class="form-text text-muted" id="handle-help">
+      {{ "We'll never share your email with anyone else." | translate }}
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="password">{{ "Password" | translate }}</label>
+    <input class="form-control" formControlName="password" id="password" type="password" />
+  </div>
+</form>

@@ -1,0 +1,65 @@
+<ng-container *ngIf="(show$ | async) === true">
+  <ng-container *ngIf="{
+    hd: hdThumbnail$ | async,
+    real: realThumbnail$ | async
+  } as thumbnails">
+
+    <ng-container
+      *ngIf="thumbnails.hd && thumbnails.real && !isTouchDevice; else hdOnly"
+      [ngTemplateOutlet]="imageZoom"
+      [ngTemplateOutletContext]="{hd: thumbnails.hd, real: thumbnails.real}">
+    </ng-container>
+
+    <ng-template #hdOnly>
+      <ng-container
+        *ngIf="thumbnails.hd; else loading"
+        [ngTemplateOutlet]="noZoom"
+        [ngTemplateOutletContext]="{url: thumbnails.hd}">
+      </ng-container>
+    </ng-template>
+  </ng-container>
+
+  <div (click)="hide()" class="close">
+    <fa-icon icon="times"></fa-icon>
+    <span class="esc">ESC</span>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <astrobin-loading-indicator [progress]="hdLoadingProgress$ | async"></astrobin-loading-indicator>
+</ng-template>
+
+<ng-template #imageZoom let-hd="hd" let-real="real">
+  <lib-ngx-image-zoom
+    class="image-zoom"
+    [zoomMode]="'click'"
+    [thumbImage]="hd"
+    [fullImage]="real"
+    [enableLens]="true"
+    [circularLens]="true"
+    [lensHeight]="zoomLensSize"
+    [lensWidth]="zoomLensSize"
+    [enableScrollZoom]="true"
+    [maxZoomRatio]="8"
+    (zoomPosition)="setZoomPosition($event)"
+    (zoomScroll)="setZoomScroll($event)">
+  </lib-ngx-image-zoom>
+
+  <div
+    class="image-zoom-indicator" *ngIf="showZoomIndicator && getZoomPosition()">
+    {{ getZoomScroll() | number:"1.2-2" }}x
+  </div>
+</ng-template>
+
+<ng-template #noZoom let-url="url">
+  <div class="no-zoom">
+    <img [src]="url" alt=""/>
+
+    <ng-container *ngIf="realLoadingProgress$ | async as progress">
+        <astrobin-loading-indicator
+          *ngIf="progress > 0 && progress < 100"
+          [progress]="progress">
+        </astrobin-loading-indicator>
+    </ng-container>
+  </div>
+</ng-template>

@@ -1,0 +1,39 @@
+<div class="page has-breadcrumb">
+  <h1>{{ pageTitle }}</h1>
+
+  <ng-container *ngIf="store$ | async as state">
+    <astrobin-read-only-mode *ngIf="state.app.backendConfig?.readOnly; else uploaderTemplate"></astrobin-read-only-mode>
+  </ng-container>
+</div>
+
+<ng-template #uploaderTemplate>
+  <div class="row">
+    <div class="col-3" *ngIf="(imageThumbnail$ | async) as thumbnail">
+      <div class="thumbnail">
+        <img [attr.src]="thumbnail" alt="image.title" />
+      </div>
+    </div>
+
+    <div class="col">
+      <form (ngSubmit)="onSubmit()" [formGroup]="form">
+        <div class="form-group">
+          <label>{{"Target image" | translate}}</label>
+          <p class="d-block mb-4">{{image.title}}</p>
+        </div>
+
+        <formly-form [fields]="fields" [form]="form" [model]="model"></formly-form>
+
+        <div class="form-actions">
+          <button
+            [class.loading]="uploadButtonLoading()"
+            [disabled]="uploadButtonLoading()"
+            class="btn btn-lg btn-primary"
+            type="submit">
+            <fa-icon icon="upload"></fa-icon>
+            {{ "Upload" | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>

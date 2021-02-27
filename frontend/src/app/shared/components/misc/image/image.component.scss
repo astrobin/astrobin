@@ -1,0 +1,12 @@
+@import "../../../../styles/variables";
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  .astrobin-image {
+    width: 100%;
+  }
+}

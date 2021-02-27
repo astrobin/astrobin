@@ -1,0 +1,11 @@
+@import "variables";
+@import "mixins";
+
+.modal {
+  .modal-content {
+    border-radius: 0.4rem;
+  }
+  .modal-header {
+    @include darkest-background-texture;
+  }
+}

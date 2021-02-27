@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-angular",
+    "tslint-config-prettier"
+  ],
+  "rulesDirectory": [
+    "codelyzer"
+  ],
+  "rules": {
+    "deprecation": {
+      "severity": "warning"
+    },
+    "quotemark": [
+      true,
+      "double"
+    ],
+    "interface-name": [
+      true,
+      "never-prefix"
+    ]
+  }
+}

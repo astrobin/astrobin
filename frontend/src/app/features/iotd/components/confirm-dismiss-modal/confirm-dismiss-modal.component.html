@@ -1,0 +1,33 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">{{ "Dismiss image" | translate }}</h4>
+  <button (click)="modal.dismiss(ConfirmDismissResult.CANCEL)" aria-describedby="modal-title" class="close" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <p>
+    <strong>
+      {{ "Are you sure you want to dismiss this image?" | translate }}
+    </strong>
+  </p>
+
+  <p>
+    {{ "The image will permanently disappear from your queue." | translate }}
+    <span class="text-danger">{{ "This operation can not be undone." | translate }}</span>
+  </p>
+</div>
+
+<div class="modal-footer">
+  <button
+    (click)="modal.dismiss(ConfirmDismissResult.CANCEL)"
+    class="btn btn-outline-secondary"
+    type="button">{{ "Cancel" | translate }}
+  </button>
+
+  <button
+    (click)="modal.close(ConfirmDismissResult.CONFIRM)"
+    class="btn btn-danger"
+    type="button">{{ "Dismiss image" | translate }}
+  </button>
+</div>

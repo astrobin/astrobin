@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - node --version
+      - npm --version
+      - npm ci
+
+  build:
+    commands:
+      - npm run lint
+      - npm run build
+      - npm run build:prod
+
+  post_build:
+    commands:
+      - npm run test
+      - npm run cy:serve-and-run
+      - aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
+      - aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
+      - aws s3 cp $CODEBUILD_SRC_DIR/cypress s3://astrobin-ng-cypress-output/ --recursive
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: dist

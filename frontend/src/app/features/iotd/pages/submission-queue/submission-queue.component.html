@@ -1,0 +1,64 @@
+<div class="page has-breadcrumb">
+
+  <div class="d-flex justify-content-between">
+    <h1 class="flex-grow-1">
+      {{ "Submission queue" | translate }}
+    </h1>
+
+    <astrobin-refresh-button (click)="refresh()"></astrobin-refresh-button>
+  </div>
+
+  <ng-container *ngIf="queue$ | async as queue; else loading">
+    <ng-container *ngIf="hiddenImages$ | async as hiddenImages">
+      <ng-container *ngIf="promotions$ | async as promotions">
+        <ng-container *ngIf="queue?.count > 0; else noEntries">
+
+          <astrobin-submission-slots
+            ngStickyNav stickyClass="sticky-promotion-slots"
+            [availableEntries]="queue.results"
+            (slotClick)="scrollToEntry($event)">
+          </astrobin-submission-slots>
+
+          <ng-container
+            [ngTemplateOutlet]="pagination"
+            [ngTemplateOutletContext]="{queue: queue}">
+          </ng-container>
+
+          <div
+            *ngFor="let entry of queue.results"
+            id="promotion-queue-entry-{{entry.pk}}"
+            #promotionQueueEntries>
+            <astrobin-submission-entry [entry]="entry"></astrobin-submission-entry>
+          </div>
+
+          <ng-container
+            [ngTemplateOutlet]="pagination"
+            [ngTemplateOutletContext]="{queue: queue}">
+          </ng-container>
+
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+</div>
+
+<ng-template #noEntries>
+  <p>
+    {{ "The submission queue is currently empty." | translate }}&nbsp;{{ "Please come back later!" | translate }}
+  </p>
+</ng-template>
+
+<ng-template #pagination let-queue="queue">
+  <ngb-pagination
+    *ngIf="queue.count > queue.results.length"
+    (pageChange)="pageChange($event)"
+    [(page)]="page"
+    [pageSize]="pageSize$ | async"
+    [collectionSize]="queue.count">
+  </ngb-pagination>
+</ng-template>
+
+<ng-template #loading>
+  <astrobin-loading-indicator></astrobin-loading-indicator>
+</ng-template>

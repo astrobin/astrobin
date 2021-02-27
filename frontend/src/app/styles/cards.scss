@@ -1,0 +1,11 @@
+@import "variables";
+
+.card {
+  .card-header {
+    background-color: $dark-grey;
+    .btn-link {
+      padding: 0;
+      font-size: 1rem;
+    }
+  }
+}

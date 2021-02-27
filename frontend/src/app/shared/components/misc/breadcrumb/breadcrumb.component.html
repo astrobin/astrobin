@@ -1,0 +1,27 @@
+<nav *ngIf="breadcrumb$ | async as breadcrumb" aria-label="breadcrumb">
+  <ol *ngIf="breadcrumb.length" class="breadcrumb">
+
+    <li class="breadcrumb-item">
+      <a [href]="classicRoutesService.HOME">
+        <fa-icon icon="home"></fa-icon>
+        {{ "Home" | translate }}
+      </a>
+    </li>
+
+    <li *ngFor="let item of breadcrumb; let i = index" class="breadcrumb-item">
+
+      <a *ngIf="item?.link" [routerLink]="item?.link">
+        {{ item.label }}
+      </a>
+
+      <a *ngIf="item?.externalLink" [href]="item?.externalLink">
+        {{ item.label }}
+      </a>
+
+      <span *ngIf="!item?.link && !item?.externalLink">
+        {{ item.label }}
+      </span>
+
+    </li>
+  </ol>
+</nav>

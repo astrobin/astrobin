@@ -1,0 +1,42 @@
+:host .return-to-classic {
+  font-size: 1rem;
+  display: block; }
+:host astrobin-submission-slots,
+:host astrobin-submission-entry,
+:host astrobin-submission-slots,
+:host astrobin-submission-entry,
+:host astrobin-review-slots,
+:host astrobin-review-entry,
+:host astrobin-review-slots,
+:host astrobin-review-entry {
+  margin-bottom: 2rem; }
+:host .sticky-promotion-slots {
+  z-index: 2;
+  margin-top: 5px;
+  transition: .3s ease-in-out; }
+  @media screen and (max-width: 575.98px) {
+    :host .sticky-promotion-slots {
+      width: calc(100% - 94px);
+      transform: scale(0.5) translateY(-48px); } }
+  @media screen and (min-width: 576px) {
+    :host .sticky-promotion-slots {
+      width: 446px;
+      transform: scale(0.5) translateY(-62px); } }
+  @media screen and (min-width: 768px) {
+    :host .sticky-promotion-slots {
+      width: 626px;
+      transform: scale(0.5) translateY(-74px); } }
+  @media screen and (min-width: 992px) {
+    :host .sticky-promotion-slots {
+      width: 866px;
+      transform: scale(0.5) translateY(-88px); } }
+  @media screen and (min-width: 1200px) {
+    :host .sticky-promotion-slots {
+      width: 940px;
+      transform: scale(0.5) translateY(-100px); } }
+  :host .sticky-promotion-slots.is-empty {
+    top: 2vw !important; }
+    :host .sticky-promotion-slots.is-empty ::ng-deep .promotion-slot {
+      min-height: 100px; }
+
+/*# sourceMappingURL=submission-queue.component.css.map */

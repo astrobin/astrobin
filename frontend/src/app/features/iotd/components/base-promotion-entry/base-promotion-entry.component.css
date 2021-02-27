@@ -1,0 +1,45 @@
+:host {
+  display: block; }
+
+.promotion-queue-entry {
+  position: relative; }
+  .promotion-queue-entry .hidden-overlay {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1; }
+  .promotion-queue-entry.hidden .hidden-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    @media screen and (max-width: 767.98px) {
+      .promotion-queue-entry.hidden .hidden-overlay .btn {
+        display: inline-block;
+        width: auto; } }
+  .promotion-queue-entry.hidden .col-image {
+    opacity: .25;
+    filter: brightness(50%);
+    max-height: 150px; }
+    .promotion-queue-entry.hidden .col-image ::ng-deep .astrobin-image {
+      background-size: auto; }
+  .promotion-queue-entry.hidden .col-tools {
+    display: none; }
+
+.dark-box {
+  margin: 0;
+  padding: 1rem 0; }
+
+.col-image {
+  position: relative; }
+  .col-image astrobin-image.promotion-image:not(.loading) {
+    cursor: zoom-in; }
+  .col-image astrobin-image.loading {
+    margin-bottom: 4rem !important; }
+
+.col-gear p {
+  margin: 0; }
+
+/*# sourceMappingURL=base-promotion-entry.component.css.map */

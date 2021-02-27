@@ -1,0 +1,35 @@
+@import "variables";
+
+.dropdown-menu {
+  font-size: 0.85rem;
+
+  .dropdown-item {
+    &:hover {
+      background-color: $accent-color;
+      color: $white;
+    }
+
+    fa-icon {
+      font-size: 11px;
+      margin-right: 0.25rem;
+      width: 1rem;
+      display: inline-block;
+      text-align: center;
+    }
+  }
+}
+
+.dropdown-toggle {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  margin-top: 3px;
+
+  &::after {
+    margin-left: 0.5rem;
+    vertical-align: 0.085rem;
+  }
+}
+
+.dropdown-divider {
+    border-top-color: $grey;
+}

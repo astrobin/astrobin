@@ -1,0 +1,23 @@
+@import "variables";
+
+@mixin dark-background-texture {
+  background: url("/assets/images/dark-background.png") repeat;
+  color: $lighter-grey;
+}
+
+@mixin darkest-background-texture {
+  background: url("/assets/images/darkest-background.png") repeat;
+  color: $lighter-grey;
+}
+
+@mixin subtle-accent-link {
+  color: $subtle-accent-color;
+  padding-bottom: 2px;
+  border-bottom: 1px dotted transparentize($subtle-accent-color, .8);
+
+  &:hover {
+    color: $accent-color;
+    border-bottom-color: $accent-color;
+    text-decoration: none;
+  }
+}

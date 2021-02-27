@@ -1,0 +1,109 @@
+<div class="page has-breadcrumb">
+
+  <ng-container *ngIf="store$ | async as state">
+
+    <ng-container *ngIf="state && state.auth.initialized && state.app.backendConfig; else loading">
+
+      <h1>{{ pageTitle }}</h1>
+
+      <small>
+        <span *ngIf="state.auth.userProfile |
+          hasValidUserSubscription:[SubscriptionName.ASTROBIN_ULTIMATE_2020] |
+          async; else noUltimate" [innerHTML]="subscriptionWithUnlimitedSlotsMessage('Ultimate')">
+        </span>
+
+        <ng-template #noUltimate>
+          <span *ngIf="state.auth.userProfile | hasValidUserSubscription:[
+            SubscriptionName.ASTROBIN_PREMIUM, SubscriptionName.ASTROBIN_PREMIUM_AUTORENEW,
+            SubscriptionName.ASTROBIN_PREMIUM_2020] | async; else noPremium"
+            [innerHTML]="subscriptionWithUnlimitedSlotsMessage('Premium')">
+          </span>
+        </ng-template>
+
+        <ng-template #noPremium>
+          <span *ngIf="state.auth.userProfile | hasValidUserSubscription:[
+            SubscriptionName.ASTROBIN_LITE, SubscriptionName.ASTROBIN_LITE_AUTORENEW] | async; else lite2020"
+            [innerHTML]="subscriptionWithYearlySlotsMessage('Lite', state.auth.userProfile.premiumCounter,
+            state.app.backendConfig.PREMIUM_MAX_IMAGES_LITE)">
+          </span>
+        </ng-template>
+
+        <ng-template #lite2020>
+          <span *ngIf="state.auth.userProfile | hasValidUserSubscription:[
+            SubscriptionName.ASTROBIN_LITE_2020] | async; else free" [innerHTML]="subscriptionWithTotalSlotsMessage('Lite',
+                state.auth.userProfile.premiumCounter,
+            state.app.backendConfig.PREMIUM_MAX_IMAGES_LITE_2020)">
+          </span>
+        </ng-template>
+
+        <ng-template #free>
+          <span [innerHTML]="subscriptionWithTotalSlotsMessage('Free',
+          state.auth.userProfile.premiumCounter,
+            state.app.backendConfig.PREMIUM_MAX_IMAGES_FREE_2020)">
+          </span>
+        </ng-template>
+
+      </small>
+
+      <astrobin-read-only-mode *ngIf="state.app.backendConfig?.readOnly; else uploaderTemplate">
+      </astrobin-read-only-mode>
+
+    </ng-container>
+
+    <ng-template #loading>
+      <astrobin-loading-indicator></astrobin-loading-indicator>
+    </ng-template>
+
+  </ng-container>
+</div>
+
+<ng-template #uploaderTemplate>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form" *ngIf="(uploadAllowed$ | async) !== false; else uploadNotAllowed">
+    <formly-form [fields]="fields" [form]="form" [model]="model"></formly-form>
+
+    <ngb-alert [dismissible]="false" type="info">
+      <p translate>
+        This image will be uploaded to your staging area as a work in progress. You can make it public at the end of the
+        process.
+      </p>
+    </ngb-alert>
+
+    <div class="form-actions">
+      <ng-container *ngTemplateOutlet="returnToClassicUploader"></ng-container>
+      <button
+        class=" btn btn-lg btn-primary"
+        [disabled]="uploadButtonLoading()"
+        [class.loading]="uploadButtonLoading()"
+        type="submit">
+        <fa-icon icon="upload"></fa-icon>
+        {{ "Upload" | translate }}
+      </button>
+    </div>
+  </form>
+</ng-template>
+
+
+<ng-template #uploadNotAllowed>
+  <div class="sad hero-image"></div>
+
+  <div class="upload-not-allowed">
+    <div class="alert alert-warning d-flex justify-content-between align-items-baseline">
+      <span class="flex-fill mr-4">
+        {{ "It looks like you reached the upload limit for your subscription." | translate }}
+      </span>
+      <a [attr.href]="classicRoutesService.PRICING" class="btn btn-primary btn-lg">
+        {{ "Would you like to upgrade?" | translate }}
+      </a>
+    </div>
+
+    <ng-container *ngTemplateOutlet="returnToClassicUploader"></ng-container>
+  </div>
+
+</ng-template>
+
+<ng-template #returnToClassicUploader>
+  <a class="btn btn-link return-to-classic-uploader" [attr.href]="classicRoutesService.UPLOAD +
+    '?forceClassicUploader'">
+    {{ "Return to the classic uploader" | translate }}
+  </a>
+</ng-template>

@@ -1,0 +1,15 @@
+<ng-container *ngIf="image$ | async as image; else loading">
+  <ng-container *ngIf="thumbnailUrl$ | async as thumbnailUrl; else loading">
+
+     <img
+       id="image-{{id}}{{image.hash ? '-' + image.hash : ''}}-{{revision}}-{{alias}}"
+       class="astrobin-image"
+       [src]="thumbnailUrl"
+       [alt]="image.title" />
+
+  </ng-container>
+</ng-container>
+
+<ng-template #loading>
+  <astrobin-loading-indicator #loadingIndicator [progress]="loadingProgress$ | async"></astrobin-loading-indicator>
+</ng-template>

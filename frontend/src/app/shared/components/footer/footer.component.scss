@@ -1,0 +1,16 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.footer {
+  @include darkest-background-texture;
+  padding: 1rem 0;
+  color: $darkest-background-text-color;
+}
+
+.build-date {
+  color: $grey;
+
+  @media (min-width: $md-min) {
+    text-align: right;
+  }
+}

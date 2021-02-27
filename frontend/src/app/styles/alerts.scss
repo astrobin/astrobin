@@ -1,0 +1,55 @@
+@import "../styles/variables";
+
+.alert {
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, .333);
+
+  > fa-icon {
+    display: inline-block;
+    font-weight: bold;
+    margin-right: .5rem;
+    color: $light-grey;
+
+    + p {
+      display: inline-block;
+    }
+  }
+
+  > p {
+    font-style: italic;
+
+    &:not(:last-child) {
+      margin-bottom: .25rem;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  a,
+  .alert-link {
+    color: inherit;;
+
+    &.btn {
+      text-decoration: none;
+    }
+  }
+
+  strong {
+    color: inherit;
+  }
+
+  &.alert-info {
+    background-color: $white;
+
+    > p, & {
+      color: $grey;
+    }
+  }
+
+  &.alert-warning {
+    background-color: $warning-orange;
+    color: $darkest-grey;
+    text-shadow: 0 1px 1px transparentize($white, .5);
+  }
+}

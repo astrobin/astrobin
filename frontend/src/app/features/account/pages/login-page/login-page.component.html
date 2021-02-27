@@ -1,0 +1,20 @@
+<div class="page has-breadcrumb">
+  <h1>{{ "Log in" | translate }}</h1>
+
+  <astrobin-login-form #loginForm [redirectUrl]="redirectUrl"></astrobin-login-form>
+
+  <div class="buttons-area">
+    <button [class.loading]="loadingService.isLoading()" [disabled]="!loginForm.form.valid || loadingService.isLoading()"
+      (click)="loginForm.login()" class="btn btn-primary">
+      {{ "Log in" | translate }}
+    </button>
+
+    <a [attr.href]="classicRoutesService.REGISTER" class="btn btn-secondary">
+      {{ "Register" | translate }}
+    </a>
+
+    <a [attr.href]="classicRoutesService.RESET_PASSWORD" class="btn btn-secondary">
+      {{ "Reset password" | translate }}
+    </a>
+  </div>
+</div>

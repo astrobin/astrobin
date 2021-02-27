@@ -1,0 +1,33 @@
+{
+  "id": 3,
+  "avatar": "/media/static/astrobin/images/astrobin-default-avatar.png?v=1",
+  "userprofile": 3,
+  "last_login": "2020-04-10T19:05:51.400207",
+  "is_superuser": false,
+  "username": "astrobin_dev_iotd_submitter",
+  "first_name": "",
+  "is_staff": true,
+  "is_active": true,
+  "date_joined": "2020-04-09T19:45:21.522611",
+  "groups": [
+    {
+      "id": 1,
+      "name": "iotd_reviewers",
+      "permissions": []
+    }
+  ],
+  "user_permissions": [
+    {
+      "id": 125,
+      "name": "Can add Post",
+      "codename": "add_post",
+      "content_type": 42
+    },
+    {
+      "id": 122,
+      "name": "Can add Topic",
+      "codename": "add_topic",
+      "content_type": 41
+    }
+  ]
+}

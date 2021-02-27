@@ -1,0 +1,141 @@
+<h1 class="d-flex align-items-center">
+  <span class="flex-fill">{{ subscriptionsService.getName(product) }}</span>
+  <span *ngIf="pricing$ | async as pricing" class="price">
+    <span *ngIf="pricing.discount > 0" class="full-price">
+      {{ pricing.fullPrice | currency: this.subscriptionsService.currency:"symbol":"1.2-2":translate.currentLang }}
+    </span>
+    {{ pricing.price | currency: this.subscriptionsService.currency:"symbol":"1.2-2":translate.currentLang }}
+  </span>
+</h1>
+
+<small>
+  {{ "Validity" | translate }}: <strong>1 {{ "year" | translate }}</strong> &middot; {{ "Autorenew" | translate }}:
+  <strong>{{ "No" | translate }}</strong>
+</small>
+<small [innerHTML]="moreInfoMessage"></small>
+
+<ngb-accordion class="info">
+  <ngb-panel
+    *ngIf="product === 'premium' || product === 'ultimate'"
+    title="{{ 'Want to upgrade from a lower subscription tier?' | translate }}"
+  >
+    <ng-template ngbPanelContent>
+      <p [innerHTML]="upgradeMessage"></p>
+    </ng-template>
+  </ngb-panel>
+
+  <ngb-panel title="{{ 'Prefer to pay via bank transfer?' | translate }}">
+    <ng-template ngbPanelContent>
+      <p *ngIf="subscriptionsService.supportsSepaDebitPaymentType" class="alert alert-info">
+          <strong>{{ "Please note" | translate }}</strong>:
+          {{ "For payments in EUR, you can pay with a SEPA direct debit using the Buy button below!" }}
+      </p>
+
+      <p>
+        <span [innerHtml]="bankDetailsMessage$ | async"></span>&nbsp;
+        <span translate>Thanks!</span>
+      </p>
+
+      <label for="bank-location-selector">{{ "Preferred bank location" }}:</label>
+      <ng-select
+        [(ngModel)]="selectedBankLocation"
+        [clearable]="false"
+        [items]="bankLocations"
+        appendTo="body"
+        bindValue="id"
+        id="bank-location-selector"
+      >
+      </ng-select>
+
+      <pre [innerHTML]="bankDetails"></pre>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+
+<ng-container *ngIf="(alreadySubscribedHigher$ | async) === true; else notAlreadySubscribedHigher">
+  <div class="already-subscribed-higher alert alert-warning">
+    <h5>{{ "Please note" | translate }}</h5>
+    <p>
+      {{ "You are already subscribed to a higher plan." | translate }}
+    </p>
+    <p>
+      {{
+        "For this reason, you cannot purchase this at the moment, as AstroBin does not currently offer a downgrade path."
+          | translate
+      }}
+    </p>
+
+    <p>
+      {{ "Please wait until your subscription expires, then come back to this page." | translate }}
+      {{ "When a paid subscription expires, nothing happens to your images or content." | translate }}
+    </p>
+  </div>
+</ng-container>
+
+<ng-template #notAlreadySubscribedHigher>
+  <ng-container *ngIf="(alreadySubscribed$ | async) === true">
+    <div class="already-subscribed alert alert-warning">
+      <h5>{{ "Please note" | translate }}</h5>
+      <p>
+        {{
+          "You are already on this plan. If you buy it again, your expiration date will be extended by one year."
+            | translate
+        }}
+      </p>
+    </div>
+  </ng-container>
+
+  <ng-container [ngTemplateOutlet]="buyButton"></ng-container>
+</ng-template>
+
+<ng-template #buyButton>
+  <ng-container *ngIf="product === PayableProductInterface.LITE && numberOfImages$ | async as numberOfImages">
+    <div *ngIf="numberOfImages >= 25" class="lite-limit alert alert-warning">
+      <h5>
+        {{ "Please note" | translate }}
+      </h5>
+      <p>
+        <span [innerHTML]="getLiteLimitMessage(numberOfImages)"></span>&nbsp;
+        <span [innerHTML]="moreInfoMessage"></span>
+      </p>
+    </div>
+  </ng-container>
+
+  <div class="form-actions">
+    <a
+      [class.disabled]="loadingService.isLoading()"
+      [href]="classicRoutesService.PRICING"
+      class="btn btn-outline-secondary"
+    >
+      <fa-icon icon="info"></fa-icon>
+      {{ "Learn more" | translate }}
+    </a>
+
+    <button
+      (click)="buy()"
+      [class.loading]="loadingService.isLoading()"
+      [disabled]="loadingService.isLoading()"
+      class="btn btn-xl btn-primary buy"
+    >
+      {{ "Buy" | translate }}
+      <span class="icons">
+        <img *ngIf="subscriptionsService.supportsAliPayPaymentType" alt="AliPay" class="icon"
+             src="/assets/images/alipay-brands.svg" />
+
+        <img *ngIf="subscriptionsService.supportsCardPaymentType" alt="Visa" class="icon"
+             src="/assets/images/cc-visa-brands.svg" />
+        <img *ngIf="subscriptionsService.supportsCardPaymentType" alt="Mastercard" class="icon"
+             src="/assets/images/cc-mastercard-brands.svg" />
+        <img *ngIf="subscriptionsService.supportsCardPaymentType" alt="Amex" class="icon"
+             src="/assets/images/cc-amex-brands.svg" />
+
+        <img *ngIf="subscriptionsService.supportsSepaDebitPaymentType" alt="SEPA" class="icon"
+             src="/assets/images/bank.svg" />
+      </span>
+
+      <span class="stripe-info">
+        {{ "Secure payment by Stripe™" | translate }}
+      </span>
+    </button>
+  </div>
+</ng-template>

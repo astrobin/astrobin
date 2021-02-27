@@ -1,0 +1,56 @@
+@import "variables";
+
+label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: $white;
+}
+
+.form-control {
+  &,
+  &:focus {
+    background-color: $darkest-grey;
+    border-color: $dark-grey;
+    color: $lighter-grey;
+    padding: 1.25rem 1rem;
+
+    &::placeholder {
+      color: $light-grey !important;
+    }
+  }
+
+  &.is-invalid {
+    border-left: 0.5rem solid $error-red;
+    padding-left: calc(0.75rem - 0.5rem + 1px);
+  }
+}
+
+.form-group {
+  margin-bottom: 2rem;
+
+  &.has-error {
+    label {
+      color: $error-red;
+    }
+  }
+}
+
+.form-text {
+  margin-top: .25rem;
+  font-size: .85rem;
+  color: $muted-accent-color !important;
+}
+
+.form-actions {
+  margin-top: 3rem;
+  padding-top: 0.75rem;
+  text-align: right;
+
+  .btn:not(:last-child) {
+    margin-right: 1rem;
+  }
+}
+
+.error {
+  color: $error-red;
+}

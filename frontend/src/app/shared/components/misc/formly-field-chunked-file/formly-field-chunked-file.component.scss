@@ -1,0 +1,88 @@
+@import "../../../../styles/variables";
+
+:host {
+  display: block;
+}
+
+.chunked-file {
+  position: relative;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 10rem;
+  padding: 2rem;
+  border: 2px dashed $light-grey;
+  background: url("/assets/images/darkest-background.png") repeat;
+  opacity: .9;
+  border-radius: .25rem;
+  cursor: not-allowed;
+  pointer-events: none;
+
+  &.active {
+    cursor: pointer;
+    pointer-events: initial;
+  }
+
+  .progress-area {
+    position: absolute;
+    height: 100%;
+    width: 0;
+    left: 0;
+    overflow: hidden;
+
+    .background {
+      display: block;
+      background: repeating-linear-gradient(
+          -55deg,
+          lighten($green, 30%) 1px,
+          $green 2px,
+          $green 11px,
+          lighten($green, 30%) 12px,
+          lighten($green, 30%) 20px
+      );
+      height: 100%;
+      width: 200%;
+      margin-left: -45px;
+      opacity: .1;
+      animation-name: move-striped-loading-indicator;
+      animation-duration: 1.5s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+  }
+
+  .file {
+    font-weight: normal;
+    text-transform: uppercase;
+    color: $lighter-grey;
+    text-align: center;
+
+    [icon=upload] {
+      display: block;
+      font-size: 1.5rem;
+    }
+
+    .status {
+      display: block;
+      color: $lighter-grey;
+      font-size: .75rem;
+      text-transform: uppercase;
+      animation: pulsate 3s ease-out;
+      animation-iteration-count: infinite;
+      opacity: .1;
+    }
+  }
+
+  input {
+    display: none;
+  }
+}
+
+.accepted-formats {
+  color: $light-grey;
+  font-size: .9rem;
+  text-transform: none;
+}

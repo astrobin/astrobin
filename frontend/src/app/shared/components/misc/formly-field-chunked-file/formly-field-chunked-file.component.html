@@ -1,0 +1,24 @@
+<div class="chunked-file" uploadxDrop>
+  <label class="upload-btn" [class.active]="isActive()">
+    <span class="progress-area" [style.width.%]="uploadState?.progress">
+      <span class="background"></span>
+    </span>
+
+    <span class="file">
+      <ng-container *ngIf="upload && upload.name; else withoutFile">
+        {{ upload.name }} ({{uploadSize | filesize}})
+
+        <span class="status">{{ status$ | async }}</span>
+      </ng-container>
+
+      <ng-template #withoutFile>
+        <fa-icon icon="upload"></fa-icon>
+        <div class="choose-file">{{ "Drop file here or click to browse" | translate }}</div>
+        <div class="accepted-formats">{{ "Accepted formats" | translate }}: {{ uploadOptions.allowedTypes }}</div>
+      </ng-template>
+    </span>
+
+    <input [formControl]="formControl" [formlyAttributes]="field" [uploadx]="uploadOptions" type="file"
+      class="chunked" />
+  </label>
+</div>

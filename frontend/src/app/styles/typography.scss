@@ -1,0 +1,42 @@
+@import "variables";
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $bright-white;
+}
+
+h1 {
+  margin-bottom: 2rem;
+
+  + small {
+    font-size: 1rem;
+    color: $light-grey;
+    display: block;
+    margin-top: -2rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: $sm-max) {
+    font-size: 2.25rem;
+    hyphens: auto;
+  }
+}
+
+strong {
+  color: $white;
+}
+
+pre {
+  padding: 1rem;
+  background: $dark-grey;
+}
+
+.help-tooltip {
+  font-style: italic;
+  border-bottom: 1px dotted $lightest-grey;
+  cursor: help;
+}

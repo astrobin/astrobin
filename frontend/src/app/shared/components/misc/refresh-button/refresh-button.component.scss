@@ -1,0 +1,17 @@
+@import "../../../../styles/variables";
+
+.btn {
+  color: $lighter-grey;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: $lightest-grey;
+    outline: none;
+    box-shadow: none;
+  }
+
+  fa-icon {
+    margin: 0;
+  }
+}

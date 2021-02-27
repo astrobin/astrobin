@@ -1,0 +1,35 @@
+// Include bootswatch variables first.
+@import "./node_modules/bootswatch/dist/cyborg/variables";
+
+// Then override them.
+@import "app/styles/variables";
+
+// Then import bootstrap and bootswatch, that now have the correct variables.
+@import "./node_modules/bootstrap/scss/bootstrap";
+@import "./node_modules/bootswatch/dist/cyborg/bootswatch";
+
+@import "./node_modules/ngx-toastr/toastr-bs4-alert";
+@import '~ng-wizard/themes/ng_wizard.min.css';
+@import '~ng-wizard/themes/ng_wizard_theme_arrows.min.css';
+@import "~@ng-select/ng-select/scss/default.theme.scss";
+
+@import "assets/flags/flags";
+
+@import "app/styles/alerts";
+@import "app/styles/buttons";
+@import "app/styles/cards";
+@import "app/styles/common";
+@import "app/styles/dropdowns";
+@import "app/styles/forms";
+@import "app/styles/icons";
+@import "app/styles/images";
+@import "app/styles/lists";
+@import "app/styles/mixins";
+@import "app/styles/modals";
+@import "app/styles/notifications";
+@import "app/styles/pages";
+@import "app/styles/pagination";
+@import "app/styles/select";
+@import "app/styles/tables";
+@import "app/styles/typography";
+@import "app/styles/wizard";

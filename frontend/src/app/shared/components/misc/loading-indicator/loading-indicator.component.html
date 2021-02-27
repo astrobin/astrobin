@@ -1,0 +1,9 @@
+<div *ngIf="progress !== undefined && progress > 0; else noProgress">
+  <ngb-progressbar type="secondary" [value]="progress"></ngb-progressbar>
+</div>
+
+<ng-template #noProgress>
+  <div class="btn loading" *ngIf="!progress">
+    <span class="sr-only">{{ "Loading..." | translate }}</span>
+  </div>
+</ng-template>

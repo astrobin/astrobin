@@ -1,0 +1,114 @@
+@import "mixins";
+@import "variables";
+
+.page {
+  @include dark-background-texture;
+  position: relative;
+  border-radius: 0.25rem;
+  padding: 2rem;
+  margin: 1rem 0;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+  transition: opacity .5s ease-in;
+  color: $white;
+
+  &.has-breadcrumb {
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  h1 {
+    .beta {
+      opacity: .2;
+      font-size: 2rem;
+      font-style: italic;
+      vertical-align: super;
+    }
+
+    text-shadow: 1px 1px 0 $black;
+    border-bottom: 1px solid $light-grey;
+    padding-bottom: .5rem;
+    margin-bottom: 3rem;
+
+    + small {
+      display: block;
+      margin-bottom: 3rem;
+      font-size: 1.5rem;
+      color: $lightest-grey;
+
+      strong {
+        color: $white;
+      }
+
+      + small {
+        display: block;
+        font-size: 1rem;
+        color: $lighter-grey;
+        margin-top: -3rem;
+        margin-bottom: 3rem;
+      }
+    }
+  }
+
+  > .buttons-area {
+    margin-top: 4rem;
+    padding-top: 1rem;
+    border-top: 1px solid $light-grey;
+
+    @media (min-width: $sm-min) {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    > .btn {
+      margin-left: .5rem;
+    }
+  }
+
+  &.hero {
+    padding: 4rem;
+
+    h1 {
+      font-size: 4rem;
+      text-align: center;
+
+      + p {
+        font-size: 2rem;
+        text-align: center;
+        margin-top: -2rem;
+        margin-bottom: 3rem;
+
+        strong {
+          color: $white;
+        }
+      }
+    }
+
+    @media (max-width: $sm-max) {
+      padding: 2rem;
+
+      .hero-image {
+        height: 6rem;
+      }
+
+      h1 {
+        font-size: 3rem;
+
+        + p {
+          font-size: initial;
+        }
+      }
+    }
+  }
+
+  .hero-image {
+    background-size: contain;
+    height: 8rem;
+    margin-bottom: 2rem;
+
+    + h1,
+    + h1 + small {
+      text-align: center;
+    }
+  }
+}

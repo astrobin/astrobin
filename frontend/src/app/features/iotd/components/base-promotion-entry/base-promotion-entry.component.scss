@@ -1,0 +1,73 @@
+@import "../../../../styles/variables";
+
+:host {
+  display: block;
+}
+
+.promotion-queue-entry {
+  position: relative;
+
+  .hidden-overlay {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  &.hidden {
+    .hidden-overlay {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @media screen and (max-width: $sm-max) {
+        .btn {
+          display: inline-block;
+          width: auto;
+        }
+      }
+    }
+
+    .col-image {
+      opacity: .25;
+      filter: brightness(50%);
+      max-height: 150px;
+
+      ::ng-deep .astrobin-image {
+        background-size: auto;
+      }
+    }
+
+    .col-tools {
+      display: none;
+    }
+  }
+}
+
+.dark-box {
+  margin: 0;
+  padding: 1rem 0;
+}
+
+.col-image {
+  position: relative;
+
+  astrobin-image {
+    &.promotion-image:not(.loading) {
+      cursor: zoom-in;
+    }
+
+    &.loading {
+      margin-bottom: 4rem !important;
+    }
+  }
+}
+
+.col-gear {
+  p {
+    margin: 0;
+  }
+}

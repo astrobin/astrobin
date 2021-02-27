@@ -1,0 +1,7 @@
+<ng-container *ngIf="camera$ | async as camera; else loading">
+  {{ gearService.getDisplayName(camera.make, camera.name) }}
+</ng-container>
+
+<ng-template #loading>
+  <astrobin-text-loading-indicator></astrobin-text-loading-indicator>
+</ng-template>

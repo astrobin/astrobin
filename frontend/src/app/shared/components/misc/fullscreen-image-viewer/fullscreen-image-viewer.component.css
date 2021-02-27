@@ -1,0 +1,69 @@
+:host {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background-color: #101010;
+  justify-content: center;
+  align-items: center; }
+  :host .image-zoom ::ng-deep {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; }
+    :host .image-zoom ::ng-deep .ngxImageZoomContainer {
+      width: auto !important;
+      height: auto !important; }
+    :host .image-zoom ::ng-deep .ngxImageZoomThumbnail {
+      max-height: 100vh;
+      max-width: 100vw; }
+    :host .image-zoom ::ng-deep .ngxImageZoomFullContainer.ngxImageZoomLensEnabled {
+      border-color: #e9e9e9; }
+  :host .image-zoom-indicator {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    color: #e9e9e9;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 2rem;
+    padding: .5rem 1rem; }
+  :host .no-zoom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; }
+    :host .no-zoom astrobin-loading-indicator {
+      position: absolute;
+      margin-top: calc(-100vh + 180px);
+      margin-right: calc(-100vw + 185px); }
+      @media screen and (max-width: 767.98px) {
+        :host .no-zoom astrobin-loading-indicator {
+          display: none; } }
+    :host .no-zoom img {
+      max-width: 100vw;
+      max-height: 100vh; }
+  :host .close {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    color: #e9e9e9;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 2rem;
+    padding: .5rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer; }
+    :host .close .esc {
+      display: block;
+      margin-left: .5rem;
+      font-weight: normal; }
+      @media screen and (max-width: 575.98px) {
+        :host .close .esc {
+          display: none; } }
+
+/*# sourceMappingURL=fullscreen-image-viewer.component.css.map */

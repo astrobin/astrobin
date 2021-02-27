@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  justify-content: space-between; }
+  :host .promotion-slot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    background-color: #333;
+    border: 2px dashed #555;
+    font-size: 3rem;
+    color: #555; }
+    :host .promotion-slot:not(:last-child) {
+      margin-right: .5rem; }
+    :host .promotion-slot astrobin-image.clickable {
+      cursor: pointer; }
+    :host .promotion-slot astrobin-image:not(.clickable) {
+      cursor: not-allowed; }
+
+/*# sourceMappingURL=base-promotion-slots.component.css.map */

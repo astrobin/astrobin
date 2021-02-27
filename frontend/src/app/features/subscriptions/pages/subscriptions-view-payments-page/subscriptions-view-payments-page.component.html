@@ -1,0 +1,32 @@
+<h3 translate>Your payments</h3>
+
+<table class="table table-striped" *ngIf="payments$ | async as payments">
+  <thead>
+    <tr>
+      <th scope="col" translate>Date</th>
+      <th scope="col">
+        {{ "Amount" | translate }}
+        <span class="help-tooltip" [ngbTooltip]="currencyHelpTooltip">(CHF)</span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="payments.length > 0; else noPayments">
+      <tr *ngFor="let payment of payments">
+        <th scope="row">{{ payment.timestamp | date }}</th>
+        <td>{{ payment.amount | currency:payment.currency:'symbol':'1.2-2':translate.currentLang }}</td>
+      </tr>
+    </ng-container>
+    <ng-template #noPayments>
+      <tr>
+        <td class="empty-table" colspan="2">
+          <astrobin-empty-list></astrobin-empty-list>
+        </td>
+      </tr>
+    </ng-template>
+  </tbody>
+</table>
+
+<ng-template #currencyHelpTooltip>
+  {{ currencyHelpTooltipMessage | translate }}
+</ng-template>
