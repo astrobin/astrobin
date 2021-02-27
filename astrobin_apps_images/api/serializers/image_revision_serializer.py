@@ -9,6 +9,7 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
     is_final = serializers.BooleanField(default=False)
     w = serializers.IntegerField()
     h = serializers.IntegerField()
+    uploader_in_progress = serializers.NullBooleanField()
 
     class Meta:
         model = ImageRevision
@@ -23,4 +24,5 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
             'is_final',
             'w',
             'h',
+            'uploader_in_progress',
         )

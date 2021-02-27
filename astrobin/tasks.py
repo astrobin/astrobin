@@ -1,11 +1,22 @@
 from __future__ import absolute_import
 
+import json
+import uuid
+
+import six
+
 import csv
 import ntpath
 import subprocess
 import tempfile
 import zipfile
-from StringIO import StringIO
+
+from common.services import DateTimeService
+
+if six.PY2:
+    from StringIO import StringIO
+else:
+    from io import StringIO
 from datetime import datetime, timedelta
 from time import sleep
 from zipfile import ZipFile
@@ -29,14 +40,13 @@ from requests import Response
 
 from astrobin.models import BroadcastEmail, Image, DataDownloadRequest, ImageRevision
 from astrobin.utils import inactive_accounts, never_activated_accounts, never_activated_accounts_to_be_deleted
-from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
 
 logger = get_task_logger(__name__)
 
 
-@shared_task()
+@shared_task(time_limit=20)
 def test_task():
     logger.info('Test task begins')
     sleep(15)
@@ -70,7 +80,7 @@ def update_top100_ids():
         'Top100 ids task is already being run by another worker')
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def global_stats():
     from astrobin.models import Image, GlobalStat
     sqs = SearchQuerySet()
@@ -90,22 +100,22 @@ def global_stats():
     gs.save()
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def sync_iotd_api():
     call_command("image_of_the_day")
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def merge_gear():
     call_command("merge_gear")
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def hitcount_cleanup():
     call_command("hitcount_cleanup")
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def contain_temporary_files_size():
     subprocess.call(['scripts/contain_directory_size.sh', '/astrobin-temporary-files/files', '120'])
 
@@ -116,7 +126,7 @@ addresses.
 """
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def delete_inactive_bounced_accounts():
     bounces = Bounce.objects.filter(
         hard=True,
@@ -127,7 +137,7 @@ def delete_inactive_bounced_accounts():
     bounces.delete()
 
 
-@shared_task()
+@shared_task(time_limit=120)
 def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     from astrobin.models import Image
 
@@ -177,17 +187,17 @@ def update_index(model, age_in_minutes, batch_size):
     )
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def send_missing_data_source_notifications():
     call_command("send_missing_data_source_notifications")
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def send_missing_remote_source_notifications():
     call_command("send_missing_remote_source_notifications")
 
 
-@shared_task(rate_limit="3/s")
+@shared_task(rate_limit="3/s", time_limit=600)
 def send_broadcast_email(broadcast_email_id, recipients):
     try:
         broadcast_email = BroadcastEmail.objects.get(id=broadcast_email_id)
@@ -205,7 +215,8 @@ def send_broadcast_email(broadcast_email_id, recipients):
         msg.send()
         logger.info("Email sent to %s: %s" % (recipient.email, broadcast_email.subject))
 
-@shared_task()
+
+@shared_task(time_limit=60)
 def send_inactive_account_reminder():
     try:
         email = BroadcastEmail.objects.get(subject="We miss your astrophotographs!")
@@ -216,7 +227,7 @@ def send_inactive_account_reminder():
         pass
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def send_never_activated_account_reminder():
     users = never_activated_accounts()
 
@@ -240,14 +251,15 @@ def send_never_activated_account_reminder():
         logger.debug("Sent 'never activated account reminder' to %d" % user.pk)
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def delete_never_activated_accounts():
     users = never_activated_accounts_to_be_deleted()
     count = users.count()
     users.delete()
     logger.debug("Deleted %d inactive accounts" % count)
 
-@shared_task()
+
+@shared_task(time_limit=600)
 def prepare_download_data_archive(request_id):
     # type: (str) -> None
 
@@ -407,9 +419,161 @@ def prepare_download_data_archive(request_id):
         data_download_request.save()
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def expire_download_data_requests():
     DataDownloadRequest.objects \
         .exclude(status="EXPIRED") \
         .filter(created__lt=datetime.now() - timedelta(days=7)) \
         .update(status="EXPIRED")
+
+
+@shared_task(time_limit=60)
+def purge_expired_incomplete_uploads():
+    deleted, _ = Image.uploads_in_progress.filter(uploader_expires__lt=DateTimeService.now()).delete()
+    logger.info("Purged %d expired incomplete image uploads." % deleted)
+
+    deleted, _ = ImageRevision.uploads_in_progress.filter(uploader_expires__lt=DateTimeService.now()).delete()
+    logger.info("Purged %d expired incomplete image revision uploads." % deleted)
+
+
+@shared_task(time_limit=60)
+def perform_wise_payouts(
+        wise_token, account_id, min_payout_amount, max_payout_amount, expenses_balance, expenses_buffer):
+    BASE_URL = 'https://api.transferwise.com'
+    HEADERS = {'Authorization': 'Bearer %s' % wise_token}
+
+    def get_profiles():
+        result = requests.get('%s/v1/profiles' % BASE_URL, headers=HEADERS)
+        result_json = result.json()
+
+        logger.debug(result.headers)
+        logger.debug(json.dumps(result_json, indent=4, sort_keys=True))
+        logger.info('Wise Payout: got profiles')
+
+        return result_json
+
+    def get_profile_id(profiles):
+        return [x for x in profiles if x['type'] == u'business' and x['details']['name'] == u'AstroBin'][0]['id']
+
+    def get_accounts(profile_id):
+        result = requests.get('%s/v1/borderless-accounts?profileId=%d' % (BASE_URL, profile_id), headers=HEADERS)
+        result_json = result.json()
+
+        logger.debug(result.headers)
+        logger.debug(json.dumps(result_json, indent=4, sort_keys=True))
+        logger.info('Wise Payout: got accounts')
+
+        return result_json
+
+    def create_quote(profile_id, currency, value):
+        def get_source_amount(currency, value):
+            # Always leave `expenses_buffer` in the `expenses_balance` account for expenses.
+            if currency == expenses_balance:
+                if value < expenses_buffer:
+                    # Skip to the next balance.
+                    return 0
+                result = value - expenses_buffer
+            else:
+                result = value
+            return result
+
+        source_amount = get_source_amount(currency, value)
+
+        if source_amount < min_payout_amount:
+            logger.info('Wise Payout: amount is %d < %d, bailing.' % (source_amount, min_payout_amount))
+            return None
+
+        result = requests.post('%s/v2/quotes' % BASE_URL, json={
+            'profile': profile_id,
+            'sourceCurrency': currency,
+            'sourceAmount': min(max_payout_amount, source_amount),
+            'targetCurrency': 'CHF',
+        }, headers=HEADERS)
+        result_json = result.json()
+
+        logger.debug(result.headers)
+        logger.debug(json.dumps(result_json, indent=4, sort_keys=True))
+
+        if 'errors' not in result_json:
+            logger.info('Wise Payout: created quote %s' % result_json['id'])
+            return result_json
+
+        for error in result_json['errors']:
+            logger.error("Wise Payout: error %s" % error['message'])
+
+        return None
+
+    def create_transfer(account_id, quote_id, transactionId=None):
+        result = requests.post('%s/v1/transfers' % BASE_URL, json={
+            'targetAccount': account_id,
+            'quoteUuid': quote_id,
+            'customerTransactionId': transactionId if transactionId else str(uuid.uuid4())
+        }, headers=HEADERS)
+        result_json = result.json()
+
+        logger.debug(result.headers)
+        logger.debug(json.dumps(result_json, indent=4, sort_keys=True))
+
+        if 'errors' not in result_json:
+            logger.info('Wise Payout: created transfer %d' % result_json['id'])
+            return result_json
+
+        for error in result_json['errors']:
+            logger.error("Wise Payout: error %s" % error['message'])
+
+        return None
+
+    def create_fund(profile_id, transfer_id):
+        result = requests.post(
+            '%s/v3/profiles/%d/transfers/%d/payments' % (BASE_URL, profile_id, transfer_id),
+            json={
+                'type': 'BALANCE'
+            }, headers=HEADERS)
+        result_json = result.json()
+
+        logger.debug(result.headers)
+        logger.debug(json.dumps(result_json, indent=4, sort_keys=True))
+        logger.info('Wise Payout: created fund %d' % result_json['balanceTransactionId'])
+
+        return result_json
+
+    def process_wise_payouts():
+        profiles = get_profiles()
+        profile_id = get_profile_id(profiles)
+
+        logger.info('Wise Payout: beginning for profile %d' % profile_id)
+
+        accounts = get_accounts(profile_id)
+
+        for account in accounts:
+            logger.info('Wise Payout: processing account %d' % account['id'])
+
+            for balance in account['balances']:
+                balance_id = balance['id']
+                currency = balance['currency']
+                value = balance['amount']['value']
+
+                logger.info('Wise Payout: processing balance (%d, %s, %.2f)' % (balance_id, currency, value))
+
+                quote = create_quote(profile_id, currency, value)
+
+                if quote is None:
+                    logger.warning("Wise Payout: unable to create quote")
+                    continue
+
+                transfer = create_transfer(account_id, quote['id'])
+
+                if transfer is None:
+                    logger.warning("Wise Payout: unable to create transfer")
+                    continue
+
+                fund = create_fund(profile_id, transfer['id'])
+
+                if fund is None:
+                    logger.warning("Wise Payout: unable to create fund")
+                    continue
+
+                logger.info('Wise Payout: done processing balance (%d, %s, %.2f)' % (balance_id, currency, value))
+
+    process_wise_payouts()
+

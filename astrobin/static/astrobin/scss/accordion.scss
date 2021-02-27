@@ -16,6 +16,8 @@
   .accordion-heading {
     position: relative;
     background-color: $grey-8;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 
     > a {
       [class^="icon-"] {

@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User, Group as DjangoGroup
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
 from django.core.urlresolvers import reverse as reverse_url
 from django.db import IntegrityError
 from django.db import transaction
@@ -17,7 +18,7 @@ from django.db.models.signals import (
     pre_save, post_save, post_delete, m2m_changed)
 from django.utils.translation import ugettext_lazy as _, gettext, override
 from gadjo.requestprovider.signals import get_request
-from pybb.models import Forum, Topic, Post
+from pybb.models import Forum, Topic, Post, TopicReadTracker
 from rest_framework.authtoken.models import Token
 from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete
@@ -26,9 +27,11 @@ from subscription.signals import paid, signed_up
 from threaded_messages.models import Thread
 
 from astrobin_apps_groups.models import Group
+from astrobin_apps_notifications.tasks import push_notification_for_new_image, push_notification_for_new_image_revision
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
+from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_lite, is_any_premium_subscription, is_lite_2020, is_any_ultimate, is_premium_2020, is_premium, is_free)
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
@@ -46,6 +49,9 @@ log = logging.getLogger('apps')
 
 
 def image_pre_save(sender, instance, **kwargs):
+    if instance.uploader_in_progress:
+        return
+
     if not instance.pk and not instance.is_wip:
         instance.published = datetime.datetime.now()
 
@@ -72,19 +78,9 @@ pre_save.connect(image_pre_save, sender=Image)
 def image_post_save(sender, instance, created, **kwargs):
     # type: (object, Image, bool, object) -> None
 
-    profile_saved = False
-
-    groups = instance.user.joined_group_set.filter(autosubmission=True)
-    for group in groups:
-        if instance.is_wip:
-            group.images.remove(instance)
-        else:
-            group.images.add(instance)
-
     if created:
         instance.user.userprofile.premium_counter += 1
         instance.user.userprofile.save(keep_deleted=True)
-        profile_saved = True
 
         if not instance.user.userprofile.exclude_from_competitions:
             instance.designated_iotd_submitters.add(*UserService.get_users_in_group_sample(
@@ -93,17 +89,7 @@ def image_post_save(sender, instance, created, **kwargs):
                 'iotd_reviewers', settings.IOTD_DESIGNATED_REVIEWERS_PERCENTAGE, instance.user))
 
         if not instance.is_wip and not instance.skip_notifications:
-            followers = [x.user for x in ToggleProperty.objects.filter(
-                property_type="follow",
-                content_type=ContentType.objects.get_for_model(User),
-                object_id=instance.user.pk)]
-
-            thumb = instance.thumbnail_raw('gallery', None, sync=True)
-            push_notification(followers, 'new_image', {
-                'image': instance,
-                'image_thumbnail': thumb.url if thumb else None
-            })
-
+            push_notification_for_new_image.apply_async(args=(instance.user.pk, instance.pk,))
             if instance.moderator_decision == 1:
                 add_story(instance.user, verb='VERB_UPLOADED_IMAGE', action_object=instance)
 
@@ -113,17 +99,20 @@ def image_post_save(sender, instance, created, **kwargs):
                 'PREMIUM_MAX_IMAGES_FREE': settings.PREMIUM_MAX_IMAGES_FREE
             })
 
-    if not profile_saved:
-        # Trigger update of auto_add fields
-        try:
-            instance.user.userprofile.save(keep_deleted=True)
-        except UserProfile.DoesNotExist:
-            pass
+    if not instance.uploader_in_progress:
+        groups = instance.user.joined_group_set.filter(autosubmission=True)
+        for group in groups:
+            if instance.is_wip:
+                group.images.remove(instance)
+            else:
+                group.images.add(instance)
 
-    # Trigger real time search index
-    if instance.user.userprofile.updated < datetime.datetime.now() - datetime.timedelta(minutes=5):
-        instance.user.save()
-
+        if instance.user.userprofile.updated < datetime.datetime.now() - datetime.timedelta(minutes=5):
+            instance.user.save()
+            try:
+                instance.user.userprofile.save(keep_deleted=True)
+            except UserProfile.DoesNotExist:
+                pass
 
 post_save.connect(image_post_save, sender=Image)
 
@@ -160,17 +149,7 @@ post_softdelete.connect(image_post_delete, sender=Image)
 
 def imagerevision_post_save(sender, instance, created, **kwargs):
     if created and not instance.image.is_wip and not instance.skip_notifications:
-        followers = [x.user for x in ToggleProperty.objects.filter(
-            property_type="follow",
-            content_type=ContentType.objects.get_for_model(User),
-            object_id=instance.image.user.pk)]
-
-        push_notification(followers, 'new_image_revision',
-                          {
-                              'object_url': settings.BASE_URL + instance.get_absolute_url(),
-                              'originator': instance.image.user.userprofile.get_display_name(),
-                          })
-
+        push_notification_for_new_image_revision.apply_async(args=(instance.pk,))
         add_story(instance.image.user,
                   verb='VERB_UPLOADED_REVISION',
                   action_object=instance,
@@ -377,6 +356,8 @@ def subscription_paid(sender, **kwargs):
     subscription = kwargs.get('subscription')
     user = kwargs.get('user')
 
+    PremiumService.clear_subscription_status_cache_keys(user.pk)
+
     if subscription.group.name == 'astrobin_lite':
         profile = user.userprofile
         profile.premium_counter = 0
@@ -398,6 +379,8 @@ def subscription_signed_up(sender, **kwargs):
     subscription = kwargs.get('subscription')
     user_subscription = kwargs.get('usersubscription')
     user = kwargs.get('user')
+
+    PremiumService.clear_subscription_status_cache_keys(user.pk)
 
     if 'premium' in subscription.category:
         if user_subscription.expires is None:
@@ -422,26 +405,6 @@ def subscription_signed_up(sender, **kwargs):
 
 
 signed_up.connect(subscription_signed_up)
-
-
-def reset_lite_and_premium_counter(sender, **kwargs):
-    subscription = kwargs.get("subscription")  # type: Subscription
-    usersubscription = kwargs.get("usersubscription")  # type: UserSubscription
-    user = usersubscription.user  # type: User
-
-    if subscription.group.name in ('astrobin_lite_2020', 'astrobin_premium_2020'):
-        previous = UserSubscription.objects.filter(
-            user__username=user.username,
-            subscription__name__in=("AstroBin Premium", "AstroBin Lite"),
-            expires__gte=datetime.date.today() - datetime.timedelta(days=180)
-        )
-
-        if previous:
-            user.userprofile.premium_counter = 0
-            user.userprofile.save()
-
-
-signed_up.connect(reset_lite_and_premium_counter)
 
 
 def group_pre_save(sender, instance, **kwargs):
@@ -672,6 +635,11 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
             },
         )
 
+    cache_key = make_template_fragment_key(
+        'home_page_latest_from_forums',
+        (instance.user.pk, instance.user.userprofile.language))
+    cache.delete(cache_key)
+
 
 post_save.connect(forum_topic_post_save, sender=Topic)
 
@@ -735,8 +703,22 @@ def forum_post_post_save(sender, instance, created, **kwargs):
         except User.DoesNotExist:
             pass
 
+    cache_key = make_template_fragment_key(
+        'home_page_latest_from_forums',
+        (instance.user.pk, instance.user.userprofile.language))
+    cache.delete(cache_key)
 
 post_save.connect(forum_post_post_save, sender=Post)
+
+
+def topic_read_tracker_post_save(sender, instance, created, **kwargs):
+    cache_key = make_template_fragment_key(
+        'home_page_latest_from_forums',
+        (instance.user.pk, instance.user.userprofile.language))
+    cache.delete(cache_key)
+
+
+post_save.connect(topic_read_tracker_post_save, sender=TopicReadTracker)
 
 
 def threaded_messages_thread_post_save(sender, instance, created, **kwargs):

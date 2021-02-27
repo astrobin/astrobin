@@ -20,7 +20,7 @@ if AWS_S3_ENABLED:
     AWS_STORAGE_BUCKET_CNAME = AWS_STORAGE_BUCKET_NAME
     AWS_S3_SECURE_URLS = True
     AWS_QUERYSTRING_AUTH = False
-    AWS_DEFAULT_ACL = 'public-read'
+    AWS_DEFAULT_ACL = 'private'
     AWS_S3_OBJECT_PARAMETERS = {
         'Expires': 'Wed, 31 Dec 2036 23:59:59 GMT',
         'StorageClass': 'INTELLIGENT_TIERING',

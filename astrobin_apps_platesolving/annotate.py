@@ -1,6 +1,10 @@
 import logging
 import os
-from StringIO import StringIO
+import six
+if six.PY2:
+    from StringIO import StringIO
+else:
+    from io import StringIO
 
 import simplejson
 from PIL import Image, ImageDraw, ImageFont
@@ -146,13 +150,12 @@ class Annotator:
                 hd_h = h
 
             try:
-                base = Image \
-                    .open(get_from_storage(
-                    self.solution.content_object,
-                    'hd')) \
-                    .convert('RGBA')
+                base = Image.open(
+                    get_from_storage(self.solution.content_object, 'hd')
+                ).convert('RGBA')
             except ThumbnailNotReadyException as e:
-                log.warning("annotate.py: ThumbnailNotReadyException when trying to open the image: %s" % e.message)
+                log.warning(
+                    "annotate.py: ThumbnailNotReadyException when trying to open the image: %s" % e.message)
                 return None
             except IOError as e:
                 log.warning("annotate.py: IOError when trying to open the image: %s" % e.message)

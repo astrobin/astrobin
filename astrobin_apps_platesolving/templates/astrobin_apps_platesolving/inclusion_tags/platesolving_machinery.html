@@ -36,7 +36,13 @@
                     solveFailedMsg: "{% trans "This image could not be plate-solved." %}",
                     solveAdvancedFailedMsg: "{% trans "The advanced plate-solving failed." %}",
                     solveSuccessMsg: "{% trans "This image has been plate-solved. Refresh the page to see new data!" %}",
-                    solveAdvancedSuccessMsg: "{% trans "The advanced plate-solved finished. Refresh the page to see new data!" %}"
+                    solveAdvancedSuccessMsg: "{% trans "The advanced plate-solved finished. Refresh the page to see new data!" %}",
+
+                    i18n: {
+                        error: "{% trans 'Error' %}",
+                        connectionRefused: "{% trans 'AstroBin could not plate-solve this image because it was not possible to establish a connection to nova.astrometry.net. Please try again later!' %}",
+                        internalError: "{% trans 'AstroBin could not plate-solve this image because nova.astrometry.net reported an internal server error.' %}"
+                    }
                 });
 
                 solving.process();

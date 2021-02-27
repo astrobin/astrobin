@@ -8,15 +8,15 @@ from django.http import HttpResponse
 from django.utils.encoding import smart_str
 from django.views.decorators.http import require_GET
 
-from models import Accessory, Image
-from models import Camera
-from models import Filter
-from models import FocalReducer
-from models import Location
-from models import Mount
-from models import Software
-from models import Telescope
-from models import UserProfile
+from .models import Accessory, Image
+from .models import Camera
+from .models import Filter
+from .models import FocalReducer
+from .models import Location
+from .models import Mount
+from .models import Software
+from .models import Telescope
+from .models import UserProfile
 
 
 @require_GET
@@ -42,7 +42,8 @@ def autocomplete(request, what):
                  'filters': Filter,
                  'accessories': Accessory}.iteritems():
         if what == k:
-            values = v.objects.filter(Q(make__iregex=r'%s' % regex) | Q(name__iregex=r'%s' % regex))[:limit]
+            values = v.objects.filter(Q(make__iregex=r'%s' % regex) |
+                                      Q(name__iregex=r'%s' % regex))[:limit]
             if k == 'locations':
                 return HttpResponse(simplejson.dumps([{'id': str(v.id), 'name': v.name} for v in values]))
             else:

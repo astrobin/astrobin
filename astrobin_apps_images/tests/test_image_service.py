@@ -4,6 +4,7 @@ from mock import patch
 from astrobin.models import Image
 from astrobin.tests.generators import Generators
 from astrobin_apps_images.services import ImageService
+from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.tests.platesolving_generators import PlateSolvingGenerators
 
 
@@ -250,3 +251,77 @@ class TestImageService(TestCase):
 
         self.assertEquals(Image.HEMISPHERE_TYPE_NORTHERN, ImageService(image).get_hemisphere())
         self.assertEquals(Image.HEMISPHERE_TYPE_SOUTHERN, ImageService(image).get_hemisphere(revision.label))
+
+    def test_delete_original_when_no_revisions(self):
+        image= Generators.image()
+        PlateSolvingGenerators.solution(image)
+
+        self.assertEquals(1, Image.objects.all().count())
+        self.assertEquals(1, Solution.objects.all().count())
+
+        ImageService(image).delete_original()
+
+        self.assertEquals(0, Image.objects.all().count())
+        self.assertEquals(0, Solution.objects.all().count())
+
+    def test_delete_original_when_one_revision_and_original_is_final(self):
+        image = Generators.image(image_file='original.jpg')
+        PlateSolvingGenerators.solution(image, image_file='original_solution.jpg')
+
+        revision = Generators.imageRevision(image=image, image_file='revision.jpg')
+        revision_solution = PlateSolvingGenerators.solution(revision, image_file='revision_solution.jpg')
+
+        ImageService(image).delete_original()
+
+        self.assertEquals('revision.jpg', image.image_file)
+        self.assertTrue(image.is_final)
+        self.assertEquals('revision_solution.jpg', revision_solution.image_file)
+        self.assertEquals(image.pk, revision_solution.object_id)
+        self.assertEquals(1, Image.objects.all().count())
+        self.assertEquals(1, Solution.objects.all().count())
+
+    def test_delete_original_when_one_revision_and_revision_is_final(self):
+        image = Generators.image(image_file='original.jpg', is_final=False)
+        Generators.imageRevision(image=image, image_file='revision.jpg', is_final=True)
+
+        ImageService(image).delete_original()
+
+        self.assertEquals('revision.jpg', image.image_file)
+        self.assertTrue(image.is_final)
+
+    def test_delete_original_when_two_revisions_and_original_is_final(self):
+        image = Generators.image(image_file='original.jpg', is_final=True)
+        Generators.imageRevision(image=image, image_file='revision_b.jpg', is_final=False, label='B')
+        Generators.imageRevision(image=image, image_file='revision_c.jpg', is_final=False, label='C')
+
+        ImageService(image).delete_original()
+
+        self.assertEquals('revision_b.jpg', image.image_file)
+        self.assertTrue(image.is_final)
+        self.assertEquals(1, ImageService(image).get_revisions().count())
+        self.assertEquals('C', ImageService(image).get_revisions().first().label)
+
+
+    def test_delete_original_when_two_revisions_and_B_is_final(self):
+        image = Generators.image(image_file='original.jpg', is_final=False)
+        Generators.imageRevision(image=image, image_file='revision_b.jpg', is_final=True, label='B')
+        Generators.imageRevision(image=image, image_file='revision_c.jpg', is_final=False, label='C')
+
+        ImageService(image).delete_original()
+
+        self.assertEquals('revision_b.jpg', image.image_file)
+        self.assertTrue(image.is_final)
+        self.assertEquals(1, ImageService(image).get_revisions().count())
+        self.assertEquals('C', ImageService(image).get_revisions().first().label)
+
+    def test_delete_original_when_two_revisions_and_C_is_final(self):
+        image = Generators.image(image_file='original.jpg', is_final=False)
+        Generators.imageRevision(image=image, image_file='revision_b.jpg', is_final=False, label='B')
+        Generators.imageRevision(image=image, image_file='revision_c.jpg', is_final=True, label='C')
+
+        ImageService(image).delete_original()
+
+        self.assertEquals('revision_b.jpg', image.image_file)
+        self.assertFalse(image.is_final)
+        self.assertEquals(1, ImageService(image).get_revisions().count())
+        self.assertEquals('C', ImageService(image).get_revisions().first().label)

@@ -11,5 +11,6 @@ class PlateSolvingGenerators:
     def solution(target, *args, **kwargs):
         return Solution.objects.create(
             object_id=target.pk,
-            content_type=ContentType.objects.get_for_model(target)
+            content_type=ContentType.objects.get_for_model(target),
+            image_file=kwargs.pop('image_file', 'solutions/foo.jpg')
         )

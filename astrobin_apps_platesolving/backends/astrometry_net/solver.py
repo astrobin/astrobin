@@ -15,7 +15,8 @@ from astrobin_apps_platesolving.backends.base import AbstractPlateSolvingBackend
 from errors import RequestError
 from utils import json2python, python2json
 
-default_url = 'http://nova.astrometry.net/api/'
+base_url = 'http://nova.astrometry.net'
+default_url = base_url + '/api/'
 
 log = logging.getLogger('apps')
 
@@ -92,7 +93,7 @@ class Solver(AbstractPlateSolvingBackend):
 
         request = Request(url=url, headers=headers, data=data)
 
-        response = urlopen(request)
+        response = urlopen(request, timeout=30)
         text = response.read()
         result = json2python(text)
         status = result.get('status')
@@ -198,7 +199,7 @@ class Solver(AbstractPlateSolvingBackend):
         job_id = self.get_job_from_submission(submission_id)
 
         if job_id:
-            return 'http://nova.astrometry.net/annotated_full/%d' % job_id
+            return '%s/annotated_full/%d' % (base_url, job_id)
 
         return ''
 
@@ -206,7 +207,7 @@ class Solver(AbstractPlateSolvingBackend):
         job_calibration_id = self.get_job_calibration_from_submission(submission_id)
 
         if job_calibration_id:
-            return 'http://nova.astrometry.net/sky_plot/zoom1/%d' % job_calibration_id
+            return '%s/sky_plot/zoom1/%d' % (base_url, job_calibration_id)
 
         return ''
 

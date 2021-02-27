@@ -4,23 +4,18 @@ TOGGLEPROPERTIES = {
     "bookmark": {
         "property_tooltip_on": _("Remove from bookmarks"),
         "property_tooltip_off": _("Bookmark"),
-        "property_tooltip_as_bootstrap": False,
         "property_icon": "icon-bookmark",
     },
 
     "like": {
         "property_label_on": _("Unlike"),
         "property_label_off": _("Like"),
-        "property_tooltip_on": _("Unlike"),
-        "property_tooltip_off": _("Like"),
-        "property_tooltip_as_bootstrap": False,
         "property_icon": "icon-thumbs-up",
     },
 
     "follow": {
         "property_tooltip_on": _("Stop following"),
         "property_tooltip_off": _("Follow"),
-        "property_tooltip_as_bootstrap": False,
         "property_icon": "icon-plus",
     }
 }

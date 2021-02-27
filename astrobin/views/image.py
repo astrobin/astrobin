@@ -1,6 +1,7 @@
 import logging
 import re
 
+import six
 from braces.views import (
     JSONResponseMixin,
     LoginRequiredMixin,
@@ -16,7 +17,13 @@ from django.db.models import Q
 from django.db.models.query import QuerySet
 from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest, HttpResponseForbidden, HttpResponse
 from django.shortcuts import redirect
-from django.utils.encoding import iri_to_uri, smart_unicode
+from django.utils.encoding import iri_to_uri
+
+# Temp compat fix, drop when moved to python3
+if six.PY2:
+    from django.utils.encoding import smart_unicode
+else:
+    from django.utils.encoding import smart_text as smart_unicode
 from django.utils.translation import ugettext as _
 from django.views.generic import (
     DeleteView,
@@ -46,22 +53,20 @@ from astrobin.models import (
     Image, ImageRevision,
     DeepSky_Acquisition,
     SolarSystem_Acquisition,
-    UserProfile,
     LANGUAGES,
     LICENSE_CHOICES,
 )
 from astrobin.stories import add_story
+from astrobin_apps_notifications.tasks import push_notification_for_new_image
 from astrobin.templatetags.tags import can_like
 from astrobin.utils import to_user_timezone, get_image_resolution
 from astrobin_apps_groups.forms import GroupSelectForm
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
-from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
 from nested_comments.models import NestedComment
-from toggleproperties.models import ToggleProperty
 
 logger = logging.getLogger("apps")
 
@@ -230,21 +235,28 @@ class ImageDetailView(ImageDetailViewBase):
             else:
                 raise Http404
 
-        if revision_label != '0':
+        if revision_label is not None and revision_label != '0':
             try:
-                revision = image.revisions.get(label=revision_label)
+                revision = ImageService(image).get_revisions(include_corrupted=True).get(label=revision_label)
                 if revision.corrupted:
                     if request.user == image.user:
                         return redirect(reverse('image_edit_revision', args=(revision.pk,)) + '?corrupted')
                     else:
                         raise Http404
             except ImageRevision.DoesNotExist:
-                pass
+                revision = ImageService(image).get_final_revision()
+                redirect_revision_label = revision.label if hasattr(revision, 'label') else '0'
+                if request.user.is_authenticated:
+                    messages.info(request, _(
+                        "You requested revision %s, but it doesn't exist or it was deleted. We redirected you to the "
+                        "revision currently marked as final." % revision_label
+                    ))
+                return redirect(reverse('image_detail', args=(image.get_id(), redirect_revision_label,)))
 
         if revision_label is None:
             # No revision specified, let's see if we need to redirect to the
             # final.
-            if image.is_final == False:
+            if not image.is_final:
                 final = image.revisions.filter(is_final=True)
                 if final.count() > 0:
                     url = reverse_lazy(
@@ -410,7 +422,8 @@ class ImageDetailView(ImageDetailViewBase):
                     dsa_data['frames'][key]['filter'] = a.filter if a.filter is not None else ''
                     dsa_data['frames'][key]['iso'] = 'ISO%d' % a.iso if a.iso is not None else ''
                     dsa_data['frames'][key]['gain'] = '(gain: %.2f)' % a.gain if a.gain is not None else ''
-                    dsa_data['frames'][key]['sensor_cooling'] = '%dC' % a.sensor_cooling if a.sensor_cooling is not None else ''
+                    dsa_data['frames'][key][
+                        'sensor_cooling'] = '%dC' % a.sensor_cooling if a.sensor_cooling is not None else ''
                     dsa_data['frames'][key]['binning'] = 'bin %sx%s' % (a.binning, a.binning) if a.binning else ''
                     dsa_data['frames'][key]['integration'] = '%sx%s"' % (current_number + a.number, a.duration)
 
@@ -868,48 +881,13 @@ class ImageDeleteOriginalView(ImageDeleteView):
         return self.image.get_absolute_url()
 
     def post(self, *args, **kwargs):
-        image = self.get_object()
-        revisions = ImageRevision.all_objects.filter(image=image)
+        self.image = self.get_object()
 
-        if not revisions:
+        revisions = ImageService(self.image).get_revisions()
+        if not revisions.exists():
             return HttpResponseBadRequest()
 
-        final = None
-        if image.is_final:
-            final = revisions[0]
-        else:
-            for r in revisions:
-                if r.is_final:
-                    final = r
-
-        if final is None:
-            # Fallback to the most recent revision.
-            final = revisions[0]
-
-        image.thumbnail_invalidate()
-
-        image.image_file = final.image_file
-        image.updated = final.uploaded
-        image.w = final.w
-        image.h = final.h
-        image.is_final = True
-
-        if image.solution:
-            image.solution.delete()
-
-        image.save(keep_deleted=True)
-
-        if final.solution:
-            # Get the solution this way, I don't know why it wouldn't work otherwise
-            content_type = ContentType.objects.get_for_model(ImageRevision)
-            solution = Solution.objects.get(content_type=content_type, object_id=final.pk)
-            solution.content_object = image
-            solution.save()
-
-        image.thumbnails.filter(revision=final.label).update(revision='0')
-        self.image = image
-        final.delete()
-
+        ImageService(self.image).delete_original()
         messages.success(self.request, _("Original version deleted!"));
         # We do not call super, because that would delete the Image
         return HttpResponseRedirect(self.get_success_url())
@@ -920,7 +898,7 @@ class ImageDeleteOtherVersionsView(LoginRequiredMixin, View):
         image = Image.objects_including_wip.get(pk=kwargs.get('id'))  # type: Image
 
         if self.request.user != image.user and not self.request.user.is_superuser:
-            return HttpResponseForbidden();
+            return HttpResponseForbidden()
 
         revisions = ImageRevision.all_objects.filter(image=image)
 
@@ -1026,19 +1004,7 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
             image.save(keep_deleted=True)
 
             if not previously_published and not skip_notifications:
-                followers = [
-                    x.user for x in
-                    ToggleProperty.objects.toggleproperties_for_object(
-                        "follow",
-                        UserProfile.objects.get(user__pk=request.user.pk).user)
-                ]
-
-                thumb = image.thumbnail_raw('gallery', None, sync=True)
-                push_notification(followers, 'new_image', {
-                    'image': image,
-                    'image_thumbnail': thumb.url if thumb else None
-                })
-
+                push_notification_for_new_image.apply_async(args=(request.user.pk, image.pk,))
                 add_story(image.user, verb='VERB_UPLOADED_IMAGE', action_object=image)
 
             messages.success(request, _("Image moved to the public area."))

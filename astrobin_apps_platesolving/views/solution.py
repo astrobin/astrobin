@@ -38,6 +38,7 @@ class SolveView(base.View):
     def post(self, request, *args, **kwargs):
         target = get_target(kwargs.get('object_id'), kwargs.get('content_type_id'))
         solution = get_solution(kwargs.get('object_id'), kwargs.get('content_type_id'))
+        error = None
 
         if target._meta.model_name == u'image':
             image = target
@@ -73,15 +74,17 @@ class SolveView(base.View):
                 solution.submission_id = submission
                 solution.save()
             except Exception as e:
-                log.error("Error during basic plate-solving: %s" % e.message)
+                log.error("Error during basic plate-solving: %s" % str(e))
                 solution.status = Solver.MISSING
                 solution.submission_id = None
                 solution.save()
+                error = str(e)
 
         context = {
             'solution': solution.id,
             'submission': solution.submission_id,
             'status': solution.status,
+            'error': error
         }
         return HttpResponse(simplejson.dumps(context), content_type='application/json')
 
