@@ -10,7 +10,6 @@ phases:
 
   build:
     commands:
-      - echo fs.inotify.max_user_watches=524288 | tee -a /etc/sysctl.conf && sysctl -p
       - npm run lint
       - npm run build
       - npm run build:prod
