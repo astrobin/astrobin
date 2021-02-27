@@ -5,6 +5,7 @@ phases:
     commands:
       - node --version
       - npm --version
+      - cd frontend
       - npm ci
 
   build:
