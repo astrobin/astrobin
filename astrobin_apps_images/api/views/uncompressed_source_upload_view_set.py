@@ -16,7 +16,7 @@ from astrobin_apps_images.api.mixins import TusPatchMixin, TusHeadMixin, TusTerm
 from astrobin_apps_images.api.parsers import TusUploadStreamParser
 from astrobin_apps_images.api.permissions import HasUploaderAccessOrReadOnly, IsImageOwnerOrReadOnly
 from astrobin_apps_images.api.serializers import UncompressedSourceUploadSerializer
-from astrobin_apps_images.api.views.image_view_set import UploadMetadata
+from astrobin_apps_images.api.views.image_upload_view_set import UploadMetadata
 from astrobin_apps_images.models import UncompressedSourceUpload
 from common.upload_paths import uncompressed_source_upload_path
 

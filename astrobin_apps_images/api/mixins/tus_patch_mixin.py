@@ -42,9 +42,6 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
         """
         return chunk_bytes
 
-    def update(self, request, *args, **kwargs):
-        raise MethodNotAllowed
-
     def partial_update(self, request, *args, **kwargs):
         # Validate tus header
         if not has_required_tus_header(request):
