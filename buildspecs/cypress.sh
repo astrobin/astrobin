@@ -12,20 +12,8 @@ docker-compose \
    -f docker/docker-compose-local.yml \
    up -d &
 
-(\
-    cd ..;\
-    git clone https://github.com/astrobin/astrobin-ng.git && cd astrobin-ng;
-    npm ci && \
-    npm start
-)
-
 while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost/accounts/login/)" != "200" ]]; do
     echo "Waiting for AstroBin..."
-    sleep 5
-done
-
-while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:4400/account/login)" != "200" ]]; do
-    echo "Waiting for AstroBin NG..."
     sleep 5
 done
 
