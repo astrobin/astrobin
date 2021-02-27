@@ -8,7 +8,7 @@ import { PaginatedApiResultInterface } from "@shared/services/api/interfaces/pag
 export class LoadImage implements Action {
   readonly type = AppActionTypes.LOAD_IMAGE;
 
-  constructor(public payload: number | string) {}
+  constructor(public payload: number) {}
 }
 
 export class LoadImageSuccess implements Action {

@@ -25,7 +25,7 @@ export class UploadDataService implements UploadDataServiceInterface {
 
   private _metadataChanges = new BehaviorSubject<UploadMetadataEventInterface>(null);
 
-  private _endpointChanges = new BehaviorSubject<string>(`${environment.classicBaseUrl}/api/v2/images/image-upload/`);
+  private _endpointChanges = new BehaviorSubject<string>(`${environment.classicBaseUrl}/api/v2/images/image/`);
 
   private _allowedTypesChanges = new BehaviorSubject<string>(Constants.ALLOWED_UPLOAD_EXTENSIONS.join());
 

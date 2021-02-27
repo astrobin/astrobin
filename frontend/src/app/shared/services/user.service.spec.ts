@@ -1,5 +1,5 @@
 import { TestBed } from "@angular/core/testing";
-import { AuthGroupGenerator } from "@shared/generators/auth-group.generator";
+import { GroupGenerator } from "@shared/generators/group.generator";
 import { UserGenerator } from "@shared/generators/user.generator";
 import { MockBuilder } from "ng-mocks";
 
@@ -31,7 +31,7 @@ describe("UserService", () => {
 
     it("should be false if user is not in group", () => {
       const user = UserGenerator.user();
-      const group = AuthGroupGenerator.group();
+      const group = GroupGenerator.group();
 
       group.name = "foo";
       user.groups = [group];
@@ -41,7 +41,7 @@ describe("UserService", () => {
 
     it("should be true if user is in group", () => {
       const user = UserGenerator.user();
-      const group = AuthGroupGenerator.group();
+      const group = GroupGenerator.group();
 
       group.name = "foo";
       user.groups = [group];

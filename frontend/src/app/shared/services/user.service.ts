@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { AuthGroupInterface } from "@shared/interfaces/auth-group.interface";
+import { GroupInterface } from "@shared/interfaces/group.interface";
 import { UserInterface } from "@shared/interfaces/user.interface";
 import { BaseService } from "@shared/services/base.service";
 import { UserServiceInterface } from "@shared/services/user.service-interface";
@@ -12,6 +12,6 @@ export class UserService extends BaseService implements UserServiceInterface {
     if (!user || !user.groups) {
       return false;
     }
-    return user.groups.filter((group: AuthGroupInterface) => group.name === name).length > 0;
+    return user.groups.filter((group: GroupInterface) => group.name === name).length > 0;
   }
 }

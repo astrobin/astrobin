@@ -7,8 +7,8 @@ export const selectImages = createSelector(selectApp, (state: AppState): ImageIn
 
 export const selectImage = createSelector(
   selectImages,
-  (images: ImageInterface[], id: number | string): ImageInterface => {
-    const matching = images.filter(image => image.pk === id || image.hash === id);
+  (images: ImageInterface[], pk: number): ImageInterface => {
+    const matching = images.filter(image => image.pk === pk);
     return matching.length > 0 ? matching[0] : null;
   }
 );

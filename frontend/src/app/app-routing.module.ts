@@ -11,10 +11,6 @@ const routes: Routes = [
     loadChildren: () => import("@features/dev/dev.module").then(m => m.DevModule)
   },
   {
-    path: "i",
-    loadChildren: () => import("@features/image/image.module").then(m => m.ImageModule)
-  },
-  {
     path: "iotd",
     loadChildren: () => import("@features/iotd/iotd.module").then(m => m.IotdModule)
   },

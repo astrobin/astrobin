@@ -1,61 +1,41 @@
 @import "variables";
 
-$background: $darkest-grey;
+$background: $dark-grey;
 $foreground: $lightest-grey;
 $highlight: 3%;
 
 .ng-select {
+  background: $background;
+  color: $foreground;
+  padding: .75rem 1rem;
+
   .ng-arrow-wrapper {
-    width: 25px !important;
-    padding-right: 5px !important;
+    width: 25px;
+    padding-right: 5px;
 
     .ng-arrow {
-      border-color: $light-grey transparent transparent !important;
-      border-style: solid !important;
-      border-width: 5px 5px 2.5px !important;
-    }
-  }
-
-  .ng-clear-wrapper {
-    color: $light-grey !important;
-    &:hover .ng-clear {
-      color: $lightest-grey !important;
+      border-color: $light-grey transparent transparent;
+      border-style: solid;
+      border-width: 5px 5px 2.5px;
     }
   }
 
   .ng-input > input {
-    color: $foreground !important;
-  }
-
-  &.ng-select-multiple {
-    .ng-value {
-      background: $grey !important;
-      border: 1px dotted $light-grey !important;
-      padding: .0625rem .6rem !important;
-      margin-right: .5rem !important;
-    }
+    color: $foreground;
   }
 }
 
 .ng-dropdown-panel {
-  background: $background !important;
-  border-top: 1px solid lighten($background, $highlight) !important;
-  box-shadow: .25rem .5rem 1rem rgba(0,0,0,.5) !important;
-
-  .ng-optgroup {
-    color: $white !important;
-    font-weight: bold !important;
-    font-style: italic !important;
-    padding: .75rem !important;
-  }
+  background: $background;
+  border-top: 1px solid lighten($background, $highlight);
+  box-shadow: .25rem .5rem 1rem rgba(0,0,0,.5);
 
   .ng-option {
-    padding: .5rem 1rem !important;
-    color: $lightest-grey !important;
+    padding: .5rem 1rem;
 
     &.ng-option-marked {
-      color: lighten($foreground, $highlight) !important;
-      background: lighten($background, $highlight) !important;
+      color: lighten($foreground, $highlight);
+      background: lighten($background, $highlight);
     }
   }
 }

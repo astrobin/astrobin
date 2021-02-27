@@ -1,10 +1,4 @@
-import {
-  AcquisitionType,
-  DataSource,
-  ImageInterface,
-  MouseHoverImageOptions,
-  SubjectType
-} from "../interfaces/image.interface";
+import { ImageInterface } from "../interfaces/image.interface";
 
 export class ImageGenerator {
   static image(source: Partial<ImageInterface> = {}): ImageInterface {
@@ -20,20 +14,7 @@ export class ImageGenerator {
       h: source.h || 1000,
       imagingTelescopes: source.imagingTelescopes || [],
       imagingCameras: source.imagingCameras || [],
-      published: source.published || new Date().toISOString(),
-      license: "",
-      description: undefined,
-      link: undefined,
-      linkToFits: undefined,
-      acquisitionType: AcquisitionType.REGULAR,
-      subjectType: SubjectType.DEEP_SKY,
-      solarSystemMainSubject: undefined,
-      dataSource: DataSource.BACKYARD,
-      remoteSource: undefined,
-      partOfGroupSet: [],
-      keyValueTags: undefined,
-      mouseHoverImage: MouseHoverImageOptions.SOLUTION,
-      allowComments: true
+      published: source.published || new Date().toISOString()
     };
   }
 }

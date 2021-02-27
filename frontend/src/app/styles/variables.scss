@@ -1,5 +1,4 @@
 $accent-color: #cc4b2e;
-$muted-accent-color: #866158;
 $subtle-accent-color: #e0e0e0;
 $secondary-accent-color: #3092cf;
 
@@ -9,15 +8,15 @@ $white: #e9e9e9;
 $grey: #333;
 $black: #101010;
 
-$light-grey: #555;
-$lighter-grey: #999;
-$lightest-grey: #ccc;
+$light-grey: lighten($grey, 10%);
+$lighter-grey: lighten($grey, 25%);
+$lightest-grey: lighten($grey, 50%);
 
-$dark-grey: #303030;
-$darker-grey: #292929;
-$darkest-grey: #222;
+$dark-grey: darken($grey, 10%);
+$darker-grey: darken($grey, 25%);
+$darkest-grey: darken($grey, 50%);
 
-$darkest-background-text-color: #b0b0b0;
+$darkest_background_text_color: #b0b0b0;
 
 $warning-orange: #ff9a28;
 $error-red: #e84545;
@@ -42,17 +41,3 @@ $lg-min: 992px;
 $lg-max: 1199.98px;
 
 $xl-min: 1200px;
-
-$ng-select-highlight: $darker-grey;
-$ng-select-primary-text: $lightest-grey;
-$ng-select-disabled-text: $lightest-grey;
-$ng-select-border: $darker-grey;
-$ng-select-border-radius: 4px;
-$ng-select-bg: $darkest-grey;
-$ng-select-selected: darken($ng-select-highlight, 2);
-$ng-select-marked: darken($ng-select-highlight, 1);
-$ng-select-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px rgba(0, 126, 255, 0.1);
-$ng-select-placeholder: darken($ng-select-primary-text, 10);
-$ng-select-height: 42px;
-$ng-select-value-padding-left: .5rem;
-$ng-select-value-font-size: 0.9em;

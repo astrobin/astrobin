@@ -9,9 +9,6 @@
 @import "./node_modules/bootswatch/dist/cyborg/bootswatch";
 
 @import "./node_modules/ngx-toastr/toastr-bs4-alert";
-@import '~ng-wizard/themes/ng_wizard.min.css';
-@import '~ng-wizard/themes/ng_wizard_theme_arrows.min.css';
-@import "~@ng-select/ng-select/scss/default.theme.scss";
 
 @import "assets/flags/flags";
 
@@ -32,4 +29,3 @@
 @import "app/styles/select";
 @import "app/styles/tables";
 @import "app/styles/typography";
-@import "app/styles/wizard";

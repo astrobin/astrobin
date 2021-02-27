@@ -12,16 +12,12 @@ import {
   NgbProgressbarModule,
   NgbTooltipModule
 } from "@ng-bootstrap/ng-bootstrap";
-import { NgSelectModule } from "@ng-select/ng-select";
 import { FORMLY_CONFIG, FormlyModule } from "@ngx-formly/core";
-import { FormlySelectModule } from "@ngx-formly/core/select";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { BreadcrumbComponent } from "@shared/components/misc/breadcrumb/breadcrumb.component";
 import { CameraComponent } from "@shared/components/misc/camera/camera.component";
 import { FormlyFieldChunkedFileAccessorDirective } from "@shared/components/misc/formly-field-chunked-file/formly-field-chunked-file-accessor.directive";
 import { FormlyFieldChunkedFileComponent } from "@shared/components/misc/formly-field-chunked-file/formly-field-chunked-file.component";
-import { FormlyFieldNgSelectComponent } from "@shared/components/misc/formly-field-ng-select/formly-field-ng-select.component";
-import { FormlyFieldStepperComponent } from "@shared/components/misc/formly-field-stepper/formly-field-stepper.component";
 import { FullscreenImageViewerComponent } from "@shared/components/misc/fullscreen-image-viewer/fullscreen-image-viewer.component";
 import { ImageComponent } from "@shared/components/misc/image/image.component";
 import { LoadingIndicatorComponent } from "@shared/components/misc/loading-indicator/loading-indicator.component";
@@ -29,7 +25,6 @@ import { RefreshButtonComponent } from "@shared/components/misc/refresh-button/r
 import { TelescopeComponent } from "@shared/components/misc/telescope/telescope.component";
 import { TextLoadingIndicatorComponent } from "@shared/components/misc/text-loading-indicator/text-loading-indicator.component";
 import { PipesModule } from "@shared/pipes/pipes.module";
-import { NgWizardModule } from "ng-wizard";
 import { NgxFilesizeModule } from "ngx-filesize";
 import { NgxImageZoomModule } from "ngx-image-zoom";
 import { UploadxModule } from "ngx-uploadx";
@@ -45,16 +40,13 @@ const modules = [
   CommonModule,
   FontAwesomeModule,
   FormsModule,
-  FormlySelectModule,
   NgbCollapseModule,
   NgbDropdownModule,
   NgbModalModule,
   NgbProgressbarModule,
   NgbTooltipModule,
-  NgSelectModule,
   NgxFilesizeModule,
   NgxImageZoomModule,
-  NgWizardModule,
   PipesModule,
   ReactiveFormsModule,
   RouterModule,
@@ -70,8 +62,6 @@ const components = [
   FooterComponent,
   FormlyFieldChunkedFileAccessorDirective,
   FormlyFieldChunkedFileComponent,
-  FormlyFieldNgSelectComponent,
-  FormlyFieldStepperComponent,
   FullscreenImageViewerComponent,
   HeaderComponent,
   ImageComponent,
