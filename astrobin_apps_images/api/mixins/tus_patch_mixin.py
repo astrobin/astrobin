@@ -60,7 +60,9 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             return HttpResponse(msg, status=status.HTTP_400_BAD_REQUEST)
 
         # Retrieve object
-        object = self.get_upload_in_progress_object() if self.get_upload_in_progress_object else self.get_object()
+        object = self.get_upload_in_progress_object() \
+            if hasattr(self, 'get_upload_in_progress_object') \
+            else self.get_object()
 
         # Get upload_offset
         upload_offset = int(request.META.get(constants.UPLOAD_OFFSET_NAME, 0))
