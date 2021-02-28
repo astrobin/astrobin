@@ -24,7 +24,7 @@ while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost/accounts/l
     sleep 5
 done
 
-while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:4400/accounts/login/)" != "200" ]]; do
+while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:4400/account/login)" != "200" ]]; do
     echo "Waiting for astrobin-ng..."
     sleep 5
 done
