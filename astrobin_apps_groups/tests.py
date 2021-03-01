@@ -167,7 +167,7 @@ class GroupsTest(TestCase):
         response = self.client.post(url, {
             'name': 'Test create group',
             'description': 'Description',
-            'category': 101,
+            'category': GroupCategory.OTHER,
             'public': True,
             'moderated': True,
         }, follow=True)
@@ -192,7 +192,7 @@ class GroupsTest(TestCase):
         response = self.client.post(url, {
             'name': 'Test create group',
             'description': 'Description',
-            'category': 101,
+            'category': GroupCategory.OTHER,
             'public': False,
         }, follow=True)
         self.assertEqual(response.status_code, 200)
@@ -206,7 +206,7 @@ class GroupsTest(TestCase):
         response = self.client.post(url, {
             'name': 'Test create group',
             'description': 'Description',
-            'category': 101,
+            'category': GroupCategory.OTHER,
             'autosubmission': True,
         }, follow=True)
         self.assertEqual(response.status_code, 200)
