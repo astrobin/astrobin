@@ -1,4 +1,6 @@
+from .image_view_set import ImageViewSet
 from .image_upload_view_set import ImageUploadViewSet
 from .image_revision_view_set import ImageRevisionViewSet
+from .image_revision_upload_view_set import ImageRevisionUploadViewSet
 from .thumbnail_group_view_set import ThumbnailGroupViewSet
 from .uncompressed_source_upload_view_set import UncompressedSourceUploadViewSet

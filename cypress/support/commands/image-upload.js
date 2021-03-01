@@ -30,7 +30,7 @@ Cypress.Commands.add("imageUpload", (fixture, options = {}) => {
             cy.fixture(fixture, 'base64')
                 .then(Cypress.Blob.base64StringToBlob)
                 .then(blob => {
-                    const el = $input[0]
+                    const el = $input[0];
                     const testFile = new File([blob], fixture, {
                         type: "image/jpeg",
                     });
@@ -45,4 +45,28 @@ Cypress.Commands.add("imageUpload", (fixture, options = {}) => {
     cy.imageEditThumbnails(options);
     cy.imageEditWatermark(options);
     cy.imageEditBasic(options);
+});
+
+Cypress.Commands.add("ngPrepareImageUpload", (fixture, options = {}) => {
+    cy.visit("http://localhost:4400/uploader");
+
+    cy.get("#title").type(options.title || "Test title");
+    cy.get("#image_file")
+        .then(function ($input) {
+            cy.fixture(fixture, 'base64')
+                .then(Cypress.Blob.base64StringToBlob)
+                .then(blob => {
+                    const el = $input[0];
+                    const testFile = new File([blob], fixture, {
+                        type: "image/jpeg",
+                    });
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(testFile);
+                    el.files = dataTransfer.files;
+
+                    const event = document.createEvent("UIEvents");
+                    event.initUIEvent("change", true, true);
+                    el.dispatchEvent(event);
+                });
+        });
 });
