@@ -41,7 +41,7 @@ class AppConfig(JSONResponseMixin, View):
             u'IOTD_SUBMISSION_MAX_PER_DAY': settings.IOTD_SUBMISSION_MAX_PER_DAY,
             u'IOTD_REVIEW_MAX_PER_DAY': settings.IOTD_REVIEW_MAX_PER_DAY,
             u'IOTD_QUEUES_PAGE_SIZE': settings.IOTD_QUEUES_PAGE_SIZE,
-            u'IMAGE_UPLOAD_ENDPOINT': '/api/v2/images/image/',
+            u'IMAGE_UPLOAD_ENDPOINT': '/api/v2/images/image-upload/',
         })
 
     def __get_i18n_hash__(self):
