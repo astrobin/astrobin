@@ -16,7 +16,7 @@ docker-compose \
     git clone https://github.com/astrobin/astrobin-ng.git &&
     cd astrobin-ng &&
     npm ci &&
-    npm start:cypress
+    npm run serve:cypress
 ) &
 
 while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost/accounts/login/)" != "200" ]]; do
