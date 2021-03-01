@@ -1,11 +1,14 @@
+Cypress.Commands.add('fillInLogin', (opts = {}) => {
+    cy.get(".login-form input[name='username']").type(opts.username || "astrobin_dev");
+    cy.get(".login-form input[name='password']").type(opts.password || "astrobin_dev");
+    cy.get(".login-form input[type='submit']").click();
+});
+
 Cypress.Commands.add('login', (opts={}) => {
     cy.visit("/accounts/login/?next=" + (opts.next || "/me/"));
 
     cy.acceptCookies();
-
-    cy.get(".login-form input[name='username']").type(opts.username || "astrobin_dev");
-    cy.get(".login-form input[name='password']").type(opts.password || "astrobin_dev");
-    cy.get(".login-form input[type='submit']").click();
+    cy.fillInLogin(opts);
 
     cy.url().should(
         "contain",
@@ -27,6 +30,7 @@ Cypress.Commands.add('ngLogin', (opts={}) => {
     cy.get("#login-form #handle").type(opts.username || "astrobin_dev");
     cy.get("#login-form #password").type(opts.password || "astrobin_dev");
     cy.get(".buttons-area .btn").contains("Log in").click();
+    cy.wait(1000);
 
     cy.url().should("contain", "logged-in");
 });
