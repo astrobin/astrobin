@@ -18,3 +18,15 @@ Cypress.Commands.add('login', (opts={}) => {
         }
     });
 });
+
+Cypress.Commands.add('ngLogin', (opts={}) => {
+    cy.visit("http://localhost:4400/account/login/?redirectUrl=%2Fuploader");
+
+    cy.acceptCookies();
+
+    cy.get("#login-form #handle").type(opts.username || "astrobin_dev");
+    cy.get("#login-form #password").type(opts.password || "astrobin_dev");
+    cy.get(".buttons-area .btn").contains("Log in").click();
+
+    cy.url().should("contain", "logged-in");
+});
