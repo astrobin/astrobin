@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-02 09:28+0000\n"
-"PO-Revision-Date: 2021-03-02 09:11+0000\n"
-"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
+"PO-Revision-Date: 2021-03-02 21:03+0000\n"
+"Last-Translator: 张熠瑆 Phillip <31302717@qq.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: zh_CN\n"
+"Language: zh-CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1614676306.000000\n"
+"X-POOTLE-MTIME: 1614718991.000000\n"
 
 msgid "United Kingdom"
 msgstr "英国（大不列颠及北爱尔兰联合王国）"
@@ -1059,10 +1059,9 @@ msgstr "阿拉伯"
 msgid "Japanese"
 msgstr "日语"
 
-#, fuzzy
 #| msgid "China"
 msgid "Chinese"
-msgstr "中国"
+msgstr "中文"
 
 msgid "Pulsars"
 msgstr "脉冲星"
@@ -2434,19 +2433,18 @@ msgstr "本网站的图片版权，归其各自所有者所有。"
 msgid "Back to top"
 msgstr "回到顶部"
 
-#, fuzzy
 #| msgid "Your subscriptions"
 msgid "Your AstroBin subscription is expired."
-msgstr "您的订阅"
+msgstr "您的AstroBin订阅已到期。"
 
 msgid ""
 "That's okay: we don't EVER delete your images if your subscription expires."
-msgstr ""
+msgstr "没关系，即使您的订阅到期，我们也永远不会删除您的图片。"
 
 msgid ""
 "However, it would be great if you considered renewing: it's inexpensive and "
 "it goes a long way to support the AstroBin project!"
-msgstr ""
+msgstr "但是，如果您考虑续订那就太棒了：对您来说九牛之一毛，却能支持AstroBin走的更远！"
 
 msgid "Subscription plans"
 msgstr "订阅计划"
@@ -2454,10 +2452,9 @@ msgstr "订阅计划"
 msgid "Your subscriptions"
 msgstr "您的订阅"
 
-#, fuzzy
 #| msgid "The paid subscriptions are too expensive"
 msgid "Your AstroBin subscription about to expire."
-msgstr "付费订阅太贵了"
+msgstr "您的AstroBin订阅即将到期。"
 
 msgid ""
 "AstroBin is unable to deliver your emails, and it won't try again until the "
@@ -2467,22 +2464,19 @@ msgstr "AstroBin无法发送您的电子邮件，在问题解决之前不会重�
 msgid "Your email provider recently reported the following error code(s):"
 msgstr "您的电子邮件服务商最近报告了以下错误代码："
 
-#, fuzzy
 #| msgid ""
 #| "If you believe this is in error, please contact us. Otherwise please "
 #| "contact your email provider or change your e-mail address on AstroBin."
 msgid ""
 "If you believe this is in error, please contact us. Otherwise please contact "
 "you email provider or change your e-mail address on AstroBin."
-msgstr ""
-"如果您认为这是错误的，请与我们联系。否则，请联系您的电子邮件服务商或更改"
-"AstroBin上的电子邮件地址。"
+msgstr "如果您认为这里有问题，请与我们联系。否则，请联系您的电子邮件服务商或更改AstroBin上的电子邮件地址。"
 
 msgid "Change your e-mail"
 msgstr "修改您的电子邮箱"
 
 msgid "Ignore and retry"
-msgstr ""
+msgstr "忽略并重试"
 
 msgid "Contact us"
 msgstr "联系我们"
@@ -2507,13 +2501,12 @@ msgstr "AstroBin不向您发送电子邮件，因为您已将其中一些标记�
 msgid ""
 "If you have an automated filter or rule to mark AstroBin emails as spam, "
 "please disable it using your email client."
-msgstr ""
+msgstr "如果您的邮箱有自动过滤功能，或将AstroBin的邮件识别为垃圾邮件，请在邮箱中将其禁用。"
 
 # 待定
-#, fuzzy
 #| msgid "New e-mail"
 msgid "Resume emails"
-msgstr "使用新的电子邮箱"
+msgstr "恢复电子邮件"
 
 msgid "Cancel"
 msgstr "取消"
@@ -2540,7 +2533,7 @@ msgid "Settings"
 msgstr "设置"
 
 msgid "Mark all as read"
-msgstr "标记所有为已读"
+msgstr "全部标记为已读"
 
 msgid "AstroBin is in READ ONLY mode"
 msgstr "AstroBin正处于只读模式"
@@ -4740,14 +4733,13 @@ msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> 赞了您的图片！</a>"
 msgid "%(user)s likes your image: %(title)s"
 msgstr "%(user)s 赞了您的图片：%(title)s"
 
-#, fuzzy
 #| msgid ""
 #| "I really appreciate your support for AstroBin, I hope you will enjoy your "
 #| "new subscription!"
 msgid ""
 "I really appreciate your support for AstroBin, thank you so much for "
 "renewing!"
-msgstr "非常感谢您对AstroBin的支持，希望您喜欢新的订阅！"
+msgstr "非常感谢您对AstroBin的支持，非常感谢您的续订！"
 
 #, python-format
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
@@ -5041,12 +5033,16 @@ msgid ""
 "to provide feedback or ask a question about AstroBin, please <a href="
 "\"%(contact_url)s\">contact us</a>: we really value your input!"
 msgstr ""
+"有关AstroBin本身的帖子，例如有关IOTD / "
+"TP流程的问题或评论、关AstroBin索引、AstroBin的“赞”或论坛本身的帖子，也将被视为无关主题，它们将被删除。 "
+"如果您想提供反馈或询问有关AstroBin的问题，<a href=\"%(contact_url)s\">contact "
+"us</a>：我们非常重视您的意见！"
 
 msgid "Thanks for your cooperation!"
 msgstr "感谢您的配合！"
 
 msgid "I have read the text above"
-msgstr ""
+msgstr "我已阅读以上内容"
 
 msgid "I understand"
 msgstr "朕知道了"
@@ -5116,10 +5112,9 @@ msgstr "请首先退出“源”模式以引用消息。"
 msgid "*** Type your reply here ***"
 msgstr "*** 在此回复主题 ***"
 
-#, fuzzy
 #| msgid "Deleted"
 msgid "(deleted)"
-msgstr "删除"
+msgstr "（已删除）"
 
 msgctxt "Noun, e.g. 'This element has 1 like'"
 msgid "like"
@@ -5148,13 +5143,13 @@ msgstr "删除帖子？"
 msgid "Approve post"
 msgstr "同意发布"
 
-#, fuzzy, python-format
+#, python-format
 #| msgid ""
 #| "Editing a post is only allowed within %(minutes)s minutes after creating "
 #| "it."
 msgid ""
 "Editing a post is only allowed within %(hours)s hours after creating it."
-msgstr "仅允许在创建帖子后 %(minutes)s 分钟内进行编辑。"
+msgstr "仅允许在创建帖子后%(hours)s 小时内进行编辑。"
 
 msgid "You cannot Like this post because the topic is closed."
 msgstr "该主题已关闭，您不能给此帖子点赞。"
@@ -6049,10 +6044,9 @@ msgstr "获奖"
 msgid "Publication date range"
 msgstr "发布日期范围"
 
-#, fuzzy
 #| msgid "Publication date range"
 msgid "Acquisition date range"
-msgstr "发布日期范围"
+msgstr "拍摄日期范围"
 
 msgid "Camera type"
 msgstr "相机类型"
@@ -6285,7 +6279,7 @@ msgstr "感谢您报告此错误。将重新生成所有缩略图。"
 msgid ""
 "You requested revision %s, but it doesn't exist or it was deleted. We "
 "redirected you to the revision currently marked as final."
-msgstr ""
+msgstr "您请求访问的修订版是 %s，但它不存在或已被删除。我们为您跳转至最终修订版。"
 
 msgid "Accessory"
 msgstr "配件"
