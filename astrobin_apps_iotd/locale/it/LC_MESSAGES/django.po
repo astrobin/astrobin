@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-02 09:41+0000\n"
-"PO-Revision-Date: 2021-01-24 21:36+0000\n"
+"PO-Revision-Date: 2021-03-02 09:54+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1611524162.000000\n"
+"X-POOTLE-MTIME: 1614678872.000000\n"
 
 msgid "You cannot unhide an image on behalf of another user."
 msgstr ""
@@ -146,17 +146,17 @@ msgstr ""
 
 #, python-format
 msgid "you already selected %s IOTD today (UTC)"
-msgstr ""
+msgstr "hai già selezionato %s FOto del Giorno oggi (UTC)"
 
-#, fuzzy, python-format
+#, python-format
 #| msgid "You have already scheduled %(max_allowed)s IOTDs."
 msgid "you already selected %s scheduled IOTDs"
-msgstr "Hai già programmato %(max_allowed)s Foto del Giorno."
+msgstr "hai già programmato %s Foto del Giorno."
 
-#, fuzzy, python-format
+#, python-format
 #| msgid "You have already scheduled %(max_allowed)s IOTDs."
 msgid "there are already %s scheduled IOTDs"
-msgstr "Hai già programmato %(max_allowed)s Foto del Giorno."
+msgstr "ci sono già %s Foto del Giorno programmate"
 
 msgid "Image of the day"
 msgstr "Foto del Giorno"
@@ -176,6 +176,8 @@ msgid ""
 "Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
 "<strong>%(time)s</strong>."
 msgstr ""
+"Spiacenti, non puoi selezionare una Foto del Giorno in questo momento: "
+"%(reason)s. Prova di nuovo in <strong>%(time)s</strong>."
 
 msgid "This queue is currently empty."
 msgstr "Questa coda al momento è vuota."
