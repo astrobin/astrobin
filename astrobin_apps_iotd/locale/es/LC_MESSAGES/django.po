@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-24 21:27+0000\n"
+"POT-Creation-Date: 2021-03-02 09:41+0000\n"
 "PO-Revision-Date: 2020-05-15 20:18+0000\n"
 "Last-Translator: DanielaDGR <danieladgr.5r@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,6 +149,20 @@ msgstr "No se puede anular el elección de una imagen elegida por otro juez."
 msgid "You cannot unelect a past or current IOTD."
 msgstr "No puede anular un IOTD pasado o actual."
 
+#, python-format
+msgid "you already selected %s IOTD today (UTC)"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "You have already scheduled %(max_allowed)s IOTDs."
+msgid "you already selected %s scheduled IOTDs"
+msgstr "Ya ha programado%(max_allowed)s IOTD."
+
+#, fuzzy, python-format
+#| msgid "You have already scheduled %(max_allowed)s IOTDs."
+msgid "there are already %s scheduled IOTDs"
+msgstr "Ya ha programado%(max_allowed)s IOTD."
+
 msgid "Image of the day"
 msgstr "Imagen del día"
 
@@ -163,6 +177,12 @@ msgid ""
 msgstr ""
 "Por favor seleccione las imágenes que usted desea elegir para IOTD haciendo "
 "clic sobre estas."
+
+#, python-format
+msgid ""
+"Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
+"<strong>%(time)s</strong>."
+msgstr ""
 
 msgid "This queue is currently empty."
 msgstr "Esta cola está vacía actualmente."

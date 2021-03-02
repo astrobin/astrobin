@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-24 21:27+0000\n"
+"POT-Creation-Date: 2021-03-02 09:41+0000\n"
 "PO-Revision-Date: 2021-01-24 21:36+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,6 @@ msgstr ""
 "X-Generator: Pootle 2.8\n"
 "X-POOTLE-MTIME: 1611524162.000000\n"
 
-#| msgid "You cannot unelect an image elected by another judge."
 msgid "You cannot unhide an image on behalf of another user."
 msgstr ""
 "Non puoi annullare il nascondimento di un'immagine da parte di un altro "
@@ -145,6 +144,20 @@ msgid "You cannot unelect a past or current IOTD."
 msgstr ""
 "Non puoi rimuovere l'elezione di una Foto del Giorno passata o corrente."
 
+#, python-format
+msgid "you already selected %s IOTD today (UTC)"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "You have already scheduled %(max_allowed)s IOTDs."
+msgid "you already selected %s scheduled IOTDs"
+msgstr "Hai già programmato %(max_allowed)s Foto del Giorno."
+
+#, fuzzy, python-format
+#| msgid "You have already scheduled %(max_allowed)s IOTDs."
+msgid "there are already %s scheduled IOTDs"
+msgstr "Hai già programmato %(max_allowed)s Foto del Giorno."
+
 msgid "Image of the day"
 msgstr "Foto del Giorno"
 
@@ -157,6 +170,12 @@ msgstr "Coda di Elezione Foto del Giorno"
 msgid ""
 "Please select the images that you want to elect to IOTD by clicking on them."
 msgstr "Scegli le immagini che vuoi eleggere a Foto del Giorno cliccandole."
+
+#, python-format
+msgid ""
+"Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
+"<strong>%(time)s</strong>."
+msgstr ""
 
 msgid "This queue is currently empty."
 msgstr "Questa coda al momento è vuota."

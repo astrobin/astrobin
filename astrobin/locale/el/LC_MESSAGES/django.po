@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-24 21:14+0000\n"
+"POT-Creation-Date: 2021-03-02 09:28+0000\n"
 "PO-Revision-Date: 2014-01-24 09:40+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1075,6 +1075,11 @@ msgstr ""
 #, fuzzy
 msgid "Japanese"
 msgstr "Ιαπωνία"
+
+#, fuzzy
+#| msgid "China"
+msgid "Chinese"
+msgstr "Κίνα"
 
 msgid "Pulsars"
 msgstr "Πάλσαρς"
@@ -2207,9 +2212,6 @@ msgid ""
 "to your %(_0)sContribution Index (beta)%(_1)s."
 msgstr ""
 
-msgid "New!"
-msgstr "Νέο!"
-
 msgid "Use the <strong>@</strong> sign and start typing to mention any user."
 msgstr ""
 
@@ -2486,15 +2488,28 @@ msgstr ""
 msgid "Back to top"
 msgstr "Πίσω στην κορυφή"
 
+#, fuzzy
+msgid "Your AstroBin subscription is expired."
+msgstr "Περιγραφή"
+
 msgid ""
-"Please review your preferences about receiving important communications, "
-"newsletters, and marketing emails from AstroBin."
+"That's okay: we don't EVER delete your images if your subscription expires."
 msgstr ""
 
-msgid "Preferences"
-msgstr "Προτιμήσεις"
+msgid ""
+"However, it would be great if you considered renewing: it's inexpensive and "
+"it goes a long way to support the AstroBin project!"
+msgstr ""
 
-msgid "Don't show again"
+#, fuzzy
+msgid "Subscription plans"
+msgstr "Περιγραφή"
+
+#, fuzzy
+msgid "Your subscriptions"
+msgstr "Περιγραφή"
+
+msgid "Your AstroBin subscription about to expire."
 msgstr ""
 
 msgid ""
@@ -2507,12 +2522,15 @@ msgstr ""
 
 msgid ""
 "If you believe this is in error, please contact us. Otherwise please contact "
-"your email provider or change your e-mail address on AstroBin."
+"you email provider or change your e-mail address on AstroBin."
 msgstr ""
 
 #, fuzzy
 msgid "Change your e-mail"
 msgstr "Αλλάξτε τον κωδικό σας"
+
+msgid "Ignore and retry"
+msgstr ""
 
 #, fuzzy
 #| msgid "Contact"
@@ -2525,26 +2543,24 @@ msgid ""
 msgstr ""
 
 msgid ""
+"If you believe this is in error, please contact us. Otherwise please contact "
+"your email provider or change your e-mail address on AstroBin."
+msgstr ""
+
+msgid ""
 "AstroBin is not delivering you emails because you have marked some of them "
 "as spam."
 msgstr ""
 
-msgid "Contact us to resolve the issue"
-msgstr ""
-
-#, python-format
 msgid ""
-"<strong>Good news!</strong> AstroBin automatically recovered some of your "
-"images that were lost in the data loss incident of February 2020. Please "
-"review them to confirm the recovery. If you do nothing, your recovered "
-"images will be confirmed automatically starting from <strong>%(date)s</"
-"strong>."
+"If you have an automated filter or rule to mark AstroBin emails as spam, "
+"please disable it using your email client."
 msgstr ""
 
 #, fuzzy
-#| msgid "Recent images"
-msgid "Review recovered images"
-msgstr "Πρόσφατες εικόνες"
+#| msgid "New Zealand"
+msgid "Resume emails"
+msgstr "Νέα Ζηλανδία"
 
 msgid "Cancel"
 msgstr "Άκυρο"
@@ -2767,10 +2783,6 @@ msgid ""
 "informative, constructive, and valuable commentary on AstroBin. %(_0)sLearn "
 "more.%(_1)s"
 msgstr ""
-
-#, fuzzy
-msgid "Subscription plans"
-msgstr "Περιγραφή"
 
 msgid "My places"
 msgstr "Τα μέρη μου"
@@ -4021,6 +4033,9 @@ msgstr "Τι είναι αυτός ο ιστότοπος;"
 msgid "Gallery"
 msgstr "Έκθεση εικόνων"
 
+msgid "Preferences"
+msgstr "Προτιμήσεις"
+
 msgid "Compose message"
 msgstr "Νέο μήνυμα"
 
@@ -4940,6 +4955,11 @@ msgstr ""
 msgid "%(user)s likes your image: %(title)s"
 msgstr "Ο/Η %(user)s προτιμάει την εικόνα σας: %(url)s"
 
+msgid ""
+"I really appreciate your support for AstroBin, thank you so much for "
+"renewing!"
+msgstr ""
+
 #, python-format
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
 msgstr ""
@@ -5230,9 +5250,21 @@ msgid ""
 "User support posts, feature requests, issue reports, etc, will be deleted."
 msgstr ""
 
+#, python-format
+msgid ""
+"Posts about AstroBin itself, such as questions or comments about the IOTD/TP "
+"process, or the AstroBin Index, AstroBin \"likes\", or the forums "
+"themselves, are also considered off-topic and will be deleted. If you want "
+"to provide feedback or ask a question about AstroBin, please <a href="
+"\"%(contact_url)s\">contact us</a>: we really value your input!"
+msgstr ""
+
 #, fuzzy
 msgid "Thanks for your cooperation!"
 msgstr "Ευχαριστούμε για την πρόταση σας"
+
+msgid "I have read the text above"
+msgstr ""
 
 msgid "I understand"
 msgstr ""
@@ -5302,6 +5334,11 @@ msgid "*** Type your reply here ***"
 msgstr ""
 
 #, fuzzy
+#| msgid "Delete"
+msgid "(deleted)"
+msgstr "Διαγραφή"
+
+#, fuzzy
 #| msgid "likes"
 msgctxt "Noun, e.g. 'This element has 1 like'"
 msgid "like"
@@ -5338,7 +5375,7 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Editing a post is only allowed within %(minutes)s minutes after creating it."
+"Editing a post is only allowed within %(hours)s hours after creating it."
 msgstr ""
 
 msgid "You cannot Like this post because the topic is closed."
@@ -6060,10 +6097,6 @@ msgid "Thanks for your support!"
 msgstr "Ευχαριστούμε για την πρόταση σας"
 
 #, fuzzy
-msgid "Your subscriptions"
-msgstr "Περιγραφή"
-
-#, fuzzy
 #| msgid "You have no requests."
 msgid "Your payments"
 msgstr "Δεν έχετε αιτήσεις."
@@ -6310,6 +6343,11 @@ msgstr ""
 #, fuzzy
 #| msgid "Public data pools"
 msgid "Publication date range"
+msgstr "Δημόσιες περιοχές δεδομένων"
+
+#, fuzzy
+#| msgid "Public data pools"
+msgid "Acquisition date range"
 msgstr "Δημόσιες περιοχές δεδομένων"
 
 msgid "Camera type"
@@ -6612,6 +6650,12 @@ msgstr ""
 "Σας ευχαριστούμε για την αναφορά του προβλήματος. Όλες οι μικρογραφίες θα "
 "δημιουργηθούν ξανά."
 
+#, python-format
+msgid ""
+"You requested revision %s, but it doesn't exist or it was deleted. We "
+"redirected you to the revision currently marked as final."
+msgstr ""
+
 #, fuzzy
 msgid "Accessory"
 msgstr "Λοιπός εξοπλισμός"
@@ -6671,6 +6715,14 @@ msgstr "Είστε σίγουροι;"
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid "New!"
+#~ msgstr "Νέο!"
+
+#, fuzzy
+#~| msgid "Recent images"
+#~ msgid "Review recovered images"
+#~ msgstr "Πρόσφατες εικόνες"
 
 #~ msgid ""
 #~ "Please contact us if you need any assistance, or want to report a "
