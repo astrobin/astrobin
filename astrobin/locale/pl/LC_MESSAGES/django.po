@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-02 09:28+0000\n"
+"POT-Creation-Date: 2021-03-02 22:14+0000\n"
 "PO-Revision-Date: 2020-10-26 10:36+0000\n"
 "Last-Translator: Łukasz Sujka <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1064,10 +1064,8 @@ msgstr "Arabski"
 msgid "Japanese"
 msgstr "Japoński"
 
-#, fuzzy
-#| msgid "China"
-msgid "Chinese"
-msgstr "Chiny"
+msgid "Chinese (Simplified)"
+msgstr ""
 
 msgid "Pulsars"
 msgstr "Pulsary"
@@ -6578,6 +6576,9 @@ msgstr ""
 msgid "Image uploaded. Thank you!"
 msgstr "Zapisane! Dziękujemy!"
 
+msgid "Sorry, AstroBin was unable to activate the requested language"
+msgstr ""
+
 msgid "You already have a collection with that name"
 msgstr ""
 
@@ -6666,6 +6667,11 @@ msgstr "Czy jesteś pewny?"
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#, fuzzy
+#~| msgid "China"
+#~ msgid "Chinese"
+#~ msgstr "Chiny"
 
 #~ msgid "New!"
 #~ msgstr "Nowy!"

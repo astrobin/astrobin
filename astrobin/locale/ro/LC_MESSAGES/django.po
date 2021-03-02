@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-02 09:28+0000\n"
+"POT-Creation-Date: 2021-03-02 22:14+0000\n"
 "PO-Revision-Date: 2013-11-11 19:27+0000\n"
 "Last-Translator: gamangabriel <gamangabriel@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1082,10 +1082,8 @@ msgstr ""
 msgid "Japanese"
 msgstr "Japonia"
 
-#, fuzzy
-#| msgid "China"
-msgid "Chinese"
-msgstr "China"
+msgid "Chinese (Simplified)"
+msgstr ""
 
 msgid "Pulsars"
 msgstr "Pulsari"
@@ -6328,6 +6326,9 @@ msgstr ""
 msgid "Image uploaded. Thank you!"
 msgstr "Formă salvată. Mulțumesc!"
 
+msgid "Sorry, AstroBin was unable to activate the requested language"
+msgstr ""
+
 msgid "You already have a collection with that name"
 msgstr ""
 
@@ -6414,6 +6415,11 @@ msgstr "Sunteţi sigur?"
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#, fuzzy
+#~| msgid "China"
+#~ msgid "Chinese"
+#~ msgstr "China"
 
 #~ msgid "New!"
 #~ msgstr "Nou !"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-02 09:41+0000\n"
+"POT-Creation-Date: 2021-03-02 22:28+0000\n"
 "PO-Revision-Date: 2021-03-02 09:54+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,12 +149,10 @@ msgid "you already selected %s IOTD today (UTC)"
 msgstr "hai già selezionato %s FOto del Giorno oggi (UTC)"
 
 #, python-format
-#| msgid "You have already scheduled %(max_allowed)s IOTDs."
 msgid "you already selected %s scheduled IOTDs"
 msgstr "hai già programmato %s Foto del Giorno."
 
 #, python-format
-#| msgid "You have already scheduled %(max_allowed)s IOTDs."
 msgid "there are already %s scheduled IOTDs"
 msgstr "ci sono già %s Foto del Giorno programmate"
 

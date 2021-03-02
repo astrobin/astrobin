@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-02 09:41+0000\n"
+"POT-Creation-Date: 2021-03-02 22:28+0000\n"
 "PO-Revision-Date: 2021-03-02 20:53+0000\n"
 "Last-Translator: 张熠瑆 Phillip <31302717@qq.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -139,12 +139,10 @@ msgid "you already selected %s IOTD today (UTC)"
 msgstr "您今天（UTC）已经选择了 %s 个IOTD"
 
 #, python-format
-#| msgid "You have already scheduled %(max_allowed)s IOTDs."
 msgid "you already selected %s scheduled IOTDs"
 msgstr "您已经选择了%s个预定的IOTD"
 
 #, python-format
-#| msgid "You have already scheduled %(max_allowed)s IOTDs."
 msgid "there are already %s scheduled IOTDs"
 msgstr "您已经预定了 %s 个IOTD。"
 
@@ -165,7 +163,8 @@ msgstr "请通过单击选择要票选为IOTD的图像。"
 msgid ""
 "Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
 "<strong>%(time)s</strong>."
-msgstr "抱歉，您现在无法选择IOTD：%(reason)s。 请在<strong>%(time)s</strong>后重试。"
+msgstr ""
+"抱歉，您现在无法选择IOTD：%(reason)s。 请在<strong>%(time)s</strong>后重试。"
 
 msgid "This queue is currently empty."
 msgstr "此列队现在是空的。"
