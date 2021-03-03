@@ -259,7 +259,7 @@ def delete_never_activated_accounts():
     logger.debug("Deleted %d inactive accounts" % count)
 
 
-@shared_task(time_limit=600)
+@shared_task(time_limit=3600)
 def prepare_download_data_archive(request_id):
     # type: (str) -> None
 
