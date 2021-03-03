@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-24 21:14+0000\n"
+"POT-Creation-Date: 2021-03-02 22:14+0000\n"
 "PO-Revision-Date: 2020-10-26 10:36+0000\n"
 "Last-Translator: Łukasz Sujka <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1063,6 +1063,9 @@ msgstr "Arabski"
 
 msgid "Japanese"
 msgstr "Japoński"
+
+msgid "Chinese (Simplified)"
+msgstr ""
 
 msgid "Pulsars"
 msgstr "Pulsary"
@@ -2154,9 +2157,6 @@ msgid ""
 "to your %(_0)sContribution Index (beta)%(_1)s."
 msgstr ""
 
-msgid "New!"
-msgstr "Nowy!"
-
 msgid "Use the <strong>@</strong> sign and start typing to mention any user."
 msgstr ""
 
@@ -2460,18 +2460,30 @@ msgstr ""
 msgid "Back to top"
 msgstr "Na górę"
 
+#, fuzzy
+#| msgid "Your active subscription plans"
+msgid "Your AstroBin subscription is expired."
+msgstr "Twoje aktywne plany subskrypcji"
+
 msgid ""
-"Please review your preferences about receiving important communications, "
-"newsletters, and marketing emails from AstroBin."
+"That's okay: we don't EVER delete your images if your subscription expires."
 msgstr ""
-"Przejrzyj swoje preferencje dotyczące otrzymywania ważnych informacji, "
-"newslettera oraz informacji handlowych od AstroBin."
 
-msgid "Preferences"
-msgstr "Ustawienia"
+msgid ""
+"However, it would be great if you considered renewing: it's inexpensive and "
+"it goes a long way to support the AstroBin project!"
+msgstr ""
 
-msgid "Don't show again"
-msgstr "Nie pokazuj tego ponownie"
+msgid "Subscription plans"
+msgstr "Plany subskrypcji"
+
+#, fuzzy
+#| msgid "Your active subscription plans"
+msgid "Your subscriptions"
+msgstr "Twoje aktywne plany subskrypcji"
+
+msgid "Your AstroBin subscription about to expire."
+msgstr ""
 
 #, fuzzy
 #| msgid ""
@@ -2489,11 +2501,14 @@ msgstr ""
 
 msgid ""
 "If you believe this is in error, please contact us. Otherwise please contact "
-"your email provider or change your e-mail address on AstroBin."
+"you email provider or change your e-mail address on AstroBin."
 msgstr ""
 
 msgid "Change your e-mail"
 msgstr "Zmień adres e-mail"
+
+msgid "Ignore and retry"
+msgstr ""
 
 #, fuzzy
 #| msgid "Contact"
@@ -2512,28 +2527,26 @@ msgstr ""
 "adres email jest nieprawidłowy."
 
 msgid ""
+"If you believe this is in error, please contact us. Otherwise please contact "
+"your email provider or change your e-mail address on AstroBin."
+msgstr ""
+
+msgid ""
 "AstroBin is not delivering you emails because you have marked some of them "
 "as spam."
 msgstr ""
 "AstroBin nie jest w stanie dostarczyć Ci emaila ponieważ oznaczyłeś te "
 "wiadomości jako spam"
 
-msgid "Contact us to resolve the issue"
-msgstr "Skontaktuj się z nami w celu rozwiązania problemu"
-
-#, python-format
 msgid ""
-"<strong>Good news!</strong> AstroBin automatically recovered some of your "
-"images that were lost in the data loss incident of February 2020. Please "
-"review them to confirm the recovery. If you do nothing, your recovered "
-"images will be confirmed automatically starting from <strong>%(date)s</"
-"strong>."
+"If you have an automated filter or rule to mark AstroBin emails as spam, "
+"please disable it using your email client."
 msgstr ""
 
 #, fuzzy
-#| msgid "Recent images"
-msgid "Review recovered images"
-msgstr "Najnowsze zdjęcia"
+#| msgid "New e-mail"
+msgid "Resume emails"
+msgstr "Nowy adres e-mail"
 
 msgid "Cancel"
 msgstr "Anuluj"
@@ -2744,9 +2757,6 @@ msgid ""
 "informative, constructive, and valuable commentary on AstroBin. %(_0)sLearn "
 "more.%(_1)s"
 msgstr ""
-
-msgid "Subscription plans"
-msgstr "Plany subskrypcji"
 
 msgid "My places"
 msgstr "Moje miejsca"
@@ -4011,6 +4021,9 @@ msgstr "Czym jest AstroBin?"
 msgid "Gallery"
 msgstr "Galeria"
 
+msgid "Preferences"
+msgstr "Ustawienia"
+
 msgid "Compose message"
 msgstr "Napisz wiadomość"
 
@@ -4927,6 +4940,11 @@ msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> lubi Twoje zdjęcie!</a>"
 msgid "%(user)s likes your image: %(title)s"
 msgstr "%(user)s polubił(a) Twoje zdjęcie: %(title)s"
 
+msgid ""
+"I really appreciate your support for AstroBin, thank you so much for "
+"renewing!"
+msgstr ""
+
 #, python-format
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
 msgstr "%(creator)s utworzył nową grupę publiczną: \"%(group_name)s\""
@@ -5201,10 +5219,22 @@ msgid ""
 "User support posts, feature requests, issue reports, etc, will be deleted."
 msgstr ""
 
+#, python-format
+msgid ""
+"Posts about AstroBin itself, such as questions or comments about the IOTD/TP "
+"process, or the AstroBin Index, AstroBin \"likes\", or the forums "
+"themselves, are also considered off-topic and will be deleted. If you want "
+"to provide feedback or ask a question about AstroBin, please <a href="
+"\"%(contact_url)s\">contact us</a>: we really value your input!"
+msgstr ""
+
 #, fuzzy
 #| msgid "Thanks for your support!"
 msgid "Thanks for your cooperation!"
 msgstr "Dziękujemy za Twoje wsparcie!"
+
+msgid "I have read the text above"
+msgstr ""
 
 msgid "I understand"
 msgstr ""
@@ -5271,6 +5301,11 @@ msgid "*** Type your reply here ***"
 msgstr ""
 
 #, fuzzy
+#| msgid "Delete"
+msgid "(deleted)"
+msgstr "Usuń"
+
+#, fuzzy
 #| msgid "likes"
 msgctxt "Noun, e.g. 'This element has 1 like'"
 msgid "like"
@@ -5303,7 +5338,7 @@ msgstr "Zatwierdź post"
 
 #, python-format
 msgid ""
-"Editing a post is only allowed within %(minutes)s minutes after creating it."
+"Editing a post is only allowed within %(hours)s hours after creating it."
 msgstr ""
 
 msgid "You cannot Like this post because the topic is closed."
@@ -6005,11 +6040,6 @@ msgid "Thanks for your support!"
 msgstr "Dziękujemy za Twoje wsparcie!"
 
 #, fuzzy
-#| msgid "Your active subscription plans"
-msgid "Your subscriptions"
-msgstr "Twoje aktywne plany subskrypcji"
-
-#, fuzzy
 #| msgid "You have no requests."
 msgid "Your payments"
 msgstr "Brak powiadomień"
@@ -6254,6 +6284,11 @@ msgstr ""
 #, fuzzy
 #| msgid "Public amateur data"
 msgid "Publication date range"
+msgstr "Amatorskie publiczne dane"
+
+#, fuzzy
+#| msgid "Public amateur data"
+msgid "Acquisition date range"
 msgstr "Amatorskie publiczne dane"
 
 msgid "Camera type"
@@ -6541,6 +6576,9 @@ msgstr ""
 msgid "Image uploaded. Thank you!"
 msgstr "Zapisane! Dziękujemy!"
 
+msgid "Sorry, AstroBin was unable to activate the requested language"
+msgstr ""
+
 msgid "You already have a collection with that name"
 msgstr ""
 
@@ -6561,6 +6599,12 @@ msgid ""
 msgstr ""
 "Dziękujemy za raport o problemie. Wszystkie miniaturki będę wygenerowane "
 "jeszcze raz."
+
+#, python-format
+msgid ""
+"You requested revision %s, but it doesn't exist or it was deleted. We "
+"redirected you to the revision currently marked as final."
+msgstr ""
 
 #, fuzzy
 #| msgid "Accessory"
@@ -6623,6 +6667,32 @@ msgstr "Czy jesteś pewny?"
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#, fuzzy
+#~| msgid "China"
+#~ msgid "Chinese"
+#~ msgstr "Chiny"
+
+#~ msgid "New!"
+#~ msgstr "Nowy!"
+
+#~ msgid ""
+#~ "Please review your preferences about receiving important communications, "
+#~ "newsletters, and marketing emails from AstroBin."
+#~ msgstr ""
+#~ "Przejrzyj swoje preferencje dotyczące otrzymywania ważnych informacji, "
+#~ "newslettera oraz informacji handlowych od AstroBin."
+
+#~ msgid "Don't show again"
+#~ msgstr "Nie pokazuj tego ponownie"
+
+#~ msgid "Contact us to resolve the issue"
+#~ msgstr "Skontaktuj się z nami w celu rozwiązania problemu"
+
+#, fuzzy
+#~| msgid "Recent images"
+#~ msgid "Review recovered images"
+#~ msgstr "Najnowsze zdjęcia"
 
 #~ msgid ""
 #~ "Please contact us if you need any assistance, or want to report a "

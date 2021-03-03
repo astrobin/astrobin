@@ -2361,26 +2361,33 @@ def location_edit(request, id):
 
 @require_GET
 @never_cache
-def set_language(request, lang):
+def set_language(request, language_code):
     from django.utils.translation import check_for_language, activate
 
     next = request.GET.get('next', None)
+
     if not next:
         next = request.META.get('HTTP_REFERER', None)
+
     if not next:
         next = '/'
+
     response = HttpResponseRedirect(next)
-    if lang and check_for_language(lang):
+
+    if language_code and check_for_language(language_code):
         if hasattr(request, 'session'):
-            request.session['django_language'] = lang
+            request.session['django_language'] = language_code
 
-        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
-        activate(lang)
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language_code)
+        activate(language_code)
 
-    if request.user.is_authenticated():
-        profile = request.user.userprofile
-        profile.language = lang
-        profile.save(keep_deleted=True)
+        if request.user.is_authenticated():
+            profile = request.user.userprofile
+            profile.language = language_code
+            profile.save(keep_deleted=True)
+    else:
+        messages.error(request, _("Sorry, AstroBin was unable to activate the requested language"))
+        log.error("set_language: unable to activate %s" % language_code)
 
     return response
 

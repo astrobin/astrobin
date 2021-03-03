@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-24 21:14+0000\n"
+"POT-Creation-Date: 2021-03-02 22:14+0000\n"
 "PO-Revision-Date: 2021-01-04 13:40+0000\n"
 "Last-Translator: JeanBaptisteAuroux <jbauroux@bbox.fr>\n"
 "Language-Team: Français <LL@li.org>\n"
@@ -1079,6 +1079,9 @@ msgstr "Arabe"
 
 msgid "Japanese"
 msgstr "Japonais"
+
+msgid "Chinese (Simplified)"
+msgstr ""
 
 msgid "Pulsars"
 msgstr "Pulsars"
@@ -2203,9 +2206,6 @@ msgstr ""
 "utilisateurs apprécient, les \"J'aime\" que vous recevrez contribueront à "
 "augmenter votre %(_0)sIndice de Contribution (beta)%(_1)s."
 
-msgid "New!"
-msgstr "Nouveau!"
-
 msgid "Use the <strong>@</strong> sign and start typing to mention any user."
 msgstr "Utilisez le symbole <strong>@</strong> pour mentionner un utilisateur."
 
@@ -2518,18 +2518,30 @@ msgstr ""
 msgid "Back to top"
 msgstr "Haut de page"
 
+#, fuzzy
+#| msgid "Your subscriptions"
+msgid "Your AstroBin subscription is expired."
+msgstr "Vos abonnements"
+
 msgid ""
-"Please review your preferences about receiving important communications, "
-"newsletters, and marketing emails from AstroBin."
+"That's okay: we don't EVER delete your images if your subscription expires."
 msgstr ""
-"Veuillez indiquer vos préférences concernant la réception de communications "
-"importantes, de newsletters et de courriels marketing d'AstroBin."
 
-msgid "Preferences"
-msgstr "Préférences"
+msgid ""
+"However, it would be great if you considered renewing: it's inexpensive and "
+"it goes a long way to support the AstroBin project!"
+msgstr ""
 
-msgid "Don't show again"
-msgstr "Ne plus afficher à nouveau"
+msgid "Subscription plans"
+msgstr "Formules d'abonnement"
+
+msgid "Your subscriptions"
+msgstr "Vos abonnements"
+
+#, fuzzy
+#| msgid "The paid subscriptions are too expensive"
+msgid "Your AstroBin subscription about to expire."
+msgstr "Prix des abonnements trop élevés"
 
 msgid ""
 "AstroBin is unable to deliver your emails, and it won't try again until the "
@@ -2543,9 +2555,13 @@ msgstr ""
 "Votre fournisseur de courrier électronique a récemment reporté l'erreur "
 "suivante :"
 
+#, fuzzy
+#| msgid ""
+#| "If you believe this is in error, please contact us. Otherwise please "
+#| "contact your email provider or change your e-mail address on AstroBin."
 msgid ""
 "If you believe this is in error, please contact us. Otherwise please contact "
-"your email provider or change your e-mail address on AstroBin."
+"you email provider or change your e-mail address on AstroBin."
 msgstr ""
 "Si vous pensez qu'il s'agit d'une erreur, merci de nous contacter. A défaut, "
 "contactez votre fournisseur de courrier électronique ou modifiez votre "
@@ -2553,6 +2569,9 @@ msgstr ""
 
 msgid "Change your e-mail"
 msgstr "Modifier votre e-mail"
+
+msgid "Ignore and retry"
+msgstr ""
 
 msgid "Contact us"
 msgstr "Nous contacter"
@@ -2565,31 +2584,29 @@ msgstr ""
 "essai sera effectué une semaine après le dernier échec."
 
 msgid ""
+"If you believe this is in error, please contact us. Otherwise please contact "
+"your email provider or change your e-mail address on AstroBin."
+msgstr ""
+"Si vous pensez qu'il s'agit d'une erreur, merci de nous contacter. A défaut, "
+"contactez votre fournisseur de courrier électronique ou modifiez votre "
+"adresse email dans AstroBin."
+
+msgid ""
 "AstroBin is not delivering you emails because you have marked some of them "
 "as spam."
 msgstr ""
 "AstroBin ne peut pas vous adresser de courriels car vous avez marqué "
 "certains d'entre eux comme spam."
 
-msgid "Contact us to resolve the issue"
-msgstr "Contactez-nous pour résoudre le problème"
-
-#, python-format
 msgid ""
-"<strong>Good news!</strong> AstroBin automatically recovered some of your "
-"images that were lost in the data loss incident of February 2020. Please "
-"review them to confirm the recovery. If you do nothing, your recovered "
-"images will be confirmed automatically starting from <strong>%(date)s</"
-"strong>."
+"If you have an automated filter or rule to mark AstroBin emails as spam, "
+"please disable it using your email client."
 msgstr ""
-"<strong>Bonne nouvelle !</strong> AstroBin a automatiquement récupéré "
-"certaines de vos images perdues au cours de l'incident technique de février "
-"2020. Veuillez les consulter pour confirmer leur récupération. Sans action "
-"de votre part, vos images récupérées seront automatiquement confirmées à "
-"partir du <strong>%(date)s</strong>."
 
-msgid "Review recovered images"
-msgstr "Vérifier les images récupérées"
+#, fuzzy
+#| msgid "New e-mail"
+msgid "Resume emails"
+msgstr "Nouvel e-mail"
 
 msgid "Cancel"
 msgstr "Annuler"
@@ -2829,9 +2846,6 @@ msgstr ""
 "L'<strong>Indice de Contribution (beta)</strong> est un système visant à "
 "favoriser les commentaires constructifs, informatifs et à valeur ajoutée "
 "pour la communauté AstroBin. %(_0)sEn savoir plus.%(_1)s"
-
-msgid "Subscription plans"
-msgstr "Formules d'abonnement"
 
 msgid "My places"
 msgstr "Mon compte"
@@ -4082,6 +4096,9 @@ msgstr "AstroBin, c'est quoi ?"
 msgid "Gallery"
 msgstr "Galerie"
 
+msgid "Preferences"
+msgstr "Préférences"
+
 msgid "Compose message"
 msgstr "Ecrire un nouveau message"
 
@@ -4985,6 +5002,17 @@ msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> aime votre image !</a>"
 msgid "%(user)s likes your image: %(title)s"
 msgstr "%(user)s aime votre image : %(title)s"
 
+#, fuzzy
+#| msgid ""
+#| "I really appreciate your support for AstroBin, I hope you will enjoy your "
+#| "new subscription!"
+msgid ""
+"I really appreciate your support for AstroBin, thank you so much for "
+"renewing!"
+msgstr ""
+"Merci beaucoup pour votre soutien à AstroBin, j'espère que vous apprécierez "
+"votre abonnement !"
+
 #, python-format
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
 msgstr "%(creator)s a créé un nouveau groupe public : \" %(group_name)s \"."
@@ -5294,8 +5322,20 @@ msgstr ""
 "Les messages relatifs aux demandes d'assistance, aux fonctionnalités, aux "
 "problèmes rencontrés, etc. seront supprimés."
 
+#, python-format
+msgid ""
+"Posts about AstroBin itself, such as questions or comments about the IOTD/TP "
+"process, or the AstroBin Index, AstroBin \"likes\", or the forums "
+"themselves, are also considered off-topic and will be deleted. If you want "
+"to provide feedback or ask a question about AstroBin, please <a href="
+"\"%(contact_url)s\">contact us</a>: we really value your input!"
+msgstr ""
+
 msgid "Thanks for your cooperation!"
 msgstr "Merci pour votre coopération !"
+
+msgid "I have read the text above"
+msgstr ""
 
 msgid "I understand"
 msgstr "Je comprends"
@@ -5366,6 +5406,11 @@ msgstr "Veuillez d'abord quitter le mode 'Source' pour citer un message."
 msgid "*** Type your reply here ***"
 msgstr "*** Ecrivez votre réponse ici ***"
 
+#, fuzzy
+#| msgid "Deleted"
+msgid "(deleted)"
+msgstr "Supprimé"
+
 msgctxt "Noun, e.g. 'This element has 1 like'"
 msgid "like"
 msgstr "J'aime"
@@ -5395,9 +5440,12 @@ msgstr "Supprimer ce message ?"
 msgid "Approve post"
 msgstr "Approuver ce message"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Editing a post is only allowed within %(minutes)s minutes after creating "
+#| "it."
 msgid ""
-"Editing a post is only allowed within %(minutes)s minutes after creating it."
+"Editing a post is only allowed within %(hours)s hours after creating it."
 msgstr ""
 "La modification d'un message n'est autorisée que dans les %(minutes)s "
 "minutes qui suivent sa création."
@@ -6122,9 +6170,6 @@ msgstr "Images utilisées"
 msgid "Thanks for your support!"
 msgstr "Merci pour votre soutien !"
 
-msgid "Your subscriptions"
-msgstr "Vos abonnements"
-
 msgid "Your payments"
 msgstr "Vos paiements"
 
@@ -6358,6 +6403,11 @@ msgstr "Récompense"
 msgid "Publication date range"
 msgstr "Dates de publication"
 
+#, fuzzy
+#| msgid "Publication date range"
+msgid "Acquisition date range"
+msgstr "Dates de publication"
+
 msgid "Camera type"
 msgstr "CCD/APN"
 
@@ -6582,6 +6632,9 @@ msgstr ""
 msgid "Image uploaded. Thank you!"
 msgstr "Image publiée. Merci !"
 
+msgid "Sorry, AstroBin was unable to activate the requested language"
+msgstr ""
+
 msgid "You already have a collection with that name"
 msgstr "Vous avez déjà créé un album avec le même nom"
 
@@ -6599,6 +6652,12 @@ msgid ""
 msgstr ""
 "Merci de nous avoir signalé ce problème. Toutes les vignettes vont être "
 "régénérées."
+
+#, python-format
+msgid ""
+"You requested revision %s, but it doesn't exist or it was deleted. We "
+"redirected you to the revision currently marked as final."
+msgstr ""
 
 msgid "Accessory"
 msgstr "Accessoire"
@@ -6657,6 +6716,44 @@ msgstr "Etes-vous un robot ?"
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
 "Désolé, ce nom d'utilisateur existes déjà avec un mise en forme différente."
+
+#, fuzzy
+#~| msgid "China"
+#~ msgid "Chinese"
+#~ msgstr "Chine"
+
+#~ msgid "New!"
+#~ msgstr "Nouveau!"
+
+#~ msgid ""
+#~ "Please review your preferences about receiving important communications, "
+#~ "newsletters, and marketing emails from AstroBin."
+#~ msgstr ""
+#~ "Veuillez indiquer vos préférences concernant la réception de "
+#~ "communications importantes, de newsletters et de courriels marketing "
+#~ "d'AstroBin."
+
+#~ msgid "Don't show again"
+#~ msgstr "Ne plus afficher à nouveau"
+
+#~ msgid "Contact us to resolve the issue"
+#~ msgstr "Contactez-nous pour résoudre le problème"
+
+#~ msgid ""
+#~ "<strong>Good news!</strong> AstroBin automatically recovered some of your "
+#~ "images that were lost in the data loss incident of February 2020. Please "
+#~ "review them to confirm the recovery. If you do nothing, your recovered "
+#~ "images will be confirmed automatically starting from <strong>%(date)s</"
+#~ "strong>."
+#~ msgstr ""
+#~ "<strong>Bonne nouvelle !</strong> AstroBin a automatiquement récupéré "
+#~ "certaines de vos images perdues au cours de l'incident technique de "
+#~ "février 2020. Veuillez les consulter pour confirmer leur récupération. "
+#~ "Sans action de votre part, vos images récupérées seront automatiquement "
+#~ "confirmées à partir du <strong>%(date)s</strong>."
+
+#~ msgid "Review recovered images"
+#~ msgstr "Vérifier les images récupérées"
 
 #~ msgid ""
 #~ "Please contact us if you need any assistance, or want to report a "

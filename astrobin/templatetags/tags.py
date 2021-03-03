@@ -593,7 +593,8 @@ def get_officially_supported_languages():
         'es',
         'fr',
         'it',
-        'pt'
+        'pt',
+        'zh-hans',
     )
 
 
@@ -635,6 +636,7 @@ def get_language_name(language_code):
         'ru': 'Русский',
         'sq': 'Shqipe',
         'tr': 'Türkçe',
+        'zh-hans': '中文 (简体)',
     }
 
     try:

@@ -2,7 +2,6 @@
 .DS_Store
 *.bak
 *.Plo
-*.Po
 *.a
 *.pyc
 *.so
@@ -18,7 +17,6 @@
 *.log*
 !docker/astrobin.logrotate.conf
 *.err
-*.po~
 .dirstamp
 cover/
 .coverage
