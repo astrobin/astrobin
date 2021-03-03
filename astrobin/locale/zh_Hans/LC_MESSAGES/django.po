@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-02 22:14+0000\n"
-"PO-Revision-Date: 2021-03-02 21:03+0000\n"
+"POT-Creation-Date: 2021-03-03 20:13+0000\n"
+"PO-Revision-Date: 2021-03-03 19:01+0000\n"
 "Last-Translator: 张熠瑆 Phillip <31302717@qq.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: zh-CN\n"
+"Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1614718991.000000\n"
+"X-POOTLE-MTIME: 1614798103.000000\n"
 
 msgid "United Kingdom"
 msgstr "英国（大不列颠及北爱尔兰联合王国）"
@@ -835,7 +835,7 @@ msgid "Please select a remote source if this image was acquired remotely."
 msgstr "如果此图像是远程台拍摄的，请选择拍摄的远程台。"
 
 msgid "Imaging telescopes or lenses"
-msgstr "摄影用望远镜或者镜头"
+msgstr "主镜或镜头"
 
 msgid "Guiding telescopes or lenses"
 msgstr "导星镜或者镜头"
@@ -844,7 +844,7 @@ msgid "Mounts"
 msgstr "赤道仪"
 
 msgid "Imaging cameras"
-msgstr "拍摄相机"
+msgstr "主相机"
 
 msgid "Guiding cameras"
 msgstr "导星相机"
@@ -975,7 +975,7 @@ msgid "Remove from bookmarks"
 msgstr "从收藏夹删除"
 
 msgid "Bookmark"
-msgstr "收藏"
+msgstr "加入书签"
 
 # Need to know where it apears
 msgid "Unlike"
@@ -1060,7 +1060,7 @@ msgid "Japanese"
 msgstr "日语"
 
 msgid "Chinese (Simplified)"
-msgstr ""
+msgstr "中文（简体）"
 
 msgid "Pulsars"
 msgstr "脉冲星"
@@ -1181,7 +1181,7 @@ msgid ""
 "customizations. Try to use the international name, in English language, if "
 "applicable. This name is shared among all users on AstroBin."
 msgstr ""
-"本产品的名称，没有任何属性或个人定制。尝试使用国际通用的名字。这个名称会共享"
+"本产品的名称，没有任何属性或个人定制。尝试使用国际通用的名称。这个名称会共享"
 "给AstroBin所有用户。"
 
 msgid "Alias"
@@ -1280,7 +1280,7 @@ msgid "Focal length"
 msgstr "焦距"
 
 msgid "Type"
-msgstr "类型"
+msgstr "用户类型"
 
 msgid "mm"
 msgstr "毫米"
@@ -1829,13 +1829,13 @@ msgid ""
 "from the leaderboards and hide your Image Index and Contribution Index."
 msgstr ""
 "勾选此框，可被排除在各类比赛竞赛之外，例如IOTD、Top Picks和其他自定义竞赛。您"
-"将排行榜中被删除，您的图像索引和贡献索引都将被隐藏。"
+"将排行榜中被删除，您的图像索引和贡献榜排名都将被隐藏。"
 
 msgid "Global stream"
-msgstr "全局流"
+msgstr "全局信息流"
 
 msgid "Personal stream"
-msgstr "私人流"
+msgstr "私人信息流"
 
 msgid "All uploaded images"
 msgstr "所有已上传的图像"
@@ -1993,7 +1993,7 @@ msgid "In meters."
 msgstr "单位米"
 
 msgid "The name of the website or app that wishes to use the APIs."
-msgstr "想要使用API函数的网站或者应用的名字"
+msgstr "想要使用API的网站或者应用的名称。"
 
 msgid ""
 "Please explain the purpose of your application, and how you intend to use "
@@ -2040,13 +2040,13 @@ msgid "Integration hours by gear, daily"
 msgstr "按设备列出每天累计曝光时间"
 
 msgid "Uploaded images, yearly"
-msgstr "每年上传图片数量"
+msgstr "每年上传图片数"
 
 msgid "Uploaded images, monthly"
-msgstr "每月上传图片数量"
+msgstr "每月上传图片数"
 
 msgid "Uploaded images, daily"
-msgstr "每天上传图片数量"
+msgstr "每天上传图片数"
 
 # Views refer to view image upload by other users, or the pictures I uploaded were browsed
 msgid "Views, yearly"
@@ -2388,7 +2388,7 @@ msgid ""
 msgstr "AstroBin是业余天文学家和天文摄影师的图像托管平台和社交网络。"
 
 msgid "Site links"
-msgstr "站点链接"
+msgstr "友情链接"
 
 msgid "Home"
 msgstr "首页"
@@ -2424,7 +2424,7 @@ msgid "Third party tools"
 msgstr "第三方工具"
 
 msgid "Copyright"
-msgstr "版权所有"
+msgstr "版权"
 
 msgid "The images on this websites are copyright of their respective owners."
 msgstr "本网站的图片版权，归其各自所有者所有。"
@@ -2549,7 +2549,7 @@ msgstr "此功能仅对更高级别的会员开放。"
 msgid ""
 "Would you be interested in upgrading? AstroBin is a very small business and "
 "your support would mean a lot!"
-msgstr "您对升级感兴趣吗？ AstroBin是一家非常小的企业，您的支持将非常重要！"
+msgstr "您对升级感兴趣吗？ AstroBin是家境贫寒白手起家，您的支持将非常重要！"
 
 msgid "No, thanks"
 msgstr "不需要，谢谢！"
@@ -2597,9 +2597,8 @@ msgid ""
 "nothing that will use any of your private\n"
 "                        information."
 msgstr ""
-"在AstroBin只有和天文相关的广告，他们发布之前都经过我检查\n"
-"                        和许可。没什么可疑的，没什么离题的，也没什么会用到您"
-"的隐私\n"
+"在AstroBin只有和天文相关的广告，它们发布之前都经过我们审查\n"
+"                        和许可。没有可疑的、无关主题的，也不会获取您的隐私\n"
 "                        信息。"
 
 #, python-format
@@ -2650,10 +2649,10 @@ msgid "Image of the day"
 msgstr "IOTD（每日一图）"
 
 msgid "Submission queue"
-msgstr "审核列队"
+msgstr "提交列队"
 
 msgid "Review queue"
-msgstr "复查队列"
+msgstr "审查队列"
 
 # 待定
 msgid "Judgement queue"
@@ -2670,7 +2669,7 @@ msgstr "浏览"
 
 # 待定
 msgid "The Big Wall"
-msgstr "大墙"
+msgstr "图片墙"
 
 msgid "Advanced search"
 msgstr "高级搜索"
@@ -2685,14 +2684,14 @@ msgid "Remote astrophotography"
 msgstr "远程天文摄影"
 
 msgid "Contributors list"
-msgstr "贡献者名单"
+msgstr "贡献榜"
 
 msgid "(beta)"
 msgstr "（测试版）"
 
 # 待定
 msgid "Stats"
-msgstr "统计"
+msgstr "统计数据"
 
 msgid "Help"
 msgstr "帮助"
@@ -2725,7 +2724,7 @@ msgstr ""
 "中最活跃和最受喜爱的用户 %(_0)s了解更多。%(_1)s"
 
 msgid "Contribution Index"
-msgstr "贡献值"
+msgstr "贡献榜"
 
 #, python-format
 msgid ""
@@ -2733,7 +2732,7 @@ msgid ""
 "informative, constructive, and valuable commentary on AstroBin. %(_0)sLearn "
 "more.%(_1)s"
 msgstr ""
-"<strong>贡献值（测试版）</strong> 是AstroBin中一个激励机制，用于激励信息丰"
+"<strong>贡献榜（试运行）</strong> 是AstroBin中一个奖励系统，用于奖励内容丰"
 "富、有建设性、有价值的评论。%(_0)s了解更多%(_1)s"
 
 msgid "My places"
@@ -2750,19 +2749,19 @@ msgstr "书签"
 
 # 待定
 msgid "Plots"
-msgstr "统计"
+msgstr "空位"
 
 msgid "My messages"
 msgstr "我的消息"
 
 msgid "API Keys"
-msgstr "API键值"
+msgstr "API Keys"
 
 msgid "My settings"
 msgstr "我的设置"
 
 msgid "Logout"
-msgstr "退出"
+msgstr "登出"
 
 msgid "E-mail change confirmation"
 msgstr "确认修改电子邮箱"
@@ -2834,10 +2833,10 @@ msgstr "论坛帖子"
 
 # 待定
 msgid "Written"
-msgstr "已写入"
+msgstr "发表"
 
 msgid "Received"
-msgstr "已收到"
+msgstr "收到"
 
 msgid "Cookie consent"
 msgstr "Cookie许可"
@@ -3022,11 +3021,11 @@ msgid "Hemisphere"
 msgstr "半球"
 
 msgid "Northern"
-msgstr "北方"
+msgstr "北半球"
 
 # 待定
 msgid "Southern"
-msgstr "南方"
+msgstr "南半球"
 
 msgid "Contains"
 msgstr "包含"
@@ -3092,13 +3091,13 @@ msgid "Frames"
 msgstr "帧数"
 
 msgid "Basic astrometry details"
-msgstr "基础天文测量信息"
+msgstr "基础天文观测信息"
 
 msgid "RA center"
 msgstr "赤纬中心"
 
 msgid "degrees"
-msgstr "度数"
+msgstr "度"
 
 msgid "DEC center"
 msgstr "赤经中心"
@@ -3157,7 +3156,7 @@ msgid "Mark this revision as final"
 msgstr "标记此修订版为终版"
 
 msgid "Promote to public area"
-msgstr "推送到公开区域"
+msgstr "晋升到公开区域"
 
 msgid "Move to staging area"
 msgstr "移动到暂存区"
@@ -3242,7 +3241,7 @@ msgid "All image uploads"
 msgstr "上传所有图像"
 
 msgid "Share"
-msgstr "共享"
+msgstr "分享"
 
 msgid "View profile"
 msgstr "查看档案"
@@ -3462,15 +3461,15 @@ msgid ""
 "Sorry, you cannot send images from your Staging Area to a group. You need to "
 "first promote this image to your Public Area, if you want to do that."
 msgstr ""
-"很抱歉，您无法将图像从暂存区发送到小组。如果您想这样做的话，需要先把此图像移"
-"动到您的公开区域。"
+"很抱歉，您无法将图像从暂存区发送到小组。如果您想这样做的话，需要先把此图像晋"
+"升到您的公开区域。"
 
 # 待定
 msgid ""
 "Use this form to select one of your groups. The list includes all public and "
 "private non-autosubmission groups of which you are the owner or a member."
 msgstr ""
-"使用此窗体选择您的一个小组。此列表包括所有公开、私密的且不是自动审核的小组，"
+"使用此窗体选择您的一个小组。此列表包括所有公开、私密的且不是自动提交的小组，"
 "您是这些小组的所有者或成员。"
 
 msgid "Send"
@@ -3546,7 +3545,7 @@ msgid ""
 msgstr "此图像正在等待审核，目前在首页和搜索页面上不可见。"
 
 msgid "Revisions"
-msgstr "修订版图像"
+msgstr "修订版"
 
 msgid "Final"
 msgstr "终稿"
@@ -3556,7 +3555,7 @@ msgstr "原版"
 
 # 待定
 msgid "Sky plot"
-msgstr "星空统计"
+msgstr "天区位置"
 
 #, python-format
 msgid ""
@@ -3570,7 +3569,7 @@ msgstr ""
 "这张图像是 <strong>正在处理中的</strong> ，位于您的<a href=\"%(profile_url)s?"
 "staging\">暂存区</a>。这意味着没有人可以看到这张图，除非您给他们发送了位于下"
 "方 <em>分享</em> 菜单中 的链接。 使用此链接可以将图像发布到网络论坛中，并获得"
-"反馈。或许在上传过几个修订版后，直到您满意时，可将其移动到<a href="
+"反馈。或许在上传过几个修订版后，直到您满意时，可将其晋升到<a href="
 "\"%(profile_url)s\">公开区域</a>。"
 
 msgid "Oh no!"
@@ -3887,13 +3886,13 @@ msgid "Home of Astrophotography"
 msgstr "天文摄影之家"
 
 msgid "Latest from the forums"
-msgstr "论坛最新消息"
+msgstr "论坛新帖"
 
 msgid "Recent images"
 msgstr "最新图像"
 
 msgid "Recent from your followed users"
-msgstr "您粉丝的最新消息"
+msgstr "您关注的人"
 
 # 待定
 msgid "There is no activity yet."
@@ -4097,7 +4096,7 @@ msgid "You have a new notification on AstroBin"
 msgstr "您在AstroBin上有新提醒"
 
 msgid "See all your notifications"
-msgstr "查看所有提醒"
+msgstr "查看所有通知"
 
 msgid "Edit your notification preferences"
 msgstr "编辑提醒偏好"
@@ -5003,7 +5002,7 @@ msgid "View forums"
 msgstr "查看论坛"
 
 msgid "This topic was closed by a moderator."
-msgstr "组长关闭了这个话题。"
+msgstr "组长关闭了这个主题。"
 
 msgid "New reply"
 msgstr "新回复"
@@ -5172,7 +5171,7 @@ msgid "Subscribers"
 msgstr "订阅者"
 
 msgid "Topic"
-msgstr "话题"
+msgstr "主题"
 
 msgid "Last post"
 msgstr "最新帖子"
@@ -5518,23 +5517,23 @@ msgid ""
 "make sure by checking whether you have images which lack data <a href="
 "\"%(user_page)s?public&sub=nodata\">here</a>."
 msgstr ""
-"Hey <strong>%(user)s</strong>！我只是想让您知道，如果您把所有的数据都添加到您"
-"的图片中，可以让统计图更加有用。请检查 <a href=\"%(user_page)s?"
-"public&sub=nodata\"> 这里 </a> 是否有缺少数据的图像。"
+"Hey <strong>%(user)s</strong>！我只是想让您知道，如果您给所有的图片都添加数"
+"据，则可以让统计图更加有用。请检查 <a href=\"%(user_page)s?public&sub=nodata"
+"\"> 这里 </a> 是否有缺少数据的图像。"
 
 msgid "Total integration hours, plotted against time."
-msgstr "以时间统计累计曝光小时数。"
+msgstr "累计曝光小时数"
 
 msgid ""
 "Total integration hours, plotted against time and arranged by imaging "
 "telescopes and lenses, and imaging cameras."
-msgstr "以时间统计累计曝光小时数，按主镜/镜头、相机排列。"
+msgstr "根据时间统计累计曝光小时数，按主镜/镜头、相机分类"
 
 msgid "Combined view count for all the user's images, plotted against time."
-msgstr "以时间为序，用户所有图片的合并统计视图。"
+msgstr "用户所有图片的合并统计视图"
 
 msgid "Image uploads, plotted against time."
-msgstr "以时间统计上传图像数量。"
+msgstr "上传图像数"
 
 #, python-format
 msgid "%(user)s's gallery"
@@ -5818,13 +5817,13 @@ msgid "Expiration date"
 msgstr "有效期"
 
 msgid "Images used"
-msgstr "图像被使用"
+msgstr "已有图像"
 
 msgid "Thanks for your support!"
 msgstr "感谢您的支持！"
 
 msgid "Your payments"
-msgstr "您的付款"
+msgstr "付款记录"
 
 msgid "This data is currently not available and will be recalculated shortly."
 msgstr "该数据当前不可用，很快将重新计算。"
@@ -5848,7 +5847,7 @@ msgid "Liked images"
 msgstr "赞的图像"
 
 msgid "Following"
-msgstr "关注中的"
+msgstr "关注的人"
 
 msgid "Friends"
 msgstr "好友"
@@ -6251,7 +6250,7 @@ msgid "Image uploaded. Thank you!"
 msgstr "图像已上传。谢谢！"
 
 msgid "Sorry, AstroBin was unable to activate the requested language"
-msgstr ""
+msgstr "抱歉，AstroBin无法激活您请求的语言"
 
 msgid "You already have a collection with that name"
 msgstr "您已经有一个选集正在使用该名称了"
@@ -6314,7 +6313,7 @@ msgstr "图像已被移至公开区。"
 
 #, python-format
 msgid "%s topics deleted"
-msgstr "%s 话题已删除"
+msgstr "%s 主题已删除"
 
 msgid ""
 "AstroBin is preparing your data for download. Please check this page again "
