@@ -303,7 +303,7 @@ astrobin_common = {
                 ],
                 specialChars: [
                     '!', '&quot;', '#', '$', '%', '&amp;', "'", '(', ')', '*', '+', '-', '.', '/',
-                    '4', '5', '6', '7', '8', '9', ':', ';', '&lt;', '=', '&gt;', '?', '@',  '[', ']', '^', '_', '`',
+                    '4', '5', '6', '7', '8', '9', ':', ';', '&lt;', '=', '&gt;', '?', '@', '[', ']', '^', '_', '`',
                     '{', '|', '}', '~', '&euro;', '&lsquo;', '&rsquo;', '&ldquo;', '&rdquo;', '&ndash;', '&mdash;',
                     '&iexcl;', '&cent;', '&pound;', '&curren;', '&yen;', '&brvbar;', '&sect;', '&uml;', '&copy;',
                     '&ordf;', '&laquo;', '&not;', '&reg;', '&macr;', '&deg;', '&sup2;', '&sup3;', '&acute;', '&micro;',
@@ -324,7 +324,7 @@ astrobin_common = {
                     change: function () {
                         this.updateElement();
                     },
-                    beforeCommandExec: function(event) {
+                    beforeCommandExec: function (event) {
                         // Show the paste dialog for the paste buttons and right-click paste
                         if (event.data.name === "paste") {
                             event.editor._.forcePasteDialog = true;
@@ -690,6 +690,49 @@ astrobin_common = {
                 });
             }
         });
+    },
+
+    register_notification_on_click: function () {
+        $(document).ready(function () {
+            $(".notifications-modal .notification-item a").click(function () {
+                var $item = $(this).closest(".notification-item");
+                var id = $item.data("id");
+                var links = astrobin_common.get_links_in_text($item.find(".notification-content").html());
+
+                astrobin_common.mark_notification_as_read(id);
+
+                if (links.length > 0) {
+                    Object.assign(document.createElement("a"), {
+                        target: "_blank",
+                        href: links[0],
+                    }).click();
+                }
+
+                return false;
+            })
+        });
+    },
+
+    get_links_in_text: function(text) {
+        var regex = /href="(.*?)"/gm;
+        var m;
+        var links = [];
+
+        while ((m = regex.exec(text)) !== null) {
+            // This is necessary to avoid infinite loops with zero-width matches
+            if (m.index === regex.lastIndex) {
+                regex.lastIndex++;
+            }
+
+            // The result can be accessed through the `m`-variable.
+            m.forEach((match, groupIndex) => {
+                if (match.indexOf("href") !== 0) {
+                    links.push(match);
+                }
+            });
+        }
+
+        return links;
     },
 
     init: function (current_username, config) {
