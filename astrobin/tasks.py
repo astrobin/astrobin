@@ -173,7 +173,7 @@ def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     logger.debug('retrieve_thumbnail task is already running')
 
 
-@shared_task(time_limit=600)
+@shared_task(time_limit=900)
 def update_index(model, age_in_minutes, batch_size):
     start = datetime.now() - timedelta(minutes=age_in_minutes)
     end = datetime.now()
@@ -251,7 +251,7 @@ def send_never_activated_account_reminder():
         logger.debug("Sent 'never activated account reminder' to %d" % user.pk)
 
 
-@shared_task(time_limit=60)
+@shared_task(time_limit=300)
 def delete_never_activated_accounts():
     users = never_activated_accounts_to_be_deleted()
     count = users.count()
