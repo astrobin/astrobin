@@ -3072,7 +3072,12 @@ ul.astrobin-users {
     width: 194px;
     height: 194px;
 
+    .icon.edit {
+      visibility: hidden;
+    }
+
     &:hover .icon.edit {
+      visibility: visible;
       position: absolute;
       top: 40px;
       left: 62px;
