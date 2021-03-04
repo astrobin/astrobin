@@ -430,10 +430,14 @@ def expire_download_data_requests():
 @shared_task(time_limit=60)
 def purge_expired_incomplete_uploads():
     deleted = Image.uploads_in_progress.filter(uploader_expires__lt=DateTimeService.now()).delete()
-    logger.info("Purged %d expired incomplete image uploads." % deleted[0])
+
+    if deleted is not None:
+        logger.info("Purged %d expired incomplete image uploads." % deleted[0])
 
     deleted = ImageRevision.uploads_in_progress.filter(uploader_expires__lt=DateTimeService.now()).delete()
-    logger.info("Purged %d expired incomplete image revision uploads." % deleted[0])
+
+    if deleted is not None:
+        logger.info("Purged %d expired incomplete image revision uploads." % deleted[0])
 
 
 @shared_task(time_limit=60)
