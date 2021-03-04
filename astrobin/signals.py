@@ -96,7 +96,8 @@ def image_post_save(sender, instance, created, **kwargs):
         if Image.all_objects.filter(user=instance.user).count() == 1:
             push_notification([instance.user], 'congratulations_for_your_first_image', {
                 'BASE_URL': settings.BASE_URL,
-                'PREMIUM_MAX_IMAGES_FREE': settings.PREMIUM_MAX_IMAGES_FREE
+                'PREMIUM_MAX_IMAGES_FREE': settings.PREMIUM_MAX_IMAGES_FREE,
+                'url': reverse_url('image_detail', args=(instance.get_id(),))
             })
 
     if not instance.uploader_in_progress:
