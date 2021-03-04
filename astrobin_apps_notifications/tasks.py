@@ -18,7 +18,7 @@ def purge_old_notifications():
     call_command("purge_old_notifications")
 
 
-@shared_task(time_limit=120)
+@shared_task(time_limit=600)
 def push_notification_for_new_image(user_pk, image_pk):
     try:
         image = Image.objects_including_wip.get(pk=image_pk)
