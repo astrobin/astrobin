@@ -2156,6 +2156,8 @@ class UserProfile(SafeDeleteModel):
         blank=True,
     )
 
+    open_notifications_in_new_tab = models.NullBooleanField()
+
     # Gear
     telescopes = models.ManyToManyField(Telescope, blank=True, verbose_name=_("Telescopes and lenses"),
                                         related_name='telescopes')

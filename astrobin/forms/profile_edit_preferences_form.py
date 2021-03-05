@@ -13,6 +13,7 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             'default_frontpage_section',
             'default_gallery_sorting',
             'display_wip_images_on_public_gallery',
+            'open_notifications_in_new_tab',
             'exclude_from_competitions',
             'receive_forum_emails',
             'receive_important_communications',
