@@ -18,6 +18,7 @@ from django.db.models.signals import (
     pre_save, post_save, post_delete, m2m_changed)
 from django.utils.translation import ugettext_lazy as _, gettext, override
 from gadjo.requestprovider.signals import get_request
+from persistent_messages.models import Message
 from pybb.models import Forum, Topic, Post, TopicReadTracker
 from rest_framework.authtoken.models import Token
 from safedelete.models import SafeDeleteModel
@@ -28,7 +29,7 @@ from threaded_messages.models import Thread
 
 from astrobin_apps_groups.models import Group
 from astrobin_apps_notifications.tasks import push_notification_for_new_image, push_notification_for_new_image_revision
-from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_notifications.utils import push_notification, clear_notifications_template_cache
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.services.premium_service import PremiumService
@@ -114,6 +115,7 @@ def image_post_save(sender, instance, created, **kwargs):
                 instance.user.userprofile.save(keep_deleted=True)
             except UserProfile.DoesNotExist:
                 pass
+
 
 post_save.connect(image_post_save, sender=Image)
 
@@ -709,6 +711,7 @@ def forum_post_post_save(sender, instance, created, **kwargs):
         (instance.user.pk, instance.user.userprofile.language))
     cache.delete(cache_key)
 
+
 post_save.connect(forum_post_post_save, sender=Post)
 
 
@@ -757,3 +760,10 @@ def userprofile_post_delete(sender, instance, **kwargs):
 
 
 post_softdelete.connect(userprofile_post_delete, sender=UserProfile)
+
+
+def persistent_message_post_save(sender, instance, **kwargs):
+    clear_notifications_template_cache(instance.user.username)
+
+
+post_save.connect(persistent_message_post_save, sender=Message)

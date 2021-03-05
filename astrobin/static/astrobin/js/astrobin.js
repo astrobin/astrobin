@@ -660,53 +660,66 @@ astrobin_common = {
     },
 
     mark_notification_as_read: function (notification_id) {
-        $.ajax({
-            url: '/persistent_messages/mark_read/' + notification_id + '/',
-            dataType: 'json',
-            success: function () {
-                var $row = $('#notifications-modal tr[data-id=' + notification_id + ']'),
-                    $check_mark = $row.find('td.notification-mark-as-read a'),
-                    $count_badge = $('#notifications_count'),
-                    count;
+        var $row = $('#notifications-modal tr[data-id=' + notification_id + ']'),
+            $check_mark = $row.find('td.notification-mark-as-read a'),
+            $loading = $row.find(".notification-mark-as-read .loading"),
+            $count_badge = $('#notifications_count'),
+            count;
 
-                $row.removeClass('notification-unread');
-                $row.addClass('notification-read');
-                $check_mark.remove();
+        $check_mark.remove();
+        $loading.show();
 
-                if ($count_badge.length > 0) {
-                    count = parseInt($count_badge.text());
-                    if (count == 1) {
-                        $count_badge.remove();
-                    } else {
-                        $count_badge.text(count - 1);
-                    }
-                }
-
-                $.ajax({
-                    url: '/notifications/clear-template-cache/',
-                    type: 'POST',
-                    dataType: 'json',
-                    timeout: 1000
-                });
+        return new Promise(function(resolve) {
+            if ($row.hasClass("notification-read")) {
+                $loading.hide();
+                return resolve();
             }
+
+            $.ajax({
+                url: '/persistent_messages/mark_read/' + notification_id + '/',
+                dataType: 'json',
+                success: function () {
+                    $row.removeClass('notification-unread');
+                    $row.addClass('notification-read');
+                    $loading.hide();
+
+                    if ($count_badge.length > 0) {
+                        count = parseInt($count_badge.text());
+                        if (count === 1) {
+                            $count_badge.remove();
+                        } else {
+                            $count_badge.text(count - 1);
+                        }
+                    }
+
+                    resolve();
+                }
+            });
         });
+
     },
 
     register_notification_on_click: function (options = {}) {
         $(document).ready(function () {
             $(".notifications-modal .notification-item .notification-content a").click(function () {
                 var $item = $(this).closest(".notification-item");
+                var $loading = $item.find(".notification-mark-as-read .loading")
                 var id = $item.data("id");
                 var links = astrobin_common.get_links_in_text($item.find(".notification-content").html());
+                var open_in_new_tab = !!options && options.open_notifications_in_new_tab;
 
-                astrobin_common.mark_notification_as_read(id);
+                astrobin_common.mark_notification_as_read(id).then(function() {
+                    if (links.length > 0) {
+                        if (!open_in_new_tab) {
+                            $loading.show();
+                        }
 
-                if (links.length > 0) {
-                    Object.assign(document.createElement("a"), {
-                        target: !!options && options.open_notifications_in_new_tab ? "_blank" : "_self",
-                        href: links[0],
-                    }).click();
-                }
+                        Object.assign(document.createElement("a"), {
+                            target: open_in_new_tab ? "_blank" : "_self",
+                            href: links[0],
+                        }).click();
+                    }
+                });
 
                 return false;
             })

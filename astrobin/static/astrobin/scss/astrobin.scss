@@ -3588,6 +3588,10 @@ table.notifications-modal {
     a {
       color: $link-color;
     }
+
+    .loading {
+      display: none;
+    }
   }
 
   tr.divider td {
