@@ -74,7 +74,13 @@
 
     $(document).ready(function() {
         astrobin_common.init();
-        astrobin_common.register_notification_on_click();
+
+        {% if request.user.is_authenticated %}
+            astrobin_common.register_notification_on_click({
+                open_notifications_in_new_tab: "{{ request.user.userprofile.open_notifications_in_new_tab }}" === "True"
+            });
+        {% endif %}
+
         astrobin_common.setup_user_popovers();
 
         $('input:checkbox, input:radio, input:file').uniform(

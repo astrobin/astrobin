@@ -692,9 +692,9 @@ astrobin_common = {
         });
     },
 
-    register_notification_on_click: function () {
+    register_notification_on_click: function (options = {}) {
         $(document).ready(function () {
-            $(".notifications-modal .notification-item a").click(function () {
+            $(".notifications-modal .notification-item .notification-content a").click(function () {
                 var $item = $(this).closest(".notification-item");
                 var id = $item.data("id");
                 var links = astrobin_common.get_links_in_text($item.find(".notification-content").html());
@@ -703,7 +703,7 @@ astrobin_common = {
 
                 if (links.length > 0) {
                     Object.assign(document.createElement("a"), {
-                        target: "_blank",
+                        target: !!options && options.open_notifications_in_new_tab ? "_blank" : "_self",
                         href: links[0],
                     }).click();
                 }
