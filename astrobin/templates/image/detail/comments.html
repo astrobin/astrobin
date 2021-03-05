@@ -8,7 +8,15 @@
         {% if image.allow_comments %}
             {% if user.is_authenticated %}
             <p>
-                {% blocktrans with user=image.user.userprofile lang=preferred_language %}<strong>Leave a comment here</strong>, and remember that AstroBin is an international community: using English is preferred. PS: <strong>{{user}}</strong>'s preferred language is <strong>{{lang}}</strong>.{% endblocktrans %}
+                {% blocktrans trimmed %}
+                    <strong>Leave a comment here</strong>, and remember that AstroBin is an international community:
+                    using <strong>English</strong> is preferred.
+                {% endblocktrans %}
+
+                {% blocktrans trimmed with user=image.user.userprofile %}
+                    The author of this image is comfortable with the following languages:
+                    <strong>{{ preferred_languages }}</strong>.
+                {% endblocktrans %}
             </p>
             {% endif %}
 

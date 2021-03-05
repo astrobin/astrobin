@@ -535,18 +535,26 @@ class ImageDetailView(ImageDetailViewBase):
 
         locations = '; '.join([u'%s' % (x) for x in image.locations.all()])
 
-        ######################
-        # PREFERRED LANGUAGE #
-        ######################
+        #######################
+        # PREFERRED LANGUAGES #
+        #######################
 
-        preferred_language = image.user.userprofile.language
-        if preferred_language:
+        user_language = image.user.userprofile.language
+        if user_language:
             try:
-                preferred_language = LANGUAGES[preferred_language]
+                user_language = LANGUAGES[user_language]
             except KeyError:
-                preferred_language = _("English")
+                user_language = _("English")
         else:
-            preferred_language = _("English")
+            user_language = _("English")
+
+        preferred_languages = [unicode(user_language)]
+        for language in image.user.userprofile.other_languages:
+            language_label = [x for x in settings.ALL_LANGUAGE_CHOICES if x[0] == language][0][1]
+            if language_label != user_language:
+                preferred_languages.append(unicode(language_label))
+
+        preferred_languages = ', '.join(preferred_languages)
 
         ##########################
         # LIKE / BOOKMARKED THIS #
@@ -707,7 +715,7 @@ class ImageDetailView(ImageDetailViewBase):
             'locations': locations,
             'solar_system_main_subject': ImageService(image).get_solar_system_main_subject_label(),
             'content_type': ContentType.objects.get(app_label='astrobin', model='image'),
-            'preferred_language': preferred_language,
+            'preferred_languages': preferred_languages,
             'select_group_form': GroupSelectForm(
                 user=self.request.user) if self.request.user.is_authenticated() else None,
             'in_public_groups': Group.objects.filter(Q(public=True, images=image)),

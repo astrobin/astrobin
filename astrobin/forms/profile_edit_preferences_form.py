@@ -1,6 +1,8 @@
 from django import forms
+from django.conf import settings
 
 from astrobin.models import UserProfile
+from astrobin.widgets import ArrayFieldSelectMultipleWdget
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_remove_ads, \
     can_remove_retailer_integration
 
@@ -10,6 +12,7 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
         model = UserProfile
         fields = [
             'language',
+            'other_languages',
             'default_frontpage_section',
             'default_gallery_sorting',
             'display_wip_images_on_public_gallery',
@@ -22,6 +25,13 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             'allow_astronomy_ads',
             'allow_retailer_integration',
         ]
+        widgets = {
+            'other_languages': ArrayFieldSelectMultipleWdget(
+                choices=settings.ALL_LANGUAGE_CHOICES,
+                attrs={
+                    'class': 'select2'
+                })
+        }
 
     def __init__(self, **kwargs):
         super(UserProfileEditPreferencesForm, self).__init__(**kwargs)

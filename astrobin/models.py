@@ -12,6 +12,7 @@ from datetime import datetime
 from urlparse import urlparse
 
 import boto3
+from django.contrib.postgres.fields import ArrayField
 from django.core.files.images import get_image_dimensions
 from image_cropping import ImageRatioField
 
@@ -2311,6 +2312,15 @@ class UserProfile(SafeDeleteModel):
         null=True, blank=True,
         verbose_name=_("Language"),
         choices=LANGUAGE_CHOICES,
+    )
+
+    other_languages = ArrayField(
+        models.CharField(max_length=2, blank=True, choices=settings.ALL_LANGUAGE_CHOICES),
+        default=list,
+        blank=True,
+        verbose_name=_("Other languages"),
+        help_text=_("Other languages that you can read and write. This can be useful to other AstroBin members who "
+                    "would like to communicate with you.")
     )
 
     # One time notifications that won't disappear until marked as seen.

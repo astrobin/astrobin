@@ -1,1 +1,2 @@
+from .array_field_select_multiple_wdget import ArrayFieldSelectMultipleWdget
 from .hidden_image_crop_widget import HiddenImageCropWidget
