@@ -3,8 +3,7 @@ from django.contrib.auth.decorators import login_required
 from notification import urls as notification_urls
 from notification.views import notice_settings
 
-from astrobin_apps_notifications.views import TestNotificationView, NotificationListView, NotificationMarkAllAsReadView, \
-    NotificationClearTemplateCacheAjaxView
+from astrobin_apps_notifications.views import TestNotificationView, NotificationListView, NotificationMarkAllAsReadView
 
 urlpatterns = (
     url(
@@ -23,9 +22,6 @@ urlpatterns = (
         r'mark-all-as-read/$',
         login_required(NotificationMarkAllAsReadView.as_view()),
         name='astrobin_apps_notifications.mark_all_as_read'),
-    url(
-        r'clear-template-cache/$',
-        login_required(NotificationClearTemplateCacheAjaxView.as_view()),
-        name='astrobin_apps_notifications.clear_template_cache'),
+
     url(r'_/', include(notification_urls)),
 )
