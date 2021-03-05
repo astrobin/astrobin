@@ -5,7 +5,7 @@
  */
 
 $.extend($.ui.multiselect.locale, {
-    addAll:'加入所有',
-    removeAll:'移除所有',
-    itemsCount:'项目数'
+    addAll:'添加全部',
+	removeAll:'移除全部',
+	itemsCount:'选定的项目'
 });
