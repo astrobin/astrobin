@@ -54,7 +54,7 @@ abbr[title] {
 
 html, body {
   color: $text-color;
-  font-family: $regular_font;
+  font-family: $regular-font;
   font-size: $base-font-size;
 }
 
@@ -335,7 +335,7 @@ li.astrobin-thumbnail {
 h1, h2, h3, h4, h5, h6 {
   margin-top: $spacer-xlarge;
   margin-bottom: $spacer-xxlarge;
-  font-family: $headers_font;
+  font-family: $headers-font;
   color: $strong-text-color;
 }
 
@@ -2056,7 +2056,7 @@ form.avatar-change label.control-label {
     }
 
     .title {
-      font-family: 'Noto Sans', sans-serif;
+      font-family: $headers-font;
       font-weight: normal;
       font-style: italic;
       font-size: 16px;
@@ -2194,7 +2194,7 @@ form.avatar-change label.control-label {
   h4 {
     .actions {
       font-weight: normal;
-      font-family: $regular_font;
+      font-family: $regular-font;
       font-size: 14px;
       position: absolute;
       top: 8px;
@@ -3072,7 +3072,12 @@ ul.astrobin-users {
     width: 194px;
     height: 194px;
 
+    .icon.edit {
+      visibility: hidden;
+    }
+
     &:hover .icon.edit {
+      visibility: visible;
       position: absolute;
       top: 40px;
       left: 62px;
