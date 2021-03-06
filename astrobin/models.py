@@ -12,7 +12,6 @@ from datetime import datetime
 from urlparse import urlparse
 
 import boto3
-from django.contrib.postgres.fields import ArrayField
 from django.core.files.images import get_image_dimensions
 from image_cropping import ImageRatioField
 
@@ -1621,10 +1620,8 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         ordering = ('uploaded', '-id')
         unique_together = ('image', 'label')
 
-
     objects = ImageRevisionsManager()
     uploads_in_progress = UploadsInProgressImageRevisionsManager()
-
 
     def __unicode__(self):
         return self.image.title
@@ -2314,10 +2311,9 @@ class UserProfile(SafeDeleteModel):
         choices=LANGUAGE_CHOICES,
     )
 
-    other_languages = ArrayField(
-        models.CharField(max_length=2, blank=True, choices=settings.ALL_LANGUAGE_CHOICES),
-        default=list,
+    other_languages = models.TextField(
         blank=True,
+        null=True,
         verbose_name=_("Other languages"),
         help_text=_("Other languages that you can read and write. This can be useful to other AstroBin members who "
                     "would like to communicate with you.")

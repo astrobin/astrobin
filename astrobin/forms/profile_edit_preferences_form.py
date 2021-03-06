@@ -1,8 +1,8 @@
 from django import forms
 from django.conf import settings
+from django.forms import SelectMultiple
 
 from astrobin.models import UserProfile
-from astrobin.widgets import ArrayFieldSelectMultipleWdget
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_remove_ads, \
     can_remove_retailer_integration
 
@@ -26,7 +26,7 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             'allow_retailer_integration',
         ]
         widgets = {
-            'other_languages': ArrayFieldSelectMultipleWdget(
+            'other_languages': SelectMultiple(
                 choices=settings.ALL_LANGUAGE_CHOICES,
                 attrs={
                     'class': 'select2'
@@ -42,3 +42,8 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
 
         if not can_remove_retailer_integration(profile.user):
             self.fields['allow_retailer_integration'].widget.attrs['disabled'] = True
+
+    def clean_other_languages(self):
+        data = self.cleaned_data['other_languages']
+        cleaned_data = ",".join(eval(data))
+        return cleaned_data
