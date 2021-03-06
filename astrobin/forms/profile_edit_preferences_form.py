@@ -45,5 +45,8 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
 
     def clean_other_languages(self):
         data = self.cleaned_data['other_languages']
-        cleaned_data = ",".join(eval(data))
-        return cleaned_data
+        if data:
+            cleaned_data = ",".join(eval(data))
+            return cleaned_data
+
+        return data
