@@ -1,6 +1,5 @@
 #!/bin/bash
 
-export USE_SQLITE=true
 export TESTING=true
 
-coverage run --source=. ./manage.py test --noinput --failfast --verbosity=2 --parallel
+coverage run --source=. ./manage.py test --noinput --verbosity=2

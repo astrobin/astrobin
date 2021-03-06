@@ -12,6 +12,12 @@ docker-compose \
    -f docker/docker-compose-local.yml \
    up -d &
 
+
+while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://127.0.0.1/accounts/login/)" != "200" ]]; do
+    echo "Waiting for astrobin..."
+    sleep 5
+done
+
 (
     git clone https://github.com/astrobin/astrobin-ng.git &&
     cd astrobin-ng &&
@@ -19,12 +25,7 @@ docker-compose \
     npm run start:cypress
 ) &
 
-while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost/accounts/login/)" != "200" ]]; do
-    echo "Waiting for astrobin..."
-    sleep 5
-done
-
-while [[ "$(curl -s -o /dev/null http://localhost:4400)" ]]; do
+while [[ "$(curl -s -o /dev/null http://127.0.0.1:4400)" ]]; do
     echo "Waiting for astrobin-ng..."
     sleep 5
 done

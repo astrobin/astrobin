@@ -1,3 +1,4 @@
+from unittest import skip
 
 from django.test import TestCase
 
@@ -5,6 +6,7 @@ from astrobin_apps_platesolving.backends.pixinsight.solver import Solver
 from astrobin_apps_platesolving.models import PlateSolvingAdvancedTask, PlateSolvingAdvancedSettings
 
 
+@skip()
 class PixInsightSolverTest(TestCase):
     def test_task_params_when_image_smaller_than_hd_in_both_dimensions(self):
         solver = Solver()
