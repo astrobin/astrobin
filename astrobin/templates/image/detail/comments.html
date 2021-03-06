@@ -6,7 +6,7 @@
         {% include 'readonly_mode.html' %}
     {% else %}
         {% if image.allow_comments %}
-            {% if user.is_authenticated %}
+            {% if request.user.is_authenticated %}
             <p>
                 {% blocktrans trimmed %}
                     <strong>Leave a comment here</strong>, and remember that AstroBin is an international community:
@@ -17,6 +17,13 @@
                     The author of this image is comfortable with the following languages:
                     <strong>{{ preferred_languages }}</strong>.
                 {% endblocktrans %}
+
+                {% ifequal image.user request.user %}
+                    <a href="{% url 'profile_edit_preferences' %}">
+                        <i class="icon-pencil"></i>
+                        {% trans "Edit" %}
+                    </a>
+                {% endifequal %}
             </p>
             {% endif %}
 
