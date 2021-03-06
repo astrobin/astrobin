@@ -773,9 +773,13 @@ astrobin_common = {
             $("select:not([multiple])").select2({theme: "flat"});
         }
 
-        $("select[multiple]").not('*[name="license"]').multiselect({
+        $("select[multiple]:not(.select2)").not('*[name="license"]').multiselect({
             searchable: false,
             dividerLocation: 0.5
+        });
+
+        $("select.select2").select2({
+            theme: "flat"
         });
 
         astrobin_common.init_ajax_csrf_token();

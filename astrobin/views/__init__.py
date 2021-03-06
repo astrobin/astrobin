@@ -2060,7 +2060,10 @@ def user_profile_remove_shadow_ban(request):
 def user_profile_edit_preferences(request):
     """Edits own preferences"""
     profile = request.user.userprofile
-    form = UserProfileEditPreferencesForm(instance=profile)
+    form = UserProfileEditPreferencesForm(
+        instance=profile,
+        initial={'other_languages': profile.other_languages.split(',') if profile.other_languages else []}
+    )
     response_dict = {
         'form': form,
     }

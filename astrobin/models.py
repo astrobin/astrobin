@@ -1620,10 +1620,8 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         ordering = ('uploaded', '-id')
         unique_together = ('image', 'label')
 
-
     objects = ImageRevisionsManager()
     uploads_in_progress = UploadsInProgressImageRevisionsManager()
-
 
     def __unicode__(self):
         return self.image.title
@@ -2311,6 +2309,14 @@ class UserProfile(SafeDeleteModel):
         null=True, blank=True,
         verbose_name=_("Language"),
         choices=LANGUAGE_CHOICES,
+    )
+
+    other_languages = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name=_("Other languages"),
+        help_text=_("Other languages that you can read and write. This can be useful to other AstroBin members who "
+                    "would like to communicate with you.")
     )
 
     # One time notifications that won't disappear until marked as seen.
