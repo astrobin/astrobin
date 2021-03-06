@@ -549,10 +549,11 @@ class ImageDetailView(ImageDetailViewBase):
             user_language = _("English")
 
         preferred_languages = [unicode(user_language)]
-        for language in image.user.userprofile.other_languages.split(','):
-            language_label = [x for x in settings.ALL_LANGUAGE_CHOICES if x[0] == language][0][1]
-            if language_label != user_language:
-                preferred_languages.append(unicode(language_label))
+        if image.user.userprofile.other_languages:
+            for language in image.user.userprofile.other_languages.split(','):
+                language_label = [x for x in settings.ALL_LANGUAGE_CHOICES if x[0] == language][0][1]
+                if language_label != user_language:
+                    preferred_languages.append(unicode(language_label))
 
         preferred_languages = ', '.join(preferred_languages)
 
