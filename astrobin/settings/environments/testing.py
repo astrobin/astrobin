@@ -10,6 +10,13 @@ if TESTING:
         'django.contrib.auth.hashers.MD5PasswordHasher',
     )
 
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'astrobin_test_db',
+        }
+    }
+
     MIGRATION_MODULES = {
         app.split('.')[-1]: None for app in INSTALLED_APPS
     }
