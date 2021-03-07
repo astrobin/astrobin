@@ -1,0 +1,14 @@
+{% load i18n %}
+{% load astrobin_apps_premium_tags %}
+
+{% if request.user|is_free %}
+    <p class="alert alert-info">
+        <strong>{% trans "Please note" %}</strong>:
+        {% blocktrans trimmed with url="https://welcome.astrobin.com/pricing" %}
+            You are on a Free account, and when you delete an image, your upload counter does not decrease
+            (unless the image is deleted within 24 hours of uploading it). The Free account is not a way to keep
+            your most recent or best 10 images on AstroBin, but a trial period for you to decide whether or not
+            a paid subscription is worth it. For more information, please <a href="{{ url }}">click here</a>.
+        {% endblocktrans %}
+    </p>
+{% endif %}
