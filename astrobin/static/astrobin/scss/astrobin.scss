@@ -1118,10 +1118,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 }
 
 .avatar-block {
-  .avatar, .username {
-    display: block;
-  }
-
   .avatar {
     float: left;
   }
@@ -1136,7 +1132,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     margin-top: $spacer-small;
 
     a.astrobin-username {
-      font-size: 80%
+      font-size: 80%;
+      display: inline-block;
+      margin-bottom: 1rem;
     }
 
     .data {
@@ -2056,15 +2054,16 @@ form.avatar-change label.control-label {
     }
 
     .title {
-      font-family: $headers-font;
       font-weight: normal;
       font-style: italic;
-      font-size: 16px;
+      font-size: 1.1rem;
+      line-height: 1.25rem;
       color: $text-color;
       float: right;
+      text-align: right;
 
       a {
-        color: $link-color;
+        display: block;
       }
     }
   }
@@ -2091,11 +2090,12 @@ form.avatar-change label.control-label {
 
   .data {
     position: absolute;
-    top: $spacer-xxlarge;
-    left: $spacer-large;
-    padding: $spacer-small $spacer-medium;
+    top: $spacer-xlarge;
+    left: $spacer-xlarge;
+    padding: $spacer-medium $spacer-large;
     background-color: #111;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(4px);
     @include rounded-corners;
 
     h3 {
@@ -3068,6 +3068,10 @@ ul.astrobin-users {
 .user-card {
   position: relative;
 
+  > .header > h4 {
+    white-space: normal;
+  }
+
   .avatar {
     width: 194px;
     height: 194px;
@@ -3790,7 +3794,8 @@ table.search-table {
     position: absolute;
     width: 100%;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
     color: white;
 
     .inner {
@@ -3803,6 +3808,11 @@ table.search-table {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+      }
+
+      .astrobin-username {
+        display: inline-block;
+        margin-top: .25rem;
       }
     }
   }
@@ -3861,7 +3871,7 @@ table.api-examples {
     font-style: italic;
     font-weight: bold;
     line-height: 1.5em;
-    padding: 0.1em 0.5em;
+    padding: 0.25rem 0.5rem;
     border-radius: 6px;
     color: white;
   }
