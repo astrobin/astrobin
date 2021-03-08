@@ -340,7 +340,7 @@ def index(request, template='index/root.html', extra_context=None):
     user_ct = ContentType.objects.get_for_model(User)
 
     recent_images = Image.objects\
-        .filter(Q(~Q(title=None) & ~Q(title='') & Q(moderator_decision=1)))\
+        .filter(Q(~Q(title=None) & ~Q(title='') & Q(moderator_decision=1) & Q(published__isnull=False)))\
         .order_by('-published')
 
     response_dict = {
