@@ -339,10 +339,9 @@ def index(request, template='index/root.html', extra_context=None):
     image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
     user_ct = ContentType.objects.get_for_model(User)
 
-    recent_images = Image.objects \
-        .exclude(title=None) \
-        .exclude(title='') \
-        .filter(moderator_decision=1)
+    recent_images = Image.objects\
+        .filter(Q(~Q(title=None) & ~Q(title='') & Q(moderator_decision=1)))\
+        .order_by('-published')
 
     response_dict = {
         'recent_images': recent_images,
