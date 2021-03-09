@@ -223,3 +223,27 @@ class IotdService:
                 TopPickArchive.objects.create(image=item)
             except IntegrityError:
                 continue
+
+    def get_inactive_submitter_and_reviewers(self, days):
+        inactive_members = []
+        members = User.objects.filter(groups__name__in=['iotd_submitters', 'iotd_reviewers'])
+
+        for member in members.iterator():
+            if member.is_superuser:
+                continue
+
+            if 'iotd_reviewers' in member.groups.all().values_list('name', flat=True):
+                actions = IotdVote.objects.filter(reviewer=member).order_by('-date')
+                action_count = actions.count()
+                last_action = actions.first().date if action_count > 0 else None
+            elif 'iotd_submitters' in member.groups.all().values_list('name', flat=True):
+                actions = IotdSubmission.objects.filter(submitter=member).order_by('-date')
+                action_count = actions.count()
+                last_action = actions.first().date if action_count > 0 else None
+            else:
+                continue
+
+            if last_action is None or last_action.date() == DateTimeService.today() - timedelta(days=days):
+                inactive_members.append(member)
+
+        return inactive_members

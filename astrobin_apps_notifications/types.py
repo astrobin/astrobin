@@ -233,5 +233,17 @@ NOTICE_TYPES = (
         _("Thank you for your payment!"),
         '',
         2
+    ),
+    (
+        'iotd_staff_inactive_removal_notice',
+        _("You were removed from the IOTD staff"),
+        '',
+        2
+    ),
+    (
+        'iotd_staff_inactive_warning',
+        _("You have been inactive as an IOTD staff member"),
+        '',
+        2
     )
 )

@@ -1372,3 +1372,95 @@ class IotdServiceTest(TestCase):
         self.assertEquals(
             IotdService().get_next_available_selection_time_for_judge(iotd.judge),
             DateTimeService.next_midnight())
+
+    def test_inactive_submitters_no_submissions(self):
+        submitter = Generators.user(groups=['iotd_submitters'])
+        self.assertTrue(submitter in IotdService().get_inactive_submitter_and_reviewers(3))
+
+    def test_inactive_submitters_superuser(self):
+        submitter = Generators.user(groups=['iotd_submitters'])
+        submitter.is_superuser = True
+        submitter.save()
+
+        self.assertFalse(submitter in IotdService().get_inactive_submitter_and_reviewers(3))
+
+    def test_inactive_submitters_no_recent_submissions(self):
+        uploader = Generators.user()
+        Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+
+        image = Generators.image(user=uploader)
+        image.designated_iotd_submitters.add(submitter)
+
+        submission = IotdGenerators.submission(submitter=submitter, image=image)
+        submission.date = DateTimeService.now() - timedelta(days=5)
+        submission.save()
+
+        self.assertFalse(submitter in IotdService().get_inactive_submitter_and_reviewers(4))
+        self.assertTrue(submitter in IotdService().get_inactive_submitter_and_reviewers(5))
+        self.assertFalse(submitter in IotdService().get_inactive_submitter_and_reviewers(6))
+
+    def test_inactive_submitters_recent_submissions(self):
+        uploader = Generators.user()
+        Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+
+        image = Generators.image(user=uploader)
+        image.designated_iotd_submitters.add(submitter)
+
+        IotdGenerators.submission(submitter=submitter, image=image)
+
+        self.assertFalse(submitter in IotdService().get_inactive_submitter_and_reviewers(3))
+
+    def test_inactive_reviewers_no_votes(self):
+        uploader = Generators.user()
+        Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+        reviewer = Generators.user(groups=['iotd_reviewers'])
+
+        image = Generators.image(user=uploader)
+        image.designated_iotd_submitters.add(submitter)
+        image.designated_iotd_reviewers.add(reviewer)
+
+        IotdGenerators.submission(submitter=submitter, image=image)
+
+        self.assertTrue(reviewer in IotdService().get_inactive_submitter_and_reviewers(3))
+
+    def test_inactive_reviewers_no_recent_votes(self):
+        uploader = Generators.user()
+        Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+        reviewer = Generators.user(groups=['iotd_reviewers'])
+
+        image = Generators.image(user=uploader)
+        image.designated_iotd_submitters.add(submitter)
+        image.designated_iotd_reviewers.add(reviewer)
+
+        IotdGenerators.submission(submitter=submitter, image=image)
+        vote = IotdGenerators.vote(reviewer=reviewer, image=image)
+        vote.date = DateTimeService.now() - timedelta(days=5)
+        vote.save()
+
+        self.assertFalse(reviewer in IotdService().get_inactive_submitter_and_reviewers(4))
+        self.assertTrue(reviewer in IotdService().get_inactive_submitter_and_reviewers(5))
+        self.assertFalse(reviewer in IotdService().get_inactive_submitter_and_reviewers(6))
+
+    def test_inactive_reviewers_recent_votes(self):
+        uploader = Generators.user()
+        Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+        reviewer = Generators.user(groups=['iotd_reviewers'])
+
+        image = Generators.image(user=uploader)
+        image.designated_iotd_submitters.add(submitter)
+        image.designated_iotd_reviewers.add(reviewer)
+
+        IotdGenerators.submission(submitter=submitter, image=image)
+        IotdGenerators.vote(reviewer=reviewer, image=image)
+
+        self.assertFalse(reviewer in IotdService().get_inactive_submitter_and_reviewers(3))

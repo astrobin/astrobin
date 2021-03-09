@@ -1,0 +1,33 @@
+{% load i18n %}
+
+<h1>
+    {% blocktrans trimmed %}
+        You have been inactive as an IOTD Submitter or Reviewer for {{days}} days or more.
+    {% endblocktrans %}
+</h1>
+
+<br /><br />
+
+<p>
+    {% blocktrans trimmed %}
+        While the AstroBin IOTD selection process has a good level of redundancy built into the system, it still relies
+        on the members of the staff regularly making selections from their respective queues.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        As you have not been active for a significant amount of time, you have been removed from the IOTD staff for now.
+    {% endblocktrans %}
+
+    {% blocktrans trimmed %}
+        This will ensure that potential IOTD or Top Pick candidates don't go unnoticed sitting in the queue of an
+        inactive staff member.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        Thank you for understanding!
+    {% endblocktrans %}
+</p>
