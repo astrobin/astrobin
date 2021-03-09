@@ -61,6 +61,12 @@ NOTICE_TYPES = (
         2,
     ),
     (
+        'comment_approved',
+        _('Your comment was approved'),
+        '',
+        2,
+    ),
+    (
         'new_bookmark',
         _('Your image was bookmarked'),
         '',

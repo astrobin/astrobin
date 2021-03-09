@@ -64,3 +64,9 @@ class CommentNotificationsService:
                           verb='VERB_COMMENTED_IMAGE',
                           action_object=instance,
                           target=obj)
+
+    def send_approval_notification(self):
+        if not self.comment.pending_moderation:
+            push_notification([self.comment.author], 'comment_approved', {
+                'url': settings.BASE_URL + self.comment.get_absolute_url()
+            })
