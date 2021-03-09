@@ -39,6 +39,7 @@ class NestedCommentAdmin(admin.ModelAdmin):
 
         for comment in queryset:
             CommentNotificationsService(comment).send_notifications()
+            CommentNotificationsService(comment).send_approval_notification()
 
     approve.short_description = 'Approve'
 
