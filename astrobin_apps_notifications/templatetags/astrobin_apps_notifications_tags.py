@@ -41,5 +41,7 @@ def show_notice_settings(label):
         'new_subscription',
         'new_payment',
         'iotd_staff_inactive_removal_notice',
-        'iotd_staff_inactive_warning'
+        'iotd_staff_inactive_warning',
+        'image_you_promoted_is_tp',
+        'image_you_promoted_is_iotd',
     )
