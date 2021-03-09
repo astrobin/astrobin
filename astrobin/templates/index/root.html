@@ -35,8 +35,10 @@
                     <i class="icon-trophy"></i>
                     {% trans "Image of the day" %}
                     <span class="title">
-                        {{iotd.image.title|truncatechars:50}},
-                        {% astrobin_username iotd.image.user %}
+                        {{iotd.image.title|truncatechars:50}}
+                        <a href="{% url 'user_page' iotd.image.user %}">
+                            {{iotd.image.user.userprofile|truncatechars:50}}
+                        </a>
                     </span>
                 </h2>
             </div>
