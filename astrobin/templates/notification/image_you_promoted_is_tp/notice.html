@@ -1,0 +1,6 @@
+{% load i18n %}
+
+<a href="{{ base_url }}{% url 'image_detail' image.get_id %}">
+    {% blocktrans %}An image you promoted made it to Top Pick{% endblocktrans %}: {{ image.title }}
+</a>
+

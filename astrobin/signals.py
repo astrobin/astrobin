@@ -23,11 +23,12 @@ from pybb.models import Forum, Topic, Post, TopicReadTracker
 from rest_framework.authtoken.models import Token
 from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete
-from subscription.models import UserSubscription, Subscription, Transaction
+from subscription.models import UserSubscription, Transaction
 from subscription.signals import paid, signed_up
 from threaded_messages.models import Thread
 
 from astrobin_apps_groups.models import Group
+from astrobin_apps_iotd.models import IotdSubmission, IotdVote, TopPickArchive, Iotd
 from astrobin_apps_notifications.tasks import push_notification_for_new_image, push_notification_for_new_image_revision
 from astrobin_apps_notifications.utils import push_notification, clear_notifications_template_cache
 from astrobin_apps_platesolving.models import Solution
@@ -767,3 +768,24 @@ def persistent_message_post_save(sender, instance, **kwargs):
 
 
 post_save.connect(persistent_message_post_save, sender=Message)
+
+
+def top_pick_archive_item_post_save(sender, instance, created, **kwargs):
+    if created:
+        image = instance.image
+        thumb = image.thumbnail_raw('gallery', None, sync=True)
+
+        submitters = [x.submitter for x in IotdSubmission.objects.filter(image=image)]
+        push_notification(submitters, 'image_you_promoted_is_tp', {
+            'image': image,
+            'image_thumbnail': thumb.url if thumb else None
+        })
+
+        reviewers = [x.reviewer for x in IotdVote.objects.filter(image=image)]
+        push_notification(reviewers, 'image_you_promoted_is_tp', {
+            'image': image,
+            'image_thumbnail': thumb.url if thumb else None
+        })
+
+
+post_save.connect(top_pick_archive_item_post_save, sender=TopPickArchive)

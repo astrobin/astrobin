@@ -245,5 +245,17 @@ NOTICE_TYPES = (
         _("You have been inactive as an IOTD staff member"),
         '',
         2
+    ),
+    (
+        'image_you_promoted_is_tp',
+        _("An image you promoted made it to Top Pick"),
+        '',
+        2
+    ),
+    (
+        'image_you_promoted_is_iotd',
+        _("An image you promoted made it to IOTD"),
+        '',
+        2
     )
 )
