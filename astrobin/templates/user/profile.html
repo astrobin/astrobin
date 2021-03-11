@@ -99,6 +99,25 @@
             {% elif section == 'trash' %}
                 {% include "user/profile/trash_image_list.html" %}
             {% else %}
+                {% if request.user == requested_user and section == 'public' and public_images_no == 0 and wip_images_no > 0 %}
+                    <div class="alert alert-warning">
+                        <button class="close" data-dismiss="alert">&times;</button>
+
+                        <h4>
+                            <i class="icon icon-warning-sign"></i> {% trans "Can't find your images?" %}
+                        </h4>
+
+                        <p>
+                            {% url "user_page" requested_user as user_page %}
+                            {% blocktrans trimmed with staging_area_learn_more_link="https://welcome.astrobin.com/faq#staging-area" %}
+                                All your images are still unpublished.
+                                <a href="{{ user_page }}?staging">Visit your Staging Area</a> to find them, or
+                                <a href="{{ staging_area_learn_more_link }}">learn more</a>.
+                            {% endblocktrans %}
+                        </p>
+                    </div>
+                {% endif %}
+
                 {% image_list image_list nav_ctx='user' %}
             {% endif %}
         </div> <!-- images -->
