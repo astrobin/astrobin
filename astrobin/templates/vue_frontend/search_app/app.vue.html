@@ -120,6 +120,11 @@
                                 <telescope-type-filter
                                         v-if="filter.name === 'telescope_type'"
                                         :telescope-type="telescopeType"></telescope-type-filter>
+
+                                <integration-time-filter v-if="filter.name === 'integration_time'"
+                                                    :integration-time-min="integrationTimeMin"
+                                                    :integration-time-max="integrationTimeMax">
+                                </integration-time-filter>
                             </div>
 
                             <add-filter
@@ -332,6 +337,18 @@
                 {% else %}
                     undefined
                 {% endif %},
+            integrationTimeMin:
+                {% if "integration_time_min" in request.GET and request.GET.integration_time_min %}
+                    {{ request.GET.integration_time_min }}
+                {% else %}
+                    0
+                {% endif %},
+            integrationTimeMax:
+                {% if "integration_time_max" in request.GET and request.GET.integration_time_max %}
+                    {{ request.GET.integration_time_max }}
+                {% else %}
+                    999
+                {% endif %},
 
             allFilters: [
                 {
@@ -436,7 +453,12 @@
                     name: "telescope_type",
                     label: "{% trans "Telescope type" %}",
                     removable: true
-                }
+                },
+                {
+                    name: "integration_time",
+                    label: "{% trans "Integration time (hours)" %}",
+                    removable: true
+                },
             ],
             enabledFilters: []
         },
@@ -506,6 +528,10 @@
 
             {% if "pixel_scale_min" in request.GET or "pixel_scale_max" in request.GET %}
                 this.enabledFilters.push(this.getFilterByName("pixel_scale"));
+            {% endif %}
+
+            {% if "integration_time_min" in request.GET or "integration_time_max" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("integration_time"));
             {% endif %}
 
             if (this.license) {

@@ -97,4 +97,18 @@ body#search {
     margin-right: .5rem !important;
   }
 
+  .search-integration-time-form-group {
+    display: flex !important;
+    align-items: center;
+
+    label {
+      margin-bottom: 0;
+      margin-right: 5px;
+
+      &:not(:first-child) {
+        margin-left: 10px;
+      }
+    }
+  }
+
 }
