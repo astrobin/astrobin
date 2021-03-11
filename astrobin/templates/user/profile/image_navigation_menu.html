@@ -1,0 +1,13 @@
+{% load common_tags %}
+
+{% if menu %}
+    <ul class="nav nav-pills">
+        {% for item in menu %}
+            <li{% if item.0 == active %} class="active"{% endif %}>
+                <a href="{% url 'user_page' requested_user.username %}{% query_string "active=item.0" "" %}">
+                    {{ item.1 }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
