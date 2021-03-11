@@ -28,6 +28,11 @@
     {% breadcrumb image.title|escape|default:_("(no title)") None %}
 {% endblock %}
 
+{% block extra_alerts %}
+    {% include 'image/detail/pending_moderation_banner.html' %}
+    {% include 'image/detail/wip_banner.html' %}
+{% endblock %}
+
 {% block content %}
     {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" or show_contains %}
     <div class="subtitle">
@@ -77,8 +82,6 @@
         {% endwith %}
     {% endif %}
 
-    {% include 'image/detail/pending_moderation_banner.html' %}
-    {% include 'image/detail/wip_banner.html' %}
     {% include 'image/detail/menu/root.html' %}
 
     <div class="row"> <!-- main row -->
