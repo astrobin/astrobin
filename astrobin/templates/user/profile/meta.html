@@ -79,19 +79,6 @@
         </div>
     {% endif %}
 
-    {% if menu %}
-        <ul class="nav nav-tabs nav-stacked">
-            {% for item in menu %}
-                <li{% if item.0 == active %} class="active"{% endif %}>
-                    <a href="{% url 'user_page' requested_user.username %}{% query_string "active=item.0" "" %}">
-                        {{item.1}}
-                        <i class="icon-chevron-right"></i>
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
     <div class="subtle-container stats">
         <div class="header">
             <h4>

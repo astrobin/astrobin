@@ -252,6 +252,7 @@ body.full {
   -moz-border-radius: 0;
   border-radius: 0;
   color: $strong-text-color;
+  background-color: transparent;
 
   @media screen and (min-width: 768px) {
     padding-bottom: 6px;
@@ -384,6 +385,13 @@ body.full {
     margin-top: 1px;
     margin-right: -6px;
     @include opacity(0.5);
+  }
+}
+
+.nav-pills {
+  > li > a {
+    background-color: rgba(0, 0, 0, .1);
+    padding: 10px 15px;
   }
 }
 
