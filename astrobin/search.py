@@ -9,8 +9,8 @@ from pybb.models import Post, Topic
 
 from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin_apps_equipment.models import EquipmentBrandListing
-from .models import Image
 from nested_comments.models import NestedComment
+from .models import Image
 
 FIELDS = (
     # Filtering
@@ -42,6 +42,8 @@ FIELDS = (
     'remote_source',
     'subject_type',
     'telescope_type',
+    'integration_time_min',
+    'integration_time_max',
 
     # Sorting
     'sort'
@@ -79,6 +81,8 @@ class AstroBinSearchForm(SearchForm):
     remote_source = forms.CharField(required=False)
     subject_type = forms.CharField(required=False)
     telescope_type = forms.CharField(required=False)
+    integration_time_min = forms.FloatField(required=False)
+    integration_time_max = forms.FloatField(required=False)
 
     def __init__(self, *args, **kwargs):
         super(AstroBinSearchForm, self).__init__(args, kwargs)
@@ -311,6 +315,21 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filter_by_integration_time(self, results):
+        try:
+            min = float(self.cleaned_data.get("integration_time_min"))
+            results = results.filter(integration__gte=min * 3600)
+        except TypeError:
+            pass
+
+        try:
+            max = float(self.cleaned_data.get("integration_time_max"))
+            results = results.filter(integration__lte=max * 3600)
+        except TypeError:
+            pass
+
+        return results
+
     def sort(self, results):
         order_by = None
         domain = self.cleaned_data.get('d', 'i')
@@ -375,6 +394,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_remote_source(sqs)
         sqs = self.filter_by_subject_type(sqs)
         sqs = self.filter_by_telescope_type(sqs)
+        sqs = self.filter_by_integration_time(sqs)
 
         sqs = self.sort(sqs)
 
