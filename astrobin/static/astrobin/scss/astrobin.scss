@@ -2343,21 +2343,30 @@ form.avatar-change label.control-label {
         }
       }
     }
+  }
 
-    .revision-description {
-      padding: 8px;
+  .revision-description {
+    padding: 8px;
 
-      h3 {
-        color: $strong-text-color;
-        font-size: 16px;
-        margin: 0 0 4px 0;
-      }
+    h3 {
+      color: $strong-text-color;
+      font-size: 16px;
+      margin: 0 0 4px 0;
+    }
 
-      p {
-        color: #c3c3c3;
-        font-size: 13px;
-        line-height: 15px;
-      }
+    p {
+      color: #c3c3c3;
+      font-size: 13px;
+      line-height: 15px;
+    }
+  }
+}
+
+.subtle-container.histogram {
+  @media screen and (max-width: 767px) {
+    .astrobin-image-container {
+      text-align: center;
+      padding: 1rem;
     }
   }
 }

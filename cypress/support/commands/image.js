@@ -5,14 +5,14 @@ Cypress.Commands.add("visitImage", (options = {}) => {
 });
 
 Cypress.Commands.add("likeImage", (options = {}) => {
-    let btn = cy.get(".property-like");
+    let btn = cy.get(".property-like").first();
 
     btn.click();
     btn.should("contain", "Unlike");
 });
 
 Cypress.Commands.add("unlikeImage", (options = {}) => {
-    let btn = cy.get(".property-like");
+    let btn = cy.get(".property-like").first();
 
     btn.click();
     btn.should("contain", "Like");

@@ -5,6 +5,12 @@
   src: url("../fonts/LeagueGothic-Regular.otf") format("opentype");
 }
 
+@media screen and (max-width: 1019px) {
+  .extra-alerts .alert {
+    margin: 10px -10px;
+  }
+}
+
 @media screen and (max-width: 979px) {
   html, body {
     font-size: 16px;
@@ -240,9 +246,16 @@
 
   .subtle-container .header {
     width: calc(100% - 12px);
+    text-align: center;
+
+    .actions {
+      right: 20px;
+    }
   }
 
-  .subtle-container, .subtle-container .header, .subnav,
+  .subtle-container,
+  .subtle-container .header,
+  .subnav,
   footer .container {
     -webkit-border-radius: 0;
     border-radius: 0;
@@ -299,6 +312,7 @@
 
   div.image-title {
     padding: 0 12px;
+    text-align: center;
   }
 
   .btn-block-mobile {
@@ -383,8 +397,23 @@
     width: 100% !important;
   }
 
-  .avatar-block .avatar {
-    margin: 0 $spacer-medium;
+  .avatar-block {
+    margin-bottom: 0;
+
+    .avatar {
+      margin: 0 12px;
+      width: 60px;
+    }
+
+    .username {
+      padding: 0 10px 20px 4px;
+      margin-left: 80px;
+
+      .data > div,
+      .property-follow {
+        margin-left: 12px;
+      }
+    }
   }
 
   .technical-card {
