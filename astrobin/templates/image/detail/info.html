@@ -30,13 +30,14 @@
     <div class="username">
         {% astrobin_username image.user %}
         <div class="data">
-            <img class="license"
-                 src="{{license_icon}}"
-                 alt="{% trans "License" %}: {{license_title}}"
-                 title="{% trans "License" %}: {{license_title}}" />
+            <div>
+                <img class="license"
+                     src="{{license_icon}}"
+                     alt="{% trans "License" %}: {{license_title}}"
+                     title="{% trans "License" %}: {{license_title}}" />
 
-            <abbr class="published timeago" title="{{published_on|date:'Y-m-d\TH:i:s'}}"></abbr>
-
+                <abbr class="published timeago" title="{{published_on|date:'Y-m-d\TH:i:s'}}"></abbr>
+            </div>
             <div>
                 <span class="views">
                     {% get_hit_count for image as hit_count %}

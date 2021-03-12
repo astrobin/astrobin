@@ -3,6 +3,12 @@
 .nested-comments-container {
   overflow: visible !important;
 
+  @media screen and (max-width: 767px) {
+    .please-login {
+      margin-left: 12px !important;
+    }
+  }
+
   .comments {
     margin-top: $spacer-large;
     margin-left: $spacer-large;
