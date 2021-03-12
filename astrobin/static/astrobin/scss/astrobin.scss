@@ -1055,16 +1055,12 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   margin-bottom: $spacer-xlarge;
 
   .image-title {
-    margin-bottom: 0;
+    margin-bottom: 1rem;
     line-height: 26px;
   }
 
   .image-license {
     text-align: right;
-  }
-
-  .download-original {
-    margin-top: 1rem;
   }
 }
 
