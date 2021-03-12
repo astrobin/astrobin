@@ -10,4 +10,5 @@ class ExtendedRSSFeed(Rss201rev2Feed):
     def add_item_elements(self, handler, item):
         super(ExtendedRSSFeed, self).add_item_elements(handler, item)
         handler.addQuickElement(u'content:encoded', item['content_encoded'])
+        handler.addQuickElement(u'instagram_username', item['instagram_username'])
 
