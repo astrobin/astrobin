@@ -90,15 +90,24 @@
             {% include 'image/detail/solve_status.html' %}
             {% include 'image/detail/image.html' %}
             {% include 'image/detail/image_title.html' %}
+
+            <div class="visible-phone">
+                {% include 'image/detail/info.html' %}
+                {% include 'image/detail/like.html' %}
+                {% include 'image/detail/bookmark.html' %}
+            </div>
+
             {% include 'image/detail/image_card.html' %}
             {% include 'image/detail/image_description.html' %}
             {% include 'image/detail/comments.html' %}
         </div> <!-- /left pane -->
 
         <div class="span4"> <!-- right pane -->
-            {% include 'image/detail/info.html' %}
-            {% include 'image/detail/like.html' %}
-            {% include 'image/detail/bookmark.html' %}
+            <div class="hidden-phone">
+                {% include 'image/detail/info.html' %}
+                {% include 'image/detail/like.html' %}
+                {% include 'image/detail/bookmark.html' %}
+            </div>
 
             {% if not request.user_agent.is_mobile %}
                 {% with ad_container_classes='hidden-phone' %}
