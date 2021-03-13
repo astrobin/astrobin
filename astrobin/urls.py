@@ -429,7 +429,7 @@ urlpatterns += [
     ### I18N VIEWS                                                          ###
     ###########################################################################
 
-    url(r'^language/set/(?P<lang>[\w-]+)/$', set_language, name='set_language'),
+    url(r'^language/set/(?P<language_code>[\w-]+)/$', set_language, name='set_language'),
 
     ###########################################################################
     ### IMAGE EDIT VIEWS                                                    ###

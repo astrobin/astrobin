@@ -339,10 +339,9 @@ def index(request, template='index/root.html', extra_context=None):
     image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
     user_ct = ContentType.objects.get_for_model(User)
 
-    recent_images = Image.objects \
-        .exclude(title=None) \
-        .exclude(title='') \
-        .filter(moderator_decision=1)
+    recent_images = Image.objects\
+        .filter(Q(~Q(title=None) & ~Q(title='') & Q(moderator_decision=1) & Q(published__isnull=False)))\
+        .order_by('-published')
 
     response_dict = {
         'recent_images': recent_images,
@@ -2060,7 +2059,10 @@ def user_profile_remove_shadow_ban(request):
 def user_profile_edit_preferences(request):
     """Edits own preferences"""
     profile = request.user.userprofile
-    form = UserProfileEditPreferencesForm(instance=profile)
+    form = UserProfileEditPreferencesForm(
+        instance=profile,
+        initial={'other_languages': profile.other_languages.split(',') if profile.other_languages else []}
+    )
     response_dict = {
         'form': form,
     }
@@ -2361,26 +2363,33 @@ def location_edit(request, id):
 
 @require_GET
 @never_cache
-def set_language(request, lang):
+def set_language(request, language_code):
     from django.utils.translation import check_for_language, activate
 
     next = request.GET.get('next', None)
+
     if not next:
         next = request.META.get('HTTP_REFERER', None)
+
     if not next:
         next = '/'
+
     response = HttpResponseRedirect(next)
-    if lang and check_for_language(lang):
+
+    if language_code and check_for_language(language_code):
         if hasattr(request, 'session'):
-            request.session['django_language'] = lang
+            request.session['django_language'] = language_code
 
-        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
-        activate(lang)
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language_code)
+        activate(language_code)
 
-    if request.user.is_authenticated():
-        profile = request.user.userprofile
-        profile.language = lang
-        profile.save(keep_deleted=True)
+        if request.user.is_authenticated():
+            profile = request.user.userprofile
+            profile.language = language_code
+            profile.save(keep_deleted=True)
+    else:
+        messages.error(request, _("Sorry, AstroBin was unable to activate the requested language"))
+        log.error("set_language: unable to activate %s" % language_code)
 
     return response
 

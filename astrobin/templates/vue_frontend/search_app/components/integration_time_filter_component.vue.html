@@ -1,0 +1,31 @@
+{% load astrobin_apps_premium_tags %}
+{% load i18n %}
+
+<script type="text/x-template" id="integration-time-filter-template">
+    {% if request.user|can_access_full_search %}
+        <div class="form-group search-integration-time-form-group" :class="{highlighted: highlighted}">
+            <label for="integration-time-min-value">{% trans "Min" %}</label>
+            <input id="integration-time-min-value" name="integration_time_min" type="number" min="0" max="999"
+                   step="0.1" :value="integrationTimeMin" />
+
+            <label for="integration-time-min-value">{% trans "Max" %}</label>
+            <input id="integration-time-max-value" name="integration_time_max" type="number" min="0" max="999"
+                   step="0.1" :value="integrationTimeMax" />
+        </div>
+    {% else %}
+        {% include "./_filter_not_allowed.html" %}
+    {% endif %}
+</script>
+
+<script>
+    Vue.component("integration-time-filter", {
+        template: "#integration-time-filter-template",
+        props: [
+            "integrationTimeMin",
+            "integrationTimeMax"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ]
+    });
+</script>

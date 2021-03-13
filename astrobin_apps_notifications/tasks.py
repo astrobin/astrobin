@@ -13,12 +13,12 @@ from common.services import DateTimeService
 from toggleproperties.models import ToggleProperty
 
 
-@shared_task(time_limit=60)
+@shared_task(time_limit=300)
 def purge_old_notifications():
     call_command("purge_old_notifications")
 
 
-@shared_task(time_limit=120)
+@shared_task(time_limit=1200)
 def push_notification_for_new_image(user_pk, image_pk):
     try:
         image = Image.objects_including_wip.get(pk=image_pk)
@@ -43,7 +43,7 @@ def push_notification_for_new_image(user_pk, image_pk):
         })
 
 
-@shared_task(time_limit=120)
+@shared_task(time_limit=1200)
 def push_notification_for_new_image_revision(revision_pk):
     try:
         revision = ImageRevision.objects.get(pk=revision_pk)
@@ -64,7 +64,7 @@ def push_notification_for_new_image_revision(revision_pk):
     })
 
 
-@shared_task(time_limit=60)
+@shared_task(time_limit=300)
 def clear_old_bouncy_objects():
     Delivery.objects.filter(created_at__lte=DateTimeService.now() - timedelta(7)).delete()
     Bounce.objects.filter(created_at__lte=DateTimeService.now() - timedelta(30)).delete()

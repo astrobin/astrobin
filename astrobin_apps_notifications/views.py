@@ -28,15 +28,3 @@ class NotificationMarkAllAsReadView(View):
         Message.objects.filter(user=request.user).update(read=True)
         clear_notifications_template_cache(request.user.username)
         return redirect(request.POST.get('next', '/'))
-
-
-class NotificationClearTemplateCacheAjaxView(JSONResponseMixin, View):
-    model = Message
-    http_method_names = ['post']
-
-    def post(self, request, *args, **kwargs):
-        if request.is_ajax():
-            print(self.request.user.username)
-            clear_notifications_template_cache(request.user.username)
-            return self.render_json_response({'result': 'ok'})
-        return HttpResponseForbidden()

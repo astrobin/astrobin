@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-24 21:27+0000\n"
+"POT-Creation-Date: 2021-03-06 23:07+0000\n"
 "PO-Revision-Date: 2020-05-18 11:06+0000\n"
 "Last-Translator: Milosz Wasilewski <milosz.wasilewski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -150,6 +150,22 @@ msgstr "Nie możesz odznaczyć zdjęcia wybranego przez innego jurora."
 msgid "You cannot unelect a past or current IOTD."
 msgstr "Nie możesz odznaczyć bieżącego lub poprzednich zdjęć IOTD"
 
+#, python-format
+msgid "you already selected %s IOTD today (UTC)"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "You have already scheduled %(max_allowed)s IOTDs."
+msgid "you already selected %s scheduled IOTDs"
+msgstr ""
+"Oznaczyłeś już dzisiaj maksymalną ilość %(max_allowed)s kandydatów do IOTD"
+
+#, fuzzy, python-format
+#| msgid "You have already scheduled %(max_allowed)s IOTDs."
+msgid "there are already %s scheduled IOTDs"
+msgstr ""
+"Oznaczyłeś już dzisiaj maksymalną ilość %(max_allowed)s kandydatów do IOTD"
+
 msgid "Image of the day"
 msgstr "Zdjęcie dnia"
 
@@ -164,6 +180,12 @@ msgid ""
 msgstr ""
 "Proszę wybrać zdjęcia które chcesz oznaczyć jako kandydatów do IOTD poprzez "
 "kliknięcie w nie."
+
+#, python-format
+msgid ""
+"Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
+"<strong>%(time)s</strong>."
+msgstr ""
 
 msgid "This queue is currently empty."
 msgstr "Ta kolejka jest obecnie pusta."

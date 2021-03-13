@@ -54,7 +54,7 @@ abbr[title] {
 
 html, body {
   color: $text-color;
-  font-family: $regular_font;
+  font-family: $regular-font;
   font-size: $base-font-size;
 }
 
@@ -335,7 +335,7 @@ li.astrobin-thumbnail {
 h1, h2, h3, h4, h5, h6 {
   margin-top: $spacer-xlarge;
   margin-bottom: $spacer-xxlarge;
-  font-family: $headers_font;
+  font-family: $headers-font;
   color: $strong-text-color;
 }
 
@@ -1055,16 +1055,12 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   margin-bottom: $spacer-xlarge;
 
   .image-title {
-    margin-bottom: 0;
+    margin-bottom: 1rem;
     line-height: 26px;
   }
 
   .image-license {
     text-align: right;
-  }
-
-  .download-original {
-    margin-top: 1rem;
   }
 }
 
@@ -1118,10 +1114,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 }
 
 .avatar-block {
-  .avatar, .username {
-    display: block;
-  }
-
   .avatar {
     float: left;
   }
@@ -1136,7 +1128,9 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     margin-top: $spacer-small;
 
     a.astrobin-username {
-      font-size: 80%
+      font-size: 80%;
+      display: inline-block;
+      margin-bottom: 1rem;
     }
 
     .data {
@@ -2056,15 +2050,16 @@ form.avatar-change label.control-label {
     }
 
     .title {
-      font-family: 'Noto Sans', sans-serif;
       font-weight: normal;
       font-style: italic;
-      font-size: 16px;
+      font-size: 1.1rem;
+      line-height: 1.25rem;
       color: $text-color;
       float: right;
+      text-align: right;
 
       a {
-        color: $link-color;
+        display: block;
       }
     }
   }
@@ -2091,11 +2086,12 @@ form.avatar-change label.control-label {
 
   .data {
     position: absolute;
-    top: $spacer-xxlarge;
-    left: $spacer-large;
-    padding: $spacer-small $spacer-medium;
+    top: $spacer-xlarge;
+    left: $spacer-xlarge;
+    padding: $spacer-medium $spacer-large;
     background-color: #111;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(4px);
     @include rounded-corners;
 
     h3 {
@@ -2194,7 +2190,7 @@ form.avatar-change label.control-label {
   h4 {
     .actions {
       font-weight: normal;
-      font-family: $regular_font;
+      font-family: $regular-font;
       font-size: 14px;
       position: absolute;
       top: 8px;
@@ -2343,21 +2339,30 @@ form.avatar-change label.control-label {
         }
       }
     }
+  }
 
-    .revision-description {
-      padding: 8px;
+  .revision-description {
+    padding: 8px;
 
-      h3 {
-        color: $strong-text-color;
-        font-size: 16px;
-        margin: 0 0 4px 0;
-      }
+    h3 {
+      color: $strong-text-color;
+      font-size: 16px;
+      margin: 0 0 4px 0;
+    }
 
-      p {
-        color: #c3c3c3;
-        font-size: 13px;
-        line-height: 15px;
-      }
+    p {
+      color: #c3c3c3;
+      font-size: 13px;
+      line-height: 15px;
+    }
+  }
+}
+
+.subtle-container.histogram {
+  @media screen and (max-width: 767px) {
+    .astrobin-image-container {
+      text-align: center;
+      padding: 1rem;
     }
   }
 }
@@ -3068,11 +3073,20 @@ ul.astrobin-users {
 .user-card {
   position: relative;
 
+  > .header > h4 {
+    white-space: normal;
+  }
+
   .avatar {
     width: 194px;
     height: 194px;
 
+    .icon.edit {
+      visibility: hidden;
+    }
+
     &:hover .icon.edit {
+      visibility: visible;
       position: absolute;
       top: 40px;
       left: 62px;
@@ -3583,6 +3597,10 @@ table.notifications-modal {
     a {
       color: $link-color;
     }
+
+    .loading {
+      display: none;
+    }
   }
 
   tr.divider td {
@@ -3781,7 +3799,8 @@ table.search-table {
     position: absolute;
     width: 100%;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
     color: white;
 
     .inner {
@@ -3794,6 +3813,11 @@ table.search-table {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+      }
+
+      .astrobin-username {
+        display: inline-block;
+        margin-top: .25rem;
       }
     }
   }
@@ -3852,7 +3876,7 @@ table.api-examples {
     font-style: italic;
     font-weight: bold;
     line-height: 1.5em;
-    padding: 0.1em 0.5em;
+    padding: 0.25rem 0.5rem;
     border-radius: 6px;
     color: white;
   }
@@ -4069,6 +4093,29 @@ form.edit-thumbnails {
       max-width: 400px;
       margin-top: 1.25rem;
       text-align: left;
+    }
+  }
+}
+
+.jcrop-holder {
+  &.size-warning {
+    > div .jcrop-tracker {
+      background-color: rgba(255, 0, 0, .5);
+
+      &::after {
+        display: block;
+        content: "⚠️ Thumbnail too small";
+        position: fixed;
+        top: 47px;
+        width: 100vw;
+        left: 0;
+        text-align: center;
+        padding: 20px;
+        color: $white;
+        background: $red;
+        font-size: 20px;
+        text-shadow: 0 0 4px rgba(0, 0, 0, .5);
+      }
     }
   }
 }

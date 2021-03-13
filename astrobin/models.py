@@ -13,6 +13,7 @@ from urlparse import urlparse
 
 import boto3
 from django.core.files.images import get_image_dimensions
+from django.core.validators import MinLengthValidator, MaxLengthValidator, RegexValidator
 from image_cropping import ImageRatioField
 
 from astrobin.enums import SubjectType, SolarSystemSubject
@@ -141,6 +142,7 @@ LANGUAGES = {
     'ru': _("Russian"),
     'ar': _("Arabic"),
     'ja': _("Japanese"),
+    'zh-hans': _("Chinese (Simplified)"),
 }
 
 SUBJECT_LABELS = {
@@ -1619,10 +1621,8 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         ordering = ('uploaded', '-id')
         unique_together = ('image', 'label')
 
-
     objects = ImageRevisionsManager()
     uploads_in_progress = UploadsInProgressImageRevisionsManager()
-
 
     def __unicode__(self):
         return self.image.title
@@ -2067,6 +2067,23 @@ class UserProfile(SafeDeleteModel):
         help_text=_("Do you have any hobbies other than astrophotography?"),
     )
 
+    instagram_username = models.CharField(
+        verbose_name=_("Instagram username"),
+        help_text=_("If you provide this, AstroBin will tag you on Instagram if it's sharing an image of yours."),
+        validators=[
+            MinLengthValidator(4),
+            MaxLengthValidator(30),
+            RegexValidator(
+                '^@[\w](?!.*?\.{2})[\w.]{1,28}[\w]$',
+                _('An Instagram username must be between 3 and 30 characters, start with an @ sign, and only '
+                  'have letters, numbers, periods, and underlines.')
+            )
+        ],
+        max_length=30,
+        null=True,
+        blank=True
+    )
+
     timezone = models.CharField(
         max_length=255,
         choices=PRETTY_TIMEZONE_CHOICES,
@@ -2154,6 +2171,8 @@ class UserProfile(SafeDeleteModel):
         null=True,
         blank=True,
     )
+
+    open_notifications_in_new_tab = models.NullBooleanField()
 
     # Gear
     telescopes = models.ManyToManyField(Telescope, blank=True, verbose_name=_("Telescopes and lenses"),
@@ -2308,6 +2327,14 @@ class UserProfile(SafeDeleteModel):
         null=True, blank=True,
         verbose_name=_("Language"),
         choices=LANGUAGE_CHOICES,
+    )
+
+    other_languages = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name=_("Other languages"),
+        help_text=_("Other languages that you can read and write. This can be useful to other AstroBin members who "
+                    "would like to communicate with you.")
     )
 
     # One time notifications that won't disappear until marked as seen.

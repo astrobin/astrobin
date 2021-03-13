@@ -1,0 +1,11 @@
+{% load i18n %}
+
+{% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
+    An image you promoted made it to IOTD
+{% endblocktrans %}: <a href="{{ base_url }}{% url 'image_detail' image.get_id %}">{{ image.title }}</a>
+
+<br /><br />
+
+<a href="{{ base_url }}{% url 'image_detail' image.get_id %}">
+    <img src="{{ image_thumbnail }}" />
+</a>

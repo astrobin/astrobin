@@ -37,7 +37,9 @@
                 <div class="btn-group">
                     <a href="{% url 'user_page' request.user.username %}" class="btn btn-primary">
                         <span class="visible-phone"><i class="icon icon-user"></i></span>
-                        <span class="hidden-phone username">{{request.user.userprofile|truncatechars:"20"}}</span>
+                        <span class="hidden-phone username">
+                            {{ request.user.userprofile }}
+                        </span>
                         <span id="navbar-user-scores">
                             {% show_competitive_feature request.user None as show_competitive_feature %}
                             {% if show_competitive_feature or request.user.is_superuser %}

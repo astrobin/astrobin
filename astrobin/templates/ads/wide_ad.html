@@ -7,7 +7,7 @@
 {% if show_ads_on_page %}
     <div class="subtle-container advertisement {{ ad_container_classes }}">
         <div class="header">
-            <h4><i class="icon-bullhorn"></i></h4>
+            <h4><i class="icon-bullhorn hidden-phone"></i></h4>
 
             <a class="remove" data-toggle="modal"
                     {% if request.user|can_remove_ads %}

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-24 21:27+0000\n"
+"POT-Creation-Date: 2021-03-06 23:07+0000\n"
 "PO-Revision-Date: 2020-11-24 02:29+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -143,6 +143,20 @@ msgstr "他の審査員に選ばれた画像を無選挙にすることはでき
 msgid "You cannot unelect a past or current IOTD."
 msgstr "過去や現在のIOTDを無投票にすることはできません。"
 
+#, python-format
+msgid "you already selected %s IOTD today (UTC)"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "You have already scheduled %(max_allowed)s IOTDs."
+msgid "you already selected %s scheduled IOTDs"
+msgstr "あなたは既に%(max_allowed)s のIOTDをスケジュールされています。"
+
+#, fuzzy, python-format
+#| msgid "You have already scheduled %(max_allowed)s IOTDs."
+msgid "there are already %s scheduled IOTDs"
+msgstr "あなたは既に%(max_allowed)s のIOTDをスケジュールされています。"
+
 msgid "Image of the day"
 msgstr "Image of the day"
 
@@ -155,6 +169,12 @@ msgstr "IOTD Judgement Queue"
 msgid ""
 "Please select the images that you want to elect to IOTD by clicking on them."
 msgstr "IOTDに選出したい画像をクリックして選択してください。"
+
+#, python-format
+msgid ""
+"Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
+"<strong>%(time)s</strong>."
+msgstr ""
 
 msgid "This queue is currently empty."
 msgstr "このキューは現在空です。"

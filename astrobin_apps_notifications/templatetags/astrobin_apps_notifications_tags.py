@@ -40,4 +40,8 @@ def show_notice_settings(label):
         'congratulations_for_your_first_image',
         'new_subscription',
         'new_payment',
+        'iotd_staff_inactive_removal_notice',
+        'iotd_staff_inactive_warning',
+        'image_you_promoted_is_tp',
+        'image_you_promoted_is_iotd',
     )

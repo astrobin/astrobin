@@ -28,6 +28,11 @@
     {% breadcrumb image.title|escape|default:_("(no title)") None %}
 {% endblock %}
 
+{% block extra_alerts %}
+    {% include 'image/detail/pending_moderation_banner.html' %}
+    {% include 'image/detail/wip_banner.html' %}
+{% endblock %}
+
 {% block content %}
     {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" or show_contains %}
     <div class="subtitle">
@@ -77,8 +82,6 @@
         {% endwith %}
     {% endif %}
 
-    {% include 'image/detail/pending_moderation_banner.html' %}
-    {% include 'image/detail/wip_banner.html' %}
     {% include 'image/detail/menu/root.html' %}
 
     <div class="row"> <!-- main row -->
@@ -87,17 +90,28 @@
             {% include 'image/detail/solve_status.html' %}
             {% include 'image/detail/image.html' %}
             {% include 'image/detail/image_title.html' %}
+
+            {% if request.user_agent.is_mobile %}
+                <div class="visible-phone">
+                    {% include 'image/detail/info.html' %}
+                    {% include 'image/detail/like.html' %}
+                    {% include 'image/detail/bookmark.html' %}
+                </div>
+            {% endif %}
+
             {% include 'image/detail/image_card.html' %}
             {% include 'image/detail/image_description.html' %}
             {% include 'image/detail/comments.html' %}
         </div> <!-- /left pane -->
 
         <div class="span4"> <!-- right pane -->
-            {% include 'image/detail/info.html' %}
-            {% include 'image/detail/like.html' %}
-            {% include 'image/detail/bookmark.html' %}
-
             {% if not request.user_agent.is_mobile %}
+                <div class="hidden-phone">
+                    {% include 'image/detail/info.html' %}
+                    {% include 'image/detail/like.html' %}
+                    {% include 'image/detail/bookmark.html' %}
+                </div>
+
                 {% with ad_container_classes='hidden-phone' %}
                     {% include 'image/detail/ad.html' %}
                 {% endwith %}

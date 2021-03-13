@@ -1,0 +1,3 @@
+{% load i18n %}
+
+{% blocktrans %}An image you promoted made it to Top Pick{% endblocktrans %}: {{image.title}}

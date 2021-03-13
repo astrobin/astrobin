@@ -9,11 +9,15 @@
     </div>
 
     <div class="modal-body">
-        {% if request.user|can_restore_from_trash %}
-            {% trans "The image will be moved to the trash, and it can be restored later. All its revisions will be there too. Continue?" %}
-        {% else %}
-            {% trans "The image will be permanently deleted and cannot be recovered. All its revisions will be deleted too. Are you sure?" %}
-        {% endif %}
+        {% include "./_delete_from_free_info.html" %}
+
+        <p>
+            {% if request.user|can_restore_from_trash %}
+                {% trans "The image will be moved to the trash, and it can be restored later. All its revisions will be there too. Continue?" %}
+            {% else %}
+                {% trans "The image will be permanently deleted and cannot be recovered. All its revisions will be deleted too. Are you sure?" %}
+            {% endif %}
+        </p>
     </div>
 
     <div class="modal-footer">
@@ -33,9 +37,11 @@
         <h3>{% trans "Delete original image?" %}</h3>
     </div>
 
-    <div class="modal-body">
-        {% trans "The image will be permanently deleted and cannot be recovered. Its revisions will not be deleted. Are you sure?"%}
-    </div>
+    <p>
+        <div class="modal-body">
+            {% trans "The image will be permanently deleted and cannot be recovered. Its revisions will not be deleted. Are you sure?"%}
+        </div>
+    </p>
 
     <div class="modal-footer">
         <form action="{% url 'image_delete_original' image.get_id %}" method="post">{% csrf_token %}
@@ -55,10 +61,12 @@
     </div>
 
     <div class="modal-body">
-        {% blocktrans trimmed %}
-            You will delete all other revisions (if any), and the originally uploaded image, leaving the current
-            revision as the final and only version of this image.
-        {% endblocktrans %}
+        <p>
+            {% blocktrans trimmed %}
+                You will delete all other revisions (if any), and the originally uploaded image, leaving the current
+                revision as the final and only version of this image.
+            {% endblocktrans %}
+        </p>
     </div>
 
     <div class="modal-footer">
@@ -80,10 +88,12 @@
     </div>
 
     <div class="modal-body">
-        {% blocktrans trimmed %}
-            You will delete all revisions, leaving the originally uploaded image as the final and only version of this
-            image.
-        {% endblocktrans %}
+        <p>
+            {% blocktrans trimmed %}
+                You will delete all revisions, leaving the originally uploaded image as the final and only version of
+                this image.
+            {% endblocktrans %}
+        </p>
     </div>
 
     <div class="modal-footer">

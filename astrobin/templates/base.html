@@ -89,6 +89,10 @@
 
         {% include "base/global_alerts.html" %}
 
+        <div class="container extra-alerts">
+            {% block extra_alerts %}{% endblock %}
+        </div>
+
         <div id="top" class="container astrobin-container {% block container_extra_classes %}{% endblock %}">
             {% if show_adsense_ads %}
                 <div class="ads-sidebar-left"></div>

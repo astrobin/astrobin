@@ -173,7 +173,7 @@ def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     logger.debug('retrieve_thumbnail task is already running')
 
 
-@shared_task(time_limit=600)
+@shared_task(time_limit=900)
 def update_index(model, age_in_minutes, batch_size):
     start = datetime.now() - timedelta(minutes=age_in_minutes)
     end = datetime.now()
@@ -251,7 +251,7 @@ def send_never_activated_account_reminder():
         logger.debug("Sent 'never activated account reminder' to %d" % user.pk)
 
 
-@shared_task(time_limit=60)
+@shared_task(time_limit=300)
 def delete_never_activated_accounts():
     users = never_activated_accounts_to_be_deleted()
     count = users.count()
@@ -259,7 +259,7 @@ def delete_never_activated_accounts():
     logger.debug("Deleted %d inactive accounts" % count)
 
 
-@shared_task(time_limit=600)
+@shared_task(time_limit=3600)
 def prepare_download_data_archive(request_id):
     # type: (str) -> None
 
@@ -429,11 +429,15 @@ def expire_download_data_requests():
 
 @shared_task(time_limit=60)
 def purge_expired_incomplete_uploads():
-    deleted, _ = Image.uploads_in_progress.filter(uploader_expires__lt=DateTimeService.now()).delete()
-    logger.info("Purged %d expired incomplete image uploads." % deleted)
+    deleted = Image.uploads_in_progress.filter(uploader_expires__lt=DateTimeService.now()).delete()
 
-    deleted, _ = ImageRevision.uploads_in_progress.filter(uploader_expires__lt=DateTimeService.now()).delete()
-    logger.info("Purged %d expired incomplete image revision uploads." % deleted)
+    if deleted is not None:
+        logger.info("Purged %d expired incomplete image uploads." % deleted[0])
+
+    deleted = ImageRevision.uploads_in_progress.filter(uploader_expires__lt=DateTimeService.now()).delete()
+
+    if deleted is not None:
+        logger.info("Purged %d expired incomplete image revision uploads." % deleted[0])
 
 
 @shared_task(time_limit=60)

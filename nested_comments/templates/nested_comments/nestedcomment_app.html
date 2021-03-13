@@ -56,7 +56,7 @@
             </a>
         {{/unless}}
     {{else}}
-        <p>
+        <p class="please-login">
             {% url 'auth_login' as login_url %}
             {% blocktrans trimmed with signup_url="https://welcome.astrobin.com/pricing" %}
                 Please <a href="{{login_url}}">log in</a> or <a href="{{signup_url}}">sign up</a> to leave a comment.
@@ -255,7 +255,7 @@
             {{view NestedCommentsApp.LoaderView}}
         {{/if}}
     {{else}}
-        <p>
+        <p class="please-login">
             {% url 'auth_login' as login_url %}
             {% blocktrans trimmed with signup_url="https://welcome.astrobin.com/pricing" %}
                 Please <a href="{{ login_url }}">log in</a> or <a href="{{ signup_url }}">sign up</a> to leave a comment.

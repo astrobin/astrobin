@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-24 21:27+0000\n"
-"PO-Revision-Date: 2021-01-06 19:09+0000\n"
+"POT-Creation-Date: 2021-03-06 23:07+0000\n"
+"PO-Revision-Date: 2021-03-04 07:53+0000\n"
 "Last-Translator: NadirAstro <nadir_teymurov@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ru\n"
@@ -18,12 +18,10 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1609960177.000000\n"
+"X-POOTLE-MTIME: 1614844438.000000\n"
 
-#, fuzzy
-#| msgid "You cannot unelect an image elected by another judge."
 msgid "You cannot unhide an image on behalf of another user."
-msgstr "Вы не можете отменить выбор изображения другого судьи."
+msgstr "Вы не можете показать изображение от имени другого пользователя."
 
 msgid "You cannot delete another user's submission."
 msgstr "Вы не можете удалить заявку другого пользователя."
@@ -143,6 +141,18 @@ msgstr "Вы не можете отменить выбор изображени�
 msgid "You cannot unelect a past or current IOTD."
 msgstr "Вы не можете переизбрать прошлые или текущие Изображения Дня."
 
+#, python-format
+msgid "you already selected %s IOTD today (UTC)"
+msgstr "вы уже выбрали %s IOTD сегодня (UTC)"
+
+#, python-format
+msgid "you already selected %s scheduled IOTDs"
+msgstr "Вы уже выбрали %s запланированных Изображений Дня"
+
+#, python-format
+msgid "there are already %s scheduled IOTDs"
+msgstr "Уже есть %s запланированных Изображений Дня"
+
 msgid "Image of the day"
 msgstr "Изображение Дня"
 
@@ -157,6 +167,14 @@ msgid ""
 msgstr ""
 "Пожалуйста отметьте изображения, которые вы хотите выбрать для ИД, нажимая "
 "на них."
+
+#, python-format
+msgid ""
+"Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
+"<strong>%(time)s</strong>."
+msgstr ""
+"К сожалению, вы не можете выбрать IOTD прямо сейчас: %(reason)s. Повторите "
+"попытку через <strong>%(time)s</strong>."
 
 msgid "This queue is currently empty."
 msgstr "Пока эта очередь пуста."

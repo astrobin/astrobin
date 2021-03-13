@@ -61,6 +61,12 @@ NOTICE_TYPES = (
         2,
     ),
     (
+        'comment_approved',
+        _('Your comment was approved'),
+        '',
+        2,
+    ),
+    (
         'new_bookmark',
         _('Your image was bookmarked'),
         '',
@@ -231,6 +237,30 @@ NOTICE_TYPES = (
     (
         'new_payment',
         _("Thank you for your payment!"),
+        '',
+        2
+    ),
+    (
+        'iotd_staff_inactive_removal_notice',
+        _("You were removed from the IOTD staff"),
+        '',
+        2
+    ),
+    (
+        'iotd_staff_inactive_warning',
+        _("You have been inactive as an IOTD staff member"),
+        '',
+        2
+    ),
+    (
+        'image_you_promoted_is_tp',
+        _("An image you promoted made it to Top Pick"),
+        '',
+        2
+    ),
+    (
+        'image_you_promoted_is_iotd',
+        _("An image you promoted made it to IOTD"),
         '',
         2
     )
