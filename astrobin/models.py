@@ -2072,14 +2072,14 @@ class UserProfile(SafeDeleteModel):
         help_text=_("If you provide this, AstroBin will tag you on Instagram if it's sharing an image of yours."),
         validators=[
             MinLengthValidator(4),
-            MaxLengthValidator(30),
+            MaxLengthValidator(31),
             RegexValidator(
                 '^@[\w](?!.*?\.{2})[\w.]{1,28}[\w]$',
                 _('An Instagram username must be between 3 and 30 characters, start with an @ sign, and only '
                   'have letters, numbers, periods, and underlines.')
             )
         ],
-        max_length=30,
+        max_length=31,
         null=True,
         blank=True
     )
