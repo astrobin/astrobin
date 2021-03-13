@@ -81,6 +81,7 @@ class IotdFeed(Feed):
     def item_extra_kwargs(self, item):
         return {
             'content_encoded': self.item_content_encoded(item),
+            'instagram_username': item.image.user.userprofile.instagram_username
         }
 
 

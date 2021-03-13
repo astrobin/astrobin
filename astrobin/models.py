@@ -13,6 +13,7 @@ from urlparse import urlparse
 
 import boto3
 from django.core.files.images import get_image_dimensions
+from django.core.validators import MinLengthValidator, MaxLengthValidator, RegexValidator
 from image_cropping import ImageRatioField
 
 from astrobin.enums import SubjectType, SolarSystemSubject
@@ -2064,6 +2065,23 @@ class UserProfile(SafeDeleteModel):
         null=True,
         blank=True,
         help_text=_("Do you have any hobbies other than astrophotography?"),
+    )
+
+    instagram_username = models.CharField(
+        verbose_name=_("Instagram username"),
+        help_text=_("If you provide this, AstroBin will tag you on Instagram if it's sharing an image of yours."),
+        validators=[
+            MinLengthValidator(4),
+            MaxLengthValidator(30),
+            RegexValidator(
+                '^@[\w](?!.*?\.{2})[\w.]{1,28}[\w]$',
+                _('An Instagram username must be between 3 and 30 characters, start with an @ sign, and only '
+                  'have letters, numbers, periods, and underlines.')
+            )
+        ],
+        max_length=30,
+        null=True,
+        blank=True
     )
 
     timezone = models.CharField(
