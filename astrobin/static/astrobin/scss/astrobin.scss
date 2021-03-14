@@ -1113,80 +1113,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   margin-right: $spacer-small;
 }
 
-.avatar-block {
-  .avatar {
-    float: left;
-  }
-
-  .avatar img {
-    @include rounded-corners(20px);
-  }
-
-  .username {
-    font-size: 1.5em;
-    margin-left: 120px;
-    margin-top: $spacer-small;
-
-    a.astrobin-username {
-      font-size: 80%;
-      display: inline-block;
-      margin-bottom: 1rem;
-    }
-
-    .data {
-      display: block;
-      font-size: 60%;
-      color: darken($text-color, 10%);
-      margin-top: $spacer-small;
-      margin-bottom: $spacer-medium;
-
-      .license {
-        margin-right: $spacer-small;
-      }
-    }
-
-    .views, .bookmarks, .likes {
-      font-size: 85%;
-      color: darken($text-color, 15%);
-      margin-right: $spacer-medium;
-
-      .number {
-        color: $strong-text-color;
-        font-weight: bold;
-      }
-    }
-
-    .likes a, .bookmarks a {
-      color: darken($text-color, 15%);
-      border-bottom: 1px dotted #646464;
-    }
-
-    .property-bookmark {
-      margin: 0;
-      width: 30px;
-
-      button, a {
-        font-size: 12px;
-        line-height: initial;
-      }
-    }
-  }
-}
-
-.avatar {
-  position: relative;
-
-  img {
-    @include rounded-corners(20px);
-  }
-
-  .property-follow {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-  }
-}
-
 .index-section {
   margin-bottom: $spacer-xxxlarge;
 }
@@ -1327,6 +1253,90 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
+.avatar-block {
+  @media screen and (min-width: 768px) {
+    > .header {
+      padding: 12px;
+
+      a.astrobin-username {
+        display: inline-block;
+        white-space: normal;
+      }
+    }
+  }
+
+  .avatar {
+    float: left;
+  }
+
+  .avatar img {
+    @include rounded-corners(20px);
+  }
+
+  .username {
+    font-size: 1.5em;
+    margin-left: 120px;
+    margin-top: $spacer-small;
+
+    a.astrobin-username {
+      font-size: 80%;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .data {
+      display: block;
+      font-size: 60%;
+      color: darken($text-color, 10%);
+      margin-top: $spacer-small;
+      margin-bottom: $spacer-medium;
+
+      .license {
+        margin-right: $spacer-small;
+      }
+    }
+
+    .views, .bookmarks, .likes {
+      font-size: 85%;
+      color: darken($text-color, 15%);
+      margin-right: $spacer-medium;
+
+      .number {
+        color: $strong-text-color;
+        font-weight: bold;
+      }
+    }
+
+    .likes a, .bookmarks a {
+      color: darken($text-color, 15%);
+      border-bottom: 1px dotted #646464;
+    }
+
+    .property-bookmark {
+      margin: 0;
+      width: 30px;
+
+      button, a {
+        font-size: 12px;
+        line-height: initial;
+      }
+    }
+  }
+}
+
+.avatar {
+  position: relative;
+
+  img {
+    @include rounded-corners(20px);
+  }
+
+  .property-follow {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
+}
 
 .advertisement.full-width-wide-ad {
   margin: -20px -30px 30px;
