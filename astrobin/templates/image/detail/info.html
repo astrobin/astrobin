@@ -10,8 +10,9 @@
 {% load staticfiles %}
 
 <div class="subtle-container avatar-block">
-    <div class="header visible-phone">
-        <h4><i class="icon-user"></i> {% trans "Author" %}</h4>
+    <div class="header">
+        <h4 class="visible-phone"><i class="icon-user"></i> {% trans "Author" %}</h4>
+        <h4 class="hidden-phone">{% astrobin_username image.user %}</h4>
     </div>
 
     <div class="avatar">
@@ -28,7 +29,7 @@
         </a>
     </div>
     <div class="username">
-        {% astrobin_username image.user %}
+        <span class="visible-phone">{% astrobin_username image.user %}</span>
         <div class="data">
             <div>
                 <img class="license"
