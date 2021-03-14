@@ -5,15 +5,15 @@
     <li class="dropdown">
         <a data-toggle="modal" href="#readonly-mode-modal">
             <i class="icon-legal icon-white"></i>
-            <span class="visible-desktop">{% trans "Admin" %}</span>
+            <span class="hidden-phone hidden-tablet">{% trans "Admin" %}</span>
         </a>
     </li>
     {% else %}
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <i class="icon-legal icon-white"></i>
-            <span class="visible-desktop">{% trans "Admin" %}</span>
-            <span class="caret visible-desktop"></span>
+            <span class="hidden-phone hidden-tablet">{% trans "Admin" %}</span>
+            <span class="caret hidden-phone hidden-tablet"></span>
         </a>
         <ul class="dropdown-menu">
             <li>
