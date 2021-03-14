@@ -99,6 +99,7 @@ def common_variables(request):
         'STATIC_URL': settings.STATIC_URL,
         'LANGUAGE_CODE': request.LANGUAGE_CODE if hasattr(request, "LANGUAGE_CODE") else "en",
         'DEBUG_MODE': settings.DEBUG,
+        'TESTING': settings.TESTING,
         'REQUEST_COUNTRY': get_client_country_code(request),
 
         'IMAGES_URL': settings.IMAGES_URL,
