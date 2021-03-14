@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import mixins
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -18,6 +19,7 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
     serializer_class = ImageSerializer
     queryset = Image.objects_including_wip.all()
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
+    parser_classes = [CamelCaseJSONParser]
     filter_class = ImageFilter
     permission_classes = [
         IsAuthenticatedOrReadOnly,

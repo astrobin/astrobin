@@ -22,7 +22,6 @@ class ImageSerializer(serializers.ModelSerializer):
             'pk',
             'hash',
             'title',
-            'image_file',
             'is_wip',
             'skip_notifications',
             'w',
@@ -44,4 +43,5 @@ class ImageSerializer(serializers.ModelSerializer):
             'mouse_hover_image',
             'allow_comments',
             'uploader_in_progress',
+            'square_cropping',
         )
