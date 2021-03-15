@@ -9,11 +9,7 @@ class ImageSerializer(serializers.ModelSerializer):
     hash = serializers.PrimaryKeyRelatedField(read_only=True)
     w = serializers.IntegerField()
     h = serializers.IntegerField()
-    key_value_tags = serializers.SerializerMethodField()
-    uploader_in_progress = serializers.NullBooleanField()
-
-    def get_key_value_tags(self, image):
-        return '\n'.join(["%s=%s" % (x.key, x.value) for x in KeyValueTag.objects.filter(image=image)])
+    uploader_in_progress = serializers.NullBooleanField(read_only=True)
 
     class Meta:
         model = Image
@@ -39,7 +35,6 @@ class ImageSerializer(serializers.ModelSerializer):
             'data_source',
             'remote_source',
             'part_of_group_set',
-            'key_value_tags',
             'mouse_hover_image',
             'allow_comments',
             'uploader_in_progress',
