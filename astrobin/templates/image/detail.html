@@ -105,7 +105,7 @@
         </div> <!-- /left pane -->
 
         <div class="span4"> <!-- right pane -->
-            {% if not request.user_agent.is_mobile %}
+            {% if request.user_agent.is_pc or request.user_agent.is_tablet or TESTING %}
                 <div class="hidden-phone">
                     {% include 'image/detail/info.html' %}
                     {% include 'image/detail/like.html' %}

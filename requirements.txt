@@ -147,9 +147,9 @@ Pillow==6.2.2
 ply==3.11
 psycopg2==2.7.1
 -e git+https://github.com/siovene/pybbm.git@8b044fbf2906fd8542a96020d012ac93743ee33a#egg=pybbm
-pycodestyle==2.6.0
+pycodestyle==2.7.0
 pycparser==2.20
-pyflakes==2.2.0
+pyflakes==2.3.0
 Pygments==2.5.2
 pyOpenSSL==20.0.1
 pyparsing==2.4.7
@@ -181,7 +181,7 @@ six==1.15.0
 slimit==0.8.1
 spark-parser==1.8.9
 sphinx-me==0.3
-SQLAlchemy==1.3.23
+SQLAlchemy==1.4.0
 sqlparse==0.3.1
 stripe==2.56.0
 tblib==1.7.0
@@ -191,14 +191,14 @@ typing==3.7.4.3
 ua-parser==0.10.0
 uncompyle6==3.7.4
 Unidecode==1.2.0
-urllib3==1.26.3
+urllib3==1.26.4
 user-agents==2.2.0
 vine==1.3.0
 watchtower==0.8.0
 webencodings==0.5.1
 WebOb==1.8.7
 Werkzeug==1.0.1
-xdis==5.0.7
+xdis==5.0.8
 yolk==0.4.3
 zipp==1.2.0
 zope.event==4.5.0

@@ -1,3 +1,4 @@
+PYBB_BODY_CLEANERS = []
 PYBB_DEFAULT_TITLE = "AstroBin Forum"
 PYBB_DEFAULT_FROM_EMAIL = "AstroBin Forum <noreply@astrobin.com>"
 PYBB_NICE_URL = True
