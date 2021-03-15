@@ -9,6 +9,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'astrobin.middleware.LastSeenMiddleware',
     'astrobin.middleware.LogoutDeletedUserMiddleware',
+    'astrobin.middleware.MarkNotificationAsReadMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
     'gadjo.requestprovider.middleware.RequestProvider',

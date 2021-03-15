@@ -701,6 +701,9 @@ astrobin_common = {
 
     register_notification_on_click: function (options = {}) {
         $(document).ready(function () {
+            var url_without_nid = astrobin_common.remove_url_param(window.location.href, "nid");
+            window.history.replaceState('', document.title, url_without_nid);
+
             $(".notifications-modal .notification-item .notification-content a").click(function () {
                 var $item = $(this).closest(".notification-item");
                 var $loading = $item.find(".notification-mark-as-read .loading")
@@ -708,18 +711,20 @@ astrobin_common = {
                 var links = astrobin_common.get_links_in_text($item.find(".notification-content").html());
                 var open_in_new_tab = !!options && options.open_notifications_in_new_tab;
 
-                astrobin_common.mark_notification_as_read(id).then(function() {
-                    if (links.length > 0) {
-                        if (!open_in_new_tab) {
-                            $loading.show();
-                        }
+                if (links.length > 0) {
+                    var link = astrobin_common.add_or_update_url_param(links[0], "nid", id);
 
-                        Object.assign(document.createElement("a"), {
-                            target: open_in_new_tab ? "_blank" : "_self",
-                            href: links[0],
-                        }).click();
+                    if (open_in_new_tab) {
+                        astrobin_common.mark_notification_as_read(id);
+                    } else {
+                        $loading.show();
                     }
-                });
+
+                    Object.assign(document.createElement("a"), {
+                        target: open_in_new_tab ? "_blank" : "_self",
+                        href: link,
+                    }).click();
+                }
 
                 return false;
             })
@@ -746,6 +751,40 @@ astrobin_common = {
         }
 
         return links;
+    },
+
+    add_or_update_url_param: function(url, name, value) {
+        var regex = new RegExp("[&\\?]" + name + "=");
+
+        if (regex.test(url)) {
+            regex = new RegExp("([&\\?])" + name + "=\\S+");
+            return url.replace(regex, "$1" + name + "=" + value);
+        }
+
+        if (url.indexOf("?") > -1) {
+            return url + "&" + name + "=" + value;
+        }
+
+        return url + "?" + name + "=" + value;
+    },
+
+    remove_url_param: function(url, parameter) {
+        var urlParts = url.split('?');
+
+        if (urlParts.length >= 2) {
+            var prefix = encodeURIComponent(parameter) + '=';
+            var pars = urlParts[1].split(/[&;]/g);
+
+            for (var i = pars.length; i-- > 0;) {
+                if (pars[i].lastIndexOf(prefix, 0) !== -1) {
+                    pars.splice(i, 1);
+                }
+            }
+
+            return urlParts[0] + (pars.length > 0 ? '?' + pars.join('&') : '');
+        }
+
+        return url;
     },
 
     init: function (current_username, config) {
