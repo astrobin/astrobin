@@ -74,7 +74,14 @@ PYBB_SMILES = {
 PYBB_TOPIC_PAGE_SIZE = 25
 PYBB_FORUM_PAGE_SIZE = 50
 
-def pybb_premoderation(user, post_content):
+def pybb_premoderation(user, post_content, forum):
+    if user.is_superuser:
+        return True
+
+    # Everybody gets moderated in these forums
+    if forum and forum.name in ('Anything goes', 'Other'):
+        return False
+
     # Paying members always approved
     from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
     if not is_free(user):

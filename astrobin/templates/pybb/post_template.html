@@ -16,7 +16,7 @@
 
 <a class="anchor" name="post-{{ post.id }}"></a> {# may be remove this string? #}
 
-<table class="table post {% if post.on_moderation %}on-moderation{% endif %}" id="post-{{ post.id }}">
+<table class="table post {% if post.on_moderation and user.is_superuser %}on-moderation{% endif %}" id="post-{{ post.id }}">
     <thead class="post-header">
     <tr>
     <th>
@@ -93,8 +93,8 @@
                     </a>
                 {% endif %}
 
-                {% if post|pybb_posted_by:user or user.is_moderator %}
-                    {% if post.created|more_recent_than:86400 or user.is_moderator %}
+                {% if post|pybb_posted_by:user or user.is_superuser %}
+                    {% if post.created|more_recent_than:86400 or user.is_superuser %}
                         <a href="{% url 'pybb:edit_post' pk=post.id %}"
                            class="btn btn-mini btn-primary">
                             <i class="icon-pencil"></i> {% trans "Edit" %}
@@ -155,7 +155,7 @@
                     {% endif %}
                 {% endif %}
 
-                {% if user.is_moderator %}
+                {% if user.is_superuser %}
                     <a class="btn btn-mini btn-danger"
                        onclick="pybb_delete_post('{% url 'pybb:delete_post' post.id %}', 'post-{{ post.id }}', '{% trans 'Delete post?' %}'); return false;"
                        href="{% url 'pybb:delete_post' post.id %}">
