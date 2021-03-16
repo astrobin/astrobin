@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-06 22:48+0000\n"
+"POT-Creation-Date: 2021-03-16 18:49+0000\n"
 "PO-Revision-Date: 2015-12-30 10:50+0000\n"
 "Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -1848,6 +1848,20 @@ msgstr "Harrastukset"
 
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "Mitä muita harrastuksia sinulla on tähtikuvaamisen lisäksi?"
+
+#, fuzzy
+msgid "Instagram username"
+msgstr "Vaihda avataria."
+
+msgid ""
+"If you provide this, AstroBin will tag you on Instagram if it's sharing an "
+"image of yours."
+msgstr ""
+
+msgid ""
+"An Instagram username must be between 3 and 30 characters, start with an @ "
+"sign, and only have letters, numbers, periods, and underlines."
+msgstr ""
 
 msgid "Timezone"
 msgstr "Aikavyöhyke"
@@ -3984,6 +3998,21 @@ msgstr "Kuvan koko"
 msgid "Full size"
 msgstr "Täysikokoinen:"
 
+#, fuzzy
+#| msgid "Please note!"
+msgid "Please note"
+msgstr "Huomaa!"
+
+#, python-format
+msgid ""
+"You are on a Free account, and when you delete an image, your upload counter "
+"does not decrease (unless the image is deleted within 24 hours of uploading "
+"it). The Free account is not a way to keep your most recent or best 10 "
+"images on AstroBin, but a trial period for you to decide whether or not a "
+"paid subscription is worth it. For more information, please <a href=\"%(url)s"
+"\">click here</a>."
+msgstr ""
+
 msgid "Delete this revision?"
 msgstr "Poista tämä versio?"
 
@@ -4560,6 +4589,18 @@ msgstr "Valitse leveyspiiri (latitudi)"
 msgid "Galactic latitude"
 msgstr "Valitse leveyspiiri (latitudi)"
 
+#, fuzzy
+#| msgid "Warning!"
+msgid "Warning"
+msgstr "Huomio!"
+
+#, python-format
+msgid ""
+"You are about to open a large file of about %(size)s. Depending on your "
+"download speed, it might take several seconds or even minutes to view the "
+"file."
+msgstr ""
+
 msgid "Click-and-drag anywhere on the image."
 msgstr ""
 
@@ -4764,6 +4805,24 @@ msgstr "Kiitos Astrobinin tukemisesta!"
 msgid "You can review your API keys at %(api_keys_url)s."
 msgstr ""
 
+#, fuzzy
+#| msgid "Your image was plate-solved"
+msgid "Your comment was approved!"
+msgstr "Kuvakenttäsi on ratkaistu"
+
+msgid ""
+"As a new user on AstroBin, your first 3 comments will go through a "
+"moderation queue, to prevent spam."
+msgstr ""
+
+msgid "The following comment of yours was just approved by a moderator."
+msgstr ""
+
+#, fuzzy
+#| msgid "Allow comments"
+msgid "View comment"
+msgstr "Salli kommentit"
+
 msgid "Congratulations for your first image on AstroBin!"
 msgstr ""
 
@@ -4954,6 +5013,45 @@ msgstr "<a href=\"%(object_url)s\">Kuvasi astrometrinen ratkaisu onnistui.</a>"
 
 msgid "Your image has been successfully plate-solved."
 msgstr "Kuvakenttäsi saatiin ratkaistua."
+
+msgid "An image you promoted made it to IOTD"
+msgstr ""
+
+msgid "An image you promoted made it to Top Pick"
+msgstr ""
+
+#, python-format
+msgid ""
+"You have been inactive as an IOTD Submitter or Reviewer for %(days)s days or "
+"more."
+msgstr ""
+
+msgid ""
+"While the AstroBin IOTD selection process has a good level of redundancy "
+"built into the system, it still relies on the members of the staff regularly "
+"making selections from their respective queues."
+msgstr ""
+
+msgid ""
+"As you have not been active for a significant amount of time, you have been "
+"removed from the IOTD staff for now."
+msgstr ""
+
+msgid ""
+"This will ensure that potential IOTD or Top Pick candidates don't go "
+"unnoticed sitting in the queue of an inactive staff member."
+msgstr ""
+
+#, fuzzy
+#| msgid "Thank you for supporting AstroBin!"
+msgid "Thank you for understanding!"
+msgstr "Kiitos Astrobinin tukemisesta!"
+
+#, python-format
+msgid ""
+"After %(max_inactivity_days)s days of inactivity (counted from the last "
+"selection you made in your queue) you will be removed from the IOTD staff."
+msgstr ""
 
 #, fuzzy, python-format
 #| msgid ""
@@ -5795,11 +5893,6 @@ msgstr "Sulje"
 msgid "Please select a forum"
 msgstr ""
 
-#, fuzzy
-#| msgid "Please note!"
-msgid "Please note"
-msgstr "Huomaa!"
-
 msgid ""
 "To post a new topic, please first go to the forum that is most relevant to "
 "your topic."
@@ -6445,6 +6538,18 @@ msgstr ""
 "Kuvausajankohdat ovat myös tärkeitä."
 
 #, fuzzy
+#| msgid "What kind of image is this?"
+msgid "Can't find your images?"
+msgstr "Millainen kuva tämä on?"
+
+#, python-format
+msgid ""
+"All your images are still unpublished. <a href=\"%(user_page)s?staging"
+"\">Visit your Staging Area</a> to find them, or <a href="
+"\"%(staging_area_learn_more_link)s\">learn more</a>."
+msgstr ""
+
+#, fuzzy
 msgid "Delete account"
 msgstr "Poista keskustelu"
 
@@ -6941,6 +7046,11 @@ msgstr "kaarisekuntia/pikseli"
 msgid "Telescope type"
 msgstr "Kaukoputken tyyppi"
 
+#, fuzzy
+#| msgid "Integration hours"
+msgid "Integration time (hours)"
+msgstr "Valotusaika"
+
 #, python-format
 msgid ""
 "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Ultimate</a> "
@@ -6971,6 +7081,12 @@ msgstr "Perustiedot"
 #| msgid "Guider/Planetary"
 msgid "Guider/planetary"
 msgstr "Seuranta/Planeettakamera"
+
+msgid "Min"
+msgstr ""
+
+msgid "Max"
+msgstr ""
 
 #, fuzzy
 msgid "Imaging telescopes"
@@ -7460,9 +7576,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Back to the plans"
 #~ msgstr "Takaisin ylös"
-
-#~ msgid "Thank you for supporting AstroBin!"
-#~ msgstr "Kiitos Astrobinin tukemisesta!"
 
 #, fuzzy
 #~ msgid "Your inactive subscription plans"
@@ -8875,9 +8988,6 @@ msgstr ""
 #~ msgid "New image revision from a user you follow"
 #~ msgstr "Uusi kuvaversio seuraamaltasi käyttäjältä"
 
-#~ msgid "Your image was plate-solved"
-#~ msgstr "Kuvakenttäsi on ratkaistu"
-
 #~ msgid "Your image could not be plate-solved"
 #~ msgstr "Kuvakenttäsi ratkaisu ei onnistunut"
 
@@ -10186,9 +10296,6 @@ msgstr ""
 
 #~ msgid "Sort by:"
 #~ msgstr "Järjestä:"
-
-#~ msgid "Integration hours"
-#~ msgstr "Valotusaika"
 
 #~ msgid "Show by period"
 #~ msgstr "Näytä vaiheen mukaan"

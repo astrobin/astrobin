@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-06 23:05+0000\n"
-"PO-Revision-Date: 2020-12-06 11:54+0000\n"
+"POT-Creation-Date: 2021-03-16 19:04+0000\n"
+"PO-Revision-Date: 2021-03-07 15:12+0000\n"
 "Last-Translator: JeanBaptisteAuroux <jbauroux@bbox.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1607255660.000000\n"
+"X-POOTLE-MTIME: 1615129976.000000\n"
 
 msgid "Notifications"
 msgstr "Notifications"
@@ -54,6 +54,11 @@ msgstr "Votre image a reçu un nouveau commentaire"
 
 msgid "There was a reply to your comment"
 msgstr "Quelqu'un a répondu à votre commentaire"
+
+#, fuzzy
+#| msgid "Your comment was liked"
+msgid "Your comment was approved"
+msgstr "Un utilisateur a aimé votre commentaire"
 
 msgid "Your image was bookmarked"
 msgstr "Votre image a été ajoutée en favori"
@@ -141,6 +146,18 @@ msgid "Thank you for getting a subscription!"
 msgstr "Merci d'avoir souscrit à un abonnement !"
 
 msgid "Thank you for your payment!"
+msgstr "Merci pour votre paiement !"
+
+msgid "You were removed from the IOTD staff"
+msgstr ""
+
+msgid "You have been inactive as an IOTD staff member"
+msgstr ""
+
+msgid "An image you promoted made it to Top Pick"
+msgstr ""
+
+msgid "An image you promoted made it to IOTD"
 msgstr ""
 
 #~ msgid "New review of a gear item you own"

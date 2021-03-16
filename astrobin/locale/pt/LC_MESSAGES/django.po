@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-06 22:48+0000\n"
+"POT-Creation-Date: 2021-03-16 18:49+0000\n"
 "PO-Revision-Date: 2020-12-30 17:39+0000\n"
 "Last-Translator: XandeGil <xandegil@gmail.com>\n"
 "Language-Team: \n"
@@ -1841,6 +1841,21 @@ msgstr "Passatempos"
 
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "Você possui outros passatempos além de astrofotografia?"
+
+#, fuzzy
+#| msgid "Change your e-mail"
+msgid "Instagram username"
+msgstr "Mudar seu e-mail"
+
+msgid ""
+"If you provide this, AstroBin will tag you on Instagram if it's sharing an "
+"image of yours."
+msgstr ""
+
+msgid ""
+"An Instagram username must be between 3 and 30 characters, start with an @ "
+"sign, and only have letters, numbers, periods, and underlines."
+msgstr ""
 
 msgid "Timezone"
 msgstr "Fuso horário"
@@ -4049,6 +4064,21 @@ msgstr "Tamanho grande"
 msgid "Full size"
 msgstr "Tamanho completo"
 
+#, fuzzy
+#| msgid "Please note!"
+msgid "Please note"
+msgstr "Atenção!"
+
+#, python-format
+msgid ""
+"You are on a Free account, and when you delete an image, your upload counter "
+"does not decrease (unless the image is deleted within 24 hours of uploading "
+"it). The Free account is not a way to keep your most recent or best 10 "
+"images on AstroBin, but a trial period for you to decide whether or not a "
+"paid subscription is worth it. For more information, please <a href=\"%(url)s"
+"\">click here</a>."
+msgstr ""
+
 msgid "Delete this revision?"
 msgstr "Excluir esta versão?"
 
@@ -4661,6 +4691,18 @@ msgstr "Longitude galática"
 msgid "Galactic latitude"
 msgstr "Latitude galática"
 
+#, fuzzy
+#| msgid "Warning!"
+msgid "Warning"
+msgstr "Aviso!"
+
+#, python-format
+msgid ""
+"You are about to open a large file of about %(size)s. Depending on your "
+"download speed, it might take several seconds or even minutes to view the "
+"file."
+msgstr ""
+
 msgid "Click-and-drag anywhere on the image."
 msgstr ""
 
@@ -4849,6 +4891,24 @@ msgstr "Obrigado por apoiar o AstroBin!"
 msgid "You can review your API keys at %(api_keys_url)s."
 msgstr ""
 
+#, fuzzy
+#| msgid "Your image was plate-solved"
+msgid "Your comment was approved!"
+msgstr "Identificação bem sucedida de objetos na sua imagem"
+
+msgid ""
+"As a new user on AstroBin, your first 3 comments will go through a "
+"moderation queue, to prevent spam."
+msgstr ""
+
+msgid "The following comment of yours was just approved by a moderator."
+msgstr ""
+
+#, fuzzy
+#| msgid "Allow comments"
+msgid "View comment"
+msgstr "Permitir comentários"
+
 msgid "Congratulations for your first image on AstroBin!"
 msgstr ""
 
@@ -5036,6 +5096,45 @@ msgstr ""
 
 msgid "Your image has been successfully plate-solved."
 msgstr "Sua imagem foi resolvida em placa com sucesso."
+
+msgid "An image you promoted made it to IOTD"
+msgstr ""
+
+msgid "An image you promoted made it to Top Pick"
+msgstr ""
+
+#, python-format
+msgid ""
+"You have been inactive as an IOTD Submitter or Reviewer for %(days)s days or "
+"more."
+msgstr ""
+
+msgid ""
+"While the AstroBin IOTD selection process has a good level of redundancy "
+"built into the system, it still relies on the members of the staff regularly "
+"making selections from their respective queues."
+msgstr ""
+
+msgid ""
+"As you have not been active for a significant amount of time, you have been "
+"removed from the IOTD staff for now."
+msgstr ""
+
+msgid ""
+"This will ensure that potential IOTD or Top Pick candidates don't go "
+"unnoticed sitting in the queue of an inactive staff member."
+msgstr ""
+
+#, fuzzy
+#| msgid "Thank you for supporting AstroBin!"
+msgid "Thank you for understanding!"
+msgstr "Obrigado por apoiar o AstroBin!"
+
+#, python-format
+msgid ""
+"After %(max_inactivity_days)s days of inactivity (counted from the last "
+"selection you made in your queue) you will be removed from the IOTD staff."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5861,11 +5960,6 @@ msgstr "Novo tópico"
 msgid "Please select a forum"
 msgstr ""
 
-#, fuzzy
-#| msgid "Please note!"
-msgid "Please note"
-msgstr "Atenção!"
-
 msgid ""
 "To post a new topic, please first go to the forum that is most relevant to "
 "your topic."
@@ -6522,6 +6616,18 @@ msgstr ""
 "preencher algumas informações. Telescópios, câmeras e objetos são o mínimo. "
 "As datas das capturas também são muito importantes."
 
+#, fuzzy
+#| msgid "What kind of image is this?"
+msgid "Can't find your images?"
+msgstr "Que tipo de imagem é esta?"
+
+#, python-format
+msgid ""
+"All your images are still unpublished. <a href=\"%(user_page)s?staging"
+"\">Visit your Staging Area</a> to find them, or <a href="
+"\"%(staging_area_learn_more_link)s\">learn more</a>."
+msgstr ""
+
 msgid "Delete account"
 msgstr "Excluir conta"
 
@@ -6998,6 +7104,11 @@ msgstr "Escala de pixels (arcseg/pixel)"
 msgid "Telescope type"
 msgstr "Tipo de telescópio"
 
+#, fuzzy
+#| msgid "Integration hours, daily"
+msgid "Integration time (hours)"
+msgstr "Horas de captura, diariamente"
+
 #, python-format
 msgid ""
 "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Ultimate</a> "
@@ -7027,6 +7138,12 @@ msgstr "Por informações básicas"
 
 msgid "Guider/planetary"
 msgstr "Guia/Planetário"
+
+msgid "Min"
+msgstr ""
+
+msgid "Max"
+msgstr ""
 
 msgid "Imaging telescopes"
 msgstr "Telescópios de imagem"
@@ -7699,9 +7816,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Sua solicitação foi recebida e estamos aguardando a confirmação final do "
 #~ "PayPal. Sua assinatura deve estar ativa em alguns minutos!"
-
-#~ msgid "Thank you for supporting AstroBin!"
-#~ msgstr "Obrigado por apoiar o AstroBin!"
 
 #~ msgid "Your inactive subscription plans"
 #~ msgstr "Seus planos de assinatura inativos"
@@ -9109,9 +9223,6 @@ msgstr ""
 
 #~ msgid "New image revision from a user you follow"
 #~ msgstr "Nova revisão de imagem de um usuário que você segue"
-
-#~ msgid "Your image was plate-solved"
-#~ msgstr "Identificação bem sucedida de objetos na sua imagem"
 
 #~ msgid "Your image could not be plate-solved"
 #~ msgstr "Identificação mal sucedida de objetos na sua imagem"

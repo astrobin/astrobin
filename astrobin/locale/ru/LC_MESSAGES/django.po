@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-06 22:48+0000\n"
+"POT-Creation-Date: 2021-03-16 18:49+0000\n"
 "PO-Revision-Date: 2021-03-04 07:53+0000\n"
 "Last-Translator: NadirAstro <nadir_teymurov@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1834,6 +1834,21 @@ msgstr "Увлечения"
 
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "Есть ли у вас другие увлечения, кроме астрофотографии?"
+
+#, fuzzy
+#| msgid "Change your username"
+msgid "Instagram username"
+msgstr "Изменить вашего пользователя"
+
+msgid ""
+"If you provide this, AstroBin will tag you on Instagram if it's sharing an "
+"image of yours."
+msgstr ""
+
+msgid ""
+"An Instagram username must be between 3 and 30 characters, start with an @ "
+"sign, and only have letters, numbers, periods, and underlines."
+msgstr ""
 
 msgid "Timezone"
 msgstr "Часовой пояс"
@@ -4018,6 +4033,19 @@ msgstr "Большой размер"
 msgid "Full size"
 msgstr "Полный размер"
 
+msgid "Please note"
+msgstr "Пожалуйста, обратите внимание"
+
+#, python-format
+msgid ""
+"You are on a Free account, and when you delete an image, your upload counter "
+"does not decrease (unless the image is deleted within 24 hours of uploading "
+"it). The Free account is not a way to keep your most recent or best 10 "
+"images on AstroBin, but a trial period for you to decide whether or not a "
+"paid subscription is worth it. For more information, please <a href=\"%(url)s"
+"\">click here</a>."
+msgstr ""
+
 msgid "Delete this revision?"
 msgstr "Удалить эту версию?"
 
@@ -4611,6 +4639,18 @@ msgstr "Галактическая долгота"
 msgid "Galactic latitude"
 msgstr "Галактическая широта"
 
+#, fuzzy
+#| msgid "Warning!"
+msgid "Warning"
+msgstr "Внимание!"
+
+#, python-format
+msgid ""
+"You are about to open a large file of about %(size)s. Depending on your "
+"download speed, it might take several seconds or even minutes to view the "
+"file."
+msgstr ""
+
 msgid "Click-and-drag anywhere on the image."
 msgstr "Щелкните и перетащите в любое место на изображении."
 
@@ -4794,6 +4834,24 @@ msgstr "Спасибо за использование AstroBin API !"
 #, python-format
 msgid "You can review your API keys at %(api_keys_url)s."
 msgstr "Вы можете просмотреть свои ключи API на странице %(api_keys_url)s."
+
+#, fuzzy
+#| msgid "Your image was plate-solved"
+msgid "Your comment was approved!"
+msgstr "Ваше изображение обработано по координатам"
+
+msgid ""
+"As a new user on AstroBin, your first 3 comments will go through a "
+"moderation queue, to prevent spam."
+msgstr ""
+
+msgid "The following comment of yours was just approved by a moderator."
+msgstr ""
+
+#, fuzzy
+#| msgid "Allow comments"
+msgid "View comment"
+msgstr "Разрешить комментарии"
 
 msgid "Congratulations for your first image on AstroBin!"
 msgstr "Поздравляем с вашим первым изображением на AstroBin!"
@@ -5013,6 +5071,45 @@ msgstr ""
 
 msgid "Your image has been successfully plate-solved."
 msgstr "Ваше изображение было успешно определено по координатам."
+
+msgid "An image you promoted made it to IOTD"
+msgstr ""
+
+msgid "An image you promoted made it to Top Pick"
+msgstr ""
+
+#, python-format
+msgid ""
+"You have been inactive as an IOTD Submitter or Reviewer for %(days)s days or "
+"more."
+msgstr ""
+
+msgid ""
+"While the AstroBin IOTD selection process has a good level of redundancy "
+"built into the system, it still relies on the members of the staff regularly "
+"making selections from their respective queues."
+msgstr ""
+
+msgid ""
+"As you have not been active for a significant amount of time, you have been "
+"removed from the IOTD staff for now."
+msgstr ""
+
+msgid ""
+"This will ensure that potential IOTD or Top Pick candidates don't go "
+"unnoticed sitting in the queue of an inactive staff member."
+msgstr ""
+
+#, fuzzy
+#| msgid "Thank you for supporting AstroBin!"
+msgid "Thank you for understanding!"
+msgstr "Спасибо за поддержку AstroBin!"
+
+#, python-format
+msgid ""
+"After %(max_inactivity_days)s days of inactivity (counted from the last "
+"selection you made in your queue) you will be removed from the IOTD staff."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5856,9 +5953,6 @@ msgstr "Создать тему"
 msgid "Please select a forum"
 msgstr "Пожалуйста, выберите форум"
 
-msgid "Please note"
-msgstr "Пожалуйста, обратите внимание"
-
 msgid ""
 "To post a new topic, please first go to the forum that is most relevant to "
 "your topic."
@@ -6518,6 +6612,18 @@ msgstr ""
 "камеры, использованные для съемки, и объекты - это как минимум. Даты съемок "
 "также очень важны."
 
+#, fuzzy
+#| msgid "What kind of image is this?"
+msgid "Can't find your images?"
+msgstr "Какого рода это изображение?"
+
+#, python-format
+msgid ""
+"All your images are still unpublished. <a href=\"%(user_page)s?staging"
+"\">Visit your Staging Area</a> to find them, or <a href="
+"\"%(staging_area_learn_more_link)s\">learn more</a>."
+msgstr ""
+
 msgid "Delete account"
 msgstr "Удалить аккаунт"
 
@@ -6986,6 +7092,11 @@ msgstr "Масштаб угл.сек/пиксель"
 msgid "Telescope type"
 msgstr "Тип телескопа"
 
+#, fuzzy
+#| msgid "Integration hours, daily"
+msgid "Integration time (hours)"
+msgstr "Накопленные часы, за день"
+
 #, python-format
 msgid ""
 "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Ultimate</a> "
@@ -7011,6 +7122,12 @@ msgstr "Номинация на лучшее изображение"
 
 msgid "Guider/planetary"
 msgstr "Гид/планетная"
+
+msgid "Min"
+msgstr ""
+
+msgid "Max"
+msgstr ""
 
 msgid "Imaging telescopes"
 msgstr "Объектив"
@@ -7695,9 +7812,6 @@ msgstr "Извините, это имя пользователя уже суще
 #~ msgstr ""
 #~ "Ваш запрос отправлен, и мы ожидаем окончательного подтверждения от "
 #~ "PayPal. Ваша подписка будет активирована в течение нескольких минут!"
-
-#~ msgid "Thank you for supporting AstroBin!"
-#~ msgstr "Спасибо за поддержку AstroBin!"
 
 #~ msgid "Your inactive subscription plans"
 #~ msgstr "Ваши неактивные планы подписки"
@@ -9642,9 +9756,6 @@ msgstr "Извините, это имя пользователя уже суще
 
 #~ msgid "New image revision from a user you follow"
 #~ msgstr "Новая версия изображения от пользователя, на которого вы подписаны"
-
-#~ msgid "Your image was plate-solved"
-#~ msgstr "Ваше изображение обработано по координатам"
 
 #~ msgid "Your image could not be plate-solved"
 #~ msgstr "Ваше изображение не может быть обработано по координатам"
