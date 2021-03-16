@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
-from astrobin.models import Image
-from astrobin_apps_images.models import KeyValueTag
+from astrobin.models import Image, UserProfile
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -10,6 +9,25 @@ class ImageSerializer(serializers.ModelSerializer):
     w = serializers.IntegerField()
     h = serializers.IntegerField()
     uploader_in_progress = serializers.NullBooleanField(read_only=True)
+
+    def update(self, instance, validated_data):
+        instance = super(ImageSerializer, self).update(instance, validated_data)  # type: Image
+
+        profile = instance.user.userprofile  # type: UserProfile
+
+        if instance.watermark != profile.default_watermark or \
+            instance.watermark_text != profile.default_watermark_text or \
+            instance.watermark_position != profile.default_watermark_position or \
+            instance.watermark_size != profile.default_watermark_size or \
+            instance.watermark_opacity != profile.default_watermark_opacity:
+            profile.default_watermark = instance.watermark
+            profile.default_watermark_text = instance.watermark_text
+            profile.default_watermark_position = instance.watermark_position
+            profile.default_watermark_size = instance.watermark_size
+            profile.default_watermark_opacity = instance.watermark_opacity
+            profile.save(keep_deleted=True)
+
+        return instance
 
     class Meta:
         model = Image
@@ -39,4 +57,9 @@ class ImageSerializer(serializers.ModelSerializer):
             'allow_comments',
             'uploader_in_progress',
             'square_cropping',
+            'watermark',
+            'watermark_text',
+            'watermark_position',
+            'watermark_size',
+            'watermark_opacity',
         )
