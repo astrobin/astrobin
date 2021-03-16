@@ -52,8 +52,11 @@ class CustomForumPermissions(DefaultPermissionHandler):
         if user.is_superuser:
             return True
 
-        if not user.is_staff and (topic.forum.hidden or topic.forum.category.hidden):
-            return False  # only staff may see hidden forum / category
+        if not user.is_superuser and (topic.forum.hidden or topic.forum.category.hidden):
+            return False  # only superuser may see hidden forum / category
+
+        if topic.on_moderation and topic.user == user:
+            return True
 
         try:
             if topic.forum.group and user.is_authenticated():

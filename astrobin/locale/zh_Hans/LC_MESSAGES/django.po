@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-06 22:48+0000\n"
-"PO-Revision-Date: 2021-03-06 20:16+0000\n"
+"POT-Creation-Date: 2021-03-16 18:49+0000\n"
+"PO-Revision-Date: 2021-03-08 20:54+0000\n"
 "Last-Translator: 张熠瑆 Phillip <31302717@qq.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_Hans\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1615061763.000000\n"
+"X-POOTLE-MTIME: 1615236868.000000\n"
 
 msgid "United Kingdom"
 msgstr "英国（大不列颠及北爱尔兰联合王国）"
@@ -963,7 +963,7 @@ msgid "bookmarked"
 msgstr "收藏"
 
 msgid "likes"
-msgstr "收到的赞"
+msgstr "赞"
 
 msgid "created a new public group"
 msgstr "创建了一个新的公开小组"
@@ -1796,6 +1796,21 @@ msgstr "爱好"
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "除了天文摄影以外的其他爱好"
 
+#, fuzzy
+#| msgid "Change your username"
+msgid "Instagram username"
+msgstr "修改您的用户名"
+
+msgid ""
+"If you provide this, AstroBin will tag you on Instagram if it's sharing an "
+"image of yours."
+msgstr ""
+
+msgid ""
+"An Instagram username must be between 3 and 30 characters, start with an @ "
+"sign, and only have letters, numbers, periods, and underlines."
+msgstr ""
+
 msgid "Timezone"
 msgstr "时区"
 
@@ -1913,8 +1928,8 @@ msgid ""
 "ads on this website. AstroBin is a small business run by a single person, "
 "and this kind of support would be amazing. Thank you in advance!"
 msgstr ""
-"这意义重大，如果您选择允许天文相关的、非骚扰性质的广告在这个网站上。AstroBin "
-"是一家由一个人经营的小企业，这种支持匡助良多。提前向您致谢！"
+"这意义重大，如果您选择允许天文相关的、非骚扰性质的广告出现在这个网站上。"
+"AstroBin 是一家由一个人经营的小企业，这种支持匡助良多。提前向您致谢！"
 
 msgid "Allow retailer integration"
 msgstr "允许零售商聚合"
@@ -1931,15 +1946,14 @@ msgstr ""
 msgid "Language"
 msgstr "语言"
 
-#, fuzzy
-#| msgid "Netherlands"
 msgid "Other languages"
-msgstr "荷兰"
+msgstr "其他语言"
 
 msgid ""
 "Other languages that you can read and write. This can be useful to other "
 "AstroBin members who would like to communicate with you."
 msgstr ""
+"你可以读/写的其他语言。这对于希望与您交流的其他 AstroBin 用户可能很有用。"
 
 msgid "Signature"
 msgstr "签名"
@@ -2027,634 +2041,518 @@ msgid "Expired"
 msgstr "已到期"
 
 msgid "Abkhazian"
-msgstr ""
+msgstr "阿布哈兹语"
 
 msgid "Afar"
-msgstr ""
+msgstr "阿法尔语"
 
 msgid "Afrikaans"
-msgstr ""
+msgstr "荷兰语（南非）"
 
 msgid "Akan"
-msgstr ""
+msgstr "阿坎语"
 
 msgid "Amharic"
-msgstr ""
+msgstr "阿姆哈拉语"
 
 msgid "Aragonese"
-msgstr ""
+msgstr "阿拉贡语"
 
-#, fuzzy
-#| msgid "Armenia"
 msgid "Armenian"
-msgstr "亚美尼亚"
+msgstr "亚美尼亚语"
 
 msgid "Assamese"
-msgstr ""
+msgstr "阿萨姆语"
 
 msgid "Avaric"
-msgstr ""
+msgstr "阿瓦尔语"
 
 msgid "Avestan"
-msgstr ""
+msgstr "阿维斯坦语"
 
 msgid "Aymara"
-msgstr ""
+msgstr "艾马拉语"
 
-#, fuzzy
-#| msgid "Azerbaijan"
 msgid "Azerbaijani"
-msgstr "阿塞拜疆"
+msgstr "阿塞拜疆语"
 
 msgid "Bambara"
-msgstr ""
+msgstr "班巴拉语"
 
 msgid "Bashkir"
-msgstr ""
+msgstr "巴什基尔语"
 
 msgid "Basque"
-msgstr ""
+msgstr "巴斯克语"
 
-#, fuzzy
-#| msgid "Belarus"
 msgid "Belarusian"
-msgstr "白俄罗斯"
+msgstr "白俄罗斯语"
 
 msgid "Bengali"
-msgstr ""
+msgstr "孟加拉语"
 
 msgid "Bihari languages"
-msgstr ""
+msgstr "比哈尔语"
 
 msgid "Bislama"
-msgstr ""
+msgstr "比斯拉马语"
 
-#, fuzzy
-#| msgid "Newtonian"
 msgid "Bosnian"
-msgstr "牛顿式（牛反）"
+msgstr "波斯尼亚语"
 
 msgid "Breton"
-msgstr ""
+msgstr "布列塔尼语"
 
-#, fuzzy
-#| msgid "Bulgaria"
 msgid "Bulgarian"
-msgstr "保加利亚"
+msgstr "保加利亚语"
 
 msgid "Burmese"
-msgstr ""
+msgstr "缅甸语"
 
 msgid "Catalan / Valencian"
-msgstr ""
+msgstr "加泰罗尼亚语/瓦伦西亚语"
 
 msgid "Chamorro"
-msgstr ""
+msgstr "查莫罗语"
 
 msgid "Chechen"
-msgstr ""
+msgstr "车臣语"
 
 msgid "Chichewa, Chewa, Nyanja"
-msgstr ""
+msgstr "齐佩瓦语，齐切瓦语，尼昂加语"
 
 msgid "Chinese"
 msgstr "中文"
 
 msgid "Chuvash"
-msgstr ""
+msgstr "楚瓦什语"
 
-#, fuzzy
-#| msgid "Finish"
 msgid "Cornish"
-msgstr "完成"
+msgstr "康沃尔语"
 
 msgid "Corsican"
-msgstr ""
+msgstr "科西嘉语"
 
 msgid "Cree"
-msgstr ""
+msgstr "克里语"
 
-#, fuzzy
-#| msgid "Croatia"
 msgid "Croatian"
-msgstr "克罗地亚"
+msgstr "克罗地亚语"
 
 msgid "Czech"
-msgstr ""
+msgstr "捷克语"
 
-#, fuzzy
-#| msgid "Spanish"
 msgid "Danish"
-msgstr "西班牙语"
+msgstr "丹麦语"
 
 msgid "Divehi  / Dhivehi / Maldivian"
-msgstr ""
+msgstr "迪维希语/迪维希语/马尔代夫语"
 
 msgid "Dutch, Flemish"
-msgstr ""
+msgstr "荷兰语，佛兰芒语"
 
 msgid "Dzongkha"
-msgstr ""
+msgstr "宗喀语"
 
 msgid "English"
 msgstr "英语"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "世界语"
 
-#, fuzzy
-#| msgid "Estonia"
 msgid "Estonian"
-msgstr "爱沙尼亚"
+msgstr "爱沙尼亚语"
 
 msgid "Ewe"
-msgstr ""
+msgstr "埃维语"
 
-#, fuzzy
-#| msgid "Faroe Islands"
 msgid "Faroese"
-msgstr "法罗群岛"
+msgstr "法罗群岛语"
 
-#, fuzzy
-#| msgid "Fiji"
 msgid "Fijian"
-msgstr "斐济"
+msgstr "斐济语"
 
 msgid "Fulah"
-msgstr ""
+msgstr "富拉赫语"
 
 msgid "Galician"
-msgstr ""
+msgstr "加利西亚語"
 
-#, fuzzy
-#| msgid "Georgia"
 msgid "Georgian"
-msgstr "格鲁吉亚"
+msgstr "格鲁吉亚语"
 
 msgid "Guarani"
-msgstr ""
+msgstr "瓜拉尼语"
 
-#, fuzzy
-#| msgid "Duration"
 msgid "Gujarati"
-msgstr "曝光时间"
+msgstr "古吉拉特语"
 
 msgid "Haitian / Haitian Creole"
-msgstr ""
+msgstr "海地/海地克里奥尔语"
 
 msgid "Hausa"
-msgstr ""
+msgstr "豪萨语"
 
 msgid "Hebrew"
-msgstr ""
+msgstr "希伯来语"
 
 msgid "Herero"
-msgstr ""
+msgstr "赫雷罗语"
 
 msgid "Hindi"
-msgstr ""
+msgstr "印地语"
 
 msgid "Hiri Motu"
-msgstr ""
+msgstr "希利摩陀语"
 
-#, fuzzy
-#| msgid "Hungary"
 msgid "Hungarian"
-msgstr "匈牙利"
+msgstr "匈牙利语"
 
 # 待定
-#, fuzzy
-#| msgid "Integration"
 msgid "Interlingua"
-msgstr "累计曝光"
+msgstr "国际语"
 
-#, fuzzy
-#| msgid "Indonesia"
 msgid "Indonesian"
-msgstr "印度尼西亚"
+msgstr "印度尼西亚语"
 
 msgid "Interlingue / Occidental"
-msgstr ""
+msgstr "国际语/西语"
 
 msgid "Irish"
-msgstr ""
+msgstr "爱尔兰语"
 
 msgid "Igbo"
-msgstr ""
+msgstr "伊格博语"
 
 msgid "Inupiaq"
-msgstr ""
+msgstr "伊努皮克语"
 
 msgid "Ido"
-msgstr ""
+msgstr "伊多语"
 
-#, fuzzy
-#| msgid "Iceland"
 msgid "Icelandic"
-msgstr "冰岛"
+msgstr "冰岛语"
 
 msgid "Inuktitut"
-msgstr ""
+msgstr "因纽特语"
 
-#, fuzzy
-#| msgid "Japanese"
 msgid "Javanese"
-msgstr "日语"
+msgstr "爪哇语"
 
 msgid "Kalaallisut / Greenlandic"
-msgstr ""
+msgstr "卡拉利苏特/格陵兰语"
 
-#, fuzzy
-#| msgid "Canada"
 msgid "Kannada"
-msgstr "加拿大"
+msgstr "坎纳达语"
 
 msgid "Kanuri"
-msgstr ""
+msgstr "卡努里语"
 
 msgid "Kashmiri"
-msgstr ""
+msgstr "克什米尔语"
 
-#, fuzzy
-#| msgid "Kazakhstan"
 msgid "Kazakh"
-msgstr "哈萨克斯坦"
+msgstr "哈萨克斯坦语"
 
-#, fuzzy
-#| msgid "Center"
 msgid "Central Khmer"
-msgstr "中心"
+msgstr "高棉语"
 
 msgid "Kikuyu / Gikuyu"
-msgstr ""
+msgstr "基库语"
 
 msgid "Kinyarwanda"
-msgstr ""
+msgstr "卢旺达语"
 
 msgid "Kirghiz / Kyrgyz"
-msgstr ""
+msgstr "吉尔吉斯语"
 
 msgid "Komi"
-msgstr ""
+msgstr "科米语"
 
-#, fuzzy
-#| msgid "Congo"
 msgid "Kongo"
-msgstr "刚果"
+msgstr "刚果语"
 
 msgid "Korean"
-msgstr ""
+msgstr "韩语"
 
 msgid "Kurdish"
-msgstr ""
+msgstr "库尔德语"
 
 msgid "Kuanyama / Kwanyama"
-msgstr ""
+msgstr "宽亚玛语"
 
 msgid "Latin"
-msgstr ""
+msgstr "拉丁语"
 
 msgid "Luxembourgish, Letzeburgesch"
-msgstr ""
+msgstr "卢森堡语"
 
-#, fuzzy
-#| msgid "Rwanda"
 msgid "Ganda"
-msgstr "卢旺达"
+msgstr "干达语"
 
 msgid "Limburgan / Limburger / Limburgish"
-msgstr ""
+msgstr "林堡语"
 
 msgid "Lingala"
-msgstr ""
+msgstr "林加拉语"
 
-#, fuzzy
-#| msgid "Lebanon"
 msgid "Lao"
-msgstr "黎巴嫩"
+msgstr "老挝语"
 
-#, fuzzy
-#| msgid "Lithuania"
 msgid "Lithuanian"
-msgstr "立陶宛"
+msgstr "立陶宛语"
 
 msgid "Luba / Katanga"
-msgstr ""
+msgstr "卢巴/加丹加语"
 
-#, fuzzy
-#| msgid "Latvia"
 msgid "Latvian"
-msgstr "拉脱维亚"
+msgstr "拉脱维亚语"
 
 msgid "Manx"
-msgstr ""
+msgstr "马恩岛语"
 
-#, fuzzy
-#| msgid "Newtonian"
 msgid "Macedonian"
-msgstr "牛顿式（牛反）"
+msgstr "马其顿语"
 
-#, fuzzy
-#| msgid "Madagascar"
 msgid "Malagasy"
-msgstr "马达加斯加"
+msgstr "马拉加斯语"
 
-#, fuzzy
-#| msgid "Malaysia"
 msgid "Malay"
-msgstr "马来西亚"
+msgstr "马来语"
 
-#, fuzzy
-#| msgid "Malaysia"
 msgid "Malayalam"
-msgstr "马来西亚"
+msgstr "马拉雅拉姆语"
 
-#, fuzzy
-#| msgid "Malta"
 msgid "Maltese"
-msgstr "马耳他"
+msgstr "马耳他语"
 
 msgid "Maori"
-msgstr ""
+msgstr "毛利语"
 
 msgid "Marathi"
-msgstr ""
+msgstr "马拉塔语"
 
-#, fuzzy
-#| msgid "Marshall Islands"
 msgid "Marshallese"
-msgstr "马绍尔群岛"
+msgstr "马绍尔语"
 
-#, fuzzy
-#| msgid "Mongolia"
 msgid "Mongolian"
-msgstr "蒙古"
+msgstr "蒙古语"
 
 msgid "Navajo / Navaho"
-msgstr ""
+msgstr "纳瓦霍语"
 
 msgid "North Ndebele"
-msgstr ""
+msgstr "北内地贝尔语"
 
-#, fuzzy
-#| msgid "Nepal"
 msgid "Nepali"
-msgstr "尼泊尔"
+msgstr "尼泊尔语"
 
-#, fuzzy
-#| msgid "Tonga"
 msgid "Ndonga"
-msgstr "汤加"
+msgstr "尼东阁语"
 
 msgid "Norwegian Bokmål"
-msgstr ""
+msgstr "挪威语（博克马尔）"
 
 msgid "Norwegian Nynorsk"
-msgstr ""
+msgstr "挪威语（尼诺尔斯克）"
 
-#, fuzzy
-#| msgid "Norway"
 msgid "Norwegian"
-msgstr "挪威"
+msgstr "挪威语"
 
 msgid "Sichuan Yi / Nuosu"
-msgstr ""
+msgstr "四川彝族语/诺苏语"
 
 msgid "South Ndebele"
-msgstr ""
+msgstr "南内地贝尔语"
 
 msgid "Occitan"
-msgstr ""
+msgstr "奥克语"
 
 msgid "Ojibwa"
-msgstr ""
+msgstr "奥吉布瓦"
 
 msgid ""
 "Church Slavic / Old Slavonic / Church Slavonic / Old Bulgarian / Old Church "
 "Slavonic"
-msgstr ""
+msgstr "教会斯拉夫语/古斯拉夫语/教会斯拉夫语/古保加利亚语/古教会斯拉夫语"
 
 msgid "Oromo"
-msgstr ""
+msgstr "奥罗莫语"
 
 msgid "Oriya"
-msgstr ""
+msgstr "奥里雅语"
 
 msgid "Ossetian / Ossetic"
-msgstr ""
+msgstr "奥塞梯语"
 
 msgid "Punjabi / Panjabi"
-msgstr ""
+msgstr "旁遮普语"
 
 msgid "Pali"
-msgstr ""
+msgstr "巴利语"
 
 msgid "Persian"
-msgstr ""
+msgstr "波斯语"
 
 msgid "Pashto / Pushto"
-msgstr ""
+msgstr "普什图语"
 
 msgid "Quechua"
-msgstr ""
+msgstr "克丘亚语"
 
-#, fuzzy
-#| msgid "Romania"
 msgid "Romansh"
-msgstr "罗马尼亚"
+msgstr "罗马语"
 
-#, fuzzy
-#| msgid "Burundi"
 msgid "Rundi"
-msgstr "布隆迪"
+msgstr "隆迪语"
 
 msgid "Romanian / Moldavian / Moldovan"
-msgstr ""
+msgstr "罗马尼亚/摩尔多瓦/摩尔多瓦语"
 
 msgid "Sanskrit"
-msgstr ""
+msgstr "梵语"
 
 msgid "Sardinian"
-msgstr ""
+msgstr "撒丁语"
 
 msgid "Sindhi"
-msgstr ""
+msgstr "信德语"
 
-#, fuzzy
-#| msgid "Northern"
 msgid "Northern Sami"
-msgstr "北半球"
+msgstr "北萨米语"
 
-#, fuzzy
-#| msgid "Samoa"
 msgid "Samoan"
-msgstr "萨摩亚"
+msgstr "萨摩亚语"
 
 msgid "Sango"
-msgstr ""
+msgstr "桑戈语"
 
-#, fuzzy
-#| msgid "Serbia"
 msgid "Serbian"
-msgstr "塞尔维亚"
+msgstr "塞尔维亚语"
 
 msgid "Gaelic / Scottish Gaelic"
-msgstr ""
+msgstr "盖尔语/苏格兰盖尔语"
 
 msgid "Shona"
-msgstr ""
+msgstr "绍纳语"
 
 msgid "Sinhala / Sinhalese"
-msgstr ""
+msgstr "僧伽罗语"
 
-#, fuzzy
-#| msgid "Slovakia"
 msgid "Slovak"
-msgstr "斯洛伐克"
+msgstr "斯洛伐克语"
 
-#, fuzzy
-#| msgid "Slovenia"
 msgid "Slovenian"
-msgstr "斯洛文尼亚"
+msgstr "斯洛文尼亚语"
 
-#, fuzzy
-#| msgid "Somalia"
 msgid "Somali"
-msgstr "索马里"
+msgstr "索马里语"
 
 # 待定
-#, fuzzy
-#| msgid "Southern"
 msgid "Southern Sotho"
-msgstr "南半球"
+msgstr "南索托语"
 
 msgid "Spanish / Castilian"
-msgstr ""
+msgstr "西班牙语/卡斯蒂利亚语"
 
 msgid "Sundanese"
-msgstr ""
+msgstr "巽他语"
 
 msgid "Swahili"
-msgstr ""
+msgstr "斯瓦希里语"
 
 msgid "Swati"
-msgstr ""
+msgstr "斯瓦蒂语"
 
-#, fuzzy
-#| msgid "Sweden"
 msgid "Swedish"
-msgstr "瑞典"
+msgstr "瑞典语"
 
 msgid "Tamil"
-msgstr ""
+msgstr "泰米尔语"
 
 msgid "Telugu"
-msgstr ""
+msgstr "泰卢固语"
 
-#, fuzzy
-#| msgid "Tajikistan"
 msgid "Tajik"
-msgstr "塔吉克斯坦"
+msgstr "塔吉克斯坦语"
 
-#, fuzzy
-#| msgid "Thailand"
 msgid "Thai"
-msgstr "泰国"
+msgstr "泰语"
 
 msgid "Tigrinya"
-msgstr ""
+msgstr "提格里尼亚语"
 
-#, fuzzy
-#| msgid "(beta)"
 msgid "Tibetan"
-msgstr "（试运行）"
+msgstr "藏语"
 
-#, fuzzy
-#| msgid "Turkey"
 msgid "Turkmen"
-msgstr "土耳其"
+msgstr "土库曼语"
 
 msgid "Tagalog"
-msgstr ""
+msgstr "他加禄语"
 
-#, fuzzy
-#| msgid "Botswana"
 msgid "Tswana"
-msgstr "博茨瓦纳"
+msgstr "茨瓦纳语"
 
-#, fuzzy
-#| msgid "Tonga"
 msgid "Tsonga"
-msgstr "汤加"
+msgstr "汤加语"
 
-#, fuzzy
-#| msgid "Qatar"
 msgid "Tatar"
-msgstr "卡塔尔"
+msgstr "卡塔尔语"
 
 msgid "Twi"
-msgstr ""
+msgstr "特威语"
 
 msgid "Tahitian"
-msgstr ""
+msgstr "塔希提語"
 
 msgid "Uighur / Uyghur"
-msgstr ""
+msgstr "维吾尔语"
 
-#, fuzzy
-#| msgid "Ukraine"
 msgid "Ukrainian"
-msgstr "乌克兰"
+msgstr "乌克兰语"
 
 msgid "Urdu"
-msgstr ""
+msgstr "乌尔都语"
 
-#, fuzzy
-#| msgid "Uzbekistan"
 msgid "Uzbek"
-msgstr "乌兹别克斯坦"
+msgstr "乌兹别克语"
 
 msgid "Venda"
-msgstr ""
+msgstr "文达语"
 
-#, fuzzy
-#| msgid "Viet Nam"
 msgid "Vietnamese"
-msgstr "越南"
+msgstr "越南语"
 
 msgid "Volapük"
-msgstr ""
+msgstr "沃拉皮克"
 
 msgid "Walloon"
-msgstr ""
+msgstr "瓦隆语"
 
 msgid "Welsh"
-msgstr ""
+msgstr "威尔士语"
 
 msgid "Wolof"
-msgstr ""
+msgstr "沃洛夫语"
 
-#, fuzzy
-#| msgid "Western Sahara"
 msgid "Western Frisian"
-msgstr "西撒哈拉"
+msgstr "西弗里斯语"
 
 msgid "Xhosa"
-msgstr ""
+msgstr "科萨语（南非）"
 
 msgid "Yiddish"
-msgstr ""
+msgstr "依地语"
 
-#, fuzzy
-#| msgid "Aruba"
 msgid "Yoruba"
-msgstr "阿鲁巴岛"
+msgstr "约鲁巴语"
 
 msgid "Zhuang / Chuang"
-msgstr ""
+msgstr "壮语"
 
 msgid "Zulu"
-msgstr ""
+msgstr "祖鲁语"
 
 msgid "Message sent"
 msgstr "消息已发出"
@@ -2969,7 +2867,7 @@ msgid "Followers"
 msgstr "粉丝"
 
 msgid "Likes"
-msgstr "赞"
+msgstr "收到的赞"
 
 msgid "Total integration"
 msgstr "累计曝光"
@@ -3659,14 +3557,14 @@ msgid "Return to image"
 msgstr "回到作品"
 
 msgid "Hemisphere"
-msgstr "半球"
+msgstr "天区"
 
 msgid "Northern"
-msgstr "北半球"
+msgstr "北天"
 
 # 待定
 msgid "Southern"
-msgstr "南半球"
+msgstr "南天"
 
 msgid "Contains"
 msgstr "包含"
@@ -3682,24 +3580,18 @@ msgstr "获取于"
 msgid "Remove"
 msgstr "移除"
 
-#, fuzzy
-#| msgid ""
-#| "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
-#| "international community: using English is preferred. PS: <strong>"
-#| "%(user)s</strong>'s preferred language is <strong>%(lang)s</strong>."
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
 "international community: using <strong>English</strong> is preferred."
 msgstr ""
-"<strong>在此留下评论</strong>，请记住，因为 AstroBin 是一个国际化的社区，推荐"
-"您使用英语交流。PS：<strong>%(user)s</strong> 的首选语言是 <strong>%(lang)s</"
-"strong>。"
+"<strong>在此留下评论</strong>，请记住，AstroBin 是一个国际化的社区：推荐使用"
+"<strong>英语</strong>进行交流。"
 
 #, python-format
 msgid ""
 "The author of this image is comfortable with the following languages: "
 "<strong>%(preferred_languages)s</strong>."
-msgstr ""
+msgstr "此作品的作者熟悉以下语言：<strong>%(preferred_languages)s</strong>。"
 
 msgid "Edit"
 msgstr "编辑"
@@ -3925,6 +3817,19 @@ msgstr "大尺寸"
 
 msgid "Full size"
 msgstr "完整大小"
+
+msgid "Please note"
+msgstr "请注意"
+
+#, python-format
+msgid ""
+"You are on a Free account, and when you delete an image, your upload counter "
+"does not decrease (unless the image is deleted within 24 hours of uploading "
+"it). The Free account is not a way to keep your most recent or best 10 "
+"images on AstroBin, but a trial period for you to decide whether or not a "
+"paid subscription is worth it. For more information, please <a href=\"%(url)s"
+"\">click here</a>."
+msgstr ""
 
 msgid "Delete this revision?"
 msgstr "删除这个修订版？"
@@ -4481,6 +4386,18 @@ msgstr "银经"
 msgid "Galactic latitude"
 msgstr "银纬"
 
+#, fuzzy
+#| msgid "Warning!"
+msgid "Warning"
+msgstr "警告！"
+
+#, python-format
+msgid ""
+"You are about to open a large file of about %(size)s. Depending on your "
+"download speed, it might take several seconds or even minutes to view the "
+"file."
+msgstr ""
+
 msgid "Click-and-drag anywhere on the image."
 msgstr "在任意处点击并拖动。"
 
@@ -4666,6 +4583,22 @@ msgstr "感谢您使用 AstroBin API！"
 #, python-format
 msgid "You can review your API keys at %(api_keys_url)s."
 msgstr "您可以点击 %(api_keys_url)s预览您的API keys"
+
+msgid "Your comment was approved!"
+msgstr ""
+
+msgid ""
+"As a new user on AstroBin, your first 3 comments will go through a "
+"moderation queue, to prevent spam."
+msgstr ""
+
+msgid "The following comment of yours was just approved by a moderator."
+msgstr ""
+
+#, fuzzy
+#| msgid "Allow comments"
+msgid "View comment"
+msgstr "允许评论"
 
 msgid "Congratulations for your first image on AstroBin!"
 msgstr "恭喜拿下一血！这是您在 AstroBin 上的第一图！"
@@ -4860,6 +4793,45 @@ msgstr "<a href=\"%(object_url)s\">您的作品已被成功解析。</a>"
 
 msgid "Your image has been successfully plate-solved."
 msgstr "您的作品已被成功解析。"
+
+msgid "An image you promoted made it to IOTD"
+msgstr ""
+
+msgid "An image you promoted made it to Top Pick"
+msgstr ""
+
+#, python-format
+msgid ""
+"You have been inactive as an IOTD Submitter or Reviewer for %(days)s days or "
+"more."
+msgstr ""
+
+msgid ""
+"While the AstroBin IOTD selection process has a good level of redundancy "
+"built into the system, it still relies on the members of the staff regularly "
+"making selections from their respective queues."
+msgstr ""
+
+msgid ""
+"As you have not been active for a significant amount of time, you have been "
+"removed from the IOTD staff for now."
+msgstr ""
+
+msgid ""
+"This will ensure that potential IOTD or Top Pick candidates don't go "
+"unnoticed sitting in the queue of an inactive staff member."
+msgstr ""
+
+#, fuzzy
+#| msgid "Thank you for using AstroBin's APIs!"
+msgid "Thank you for understanding!"
+msgstr "感谢您使用 AstroBin API！"
+
+#, python-format
+msgid ""
+"After %(max_inactivity_days)s days of inactivity (counted from the last "
+"selection you made in your queue) you will be removed from the IOTD staff."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5641,9 +5613,6 @@ msgstr "新建主题"
 msgid "Please select a forum"
 msgstr "请选择一个板块"
 
-msgid "Please note"
-msgstr "请注意"
-
 msgid ""
 "To post a new topic, please first go to the forum that is most relevant to "
 "your topic."
@@ -5768,7 +5737,7 @@ msgstr "赞"
 
 msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
-msgstr "收到的赞"
+msgstr "赞"
 
 msgid ""
 "Warning: this post awaits moderation and is not yet visible to everybody"
@@ -6274,6 +6243,18 @@ msgstr ""
 "如果希望将图像归类到相册中，则应填写一些数据。 拍摄所用望远镜、相机和被拍摄的"
 "目标是最低要求。 拍摄日期也很重要。"
 
+#, fuzzy
+#| msgid "What kind of image is this?"
+msgid "Can't find your images?"
+msgstr "这是哪一类作品？"
+
+#, python-format
+msgid ""
+"All your images are still unpublished. <a href=\"%(user_page)s?staging"
+"\">Visit your Staging Area</a> to find them, or <a href="
+"\"%(staging_area_learn_more_link)s\">learn more</a>."
+msgstr ""
+
 msgid "Delete account"
 msgstr "删除账户"
 
@@ -6709,6 +6690,11 @@ msgstr "像素分辨率（角秒/像素）"
 msgid "Telescope type"
 msgstr "望远镜类型"
 
+#, fuzzy
+#| msgid "Integration hours, daily"
+msgid "Integration time (hours)"
+msgstr "每天累计曝光时间"
+
 #, python-format
 msgid ""
 "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Ultimate</a> "
@@ -6733,8 +6719,16 @@ msgstr "“热门精选”提名"
 msgid "Guider/planetary"
 msgstr "导星/行星相机"
 
+msgid "Min"
+msgstr ""
+
+#, fuzzy
+#| msgid "Manx"
+msgid "Max"
+msgstr "马恩岛语"
+
 msgid "Imaging telescopes"
-msgstr "主相机"
+msgstr "主镜"
 
 msgid "Astrometry"
 msgstr "天体测量"

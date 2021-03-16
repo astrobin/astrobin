@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-06 22:48+0000\n"
+"POT-Creation-Date: 2021-03-16 18:49+0000\n"
 "PO-Revision-Date: 2013-11-11 19:27+0000\n"
 "Last-Translator: gamangabriel <gamangabriel@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1865,6 +1865,20 @@ msgstr "Hobby-uri"
 
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "Mai aveţi alte hobby-uri înafară de astrofotografie?"
+
+#, fuzzy
+msgid "Instagram username"
+msgstr "Schimbă-ţi parola"
+
+msgid ""
+"If you provide this, AstroBin will tag you on Instagram if it's sharing an "
+"image of yours."
+msgstr ""
+
+msgid ""
+"An Instagram username must be between 3 and 30 characters, start with an @ "
+"sign, and only have letters, numbers, periods, and underlines."
+msgstr ""
 
 msgid "Timezone"
 msgstr "Zona de fus orar"
@@ -3964,6 +3978,21 @@ msgstr "Dimensiunea imaginii"
 msgid "Full size"
 msgstr "Dimensiunea pixelului"
 
+#, fuzzy
+#| msgid "Please note!"
+msgid "Please note"
+msgstr "Vă rugăm, reţineţi !"
+
+#, python-format
+msgid ""
+"You are on a Free account, and when you delete an image, your upload counter "
+"does not decrease (unless the image is deleted within 24 hours of uploading "
+"it). The Free account is not a way to keep your most recent or best 10 "
+"images on AstroBin, but a trial period for you to decide whether or not a "
+"paid subscription is worth it. For more information, please <a href=\"%(url)s"
+"\">click here</a>."
+msgstr ""
+
 msgid "Delete this revision?"
 msgstr "Stergeti aceasta revizie ?"
 
@@ -4491,6 +4520,18 @@ msgstr "Selectati latitudinea :"
 msgid "Galactic latitude"
 msgstr "Selectati latitudinea :"
 
+#, fuzzy
+#| msgid "Warning!"
+msgid "Warning"
+msgstr "Avertizare!"
+
+#, python-format
+msgid ""
+"You are about to open a large file of about %(size)s. Depending on your "
+"download speed, it might take several seconds or even minutes to view the "
+"file."
+msgstr ""
+
 msgid "Click-and-drag anywhere on the image."
 msgstr ""
 
@@ -4687,6 +4728,23 @@ msgstr "Urmatoarele companii sprijina AstroBin."
 msgid "You can review your API keys at %(api_keys_url)s."
 msgstr ""
 
+#, fuzzy
+#| msgid "Your commercial products"
+msgid "Your comment was approved!"
+msgstr "Produsele dumneavoastra comerciale."
+
+msgid ""
+"As a new user on AstroBin, your first 3 comments will go through a "
+"moderation queue, to prevent spam."
+msgstr ""
+
+msgid "The following comment of yours was just approved by a moderator."
+msgstr ""
+
+#, fuzzy
+msgid "View comment"
+msgstr "Comentarii"
+
 msgid "Congratulations for your first image on AstroBin!"
 msgstr ""
 
@@ -4868,6 +4926,44 @@ msgid ""
 msgstr ""
 
 msgid "Your image has been successfully plate-solved."
+msgstr ""
+
+msgid "An image you promoted made it to IOTD"
+msgstr ""
+
+msgid "An image you promoted made it to Top Pick"
+msgstr ""
+
+#, python-format
+msgid ""
+"You have been inactive as an IOTD Submitter or Reviewer for %(days)s days or "
+"more."
+msgstr ""
+
+msgid ""
+"While the AstroBin IOTD selection process has a good level of redundancy "
+"built into the system, it still relies on the members of the staff regularly "
+"making selections from their respective queues."
+msgstr ""
+
+msgid ""
+"As you have not been active for a significant amount of time, you have been "
+"removed from the IOTD staff for now."
+msgstr ""
+
+msgid ""
+"This will ensure that potential IOTD or Top Pick candidates don't go "
+"unnoticed sitting in the queue of an inactive staff member."
+msgstr ""
+
+#, fuzzy
+msgid "Thank you for understanding!"
+msgstr "Urmatoarele companii sprijina AstroBin."
+
+#, python-format
+msgid ""
+"After %(max_inactivity_days)s days of inactivity (counted from the last "
+"selection you made in your queue) you will be removed from the IOTD staff."
 msgstr ""
 
 #, fuzzy, python-format
@@ -5611,11 +5707,6 @@ msgstr "Închis"
 msgid "Please select a forum"
 msgstr ""
 
-#, fuzzy
-#| msgid "Please note!"
-msgid "Please note"
-msgstr "Vă rugăm, reţineţi !"
-
 msgid ""
 "To post a new topic, please first go to the forum that is most relevant to "
 "your topic."
@@ -6227,6 +6318,18 @@ msgstr ""
 "foarte importante deasemenea."
 
 #, fuzzy
+#| msgid "What kind of image is this?"
+msgid "Can't find your images?"
+msgstr "Ce fel de imagine este aceasta ?"
+
+#, python-format
+msgid ""
+"All your images are still unpublished. <a href=\"%(user_page)s?staging"
+"\">Visit your Staging Area</a> to find them, or <a href="
+"\"%(staging_area_learn_more_link)s\">learn more</a>."
+msgstr ""
+
+#, fuzzy
 msgid "Delete account"
 msgstr "Stergeti conversatia"
 
@@ -6717,6 +6820,11 @@ msgstr "arcsec/pixel"
 msgid "Telescope type"
 msgstr "Tipul telescopului"
 
+#, fuzzy
+#| msgid "Integration hours, daily"
+msgid "Integration time (hours)"
+msgstr "Ore de integrare, zilnic"
+
 #, python-format
 msgid ""
 "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Ultimate</a> "
@@ -6747,6 +6855,12 @@ msgstr "Informații de bază"
 #| msgid "Guider/Planetary"
 msgid "Guider/planetary"
 msgstr "Ghidaj/Planetar"
+
+msgid "Min"
+msgstr ""
+
+msgid "Max"
+msgstr ""
 
 #, fuzzy
 msgid "Imaging telescopes"
@@ -7190,10 +7304,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Back to the plans"
 #~ msgstr "Inapoi in sus"
-
-#, fuzzy
-#~ msgid "Thank you for supporting AstroBin!"
-#~ msgstr "Urmatoarele companii sprijina AstroBin."
 
 #, fuzzy
 #~ msgid "Your inactive subscription plans"
@@ -8081,9 +8191,6 @@ msgstr ""
 
 #~ msgid "Edit profile"
 #~ msgstr "Editati profilul"
-
-#~ msgid "Your commercial products"
-#~ msgstr "Produsele dumneavoastra comerciale."
 
 #, fuzzy
 #~ msgid "There was one or more errors processing the form. "

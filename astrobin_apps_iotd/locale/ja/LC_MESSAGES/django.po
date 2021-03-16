@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-06 23:07+0000\n"
+"POT-Creation-Date: 2021-03-16 19:06+0000\n"
 "PO-Revision-Date: 2020-11-24 02:29+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -160,9 +160,6 @@ msgstr "あなたは既に%(max_allowed)s のIOTDをスケジュールされて�
 msgid "Image of the day"
 msgstr "Image of the day"
 
-msgid "by"
-msgstr "by"
-
 msgid "IOTD Judgement Queue"
 msgstr "IOTD Judgement Queue"
 
@@ -188,6 +185,9 @@ msgstr "他の審査員が選出したIOTDを無選挙にすることはでき�
 #, python-format
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr "%(days)s日後までIOTDの空き枠が既に埋まっています。"
+
+#~ msgid "by"
+#~ msgstr "by"
 
 #~ msgid "Submit for IOTD"
 #~ msgstr "IOTDへ送信"

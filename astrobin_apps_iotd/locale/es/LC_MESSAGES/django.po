@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-06 23:07+0000\n"
+"POT-Creation-Date: 2021-03-16 19:06+0000\n"
 "PO-Revision-Date: 2020-05-15 20:18+0000\n"
 "Last-Translator: DanielaDGR <danieladgr.5r@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -166,9 +166,6 @@ msgstr "Ya ha programado%(max_allowed)s IOTD."
 msgid "Image of the day"
 msgstr "Imagen del día"
 
-msgid "by"
-msgstr "por"
-
 msgid "IOTD Judgement Queue"
 msgstr "Cola de evaluación IOTD"
 
@@ -196,6 +193,9 @@ msgstr "No puede anular un IOTD elegido por otro juez."
 #, python-format
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr "Todos los puestos IOTD para los próximos %(days)s días están llenos."
+
+#~ msgid "by"
+#~ msgstr "por"
 
 #~ msgid "Submit for IOTD"
 #~ msgstr "Enviar para IOTD"

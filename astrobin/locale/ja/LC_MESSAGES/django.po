@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-06 22:48+0000\n"
+"POT-Creation-Date: 2021-03-16 18:49+0000\n"
 "PO-Revision-Date: 2020-11-27 01:58+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1821,6 +1821,21 @@ msgstr "趣味"
 
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "天体写真以外の趣味はありますか?"
+
+#, fuzzy
+#| msgid "Change your e-mail"
+msgid "Instagram username"
+msgstr "メールアドレスを変更"
+
+msgid ""
+"If you provide this, AstroBin will tag you on Instagram if it's sharing an "
+"image of yours."
+msgstr ""
+
+msgid ""
+"An Instagram username must be between 3 and 30 characters, start with an @ "
+"sign, and only have letters, numbers, periods, and underlines."
+msgstr ""
 
 msgid "Timezone"
 msgstr "タイムゾーン"
@@ -3982,6 +3997,21 @@ msgstr "大きいサイズ"
 msgid "Full size"
 msgstr "フルサイズ"
 
+#, fuzzy
+#| msgid "Please note!"
+msgid "Please note"
+msgstr "要注意"
+
+#, python-format
+msgid ""
+"You are on a Free account, and when you delete an image, your upload counter "
+"does not decrease (unless the image is deleted within 24 hours of uploading "
+"it). The Free account is not a way to keep your most recent or best 10 "
+"images on AstroBin, but a trial period for you to decide whether or not a "
+"paid subscription is worth it. For more information, please <a href=\"%(url)s"
+"\">click here</a>."
+msgstr ""
+
 msgid "Delete this revision?"
 msgstr "この修正版を削除しますか？"
 
@@ -4541,6 +4571,18 @@ msgstr ""
 msgid "Galactic latitude"
 msgstr ""
 
+#, fuzzy
+#| msgid "Warning!"
+msgid "Warning"
+msgstr "警告!"
+
+#, python-format
+msgid ""
+"You are about to open a large file of about %(size)s. Depending on your "
+"download speed, it might take several seconds or even minutes to view the "
+"file."
+msgstr ""
+
 msgid "Click-and-drag anywhere on the image."
 msgstr ""
 
@@ -4733,6 +4775,24 @@ msgstr "AstoBinをサポートいただけてありがとうございます。"
 msgid "You can review your API keys at %(api_keys_url)s."
 msgstr ""
 
+#, fuzzy
+#| msgid "Your image was plate-solved"
+msgid "Your comment was approved!"
+msgstr "あなたの画像は図版化された"
+
+msgid ""
+"As a new user on AstroBin, your first 3 comments will go through a "
+"moderation queue, to prevent spam."
+msgstr ""
+
+msgid "The following comment of yours was just approved by a moderator."
+msgstr ""
+
+#, fuzzy
+#| msgid "Allow comments"
+msgid "View comment"
+msgstr "コメントを許可"
+
 msgid "Congratulations for your first image on AstroBin!"
 msgstr ""
 
@@ -4905,6 +4965,45 @@ msgstr "<a href=\"%(object_url)s\">あなたの画像は図画化に成功しま
 
 msgid "Your image has been successfully plate-solved."
 msgstr "あなたの画像は図画化に成功しました。"
+
+msgid "An image you promoted made it to IOTD"
+msgstr ""
+
+msgid "An image you promoted made it to Top Pick"
+msgstr ""
+
+#, python-format
+msgid ""
+"You have been inactive as an IOTD Submitter or Reviewer for %(days)s days or "
+"more."
+msgstr ""
+
+msgid ""
+"While the AstroBin IOTD selection process has a good level of redundancy "
+"built into the system, it still relies on the members of the staff regularly "
+"making selections from their respective queues."
+msgstr ""
+
+msgid ""
+"As you have not been active for a significant amount of time, you have been "
+"removed from the IOTD staff for now."
+msgstr ""
+
+msgid ""
+"This will ensure that potential IOTD or Top Pick candidates don't go "
+"unnoticed sitting in the queue of an inactive staff member."
+msgstr ""
+
+#, fuzzy
+#| msgid "Thank you for supporting AstroBin!"
+msgid "Thank you for understanding!"
+msgstr "AstoBinをサポートいただけてありがとうございます。"
+
+#, python-format
+msgid ""
+"After %(max_inactivity_days)s days of inactivity (counted from the last "
+"selection you made in your queue) you will be removed from the IOTD staff."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5703,11 +5802,6 @@ msgstr "トピックを開く"
 msgid "Please select a forum"
 msgstr ""
 
-#, fuzzy
-#| msgid "Please note!"
-msgid "Please note"
-msgstr "要注意"
-
 msgid ""
 "To post a new topic, please first go to the forum that is most relevant to "
 "your topic."
@@ -6331,6 +6425,18 @@ msgstr ""
 "に重要です。"
 
 #, fuzzy
+#| msgid "What kind of image is this?"
+msgid "Can't find your images?"
+msgstr "この画像の種類はなんでしょうか？"
+
+#, python-format
+msgid ""
+"All your images are still unpublished. <a href=\"%(user_page)s?staging"
+"\">Visit your Staging Area</a> to find them, or <a href="
+"\"%(staging_area_learn_more_link)s\">learn more</a>."
+msgstr ""
+
+#, fuzzy
 msgid "Delete account"
 msgstr "会話を削除"
 
@@ -6826,6 +6932,11 @@ msgstr "秒/pixel"
 msgid "Telescope type"
 msgstr "望遠鏡のタイプ"
 
+#, fuzzy
+#| msgid "Integration hours, daily"
+msgid "Integration time (hours)"
+msgstr "露出時間（何日）"
+
 #, python-format
 msgid ""
 "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Ultimate</a> "
@@ -6858,6 +6969,12 @@ msgstr "基本情報"
 #| msgid "Guider/Planetary"
 msgid "Guider/planetary"
 msgstr "ガイド用カメラ／惑星用カメラ"
+
+msgid "Min"
+msgstr ""
+
+msgid "Max"
+msgstr ""
 
 #, fuzzy
 #| msgid "Imaging telescopes or lenses"
@@ -7388,9 +7505,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Back to the plans"
 #~ msgstr "Top に戻る"
-
-#~ msgid "Thank you for supporting AstroBin!"
-#~ msgstr "AstoBinをサポートいただけてありがとうございます。"
 
 #, fuzzy
 #~ msgid "Your inactive subscription plans"
@@ -8926,9 +9040,6 @@ msgstr ""
 
 #~ msgid "New image revision from a user you follow"
 #~ msgstr "あなたのフォロワーが修正版を投稿しました"
-
-#~ msgid "Your image was plate-solved"
-#~ msgstr "あなたの画像は図版化された"
 
 #~ msgid "Your image could not be plate-solved"
 #~ msgstr "あなたの画像は図版化することができなかった"
