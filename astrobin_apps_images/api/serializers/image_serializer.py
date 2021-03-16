@@ -62,4 +62,5 @@ class ImageSerializer(serializers.ModelSerializer):
             'watermark_position',
             'watermark_size',
             'watermark_opacity',
+            'sharpen_thumbnails',
         )
