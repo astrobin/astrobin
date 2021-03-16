@@ -120,9 +120,23 @@
                                 <span class="hidden-phone hidden-tablet">{% trans "Fit to window" %}</span>
                             </a>
                         {% elif request.user|can_see_real_resolution:image %}
-                            <a class="btn btn-primary navbar-btn" href="{% get_image_url image revision_label 'full' %}{% query_string "mod=mod,real=''" "" %}">
+                            {% if file_size < max_file_size_before_warning %}
+                                <a class="btn btn-primary navbar-btn"
+                                   href="{% get_image_url image revision_label 'full' %}{% query_string "mod=mod,real=''" "" %}"
+                                >
+                            {% else  %}
+                                <a class="btn btn-primary navbar-btn"
+                                   data-toggle="modal"
+                                   href="#large-size-full-resolution-warning"
+                                >
+                            {% endif %}
                                 <i class="icon-fullscreen"></i>
-                                <span class="hidden-phone hidden-tablet">{% trans "Full resolution" %}</span>
+                                <span class="hidden-phone hidden-tablet">
+                                    {% trans "Full resolution" %}
+                                    {% if file_size %}
+                                        (~{{ file_size|filesizeformat }})
+                                    {% endif %}
+                                </span>
                             </a>
                         {% endif %}
                     </li>
@@ -195,6 +209,32 @@
 </div>
 {% endif %}
 
+<div class="modal hide fade" id="large-size-full-resolution-warning">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3><i class="icon-warning-sign"></i> {% trans "Warning" %}</h3>
+    </div>
+
+    <div class="modal-body">
+        <p>
+            {% blocktrans trimmed with size=file_size|filesizeformat %}
+                You are about to open a large file of about {{size}}. Depending on your download speed, it might take
+                several seconds or even minutes to view the file.
+            {% endblocktrans %}
+        </p>
+
+    </div>
+
+    <div class="modal-footer">
+        <a class="btn btn-cancel" data-dismiss="modal">{% trans "Cancel" %}</a>
+        <a class="btn btn-primary"
+           href="{% get_image_url image revision_label 'full' %}{% query_string "mod=mod,real=''" "" %}">
+            {% trans "Continue" %}
+        </a>
+    </div>
+</div>
+
+
 {% include 'image/detail/modals/cant_like.html' %}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.7.2/bluebird.min.js"></script>
@@ -252,7 +292,7 @@
                 });
             }
 
-            {% if request|show_click_and_drag_zoom:image %}
+            {% if request|show_click_and_drag_zoom:image and file_size < max_file_size_before_warning %}
                 if(!('ontouchend' in document) && (window.innerWidth < {{ image.w }})) {
                     $('.loading-zoom').removeClass('hidden');
                     getRealImage().then(function(url) {
