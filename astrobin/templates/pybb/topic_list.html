@@ -37,7 +37,7 @@
         </thead>
         <tbody>
         {% for topic in topic_list|pybb_topic_unread:user %}
-            <tr class="topic-row {% if topic.sticky %} sticky {% endif %} {% cycle "odd" "even" %} {% if topic.on_moderation %} on-moderation {% endif %}">
+            <tr class="topic-row {% if topic.sticky %} sticky {% endif %} {% cycle "odd" "even" %} {% if topic.on_moderation and user.is_superuser %} on-moderation {% endif %}">
                     {% if request.user|is_forum_moderator %}
                         <td class="topic-select">
                             <input type="checkbox" name="topic-ids[]" value="{{ topic.id }}">
