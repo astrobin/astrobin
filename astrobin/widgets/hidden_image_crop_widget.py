@@ -22,7 +22,7 @@ def _s3_get_attrs(image, name):
     try:
         astrobin_image = Image.all_objects.get(image_file=image)
         width, height = astrobin_image.w, astrobin_image.h
-        url = astrobin_image.thumbnail('regular', None, sync=True)
+        url = astrobin_image.thumbnail('regular', '0', sync=True)
     except Image.DoesNotExist:
         try:
             astrobin_image = ImageRevision.objects.get(image_file=image)
