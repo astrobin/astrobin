@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-06 22:48+0000\n"
+"POT-Creation-Date: 2021-03-16 18:49+0000\n"
 "PO-Revision-Date: 2015-12-30 11:27+0000\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -1857,6 +1857,20 @@ msgstr "Hobbies"
 
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "Heb je andere hobbies dan astrofotografie?"
+
+#, fuzzy
+msgid "Instagram username"
+msgstr "Wijzig je avatar"
+
+msgid ""
+"If you provide this, AstroBin will tag you on Instagram if it's sharing an "
+"image of yours."
+msgstr ""
+
+msgid ""
+"An Instagram username must be between 3 and 30 characters, start with an @ "
+"sign, and only have letters, numbers, periods, and underlines."
+msgstr ""
 
 msgid "Timezone"
 msgstr "Tijdzone"
@@ -4007,6 +4021,21 @@ msgstr "Grootte foto"
 msgid "Full size"
 msgstr "Volledige grootte:"
 
+#, fuzzy
+#| msgid "Please note!"
+msgid "Please note"
+msgstr "Attentie!"
+
+#, python-format
+msgid ""
+"You are on a Free account, and when you delete an image, your upload counter "
+"does not decrease (unless the image is deleted within 24 hours of uploading "
+"it). The Free account is not a way to keep your most recent or best 10 "
+"images on AstroBin, but a trial period for you to decide whether or not a "
+"paid subscription is worth it. For more information, please <a href=\"%(url)s"
+"\">click here</a>."
+msgstr ""
+
 msgid "Delete this revision?"
 msgstr "Wis deze revisie?"
 
@@ -4591,6 +4620,18 @@ msgstr "Selecteer breedte"
 msgid "Galactic latitude"
 msgstr "Selecteer breedte"
 
+#, fuzzy
+#| msgid "Warning!"
+msgid "Warning"
+msgstr "Waarschuwing!"
+
+#, python-format
+msgid ""
+"You are about to open a large file of about %(size)s. Depending on your "
+"download speed, it might take several seconds or even minutes to view the "
+"file."
+msgstr ""
+
 msgid "Click-and-drag anywhere on the image."
 msgstr ""
 
@@ -4792,6 +4833,24 @@ msgstr "Bedankt voor het ondersteunen van AstroBin!"
 #, python-format
 msgid "You can review your API keys at %(api_keys_url)s."
 msgstr ""
+
+#, fuzzy
+#| msgid "Your image was plate-solved"
+msgid "Your comment was approved!"
+msgstr "Je foto werd ge-plate-solved"
+
+msgid ""
+"As a new user on AstroBin, your first 3 comments will go through a "
+"moderation queue, to prevent spam."
+msgstr ""
+
+msgid "The following comment of yours was just approved by a moderator."
+msgstr ""
+
+#, fuzzy
+#| msgid "Allow comments"
+msgid "View comment"
+msgstr "Commentaar toestaan"
 
 msgid "Congratulations for your first image on AstroBin!"
 msgstr ""
@@ -5002,6 +5061,45 @@ msgstr "<a href=\"%(object_url)s\">Je foto is met succes ge-plate-solved.</a>"
 
 msgid "Your image has been successfully plate-solved."
 msgstr "Je foto is met succes ge-plate-solved."
+
+msgid "An image you promoted made it to IOTD"
+msgstr ""
+
+msgid "An image you promoted made it to Top Pick"
+msgstr ""
+
+#, python-format
+msgid ""
+"You have been inactive as an IOTD Submitter or Reviewer for %(days)s days or "
+"more."
+msgstr ""
+
+msgid ""
+"While the AstroBin IOTD selection process has a good level of redundancy "
+"built into the system, it still relies on the members of the staff regularly "
+"making selections from their respective queues."
+msgstr ""
+
+msgid ""
+"As you have not been active for a significant amount of time, you have been "
+"removed from the IOTD staff for now."
+msgstr ""
+
+msgid ""
+"This will ensure that potential IOTD or Top Pick candidates don't go "
+"unnoticed sitting in the queue of an inactive staff member."
+msgstr ""
+
+#, fuzzy
+#| msgid "Thank you for supporting AstroBin!"
+msgid "Thank you for understanding!"
+msgstr "Bedankt voor het ondersteunen van AstroBin!"
+
+#, python-format
+msgid ""
+"After %(max_inactivity_days)s days of inactivity (counted from the last "
+"selection you made in your queue) you will be removed from the IOTD staff."
+msgstr ""
 
 #, fuzzy, python-format
 #| msgid ""
@@ -5876,11 +5974,6 @@ msgstr "Onderwerp openen"
 msgid "Please select a forum"
 msgstr ""
 
-#, fuzzy
-#| msgid "Please note!"
-msgid "Please note"
-msgstr "Attentie!"
-
 msgid ""
 "To post a new topic, please first go to the forum that is most relevant to "
 "your topic."
@@ -6531,6 +6624,18 @@ msgstr ""
 "camera is het absolute minimum. De datums waarop de belichting is gebeurd "
 "zijn ook erg belangrijk."
 
+#, fuzzy
+#| msgid "What kind of image is this?"
+msgid "Can't find your images?"
+msgstr "Wat voor type foto is dit?"
+
+#, python-format
+msgid ""
+"All your images are still unpublished. <a href=\"%(user_page)s?staging"
+"\">Visit your Staging Area</a> to find them, or <a href="
+"\"%(staging_area_learn_more_link)s\">learn more</a>."
+msgstr ""
+
 msgid "Delete account"
 msgstr "Account verwijderen"
 
@@ -7027,6 +7132,11 @@ msgstr "arcsec/pixel"
 msgid "Telescope type"
 msgstr "Telescoop type"
 
+#, fuzzy
+#| msgid "Integration hours"
+msgid "Integration time (hours)"
+msgstr "Integratieuren"
+
 #, python-format
 msgid ""
 "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Ultimate</a> "
@@ -7057,6 +7167,12 @@ msgstr "Basisinformatie"
 #| msgid "Guider/Planetary"
 msgid "Guider/planetary"
 msgstr "Volger/Planetair"
+
+msgid "Min"
+msgstr ""
+
+msgid "Max"
+msgstr ""
 
 #, fuzzy
 msgid "Imaging telescopes"
@@ -7637,9 +7753,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Je aanvraag is ontvangen en we wachten op de bevestiging van PayPal. Uw "
 #~ "abonnement zou binnen een paar minuten in orde moeten zijn!"
-
-#~ msgid "Thank you for supporting AstroBin!"
-#~ msgstr "Bedankt voor het ondersteunen van AstroBin!"
 
 #, fuzzy
 #~| msgid "Your active subscription plans"
@@ -9443,9 +9556,6 @@ msgstr ""
 #~ msgid "New image revision from a user you follow"
 #~ msgstr "Niewe fotorevisie van een gebruiker die je volgt"
 
-#~ msgid "Your image was plate-solved"
-#~ msgstr "Je foto werd ge-plate-solved"
-
 #~ msgid "Your image could not be plate-solved"
 #~ msgstr "Je foto kon niet worden ge-plate-solved"
 
@@ -11108,9 +11218,6 @@ msgstr ""
 
 #~ msgid "Sort by:"
 #~ msgstr "Sorteren volgens:"
-
-#~ msgid "Integration hours"
-#~ msgstr "Integratieuren"
 
 #~ msgid "Show by period"
 #~ msgstr "Bepaal de tijdsspanne"

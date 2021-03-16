@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-06 22:48+0000\n"
-"PO-Revision-Date: 2021-03-06 23:23+0000\n"
+"POT-Creation-Date: 2021-03-16 18:49+0000\n"
+"PO-Revision-Date: 2021-03-16 19:20+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1615073030.000000\n"
+"X-POOTLE-MTIME: 1615922441.000000\n"
 
 msgid "United Kingdom"
 msgstr "Regno Unito"
@@ -1836,6 +1836,25 @@ msgstr "Interessi"
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "Hai altri hobby, a parte l'astrofotografia?"
 
+#| msgid "Change your username"
+msgid "Instagram username"
+msgstr "Nome utente Instagram"
+
+msgid ""
+"If you provide this, AstroBin will tag you on Instagram if it's sharing an "
+"image of yours."
+msgstr ""
+"Se lo fornisci, AstroBin ti taggerà su Instagram in caso condivida una tua "
+"immagine."
+
+msgid ""
+"An Instagram username must be between 3 and 30 characters, start with an @ "
+"sign, and only have letters, numbers, periods, and underlines."
+msgstr ""
+"Un nome utente Instagram deve essere tra 3 e 30 caratteri, iniziare con il "
+"simbolo @, ed avere solo lettere, numeri, punti e caratteri di "
+"sottolineatura."
+
 msgid "Timezone"
 msgstr "Fusorario"
 
@@ -1992,7 +2011,6 @@ msgstr ""
 msgid "Language"
 msgstr "Lingua"
 
-#| msgid "Other images"
 msgid "Other languages"
 msgstr "Altre lingue"
 
@@ -2108,7 +2126,6 @@ msgstr "Amarico"
 msgid "Aragonese"
 msgstr "Aragonese"
 
-#| msgid "Armenia"
 msgid "Armenian"
 msgstr "Armeno"
 
@@ -2124,7 +2141,6 @@ msgstr "Avestano"
 msgid "Aymara"
 msgstr "Aymarano"
 
-#| msgid "Azerbaijan"
 msgid "Azerbaijani"
 msgstr "Azerbaijano"
 
@@ -2137,7 +2153,6 @@ msgstr "Baschirano"
 msgid "Basque"
 msgstr "Basco"
 
-#| msgid "Belarus"
 msgid "Belarusian"
 msgstr "Bielorusso"
 
@@ -2150,14 +2165,12 @@ msgstr "Lingue bihari"
 msgid "Bislama"
 msgstr "Bislamo"
 
-#| msgid "Newtonian"
 msgid "Bosnian"
 msgstr "Bosniaco"
 
 msgid "Breton"
 msgstr "Bretone"
 
-#| msgid "Bulgaria"
 msgid "Bulgarian"
 msgstr "Bulgaro"
 
@@ -2182,7 +2195,6 @@ msgstr "Cinese"
 msgid "Chuvash"
 msgstr "Ciuvascio"
 
-#| msgid "Finish"
 msgid "Cornish"
 msgstr "Cornico"
 
@@ -2192,14 +2204,12 @@ msgstr "Corso"
 msgid "Cree"
 msgstr "Cree"
 
-#| msgid "Croatia"
 msgid "Croatian"
 msgstr "Croato"
 
 msgid "Czech"
 msgstr "Ceco"
 
-#| msgid "Spanish"
 msgid "Danish"
 msgstr "Danese"
 
@@ -2218,18 +2228,15 @@ msgstr "Inglese"
 msgid "Esperanto"
 msgstr "Esperanto"
 
-#| msgid "Estonia"
 msgid "Estonian"
 msgstr "Estone"
 
 msgid "Ewe"
 msgstr "Ewe"
 
-#| msgid "Faroe Islands"
 msgid "Faroese"
 msgstr "Faroese"
 
-#| msgid "Fiji"
 msgid "Fijian"
 msgstr "Fijiano"
 
@@ -2239,14 +2246,12 @@ msgstr "Fulano"
 msgid "Galician"
 msgstr "Gallego"
 
-#| msgid "Georgia"
 msgid "Georgian"
 msgstr "Georgiano"
 
 msgid "Guarani"
 msgstr "Guarani"
 
-#| msgid "Duration"
 msgid "Gujarati"
 msgstr "Gujarati"
 
@@ -2268,15 +2273,12 @@ msgstr "Hindi"
 msgid "Hiri Motu"
 msgstr "Hiri Motu"
 
-#| msgid "Hungary"
 msgid "Hungarian"
 msgstr "Ungherese"
 
-#| msgid "Integration"
 msgid "Interlingua"
 msgstr "Interlingua"
 
-#| msgid "Indonesia"
 msgid "Indonesian"
 msgstr "Indonesiano"
 
@@ -2295,21 +2297,18 @@ msgstr "Inupiak"
 msgid "Ido"
 msgstr "Ido"
 
-#| msgid "Iceland"
 msgid "Icelandic"
 msgstr "Islandese"
 
 msgid "Inuktitut"
 msgstr "Inuktitut"
 
-#| msgid "Japanese"
 msgid "Javanese"
 msgstr "Javanese"
 
 msgid "Kalaallisut / Greenlandic"
 msgstr "Kalaallisut / Groenlandese"
 
-#| msgid "Canada"
 msgid "Kannada"
 msgstr "Kannada"
 
@@ -2319,11 +2318,9 @@ msgstr "Kanuri"
 msgid "Kashmiri"
 msgstr "Kashmiri"
 
-#| msgid "Kazakhstan"
 msgid "Kazakh"
 msgstr "Kazako"
 
-#| msgid "Center"
 msgid "Central Khmer"
 msgstr "Khmer centrale"
 
@@ -2339,7 +2336,6 @@ msgstr "Kirghizo; Chirghiso"
 msgid "Komi"
 msgstr "Komi"
 
-#| msgid "Congo"
 msgid "Kongo"
 msgstr "Congese"
 
@@ -2352,14 +2348,12 @@ msgstr "Curdo"
 msgid "Kuanyama / Kwanyama"
 msgstr "Kuanyama; Kwanyama"
 
-#| msgid "Rating"
 msgid "Latin"
 msgstr "Latino"
 
 msgid "Luxembourgish, Letzeburgesch"
 msgstr "Lussemburghese"
 
-#| msgid "Rwanda"
 msgid "Ganda"
 msgstr "Gandese"
 
@@ -2369,41 +2363,33 @@ msgstr "Limburgan / Limburger / Limburgish"
 msgid "Lingala"
 msgstr "Lingala"
 
-#| msgid "ago"
 msgid "Lao"
 msgstr "Lao"
 
-#| msgid "Lithuania"
 msgid "Lithuanian"
 msgstr "Lituano"
 
 msgid "Luba / Katanga"
 msgstr "Luba-Katanga"
 
-#| msgid "Latvia"
 msgid "Latvian"
 msgstr "Lettone"
 
 msgid "Manx"
 msgstr "Mannese"
 
-#| msgid "Newtonian"
 msgid "Macedonian"
 msgstr "Macedone"
 
-#| msgid "Madagascar"
 msgid "Malagasy"
 msgstr "Malgascio"
 
-#| msgid "Malaysia"
 msgid "Malay"
 msgstr "Malese"
 
-#| msgid "Malaysia"
 msgid "Malayalam"
 msgstr "Malayalam"
 
-#| msgid "Malta"
 msgid "Maltese"
 msgstr "Maltese"
 
@@ -2413,11 +2399,9 @@ msgstr "Maori"
 msgid "Marathi"
 msgstr "Marathi"
 
-#| msgid "Marshall Islands"
 msgid "Marshallese"
 msgstr "Marshallese"
 
-#| msgid "Mongolia"
 msgid "Mongolian"
 msgstr "Mongolo"
 
@@ -2427,11 +2411,9 @@ msgstr "Navajo; Navaho"
 msgid "North Ndebele"
 msgstr "Ndebele settentrionale"
 
-#| msgid "Nepal"
 msgid "Nepali"
 msgstr "Nepalese"
 
-#| msgid "Tonga"
 msgid "Ndonga"
 msgstr "Ndonga"
 
@@ -2441,7 +2423,6 @@ msgstr "Norvegese Bokmål"
 msgid "Norwegian Nynorsk"
 msgstr "Norvegese Nynorsk"
 
-#| msgid "Norway"
 msgid "Norwegian"
 msgstr "Norvegese"
 
@@ -2488,11 +2469,9 @@ msgstr "Pasthu; Afgano"
 msgid "Quechua"
 msgstr "Quechua"
 
-#| msgid "Romania"
 msgid "Romansh"
 msgstr "Romansh"
 
-#| msgid "Burundi"
 msgid "Rundi"
 msgstr "Rundi"
 
@@ -2508,18 +2487,15 @@ msgstr "Sardo"
 msgid "Sindhi"
 msgstr "Sindhi"
 
-#| msgid "Northern"
 msgid "Northern Sami"
 msgstr "Sami settentrionale"
 
-#| msgid "Samoa"
 msgid "Samoan"
 msgstr "Samoano"
 
 msgid "Sango"
 msgstr "Sango"
 
-#| msgid "Serbia"
 msgid "Serbian"
 msgstr "Serbo"
 
@@ -2532,19 +2508,15 @@ msgstr "Shona"
 msgid "Sinhala / Sinhalese"
 msgstr "Sinhala; Sinhalese"
 
-#| msgid "Slovakia"
 msgid "Slovak"
 msgstr "Slovacco"
 
-#| msgid "Slovenia"
 msgid "Slovenian"
 msgstr "Sloveno"
 
-#| msgid "Somalia"
 msgid "Somali"
 msgstr "Somalo"
 
-#| msgid "Southern"
 msgid "Southern Sotho"
 msgstr "Sesotho meridionale"
 
@@ -2560,7 +2532,6 @@ msgstr "Swahili"
 msgid "Swati"
 msgstr "Swati"
 
-#| msgid "Sweden"
 msgid "Swedish"
 msgstr "Svedese"
 
@@ -2570,37 +2541,30 @@ msgstr "Tamil"
 msgid "Telugu"
 msgstr "Telugu"
 
-#| msgid "Tajikistan"
 msgid "Tajik"
 msgstr "Tagico"
 
-#| msgid "Thailand"
 msgid "Thai"
 msgstr "Tailandese"
 
 msgid "Tigrinya"
 msgstr "Tigrino"
 
-#| msgid "(beta)"
 msgid "Tibetan"
 msgstr "Tibetano"
 
-#| msgid "Turkey"
 msgid "Turkmen"
 msgstr "Turkmeno"
 
 msgid "Tagalog"
 msgstr "Tagalog"
 
-#| msgid "Botswana"
 msgid "Tswana"
 msgstr "Tswana"
 
-#| msgid "Tonga"
 msgid "Tsonga"
 msgstr "Tsonga"
 
-#| msgid "Qatar"
 msgid "Tatar"
 msgstr "Tatar"
 
@@ -2613,21 +2577,18 @@ msgstr "Tahitiano"
 msgid "Uighur / Uyghur"
 msgstr "Uighur"
 
-#| msgid "Ukraine"
 msgid "Ukrainian"
 msgstr "Ucraino"
 
 msgid "Urdu"
 msgstr "Urdu"
 
-#| msgid "Uzbekistan"
 msgid "Uzbek"
 msgstr "Uzbeko"
 
 msgid "Venda"
 msgstr "Venda"
 
-#| msgid "Viet Nam"
 msgid "Vietnamese"
 msgstr "Vietnamita"
 
@@ -2643,7 +2604,6 @@ msgstr "Gallese"
 msgid "Wolof"
 msgstr "Wolof"
 
-#| msgid "Western Sahara"
 msgid "Western Frisian"
 msgstr "Frisone occidentale"
 
@@ -2653,7 +2613,6 @@ msgstr "Xhosa"
 msgid "Yiddish"
 msgstr "Yiddish"
 
-#| msgid "Aruba"
 msgid "Yoruba"
 msgstr "Yoruba"
 
@@ -3722,10 +3681,6 @@ msgstr "Acquisita a"
 msgid "Remove"
 msgstr "Rimuovi"
 
-#| msgid ""
-#| "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
-#| "international community: using English is preferred. PS: <strong>"
-#| "%(user)s</strong>'s preferred language is <strong>%(lang)s</strong>."
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
 "international community: using <strong>English</strong> is preferred."
@@ -3955,6 +3910,25 @@ msgstr "Dimensione grande"
 
 msgid "Full size"
 msgstr "Dimensione intera"
+
+msgid "Please note"
+msgstr "Nota bene"
+
+#, python-format
+msgid ""
+"You are on a Free account, and when you delete an image, your upload counter "
+"does not decrease (unless the image is deleted within 24 hours of uploading "
+"it). The Free account is not a way to keep your most recent or best 10 "
+"images on AstroBin, but a trial period for you to decide whether or not a "
+"paid subscription is worth it. For more information, please <a href=\"%(url)s"
+"\">click here</a>."
+msgstr ""
+"Hai un account Free, e quando cancelli un'immagine, il tuo contatore di "
+"caricamenti non decresce (a meno che l'immagine non sia cancellata entro 24 "
+"ore dal suo caricemento). L'account Free non è un modo per avere le tue 10 "
+"immagini più recenti o migliori, ma un periodo di prova in cui decidere se "
+"un abbonamento a pagamento fa per te. Per maggiori informazioni, <a href=\""
+"%(url)s\">clicca qui</a>."
 
 msgid "Delete this revision?"
 msgstr "Cancellare questa versione?"
@@ -4546,6 +4520,20 @@ msgstr "Longitudine galattica"
 msgid "Galactic latitude"
 msgstr "Latitudine galattica"
 
+#| msgid "Warning!"
+msgid "Warning"
+msgstr "Attenzione"
+
+#, python-format
+msgid ""
+"You are about to open a large file of about %(size)s. Depending on your "
+"download speed, it might take several seconds or even minutes to view the "
+"file."
+msgstr ""
+"Stai per aprire un file grande circa %(size)s. A seconda della tua velocità "
+"di download, potrebbero volerci diversi secondi o perfino minuti per "
+"visualizzarlo."
+
 msgid "Click-and-drag anywhere on the image."
 msgstr "Clicca-e-trascina su qualunque punto dell'immagine."
 
@@ -4730,6 +4718,24 @@ msgstr "Grazie per l'usare le API AstroBin!"
 #, python-format
 msgid "You can review your API keys at %(api_keys_url)s."
 msgstr "Vuoi visualizzare le tue chiavi API su %(api_keys_url)s."
+
+#| msgid "Your image was plate-solved"
+msgid "Your comment was approved!"
+msgstr "Il tuo commento è stato approvato!"
+
+msgid ""
+"As a new user on AstroBin, your first 3 comments will go through a "
+"moderation queue, to prevent spam."
+msgstr ""
+"In quanto nuovo utente su AstroBin, i tuoi primi 3 commenti saranno "
+"verificati da un moderatore, per evitare spam."
+
+msgid "The following comment of yours was just approved by a moderator."
+msgstr "Il seguente commento è stato approvato da un moderatore."
+
+#| msgid "Allow comments"
+msgid "View comment"
+msgstr "Visualizza commento"
 
 msgid "Congratulations for your first image on AstroBin!"
 msgstr "Congratulazioni per la tua prima immagine su AstroBin!"
@@ -4959,6 +4965,55 @@ msgstr ""
 
 msgid "Your image has been successfully plate-solved."
 msgstr "La tua immagine è ridotta astrometricamente."
+
+msgid "An image you promoted made it to IOTD"
+msgstr "Un'immagine per cui hai votato è diventata Foto del Giorno"
+
+msgid "An image you promoted made it to Top Pick"
+msgstr "Un'immagine per cui hai votato è diventata Top Pick"
+
+#, python-format
+msgid ""
+"You have been inactive as an IOTD Submitter or Reviewer for %(days)s days or "
+"more."
+msgstr ""
+"Sei stato inattivo in qualità di Propositore o Revisore IOTD per %(days)s "
+"giorni o più."
+
+msgid ""
+"While the AstroBin IOTD selection process has a good level of redundancy "
+"built into the system, it still relies on the members of the staff regularly "
+"making selections from their respective queues."
+msgstr ""
+"Sebbene il processo di selezione della Foto del Giorno su AstroBin abbia "
+"della ridondanza, ha comunque bisogno che i membri dello staff facciamo le "
+"selezioni nelle proprie code regolarmente."
+
+msgid ""
+"As you have not been active for a significant amount of time, you have been "
+"removed from the IOTD staff for now."
+msgstr ""
+"Davo che non sei stato attivo per una quantità di tempo significativa, sei "
+"stato rimosso dallo staff IOTD per ora."
+
+msgid ""
+"This will ensure that potential IOTD or Top Pick candidates don't go "
+"unnoticed sitting in the queue of an inactive staff member."
+msgstr ""
+"Questo assicurerà che immagini potenaizlmente IOTD or Top Pick non saranno "
+"ignorate nella coda di un membro dello staff inattivo."
+
+#| msgid "Thank you for supporting AstroBin!"
+msgid "Thank you for understanding!"
+msgstr "Grazie per la compreinsione!"
+
+#, python-format
+msgid ""
+"After %(max_inactivity_days)s days of inactivity (counted from the last "
+"selection you made in your queue) you will be removed from the IOTD staff."
+msgstr ""
+"Dopo %(max_inactivity_days)s giorni di inattività (contatti dall'ultima "
+"selezione che hai fatto nella tua coda) sarai rimosso dallo staff IOTD."
 
 #, python-format
 msgid ""
@@ -5810,9 +5865,6 @@ msgstr "Apri argomento"
 msgid "Please select a forum"
 msgstr "Seleziona un forum"
 
-msgid "Please note"
-msgstr "Nota bene"
-
 msgid ""
 "To post a new topic, please first go to the forum that is most relevant to "
 "your topic."
@@ -6461,6 +6513,20 @@ msgstr ""
 "i dati necessari. Telescopi di acquisizione, camere di acquisizione e "
 "soggetti sono il minimo. Anche le date di acquisizione sono molto importanti."
 
+#| msgid "What kind of image is this?"
+msgid "Can't find your images?"
+msgstr "Non trovi le tue immagini?"
+
+#, python-format
+msgid ""
+"All your images are still unpublished. <a href=\"%(user_page)s?staging"
+"\">Visit your Staging Area</a> to find them, or <a href="
+"\"%(staging_area_learn_more_link)s\">learn more</a>."
+msgstr ""
+"Tutte le tue immagini sono ancora nascoste. <a href=\"%(user_page)s?staging\""
+">Visita la tua Area di Lavoro</a> per trovarle, oppure <a href=\""
+"%(staging_area_learn_more_link)s\">scopri di più</a>."
+
 msgid "Delete account"
 msgstr "Cancella account"
 
@@ -6927,6 +6993,10 @@ msgstr "Campionamento (arcsec/pixel)"
 msgid "Telescope type"
 msgstr "Tipo di telescopio"
 
+#| msgid "Integration hours"
+msgid "Integration time (hours)"
+msgstr "Tempo d'integrazione (ore)"
+
 #, python-format
 msgid ""
 "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Ultimate</a> "
@@ -6952,6 +7022,13 @@ msgstr "Nomina Top pick"
 
 msgid "Guider/planetary"
 msgstr "Guida/Planetaria"
+
+msgid "Min"
+msgstr "Min"
+
+#| msgid "Manx"
+msgid "Max"
+msgstr "Max"
 
 msgid "Imaging telescopes"
 msgstr "Telescopio o obiettivo di acquisizione"
@@ -7641,9 +7718,6 @@ msgstr ""
 #~ msgstr ""
 #~ "La tua richiesta è stata ricevuta, e stiamo attendendo la confema finale "
 #~ "da PayPal. Il tuo abbonamento dovrebbe essere attivo entro pochi minuti!"
-
-#~ msgid "Thank you for supporting AstroBin!"
-#~ msgstr "Grazie per il tuo supporto ad AstroBin!"
 
 #~ msgid "Your inactive subscription plans"
 #~ msgstr "I tuoi abbonamenti inattivi"
@@ -9589,9 +9663,6 @@ msgstr ""
 #~ msgid "New image revision from a user you follow"
 #~ msgstr "Nuova revisione d'immagine da un utente che segui"
 
-#~ msgid "Your image was plate-solved"
-#~ msgstr "La tua immagine è stata ridotta astrometricamente"
-
 #~ msgid "Your image could not be plate-solved"
 #~ msgstr "La tua immagine non è stata ridotta astrometricamente"
 
@@ -11307,9 +11378,6 @@ msgstr ""
 #~ msgid "Sort by:"
 #~ msgstr "Ordina per:"
 
-#~ msgid "Integration hours"
-#~ msgstr "Ore di integrazione"
-
 #~ msgid "Show by period"
 #~ msgstr "Mostra per periodo"
 
@@ -11648,10 +11716,6 @@ msgstr ""
 #~ msgid_plural "Please correct following errors."
 #~ msgstr[0] "Non stai più seguendo"
 #~ msgstr[1] "Non stai più seguendo"
-
-#, fuzzy
-#~ msgid "in"
-#~ msgstr "Gain"
 
 #, fuzzy
 #~ msgid "Leaderbloard"
