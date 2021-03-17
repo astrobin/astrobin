@@ -62,13 +62,8 @@ class GearTest(TestCase):
         g.delete()
 
     def test_get_absolute_url(self):
-         g, created = Gear.objects.get_or_create(
-            make = "Test make",
-            name = "Test name")
-         self.assertEqual(
-            g.get_absolute_url(),
-            '/gear/%i/test-make-test-name/' % g.id)
-         g.delete()
+         g, created = Gear.objects.get_or_create(make = "Test make", name = "Test name")
+         self.assertEqual('/search/?q=Test make Test name', g.get_absolute_url())
 
     def test_hard_merge(self):
         # Check with diffrent gear types
