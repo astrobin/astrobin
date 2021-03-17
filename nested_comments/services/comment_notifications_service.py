@@ -5,7 +5,7 @@ from django.urls import reverse
 
 from astrobin.models import Image
 from astrobin.stories import add_story
-from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_notifications.utils import push_notification, build_notification_url
 from astrobin_apps_users.services import UserService
 from nested_comments.models import NestedComment
 
@@ -39,7 +39,7 @@ class CommentNotificationsService:
                 push_notification(
                     [instance.parent.author], 'new_comment_reply',
                     {
-                        'url': url,
+                        'url': build_notification_url(url),
                         'user': instance.author.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse(
                             'user_page', kwargs={'username': instance.author.username}),
@@ -52,7 +52,7 @@ class CommentNotificationsService:
                 push_notification(
                     [obj.user], 'new_comment',
                     {
-                        'url': url,
+                        'url': build_notification_url(url),
                         'user': instance.author.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse(
                             'user_page', kwargs={'username': instance.author.username}),
@@ -68,5 +68,5 @@ class CommentNotificationsService:
     def send_approval_notification(self):
         if not self.comment.pending_moderation:
             push_notification([self.comment.author], 'comment_approved', {
-                'url': settings.BASE_URL + self.comment.get_absolute_url()
+                'url': build_notification_url(settings.BASE_URL + self.comment.get_absolute_url())
             })
