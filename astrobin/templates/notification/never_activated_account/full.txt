@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load astrobin_apps_notifications_tags %}
 
 {% blocktrans trimmed %}
     Hi!
@@ -19,7 +20,7 @@
     If you would like to activate it now, please click on the following link:
 {% endblocktrans %}
 
-{{ activation_link }}
+{{ activation_link }}?{% notification_url_params_for_email %}
 
 {% blocktrans trimmed %}
     If you don't, we will delete this account in a week. But don't worry, you're always welcome to join again!

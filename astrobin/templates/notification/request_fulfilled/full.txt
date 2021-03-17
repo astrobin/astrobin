@@ -1,2 +1,0 @@
-{% load i18n %}
-{% blocktrans %}{{originator}} has fulfilled your request! Check it out at the following url: {{object_url}}{% endblocktrans %}

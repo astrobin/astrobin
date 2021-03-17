@@ -1,12 +1,11 @@
-# Django
+import urllib
+
 from django.template import Library
 
-# This app
 from astrobin_apps_notifications.utils import (
     get_seen_notifications,
-    get_unseen_notifications,
+    get_unseen_notifications, build_notification_url, get_notification_url_params_for_email
 )
-
 
 register = Library()
 
@@ -45,3 +44,14 @@ def show_notice_settings(label):
         'image_you_promoted_is_tp',
         'image_you_promoted_is_iotd',
     )
+
+
+@register.filter
+def to_notification_url(url):
+    return build_notification_url(url)
+
+
+@register.simple_tag
+def notification_url_params_for_email():
+    params = get_notification_url_params_for_email()
+    return urllib.urlencode(params)
