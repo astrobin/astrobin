@@ -8,7 +8,7 @@ from django.core.management import call_command
 from django_bouncy.models import Delivery, Bounce, Complaint
 
 from astrobin.models import Image, UserProfile, ImageRevision
-from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_notifications.utils import push_notification, build_notification_url
 from common.services import DateTimeService
 from toggleproperties.models import ToggleProperty
 
@@ -59,7 +59,7 @@ def push_notification_for_new_image_revision(revision_pk):
         object_id=revision.image.user.pk)]
 
     push_notification(followers, 'new_image_revision', {
-        'object_url': settings.BASE_URL + revision.get_absolute_url(),
+        'object_url': build_notification_url(settings.BASE_URL + revision.get_absolute_url()),
         'originator': revision.image.user.userprofile.get_display_name(),
     })
 

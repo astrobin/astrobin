@@ -28,9 +28,10 @@ from subscription.signals import paid, signed_up
 from threaded_messages.models import Thread
 
 from astrobin_apps_groups.models import Group
-from astrobin_apps_iotd.models import IotdSubmission, IotdVote, TopPickArchive, Iotd
+from astrobin_apps_iotd.models import IotdSubmission, IotdVote, TopPickArchive
 from astrobin_apps_notifications.tasks import push_notification_for_new_image, push_notification_for_new_image_revision
-from astrobin_apps_notifications.utils import push_notification, clear_notifications_template_cache
+from astrobin_apps_notifications.utils import push_notification, clear_notifications_template_cache, \
+    build_notification_url
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.services.premium_service import PremiumService
@@ -207,7 +208,7 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
             push_notification(
                 [user], 'new_comment_mention',
                 {
-                    'url': settings.BASE_URL + instance.get_absolute_url(),
+                    'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url()),
                     'user': instance.author.userprofile.get_display_name(),
                     'user_url': settings.BASE_URL + reverse_url(
                         'user_page', kwargs={'username': instance.author}),
@@ -263,7 +264,7 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                 push_notification(
                     [instance.content_object.user], 'new_' + instance.property_type,
                     {
-                        'url': settings.BASE_URL + instance.content_object.get_absolute_url(),
+                        'url': build_notification_url(settings.BASE_URL + instance.content_object.get_absolute_url()),
                         'title': instance.content_object.title,
                         'user': instance.user.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse_url(
@@ -274,7 +275,7 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                 push_notification(
                     [instance.content_object.author], 'new_comment_like',
                     {
-                        'url': settings.BASE_URL + instance.content_object.get_absolute_url(),
+                        'url': build_notification_url(settings.BASE_URL + instance.content_object.get_absolute_url()),
                         'user': instance.user.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse_url(
                             'user_page', kwargs={'username': instance.user.username}),
@@ -288,7 +289,7 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                 push_notification(
                     [instance.content_object.user], 'new_forum_post_like',
                     {
-                        'url': settings.BASE_URL + instance.content_object.get_absolute_url(),
+                        'url': build_notification_url(settings.BASE_URL + instance.content_object.get_absolute_url()),
                         'user': instance.user.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse_url(
                             'user_page', kwargs={'username': instance.user.username}),
@@ -310,8 +311,8 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                 push_notification(
                     [followed_user], 'new_follower', {
                         'object': instance.user.userprofile.get_display_name(),
-                        'object_url': settings.BASE_URL + reverse_url(
-                            'user_page', kwargs={'username': instance.user.username}),
+                        'object_url': build_notification_url(settings.BASE_URL + reverse_url(
+                            'user_page', kwargs={'username': instance.user.username})),
                     }
                 )
 
@@ -349,8 +350,9 @@ def solution_post_save(sender, instance, created, **kwargs):
     else:
         return
 
-    push_notification([user], notification,
-                      {'object_url': settings.BASE_URL + target.get_absolute_url()})
+    push_notification(
+        [user], notification,
+        {'object_url': build_notification_url(settings.BASE_URL + target.get_absolute_url())})
 
 
 post_save.connect(solution_post_save, sender=Solution)
@@ -606,8 +608,8 @@ def forum_topic_pre_save(sender, instance, **kwargs):
                 'new_topic_in_group',
                 {
                     'user': instance.user.userprofile.get_display_name(),
-                    'url': settings.BASE_URL + instance.get_absolute_url(),
-                    'group_url': reverse_url('group_detail', kwargs={'pk': group.pk}),
+                    'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url()),
+                    'group_url': build_notification_url(reverse_url('group_detail', kwargs={'pk': group.pk})),
                     'group_name': group.name,
                     'topic_title': instance.name,
                 },
@@ -632,8 +634,9 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
             'new_topic_in_group',
             {
                 'user': instance.user.userprofile.get_display_name(),
-                'url': settings.BASE_URL + instance.get_absolute_url(),
-                'group_url': settings.BASE_URL + reverse_url('group_detail', kwargs={'pk': group.pk}),
+                'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url()),
+                'group_url': build_notification_url(
+                    settings.BASE_URL + reverse_url('group_detail', kwargs={'pk': group.pk})),
                 'group_name': group.name,
                 'topic_title': instance.name,
             },
@@ -697,7 +700,7 @@ def forum_post_post_save(sender, instance, created, **kwargs):
             push_notification(
                 [user], 'new_forum_post_mention',
                 {
-                    'url': settings.BASE_URL + instance.get_absolute_url(),
+                    'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url()),
                     'user': instance.user.userprofile.get_display_name(),
                     'user_url': settings.BASE_URL + reverse_url(
                         'user_page', kwargs={'username': instance.user}),

@@ -1,3 +1,6 @@
+import urlparse
+from urllib import urlencode
+
 from django.conf import settings
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
@@ -51,3 +54,18 @@ def get_seen_notifications(user, n=10):
     if n >= 0:
         notifications = notifications[:n]
     return notifications
+
+
+def get_notification_url_params_for_email():
+    return dict(utm_source='astrobin', utm_medium='email', utm_campaign='notification')
+
+
+def build_notification_url(url):
+    params = get_notification_url_params_for_email()
+    url_parse = urlparse.urlparse(url)
+    query = url_parse.query
+    url_dict = dict(urlparse.parse_qsl(query))
+    url_dict.update(params)
+    url_new_query = urlencode(url_dict)
+    url_parse = url_parse._replace(query=url_new_query)
+    return urlparse.urlunparse(url_parse)

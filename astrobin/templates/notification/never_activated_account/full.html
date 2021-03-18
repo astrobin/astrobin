@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load astrobin_apps_notifications_tags %}
 
 {% blocktrans trimmed %}
     Hi!
@@ -34,7 +35,7 @@
 <br />
 <br />
 
-<a href="{{ activation_link }}">{% trans "Activate my account" %}</a>
+<a href="{{ activation_link }}?{% notification_url_params_for_email %}">{% trans "Activate my account" %}</a>
 
 <br />
 <br />

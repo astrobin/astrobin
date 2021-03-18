@@ -43,12 +43,6 @@ NOTICE_TYPES = (
         1,
     ),
     (
-        'new_blog_entry',
-        'AstroBin has published a new blog entry',
-        '',
-        1,
-    ),
-    (
         'new_comment',
         _('Your image received a new comment'),
         '',
@@ -91,26 +85,8 @@ NOTICE_TYPES = (
         2,
     ),
     (
-        'new_image_from_gear',
-        _('New image with some gear you follow'),
-        '',
-        2,
-    ),
-    (
-        'new_image_of_subject',
-        _('New image of a subject you follow'),
-        '',
-        2,
-    ),
-    (
         'api_key_request_approved',
         _('Your API Key request has been approved'),
-        '',
-        2,
-    ),
-    (
-        'new_gear_discussion',
-        _('New discussion about a gear item you own'),
         '',
         2,
     ),

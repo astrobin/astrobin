@@ -9,7 +9,7 @@ from django.views.generic import UpdateView
 
 from astrobin_apps_groups.models import Group
 from astrobin_apps_groups.views.mixins import RedirectToGroupDetailMixin, RestrictToPremiumMembersMixin
-from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_notifications.utils import push_notification, build_notification_url
 
 
 class GroupJoinView(LoginRequiredMixin, RedirectToGroupDetailMixin, RestrictToPremiumMembersMixin, UpdateView):
@@ -34,13 +34,14 @@ class GroupJoinView(LoginRequiredMixin, RedirectToGroupDetailMixin, RestrictToPr
                 group.join_requests.add(request.user)
                 messages.warning(request,
                                  _("This is a moderated group, and your join request will be reviewed by a moderator"))
-                push_notification(group.moderators.all(), 'new_group_join_request',
-                                  {
-                                      'requester': request.user.userprofile.get_display_name(),
-                                      'group_name': group.name,
-                                      'url': settings.BASE_URL + reverse('group_moderate_join_requests',
-                                                                         args=(group.pk,)),
-                                  })
+                push_notification(
+                    group.moderators.all(), 'new_group_join_request',
+                    {
+                        'requester': request.user.userprofile.get_display_name(),
+                        'group_name': group.name,
+                        'url': build_notification_url(settings.BASE_URL + reverse('group_moderate_join_requests',
+                                                           args=(group.pk,))),
+                    })
                 return redirect(self.get_success_url())
             else:
                 doAdd(request.user, group)

@@ -46,3 +46,20 @@ class NotificationsTest(TestCase):
         self.assertEquals(response['unseen'][0], get_unseen_notifications(self.user2)[0])
         self.assertEquals(len(response['seen']), 0)
         self.client.logout()
+
+    def test_build_notification_url_no_other_params(self):
+        url = build_notification_url('www.astrobin.com')
+        url_parse = urlparse.urlparse(url)
+        query = url_parse.query
+        self.assertTrue('utm_source=astrobin' in query)
+        self.assertTrue('utm_medium=email' in query)
+        self.assertTrue('utm_campaign=notification' in query)
+
+    def test_build_notification_url_with_other_params(self):
+        url = build_notification_url('www.astrobin.com?foo=bar')
+        url_parse = urlparse.urlparse(url)
+        query = url_parse.query
+        self.assertTrue('utm_source=astrobin' in query)
+        self.assertTrue('utm_medium=email' in query)
+        self.assertTrue('utm_campaign=notification' in query)
+        self.assertTrue('foo=bar' in query)

@@ -1,2 +1,0 @@
-{% load i18n %}
-{% blocktrans %}New image of a subject you follow: <strong>{{subject}}</strong>. Check it out at the following url: {{object_url}}{% endblocktrans %}

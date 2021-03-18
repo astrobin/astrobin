@@ -2,6 +2,7 @@
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 LANGUAGE_COOKIE_NAME = 'astrobin_lang'
+LANGUAGE_COOKIE_AGE=60*60*24*365*10
 
 gettext = lambda s: s
 LANGUAGES = (

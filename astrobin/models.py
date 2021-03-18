@@ -296,7 +296,7 @@ class Gear(models.Model):
         return []
 
     def get_absolute_url(self):
-        return '/gear/%i/%s/' % (self.id, self.slug())
+        return '/search/?q=%s' % unicode(self)
 
     def slug(self):
         return slugify("%s %s" % (self.get_make(), self.get_name()))

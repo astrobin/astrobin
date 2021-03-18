@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load astrobin_apps_notifications_tags %}
 
 {% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
     <strong>{{ user }}</strong> has published a new image
@@ -8,4 +9,4 @@
     : {{ image.title }}
 {% endif %}
 
-{{ base_url }}{% url 'image_detail' image.get_id %}
+{{ base_url }}{% url 'image_detail' image.get_id %}?{% notification_url_params_for_email %}

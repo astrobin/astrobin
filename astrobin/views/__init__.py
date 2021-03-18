@@ -2089,7 +2089,10 @@ def user_profile_save_preferences(request):
             if hasattr(request, 'session'):
                 request.session['django_language'] = lang
 
-            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
+            response.set_cookie(
+                settings.LANGUAGE_COOKIE_NAME, lang,
+                max_age=settings.LANGUAGE_COOKIE_AGE
+            )
             activate(lang)
     else:
         return render(request, "user/profile/edit/preferences.html", response_dict)
@@ -2380,7 +2383,10 @@ def set_language(request, language_code):
         if hasattr(request, 'session'):
             request.session['django_language'] = language_code
 
-        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language_code)
+        response.set_cookie(
+            settings.LANGUAGE_COOKIE_NAME, language_code,
+            max_age=settings.LANGUAGE_COOKIE_AGE
+        )
         activate(language_code)
 
         if request.user.is_authenticated():

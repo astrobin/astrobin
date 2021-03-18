@@ -7,7 +7,7 @@ from django.views.generic import UpdateView
 from astrobin.models import UserProfile
 from astrobin_apps_groups.models import Group
 from astrobin_apps_groups.views.mixins import RestrictToModeratedGroupsMixin, RestrictToGroupModeratorsMixin
-from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_notifications.utils import push_notification, build_notification_url
 
 
 class GroupApproveJoinRequestView(JSONResponseMixin, LoginRequiredMixin,
@@ -25,11 +25,12 @@ class GroupApproveJoinRequestView(JSONResponseMixin, LoginRequiredMixin,
 
             group.join_requests.remove(user)
             group.members.add(user)
-            push_notification([user], 'group_join_request_approved',
-                              {
-                                  'group_name': group.name,
-                                  'url': settings.BASE_URL + reverse('group_detail', args=(group.pk,)),
-                              })
+            push_notification(
+                [user], 'group_join_request_approved',
+                {
+                    'group_name': group.name,
+                    'url': build_notification_url(settings.BASE_URL + reverse('group_detail', args=(group.pk,))),
+                })
 
             return self.render_json_response({
                 'member': user.pk,
