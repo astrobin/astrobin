@@ -645,6 +645,38 @@ def get_language_name(language_code):
         return 'English (US)'
 
 
+@register.simple_tag
+def get_language_code_display(language_code):
+    languages = {
+        '': 'EN',
+        'en': 'EN',
+        'en-us': 'EN',
+        'en-gb': 'EN (GB)',
+
+        'ar': 'AR',
+        'de': 'DE',
+        'el': 'EL',
+        'es': 'ES',
+        'fi': 'FI',
+        'fr': 'FR',
+        'it': 'IT',
+        'ja': 'JA',
+        'nl': 'NL',
+        'pl': 'PL',
+        'pt': 'PT',
+        'pt-br': 'PT (BR)',
+        'ru': 'RU',
+        'sq': 'SQ',
+        'tr': 'TR',
+        'zh-hans': 'ZH (CN)',
+    }
+
+    try:
+        return languages[language_code.lower()]
+    except KeyError:
+        return 'EN'
+
+
 @register.filter
 def shadow_bans(a, b):
     # type: (User, User) -> bool
