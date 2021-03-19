@@ -217,7 +217,7 @@ body.full {
     }
 
     @media screen and (min-width: 980px) {
-      max-width: 210px;
+      max-width: 205px;
     }
   }
 
@@ -425,10 +425,6 @@ body.full {
 
   > li.open > a {
     text-shadow: 0 1px 0 darken($text-color, 20%);
-  }
-
-  .language-switcher {
-    margin-right: .5rem;
   }
 
   .form-inline {

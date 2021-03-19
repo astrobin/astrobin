@@ -4,13 +4,14 @@
 
 <li class="dropdown language-switcher">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <i class="icon-globe"></i>
-        {% if not request.user.is_authenticated %}
-            <span class="hidden-phone">
+        <span class="hidden-phone">
+            {% if request.user.is_authenticated %}
+                {% get_language_code_display request.LANGUAGE_CODE %}
+            {% else %}
                 {% get_language_name request.LANGUAGE_CODE %}
-                <i class="icon-caret-down"></i>
-            </span>
-        {% endif %}
+            {% endif %}
+            <i class="icon-caret-down"></i>
+        </span>
     </a>
     <ul class="dropdown-menu">
 
