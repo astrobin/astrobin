@@ -43,6 +43,6 @@ class HiddenImageViewSet(viewsets.ModelViewSet):
         object = self.get_object()  # type: IotdHiddenImage
 
         if object.user != request.user:
-            return HttpResponseForbidden([_("You cannot unhide an image on behalf of another user.")])
+            return HttpResponseForbidden(["You cannot unhide an image on behalf of another user."])
 
         return super(viewsets.ModelViewSet, self).destroy(request, *args, **kwargs)
