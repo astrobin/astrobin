@@ -3,6 +3,8 @@
 
 {% load pybb_tags i18n %}
 {% load staticfiles %}
+{% load tags %}
+{% load common_tags %}
 
 {% block title %}{{ topic }}{% endblock %}
 
@@ -84,6 +86,14 @@
             {% endifnotequal %}{% endif %}
             {% for post in post_list %}
                 {% cycle 'odd' 'even' as rowcolors silent %}
+
+                {% if user.is_authenticated and post != post.topic.head and post|post_is_unread:request and not unread_marker_shown %}
+                    <div class="unread-marker">
+                        {% trans "The posts below are new since your last visit to this topic." %}
+                    </div>
+                    {% setvar True as unread_marker_shown %}
+                {% endif %}
+
                 {% include "pybb/post_template.html" %}
             {% endfor %}
         </div>
@@ -93,7 +103,7 @@
         {% endwith %}
 
         {% if user|pybb_may_create_post:topic %}
-            <h3>{% trans "Reply" %}</h3>
+            <h3 class="reply-header">{% trans "Reply" %}</h3>
             {% include "pybb/post_form.html" %}
         {% else %}
             {% if topic.closed %}
@@ -117,4 +127,26 @@
             </div>
         {% endif %}
     </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            {% with topic|first_unread_post_link:request as first_unread_post_link %}
+                {% if first_unread_post_link and topic.posts.count > 1 %}
+                    var hash = window.location.hash;
+                    if (!hash || hash.indexOf("#post-") === -1) {
+                        $.toast({
+                            heading: "{% trans "You have unread posts in this topic." %}",
+                            text: "{% trans "Would you like to jump to the new posts since your last visit?" %}<br/><br/><a href='{{ first_unread_post_link }}'>{% trans "Click here" %}</a>",
+                            showHideTransition: 'slide',
+                            allowToastClose: true,
+                            hideAfter: false,
+                            position: 'top-right'
+                        });
+                    }
+                {% endif %}
+            {% endwith %}
+        });
+    </script>
 {% endblock %}
