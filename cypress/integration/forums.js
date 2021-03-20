@@ -92,7 +92,7 @@ describe("Forums", () => {
         cy.get("#cke_id_body .cke_wysiwyg_div").find(".smiley").should("be.visible");
     });
 
-    it("should insert bold", () => { 
+    it("should insert bold", () => {
         cy.get(".cke_button__bold").click();
         cy.get("#cke_id_body .cke_wysiwyg_div strong");
     });
@@ -102,11 +102,87 @@ describe("Forums", () => {
         cy.get("#cke_id_body .cke_wysiwyg_div em");
     });
 
-    it("should insert link", () => { 
+    it("should insert link", () => {
         cy.get(".cke_button__simplelink").click();
         cy.get(".cke_dialog_ui_input_text input").first().type("https://astrobin.com");
         cy.get(".cke_dialog_ui_input_text input").last().type("Astrobin");
         cy.get(".cke_dialog_ui_button_ok").click();
         cy.get("#cke_id_body .cke_wysiwyg_div a").should("contain", "Astrobin");
+    });
+
+    it("should not show 'new posts below' break and notification for the first post", () => {
+        cy.clearCookies();
+        cy.login({username: "astrobin_dev2", password: "astrobin_dev2", next: "/forum/c/astrobin/announcements/"});
+
+        cy.get("a").contains("New topic").click();
+        cy.url().should("contain", "/topic/add/");
+
+        cy.get('#i-have-read').click();
+        cy.get('#forum-usage-modal .btn-primary').click();
+
+        // Give the editor 10 seconds to appear
+        cy.get(".post-form input[name='name']", {timeout: 10000}).should('be.visible');
+
+        cy.get(".post-form input[name='name']").type("Test topic");
+        cy.get("#cke_id_body .cke_wysiwyg_div").type("Hello, this is a test topic.");
+        cy.get(".post-form button[type='submit']").click();
+
+        cy.clearCookies();
+        cy.login({username: "astrobin_dev", password: "astrobin_dev", next: "/forum/c/astrobin/announcements/"});
+        cy.get(".topic-list tr:first-child .topic-name a").first().click();
+
+        cy.get(".unread-marker").should("not.exist");
+        cy.get(".jq-toast").should("not.exist");
+    });
+
+    it("should show 'new posts below' break and notification", () => {
+        cy.clearCookies();
+        cy.login({username: "astrobin_dev2", password: "astrobin_dev2", next: "/forum/c/astrobin/announcements/"});
+
+        cy.get(".topic-list tr:first-child .topic-name a").first().click();
+        cy.get("#cke_id_body .cke_wysiwyg_div").type("This is a reply.");
+        cy.get(".post-form button[type='submit']").click();
+
+        cy.clearCookies();
+        cy.login({username: "astrobin_dev", password: "astrobin_dev", next: "/forum/c/astrobin/announcements/"});
+        cy.get(".topic-list tr:first-child .topic-name a").first().click();
+
+        cy.get(".unread-marker").should("exist");
+        cy.get(".jq-toast-heading").contains("You have unread posts in this topic.").should("exist");
+    });
+
+    it("should not show 'new posts below' break and notification when visiting again", () => {
+        cy.visit("/forum/c/astrobin/announcements/");
+
+        cy.get(".topic-list tr:first-child .topic-name a").first().click();
+
+        cy.get(".unread-marker").should("not.exist");
+        cy.get(".jq-toast").should("not.exist");
+    });
+
+    it("should not show the notification but only the marker if clicking on the 'first-unread' link", () => {
+        cy.clearCookies();
+        cy.login({username: "astrobin_dev2", password: "astrobin_dev2", next: "/forum/c/astrobin/announcements/"});
+
+        cy.get(".topic-list tr:first-child .topic-name a").first().click();
+        cy.get("#cke_id_body .cke_wysiwyg_div").type("This is a reply.");
+        cy.get(".post-form button[type='submit']").click();
+
+        cy.clearCookies();
+        cy.login({username: "astrobin_dev", password: "astrobin_dev", next: "/forum/c/astrobin/announcements/"});
+        cy.get(".topic-list tr:first-child .topic-name .first-unread-post-link").click();
+
+        cy.get(".unread-marker").should("exist");
+        cy.get(".jq-toast").should("not.exist");
+    });
+
+    it("the page should display fine for anonymous users", () => {
+        cy.clearCookies();
+
+        cy.visit("/forum/c/astrobin/announcements/");
+        cy.get(".topic-list tr:first-child .topic-name a").first().click();
+        cy.get("h1").contains("Test topic").should("exist");
+        cy.get(".unread-marker").should("not.exist");
+        cy.get(".jq-toast").should("not.exist");
     });
 });

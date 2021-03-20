@@ -2,6 +2,11 @@ import os
 
 local_path = lambda path: os.path.join(os.path.dirname(__file__), path)
 
+LOADERS = [
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -27,13 +32,11 @@ TEMPLATES = [
                 'astrobin.context_processors.user_scores',
                 'astrobin.context_processors.common_variables',
             ],
-            'loaders': [
-                ('django.template.loaders.cached.Loader', [
-                    'django.template.loaders.filesystem.Loader',
-                    'django.template.loaders.app_directories.Loader',
-                ]),
-            ],
+            'loaders': [('django.template.loaders.cached.Loader', LOADERS)],
             'debug': DEBUG,
         },
     },
 ]
+
+if DEBUG:
+    TEMPLATES[0]['OPTIONS']['loaders'] = LOADERS

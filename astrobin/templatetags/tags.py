@@ -2,11 +2,14 @@
 import math
 from datetime import datetime, date
 
+import dateutil
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import Library
 from django.template.defaultfilters import timesince
 from django.utils.translation import ugettext as _
+from pybb.models import Post
 from subscription.models import UserSubscription, Subscription
 from threaded_messages.models import Participant
 
@@ -754,3 +757,25 @@ def show_uploads_used(user):
 def show_cookie_banner(request):
     country = utils.get_client_country_code(request)
     return country is None or country.lower() in utils.get_european_union_country_codes()
+
+
+@register.filter
+def post_is_unread(post, request):
+    first_unread_created_string = request.session.get('first_unread_for_topic_%d' % post.topic.pk)
+
+    if first_unread_created_string:
+        first_unread_created = dateutil.parser.parse(first_unread_created_string)
+        return post.created >= first_unread_created and post.user != request.user
+
+    return False
+
+
+@register.filter
+def first_unread_post_link(topic, request):
+    if 'first_unread_for_topic_%d_post' % topic.pk in request.session:
+        post = Post.objects.get(pk=request.session['first_unread_for_topic_%d_post' % topic.pk])
+        if post == post.topic.last_post and post.user == request.user:
+            return None
+        return settings.BASE_URL + post.get_absolute_url()
+
+    return None
