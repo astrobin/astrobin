@@ -29,12 +29,13 @@ class GroupInviteView(
 
             group.invited_users.add(user)
             push_notification(
-                [user], 'new_group_invitation',
+                [user], request.user, 'new_group_invitation',
                 {
                     'inviter': request.user.userprofile.get_display_name(),
                     'inviter_page': reverse('user_page', args=(request.user.username,)),
                     'group_name': group.name,
-                    'group_page': build_notification_url(settings.BASE_URL + reverse('group_detail', args=(group.pk,))),
+                    'group_page': build_notification_url(
+                        settings.BASE_URL + reverse('group_detail', args=(group.pk,)), request.user),
                 })
 
         if request.is_ajax():

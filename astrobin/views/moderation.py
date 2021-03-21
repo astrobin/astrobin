@@ -79,7 +79,7 @@ class ImageModerationMarkAsHamView(LoginRequiredMixin, GroupRequiredMixin, JSONR
                     object_id=image.user.pk)]
 
                 thumb = image.thumbnail_raw('gallery', None, sync=True)
-                push_notification(followers, 'new_image', {
+                push_notification(followers, image.user, 'new_image', {
                     'image': image,
                     'image_thumbnail': thumb.url if thumb else None
                 })

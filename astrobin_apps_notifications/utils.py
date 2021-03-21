@@ -14,12 +14,12 @@ def clear_notifications_template_cache(username):
     cache.delete(key)
 
 
-def push_notification(recipients, notice_type, data):
+def push_notification(recipients, from_user, notice_type, data):
     data.update({
         'notices_url': settings.BASE_URL + '/',
         'base_url': settings.BASE_URL,
     })
-    notification.send(recipients, notice_type, data)
+    notification.send(recipients, notice_type, data, sender=from_user)
     for recipient in recipients:
         clear_notifications_template_cache(recipient.username)
 
@@ -56,12 +56,17 @@ def get_seen_notifications(user, n=10):
     return notifications
 
 
-def get_notification_url_params_for_email():
-    return dict(utm_source='astrobin', utm_medium='email', utm_campaign='notification')
+def get_notification_url_params_for_email(from_user=None):
+    return dict(
+        utm_source='astrobin',
+        utm_medium='email',
+        utm_campaign='notification',
+        from_user=from_user.pk if from_user else None
+    )
 
 
-def build_notification_url(url):
-    params = get_notification_url_params_for_email()
+def build_notification_url(url, from_user=None):
+    params = get_notification_url_params_for_email(from_user)
     url_parse = urlparse.urlparse(url)
     query = url_parse.query
     url_dict = dict(urlparse.parse_qsl(query))

@@ -25,10 +25,11 @@ class GroupRejectJoinRequestView(JSONResponseMixin, LoginRequiredMixin,
 
             group.join_requests.remove(user)
             push_notification(
-                [user], 'group_join_request_rejected',
+                [user], request.user, 'group_join_request_rejected',
                 {
                     'group_name': group.name,
-                    'url': build_notification_url(settings.BASE_URL + reverse('group_detail', args=(group.pk,))),
+                    'url': build_notification_url(
+                        settings.BASE_URL + reverse('group_detail', args=(group.pk,)), request.user),
                 })
 
             return self.render_json_response({

@@ -33,7 +33,7 @@ def send_iotd_staff_inactive_reminders_and_remove_after_max_days():
             member.groups.remove(Group.objects.get(name='iotd_reviewers'))
             member.groups.remove(Group.objects.get(name='iotd_submitters'))
 
-        push_notification(final_notice_members, 'iotd_staff_inactive_removal_notice', {
+        push_notification(final_notice_members, None, 'iotd_staff_inactive_removal_notice', {
             'BASE_URL': settings.BASE_URL,
             'days': final_notice_days,
             'max_inactivity_days': final_notice_days
@@ -43,7 +43,7 @@ def send_iotd_staff_inactive_reminders_and_remove_after_max_days():
     reminder_2_days = int(math.ceil(final_notice_days / 2))
     reminder_2_members = IotdService().get_inactive_submitter_and_reviewers(reminder_2_days)
     if reminder_2_members:
-        push_notification(reminder_2_members, 'iotd_staff_inactive_warning', {
+        push_notification(reminder_2_members, None, 'iotd_staff_inactive_warning', {
             'BASE_URL': settings.BASE_URL,
             'days': reminder_2_days,
             'max_inactivity_days': final_notice_days
@@ -53,7 +53,7 @@ def send_iotd_staff_inactive_reminders_and_remove_after_max_days():
     reminder_1_days = int(math.ceil(final_notice_days / 4))
     reminder_1_members = IotdService().get_inactive_submitter_and_reviewers(reminder_1_days)
     if reminder_1_members:
-        push_notification(reminder_1_members, 'iotd_staff_inactive_warning', {
+        push_notification(reminder_1_members, None, 'iotd_staff_inactive_warning', {
             'BASE_URL': settings.BASE_URL,
             'days': reminder_1_days,
             'max_inactivity_days': final_notice_days
@@ -72,13 +72,13 @@ def send_notifications_when_promoted_image_becomes_iotd():
     thumb = image.thumbnail_raw('gallery', None, sync=True)
 
     submitters = [x.submitter for x in IotdSubmission.objects.filter(image=image)]
-    push_notification(submitters, 'image_you_promoted_is_iotd', {
+    push_notification(submitters, None, 'image_you_promoted_is_iotd', {
         'image': image,
         'image_thumbnail': thumb.url if thumb else None
     })
 
     reviewers = [x.reviewer for x in IotdVote.objects.filter(image=image)]
-    push_notification(reviewers, 'image_you_promoted_is_iotd', {
+    push_notification(reviewers, None, 'image_you_promoted_is_iotd', {
         'image': image,
         'image_thumbnail': thumb.url if thumb else None
     })

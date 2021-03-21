@@ -97,7 +97,7 @@ def image_post_save(sender, instance, created, **kwargs):
                 add_story(instance.user, verb='VERB_UPLOADED_IMAGE', action_object=instance)
 
         if Image.all_objects.filter(user=instance.user).count() == 1:
-            push_notification([instance.user], 'congratulations_for_your_first_image', {
+            push_notification([instance.user], None, 'congratulations_for_your_first_image', {
                 'BASE_URL': settings.BASE_URL,
                 'PREMIUM_MAX_IMAGES_FREE': settings.PREMIUM_MAX_IMAGES_FREE,
                 'url': reverse_url('image_detail', args=(instance.get_id(),))
@@ -206,9 +206,9 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
         try:
             user = User.objects.get(username=username)
             push_notification(
-                [user], 'new_comment_mention',
+                [user], instance.author, 'new_comment_mention',
                 {
-                    'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url()),
+                    'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.author),
                     'user': instance.author.userprofile.get_display_name(),
                     'user_url': settings.BASE_URL + reverse_url(
                         'user_page', kwargs={'username': instance.author}),
@@ -262,9 +262,10 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                     return
 
                 push_notification(
-                    [instance.content_object.user], 'new_' + instance.property_type,
+                    [instance.content_object.user], instance.user, 'new_' + instance.property_type,
                     {
-                        'url': build_notification_url(settings.BASE_URL + instance.content_object.get_absolute_url()),
+                        'url': build_notification_url(
+                            settings.BASE_URL + instance.content_object.get_absolute_url(), instance.user),
                         'title': instance.content_object.title,
                         'user': instance.user.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse_url(
@@ -273,9 +274,10 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
 
             elif instance.content_type == ContentType.objects.get_for_model(NestedComment):
                 push_notification(
-                    [instance.content_object.author], 'new_comment_like',
+                    [instance.content_object.author], instance.user, 'new_comment_like',
                     {
-                        'url': build_notification_url(settings.BASE_URL + instance.content_object.get_absolute_url()),
+                        'url': build_notification_url(
+                            settings.BASE_URL + instance.content_object.get_absolute_url(), instance.user),
                         'user': instance.user.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse_url(
                             'user_page', kwargs={'username': instance.user.username}),
@@ -287,9 +289,10 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
 
             elif instance.content_type == ContentType.objects.get_for_model(Post):
                 push_notification(
-                    [instance.content_object.user], 'new_forum_post_like',
+                    [instance.content_object.user], instance.user, 'new_forum_post_like',
                     {
-                        'url': build_notification_url(settings.BASE_URL + instance.content_object.get_absolute_url()),
+                        'url': build_notification_url(
+                            settings.BASE_URL + instance.content_object.get_absolute_url(), instance.user),
                         'user': instance.user.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse_url(
                             'user_page', kwargs={'username': instance.user.username}),
@@ -309,10 +312,10 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
             if instance.content_type == user_ct:
                 followed_user = user_ct.get_object_for_this_type(pk=instance.object_id)
                 push_notification(
-                    [followed_user], 'new_follower', {
+                    [followed_user], instance.user, 'new_follower', {
                         'object': instance.user.userprofile.get_display_name(),
                         'object_url': build_notification_url(settings.BASE_URL + reverse_url(
-                            'user_page', kwargs={'username': instance.user.username})),
+                            'user_page', kwargs={'username': instance.user.username}), instance.user),
                     }
                 )
 
@@ -351,7 +354,7 @@ def solution_post_save(sender, instance, created, **kwargs):
         return
 
     push_notification(
-        [user], notification,
+        [user], None, notification,
         {'object_url': build_notification_url(settings.BASE_URL + target.get_absolute_url())})
 
 
@@ -373,9 +376,9 @@ def subscription_paid(sender, **kwargs):
             user=user,
             event='new usersubscription',
             timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)):
-        push_notification([user], 'new_subscription', {'BASE_URL': settings.BASE_URL})
+        push_notification([user], None, 'new_subscription', {'BASE_URL': settings.BASE_URL})
     else:
-        push_notification([user], 'new_payment', {'BASE_URL': settings.BASE_URL})
+        push_notification([user], None, 'new_payment', {'BASE_URL': settings.BASE_URL})
 
 
 paid.connect(subscription_paid)
@@ -405,9 +408,9 @@ def subscription_signed_up(sender, **kwargs):
                 user=user,
                 event='new usersubscription',
                 timestamp__gte=DateTimeService.now() - datetime.timedelta(minutes=5)):
-            push_notification([user], 'new_subscription', {'BASE_URL': settings.BASE_URL})
+            push_notification([user], None, 'new_subscription', {'BASE_URL': settings.BASE_URL})
         else:
-            push_notification([user], 'new_payment', {'BASE_URL': settings.BASE_URL})
+            push_notification([user], None, 'new_payment', {'BASE_URL': settings.BASE_URL})
 
 
 signed_up.connect(subscription_signed_up)
@@ -447,7 +450,7 @@ def group_post_save(sender, instance, created, **kwargs):
                 ToggleProperty.objects.toggleproperties_for_object(
                     "follow", UserProfile.objects.get(user__pk=instance.creator.pk).user)
             ]
-            push_notification(followers, 'new_public_group_created',
+            push_notification(followers, instance.creator, 'new_public_group_created',
                               {
                                   'creator': instance.creator.userprofile.get_display_name(),
                                   'group_name': instance.name,
@@ -493,7 +496,7 @@ def group_members_changed(sender, instance, **kwargs):
                         x.user for x in
                         ToggleProperty.objects.toggleproperties_for_object("follow", user)
                     ]
-                    push_notification(followers, 'user_joined_public_group',
+                    push_notification(followers, user, 'user_joined_public_group',
                                       {
                                           'user': user.userprofile.get_display_name(),
                                           'group_name': instance.name,
@@ -605,11 +608,13 @@ def forum_topic_pre_save(sender, instance, **kwargs):
             group = instance.forum.group
             push_notification(
                 [x for x in group.members.all() if x != instance.user],
+                instance.user,
                 'new_topic_in_group',
                 {
                     'user': instance.user.userprofile.get_display_name(),
-                    'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url()),
-                    'group_url': build_notification_url(reverse_url('group_detail', kwargs={'pk': group.pk})),
+                    'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
+                    'group_url': build_notification_url(
+                        reverse_url('group_detail', kwargs={'pk': group.pk}), instance.user),
                     'group_name': group.name,
                     'topic_title': instance.name,
                 },
@@ -631,12 +636,13 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
 
         push_notification(
             recipients,
+            instance.user,
             'new_topic_in_group',
             {
                 'user': instance.user.userprofile.get_display_name(),
-                'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url()),
+                'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
                 'group_url': build_notification_url(
-                    settings.BASE_URL + reverse_url('group_detail', kwargs={'pk': group.pk})),
+                    settings.BASE_URL + reverse_url('group_detail', kwargs={'pk': group.pk}), instance.user),
                 'group_name': group.name,
                 'topic_title': instance.name,
             },
@@ -698,9 +704,11 @@ def forum_post_post_save(sender, instance, created, **kwargs):
         try:
             user = User.objects.get(username=username)
             push_notification(
-                [user], 'new_forum_post_mention',
+                [user],
+                instance.user,
+                'new_forum_post_mention',
                 {
-                    'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url()),
+                    'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
                     'user': instance.user.userprofile.get_display_name(),
                     'user_url': settings.BASE_URL + reverse_url(
                         'user_page', kwargs={'username': instance.user}),
@@ -779,13 +787,13 @@ def top_pick_archive_item_post_save(sender, instance, created, **kwargs):
         thumb = image.thumbnail_raw('gallery', None, sync=True)
 
         submitters = [x.submitter for x in IotdSubmission.objects.filter(image=image)]
-        push_notification(submitters, 'image_you_promoted_is_tp', {
+        push_notification(submitters, None, 'image_you_promoted_is_tp', {
             'image': image,
             'image_thumbnail': thumb.url if thumb else None
         })
 
         reviewers = [x.reviewer for x in IotdVote.objects.filter(image=image)]
-        push_notification(reviewers, 'image_you_promoted_is_tp', {
+        push_notification(reviewers, None, 'image_you_promoted_is_tp', {
             'image': image,
             'image_thumbnail': thumb.url if thumb else None
         })

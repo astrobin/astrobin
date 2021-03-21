@@ -2681,7 +2681,7 @@ class AppApiKeyRequest(models.Model):
 
         if created:
             push_notification(
-                [self.registrar], 'api_key_request_approved',
+                [self.registrar], None, 'api_key_request_approved',
                 {'api_docs_url': settings.BASE_URL + '/help/api/',
                  'api_keys_url': settings.BASE_URL + '/users/%s/apikeys/' % self.registrar.username,
                  'key': app.key,

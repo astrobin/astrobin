@@ -26,10 +26,11 @@ class GroupApproveJoinRequestView(JSONResponseMixin, LoginRequiredMixin,
             group.join_requests.remove(user)
             group.members.add(user)
             push_notification(
-                [user], 'group_join_request_approved',
+                [user], request.user, 'group_join_request_approved',
                 {
                     'group_name': group.name,
-                    'url': build_notification_url(settings.BASE_URL + reverse('group_detail', args=(group.pk,))),
+                    'url': build_notification_url(
+                        settings.BASE_URL + reverse('group_detail', args=(group.pk,)), request.user),
                 })
 
             return self.render_json_response({

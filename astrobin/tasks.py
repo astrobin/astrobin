@@ -236,7 +236,7 @@ def send_never_activated_account_reminder():
             user.delete()
             continue
 
-        push_notification([user], 'never_activated_account', {
+        push_notification([user], None, 'never_activated_account', {
             'date': user.date_joined,
             'username': user.username,
             'activation_link': '%s/%s' % (

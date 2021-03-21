@@ -37,7 +37,7 @@ def push_notification_for_new_image(user_pk, image_pk):
 
     if len(followers) > 0:
         thumb = image.thumbnail_raw('gallery', None, sync=True)
-        push_notification(followers, 'new_image', {
+        push_notification(followers, image.user, 'new_image', {
             'image': image,
             'image_thumbnail': thumb.url if thumb else None
         })
@@ -58,8 +58,8 @@ def push_notification_for_new_image_revision(revision_pk):
         content_type=ContentType.objects.get_for_model(User),
         object_id=revision.image.user.pk)]
 
-    push_notification(followers, 'new_image_revision', {
-        'object_url': build_notification_url(settings.BASE_URL + revision.get_absolute_url()),
+    push_notification(followers, revision.image.user, 'new_image_revision', {
+        'object_url': build_notification_url(settings.BASE_URL + revision.get_absolute_url(), revision.image.user),
         'originator': revision.image.user.userprofile.get_display_name(),
     })
 
