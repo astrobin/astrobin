@@ -42,6 +42,10 @@ class MarkNotificationAsReadMiddleware(object):
             notifications = Message.objects.filter(user=request.user, message__contains=request.path, read=False)
 
             if 'from_user' in request.GET:
-                notifications = notifications.filter(from_user__pk = request.GET.get('from_user'))
+                try:
+                    from_user_pk = int(request.GET.get('from_user'))
+                    notifications = notifications.filter(from_user__pk=from_user_pk)
+                except ValueError:
+                    pass
 
             notifications.update(read=True)
