@@ -32,7 +32,7 @@ class Command(BaseCommand):
             .exclude(subscription__recurrence_unit = None)
 
         for user_subscription in user_subscriptions:
-            push_notification([user_subscription.user], 'expiring_subscription', {
+            push_notification([user_subscription.user], None, 'expiring_subscription', {
                 'user_subscription': user_subscription,
                 'url': 'https://app.astrobin.com/subscriptions/options'
             })

@@ -15,7 +15,7 @@ class CommentNotificationServiceTest(TestCase):
         comment = NestedCommentsGenerators.comment()
 
         with self.assertRaises(AssertionError):
-            push_notification.assert_called_with(mock.ANY, 'new_comment', mock.ANY)
+            push_notification.assert_called_with(mock.ANY, mock.ANY, 'new_comment', mock.ANY)
 
         with self.assertRaises(AssertionError):
             add_story.assert_called_with(
@@ -37,7 +37,7 @@ class CommentNotificationServiceTest(TestCase):
         comment = NestedCommentsGenerators.comment(author=shadowbanned_user, target=image)
 
         with self.assertRaises(AssertionError):
-            push_notification.assert_called_with(mock.ANY, 'new_comment', mock.ANY)
+            push_notification.assert_called_with(mock.ANY, comment.author, 'new_comment', mock.ANY)
 
         with self.assertRaises(AssertionError):
             add_story.assert_called_with(
@@ -56,10 +56,10 @@ class CommentNotificationServiceTest(TestCase):
 
         comment = NestedCommentsGenerators.comment(author=commenter, target=image)
 
-        push_notification.assert_called_with(mock.ANY, 'new_comment', mock.ANY)
+        push_notification.assert_called_with(mock.ANY, commenter, 'new_comment', mock.ANY)
 
         with self.assertRaises(AssertionError):
-            push_notification.assert_called_with(mock.ANY, 'new_comment_reply', mock.ANY)
+            push_notification.assert_called_with(mock.ANY, commenter, 'new_comment_reply', mock.ANY)
 
         with self.assertRaises(AssertionError):
             add_story.assert_called_with(
@@ -78,10 +78,10 @@ class CommentNotificationServiceTest(TestCase):
 
         comment = NestedCommentsGenerators.comment(author=commenter, target=image)
 
-        push_notification.assert_called_with(mock.ANY, 'new_comment', mock.ANY)
+        push_notification.assert_called_with(mock.ANY, commenter, 'new_comment', mock.ANY)
 
         with self.assertRaises(AssertionError):
-            push_notification.assert_called_with(mock.ANY, 'new_comment_reply', mock.ANY)
+            push_notification.assert_called_with(mock.ANY, commenter, 'new_comment_reply', mock.ANY)
 
         add_story.assert_called_with(
             comment.author, verb='VERB_COMMENTED_IMAGE',
@@ -100,7 +100,7 @@ class CommentNotificationServiceTest(TestCase):
 
         comment = NestedCommentsGenerators.comment(author=commenter, target=image)
 
-        push_notification.assert_called_with(mock.ANY, 'new_comment', mock.ANY)
+        push_notification.assert_called_with(mock.ANY, commenter, 'new_comment', mock.ANY)
         add_story.assert_called_with(
             comment.author, verb='VERB_COMMENTED_IMAGE',
             action_object=comment,
@@ -112,8 +112,8 @@ class CommentNotificationServiceTest(TestCase):
         comment = NestedCommentsGenerators.comment(author=commenter2, target=image, parent=comment)
 
         calls = [
-            mock.call(mock.ANY, 'new_comment', mock.ANY),
-            mock.call(mock.ANY, 'new_comment_reply', mock.ANY),
+            mock.call(mock.ANY, commenter2, 'new_comment', mock.ANY),
+            mock.call(mock.ANY, commenter2, 'new_comment_reply', mock.ANY),
         ]
         push_notification.assert_has_calls(calls, any_order=True)
 
@@ -134,7 +134,7 @@ class CommentNotificationServiceTest(TestCase):
         comment = NestedCommentsGenerators.comment(author=image.user, target=image)
 
         with self.assertRaises(AssertionError):
-            push_notification.assert_called_with(mock.ANY, 'new_comment', mock.ANY)
+            push_notification.assert_called_with(mock.ANY, commenter, 'new_comment', mock.ANY)
 
         add_story.assert_called_with(
             comment.author, verb='VERB_COMMENTED_IMAGE',
@@ -147,10 +147,10 @@ class CommentNotificationServiceTest(TestCase):
         comment = NestedCommentsGenerators.comment(author=commenter, target=image, parent=comment)
 
         with self.assertRaises(AssertionError):
-            push_notification.assert_called_with(mock.ANY, 'new_comment', mock.ANY)
+            push_notification.assert_called_with(mock.ANY, comment.author, 'new_comment', mock.ANY)
 
         calls = [
-            mock.call(mock.ANY, 'new_comment_reply', mock.ANY),
+            mock.call(mock.ANY, commenter, 'new_comment_reply', mock.ANY),
         ]
         push_notification.assert_has_calls(calls, any_order=True)
 

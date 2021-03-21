@@ -14,7 +14,7 @@ class Command(BaseCommand):
                 remote_source=None)
 
             if images.count() > 0:
-                push_notification([user], 'missing_remote_source', {
+                push_notification([user], None, 'missing_remote_source', {
                     'BASE_URL': settings.BASE_URL,
                     'images': images
                 })

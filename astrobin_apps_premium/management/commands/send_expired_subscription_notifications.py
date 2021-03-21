@@ -30,7 +30,7 @@ class Command(BaseCommand):
             expires = datetime.now() - timedelta(days = 1))
 
         for user_subscription in user_subscriptions:
-            push_notification([user_subscription.user], 'expired_subscription', {
+            push_notification([user_subscription.user], None, 'expired_subscription', {
                 'user_subscription': user_subscription,
                 'url': 'https://app.astrobin.com/subscriptions/options'
             })

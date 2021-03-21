@@ -92,7 +92,7 @@ def user_created(sender, user, request, **kwargs):
     if changed:
         profile.save(keep_deleted=True)
 
-    push_notification([user], 'welcome_to_astrobin', {
+    push_notification([user], None, 'welcome_to_astrobin', {
         'BASE_URL': settings.BASE_URL,
     })
 

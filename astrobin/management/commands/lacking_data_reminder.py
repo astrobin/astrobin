@@ -24,6 +24,7 @@ class Command(BaseCommand):
             if number > 0:
                 push_notification(
                     [user],
+                    None,
                     'lacking_data_reminder',
                     {
                         'number': number,

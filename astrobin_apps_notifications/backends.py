@@ -44,9 +44,9 @@ class PersistentMessagesBackend(BaseBackend):
 
         try:
             request = get_request()
-            persistent_messages.add_message(request, level, message, user=recipient)
+            persistent_messages.add_message(request, level, message, user=recipient, from_user=sender)
         except IndexError:
-            persistent_message = Message(user=recipient, level=level, message=message)
+            persistent_message = Message(user=recipient, from_user=sender, level=level, message=message)
             persistent_message.save()
 
 
