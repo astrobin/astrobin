@@ -6,7 +6,20 @@ from astrobin_apps_groups.models import Group
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
-        fields = '__all__'
+        fields = [
+            'id',
+            'date_created',
+            'date_updated',
+            'creator',
+            'owner',
+            'name',
+            'description',
+            'category',
+            'public',
+            'moderated',
+            'autosubmission',
+            'forum',
+        ]
 
     def create(self, validated_data):
         validated_data['creator'] = self.context['request'].user
