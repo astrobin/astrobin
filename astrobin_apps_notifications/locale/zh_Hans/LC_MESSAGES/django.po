@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-16 19:04+0000\n"
-"PO-Revision-Date: 2021-03-05 05:58+0000\n"
-"Last-Translator: 天文通老A <yume7@qq.com>\n"
+"POT-Creation-Date: 2021-03-21 16:02+0000\n"
+"PO-Revision-Date: 2021-03-18 08:09+0000\n"
+"Last-Translator: 张熠瑆 Phillip <31302717@qq.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1614923892.000000\n"
+"X-POOTLE-MTIME: 1616054981.000000\n"
 
 msgid "Notifications"
 msgstr "通知"
@@ -55,10 +55,8 @@ msgstr "您的作品收到了新评论"
 msgid "There was a reply to your comment"
 msgstr "您的评论有了新回复"
 
-#, fuzzy
-#| msgid "Your comment was liked"
 msgid "Your comment was approved"
-msgstr "您的评论获得了赞"
+msgstr "您的评论已通过审核"
 
 msgid "Your image was bookmarked"
 msgstr "您的作品已被收藏"
@@ -72,17 +70,8 @@ msgstr "您的评论获得了赞"
 msgid "Your forum post was liked"
 msgstr "您的帖子获得了赞"
 
-msgid "New image with some gear you follow"
-msgstr "新作品-使用您关注的设备"
-
-msgid "New image of a subject you follow"
-msgstr "新作品-来自您关注的主题"
-
 msgid "Your API Key request has been approved"
 msgstr "您的API Key申请被通过"
-
-msgid "New discussion about a gear item you own"
-msgstr "新讨论-关于您拥有的设备"
 
 msgid "A user you follow joined a public group"
 msgstr "您关注的人加入了公开小组"
@@ -148,13 +137,22 @@ msgid "Thank you for your payment!"
 msgstr "感谢您支付！"
 
 msgid "You were removed from the IOTD staff"
-msgstr ""
+msgstr "您已被从“今日最佳”工作人员中被移除"
 
 msgid "You have been inactive as an IOTD staff member"
-msgstr ""
+msgstr "作为“今日最佳”工作人员，您一直处于不活跃状态"
 
 msgid "An image you promoted made it to Top Pick"
-msgstr ""
+msgstr "您的作品被选为“热门精选”"
 
 msgid "An image you promoted made it to IOTD"
-msgstr ""
+msgstr "您的作品被选为“今日最佳”"
+
+#~ msgid "New image with some gear you follow"
+#~ msgstr "新作品-使用您关注的设备"
+
+#~ msgid "New image of a subject you follow"
+#~ msgstr "新作品-来自您关注的主题"
+
+#~ msgid "New discussion about a gear item you own"
+#~ msgstr "新讨论-关于您拥有的设备"

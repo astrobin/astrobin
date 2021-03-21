@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-16 18:49+0000\n"
-"PO-Revision-Date: 2021-03-08 20:54+0000\n"
+"POT-Creation-Date: 2021-03-21 15:59+0000\n"
+"PO-Revision-Date: 2021-03-18 08:30+0000\n"
 "Last-Translator: 张熠瑆 Phillip <31302717@qq.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_Hans\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1615236868.000000\n"
+"X-POOTLE-MTIME: 1616056211.000000\n"
 
 msgid "United Kingdom"
 msgstr "英国（大不列颠及北爱尔兰联合王国）"
@@ -994,22 +994,22 @@ msgid "None (All rights reserved)"
 msgstr "无（保留所有权利）"
 
 msgid "Attribution-NonCommercial-ShareAlike Creative Commons"
-msgstr "署名 - 非商业性使用 - 相同方式知识共享"
+msgstr "署名 - 非商业性使用 - 相同方式共享"
 
 msgid "Attribution-NonCommercial Creative Commons"
-msgstr "署名 - 非商业性的知识共享"
+msgstr "署名 - 非商业性使用"
 
 msgid "Attribution-NonCommercial-NoDerivs Creative Commons"
-msgstr "知识共享署名 - 非商业性使用 - 禁止演绎"
+msgstr "署名 - 非商业性使用 - 禁止演绎"
 
 msgid "Attribution Creative Commons"
-msgstr "署名知识共享"
+msgstr "署名"
 
 msgid "Attribution-ShareAlike Creative Commons"
-msgstr "署名 - 相同方式共享知识共享"
+msgstr "署名 - 相同方式共享"
 
 msgid "Attribution-NoDerivs Creative Commons"
-msgstr "署名 - 禁止知识共享"
+msgstr "署名 - 禁止演绎"
 
 msgid "English (US)"
 msgstr "英语（美国）"
@@ -1168,7 +1168,7 @@ msgid "Bottom right"
 msgstr "右下"
 
 msgid "Make"
-msgstr "制造"
+msgstr "厂商"
 
 msgid "The make, brand, producer or developer of this product."
 msgstr "该产品的制造商，品牌，生产商或者开发商。"
@@ -1202,10 +1202,10 @@ msgid "Refractor: achromatic"
 msgstr "折射镜：消色差"
 
 msgid "Refractor: semi-apochromatic"
-msgstr "折射镜：半APO"
+msgstr "折射镜：准APO"
 
 msgid "Refractor: apochromatic"
-msgstr "折射镜: APO"
+msgstr "折射镜:  APO"
 
 msgid "Refractor: non-achromatic Galilean"
 msgstr "折射镜：伽利略式非消色差"
@@ -1553,7 +1553,7 @@ msgid "The final font size will depend on how long your watermark is."
 msgstr "字体最终的大小取决于水印长度。"
 
 msgid "License"
-msgstr "版权"
+msgstr "许可协议"
 
 msgid "Allow comments"
 msgstr "允许评论"
@@ -1796,20 +1796,20 @@ msgstr "爱好"
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "除了天文摄影以外的其他爱好"
 
-#, fuzzy
-#| msgid "Change your username"
 msgid "Instagram username"
-msgstr "修改您的用户名"
+msgstr "Instagram用户名"
 
 msgid ""
 "If you provide this, AstroBin will tag you on Instagram if it's sharing an "
 "image of yours."
-msgstr ""
+msgstr "填写此项，AstroBin在Instagram上分享作品时会Tag你。"
 
 msgid ""
 "An Instagram username must be between 3 and 30 characters, start with an @ "
 "sign, and only have letters, numbers, periods, and underlines."
 msgstr ""
+"Instagram用户名必须介于3到30个字符之间，以@符号开头，并且只有字母、数字、句点"
+"和下划线。"
 
 msgid "Timezone"
 msgstr "时区"
@@ -1845,6 +1845,11 @@ msgid ""
 msgstr ""
 "勾选此框，可被排除在各类比赛竞赛之外，例如“今日最佳”、“热门精选”和其他自定义"
 "竞赛。您将排行榜中被删除，您的作品指数和贡献指数排名都将被隐藏。"
+
+#, fuzzy
+#| msgid "Skip notifications"
+msgid "Open notifications in a new tab"
+msgstr "跳过通知"
 
 msgid "Global stream"
 msgstr "全局信息流"
@@ -3609,7 +3614,7 @@ msgid "Right ascension"
 msgstr "赤纬"
 
 msgid "Declination"
-msgstr "赤经"
+msgstr "赤纬"
 
 msgid "Technical card"
 msgstr "技术数据卡"
@@ -3640,13 +3645,13 @@ msgid "Basic astrometry details"
 msgstr "基础天文信息"
 
 msgid "RA center"
-msgstr "赤纬中心"
+msgstr "赤经中心"
 
 msgid "degrees"
 msgstr "度"
 
 msgid "DEC center"
-msgstr "赤经中心"
+msgstr "赤纬中心"
 
 msgid "Pixel scale"
 msgstr "像素分辨率"
@@ -3702,7 +3707,7 @@ msgid "Mark this revision as final"
 msgstr "标记此修订版为终版"
 
 msgid "Promote to public area"
-msgstr "晋升到公开区域"
+msgstr "推送到公开区域"
 
 msgid "Move to staging area"
 msgstr "移动到暂存区"
@@ -3830,6 +3835,10 @@ msgid ""
 "paid subscription is worth it. For more information, please <a href=\"%(url)s"
 "\">click here</a>."
 msgstr ""
+"您当前使用的是免费帐户，当您删除作品时，上传计数器不会减少（除非在上传24小时"
+"内删除）。免费帐户不适用于在AstroBin上保存10张最好作品，相反，它的作用是“试用"
+"期”，供您体验已帮助您决定是否购买付费订阅。有关详细信息，请<a href=\"%(url)s"
+"\">点击这里</a>。"
 
 msgid "Delete this revision?"
 msgstr "删除这个修订版？"
@@ -4016,8 +4025,8 @@ msgid ""
 "Sorry, you cannot send images from your Staging Area to a group. You need to "
 "first promote this image to your Public Area, if you want to do that."
 msgstr ""
-"很抱歉，您无法将作品从暂存区发送到小组。如果您想这样做的话，需要先把此作品晋"
-"升到您的公开区域。"
+"很抱歉，您无法将作品从暂存区发送到小组。如果您想这样做的话，需要先把此作品推"
+"送到您的公开区域。"
 
 # 待定
 msgid ""
@@ -4125,7 +4134,7 @@ msgstr ""
 "这张作品是 <strong>正在处理中的</strong> ，位于您的<a href=\"%(profile_url)s?"
 "staging\">暂存区</a>。这意味着没有人可以看到这张图，除非您给他们发送了位于下"
 "方 <em>分享</em> 菜单中 的链接。 使用此链接可以将图像发布到网络论坛中，并获得"
-"反馈。或许在上传过几个修订版后，直到您满意时，可将其晋升到<a href="
+"反馈。或许在上传过几个修订版后，直到您满意时，可将其推送到<a href="
 "\"%(profile_url)s\">公开区域</a>。"
 
 msgid "Oh no!"
@@ -4386,10 +4395,8 @@ msgstr "银经"
 msgid "Galactic latitude"
 msgstr "银纬"
 
-#, fuzzy
-#| msgid "Warning!"
 msgid "Warning"
-msgstr "警告！"
+msgstr "警告"
 
 #, python-format
 msgid ""
@@ -4397,6 +4404,8 @@ msgid ""
 "download speed, it might take several seconds or even minutes to view the "
 "file."
 msgstr ""
+"您正在打开一个%(size)s的大文件。根据您的下载速度，查看该文件可能需要几秒至几"
+"分钟。"
 
 msgid "Click-and-drag anywhere on the image."
 msgstr "在任意处点击并拖动。"
@@ -4585,20 +4594,18 @@ msgid "You can review your API keys at %(api_keys_url)s."
 msgstr "您可以点击 %(api_keys_url)s预览您的API keys"
 
 msgid "Your comment was approved!"
-msgstr ""
+msgstr "您的评论已通过审核！"
 
 msgid ""
 "As a new user on AstroBin, your first 3 comments will go through a "
 "moderation queue, to prevent spam."
-msgstr ""
+msgstr "作为AstroBin的新用户，为了杜绝垃圾信息，您的前3条评论将进入审核程序。"
 
 msgid "The following comment of yours was just approved by a moderator."
-msgstr ""
+msgstr "您的以下评论刚刚被版主审核通过。"
 
-#, fuzzy
-#| msgid "Allow comments"
 msgid "View comment"
-msgstr "允许评论"
+msgstr "查看评论"
 
 msgid "Congratulations for your first image on AstroBin!"
 msgstr "恭喜拿下一血！这是您在 AstroBin 上的第一图！"
@@ -4723,13 +4730,6 @@ msgstr ""
 
 #, python-format
 msgid ""
-"<a href=\"%(object_url)s\">You are now following <strong>%(object)s</strong>."
-"</a>"
-msgstr ""
-"<a href=\"%(object_url)s\">您现在正在关注 <strong>%(object)s</strong>.</a>"
-
-#, python-format
-msgid ""
 "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
 "\n"
 "Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
@@ -4756,9 +4756,6 @@ msgstr "您加入 \"%(group_name)s\" 的申请已被批准"
 msgid "Your request to join the group \"%(group_name)s\" has been REJECTED"
 msgstr "您加入 \"%(group_name)s\" 的申请被拒绝"
 
-msgid "Your image has been deleted."
-msgstr "您的作品已被删除。"
-
 #, python-format
 msgid "<a href=\"%(object_url)s\">Your image</a> could not be plate-solved."
 msgstr "<a href=\"%(object_url)s\">您的作品</a> 无法被解析。"
@@ -4773,10 +4770,6 @@ msgstr "<a href=\"%(object_url)s\">您的作品无法被解析。</a>"
 
 msgid "Your image could not be plate-solved."
 msgstr "您的作品无法被解析。"
-
-#, python-format
-msgid "<a href=\"%(object_url)s\">Your image has been processed.</a>"
-msgstr "<a href=\"%(object_url)s\">您的作品无法被解析。</a>"
 
 #, python-format
 msgid "<a href=\"%(object_url)s\">Your image</a> was plate-solved."
@@ -4795,43 +4788,45 @@ msgid "Your image has been successfully plate-solved."
 msgstr "您的作品已被成功解析。"
 
 msgid "An image you promoted made it to IOTD"
-msgstr ""
+msgstr "您的一幅作品被选为“今日最佳”"
 
 msgid "An image you promoted made it to Top Pick"
-msgstr ""
+msgstr "您的一幅作品被选为“热门精选”"
 
 #, python-format
 msgid ""
 "You have been inactive as an IOTD Submitter or Reviewer for %(days)s days or "
 "more."
-msgstr ""
+msgstr "您的“今日最佳”提名者或评审员的资格已停用 %(days)s 天或更长时间。"
 
 msgid ""
 "While the AstroBin IOTD selection process has a good level of redundancy "
 "built into the system, it still relies on the members of the staff regularly "
 "making selections from their respective queues."
 msgstr ""
+"虽然 AstroBin“今日最佳”的选拔系统具备充分的冗余机制，但它仍然依赖于工作人员定"
+"期从各自的队列中进行选拔。"
 
 msgid ""
 "As you have not been active for a significant amount of time, you have been "
 "removed from the IOTD staff for now."
-msgstr ""
+msgstr "由于您已经有很长时间没有活跃，现在已经被从“今日最佳”工作人员中移除。"
 
 msgid ""
 "This will ensure that potential IOTD or Top Pick candidates don't go "
 "unnoticed sitting in the queue of an inactive staff member."
-msgstr ""
+msgstr "这将确保潜在的“今日最佳”或“热门精选”不会因为工作人员缺位而被忽略。"
 
-#, fuzzy
-#| msgid "Thank you for using AstroBin's APIs!"
 msgid "Thank you for understanding!"
-msgstr "感谢您使用 AstroBin API！"
+msgstr "感谢您的理解！"
 
 #, python-format
 msgid ""
 "After %(max_inactivity_days)s days of inactivity (counted from the last "
 "selection you made in your queue) you will be removed from the IOTD staff."
 msgstr ""
+"在您不活跃 %(max_inactivity_days)s 天后（自最后一次选拔提名开始计算），您将被"
+"从“今日最佳”工作人员中移除。"
 
 #, python-format
 msgid ""
@@ -4958,38 +4953,6 @@ msgstr ""
 
 msgid "Would you like to activate your account on AstroBin?"
 msgstr "您想激活您的 AstroBin 帐户吗？"
-
-#, python-format
-msgid ""
-"AstroBin has published a new blog entry: \"%(object)s\".\n"
-"\n"
-"Check it out at the following url: <a href=\"%(object_url)s\">"
-"%(object_url)s</a>"
-msgstr ""
-"AstroBin 新的博客入口：\"%(object)s\".\n"
-"\n"
-"点击以下链接查看：<a href=\"%(object_url)s\">%(object_url)s</a>"
-
-#, python-format
-msgid ""
-"AstroBin has published a new blog entry: \"%(object)s\".\n"
-"\n"
-"Check it out at the following url: %(object_url)s"
-msgstr ""
-"AstroBin 发布了新的博客入口：\"%(object)s\".\n"
-"\n"
-"点击以下链接查看：%(object_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">AstroBin has published a new blog entry: "
-"\"%(object)s\"</a>"
-msgstr ""
-"<a href=\"%(object_url)s\">AstroBin 发布了新的博客入口 \"%(object)s\"</a>"
-
-#, python-format
-msgid "AstroBin has publushed a new blog entry: %(object)s"
-msgstr "AstroBin 发布了新的博客入口：%(object)s"
 
 #, python-format
 msgid ""
@@ -5164,31 +5127,6 @@ msgstr "%(user)s 在论坛的帖子中提到了您！"
 
 #, python-format
 msgid ""
-"%(user)s started a new discussion about a gear item you own! Read it at "
-"following url: <a href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-"%(user)s 开始了关于您设备的新讨论！点击这里查看： <a href=\"%(url)s\">"
-"%(url)s</a>"
-
-#, python-format
-msgid ""
-"%(user)s started a new discussion about a gear item you own! Read it at "
-"following url: %(url)s"
-msgstr "%(user)s 开始了有关您设备的新讨论！点击这里查看：%(url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> started a new discussion about "
-"a gear item you own!</a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> 开始了有关您设备的新讨论！</a>"
-
-#, python-format
-msgid "%(user)s started a new discussion about a gear item you own!"
-msgstr "%(user)s 开始了有关您设备的新讨论！"
-
-#, python-format
-msgid ""
 "%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
 "\n"
 "Visit the group here: <a href=\"%(group_page)s\">%(group_page)s</a>"
@@ -5254,60 +5192,6 @@ msgstr "<strong>%(user)s</strong> 发布了新的作品"
 #, python-format
 msgid "New image by %(user)s"
 msgstr "%(user)s的新图"
-
-#, python-format
-msgid ""
-"New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
-"Check it out at the following url: <a href=\"%(object_url)s\">"
-"%(object_url)s</a>"
-msgstr ""
-"有一张使用您关注设备拍摄的新作品<strong>%(gear)s</strong>。点击此处查看：<a "
-"href=\"%(object_url)s\">%(object_url)s</a>"
-
-#, python-format
-msgid ""
-"New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
-"Check it out at the following url: %(object_url)s"
-msgstr ""
-"有一张使用您关注设备拍摄的新作品<strong>%(gear)s</strong>。 点击此处查看："
-"%(object_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">New image taken with a <strong>%(gear)s</strong>."
-"</a>"
-msgstr ""
-"<a href=\"%(object_url)s\">使用<strong>%(gear)s</strong>拍摄的新作品。</a>"
-
-#, python-format
-msgid "New image taken with a %(gear)s"
-msgstr "使用 %(gear)s 拍摄的新作品"
-
-#, python-format
-msgid ""
-"New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
-"out at the following url: <a href=\"%(object_url)s\">%(object_url)s</a>"
-msgstr ""
-"拍摄您关注主题的新作品： <strong>%(subject)s</strong>。 点击此处查看： <a "
-"href=\"%(object_url)s\">%(object_url)s</a>"
-
-#, python-format
-msgid ""
-"New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
-"out at the following url: %(object_url)s"
-msgstr ""
-"拍摄您关注主题的新作品：<strong>%(subject)s</strong>。 点击此处查看： "
-"%(object_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">New image of <strong>%(subject)s</strong>.</a>"
-msgstr ""
-"<a href=\"%(object_url)s\"> <strong>%(subject)s</strong>的一张新图片。</a>"
-
-#, python-format
-msgid "New image of %(subject)s"
-msgstr "%(subject)s 主题的新图片"
 
 #, python-format
 msgid ""
@@ -5474,31 +5358,6 @@ msgid "You have received a new private message."
 msgstr "您在 AstroBin 上收到了私信！"
 
 #, python-format
-msgid ""
-"%(originator)s has fulfilled your request! Check it out at the following "
-"url: %(object_url)s"
-msgstr "%(originator)s 完成了您的请求！点击这里查看： %(object_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has fulfilled "
-"your request</a>"
-msgstr ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> 完成了您的请求 </"
-"a>"
-
-#, python-format
-msgid "%(originator)s has fulfilled your request."
-msgstr "%(originator)s 完成了您的请求。"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">You have stopped following <strong>%(object)s</"
-"strong>.</a>"
-msgstr ""
-"<a href=\"%(object_url)s\">您已不再关注 <strong>%(object)s</strong>.</a>"
-
-#, python-format
 msgid "%(user)s joined the public group: \"%(group_name)s\""
 msgstr "%(user)s 加入了公开小组： \"%(group_name)s\""
 
@@ -5593,10 +5452,10 @@ msgid "Find images"
 msgstr "查找作品"
 
 msgid "RA"
-msgstr "赤纬"
+msgstr "赤经"
 
 msgid "Dec"
-msgstr "经度"
+msgstr "赤纬"
 
 msgid "View page"
 msgstr "查看页面"
@@ -5788,8 +5647,24 @@ msgstr "退订"
 msgid "Subscribe"
 msgstr "订阅"
 
+msgid "The posts below are new since your last visit to this topic."
+msgstr ""
+
 msgid "Subscribers"
 msgstr "订阅者"
+
+#, fuzzy
+#| msgid "You have already claimed this product."
+msgid "You have unread posts in this topic."
+msgstr "您之前已经申索过这个产品。"
+
+#, fuzzy
+#| msgid "Would you like to upgrade to a higher plan?"
+msgid "Would you like to jump to the new posts since your last visit?"
+msgstr "您希望升级到更高的订阅计划？"
+
+msgid "Click here"
+msgstr ""
 
 msgid "Topic"
 msgstr "主题"
@@ -6243,10 +6118,8 @@ msgstr ""
 "如果希望将图像归类到相册中，则应填写一些数据。 拍摄所用望远镜、相机和被拍摄的"
 "目标是最低要求。 拍摄日期也很重要。"
 
-#, fuzzy
-#| msgid "What kind of image is this?"
 msgid "Can't find your images?"
-msgstr "这是哪一类作品？"
+msgstr "找不到您的作品？"
 
 #, python-format
 msgid ""
@@ -6254,6 +6127,8 @@ msgid ""
 "\">Visit your Staging Area</a> to find them, or <a href="
 "\"%(staging_area_learn_more_link)s\">learn more</a>."
 msgstr ""
+"您所有的作品都尚未发布。 <a href=\"%(user_page)s?staging\">访问您的暂存区</"
+"a> 查找它们，或 <a href=\"%(staging_area_learn_more_link)s\">了解更多</a>。"
 
 msgid "Delete account"
 msgstr "删除账户"
@@ -6690,10 +6565,8 @@ msgstr "像素分辨率（角秒/像素）"
 msgid "Telescope type"
 msgstr "望远镜类型"
 
-#, fuzzy
-#| msgid "Integration hours, daily"
 msgid "Integration time (hours)"
-msgstr "每天累计曝光时间"
+msgstr "累计曝光时间（小时）"
 
 #, python-format
 msgid ""
@@ -6720,12 +6593,10 @@ msgid "Guider/planetary"
 msgstr "导星/行星相机"
 
 msgid "Min"
-msgstr ""
+msgstr "最小"
 
-#, fuzzy
-#| msgid "Manx"
 msgid "Max"
-msgstr "马恩岛语"
+msgstr "最大"
 
 msgid "Imaging telescopes"
 msgstr "主镜"
@@ -6975,6 +6846,135 @@ msgstr "您是机器人吗？"
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr "抱歉，用户名已经存在，大小写不同。"
 
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\">You are now following <strong>%(object)s</"
+#~ "strong>.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\">您现在正在关注 <strong>%(object)s</strong>.</a>"
+
+#~ msgid "Your image has been deleted."
+#~ msgstr "您的作品已被删除。"
+
+#~ msgid "<a href=\"%(object_url)s\">Your image has been processed.</a>"
+#~ msgstr "<a href=\"%(object_url)s\">您的作品无法被解析。</a>"
+
+#~ msgid ""
+#~ "AstroBin has published a new blog entry: \"%(object)s\".\n"
+#~ "\n"
+#~ "Check it out at the following url: <a href=\"%(object_url)s\">"
+#~ "%(object_url)s</a>"
+#~ msgstr ""
+#~ "AstroBin 新的博客入口：\"%(object)s\".\n"
+#~ "\n"
+#~ "点击以下链接查看：<a href=\"%(object_url)s\">%(object_url)s</a>"
+
+#~ msgid ""
+#~ "AstroBin has published a new blog entry: \"%(object)s\".\n"
+#~ "\n"
+#~ "Check it out at the following url: %(object_url)s"
+#~ msgstr ""
+#~ "AstroBin 发布了新的博客入口：\"%(object)s\".\n"
+#~ "\n"
+#~ "点击以下链接查看：%(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\">AstroBin has published a new blog entry: "
+#~ "\"%(object)s\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\">AstroBin 发布了新的博客入口 \"%(object)s\"</a>"
+
+#~ msgid "AstroBin has publushed a new blog entry: %(object)s"
+#~ msgstr "AstroBin 发布了新的博客入口：%(object)s"
+
+#~ msgid ""
+#~ "%(user)s started a new discussion about a gear item you own! Read it at "
+#~ "following url: <a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "%(user)s 开始了关于您设备的新讨论！点击这里查看： <a href=\"%(url)s\">"
+#~ "%(url)s</a>"
+
+#~ msgid ""
+#~ "%(user)s started a new discussion about a gear item you own! Read it at "
+#~ "following url: %(url)s"
+#~ msgstr "%(user)s 开始了有关您设备的新讨论！点击这里查看：%(url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> started a new discussion "
+#~ "about a gear item you own!</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> 开始了有关您设备的新讨论！</"
+#~ "a>"
+
+#~ msgid "%(user)s started a new discussion about a gear item you own!"
+#~ msgstr "%(user)s 开始了有关您设备的新讨论！"
+
+#~ msgid ""
+#~ "New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
+#~ "Check it out at the following url: <a href=\"%(object_url)s\">"
+#~ "%(object_url)s</a>"
+#~ msgstr ""
+#~ "有一张使用您关注设备拍摄的新作品<strong>%(gear)s</strong>。点击此处查看："
+#~ "<a href=\"%(object_url)s\">%(object_url)s</a>"
+
+#~ msgid ""
+#~ "New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
+#~ "Check it out at the following url: %(object_url)s"
+#~ msgstr ""
+#~ "有一张使用您关注设备拍摄的新作品<strong>%(gear)s</strong>。 点击此处查看："
+#~ "%(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\">New image taken with a <strong>%(gear)s</"
+#~ "strong>.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\">使用<strong>%(gear)s</strong>拍摄的新作品。</a>"
+
+#~ msgid "New image taken with a %(gear)s"
+#~ msgstr "使用 %(gear)s 拍摄的新作品"
+
+#~ msgid ""
+#~ "New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
+#~ "out at the following url: <a href=\"%(object_url)s\">%(object_url)s</a>"
+#~ msgstr ""
+#~ "拍摄您关注主题的新作品： <strong>%(subject)s</strong>。 点击此处查看： <a "
+#~ "href=\"%(object_url)s\">%(object_url)s</a>"
+
+#~ msgid ""
+#~ "New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
+#~ "out at the following url: %(object_url)s"
+#~ msgstr ""
+#~ "拍摄您关注主题的新作品：<strong>%(subject)s</strong>。 点击此处查看： "
+#~ "%(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\">New image of <strong>%(subject)s</strong>.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\"> <strong>%(subject)s</strong>的一张新图片。</a>"
+
+#~ msgid "New image of %(subject)s"
+#~ msgstr "%(subject)s 主题的新图片"
+
+#~ msgid ""
+#~ "%(originator)s has fulfilled your request! Check it out at the following "
+#~ "url: %(object_url)s"
+#~ msgstr "%(originator)s 完成了您的请求！点击这里查看： %(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has fulfilled "
+#~ "your request</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> 完成了您的请求 "
+#~ "</a>"
+
+#~ msgid "%(originator)s has fulfilled your request."
+#~ msgstr "%(originator)s 完成了您的请求。"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\">You have stopped following <strong>%(object)s</"
+#~ "strong>.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\">您已不再关注 <strong>%(object)s</strong>.</a>"
+
 #~ msgid "New!"
 #~ msgstr "新！"
 
@@ -7031,11 +7031,6 @@ msgstr "抱歉，用户名已经存在，大小写不同。"
 #~| msgid "Higher resolution"
 #~ msgid "View in original resolution"
 #~ msgstr "更高的分辨率"
-
-#, fuzzy
-#~| msgid "You have already claimed this product."
-#~ msgid "You are already on this plan"
-#~ msgstr "您之前已经申索过这个产品。"
 
 #, fuzzy
 #~ msgid "Full search"

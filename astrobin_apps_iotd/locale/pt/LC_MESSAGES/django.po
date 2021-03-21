@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-16 19:06+0000\n"
+"POT-Creation-Date: 2021-03-21 16:03+0000\n"
 "PO-Revision-Date: 2020-05-30 21:25-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,23 +18,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3.1\n"
 
-#, fuzzy
-#| msgid "You cannot unelect an image elected by another judge."
-msgid "You cannot unhide an image on behalf of another user."
-msgstr "Você não pode deseleger uma imagem eleita por outro juiz."
-
-#, fuzzy
-#| msgid "You cannot elect your own submission."
-msgid "You cannot delete another user's submission."
-msgstr "Você não pode eleger seu próprio envio."
-
 msgid "Sorry, it's now too late to retract this submission."
 msgstr ""
-
-#, fuzzy
-#| msgid "You cannot elect an image you voted for."
-msgid "You cannot delete another user's vote."
-msgstr "Você não pode eleger uma imagem em que votou."
 
 msgid "Sorry, it's now too late to retract this vote."
 msgstr ""
@@ -192,6 +177,21 @@ msgstr "Você não pode deseleger uma IDD eleita por outro juiz."
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr ""
 "Todos os espaços de IDD para os próximos %(days)s dias já estão preenchidos."
+
+#, fuzzy
+#~| msgid "You cannot unelect an image elected by another judge."
+#~ msgid "You cannot unhide an image on behalf of another user."
+#~ msgstr "Você não pode deseleger uma imagem eleita por outro juiz."
+
+#, fuzzy
+#~| msgid "You cannot elect your own submission."
+#~ msgid "You cannot delete another user's submission."
+#~ msgstr "Você não pode eleger seu próprio envio."
+
+#, fuzzy
+#~| msgid "You cannot elect an image you voted for."
+#~ msgid "You cannot delete another user's vote."
+#~ msgstr "Você não pode eleger uma imagem em que votou."
 
 #~ msgid "by"
 #~ msgstr "por"
