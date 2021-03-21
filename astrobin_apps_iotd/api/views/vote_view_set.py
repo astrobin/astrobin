@@ -39,7 +39,7 @@ class VoteViewSet(viewsets.ModelViewSet):
         deadline = datetime.now() - timedelta(days=settings.IOTD_REVIEW_WINDOW_DAYS)
 
         if vote.reviewer != request.user:
-            return HttpResponseForbidden([_("You cannot delete another user's vote.")])
+            return HttpResponseForbidden(["You cannot delete another user's vote."])
 
         if vote.date < deadline or vote.image.published < deadline:
             return HttpResponseForbidden([_("Sorry, it's now too late to retract this vote.")])

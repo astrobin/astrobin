@@ -10,6 +10,7 @@ MIDDLEWARE_CLASSES = [
     'astrobin.middleware.LastSeenMiddleware',
     'astrobin.middleware.LogoutDeletedUserMiddleware',
     'astrobin.middleware.MarkNotificationAsReadMiddleware',
+    'astrobin.middleware.PreviousTopicReadMarkerMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
     'gadjo.requestprovider.middleware.RequestProvider',

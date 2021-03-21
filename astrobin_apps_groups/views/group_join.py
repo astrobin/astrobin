@@ -35,12 +35,12 @@ class GroupJoinView(LoginRequiredMixin, RedirectToGroupDetailMixin, RestrictToPr
                 messages.warning(request,
                                  _("This is a moderated group, and your join request will be reviewed by a moderator"))
                 push_notification(
-                    group.moderators.all(), 'new_group_join_request',
+                    group.moderators.all(), request.user, 'new_group_join_request',
                     {
                         'requester': request.user.userprofile.get_display_name(),
                         'group_name': group.name,
-                        'url': build_notification_url(settings.BASE_URL + reverse('group_moderate_join_requests',
-                                                           args=(group.pk,))),
+                        'url': build_notification_url(
+                            settings.BASE_URL + reverse('group_moderate_join_requests', args=(group.pk,)), request.user)
                     })
                 return redirect(self.get_success_url())
             else:

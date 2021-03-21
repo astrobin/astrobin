@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-16 18:49+0000\n"
+"POT-Creation-Date: 2021-03-21 15:59+0000\n"
 "PO-Revision-Date: 2015-01-20 21:30+0000\n"
 "Last-Translator: jordi <jordi.inyigo@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1903,6 +1903,11 @@ msgid ""
 "Image of the Day, the Top Picks, other custom contests. This will remove you "
 "from the leaderboards and hide your Image Index and Contribution Index."
 msgstr ""
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "Open notifications in a new tab"
+msgstr "Lajmerime"
 
 #, fuzzy
 msgid "Global stream"
@@ -4855,14 +4860,6 @@ msgstr ""
 "Qiej te erret,\n"
 "AstroBin.\n"
 
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">You are now following <strong>%(object)s</strong>."
-"</a>"
-msgstr ""
-"<a href=\"%(object_url)s\">Juve nuk po ndiqni <strong>%(object)s</strong>.</"
-"a>"
-
 #, fuzzy, python-format
 msgid ""
 "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
@@ -4886,9 +4883,6 @@ msgstr ""
 msgid "Your request to join the group \"%(group_name)s\" has been REJECTED"
 msgstr ""
 
-msgid "Your image has been deleted."
-msgstr "Foto juaj u fshi."
-
 #, fuzzy, python-format
 #| msgid "<a href=\"%(object_url)s\">Your image could not be plate-solved.</a>"
 msgid "<a href=\"%(object_url)s\">Your image</a> could not be plate-solved."
@@ -4904,10 +4898,6 @@ msgstr "<a href=\"%(object_url)s\">Foto juaj nuk mund te zberthehet.</a>"
 
 msgid "Your image could not be plate-solved."
 msgstr "Foto juaj nuk mund te zberthehet."
-
-#, python-format
-msgid "<a href=\"%(object_url)s\">Your image has been processed.</a>"
-msgstr "<a href=\"%(object_url)s\">Foto juaj u proçesua.</a>"
 
 #, fuzzy, python-format
 #| msgid "<a href=\"%(object_url)s\">Your image could not be plate-solved.</a>"
@@ -5095,43 +5085,6 @@ msgstr ""
 
 msgid "Would you like to activate your account on AstroBin?"
 msgstr ""
-
-#, fuzzy, python-format
-#| msgid ""
-#| "AstroBin has published a new blog entry: \"%(object)s\".\n"
-#| "\n"
-#| "Check it out at the following url: %(object_url)s"
-msgid ""
-"AstroBin has published a new blog entry: \"%(object)s\".\n"
-"\n"
-"Check it out at the following url: <a href=\"%(object_url)s\">"
-"%(object_url)s</a>"
-msgstr ""
-"AstroBin ka publikuar hyrjen ne nje blog te ri: \"%(object)s\".\n"
-"\n"
-"Hidhi nje sy ne adrsen qe vijon: %(object_url)s"
-
-#, python-format
-msgid ""
-"AstroBin has published a new blog entry: \"%(object)s\".\n"
-"\n"
-"Check it out at the following url: %(object_url)s"
-msgstr ""
-"AstroBin ka publikuar hyrjen ne nje blog te ri: \"%(object)s\".\n"
-"\n"
-"Hidhi nje sy ne adrsen qe vijon: %(object_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">AstroBin has published a new blog entry: "
-"\"%(object)s\"</a>"
-msgstr ""
-"<a href=\"%(object_url)s\">AstroBin ka publikuar hyrjen ne nje blog te ri: "
-"\"%(object)s\"</a>"
-
-#, python-format
-msgid "AstroBin has publushed a new blog entry: %(object)s"
-msgstr "Astrobin ka publikuar hyrjen ne nje blog te ri: %(object)s"
 
 #, fuzzy, python-format
 msgid ""
@@ -5338,31 +5291,6 @@ msgstr "%(user)s ka komentuar foton tuaj!"
 
 #, fuzzy, python-format
 msgid ""
-"%(user)s started a new discussion about a gear item you own! Read it at "
-"following url: <a href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-"%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: %(url)s"
-
-#, fuzzy, python-format
-msgid ""
-"%(user)s started a new discussion about a gear item you own! Read it at "
-"following url: %(url)s"
-msgstr ""
-"%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: %(url)s"
-
-#, fuzzy, python-format
-msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> started a new discussion about "
-"a gear item you own!</a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> ka komentuar foton tuaj!</a>"
-
-#, python-format
-msgid "%(user)s started a new discussion about a gear item you own!"
-msgstr ""
-
-#, fuzzy, python-format
-msgid ""
 "%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
 "\n"
 "Visit the group here: <a href=\"%(group_page)s\">%(group_page)s</a>"
@@ -5424,64 +5352,6 @@ msgstr ""
 
 #, fuzzy, python-format
 msgid "New image by %(user)s"
-msgstr "Foto re nga %(originator)s"
-
-#, fuzzy, python-format
-msgid ""
-"New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
-"Check it out at the following url: <a href=\"%(object_url)s\">"
-"%(object_url)s</a>"
-msgstr ""
-"%(originator)s ka përmbushur kerkesen tuaj! Hidhini nje sy te linku qe "
-"vijon: %(object_url)s"
-
-#, fuzzy, python-format
-msgid ""
-"New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
-"Check it out at the following url: %(object_url)s"
-msgstr ""
-"%(originator)s ka përmbushur kerkesen tuaj! Hidhini nje sy te linku qe "
-"vijon: %(object_url)s"
-
-#, fuzzy, python-format
-msgid ""
-"<a href=\"%(object_url)s\">New image taken with a <strong>%(gear)s</strong>."
-"</a>"
-msgstr ""
-"<a href=\"%(object_url)s\">Juve nuk po ndiqni <strong>%(object)s</strong>.</"
-"a>"
-
-#, fuzzy, python-format
-msgid "New image taken with a %(gear)s"
-msgstr "Foto e re e riparë nga %(originator)s"
-
-#, fuzzy, python-format
-msgid ""
-"New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
-"out at the following url: <a href=\"%(object_url)s\">%(object_url)s</a>"
-msgstr ""
-"AstroBin ka publikuar hyrjen ne nje blog te ri: \"%(object)s\".\n"
-"\n"
-"Hidhi nje sy ne adrsen qe vijon: %(object_url)s"
-
-#, fuzzy, python-format
-msgid ""
-"New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
-"out at the following url: %(object_url)s"
-msgstr ""
-"AstroBin ka publikuar hyrjen ne nje blog te ri: \"%(object)s\".\n"
-"\n"
-"Hidhi nje sy ne adrsen qe vijon: %(object_url)s"
-
-#, fuzzy, python-format
-msgid ""
-"<a href=\"%(object_url)s\">New image of <strong>%(subject)s</strong>.</a>"
-msgstr ""
-"<a href=\"%(object_url)s\">Juve nuk po ndiqni <strong>%(object)s</strong>.</"
-"a>"
-
-#, fuzzy, python-format
-msgid "New image of %(subject)s"
 msgstr "Foto re nga %(originator)s"
 
 #, fuzzy, python-format
@@ -5646,34 +5516,6 @@ msgstr ""
 
 msgid "You have received a new private message."
 msgstr "Ju keni nje mesazh privat te ri."
-
-#, python-format
-msgid ""
-"%(originator)s has fulfilled your request! Check it out at the following "
-"url: %(object_url)s"
-msgstr ""
-"%(originator)s ka përmbushur kerkesen tuaj! Hidhini nje sy te linku qe "
-"vijon: %(object_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has fulfilled "
-"your request</a>"
-msgstr ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> ka permbushur "
-"kerkesen tuaj</a>"
-
-#, python-format
-msgid "%(originator)s has fulfilled your request."
-msgstr "%(originator)s ka përmbushur kerkesen tuaj."
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">You have stopped following <strong>%(object)s</"
-"strong>.</a>"
-msgstr ""
-"<a href=\"%(object_url)s\">Juve keni ndaluar se ndjekuri<strong>%(object)s</"
-"strong>.</a>"
 
 #, python-format
 msgid "%(user)s joined the public group: \"%(group_name)s\""
@@ -5968,7 +5810,21 @@ msgstr ""
 msgid "Subscribe"
 msgstr ""
 
+msgid "The posts below are new since your last visit to this topic."
+msgstr ""
+
 msgid "Subscribers"
+msgstr ""
+
+#, fuzzy
+#| msgid "You have already nominated this image"
+msgid "You have unread posts in this topic."
+msgstr "E ke percaktuar nje here kete foto"
+
+msgid "Would you like to jump to the new posts since your last visit?"
+msgstr ""
+
+msgid "Click here"
 msgstr ""
 
 msgid "Topic"
@@ -7261,6 +7117,158 @@ msgstr ""
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
 
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\">You are now following <strong>%(object)s</"
+#~ "strong>.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\">Juve nuk po ndiqni <strong>%(object)s</strong>."
+#~ "</a>"
+
+#~ msgid "Your image has been deleted."
+#~ msgstr "Foto juaj u fshi."
+
+#~ msgid "<a href=\"%(object_url)s\">Your image has been processed.</a>"
+#~ msgstr "<a href=\"%(object_url)s\">Foto juaj u proçesua.</a>"
+
+#, fuzzy
+#~| msgid ""
+#~| "AstroBin has published a new blog entry: \"%(object)s\".\n"
+#~| "\n"
+#~| "Check it out at the following url: %(object_url)s"
+#~ msgid ""
+#~ "AstroBin has published a new blog entry: \"%(object)s\".\n"
+#~ "\n"
+#~ "Check it out at the following url: <a href=\"%(object_url)s\">"
+#~ "%(object_url)s</a>"
+#~ msgstr ""
+#~ "AstroBin ka publikuar hyrjen ne nje blog te ri: \"%(object)s\".\n"
+#~ "\n"
+#~ "Hidhi nje sy ne adrsen qe vijon: %(object_url)s"
+
+#~ msgid ""
+#~ "AstroBin has published a new blog entry: \"%(object)s\".\n"
+#~ "\n"
+#~ "Check it out at the following url: %(object_url)s"
+#~ msgstr ""
+#~ "AstroBin ka publikuar hyrjen ne nje blog te ri: \"%(object)s\".\n"
+#~ "\n"
+#~ "Hidhi nje sy ne adrsen qe vijon: %(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\">AstroBin has published a new blog entry: "
+#~ "\"%(object)s\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\">AstroBin ka publikuar hyrjen ne nje blog te "
+#~ "ri: \"%(object)s\"</a>"
+
+#~ msgid "AstroBin has publushed a new blog entry: %(object)s"
+#~ msgstr "Astrobin ka publikuar hyrjen ne nje blog te ri: %(object)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "%(user)s started a new discussion about a gear item you own! Read it at "
+#~ "following url: <a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: "
+#~ "%(url)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "%(user)s started a new discussion about a gear item you own! Read it at "
+#~ "following url: %(url)s"
+#~ msgstr ""
+#~ "%(user)s ka komentuar foton tuaj! Hidhini nje sy ne adresen qe vijon: "
+#~ "%(url)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> started a new discussion "
+#~ "about a gear item you own!</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> ka komentuar foton tuaj!</a>"
+
+#, fuzzy
+#~ msgid ""
+#~ "New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
+#~ "Check it out at the following url: <a href=\"%(object_url)s\">"
+#~ "%(object_url)s</a>"
+#~ msgstr ""
+#~ "%(originator)s ka përmbushur kerkesen tuaj! Hidhini nje sy te linku qe "
+#~ "vijon: %(object_url)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
+#~ "Check it out at the following url: %(object_url)s"
+#~ msgstr ""
+#~ "%(originator)s ka përmbushur kerkesen tuaj! Hidhini nje sy te linku qe "
+#~ "vijon: %(object_url)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\">New image taken with a <strong>%(gear)s</"
+#~ "strong>.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\">Juve nuk po ndiqni <strong>%(object)s</strong>."
+#~ "</a>"
+
+#, fuzzy
+#~ msgid "New image taken with a %(gear)s"
+#~ msgstr "Foto e re e riparë nga %(originator)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
+#~ "out at the following url: <a href=\"%(object_url)s\">%(object_url)s</a>"
+#~ msgstr ""
+#~ "AstroBin ka publikuar hyrjen ne nje blog te ri: \"%(object)s\".\n"
+#~ "\n"
+#~ "Hidhi nje sy ne adrsen qe vijon: %(object_url)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
+#~ "out at the following url: %(object_url)s"
+#~ msgstr ""
+#~ "AstroBin ka publikuar hyrjen ne nje blog te ri: \"%(object)s\".\n"
+#~ "\n"
+#~ "Hidhi nje sy ne adrsen qe vijon: %(object_url)s"
+
+#, fuzzy
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\">New image of <strong>%(subject)s</strong>.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\">Juve nuk po ndiqni <strong>%(object)s</strong>."
+#~ "</a>"
+
+#, fuzzy
+#~ msgid "New image of %(subject)s"
+#~ msgstr "Foto re nga %(originator)s"
+
+#~ msgid ""
+#~ "%(originator)s has fulfilled your request! Check it out at the following "
+#~ "url: %(object_url)s"
+#~ msgstr ""
+#~ "%(originator)s ka përmbushur kerkesen tuaj! Hidhini nje sy te linku qe "
+#~ "vijon: %(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has fulfilled "
+#~ "your request</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> ka permbushur "
+#~ "kerkesen tuaj</a>"
+
+#~ msgid "%(originator)s has fulfilled your request."
+#~ msgstr "%(originator)s ka përmbushur kerkesen tuaj."
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\">You have stopped following <strong>%(object)s</"
+#~ "strong>.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\">Juve keni ndaluar se ndjekuri<strong>"
+#~ "%(object)s</strong>.</a>"
+
 #~ msgid "New!"
 #~ msgstr "E re!"
 
@@ -7327,11 +7335,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Basic analytics"
 #~ msgstr "Informacione bazë"
-
-#, fuzzy
-#~| msgid "You have already nominated this image"
-#~ msgid "You are already on this plan"
-#~ msgstr "E ke percaktuar nje here kete foto"
 
 #, fuzzy
 #~ msgid "∞ images, ∞ size"

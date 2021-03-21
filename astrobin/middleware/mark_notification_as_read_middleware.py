@@ -40,4 +40,8 @@ class MarkNotificationAsReadMiddleware(object):
                 log.warning("Notification %s does not exist" % notification_id)
         elif self._process_with_email_medium(request):
             notifications = Message.objects.filter(user=request.user, message__contains=request.path, read=False)
+
+            if 'from_user' in request.GET:
+                notifications = notifications.filter(from_user__pk = request.GET.get('from_user'))
+
             notifications.update(read=True)

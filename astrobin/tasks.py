@@ -1,15 +1,16 @@
 from __future__ import absolute_import
 
-import json
-import uuid
-
-import six
-
 import csv
+import json
 import ntpath
 import subprocess
 import tempfile
+import uuid
 import zipfile
+
+import six
+from django.db import IntegrityError
+from django.template.defaultfilters import filesizeformat
 
 from common.services import DateTimeService
 
@@ -181,7 +182,7 @@ def update_index(model, age_in_minutes, batch_size):
     call_command(
         'update_index',
         model,
-        '-b %d'  % batch_size,
+        '-b %d' % batch_size,
         '--start=%s' % start.strftime("%Y-%m-%dT%H:%M:%S"),
         '--end=%s' % end.strftime("%Y-%m-%dT%H:%M:%S")
     )
@@ -236,7 +237,7 @@ def send_never_activated_account_reminder():
             user.delete()
             continue
 
-        push_notification([user], 'never_activated_account', {
+        push_notification([user], None, 'never_activated_account', {
             'date': user.date_joined,
             'username': user.username,
             'activation_link': '%s/%s' % (
@@ -350,7 +351,8 @@ def prepare_download_data_archive(request_id):
                             response = requests.get(revision.solution.image_file.url, verify=False)  # type: Response
                             if response.status_code == 200:
                                 path = ntpath.basename(revision.solution.image_file.name)  # type: str
-                                archive.writestr("%s-%s/revisions/%s/solution/%s" % (id, title, label, path), response.content)
+                                archive.writestr("%s-%s/revisions/%s/solution/%s" % (id, title, label, path),
+                                                 response.content)
                                 logger.debug(
                                     "prepare_download_data_archive: solution image of image %s revision %s = written" % (
                                         id, label
@@ -581,3 +583,39 @@ def perform_wise_payouts(
 
     process_wise_payouts()
 
+
+@shared_task(time_limit=300)
+def assign_upload_length():
+    """
+    Run this tasks every hour to assign `uploader_upload_length` to images that lack it.
+    """
+
+    def process(items):
+        for item in items.iterator():
+            try:
+                url = item.image_file.url
+                response = requests.head(url)  # type: Response
+            except ValueError as e:
+                logger.error("assign_upload_length: error %s", str(e))
+                continue
+
+            if response.status_code == 200:
+                size = response.headers.get("Content-Length")
+                item.uploader_upload_length = size
+
+                try:
+                    item.save(keep_deleted=True)
+                except IntegrityError:
+                    continue
+
+                logger.info("assign_upload_length: proccessed %d (%s) = %s" % (
+                    item.pk, item.image_file.url, filesizeformat(size)
+                ))
+
+    time_cut = DateTimeService.now() - timedelta(hours=2)
+    images = Image.all_objects.filter(uploader_upload_length__isnull=True, uploaded_gte=time_cut, corrupted=False)
+    revisions = ImageRevision.all_objects.filter(uploader_upload_length__isnull=True, uploaded_gte=time_cut,
+                                                 corrupted=False)
+
+    process(images)
+    process(revisions)

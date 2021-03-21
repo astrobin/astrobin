@@ -1,5 +1,14 @@
 @import 'variables';
 
+@keyframes highlighted {
+  from {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+  to {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
 table.topic-list {
   color: #606060;
 
@@ -89,7 +98,23 @@ th.forum-name {
 }
 
 .post {
-  margin: 0 0 12px 0;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+
+  &.even .post-content {
+    background: rgba(255, 255, 255, .02);
+  }
+
+  &.odd .post-content {
+    background: rgba(0, 0, 0, .05);
+  }
+
+  &.highlighted .post-content {
+    animation-name: highlighted;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    background-color: rgba(255, 255, 255, 0.15);
+  }
 }
 
 .post-header {
@@ -97,9 +122,10 @@ th.forum-name {
 
   th {
     position: relative;
-    padding: 0 20px !important;
+    padding: 0 18px !important;
     height: 60px;
     vertical-align: middle !important;
+    border-bottom-color: $grey-5 !important;
   }
 
   img {
@@ -131,10 +157,6 @@ th.forum-name {
   }
 }
 
-.post tbody tr:hover td {
-  background-color: inherit !important; // Cancel bootstrap's on-hover highlight
-}
-
 .post-info {
   width: 220px;
 
@@ -152,7 +174,7 @@ th.forum-name {
 .post-content {
   font-size: 14.5px;
   line-height: 20px;
-  padding: 18px !important;
+  padding: 1.5rem 18px !important;
 
   /* These are technically the same, but use both */
   overflow-wrap: break-word;
@@ -213,7 +235,7 @@ th.forum-name {
     margin: 15px 0;
 
     &[alt='smile'],
-    &[src*='precise_bbcode']{
+    &[src*='precise_bbcode'] {
       width: 18px;
       height: 18px;
       margin: 0 1px;
@@ -223,7 +245,7 @@ th.forum-name {
   ul,
   ol {
     + br + img:not([alt='smile']) {
-    margin-top: -19px;
+      margin-top: -19px;
     }
   }
 
@@ -243,7 +265,9 @@ th.forum-name {
 }
 
 .post-related {
-  margin-top: 20px;
+  margin-top: 1.5rem;
+  margin-bottom: -.5rem;
+  text-align: right;
 
   .btn {
     font-size: 11px;
@@ -277,7 +301,7 @@ th.forum-name {
 
   .toggleproperty-add-remove {
     width: auto !important;
-    margin-left: 0 !important;
+    margin: 0 2px 0 0 !important;
 
     .btn {
       width: auto;
@@ -429,8 +453,15 @@ table.post th.post-avatar {
 }
 
 .topic h1, .forum h1, .category h1 {
-  margin: 24px 0 8px 0;
-  font-size: 24px;
+  margin: 2rem 0 2.5rem;
+  font-size: 2rem;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .5);
+
+  @media screen and (max-width: 767px) {
+    text-align: left;
+    padding: 0 18px;
+    border: 0;
+  }
 }
 
 .post-content .updated-message {
@@ -459,3 +490,32 @@ table.post th.post-avatar {
   }
 }
 
+.reply-header {
+  @media screen and (max-width: 767px) {
+    padding: 0 18px;
+  }
+}
+
+.unread-marker {
+  padding: 3rem 1rem;
+  margin: 3rem 0;
+  text-align: center;
+  background: $grey-6 url("../images/background-tile.png");
+  color: $white;
+  text-shadow: 0 1px 0 $black;
+  font-size: 1.15rem;
+  line-height: 1.4rem;
+  font-weight: bold;
+  border: 1px dashed $grey-4;
+
+  @media screen and (min-width: 1155px) {
+    margin: 3rem -100px;
+    border-left: 0;
+    border-right: 0;
+  }
+
+  @media screen and (max-width: 767px) {
+    border-left: 0;
+    border-right: 0;
+  }
+}

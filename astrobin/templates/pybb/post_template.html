@@ -14,9 +14,14 @@
 {% pybb_get_profile user=post.user as post_user_profile %}
 {% pybb_get_profile user=user as user_profile %}
 
-<a class="anchor" name="post-{{ post.id }}"></a> {# may be remove this string? #}
+<a class="anchor" id="post-{{ post.id }}"></a> {# may be remove this string? #}
 
-<table class="table post {% if post.on_moderation and user.is_superuser %}on-moderation{% endif %}" id="post-{{ post.id }}">
+<table class="
+        table
+        post
+        {{ rowcolors }}
+        {% if post.on_moderation and user.is_superuser %}on-moderation{% endif %}
+        {% if user.is_authenticated and post|post_is_unread:request %}unread{% endif %}">
     <thead class="post-header">
     <tr>
     <th>
@@ -213,4 +218,20 @@
 
     {% include 'image/detail/modals/cant_like.html' %}
     {% include 'image/detail/modals/cant_unlike.html' %}
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var hash = window.location.hash;
+
+            if (!!hash && hash.indexOf("#post-") > -1) {
+                var $post = $(hash).next();
+
+                if (!!$post) {
+                    $post.addClass('highlighted');
+                }
+            }
+        });
+    </script>
 {% endblock %}

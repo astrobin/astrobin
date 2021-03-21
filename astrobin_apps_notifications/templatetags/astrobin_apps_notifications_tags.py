@@ -52,6 +52,6 @@ def to_notification_url(url):
 
 
 @register.simple_tag
-def notification_url_params_for_email():
-    params = get_notification_url_params_for_email()
+def notification_url_params_for_email(from_user=None):
+    params = get_notification_url_params_for_email(from_user)
     return urllib.urlencode(params)

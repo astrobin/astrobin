@@ -2172,7 +2172,9 @@ class UserProfile(SafeDeleteModel):
         blank=True,
     )
 
-    open_notifications_in_new_tab = models.NullBooleanField()
+    open_notifications_in_new_tab = models.NullBooleanField(
+        verbose_name=_("Open notifications in a new tab")
+    )
 
     # Gear
     telescopes = models.ManyToManyField(Telescope, blank=True, verbose_name=_("Telescopes and lenses"),
@@ -2679,7 +2681,7 @@ class AppApiKeyRequest(models.Model):
 
         if created:
             push_notification(
-                [self.registrar], 'api_key_request_approved',
+                [self.registrar], None, 'api_key_request_approved',
                 {'api_docs_url': settings.BASE_URL + '/help/api/',
                  'api_keys_url': settings.BASE_URL + '/users/%s/apikeys/' % self.registrar.username,
                  'key': app.key,

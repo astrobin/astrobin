@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-16 18:49+0000\n"
+"POT-Creation-Date: 2021-03-21 15:59+0000\n"
 "PO-Revision-Date: 2015-11-10 11:53+0000\n"
 "Last-Translator: Xavier <bufote@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1885,6 +1885,11 @@ msgid ""
 "Image of the Day, the Top Picks, other custom contests. This will remove you "
 "from the leaderboards and hide your Image Index and Contribution Index."
 msgstr ""
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "Open notifications in a new tab"
+msgstr "Notificacions"
 
 #, fuzzy
 msgid "Global stream"
@@ -4735,12 +4740,6 @@ msgid ""
 "AstroBin.\n"
 msgstr ""
 
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">You are now following <strong>%(object)s</strong>."
-"</a>"
-msgstr ""
-
 #, fuzzy, python-format
 msgid ""
 "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
@@ -4764,9 +4763,6 @@ msgstr ""
 msgid "Your request to join the group \"%(group_name)s\" has been REJECTED"
 msgstr ""
 
-msgid "Your image has been deleted."
-msgstr ""
-
 #, fuzzy, python-format
 #| msgid "Your image could not be plate-solved"
 msgid "<a href=\"%(object_url)s\">Your image</a> could not be plate-solved."
@@ -4781,10 +4777,6 @@ msgid "<a href=\"%(object_url)s\">Your image could not be plate-solved.</a>"
 msgstr ""
 
 msgid "Your image could not be plate-solved."
-msgstr ""
-
-#, python-format
-msgid "<a href=\"%(object_url)s\">Your image has been processed.</a>"
 msgstr ""
 
 #, fuzzy, python-format
@@ -4940,31 +4932,6 @@ msgid ""
 msgstr ""
 
 msgid "Would you like to activate your account on AstroBin?"
-msgstr ""
-
-#, python-format
-msgid ""
-"AstroBin has published a new blog entry: \"%(object)s\".\n"
-"\n"
-"Check it out at the following url: <a href=\"%(object_url)s\">"
-"%(object_url)s</a>"
-msgstr ""
-
-#, python-format
-msgid ""
-"AstroBin has published a new blog entry: \"%(object)s\".\n"
-"\n"
-"Check it out at the following url: %(object_url)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">AstroBin has published a new blog entry: "
-"\"%(object)s\"</a>"
-msgstr ""
-
-#, python-format
-msgid "AstroBin has publushed a new blog entry: %(object)s"
 msgstr ""
 
 #, python-format
@@ -5126,28 +5093,6 @@ msgstr ""
 msgid "%(user)s mentioned you in a forum post!"
 msgstr ""
 
-#, python-format
-msgid ""
-"%(user)s started a new discussion about a gear item you own! Read it at "
-"following url: <a href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-
-#, python-format
-msgid ""
-"%(user)s started a new discussion about a gear item you own! Read it at "
-"following url: %(url)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> started a new discussion about "
-"a gear item you own!</a>"
-msgstr ""
-
-#, python-format
-msgid "%(user)s started a new discussion about a gear item you own!"
-msgstr ""
-
 #, fuzzy, python-format
 msgid ""
 "%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
@@ -5207,50 +5152,6 @@ msgstr ""
 
 #, python-format
 msgid "New image by %(user)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
-"Check it out at the following url: <a href=\"%(object_url)s\">"
-"%(object_url)s</a>"
-msgstr ""
-
-#, python-format
-msgid ""
-"New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
-"Check it out at the following url: %(object_url)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">New image taken with a <strong>%(gear)s</strong>."
-"</a>"
-msgstr ""
-
-#, python-format
-msgid "New image taken with a %(gear)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
-"out at the following url: <a href=\"%(object_url)s\">%(object_url)s</a>"
-msgstr ""
-
-#, python-format
-msgid ""
-"New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
-"out at the following url: %(object_url)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">New image of <strong>%(subject)s</strong>.</a>"
-msgstr ""
-
-#, python-format
-msgid "New image of %(subject)s"
 msgstr ""
 
 #, python-format
@@ -5387,28 +5288,6 @@ msgid ""
 msgstr ""
 
 msgid "You have received a new private message."
-msgstr ""
-
-#, python-format
-msgid ""
-"%(originator)s has fulfilled your request! Check it out at the following "
-"url: %(object_url)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has fulfilled "
-"your request</a>"
-msgstr ""
-
-#, python-format
-msgid "%(originator)s has fulfilled your request."
-msgstr ""
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">You have stopped following <strong>%(object)s</"
-"strong>.</a>"
 msgstr ""
 
 #, python-format
@@ -5702,8 +5581,24 @@ msgstr ""
 msgid "Subscribe"
 msgstr ""
 
+msgid "The posts below are new since your last visit to this topic."
+msgstr ""
+
 msgid "Subscribers"
 msgstr ""
+
+#, fuzzy
+#| msgid "You have already nominated this image"
+msgid "You have unread posts in this topic."
+msgstr "Ja has nominat aquesta imatge"
+
+msgid "Would you like to jump to the new posts since your last visit?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Click here to help!"
+msgid "Click here"
+msgstr "Fes clic aquí per col·laborar!"
 
 msgid "Topic"
 msgstr ""
@@ -6957,11 +6852,6 @@ msgstr ""
 #~| msgid "Basic information"
 #~ msgid "Basic analytics"
 #~ msgstr "Informació bàsica"
-
-#, fuzzy
-#~| msgid "You have already nominated this image"
-#~ msgid "You are already on this plan"
-#~ msgstr "Ja has nominat aquesta imatge"
 
 #, fuzzy
 #~ msgid "Full search"
@@ -8628,6 +8518,3 @@ msgstr ""
 #~ msgstr ""
 #~ "AstroBin du a terme una campanya col·lectiva per a millorar la "
 #~ "consistència de la base de dades d'instrumental."
-
-#~ msgid "Click here to help!"
-#~ msgstr "Fes clic aquí per col·laborar!"

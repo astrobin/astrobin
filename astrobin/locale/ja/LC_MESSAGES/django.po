@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-16 18:49+0000\n"
+"POT-Creation-Date: 2021-03-21 15:59+0000\n"
 "PO-Revision-Date: 2020-11-27 01:58+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1874,6 +1874,11 @@ msgstr ""
 "このボックスにチェックを入れると、Image of the Day、Top Picks、その他のカスタ"
 "ムコンテストなどのコンテストから除外されます。これにより、あなたはリーダー"
 "ボードから除外され、AstroBin Indexが非表示になります。"
+
+#, fuzzy
+#| msgid "Skip notifications"
+msgid "Open notifications in a new tab"
+msgstr "通知をスキップ"
 
 msgid "Global stream"
 msgstr "全体での新着"
@@ -4898,14 +4903,6 @@ msgstr ""
 
 #, python-format
 msgid ""
-"<a href=\"%(object_url)s\">You are now following <strong>%(object)s</strong>."
-"</a>"
-msgstr ""
-"<a href=\"%(object_url)s\">あなたは今、 <strong>%(object)s</strong>をフォロー"
-"しました。</a>"
-
-#, python-format
-msgid ""
 "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
 "\n"
 "Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
@@ -4926,9 +4923,6 @@ msgstr ""
 msgid "Your request to join the group \"%(group_name)s\" has been REJECTED"
 msgstr ""
 
-msgid "Your image has been deleted."
-msgstr "あなたの画像は削除されました。"
-
 #, fuzzy, python-format
 #| msgid "<a href=\"%(object_url)s\">Your image could not be plate-solved.</a>"
 msgid "<a href=\"%(object_url)s\">Your image</a> could not be plate-solved."
@@ -4944,10 +4938,6 @@ msgstr "<a href=\"%(object_url)s\">あなたの画像は図画化できません
 
 msgid "Your image could not be plate-solved."
 msgstr "あなたの画像は図画化できませんでした。"
-
-#, python-format
-msgid "<a href=\"%(object_url)s\">Your image has been processed.</a>"
-msgstr "<a href=\"%(object_url)s\">あたなの画像が処理されました。</a>"
 
 #, fuzzy, python-format
 #| msgid "<a href=\"%(object_url)s\">Your image could not be plate-solved.</a>"
@@ -5127,40 +5117,6 @@ msgstr ""
 #| msgid "Would you like to start using your real name on AstroBin?"
 msgid "Would you like to activate your account on AstroBin?"
 msgstr "あなたの本当の名前を使ってAstroBinを始めようとしてますか?"
-
-#, python-format
-msgid ""
-"AstroBin has published a new blog entry: \"%(object)s\".\n"
-"\n"
-"Check it out at the following url: <a href=\"%(object_url)s\">"
-"%(object_url)s</a>"
-msgstr ""
-"AstroBinは新しいブログを公開しました。\"%(object)s\"\n"
-"\n"
-"それを読むには、以下のURLをクリックしてください。<a href=\"%(object_url)s\">"
-"%(object_url)s</a>"
-
-#, python-format
-msgid ""
-"AstroBin has published a new blog entry: \"%(object)s\".\n"
-"\n"
-"Check it out at the following url: %(object_url)s"
-msgstr ""
-"AstroBinは新しいブログ記事を公開しました。\"%(object)s\"\n"
-"\n"
-"以下のURLをクリックしてください。%(object_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">AstroBin has published a new blog entry: "
-"\"%(object)s\"</a>"
-msgstr ""
-"<a href=\"%(object_url)s\">AstroBinは新しいブログ記事を公開しまし"
-"た。\"%(object)s\"</a>"
-
-#, python-format
-msgid "AstroBin has publushed a new blog entry: %(object)s"
-msgstr "AstroBinは新しいブログ記事を公開しました。%(object)s"
 
 #, python-format
 msgid ""
@@ -5364,34 +5320,6 @@ msgstr "%(user)sがあなたの画像にコメントしました!"
 
 #, python-format
 msgid ""
-"%(user)s started a new discussion about a gear item you own! Read it at "
-"following url: <a href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-"%(user)sはあなたが所有する機材についての新しいディスカッションを開始しまし"
-"た。以下のURLでそれを読むことができます。<a href=\"%(url)s\">%(url)s</a>"
-
-#, python-format
-msgid ""
-"%(user)s started a new discussion about a gear item you own! Read it at "
-"following url: %(url)s"
-msgstr ""
-"%(user)sはあなたが所有する機材品についての新しい議論を開始しました。以下のURL"
-"でそれを読んでください。%(url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> started a new discussion about "
-"a gear item you own!</a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong>はあなたが所有する機材品について"
-"の新しい議論を開始しました。</a>"
-
-#, python-format
-msgid "%(user)s started a new discussion about a gear item you own!"
-msgstr "%(user)sはあなたが所有する機材についての新しい議論をスタートしました!"
-
-#, python-format
-msgid ""
 "%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
 "\n"
 "Visit the group here: <a href=\"%(group_page)s\">%(group_page)s</a>"
@@ -5445,62 +5373,6 @@ msgstr "<strong>%(user)s</strong>が新しい画像を公開"
 #, python-format
 msgid "New image by %(user)s"
 msgstr "%(user)s の新着画像"
-
-#, python-format
-msgid ""
-"New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
-"Check it out at the following url: <a href=\"%(object_url)s\">"
-"%(object_url)s</a>"
-msgstr ""
-"あなたのフォローする機材<strong>%(gear)s</strong>を使用した新しい写真が追加さ"
-"れました。以下のURLをチェックしてください。<a href=\"%(object_url)s\">"
-"%(object_url)s</a>"
-
-#, python-format
-msgid ""
-"New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
-"Check it out at the following url: %(object_url)s"
-msgstr ""
-"あなたのフォローする機材（<strong>%(gear)s</strong>）の新しい写真が追加されま"
-"した。以下のURLをチェックしてください。%(object_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">New image taken with a <strong>%(gear)s</strong>."
-"</a>"
-msgstr ""
-"<a href=\"%(object_url)s\"><strong>%(gear)s</strong>についての新しい画像が追"
-"加されました。</a>"
-
-#, python-format
-msgid "New image taken with a %(gear)s"
-msgstr "%(gear)sの新しい画像が追加"
-
-#, python-format
-msgid ""
-"New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
-"out at the following url: <a href=\"%(object_url)s\">%(object_url)s</a>"
-msgstr ""
-"あなたがフォローするタイトル（<strong>%(subject)s</strong>）に新しい画像が追"
-"加されました。以下のURLをチェックしてください。<a href=\"%(object_url)s\">"
-"%(object_url)s</a>"
-
-#, python-format
-msgid ""
-"New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
-"out at the following url: %(object_url)s"
-msgstr ""
-"あなたがフォローする被写体（<strong>%(subject)s</strong>）の新しい画像が追加"
-"されました。以下のURLをチェックしてください。%(object_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">New image of <strong>%(subject)s</strong>.</a>"
-msgstr "<a href=\"%(object_url)s\"><strong>%(subject)s</strong>の新着画像</a>"
-
-#, python-format
-msgid "New image of %(subject)s"
-msgstr "%(subject)sの新着画像"
 
 #, python-format
 msgid ""
@@ -5653,34 +5525,6 @@ msgstr ""
 
 msgid "You have received a new private message."
 msgstr "新しいプライベートメッセージが届いています。"
-
-#, python-format
-msgid ""
-"%(originator)s has fulfilled your request! Check it out at the following "
-"url: %(object_url)s"
-msgstr ""
-"%(originator)sは、あなたのリクエストを終了しました。以下のURLをチェックしてく"
-"ださい。%(object_url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has fulfilled "
-"your request</a>"
-msgstr ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong>は、あなたのリクエ"
-"ストを終了しました。</a>"
-
-#, python-format
-msgid "%(originator)s has fulfilled your request."
-msgstr "%(originator)sは、あなたのリクエストを終了しました。"
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">You have stopped following <strong>%(object)s</"
-"strong>.</a>"
-msgstr ""
-"<a href=\"%(object_url)s\"><strong>%(object)s</strong>をフォローすることを止"
-"めました。</a>"
 
 #, python-format
 msgid "%(user)s joined the public group: \"%(group_name)s\""
@@ -5975,7 +5819,23 @@ msgstr ""
 msgid "Subscribe"
 msgstr ""
 
+msgid "The posts below are new since your last visit to this topic."
+msgstr ""
+
 msgid "Subscribers"
+msgstr ""
+
+#, fuzzy
+#| msgid "You are not allowed to see this page."
+msgid "You have unread posts in this topic."
+msgstr "このページの閲覧を許可されていません。"
+
+#, fuzzy
+#| msgid "Would you like to upgrade?"
+msgid "Would you like to jump to the new posts since your last visit?"
+msgstr "アップグレードしたいですか？"
+
+msgid "Click here"
 msgstr ""
 
 msgid "Topic"
@@ -7289,6 +7149,147 @@ msgstr "本当にいいですか?"
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
 
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\">You are now following <strong>%(object)s</"
+#~ "strong>.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\">あなたは今、 <strong>%(object)s</strong>をフォ"
+#~ "ローしました。</a>"
+
+#~ msgid "Your image has been deleted."
+#~ msgstr "あなたの画像は削除されました。"
+
+#~ msgid "<a href=\"%(object_url)s\">Your image has been processed.</a>"
+#~ msgstr "<a href=\"%(object_url)s\">あたなの画像が処理されました。</a>"
+
+#~ msgid ""
+#~ "AstroBin has published a new blog entry: \"%(object)s\".\n"
+#~ "\n"
+#~ "Check it out at the following url: <a href=\"%(object_url)s\">"
+#~ "%(object_url)s</a>"
+#~ msgstr ""
+#~ "AstroBinは新しいブログを公開しました。\"%(object)s\"\n"
+#~ "\n"
+#~ "それを読むには、以下のURLをクリックしてください。<a href=\"%(object_url)s"
+#~ "\">%(object_url)s</a>"
+
+#~ msgid ""
+#~ "AstroBin has published a new blog entry: \"%(object)s\".\n"
+#~ "\n"
+#~ "Check it out at the following url: %(object_url)s"
+#~ msgstr ""
+#~ "AstroBinは新しいブログ記事を公開しました。\"%(object)s\"\n"
+#~ "\n"
+#~ "以下のURLをクリックしてください。%(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\">AstroBin has published a new blog entry: "
+#~ "\"%(object)s\"</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\">AstroBinは新しいブログ記事を公開しまし"
+#~ "た。\"%(object)s\"</a>"
+
+#~ msgid "AstroBin has publushed a new blog entry: %(object)s"
+#~ msgstr "AstroBinは新しいブログ記事を公開しました。%(object)s"
+
+#~ msgid ""
+#~ "%(user)s started a new discussion about a gear item you own! Read it at "
+#~ "following url: <a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "%(user)sはあなたが所有する機材についての新しいディスカッションを開始しまし"
+#~ "た。以下のURLでそれを読むことができます。<a href=\"%(url)s\">%(url)s</a>"
+
+#~ msgid ""
+#~ "%(user)s started a new discussion about a gear item you own! Read it at "
+#~ "following url: %(url)s"
+#~ msgstr ""
+#~ "%(user)sはあなたが所有する機材品についての新しい議論を開始しました。以下の"
+#~ "URLでそれを読んでください。%(url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> started a new discussion "
+#~ "about a gear item you own!</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong>はあなたが所有する機材品につ"
+#~ "いての新しい議論を開始しました。</a>"
+
+#~ msgid "%(user)s started a new discussion about a gear item you own!"
+#~ msgstr ""
+#~ "%(user)sはあなたが所有する機材についての新しい議論をスタートしました!"
+
+#~ msgid ""
+#~ "New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
+#~ "Check it out at the following url: <a href=\"%(object_url)s\">"
+#~ "%(object_url)s</a>"
+#~ msgstr ""
+#~ "あなたのフォローする機材<strong>%(gear)s</strong>を使用した新しい写真が追"
+#~ "加されました。以下のURLをチェックしてください。<a href=\"%(object_url)s\">"
+#~ "%(object_url)s</a>"
+
+#~ msgid ""
+#~ "New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
+#~ "Check it out at the following url: %(object_url)s"
+#~ msgstr ""
+#~ "あなたのフォローする機材（<strong>%(gear)s</strong>）の新しい写真が追加さ"
+#~ "れました。以下のURLをチェックしてください。%(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\">New image taken with a <strong>%(gear)s</"
+#~ "strong>.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\"><strong>%(gear)s</strong>についての新しい画像が"
+#~ "追加されました。</a>"
+
+#~ msgid "New image taken with a %(gear)s"
+#~ msgstr "%(gear)sの新しい画像が追加"
+
+#~ msgid ""
+#~ "New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
+#~ "out at the following url: <a href=\"%(object_url)s\">%(object_url)s</a>"
+#~ msgstr ""
+#~ "あなたがフォローするタイトル（<strong>%(subject)s</strong>）に新しい画像が"
+#~ "追加されました。以下のURLをチェックしてください。<a href=\"%(object_url)s"
+#~ "\">%(object_url)s</a>"
+
+#~ msgid ""
+#~ "New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
+#~ "out at the following url: %(object_url)s"
+#~ msgstr ""
+#~ "あなたがフォローする被写体（<strong>%(subject)s</strong>）の新しい画像が追"
+#~ "加されました。以下のURLをチェックしてください。%(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\">New image of <strong>%(subject)s</strong>.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\"><strong>%(subject)s</strong>の新着画像</a>"
+
+#~ msgid "New image of %(subject)s"
+#~ msgstr "%(subject)sの新着画像"
+
+#~ msgid ""
+#~ "%(originator)s has fulfilled your request! Check it out at the following "
+#~ "url: %(object_url)s"
+#~ msgstr ""
+#~ "%(originator)sは、あなたのリクエストを終了しました。以下のURLをチェックし"
+#~ "てください。%(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has fulfilled "
+#~ "your request</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong>は、あなたのリク"
+#~ "エストを終了しました。</a>"
+
+#~ msgid "%(originator)s has fulfilled your request."
+#~ msgstr "%(originator)sは、あなたのリクエストを終了しました。"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\">You have stopped following <strong>%(object)s</"
+#~ "strong>.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\"><strong>%(object)s</strong>をフォローすることを"
+#~ "止めました。</a>"
+
 #~ msgid "New!"
 #~ msgstr "新着!"
 
@@ -7402,11 +7403,6 @@ msgstr ""
 #~| msgid "Basic information"
 #~ msgid "Basic analytics"
 #~ msgstr "基本情報"
-
-#, fuzzy
-#~| msgid "You are not allowed to see this page."
-#~ msgid "You are already on this plan"
-#~ msgstr "このページの閲覧を許可されていません。"
 
 #, fuzzy
 #~| msgid "Image size"

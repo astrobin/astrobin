@@ -37,9 +37,9 @@ class CommentNotificationsService:
                     instance.parent.author != instance.author and \
                     not instance.pending_moderation:
                 push_notification(
-                    [instance.parent.author], 'new_comment_reply',
+                    [instance.parent.author], instance.author, 'new_comment_reply',
                     {
-                        'url': build_notification_url(url),
+                        'url': build_notification_url(url, instance.author),
                         'user': instance.author.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse(
                             'user_page', kwargs={'username': instance.author.username}),
@@ -50,9 +50,9 @@ class CommentNotificationsService:
                     (instance.parent is None or instance.parent.author != obj.user) and \
                     not instance.pending_moderation:
                 push_notification(
-                    [obj.user], 'new_comment',
+                    [obj.user], instance.author, 'new_comment',
                     {
-                        'url': build_notification_url(url),
+                        'url': build_notification_url(url, instance.author),
                         'user': instance.author.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse(
                             'user_page', kwargs={'username': instance.author.username}),
@@ -67,6 +67,6 @@ class CommentNotificationsService:
 
     def send_approval_notification(self):
         if not self.comment.pending_moderation:
-            push_notification([self.comment.author], 'comment_approved', {
+            push_notification([self.comment.author], None, 'comment_approved', {
                 'url': build_notification_url(settings.BASE_URL + self.comment.get_absolute_url())
             })

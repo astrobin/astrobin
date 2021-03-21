@@ -8,20 +8,34 @@
   font-size: 14px;
   box-shadow: 0 0 10px rgba(0, 0, 0, .5);
   border-radius: 12px;
-  padding: 12px 24px;
+  padding: 1.5rem;
   right: 25px;
 
   .close-jq-toast-single {
     font-size: 22px;
     color: $grey-4;
     text-shadow: 1px 1px 0 $grey-1;
-    top: 6px;
-    right: 6px;
+    top: .75rem;
+    right: .75rem;
   }
 
   h2 {
     font-size: 15px;
     color: $grey-5;
     text-shadow: 1px 1px 0 $white;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    border: 0;
+  }
+
+  a {
+    color: $link-color;
+    border: 0;
+    text-decoration: underline;
+    font-size: 14px;
+
+    &:hover {
+      color: darken($link-color, 5%);
+    }
   }
 }

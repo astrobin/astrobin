@@ -13,6 +13,7 @@ class TestNotificationView(View):
     def post(request, *args, **kwargs):
         push_notification(
             [UserProfile.objects.get(user__username=kwargs.pop('username')).user],
+            None,
             'test_notification',
             {})
         return HttpResponse("test_notification sent")

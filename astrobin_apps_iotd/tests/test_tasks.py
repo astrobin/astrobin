@@ -26,7 +26,7 @@ class IotdTasksTest(TestCase):
         self.assertFalse('iotd_staff' in groups)
         self.assertFalse('iotd_submitters' in groups)
 
-        push_notification.assert_called_with([submitter], 'iotd_staff_inactive_removal_notice', {
+        push_notification.assert_called_with([submitter], None, 'iotd_staff_inactive_removal_notice', {
             'BASE_URL': settings.BASE_URL,
             'days': settings.IOTD_MAX_INACTIVE_DAYS,
             'max_inactivity_days': settings.IOTD_MAX_INACTIVE_DAYS

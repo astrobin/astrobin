@@ -15,7 +15,7 @@ class Command(BaseCommand):
             images = Image.objects.filter(user=user, data_source="UNSET")
 
             if images.count() > 0:
-                push_notification([user], 'missing_data_source', {
+                push_notification([user], None, 'missing_data_source', {
                     'BASE_URL': settings.BASE_URL,
                     'images': images
                 })
