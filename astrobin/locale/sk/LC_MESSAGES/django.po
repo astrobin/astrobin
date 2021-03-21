@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-16 18:49+0000\n"
+"POT-Creation-Date: 2021-03-21 15:59+0000\n"
 "PO-Revision-Date: 2020-09-25 11:30+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1877,6 +1877,9 @@ msgid ""
 "Check this box to be excluded from competitions and contests, such as the "
 "Image of the Day, the Top Picks, other custom contests. This will remove you "
 "from the leaderboards and hide your Image Index and Contribution Index."
+msgstr ""
+
+msgid "Open notifications in a new tab"
 msgstr ""
 
 #, fuzzy
@@ -4681,12 +4684,6 @@ msgid ""
 "AstroBin.\n"
 msgstr ""
 
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">You are now following <strong>%(object)s</strong>."
-"</a>"
-msgstr ""
-
 #, fuzzy, python-format
 msgid ""
 "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
@@ -4709,9 +4706,6 @@ msgstr ""
 msgid "Your request to join the group \"%(group_name)s\" has been REJECTED"
 msgstr ""
 
-msgid "Your image has been deleted."
-msgstr ""
-
 #, python-format
 msgid "<a href=\"%(object_url)s\">Your image</a> could not be plate-solved."
 msgstr "Astrometria Vášho <a href=\"%(object_url)s\">obrázku</a> sa nepodarila"
@@ -4725,10 +4719,6 @@ msgid "<a href=\"%(object_url)s\">Your image could not be plate-solved.</a>"
 msgstr ""
 
 msgid "Your image could not be plate-solved."
-msgstr ""
-
-#, python-format
-msgid "<a href=\"%(object_url)s\">Your image has been processed.</a>"
 msgstr ""
 
 #, python-format
@@ -4887,31 +4877,6 @@ msgstr ""
 
 #, python-format
 msgid ""
-"AstroBin has published a new blog entry: \"%(object)s\".\n"
-"\n"
-"Check it out at the following url: <a href=\"%(object_url)s\">"
-"%(object_url)s</a>"
-msgstr ""
-
-#, python-format
-msgid ""
-"AstroBin has published a new blog entry: \"%(object)s\".\n"
-"\n"
-"Check it out at the following url: %(object_url)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">AstroBin has published a new blog entry: "
-"\"%(object)s\"</a>"
-msgstr ""
-
-#, python-format
-msgid "AstroBin has publushed a new blog entry: %(object)s"
-msgstr ""
-
-#, python-format
-msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> added your image to their bookmarks: "
 "<a href=\"%(url)s\">%(title)s</a>."
 msgstr ""
@@ -5064,28 +5029,6 @@ msgstr "<strong>%s</strong> požadoval vidieť TIFF alebo FITS Vášho obrázku.
 msgid "%(user)s mentioned you in a forum post!"
 msgstr ""
 
-#, python-format
-msgid ""
-"%(user)s started a new discussion about a gear item you own! Read it at "
-"following url: <a href=\"%(url)s\">%(url)s</a>"
-msgstr ""
-
-#, python-format
-msgid ""
-"%(user)s started a new discussion about a gear item you own! Read it at "
-"following url: %(url)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> started a new discussion about "
-"a gear item you own!</a>"
-msgstr ""
-
-#, python-format
-msgid "%(user)s started a new discussion about a gear item you own!"
-msgstr ""
-
 #, fuzzy, python-format
 msgid ""
 "%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
@@ -5140,50 +5083,6 @@ msgstr "<strong>%s</strong> požadoval vidieť TIFF alebo FITS Vášho obrázku.
 
 #, python-format
 msgid "New image by %(user)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
-"Check it out at the following url: <a href=\"%(object_url)s\">"
-"%(object_url)s</a>"
-msgstr ""
-
-#, python-format
-msgid ""
-"New image taken with a gear item you follow: <strong>%(gear)s</strong>. "
-"Check it out at the following url: %(object_url)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">New image taken with a <strong>%(gear)s</strong>."
-"</a>"
-msgstr ""
-
-#, python-format
-msgid "New image taken with a %(gear)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
-"out at the following url: <a href=\"%(object_url)s\">%(object_url)s</a>"
-msgstr ""
-
-#, python-format
-msgid ""
-"New image of a subject you follow: <strong>%(subject)s</strong>. Check it "
-"out at the following url: %(object_url)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">New image of <strong>%(subject)s</strong>.</a>"
-msgstr ""
-
-#, python-format
-msgid "New image of %(subject)s"
 msgstr ""
 
 #, python-format
@@ -5314,28 +5213,6 @@ msgid ""
 msgstr ""
 
 msgid "You have received a new private message."
-msgstr ""
-
-#, python-format
-msgid ""
-"%(originator)s has fulfilled your request! Check it out at the following "
-"url: %(object_url)s"
-msgstr ""
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has fulfilled "
-"your request</a>"
-msgstr ""
-
-#, python-format
-msgid "%(originator)s has fulfilled your request."
-msgstr ""
-
-#, python-format
-msgid ""
-"<a href=\"%(object_url)s\">You have stopped following <strong>%(object)s</"
-"strong>.</a>"
 msgstr ""
 
 #, python-format
@@ -5628,7 +5505,21 @@ msgstr ""
 msgid "Subscribe"
 msgstr ""
 
+msgid "The posts below are new since your last visit to this topic."
+msgstr ""
+
 msgid "Subscribers"
+msgstr ""
+
+#, fuzzy
+#| msgid "You are not allowed to see this page."
+msgid "You have unread posts in this topic."
+msgstr "Nemáte oprávnenie vidieť túto stránku."
+
+msgid "Would you like to jump to the new posts since your last visit?"
+msgstr ""
+
+msgid "Click here"
 msgstr ""
 
 msgid "Topic"
@@ -6859,11 +6750,6 @@ msgstr ""
 #~| msgid "Higher resolution"
 #~ msgid "View in original resolution"
 #~ msgstr "Vyššie rozlíšenie"
-
-#, fuzzy
-#~| msgid "You are not allowed to see this page."
-#~ msgid "You are already on this plan"
-#~ msgstr "Nemáte oprávnenie vidieť túto stránku."
 
 #, fuzzy
 #~ msgid "Full search"

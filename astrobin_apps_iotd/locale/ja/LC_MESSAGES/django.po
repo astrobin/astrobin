@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-16 19:06+0000\n"
+"POT-Creation-Date: 2021-03-21 16:03+0000\n"
 "PO-Revision-Date: 2020-11-24 02:29+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,23 +19,8 @@ msgstr ""
 "X-Generator: Pootle 2.8\n"
 "X-POOTLE-MTIME: 1606184978.000000\n"
 
-#, fuzzy
-#| msgid "You cannot unelect an image elected by another judge."
-msgid "You cannot unhide an image on behalf of another user."
-msgstr "他の審査員に選ばれた画像を無選挙にすることはできません。"
-
-#, fuzzy
-#| msgid "You cannot elect your own submission."
-msgid "You cannot delete another user's submission."
-msgstr "自分の画像を選択することはできません。"
-
 msgid "Sorry, it's now too late to retract this submission."
 msgstr ""
-
-#, fuzzy
-#| msgid "You cannot elect an image you voted for."
-msgid "You cannot delete another user's vote."
-msgstr "あなたが投票した画像を選挙で選ぶことはできません。"
 
 msgid "Sorry, it's now too late to retract this vote."
 msgstr ""
@@ -185,6 +170,21 @@ msgstr "他の審査員が選出したIOTDを無選挙にすることはでき�
 #, python-format
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr "%(days)s日後までIOTDの空き枠が既に埋まっています。"
+
+#, fuzzy
+#~| msgid "You cannot unelect an image elected by another judge."
+#~ msgid "You cannot unhide an image on behalf of another user."
+#~ msgstr "他の審査員に選ばれた画像を無選挙にすることはできません。"
+
+#, fuzzy
+#~| msgid "You cannot elect your own submission."
+#~ msgid "You cannot delete another user's submission."
+#~ msgstr "自分の画像を選択することはできません。"
+
+#, fuzzy
+#~| msgid "You cannot elect an image you voted for."
+#~ msgid "You cannot delete another user's vote."
+#~ msgstr "あなたが投票した画像を選挙で選ぶことはできません。"
 
 #~ msgid "by"
 #~ msgstr "by"

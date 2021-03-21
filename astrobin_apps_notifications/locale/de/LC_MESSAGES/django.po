@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-16 19:04+0000\n"
-"PO-Revision-Date: 2020-09-28 12:35+0200\n"
+"POT-Creation-Date: 2021-03-21 16:02+0000\n"
+"PO-Revision-Date: 2021-03-18 20:52+0000\n"
 "Last-Translator: Hartmuth <hk@kinconsult.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3.1\n"
-"X-POOTLE-MTIME: 1590154832.000000\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1616100746.000000\n"
 
 msgid "Notifications"
 msgstr "Benachrichtigungen"
@@ -55,38 +55,23 @@ msgstr "Dein Bild hat einen neuen Kommentar erhalten"
 msgid "There was a reply to your comment"
 msgstr "Es gab eine Antwort auf Deinen Kommentar"
 
-#, fuzzy
-#| msgid "Your image was liked"
 msgid "Your comment was approved"
-msgstr "Dein Bild wurde geliket"
+msgstr "Ihr Kommentar wurde genehmigt"
 
 msgid "Your image was bookmarked"
 msgstr "Dein Bild wurde mit einem Lesezeichen versehen"
 
 msgid "Your image was liked"
-msgstr "Dein Bild wurde geliket"
+msgstr "Dein Bild wurde geliked"
 
-#, fuzzy
-#| msgid "Your image was liked"
 msgid "Your comment was liked"
-msgstr "Dein Bild wurde geliket"
+msgstr "Dein Kommentar wurde geliked"
 
-#, fuzzy
-#| msgid "Your image was liked"
 msgid "Your forum post was liked"
-msgstr "Dein Bild wurde geliket"
-
-msgid "New image with some gear you follow"
-msgstr "Neues Bild mit Ausrüstung, der Du folgst"
-
-msgid "New image of a subject you follow"
-msgstr "Neues Bild eines Themas, dem Du folgst"
+msgstr "hr Forumsbeitrag wurde geliked"
 
 msgid "Your API Key request has been approved"
 msgstr "Dein API-Schlüsselantrag wurde genehmigt"
-
-msgid "New discussion about a gear item you own"
-msgstr "Neue Diskussion zu einem Teil deiner Ausrüstung gestartet"
 
 msgid "A user you follow joined a public group"
 msgstr "Ein Benutzer, dem Du folgst, ist einer öffentlichen Gruppe beigetreten"
@@ -121,10 +106,8 @@ msgstr "Dein Premium-Abonnement ist gerade abgelaufen"
 msgid "Your subscription will be renewed in one week"
 msgstr "Dein Abonnement wird in einer Woche erneuert"
 
-#, fuzzy
-#| msgid "Your subscription will be renewed in one week"
 msgid "Your subscription will be renewed in one 30 days"
-msgstr "Dein Abonnement wird in einer Woche erneuert"
+msgstr "Ihr Abonnement wird in 30 Tagen erneuert"
 
 msgid "You have images with a missing \"Data source\""
 msgstr "Du hast Bilder mit einer fehlenden \"Datenquelle\""
@@ -132,43 +115,47 @@ msgstr "Du hast Bilder mit einer fehlenden \"Datenquelle\""
 msgid "You have images with a missing \"Remote source\""
 msgstr "Du hast Bilder mit einer fehlenden \"Remote-Quelle\""
 
-#, fuzzy
 msgid "Would you like to activate your account?"
-msgstr "Möchtest Du dein Konto bei AstroBin aktivieren?"
+msgstr "Möchtest Du dein Konto aktivieren?"
 
-#, fuzzy
-#| msgid "You are invited to a group"
 msgid "You were mentioned in a forum post"
-msgstr "Du wurdest zu einer Gruppe eingeladen"
+msgstr "Sie wurden in einem Forumsbeitrag erwähnt"
 
-#, fuzzy
-#| msgid "Your image received a new comment"
 msgid "You were mentioned in a comment"
-msgstr "Dein Bild hat einen neuen Kommentar erhalten"
+msgstr "Sie wurden in einem Kommentar erwähnt"
 
 msgid "Welcome to AstroBin!"
-msgstr ""
+msgstr "Willkommen bei AstroBin!"
 
 msgid "Congratulations for your first image on AstroBin!"
-msgstr ""
+msgstr "Herzlichen Glückwunsch zu Ihrem ersten Bild auf AstroBin!"
 
 msgid "Thank you for getting a subscription!"
-msgstr ""
+msgstr "Danke, dass Sie ein Abonnement abgeschlossen haben!"
 
 msgid "Thank you for your payment!"
-msgstr ""
+msgstr "Vielen Dank für Ihre Zahlung!"
 
 msgid "You were removed from the IOTD staff"
-msgstr ""
+msgstr "Sie wurden aus dem IOTD-Team entfernt"
 
 msgid "You have been inactive as an IOTD staff member"
-msgstr ""
+msgstr "Sie sind als IOTD-Team-Mitglied nicht aktiv gewesen"
 
 msgid "An image you promoted made it to Top Pick"
-msgstr ""
+msgstr "Ein von Ihnen vorgeschlagenes Bild wurde zum Top Pick gewählt"
 
 msgid "An image you promoted made it to IOTD"
-msgstr ""
+msgstr "Ein von Ihnen vorgeschlagenes Bild wurde zum IOTD gewählt"
+
+#~ msgid "New image with some gear you follow"
+#~ msgstr "Neues Bild mit Ausrüstung, der Du folgst"
+
+#~ msgid "New image of a subject you follow"
+#~ msgstr "Neues Bild eines Themas, dem Du folgst"
+
+#~ msgid "New discussion about a gear item you own"
+#~ msgstr "Neue Diskussion zu einem Teil deiner Ausrüstung gestartet"
 
 #~ msgid "New review of a gear item you own"
 #~ msgstr "Neue Bewertung eines Ausrüstungsgegenstandes, den Du besitzt"

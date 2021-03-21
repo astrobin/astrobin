@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-16 19:06+0000\n"
+"POT-Creation-Date: 2021-03-21 16:03+0000\n"
 "PO-Revision-Date: 2021-03-04 07:53+0000\n"
 "Last-Translator: NadirAstro <nadir_teymurov@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,17 +20,8 @@ msgstr ""
 "X-Generator: Pootle 2.8\n"
 "X-POOTLE-MTIME: 1614844438.000000\n"
 
-msgid "You cannot unhide an image on behalf of another user."
-msgstr "Вы не можете показать изображение от имени другого пользователя."
-
-msgid "You cannot delete another user's submission."
-msgstr "Вы не можете удалить заявку другого пользователя."
-
 msgid "Sorry, it's now too late to retract this submission."
 msgstr "Извините, уже слишком поздно отменять эту заявку."
-
-msgid "You cannot delete another user's vote."
-msgstr "Вы не можете удалить голос другого пользователя."
 
 msgid "Sorry, it's now too late to retract this vote."
 msgstr "Извините, уже слишком поздно отменять этот голос."
@@ -185,6 +176,15 @@ msgstr "Вы не можете отменить выбор ИД от друго�
 #, python-format
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr "Все места для ИД на следующие %(days)s дней уже заполнены."
+
+#~ msgid "You cannot unhide an image on behalf of another user."
+#~ msgstr "Вы не можете показать изображение от имени другого пользователя."
+
+#~ msgid "You cannot delete another user's submission."
+#~ msgstr "Вы не можете удалить заявку другого пользователя."
+
+#~ msgid "You cannot delete another user's vote."
+#~ msgstr "Вы не можете удалить голос другого пользователя."
 
 #~ msgid "by"
 #~ msgstr "от"
