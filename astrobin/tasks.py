@@ -613,8 +613,8 @@ def assign_upload_length():
                 ))
 
     time_cut = DateTimeService.now() - timedelta(hours=2)
-    images = Image.all_objects.filter(uploader_upload_length__isnull=True, uploaded_gte=time_cut, corrupted=False)
-    revisions = ImageRevision.all_objects.filter(uploader_upload_length__isnull=True, uploaded_gte=time_cut,
+    images = Image.all_objects.filter(uploader_upload_length__isnull=True, uploaded__gte=time_cut, corrupted=False)
+    revisions = ImageRevision.all_objects.filter(uploader_upload_length__isnull=True, uploaded__gte=time_cut,
                                                  corrupted=False)
 
     process(images)
