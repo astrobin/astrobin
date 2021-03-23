@@ -10,7 +10,7 @@ describe("Login", () => {
 
     it("should upload an image", () => {
         cy.ngLogin();
-        cy.visit("http://localhost:4400/uploader");
+        cy.visit("http://localhost:4400/uploader?forceClassicEditor");
 
         cy.ngPrepareImageUpload("test.jpg");
         cy.get("label.upload-btn .file").should("contain.text", "test.jpg (28.4 KB)");

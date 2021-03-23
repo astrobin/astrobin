@@ -48,10 +48,8 @@ Cypress.Commands.add("imageUpload", (fixture, options = {}) => {
 });
 
 Cypress.Commands.add("ngPrepareImageUpload", (fixture, options = {}) => {
-    cy.visit("http://localhost:4400/uploader");
-
     cy.get("#title").type(options.title || "Test title");
-    cy.get("#image_file")
+    cy.get("input#image_file")
         .then(function ($input) {
             cy.fixture(fixture, 'base64')
                 .then(Cypress.Blob.base64StringToBlob)
