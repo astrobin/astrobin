@@ -392,8 +392,9 @@ def subscription_signed_up(sender, **kwargs):
     PremiumService.clear_subscription_status_cache_keys(user.pk)
 
     if 'premium' in subscription.category:
-        if user_subscription.expires is None:
-            user_subscription.expires = DateTimeService.today()
+        today = DateTimeService.today()
+        if user_subscription.expires is None or user_subscription.expires < today:
+            user_subscription.expires = today
         user_subscription.extend(datetime.timedelta(days=365.2425))
         user_subscription.save()
 
