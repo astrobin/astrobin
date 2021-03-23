@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from astrobin.models import Image, UserProfile
+from astrobin_apps_images.api.fields import KeyValueTagsSerializerField
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -9,6 +10,7 @@ class ImageSerializer(serializers.ModelSerializer):
     w = serializers.IntegerField()
     h = serializers.IntegerField()
     uploader_in_progress = serializers.NullBooleanField(read_only=True)
+    key_value_tags = KeyValueTagsSerializerField(source='keyvaluetags')
 
     def update(self, instance, validated_data):
         instance = super(ImageSerializer, self).update(instance, validated_data)  # type: Image
@@ -16,10 +18,10 @@ class ImageSerializer(serializers.ModelSerializer):
         profile = instance.user.userprofile  # type: UserProfile
 
         if instance.watermark != profile.default_watermark or \
-            instance.watermark_text != profile.default_watermark_text or \
-            instance.watermark_position != profile.default_watermark_position or \
-            instance.watermark_size != profile.default_watermark_size or \
-            instance.watermark_opacity != profile.default_watermark_opacity:
+                instance.watermark_text != profile.default_watermark_text or \
+                instance.watermark_position != profile.default_watermark_position or \
+                instance.watermark_size != profile.default_watermark_size or \
+                instance.watermark_opacity != profile.default_watermark_opacity:
             profile.default_watermark = instance.watermark
             profile.default_watermark_text = instance.watermark_text
             profile.default_watermark_position = instance.watermark_position
@@ -63,4 +65,5 @@ class ImageSerializer(serializers.ModelSerializer):
             'watermark_size',
             'watermark_opacity',
             'sharpen_thumbnails',
+            'key_value_tags',
         )
