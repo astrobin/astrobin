@@ -94,7 +94,7 @@
                                         {% trans "Revision" %} {{ r.label }}
                                     </li>
                                     <li class="nav-header">
-                                        {% trans "Uploaded" %}:
+                                        {% trans "Uploaded" %}
                                         <abbr class="data published timeago"
                                               title="{{ r.uploaded|date:'Y-m-d\TH:i:s' }}"></abbr>
                                     </li>
@@ -164,7 +164,7 @@
                         {% endif %}
                     </p>
                     <p>
-                        <strong>{% trans "Uploaded" %}:</strong>
+                        <strong>{% trans "Uploaded" %}:</strong>&nbsp;
                         <abbr class="data published timeago" title="{{ r.uploaded|date:'Y-m-d\TH:i:s' }}"></abbr>
                     </p>
                 </div>
