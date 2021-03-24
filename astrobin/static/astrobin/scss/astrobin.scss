@@ -2308,6 +2308,13 @@ form.avatar-change label.control-label {
         * {
           font-size: 1rem;
         }
+
+        .nav-header {
+          &,
+          * {
+            font-size: .8rem;
+          }
+        }
       }
 
       &:hover .contextual-menu {
