@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-21 15:59+0000\n"
-"PO-Revision-Date: 2015-12-29 23:52+0000\n"
-"Last-Translator: bilgebay <bilgebay@gmail.com>\n"
+"POT-Creation-Date: 2021-03-23 23:15+0000\n"
+"PO-Revision-Date: 2021-03-23 01:39+0000\n"
+"Last-Translator: mustastum <scriptyper@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1451433131.124260\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1616463580.000000\n"
 
 msgid "United Kingdom"
 msgstr "Birleşik Krallık"
@@ -2958,16 +2958,12 @@ msgid "After you submit a request, you will receive a reply within 24 hours."
 msgstr ""
 "İsteğinizi gönderdikten sonra, 24 saat içerisinde bir yanıt alacaksınız."
 
-#, fuzzy
-#| msgid ""
-#| "Please make sure you have read the section about APIs in the <a href="
-#| "\"%(tos_url)s\">Terms of Service</a>."
 msgid ""
 "Please make sure you have read the section about APIs in the <a href="
 "\"https://welcome.astrobin.com/terms-of-service\">Terms of Service</a>."
 msgstr ""
-"Lütfen <a href=\"%(tos_url)s\">Kullanım koşullarımız</a> içinde API'ler "
-"bölümünü okuduğunuzdan emin olun."
+"Lütfen <a href=\"https://welcome.astrobin.com/terms-of-service\">Kullanım "
+"koşullarımız</a> içinde API'ler bölümünü okuduğunuzdan emin olun."
 
 msgid "Submit"
 msgstr "Gönder"
@@ -3686,18 +3682,13 @@ msgstr "Şu tarihten sonra çekilmiş"
 msgid "Remove"
 msgstr "Verileri sil"
 
-#, fuzzy
-#| msgid ""
-#| "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
-#| "international community: using English is preferred. PS: <strong>"
-#| "%(user)s</strong>'s preferred language is <strong>%(lang)s</strong>."
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
 "international community: using <strong>English</strong> is preferred."
 msgstr ""
-"<strong>Yorumunuzu buraya yazınız</strong>, ve unutmayın ki AstroBin uluslar "
-"arası bir camiadır: İngilizce kullanımı tercih edilir. Dipnot: <strong>"
-"%(user)s</strong> kullanıcısının tercih ettiği dil <strong>%(lang)s</strong>."
+"<strong>Yorumunuzu buraya yazınız</strong>, ve unutmayın ki AstroBin "
+"uluslararası bir camiadır: <strong>İngilizce</strong> kullanımı tercih "
+"edilir."
 
 #, python-format
 msgid ""
@@ -3709,7 +3700,7 @@ msgid "Edit"
 msgstr "Düzenle"
 
 msgid "Comments are closed."
-msgstr ""
+msgstr "Yorumlar kapalı."
 
 msgid "In these public groups"
 msgstr ""
@@ -3718,12 +3709,10 @@ msgid "Histogram"
 msgstr "Histogram"
 
 msgid "Right ascension"
-msgstr ""
+msgstr "Sağ açıklık"
 
-#, fuzzy
-#| msgid "Description"
 msgid "Declination"
-msgstr "Açıklama"
+msgstr "Dik açıklık"
 
 msgid "Technical card"
 msgstr "Teknik kart"
@@ -3899,9 +3888,8 @@ msgstr "Bağlantı"
 msgid "Navigation context"
 msgstr ""
 
-#, fuzzy
 msgid "User gallery"
-msgstr "%(user)s kullanıcısının galerisi"
+msgstr "Kullanıcı galerisi"
 
 #, fuzzy
 msgid "User collection"
@@ -4175,16 +4163,12 @@ msgstr "Resim modu"
 msgid "Copy this"
 msgstr "Bunu kopyala"
 
-#, fuzzy
-#| msgid ""
-#| "Did you improve the post-processing of your image? Upload the new "
-#| "revision!"
 msgid ""
 "Did you improve the post-processing of your image? Upload the new\n"
 "                    revision!"
 msgstr ""
-"Fotoğrafınız üzerinde uyguladığınız işleme tekniğinizi geliştirdiniz mi? O "
-"halde fotoğrafınızın yeni revizyonunu yükleyin!"
+"Fotoğrafınız üzerinde uyguladığınız işleme tekniğinizi geliştirdiniz mi?\n"
+"O halde fotoğrafınızın yeni revizyonunu yükleyin!"
 
 #, python-format
 msgid "Over 100 MB? Try the <a href=\"%(url)s/%(id)s\">new beta uploader</a>!"
@@ -4375,17 +4359,14 @@ msgstr ""
 "Hiç birşey göremiyor musunuz? Belkide önce <a href=\"%(the_url)s"
 "\">profilinize</a> bazı donanımlar eklemeniz gerekmektedir!"
 
-#, fuzzy
-#| msgid ""
-#| "To choose the gear used for this image, drag items from the right side to "
-#| "left side, or click the plus sign."
 msgid ""
 "To choose the gear used for this image, drag items from the right side to "
 "left side, or\n"
 "                click the plus sign."
 msgstr ""
 "Bu fotoğrafta kullanılan donanımları seçmek için, parçaları sağ taraftan sol "
-"tarafa sürükleyin ya da artı işaretine tıklayın."
+"tarafa sürükleyin ya da\n"
+"artı işaretine tıklayın."
 
 msgid ""
 "Use this button to import the gear settings from another image of yours."
@@ -4402,17 +4383,14 @@ msgstr "Çekim detaylarını düzenle"
 msgid "Copy gear"
 msgstr "Donanımı kopyala"
 
-#, fuzzy
-#| msgid ""
-#| "Copying the gear from another image will populate the gear selection form "
-#| "for you, but you will still need to save it in the end."
 msgid ""
 "Copying the gear from another image will populate the gear selection form "
 "for you, but\n"
 "                    you will still need to save it in the end."
 msgstr ""
 "Başka bir resimden donanım kopyalamak, donanım seçim formunu sizin için "
-"dolduracak fakat, yine de formu kaydetmeniz gerekecek."
+"dolduracak fakat,\n"
+"yine de formu kaydetmeniz gerekecek."
 
 msgid "Copy"
 msgstr "Kopyala"
@@ -4722,16 +4700,13 @@ msgstr "API Anahtarlarınız"
 msgid "Please read the API documentation %(_0)shere%(_1)s."
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid ""
-#| "You don't have any API Keys. Please read the <a href=\"%(api_docs_url)s"
-#| "\">API documentation</a>."
+#, python-format
 msgid ""
 "You can review your API keys at <a href=\"%(api_keys_url)s\">"
 "%(api_keys_url)s</a>"
 msgstr ""
-"API Anahtarınız yok. Lütfen <a href=\"%(api_docs_url)s\">API dokümanını</a> "
-"okuyunuz."
+"API Anahtarlarınızı <a href=\"%(api_keys_url)s\">%(api_keys_url)s</a> "
+"adresinden inceleyebilirsiniz."
 
 msgid "Thank you for using AstroBin's APIs!"
 msgstr ""
@@ -4844,7 +4819,7 @@ msgstr "Ekipman resimleri"
 msgid "Follow AstroBin"
 msgstr "Takip et"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Hi! You have a new notification on AstroBin:\n"
 "\n"
@@ -4865,22 +4840,25 @@ msgstr ""
 "%(message)s\n"
 "\n"
 "Tüm bilgilendirme mesajlarınızı görmek için, lütfen şuraya gidin: "
-"%(notices_url)s.\n"
+"%(base_url)s%(notices_url)s.\n"
 "\n"
-"Eğer bundan sonra email almak istemiyorsanız, http://astrobin.com"
-"%(pref_url)s 'a giderek tercihlerinizi güncelleyiniz.\n"
+"Eğer bundan sonra email almak istemiyorsanız, %(base_url)s%(pref_url)s 'a "
+"giderek tercihlerinizi güncelleyiniz.\n"
+"\n"
+"LÜTFEN BU E-POSTAYA YANIT VERMEYİN\n"
 "\n"
 "Bulutsuz geceler,\n"
 "AstroBin.\n"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
 "\n"
 "Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
 msgstr ""
-"<strong>%(username)s</strong> kullanıcısı fotoğrafınızın TIFF ya da FITS "
-"versiyonlarından biri görme isteğinde bulundu."
+"\"%(group_name)s\" grubuna katılma isteğiniz ONAYLANDI.\n"
+"\n"
+"Grubu ziyaret edin: <a href=\"%(url)s\">%(url)s</a>"
 
 #, python-format
 msgid ""
@@ -4977,17 +4955,7 @@ msgid ""
 "selection you made in your queue) you will be removed from the IOTD staff."
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid ""
-#| "You have %(number)s images with insufficient data.\n"
-#| "\n"
-#| "AstroBin relies on data to be a great service for you and every other "
-#| "user.\n"
-#| "Please fill in the data for your images at the following URL:\n"
-#| "\n"
-#| "%(url)s\n"
-#| "\n"
-#| "Thank you!"
+#, python-format
 msgid ""
 "You have %(number)s images with insufficient data.\n"
 "\n"
@@ -5002,10 +4970,9 @@ msgstr ""
 "\n"
 "AstroBin'in bu kadar önemli bir servis olmasının altında verilere verdiği "
 "önem yatıyor.\n"
-"Lütfen aşağıdaki linke tıklayarak tüm fotoğraflarınızn verilerini eksiksiz "
-"bir şekilde giriniz:\n"
+"Lütfen aşağıdaki linke tıklayarak fotoğraflarınıza veri ekleyiniz:\n"
 "\n"
-"%(url)s\n"
+"<a href=\"%(url)s\">%(url)s</a>\n"
 "\n"
 "Teşekkür ederiz!"
 
@@ -5136,16 +5103,13 @@ msgid ""
 "    %(user)s added your image \"%(title)s\" to their bookmarks!\n"
 msgstr "%(user)s kullanıcısı fotoğrafınızı favorilerine ekledi: %(url)s"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "%(user)s commented on your image! Check it out at the following url: "
-#| "%(url)s"
+#, python-format
 msgid ""
 "%(user)s commented on your image! Check it out at the following url: <a href="
 "\"%(url)s\">%(url)s</a>"
 msgstr ""
 "%(user)s kullanıcısı fotoğrafınıza yorum yaptı! Şu adresten kontrol "
-"edebilirsiniz: %(url)s"
+"edebilirsiniz: <a href=\"%(url)s\">%(url)s</a>"
 
 #, python-format
 msgid ""
@@ -5165,23 +5129,21 @@ msgstr ""
 msgid "%(user)s commented on your image!"
 msgstr "%(user)s kullanıcısı fotoğrafınıza yorum yaptı!"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> likes your comment: <a href=\"%(url)s"
 "\">%(comment)s</a>."
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> kullanıcısı fotoğrafınıza "
-"yorum yaptı!</a>"
+"<a href=\"%(user_url)s\">%(user)s</a> kullanıcısı yorumunuzu beğendi: <a "
+"href=\"%(url)s\">%(comment)s</a>."
 
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s likes your comment: %(url)s %(comment)s"
-msgstr "%(user)s kullanıcısı fotoğrafınızı favorilerine ekledi: %(url)s"
+msgstr "%(user)s kullanıcısı yorumunuzu beğendi: %(url)s %(comment)s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "<strong>%(user)s</strong> likes your comment!"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> kullanıcısı fotoğrafınıza "
-"yorum yaptı!</a>"
+msgstr "<strong>%(user)s</strong> kullanıcısı yorumunuzu beğendi!"
 
 #, fuzzy, python-format
 #| msgid "%(user)s replied to your comment."
