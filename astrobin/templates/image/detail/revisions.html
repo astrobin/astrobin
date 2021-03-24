@@ -24,6 +24,15 @@
                                     <i class="icon-ellipsis-vertical icon-white"></i>
                                 </a>
                                 <ul class="dropdown-menu">
+                                    <li class="nav-header">
+                                        {% trans "Original" %}
+                                    </li>
+                                    <li class="nav-header">
+                                        {% trans "Uploaded" %}:
+                                        <abbr class="data published timeago" title="{{ image.published|date:'Y-m-d\TH:i:s' }}"></abbr>
+                                    </li>
+                                    <li class="divider"></li>
+
                                     {% if not image.is_final %}
                                         <li>
                                             <a href="{% url 'image_edit_make_final' image.get_id %}">
@@ -81,6 +90,16 @@
                                     <i class="icon-ellipsis-vertical icon-white"></i>
                                 </a>
                                 <ul class="dropdown-menu">
+                                    <li class="nav-header">
+                                        {% trans "Revision" %} {{ r.label }}
+                                    </li>
+                                    <li class="nav-header">
+                                        {% trans "Uploaded" %}:
+                                        <abbr class="data published timeago"
+                                              title="{{ r.uploaded|date:'Y-m-d\TH:i:s' }}"></abbr>
+                                    </li>
+                                    <li class="divider"></li>
+
                                     {% if not r.is_final %}
                                     <li>
                                         <a href="{% url 'image_edit_revision_make_final' r.pk %}">
@@ -135,17 +154,19 @@
             {% for r in revisions_with_description %}
                 <div class="revision-description">
                     <h3>{{r.label}}</h3>
-                    {% if r.description %}
-                        <p>
-                            <strong>{% trans "Description" %}:</strong> {{r.description|strip_html|safe}}
-                            {% if request.user == image.user or request.user.is_superuser %}
-                                <a href="{% url 'image_edit_revision' r.pk %}">
-                                    {% private_abbr %}
-                                    {% trans "Edit" %}
-                                </a>
-                            {% endif %}
-                        </p>
-                    {% endif %}
+                    <p>
+                        <strong>{% trans "Description" %}:</strong> {{r.description|strip_html|safe}}
+                        {% if request.user == image.user or request.user.is_superuser %}
+                            <a href="{% url 'image_edit_revision' r.pk %}">
+                                {% private_abbr %}
+                                {% trans "Edit" %}
+                            </a>
+                        {% endif %}
+                    </p>
+                    <p>
+                        <strong>{% trans "Uploaded" %}:</strong>
+                        <abbr class="data published timeago" title="{{ r.uploaded|date:'Y-m-d\TH:i:s' }}"></abbr>
+                    </p>
                 </div>
             {% endfor %}
         {% endif %}
