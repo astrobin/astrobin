@@ -1084,6 +1084,14 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     margin: $spacer-small 0;
   }
 
+  .search-around {
+    margin-top: 1rem;
+
+    .btn {
+      padding: 6px 10px;
+    }
+  }
+
   .astrometry-header {
     margin-bottom: $spacer-large;
     font-weight: bold;
