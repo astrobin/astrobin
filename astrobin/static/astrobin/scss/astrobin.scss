@@ -1087,6 +1087,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   .search-around {
     margin-top: 1rem;
 
+    @media screen and (max-width: 767px) {
+      margin-left: 12px;
+    }
+
     .btn {
       padding: 6px 10px;
     }
