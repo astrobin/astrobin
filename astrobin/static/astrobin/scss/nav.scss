@@ -335,8 +335,14 @@ body.full {
   }
 }
 
-.dropdown-menu li > a:hover, .dropdown-menu .active > a, .dropdown-menu .active > a:hover {
-  background-color: $orange;
+.dropdown-menu li > a:hover,
+.dropdown-menu .active > a,
+.dropdown-menu .active > a:hover {
+  &,
+  strong {
+    background-color: $orange;
+    color: $white;
+  }
 }
 
 .nav li [class^="icon-"],

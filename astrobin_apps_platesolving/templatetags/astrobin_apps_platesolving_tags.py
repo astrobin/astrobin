@@ -1,6 +1,8 @@
 from django.contrib.contenttypes.models import ContentType
 from django.template import Library
 
+from astrobin_apps_platesolving.models import Solution
+from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_platesolving.solver import SolverBase
 
 register = Library()
@@ -41,3 +43,15 @@ def is_advanced_failed_status(solution):
 @register.filter
 def has_started_advanced_platesolving(solution):
     return solution is not None and solution.status >= SolverBase.ADVANCED_PENDING
+
+
+@register.filter
+def get_search_query_around(solution, degrees):
+    # type: (Solution, int) -> str
+    return SolutionService(solution).get_search_query_around(degrees)
+
+
+@register.filter
+def supports_search_around(solution):
+    # type: (Solution) -> bool
+    return (solution.advanced_ra or solution.ra) and (solution.advanced_dec or solution.dec)
