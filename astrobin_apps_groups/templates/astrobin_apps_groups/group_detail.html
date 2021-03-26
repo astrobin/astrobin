@@ -220,7 +220,7 @@
 
     <div class="group-images">
         <h2>{% trans "Images" %}</h2>
-        {% image_list image_list nav_ctx='group' nav_ctx_extra=object.pk %}
+        {% image_list image_list paginate_by=paginate_by nav_ctx='group' nav_ctx_extra=object.pk %}
     </div>
 {% endblock %}
 

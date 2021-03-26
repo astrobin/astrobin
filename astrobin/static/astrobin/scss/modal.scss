@@ -32,6 +32,8 @@
   }
 
   .modal-body {
+    max-height: calc(100vh - 230px);
+
     small {
       font-size: 87.5%;
       color: darken($text-color, 15%);

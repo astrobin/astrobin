@@ -2,39 +2,39 @@
 {% load tags %}
 
 <div class="image-title">
-    <div class="row">
-        <div class="span8">
+    <div class="row-fluid">
+        <div class="span12">
             <h3 class="image-title">{{image.title|escape|default:_("(no title)")}}</h3>
         </div>
     </div>
 
     {% if image.link %}
-        <div class="row">
-            <div class="span8">
+        <div class="row-fluid">
+            <div class="span12">
                 <strong>{% trans "Link" %}</strong>: <a href="{{image.link}}" target="_blank">{{image.link}}</a>
             </div>
         </div>
     {% endif %}
 
     {% if image.link_to_fits %}
-        <div class="row">
-            <div class="span8">
+        <div class="row-fluid">
+            <div class="span12">
                 <strong>{% trans "Link to TIFF/FITS" %}</strong>: <a href="{{image.link_to_fits}}" target="_blank">{{image.link_to_fits}}</a>
             </div>
         </div>
     {% endif %}
 
     {% if image.acquisition_type and image.acquisition_type != 'REGULAR' and image.acquisition_type != 'OTHER' %}
-        <div class="row">
-            <div class="span8">
+        <div class="row-fluid">
+            <div class="span12">
                 <strong>{% trans "Acquisition type" %}</strong>: {{ image.acquisition_type | humanize_image_acquisition_type }}
             </div>
         </div>
     {% endif %}
 
     {% if request.user == image.user or request.user.is_superuser %}
-        <div class="row">
-            <div class="span8">
+        <div class="row-fluid">
+            <div class="span12">
                 <strong>{% trans "Download original file" %}</strong>:
 
                 {% if revision_image %}

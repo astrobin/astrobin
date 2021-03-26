@@ -15,7 +15,7 @@
 
 {% block content %}
     {% include 'user/profile/navigation.html' %}
-    {% image_list image_list %}
+    {% image_list image_list paginate_by=paginate_by %}
 {% endblock %}
 
 {% block extra_js %}

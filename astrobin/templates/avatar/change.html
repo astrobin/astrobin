@@ -17,28 +17,29 @@
 {% endblock %}
 
 {% block content %}
-<div class="row">
+<div class="row-fluid">
     {% include 'user/profile/edit/navigation.html' %}
     <div class="span9">
         {% if READONLY_MODE %}
             {% include 'readonly_mode.html' %}
         {% else %}
-            <div class="row">
-                {% if not avatars %}
-                    <div class="span9">
-                        <div class="alert alert-warning">
-                            {% trans "You do not yet have an avatar. Please upload one now." %}
-                        </div>
-                    </div>
-                {% else %}
+            <div class="row-fluid">
+                {% if avatars %}
                     <div class="span2">
                         <div class="well"><strong>{% trans "Current avatar" %}</strong></div>
                         {% avatar user %}
                     </div>
+
+                {% else %}
+                    <div class="span12">
+                        <div class="alert alert-warning">
+                            {% trans "You do not yet have an avatar. Please upload one now." %}
+                        </div>
+                    </div>
                 {% endif %}
 
                 {% if avatars %}
-                    <div class="span3">
+                    <div class="span10">
                         <div class="well"><strong>{% trans "Previously uploaded" %}</strong></div>
                         <form method="POST" action="{% url 'avatar_change' %}" class="avatar-change"> {% csrf_token %}
                             {{primary_avatar_form|as_bootstrap}}
@@ -46,8 +47,7 @@
                         </form>
                     </div>
                 {% endif %}
-
-                    <div class="span4">
+                    <div class="span12">
                         <div class="well"><strong>{% trans "Upload a new image" %}</div>
                         <form enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}" class="form-inline"> {% csrf_token %}
                             <input type="file" name="avatar" value="{% trans "Avatar image" %}" />

@@ -1359,6 +1359,7 @@ def user_page(request, username):
             log.error("User page (%d): unable to get user's SearchQuerySet" % user.pk)
 
     response_dict = {
+        'paginate_by': settings.PAGINATE_USER_PAGE_BY,
         'followers': followers,
         'following': following,
         'image_list': qs,
@@ -1412,6 +1413,7 @@ def user_page_bookmarks(request, username):
     response_dict = {
         'requested_user': user,
         'image_list': UserService(user).get_bookmarked_images(),
+        'paginate_by': settings.PAGINATE_USER_PAGE_BY,
         'private_message_form': PrivateMessageForm(),
         'alias': 'gallery',
     }
@@ -1432,6 +1434,7 @@ def user_page_liked(request, username):
     response_dict = {
         'requested_user': user,
         'image_list': UserService(user).get_liked_images(),
+        'paginate_by': settings.PAGINATE_USER_PAGE_BY,
         'private_message_form': PrivateMessageForm(),
         'alias': 'gallery',
     }

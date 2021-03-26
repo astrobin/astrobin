@@ -1,0 +1,135 @@
+@media screen and (min-width: 1241px) {
+  .navbar .container {
+    width: 1140px;
+  }
+
+  .astrobin-container {
+    width: 1080px;
+  }
+
+  footer .container {
+    max-width: unset;
+    width: 1080px;
+  }
+
+  #index {
+    .image-of-the-day {
+      .astrobin-image {
+        width: 100%;
+      }
+    }
+
+    .activity-actions {
+      .endless {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .action,
+        .action-object {
+          width: 530px;
+          height: 368px;
+          margin: 0 0 20px 0;
+        }
+      }
+    }
+  }
+
+  .image-page-left-pane {
+    width: calc(70% - 12px) !important;
+  }
+
+  .image-page-right-pane {
+    width: calc(30% - 12px) !important;
+  }
+
+  .main-image {
+    max-width: unset;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .sky-plot {
+    img {
+      width: 100%;
+    }
+  }
+
+  .histogram {
+    .astrobin-image {
+      width: 100%;
+    }
+  }
+
+  .form-horizontal input[type=text],
+  .form-horizontal input[type=password],
+  .form-horizontal input[type=number],
+  .form-horizontal textarea,
+  .form-horizontal .cke,
+  .form-horizontal .help-block {
+    max-width: 610px;
+    width: 100%;
+  }
+
+  .user-card {
+    .avatar {
+      width: 100%;
+      height: 100%;
+
+      img {
+        width: 100%;
+      }
+
+      .profile-details {
+        bottom: 12px;
+      }
+
+      &,
+      &:hover {
+        .icon.edit {
+          position: absolute;
+          top: calc(50% - 40px);
+          left: calc(50% - 40px);
+        }
+      }
+    }
+  }
+
+  .astrobin-users .user-card .avatar img {
+    width: 186px;
+  }
+
+  ul.astrobin-thumbnails {
+    .endless_container {
+      display: list-item;
+      text-align: right;
+
+      .btn {
+        margin-right: 10px;
+        margin-top: 50px;
+      }
+    }
+  }
+
+  .collections > .collection {
+    width: 197px;
+
+    > .collection-tools {
+      left: 39px;
+    }
+  }
+
+  .top-picks-item .astrobin-image {
+    width: 535px;
+  }
+
+  .iotd-archive-image .astrobin-image {
+    width: 100%;
+  }
+
+  .iotd-queue-item .astrobin-image {
+    width: 520px;
+  }
+}
