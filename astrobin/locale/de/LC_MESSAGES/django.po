@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 23:15+0000\n"
-"PO-Revision-Date: 2021-03-19 21:11+0000\n"
+"POT-Creation-Date: 2021-03-28 21:57+0000\n"
+"PO-Revision-Date: 2021-03-27 16:38+0000\n"
 "Last-Translator: Hartmuth <hk@kinconsult.de>\n"
 "Language-Team: German <LL@li.org>\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1616188262.000000\n"
+"X-POOTLE-MTIME: 1616863122.000000\n"
 
 msgid "United Kingdom"
 msgstr "Großbritannien"
@@ -1904,10 +1904,8 @@ msgstr ""
 "zu werden. Dadurch wirst Du aus den Ranglisten entfernt und Dein AstroBin-"
 "Index wird ausgeblendet."
 
-#, fuzzy
-#| msgid "Skip notifications"
 msgid "Open notifications in a new tab"
-msgstr "Benachrichtigungen überspringen"
+msgstr "Benachrichtigungen im neuen Tab öffnen"
 
 msgid "Global stream"
 msgstr "Globaler Stream"
@@ -2976,11 +2974,11 @@ msgstr ""
 msgid "Avatar"
 msgstr "Profilbild"
 
-msgid "You do not yet have an avatar. Please upload one now."
-msgstr "Du hast noch keinen Avatar. Bitte lade jetzt einen hoch."
-
 msgid "Current avatar"
 msgstr "Aktueller Avatar"
+
+msgid "You do not yet have an avatar. Please upload one now."
+msgstr "Du hast noch keinen Avatar. Bitte lade jetzt einen hoch."
 
 msgid "Previously uploaded"
 msgstr "Bereits hochgeladen"
@@ -3818,6 +3816,38 @@ msgstr "Feldradius"
 msgid "WCS transformation"
 msgstr "WCS-Transformation"
 
+#, fuzzy
+#| msgid "There are no images in the spam list."
+msgid "Find images in the same area"
+msgstr "Es befinden sich keine Bilder in der Spam-Liste."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            <a href=\"%(user_page)s\">%(user)s</a> joined "
+#| "a group.\n"
+#| "                        "
+msgid ""
+"\n"
+"                                                Around <strong>1</strong> "
+"degree\n"
+"                                            "
+msgid_plural ""
+"\n"
+"                                                Around <strong>%(n)s</"
+"strong> degrees\n"
+"                                            "
+msgstr[0] ""
+"\n"
+"                           <a href=\"%(user_page)s\"> %(user)s</a> ist einer "
+"Gruppe beigetreten.\n"
+"                        "
+msgstr[1] ""
+"\n"
+"                           <a href=\"%(user_page)s\"> %(user)s</a> ist einer "
+"Gruppe beigetreten.\n"
+"                        "
+
 msgid "Resolution"
 msgstr "Auflösung"
 
@@ -4287,6 +4317,12 @@ msgstr "Final"
 msgid "Original"
 msgstr "Original"
 
+msgid "Uploaded"
+msgstr "Hochgeladen"
+
+msgid "Revision"
+msgstr "Revision"
+
 msgid "Sky plot"
 msgstr "Sternen Karte"
 
@@ -4344,9 +4380,6 @@ msgstr ""
 
 msgid "Here's some detail about the image to give you some context."
 msgstr "Hier sind einige Details über das Bild, um dir etwas Kontext zu geben."
-
-msgid "Uploaded"
-msgstr "Hochgeladen"
 
 msgid "Image uploaded"
 msgstr "Bild hochgeladen"
@@ -5961,24 +5994,20 @@ msgstr "Abonnieren"
 
 msgid "The posts below are new since your last visit to this topic."
 msgstr ""
+"Die folgenden Beiträge sind seit Ihrem letzten Besuch in diesem Thema neu "
+"hinzu gekommen."
 
 msgid "Subscribers"
 msgstr "Abonnenten"
 
-#, fuzzy
-#| msgid "You are already on this plan"
 msgid "You have unread posts in this topic."
-msgstr "Du bist bereits auf diesem Plan"
+msgstr "Sie haben ungelesene Beiträge in diesem Thema."
 
-#, fuzzy
-#| msgid "Would you like to upgrade to a higher plan?"
 msgid "Would you like to jump to the new posts since your last visit?"
-msgstr "Möchtest du auf einen höheren Plan upgraden?"
+msgstr "Möchten Sie zu den neuen Beiträgen springen?"
 
-#, fuzzy
-#| msgid "Click here to help!"
 msgid "Click here"
-msgstr "Klicke hier, um mitzuhelfen!"
+msgstr "Klicken Sie hier"
 
 msgid "Topic"
 msgstr "Thema"
@@ -6821,9 +6850,6 @@ msgstr "Staging-Bereich"
 
 msgid "Deleted"
 msgstr "Gelöscht"
-
-msgid "Revision"
-msgstr "Revision"
 
 msgid "Recover all"
 msgstr "Alle wiederherstellen"
@@ -7815,22 +7841,6 @@ msgstr ""
 #~ msgstr ""
 #~ "PS: Bist Du an größeren Abonnements interessiert? \n"
 #~ "<a href=\"/contact/\">Lass es uns wissen!</a>"
-
-#, fuzzy
-#~| msgid ""
-#~| "\n"
-#~| "                            <a href=\"%(user_page)s\">%(user)s</a> "
-#~| "joined a group.\n"
-#~| "                        "
-#~ msgid ""
-#~ "\n"
-#~ "                            And %(count)s more.\n"
-#~ "                        "
-#~ msgstr ""
-#~ "\n"
-#~ "                           <a href=\"%(user_page)s\"> %(user)s</a> ist "
-#~ "einer Gruppe beigetreten.\n"
-#~ "                        "
 
 #~ msgid ""
 #~ "AstroBin can protect your images from theft by applying a watermark to "

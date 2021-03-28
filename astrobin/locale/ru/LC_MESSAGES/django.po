@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 23:15+0000\n"
+"POT-Creation-Date: 2021-03-28 21:57+0000\n"
 "PO-Revision-Date: 2021-03-04 07:53+0000\n"
 "Last-Translator: NadirAstro <nadir_teymurov@mail.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3064,11 +3064,11 @@ msgstr "Данных пока недостаточно, вернитесь по�
 msgid "Avatar"
 msgstr "Аватар"
 
-msgid "You do not yet have an avatar. Please upload one now."
-msgstr "У вас всё ещё нет аватары. Пожалуйста, закачайте какую-нибудь."
-
 msgid "Current avatar"
 msgstr "Текущая аватарка"
+
+msgid "You do not yet have an avatar. Please upload one now."
+msgstr "У вас всё ещё нет аватары. Пожалуйста, закачайте какую-нибудь."
 
 msgid "Previously uploaded"
 msgstr "Ранее закачанная"
@@ -3894,6 +3894,40 @@ msgstr "Радиус поля"
 msgid "WCS transformation"
 msgstr "WCS трансформация"
 
+#, fuzzy
+#| msgid "There are no images in the spam list."
+msgid "Find images in the same area"
+msgstr "В спам листе пока нет изображений."
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            <a href=\"%(user_page)s\">%(user)s</a> joined "
+#| "a group.\n"
+#| "                        "
+msgid ""
+"\n"
+"                                                Around <strong>1</strong> "
+"degree\n"
+"                                            "
+msgid_plural ""
+"\n"
+"                                                Around <strong>%(n)s</"
+"strong> degrees\n"
+"                                            "
+msgstr[0] ""
+"\n"
+"<a href=\"%(user_page)s\">%(user)s</a> вступил в группу.\n"
+"                        "
+msgstr[1] ""
+"\n"
+"<a href=\"%(user_page)s\">%(user)s</a> вступил в группу.\n"
+"                        "
+msgstr[2] ""
+"\n"
+"<a href=\"%(user_page)s\">%(user)s</a> вступил в группу.\n"
+"                        "
+
 msgid "Resolution"
 msgstr "Разрешение"
 
@@ -4349,6 +4383,12 @@ msgstr "Окончательный вариант"
 msgid "Original"
 msgstr "Оригинал"
 
+msgid "Uploaded"
+msgstr "Закачено"
+
+msgid "Revision"
+msgstr "Версия"
+
 msgid "Sky plot"
 msgstr "Положение на небе"
 
@@ -4405,9 +4445,6 @@ msgstr ""
 
 msgid "Here's some detail about the image to give you some context."
 msgstr "Еще несколько деталей об изображении для контекста"
-
-msgid "Uploaded"
-msgstr "Закачено"
 
 msgid "Image uploaded"
 msgstr "Изображение закачано"
@@ -6823,9 +6860,6 @@ msgstr "Студия"
 msgid "Deleted"
 msgstr "Удалено"
 
-msgid "Revision"
-msgstr "Версия"
-
 msgid "Recover all"
 msgstr "Восстановить всё"
 
@@ -7820,21 +7854,6 @@ msgstr "Извините, это имя пользователя уже суще
 #~ msgstr ""
 #~ "PS: Вы заинтересованы в продвинутых планах? \n"
 #~ "                <a href=\"/contact/\">Дайте нам знать!</a>"
-
-#, fuzzy
-#~| msgid ""
-#~| "\n"
-#~| "                            <a href=\"%(user_page)s\">%(user)s</a> "
-#~| "joined a group.\n"
-#~| "                        "
-#~ msgid ""
-#~ "\n"
-#~ "                            And %(count)s more.\n"
-#~ "                        "
-#~ msgstr ""
-#~ "\n"
-#~ "<a href=\"%(user_page)s\">%(user)s</a> вступил в группу.\n"
-#~ "                        "
 
 #~ msgid ""
 #~ "AstroBin can protect your images from theft by applying a watermark to "

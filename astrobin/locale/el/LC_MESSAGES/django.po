@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 23:15+0000\n"
+"POT-Creation-Date: 2021-03-28 21:57+0000\n"
 "PO-Revision-Date: 2014-01-24 09:40+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3051,11 +3051,11 @@ msgstr ""
 msgid "Avatar"
 msgstr "Avatar"
 
-msgid "You do not yet have an avatar. Please upload one now."
-msgstr "Δεν έχετε ακόμα avatar. Παρακαλώ ανεβάστε ένα τώρα."
-
 msgid "Current avatar"
 msgstr "Τρέχων avatar"
+
+msgid "You do not yet have an avatar. Please upload one now."
+msgstr "Δεν έχετε ακόμα avatar. Παρακαλώ ανεβάστε ένα τώρα."
 
 msgid "Previously uploaded"
 msgstr "Ανεβασμένες εικόνες"
@@ -3860,6 +3860,24 @@ msgstr "Ακτίνα πεδίου"
 msgid "WCS transformation"
 msgstr "Εμπορικές πληροφορίες"
 
+#, fuzzy
+msgid "Find images in the same area"
+msgstr "Δεν υπάρχουν ακόμη σχόλια."
+
+#, python-format
+msgid ""
+"\n"
+"                                                Around <strong>1</strong> "
+"degree\n"
+"                                            "
+msgid_plural ""
+"\n"
+"                                                Around <strong>%(n)s</"
+"strong> degrees\n"
+"                                            "
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "Resolution"
 msgstr "Ανάλυση"
 
@@ -4318,6 +4336,15 @@ msgstr "Τελική"
 msgid "Original"
 msgstr "Αρχική"
 
+#, fuzzy
+#| msgid "uploaded"
+msgid "Uploaded"
+msgstr "ανέβηκε"
+
+#, fuzzy
+msgid "Revision"
+msgstr "Κριτικές"
+
 msgid "Sky plot"
 msgstr "Διάγραμμα ουρανού"
 
@@ -4365,11 +4392,6 @@ msgstr ""
 #| msgid "Here's some more reading material to get you started"
 msgid "Here's some detail about the image to give you some context."
 msgstr "Ορίστε και υλικό για διάβασμα για να ξεκινήσετε"
-
-#, fuzzy
-#| msgid "uploaded"
-msgid "Uploaded"
-msgstr "ανέβηκε"
 
 #, fuzzy
 msgid "Image uploaded"
@@ -6813,10 +6835,6 @@ msgstr "Περιοχή Επεξεργασίας"
 #| msgid "Delete"
 msgid "Deleted"
 msgstr "Διαγραφή"
-
-#, fuzzy
-msgid "Revision"
-msgstr "Κριτικές"
 
 msgid "Recover all"
 msgstr ""

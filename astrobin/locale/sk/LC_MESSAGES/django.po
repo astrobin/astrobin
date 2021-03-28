@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 23:15+0000\n"
+"POT-Creation-Date: 2021-03-28 21:57+0000\n"
 "PO-Revision-Date: 2020-09-25 11:30+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2988,10 +2988,10 @@ msgstr ""
 msgid "Avatar"
 msgstr ""
 
-msgid "You do not yet have an avatar. Please upload one now."
+msgid "Current avatar"
 msgstr ""
 
-msgid "Current avatar"
+msgid "You do not yet have an avatar. Please upload one now."
 msgstr ""
 
 msgid "Previously uploaded"
@@ -3717,6 +3717,25 @@ msgstr ""
 msgid "WCS transformation"
 msgstr "Doplňujúce informácie"
 
+#, fuzzy
+msgid "Find images in the same area"
+msgstr "Dátum nemôže byť budúci."
+
+#, python-format
+msgid ""
+"\n"
+"                                                Around <strong>1</strong> "
+"degree\n"
+"                                            "
+msgid_plural ""
+"\n"
+"                                                Around <strong>%(n)s</"
+"strong> degrees\n"
+"                                            "
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 msgid "Resolution"
 msgstr "Rozlíšenie"
 
@@ -4115,6 +4134,13 @@ msgstr ""
 msgid "Original"
 msgstr ""
 
+msgid "Uploaded"
+msgstr ""
+
+#, fuzzy
+msgid "Revision"
+msgstr "Revízia zmazaná."
+
 msgid "Sky plot"
 msgstr ""
 
@@ -4151,9 +4177,6 @@ msgid ""
 msgstr ""
 
 msgid "Here's some detail about the image to give you some context."
-msgstr ""
-
-msgid "Uploaded"
 msgstr ""
 
 #, fuzzy
@@ -6230,10 +6253,6 @@ msgstr "Snímacie kamery"
 
 msgid "Deleted"
 msgstr ""
-
-#, fuzzy
-msgid "Revision"
-msgstr "Revízia zmazaná."
 
 msgid "Recover all"
 msgstr ""

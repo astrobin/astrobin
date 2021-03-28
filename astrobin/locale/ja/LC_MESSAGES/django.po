@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 23:15+0000\n"
+"POT-Creation-Date: 2021-03-28 21:57+0000\n"
 "PO-Revision-Date: 2020-11-27 01:58+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3040,12 +3040,12 @@ msgstr "まだデータが十分でないので、あとで戻ってきてくだ
 msgid "Avatar"
 msgstr "アバター"
 
+msgid "Current avatar"
+msgstr "現在のアバター"
+
 msgid "You do not yet have an avatar. Please upload one now."
 msgstr ""
 "あなたはまだアバターを設定してません。いますぐそれをアップロードしましょう。"
-
-msgid "Current avatar"
-msgstr "現在のアバター"
 
 msgid "Previously uploaded"
 msgstr "前にアップロードしたもの"
@@ -3856,6 +3856,31 @@ msgstr "視野半径"
 msgid "WCS transformation"
 msgstr "WCS変換"
 
+#, fuzzy
+msgid "Find images in the same area"
+msgstr "まだレビューがありません"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            <a href=\"%(user_page)s\">%(user)s</a> joined "
+#| "a group.\n"
+#| "                        "
+msgid ""
+"\n"
+"                                                Around <strong>1</strong> "
+"degree\n"
+"                                            "
+msgid_plural ""
+"\n"
+"                                                Around <strong>%(n)s</"
+"strong> degrees\n"
+"                                            "
+msgstr[0] ""
+"\n"
+"<a href=\"%(user_page)s\">%(user)s</a> がグループに参加しました。\n"
+"                        "
+
 msgid "Resolution"
 msgstr "解像度"
 
@@ -4289,6 +4314,14 @@ msgstr "最終版"
 msgid "Original"
 msgstr "元画像"
 
+#, fuzzy
+#| msgid "Upload"
+msgid "Uploaded"
+msgstr "Upload"
+
+msgid "Revision"
+msgstr "リビジョン"
+
 msgid "Sky plot"
 msgstr "星図"
 
@@ -4328,11 +4361,6 @@ msgstr ""
 #| msgid "Here's some more reading material to get you started"
 msgid "Here's some detail about the image to give you some context."
 msgstr "ここには、あなたがスタートするための沢山の読み物があります"
-
-#, fuzzy
-#| msgid "Upload"
-msgid "Uploaded"
-msgstr "Upload"
 
 #, fuzzy
 #| msgid "Image upload"
@@ -6635,9 +6663,6 @@ msgstr "ステージングエリア"
 msgid "Deleted"
 msgstr "削除"
 
-msgid "Revision"
-msgstr "リビジョン"
-
 msgid "Recover all"
 msgstr ""
 
@@ -7512,21 +7537,6 @@ msgstr ""
 #~ msgstr ""
 #~ "PS: もっと興味がある場合、\n"
 #~ "<a href=\"/contact/\">問合せ</a>をしてください。"
-
-#, fuzzy
-#~| msgid ""
-#~| "\n"
-#~| "                            <a href=\"%(user_page)s\">%(user)s</a> "
-#~| "joined a group.\n"
-#~| "                        "
-#~ msgid ""
-#~ "\n"
-#~ "                            And %(count)s more.\n"
-#~ "                        "
-#~ msgstr ""
-#~ "\n"
-#~ "<a href=\"%(user_page)s\">%(user)s</a> がグループに参加しました。\n"
-#~ "                        "
 
 #~ msgid ""
 #~ "AstroBin can protect your images from theft by applying a watermark to "

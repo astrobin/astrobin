@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 23:15+0000\n"
+"POT-Creation-Date: 2021-03-28 21:57+0000\n"
 "PO-Revision-Date: 2013-11-11 19:27+0000\n"
 "Last-Translator: gamangabriel <gamangabriel@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3049,11 +3049,11 @@ msgstr ""
 msgid "Avatar"
 msgstr "Avatar"
 
-msgid "You do not yet have an avatar. Please upload one now."
-msgstr "Nu aveti inca un avatar. Va rugam sa incarcati unul acum."
-
 msgid "Current avatar"
 msgstr "Avatarul curent"
+
+msgid "You do not yet have an avatar. Please upload one now."
+msgstr "Nu aveti inca un avatar. Va rugam sa incarcati unul acum."
 
 msgid "Previously uploaded"
 msgstr "Incarcarea anterioara"
@@ -3817,6 +3817,25 @@ msgstr "Latimea campului"
 msgid "WCS transformation"
 msgstr "Informații comerciale"
 
+#, fuzzy
+msgid "Find images in the same area"
+msgstr "Inca nu sunt comentarii aici."
+
+#, python-format
+msgid ""
+"\n"
+"                                                Around <strong>1</strong> "
+"degree\n"
+"                                            "
+msgid_plural ""
+"\n"
+"                                                Around <strong>%(n)s</"
+"strong> degrees\n"
+"                                            "
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 msgid "Resolution"
 msgstr "Rezoluție"
 
@@ -4250,6 +4269,15 @@ msgstr "Final"
 msgid "Original"
 msgstr "Original"
 
+#, fuzzy
+#| msgid "uploaded"
+msgid "Uploaded"
+msgstr "incarcata"
+
+#, fuzzy
+msgid "Revision"
+msgstr "Înregistrare încheiată"
+
 msgid "Sky plot"
 msgstr ""
 
@@ -4287,11 +4315,6 @@ msgstr ""
 
 msgid "Here's some detail about the image to give you some context."
 msgstr ""
-
-#, fuzzy
-#| msgid "uploaded"
-msgid "Uploaded"
-msgstr "incarcata"
 
 #, fuzzy
 msgid "Image uploaded"
@@ -6556,10 +6579,6 @@ msgstr "Camere de imagistică"
 #| msgid "Delete"
 msgid "Deleted"
 msgstr "Sterge"
-
-#, fuzzy
-msgid "Revision"
-msgstr "Înregistrare încheiată"
 
 msgid "Recover all"
 msgstr ""

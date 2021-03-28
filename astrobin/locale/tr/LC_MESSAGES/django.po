@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 23:15+0000\n"
+"POT-Creation-Date: 2021-03-28 21:57+0000\n"
 "PO-Revision-Date: 2021-03-23 01:39+0000\n"
 "Last-Translator: mustastum <scriptyper@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3016,11 +3016,11 @@ msgstr ""
 msgid "Avatar"
 msgstr "Profil Resmi"
 
-msgid "You do not yet have an avatar. Please upload one now."
-msgstr "Profil resminiz yok. Lütfen şimdi bir tane yükleyin."
-
 msgid "Current avatar"
 msgstr "Şu anki profil resminiz"
+
+msgid "You do not yet have an avatar. Please upload one now."
+msgstr "Profil resminiz yok. Lütfen şimdi bir tane yükleyin."
 
 msgid "Previously uploaded"
 msgstr "En son yüklenen"
@@ -3770,6 +3770,24 @@ msgstr "Alan genişliği"
 msgid "WCS transformation"
 msgstr "Ek bilgi"
 
+#, fuzzy
+msgid "Find images in the same area"
+msgstr "Henüz bir yorum yapılmamaış."
+
+#, python-format
+msgid ""
+"\n"
+"                                                Around <strong>1</strong> "
+"degree\n"
+"                                            "
+msgid_plural ""
+"\n"
+"                                                Around <strong>%(n)s</"
+"strong> degrees\n"
+"                                            "
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "Resolution"
 msgstr "Çözünürlük"
 
@@ -4206,6 +4224,15 @@ msgstr ""
 msgid "Original"
 msgstr ""
 
+#, fuzzy
+#| msgid "uploaded"
+msgid "Uploaded"
+msgstr "yüklendi"
+
+#, fuzzy
+msgid "Revision"
+msgstr "Görüntülenme"
+
 msgid "Sky plot"
 msgstr ""
 
@@ -4250,11 +4277,6 @@ msgstr ""
 
 msgid "Here's some detail about the image to give you some context."
 msgstr ""
-
-#, fuzzy
-#| msgid "uploaded"
-msgid "Uploaded"
-msgstr "yüklendi"
 
 #, fuzzy
 msgid "Image uploaded"
@@ -6622,10 +6644,6 @@ msgstr "Özel alan"
 #| msgid "Delete"
 msgid "Deleted"
 msgstr "Sil"
-
-#, fuzzy
-msgid "Revision"
-msgstr "Görüntülenme"
 
 msgid "Recover all"
 msgstr ""
