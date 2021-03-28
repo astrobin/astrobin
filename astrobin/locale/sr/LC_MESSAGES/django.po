@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 23:15+0000\n"
+"POT-Creation-Date: 2021-03-28 21:57+0000\n"
 "PO-Revision-Date: 2012-11-25 18:36+0100\n"
 "Last-Translator: strugar <strugar@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2850,11 +2850,11 @@ msgstr ""
 msgid "Avatar"
 msgstr ""
 
-msgid "You do not yet have an avatar. Please upload one now."
-msgstr "Još uvek nemate avatar. Molimo Vas da ga uploadujete."
-
 msgid "Current avatar"
 msgstr "Sadašnji avatar"
+
+msgid "You do not yet have an avatar. Please upload one now."
+msgstr "Još uvek nemate avatar. Molimo Vas da ga uploadujete."
 
 msgid "Previously uploaded"
 msgstr "Ranije uploadovano"
@@ -3579,6 +3579,24 @@ msgstr ""
 msgid "WCS transformation"
 msgstr "Dodatne informacije"
 
+msgid "Find images in the same area"
+msgstr ""
+
+#, python-format
+msgid ""
+"\n"
+"                                                Around <strong>1</strong> "
+"degree\n"
+"                                            "
+msgid_plural ""
+"\n"
+"                                                Around <strong>%(n)s</"
+"strong> degrees\n"
+"                                            "
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 msgid "Resolution"
 msgstr "Rezolucija"
 
@@ -3977,6 +3995,15 @@ msgstr ""
 msgid "Original"
 msgstr ""
 
+#, fuzzy
+msgid "Uploaded"
+msgstr "Uploadovano"
+
+#, fuzzy
+#| msgid "Previously uploaded"
+msgid "Revision"
+msgstr "Ranije uploadovano"
+
 msgid "Sky plot"
 msgstr ""
 
@@ -4016,10 +4043,6 @@ msgstr ""
 #| msgid "Here's some more reading material to get you started"
 msgid "Here's some detail about the image to give you some context."
 msgstr "Ovde se nalazi još materijala za čitanje, za početak"
-
-#, fuzzy
-msgid "Uploaded"
-msgstr "Uploadovano"
 
 #, fuzzy
 msgid "Image uploaded"
@@ -6090,11 +6113,6 @@ msgstr ""
 
 msgid "Deleted"
 msgstr ""
-
-#, fuzzy
-#| msgid "Previously uploaded"
-msgid "Revision"
-msgstr "Ranije uploadovano"
 
 msgid "Recover all"
 msgstr ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 23:15+0000\n"
+"POT-Creation-Date: 2021-03-28 21:57+0000\n"
 "PO-Revision-Date: 2020-11-23 21:43+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: Pepe Chambó <jjchambo@hotmail.com>\n"
@@ -3069,11 +3069,11 @@ msgstr ""
 msgid "Avatar"
 msgstr "Avatar"
 
-msgid "You do not yet have an avatar. Please upload one now."
-msgstr "Todavía no tienes un avatar. Por favor, sube uno ahora."
-
 msgid "Current avatar"
 msgstr "Avatar actual"
+
+msgid "You do not yet have an avatar. Please upload one now."
+msgstr "Todavía no tienes un avatar. Por favor, sube uno ahora."
 
 msgid "Previously uploaded"
 msgstr "Subidas previamente"
@@ -3921,6 +3921,38 @@ msgstr "Radio del campo"
 msgid "WCS transformation"
 msgstr "Transformación WCS"
 
+#, fuzzy
+#| msgid "There are no images in the spam list."
+msgid "Find images in the same area"
+msgstr "No hay imágenes en la lista de spam"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                            <a href=\"%(user_page)s\">%(user)s</a> joined "
+#| "a group.\n"
+#| "                        "
+msgid ""
+"\n"
+"                                                Around <strong>1</strong> "
+"degree\n"
+"                                            "
+msgid_plural ""
+"\n"
+"                                                Around <strong>%(n)s</"
+"strong> degrees\n"
+"                                            "
+msgstr[0] ""
+"\n"
+"                            <a href=\"%(user_page)s\">%(user)s</a> se unió a "
+"un grupo.\n"
+"                        "
+msgstr[1] ""
+"\n"
+"                            <a href=\"%(user_page)s\">%(user)s</a> se unió a "
+"un grupo.\n"
+"                        "
+
 msgid "Resolution"
 msgstr "Resolución"
 
@@ -4396,6 +4428,12 @@ msgstr "Final"
 msgid "Original"
 msgstr "Original"
 
+msgid "Uploaded"
+msgstr "Subido"
+
+msgid "Revision"
+msgstr "Revisión"
+
 msgid "Sky plot"
 msgstr "Carta celeste"
 
@@ -4453,9 +4491,6 @@ msgstr ""
 
 msgid "Here's some detail about the image to give you some context."
 msgstr "Aquí hay algunos detalles sobre la imagen para darle contexto."
-
-msgid "Uploaded"
-msgstr "Subido"
 
 msgid "Image uploaded"
 msgstr "Imagen subida"
@@ -6825,9 +6860,6 @@ msgstr "Área de Pruebas"
 msgid "Deleted"
 msgstr "Borrar"
 
-msgid "Revision"
-msgstr "Revisión"
-
 msgid "Recover all"
 msgstr ""
 
@@ -7833,22 +7865,6 @@ msgstr ""
 #~ msgstr ""
 #~ "PD: ¿Estás interesado en un plan más grande?\n"
 #~ "                <a href=\"/contact/\">¡Déjenoslo saber!</a>"
-
-#, fuzzy
-#~| msgid ""
-#~| "\n"
-#~| "                            <a href=\"%(user_page)s\">%(user)s</a> "
-#~| "joined a group.\n"
-#~| "                        "
-#~ msgid ""
-#~ "\n"
-#~ "                            And %(count)s more.\n"
-#~ "                        "
-#~ msgstr ""
-#~ "\n"
-#~ "                            <a href=\"%(user_page)s\">%(user)s</a> se "
-#~ "unió a un grupo.\n"
-#~ "                        "
 
 #~ msgid ""
 #~ "AstroBin can protect your images from theft by applying a watermark to "

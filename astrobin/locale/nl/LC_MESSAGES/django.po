@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 23:15+0000\n"
+"POT-Creation-Date: 2021-03-28 21:57+0000\n"
 "PO-Revision-Date: 2015-12-30 11:27+0000\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -3045,11 +3045,11 @@ msgstr ""
 msgid "Avatar"
 msgstr "Avatar"
 
-msgid "You do not yet have an avatar. Please upload one now."
-msgstr "Je hebt nog geen avatar. Gelieve er een up te loaden."
-
 msgid "Current avatar"
 msgstr "Huidige avatar"
+
+msgid "You do not yet have an avatar. Please upload one now."
+msgstr "Je hebt nog geen avatar. Gelieve er een up te loaden."
 
 msgid "Previously uploaded"
 msgstr "Eerder upgeloade beelden"
@@ -3856,6 +3856,24 @@ msgstr "Breedte beeldveld"
 msgid "WCS transformation"
 msgstr "Commerciële informatie"
 
+#, fuzzy
+msgid "Find images in the same area"
+msgstr "Tot nu toe heeft niemand commentaar gegeven."
+
+#, python-format
+msgid ""
+"\n"
+"                                                Around <strong>1</strong> "
+"degree\n"
+"                                            "
+msgid_plural ""
+"\n"
+"                                                Around <strong>%(n)s</"
+"strong> degrees\n"
+"                                            "
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "Resolution"
 msgstr "Resolutie"
 
@@ -4310,6 +4328,15 @@ msgstr "Finaal"
 msgid "Original"
 msgstr "Origineel"
 
+#, fuzzy
+#| msgid "uploaded"
+msgid "Uploaded"
+msgstr "Gepost op"
+
+#, fuzzy
+msgid "Revision"
+msgstr "Reviews"
+
 msgid "Sky plot"
 msgstr "Hemel positie"
 
@@ -4357,11 +4384,6 @@ msgstr ""
 #| msgid "Here's some more reading material to get you started"
 msgid "Here's some detail about the image to give you some context."
 msgstr "Hier nog wat lectuur om te kunnen beginnen"
-
-#, fuzzy
-#| msgid "uploaded"
-msgid "Uploaded"
-msgstr "Gepost op"
 
 #, fuzzy
 #| msgid "Image upload"
@@ -6821,10 +6843,6 @@ msgstr "Ontwikkelingszone"
 #| msgid "Delete"
 msgid "Deleted"
 msgstr "Wissen"
-
-#, fuzzy
-msgid "Revision"
-msgstr "Reviews"
 
 msgid "Recover all"
 msgstr ""

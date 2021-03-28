@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 23:15+0000\n"
+"POT-Creation-Date: 2021-03-28 21:57+0000\n"
 "PO-Revision-Date: 2015-12-30 10:50+0000\n"
 "Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -3028,11 +3028,11 @@ msgstr ""
 msgid "Avatar"
 msgstr "Profiilikuva"
 
-msgid "You do not yet have an avatar. Please upload one now."
-msgstr "Sinulla ei vielä ole avataria.  Ole hyvä ja lataa avatar."
-
 msgid "Current avatar"
 msgstr "Tämänhetkinen avatar"
+
+msgid "You do not yet have an avatar. Please upload one now."
+msgstr "Sinulla ei vielä ole avataria.  Ole hyvä ja lataa avatar."
 
 msgid "Previously uploaded"
 msgstr "Aiemmin ladattuja"
@@ -3832,6 +3832,24 @@ msgstr "Kentän leveys"
 msgid "WCS transformation"
 msgstr "Kaupallista tietoa"
 
+#, fuzzy
+msgid "Find images in the same area"
+msgstr "Ei kommentteja."
+
+#, python-format
+msgid ""
+"\n"
+"                                                Around <strong>1</strong> "
+"degree\n"
+"                                            "
+msgid_plural ""
+"\n"
+"                                                Around <strong>%(n)s</"
+"strong> degrees\n"
+"                                            "
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "Resolution"
 msgstr "Resoluutio"
 
@@ -4288,6 +4306,15 @@ msgstr "Lopullinen versio"
 msgid "Original"
 msgstr "Alkuperäinen"
 
+#, fuzzy
+#| msgid "uploaded"
+msgid "Uploaded"
+msgstr "ladattu"
+
+#, fuzzy
+msgid "Revision"
+msgstr "Arvostelut"
+
 msgid "Sky plot"
 msgstr "Taivaskartta"
 
@@ -4333,11 +4360,6 @@ msgstr ""
 #| msgid "Here's some more reading material to get you started"
 msgid "Here's some detail about the image to give you some context."
 msgstr "Tässä on hieman lukemista, jotta pääset alkuun"
-
-#, fuzzy
-#| msgid "uploaded"
-msgid "Uploaded"
-msgstr "ladattu"
 
 #, fuzzy
 #| msgid "Image upload"
@@ -6741,10 +6763,6 @@ msgstr "Tilapäinen alue"
 #| msgid "Delete"
 msgid "Deleted"
 msgstr "Poista"
-
-#, fuzzy
-msgid "Revision"
-msgstr "Arvostelut"
 
 msgid "Recover all"
 msgstr ""

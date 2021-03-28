@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 23:15+0000\n"
+"POT-Creation-Date: 2021-03-28 21:57+0000\n"
 "PO-Revision-Date: 2014-02-24 20:42+0000\n"
 "Last-Translator: Ayatola <ayatola@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3041,12 +3041,12 @@ msgstr ""
 msgid "Avatar"
 msgstr "Imagem do perfil"
 
+msgid "Current avatar"
+msgstr "Imagem de perfil atual"
+
 msgid "You do not yet have an avatar. Please upload one now."
 msgstr ""
 "Você ainda não possui uma imagem para o seu perfil. Por favor, envie uma."
-
-msgid "Current avatar"
-msgstr "Imagem de perfil atual"
 
 msgid "Previously uploaded"
 msgstr "Enviado anteriormente"
@@ -3850,6 +3850,24 @@ msgstr "Largura do campo"
 msgid "WCS transformation"
 msgstr "Informações comerciais"
 
+#, fuzzy
+msgid "Find images in the same area"
+msgstr "Ainda sem comentários."
+
+#, python-format
+msgid ""
+"\n"
+"                                                Around <strong>1</strong> "
+"degree\n"
+"                                            "
+msgid_plural ""
+"\n"
+"                                                Around <strong>%(n)s</"
+"strong> degrees\n"
+"                                            "
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "Resolution"
 msgstr "Resolução"
 
@@ -4292,6 +4310,15 @@ msgstr "Final"
 msgid "Original"
 msgstr "Original"
 
+#, fuzzy
+#| msgid "uploaded"
+msgid "Uploaded"
+msgstr "enviado"
+
+#, fuzzy
+msgid "Revision"
+msgstr "Opiniões"
+
 msgid "Sky plot"
 msgstr ""
 
@@ -4338,11 +4365,6 @@ msgstr ""
 #| msgid "Here's some more reading material to get you started"
 msgid "Here's some detail about the image to give you some context."
 msgstr "Aqui tem mais material para você ler e começar a participar"
-
-#, fuzzy
-#| msgid "uploaded"
-msgid "Uploaded"
-msgstr "enviado"
 
 #, fuzzy
 msgid "Image uploaded"
@@ -6746,10 +6768,6 @@ msgstr "Área de Testes"
 #| msgid "Delete"
 msgid "Deleted"
 msgstr "Excluir"
-
-#, fuzzy
-msgid "Revision"
-msgstr "Opiniões"
 
 msgid "Recover all"
 msgstr ""

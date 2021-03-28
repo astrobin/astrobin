@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 23:15+0000\n"
+"POT-Creation-Date: 2021-03-28 21:57+0000\n"
 "PO-Revision-Date: 2014-02-05 12:48+0000\n"
 "Last-Translator: Omar <thekingosm168@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3029,11 +3029,11 @@ msgstr ""
 msgid "Avatar"
 msgstr "الصورة الرمزية"
 
-msgid "You do not yet have an avatar. Please upload one now."
-msgstr "أنت لا تملك حاليا صورة رمزية. من فضلك قم برفع واحدة الآن."
-
 msgid "Current avatar"
 msgstr "الصورة الرمزية الحالية"
+
+msgid "You do not yet have an avatar. Please upload one now."
+msgstr "أنت لا تملك حاليا صورة رمزية. من فضلك قم برفع واحدة الآن."
 
 msgid "Previously uploaded"
 msgstr "تم رفعها مسبّقاً"
@@ -3809,6 +3809,28 @@ msgstr "نصف قطر المجال"
 msgid "WCS transformation"
 msgstr "معلومات تجاريّة"
 
+#, fuzzy
+msgid "Find images in the same area"
+msgstr "لا توجد آراء نقدية حتي الآن."
+
+#, python-format
+msgid ""
+"\n"
+"                                                Around <strong>1</strong> "
+"degree\n"
+"                                            "
+msgid_plural ""
+"\n"
+"                                                Around <strong>%(n)s</"
+"strong> degrees\n"
+"                                            "
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
 msgid "Resolution"
 msgstr "الدقة"
 
@@ -4254,6 +4276,15 @@ msgstr "نهائية"
 msgid "Original"
 msgstr "الأصلية"
 
+#, fuzzy
+#| msgid "Upload"
+msgid "Uploaded"
+msgstr "ارفع صورة"
+
+#, fuzzy
+msgid "Revision"
+msgstr "الآراء النقدية"
+
 msgid "Sky plot"
 msgstr "الموقع علي خريطة السماء"
 
@@ -4300,11 +4331,6 @@ msgstr ""
 #| msgid "Here's some more reading material to get you started"
 msgid "Here's some detail about the image to give you some context."
 msgstr "هذه مادة أكثر للقراءة لكي تبدأ."
-
-#, fuzzy
-#| msgid "Upload"
-msgid "Uploaded"
-msgstr "ارفع صورة"
 
 #, fuzzy
 msgid "Image uploaded"
@@ -6650,10 +6676,6 @@ msgstr "مساحة الإعداد"
 #| msgid "Delete"
 msgid "Deleted"
 msgstr "حذف"
-
-#, fuzzy
-msgid "Revision"
-msgstr "الآراء النقدية"
 
 msgid "Recover all"
 msgstr ""

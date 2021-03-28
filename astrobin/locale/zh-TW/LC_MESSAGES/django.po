@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 23:15+0000\n"
+"POT-Creation-Date: 2021-03-28 21:57+0000\n"
 "PO-Revision-Date: 2015-12-30 10:07+0000\n"
 "Last-Translator: marmotstar <marmot.subaru@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2909,10 +2909,10 @@ msgstr ""
 msgid "Avatar"
 msgstr ""
 
-msgid "You do not yet have an avatar. Please upload one now."
+msgid "Current avatar"
 msgstr ""
 
-msgid "Current avatar"
+msgid "You do not yet have an avatar. Please upload one now."
 msgstr ""
 
 msgid "Previously uploaded"
@@ -3624,6 +3624,24 @@ msgstr ""
 msgid "WCS transformation"
 msgstr ""
 
+#, fuzzy
+msgid "Find images in the same area"
+msgstr "不能選擇未來的日期"
+
+#, python-format
+msgid ""
+"\n"
+"                                                Around <strong>1</strong> "
+"degree\n"
+"                                            "
+msgid_plural ""
+"\n"
+"                                                Around <strong>%(n)s</"
+"strong> degrees\n"
+"                                            "
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "Resolution"
 msgstr ""
 
@@ -4015,6 +4033,12 @@ msgstr ""
 msgid "Original"
 msgstr ""
 
+msgid "Uploaded"
+msgstr ""
+
+msgid "Revision"
+msgstr ""
+
 msgid "Sky plot"
 msgstr ""
 
@@ -4051,9 +4075,6 @@ msgid ""
 msgstr ""
 
 msgid "Here's some detail about the image to give you some context."
-msgstr ""
-
-msgid "Uploaded"
 msgstr ""
 
 #, fuzzy
@@ -6065,9 +6086,6 @@ msgid "Staging area"
 msgstr "拍攝用的相機"
 
 msgid "Deleted"
-msgstr ""
-
-msgid "Revision"
 msgstr ""
 
 msgid "Recover all"
