@@ -79,7 +79,7 @@
         </div>
     {% endif %}
 
-    <div class="row">
+    <div class="row-fluid">
         <div class="span3">
             {% include 'user/profile/meta.html' %}
         </div>
@@ -120,7 +120,7 @@
 
                 {% include './profile/image_navigation_menu.html' %}
 
-                {% image_list image_list nav_ctx='user' %}
+                {% image_list image_list paginate_by=paginate_by nav_ctx='user' %}
             {% endif %}
         </div> <!-- images -->
     </div> <!-- row -->

@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.views.generic import DetailView
 from pybb.permissions import perms
 
@@ -20,6 +21,7 @@ class GroupDetailView(RestrictPrivateGroupToMembersMixin, DetailView):
         # Images
         context['image_list'] = group.images.all()
         context['alias'] = 'gallery'
+        context['paginate_by'] = settings.PAGINATE_GROUP_DETAIL_PAGE_BY
 
         # Misc
         context['user_is_member'] = self.request.user in group.members.all()

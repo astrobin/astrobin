@@ -1,6 +1,7 @@
 import simplejson
 from braces.views import JSONResponseMixin
 from braces.views import LoginRequiredMixin
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse_lazy
@@ -242,6 +243,7 @@ class UserCollectionsDetail(UserCollectionsBase, DetailView):
         context['image_list'] = image_list.all() if image_list else None
         context['not_matching_tag'] = not_matching_tag.all() if not_matching_tag else None
         context['alias'] = 'gallery'
+        context['paginate_by'] = settings.PAGINATE_USER_PAGE_BY
         return context
 
     def get_template_names(self):

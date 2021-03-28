@@ -84,8 +84,8 @@
 
     {% include 'image/detail/menu/root.html' %}
 
-    <div class="row"> <!-- main row -->
-        <div class="span8"> <!-- left pane -->
+    <div class="row-fluid"> <!-- main row -->
+        <div class="span8 image-page-left-pane"> <!-- left pane -->
             {% include 'image/detail/iotd_banner.html' %}
             {% include 'image/detail/solve_status.html' %}
             {% include 'image/detail/image.html' %}
@@ -104,7 +104,7 @@
             {% include 'image/detail/comments.html' %}
         </div> <!-- /left pane -->
 
-        <div class="span4"> <!-- right pane -->
+        <div class="span4 image-page-right-pane"> <!-- right pane -->
             {% if request.user_agent.is_pc or request.user_agent.is_tablet or TESTING %}
                 <div class="hidden-phone">
                     {% include 'image/detail/info.html' %}
