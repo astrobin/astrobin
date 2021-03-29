@@ -7,7 +7,7 @@
 
 @media screen and (max-width: 1019px) {
   .extra-alerts .alert {
-    margin: 10px -10px;
+    margin: 10px -30px;
   }
 }
 
@@ -234,6 +234,12 @@
 
   h4, p {
     padding: 0 12px;
+  }
+
+  @media screen and (max-width: 1019px) {
+    .extra-alerts .alert {
+      margin: 10px 0px;
+    }
   }
 
   #astrobin-index-mobile-header {
