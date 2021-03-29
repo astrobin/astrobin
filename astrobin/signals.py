@@ -767,6 +767,10 @@ def userprofile_post_delete(sender, instance, **kwargs):
     # Images are attached to the auth.User object, and that's not really
     # deleted, so nothing is cascaded, hence the following line.
     instance.user.is_active = False
+
+    if instance.user.email and 'ASTROBIN_IGNORE' not in instance.user.email:
+        instance.user.email = instance.user.email.replace('@', '+ASTROBIN_IGNORE@')
+
     instance.user.save()
     Image.objects_including_wip.filter(user=instance.user).delete()
     UserIndex().remove_object(instance.user)
