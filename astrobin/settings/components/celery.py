@@ -41,7 +41,7 @@ CELERY_ROUTES = {
         'queue': 'email',
         'routing_key': 'email',
     },
-    'astrobin.tasks.update_index_images_1h': {
+    'astrobin.tasks.update_index': {
         'queue': 'haystack',
         'routing_key': 'haystack',
     },
