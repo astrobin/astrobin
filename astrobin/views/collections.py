@@ -26,6 +26,7 @@ from astrobin.models import Collection
 from astrobin.models import Image
 from astrobin.models import UserProfile
 from astrobin_apps_images.models import KeyValueTag
+from astrobin_apps_users.services import UserService
 
 
 class EnsureCollectionOwnerMixin(View):
@@ -61,6 +62,10 @@ class UserCollectionsBase(View):
         context['requested_user'] = user
         context['public_images_no'] = Image.objects.filter(user=user).count()
         context['wip_images_no'] = Image.wip.filter(user=user).count()
+        context['mobile_header_background'] = \
+                UserService(user).get_public_images().first().thumbnail('regular', None, sync=True) \
+                    if UserService(user).get_public_images().exists() \
+                    else None
 
         # TODO: stats
 

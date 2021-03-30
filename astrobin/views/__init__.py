@@ -339,8 +339,8 @@ def index(request, template='index/root.html', extra_context=None):
     image_rev_ct = ContentType.objects.get_for_model(ImageRevision)
     user_ct = ContentType.objects.get_for_model(User)
 
-    recent_images = Image.objects\
-        .filter(Q(~Q(title=None) & ~Q(title='') & Q(moderator_decision=1) & Q(published__isnull=False)))\
+    recent_images = Image.objects \
+        .filter(Q(~Q(title=None) & ~Q(title='') & Q(moderator_decision=1) & Q(published__isnull=False))) \
         .order_by('-published')
 
     response_dict = {
@@ -1374,7 +1374,11 @@ def user_page(request, username):
         'menu': menu,
         'stats': data['stats'] if 'stats' in data else None,
         'alias': 'gallery',
-        'corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user)
+        'corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user),
+        'mobile_header_background': \
+            UserService(user).get_public_images().first().thumbnail('regular', None, sync=True) \
+                if UserService(user).get_public_images().exists() \
+                else None
     }
 
     response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))

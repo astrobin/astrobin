@@ -196,11 +196,10 @@
     }
   }
 
-  .top-picks-item img{
+  .top-picks-item img {
     width: 354px !important;
   }
 }
-
 
 @media screen and (max-width: 767px) {
   body, .astrobin-container {
@@ -428,6 +427,26 @@
   .toggleproperty-add-remove.property-like {
     margin-left: $spacer-medium;
     width: calc(70% - 22px);
+  }
+
+  .user-page {
+    .advertisement {
+      margin-top: -20px;
+    }
+
+    .profile-meta {
+      display: flex;
+      justify-content: center;
+      margin-top: -20px;
+      margin-bottom: 12px;
+      padding: 2rem 0;
+      background-size: cover;
+      background-position: center;
+
+      > .user-card {
+        margin: 0;
+      }
+    }
   }
 }
 
