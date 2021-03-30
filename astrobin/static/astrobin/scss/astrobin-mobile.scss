@@ -445,7 +445,16 @@
 
       > .user-card {
         margin: 0;
+        box-shadow: 0 0 2rem $black;
       }
+    }
+  }
+
+  .user-gallery {
+    .nav-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
     }
   }
 }
