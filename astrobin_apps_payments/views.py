@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import json
 import logging
 
 import stripe
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.mail import EmailMultiAlternatives
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
@@ -154,11 +156,19 @@ def stripe_webhook(request):
         type = event['type']
         session = event['data']['object']
 
-        if (type == 'checkout.session.completed' and session['payment_status']) or \
-                type == 'checkout.session.async_payment_succeeded':
+        if type == 'checkout.session.completed':
             fulfull_payment(session)
+        elif event['type'] == 'checkout.session.async_payment_succeeded':
+            log.info("stripe_webhook: payment succeeded for event %s" % event['id'])
         elif event['type'] == 'checkout.session.async_payment_failed':
             log.info("stripe_webhook: payment failed for event %s" % event['id'])
+            msg = EmailMultiAlternatives(
+                '[AstroBin] User payment failed',
+                'Payment from user failed: <br/>%s' % json.dumps(session, indent = 4, sort_keys = True),
+                settings.DEFAULT_FROM_EMAIL,
+                ['astrobin@astrobin.com']
+            )
+            msg.send()
     except KeyError as e:
         log.exception("stripe_webhook: %s" % str(e))
         return HttpResponseBadRequest()
