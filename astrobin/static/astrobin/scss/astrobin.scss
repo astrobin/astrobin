@@ -209,6 +209,14 @@ body.full {
 ul.astrobin-thumbnails {
   margin-left: 0;
   clear: both;
+  display: flex;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 767px) {
+    justify-content: center;
+    padding-left: .5rem;
+    padding-right: .5rem;
+  }
 }
 
 li.astrobin-thumbnail {
@@ -285,6 +293,24 @@ li.astrobin-thumbnail {
       background: rgba(0, 0, 0, 0.5);
       border-radius: 20px 20px 0 0;
       font-size: 11px;
+    }
+  }
+
+  .astrobin-image-container {
+    @media screen and (max-width: 767px) {
+      width: calc(100vw / 6 - 10px);
+    }
+
+    @media screen and (max-width: 671px) {
+      width: calc(100vw / 5 - 11px);
+    }
+
+    @media screen and (max-width: 576px) {
+      width: calc(100vw / 4 - 12px);
+    }
+
+    @media screen and (max-width: 425px) {
+      width: calc(100vw / 3 - 15px);
     }
   }
 
@@ -3313,6 +3339,11 @@ pre {
 
 .collections {
   margin: 0;
+
+  @media screen and (max-width: 767px) {
+    display: flex;
+    justify-content:center;
+  }
 
   .table {
     .collection-name {

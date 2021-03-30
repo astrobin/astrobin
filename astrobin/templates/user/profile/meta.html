@@ -2,16 +2,30 @@
 {% load astrobin_apps_users_tags %}
 {% load common_tags %}
 {% load tags %}
-
 {% load i18n %}
 
-<div class="profile-meta hidden-phone">
+
+{% with ad_container_classes='visible-phone' %}
+    {% include 'ads/wide_ad.html' %}
+{% endwith %}
+
+<style>
+    @media screen and (max-width: 767px) {
+        .mobile-header-background {
+            background-image: url('{{ mobile_header_background }}');
+        }
+    }
+</style>
+
+<div class="profile-meta{% if mobile_header_background %} mobile-header-background{% endif %}">
     {% astrobin_user requested_user view='default'%}
 
-    {% include 'ads/rectangular_ad.html' %}
+    {% with ad_container_classes='hidden-phone' %}
+        {% include 'ads/rectangular_ad.html' %}
+    {% endwith %}
 
     {% if PREMIUM_ENABLED and requested_user == request.user or request.user.is_superuser%}
-        <div class="subtle-container">
+        <div class="subtle-container hidden-phone">
             <div class="header">
                 <h4>{% trans "Subscription" %}</h4>
             </div>
@@ -79,7 +93,7 @@
         </div>
     {% endif %}
 
-    <div class="subtle-container stats">
+    <div class="subtle-container stats hidden-phone">
         <div class="header">
             <h4>
                 {% trans "Stats" %}
@@ -106,3 +120,5 @@
         {% endfor %}
     </div>
 </div><!-- ./profile-meta -->
+
+
