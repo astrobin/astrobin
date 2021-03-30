@@ -251,7 +251,8 @@
     }
   }
 
-  .comment.newlyAdded, .comment.hilight {
+  .comment.newlyAdded,
+  .comment.hilight {
     &:before {
       content: "\279F";
       position: absolute;
@@ -265,8 +266,16 @@
     }
 
     .content {
-      font-weight: bold;
-      color: yellow;
+      @keyframes colorchange {
+        0% {
+          color: yellow;
+        }
+        100% {
+          color: $strong-text-color;
+        }
+      }
+
+      animation: colorchange 5s ease-in-out;
     }
   }
 }
