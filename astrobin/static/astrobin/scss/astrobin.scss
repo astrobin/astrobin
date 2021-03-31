@@ -3343,6 +3343,7 @@ pre {
   @media screen and (max-width: 767px) {
     display: flex;
     justify-content:center;
+    flex-wrap: wrap;
   }
 
   .table {
