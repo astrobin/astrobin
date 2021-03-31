@@ -1375,11 +1375,15 @@ def user_page(request, username):
         'stats': data['stats'] if 'stats' in data else None,
         'alias': 'gallery',
         'corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user),
-        'mobile_header_background': \
+    }
+
+    try:
+        response_dict['mobile_header_background'] = \
             UserService(user).get_public_images().first().thumbnail('regular', None, sync=True) \
                 if UserService(user).get_public_images().exists() \
                 else None
-    }
+    except IOError:
+        response_dict['mobile_header_background'] = None
 
     response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
 

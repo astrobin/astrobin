@@ -62,10 +62,14 @@ class UserCollectionsBase(View):
         context['requested_user'] = user
         context['public_images_no'] = Image.objects.filter(user=user).count()
         context['wip_images_no'] = Image.wip.filter(user=user).count()
-        context['mobile_header_background'] = \
-                UserService(user).get_public_images().first().thumbnail('regular', None, sync=True) \
-                    if UserService(user).get_public_images().exists() \
-                    else None
+
+        try:
+            context['mobile_header_background'] = \
+                    UserService(user).get_public_images().first().thumbnail('regular', None, sync=True) \
+                        if UserService(user).get_public_images().exists() \
+                        else None
+        except IOError:
+            context['mobile_header_background'] = None
 
         # TODO: stats
 
