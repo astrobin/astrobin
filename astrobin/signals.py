@@ -91,8 +91,9 @@ def image_post_save(sender, instance, created, **kwargs):
             instance.designated_iotd_reviewers.add(*UserService.get_users_in_group_sample(
                 'iotd_reviewers', settings.IOTD_DESIGNATED_REVIEWERS_PERCENTAGE, instance.user))
 
-        if not instance.is_wip and not instance.skip_notifications:
-            push_notification_for_new_image.apply_async(args=(instance.user.pk, instance.pk,))
+        if not instance.is_wip:
+            if not instance.skip_notifications:
+                push_notification_for_new_image.apply_async(args=(instance.user.pk, instance.pk,))
             if instance.moderator_decision == 1:
                 add_story(instance.user, verb='VERB_UPLOADED_IMAGE', action_object=instance)
 
