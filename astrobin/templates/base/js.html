@@ -41,6 +41,7 @@
                     window.hj("identify", userId, {
                         "Registration date": new Date("{{ request.user.date_joined|date:"Y-m-d" }}").toISOString(),
                         "Language": "{{ request.LANGUAGE_CODE }}",
+                        "Country": "{{ REQUEST_COUNTRY }}",
                         "Images": {{ request.user.image_set.count }},
                         "Is Free": "{{ request.user|is_free }}" === "True",
                         "Is Lite": "{{ request.user|is_any_lite }}" === "True",
