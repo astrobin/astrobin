@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.staticfiles.storage import staticfiles_storage
+from django.views.decorators.cache import never_cache
 from django.views.generic import RedirectView
 from django.views.static import serve
 from rest_framework.authtoken.views import obtain_auth_token
@@ -175,7 +176,7 @@ urlpatterns += [
         name='password_reset_confirm'),
     # and now add the registration urls
     url(r'^accounts/register/$',
-        registration_views.AstroBinRegistrationView.as_view(),
+        never_cache(registration_views.AstroBinRegistrationView.as_view()),
         name='registration_register'),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^accounts/email/', include('change_email.urls')),
@@ -199,8 +200,8 @@ urlpatterns += [
     ###########################################################################
 
     url(r'^api/', include(v1_api.urls)),
-    url(r'^api/request-key/$', api_views.AppApiKeyRequestView.as_view(), name='app_api_key_request'),
-    url(r'^api/request-key/complete/$', api_views.AppApiKeyRequestCompleteView.as_view(),
+    url(r'^api/request-key/$', never_cache(api_views.AppApiKeyRequestView.as_view()), name='app_api_key_request'),
+    url(r'^api/request-key/complete/$', never_cache(api_views.AppApiKeyRequestCompleteView.as_view()),
         name='app_api_key_request_complete'),
     url(r'^api/v2/api-auth-token/', obtain_auth_token),
     url(r'^api/v2/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
@@ -249,14 +250,14 @@ urlpatterns += [
     ### SEARCH VIEWS                                                        ###
     ###########################################################################
 
-    url(r'^search/', AstroBinSearchView.as_view(), name='haystack_search'),
+    url(r'^search/', never_cache(AstroBinSearchView.as_view()), name='haystack_search'),
 
     ###########################################################################
     ### EXPLORE VIEWS                                                       ###
     ###########################################################################
 
-    url(r'^explore/top-picks/$', explore_views.TopPicksView.as_view(), name='top_picks'),
-    url(r'^explore/top-pick-nominations/$', explore_views.TopPickNominationsView.as_view(),
+    url(r'^explore/top-picks/$', never_cache(explore_views.TopPicksView.as_view()), name='top_picks'),
+    url(r'^explore/top-pick-nominations/$', never_cache(explore_views.TopPickNominationsView.as_view()),
         name='top_pick_nominations'),
 
     ###########################################################################
@@ -271,16 +272,16 @@ urlpatterns += [
     url(r'^users/(?P<username>[\w.@+-]*)/collections/create/$', collections_views.UserCollectionsCreate.as_view(),
         name='user_collections_create'),
     url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/$',
-        collections_views.UserCollectionsDetail.as_view(), name='user_collections_detail'),
+        never_cache(collections_views.UserCollectionsDetail.as_view()), name='user_collections_detail'),
     url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/update/$',
-        collections_views.UserCollectionsUpdate.as_view(), name='user_collections_update'),
+        never_cache(collections_views.UserCollectionsUpdate.as_view()), name='user_collections_update'),
     url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/add-remove-images/$',
-        collections_views.UserCollectionsAddRemoveImages.as_view(), name='user_collections_add_remove_images'),
+        never_cache(collections_views.UserCollectionsAddRemoveImages.as_view()), name='user_collections_add_remove_images'),
     url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/quick-edit/key-value-pairs$',
-        collections_views.UserCollectionsQuickEditKeyValueTags.as_view(),
+        never_cache(collections_views.UserCollectionsQuickEditKeyValueTags.as_view()),
         name='user_collections_quick_edit_key_value_tags'),
     url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/delete/$',
-        collections_views.UserCollectionsDelete.as_view(), name='user_collections_delete'),
+        never_cache( collections_views.UserCollectionsDelete.as_view()), name='user_collections_delete'),
     url(r'^users/(?P<username>[\w.@+-]*)/apikeys/$', user_page_api_keys, name='user_page_api_keys'),
     url(r'^users/(?P<username>[\w.@+-]*)/ban/$', user_ban, name='user_ban'),
     url(r'^users/(?P<username>[\w.@+-]*)/bookmarks/$', user_page_bookmarks, name='user_page_bookmarks'),
@@ -312,7 +313,7 @@ urlpatterns += [
     url(r'^profile/edit/license/$', user_profile_edit_license, name='profile_edit_license'),
     url(r'^profile/edit/locations/$', user_profile_edit_locations, name='profile_edit_locations'),
     url(r'^profile/edit/preferences/$', user_profile_edit_preferences, name='profile_edit_preferences'),
-    url(r'^profile/download-data/$', DownloadDataView.as_view(), name='profile_download_data'),
+    url(r'^profile/download-data/$', never_cache(DownloadDataView.as_view()), name='profile_download_data'),
     url(r'^profile/save/basic/$', user_profile_save_basic, name='profile_save_basic'),
     url(r'^profile/save/gear/$', user_profile_save_gear, name='profile_save_gear'),
     url(r'^profile/save/license/$', user_profile_save_license, name='profile_save_license'),
@@ -394,22 +395,22 @@ urlpatterns += [
     ### MODERATION VIEWS                                                    ###
     ###########################################################################
 
-    url(r'^moderate/images/$', moderation_views.ImageModerationListView.as_view(),
+    url(r'^moderate/images/$', never_cache(moderation_views.ImageModerationListView.as_view()),
         name='image_moderation'),
     url(r'^moderate/images/spam/$',
-        moderation_views.ImageModerationSpamListView.as_view(),
+        never_cache(moderation_views.ImageModerationSpamListView.as_view()),
         name='image_moderation_view_spam'),
     url(r'^moderate/images/mark-as-spam/$',
-        moderation_views.ImageModerationMarkAsSpamView.as_view(),
+        never_cache(moderation_views.ImageModerationMarkAsSpamView.as_view()),
         name='image_moderation_mark_as_spam'),
     url(r'^moderate/images/mark-as-ham/$',
-        moderation_views.ImageModerationMarkAsHamView.as_view(),
+        never_cache(moderation_views.ImageModerationMarkAsHamView.as_view()),
         name='image_moderation_mark_as_ham'),
     url(r'^moderate/images/ban-all/$',
-        moderation_views.ImageModerationBanAllView.as_view(),
+        never_cache(moderation_views.ImageModerationBanAllView.as_view()),
         name='image_moderation_ban_all'),
     url(r'^moderate/forums/mark-as-spam/$',
-        moderation_views.ForumModerationMarkAsSpamView.as_view(),
+        never_cache(moderation_views.ForumModerationMarkAsSpamView.as_view()),
         name='forum_moderation_mark_as_spam'),
 
     ###########################################################################
@@ -435,16 +436,18 @@ urlpatterns += [
     ### IMAGE EDIT VIEWS                                                    ###
     ###########################################################################
 
-    url(r'^delete/(?P<id>\w+)/$', image_views.ImageDeleteView.as_view(), name='image_delete'),
-    url(r'^delete/original/(?P<id>\w+)/$', image_views.ImageDeleteOriginalView.as_view(), name='image_delete_original'),
-    url(r'^delete/revision/(?P<id>\w+)/$', image_views.ImageRevisionDeleteView.as_view(), name='image_delete_revision'),
-    url(r'^delete/other-versions/(?P<id>\w+)/$', image_views.ImageDeleteOtherVersionsView.as_view(),
+    url(r'^delete/(?P<id>\w+)/$', never_cache(image_views.ImageDeleteView.as_view()), name='image_delete'),
+    url(r'^delete/original/(?P<id>\w+)/$',
+        never_cache(image_views.ImageDeleteOriginalView.as_view()), name='image_delete_original'),
+    url(r'^delete/revision/(?P<id>\w+)/$',
+        never_cache(image_views.ImageRevisionDeleteView.as_view()), name='image_delete_revision'),
+    url(r'^delete/other-versions/(?P<id>\w+)/$', never_cache(image_views.ImageDeleteOtherVersionsView.as_view()),
         name='image_delete_other_versions'),
-    url(r'^demote/(?P<id>\w+)/$', image_views.ImageDemoteView.as_view(), name='image_demote'),
+    url(r'^demote/(?P<id>\w+)/$', never_cache(image_views.ImageDemoteView.as_view()), name='image_demote'),
     url(r'^edit/acquisition/(?P<id>\w+)/$', image_edit_acquisition, name='image_edit_acquisition'),
     url(r'^edit/acquisition/reset/(?P<id>\w+)/$', image_edit_acquisition_reset, name='image_edit_acquisition_reset'),
-    url(r'^edit/basic/(?P<id>\w+)/$', image_views.ImageEditBasicView.as_view(), name='image_edit_basic'),
-    url(r'^edit/gear/(?P<id>\w+)/$', image_views.ImageEditGearView.as_view(), name='image_edit_gear'),
+    url(r'^edit/basic/(?P<id>\w+)/$', never_cache(image_views.ImageEditBasicView.as_view()), name='image_edit_basic'),
+    url(r'^edit/gear/(?P<id>\w+)/$', never_cache(image_views.ImageEditGearView.as_view()), name='image_edit_gear'),
     url(r'^edit/license/(?P<id>\w+)/$', image_edit_license, name='image_edit_license'),
     url(r'^edit/platesolving/(?P<id>\w+)/(?:(?P<revision_label>\w+)/)?$', image_edit_platesolving_settings,
         name='image_edit_platesolving_settings'),
@@ -461,22 +464,24 @@ urlpatterns += [
     url(r'^edit/save/license/$', image_edit_save_license, name='image_edit_save_license'),
     url(r'^edit/save/watermark/$', image_edit_save_watermark, name='image_edit_save_watermark'),
     url(r'^edit/watermark/(?P<id>\w+)/$', image_edit_watermark, name='image_edit_watermark'),
-    url(r'^edit/thumbnails/(?P<id>\w+)/$', image_views.ImageEditThumbnailsView.as_view(), name='image_edit_thumbnails'),
-    url(r'^edit/revision/(?P<id>\w+)/$', image_views.ImageEditRevisionView.as_view(), name='image_edit_revision'),
-    url(r'^promote/(?P<id>\w+)/$', image_views.ImagePromoteView.as_view(), name='image_promote'),
+    url(r'^edit/thumbnails/(?P<id>\w+)/$',
+        never_cache(image_views.ImageEditThumbnailsView.as_view()), name='image_edit_thumbnails'),
+    url(r'^edit/revision/(?P<id>\w+)/$',
+        never_cache(image_views.ImageEditRevisionView.as_view()), name='image_edit_revision'),
+    url(r'^promote/(?P<id>\w+)/$', never_cache(image_views.ImagePromoteView.as_view()), name='image_promote'),
     url(r'^upload/$', image_upload, name='image_upload'),
     url(r'^upload/process/$', image_upload_process, name='image_upload_process'),
     url(r'^upload/revision/process/$', image_revision_upload_process, name='image_revision_upload_process'),
-    url(r'^upload-uncompressed-source/(?P<id>\w+)/$', image_views.ImageUploadUncompressedSource.as_view(),
+    url(r'^upload-uncompressed-source/(?P<id>\w+)/$', never_cache(image_views.ImageUploadUncompressedSource.as_view()),
         name='upload_uncompressed_source'),
 
     ###########################################################################
     ### IMAGE VIEWS                                                         ###
     ###########################################################################
 
-    url(r'^full/(?P<id>\w+)/(?:(?P<r>\w+)/)?$', image_views.ImageFullView.as_view(), name='image_full'),
-    url(r'^(?P<id>\w+)/flagthumbs/$', image_views.ImageFlagThumbsView.as_view(), name='image_flag_thumbs'),
-    url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?$', image_views.ImageDetailView.as_view(), name='image_detail'),
+    url(r'^full/(?P<id>\w+)/(?:(?P<r>\w+)/)?$', never_cache(image_views.ImageFullView.as_view()), name='image_full'),
+    url(r'^(?P<id>\w+)/flagthumbs/$', never_cache(image_views.ImageFlagThumbsView.as_view()), name='image_flag_thumbs'),
+    url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?$', never_cache(image_views.ImageDetailView.as_view()), name='image_detail'),
     url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:get.jpg)?$', image_views.ImageRawThumbView.as_view(),
         name='image_rawthumb'),
     url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?thumb/(?P<alias>\w+)/$', image_views.ImageThumbView.as_view(),
