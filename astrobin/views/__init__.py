@@ -325,6 +325,7 @@ def upload_max_revisions_error(request, max_revisions, image):
 
 # VIEWS
 
+@never_cache
 @page_template('index/stream_page.html', key='stream_page')
 @page_template('index/recent_images_page.html', key='recent_images_page')
 @silk_profile('Index')
@@ -480,6 +481,7 @@ def index(request, template='index/root.html', extra_context=None):
     return render(request, template, response_dict)
 
 
+@never_cache
 @login_required
 def image_upload(request):
     if not settings.TESTING and "forceClassicUploader" not in request.GET:
@@ -511,6 +513,7 @@ def image_upload(request):
     return render(request, "upload.html", response_dict)
 
 
+@never_cache
 @login_required
 @require_POST
 def image_upload_process(request):
@@ -577,6 +580,7 @@ def image_upload_process(request):
     return HttpResponseRedirect(reverse('image_edit_thumbnails', kwargs={'id': image.get_id()}))
 
 
+@never_cache
 @login_required
 @require_GET
 def image_edit_watermark(request, id):
@@ -603,6 +607,7 @@ def image_edit_watermark(request, id):
     })
 
 
+@never_cache
 @login_required
 @require_GET
 def image_edit_acquisition(request, id):
@@ -665,6 +670,7 @@ def image_edit_acquisition(request, id):
     return render(request, 'image/edit/acquisition.html', response_dict)
 
 
+@never_cache
 @login_required
 @require_GET
 def image_edit_acquisition_reset(request, id):
@@ -682,6 +688,7 @@ def image_edit_acquisition_reset(request, id):
     return render(request, 'image/edit/acquisition.html', response_dict)
 
 
+@never_cache
 @login_required
 @require_GET
 def image_edit_make_final(request, id):
@@ -699,6 +706,7 @@ def image_edit_make_final(request, id):
     return HttpResponseRedirect(image.get_absolute_url())
 
 
+@never_cache
 @login_required
 @require_GET
 def image_edit_revision_make_final(request, id):
@@ -734,6 +742,7 @@ def image_edit_license(request, id):
     })
 
 
+@never_cache
 @login_required
 def image_edit_platesolving_settings(request, id, revision_label):
     image = get_image_or_404(Image.objects_including_wip, id)
@@ -793,6 +802,7 @@ def image_edit_platesolving_settings(request, id, revision_label):
         return HttpResponseRedirect(return_url)
 
 
+@never_cache
 @login_required
 def image_edit_platesolving_advanced_settings(request, id, revision_label):
     image = get_image_or_404(Image.objects_including_wip, id)
@@ -880,6 +890,7 @@ def image_restart_platesolving(request, id, revision_label):
     return HttpResponseRedirect(return_url)
 
 
+@never_cache
 @login_required
 def image_restart_advanced_platesolving(request, id, revision_label):
     image = get_image_or_404(Image.objects_including_wip, id)
@@ -906,6 +917,7 @@ def image_restart_advanced_platesolving(request, id, revision_label):
     return HttpResponseRedirect(return_url)
 
 
+@never_cache
 @login_required
 @require_POST
 def image_edit_save_watermark(request):
@@ -948,6 +960,7 @@ def image_edit_save_watermark(request):
     return HttpResponseRedirect(image.get_absolute_url())
 
 
+@never_cache
 @login_required
 @require_POST
 def image_edit_save_acquisition(request):
@@ -1030,6 +1043,7 @@ def image_edit_save_acquisition(request):
     return HttpResponseRedirect(image.get_absolute_url())
 
 
+@never_cache
 @login_required
 @require_POST
 def image_edit_save_license(request):
@@ -1057,12 +1071,14 @@ def image_edit_save_license(request):
     return HttpResponseRedirect(image.get_absolute_url())
 
 
+@never_cache
 @login_required
 @require_GET
 def me(request):
     return HttpResponseRedirect('/users/%s/?%s' % (request.user.username, request.META['QUERY_STRING']))
 
 
+@never_cache
 @require_GET
 @silk_profile('User page')
 def user_page(request, username):
@@ -1394,6 +1410,7 @@ def user_page(request, username):
     return render(request, template_name, response_dict)
 
 
+@never_cache
 @user_passes_test(lambda u: u.is_superuser)
 def user_ban(request, username):
     user = get_object_or_404(UserProfile, user__username=username).user
@@ -1410,6 +1427,7 @@ def user_ban(request, username):
     })
 
 
+@never_cache
 @require_GET
 def user_page_bookmarks(request, username):
     user = get_object_or_404(UserProfile, user__username=username).user
@@ -1431,6 +1449,7 @@ def user_page_bookmarks(request, username):
     return render(request, template_name, response_dict)
 
 
+@never_cache
 @require_GET
 def user_page_liked(request, username):
     user = get_object_or_404(UserProfile, user__username=username).user
@@ -1452,6 +1471,7 @@ def user_page_liked(request, username):
     return render(request, template_name, response_dict)
 
 
+@never_cache
 @require_GET
 @page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key='users_page')
 def user_page_following(request, username, extra_context=None):
@@ -1490,6 +1510,7 @@ def user_page_following(request, username, extra_context=None):
     return render(request, template_name, response_dict)
 
 
+@never_cache
 @require_GET
 @page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key='users_page')
 def user_page_followers(request, username, extra_context=None):
@@ -1567,6 +1588,7 @@ def user_page_friends(request, username, extra_context=None):
     return render(request, template_name, response_dict)
 
 
+@never_cache
 @require_GET
 def user_page_plots(request, username):
     """Shows the user's public page"""
@@ -1583,6 +1605,7 @@ def user_page_plots(request, username):
     return render(request, 'user/plots.html', response_dict)
 
 
+@never_cache
 @require_GET
 def user_page_api_keys(request, username):
     """Shows the user's API Keys"""
@@ -1604,6 +1627,7 @@ def user_page_api_keys(request, username):
     return render(request, 'user/api_keys.html', response_dict)
 
 
+@never_cache
 @require_GET
 def user_profile_stats_get_integration_hours_ajax(request, username, period='monthly', since=0):
     user = get_object_or_404(UserProfile, user__username=username).user
@@ -1619,6 +1643,7 @@ def user_profile_stats_get_integration_hours_ajax(request, username, period='mon
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def user_profile_stats_get_integration_hours_by_gear_ajax(request, username, period='monthly'):
     user = get_object_or_404(UserProfile, user__username=username).user
@@ -1633,6 +1658,7 @@ def user_profile_stats_get_integration_hours_by_gear_ajax(request, username, per
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def user_profile_stats_get_uploaded_images_ajax(request, username, period='monthly'):
     user = get_object_or_404(UserProfile, user__username=username).user
@@ -1663,6 +1689,7 @@ def user_profile_stats_get_views_ajax(request, username, period='monthly'):
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def stats_get_image_views_ajax(request, id, period='monthly'):
     import astrobin.stats as _s
@@ -1678,6 +1705,7 @@ def stats_get_image_views_ajax(request, id, period='monthly'):
     return ajax_response(response_dict)
 
 
+@never_cache
 @login_required
 @require_GET
 def user_profile_edit_basic(request):
@@ -1691,6 +1719,7 @@ def user_profile_edit_basic(request):
     return render(request, "user/profile/edit/basic.html", response_dict)
 
 
+@never_cache
 @login_required
 @require_POST
 def user_profile_save_basic(request):
@@ -1709,6 +1738,7 @@ def user_profile_save_basic(request):
     return HttpResponseRedirect("/profile/edit/basic/")
 
 
+@never_cache
 @login_required
 @require_GET
 def user_profile_edit_license(request):
@@ -1719,6 +1749,7 @@ def user_profile_edit_license(request):
     })
 
 
+@never_cache
 @login_required
 @require_POST
 def user_profile_save_license(request):
@@ -1736,6 +1767,7 @@ def user_profile_save_license(request):
     return HttpResponseRedirect('/profile/edit/license/')
 
 
+@never_cache
 @login_required
 @require_GET
 def user_profile_edit_gear(request):
@@ -1773,6 +1805,7 @@ def user_profile_edit_gear(request):
     return render(request, "user/profile/edit/gear.html", response_dict)
 
 
+@never_cache
 @login_required
 @require_POST
 def user_profile_edit_gear_remove(request, id):
@@ -1786,6 +1819,7 @@ def user_profile_edit_gear_remove(request, id):
     return ajax_success()
 
 
+@never_cache
 @login_required
 @require_GET
 def user_profile_edit_locations(request):
@@ -1799,6 +1833,7 @@ def user_profile_edit_locations(request):
     })
 
 
+@never_cache
 @login_required
 @require_POST
 def user_profile_save_locations(request):
@@ -1819,6 +1854,7 @@ def user_profile_save_locations(request):
     return HttpResponseRedirect('/profile/edit/locations/')
 
 
+@never_cache
 @login_required
 @require_POST
 def user_profile_save_gear(request):
@@ -1872,6 +1908,7 @@ def user_profile_save_gear(request):
     return HttpResponseRedirect("/profile/edit/gear/" + initial)
 
 
+@never_cache
 @login_required
 def user_profile_flickr_import(request):
     from django.core.files import File
@@ -1986,6 +2023,7 @@ def user_profile_flickr_import(request):
     return render(request, "user/profile/flickr_import.html", response_dict)
 
 
+@never_cache
 def flickr_auth_callback(request):
     log.debug("Flickr import (user %d): received auth callback" % request.user.pk)
     flickr = flickrapi.FlickrAPI(
@@ -2007,6 +2045,7 @@ def flickr_auth_callback(request):
     return HttpResponseRedirect("/profile/edit/flickr/")
 
 
+@never_cache
 @login_required
 @require_POST
 def user_profile_seen_realname(request):
@@ -2017,6 +2056,7 @@ def user_profile_seen_realname(request):
     return HttpResponseRedirect(request.POST.get('next', '/'))
 
 
+@never_cache
 @login_required
 @require_POST
 def user_profile_shadow_ban(request):
@@ -2041,6 +2081,7 @@ def user_profile_shadow_ban(request):
     return HttpResponseRedirect(request.POST.get('next', '/'))
 
 
+@never_cache
 @login_required
 @require_POST
 def user_profile_remove_shadow_ban(request):
@@ -2065,6 +2106,7 @@ def user_profile_remove_shadow_ban(request):
     return HttpResponseRedirect(request.POST.get('next', '/'))
 
 
+@never_cache
 @login_required
 @require_GET
 def user_profile_edit_preferences(request):
@@ -2112,6 +2154,7 @@ def user_profile_save_preferences(request):
     return response
 
 
+@never_cache
 @login_required
 def user_profile_delete(request):
     if request.method == 'POST':
@@ -2139,6 +2182,7 @@ def user_profile_delete(request):
     return render(request, 'user/profile/delete.html', {'form': form})
 
 
+@never_cache
 @login_required
 @require_POST
 def image_revision_upload_process(request):
@@ -2199,6 +2243,7 @@ def image_revision_upload_process(request):
     return HttpResponseRedirect(reverse('image_edit_revision', args=(image_revision.pk,)))
 
 
+@never_cache
 @require_GET
 @user_passes_test(lambda u: u.is_superuser)
 def stats(request):
@@ -2233,6 +2278,7 @@ def stats(request):
     )
 
 
+@never_cache
 @require_GET
 def astrophotographers_list(request):
     if request.user.is_authenticated() and \
@@ -2298,6 +2344,7 @@ def astrophotographers_list(request):
     )
 
 
+@never_cache
 @require_GET
 def contributors_list(request):
     if request.user.is_authenticated() and \
@@ -2363,6 +2410,7 @@ def api_help(request):
     return HttpResponseRedirect('https://welcome.astrobin.com/application-programming-interface')
 
 
+@never_cache
 @login_required
 @require_GET
 def location_edit(request, id):
@@ -2375,8 +2423,8 @@ def location_edit(request, id):
     })
 
 
-@require_GET
 @never_cache
+@require_GET
 def set_language(request, language_code):
     from django.utils.translation import check_for_language, activate
 
@@ -2411,9 +2459,9 @@ def set_language(request, language_code):
     return response
 
 
+@never_cache
 @require_GET
 @login_required
-@never_cache
 def get_edit_gear_form(request, id):
     gear, gear_type = get_correct_gear(id)
     if not gear:
@@ -2445,6 +2493,7 @@ def get_edit_gear_form(request, id):
         content_type='application/javascript')
 
 
+@never_cache
 @require_GET
 @login_required
 def get_empty_edit_gear_form(request, gear_type):
@@ -2469,6 +2518,7 @@ def get_empty_edit_gear_form(request, gear_type):
         content_type='application/javascript')
 
 
+@never_cache
 @require_POST
 @login_required
 def save_gear_details(request):
@@ -2566,18 +2616,18 @@ def save_gear_details(request):
         content_type='application/javascript')
 
 
+@never_cache
 @require_GET
 @login_required
-@never_cache
 def get_is_gear_complete(request, id):
     return HttpResponse(
         simplejson.dumps({'complete': is_gear_complete(id)}),
         content_type='application/javascript')
 
 
+@never_cache
 @require_GET
 @login_required
-@never_cache
 def get_gear_user_info_form(request, id):
     gear = get_object_or_404(Gear, id=id)
     gear_user_info, created = GearUserInfo.objects.get_or_create(
@@ -2597,6 +2647,7 @@ def get_gear_user_info_form(request, id):
         content_type='application/javascript')
 
 
+@never_cache
 @require_POST
 @login_required
 def save_gear_user_info(request):
@@ -2620,8 +2671,8 @@ def save_gear_user_info(request):
     return ajax_success()
 
 
-@require_GET
 @never_cache
+@require_GET
 def gear_popover_ajax(request, id, image_id):
     gear, gear_type = get_correct_gear(id)
     image = get_object_or_404(Image.objects_including_wip, id=image_id)
@@ -2647,8 +2698,8 @@ def gear_popover_ajax(request, id, image_id):
         content_type='application/javascript')
 
 
-@require_GET
 @never_cache
+@require_GET
 def user_popover_ajax(request, username):
     profile = get_object_or_404(UserProfile, user__username=username)
     template = 'popover/user.html'
@@ -2682,6 +2733,7 @@ def user_popover_ajax(request, username):
         content_type='application/javascript')
 
 
+@never_cache
 @require_GET
 def stats_subject_images_monthly_ajax(request, id):
     import astrobin.stats as _s
@@ -2697,6 +2749,7 @@ def stats_subject_images_monthly_ajax(request, id):
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def stats_subject_integration_monthly_ajax(request, id):
     import astrobin.stats as _s
@@ -2712,6 +2765,7 @@ def stats_subject_integration_monthly_ajax(request, id):
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def stats_subject_total_images_ajax(request, id):
     import astrobin.stats as _s
@@ -2727,6 +2781,7 @@ def stats_subject_total_images_ajax(request, id):
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def stats_subject_camera_types_ajax(request, id):
     import astrobin.stats as _s
@@ -2742,6 +2797,7 @@ def stats_subject_camera_types_ajax(request, id):
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def stats_subject_telescope_types_ajax(request, id):
     import astrobin.stats as _s
@@ -2757,6 +2813,7 @@ def stats_subject_telescope_types_ajax(request, id):
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def stats_camera_types_trend_ajax(request):
     import astrobin.stats as _s
@@ -2771,6 +2828,7 @@ def stats_camera_types_trend_ajax(request):
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def stats_telescope_types_trend_ajax(request):
     import astrobin.stats as _s
@@ -2799,6 +2857,7 @@ def stats_subject_type_trend_ajax(request):
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def gear_by_image(request, image_id):
     image = get_object_or_404(Image.objects_including_wip, pk=image_id)
@@ -2820,6 +2879,7 @@ def gear_by_image(request, image_id):
         content_type='application/javascript')
 
 
+@never_cache
 @require_GET
 def gear_by_make(request, make):
     klass = request.GET.get('klass', Gear)
@@ -2849,6 +2909,7 @@ def gear_by_make(request, make):
         content_type='application/javascript')
 
 
+@never_cache
 @require_GET
 def gear_by_ids(request, ids):
     filters = reduce(operator.or_, [Q(**{'id': x}) for x in ids.split(',')])
@@ -2858,6 +2919,7 @@ def gear_by_ids(request, ids):
         content_type='application/javascript')
 
 
+@never_cache
 @require_GET
 def get_makes_by_type(request, klass):
     ret = {
@@ -2892,6 +2954,7 @@ def gear_fix(request, id):
     # })
 
 
+@never_cache
 @require_POST
 @login_required
 def gear_fix_save(request):
@@ -2916,6 +2979,7 @@ def gear_fix_save(request):
     # return HttpResponseRedirect('/gear/fix/%d/' % next_gear.id)
 
 
+@never_cache
 @require_GET
 @login_required
 def gear_fix_thanks(request):

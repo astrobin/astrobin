@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.views.decorators.cache import never_cache
 
 from astrobin_apps_iotd.feeds.iotd import IotdFeed, IotdAtomFeed
 from astrobin_apps_iotd.feeds.top_picks import TopPickFeed, TopPickAtomFeed
@@ -10,29 +11,29 @@ urlpatterns = (
     # Submissions
     url(
         r'^submission-queue/$',
-        IotdSubmissionQueueView.as_view(),
+        never_cache(IotdSubmissionQueueView.as_view()),
         name='iotd_submission_queue'),
 
     # Votes
     url(
         r'^review-queue/$',
-        IotdReviewQueueView.as_view(),
+        never_cache(IotdReviewQueueView.as_view()),
         name='iotd_review_queue'),
 
     # Judgements
     url(
         r'^toggle-iotd-judgement-ajax/(?P<pk>\d+)/$',
-        IotdToggleJudgementAjaxView.as_view(),
+        never_cache(IotdToggleJudgementAjaxView.as_view()),
         name='iotd_toggle_judgement_ajax'),
     url(
         r'^judgement-queue/$',
-        IotdJudgementQueueView.as_view(),
+        never_cache(IotdJudgementQueueView.as_view()),
         name='iotd_judgement_queue'),
 
     # Archive
     url(
         r'^archive/$',
-        IotdArchiveView.as_view(),
+        never_cache(IotdArchiveView.as_view()),
         name='iotd_archive'),
 
     # Feeds
