@@ -18,8 +18,7 @@ astrobin_common = {
         },
 
         requests: [],
-        smart_ajax: $.ajax,
-        current_username: ''
+        smart_ajax: $.ajax
     },
 
     utils: {
@@ -787,9 +786,8 @@ astrobin_common = {
         return url;
     },
 
-    init: function (current_username, config) {
+    init: function (config) {
         /* Init */
-        astrobin_common.globals.current_username = current_username;
         $.extend(true, astrobin_common.config, config);
 
         $('.dropdown-toggle').dropdown();
@@ -806,7 +804,17 @@ astrobin_common = {
             changeYear: true
         });
 
-        $('abbr.timeago').timeago();
+        $('abbr.timeago').each(function(index, element) {
+            var $el = $(element);
+            var date = $el.attr('title');
+
+            if (!astrobin_common.config.timezone) {
+                // Fallback to browser timezone.
+                $el.attr('title', new Date(new Date(date + 'Z')).toISOString());
+            }
+
+            $el.timeago();
+        });
 
         if (window.innerWidth >= 980) {
             $("select:not([multiple])").select2({theme: "flat"});

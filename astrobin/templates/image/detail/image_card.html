@@ -168,8 +168,11 @@
                         {% else %}
                             {% if request.user|can_view_full_technical_card %}
                                 {% if ssa.date %}
-                                    <p><strong class="card-label">{% trans "Date" %}:</strong> <a
-                                            href="/search/{% query_string "q=, start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}">{{ ssa.date|date:"DATE_FORMAT" }}</a>
+                                    <p>
+                                        <strong class="card-label">{% trans "Date" %}:</strong>
+                                        <a href="/search/{% query_string "q=, start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}">
+                                            {{ ssa.date|date:"DATE_FORMAT" }}
+                                        </a>
                                     </p>
                                 {% endif %}
                                 {% if ssa.time %}

@@ -74,7 +74,14 @@
 
 
     $(document).ready(function() {
-        astrobin_common.init();
+        astrobin_common.init({
+            timezone:
+                {% if request.user.is_authenticated and request.user.userprofile.timezone %}
+                    '{{ request.user.userprofile.timezone }}'
+                {% else %}
+                    null
+                {% endif %}
+        });
 
         {% if request.user.is_authenticated %}
             astrobin_common.register_notification_on_click({

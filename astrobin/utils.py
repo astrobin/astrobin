@@ -74,18 +74,16 @@ def to_user_timezone(date, profile):
     if date is None:
         return None
 
-    timezone = profile.timezone if profile.timezone else settings.TIME_ZONE
-    return date.replace(tzinfo=pytz.timezone(settings.TIME_ZONE)) \
-        .astimezone(pytz.timezone(timezone))
+    tz = profile.timezone if profile.timezone else settings.TIME_ZONE
+    return date.replace(tzinfo=pytz.timezone(settings.TIME_ZONE)).astimezone(pytz.timezone(tz))
 
 
 def to_system_timezone(date, profile):
     if date is None:
         return None
 
-    timezone = profile.timezone if profile.timezone else settings.TIME_ZONE
-    return date.replace(tzinfo=pytz.timezone(timezone)) \
-        .astimezone(pytz.timezone(settings.TIME_ZONE))
+    tz = profile.timezone if profile.timezone else settings.TIME_ZONE
+    return date.replace(tzinfo=pytz.timezone(tz)).astimezone(pytz.timezone(settings.TIME_ZONE))
 
 
 def now_timezone():
