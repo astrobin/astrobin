@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load tags %}
 
 <table class="table migrate-donations">
     <caption>{% trans "Your donations last year" %}</caption>
@@ -13,7 +14,7 @@
         {% for t in migration_data.transactions %}
         <tr>
             <td>$ {{t.amount}} USD</td>
-            <td>{{t.timestamp|date:"SHORT_DATE_FORMAT"}}</td>
+            <td>{{t.timestamp|to_user_timezone:request.user|date:"SHORT_DATE_FORMAT"}}</td>
             <td>{{t.subscription.name}}</td>
         </tr>
         {% endfor %}

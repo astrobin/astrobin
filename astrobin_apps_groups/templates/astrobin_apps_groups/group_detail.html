@@ -187,7 +187,7 @@
     <div class="subtitle">
         <i class="icon icon-info-sign"></i>
         {% url 'user_page' object.owner.username as owner_url %}
-        {% blocktrans with date_created=object.date_created|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile category=object.category_humanized %}A group created on {{date_created}}, owned by <a href="{{owner_url}}">{{owner}}</a>, categorized as <strong>{{category}}</strong>.{% endblocktrans %}
+        {% blocktrans with date_created=object.date_created|to_user_timezone:request.user|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile category=object.category_humanized %}A group created on {{date_created}}, owned by <a href="{{owner_url}}">{{owner}}</a>, categorized as <strong>{{category}}</strong>.{% endblocktrans %}
     </div>
 
     <div class="group-description">

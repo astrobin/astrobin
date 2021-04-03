@@ -498,14 +498,6 @@ class ImageDetailView(ImageDetailViewBase):
         # BASIC DATA #
         ##############
 
-        published_on = \
-            to_user_timezone(image.uploaded, profile) \
-                if profile else image.uploaded
-        if image.published:
-            published_on = \
-                to_user_timezone(image.published, profile) \
-                    if profile else image.published
-
         alias = 'regular' if not image.sharpen_thumbnails else 'regular_sharpened'
         mod = self.request.GET.get('mod')
         if mod == 'inverted':
@@ -704,7 +696,6 @@ class ImageDetailView(ImageDetailViewBase):
             'upload_revision_form': ImageRevisionUploadForm(),
             'upload_uncompressed_source_form': UncompressedSourceUploadForm(instance=image),
             'dates_label': _("Dates"),
-            'published_on': published_on,
             'show_contains': (image.subject_type == SubjectType.DEEP_SKY and subjects) or
                              (image.subject_type != SubjectType.DEEP_SKY),
             'subjects': subjects,

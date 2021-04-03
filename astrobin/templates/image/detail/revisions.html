@@ -29,7 +29,7 @@
                                     </li>
                                     <li class="nav-header">
                                         {% trans "Uploaded" %}:
-                                        <abbr class="data published timeago" title="{{ image.published|date:'Y-m-d\TH:i:s' }}"></abbr>
+                                        <abbr class="data published timeago" title="{{ image.published|to_user_timezone:request.user|date:'Y-m-d\TH:i:s' }}"></abbr>
                                     </li>
                                     <li class="divider"></li>
 
@@ -96,7 +96,7 @@
                                     <li class="nav-header">
                                         {% trans "Uploaded" %}
                                         <abbr class="data published timeago"
-                                              title="{{ r.uploaded|date:'Y-m-d\TH:i:s' }}"></abbr>
+                                              title="{{ r.uploaded|to_user_timezone:request.user|date:'Y-m-d\TH:i:s' }}"></abbr>
                                     </li>
                                     <li class="divider"></li>
 
@@ -165,7 +165,7 @@
                     </p>
                     <p>
                         <strong>{% trans "Uploaded" %}:</strong>&nbsp;
-                        <abbr class="data published timeago" title="{{ r.uploaded|date:'Y-m-d\TH:i:s' }}"></abbr>
+                        <abbr class="data published timeago" title="{{ r.uploaded|to_user_timezone:request.user|date:'Y-m-d\TH:i:s' }}"></abbr>
                     </p>
                 </div>
             {% endfor %}

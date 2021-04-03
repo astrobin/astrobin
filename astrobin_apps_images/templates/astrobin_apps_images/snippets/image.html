@@ -4,6 +4,7 @@
 {% load common_tags %}
 {% load i18n %}
 {% load staticfiles %}
+{% load tags %}
 
 {% if status != 'error' %}
     <div class="astrobin-image-container
@@ -114,9 +115,9 @@
                                 <tr>
                                     <th><i class="icon-calendar"></i></th>
                                     {% if image.published %}
-                                        <td colspan="3">{{image.published|date:"SHORT_DATE_FORMAT"}}</td>
+                                        <td colspan="3">{{image.published|to_user_timezone:request.user|date:"SHORT_DATE_FORMAT"}}</td>
                                     {% else %}
-                                        <td colspan="3">{{image.uploaded|date:"SHORT_DATE_FORMAT"}}</td>
+                                        <td colspan="3">{{image.uploaded|to_user_timezone:request.user|date:"SHORT_DATE_FORMAT"}}</td>
                                     {% endif %}
                                 </tr>
 

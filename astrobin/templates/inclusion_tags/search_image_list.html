@@ -92,8 +92,8 @@
                                     {% trans "Date joined" %}:
                                     <strong>
                                         <abbr class="timeago"
-                                              title="{{ result.object.date_joined|date:'Y-m-d\TH:i:s' }}">
-                                            {{ result.object.date_joined|date }}
+                                              title="{{ result.object.date_joined|to_user_timezone:request.user|date:'Y-m-d\TH:i:s' }}">
+                                            {{ result.object.date_joined|to_user_timezone:request.user|date }}
                                         </abbr>
                                     </strong><br />
                                     {% trans "Images" %}: <strong>{{ result.images }}</strong><br />
@@ -121,7 +121,7 @@
                                     {% astrobin_username text.object.author %}
                                 </span>
                                 <span class="search-results__text__date">
-                                    <abbr class="timeago" title="{{ text.object.updated|date:'Y-m-d\TH:i:s' }}">
+                                    <abbr class="timeago" title="{{ text.object.updated|to_user_timezone:request.user|date:'Y-m-d\TH:i:s' }}">
                                         {{ text.object.updated|date }}
                                     </abbr>
                                 </span>
@@ -148,11 +148,11 @@
                     </span>
                             <span class="search-results__text__date">
                         {% if text.object.updated %}
-                            <abbr class="timeago" title="{{ text.object.updated|date:'Y-m-d\TH:i:s' }}">
+                            <abbr class="timeago" title="{{ text.object.updated|to_user_timezone:request.user|date:'Y-m-d\TH:i:s' }}">
                                 {{ text.object.updated|date }}
                             </abbr>
                         {% elif text.object.created %}
-                            <abbr class="timeago" title="{{ text.object.created|date:'Y-m-d\TH:i:s' }}">
+                            <abbr class="timeago" title="{{ text.object.created|to_user_timezone:request.user|date:'Y-m-d\TH:i:s' }}">
                                 {{ text.object.created|date }}
                             </abbr>
                         {% endif %}
@@ -177,11 +177,11 @@
                     </span>
                             <span class="search-results__text__date">
                         {% if text.object.updated %}
-                            <abbr class="timeago" title="{{ text.object.updated|date:'Y-m-d\TH:i:s' }}">
+                            <abbr class="timeago" title="{{ text.object.updated|to_user_timezone:request.user|date:'Y-m-d\TH:i:s' }}">
                                 {{ text.object.updated|date }}
                             </abbr>
                         {% elif text.object.created %}
-                            <abbr class="timeago" title="{{ text.object.created|date:'Y-m-d\TH:i:s' }}">
+                            <abbr class="timeago" title="{{ text.object.created|to_user_timezone:request.user|date:'Y-m-d\TH:i:s' }}">
                                 {{ text.object.created|date }}
                             </abbr>
                         {% endif %}
