@@ -289,6 +289,8 @@ def astrobin_image(context, image, alias, **kwargs):
         'recovered': image_revision.recovered is not None,
         'is_revision': hasattr(image_revision, 'label'),
         'revision_id': image_revision.pk,
+        'w': w,
+        'h': h,
     }.items())
 
 
