@@ -310,9 +310,13 @@
     }
   }
 
-  .main-image .main-image-inner img {
-    -webkit-border-radius: 0;
-    border-radius: 0;
+  .main-image {
+    text-align: center;
+
+    .main-image-inner img {
+      -webkit-border-radius: 0;
+      border-radius: 0;
+    }
   }
 
   div.image-title {
