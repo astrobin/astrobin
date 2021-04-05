@@ -1994,7 +1994,7 @@ form.avatar-change label.control-label {
   margin: 8px 0;
 
   .iotd-ribbon {
-    width: 109%;
+    width: calc(100% + 46px);
     position: absolute;
     left: -46px;
     text-align: center;
@@ -2026,6 +2026,11 @@ form.avatar-change label.control-label {
         font-weight: normal;
         font-style: italic;
         font-size: 70%;
+      }
+
+      .info {
+        float: right;
+        color: $strong-text-color;
       }
     }
 
@@ -2093,6 +2098,11 @@ form.avatar-change label.control-label {
       font-size: 24px;
       margin: 0;
       padding: 15px;
+
+      .info {
+        margin-left: 1rem;
+        color: $strong-text-color;
+      }
     }
 
     .title {
