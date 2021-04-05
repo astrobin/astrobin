@@ -4,14 +4,14 @@
     {% pybb_get_profile user=post.user as profile %}
     {% with link_end='</a>'|safe %}
         <p>
-            {% blocktrans with username=profile.get_display_name %}User {{ username }} replied in topic to which you are subscribed.{% endblocktrans%}
+            {% blocktrans trimmed with username=profile.get_display_name %}User {{ username }} replied in topic to which you are subscribed.{% endblocktrans%}
         </p>
         <p>
-             {% blocktrans with topic_name=post.topic.name link_post_start='<a href="'|add:post_url|add:'">'|safe link_topic_start='<a href="'|add:topic_url|add:'">'|safe %}Follow {{ link_post_start }}this link{{ link_end }} to see the new post on the topic {{ link_topic_start }}{{ topic_name }}{{ link_end }}.{% endblocktrans%}
+             {% blocktrans trimmed with topic_name=post.topic.name link_post_start='<a href="'|add:post_url|add:'">'|safe link_topic_start='<a href="'|add:topic_url|add:'">'|safe %}Follow {{ link_post_start }}this link{{ link_end }} to see the new post on the topic {{ link_topic_start }}{{ topic_name }}{{ link_end }}.{% endblocktrans%}
         </p>
 
         <p>
-        {% blocktrans with link_start='<a href="'|add:delete_url_full|add:'">'|safe %}If you don't want to receive notifications on new posts in this topic visit {{ link_start}}this link{{ link_end }}.{% endblocktrans%}
+        {% blocktrans trimmed with link_start='<a href="'|add:delete_url_full|add:'">'|safe %}If you don't want to receive notifications on new posts in this topic visit {{ link_start}}this link{{ link_end }}.{% endblocktrans%}
         </p>
     {% endwith %}
 {% endblock %}

@@ -187,7 +187,7 @@
     <div class="subtitle">
         <i class="icon icon-info-sign"></i>
         {% url 'user_page' object.owner.username as owner_url %}
-        {% blocktrans with date_created=object.date_created|to_user_timezone:request.user|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile category=object.category_humanized %}A group created on {{date_created}}, owned by <a href="{{owner_url}}">{{owner}}</a>, categorized as <strong>{{category}}</strong>.{% endblocktrans %}
+        {% blocktrans trimmed with date_created=object.date_created|to_user_timezone:request.user|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile category=object.category_humanized %}A group created on {{date_created}}, owned by <a href="{{owner_url}}">{{owner}}</a>, categorized as <strong>{{category}}</strong>.{% endblocktrans %}
     </div>
 
     <div class="group-description">
@@ -198,7 +198,7 @@
         <h2>
             {% trans "Group forum" %}
             <small>
-                {% blocktrans with post_count=object.forum.post_count topic_count=object.forum.topic_count %}<strong>{{post_count}}</strong> posts in <strong>{{topic_count}}</strong> topics{% endblocktrans %}
+                {% blocktrans trimmed with post_count=object.forum.post_count topic_count=object.forum.topic_count %}<strong>{{post_count}}</strong> posts in <strong>{{topic_count}}</strong> topics{% endblocktrans %}
             </small>
         </h2>
         {% if request.user in object.members.all %}

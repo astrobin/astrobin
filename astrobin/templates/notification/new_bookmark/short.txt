@@ -1,5 +1,4 @@
 {% load i18n %}
 
-{% blocktrans %}
-    {{user}} added your image "{{title}}" to their bookmarks!
+{% blocktrans trimmed %}{{user}} added your image "{{title}}" to their bookmarks!
 {% endblocktrans %}
