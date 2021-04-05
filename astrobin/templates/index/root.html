@@ -34,6 +34,11 @@
                 <h2>
                     <i class="icon-trophy"></i>
                     {% trans "Image of the day" %}
+
+                    <a class="info" href="https://welcome.astrobin.com/iotd" target="_blank">
+                        <i class="icon-info-sign"></i>
+                    </a>
+
                     <span class="title">
                         {{iotd.image.title|truncatechars:50}}
                         <a href="{% url 'user_page' iotd.image.user %}">
