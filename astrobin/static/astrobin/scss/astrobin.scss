@@ -1994,7 +1994,7 @@ form.avatar-change label.control-label {
   margin: 8px 0;
 
   .iotd-ribbon {
-    width: calc(100% + 46px);
+    width: calc(100% - -46px);
     position: absolute;
     left: -46px;
     text-align: center;
