@@ -405,10 +405,15 @@
 
   .iotd-queue-item, .top-picks-item {
     margin-right: 0 !important;
-  }
 
-  .iotd-queue-item img, .top-picks-item img {
-    width: 100% !important;
+    .image-title {
+      text-align: left;
+      padding: 0;
+    }
+
+    img {
+      width: 100% !important;
+    }
   }
 
   .avatar-block {
