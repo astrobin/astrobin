@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 19:06+0000\n"
+"POT-Creation-Date: 2021-04-05 20:22+0000\n"
 "PO-Revision-Date: 2021-01-03 20:57+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,6 +27,12 @@ msgstr "Peruuta"
 
 msgid "Add a comment"
 msgstr "Lisää kommentti"
+
+#, python-format
+msgid ""
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
+"\">sign up</a> to leave a comment."
+msgstr ""
 
 msgid "There are no comments yet."
 msgstr "Kommentteja ei ole vielä."

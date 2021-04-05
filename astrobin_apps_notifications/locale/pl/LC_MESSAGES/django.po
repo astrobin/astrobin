@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 22:00+0000\n"
+"POT-Creation-Date: 2021-04-05 20:24+0000\n"
 "PO-Revision-Date: 2020-10-26 10:37+0000\n"
 "Last-Translator: Łukasz Sujka <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
 "X-POOTLE-MTIME: 1603708641.000000\n"
 
@@ -55,11 +56,20 @@ msgstr "Twoje zdjęcie otrzymało nowy komentarz"
 msgid "There was a reply to your comment"
 msgstr "Ktoś odpowiedział na Twój komentarz"
 
+msgid "Your comment was approved"
+msgstr ""
+
 msgid "Your image was bookmarked"
 msgstr "Twoje zdjęcie zostało dodane do zakładek"
 
 msgid "Your image was liked"
 msgstr "Twoje zdjęcie zostało polubione"
+
+msgid "Your comment was liked"
+msgstr ""
+
+msgid "Your forum post was liked"
+msgstr ""
 
 msgid "Your API Key request has been approved"
 msgstr "Twój wniosek o klucz API został zatwierdzony"
@@ -97,11 +107,23 @@ msgstr "Twoja subskrypcja \"premium\" wygasła"
 msgid "Your subscription will be renewed in one week"
 msgstr "Twoja subskrypcja będzie odnowiona w ciągu tygodnia"
 
+msgid "Your subscription will be renewed in one 30 days"
+msgstr ""
+
 msgid "You have images with a missing \"Data source\""
 msgstr "Masz zdjęcia bez informacji o \"Źródle danych\""
 
 msgid "You have images with a missing \"Remote source\""
 msgstr "Masz zdjęcia bez informacji o \"Zewnętrznym źródle danych\""
+
+msgid "Would you like to activate your account?"
+msgstr ""
+
+msgid "You were mentioned in a forum post"
+msgstr ""
+
+msgid "You were mentioned in a comment"
+msgstr ""
 
 msgid "Welcome to AstroBin!"
 msgstr ""

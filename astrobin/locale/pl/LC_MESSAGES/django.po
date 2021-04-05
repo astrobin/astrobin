@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 19:06+0000\n"
+"POT-Creation-Date: 2021-04-05 20:21+0000\n"
 "PO-Revision-Date: 2020-10-26 10:36+0000\n"
 "Last-Translator: Łukasz Sujka <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.8\n"
 "X-POOTLE-MTIME: 1603708561.000000\n"
 
@@ -780,8 +781,7 @@ msgid "Link"
 msgstr "Link"
 
 msgid ""
-"If you're hosting a copy of this image on your website, put the address "
-"here."
+"If you're hosting a copy of this image on your website, put the address here."
 msgstr "Jeśli hostujesz to zdjęcie na swojej stronie, wpisz tutaj jej adres."
 
 msgid "Link to TIFF/FITS"
@@ -818,9 +818,9 @@ msgid "Key/value tags"
 msgstr "Kluczowe wartości/tagi"
 
 msgid ""
-"Provide a list of unique key/value pairs to tag this image with. Use the '='"
-" symbol between key and value, and provide one pair per line. These tags can"
-" be used to sort images by arbitrary properties."
+"Provide a list of unique key/value pairs to tag this image with. Use the '=' "
+"symbol between key and value, and provide one pair per line. These tags can "
+"be used to sort images by arbitrary properties."
 msgstr ""
 "Dostarcz listę unikalnych par klucz-wartość do otagowania zdjęcia. Użyj "
 "symbolu \"=\" pomiędzy kluczem a wartością. Wpisuj jedną parę w linii. "
@@ -863,9 +863,9 @@ msgid "Accessories"
 msgstr "Akcesoria"
 
 msgid ""
-"Choose what will be displayed when somebody hovers the mouse over this image"
-" revision. Pleasenote: only revisions with the same width and height as this"
-" one can be considered."
+"Choose what will be displayed when somebody hovers the mouse over this image "
+"revision. Pleasenote: only revisions with the same width and height as this "
+"one can be considered."
 msgstr ""
 
 msgid "Original image"
@@ -916,11 +916,11 @@ msgstr ""
 "Wprowadź nazwy twoich urządzeń rejestrujących (DSLR, CCD, Kamery planetarne)"
 
 msgid ""
-"Hint: enter your filters separately! If you enter, for instance, LRGB in one"
-" box, you won't be able to add separate acquisition sessions for them."
+"Hint: enter your filters separately! If you enter, for instance, LRGB in one "
+"box, you won't be able to add separate acquisition sessions for them."
 msgstr ""
-"Wskazówka: wpisz nazwy filtrów osobno! Jeżeli wpiszesz nazwy razem, np LRGB,"
-" nie będziesz miał możliwości określenia czasu naświetlania dla każdego "
+"Wskazówka: wpisz nazwy filtrów osobno! Jeżeli wpiszesz nazwy razem, np LRGB, "
+"nie będziesz miał możliwości określenia czasu naświetlania dla każdego "
 "filtra osobno."
 
 msgid "Telescopes and lenses"
@@ -1117,6 +1117,12 @@ msgstr "Planetoida"
 
 msgid "Comet"
 msgstr "Kometa"
+
+msgid "Occultation"
+msgstr ""
+
+msgid "Conjunction"
+msgstr ""
 
 msgid "Partial lunar eclipse"
 msgstr ""
@@ -1519,8 +1525,8 @@ msgid "Uncompressed source (max 100 MB)"
 msgstr "Nieskompresowane źródło (max 100 MB)"
 
 msgid ""
-"You can store the final processed image that came out of your favorite image"
-" editor (e.g. PixInsight, Adobe Photoshop, etc) here on AstroBin, for "
+"You can store the final processed image that came out of your favorite image "
+"editor (e.g. PixInsight, Adobe Photoshop, etc) here on AstroBin, for "
 "archival purposes. This file is stored privately and only you will have "
 "access to it."
 msgstr ""
@@ -1680,8 +1686,8 @@ msgid "Bortle Dark-Sky Scale"
 msgstr "Skala jasności nieba Bortle'a"
 
 msgid ""
-"Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki"
-"/Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
+"Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/"
+"Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
 msgstr ""
 "Jakość nieba według <a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-"
 "Sky_Scale\" target=\"_blank\">skali Bortle'a</a>."
@@ -1770,6 +1776,12 @@ msgstr "TIFF/FITS"
 msgid "Higher resolution"
 msgstr "Wyższa rozdzielczość"
 
+msgid "I am no longer active in astrophotography"
+msgstr ""
+
+msgid "This website did not meet my expectations"
+msgstr ""
+
 msgid "Something on this website doesn't work for me"
 msgstr ""
 
@@ -1793,6 +1805,9 @@ msgstr "Hobby"
 
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "Posiadasz jakieś inne hobby poza astrofotografią?"
+
+msgid "Instagram username"
+msgstr ""
 
 msgid ""
 "If you provide this, AstroBin will tag you on Instagram if it's sharing an "
@@ -1819,6 +1834,9 @@ msgstr "O sobie"
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "Napisz coś o sobie. Tagi HTML są dozwolone."
 
+msgid "Delete reason"
+msgstr ""
+
 msgid "Why are you deleting your AstroBin account?"
 msgstr ""
 
@@ -1829,6 +1847,15 @@ msgstr ""
 
 msgid "I want to be excluded from competitions"
 msgstr "Chcę być wyłączony z zawodów"
+
+msgid ""
+"Check this box to be excluded from competitions and contests, such as the "
+"Image of the Day, the Top Picks, other custom contests. This will remove you "
+"from the leaderboards and hide your Image Index and Contribution Index."
+msgstr ""
+
+msgid "Open notifications in a new tab"
+msgstr ""
 
 msgid "Global stream"
 msgstr "Kanał globalny"
@@ -1882,11 +1909,11 @@ msgid "I accept to receive rare important communications via email"
 msgstr "Akceptuję otrzymywanie okazjonalnych informacji na mój email."
 
 msgid ""
-"This is highly recommended. These are very rare and contain information that"
-" you probably want to have."
+"This is highly recommended. These are very rare and contain information that "
+"you probably want to have."
 msgstr ""
-"Wysoce rekomendowane! Wysyłanie informacji jest bardzo okazjonalne i będą to"
-" informacje które raczej będą dla Ciebie wartościowe."
+"Wysoce rekomendowane! Wysyłanie informacji jest bardzo okazjonalne i będą to "
+"informacje które raczej będą dla Ciebie wartościowe."
 
 msgid "I accept to receive occasional newsletters via email"
 msgstr "Akceptuję otrzymywanie okazjonalnego newslettera poprzez email"
@@ -1919,15 +1946,21 @@ msgid ""
 "and this kind of support would be amazing. Thank you in advance!"
 msgstr ""
 
+msgid "Allow retailer integration"
+msgstr ""
+
 msgid ""
 "AstroBin may associate with retailers of astronomy and astrophotography "
-"equipment to enhance the display of equipment items with links to sponsoring"
-" partners. The integration is subtle and non intrusive, and it would help a "
+"equipment to enhance the display of equipment items with links to sponsoring "
+"partners. The integration is subtle and non intrusive, and it would help a "
 "lot if you didn't disable it. Thank you in advance!"
 msgstr ""
 
 msgid "Language"
 msgstr "Język"
+
+msgid "Other languages"
+msgstr ""
 
 msgid ""
 "Other languages that you can read and write. This can be useful to other "
@@ -2036,6 +2069,9 @@ msgstr ""
 msgid "Aragonese"
 msgstr ""
 
+msgid "Armenian"
+msgstr ""
+
 msgid "Assamese"
 msgstr ""
 
@@ -2048,6 +2084,9 @@ msgstr ""
 msgid "Aymara"
 msgstr ""
 
+msgid "Azerbaijani"
+msgstr ""
+
 msgid "Bambara"
 msgstr ""
 
@@ -2055,6 +2094,9 @@ msgid "Bashkir"
 msgstr ""
 
 msgid "Basque"
+msgstr ""
+
+msgid "Belarusian"
 msgstr ""
 
 msgid "Bengali"
@@ -2066,7 +2108,13 @@ msgstr ""
 msgid "Bislama"
 msgstr ""
 
+msgid "Bosnian"
+msgstr ""
+
 msgid "Breton"
+msgstr ""
+
+msgid "Bulgarian"
 msgstr ""
 
 msgid "Burmese"
@@ -2084,7 +2132,13 @@ msgstr ""
 msgid "Chichewa, Chewa, Nyanja"
 msgstr ""
 
+msgid "Chinese"
+msgstr ""
+
 msgid "Chuvash"
+msgstr ""
+
+msgid "Cornish"
 msgstr ""
 
 msgid "Corsican"
@@ -2093,7 +2147,13 @@ msgstr ""
 msgid "Cree"
 msgstr ""
 
+msgid "Croatian"
+msgstr ""
+
 msgid "Czech"
+msgstr ""
+
+msgid "Danish"
 msgstr ""
 
 msgid "Divehi  / Dhivehi / Maldivian"
@@ -2111,7 +2171,16 @@ msgstr "Angielski"
 msgid "Esperanto"
 msgstr ""
 
+msgid "Estonian"
+msgstr ""
+
 msgid "Ewe"
+msgstr ""
+
+msgid "Faroese"
+msgstr ""
+
+msgid "Fijian"
 msgstr ""
 
 msgid "Fulah"
@@ -2120,7 +2189,13 @@ msgstr ""
 msgid "Galician"
 msgstr ""
 
+msgid "Georgian"
+msgstr ""
+
 msgid "Guarani"
+msgstr ""
+
+msgid "Gujarati"
 msgstr ""
 
 msgid "Haitian / Haitian Creole"
@@ -2141,6 +2216,15 @@ msgstr ""
 msgid "Hiri Motu"
 msgstr ""
 
+msgid "Hungarian"
+msgstr ""
+
+msgid "Interlingua"
+msgstr ""
+
+msgid "Indonesian"
+msgstr ""
+
 msgid "Interlingue / Occidental"
 msgstr ""
 
@@ -2156,16 +2240,31 @@ msgstr ""
 msgid "Ido"
 msgstr ""
 
+msgid "Icelandic"
+msgstr ""
+
 msgid "Inuktitut"
 msgstr ""
 
+msgid "Javanese"
+msgstr ""
+
 msgid "Kalaallisut / Greenlandic"
+msgstr ""
+
+msgid "Kannada"
 msgstr ""
 
 msgid "Kanuri"
 msgstr ""
 
 msgid "Kashmiri"
+msgstr ""
+
+msgid "Kazakh"
+msgstr ""
+
+msgid "Central Khmer"
 msgstr ""
 
 msgid "Kikuyu / Gikuyu"
@@ -2180,6 +2279,9 @@ msgstr ""
 msgid "Komi"
 msgstr ""
 
+msgid "Kongo"
+msgstr ""
+
 msgid "Korean"
 msgstr ""
 
@@ -2189,7 +2291,13 @@ msgstr ""
 msgid "Kuanyama / Kwanyama"
 msgstr ""
 
+msgid "Latin"
+msgstr ""
+
 msgid "Luxembourgish, Letzeburgesch"
+msgstr ""
+
+msgid "Ganda"
 msgstr ""
 
 msgid "Limburgan / Limburger / Limburgish"
@@ -2198,10 +2306,34 @@ msgstr ""
 msgid "Lingala"
 msgstr ""
 
+msgid "Lao"
+msgstr ""
+
+msgid "Lithuanian"
+msgstr ""
+
 msgid "Luba / Katanga"
 msgstr ""
 
+msgid "Latvian"
+msgstr ""
+
 msgid "Manx"
+msgstr ""
+
+msgid "Macedonian"
+msgstr ""
+
+msgid "Malagasy"
+msgstr ""
+
+msgid "Malay"
+msgstr ""
+
+msgid "Malayalam"
+msgstr ""
+
+msgid "Maltese"
 msgstr ""
 
 msgid "Maori"
@@ -2210,16 +2342,31 @@ msgstr ""
 msgid "Marathi"
 msgstr ""
 
+msgid "Marshallese"
+msgstr ""
+
+msgid "Mongolian"
+msgstr ""
+
 msgid "Navajo / Navaho"
 msgstr ""
 
 msgid "North Ndebele"
 msgstr ""
 
+msgid "Nepali"
+msgstr ""
+
+msgid "Ndonga"
+msgstr ""
+
 msgid "Norwegian Bokmål"
 msgstr ""
 
 msgid "Norwegian Nynorsk"
+msgstr ""
+
+msgid "Norwegian"
 msgstr ""
 
 msgid "Sichuan Yi / Nuosu"
@@ -2263,6 +2410,12 @@ msgstr ""
 msgid "Quechua"
 msgstr ""
 
+msgid "Romansh"
+msgstr ""
+
+msgid "Rundi"
+msgstr ""
+
 msgid "Romanian / Moldavian / Moldovan"
 msgstr ""
 
@@ -2275,7 +2428,16 @@ msgstr ""
 msgid "Sindhi"
 msgstr ""
 
+msgid "Northern Sami"
+msgstr ""
+
+msgid "Samoan"
+msgstr ""
+
 msgid "Sango"
+msgstr ""
+
+msgid "Serbian"
 msgstr ""
 
 msgid "Gaelic / Scottish Gaelic"
@@ -2285,6 +2447,18 @@ msgid "Shona"
 msgstr ""
 
 msgid "Sinhala / Sinhalese"
+msgstr ""
+
+msgid "Slovak"
+msgstr ""
+
+msgid "Slovenian"
+msgstr ""
+
+msgid "Somali"
+msgstr ""
+
+msgid "Southern Sotho"
 msgstr ""
 
 msgid "Spanish / Castilian"
@@ -2299,10 +2473,19 @@ msgstr ""
 msgid "Swati"
 msgstr ""
 
+msgid "Swedish"
+msgstr ""
+
 msgid "Tamil"
 msgstr ""
 
 msgid "Telugu"
+msgstr ""
+
+msgid "Tajik"
+msgstr ""
+
+msgid "Thai"
 msgstr ""
 
 msgid "Tigrinya"
@@ -2311,7 +2494,19 @@ msgstr ""
 msgid "Tibetan"
 msgstr ""
 
+msgid "Turkmen"
+msgstr ""
+
 msgid "Tagalog"
+msgstr ""
+
+msgid "Tswana"
+msgstr ""
+
+msgid "Tsonga"
+msgstr ""
+
+msgid "Tatar"
 msgstr ""
 
 msgid "Twi"
@@ -2323,10 +2518,19 @@ msgstr ""
 msgid "Uighur / Uyghur"
 msgstr ""
 
+msgid "Ukrainian"
+msgstr ""
+
 msgid "Urdu"
 msgstr ""
 
+msgid "Uzbek"
+msgstr ""
+
 msgid "Venda"
+msgstr ""
+
+msgid "Vietnamese"
 msgstr ""
 
 msgid "Volapük"
@@ -2341,10 +2545,16 @@ msgstr ""
 msgid "Wolof"
 msgstr ""
 
+msgid "Western Frisian"
+msgstr ""
+
 msgid "Xhosa"
 msgstr ""
 
 msgid "Yiddish"
+msgstr ""
+
+msgid "Yoruba"
 msgstr ""
 
 msgid "Zhuang / Chuang"
@@ -2369,8 +2579,7 @@ msgid "Integration hours by gear, yearly"
 msgstr "Sumaryczny czas naświetlania posegregowany według sprzętu, rocznie"
 
 msgid "Integration hours by gear, monthly"
-msgstr ""
-"Sumaryczny czas naświetlania posegregowany według sprzętu, miesięcznie"
+msgstr "Sumaryczny czas naświetlania posegregowany według sprzętu, miesięcznie"
 
 msgid "Integration hours by gear, daily"
 msgstr "Sumaryczny czas naświetlania posegregowany według sprzętu, dziennie"
@@ -2529,13 +2738,16 @@ msgstr ""
 msgid "<a href=\"%(user_page)s\">%(user)s</a> joined a group."
 msgstr ""
 
+msgid "Remove ads"
+msgstr ""
+
 msgid "Request an API key"
 msgstr "Zaaplikuj o klucz do API."
 
 msgid ""
-"Thanks for your interest in using AstroBin's APIs! You need a "
-"<strong>key</strong> and a <strong>secret</strong> if you want to access "
-"AstroBin's data in your own app or website."
+"Thanks for your interest in using AstroBin's APIs! You need a <strong>key</"
+"strong> and a <strong>secret</strong> if you want to access AstroBin's data "
+"in your own app or website."
 msgstr ""
 "Dziękujemy za zainteresowanie w używaniu API AstroBin! Aby używać danych z "
 "AstroBin w swoim serwisie będziesz potrzebować <strong>klucza</strong> i "
@@ -2545,12 +2757,11 @@ msgid "After you submit a request, you will receive a reply within 24 hours."
 msgstr "Aplikacja zostanie rozpatrzona w ciągu 24 godzin."
 
 msgid ""
-"Please make sure you have read the section about APIs in the <a "
-"href=\"https://welcome.astrobin.com/terms-of-service\">Terms of Service</a>."
+"Please make sure you have read the section about APIs in the <a href="
+"\"https://welcome.astrobin.com/terms-of-service\">Terms of Service</a>."
 msgstr ""
-"Koniecznie przeczytaj sekcję dotyczącą API w <a "
-"href=\"https://welcome.astrobin.com/terms-of-service\">warunkach korzystania"
-" z serwisu</a>."
+"Koniecznie przeczytaj sekcję dotyczącą API w <a href=\"https://welcome."
+"astrobin.com/terms-of-service\">warunkach korzystania z serwisu</a>."
 
 msgid "Submit"
 msgstr "Wyślij"
@@ -2564,6 +2775,9 @@ msgid ""
 msgstr ""
 "Aplikacja zostanie obsłużona w ciągu 24 godzin. Dziękujemy za "
 "zainteresowanie API AstroBin!"
+
+msgid "Astrophotographers list"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -2586,6 +2800,9 @@ msgstr "Polubienia"
 
 msgid "Total integration"
 msgstr "Całkowity czas naświetlania"
+
+msgid "Image Index"
+msgstr ""
 
 msgid "There isn't enough data yet, please come back later!"
 msgstr ""
@@ -2685,6 +2902,9 @@ msgstr ""
 msgid "Back to top"
 msgstr "Na górę"
 
+msgid "Your AstroBin subscription is expired."
+msgstr ""
+
 msgid ""
 "That's okay: we don't EVER delete your images if your subscription expires."
 msgstr ""
@@ -2697,15 +2917,23 @@ msgstr ""
 msgid "Subscription plans"
 msgstr "Plany subskrypcji"
 
+msgid "Your subscriptions"
+msgstr ""
+
 msgid "Your AstroBin subscription about to expire."
+msgstr ""
+
+msgid ""
+"AstroBin is unable to deliver your emails, and it won't try again until the "
+"issue is resolved."
 msgstr ""
 
 msgid "Your email provider recently reported the following error code(s):"
 msgstr ""
 
 msgid ""
-"If you believe this is in error, please contact us. Otherwise please contact"
-" you email provider or change your e-mail address on AstroBin."
+"If you believe this is in error, please contact us. Otherwise please contact "
+"you email provider or change your e-mail address on AstroBin."
 msgstr ""
 
 msgid "Change your e-mail"
@@ -2714,9 +2942,17 @@ msgstr "Zmień adres e-mail"
 msgid "Ignore and retry"
 msgstr ""
 
+msgid "Contact us"
+msgstr ""
+
 msgid ""
-"If you believe this is in error, please contact us. Otherwise please contact"
-" your email provider or change your e-mail address on AstroBin."
+"AstroBin is unable to deliver your emails, and it will try again a week "
+"after the latest email bounce."
+msgstr ""
+
+msgid ""
+"If you believe this is in error, please contact us. Otherwise please contact "
+"your email provider or change your e-mail address on AstroBin."
 msgstr ""
 
 msgid ""
@@ -2729,6 +2965,9 @@ msgstr ""
 msgid ""
 "If you have an automated filter or rule to mark AstroBin emails as spam, "
 "please disable it using your email client."
+msgstr ""
+
+msgid "Resume emails"
 msgstr ""
 
 msgid "Cancel"
@@ -2781,6 +3020,9 @@ msgstr "Nie, dziękuję"
 msgid "Tell me more!"
 msgstr ""
 
+msgid "Are you really sure?"
+msgstr ""
+
 msgid ""
 "We know, we're all used to the fact that ads on the Internet are annoying."
 msgstr ""
@@ -2790,8 +3032,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"There are only astronomy ads on AstroBin, that are published after my review"
-" and approval. Nothing fishy, nothing off-topic, and nothing that will use "
+"There are only astronomy ads on AstroBin, that are published after my review "
+"and approval. Nothing fishy, nothing off-topic, and nothing that will use "
 "any of your private information."
 msgstr ""
 
@@ -2811,8 +3053,8 @@ msgstr ""
 
 msgid ""
 "They will not know that they have been shadow-banned, and the goal is that "
-"eventually they will get bored while having caused no harm, since nobody saw"
-" what they posted."
+"eventually they will get bored while having caused no harm, since nobody saw "
+"what they posted."
 msgstr ""
 
 msgid "Continue"
@@ -2859,8 +3101,14 @@ msgstr "Ściana Zdjęć"
 msgid "Advanced search"
 msgstr "Zaawansowane wyszukiwanie"
 
+msgid "Top pick nominations"
+msgstr ""
+
 msgid "Top picks"
 msgstr "Najlepsze zdjęcia"
+
+msgid "Remote astrophotography"
+msgstr ""
 
 msgid "Contributors list"
 msgstr ""
@@ -2900,6 +3148,9 @@ msgid ""
 "community. %(_0)sLearn more.%(_1)s"
 msgstr ""
 
+msgid "Contribution Index"
+msgstr ""
+
 #, python-format
 msgid ""
 "The <strong>Contribution Index (beta)</strong> is system to reward "
@@ -2909,6 +3160,9 @@ msgstr ""
 
 msgid "My places"
 msgstr "Moje miejsca"
+
+msgid "Public Gallery"
+msgstr ""
 
 msgid "Staging Area"
 msgstr "Przechowalnia"
@@ -2951,12 +3205,12 @@ msgid "E-mail change request"
 msgstr "Wniosek o zmianę adresu e-mail"
 
 msgid ""
-"You already have a pending request to change your e-mail address. You should"
-" have received a confirmation e-mail with instructions about how to confirm "
+"You already have a pending request to change your e-mail address. You should "
+"have received a confirmation e-mail with instructions about how to confirm "
 "this request. If not, please delete it and start a new one."
 msgstr ""
-"Obecnie masz już jeden oczekujący wniosek o zmianę adresu e-mail. Powinieneś"
-" otrzymać potwierdzenie na swój adres e-mail z informacjami jak potwierdzić "
+"Obecnie masz już jeden oczekujący wniosek o zmianę adresu e-mail. Powinieneś "
+"otrzymać potwierdzenie na swój adres e-mail z informacjami jak potwierdzić "
 "ten wniosek. Jeśli nie otrzymałeś takiego powiadomienia usuń oczekujący "
 "wniosek i stwórz nowy."
 
@@ -2983,10 +3237,12 @@ msgstr ""
 "wygląda na to, że wnioskowałeś o zmianę adresu e-mail powiązanego\n"
 "Twoim kontem AstroBin.\n"
 "\n"
-"Aby kontynuować, kliknij w podanych link lub przeklej go w okno przeglądarki:\n"
+"Aby kontynuować, kliknij w podanych link lub przeklej go w okno "
+"przeglądarki:\n"
 "https://www.astrobin.com%(confirmation_url)s\n"
 "\n"
-"Jeśli nie wnioskowałeś o zmianę adresu e-mail możesz zignorować tą wiadomość.\n"
+"Jeśli nie wnioskowałeś o zmianę adresu e-mail możesz zignorować tą "
+"wiadomość.\n"
 "\n"
 "Czystego nieba!\n"
 "Zespół AstroBin."
@@ -3001,6 +3257,9 @@ msgid "Forum posts"
 msgstr "Posty na froum"
 
 msgid "Written"
+msgstr ""
+
+msgid "Received"
 msgstr ""
 
 msgid "Cookie consent"
@@ -3025,22 +3284,21 @@ msgstr "Instrukcje i przykłady"
 
 msgid ""
 "AstroBin's gear database is a little messy: many users have used different "
-"names for the same object, ignoring the suggestions. But don't worry, we can"
-" fix it, and after it's fixed, it shouldn't get very messy in the future."
+"names for the same object, ignoring the suggestions. But don't worry, we can "
+"fix it, and after it's fixed, it shouldn't get very messy in the future."
 msgstr ""
 "Baza danych sprzętu AstroBin jest nieco zabałaganiona: użytkownicy używali "
 "różnych nazw tego samego sprzętu i ignorowali sugestie. Ale nie martw się, "
 "możemy to naprawić. Kiedy już uda sie posprzątać bałagan, podobne problemy "
 "nie powinny się zdarzyć w przyszłości."
 
-msgid ""
-"Please read the instructions and the example below, they are important!"
+msgid "Please read the instructions and the example below, they are important!"
 msgstr "Przeczytaj instrukcje i przykład poniżej - są ważne!"
 
 msgid ""
 "In a wiki-style collaborative effort, we can all work together, a few items "
-"at a time, to improve the situation. It's very simple! This is what you need"
-" to do:"
+"at a time, to improve the situation. It's very simple! This is what you need "
+"to do:"
 msgstr ""
 "Pracując wspólnie, używając wiki-stylów, po kilka sztuk, możemy poprawić "
 "sytuację. To bardzo proste! Oto, co należy uczynić:"
@@ -3065,8 +3323,10 @@ msgstr "Oto kilka dobrych przykładów:"
 msgid "And here's some bad examples, that need fixing, and why:"
 msgstr "A oto kilka złych przykładów, wymagających poprawy. Oto dlaczego:"
 
-msgid "The words are not properly capitalized. It should be \"Meade\" and \"LX200\"."
-msgstr "Wielkie litery nie są użyte poprawnie. Powinno być \"Meade\" i \"LX200\"."
+msgid ""
+"The words are not properly capitalized. It should be \"Meade\" and \"LX200\"."
+msgstr ""
+"Wielkie litery nie są użyte poprawnie. Powinno być \"Meade\" i \"LX200\"."
 
 msgid ""
 "The word \"Celestron\" appears also in the name of the product. That should "
@@ -3096,8 +3356,8 @@ msgstr ""
 
 msgid ""
 "Obviously, the user who created this mount in the database, has it on a "
-"fixed pier. But this doesn't mean that SkyWatcher sells a NEQ-6 that you can"
-" only buy on a pier! \"on a fixed pier\" should be removed."
+"fixed pier. But this doesn't mean that SkyWatcher sells a NEQ-6 that you can "
+"only buy on a pier! \"on a fixed pier\" should be removed."
 msgstr ""
 "Oczywiście użytkownik, który dodał ten montaż do bazy danych, używa go na "
 "stacjonarnym słupie. Ale to nie znaczy, że SkyWatcher sprzedaje NEQ-6 tylko "
@@ -3115,24 +3375,24 @@ msgstr ""
 msgid ""
 "\"5.4&mu;\" is a property of the CCD, not part of its name. It should be "
 "removed. But sometimes a property can be part of the name of the object, "
-"because it's such a generic name: for example, Newton 8\" f/6 would be okay,"
-" because just \"Newton\" would not be enough."
+"because it's such a generic name: for example, Newton 8\" f/6 would be okay, "
+"because just \"Newton\" would not be enough."
 msgstr ""
-"\"5.4&mu;\" jest właściwością sensora CCD, a nie częścią jego nazwy. Powinno"
-" zostać usunięte. Czasami jednag właściwość może być częścią nazwy, ponieważ"
-" jest to bardzo ogólna nazwa. Na przykład Newton 8'' f/6 jest dobrą nazwą, "
+"\"5.4&mu;\" jest właściwością sensora CCD, a nie częścią jego nazwy. Powinno "
+"zostać usunięte. Czasami jednag właściwość może być częścią nazwy, ponieważ "
+"jest to bardzo ogólna nazwa. Na przykład Newton 8'' f/6 jest dobrą nazwą, "
 "ponieważ samo \"Newton\" byłoby niewystarczające."
 
 msgid ""
-"\"CS5\" is the version of Photoshop, but the procut name is just "
-"\"Photoshop\". \"CS5\" should be removed."
+"\"CS5\" is the version of Photoshop, but the procut name is just \"Photoshop"
+"\". \"CS5\" should be removed."
 msgstr ""
 "\"CS5\" jest nazwą wersji Photoshopa, ale nazwa produktu to po prostu "
 "\"Photoshop\". \"CS5\" powinno zostać usunięte."
 
 msgid ""
-"Thanks for reading so far. If you are not sure about how to fix a gear item,"
-" just make assumptions and hope you are right. Mistakes will surface "
+"Thanks for reading so far. If you are not sure about how to fix a gear item, "
+"just make assumptions and hope you are right. Mistakes will surface "
 "eventually."
 msgstr ""
 "Dziękujemy za uwagę. Jeżeli nie jesteś pewny, jak naprawić informacje o "
@@ -3189,6 +3449,15 @@ msgstr ""
 msgid "Return to image"
 msgstr "Powrót do zdjęcia"
 
+msgid "Hemisphere"
+msgstr ""
+
+msgid "Northern"
+msgstr ""
+
+msgid "Southern"
+msgstr ""
+
 msgid "Contains"
 msgstr "Zawiera"
 
@@ -3196,13 +3465,12 @@ msgstr "Zawiera"
 msgid "And %(count)s more."
 msgstr ""
 
+msgid "Acquired at"
+msgstr ""
+
 msgid "Remove"
 msgstr "Usuń"
 
-#| msgid ""
-#| "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
-#| "international community: using English is preferred. PS: "
-#| "<strong>%(user)s</strong>'s preferred language is <strong>%(lang)s</strong>."
 msgid ""
 "<strong>Leave a comment here</strong>, and remember that AstroBin is an "
 "international community: using <strong>English</strong> is preferred."
@@ -3229,11 +3497,23 @@ msgstr "Histogram"
 msgid "Right ascension"
 msgstr ""
 
+msgid "Declination"
+msgstr ""
+
 msgid "Technical card"
 msgstr "Dane techniczne"
 
+msgid "Sponsored brands"
+msgstr ""
+
 #, python-format
 msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr ""
+
+msgid "Sponsored items"
+msgstr ""
+
+msgid "Disable retailer integration"
 msgstr ""
 
 #, python-format
@@ -3270,6 +3550,12 @@ msgstr ""
 msgid "Field radius"
 msgstr "Szerokość pola"
 
+msgid "WCS transformation"
+msgstr ""
+
+msgid "Find images in the same area"
+msgstr ""
+
 #, python-format
 msgid "Around <strong>1</strong> degree"
 msgid_plural "Around <strong>%(n)s</strong> degrees"
@@ -3281,6 +3567,15 @@ msgid "Resolution"
 msgstr "Rozdzielczość"
 
 msgid "Uncompressed source file"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+msgid "Remote source"
+msgstr ""
+
+msgid "Download original file"
 msgstr ""
 
 msgid "Author"
@@ -3322,6 +3617,12 @@ msgstr "Usuń pierwowzór"
 msgid "Delete this revision only"
 msgstr "Usuń tylko tą wersję"
 
+msgid "Delete all other versions"
+msgstr ""
+
+msgid "Delete all revisions"
+msgstr ""
+
 msgid "Flag malfunctioning thumbnails"
 msgstr "Zgłoś nieaktywne miniaturki"
 
@@ -3330,6 +3631,9 @@ msgstr "Administrator"
 
 msgid "Ban user"
 msgstr "Zablokuj użytkownika"
+
+msgid "Thumbnails"
+msgstr ""
 
 msgid "Watermark"
 msgstr "Znak wodny"
@@ -3340,6 +3644,18 @@ msgstr "Informacje podstawowe"
 msgid "Acquisition details"
 msgstr "Szczegóły naświetlania"
 
+msgid "Plate-solving settings"
+msgstr ""
+
+msgid "Restart plate-solving"
+msgstr ""
+
+msgid "Advanced plate-solving settings"
+msgstr ""
+
+msgid "Restart advanced plate-solving"
+msgstr ""
+
 msgid "Context"
 msgstr "Kontekst"
 
@@ -3347,6 +3663,15 @@ msgid "Navigation context"
 msgstr ""
 
 msgid "User gallery"
+msgstr ""
+
+msgid "User collection"
+msgstr ""
+
+msgid "Public group"
+msgstr ""
+
+msgid "All image uploads"
 msgstr ""
 
 msgid "Share"
@@ -3359,6 +3684,9 @@ msgid "Send private message"
 msgstr "Wyślij prywatną wiadomość"
 
 msgid "Shadow-ban"
+msgstr ""
+
+msgid "Remove shadow-ban"
 msgstr ""
 
 msgid "View"
@@ -3379,14 +3707,17 @@ msgstr "Duży rozmiar"
 msgid "Full size"
 msgstr "Pełny rozmiar"
 
+msgid "Please note"
+msgstr ""
+
 #, python-format
 msgid ""
-"You are on a Free account, and when you delete an image, your upload counter"
-" does not decrease (unless the image is deleted within 24 hours of uploading"
-" it). The Free account is not a way to keep your most recent or best 10 "
+"You are on a Free account, and when you delete an image, your upload counter "
+"does not decrease (unless the image is deleted within 24 hours of uploading "
+"it). The Free account is not a way to keep your most recent or best 10 "
 "images on AstroBin, but a trial period for you to decide whether or not a "
-"paid subscription is worth it. For more information, please <a "
-"href=\"%(url)s\">click here</a>."
+"paid subscription is worth it. For more information, please <a href=\"%(url)s"
+"\">click here</a>."
 msgstr ""
 
 msgid "Delete this revision?"
@@ -3418,11 +3749,11 @@ msgid ""
 msgstr ""
 
 msgid ""
-"<strong>Please note:</strong> it's very important that the XISF or FITS file"
-" you upload is aligned to your processed image, otherwise the object "
-"annotations will not match. To improve your chances at a successful accurate"
-" plate-solution, calibrate your file the usual way (dark/bias/flats) but you"
-" don't need to stretch it."
+"<strong>Please note:</strong> it's very important that the XISF or FITS file "
+"you upload is aligned to your processed image, otherwise the object "
+"annotations will not match. To improve your chances at a successful accurate "
+"plate-solution, calibrate your file the usual way (dark/bias/flats) but you "
+"don't need to stretch it."
 msgstr ""
 
 msgid "The following people bookmarked this image"
@@ -3436,12 +3767,36 @@ msgstr "Przepraszamy"
 
 #, python-format
 msgid ""
+"We're really sorry, but giving likes requires an Image Index of <strong>"
+"%(min_index_to_like)s</strong> or greater."
+msgstr ""
+
+msgid ""
+"Such limitation improves the website as a whole by discouraging people from "
+"creating fake accounts to like their own content. Thank you for "
+"understanding!"
+msgstr ""
+
+#, python-format
+msgid "Currently, your Image Index is <strong>%(index)s</strong>."
+msgstr ""
+
+#, python-format
+msgid ""
 "To learn more about the Image Index, please visit %(_0)sthe FAQ page%(_1)s. "
 "Thanks!"
 msgstr ""
 
+msgid "You cannot remove a like that you gave more than one hour ago."
+msgstr ""
+
 msgid "Delete image and all its revisions?"
 msgstr "Usuąć zdjęcie wraz z wszystkimi wersjami?"
+
+msgid ""
+"The image will be moved to the trash, and it can be restored later. All its "
+"revisions will be there too. Continue?"
+msgstr ""
 
 msgid ""
 "The image will be permanently deleted and cannot be recovered. All its "
@@ -3455,16 +3810,22 @@ msgid "Delete original image?"
 msgstr "Czy usunąć zdjęcie?"
 
 msgid ""
-"The image will be permanently deleted and cannot be recovered. Its revisions"
-" will not be deleted. Are you sure?"
+"The image will be permanently deleted and cannot be recovered. Its revisions "
+"will not be deleted. Are you sure?"
 msgstr ""
 "Zdjecie zostanie całkowicie usunięte i nie będzie go można przywrócić. "
 "Wszystkie pozostałe wersje również zostaną usunięte. Czy jesteś pewny?"
+
+msgid "Delete all other versions?"
+msgstr ""
 
 msgid ""
 "You will delete all other revisions (if any), and the originally uploaded "
 "image, leaving the current revision as the final and only version of this "
 "image."
+msgstr ""
+
+msgid "Delete all revisions?"
 msgstr ""
 
 msgid ""
@@ -3476,8 +3837,8 @@ msgid ""
 "This will move this image to your staging area, making it unlisted. The "
 "image will be accessible by anyone with a direct link."
 msgstr ""
-"Twoje zdjęcie będzie przeniesione do strefy roboczej i nie będzie widoczne w"
-" wynikach wyszukiwania. Zdjęcie będzie dostępne poprzez bezpośredni link."
+"Twoje zdjęcie będzie przeniesione do strefy roboczej i nie będzie widoczne w "
+"wynikach wyszukiwania. Zdjęcie będzie dostępne poprzez bezpośredni link."
 
 msgid ""
 "This will trigger the regeneration of all thumbnails for this image and all "
@@ -3492,33 +3853,26 @@ msgstr "Zamknij"
 msgid "The following people like this image"
 msgstr "Następujące osoby lubią to zdjęcie"
 
-#| msgid ""
-#| "This will move this image to your public area, making it listed and "
-#| "notifying your followers."
 msgid ""
 "This will move this image to your public area, making it listed. As this "
-"image had already been published before, your followers will not be "
-"notified."
+"image had already been published before, your followers will not be notified."
 msgstr ""
 
-#| msgid ""
-#| "This will move this image to your public area, making it listed and "
-#| "notifying your followers."
 msgid ""
 "This will move this image to your public area, making it listed and "
 "optionally notifying your followers."
 msgstr ""
 
 msgid ""
-"Sorry, you cannot send images from your Staging Area to a group. You need to"
-" first promote this image to your Public Area, if you want to do that."
+"Sorry, you cannot send images from your Staging Area to a group. You need to "
+"first promote this image to your Public Area, if you want to do that."
 msgstr ""
 "Przepraszamy, nie możesz przesłać zdjęcia ze strefy roboczej do grupy. "
 "Najpierw musisz przenieść zdjęcie do strefy publicznej."
 
 msgid ""
-"Use this form to select one of your groups. The list includes all public and"
-" private non-autosubmission groups of which you are the owner or a member."
+"Use this form to select one of your groups. The list includes all public and "
+"private non-autosubmission groups of which you are the owner or a member."
 msgstr ""
 "Użyj tej formatki żeby wybrać jedną z Twoich grup. Lista zawiera wszystkie "
 "publiczne oraz prywatne grupy których jesteś właścicielem lub członkiem."
@@ -3572,14 +3926,17 @@ msgstr ""
 
 msgid ""
 "Please note: AstroBin is not officially a backup service. So please also "
-"keep additional copies of your file. However, by storing your work here, you"
-" can have some additional peace of mind."
+"keep additional copies of your file. However, by storing your work here, you "
+"can have some additional peace of mind."
 msgstr ""
 
 #, python-format
 msgid ""
-"Read about how AstroBin stores your files safely on the <a "
-"href=\"%(faq_url)s\">FAQ page</a>."
+"Read about how AstroBin stores your files safely on the <a href=\"%(faq_url)s"
+"\">FAQ page</a>."
+msgstr ""
+
+msgid "Clear"
 msgstr ""
 
 msgid ""
@@ -3598,6 +3955,9 @@ msgstr "Wersja ostateczna"
 msgid "Original"
 msgstr "Wersja początkowa"
 
+msgid "Uploaded"
+msgstr ""
+
 msgid "Revision"
 msgstr "Wersja"
 
@@ -3605,19 +3965,11 @@ msgid "Sky plot"
 msgstr "Mapa nieba"
 
 #, python-format
-#| msgid ""
-#| "This image is a <strong>work in progress</strong> from your <a "
-#| "href=\"%(profile_url)s?staging\">Staging Area</a>. This means nobody can see"
-#| " it unless you give them one of the links you can find in the <em>Share</em>"
-#| " menu below. Use that link to post this image to Internet forums and get "
-#| "feedback on it. When you are satisfied, perhaps after uploading some "
-#| "revisions, <a href=\"#promote-modal\" data-toggle=\"modal\">promote it</a> "
-#| "to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgid ""
-"This image is a <strong>work in progress</strong> from your <a "
-"href=\"%(profile_url)s?staging\">Staging Area</a>. This means nobody can see"
-" it unless you give them one of the links you can find in the <em>Share</em>"
-" menu below. Use that link to post this image to Internet forums and get "
+"This image is a <strong>work in progress</strong> from your <a href="
+"\"%(profile_url)s?staging\">Staging Area</a>. This means nobody can see it "
+"unless you give them one of the links you can find in the <em>Share</em> "
+"menu below. Use that link to post this image to Internet forums and get "
 "feedback on it. When you are satisfied, perhaps after uploading some "
 "revisions, promote it to the <a href=\"%(profile_url)s\">Public Area</a>."
 msgstr ""
@@ -3638,6 +3990,15 @@ msgid ""
 "image is still here."
 msgstr ""
 
+msgid "Here's some detail about the image to give you some context."
+msgstr ""
+
+msgid "Image uploaded"
+msgstr ""
+
+msgid "Revision uploaded"
+msgstr ""
+
 msgid "Please wait..."
 msgstr "Proszę czekać..."
 
@@ -3654,25 +4015,24 @@ msgid "Remove data"
 msgstr "Usuń dane"
 
 msgid ""
-"You can insert as many acquisition sessions as you want, as often images are"
-" taken across several nights. An acquisition session is defined primarily by"
-" a date and a filter. Fill in your data and then click on "
-"<strong>Save</strong> to finish, or on <strong>Add more</strong> to add more"
-" acquisition sessions."
+"You can insert as many acquisition sessions as you want, as often images are "
+"taken across several nights. An acquisition session is defined primarily by "
+"a date and a filter. Fill in your data and then click on <strong>Save</"
+"strong> to finish, or on <strong>Add more</strong> to add more acquisition "
+"sessions."
 msgstr ""
 "Klatki naświetlane są często przez wiele nocy, więc możesz wpisać tyle "
-"sesji, ile potrzebujesz. Sesja zdjęciowa jest zdefiniowana przez użyty filtr"
-" i datę wykonania zdjęć. Wpisz dane i kliknij <strong>Zapisz</strong> aby "
+"sesji, ile potrzebujesz. Sesja zdjęciowa jest zdefiniowana przez użyty filtr "
+"i datę wykonania zdjęć. Wpisz dane i kliknij <strong>Zapisz</strong> aby "
 "zakończyć, lub <strong>Dodaj więcej</strong> aby dodać kolejne sesje."
 
 #, python-format
 msgid ""
-"Is this too much data for you to handle? Go to the <a class=\"button\" "
-"href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic "
-"form</a>."
+"Is this too much data for you to handle? Go to the <a class=\"button\" href="
+"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
 msgstr ""
-"Czy to zbyt dużo danych do uzupełnienia? Przejdź do <a class=\"button\" "
-"href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">podstawowego "
+"Czy to zbyt dużo danych do uzupełnienia? Przejdź do <a class=\"button\" href="
+"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">podstawowego "
 "formularza</a>."
 
 msgid "Acquisition session"
@@ -3688,15 +4048,13 @@ msgstr "Dodaj więcej"
 msgid ""
 "With this form you can input the basic details for the acquisition of your "
 "image. If you want to be more thorough or fill in separate details for each "
-"filter, go to the <a class=\"button\" "
-"href=\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">advanced "
-"form</a>."
+"filter, go to the <a class=\"button\" href=\"%(advanced_form_url)s?"
+"edit_type=deep_sky&advanced=true\">advanced form</a>."
 msgstr ""
 "Ten formularz pozwala wpisać podstawowe dane na temat wykonania Twojego "
 "zdjęcia. Jeżeli chcesz wypełnić więcej danych, lub osobno opisać każdy "
-"filtr, przejdź do <a class=\"button\" "
-"href=\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">formularza "
-"szczegółowego</a>."
+"filtr, przejdź do <a class=\"button\" href=\"%(advanced_form_url)s?"
+"edit_type=deep_sky&advanced=true\">formularza szczegółowego</a>."
 
 msgid "What kind of image is this?"
 msgstr "Jakie obiekty zawiera to zdjęcie?"
@@ -3731,10 +4089,12 @@ msgstr ""
 " <a href=\"%(the_url)s\">profilu</a>!"
 
 msgid ""
-"To choose the gear used for this image, drag items from the right side to left side, or\n"
+"To choose the gear used for this image, drag items from the right side to "
+"left side, or\n"
 "                click the plus sign."
 msgstr ""
-"Aby wybrać użyty sprzęt, przeciągnij wybrane elementy z prawej strony na lewą lub \n"
+"Aby wybrać użyty sprzęt, przeciągnij wybrane elementy z prawej strony na "
+"lewą lub \n"
 "klinkij w znak plusa."
 
 msgid ""
@@ -3751,10 +4111,12 @@ msgid "Copy gear"
 msgstr "Kopiuj sprzęt"
 
 msgid ""
-"Copying the gear from another image will populate the gear selection form for you, but\n"
+"Copying the gear from another image will populate the gear selection form "
+"for you, but\n"
 "                    you will still need to save it in the end."
 msgstr ""
-"Kopiowanie ustawień sprzętu z innego zdjęcia uzupełni formularz za Ciebie, jednak\n"
+"Kopiowanie ustawień sprzętu z innego zdjęcia uzupełni formularz za Ciebie, "
+"jednak\n"
 " nadal będzie trzeba na końcu zapisać zmiany."
 
 msgid "Copy"
@@ -3766,23 +4128,23 @@ msgstr "Zmień licencję dla tego zdjęcia"
 msgid ""
 "You can associate a Creative Commons license with your content if you wish, "
 "to grant people the right to use your work under certain circumstances. For "
-"more information on what your options are, please visit the <a "
-"target=\"_blank\" href=\"http://www.creativecommons.org/\">Creative Commons "
+"more information on what your options are, please visit the <a target="
+"\"_blank\" href=\"http://www.creativecommons.org/\">Creative Commons "
 "website</a>."
 msgstr ""
 "Możesz publikować swoje zdjęcia na licencji Creative Commons. Dzieki temu "
 "dajesz innym możliwośc używania Twojej pracy pod wybranymi przez Ciebie "
 "warunkami. Aby uzyskać więcej informacji na ten temat, sprawdź stronę <a "
-"target=\"_blank\" href=\"http://www.creativecommons.org/\">Creative "
-"Commons</a>."
+"target=\"_blank\" href=\"http://www.creativecommons.org/\">Creative Commons</"
+"a>."
 
 #, python-format
 msgid ""
-"Remember that you can change your default license <a "
-"href=\"%(change_default_url)s\">here</a>."
+"Remember that you can change your default license <a href="
+"\"%(change_default_url)s\">here</a>."
 msgstr ""
-"Pamiętaj, że możesz zmienić domyślną licencję <a "
-"href=\"%(change_default_url)s\">tutaj</a>."
+"Pamiętaj, że możesz zmienić domyślną licencję <a href="
+"\"%(change_default_url)s\">tutaj</a>."
 
 msgid "Basic Information"
 msgstr "Informacje podstawowe"
@@ -3790,11 +4152,23 @@ msgstr "Informacje podstawowe"
 msgid "Gear used"
 msgstr "Użyty sprzęt"
 
+msgid "Edit your image: advanced plate-solving settings"
+msgstr ""
+
+msgid "Save and plate-solve again"
+msgstr ""
+
 msgid "Edit your image: plate-solving settings"
 msgstr "Edytuj zdjęcie: ustawienia do automatycznej fotoastrometrii"
 
 msgid "Edit revision"
 msgstr "Edytuj wersję"
+
+msgid "Change the thumbnails for this image"
+msgstr ""
+
+msgid "Next step: edit watermark"
+msgstr ""
 
 msgid "Apply a watermark to image"
 msgstr "Wstaw znak wodny do zdjęcia"
@@ -3819,6 +4193,9 @@ msgstr "Pełna rozdzielczość"
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "przez <a href=\"%(the_url)s\">%(user)s</a>"
 
+msgid "Plate-solution overlay"
+msgstr ""
+
 msgid "Fit to window"
 msgstr "Dopasuj do szerokości ekranu"
 
@@ -3832,6 +4209,18 @@ msgid "Ordinate"
 msgstr ""
 
 msgid "Ecliptic longitude"
+msgstr ""
+
+msgid "Ecliptic latitude"
+msgstr ""
+
+msgid "Galactic longitude"
+msgstr ""
+
+msgid "Galactic latitude"
+msgstr ""
+
+msgid "Warning"
 msgstr ""
 
 #, python-format
@@ -3861,8 +4250,11 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Interested in <strong>%(brand)s</strong>? Our sponsor "
-"<strong>%(retailer)s</strong> sells this brand!"
+"Interested in <strong>%(brand)s</strong>? Our sponsor <strong>%(retailer)s</"
+"strong> sells this brand!"
+msgstr ""
+
+msgid "Shop now"
 msgstr ""
 
 msgid "Integration"
@@ -3904,8 +4296,7 @@ msgstr "Nie ma jeszcze żadnych aktualizacji."
 msgid "Edit your location"
 msgstr "Edytuj swoje położenie"
 
-msgid ""
-"If this location is missing data, or has incorrect data, please fix it."
+msgid "If this location is missing data, or has incorrect data, please fix it."
 msgstr ""
 "Jeżeli nie wszystkie dane na temat lokalizacji są uzupełnione, lub dane są "
 "niepoprawne, napraw je teraz."
@@ -3965,9 +4356,6 @@ msgstr "Wysyłanie..."
 msgid "Moderate"
 msgstr "Przeglądaj"
 
-#| msgid ""
-#| "Please click on the images that you want to mark as SPAM, then click on the "
-#| "Approve button below to approve all the others."
 msgid ""
 "Please click on the images that you want to mark as SPAM, then click on the "
 "Finish button below to approve all the others."
@@ -3995,10 +4383,13 @@ msgstr "Zatwierdź wybrane i zablokuj pozostałe"
 msgid "There are no images in the spam list."
 msgstr "Nie ma żadnych zdjęć na liście SPAMu"
 
-#| msgid ""
-#| "<a href=\"%(api_keys_url)s\">Your request for an API Key has been "
-#| "approved!</a>"
 msgid "Your request for an API Key has been approved!"
+msgstr ""
+
+msgid "Your API key"
+msgstr ""
+
+msgid "Your API secret"
 msgstr ""
 
 #, python-format
@@ -4006,16 +4397,19 @@ msgid "Please read the API documentation %(_0)shere%(_1)s."
 msgstr ""
 
 #, python-format
-#| msgid ""
-#| "You don't have any API Keys. Please read the <a "
-#| "href=\"%(api_docs_url)s\">API documentation</a>."
 msgid ""
-"You can review your API keys at <a "
-"href=\"%(api_keys_url)s\">%(api_keys_url)s</a>"
+"You can review your API keys at <a href=\"%(api_keys_url)s\">"
+"%(api_keys_url)s</a>"
+msgstr ""
+
+msgid "Thank you for using AstroBin's APIs!"
 msgstr ""
 
 #, python-format
 msgid "You can review your API keys at %(api_keys_url)s."
+msgstr ""
+
+msgid "Your comment was approved!"
 msgstr ""
 
 msgid ""
@@ -4024,6 +4418,9 @@ msgid ""
 msgstr ""
 
 msgid "The following comment of yours was just approved by a moderator."
+msgstr ""
+
+msgid "View comment"
 msgstr ""
 
 msgid "Congratulations for your first image on AstroBin!"
@@ -4040,43 +4437,43 @@ msgstr ""
 #, python-format
 msgid ""
 "Keep in mind that AstroBin is not meant to be a free service. If you are "
-"still on a free account, you can upload images %(max)s times before you will"
-" be asked to upgrade. More info on the <a href=\"%(url)s\">pricing page</a>."
+"still on a free account, you can upload images %(max)s times before you will "
+"be asked to upgrade. More info on the <a href=\"%(url)s\">pricing page</a>."
 msgstr ""
 
 #, python-format
 msgid ""
 "New uploads go to your \"staging area\", where they are unlisted. You can "
-"still share the link to an individual image in your staging area, and people"
-" with a link will be able to access it, but to make an image public and "
+"still share the link to an individual image in your staging area, and people "
+"with a link will be able to access it, but to make an image public and "
 "listed on AstroBin, you need to promote it. Visit <a href=\"%(url)s\">your "
 "staging area</a>."
 msgstr ""
 
 #, python-format
 msgid ""
-"If you have any questions, have a look at the <a href=\"%(url)s\">frequently"
-" asked questions</a>."
+"If you have any questions, have a look at the <a href=\"%(url)s\">frequently "
+"asked questions</a>."
 msgstr ""
 
 #, python-format
 msgid ""
-"Finally, should you need any support, simply use the <a "
-"href=\"%(url)s\">contact form</a> or send an email to <a "
-"href=\"mailto:support@astrobin.com\">support@astrobin.com</a>."
+"Finally, should you need any support, simply use the <a href=\"%(url)s"
+"\">contact form</a> or send an email to <a href=\"mailto:support@astrobin.com"
+"\">support@astrobin.com</a>."
 msgstr ""
 
 #, python-format
 msgid ""
 "Keep in mind that AstroBin is not meant to be a free service. If you are "
-"still on a free account, you can upload images %(max)s times before you will"
-" be asked to upgrade. More info on the pricing page:"
+"still on a free account, you can upload images %(max)s times before you will "
+"be asked to upgrade. More info on the pricing page:"
 msgstr ""
 
 msgid ""
 "New uploads go to your \"staging area\", where they are unlisted. You can "
-"still share the link to an individual image in your staging area, and people"
-" with a link will be able to access it, but to make an image public and "
+"still share the link to an individual image in your staging area, and people "
+"with a link will be able to access it, but to make an image public and "
 "listed on AstroBin, you need to promote it. Visit your staging area:"
 msgstr ""
 
@@ -4093,26 +4490,19 @@ msgstr ""
 msgid "You have a new notification on AstroBin"
 msgstr "Masz nowe powiadomienia na AstroBin"
 
+msgid "See all your notifications"
+msgstr ""
+
 msgid "Edit your notification preferences"
 msgstr "Edytuj ustawienia powiadomień"
 
 msgid "Clear skies"
 msgstr "Pogodnego nieba"
 
+msgid "Follow AstroBin"
+msgstr ""
+
 #, python-format
-#| msgid ""
-#| "Hi! You have a new notification on AstroBin:\n"
-#| "\n"
-#| "%(message)s\n"
-#| "\n"
-#| "To see all your notifications, please go to %(notices_url)s.\n"
-#| "\n"
-#| "If you don't want to receive emails anymore, edit your preferences by going to http://astrobin.com%(pref_url)s.\n"
-#| "\n"
-#| "PLEASE DO NOT REPLY TO THIS EMAIL\n"
-#| "\n"
-#| "Clear skies,\n"
-#| "AstroBin.\n"
 msgid ""
 "Hi! You have a new notification on AstroBin:\n"
 "\n"
@@ -4120,7 +4510,8 @@ msgid ""
 "\n"
 "To see all your notifications, please go to %(base_url)s%(notices_url)s.\n"
 "\n"
-"If you don't want to receive emails anymore, edit your preferences by going to %(base_url)s%(pref_url)s.\n"
+"If you don't want to receive emails anymore, edit your preferences by going "
+"to %(base_url)s%(pref_url)s.\n"
 "\n"
 "PLEASE DO NOT REPLY TO THIS EMAIL\n"
 "\n"
@@ -4190,8 +4581,7 @@ msgstr ""
 
 #, python-format
 msgid ""
-"<a href=\"%(object_url)s\">Your image has been successfully plate-"
-"solved.</a>"
+"<a href=\"%(object_url)s\">Your image has been successfully plate-solved.</a>"
 msgstr ""
 "<a href=\"%(object_url)s\">Automatyczna fotoastrometria Twojego zdjęcia "
 "powiodła się.</a>"
@@ -4207,14 +4597,14 @@ msgstr ""
 
 #, python-format
 msgid ""
-"You have been inactive as an IOTD Submitter or Reviewer for %(days)s days or"
-" more."
+"You have been inactive as an IOTD Submitter or Reviewer for %(days)s days or "
+"more."
 msgstr ""
 
 msgid ""
 "While the AstroBin IOTD selection process has a good level of redundancy "
-"built into the system, it still relies on the members of the staff regularly"
-" making selections from their respective queues."
+"built into the system, it still relies on the members of the staff regularly "
+"making selections from their respective queues."
 msgstr ""
 
 msgid ""
@@ -4225,6 +4615,9 @@ msgstr ""
 msgid ""
 "This will ensure that potential IOTD or Top Pick candidates don't go "
 "unnoticed sitting in the queue of an inactive staff member."
+msgstr ""
+
+msgid "Thank you for understanding!"
 msgstr ""
 
 #, python-format
@@ -4246,7 +4639,8 @@ msgid ""
 msgstr ""
 "%(number)s Twoich zdjęć ma nieuzupełnione dane.\n"
 "\n"
-"Jakość AstroBin zależy od danych wprowadzonych przez Ciebie i innych użytkowników.\n"
+"Jakość AstroBin zależy od danych wprowadzonych przez Ciebie i innych "
+"użytkowników.\n"
 "Uzupełnij proszę brakujące dane dla Twoich zdjęć tu:\n"
 "\n"
 "<a href=\"%(url)s\">%(url)s</a>\n"
@@ -4266,7 +4660,8 @@ msgid ""
 msgstr ""
 "%(number)s Twoich zdjęć ma nieuzupełnione dane.\n"
 "\n"
-"Jakość AstroBin zależy od danych wprowadzonych przez Ciebie i innych użytkowników.\n"
+"Jakość AstroBin zależy od danych wprowadzonych przez Ciebie i innych "
+"użytkowników.\n"
 "Uzupełnij proszę brakujące dane dla Twoich zdjęć tu:\n"
 "\n"
 "%(url)s\n"
@@ -4289,9 +4684,9 @@ msgid "Data is paramount on AstroBin, and the whole community thrives on it."
 msgstr ""
 
 msgid ""
-"We have noticed that one or more of your images are missing the \"Data "
-"source\" field, a very important piece of information that the members of "
-"the AstroBin community value a lot."
+"We have noticed that one or more of your images are missing the \"Data source"
+"\" field, a very important piece of information that the members of the "
+"AstroBin community value a lot."
 msgstr ""
 
 msgid ""
@@ -4304,9 +4699,8 @@ msgstr ""
 
 msgid ""
 "We have noticed that one or more of your images that were acquired at a "
-"remote observatory are missing the \"Remote source\" field, a very important"
-" piece of information that the members of the AstroBin community value a "
-"lot."
+"remote observatory are missing the \"Remote source\" field, a very important "
+"piece of information that the members of the AstroBin community value a lot."
 msgstr ""
 
 msgid "You have images on AstroBin missing the \"Remote source\" information"
@@ -4329,9 +4723,12 @@ msgid ""
 "If you would like to activate it now, please click on the following link:"
 msgstr ""
 
+msgid "Activate my account"
+msgstr ""
+
 msgid ""
-"If you don't, we will delete this account in a week. But don't worry, you're"
-" always welcome to join again!"
+"If you don't, we will delete this account in a week. But don't worry, you're "
+"always welcome to join again!"
 msgstr ""
 
 msgid ""
@@ -4342,8 +4739,11 @@ msgstr ""
 #, python-format
 msgid ""
 "We noticed that on %(date)s GMT you created an account on AstroBin, the "
-"image hosting service and social community for astrophotographers, but never"
-" got the chance to activate it."
+"image hosting service and social community for astrophotographers, but never "
+"got the chance to activate it."
+msgstr ""
+
+msgid "Would you like to activate your account on AstroBin?"
 msgstr ""
 
 #, python-format
@@ -4351,18 +4751,14 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> added your image to their bookmarks: "
 "<a href=\"%(url)s\">%(title)s</a>."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user)s</a> dodał Twoje zdjęcie do ulubionych!: <a"
-" href=\"%(url)s\">%(title)s</a>."
+"<a href=\"%(user_url)s\">%(user)s</a> dodał Twoje zdjęcie do ulubionych!: <a "
+"href=\"%(url)s\">%(title)s</a>."
 
 #, python-format
-#| msgid "%(user)s has added your image to their bookmarks: %(url)s"
 msgid "%(user)s added your image \"%(title)s\" to their bookmarks: %(url)s"
 msgstr ""
 
 #, python-format
-#| msgid ""
-#| "<a href=\"%(url)s\"><strong>%(user)s</strong> has added your image to their "
-#| "bookmarks!</a>"
 msgid ""
 "<strong>%(user)s</strong> added your image \"%(title)s\" to their bookmarks!"
 msgstr ""
@@ -4373,11 +4769,11 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(user)s commented on your image! Check it out at the following url: <a "
-"href=\"%(url)s\">%(url)s</a>"
+"%(user)s commented on your image! Check it out at the following url: <a href="
+"\"%(url)s\">%(url)s</a>"
 msgstr ""
-"%(user)s skomentował Twoje zdjęcie! Komentarz możesz zobaczyć tu: <a "
-"href=\"%(url)s\">%(url)s</a>"
+"%(user)s skomentował Twoje zdjęcie! Komentarz możesz zobaczyć tu: <a href="
+"\"%(url)s\">%(url)s</a>"
 
 #, python-format
 msgid ""
@@ -4386,7 +4782,8 @@ msgstr ""
 "%(user)s skomentował Twoje zdjęcie! Komentarz możesz zobaczyć tu: %(url)s"
 
 #, python-format
-msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> commented on your image!</a>"
+msgid ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> commented on your image!</a>"
 msgstr ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> skomentował Twoje zdjęcie!</a>"
 
@@ -4395,58 +4792,42 @@ msgid "%(user)s commented on your image!"
 msgstr "%(user)s skomentował Twoje zdjęcie!"
 
 #, python-format
-#| msgid ""
-#| "<a href=\"%(user_url)s\">%(user)s</a> likes your image: <a "
-#| "href=\"%(url)s\">%(title)s</a>."
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> likes your comment: <a "
-"href=\"%(url)s\">%(comment)s</a>."
+"<a href=\"%(user_url)s\">%(user)s</a> likes your comment: <a href=\"%(url)s"
+"\">%(comment)s</a>."
 msgstr ""
 
 #, python-format
-#| msgid "%(user)s likes your image: %(url)s"
 msgid "%(user)s likes your comment: %(url)s %(comment)s"
 msgstr ""
 
 #, python-format
-#| msgid ""
-#| "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
 msgid "<strong>%(user)s</strong> likes your comment!"
 msgstr ""
 
 #, python-format
-#| msgid "%(user)s replied to your comment."
 msgid "%(user)s likes your comment!"
 msgstr ""
 
 #, python-format
-#| msgid ""
-#| "<a href=\"%(user_url)s\">%(user)s</a> likes your image: <a "
-#| "href=\"%(url)s\">%(title)s</a>."
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a comment: <a "
-"href=\"%(url)s\">%(url)s</a>."
+"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a comment: <a href="
+"\"%(url)s\">%(url)s</a>."
 msgstr ""
 
 #, python-format
-#| msgid "%(user)s likes your image: %(url)s"
 msgid "%(user)s mentioned you in a comment: %(url)s"
 msgstr ""
 
 #, python-format
-#| msgid "<strong>%(user)s</strong> has published a new image"
 msgid "<strong>%(user)s</strong> mentioned you in a comment!"
 msgstr ""
 
 #, python-format
-#| msgid "%(user)s replied to your comment."
 msgid "%(user)s mentioned you in a comment!"
 msgstr ""
 
 #, python-format
-#| msgid ""
-#| "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it out "
-#| "at the following url: %(url)s"
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it out "
 "at the following url: <a href=\"%(url)s\">%(url)s</a>"
@@ -4460,10 +4841,11 @@ msgstr ""
 "%(url)s"
 
 #, python-format
-msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> replied to your comment.</a>"
+msgid ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> replied to your comment.</a>"
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> odpowiedział na Twoj "
-"komentarz.</a>"
+"<a href=\"%(url)s\"><strong>%(user)s</strong> odpowiedział na Twoj komentarz."
+"</a>"
 
 #, python-format
 msgid "%(user)s replied to your comment."
@@ -4479,70 +4861,55 @@ msgstr ""
 
 #, python-format
 msgid ""
-"User %(object)s is now following you. They will be notified when you publish"
-" new images."
+"User %(object)s is now following you. They will be notified when you publish "
+"new images."
 msgstr ""
 "Użytkownik %(object)s Cię obserwuje. Będzie poinformowany, kiedy "
 "opublikujesz nowe zdjęcia."
 
 #, python-format
 msgid ""
-"<a href=\"%(object_url)s\"><strong>%(object)s</strong> is now following "
-"you.</a>"
-msgstr "<a href=\"%(object_url)s\"><strong>%(object)s</strong> obserwują Cię.</a>"
+"<a href=\"%(object_url)s\"><strong>%(object)s</strong> is now following you."
+"</a>"
+msgstr ""
+"<a href=\"%(object_url)s\"><strong>%(object)s</strong> obserwują Cię.</a>"
 
 msgid "You have a new follower!"
 msgstr "Masz nowego obserwatora!"
 
 #, python-format
-#| msgid ""
-#| "<a href=\"%(user_url)s\">%(user)s</a> likes your image: <a "
-#| "href=\"%(url)s\">%(title)s</a>."
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> likes your post on this forum topic: "
 "<a href=\"%(url)s\">%(post)s</a>."
 msgstr ""
 
 #, python-format
-#| msgid "%(user)s likes your image: %(url)s"
 msgid "%(user)s likes your post on this forum topic: %(url)s"
 msgstr ""
 
 #, python-format
-#| msgid ""
-#| "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
 msgid "<strong>%(user)s</strong> likes your forum post!"
 msgstr ""
 
 #, python-format
-#| msgid "%(user)s likes your image: %(url)s"
 msgid "%(user)s likes your forum post!"
 msgstr ""
 
 #, python-format
-#| msgid ""
-#| "<a href=\"%(user_url)s\">%(user)s</a> added your image to their bookmarks: "
-#| "<a href=\"%(url)s\">%(title)s</a>."
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a post on this forum "
 "topic: <a href=\"%(url)s\">%(post)s</a>."
 msgstr ""
 
 #, python-format
-#| msgid ""
-#| "%(user)s commented on your image! Check it out at the following url: %(url)s"
 msgid "%(user)s mentioned you in a post on this forum topic: %(url)s"
 msgstr ""
 
 #, python-format
-#| msgid ""
-#| "<strong>%(inviter)s</strong> invited you to join the group: "
-#| "\"%(group_name)s\""
 msgid "<strong>%(user)s</strong> mentioned you in a forum post!"
 msgstr ""
 
 #, python-format
-#| msgid "%(user)s commented on your image!"
 msgid "%(user)s mentioned you in a forum post!"
 msgstr ""
 
@@ -4568,8 +4935,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"<strong>%(inviter)s</strong> invited you to join the group: "
-"\"%(group_name)s\""
+"<strong>%(inviter)s</strong> invited you to join the group: \"%(group_name)s"
+"\""
 msgstr ""
 "<strong>%(inviter)s</strong> zaprosił Cię do dołączenia do grupy "
 "\"%(group_name)s\""
@@ -4600,8 +4967,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"<strong>%(requester)s</strong> requested to join the group: "
-"\"%(group_name)s\""
+"<strong>%(requester)s</strong> requested to join the group: \"%(group_name)s"
+"\""
 msgstr ""
 "<strong>%(requester)s</strong> wnioskuje o dołączenie do grupy: "
 "\"%(group_name)s\""
@@ -4648,11 +5015,11 @@ msgstr "Nowa wersja opublikowana przez %(originator)s"
 
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> likes your image: <a "
-"href=\"%(url)s\">%(title)s</a>."
+"<a href=\"%(user_url)s\">%(user)s</a> likes your image: <a href=\"%(url)s\">"
+"%(title)s</a>."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user)s</a> lubi Twoje zdjęcie!: <a "
-"href=\"%(url)s\">%(title)s</a>."
+"<a href=\"%(user_url)s\">%(user)s</a> lubi Twoje zdjęcie!: <a href=\"%(url)s"
+"\">%(title)s</a>."
 
 #, python-format
 msgid "%(user)s likes your image: %(url)s"
@@ -4679,8 +5046,8 @@ msgstr "%(creator)s utworzył nową grupę publiczną: \"%(group_name)s\""
 msgid ""
 "<strong>%(creator)s</strong> created a new public group: \"%(group_name)s\""
 msgstr ""
-"<strong>%(creator)s</strong> utworzył nową grupę publiczną: "
-"\"%(group_name)s\""
+"<strong>%(creator)s</strong> utworzył nową grupę publiczną: \"%(group_name)s"
+"\""
 
 #, python-format
 msgid "%(creator)s created a new public group: \"%(group_name)s\""
@@ -4693,9 +5060,9 @@ msgstr ""
 
 msgid ""
 "AstroBin subscriptions are valid for 1 year. When a subscription expires, "
-"nothing happens to your content. Nothing is deleted, hidden, held hostage or"
-" anything. In fact, you can leave it up forever even if you stop being "
-"active as an astrophotographer."
+"nothing happens to your content. Nothing is deleted, hidden, held hostage or "
+"anything. In fact, you can leave it up forever even if you stop being active "
+"as an astrophotographer."
 msgstr ""
 
 msgid ""
@@ -4727,8 +5094,7 @@ msgstr ""
 
 #, python-format
 msgid ""
-"<strong>%(user)s</strong> posted a new topic to the group: "
-"\"%(group_name)s\""
+"<strong>%(user)s</strong> posted a new topic to the group: \"%(group_name)s\""
 msgstr ""
 
 #, python-format
@@ -4745,12 +5111,14 @@ msgid ""
 "You have received a private message on AstroBin!\n"
 "Read it at the following link:\n"
 "\n"
-"<a href=\"https://www.astrobin.com/messages/inbox/\">https://www.astrobin.com/messages/inbox/</a>"
+"<a href=\"https://www.astrobin.com/messages/inbox/\">https://www.astrobin."
+"com/messages/inbox/</a>"
 msgstr ""
 "Otrzymałeś/aś prywatną wiadomość na AstroBin!\n"
 "Możesz ją przeczytać klikając w poniższy link:\n"
 "\n"
-"<a href=\"https://www.astrobin.com/messages/inbox/\">https://www.astrobin.com/messages/inbox/</a>"
+"<a href=\"https://www.astrobin.com/messages/inbox/\">https://www.astrobin."
+"com/messages/inbox/</a>"
 
 msgid ""
 "You have received a private message on AstroBin!\n"
@@ -4779,6 +5147,9 @@ msgstr ""
 msgid "%(user)s joined the public group: \"%(group_name)s\""
 msgstr "%(user)s dołączył do grupy publicznej: \"%(group_name)s\""
 
+msgid "Welcome to AstroBin!"
+msgstr ""
+
 msgid ""
 "I'm very excited that you joined, and I would like to give you a warm "
 "welcome to the community!"
@@ -4796,8 +5167,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Head over to your settings and configure <a href=\"%(url)s\">your "
-"profile</a>."
+"Head over to your settings and configure <a href=\"%(url)s\">your profile</"
+"a>."
 msgstr ""
 
 #, python-format
@@ -4814,11 +5185,13 @@ msgstr ""
 
 msgid ""
 "Follow AstroBin on social networks! AstroBin posts quick announcements and "
-"reports there, in addition to the Image of the Day, and Top Picks as "
-"stories!"
+"reports there, in addition to the Image of the Day, and Top Picks as stories!"
 msgstr ""
 
 msgid "Thanks again for joining and clear skies!"
+msgstr ""
+
+msgid "Have a look at our frequently asked questions:"
 msgstr ""
 
 msgid "Head over to your settings and configure your profile:"
@@ -4843,6 +5216,9 @@ msgstr "Poprzednia strona"
 
 msgid "Next page"
 msgstr "Następna strona"
+
+msgid "No additional information available for this item."
+msgstr ""
 
 msgid "Find images"
 msgstr "Znajdź zdjęcia"
@@ -4873,14 +5249,20 @@ msgid ""
 "your topic."
 msgstr ""
 
+msgid "View forums"
+msgstr ""
+
 msgid "This topic was closed by a moderator."
+msgstr ""
+
+msgid "New reply"
 msgstr ""
 
 #, python-format
 msgid ""
 "The AstroBin forums are a place to discuss astrophotography and astronomy. "
-"If you need help with AstroBin please use the <a "
-"href=\"%(contact_url)s\">contact form</a>."
+"If you need help with AstroBin please use the <a href=\"%(contact_url)s"
+"\">contact form</a>."
 msgstr ""
 
 msgid ""
@@ -4889,11 +5271,14 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Posts about AstroBin itself, such as questions or comments about the IOTD/TP"
-" process, or the AstroBin Index, AstroBin \"likes\", or the forums "
+"Posts about AstroBin itself, such as questions or comments about the IOTD/TP "
+"process, or the AstroBin Index, AstroBin \"likes\", or the forums "
 "themselves, are also considered off-topic and will be deleted. If you want "
-"to provide feedback or ask a question about AstroBin, please <a "
-"href=\"%(contact_url)s\">contact us</a>: we really value your input!"
+"to provide feedback or ask a question about AstroBin, please <a href="
+"\"%(contact_url)s\">contact us</a>: we really value your input!"
+msgstr ""
+
+msgid "Thanks for your cooperation!"
 msgstr ""
 
 msgid "I have read the text above"
@@ -4963,12 +5348,13 @@ msgstr ""
 msgid "*** Type your reply here ***"
 msgstr ""
 
-#| msgid "likes"
+msgid "(deleted)"
+msgstr ""
+
 msgctxt "Noun, e.g. 'This element has 1 like'"
 msgid "like"
 msgstr ""
 
-#| msgid "likes"
 msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr ""
@@ -5027,6 +5413,15 @@ msgstr ""
 msgid "Subscribers"
 msgstr "Obserwujący"
 
+msgid "You have unread posts in this topic."
+msgstr ""
+
+msgid "Would you like to jump to the new posts since your last visit?"
+msgstr ""
+
+msgid "Click here"
+msgstr ""
+
 msgid "Topic"
 msgstr "Temat"
 
@@ -5039,6 +5434,9 @@ msgstr "Przyklejone"
 msgid "Closed"
 msgstr "Zamknięte"
 
+msgid "This forum does not have any topics."
+msgstr ""
+
 msgid "Mark as spam"
 msgstr "Oznacz jako spam"
 
@@ -5048,6 +5446,9 @@ msgid ""
 msgstr ""
 
 msgid "For more information, please check out our Twitter feed:"
+msgstr ""
+
+msgid "Account activation"
 msgstr ""
 
 msgid "Account successfully activated"
@@ -5131,8 +5532,8 @@ msgstr ""
 "aktywacyjnym."
 
 msgid ""
-"If you don't receive the e-mail within a few minutes, remember to check your"
-" spam folder."
+"If you don't receive the e-mail within a few minutes, remember to check your "
+"spam folder."
 msgstr ""
 "Jeśli nie otrzymasz tego maila w ciągu kilku minut, sprawdź swój folder ze "
 "spamem"
@@ -5141,12 +5542,11 @@ msgid "Register with AstroBin"
 msgstr "Zarejestruj się w AstroBin"
 
 msgid ""
-"By registering with AstroBin, you agree to our <a "
-"href=\"https://welcome.astrobin.com/terms-of-service\">terms of service</a>."
+"By registering with AstroBin, you agree to our <a href=\"https://welcome."
+"astrobin.com/terms-of-service\">terms of service</a>."
 msgstr ""
-"Rejestrując konto w AstroBin, zgadzasz się na <a "
-"href=\"https://welcome.astrobin.com/terms-of-service\">warunki korzystania z"
-" serwisu</a>."
+"Rejestrując konto w AstroBin, zgadzasz się na <a href=\"https://welcome."
+"astrobin.com/terms-of-service\">warunki korzystania z serwisu</a>."
 
 msgid "Sort"
 msgstr "Sortuj"
@@ -5154,20 +5554,30 @@ msgstr "Sortuj"
 msgid "Relevance"
 msgstr "Związek z tematem"
 
-#| msgid ""
-#| "Search for astronomical objects, telescopes or lenses, cameras, filters..."
+msgid "Large field radius"
+msgstr ""
+
+msgid "Small field radius"
+msgstr ""
+
+msgid "Large pixel scale"
+msgstr ""
+
+msgid "Small pixel scale"
+msgstr ""
+
 msgid "Search for celestial objects, equipment items, users, etc..."
 msgstr ""
 
 #, python-format
 msgid ""
-"<strong>%(total_users)s</strong> users uploaded "
-"<strong>%(total_images)s</strong> images, reaching "
-"<strong>%(total_integration)s</strong> hours of integration time."
+"<strong>%(total_users)s</strong> users uploaded <strong>%(total_images)s</"
+"strong> images, reaching <strong>%(total_integration)s</strong> hours of "
+"integration time."
 msgstr ""
-"<strong>%(total_users)s</strong> użytkowników przesłało "
-"<strong>%(total_images)s</strong> zdjęć, sumarycznie dając "
-"<strong>%(total_integration)s</strong> godzin naświetlania."
+"<strong>%(total_users)s</strong> użytkowników przesłało <strong>"
+"%(total_images)s</strong> zdjęć, sumarycznie dając <strong>"
+"%(total_integration)s</strong> godzin naświetlania."
 
 msgid "Total integration hours in the last 12 months"
 msgstr "Sumaryczny czas naświetlania w ciągu ostatnich 12 miesięcy"
@@ -5225,8 +5635,12 @@ msgid ""
 "Thank you for being a premium member! Enjoy your unlimited images.\n"
 "                        "
 msgstr ""
-"Dziękujemy za to, że jesteś użytkownikiem Premium! Ciesz się nieograniczoną możliwością ładowania zdjęć.\n"
+"Dziękujemy za to, że jesteś użytkownikiem Premium! Ciesz się nieograniczoną "
+"możliwością ładowania zdjęć.\n"
 "                        "
+
+msgid "Would you like to upgrade to a higher plan?"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5242,12 +5656,16 @@ msgstr "Ładuję..."
 
 msgid ""
 "Use this button to upload an image to the\n"
-"                                        <strong>Staging Area</strong>. It's perfect for works in progress that you want\n"
-"                                        to share on Internet forums. Read more in the\n"
-"                                        <a href=\"https://welcome.astrobin.com/faq\">FAQ</a>."
+"                                        <strong>Staging Area</strong>. It's "
+"perfect for works in progress that you want\n"
+"                                        to share on Internet forums. Read "
+"more in the\n"
+"                                        <a href=\"https://welcome.astrobin."
+"com/faq\">FAQ</a>."
 msgstr ""
 "Użyj tego przycisku aby załadować zdjęcie do\n"
-"<strong>Przechowalni</strong>. Sprawdza się to świetnie dla nieukończonych zdjęć,\n"
+"<strong>Przechowalni</strong>. Sprawdza się to świetnie dla nieukończonych "
+"zdjęć,\n"
 "które chcesz publikować np na forach internetowych. Przeczytaj więcej w\n"
 "<a href=\"https://welcome.astrobin.com/faq\">FAQ</a>."
 
@@ -5260,14 +5678,18 @@ msgstr ""
 #, python-format
 msgid ""
 "Use this button to upload an image to the\n"
-"                                        <strong>Public Area</strong>. It will be displayed in\n"
-"                                        <a href=\"%(profile_url)s\">your profile</a> and here on the home page. You can\n"
-"                                        <a href=\"%(flickr_url)s\">import from Flickr</a> too."
+"                                        <strong>Public Area</strong>. It "
+"will be displayed in\n"
+"                                        <a href=\"%(profile_url)s\">your "
+"profile</a> and here on the home page. You can\n"
+"                                        <a href=\"%(flickr_url)s\">import "
+"from Flickr</a> too."
 msgstr ""
 "Użyj tego przycisku aby załadować zdjęcie do\n"
 "<strong>Galerii Publicznej</strong>. Będzie wyświetlony w\n"
 "<a href=\"%(profile_url)s\">Twoim profilu</a> i na stronie głównej.\n"
-"Możesz również importować zdjęcia z <a href=\"%(flickr_url)s\">serwisu Flickr</a>. "
+"Możesz również importować zdjęcia z <a href=\"%(flickr_url)s\">serwisu "
+"Flickr</a>. "
 
 msgid "Your API Keys"
 msgstr "Twoje klucze API"
@@ -5280,11 +5702,11 @@ msgstr "Aktywny"
 
 #, python-format
 msgid ""
-"You don't have any API Keys. Please read the <a "
-"href=\"%(api_docs_url)s\">API documentation</a>."
+"You don't have any API Keys. Please read the <a href=\"%(api_docs_url)s"
+"\">API documentation</a>."
 msgstr ""
-"Nie masz żadnych kluczy API. Przeczytaj <a "
-"href=\"%(api_docs_url)s\">dokumentację API</a>."
+"Nie masz żadnych kluczy API. Przeczytaj <a href=\"%(api_docs_url)s"
+"\">dokumentację API</a>."
 
 msgid "Request an API Key"
 msgstr "Zaaplikuj o klucz API."
@@ -5319,17 +5741,14 @@ msgid "%(user)s's followed users"
 msgstr "%(user)s obserwuje następujących użytkowników"
 
 #, python-format
-#| msgid "%(user)s's favorites"
 msgid "%(user)s's friends"
 msgstr ""
 
 #, python-format
-#| msgid "These are the cities from which you usually image."
 msgid "These are the users that follow %(user)s mutually."
 msgstr ""
 
 #, python-format
-#| msgid "%(user)s's followed users"
 msgid "%(user)s's liked images"
 msgstr ""
 
@@ -5344,8 +5763,8 @@ msgstr "wykresy użytkownika %(user)s"
 msgid ""
 "Hey <strong>%(user)s</strong>! I just wanted to let you know that you could "
 "make these plots more useful if you added all data to your images. Please "
-"make sure by checking whether you have images which lack data <a "
-"href=\"%(user_page)s?public&sub=nodata\">here</a>."
+"make sure by checking whether you have images which lack data <a href="
+"\"%(user_page)s?public&sub=nodata\">here</a>."
 msgstr ""
 "Hej <strong>%(user)s</strong>! Żeby wykresy były bardziej użyteczne musisz "
 "uzupełnić dane na temat swoich zdjęć. Aby uzupełnić brakujące dane możesz "
@@ -5381,7 +5800,8 @@ msgstr ""
 "<em>Udostępnij</em>."
 
 msgid ""
-"These are your \"deleted\" images: only you can see this list. Click the images you want to\n"
+"These are your \"deleted\" images: only you can see this list. Click the "
+"images you want to\n"
 "            restore, and then use the button below to confirm."
 msgstr ""
 
@@ -5407,6 +5827,9 @@ msgstr ""
 msgid "AstroBin would like to offer you its sincerest apologies. :("
 msgstr ""
 
+msgid "Okay, don't show this again"
+msgstr ""
+
 msgid "These images don't have enough data. It's a shame..."
 msgstr "Te zdjęcia nie mają wystarczającego opisu. Szkoda..."
 
@@ -5419,24 +5842,30 @@ msgstr ""
 "dodać do nich opisy. Należy podać przynajmniej teleskop, kamerę i "
 "fotografowane obiekty. Data zbierania materiału też jest bardzo istotna."
 
+msgid "Can't find your images?"
+msgstr ""
+
 #, python-format
 msgid ""
-"All your images are still unpublished. <a "
-"href=\"%(user_page)s?staging\">Visit your Staging Area</a> to find them, or "
-"<a href=\"%(staging_area_learn_more_link)s\">learn more</a>."
+"All your images are still unpublished. <a href=\"%(user_page)s?staging"
+"\">Visit your Staging Area</a> to find them, or <a href="
+"\"%(staging_area_learn_more_link)s\">learn more</a>."
 msgstr ""
 
 msgid "Delete account"
 msgstr "Usuń konto"
 
 msgid ""
-"Are you sure you want to delete your account? This operation is irreversible"
-" and immediate. All traces of your activity on AstroBin will be erased "
+"Are you sure you want to delete your account? This operation is irreversible "
+"and immediate. All traces of your activity on AstroBin will be erased "
 "forever!"
 msgstr ""
 "Czy jesteś pewien, że chcesz usunąć swoje konto? Ta operacja jest "
-"nieodwracalna i natychmiastowa. Wszelkie ślady Twojej aktywności na AstroBin"
-" zostaną usunięte na zawsze!"
+"nieodwracalna i natychmiastowa. Wszelkie ślady Twojej aktywności na AstroBin "
+"zostaną usunięte na zawsze!"
+
+msgid "Account deleted"
+msgstr ""
 
 msgid "Your account was deleted. Thanks for using AstroBin until now!"
 msgstr ""
@@ -5444,14 +5873,29 @@ msgstr ""
 msgid "Edit your basic information"
 msgstr "Edytuj podstawowe dane"
 
+msgid "Download your data"
+msgstr ""
+
 msgid ""
-"You can download all your data off AstroBin, including original uploads, all"
-" revisions, and information such as description, gear used, acquisition "
+"You can download all your data off AstroBin, including original uploads, all "
+"revisions, and information such as description, gear used, acquisition "
 "details, and so on."
+msgstr ""
+
+msgid "Request download"
+msgstr ""
+
+msgid "Your past requests"
+msgstr ""
+
+msgid "Request time"
 msgstr ""
 
 msgid "Status"
 msgstr "Status"
+
+msgid "File size"
+msgstr ""
 
 msgid "There doesn't seem to be anything here."
 msgstr ""
@@ -5462,13 +5906,13 @@ msgstr ""
 msgid ""
 "To prevent excessive usage of server resources, you can only request one "
 "data download per 24 hour period. If you believe your download is stuck, "
-"please email us at <a "
-"href=\"mailto:astrobin@astrobin.com\">astrobin@astrobin.com</a>."
+"please email us at <a href=\"mailto:astrobin@astrobin.com"
+"\">astrobin@astrobin.com</a>."
 msgstr ""
 
 msgid ""
-"Please keep in mind that it could take several hours for your download to be"
-" ready, depending on the number and size of your images, and how busy the "
+"Please keep in mind that it could take several hours for your download to be "
+"ready, depending on the number and size of your images, and how busy the "
 "servers are at the moment."
 msgstr ""
 
@@ -5482,16 +5926,16 @@ msgid "Please note!"
 msgstr "Uwaga!"
 
 msgid ""
-"When you add or edit the make, the name, and the properties of this product,"
-" the data is global and shared between all AstroBin users. Do not write any "
-"information in there that refers to your personal copy of this product, like"
-" \"modded\", \"sold\", \"broken\", \"a present from my aunt\" and so on. "
+"When you add or edit the make, the name, and the properties of this product, "
+"the data is global and shared between all AstroBin users. Do not write any "
+"information in there that refers to your personal copy of this product, like "
+"\"modded\", \"sold\", \"broken\", \"a present from my aunt\" and so on. "
 msgstr ""
 "Kiedy dodajesz lub edytujesz markę, nazwę lub inne właściwości produktu, te "
 "dane są globalnie współdzielone pomiędzy wszystkimi użytkownikami AstroBin. "
 "Nie wpisuj żadnych informacji, które dotyczą tylko Twojego egzemplarza "
-"sprzętu, np: \"modyfikowany\", \"sprzedany\", \"popsuty\", \"prezent od "
-"cioci\" itd..."
+"sprzętu, np: \"modyfikowany\", \"sprzedany\", \"popsuty\", \"prezent od cioci"
+"\" itd..."
 
 msgid ""
 "The following information, instead, is personal, and may refer to your copy "
@@ -5511,8 +5955,8 @@ msgid ""
 "You can set a default type of license for everything you upload into "
 "AstroBin. Change your default here."
 msgstr ""
-"Możesz ustawić domyślną licencję na wszystkie materiały, które publikujesz w"
-" AstroBin. Zmień opcję domyślną tutaj."
+"Możesz ustawić domyślną licencję na wszystkie materiały, które publikujesz w "
+"AstroBin. Zmień opcję domyślną tutaj."
 
 msgid "Edit your locations"
 msgstr "Edytuj swoje lokalizacje"
@@ -5530,6 +5974,9 @@ msgstr "AstroBin nie ujawni Twojej lokalizacji innym użytkownikom."
 
 msgid "Import from Flickr"
 msgstr "Importuj z Flickr'a"
+
+msgid "Change your username"
+msgstr ""
 
 msgid "Edit your site preferences"
 msgstr "Edytuj ustawienia strony"
@@ -5558,8 +6005,8 @@ msgid "Authenticate with Flickr"
 msgstr "Zaloguj do Flickr"
 
 msgid ""
-"Unfortunately you need to enable Javascript to be able to import photos from"
-" Flickr at this time."
+"Unfortunately you need to enable Javascript to be able to import photos from "
+"Flickr at this time."
 msgstr ""
 "Niestety musisz włączyć Javascript, żeby importować zdjęcia z Flickr'a."
 
@@ -5595,8 +6042,14 @@ msgstr "Subskrypcja"
 msgid "Expiration date"
 msgstr "Data ważności"
 
+msgid "Images used"
+msgstr ""
+
 msgid "Thanks for your support!"
 msgstr "Dziękujemy za Twoje wsparcie!"
+
+msgid "Your payments"
+msgstr ""
 
 msgid "This data is currently not available and will be recalculated shortly."
 msgstr ""
@@ -5616,6 +6069,9 @@ msgstr ""
 msgid "Trash"
 msgstr ""
 
+msgid "Liked images"
+msgstr ""
+
 msgid "Following"
 msgstr "Obserwujesz"
 
@@ -5631,6 +6087,9 @@ msgstr ""
 msgid "Add/remove images"
 msgstr "Dodaj/usuń zdjęcia"
 
+msgid "Quick edit"
+msgstr ""
+
 msgid "Key/value pairs"
 msgstr ""
 
@@ -5640,11 +6099,14 @@ msgstr ""
 #, python-format
 msgid ""
 "Following the <a href=\"%(url)s\" target=\"_blank\">data loss incident in "
-"February 2020</a>, these images <strong>were automatically "
-"recovered</strong>."
+"February 2020</a>, these images <strong>were automatically recovered</"
+"strong>."
 msgstr ""
 
 msgid "Now you need to <strong>manually confirm or reject</strong> them."
+msgstr ""
+
+msgid "Instructions"
 msgstr ""
 
 msgid ""
@@ -5662,7 +6124,9 @@ msgid ""
 "deletion, once more to return to the \"do nothing\" state."
 msgstr ""
 
-msgid "You can also use the \"Recover all\" and \"Delete all\" buttons at the bottom."
+msgid ""
+"You can also use the \"Recover all\" and \"Delete all\" buttons at the "
+"bottom."
 msgstr ""
 
 msgid ""
@@ -5680,11 +6144,32 @@ msgid ""
 "depending on where they were before the data loss)."
 msgstr ""
 
+msgid "Original upload"
+msgstr ""
+
+msgid "Staging area"
+msgstr ""
+
+msgid "Deleted"
+msgstr ""
+
 msgid "Recover all"
+msgstr ""
+
+msgid "Delete all"
 msgstr ""
 
 msgid "Reset"
 msgstr "Zresetuj"
+
+msgid "Submit selected"
+msgstr ""
+
+msgid "There are no images to recover."
+msgstr ""
+
+msgid "Restore selected"
+msgstr ""
 
 msgid ""
 "Click on the images to include them in this collection (and click again to "
@@ -5717,6 +6202,9 @@ msgstr "Kolekcja nie zawiera zdjęć."
 msgid "Would you like to add some images?"
 msgstr "Czy chcesz dodać kilka zdjęć?"
 
+msgid "Collection"
+msgstr ""
+
 msgid "Tools"
 msgstr "Narzędzia"
 
@@ -5735,8 +6223,26 @@ msgstr ""
 msgid "Edit collection"
 msgstr "Edytuj kolekcję"
 
+msgid "Show filters"
+msgstr ""
+
+msgid "Hide filters"
+msgstr ""
+
 #, python-brace-format
 msgid "${filter.label}"
+msgstr ""
+
+msgid "Results"
+msgstr ""
+
+msgid "Search terms"
+msgstr ""
+
+msgid "Search domain"
+msgstr ""
+
+msgid "Search by"
 msgstr ""
 
 msgid "Only animated"
@@ -5745,24 +6251,41 @@ msgstr ""
 msgid "Award"
 msgstr ""
 
+msgid "Publication date range"
+msgstr ""
+
+msgid "Acquisition date range"
+msgstr ""
+
 msgid "Camera type"
 msgstr "Typ kamery"
+
+msgid "Field radius (deg)"
+msgstr ""
 
 msgid "Minimum data"
 msgstr ""
 
 #, python-format
-#| msgid "Min. Moon phase %"
 msgid "Moon phase (%%)"
+msgstr ""
+
+msgid "Pixel scale (arcsec/pixel)"
 msgstr ""
 
 msgid "Telescope type"
 msgstr "Typ teleskopu"
 
+msgid "Integration time (hours)"
+msgstr ""
+
 #, python-format
 msgid ""
 "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Ultimate</a> "
 "subscription."
+msgstr ""
+
+msgid "Select"
 msgstr ""
 
 msgid "Add filter:"
@@ -5771,18 +6294,31 @@ msgstr ""
 msgid "Image of the Day"
 msgstr "Zdjęcie dnia"
 
+msgid "Top pick"
+msgstr ""
+
+msgid "Top pick nomination"
+msgstr ""
+
+msgid "Guider/planetary"
+msgstr ""
+
 msgid "Min"
 msgstr ""
 
 msgid "Max"
 msgstr ""
 
-#| msgid "Imaging telescope or lens"
-#| msgid_plural "Imaging telescopes or lenses"
 msgid "Imaging telescopes"
 msgstr ""
 
 msgid "Astrometry"
+msgstr ""
+
+msgid "Everything"
+msgstr ""
+
+msgid "By basic information"
 msgstr ""
 
 msgid "By astrometry details"
@@ -5791,18 +6327,82 @@ msgstr ""
 msgid "Objects in field"
 msgstr "Obiekt w polu"
 
-#| msgid "Guiding telescope or lens"
-#| msgid_plural "Guiding telescopes or lenses"
+msgid "By gear used"
+msgstr ""
+
 msgid "Guiding telescopes"
+msgstr ""
+
+msgid "Comments & forums"
+msgstr ""
+
+msgid "Earth's moon"
+msgstr ""
+
+msgid "Other solar system object"
 msgstr ""
 
 msgid "Achromatic"
 msgstr ""
 
+msgid "Semi-apochromatic"
+msgstr ""
+
+msgid "Apochromatic"
+msgstr ""
+
+msgid "Non-achromatic Galilean"
+msgstr ""
+
+msgid "Non-achromatic Keplerian"
+msgstr ""
+
+msgid "Superchromat"
+msgstr ""
+
+msgid "Dall-Kirkham"
+msgstr ""
+
 msgid "Nasmyth"
 msgstr ""
 
+msgid "Ritchey Chretien"
+msgstr ""
+
+msgid "Gregorian"
+msgstr ""
+
+msgid "Herschellian"
+msgstr ""
+
+msgid "Newtonian"
+msgstr ""
+
+msgid "Argunov-Cassegrain"
+msgstr ""
+
+msgid "Klevtsov-Cassegrain"
+msgstr ""
+
+msgid "Lurie-Houghton"
+msgstr ""
+
 msgid "Maksutov"
+msgstr ""
+
+msgid "Maksutov-Cassegrain"
+msgstr ""
+
+msgid "Modified Dall-Kirkham"
+msgstr ""
+
+msgid "Schmidt camera"
+msgstr ""
+
+msgid "Schmidt-Cassegrain"
+msgstr ""
+
+msgid "ACF Schmidt-Cassegrain"
 msgstr ""
 
 msgid "Rowe-Ackermann Schmidt astrograph"
@@ -5826,6 +6426,9 @@ msgid ""
 msgstr ""
 "Zdjęcie w nieprawidłowym formacie lub brak danych. Dozwolone formaty: JPG, "
 "PNG lub GIF"
+
+msgid "You have reached your image count limit. Please upgrade!"
+msgstr ""
 
 msgid ""
 "There was one or more errors processing the form. You may need to scroll "
@@ -5886,6 +6489,15 @@ msgstr ""
 msgid "You already have a collection with that name"
 msgstr ""
 
+msgid "Collection updated!"
+msgstr ""
+
+msgid "Images updated!"
+msgstr ""
+
+msgid "Collection deleted!"
+msgstr ""
+
 msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr ""
@@ -5898,8 +6510,6 @@ msgid ""
 "redirected you to the revision currently marked as final."
 msgstr ""
 
-#| msgid "Accessory"
-#| msgid_plural "Accessories"
 msgid "Accessory"
 msgstr ""
 
@@ -5924,6 +6534,15 @@ msgstr "Twój obraz został usunięty"
 msgid "Revision deleted."
 msgstr "Wybrana wersja zdjęcia została usunięta."
 
+msgid "Original version deleted!"
+msgstr ""
+
+msgid "Image moved to the staging area."
+msgstr ""
+
+msgid "Image moved to the public area."
+msgstr ""
+
 #, python-format
 msgid "%s topics deleted"
 msgstr ""
@@ -5934,6 +6553,9 @@ msgid ""
 msgstr ""
 
 msgid "Referral code (optional)"
+msgstr ""
+
+msgid "Are you a robot?"
 msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."

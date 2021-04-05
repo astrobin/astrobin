@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 22:00+0000\n"
+"POT-Creation-Date: 2021-04-05 20:25+0000\n"
 "PO-Revision-Date: 2020-05-15 20:18+0000\n"
 "Last-Translator: DanielaDGR <danieladgr.5r@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,6 +36,9 @@ msgstr "Las imágenes en la zona de prueba no pueden enviarse."
 
 msgid "This user has chosen to be excluded from competitions."
 msgstr "Este usuario ha optado por ser excluido de los concursos."
+
+msgid "This user has been banned from competitions."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -131,6 +134,14 @@ msgstr "No puede anular un IOTD pasado o actual."
 
 #, python-format
 msgid "you already selected %s IOTD today (UTC)"
+msgstr ""
+
+#, python-format
+msgid "you already selected %s scheduled IOTDs"
+msgstr ""
+
+#, python-format
+msgid "there are already %s scheduled IOTDs"
 msgstr ""
 
 msgid "Image of the day"
