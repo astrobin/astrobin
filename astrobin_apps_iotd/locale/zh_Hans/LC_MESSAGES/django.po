@@ -1,169 +1,206 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: AstroBin Apps: IOTD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 20:25+0000\n"
-"PO-Revision-Date: 2021-03-04 17:07+0000\n"
-"Last-Translator: 张熠瑆 Phillip <31302717@qq.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: zh_Hans\n"
+"POT-Creation-Date: 2021-04-05 16:14+0200\n"
+"PO-Revision-Date: 2021-04-05 22:44+0200\n"
+"Last-Translator: Salvatore Iovene\n"
+"Language-Team: Simplified Chinese\n"
+"Language: zh-Hans\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1614877671.000000\n"
+"X-Generator: Loco https://localise.biz\n"
+"X-Loco-Source-Locale: en\n"
+"X-Loco-Project-Id: 108442\n"
+"X-Loco-Api-Version: 1.0.25 20210310-1"
 
+#: loco:606b763113912c50b948d6e2
 msgid "Sorry, it's now too late to retract this submission."
 msgstr "抱歉，现在撤消此提名为时已晚。"
 
+#: loco:606b763113912c50b948d6e3
 msgid "Sorry, it's now too late to retract this vote."
 msgstr "抱歉，现在取消该投票为时已晚。"
 
+#: loco:606b763113912c50b948d6e4
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "您不是“今日最佳”提名委员会的成员。"
 
+#: loco:606b763113912c50b948d6e5
 msgid "You cannot submit your own image."
 msgstr "您不能审核您自己的作品。"
 
+#: loco:606b763113912c50b948d6e6
 msgid "Images in the staging area cannot be submitted."
 msgstr "在暂存区中的作品不能被提名。"
 
+#: loco:606b763113912c50b948d6e7
 msgid "This user has chosen to be excluded from competitions."
 msgstr "该用户已选择不参加比赛。"
 
+#: loco:606b763113912c50b948d6e8
 msgid "This user has been banned from competitions."
 msgstr "该用户被禁赛。"
 
+#: loco:606b763113912c50b948d6e9
 #, python-format
 msgid ""
 "You cannot submit an image that was published more than %(max_days)s days "
 "ago."
 msgstr "您提名的作品不能晚于 %(max_days)s 天前发布。"
 
+#: loco:606b763113912c50b948d6ea
 msgid "Users with a Free membership cannot participate in the IOTD."
 msgstr "免费用户不能参加“今日最佳”评选。"
 
+#: loco:606b763113912c50b948d6eb
 msgid "This image has already been an IOTD in the past"
 msgstr "该作品过去已经获得过“今日最佳”"
 
+#: loco:606b763113912c50b948d6ec
 #, python-format
 msgid "You have already submitted %(max_allowed)s images today."
 msgstr "您今天已经提名了%(max_allowed)s张作品。"
 
+#: loco:606b763113912c50b948d6ed
 msgid "You are not a member of the IOTD Reviewers board."
 msgstr "您不是“今日最佳”审查委员会成员。"
 
+#: loco:606b763113912c50b948d6ee
 msgid "You cannot vote for your own image."
 msgstr "您不能为自己的作品投票。"
 
+#: loco:606b763113912c50b948d6ef
 msgid "Images in the staging area cannot be voted for."
 msgstr "在暂存区中的作品不能被投票。"
 
+#: loco:606b763113912c50b948d6f0
 msgid "You cannot vote for an image that has not been submitted."
 msgstr "您无法投票给尚未被提名的作品。"
 
+#: loco:606b763113912c50b948d6f1
 msgid "You cannot vote for your own submission."
 msgstr "您不能为自己提名的作品投票。"
 
+#: loco:606b763113912c50b948d6f2
 #, python-format
 msgid ""
 "You cannot vote for an image that has been in the submission queue for more "
 "than %(max_days)s days."
 msgstr "您不能为已提名名单中已超过 %(max_days)s天的作品进行投票。"
 
+#: loco:606b763113912c50b948d6f3
 #, python-format
 msgid "You have already voted for %(max_allowed)s images today."
 msgstr "您今天已经为 %(max_allowed)s 张作品投票了。"
 
+#: loco:606b763113912c50b948d6f4
 msgid "You are not a member of the IOTD Judges board."
 msgstr "您不是“今日最佳”评审委员会的成员。"
 
+#: loco:606b763113912c50b948d6f5
 msgid "You cannot elect your own image."
 msgstr "您不能票选自己的作品。"
 
+#: loco:606b763113912c50b948d6f6
 msgid "Images in the staging area cannot be elected."
 msgstr "暂存区域中的作品无法被票选。"
 
+#: loco:606b763113912c50b948d6f7
 msgid "You cannot elect an image that has not been voted."
 msgstr "您不能票选一张还未经过投票的作品。"
 
+#: loco:606b763113912c50b948d6f8
 msgid "You cannot elect your own submission."
 msgstr "您不能票选您自己提名的作品。"
 
+#: loco:606b763113912c50b948d6f9
 msgid "You cannot elect an image you voted for."
 msgstr "您不能票选您自己投票的作品。"
 
+#: loco:606b763113912c50b948d6fa
 #, python-format
 msgid ""
 "You cannot elect an image that has been in the review queue for more than "
 "%(max_days)s days."
 msgstr "您不能票选已经在审核名单中超过 %(max_days)s 天的作品。"
 
+#: loco:606b763113912c50b948d6fb
 #, python-format
 msgid "You have already elected %(max_allowed)s images today."
 msgstr "您今天已经票选了 %(max_allowed)s 张作品。"
 
+#: loco:606b763113912c50b948d6fc
 #, python-format
 msgid "You have already scheduled %(max_allowed)s IOTDs."
 msgstr "您已经安排了 %(max_allowed)s 个“今日最佳”。"
 
+#: loco:606b763113912c50b948d6fd
 msgid "You cannot unelect your own submission."
 msgstr "您不能不票选自己的提名。"
 
+#: loco:606b763113912c50b948d6fe
 msgid "You cannot unelect an image you voted for."
 msgstr "您不能不票选您投票的作品。"
 
+#: loco:606b763113912c50b948d6ff
 msgid "You cannot unelect an image elected by another judge."
 msgstr "您不能不票选由另一位评审票选的作品。"
 
+#: loco:606b763113912c50b948d700
 msgid "You cannot unelect a past or current IOTD."
 msgstr "您不能不票选一个过去或者现在的“今日最佳”。"
 
+#: loco:606b763113912c50b948d701
 #, python-format
 msgid "you already selected %s IOTD today (UTC)"
 msgstr "您今天（UTC）已经选择了 %s 个“今日最佳”"
 
+#: loco:606b763113912c50b948d702
 #, python-format
 msgid "you already selected %s scheduled IOTDs"
 msgstr "您已经选择了%s个预定的“今日最佳”"
 
+#: loco:606b763113912c50b948d703
 #, python-format
 msgid "there are already %s scheduled IOTDs"
 msgstr "您已经预定了 %s 个“今日最佳”。"
 
+#: loco:606b763113912c50b948d704
 msgid "Image of the day"
 msgstr "今日最佳"
 
+#: loco:606b763113912c50b948d705
 msgid "IOTD Judgement Queue"
 msgstr "“今日最佳”评审列队"
 
+#: loco:606b763113912c50b948d706
 msgid ""
 "Please select the images that you want to elect to IOTD by clicking on them."
 msgstr "请通过单击选择要票选为“今日最佳”的作品。"
 
+#: loco:606b763113912c50b948d707
 #, python-format
 msgid ""
 "Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
 "<strong>%(time)s</strong>."
-msgstr ""
-"抱歉，您现在无法选择“今日最佳”：%(reason)s。 请在<strong>%(time)s</strong>后"
-"重试。"
+msgstr "抱歉，您现在无法选择“今日最佳”：%(reason)s。 请在<strong>%(time)s</strong>后重试。"
 
+#: loco:606b763113912c50b948d708
 msgid "This queue is currently empty."
 msgstr "此列队现在是空的。"
 
+#: loco:606b763113912c50b948d709
 msgid "Error"
 msgstr "错误"
 
+#: loco:606b763113912c50b948d70a
 msgid "You cannot unelect an IOTD elected by another judge."
 msgstr "您不能不票选由另一位评审选出的“今日最佳”。"
 
+#: loco:606b763113912c50b948d70b
 #, python-format
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr "接下来的 %(days)s 天的所有“今日最佳”席位已填满。"

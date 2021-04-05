@@ -1,152 +1,186 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: AstroBin Apps: Groups\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 20:24+0000\n"
-"PO-Revision-Date: 2020-12-06 22:10+0000\n"
-"Last-Translator: JeanBaptisteAuroux <jbauroux@bbox.fr>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2021-04-05 16:11+0200\n"
+"PO-Revision-Date: 2021-04-05 22:44+0200\n"
+"Last-Translator: Salvatore Iovene\n"
+"Language-Team: French\n"
 "Language: fr\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1607292630.000000\n"
+"X-Generator: Loco https://localise.biz\n"
+"X-Loco-Source-Locale: en\n"
+"X-Loco-Project-Id: 108436\n"
+"X-Loco-Api-Version: 1.0.25 20210310-1"
 
+#: loco:606b76100e5269297c75c362
 msgid "Autosubmission deactivation strategy"
 msgstr "Stratégie de désactivation de l'importation automatique d'images"
 
+#: loco:606b76100e5269297c75c363
 msgid "Keep all images currently auto-submitted"
 msgstr "Conserver toutes les images actuelles importées automatiquement "
 
+#: loco:606b76100e5269297c75c364
 msgid "Remove all images and start over"
 msgstr "Supprimer toutes les images et recommencer"
 
+#: loco:606b76100e5269297c75c365
 msgid ""
 "When changing your group from autosubmission to non-autosubmission, you need "
 "to think of what to do with the images currently in the group."
 msgstr ""
-"Quand vous modifiez la politique de votre groupe de \"importation automatique"
-"\" à \"importation sélective\", vous devez déterminer que faire des images "
-"actuellement dans le groupe."
+"Quand vous modifiez la politique de votre groupe de \"importation "
+"automatique\" à \"importation sélective\", vous devez déterminer que faire "
+"des images actuellement dans le groupe."
 
+#: loco:606b76100e5269297c75c366
 msgid "Invite users"
 msgstr "Inviter des utilisateurs"
 
+#: loco:606b76100e5269297c75c367
 msgid "Users will receive a notification and will be able to join the group"
 msgstr ""
 "Les utilisateurs recevront une notification et pourront rejoindre le groupe"
 
+#: loco:606b76100e5269297c75c368
 msgid "Professional network"
 msgstr "Réseau professionnel"
 
+#: loco:606b76100e5269297c75c369
 msgid "Club or association"
 msgstr "Club ou association"
 
+#: loco:606b76100e5269297c75c36a
 msgid "Internet community"
 msgstr "Communauté Internet"
 
+#: loco:606b76100e5269297c75c36b
 msgid "Friends or partners"
 msgstr "Amis ou partenaires"
 
+#: loco:606b76100e5269297c75c36c
 msgid "Geographical area"
 msgstr "Zone géographique"
 
+#: loco:606b76100e5269297c75c36d
 msgid "Ad-hoc collaboration"
 msgstr "Collaboration ad hoc"
 
+#: loco:606b76100e5269297c75c36e
 msgid "Specific to an imaging technique"
 msgstr "Technique d'imagerie spécifique"
 
+#: loco:606b76100e5269297c75c36f
 msgid "Specific to an astrophotography target"
 msgstr "Cibles d'astrophotographie spécifiques"
 
+#: loco:606b76100e5269297c75c370
 msgid "Specific to certain equipment"
 msgstr "Certains équipements spécifiques"
 
+#: loco:606b76100e5269297c75c371
 msgid "Other"
 msgstr "Autre"
 
+#: loco:606b76100e5269297c75c372
 msgid "Name"
 msgstr "Nom"
 
+#: loco:606b76100e5269297c75c373
 msgid "Description"
 msgstr "Description"
 
+#: loco:606b76100e5269297c75c374
 msgid "HTML tags are allowed."
 msgstr "Les balises HTML sont autorisées."
 
+#: loco:606b76100e5269297c75c375
 msgid "Category"
 msgstr "Catégorie"
 
+#: loco:606b76100e5269297c75c376
 msgid "Public group"
 msgstr "Groupe public"
 
+#: loco:606b76100e5269297c75c377
 msgid ""
 "Public groups can be searched by anyone, and all their content is public."
 msgstr ""
 "Les groupes publics peuvent être recherchés par n'importe qui, et tout leur "
 "contenu est public."
 
+#: loco:606b76100e5269297c75c378
 msgid "Moderated group"
 msgstr "Groupe avec modérateur"
 
+#: loco:606b76100e5269297c75c379
 msgid ""
 "Moderated groups have a moderation queue for posted images and join requests."
 msgstr ""
 "Les groupes avec modérateur impliquent la validation préalable des images "
 "postées et des demandes d'adhésion."
 
+#: loco:606b76100e5269297c75c37a
 msgid "Automatic submission"
 msgstr "Importation automatique des images"
 
+#: loco:606b76100e5269297c75c37b
 msgid ""
 "Groups with automatic submissions always contain all public images from all "
 "members. Groups without automatic submission only contain images that are "
 "explicitly submitted to it."
 msgstr ""
 "Les groupes pour lesquels l'importation automatique des images est activé "
-"comportent toujours toutes les images publiques de l'ensemble de les "
-"membres. Les groupes pour lesquels l'importation sélective est activée "
-"contiennent uniquement les images que les membres choisissent spécifiquement "
-"de soumettre."
+"comportent toujours toutes les images publiques de l'ensemble de les membres."
+" Les groupes pour lesquels l'importation sélective est activée contiennent "
+"uniquement les images que les membres choisissent spécifiquement de "
+"soumettre."
 
+#: loco:606b76100e5269297c75c37c
 msgid "Last activity"
 msgstr "Activité récente"
 
+#: loco:606b76100e5269297c75c37d
 msgid "Members"
 msgstr "Membres"
 
+#: loco:606b76100e5269297c75c37e
 msgid "Images"
 msgstr "Images"
 
+#: loco:606b76100e5269297c75c37f
 msgid "Forum posts"
 msgstr "Messages du forum"
 
+#: loco:606b76100e5269297c75c380
 msgid "Owner"
 msgstr "Créateur"
 
+#: loco:606b76100e5269297c75c381
 msgid "Moderator"
 msgstr "Modérateur"
 
+#: loco:606b76100e5269297c75c382
 msgid "Member"
 msgstr "Membre"
 
+#: loco:606b76100e5269297c75c383
 msgid "Invited"
 msgstr "Invité"
 
+#: loco:606b76100e5269297c75c384
 msgid "Join request pending approval"
 msgstr "Demande d'adhésion en attente d'approbation"
 
+#: loco:606b76100e5269297c75c385
 msgid "Add/remove images"
 msgstr "Ajouter/supprimer des images"
 
+#: loco:606b76100e5269297c75c386
 msgid ""
 "Click on the images to include them in this group (and click again to "
 "exclude them). Then click on the Save button down below."
@@ -154,18 +188,23 @@ msgstr ""
 "Cliquez sur les images pour les intégrer dans ce groupe (et cliquez à "
 "nouveau pour les exclure). Cliquez ensuite sur le bouton Sauvegarder en bas."
 
+#: loco:606b76100e5269297c75c387
 msgid "(no title)"
 msgstr "(aucun titre)"
 
+#: loco:606b76100e5269297c75c388
 msgid "Save"
 msgstr "Sauvegarder"
 
+#: loco:606b76100e5269297c75c389
 msgid "Cancel"
 msgstr "Annuler"
 
+#: loco:606b76100e5269297c75c38a
 msgid "Delete group?"
 msgstr "Supprimer le groupe ?"
 
+#: loco:606b76100e5269297c75c38b
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone!"
@@ -173,85 +212,109 @@ msgstr ""
 "Attention ! Voulez-vous vraiment supprimer ce groupe ? Cette opération ne "
 "peut être annulée !"
 
+#: loco:606b76100e5269297c75c38c
 msgid "Delete group"
 msgstr "Effacer le groupe"
 
+#: loco:606b76100e5269297c75c38d
 msgid "Create new group"
 msgstr "Créer un nouveau groupe"
 
+#: loco:606b76100e5269297c75c38e
 msgid "Admin"
 msgstr "Admin"
 
+#: loco:606b76100e5269297c75c38f
 msgid "Edit group"
 msgstr "Modifier le groupe"
 
+#: loco:606b76100e5269297c75c390
 msgid "Manage members"
 msgstr "Gérer les membres"
 
+#: loco:606b76100e5269297c75c391
 msgid "Actions"
 msgstr "Actions"
 
+#: loco:606b76100e5269297c75c392
 msgid "Join group"
 msgstr "Rejoindre le groupe"
 
+#: loco:606b76100e5269297c75c393
 msgid "Leave group"
 msgstr "Quitter le groupe"
 
+#: loco:606b76100e5269297c75c394
 msgid "Moderate join requests"
 msgstr "Modération des demandes d'adhésion"
 
+#: loco:606b76100e5269297c75c395
 msgid "This group is public"
 msgstr "Ce groupe est public"
 
+#: loco:606b76100e5269297c75c396
 msgid "This group is private"
 msgstr "Ce groupe est privé"
 
+#: loco:606b76100e5269297c75c397
 msgid "This group is moderated"
 msgstr "Groupe avec modérateur"
 
+#: loco:606b76100e5269297c75c398
 msgid "This group is not moderated"
 msgstr "Groupe sans modérateur"
 
+#: loco:606b76100e5269297c75c399
 msgid "This group has automatic submission"
 msgstr "Ce groupe avec importation automatique des images"
 
+#: loco:606b76100e5269297c75c39a
 msgid "This group does not have automatic submission"
 msgstr "Ce groupe avec importation sélective des images"
 
+#: loco:606b76100e5269297c75c39b
 msgid "Invited users"
 msgstr "Utilisateurs invités"
 
+#: loco:606b76100e5269297c75c39c
 msgid "Join requests"
 msgstr "Demandes d'adhésion"
 
+#: loco:606b76100e5269297c75c39d
 #, python-format
 msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
-"Un groupe créé le %(date_created)s, par <a href=\"%(owner_url)s\">%(owner)s</"
-"a>, dans la catégorie <strong>%(category)s</strong>."
+"Un groupe créé le %(date_created)s, par <a href=\"%(owner_url)s\">%(owner)"
+"s</a>, dans la catégorie <strong>%(category)s</strong>."
 
+#: loco:606b76100e5269297c75c39e
 msgid "Group forum"
 msgstr "Forum du groupe"
 
+#: loco:606b76100e5269297c75c39f
 #, python-format
 msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
 "topics"
 msgstr ""
-"<strong>%(post_count)s</strong> messages dans <strong>%(topic_count)s</"
-"strong> sujets"
+"<strong>%(post_count)s</strong> messages dans <strong>%(topic_count)"
+"s</strong> sujets"
 
+#: loco:606b76100e5269297c75c3a0
 msgid "View all"
 msgstr "Voir tout"
 
+#: loco:606b76100e5269297c75c3a1
 msgid "New topic"
 msgstr "Nouveau sujet"
 
+#: loco:606b76100e5269297c75c3a2
 msgid "Please join the group to view its forum."
 msgstr "Veuillez adhérer au groupe pour consulter son forum."
 
+#: loco:606b76100e5269297c75c3a3
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone and the group's forum and all its topics will be irreversibly deleted!"
@@ -260,9 +323,11 @@ msgstr ""
 "être annulée et le forum du groupe ainsi que tous ses sujets seront "
 "irrémédiablement supprimés !"
 
+#: loco:606b76100e5269297c75c3a4
 msgid "Join group?"
 msgstr "Adhérer au groupe ?"
 
+#: loco:606b76100e5269297c75c3a5
 msgid ""
 "This is a public group: all content, including the members list, is "
 "available to non-members."
@@ -270,10 +335,12 @@ msgstr ""
 "Il s'agit d'un groupe public : tout le contenu, y compris la liste de ses "
 "membres, est accessible aux non-membres."
 
+#: loco:606b76100e5269297c75c3a6
 msgid "This is a private group: only members have access to its contents."
 msgstr ""
 "Il s'agit d'un groupe privé : seuls ses membres ont accès à son contenu."
 
+#: loco:606b76100e5269297c75c3a7
 msgid ""
 "This is a moderated group, join requests, images and forum posts might go "
 "through a moderation queue."
@@ -281,9 +348,11 @@ msgstr ""
 "Il s'agit d'un groupe avec modérateur. Les demandes d'adhésion, les images "
 "et les messages du forum peuvent être soumis à une modération préalable."
 
+#: loco:606b76100e5269297c75c3a8
 msgid "This is a non-moderated group."
 msgstr "Il s'agit d'un groupe sans modérateur. "
 
+#: loco:606b76100e5269297c75c3a9
 msgid ""
 "This is an automatic submission group: all of your images will instantly "
 "appear here without any need for action."
@@ -292,6 +361,7 @@ msgstr ""
 "toutes vos images y apparaîtront instantanément à leur publication sans "
 "action supplémentaire de votre part."
 
+#: loco:606b76100e5269297c75c3aa
 msgid ""
 "This is a non-automatic submission group: you will pick and choose which "
 "images you want to submit."
@@ -300,9 +370,11 @@ msgstr ""
 "vous sélectionnez et choisissez spécifiquement les images que vous souhaitez "
 "soumettre."
 
+#: loco:606b76100e5269297c75c3ab
 msgid "Leave group?"
 msgstr "Quitter le groupe ?"
 
+#: loco:606b76100e5269297c75c3ac
 msgid ""
 "By leaving this group, your image submissions will no longer be visible to "
 "group members, while your forum posts will remain. Are you sure?"
@@ -311,120 +383,158 @@ msgstr ""
 "membres du groupe, mais vos messages dans le forum seront conservés. Êtes-"
 "vous sûr ?"
 
+#: loco:606b76100e5269297c75c3ad
 msgid "Groups"
 msgstr "Groupes"
 
+#: loco:606b76100e5269297c75c3ae
 msgid "Sort"
 msgstr "Trier"
 
+#: loco:606b76100e5269297c75c3af
 msgid "Date created"
 msgstr "Date de création"
 
+#: loco:606b76100e5269297c75c3b0
 msgid "Your private groups"
 msgstr "Vos groupes privés"
 
+#: loco:606b76100e5269297c75c3b1
 msgid "You own, or are a member of, or were invited to, these private groups."
 msgstr ""
 "Vous êtes créateur ou membre de ces groupes privés, ou y avez été invité."
 
+#: loco:606b76100e5269297c75c3b2
 msgctxt "group"
 msgid "Create private group"
 msgstr "Créer un groupe privé"
 
+#: loco:606b76100e5269297c75c3b3
 msgid "Public groups"
 msgstr "Groupes publics"
 
+#: loco:606b76100e5269297c75c3b4
 msgid "Open to the whole community."
 msgstr "Ouverts à l'ensemble de la communauté."
 
+#: loco:606b76100e5269297c75c3b5
 msgctxt "group"
 msgid "Create public group"
 msgstr "Créer un groupe public"
 
+#: loco:606b76100e5269297c75c3b6
 msgid "No groups available."
 msgstr "Aucun groupe disponible."
 
+#: loco:606b76100e5269297c75c3b7
 msgid "Revoke?"
 msgstr "Annuler ?"
 
+#: loco:606b76100e5269297c75c3b8
 msgid "Revoke invitation"
 msgstr "Annuler l'invitation"
 
+#: loco:606b76100e5269297c75c3b9
 msgid "This group has no active invitations."
 msgstr "Ce groupe n'a pas d'invitations en cours."
 
+#: loco:606b76100e5269297c75c3ba
 msgid "Moderators"
 msgstr "Modérateurs"
 
+#: loco:606b76100e5269297c75c3bb
 msgid "Remove moderator status"
 msgstr "Révoquer le statut de modérateur"
 
+#: loco:606b76100e5269297c75c3bc
 msgid "This group has no moderators."
 msgstr "Ce groupe n'a pas de modérateurs."
 
+#: loco:606b76100e5269297c75c3bd
 msgid "Make moderator"
 msgstr "Promouvoir en modérateur"
 
+#: loco:606b76100e5269297c75c3be
 msgid "Remove member"
 msgstr "Supprimer un membre"
 
+#: loco:606b76100e5269297c75c3bf
 msgid "This group has no members."
 msgstr "Ce groupe n'a aucun membre."
 
+#: loco:606b76100e5269297c75c3c0
 msgid "Type in a search term"
 msgstr "Saisissez un terme de recherche"
 
+#: loco:606b76100e5269297c75c3c1
 msgid "No results"
 msgstr "Pas de résultats"
 
+#: loco:606b76100e5269297c75c3c2
 msgid "Searching"
 msgstr "Recherche en cours"
 
+#: loco:606b76100e5269297c75c3c3
 msgid "members list"
 msgstr "liste des membres"
 
+#: loco:606b76100e5269297c75c3c4
 msgid "Back to group"
 msgstr "Retour au groupe"
 
+#: loco:606b76100e5269297c75c3c5
 msgid "Full list of the group members"
 msgstr "Liste de l'ensemble des membres du groupe"
 
+#: loco:606b76100e5269297c75c3c6
 msgid "Images in group"
 msgstr "Images dans le groupe"
 
+#: loco:606b76100e5269297c75c3c7
 msgid "Forum posts in group"
 msgstr "Messages du forum du groupe"
 
+#: loco:606b76100e5269297c75c3c8
 msgid "Approve"
 msgstr "Valider"
 
+#: loco:606b76100e5269297c75c3c9
 msgid "Reject"
 msgstr "Refuser"
 
+#: loco:606b76100e5269297c75c3ca
 msgid "This group has no join requests."
 msgstr "Ce groupe n'a pas de demandes d'adhésion en cours."
 
+#: loco:606b76100e5269297c75c3cb
 msgid "You cannot add images that are not yours!"
 msgstr "Vous ne pouvez pas importer des images qui ne sont pas les vôtres !"
 
+#: loco:606b76100e5269297c75c3cc
 msgid "Your image was added to the group."
 msgstr "Votre image a été importée dans le groupe."
 
+#: loco:606b76100e5269297c75c3cd
 msgid "Group updated with your selection of images."
 msgstr "Groupe actualisé avec votre sélection d'images."
 
+#: loco:606b76100e5269297c75c3ce
 msgid "Your new group was created successfully"
 msgstr "Votre nouveau groupe a été créé avec succès"
 
+#: loco:606b76100e5269297c75c3cf
 msgid "Group deleted"
 msgstr "Groupe supprimé"
 
+#: loco:606b76100e5269297c75c3d0
 msgid "You have joined the group"
 msgstr "Vous avez rejoins le groupe"
 
+#: loco:606b76100e5269297c75c3d1
 msgid "You already were a member of this group"
 msgstr "Vous faites déjà partie de ce groupe"
 
+#: loco:606b76100e5269297c75c3d2
 msgid ""
 "This is a moderated group, and your join request will be reviewed by a "
 "moderator"
@@ -432,8 +542,10 @@ msgstr ""
 "Il s'agit d'un groupe avec modérateur ; votre demande d'adhésion sera "
 "étudiée par un modérateur."
 
+#: loco:606b76100e5269297c75c3d3
 msgid "You have left the group"
 msgstr "Vous avez quitté le groupe"
 
+#: loco:606b76100e5269297c75c3d4
 msgid "Form saved"
 msgstr "Formulaire sauvegardé"
