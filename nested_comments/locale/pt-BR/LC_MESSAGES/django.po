@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 21:58+0000\n"
+"POT-Creation-Date: 2021-04-05 20:22+0000\n"
 "PO-Revision-Date: 2013-04-09 00:45+0100\n"
 "Last-Translator: GlaucoH <glauco.hass@ig.com.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,16 +27,11 @@ msgstr "Cancelar"
 msgid "Add a comment"
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid ""
-#| "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-#| "register/\">register</a> to leave a comment.</p>"
+#, python-format
 msgid ""
 "Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
 "\">sign up</a> to leave a comment."
 msgstr ""
-"Por favor, <a href=\"/accounts/login/\">identifique-se</a> ou <a href=\"/"
-"accounts/register/\">registre-se</a> para comentar.</p>"
 
 msgid "There are no comments yet."
 msgstr "Ainda sem comentários."
@@ -81,42 +76,3 @@ msgstr "Aparentemente o campo de comentário está vazio."
 
 msgid "Submit"
 msgstr ""
-
-#~ msgid "Save"
-#~ msgstr "Salvar"
-
-#~ msgid "(comment deleted)"
-#~ msgstr "(comentário excluído)"
-
-#~ msgid "There doesn't seem to be anything here."
-#~ msgstr "Parece não existir nada aqui."
-
-#~ msgid "Formatting help"
-#~ msgstr "Ajuda de formatação"
-
-#~ msgid "Preview"
-#~ msgstr "Prever"
-
-#~ msgid "You type:"
-#~ msgstr "Você escreveu:"
-
-#~ msgid "You see:"
-#~ msgstr "Você vê:"
-
-#~ msgid "italics"
-#~ msgstr "itálico"
-
-#~ msgid "bold"
-#~ msgstr "negrito"
-
-#~ msgid "(TAB or 4 spaces)"
-#~ msgstr "(TAB ou 4 espaços)"
-
-#~ msgid "preformatted text"
-#~ msgstr "texto monoespaçado"
-
-#~ msgid "quoted text"
-#~ msgstr "citação"
-
-#~ msgid "escape the formatting syntax"
-#~ msgstr "inserir texto não formatado em texto formatado"

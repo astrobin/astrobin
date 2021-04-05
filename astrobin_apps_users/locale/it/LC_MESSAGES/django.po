@@ -1,60 +1,70 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: AstroBin Apps: Users\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 21:58+0000\n"
-"PO-Revision-Date: 2021-03-02 09:57+0000\n"
-"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2021-04-05 16:18+0200\n"
+"PO-Revision-Date: 2021-04-05 22:44+0200\n"
+"Last-Translator: Salvatore Iovene\n"
+"Language-Team: Italian\n"
 "Language: it\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1614679031.000000\n"
+"X-Generator: Loco https://localise.biz\n"
+"X-Loco-Source-Locale: en\n"
+"X-Loco-Project-Id: 108454\n"
+"X-Loco-Api-Version: 1.0.25 20210310-1"
 
+#: loco:606b76b5384e151fc32def92
 msgid "You follow each other"
 msgstr "Seguite l'un l'altro"
 
+#: loco:606b76b5384e151fc32def93
 msgid "Images"
 msgstr "Immagini"
 
+#: loco:606b76b5384e151fc32def94
 msgid "Followers"
 msgstr "Follower"
 
+#: loco:606b76b5384e151fc32def95
 msgid "Following"
 msgstr "Following"
 
+#: loco:606b76b5384e151fc32def96
 msgid "User"
 msgstr "Utente"
 
+#: loco:606b76b5384e151fc32def97
 msgid "No users."
 msgstr "Nessun utente."
 
+#: loco:606b76b5384e151fc32def98
 msgid "Administrator"
 msgstr "Amministratore"
 
+#: loco:606b76b5384e151fc32def99
 msgid "Image moderator"
 msgstr "Moderatore di immagini"
 
+#: loco:606b76b5384e151fc32def9a
 msgid "IOTD Submitter"
 msgstr "Submitter Foto del Giorno"
 
+#: loco:606b76b5384e151fc32def9b
 msgid "IOTD Reviewer"
 msgstr "Reviewer Foto del Giorno"
 
+#: loco:606b76b5384e151fc32def9c
 msgid "IOTD Judge"
 msgstr "Giudice Foto del Giorno"
 
+#: loco:606b76b5384e151fc32def9d
 msgid "Premium member"
 msgstr "Utente Premium"
 
+#: loco:606b76b5384e151fc32def9e
 msgid ""
 "Your email bounce reports have been removed from AstroBin. Please make sure "
 "that your email works well or you will get the same warning message again. "
@@ -64,6 +74,7 @@ msgstr ""
 "Assicurati che la tua email funzioni bene, altrimenti riceverai di nuovo "
 "questo messaggio in futuro. Grazie!"
 
+#: loco:606b76b5384e151fc32def9f
 msgid ""
 "Your spam reports have been removed from AstroBin. Please make sure you "
 "don't have a filter or rule to always mark AstroBin's emails as spam! If you "
@@ -74,13 +85,3 @@ msgstr ""
 "avere un filtro o una regola che segnala le email di AstroBin come spam "
 "automaticamente! Se non vuoi più ricevere email da AstroBin, usa il link che "
 "c'è in fondo ad ogni email. Grazie!"
-
-#~ msgid "%(images_number)s image"
-#~ msgid_plural "%(images_number)s images"
-#~ msgstr[0] "%(images_number)s immagine"
-#~ msgstr[1] "%(images_number)s immagini"
-
-#~ msgid "%(followers_number)s follower"
-#~ msgid_plural "%(followers_number)s followers"
-#~ msgstr[0] "%(followers_number)s follower"
-#~ msgstr[1] "%(followers_number)s follower"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 22:00+0000\n"
+"POT-Creation-Date: 2021-04-05 20:25+0000\n"
 "PO-Revision-Date: 2020-11-24 02:29+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -132,15 +132,13 @@ msgstr "過去や現在のIOTDを無投票にすることはできません。"
 msgid "you already selected %s IOTD today (UTC)"
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid "You have already scheduled %(max_allowed)s IOTDs."
+#, python-format
 msgid "you already selected %s scheduled IOTDs"
-msgstr "あなたは既に%(max_allowed)s のIOTDをスケジュールされています。"
+msgstr ""
 
-#, fuzzy, python-format
-#| msgid "You have already scheduled %(max_allowed)s IOTDs."
+#, python-format
 msgid "there are already %s scheduled IOTDs"
-msgstr "あなたは既に%(max_allowed)s のIOTDをスケジュールされています。"
+msgstr ""
 
 msgid "Image of the day"
 msgstr "Image of the day"
@@ -170,60 +168,3 @@ msgstr "他の審査員が選出したIOTDを無選挙にすることはでき�
 #, python-format
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr "%(days)s日後までIOTDの空き枠が既に埋まっています。"
-
-#, fuzzy
-#~| msgid "You cannot unelect an image elected by another judge."
-#~ msgid "You cannot unhide an image on behalf of another user."
-#~ msgstr "他の審査員に選ばれた画像を無選挙にすることはできません。"
-
-#, fuzzy
-#~| msgid "You cannot elect your own submission."
-#~ msgid "You cannot delete another user's submission."
-#~ msgstr "自分の画像を選択することはできません。"
-
-#, fuzzy
-#~| msgid "You cannot elect an image you voted for."
-#~ msgid "You cannot delete another user's vote."
-#~ msgstr "あなたが投票した画像を選挙で選ぶことはできません。"
-
-#~ msgid "by"
-#~ msgstr "by"
-
-#~ msgid "Submit for IOTD"
-#~ msgstr "IOTDへ送信"
-
-#~ msgid ""
-#~ "You will submit this image to the IOTD Submissions Queue. From there, a "
-#~ "member of the IOTD Reviewers Board will consider promoting it for final "
-#~ "evaluation from an IOTD Judge"
-#~ msgstr ""
-#~ "この画像をIOTD投稿キューに投稿します。そこから、IOTD審査委員会のメンバー"
-#~ "が、IOTD審査員の最終評価への昇格を検討します。"
-
-#~ msgid "Submit"
-#~ msgstr "送信"
-
-#~ msgid "IOTD Review Queue"
-#~ msgstr "IOTD Review Queue"
-
-#~ msgid ""
-#~ "Please select the images that you want to promote for final judgement by "
-#~ "clicking on them."
-#~ msgstr ""
-#~ "最終審査のためにプロモートしたい画像をクリックして選択してください。"
-
-#~ msgid "IOTD Submission Queue"
-#~ msgstr "IOTD Submission Queue"
-
-#~ msgid ""
-#~ "Please select the images that you want to propose for IOTD consideration."
-#~ msgstr "IOTD検討のために提案したい画像を選択してください。"
-
-#~ msgid "Reviewers"
-#~ msgstr "レビューア"
-
-#~ msgid "Loading"
-#~ msgstr "読み込み中"
-
-#~ msgid "Submitters"
-#~ msgstr "サブミッター"

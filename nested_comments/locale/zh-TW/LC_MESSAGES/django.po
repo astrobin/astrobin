@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 21:58+0000\n"
+"POT-Creation-Date: 2021-04-05 20:22+0000\n"
 "PO-Revision-Date: 2014-01-27 06:19+0000\n"
 "Last-Translator: mychat_aa <mychat.aa@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,16 +27,11 @@ msgstr "取消"
 msgid "Add a comment"
 msgstr "評論"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-#| "register/\">register</a> to leave a comment.</p>"
+#, python-format
 msgid ""
 "Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
 "\">sign up</a> to leave a comment."
 msgstr ""
-"請<a href=\"/accounts/login/\">登錄</a> 或 <a href=\"/accounts/register/\">註"
-"冊</a> 來進行評論</p>"
 
 msgid "There are no comments yet."
 msgstr "現在還沒有評論"
@@ -81,42 +76,3 @@ msgstr "評論不能是空的"
 
 msgid "Submit"
 msgstr ""
-
-#~ msgid "Save"
-#~ msgstr "儲存"
-
-#~ msgid "(comment deleted)"
-#~ msgstr "(評論已刪除)"
-
-#~ msgid "There doesn't seem to be anything here."
-#~ msgstr "似乎沒有任何東西在這裡。"
-
-#~ msgid "Formatting help"
-#~ msgstr "格式使用幫助"
-
-#~ msgid "Preview"
-#~ msgstr "預覽"
-
-#~ msgid "You type:"
-#~ msgstr "您輸入："
-
-#~ msgid "You see:"
-#~ msgstr "您會看到："
-
-#~ msgid "italics"
-#~ msgstr "斜體"
-
-#~ msgid "bold"
-#~ msgstr "粗體"
-
-#~ msgid "(TAB or 4 spaces)"
-#~ msgstr "(TAB按鈕或者4個空格)"
-
-#~ msgid "preformatted text"
-#~ msgstr "預設文字格式"
-
-#~ msgid "quoted text"
-#~ msgstr "引用的文字"
-
-#~ msgid "escape the formatting syntax"
-#~ msgstr "轉換格式化語法"

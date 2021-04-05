@@ -1,411 +1,513 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: AstroBin Apps: Groups\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 22:00+0000\n"
-"PO-Revision-Date: 2021-03-05 18:14+0000\n"
-"Last-Translator: 张熠瑆 Phillip <31302717@qq.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: zh_Hans\n"
+"POT-Creation-Date: 2021-04-05 16:11+0200\n"
+"PO-Revision-Date: 2021-04-05 22:44+0200\n"
+"Last-Translator: Salvatore Iovene\n"
+"Language-Team: Simplified Chinese\n"
+"Language: zh-Hans\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1614968047.000000\n"
+"X-Generator: Loco https://localise.biz\n"
+"X-Loco-Source-Locale: en\n"
+"X-Loco-Project-Id: 108436\n"
+"X-Loco-Api-Version: 1.0.25 20210310-1"
 
+#: loco:606b76100e5269297c75c362
 msgid "Autosubmission deactivation strategy"
 msgstr "自动提交停用策略"
 
+#: loco:606b76100e5269297c75c363
 msgid "Keep all images currently auto-submitted"
 msgstr "保留所有目前已经自动提交的作品"
 
+#: loco:606b76100e5269297c75c364
 msgid "Remove all images and start over"
 msgstr "移除所有作品，重新开始"
 
+#: loco:606b76100e5269297c75c365
 msgid ""
 "When changing your group from autosubmission to non-autosubmission, you need "
 "to think of what to do with the images currently in the group."
-msgstr ""
-"当您将小组从自动提交状态切换为手动时，您需要考虑如何处理现在已经在小组中的作"
-"品。"
+msgstr "当您将小组从自动提交状态切换为手动时，您需要考虑如何处理现在已经在小组中的作品。"
 
+#: loco:606b76100e5269297c75c366
 msgid "Invite users"
 msgstr "邀请用户"
 
+#: loco:606b76100e5269297c75c367
 msgid "Users will receive a notification and will be able to join the group"
 msgstr "用户将收到通知，并可以加入小组"
 
+#: loco:606b76100e5269297c75c368
 msgid "Professional network"
 msgstr "专业网络"
 
+#: loco:606b76100e5269297c75c369
 msgid "Club or association"
 msgstr "俱乐部或协会"
 
+#: loco:606b76100e5269297c75c36a
 msgid "Internet community"
 msgstr "互联网社区"
 
+#: loco:606b76100e5269297c75c36b
 msgid "Friends or partners"
 msgstr "朋友或伙伴"
 
+#: loco:606b76100e5269297c75c36c
 msgid "Geographical area"
 msgstr "地理区域"
 
+#: loco:606b76100e5269297c75c36d
 msgid "Ad-hoc collaboration"
 msgstr "临时合作"
 
+#: loco:606b76100e5269297c75c36e
 msgid "Specific to an imaging technique"
 msgstr "拍摄技术"
 
+#: loco:606b76100e5269297c75c36f
 msgid "Specific to an astrophotography target"
 msgstr "特定天体"
 
+#: loco:606b76100e5269297c75c370
 msgid "Specific to certain equipment"
 msgstr "特定设备"
 
+#: loco:606b76100e5269297c75c371
 msgid "Other"
 msgstr "其他"
 
+#: loco:606b76100e5269297c75c372
 msgid "Name"
 msgstr "名称"
 
+#: loco:606b76100e5269297c75c373
 msgid "Description"
 msgstr "描述"
 
+#: loco:606b76100e5269297c75c374
 msgid "HTML tags are allowed."
 msgstr "允许使用HTML标签。"
 
+#: loco:606b76100e5269297c75c375
 msgid "Category"
 msgstr "分类"
 
+#: loco:606b76100e5269297c75c376
 msgid "Public group"
 msgstr "公开小组"
 
+#: loco:606b76100e5269297c75c377
 msgid ""
 "Public groups can be searched by anyone, and all their content is public."
 msgstr "公开小组可以被任何人搜索到，其中内容都是公开的。"
 
+#: loco:606b76100e5269297c75c378
 msgid "Moderated group"
 msgstr "有限小组"
 
+#: loco:606b76100e5269297c75c379
 msgid ""
 "Moderated groups have a moderation queue for posted images and join requests."
 msgstr "加入有限小组或在小组中发布作品需要经过审核。"
 
+#: loco:606b76100e5269297c75c37a
 msgid "Automatic submission"
 msgstr "自动提交"
 
+#: loco:606b76100e5269297c75c37b
 msgid ""
 "Groups with automatic submissions always contain all public images from all "
 "members. Groups without automatic submission only contain images that are "
 "explicitly submitted to it."
-msgstr ""
-"开启了自动提交的小组，将始终显示来自组成员提交的所有作品。没有开启自动提交的"
-"小组，将仅显示被正式提交到小组的作品。"
+msgstr "开启了自动提交的小组，将始终显示来自组成员提交的所有作品。没有开启自动提交的小组，将仅显示被正式提交到小组的作品。"
 
+#: loco:606b76100e5269297c75c37c
 msgid "Last activity"
 msgstr "最近活跃"
 
+#: loco:606b76100e5269297c75c37d
 msgid "Members"
 msgstr "成员"
 
+#: loco:606b76100e5269297c75c37e
 msgid "Images"
 msgstr "作品"
 
+#: loco:606b76100e5269297c75c37f
 msgid "Forum posts"
 msgstr "论坛帖子"
 
+#: loco:606b76100e5269297c75c380
 msgid "Owner"
 msgstr "所有者"
 
+#: loco:606b76100e5269297c75c381
 msgid "Moderator"
 msgstr "组长"
 
+#: loco:606b76100e5269297c75c382
 msgid "Member"
 msgstr "成员"
 
+#: loco:606b76100e5269297c75c383
 msgid "Invited"
 msgstr "已邀请"
 
+#: loco:606b76100e5269297c75c384
 msgid "Join request pending approval"
 msgstr "加入请求待批准"
 
+#: loco:606b76100e5269297c75c385
 msgid "Add/remove images"
 msgstr "添加/移除作品"
 
+#: loco:606b76100e5269297c75c386
 msgid ""
 "Click on the images to include them in this group (and click again to "
 "exclude them). Then click on the Save button down below."
-msgstr ""
-"单击作品以将其包括在该小组中（再次单击将其排除）。点击下方的“保存”按钮。"
+msgstr "单击作品以将其包括在该小组中（再次单击将其排除）。点击下方的“保存”按钮。"
 
+#: loco:606b76100e5269297c75c387
 msgid "(no title)"
 msgstr "（无标题）"
 
+#: loco:606b76100e5269297c75c388
 msgid "Save"
 msgstr "保存"
 
+#: loco:606b76100e5269297c75c389
 msgid "Cancel"
 msgstr "取消"
 
+#: loco:606b76100e5269297c75c38a
 msgid "Delete group?"
 msgstr "删除小组？"
 
+#: loco:606b76100e5269297c75c38b
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone!"
 msgstr "小心！您真的要删除这个小组吗？此操作无法撤回！"
 
+#: loco:606b76100e5269297c75c38c
 msgid "Delete group"
 msgstr "删除小组"
 
+#: loco:606b76100e5269297c75c38d
 msgid "Create new group"
 msgstr "创建新的小组"
 
+#: loco:606b76100e5269297c75c38e
 msgid "Admin"
 msgstr "管理员"
 
+#: loco:606b76100e5269297c75c38f
 msgid "Edit group"
 msgstr "编辑小组"
 
+#: loco:606b76100e5269297c75c390
 msgid "Manage members"
 msgstr "管理成员"
 
+#: loco:606b76100e5269297c75c391
 msgid "Actions"
 msgstr "操作"
 
+#: loco:606b76100e5269297c75c392
 msgid "Join group"
 msgstr "加入小组"
 
+#: loco:606b76100e5269297c75c393
 msgid "Leave group"
 msgstr "退出小组"
 
+#: loco:606b76100e5269297c75c394
 msgid "Moderate join requests"
 msgstr "有限小组加入请求"
 
+#: loco:606b76100e5269297c75c395
 msgid "This group is public"
 msgstr "这个小组是公开的"
 
+#: loco:606b76100e5269297c75c396
 msgid "This group is private"
 msgstr "这个小组是私密的"
 
+#: loco:606b76100e5269297c75c397
 msgid "This group is moderated"
 msgstr "这个小组是有限小组"
 
+#: loco:606b76100e5269297c75c398
 msgid "This group is not moderated"
 msgstr "这个小组不是有限小组"
 
+#: loco:606b76100e5269297c75c399
 msgid "This group has automatic submission"
 msgstr "这个小组是自动提交的"
 
+#: loco:606b76100e5269297c75c39a
 msgid "This group does not have automatic submission"
 msgstr "这个小组没有自动提交"
 
+#: loco:606b76100e5269297c75c39b
 msgid "Invited users"
 msgstr "邀请用户"
 
+#: loco:606b76100e5269297c75c39c
 msgid "Join requests"
 msgstr "加入请求"
 
+#: loco:606b76100e5269297c75c39d
 #, python-format
 msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
-"这个小组建立于 %(date_created)s， 由 <a href=\"%(owner_url)s\">%(owner)s</a>"
-"所有， 分类为 <strong>%(category)s</strong>。"
+"这个小组建立于 %(date_created)s， 由 <a href=\"%(owner_url)s\">%(owner)s</a>所有， 分类为 "
+"<strong>%(category)s</strong>。"
 
+#: loco:606b76100e5269297c75c39e
 msgid "Group forum"
 msgstr "小组论坛"
 
+#: loco:606b76100e5269297c75c39f
 #, python-format
 msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
 "topics"
 msgstr ""
-"<strong>%(post_count)s</strong> 个帖子位于<strong>%(topic_count)s</strong>主"
-"题下"
+"<strong>%(post_count)s</strong> 个帖子位于<strong>%(topic_count)s</strong>主题下"
 
+#: loco:606b76100e5269297c75c3a0
 msgid "View all"
 msgstr "查看全部"
 
+#: loco:606b76100e5269297c75c3a1
 msgid "New topic"
 msgstr "新主题"
 
+#: loco:606b76100e5269297c75c3a2
 msgid "Please join the group to view its forum."
 msgstr "请先加入小组再浏览它的板块。"
 
+#: loco:606b76100e5269297c75c3a3
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone and the group's forum and all its topics will be irreversibly deleted!"
-msgstr ""
-"小心！ 您确实要删除该组吗？ 此操作无法撤消，该小组板块及其所有主题都将被不可"
-"撤消地删除！"
+msgstr "小心！ 您确实要删除该组吗？ 此操作无法撤消，该小组板块及其所有主题都将被不可撤消地删除！"
 
+#: loco:606b76100e5269297c75c3a4
 msgid "Join group?"
 msgstr "加入小组？"
 
+#: loco:606b76100e5269297c75c3a5
 msgid ""
 "This is a public group: all content, including the members list, is "
 "available to non-members."
 msgstr "这是一个开放小组：所有内容，包括成员列表对非成员都是可用的。"
 
+#: loco:606b76100e5269297c75c3a6
 msgid "This is a private group: only members have access to its contents."
 msgstr "这是一个私密小组：只有小组成员才能访问其内容。"
 
+#: loco:606b76100e5269297c75c3a7
 msgid ""
 "This is a moderated group, join requests, images and forum posts might go "
 "through a moderation queue."
 msgstr "这是一个有限小组，加入请求、作品和论坛帖子可能需要经过审核。"
 
+#: loco:606b76100e5269297c75c3a8
 msgid "This is a non-moderated group."
 msgstr "这不是一个有限小组。"
 
+#: loco:606b76100e5269297c75c3a9
 msgid ""
 "This is an automatic submission group: all of your images will instantly "
 "appear here without any need for action."
 msgstr "这是一个自动提交小组：您的所有作品都会立即显示在此处，无需任何操作。"
 
+#: loco:606b76100e5269297c75c3aa
 msgid ""
 "This is a non-automatic submission group: you will pick and choose which "
 "images you want to submit."
 msgstr "这不是一个自动提交小组：您需要选择希望提交的作品。"
 
+#: loco:606b76100e5269297c75c3ab
 msgid "Leave group?"
 msgstr "退出小组？"
 
+#: loco:606b76100e5269297c75c3ac
 msgid ""
 "By leaving this group, your image submissions will no longer be visible to "
 "group members, while your forum posts will remain. Are you sure?"
-msgstr ""
-"离开此小组后，您提交的作品将不再对小组成员可见，但您的论坛帖子仍将保留。您确"
-"定吗？"
+msgstr "离开此小组后，您提交的作品将不再对小组成员可见，但您的论坛帖子仍将保留。您确定吗？"
 
+#: loco:606b76100e5269297c75c3ad
 msgid "Groups"
 msgstr "小组"
 
+#: loco:606b76100e5269297c75c3ae
 msgid "Sort"
 msgstr "排序"
 
+#: loco:606b76100e5269297c75c3af
 msgid "Date created"
 msgstr "创建日期"
 
+#: loco:606b76100e5269297c75c3b0
 msgid "Your private groups"
 msgstr "您的私密小组"
 
+#: loco:606b76100e5269297c75c3b1
 msgid "You own, or are a member of, or were invited to, these private groups."
 msgstr "您拥有、被邀请、或是这些私密小组中的一员。"
 
+#: loco:606b76100e5269297c75c3b2
 msgctxt "group"
 msgid "Create private group"
 msgstr "创建私密小组"
 
+#: loco:606b76100e5269297c75c3b3
 msgid "Public groups"
 msgstr "公开小组"
 
+#: loco:606b76100e5269297c75c3b4
 msgid "Open to the whole community."
 msgstr "向整个社区开放。"
 
+#: loco:606b76100e5269297c75c3b5
 msgctxt "group"
 msgid "Create public group"
 msgstr "创建公开小组"
 
+#: loco:606b76100e5269297c75c3b6
 msgid "No groups available."
 msgstr "无可用小组。"
 
+#: loco:606b76100e5269297c75c3b7
 msgid "Revoke?"
 msgstr "撤销？"
 
+#: loco:606b76100e5269297c75c3b8
 msgid "Revoke invitation"
 msgstr "撤销邀请？"
 
+#: loco:606b76100e5269297c75c3b9
 msgid "This group has no active invitations."
 msgstr "此小组没有新的邀请。"
 
+#: loco:606b76100e5269297c75c3ba
 msgid "Moderators"
 msgstr "组长"
 
+#: loco:606b76100e5269297c75c3bb
 msgid "Remove moderator status"
 msgstr "移除组长"
 
+#: loco:606b76100e5269297c75c3bc
 msgid "This group has no moderators."
 msgstr "这个小组没有组长。"
 
+#: loco:606b76100e5269297c75c3bd
 msgid "Make moderator"
 msgstr "成为组长"
 
+#: loco:606b76100e5269297c75c3be
 msgid "Remove member"
 msgstr "移除成员"
 
+#: loco:606b76100e5269297c75c3bf
 msgid "This group has no members."
 msgstr "这个小组没有成员。"
 
+#: loco:606b76100e5269297c75c3c0
 msgid "Type in a search term"
 msgstr "输入搜索条件"
 
+#: loco:606b76100e5269297c75c3c1
 msgid "No results"
 msgstr "没有结果"
 
+#: loco:606b76100e5269297c75c3c2
 msgid "Searching"
 msgstr "搜索"
 
+#: loco:606b76100e5269297c75c3c3
 msgid "members list"
 msgstr "成员列表"
 
+#: loco:606b76100e5269297c75c3c4
 msgid "Back to group"
 msgstr "回到小组"
 
+#: loco:606b76100e5269297c75c3c5
 msgid "Full list of the group members"
 msgstr "小组成员的完整列表"
 
+#: loco:606b76100e5269297c75c3c6
 msgid "Images in group"
 msgstr "小组中的作品"
 
+#: loco:606b76100e5269297c75c3c7
 msgid "Forum posts in group"
 msgstr "小组中的帖子"
 
+#: loco:606b76100e5269297c75c3c8
 msgid "Approve"
 msgstr "通过"
 
+#: loco:606b76100e5269297c75c3c9
 msgid "Reject"
 msgstr "拒绝"
 
+#: loco:606b76100e5269297c75c3ca
 msgid "This group has no join requests."
 msgstr "此小组没有加入申请。"
 
+#: loco:606b76100e5269297c75c3cb
 msgid "You cannot add images that are not yours!"
 msgstr "您不能添加非您所有的作品！"
 
+#: loco:606b76100e5269297c75c3cc
 msgid "Your image was added to the group."
 msgstr "作品已添加到小组。"
 
+#: loco:606b76100e5269297c75c3cd
 msgid "Group updated with your selection of images."
 msgstr "小组已根据您的作品完成更新。"
 
+#: loco:606b76100e5269297c75c3ce
 msgid "Your new group was created successfully"
 msgstr "新的小组创建成功"
 
+#: loco:606b76100e5269297c75c3cf
 msgid "Group deleted"
 msgstr "小组已删除"
 
+#: loco:606b76100e5269297c75c3d0
 msgid "You have joined the group"
 msgstr "您已加入小组"
 
+#: loco:606b76100e5269297c75c3d1
 msgid "You already were a member of this group"
 msgstr "您已经是此小组的成员"
 
+#: loco:606b76100e5269297c75c3d2
 msgid ""
 "This is a moderated group, and your join request will be reviewed by a "
 "moderator"
 msgstr "这是一个有限小组，您的加入请求将被组长审核"
 
+#: loco:606b76100e5269297c75c3d3
 msgid "You have left the group"
 msgstr "您已离开小组"
 
+#: loco:606b76100e5269297c75c3d4
 msgid "Form saved"
 msgstr "表单已保存"

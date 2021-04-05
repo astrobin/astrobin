@@ -1,28 +1,27 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: AstroBin Apps: Donations\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 21:59+0000\n"
-"PO-Revision-Date: 2020-11-24 10:47+0000\n"
-"Last-Translator: NadirAstro <nadir_teymurov@mail.ru>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2021-04-05 15:49+0200\n"
+"PO-Revision-Date: 2021-04-05 22:44+0200\n"
+"Last-Translator: Salvatore Iovene\n"
+"Language-Team: Russian\n"
 "Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1606214875.000000\n"
+"X-Generator: Loco https://localise.biz\n"
+"X-Loco-Source-Locale: en\n"
+"X-Loco-Project-Id: 108431\n"
+"X-Loco-Api-Version: 1.0.25 20210310-1"
 
+#: loco:606b76000c067b67fd307a72
 msgid "Your recurring donation has been canceled"
 msgstr "Ваши регулярные пожертвования отменены"
 
+#: loco:606b76000c067b67fd307a73
 msgid ""
 "I am very grateful for your support so far! Your contribution has helped "
 "AstroBin with its ever increasing hosting costs, and served an incentive for "
@@ -32,18 +31,23 @@ msgstr ""
 "растущими затратами на хостинг и служит для нас стимулом к дальнейшему его "
 "улучшению."
 
+#: loco:606b76000c067b67fd307a74
 msgid "Wishing you clear skies and excellent seeing!"
 msgstr "Желаем вам чистого неба и отличного сиинга !"
 
+#: loco:606b76000c067b67fd307a75
 msgid "Founder of AstroBin"
 msgstr "Основатель AstroBin"
 
+#: loco:606b76000c067b67fd307a76
 msgid "Donate"
 msgstr "Сделать пожертвование"
 
+#: loco:606b76000c067b67fd307a77
 msgid "Thank you in advance for your support"
 msgstr "Спасибо вам заранее за поддержку"
 
+#: loco:606b76000c067b67fd307a78
 msgid ""
 "Please donate any amount you want, selecting from the options below and "
 "subscribing with\n"
@@ -56,52 +60,65 @@ msgstr ""
 "когда \n"
 "захотите."
 
+#: loco:606b76000c067b67fd307a79
 msgid ""
 "If ended up on this page and are not sure what this is about, please read "
 "everything about it\n"
-"        <a href=\"https://welcome.astrobin.com/voluntary-donations\" target="
-"\"_blank\">here</a>."
+"        <a href=\"https://welcome.astrobin.com/voluntary-donations\" "
+"target=\"_blank\">here</a>."
 msgstr ""
 "Если вы оказались на этой странице и не уверены, о чем идет речь, прочтите "
 "все об этом\n"
-"        <a href=\"https://welcome.astrobin.com/voluntary-donations\" target="
-"\"_blank\">здесь</a>."
+"        <a href=\"https://welcome.astrobin.com/voluntary-donations\" "
+"target=\"_blank\">здесь</a>."
 
+#: loco:606b76000c067b67fd307a7a
 msgid "Thanks!"
 msgstr "Спасибо !"
 
+#: loco:606b76000c067b67fd307a7b
 msgid "Edit your recurring donation settings"
 msgstr "Редактировать ваши регулярные пожертвования"
 
+#: loco:606b76000c067b67fd307a7c
 msgid "Monthly contributions"
 msgstr "Ежемесячные взносы"
 
+#: loco:606b76000c067b67fd307a7d
 msgid "Bronze"
 msgstr "Бронза"
 
+#: loco:606b76000c067b67fd307a7e
 #, python-format
 msgid "CHF %(amount)s / month"
 msgstr "CHF %(amount)s / month"
 
+#: loco:606b76000c067b67fd307a7f
 msgid "Silver"
 msgstr "Серебрo"
 
+#: loco:606b76000c067b67fd307a80
 msgid "Gold"
 msgstr "Золото"
 
+#: loco:606b76000c067b67fd307a81
 msgid "Platinum"
 msgstr "Платина"
 
+#: loco:606b76000c067b67fd307a82
 msgid "Yearly contributions (cheaper)"
 msgstr "Ежегодные вклады (дешевле)"
 
+#: loco:606b76000c067b67fd307a83
 #, python-format
 msgid "CHF %(amount)s / year"
 msgstr "CHF %(amount)s / year"
 
+#: loco:606b76000c067b67fd307a84
 msgid "IMPORTANT"
 msgstr "ВАЖНО"
 
+#: loco:606b76000c067b67fd307a85
 msgid ""
 "Please note: if you are already a donor, the Subscribe button will update "
 "your existing subscription, not create a new one."
@@ -109,9 +126,11 @@ msgstr ""
 "Обратите внмание: если вы уже являетесь спонсором, кнопка \"Подписаться\" "
 "обновит вашу существующую подписку, но не создаст новую."
 
+#: loco:606b76000c067b67fd307a86
 msgid "Pay with a bank transfer"
 msgstr "Оплатить банковским переводом"
 
+#: loco:606b76000c067b67fd307a87
 msgid ""
 "\n"
 "            Prefer to donate via bank transfer? Please make a deposit of the "
@@ -125,9 +144,11 @@ msgstr ""
 "            банковские детали. Спасибо!\n"
 "        "
 
+#: loco:606b76000c067b67fd307a88
 msgid "Cancel your recurring donation"
 msgstr "Отменить ваши регулярные пожертвования"
 
+#: loco:606b76000c067b67fd307a89
 msgid ""
 "Thank you so much for your donations so far! I, and the whole AstroBin "
 "community, really appreciate your support."
@@ -135,6 +156,7 @@ msgstr ""
 "Спасибо вам большое за ваше пожертвование! Я, и всё сообщество AstroBin, "
 "очень ценим вашу поддержку."
 
+#: loco:606b76000c067b67fd307a8a
 msgid ""
 "Are you sure you want to cancel your subscription? AstroBin is a resource "
 "hungry website, and every small donation helps with the hosting costs."
@@ -143,6 +165,7 @@ msgstr ""
 "на ресурсы вебсайт, и даже небольшое пожертвование помогает нам решать "
 "проблему размещения."
 
+#: loco:606b76000c067b67fd307a8b
 msgid ""
 "If you really have made up your mind about it, use the button below to "
 "cancel your PayPal subscription."
@@ -150,15 +173,19 @@ msgstr ""
 "Если вы действительно решили, нажмите кнопку ниже для отмены вашей PayPal-"
 "подписки."
 
+#: loco:606b76000c067b67fd307a8c
 msgid "Thank you for your donations!"
 msgstr "Спасибо за ваше пожертвование!"
 
+#: loco:606b76000c067b67fd307a8d
 msgid "Want to cancel?"
 msgstr "Хотите отменить?"
 
+#: loco:606b76000c067b67fd307a8e
 msgid "Thank you for your donation!"
 msgstr "Спасибо за ваше пожертвование!"
 
+#: loco:606b76000c067b67fd307a8f
 msgid ""
 "I am very grateful for your support! Your contribution will help AstroBin "
 "with its ever increasing hosting costs, and will serve an incentive for me "
@@ -167,94 +194,3 @@ msgstr ""
 "Я очень благодарен за вашу поддержку! Ваш вклад поможет AstroBin с его всё "
 "увеличивающимися затратами на хостинг и будет служить для нас стимулом к "
 "дальнейшему его улучшению."
-
-#~ msgid "From now on, you will again see ads on this website."
-#~ msgstr "С текущего момента вы снова будете видеть рекламу на этом сайте."
-
-#~ msgid "What is AstroBin worth to you?"
-#~ msgstr "Сколько для вас стоит AstroBin?"
-
-#~ msgid "A coffee"
-#~ msgstr "Чашка кофе"
-
-#~ msgid "A snack"
-#~ msgstr "Один раз перекусить"
-
-#~ msgid "A pizza"
-#~ msgstr "Пицца"
-
-#~ msgid "A movie night for one"
-#~ msgstr "Билет в кино на одного"
-
-#~ msgid "A frugal dinner out for one"
-#~ msgstr "Скромный ужин на одного"
-
-#~ msgid "Please donate!"
-#~ msgstr "Пожалуйста, пожертвуйте!"
-
-#~ msgid ""
-#~ "Hosting this website is getting more and more expensive as new users sign "
-#~ "up all the time."
-#~ msgstr ""
-#~ "Хостинг этого веб-сайта становится всё более и более дорогостоящим с "
-#~ "прибавлением новых пользователей со временем."
-
-#~ msgid ""
-#~ "AstroBin stores images at full size and quality, and with no limitations, "
-#~ "because quality is important when it comes to astrophotography. But such "
-#~ "files can be large, and bandwidth is expensive."
-#~ msgstr ""
-#~ "AstroBin хранит изображения в полном размере и качестве, и без "
-#~ "ограничений, потому что качество это очень важно, если это касается "
-#~ "астрофотографии. Но такие файлы могут быть большими, а вот пропускная "
-#~ "способность канала дорога."
-
-#~ msgid ""
-#~ "If you too would hate for AstroBin to cease to exist, we kindly ask you "
-#~ "for a contribution. It would help us with the hosting bills, as they grow "
-#~ "fatter and fatter each month, and who knows, maybe offer a little "
-#~ "compensation for the thousands of hours that were put into the project."
-#~ msgstr ""
-#~ "Если вы не хотите, чтобы AstroBin прекратил своё существование, мы просим "
-#~ "вас сделать вклад. Это поможет нам с оплатой счетов, которые растут из "
-#~ "месяца в месяц, и кто знает, может быть это станет компенсацией за тысячи "
-#~ "часов работы, вложенных в этот проект."
-
-#~ msgid ""
-#~ "Although we have tried to keep AstroBin ad free, as of right now the only "
-#~ "way we can keep the website running is with commercial support by "
-#~ "advertisers and your donations."
-#~ msgstr ""
-#~ "Хотя мы старались сохранить AstroBin без рекламы, на данный момент "
-#~ "единственным выходом для продолжения работы сайта является финансовая "
-#~ "поддержка рекламодателями и вашими пожертвованиями."
-
-#~ msgid ""
-#~ "The ads you will see on AstroBin come from legitimate advertisers whose "
-#~ "business we support, and each image and word is reviewed and approved "
-#~ "before it's published. AstroBin will not share any personal information "
-#~ "about you to its advertisers."
-#~ msgstr ""
-#~ "Реклама, которую вы видите на AstroBin получена только от легальных "
-#~ "рекламодателей, чей бизнес мы поддерживаем, каждое изображение и слово "
-#~ "которых мы одобряем до момента публикации. AstrоBin не предоставляет вашу "
-#~ "персональную информацию своим рекламодателям."
-
-#~ msgid ""
-#~ "However, if you still feel that you would rather not see these ads, we "
-#~ "kindly ask you for a small donation. It will keep our servers running and "
-#~ "help with the hosting costs."
-#~ msgstr ""
-#~ "Тем не менее, если вы чувствуете желание не видеть рекламы, мы просим вас "
-#~ "о небольшом пожертвовании. Это сохранит наши сервера в рабочем состоянии "
-#~ "и поможет в их оплате."
-
-#~ msgid "If you donate, you will not be shown ads anymore."
-#~ msgstr "Если вы пожертвуете, вы больше не увидите никакой рекламы."
-
-#~ msgid ""
-#~ "In a few minutes, once your PayPal transaction is processed, we will stop "
-#~ "showing you ads on this website."
-#~ msgstr ""
-#~ "В течение нескольких минут, когда завершится транзакция с PayPal, мы "
-#~ "перестанем показывать вам рекламу на этом сайте."

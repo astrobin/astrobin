@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 21:58+0000\n"
+"POT-Creation-Date: 2021-04-05 20:22+0000\n"
 "PO-Revision-Date: 2013-10-20 22:13+0100\n"
 "Last-Translator: VojtechKudela <vojtiik@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,16 +27,11 @@ msgstr "Zrušit"
 msgid "Add a comment"
 msgstr "Přidat komentář"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-#| "register/\">register</a> to leave a comment.</p>"
+#, python-format
 msgid ""
 "Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
 "\">sign up</a> to leave a comment."
 msgstr ""
-"Pro přidání komentáře se, prosím, <a href=\"/accounts/login/\">přihlašte</a> "
-"nebo <a href=\"/accounts/register/\">zaregistrujte</a>.</p>"
 
 msgid "There are no comments yet."
 msgstr "Zatím nikdo žádný komentář nevložil."
@@ -81,42 +76,3 @@ msgstr "Není možné vložit prázdný komentář."
 
 msgid "Submit"
 msgstr ""
-
-#~ msgid "Save"
-#~ msgstr "Uložit"
-
-#~ msgid "(comment deleted)"
-#~ msgstr "(komentář byl smazán)"
-
-#~ msgid "There doesn't seem to be anything here."
-#~ msgstr "Nic tady není."
-
-#~ msgid "Formatting help"
-#~ msgstr "Nápověda k formátování"
-
-#~ msgid "Preview"
-#~ msgstr "Náhled"
-
-#~ msgid "You type:"
-#~ msgstr "Co píšete:"
-
-#~ msgid "You see:"
-#~ msgstr "Co se zobrazí:"
-
-#~ msgid "italics"
-#~ msgstr "kurzíva"
-
-#~ msgid "bold"
-#~ msgstr "tučně"
-
-#~ msgid "(TAB or 4 spaces)"
-#~ msgstr "(TAB nebo 4 mezery)"
-
-#~ msgid "preformatted text"
-#~ msgstr "předformátovaný text"
-
-#~ msgid "quoted text"
-#~ msgstr "citovaný text"
-
-#~ msgid "escape the formatting syntax"
-#~ msgstr "opustit formátování"

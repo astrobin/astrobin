@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 21:59+0000\n"
+"POT-Creation-Date: 2021-04-05 20:23+0000\n"
 "PO-Revision-Date: 2018-12-04 17:52+0000\n"
 "Last-Translator: Łukasz Sujka <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -198,22 +198,11 @@ msgstr "Twoja migracja została zakończona pomyślnie"
 msgid "Thanks for supporting AstroBin!"
 msgstr "Dziękujemy za wspieranie AstroBin!"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "Your \"%(subscription_name)s\" subscription on AstroBin will expire in "
-#| "one week."
+#, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
 msgstr ""
-"\"%(subscription_name)s\" subskrypcja na AstroBin wygaśnie w ciągu tygodnia."
 
-#, fuzzy
-#| msgid ""
-#| "When a Premium or Lite subscription on AstroBin expires, nothing happens "
-#| "to your images or any of your content. You are reverted to AstroBin Free "
-#| "and will not be able to upload new images until you renew, but you may "
-#| "continue to use AstroBin in all other aspects if you do not have any new "
-#| "images to share at the moment."
 msgid ""
 "When a subscription on AstroBin expires, nothing happens to your images or "
 "any of your content. You are reverted to AstroBin Free and will not be able "
@@ -221,12 +210,6 @@ msgid ""
 "in all other aspects if you do not have any new images to share at the "
 "moment."
 msgstr ""
-"Kiedy subskrypcja Premium lub Lite wygaśnie, nic nie stanie się z Twoimi "
-"plikami ani z Twoją pozostałą treścią. Pozostaniesz aktywnym użytkownikiem w "
-"ramach AstroBin Free i nie będziesz mógł jedynie wczytywać nowych zdjęć i "
-"treści do momentu odnowienia subskrypcji. W ramach AstroBin Free będziesz "
-"mógł korzystać z pozostałych funkcjonalności AstroBin jeśli akurat nie masz "
-"żadnych nowych zdjęć do udostępnienia."
 
 msgid ""
 "When you are ready to renew your subscription, please visit the following "
@@ -234,10 +217,8 @@ msgid ""
 msgstr ""
 "Kiedy zdecydujesz się odnowić subskrypcje, proszę odwiedzić poniższą stronę:"
 
-#, fuzzy
-#| msgid "Your premium subscription will expire in one week"
 msgid "Your AstroBin subscription has just expired"
-msgstr "Twoja subskrypcja premium wygaśnie za tydzień"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -251,10 +232,8 @@ msgid ""
 "still ongoing. Please wait until it is expired. Thank you!"
 msgstr ""
 
-#, fuzzy
-#| msgid "Your premium subscription will expire in one week"
 msgid "Your AstroBin subscription will expire in one week"
-msgstr "Twoja subskrypcja premium wygaśnie za tydzień"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -286,25 +265,14 @@ msgstr ""
 msgid "Thank you!"
 msgstr "Dziękujemy!"
 
-#, fuzzy
-#| msgid "Your premium subscription will be automatically renewed in one week"
 msgid "Your AstroBin subscription will be automatically renewed in one week"
 msgstr ""
-"Twoja subskrypcja premium zostanie automatycznie odnowiona w ciągu tygodnia."
 
-#, fuzzy, python-format
-#| msgid ""
-#| "Your \"%(subscription_name)s\" subscription on AstroBin will be "
-#| "automatically renewed in one week."
+#, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin will be "
 "automatically renewed in 30 days."
 msgstr ""
-"Subskrypcja \"%(subscription_name)s\" zostanie automatycznie odnowiona w "
-"ciągu tygodnia."
 
-#, fuzzy
-#| msgid "Your premium subscription will be automatically renewed in one week"
 msgid "Your AstroBin subscription will be automatically renewed in 30 days"
 msgstr ""
-"Twoja subskrypcja premium zostanie automatycznie odnowiona w ciągu tygodnia."

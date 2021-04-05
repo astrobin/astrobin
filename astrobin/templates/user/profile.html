@@ -8,7 +8,7 @@
 {% load toggleproperty_tags %}
 {% load staticfiles %}
 
-{% block title %}{% blocktrans with user=requested_user.userprofile %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans trimmed with user=requested_user.userprofile %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block breadcrumbs %}
@@ -46,28 +46,25 @@
             </h4>
 
             <p>
-                {% blocktrans with "forum/c/astrobin/annoucements/official-statement-and-post-mortem-about-the-data-loss/" as data_corruption_url %}
+                {% blocktrans trimmed with "forum/c/astrobin/annoucements/official-statement-and-post-mortem-about-the-data-loss/" as data_corruption_url %}
                     We are very, very sorry, but it appears that some of your images suffered a catastrophic data
                     corruption, and cannot be retrieved. Please read more <a href="{{ data_corruption_url }}">here</a>.
                 {% endblocktrans %}
             </p>
             <p>
-                {% blocktrans %}
-                    Please click on the thumbnails stuck with the hourglass icon to upload the image files that you
+                {% blocktrans trimmed %}Please click on the thumbnails stuck with the hourglass icon to upload the image files that you
                     still have on your computer or backups to their pages again.
                 {% endblocktrans %}
             </p>
 
             <p>
-                {% blocktrans %}
-                    The data associated to your affected images, such as title, description, equipment used, acquisition
+                {% blocktrans trimmed %}The data associated to your affected images, such as title, description, equipment used, acquisition
                     details, comments, likes, bookmarks, and so on, is still intact and safe.
                 {% endblocktrans %}
             </p>
 
             <p>
-                {% blocktrans %}
-                    AstroBin would like to offer you its sincerest apologies. :(
+                {% blocktrans trimmed %}AstroBin would like to offer you its sincerest apologies. :(
                 {% endblocktrans %}
             </p>
 

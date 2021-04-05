@@ -1,28 +1,27 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: AstroBin Apps: Plate-solving\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 21:59+0000\n"
-"PO-Revision-Date: 2021-03-04 07:55+0000\n"
-"Last-Translator: NadirAstro <nadir_teymurov@mail.ru>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2021-04-05 16:17+0200\n"
+"PO-Revision-Date: 2021-04-05 22:44+0200\n"
+"Last-Translator: Salvatore Iovene\n"
+"Language-Team: Russian\n"
 "Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1614844500.000000\n"
+"X-Generator: Loco https://localise.biz\n"
+"X-Loco-Source-Locale: en\n"
+"X-Loco-Project-Id: 108448\n"
+"X-Loco-Api-Version: 1.0.25 20210310-1"
 
+#: loco:606b765229f20946c1545c55
 msgid "Perform a blind solve"
 msgstr "Выполнить определение \"вслепую\""
 
+#: loco:606b765229f20946c1545c56
 msgid ""
 "Attempt to solve with no hints. In most cases this will work, but it will "
 "take longer."
@@ -30,45 +29,59 @@ msgstr ""
 "Попытаться определить без подсказок. В большинстве случаев срабатывает, но "
 "занимает больше времени."
 
+#: loco:606b765229f20946c1545c57
 msgid "Width of the field in degrees"
 msgstr "Ширина поля в градусах"
 
+#: loco:606b765229f20946c1545c58
 msgid "Width of the field in arcminutes"
 msgstr "Ширина поля в угл. минутах"
 
+#: loco:606b765229f20946c1545c59
 msgid "Resolution of the field in arcseconds/pixel"
 msgstr "Разрешение поля в угл. минутах/пкс"
 
+#: loco:606b765229f20946c1545c5a
 msgid "Field size units"
 msgstr "Значения размера поля"
 
+#: loco:606b765229f20946c1545c5b
 msgid "Min field size"
 msgstr "Минимальное значение поля"
 
+#: loco:606b765229f20946c1545c5c
 msgid "Estimate the lower bound for the width of this field."
 msgstr "Определите нижнюю границу ширины этого поля."
 
+#: loco:606b765229f20946c1545c5d
 msgid "Max field size"
 msgstr "Максимальный размер поля"
 
+#: loco:606b765229f20946c1545c5e
 msgid "Estimate the upper bound for the width of this field."
 msgstr "Определите верхнюю границу ширины этого поля."
 
+#: loco:606b765229f20946c1545c5f
 msgid "Center RA"
 msgstr "Центр П.В."
 
+#: loco:606b765229f20946c1545c60
 msgid "Center RA of the field in degrees, 0.000 to 360.000"
 msgstr "Центр П.В. поля в градусах, 0.000 до 360.000"
 
+#: loco:606b765229f20946c1545c61
 msgid "Center dec"
 msgstr "Центр скл"
 
+#: loco:606b765229f20946c1545c62
 msgid "Center dec of the field in degrees, -90.000 to +90.000"
 msgstr "Центр склонения поля в градусах, -90.000 до +90.000"
 
+#: loco:606b765229f20946c1545c63
 msgid "Radius"
 msgstr "Радиус"
 
+#: loco:606b765229f20946c1545c64
 msgid ""
 "Tells the plate-solving engine to look within these many degrees of the "
 "given center RA and dec position."
@@ -76,18 +89,23 @@ msgstr ""
 "Сообщает определителю по координатам смотреть в пределах данного центра по "
 "прямому восхождению и склонению."
 
+#: loco:606b765229f20946c1545c65
 msgid "Small"
 msgstr "Маленький"
 
+#: loco:606b765229f20946c1545c66
 msgid "Medium"
 msgstr "Средний"
 
+#: loco:606b765229f20946c1545c67
 msgid "Large"
 msgstr "Большой"
 
+#: loco:606b765229f20946c1545c68
 msgid "Sample raw frame (max 100 MB)"
 msgstr "Пример сырого кадра (макс. 100 Мб)"
 
+#: loco:606b765229f20946c1545c69
 msgid ""
 "To improve the accuracy of your plate-solution even further, please upload "
 "one of the XISF or FITS files from your data set. Such files normally have "
@@ -108,54 +126,68 @@ msgstr ""
 "системы и находить планеты и астероиды на вашем изображении (при условии, "
 "что вы также добавляете к нему информацию о местоположении). <br/> <br/> Для "
 "максимальной точности рекомендуется использовать собственный и открытый "
-"формат PixInsight XISF. Узнайте больше о XISF здесь: <br/> <br/> <a href="
-"\"https://pixinsight.com/xisf/\" target=\"_blank\"> https://pixinsight.com/"
-"xisf/ </a> <br/> <br/> <strong> Обратите внимание: </strong> очень важно, "
-"чтобы загружаемый файл XISF или FITS был выровнен с обработанным "
+"формат PixInsight XISF. Узнайте больше о XISF здесь: <br/> <br/> <a "
+"href=\"https://pixinsight.com/xisf/\" target=\"_blank\"> https://pixinsight."
+"com/xisf/ </a> <br/> <br/> <strong> Обратите внимание: </strong> очень важно,"
+" чтобы загружаемый файл XISF или FITS был выровнен с обработанным "
 "изображением, в противном случае аннотации объектов не будут совпадать. "
 "Чтобы повысить ваши шансы на получение точного раствора для планшета, "
 "откалибруйте файл обычным способом (темный / смещенный / плоский), но не "
 "растягивайте его."
 
+#: loco:606b765229f20946c1545c6a
 msgid "Scaled font size"
 msgstr "Масштабированный размер шрифта"
 
+#: loco:606b765229f20946c1545c6b
 msgid "Font size of the annotations on your main image page"
 msgstr "Размер шрифта аннотаций на главной странице изображения"
 
+#: loco:606b765229f20946c1545c6c
 msgid "Show equatorial grid"
 msgstr "Показывать экваториальную сетку"
 
+#: loco:606b765229f20946c1545c6d
 msgid "Show constellation borders"
 msgstr "Показывать границы созвездий"
 
+#: loco:606b765229f20946c1545c6e
 msgid "Show constellation lines"
 msgstr "Показывать линии созвездий"
 
+#: loco:606b765229f20946c1545c6f
 msgid "Show named stars"
 msgstr "Показывать названные звёзды"
 
+#: loco:606b765229f20946c1545c70
 msgid "Show Messier objects"
 msgstr "Показывать объекты Мессье"
 
+#: loco:606b765229f20946c1545c71
 msgid "Show NGC and IC objects"
 msgstr "Показывать NGC и IC объекты"
 
+#: loco:606b765229f20946c1545c72
 msgid "Show VdB objects"
 msgstr "Показывать VdB объекты"
 
+#: loco:606b765229f20946c1545c73
 msgid "Show Sharpless objects"
 msgstr "Показывать Sharpless объекты"
 
+#: loco:606b765229f20946c1545c74
 msgid "Show Barnard objects"
 msgstr "Показывать Barnard объекты"
 
+#: loco:606b765229f20946c1545c75
 msgid "Show PGC objects"
 msgstr "Показывать PGC объекты"
 
+#: loco:606b765229f20946c1545c76
 msgid "Show planets"
 msgstr "Показывать планеты"
 
+#: loco:606b765229f20946c1545c77
 msgid ""
 "Only available if your image at least an acquisition time and an accurate "
 "location"
@@ -163,61 +195,78 @@ msgstr ""
 "Доступно только в том случае, если у вашего изображения хотя бы время "
 "получения и точное местоположение"
 
+#: loco:606b765229f20946c1545c78
 msgid "Show asteroids"
 msgstr "Показывать астероиды"
 
+#: loco:606b765229f20946c1545c79
 msgid "Show GCVS stars"
 msgstr "Показывать GCVS звёзды"
 
+#: loco:606b765229f20946c1545c7a
 msgid "General Catalog of Variable Stars"
 msgstr "Общий каталог переменных звёзд"
 
+#: loco:606b765229f20946c1545c7b
 msgid "Show Tycho-2 catalog"
 msgstr "Показывать Tycho-2 каталог"
 
+#: loco:606b765229f20946c1545c7c
 msgid "Show CGPN objects"
 msgstr "Показывать CGPN объекты"
 
+#: loco:606b765229f20946c1545c7d
 msgid "Getting plate-solving status, please wait..."
 msgstr "Получение статуса для размещения координат, пожалуйста ждите..."
 
+#: loco:606b765229f20946c1545c7e
 msgid "Plate-solving starting, please do not leave this page..."
 msgstr "Плейтсолв начинается, пожалуйста не покидайте эту страницу..."
 
+#: loco:606b765229f20946c1545c7f
 msgid "Advanced plate-solving starting, please do not leave this page..."
 msgstr ""
 "Продвинутый плейтсолв начинается, пожалуйста не покидайте эту страницу..."
 
+#: loco:606b765229f20946c1545c80
 msgid "Plate-solving started. You may leave this page."
 msgstr "Плейтсолв начался. Вы можете покинуть эту страницу."
 
+#: loco:606b765229f20946c1545c81
 msgid "Advanced plate-solving started. You may leave this page."
 msgstr "Продвинутый плейтсолв начался. Вы можете покинуть эту страницу."
 
+#: loco:606b765229f20946c1545c82
 msgid "Plate-solving almost ready, please do not leave this page..."
 msgstr ""
-"Размещение по координатам почти готово, пожалуйста не покидайте эту "
-"страницу..."
+"Размещение по координатам почти готово, пожалуйста не покидайте эту страницу."
+".."
 
+#: loco:606b765229f20946c1545c83
 msgid "This image could not be plate-solved."
 msgstr "Это изображение не может быть размещено по координатам."
 
+#: loco:606b765229f20946c1545c84
 msgid "The advanced plate-solving failed."
 msgstr "Продвинутый плейтсолв провалился."
 
+#: loco:606b765229f20946c1545c85
 msgid "This image has been plate-solved. Refresh the page to see new data!"
 msgstr ""
 "Плейтсолв этого изображения проведено успешно. Пожалуйста обновите страницу, "
 "чтобы увидеть новые данные."
 
+#: loco:606b765229f20946c1545c86
 msgid "The advanced plate-solved finished. Refresh the page to see new data!"
 msgstr ""
 "Продвинутый плейтсолв этого изображения завершено. Пожалуйста обновите "
 "страницу, чтобы увидеть новые данные!"
 
+#: loco:606b765229f20946c1545c87
 msgid "Error"
 msgstr "Ошибка"
 
+#: loco:606b765229f20946c1545c88
 msgid ""
 "AstroBin could not plate-solve this image because it was not possible to "
 "establish a connection to nova.astrometry.net. Please try again later!"
@@ -226,6 +275,7 @@ msgstr ""
 "установить соединение с nova.astrometry.net. Пожалуйста, повторите попытку "
 "позже!"
 
+#: loco:606b765229f20946c1545c89
 msgid ""
 "AstroBin could not plate-solve this image because nova.astrometry.net "
 "reported an internal server error."

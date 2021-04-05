@@ -15,5 +15,5 @@ astrobin_apps_iotd
 
 for APP in ${APPS}; do
     echo "Processing ${APP}..."
-    (cd ${APP}; ../manage.py makemessages --all --no-location) || exit 1
+    (cd ${APP}; ../manage.py make_messages_no_fuzzy --all --no-location) || exit 1
 done

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 21:58+0000\n"
+"POT-Creation-Date: 2021-04-05 20:22+0000\n"
 "PO-Revision-Date: 2020-11-24 02:06+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,16 +28,11 @@ msgstr "キャンセル"
 msgid "Add a comment"
 msgstr "コメントを追加"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-#| "register/\">register</a> to leave a comment.</p>"
+#, python-format
 msgid ""
 "Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
 "\">sign up</a> to leave a comment."
 msgstr ""
-"コメントを残すためには<a href=\"/accounts/login/\">ログイン</a>か<a href=\"/"
-"accounts/register/\">新規登録</a>をしてください。</p>"
 
 msgid "There are no comments yet."
 msgstr "コメントが入力されていません。"
@@ -82,42 +77,3 @@ msgstr "コメント欄は必ず入力してください。"
 
 msgid "Submit"
 msgstr "送信"
-
-#~ msgid "Save"
-#~ msgstr "保存"
-
-#~ msgid "(comment deleted)"
-#~ msgstr "(コメントは削除されました)"
-
-#~ msgid "There doesn't seem to be anything here."
-#~ msgstr "ここには何もないようです。"
-
-#~ msgid "Formatting help"
-#~ msgstr "フォーマット例"
-
-#~ msgid "Preview"
-#~ msgstr "プレビュー"
-
-#~ msgid "You type:"
-#~ msgstr "入力"
-
-#~ msgid "You see:"
-#~ msgstr "表示"
-
-#~ msgid "italics"
-#~ msgstr "斜体"
-
-#~ msgid "bold"
-#~ msgstr "太字"
-
-#~ msgid "(TAB or 4 spaces)"
-#~ msgstr "（タブもしくは4×スペース）"
-
-#~ msgid "preformatted text"
-#~ msgstr "整形済みテキスト"
-
-#~ msgid "quoted text"
-#~ msgstr "引用文"
-
-#~ msgid "escape the formatting syntax"
-#~ msgstr "書式設定を無視"

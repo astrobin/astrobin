@@ -22,7 +22,7 @@
     {% if not deleted %}
         <h1>{% trans "Are you sure you want to ban this user?" %}</h1>
         <p>
-            {% blocktrans with username=user.profile %}User <strong>{{user}}</strong> will be deleted, with all their images, messages, comments, and so on.{% endblocktrans %}
+            {% blocktrans trimmed with username=user.profile %}User <strong>{{user}}</strong> will be deleted, with all their images, messages, comments, and so on.{% endblocktrans %}
         </p>
 
         <form method="post" action="">
