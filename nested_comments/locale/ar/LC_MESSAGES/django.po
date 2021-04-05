@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 21:58+0000\n"
+"POT-Creation-Date: 2021-04-05 19:06+0000\n"
 "PO-Revision-Date: 2014-02-03 01:56+0000\n"
 "Last-Translator: Omar <thekingosm168@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,17 +28,6 @@ msgstr "إلغاء"
 
 msgid "Add a comment"
 msgstr "أضف تعليق"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-#| "register/\">register</a> to leave a comment.</p>"
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
-"\">sign up</a> to leave a comment."
-msgstr ""
-"رجاء <a href=\"/accounts/login/\">قم بالدخول</a> أو <a href=\"/accounts/"
-"register/\">التسجيل</a> لعمل تعليق.</p>"
 
 msgid "There are no comments yet."
 msgstr "لا توجد تعليقات حتى الآن."
@@ -84,41 +73,3 @@ msgstr "التعليق لا يمكن أن يكون فارغا."
 msgid "Submit"
 msgstr ""
 
-#~ msgid "Save"
-#~ msgstr "احفظ"
-
-#~ msgid "(comment deleted)"
-#~ msgstr "(تم حذف التعليق)"
-
-#~ msgid "There doesn't seem to be anything here."
-#~ msgstr "يبدو أنه لا يوجد شيئ هنا."
-
-#~ msgid "Formatting help"
-#~ msgstr "المساعدة في التنسيق "
-
-#~ msgid "Preview"
-#~ msgstr "معاينة"
-
-#~ msgid "You type:"
-#~ msgstr "تكتب:"
-
-#~ msgid "You see:"
-#~ msgstr "ترى:"
-
-#~ msgid "italics"
-#~ msgstr "مائل"
-
-#~ msgid "bold"
-#~ msgstr "سميك"
-
-#~ msgid "(TAB or 4 spaces)"
-#~ msgstr "أربعة مسافات"
-
-#~ msgid "preformatted text"
-#~ msgstr "نص منسّق مسبقًا"
-
-#~ msgid "quoted text"
-#~ msgstr "نص مقتبس"
-
-#~ msgid "escape the formatting syntax"
-#~ msgstr "الخروج من التنسيق"

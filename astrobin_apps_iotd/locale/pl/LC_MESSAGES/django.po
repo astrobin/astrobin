@@ -38,11 +38,6 @@ msgstr "Zdjęcia ze strefy oczekującej nie mogą być zgłoszone."
 msgid "This user has chosen to be excluded from competitions."
 msgstr "Ten użytkownik został wyłączony z ubiegania się o IOTD"
 
-#, fuzzy
-#| msgid "This user has chosen to be excluded from competitions."
-msgid "This user has been banned from competitions."
-msgstr "Ten użytkownik został wyłączony z ubiegania się o IOTD"
-
 #, python-format
 msgid ""
 "You cannot submit an image that was published more than %(max_days)s days "
@@ -139,18 +134,6 @@ msgstr "Nie możesz odznaczyć bieżącego lub poprzednich zdjęć IOTD"
 msgid "you already selected %s IOTD today (UTC)"
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid "You have already scheduled %(max_allowed)s IOTDs."
-msgid "you already selected %s scheduled IOTDs"
-msgstr ""
-"Oznaczyłeś już dzisiaj maksymalną ilość %(max_allowed)s kandydatów do IOTD"
-
-#, fuzzy, python-format
-#| msgid "You have already scheduled %(max_allowed)s IOTDs."
-msgid "there are already %s scheduled IOTDs"
-msgstr ""
-"Oznaczyłeś już dzisiaj maksymalną ilość %(max_allowed)s kandydatów do IOTD"
-
 msgid "Image of the day"
 msgstr "Zdjęcie dnia"
 
@@ -183,70 +166,3 @@ msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr ""
 "Wszystkie miejsca do następnego wyboru IOTD na następne %(days)s dni są już "
 "zapełnione"
-
-#, fuzzy
-#~| msgid "You cannot unelect an image elected by another judge."
-#~ msgid "You cannot unhide an image on behalf of another user."
-#~ msgstr "Nie możesz odznaczyć zdjęcia wybranego przez innego jurora."
-
-#, fuzzy
-#~| msgid "You cannot elect your own submission."
-#~ msgid "You cannot delete another user's submission."
-#~ msgstr "Nie możesz wybrać zdjęcia które sam wysłałeś."
-
-#, fuzzy
-#~| msgid "You cannot elect a judge's image."
-#~ msgid "You cannot delete another user's vote."
-#~ msgstr "Nie możesz wybrać zdjęcia innego jurora."
-
-#~ msgid "by"
-#~ msgstr "od"
-
-#~ msgid "Submit for IOTD"
-#~ msgstr "Wyślij jako IOTD"
-
-#~ msgid ""
-#~ "You will submit this image to the IOTD Submissions Queue. From there, a "
-#~ "member of the IOTD Reviewers Board will consider promoting it for final "
-#~ "evaluation from an IOTD Judge"
-#~ msgstr ""
-#~ "Wyślesz to zdjęcie do kolejki. Tam członek wybierający IOTD rozważy "
-#~ "przesłanie go do finałowej oceny i wyboru IOTD"
-
-#~ msgid "Submit"
-#~ msgstr "Wyślij"
-
-#~ msgid "IOTD Review Queue"
-#~ msgstr "Kolejka pretendentów do IOTD"
-
-#~ msgid ""
-#~ "Please select the images that you want to promote for final judgement by "
-#~ "clicking on them."
-#~ msgstr "Proszę zaznaczyć zdjęcia do finalnej oceny przez kliknięcie w nie."
-
-#~ msgid "IOTD Submission Queue"
-#~ msgstr "Kolejka zdjęć zgłoszonych do przeglądu w ramach IOTD"
-
-#~ msgid ""
-#~ "Please select the images that you want to propose for IOTD consideration."
-#~ msgstr ""
-#~ "Wybierz zdjęcia które proponujesz do wyboru jako IOTD przez kliknięcie w "
-#~ "nie."
-
-#~ msgid "Reviewers"
-#~ msgstr "Recenzenci"
-
-#~ msgid "Loading"
-#~ msgstr "Ładowanie"
-
-#~ msgid "Submitters"
-#~ msgstr "Wysyłający"
-
-#~ msgid "You cannot submit a judge's image."
-#~ msgstr "Nie możesz zgłosić zdjęcia innego oceniającego."
-
-#~ msgid "You cannot vote for a judge's image."
-#~ msgstr "Nie możesz głosować na zdjęcie innego oceniającego."
-
-#~ msgid "No images uploaded on this day."
-#~ msgstr "Żadne zdjęcia nie zostały dzisiaj dodane."

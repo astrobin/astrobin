@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 21:58+0000\n"
+"POT-Creation-Date: 2021-04-05 19:06+0000\n"
 "PO-Revision-Date: 2014-03-27 17:48+0000\n"
 "Last-Translator: Tomáš <fun2mas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,17 +27,6 @@ msgstr "Zrušiť"
 
 msgid "Add a comment"
 msgstr "Pridať komentár"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-#| "register/\">register</a> to leave a comment.</p>"
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
-"\">sign up</a> to leave a comment."
-msgstr ""
-"Prosím <a href=\"/accounts/login/\">prihláste sa</a> alebo <a href=\"/"
-"accounts/register/\">zaregistrujte</a> aby ste mohli vložiť komentár.</p>"
 
 msgid "There are no comments yet."
 msgstr "Zatiaľ tu nie sú komentáre."
@@ -83,50 +72,11 @@ msgstr "Komentár nemôže byť prázdny."
 msgid "Submit"
 msgstr ""
 
-#~ msgid "Save"
-#~ msgstr "Uložiť"
 
-#~ msgid "(comment deleted)"
-#~ msgstr "(komentár odstránený)"
 
-#~ msgid "There doesn't seem to be anything here."
-#~ msgstr "Nezdá sa, že by tu niečo bolo."
 
-#~ msgid "Formatting help"
-#~ msgstr "Pomoc s formátovaním"
 
-#~ msgid "Preview"
-#~ msgstr "Náhľad"
 
-#~ msgid "You type:"
-#~ msgstr "Píšete:"
 
-#~ msgid "You see:"
-#~ msgstr "Vidíte:"
 
-#~ msgid "italics"
-#~ msgstr "kurzíva"
 
-#~ msgid "bold"
-#~ msgstr "tučné"
-
-#~ msgid "(TAB or 4 spaces)"
-#~ msgstr "(TAB alebo 4 medzery)"
-
-#~ msgid "preformatted text"
-#~ msgstr "predformátovaný text"
-
-#~ msgid "quoted text"
-#~ msgstr "citovaný text"
-
-#~ msgid "escape the formatting syntax"
-#~ msgstr "opustiť formátovanie"
-
-#~ msgid ""
-#~ "Remember to use the <span class=\"label label-important\">reply</span> "
-#~ "button when replying directly to a comment. To post a new top level "
-#~ "comment, use the form at the end of the comment list."
-#~ msgstr ""
-#~ "Nezabudnite použiť tlačítko <span class=\"label label-important"
-#~ "\">Odpovedať</span> ak chcete reagovať priamo na príspevok. Ak si prajete "
-#~ "vložiť nový príspevok, použite formulár na konci príspevkov."

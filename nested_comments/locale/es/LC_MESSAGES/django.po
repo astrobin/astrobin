@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 21:58+0000\n"
+"POT-Creation-Date: 2021-04-05 19:06+0000\n"
 "PO-Revision-Date: 2013-01-20 17:08+0100\n"
 "Last-Translator: PepeChambo <jjchambo@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,17 +26,6 @@ msgstr "Cancelar"
 
 msgid "Add a comment"
 msgstr "Añadir comentario"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-#| "register/\">register</a> to leave a comment.</p>"
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
-"\">sign up</a> to leave a comment."
-msgstr ""
-"Por favor, <a href=\"/accounts/login/\">identificate</a> o <a href=\"/"
-"accounts/register/\">registrate</a> para dejar un comentario.</p>"
 
 msgid "There are no comments yet."
 msgstr "No hay todavía comentarios."
@@ -82,51 +71,12 @@ msgstr "El comentario no puede estar vacío."
 msgid "Submit"
 msgstr ""
 
-#~ msgid "Save"
-#~ msgstr "Guardar"
 
-#~ msgid "(comment deleted)"
-#~ msgstr "(comentario borrado)"
 
-#~ msgid "There doesn't seem to be anything here."
-#~ msgstr "Parece que aquí no hay nada."
 
-#~ msgid "Formatting help"
-#~ msgstr "Ayuda de formato"
 
-#~ msgid "Preview"
-#~ msgstr "Previsualizar"
 
-#~ msgid "You type:"
-#~ msgstr "Escribe:"
 
-#~ msgid "You see:"
-#~ msgstr "Para ver:"
 
-#~ msgid "italics"
-#~ msgstr "cursiva"
 
-#~ msgid "bold"
-#~ msgstr "negrita"
 
-#~ msgid "(TAB or 4 spaces)"
-#~ msgstr "(tabulación ó 4 espacios)"
-
-#~ msgid "preformatted text"
-#~ msgstr "texto con formato"
-
-#~ msgid "quoted text"
-#~ msgstr "texto citado"
-
-#~ msgid "escape the formatting syntax"
-#~ msgstr "salir de la sintaxis de formato"
-
-#~ msgid ""
-#~ "Remember to use the <span class=\"label label-important\">reply</span> "
-#~ "button when replying directly to a comment. To post a new top level "
-#~ "comment, use the form at the end of the comment list."
-#~ msgstr ""
-#~ "Recuerda usar el botón <span class=\"label label-important\">responder</"
-#~ "span> cuando respondas directamente a un comentario. Para publicar un "
-#~ "nuevo comentario de nivel superior, usa el formulario que hay al final de "
-#~ "la lista de comentarios."

@@ -3542,7 +3542,7 @@
 	}
 
 	// Force selectionChange when editable was focused.
-	// Similar to hack in selection.js#~620.
+	// Similar to hack in selection.js
 	// @context widget
 	function onEditableFocus() {
 		// Gecko does not support 'DOMFocusIn' event on which we unlock selection

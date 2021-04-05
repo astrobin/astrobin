@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 21:58+0000\n"
+"POT-Creation-Date: 2021-04-05 19:06+0000\n"
 "PO-Revision-Date: 2013-10-14 09:52+0100\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,17 +26,6 @@ msgstr "Annuleren"
 
 msgid "Add a comment"
 msgstr "Commentaar toevoegen"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-#| "register/\">register</a> to leave a comment.</p>"
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
-"\">sign up</a> to leave a comment."
-msgstr ""
-"Gelieve <a href=\"/accounts/login/\">in te loggen</a> of te <a href=\"/"
-"accounts/register/\">registreren</a> om commentaar te kunnen geven.</p>"
 
 msgid "There are no comments yet."
 msgstr "Er zijn nog geen commentaren."
@@ -82,51 +71,12 @@ msgstr "Het commentaarveld mag niet leeg zijn."
 msgid "Submit"
 msgstr ""
 
-#~ msgid "Save"
-#~ msgstr "Bewaren"
 
-#~ msgid "(comment deleted)"
-#~ msgstr "(commentaar gewist)"
 
-#~ msgid "There doesn't seem to be anything here."
-#~ msgstr "Het lijkt er op dat hier niets is."
 
-#~ msgid "Formatting help"
-#~ msgstr "Hulp ivm het formatteren"
 
-#~ msgid "Preview"
-#~ msgstr "Voorbeeld"
 
-#~ msgid "You type:"
-#~ msgstr "Je typt:"
 
-#~ msgid "You see:"
-#~ msgstr "Je ziet:"
 
-#~ msgid "italics"
-#~ msgstr "schuinschrift"
 
-#~ msgid "bold"
-#~ msgstr "vet"
 
-#~ msgid "(TAB or 4 spaces)"
-#~ msgstr "(TAB of 4 spaties)"
-
-#~ msgid "preformatted text"
-#~ msgstr "voorgeformatteerde tekst"
-
-#~ msgid "quoted text"
-#~ msgstr "aanhaling"
-
-#~ msgid "escape the formatting syntax"
-#~ msgstr "verlaten van de formatterenende syntax"
-
-#~ msgid ""
-#~ "Remember to use the <span class=\"label label-important\">reply</span> "
-#~ "button when replying directly to a comment. To post a new top level "
-#~ "comment, use the form at the end of the comment list."
-#~ msgstr ""
-#~ "Denk eraan om de <span class=\"label label-important\">antwoorden</span>-"
-#~ "knop te gebruiken om een rechtstreeks antwoord te formuleren op een "
-#~ "commentaar. Om een nieuw commentaar aan te maken dien je het invulveld te "
-#~ "gebruiken onderaan de commentaarlijst."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 21:57+0000\n"
+"POT-Creation-Date: 2021-04-05 19:06+0000\n"
 "PO-Revision-Date: 2020-09-25 11:30+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -799,15 +799,6 @@ msgstr ""
 msgid "Groups"
 msgstr ""
 
-#, fuzzy
-#| msgid "How is the Image of the Day selected?"
-msgid "Submit this image to the selected groups."
-msgstr "Ako je vyberaný obrázok dňa?"
-
-#, fuzzy
-msgid "Mouse hover image"
-msgstr "Obrázok"
-
 msgid ""
 "Choose what will be displayed when somebody hovers the mouse over this "
 "image. Please note: only revisions with the same width and height of your "
@@ -864,11 +855,6 @@ msgid ""
 "revision. Pleasenote: only revisions with the same width and height as this "
 "one can be considered."
 msgstr ""
-
-#, fuzzy
-#| msgid "Total images"
-msgid "Original image"
-msgstr "Celkový počet obrázkov"
 
 msgid "Opacity"
 msgstr "Nepriehľadnosť"
@@ -933,9 +919,6 @@ msgstr "Ak máte osobnú webstránku, vložte sem prosím adresu"
 msgid "Website"
 msgstr "Webstránka"
 
-#, fuzzy
-msgid "Mark as final"
-msgstr "Marshallove ostrovy"
 
 msgid "Please enter a value between 1 and 5."
 msgstr "Vložte prosím hodnotu medzi 1 a 5"
@@ -970,9 +953,6 @@ msgstr "označené záložkou"
 msgid "likes"
 msgstr "páči sa"
 
-#, fuzzy
-msgid "created a new public group"
-msgstr "vytvorená nová verejná dátová zložka"
 
 msgid "joined the public group"
 msgstr ""
@@ -1016,16 +996,6 @@ msgstr "Uveďte autora-Zachovajte licenciu Creative Commons"
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "Uveďte autora-Neodvodzujte práce Creative Commons"
 
-#, fuzzy
-#| msgid "English"
-msgid "English (US)"
-msgstr "Anglicky"
-
-#, fuzzy
-#| msgid "English"
-msgid "English (GB)"
-msgstr "Anglicky"
-
 msgid "Italian"
 msgstr "Taliansky"
 
@@ -1052,11 +1022,6 @@ msgstr "Albánsky"
 
 msgid "Polish"
 msgstr "Poľsky"
-
-#, fuzzy
-#| msgid "Brazilian Portuguese"
-msgid "Portuguese"
-msgstr "Brazílsky Portugalsky"
 
 msgid "Greek"
 msgstr "Grécky"
@@ -1124,15 +1089,6 @@ msgstr "Asteroid"
 msgid "Comet"
 msgstr "Kométa"
 
-#, fuzzy
-#| msgid "Description"
-msgid "Occultation"
-msgstr "Popis"
-
-#, fuzzy
-msgid "Conjunction"
-msgstr "Miesta"
-
 msgid "Partial lunar eclipse"
 msgstr ""
 
@@ -1157,9 +1113,6 @@ msgstr ""
 msgid "Medium"
 msgstr ""
 
-#, fuzzy
-msgid "Large"
-msgstr "veľkosť pixelov"
 
 msgid "Center"
 msgstr "Stred"
@@ -1276,11 +1229,6 @@ msgid "Catadioptric: Schmidt-Cassegrain"
 msgstr "Katadioptrický: Schmidt-Cassegrain"
 
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
-msgstr "Katadioptrický: ACF Schmidt-Cassegrain"
-
-#, fuzzy
-#| msgid "Catadioptric: ACF Schmidt-Cassegrain"
-msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
 msgstr "Katadioptrický: ACF Schmidt-Cassegrain"
 
 msgid "Camera lens"
@@ -1425,11 +1373,6 @@ msgstr ""
 msgid "Other/Unknown"
 msgstr ""
 
-#, fuzzy
-#| msgid "Deep sky object"
-msgid "Deep sky object or field"
-msgstr "Deep sky objekt"
-
 msgid "Solar system body or event"
 msgstr "Teleso alebo udalosť v Slnečnej sústave"
 
@@ -1472,9 +1415,6 @@ msgstr ""
 msgid "Mix of multiple sources"
 msgstr ""
 
-#, fuzzy
-msgid "None of the above"
-msgstr "Ako je vyberaný obrázok dňa?"
 
 msgid "Unknown"
 msgstr ""
@@ -1554,11 +1494,6 @@ msgstr ""
 msgid "Select an area of the image to be used as thumbnail in your gallery."
 msgstr ""
 
-#, fuzzy
-#| msgid "Star trails"
-msgid "Sharpen thumbnails"
-msgstr "Star trails"
-
 msgid ""
 "If selected, AstroBin will use a resizing algorithm that slightly sharpens "
 "the image's thumbnails. This setting applies to all revisions."
@@ -1600,9 +1535,6 @@ msgstr ""
 msgid "Images"
 msgstr "Obrázky"
 
-#, fuzzy
-msgid "Cover image"
-msgstr "Obrázok"
 
 msgid "Order by image tag"
 msgstr ""
@@ -1643,11 +1575,6 @@ msgstr "9 - Obloha v centre mesta (BIELA)"
 
 msgid "Synthetic channel"
 msgstr "Umelý kanál"
-
-#, fuzzy
-#| msgid "Filter"
-msgid "Filter"
-msgstr "Filter"
 
 msgid "Binning"
 msgstr "Binning"
@@ -1765,21 +1692,8 @@ msgstr "Zemepisná dĺžka tretieho centrálneho poludníka."
 msgid "Seeing"
 msgstr "Seeing"
 
-#, fuzzy
-#| msgid "Your estimation of the seeing, on a scale from 1 to 5."
-msgid ""
-"Your estimation of the seeing, on a scale from 1 to 5. Larger is better."
-msgstr "Váš odhad seeingu, na stupnici 1 až 5."
-
 msgid "Transparency"
 msgstr "Priehľadnosť"
-
-#, fuzzy
-#| msgid "Your estimation of the transparency, on a scale from 1 to 10."
-msgid ""
-"Your estimation of the transparency, on a scale from 1 to 10. Larger is "
-"better."
-msgstr "Váš odhad priehľadnosti na stupnici 1 až 10."
 
 msgid "Time"
 msgstr "Čas"
@@ -1798,11 +1712,6 @@ msgstr "TIFF/FITS"
 
 msgid "Higher resolution"
 msgstr "Vyššie rozlíšenie"
-
-#, fuzzy
-#| msgid "Do you have any hobbies other than astrophotography?"
-msgid "I am no longer active in astrophotography"
-msgstr "Máte iné záľuby ako astrofotografia?"
 
 msgid "This website did not meet my expectations"
 msgstr ""
@@ -1858,9 +1767,6 @@ msgstr "O Vás"
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "Napíšte niečo o Vás. HTML značky sú povolené."
 
-#, fuzzy
-msgid "Delete reason"
-msgstr "Spojené štáty"
 
 msgid "Why are you deleting your AstroBin account?"
 msgstr ""
@@ -1882,24 +1788,12 @@ msgstr ""
 msgid "Open notifications in a new tab"
 msgstr ""
 
-#, fuzzy
-msgid "Global stream"
-msgstr "Guľové hviezdokopy"
 
 msgid "Personal stream"
 msgstr ""
 
-#, fuzzy
-msgid "All uploaded images"
-msgstr "nahratý nový obrázok"
 
-#, fuzzy
-msgid "All images uploaded by people you follow"
-msgstr "Nový obrázok od používateľa, ktorého sledujete"
 
-#, fuzzy
-msgid "Default front page view"
-msgstr "Predvolená sekcia na úvodnej stránke bola zmenená."
 
 msgid "Upload time"
 msgstr ""
@@ -1910,9 +1804,6 @@ msgstr ""
 msgid "Year"
 msgstr ""
 
-#, fuzzy
-msgid "Collections"
-msgstr "Miesta"
 
 msgid "Default gallery sorting"
 msgstr ""
@@ -1968,11 +1859,6 @@ msgid ""
 "and this kind of support would be amazing. Thank you in advance!"
 msgstr ""
 
-#, fuzzy
-#| msgid "Total integration time"
-msgid "Allow retailer integration"
-msgstr "Celkový expozičný čas"
-
 msgid ""
 "AstroBin may associate with retailers of astronomy and astrophotography "
 "equipment to enhance the display of equipment items with links to sponsoring "
@@ -1982,11 +1868,6 @@ msgstr ""
 
 msgid "Language"
 msgstr "Jazyk"
-
-#, fuzzy
-#| msgid "Netherlands"
-msgid "Other languages"
-msgstr "Holandsko"
 
 msgid ""
 "Other languages that you can read and write. This can be useful to other "
@@ -2094,11 +1975,6 @@ msgstr ""
 msgid "Aragonese"
 msgstr ""
 
-#, fuzzy
-#| msgid "Armenia"
-msgid "Armenian"
-msgstr "Arménsko"
-
 msgid "Assamese"
 msgstr ""
 
@@ -2111,11 +1987,6 @@ msgstr ""
 msgid "Aymara"
 msgstr ""
 
-#, fuzzy
-#| msgid "Azerbaijan"
-msgid "Azerbaijani"
-msgstr "Azerbajdžan"
-
 msgid "Bambara"
 msgstr ""
 
@@ -2124,11 +1995,6 @@ msgstr ""
 
 msgid "Basque"
 msgstr ""
-
-#, fuzzy
-#| msgid "Belarus"
-msgid "Belarusian"
-msgstr "Bielorusko"
 
 msgid "Bengali"
 msgstr ""
@@ -2139,18 +2005,8 @@ msgstr ""
 msgid "Bislama"
 msgstr ""
 
-#, fuzzy
-#| msgid "New Caledonia"
-msgid "Bosnian"
-msgstr "Nová Kaledónia"
-
 msgid "Breton"
 msgstr ""
-
-#, fuzzy
-#| msgid "Bulgaria"
-msgid "Bulgarian"
-msgstr "Bulharsko"
 
 msgid "Burmese"
 msgstr ""
@@ -2167,18 +2023,8 @@ msgstr ""
 msgid "Chichewa, Chewa, Nyanja"
 msgstr ""
 
-#, fuzzy
-#| msgid "China"
-msgid "Chinese"
-msgstr "Čína"
-
 msgid "Chuvash"
 msgstr ""
-
-#, fuzzy
-#| msgid "Finnish"
-msgid "Cornish"
-msgstr "Fínsky"
 
 msgid "Corsican"
 msgstr ""
@@ -2186,18 +2032,8 @@ msgstr ""
 msgid "Cree"
 msgstr ""
 
-#, fuzzy
-#| msgid "Croatia"
-msgid "Croatian"
-msgstr "Chorvátsko"
-
 msgid "Czech"
 msgstr ""
-
-#, fuzzy
-#| msgid "Spanish"
-msgid "Danish"
-msgstr "Španielsky"
 
 msgid "Divehi  / Dhivehi / Maldivian"
 msgstr ""
@@ -2214,23 +2050,8 @@ msgstr "Anglicky"
 msgid "Esperanto"
 msgstr ""
 
-#, fuzzy
-#| msgid "Estonia"
-msgid "Estonian"
-msgstr "Estónsko"
-
 msgid "Ewe"
 msgstr ""
-
-#, fuzzy
-#| msgid "Faroe Islands"
-msgid "Faroese"
-msgstr "Faerské ostrovy"
-
-#, fuzzy
-#| msgid "Fiji"
-msgid "Fijian"
-msgstr "Fidži"
 
 msgid "Fulah"
 msgstr ""
@@ -2238,18 +2059,8 @@ msgstr ""
 msgid "Galician"
 msgstr ""
 
-#, fuzzy
-#| msgid "Georgia"
-msgid "Georgian"
-msgstr "Gruzínsko"
-
 msgid "Guarani"
 msgstr ""
-
-#, fuzzy
-#| msgid "Duration"
-msgid "Gujarati"
-msgstr "Expozícia"
 
 msgid "Haitian / Haitian Creole"
 msgstr ""
@@ -2269,21 +2080,6 @@ msgstr ""
 msgid "Hiri Motu"
 msgstr ""
 
-#, fuzzy
-#| msgid "Hungary"
-msgid "Hungarian"
-msgstr "Maďarsko"
-
-#, fuzzy
-#| msgid "Integration"
-msgid "Interlingua"
-msgstr "Expozícia"
-
-#, fuzzy
-#| msgid "Indonesia"
-msgid "Indonesian"
-msgstr "Indonézia"
-
 msgid "Interlingue / Occidental"
 msgstr ""
 
@@ -2299,42 +2095,17 @@ msgstr ""
 msgid "Ido"
 msgstr ""
 
-#, fuzzy
-#| msgid "Iceland"
-msgid "Icelandic"
-msgstr "Island"
-
 msgid "Inuktitut"
 msgstr ""
 
-#, fuzzy
-#| msgid "Japanese"
-msgid "Javanese"
-msgstr "Japončina"
-
 msgid "Kalaallisut / Greenlandic"
 msgstr ""
-
-#, fuzzy
-#| msgid "Canada"
-msgid "Kannada"
-msgstr "Kanada"
 
 msgid "Kanuri"
 msgstr ""
 
 msgid "Kashmiri"
 msgstr ""
-
-#, fuzzy
-#| msgid "Kazakhstan"
-msgid "Kazakh"
-msgstr "Kazachstan"
-
-#, fuzzy
-#| msgid "Center"
-msgid "Central Khmer"
-msgstr "Stred"
 
 msgid "Kikuyu / Gikuyu"
 msgstr ""
@@ -2347,11 +2118,6 @@ msgstr ""
 
 msgid "Komi"
 msgstr ""
-
-#, fuzzy
-#| msgid "Congo"
-msgid "Kongo"
-msgstr "Kongo"
 
 msgid "Korean"
 msgstr ""
@@ -2368,62 +2134,17 @@ msgstr ""
 msgid "Luxembourgish, Letzeburgesch"
 msgstr ""
 
-#, fuzzy
-#| msgid "Rwanda"
-msgid "Ganda"
-msgstr "Rwanda"
-
 msgid "Limburgan / Limburger / Limburgish"
 msgstr ""
 
 msgid "Lingala"
 msgstr ""
 
-#, fuzzy
-#| msgid "Lebanon"
-msgid "Lao"
-msgstr "Libanon"
-
-#, fuzzy
-#| msgid "Lithuania"
-msgid "Lithuanian"
-msgstr "Litva"
-
 msgid "Luba / Katanga"
 msgstr ""
 
-#, fuzzy
-#| msgid "Latvia"
-msgid "Latvian"
-msgstr "Lotyšsko"
-
 msgid "Manx"
 msgstr ""
-
-#, fuzzy
-#| msgid "New Caledonia"
-msgid "Macedonian"
-msgstr "Nová Kaledónia"
-
-#, fuzzy
-#| msgid "Madagascar"
-msgid "Malagasy"
-msgstr "Madagaskar"
-
-#, fuzzy
-#| msgid "Malaysia"
-msgid "Malay"
-msgstr "Malajzia"
-
-#, fuzzy
-#| msgid "Malaysia"
-msgid "Malayalam"
-msgstr "Malajzia"
-
-#, fuzzy
-#| msgid "Malta"
-msgid "Maltese"
-msgstr "Malta"
 
 msgid "Maori"
 msgstr ""
@@ -2431,42 +2152,17 @@ msgstr ""
 msgid "Marathi"
 msgstr ""
 
-#, fuzzy
-#| msgid "Marshall Islands"
-msgid "Marshallese"
-msgstr "Marshallove ostrovy"
-
-#, fuzzy
-#| msgid "Mongolia"
-msgid "Mongolian"
-msgstr "Mongolsko"
-
 msgid "Navajo / Navaho"
 msgstr ""
 
 msgid "North Ndebele"
 msgstr ""
 
-#, fuzzy
-#| msgid "Nepal"
-msgid "Nepali"
-msgstr "Nepál"
-
-#, fuzzy
-#| msgid "Tonga"
-msgid "Ndonga"
-msgstr "Tonga"
-
 msgid "Norwegian Bokmål"
 msgstr ""
 
 msgid "Norwegian Nynorsk"
 msgstr ""
-
-#, fuzzy
-#| msgid "Norway"
-msgid "Norwegian"
-msgstr "Nórsko"
 
 msgid "Sichuan Yi / Nuosu"
 msgstr ""
@@ -2509,16 +2205,6 @@ msgstr ""
 msgid "Quechua"
 msgstr ""
 
-#, fuzzy
-#| msgid "Romania"
-msgid "Romansh"
-msgstr "Rumunsko"
-
-#, fuzzy
-#| msgid "Burundi"
-msgid "Rundi"
-msgstr "Burundi"
-
 msgid "Romanian / Moldavian / Moldovan"
 msgstr ""
 
@@ -2531,23 +2217,8 @@ msgstr ""
 msgid "Sindhi"
 msgstr ""
 
-#, fuzzy
-#| msgid "North"
-msgid "Northern Sami"
-msgstr "Sever"
-
-#, fuzzy
-#| msgid "Samoa"
-msgid "Samoan"
-msgstr "Samoa"
-
 msgid "Sango"
 msgstr ""
-
-#, fuzzy
-#| msgid "Serbia"
-msgid "Serbian"
-msgstr "Srbsko"
 
 msgid "Gaelic / Scottish Gaelic"
 msgstr ""
@@ -2557,26 +2228,6 @@ msgstr ""
 
 msgid "Sinhala / Sinhalese"
 msgstr ""
-
-#, fuzzy
-#| msgid "Slovakia"
-msgid "Slovak"
-msgstr "Slovensko"
-
-#, fuzzy
-#| msgid "Slovenia"
-msgid "Slovenian"
-msgstr "Slovinsko"
-
-#, fuzzy
-#| msgid "Somalia"
-msgid "Somali"
-msgstr "Somálsko"
-
-#, fuzzy
-#| msgid "South"
-msgid "Southern Sotho"
-msgstr "Juh"
 
 msgid "Spanish / Castilian"
 msgstr ""
@@ -2590,26 +2241,11 @@ msgstr ""
 msgid "Swati"
 msgstr ""
 
-#, fuzzy
-#| msgid "Sweden"
-msgid "Swedish"
-msgstr "Švédsko"
-
 msgid "Tamil"
 msgstr ""
 
 msgid "Telugu"
 msgstr ""
-
-#, fuzzy
-#| msgid "Tajikistan"
-msgid "Tajik"
-msgstr "Tadžikistan"
-
-#, fuzzy
-#| msgid "Thailand"
-msgid "Thai"
-msgstr "Thajsko"
 
 msgid "Tigrinya"
 msgstr ""
@@ -2617,28 +2253,8 @@ msgstr ""
 msgid "Tibetan"
 msgstr ""
 
-#, fuzzy
-#| msgid "Turkey"
-msgid "Turkmen"
-msgstr "Turecko"
-
 msgid "Tagalog"
 msgstr ""
-
-#, fuzzy
-#| msgid "Botswana"
-msgid "Tswana"
-msgstr "Botswana"
-
-#, fuzzy
-#| msgid "Tonga"
-msgid "Tsonga"
-msgstr "Tonga"
-
-#, fuzzy
-#| msgid "Qatar"
-msgid "Tatar"
-msgstr "Katar"
 
 msgid "Twi"
 msgstr ""
@@ -2649,26 +2265,11 @@ msgstr ""
 msgid "Uighur / Uyghur"
 msgstr ""
 
-#, fuzzy
-#| msgid "Ukraine"
-msgid "Ukrainian"
-msgstr "Ukraina"
-
 msgid "Urdu"
 msgstr ""
 
-#, fuzzy
-#| msgid "Uzbekistan"
-msgid "Uzbek"
-msgstr "Uzbekistan"
-
 msgid "Venda"
 msgstr ""
-
-#, fuzzy
-#| msgid "Viet Nam"
-msgid "Vietnamese"
-msgstr "Vietnam"
 
 msgid "Volapük"
 msgstr ""
@@ -2682,21 +2283,11 @@ msgstr ""
 msgid "Wolof"
 msgstr ""
 
-#, fuzzy
-#| msgid "Western Sahara"
-msgid "Western Frisian"
-msgstr "Saharská arabská demokratická republika"
-
 msgid "Xhosa"
 msgstr ""
 
 msgid "Yiddish"
 msgstr ""
-
-#, fuzzy
-#| msgid "Aruba"
-msgid "Yoruba"
-msgstr "Aruba"
 
 msgid "Zhuang / Chuang"
 msgstr ""
@@ -2786,9 +2377,6 @@ msgstr ""
 "takže sa pokúsime čo najskôr odstrániť problém. Ospravedlňujeme sa za "
 "nepríjemnosti! "
 
-#, fuzzy
-msgid "Go back to the home page."
-msgstr "Späť na úvodnú stránku"
 
 msgid "AstroBin in temporarily unavailable"
 msgstr "Služba AstroBin je dočasne nedostupná"
@@ -2836,83 +2424,48 @@ msgid "AstroBin is in READ ONLY mode "
 msgstr ""
 
 #, python-format
-msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> uploaded "
-"a new image.\n"
-"                        "
+msgid "<a href=\"%(user_page)s\">%(user)s</a> uploaded a new image."
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(user_page)s\">%(user)s</a> uploaded a new image revision."
 msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> uploaded "
-"a new image revision.\n"
-"                        "
+"<a href=\"%(user_page)s\">%(user)s</a> and %(count)s others like this image."
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(user_page)s\">%(user)s</a> likes this image."
 msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                                <a href=\"%(user_page)s\">%(user)s</a> and "
-"%(count)s others like this image.\n"
-"                            "
+"<a href=\"%(user_page)s\">%(user)s</a> and %(count)s others bookmarked this "
+"image."
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(user_page)s\">%(user)s</a> bookmarked this image."
 msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                                <a href=\"%(user_page)s\">%(user)s</a> likes "
-"this image.\n"
-"                            "
+"<a href=\"%(user_page)s\">%(user)s</a> and %(count)s others commented this "
+"image."
 msgstr ""
 
 #, python-format
-msgid ""
-"\n"
-"                                <a href=\"%(user_page)s\">%(user)s</a> and "
-"%(count)s others bookmarked this image.\n"
-"                            "
+msgid "<a href=\"%(user_page)s\">%(user)s</a> commented this image."
 msgstr ""
 
 #, python-format
-msgid ""
-"\n"
-"                                <a href=\"%(user_page)s\">%(user)s</a> "
-"bookmarked this image.\n"
-"                            "
+msgid "<a href=\"%(user_page)s\">%(user)s</a> created a new public group."
 msgstr ""
 
 #, python-format
-msgid ""
-"\n"
-"                                <a href=\"%(user_page)s\">%(user)s</a> and "
-"%(count)s others commented this image.\n"
-"                            "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                                <a href=\"%(user_page)s\">%(user)s</a> "
-"commented this image.\n"
-"                            "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> created a "
-"new public group.\n"
-"                        "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> joined a "
-"group.\n"
-"                        "
+msgid "<a href=\"%(user_page)s\">%(user)s</a> joined a group."
 msgstr ""
 
 msgid "Remove ads"
@@ -2978,9 +2531,6 @@ msgstr ""
 msgid "Total integration"
 msgstr ""
 
-#, fuzzy
-msgid "Image Index"
-msgstr "Obrázok bol nahratý. Ďakujeme!"
 
 msgid "There isn't enough data yet, please come back later!"
 msgstr ""
@@ -3077,9 +2627,6 @@ msgstr ""
 msgid "Back to top"
 msgstr ""
 
-#, fuzzy
-msgid "Your AstroBin subscription is expired."
-msgstr "Popis"
 
 msgid ""
 "That's okay: we don't EVER delete your images if your subscription expires."
@@ -3090,13 +2637,7 @@ msgid ""
 "it goes a long way to support the AstroBin project!"
 msgstr ""
 
-#, fuzzy
-msgid "Subscription plans"
-msgstr "Popis"
 
-#, fuzzy
-msgid "Your subscriptions"
-msgstr "Popis"
 
 msgid "Your AstroBin subscription about to expire."
 msgstr ""
@@ -3143,11 +2684,6 @@ msgid ""
 "please disable it using your email client."
 msgstr ""
 
-#, fuzzy
-#| msgid "New Zealand"
-msgid "Resume emails"
-msgstr "Nový Zéland"
-
 msgid "Cancel"
 msgstr ""
 
@@ -3166,27 +2702,16 @@ msgstr ""
 msgid "Notifications"
 msgstr ""
 
-#, fuzzy
-msgid "View all"
-msgstr "Zobrazenia, denne"
 
 msgid "Settings"
 msgstr ""
 
-#, fuzzy
-msgid "Mark all as read"
-msgstr "Marshallove ostrovy"
 
 msgid "AstroBin is in READ ONLY mode"
 msgstr ""
 
 msgid "Sorry :-("
 msgstr ""
-
-#, fuzzy
-#| msgid "Accessories"
-msgid "Access denied"
-msgstr "Príslušenstvo"
 
 msgid "This feature is only offered at higher membership levels."
 msgstr ""
@@ -3206,43 +2731,25 @@ msgid "Are you really sure?"
 msgstr ""
 
 msgid ""
-"We know, we're all used to the fact that ads on the Internet are\n"
-"                    annoying."
+"We know, we're all used to the fact that ads on the Internet are annoying."
 msgstr ""
 
 msgid ""
-"However, please let us offer you two good reasons to allow ads on\n"
-"                    AstroBin:"
-msgstr ""
-
-msgid ""
-"AstroBin is a one-person business. As of the time of writing, in early "
-"2020,\n"
-"                        I'm trying to make AstroBin a full time job, but it "
-"hasn't happened yet. If this dream were to\n"
-"                        become reality, I could invest a lot more time in "
-"the development of AstroBin, and everybody\n"
-"                        would benefit from it!"
+"However, please let us offer you a good reason to allow ads on AstroBin:"
 msgstr ""
 
 msgid ""
 "There are only astronomy ads on AstroBin, that are published after my review "
-"and\n"
-"                        approval. Nothing fishy, nothing off-topic, and "
-"nothing that will use any of your private\n"
-"                        information."
+"and approval. Nothing fishy, nothing off-topic, and nothing that will use "
+"any of your private information."
 msgstr ""
 
 #, python-format
 msgid ""
 "If you still feel that you would rather not see these ads, you can change "
-"this on\n"
-"                    <a href=\"%(profile_url)s\">your settings page</a>."
+"this on <a href=\"%(profile_url)s\">your settings page</a>."
 msgstr ""
 
-#, fuzzy
-msgid "Thank you!"
-msgstr "Formulár bol uložený. Ďakujeme!"
 
 msgid ""
 "If this user has been harassing you, and you shadow-ban them, all their "
@@ -3266,13 +2773,7 @@ msgstr ""
 msgid "Quick search"
 msgstr ""
 
-#, fuzzy
-msgid "Image queue"
-msgstr "Obrázky"
 
-#, fuzzy
-msgid "Spam list"
-msgstr "Obrázky príslušenstva"
 
 msgid "Image of the day"
 msgstr ""
@@ -3300,11 +2801,6 @@ msgstr "Veľká nástenka"
 
 msgid "Advanced search"
 msgstr ""
-
-#, fuzzy
-#| msgid "Additional information"
-msgid "Top pick nominations"
-msgstr "Doplňujúce informácie"
 
 msgid "Top picks"
 msgstr ""
@@ -3396,11 +2892,6 @@ msgid ""
 "Please confirm that you want to delete the following e-mail change request."
 msgstr ""
 
-#, fuzzy
-#| msgid "New Zealand"
-msgid "New e-mail"
-msgstr "Nový Zéland"
-
 msgid "Confirm"
 msgstr ""
 
@@ -3444,9 +2935,6 @@ msgstr "Články na fóre"
 msgid "Written"
 msgstr ""
 
-#, fuzzy
-msgid "Received"
-msgstr "okomentoval obrázok"
 
 msgid "Cookie consent"
 msgstr ""
@@ -3595,7 +3083,7 @@ msgstr ""
 msgid ""
 "<strong>%(username)s</strong> has been notified. Hopefully they will update "
 "the image soon. Remember that you can also <a href=\"%(message_url)s\">send "
-"them a message</a>. "
+"them a message</a>."
 msgstr ""
 
 msgid "Return to image"
@@ -3604,27 +3092,12 @@ msgstr ""
 msgid "Hemisphere"
 msgstr ""
 
-#, fuzzy
-#| msgid "North"
-msgid "Northern"
-msgstr "Sever"
-
-#, fuzzy
-#| msgid "South"
-msgid "Southern"
-msgstr "Juh"
-
 msgid "Contains"
 msgstr ""
 
 #, python-format
 msgid "And %(count)s more."
 msgstr ""
-
-#, fuzzy
-#| msgid "Acquired after"
-msgid "Acquired at"
-msgstr "Nasnímané po"
 
 msgid "Remove"
 msgstr ""
@@ -3655,11 +3128,6 @@ msgstr ""
 msgid "Right ascension"
 msgstr ""
 
-#, fuzzy
-#| msgid "Description"
-msgid "Declination"
-msgstr "Popis"
-
 msgid "Technical card"
 msgstr ""
 
@@ -3672,11 +3140,6 @@ msgstr ""
 
 msgid "Sponsored items"
 msgstr ""
-
-#, fuzzy
-#| msgid "Average integration time"
-msgid "Disable retailer integration"
-msgstr "Priemerný expozičný čas"
 
 #, python-format
 msgid "Shop %(name)s at %(retailer)s"
@@ -3712,26 +3175,9 @@ msgstr ""
 msgid "Field radius"
 msgstr ""
 
-#, fuzzy
-#| msgid "Additional information"
-msgid "WCS transformation"
-msgstr "Doplňujúce informácie"
-
-#, fuzzy
-msgid "Find images in the same area"
-msgstr "Dátum nemôže byť budúci."
-
 #, python-format
-msgid ""
-"\n"
-"                                                Around <strong>1</strong> "
-"degree\n"
-"                                            "
-msgid_plural ""
-"\n"
-"                                                Around <strong>%(n)s</"
-"strong> degrees\n"
-"                                            "
+msgid "Around <strong>1</strong> degree"
+msgid_plural "Around <strong>%(n)s</strong> degrees"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -3793,9 +3239,6 @@ msgstr ""
 msgid "Delete all other versions"
 msgstr ""
 
-#, fuzzy
-msgid "Delete all revisions"
-msgstr "Spojené štáty"
 
 msgid "Flag malfunctioning thumbnails"
 msgstr ""
@@ -3809,9 +3252,6 @@ msgstr ""
 msgid "Thumbnails"
 msgstr ""
 
-#, fuzzy
-msgid "Watermark"
-msgstr "Dánsko"
 
 msgid "Basic information"
 msgstr ""
@@ -3825,9 +3265,6 @@ msgstr ""
 msgid "Restart plate-solving"
 msgstr ""
 
-#, fuzzy
-msgid "Advanced plate-solving settings"
-msgstr "Astrometria Vášho obrázok je dokončená"
 
 msgid "Restart advanced plate-solving"
 msgstr ""
@@ -3841,16 +3278,10 @@ msgstr ""
 msgid "User gallery"
 msgstr ""
 
-#, fuzzy
-msgid "User collection"
-msgstr "Miesta"
 
 msgid "Public group"
 msgstr ""
 
-#, fuzzy
-msgid "All image uploads"
-msgstr "Obrázok bol nahratý. Ďakujeme!"
 
 msgid "Share"
 msgstr ""
@@ -3879,13 +3310,7 @@ msgstr ""
 msgid "Normal"
 msgstr ""
 
-#, fuzzy
-msgid "Large size"
-msgstr "veľkosť pixelov"
 
-#, fuzzy
-msgid "Full size"
-msgstr "veľkosť pixelov"
 
 msgid "Please note"
 msgstr ""
@@ -3912,39 +3337,26 @@ msgid "Associate XISF/FITS file"
 msgstr ""
 
 msgid ""
-"\n"
-"                        To improve the accuracy of your plate-solution even "
-"further, please upload one of the XISF or\n"
-"                        FITS files from your data set. Such files normally "
-"have date and time headers that will allow\n"
-"                        AstroBin to calculate solar system body ephemerides "
-"and find planets and asteroids in your\n"
-"                        image (provided you also add location information to "
-"your image).\n"
-"                    "
+"To improve the accuracy of your plate-solution even further, please upload "
+"one of the XISF or FITS files from your data set. Such files normally have "
+"date and time headers that will allow AstroBin to calculate solar system "
+"body ephemerides and find planets and asteroids in your image (provided you "
+"also add location information to your image)."
 msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                        For maximum accuracy, it's recommended that you use "
-"PixInsight's native and open format XISF.\n"
-"                        Learn more about XISF here: <a href=\"%(xisf_url)s\" "
-"target=\"_blank\">%(xisf_url)s</a>\n"
-"                    "
+"For maximum accuracy, it's recommended that you use PixInsight's native and "
+"open format XISF. Learn more about XISF here: <a href=\"%(xisf_url)s\" "
+"target=\"_blank\">%(xisf_url)s</a>"
 msgstr ""
 
 msgid ""
-"\n"
-"                        <strong>Please note:</strong> it's very important "
-"that the XISF or FITS file you upload is\n"
-"                        aligned to your processed image, otherwise the "
-"object annotations will not match.\n"
-"                        To improve your chances at a successful accurate "
-"plate-solution, calibrate your file the usual\n"
-"                        way (dark/bias/flats) but you don't need to stretch "
-"it.\n"
-"                    "
+"<strong>Please note:</strong> it's very important that the XISF or FITS file "
+"you upload is aligned to your processed image, otherwise the object "
+"annotations will not match. To improve your chances at a successful accurate "
+"plate-solution, calibrate your file the usual way (dark/bias/flats) but you "
+"don't need to stretch it."
 msgstr ""
 
 msgid "The following people bookmarked this image"
@@ -4011,9 +3423,6 @@ msgid ""
 "image."
 msgstr ""
 
-#, fuzzy
-msgid "Delete all revisions?"
-msgstr "Spojené štáty"
 
 msgid ""
 "You will delete all revisions, leaving the originally uploaded image as the "
@@ -4083,9 +3492,6 @@ msgstr ""
 msgid "Full"
 msgstr ""
 
-#, fuzzy
-msgid "Real"
-msgstr "Skutočný názov."
 
 msgid "Image mode"
 msgstr ""
@@ -4114,19 +3520,11 @@ msgid ""
 "\">FAQ page</a>."
 msgstr ""
 
-#, fuzzy
-#| msgid "Gear images"
-msgid "Clear"
-msgstr "Obrázky príslušenstva"
-
 msgid ""
 "This image is pending moderation and is currently not visible on the front "
 "page or search results."
 msgstr ""
 
-#, fuzzy
-msgid "Revisions"
-msgstr "Revízia zmazaná."
 
 msgid "Final"
 msgstr ""
@@ -4137,9 +3535,6 @@ msgstr ""
 msgid "Uploaded"
 msgstr ""
 
-#, fuzzy
-msgid "Revision"
-msgstr "Revízia zmazaná."
 
 msgid "Sky plot"
 msgstr ""
@@ -4158,35 +3553,21 @@ msgid "Oh no!"
 msgstr ""
 
 msgid ""
-"\n"
-"            We are very, very sorry, but it appears that your image suffered "
-"a catastrophic data\n"
-"            corruption, and it cannot be retrieved. Hopefully you still have "
-"your file (the information on\n"
-"            this form should provide you with enough context).\n"
-"        "
+"We are very, very sorry, but it appears that your image suffered a "
+"catastrophic data corruption, and it cannot be retrieved. Hopefully you "
+"still have your file (the information on this form should provide you with "
+"enough context)."
 msgstr ""
 
 msgid ""
-"\n"
-"            Please use the file input below to upload it again, and then "
-"click on the Save button down\n"
-"            below. All the data you had previously associated to your image "
-"is still here.\n"
-"        "
+"Please use the file input below to upload it again, and then click on the "
+"Save button down below. All the data you had previously associated to your "
+"image is still here."
 msgstr ""
 
 msgid "Here's some detail about the image to give you some context."
 msgstr ""
 
-#, fuzzy
-msgid "Image uploaded"
-msgstr "Obrázok bol nahratý. Ďakujeme!"
-
-#, fuzzy
-#| msgid "Revision deleted."
-msgid "Revision uploaded"
-msgstr "Revízia zmazaná."
 
 msgid "Please wait..."
 msgstr ""
@@ -4264,18 +3645,6 @@ msgid ""
 "                <a href=\"%(the_url)s\">profile</a>!"
 msgstr ""
 
-#, fuzzy
-#| msgid ""
-#| "Drag items from the right side to the left side, or click on the plus "
-#| "sign."
-msgid ""
-"To choose the gear used for this image, drag items from the right side to "
-"left side, or\n"
-"                click the plus sign."
-msgstr ""
-"Pretiahnite položky z pravej strany na ľavú stranu, alebo kliknite na značku "
-"plus"
-
 msgid ""
 "Use this button to import the gear settings from another image of yours."
 msgstr ""
@@ -4321,16 +3690,10 @@ msgstr ""
 msgid "Gear used"
 msgstr ""
 
-#, fuzzy
-msgid "Edit your image: advanced plate-solving settings"
-msgstr "Astrometria Vášho obrázok je dokončená"
 
 msgid "Save and plate-solve again"
 msgstr ""
 
-#, fuzzy
-msgid "Edit your image: plate-solving settings"
-msgstr "Astrometria Vášho obrázok je dokončená"
 
 msgid "Edit revision"
 msgstr ""
@@ -4455,13 +3818,7 @@ msgstr ""
 msgid "Latest from the forums"
 msgstr ""
 
-#, fuzzy
-msgid "Recent images"
-msgstr "okomentoval obrázok"
 
-#, fuzzy
-msgid "Recent from your followed users"
-msgstr "Nový obrázok od používateľa, ktorého sledujete"
 
 msgid "There is no activity yet."
 msgstr "Zatiaľ tu nie je aktivita."
@@ -4502,9 +3859,6 @@ msgstr ""
 msgid "Participants"
 msgstr ""
 
-#, fuzzy
-msgid "Last message"
-msgstr "Východ alebo západ"
 
 msgid "No messages"
 msgstr ""
@@ -4533,11 +3887,6 @@ msgid ""
 "Finish button below to approve all the others."
 msgstr ""
 
-#, fuzzy
-#| msgid "Finnish"
-msgid "Finish"
-msgstr "Fínsky"
-
 msgid "The moderation queue is empty, hooray! Come back later."
 msgstr ""
 
@@ -4546,26 +3895,10 @@ msgid ""
 "the Approve button below to approve them."
 msgstr ""
 
-#, fuzzy
-msgid "Approve selected"
-msgstr "citovaný text"
 
 msgid "Approve selected and ban the rest"
 msgstr ""
 
-#, fuzzy
-msgid "There are no images in the spam list."
-msgstr "Dátum nemôže byť budúci."
-
-#, fuzzy
-#| msgid "Your API Key request has been approved"
-msgid "Your request for an API Key has been approved!"
-msgstr "Vaša API kľúčová požiadavka bola schválená"
-
-#, fuzzy
-#| msgid "Request an API key"
-msgid "Your API key"
-msgstr "Požiadavka na API kľúč"
 
 msgid "Your API secret"
 msgstr ""
@@ -4580,18 +3913,10 @@ msgid ""
 "%(api_keys_url)s</a>"
 msgstr ""
 
-#, fuzzy
-msgid "Thank you for using AstroBin's APIs!"
-msgstr "Nasledujúce spoločnosti podporujú AstroBin."
 
 #, python-format
 msgid "You can review your API keys at %(api_keys_url)s."
 msgstr ""
-
-#, fuzzy
-#| msgid "Your image was bookmarked"
-msgid "Your comment was approved!"
-msgstr "Váš obrázok bol označený záložkou"
 
 msgid ""
 "As a new user on AstroBin, your first 3 comments will go through a "
@@ -4600,11 +3925,6 @@ msgstr ""
 
 msgid "The following comment of yours was just approved by a moderator."
 msgstr ""
-
-#, fuzzy
-#| msgid "Allow comments"
-msgid "View comment"
-msgstr "Povoliť komentáre"
 
 msgid "Congratulations for your first image on AstroBin!"
 msgstr ""
@@ -4670,25 +3990,11 @@ msgstr ""
 msgid "Or send an email to support@astrobin.com."
 msgstr ""
 
-#, fuzzy
-#| msgid "You have a new follower"
-msgid "You have a new notification on AstroBin"
-msgstr "Máte nového sympatizanta"
-
 msgid "See all your notifications"
 msgstr ""
 
 msgid "Edit your notification preferences"
 msgstr ""
-
-#, fuzzy
-#| msgid "Gear images"
-msgid "Clear skies"
-msgstr "Obrázky príslušenstva"
-
-#, fuzzy
-msgid "Follow AstroBin"
-msgstr "Povoliť hodnotenie"
 
 #, python-format
 msgid ""
@@ -4788,9 +4094,6 @@ msgid ""
 "unnoticed sitting in the queue of an inactive staff member."
 msgstr ""
 
-#, fuzzy
-msgid "Thank you for understanding!"
-msgstr "Nasledujúce spoločnosti podporujú AstroBin."
 
 #, python-format
 msgid ""
@@ -4908,15 +4211,8 @@ msgstr ""
 msgid "%(user)s added your image \"%(title)s\" to their bookmarks: %(url)s"
 msgstr ""
 
-#, fuzzy, python-format
-msgid ""
-"<strong>%(user)s</strong> added your image \"%(title)s\" to their bookmarks!"
-msgstr "<strong>%s</strong> požadoval vidieť TIFF alebo FITS Vášho obrázku. "
-
 #, python-format
-msgid ""
-"\n"
-"    %(user)s added your image \"%(title)s\" to their bookmarks!\n"
+msgid "%(user)s added your image \"%(title)s\" to their bookmarks!"
 msgstr ""
 
 #, python-format
@@ -4966,10 +4262,6 @@ msgstr ""
 #, python-format
 msgid "%(user)s mentioned you in a comment: %(url)s"
 msgstr ""
-
-#, fuzzy, python-format
-msgid "<strong>%(user)s</strong> mentioned you in a comment!"
-msgstr "<strong>%s</strong> požadoval vidieť TIFF alebo FITS Vášho obrázku. "
 
 #, python-format
 msgid "%(user)s mentioned you in a comment!"
@@ -5044,10 +4336,6 @@ msgstr ""
 msgid "%(user)s mentioned you in a post on this forum topic: %(url)s"
 msgstr ""
 
-#, fuzzy, python-format
-msgid "<strong>%(user)s</strong> mentioned you in a forum post!"
-msgstr "<strong>%s</strong> požadoval vidieť TIFF alebo FITS Vášho obrázku. "
-
 #, python-format
 msgid "%(user)s mentioned you in a forum post!"
 msgstr ""
@@ -5076,33 +4364,9 @@ msgstr ""
 msgid "%(inviter)s invited you to join the group: \"%(group_name)s\""
 msgstr ""
 
-#, fuzzy, python-format
-msgid ""
-"%(requester)s requested to join the group: \"%(group_name)s\".\n"
-"\n"
-"Visit the group here: <a href=\"%(url)s\">%(url)s</a>"
-msgstr "<strong>%s</strong> požadoval vidieť TIFF alebo FITS Vášho obrázku. "
-
-#, fuzzy, python-format
-msgid ""
-"%(requester)s requested to join the group: \"%(group_name)s\".\n"
-"\n"
-"Visit the group here: %(url)s"
-msgstr "<strong>%s</strong> požadoval vidieť TIFF alebo FITS Vášho obrázku. "
-
-#, fuzzy, python-format
-msgid ""
-"<strong>%(requester)s</strong> requested to join the group: \"%(group_name)s"
-"\""
-msgstr "<strong>%s</strong> požadoval vidieť TIFF alebo FITS Vášho obrázku. "
-
 #, python-format
 msgid "%(requester)s requested to join the group: \"%(group_name)s\""
 msgstr ""
-
-#, fuzzy, python-format
-msgid "<strong>%(user)s</strong> has published a new image"
-msgstr "<strong>%s</strong> požadoval vidieť TIFF alebo FITS Vášho obrázku. "
 
 #, python-format
 msgid "New image by %(user)s"
@@ -5250,9 +4514,6 @@ msgstr ""
 msgid "%(user)s joined the public group: \"%(group_name)s\""
 msgstr ""
 
-#, fuzzy
-msgid "Welcome to AstroBin!"
-msgstr "Povoliť hodnotenie"
 
 msgid ""
 "I'm very excited that you joined, and I would like to give you a warm "
@@ -5294,11 +4555,6 @@ msgstr ""
 
 msgid "Thanks again for joining and clear skies!"
 msgstr ""
-
-#, fuzzy
-#| msgid "Frequently Asked Questions"
-msgid "Have a look at our frequently asked questions:"
-msgstr "Často kladené otázky"
 
 msgid "Head over to your settings and configure your profile:"
 msgstr ""
@@ -5344,9 +4600,6 @@ msgstr "Členom od"
 msgid "Search all forums and comments"
 msgstr ""
 
-#, fuzzy
-msgid "New topic"
-msgstr "Zavrieť"
 
 msgid "Please select a forum"
 msgstr ""
@@ -5356,17 +4609,9 @@ msgid ""
 "your topic."
 msgstr ""
 
-#, fuzzy
-msgid "View forums"
-msgstr "Zobrazenia, denne"
 
 msgid "This topic was closed by a moderator."
 msgstr ""
-
-#, fuzzy
-#| msgid "New Zealand"
-msgid "New reply"
-msgstr "Nový Zéland"
 
 #, python-format
 msgid ""
@@ -5397,9 +4642,6 @@ msgstr ""
 msgid "I understand"
 msgstr ""
 
-#, fuzzy
-msgid "Back to group"
-msgstr "Späť na úvodnú stránku"
 
 msgid "Hidden"
 msgstr ""
@@ -5419,9 +4661,6 @@ msgstr ""
 msgid "Posts"
 msgstr ""
 
-#, fuzzy
-msgid "Last posts"
-msgstr "Východ alebo západ"
 
 msgid "Forum categories are not created"
 msgstr ""
@@ -5461,11 +4700,6 @@ msgid "*** Type your reply here ***"
 msgstr ""
 
 #, fuzzy
-#| msgid "Image deleted."
-msgid "(deleted)"
-msgstr "Obrázok bol zmazaný"
-
-#, fuzzy
 #| msgid "likes"
 msgctxt "Noun, e.g. 'This element has 1 like'"
 msgid "like"
@@ -5484,13 +4718,7 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
-#, fuzzy
-msgid "quote"
-msgstr "citovaný text"
 
-#, fuzzy
-msgid "quote selected"
-msgstr "citovaný text"
 
 msgid "Delete post?"
 msgstr ""
@@ -5518,9 +4746,6 @@ msgstr ""
 msgid "Open topic"
 msgstr ""
 
-#, fuzzy
-msgid "Close topic"
-msgstr "Zavrieť"
 
 msgid "Unsubscribe"
 msgstr ""
@@ -5534,11 +4759,6 @@ msgstr ""
 msgid "Subscribers"
 msgstr ""
 
-#, fuzzy
-#| msgid "You are not allowed to see this page."
-msgid "You have unread posts in this topic."
-msgstr "Nemáte oprávnenie vidieť túto stránku."
-
 msgid "Would you like to jump to the new posts since your last visit?"
 msgstr ""
 
@@ -5548,23 +4768,14 @@ msgstr ""
 msgid "Topic"
 msgstr ""
 
-#, fuzzy
-msgid "Last post"
-msgstr "Východ alebo západ"
 
 msgid "Sticky"
 msgstr ""
 
-#, fuzzy
-msgid "Closed"
-msgstr "Zavrieť"
 
 msgid "This forum does not have any topics."
 msgstr ""
 
-#, fuzzy
-msgid "Mark as spam"
-msgstr "Marshallove ostrovy"
 
 msgid ""
 "This page or operation is not available at the moment, because AstroBin is "
@@ -5728,9 +4939,6 @@ msgid ""
 "<a href=\"mailto:%(email)s\">%(email)s</a>."
 msgstr ""
 
-#, fuzzy
-msgid "Image upload"
-msgstr "Obrázok bol nahratý. Ďakujeme!"
 
 msgid ""
 "Your Lite or Premium subscription is not active, or it has expired. If you "
@@ -5895,37 +5103,24 @@ msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                    We are very, very sorry, but it appears that some of "
-"your images suffered a catastrophic data\n"
-"                    corruption, and cannot be retrieved. Please read more <a "
-"href=\"%(data_corruption_url)s\">here</a>.\n"
-"                "
+"We are very, very sorry, but it appears that some of your images suffered a "
+"catastrophic data corruption, and cannot be retrieved. Please read more <a "
+"href=\"%(data_corruption_url)s\">here</a>."
 msgstr ""
 
 msgid ""
-"\n"
-"                    Please click on the thumbnails stuck with the hourglass "
-"icon to upload the image files that you\n"
-"                    still have on your computer or backups to their pages "
-"again.\n"
-"                "
+"Please click on the thumbnails stuck with the hourglass icon to upload the "
+"image files that you still have on your computer or backups to their pages "
+"again."
 msgstr ""
 
 msgid ""
-"\n"
-"                    The data associated to your affected images, such as "
-"title, description, equipment used, acquisition\n"
-"                    details, comments, likes, bookmarks, and so on, is still "
-"intact and safe.\n"
-"                "
+"The data associated to your affected images, such as title, description, "
+"equipment used, acquisition details, comments, likes, bookmarks, and so on, "
+"is still intact and safe."
 msgstr ""
 
-msgid ""
-"\n"
-"                    AstroBin would like to offer you its sincerest "
-"apologies. :(\n"
-"                "
+msgid "AstroBin would like to offer you its sincerest apologies. :("
 msgstr ""
 
 msgid "Okay, don't show this again"
@@ -5959,14 +5154,8 @@ msgid ""
 "forever!"
 msgstr ""
 
-#, fuzzy
-msgid "Account deleted"
-msgstr "Revízia zmazaná."
 
-msgid ""
-"\n"
-"            Your account was deleted. Thanks for using AstroBin until now!\n"
-"        "
+msgid "Your account was deleted. Thanks for using AstroBin until now!"
 msgstr ""
 
 msgid "Edit your basic information"
@@ -5981,25 +5170,12 @@ msgid ""
 "details, and so on."
 msgstr ""
 
-#, fuzzy
-#| msgid "Request from"
-msgid "Request download"
-msgstr "Požiadavka na"
-
 msgid "Your past requests"
 msgstr ""
-
-#, fuzzy
-#| msgid "Request from"
-msgid "Request time"
-msgstr "Požiadavka na"
 
 msgid "Status"
 msgstr ""
 
-#, fuzzy
-msgid "File size"
-msgstr "veľkosť pixelov"
 
 msgid "There doesn't seem to be anything here."
 msgstr ""
@@ -6127,16 +5303,10 @@ msgstr ""
 msgid "Do not navigate away from this window: this might take a while!"
 msgstr ""
 
-#, fuzzy
-msgid "Subscription"
-msgstr "Popis"
 
 msgid "Expiration date"
 msgstr ""
 
-#, fuzzy
-msgid "Images used"
-msgstr "Obrázky"
 
 msgid "Thanks for your support!"
 msgstr ""
@@ -6162,13 +5332,7 @@ msgstr ""
 msgid "Trash"
 msgstr ""
 
-#, fuzzy
-msgid "Liked images"
-msgstr "Spojené štáty"
 
-#, fuzzy
-msgid "Following"
-msgstr "Povoliť hodnotenie"
 
 msgid "Friends"
 msgstr ""
@@ -6179,9 +5343,6 @@ msgstr ""
 msgid "Collection tools"
 msgstr ""
 
-#, fuzzy
-msgid "Add/remove images"
-msgstr "okomentoval obrázok"
 
 msgid "Quick edit"
 msgstr ""
@@ -6201,11 +5362,6 @@ msgstr ""
 
 msgid "Now you need to <strong>manually confirm or reject</strong> them."
 msgstr ""
-
-#, fuzzy
-#| msgid "Integration"
-msgid "Instructions"
-msgstr "Expozícia"
 
 msgid ""
 "Below, you see the list of all your images impacted by the automatic "
@@ -6242,39 +5398,18 @@ msgid ""
 "depending on where they were before the data loss)."
 msgstr ""
 
-#, fuzzy
-#| msgid "Total images"
-msgid "Original upload"
-msgstr "Celkový počet obrázkov"
-
-#, fuzzy
-msgid "Staging area"
-msgstr "Snímacie kamery"
-
 msgid "Deleted"
 msgstr ""
 
 msgid "Recover all"
 msgstr ""
 
-#, fuzzy
-msgid "Delete all"
-msgstr "Spojené štáty"
 
 msgid "Reset"
 msgstr ""
 
-#, fuzzy
-msgid "Submit selected"
-msgstr "citovaný text"
 
-#, fuzzy
-msgid "There are no images to recover."
-msgstr "Dátum nemôže byť budúci."
 
-#, fuzzy
-msgid "Restore selected"
-msgstr "citovaný text"
 
 msgid ""
 "Click on the images to include them in this collection (and click again to "
@@ -6303,9 +5438,6 @@ msgstr ""
 msgid "Would you like to add some images?"
 msgstr ""
 
-#, fuzzy
-msgid "Collection"
-msgstr "Miesta"
 
 msgid "Tools"
 msgstr ""
@@ -6325,16 +5457,6 @@ msgstr ""
 msgid "Edit collection"
 msgstr ""
 
-#, fuzzy
-#| msgid "Show signatures"
-msgid "Show filters"
-msgstr "Zobraziť podpisy"
-
-#, fuzzy
-#| msgid "Filters"
-msgid "Hide filters"
-msgstr "Filtre"
-
 #, python-brace-format
 msgid "${filter.label}"
 msgstr ""
@@ -6342,18 +5464,8 @@ msgstr ""
 msgid "Results"
 msgstr ""
 
-#, fuzzy
-#| msgid "Search type"
-msgid "Search terms"
-msgstr "Typ vyhľadávania"
-
 msgid "Search domain"
 msgstr ""
-
-#, fuzzy
-#| msgid "Search type"
-msgid "Search by"
-msgstr "Typ vyhľadávania"
 
 msgid "Only animated"
 msgstr ""
@@ -6387,41 +5499,18 @@ msgstr ""
 msgid "Telescope type"
 msgstr "Typ ďalekohľadu"
 
-#, fuzzy
-#| msgid "Integration hours, daily"
-msgid "Integration time (hours)"
-msgstr "Integračné hodiny, denne"
-
 #, python-format
 msgid ""
 "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Ultimate</a> "
 "subscription."
 msgstr ""
 
-#, fuzzy
-#| msgid "Reflector"
-msgid "Select"
-msgstr "Reflektor"
-
 msgid "Add filter:"
 msgstr ""
 
-#, fuzzy
-msgid "Image of the Day"
-msgstr "Ako je vyberaný obrázok dňa?"
 
 msgid "Top pick"
 msgstr ""
-
-#, fuzzy
-#| msgid "Additional information"
-msgid "Top pick nomination"
-msgstr "Doplňujúce informácie"
-
-#, fuzzy
-#| msgid "Guider/Planetary"
-msgid "Guider/planetary"
-msgstr "Pointačná/Planetárna kamera"
 
 msgid "Min"
 msgstr ""
@@ -6429,9 +5518,6 @@ msgstr ""
 msgid "Max"
 msgstr ""
 
-#, fuzzy
-msgid "Imaging telescopes"
-msgstr "Snímacie ďalekohľady alebo objektívy"
 
 msgid "Astrometry"
 msgstr ""
@@ -6439,136 +5525,25 @@ msgstr ""
 msgid "Everything"
 msgstr ""
 
-#, fuzzy
-#| msgid "Additional information"
-msgid "By basic information"
-msgstr "Doplňujúce informácie"
-
 msgid "By astrometry details"
 msgstr ""
 
 msgid "Objects in field"
 msgstr "Objekty v poli"
 
-#, fuzzy
-msgid "By gear used"
-msgstr "Obrázky"
 
-#, fuzzy
-msgid "Guiding telescopes"
-msgstr "Pointačné ďalekohľady alebo objektívy"
 
 msgid "Comments & forums"
 msgstr ""
 
-#, fuzzy
-#| msgid "Earth's Moon"
-msgid "Earth's moon"
-msgstr "Mesiac"
-
-#, fuzzy
-#| msgid "Main solar system subject"
-msgid "Other solar system object"
-msgstr "Objekt slnečnej sústavy"
-
 msgid "Achromatic"
 msgstr ""
-
-#, fuzzy
-#| msgid "Refractor: semi-apochromatic"
-msgid "Semi-apochromatic"
-msgstr "Refraktor: polo-apochromát"
-
-#, fuzzy
-#| msgid "Refractor: apochromatic"
-msgid "Apochromatic"
-msgstr "Refraktor: apochromát"
-
-#, fuzzy
-#| msgid "Refractor: non-achromatic Galilean"
-msgid "Non-achromatic Galilean"
-msgstr "Refraktor: neachromatický Galileiho"
-
-#, fuzzy
-#| msgid "Refractor: non-achromatic Keplerian"
-msgid "Non-achromatic Keplerian"
-msgstr "Refraktor: neachromatický Keplerov"
-
-#, fuzzy
-#| msgid "Refractor: superachromat"
-msgid "Superchromat"
-msgstr "Refraktor: superachromát"
-
-#, fuzzy
-#| msgid "Reflector: Dall-Kirkham"
-msgid "Dall-Kirkham"
-msgstr "Reflektor: Dall-Kirkham"
 
 msgid "Nasmyth"
 msgstr ""
 
-#, fuzzy
-#| msgid "Reflector: Ritchey Chretien"
-msgid "Ritchey Chretien"
-msgstr "Reflektor: Ritchey-Chretien"
-
-#, fuzzy
-#| msgid "Reflector: Gregorian"
-msgid "Gregorian"
-msgstr "Reflektor: Gregory"
-
-#, fuzzy
-#| msgid "Reflector: Herschellian"
-msgid "Herschellian"
-msgstr "Reflektor: Herschelov"
-
-#, fuzzy
-#| msgid "New Caledonia"
-msgid "Newtonian"
-msgstr "Nová Kaledónia"
-
-#, fuzzy
-#| msgid "Catadioptric: Argunov-Cassegrain"
-msgid "Argunov-Cassegrain"
-msgstr "Katadioptrický: Argunov-Cassegrain"
-
-#, fuzzy
-#| msgid "Catadioptric: Klevtsov-Cassegrain"
-msgid "Klevtsov-Cassegrain"
-msgstr "Katadioptrický: Klevcov-Cassegrain"
-
-#, fuzzy
-#| msgid "Catadioptric: Lurie-Houghton"
-msgid "Lurie-Houghton"
-msgstr "Katadioptrický: Lurie-Houghton"
-
 msgid "Maksutov"
 msgstr ""
-
-#, fuzzy
-#| msgid "Catadioptric: Maksutov-Cassegrain"
-msgid "Maksutov-Cassegrain"
-msgstr "Katadioptrický: Maksutov-Cassegrain"
-
-#, fuzzy
-#| msgid "Catadioptric: modified Dall-Kirkham"
-msgid "Modified Dall-Kirkham"
-msgstr "Katadioptrický: modifikovaný Dall-Kirkham"
-
-#, fuzzy
-#| msgid "Video camera"
-msgid "Schmidt camera"
-msgstr "Video kamera"
-
-#, fuzzy
-#| msgid "Catadioptric: Schmidt-Cassegrain"
-msgid "Schmidt-Cassegrain"
-msgstr "Katadioptrický: Schmidt-Cassegrain"
-
-#, fuzzy
-#| msgid "Catadioptric: ACF Schmidt-Cassegrain"
-msgid "ACF Schmidt-Cassegrain"
-msgstr "Katadioptrický: ACF Schmidt-Cassegrain"
 
 msgid "Rowe-Ackermann Schmidt astrograph"
 msgstr ""
@@ -6655,17 +5630,8 @@ msgstr ""
 msgid "You already have a collection with that name"
 msgstr ""
 
-#, fuzzy
-msgid "Collection updated!"
-msgstr "Miesta"
 
-#, fuzzy
-msgid "Images updated!"
-msgstr "Obrázky"
 
-#, fuzzy
-msgid "Collection deleted!"
-msgstr "Revízia zmazaná."
 
 msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
@@ -6679,9 +5645,6 @@ msgid ""
 "redirected you to the revision currently marked as final."
 msgstr ""
 
-#, fuzzy
-msgid "Accessory"
-msgstr "Príslušenstvo"
 
 msgid "Dates"
 msgstr "Dátumy"
@@ -6704,16 +5667,10 @@ msgstr "Obrázok bol zmazaný"
 msgid "Revision deleted."
 msgstr "Revízia zmazaná."
 
-#, fuzzy
-msgid "Original version deleted!"
-msgstr "Revízia zmazaná."
 
 msgid "Image moved to the staging area."
 msgstr ""
 
-#, fuzzy
-msgid "Image moved to the public area."
-msgstr "Nový obrázok odoslaný do verejnej zložky"
 
 #, python-format
 msgid "%s topics deleted"
@@ -6732,952 +5689,3 @@ msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
-
-#, fuzzy
-#~ msgid "Review recovered images"
-#~ msgstr "okomentoval obrázok"
-
-#, fuzzy
-#~ msgid "pages"
-#~ msgstr "Obrázky"
-
-#, fuzzy
-#~| msgid "Djibouti"
-#~ msgctxt "approximately"
-#~ msgid "about"
-#~ msgstr "Džibutsko"
-
-#, fuzzy
-#~| msgid "Pixel size"
-#~ msgid "Max size"
-#~ msgstr "veľkosť pixelov"
-
-#, fuzzy
-#~| msgid "Commercial gear items"
-#~ msgid "Social features"
-#~ msgstr "Komerčné príslušenstvo"
-
-#, fuzzy
-#~ msgid "Full size annotations"
-#~ msgstr "veľkosť pixelov"
-
-#, fuzzy
-#~ msgid "Undelete images"
-#~ msgstr "Spojené štáty"
-
-#, fuzzy
-#~| msgid "Higher resolution"
-#~ msgid "View in original resolution"
-#~ msgstr "Vyššie rozlíšenie"
-
-#, fuzzy
-#~ msgid "Full search"
-#~ msgstr "veľkosť pixelov"
-
-#, fuzzy
-#~ msgid "Unlimited revisions"
-#~ msgstr "Spojené štáty"
-
-#, fuzzy
-#~ msgctxt "Subscription plan name"
-#~ msgid "Plan"
-#~ msgstr "Planetárny"
-
-#~ msgid "Price"
-#~ msgstr "Cena"
-
-#, fuzzy
-#~ msgid "day"
-#~ msgstr "dní"
-
-#, fuzzy
-#~ msgid "Subscription plan"
-#~ msgstr "Popis"
-
-#, fuzzy
-#~ msgid "You cannot switch to this plan."
-#~ msgstr "Nemáte oprávnenie vidieť túto stránku."
-
-#, fuzzy
-#~ msgid "Back to the plans"
-#~ msgstr "Späť na úvodnú stránku"
-
-#, fuzzy
-#~ msgid "Your inactive subscription plans"
-#~ msgstr "Popis"
-
-#, fuzzy
-#~| msgid "Duration"
-#~ msgid "Traditional"
-#~ msgstr "Expozícia"
-
-#, fuzzy
-#~ msgid "Last 6 months"
-#~ msgstr "Východ alebo západ"
-
-#~ msgid "Merge"
-#~ msgstr "Spojiť"
-
-#~ msgid ""
-#~ "Use this field to mark that the item you are claiming really is the same "
-#~ "product (or a variation thereof) of something you have claimed before."
-#~ msgstr ""
-#~ "Použite toto pole na označenie, že žiadaná položka je rovnaký produkt "
-#~ "(alebo jeho varianta) ako predchádzajúci požadovaný produkt."
-
-#~ msgid ""
-#~ "You can't create more than %d claims. Consider upgrading your affiliation!"
-#~ msgstr ""
-#~ "Nemôžete vytvoriť viac ako %d požiadaviek. Zvážte zvýšenie vášho členstva!"
-
-#~ msgid "You have already claimed this product."
-#~ msgstr "Tento produkt ste už požadovali."
-
-#~ msgid ""
-#~ "Use this field to mark that the item you are merging really is the same "
-#~ "product (or a variation thereof) of something you have claimed before."
-#~ msgstr ""
-#~ "Použite toto pole na označenie, že pripájaná položka je skutočne ten istý "
-#~ "produkt (alebo jeho varianta), ktorý ste požadovali predtým."
-
-#~ msgid "has written a review on"
-#~ msgstr "napísal recenziu"
-
-#~ msgid "Company name"
-#~ msgstr "Názov spoločnosti"
-
-#~ msgid "The name of the company you represent on AstroBin."
-#~ msgstr "Názov spoločnosti, ktorú reprezentujete na AstroBin."
-
-#~ msgid "Company description"
-#~ msgstr "Popis spoločnosti"
-
-#~ msgid ""
-#~ "A short description of the company you represent on AstroBin. You can use "
-#~ "some <a href=\"/faq/#comments\">formatting rules</a>."
-#~ msgstr ""
-#~ "Krátky popis spoločnosti, ktorú reprezentujete na Astrobin. Môžete použiť "
-#~ "niektoré <a href=\"/faq/#comments\">formátovacie pravidlá</a>."
-
-#~ msgid "Company website"
-#~ msgstr "Web stránka spoločnosti"
-
-#~ msgid "The website of the company you represent on AstroBin."
-#~ msgstr "Web stránka spoločnosti, ktorú reprezentujete na AstroBin."
-
-#~ msgid "Country of operation"
-#~ msgstr "Krajina pôsobnosti"
-
-#~ msgid "AUD - Australian dollars"
-#~ msgstr "AUD - Austrálske doláre"
-
-#~ msgid "CAD - Canadian dollars"
-#~ msgstr "CAD - Kanadské doláre"
-
-#~ msgid "CHF - Swiss francs"
-#~ msgstr "CHF - Švajčiarske franky"
-
-#~ msgid "EUR - Euros"
-#~ msgstr "EUR - Eurá"
-
-#~ msgid "GPB - Pound stelings"
-#~ msgstr "GBP - Britské libry"
-
-#~ msgid "PLN - Polish zloty"
-#~ msgstr "PLN - Poľské zloté"
-
-#~ msgid "SEK - Swedish krona"
-#~ msgstr "SEK - Švédske koruny"
-
-#~ msgid "USD - American dollars"
-#~ msgstr "USD - Americké doláre"
-
-#~ msgid "Producer"
-#~ msgstr "Výrobca"
-
-#~ msgid "The link to this product's page on your website."
-#~ msgstr "Linka na popis produktu na Vašej webstránke"
-
-#~ msgid "Currency"
-#~ msgstr "Mena"
-
-#~ msgid "Retailed gear items"
-#~ msgstr "Predávané príslušenstvo"
-
-#~ msgid "Proper make"
-#~ msgstr "Vlastná výroba"
-
-#~ msgid ""
-#~ "Sometimes, product make/brand/producer/developer names are not written "
-#~ "properly by the users. Write here the proper make/brand/producer/"
-#~ "developer name."
-#~ msgstr ""
-#~ "Niekedy meno výrobcu, značky, vývojára nie sú správne napísané "
-#~ "používateľmi. Sem napíšte správne meno značky, výrobcu vývojára."
-
-#~ msgid "Proper name"
-#~ msgstr "Názov"
-
-#~ msgid ""
-#~ "Sometimes, product names are not written properly by the users. Write "
-#~ "here the proper product name, not including the make/brand/producer/"
-#~ "developer name.<br/>It is recommended that you try to group as many items "
-#~ "as possible, so try to use a generic version of your product's name."
-#~ msgstr ""
-#~ "Niekedy názov produktu nie je správne napísaný užívateľmi. Sem napíšte "
-#~ "presný názov produktu bez uvedenia výrobcu/značky/vývojára.<br/>Pokúste "
-#~ "sa zoskupiť čo najviac položiek, a tým použiť všeobecnú verziu názvu "
-#~ "produktu."
-
-#~ msgid ""
-#~ "The official, commercial image for this product. Upload an image via the "
-#~ "regular uploading interface, set its subject type to \"Gear\", and then "
-#~ "choose it from this list. If you upload several revisions, they will also "
-#~ "appear in the commercial page."
-#~ msgstr ""
-#~ "Oficiálny reklamný obrázok tohto produktu. Vložte obrázok štandardným "
-#~ "rozhraním, nastavte názov na \"Gear/Vybavenie\", a potom ho zvoľte zo "
-#~ "zoznamu. Ak vložíte niekoľko verzií, tieto budú použité aj na komerčnej "
-#~ "stránke."
-
-#~ msgid "Tagline"
-#~ msgstr "Slogan"
-
-#~ msgid ""
-#~ "A memorable phrase that will sum up this product, for marketing purposes."
-#~ msgstr ""
-#~ "Zapamätateľná fráza, popisujúca produkt, použiteľná na marketingové účely."
-
-#~ msgid ""
-#~ "Here you can write the full commercial description of your product. You "
-#~ "can use some <a href=\"/faq/#comments\">formatting rules</a>."
-#~ msgstr ""
-#~ "Sem môžete vpísať detailný popis Vášho produktu. Môžete použiť niektoré<a "
-#~ "href=\"/faq/#comments\">formátovacie pravidlá</a>."
-
-#~ msgid "Commercial gear items"
-#~ msgstr "Komerčné príslušenstvo"
-
-#, fuzzy
-#~ msgid "Gear IDs"
-#~ msgstr "Príslušenstvo"
-
-#~ msgid "You can't merge a product to itself."
-#~ msgstr "Nemôžete pripojiť produkt k sebe samému."
-
-#, fuzzy
-#~ msgid "Imaging telescope or lens"
-#~ msgid_plural "Imaging telescopes or lenses"
-#~ msgstr[0] "Snímacie ďalekohľady alebo objektívy"
-#~ msgstr[1] "Snímacie ďalekohľady alebo objektívy"
-#~ msgstr[2] "Snímacie ďalekohľady alebo objektívy"
-
-#, fuzzy
-#~ msgid "Mount"
-#~ msgid_plural "Mounts"
-#~ msgstr[0] "Montáže"
-#~ msgstr[1] "Montáže"
-#~ msgstr[2] "Montáže"
-
-#, fuzzy
-#~ msgid "Guiding telescope or lens"
-#~ msgid_plural "Guiding telescopes or lenses"
-#~ msgstr[0] "Pointačné ďalekohľady alebo objektívy"
-#~ msgstr[1] "Pointačné ďalekohľady alebo objektívy"
-#~ msgstr[2] "Pointačné ďalekohľady alebo objektívy"
-
-#, fuzzy
-#~ msgid "Guiding camera"
-#~ msgid_plural "Guiding cameras"
-#~ msgstr[0] "Pointačné kamery"
-#~ msgstr[1] "Pointačné kamery"
-#~ msgstr[2] "Pointačné kamery"
-
-#, fuzzy
-#~ msgid "Focal reducer"
-#~ msgid_plural "Focal reducers"
-#~ msgstr[0] "Reduktory ohniska"
-#~ msgstr[1] "Reduktory ohniska"
-#~ msgstr[2] "Reduktory ohniska"
-
-#~ msgid "created a new public data pool"
-#~ msgstr "vytvorená nová verejná dátová zložka"
-
-#~ msgid "added new data to public data pool"
-#~ msgstr "vložené nové dáta do verejnej zložky"
-
-#~ msgid "added a new processed image to public data pool"
-#~ msgstr "priadné nové spracované obrázky do verejnej zložky"
-
-#~ msgid "Affiliates"
-#~ msgstr "Pobočky"
-
-#~ msgid "The following companies support AstroBin."
-#~ msgstr "Nasledujúce spoločnosti podporujú AstroBin."
-
-#~ msgid "Is this website for free?"
-#~ msgstr "Je táto stránka bezplatná?"
-
-#~ msgid "Are there any limits on how large and how many images I can upload?"
-#~ msgstr ""
-#~ "Sú tu nejaké obmedzenia veľkosti a počtu obrázkov, ktoré môžem uložiť?"
-
-#~ msgid "What image formats are supported?"
-#~ msgstr "Aké formáty obrázkov sú podporované?"
-
-#~ msgid "Is my data safe on AstroBin?"
-#~ msgstr "Sú moje dáta na AstroBin bezpečné?"
-
-#~ msgid ""
-#~ "I've seen beautiful images on this site. I'm not worthy of posting mine!"
-#~ msgstr ""
-#~ "Videl som prekrásne obrázky na tejto stránke. Moje nie sú hodné odoslania!"
-
-#~ msgid "What's the deal with the Staging Area and the Public Area?"
-#~ msgstr "Čo znamená dočasná a verejná zóna?"
-
-#~ msgid "Why was AstroBin created?"
-#~ msgstr "Prečo vznikol AstroBin?"
-
-#~ msgid "What are the plans for the future?"
-#~ msgstr "Aké sú plány do budúcnosti?"
-
-#~ msgid "How can I format my comments?"
-#~ msgstr "Ako môžem naformátovať svoje príspevky."
-
-#~ msgid "How is the AstroBin index calculated?"
-#~ msgstr "Ako sa počíta index AstroBin?"
-
-#~ msgid "I received some Likes, why is my AstroBin index not updated?"
-#~ msgstr "Získal som nejaké Lajky. Prečo sa mi neaktualizoval index AstroBin?"
-
-#~ msgid "How is the Image of the Day selected?"
-#~ msgstr "Ako je vyberaný obrázok dňa?"
-
-#~ msgid "... and their answers!"
-#~ msgstr "... a ich odpovede!"
-
-#~ msgid ""
-#~ "No. A free account will let you upload up to 10 images, and partake in "
-#~ "all social activities. For unlimited storage, you will need a premium "
-#~ "subscription."
-#~ msgstr ""
-#~ "Nie. Účet zdarma vám umožní nahrať najviac 10 obrázkov a zúčastniť sa na "
-#~ "všetkých sociálnych aktivitách. Pre neobmedzený prístup potrebujete "
-#~ "prémiové predplatné."
-
-#, fuzzy
-#~ msgid ""
-#~ "<strong>NO!</strong> If you are a premium member, on AstroBin you can "
-#~ "upload as many images as you want, and as large as you want. In fact, "
-#~ "full size images are encouraged!"
-#~ msgstr ""
-#~ "<strong>NIE!</strong> Ak ste prémiový člen, na AstroBin môžete ukladať "
-#~ "koľko obrázkov chcete a aké veľké chcete. V skutočnosti sú obrázky v "
-#~ "originálnom rozlíšení preferované!"
-
-#~ msgid ""
-#~ "AstroBin will accept JPEG, PNG and GIF. Animated GIF is supported too."
-#~ msgstr ""
-#~ "AstroBin akceptuje JPEG, PNG a GIF. Animované GIFy sú tiež podporované."
-
-#~ msgid ""
-#~ "Absolutely. There are multiple ways in which AstroBin can store your data "
-#~ "very safely. First of all, the images you upload are stored on a highly "
-#~ "durable, highly available, redundant backend. The durability of the "
-#~ "storage backend is 99.999999999 percent over a given year. This means "
-#~ "that if you upload 10,000 images, you can expect to lose one image to "
-#~ "data corruption once in 10,000,000 year. The images are duplicated across "
-#~ "two different physical servers, for protection against natural disasters."
-#~ msgstr ""
-#~ "Absolútne. Je niekoľko spôsobov ako AstroBin ukladá Vaše dáta veľmi "
-#~ "bezpečne. Predovšetkým, všetky vkladané obrázky sú uchovávané na veľmi "
-#~ "odolnom, vysoko dostupnom, naddimenzovanom systéme. Odolnosť úložného "
-#~ "systému je 99.999999999 percent počas roka. To znamená, že ak uložíte "
-#~ "10,000 obrázkov, stratu jediného obrázku kvôli dátovej chybe môžete "
-#~ "očakávať raz za 10,000,000 rokov. Obrázky sú duplikované medzi dvomi "
-#~ "fyzicky oddelenými servermi kvôli ochrane pred prírodnou katastrofou."
-
-#~ msgid ""
-#~ "The actual website, instead, is hosted on a Virtual Machine, so, in case "
-#~ "of severe hardware failure, it can be redeployed to a different server in "
-#~ "a matter of 15 minutes."
-#~ msgstr ""
-#~ "Skutočná webstránka je v skutočnosti uložená na virtuálnom serveri, takže "
-#~ "v prípade vážnej hardvérovej poruchy môže byť presunutá na iný server v "
-#~ "priebehu 15 minút. "
-
-#~ msgid ""
-#~ "Finally, the database that powers AstroBin (in fact, the whole Virtual "
-#~ "Machine) is backed up daily. In case of severe data loss, the website "
-#~ "will be quickly restored to a snapshot that's never older than 24 hours."
-#~ msgstr ""
-#~ "Posledne, AstroBin databáza (vlastne celý virtuálny server) je zálohovaná "
-#~ "denne. V prípade vážnej straty dát bude webstránka rýchlo obnovená do "
-#~ "stavu nie staršieho ako 24 hodín. "
-
-#~ msgid ""
-#~ "That said, you should be aware that AstroBin is not a backup service, and "
-#~ "although your data is very safe in our hands, we cannot legally take "
-#~ "responsibility in the event of loss, however unlikely it is. Always keep "
-#~ "a copy of your image on your computer."
-#~ msgstr ""
-#~ "Napriek všetkému by ste si mali byť vedomí toho, že AstroBin nie je "
-#~ "zálohovacia služba, aj keď sú vaše dáta v našich rukách v bezpečí. "
-#~ "Nemôžeme byť legálne zodpovední v prípade straty, akokoľvek "
-#~ "nepravdepodobnej. Vždy ukladajte kópiu vašich súborov na vašom počítači. "
-
-#~ msgid ""
-#~ "Nonsense. AstroBin has <strong>not</strong> been made to showcase "
-#~ "beautiful image, but to give everybody an opportunity to contribute to a "
-#~ "vast and evergrowing effort of centralization and indexing of important "
-#~ "data. That 30 minute picture of M31 you took last night between the "
-#~ "clouds <em>belongs</em> here! Don't be shy and post it!"
-#~ msgstr ""
-#~ "Nezmysel. AstroBin <strong>nebol</strong>vytvorený pre prezentáciu "
-#~ "nádherných fotografií ale pre umožnenie každému prispieť do rozsiahleho a "
-#~ "neustále rastúceho úsilia centralizácie a indexácie dôležitých údajov. Tá "
-#~ "30-minútová fotografia M31-ky, ktorú si spravil minulú noc pomedzi oblaky "
-#~ "<em>patrí</em>sem! Nehanbi sa a uverejni ju!"
-
-#~ msgid ""
-#~ "On AstroBin you have two places for our images. The Staging Area is where "
-#~ "you can upload images that you want to quickly share on forums, mailing "
-#~ "lists or social networks. The days of scaling down and compressing your "
-#~ "image so you can upload it to a forum for feedback and critique are over! "
-#~ "Just upload to AstroBin's Staging Area, and send the link to anyone you "
-#~ "want. The image will be visible only to the intended recipients, and "
-#~ "won't appear on your profile or AstroBin's home page."
-#~ msgstr ""
-#~ "Na AstroBine máte dve zóny pre fotografie. Do pracovnej zóny môžete "
-#~ "nahrávať fotografie, ktoré chcete rýchlo zdieľať na fórach, sociálnych "
-#~ "sieťach alebo mailových zoznamoch. Dni škálovania a kompresie obrázkov "
-#~ "pre potreby fór sú za nami! Jednoducho nahrajte fotografiu do pracovnej "
-#~ "zóny a pošlite komukoľvek link. Fotografia bude dostupná len určeným "
-#~ "príjemcom a nezobrazí sa na vašom profile alebo domovskej stránke "
-#~ "AstroBin."
-
-#~ msgid ""
-#~ "The Public Area, instead, is for your finished products. After you have "
-#~ "received feedback on your favorite forum, you can promote an image from "
-#~ "the Staging Area to the Public Area, and it will appear on your profile. "
-#~ "Remember that you can also move images back and forth from one Area to "
-#~ "the other as many times as you want!"
-#~ msgstr ""
-#~ "Na druhej strane verejná zóna je pre vaše finálne produkty. Po tom ako "
-#~ "obdržíte ohlasy na vašom obľúbenom fóre, môžete presunúť fotografiu z "
-#~ "pracovnej zóny do verejnej zóny a zobrazí sa na vašom profile. Fotografie "
-#~ "môžete presúvať medzi zónami tam a naspäť neobmedzene. "
-
-#~ msgid ""
-#~ "AstroBin was born out of the desire to end something that had been going "
-#~ "on for too long: the waste of incredible material to the sea of chaos "
-#~ "that the Internet can be. For years, fantastic astrophotographs have "
-#~ "beeen uploaded to Internet Forums, often with little or no data, or to "
-#~ "general purpose image hosting websites, invariably with no data attached."
-#~ msgstr ""
-#~ "AstroBin sa zrodil z túžby skončiť niečo, čo sa dialo príliš dlho: "
-#~ "mrhanie skvelého materiálu v mori chaosu, akým internet dokáže byť. "
-#~ "Fantastické astrofotografie boli roky nahrávané na internetové fóra alebo "
-#~ "na stránky všeobecnej fotografie s málo alebo žiadnymi dátami. "
-
-#~ msgid ""
-#~ "Such an image would be seen by some people, then quickly forgotten, and "
-#~ "reduced to nothing more than a bunch of pixel in the giant wasteland of "
-#~ "the Internet."
-#~ msgstr ""
-#~ "Taká fotografia bola videná ľuďmi, zabudnutá a zredukovaná na súbor "
-#~ "pixelov plávajúcich v mori internetu. "
-
-#~ msgid ""
-#~ "This should not be allowed to happen. AstroBin is the response: an effort "
-#~ "to host, collect, index and categorize the output of the "
-#~ "astrophotographers all over the world, so that their precious data would "
-#~ "serve a purpose, and have a meaning forever."
-#~ msgstr ""
-#~ "Toto by sa nemalo stávať. AstroBin je odpoveďou: úsilie skladovať, "
-#~ "zbierať, indexovať a kategorizovať výsledky astrofotografov z celého "
-#~ "sveta. Ich vzácne dátu budú slúžiť účelu a budú navždy niečo znamenať. "
-
-#~ msgid ""
-#~ "<em>AstroBin</em> is just starting out, and this time we can really say "
-#~ "that the sky is the limit! Tons of ideas are in the pipeline. As the user "
-#~ "base grows, so does the data. Suddenly, things like automated supernovae "
-#~ "search become possible: you could simply upload an image of a galaxy, and "
-#~ "AstroBin could compare it to pictures of the same galaxy taken previously."
-#~ msgstr ""
-#~ "<em>AstroBin</em> ešte len začína a môžeme skutočne povedať, že jediným "
-#~ "limitom je obloha! Uvažujeme nad množstvom nápadov. Tak ako používateľská "
-#~ "základňa, rovnako rastie aj objem dát. Veci ako zautomatizované hľadanie "
-#~ "supernov sa stáva možným - jednoducho nahráte fotografiu galaxie a "
-#~ "AstroBin ju môže porovnať s ostatnými, odfotenými v minulosti. "
-
-#~ msgid ""
-#~ "AstroBin could also recommend subjects for you to image! Knowing your "
-#~ "equipment, your location, and comparing what you have imaged to what "
-#~ "users similar to you have, AstroBin could suggest your next challenge!"
-#~ msgstr ""
-#~ "AstroBin by vám tiež mohol navrhnúť objekty fotografovania. Poznajúc vaše "
-#~ "vybavenie, vašu lokalitu a porovnaním vašich výsledkov s používateľmi s "
-#~ "podobným vybavením, AstroBin by vám mohol navrhnúť ďalšiu výzvu!"
-
-#~ msgid ""
-#~ "Thanks to the input from the community, more ideas are flowing in and the "
-#~ "list get bigger and bigger."
-#~ msgstr ""
-#~ "Z komunity k nám plynú ďalšie nápady a ich zoznam sa rýchlo zväčšuje. "
-
-#~ msgid ""
-#~ "AstroBin uses the Markdown syntax. Please use the following reference "
-#~ "table:"
-#~ msgstr ""
-#~ "AstroBin používa Markdown syntax. Prosím, použite nasledujúcu tabuľku: "
-
-#~ msgid "You type:"
-#~ msgstr "Napíšete"
-
-#~ msgid "You see:"
-#~ msgstr "Vidíte:"
-
-#~ msgid "italics"
-#~ msgstr "kurzíva"
-
-#~ msgid "bold"
-#~ msgstr "tučné"
-
-#~ msgid "(TAB or 4 spaces)"
-#~ msgstr "(TAB alebo 4 medzery)"
-
-#~ msgid "preformatted text"
-#~ msgstr "predformátovaný text"
-
-#~ msgid "quoted text"
-#~ msgstr "citovaný text"
-
-#~ msgid "escape the formatting syntax"
-#~ msgstr "vyjsť von z formátovacej syntaxe"
-
-#~ msgid ""
-#~ "The AstroBin index is a function of the number of Likes and the number of "
-#~ "images posted by a user."
-#~ msgstr ""
-#~ "Index AstroBin je funkcia počtu lajkov a počtu fotografii nahratých "
-#~ "používateľom. "
-
-#~ msgid ""
-#~ "Because it's computationally expensive, the AstroBin index is updated "
-#~ "only every 24 hours. The same applies for the search index, the Big Wall, "
-#~ "and some other user data."
-#~ msgstr ""
-#~ "AstroBin index je aktualizovaný každých 24 hodín kvôli jeho výpočtovej "
-#~ "náročnosti. To isté platí pre index pre hľadanie, veľkú nástenku a "
-#~ "niektoré ďalšie používateľské dáta. "
-
-#~ msgid ""
-#~ "Do you have a question not covered here! Please <a href=\"/contact/"
-#~ "\">contact us</a>!"
-#~ msgstr ""
-#~ "Máte otázku, ktorá tu nebola spomenutá? Prosím <a href=\"/contact/"
-#~ "\">kontaktujte nás</a>!"
-
-#~ msgid ""
-#~ "AstroBin accounts are meant for members to share original images that "
-#~ "they have created."
-#~ msgstr ""
-#~ "Cieľom AstroBin účtov je zdieľať originálne obrázky členov, ktoré "
-#~ "vytvorili."
-
-#~ msgid "What is allowed"
-#~ msgstr "Čo je umožnené"
-
-#~ msgid "Do upload content you have created yourself."
-#~ msgstr "Nahrajte obsah, ktorý ste vytvorili vy samotní."
-
-#, fuzzy
-#~ msgid "Don't upload anything that you did not work on."
-#~ msgstr "Nenahrávajte obrázky, ktoré nijako nesúvisia s astronómiou."
-
-#~ msgid "Don't upload images that have nothing to do with astronomy."
-#~ msgstr "Nenahrávajte obrázky, ktoré nijako nesúvisia s astronómiou."
-
-#~ msgid ""
-#~ "Images of your equipment are fine, but don't use AstroBin to upload "
-#~ "pictures from your last vacation. Your account won't be deleted, but we "
-#~ "will ask you to remove those pictures."
-#~ msgstr ""
-#~ "Obrázky vášho vybavenia sú v poriadku, ale nepoužívajte AstroBin na "
-#~ "nahrávanie obrázkov z vašej poslednej dovolenky. Váš účet nebude "
-#~ "vymazaný, ale vás požiadame, aby ste odstránili takéto obrázky."
-
-#~ msgid ""
-#~ "Don't use your account to host images for websites, banners or logos."
-#~ msgstr ""
-#~ "Nepoužívajte váš účet, aby ste pod ním ukladali obrázky určené pre webové "
-#~ "stránky, pútače alebo logá."
-
-#~ msgid ""
-#~ "Banners, logos, icons or other graphic elements that are not "
-#~ "astrophotography are not allowed on AstroBin."
-#~ msgstr ""
-#~ "Pútače, logá, ikony alebo iné grafické prvky, ktoré nie sú "
-#~ "astrofotografiou, nie sú dovolené na AstroBin."
-
-#~ msgid ""
-#~ "In conclusion, these terms are just a way to say \"please be nice and use "
-#~ "common sense\". If you feel you can't abide by them, please let us know "
-#~ "what you feel is wrong."
-#~ msgstr ""
-#~ "Vo všeobecnosti platí, že takéto výrazy sú len spôsobom, aby sme vám "
-#~ "povedali \"buďte slušní a používajte zdravý rozum\". Pokiaľ cítite, že "
-#~ "nemôžete toto splniť, prosím, dajte nám vedieť, čo vnímate ako nesprávne."
-
-#~ msgid ""
-#~ "Are you an astrophotographer? Do you like to share the outcome of your "
-#~ "hard work with others? As an astrophotographer myself, and a subscriber "
-#~ "to numerous Astrophotography forums, I have found that the Internet is "
-#~ "lacking a centralized place where astrophotographers can share their work."
-#~ msgstr ""
-#~ "Ste astrofotograf? Radi zdieľate výstup vašej ťažkej práce s ostatnými? "
-#~ "Ja ako astrofotograf a prispievateľ na mnohých astrofotografických fórach "
-#~ "som zistil, že na internete chýba centralizované miesto, kde "
-#~ "astrofotografi môžu zdieľať svoju prácu."
-
-#, fuzzy
-#~ msgid "Back to image"
-#~ msgstr "Späť na úvodnú stránku"
-
-#, fuzzy
-#~ msgid "You are invited to the private shared folder: %(folder_name)s"
-#~ msgstr "Boli ste pozvaní zdieľať súkromnú zložku"
-
-#, fuzzy
-#~| msgid "Proper name"
-#~ msgid "Username"
-#~ msgstr "Názov"
-
-#, fuzzy
-#~ msgid "Activate"
-#~ msgstr "Aktivity"
-
-#, fuzzy
-#~ msgid "Filename"
-#~ msgstr "Surinam"
-
-#~ msgid "Taiwan, Province of China"
-#~ msgstr "Taiwan"
-
-#~ msgid "Any"
-#~ msgstr "Akýkoľvek"
-
-#~ msgid "Express value in mm"
-#~ msgstr "Hodnota v mm"
-
-#~ msgid "Express value in &mu;m"
-#~ msgstr "Hodnota v &mu;m"
-
-#~ msgid "Express value in hours"
-#~ msgstr "Hodnota v hodinách"
-
-#~ msgid "Min. telescope aperture"
-#~ msgstr "Min. priemer ďalekohľadu"
-
-#~ msgid "Max. telescope aperture"
-#~ msgstr "Max. priemer ďalekohľadu"
-
-#~ msgid "Acquired before"
-#~ msgstr "Nasnímané pred"
-
-#~ msgid "Min. integration"
-#~ msgstr "Min. expozícia"
-
-#~ msgid "Max. integration"
-#~ msgstr "Max. expozícia"
-
-#~ msgid "Max. Moon phase %"
-#~ msgstr "Max. fáaza Mesiaca %"
-
-#~ msgid "Use a <strong>comma</strong> to separate the values."
-#~ msgstr "Použite  <strong>čiarka</strong> na oddelenie hodnôt."
-
-#~ msgid "Matching items:"
-#~ msgstr "Zodpovedajúce položky:"
-
-#~ msgid "New image from a user you follow"
-#~ msgstr "Nový obrázok od používateľa, ktorého sledujete"
-
-#~ msgid "New image revision from a user you follow"
-#~ msgstr "Nová verzia obrázku od užívateľa, ktorého sledujete"
-
-#~ msgid "AstroBin has published a new blog entry"
-#~ msgstr "AstroBin vydal nový článok na blogu"
-
-#~ msgid "Your image received a new comment"
-#~ msgstr "Váš obrázok dostal nový komentár."
-
-#~ msgid "There was a reply to your comment"
-#~ msgstr "Dostali ste odpoveď na váš obrázok."
-
-#~ msgid "Your image was liked"
-#~ msgstr "Váš obrázok bol označený \"páči sa\""
-
-#~ msgid "New image with some gear you follow"
-#~ msgstr "Nový obrázok s vybavením, ktoré sledujete"
-
-#~ msgid "New image of a subject you follow"
-#~ msgstr "Nový obrázok s predmetom, ktorý sledujete"
-
-#~ msgid "New discussion about a gear item you own"
-#~ msgstr "Nová diskusia o položke vybavenia, ktorú vlastníte"
-
-#~ msgid "New review of a gear item you own"
-#~ msgstr "Nová recenzia príslušenstva, ktoré vlastníte."
-
-#~ msgid "New data posted to public pool"
-#~ msgstr "Nové dáta odoslané do verejnej zložky"
-
-#~ msgid "New image posted to public data pool"
-#~ msgstr "Nový obrázok odoslaný do verejnej zložky"
-
-#~ msgid "New data posted to shared private folder"
-#~ msgstr "Nové dáta odoslané dozdieľanej súkromnej zložky"
-
-#~ msgid "New image posted to shared private folder"
-#~ msgstr "Nový obrázok odoslaný do zdieľanej súkromnej zložky"
-
-#~ msgid "You are invited to a shared private folder"
-#~ msgstr "Boli ste pozvaní zdieľať súkromnú zložku"
-
-#, fuzzy
-#~ msgid "You are invited to a group"
-#~ msgstr "Boli ste pozvaní zdieľať súkromnú zložku"
-
-#~ msgid "Activity stream"
-#~ msgstr "Aktivity"
-
-#~ msgid ""
-#~ "The best way to see what's new on AstroBin: a big wall with 100 images "
-#~ "per page, that you can sort and filter to your liking."
-#~ msgstr ""
-#~ "Najlepší spôsob ako vidieť čo je nové na AstroBin: veľká nástenka so 100 "
-#~ "obrázkami na stranu, ktoré môžete ľubovoľne sortovať a filtrovať."
-
-#~ msgid ""
-#~ "Every night, an algorithm looks at the images uploaded during the "
-#~ "previous 7 days. The 20 most liked images in that time window are "
-#~ "presented each morning to an appointed person that selects one according "
-#~ "to personal preference."
-#~ msgstr ""
-#~ "Každú noc algoritmus prehliadne obrázky nahrané počas posledných 7 dní. "
-#~ "20 obrázkov s najväčším počtom lajkov z tohto časového obdobia je "
-#~ "predstavených každé ráno vybranej osobe, ktorá vyberie jeden podľa "
-#~ "vlastnej preferencie."
-
-#, fuzzy
-#~ msgid "Number of likes"
-#~ msgstr "Počet snímok"
-
-#, fuzzy
-#~ msgid "Image modetation"
-#~ msgstr "Obrázok bol zmazaný"
-
-#, fuzzy
-#~ msgid "Image moderation"
-#~ msgstr "Obrázok bol zmazaný"
-
-#, fuzzy
-#~ msgid "Spam images"
-#~ msgstr "Obrázky príslušenstva"
-
-#, fuzzy
-#~ msgid "Allow external login"
-#~ msgstr "Povoliť hodnotenie"
-
-#, fuzzy
-#~ msgid "Action"
-#~ msgstr "Miesta"
-
-#, fuzzy
-#~ msgid "Your followers"
-#~ msgstr "Máte nového sympatizanta"
-
-#, fuzzy
-#~ msgid "There was one or more errors processing the form. "
-#~ msgstr ""
-#~ "Formulár obsahuje jednu alebo viac chýb. Uvidíte ich v dolnej časti "
-#~ "formulára."
-
-#, fuzzy
-#~ msgid "Content moderation"
-#~ msgstr "Krajina pôsobnosti"
-
-#, fuzzy
-#~ msgid "Today's 'Image of the day' was already chosen. Come back tomorrow!"
-#~ msgstr "Dnešný \"Obrázok dňa\" bol už vybratý. Vráťte sa zajtra! "
-
-#, fuzzy
-#~ msgid "Recently uploaded"
-#~ msgstr "odoslaných obrázkov"
-
-#, fuzzy
-#~ msgid "Recently bookmarked"
-#~ msgstr "okomentoval obrázok"
-
-#, fuzzy
-#~ msgid "Recent images with link to TIFF/FITS"
-#~ msgstr "Linka na TIFF/FITS"
-
-#~ msgid "Image brought to your attention"
-#~ msgstr "Obrázok daný do Vašej pozornosti"
-
-#~ msgid "Yes. AstroBin is completely free!"
-#~ msgstr "Áno. AstroBin je úplne zadarmo!"
-
-#, fuzzy
-#~ msgid "Community"
-#~ msgstr "Komentár"
-
-#~ msgid "Following a user was successful"
-#~ msgstr "Sledovanie používateľa bolo úspešné"
-
-#~ msgid "Unfollowing a user was successful"
-#~ msgstr "Ukončenie sledovania používateľa bolo úspešné"
-
-#~ msgid "Your image is ready"
-#~ msgstr "Váš obrázok je pripravený"
-
-#~ msgid "Your request was fulfilled"
-#~ msgstr "Vaša požiadavka bola splnená"
-
-#~ msgid "Your image was deleted"
-#~ msgstr "Váš obrázok bol zmazaný"
-
-#~ msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
-#~ msgstr ""
-#~ "Ak je to možné, použite katalógový názov (napr. M101, alebo NGC224 alebo "
-#~ "IC1370)."
-
-#~ msgid "Subjects"
-#~ msgstr "Názvy"
-
-#~ msgid "Please enter either some subjects or a main solar system subject."
-#~ msgstr ""
-#~ "Zadajte prosím názvy objektov alebo názov objektu v slnečnej sústave."
-
-#~ msgid "Nominate for"
-#~ msgstr "Návrh na"
-
-#~ msgid "has favorited"
-#~ msgstr "označil ako obľúbené"
-
-#~ msgid "I don't want this image plate-solved."
-#~ msgstr "Nechcem astrometrickú redukciu pre tento obrázok"
-
-#~ msgid "This is not a deep sky image, don't plate-solve it."
-#~ msgstr "Nie je to deep-sky obrázok, nerobiť astrometriu."
-
-#~ msgid "I have no idea about the size of field, try a blind solve."
-#~ msgstr "Nemám predstavu o veľkosti poľa, skúsiť naslepo."
-
-#~ msgid "This is a very wide field image (more than 10 degrees)."
-#~ msgstr "Je to veľmi širokoúhly obrázok (viac ako 10 stupňov)."
-
-#~ msgid "This is a wide field image (1 to 10 degrees)."
-#~ msgstr "Je to širokoúhly obrázok (1 až 10 stupňov)."
-
-#~ msgid "This ia narrow field image (less than 1 degree)."
-#~ msgstr "Je to malé zorné pole (menej ako 1stupeň)."
-
-#~ msgid "Insert a focal length if you want to plate-solve."
-#~ msgstr "Zadajte ohniskovú vzdialenosť ak si prajete premerať snímku."
-
-#~ msgid "Insert a pixel size if you want to plate-solve."
-#~ msgstr "Zadajte veľkosť pixlov, ak si prajete premerať snímku."
-
-#~ msgid ""
-#~ "This is the smallest of the binning values you used. If you imaged L in "
-#~ "1x1 and RGB in 2x2, put 1x1 here."
-#~ msgstr ""
-#~ "Najmenší binning, aký ste použili. Ak ste snímali L v binningu 1x1 a RGB "
-#~ "v binningu 2x2, vložte sem 1x1."
-
-#~ msgid ""
-#~ "If you scaled your image before uploading, enter here the percentage of "
-#~ "the new size. E.g. 50 if you made it half the size. Cropping, instead, "
-#~ "doesn't matter."
-#~ msgstr ""
-#~ "Ak ste zmenili mierku obrázku pred uploadom, vložte sem percentuálnu "
-#~ "veľkosť nového obrázku. Napríklad 50, ak ste ho zmenšili na polovicu. Na "
-#~ "orezaní naopak nezáleží."
-
-#~ msgid "Scaling"
-#~ msgstr "Mierka"
-
-#~ msgid ""
-#~ "The revision you are looking for is invalid, or was deleted. This is the "
-#~ "original image."
-#~ msgstr ""
-#~ "Verzia, ktorú hľadáte je neplatná, alebo bola zmazaná. Toto je pôvodný "
-#~ "obrázok."
-
-#~ msgid ""
-#~ "Plate-solving has started in the background. It might take a while, so "
-#~ "please don't request it again! You will be notified when the job has "
-#~ "completed. Thanks!"
-#~ msgstr ""
-#~ "Astrometria bola spustená na pozadí. Môže to chvíľu trvať, neopakujte "
-#~ "preto svoju požiadavku opätovne! Po skončení budete informovaní. Ďakujeme!"
-
-#~ msgid "Click on a suggestion or press TAB to add what you typed"
-#~ msgstr "Kliknite na návrhy, alebo stlačte TAB na pridanie písaného slova"
-
-#~ msgid ""
-#~ "To fill in the missing dates, use the <strong>Edit acquisition details</"
-#~ "strong> entry in the <strong>Actions</strong> menu for each image."
-#~ msgstr ""
-#~ "Na vyplnenie chýbajúcich údajov použite položku <strong>Úpravu "
-#~ "expozičných údajov</strong> v menu <strong>Akcie</strong>."
-
-#~ msgid ""
-#~ "To fill in the missing gear, use the <strong>Edit gear used</strong> "
-#~ "entry in the <strong>Actions</strong> menu for each image."
-#~ msgstr ""
-#~ "Na zadanie chýbajúceho príslušenstva použite položku <strong>Úprava "
-#~ "použitého príslušenstva</strong> v menu <strong>Akcie</strong>."
-
-#~ msgid ""
-#~ "To fill in the missing subjects, use the <strong>Edit basic information</"
-#~ "strong> entry in the <strong>Actions</strong> menu for each image."
-#~ msgstr ""
-#~ "Na zadanie chýbajúceho názvu použite položku <strong>Úprava základných "
-#~ "údajov</strong> v menu <strong>Akcie</strong>."
-
-#~ msgid ""
-#~ "To fill in the missing acquisition details, use the <strong>Edit "
-#~ "acquisition details</strong> entry in the <strong>Actions</strong> menu "
-#~ "for each image."
-#~ msgstr ""
-#~ "Na zadanie expozičných údajov použite položku <strong>Úprav expozičných "
-#~ "údajov</strong> v menu <strong>Akcie</strong>."
-
-#~ msgid "Nomination for the Messier Marathon"
-#~ msgstr "Nominácia na Messierov maratón"
-
-#~ msgid "Top Nomination for the Messier Marathon"
-#~ msgstr "Top nominácie na messierov maratón"
-
-#, fuzzy
-#~ msgid "Top quality!"
-#~ msgstr "Vľavo hore"
-
-#~ msgid ""
-#~ "<strong>%s</strong> has requested additional information about your image."
-#~ msgstr ""
-#~ "<strong>%s</strong> požadoval doplňujúce informácie o Vašom obrázku."
-
-#, fuzzy
-#~ msgid "Community bulletin"
-#~ msgstr "Komentár"
-
-#, fuzzy
-#~ msgid "Producer's description"
-#~ msgstr "Popis"

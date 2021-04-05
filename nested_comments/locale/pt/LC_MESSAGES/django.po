@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 21:58+0000\n"
+"POT-Creation-Date: 2021-04-05 19:06+0000\n"
 "PO-Revision-Date: 2020-05-30 22:21-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -26,17 +26,6 @@ msgstr "Cancelar"
 
 msgid "Add a comment"
 msgstr "Adicionar um comentário"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-#| "register/\">register</a> to leave a comment.</p>"
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
-"\">sign up</a> to leave a comment."
-msgstr ""
-"Por favor, <a href=\"/accounts/login/\">faça login</a> ou <a href=\"/"
-"accounts/register/\">registre-se</a> para deixar um comentário.</p>"
 
 msgid "There are no comments yet."
 msgstr "Ainda não há comentários."
@@ -82,11 +71,3 @@ msgstr "O comentário não pode estar vazio."
 msgid "Submit"
 msgstr ""
 
-#~ msgid "Save"
-#~ msgstr "Salvar"
-
-#~ msgid "(comment deleted)"
-#~ msgstr "(comentário excluído)"
-
-#~ msgid "There doesn't seem to be anything here."
-#~ msgstr "Parece não haver nada aqui."

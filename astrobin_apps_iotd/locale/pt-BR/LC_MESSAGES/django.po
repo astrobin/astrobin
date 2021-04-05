@@ -36,11 +36,6 @@ msgstr "Imagens na área de preparação não podem ser enviadas."
 msgid "This user has chosen to be excluded from competitions."
 msgstr "Este usuário optou por ser excluído das competições."
 
-#, fuzzy
-#| msgid "This user has chosen to be excluded from competitions."
-msgid "This user has been banned from competitions."
-msgstr "Este usuário optou por ser excluído das competições."
-
 #, python-format
 msgid ""
 "You cannot submit an image that was published more than %(max_days)s days "
@@ -136,16 +131,6 @@ msgstr "Você não pode deseleger uma IDD passada ou atual."
 msgid "you already selected %s IOTD today (UTC)"
 msgstr ""
 
-#, fuzzy, python-format
-#| msgid "You have already scheduled %(max_allowed)s IOTDs."
-msgid "you already selected %s scheduled IOTDs"
-msgstr "Você já programou %(max_allowed)s IDDs."
-
-#, fuzzy, python-format
-#| msgid "You have already scheduled %(max_allowed)s IOTDs."
-msgid "there are already %s scheduled IOTDs"
-msgstr "Você já programou %(max_allowed)s IDDs."
-
 msgid "Image of the day"
 msgstr "Imagem do dia"
 
@@ -177,64 +162,3 @@ msgstr "Você não pode deseleger uma IDD eleita por outro juiz."
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr ""
 "Todos os espaços de IDD para os próximos %(days)s dias já estão preenchidos."
-
-#, fuzzy
-#~| msgid "You cannot unelect an image elected by another judge."
-#~ msgid "You cannot unhide an image on behalf of another user."
-#~ msgstr "Você não pode deseleger uma imagem eleita por outro juiz."
-
-#, fuzzy
-#~| msgid "You cannot elect your own submission."
-#~ msgid "You cannot delete another user's submission."
-#~ msgstr "Você não pode eleger seu próprio envio."
-
-#, fuzzy
-#~| msgid "You cannot elect an image you voted for."
-#~ msgid "You cannot delete another user's vote."
-#~ msgstr "Você não pode eleger uma imagem em que votou."
-
-#~ msgid "by"
-#~ msgstr "por"
-
-#~ msgid "Submit for IOTD"
-#~ msgstr "Enviar para IDD"
-
-#~ msgid ""
-#~ "You will submit this image to the IOTD Submissions Queue. From there, a "
-#~ "member of the IOTD Reviewers Board will consider promoting it for final "
-#~ "evaluation from an IOTD Judge"
-#~ msgstr ""
-#~ "Você enviará esta imagem para a fila de envios da IDD. A partir daí, um "
-#~ "membro do Quadro de Revisores da IDD considerará promovê-la para a "
-#~ "avaliação final de um Juiz da IDD"
-
-#~ msgid "Submit"
-#~ msgstr "Enviar"
-
-#~ msgid "IOTD Review Queue"
-#~ msgstr "Fila de Revisão da IDD"
-
-#~ msgid ""
-#~ "Please select the images that you want to promote for final judgement by "
-#~ "clicking on them."
-#~ msgstr ""
-#~ "Por favor selecione as imagens que você deseja promover para julgamento "
-#~ "final clicando nelas."
-
-#~ msgid "IOTD Submission Queue"
-#~ msgstr "Fila de Envio da IDD"
-
-#~ msgid ""
-#~ "Please select the images that you want to propose for IOTD consideration."
-#~ msgstr ""
-#~ "Por favor selecione as imagens que você deseja propor para serem "
-#~ "consideradas como IDD."
-
-#~ msgid "Reviewers"
-#~ msgstr "Revisores"
-
-#~ msgid "Loading"
-#~ msgstr "Carregando"
-
-#~ msgid "Submitters"
-#~ msgstr "Enviadores"

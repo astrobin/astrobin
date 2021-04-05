@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 21:57+0000\n"
+"POT-Creation-Date: 2021-04-05 19:06+0000\n"
 "PO-Revision-Date: 2013-11-11 19:27+0000\n"
 "Last-Translator: gamangabriel <gamangabriel@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -802,15 +802,6 @@ msgstr ""
 msgid "Groups"
 msgstr ""
 
-#, fuzzy
-#| msgid "How is the Image of the Day selected?"
-msgid "Submit this image to the selected groups."
-msgstr "Cum este selectată Imaginea Zilei?"
-
-#, fuzzy
-msgid "Mouse hover image"
-msgstr "Fara imagini"
-
 msgid ""
 "Choose what will be displayed when somebody hovers the mouse over this "
 "image. Please note: only revisions with the same width and height of your "
@@ -867,11 +858,6 @@ msgid ""
 "revision. Pleasenote: only revisions with the same width and height as this "
 "one can be considered."
 msgstr ""
-
-#, fuzzy
-#| msgid "Delete original image"
-msgid "Original image"
-msgstr "Sterge imaginea originala"
 
 msgid "Opacity"
 msgstr "Opacitate"
@@ -940,11 +926,6 @@ msgstr "Dacă deţineţi un site web personal, puneţi adresa aici."
 msgid "Website"
 msgstr "Site web"
 
-#, fuzzy
-#| msgid "Mark as good"
-msgid "Mark as final"
-msgstr "Marcheaza ca bun"
-
 msgid "Please enter a value between 1 and 5."
 msgstr "Vă rugăm să introduceți o valoare între 1 și 5."
 
@@ -960,9 +941,6 @@ msgstr "Subiect"
 msgid "Body"
 msgstr "Corp"
 
-#, fuzzy
-msgid "uploaded a new image"
-msgstr "Incarcati o noua imagine"
 
 msgid "uploaded a new revision of"
 msgstr "a încărcat o nouă revizie a"
@@ -979,16 +957,10 @@ msgstr "semn de carte"
 msgid "likes"
 msgstr ""
 
-#, fuzzy
-msgid "created a new public group"
-msgstr "a crea un nou sondaj public de date"
 
 msgid "joined the public group"
 msgstr ""
 
-#, fuzzy
-msgid "Remove from bookmarks"
-msgstr "Stergeti de la favorite"
 
 msgid "Bookmark"
 msgstr "Semn de carte"
@@ -1027,16 +999,6 @@ msgstr "Atribuire - Distribuire în condiții identice Creative Commons"
 msgid "Attribution-NoDerivs Creative Commons"
 msgstr "Atribuire-NoDerivs Creative Commons"
 
-#, fuzzy
-#| msgid "English"
-msgid "English (US)"
-msgstr "Engleză"
-
-#, fuzzy
-#| msgid "English"
-msgid "English (GB)"
-msgstr "Engleză"
-
 msgid "Italian"
 msgstr "Italiană"
 
@@ -1064,11 +1026,6 @@ msgstr "Albaneză"
 msgid "Polish"
 msgstr "Polonă"
 
-#, fuzzy
-#| msgid "Brazilian Portuguese"
-msgid "Portuguese"
-msgstr "Portugheză braziliană"
-
 msgid "Greek"
 msgstr "Greacă"
 
@@ -1078,9 +1035,6 @@ msgstr ""
 msgid "Arabic"
 msgstr ""
 
-#, fuzzy
-msgid "Japanese"
-msgstr "Japonia"
 
 msgid "Chinese (Simplified)"
 msgstr ""
@@ -1136,15 +1090,6 @@ msgstr "Planetă minoră"
 msgid "Comet"
 msgstr "Cometă"
 
-#, fuzzy
-#| msgid "Orientation"
-msgid "Occultation"
-msgstr "Orientare"
-
-#, fuzzy
-msgid "Conjunction"
-msgstr "Locații"
-
 msgid "Partial lunar eclipse"
 msgstr ""
 
@@ -1169,9 +1114,6 @@ msgstr ""
 msgid "Medium"
 msgstr ""
 
-#, fuzzy
-msgid "Large"
-msgstr "Dimensiunea imaginii"
 
 msgid "Center"
 msgstr "Centru"
@@ -1291,11 +1233,6 @@ msgid "Catadioptric: Schmidt-Cassegrain"
 msgstr "Catadioptric: Schmidt-Cassegrain"
 
 msgid "Catadioptric: ACF Schmidt-Cassegrain"
-msgstr "Catadioptric: ACF Schmidt-Cassegrain"
-
-#, fuzzy
-#| msgid "Catadioptric: ACF Schmidt-Cassegrain"
-msgid "Catadioptric: Rowe-Atkinson Schmidt astrograph"
 msgstr "Catadioptric: ACF Schmidt-Cassegrain"
 
 msgid "Camera lens"
@@ -1440,11 +1377,6 @@ msgstr ""
 msgid "Other/Unknown"
 msgstr ""
 
-#, fuzzy
-#| msgid "Deep sky object"
-msgid "Deep sky object or field"
-msgstr "Obiect Deep-Sky"
-
 msgid "Solar system body or event"
 msgstr "Corp sau eveniment  din sistemul solar "
 
@@ -1460,45 +1392,20 @@ msgstr ""
 msgid "Gear"
 msgstr "Echipament"
 
-#, fuzzy
-#| msgid "Acquired"
-msgid "Self acquired"
-msgstr "Capturate"
-
 msgid "Backyard"
 msgstr ""
-
-#, fuzzy
-#| msgid "Gallery"
-msgid "Traveller"
-msgstr "Galerie"
 
 msgid "Own remote observatory"
 msgstr ""
 
-#, fuzzy
-#| msgid "Uploaded"
-msgid "Downloaded"
-msgstr "Incarcate"
-
 msgid "Amateur hosting facility"
 msgstr ""
-
-#, fuzzy
-#| msgid "Public Area"
-msgid "Public amateur data"
-msgstr "Zona Publică"
 
 msgid "Professional, scientific grade data"
 msgstr ""
 
 msgid "Mix of multiple sources"
 msgstr ""
-
-#, fuzzy
-#| msgid "Image of the day"
-msgid "None of the above"
-msgstr "Imaginea zilei"
 
 msgid "Unknown"
 msgstr ""
@@ -1518,11 +1425,6 @@ msgstr "Imagine monocroma negativa"
 msgid "Title"
 msgstr "Titlu"
 
-#, fuzzy
-#| msgid "Acquisition time"
-msgid "Acquisition type"
-msgstr "Timpul de achiziţie"
-
 msgid "Subject type"
 msgstr "Tipul subiectului"
 
@@ -1531,11 +1433,6 @@ msgstr ""
 
 msgid "Where does the data for this image come from?"
 msgstr ""
-
-#, fuzzy
-#| msgid "Remove data"
-msgid "Remote data source"
-msgstr "Stergeti datele"
 
 msgid ""
 "Which remote hosting facility did you use to acquire data for this image?"
@@ -1566,9 +1463,6 @@ msgstr "Descriere"
 msgid "HTML tags are allowed."
 msgstr "Etichetele HTML sunt permise."
 
-#, fuzzy
-msgid "Uncompressed source (max 100 MB)"
-msgstr "Timp de incarcare"
 
 msgid ""
 "You can store the final processed image that came out of your favorite image "
@@ -1577,18 +1471,8 @@ msgid ""
 "access to it."
 msgstr ""
 
-#, fuzzy
-#| msgid "Thumbnail"
-msgid "Gallery thumbnail"
-msgstr "Imagine iconita"
-
 msgid "Select an area of the image to be used as thumbnail in your gallery."
 msgstr ""
-
-#, fuzzy
-#| msgid "Star trails"
-msgid "Sharpen thumbnails"
-msgstr "Trasee stelare"
 
 msgid ""
 "If selected, AstroBin will use a resizing algorithm that slightly sharpens "
@@ -1610,14 +1494,6 @@ msgstr ""
 msgid "License"
 msgstr "Licență"
 
-#, fuzzy
-msgid "Allow comments"
-msgstr "Comentarii"
-
-#, fuzzy
-#| msgid "Notifications"
-msgid "Skip notifications"
-msgstr "Notificări"
 
 msgid "Do not notify your followers about this image upload."
 msgstr ""
@@ -1634,14 +1510,6 @@ msgstr ""
 msgid "Images"
 msgstr "Imagini"
 
-#, fuzzy
-msgid "Cover image"
-msgstr "Fara imagini"
-
-#, fuzzy
-#| msgid "Other images"
-msgid "Order by image tag"
-msgstr "Alte imagini"
 
 msgid "Please use the following format: yyyy-mm-dd."
 msgstr "Vă rugăm să folosiți următorul format: aaaa-ll-zz."
@@ -1678,11 +1546,6 @@ msgstr "9 - Cer din interiorul oraşului (ALB)"
 
 msgid "Synthetic channel"
 msgstr "Canal sintetic"
-
-#, fuzzy
-#| msgid "Filter"
-msgid "Filter"
-msgstr "Filtru"
 
 msgid "Binning"
 msgstr "Reductie matriciala a rezolutiei imaginii"
@@ -1800,21 +1663,8 @@ msgstr "Latitudinea celui de-al treilea Meridian Central"
 msgid "Seeing"
 msgstr "Seeing"
 
-#, fuzzy
-#| msgid "Your estimation of the seeing, on a scale from 1 to 5."
-msgid ""
-"Your estimation of the seeing, on a scale from 1 to 5. Larger is better."
-msgstr "Estimarea proprie a seeingului, pe o scară de la 1 la 5."
-
 msgid "Transparency"
 msgstr "Transparență"
-
-#, fuzzy
-#| msgid "Your estimation of the transparency, on a scale from 1 to 10."
-msgid ""
-"Your estimation of the transparency, on a scale from 1 to 10. Larger is "
-"better."
-msgstr "Estimarea ta a transparenţei, pe o scară de la 1 la 10."
 
 msgid "Time"
 msgstr "Timp"
@@ -1834,9 +1684,6 @@ msgstr "TIFF/FITS"
 msgid "Higher resolution"
 msgstr "Rezoluție mai mare"
 
-#, fuzzy
-msgid "I am no longer active in astrophotography"
-msgstr "Editaţi-vă echipamentul de astrofotografie"
 
 msgid "This website did not meet my expectations"
 msgstr ""
@@ -1850,9 +1697,6 @@ msgstr ""
 msgid "I prefer not to say"
 msgstr ""
 
-#, fuzzy
-msgid "Real name"
-msgstr "Nume adecvat"
 
 msgid "If present, your real name will be used throughout the website."
 msgstr ""
@@ -1866,9 +1710,6 @@ msgstr "Hobby-uri"
 msgid "Do you have any hobbies other than astrophotography?"
 msgstr "Mai aveţi alte hobby-uri înafară de astrofotografie?"
 
-#, fuzzy
-msgid "Instagram username"
-msgstr "Schimbă-ţi parola"
 
 msgid ""
 "If you provide this, AstroBin will tag you on Instagram if it's sharing an "
@@ -1895,9 +1736,6 @@ msgstr "Despre tine"
 msgid "Write something about yourself. HTML tags are allowed."
 msgstr "Scrie ceva despre tine. Marcajele HTML sunt permise."
 
-#, fuzzy
-msgid "Delete reason"
-msgstr "Stergeti conversatia"
 
 msgid "Why are you deleting your AstroBin account?"
 msgstr ""
@@ -1916,25 +1754,10 @@ msgid ""
 "from the leaderboards and hide your Image Index and Contribution Index."
 msgstr ""
 
-#, fuzzy
-#| msgid "Notifications"
-msgid "Open notifications in a new tab"
-msgstr "Notificări"
-
-#, fuzzy
-msgid "Global stream"
-msgstr "Stream de activitate"
-
 msgid "Personal stream"
 msgstr ""
 
-#, fuzzy
-msgid "All uploaded images"
-msgstr "Incarcati o noua imagine"
 
-#, fuzzy
-msgid "All images uploaded by people you follow"
-msgstr "O noua imagine de la utilizatorul urmarit."
 
 msgid "Default front page view"
 msgstr ""
@@ -1948,9 +1771,6 @@ msgstr "Timpul de achiziţie"
 msgid "Year"
 msgstr "Anul"
 
-#, fuzzy
-msgid "Collections"
-msgstr "Locații"
 
 msgid "Default gallery sorting"
 msgstr ""
@@ -2006,11 +1826,6 @@ msgid ""
 "and this kind of support would be amazing. Thank you in advance!"
 msgstr ""
 
-#, fuzzy
-#| msgid "Total integration"
-msgid "Allow retailer integration"
-msgstr "Integrare totala"
-
 msgid ""
 "AstroBin may associate with retailers of astronomy and astrophotography "
 "equipment to enhance the display of equipment items with links to sponsoring "
@@ -2021,19 +1836,11 @@ msgstr ""
 msgid "Language"
 msgstr "Limbă"
 
-#, fuzzy
-#| msgid "Other images"
-msgid "Other languages"
-msgstr "Alte imagini"
-
 msgid ""
 "Other languages that you can read and write. This can be useful to other "
 "AstroBin members who would like to communicate with you."
 msgstr ""
 
-#, fuzzy
-msgid "Signature"
-msgstr "Saturn"
 
 msgid "Signature HTML Version"
 msgstr ""
@@ -2105,23 +1912,8 @@ msgstr ""
 "Vă rugăm să explicați scopul cererii dumneavoastră, și modul în care "
 "intenționați să utilizați API."
 
-#, fuzzy
-#| msgid "Sending..."
-msgid "Pending"
-msgstr "Se trimite..."
-
 msgid "Processing"
 msgstr ""
-
-#, fuzzy
-#| msgid "Read all"
-msgid "Ready"
-msgstr "Citeste tot"
-
-#, fuzzy
-#| msgid "Error!"
-msgid "Error"
-msgstr "Eroare!"
 
 msgid "Expired"
 msgstr ""
@@ -2144,11 +1936,6 @@ msgstr ""
 msgid "Aragonese"
 msgstr ""
 
-#, fuzzy
-#| msgid "Armenia"
-msgid "Armenian"
-msgstr "Armenia"
-
 msgid "Assamese"
 msgstr ""
 
@@ -2161,11 +1948,6 @@ msgstr ""
 msgid "Aymara"
 msgstr ""
 
-#, fuzzy
-#| msgid "Azerbaijan"
-msgid "Azerbaijani"
-msgstr "Azerbaijan"
-
 msgid "Bambara"
 msgstr ""
 
@@ -2174,11 +1956,6 @@ msgstr ""
 
 msgid "Basque"
 msgstr ""
-
-#, fuzzy
-#| msgid "Belarus"
-msgid "Belarusian"
-msgstr "Belarus"
 
 msgid "Bengali"
 msgstr ""
@@ -2189,18 +1966,8 @@ msgstr ""
 msgid "Bislama"
 msgstr ""
 
-#, fuzzy
-#| msgid "New Caledonia"
-msgid "Bosnian"
-msgstr "Noua Caledonie"
-
 msgid "Breton"
 msgstr ""
-
-#, fuzzy
-#| msgid "Bulgaria"
-msgid "Bulgarian"
-msgstr "Bulgaria"
 
 msgid "Burmese"
 msgstr ""
@@ -2217,18 +1984,8 @@ msgstr ""
 msgid "Chichewa, Chewa, Nyanja"
 msgstr ""
 
-#, fuzzy
-#| msgid "China"
-msgid "Chinese"
-msgstr "China"
-
 msgid "Chuvash"
 msgstr ""
-
-#, fuzzy
-#| msgid "Finnish"
-msgid "Cornish"
-msgstr "Finlandeză"
 
 msgid "Corsican"
 msgstr ""
@@ -2236,18 +1993,8 @@ msgstr ""
 msgid "Cree"
 msgstr ""
 
-#, fuzzy
-#| msgid "Croatia"
-msgid "Croatian"
-msgstr "Croaţia"
-
 msgid "Czech"
 msgstr ""
-
-#, fuzzy
-#| msgid "Spanish"
-msgid "Danish"
-msgstr "Spaniolă"
 
 msgid "Divehi  / Dhivehi / Maldivian"
 msgstr ""
@@ -2264,23 +2011,8 @@ msgstr "Engleză"
 msgid "Esperanto"
 msgstr ""
 
-#, fuzzy
-#| msgid "Estonia"
-msgid "Estonian"
-msgstr "Estonia"
-
 msgid "Ewe"
 msgstr ""
-
-#, fuzzy
-#| msgid "Faroe Islands"
-msgid "Faroese"
-msgstr "Insulele Feroe"
-
-#, fuzzy
-#| msgid "Fiji"
-msgid "Fijian"
-msgstr "Fiji"
 
 msgid "Fulah"
 msgstr ""
@@ -2288,18 +2020,8 @@ msgstr ""
 msgid "Galician"
 msgstr ""
 
-#, fuzzy
-#| msgid "Georgia"
-msgid "Georgian"
-msgstr "Georgia"
-
 msgid "Guarani"
 msgstr ""
-
-#, fuzzy
-#| msgid "Duration"
-msgid "Gujarati"
-msgstr "Durata"
 
 msgid "Haitian / Haitian Creole"
 msgstr ""
@@ -2319,21 +2041,6 @@ msgstr ""
 msgid "Hiri Motu"
 msgstr ""
 
-#, fuzzy
-#| msgid "Hungary"
-msgid "Hungarian"
-msgstr "Ungaria"
-
-#, fuzzy
-#| msgid "Integration"
-msgid "Interlingua"
-msgstr "Integrare"
-
-#, fuzzy
-#| msgid "Indonesia"
-msgid "Indonesian"
-msgstr "Indonezia"
-
 msgid "Interlingue / Occidental"
 msgstr ""
 
@@ -2349,41 +2056,18 @@ msgstr ""
 msgid "Ido"
 msgstr ""
 
-#, fuzzy
-#| msgid "Iceland"
-msgid "Icelandic"
-msgstr "Islanda"
-
 msgid "Inuktitut"
 msgstr ""
 
-#, fuzzy
-msgid "Javanese"
-msgstr "Japonia"
 
 msgid "Kalaallisut / Greenlandic"
 msgstr ""
-
-#, fuzzy
-#| msgid "Canada"
-msgid "Kannada"
-msgstr "Canada"
 
 msgid "Kanuri"
 msgstr ""
 
 msgid "Kashmiri"
 msgstr ""
-
-#, fuzzy
-#| msgid "Kazakhstan"
-msgid "Kazakh"
-msgstr "Kazakhstan"
-
-#, fuzzy
-#| msgid "Center"
-msgid "Central Khmer"
-msgstr "Centru"
 
 msgid "Kikuyu / Gikuyu"
 msgstr ""
@@ -2397,11 +2081,6 @@ msgstr ""
 msgid "Komi"
 msgstr ""
 
-#, fuzzy
-#| msgid "Congo"
-msgid "Kongo"
-msgstr "Congo"
-
 msgid "Korean"
 msgstr ""
 
@@ -2411,18 +2090,8 @@ msgstr ""
 msgid "Kuanyama / Kwanyama"
 msgstr ""
 
-#, fuzzy
-#| msgid "Rating"
-msgid "Latin"
-msgstr "Votari"
-
 msgid "Luxembourgish, Letzeburgesch"
 msgstr ""
-
-#, fuzzy
-#| msgid "Rwanda"
-msgid "Ganda"
-msgstr "Ruanda"
 
 msgid "Limburgan / Limburger / Limburgish"
 msgstr ""
@@ -2430,51 +2099,11 @@ msgstr ""
 msgid "Lingala"
 msgstr ""
 
-#, fuzzy
-#| msgid "ago"
-msgid "Lao"
-msgstr "in urma cu"
-
-#, fuzzy
-#| msgid "Lithuania"
-msgid "Lithuanian"
-msgstr "Lituania"
-
 msgid "Luba / Katanga"
 msgstr ""
 
-#, fuzzy
-#| msgid "Latvia"
-msgid "Latvian"
-msgstr "Latvia"
-
 msgid "Manx"
 msgstr ""
-
-#, fuzzy
-#| msgid "New Caledonia"
-msgid "Macedonian"
-msgstr "Noua Caledonie"
-
-#, fuzzy
-#| msgid "Madagascar"
-msgid "Malagasy"
-msgstr "Madagascar"
-
-#, fuzzy
-#| msgid "Malaysia"
-msgid "Malay"
-msgstr "Malaezia"
-
-#, fuzzy
-#| msgid "Malaysia"
-msgid "Malayalam"
-msgstr "Malaezia"
-
-#, fuzzy
-#| msgid "Malta"
-msgid "Maltese"
-msgstr "Malta"
 
 msgid "Maori"
 msgstr ""
@@ -2482,42 +2111,17 @@ msgstr ""
 msgid "Marathi"
 msgstr ""
 
-#, fuzzy
-#| msgid "Marshall Islands"
-msgid "Marshallese"
-msgstr "Insulele Marshall"
-
-#, fuzzy
-#| msgid "Mongolia"
-msgid "Mongolian"
-msgstr "Mongolia"
-
 msgid "Navajo / Navaho"
 msgstr ""
 
 msgid "North Ndebele"
 msgstr ""
 
-#, fuzzy
-#| msgid "Nepal"
-msgid "Nepali"
-msgstr "Nepal"
-
-#, fuzzy
-#| msgid "Tonga"
-msgid "Ndonga"
-msgstr "Tonga"
-
 msgid "Norwegian Bokmål"
 msgstr ""
 
 msgid "Norwegian Nynorsk"
 msgstr ""
-
-#, fuzzy
-#| msgid "Norway"
-msgid "Norwegian"
-msgstr "Norvegia"
 
 msgid "Sichuan Yi / Nuosu"
 msgstr ""
@@ -2560,16 +2164,6 @@ msgstr ""
 msgid "Quechua"
 msgstr ""
 
-#, fuzzy
-#| msgid "Romania"
-msgid "Romansh"
-msgstr "România"
-
-#, fuzzy
-#| msgid "Burundi"
-msgid "Rundi"
-msgstr "Burundi"
-
 msgid "Romanian / Moldavian / Moldovan"
 msgstr ""
 
@@ -2582,23 +2176,8 @@ msgstr ""
 msgid "Sindhi"
 msgstr ""
 
-#, fuzzy
-#| msgid "North"
-msgid "Northern Sami"
-msgstr "Nord"
-
-#, fuzzy
-#| msgid "Samoa"
-msgid "Samoan"
-msgstr "Samoa"
-
 msgid "Sango"
 msgstr ""
-
-#, fuzzy
-#| msgid "Serbia"
-msgid "Serbian"
-msgstr "Serbia"
 
 msgid "Gaelic / Scottish Gaelic"
 msgstr ""
@@ -2608,26 +2187,6 @@ msgstr ""
 
 msgid "Sinhala / Sinhalese"
 msgstr ""
-
-#, fuzzy
-#| msgid "Slovakia"
-msgid "Slovak"
-msgstr "Slovacia"
-
-#, fuzzy
-#| msgid "Slovenia"
-msgid "Slovenian"
-msgstr "Slovenia"
-
-#, fuzzy
-#| msgid "Somalia"
-msgid "Somali"
-msgstr "Somalia"
-
-#, fuzzy
-#| msgid "South"
-msgid "Southern Sotho"
-msgstr "Sud"
 
 msgid "Spanish / Castilian"
 msgstr ""
@@ -2641,26 +2200,11 @@ msgstr ""
 msgid "Swati"
 msgstr ""
 
-#, fuzzy
-#| msgid "Sweden"
-msgid "Swedish"
-msgstr "Suedia"
-
 msgid "Tamil"
 msgstr ""
 
 msgid "Telugu"
 msgstr ""
-
-#, fuzzy
-#| msgid "Tajikistan"
-msgid "Tajik"
-msgstr "Tadjikistan"
-
-#, fuzzy
-#| msgid "Thailand"
-msgid "Thai"
-msgstr "Thailanda"
 
 msgid "Tigrinya"
 msgstr ""
@@ -2668,28 +2212,8 @@ msgstr ""
 msgid "Tibetan"
 msgstr ""
 
-#, fuzzy
-#| msgid "Turkey"
-msgid "Turkmen"
-msgstr "Turcia"
-
 msgid "Tagalog"
 msgstr ""
-
-#, fuzzy
-#| msgid "Botswana"
-msgid "Tswana"
-msgstr "Botswana"
-
-#, fuzzy
-#| msgid "Tonga"
-msgid "Tsonga"
-msgstr "Tonga"
-
-#, fuzzy
-#| msgid "Qatar"
-msgid "Tatar"
-msgstr "Quatar"
 
 msgid "Twi"
 msgstr ""
@@ -2700,26 +2224,11 @@ msgstr ""
 msgid "Uighur / Uyghur"
 msgstr ""
 
-#, fuzzy
-#| msgid "Ukraine"
-msgid "Ukrainian"
-msgstr "Ucraina"
-
 msgid "Urdu"
 msgstr ""
 
-#, fuzzy
-#| msgid "Uzbekistan"
-msgid "Uzbek"
-msgstr "Uzbekistan"
-
 msgid "Venda"
 msgstr ""
-
-#, fuzzy
-#| msgid "Viet Nam"
-msgid "Vietnamese"
-msgstr "Vietnam"
 
 msgid "Volapük"
 msgstr ""
@@ -2733,21 +2242,11 @@ msgstr ""
 msgid "Wolof"
 msgstr ""
 
-#, fuzzy
-#| msgid "Western Sahara"
-msgid "Western Frisian"
-msgstr "Sahara de Vest"
-
 msgid "Xhosa"
 msgstr ""
 
 msgid "Yiddish"
 msgstr ""
-
-#, fuzzy
-#| msgid "Aruba"
-msgid "Yoruba"
-msgstr "Aruba"
 
 msgid "Zhuang / Chuang"
 msgstr ""
@@ -2836,13 +2335,7 @@ msgid ""
 "the inconvenience! "
 msgstr ""
 
-#, fuzzy
-msgid "Go back to the home page."
-msgstr "Inapoi in sus"
 
-#, fuzzy
-msgid "AstroBin in temporarily unavailable"
-msgstr "Astrobin este temporar indisponibil"
 
 msgid "AstroBin is temporarily unavailable"
 msgstr "Astrobin este temporar indisponibil"
@@ -2888,89 +2381,49 @@ msgid "AstroBin is in READ ONLY mode "
 msgstr ""
 
 #, python-format
-msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> uploaded "
-"a new image.\n"
-"                        "
+msgid "<a href=\"%(user_page)s\">%(user)s</a> uploaded a new image."
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(user_page)s\">%(user)s</a> uploaded a new image revision."
 msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> uploaded "
-"a new image revision.\n"
-"                        "
+"<a href=\"%(user_page)s\">%(user)s</a> and %(count)s others like this image."
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(user_page)s\">%(user)s</a> likes this image."
 msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                                <a href=\"%(user_page)s\">%(user)s</a> and "
-"%(count)s others like this image.\n"
-"                            "
+"<a href=\"%(user_page)s\">%(user)s</a> and %(count)s others bookmarked this "
+"image."
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(user_page)s\">%(user)s</a> bookmarked this image."
 msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                                <a href=\"%(user_page)s\">%(user)s</a> likes "
-"this image.\n"
-"                            "
+"<a href=\"%(user_page)s\">%(user)s</a> and %(count)s others commented this "
+"image."
 msgstr ""
 
 #, python-format
-msgid ""
-"\n"
-"                                <a href=\"%(user_page)s\">%(user)s</a> and "
-"%(count)s others bookmarked this image.\n"
-"                            "
+msgid "<a href=\"%(user_page)s\">%(user)s</a> commented this image."
 msgstr ""
 
 #, python-format
-msgid ""
-"\n"
-"                                <a href=\"%(user_page)s\">%(user)s</a> "
-"bookmarked this image.\n"
-"                            "
+msgid "<a href=\"%(user_page)s\">%(user)s</a> created a new public group."
 msgstr ""
 
 #, python-format
-msgid ""
-"\n"
-"                                <a href=\"%(user_page)s\">%(user)s</a> and "
-"%(count)s others commented this image.\n"
-"                            "
+msgid "<a href=\"%(user_page)s\">%(user)s</a> joined a group."
 msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                                <a href=\"%(user_page)s\">%(user)s</a> "
-"commented this image.\n"
-"                            "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> created a "
-"new public group.\n"
-"                        "
-msgstr ""
-
-#, python-format
-msgid ""
-"\n"
-"                            <a href=\"%(user_page)s\">%(user)s</a> joined a "
-"group.\n"
-"                        "
-msgstr ""
-
-#, fuzzy
-#| msgid "Remove data"
-msgid "Remove ads"
-msgstr "Stergeti datele"
 
 msgid "Request an API key"
 msgstr "Necesita o cheie API"
@@ -3011,9 +2464,6 @@ msgstr ""
 "O sa primesti un raspuns in 24 de ore. Multumim pentru interesul tau in "
 "utilizarea  API-urilor AstroBin."
 
-#, fuzzy
-msgid "Astrophotographers list"
-msgstr "Editaţi-vă echipamentul de astrofotografie"
 
 #, python-format
 msgid ""
@@ -3028,20 +2478,12 @@ msgstr "Cauta"
 msgid "User"
 msgstr "Utilizator"
 
-#, fuzzy
-msgid "Followers"
-msgstr "Urmarite"
 
 msgid "Likes"
 msgstr ""
 
 msgid "Total integration"
 msgstr "Integrare totala"
-
-#, fuzzy
-#| msgid "Image mode"
-msgid "Image Index"
-msgstr "Mod imagine"
 
 msgid "There isn't enough data yet, please come back later!"
 msgstr ""
@@ -3099,9 +2541,6 @@ msgstr "Linkuri site"
 msgid "Home"
 msgstr "Acasă"
 
-#, fuzzy
-msgid "Forum"
-msgstr "Forumuri"
 
 msgid "FAQ"
 msgstr ""
@@ -3133,16 +2572,10 @@ msgstr ""
 msgid "Copyright"
 msgstr "Drept de autor"
 
-#, fuzzy
-msgid "The images on this websites are copyright of their respective owners."
-msgstr "Imaginea a fost adusa in atentia utilizatorilor selectati ."
 
 msgid "Back to top"
 msgstr "Inapoi in sus"
 
-#, fuzzy
-msgid "Your AstroBin subscription is expired."
-msgstr "Descriere"
 
 msgid ""
 "That's okay: we don't EVER delete your images if your subscription expires."
@@ -3153,13 +2586,7 @@ msgid ""
 "it goes a long way to support the AstroBin project!"
 msgstr ""
 
-#, fuzzy
-msgid "Subscription plans"
-msgstr "Descriere"
 
-#, fuzzy
-msgid "Your subscriptions"
-msgstr "Descriere"
 
 msgid "Your AstroBin subscription about to expire."
 msgstr ""
@@ -3177,17 +2604,9 @@ msgid ""
 "you email provider or change your e-mail address on AstroBin."
 msgstr ""
 
-#, fuzzy
-msgid "Change your e-mail"
-msgstr "Schimbă-ţi parola"
 
 msgid "Ignore and retry"
 msgstr ""
-
-#, fuzzy
-#| msgid "Contact"
-msgid "Contact us"
-msgstr "Contact"
 
 msgid ""
 "AstroBin is unable to deliver your emails, and it will try again a week "
@@ -3209,11 +2628,6 @@ msgid ""
 "please disable it using your email client."
 msgstr ""
 
-#, fuzzy
-#| msgid "New Zealand"
-msgid "Resume emails"
-msgstr "Noua Zeelanda"
-
 msgid "Cancel"
 msgstr "Anulează"
 
@@ -3232,30 +2646,11 @@ msgstr "Va rog selectati limbajul dumneavoastra dintre optiunile de mai sus"
 msgid "Notifications"
 msgstr "Notificări"
 
-#, fuzzy
-msgid "View all"
-msgstr "Vizualizati pagina"
 
-#, fuzzy
-msgid "Settings"
-msgstr "Setările mele"
 
-#, fuzzy
-msgid "Mark all as read"
-msgstr "Marcheaza ca bun"
-
-#, fuzzy
-#| msgid "AstroBin index"
-msgid "AstroBin is in READ ONLY mode"
-msgstr "Index AstroBin"
 
 msgid "Sorry :-("
 msgstr ""
-
-#, fuzzy
-#| msgid "Accessories"
-msgid "Access denied"
-msgstr "Accesorii"
 
 msgid "This feature is only offered at higher membership levels."
 msgstr ""
@@ -3271,49 +2666,26 @@ msgstr ""
 msgid "Tell me more!"
 msgstr ""
 
-#, fuzzy
-#| msgid "Are you sure?"
-msgid "Are you really sure?"
-msgstr "Sunteţi sigur?"
-
 msgid ""
-"We know, we're all used to the fact that ads on the Internet are\n"
-"                    annoying."
+"We know, we're all used to the fact that ads on the Internet are annoying."
 msgstr ""
 
 msgid ""
-"However, please let us offer you two good reasons to allow ads on\n"
-"                    AstroBin:"
-msgstr ""
-
-msgid ""
-"AstroBin is a one-person business. As of the time of writing, in early "
-"2020,\n"
-"                        I'm trying to make AstroBin a full time job, but it "
-"hasn't happened yet. If this dream were to\n"
-"                        become reality, I could invest a lot more time in "
-"the development of AstroBin, and everybody\n"
-"                        would benefit from it!"
+"However, please let us offer you a good reason to allow ads on AstroBin:"
 msgstr ""
 
 msgid ""
 "There are only astronomy ads on AstroBin, that are published after my review "
-"and\n"
-"                        approval. Nothing fishy, nothing off-topic, and "
-"nothing that will use any of your private\n"
-"                        information."
+"and approval. Nothing fishy, nothing off-topic, and nothing that will use "
+"any of your private information."
 msgstr ""
 
 #, python-format
 msgid ""
 "If you still feel that you would rather not see these ads, you can change "
-"this on\n"
-"                    <a href=\"%(profile_url)s\">your settings page</a>."
+"this on <a href=\"%(profile_url)s\">your settings page</a>."
 msgstr ""
 
-#, fuzzy
-msgid "Thank you!"
-msgstr "Datorită"
 
 msgid ""
 "If this user has been harassing you, and you shadow-ban them, all their "
@@ -3337,13 +2709,7 @@ msgstr ""
 msgid "Quick search"
 msgstr "Căutare rapidă"
 
-#, fuzzy
-msgid "Image queue"
-msgstr "Dimensiunea imaginii"
 
-#, fuzzy
-msgid "Spam list"
-msgstr "Cateva imagini"
 
 msgid "Image of the day"
 msgstr "Imaginea zilei"
@@ -3372,17 +2738,9 @@ msgstr "Marele Perete"
 msgid "Advanced search"
 msgstr "Căutare avansată"
 
-#, fuzzy
-#| msgid "Basic information"
-msgid "Top pick nominations"
-msgstr "Informații de bază"
-
 msgid "Top picks"
 msgstr ""
 
-#, fuzzy
-msgid "Remote astrophotography"
-msgstr "Editaţi-vă echipamentul de astrofotografie"
 
 msgid "Contributors list"
 msgstr ""
@@ -3421,9 +2779,6 @@ msgid ""
 "community. %(_0)sLearn more.%(_1)s"
 msgstr ""
 
-#, fuzzy
-msgid "Contribution Index"
-msgstr "Index AstroBin"
 
 #, python-format
 msgid ""
@@ -3434,11 +2789,6 @@ msgstr ""
 
 msgid "My places"
 msgstr ""
-
-#, fuzzy
-#| msgid "Gallery"
-msgid "Public Gallery"
-msgstr "Galerie"
 
 msgid "Staging Area"
 msgstr ""
@@ -3461,9 +2811,6 @@ msgstr "Setările mele"
 msgid "Logout"
 msgstr "Delogare"
 
-#, fuzzy
-msgid "E-mail change confirmation"
-msgstr "Arata toate notificarile."
 
 msgid "Confirm deletion of e-mail change request"
 msgstr ""
@@ -3471,11 +2818,6 @@ msgstr ""
 msgid ""
 "Please confirm that you want to delete the following e-mail change request."
 msgstr ""
-
-#, fuzzy
-#| msgid "New Zealand"
-msgid "New e-mail"
-msgstr "Noua Zeelanda"
 
 msgid "Confirm"
 msgstr ""
@@ -3514,16 +2856,10 @@ msgstr ""
 msgid "Comments"
 msgstr "Comentarii"
 
-#, fuzzy
-msgid "Forum posts"
-msgstr "Forumuri"
 
 msgid "Written"
 msgstr ""
 
-#, fuzzy
-msgid "Received"
-msgstr "Recent favorite"
 
 msgid "Cookie consent"
 msgstr ""
@@ -3684,26 +3020,11 @@ msgstr "Este nevoie de informatii suplimentare."
 msgid ""
 "<strong>%(username)s</strong> has been notified. Hopefully they will update "
 "the image soon. Remember that you can also <a href=\"%(message_url)s\">send "
-"them a message</a>. "
+"them a message</a>."
 msgstr ""
 
 msgid "Return to image"
 msgstr "Intoarcere la imagine"
-
-#, fuzzy
-#| msgid "Hemisphere:"
-msgid "Hemisphere"
-msgstr "Emisfera:"
-
-#, fuzzy
-#| msgid "North"
-msgid "Northern"
-msgstr "Nord"
-
-#, fuzzy
-#| msgid "South"
-msgid "Southern"
-msgstr "Sud"
 
 msgid "Contains"
 msgstr "Contine"
@@ -3711,11 +3032,6 @@ msgstr "Contine"
 #, python-format
 msgid "And %(count)s more."
 msgstr ""
-
-#, fuzzy
-#| msgid "Acquired after"
-msgid "Acquired at"
-msgstr "Achiziționat după"
 
 msgid "Remove"
 msgstr "Inlaturati"
@@ -3754,11 +3070,6 @@ msgstr "Histograma"
 msgid "Right ascension"
 msgstr ""
 
-#, fuzzy
-#| msgid "Description"
-msgid "Declination"
-msgstr "Descriere"
-
 msgid "Technical card"
 msgstr "Carte tehnică"
 
@@ -3771,11 +3082,6 @@ msgstr ""
 
 msgid "Sponsored items"
 msgstr ""
-
-#, fuzzy
-#| msgid "Total integration"
-msgid "Disable retailer integration"
-msgstr "Integrare totala"
 
 #, python-format
 msgid "Shop %(name)s at %(retailer)s"
@@ -3808,30 +3114,10 @@ msgstr "Orientare"
 msgid "(flipped)"
 msgstr ""
 
-#, fuzzy
-msgid "Field radius"
-msgstr "Latimea campului"
-
-#, fuzzy
-#| msgid "Commercial information"
-msgid "WCS transformation"
-msgstr "Informații comerciale"
-
-#, fuzzy
-msgid "Find images in the same area"
-msgstr "Inca nu sunt comentarii aici."
 
 #, python-format
-msgid ""
-"\n"
-"                                                Around <strong>1</strong> "
-"degree\n"
-"                                            "
-msgid_plural ""
-"\n"
-"                                                Around <strong>%(n)s</"
-"strong> degrees\n"
-"                                            "
+msgid "Around <strong>1</strong> degree"
+msgid_plural "Around <strong>%(n)s</strong> degrees"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -3842,18 +3128,8 @@ msgstr "Rezoluție"
 msgid "Uncompressed source file"
 msgstr ""
 
-#, fuzzy
-#| msgid "Uploaded"
-msgid "Download"
-msgstr "Incarcate"
-
 msgid "Remote source"
 msgstr ""
-
-#, fuzzy
-#| msgid "Delete original image"
-msgid "Download original file"
-msgstr "Sterge imaginea originala"
 
 msgid "Author"
 msgstr ""
@@ -3882,9 +3158,6 @@ msgstr "Mutati in zona de asteptare"
 msgid "Send to group"
 msgstr ""
 
-#, fuzzy
-msgid "Delete image and all revisions"
-msgstr "Stergeti imaginea si toate reviziile ei ?"
 
 msgid "Delete"
 msgstr "Sterge"
@@ -3892,18 +3165,6 @@ msgstr "Sterge"
 msgid "Delete original image"
 msgstr "Sterge imaginea originala"
 
-#, fuzzy
-msgid "Delete this revision only"
-msgstr "Sterge aceasta revizie"
-
-#, fuzzy
-#| msgid "Delete conversation"
-msgid "Delete all other versions"
-msgstr "Stergeti conversatia"
-
-#, fuzzy
-msgid "Delete all revisions"
-msgstr "Stergeti imaginea si toate reviziile ei ?"
 
 msgid "Flag malfunctioning thumbnails"
 msgstr ""
@@ -3913,15 +3174,6 @@ msgstr ""
 
 msgid "Ban user"
 msgstr ""
-
-#, fuzzy
-#| msgid "Thumbnail"
-msgid "Thumbnails"
-msgstr "Imagine iconita"
-
-#, fuzzy
-msgid "Watermark"
-msgstr "Danemarca"
 
 msgid "Basic information"
 msgstr "Informații de bază"
@@ -3935,35 +3187,17 @@ msgstr ""
 msgid "Restart plate-solving"
 msgstr ""
 
-#, fuzzy
-msgid "Advanced plate-solving settings"
-msgstr "Editati imaginea: detalii de achizitie"
 
 msgid "Restart advanced plate-solving"
 msgstr ""
 
-#, fuzzy
-msgid "Context"
-msgstr "Contact"
 
 msgid "Navigation context"
 msgstr ""
 
-#, fuzzy
-msgid "User gallery"
-msgstr "galeria lui %(user)s"
 
-#, fuzzy
-msgid "User collection"
-msgstr "Editează-ţi locaţia"
 
-#, fuzzy
-msgid "Public group"
-msgstr "Zona Publică"
 
-#, fuzzy
-msgid "All image uploads"
-msgstr "Imagini încărcate"
 
 msgid "Share"
 msgstr "Distribuie"
@@ -3977,11 +3211,6 @@ msgstr "Trimite mesaj privat"
 msgid "Shadow-ban"
 msgstr ""
 
-#, fuzzy
-#| msgid "Remove data"
-msgid "Remove shadow-ban"
-msgstr "Stergeti datele"
-
 msgid "View"
 msgstr "Vezi"
 
@@ -3994,18 +3223,7 @@ msgstr "Adnotat"
 msgid "Normal"
 msgstr "Normal"
 
-#, fuzzy
-msgid "Large size"
-msgstr "Dimensiunea imaginii"
 
-#, fuzzy
-msgid "Full size"
-msgstr "Dimensiunea pixelului"
-
-#, fuzzy
-#| msgid "Please note!"
-msgid "Please note"
-msgstr "Vă rugăm, reţineţi !"
 
 #, python-format
 msgid ""
@@ -4031,47 +3249,31 @@ msgid "Associate XISF/FITS file"
 msgstr ""
 
 msgid ""
-"\n"
-"                        To improve the accuracy of your plate-solution even "
-"further, please upload one of the XISF or\n"
-"                        FITS files from your data set. Such files normally "
-"have date and time headers that will allow\n"
-"                        AstroBin to calculate solar system body ephemerides "
-"and find planets and asteroids in your\n"
-"                        image (provided you also add location information to "
-"your image).\n"
-"                    "
+"To improve the accuracy of your plate-solution even further, please upload "
+"one of the XISF or FITS files from your data set. Such files normally have "
+"date and time headers that will allow AstroBin to calculate solar system "
+"body ephemerides and find planets and asteroids in your image (provided you "
+"also add location information to your image)."
 msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                        For maximum accuracy, it's recommended that you use "
-"PixInsight's native and open format XISF.\n"
-"                        Learn more about XISF here: <a href=\"%(xisf_url)s\" "
-"target=\"_blank\">%(xisf_url)s</a>\n"
-"                    "
+"For maximum accuracy, it's recommended that you use PixInsight's native and "
+"open format XISF. Learn more about XISF here: <a href=\"%(xisf_url)s\" "
+"target=\"_blank\">%(xisf_url)s</a>"
 msgstr ""
 
 msgid ""
-"\n"
-"                        <strong>Please note:</strong> it's very important "
-"that the XISF or FITS file you upload is\n"
-"                        aligned to your processed image, otherwise the "
-"object annotations will not match.\n"
-"                        To improve your chances at a successful accurate "
-"plate-solution, calibrate your file the usual\n"
-"                        way (dark/bias/flats) but you don't need to stretch "
-"it.\n"
-"                    "
+"<strong>Please note:</strong> it's very important that the XISF or FITS file "
+"you upload is aligned to your processed image, otherwise the object "
+"annotations will not match. To improve your chances at a successful accurate "
+"plate-solution, calibrate your file the usual way (dark/bias/flats) but you "
+"don't need to stretch it."
 msgstr ""
 
 msgid "The following people bookmarked this image"
 msgstr ""
 
-#, fuzzy
-msgid "Loading"
-msgstr "Incarc..."
 
 msgid "Sorry"
 msgstr ""
@@ -4097,11 +3299,6 @@ msgid ""
 "To learn more about the Image Index, please visit %(_0)sthe FAQ page%(_1)s. "
 "Thanks!"
 msgstr ""
-
-#, fuzzy
-#| msgid "You can't nominate the same image more than once."
-msgid "You cannot remove a like that you gave more than one hour ago."
-msgstr "Nu puteti nominaliza aceeasi imagine de mai multe ori."
 
 msgid "Delete image and all its revisions?"
 msgstr "Stergeti imaginea si toate reviziile ei ?"
@@ -4134,21 +3331,11 @@ msgstr ""
 "Aceasta imagine va fi stearsa definitiv si nu va putea fi recuperata. "
 "Reviziile sale nu vor fi sterse. Sunteti sigur ?"
 
-#, fuzzy
-#| msgid "Delete this revision?"
-msgid "Delete all other versions?"
-msgstr "Stergeti aceasta revizie ?"
-
 msgid ""
 "You will delete all other revisions (if any), and the originally uploaded "
 "image, leaving the current revision as the final and only version of this "
 "image."
 msgstr ""
-
-#, fuzzy
-#| msgid "Delete this revision?"
-msgid "Delete all revisions?"
-msgstr "Stergeti aceasta revizie ?"
 
 msgid ""
 "You will delete all revisions, leaving the originally uploaded image as the "
@@ -4218,9 +3405,6 @@ msgstr "Dimensiunea imaginii"
 msgid "Full"
 msgstr "Plin"
 
-#, fuzzy
-msgid "Real"
-msgstr "Nume adecvat"
 
 msgid "Image mode"
 msgstr "Mod imagine"
@@ -4249,34 +3433,17 @@ msgid ""
 "\">FAQ page</a>."
 msgstr ""
 
-#, fuzzy
-#| msgid "Gear images"
-msgid "Clear"
-msgstr "Imagini cu echipamentul"
-
 msgid ""
 "This image is pending moderation and is currently not visible on the front "
 "page or search results."
 msgstr ""
 
-#, fuzzy
-msgid "Revisions"
-msgstr "Înregistrare încheiată"
 
 msgid "Final"
 msgstr "Final"
 
 msgid "Original"
 msgstr "Original"
-
-#, fuzzy
-#| msgid "uploaded"
-msgid "Uploaded"
-msgstr "incarcata"
-
-#, fuzzy
-msgid "Revision"
-msgstr "Înregistrare încheiată"
 
 msgid "Sky plot"
 msgstr ""
@@ -4295,35 +3462,21 @@ msgid "Oh no!"
 msgstr ""
 
 msgid ""
-"\n"
-"            We are very, very sorry, but it appears that your image suffered "
-"a catastrophic data\n"
-"            corruption, and it cannot be retrieved. Hopefully you still have "
-"your file (the information on\n"
-"            this form should provide you with enough context).\n"
-"        "
+"We are very, very sorry, but it appears that your image suffered a "
+"catastrophic data corruption, and it cannot be retrieved. Hopefully you "
+"still have your file (the information on this form should provide you with "
+"enough context)."
 msgstr ""
 
 msgid ""
-"\n"
-"            Please use the file input below to upload it again, and then "
-"click on the Save button down\n"
-"            below. All the data you had previously associated to your image "
-"is still here.\n"
-"        "
+"Please use the file input below to upload it again, and then click on the "
+"Save button down below. All the data you had previously associated to your "
+"image is still here."
 msgstr ""
 
 msgid "Here's some detail about the image to give you some context."
 msgstr ""
 
-#, fuzzy
-msgid "Image uploaded"
-msgstr "Imagini încărcate"
-
-#, fuzzy
-#| msgid "Previously uploaded"
-msgid "Revision uploaded"
-msgstr "Incarcarea anterioara"
 
 msgid "Please wait..."
 msgstr "Vă rugăm, aşteptaţi..."
@@ -4468,29 +3621,11 @@ msgstr "Informatii de baza"
 msgid "Gear used"
 msgstr "Echipament utilizat"
 
-#, fuzzy
-msgid "Edit your image: advanced plate-solving settings"
-msgstr "Editati imaginea: detalii de achizitie"
 
 msgid "Save and plate-solve again"
 msgstr ""
 
-#, fuzzy
-msgid "Edit your image: plate-solving settings"
-msgstr "Editati imaginea: detalii de achizitie"
 
-#, fuzzy
-msgid "Edit revision"
-msgstr "Da, sterge revizia."
-
-#, fuzzy
-#| msgid "Change the license for this image"
-msgid "Change the thumbnails for this image"
-msgstr "Schimba licenta pentru aceasta imagine"
-
-#, fuzzy
-msgid "Next step: edit watermark"
-msgstr "Pasul urmator: eticheta ( watermark)"
 
 msgid "Apply a watermark to image"
 msgstr "Aplica o eticheta (semnatura) la imagine"
@@ -4533,26 +3668,6 @@ msgstr ""
 msgid "Ecliptic longitude"
 msgstr ""
 
-#, fuzzy
-#| msgid "Select latitude"
-msgid "Ecliptic latitude"
-msgstr "Selectati latitudinea :"
-
-#, fuzzy
-#| msgid "Select latitude"
-msgid "Galactic longitude"
-msgstr "Selectati latitudinea :"
-
-#, fuzzy
-#| msgid "Select latitude"
-msgid "Galactic latitude"
-msgstr "Selectati latitudinea :"
-
-#, fuzzy
-#| msgid "Warning!"
-msgid "Warning"
-msgstr "Avertizare!"
-
 #, python-format
 msgid ""
 "You are about to open a large file of about %(size)s. Depending on your "
@@ -4584,11 +3699,6 @@ msgid ""
 "strong> sells this brand!"
 msgstr ""
 
-#, fuzzy
-#| msgid "Sign up now!"
-msgid "Shop now"
-msgstr "Înregistrează-te acum!"
-
 msgid "Integration"
 msgstr "Integrare"
 
@@ -4610,9 +3720,6 @@ msgstr "Niciun rezultat. Scuze."
 msgid "Please input some search terms!"
 msgstr "Va rog, introduceti termeni de cautare"
 
-#, fuzzy
-msgid "Home of Astrophotography"
-msgstr "Editaţi-vă echipamentul de astrofotografie"
 
 msgid "Latest from the forums"
 msgstr ""
@@ -4620,9 +3727,6 @@ msgstr ""
 msgid "Recent images"
 msgstr "Imagini recente"
 
-#, fuzzy
-msgid "Recent from your followed users"
-msgstr "O noua imagine de la utilizatorul urmarit."
 
 msgid "There is no activity yet."
 msgstr "Inca nu exista activitate."
@@ -4663,9 +3767,6 @@ msgstr "Mesaje"
 msgid "Participants"
 msgstr ""
 
-#, fuzzy
-msgid "Last message"
-msgstr "Mesajele mele"
 
 msgid "No messages"
 msgstr "Nu sunt mesaje"
@@ -4694,11 +3795,6 @@ msgid ""
 "Finish button below to approve all the others."
 msgstr ""
 
-#, fuzzy
-#| msgid "Finnish"
-msgid "Finish"
-msgstr "Finlandeză"
-
 msgid "The moderation queue is empty, hooray! Come back later."
 msgstr ""
 
@@ -4707,31 +3803,10 @@ msgid ""
 "the Approve button below to approve them."
 msgstr ""
 
-#, fuzzy
-msgid "Approve selected"
-msgstr "# selectat"
 
 msgid "Approve selected and ban the rest"
 msgstr ""
 
-#, fuzzy
-msgid "There are no images in the spam list."
-msgstr "Inca nu sunt comentarii aici."
-
-#, fuzzy
-#| msgid "Your API Key request has been approved"
-msgid "Your request for an API Key has been approved!"
-msgstr "Cheile API pe care le-ai solicitat au fost aprobate."
-
-#, fuzzy
-#| msgid "Your API Keys"
-msgid "Your API key"
-msgstr "Cheile tale API"
-
-#, fuzzy
-#| msgid "Your API Keys"
-msgid "Your API secret"
-msgstr "Cheile tale API"
 
 #, python-format
 msgid "Please read the API documentation %(_0)shere%(_1)s."
@@ -4748,18 +3823,10 @@ msgstr ""
 "Nu aveţi Chei API. Vă rugăm să citiţi <a href=\"%(api_docs_url)s"
 "\">Documentaţia API</a>."
 
-#, fuzzy
-msgid "Thank you for using AstroBin's APIs!"
-msgstr "Urmatoarele companii sprijina AstroBin."
 
 #, python-format
 msgid "You can review your API keys at %(api_keys_url)s."
 msgstr ""
-
-#, fuzzy
-#| msgid "Your commercial products"
-msgid "Your comment was approved!"
-msgstr "Produsele dumneavoastra comerciale."
 
 msgid ""
 "As a new user on AstroBin, your first 3 comments will go through a "
@@ -4769,9 +3836,6 @@ msgstr ""
 msgid "The following comment of yours was just approved by a moderator."
 msgstr ""
 
-#, fuzzy
-msgid "View comment"
-msgstr "Comentarii"
 
 msgid "Congratulations for your first image on AstroBin!"
 msgstr ""
@@ -4836,29 +3900,6 @@ msgstr ""
 
 msgid "Or send an email to support@astrobin.com."
 msgstr ""
-
-#, fuzzy
-#| msgid "You have a new follower"
-msgid "You have a new notification on AstroBin"
-msgstr "Ai un nou urmăritor"
-
-#, fuzzy
-#| msgid "Here are your notifications"
-msgid "See all your notifications"
-msgstr "Aici sunt notificarile dumneavoastra."
-
-#, fuzzy
-msgid "Edit your notification preferences"
-msgstr "Editaţi preferinţele pentru site"
-
-#, fuzzy
-#| msgid "Gear images"
-msgid "Clear skies"
-msgstr "Imagini cu echipamentul"
-
-#, fuzzy
-msgid "Follow AstroBin"
-msgstr "Urmăreşte"
 
 #, fuzzy, python-format
 msgid ""
@@ -4970,9 +4011,6 @@ msgid ""
 "unnoticed sitting in the queue of an inactive staff member."
 msgstr ""
 
-#, fuzzy
-msgid "Thank you for understanding!"
-msgstr "Urmatoarele companii sprijina AstroBin."
 
 #, python-format
 msgid ""
@@ -5089,11 +4127,6 @@ msgid ""
 "If you would like to activate it now, please click on the following link:"
 msgstr ""
 
-#, fuzzy
-#| msgid "Activate account at"
-msgid "Activate my account"
-msgstr "Cont activat la"
-
 msgid ""
 "If you don't, we will delete this account in a week. But don't worry, you're "
 "always welcome to join again!"
@@ -5133,11 +4166,9 @@ msgstr ""
 "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> doreste sa aduca "
 "o imagine in atentia ta.</a>"
 
-#, fuzzy, python-format
-msgid ""
-"\n"
-"    %(user)s added your image \"%(title)s\" to their bookmarks!\n"
-msgstr "%(user)s a marcat imaginea ta ca favorită: %(url)s"
+#, python-format
+msgid "%(user)s added your image \"%(title)s\" to their bookmarks!"
+msgstr ""
 
 #, fuzzy, python-format
 #| msgid ""
@@ -5463,13 +4494,7 @@ msgstr "%s a cerut sa vada formatele TIFF sau FIT a imaginii dvs."
 msgid "%(user)s posted a new topic to the group: \"%(group_name)s\""
 msgstr "%s a cerut sa vada formatele TIFF sau FIT a imaginii dvs."
 
-#, fuzzy
-msgid "Notification settings"
-msgstr "Notificări"
 
-#, fuzzy
-msgid "Notification Type"
-msgstr "Notificări"
 
 msgid ""
 "You have received a private message on AstroBin!\n"
@@ -5501,9 +4526,6 @@ msgstr ""
 msgid "%(user)s joined the public group: \"%(group_name)s\""
 msgstr ""
 
-#, fuzzy
-msgid "Welcome to AstroBin!"
-msgstr "Urmăreşte"
 
 msgid ""
 "I'm very excited that you joined, and I would like to give you a warm "
@@ -5546,11 +4568,6 @@ msgstr ""
 msgid "Thanks again for joining and clear skies!"
 msgstr ""
 
-#, fuzzy
-#| msgid "Frequently Asked Questions"
-msgid "Have a look at our frequently asked questions:"
-msgstr "Cele mai frecvente intrebări"
-
 msgid "Head over to your settings and configure your profile:"
 msgstr ""
 
@@ -5567,21 +4584,6 @@ msgstr ""
 
 msgid "Object not found"
 msgstr "Obiectul nu a fost gasit"
-
-#, fuzzy
-#| msgid "Previously uploaded"
-msgid "Previous page"
-msgstr "Incarcarea anterioara"
-
-#, fuzzy
-#| msgid "View page"
-msgid "Next page"
-msgstr "Vizualizati pagina"
-
-#, fuzzy
-#| msgid "Additional information requested"
-msgid "No additional information available for this item."
-msgstr "Este nevoie de informatii suplimentare."
 
 msgid "Find images"
 msgstr "Cauta imagini"
@@ -5601,9 +4603,6 @@ msgstr "Membru incepand din"
 msgid "Search all forums and comments"
 msgstr ""
 
-#, fuzzy
-msgid "New topic"
-msgstr "Închis"
 
 msgid "Please select a forum"
 msgstr ""
@@ -5613,17 +4612,9 @@ msgid ""
 "your topic."
 msgstr ""
 
-#, fuzzy
-msgid "View forums"
-msgstr "Vizualizati pagina"
 
 msgid "This topic was closed by a moderator."
 msgstr ""
-
-#, fuzzy
-#| msgid "New Zealand"
-msgid "New reply"
-msgstr "Noua Zeelanda"
 
 #, python-format
 msgid ""
@@ -5645,9 +4636,6 @@ msgid ""
 "\"%(contact_url)s\">contact us</a>: we really value your input!"
 msgstr ""
 
-#, fuzzy
-msgid "Thanks for your cooperation!"
-msgstr "Multumesc pentru nominalizare !"
 
 msgid "I have read the text above"
 msgstr ""
@@ -5655,9 +4643,6 @@ msgstr ""
 msgid "I understand"
 msgstr ""
 
-#, fuzzy
-msgid "Back to group"
-msgstr "Inapoi in sus"
 
 msgid "Hidden"
 msgstr ""
@@ -5668,9 +4653,6 @@ msgstr ""
 msgid "You are not a member of any groups"
 msgstr ""
 
-#, fuzzy
-msgid "These are the forums in the groups you have access to."
-msgstr "Acestea sunt imagini pe care le-ai marcat ca favorite."
 
 msgid "Topics"
 msgstr ""
@@ -5678,9 +4660,6 @@ msgstr ""
 msgid "Posts"
 msgstr ""
 
-#, fuzzy
-msgid "Last posts"
-msgstr "Est sau vest"
 
 msgid "Forum categories are not created"
 msgstr ""
@@ -5719,11 +4698,6 @@ msgstr ""
 msgid "*** Type your reply here ***"
 msgstr ""
 
-#, fuzzy
-#| msgid "Delete"
-msgid "(deleted)"
-msgstr "Sterge"
-
 msgctxt "Noun, e.g. 'This element has 1 like'"
 msgid "like"
 msgstr ""
@@ -5736,21 +4710,9 @@ msgid ""
 "Warning: this post awaits moderation and is not yet visible to everybody"
 msgstr ""
 
-#, fuzzy
-msgid "Edited"
-msgstr "Editare"
 
-#, fuzzy
-msgid "quote"
-msgstr "text citat"
 
-#, fuzzy
-msgid "quote selected"
-msgstr "# selectat"
 
-#, fuzzy
-msgid "Delete post?"
-msgstr "Stergeti conversatia"
 
 msgid "Approve post"
 msgstr ""
@@ -5775,9 +4737,6 @@ msgstr ""
 msgid "Open topic"
 msgstr ""
 
-#, fuzzy
-msgid "Close topic"
-msgstr "Închis"
 
 msgid "Unsubscribe"
 msgstr ""
@@ -5791,11 +4750,6 @@ msgstr ""
 msgid "Subscribers"
 msgstr ""
 
-#, fuzzy
-#| msgid "You have already nominated this image"
-msgid "You have unread posts in this topic."
-msgstr "Deja ati nominalizat aceasta imagine"
-
 msgid "Would you like to jump to the new posts since your last visit?"
 msgstr ""
 
@@ -5805,25 +4759,11 @@ msgstr ""
 msgid "Topic"
 msgstr ""
 
-#, fuzzy
-msgid "Last post"
-msgstr "Est sau vest"
 
 msgid "Sticky"
 msgstr ""
 
-#, fuzzy
-msgid "Closed"
-msgstr "Închis"
 
-#, fuzzy
-msgid "This forum does not have any topics."
-msgstr "Nu aveti notificari noi."
-
-#, fuzzy
-#| msgid "Mark as good"
-msgid "Mark as spam"
-msgstr "Marcheaza ca bun"
 
 msgid ""
 "This page or operation is not available at the moment, because AstroBin is "
@@ -5832,11 +4772,6 @@ msgstr ""
 
 msgid "For more information, please check out our Twitter feed:"
 msgstr ""
-
-#, fuzzy
-#| msgid "Account activation failed"
-msgid "Account activation"
-msgstr "Activarea contului eşuată"
 
 msgid "Account successfully activated"
 msgstr "Cont activat cu succes"
@@ -5904,9 +4839,6 @@ msgstr "Resetează parola la %(site_name)s"
 msgid "Registration completed"
 msgstr "Înregistrare încheiată"
 
-#, fuzzy
-msgid "You are now registered"
-msgstr "Nu aveti cereri."
 
 msgid ""
 "To confirm your e-mail address, we have sent you an e-mail with an "
@@ -5942,23 +4874,7 @@ msgstr "Sorteaza"
 msgid "Relevance"
 msgstr "Relevanta"
 
-#, fuzzy
-msgid "Large field radius"
-msgstr "Latimea campului"
 
-#, fuzzy
-msgid "Small field radius"
-msgstr "Latimea campului"
-
-#, fuzzy
-#| msgid "Pixel scale"
-msgid "Large pixel scale"
-msgstr "Scara pixeli"
-
-#, fuzzy
-#| msgid "Pixel scale"
-msgid "Small pixel scale"
-msgstr "Scara pixeli"
 
 #, fuzzy
 #| msgid ""
@@ -6008,9 +4924,6 @@ msgid ""
 "<a href=\"mailto:%(email)s\">%(email)s</a>."
 msgstr ""
 
-#, fuzzy
-msgid "Image upload"
-msgstr "Imagini încărcate"
 
 msgid ""
 "Your Lite or Premium subscription is not active, or it has expired. If you "
@@ -6094,9 +5007,6 @@ msgstr "Se cere API Key"
 msgid "Are you sure you want to ban this user?"
 msgstr ""
 
-#, fuzzy
-msgid "User banned"
-msgstr "Utilizator negăsit:"
 
 #, python-format
 msgid ""
@@ -6183,37 +5093,24 @@ msgstr ""
 
 #, python-format
 msgid ""
-"\n"
-"                    We are very, very sorry, but it appears that some of "
-"your images suffered a catastrophic data\n"
-"                    corruption, and cannot be retrieved. Please read more <a "
-"href=\"%(data_corruption_url)s\">here</a>.\n"
-"                "
+"We are very, very sorry, but it appears that some of your images suffered a "
+"catastrophic data corruption, and cannot be retrieved. Please read more <a "
+"href=\"%(data_corruption_url)s\">here</a>."
 msgstr ""
 
 msgid ""
-"\n"
-"                    Please click on the thumbnails stuck with the hourglass "
-"icon to upload the image files that you\n"
-"                    still have on your computer or backups to their pages "
-"again.\n"
-"                "
+"Please click on the thumbnails stuck with the hourglass icon to upload the "
+"image files that you still have on your computer or backups to their pages "
+"again."
 msgstr ""
 
 msgid ""
-"\n"
-"                    The data associated to your affected images, such as "
-"title, description, equipment used, acquisition\n"
-"                    details, comments, likes, bookmarks, and so on, is still "
-"intact and safe.\n"
-"                "
+"The data associated to your affected images, such as title, description, "
+"equipment used, acquisition details, comments, likes, bookmarks, and so on, "
+"is still intact and safe."
 msgstr ""
 
-msgid ""
-"\n"
-"                    AstroBin would like to offer you its sincerest "
-"apologies. :(\n"
-"                "
+msgid "AstroBin would like to offer you its sincerest apologies. :("
 msgstr ""
 
 msgid "Okay, don't show this again"
@@ -6232,11 +5129,6 @@ msgstr ""
 "imagistice şi subiectele sunt minimul necesar. Datele de achiziţie sunt "
 "foarte importante deasemenea."
 
-#, fuzzy
-#| msgid "What kind of image is this?"
-msgid "Can't find your images?"
-msgstr "Ce fel de imagine este aceasta ?"
-
 #, python-format
 msgid ""
 "All your images are still unpublished. <a href=\"%(user_page)s?staging"
@@ -6244,9 +5136,6 @@ msgid ""
 "\"%(staging_area_learn_more_link)s\">learn more</a>."
 msgstr ""
 
-#, fuzzy
-msgid "Delete account"
-msgstr "Stergeti conversatia"
 
 msgid ""
 "Are you sure you want to delete your account? This operation is irreversible "
@@ -6254,24 +5143,11 @@ msgid ""
 "forever!"
 msgstr ""
 
-#, fuzzy
-#| msgid "(comment deleted)"
-msgid "Account deleted"
-msgstr "(comentariul a fost sters)"
-
-msgid ""
-"\n"
-"            Your account was deleted. Thanks for using AstroBin until now!\n"
-"        "
+msgid "Your account was deleted. Thanks for using AstroBin until now!"
 msgstr ""
 
 msgid "Edit your basic information"
 msgstr "Editaţi-vă informaţiile de bază"
-
-#, fuzzy
-#| msgid "Uploaded"
-msgid "Download your data"
-msgstr "Incarcate"
 
 msgid ""
 "You can download all your data off AstroBin, including original uploads, all "
@@ -6279,27 +5155,9 @@ msgid ""
 "details, and so on."
 msgstr ""
 
-#, fuzzy
-#| msgid "Request from"
-msgid "Request download"
-msgstr "Cerere de la"
-
-#, fuzzy
-#| msgid "You have no requests."
-msgid "Your past requests"
-msgstr "Nu aveti cereri."
-
-#, fuzzy
-#| msgid "Request critique"
-msgid "Request time"
-msgstr "Solicită o critică"
-
 msgid "Status"
 msgstr "Status"
 
-#, fuzzy
-msgid "File size"
-msgstr "Dimensiunea pixelului"
 
 msgid "There doesn't seem to be anything here."
 msgstr ""
@@ -6381,9 +5239,6 @@ msgstr "AstroBin nu va împărtăşi locaţia ta altor utilizatori."
 msgid "Import from Flickr"
 msgstr "Importa din Flickr"
 
-#, fuzzy
-msgid "Change your username"
-msgstr "Schimbă-ţi parola"
 
 msgid "Edit your site preferences"
 msgstr "Editaţi preferinţele pentru site"
@@ -6445,25 +5300,11 @@ msgid "Do not navigate away from this window: this might take a while!"
 msgstr ""
 "Nu navigati in afara acestei ferestre : aceasta at putea dura mult timp."
 
-#, fuzzy
-msgid "Subscription"
-msgstr "Descriere"
 
 msgid "Expiration date"
 msgstr ""
 
-#, fuzzy
-msgid "Images used"
-msgstr "Dimensiunea imaginii"
 
-#, fuzzy
-msgid "Thanks for your support!"
-msgstr "Multumesc pentru nominalizare !"
-
-#, fuzzy
-#| msgid "You have no requests."
-msgid "Your payments"
-msgstr "Nu aveti cereri."
 
 msgid "This data is currently not available and will be recalculated shortly."
 msgstr ""
@@ -6483,15 +5324,6 @@ msgstr ""
 msgid "Trash"
 msgstr ""
 
-#, fuzzy
-#| msgid "Find images"
-msgid "Liked images"
-msgstr "Cauta imagini"
-
-#, fuzzy
-msgid "Following"
-msgstr "Urmăreşte"
-
 msgid "Friends"
 msgstr ""
 
@@ -6501,14 +5333,6 @@ msgstr "Lipsă de date"
 msgid "Collection tools"
 msgstr ""
 
-#, fuzzy
-msgid "Add/remove images"
-msgstr "Cateva imagini"
-
-#, fuzzy
-#| msgid "Quick search"
-msgid "Quick edit"
-msgstr "Căutare rapidă"
 
 msgid "Key/value pairs"
 msgstr ""
@@ -6525,11 +5349,6 @@ msgstr ""
 
 msgid "Now you need to <strong>manually confirm or reject</strong> them."
 msgstr ""
-
-#, fuzzy
-#| msgid "Integration"
-msgid "Instructions"
-msgstr "Integrare"
 
 msgid ""
 "Below, you see the list of all your images impacted by the automatic "
@@ -6566,43 +5385,12 @@ msgid ""
 "depending on where they were before the data loss)."
 msgstr ""
 
-#, fuzzy
-#| msgid "Original"
-msgid "Original upload"
-msgstr "Original"
-
-#, fuzzy
-msgid "Staging area"
-msgstr "Camere de imagistică"
-
-#, fuzzy
-#| msgid "Delete"
-msgid "Deleted"
-msgstr "Sterge"
-
 msgid "Recover all"
 msgstr ""
-
-#, fuzzy
-#| msgid "Select all"
-msgid "Delete all"
-msgstr "Selectati tot"
 
 msgid "Reset"
 msgstr ""
 
-#, fuzzy
-msgid "Submit selected"
-msgstr "# selectat"
-
-#, fuzzy
-#| msgid "There are no reviews yet."
-msgid "There are no images to recover."
-msgstr "Inca nu exista review-uri."
-
-#, fuzzy
-msgid "Restore selected"
-msgstr "# selectat"
 
 msgid ""
 "Click on the images to include them in this collection (and click again to "
@@ -6612,9 +5400,6 @@ msgstr ""
 msgid "Create new collection"
 msgstr ""
 
-#, fuzzy
-msgid "Delete collection?"
-msgstr "Stergeti conversatia"
 
 #, fuzzy
 msgid ""
@@ -6635,16 +5420,10 @@ msgstr ""
 msgid "Would you like to add some images?"
 msgstr ""
 
-#, fuzzy
-msgid "Collection"
-msgstr "Locații"
 
 msgid "Tools"
 msgstr "Instrumente"
 
-#, fuzzy
-msgid "You do not have any collections."
-msgstr "Nu aveti notificari noi."
 
 msgid "Do you want to create a collection now?"
 msgstr ""
@@ -6655,42 +5434,11 @@ msgstr ""
 msgid "Quick edit: key/value tags"
 msgstr ""
 
-#, fuzzy
-msgid "Edit collection"
-msgstr "Editează-ţi locaţia"
 
-#, fuzzy
-msgid "Show filters"
-msgstr "Alege fişier"
-
-#, fuzzy
-#| msgid "Remove filter"
-msgid "Hide filters"
-msgstr "Indepartati filtrul"
 
 #, python-brace-format
 msgid "${filter.label}"
 msgstr ""
-
-#, fuzzy
-#| msgid "No results"
-msgid "Results"
-msgstr "Nu sunt rezultate"
-
-#, fuzzy
-#| msgid "Search type"
-msgid "Search terms"
-msgstr "Tipul căutării"
-
-#, fuzzy
-#| msgid "Searching"
-msgid "Search domain"
-msgstr "Căutare"
-
-#, fuzzy
-#| msgid "Search type"
-msgid "Search by"
-msgstr "Tipul căutării"
 
 msgid "Only animated"
 msgstr ""
@@ -6698,22 +5446,9 @@ msgstr ""
 msgid "Award"
 msgstr ""
 
-#, fuzzy
-#| msgid "Public Area"
-msgid "Publication date range"
-msgstr "Zona Publică"
-
-#, fuzzy
-#| msgid "Public Area"
-msgid "Acquisition date range"
-msgstr "Zona Publică"
-
 msgid "Camera type"
 msgstr "Tipul camerei"
 
-#, fuzzy
-msgid "Field radius (deg)"
-msgstr "Latimea campului"
 
 msgid "Minimum data"
 msgstr ""
@@ -6723,18 +5458,8 @@ msgstr ""
 msgid "Moon phase (%%)"
 msgstr "Faza minimă a Lunii %"
 
-#, fuzzy
-#| msgid "arcsec/pixel"
-msgid "Pixel scale (arcsec/pixel)"
-msgstr "arcsec/pixel"
-
 msgid "Telescope type"
 msgstr "Tipul telescopului"
-
-#, fuzzy
-#| msgid "Integration hours, daily"
-msgid "Integration time (hours)"
-msgstr "Ore de integrare, zilnic"
 
 #, python-format
 msgid ""
@@ -6742,30 +5467,12 @@ msgid ""
 "subscription."
 msgstr ""
 
-#, fuzzy
-#| msgid "Select all"
-msgid "Select"
-msgstr "Selectati tot"
-
 msgid "Add filter:"
 msgstr ""
 
-#, fuzzy
-msgid "Image of the Day"
-msgstr "Imaginea zilei"
 
 msgid "Top pick"
 msgstr ""
-
-#, fuzzy
-#| msgid "Basic information"
-msgid "Top pick nomination"
-msgstr "Informații de bază"
-
-#, fuzzy
-#| msgid "Guider/Planetary"
-msgid "Guider/planetary"
-msgstr "Ghidaj/Planetar"
 
 msgid "Min"
 msgstr ""
@@ -6773,152 +5480,22 @@ msgstr ""
 msgid "Max"
 msgstr ""
 
-#, fuzzy
-msgid "Imaging telescopes"
-msgstr "Telescoape de imagistica si lentile"
 
 msgid "Astrometry"
 msgstr ""
 
-#, fuzzy
-#| msgid "Delete everything"
-msgid "Everything"
-msgstr "Sterge tot"
-
-#, fuzzy
-#| msgid "Basic information"
-msgid "By basic information"
-msgstr "Informații de bază"
-
 msgid "By astrometry details"
 msgstr ""
 
-#, fuzzy
-msgid "Objects in field"
-msgstr "Obiectul nu a fost gasit"
-
-#, fuzzy
-#| msgid "Edit gear used"
-msgid "By gear used"
-msgstr "Editeaza echipamentul utilizat"
-
-#, fuzzy
-msgid "Guiding telescopes"
-msgstr "Telescoape de ghidare sau lentile"
-
-#, fuzzy
-#| msgid "Comments"
-msgid "Comments & forums"
-msgstr "Comentarii"
-
-#, fuzzy
-#| msgid "Earth's Moon"
-msgid "Earth's moon"
-msgstr "Luna"
-
-#, fuzzy
-#| msgid "Main solar system subject"
-msgid "Other solar system object"
-msgstr "Obiect principal din sistemul solar"
 
 msgid "Achromatic"
 msgstr ""
 
-#, fuzzy
-#| msgid "Refractor: semi-apochromatic"
-msgid "Semi-apochromatic"
-msgstr "Refractor: semi-apocromatic"
-
-#, fuzzy
-#| msgid "Refractor: apochromatic"
-msgid "Apochromatic"
-msgstr "Refractor: apocromatic"
-
-#, fuzzy
-#| msgid "Refractor: non-achromatic Galilean"
-msgid "Non-achromatic Galilean"
-msgstr "Refractor: non-acromatic Galilean"
-
-#, fuzzy
-#| msgid "Refractor: non-achromatic Keplerian"
-msgid "Non-achromatic Keplerian"
-msgstr "Refractor: non-acromatic Keplerian"
-
-#, fuzzy
-#| msgid "Refractor: superachromat"
-msgid "Superchromat"
-msgstr "Refractor: superacromat"
-
-#, fuzzy
-#| msgid "Reflector: Dall-Kirkham"
-msgid "Dall-Kirkham"
-msgstr "Reflector: Dall-Kirkham"
-
 msgid "Nasmyth"
 msgstr ""
 
-#, fuzzy
-#| msgid "Reflector: Ritchey Chretien"
-msgid "Ritchey Chretien"
-msgstr "Reflector: Ritchey Chretien"
-
-#, fuzzy
-#| msgid "Reflector: Gregorian"
-msgid "Gregorian"
-msgstr "Reflector: Gregorian"
-
-#, fuzzy
-#| msgid "Reflector: Herschellian"
-msgid "Herschellian"
-msgstr "Reflector: Herschellian"
-
-#, fuzzy
-#| msgid "New Caledonia"
-msgid "Newtonian"
-msgstr "Noua Caledonie"
-
-#, fuzzy
-#| msgid "Catadioptric: Argunov-Cassegrain"
-msgid "Argunov-Cassegrain"
-msgstr "Catadioptric: Argunov-Cassegrain"
-
-#, fuzzy
-#| msgid "Catadioptric: Klevtsov-Cassegrain"
-msgid "Klevtsov-Cassegrain"
-msgstr "Catadioptric: Klevtsov-Cassegrain"
-
-#, fuzzy
-#| msgid "Catadioptric: Lurie-Houghton"
-msgid "Lurie-Houghton"
-msgstr "Catadioptric: Lurie-Houghton"
-
 msgid "Maksutov"
 msgstr ""
-
-#, fuzzy
-#| msgid "Catadioptric: Maksutov-Cassegrain"
-msgid "Maksutov-Cassegrain"
-msgstr "Catadioptric: Maksutov-Cassegrain"
-
-#, fuzzy
-#| msgid "Catadioptric: modified Dall-Kirkham"
-msgid "Modified Dall-Kirkham"
-msgstr "Catadioptric: Dall-Kirkham modificat"
-
-#, fuzzy
-#| msgid "Video camera"
-msgid "Schmidt camera"
-msgstr "Cameră video"
-
-#, fuzzy
-#| msgid "Catadioptric: Schmidt-Cassegrain"
-msgid "Schmidt-Cassegrain"
-msgstr "Catadioptric: Schmidt-Cassegrain"
-
-#, fuzzy
-#| msgid "Catadioptric: ACF Schmidt-Cassegrain"
-msgid "ACF Schmidt-Cassegrain"
-msgstr "Catadioptric: ACF Schmidt-Cassegrain"
 
 msgid "Rowe-Ackermann Schmidt astrograph"
 msgstr ""
@@ -6995,9 +5572,6 @@ msgid ""
 "count to 256 in order to work with it."
 msgstr ""
 
-#, fuzzy
-msgid "Image uploaded. Thank you!"
-msgstr "Formă salvată. Mulțumesc!"
 
 msgid "Sorry, AstroBin was unable to activate the requested language"
 msgstr ""
@@ -7005,17 +5579,8 @@ msgstr ""
 msgid "You already have a collection with that name"
 msgstr ""
 
-#, fuzzy
-msgid "Collection updated!"
-msgstr "Locații"
 
-#, fuzzy
-msgid "Images updated!"
-msgstr "Dimensiunea imaginii"
 
-#, fuzzy
-msgid "Collection deleted!"
-msgstr "Înregistrare încheiată"
 
 msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
@@ -7027,9 +5592,6 @@ msgid ""
 "redirected you to the revision currently marked as final."
 msgstr ""
 
-#, fuzzy
-msgid "Accessory"
-msgstr "Accesorii"
 
 msgid "Dates"
 msgstr "Date"
@@ -7046,25 +5608,10 @@ msgstr "aprecierea medie a fazei Lunei"
 msgid "Mean SQM"
 msgstr ""
 
-#, fuzzy
-msgid "Image deleted."
-msgstr "Imaginea dumneavoastra a fost stearsa"
 
-#, fuzzy
-msgid "Revision deleted."
-msgstr "Înregistrare încheiată"
 
-#, fuzzy
-msgid "Original version deleted!"
-msgstr "Înregistrare încheiată"
 
-#, fuzzy
-msgid "Image moved to the staging area."
-msgstr "Mutati in zona de asteptare"
 
-#, fuzzy
-msgid "Image moved to the public area."
-msgstr "Promovare in zona publica"
 
 #, python-format
 msgid "%s topics deleted"
@@ -7078,1698 +5625,5 @@ msgstr ""
 msgid "Referral code (optional)"
 msgstr ""
 
-#, fuzzy
-#| msgid "Are you sure?"
-msgid "Are you a robot?"
-msgstr "Sunteţi sigur?"
-
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
-
-#~ msgid ""
-#~ "<a href=\"%(object_url)s\">You are now following <strong>%(object)s</"
-#~ "strong>.</a>"
-#~ msgstr ""
-#~ "<a href=\"%(object_url)s\">Acum urmariti <strong>%(object)s</strong>.</a>"
-
-#~ msgid "Your image has been deleted."
-#~ msgstr "Imaginea ta a fost stearsa."
-
-#~ msgid "<a href=\"%(object_url)s\">Your image has been processed.</a>"
-#~ msgstr "<a href=\"%(object_url)s\">Imaginea ta a fost procesata.</a>"
-
-#~ msgid "%(originator)s has fulfilled your request."
-#~ msgstr "%(originator)s și-a îndeplinit cererea."
-
-#~ msgid "New!"
-#~ msgstr "Nou !"
-
-#, fuzzy
-#~| msgid "Recent images"
-#~ msgid "Review recovered images"
-#~ msgstr "Imagini recente"
-
-#~ msgid "Thank you! Your message was sent successfully."
-#~ msgstr "Multumesc! Mesajul tau a fost trimis cu succes."
-
-#, fuzzy
-#~ msgid "pages"
-#~ msgstr "Imagini"
-
-#, fuzzy
-#~| msgid "About"
-#~ msgctxt "approximately"
-#~ msgid "about"
-#~ msgstr "Despre"
-
-#, fuzzy
-#~| msgid "Pixel size"
-#~ msgid "Max size"
-#~ msgstr "Dimensiunea pixelului"
-
-#, fuzzy
-#~| msgid "View your images"
-#~ msgid "View full image info"
-#~ msgstr "Vizualizează-ţi imaginile"
-
-#, fuzzy
-#~| msgid "Advanced search"
-#~ msgid "Advanced"
-#~ msgstr "Căutare avansată"
-
-#, fuzzy
-#~| msgid "Commercial gear items"
-#~ msgid "Social features"
-#~ msgstr "elemente comerciale pentru echipament"
-
-#, fuzzy
-#~| msgid "Full resolution"
-#~ msgid "Full size annotations"
-#~ msgstr "Rezolutie maxima"
-
-#, fuzzy
-#~ msgid "Upload uncompressed source"
-#~ msgstr "Timp de incarcare"
-
-#, fuzzy
-#~ msgid "Undelete images"
-#~ msgstr "Statele Unite ale Americii "
-
-#, fuzzy
-#~| msgid "Higher resolution"
-#~ msgid "View in original resolution"
-#~ msgstr "Rezoluție mai mare"
-
-#, fuzzy
-#~| msgid "Buy it here"
-#~ msgid "Buy in the Marketplace"
-#~ msgstr "Cumpara-l aici"
-
-#, fuzzy
-#~| msgid "Basic information"
-#~ msgid "Basic analytics"
-#~ msgstr "Informații de bază"
-
-#, fuzzy
-#~| msgid "Image size"
-#~ msgid "∞ images, ∞ size"
-#~ msgstr "Dimensiunea imaginii"
-
-#, fuzzy
-#~ msgid "Full search"
-#~ msgstr "Dimensiunea pixelului"
-
-#, fuzzy
-#~ msgid "Unlimited revisions"
-#~ msgstr "Da, sterge revizia."
-
-#, fuzzy
-#~| msgid "Advanced search"
-#~ msgid "Advanced analytics"
-#~ msgstr "Căutare avansată"
-
-#, fuzzy
-#~ msgctxt "Subscription plan name"
-#~ msgid "Plan"
-#~ msgstr "Planete"
-
-#~ msgid "Price"
-#~ msgstr "Preț"
-
-#, fuzzy
-#~ msgid "day"
-#~ msgstr "zile"
-
-#, fuzzy
-#~| msgid "Upload time"
-#~ msgid "one time"
-#~ msgstr "Timp de incarcare"
-
-#, fuzzy
-#~| msgid "Year"
-#~ msgid "Yearly"
-#~ msgstr "Anul"
-
-#, fuzzy
-#~ msgid "Subscription plan"
-#~ msgstr "Descriere"
-
-#, fuzzy
-#~ msgid "Cancelled"
-#~ msgstr "Anulează"
-
-#, fuzzy
-#~ msgid "You cannot switch to this plan."
-#~ msgstr "Nu aveţi permisiunea să vedeţi această pagină."
-
-#, fuzzy
-#~ msgid "Back to the plans"
-#~ msgstr "Inapoi in sus"
-
-#, fuzzy
-#~ msgid "Your inactive subscription plans"
-#~ msgstr "Astrobin date de tip Raw  "
-
-#~ msgid ""
-#~ "AstroBin can protect your images from theft by applying a watermark to "
-#~ "them. Be careful with your settings though: once a watermark has been "
-#~ "applied, it cannot be removed (AstroBin won't store the non-watermarked "
-#~ "version of your image, for your safety). If you don't like the watermark "
-#~ "resulting from the following settings, your only choice is to delete the "
-#~ "image and start over."
-#~ msgstr ""
-#~ "Astrobin va poate proteja imaginile contra furtului, aplicandu-le o "
-#~ "eticheta. Aveti grija la setari deoarece odata aplicata eticheta, nu mai "
-#~ "poate fi inlaturata. ( Astrobin nu va depozita imaginea originala fara "
-#~ "marcaj pentru, siguranta dumneavoastra).Daca nu va place imaginea cu "
-#~ "eticheta care a rezultat din setari, atunci singura sansa va fi sa "
-#~ "stergeti si maginea si sa o luati de la inceput."
-
-#, fuzzy
-#~| msgid "Duration"
-#~ msgid "Traditional"
-#~ msgstr "Durata"
-
-#~ msgid ""
-#~ "AstroBin is an image hosting website specifically targeted to "
-#~ "astrophotographers: it's the first and the last place where you need to "
-#~ "upload your astrophotography images. Made by an astrophotographer, for "
-#~ "the astrophotographers."
-#~ msgstr ""
-#~ "Astrobin este un website specific dedicat astrofotografilor: este primul "
-#~ "si ultimul loc unde va puteti incarca astrofotografiile. Facute de un "
-#~ "astrofotograf pentru astrofotografi.  "
-
-#~ msgid "AstroBin index"
-#~ msgstr "Index AstroBin"
-
-#~ msgid "Blog"
-#~ msgstr "Blog"
-
-#, fuzzy
-#~| msgid "Terms of Service"
-#~ msgid "Terms of servic"
-#~ msgstr "Termeni şi condiţii de utilizare"
-
-#, fuzzy
-#~| msgid ""
-#~| "Your request for an API Key has been approved!\n"
-#~| "\n"
-#~| "    Your key: %(key)s\n"
-#~| "    Your secret: %(secret)s\n"
-#~| "\n"
-#~| "    Please read the API documentation at %(api_docs_url)s\n"
-#~| "    \n"
-#~| "    You can review your API keys at %(api_keys_url)s\n"
-#~| "    \n"
-#~| "    Thank you for using AstroBin's APIs!"
-#~ msgid ""
-#~ "Your request for an API Key has been approved!\n"
-#~ "\n"
-#~ "    Your key: %(key)s\n"
-#~ "    Your secret: %(secret)s\n"
-#~ "\n"
-#~ "    Please read the API documentation at <a href=\"%(api_docs_url)s\">"
-#~ "%(api_docs_url)s</a>\n"
-#~ "\n"
-#~ "    You can review your API keys at <a href=\"%(api_keys_url)s\">"
-#~ "%(api_keys_url)s</a>\n"
-#~ "\n"
-#~ "    Thank you for using AstroBin's APIs!"
-#~ msgstr ""
-#~ "Cererea dumneavoastra pentru o cheie API a fost aprobata!\n"
-#~ "\n"
-#~ "              Cheia este: %(key)s\n"
-#~ "              Secretul este: %(secret)s\n"
-#~ "\n"
-#~ "             Va rugam citit documentatia API la %(api_docs_url)s\n"
-#~ "             \n"
-#~ "             Va puteti revizui cheile API la %(api_keys_url)s\n"
-#~ "             \n"
-#~ "             Va multumim pentru ca utilizati Astrobin APIs!"
-
-#~ msgid ""
-#~ "Your request for an API Key has been approved!\n"
-#~ "\n"
-#~ "    Your key: %(key)s\n"
-#~ "    Your secret: %(secret)s\n"
-#~ "\n"
-#~ "    Please read the API documentation at %(api_docs_url)s\n"
-#~ "    \n"
-#~ "    You can review your API keys at %(api_keys_url)s\n"
-#~ "    \n"
-#~ "    Thank you for using AstroBin's APIs!"
-#~ msgstr ""
-#~ "Cererea dumneavoastra pentru o cheie API a fost aprobata!\n"
-#~ "\n"
-#~ "              Cheia este: %(key)s\n"
-#~ "              Secretul este: %(secret)s\n"
-#~ "\n"
-#~ "             Va rugam citit documentatia API la %(api_docs_url)s\n"
-#~ "             \n"
-#~ "             Va puteti revizui cheile API la %(api_keys_url)s\n"
-#~ "             \n"
-#~ "             Va multumim pentru ca utilizati Astrobin APIs!"
-
-#~ msgid "API Key request approved"
-#~ msgstr "Cheia API solicitata a fost aprobata"
-
-#, fuzzy
-#~ msgid "Last 6 months"
-#~ msgstr "Est sau vest"
-
-#, fuzzy
-#~ msgid "Last year"
-#~ msgstr "Ultimul care a trimis"
-
-#, fuzzy
-#~ msgid "All time"
-#~ msgstr "Timp de incarcare"
-
-#~ msgid "Merge"
-#~ msgstr "Imbina"
-
-#~ msgid ""
-#~ "Use this field to mark that the item you are claiming really is the same "
-#~ "product (or a variation thereof) of something you have claimed before."
-#~ msgstr ""
-#~ "Utilizaţi acest câmp pentru a marca faptul că pretindeţi cu adevărat că "
-#~ "este acelaşi produs (sau o variaţie a acestuia) a ceva ce ai pretins "
-#~ "înainte."
-
-#~ msgid ""
-#~ "You can't create more than %d claims. Consider upgrading your affiliation!"
-#~ msgstr ""
-#~ "Nu puteti crea mai mult de %d cereri. Luați în considerare modernizarea "
-#~ "afilierei!"
-
-#~ msgid "You have already claimed this product."
-#~ msgstr "Ați susținut deja acest produs."
-
-#~ msgid ""
-#~ "Use this field to mark that the item you are merging really is the same "
-#~ "product (or a variation thereof) of something you have claimed before."
-#~ msgstr ""
-#~ "Utilizati acest câmp pentru a marca faptul că elementul pe care il "
-#~ "imbinati este într-adevăr acelasi produs (sau o variantă a acestuia) a "
-#~ "ceva ce ati sustinut inainte."
-
-#~ msgid "has written a review on"
-#~ msgstr "a scris o recenzie pe"
-
-#~ msgid "Company name"
-#~ msgstr "Numele companiei"
-
-#~ msgid "The name of the company you represent on AstroBin."
-#~ msgstr "Numele companiei pe care o reprezentaţi pe AstroBin."
-
-#~ msgid "Company description"
-#~ msgstr "Descrierea companiei"
-
-#, fuzzy
-#~ msgid ""
-#~ "A short description of the company you represent on AstroBin. You can use "
-#~ "some <a href=\"/faq/#comments\">formatting rules</a>."
-#~ msgstr ""
-#~ "O scurta descriere a companiei pe care o reprezentati pe AstroBin. Aveți "
-#~ "posibilitatea să utilizați unele  <a href=\"/faq/#10\">norme de "
-#~ "formatare</a>."
-
-#~ msgid "Company website"
-#~ msgstr "Site-ul web al companiei"
-
-#~ msgid "The website of the company you represent on AstroBin."
-#~ msgstr "Site-ul web al companiei pe care o reprezentaţi pe Astrobin."
-
-#~ msgid "Country of operation"
-#~ msgstr "Ţara de funcţionare"
-
-#~ msgid "AUD - Australian dollars"
-#~ msgstr "AUD - Dolari australieni"
-
-#~ msgid "CAD - Canadian dollars"
-#~ msgstr "CAD - Dolari canadieni"
-
-#~ msgid "CHF - Swiss francs"
-#~ msgstr "CHF - Franci elvețieni"
-
-#~ msgid "EUR - Euros"
-#~ msgstr "EUR - Euro"
-
-#~ msgid "GPB - Pound stelings"
-#~ msgstr "GPB - Lire sterline"
-
-#~ msgid "PLN - Polish zloty"
-#~ msgstr "PLN - Zlot polonez"
-
-#~ msgid "SEK - Swedish krona"
-#~ msgstr "SEK - Coroana suedeză"
-
-#~ msgid "USD - American dollars"
-#~ msgstr "USD - Dolari americani"
-
-#~ msgid "Producer"
-#~ msgstr "Producător"
-
-#~ msgid "The link to this product's page on your website."
-#~ msgstr "Link către pagina acestui produs pe site-ul tau."
-
-#~ msgid "Currency"
-#~ msgstr "Valută"
-
-#~ msgid "Retailed gear items"
-#~ msgstr "Articole de echipament vândute "
-
-#~ msgid "Proper make"
-#~ msgstr "Marca adecvată"
-
-#~ msgid ""
-#~ "Sometimes, product make/brand/producer/developer names are not written "
-#~ "properly by the users. Write here the proper make/brand/producer/"
-#~ "developer name."
-#~ msgstr ""
-#~ "Uneori, marca produsului/producătorul/numele dezvoltatorilor nu sunt "
-#~ "scrise în mod corespunzător de către utilizatori. Scrieţi aici marca/"
-#~ "producătorul/numele dezvoltatorului corespunzător. "
-
-#~ msgid "Proper name"
-#~ msgstr "Nume adecvat"
-
-#~ msgid ""
-#~ "Sometimes, product names are not written properly by the users. Write "
-#~ "here the proper product name, not including the make/brand/producer/"
-#~ "developer name.<br/>It is recommended that you try to group as many items "
-#~ "as possible, so try to use a generic version of your product's name."
-#~ msgstr ""
-#~ "Uneori, numele produselor nu sunt scrise corespunzator de catre "
-#~ "utilizatori. Scrieti aici numele corespunzator al produsului  neincluzand "
-#~ "marca produsului/producătorul/numele dezvoltatorului. Este recomandat sa "
-#~ "incercati gruparea a cat mai multor elemente posibile, asa incat "
-#~ "incercati sa folositi o versiune generica a numelui produselor "
-#~ "dumneavoastra.."
-
-#~ msgid ""
-#~ "The official, commercial image for this product. Upload an image via the "
-#~ "regular uploading interface, set its subject type to \"Gear\", and then "
-#~ "choose it from this list. If you upload several revisions, they will also "
-#~ "appear in the commercial page."
-#~ msgstr ""
-#~ "Imaginea oficiala comerciala pentru acest produs. Incarcati o imagine "
-#~ "prin interfata uzuala de incarcare, setandu-l la tipul \"Gear\" si "
-#~ "alegandu-l din aceaasta lista. Daca incarcati diverse versiuni revizuite "
-#~ "acestea vor aparea deasemeni in pagina comercial."
-
-#~ msgid "Tagline"
-#~ msgstr "Sloganul"
-
-#~ msgid ""
-#~ "A memorable phrase that will sum up this product, for marketing purposes."
-#~ msgstr ""
-#~ "O fraza memorabila care va insuma insusirile acestui produs, in sensul "
-#~ "marketingului."
-
-#, fuzzy
-#~ msgid ""
-#~ "Here you can write the full commercial description of your product. You "
-#~ "can use some <a href=\"/faq/#comments\">formatting rules</a>."
-#~ msgstr ""
-#~ "Aici puteti completa intreaga descriere comerciala a produsului "
-#~ "dumneavoastra. Puteti utiliza reguli de formatare de tip <a href=\"/faq/"
-#~ "\"10\">."
-
-#~ msgid "Commercial gear items"
-#~ msgstr "elemente comerciale pentru echipament"
-
-#~ msgid "Commercial products"
-#~ msgstr "Produse comerciale"
-
-#~ msgid "Edit commercial product"
-#~ msgstr "Editati produsul comercial"
-
-#~ msgid "Return to list"
-#~ msgstr "Intoarcere la lista"
-
-#~ msgid "View in new window"
-#~ msgstr "Vizualizati intr-o noua fereastra"
-
-#~ msgid "by"
-#~ msgstr "de"
-
-#~ msgid "Some images"
-#~ msgstr "Cateva imagini"
-
-#~ msgid "(view more)"
-#~ msgstr "(vizualizati mai mult)"
-
-#~ msgid "Add your review"
-#~ msgstr "Adaugati review-ul dumneavoastra"
-
-#~ msgid ""
-#~ "Please be fair, honest and polite when writing a review. Many people will "
-#~ "read your review: all the users on AstroBin who own this piece of gear, "
-#~ "will be notified of your review."
-#~ msgstr ""
-#~ "Va rugam sa fiti onest si politicos cand scrieti un review. Multi oameni "
-#~ "vor citi review-ul dvs. Toti membrii AstroBin, posesori ai acestui tip de "
-#~ "echipament vor fi notificati despre review-ul dumneavoastra."
-
-#~ msgid ""
-#~ "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-#~ "register/\">register</a> to write a review."
-#~ msgstr ""
-#~ "Va rugam <a href=\"/accounts/login/\">sa va logati</a>sau <a href=\"/"
-#~ "accounts/register/\">sa va inregistrati</a> pentru a putea scrie un "
-#~ "review."
-
-#~ msgid ""
-#~ "Use this space to start a discussion, leave a comment or ask a question "
-#~ "about this piece of gear. All the users on AstroBin who own one, will be "
-#~ "notified and can join the discussion."
-#~ msgstr ""
-#~ "Utilizati acest spatiu pentru a purta o discutie, a lasa un comentariu "
-#~ "sau a intreba despre echipamentul respectiv. Toti utilizatorii de pe "
-#~ "AstroBin care au acest echipament vor fi notificati si pot participa la "
-#~ "discutie."
-
-#~ msgid ""
-#~ "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-#~ "register/\">register</a> to leave a comment."
-#~ msgstr ""
-#~ "Va rugam <a href=\"/accounts/login/\">sa va logati</a>sau <a href=\"/"
-#~ "accounts/register/\">sa va inregistrati</a> pentru a lasa un comentariu"
-
-#~ msgid "Buy it here"
-#~ msgstr "Cumpara-l aici"
-
-#~ msgid "Properties"
-#~ msgstr "Proprietati"
-
-#~ msgid "Owners"
-#~ msgstr "Posesori"
-
-#~ msgid "just now"
-#~ msgstr "chiar acum"
-
-#~ msgid "Made possible by"
-#~ msgstr "A fost posibil datorita"
-
-#~ msgid "Commercial information"
-#~ msgstr "Informații comerciale"
-
-#~ msgid "%(user)s's commercial products"
-#~ msgstr "Produsele comerciale ale utilizatorului %(user)s"
-
-#~ msgid ""
-#~ "Please remember that you are only allowed to claim items that you really "
-#~ "produce and/or retail."
-#~ msgstr ""
-#~ "Vă rugăm să rețineți că vă este permis sa revendicati doar ce produceti "
-#~ "sau vindeti cu adevarat."
-
-#~ msgid "As producer"
-#~ msgstr "Ca producator"
-
-#~ msgid "Gear IDs"
-#~ msgstr "IDs echipament"
-
-#~ msgid "You haven't claimed any commercial products yet."
-#~ msgstr "Încă nu aţi susţinut nici un produs comercial."
-
-#~ msgid "%(user)s hasn't claimed any commercial products yet."
-#~ msgstr "%(user)s nu a susţinut nici un produs comercial incă."
-
-#~ msgid "As retailer"
-#~ msgstr "Ca vanzator cu amanuntul"
-
-#~ msgid "You haven't claimed any retailed products yet."
-#~ msgstr "Tu nu ai sustinut inca niciun produs vandut cu amanuntul."
-
-#~ msgid "%(user)s hasn't claimed any retailed products yet."
-#~ msgstr "%(user)s nu a revendicat vreun produs vandut cu amanuntul"
-
-#~ msgid "Claim as producer"
-#~ msgstr "Revendicare ca producator"
-
-#~ msgid "Claim as retailer"
-#~ msgstr "Revendicare ca vânzător cu amănuntul"
-
-#~ msgid "Claim commercial product"
-#~ msgstr "Revendicati produs comercial"
-
-#~ msgid "Claim"
-#~ msgstr "Revendicati"
-
-#~ msgid "Select items to remove"
-#~ msgstr "Selectati itemurile ce urmeaza a fi eliminate."
-
-#~ msgid "Be careful if you try to remove all of these!"
-#~ msgstr "Fiti atent daca incercati sa eliminati toate acestea !"
-
-#~ msgid ""
-#~ "All the properties, including the commercial description, of this claim "
-#~ "will be deleted and cannot be recovered!"
-#~ msgstr ""
-#~ "Toate proprietățile, inclusiv denumirea comercială a acestei afirmatii "
-#~ "vor fi sterse si nu pot fi recuperate."
-
-#~ msgid "Select the product you want to merge to"
-#~ msgstr "Selectaţi produsul pe care doriţi să îl imbinaţi "
-
-#~ msgid "Claim retailed product"
-#~ msgstr "Revendicați produs de vânzare cu amănuntul"
-
-#~ msgid ""
-#~ "All the properties of this claim will be deleted and cannot be recovered!"
-#~ msgstr ""
-#~ "Toate proprietaţile acestei reclamaţii vor fi şterse şi nu pot fi "
-#~ "recuperate."
-
-#~ msgid "Edit your commercial information"
-#~ msgstr "Editaţi-vă informaţiile comerciale"
-
-#~ msgid "Edit your retailer information"
-#~ msgstr "Editează informaţiile vânzătorului tău"
-
-#~ msgid "You can't merge a product to itself."
-#~ msgstr "nu puteti alipi o imagine, ei insasi."
-
-#, fuzzy
-#~ msgid "Imaging telescope or lens"
-#~ msgid_plural "Imaging telescopes or lenses"
-#~ msgstr[0] "Telescoape de imagistica si lentile"
-#~ msgstr[1] "Telescoape de imagistica si lentile"
-#~ msgstr[2] "Telescoape de imagistica si lentile"
-
-#, fuzzy
-#~ msgid "Mount"
-#~ msgid_plural "Mounts"
-#~ msgstr[0] "Monturi"
-#~ msgstr[1] "Monturi"
-#~ msgstr[2] "Monturi"
-
-#, fuzzy
-#~ msgid "Guiding telescope or lens"
-#~ msgid_plural "Guiding telescopes or lenses"
-#~ msgstr[0] "Telescoape de ghidare sau lentile"
-#~ msgstr[1] "Telescoape de ghidare sau lentile"
-#~ msgstr[2] "Telescoape de ghidare sau lentile"
-
-#, fuzzy
-#~ msgid "Guiding camera"
-#~ msgid_plural "Guiding cameras"
-#~ msgstr[0] "Camere de ghidaj"
-#~ msgstr[1] "Camere de ghidaj"
-#~ msgstr[2] "Camere de ghidaj"
-
-#, fuzzy
-#~ msgid "Focal reducer"
-#~ msgid_plural "Focal reducers"
-#~ msgstr[0] "Reductoare de focală"
-#~ msgstr[1] "Reductoare de focală"
-#~ msgstr[2] "Reductoare de focală"
-
-#~ msgid "created a new public data pool"
-#~ msgstr "a crea un nou sondaj public de date"
-
-#~ msgid "Affiliates"
-#~ msgstr "Afiliere"
-
-#~ msgid "The following companies support AstroBin."
-#~ msgstr "Urmatoarele companii sprijina AstroBin."
-
-#~ msgid "AstroBin Raw Data"
-#~ msgstr "Astrobin date de tip Raw  "
-
-#, fuzzy
-#~ msgid "Raw data"
-#~ msgstr "Biblioteca de date Raw"
-
-#~ msgid "Raw data library"
-#~ msgstr "Biblioteca de date Raw"
-
-#~ msgid "Private shared folders"
-#~ msgstr "Foldere cu distribuire privata"
-
-#~ msgid "Is my data safe on AstroBin?"
-#~ msgstr "Sunt datele mele sigure pe AstroBin?"
-
-#~ msgid "What's the deal with the Staging Area and the Public Area?"
-#~ msgstr "Care-i treaba cu Zona de Stagiat si Zona Publica ?"
-
-#~ msgid "Why was AstroBin created?"
-#~ msgstr "De ce a fost creat AstroBin?"
-
-#~ msgid "What are the plans for the future?"
-#~ msgstr "Care sunt planurile de viitor?"
-
-#~ msgid "How can I format my comments?"
-#~ msgstr "Cum pot formata comentariile mele?"
-
-#~ msgid "How is the AstroBin index calculated?"
-#~ msgstr "Cum este calculat indexul AstroBin?"
-
-#~ msgid "How is the Image of the Day selected?"
-#~ msgstr "Cum este selectată Imaginea Zilei?"
-
-#~ msgid "... and their answers!"
-#~ msgstr "... și răspunsurile lor!"
-
-#~ msgid "You type:"
-#~ msgstr "Scrii:"
-
-#~ msgid "You see:"
-#~ msgstr "Vezi:"
-
-#~ msgid "italics"
-#~ msgstr "cursiv"
-
-#~ msgid "bold"
-#~ msgstr "aldin"
-
-#~ msgid "preformatted text"
-#~ msgstr "text preformatat"
-
-#~ msgid "quoted text"
-#~ msgstr "text citat"
-
-#~ msgid "Be respectful of other users."
-#~ msgstr "Fii respectuos cu alți utilizatori."
-
-#~ msgid "What is forbidden"
-#~ msgstr "Ce este interzis"
-
-#~ msgid "All the data at a glance"
-#~ msgstr "Toate datele dintr-o privire"
-
-#~ msgid "More than just an image"
-#~ msgstr "Mai mult decât o imagine"
-
-#~ msgid "So, what are you waiting for?"
-#~ msgstr "Deci, ce mai aștepți?"
-
-#, fuzzy
-#~ msgid "Send to public data pool"
-#~ msgstr "Promovare in zona publica"
-
-#, fuzzy
-#~ msgid "Send to private shared folder"
-#~ msgstr "Trimite mesaj privat"
-
-#, fuzzy
-#~ msgid "Back to image"
-#~ msgstr "Inapoi in sus"
-
-#~ msgid "You have no messages."
-#~ msgstr "Nu aveti mesaje."
-
-#~ msgid "Show all messages"
-#~ msgstr "Arata toate mesajele."
-
-#~ msgid "Error. Try again!"
-#~ msgstr "Eroare. Incercati din nou !"
-
-#, fuzzy
-#~| msgid ""
-#~| "%(user)s replied to your comment. Check it out at the following url: "
-#~| "%(url)s"
-#~ msgid ""
-#~ "%(originator)s has published a new image! Check it out at the following "
-#~ "url: <a href=\"%(object_url)s\">%(object_url)s</a>"
-#~ msgstr ""
-#~ "%(user)s a răspuns la comentariul tău! Verifică următoarea adresă: %(url)s"
-
-#, fuzzy
-#~ msgid ""
-#~ "<a href=\"%(folder_url)s\">You are invited to the private shared folder: "
-#~ "<strong>\"%(folder_name)s.\"</strong></a>"
-#~ msgstr ""
-#~ "<a href=\"%(object_url)s\">Acum urmariti <strong>%(object)s</strong>.</a>"
-
-#, fuzzy
-#~ msgid "You are invited to the private shared folder: %(folder_name)s"
-#~ msgstr "Sunteti invitat la a vizita un folder cu statut privat."
-
-#, fuzzy
-#~ msgid ""
-#~ "%(user_name)s has added a new processed image to the public data pool: "
-#~ "\"%(pool_name)s\". Check it out at the following url: <a href="
-#~ "\"%(pool_url)s\">%(pool_url)s</a>"
-#~ msgstr ""
-#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> doreste sa "
-#~ "aduca o imagine in atentia ta.</a>"
-
-#, fuzzy
-#~| msgid "User"
-#~ msgid "Username"
-#~ msgstr "Utilizator"
-
-#, fuzzy
-#~| msgid "Password changed"
-#~ msgid "Password"
-#~ msgstr "Parolă schimbată"
-
-#, fuzzy
-#~ msgid "Activate"
-#~ msgstr "Activ"
-
-#, fuzzy
-#~ msgid "Deactivate"
-#~ msgstr "Activ"
-
-#, fuzzy
-#~ msgid "AstroBin Premium subscription plans"
-#~ msgstr "AstroBin Intrebari"
-
-#, fuzzy
-#~ msgid "AstroBin Raw Data subscription plans"
-#~ msgstr "Astrobin date de tip Raw  "
-
-#~ msgid ""
-#~ "The following Terms are only available in English. It is your "
-#~ "responsibility to comprehend them."
-#~ msgstr ""
-#~ "Urmatorii termeni sunt disponibili doar in engleza. Este "
-#~ "responsabilitatea dumneavoastra sa ii intelegeti."
-
-#, fuzzy
-#~ msgid "Raw data upload"
-#~ msgstr "Biblioteca de date Raw"
-
-#, fuzzy
-#~ msgid "Filename"
-#~ msgstr "Suriname"
-
-#, fuzzy
-#~ msgid "Choose files"
-#~ msgstr "Alege fişier"
-
-#, fuzzy
-#~ msgid "Start upload"
-#~ msgstr "incarcata"
-
-#, fuzzy
-#~| msgid ""
-#~| "Done! Go to <a href=\\\"/me\\\">your profile</a> to see the new pictures "
-#~| "(and keep an eye on your notifications)!"
-#~ msgid ""
-#~ "Done! Go to <a href=\\\"/users/\" + username + \"/?staging&sub=uploaded\\"
-#~ "\">your staging gallery</a> to see the new pictures (and keep an eye on "
-#~ "your notifications)!"
-#~ msgstr ""
-#~ "Gata ! Mergeti la <a href=\\\"/me\\\">profilul dumneavoastra</a> pentru a "
-#~ "vedea noile poze ( si a fi atent la notificatiile dumneavoastra) !"
-
-#~ msgid "The perfect home for your astrophotography."
-#~ msgstr "Casa perfectă pentru astrofotografia ta."
-
-#~ msgid "Unlimited uploads, unlimited size."
-#~ msgstr "Incarcari nelimitate, marime nemilitata."
-
-#~ msgid ""
-#~ "Data is everything, and AstroBin will give you the tools to keep your "
-#~ "data neat and organized. And with our plots, you can get insights on your "
-#~ "productivity and on the gear you use the most."
-#~ msgstr ""
-#~ "Datele sunt totul, iar AstroBin vă va oferi instrumentele necesare pentru "
-#~ "a menține datele dvs. îngrijite și organizate.Si cu parcelele noastre "
-#~ "puteți obține intuiții asupra productivitati cu echipamentul din dotare."
-
-#~ msgid "Taiwan, Province of China"
-#~ msgstr "Taiwan"
-
-#~ msgid "Any"
-#~ msgstr "Orice"
-
-#~ msgid "Express value in mm"
-#~ msgstr "Valoare exprimată în mm"
-
-#~ msgid "Express value in &mu;m"
-#~ msgstr "Valoare exprimată în &mu;m"
-
-#~ msgid "Express value in hours"
-#~ msgstr "Valoare exprimată în ore"
-
-#~ msgid "Min. telescope aperture"
-#~ msgstr "Apertura minimă a telescopului"
-
-#~ msgid "Max. telescope aperture"
-#~ msgstr "Apertura maximă a telescopului"
-
-#~ msgid "Acquired before"
-#~ msgstr "Achiziționat înainte de"
-
-#~ msgid "Min. integration"
-#~ msgstr "Integrare minimă"
-
-#~ msgid "Max. integration"
-#~ msgstr "Integrare maximă"
-
-#~ msgid "Max. Moon phase %"
-#~ msgstr "Faza maximă a Lunii %"
-
-#~ msgid "Matching items:"
-#~ msgstr "Elementele care se potrivesc:"
-
-#~ msgid "New image from a user you follow"
-#~ msgstr "O noua imagine de la utilizatorul urmarit."
-
-#~ msgid "New image revision from a user you follow"
-#~ msgstr "O noua imagine revizuita de la un utilizator pe care il urmariti"
-
-#~ msgid "AstroBin has published a new blog entry"
-#~ msgstr "Astrobin a publicat o noua intrare pe blog"
-
-#~ msgid "Your image received a new comment"
-#~ msgstr "Imaginea ta a primit un comentariu nou"
-
-#~ msgid "There was a reply to your comment"
-#~ msgstr "A aparut un raspuns la comentariul tau."
-
-#, fuzzy
-#~ msgid "Your image was bookmarked"
-#~ msgstr "Imaginea ta a fost favorita de cineva."
-
-#, fuzzy
-#~ msgid "Your image was liked"
-#~ msgstr "Imaginea dumneavoastra a fost stearsa"
-
-#~ msgid "New image with some gear you follow"
-#~ msgstr "Imagine noua cu ceva echipament pe care tu il urmaresti."
-
-#~ msgid "New image of a subject you follow"
-#~ msgstr "O noua imagine cu subiectul pe care il urmaresti"
-
-#~ msgid "New discussion about a gear item you own"
-#~ msgstr "O noua discutie despre echipamentele pe care le detineti"
-
-#~ msgid "New review of a gear item you own"
-#~ msgstr "Un nou review al echipamentului pe care il detineti"
-
-#~ msgid "New data posted to public pool"
-#~ msgstr "O noua data publicata in zona publica"
-
-#, fuzzy
-#~ msgid "New image posted to public data pool"
-#~ msgstr "O noua imagine cu subiectul pe care il urmaresti"
-
-#~ msgid "New data posted to shared private folder"
-#~ msgstr "O noua data postata in zona privata a folderului de interschimb"
-
-#~ msgid "New image posted to shared private folder"
-#~ msgstr "O noua imagine postata zona privata a folderului de interschimb"
-
-#~ msgid "You are invited to a shared private folder"
-#~ msgstr "Sunteti invitat la a vizita un folder cu statut privat."
-
-#, fuzzy
-#~ msgid "You are invited to a group"
-#~ msgstr "Sunteti invitat la a vizita un folder cu statut privat."
-
-#~ msgid "Activity stream"
-#~ msgstr "Stream de activitate"
-
-#~ msgid ""
-#~ "The best way to see what's new on AstroBin: a big wall with 100 images "
-#~ "per page, that you can sort and filter to your liking."
-#~ msgstr ""
-#~ "Cel mai bun mod de a vedea ce este nou pe Astrobin: un mare zid cu 100 "
-#~ "imagini pe pagina, pe care le puteti sorta si filtra dupa cum va plac. "
-
-#~ msgid "previous"
-#~ msgstr "anterior"
-
-#~ msgid "next"
-#~ msgstr "urmatorul"
-
-#~ msgid "Sort by"
-#~ msgstr "Selecteaza dupa"
-
-#, fuzzy
-#~ msgid "Number of likes"
-#~ msgstr "Număr de cadre"
-
-#~ msgid "Filter by"
-#~ msgstr "Filtrate "
-
-#~ msgid "All deep sky objects"
-#~ msgstr "Toate obiectele deep sky"
-
-#~ msgid "All Solar System objects"
-#~ msgstr "Toate obiectele sistemului solar"
-
-#~ msgid "Moon"
-#~ msgstr "Luna"
-
-#~ msgid "Planets"
-#~ msgstr "Planete"
-
-#~ msgid "Comets"
-#~ msgstr "Comete"
-
-#~ msgid "Send %(username)s a message"
-#~ msgstr "Trimite utilizatorului %(username)s un mesaj"
-
-#~ msgid ""
-#~ "If you searched for a gear item, the following users own one, or have "
-#~ "imaged with one."
-#~ msgstr ""
-#~ "Daca ati cautat un echipament, urmatorii utilizatori au unul sau au "
-#~ "folosit unul."
-
-#, fuzzy
-#~ msgid "Image modetation"
-#~ msgstr "Mod imagine"
-
-#, fuzzy
-#~ msgid "Image moderation"
-#~ msgstr "Mod imagine"
-
-#, fuzzy
-#~ msgid "Spam images"
-#~ msgstr "Cateva imagini"
-
-#~ msgid "Allow external login"
-#~ msgstr "Permiteți autentificare externă"
-
-#~ msgid "The following site has requested verification of your account:"
-#~ msgstr "Site-ul următor a solicitat verificarea contului dvs.:"
-
-#~ msgid "Verify"
-#~ msgstr "Verifică"
-
-#~ msgid "AstroBin is currently in closed beta"
-#~ msgstr "AstroBin este în prezent în versiune beta închisă"
-
-#~ msgid "What is AstroBin?"
-#~ msgstr "Ce este AstroBin ?"
-
-#~ msgid ""
-#~ "and it will be open for everybody soon. If you've been invited, you can "
-#~ "<a href=\"%(login_url)s\">login</a>, otherwise you can leave us your "
-#~ "email address and we will notify you when the website is up!"
-#~ msgstr ""
-#~ "şi el va fi deschis pentru toţi în curând. Dacă tu ai fost invitat, tu "
-#~ "poţi <a href=\"%(login_url)s\">logare</a>, sau ne poţi lăsa adresa ta de "
-#~ "e-mail şi noi te vom notifica când site-ul web este disponibil!"
-
-#~ msgid "Login with AstroBin"
-#~ msgstr "Autentifică-te cu AstroBin"
-
-#~ msgid "Basic criteria"
-#~ msgstr "Criteriu de baza"
-
-#~ msgid "Telescope's aperture"
-#~ msgstr "Apertura telescopului"
-
-#~ msgid "Select types"
-#~ msgstr "Selectaţi tipuri"
-
-#~ msgid "# selected"
-#~ msgstr "# selectat"
-
-#~ msgid "Select licenses"
-#~ msgstr "Selectează licenţele"
-
-#, fuzzy
-#~ msgid "Action"
-#~ msgstr "Actiuni"
-
-#, fuzzy
-#~ msgid "%(username)s's bookmarks"
-#~ msgstr "Vezi imaginile lui %(username)s"
-
-#, fuzzy
-#~ msgid "Your followers"
-#~ msgstr "Da, urmati !"
-
-#, fuzzy
-#~ msgid "%(username)s's followers"
-#~ msgstr "Vezi favoritele lui %(username)"
-
-#, fuzzy
-#~ msgid "%(username)s's followed users"
-#~ msgstr "Vezi favoritele lui %(username)"
-
-#~ msgid "Edit profile"
-#~ msgstr "Editati profilul"
-
-#, fuzzy
-#~ msgid "There was one or more errors processing the form. "
-#~ msgstr ""
-#~ "Au fost una sau mai multe erori de procesare a formularului. Ar putea fi "
-#~ "necesar să derulați în jos pentru a le vedea. "
-
-#, fuzzy
-#~ msgid "Archive of 'Image of the day' winners"
-#~ msgstr "Imaginea zilei"
-
-#, fuzzy
-#~ msgid "Choose today's 'Image of the day'"
-#~ msgstr "Imaginea zilei"
-
-#, fuzzy
-#~ msgid "Choose"
-#~ msgstr "Alege fişier"
-
-#~ msgid "Leaderboard"
-#~ msgstr "Grupul de lideri"
-
-#, fuzzy
-#~ msgid "View spam list"
-#~ msgstr "Vizualizati pagina"
-
-#, fuzzy
-#~ msgid "Choose Image Of The Day"
-#~ msgstr "Imaginea zilei"
-
-#, fuzzy
-#~ msgid "Content moderation"
-#~ msgstr "Ţara de funcţionare"
-
-#~ msgid "Edit basic information"
-#~ msgstr "Editeaza informatiile de baza"
-
-#~ msgid "Change license"
-#~ msgstr "Schimba licenta"
-
-#~ msgid "Date and time"
-#~ msgstr "Data si ora"
-
-#~ msgid "Excerpt"
-#~ msgstr "Extras"
-
-#~ msgid "or return to messages"
-#~ msgstr "sau reveniti la mesaje"
-
-#, fuzzy
-#~ msgid "Your activity stream"
-#~ msgstr "Stream de activitate"
-
-#, fuzzy
-#~ msgid "Recently uploaded"
-#~ msgstr "Recent favorite"
-
-#, fuzzy
-#~ msgid "Recently bookmarked"
-#~ msgstr "Recent favorite"
-
-#, fuzzy
-#~ msgid "Recent images with link to TIFF/FITS"
-#~ msgstr "Legătură către TIFF/FITS"
-
-#, fuzzy
-#~ msgid "Uploads used"
-#~ msgstr "Incarcate"
-
-#~ msgid ""
-#~ "Select your language, and which e-mail notification you would like to "
-#~ "receive:"
-#~ msgstr ""
-#~ "Selectaţi limba dvs. şi ce notificare prin e-mail doriţi să primiţi:"
-
-#~ msgid "Image brought to your attention"
-#~ msgstr "Imagine adusa in atentia dvs."
-
-#~ msgid "Bring image to attention"
-#~ msgstr "Aduceti imaginea in atentie"
-
-#~ msgid ""
-#~ "By choosing some users and clicking the button below, you will send them "
-#~ "a notification prompting them to checkout this image."
-#~ msgstr ""
-#~ "Alegand unii utilizatori si apasand butonul de mai jos, le vei trimite o "
-#~ "notificare sa verifice aceasta imagine."
-
-#~ msgid "Click on a user below!"
-#~ msgstr "Faceți clic pe un utilizator de mai jos!"
-
-#~ msgid "Done!"
-#~ msgstr "Realizat !"
-
-#~ msgid "The image was brought to the attention of the selected users."
-#~ msgstr "Imaginea a fost adusa in atentia utilizatorilor selectati ."
-
-#~ msgid "Bring to a user's attention"
-#~ msgstr "Aduceti in atentia unui utilizator"
-
-#~ msgid ""
-#~ "%(originator)s would like to bring the following image to your attention: "
-#~ "%(object_url)s"
-#~ msgstr ""
-#~ "%(originator)s doreste sa aduca urmatoarea imagine in atentia ta: "
-#~ "%(object_url)s"
-
-#~ msgid ""
-#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> wants to bring "
-#~ "an image to your attention.</a>"
-#~ msgstr ""
-#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> doreste sa "
-#~ "aduca o imagine in atentia ta.</a>"
-
-#~ msgid "%(originator)s wants to bring an image to your attention"
-#~ msgstr "%(originator)s doreste sa aduca o imagine in atentia ta"
-
-#, fuzzy
-#~ msgid "%(user)s has added yout image to their bookmarks: %(url)s"
-#~ msgstr "%(user)s a marcat imaginea ta ca favorită: %(url)s"
-
-#, fuzzy
-#~ msgid ""
-#~ "<a href=\"%(pool_url)s\"><strong>%(user_name)s</strong> has added new "
-#~ "data to the public pool: <strong>\"%(pool_name)s.\"</a>"
-#~ msgstr ""
-#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> doreste sa "
-#~ "aduca o imagine in atentia ta.</a>"
-
-#, fuzzy
-#~ msgid ""
-#~ "<a href=\"%(folder_url)s\"><strong>%(user_name)s</strong> has added new "
-#~ "data to the private shared folder: <strong>\"%(folder_name)s.\"</a>"
-#~ msgstr ""
-#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> doreste sa "
-#~ "aduca o imagine in atentia ta.</a>"
-
-#, fuzzy
-#~ msgid "Inactive"
-#~ msgstr "Activ"
-
-#~ msgid "Yes. AstroBin is completely free!"
-#~ msgstr "Da. AstroBin este complet gratuit!"
-
-#~ msgid "Community"
-#~ msgstr "Comunitatea"
-
-#~ msgid "What is AstroBin Questions?"
-#~ msgstr "Ce este Întrebări AstroBin?"
-
-#~ msgid "Go to AstroBin Questions!"
-#~ msgstr "Mergi la Întrebări AstroBin! "
-
-#~ msgid "Step 2 of 5: watermark"
-#~ msgstr "Pasul 2 din 5:eticheta"
-
-#~ msgid "Following a user was successful"
-#~ msgstr "Regimul de urmarire a utilizatorului s-a activat cu succes."
-
-#~ msgid "Unfollowing a user was successful"
-#~ msgstr "Regimul de urmarire a utilizatorului s-a dezactivat cu succes."
-
-#~ msgid "Your image is ready"
-#~ msgstr "Imaginea ta este pregătită"
-
-#~ msgid "Your request was fulfilled"
-#~ msgstr "Cererea dumneavoastra a fost indeplinita."
-
-#~ msgid "Your image was deleted"
-#~ msgstr "Imaginea dumneavoastra a fost stearsa"
-
-#~ msgid "You have some images that are lacking data"
-#~ msgstr "Ai cateva imagini care au date lipsa."
-
-#~ msgid "Clusters"
-#~ msgstr "Roiuri de stele"
-
-#~ msgid "If possible, use catalog names (e.g. M101, or NGC224 or IC1370)."
-#~ msgstr ""
-#~ "Dacă este posibil, utilizează denumirile din catalog (ex. M101, or NGC224 "
-#~ "or IC1370)."
-
-#~ msgid "Subjects"
-#~ msgstr "Subiecte"
-
-#~ msgid "Please enter either some subjects or a main solar system subject."
-#~ msgstr ""
-#~ "Vă rugăm să introduceți  fie un anume subiect fie un subiect legat de "
-#~ "sistemul nostru solar. "
-
-#~ msgid "Nominate for"
-#~ msgstr "Nominalizat pentru"
-
-#~ msgid "has favorited"
-#~ msgstr "a marcat ca favorit/ă"
-
-#~ msgid "I don't want this image plate-solved."
-#~ msgstr "Nu vreau această imagine placă-rezolvată."
-
-#~ msgid "This is not a deep sky image, don't plate-solve it."
-#~ msgstr "Aceasta nu este o imagine Deep-Sky, n-o lasa- rezolv-o ."
-
-#~ msgid "I have no idea about the size of field, try a blind solve."
-#~ msgstr ""
-#~ "Nu am nici o idee despre dimensiunea câmpului, încearcă o rezolvare oarbă."
-
-#~ msgid "This is a very wide field image (more than 10 degrees)."
-#~ msgstr ""
-#~ "Aceasta este o imagine cu un câmp foarte larg (mai mult de 10 grade)."
-
-#~ msgid "This is a wide field image (1 to 10 degrees)."
-#~ msgstr "Aceasta este o imagine cu un câmp larg (1 spre 10 grade)."
-
-#~ msgid "This ia narrow field image (less than 1 degree)."
-#~ msgstr "Aceasta este o imagine cu un câmp îngust (mai puţin de un grad)."
-
-#~ msgid "Allow rating"
-#~ msgstr "Permite votare"
-
-#~ msgid "Insert a focal length if you want to plate-solve."
-#~ msgstr "Introduceți o distanță focală dacă doriți placare-rezolvată."
-
-#~ msgid "Insert a pixel size if you want to plate-solve."
-#~ msgstr "Introduceți o dimensiune a pixelului dacă doriți placare-rezolvată."
-
-#~ msgid ""
-#~ "This is the smallest of the binning values you used. If you imaged L in "
-#~ "1x1 and RGB in 2x2, put 1x1 here."
-#~ msgstr ""
-#~ "Aceasta este cea mai mică dintre valorile de reductie matriciala a "
-#~ "imaginii pe care le-aţi utilizat până acum. Dacă aţi fotografiat L în 1x1 "
-#~ "şi RGB în 2x2, puneţi 1x1 aici."
-
-#~ msgid ""
-#~ "If you scaled your image before uploading, enter here the percentage of "
-#~ "the new size. E.g. 50 if you made it half the size. Cropping, instead, "
-#~ "doesn't matter."
-#~ msgstr ""
-#~ "Dacă scalați imaginea înainte de încărcare, introduceți aici procentul "
-#~ "din noua dimensiune. De exemplu, 50% Dacă ai făcut jumătate din "
-#~ "dimensiune. Decuparea, în schimb, nu contează."
-
-#~ msgid "Scaling"
-#~ msgstr "Scalare"
-
-#~ msgid "Click on a suggestion or press TAB to add what you typed"
-#~ msgstr ""
-#~ "Faceti click pe o sugestie sau apasati TAB pentru a adauga ce ati scris"
-
-#~ msgid ""
-#~ "To fill in the missing dates, use the <strong>Edit acquisition details</"
-#~ "strong> entry in the <strong>Actions</strong> menu for each image."
-#~ msgstr ""
-#~ "Pentru a completa datele lipsa, folositi  intrarea <Edit acquisition "
-#~ "details> in meniul <Actions> pentru fiecare imagine."
-
-#~ msgid ""
-#~ "To fill in the missing gear, use the <strong>Edit gear used</strong> "
-#~ "entry in the <strong>Actions</strong> menu for each image."
-#~ msgstr ""
-#~ "Pentru completarea echipamentului, folositi <Edit gear used> apelat in "
-#~ "meniul <Actions> pentru fiecare imagine."
-
-#~ msgid ""
-#~ "To fill in the missing subjects, use the <strong>Edit basic information</"
-#~ "strong> entry in the <strong>Actions</strong> menu for each image."
-#~ msgstr ""
-#~ "Pentru completarea subiectelor lipsa folositi<Edit basic information> "
-#~ "apelat din meniul<Actions> pentru fiecare imagine."
-
-#~ msgid ""
-#~ "To fill in the missing acquisition details, use the <strong>Edit "
-#~ "acquisition details</strong> entry in the <strong>Actions</strong> menu "
-#~ "for each image."
-#~ msgstr ""
-#~ "Pentru completarea detaliilor de achizitie folositi<Edit acquisition "
-#~ "details> apelat din meniul<Actions> pentru fiecare imagine."
-
-#~ msgid "Nomination for the Messier Marathon"
-#~ msgstr "Nominalizare pentru Maratonul Messier"
-
-#~ msgid "Top Nomination for the Messier Marathon"
-#~ msgstr "Nominalizare de varf ( de top ) pentru maratonul Messier"
-
-#~ msgid "Messier marathon"
-#~ msgstr "Maraton Messier"
-
-#~ msgid "Favorites"
-#~ msgstr "Favorite"
-
-#~ msgid "Unfollow"
-#~ msgstr "Anulați urmărirea"
-
-#~ msgid "How do I get an image featured on the Messier Marathon page?"
-#~ msgstr "Cum obtin o imagine infatisata pe pagina Messier Marathon ?"
-
-#~ msgid "What is the correct way to vote images?"
-#~ msgstr "Care este modul corect de a vota imaginile?"
-
-#~ msgid "The rating values seem odd. How are they calculated?"
-#~ msgstr "Valorile de rating par ciudate. Cum sunt calculate?"
-
-#~ msgid "It's a start, but it needs better data."
-#~ msgstr "E un început, dar are nevoie de date mai bune."
-
-#~ msgid "It looks good, but it needs better processing."
-#~ msgstr "Arată bine, dar necesită o prelucrare mai bună. "
-
-#~ msgid "Good data, good processing."
-#~ msgstr "Date bune, prelucrare bună."
-
-#~ msgid "Great result!"
-#~ msgstr "Rezultat minunat!"
-
-#~ msgid "Top quality!"
-#~ msgstr "Calitate de top!"
-
-#~ msgid "Recent"
-#~ msgstr "Recent"
-
-#~ msgid "Recently voted 5 stars"
-#~ msgstr "Recent votate cu 5 stelute"
-
-#~ msgid "Avg. integration hours"
-#~ msgstr "Media orelor de integrare"
-
-#~ msgid "Messier Marathon"
-#~ msgstr "Maratonul Messier"
-
-#~ msgid "Nominate for the Messier Marathon"
-#~ msgstr "Nominalizati pentru maratonul Messier"
-
-#~ msgid ""
-#~ "Sorry, but it doesn't look like this image contains a Messier object. If "
-#~ "you think this is a mistake, please contact the author of the image and "
-#~ "ask them to add the correct Messier object as a subject."
-#~ msgstr ""
-#~ "Ne pare rau, dar nu pare ca aceasta imagine sa contina vreun obiect "
-#~ "Messier. Daca consideriati ca aceasta este o greseala, va rugam sa "
-#~ "contactati autorul imaginii si sa il sfatuiti cum sa marcheze corect "
-#~ "obiectul Messier."
-
-#~ msgid ""
-#~ "This image contains multiple Messier objects. Please choose the one for "
-#~ "which you are nominating this image."
-#~ msgstr ""
-#~ "Aceasta imagine contine mai multe obiecte Messier. Va rugam sa alegeti pe "
-#~ "cea pentru care nominalizati aceasta imagine."
-
-#~ msgid "Your nomination has been recorded, thank you!"
-#~ msgstr "Nominalizarea dumneavoastra a fost inregistrata. Multumim !"
-
-#~ msgid "Visit the Messier Marathon"
-#~ msgstr "Vizitati maratonul Messier"
-
-#~ msgid "Favorited"
-#~ msgstr "Favorite"
-
-#~ msgid ""
-#~ "This image was just uploaded and is still processing. Please try to "
-#~ "refresh this page in a few seconds."
-#~ msgstr ""
-#~ "Aceasta imagine tocmai a fost uploadata si se afla in curs de procesare. "
-#~ "Va rugam sa reveniti cu un refresh al paginii peste cateva secunde."
-
-#~ msgid "(hide these subjects)"
-#~ msgstr "(ascunde aceste subiecte)"
-
-#~ msgid "arcminutes"
-#~ msgstr "arcminute"
-
-#~ msgid "Field height"
-#~ msgstr "Inaltimea campului"
-
-#~ msgid "Mark as favorite"
-#~ msgstr "Marcheaza ca favorit"
-
-#~ msgid "Votes"
-#~ msgstr "Voturi"
-
-#~ msgid "Copied!"
-#~ msgstr "Copiat !"
-
-#~ msgid "Follow %(username)s?"
-#~ msgstr "Urmariti %(username)s?"
-
-#~ msgid ""
-#~ "You will receive a notification every time %(username)s posts a new "
-#~ "image. Continue?"
-#~ msgstr ""
-#~ "Veti primi cate o notificare de fiecare data cand %(username)s a postat o "
-#~ "noua imagine. Continuati ?"
-
-#~ msgid "Stop following %(username)s?"
-#~ msgstr "Opriti urmarirea userului %(username)s?"
-
-#~ msgid ""
-#~ "You will stop receiving notifications when %(username)s posts a new "
-#~ "image. Continue?"
-#~ msgstr ""
-#~ "Nu veti mai primi notificari cand utilizatorul %(username)s va posta o "
-#~ "noua imagine. Continuati ?"
-
-#~ msgid "Yes, stop following!"
-#~ msgstr "Da, nu mai urmari !"
-
-#~ msgid "You have already voted."
-#~ msgstr "Deja ai votat."
-
-#~ msgid "Yes, delete everything"
-#~ msgstr "Da, sterge tot."
-
-#~ msgid "Yes, delete image"
-#~ msgstr "Da, sterge imaginea"
-
-#~ msgid "TIFF/FITS requested"
-#~ msgstr "TIFF/FITS sunt solicitate"
-
-#~ msgid "Step 5 of 5: acquisition details"
-#~ msgstr "Pasul 5 din 5: detalii de achizitie"
-
-#~ msgid "Save and finish"
-#~ msgstr "Salvati si continuati"
-
-#~ msgid "Step 3 of 5: basic information"
-#~ msgstr "Pasul 3 din 5: informatii de baza"
-
-#~ msgid "Step 4 of 5: gear used"
-#~ msgstr "Pasul 4 din 5: echipamentul utilizat"
-
-#~ msgid "Next step: acquisition"
-#~ msgstr "Pasul urmator: achizitia"
-
-#~ msgid "Knowing the pixel scale will help"
-#~ msgstr "Cunoscand marimea pixelilor va ajuta"
-
-#~ msgid ""
-#~ "<strong>Note</strong>: if you didn't upload a full resolution image, the "
-#~ "pixel scale will be wrong!"
-#~ msgstr ""
-#~ "<strong>Nota</strong>: daca nu ati uploadat o imagine la rezolutia "
-#~ "maxima, scara pixelilor va fi gresita !"
-
-#~ msgid "newer"
-#~ msgstr "nou"
-
-#~ msgid "older"
-#~ msgstr "vechi"
-
-#~ msgid ""
-#~ "%(user)s has nominated your image of %(messier_object)s for the Messier "
-#~ "Marathon. Congratulations!\n"
-#~ "\n"
-#~ "This is the image of yours that was nominated: http://astrobin.com"
-#~ "%(image_url)s\n"
-#~ "\n"
-#~ "The Messier Marathon is a list of Messier objects featuring images from "
-#~ "AstroBin, chosen by the users via nominations.\n"
-#~ "\n"
-#~ "You can find the Messier Marathon here: http://astrobin.com/explore/"
-#~ "messier/"
-#~ msgstr ""
-#~ "%(user)s a nominalizat imaginea ta %(messier_object)s pentru Maratonul "
-#~ "Messier. Felicitari !\n"
-#~ "\n"
-#~ "Aceasta imagine a ta a fost nominalizata la : http://astrobin.com"
-#~ "%(image_url)s\n"
-#~ "\n"
-#~ "Maratonul Messier este o lista a obiectelor Messier care cuprinde imagini "
-#~ "de la Astrobin, alese de utilizatori via nominalizari.\n"
-#~ "\n"
-#~ "Puteti gasi maratonul Messier aici : http://astrobin.com/explore/messier/"
-
-#~ msgid ""
-#~ "<a href=\"%(image_url)s\"><strong>%(user)s</strong> has nominated your "
-#~ "image of <strong>%(messier_object)s</strong> for the Messier Marathon. "
-#~ "Congratulations!</a>"
-#~ msgstr ""
-#~ "<a href=\"%(image_url)s\"><strong>%(user)s</strong>a nominalizat imaginea "
-#~ "ta a <strong>%(messier_object)s</strong>pentru Maratonul Messier. "
-#~ "Felicitari !</a>"
-
-#~ msgid ""
-#~ "Your image of %(messier_object)s has been nominated for the Messier "
-#~ "Marathon!"
-#~ msgstr ""
-#~ "Imaginea ta %(messier_object)s a fost nominalizata pentru Maratonul "
-#~ "Messier !"
-
-#~ msgid "Average"
-#~ msgstr "Media"
-
-#~ msgid "Info"
-#~ msgstr "Info"
-
-#~ msgid "Interesting links"
-#~ msgstr "Linkuri de interes"
-
-#~ msgid "SIMBAD page"
-#~ msgstr "Pagina SIMBAD"
-
-#~ msgid "SIMBAD clickable map"
-#~ msgstr "Harta clickabila SIMBAD"
-
-#~ msgid "Camera types"
-#~ msgstr "Tipuri de camera"
-
-#~ msgid "Telescope types"
-#~ msgstr "Tipuri de telescop"
-
-#~ msgid "About %(username)s"
-#~ msgstr "Despre %(username)s"
-
-#~ msgid "View your favorites"
-#~ msgstr "Vezi favoritele tale"
-
-#~ msgid "No images."
-#~ msgstr "Nu sunt imagini."
-
-#~ msgid "(go back)"
-#~ msgstr "(mergi inapoi)"
-
-#~ msgid ""
-#~ "These images are ordered so that the most recently acquired appear first. "
-#~ "Please note: images with no acquisition dates will appear last, and in no "
-#~ "particular order."
-#~ msgstr ""
-#~ "Aceste imagini sunt ordonate in asa fel incat cele mai recente "
-#~ "achizitionate sa apara primele. Va rugam sa retineti: imaginile care nu "
-#~ "au datele de achizitie vor aparea ultimele si in nici o ordine anume."
-
-#~ msgid "Please fill in the missing dates on all your images!"
-#~ msgstr ""
-#~ "Va rugam, completati toate datele lipsa ale imaginilor dumneavoastra !"
-
-#~ msgid "Popular subjects"
-#~ msgstr "Subiecte populare"
-
-#~ msgid "Night after night"
-#~ msgstr "Noapte după noapte"
-
-#~ msgid "Nightly"
-#~ msgstr "Noapte de noapte"
-
-#~ msgid "A list of all images acquired every night."
-#~ msgstr "O lista cu imaginile capturate in fiecare noapte."
-
-#~ msgid "From latitude:"
-#~ msgstr "De la latitudinea :"
-
-#~ msgid "To latitude:"
-#~ msgstr "La latitudinea :"
-
-#~ msgid "Both"
-#~ msgstr "Ambele"
-
-#~ msgid "Most popular subjects"
-#~ msgstr "Cele mai populare subiecte"
-
-#~ msgid ""
-#~ "These are the most popular subjects on AstroBin, month by month. For each "
-#~ "subject, one image has been chosen. Use the menu to limit the images to "
-#~ "those acquired from a certain latitude on Earth."
-#~ msgstr ""
-#~ "Acestea sunt cele mai populare subiecte de pe AstroBin, lună de lună. "
-#~ "Pentru fiecare subiect, fost aleasă cate o imagine.Utilizati meniul "
-#~ "pentru a limita pe cele obtinute la o anumita latitudine de pe Pamant."
-
-#~ msgid "Images acquired night after night"
-#~ msgstr "Imagini capturate noapte dupa noapte ."
-
-#~ msgid ""
-#~ "On this page you can see images that were actually taken each night, and "
-#~ "not merely uploaded on a particular date."
-#~ msgstr ""
-#~ "Pe aceasta pagina putetii vedea imagini care au fost luate in fiecare "
-#~ "noapte si nu incarcate doar la o anumita data."
-
-#~ msgid "No image acquired in the selected month."
-#~ msgstr "Nicio imagine dobandita in luna selectata."
-
-#~ msgid "current month"
-#~ msgstr "luna curenta"
-
-#~ msgid ""
-#~ "<strong>%s</strong> has requested additional information about your image."
-#~ msgstr "%s a cerut informatii aditionale despre imaginea dvs."
-
-#~ msgid "Requests"
-#~ msgstr "Cereri"
-
-#~ msgid "Request additional information"
-#~ msgstr "Necesita informatii suplimentare"
-
-#~ msgid "Request TIFF/FITS"
-#~ msgstr "Solicitare TIFF/FITS"
-
-#, fuzzy
-#~ msgid "What is this?"
-#~ msgstr "Ce este acest site?"
-
-#~ msgid "Learn more about AstroBin Questions."
-#~ msgstr "Aflați mai multe despre Întrebări Astrobin."
-
-#, fuzzy
-#~ msgid "Introducing AstroBin Raw Data"
-#~ msgstr "Introducere în Întrebări Astrobin"
-
-#~ msgid "Manage received requests"
-#~ msgstr "Prelucrati cererile primite."
-
-#~ msgid "Here are your requests"
-#~ msgstr "Aici sunt cererile tale"
-
-#~ msgid "When"
-#~ msgstr "Când"
-
-#~ msgid "From"
-#~ msgstr "De la"
-
-#~ msgid "Action needed"
-#~ msgstr "Acţiune necesară"
-
-#~ msgid "Object affected"
-#~ msgstr "Obiect afectat"
-
-#~ msgid "at"
-#~ msgstr "la"
-
-#~ msgid "Location details missing."
-#~ msgstr "Detaliile locatiei lipsesc."
-
-#~ msgid "Yes."
-#~ msgstr "Da."
-
-#~ msgid "No."
-#~ msgstr "Nu."
-
-#~ msgid "Do it now?"
-#~ msgstr "Fă-o acum?"
-
-#~ msgid "Mark as done."
-#~ msgstr "Marcheaza ca terminat."
-
-#~ msgid "You are now registered. Activation email sent."
-#~ msgstr "Acum sunteţi înregistrat. Email-ul de activare a fost trimis."
-
-#~ msgid "Undelete"
-#~ msgstr "Restaurati ce ati sters"
-
-#~ msgid "Formatting help"
-#~ msgstr "Ajutor"
-
-#~ msgid "Start a discussion, leave a comment or ask a question"
-#~ msgstr "Incepe o discutie, lasa un comentariu sau pune o intrebare "
-
-#~ msgid "Community bulletin"
-#~ msgstr "Buletinul comunității"
-
-#~ msgid "Producer's description"
-#~ msgstr "Descrierea producatorului"

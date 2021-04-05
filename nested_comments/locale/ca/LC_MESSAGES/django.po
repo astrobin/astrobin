@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 21:58+0000\n"
+"POT-Creation-Date: 2021-04-05 19:06+0000\n"
 "PO-Revision-Date: 2014-01-29 01:49+0000\n"
 "Last-Translator: Bufot <bufote@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,17 +27,6 @@ msgstr "Cancel·lar"
 
 msgid "Add a comment"
 msgstr "Afegir comentari"
-
-#, fuzzy, python-format
-#| msgid ""
-#| "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-#| "register/\">register</a> to leave a comment.</p>"
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
-"\">sign up</a> to leave a comment."
-msgstr ""
-"Si us plau, <a href=\"/accounts/login/\">identifica't</a> o <a href=\"/"
-"accounts/register/\">registra't</a> per deixar el teu comentari.</p>"
 
 msgid "There are no comments yet."
 msgstr "Encara no hi ha comentaris."
@@ -83,41 +72,3 @@ msgstr "El comentari no pot estar buit."
 msgid "Submit"
 msgstr ""
 
-#~ msgid "Save"
-#~ msgstr "Desar"
-
-#~ msgid "(comment deleted)"
-#~ msgstr "(comentari esborrat)"
-
-#~ msgid "There doesn't seem to be anything here."
-#~ msgstr "Sembla que aquí no hi ha res."
-
-#~ msgid "Formatting help"
-#~ msgstr "Ajuda amb el format"
-
-#~ msgid "Preview"
-#~ msgstr "Previsualitzar"
-
-#~ msgid "You type:"
-#~ msgstr "Escriu:"
-
-#~ msgid "You see:"
-#~ msgstr "Per veure:"
-
-#~ msgid "italics"
-#~ msgstr "cursiva"
-
-#~ msgid "bold"
-#~ msgstr "negreta"
-
-#~ msgid "(TAB or 4 spaces)"
-#~ msgstr "(tabulació o 4 espais)"
-
-#~ msgid "preformatted text"
-#~ msgstr "text amb format"
-
-#~ msgid "quoted text"
-#~ msgstr "text citat"
-
-#~ msgid "escape the formatting syntax"
-#~ msgstr "sortir de la sintaxi del format"
