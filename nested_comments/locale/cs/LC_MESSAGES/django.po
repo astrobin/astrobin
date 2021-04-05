@@ -27,16 +27,14 @@ msgstr "Zrušit"
 msgid "Add a comment"
 msgstr "Přidat komentář"
 
-#, fuzzy, python-format
+#, python-format
 #| msgid ""
-#| "Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-#| "register/\">register</a> to leave a comment.</p>"
+#| "Please <a href=\"/accounts/login/\">login</a> or <a "
+#| "href=\"/accounts/register/\">register</a> to leave a comment.</p>"
 msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
-"\">sign up</a> to leave a comment."
+"Please <a href=\"%(login_url)s\">log in</a> or <a "
+"href=\"%(signup_url)s\">sign up</a> to leave a comment."
 msgstr ""
-"Pro přidání komentáře se, prosím, <a href=\"/accounts/login/\">přihlašte</a> "
-"nebo <a href=\"/accounts/register/\">zaregistrujte</a>.</p>"
 
 msgid "There are no comments yet."
 msgstr "Zatím nikdo žádný komentář nevložil."
@@ -81,4 +79,3 @@ msgstr "Není možné vložit prázdný komentář."
 
 msgid "Submit"
 msgstr ""
-

@@ -151,9 +151,7 @@ msgstr "请通过单击选择要票选为“今日最佳”的作品。"
 msgid ""
 "Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
 "<strong>%(time)s</strong>."
-msgstr ""
-"抱歉，您现在无法选择“今日最佳”：%(reason)s。 请在<strong>%(time)s</strong>后"
-"重试。"
+msgstr "抱歉，您现在无法选择“今日最佳”：%(reason)s。 请在<strong>%(time)s</strong>后重试。"
 
 msgid "This queue is currently empty."
 msgstr "此列队现在是空的。"
@@ -167,4 +165,3 @@ msgstr "您不能不票选由另一位评审选出的“今日最佳”。"
 #, python-format
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr "接下来的 %(days)s 天的所有“今日最佳”席位已填满。"
-

@@ -75,9 +75,7 @@ msgstr "自分の投稿に投票できません。"
 msgid ""
 "You cannot vote for an image that has been in the submission queue for more "
 "than %(max_days)s days."
-msgstr ""
-"投稿キューに登録されてから %(max_days)s 日以上経過した画像に投票することはで"
-"きません。"
+msgstr "投稿キューに登録されてから %(max_days)s 日以上経過した画像に投票することはできません。"
 
 #, python-format
 msgid "You have already voted for %(max_allowed)s images today."
@@ -105,8 +103,7 @@ msgstr "あなたが投票した画像を選挙で選ぶことはできません
 msgid ""
 "You cannot elect an image that has been in the review queue for more than "
 "%(max_days)s days."
-msgstr ""
-"%(max_days)s 日以上の日数が立っている画像を選挙で選択することはできません。"
+msgstr "%(max_days)s 日以上の日数が立っている画像を選挙で選択することはできません。"
 
 #, python-format
 msgid "You have already elected %(max_allowed)s images today."
