@@ -37,7 +37,7 @@
                      alt="{% trans "License" %}: {{license_title}}"
                      title="{% trans "License" %}: {{license_title}}" />
 
-                {% if image.pusblished %}
+                {% if image.published %}
                     <abbr class="published timeago"
                           title="{{image.published|to_user_timezone:request.user|date:'Y-m-d\TH:i:s'}}"></abbr>
                 {% else %}
