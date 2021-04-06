@@ -14,6 +14,7 @@ from pybb.models import Post, Topic
 from astrobin.models import DeepSky_Acquisition
 from astrobin.models import Image
 from astrobin.models import SolarSystem_Acquisition
+from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
@@ -544,6 +545,7 @@ class ImageIndex(SearchIndex, Indexable):
     is_moon = BooleanField()
     is_planets = BooleanField()
     is_comets = BooleanField()
+    constellation = CharField()
 
     is_iotd = BooleanField()
     is_top_pick = BooleanField()
@@ -646,6 +648,10 @@ class ImageIndex(SearchIndex, Indexable):
 
     def prepare_bookmarks(self, obj):
         return _prepare_bookmarks(obj)
+
+    def prepare_constellation(self, obj):
+        constellation = ImageService.get_constellation(obj.solution)
+        return constellation.get('abbreviation') if constellation else None
 
     def prepare_telescope_types(self, obj):
         return _prepare_telescope_types(obj)

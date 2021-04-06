@@ -701,6 +701,9 @@ class ImageDetailView(ImageDetailViewBase):
             'subjects': subjects,
             'subject_type': ImageService(image).get_subject_type_label(),
             'hemisphere': ImageService(image).get_hemisphere(r),
+            'constellation': ImageService.get_constellation(revision_image.solution) \
+                if revision_image \
+                else ImageService.get_constellation(image.solution),
             'license_icon': static('astrobin/icons/%s' % licenses[image.license][1]),
             'license_title': licenses[image.license][2],
             'resolution': '%dx%d' % (w, h) if (w and h) else None,
