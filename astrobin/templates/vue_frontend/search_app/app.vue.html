@@ -125,6 +125,9 @@
                                                     :integration-time-min="integrationTimeMin"
                                                     :integration-time-max="integrationTimeMax">
                                 </integration-time-filter>
+
+                                <constellation-filter v-if="filter.name === 'constellation'"
+                                                     :constellation="constellation"></constellation-filter>
                             </div>
 
                             <add-filter
@@ -349,6 +352,12 @@
                 {% else %}
                     999
                 {% endif %},
+            constellation:
+                {% if "constellation" in request.GET and request.GET.constellation %}
+                    "{{ request.GET.constellation }}"
+                {% else %}
+                    undefined
+                {% endif %},
 
             allFilters: [
                 {
@@ -459,6 +468,11 @@
                     label: "{% trans "Integration time (hours)" %}",
                     removable: true
                 },
+                {
+                    name: "constellation",
+                    label: "{% trans "Constellation" %}",
+                    removable: true
+                },
             ],
             enabledFilters: []
         },
@@ -552,6 +566,10 @@
 
             if (this.telescopeType) {
                 this.enabledFilters.push(this.getFilterByName("telescope_type"));
+            }
+
+            if (this.constellation) {
+                this.enabledFilters.push(this.getFilterByName("constellation"));
             }
         },
         methods: {
