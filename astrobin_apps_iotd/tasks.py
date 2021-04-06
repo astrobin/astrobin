@@ -40,7 +40,7 @@ def send_iotd_staff_inactive_reminders_and_remove_after_max_days():
         })
         return
 
-    reminder_2_days = int(math.ceil(final_notice_days / 2))
+    reminder_2_days = settings.IOTD_INACTIVE_MEMBER_REMINDER_2_DAYS
     reminder_2_members = IotdService().get_inactive_submitter_and_reviewers(reminder_2_days)
     if reminder_2_members:
         push_notification(reminder_2_members, None, 'iotd_staff_inactive_warning', {
@@ -50,7 +50,7 @@ def send_iotd_staff_inactive_reminders_and_remove_after_max_days():
         })
         return
 
-    reminder_1_days = int(math.ceil(final_notice_days / 4))
+    reminder_1_days = settings.IOTD_INACTIVE_MEMBER_REMINDER_1_DAYS
     reminder_1_members = IotdService().get_inactive_submitter_and_reviewers(reminder_1_days)
     if reminder_1_members:
         push_notification(reminder_1_members, None, 'iotd_staff_inactive_warning', {
