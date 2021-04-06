@@ -651,7 +651,7 @@ class ImageIndex(SearchIndex, Indexable):
 
     def prepare_constellation(self, obj):
         constellation = ImageService.get_constellation(obj.solution)
-        # Escape with __ because And (Andromeda) is not searchable, due to it being the smae word as the AND operator.
+        # Escape with __ because And (Andromeda) is not searchable, due to it being the same word as the AND operator.
         return "__%s__" % constellation.get('abbreviation') if constellation else None
 
     def prepare_telescope_types(self, obj):
