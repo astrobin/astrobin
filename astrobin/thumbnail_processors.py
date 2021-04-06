@@ -2,6 +2,7 @@ import logging
 import os
 from tempfile import NamedTemporaryFile
 
+import numpy as np
 from PIL import Image, ImageOps, ImageDraw, ImageEnhance, ImageFont, ImageFilter, ImageCms
 from PIL.ImageCms import PyCMSError
 from easy_thumbnails.utils import is_transparent
@@ -220,5 +221,14 @@ def ensure_srgb(image):
             except PyCMSError:
                 log.error("Unable to apply color profile!")
                 pass
+
+    return image
+
+
+def tiff_force_8bit(image, **kwargs):
+    if image.format == 'TIFF' and image.mode == 'I;16':
+        array = np.array(image)
+        normalized = (array.astype(np.uint16) - array.min()) * 255.0 / (array.max() - array.min())
+        image = Image.fromarray(normalized.astype(np.uint8))
 
     return image
