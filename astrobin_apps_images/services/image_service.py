@@ -8,11 +8,14 @@ from django.core.files.images import get_image_dimensions
 from django.db.models import Q
 
 from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
-from astrobin.utils import base26_encode, base26_decode
+from astrobin.utils import base26_encode, base26_decode, decimal_to_hours_minutes_seconds, \
+    decimal_to_degrees_minutes_seconds
 from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_platesolving.models import Solution
+from common.services.constellations_service import ConstellationsService, ConstellationException
 
 logger = logging.getLogger("apps")
+
 
 class ImageService:
     image = None  # type: Image
@@ -201,7 +204,7 @@ class ImageService:
     def get_images_pending_moderation(self):
         return Image.objects_including_wip.filter(
             moderator_decision=0,
-            uploaded__lt = datetime.now() - timedelta(minutes=10))
+            uploaded__lt=datetime.now() - timedelta(minutes=10))
 
     def get_hemisphere(self, revision_label=None):
         # type: (str) -> str
@@ -265,6 +268,23 @@ class ImageService:
 
         image.thumbnails.filter(revision=new_original.label).update(revision='0')
         new_original.delete()
+
+    @staticmethod
+    def get_constellation(solution):
+        if solution is None or solution.ra is None or solution.dec is None:
+            return None
+
+        ra = solution.advanced_ra if solution.advanced_ra else solution.ra
+        ra_hms = decimal_to_hours_minutes_seconds(ra, hour_symbol='', minute_symbol='', second_symbol='')
+
+        dec = solution.advanced_dec if solution.advanced_dec else solution.dec
+        dec_dms = decimal_to_degrees_minutes_seconds(dec, degree_symbol='', minute_symbol='', second_symbol='')
+
+        try:
+            return ConstellationsService.get_constellation('%s %s' % (ra_hms, dec_dms))
+        except ConstellationException as e:
+            logger.error('ConstellationException for solution %d: %s' % (solution.pk. str(e)))
+            return None
 
     @staticmethod
     def verify_file(path):

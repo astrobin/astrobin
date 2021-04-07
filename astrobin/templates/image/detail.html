@@ -34,7 +34,7 @@
 {% endblock %}
 
 {% block content %}
-    {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" or show_contains %}
+    {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" or constellation or show_contains %}
     <div class="subtitle">
         {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" %}
             <i class="icon icon-globe"></i>
@@ -44,6 +44,15 @@
             {% else %}
                 {% trans "Southern" %}
             {% endif %}
+
+            {% if constellation or show_contains %}
+                &nbsp;&middot;&nbsp;
+            {% endif %}
+        {% endif %}
+
+        {% if constellation %}
+            <i class="icon icon-star-empty"></i>
+            <strong>{% trans "Constellation" %}:</strong> {{ constellation.name }} ({{ constellation.abbreviation }})
 
             {% if show_contains %}
                 &nbsp;&middot;&nbsp;
