@@ -283,7 +283,7 @@ class ImageService:
         try:
             return ConstellationsService.get_constellation('%s %s' % (ra_hms, dec_dms))
         except ConstellationException as e:
-            logger.error('ConstellationException for solution %d: %s' % (solution.pk. str(e)))
+            logger.error('ConstellationException for solution %d: %s' % (solution.pk, str(e)))
             return None
 
     @staticmethod
