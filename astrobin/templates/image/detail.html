@@ -52,7 +52,10 @@
 
         {% if constellation %}
             <i class="icon icon-star-empty"></i>
-            <strong>{% trans "Constellation" %}:</strong> {{ constellation.name }} ({{ constellation.abbreviation }})
+            <strong>{% trans "Constellation" %}:</strong>
+            <a href="{% url 'haystack_search' %}?d=i&constellation={{ constellation.abbreviation }}">
+                {{ constellation.name }} ({{ constellation.abbreviation }})
+            </a>
 
             {% if show_contains %}
                 &nbsp;&middot;&nbsp;
