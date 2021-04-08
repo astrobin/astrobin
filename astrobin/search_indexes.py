@@ -50,7 +50,7 @@ def _prepare_integration(obj):
 
     try:
         solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=obj)
-    except SolarSystem_Acquisition.DoesNotExist:
+    except (SolarSystem_Acquisition.DoesNotExist, SolarSystem_Acquisition.MultipleObjectsReturned):
         pass
 
     if deep_sky_acquisitions:
