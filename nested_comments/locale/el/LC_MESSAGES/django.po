@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:06+0000\n"
+"POT-Creation-Date: 2021-04-09 14:01+0000\n"
 "PO-Revision-Date: 2013-12-28 09:06+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,24 +19,37 @@ msgstr ""
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1388221612.935002\n"
 
+msgid "Type your comment here..."
+msgstr ""
+
 msgid "Cancel"
 msgstr "Ακύρωση"
 
 msgid "Add a comment"
 msgstr "Προσθήκη σχολίου"
 
+#, python-format
 msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment.</p>"
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
+"\">sign up</a> to leave a comment."
 msgstr ""
-"Παρακαλώ <a href=\"/accounts/login/\">κάντε είσοδο</a> ή <a href=\"/accounts/"
-"register/\">εγγραφείτε</a> για να αφήσετε σχόλιο.</p>"
 
 msgid "There are no comments yet."
 msgstr "Δεν υπάρχουν σχόλια."
 
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr ""
+
 msgid "(deleted)"
 msgstr "(διεγράφη)"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr ""
 
 msgid "Link"
 msgstr "Σύνδεσμος"
@@ -53,53 +66,14 @@ msgstr "Επεξεργασία"
 msgid "Reply"
 msgstr "Απάντηση"
 
+msgid "Like"
+msgstr ""
+
+msgid "Unlike"
+msgstr ""
+
 msgid "The comment cannot be empty."
 msgstr "Το σχόλιο δεν μπορεί να είναι άδειο."
 
-msgid "Save"
-msgstr "Σώσιμο"
-
-msgid "(comment deleted)"
-msgstr "(σχόλιο διεγράφη)"
-
-msgid "There doesn't seem to be anything here."
-msgstr "Δεν φαίνεται να υπάρχει κάτι εδώ."
-
-#~ msgid "Formatting help"
-#~ msgstr "Βοήθεια μορφοποίησης"
-
-#~ msgid "Preview"
-#~ msgstr "Προεπισκόπηση"
-
-#~ msgid "You type:"
-#~ msgstr "Εισάγετε:"
-
-#~ msgid "You see:"
-#~ msgstr "Βλέπετε:"
-
-#~ msgid "italics"
-#~ msgstr "πλάγια"
-
-#~ msgid "bold"
-#~ msgstr "έντονα"
-
-#~ msgid "(TAB or 4 spaces)"
-#~ msgstr "(ΤΑΒ ή 4 κενά)"
-
-#~ msgid "preformatted text"
-#~ msgstr "προδιαμορφωμένο κείμενο"
-
-#~ msgid "quoted text"
-#~ msgstr "εισηγμένο κείμενο"
-
-#~ msgid "escape the formatting syntax"
-#~ msgstr "έξοδος από το συντακτικό μορφοποίησης"
-
-#~ msgid ""
-#~ "Remember to use the <span class=\"label label-important\">reply</span> "
-#~ "button when replying directly to a comment. To post a new top level "
-#~ "comment, use the form at the end of the comment list."
-#~ msgstr ""
-#~ "Θυμηθείτε να χρησιμοποιήσετε το κουμπί <span class=\"label label-important"
-#~ "\">απάντησης</span> όταν απαντάτε σε ένα σχόλιο. Για να αναρτήσετε ένα "
-#~ "σχόλιο στην κορυφή, χρησιμοποιήστε την φόρμα στο τέλος της λίστας σχολίων."
+msgid "Submit"
+msgstr ""

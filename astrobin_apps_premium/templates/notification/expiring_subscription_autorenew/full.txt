@@ -1,12 +1,24 @@
 {% load i18n %}
 
-{% blocktrans with user_subscription.subscription.name as subscription_name %}Your "{{subscription_name}}" subscription on AstroBin will be automatically renewed in one week.{% endblocktrans %}
+{% blocktrans trimmed with user_subscription.subscription.name as subscription_name %}
+    Your "{{subscription_name}}" subscription on AstroBin will be automatically renewed in one week.
+{% endblocktrans %}
 
-{% blocktrans %}You have an automatically renewing subscription on AstroBin, and we will attempt to renew it automatically. If your subscription was created the regular way, via PayPal, then PayPal will attempt to charge your credit card or retrieve funds that are available in your account.{% endblocktrans %}
+{% blocktrans trimmed %}
+    You have an automatically renewing subscription on AstroBin, and we will attempt to renew it automatically. If your
+    subscription was created the regular way, via PayPal, then PayPal will attempt to charge your credit card or
+    retrieve funds that are available in your account.
+{% endblocktrans %}
 
-{% blocktrans %}When a subscription on AstroBin expires, nothing happens to your images or any of your content. You are reverted to AstroBin Free and will not be able to upload new images until you renew, but you may continue to use AstroBin in all other aspects if you do not have any new images to share at the moment.{% endblocktrans %}
+{% blocktrans trimmed %}
+    When a subscription on AstroBin expires, nothing happens to your images or any of your content. You are reverted to
+    AstroBin Free and will not be able to upload new images until you renew, but you may continue to use AstroBin in all
+    other aspects if you do not have any new images to share at the moment.
+{% endblocktrans %}
 
-{% blocktrans %}If your subscription was created manually via a bank transfer, please get in touch for a new payment.{% endblocktrans %}
+{% blocktrans trimmed %}
+    If your subscription was created manually via a bank transfer, please get in touch for a new payment.
+{% endblocktrans %}
 
 https://www.astrobin.com/contact/
 

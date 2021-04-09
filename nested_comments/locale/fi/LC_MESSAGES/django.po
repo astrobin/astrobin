@@ -7,17 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:06+0000\n"
-"PO-Revision-Date: 2015-12-30 10:44+0000\n"
-"Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
+"POT-Creation-Date: 2021-04-09 14:01+0000\n"
+"PO-Revision-Date: 2021-01-03 20:57+0000\n"
+"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.5.0\n"
-"X-POOTLE-MTIME: 1451472275.88037\n"
+"X-Generator: Pootle 2.8\n"
+"X-POOTLE-MTIME: 1609707465.000000\n"
+
+msgid "Type your comment here..."
+msgstr ""
 
 msgid "Cancel"
 msgstr "Peruuta"
@@ -25,18 +28,28 @@ msgstr "Peruuta"
 msgid "Add a comment"
 msgstr "Lisää kommentti"
 
+#, python-format
 msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment.</p>"
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
+"\">sign up</a> to leave a comment."
 msgstr ""
-"Ole hyvä ja <a href=\"/accounts/login\">kirjaudu sisään</a> tai <a href=\"/"
-"accounts/register/\">rekisteröidy</a> jättääksesi kommentteja.</p>"
 
 msgid "There are no comments yet."
 msgstr "Kommentteja ei ole vielä."
 
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr ""
+
 msgid "(deleted)"
 msgstr "(poistettu)"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr ""
 
 msgid "Link"
 msgstr "Linkki"
@@ -53,44 +66,14 @@ msgstr "Muokkaa"
 msgid "Reply"
 msgstr "Vastaa"
 
+msgid "Like"
+msgstr ""
+
+msgid "Unlike"
+msgstr ""
+
 msgid "The comment cannot be empty."
 msgstr "Kommentti ei saa olla tyhjä."
 
-msgid "Save"
-msgstr "Tallenna"
-
-msgid "(comment deleted)"
-msgstr "(kommentti poistettu)"
-
-msgid "There doesn't seem to be anything here."
-msgstr "Täällä ei näytä olevan mitään."
-
-#~ msgid "Formatting help"
-#~ msgstr "Muotoiluapua"
-
-#~ msgid "Preview"
-#~ msgstr "Esikatselu"
-
-#~ msgid "You type:"
-#~ msgstr "Kirjoitat:"
-
-#~ msgid "You see:"
-#~ msgstr "Näet:"
-
-#~ msgid "italics"
-#~ msgstr "kursiivi"
-
-#~ msgid "bold"
-#~ msgstr "lihavointi"
-
-#~ msgid "(TAB or 4 spaces)"
-#~ msgstr "(Tabulaattori tai 4 välilyöntiä)"
-
-#~ msgid "preformatted text"
-#~ msgstr "esimuotoiltu teksti"
-
-#~ msgid "quoted text"
-#~ msgstr "lainattu teksti"
-
-#~ msgid "escape the formatting syntax"
-#~ msgstr "ohita (escape) erikoismerkeillä tehtävä muotoilusyntaksi"
+msgid "Submit"
+msgstr ""

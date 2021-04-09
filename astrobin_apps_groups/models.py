@@ -5,18 +5,31 @@ from django.utils.translation import ugettext_lazy as _
 from pybb.models import Forum, Category
 
 
+class GroupCategory:
+    PROFESSIONAL_NETWORK = 'PROFESSIONAL_NETWORK'
+    CLUB_OR_ASSOCIATION = 'CLUB_OR_ASSOCIATION'
+    INTERNET_COMMUNITY = 'INTERNET_COMMUNITY'
+    FRIENDS_OR_PARTNERS = 'FRIENDS_OR_PARTNERS'
+    GEOGRAPHICAL_AREA = 'GEOGRAPHICAL_AREA'
+    AD_HOC_COLLABORATION = 'AD_HOC_COLLABORATION'
+    SPECIFIC_TO_TECHNIQUE = 'SPECIFIC_TO_TECHNIQUE'
+    SPECIFIC_TO_TARGET = 'SPECIFIC_TO_TARGET'
+    SPECIFIC_TO_EQUIPMENT = 'SPECIFIC_TO_EQUIPMENT'
+    OTHER = 'OTHER'
+
+
 class Group(models.Model):
     GROUP_CATEGORY_CHOICES = (
-        (1, _("Professional network")),
-        (11, _("Club or association")),
-        (21, _("Internet community")),
-        (31, _("Friends or partners")),
-        (41, _("Geographical area")),
-        (51, _("Ad-hoc collaboration")),
-        (61, _("Specific to an imaging technique")),
-        (71, _("Specific to an astrophotography target")),
-        (81, _("Specific to certain equipment")),
-        (101, _("Other")),
+        (GroupCategory.PROFESSIONAL_NETWORK, _("Professional network")),
+        (GroupCategory.CLUB_OR_ASSOCIATION, _("Club or association")),
+        (GroupCategory.INTERNET_COMMUNITY, _("Internet community")),
+        (GroupCategory.FRIENDS_OR_PARTNERS, _("Friends or partners")),
+        (GroupCategory.GEOGRAPHICAL_AREA, _("Geographical area")),
+        (GroupCategory.AD_HOC_COLLABORATION, _("Ad-hoc collaboration")),
+        (GroupCategory.SPECIFIC_TO_TECHNIQUE, _("Specific to an imaging technique")),
+        (GroupCategory.SPECIFIC_TO_TARGET, _("Specific to an astrophotography target")),
+        (GroupCategory.SPECIFIC_TO_EQUIPMENT, _("Specific to certain equipment")),
+        (GroupCategory.OTHER, _("Other")),
     )
 
     date_created = models.DateTimeField(
@@ -63,7 +76,8 @@ class Group(models.Model):
         help_text=_("HTML tags are allowed."),
     )
 
-    category = models.PositiveSmallIntegerField(
+    category = models.CharField(
+        max_length=100,
         choices=GROUP_CATEGORY_CHOICES,
         null=False,
         blank=False,

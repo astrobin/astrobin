@@ -5,7 +5,7 @@
     <h1>{% trans "Additional information requested" %}</h1>
     <div class="well">
         {% url 'messages_compose' image.user.username as message_url %}
-        {% blocktrans with image.user.username as username %}<strong>{{username}}</strong> has been notified. Hopefully they will update the image soon. Remember that you can also <a href="{{message_url}}">send them a message</a>. {% endblocktrans %}
+        {% blocktrans trimmed with image.user.username as username %}<strong>{{username}}</strong> has been notified. Hopefully they will update the image soon. Remember that you can also <a href="{{message_url}}">send them a message</a>. {% endblocktrans %}
     </div>
     
     <a class="btn" href="{% url 'image_detail' image.id %}">{% trans "Return to image" %}</a>

@@ -1,14 +1,9 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:22+0000\n"
+"POT-Creation-Date: 2021-04-09 14:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +13,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Sorry, it's now too late to retract this submission."
+msgstr ""
+
+msgid "Sorry, it's now too late to retract this vote."
+msgstr ""
 
 msgid "You are not a member of the IOTD Submitters board."
 msgstr ""
@@ -29,6 +30,9 @@ msgid "Images in the staging area cannot be submitted."
 msgstr ""
 
 msgid "This user has chosen to be excluded from competitions."
+msgstr ""
+
+msgid "This user has been banned from competitions."
 msgstr ""
 
 #, python-format
@@ -116,22 +120,19 @@ msgstr ""
 msgid "You cannot unelect a past or current IOTD."
 msgstr ""
 
-msgid "Submit for IOTD"
+#, python-format
+msgid "you already selected %s IOTD today (UTC)"
 msgstr ""
 
-msgid ""
-"You will submit this image to the IOTD Submissions Queue. From there, a "
-"member of the IOTD Reviewers Board will consider promoting it for final "
-"evaluation from an IOTD Judge"
+#, python-format
+msgid "you already selected %s scheduled IOTDs"
 msgstr ""
 
-msgid "Submit"
+#, python-format
+msgid "there are already %s scheduled IOTDs"
 msgstr ""
 
 msgid "Image of the day"
-msgstr ""
-
-msgid "by"
 msgstr ""
 
 msgid "IOTD Judgement Queue"
@@ -141,34 +142,16 @@ msgid ""
 "Please select the images that you want to elect to IOTD by clicking on them."
 msgstr ""
 
+#, python-format
+msgid ""
+"Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
+"<strong>%(time)s</strong>."
+msgstr ""
+
 msgid "This queue is currently empty."
 msgstr ""
 
-msgid "Reviewers"
-msgstr ""
-
-msgid "Loading"
-msgstr ""
-
 msgid "Error"
-msgstr ""
-
-msgid "IOTD Review Queue"
-msgstr ""
-
-msgid ""
-"Please select the images that you want to promote for final judgement by "
-"clicking on them."
-msgstr ""
-
-msgid "Submitters"
-msgstr ""
-
-msgid "IOTD Submission Queue"
-msgstr ""
-
-msgid ""
-"Please select the images that you want to propose for IOTD consideration."
 msgstr ""
 
 msgid "You cannot unelect an IOTD elected by another judge."

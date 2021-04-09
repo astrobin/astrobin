@@ -56,6 +56,10 @@
                                         :date-published-min="datePublishedMin"
                                         :date-published-max="datePublishedMax"></date-published-filter>
 
+                                <date-acquired-filter v-if="filter.name === 'date_acquired'"
+                                       :date-acquired-min="dateAcquiredMin"
+                                       :date-acquired-max="dateAcquiredMax"></date-acquired-filter>
+                
                                 <camera-type-filter
                                         v-if="filter.name === 'camera_type'"
                                         :camera-type="cameraType"></camera-type-filter>
@@ -116,6 +120,14 @@
                                 <telescope-type-filter
                                         v-if="filter.name === 'telescope_type'"
                                         :telescope-type="telescopeType"></telescope-type-filter>
+
+                                <integration-time-filter v-if="filter.name === 'integration_time'"
+                                                    :integration-time-min="integrationTimeMin"
+                                                    :integration-time-max="integrationTimeMax">
+                                </integration-time-filter>
+
+                                <constellation-filter v-if="filter.name === 'constellation'"
+                                                     :constellation="constellation"></constellation-filter>
                             </div>
 
                             <add-filter
@@ -201,6 +213,18 @@
                     "{{ request.GET.date_published_max }}"
                 {% else %}
                     new Date().toISOString().split('T')[0]
+                {% endif %},
+            dateAcquiredMin:
+                {% if "date_acquired_min" in request.GET %}
+                    "{{ request.GET.date_acquired_min }}"
+                {% else %}
+                    undefined
+                {% endif %},
+            dateAcquiredMax:
+                {% if "date_acquired_max" in request.GET %}
+                    "{{ request.GET.date_acquired_max }}"
+                {% else %}
+                    undefined
                 {% endif %},
             cameraType:
                 {% if "camera_type" in request.GET and request.GET.camera_type %}
@@ -316,6 +340,24 @@
                 {% else %}
                     undefined
                 {% endif %},
+            integrationTimeMin:
+                {% if "integration_time_min" in request.GET and request.GET.integration_time_min %}
+                    {{ request.GET.integration_time_min }}
+                {% else %}
+                    0
+                {% endif %},
+            integrationTimeMax:
+                {% if "integration_time_max" in request.GET and request.GET.integration_time_max %}
+                    {{ request.GET.integration_time_max }}
+                {% else %}
+                    999
+                {% endif %},
+            constellation:
+                {% if "constellation" in request.GET and request.GET.constellation %}
+                    "{{ request.GET.constellation }}"
+                {% else %}
+                    undefined
+                {% endif %},
 
             allFilters: [
                 {
@@ -344,6 +386,11 @@
                 {
                     name: "date_published",
                     label: "{% trans "Publication date range" %}",
+                    removable: true
+                },
+                {
+                    name: "date_acquired",
+                    label: "{% trans "Acquisition date range" %}",
                     removable: true
                 },
                 {
@@ -415,7 +462,17 @@
                     name: "telescope_type",
                     label: "{% trans "Telescope type" %}",
                     removable: true
-                }
+                },
+                {
+                    name: "integration_time",
+                    label: "{% trans "Integration time (hours)" %}",
+                    removable: true
+                },
+                {
+                    name: "constellation",
+                    label: "{% trans "Constellation" %}",
+                    removable: true
+                },
             ],
             enabledFilters: []
         },
@@ -445,6 +502,10 @@
 
             if (this.datePublishedMin || this.datePublishedMax) {
                 this.enabledFilters.push(this.getFilterByName("date_published"));
+            }
+
+            if (this.dateAcquiredMin || this.dateAcquiredMax) {
+                this.enabledFilters.push(this.getFilterByName("date_acquired"));
             }
 
             if (this.cameraType) {
@@ -483,6 +544,10 @@
                 this.enabledFilters.push(this.getFilterByName("pixel_scale"));
             {% endif %}
 
+            {% if "integration_time_min" in request.GET or "integration_time_max" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("integration_time"));
+            {% endif %}
+
             if (this.license) {
                 this.enabledFilters.push(this.getFilterByName("license"));
             }
@@ -501,6 +566,10 @@
 
             if (this.telescopeType) {
                 this.enabledFilters.push(this.getFilterByName("telescope_type"));
+            }
+
+            if (this.constellation) {
+                this.enabledFilters.push(this.getFilterByName("constellation"));
             }
         },
         methods: {

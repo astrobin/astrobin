@@ -3,11 +3,14 @@
 <footer>
     {% block footer %}
     <div class="container">
-        <div class="row hidden-phone">
+        <div class="row-fluid hidden-phone">
             <div class="span3">
                 <h3>{% trans "About" %}</h3>
                 <p>
-                {% trans "AstroBin is an image hosting website specifically targeted to astrophotographers: it's the first and the last place where you need to upload your astrophotography images. Made by an astrophotographer, for the astrophotographers." %}
+                    {% blocktrans trimmed %}
+                        AstroBin is an image hosting platform and social network for amateur astronomers and
+                        astrophotographers.
+                    {% endblocktrans %}
                 </p>
             </div>
             <div class="span3">
@@ -25,14 +28,52 @@
                             {% trans "Source code" %}
                         </a>
                     </li>
-
+                    <li>
+                        <a href="https://twitter.com/search?q=(%23astrobintech)%20(from%3AAstroBin_com)&src=typed_query&f=live" target="_blank">
+                            {% trans "Platform updates" %}
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="span3">
                 <h3>{% trans "Thanks to" %}</h3>
                 <ul>
-                    <li>{% trans "The localization team" %}: <a href="/users/PepeChambo">Jos&eacute; J. Chamb&oacute;</a>, <a href="/users/Tannhauser">Jean-Charles Schmidt</a>, <a href="/users/OrionRider">Laurent Schmitz</a>, <a href="/users/Vostok/">Lauri Kangas</a>, <a href="/users/naavis/">Samuli Vuorinen</a>, <a href="/users/ketarax/">Jussi Kantola</a>, <a href="/users/KoenDierckens/">Koen Dierckens</a>, <a href="http://lambermont.dyndns.org/astro/" target="_blank">Hans Lambermont</a>, <a href="http://strehl1.de" target="_blank">Michael Wilk</a>, <a href="/users/stimpy/">Marc Demierre</a>, <a href="/users/kalle66/">Rinke Kallenkoot</a>, <a href="/users/leonh/">Leon Handreke</a>, <a href="/users/bilgebay/">Sedat Bilgebay</a>, <a href="/users/onuratilgan/">Onur Atilgan</a>, <a href="/users/guvenozkan/">Güven Özkan</a>, <a href="/users/castle/">Ahmet Kale</a>, <a href="/users/AstroAlb/">Ardian Xherrahi</a>, <a href="/users/milosz/">Milosz Wasilewski</a>, <a href="/users/GlaucoH/">Glauco Hass</a>, <a href="/users/kookoo_gr/">Konstantinos Stavropoulos</a>, <a href="/users/sypai/">Pavel Syrin</a>, <a href="/users/ohmishonin/">Ken-ichiro Tanaka</a>, <a href="/users/Lukasz83/">Łukasz Sujka</a>.</li>
-                    <li><a href="http://astrometry.net/" target="_blank">Astrometry.net</a></li>
+                    <li>
+                        {% trans "The localization team" %}:
+                        <a href="/users/PepeChambo">Jos&eacute; J. Chamb&oacute;</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/Tannhauser">Jean-Charles Schmidt</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/OrionRider">Laurent Schmitz</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/Vostok/">Lauri Kangas</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/naavis/">Samuli Vuorinen</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/ketarax/">Jussi Kantola</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/KoenDierckens/">Koen Dierckens</a>&nbsp;&middot;&nbsp;
+                        <a href="http://lambermont.dyndns.org/astro/" target="_blank">Hans Lambermont</a>&nbsp;&middot;&nbsp;
+                        <a href="http://strehl1.de" target="_blank">Michael Wilk</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/stimpy/">Marc Demierre</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/kalle66/">Rinke Kallenkoot</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/leonh/">Leon Handreke</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/bilgebay/">Sedat Bilgebay</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/onuratilgan/">Onur Atilgan</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/guvenozkan/">Güven Özkan</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/castle/">Ahmet Kale</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/AstroAlb/">Ardian Xherrahi</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/milosz/">Milosz Wasilewski</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/GlaucoH/">Glauco Hass</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/kookoo_gr/">Konstantinos Stavropoulos</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/sypai/">Pavel Syrin</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/ohmishonin/">Ken-ichiro Tanaka</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/Lukasz83/">Łukasz Sujka</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/Jean-Baptiste_Paris/">Jean-Baptiste Auroux</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/leviathan/">Nadir Teymurov</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/Hartmuth_Kintzel/">Hartmuth Kintzel</a>&nbsp;&middot;&nbsp;
+                        <a href="/users/hackersb46/">雅痞张</a>
+                    </li>
+                    
+                    <li>
+                        {% trans "Third party tools" %}:
+                        <a href="http://astrometry.net/" target="_blank">Astrometry.net</a>&nbsp;&middot;&nbsp;
+                        <a href="https://pixinsight.com/" target="_blank">PixInsight</a>
+                    </li>
                 </ul>
             </div>
             <div class="span3">
@@ -43,7 +84,7 @@
             </div>
         </div> <!-- row -->
 
-        <div class="row bottom">
+        <div class="row-fluid bottom">
             <div class="span8">
                 <p>&copy; 2010-{% now "Y" %} <a href="/users/siovene/">Salvatore Iovene</a></p>
             </div>

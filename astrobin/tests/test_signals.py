@@ -48,15 +48,12 @@ class SignalsTest(TestCase):
         self.assertFalse(push_notification.called)
         self.assertFalse(add_story.called)
 
-    @patch("astrobin.signals.push_notification")
     @patch("astrobin.signals.add_story")
-    def test_imagerevision_post_save(self, add_story, push_notification):
+    def test_imagerevision_post_save(self, add_story):
         revision = Generators.imageRevision()
 
-        push_notification.reset_mock()
         add_story.reset_mock()
 
         imagerevision_post_save(None, revision, True)
 
-        self.assertTrue(push_notification.called)
         self.assertTrue(add_story.called)

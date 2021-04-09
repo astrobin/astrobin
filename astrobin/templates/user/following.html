@@ -5,7 +5,7 @@
 {% load astrobin_apps_users_tags %}
 {% load tags %}
 
-{% block title %}{% blocktrans with user=requested_user.userprofile %}{{user}}'s followed users{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans trimmed with user=requested_user.userprofile %}{{user}}'s followed users{% endblocktrans %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block breadcrumbs %}

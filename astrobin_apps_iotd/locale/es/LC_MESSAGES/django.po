@@ -1,23 +1,26 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: AstroBin Apps: IOTD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:22+0000\n"
-"PO-Revision-Date: 2020-05-15 20:18+0000\n"
-"Last-Translator: DanielaDGR <danieladgr.5r@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2021-04-09 14:06+0000\n"
+"PO-Revision-Date: 2021-04-09 15:49+0200\n"
+"Last-Translator: Salvatore Iovene\n"
+"Language-Team: Spanish\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1589573930.000000\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Loco https://localise.biz\n"
+"X-Loco-Source-Locale: en\n"
+"X-Loco-Project-Id: 108442\n"
+"X-Loco-Api-Version: 1.0.25 20210310-1\n"
+
+msgid "Sorry, it's now too late to retract this submission."
+msgstr ""
+
+msgid "Sorry, it's now too late to retract this vote."
+msgstr ""
 
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "Usted no es miembro de la junta de remitentes del IOTD."
@@ -30,6 +33,9 @@ msgstr "Las imágenes en la zona de prueba no pueden enviarse."
 
 msgid "This user has chosen to be excluded from competitions."
 msgstr "Este usuario ha optado por ser excluido de los concursos."
+
+msgid "This user has been banned from competitions."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -123,26 +129,20 @@ msgstr "No se puede anular el elección de una imagen elegida por otro juez."
 msgid "You cannot unelect a past or current IOTD."
 msgstr "No puede anular un IOTD pasado o actual."
 
-msgid "Submit for IOTD"
-msgstr "Enviar para IOTD"
-
-msgid ""
-"You will submit this image to the IOTD Submissions Queue. From there, a "
-"member of the IOTD Reviewers Board will consider promoting it for final "
-"evaluation from an IOTD Judge"
+#, python-format
+msgid "you already selected %s IOTD today (UTC)"
 msgstr ""
-"Enviará esta imagen a la cola de envíos IOTD. A partir de ahí, un miembro de "
-"la Junta de Revisores de IOTD considerará promoverlo para la evaluación "
-"final de un Juez IOTD"
 
-msgid "Submit"
-msgstr "Enviar"
+#, python-format
+msgid "you already selected %s scheduled IOTDs"
+msgstr ""
+
+#, python-format
+msgid "there are already %s scheduled IOTDs"
+msgstr ""
 
 msgid "Image of the day"
 msgstr "Imagen del día"
-
-msgid "by"
-msgstr "por"
 
 msgid "IOTD Judgement Queue"
 msgstr "Cola de evaluación IOTD"
@@ -153,39 +153,17 @@ msgstr ""
 "Por favor seleccione las imágenes que usted desea elegir para IOTD haciendo "
 "clic sobre estas."
 
+#, python-format
+msgid ""
+"Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
+"<strong>%(time)s</strong>."
+msgstr ""
+
 msgid "This queue is currently empty."
 msgstr "Esta cola está vacía actualmente."
 
-msgid "Reviewers"
-msgstr "Revisores"
-
-msgid "Loading"
-msgstr "Cargando"
-
 msgid "Error"
 msgstr "Error"
-
-msgid "IOTD Review Queue"
-msgstr "Cola de Revisión IOTD"
-
-msgid ""
-"Please select the images that you want to promote for final judgement by "
-"clicking on them."
-msgstr ""
-"Por favor seleccione las imágenes que usted desea promover para una "
-"evaluación final haciendo clic sobre estas."
-
-msgid "Submitters"
-msgstr "Remitentes"
-
-msgid "IOTD Submission Queue"
-msgstr "Cola de envío IOTD"
-
-msgid ""
-"Please select the images that you want to propose for IOTD consideration."
-msgstr ""
-"Por favor, seleccione las imágenes que usted desea proponer para "
-"consideración del IOTD."
 
 msgid "You cannot unelect an IOTD elected by another judge."
 msgstr "No puede anular un IOTD elegido por otro juez."

@@ -11,6 +11,8 @@ ASTROBIN_APPS = [
     'astrobin_apps_iotd',
     'astrobin_apps_remote_source_affiliation',
     'astrobin_apps_equipment',
+    'astrobin_apps_json_api',
+    'astrobin_apps_payments',
     'toggleproperties'
 ]
 
@@ -18,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.humanize',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.staticfiles',
@@ -26,18 +29,15 @@ INSTALLED_APPS = [
     'haystack',
     'notification',
     'persistent_messages',
-    'celery_haystack',
     'gunicorn',
     'django_comments',
     'tagging',
-    'mptt',
     'tinymce',
     'hitcount',
     'avatar',
     'crispy_forms',
     'threaded_messages',
     'bootstrap_toolkit',
-    'contact_form',
     'pipeline',
     'tastypie',
     'actstream',
@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'easy_thumbnails',
     'el_pagination',
-    'dfp',
     'django_user_agents',
     'pybb',
     'markup_deprecated',
@@ -69,6 +68,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'progressbarupload',
     'cachalot',
+    'captcha',
+    'django_celery_monitor',
 
     'astrobin.apps.AstroBinAppConfig',
 ]

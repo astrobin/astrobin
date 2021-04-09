@@ -1,0 +1,30 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Upgrading Image paste to Simple Uploads</title>
+<link href="styles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>From Image Paste 3 to Simple Uploads 4</h1>
+
+<p>After far too long with a name that wasn't really descriptive about all its current features, for version 4.0 I've finally renamed the plugin to "simpleuploads"</p>
+<p>That means that when you upgrade this very first time you might experience a few hickups, but it should be easy if you pay a little attention. <br>
+Also I must recognize that there's a lot of new code (v4 means far more than the rename of the plugin), and that code might have unexpected bugs, so if you're unsure you can wait a few days/weeks to check that I don't publish a new version to polish this version</p>
+
+<p>First of all: backup your setup :-)</p>
+<p>Now delete the <code>imagepaste</code> folder from the plugins folder and place the new <code>simpleuploads</code> instead</p>
+<p>Just like when you first installed it open your config.js, and in the config.extraPlugins replace <code>imagepaste</code> with <code>simpleuploads</code></p>
+<p>If you didn't apply any extra customizations then you're done!. Clear the cache and reload the editor</p>
+<p>But you might have used some of the configuration options that the plugin provides, in that case you have to update that code also<br>
+The events have been renamed from imagepaste.* to simpleuploads.*, that's easy to fix<br>
+The configuration options are also mostly easy, replace config.simpleuploads_* with config.simpleuploads_*, there's only two exceptions: the CSS clases for dragover, I've renamed the "hover" part to just "over", so they become:<br>
+	imagepaste_editorhover -&gt; simpleuploads_editorover<br>
+	imagepaste_containerhover -&gt; simpleuploads_containerover<br>
+</p>
+<p>That should take care of almost everything, there's one last item: you might have used the tmp class in your CSS to style the uploads, in that case you must change .ImagePasteTmpWrapper with .SimpleUploadsTmpWrapper</p>
+<p>I might provide updated info in <a href="http://alfonsoml.blogspot.com/">my blog</a></p>
+</body>
+</html>

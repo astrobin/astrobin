@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+{% load common_tags %}
+{% load tags %}
+{% load cache %}
+{% load el_pagination_tags %}
+
+
+{% block title %}{% trans "Contributors list" %} {% trans "(beta)" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Explore' None %}
+    {% breadcrumb 'Contributors list (beta)' None %}
+{% endblock %}
+
+{% block content %}
+    <div id="contributors-list-page">
+        <div class="subtitle">
+            <i class="icon icon-info-sign"></i>
+            {% blocktrans trimmed with '<a class="btn btn-primary btn-mini" href="https://welcome.astrobin.com/features/contribution-index" target="_blank">' as _0 and '</a>' as _1 %}
+                The <strong>Contribution Index (beta)</strong> is system to reward informative, constructive, and
+                valuable commentary on AstroBin. {{_0}}Learn more.{{_1}}
+            {% endblocktrans %}
+        </div>
+
+        <form id="contributors-list-search" class="form form-horizontal" method="get"
+              action="{% url 'contributors_list' %}">
+            <input type="text" id="contributors-list-search-input" name="q"
+                   placeholder="{% trans "Search" %}"
+                   value="{% if 'q' in request.GET %}{{ request.GET.q }}{% endif %}"/>
+            <input type="hidden" name="sort"
+                   value="{% if 'sort' in request.GET %}{{ request.GET.sort }}{% else %}default{% endif %}" />
+        </form>
+
+        {% lazy_paginate 100 user_list using "page" %}
+        {% get_pages %}
+
+        <table class="contributors-list table striped">
+            <colgroup class="hidden-phone">
+                <col span="2">
+                <col span="3" class="comments">
+                <col span="2" class="forum-posts">
+                <col span="1">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th class="contributors-list-position"></th>
+                    <th class="contributors-list-user"></th>
+
+                    <th class="contributors-list-comment-likes hidden-phone" colspan="3">
+                        {% trans "Comments" %}
+                    </th>
+
+                    <th class="contributors-list-forum-post-likes hidden-phone" colspan="2">
+                        {% trans "Forum posts" %}
+                    </th>
+
+                    <th class="contributors-list-contribution-index"></th>
+                </tr>
+                <tr>
+                    <th class="contributors-list-position">#</th>
+                    <th class="contributors-list-user">{% trans "User" %}</th>
+
+                    <!-- comments -->
+
+                    <th class="contributors-list-written hidden-phone">
+                        <a href="{% url 'contributors_list' %}{% query_string "sort='-comments_written'" "" %}">
+                            {% trans "Written" %} <i class="icon-sort"></i>
+                        </a>
+                    </th>
+
+                    <th class="contributors-list-received hidden-phone">
+                        <a href="{% url 'contributors_list' %}{% query_string "sort='-comments'" "" %}">
+                            {% trans "Received" %} <i class="icon-sort"></i>
+                        </a>
+                    </th>
+
+                    <th class="contributors-list-likes-received hidden-phone">
+                        <a href="{% url 'contributors_list' %}{% query_string "sort='-comment_likes_received'" "" %}">
+                            {% trans "Likes" %} <i class="icon-sort"></i>
+                        </a>
+                    </th>
+
+                    <!-- forum posts -->
+
+                    <th class="contributors-list-written hidden-phone">
+                        <a href="{% url 'contributors_list' %}{% query_string "sort='-forum_posts'" "" %}">
+                            {% trans "Written" %} <i class="icon-sort"></i>
+                        </a>
+                    </th>
+
+                    <th class="contributors-list-likes-received hidden-phone">
+                        <a href="{% url 'contributors_list' %}{% query_string "sort='-forum_post_likes_received'" "" %}">
+                            {% trans "Likes" %} <i class="icon-sort"></i>
+                        </a>
+                    </th>
+
+                    <!-- contribution index -->
+
+                    <th class="contributors-list-contribution-index">
+                        {# DEPRECATED: remove once contribution_index is populated #}
+                        <a href="{% url 'contributors_list' %}{% query_string "sort='-reputation'" "" %}">
+                            {% trans "Contribution Index" %} {% trans "(beta)" %} <i class="icon-sort"></i>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+
+            {% for u in user_list %}
+                <tr>
+                    <td class="contributors-list-position">
+                        {% if 'q' not in request.GET or request.GET.q == '' %}
+                            {% page_counter forloop.counter pages.current.number 100 %}
+                        {% endif %}
+                    </td>
+
+                    <td class="contributors-list-user">
+                        <a href="{% url 'user_page' u.username %}">
+                            {% if u.object %}
+                                {{u.object.userprofile}}
+                            {% else %}
+                                {{u.username}}
+                            {% endif %}
+                        </a>
+                    </td>
+
+                    <!-- comments -->
+
+                    <td class="contributors-list-comments-written hidden-phone">
+                        {{ u.comments_written }}
+                    </td>
+
+                    <td class="contributors-list-comments-received hidden-phone">
+                        {{ u.comments }}
+                    </td>
+
+                    <td class="contributors-list-comment-likes-received hidden-phone">
+                        {{ u.comment_likes_received }}
+                    </td>
+
+                    <!-- forum posts -->
+
+                    <td class="contributors-list-forum-posts hidden-phone">
+                        {{ u.forum_posts }}
+                    </td>
+
+                    <td class="contributors-list-forum-post-likes-received hidden-phone">
+                        {{ u.forum_post_likes_received }}
+                    </td>
+
+                    <!-- contribution index -->
+
+                    <td class="contributors-list-contribution-index">
+                        {# DEPRECATED: remove once contribution_index is populated #}
+                        {{ u.reputation|floatformat:2 }}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="9">
+                        {% trans "There isn't enough data yet, please come back later!" %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <div class="pagination pagination-centered">
+            {% show_pages %}
+        </div>
+    </div>
+{% endblock %}

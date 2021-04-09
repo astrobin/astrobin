@@ -23,7 +23,10 @@
         this.$bar = this.$root.find('.bar');
         this.$icon = this.$root.find('i');
 
+        this.i18n = config.i18n;
+
         this.missingCounter = 0;
+        this.connectionRefusedErrorShown = false;
 
         $.extend(this, config);
 
@@ -56,6 +59,29 @@
 
                     if (data.status <= Status.PENDING) {
                         self.onStarted();
+                    }
+
+                    if (!self.connectionRefusedErrorShown && data.error) {
+                        var message = "";
+
+                        if (data.error.indexOf("Connection refused") > -1 || data.error.indexOf("timed out") > -1) {
+                            message = self.i18n.connectionRefused;
+                        } else if (data.error.indexOf("500") > -1) {
+                            message = self.i18n.internalError;
+                        }
+
+                        $.toast({
+                            heading: self.i18n.error,
+                            text: message,
+                            showHideTransition: 'slide',
+                            allowToastClose: true,
+                            position: 'top-right',
+                            loader: false,
+                            hideAfter: false,
+                            icon: 'error'
+                        });
+                        self.connectionRefusedErrorShown = true;
+                        self.onStatusFailed();
                     }
                 }
             });

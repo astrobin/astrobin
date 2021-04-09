@@ -1,6 +1,7 @@
 import simplejson
 from braces.views import JSONResponseMixin
 from braces.views import LoginRequiredMixin
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse_lazy
@@ -25,6 +26,7 @@ from astrobin.models import Collection
 from astrobin.models import Image
 from astrobin.models import UserProfile
 from astrobin_apps_images.models import KeyValueTag
+from astrobin_apps_users.services import UserService
 
 
 class EnsureCollectionOwnerMixin(View):
@@ -60,6 +62,14 @@ class UserCollectionsBase(View):
         context['requested_user'] = user
         context['public_images_no'] = Image.objects.filter(user=user).count()
         context['wip_images_no'] = Image.wip.filter(user=user).count()
+
+        try:
+            context['mobile_header_background'] = \
+                    UserService(user).get_public_images().first().thumbnail('regular', None, sync=True) \
+                        if UserService(user).get_public_images().exists() \
+                        else None
+        except IOError:
+            context['mobile_header_background'] = None
 
         # TODO: stats
 
@@ -242,6 +252,7 @@ class UserCollectionsDetail(UserCollectionsBase, DetailView):
         context['image_list'] = image_list.all() if image_list else None
         context['not_matching_tag'] = not_matching_tag.all() if not_matching_tag else None
         context['alias'] = 'gallery'
+        context['paginate_by'] = settings.PAGINATE_USER_PAGE_BY
         return context
 
     def get_template_names(self):

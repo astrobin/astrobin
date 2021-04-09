@@ -1,366 +1,486 @@
 @import 'variables';
 
 @font-face {
-    font-family: LeagueGothicRegular;
-    src: url("../fonts/LeagueGothic-Regular.otf") format("opentype");
+  font-family: LeagueGothicRegular;
+  src: url("../fonts/LeagueGothic-Regular.otf") format("opentype");
+}
+
+@media screen and (max-width: 1019px) {
+  .extra-alerts .alert {
+    margin: 10px -30px;
+  }
 }
 
 @media screen and (max-width: 979px) {
-    html, body {
-        font-size: 16px;
+  html, body {
+    font-size: 16px;
+  }
+
+  .anchor {
+    top: 0;
+  }
+
+  .brand-mobile {
+    position: absolute;
+    top: 25px;
+    left: 70px;
+    opacity: .25;
+
+    &.ten-year-anniversary {
+      font-size: 24px;
+      line-height: 42px;
+      margin-left: 12px;
+    }
+  }
+
+  .astrobin-container {
+    padding-bottom: 28px;
+    margin-bottom: 0;
+
+    &.has-subnav {
+      padding-top: 28px;
+    }
+  }
+
+  .navbar {
+    .nav {
+      margin: 5px;
     }
 
-    .anchor {
-        top: 0;
+    input {
+      width: 100%;
     }
 
-    .brand-mobile {
-        font: 40px "LeagueGothicRegular";
-        text-transform: uppercase;
+    .btn-navbar {
+      margin: 0;
+      position: absolute;
+      top: 24px;
+      left: 12px;
+
+      .text {
+        text-shadow: none;
         position: absolute;
-        top: 11px;
-        left: 60px;
-        color: $grey-8;
-        text-shadow: 0 -1px 0 $black, 0 1px 0 $grey-6;
+        top: 4px;
+        left: 34px;
+      }
 
-        &:hover, &:focus, &:active {
-            color: $grey-2;
-            text-shadow: none;
-            top: 11px;
+      &:last-child {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .navbar-fixed-top {
+    margin: 0;
+
+    .container {
+      max-height: inherit;
+    }
+  }
+
+  .site-nav.nav-collapse,
+  .user-nav.nav-collapse {
+    overflow: hidden;
+    z-index: 1021;
+
+    .nav > li > a, .dropdown-menu a {
+      font-weight: normal;
+      color: #ececec !important;
+    }
+  }
+
+  .site-nav.nav-collapse {
+    position: absolute;
+    top: 52px;
+    left: 12px;
+    background: #111;
+  }
+
+  .user-nav .dropdown-menu {
+    z-index: 1021;
+  }
+
+  .user-card .avatar {
+    width: 142px;
+    height: 142px;
+    margin-top: -10px;
+  }
+
+  .group-list {
+    td, th {
+      &.group-members, &.group-images, &.group-forum-posts,
+      &.member-images-count, &.member-posts-count {
+        width: 15%;
+      }
+    }
+  }
+
+  .image-of-the-day {
+    margin-bottom: $spacer-xlarge;
+
+    .header {
+      h2 {
+        background: $gold;
+        background: -webkit-gradient(linear, left top, left bottom, from($gold), to(darken($gold, 10%)));
+        background: -webkit-linear-gradient(top, $gold, darken($gold, 10%));
+        background: -moz-linear-gradient(top, $gold, darken($gold, 10%));
+        background: -ms-linear-gradient(top, $gold, darken($gold, 10%));
+        background: -o-linear-gradient(top, $gold, darken($gold, 10%));
+        background-image: -ms-linear-gradient(top, $gold 0%, darken($gold, 10%) 100%);
+        -webkit-box-shadow: rgba(000, 000, 000, 0.3) 0 1px 1px;
+        -moz-box-shadow: rgba(000, 000, 000, 0.3) 0 1px 1px;
+        box-shadow: rgba(000, 000, 000, 0.3) 0 1px 1px;
+        color: #f5ddae;
+        text-shadow: #8f6b22 0 1px 0;
+
+        .info {
+          color: #f5ddae;
+          text-shadow: #8f6b22 0 1px 0;
         }
+      }
+
+      .title {
+        display: none;
+      }
     }
 
-    .astrobin-container {
-        padding-bottom: 28px;
-        margin-bottom: 0;
+    .astrobin-image-container {
+      padding-top: 66px;
 
-        &.has-subnav {
-            padding-top: 28px;
-        }
+      img {
+        border-radius: 0;
+      }
     }
+  }
 
-    .navbar {
-        .nav {
-            margin: 5px;
-        }
-        input {
-            width: 100%;
-        }
-        .btn-navbar {
-            margin: 0;
-            position: absolute;
-            top: 20px;
-            left: 12px;
+  .activity-actions {
+    text-align: center;
 
-            .text {
-                text-shadow: none;
-                position: absolute;
-                top: 4px;
-                left: 34px;
-            }
-            &:last-child {
-                margin-bottom: 10px;
-            }
-        }
-    }
+    .action {
+      text-align: left;
+      width: 100%;
+      height: auto;
+      margin-bottom: 24px;
 
-    .navbar-fixed-top {
-        margin: 0;
-
-        .container {
-            max-height: inherit;
-        }
-    }
-
-    .site-nav.nav-collapse,
-    .user-nav.nav-collapse {
-        overflow: hidden;
-        z-index: 1021;
-
-        .nav > li > a, .dropdown-menu a {
-            font-weight: normal;
-            color: #ececec !important;
-        }
-    }
-
-    .site-nav.nav-collapse {
+      .avatar {
+        float: none;
         position: absolute;
-        top: 52px;
-        left: 12px;
-        background: #111;
-    }
+        top: 4px;
+        left: 4px;
+        z-index: 1;
+      }
 
-    .user-nav .dropdown-menu {
-        z-index: 1021;
-    }
+      .action-object {
+        float: none;
+        width: 100%;
 
-    .user-card .avatar {
-        width: 140px;
-        height: 140px;
-    }
+        .verb {
+          top: initial;
+          bottom: 0;
+          width: 100%;
 
-    .group-list {
-        td, th {
-            &.group-members, &.group-images, &.group-forum-posts,
-            &.member-images-count, &.member-posts-count {
-                width: 15%;
-            }
+          .verb-inner {
+            padding-left: 12px;
+          }
         }
+      }
+    }
+  }
+
+  .iotd-queue-item {
+    .iotd-queue-item-actions {
+      visibility: visible;
+
+      a {
+        padding: 16px 24px;
+      }
     }
 
-    .image-of-the-day {
-        .header {
-            h2 {
-                font-size: 20px;
-            }
-
-            .title {
-                display: none;
-            }
-        }
+    img {
+      width: 354px !important;
     }
+  }
 
-    .activity-actions {
-        text-align: center;
-
-        .action {
-            text-align: left;
-            width: 100%;
-            height: auto;
-            margin-bottom: 24px;
-
-            .avatar {
-                float: none;
-                position: absolute;
-                top: 4px;
-                left: 4px;
-                z-index: 1;
-            }
-
-            .action-object {
-                float: none;
-                width: 100%;
-
-                .verb {
-                    top: initial;
-                    bottom: 0;
-                    width: 100%;
-
-                    .verb-inner {
-                        padding-left: 12px;
-                    }
-                }
-            }
-        }
-    }
-
-    .iotd-queue-item {
-        .iotd-queue-item-actions {
-            visibility: visible;
-
-            a {
-                padding: 16px 24px;
-            }
-        }
-    }
+  .top-picks-item img {
+    width: 354px !important;
+  }
 }
-
 
 @media screen and (max-width: 767px) {
-    body, .astrobin-container {
+  body, .astrobin-container {
+    padding: 0;
+  }
+
+  h1, h2 {
+    text-align: center;
+    padding-bottom: 8px;
+    display: block;
+    border-bottom: 1px solid #404040;
+
+    + .subtitle {
+      text-align: center;
+    }
+
+    small {
+      padding-top: 8px;
+      line-height: 22px;
+      display: block;
+    }
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  h4, p {
+    padding: 0 12px;
+  }
+
+  @media screen and (max-width: 1019px) {
+    .extra-alerts .alert {
+      margin: 10px 0px;
+    }
+  }
+
+  #astrobin-index-mobile-header {
+    font-size: 12px;
+    font-style: italic;
+    line-height: 42px;
+    color: $grey-4;
+    padding: 0 4px;
+  }
+
+  .subtle-container .header {
+    width: calc(100% - 12px);
+    text-align: center;
+
+    .actions {
+      right: 20px;
+    }
+  }
+
+  .subtle-container,
+  .subtle-container .header,
+  .subnav,
+  footer .container {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    margin-top: 0;
+  }
+
+  .astrobin-thumbnails {
+    text-align: center;
+  }
+
+  .image-of-the-day {
+    .header {
+      border-radius: 0;
+      position: initial;
+
+      h2 {
+        font-size: 18px;
+        line-height: 48px;
         padding: 0;
+      }
+
+      .title {
+        display: none;
+      }
     }
 
-    h1, h2 {
-        text-align: center;
-        padding-bottom: 8px;
-        display: block;
-        border-bottom: 1px solid #404040;
-
-        +.subtitle {
-            text-align: center;
-        }
-
-        small {
-            padding-top: 8px;
-            line-height: 22px;
-            display: block;
-        }
+    .astrobin-image-container {
+      padding-top: 0;
+      border-bottom: 8px solid $gold;
     }
+  }
 
-    h1 {
-        font-size: 26px;
+  .iotd-ribbon-container {
+    margin: 0;
+
+    .iotd-ribbon {
+      width: 100%;
+      left: 0;
+
+      &:after {
+        display: none;
+      }
+
+      .ribbon-content:after {
+        display: none;
+      }
     }
+  }
 
-    h2 {
-        font-size: 22px;
+  .main-image {
+    text-align: center;
+
+    .main-image-inner img {
+      -webkit-border-radius: 0;
+      border-radius: 0;
     }
+  }
 
-    h4, p {
-        padding: 0 12px;
+  div.image-title {
+    padding: 0 12px;
+    text-align: center;
+  }
+
+  .btn-block-mobile {
+    display: block !important;
+    width: 100% !important;
+    margin: 8px 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 11px 19px;
+    font-size: 16.25px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+  }
+
+  .loading {
+    display: block;
+    margin: 20px 0;
+    text-align: center;
+
+    &.hide {
+      visibility: hidden;
     }
+  }
 
-    #astrobin-index-mobile-header {
-        font-size: 12px;
-        font-style: italic;
-        line-height: 42px;
-        color: $grey-4;
-        padding: 0 4px;
+  .alert {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  form {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .topic {
+    .subscriber-list {
+      padding: 12px;
+      font-size: 14px;
     }
+  }
 
-    .subtle-container, .subtle-container .header, .subnav,
-    footer .container
-    {
-        -webkit-border-radius: 0;
-        border-radius: 0;
-        margin-top: 0;
-    }
+  .group-description {
+    padding: 0 12px;
+  }
 
-    .astrobin-thumbnails {
-        text-align: center;
-    }
+  .subtle-container {
+    padding: 0;
+  }
 
-    .image-of-the-day {
-        h2 {
-            left: 0;
-        }
+  .breadcrumb {
+    margin-left: -15px;
+    width: calc(100% - 45px);
+  }
 
-        img {
-            -webkit-border-radius: 0;
-            border-radius: 0;
-        }
-    }
+  .astrobin-container .subtitle {
+    padding-left: 45px;
+    width: calc(100% - 45px);
+  }
 
-    .iotd-ribbon-container {
-        margin: 0;
-
-        .iotd-ribbon {
-            width: 100%;
-            left: 0;
-
-            &:after {
-                display: none;
-            }
-
-            .ribbon-content:after {
-                display: none;
-            }
-        }
-    }
-
-    .main-image .main-image-inner img {
-        -webkit-border-radius: 0;
-        border-radius: 0;
-    }
-
-    div.image-title {
-        padding: 0 12px;
-    }
-
-    .btn-block-mobile {
-        display: block !important;
-        width: 100% !important;
-        margin: 8px 0;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        padding: 11px 19px;
-        font-size: 16.25px;
-        -webkit-border-radius: 6px;
-        -moz-border-radius: 6px;
-        border-radius: 6px;
-    }
-
-    .loading {
-        display: block;
-        margin: 20px 0;
-        text-align: center;
-
-        &.hide {
-            visibility: hidden;
-        }
-    }
-
-    .alert {
-        -webkit-border-radius: 0;
-        border-radius: 0;
-        padding-top: 24px;
-        padding-bottom: 24px;
-    }
-
-    form {
-        padding-left: 12px;
-        padding-right: 12px;
-    }
-
-    .topic {
-        .subscriber-list {
-            padding: 12px;
-            font-size: 14px;
-        }
-    }
-
-    .group-description {
-        padding: 0 12px;
-    }
-
-    .image-of-the-day {
-        margin: 0;
-
-        .header {
-            border-radius: 0;
-            position: initial;
-
-            h2 {
-                font-size: 14px;
-                padding: 0;
-            }
-
-            .title {
-                display: none;
-            }
-        }
-
-        .astrobin-image-container {
-            img {
-                border-radius: 0;
-            }
-        }
-    }
-
+  .subscription-plans-overview {
     .subtle-container {
-        padding: 0;
+      .logo {
+        top: -15%;
+        width: 100%;
+      }
+    }
+  }
+
+  .top-picks, .iotd-promotion-queue {
+    justify-content: center;
+  }
+
+  .iotd-queue-item, .top-picks-item {
+    margin-right: 0 !important;
+
+    .image-title {
+      text-align: left;
+      padding: 0;
     }
 
-    .breadcrumb {
-        margin-left: -15px;
-        width: calc(100% - 45px);
+    img {
+      width: 100% !important;
+    }
+  }
+
+  .avatar-block {
+    margin-bottom: 0;
+
+    .avatar {
+      width: 80px;
+      float: none;
+      margin: 0 auto;
     }
 
-    .astrobin-container .subtitle {
-        padding-left: 45px;
-        width: calc(100% - 45px);
+    .username {
+      padding: 0;
+      margin: 1rem 0;
+      text-align: center;
+    }
+  }
+
+  .technical-card {
+    .astrometry-header {
+      padding: 0 $spacer-large;
+    }
+  }
+
+  .toggleproperty-add-remove.property-like {
+    margin-left: $spacer-medium;
+    width: calc(70% - 22px);
+  }
+
+  .user-page {
+    .advertisement {
+      margin-top: -20px;
     }
 
-    .subscription-plans-overview {
-        .subtle-container {
-            .logo {
-                top: -15%;
-                width: 100%;
-            }
-        }
+    .profile-meta {
+      display: flex;
+      justify-content: center;
+      margin-top: -20px;
+      margin-bottom: 12px;
+      padding: 2rem 0;
+      background-size: cover;
+      background-position: center;
+
+      > .user-card {
+        margin: 0;
+        box-shadow: 0 0 2rem $black;
+      }
     }
+  }
+
+  .user-gallery {
+    .nav-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
 }
 
-
 @media screen and (max-width: 375px) {
-    .modal {
-        .form-horizontal {
-            input[type="text"], input[type="number"],
-            select,
-            .help-inline {
-                width: 95%;
-            }
-        }
+  .modal {
+    .form-horizontal {
+      input[type="text"], input[type="number"],
+      select,
+      .help-inline {
+        width: 95%;
+      }
     }
+  }
 }

@@ -8,7 +8,7 @@
 {% load toggleproperty_tags %}
 {% load staticfiles %}
 
-{% block title %}{% blocktrans with user=requested_user.userprofile %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans trimmed with user=requested_user.userprofile %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block breadcrumbs %}
@@ -37,7 +37,7 @@
         </div>
     {% endif %}
 
-    {% if requested_user == request.user and has_corrupted_images and section == 'corrupted' and not request.COOKIES.astrobin_corrupted_images_banner_seen %}
+    {% if requested_user == request.user and section == 'corrupted' and not request.COOKIES.astrobin_corrupted_images_banner_seen and corrupted_images|length > 0  %}
         <div class="alert alert-warning corrupted-images-banner">
             <button class="close" data-dismiss="alert">&times;</button>
 
@@ -46,28 +46,25 @@
             </h4>
 
             <p>
-                {% blocktrans with "forum/c/astrobin/annoucements/official-statement-and-post-mortem-about-the-data-loss/" as data_corruption_url %}
+                {% blocktrans trimmed with "forum/c/astrobin/annoucements/official-statement-and-post-mortem-about-the-data-loss/" as data_corruption_url %}
                     We are very, very sorry, but it appears that some of your images suffered a catastrophic data
                     corruption, and cannot be retrieved. Please read more <a href="{{ data_corruption_url }}">here</a>.
                 {% endblocktrans %}
             </p>
             <p>
-                {% blocktrans %}
-                    Please click on the thumbnails stuck with the hourglass icon to upload the image files that you
+                {% blocktrans trimmed %}Please click on the thumbnails stuck with the hourglass icon to upload the image files that you
                     still have on your computer or backups to their pages again.
                 {% endblocktrans %}
             </p>
 
             <p>
-                {% blocktrans %}
-                    The data associated to your affected images, such as title, description, equipment used, acquisition
+                {% blocktrans trimmed %}The data associated to your affected images, such as title, description, equipment used, acquisition
                     details, comments, likes, bookmarks, and so on, is still intact and safe.
                 {% endblocktrans %}
             </p>
 
             <p>
-                {% blocktrans %}
-                    AstroBin would like to offer you its sincerest apologies. :(
+                {% blocktrans trimmed %}AstroBin would like to offer you its sincerest apologies. :(
                 {% endblocktrans %}
             </p>
 
@@ -79,7 +76,7 @@
         </div>
     {% endif %}
 
-    <div class="row">
+    <div class="row-fluid user-page">
         <div class="span3">
             {% include 'user/profile/meta.html' %}
         </div>
@@ -94,10 +91,33 @@
             </div>
             {% endif %}
 
-            {% if section == 'trash' %}
+            {% if section == 'recovered' %}
+                {% include "user/profile/recovered_image_list.html" %}
+            {% elif section == 'trash' %}
                 {% include "user/profile/trash_image_list.html" %}
             {% else %}
-                {% image_list image_list nav_ctx='user' %}
+                {% if request.user == requested_user and section == 'public' and public_images_no == 0 and wip_images_no > 0 %}
+                    <div class="alert alert-warning">
+                        <button class="close" data-dismiss="alert">&times;</button>
+
+                        <h4>
+                            <i class="icon icon-warning-sign"></i> {% trans "Can't find your images?" %}
+                        </h4>
+
+                        <p>
+                            {% url "user_page" requested_user as user_page %}
+                            {% blocktrans trimmed with staging_area_learn_more_link="https://welcome.astrobin.com/faq#staging-area" %}
+                                All your images are still unpublished.
+                                <a href="{{ user_page }}?staging">Visit your Staging Area</a> to find them, or
+                                <a href="{{ staging_area_learn_more_link }}">learn more</a>.
+                            {% endblocktrans %}
+                        </p>
+                    </div>
+                {% endif %}
+
+                {% include './profile/image_navigation_menu.html' %}
+
+                {% image_list image_list paginate_by=paginate_by nav_ctx='user' %}
             {% endif %}
         </div> <!-- images -->
     </div> <!-- row -->

@@ -3,6 +3,7 @@
 {% load common_tags %}
 {% load hitcount_tags %}
 {% load i18n %}
+{% load tags %}
 
 
 {% ifequal view "table" %}
@@ -34,9 +35,9 @@
                     </td>
                     <td class="published hidden-phone">
                         {% if image.published %}
-                            {{image.published|date:"SHORT_DATE_FORMAT"}}
+                            {{image.published|to_user_timezone:request.user|date:"SHORT_DATE_FORMAT"}}
                         {% else %}
-                            {{image.uploaded|date:"SHORT_DATE_FORMAT"}}
+                            {{image.uploaded|to_user_timezone:request.user|date:"SHORT_DATE_FORMAT"}}
                         {% endif %}
                     </td>
                     <td class="views hidden-phone">{% get_hit_count for image %}</td>

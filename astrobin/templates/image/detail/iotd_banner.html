@@ -13,7 +13,8 @@
                         <span class="date">
                             {{iotd.date|date:"SHORT_DATE_FORMAT"}}
                         </span>
-                        {% if iotd.judge and IOTD_SHOW_CHOOSING_JUDGE %}
+
+                        {% if iotd.judge and IOTD_SHOW_CHOOSING_JUDGE %}
                         <span class="chosen-by">
                             --
                             {% trans "chosen by" %}
@@ -22,6 +23,10 @@
                             </a>
                         </span>
                         {% endif %}
+
+                        <a class="info" href="https://welcome.astrobin.com/iotd" target="_blank">
+                            <i class="icon-info-sign"></i>
+                        </a>
                     </h1>
                 </strong>
                 <div class="ribbon-stitches-bottom"></div>

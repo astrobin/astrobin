@@ -1,23 +1,20 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: AstroBin Apps: Premium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:19+0000\n"
-"PO-Revision-Date: 2020-09-25 20:02+0000\n"
-"Last-Translator: DanielaDGR <danieladgr.5r@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2021-04-09 14:04+0000\n"
+"PO-Revision-Date: 2021-04-09 15:49+0200\n"
+"Last-Translator: Salvatore Iovene\n"
+"Language-Team: Spanish\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1601064176.000000\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Loco https://localise.biz\n"
+"X-Loco-Source-Locale: en\n"
+"X-Loco-Project-Id: 108451\n"
+"X-Loco-Api-Version: 1.0.25 20210310-1\n"
 
 msgid "I wasn't really affected by the data loss"
 msgstr "No me afectó mucho la pérdida de datos"
@@ -287,3 +284,12 @@ msgstr "¡Gracias!"
 
 msgid "Your AstroBin subscription will be automatically renewed in one week"
 msgstr "Su suscripción en AstroBin se renovará automáticamente en una semana"
+
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will be "
+"automatically renewed in 30 days."
+msgstr ""
+
+msgid "Your AstroBin subscription will be automatically renewed in 30 days"
+msgstr ""

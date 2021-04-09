@@ -1,0 +1,13 @@
+{% load i18n %}
+
+{% blocktrans %}Your comment was approved!{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    As a new user on AstroBin, your first 3 comments will go through a moderation queue, to prevent spam.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    The following comment of yours was just approved by a moderator.
+{% endblocktrans %}
+
+{{url}}

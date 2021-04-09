@@ -16,18 +16,18 @@ from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import base
-from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework import permissions
 
 from astrobin.models import DeepSky_Acquisition
 from astrobin.utils import degrees_minutes_seconds_to_decimal_degrees
 from astrobin_apps_platesolving.annotate import Annotator
-from astrobin_apps_platesolving.api_filters.image_object_id_filter import ImageObjectIdFilter
-from astrobin_apps_platesolving.models import PlateSolvingAdvancedSettings, PlateSolvingAdvancedTask
+from astrobin_apps_platesolving.api_filters.solution_list_filter import SolutionListFilter
+from astrobin_apps_platesolving.models import PlateSolvingAdvancedTask
 from astrobin_apps_platesolving.models import PlateSolvingSettings
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.serializers import SolutionSerializer
+from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_platesolving.solver import Solver, AdvancedSolver, SolverBase
 from astrobin_apps_platesolving.utils import ThumbnailNotReadyException, get_target, get_solution, corrected_pixscale
 
@@ -38,6 +38,7 @@ class SolveView(base.View):
     def post(self, request, *args, **kwargs):
         target = get_target(kwargs.get('object_id'), kwargs.get('content_type_id'))
         solution = get_solution(kwargs.get('object_id'), kwargs.get('content_type_id'))
+        error = None
 
         if target._meta.model_name == u'image':
             image = target
@@ -52,10 +53,10 @@ class SolveView(base.View):
             solver = Solver()
 
             try:
-                url = target.thumbnail('hd_sharpened' if image.sharpen_thumbnails else 'hd', {
-                    'sync': True,
-                    'revision_label': '0' if target._meta.model_name == u'image' else target.label
-                })
+                url = image.thumbnail(
+                    'hd_sharpened' if image.sharpen_thumbnails else 'hd',
+                    '0' if target._meta.model_name == u'image' else target.label,
+                    sync=True)
 
                 if solution.settings.blind:
                     submission = solver.solve(url)
@@ -72,16 +73,18 @@ class SolveView(base.View):
                 solution.status = Solver.PENDING
                 solution.submission_id = submission
                 solution.save()
-            except Exception, e:
-                log.error(e)
+            except Exception as e:
+                log.error("Error during basic plate-solving: %s" % str(e))
                 solution.status = Solver.MISSING
                 solution.submission_id = None
                 solution.save()
+                error = str(e)
 
         context = {
             'solution': solution.id,
             'submission': solution.submission_id,
             'status': solution.status,
+            'error': error
         }
         return HttpResponse(simplejson.dumps(context), content_type='application/json')
 
@@ -92,24 +95,8 @@ class SolveAdvancedView(base.View):
         solution = get_solution(kwargs.get('object_id'), kwargs.get('content_type_id'))
 
         if solution.advanced_settings is None:
-            latest_settings = None
-
-            if target._meta.model_name == u'image':
-                images = target._meta.model.objects.filter(user=target.user).order_by('-pk')
-                for image in images:
-                    if image.solution and image.solution.advanced_settings:
-                        latest_settings = image.solution.advanced_settings
-                        break
-            elif target.image.solution and target.image.solution.advanced_settings:
-                    latest_settings = target.image.solution.advanced_settings
-
-            if latest_settings is not None:
-                latest_settings.pk = None
-                latest_settings.save()
-            else:
-                latest_settings = PlateSolvingAdvancedSettings.objects.create()
-
-            solution.advanced_settings = latest_settings
+            advanced_settings, created = SolutionService.get_or_create_advanced_settings(target)
+            solution.advanced_settings = advanced_settings
             solution.save()
 
         if solution.pixinsight_serial_number is None or solution.status == SolverBase.SUCCESS:
@@ -129,10 +116,10 @@ class SolveAdvancedView(base.View):
                 if solution.advanced_settings.sample_raw_frame_file:
                     url = solution.advanced_settings.sample_raw_frame_file.url
                 else:
-                    url = target.thumbnail('hd_sharpened' if image.sharpen_thumbnails else 'hd', {
-                        'sync': True,
-                        'revision_label': '0' if target._meta.model_name == u'image' else target.label
-                    })
+                    url = image.thumbnail(
+                        'hd_sharpened' if image.sharpen_thumbnails else 'hd',
+                        '0' if target._meta.model_name == u'image' else target.label,
+                        sync=True)
 
                 acquisitions = DeepSky_Acquisition.objects.filter(image=image)
                 if acquisitions.count() > 0 and acquisitions[0].date:
@@ -373,9 +360,7 @@ class SolutionList(generics.ListCreateAPIView):
     queryset = Solution.objects.order_by('pk')
     serializer_class = SolutionSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('content_type', 'object_id',)
-    filter_class = ImageObjectIdFilter
+    filter_class = SolutionListFilter
     pagination_class = None
 
 

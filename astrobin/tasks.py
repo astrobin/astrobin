@@ -1,13 +1,24 @@
 from __future__ import absolute_import
 
 import csv
+import json
 import ntpath
 import subprocess
 import tempfile
+import uuid
 import zipfile
-from StringIO import StringIO
+
+import six
+from django.db import IntegrityError
+from django.template.defaultfilters import filesizeformat
+
+from common.services import DateTimeService
+
+if six.PY2:
+    from StringIO import StringIO
+else:
+    from io import StringIO
 from datetime import datetime, timedelta
-from tempfile import _TemporaryFileWrapper
 from time import sleep
 from zipfile import ZipFile
 
@@ -30,14 +41,13 @@ from requests import Response
 
 from astrobin.models import BroadcastEmail, Image, DataDownloadRequest, ImageRevision
 from astrobin.utils import inactive_accounts, never_activated_accounts, never_activated_accounts_to_be_deleted
-from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
 
 logger = get_task_logger(__name__)
 
 
-@shared_task()
+@shared_task(time_limit=20)
 def test_task():
     logger.info('Test task begins')
     sleep(15)
@@ -71,7 +81,7 @@ def update_top100_ids():
         'Top100 ids task is already being run by another worker')
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def global_stats():
     from astrobin.models import Image, GlobalStat
     sqs = SearchQuerySet()
@@ -91,24 +101,24 @@ def global_stats():
     gs.save()
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def sync_iotd_api():
     call_command("image_of_the_day")
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def merge_gear():
     call_command("merge_gear")
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def hitcount_cleanup():
     call_command("hitcount_cleanup")
 
 
-@shared_task()
-def contain_imagecache_size():
-    subprocess.call(['scripts/contain_directory_size.sh', '/media/imagecache', '120'])
+@shared_task(time_limit=60)
+def contain_temporary_files_size():
+    subprocess.call(['scripts/contain_directory_size.sh', '/astrobin-temporary-files/files', '120'])
 
 
 """
@@ -117,7 +127,7 @@ addresses.
 """
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def delete_inactive_bounced_accounts():
     bounces = Bounce.objects.filter(
         hard=True,
@@ -128,16 +138,9 @@ def delete_inactive_bounced_accounts():
     bounces.delete()
 
 
-"""
-This task gets the raw thumbnail data and sets the cache and ThumbnailGroup object.
-"""
-
-
-@shared_task()
-def retrieve_thumbnail(pk, alias, options):
+@shared_task(time_limit=120)
+def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     from astrobin.models import Image
-
-    revision_label = options.get('revision_label', 'final')
 
     LOCK_EXPIRE = 1
     lock_id = 'retrieve_thumbnail_%d_%s_%s' % (pk, revision_label, alias)
@@ -146,23 +149,17 @@ def retrieve_thumbnail(pk, alias, options):
     release_lock = lambda: cache.delete(lock_id)
 
     def set_thumb():
-        url = thumb.url
         field = image.get_thumbnail_field(revision_label)
-        if not field.name.startswith('images/'):
-            field.name = 'images/' + field.name
         cache_key = image.thumbnail_cache_key(field, alias)
-        cache.set(cache_key, url, 60 * 60 * 24 * 365)
-        logger.debug("Image %d: saved generated thumbnail in the cache." % image.pk)
-        thumbnails, created = ThumbnailGroup.objects.get_or_create(image=image, revision=revision_label)
-        setattr(thumbnails, alias, url)
-        thumbnails.save()
-        logger.debug("Image %d: saved generated thumbnail in the database." % image.pk)
+
+        ImageService(image).set_thumb(alias, revision_label, thumb.url)
+
         cache.delete('%s.retrieve' % cache_key)
 
     if acquire_lock():
         try:
             image = Image.all_objects.get(pk=pk)
-            thumb = image.thumbnail_raw(alias, options)
+            thumb = image.thumbnail_raw(alias, revision_label, thumbnail_settings=thumbnail_settings)
 
             if thumb:
                 set_thumb()
@@ -177,61 +174,70 @@ def retrieve_thumbnail(pk, alias, options):
     logger.debug('retrieve_thumbnail task is already running')
 
 
-"""
-This task retrieves all thumbnail data.
-"""
+@shared_task(time_limit=900)
+def update_index(model, age_in_minutes, batch_size):
+    start = datetime.now() - timedelta(minutes=age_in_minutes)
+    end = datetime.now()
+
+    call_command(
+        'update_index',
+        model,
+        '-b %d' % batch_size,
+        '--start=%s' % start.strftime("%Y-%m-%dT%H:%M:%S"),
+        '--end=%s' % end.strftime("%Y-%m-%dT%H:%M:%S")
+    )
 
 
-@shared_task()
-def retrieve_primary_thumbnails(pk, options):
-    for alias in ('story', 'thumb', 'gallery', 'regular', 'hd', 'real'):
-        logger.debug("Starting retrieve thumbnail for %d:%s" % (pk, alias))
-        retrieve_thumbnail.delay(pk, alias, options)
-
-
-@shared_task()
-def update_index():
-    call_command('update_index', '-k 4', '-b 100', '--remove', '--age=24')
-
-
-@shared_task()
+@shared_task(time_limit=60)
 def send_missing_data_source_notifications():
     call_command("send_missing_data_source_notifications")
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def send_missing_remote_source_notifications():
     call_command("send_missing_remote_source_notifications")
 
 
-@shared_task(rate_limit="1/s")
-def send_broadcast_email(broadcastEmail, recipients):
-    for recipient in list(recipients):
+@shared_task(rate_limit="3/s", time_limit=600)
+def send_broadcast_email(broadcast_email_id, recipients):
+    try:
+        broadcast_email = BroadcastEmail.objects.get(id=broadcast_email_id)
+    except BroadcastEmail.DoesNotExist:
+        logger.error("Attempted to send broadcast email that does not exist: %d" % broadcast_email_id)
+        return
+
+    for recipient in recipients:
         msg = EmailMultiAlternatives(
-            broadcastEmail.subject,
-            broadcastEmail.message,
+            broadcast_email.subject,
+            broadcast_email.message,
             settings.DEFAULT_FROM_EMAIL,
             [recipient])
-        msg.attach_alternative(broadcastEmail.message_html, "text/html")
+        msg.attach_alternative(broadcast_email.message_html, "text/html")
         msg.send()
+        logger.info("Email sent to %s: %s" % (recipient.email, broadcast_email.subject))
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def send_inactive_account_reminder():
     try:
         email = BroadcastEmail.objects.get(subject="We miss your astrophotographs!")
         recipients = inactive_accounts()
-        send_broadcast_email.delay(email, recipients.values_list('user__email', flat=True))
+        send_broadcast_email.delay(email, list(recipients.values_list('user__email', flat=True)))
         recipients.update(inactive_account_reminder_sent=timezone.now())
     except BroadcastEmail.DoesNotExist:
         pass
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def send_never_activated_account_reminder():
     users = never_activated_accounts()
+
     for user in users:
-        push_notification([user], 'never_activated_account', {
+        if not hasattr(user, 'userprofile'):
+            user.delete()
+            continue
+
+        push_notification([user], None, 'never_activated_account', {
             'date': user.date_joined,
             'username': user.username,
             'activation_link': '%s/%s' % (
@@ -241,28 +247,29 @@ def send_never_activated_account_reminder():
         })
 
         user.userprofile.never_activated_account_reminder_sent = timezone.now()
-        user.userprofile.save()
+        user.userprofile.save(keep_deleted=True)
 
-        logger.debug("Sent 'never activated account reminder' to %s" % user.username)
+        logger.debug("Sent 'never activated account reminder' to %d" % user.pk)
 
 
-@shared_task()
+@shared_task(time_limit=300)
 def delete_never_activated_accounts():
     users = never_activated_accounts_to_be_deleted()
     count = users.count()
     users.delete()
     logger.debug("Deleted %d inactive accounts" % count)
 
-@shared_task()
+
+@shared_task(time_limit=3600)
 def prepare_download_data_archive(request_id):
     # type: (str) -> None
 
-    logger.debug("prepare_download_data_archive: called for request %d" % request_id)
+    logger.info("prepare_download_data_archive: called for request %d" % request_id)
 
     data_download_request = DataDownloadRequest.objects.get(id=request_id)
 
     try:
-        temp_zip = tempfile.NamedTemporaryFile()  # type: _TemporaryFileWrapper
+        temp_zip = tempfile.NamedTemporaryFile()
         temp_csv = StringIO()  # type: StringIO
         archive = zipfile.ZipFile(temp_zip, 'w', zipfile.ZIP_DEFLATED, allowZip64=True)  # type: ZipFile
 
@@ -344,18 +351,19 @@ def prepare_download_data_archive(request_id):
                             response = requests.get(revision.solution.image_file.url, verify=False)  # type: Response
                             if response.status_code == 200:
                                 path = ntpath.basename(revision.solution.image_file.name)  # type: str
-                                archive.writestr("%s-%s/revisions/%s/solution/%s" % (id, title, label, path), response.content)
+                                archive.writestr("%s-%s/revisions/%s/solution/%s" % (id, title, label, path),
+                                                 response.content)
                                 logger.debug(
                                     "prepare_download_data_archive: solution image of image %s revision %s = written" % (
                                         id, label
                                     )
                                 )
                     except Exception as e:
-                        logger.exception("prepare_download_data_archive error: %s" % e.message)
+                        logger.warning("prepare_download_data_archive error: %s" % e.message)
                         logger.debug("prepare_download_data_archive: skipping revision %s" % label)
                         continue
             except Exception as e:
-                logger.exception("prepare_download_data_archive error: %s" % e.message)
+                logger.warning("prepare_download_data_archive error: %s" % e.message)
                 logger.debug("prepare_download_data_archive: skipping image %s" % id)
                 continue
 
@@ -406,16 +414,208 @@ def prepare_download_data_archive(request_id):
         data_download_request.file_size = sum([x.file_size for x in archive.infolist()])
         data_download_request.zip_file.save("", File(temp_zip))
 
-        logger.debug("prepare_download_data_archive: completed for request %d" % request_id)
+        logger.info("prepare_download_data_archive: completed for request %d" % request_id)
     except Exception as e:
         logger.exception("prepare_download_data_archive error: %s" % e.message)
         data_download_request.status = "ERROR"
         data_download_request.save()
 
 
-@shared_task()
+@shared_task(time_limit=60)
 def expire_download_data_requests():
     DataDownloadRequest.objects \
         .exclude(status="EXPIRED") \
         .filter(created__lt=datetime.now() - timedelta(days=7)) \
         .update(status="EXPIRED")
+
+
+@shared_task(time_limit=60)
+def purge_expired_incomplete_uploads():
+    deleted = Image.uploads_in_progress.filter(uploader_expires__lt=DateTimeService.now()).delete()
+
+    if deleted is not None:
+        logger.info("Purged %d expired incomplete image uploads." % deleted[0])
+
+    deleted = ImageRevision.uploads_in_progress.filter(uploader_expires__lt=DateTimeService.now()).delete()
+
+    if deleted is not None:
+        logger.info("Purged %d expired incomplete image revision uploads." % deleted[0])
+
+
+@shared_task(time_limit=60)
+def perform_wise_payouts(
+        wise_token, account_id, min_payout_amount, max_payout_amount, expenses_balance, expenses_buffer):
+    BASE_URL = 'https://api.transferwise.com'
+    HEADERS = {'Authorization': 'Bearer %s' % wise_token}
+
+    def get_profiles():
+        result = requests.get('%s/v1/profiles' % BASE_URL, headers=HEADERS)
+        result_json = result.json()
+
+        logger.debug(result.headers)
+        logger.debug(json.dumps(result_json, indent=4, sort_keys=True))
+        logger.info('Wise Payout: got profiles')
+
+        return result_json
+
+    def get_profile_id(profiles):
+        return [x for x in profiles if x['type'] == u'business' and x['details']['name'] == u'AstroBin'][0]['id']
+
+    def get_accounts(profile_id):
+        result = requests.get('%s/v1/borderless-accounts?profileId=%d' % (BASE_URL, profile_id), headers=HEADERS)
+        result_json = result.json()
+
+        logger.debug(result.headers)
+        logger.debug(json.dumps(result_json, indent=4, sort_keys=True))
+        logger.info('Wise Payout: got accounts')
+
+        return result_json
+
+    def create_quote(profile_id, currency, value):
+        def get_source_amount(currency, value):
+            # Always leave `expenses_buffer` in the `expenses_balance` account for expenses.
+            if currency == expenses_balance:
+                if value < expenses_buffer:
+                    # Skip to the next balance.
+                    return 0
+                result = value - expenses_buffer
+            else:
+                result = value
+            return result
+
+        source_amount = get_source_amount(currency, value)
+
+        if source_amount < min_payout_amount:
+            logger.info('Wise Payout: amount is %d < %d, bailing.' % (source_amount, min_payout_amount))
+            return None
+
+        result = requests.post('%s/v2/quotes' % BASE_URL, json={
+            'profile': profile_id,
+            'sourceCurrency': currency,
+            'sourceAmount': min(max_payout_amount, source_amount),
+            'targetCurrency': 'CHF',
+        }, headers=HEADERS)
+        result_json = result.json()
+
+        logger.debug(result.headers)
+        logger.debug(json.dumps(result_json, indent=4, sort_keys=True))
+
+        if 'errors' not in result_json:
+            logger.info('Wise Payout: created quote %s' % result_json['id'])
+            return result_json
+
+        for error in result_json['errors']:
+            logger.error("Wise Payout: error %s" % error['message'])
+
+        return None
+
+    def create_transfer(account_id, quote_id, transactionId=None):
+        result = requests.post('%s/v1/transfers' % BASE_URL, json={
+            'targetAccount': account_id,
+            'quoteUuid': quote_id,
+            'customerTransactionId': transactionId if transactionId else str(uuid.uuid4())
+        }, headers=HEADERS)
+        result_json = result.json()
+
+        logger.debug(result.headers)
+        logger.debug(json.dumps(result_json, indent=4, sort_keys=True))
+
+        if 'errors' not in result_json:
+            logger.info('Wise Payout: created transfer %d' % result_json['id'])
+            return result_json
+
+        for error in result_json['errors']:
+            logger.error("Wise Payout: error %s" % error['message'])
+
+        return None
+
+    def create_fund(profile_id, transfer_id):
+        result = requests.post(
+            '%s/v3/profiles/%d/transfers/%d/payments' % (BASE_URL, profile_id, transfer_id),
+            json={
+                'type': 'BALANCE'
+            }, headers=HEADERS)
+        result_json = result.json()
+
+        logger.debug(result.headers)
+        logger.debug(json.dumps(result_json, indent=4, sort_keys=True))
+        logger.info('Wise Payout: created fund %d' % result_json['balanceTransactionId'])
+
+        return result_json
+
+    def process_wise_payouts():
+        profiles = get_profiles()
+        profile_id = get_profile_id(profiles)
+
+        logger.info('Wise Payout: beginning for profile %d' % profile_id)
+
+        accounts = get_accounts(profile_id)
+
+        for account in accounts:
+            logger.info('Wise Payout: processing account %d' % account['id'])
+
+            for balance in account['balances']:
+                balance_id = balance['id']
+                currency = balance['currency']
+                value = balance['amount']['value']
+
+                logger.info('Wise Payout: processing balance (%d, %s, %.2f)' % (balance_id, currency, value))
+
+                quote = create_quote(profile_id, currency, value)
+
+                if quote is None:
+                    logger.warning("Wise Payout: unable to create quote")
+                    continue
+
+                transfer = create_transfer(account_id, quote['id'])
+
+                if transfer is None:
+                    logger.warning("Wise Payout: unable to create transfer")
+                    continue
+
+                fund = create_fund(profile_id, transfer['id'])
+
+                if fund is None:
+                    logger.warning("Wise Payout: unable to create fund")
+                    continue
+
+                logger.info('Wise Payout: done processing balance (%d, %s, %.2f)' % (balance_id, currency, value))
+
+    process_wise_payouts()
+
+
+@shared_task(time_limit=300)
+def assign_upload_length():
+    """
+    Run this tasks every hour to assign `uploader_upload_length` to images that lack it.
+    """
+
+    def process(items):
+        for item in items.iterator():
+            try:
+                url = item.image_file.url
+                response = requests.head(url)  # type: Response
+            except ValueError as e:
+                logger.error("assign_upload_length: error %s", str(e))
+                continue
+
+            if response.status_code == 200:
+                size = response.headers.get("Content-Length")
+                item.uploader_upload_length = size
+
+                try:
+                    item.save(keep_deleted=True)
+                except IntegrityError:
+                    continue
+
+                logger.info("assign_upload_length: proccessed %d (%s) = %s" % (
+                    item.pk, item.image_file.url, filesizeformat(size)
+                ))
+
+    time_cut = DateTimeService.now() - timedelta(hours=2)
+    images = Image.all_objects.filter(uploader_upload_length__isnull=True, uploaded__gte=time_cut, corrupted=False)
+    revisions = ImageRevision.all_objects.filter(uploader_upload_length__isnull=True, uploaded__gte=time_cut,
+                                                 corrupted=False)
+
+    process(images)
+    process(revisions)

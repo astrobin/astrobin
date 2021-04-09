@@ -1,20 +1,37 @@
+import logging
+from datetime import datetime, timedelta
+
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
+from django.core.cache import cache
 from django.core.files.images import get_image_dimensions
 from django.db.models import Q
 
 from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
-from astrobin.utils import base26_encode, base26_decode
+from astrobin.utils import base26_encode, base26_decode, decimal_to_hours_minutes_seconds, \
+    decimal_to_degrees_minutes_seconds
+from astrobin_apps_images.models import ThumbnailGroup
+from astrobin_apps_platesolving.models import Solution
+from common.services.constellations_service import ConstellationsService, ConstellationException
+
+logger = logging.getLogger("apps")
 
 
 class ImageService:
     image = None  # type: Image
 
-    def __init__(self, image):
+    def __init__(self, image=None):
         # type: (Image) -> None
         self.image = image
 
     def get_revision(self, label):
         # type: (str) -> ImageRevision
+        if label is None or label is 0 or label is '0':
+            raise ValueError("`label` must be a revision label (B or more)")
+
+        if label == 'final':
+            label = self.get_final_revision_label()
+
         return ImageRevision.objects.get(image=self.image, label=label)
 
     def get_final_revision_label(self):
@@ -67,7 +84,10 @@ class ImageService:
             if w == 0 or h == 0:
                 try:
                     (w, h) = get_image_dimensions(self.image.image_file.file)
-                except (ValueError, IOError):
+                except (ValueError, IOError) as e:
+                    logger.warning(
+                        "ImageService.get_default_cropping: unable to get image dimensions for %d: %s" % (
+                            self.image.pk, str(e)))
                     return '0,0,0,0'
         else:
             try:
@@ -78,7 +98,13 @@ class ImageService:
             w, h = revision.w, revision.h
 
             if w == 0 or h == 0:
-                (w, h) = get_image_dimensions(revision.image_file.file)
+                try:
+                    (w, h) = get_image_dimensions(revision.image_file.file)
+                except (ValueError, IOError) as e:
+                    logger.warning(
+                        "ImageService.get_default_cropping: unable to get image dimensions for %d: %s" % (
+                            self.image.pk, str(e)))
+                    return '0,0,0,0'
 
         shorter_size = min(w, h)  # type: int
         x1 = int(w / 2.0 - shorter_size / 2.0)  # type: int
@@ -94,14 +120,21 @@ class ImageService:
         elif revision_label == 'final':
             target = self.get_final_revision()
         else:
-            target = self.get_revision(label=revision_label)
+            try:
+                target = self.get_revision(label=revision_label)
+            except ImageRevision.DoesNotExist:
+                target = self.get_final_revision()
 
         square_cropping = target.square_cropping if target.square_cropping else self.get_default_cropping(
             revision_label)
-        square_cropping_x0 = int(square_cropping.split(',')[0])
-        square_cropping_y0 = int(square_cropping.split(',')[1])
-        square_cropping_x1 = int(square_cropping.split(',')[2])
-        square_cropping_y1 = int(square_cropping.split(',')[3])
+        try:
+            square_cropping_x0 = int(square_cropping.split(',')[0])
+            square_cropping_y0 = int(square_cropping.split(',')[1])
+            square_cropping_x1 = int(square_cropping.split(',')[2])
+            square_cropping_y1 = int(square_cropping.split(',')[3])
+        except (IndexError, ValueError) as e:
+            return None
+
         point_of_interest = {
             'x': int((square_cropping_x1 + square_cropping_x0) / 2),
             'y': int((square_cropping_y1 + square_cropping_y0) / 2),
@@ -111,7 +144,9 @@ class ImageService:
         if w == 0 or h == 0:
             try:
                 (w, h) = get_image_dimensions(target.image_file.file)
-            except (ValueError, IOError):
+            except (ValueError, IOError, TypeError) as e:
+                logger.warning("ImageService.get_crop_box: unable to get image dimensions for %d: %s" % (
+                    target.pk, str(e)))
                 return None
 
         crop_width = settings.THUMBNAIL_ALIASES[''][alias]['size'][0]
@@ -165,3 +200,102 @@ class ImageService:
         for solar_system_subject in SOLAR_SYSTEM_SUBJECT_CHOICES:
             if self.image.solar_system_main_subject == solar_system_subject[0]:
                 return solar_system_subject[1]
+
+    def get_images_pending_moderation(self):
+        return Image.objects_including_wip.filter(
+            moderator_decision=0,
+            uploaded__lt=datetime.now() - timedelta(minutes=10))
+
+    def get_hemisphere(self, revision_label=None):
+        # type: (str) -> str
+
+        target = None  # type: union[Image, ImageRevision]
+
+        if revision_label is None or revision_label == '0':
+            target = self.image
+        else:
+            try:
+                target = self.get_revision(revision_label)
+            except ImageRevision.DoesNotExist:
+                return Image.HEMISPHERE_TYPE_UNKNOWN
+
+        solution = target.solution  # type: Solution
+
+        if solution is None or solution.dec is None:
+            return Image.HEMISPHERE_TYPE_UNKNOWN
+
+        return Image.HEMISPHERE_TYPE_NORTHERN if solution.dec >= 0 else Image.HEMISPHERE_TYPE_SOUTHERN
+
+    def set_thumb(self, alias, revision_label, url):
+        # type: (str, str, str) -> None
+
+        field = self.image.get_thumbnail_field(revision_label)
+        cache_key = self.image.thumbnail_cache_key(field, alias)
+        cache.set(cache_key, url, 60 * 60 * 24)
+
+        thumbnails, created = ThumbnailGroup.objects.get_or_create(image=self.image, revision=revision_label)
+        setattr(thumbnails, alias, url)
+        thumbnails.save()
+
+    def delete_original(self):
+        image = self.image
+        revisions = self.get_revisions()
+
+        image.thumbnail_invalidate()
+
+        if image.solution:
+            image.solution.delete()
+
+        if not revisions.exists():
+            image.delete()
+            return
+
+        new_original = revisions.first()
+
+        image.image_file = new_original.image_file
+        image.updated = new_original.uploaded
+        image.w = new_original.w
+        image.h = new_original.h
+        image.is_final = image.is_final or new_original.is_final
+        image.save(keep_deleted=True)
+
+        if new_original.solution:
+            # Get the solution this way, I don't know why it wouldn't work otherwise
+            content_type = ContentType.objects.get_for_model(ImageRevision)
+            solution = Solution.objects.get(content_type=content_type, object_id=new_original.pk)
+            solution.content_object = image
+            solution.save()
+
+        image.thumbnails.filter(revision=new_original.label).update(revision='0')
+        new_original.delete()
+
+    @staticmethod
+    def get_constellation(solution):
+        if solution is None or solution.ra is None or solution.dec is None:
+            return None
+
+        ra = solution.advanced_ra if solution.advanced_ra else solution.ra
+        ra_hms = decimal_to_hours_minutes_seconds(ra, hour_symbol='', minute_symbol='', second_symbol='')
+
+        dec = solution.advanced_dec if solution.advanced_dec else solution.dec
+        dec_dms = decimal_to_degrees_minutes_seconds(dec, degree_symbol='', minute_symbol='', second_symbol='')
+
+        try:
+            return ConstellationsService.get_constellation('%s %s' % (ra_hms, dec_dms))
+        except ConstellationException as e:
+            logger.error('ConstellationException for solution %d: %s' % (solution.pk, str(e)))
+            return None
+
+    @staticmethod
+    def verify_file(path):
+        try:
+            with open(path) as f:
+                from PIL import Image as PILImage
+                trial_image = PILImage.open(f)
+                trial_image.verify()
+                f.seek(0)  # Because we opened it with PIL
+        except Exception as e:
+            logger.warning("Unable to read image file %s with PIL: %s" % (path, str(e)))
+            return False
+
+        return True

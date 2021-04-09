@@ -17,8 +17,7 @@
 
             <div class="modal-body">
                 <p>
-                    {% blocktrans %}
-                        To improve the accuracy of your plate-solution even further, please upload one of the XISF or
+                    {% blocktrans trimmed %}To improve the accuracy of your plate-solution even further, please upload one of the XISF or
                         FITS files from your data set. Such files normally have date and time headers that will allow
                         AstroBin to calculate solar system body ephemerides and find planets and asteroids in your
                         image (provided you also add location information to your image).
@@ -26,15 +25,14 @@
                 </p>
 
                 <p>
-                    {% blocktrans with xisf_url='https://pixinsight.com/xisf/' %}
+                    {% blocktrans trimmed with xisf_url='https://pixinsight.com/xisf/' %}
                         For maximum accuracy, it's recommended that you use PixInsight's native and open format XISF.
                         Learn more about XISF here: <a href="{{ xisf_url }}" target="_blank">{{ xisf_url }}</a>
                     {% endblocktrans %}
                 </p>
 
                 <p>
-                    {% blocktrans %}
-                        <strong>Please note:</strong> it's very important that the XISF or FITS file you upload is
+                    {% blocktrans trimmed %}<strong>Please note:</strong> it's very important that the XISF or FITS file you upload is
                         aligned to your processed image, otherwise the object annotations will not match.
                         To improve your chances at a successful accurate plate-solution, calibrate your file the usual
                         way (dark/bias/flats) but you don't need to stretch it.

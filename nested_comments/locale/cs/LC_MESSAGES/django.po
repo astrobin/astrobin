@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:06+0000\n"
+"POT-Creation-Date: 2021-04-09 14:01+0000\n"
 "PO-Revision-Date: 2013-10-20 22:13+0100\n"
 "Last-Translator: VojtechKudela <vojtiik@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,24 +18,37 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Pootle 2.1.6\n"
 
+msgid "Type your comment here..."
+msgstr ""
+
 msgid "Cancel"
 msgstr "Zrušit"
 
 msgid "Add a comment"
 msgstr "Přidat komentář"
 
+#, python-format
 msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment.</p>"
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
+"\">sign up</a> to leave a comment."
 msgstr ""
-"Pro přidání komentáře se, prosím, <a href=\"/accounts/login/\">přihlašte</a> "
-"nebo <a href=\"/accounts/register/\">zaregistrujte</a>.</p>"
 
 msgid "There are no comments yet."
 msgstr "Zatím nikdo žádný komentář nevložil."
 
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr ""
+
 msgid "(deleted)"
 msgstr "(smazáno)"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr ""
 
 msgid "Link"
 msgstr "Odkaz"
@@ -52,44 +65,14 @@ msgstr "Upravit"
 msgid "Reply"
 msgstr "Odpovědět"
 
+msgid "Like"
+msgstr ""
+
+msgid "Unlike"
+msgstr ""
+
 msgid "The comment cannot be empty."
 msgstr "Není možné vložit prázdný komentář."
 
-msgid "Save"
-msgstr "Uložit"
-
-msgid "(comment deleted)"
-msgstr "(komentář byl smazán)"
-
-msgid "There doesn't seem to be anything here."
-msgstr "Nic tady není."
-
-#~ msgid "Formatting help"
-#~ msgstr "Nápověda k formátování"
-
-#~ msgid "Preview"
-#~ msgstr "Náhled"
-
-#~ msgid "You type:"
-#~ msgstr "Co píšete:"
-
-#~ msgid "You see:"
-#~ msgstr "Co se zobrazí:"
-
-#~ msgid "italics"
-#~ msgstr "kurzíva"
-
-#~ msgid "bold"
-#~ msgstr "tučně"
-
-#~ msgid "(TAB or 4 spaces)"
-#~ msgstr "(TAB nebo 4 mezery)"
-
-#~ msgid "preformatted text"
-#~ msgstr "předformátovaný text"
-
-#~ msgid "quoted text"
-#~ msgstr "citovaný text"
-
-#~ msgid "escape the formatting syntax"
-#~ msgstr "opustit formátování"
+msgid "Submit"
+msgstr ""

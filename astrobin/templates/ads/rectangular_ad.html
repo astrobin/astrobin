@@ -1,0 +1,52 @@
+{% load i18n %}
+{% load tags %}
+{% load astrobin_apps_premium_tags %}
+
+{% show_ads_on_page as show_ads_on_page %}
+{% show_secondary_ad_on_page as show_secondary_ad_on_page %}
+
+{% if show_ads_on_page %}
+    <div class="subtle-container advertisement {{ ad_container_classes }}">
+        <div class="header">
+            <h4><i class="icon-bullhorn hidden-phone"></i></h4>
+
+            <a class="remove" data-toggle="modal"
+                    {% if request.user|can_remove_ads %}
+               href="#remove-ads-modal"
+                    {% else %}
+               href="#feature-restricted-modal"
+                    {% endif %}
+            >
+                {% trans "Remove ads" %} <i class="icon-remove"></i>
+            </a>
+        </div>
+
+        <div id='{{ NATIVE_RESPONSIVE_RECTANGULAR_SLOT }}'>
+            <script>
+                googletag.cmd.push(function () {
+                    {% if key_value_pairs %}
+                        {% for key, value in key_value_pairs.items %}
+                            googletag.pubads().setTargeting("{{ key }}", "{{ value }}");
+                        {% endfor %}
+                    {% endif %}
+                    googletag.display('{{ NATIVE_RESPONSIVE_RECTANGULAR_SLOT }}');
+                });
+            </script>
+        </div>
+
+        {% if show_secondary_ad_on_page %}
+            <div id='{{ NATIVE_RESPONSIVE_RECTANGULAR_SLOT_2 }}'>
+                <script>
+                    googletag.cmd.push(function () {
+                        {% if key_value_pairs %}
+                            {% for key, value in key_value_pairs.items %}
+                                googletag.pubads().setTargeting("{{ key }}", "{{ value }}");
+                            {% endfor %}
+                        {% endif %}
+                        googletag.display('{{ NATIVE_RESPONSIVE_RECTANGULAR_SLOT_2 }}');
+                    });
+                </script>
+            </div>
+        {% endif %}
+    </div>
+{% endif %}

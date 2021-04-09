@@ -1,0 +1,19 @@
+@import "variables";
+
+#astrophotographers-list-page {
+  #astrophotographers-list-search {
+    @media screen and (min-width: 768px) {
+      width: 300px;
+      float: right;
+      margin-bottom: 20px;
+    }
+  }
+
+  .astrophotographers-list {
+    table-layout: initial;
+
+    .astrophotographers-list-position {
+      width: 25px;
+    }
+  }
+}

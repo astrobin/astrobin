@@ -1,6 +1,6 @@
 {% load i18n %}
 
-{% blocktrans trimmed    with image.user.userprofile.get_display_name as user %}
+{% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
     New image by {{user}}
 {% endblocktrans %}
 

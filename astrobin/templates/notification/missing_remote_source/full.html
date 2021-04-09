@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load astrobin_apps_notifications_tags %}
 
 {% blocktrans %}Data is paramount on AstroBin, and the whole community thrives on it.{% endblocktrans %}<br />
 
@@ -9,5 +10,5 @@
 <br />
 
 {% for image in images %}
-    <a href="{{ BASE_URL }}{% url 'image_edit_basic' image.pk %}">{{ image.title | default:_("(no title)") }}</a><br />
+    <a href="{{ BASE_URL }}{% url 'image_edit_basic' image.pk %}?{% notification_url_params_for_email %}">{{ image.title | default:_("(no title)") }}</a><br />
 {% endfor %}

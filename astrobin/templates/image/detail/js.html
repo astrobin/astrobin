@@ -11,18 +11,16 @@
     {% get_hit_count_js_variables for image as hitcount %}
     <script type="text/javascript">
     jQuery(document).ready(function($) {
-        // use the template tags in our JavaScript call
-        $.postCSRF("{{ hitcount.ajax_url }}", { hitcountPK : "{{ hitcount.pk }}" })
-            .done(function(data) {
-                var $el = $('.views .number');
-                var views = parseInt($el.text());
-                if (data.hit_counted) {
-                    $el.text(views + 1);
-                }
-            }).fail(function(data) {
-                console.log('POST failed');
-                console.log(data);
-            });
+        if ($.postCSRF !== undefined) {
+            $.postCSRF("{{ hitcount.ajax_url }}", {hitcountPK: "{{ hitcount.pk }}"})
+                .done(function (data) {
+                    var $el = $('.views .number');
+                    var views = parseInt($el.text());
+                    if (data.hit_counted) {
+                        $el.text(views + 1);
+                    }
+                });
+        }
     });
     </script>
 {% endifnotequal %}
@@ -111,11 +109,8 @@ $(document).ready(function() {
         textarea.val(content);
     });
 
-    astrobin_common.init('{{image.user.username}}');
-
     astrobin_common.setup_gear_popovers();
     astrobin_common.setup_subject_popovers();
-    astrobin_common.setup_user_popovers();
 
     $('#upload-revision-modal form input[type=submit]').click(function(e) {
         $(this).addClass('disabled');

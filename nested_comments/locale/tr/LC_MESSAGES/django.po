@@ -1,14 +1,9 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:06+0000\n"
+"POT-Creation-Date: 2021-04-09 14:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,21 +13,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
+msgid "Type your comment here..."
+msgstr ""
+
 msgid "Cancel"
 msgstr ""
 
 msgid "Add a comment"
 msgstr ""
 
+#, python-format
 msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment.</p>"
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
+"\">sign up</a> to leave a comment."
 msgstr ""
 
 msgid "There are no comments yet."
 msgstr ""
 
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr ""
+
 msgid "(deleted)"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
 msgstr ""
 
 msgid "Link"
@@ -50,14 +60,14 @@ msgstr ""
 msgid "Reply"
 msgstr ""
 
+msgid "Like"
+msgstr ""
+
+msgid "Unlike"
+msgstr ""
+
 msgid "The comment cannot be empty."
 msgstr ""
 
-msgid "Save"
-msgstr ""
-
-msgid "(comment deleted)"
-msgstr ""
-
-msgid "There doesn't seem to be anything here."
+msgid "Submit"
 msgstr ""

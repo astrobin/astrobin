@@ -3,25 +3,17 @@
 
 {% load pybb_tags i18n %}
 {% load staticfiles %}
+{% load tags %}
+{% load common_tags %}
 
 {% block title %}{{ topic }}{% endblock %}
 
 {% block container_extra_classes %}
     {% if not READONLY_MODE %}
-        {% if user.is_moderator or user.is_subscribed or user|pybb_may_subscribe_topic:topic %}
+        {% if user.is_superuser or user.is_subscribed or user|pybb_may_subscribe_topic:topic %}
             has-subnav
         {% endif %}
     {% endif %}
-{% endblock %}
-
-{% block extra_head %}
-    {{ block.super }}
-    {{ form.media.css }}
-{% endblock %}
-{% block extra_script %}
-    {{ block.super }}
-    {{ form.media.js }}
-    <script type="text/javascript" src="{% static 'pybb/js/jquery.formset.min.js' %}"></script>
 {% endblock %}
 
 {% block breadcrumb %}
@@ -32,10 +24,10 @@
 
 {% block content %}
     {% if not READONLY_MODE %}
-        {% if user.is_moderator or user.is_subscribed or user|pybb_may_subscribe_topic:topic %}
+        {% if user.is_superuser or user.is_subscribed or user|pybb_may_subscribe_topic:topic %}
             <div class="subnav subnav-fixed">
                 <ul class="nav nav-pills">
-                    {% if user.is_moderator %}
+                    {% if user.is_superuser %}
                         <li class="hidden-phone">
                             {% if topic.sticky %}
                                 <a href="{% url 'pybb:unstick_topic' topic.id %}">{% trans "Unstick topic" %}</a>
@@ -52,7 +44,7 @@
                             {% endif %}
                         </li>
 
-                        {% if perms.pybb.change_topic and user.is_staff %}
+                        {% if perms.pybb.change_topic and user.is_superuser %}
                             <li class="hidden-phone">
                                 <a href="{% url 'admin:pybb_topic_change' topic.id %}">{% trans 'Admin' %}</a>
                             </li>
@@ -94,6 +86,14 @@
             {% endifnotequal %}{% endif %}
             {% for post in post_list %}
                 {% cycle 'odd' 'even' as rowcolors silent %}
+
+                {% if user.is_authenticated and post != post.topic.head and post|post_is_unread:request and not unread_marker_shown %}
+                    <div class="unread-marker">
+                        {% trans "The posts below are new since your last visit to this topic." %}
+                    </div>
+                    {% setvar True as unread_marker_shown %}
+                {% endif %}
+
                 {% include "pybb/post_template.html" %}
             {% endfor %}
         </div>
@@ -103,7 +103,7 @@
         {% endwith %}
 
         {% if user|pybb_may_create_post:topic %}
-            <h3>{% trans "Reply" %}</h3>
+            <h3 class="reply-header">{% trans "Reply" %}</h3>
             {% include "pybb/post_form.html" %}
         {% else %}
             {% if topic.closed %}
@@ -115,7 +115,7 @@
             {% endif %}
         {% endif %}
 
-        {% if user.is_staff %}
+        {% if user.is_superuser %}
             <div class="subscriber-list">
                 {% trans "Subscribers" %}:
                 {% for subscriber in topic.subscribers.all %}
@@ -127,4 +127,26 @@
             </div>
         {% endif %}
     </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            {% with topic|first_unread_post_link:request as first_unread_post_link %}
+                {% if first_unread_post_link and topic.posts.count > 1 %}
+                    var hash = window.location.hash;
+                    if (!hash || hash.indexOf("#post-") === -1) {
+                        $.toast({
+                            heading: "{% trans "You have unread posts in this topic." %}",
+                            text: "{% trans "Would you like to jump to the new posts since your last visit?" %}<br/><br/><a href='{{ first_unread_post_link }}'>{% trans "Click here" %}</a>",
+                            showHideTransition: 'slide',
+                            allowToastClose: true,
+                            hideAfter: false,
+                            position: 'top-right'
+                        });
+                    }
+                {% endif %}
+            {% endwith %}
+        });
+    </script>
 {% endblock %}

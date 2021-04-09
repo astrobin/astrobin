@@ -14,14 +14,14 @@
 {% endblock %}
 
 {% block content %}
-    <form class="form-horizontal" method="post" action="">{% csrf_token %}
+    <form class="form-horizontal login-form" method="post" action="">{% csrf_token %}
 
         {{ form | as_bootstrap }}
 
         <div class="form-actions">
             <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans 'Log in' %}" />
             <a class="btn btn-block-mobile" href="{% url 'auth_password_reset' %}">{% trans "Reset password" %}</a>
-            <a class="btn btn-block-mobile" href="{% url 'registration_register' %}">{% trans "Register" %}</a>
+            <a class="btn btn-block-mobile" href="https://welcome.astrobin.com/pricing">{% trans "Register" %}</a>
             <input type="hidden" name="next" value="{{ next }}" />
         </div>
 

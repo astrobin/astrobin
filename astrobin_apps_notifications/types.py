@@ -43,12 +43,6 @@ NOTICE_TYPES = (
         1,
     ),
     (
-        'new_blog_entry',
-        'AstroBin has published a new blog entry',
-        '',
-        1,
-    ),
-    (
         'new_comment',
         _('Your image received a new comment'),
         '',
@@ -57,6 +51,12 @@ NOTICE_TYPES = (
     (
         'new_comment_reply',
         _('There was a reply to your comment'),
+        '',
+        2,
+    ),
+    (
+        'comment_approved',
+        _('Your comment was approved'),
         '',
         2,
     ),
@@ -73,26 +73,20 @@ NOTICE_TYPES = (
         2,
     ),
     (
-        'new_image_from_gear',
-        _('New image with some gear you follow'),
+        'new_comment_like',
+        _('Your comment was liked'),
         '',
         2,
     ),
     (
-        'new_image_of_subject',
-        _('New image of a subject you follow'),
+        'new_forum_post_like',
+        _('Your forum post was liked'),
         '',
         2,
     ),
     (
         'api_key_request_approved',
         _('Your API Key request has been approved'),
-        '',
-        2,
-    ),
-    (
-        'new_gear_discussion',
-        _('New discussion about a gear item you own'),
         '',
         2,
     ),
@@ -163,6 +157,12 @@ NOTICE_TYPES = (
         2
     ),
     (
+        'expiring_subscription_autorenew_30d',
+        _('Your subscription will be renewed in one 30 days'),
+        '',
+        2
+    ),
+    (
         'missing_data_source',
         _('You have images with a missing "Data source"'),
         '',
@@ -176,7 +176,67 @@ NOTICE_TYPES = (
     ),
     (
         'never_activated_account',
-        _('Would you like to activate your account?"'),
+        _('Would you like to activate your account?'),
+        '',
+        2
+    ),
+    (
+        'new_forum_post_mention',
+        _('You were mentioned in a forum post'),
+        '',
+        2,
+    ),
+    (
+        'new_comment_mention',
+        _('You were mentioned in a comment'),
+        '',
+        2,
+    ),
+    (
+        'welcome_to_astrobin',
+        _('Welcome to AstroBin!'),
+        '',
+        2,
+    ),
+    (
+        'congratulations_for_your_first_image',
+        _("Congratulations for your first image on AstroBin!"),
+        '',
+        2
+    ),
+    (
+        'new_subscription',
+        _("Thank you for getting a subscription!"),
+        '',
+        2
+    ),
+    (
+        'new_payment',
+        _("Thank you for your payment!"),
+        '',
+        2
+    ),
+    (
+        'iotd_staff_inactive_removal_notice',
+        _("You were removed from the IOTD staff"),
+        '',
+        2
+    ),
+    (
+        'iotd_staff_inactive_warning',
+        _("You have been inactive as an IOTD staff member"),
+        '',
+        2
+    ),
+    (
+        'image_you_promoted_is_tp',
+        _("An image you promoted made it to Top Pick"),
+        '',
+        2
+    ),
+    (
+        'image_you_promoted_is_iotd',
+        _("An image you promoted made it to IOTD"),
         '',
         2
     )

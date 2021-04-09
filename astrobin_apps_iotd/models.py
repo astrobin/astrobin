@@ -8,7 +8,7 @@ from astrobin_apps_iotd.permissions import may_toggle_submission_image, may_togg
 
 
 class IotdSubmission(models.Model):
-    submitter = models.ForeignKey(User)
+    submitter = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     image = models.ForeignKey(Image)
     date = models.DateTimeField(auto_now_add=True)
 
@@ -43,7 +43,7 @@ class IotdSubmission(models.Model):
 
 
 class IotdVote(models.Model):
-    reviewer = models.ForeignKey(User)
+    reviewer = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     image = models.ForeignKey(Image)
     date = models.DateTimeField(auto_now_add=True)
 
@@ -94,3 +94,42 @@ class Iotd(models.Model):
         # Force validation on save
         self.full_clean()
         return super(Iotd, self).save(*args, **kwargs)
+
+
+class IotdHiddenImage(models.Model):
+    user = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, null=False, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created']
+        unique_together = ('user', 'image')
+
+    def __unicode__(self):
+        return "IOTD hidden image: %d / %s" % (self.user.pk, self.image.get_id())
+
+
+class IotdDismissedImage(models.Model):
+    user = models.ForeignKey(User, null=False, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, null=False, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created']
+        unique_together = ('user', 'image')
+
+    def __unicode__(self):
+        return "IOTD dismissed image: %d / %s" % (self.user.pk, self.image.get_id())
+
+
+class TopPickNominationsArchive(models.Model):
+    image = models.OneToOneField(Image, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['-image__published']
+
+class TopPickArchive(models.Model):
+    image = models.OneToOneField(Image, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['-image__published']

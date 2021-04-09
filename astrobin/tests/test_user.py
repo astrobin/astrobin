@@ -1,6 +1,7 @@
 import sys
 from datetime import date, timedelta, datetime
 
+from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
 from django.test import TestCase, override_settings
@@ -9,8 +10,6 @@ from django_bouncy.models import Bounce
 from mock import patch
 
 from astrobin.enums import SubjectType
-from toggleproperties.models import ToggleProperty
-
 from astrobin.models import (
     Acquisition,
     Telescope,
@@ -19,6 +18,8 @@ from astrobin.models import (
     DataDownloadRequest)
 from astrobin.tests.generators import Generators
 from astrobin_apps_iotd.models import *
+from astrobin_apps_iotd.services import IotdService
+from toggleproperties.models import ToggleProperty
 
 
 class UserTest(TestCase):
@@ -29,7 +30,6 @@ class UserTest(TestCase):
         self.user_2 = User.objects.create_user(
             username="user_2", email="user_2@example.com",
             password="password")
-
 
     def tearDown(self):
         self.user.delete()
@@ -43,7 +43,6 @@ class UserTest(TestCase):
         if wip:
             data['wip'] = True
 
-        patch('astrobin.tasks.retrieve_primary_thumbnails.delay')
         self.client.post(
             reverse('image_upload_process'),
             data,
@@ -131,8 +130,9 @@ class UserTest(TestCase):
         response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
         self.assertEquals(response.status_code, 200)
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_user_page_view(self, retrieve_primary_thumbnails):
+
+    def test_user_page_view(self):
+        now = datetime.now()
         today = date.today()
 
         # Test simple access
@@ -167,9 +167,9 @@ class UserTest(TestCase):
         # Test "upload time" sorting
         image1 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE1")
         image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
-        image1.uploaded = today
+        image1.uploaded = now
         image1.save(keep_deleted=True)
-        image2.uploaded = today + timedelta(1)
+        image2.uploaded = now + timedelta(hours=24)
         image2.save(keep_deleted=True)
 
         response = self.client.get(
@@ -186,7 +186,7 @@ class UserTest(TestCase):
         image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
         acquisition1 = Acquisition.objects.create(image=image1, date=today)
         acquisition2 = Acquisition.objects.create(
-            image=image2, date=today + timedelta(1))
+            image=image2, date=today + timedelta(days=1))
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=acquired")
         self.assertEquals(response.status_code, 200)
@@ -294,9 +294,11 @@ class UserTest(TestCase):
         image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
         image3 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE3")
 
+        today = date.today()
+        one_year_ago = datetime(today.year - 1,today.month, today.day, 0, 0, 0)
         acquisition1 = Acquisition.objects.create(image=image1, date=today)
         acquisition2 = Acquisition.objects.create(
-            image=image2, date=today - timedelta(365))
+            image=image2, date=one_year_ago)
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=year")
@@ -425,8 +427,8 @@ class UserTest(TestCase):
         image.delete()
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_user_page_view_wip_image_not_visible_by_others(self, retrieve_primary_thumbnails):
+
+    def test_user_page_view_wip_image_not_visible_by_others(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST STAGING IMAGE", True)
 
@@ -437,8 +439,8 @@ class UserTest(TestCase):
         self.assertEquals(image.title in response.content, False)
 
     @override_settings(PREMIUM_RESTRICTS_IOTD=False)
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_user_profile_exclude_from_competitions(self, retrieve_primary_thumbnails):
+
+    def test_user_profile_exclude_from_competitions(self):
         self.client.login(username="user", password="password")
         self._do_upload('astrobin/fixtures/test.jpg')
         self.client.logout()
@@ -463,6 +465,8 @@ class UserTest(TestCase):
         profile.save(keep_deleted=True)
         image = Image.objects_including_wip.get(pk=image.pk)
 
+        image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+
         # Check that the IOTD banner is not visible
         response = self.client.get(reverse('image_detail', args=(image.get_id(),)))
         self.assertNotContains(response, "iotd-ribbon")
@@ -471,29 +475,91 @@ class UserTest(TestCase):
         response = self.client.get(reverse('user_page', args=(self.user.username,)))
         self.assertNotContains(response, 'iotd-badge')
 
-        # Check that the Top Pick badge is not visible
+        # Check that the Top pick badge is not visible
         iotd.delete()
         response = self.client.get(reverse('user_page', args=(self.user.username,)))
         self.assertNotContains(response, 'top-pick-badge')
 
+        # Check that the Top pick nomination badge is not visible
+        vote.delete()
+        response = self.client.get(reverse('user_page', args=(self.user.username,)))
+        self.assertNotContains(response, 'top-pick-nomination-badge')
+
         # Check that the top100 badge is not visible
         self.assertNotContains(response, 'top100-badge')
 
-        submitter.delete()
-        reviewer.delete()
-        judge.delete()
+    @override_settings(
+        PREMIUM_RESTRICTS_IOTD=False,
+        IOTD_SUBMISSION_MIN_PROMOTIONS=2,
+        IOTD_REVIEW_MIN_PROMOTIONS=2,
+        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(days=365)
+    )
 
-        submitters.delete()
-        reviewers.delete()
-        judges.delete()
+    def test_user_profile_banned_from_competitions(self):
+        self.client.login(username="user", password="password")
+        self._do_upload('astrobin/fixtures/test.jpg')
+        self.client.logout()
 
-        submission.delete()
-        vote.delete()
+        image = Image.objects_including_wip.all()[0]
 
-        image.delete()
+        submitter = User.objects.create_user('submitter', 'submitter_1@test.com', 'password')
+        submitter2 = User.objects.create_user('submitter2', 'submitter_2@test.com', 'password')
+        submitters = Group.objects.create(name='iotd_submitters')
+        submitters.user_set.add(submitter, submitter2)
+        reviewer = User.objects.create_user('reviewer', 'reviewer_1@test.com', 'password')
+        reviewer2 = User.objects.create_user('reviewer2', 'reviewer_2@test.com', 'password')
+        reviewers = Group.objects.create(name='iotd_reviewers')
+        reviewers.user_set.add(reviewer, reviewer2)
+        judge = User.objects.create_user('judge', 'judge_1@test.com', 'password')
+        judges = Group.objects.create(name='iotd_judges')
+        judges.user_set.add(judge)
+        IotdSubmission.objects.create(submitter=submitter, image=image)
+        IotdSubmission.objects.create(submitter=submitter2, image=image)
+        IotdVote.objects.create(reviewer=reviewer, image=image)
+        vote = IotdVote.objects.create(reviewer=reviewer2, image=image)
+        iotd = Iotd.objects.create(judge=judge, image=image, date=datetime.now().date())
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_corrupted_images_not_shown_to_others(self, retrieve_primary_thumbnails):
+        image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        image.save()
+
+        profile = self.user.userprofile
+        profile.banned_from_competitions = datetime.now()
+        profile.save(keep_deleted=True)
+        image = Image.objects_including_wip.get(pk=image.pk)
+
+        TopPickArchive.objects.all().delete()
+        TopPickNominationsArchive.objects.all().delete()
+        IotdService().update_top_pick_nomination_archive()
+        IotdService().update_top_pick_archive()
+
+        # Check that the IOTD banner is still visible because the ban is not retroactive.
+        response = self.client.get(reverse('image_detail', args=(image.get_id(),)))
+        self.assertContains(response, "iotd-ribbon")
+
+        # Check that the IOTD badge is still not visible because the ban is not retroactive.
+        response = self.client.get(reverse('user_page', args=(self.user.username,)))
+        self.assertContains(response, 'iotd-badge')
+
+        # Check that the Top pick badge is still visible because the ban is not retroactive.
+        iotd.delete()
+        TopPickArchive.objects.all().delete()
+        TopPickNominationsArchive.objects.all().delete()
+        IotdService().update_top_pick_nomination_archive()
+        IotdService().update_top_pick_archive()
+        response = self.client.get(reverse('user_page', args=(self.user.username,)))
+        self.assertContains(response, 'top-pick-badge')
+
+        # Check that the Top pick nomination badge is still visible because the ban is not retroactive.
+        IotdVote.objects.all().delete()
+        TopPickArchive.objects.all().delete()
+        TopPickNominationsArchive.objects.all().delete()
+        IotdService().update_top_pick_nomination_archive()
+        IotdService().update_top_pick_archive()
+        response = self.client.get(reverse('user_page', args=(self.user.username,)))
+        self.assertContains(response, 'top-pick-nomination-badge')
+
+
+    def test_corrupted_images_not_shown_to_others(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST IMAGE")
         image.corrupted = True
@@ -504,8 +570,8 @@ class UserTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, "data-id=\"%d\"" % image.pk)
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_corrupted_images_shown_to_owner(self, retrieve_primary_thumbnails):
+
+    def test_corrupted_images_shown_to_owner(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST IMAGE")
         image.corrupted = True
@@ -521,8 +587,8 @@ class UserTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_liked(self, retrieve_primary_thumbnails):
+
+    def test_liked(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST IMAGE")
         self.client.logout()
@@ -546,8 +612,8 @@ class UserTest(TestCase):
         profile = UserProfile.objects.get(user=self.user)
         self.assertNotEquals(updated, profile.updated)
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_profile_updated_when_image_saved(self, retrieve_primary_thumbnails):
+
+    def test_profile_updated_when_image_saved(self):
         updated = self.user.userprofile.updated
 
         self.client.login(username="user", password="password")
@@ -770,7 +836,7 @@ class UserTest(TestCase):
         self.assertContains(response, "<h4>Subscription</h4>", html=True)
         self.assertContains(response, "<strong data-test='subscription-type'>AstroBin Free</strong>", html=True)
         self.assertNotContains(response, "data-test=\"expiration-date\"")
-        self.assertContains(response, "<strong data-test='images-used'>0 / 123</strong>", html=True)
+        self.assertContains(response, "<strong data-test='uploads-used'>0 / 123</strong>", html=True)
 
         self.client.logout()
         image.delete()
@@ -795,7 +861,7 @@ class UserTest(TestCase):
             formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
             "</strong>",
             html=True)
-        self.assertContains(response, "<strong data-test='images-used'>0 / 123</strong>", html=True)
+        self.assertContains(response, "<strong data-test='uploads-used'>0 / 123</strong>", html=True)
 
         self.client.logout()
         us.delete()
@@ -846,7 +912,6 @@ class UserTest(TestCase):
             formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
             "</strong>",
             html=True)
-        self.assertContains(response, "<strong data-test='images-used'>0 / &infin;</strong>", html=True)
 
         self.client.logout()
         us.delete()
@@ -872,7 +937,6 @@ class UserTest(TestCase):
             formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
             "</strong>",
             html=True)
-        self.assertContains(response, "<strong data-test='images-used'>0 / &infin;</strong>", html=True)
 
         self.client.logout()
         us.delete()
@@ -897,7 +961,6 @@ class UserTest(TestCase):
             formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
             "</strong>",
             html=True)
-        self.assertContains(response, "<strong data-test='images-used'>0 / &infin;</strong>", html=True)
 
         self.client.logout()
         us.delete()

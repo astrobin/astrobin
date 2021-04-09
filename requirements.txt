@@ -2,34 +2,31 @@ amqp==2.6.1
 amqplib==1.0.2
 anyjson==0.3.3
 asn1crypto==1.4.0
-autopep8==1.5.2
+autopep8==1.5.6
 backports-abc==0.5
 bbcode==1.1.0
 BeautifulSoup==3.2.2
 beautifulsoup4==4.6.0
 beautifulsoupselect==0.2
-billiard==3.6.3.0
+billiard==3.6.4.0
 bleach==3.1.4
-boto==2.49.0
 boto3==1.13.25
 botocore==1.16.25
 ccy==1.2.0
-celery==4.4.7
-celery-haystack==0.10
-certifi==2020.6.20
-cffi==1.14.3
-chardet==3.0.4
+celery[redis]==4.4.7
+certifi==2020.12.5
+cffi==1.14.5
+chardet==4.0.0
 click==7.1.2
-codecov==2.1.10
 Coffin==2.0.1
 configparser==4.0.2
 confusable-homoglyphs==3.2.0
 contextlib2==0.6.0.post1
-coverage==5.3
-cryptography==2.9.2
+coverage==5.5
+cryptography==3.3.2
 cssmin==0.2.0
 cssselect==1.1.0
-defusedxml==0.6.0
+defusedxml==0.7.1
 Django==1.11.29
 -e git+https://github.com/astrobin/django-activity-stream.git@c6eb3bab372414f1db9fc38515295d7235b032e8#egg=django_activity_stream
 django-annoying==0.10.6
@@ -42,17 +39,16 @@ django-braces==1.14.0
 django-cachalot==2.2.0
 django-celery-beat==1.1.0
 django-celery-email==2.0.2
+django-celery-monitor==1.1.2
 -e git+https://github.com/astrobin/django-change-email.git@e64be68dd0b3b36e8c683fd4a101842d0fe4e1cb#egg=django_change_email
 django-classy-tags==1.0.0
-django-contact-form-gv==0.7.0
 django-contrib-comments==1.9.2
 -e git+https://github.com/siovene/snakecheese.git@72c5c7be4a5ae19c9054f11c8cedb68dd661fd65#egg=django_contrib_requestprovider&subdirectory=gadjolib
-django-cookie-law==2.0.3
+django-cookie-law==2.0.5
 django-cors-middleware==1.5.0
 django-crispy-forms==1.7.0
 django-debug-toolbar==1.11
 django-debug-toolbar-template-timings==0.9
--e git+https://github.com/siovene/django-dfp.git@1da94954a6f2211538fcdde2b8e98497357220e9#egg=django_dfp
 django-easysettings==2.0.1
 django-el-pagination==3.2.4
 -e git+https://github.com/siovene/django-ember.git@b925ecd22c8008ccb339a4977d0081972c58f39f#egg=django_ember
@@ -60,16 +56,15 @@ django-extensions==2.2.9
 django-filter==1.1.0
 django-followit==0.4.1
 django-haystack==2.8.1
-django-hitcount==1.3.2
+-e git+https://github.com/astrobin/django-hitcount.git@3acf5bdb9728ca8c38cd792dd746114c9076ae88#egg=django_hitcount
 -e git+https://github.com/ui/django-html_sanitizer.git@63311131630471ef2315f1ddbbd18354159d24c1#egg=django_html_sanitizer
 django-image-cropping==1.1.0
 django-keyedcache==1.5.1
 django-kombu==0.9.4
-django-maintenancemode==0.11.3
+django-maintenancemode==0.11.4
 django-markup-deprecated==0.0.3
 django-memcached==0.1.2
 django-model-utils==3.2.0
-django-mptt==0.8.7
 django-multidb-router==0.9
 -e git+https://github.com/astrobin/django-notification.git@094c70829e2540f13268adf006b2f0f040cb3b27#egg=django_notification
 django-paypal==0.5.0
@@ -77,7 +72,7 @@ django-paypal==0.5.0
 django-pipeline==1.7.0
 django-precise-bbcode==1.2.10
 django-progressbarupload==0.1.7
-django-recaptcha-works==0.3.4
+django-recaptcha==2.0.6
 django-registration==2.5.2
 django-robots==4.0
 django-safedelete==0.5.6
@@ -85,7 +80,7 @@ django-silk==2.0.0
 django-split-settings==0.3.0
 django-staticfiles==1.2.1
 django-storages==1.7.1
--e git+https://github.com/astrobin/django-subscription.git@5e4c128494f6de7c1ba254d500e100567d8aee55#egg=django_subscription
+-e git+https://github.com/astrobin/django-subscription.git@1fa6a749f21549dd96591a6dfa267c3712c4f21f#egg=django_subscription
 django-tagging==0.5.0
 django-tastypie==0.14.3
 -e git+https://github.com/astrobin/django-threaded-messages.git@da86dea6dd854f9ab37201d3953f9d028faa85e9#egg=django_threaded_messages
@@ -96,9 +91,9 @@ django-xmlrpc==0.1.8
 -e git+https://github.com/siovene/django.js.git@bee62fca8fb814fdccd8cbd837008e2e761a277f#egg=django.js
 djangorestframework==3.6.3
 djangorestframework-camel-case==1.0.3
-docutils==0.16
+docutils==0.17
 -e git+https://github.com/astrobin/easy-thumbnails.git@9b57a875ff3c99801f30e8ab25b7938a654934e4#egg=easy-thumbnails
-elasticsearch==7.9.1
+elasticsearch==2.4.1
 enum34==1.1.10
 fanstatic==1.1
 flickrapi==2.4.0
@@ -108,19 +103,19 @@ futures==3.3.0
 fuzzywuzzy[speedup]==0.18
 geoip2==3.0.0
 gevent==20.6.0
-gprof2dot==2019.11.30
+gprof2dot==2021.2.21
 greenlet==0.4.16
 gunicorn==19.10.0
 gunicorn-console==0.1.16
 html5lib==1.1
-httplib2==0.18.1
+httplib2==0.19.1
 idna==2.10
-importlib-metadata==2.0.0
+importlib-metadata==2.1.1
 importmagic3==0.2.0
 ipaddress==1.0.23
-IPy==1.00
+IPy==1.01
 jedi==0.17.2
-Jinja2==2.11.2
+Jinja2==2.11.3
 jmespath==0.10.0
 js.tinymce==4.5.4
 jsmin==2.2.2
@@ -129,15 +124,14 @@ lamson==1.3.4
 lockfile==0.12.2
 log-colorizer==1.8.6
 longerusername==0.4
-lxml==4.5.2
+lxml==4.6.3
 Markdown==2.6.11
-markdown2==2.3.9
+markdown2==2.3.10
 MarkupSafe==1.1.1
 maxminddb==1.5.4
 mimeparse==0.1.3
 mock==3.0.5
 mwclient==0.10.1
-newrelic==5.20.1.150
 nose==1.3.7
 numpy==1.16.6
 oauth2==1.9.0.post1
@@ -147,65 +141,65 @@ olefile==0.46
 parso==0.7.1
 Paste==3.5.0
 pathlib2==2.3.5
-pbr==5.5.0
-pem==20.1.0
+pbr==5.5.1
+pem==21.2.0
 Pillow==6.2.2
 ply==3.11
 psycopg2==2.7.1
--e git+https://github.com/siovene/pybbm.git@13652004#egg=pybbm
-pycodestyle==2.6.0
+-e git+https://github.com/siovene/pybbm.git@947bccb116bcdd840999fb5a1081a9cde99af384#egg=pybbm
+pycodestyle==2.7.0
 pycparser==2.20
-pyflakes==2.2.0
+pyflakes==2.3.1
 Pygments==2.5.2
-pyOpenSSL==19.1.0
+pyOpenSSL==20.0.1
 pyparsing==2.4.7
-pyquery==1.4.1
+pyquery==1.4.3
 pyrg==0.2.6
 pystache==0.5.4
-python-daemon==2.2.4
+python-daemon==2.3.0
 python-dateutil==2.8.1
-python-http-client==3.3.1
-python-Levenshtein==0.12.0
-python-magic==0.4.18
+python-Levenshtein==0.12.2
+python-magic==0.4.22
 python-memcached==1.59
 python-mimeparse==1.6.0
 python-modargs==1.7
-pytz==2020.1
-PyYAML==5.3.1
+pytz==2021.1
+PyYAML==5.4.1
 rcssmin==1.0.6
 redis==3.5.3
-requests==2.24.0
+requests==2.25.1
 requests-aws4auth==1.0.1
 requests-oauthlib==1.3.0
 requests-toolbelt==0.9.1
 rjsmin==1.1.0
-s3transfer==0.3.3
+s3transfer==0.3.6
 scandir==1.10.0
 setproctitle==1.1.10
 simplejson==3.17.2
-singledispatch==3.4.0.3
+singledispatch==3.6.1
 six==1.15.0
 slimit==0.8.1
 spark-parser==1.8.9
 sphinx-me==0.3
-SQLAlchemy==1.3.20
+SQLAlchemy==1.4.7
 sqlparse==0.3.1
+stripe==2.56.0
 tblib==1.7.0
 termcolor==1.1.0
 tornado==5.1.1
 typing==3.7.4.3
 ua-parser==0.10.0
 uncompyle6==3.7.4
-Unidecode==1.1.1
-urllib3==1.25.10
+Unidecode==1.2.0
+urllib3==1.26.4
 user-agents==2.2.0
 vine==1.3.0
 watchtower==0.8.0
 webencodings==0.5.1
-WebOb==1.8.6
+WebOb==1.8.7
 Werkzeug==1.0.1
-xdis==5.0.4
+xdis==5.0.8
 yolk==0.4.3
 zipp==1.2.0
 zope.event==4.5.0
-zope.interface==5.1.2
+zope.interface==5.3.0

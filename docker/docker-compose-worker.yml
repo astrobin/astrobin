@@ -1,0 +1,96 @@
+version: '3'
+
+services:
+
+  celery_default:
+    image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
+    command:
+     - bash
+     - -c
+     - |
+       python manage.py collectstatic --noinput && \
+       celery worker -A astrobin -Q default -c 1 -l debug -E --uid=nobody --gid=nogroup
+    links:
+      - memcached
+    env_file:
+      - ./astrobin.env
+    environment:
+      - C_FORCE_ROOT=true
+      - PYTHONPATH=/usr/lib/python2.7/dist-packages
+      - DJANGO_SETTINGS_MODULE=astrobin.settings
+      - CELERY_RDB_HOST=0.0.0.0
+      - CELERY_RDB_PORT=6900
+      - POSTGRES_DB=astrobin
+      - POSTGRES_USER=astrobin
+    volumes:
+      - media:/media
+
+
+  celery_email:
+    image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
+    command:
+      - bash
+      - -c
+      - |
+        python manage.py collectstatic --noinput && \
+        celery worker -A astrobin -Q email -c 1 -l debug -E --uid=nobody --gid=nogroup
+    env_file:
+      - ./astrobin.env
+    environment:
+      - C_FORCE_ROOT=true
+      - PYTHONPATH=/usr/lib/python2.7/dist-packages
+      - DJANGO_SETTINGS_MODULE=astrobin.settings
+      - CELERY_RDB_HOST=0.0.0.0
+      - CELERY_RDB_PORT=6900
+      - POSTGRES_DB=astrobin
+      - POSTGRES_USER=astrobin
+    volumes:
+      - media:/media
+
+
+  celery_thumbnails:
+    image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
+    command:
+      - bash
+      - -c
+      - |
+        python manage.py collectstatic --noinput && \
+        celery worker -A astrobin -Q thumbnails -c 1 -l debug -E --uid=nobody --gid=nogroup
+    env_file:
+      - ./astrobin.env
+    environment:
+      - C_FORCE_ROOT=true
+      - PYTHONPATH=/usr/lib/python2.7/dist-packages
+      - DJANGO_SETTINGS_MODULE=astrobin.settings
+      - CELERY_RDB_HOST=0.0.0.0
+      - CELERY_RDB_PORT=6900
+      - POSTGRES_DB=astrobin
+      - POSTGRES_USER=astrobin
+    volumes:
+      - media:/media
+
+
+  celery_haystack:
+    image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
+    command:
+      - bash
+      - -c
+      - |
+        python manage.py collectstatic --noinput && \
+        celery worker -A astrobin -Q haystack -c 2 -l debug -E --uid=nobody --gid=nogroup
+    env_file:
+      - ./astrobin.env
+    environment:
+      - C_FORCE_ROOT=true
+      - PYTHONPATH=/usr/lib/python2.7/dist-packages
+      - DJANGO_SETTINGS_MODULE=astrobin.settings
+      - CELERY_RDB_HOST=0.0.0.0
+      - CELERY_RDB_PORT=6900
+      - POSTGRES_DB=astrobin
+      - POSTGRES_USER=astrobin
+    volumes:
+      - media:/media
+
+
+volumes:
+  media: {}

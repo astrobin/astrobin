@@ -9,8 +9,11 @@ import string
 import unicodedata
 import uuid
 from datetime import datetime
+from urlparse import urlparse
 
+import boto3
 from django.core.files.images import get_image_dimensions
+from django.core.validators import MinLengthValidator, MaxLengthValidator, RegexValidator
 from image_cropping import ImageRatioField
 
 from astrobin.enums import SubjectType, SolarSystemSubject
@@ -34,7 +37,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
-from django.core.validators import MaxLengthValidator
 from django.db import IntegrityError, models
 from django.db.models import Q
 from django.db.models.signals import post_save
@@ -61,7 +63,8 @@ except:
     # Django >= 1.10
     from timezones.zones import PRETTY_TIMEZONE_CHOICES
 
-from astrobin_apps_images.managers import ImagesManager, PublicImagesManager, WipImagesManager
+from astrobin_apps_images.managers import ImagesManager, PublicImagesManager, WipImagesManager, ImageRevisionsManager, \
+    UploadsInProgressImagesManager, UploadsInProgressImageRevisionsManager
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from nested_comments.models import NestedComment
@@ -139,6 +142,7 @@ LANGUAGES = {
     'ru': _("Russian"),
     'ar': _("Arabic"),
     'ja': _("Japanese"),
+    'zh-hans': _("Chinese (Simplified)"),
 }
 
 SUBJECT_LABELS = {
@@ -179,6 +183,13 @@ SOLAR_SYSTEM_SUBJECT_CHOICES = (
     (SolarSystemSubject.NEPTUNE, _("Neptune")),
     (SolarSystemSubject.MINOR_PLANET, _("Minor planet")),
     (SolarSystemSubject.COMET, _("Comet")),
+    (SolarSystemSubject.OCCULTATION, _("Occultation")),
+    (SolarSystemSubject.CONJUNCTION, _("Conjunction")),
+    (SolarSystemSubject.PARTIAL_LUNAR_ECLIPSE, _("Partial lunar eclipse")),
+    (SolarSystemSubject.TOTAL_LUNAR_ECLIPSE, _("Total lunar eclipse")),
+    (SolarSystemSubject.PARTIAL_SOLAR_ECLIPSE, _("Partial solar eclipse")),
+    (SolarSystemSubject.ANULAR_SOLAR_ECLIPSE, _("Anular solar eclipse")),
+    (SolarSystemSubject.TOTAL_SOLAR_ECLIPSE, _("Total solar eclipse")),
     (SolarSystemSubject.OTHER, _("Other")),
 )
 
@@ -285,7 +296,7 @@ class Gear(models.Model):
         return []
 
     def get_absolute_url(self):
-        return '/gear/%i/%s/' % (self.id, self.slug())
+        return '/search/?q=%s' % unicode(self)
 
     def slug(self):
         return slugify("%s %s" % (self.get_make(), self.get_name()))
@@ -671,7 +682,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     )
 
     ACQUISITION_TYPES = (
-        'TRADITIONAL',
+        'REGULAR',
         'EAA',
         'LUCKY',
         'DRAWING',
@@ -679,8 +690,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     )
 
     ACQUISITION_TYPE_CHOICES = (
-        ('TRADITIONAL', _("Traditional")),
-        ('EAA', _("Electronically-Assisted Astronomy (EAA)")),
+        ('REGULAR', _("Regular (e.g. medium/long exposure with a CCD or DSLR)")),
+        ('EAA', _("Electronically-Assisted Astronomy (EAA, e.g. based on a live video feed)")),
         ('LUCKY', _("Lucky imaging")),
         ('DRAWING', _("Drawing/Sketch")),
         ('OTHER', _("Other/Unknown")),
@@ -741,6 +752,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("DSC", "DeepSkyChile"),
         ("DSW", "DeepSkyWest"),
         ("eEyE", "e-EyE Extremadura"),
+        ("EITS", "Eye In The Sky"),
         ("GFA", "Goldfield Astronomical Observatory"),
         ("GMO", "Grand Mesa Observatory"),
         ("HMO", "Heaven's Mirror Observatory"),
@@ -761,9 +773,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("SPVO", "San Pedro Valley Observatory"),
         ("SRO", "Sierra Remote Observatories"),
         ("SRO2", "Sky Ranch Observatory"),
-        ("SPOO", "SkyPi Online Observatory"),
+        ("SPOO", "SkyPi Remote Observatory"),
         ("SLO", "Slooh"),
         ("SSLLC", "Stellar Skies LLC"),
+        ("TELI", "Telescope Live"),
 
         ("OTHER", _("None of the above"))
     )
@@ -786,6 +799,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         'accessories': Accessory,
     }
 
+    HEMISPHERE_TYPE_UNKNOWN = 'HEMISPHERE_TYPE_UNKNOWN'
+    HEMISPHERE_TYPE_NORTHERN = 'HEMISPHERE_TYPE_NORTHERN'
+    HEMISPHERE_TYPE_SOUTHERN = 'HEMISPHERE_TYPE_SOUTHERN'
+
     solutions = GenericRelation(Solution)
 
     corrupted = models.BooleanField(
@@ -797,11 +814,59 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         blank=True
     )
 
+    recovery_ignored = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
     hash = models.CharField(
         max_length=6,
         default=image_hash,
         null=True,
         unique=True
+    )
+
+    uploader_in_progress = models.NullBooleanField(
+        default=None,
+        editable=False
+    )
+
+    uploader_name = models.CharField(
+        max_length=256,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_upload_length = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_offset = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_expires = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_metadata = models.TextField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_temporary_file_path = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+        editable=False,
     )
 
     title = models.CharField(
@@ -814,7 +879,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         choices=ACQUISITION_TYPE_CHOICES,
         max_length=32,
         null=False,
-        default='TRADITIONAL'
+        default='REGULAR'
     )
 
     subject_type = models.CharField(
@@ -848,7 +913,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             "If the main subject of your image is a body in the solar system, please select which (or which type) it is."),
         null=True,
         blank=True,
-        max_length=16,
+        max_length=32,
         choices=SOLAR_SYSTEM_SUBJECT_CHOICES,
     )
 
@@ -915,6 +980,18 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
     published = models.DateTimeField(editable=False, null=True, blank=True)
     updated = models.DateTimeField(editable=False, auto_now=True, null=True, blank=True)
+
+    designated_iotd_submitters = models.ManyToManyField(
+        User,
+        related_name='designated_images_as_submitter',
+        editable=False
+    )
+
+    designated_iotd_reviewers = models.ManyToManyField(
+        User,
+        related_name='designated_images_as_reviewer',
+        editable=False
+    )
 
     # For likes, bookmarks, and perhaps more.
     toggleproperties = GenericRelation(ToggleProperty)
@@ -1037,6 +1114,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     objects = PublicImagesManager()
     objects_including_wip = ImagesManager()
     wip = WipImagesManager()
+    uploads_in_progress = UploadsInProgressImagesManager()
 
     def __unicode__(self):
         return self.title if self.title is not None else _("(no title)")
@@ -1168,22 +1246,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         return field
 
-
-    def thumbnail_raw(self, alias, thumbnail_settings={}):
-        import urllib2
-        from django.core.files.base import ContentFile
-        from easy_thumbnails.files import get_thumbnailer
-        from astrobin.s3utils import OverwritingFileSystemStorage
+    def get_thumbnail_options(self, alias, revision_label, thumbnail_settings):
         from astrobin_apps_images.services import ImageService
-
-        revision_label = thumbnail_settings.get('revision_label', 'final')
-
-        if revision_label is None:
-            revision_label = 'final'
-
-        # Compatibility
-        if alias in ('revision', 'runnerup'):
-            alias = 'thumb'
 
         options = dict(settings.THUMBNAIL_ALIASES[''][alias].copy(), **thumbnail_settings)
 
@@ -1191,6 +1255,30 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if crop_box and alias not in ('real', 'real_inverted'):
             options['box'] = crop_box
             options['crop'] = True
+
+        if self.watermark and 'watermark' in options:
+            options['watermark_text'] = self.watermark_text
+            options['watermark_position'] = self.watermark_position
+            options['watermark_size'] = self.watermark_size
+            options['watermark_opacity'] = self.watermark_opacity
+
+        # Make sure this is in because easy-thumbnails adds it in same cases.
+        options['subsampling'] = 2
+
+        return options
+
+    def thumbnail_raw(self, alias, revision_label, **kwargs):
+        from easy_thumbnails.files import get_thumbnailer
+        from astrobin.s3utils import OverwritingFileSystemStorage
+
+        thumbnail_settings = kwargs.pop('thumbnail_settings', {})
+
+        if revision_label is None:
+            revision_label = 'final'
+
+        # Compatibility
+        if alias in ('revision', 'runnerup'):
+            alias = 'thumb'
 
         field = self.get_thumbnail_field(revision_label)
         if not field.name:
@@ -1200,68 +1288,14 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if not field.name.startswith('images/'):
             field.name = 'images/' + field.name
 
-        local_path = None
-        name = field.name
-
         if settings.AWS_S3_ENABLED:
-            name_hash = field.storage.generate_local_name(name)
-
-            # Try to generate the thumbnail starting from the file cache locally.
-            if local_path is None:
-                local_path = field.storage.local_storage.path(name_hash)
-
-            try:
-                size = os.path.getsize(local_path)
-                if size == 0:
-                    raise IOError("Empty file")
-
-                with open(local_path):
-                    thumbnailer = get_thumbnailer(
-                        OverwritingFileSystemStorage(location=settings.IMAGE_CACHE_DIRECTORY),
-                        name_hash)
-            except (OSError, IOError, UnicodeEncodeError) as e:
-                # If things go awry, fallback to getting the file from the remote
-                # storage. But download it locally first if it doesn't exist, so
-                # it can be used again later.
-
-                # First try to get the file via URL, because that might hit the CloudFlare cache.
-                url = settings.IMAGES_URL + name
-                headers = {'User-Agent': 'Mozilla/5.0'}
-                req = urllib2.Request(url, None, headers)
-
-                try:
-                    remote_file = ContentFile(urllib2.urlopen(req).read())
-                except (urllib2.HTTPError, urllib2.URLError):
-                    remote_file = None
-
-                # If that didn't work, we'll get the file regularly via django-storages.
-                if remote_file is None:
-                    try:
-                        remote_file = field.storage._open(name)
-                    except IOError:
-                        # The remote file doesn't exist?
-                        log.error("Image %d: the remote file doesn't exist?" % self.id)
-                        return None
-
-                try:
-                    field.storage.local_storage._save(name_hash, remote_file)
-                    thumbnailer = get_thumbnailer(
-                        OverwritingFileSystemStorage(location=settings.IMAGE_CACHE_DIRECTORY),
-                        name_hash)
-                except (OSError, UnicodeEncodeError):
-                    pass
+            thumbnailer = get_thumbnailer(field.file, field.name)
         else:
-            thumbnailer = get_thumbnailer(OverwritingFileSystemStorage(
-                location=os.path.join(settings.UPLOADS_DIRECTORY)), name)
-
-        if self.watermark and 'watermark' in options:
-            options['watermark_text'] = self.watermark_text
-            options['watermark_position'] = self.watermark_position
-            options['watermark_size'] = self.watermark_size
-            options['watermark_opacity'] = self.watermark_opacity
+            storage = OverwritingFileSystemStorage(location=os.path.join(settings.UPLOADS_DIRECTORY))
+            thumbnailer = get_thumbnailer(storage, field.name)
 
         try:
-            thumb = thumbnailer.get_thumbnail(options)
+            thumb = thumbnailer.get_thumbnail(self.get_thumbnail_options(alias, revision_label, thumbnail_settings))
         except Exception as e:
             log.error("Image %d: unable to generate thumbnail: %s." % (self.id, e.message))
             return None
@@ -1281,7 +1315,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         from hashlib import sha256
         return sha256(cache_key).hexdigest()
 
-    def thumbnail(self, alias, thumbnail_settings={}):
+    def thumbnail(self, alias, revision_label, **kwargs):
         def normalize_url_security(url, thumbnail_settings):
             insecure = 'insecure' in thumbnail_settings and thumbnail_settings['insecure'] == True
             if insecure and url.startswith('https'):
@@ -1290,32 +1324,32 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             return url
 
         from astrobin_apps_images.models import ThumbnailGroup
+        from astrobin_apps_images.services import ImageService
 
-        options = thumbnail_settings.copy()
-
-        revision_label = options.get('revision_label', 'final')
-        field = self.get_thumbnail_field(revision_label)
-        if not field.name.startswith('images/'):
-            field.name = 'images/' + field.name
+        thumbnail_settings = kwargs.pop('thumbnail_settings', {})
+        sync = kwargs.pop('sync', False)
 
         # For compatibility:
         if alias in ('revision', 'runnerup'):
             alias = 'thumb'
 
         if revision_label in (None, 'None', 'final'):
-            from astrobin_apps_images.services import ImageService
             revision_label = ImageService(self).get_final_revision_label()
-            options['revision_label'] = revision_label
+
+        field = self.get_thumbnail_field(revision_label)
+        if not field.name.startswith('images/'):
+            field.name = 'images/' + field.name
+
+        options = self.get_thumbnail_options(alias, revision_label, thumbnail_settings)
 
         cache_key = self.thumbnail_cache_key(field, alias)
 
         # If this is an animated gif, let's just return the full size URL
         # because right now we can't thumbnail gifs preserving animation
-        if 'animated' in options and options['animated'] == True:
-            if alias in ('regular', 'regular_sharpened', 'hd', 'hd_sharpened', 'real'):
-                url = settings.IMAGES_URL + field.name
-                cache.set(cache_key + '_animated', url, 60 * 60 * 24 * 365)
-                return normalize_url_security(url, thumbnail_settings)
+        if kwargs.pop('animated', False) and alias in ('regular', 'regular_sharpened', 'hd', 'hd_sharpened', 'real'):
+            url = settings.IMAGES_URL + field.name
+            cache.set(cache_key + '_animated', url, 60 * 60 * 24)
+            return normalize_url_security(url, thumbnail_settings)
 
         url = cache.get(cache_key)
         if url:
@@ -1326,7 +1360,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             thumbnails = self.thumbnails.get(revision=revision_label)
             url = getattr(thumbnails, alias)
             if url:
-                cache.set(cache_key, url, 60 * 60 * 24 * 365)
+                cache.set(cache_key, url, 60 * 60 * 24)
                 return normalize_url_security(url, thumbnail_settings)
         except ThumbnailGroup.DoesNotExist:
             try:
@@ -1335,22 +1369,19 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 # Race condition
                 pass
 
-        from .tasks import retrieve_thumbnail
-
-        if "sync" in thumbnail_settings and thumbnail_settings["sync"] is True:
-            retrieve_thumbnail.apply(args=(self.pk, alias, options))
-            try:
-                thumbnails = self.thumbnails.get(revision=revision_label)
-                url = getattr(thumbnails, alias)
-                return url
-            except ThumbnailGroup.DoesNotExist:
-                return None
+        if sync:
+            thumb = self.thumbnail_raw(alias, revision_label, thumbnail_settings=options)
+            if thumb:
+                ImageService(self).set_thumb(alias, revision_label, thumb.url)
+                return thumb.url
+            return None
 
         # If we got down here, we don't have an url yet, so we start an asynchronous task and return a placeholder.
         task_id_cache_key = '%s.retrieve' % cache_key
         task_id = cache.get(task_id_cache_key)
         if task_id is None:
-            result = retrieve_thumbnail.apply_async(args=(self.pk, alias, options), task_id=cache_key)
+            from .tasks import retrieve_thumbnail
+            result = retrieve_thumbnail.apply_async(args=(self.pk, alias, revision_label, options))
             cache.set(task_id_cache_key, result.task_id)
 
             try:
@@ -1364,83 +1395,36 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             except ThumbnailGroup.DoesNotExist:
                 pass
         else:
-            AsyncResult(task_id_cache_key)
+            AsyncResult(task_id)
 
         return static('astrobin/images/placeholder-gallery.jpg')
 
-    def thumbnail_invalidate_real(self, field, revision_label, delete_remote=False):
-        from easy_thumbnails.files import get_thumbnailer
-
-        from astrobin.s3utils import OverwritingFileSystemStorage
+    def thumbnail_invalidate_real(self, field, revision_label, delete=True):
         from astrobin_apps_images.models import ThumbnailGroup
 
-        log.debug("Image %d: invalidating thumbnails for field / label: %s / %s" % (self.id, field, revision_label))
-
-        thumbnailer = get_thumbnailer(field)
-        local_filename = field.storage.generate_local_name(field.name)
-        local_thumbnailer = get_thumbnailer(
-            OverwritingFileSystemStorage(location=settings.IMAGE_CACHE_DIRECTORY),
-            local_filename)
-
-        aliases = settings.THUMBNAIL_ALIASES['']
-        for alias, thumbnail_settings in aliases.iteritems():
-            options = settings.THUMBNAIL_ALIASES[''][alias].copy()
-            if self.watermark and 'watermark' in options:
-                options['watermark_text'] = self.watermark_text
-                options['watermark_position'] = self.watermark_position
-                options['watermark_size'] = self.watermark_size
-                options['watermark_opacity'] = self.watermark_opacity
-
-            # First we delete it from the cache
+        for alias, thumbnail_settings in settings.THUMBNAIL_ALIASES[''].iteritems():
             cache_key = self.thumbnail_cache_key(field, alias)
             if cache.get(cache_key):
                 cache.delete(cache_key)
+                cache.delete('%s.retrieve' % cache_key)
 
-            # Then we delete the remote thumbnail
-            if delete_remote:
-                filename1 = thumbnailer.get_thumbnail_name(options)
-                filename2 = thumbnailer.get_thumbnail_name(options, transparent=True)
-                field.storage.delete(filename1)
-                field.storage.delete(filename2)
-
-                filename1 = local_thumbnailer.get_thumbnail_name(options)
-                filename2 = local_thumbnailer.get_thumbnail_name(options, transparent=True)
-                field.storage.delete(filename1)
-                field.storage.delete(filename2)
-
-                # Then delete local static storage image
-                filenameLocal = os.path.join(field.storage.location, local_filename)
-                field.storage.delete(filenameLocal)
-
-            # Then we delete the local file cache
-            if settings.AWS_S3_ENABLED:
-                field.storage.local_storage.delete(local_filename)
-
-                try:
-                    os.remove(os.path.join(field.storage.local_storage.location, local_filename))
-                except OSError:
-                    log.debug("Image %d: locally cached file not found." % self.id)
-
-                # Then we purge the Cloudflare cache
-                try:
-                    thumbnail_group = self.thumbnails.get(revision=revision_label)  # type: ThumbnailGroup
-                    all_urls = [x for x in thumbnail_group.get_all_urls() if x]
-
-                    cloudflare_service = CloudflareService()
-
-                    for url in all_urls:
-                        cloudflare_service.purge_resource(url)
-                except ThumbnailGroup.DoesNotExist:
-                    pass
-
-        # Then we remove the database entries
         try:
-            thumbnailgroup = self.thumbnails.get(revision=revision_label).delete()
+            thumbnail_group = self.thumbnails.get(revision=revision_label)  # type: ThumbnailGroup
+            all_urls = [x for x in thumbnail_group.get_all_urls() if x and x.startswith('http')]
+
+            cloudflare_service = CloudflareService()
+
+            for url in all_urls:
+                cloudflare_service.purge_resource(url)
+                s3 = boto3.client('s3')
+                s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=urlparse(url).path.strip('/'))
+
+            self.thumbnails.get(revision=revision_label).delete()
         except ThumbnailGroup.DoesNotExist:
             pass
 
-    def thumbnail_invalidate(self, delete_remote=False):
-        return self.thumbnail_invalidate_real(self.image_file, '0', delete_remote)
+    def thumbnail_invalidate(self, delete=True):
+        return self.thumbnail_invalidate_real(self.image_file, '0', delete)
 
     def get_data_source(self):
         LOOKUP = {
@@ -1531,12 +1515,60 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         blank=True
     )
 
+    recovery_ignored = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
     image_file = models.ImageField(
         upload_to=image_upload_path,
         height_field='h',
         width_field='w',
         null=True,
         max_length=256,
+    )
+
+    uploader_in_progress = models.NullBooleanField(
+        default=None,
+        editable=False
+    )
+
+    uploader_name = models.CharField(
+        max_length=256,
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_upload_length = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_offset = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_expires = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_metadata = models.TextField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    uploader_temporary_file_path = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+        editable=False,
     )
 
     square_cropping = ImageRatioField(
@@ -1590,6 +1622,9 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         ordering = ('uploaded', '-id')
         unique_together = ('image', 'label')
 
+    objects = ImageRevisionsManager()
+    uploads_in_progress = UploadsInProgressImageRevisionsManager()
+
     def __unicode__(self):
         return self.image.title
 
@@ -1597,7 +1632,9 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         if self.w == 0 or self.h == 0:
             try:
                 self.w, self.h = get_image_dimensions(self.image_file.file)
-            except:
+            except Exception as e:
+                log.warning("ImageRevision.save: unable to get image dimensions for %d: %s" % (
+                    self.pk if self.pk else 0, str(e)))
                 pass
 
         if self.w == self.image.w and self.h == self.image.h and not self.square_cropping:
@@ -1622,15 +1659,14 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
 
         return '/%s/%s/' % (self.image.get_id(), self.label)
 
-    def thumbnail_raw(self, alias, thumbnail_settings={}):
-        return self.image.thumbnail_raw(alias,
-                                        dict(thumbnail_settings.items() + {'revision_label': self.label}.items()))
+    def thumbnail_raw(self, alias, **kwargs):
+        return self.image.thumbnail_raw(alias, self.label, **kwargs)
 
-    def thumbnail(self, alias, thumbnail_settings={}):
-        return self.image.thumbnail(alias, dict(thumbnail_settings.items() + {'revision_label': self.label}.items()))
+    def thumbnail(self, alias, **kwargs):
+        return self.image.thumbnail(alias, self.label, **kwargs)
 
-    def thumbnail_invalidate(self, delete_remote=False):
-        return self.image.thumbnail_invalidate_real(self.image_file, self.label, delete_remote)
+    def thumbnail_invalidate(self, delete=True):
+        return self.image.thumbnail_invalidate_real(self.image_file, self.label, delete)
 
 
 class Collection(models.Model):
@@ -1967,11 +2003,36 @@ class UserProfile(SafeDeleteModel):
         'Accessory': 'accessories',
     }
 
+    DELETE_REASON_NOT_ACTIVE = 'NOT_ACTIVE'
+    DELETE_REASON_DID_NOT_MEET_EXPECTATIONS = 'DID_NOT_MEET_EXPECTATIONS'
+    DELETE_REASON_DOESNT_WORKE = 'DOESNT_WORK'
+    DELETE_REASON_TOO_EXPENSIVE = 'TOO_EXPENSIVE'
+    DELETE_REASON_PREFER_NOT_TO_SAY = 'PREFER_NOT_TO_SAY'
+    DELETE_REASON_OTHER = 'OTHER'
+    DELETE_REASON_IMAGE_SPAM = 'IMAGE_SPAM'
+    DELETE_REASON_FORUM_SPAM = 'FORUM_SPAM'
+    DELETE_REASON_BANNED = 'BANNED'
+
+    DELETE_REASON_CHOICES = (
+        (DELETE_REASON_NOT_ACTIVE, _('I am no longer active in astrophotography')),
+        (DELETE_REASON_DID_NOT_MEET_EXPECTATIONS, _('This website did not meet my expectations')),
+        (DELETE_REASON_DOESNT_WORKE, _('Something on this website doesn\'t work for me')),
+        (DELETE_REASON_TOO_EXPENSIVE, _('The paid subscriptions are too expensive')),
+        (DELETE_REASON_PREFER_NOT_TO_SAY, _('I prefer not to say')),
+        (DELETE_REASON_OTHER, _('Other')),
+    )
+
     user = models.OneToOneField(User, editable=False)
 
     updated = models.DateTimeField(
         editable=False,
         auto_now=True,
+        null=True,
+        blank=True,
+    )
+
+    last_seen = models.DateTimeField(
+        editable=False,
         null=True,
         blank=True,
     )
@@ -2007,6 +2068,23 @@ class UserProfile(SafeDeleteModel):
         help_text=_("Do you have any hobbies other than astrophotography?"),
     )
 
+    instagram_username = models.CharField(
+        verbose_name=_("Instagram username"),
+        help_text=_("If you provide this, AstroBin will tag you on Instagram if it's sharing an image of yours."),
+        validators=[
+            MinLengthValidator(4),
+            MaxLengthValidator(31),
+            RegexValidator(
+                '^@[\w](?!.*?\.{2})[\w.]{1,28}[\w]$',
+                _('An Instagram username must be between 3 and 30 characters, start with an @ sign, and only '
+                  'have letters, numbers, periods, and underlines.')
+            )
+        ],
+        max_length=31,
+        null=True,
+        blank=True
+    )
+
     timezone = models.CharField(
         max_length=255,
         choices=PRETTY_TIMEZONE_CHOICES,
@@ -2024,6 +2102,23 @@ class UserProfile(SafeDeleteModel):
     shadow_bans = models.ManyToManyField(
         "self",
         symmetrical=False
+    )
+
+    delete_reason = models.CharField(
+        choices=DELETE_REASON_CHOICES,
+        max_length=32,
+        null=True,
+        blank=False,
+        verbose_name=_("Delete reason"),
+        help_text=_("Why are you deleting your AstroBin account?"),
+    )
+
+    delete_reason_other = models.CharField(
+        max_length=512,
+        null=True,
+        blank=True,
+        verbose_name=_("Other"),
+        help_text=_("Please tell us why you are deleting your account (minimum 30 characters). Thanks!"),
     )
 
     # Counter for uploaded images.
@@ -2057,7 +2152,29 @@ class UserProfile(SafeDeleteModel):
         default=False,
         verbose_name=_("I want to be excluded from competitions"),
         help_text=_(
-            "Check this box to be excluded from competitions and contests, such as the Image of the Day, the Top Picks, other custom contests. This will remove you from the leaderboards and hide your AstroBin Index."),
+            "Check this box to be excluded from competitions and contests, such as the Image of the Day, the Top "
+            "Picks, other custom contests. This will remove you from the leaderboards and hide your Image Index "
+            "and Contribution Index."),
+    )
+
+    banned_from_competitions = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    astrobin_index_bonus = models.SmallIntegerField(
+        null=True,
+        blank=True,
+    )
+
+    plate_solution_overlay_on_full_disabled = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
+    open_notifications_in_new_tab = models.NullBooleanField(
+        verbose_name=_("Open notifications in a new tab")
     )
 
     # Gear
@@ -2152,6 +2269,12 @@ class UserProfile(SafeDeleteModel):
         default=False
     )
 
+    referral_code = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True,
+    )
+
     receive_important_communications = models.BooleanField(
         default=False,
         verbose_name=_(u'I accept to receive rare important communications via email'),
@@ -2196,6 +2319,10 @@ class UserProfile(SafeDeleteModel):
         null=True
     )
 
+    recovered_images_notice_sent = models.DateTimeField(
+        null=True
+    )
+
     # Preferences (notification preferences are stored in the django
     # notification model)
     language = models.CharField(
@@ -2205,14 +2332,17 @@ class UserProfile(SafeDeleteModel):
         choices=LANGUAGE_CHOICES,
     )
 
+    other_languages = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name=_("Other languages"),
+        help_text=_("Other languages that you can read and write. This can be useful to other AstroBin members who "
+                    "would like to communicate with you.")
+    )
+
     # One time notifications that won't disappear until marked as seen.
 
     seen_realname = models.BooleanField(
-        default=False,
-        editable=False,
-    )
-
-    seen_email_permissions = models.BooleanField(
         default=False,
         editable=False,
     )
@@ -2272,6 +2402,18 @@ class UserProfile(SafeDeleteModel):
         _('Receive e-mails from subscribed forum topics'),
         default=True)
 
+    image_recovery_process_started = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    image_recovery_process_completed = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
     def get_display_name(self):
         return self.real_name if self.real_name else self.user.__unicode__()
 
@@ -2297,11 +2439,6 @@ class UserProfile(SafeDeleteModel):
         from haystack.exceptions import SearchFieldError
         from haystack.query import SearchQuerySet
 
-        scores = {
-            'user_scores_index': 0,
-            'user_scores_followers': 0,
-        }
-
         cache_key = "astrobin_user_score_%s" % self.user.username
         scores = cache.get(cache_key)
 
@@ -2311,17 +2448,19 @@ class UserProfile(SafeDeleteModel):
                     SearchQuerySet().models(User).filter(django_id=self.user.pk)[0]
             except (IndexError, SearchFieldError):
                 return {
-                    'user_scores_index': 0,
-                    'user_scores_followers': 0
+                    'user_scores_index': None,
+                    'user_scores_contribution_index': None,
+                    'user_scores_followers': None
                 }
 
-            index = user_search_result.normalized_likes
-            followers = user_search_result.followers
+            scores = {
+                'user_scores_index': user_search_result.normalized_likes,
+                # DEPRECATED: remove once contribution_index is populated
+                'user_scores_contribution_index': user_search_result.reputation,
+                'user_scores_followers': user_search_result.followers,
+            }
 
-            scores = {}
-            scores['user_scores_index'] = index
-            scores['user_scores_followers'] = followers
-            cache.set(cache_key, scores, 43200)
+            cache.set(cache_key, scores, 300)
 
         return scores
 
@@ -2543,7 +2682,7 @@ class AppApiKeyRequest(models.Model):
 
         if created:
             push_notification(
-                [self.registrar], 'api_key_request_approved',
+                [self.registrar], None, 'api_key_request_approved',
                 {'api_docs_url': settings.BASE_URL + '/help/api/',
                  'api_keys_url': settings.BASE_URL + '/users/%s/apikeys/' % self.registrar.username,
                  'key': app.key,
@@ -2604,6 +2743,9 @@ class ImageOfTheDayCandidate(models.Model):
     def save(self, *args, **kwargs):
         if self.image.user.userprofile.exclude_from_competitions:
             raise ValidationError, "User is excluded from competitions"
+
+        if self.image.user.userprofile.banned_from_competitions:
+            raise ValidationError, "User is banned from competitions"
 
         super(ImageOfTheDayCandidate, self).save(*args, **kwargs)
 

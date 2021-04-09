@@ -38,7 +38,7 @@
                 <li class="nav-header">{% trans "Gallery" %}</li>
 
                 <li>
-                    <a href="{% url 'user_page' requested_user.username %}{% query_string "" "sub,active,staging,corrupted,trash" %}">
+                    <a href="{% url 'user_page' requested_user.username %}{% query_string "" "sub,active,staging,corrupted,recovered,trash" %}">
                         <i class="icon-bullhorn"></i>
                         {% trans "Public Area" %}
                         <span class="badge badge-success">
@@ -49,7 +49,7 @@
 
                 {% ifequal requested_user request.user %}
                     <li>
-                        <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,staging=" "public,active,corrupted,trash" %}">
+                        <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,staging=" "public,active,corrupted,recovered,trash" %}">
                             <i class="icon-lock"></i>
                             {% trans "Staging Area" %}
                             <span class="badge badge-success">
@@ -60,7 +60,7 @@
 
                     {% if corrupted_no > 0 %}
                         <li>
-                            <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,corrupted=" "public,active,staging,trash" %}">
+                            <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,corrupted=" "public,active,staging,recovered,trash" %}">
                                 <i class="icon-ambulance"></i>
                                 {% trans "Corrupted" %}
                                 <span class="badge badge-important">
@@ -70,9 +70,22 @@
                         </li>
                     {% endif %}
 
+                    {% if recovered_no > 0 %}
+                        <li>
+                            <a href="
+                                    {% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,recovered=" "public,active,staging,corrupted,trash" %}">
+                                <i class="icon-medkit"></i>
+                                {% trans "Recovered" %}
+                                <span class="badge badge-important">
+                                {{ recovered_no }}
+                            </span>
+                            </a>
+                        </li>
+                    {% endif %}
+
                     {% if request.user|can_restore_from_trash %}
                         <li>
-                            <a href="{% url 'user_page' requested_user.username %}{% query_string "trash=" "public,active,sub,staging,corrupted" %}">
+                            <a href="{% url 'user_page' requested_user.username %}{% query_string "trash=" "public,active,sub,staging,corrupted,recovered" %}">
                                 <i class="icon-trash"></i>
                                 {% trans "Trash" %}
                                 <span class="badge badge-success">
@@ -121,14 +134,21 @@
                 <li class="divider"></li>
                 <li>
                     <a href="{% url 'user_page_following' requested_user.username %}">
-                        <i class="icon-eye-open"></i>
+                        <i class="icon-rotate-right"></i>
                         {% trans "Following" %}
                     </a>
 
                 <li>
                     <a href="{% url 'user_page_followers' requested_user.username %}">
-                        <i class="icon-eye-open"></i>
+                        <i class="icon-rotate-left"></i>
                         {% trans "Followers" %}
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'user_page_friends' requested_user.username %}">
+                        <i class="icon-refresh"></i>
+                        {% trans "Friends" %}
                     </a>
                 </li>
             </ul>

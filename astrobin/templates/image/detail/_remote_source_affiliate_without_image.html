@@ -1,0 +1,18 @@
+{% load i18n %}
+{% load tags %}
+{% load astrobin_apps_remote_source_affiliation_tags %}
+
+
+{% if image.remote_source|is_remote_source_affiliate %}
+    <div class="subtle-container advertisement remote-source-affiliate">
+        <div class="header">
+            <h4><i class="icon-star"></i> {% trans "Acquired at" %}</h4>
+        </div>
+
+        <a href="{{ image.remote_source|remote_source_affiliate_url }}?{% remote_source_affiliate_utm_tags %}"
+           onclick="getOutboundLink('{{ image.remote_source|remote_source_affiliate_url }}', '{{ request.path }}')"
+           target="_blank">
+            {{ image.get_remote_source }}
+        </a>
+    </div>
+{% endif %}

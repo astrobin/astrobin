@@ -1,23 +1,20 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: AstroBin Apps: Premium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:19+0000\n"
-"PO-Revision-Date: 2020-09-25 09:22+0000\n"
-"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2021-04-09 14:04+0000\n"
+"PO-Revision-Date: 2021-04-09 15:49+0200\n"
+"Last-Translator: Salvatore Iovene\n"
+"Language-Team: Italian\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1601025753.000000\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Loco https://localise.biz\n"
+"X-Loco-Source-Locale: en\n"
+"X-Loco-Project-Id: 108451\n"
+"X-Loco-Api-Version: 1.0.25 20210310-1\n"
 
 msgid "I wasn't really affected by the data loss"
 msgstr "La perdita di dati non mi ha copito"
@@ -68,7 +65,7 @@ msgid "Date"
 msgstr "Data"
 
 msgid "Subscription"
-msgstr "Sottoscrizione"
+msgstr "Abbonamento"
 
 msgid "Data loss compensation request"
 msgstr "Richiesta di compensazione per perdita di dati"
@@ -286,3 +283,15 @@ msgid "Your AstroBin subscription will be automatically renewed in one week"
 msgstr ""
 "Il tuo abbonamento su AstroBin sarà rinnovato automaticamente in una "
 "settimana"
+
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will be "
+"automatically renewed in 30 days."
+msgstr ""
+"Il tuo abbonamento \"%(subscription_name)s\" sarà rinnovato automaticamente "
+"tra 30 giorni."
+
+msgid "Your AstroBin subscription will be automatically renewed in 30 days"
+msgstr ""
+"Il tuo abbonamento su AstroBin sarà rinnovato automaticamente tra 30 giorni"

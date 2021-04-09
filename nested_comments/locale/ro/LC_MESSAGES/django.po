@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:06+0000\n"
+"POT-Creation-Date: 2021-04-09 14:01+0000\n"
 "PO-Revision-Date: 2013-11-17 06:27+0000\n"
 "Last-Translator: Teodorian <irimiateodorian@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,22 +20,37 @@ msgstr ""
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1384669642.866456\n"
 
+msgid "Type your comment here..."
+msgstr ""
+
 msgid "Cancel"
 msgstr "Anuleaza"
 
 msgid "Add a comment"
 msgstr "Adaugati un comentariu"
 
+#, python-format
 msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment.</p>"
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
+"\">sign up</a> to leave a comment."
 msgstr ""
 
 msgid "There are no comments yet."
 msgstr "Nu sunt comentarii inca."
 
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr ""
+
 msgid "(deleted)"
 msgstr "(sters)"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr ""
 
 msgid "Link"
 msgstr "Link"
@@ -52,41 +67,14 @@ msgstr "Editati"
 msgid "Reply"
 msgstr "Raspunde"
 
+msgid "Like"
+msgstr ""
+
+msgid "Unlike"
+msgstr ""
+
 msgid "The comment cannot be empty."
 msgstr "Acest comentariu nu poate fi gol"
 
-msgid "Save"
-msgstr "Salveaza"
-
-msgid "(comment deleted)"
-msgstr "(comentariu sters)"
-
-msgid "There doesn't seem to be anything here."
-msgstr "Aici nu pare sa se afle nimic."
-
-#~ msgid "Formatting help"
-#~ msgstr "Formatare ajutor"
-
-#~ msgid "Preview"
-#~ msgstr "Previzualizeaza"
-
-#~ msgid "You type:"
-#~ msgstr "Tu scrii"
-
-#~ msgid "You see:"
-#~ msgstr "Tu vezi"
-
-#~ msgid "italics"
-#~ msgstr "italic cursiv"
-
-#~ msgid "bold"
-#~ msgstr "ingrosat"
-
-#~ msgid "(TAB or 4 spaces)"
-#~ msgstr "(TAB sau 4 spatii)"
-
-#~ msgid "preformatted text"
-#~ msgstr "text preformatat"
-
-#~ msgid "quoted text"
-#~ msgstr "text citat"
+msgid "Submit"
+msgstr ""

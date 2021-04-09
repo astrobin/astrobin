@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:06+0000\n"
+"POT-Creation-Date: 2021-04-09 14:01+0000\n"
 "PO-Revision-Date: 2014-06-11 19:14+0000\n"
 "Last-Translator: jcbo <jcbo@wp.pl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,24 +20,37 @@ msgstr ""
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1402514072.668022\n"
 
+msgid "Type your comment here..."
+msgstr ""
+
 msgid "Cancel"
 msgstr "Anuluj"
 
 msgid "Add a comment"
 msgstr "Dodaj komentarz"
 
+#, python-format
 msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment.</p>"
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
+"\">sign up</a> to leave a comment."
 msgstr ""
-"<a href=\"/accounts/login/\">Zaloguj się</a> lub <a href=\"/accounts/"
-"register/\">zarejestruj</a> aby dodać komentarz.</p>"
 
 msgid "There are no comments yet."
 msgstr "Nie ma jeszcze komentarzy."
 
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr ""
+
 msgid "(deleted)"
 msgstr "(usunięty)"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr ""
 
 msgid "Link"
 msgstr "Łącze"
@@ -54,53 +67,14 @@ msgstr "Edytuj"
 msgid "Reply"
 msgstr "Odpowiedz"
 
+msgid "Like"
+msgstr ""
+
+msgid "Unlike"
+msgstr ""
+
 msgid "The comment cannot be empty."
 msgstr "Komentarz nie może być pusty"
 
-msgid "Save"
-msgstr "Zapisz"
-
-msgid "(comment deleted)"
-msgstr "(komentarz usunięty)"
-
-msgid "There doesn't seem to be anything here."
-msgstr "Nic tu nie ma."
-
-#~ msgid "Formatting help"
-#~ msgstr "Pomoc na temat formatowania"
-
-#~ msgid "Preview"
-#~ msgstr "Podgląd"
-
-#~ msgid "You type:"
-#~ msgstr "Piszesz:"
-
-#~ msgid "You see:"
-#~ msgstr "Widzisz:"
-
-#~ msgid "italics"
-#~ msgstr "italiki"
-
-#~ msgid "bold"
-#~ msgstr "pogrubienie"
-
-#~ msgid "(TAB or 4 spaces)"
-#~ msgstr "(TAB lub 4 spacje)"
-
-#~ msgid "preformatted text"
-#~ msgstr "tekst sformatowany"
-
-#~ msgid "quoted text"
-#~ msgstr "cytat"
-
-#~ msgid "escape the formatting syntax"
-#~ msgstr "anuluj formatowanie składni"
-
-#~ msgid ""
-#~ "Remember to use the <span class=\"label label-important\">reply</span> "
-#~ "button when replying directly to a comment. To post a new top level "
-#~ "comment, use the form at the end of the comment list."
-#~ msgstr ""
-#~ "Pamiętaj, aby używać opcji  <span class=\"label label-important"
-#~ "\">odpowiedz</span>, kiedy odpowiadasz na komentarz. Aby utworzyć nowy "
-#~ "komentarz, który nie jest odpowiedzią, użyj formularza poniżej."
+msgid "Submit"
+msgstr ""

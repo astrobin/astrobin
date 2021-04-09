@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:06+0000\n"
+"POT-Creation-Date: 2021-04-09 14:01+0000\n"
 "PO-Revision-Date: 2014-02-03 01:56+0000\n"
 "Last-Translator: Omar <thekingosm168@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,24 +20,37 @@ msgstr ""
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1391392614.329083\n"
 
+msgid "Type your comment here..."
+msgstr ""
+
 msgid "Cancel"
 msgstr "إلغاء"
 
 msgid "Add a comment"
 msgstr "أضف تعليق"
 
+#, python-format
 msgid ""
-"Please <a href=\"/accounts/login/\">login</a> or <a href=\"/accounts/"
-"register/\">register</a> to leave a comment.</p>"
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
+"\">sign up</a> to leave a comment."
 msgstr ""
-"رجاء <a href=\"/accounts/login/\">قم بالدخول</a> أو <a href=\"/accounts/"
-"register/\">التسجيل</a> لعمل تعليق.</p>"
 
 msgid "There are no comments yet."
 msgstr "لا توجد تعليقات حتى الآن."
 
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr ""
+
 msgid "(deleted)"
 msgstr "(تم الحذف)"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 1 like'"
+msgid "like"
+msgstr ""
 
 msgid "Link"
 msgstr "رابط"
@@ -54,44 +67,14 @@ msgstr "تحرير"
 msgid "Reply"
 msgstr "رد"
 
+msgid "Like"
+msgstr ""
+
+msgid "Unlike"
+msgstr ""
+
 msgid "The comment cannot be empty."
 msgstr "التعليق لا يمكن أن يكون فارغا."
 
-msgid "Save"
-msgstr "احفظ"
-
-msgid "(comment deleted)"
-msgstr "(تم حذف التعليق)"
-
-msgid "There doesn't seem to be anything here."
-msgstr "يبدو أنه لا يوجد شيئ هنا."
-
-#~ msgid "Formatting help"
-#~ msgstr "المساعدة في التنسيق "
-
-#~ msgid "Preview"
-#~ msgstr "معاينة"
-
-#~ msgid "You type:"
-#~ msgstr "تكتب:"
-
-#~ msgid "You see:"
-#~ msgstr "ترى:"
-
-#~ msgid "italics"
-#~ msgstr "مائل"
-
-#~ msgid "bold"
-#~ msgstr "سميك"
-
-#~ msgid "(TAB or 4 spaces)"
-#~ msgstr "أربعة مسافات"
-
-#~ msgid "preformatted text"
-#~ msgstr "نص منسّق مسبقًا"
-
-#~ msgid "quoted text"
-#~ msgstr "نص مقتبس"
-
-#~ msgid "escape the formatting syntax"
-#~ msgstr "الخروج من التنسيق"
+msgid "Submit"
+msgstr ""

@@ -1,7 +1,13 @@
 describe("Login", () => {
-    it("should display the page", () => {
-        cy.visit("/accounts/login/");
-        cy.get("input[name='username']").should("exist");
-        cy.get("input[name='password']").should("exist");
+    before(() => {
+        cy.clearCookies();
+    });
+
+    beforeEach(() => {
+        Cypress.Cookies.preserveOnce("sessionid", "csrftoken", "astrobin_lang", "cookielaw_accepted");
+    });
+
+    it("should login", () => {
+        cy.login();
     });
 });

@@ -16,7 +16,7 @@ from astrobin_apps_images.api.mixins import TusPatchMixin, TusHeadMixin, TusTerm
 from astrobin_apps_images.api.parsers import TusUploadStreamParser
 from astrobin_apps_images.api.permissions import HasUploaderAccessOrReadOnly, IsImageOwnerOrReadOnly
 from astrobin_apps_images.api.serializers import UncompressedSourceUploadSerializer
-from astrobin_apps_images.api.views.image_view_set import UploadMetadata
+from astrobin_apps_images.api.views.image_upload_view_set import UploadMetadata
 from astrobin_apps_images.models import UncompressedSourceUpload
 from common.upload_paths import uncompressed_source_upload_path
 
@@ -39,6 +39,7 @@ class UncompressedSourceUploadViewSet(TusCreateMixin,
         HasUploaderAccessOrReadOnly,
         IsImageOwnerOrReadOnly
     ]
+    http_method_names = ['get', 'post', 'head', 'put', 'patch']
 
     def get_file_field_name(self):
         return "uncompressed_source_file"
@@ -55,6 +56,9 @@ class UncompressedSourceUploadViewSet(TusCreateMixin,
             }
         except (TypeError, KeyError):
             return {}
+
+    def verify_file(self, f):
+        return True
 
 
 @receiver(signals.saved)

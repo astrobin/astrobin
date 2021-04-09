@@ -2,7 +2,6 @@
 {% load astrobin_apps_donations_tags %}
 {% load astrobin_apps_premium_tags %}
 {% load pipeline %}
-{% load dfp_tags %}
 {% load django_bootstrap_breadcrumbs %}
 {% load cookielaw_tags %}
 {% load i18n %}
@@ -18,7 +17,6 @@
 <html lang="{% if request.user.is_authenticated and user_language %}{{user_language}}{% else %}en{% endif %}">
     <head>
         <title>{% block title %}{% endblock %} - AstroBin</title>
-        <base href="{% block base_href %}/{% endblock %}">
 
         {% include "base/meta.html" %}
         {% block extra_meta %}{% endblock %}
@@ -34,6 +32,10 @@
         <link rel="stylesheet" href="https://unpkg.com/nouislider@12.1.0/distribute/nouislider.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
               integrity="sha256-FdatTf20PQr/rWg+cAKfl6j4/IY3oohFAJ7gVC3M34E=" crossorigin="anonymous" />
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css"
+              integrity="sha512-wJgJNTBBkLit7ymC6vvzM1EcSWeM9mmOu+1USHaRBbHkm6W9EgM0HY27+UtUaprntaYQJF75rc8gjxllKs5OIQ=="
+              crossorigin="anonymous" />
 
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700|Noto+Serif:700|Noto+Sans:400|Roboto+Mono&subset=latin-ext" rel="stylesheet">
         {% stylesheet 'screen' %}
@@ -44,6 +46,7 @@
 
         {% include "base/noscript.html" %}
         {% include "base/ga.html" %}
+        {% include "base/admanager.html" %}
 
         {% block extra_gtag %}{% endblock %}
 
@@ -56,12 +59,21 @@
     </head>
 
     {% show_adsense_ads as show_adsense_ads %}
-    <body id="{% block page_body_id %}none{% endblock %}" data-offset="55"
+    <body id="{% block page_body_id %}none{% endblock %}" data-offset="60"
           {% if show_adsense_ads %}
               class="with-ads-sidebar"
           {% endif %}>
 
-        {% cookielaw_banner %}
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P24R3RF" height="0" width="0"
+                    style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <!-- End Google Tag Manager (noscript) -->
+
+        {% if request|show_cookie_banner %}
+            {% cookielaw_banner %}
+        {% endif %}
 
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
@@ -76,6 +88,10 @@
         </div>
 
         {% include "base/global_alerts.html" %}
+
+        <div class="container extra-alerts">
+            {% block extra_alerts %}{% endblock %}
+        </div>
 
         <div id="top" class="container astrobin-container {% block container_extra_classes %}{% endblock %}">
             {% if show_adsense_ads %}
@@ -138,10 +154,6 @@
         {% include "base/js.html" %}
 
         {% block extra_js %}{% endblock %}
-
-        {% if request.user|show_ads and not image.user|is_any_ultimate %}
-            {% dfp_footer %}
-        {% endif %}
 
         <!-- used to figure out how many users use ad blocking software -->
         <script type="text/javascript">

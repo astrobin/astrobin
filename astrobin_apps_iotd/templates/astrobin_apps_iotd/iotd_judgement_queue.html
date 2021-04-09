@@ -6,6 +6,7 @@
 {% load astrobin_apps_iotd_tags %}
 {% load astrobin_apps_images_tags %}
 {% load common_tags %}
+{% load humanize %}
 
 {% block title %}{% trans "IOTD Judgement Queue" %}{% endblock %}
 
@@ -30,22 +31,22 @@
     </div>
 
     <div class="iotd-promotion-queue">
+        {% with reason=user|judge_cannot_select_now_reason next_available_time=user|get_next_available_selection_time_for_judge %}
+            {% if reason and next_available_time|is_future %}
+                <div class="alert alert-warning">
+                    <i class="icon-warning-sign"></i>
+                    {% blocktrans trimmed with time=next_available_time|naturaltime %}
+                        Sorry, you cannot select an IOTD right now: {{ reason }}. Please try again in
+                        <strong>{{ time }}</strong>.
+                    {% endblocktrans %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
         {% for image in object_list %}
             <div class="iotd-queue-item
                        {% if request.user|may_elect:image and request.user|may_unelect:image %} may-select{% else %}may-not-select{% endif %}
                        {% if image|is_iotd %} selected{% endif %}">
-                {% with votes=image|votes_count %}
-                    <div class="votes-count">
-                        <a class="badge"
-                           href="#reviewers-modal"
-                           data-toggle="modal"
-                           data-image="{{image.pk}}"
-                           rel="tooltip"
-                           title="{{votes}}">
-                            #
-                        </a>
-                    </div>
-                {% endwith %}
 
                 <a href="#" class="elect" data-toggle-url="{% url 'iotd_toggle_judgement_ajax' image.pk %}">
                     {% astrobin_image image 'story' link=False tooltip=False %}
@@ -89,60 +90,32 @@
                 </div>
             </div>
         {% empty %}
-            {% trans "This queue is currently empty." %}
+            <p>
+                {% trans "This queue is currently empty." %}
+            </p>
         {% endfor %}
     </div>
     {% endif %} {# READONLY #}
 {% endblock %}
 
 {% block modals %}
-    <div id="reviewers-modal" class="modal hide fade">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h3>{% trans "Reviewers" %}</h3>
-        </div>
-
-        <div class="modal-body">
-            <img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="{% trans "Loading" %}" />
-        </div>
-    </div>
-
     <div id="error-modal" class="modal hide fide">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h3>{% trans "Error" %}</h3>
         </div>
-
         <div class="modal-body">
-            <p class="error-message">
-            </p>
+            <p class="error-message"></p>
         </div>
     </div>
 {% endblock %}
+
 
 {% block extra_js %}
     <script type="text/javascript">
         $(document).ready(function() {
             $('.fancybox').fancybox({
                 type: 'image'
-            });
-
-            $('.badge').on('click', function() {
-                var $modal = $('#reviewers-modal'),
-                    pk = $(this).data('image');
-
-                $.ajax({
-                    url: '/iotd/reviewers-for-image-ajax/' + pk,
-                    timeout: 0,
-                    success: function(data, textStatus, jqXHR) {
-                        $modal.find('.modal-body').html(data);
-                    }
-                });
-            });
-
-            $('#reviewers-modal').on('hidden', function() {
-                $(this).find('.modal-body').html(
-                    '<img src="{% static "astrobin/images/ajax-loader.gif" %}" alt="{% trans "Loading" %}" />');
             });
 
             $('.iotd-queue-item a.elect').click(function(e) {

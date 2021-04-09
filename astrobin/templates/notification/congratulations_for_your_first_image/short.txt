@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    Congratulations for your first image on AstroBin!
+{% endblocktrans %}

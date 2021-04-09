@@ -7,10 +7,12 @@
 {% load common_tags %}
 {% load staticfiles %}
 
+{% get_current_language as LANGUAGE_CODE %}
+{% get_actstream_action_template_fragment_cache_key action LANGUAGE_CODE as CACHE_KEY %}
+
 {% if action.verb|startswith:"VERB_" and user.username != '' %}
 
-<div class="action"
-     id="{{action.verb}}.{{action.actor.pk}}.{{action.action_object.pk}}{% if action.target %}.{{action.target.pk}}{% endif %}">
+<div class="action" id="{{ CACHE_KEY }}">
 
     {% comment %}
       The like mini-button is outside of the cache section because we cache for all
@@ -21,15 +23,13 @@
         {% with image=action.action_object %}
             {% include 'actstream/_action_image_like.html' %}
         {% endwith %}
-    {% endif %}
-
-    {% if action.target|get_class == 'Image' %}
+    {% elif action.target|get_class == 'Image' %}
         {% with image=action.target %}
             {% include 'actstream/_action_image_like.html' %}
         {% endwith %}
     {% endif %}
 
-    {% cache 600 actstream_action action.verb action.actor action.action_object action.target user_language %}
+    {% cache 600 actstream_action CACHE_KEY %}
 
     {% if action.verb == 'VERB_UPLOADED_IMAGE' %}
         {% with image=action.action_object user=action.actor %}
@@ -38,7 +38,7 @@
                 <div class="verb">
                     <div class="inner">
                         {% url 'user_page' user.username as user_page %}
-                        {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title %}
+                        {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title %}
                             <a href="{{user_page}}">{{user}}</a> uploaded a new image.
                         {% endblocktrans %}
                     </div>
@@ -56,7 +56,7 @@
                 <div class="verb">
                     <div class="inner">
                         {% url 'user_page' user.username as user_page %}
-                        {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title %}
+                        {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title %}
                             <a href="{{user_page}}">{{user}}</a> uploaded a new image revision.
                         {% endblocktrans %}
                     </div>
@@ -75,11 +75,11 @@
                     <div class="inner">
                         {% url 'user_page' user.username as user_page %}
                         {% if image.likes > 1 %}
-                            {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title and image.likes|add:"-1" as count %}
+                            {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title and image.likes|add:"-1" as count %}
                                 <a href="{{user_page}}">{{user}}</a> and {{count}} others like this image.
                             {% endblocktrans %}
                         {% else %}
-                            {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title %}
+                            {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title %}
                                 <a href="{{user_page}}">{{user}}</a> likes this image.
                             {% endblocktrans %}
                         {% endif %}
@@ -99,11 +99,11 @@
                     <div class="inner">
                         {% url 'user_page' user.username as user_page %}
                         {% if image.bookmarks > 1 %}
-                            {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title and image.bookmarks|add:"-1" as count %}
+                            {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title and image.bookmarks|add:"-1" as count %}
                                 <a href="{{user_page}}">{{user}}</a> and {{count}} others bookmarked this image.
                             {% endblocktrans %}
                         {% else %}
-                            {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title %}
+                            {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title %}
                                 <a href="{{user_page}}">{{user}}</a> bookmarked this image.
                             {% endblocktrans %}
                         {% endif %}
@@ -123,18 +123,14 @@
                     <div class="inner">
                         {% url 'user_page' user.username as user_page %}
                         {% if distinct_commenters > 1 %}
-                            {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title and distinct_commenters|add:"-1" as count %}
+                            {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title and distinct_commenters|add:"-1" as count %}
                                 <a href="{{user_page}}">{{user}}</a> and {{count}} others commented this image.
                             {% endblocktrans %}
                         {% else %}
-                            {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title %}
+                            {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title %}
                                 <a href="{{user_page}}">{{user}}</a> commented this image.
                             {% endblocktrans %}
                         {% endif %}
-
-                        <div class="detail">
-                            "{{comment.text}}"
-                        </div>
                     </div>
                 </div>
                 {% astrobin_image image 'story' nav_ctx='user' request=request %}
@@ -150,7 +146,7 @@
                 <div class="verb">
                     <div class="inner">
                         {% url 'user_page' user.username as user_page %}
-                        {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title %}
+                        {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title %}
                             <a href="{{user_page}}">{{user}}</a> created a new public group.
                         {% endblocktrans %}
                     </div>
@@ -176,7 +172,7 @@
                 <div class="verb">
                     <div class="inner">
                         {% url 'user_page' user.username as user_page %}
-                        {% blocktrans with user_page as user_page and user.userprofile as user and image.title as title %}
+                        {% blocktrans trimmed with user_page as user_page and user.userprofile as user and image.title as title %}
                             <a href="{{user_page}}">{{user}}</a> joined a group.
                         {% endblocktrans %}
                     </div>

@@ -3,7 +3,7 @@
 {% load django_bootstrap_breadcrumbs %}
 {% load tags %}
 
-{% block title %}{% blocktrans with user=user %}{{user}}'s bookmarks{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans trimmed with user=user %}{{user}}'s bookmarks{% endblocktrans %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block breadcrumbs %}
@@ -15,7 +15,7 @@
 
 {% block content %}
     {% include 'user/profile/navigation.html' %}
-    {% image_list image_list %}
+    {% image_list image_list paginate_by=paginate_by %}
 {% endblock %}
 
 {% block extra_js %}

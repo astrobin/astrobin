@@ -4,7 +4,7 @@
 {% block title %}{{ forum.name }}{% endblock title %}
 
 {% block container_extra_classes %}
-    {% if forum.category.slug == 'group-forums' or user|pybb_may_create_topic:forum %}
+    {% if forum.category.slug == 'group-forums' %}
         has-subnav
     {% endif %}
 {% endblock %}
@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block content %}
-    {% if forum.category.slug == 'group-forums' or user|pybb_may_create_topic:forum %}
+    {% if forum.category.slug == 'group-forums' %}
     <div class="subnav subnav-fixed">
         <ul class="nav nav-pills">
             {% if forum.category.slug == 'group-forums' %}
@@ -27,18 +27,11 @@
                     </a>
                 </li>
             {% endif %}
-
-            {% if user|pybb_may_create_topic:forum %}
-                <li>
-                    <a href="{% url 'pybb:add_topic' forum.id %}">
-                        <i class="icon-plus icon-white"></i>
-                        {% trans "New topic" %}
-                    </a>
-                </li>
-            {% endif %}
         </ul>
     </div>
     {% endif %}
+
+    {% include 'pybb/_forum_tools.html' %}
 
     <div class="forum">
         {% if forum.headline %}
@@ -50,5 +43,8 @@
         {% include 'pybb/forum_list.html' with forum_list=forum.forums_accessed category='' parent_forum=forum %}
         {% include "pybb/topic_list.html" %}
     </div>
-    {% include 'pagination_simple.html' %}
+
+    <div class="forum-tools">
+        {% include 'pagination_simple.html' %}
+    </div>
 {% endblock content %}

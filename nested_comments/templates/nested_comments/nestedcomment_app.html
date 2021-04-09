@@ -5,12 +5,16 @@
 {% load ember %}
 
 {% load common_tags %}
+{% load nestedcomments_tags %}
 
 
+<div id="nested-comments-path" data-value="{{request.path}}"></div>
+<div id="nested-comments-language-code" data-value="{{LANGUAGE_CODE}}"></div>
 <div id="nested-comments-user-id" data-value="{{request.user.id}}"></div>
 <div id="nested-comments-user-name" data-value="{{request.user.username}}"></div>
 <div id="nested-comments-user-is-authenticated" data-value="{{ request.user.is_authenticated.value }}"></div>
 <div id="nested-comments-user-is-superuser" data-value="{{ request.user.is_superuser }}"></div>
+<div id="nested-comments-comments-content-type-id" data-value="{% nestedcomments_content_type_id %}"></div>
 
 {% if image %}
     <div id="nested-comments-shadow-bans" data-value="{{ image.user.userprofile.shadow_bans.all|get_pks }}"></div>
@@ -18,6 +22,11 @@
 
 <div id="nested-comments-page-url" data-value="{{request.get_full_path}}"></div>
 <div id="nested-comments-loaderGif-url" data-value="{% static 'astrobin/images/ajax-loader.gif' %}"></div>
+<div id="nested-comments-editor-placeholder" data-value="{% trans 'Type your comment here...' %}"></div>
+
+<div style="display: none">
+    <textarea id="hidden-textarea"></textarea>
+</div>
 
 {% handlebars "nested-comments" %}
     {{outlet top-level}}
@@ -28,8 +37,10 @@
 {% handlebars "top-level" %}
     {{#if view.userIsAuthenticated}}
         {{#unless view.collapsed}}
+            {% include '_contribution_index_alert.html' %}
             <form>
                 {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
+                {% include '_rich_content_editor_help.html' %}
 
                 {{view view.SaveCommentButtonView}}
                 <a class="btn btn-mini" href="#" {{action "collapse" target="view"}}>{% trans "Cancel" %}</a>
@@ -45,17 +56,21 @@
             </a>
         {{/unless}}
     {{else}}
-        <p>{% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.</p>{% endblocktrans %}
+        <p class="please-login">
+            {% url 'auth_login' as login_url %}
+            {% blocktrans trimmed with signup_url="https://welcome.astrobin.com/pricing" %}
+                Please <a href="{{login_url}}">log in</a> or <a href="{{signup_url}}">sign up</a> to leave a comment.
+            {% endblocktrans %}
+        </p>
     {{/if}}
 {% endhandlebars %}
 
 
 {% handlebars "comments" %}
     {{#if controller.ready}}
-        {{#if controller.content.length}}
-        {{else}}
+        {{#unless controller.content.length}}
            <p class="comment">{% trans "There are no comments yet." %}</p>
-        {{/if}}
+        {{/unless}}
 
         {{#each controller.content}}
             {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
@@ -67,100 +82,152 @@
 
 
 {% handlebars "singleComment" %}
-    <div class="avatar visible-desktop">
-        <a class="author" {{bindAttr href="view.node.author_url"}}>
-            <img
-                {{bindAttr src="view.node.author_avatar"}}
-                {{bindAttr alt="view.node.author_username"}}
-                width="40" height="40" />
-        </a>
-    </div>
-    <div class="comment-container" {{bindAttr id="view.node.cid"}}>
-        <div class="meta">
-            {{#if view.node.deleted}}
-                {% trans "(deleted)" %}
-            {{else}}
-                <a class="author" {{bindAttr href="view.node.author_url"}}>
-                    {{view.node.author_username}}
-                </a>
-            {{/if}}
-            {{view NestedCommentsApp.TimeagoView valueBinding="view.node.updated"}}
-
-            {{#unless view.collapsed}}
-                <a href="#" class="collapse" {{action "collapse" target="view"}}>[-]</a>
-            {{else}}
-                <a href="#" class="collapse" {{action "uncollapse" target="view"}}>[+]</a>
-            {{/unless}}
+    {{#unless view.node.deleted}}
+        <div class="avatar visible-desktop">
+            <a class="author" {{bindAttr href="view.node.author_url"}}>
+                <img
+                    {{bindAttr src="view.node.author_avatar"}}
+                    {{bindAttr alt="view.node.author_username"}}
+                    width="40" height="40" />
+            </a>
         </div>
+    {{/unless}}
 
-        {{#unless view.collapsed}}
-            <!-- Used to access a wisybb object and convert the bbcode to HTML. -->
-            <div class="converter" style="display: none">
-                {{view Ember.TextArea rows=6 valueBinding="view.node.text"}}
+    <div class="comment-container" {{ bindAttr id="view.node.cid"}}>
+        {{#if view.node.pending_moderation}}
+            <div class="content pending-moderation">
+                <em>{% trans "This comment is pending moderation and will be reviewed shortly." %}</em>
             </div>
-
-            <div class="content">
+        {{else}}
+            <div class="meta">
                 {{#if view.node.deleted}}
-                    <p>{% trans "(deleted)" %}</p>
+                    {% trans "(deleted)" %}
                 {{else}}
-                    {{#if view.editing}}
-                        {{view view.EditView commentBinding="view.node"}}
-                    {{else}}
-                        {{# if view.node.ready }}
-                            {{{view.node.getHTML}}}
-                        {{else}}
-                            {{view NestedCommentsApp.LoaderView}}
-                        {{/if}}
-                    {{/if}}
-                {{/if}}
-            </div>
-
-            <div class="links">
-                <a {{bindAttr href="view.node.url"}} {{action "link" target="view"}}>{% trans "Link" %}</a>
-
-                {{#if view.node.authorIsRequestingUser}}
-                    {{#if view.node.deleted}}
-                        <a href="#" {{action "undelete" target="view"}}>{% trans "Undelete" %}</a>
-                    {{else}}
-                        <a href="#" {{action "delete_" target="view"}}>{% trans "Delete" %}</a>
-                    {{/if}}
-
-                    {{#if view.node.allowEditing}}
-                        {{#unless view.editing}}
-                            <a href="#" {{action "edit" target="view"}}>{% trans "Edit" %}</a>
-                        {{/unless}}
-                    {{/if}}
-
-                    {{#if view.userIsSuperuser }}
-                        <a href="#" class="label label-important" {{ action "reply" target="view"}}>
-                            {% trans "Reply" %}
-                        </a>
-                    {{/if}}
-                {{else}}
-                    <a href="#" class="label label-important" {{action "reply" target="view"}}>
-                        {% trans "Reply" %}
+                    <a class="author" {{bindAttr href="view.node.author_url"}}>
+                        {{view.node.author_username}}
                     </a>
                 {{/if}}
+
+                {{view NestedCommentsApp.TimeagoView valueBinding="view.node.created"}}
+
+                &middot;
+
+                {{#if view.node.hasNoLikes}}
+                    {{ view.node.likesCount }} {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" %}
+                {{/if}}
+
+                {{#if view.node.hasOneLike}}
+                    {{ view.node.likesCount }} {% trans "like" context "Noun, e.g. 'This element has 1 like'" %}
+                {{/if}}
+
+                {{#if view.node.hasManyLikes}}
+                    {{ view.node.likesCount }} {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" %}
+                {{/if}}
+
+                {{#unless view.collapsed}}
+                    <a href="#" class="collapse" {{action "collapse" target="view"}}>[-]</a>
+                {{else}}
+                    <a href="#" class="collapse" {{action "uncollapse" target="view"}}>[+]</a>
+                {{/unless}}
             </div>
 
-            {{#if view.replying}}
-                <div class="reply">
-                    {{view view.ReplyView parentBinding="view.node.comment"}}
+            {{#unless view.collapsed}}
+                <div class="converter" style="display: none">
+                    {{view Ember.TextArea rows=6 valueBinding="view.node.text"}}
                 </div>
-            {{/if}}
 
-            <div class="children">
+                <div class="content">
+                    {{#if view.node.deleted}}
+                        <p>{% trans "(deleted)" %}</p>
+                    {{else}}
+                        {{#if view.editing}}
+                            {{view view.EditView commentBinding="view.node"}}
+                        {{else}}
+                            {{# if view.node.ready}}
+                                {{{view.node.getHTML}}}
+                            {{else}}
+                                {{view NestedCommentsApp.LoaderView}}
+                            {{/if}}
+                        {{/if}}
+                    {{/if}}
+                </div>
+
+                <div class="links">
+                    <a {{bindAttr href="view.node.url"}} {{action "link" target="view"}}>
+                        <i class="icon-link"></i> {% trans "Link" %}
+                    </a>
+
+                    {{#if view.node.authorIsRequestingUser}}
+                        {{#if view.node.deleted}}
+                            <a href="#" {{action "undelete" target="view"}}>
+                                {% trans "Undelete" %}
+                            </a>
+                        {{else}}
+                            <a href="#" {{action "delete_" target="view"}}>
+                                <i class="icon-trash"></i> {% trans "Delete" %}
+                            </a>
+                        {{/if}}
+
+                        {{#if view.node.allowEditing}}
+                            {{#unless view.editing}}
+                                <i class="icon-pencil"></i> <a href="#" {{action "edit" target="view"}}>{% trans "Edit" %}</a>
+                            {{/unless}}
+                        {{/if}}
+
+                        {{#if view.userIsSuperuser}}
+                            <a href="#" class="label label-important" {{action "reply" target="view"}}>
+                                <i class="icon-reply"></i> {% trans "Reply" %}
+                            </a>
+                        {{/if}}
+                    {{else}}
+                        <a href="#" class="label label-important" {{action "reply" target="view"}}>
+                            <i class="icon-reply"></i> {% trans "Reply" %}
+                        </a>
+
+                        {{#unless view.node.liked}}
+                            <a href="#"
+                               class="label label-important comment-like"
+                               {{bindAttr class="view.node.liking:liking"}}
+                               {{action "like" target="view"}}>
+                                <i class="icon-thumbs-up"></i> {% trans "Like" %}
+                            </a>
+                        {{else}}
+                            <a href="#"
+                               class="label comment-unlike"
+                               {{bindAttr class="view.node.unliking:unliking"}}
+                               {{action "unlike" target="view"}}>
+                                {% trans "Unlike" %}
+                            </a>
+                        {{/unless}}
+                    {{/if}}
+                </div>
+
+                {{#if view.replying}}
+                    <div class="reply">
+                        {{view view.ReplyView parentBinding="view.node.comment"}}
+                    </div>
+                {{/if}}
+
+                {{#if view.node.shouldNotIndent}}
+                    <div class="children no-indentation">
+                {{else}}
+                    <div class="children">
+                {{/if}}
+
                 {{#each view.node.children}}
                     {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
                 {{/each}}
-            </div>
-        {{/unless}}
+                </div>
+            {{/unless}}
+        {{/if}}
     </div>
 {% endhandlebars %}
 
 
 {% handlebars "edit" %}
+    {% include '_contribution_index_alert.html' %}
     {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
+    {% include '_rich_content_editor_help.html' %}
 
     {{view view.SaveEditButtonView commentBinding="view.comment"}}
     <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>{% trans "Cancel" %}</a>
@@ -176,8 +243,10 @@
 
 
 {% handlebars "reply" %}
-    {{# if view.userIsAuthenticated}}
+    {{#if view.userIsAuthenticated}}
+        {% include '_contribution_index_alert.html' %}
         {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
+        {% include '_rich_content_editor_help.html' %}
 
         {{view view.SaveReplyButtonView}}
         <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>{% trans "Cancel" %}</a>
@@ -186,7 +255,12 @@
             {{view NestedCommentsApp.LoaderView}}
         {{/if}}
     {{else}}
-        <p>{% blocktrans %}Please <a href="/accounts/login/">login</a> or <a href="/accounts/register/">register</a> to leave a comment.</p>{% endblocktrans %}
+        <p class="please-login">
+            {% url 'auth_login' as login_url %}
+            {% blocktrans trimmed with signup_url="https://welcome.astrobin.com/pricing" %}
+                Please <a href="{{ login_url }}">log in</a> or <a href="{{ signup_url }}">sign up</a> to leave a comment.
+            {% endblocktrans %}
+        </p>
     {{/if}}
 {% endhandlebars %}
 
@@ -197,7 +271,7 @@
 
 
 {% handlebars "saveButton" %}
-    {% trans "Save" %}
+    {% trans "Submit" %}
 {% endhandlebars %}
 
 

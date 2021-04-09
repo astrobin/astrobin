@@ -1,24 +1,21 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: AstroBin Apps: Notifications\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:21+0000\n"
-"PO-Revision-Date: 2019-01-26 16:06+0000\n"
-"Last-Translator: sypai <sypai@mail.ru>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2021-04-09 14:06+0000\n"
+"PO-Revision-Date: 2021-04-09 15:49+0200\n"
+"Last-Translator: Salvatore Iovene\n"
+"Language-Team: Russian\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1548518812.000000\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
+"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
+"X-Generator: Loco https://localise.biz\n"
+"X-Loco-Source-Locale: en\n"
+"X-Loco-Project-Id: 108445\n"
+"X-Loco-Api-Version: 1.0.25 20210310-1\n"
 
 msgid "Notifications"
 msgstr "Уведомления"
@@ -56,26 +53,23 @@ msgstr "У вашего изображения комментарий"
 msgid "There was a reply to your comment"
 msgstr "Ответ на ваш комментарий"
 
+msgid "Your comment was approved"
+msgstr ""
+
 msgid "Your image was bookmarked"
 msgstr "Ваше изображение в закладках"
 
 msgid "Your image was liked"
 msgstr "Ваше изображение понравилось"
 
-msgid "New image with some gear you follow"
-msgstr "Новое изображение с вашим оборудованием"
+msgid "Your comment was liked"
+msgstr "Ваше изображение понравилось"
 
-msgid "New image of a subject you follow"
-msgstr "Новое изображение по вашей подписке"
+msgid "Your forum post was liked"
+msgstr "Ваше сообщение на форуме понравилось"
 
 msgid "Your API Key request has been approved"
 msgstr "Ваш запрос на API ключ одобрен"
-
-msgid "New discussion about a gear item you own"
-msgstr "Новое в обсуждении вашего оборудования"
-
-msgid "New review of a gear item you own"
-msgstr "Новый обзор на ваше оборудование"
 
 msgid "A user you follow joined a public group"
 msgstr "Пользователь, на которого вы подписаны вступил в открытую группу"
@@ -104,13 +98,14 @@ msgstr "У вас новое личное сообщение"
 msgid "Your premium subscription will expire in one week"
 msgstr "Ваша премиум подписка истекает через неделю"
 
-#, fuzzy
-#| msgid "Your premium subscription will expire in one week"
 msgid "Your premium subscription has just expired"
-msgstr "Ваша премиум подписка истекает через неделю"
+msgstr "Ваша премиум подписка только что истекла"
 
 msgid "Your subscription will be renewed in one week"
 msgstr "Ваша подписка будет обновлена в течение недели"
+
+msgid "Your subscription will be renewed in one 30 days"
+msgstr "Ваша подписка будет обновлена в течение месяца"
 
 msgid "You have images with a missing \"Data source\""
 msgstr "У вас есть изображения без данных "
@@ -118,20 +113,35 @@ msgstr "У вас есть изображения без данных "
 msgid "You have images with a missing \"Remote source\""
 msgstr "У вас есть изображения без информации \"Удаленный источник\""
 
-msgid "Would you like to activate your account?\""
+msgid "Would you like to activate your account?"
+msgstr "Вы хотите активировать вашу учётную запись?"
+
+msgid "You were mentioned in a forum post"
+msgstr "Вы были упомянуты в сообщении на форуме"
+
+msgid "You were mentioned in a comment"
+msgstr "Вас упомянули в комментарии"
+
+msgid "Welcome to AstroBin!"
+msgstr "Добро пожаловать в AstroBin!"
+
+msgid "Congratulations for your first image on AstroBin!"
+msgstr "Поздравления с вашим первым изображением на AstroBin!"
+
+msgid "Thank you for getting a subscription!"
+msgstr "Спасибо за подписку !"
+
+msgid "Thank you for your payment!"
+msgstr "Спасибо за ваш платеж!"
+
+msgid "You were removed from the IOTD staff"
 msgstr ""
 
-#~ msgid "New data posted to public pool"
-#~ msgstr "Новые данные в открытом хранилище"
+msgid "You have been inactive as an IOTD staff member"
+msgstr ""
 
-#~ msgid "New image posted to public data pool"
-#~ msgstr "Новое изображение опубликовано в открытом хранилище данных"
+msgid "An image you promoted made it to Top Pick"
+msgstr ""
 
-#~ msgid "New data posted to shared private folder"
-#~ msgstr "Новые данные опубликованы в закрытом каталоге"
-
-#~ msgid "New image posted to shared private folder"
-#~ msgstr "Новое изображение опубликовано в закрытом каталоге"
-
-#~ msgid "You are invited to a shared private folder"
-#~ msgstr "Вы приглашены в закрытый каталог"
+msgid "An image you promoted made it to IOTD"
+msgstr ""

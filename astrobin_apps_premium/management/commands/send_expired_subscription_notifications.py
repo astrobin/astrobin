@@ -26,12 +26,11 @@ class Command(BaseCommand):
                 "AstroBin Premium 2020+",
                 "AstroBin Ultimate 2020+",
             ],
+            active=True,
             expires = datetime.now() - timedelta(days = 1))
 
         for user_subscription in user_subscriptions:
-            push_notification([user_subscription.user], 'expired_subscription', {
+            push_notification([user_subscription.user], None, 'expired_subscription', {
                 'user_subscription': user_subscription,
-                'url': settings.BASE_URL + reverse('subscription_detail', kwargs = {
-                    'object_id': user_subscription.subscription.pk
-                })
+                'url': 'https://app.astrobin.com/subscriptions/options'
             })

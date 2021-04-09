@@ -1,12 +1,15 @@
-# Django
 import datetime
 
 from django import template
+from django.contrib.contenttypes.models import ContentType
 from django.template import Library, Node
 from django.template.defaultfilters import stringfilter
 from django.utils.encoding import force_unicode
 from django.utils.functional import allow_lazy
 from django.utils.safestring import mark_safe
+
+from common.services import AppRedirectionService, DateTimeService
+from common.services.pagination_service import PaginationService
 
 register = Library()
 
@@ -35,20 +38,21 @@ def query_string(parser, token):
 
     """
     try:
-        tag_name, add_string,remove_string = token.split_contents()
+        tag_name, add_string, remove_string = token.split_contents()
     except ValueError:
         raise template.TemplateSyntaxError, "%r tag requires two arguments" % token.contents.split()[0]
-    if not (add_string[0] == add_string[-1] and add_string[0] in ('"', "'")) or not (remove_string[0] == remove_string[-1] and remove_string[0] in ('"', "'")):
+    if not (add_string[0] == add_string[-1] and add_string[0] in ('"', "'")) or not (
+            remove_string[0] == remove_string[-1] and remove_string[0] in ('"', "'")):
         raise template.TemplateSyntaxError, "%r tag's argument should be in quotes" % tag_name
 
     add = string_to_dict(add_string[1:-1])
     remove = string_to_list(remove_string[1:-1])
 
-    return QueryStringNode(add,remove)
+    return QueryStringNode(add, remove)
 
 
 class QueryStringNode(Node):
-    def __init__(self, add,remove):
+    def __init__(self, add, remove):
         self.add = add
         self.remove = remove
 
@@ -60,7 +64,7 @@ class QueryStringNode(Node):
             p_list.append([k, query.getlist(k)])
             p_dict[k] = query.getlist(k)
 
-        return get_query_string(p_list,p_dict,self.add,self.remove,context)
+        return get_query_string(p_list, p_dict, self.add, self.remove, context)
 
 
 def get_query_string(p_list, p_dict, new_params, remove, context):
@@ -94,7 +98,8 @@ def get_query_string(p_list, p_dict, new_params, remove, context):
             except:
                 pass
 
-    return mark_safe('?' + '&amp;'.join([k[1] if k[0] == '' else u'%s=%s' % (k[0], k[1]) for k in p_list if k[1] is not None and k[1] != 'None']).replace(' ', '%20'))
+    return mark_safe('?' + '&amp;'.join([k[1] if k[0] == '' else u'%s=%s' % (k[0], k[1]) for k in p_list if
+                                         k[1] is not None and k[1] != 'None']).replace(' ', '%20'))
 
 
 @register.simple_tag
@@ -141,6 +146,8 @@ def truncate_chars(s, num):
         s = s[:length].strip()
         s += '...'
     return s
+
+
 truncate_chars = allow_lazy(truncate_chars, unicode)
 
 
@@ -153,16 +160,18 @@ def truncatechars(value, arg):
     """
     try:
         length = int(arg)
-    except ValueError: # If the argument is not a valid integer.
-        return value # Fail silently.
+    except ValueError:  # If the argument is not a valid integer.
+        return value  # Fail silently.
     return truncate_chars(value, length)
+
+
 truncatechars.is_safe = True
 truncatechars = stringfilter(truncatechars)
 
 
 @register.filter(name='get_class')
 def get_class(value):
-  return value.__class__.__name__
+    return value.__class__.__name__
 
 
 @register.simple_tag
@@ -191,3 +200,26 @@ def get_pks(qs):
 @register.filter
 def get_item(dictionary, key):
     return dictionary.get(key)
+
+
+@register.filter
+def content_type(obj):
+    if not obj:
+        return None
+    return ContentType.objects.get_for_model(obj)
+
+
+@register.simple_tag
+def page_counter(counter, page_number, items_per_page):
+    # type: (int, int, int) -> int
+    return PaginationService.page_counter(counter, page_number, items_per_page)
+
+
+@register.simple_tag
+def app_redirection_service(request, path):
+    return AppRedirectionService.redirect(request, path)
+
+
+@register.filter
+def is_future(dt):
+    return dt > DateTimeService.now()

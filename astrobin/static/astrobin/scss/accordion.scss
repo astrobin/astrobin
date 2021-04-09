@@ -1,0 +1,59 @@
+@import "variables";
+
+.accordion {
+  &.container {
+    > .accordion-group {
+      margin-left: -30px;
+      margin-right: -30px;
+      margin-bottom: -1px;
+    }
+  }
+
+  .accordion-group {
+    border-color: $grey-6;
+  }
+
+  .accordion-heading {
+    position: relative;
+    background-color: $grey-8;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+
+    > a {
+      [class^="icon-"] {
+        margin-right: .5rem;
+      }
+
+      &.show-caret {
+        padding-right: 40px;
+
+        &::after {
+          position: absolute;
+          right: 20px;
+          content: "△";
+        }
+
+        &.collapsed::after {
+          content: "▽";
+        }
+      }
+    }
+  }
+
+  .accordion-inner {
+    border: 0;
+
+    &.alert {
+      margin: 0;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+
+  .accordion-footer {
+    background: $grey-8;
+    margin: 15px -15px -27px -15px;
+    padding: 10px 15px;
+    border-radius: 0 0 4px 4px;
+  }
+}

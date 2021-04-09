@@ -2,6 +2,7 @@
 {% load tags %}
 {% load astrobin_apps_iotd_tags %}
 {% load staticfiles %}
+{% load common_tags %}
 
 <button class="btn btn-navbar" data-toggle="collapse" data-target=".site-nav">
     <span class="icon-bar"></span>
@@ -9,13 +10,26 @@
     <span class="icon-bar"></span>
 </button>
 
-<a class="brand hidden-phone hidden-tablet" href="{% url 'index' %}">
-    <img src="{% static 'astrobin/images/astrobin-logo-small.png' %}" alt="AstroBin" />
-</a>
+{% show_10_year_anniversary_logo as show_10_year_anniversary_logo %}
+{% if show_10_year_anniversary_logo %}
+    <a class="brand ten-year-anniversary hidden-phone hidden-tablet"
+       href="https://welcome.astrobin.com/blog/celebrating-10-years-of-astrobin" target="_blank">
+        <img src="{% static 'astrobin/images/astrobin-logo-10-years.png' %}" alt="AstroBin" />
+    </a>
 
-<a class="brand-mobile hidden-desktop" href="{% url 'index' %}">
-    AstroBin
-</a>
+    <a class="brand-mobile ten-year-anniversary hidden-desktop" href="https://welcome.astrobin.com/celebrating-10-years-of-astrobin"
+       target="_blank">
+        🎉
+    </a>
+{% else %}
+    <a class="brand hidden-phone hidden-tablet" href="{% url 'index' %}">
+        <img src="{% static 'astrobin/images/astrobin-logo-small.png' %}" alt="AstroBin" />
+    </a>
+
+    <a class="brand-mobile hidden-desktop" href="{% url 'index' %}">
+        <img src="{% static 'astrobin/images/astrobin-logo-small.png' %}" alt="AstroBin" />
+    </a>
+{% endif %}
 
 <div class="site-nav nav-collapse collapse pull-left">
     <ul class="nav">
@@ -26,7 +40,7 @@
         {% if request.user|is_content_moderator %}
         <li class="dropdown moderate-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                {% trans "Moderate" %}
+                <i class="icon-legal"></i>
                 {% if images_pending_moderation_no > 0 %}
                     <div class="badge badge-warning">
                         !
@@ -64,7 +78,7 @@
 
                 {% if request.user|is_iotd_submitter %}
                     <li>
-                        <a href="{% url 'iotd_submission_queue' %}">
+                        <a href="{% app_redirection_service request '/iotd/submission-queue' %}">
                             <i class="icon-upload"></i>
                             {% trans "Submission queue" %}
                         </a>
@@ -73,7 +87,7 @@
 
                 {% if request.user|is_iotd_reviewer %}
                     <li>
-                        <a href="{% url 'iotd_review_queue' %}">
+                        <a href="{% app_redirection_service request '/iotd/review-queue' %}">
                             <i class="icon-star"></i>
                             {% trans "Review queue" %}
                         </a>
@@ -106,7 +120,7 @@
             </ul>
         </li>
 
-        <li class="dropdown explore-menu {% current request "^/explore/|^/search/|^/stats/|^/trending-astrophotographers/" %}">
+        <li class="dropdown explore-menu {% current request "^/explore/|^/search/|^/stats/|^/astrophotographers-list/" %}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 {% trans "Explore" %}
                 <i class="icon-caret-down"></i>
@@ -119,8 +133,21 @@
                     </a>
                 </li>
 
+                <li class="explore-menu-constellations">
+                    <a href="{% app_redirection_service request '/explore/constellations' %}">
+                        <i class="icon-star"></i>
+                        {% trans "Constellations" %}
+                    </a>
+                </li>
+
                 <li class="divider"></li>
-                <li class="exlore-menu-top-picks">
+                <li class="explore-menu-top-pick-nominations">
+                    <a href="{% url 'top_pick_nominations' %}">
+                        <i class="icon-arrow-up"></i>
+                        {% trans "Top pick nominations" %}
+                    </a>
+                </li>
+                <li class="explore-menu-top-picks">
                     <a href="{% url 'top_picks' %}">
                         <i class="icon-star"></i>
                         {% trans "Top picks" %}
@@ -142,8 +169,6 @@
                     </a>
                 </li>
 
-                <li class="divider"></li>
-
                 <li class="explore-menu-remote-astrophotography">
                     <a href="https://welcome.astrobin.com/remote-astrophotography">
                         <i class="icon-laptop"></i>
@@ -151,12 +176,24 @@
                     </a>
                 </li>
 
-                <li class="explore-menu-trending-astrophotographers">
-                    <a href="{% url 'trending_astrophotographers' %}">
-                        <i class="icon-list-ol"></i>
-                        {% trans "Trending astrophotographers" %}
-                    </a>
-                </li>
+                {% show_competitive_feature request.user None as show_competitive_feature %}
+                {% if show_competitive_feature or request.user.is_superuser %}
+                    <li class="divider"></li>
+
+                    <li class="explore-menu-astrophotographers-list">
+                        <a href="{% url 'astrophotographers_list' %}">
+                            <i class="icon-star-empty"></i>
+                            {% trans "Astrophotographers list" %}
+                        </a>
+                    </li>
+
+                    <li class="explore-menu-contributors-list">
+                        <a href="{% url 'contributors_list' %}">
+                            <i class="icon-file-text"></i>
+                            {% trans "Contributors list" %} {% trans "(beta)" %}
+                        </a>
+                    </li>
+                {% endif %}
 
                 {% if request.user.is_superuser %}
                     <li class="divider"></li>
@@ -195,7 +232,7 @@
                 <li>
                     <a href="{% url 'api' %}">
                         <i class="icon-key"></i>
-                        API (beta)
+                        API
                     </a>
                 </li>
                 <li>
@@ -208,7 +245,7 @@
                 <li class="divider"></li>
 
                 <li>
-                    <a href="/contact/">
+                    <a href="{% url 'contact' %}">
                         <i class="icon-envelope"></i>
                         {% trans "Contact" %}
                     </a>

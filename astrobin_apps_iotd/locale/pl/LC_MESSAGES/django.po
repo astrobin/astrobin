@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:22+0000\n"
+"POT-Creation-Date: 2021-04-09 14:06+0000\n"
 "PO-Revision-Date: 2020-05-18 11:06+0000\n"
 "Last-Translator: Milosz Wasilewski <milosz.wasilewski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +20,12 @@ msgstr ""
 "X-Generator: Pootle 2.8\n"
 "X-POOTLE-MTIME: 1589799990.000000\n"
 
+msgid "Sorry, it's now too late to retract this submission."
+msgstr ""
+
+msgid "Sorry, it's now too late to retract this vote."
+msgstr ""
+
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "Nie jesteś członkiem zespołu wybierającego IOTD"
 
@@ -31,6 +37,9 @@ msgstr "Zdjęcia ze strefy oczekującej nie mogą być zgłoszone."
 
 msgid "This user has chosen to be excluded from competitions."
 msgstr "Ten użytkownik został wyłączony z ubiegania się o IOTD"
+
+msgid "This user has been banned from competitions."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -124,25 +133,20 @@ msgstr "Nie możesz odznaczyć zdjęcia wybranego przez innego jurora."
 msgid "You cannot unelect a past or current IOTD."
 msgstr "Nie możesz odznaczyć bieżącego lub poprzednich zdjęć IOTD"
 
-msgid "Submit for IOTD"
-msgstr "Wyślij jako IOTD"
-
-msgid ""
-"You will submit this image to the IOTD Submissions Queue. From there, a "
-"member of the IOTD Reviewers Board will consider promoting it for final "
-"evaluation from an IOTD Judge"
+#, python-format
+msgid "you already selected %s IOTD today (UTC)"
 msgstr ""
-"Wyślesz to zdjęcie do kolejki. Tam członek wybierający IOTD rozważy "
-"przesłanie go do finałowej oceny i wyboru IOTD"
 
-msgid "Submit"
-msgstr "Wyślij"
+#, python-format
+msgid "you already selected %s scheduled IOTDs"
+msgstr ""
+
+#, python-format
+msgid "there are already %s scheduled IOTDs"
+msgstr ""
 
 msgid "Image of the day"
 msgstr "Zdjęcie dnia"
-
-msgid "by"
-msgstr "od"
 
 msgid "IOTD Judgement Queue"
 msgstr "Kolejka pretendentów do IOTD"
@@ -153,36 +157,17 @@ msgstr ""
 "Proszę wybrać zdjęcia które chcesz oznaczyć jako kandydatów do IOTD poprzez "
 "kliknięcie w nie."
 
+#, python-format
+msgid ""
+"Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
+"<strong>%(time)s</strong>."
+msgstr ""
+
 msgid "This queue is currently empty."
 msgstr "Ta kolejka jest obecnie pusta."
 
-msgid "Reviewers"
-msgstr "Recenzenci"
-
-msgid "Loading"
-msgstr "Ładowanie"
-
 msgid "Error"
 msgstr "Błąd"
-
-msgid "IOTD Review Queue"
-msgstr "Kolejka pretendentów do IOTD"
-
-msgid ""
-"Please select the images that you want to promote for final judgement by "
-"clicking on them."
-msgstr "Proszę zaznaczyć zdjęcia do finalnej oceny przez kliknięcie w nie."
-
-msgid "Submitters"
-msgstr "Wysyłający"
-
-msgid "IOTD Submission Queue"
-msgstr "Kolejka zdjęć zgłoszonych do przeglądu w ramach IOTD"
-
-msgid ""
-"Please select the images that you want to propose for IOTD consideration."
-msgstr ""
-"Wybierz zdjęcia które proponujesz do wyboru jako IOTD przez kliknięcie w nie."
 
 msgid "You cannot unelect an IOTD elected by another judge."
 msgstr "Nie możesz odznaczyć zdjęcia wybranego przez innego jurora."
@@ -192,15 +177,3 @@ msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr ""
 "Wszystkie miejsca do następnego wyboru IOTD na następne %(days)s dni są już "
 "zapełnione"
-
-#~ msgid "You cannot submit a judge's image."
-#~ msgstr "Nie możesz zgłosić zdjęcia innego oceniającego."
-
-#~ msgid "You cannot vote for a judge's image."
-#~ msgstr "Nie możesz głosować na zdjęcie innego oceniającego."
-
-#~ msgid "You cannot elect a judge's image."
-#~ msgstr "Nie możesz wybrać zdjęcia innego jurora."
-
-#~ msgid "No images uploaded on this day."
-#~ msgstr "Żadne zdjęcia nie zostały dzisiaj dodane."

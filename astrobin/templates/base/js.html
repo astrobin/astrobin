@@ -1,5 +1,7 @@
 {% load i18n %}
 {% load static %}
+{% load cache %}
+{% load astrobin_apps_premium_tags %}
 
 <!-- javascript -->
 <script type="text/javascript">
@@ -30,6 +32,34 @@
       return rv;
     }
 
+    {% if request.user.is_authenticated %}
+        {% cache 600 hotjar_identify user.id request.LANGUAGE_CODE %}
+            function initHotjarIdentify() {
+                if (window.hj !== undefined) {
+                    var userId = "{{ request.user.id }}";
+
+                    window.hj("identify", userId, {
+                        "Registration date": new Date("{{ request.user.date_joined|date:"Y-m-d" }}").toISOString(),
+                        "Language": "{{ request.LANGUAGE_CODE }}",
+                        "Country": "{{ REQUEST_COUNTRY }}",
+                        "Images": {{ request.user.image_set.count }},
+                        "Is Free": "{{ request.user|is_free }}" === "True",
+                        "Is Lite": "{{ request.user|is_any_lite }}" === "True",
+                        "Is Premium": "{{ request.user|is_any_premium }}" === "True",
+                        "Is Ultimate": "{{ request.user|is_any_ultimate }}" === "True",
+
+                    });
+                } else {
+                    setTimeout(function() {
+                        initHotjarIdentify();
+                    }, 500);
+                }
+            }
+        {% endcache %}
+
+        initHotjarIdentify();
+    {% endif %}
+
     var dictionary = {
         'Cancel': '{% trans "Cancel" %}'
     };
@@ -44,7 +74,22 @@
 
 
     $(document).ready(function() {
-        astrobin_common.init();
+        astrobin_common.init({
+            timezone:
+                {% if request.user.is_authenticated and request.user.userprofile.timezone %}
+                    '{{ request.user.userprofile.timezone }}'
+                {% else %}
+                    null
+                {% endif %}
+        });
+
+        {% if request.user.is_authenticated %}
+            astrobin_common.register_notification_on_click({
+                open_notifications_in_new_tab: "{{ request.user.userprofile.open_notifications_in_new_tab }}" === "True"
+            });
+        {% endif %}
+
+        astrobin_common.setup_user_popovers();
 
         $('input:checkbox, input:radio, input:file').uniform(
             {fileDefaultText: '{% trans "No file selected" %}',

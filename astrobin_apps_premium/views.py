@@ -60,7 +60,7 @@ class MigrateDonationsView(FormView):
                 amount += t.amount
 
             if amount > 0:
-                days_paid = int(float(amount) / float(premium_sub.price) * 365.25)
+                days_paid = int(float(amount) / float(premium_sub.price) * 365.2425)
                 expiration = (first_payment + timedelta(days_paid)).date()
 
             if us is not None and us.active and us.expires >= date.today():

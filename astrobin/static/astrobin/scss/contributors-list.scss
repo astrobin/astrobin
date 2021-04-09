@@ -1,0 +1,34 @@
+@import "variables";
+
+#contributors-list-page {
+  #contributors-list-search {
+    @media screen and (min-width: 768px) {
+      width: 300px;
+      float: right;
+      margin-bottom: 20px;
+    }
+  }
+
+  .contributors-list {
+    table-layout: initial;
+
+    colgroup {
+      .comments {
+        background-color: $grey-5;
+      }
+
+      .forum-posts {
+        background-color: $grey-8;
+      }
+    }
+
+    th {
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .contributors-list-position {
+      width: 25px;
+    }
+  }
+}

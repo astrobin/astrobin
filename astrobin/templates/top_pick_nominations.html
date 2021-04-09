@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+{% load django_bootstrap_breadcrumbs %}
+{% load astrobin_apps_iotd_tags %}
+{% load astrobin_apps_images_tags %}
+{% load astrobin_apps_users_tags %}
+{% load common_tags %}
+
+{% block title %}{% trans "Top pick nominations" %}{% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb_safe 'Explore' None %}
+    {% breadcrumb 'Top pick nominations' None %}
+{% endblock %}
+
+{% block container_extra_classes %}has-subnav{% endblock %}
+
+{% block content %}
+    {% include './_top_picks_subnav.html' %}
+    {% include "ads/full_width_wide_ad.html" %}
+
+    <div class="top-picks">
+        {% for object in object_list %}
+            <div class="top-picks-item">
+                {% astrobin_image object.image 'story' tooltip=False %}
+                <div class="overlay">
+                    <div class="inner">
+                        <div class="image-title">{{object.image.title|default:_("(no title)")}}</div>
+                        <div class="image-author">{% astrobin_username object.image.user %}</div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            {% trans "This list is currently empty." %}
+        {% endfor %}
+    </div>
+
+    {% include 'pagination_simple.html' %}
+{% endblock %}

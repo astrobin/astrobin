@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
-import sys
+import logging
 
 import pytz
 from django.conf import settings
@@ -10,13 +10,21 @@ from django.core.files.images import get_image_dimensions
 from django.db.models import Count
 from django.utils import timezone
 
+logger = logging.getLogger('apps')
 
-def unique_items(l):
-    found = []
-    for i in l:
-        if i not in found:
-            found.append(i)
-    return found
+def unique_items(list_with_possible_duplicates):
+    """
+    Given an initial list, returns a list but without duplicates
+    """
+    try:
+        return list(set(list_with_possible_duplicates))
+    except TypeError:
+        # We have a list which is not flat, use the old way to remove duplicates
+        found = []
+        for i in list_with_possible_duplicates:
+            if i not in found:
+                found.append(i)
+        return found
 
 
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -66,18 +74,16 @@ def to_user_timezone(date, profile):
     if date is None:
         return None
 
-    timezone = profile.timezone if profile.timezone else settings.TIME_ZONE
-    return date.replace(tzinfo=pytz.timezone(settings.TIME_ZONE)) \
-        .astimezone(pytz.timezone(timezone))
+    tz = profile.timezone if profile.timezone else settings.TIME_ZONE
+    return date.replace(tzinfo=pytz.timezone(settings.TIME_ZONE)).astimezone(pytz.timezone(tz))
 
 
 def to_system_timezone(date, profile):
     if date is None:
         return None
 
-    timezone = profile.timezone if profile.timezone else settings.TIME_ZONE
-    return date.replace(tzinfo=pytz.timezone(timezone)) \
-        .astimezone(pytz.timezone(settings.TIME_ZONE))
+    tz = profile.timezone if profile.timezone else settings.TIME_ZONE
+    return date.replace(tzinfo=pytz.timezone(tz)).astimezone(pytz.timezone(settings.TIME_ZONE))
 
 
 def now_timezone():
@@ -109,6 +115,38 @@ def get_client_country_code(request):
         return geoip2.country_code(get_client_ip(request))
     except:
         return "UNKNOWN"
+
+
+def get_european_union_country_codes():
+    return (
+        'at',
+        'be',
+        'bg',
+        'cy',
+        'cz',
+        'de',
+        'dk',
+        'ee',
+        'es',
+        'fi',
+        'fr',
+        'gr',
+        'hr',
+        'hu',
+        'ie',
+        'it',
+        'lt',
+        'lu',
+        'lv',
+        'mt',
+        'nl',
+        'po',
+        'pt',
+        'ro',
+        'se',
+        'si',
+        'sk',
+    )
 
 
 def inactive_accounts():
@@ -143,7 +181,8 @@ def never_activated_accounts():
     return User.objects.filter(
         is_active=False,
         date_joined__lt=two_weeks_ago,
-        userprofile__never_activated_account_reminder_sent=None
+        userprofile__never_activated_account_reminder_sent__isnull=True,
+        userprofile__deleted__isnull=True,
     )
 
 
@@ -154,8 +193,8 @@ def never_activated_accounts_to_be_deleted():
     return User.objects.filter(
         is_active=False,
         date_joined__lt=three_weeks_ago,
-    ).exclude(
-        userprofile__never_activated_account_reminder_sent=None
+        userprofile__never_activated_account_reminder_sent__isnull=False,
+        userprofile__deleted__isnull=True,
     )
 
 
@@ -183,8 +222,9 @@ def get_image_resolution(image):
         w, h = image.w, image.h
         if not (w and h):
             w, h = get_image_dimensions(image.image_file)
-    except TypeError:
+    except TypeError as e:
         # This might happen in unit tests
+        logger.warning("utils.get_image_resolution: unable to get image dimensions for %d: %s" % (image.pk, str(e)))
         w, h = 0, 0
 
     return w, h
@@ -227,7 +267,7 @@ def degrees_minutes_seconds_to_decimal_degrees(degrees, minutes, seconds, direct
     if degrees is None:
         degrees = 0
 
-    dd = float(degrees) + float(minutes) / 60 + float(seconds) / (60 * 60);
+    dd = float(degrees) + float(minutes) / 60 + float(seconds) / (60 * 60)
 
     if direction == 'E' or direction == 'N':
         dd *= -1

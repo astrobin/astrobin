@@ -1,5 +1,15 @@
 @import "variables";
 
+#global-alerts {
+  > .container {
+    margin-bottom: 0;
+
+    &:last-child {
+      margin-bottom: 12px;
+    }
+  }
+}
+
 .alert {
   form {
     margin-bottom: $spacer-small;
@@ -11,6 +21,11 @@
 
   h4 {
     margin-bottom: 12px;
+  }
+
+  ul,
+  ol {
+    list-style: initial;
   }
 
   strong {
@@ -39,8 +54,24 @@
   margin: 0 0 12px 0;
 }
 
-.alert-info strong {
-  color: $background-color;
+.alert-info {
+  background-color: $grey-8;
+  color: $text-color;
+  border-color: $grey-9;
+  text-shadow: none;
+
+  h3, h4 {
+    color: $white;
+  }
+
+  strong {
+    color: $white;
+  }
+
+  .close {
+    color: $white;
+    text-shadow: none;
+  }
 }
 
 .alert-error,
@@ -65,9 +96,19 @@
   padding-top: 20px;
   padding-bottom: 20px;
 
-  a {
+  a:not(.btn) {
     font-weight: bold;
     text-decoration: underline;
     margin-left: $spacer-medium;
+  }
+
+  .btn {
+    margin-top: 1rem;
+  }
+}
+
+.extra-alerts {
+  .alert {
+    margin: 0 -30px 12px;
   }
 }

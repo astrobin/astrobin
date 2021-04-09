@@ -477,6 +477,11 @@ class Solution(models.Model):
                 Solver.ADVANCED_FAILED)):
             self.content_object.save(keep_deleted=True)
 
+    def delete(self, *args, **kwargs):
+        self._do_clear_basic()
+        self._do_clear_advanced()
+        super(Solution, self).delete(*args, **kwargs)
+
     def _do_clear_basic(self):
         self.status = Solver.MISSING
         self.submission_id = None

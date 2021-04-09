@@ -37,3 +37,11 @@ class TestTagEquipmentBrandListings(TestCase):
         telescope.equipment_brand_listings.add(listing)
 
         self.assertEquals(1, equipment_brand_listings(telescope, 'us').count())
+
+    def test_listing_country_is_none(self):
+        listing = EquipmentGenerators.equipment_brand_listing()
+
+        telescope = Generators.telescope()
+        telescope.equipment_brand_listings.add(listing)
+
+        self.assertEquals(0, equipment_brand_listings(telescope, None).count())

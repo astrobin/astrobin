@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+{% load astrobin_apps_users_tags %}
+{% load tags %}
+
+{% block title %}
+    {% blocktrans trimmed with user=requested_user.userprofile %}{{user}}'s friends{% endblocktrans %}
+{% endblock %}
+
+{% block container_extra_classes %}has-subnav{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Users' None %}
+    {% breadcrumb requested_user.userprofile.get_display_name 'user_page' requested_user.username %}
+    {% breadcrumb 'Friends' None %}
+{% endblock %}
+
+{% block content %}
+    {% include 'user/profile/navigation.html' %}
+
+    <div class="subtitle">
+        <i class="icon icon-info-sign"></i>
+        {% blocktrans trimmed with user=requested_user.userprofile %}
+            These are the users that follow {{ user }} mutually.
+        {% endblocktrans %}
+    </div>
+
+    {% astrobin_apps_users_list user_list %}
+{% endblock %}
+
+{% block extra_js %}
+    {% include 'user/profile/js.html' %}
+{% endblock %}
+

@@ -28,13 +28,12 @@ from django.template import loader, RequestContext
 from django.template.defaultfilters import filesizeformat
 from django.template.loader import render_to_string
 from django.utils.datastructures import MultiValueDictKeyError
-from django.utils.translation import ngettext as _n, get_language
+from django.utils.translation import ngettext as _n
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_POST
 from el_pagination.decorators import page_template
 from flickrapi.auth import FlickrAccessToken
-from haystack.exceptions import SearchFieldError
 from haystack.query import SearchQuerySet
 from silk.profiling.profiler import silk_profile
 
@@ -47,18 +46,18 @@ from astrobin.forms import ImageUploadForm, ImageLicenseForm, PrivateMessageForm
     MountEditForm, CameraEditForm, FocalReducerEditForm, SoftwareEditForm, FilterEditForm, AccessoryEditForm, \
     GearUserInfoForm, LocationEditForm, ImageEditWatermarkForm, DeepSky_AcquisitionForm, \
     UserProfileEditPreferencesForm, \
-    ImageRevisionUploadForm, UserProfileEditGearForm
+    ImageRevisionUploadForm, UserProfileEditGearForm, DeleteAccountForm
 from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import Image, UserProfile, Gear, Location, ImageRevision, DeepSky_Acquisition, \
     SolarSystem_Acquisition, GearUserInfo, Telescope, Mount, Camera, FocalReducer, Software, Filter, \
-    Accessory, GearHardMergeRedirect, GlobalStat, App, GearMakeAutoRename, Acquisition
-from astrobin.shortcuts import ajax_response, ajax_success, ajax_fail
+    Accessory, GlobalStat, App, GearMakeAutoRename, Acquisition
+from astrobin.shortcuts import ajax_response, ajax_success
 from astrobin.templatetags.tags import in_upload_wizard
 from astrobin.utils import to_user_timezone, get_client_country_code
 from astrobin_apps_images.services import ImageService
-from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
-from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution, PlateSolvingAdvancedSettings
+from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
+from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_restore_from_trash, \
     can_perform_advanced_platesolving
 from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, premium_get_max_allowed_revisions, \
@@ -276,33 +275,41 @@ def upload_error(request, image=None, errors=None):
 
     messages.error(request, message)
 
-    if image is not None:
-        return HttpResponseRedirect(image.get_absolute_url())
+    log.warning("Upload error (%d): %s" % (request.user.pk, message))
 
-    return HttpResponseRedirect('/upload/')
+    if image is not None:
+        url = image.get_absolute_url()
+    else:
+        url = '/upload/?forceClassicUploader'
+
+    return HttpResponseRedirect(url)
 
 
 def upload_size_error(request, max_size, image=None):
-    subscriptions_url = reverse('subscription_list')
-    open_link = "<a href=\"%s\">" % subscriptions_url
+    subscriptions_url = "https://welcome.astrobin.com/pricing"
+    open_link = "<a href=\"%s\" target=\"blank\">" % subscriptions_url
     close_link = "</a>"
-    msg = "Sorry, but this image is too large. Under your current subscription plan, the maximum allowed image size is %(max_size)s. %(open_link)sWould you like to upgrade?%(close_link)s"
-
-    messages.error(request, _(msg) % {
+    msg = "Sorry, but this image is too large. Under your current subscription plan, the maximum allowed image size " \
+          "is %(max_size)s. %(open_link)sWould you like to upgrade?%(close_link)s"
+    compiled_msg = _(msg) % {
         "max_size": filesizeformat(max_size),
         "open_link": open_link,
         "close_link": close_link
-    })
+    }
+
+    messages.error(request, compiled_msg)
+
+    log.warning("Upload error (%d): %s" % (request.user.pk, compiled_msg))
 
     if image is not None:
         return HttpResponseRedirect(image.get_absolute_url())
 
-    return HttpResponseRedirect('/upload/')
+    return HttpResponseRedirect('/upload/?forceClassicUploader')
 
 
 def upload_max_revisions_error(request, max_revisions, image):
-    subscriptions_url = reverse('subscription_list')
-    open_link = "<a href=\"%s\">" % subscriptions_url
+    subscriptions_url = "https://welcome.astrobin.com/pricing"
+    open_link = "<a href=\"%s\" target=\"_blank\">" % subscriptions_url
     close_link = "</a>"
     msg_singular = "Sorry, but you have reached the maximum amount of allowed image revisions. Under your current subscription, the limit is %(max_revisions)s revision per image. %(open_link)sWould you like to upgrade?%(close_link)s"
     msg_plural = "Sorry, but you have reached the maximum amount of allowed image revisions. Under your current subscription, the limit is %(max_revisions)s revisions per image. %(open_link)sWould you like to upgrade?%(close_link)s"
@@ -318,6 +325,7 @@ def upload_max_revisions_error(request, max_revisions, image):
 
 # VIEWS
 
+@never_cache
 @page_template('index/stream_page.html', key='stream_page')
 @page_template('index/recent_images_page.html', key='recent_images_page')
 @silk_profile('Index')
@@ -333,9 +341,8 @@ def index(request, template='index/root.html', extra_context=None):
     user_ct = ContentType.objects.get_for_model(User)
 
     recent_images = Image.objects \
-        .exclude(title=None) \
-        .exclude(title='') \
-        .filter(moderator_decision=1)
+        .filter(Q(~Q(title=None) & ~Q(title='') & Q(moderator_decision=1) & Q(published__isnull=False))) \
+        .order_by('-published')
 
     response_dict = {
         'recent_images': recent_images,
@@ -474,6 +481,7 @@ def index(request, template='index/root.html', extra_context=None):
     return render(request, template, response_dict)
 
 
+@never_cache
 @login_required
 def image_upload(request):
     if not settings.TESTING and "forceClassicUploader" not in request.GET:
@@ -505,6 +513,7 @@ def image_upload(request):
     return render(request, "upload.html", response_dict)
 
 
+@never_cache
 @login_required
 @require_POST
 def image_upload_process(request):
@@ -512,15 +521,17 @@ def image_upload_process(request):
 
     from astrobin_apps_premium.utils import premium_used_percent
 
+    log.info("Classic uploader (%d): submitted" % request.user.pk)
+
     used_percent = premium_used_percent(request.user)
     if used_percent >= 100:
         messages.error(request, _("You have reached your image count limit. Please upgrade!"))
-        return HttpResponseRedirect('/upload/')
+        return HttpResponseRedirect('/upload/?forceClassicUploader')
 
     if settings.READONLY_MODE:
         messages.error(request, _(
             "AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"))
-        return HttpResponseRedirect('/upload/')
+        return HttpResponseRedirect('/upload/?forceClassicUploader')
 
     if 'image_file' not in request.FILES:
         return upload_error(request)
@@ -548,9 +559,12 @@ def image_upload_process(request):
             image_file.file.seek(0)  # Because we opened it with PIL
 
             if ext == '.png' and trial_image.mode == 'I':
-                messages.warning(request, _(
-                    "You uploaded an Indexed PNG file. AstroBin will need to lower the color count to 256 in order to work with it."))
-        except:
+                indexed_png_error = "You uploaded an Indexed PNG file. AstroBin will need to lower the color count " \
+                                    "to 256 in order to work with it."
+                messages.warning(request, _(indexed_png_error))
+                log.warning("Upload error (%d): %s" % (request.user.pk, indexed_png_error))
+        except Exception as e:
+            log.warning("Upload error (%d): %s" % (request.user.pk, e.message))
             return upload_error(request)
 
     profile = request.user.userprofile
@@ -563,12 +577,10 @@ def image_upload_process(request):
 
     image.save(keep_deleted=True)
 
-    from astrobin.tasks import retrieve_primary_thumbnails
-    retrieve_primary_thumbnails.delay(image.pk, {'revision_label': '0'})
-
     return HttpResponseRedirect(reverse('image_edit_thumbnails', kwargs={'id': image.get_id()}))
 
 
+@never_cache
 @login_required
 @require_GET
 def image_edit_watermark(request, id):
@@ -595,6 +607,7 @@ def image_edit_watermark(request, id):
     })
 
 
+@never_cache
 @login_required
 @require_GET
 def image_edit_acquisition(request, id):
@@ -657,6 +670,7 @@ def image_edit_acquisition(request, id):
     return render(request, 'image/edit/acquisition.html', response_dict)
 
 
+@never_cache
 @login_required
 @require_GET
 def image_edit_acquisition_reset(request, id):
@@ -674,6 +688,7 @@ def image_edit_acquisition_reset(request, id):
     return render(request, 'image/edit/acquisition.html', response_dict)
 
 
+@never_cache
 @login_required
 @require_GET
 def image_edit_make_final(request, id):
@@ -691,6 +706,7 @@ def image_edit_make_final(request, id):
     return HttpResponseRedirect(image.get_absolute_url())
 
 
+@never_cache
 @login_required
 @require_GET
 def image_edit_revision_make_final(request, id):
@@ -726,6 +742,7 @@ def image_edit_license(request, id):
     })
 
 
+@never_cache
 @login_required
 def image_edit_platesolving_settings(request, id, revision_label):
     image = get_image_or_404(Image.objects_including_wip, id)
@@ -785,6 +802,7 @@ def image_edit_platesolving_settings(request, id, revision_label):
         return HttpResponseRedirect(return_url)
 
 
+@never_cache
 @login_required
 def image_edit_platesolving_advanced_settings(request, id, revision_label):
     image = get_image_or_404(Image.objects_including_wip, id)
@@ -800,17 +818,20 @@ def image_edit_platesolving_advanced_settings(request, id, revision_label):
         solution, created = Solution.objects.get_or_create(
             content_type=ContentType.objects.get_for_model(Image),
             object_id=image.pk)
+        advanced_settings = solution.advanced_settings
+        if advanced_settings is None:
+            solution.advanced_settings, created = SolutionService.get_or_create_advanced_settings(image)
+            solution.save()
     else:
         return_url = reverse('image_detail', args=(image.get_id(), revision_label,))
         revision = ImageRevision.objects.get(image=image, label=revision_label)
         solution, created = Solution.objects.get_or_create(
             content_type=ContentType.objects.get_for_model(ImageRevision),
             object_id=revision.pk)
-
-    advanced_settings = solution.advanced_settings
-    if advanced_settings is None:
-        solution.advanced_settings = PlateSolvingAdvancedSettings.objects.create()
-        solution.save()
+        advanced_settings = solution.advanced_settings
+        if advanced_settings is None:
+            solution.advanced_settings, created = SolutionService.get_or_create_advanced_settings(revision)
+            solution.save()
 
     if request.method == 'GET':
         form = PlateSolvingAdvancedSettingsForm(instance=advanced_settings)
@@ -869,6 +890,7 @@ def image_restart_platesolving(request, id, revision_label):
     return HttpResponseRedirect(return_url)
 
 
+@never_cache
 @login_required
 def image_restart_advanced_platesolving(request, id, revision_label):
     image = get_image_or_404(Image.objects_including_wip, id)
@@ -895,6 +917,7 @@ def image_restart_advanced_platesolving(request, id, revision_label):
     return HttpResponseRedirect(return_url)
 
 
+@never_cache
 @login_required
 @require_POST
 def image_edit_save_watermark(request):
@@ -937,6 +960,7 @@ def image_edit_save_watermark(request):
     return HttpResponseRedirect(image.get_absolute_url())
 
 
+@never_cache
 @login_required
 @require_POST
 def image_edit_save_acquisition(request):
@@ -1019,6 +1043,7 @@ def image_edit_save_acquisition(request):
     return HttpResponseRedirect(image.get_absolute_url())
 
 
+@never_cache
 @login_required
 @require_POST
 def image_edit_save_license(request):
@@ -1046,19 +1071,25 @@ def image_edit_save_license(request):
     return HttpResponseRedirect(image.get_absolute_url())
 
 
+@never_cache
 @login_required
 @require_GET
 def me(request):
-    return HttpResponseRedirect(
-        '/users/%s/%s' % (request.user.username, '?staging' if 'staging' in request.GET else ''))
+    return HttpResponseRedirect('/users/%s/?%s' % (request.user.username, request.META['QUERY_STRING']))
 
 
+@never_cache
 @require_GET
 @silk_profile('User page')
 def user_page(request, username):
-    user = get_object_or_404(
-        User.objects.select_related('userprofile').prefetch_related('groups'),
-        username=username)
+    try:
+        user = UserService.get_case_insensitive(username)
+    except User.DoesNotExist:
+        raise Http404
+
+    if user.username != username:
+        return HttpResponseRedirect(reverse('user_page', args=(user.username,)))
+
     profile = user.userprofile
 
     if profile.deleted:
@@ -1103,6 +1134,7 @@ def user_page(request, username):
         qs = UserService(user).get_public_images()
     wip_qs = UserService(user).get_wip_images()
     corrupted_qs = UserService(user).get_corrupted_images()
+    recovered_qs = UserService(user).get_recovered_images()
 
     if request.user != user:
         qs = qs \
@@ -1126,6 +1158,12 @@ def user_page(request, username):
             return HttpResponseForbidden()
         qs = corrupted_qs
         section = 'corrupted'
+        subsection = None
+    elif 'recovered' in request.GET:
+        if request.user != user and not request.user.is_superuser:
+            return HttpResponseForbidden()
+        qs = recovered_qs
+        section = 'recovered'
         subsection = None
     else:
         #########
@@ -1291,7 +1329,6 @@ def user_page(request, username):
 
     # Calculate some stats
     from django.template.defaultfilters import timesince
-    from pybb.models import Post
 
     date_time = user.date_joined.replace(tzinfo=None)
     span = timesince(date_time)
@@ -1311,35 +1348,34 @@ def user_page(request, username):
         user=user,
         content_type=user_ct).count()
 
-    key = "User.%d.Stats" % user.pk
+    key = "User.%d.Stats.%s" % (user.pk, getattr(request, 'LANGUAGE_CODE', 'en'))
     data = cache.get(key)
     if data is None:
-        sqs = SearchQuerySet()
-        sqs = sqs.filter(username=user.username).models(Image)
-        sqs = sqs.order_by('-uploaded')
-
+        user_sqs = SearchQuerySet().models(User).filter(django_id=user.pk)
         data = {}
-        try:
-            data['images'] = len(sqs)
-            integrated_images = len(sqs.filter(integration__gt=0))
-            data['integration'] = sum([x.integration for x in sqs]) / 3600.0
-            data['avg_integration'] = (data['integration'] / integrated_images) if integrated_images > 0 else 0
-        except SearchFieldError:
-            data['images'] = 0
-            data['integration'] = 0
-            data['avg_integration'] = 0
 
-        cache.set(key, data, 84600)
+        if user_sqs.count():
+            try:
+                data['stats'] = (
+                    (_('Member since'), member_since),
+                    (_('Last login'), last_login),
+                    (_('Total integration time'),
+                     "%.1f %s" % (user_sqs[0].integration, _("hours")) if user_sqs[0].integration else None),
+                    (_('Average integration time'),
+                     "%.1f %s" % (user_sqs[0].avg_integration, _("hours")) if user_sqs[0].avg_integration else None),
+                    (_('Forum posts'), "%d" % user_sqs[0].forum_posts if user_sqs[0].forum_posts else 0),
+                    (_('Comments'), "%d" % user_sqs[0].comments if user_sqs[0].comments else 0),
+                    (_('Likes'), "%d" % user_sqs[0].total_likes_received if user_sqs[0].total_likes_received else 0),
+                )
+            except Exception as e:
+                log.error("User page (%d): unable to get stats from search index: %s" % (user.pk, e.message))
 
-    stats = (
-        (_('Member since'), member_since),
-        (_('Last login'), last_login),
-        (_('Total integration time'), "%.1f %s" % (data['integration'], _("hours"))),
-        (_('Average integration time'), "%.1f %s" % (data['avg_integration'], _("hours"))),
-        (_('Forum posts'), "%d" % Post.objects.filter(user=user).count()),
-    )
+            cache.set(key, data, 300)
+        else:
+            log.error("User page (%d): unable to get user's SearchQuerySet" % user.pk)
 
     response_dict = {
+        'paginate_by': settings.PAGINATE_USER_PAGE_BY,
         'followers': followers,
         'following': following,
         'image_list': qs,
@@ -1352,12 +1388,18 @@ def user_page(request, username):
         'subsection': subsection,
         'active': active,
         'menu': menu,
-        'stats': stats,
-        'images_no': data['images'],
+        'stats': data['stats'] if 'stats' in data else None,
         'alias': 'gallery',
-        'has_corrupted_images': Image.objects_including_wip.filter(
-            corrupted=True, user=user).count() > 0,
+        'corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user),
     }
+
+    try:
+        response_dict['mobile_header_background'] = \
+            UserService(user).get_public_images().first().thumbnail('regular', None, sync=True) \
+                if UserService(user).get_public_images().exists() \
+                else None
+    except IOError:
+        response_dict['mobile_header_background'] = None
 
     response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
 
@@ -1368,12 +1410,16 @@ def user_page(request, username):
     return render(request, template_name, response_dict)
 
 
+@never_cache
 @user_passes_test(lambda u: u.is_superuser)
 def user_ban(request, username):
     user = get_object_or_404(UserProfile, user__username=username).user
 
     if request.method == 'POST':
+        user.userprofile.deleted_reason = UserProfile.DELETE_REASON_BANNED
+        user.userprofile.save(keep_deleted=True)
         user.userprofile.delete()
+        log.info("User (%d) was banned" % user.pk)
 
     return render(request, 'user/ban.html', {
         'user': user,
@@ -1381,6 +1427,7 @@ def user_ban(request, username):
     })
 
 
+@never_cache
 @require_GET
 def user_page_bookmarks(request, username):
     user = get_object_or_404(UserProfile, user__username=username).user
@@ -1392,6 +1439,7 @@ def user_page_bookmarks(request, username):
     response_dict = {
         'requested_user': user,
         'image_list': UserService(user).get_bookmarked_images(),
+        'paginate_by': settings.PAGINATE_USER_PAGE_BY,
         'private_message_form': PrivateMessageForm(),
         'alias': 'gallery',
     }
@@ -1401,6 +1449,7 @@ def user_page_bookmarks(request, username):
     return render(request, template_name, response_dict)
 
 
+@never_cache
 @require_GET
 def user_page_liked(request, username):
     user = get_object_or_404(UserProfile, user__username=username).user
@@ -1412,6 +1461,7 @@ def user_page_liked(request, username):
     response_dict = {
         'requested_user': user,
         'image_list': UserService(user).get_liked_images(),
+        'paginate_by': settings.PAGINATE_USER_PAGE_BY,
         'private_message_form': PrivateMessageForm(),
         'alias': 'gallery',
     }
@@ -1421,6 +1471,7 @@ def user_page_liked(request, username):
     return render(request, template_name, response_dict)
 
 
+@never_cache
 @require_GET
 @page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key='users_page')
 def user_page_following(request, username, extra_context=None):
@@ -1438,6 +1489,8 @@ def user_page_following(request, username, extra_context=None):
             followed_users.append(user_ct.get_object_for_this_type(pk=p.object_id))
         except User.DoesNotExist:
             pass
+
+    followed_users.sort(key=lambda x: x.username)
 
     template_name = 'user/following.html'
     if request.is_ajax():
@@ -1457,6 +1510,7 @@ def user_page_following(request, username, extra_context=None):
     return render(request, template_name, response_dict)
 
 
+@never_cache
 @require_GET
 @page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key='users_page')
 def user_page_followers(request, username, extra_context=None):
@@ -1470,6 +1524,8 @@ def user_page_followers(request, username, extra_context=None):
             object_id=user.pk,
             content_type=user_ct)
     ]
+
+    followers.sort(key=lambda x: x.username)
 
     template_name = 'user/followers.html'
     if request.is_ajax():
@@ -1490,6 +1546,50 @@ def user_page_followers(request, username, extra_context=None):
 
 
 @require_GET
+@page_template('astrobin_apps_users/inclusion_tags/user_list_entries.html', key='users_page')
+def user_page_friends(request, username, extra_context=None):
+    user = get_object_or_404(UserProfile, user__username=username).user
+
+    user_ct = ContentType.objects.get_for_model(User)
+    friends = []
+    followers = [
+        x.user for x in
+        ToggleProperty.objects.filter(
+            property_type="follow",
+            object_id=user.pk,
+            content_type=user_ct)
+    ]
+
+    for follower in followers:
+        if ToggleProperty.objects.filter(
+                property_type="follow",
+                user=user,
+                object_id=follower.pk,
+                content_type=user_ct).exists():
+            friends.append(follower)
+
+    friends.sort(key=lambda x: x.username)
+
+    template_name = 'user/friends.html'
+    if request.is_ajax():
+        template_name = 'astrobin_apps_users/inclusion_tags/user_list_entries.html'
+
+    response_dict = {
+        'request_user': UserProfile.objects.get(
+            user=request.user).user if request.user.is_authenticated() else None,
+        'requested_user': user,
+        'user_list': friends,
+        'view': request.GET.get('view', 'default'),
+        'private_message_form': PrivateMessageForm(),
+    }
+
+    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+
+    return render(request, template_name, response_dict)
+
+
+@never_cache
+@require_GET
 def user_page_plots(request, username):
     """Shows the user's public page"""
     user = get_object_or_404(UserProfile, user__username=username).user
@@ -1505,6 +1605,7 @@ def user_page_plots(request, username):
     return render(request, 'user/plots.html', response_dict)
 
 
+@never_cache
 @require_GET
 def user_page_api_keys(request, username):
     """Shows the user's API Keys"""
@@ -1526,6 +1627,7 @@ def user_page_api_keys(request, username):
     return render(request, 'user/api_keys.html', response_dict)
 
 
+@never_cache
 @require_GET
 def user_profile_stats_get_integration_hours_ajax(request, username, period='monthly', since=0):
     user = get_object_or_404(UserProfile, user__username=username).user
@@ -1541,6 +1643,7 @@ def user_profile_stats_get_integration_hours_ajax(request, username, period='mon
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def user_profile_stats_get_integration_hours_by_gear_ajax(request, username, period='monthly'):
     user = get_object_or_404(UserProfile, user__username=username).user
@@ -1555,6 +1658,7 @@ def user_profile_stats_get_integration_hours_by_gear_ajax(request, username, per
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def user_profile_stats_get_uploaded_images_ajax(request, username, period='monthly'):
     user = get_object_or_404(UserProfile, user__username=username).user
@@ -1585,6 +1689,7 @@ def user_profile_stats_get_views_ajax(request, username, period='monthly'):
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def stats_get_image_views_ajax(request, id, period='monthly'):
     import astrobin.stats as _s
@@ -1600,6 +1705,7 @@ def stats_get_image_views_ajax(request, id, period='monthly'):
     return ajax_response(response_dict)
 
 
+@never_cache
 @login_required
 @require_GET
 def user_profile_edit_basic(request):
@@ -1613,6 +1719,7 @@ def user_profile_edit_basic(request):
     return render(request, "user/profile/edit/basic.html", response_dict)
 
 
+@never_cache
 @login_required
 @require_POST
 def user_profile_save_basic(request):
@@ -1631,6 +1738,7 @@ def user_profile_save_basic(request):
     return HttpResponseRedirect("/profile/edit/basic/")
 
 
+@never_cache
 @login_required
 @require_GET
 def user_profile_edit_license(request):
@@ -1641,6 +1749,7 @@ def user_profile_edit_license(request):
     })
 
 
+@never_cache
 @login_required
 @require_POST
 def user_profile_save_license(request):
@@ -1658,6 +1767,7 @@ def user_profile_save_license(request):
     return HttpResponseRedirect('/profile/edit/license/')
 
 
+@never_cache
 @login_required
 @require_GET
 def user_profile_edit_gear(request):
@@ -1695,6 +1805,7 @@ def user_profile_edit_gear(request):
     return render(request, "user/profile/edit/gear.html", response_dict)
 
 
+@never_cache
 @login_required
 @require_POST
 def user_profile_edit_gear_remove(request, id):
@@ -1708,6 +1819,7 @@ def user_profile_edit_gear_remove(request, id):
     return ajax_success()
 
 
+@never_cache
 @login_required
 @require_GET
 def user_profile_edit_locations(request):
@@ -1721,6 +1833,7 @@ def user_profile_edit_locations(request):
     })
 
 
+@never_cache
 @login_required
 @require_POST
 def user_profile_save_locations(request):
@@ -1741,6 +1854,7 @@ def user_profile_save_locations(request):
     return HttpResponseRedirect('/profile/edit/locations/')
 
 
+@never_cache
 @login_required
 @require_POST
 def user_profile_save_gear(request):
@@ -1794,6 +1908,7 @@ def user_profile_save_gear(request):
     return HttpResponseRedirect("/profile/edit/gear/" + initial)
 
 
+@never_cache
 @login_required
 def user_profile_flickr_import(request):
     from django.core.files import File
@@ -1804,7 +1919,7 @@ def user_profile_flickr_import(request):
         'readonly': settings.READONLY_MODE
     }
 
-    log.debug("Flickr import (user %s): accessed view" % request.user.username)
+    log.debug("Flickr import (user %d): accessed view" % request.user.pk)
 
     if not request.user.is_superuser and is_free(request.user) or settings.READONLY_MODE:
         return render(request, "user/profile/flickr_import.html", response_dict)
@@ -1828,7 +1943,7 @@ def user_profile_flickr_import(request):
     if not flickr.token_valid(perms=u'read'):
         # We were never authenticated, or authentication expired. We need
         # to reauthenticate.
-        log.debug("Flickr import (user %s): token not valid" % request.user.username)
+        log.debug("Flickr import (user %d): token not valid" % request.user.pk)
         flickr.get_request_token(settings.BASE_URL + reverse('flickr_auth_callback'))
         authorize_url = flickr.auth_url(perms=u'read')
         request.session['request_token'] = flickr.flickr_oauth.resource_owner_key
@@ -1840,21 +1955,21 @@ def user_profile_flickr_import(request):
         # If we made it this far (it's a GET request), it means that we
         # are authenticated with flickr. Let's fetch the sets and send them to
         # the template.
-        log.debug("Flickr import (user %s): token valid, GET request, fetching sets" % request.user.username)
+        log.debug("Flickr import (user %d): token valid, GET request, fetching sets" % request.user.pk)
 
         # Does it have to be so insane to get the info on the
         # authenticated user?
         sets = flickr.photosets_getList().find('photosets').findall('photoset')
 
-        log.debug("Flickr import (user %s): token valid, fetched sets" % request.user.username)
+        log.debug("Flickr import (user %d): token valid, fetched sets" % request.user.pk)
         template_sets = {}
         for set in sets:
             template_sets[set.find('title').text] = set.attrib['id']
         response_dict['flickr_sets'] = template_sets
     else:
-        log.debug("Flickr import (user %s): token valid, POST request" % request.user.username)
+        log.debug("Flickr import (user %d): token valid, POST request" % request.user.pk)
         if 'id_flickr_set' in request.POST:
-            log.debug("Flickr import (user %s): set in POST request" % request.user.username)
+            log.debug("Flickr import (user %d): set in POST request" % request.user.pk)
             set_id = request.POST['id_flickr_set']
             urls_sq = {}
             for photo in flickr.walk_set(set_id, extras='url_sq'):
@@ -1865,7 +1980,7 @@ def user_profile_flickr_import(request):
             selected_photos = request.POST.getlist('flickr_selected_photos[]')
             # Starting the process of importing
             for index, photo_id in enumerate(selected_photos):
-                log.debug("Flickr import (user %s): iterating photo %s" % (request.user.username, photo_id))
+                log.debug("Flickr import (user %d): iterating photo %s" % (request.user.pk, photo_id))
                 sizes = flickr.photos_getSizes(photo_id=photo_id)
                 info = flickr.photos_getInfo(photo_id=photo_id).find('photo')
 
@@ -1899,7 +2014,7 @@ def user_profile_flickr_import(request):
                                   is_wip=True,
                                   license=profile.default_license)
                     image.save(keep_deleted=True)
-                    log.debug("Flickr import (user %s): saved image %d" % (request.user.username, image.pk))
+                    log.debug("Flickr import (user %d): saved image %d" % (request.user.pk, image.pk))
 
         log.debug("Flickr import (user %s): returning ajax response: %s" % (
             request.user.username, simplejson.dumps(response_dict)))
@@ -1908,8 +2023,9 @@ def user_profile_flickr_import(request):
     return render(request, "user/profile/flickr_import.html", response_dict)
 
 
+@never_cache
 def flickr_auth_callback(request):
-    log.debug("Flickr import (user %s): received auth callback" % request.user.username)
+    log.debug("Flickr import (user %d): received auth callback" % request.user.pk)
     flickr = flickrapi.FlickrAPI(
         settings.FLICKR_API_KEY, settings.FLICKR_SECRET,
         username=request.user.username)
@@ -1929,6 +2045,7 @@ def flickr_auth_callback(request):
     return HttpResponseRedirect("/profile/edit/flickr/")
 
 
+@never_cache
 @login_required
 @require_POST
 def user_profile_seen_realname(request):
@@ -1939,16 +2056,7 @@ def user_profile_seen_realname(request):
     return HttpResponseRedirect(request.POST.get('next', '/'))
 
 
-@login_required
-@require_POST
-def user_profile_seen_email_permissions(request):
-    profile = request.user.userprofile
-    profile.seen_email_permissions = True
-    profile.save(keep_deleted=True)
-
-    return HttpResponseRedirect(request.POST.get('next', '/'))
-
-
+@never_cache
 @login_required
 @require_POST
 def user_profile_shadow_ban(request):
@@ -1973,6 +2081,7 @@ def user_profile_shadow_ban(request):
     return HttpResponseRedirect(request.POST.get('next', '/'))
 
 
+@never_cache
 @login_required
 @require_POST
 def user_profile_remove_shadow_ban(request):
@@ -1997,12 +2106,16 @@ def user_profile_remove_shadow_ban(request):
     return HttpResponseRedirect(request.POST.get('next', '/'))
 
 
+@never_cache
 @login_required
 @require_GET
 def user_profile_edit_preferences(request):
     """Edits own preferences"""
     profile = request.user.userprofile
-    form = UserProfileEditPreferencesForm(instance=profile)
+    form = UserProfileEditPreferencesForm(
+        instance=profile,
+        initial={'other_languages': profile.other_languages.split(',') if profile.other_languages else []}
+    )
     response_dict = {
         'form': form,
     }
@@ -2029,7 +2142,10 @@ def user_profile_save_preferences(request):
             if hasattr(request, 'session'):
                 request.session['django_language'] = lang
 
-            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
+            response.set_cookie(
+                settings.LANGUAGE_COOKIE_NAME, lang,
+                max_age=settings.LANGUAGE_COOKIE_AGE
+            )
             activate(lang)
     else:
         return render(request, "user/profile/edit/preferences.html", response_dict)
@@ -2038,15 +2154,35 @@ def user_profile_save_preferences(request):
     return response
 
 
+@never_cache
 @login_required
 def user_profile_delete(request):
     if request.method == 'POST':
-        request.user.userprofile.delete()
-        auth.logout(request)
+        form = DeleteAccountForm(instance=request.user.userprofile, data=request.POST)
+        form.full_clean()
+        if form.is_valid():
+            request.user.userprofile.deleted_reason = form.cleaned_data.get('deleted_reason')
+            request.user.userprofile.deleted_reason_other = form.cleaned_data.get('deleted_reason_other')
+            request.user.userprofile.save(keep_deleted=True)
+            request.user.userprofile.delete()
 
-    return render(request, 'user/profile/delete.html', {})
+            log.info("User %s (%d) deleted their account with reason %s ('%s')" % (
+                request.user.username,
+                request.user.pk,
+                request.user.userprofile.deleted_reason,
+                request.user.userprofile.deleted_reason_other,
+            ))
+
+            auth.logout(request)
+
+            return render(request, 'user/profile/deleted.html', {})
+    elif request.method == 'GET':
+        form = DeleteAccountForm(instance=request.user.userprofile)
+
+    return render(request, 'user/profile/delete.html', {'form': form})
 
 
+@never_cache
 @login_required
 @require_POST
 def image_revision_upload_process(request):
@@ -2056,6 +2192,8 @@ def image_revision_upload_process(request):
         raise Http404
 
     image = get_image_or_404(Image.objects_including_wip, image_id)
+
+    log.info("Classic uploader (revision) (%d) (%d): submitted" % (request.user.pk, image.pk))
 
     if settings.READONLY_MODE:
         messages.error(request, _(
@@ -2105,6 +2243,7 @@ def image_revision_upload_process(request):
     return HttpResponseRedirect(reverse('image_edit_revision', args=(image_revision.pk,)))
 
 
+@never_cache
 @require_GET
 @user_passes_test(lambda u: u.is_superuser)
 def stats(request):
@@ -2139,47 +2278,139 @@ def stats(request):
     )
 
 
+@never_cache
 @require_GET
-def trending_astrophotographers(request):
-    response_dict = {}
-
-    if 'page' in request.GET:
-        raise Http404
+def astrophotographers_list(request):
+    if request.user.is_authenticated() and \
+            request.user.userprofile.exclude_from_competitions and \
+            not request.user.is_superuser:
+        return HttpResponseForbidden()
 
     sqs = SearchQuerySet()
 
-    sort = request.GET.get('sort', 'index')
-    if sort == 'index':
-        sort = '-normalized_likes'
-    elif sort == 'followers':
-        sort = '-followers'
-    elif sort == 'integration':
-        sort = '-integration'
-    elif sort == 'images':
-        sort = '-images'
-    else:
-        sort = '-normalized_likes'
+    default_sorting = [
+        '-normalized_likes',
+        '-likes',
+        '-images',
+    ]
 
-    t = request.GET.get('t', '1y')
-    if t not in ('', 'all', None):
-        sort += '_%s' % t
+    sort = request.GET.get('sort', default_sorting)
 
-    queryset = sqs.models(User).order_by(sort)
+    if sort in ('', 'default'):
+        sort = default_sorting
+
+    if sort not in (
+            default_sorting,
+
+            'normalized_likes',
+            'followers',
+            'images',
+            'likes',
+            'integration',
+
+            '-normalized_likes',
+            '-followers',
+            '-images',
+            '-likes',
+            '-integration',
+            '-top_pick_nominations',
+            '-top_picks',
+            '-iotds',
+
+            'normalized_likes',
+            'followers',
+            'images',
+            'likes',
+            'integration',
+            'top_pick_nominations',
+            'top_picks',
+            'iotds',
+    ):
+        raise Http404
+
+    if not isinstance(sort, list):
+        sort = [sort, ]
+
+    queryset = sqs.models(User).exclude(exclude_from_competitions=True).order_by(*sort)
+
+    if 'q' in request.GET:
+        queryset = queryset.filter(text__contains=request.GET.get('q'))
 
     return object_list(
         request,
         queryset=queryset,
-        template_name='trending_astrophotographers.html',
+        template_name='astrophotographers_list.html',
         template_object_name='user',
-        extra_context=response_dict,
+    )
+
+
+@never_cache
+@require_GET
+def contributors_list(request):
+    if request.user.is_authenticated() and \
+            request.user.userprofile.exclude_from_competitions and \
+            not request.user.is_superuser:
+        return HttpResponseForbidden()
+
+    queryset = SearchQuerySet()
+
+    default_sorting = [
+        # DEPRECATED: remove once contribution_index is populated
+        '-reputation',
+        '-comment_likes_received',
+        '-forum_post_likes_received',
+        '-comments_written',
+        '-forum_posts'
+    ]
+
+    sort = request.GET.get('sort', default_sorting)
+
+    if sort in ('', 'default'):
+        sort = default_sorting
+
+    if sort not in (
+            default_sorting,
+
+            'comments_written',
+            'comments',
+            'comment_likes_received',
+            'forum_posts',
+            'forum_post_likes_received',
+            # DEPRECATED: remove once contribution_index is populated
+            'reputation',
+
+            '-comments_written',
+            '-comments',
+            '-comment_likes_received',
+            '-forum_posts',
+            '-forum_post_likes_received',
+            # DEPRECATED: remove once contribution_index is populated
+            '-reputation'
+    ):
+        raise Http404
+
+    if not isinstance(sort, list):
+        sort = [sort, ]
+
+    queryset = queryset.models(User).exclude(exclude_from_competitions=True).order_by(*sort)
+
+    if 'q' in request.GET:
+        queryset = queryset.filter(text__contains=request.GET.get('q'))
+
+    return object_list(
+        request,
+        queryset=queryset,
+        template_name='contributors_list.html',
+        template_object_name='user',
     )
 
 
 @require_GET
 def api_help(request):
-    return render(request, 'api.html')
+    return HttpResponseRedirect('https://welcome.astrobin.com/application-programming-interface')
 
 
+@never_cache
 @login_required
 @require_GET
 def location_edit(request, id):
@@ -2192,35 +2423,45 @@ def location_edit(request, id):
     })
 
 
-@require_GET
 @never_cache
-def set_language(request, lang):
+@require_GET
+def set_language(request, language_code):
     from django.utils.translation import check_for_language, activate
 
     next = request.GET.get('next', None)
+
     if not next:
         next = request.META.get('HTTP_REFERER', None)
+
     if not next:
         next = '/'
+
     response = HttpResponseRedirect(next)
-    if lang and check_for_language(lang):
+
+    if language_code and check_for_language(language_code):
         if hasattr(request, 'session'):
-            request.session['django_language'] = lang
+            request.session['django_language'] = language_code
 
-        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, lang)
-        activate(lang)
+        response.set_cookie(
+            settings.LANGUAGE_COOKIE_NAME, language_code,
+            max_age=settings.LANGUAGE_COOKIE_AGE
+        )
+        activate(language_code)
 
-    if request.user.is_authenticated():
-        profile = request.user.userprofile
-        profile.language = lang
-        profile.save(keep_deleted=True)
+        if request.user.is_authenticated():
+            profile = request.user.userprofile
+            profile.language = language_code
+            profile.save(keep_deleted=True)
+    else:
+        messages.error(request, _("Sorry, AstroBin was unable to activate the requested language"))
+        log.error("set_language: unable to activate %s" % language_code)
 
     return response
 
 
+@never_cache
 @require_GET
 @login_required
-@never_cache
 def get_edit_gear_form(request, id):
     gear, gear_type = get_correct_gear(id)
     if not gear:
@@ -2252,6 +2493,7 @@ def get_edit_gear_form(request, id):
         content_type='application/javascript')
 
 
+@never_cache
 @require_GET
 @login_required
 def get_empty_edit_gear_form(request, gear_type):
@@ -2276,6 +2518,7 @@ def get_empty_edit_gear_form(request, gear_type):
         content_type='application/javascript')
 
 
+@never_cache
 @require_POST
 @login_required
 def save_gear_details(request):
@@ -2373,18 +2616,18 @@ def save_gear_details(request):
         content_type='application/javascript')
 
 
+@never_cache
 @require_GET
 @login_required
-@never_cache
 def get_is_gear_complete(request, id):
     return HttpResponse(
         simplejson.dumps({'complete': is_gear_complete(id)}),
         content_type='application/javascript')
 
 
+@never_cache
 @require_GET
 @login_required
-@never_cache
 def get_gear_user_info_form(request, id):
     gear = get_object_or_404(Gear, id=id)
     gear_user_info, created = GearUserInfo.objects.get_or_create(
@@ -2404,6 +2647,7 @@ def get_gear_user_info_form(request, id):
         content_type='application/javascript')
 
 
+@never_cache
 @require_POST
 @login_required
 def save_gear_user_info(request):
@@ -2427,8 +2671,8 @@ def save_gear_user_info(request):
     return ajax_success()
 
 
-@require_GET
 @never_cache
+@require_GET
 def gear_popover_ajax(request, id, image_id):
     gear, gear_type = get_correct_gear(id)
     image = get_object_or_404(Image.objects_including_wip, id=image_id)
@@ -2454,8 +2698,8 @@ def gear_popover_ajax(request, id, image_id):
         content_type='application/javascript')
 
 
-@require_GET
 @never_cache
+@require_GET
 def user_popover_ajax(request, username):
     profile = get_object_or_404(UserProfile, user__username=username)
     template = 'popover/user.html'
@@ -2489,6 +2733,7 @@ def user_popover_ajax(request, username):
         content_type='application/javascript')
 
 
+@never_cache
 @require_GET
 def stats_subject_images_monthly_ajax(request, id):
     import astrobin.stats as _s
@@ -2504,6 +2749,7 @@ def stats_subject_images_monthly_ajax(request, id):
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def stats_subject_integration_monthly_ajax(request, id):
     import astrobin.stats as _s
@@ -2519,6 +2765,7 @@ def stats_subject_integration_monthly_ajax(request, id):
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def stats_subject_total_images_ajax(request, id):
     import astrobin.stats as _s
@@ -2534,6 +2781,7 @@ def stats_subject_total_images_ajax(request, id):
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def stats_subject_camera_types_ajax(request, id):
     import astrobin.stats as _s
@@ -2549,6 +2797,7 @@ def stats_subject_camera_types_ajax(request, id):
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def stats_subject_telescope_types_ajax(request, id):
     import astrobin.stats as _s
@@ -2564,6 +2813,7 @@ def stats_subject_telescope_types_ajax(request, id):
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def stats_camera_types_trend_ajax(request):
     import astrobin.stats as _s
@@ -2578,6 +2828,7 @@ def stats_camera_types_trend_ajax(request):
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def stats_telescope_types_trend_ajax(request):
     import astrobin.stats as _s
@@ -2606,9 +2857,13 @@ def stats_subject_type_trend_ajax(request):
     return ajax_response(response_dict)
 
 
+@never_cache
 @require_GET
 def gear_by_image(request, image_id):
-    image = get_object_or_404(Image, pk=image_id)
+    image = get_object_or_404(Image.objects_including_wip, pk=image_id)
+
+    if image.user != request.user:
+        return HttpResponseForbidden()
 
     attrs = ('imaging_telescopes', 'guiding_telescopes', 'mounts',
              'imaging_cameras', 'guiding_cameras', 'focal_reducers',
@@ -2624,6 +2879,7 @@ def gear_by_image(request, image_id):
         content_type='application/javascript')
 
 
+@never_cache
 @require_GET
 def gear_by_make(request, make):
     klass = request.GET.get('klass', Gear)
@@ -2653,6 +2909,7 @@ def gear_by_make(request, make):
         content_type='application/javascript')
 
 
+@never_cache
 @require_GET
 def gear_by_ids(request, ids):
     filters = reduce(operator.or_, [Q(**{'id': x}) for x in ids.split(',')])
@@ -2662,6 +2919,7 @@ def gear_by_ids(request, ids):
         content_type='application/javascript')
 
 
+@never_cache
 @require_GET
 def get_makes_by_type(request, klass):
     ret = {
@@ -2696,6 +2954,7 @@ def gear_fix(request, id):
     # })
 
 
+@never_cache
 @require_POST
 @login_required
 def gear_fix_save(request):
@@ -2720,6 +2979,7 @@ def gear_fix_save(request):
     # return HttpResponseRedirect('/gear/fix/%d/' % next_gear.id)
 
 
+@never_cache
 @require_GET
 @login_required
 def gear_fix_thanks(request):

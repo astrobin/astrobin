@@ -2,6 +2,7 @@
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 LANGUAGE_COOKIE_NAME = 'astrobin_lang'
+LANGUAGE_COOKIE_AGE=60*60*24*365*10
 
 gettext = lambda s: s
 LANGUAGES = (
@@ -21,6 +22,7 @@ LANGUAGES = (
     ('ru', gettext('Russian')),
     ('ar', gettext('Arabic')),
     ('ja', gettext('Japanese')),
+    ('zh-hans', gettext('Chinese (Simplified)')),
 )
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.

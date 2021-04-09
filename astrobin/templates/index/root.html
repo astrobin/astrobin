@@ -34,14 +34,25 @@
                 <h2>
                     <i class="icon-trophy"></i>
                     {% trans "Image of the day" %}
+
+                    <a class="info" href="https://welcome.astrobin.com/iotd" target="_blank">
+                        <i class="icon-info-sign"></i>
+                    </a>
+
                     <span class="title">
-                        {{iotd.image.title|truncatechars:50}},
-                        {% astrobin_username iotd.image.user %}
+                        {{iotd.image.title|truncatechars:50}}
+                        <a href="{% url 'user_page' iotd.image.user %}">
+                            {{iotd.image.user.userprofile|truncatechars:50}}
+                        </a>
                     </span>
                 </h2>
             </div>
 
-            {% astrobin_image iotd.image 'iotd' %}
+            {% if request.user_agent.is_mobile %}
+                {% astrobin_image iotd.image 'iotd_mobile' %}
+            {% else %}
+                {% astrobin_image iotd.image 'iotd' %}
+            {% endif %}
         </div>
     {% endif %}
 
@@ -56,44 +67,53 @@
                 </div>
             </h4>
         </div>
-        {% pybb_get_latest_topics cnt=5 as topic_list %}
-        <table class="table table-striped topic-list index-recent-topics">
+
+        {% cache 120 home_page_latest_from_forums request.user.pk LANGUAGE_CODE %}
+            {% pybb_get_latest_topics cnt=6 as topic_list %}
+            <table class="table table-striped topic-list index-recent-topics">
             <tbody>
                 {% for topic in topic_list|pybb_topic_unread:request.user %}
                     <tr class="topic-row{% if topic.on_moderation %} on-moderation{% endif %}">
                         <td class="topic-state{% if topic.unread %} topic-unread{% endif %}">
                             <div class="state-indicator"></div>
                         </td>
-                        <td class="topic-forum hidden-phone">
-                            <a href="{{topic.forum.get_absolute_url}}">
-                                [{{topic.forum.name}}]
-                            </a>
-                        </td>
+
                         <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
-                            <a href="{{ topic.get_absolute_url }}?first-unread=1" class="first-unread-post-link">&#8680;</a>
-                            <a href="{{topic.get_absolute_url}}">{{topic.name|truncatewords:10}}</a>
-                            {% if topic.sticky %} &nbsp;[{% trans "Sticky" %}] {% endif %}
-                            {% if topic.closed %} &nbsp;[{% trans "Closed" %}] {% endif %}
+                            <a href="{{topic.get_absolute_url}}">{{topic.name|truncatechars:90}}</a>
+
+                            <br />
+
+                            <a href="{{ topic.forum.get_absolute_url }}">
+                                {{ topic.forum.name }}
+                            </a>
+                            &middot;
+                            <a href="{% url 'user_page' topic.user %}">{{ topic.user.userprofile.get_display_name|truncatechars:30 }}</a>
+                            &middot;
+                            {% pybb_time topic.created %}
+
                             {% with topic|pybb_topic_inline_pagination as pages %}
                                 {% if pages|length > 1 %}
-                                <span class="mini-pagination">
-                                    {% trans "pages" %}:
-                                    {% for page in pages %}
-                                    <span class="page">
-                                        {% if page == "..." %}
-                                        ...
-                                        {% else %}
-                                        <a href="{{ topic.get_absolute_url }}?page={{ page }}">{{ page }}</a>
-                                        {% endif %}
+                                    <span class="mini-pagination">
+                                        {% for page in pages %}
+                                            <span class="page">
+                                                {% if page == "..." %}
+                                                    ...
+                                                {% else %}
+                                                    <a href="{{ topic.get_absolute_url }}?page={{ page }}">
+                                                        {{ page }}
+                                                    </a>
+                                                {% endif %}
+                                            </span>
+                                        {% endfor %}
                                     </span>
-                                    {% endfor %}
-                                </span>
                                 {% endif %}
                             {% endwith %}
+
+                            <a href="{{ topic.get_absolute_url }}?first-unread=1" class="first-unread-post-link">
+                                &#8680;
+                            </a>
                         </td>
-                        <td class="topic-author hidden-phone hidden-tablet">
-                            {% astrobin_username topic.user %}
-                        </td>
+
                         <td class="topic-last-post hidden-phone hidden-tablet">
                             {% include "pybb/topic_last_message_info.html" %}
                         </td>
@@ -101,7 +121,12 @@
                 {% endfor %}
             </tbody>
         </table>
+        {% endcache %}
     </div>
+
+    {% with ad_container_classes='advertisement-frontpage' %}
+        {% include 'ads/wide_ad.html' %}
+    {% endwith %}
 
     <a class="anchor" name="stream"></a>
     <div class="subtle-container simple-container">
@@ -188,7 +213,6 @@
     <script type="text/javascript">
         $(document).ready(function() {
             astrobin_common.setup_gear_popovers();
-            astrobin_common.setup_user_popovers();
 
             $.ajaxSetup({timeout: 0});
         });

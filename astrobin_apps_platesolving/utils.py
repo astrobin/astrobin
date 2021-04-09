@@ -12,10 +12,13 @@ class ThumbnailNotReadyException(Exception):
     pass
 
 
-def get_from_storage(image, alias, revision_label):
-    url = image.thumbnail(alias, {'sync': True, 'revision_label': revision_label})
+def get_from_storage(target, alias):
+    if target._meta.model_name == u'imagerevision':
+        url = target.thumbnail(alias, sync=True)
+    else:
+        url = target.thumbnail(alias, '0', sync=True)
 
-    if "placeholder" in url:
+    if url is None or "placeholder" in url:
         raise ThumbnailNotReadyException
 
     if settings.MEDIA_URL not in url:

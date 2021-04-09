@@ -40,10 +40,20 @@
 
             {% if request.user != user %}
                 {% add_remove_toggleproperty "follow" user request_user %}
+
+                {% if request.user.is_authenticated and request.user|is_mutual_follower:user %}
+                    <div
+                            class="badge badge-mutual-followers"
+                            rel="tooltip"
+                            title="{% trans 'You follow each other' %}"
+                            data-placement="bottom">
+                        <i class="icon-refresh"></i>
+                    </div>
+                {% endif %}
             {% endif %}
         </div>
 
-        <div id="profile-details">
+        <div class="profile-details">
             {% cache 300 astrobin_user user.username view LANGUAGE_CODE user_is_owner %}
                 <ul>
                     <li>

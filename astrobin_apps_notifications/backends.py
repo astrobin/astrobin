@@ -1,4 +1,5 @@
 import logging
+from datetime import datetime, timedelta
 
 import persistent_messages
 from django.conf import settings
@@ -11,6 +12,7 @@ from django_bouncy.models import Bounce, Complaint
 from gadjo.requestprovider.signals import get_request
 from notification.backends import BaseBackend
 from notification.backends.email import EmailBackend as BaseEmailBackend
+from persistent_messages.models import Message
 
 log = logging.getLogger('apps')
 
@@ -30,39 +32,41 @@ class PersistentMessagesBackend(BaseBackend):
     spam_sensitivity = 1
 
     def deliver(self, recipient, sender, notice_type, extra_context):
-        try:
-            request = get_request()
-        except IndexError:
-            # This may happen during unit testing
-            return
-
         context = self.default_context()
         context.update(extra_context)
 
         if shadow_ban_applies(notice_type, recipient, context):
             return
 
-        messages = self.get_formatted_messages(
-            ['notice.html'],
-            notice_type.label, context)
-        persistent_messages.add_message(
-            request,
-            persistent_messages.INFO,
-            messages['notice.html'],
-            user=recipient)
+        template = 'notice.html'
+        message = self.get_formatted_messages([template], notice_type.label, context)[template]
+        level = persistent_messages.INFO
+
+        try:
+            request = get_request()
+            persistent_messages.add_message(request, level, message, user=recipient, from_user=sender)
+        except IndexError:
+            persistent_message = Message(user=recipient, from_user=sender, level=level, message=message)
+            persistent_message.save()
 
 
 class EmailBackend(BaseEmailBackend):
     def can_send(self, user, notice_type):
-        bounces = Bounce.objects.filter(
+        hard_bounces = Bounce.objects.filter(
             hard=True,
             bounce_type="Permanent",
             address=user.email)
+        soft_bounces = Bounce.objects.filter(
+            hard=False,
+            bounce_type="Transient",
+            address=user.email,
+            created_at__gte=datetime.now() - timedelta(days=7))
         complaints = Complaint.objects.filter(
             address=user.email)
         deleted = user.userprofile.deleted is not None
+        ignored = 'ASTROBIN_IGNORE' in user.email
 
-        if deleted or bounces or complaints:
+        if deleted or hard_bounces.exists() or soft_bounces.count() > 2 or complaints or ignored:
             return False
 
         return super(EmailBackend, self).can_send(user, notice_type)

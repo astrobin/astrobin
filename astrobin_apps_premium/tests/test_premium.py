@@ -4,7 +4,6 @@ from dateutil.relativedelta import relativedelta
 from django.contrib.auth.models import User, Group
 from django.core.urlresolvers import reverse
 from django.test import TestCase, override_settings
-from mock import patch
 
 from astrobin.models import Image, UserProfile
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import *
@@ -126,7 +125,7 @@ class PremiumTest(TestCase):
             self.assertEqual(premium_us, premium_get_usersubscription(self.user))
             self.assertEqual(premium_us, premium_get_valid_usersubscription(self.user))
 
-            premium_us.active = False
+            premium_us.expires = date.today() - timedelta(1)
             premium_us.save()
             self.assertEqual(premium_autorenew_us, premium_get_valid_usersubscription(self.user))
 
@@ -171,7 +170,7 @@ class PremiumTest(TestCase):
             self.assertEqual(premium_2020_us, premium_get_usersubscription(self.user))
             self.assertEqual(premium_2020_us, premium_get_valid_usersubscription(self.user))
 
-            premium_2020_us.active = False
+            premium_2020_us.expires = date.today() - timedelta(1)
             premium_2020_us.save()
             self.assertEqual(premium_us, premium_get_valid_usersubscription(self.user))
 
@@ -225,7 +224,7 @@ class PremiumTest(TestCase):
             self.assertEqual(ultimate_2020_us, premium_get_usersubscription(self.user))
             self.assertEqual(ultimate_2020_us, premium_get_valid_usersubscription(self.user))
 
-            ultimate_2020_us.active = False
+            ultimate_2020_us.expires = date.today() - timedelta(1)
             ultimate_2020_us.save()
             self.assertEqual(premium_2020_us, premium_get_valid_usersubscription(self.user))
 
@@ -361,8 +360,8 @@ class PremiumTest(TestCase):
         self.assertEqual(premium_get_valid_usersubscription(self.user), premium)
         self.assertEqual(premium_get_invalid_usersubscription(self.user), expired_ultimate)
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_upload_limits_free(self, retrieve_primary_thumbnails):
+
+    def test_upload_limits_free_recent_upload(self):
         """
         Free accounts can upload up to PREMIUM_MAX_IMAGES_FREE images.
         The counter does not decrease when deleting images.
@@ -385,7 +384,48 @@ class PremiumTest(TestCase):
                 follow=True)
             self._assertMessage(response, "error unread", "You have reached your image count limit")
 
-            # Deleting an image does not decrease the counter.
+            # Deleting an image that was just uploaded does not.
+            Image.objects_including_wip.all().last().delete()
+            profile = UserProfile.objects.get(pk=profile.pk)
+            self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_FREE - 1)
+
+        Image.all_objects.filter(user=self.user).delete()
+        self.user.userprofile.premium_counter = 0
+        self.user.userprofile.save()
+
+        self.client.logout()
+
+
+    def test_upload_limits_free(self):
+        """
+        Free accounts can upload up to PREMIUM_MAX_IMAGES_FREE images.
+        The counter does not decrease when deleting images.
+        """
+        self.client.login(username='test', password='password')
+
+        with self.settings(PREMIUM_MAX_IMAGES_FREE=2):
+            self.assertEqual(self.user.userprofile.premium_counter, 0)
+            for i in [1, 2]:
+                self.client.post(
+                    reverse('image_upload_process'),
+                    {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
+                    follow=True)
+                profile = UserProfile.objects.get(pk=self.user.userprofile.pk)
+                self.assertEqual(profile.premium_counter, i)
+
+            response = self.client.post(
+                reverse('image_upload_process'),
+                {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
+                follow=True)
+            self._assertMessage(response, "error unread", "You have reached your image count limit")
+
+            # Set the upload time to 2 days ago because images uploaded less than 24h ago never decrease the counter,
+            # regardless of the user subscription.
+            image = Image.objects_including_wip.all().last()
+            image.uploaded = datetime.now() - relativedelta(days=2)
+            image.save(keep_deleted=True)
+
+            # Deleting an image that was uploaded more than 24h ago decreases the counter.
             Image.objects_including_wip.all().last().delete()
             profile = UserProfile.objects.get(pk=profile.pk)
             self.assertEqual(profile.premium_counter, settings.PREMIUM_MAX_IMAGES_FREE)
@@ -396,8 +436,8 @@ class PremiumTest(TestCase):
 
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_upload_limits_lite(self, retrieve_primary_thumbnails):
+
+    def test_upload_limits_lite(self):
         """
         Lite accounts (pre 2020, non-autorenew) can upload up to PREMIUM_MAX_IMAGES_LITE images per year.
         The counter decreases only when you delete an image uploaded during the current subscription period.
@@ -405,7 +445,7 @@ class PremiumTest(TestCase):
         usersub, created = UserSubscription.objects.get_or_create(
             user=self.user,
             subscription=self.lite_sub,
-            expires=date.today() + relativedelta(years=1))
+            expires=date.today() + relativedelta(years=1) - relativedelta(days=2))
         usersub.subscribe()
 
         self.client.login(username='test', password='password')
@@ -424,6 +464,12 @@ class PremiumTest(TestCase):
                 {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
                 follow=True)
             self._assertMessage(response, "error unread", "You have reached your image count limit")
+
+            # Set the upload time to 2 days ago because images uploaded less than 24h ago never decrease the counter,
+            # regardless of the user subscription.
+            image = Image.objects_including_wip.all().last()
+            image.uploaded = datetime.now() - relativedelta(days=2)
+            image.save(keep_deleted=True)
 
             # Deleting an image uploaded this year should decrease the counter.
             Image.objects_including_wip.all().last().delete()
@@ -447,8 +493,8 @@ class PremiumTest(TestCase):
 
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_upload_limits_premium(self, retrieve_primary_thumbnails):
+
+    def test_upload_limits_premium(self):
         """
         Premium accounts (pre 2020, non-autorenew) can upload infinite images.
         The counter decreases, tho it's inconsequential.
@@ -471,6 +517,12 @@ class PremiumTest(TestCase):
                 profile = UserProfile.objects.get(pk=self.user.userprofile.pk)
                 self.assertEqual(profile.premium_counter, i)
 
+            # Set the upload time to 2 days ago because images uploaded less than 24h ago never decrease the counter,
+            # regardless of the user subscription.
+            image = Image.objects_including_wip.all().last()
+            image.uploaded = datetime.now() - relativedelta(days=2)
+            image.save(keep_deleted=True)
+
             # Deleting an image uploaded this year should decrease the counter.
             Image.objects_including_wip.all().last().delete()
             profile = UserProfile.objects.get(pk=profile.pk)
@@ -492,8 +544,8 @@ class PremiumTest(TestCase):
 
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_upload_limits_lite_autorenew(self, retrieve_primary_thumbnails):
+
+    def test_upload_limits_lite_autorenew(self):
         """
         Lite accounts (pre 2020, autorenew) can upload up to PREMIUM_MAX_IMAGES_LITE images per year.
         The counter decreases only when you delete an image uploaded during the current subscription period.
@@ -501,7 +553,7 @@ class PremiumTest(TestCase):
         usersub, created = UserSubscription.objects.get_or_create(
             user=self.user,
             subscription=self.lite_autorenew_sub,
-            expires=date.today() + relativedelta(years=1))
+            expires=date.today() + relativedelta(years=1) - relativedelta(days=2))
         usersub.subscribe()
 
         self.client.login(username='test', password='password')
@@ -520,6 +572,12 @@ class PremiumTest(TestCase):
                 {'image_file': open('astrobin/fixtures/test.jpg', 'rb')},
                 follow=True)
             self._assertMessage(response, "error unread", "You have reached your image count limit")
+
+            # Set the upload time to 2 days ago because images uploaded less than 24h ago never decrease the counter,
+            # regardless of the user subscription.
+            image = Image.objects_including_wip.all().last()
+            image.uploaded = datetime.now() - relativedelta(days=2)
+            image.save(keep_deleted=True)
 
             # Deleting an image uploaded this year should decrease the counter.
             Image.objects_including_wip.all().last().delete()
@@ -543,8 +601,8 @@ class PremiumTest(TestCase):
 
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_upload_limits_premium_autorenew(self, retrieve_primary_thumbnails):
+
+    def test_upload_limits_premium_autorenew(self):
         """
         Premium accounts (pre 2020, autorenew) can upload infinite images.
         The counter decreases, tho it's inconsequential.
@@ -567,6 +625,12 @@ class PremiumTest(TestCase):
                 profile = UserProfile.objects.get(pk=self.user.userprofile.pk)
                 self.assertEqual(profile.premium_counter, i)
 
+            # Set the upload time to 2 days ago because images uploaded less than 24h ago never decrease the counter,
+            # regardless of the user subscription.
+            image = Image.objects_including_wip.all().last()
+            image.uploaded = datetime.now() - relativedelta(days=2)
+            image.save(keep_deleted=True)
+
             # Deleting an image uploaded this year should decrease the counter.
             Image.objects_including_wip.all().last().delete()
             profile = UserProfile.objects.get(pk=profile.pk)
@@ -588,8 +652,8 @@ class PremiumTest(TestCase):
 
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_upload_limits_lite_2020(self, retrieve_primary_thumbnails):
+
+    def test_upload_limits_lite_2020(self):
         """
         Lite 2020+ can upload up to PREMIUM_MAX_IMAGES_LITE_2020 images.
         The counter decreases on deletions.
@@ -617,6 +681,12 @@ class PremiumTest(TestCase):
                 follow=True)
             self._assertMessage(response, "error unread", "You have reached your image count limit")
 
+            # Set the upload time to 2 days ago because images uploaded less than 24h ago never decrease the counter,
+            # regardless of the user subscription.
+            image = Image.objects_including_wip.all().last()
+            image.uploaded = datetime.now() - relativedelta(days=2)
+            image.save(keep_deleted=True)
+
             # Deleting an image uploaded this year should decrease the counter.
             Image.objects_including_wip.all().last().delete()
             profile = UserProfile.objects.get(pk=profile.pk)
@@ -639,8 +709,8 @@ class PremiumTest(TestCase):
 
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_upload_limits_premium_2020(self, retrieve_primary_thumbnails):
+
+    def test_upload_limits_premium_2020(self):
         """
         Premium 2020+ can upload unlimited images.
         The counter decreases.
@@ -660,6 +730,12 @@ class PremiumTest(TestCase):
                 follow=True)
             profile = UserProfile.objects.get(pk=self.user.userprofile.pk)
             self.assertEqual(profile.premium_counter, i)
+
+        # Set the upload time to 2 days ago because images uploaded less than 24h ago never decrease the counter,
+        # regardless of the user subscription.
+        image = Image.objects_including_wip.all().last()
+        image.uploaded = datetime.now() - relativedelta(days=2)
+        image.save(keep_deleted=True)
 
         # Deleting an image uploaded this year should decrease the counter.
         Image.objects_including_wip.all().last().delete()
@@ -683,8 +759,8 @@ class PremiumTest(TestCase):
 
         self.client.logout()
 
-    @patch("astrobin.tasks.retrieve_primary_thumbnails")
-    def test_upload_limits_ultimate_2020(self, retrieve_primary_thumbnails):
+
+    def test_upload_limits_ultimate_2020(self):
         """
         Ultimate 2020+ can upload infinite images.
         The counter decreases, even tho it's inconsequential.
@@ -706,6 +782,12 @@ class PremiumTest(TestCase):
                     follow=True)
                 profile = UserProfile.objects.get(pk=self.user.userprofile.pk)
                 self.assertEqual(profile.premium_counter, i)
+
+            # Set the upload time to 2 days ago because images uploaded less than 24h ago never decrease the counter,
+            # regardless of the user subscription.
+            image = Image.objects_including_wip.all().last()
+            image.uploaded = datetime.now() - relativedelta(days=2)
+            image.save(keep_deleted=True)
 
             # Deleting an image uploaded this year should decrease the counter.
             Image.objects_including_wip.all().last().delete()

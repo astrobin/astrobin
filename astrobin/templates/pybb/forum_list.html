@@ -11,13 +11,13 @@
                 {{ forum.description|safe }}
             </div>
         </td>
-        <td class="forum-topic-count hidden-phone">
+        <td class="forum-topic-count hidden-tablet hidden-phone">
             {{ forum.topic_count }}
         </td>
-        <td class="forum-post-count hidden-phone">
+        <td class="forum-post-count hidden-tablet hidden-phone">
             {{ forum.post_count }}
         </td>
-        <td class="forum-last-post hidden-phone hidden-tablet">
+        <td class="forum-last-post hidden-phone">
             {% include "pybb/forum_last_update_info.html" %}
         </td>
     </tr>

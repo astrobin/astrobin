@@ -97,6 +97,9 @@ class TestReactivatePreviousSubscription(TestCase):
 
         reactivate_previous_subscription_when_ultimate_compensation_expires.apply()
 
+        ultimate.expires = date.today() - timedelta(1)
+        ultimate.save()
+
         self.assertFalse(is_ultimate_2020(user))
         self.assertTrue(is_premium(user))
 
@@ -121,6 +124,9 @@ class TestReactivatePreviousSubscription(TestCase):
         )
 
         reactivate_previous_subscription_when_ultimate_compensation_expires.apply()
+
+        ultimate.expires = date.today() - timedelta(1)
+        ultimate.save()
 
         self.assertFalse(is_ultimate_2020(user))
         self.assertTrue(is_premium(user))
@@ -147,6 +153,9 @@ class TestReactivatePreviousSubscription(TestCase):
 
         reactivate_previous_subscription_when_ultimate_compensation_expires.apply()
 
+        ultimate.expires = date.today() - timedelta(1)
+        ultimate.save()
+
         self.assertFalse(is_ultimate_2020(user))
         self.assertTrue(is_premium(user))
 
@@ -171,6 +180,9 @@ class TestReactivatePreviousSubscription(TestCase):
         )
 
         reactivate_previous_subscription_when_ultimate_compensation_expires.apply()
+
+        ultimate.expires = date.today() - timedelta(1)
+        ultimate.save()
 
         self.assertFalse(is_ultimate_2020(user))
         self.assertTrue(is_premium(user))
@@ -197,6 +209,9 @@ class TestReactivatePreviousSubscription(TestCase):
 
         reactivate_previous_subscription_when_ultimate_compensation_expires.apply()
 
+        ultimate.expires = date.today() - timedelta(1)
+        ultimate.save()
+
         self.assertFalse(is_ultimate_2020(user))
         self.assertTrue(is_premium(user))
 
@@ -222,6 +237,9 @@ class TestReactivatePreviousSubscription(TestCase):
 
         reactivate_previous_subscription_when_ultimate_compensation_expires.apply()
 
+        ultimate.expires = date.today() - timedelta(1)
+        ultimate.save()
+
         self.assertFalse(is_ultimate_2020(user))
         self.assertTrue(is_lite(user))
 
@@ -246,6 +264,9 @@ class TestReactivatePreviousSubscription(TestCase):
         )
 
         reactivate_previous_subscription_when_ultimate_compensation_expires.apply()
+
+        ultimate.expires = date.today() - timedelta(1)
+        ultimate.save()
 
         self.assertFalse(is_ultimate_2020(user))
         self.assertTrue(is_lite(user))

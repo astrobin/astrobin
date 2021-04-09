@@ -4,7 +4,7 @@
 {% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_donations_tags %}
 
-{% block title %}{% blocktrans with user=requested_user.userprofile %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans trimmed with user=requested_user.userprofile %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block breadcrumbs %}
@@ -18,7 +18,7 @@
 {% block content %}
     {% include 'user/profile/navigation.html' %}
 
-    <div class="row">
+    <div class="row-fluid user-page">
         {% if not form %}
             <div class="span3">
                 {% include 'user/profile/meta.html' %}

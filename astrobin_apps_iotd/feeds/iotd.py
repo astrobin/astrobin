@@ -47,7 +47,7 @@ class IotdFeed(Feed):
         return datetime(item.date.year, item.date.month, item.date.day)
 
     def item_thumbnail_url(self, item):
-        return item.image.thumbnail('hd', {'sync': True})
+        return item.image.thumbnail('hd', None, sync=True)
 
     def item_enclosure_url(self, item):
         return self.item_thumbnail_url(item)
@@ -69,18 +69,20 @@ class IotdFeed(Feed):
 
     def item_content_encoded(self, item):
         url = self.item_thumbnail_url(item)
+
         return '<img src="{}" alt="{}"><br>{}, by <a href="{}">{}</a><br>{}'.format(
             url,
             self.item_title(item),
             self.item_title(item),
             reverse('user_page', args=(item.image.user.username,)),
             self.item_author_name(item),
-            item.image.description.encode('ascii', 'ignore').decode('ascii')
+            item.image.description.encode('ascii', 'ignore').decode('ascii') if item.image.description else ''
         )
 
     def item_extra_kwargs(self, item):
         return {
             'content_encoded': self.item_content_encoded(item),
+            'instagram_username': item.image.user.userprofile.instagram_username
         }
 
 

@@ -8,8 +8,8 @@
 
 {% if image|can_add_technical_details %}
 
-    <div class="row technical-card">
-        <div class="span8">
+    <div class="row-fluid technical-card">
+        <div class="span12">
             <div class="subtle-container">
                 <div class="header">
                     <h4>
@@ -23,7 +23,7 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                             <i class="icon-shopping-cart"></i>
                                         </a>
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu pull-right">
                                             {% if image|gear_items_with_brand_listings:REQUEST_COUNTRY|length %}
                                                 <li class="nav-header">{% trans "Sponsored brands" %}</li>
                                                 {% with image|unique_equipment_brand_listings:REQUEST_COUNTRY as listings %}
@@ -156,7 +156,7 @@
                                         <strong class="card-label">{{ data.0 }}:</strong>
                                         {% if data.0 == dates_label %}
                                             {% for date in data.1 %}
-                                                <a href="/search/{% query_string "q=, start_date=date, end_date=date" "plate_solving_started, r, mod" %}">{{ date|date:"DATE_FORMAT" }}</a>
+                                                <a href="/search/{% query_string "q=, date_acquired_min=date, date_acquired_max=date, d=i, t=all" "plate_solving_started, r, mod" %}">{{ date|date:"DATE_FORMAT" }}</a>
                                                 {% if not forloop.last %},&nbsp;{% endif %}
                                             {% endfor %}
                                         {% else %}
@@ -168,8 +168,11 @@
                         {% else %}
                             {% if request.user|can_view_full_technical_card %}
                                 {% if ssa.date %}
-                                    <p><strong class="card-label">{% trans "Date" %}:</strong> <a
-                                            href="/search/{% query_string "q=, start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}">{{ ssa.date|date:"DATE_FORMAT" }}</a>
+                                    <p>
+                                        <strong class="card-label">{% trans "Date" %}:</strong>
+                                        <a href="/search/{% query_string "q=, start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}">
+                                            {{ ssa.date|date:"DATE_FORMAT" }}
+                                        </a>
                                     </p>
                                 {% endif %}
                                 {% if ssa.time %}
@@ -301,6 +304,29 @@
                             <strong class="card-label">{% trans "WCS transformation" %}:</strong>
                             {{ instance_to_platesolve.solution.advanced_wcs_transformation }}
                         </p>
+                    {% endif %}
+
+                    {% if instance_to_platesolve.solution|supports_search_around %}
+                        <div class="dropdown search-around">
+                            <a class="dropdown-toggle btn btn-primary" data-toggle="dropdown" href="#">
+                                <i class="icon-search"></i> {% trans "Find images in the same area" %} <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% for i in '12345'|make_list %}
+                                    <li>
+                                        <a
+                                            {% if request.user|can_access_full_search %}
+                                                href="{{ instance_to_platesolve.solution|get_search_query_around:forloop.counter }}"
+                                            {% else %}
+                                                href="#feature-restricted-modal"
+                                            {% endif %}
+                                            data-toggle="modal">
+                                            {% blocktrans trimmed count n=forloop.counter %}Around <strong>1</strong> degree{% plural %}Around <strong>{{n}}</strong> degrees{% endblocktrans %}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     {% endif %}
                 {% endif %}
 

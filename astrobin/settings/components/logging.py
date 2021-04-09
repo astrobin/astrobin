@@ -5,10 +5,7 @@ from boto3.session import Session
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'invalid').strip()
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'invalid').strip()
 AWS_REGION_NAME = os.environ.get('AWS_REGION_NAME', 'us-east-1').strip()
-
-boto3_session = Session(aws_access_key_id=AWS_ACCESS_KEY_ID,
-                        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-                        region_name=AWS_REGION_NAME)
+CLOUDWATCH_LOGGING_ENABLED = os.environ.get('CLOUDWATCH_LOGGING_ENABLED', 'false').strip() == 'true'
 
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
@@ -61,11 +58,11 @@ LOGGING = {
             'propagate': False,
         },
         'apps': {
-            'handlers': ['console', 'logfile'],
+            'handlers': ['console'],
             'level': 'DEBUG',
         },
         'astrobin.tasks': {
-            'handlers': ['console', 'logfile'],
+            'handlers': ['console'],
             'level': 'DEBUG',
         },
         'django.request': {
@@ -86,7 +83,18 @@ LOGGING = {
     }
 }
 
-if AWS_ACCESS_KEY_ID != 'invalid' and AWS_SECRET_ACCESS_KEY != 'invalid' and 'localhost' not in BASE_URL:
+if DEBUG:
+    LOGGING['loggers']['apps']['handlers'].append('logfile')
+    LOGGING['loggers']['astrobin.tasks']['handlers'].append('logfile')
+
+if AWS_ACCESS_KEY_ID != 'invalid' and \
+        AWS_SECRET_ACCESS_KEY != 'invalid' and \
+        CLOUDWATCH_LOGGING_ENABLED and \
+        'localhost' not in BASE_URL:
+    boto3_session = Session(aws_access_key_id=AWS_ACCESS_KEY_ID,
+                            aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+                            region_name=AWS_REGION_NAME)
+
     LOGGING['handlers']['watchtower'] = {
         'level': 'DEBUG',
         'class': 'watchtower.CloudWatchLogHandler',

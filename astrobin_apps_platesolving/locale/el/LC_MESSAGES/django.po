@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:16+0000\n"
+"POT-Creation-Date: 2021-04-09 14:03+0000\n"
 "PO-Revision-Date: 2014-01-06 13:19+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -160,31 +160,17 @@ msgstr ""
 msgid "Getting plate-solving status, please wait..."
 msgstr "Γίνεται λήψη δεδομένων ανάλυσης, παρακαλώ περιμένετε..."
 
-#, fuzzy
-#| msgid "Plate-solving process starting, please do not leave this page..."
 msgid "Plate-solving starting, please do not leave this page..."
 msgstr ""
-"Έναρξη διαδικασίας ανάλυσης, παρακαλώ μην φύγετε από αυτή την σελίδα..."
 
-#, fuzzy
-#| msgid "Plate-solving process starting, please do not leave this page..."
 msgid "Advanced plate-solving starting, please do not leave this page..."
 msgstr ""
-"Έναρξη διαδικασίας ανάλυσης, παρακαλώ μην φύγετε από αυτή την σελίδα..."
 
-#, fuzzy
-#| msgid "Plate-solving started in the background. You may leave this page."
 msgid "Plate-solving started. You may leave this page."
 msgstr ""
-"Έναρξη διαδικασίας ανάλυσης στο υπόβαθρο. Μπορείτε να φύγετε από αυτή την "
-"σελίδα."
 
-#, fuzzy
-#| msgid "Plate-solving started in the background. You may leave this page."
 msgid "Advanced plate-solving started. You may leave this page."
 msgstr ""
-"Έναρξη διαδικασίας ανάλυσης στο υπόβαθρο. Μπορείτε να φύγετε από αυτή την "
-"σελίδα."
 
 msgid "Plate-solving almost ready, please do not leave this page..."
 msgstr ""
@@ -196,20 +182,21 @@ msgstr "Η εικόνα δεν μπορούσε να αναλυθεί."
 msgid "The advanced plate-solving failed."
 msgstr ""
 
-#, fuzzy
-#| msgid ""
-#| "This image has been successfully plate-solved. Please refresh the page to "
-#| "see the new data."
 msgid "This image has been plate-solved. Refresh the page to see new data!"
 msgstr ""
-"Η εικόνα αναλύθηκε με επιτυχία. Μπορείτε να ανανεώσετε την σελίδα για να "
-"δείτε τα νέα δεδομένα."
 
-#, fuzzy
-#| msgid ""
-#| "This image has been successfully plate-solved. Please refresh the page to "
-#| "see the new data."
 msgid "The advanced plate-solved finished. Refresh the page to see new data!"
 msgstr ""
-"Η εικόνα αναλύθηκε με επιτυχία. Μπορείτε να ανανεώσετε την σελίδα για να "
-"δείτε τα νέα δεδομένα."
+
+msgid "Error"
+msgstr ""
+
+msgid ""
+"AstroBin could not plate-solve this image because it was not possible to "
+"establish a connection to nova.astrometry.net. Please try again later!"
+msgstr ""
+
+msgid ""
+"AstroBin could not plate-solve this image because nova.astrometry.net "
+"reported an internal server error."
+msgstr ""

@@ -2,10 +2,13 @@
     <button class="btn btn-primary{% if is_toggled %} active{% endif %}"
             data-toggle="button"
             id="toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}"
-            {% if has_tooltip %}
-            rel="tooltip"
+            {% if property_tooltip_on and property_tooltip_off %}
+                rel="tooltip"
             {% endif %}
             title="{% if is_toggled %}{{ property_tooltip_on | safe }}{% else %}{{ property_tooltip_off | safe }}{% endif %}"
+            {% if disabled %}
+                disabled="disabled"
+            {% endif %}
     >
 
         {% if property_icon %}
@@ -14,17 +17,19 @@
 
         {% if property_label_on or property_label_off %}
             <span class="toggleproperties-label">
-            {% if is_toggled %}
-                {{ property_label_on | safe }}
-            {% else %}
-                {{ property_label_off | safe }}
-            {% endif %}
-        </span>
+                {% if is_toggled %}
+                    {{ property_label_on | safe }}
+                {% else %}
+                    {{ property_label_off | safe }}
+                {% endif %}
+            </span>
         {% endif %}
 
         {% if show_count %}
             <span id="count-{{ property_type }}-{{ content_type_id }}-{{ object_id }}"
-                  class="badge badge-important">{{ count }}</span>
+                  class="badge badge-important">
+                {{ count }}
+            </span>
         {% endif %}
     </button>
 </span>
@@ -46,11 +51,13 @@
                         timeout: 10000,
                         dataType: 'json',
                         success: function (data) {
-                            $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}")
-                                .tooltip('hide')
-                                .attr('data-original-title', "{{ property_tooltip_off | safe }}")
-                                .tooltip('fixTitle')
-                                .tooltip('show');
+                            {% if property_tooltip_on and property_tooltip_off %}
+                                $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}")
+                                    .tooltip('hide')
+                                    .attr('data-original-title', "{{ property_tooltip_off | safe }}")
+                                    .tooltip('fixTitle')
+                                    .tooltip('show');
+                            {% endif %}
                             $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }} .toggleproperties-label").text("{{ property_label_off | safe }}");
                             if (data['count'] !== undefined)
                                 $('#count-{{ property_type }}-{{ content_type_id }}-{{ object_id }}').text(data.count);
@@ -68,11 +75,13 @@
                         timeout: 10000,
                         dataType: 'json',
                         success: function (data) {
-                            $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}")
-                                .tooltip('hide')
-                                .attr('data-original-title', "{{ property_tooltip_on | safe }}")
-                                .tooltip('fixTitle')
-                                .tooltip('show');
+                            {% if property_tooltip_on and property_tooltip_off %}
+                                $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}")
+                                    .tooltip('hide')
+                                    .attr('data-original-title', "{{ property_tooltip_on | safe }}")
+                                    .tooltip('fixTitle')
+                                    .tooltip('show');
+                            {% endif %}
                             $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }} .toggleproperties-label").text("{{ property_label_on | safe }}");
                             if (data['count'] !== undefined)
                                 $('#count-{{ property_type }}-{{ content_type_id }}-{{ object_id }}').text(data.count);

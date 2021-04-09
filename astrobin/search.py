@@ -7,9 +7,10 @@ from haystack.generic_views import SearchView
 from haystack.query import SearchQuerySet
 from pybb.models import Post, Topic
 
+from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin_apps_equipment.models import EquipmentBrandListing
-from models import Image
 from nested_comments.models import NestedComment
+from .models import Image
 
 FIELDS = (
     # Filtering
@@ -24,6 +25,8 @@ FIELDS = (
     'data_source',
     'date_published_min',
     'date_published_max',
+    'date_acquired_min',
+    'date_acquired_max',
     'field_radius_min',
     'field_radius_max',
     'minimum_data',
@@ -39,6 +42,9 @@ FIELDS = (
     'remote_source',
     'subject_type',
     'telescope_type',
+    'integration_time_min',
+    'integration_time_max',
+    'constellation',
 
     # Sorting
     'sort'
@@ -59,6 +65,8 @@ class AstroBinSearchForm(SearchForm):
     data_source = forms.CharField(required=False)
     date_published_min = forms.CharField(required=False)
     date_published_max = forms.CharField(required=False)
+    date_acquired_min = forms.CharField(required=False)
+    date_acquired_max = forms.CharField(required=False)
     field_radius_min = forms.IntegerField(required=False)
     field_radius_max = forms.IntegerField(required=False)
     minimum_data = forms.CharField(required=False)
@@ -74,12 +82,15 @@ class AstroBinSearchForm(SearchForm):
     remote_source = forms.CharField(required=False)
     subject_type = forms.CharField(required=False)
     telescope_type = forms.CharField(required=False)
+    integration_time_min = forms.FloatField(required=False)
+    integration_time_max = forms.FloatField(required=False)
+    constellation = forms.CharField(required=False)
 
     def __init__(self, *args, **kwargs):
         super(AstroBinSearchForm, self).__init__(args, kwargs)
         self.data = {x: kwargs.pop(x, None) for x in FIELDS}
 
-    def filterByDomain(self, results):
+    def filter_by_domain(self, results):
         d = self.cleaned_data.get("d")
 
         if d is None or d == "":
@@ -94,7 +105,7 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filterByType(self, results):
+    def filter_by_type(self, results):
         t = self.cleaned_data.get("t")
 
         if t is None or t == "":
@@ -105,7 +116,7 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filterByAnimated(self, results):
+    def filter_by_animated(self, results):
         t = self.cleaned_data.get("animated")
 
         if t:
@@ -113,7 +124,7 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filterByAward(self, results):
+    def filter_by_award(self, results):
         award = self.cleaned_data.get("award")
 
         if award is not None and award != "":
@@ -125,9 +136,12 @@ class AstroBinSearchForm(SearchForm):
             if "top-pick" in types:
                 results = results.filter(is_top_pick=True)
 
+            if "top-pick-nomination" in types:
+                results = results.filter(is_top_pick_nomination=True)
+
         return results
 
-    def filterByCameraType(self, results):
+    def filter_by_camera_type(self, results):
         camera_type = self.cleaned_data.get("camera_type")
 
         if camera_type is not None and camera_type != "":
@@ -136,7 +150,7 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filterByCountry(self, results):
+    def filter_by_country(self, results):
         country = self.cleaned_data.get("country")
 
         if country is not None and country != "":
@@ -144,7 +158,7 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filterByAcquisitionType(self, results):
+    def filter_by_acquisition_type(self, results):
         acquisition_type = self.cleaned_data.get("acquisition_type")
 
         if acquisition_type is not None and acquisition_type != "":
@@ -152,7 +166,7 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filterByDataSource(self, results):
+    def filter_by_data_source(self, results):
         data_source = self.cleaned_data.get("data_source")
 
         if data_source is not None and data_source != "":
@@ -160,7 +174,7 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filterByDatePublished(self, results):
+    def filter_by_date_published(self, results):
         date_published_min = self.cleaned_data.get("date_published_min")
         date_published_max = self.cleaned_data.get("date_published_max")
 
@@ -172,7 +186,19 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filterByFieldRadius(self, results):
+    def filter_by_date_acquired(self, results):
+        date_acquired_min = self.cleaned_data.get("date_acquired_min")
+        date_acquired_max = self.cleaned_data.get("date_acquired_max")
+
+        if date_acquired_min is not None and date_acquired_min != "":
+            results = results.filter(first_acquisition_date__gte=date_acquired_min)
+
+        if date_acquired_max is not None and date_acquired_max != "":
+            results = results.filter(last_acquisition_date__lte=date_acquired_max)
+
+        return results
+
+    def filter_by_field_radius(self, results):
         try:
             min = float(self.cleaned_data.get("field_radius_min"))
             results = results.filter(field_radius__gte=min)
@@ -187,7 +213,7 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filterByMinimumData(self, results):
+    def filter_by_minimum_data(self, results):
         minimum_data = self.cleaned_data.get("minimum_data")
 
         if minimum_data is not None and minimum_data != "":
@@ -205,7 +231,7 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filterByMoonPhase(self, results):
+    def filter_by_moon_phase(self, results):
         try:
             min = float(self.cleaned_data.get("moon_phase_min"))
             results = results.filter(moon_phase__gte=min)
@@ -220,7 +246,7 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filterByLicense(self, results):
+    def filter_by_license(self, results):
         license = self.cleaned_data.get("license")
 
         if license is not None and license != "":
@@ -229,7 +255,7 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filterByCoords(self, results):
+    def filter_by_coords(self, results):
         # Intersection between the filter ra,dec area and the image area.
         try:
             ra_min = float(self.cleaned_data.get("coord_ra_min"))
@@ -249,7 +275,7 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filterByPixelScale(self, results):
+    def filter_by_pixel_scale(self, results):
         try:
             min = float(self.cleaned_data.get("pixel_scale_min"))
             results = results.filter(pixel_scale__gte=min)
@@ -264,7 +290,7 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filterByRemoteSource(self, results):
+    def filter_by_remote_source(self, results):
         remote_source = self.cleaned_data.get("remote_source")
 
         if remote_source is not None and remote_source != "":
@@ -272,56 +298,45 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
-    def filterBySubjectType(self, results):
+    def filter_by_subject_type(self, results):
         subject_type = self.cleaned_data.get("subject_type")
 
-        if subject_type == "deep_sky":
-            results = results.filter(subject_type=100)
-        elif subject_type == "solar_system":
-            results = results.filter(subject_type=200)
-        elif subject_type == "wide":
-            results = results.filter(subject_type=300)
-        elif subject_type == "trails":
-            results = results.filter(subject_type=400)
-        elif subject_type == "aurora":
-            results = results.filter(subject_type=450)
-        elif subject_type == "gear":
-            results = results.filter(subject_type=500)
-        elif subject_type == "other":
-            results = results.filter(subject_type=600)
-        elif subject_type == "sun":
-            results = results.filter(solar_system_main_subject=0)
-        elif subject_type == "moon":
-            results = results.filter(solar_system_main_subject=1)
-        elif subject_type == "mercury":
-            results = results.filter(solar_system_main_subject=2)
-        elif subject_type == "venus":
-            results = results.filter(solar_system_main_subject=3)
-        elif subject_type == "mars":
-            results = results.filter(solar_system_main_subject=4)
-        elif subject_type == "jupiter":
-            results = results.filter(solar_system_main_subject=5)
-        elif subject_type == "saturn":
-            results = results.filter(solar_system_main_subject=6)
-        elif subject_type == "uranus":
-            results = results.filter(solar_system_main_subject=7)
-        elif subject_type == "neptune":
-            results = results.filter(solar_system_main_subject=8)
-        elif subject_type == "minor_planet":
-            results = results.filter(solar_system_main_subject=9)
-        elif subject_type == "comet":
-            results = results.filter(solar_system_main_subject=10)
-        elif subject_type == "other_solar_system":
-            results = results.filter(solar_system_main_subject=11)
+        if subject_type in vars(SubjectType).keys():
+            results = results.filter(subject_type_char=subject_type)
+        elif subject_type in vars(SolarSystemSubject).keys():
+            results = results.filter(solar_system_main_subject_char=subject_type)
 
         return results
 
-    def filterByTelescopeType(self, results):
+    def filter_by_telescope_type(self, results):
         telescope_type = self.cleaned_data.get("telescope_type")
 
         if telescope_type is not None and telescope_type != "":
             types = telescope_type.split(',')
             results = results.filter(telescope_types__in=types)
+
+        return results
+
+    def filter_by_integration_time(self, results):
+        try:
+            min = float(self.cleaned_data.get("integration_time_min"))
+            results = results.filter(integration__gte=min * 3600)
+        except TypeError:
+            pass
+
+        try:
+            max = float(self.cleaned_data.get("integration_time_max"))
+            results = results.filter(integration__lte=max * 3600)
+        except TypeError:
+            pass
+
+        return results
+
+    def filter_by_constellation(self, results):
+        constellation = self.cleaned_data.get("constellation")
+
+        if constellation is not None and constellation != "":
+            results = results.filter(constellation="__%s__" % constellation)
 
         return results
 
@@ -368,26 +383,29 @@ class AstroBinSearchForm(SearchForm):
         else:
             sqs = self.searchqueryset.auto_query(q)
 
-        sqs = self.filterByDomain(sqs)
+        sqs = self.filter_by_domain(sqs)
 
         # Images
-        sqs = self.filterByType(sqs)
-        sqs = self.filterByAnimated(sqs)
-        sqs = self.filterByAward(sqs)
-        sqs = self.filterByCameraType(sqs)
-        sqs = self.filterByCountry(sqs)
-        sqs = self.filterByAcquisitionType(sqs)
-        sqs = self.filterByDataSource(sqs)
-        sqs = self.filterByDatePublished(sqs)
-        sqs = self.filterByLicense(sqs)
-        sqs = self.filterByFieldRadius(sqs)
-        sqs = self.filterByMinimumData(sqs)
-        sqs = self.filterByMoonPhase(sqs)
-        sqs = self.filterByCoords(sqs)
-        sqs = self.filterByPixelScale(sqs)
-        sqs = self.filterByRemoteSource(sqs)
-        sqs = self.filterBySubjectType(sqs)
-        sqs = self.filterByTelescopeType(sqs)
+        sqs = self.filter_by_type(sqs)
+        sqs = self.filter_by_animated(sqs)
+        sqs = self.filter_by_award(sqs)
+        sqs = self.filter_by_camera_type(sqs)
+        sqs = self.filter_by_country(sqs)
+        sqs = self.filter_by_acquisition_type(sqs)
+        sqs = self.filter_by_data_source(sqs)
+        sqs = self.filter_by_date_published(sqs)
+        sqs = self.filter_by_date_acquired(sqs)
+        sqs = self.filter_by_license(sqs)
+        sqs = self.filter_by_field_radius(sqs)
+        sqs = self.filter_by_minimum_data(sqs)
+        sqs = self.filter_by_moon_phase(sqs)
+        sqs = self.filter_by_coords(sqs)
+        sqs = self.filter_by_pixel_scale(sqs)
+        sqs = self.filter_by_remote_source(sqs)
+        sqs = self.filter_by_subject_type(sqs)
+        sqs = self.filter_by_telescope_type(sqs)
+        sqs = self.filter_by_integration_time(sqs)
+        sqs = self.filter_by_constellation(sqs)
 
         sqs = self.sort(sqs)
 

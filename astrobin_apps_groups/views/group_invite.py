@@ -8,7 +8,7 @@ from astrobin.models import UserProfile
 from astrobin_apps_groups.forms import GroupInviteForm
 from astrobin_apps_groups.models import Group
 from astrobin_apps_groups.views.mixins import RestrictToGroupOwnerMixin, RedirectToGroupDetailMixin
-from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_notifications.utils import push_notification, build_notification_url
 
 
 class GroupInviteView(
@@ -28,13 +28,15 @@ class GroupInviteView(
                 continue
 
             group.invited_users.add(user)
-            push_notification([user], 'new_group_invitation',
-                              {
-                                  'inviter': request.user.userprofile.get_display_name(),
-                                  'inviter_page': reverse('user_page', args=(request.user.username,)),
-                                  'group_name': group.name,
-                                  'group_page': settings.BASE_URL + reverse('group_detail', args=(group.pk,)),
-                              })
+            push_notification(
+                [user], request.user, 'new_group_invitation',
+                {
+                    'inviter': request.user.userprofile.get_display_name(),
+                    'inviter_page': reverse('user_page', args=(request.user.username,)),
+                    'group_name': group.name,
+                    'group_page': build_notification_url(
+                        settings.BASE_URL + reverse('group_detail', args=(group.pk,)), request.user),
+                })
 
         if request.is_ajax():
             return self.render_json_response({

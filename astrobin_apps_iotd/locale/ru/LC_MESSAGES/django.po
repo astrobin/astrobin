@@ -1,36 +1,42 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: AstroBin Apps: IOTD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:22+0000\n"
-"PO-Revision-Date: 2019-02-25 18:41+0000\n"
-"Last-Translator: BG8JQT <BG8JQT@163.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2021-04-09 14:06+0000\n"
+"PO-Revision-Date: 2021-04-09 15:49+0200\n"
+"Last-Translator: Salvatore Iovene\n"
+"Language-Team: Russian\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1551120112.000000\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
+"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
+"X-Generator: Loco https://localise.biz\n"
+"X-Loco-Source-Locale: en\n"
+"X-Loco-Project-Id: 108442\n"
+"X-Loco-Api-Version: 1.0.25 20210310-1\n"
+
+msgid "Sorry, it's now too late to retract this submission."
+msgstr "Извините, уже слишком поздно отменять эту заявку."
+
+msgid "Sorry, it's now too late to retract this vote."
+msgstr "Извините, уже слишком поздно отменять этот голос."
 
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "Вы не участник списка Номинирующих для Изображения Дня."
 
 msgid "You cannot submit your own image."
-msgstr "您不能提交您的图像。"
+msgstr "Вы не можете отправить своё собственное изображение."
 
 msgid "Images in the staging area cannot be submitted."
-msgstr "Изображения в Staging Area не могут быть номинированы."
+msgstr "Изображения в студии не могут быть номинированы."
 
 msgid "This user has chosen to be excluded from competitions."
 msgstr "Этот пользователь хочет быть исключенным из соревнования."
+
+msgid "This user has been banned from competitions."
+msgstr "Этот пользователь был заблокирован от участия в соревнованиях."
 
 #, python-format
 msgid ""
@@ -41,7 +47,7 @@ msgstr ""
 "%(max_days)s дней назад."
 
 msgid "Users with a Free membership cannot participate in the IOTD."
-msgstr ""
+msgstr "Пользователи с бесплатной подпиской не могут участвовать в IOTD."
 
 msgid "This image has already been an IOTD in the past"
 msgstr "Это изображение уже было Изображением Дня в прошлом"
@@ -57,7 +63,7 @@ msgid "You cannot vote for your own image."
 msgstr "Вы не можете голосовать за собственные изображения."
 
 msgid "Images in the staging area cannot be voted for."
-msgstr "За изображения в Staging Area нельзя голосовать."
+msgstr "За изображения в студии нельзя голосовать."
 
 msgid "You cannot vote for an image that has not been submitted."
 msgstr "Вы не можете голосовать за изображения, которые не были номинированы."
@@ -84,7 +90,7 @@ msgid "You cannot elect your own image."
 msgstr "Вы не можете выбирать собственные изображения."
 
 msgid "Images in the staging area cannot be elected."
-msgstr "Изображения в Staging Area не могут быть выбраны."
+msgstr "Изображения в студии не могут быть выбраны."
 
 msgid "You cannot elect an image that has not been voted."
 msgstr "Вы не можете выбирать изображения за которые нет голосов."
@@ -123,29 +129,23 @@ msgstr "Вы не можете отменить выбор изображени�
 msgid "You cannot unelect a past or current IOTD."
 msgstr "Вы не можете переизбрать прошлые или текущие Изображения Дня."
 
-msgid "Submit for IOTD"
-msgstr "Номинировать на ИД"
+#, python-format
+msgid "you already selected %s IOTD today (UTC)"
+msgstr "вы уже выбрали %s IOTD сегодня (UTC)"
 
-msgid ""
-"You will submit this image to the IOTD Submissions Queue. From there, a "
-"member of the IOTD Reviewers Board will consider promoting it for final "
-"evaluation from an IOTD Judge"
-msgstr ""
-"Вы номинируете это изображение в очередь заявок на Изображение Дня (ИД). "
-"После этого участник списка Рецензентов ИД рассмотрит вопрос о его "
-"продвижении для окончательной оценки Судьей ИД."
+#, python-format
+msgid "you already selected %s scheduled IOTDs"
+msgstr "Вы уже выбрали %s запланированных Изображений Дня"
 
-msgid "Submit"
-msgstr "Номинировать"
+#, python-format
+msgid "there are already %s scheduled IOTDs"
+msgstr "Уже есть %s запланированных Изображений Дня"
 
 msgid "Image of the day"
 msgstr "Изображение Дня"
 
-msgid "by"
-msgstr "от"
-
 msgid "IOTD Judgement Queue"
-msgstr "IOTD 判断队列"
+msgstr "IOTD Очередь Решения"
 
 msgid ""
 "Please select the images that you want to elect to IOTD by clicking on them."
@@ -153,39 +153,19 @@ msgstr ""
 "Пожалуйста отметьте изображения, которые вы хотите выбрать для ИД, нажимая "
 "на них."
 
+#, python-format
+msgid ""
+"Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
+"<strong>%(time)s</strong>."
+msgstr ""
+"К сожалению, вы не можете выбрать IOTD прямо сейчас: %(reason)s. Повторите "
+"попытку через <strong>%(time)s</strong>."
+
 msgid "This queue is currently empty."
 msgstr "Пока эта очередь пуста."
 
-msgid "Reviewers"
-msgstr "审核人"
-
-msgid "Loading"
-msgstr "加载中"
-
 msgid "Error"
-msgstr "错误"
-
-msgid "IOTD Review Queue"
-msgstr "Рецензируемая очередь ИД"
-
-msgid ""
-"Please select the images that you want to promote for final judgement by "
-"clicking on them."
-msgstr ""
-"Пожалуйста, отметьте изображения, которые вы хотите продвинуть для "
-"окончательного решения, нажав на них."
-
-msgid "Submitters"
-msgstr "提交者"
-
-msgid "IOTD Submission Queue"
-msgstr "IOTD 提交队列"
-
-msgid ""
-"Please select the images that you want to propose for IOTD consideration."
-msgstr ""
-"Пожалуйста, отметьте изображения, которые вы хотите номинировать на "
-"рассмотрение в качестве ИД."
+msgstr "Ошибка"
 
 msgid "You cannot unelect an IOTD elected by another judge."
 msgstr "Вы не можете отменить выбор ИД от другого судьи."
@@ -193,15 +173,3 @@ msgstr "Вы не можете отменить выбор ИД от друго�
 #, python-format
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr "Все места для ИД на следующие %(days)s дней уже заполнены."
-
-#~ msgid "You cannot submit a judge's image."
-#~ msgstr "Вы не можете номинировать изображения судей."
-
-#~ msgid "You cannot vote for a judge's image."
-#~ msgstr "Вы не можете голосовать за изображения судей."
-
-#~ msgid "You cannot elect a judge's image."
-#~ msgstr "Вы не можете выбирать изображения судей."
-
-#~ msgid "No images uploaded on this day."
-#~ msgstr "Нет изображений для этого дня."

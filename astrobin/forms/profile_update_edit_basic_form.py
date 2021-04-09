@@ -16,7 +16,7 @@ class UserProfileEditBasicForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ('real_name', 'website', 'job', 'hobbies', 'timezone', 'about')
+        fields = ('real_name', 'website', 'job', 'hobbies', 'instagram_username', 'timezone', 'about')
 
     def __init__(self, **kwargs):
         super(UserProfileEditBasicForm, self).__init__(**kwargs)

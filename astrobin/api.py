@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.http import Http404
+from hitcount.models import HitCount
 from persistent_messages.models import Message
 from tastypie import fields, http
 from tastypie.authentication import Authentication
@@ -68,6 +69,8 @@ class ImageRevisionResource(ModelResource):
     url_real = fields.CharField()
     url_duckduckgo = fields.CharField()
     url_duckduckgo_small = fields.CharField()
+    url_histogram = fields.CharField()
+    url_skyplot = fields.CharField()
 
     is_solved = fields.BooleanField()
 
@@ -94,6 +97,8 @@ class ImageRevisionResource(ModelResource):
             'url_real',
             'url_duckduckgo',
             'url_duckduckgo_small',
+            'url_histogram',
+            'url_skyplot',
 
             'is_final',
             'is_solved',
@@ -133,6 +138,14 @@ class ImageRevisionResource(ModelResource):
 
     def dehydrate_url_duckduckgo_small(self, bundle):
         return '%s/%s/%s/rawthumb/duckduckgo_small/' % (settings.BASE_URL, bundle.obj.image.get_id(), bundle.obj.label)
+
+    def dehydrate_url_histogram(self, bundle):
+        return '%s/%s/%s/rawthumb/histogram/' % (settings.BASE_URL, bundle.obj.image.get_id(), bundle.obj.label)
+
+    def dehydrate_url_skyplot(self, bundle):
+        return bundle.obj.solution.skyplot_zoom1.url \
+            if bundle.obj.solution and bundle.obj.solution.skyplot_zoom1 \
+            else None
 
     def dehydrate_is_solved(self, bundle):
         return bundle.obj.solution != None
@@ -177,6 +190,8 @@ class ImageResource(ModelResource):
     updated = fields.DateField('updated')
 
     locations = fields.ToManyField(LocationResource, 'locations')
+    data_source = fields.CharField('data_source', null=True)
+    remote_source = fields.CharField('remote_source', null=True)
 
     url_thumb = fields.CharField()
     url_gallery = fields.CharField()
@@ -185,6 +200,8 @@ class ImageResource(ModelResource):
     url_real = fields.CharField()
     url_duckduckgo = fields.CharField()
     url_duckduckgo_small = fields.CharField()
+    url_histogram = fields.CharField()
+    url_skyplot = fields.CharField()
 
     is_solved = fields.BooleanField()
 
@@ -193,6 +210,11 @@ class ImageResource(ModelResource):
     pixscale = fields.DecimalField()
     orientation = fields.DecimalField()
     radius = fields.DecimalField()
+
+    likes = fields.IntegerField()
+    bookmarks = fields.IntegerField()
+    comments = fields.IntegerField()
+    views = fields.IntegerField()
 
     class Meta:
         authentication = AppAuthentication()
@@ -204,6 +226,8 @@ class ImageResource(ModelResource):
             'w',
             'h',
             'locations',
+            'data_source',
+            'remote_source',
 
             'url_thumb',
             'url_gallery',
@@ -212,6 +236,8 @@ class ImageResource(ModelResource):
             'url_real',
             'url_duckduckgo',
             'url_duckduckgo_small',
+            'url_histogram',
+            'url_skyplot',
 
             'uploaded',
             'published',
@@ -246,6 +272,8 @@ class ImageResource(ModelResource):
             'imaging_cameras': ALL,
             'w': ALL,
             'h': ALL,
+            'data_source': ALL,
+            'remote_source': ALL,
         }
         ordering = ['uploaded']
 
@@ -269,6 +297,14 @@ class ImageResource(ModelResource):
 
     def dehydrate_url_duckduckgo_small(self, bundle):
         return '%s/%s/0/rawthumb/duckduckgo_small/' % (settings.BASE_URL, bundle.obj.get_id())
+
+    def dehydrate_url_histogram(self, bundle):
+        return '%s/%s/0/rawthumb/histogram/' % (settings.BASE_URL, bundle.obj.get_id())
+
+    def dehydrate_url_skyplot(self, bundle):
+        return bundle.obj.solution.skyplot_zoom1.url \
+            if bundle.obj.solution and bundle.obj.solution.skyplot_zoom1 \
+            else None
 
     def dehydrate_is_solved(self, bundle):
         return bundle.obj.solution != None
@@ -318,6 +354,24 @@ class ImageResource(ModelResource):
     def dehydrate_imaging_cameras(self, bundle):
         cameras = bundle.obj.imaging_cameras.all()
         return [unicode(x) for x in cameras]
+
+    def dehydrate_likes(self, bundle):
+        return ToggleProperty.objects.toggleproperties_for_object('like', bundle.obj).count()
+
+    def dehydrate_bookmarks(self, bundle):
+        return ToggleProperty.objects.toggleproperties_for_object('bookmark', bundle.obj).count()
+
+    def dehydrate_comments(self, bundle):
+        return bundle.obj.nested_comments.count()
+
+    def dehydrate_views(self, bundle):
+        try:
+            return HitCount.objects.get(
+                object_pk=bundle.obj.pk,
+                content_type=ContentType.objects.get_for_model(Image),
+            ).hits
+        except (HitCount.DoesNotExist, HitCount.MultipleObjectsReturned):
+            return 0
 
     def get_detail(self, request, **kwargs):
         """
@@ -473,40 +527,45 @@ class UserProfileResource(ModelResource):
         authentication = AppAuthentication()
         allowed_methods = ["get"]
         queryset = UserProfile.objects.all()
-        filtering = {
-            "username": ALL
-        }
-        excludes = (
-            'accept_tos',
-            'autosubscribe',
-            'company_description',
-            'company_name',
-            'company_website',
-            'default_frontpage_section',
-            'default_gallery_sorting',
-            'default_license',
-            'default_watermark',
-            'default_watermark_opacity',
-            'default_watermark_position',
-            'default_watermark_size',
-            'default_watermark_text',
-            'deleted',
-            'exclude_from_competitions',
-            'inactive_account_reminder_sent',
-            'premium_counter',
-            'premium_offer',
-            'premium_offer_expiration',
-            'premium_offer_sent',
-            'receive_forum_emails',
-            'receive_important_communications',
-            'receive_marketing_and_commercial_material',
-            'receive_newsletter',
-            'seen_email_permissions',
-            'seen_realname',
-            'show_signatures',
-            'signature',
-            'signature_html',
-        )
+        fields = [
+            'about',
+            'allow_astronomy_ads',
+            'allow_retailer_integration',
+            'astrobin_index_bonus',
+            'avatar',
+            'banned_from_competitions',
+            'date_joined',
+            'delete_reason',
+            'delete_reason_other',
+            'display_wip_images_on_public_gallery',
+            'followers_count',
+            'following_count',
+            'hobbies',
+            'id',
+            'image_count',
+            'image_recovery_process_completed',
+            'image_recovery_process_started',
+            'job',
+            'language',
+            'last_login',
+            'last_seen',
+            'never_activated_account_reminder_sent',
+            'plate_solution_overlay_on_full_disabled',
+            'post_count',
+            'premium_subscription',
+            'premium_subscription_expiration',
+            'real_name',
+            'received_likes_count',
+            'recovered_images_notice_sent',
+            'referral_code',
+            'resource_uri',
+            'timezone',
+            'total_notifications_count',
+            'unread_notifications_count',
+            'updated',
+            'username',
+            'website',
+        ]
         ordering = ['-date_joined']
 
     def dehydrate_image_count(self, bundle):
@@ -544,3 +603,20 @@ class UserProfileResource(ModelResource):
     def dehydrate_premium_subscription_expiration(self, bundle):
         user_subscription = premium_get_valid_usersubscription(bundle.obj.user)
         return user_subscription.expires if user_subscription else None
+
+    def build_filters(self, filters=None, ignore_bad_filters=False):
+        if filters is None:
+            filters = {}
+
+        username = None
+
+        if 'username' in filters:
+            username = filters['username']
+            del filters['username']
+
+        orm_filters = super(UserProfileResource, self).build_filters(filters)
+
+        if username:
+            orm_filters['user__username'] = username
+
+        return orm_filters

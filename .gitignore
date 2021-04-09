@@ -2,7 +2,6 @@
 .DS_Store
 *.bak
 *.Plo
-*.Po
 *.a
 *.pyc
 *.so
@@ -18,7 +17,6 @@
 *.log*
 !docker/astrobin.logrotate.conf
 *.err
-*.po~
 .dirstamp
 cover/
 .coverage
@@ -30,6 +28,7 @@ env/dev
 /docker/secrets.env
 /ssl-certs
 astrobin-mobile.css
+astrobin-large.css
 astrobin.css
 *.scssc
 *.css.map

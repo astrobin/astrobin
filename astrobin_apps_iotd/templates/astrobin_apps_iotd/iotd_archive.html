@@ -20,6 +20,9 @@
 
 {% block content %}
     <a class="anchor" name="page_anchor"></a>
+
+    {% include "ads/full_width_wide_ad.html" %}
+
     {% for iotd in object_list %}
         <div class="iotd-archive-image">
             {% astrobin_image iotd.image 'iotd' %}
@@ -28,7 +31,6 @@
                 <h3>{{ iotd.image.title|escape }}</h3>
                 <p>
                     {{ iotd.date|date:"SHORT_DATE_FORMAT" }},
-                    {% trans "by" %}
                     {% astrobin_username iotd.image.user %}
                 </p>
             </div>

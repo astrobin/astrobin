@@ -5,7 +5,7 @@
 {% load tags %}
 {% load staticfiles %}
 
-{% block title %}{% blocktrans with user=requested_user %}{{user}}'s plots{% endblocktrans %}{% endblock %}
+{% block title %}{% blocktrans trimmed with user=requested_user %}{{user}}'s plots{% endblocktrans %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block breadcrumbs %}
@@ -22,11 +22,11 @@
     {% ifequal request.user requested_user %}
     <p class="alert alert-info">
         {% url 'user_page' requested_user as user_page %}
-        {% blocktrans with requested_user.username as user %}Hey <strong>{{user}}</strong>! I just wanted to let you know that you could make these plots more useful if you added all data to your images. Please make sure by checking whether you have images which lack data <a href="{{user_page}}?public&sub=nodata">here</a>.{% endblocktrans %}
+        {% blocktrans trimmed with requested_user.username as user %}Hey <strong>{{user}}</strong>! I just wanted to let you know that you could make these plots more useful if you added all data to your images. Please make sure by checking whether you have images which lack data <a href="{{user_page}}?public&sub=nodata">here</a>.{% endblocktrans %}
     </p>
     {% endifequal %}
 
-    <div class="row section">
+    <div class="row-fluid section">
         <div class="span6">
             <div class="subtle-container">
                 <a class="anchor" name="stats_integration_hours_anchor"></a>
@@ -55,9 +55,9 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row-fluid">
         <div class="span6">
-            <div class="subtle-container"
+            <div class="subtle-container">
                 <a class="anchor" name="stats_views_anchor"></a>
                 <div class="header">{% trans "Combined view count for all the user's images, plotted against time." %}</div>
                 <div id="stats_views" class="plot" style="width:420px;height:200px;">

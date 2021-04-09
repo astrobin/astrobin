@@ -52,7 +52,8 @@ tokenPath = ''
 tokenFile = 'token.txt'
 
 
-class FlickrError(Exception): pass
+class FlickrError(Exception):
+    pass
 
 
 class Photo(object):
@@ -65,11 +66,11 @@ class Photo(object):
                   'permaddmeta', 'url', 'views']
 
     # XXX: Hopefully None won't cause problems
-    def __init__(self, id, owner=None, dateuploaded=None, \
-                 title=None, description=None, ispublic=None, \
-                 isfriend=None, isfamily=None, cancomment=None, \
-                 canaddmeta=None, comments=None, tags=None, secret=None, \
-                 isfavorite=None, server=None, farm=None, license=None, \
+    def __init__(self, id, owner=None, dateuploaded=None,
+                 title=None, description=None, ispublic=None,
+                 isfriend=None, isfamily=None, cancomment=None,
+                 canaddmeta=None, comments=None, tags=None, secret=None,
+                 isfavorite=None, server=None, farm=None, license=None,
                  rotation=None, url=None, views=None):
         """Must specify id, rest is optional."""
         self.__loaded = False
@@ -136,8 +137,8 @@ class Photo(object):
         self.__rotation = photo.rotation
 
         owner = photo.owner
-        self.__owner = User(owner.nsid, username=owner.username, \
-                            realname=owner.realname, \
+        self.__owner = User(owner.nsid, username=owner.username,
+                            realname=owner.realname,
                             location=owner.location)
 
         self.__title = photo.title.text
@@ -166,7 +167,7 @@ class Photo(object):
         # TODO: Implement Notes?
         if hasattr(photo.tags, "tag"):
             if isinstance(photo.tags.tag, list):
-                self.__tags = [Tag(tag.id, User(tag.author), tag.raw, tag.text) \
+                self.__tags = [Tag(tag.id, User(tag.author), tag.raw, tag.text)
                                for tag in photo.tags.tag]
             else:
                 tag = photo.tags.tag
@@ -217,7 +218,7 @@ class Photo(object):
         if description is None:
             description = self.description
 
-        _dopost(method, auth=True, title=title, \
+        _dopost(method, auth=True, title=title,
                 description=description, photo_id=self.id)
 
         self.__title = title
@@ -292,9 +293,9 @@ class Photo(object):
         Example usage:
 
             >>> exif = photo.getExif()
-            >>> print exif.camera
+            >>> print(exif.camera)
             >>> for t in exif.tags:
-            ...    print '%s: %s' % (t.label, t.raw)
+            ...    print('%s: %s' % (t.label, t.raw))
 
         """
         return Exif.getExif(self.id)
@@ -1230,7 +1231,7 @@ def test_echo():
 
 def _doget(method, auth=False, **params):
     # uncomment to check you aren't killing the flickr server
-    # print "***** do get %s" % method
+    # print("***** do get %s" % method)
 
     params = _prepare_params(params)
     url = '%s%s/?api_key=%s&method=%s&%s%s' % \
@@ -1239,14 +1240,14 @@ def _doget(method, auth=False, **params):
 
     # another useful debug print statement
     if debug:
-        print "_doget", url
+        print("_doget", url)
 
     return _get_data(minidom.parse(urlopen(url)))
 
 
 def _dopost(method, auth=False, **params):
     # uncomment to check you aren't killing the flickr server
-    # print "***** do post %s" % method
+    # print("***** do post %s" % method)
 
     params = _prepare_params(params)
     url = '%s%s/?api_key=%s%s' % \
@@ -1258,8 +1259,8 @@ def _dopost(method, auth=False, **params):
 
     # another useful debug print statement
     if debug:
-        print "_dopost url", url
-        print "_dopost payload", payload
+        print("_dopost url", url)
+        print("_dopost payload", payload)
 
     return _get_data(minidom.parse(urlopen(url, payload)))
 
@@ -1535,4 +1536,4 @@ def getUserPhotosURL(userid):
 
 
 if __name__ == '__main__':
-    print test_echo()
+    print(test_echo())

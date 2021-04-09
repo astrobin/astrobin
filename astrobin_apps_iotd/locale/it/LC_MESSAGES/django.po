@@ -1,23 +1,26 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: AstroBin Apps: IOTD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 09:22+0000\n"
-"PO-Revision-Date: 2020-05-13 21:48+0000\n"
-"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2021-04-09 14:06+0000\n"
+"PO-Revision-Date: 2021-04-09 15:49+0200\n"
+"Last-Translator: Salvatore Iovene\n"
+"Language-Team: Italian\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1589406512.000000\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Loco https://localise.biz\n"
+"X-Loco-Source-Locale: en\n"
+"X-Loco-Project-Id: 108442\n"
+"X-Loco-Api-Version: 1.0.25 20210310-1\n"
+
+msgid "Sorry, it's now too late to retract this submission."
+msgstr "Spiacenti, è troppo tardi per ritirare questa proposta."
+
+msgid "Sorry, it's now too late to retract this vote."
+msgstr "Spiacenti, è troppo tardi per ritirare questo voto."
 
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "Non sei un membro del gruppo di submitter Foto del Giorno."
@@ -30,6 +33,9 @@ msgstr "Le immagini nell'area di lavoro non possono essere proposte."
 
 msgid "This user has chosen to be excluded from competitions."
 msgstr "Questo utente ha scelto di essere escluso dalle competizioni."
+
+msgid "This user has been banned from competitions."
+msgstr "Questo utente è stato bannato dalle competizioni."
 
 #, python-format
 msgid ""
@@ -124,27 +130,20 @@ msgid "You cannot unelect a past or current IOTD."
 msgstr ""
 "Non puoi rimuovere l'elezione di una Foto del Giorno passata o corrente."
 
-msgid "Submit for IOTD"
-msgstr "Proponi come Foto del Giorno"
+#, python-format
+msgid "you already selected %s IOTD today (UTC)"
+msgstr "hai già selezionato %s FOto del Giorno oggi (UTC)"
 
-msgid ""
-"You will submit this image to the IOTD Submissions Queue. From there, a "
-"member of the IOTD Reviewers Board will consider promoting it for final "
-"evaluation from an IOTD Judge"
-msgstr ""
-"Questa immagine sarà proposta alla coda si proposte per la Foto del Giorno. "
-"Lì, un membro del gruppo dei reviewer della Foto del Giorno considererà la "
-"suo promozione per la valutazione finale da parte di un giudice della Foto "
-"del Giorno."
+#, python-format
+msgid "you already selected %s scheduled IOTDs"
+msgstr "hai già programmato %s Foto del Giorno."
 
-msgid "Submit"
-msgstr "Proponi"
+#, python-format
+msgid "there are already %s scheduled IOTDs"
+msgstr "ci sono già %s Foto del Giorno programmate"
 
 msgid "Image of the day"
 msgstr "Foto del Giorno"
-
-msgid "by"
-msgstr "di"
 
 msgid "IOTD Judgement Queue"
 msgstr "Coda di Elezione Foto del Giorno"
@@ -153,37 +152,19 @@ msgid ""
 "Please select the images that you want to elect to IOTD by clicking on them."
 msgstr "Scegli le immagini che vuoi eleggere a Foto del Giorno cliccandole."
 
+#, python-format
+msgid ""
+"Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
+"<strong>%(time)s</strong>."
+msgstr ""
+"Spiacenti, non puoi selezionare una Foto del Giorno in questo momento: "
+"%(reason)s. Prova di nuovo in <strong>%(time)s</strong>."
+
 msgid "This queue is currently empty."
 msgstr "Questa coda al momento è vuota."
 
-msgid "Reviewers"
-msgstr "Reviewer"
-
-msgid "Loading"
-msgstr "Caricamento"
-
 msgid "Error"
 msgstr "Errore"
-
-msgid "IOTD Review Queue"
-msgstr "Coda di Votazione Foto del Giorno"
-
-msgid ""
-"Please select the images that you want to promote for final judgement by "
-"clicking on them."
-msgstr ""
-"Selezione le immagini che vuoi promuovere per il giudizio finale cliccandole."
-
-msgid "Submitters"
-msgstr "Submitter"
-
-msgid "IOTD Submission Queue"
-msgstr "Coda di Proposte Foto del Giorno"
-
-msgid ""
-"Please select the images that you want to propose for IOTD consideration."
-msgstr ""
-"Scegli le immagini che vuoi proporre per la considerazione a Foto del Giorno."
 
 msgid "You cannot unelect an IOTD elected by another judge."
 msgstr ""
@@ -194,15 +175,3 @@ msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr ""
 "Tutte le posizioni per Foto del Giorno per i prossimi %(days)s sono state "
 "occupate."
-
-#~ msgid "You cannot submit a judge's image."
-#~ msgstr "Non puoi proporre l'immagine di un giudice."
-
-#~ msgid "You cannot vote for a judge's image."
-#~ msgstr "Non puoi votare l'immagine di un giudice."
-
-#~ msgid "You cannot elect a judge's image."
-#~ msgstr "Non puoi eleggere l'immagine di un giudice."
-
-#~ msgid "No images uploaded on this day."
-#~ msgstr "Nessuna immagine caricata questo giorno."

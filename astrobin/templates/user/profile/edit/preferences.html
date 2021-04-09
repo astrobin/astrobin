@@ -15,14 +15,15 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row">
+    <div class="row-fluid">
         {% include 'user/profile/edit/navigation.html' %}
         <div class="span9">
             {% if READONLY_MODE %}
                 {% include 'readonly_mode.html' %}
             {% else %}
-                <form class="form-horizontal" method="post" action="{% url 'profile_save_preferences' %}">{% csrf_token %}
-                    {{form|as_bootstrap}}
+                <form id="profile-edit-preferences-form" class="form-horizontal" method="post"
+                      action="{% url 'profile_save_preferences' %}">{% csrf_token %}
+                    {{ form|as_bootstrap }}
 
                     <div class="form-actions">
                         <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans "Save" %}" />

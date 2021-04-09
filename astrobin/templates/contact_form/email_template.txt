@@ -1,8 +1,0 @@
-You have received a contact request.
-
-Name: {{ name }}
-Email: {{ email }}
-Message:
-
-{{ body|safe }}
-

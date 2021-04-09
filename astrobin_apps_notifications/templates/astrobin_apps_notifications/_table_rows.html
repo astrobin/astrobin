@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load static %}
 {% load tags %}
 
 <tr
@@ -27,6 +28,8 @@
                 <i class="icon icon-ok"></i>
             </a>
         {% endif %}
+
+        <div class="loading"><img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="" /></div>
     </td>
 
 </tr>

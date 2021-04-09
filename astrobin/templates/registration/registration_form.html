@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
-
+{% load common_tags %}
 
 {% block title %}{% trans "Register with AstroBin" %}{% endblock %}
 
@@ -26,8 +26,31 @@
             {{ form|as_bootstrap }}
 
             <div class="form-actions">
-                <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans 'Submit' %}" />
+                <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit">
+                    {% trans "Submit" %}
+                    {% button_loading_indicator %}
+                </button>
             </div>
         </form>
     {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        $(document).ready(function () {
+            var referral = getUrlParameter('r');
+            var $el = $('#id_referral_code');
+
+            if ($el.val() === '') {
+                $el.val(referral);
+            }
+        });
+    </script>
 {% endblock %}

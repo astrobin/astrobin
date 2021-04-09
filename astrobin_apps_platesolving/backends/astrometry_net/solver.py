@@ -15,9 +15,12 @@ from astrobin_apps_platesolving.backends.base import AbstractPlateSolvingBackend
 from errors import RequestError
 from utils import json2python, python2json
 
-default_url = 'http://nova.astrometry.net/api/'
+base_url = 'http://nova.astrometry.net'
+default_url = base_url + '/api/'
 
 log = logging.getLogger('apps')
+
+# TODO: for python3 compat, StringIO must be imported differently (from io module)
 
 
 class Solver(AbstractPlateSolvingBackend):
@@ -67,10 +70,10 @@ class Solver(AbstractPlateSolvingBackend):
                     # doesn't provide the flexibility to override, so we
                     # have to copy-n-paste-n-modify.
                     for h, v in msg.items():
-                        print >> self._fp, ('%s: %s\r\n' % (h, v)),
+                        self._fp.write('%s: %s\r\n' % (h, v))
 
                     # A blank line always separates headers from body
-                    print >> self._fp, '\r\n',
+                    self._fp.write('\r\n')
 
                 # The _write_multipart method calls "clone" for the
                 # sub-parts.  We hijack that, setting root=False.
@@ -88,10 +91,9 @@ class Solver(AbstractPlateSolvingBackend):
             data = urlencode(data)
             headers = {}
 
-        log.debug("Astrometry.net: sending request to %s" % url)
         request = Request(url=url, headers=headers, data=data)
 
-        response = urlopen(request)
+        response = urlopen(request, timeout=30)
         text = response.read()
         result = json2python(text)
         status = result.get('status')
@@ -197,7 +199,7 @@ class Solver(AbstractPlateSolvingBackend):
         job_id = self.get_job_from_submission(submission_id)
 
         if job_id:
-            return 'http://nova.astrometry.net/annotated_full/%d' % job_id
+            return '%s/annotated_full/%d' % (base_url, job_id)
 
         return ''
 
@@ -205,7 +207,7 @@ class Solver(AbstractPlateSolvingBackend):
         job_calibration_id = self.get_job_calibration_from_submission(submission_id)
 
         if job_calibration_id:
-            return 'http://nova.astrometry.net/sky_plot/zoom1/%d' % job_calibration_id
+            return '%s/sky_plot/zoom1/%d' % (base_url, job_calibration_id)
 
         return ''
 

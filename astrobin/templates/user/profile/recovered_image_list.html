@@ -1,0 +1,227 @@
+{% load i18n %}
+{% load static %}
+{% load astrobin_apps_images_tags %}
+{% load astrobin_apps_users_tags %}
+{% load common_tags %}
+
+
+{% if image_list %}
+    <div class="alert alert-info">
+        <h3>{% trans "Please confirm your recovered images" %}</h3>
+
+        <p>
+            {% blocktrans trimmed with url='https://docs.google.com/document/d/1PzdYQQpR4LueJUMnbyi162xQLAYkr3MiU_7wy4ScdMU/edit?usp=sharing' %}
+                Following the <a href="{{ url }}" target="_blank">data loss incident in February 2020</a>, these images
+                <strong>were automatically recovered</strong>.
+            {% endblocktrans %}
+        </p>
+
+        <p>
+            {% blocktrans trimmed %}
+                Now you need to <strong>manually confirm or reject</strong> them.
+            {% endblocktrans %}
+        </p>
+
+        <hr />
+
+        <h4>{% trans "Instructions" %}</h4>
+
+        <ol>
+            <li>
+                {% blocktrans trimmed %}
+                    Below, you see the list of all your images impacted by the automatic recovery process.
+                {% endblocktrans %}
+            </li>
+            <li>
+                {% blocktrans trimmed %}
+                    The big thumbnail represents the original upload, and the small thumbnails represent revisions.
+                {% endblocktrans %}
+            </li>
+            <li>
+                {% blocktrans trimmed %}
+                    Click on a thumbnail once to mark it for recovery, again to mark it for deletion, once more to
+                    return to the "do nothing" state.
+                {% endblocktrans %}
+            </li>
+            <li>
+                {% blocktrans trimmed %}
+                    You can also use the "Recover all" and "Delete all" buttons at the bottom.
+                {% endblocktrans %}
+            </li>
+            <li>
+                {% blocktrans trimmed %}
+                    When you are ready, click on the "Submit selected" button to confirm your selection.
+                {% endblocktrans %}
+            </li>
+            <li>
+                {% blocktrans trimmed %}
+                    You will return to this page, and the images for which you didn't make a selection will still be
+                    here.
+                {% endblocktrans %}
+            </li>
+        </ol>
+        <p>
+            {% blocktrans trimmed %}
+                The recovered images will return to your gallery (public or staging, depending on where they were before
+                the data loss).
+            {% endblocktrans %}
+        </p>
+    </div>
+
+    <div class="recovery-process">
+        {% for image in image_list %}
+            <div class="row section">
+                <div class="span9">
+                    <h2>{{ image.title|escape|default:_("(no title)") }}</h2>
+                </div>
+
+                <div class="span9">
+                    <h4>{% trans "Original upload" %}</h4>
+                </div>
+
+                <div class="span5">
+                    {% astrobin_image image 'story' revision='0' link=False tooltip=False %}
+                </div>
+                <div class="span4">
+                    <dl>
+                        <dt>{% trans "Link" %}</dt>
+                        <dd>
+                            <a href="{% url 'image_detail' image.get_id '0' %}" target="_blank">
+                                <i class="icon-link"></i>
+                            </a>
+                        </dd>
+
+                        <dt>{% trans "Staging area" %}</dt>
+                        <dd>
+                            {% if image.is_wip %}
+                                <i class="icon-ok"></i>
+                            {% else %}
+                                <i class="icon-remove"></i>
+                            {% endif %}
+                        </dd>
+
+                        <dt>{% trans "Corrupted" %}</dt>
+                        <dd>
+                            {% if image.corrupted %}
+                                <span class="corrupted-yes">{% trans "Yes" %}</span>
+                            {% else %}
+                                <span class="corrupted-no">{% trans "No" %}</span>
+                            {% endif %}
+                        </dd>
+
+                        {% if image.corrupted %}
+                            <dt>{% trans "Recovered" %}</dt>
+                            <dd>
+                                {% if image.recovered %}
+                                    <span class="recovered-yes">{% trans "Yes" %}</span>
+                                {% else %}
+                                    <span class="recovered-no">{% trans "No" %}</span>
+                                {% endif %}
+                            </dd>
+
+                            <dt>{% trans "Deleted" %}</dt>
+                            <dd>
+                                {% if image.deleted %}
+                                    <span class="deleted-yes">{% trans "Yes" %}</span>
+                                {% else %}
+                                    <span class="deleted-no">{% trans "No" %}</span>
+                                {% endif %}
+                            </dd>
+                        {% endif %}
+                    </dl>
+                </div>
+            </div>
+            {% if image.revisions.all.count > 0 %}
+                <div class="row">
+                    <div class="span9">
+                        <h4>{% trans "Revisions" %}</h4>
+                    </div>
+                </div>
+
+                {% for revision in image.revisions.all %}
+                    <div class="row section">
+                        <div class="span2">
+                            {% astrobin_image image 'story' revision=revision.label link=False tooltip=False %}
+                        </div>
+                        <div class="span4">
+                            <dl>
+                                <dt>{% trans "Revision" %}</dt>
+                                <dd>{{ revision.label }}</dd>
+
+                                <dt>{% trans "Link" %}</dt>
+                                <dd>
+                                    <a href="{% url 'image_detail' image.get_id revision.label %}" target="_blank">
+                                        <i class="icon-link"></i>
+                                    </a>
+                                </dd>
+
+                                <dt>{% trans "Final" %}</dt>
+                                <dd>
+                                    {% if revision.final %}
+                                        <i class="icon-ok"></i>
+                                    {% else %}
+                                        <i class="icon-remove"></i>
+                                    {% endif %}
+                                </dd>
+
+                                <dt>{% trans "Corrupted" %}</dt>
+                                <dd>
+                                    {% if revision.corrupted %}
+                                        <span class="corrupted-yes">{% trans "Yes" %}</span>
+                                    {% else %}
+                                        <span class="corrupted-no">{% trans "No" %}</span>
+                                    {% endif %}
+                                </dd>
+
+                                {% if revision.corrupted %}
+                                    <dt>{% trans "Recovered" %}</dt>
+                                    <dd>
+                                        {% if revision.recovered %}
+                                            <span class="recovered-yes">{% trans "Yes" %}</span>
+                                        {% else %}
+                                            <span class="recovered-no">{% trans "No" %}</span>
+                                        {% endif %}
+                                    </dd>
+                                {% endif %}
+                            </dl>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <hr />
+        {% endfor %}
+
+        <form class="form">
+            <div class="form-actions text-right">
+                <button id="recovery-process-recover-all" class="btn btn-link btn-block-mobile">
+                    {% trans "Recover all" %}
+                </button>
+
+                <button id="recovery-process-delete-all" class="btn btn-link btn-block-mobile">
+                    {% trans "Delete all" %}
+                </button>
+
+                <button id="recovery-process-reset" class="btn btn-link btn-block-mobile">
+                    {% trans "Reset" %}
+                </button>
+
+                <button id="recovery-process-submit-button"
+                        class="btn btn-primary btn-block-mobile {% button_loading_class %}" disabled="disabled">
+                    {% trans "Submit selected" %} (<span id="recovery-process-selected-number">0</span>)
+                    {% button_loading_indicator %}
+                </button>
+
+                <p class="alert alert-error">
+                    <strong>Be careful if deleting images!</strong> You <em>almost never</em> want to do that, unless
+                    you uploaded completely new images (in a new upload process) to replace the lost ones. This is
+                    probably not the case, and if you have recovered some images manually, you have replaced them on the
+                    same page.
+                </p>
+            </div>
+        </form>
+    </div>
+{% else %}
+    {% trans "There are no images to recover." %}
+{% endif %}
+

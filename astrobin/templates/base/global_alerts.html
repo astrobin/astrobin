@@ -1,41 +1,211 @@
 {% load common_tags %}
 {% load i18n %}
+{% load astrobin_apps_premium_tags %}
 
-{% if request.user.is_authenticated and not request.user.userprofile.seen_email_permissions %}
-<div class="container alert alert-warning global-alert">
-    <div class="row">
-        <div class="span9">
-            <p>
-                {% blocktrans %}Please review your preferences about receiving important communications, newsletters, and marketing emails from AstroBin.{% endblocktrans %}
-            </p>
+<div id="global-alerts">
+
+{% if request.user.is_authenticated and request.user|has_an_expired_premium_subscription %}
+
+    <div class="accordion container" id="expired-subscription-accordion">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle show-caret collapsed" data-toggle="collapse"
+                   data-parent="#expired-subscription-accordion" href="#expired-subscription-accordion-content">
+                    <i class="icon-info-sign"></i>
+                    {% blocktrans trimmed %}
+                        Your AstroBin subscription is expired.
+                    {% endblocktrans %}
+                </a>
+            </div>
+            <div id="expired-subscription-accordion-content" class="accordion-body collapse">
+                <div class="accordion-inner alert alert-info global-alert">
+                    <p>
+                        {% blocktrans trimmed %}
+                            That's okay: we don't EVER delete your images if your subscription expires.
+                        {% endblocktrans %}
+
+                        {% blocktrans trimmed %}
+                            However, it would be great if you considered renewing: it's inexpensive and it goes a long
+                            way to support the AstroBin project!
+                        {% endblocktrans %}
+                    </p>
+
+                    <a class="btn btn-small btn-primary"
+                       href="{% app_redirection_service request '/subscriptions/options' %}">
+                        {% trans "Subscription plans" %}
+                    </a>
+
+                    <a class="btn btn-small"
+                       href="{% app_redirection_service request '/subscriptions/view' %}">
+                        {% trans "Your subscriptions" %}
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="span3">
-            <form action="{% url 'profile_seen_email_permissions' %}" method="post">{% csrf_token %}
-                <input type="hidden" name="next" value="{% url 'profile_edit_preferences' %}" />
-                <input class="btn btn-primary" type="submit" value="{% trans "Preferences" %} &rarr;" />
-            </form>
-            <form action="{% url 'profile_seen_email_permissions' %}" method="post">{% csrf_token %}
-                <input type="hidden" name="next" value="{{request.path}}" />
-                <input class="btn" type="submit" value="{% trans "Don't show again" %}" />
-            </form>
-        </div>
-    </div> <!-- row -->
-</div>
-{% endif %}
-
-
-{% if HAS_BOUNCED_EMAILS %}
-<div class="container alert alert-warning global-alert">
-    {% blocktrans %}AstroBin is unable to deliver your emails, looks like your address is incorrect.{% endblocktrans %}
-    <a href="{% url 'change_email_index' %}">{% trans "Change your e-mail" %}</a>.
-</div>
-{% endif %}
-
-{% if HAS_COMPLAINT %}
-    <div class="container alert alert-warning global-alert">
-        {% blocktrans %}AstroBin is not delivering you emails because you have marked some of them as spam.{% endblocktrans %}
-        <a href="{% url 'contact_form:contact' %}">
-            {% trans "Contact us to resolve the issue" %}
-        </a>.
     </div>
+
 {% endif %}
+
+{% if request.user.is_authenticated and request.user|has_premium_subscription_near_expiration:7 %}
+
+    <div class="accordion container" id="expired-subscription-accordion">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle show-caret collapsed" data-toggle="collapse"
+                   data-parent="#expired-subscription-accordion" href="#expired-subscription-accordion-content">
+                    <i class="icon-info-sign"></i>
+                    {% blocktrans trimmed %}
+                        Your AstroBin subscription about to expire.
+                    {% endblocktrans %}
+                </a>
+            </div>
+            <div id="expired-subscription-accordion-content" class="accordion-body collapse">
+                <div class="accordion-inner alert alert-info global-alert">
+                    <p>
+                        {% blocktrans trimmed %}
+                            That's okay: we don't EVER delete your images if your subscription expires.
+                        {% endblocktrans %}
+
+                        {% blocktrans trimmed %}
+                            However, it would be great if you considered renewing: it's inexpensive and it goes a
+                            long way to support the AstroBin project!
+                        {% endblocktrans %}
+                    </p>
+
+                    <a class="btn btn-small btn-primary"
+                       href="{% app_redirection_service request '/subscriptions/options' %}">
+                        {% trans "Subscription plans" %}
+                    </a>
+
+
+                    <a class="btn btn-small" href="{% app_redirection_service request '/subscriptions/view' %}">
+                        {% trans "Your subscriptions" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+
+{% if HARD_BOUNCES %}
+
+    <div class="accordion container" id="hard-bounce-accordion">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle show-caret collapsed" data-toggle="collapse" data-parent="#hard-bounce-accordion"
+                   href="#hard-bounce-accordion-content">
+                    <i class="icon-warning-sign"></i>
+                    {% blocktrans trimmed %}
+                        AstroBin is unable to deliver your emails, and it won't try again until the issue is
+                        resolved.
+                    {% endblocktrans %}
+                </a>
+            </div>
+            <div id="hard-bounce-accordion-content" class="accordion-body collapse">
+                <div class="accordion-inner alert alert-warning global-alert">
+                    <p>
+
+                        {% blocktrans trimmed %}
+                            Your email provider recently reported the following error code(s):
+                        {% endblocktrans %}
+                    </p>
+                    <p>
+                        {{ HARD_BOUNCES.0.diagnostic_code }}
+                    </p>
+                    <p>
+                        {% blocktrans trimmed %}
+                            If you believe this is in error, please contact us. Otherwise please contact you
+                            email provider or change your e-mail address on AstroBin.
+                        {% endblocktrans %}
+                    </p>
+
+                    <a class="btn btn-small btn-primary"
+                       href="{% url 'change_email_index' %}">{% trans "Change your e-mail" %}</a>
+                    <a class="btn btn-small"
+                       href="{% url 'astrobin_apps_users.bounce_ignore_and_retry' %}">{% trans "Ignore and retry" %}</a>
+                    <a class="btn btn-small" href="{% url 'contact' %}">{% trans "Contact us" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% elif SOFT_BOUNCES and SOFT_BOUNCES|length > 2 %}
+    
+    <div class="accordion container" id="soft-bounce-accordion">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle show-caret collapsed" data-toggle="collapse" data-parent="#soft-bounce-accordion"
+                   href="#soft-bounce-accordion-content">
+                    <i class="icon-warning-sign"></i>
+                    {% blocktrans trimmed %}
+                        AstroBin is unable to deliver your emails, and it will try again a week after the latest email
+                        bounce.
+                    {% endblocktrans %}
+                </a>
+            </div>
+            <div id="soft-bounce-accordion-content" class="accordion-body collapse">
+                <div class="accordion-inner alert alert-warning global-alert">
+                    <p>
+                        {% blocktrans trimmed %}
+                            Your email provider recently reported the following error code(s):
+                        {% endblocktrans %}
+                    </p>
+                    <p>
+                        <ul>
+                            {% for bounce in SOFT_BOUNCES %}
+                                <li>{{ bounce.diagnostic_code }}</li>
+                            {% endfor %}
+                        </ul>
+                    </p>
+                    <p>
+                        {% blocktrans trimmed %}
+                            If you believe this is in error, please contact us. Otherwise please contact your email
+                            provider or
+                            change your e-mail address on AstroBin.
+                        {% endblocktrans %}
+                    </p>
+
+                    <a class="btn btn-small btn-primary"
+                       href="{% url 'change_email_index' %}">{% trans "Change your e-mail" %}</a>
+                    <a class="btn btn-small"
+                       href="{% url 'astrobin_apps_users.bounce_ignore_and_retry' %}">{% trans "Ignore and retry" %}</a>
+                    <a class="btn btn-small" href="{% url 'contact' %}">{% trans "Contact us" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% elif HAS_COMPLAINT %}
+
+    <div class="accordion container" id="complaint-accordion">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle show-caret collapsed" data-toggle="collapse" data-parent="#complaint-accordion"
+                   href="#complaint-accordion-content">
+                    <i class="icon-warning-sign"></i>
+                    {% blocktrans trimmed %}
+                        AstroBin is not delivering you emails because you have marked some of them as spam.
+                    {% endblocktrans %}
+                </a>
+            </div>
+            <div id="complaint-accordion-content" class="accordion-body collapse">
+                <div class="accordion-inner alert alert-warning global-alert">
+                    <p>
+                        {% blocktrans trimmed %}
+                            If you have an automated filter or rule to mark AstroBin emails as spam, please disable it
+                            using your email client.
+                        {% endblocktrans %}
+                    </p>
+
+                    <a class="btn btn-small btn-primary"
+                       href="{% url 'astrobin_apps_users.complaint_remove' %}">{% trans "Resume emails" %}</a>
+                    <a class="btn btn-small" href="{% url 'contact' %}">{% trans "Contact us" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endif %}
+
+</div>

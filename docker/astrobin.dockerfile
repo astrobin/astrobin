@@ -45,7 +45,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 RUN mkdir /code
 COPY requirements.txt /code
 WORKDIR /code
-RUN python -m pip install --upgrade pip && \
+RUN python -m pip install pip==20.3.4 && \
     apt-get purge -y python-pip && \
     python -m pip install "setuptools<45" && \
     pip install --no-deps -r requirements.txt --src /src
@@ -64,6 +64,9 @@ RUN sass astrobin/static/astrobin/scss/astrobin-mobile.scss astrobin/static/astr
 # Install logrotate file
 COPY docker/astrobin.logrotate.conf /etc/logrotate.d/astrobin
 RUN chown root:root /etc/logrotate.d/astrobin && chmod 644 /etc/logrotate.d/astrobin
+
+# Set up permissions for logging in DEBUG mode
+RUN touch debug.log && chmod 777 debug.log
 
 CMD python manage.py migrate --noinput && gunicorn wsgi:application -w 2 -b :8083
 EXPOSE 8083

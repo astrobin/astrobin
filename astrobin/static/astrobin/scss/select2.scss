@@ -178,16 +178,16 @@ $flat-theme-dark-color: $grey-6;
 
 /****** Single SCSS *******/
 .select2-container--flat {
-  .select2-selection--single {
+  .select2-selection--single,
+  .select2-selection--multiple {
     background: $flat-theme-light-color;
     border: 0;
-    height: 34px;
+    min-height: 34px;
     border-radius: 4px;
 
     .select2-selection__rendered {
       color: $strong-text-color;
       line-height: 34px;
-      border: 1px solid $grey-7;
       border-radius: 4px;
     }
 
@@ -247,11 +247,11 @@ $flat-theme-dark-color: $grey-6;
     }
 
     .select2-selection__choice {
-      background-color: $flat-theme-light-color;
-      color: $text-color;
-      border: 1px solid $flat-theme-light-color;
-      border-radius: 0;
-      padding: 3px 5px;
+      background-color: darken($grey-5, 5%);
+      color: $grey-1;
+      border: 1px solid $grey-6;
+      border-radius: 4px;
+      padding: 2px 8px;
       cursor: default;
       float: left;
       margin-right: 5px;
@@ -259,10 +259,29 @@ $flat-theme-dark-color: $grey-6;
     }
 
     .select2-selection__choice__remove {
-      color: $flat-theme-dark-color;
+      color: $grey-4;
       margin-right: 6px;
       margin-left: 6px;
       float: right;
+
+      &:hover {
+        color: $grey-2;
+      }
+    }
+  }
+
+  .select2-search {
+    margin-top: 3px;
+
+    input {
+      height: 26px;
+      border: 0 !important;
+      background: transparent !important;
+      margin-top: 0 !important;
+
+      &:focus {
+        box-shadow: none !important;
+      }
     }
   }
 }

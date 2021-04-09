@@ -30,7 +30,7 @@ def _compareValidity(a, b):
 
 def _compareNames(a, b):
     """
-    This function is used to determin the "weight" of each Premium subscription. When a user has multiple, only the
+    This function is used to determine the "weight" of each Premium subscription. When a user has multiple, only the
     heaviest one gets considered throughout the website.
     :param a: left operand.
     :param b: right operand.
@@ -81,22 +81,19 @@ def premium_get_valid_usersubscription(user):
     us = [obj for obj in UserSubscription.objects.filter(
         user__username=user.username,
         subscription__name__in=SUBSCRIPTION_NAMES,
-        active=True,
         expires__gte=datetime.today()
     )]
 
     if len(us) == 0:
-        return None
+        result = None
+    elif len(us) == 1:
+        result = us[0]
+    else:
+        sortedByName = sorted(us, cmp=_compareNames)
+        sortedByValidity = sorted(sortedByName, cmp=_compareValidity)
+        result = sortedByName[0]
 
-    if len(us) == 1:
-        return us[0]
-
-    sortedByName = sorted(us, cmp=_compareNames)
-    sortedByValidity = sorted(sortedByName, cmp=_compareValidity)
-
-    result = sortedByName[0]
-
-    cache.set(cache_key, result, 1)
+    cache.set(cache_key, result, 300)
 
     return result
 

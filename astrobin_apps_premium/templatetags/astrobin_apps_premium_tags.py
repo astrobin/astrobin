@@ -2,11 +2,13 @@ import datetime
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.db.models import QuerySet
+from django.core.cache import cache
+from django.db.models import QuerySet, Q
 from django.template import Library
-from subscription.models import Subscription
+from subscription.models import Subscription, UserSubscription
 
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
+from common.services import DateTimeService
 
 register = Library()
 
@@ -20,54 +22,15 @@ def premium_badge(user, size='large'):
 
 
 @register.filter
-def show_renew_message(usersubscription):
-    # type: (UserSubscription) -> bool
-    return usersubscription is not None and usersubscription.valid() and usersubscription.subscription.name in [
-        "AstroBin Lite",
-        "AstroBin Lite 2020+",
-        "AstroBin Premium",
-        "AstroBin Premium 2020+",
-        "AstroBin Ultimate 2020+"
-    ]
-
-@register.simple_tag
-def offered_subscriptions():
-    # type: () -> QuerySet
-    return Subscription.objects.filter(name__in=[
-        "AstroBin Lite 2020+",
-        "AstroBin Premium 2020+",
-        "AstroBin Ultimate 2020+",
-
-        "AstroBin Raw Data Meteor 2020+",
-        "AstroBin Raw Data Luna 2020+",
-        "AstroBin Raw Data Sol 2020+",
-
-        "AstroBin Donor Bronze Monthly",
-        "AstroBin Donor Silver Monthly",
-        "AstroBin Gold Silver Monthly",
-        "AstroBin Platinum Silver Monthly",
-
-        "AstroBin Donor Bronze Yearly",
-        "AstroBin Donor Silver Yearly",
-        "AstroBin Gold Silver Yearly",
-        "AstroBin Platinum Silver Yearly",
-    ])
-
-@register.filter
-def is_subscription_offered(subscription):
-    # type: (Subscription) -> bool
-    return subscription in offered_subscriptions()
-
-@register.filter
 def is_any_ultimate(user):
     return is_ultimate_2020(user)
 
 
 @register.filter
 def is_ultimate_2020(user):
-    userSubscription = premium_get_valid_usersubscription(user)
-    if userSubscription:
-        return userSubscription.subscription.group.name == "astrobin_ultimate_2020"
+    user_subscription = premium_get_valid_usersubscription(user)
+    if user_subscription:
+        return user_subscription.subscription.group.name == "astrobin_ultimate_2020"
     return False
 
 
@@ -78,17 +41,17 @@ def is_any_premium(user):
 
 @register.filter
 def is_premium_2020(user):
-    userSubscription = premium_get_valid_usersubscription(user)
-    if userSubscription:
-        return userSubscription.subscription.group.name == "astrobin_premium_2020"
+    user_subscription = premium_get_valid_usersubscription(user)
+    if user_subscription:
+        return user_subscription.subscription.group.name == "astrobin_premium_2020"
     return False
 
 
 @register.filter
 def is_premium(user):
-    userSubscription = premium_get_valid_usersubscription(user)
-    if userSubscription:
-        return userSubscription.subscription.group.name == "astrobin_premium"
+    user_subscription = premium_get_valid_usersubscription(user)
+    if user_subscription:
+        return user_subscription.subscription.group.name == "astrobin_premium"
     return False
 
 
@@ -99,17 +62,17 @@ def is_any_lite(user):
 
 @register.filter
 def is_lite_2020(user):
-    userSubscription = premium_get_valid_usersubscription(user)
-    if userSubscription:
-        return userSubscription.subscription.group.name == "astrobin_lite_2020"
+    user_subscription = premium_get_valid_usersubscription(user)
+    if user_subscription:
+        return user_subscription.subscription.group.name == "astrobin_lite_2020"
     return False
 
 
 @register.filter
 def is_lite(user):
-    userSubscription = premium_get_valid_usersubscription(user)
-    if userSubscription:
-        return userSubscription.subscription.group.name == "astrobin_lite"
+    user_subscription = premium_get_valid_usersubscription(user)
+    if user_subscription:
+        return user_subscription.subscription.group.name == "astrobin_lite"
     return False
 
 
@@ -127,10 +90,56 @@ def is_any_premium_subscription(user):
         is_premium_2020(user) or \
         is_ultimate_2020(user)
 
+
 @register.filter
-def is_usersubscription_current(userSubscription):
+def has_an_expired_premium_subscription(user):
+    cache_key = "has_an_expired_premium_subscription_%d" % user.pk
+
+    cached = cache.get(cache_key)
+    if cached is not None:
+        return cached
+
+    if is_any_premium_subscription(user):
+        result = False
+    else:
+        result = UserSubscription.objects.filter(
+            user=user,
+            expires__lt=DateTimeService.today(),
+            subscription__category__contains="premium"
+        ).exists()
+
+    cache.set(cache_key, result, 300)
+    return result
+
+
+@register.filter
+def has_premium_subscription_near_expiration(user, days):
+    cache_key = "has_premium_subscription_near_expiration_%d" % user.pk
+
+    cached = cache.get(cache_key)
+    if cached is not None:
+        return cached
+
+    if has_an_expired_premium_subscription(user):
+        result = False
+    else:
+        result = UserSubscription.objects.filter(
+            Q(user=user) &
+            Q(active=True) &
+            Q(expires__lt=DateTimeService.today() + datetime.timedelta(days)) &
+            Q(expires__gt=DateTimeService.today()) &
+            Q(subscription__category__contains="premium")
+        ).exists()
+
+    cache.set(cache_key, result, 300)
+    return result
+
+
+@register.filter
+def is_usersubscription_current(user_subscription):
     # type: (UserSubscription) -> bool
-    return userSubscription and userSubscription.active and userSubscription.expires >= datetime.date.today()
+    return user_subscription and user_subscription.active and user_subscription.expires >= datetime.date.today()
+
 
 @register.filter
 def has_valid_premium_offer(user):
@@ -183,11 +192,7 @@ def can_perform_advanced_platesolving(user):
 
 @register.filter
 def can_see_real_resolution(user, image):
-    return not is_free(user) or \
-           user == image.user or \
-           is_any_ultimate(image.user) or \
-           is_premium(image.user) or \
-           is_lite(image.user)
+    return True
 
 
 @register.filter
