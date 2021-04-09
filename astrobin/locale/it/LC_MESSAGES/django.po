@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-05 15:32+0200\n"
-"PO-Revision-Date: 2021-04-05 22:44+0200\n"
+"PO-Revision-Date: 2021-04-09 15:23+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -3603,23 +3603,25 @@ msgstr "AstroBin è in modalità a SOLA LETTURA."
 #: loco:606b75eb6516df53d777efac
 #, python-format
 msgid "<a href=\"%(user_page)s\">%(user)s</a> uploaded a new image."
-msgstr ""
+msgstr "<a href=\"%(user_page)s\">%(user)s</a> ha caricato una nuova immagine."
 
 #: loco:606b75eb6516df53d777efad
 #, python-format
 msgid "<a href=\"%(user_page)s\">%(user)s</a> uploaded a new image revision."
-msgstr ""
+msgstr "<a href=\"%(user_page)s\">%(user)s</a> ha caricato una nuova versione."
 
 #: loco:606b75eb6516df53d777efae
 #, python-format
 msgid ""
 "<a href=\"%(user_page)s\">%(user)s</a> and %(count)s others like this image."
 msgstr ""
+"A <a href=\"%(user_page)s\">%(user)s</a> e %(count)s altri piace questa "
+"immagine."
 
 #: loco:606b75eb6516df53d777efaf
 #, python-format
 msgid "<a href=\"%(user_page)s\">%(user)s</a> likes this image."
-msgstr ""
+msgstr "A <a href=\"%(user_page)s\">%(user)s</a> piace questa immagine."
 
 #: loco:606b75eb6516df53d777efb0
 #, python-format
@@ -3627,11 +3629,15 @@ msgid ""
 "<a href=\"%(user_page)s\">%(user)s</a> and %(count)s others bookmarked this "
 "image."
 msgstr ""
+"<a href=\"%(user_page)s\">%(user)s</a> e %(count)s altri hanno aggiunto "
+"questa immagine ai preferiti."
 
 #: loco:606b75eb6516df53d777efb1
 #, python-format
 msgid "<a href=\"%(user_page)s\">%(user)s</a> bookmarked this image."
 msgstr ""
+"<a href=\"%(user_page)s\">%(user)s</a> ha aggiunto questa immagine ai "
+"preferiti."
 
 #: loco:606b75eb6516df53d777efb2
 #, python-format
@@ -3639,21 +3645,24 @@ msgid ""
 "<a href=\"%(user_page)s\">%(user)s</a> and %(count)s others commented this "
 "image."
 msgstr ""
+"<a href=\"%(user_page)s\">%(user)s</a> e %(count)s altri hanno commentato "
+"questa immagine."
 
 #: loco:606b75eb6516df53d777efb3
 #, python-format
 msgid "<a href=\"%(user_page)s\">%(user)s</a> commented this image."
-msgstr ""
+msgstr "<a href=\"%(user_page)s\">%(user)s</a> ha commentato questa immagine."
 
 #: loco:606b75eb6516df53d777efb4
 #, python-format
 msgid "<a href=\"%(user_page)s\">%(user)s</a> created a new public group."
 msgstr ""
+"<a href=\"%(user_page)s\">%(user)s</a> ha creato un nuovo gruppo pubblico."
 
 #: loco:606b75eb6516df53d777efb5
 #, python-format
 msgid "<a href=\"%(user_page)s\">%(user)s</a> joined a group."
-msgstr ""
+msgstr "<a href=\"%(user_page)s\">%(user)s</a> si è unito ad un gruppo."
 
 #: loco:606b75eb6516df53d777efb6
 msgid "Remove ads"
@@ -4045,11 +4054,15 @@ msgstr "Sei davvero sicuro?"
 msgid ""
 "We know, we're all used to the fact that ads on the Internet are annoying."
 msgstr ""
+"Lo sappiamo, siamo tutti abituati al fatto che le pubblicità su internet "
+"sono fastidiose."
 
 #: loco:606b75eb6516df53d777f008
 msgid ""
 "However, please let us offer you a good reason to allow ads on AstroBin:"
 msgstr ""
+"Ad ogni modo, lasciaci offrire una buona ragione per permettere le "
+"pubblicità su AstroBin:"
 
 #: loco:606b75eb6516df53d777f009
 msgid ""
@@ -4057,6 +4070,9 @@ msgid ""
 "and approval. Nothing fishy, nothing off-topic, and nothing that will use "
 "any of your private information."
 msgstr ""
+"Ci sono solo pubblicità \"astronomiche\" su AstroBin, che sono pubblicate "
+"dopo la mia approvazione. Niente di dubbio, niente di off-topic, e niente "
+"che usi le tue informazioni private."
 
 #: loco:606b75eb6516df53d777f00a
 #, python-format
@@ -4064,6 +4080,8 @@ msgid ""
 "If you still feel that you would rather not see these ads, you can change "
 "this on <a href=\"%(profile_url)s\">your settings page</a>."
 msgstr ""
+"Se comunque preferisci non vedere le pubblicità, puoi cambiare questa cosa "
+"nella<a href=\"%(profile_url)s\">tua pagina delle preferenze</a>."
 
 #: loco:606b75eb6516df53d777f00b
 msgid "Thank you!"
@@ -4577,6 +4595,9 @@ msgid ""
 "the image soon. Remember that you can also <a href=\"%(message_url)s\">send "
 "them a message</a>."
 msgstr ""
+"<strong>%(username)s</strong> è stato notificato. Si spera che aggiornerà "
+"l'immagine presto. Ricorda che puoi anche <a href=\"%(message_url)s\">"
+"mandargli un messaggio</a>."
 
 #: loco:606b75eb6516df53d777f066
 msgid "Return to image"
@@ -4724,14 +4745,14 @@ msgstr "Trasformazione WCS"
 
 #: loco:606b75eb6516df53d777f087
 msgid "Find images in the same area"
-msgstr ""
+msgstr "Trova immagini nella stessa area"
 
 #: loco:606b75eb6516df53d777f088
 #, python-format
 msgid "Around <strong>1</strong> degree"
 msgid_plural "Around <strong>%(n)s</strong> degrees"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Circa <strong>1</strong> grado"
+msgstr[1] "Circa <strong>%(n)s</strong> gradi"
 
 #: loco:606b75eb6516df53d777f08a
 msgid "Resolution"
@@ -4970,6 +4991,11 @@ msgid ""
 "body ephemerides and find planets and asteroids in your image (provided you "
 "also add location information to your image)."
 msgstr ""
+"Per migliorare l'accuratezza della riduzione astrometrica, carica uno dei "
+"file XISF o FITS dai tuoi dati. Questi file di solito hanno gli header di "
+"data e tempo che permetteranno ad AstroBin di calcolare efemiridi del "
+"sistema solare, e trovare pianeti ed asteroidi nella tua immaine (se ci hai "
+"anche associato informazioni sul luogo di acquisizione)."
 
 #: loco:606b75eb6516df53d777f0c0
 #, python-format
@@ -4978,6 +5004,9 @@ msgid ""
 "open format XISF. Learn more about XISF here: <a href=\"%(xisf_url)s\" "
 "target=\"_blank\">%(xisf_url)s</a>"
 msgstr ""
+"Per la massima accuratezza, si raccomanda che usi il formato aperto e nativo "
+"di PixInsight: XISF. Scopri di più riguardo XISF qui: <a href=\"%(xisf_url)"
+"s\" target=\"_blank\">%(xisf_url)s</a>\n"
 
 #: loco:606b75eb6516df53d777f0c1
 msgid ""
@@ -4987,6 +5016,11 @@ msgid ""
 "plate-solution, calibrate your file the usual way (dark/bias/flats) but you "
 "don't need to stretch it."
 msgstr ""
+"<strong>Nota bene:</strong> è molto importante che il file XISF o FITS che "
+"carichi sia allineato alla tua immagine processata, altrimenti le "
+"annotazioni degli oggetti non corrisponderanno. Per migliorare le "
+"probabilità di una riduzione astormetica accurata, calibra il file "
+"normalemnte (dark/bias/flat) ma non fare lo stretch."
 
 #: loco:606b75eb6516df53d777f0c2
 msgid "The following people bookmarked this image"
@@ -6365,6 +6399,7 @@ msgstr ""
 #, python-format
 msgid "%(user)s added your image \"%(title)s\" to their bookmarks!"
 msgstr ""
+"%(user)s ha aggiunto la tua immagine \"%(title)s\" ai propri preferiti!"
 
 #: loco:606b75eb6516df53d777f1a9
 #, python-format
@@ -7801,6 +7836,8 @@ msgstr "(Account cancellato)"
 #: loco:606b75eb6516df53d777f29c
 msgid "Your account was deleted. Thanks for using AstroBin until now!"
 msgstr ""
+"Il tuo account è stato cancellato. Grazie per aver utilizzato AstroBin "
+"finora!"
 
 #: loco:606b75eb6516df53d777f29d
 msgid "Edit your basic information"
