@@ -2,86 +2,105 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Plate-solving\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-09 13:44+0000\n"
-"PO-Revision-Date: 2021-04-05 22:44+0200\n"
+"POT-Creation-Date: 2021-04-05 16:17+0200\n"
+"PO-Revision-Date: 2021-04-09 15:49+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Simplified Chinese\n"
 "Language: zh-Hans\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108448\n"
-"X-Loco-Api-Version: 1.0.25 20210310-1\n"
+"X-Loco-Api-Version: 1.0.25 20210310-1"
 
+#: loco:606b765229f20946c1545c55
 msgid "Perform a blind solve"
 msgstr "执行盲解"
 
+#: loco:606b765229f20946c1545c56
 msgid ""
 "Attempt to solve with no hints. In most cases this will work, but it will "
 "take longer."
-msgstr ""
-"尝试在无任何提示的情况下解析。在大多数情况下，这可以正常工作，但是会花费更长"
-"的时间。"
+msgstr "尝试在无任何提示的情况下解析。在大多数情况下，这可以正常工作，但是会花费更长的时间。"
 
+#: loco:606b765229f20946c1545c57
 msgid "Width of the field in degrees"
 msgstr "视场宽度，以度为单位"
 
+#: loco:606b765229f20946c1545c58
 msgid "Width of the field in arcminutes"
 msgstr "视场宽度，以角秒为单位"
 
+#: loco:606b765229f20946c1545c59
 msgid "Resolution of the field in arcseconds/pixel"
 msgstr "视场分辨率，以弧秒/像素为单位"
 
+#: loco:606b765229f20946c1545c5a
 msgid "Field size units"
 msgstr "视场大小单位"
 
+#: loco:606b765229f20946c1545c5b
 msgid "Min field size"
 msgstr "最小视场大小"
 
+#: loco:606b765229f20946c1545c5c
 msgid "Estimate the lower bound for the width of this field."
 msgstr "估计视场宽度的下限"
 
+#: loco:606b765229f20946c1545c5d
 msgid "Max field size"
 msgstr "最大视场尺寸"
 
+#: loco:606b765229f20946c1545c5e
 msgid "Estimate the upper bound for the width of this field."
 msgstr "估计视场宽度的上限"
 
+#: loco:606b765229f20946c1545c5f
 msgid "Center RA"
 msgstr "中心赤经"
 
+#: loco:606b765229f20946c1545c60
 msgid "Center RA of the field in degrees, 0.000 to 360.000"
 msgstr "视场中心赤经，以度为单位，0.000~360.000°"
 
+#: loco:606b765229f20946c1545c61
 msgid "Center dec"
 msgstr "中心赤纬"
 
+#: loco:606b765229f20946c1545c62
 msgid "Center dec of the field in degrees, -90.000 to +90.000"
 msgstr "视场中心赤纬，以度为单位，-90.000~+90.000°"
 
+#: loco:606b765229f20946c1545c63
 msgid "Radius"
 msgstr "半径"
 
+#: loco:606b765229f20946c1545c64
 msgid ""
 "Tells the plate-solving engine to look within these many degrees of the "
 "given center RA and dec position."
 msgstr "告知解析引擎，在指定中心赤经/赤纬多少度的范围内搜索。"
 
+#: loco:606b765229f20946c1545c65
 msgid "Small"
 msgstr "小"
 
+#: loco:606b765229f20946c1545c66
 msgid "Medium"
 msgstr "中"
 
+#: loco:606b765229f20946c1545c67
 msgid "Large"
 msgstr "大"
 
+#: loco:606b765229f20946c1545c68
 msgid "Sample raw frame (max 100 MB)"
 msgstr "原始帧样本（最大100 MB）"
 
+#: loco:606b765229f20946c1545c69
 msgid ""
 "To improve the accuracy of your plate-solution even further, please upload "
 "one of the XISF or FITS files from your data set. Such files normally have "
@@ -96,114 +115,142 @@ msgid ""
 "match. To improve your chances at a successful accurate plate-solution, "
 "calibrate your file the usual way (dark/bias/flats) but do not stretch it."
 msgstr ""
-"为了进一步提解析精度，请从数据中上传 XISF 或 FITS 文件之一。 此类文件通常具有"
-"日期和时间文件头，这些文件头将使 AstroBin 能够计算出太阳系星历，并在作品中找"
-"到行星和小行星（前提是您还向其中添加了位置信息）。<br/><br/>为了获得最大的准"
-"确性，建议您使用 PixInsight 源生、未压缩加密的 XISF。点击这里了解有关 XISF 的"
-"更多信息：<br/><br/><a href=\"https://pixinsight.com/xisf/\" target=\"_blank"
-"\">https://pixinsight.com/xisf/</a><br/><br/> <strong>请注意：</strong> 将您"
-"上传的 XISF 或 FITS 文件与处理后的作品对齐，是非常重要的，否则标注将不匹配。 "
-"为了提高解析成功率，请以常规方式（暗场/偏置/平场）校准文件，但不要拉伸。"
+"为了进一步提解析精度，请从数据中上传 XISF 或 FITS 文件之一。 此类文件通常具有日期和时间文件头，这些文件头将使 AstroBin "
+"能够计算出太阳系星历，并在作品中找到行星和小行星（前提是您还向其中添加了位置信息）。<br/><br/>为了获得最大的准确性，建议您使用 "
+"PixInsight 源生、未压缩加密的 XISF。点击这里了解有关 XISF 的更多信息：<br/><br/><a href=\"https:"
+"//pixinsight.com/xisf/\" target=\"_blank\">https://pixinsight.com/xisf/</a>"
+"<br/><br/> <strong>请注意：</strong> 将您上传的 XISF 或 FITS "
+"文件与处理后的作品对齐，是非常重要的，否则标注将不匹配。 为了提高解析成功率，请以常规方式（暗场/偏置/平场）校准文件，但不要拉伸。"
 
+#: loco:606b765229f20946c1545c6a
 msgid "Scaled font size"
 msgstr "缩放字体大小"
 
+#: loco:606b765229f20946c1545c6b
 msgid "Font size of the annotations on your main image page"
 msgstr "主作品页面上标注的字体大小"
 
+#: loco:606b765229f20946c1545c6c
 msgid "Show equatorial grid"
 msgstr "显示赤道网格"
 
+#: loco:606b765229f20946c1545c6d
 msgid "Show constellation borders"
 msgstr "显示星座边界"
 
+#: loco:606b765229f20946c1545c6e
 msgid "Show constellation lines"
 msgstr "显示星座连线"
 
+#: loco:606b765229f20946c1545c6f
 msgid "Show named stars"
 msgstr "显示知名恒星"
 
+#: loco:606b765229f20946c1545c70
 msgid "Show Messier objects"
 msgstr "显示梅西耶天体"
 
+#: loco:606b765229f20946c1545c71
 msgid "Show NGC and IC objects"
 msgstr "显示NGC和IC天体"
 
+#: loco:606b765229f20946c1545c72
 msgid "Show VdB objects"
 msgstr "显示VdB天体"
 
+#: loco:606b765229f20946c1545c73
 msgid "Show Sharpless objects"
 msgstr "显示Sharpless天体"
 
+#: loco:606b765229f20946c1545c74
 msgid "Show Barnard objects"
 msgstr "显示Barnard天体"
 
+#: loco:606b765229f20946c1545c75
 msgid "Show PGC objects"
 msgstr "显示PGC天体"
 
+#: loco:606b765229f20946c1545c76
 msgid "Show planets"
 msgstr "显示行星"
 
+#: loco:606b765229f20946c1545c77
 msgid ""
 "Only available if your image at least an acquisition time and an accurate "
 "location"
 msgstr "仅在您的作品有拍摄日期和准确位置时可用"
 
+#: loco:606b765229f20946c1545c78
 msgid "Show asteroids"
 msgstr "显示小行星"
 
+#: loco:606b765229f20946c1545c79
 msgid "Show GCVS stars"
 msgstr "显示GCVS恒星"
 
+#: loco:606b765229f20946c1545c7a
 msgid "General Catalog of Variable Stars"
 msgstr "变星总目录"
 
+#: loco:606b765229f20946c1545c7b
 msgid "Show Tycho-2 catalog"
 msgstr "显示Tycho-2目录"
 
+#: loco:606b765229f20946c1545c7c
 msgid "Show CGPN objects"
 msgstr "显示CGPN天体"
 
+#: loco:606b765229f20946c1545c7d
 msgid "Getting plate-solving status, please wait..."
 msgstr "正在获取解析状态，请稍后..."
 
+#: loco:606b765229f20946c1545c7e
 msgid "Plate-solving starting, please do not leave this page..."
 msgstr "解析正在启动，请不要离开此页面..."
 
+#: loco:606b765229f20946c1545c7f
 msgid "Advanced plate-solving starting, please do not leave this page..."
 msgstr "高级解析正在启动，请不要离开此页面..."
 
+#: loco:606b765229f20946c1545c80
 msgid "Plate-solving started. You may leave this page."
 msgstr "解析已开始，您可以离开此页面。"
 
+#: loco:606b765229f20946c1545c81
 msgid "Advanced plate-solving started. You may leave this page."
 msgstr "高级解析已开始，您可以离开此页面。"
 
+#: loco:606b765229f20946c1545c82
 msgid "Plate-solving almost ready, please do not leave this page..."
 msgstr "解析已即将完成，请不要离开此页面..."
 
+#: loco:606b765229f20946c1545c83
 msgid "This image could not be plate-solved."
 msgstr "这张作品无法被解析。"
 
+#: loco:606b765229f20946c1545c84
 msgid "The advanced plate-solving failed."
 msgstr "高级解析失败。"
 
+#: loco:606b765229f20946c1545c85
 msgid "This image has been plate-solved. Refresh the page to see new data!"
 msgstr "这张作品已完成解析。请刷新页面查看新数据！"
 
+#: loco:606b765229f20946c1545c86
 msgid "The advanced plate-solved finished. Refresh the page to see new data!"
 msgstr "这张作品已完成高级解析。请刷新页面查看新数据！"
 
+#: loco:606b765229f20946c1545c87
 msgid "Error"
 msgstr "错误"
 
+#: loco:606b765229f20946c1545c88
 msgid ""
 "AstroBin could not plate-solve this image because it was not possible to "
 "establish a connection to nova.astrometry.net. Please try again later!"
-msgstr ""
-"AstroBin 无法解析这张作品，因为无法建立到 nova.astrometry.net 的连接。 请稍后"
-"重试！"
+msgstr "AstroBin 无法解析这张作品，因为无法建立到 nova.astrometry.net 的连接。 请稍后重试！"
 
+#: loco:606b765229f20946c1545c89
 msgid ""
 "AstroBin could not plate-solve this image because nova.astrometry.net "
 "reported an internal server error."

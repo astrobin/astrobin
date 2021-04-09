@@ -2,146 +2,189 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Notifications\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-09 13:46+0000\n"
-"PO-Revision-Date: 2021-04-05 22:44+0200\n"
+"POT-Creation-Date: 2021-04-05 16:16+0200\n"
+"PO-Revision-Date: 2021-04-09 15:49+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
-"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108445\n"
-"X-Loco-Api-Version: 1.0.25 20210310-1\n"
+"X-Loco-Api-Version: 1.0.25 20210310-1"
 
+#: loco:606b76429c83b8364f3f0a42
 msgid "Notifications"
 msgstr "Уведомления"
 
+#: loco:606b76429c83b8364f3f0a43
 msgid "You have no notifications."
 msgstr "У вас нет уведомлений."
 
+#: loco:606b76429c83b8364f3f0a44
 msgid "Settings"
 msgstr "Настройки"
 
+#: loco:606b76429c83b8364f3f0a45
 msgid "Mark all as read"
 msgstr "Отметить все прочитанным"
 
+#: loco:606b76429c83b8364f3f0a46
 msgid "You have no new notifications."
 msgstr "У вас нет новых уведомлений"
 
+#: loco:606b76429c83b8364f3f0a47
 msgid "You have a new follower"
 msgstr "У вас подписчик"
 
+#: loco:606b76429c83b8364f3f0a48
 msgid "New image from a user you follow"
 msgstr "Новое изображение от пользователя на которого вы подписаны"
 
+#: loco:606b76429c83b8364f3f0a49
 msgid "New image revision from a user you follow"
 msgstr "Новая версия изображения от пользователя, на которого вы подписаны"
 
+#: loco:606b76429c83b8364f3f0a4a
 msgid "Your image was plate-solved"
 msgstr "Ваше изображение определено по координатам"
 
+#: loco:606b76429c83b8364f3f0a4b
 msgid "Your image could not be plate-solved"
 msgstr "Ваше изображение не может быть определено по координатам"
 
+#: loco:606b76429c83b8364f3f0a4c
 msgid "Your image received a new comment"
 msgstr "У вашего изображения комментарий"
 
+#: loco:606b76429c83b8364f3f0a4d
 msgid "There was a reply to your comment"
 msgstr "Ответ на ваш комментарий"
 
+#: loco:606b76429c83b8364f3f0a4e
 msgid "Your comment was approved"
 msgstr ""
 
+#: loco:606b76429c83b8364f3f0a4f
 msgid "Your image was bookmarked"
 msgstr "Ваше изображение в закладках"
 
+#: loco:606b76429c83b8364f3f0a50
 msgid "Your image was liked"
 msgstr "Ваше изображение понравилось"
 
+#: loco:606b76429c83b8364f3f0a51
 msgid "Your comment was liked"
 msgstr "Ваше изображение понравилось"
 
+#: loco:606b76429c83b8364f3f0a52
 msgid "Your forum post was liked"
 msgstr "Ваше сообщение на форуме понравилось"
 
+#: loco:606b76429c83b8364f3f0a53
 msgid "Your API Key request has been approved"
 msgstr "Ваш запрос на API ключ одобрен"
 
+#: loco:606b76429c83b8364f3f0a54
 msgid "A user you follow joined a public group"
 msgstr "Пользователь, на которого вы подписаны вступил в открытую группу"
 
+#: loco:606b76429c83b8364f3f0a55
 msgid "You are invited to a group"
 msgstr "Вас пригласили в группу"
 
+#: loco:606b76429c83b8364f3f0a56
 msgid "A user requested to join a group you moderate"
 msgstr "Пользователь запрашивает доступ в вашу группу"
 
+#: loco:606b76429c83b8364f3f0a57
 msgid "A group moderator approved your request to join"
 msgstr "Владелец группы одобрил ваш запрос на вступление"
 
+#: loco:606b76429c83b8364f3f0a58
 msgid "A group moderator rejected your request to join"
 msgstr "Владелец группы отклонил ваш запрос на вступление"
 
+#: loco:606b76429c83b8364f3f0a59
 msgid "A user you follow created a new public group"
 msgstr "Пользователь, на которого вы подписаны создал новую открытую группу"
 
+#: loco:606b76429c83b8364f3f0a5a
 msgid "New forum topic in a group you are a member of"
 msgstr "Новая тема в группе, участником которой вы являетесь"
 
+#: loco:606b76429c83b8364f3f0a5b
 msgid "You have received a new private message"
 msgstr "У вас новое личное сообщение"
 
+#: loco:606b76429c83b8364f3f0a5c
 msgid "Your premium subscription will expire in one week"
 msgstr "Ваша премиум подписка истекает через неделю"
 
+#: loco:606b76429c83b8364f3f0a5d
 msgid "Your premium subscription has just expired"
 msgstr "Ваша премиум подписка только что истекла"
 
+#: loco:606b76429c83b8364f3f0a5e
 msgid "Your subscription will be renewed in one week"
 msgstr "Ваша подписка будет обновлена в течение недели"
 
+#: loco:606b76429c83b8364f3f0a5f
 msgid "Your subscription will be renewed in one 30 days"
 msgstr "Ваша подписка будет обновлена в течение месяца"
 
+#: loco:606b76429c83b8364f3f0a60
 msgid "You have images with a missing \"Data source\""
 msgstr "У вас есть изображения без данных "
 
+#: loco:606b76429c83b8364f3f0a61
 msgid "You have images with a missing \"Remote source\""
 msgstr "У вас есть изображения без информации \"Удаленный источник\""
 
+#: loco:606b76429c83b8364f3f0a62
 msgid "Would you like to activate your account?"
 msgstr "Вы хотите активировать вашу учётную запись?"
 
+#: loco:606b76429c83b8364f3f0a63
 msgid "You were mentioned in a forum post"
 msgstr "Вы были упомянуты в сообщении на форуме"
 
+#: loco:606b76429c83b8364f3f0a64
 msgid "You were mentioned in a comment"
 msgstr "Вас упомянули в комментарии"
 
+#: loco:606b76429c83b8364f3f0a65
 msgid "Welcome to AstroBin!"
 msgstr "Добро пожаловать в AstroBin!"
 
+#: loco:606b76429c83b8364f3f0a66
 msgid "Congratulations for your first image on AstroBin!"
 msgstr "Поздравления с вашим первым изображением на AstroBin!"
 
+#: loco:606b76429c83b8364f3f0a67
 msgid "Thank you for getting a subscription!"
 msgstr "Спасибо за подписку !"
 
+#: loco:606b76429c83b8364f3f0a68
 msgid "Thank you for your payment!"
 msgstr "Спасибо за ваш платеж!"
 
+#: loco:606b76429c83b8364f3f0a69
 msgid "You were removed from the IOTD staff"
 msgstr ""
 
+#: loco:606b76429c83b8364f3f0a6a
 msgid "You have been inactive as an IOTD staff member"
 msgstr ""
 
+#: loco:606b76429c83b8364f3f0a6b
 msgid "An image you promoted made it to Top Pick"
 msgstr ""
 
+#: loco:606b76429c83b8364f3f0a6c
 msgid "An image you promoted made it to IOTD"
 msgstr ""
