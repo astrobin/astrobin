@@ -2,25 +2,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Plate-solving\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 16:17+0200\n"
+"POT-Creation-Date: 2021-04-09 13:44+0000\n"
 "PO-Revision-Date: 2021-04-05 22:44+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: French\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108448\n"
-"X-Loco-Api-Version: 1.0.25 20210310-1"
+"X-Loco-Api-Version: 1.0.25 20210310-1\n"
 
-#: loco:606b765229f20946c1545c55
 msgid "Perform a blind solve"
 msgstr "Effectuer une réduction astrométrique à l'aveugle"
 
-#: loco:606b765229f20946c1545c56
 msgid ""
 "Attempt to solve with no hints. In most cases this will work, but it will "
 "take longer."
@@ -28,59 +26,45 @@ msgstr ""
 "Tentative de réduction astrométrique à l'aveugle. Dans la plupart des cas, "
 "cela marchera mais cela prendra plus de temps."
 
-#: loco:606b765229f20946c1545c57
 msgid "Width of the field in degrees"
 msgstr "Largeur du champ en degrés"
 
-#: loco:606b765229f20946c1545c58
 msgid "Width of the field in arcminutes"
 msgstr "Largeur du champ en minutes d'arc"
 
-#: loco:606b765229f20946c1545c59
 msgid "Resolution of the field in arcseconds/pixel"
 msgstr "Echantillonnage du champ en secondes d'arc/pixel"
 
-#: loco:606b765229f20946c1545c5a
 msgid "Field size units"
 msgstr "Unités de mesure du champ"
 
-#: loco:606b765229f20946c1545c5b
 msgid "Min field size"
 msgstr "Taille minimale du champ"
 
-#: loco:606b765229f20946c1545c5c
 msgid "Estimate the lower bound for the width of this field."
 msgstr "Evaluez la limite inférieure de la largeur du champ."
 
-#: loco:606b765229f20946c1545c5d
 msgid "Max field size"
 msgstr "Taille maximale du champ"
 
-#: loco:606b765229f20946c1545c5e
 msgid "Estimate the upper bound for the width of this field."
 msgstr "Evaluez la limite supérieure de la largeur du champ."
 
-#: loco:606b765229f20946c1545c5f
 msgid "Center RA"
 msgstr "AD du centre"
 
-#: loco:606b765229f20946c1545c60
 msgid "Center RA of the field in degrees, 0.000 to 360.000"
 msgstr "AD du centre du champ en degrés, 0.000 à 360.000"
 
-#: loco:606b765229f20946c1545c61
 msgid "Center dec"
 msgstr "Déc. du centre"
 
-#: loco:606b765229f20946c1545c62
 msgid "Center dec of the field in degrees, -90.000 to +90.000"
 msgstr "Déc. du centre du champ en degrés, -90.000 à +90.000"
 
-#: loco:606b765229f20946c1545c63
 msgid "Radius"
 msgstr "Rayon"
 
-#: loco:606b765229f20946c1545c64
 msgid ""
 "Tells the plate-solving engine to look within these many degrees of the "
 "given center RA and dec position."
@@ -88,23 +72,18 @@ msgstr ""
 "Indiquer à la solution de réduction astrométrique de rechercher dans ces "
 "limites (en degrés) par rapport aux coordonnées AD et Déc. données du centre."
 
-#: loco:606b765229f20946c1545c65
 msgid "Small"
 msgstr "Petit"
 
-#: loco:606b765229f20946c1545c66
 msgid "Medium"
 msgstr "Moyen"
 
-#: loco:606b765229f20946c1545c67
 msgid "Large"
 msgstr "Grand"
 
-#: loco:606b765229f20946c1545c68
 msgid "Sample raw frame (max 100 MB)"
 msgstr "Exemple de cadre brut (max 100 MB)"
 
-#: loco:606b765229f20946c1545c69
 msgid ""
 "To improve the accuracy of your plate-solution even further, please upload "
 "one of the XISF or FITS files from your data set. Such files normally have "
@@ -124,70 +103,56 @@ msgstr ""
 "Ces fichiers contiennent habituellement des métadonnées (date et heure) qui "
 "permettront à AstroBin de calculer des éphémérides relatifs aux corps du "
 "système solaire et de trouver des planètes ou des astéroïdes sur votre image "
-"(à condition que vous y précisiez également le lieu de prise de vue).<br/>"
-"<br/> Pour une précision maximale, il est recommandé d'utiliser le format "
-"XISF (natif et ouvert) de PixInsight. Pour en savoir plus sur le format XISF,"
-" cliquez ici:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
-"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/><strong> A "
-"noter</strong> qu'il est primordial que le fichier XISF ou FITS que vous "
+"(à condition que vous y précisiez également le lieu de prise de vue).<br/"
+"><br/> Pour une précision maximale, il est recommandé d'utiliser le format "
+"XISF (natif et ouvert) de PixInsight. Pour en savoir plus sur le format "
+"XISF, cliquez ici:<br/><br/><a href=\"https://pixinsight.com/xisf/\" target="
+"\"_blank\">https://pixinsight.com/xisf/</a><br/><br/><strong> A noter</"
+"strong> qu'il est primordial que le fichier XISF ou FITS que vous "
 "téléchargez soit aligné sur votre image traitée, sinon les annotations ne "
 "correspondront pas. Pour améliorer vos chances de réussite d'une réduction "
-"astrométrique précise, calibrez votre fichier de manière habituelle "
-"(darks/bias/flats) mais conservez-le sous forme linéaire."
+"astrométrique précise, calibrez votre fichier de manière habituelle (darks/"
+"bias/flats) mais conservez-le sous forme linéaire."
 
-#: loco:606b765229f20946c1545c6a
 msgid "Scaled font size"
 msgstr "Taille de la police à l'échelle"
 
-#: loco:606b765229f20946c1545c6b
 msgid "Font size of the annotations on your main image page"
 msgstr "Taille des annotations sur la page principale de votre image"
 
-#: loco:606b765229f20946c1545c6c
 msgid "Show equatorial grid"
 msgstr "Afficher la grille équatoriale"
 
-#: loco:606b765229f20946c1545c6d
 msgid "Show constellation borders"
 msgstr "Afficher les frontières des constellations"
 
-#: loco:606b765229f20946c1545c6e
 msgid "Show constellation lines"
 msgstr "Afficher les lignes de la constellation"
 
-#: loco:606b765229f20946c1545c6f
 msgid "Show named stars"
 msgstr "Afficher le nom des étoiles"
 
-#: loco:606b765229f20946c1545c70
 msgid "Show Messier objects"
 msgstr "Afficher les objets Messier"
 
-#: loco:606b765229f20946c1545c71
 msgid "Show NGC and IC objects"
 msgstr "Afficher les objets NGC et IC"
 
-#: loco:606b765229f20946c1545c72
 msgid "Show VdB objects"
 msgstr "Afficher les objets VdB"
 
-#: loco:606b765229f20946c1545c73
 msgid "Show Sharpless objects"
 msgstr "Afficher les objets Sharpless"
 
-#: loco:606b765229f20946c1545c74
 msgid "Show Barnard objects"
 msgstr "Afficher les objets Barnard"
 
-#: loco:606b765229f20946c1545c75
 msgid "Show PGC objects"
 msgstr "Afficher les objets PGC"
 
-#: loco:606b765229f20946c1545c76
 msgid "Show planets"
 msgstr "Afficher les planètes"
 
-#: loco:606b765229f20946c1545c77
 msgid ""
 "Only available if your image at least an acquisition time and an accurate "
 "location"
@@ -195,80 +160,63 @@ msgstr ""
 "Uniquement disponible si au moins une heure d'acquisition et un lieu précis "
 "ont été précisés pour votre image"
 
-#: loco:606b765229f20946c1545c78
 msgid "Show asteroids"
 msgstr "Afficher les astéroïdes"
 
-#: loco:606b765229f20946c1545c79
 msgid "Show GCVS stars"
 msgstr "Afficher les étoiles du catalogue GCVS"
 
-#: loco:606b765229f20946c1545c7a
 msgid "General Catalog of Variable Stars"
 msgstr "Catalogue général des étoiles variables"
 
-#: loco:606b765229f20946c1545c7b
 msgid "Show Tycho-2 catalog"
 msgstr "Afficher le catalogue Tycho-2"
 
-#: loco:606b765229f20946c1545c7c
 msgid "Show CGPN objects"
 msgstr "Afficher les objets CGPN"
 
-#: loco:606b765229f20946c1545c7d
 msgid "Getting plate-solving status, please wait..."
 msgstr "Statut de la réduction astrométrique en cours, merci de patienter..."
 
-#: loco:606b765229f20946c1545c7e
 msgid "Plate-solving starting, please do not leave this page..."
 msgstr "Réduction astrométrique initiée, merci de ne pas quitter cette page..."
 
-#: loco:606b765229f20946c1545c7f
 msgid "Advanced plate-solving starting, please do not leave this page..."
 msgstr ""
-"Réduction astrométrique avancée initiée, merci de ne pas quitter cette page.."
-"."
+"Réduction astrométrique avancée initiée, merci de ne pas quitter cette "
+"page..."
 
-#: loco:606b765229f20946c1545c80
 msgid "Plate-solving started. You may leave this page."
 msgstr "Réduction astrométrique en cours, vous pouvez quitter cette page."
 
-#: loco:606b765229f20946c1545c81
 msgid "Advanced plate-solving started. You may leave this page."
 msgstr ""
 "Réduction astrométrique avancée en cours, vous pouvez quitter cette page."
 
-#: loco:606b765229f20946c1545c82
 msgid "Plate-solving almost ready, please do not leave this page..."
 msgstr ""
 "Réduction astrométrique quasiment finalisée, merci de ne pas quitter cette "
 "page..."
 
-#: loco:606b765229f20946c1545c83
 msgid "This image could not be plate-solved."
 msgstr "La réduction astrométrique de cette image a échoué."
 
-#: loco:606b765229f20946c1545c84
 msgid "The advanced plate-solving failed."
 msgstr "La réduction astrométrique avancée de cette image a échoué."
 
-#: loco:606b765229f20946c1545c85
 msgid "This image has been plate-solved. Refresh the page to see new data!"
 msgstr ""
 "Réduction astrométrique réalisée. Rafraîchissez la page pour voir les "
 "nouvelles données !"
 
-#: loco:606b765229f20946c1545c86
 msgid "The advanced plate-solved finished. Refresh the page to see new data!"
 msgstr ""
 "Réduction astrométrique avancée réalisée. Rafraîchissez la page pour voir "
 "les nouvelles données !"
 
-#: loco:606b765229f20946c1545c87
 msgid "Error"
 msgstr "Erreur"
 
-#: loco:606b765229f20946c1545c88
 msgid ""
 "AstroBin could not plate-solve this image because it was not possible to "
 "establish a connection to nova.astrometry.net. Please try again later!"
@@ -277,7 +225,6 @@ msgstr ""
 "il est impossible d'établir une connexion avec nova.astrometry.net. Merci de "
 "réessayer plus tard !"
 
-#: loco:606b765229f20946c1545c89
 msgid ""
 "AstroBin could not plate-solve this image because nova.astrometry.net "
 "reported an internal server error."
