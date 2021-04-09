@@ -2,156 +2,108 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Comments\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 16:19+0200\n"
-"PO-Revision-Date: 2021-04-05 22:44+0200\n"
+"POT-Creation-Date: 2021-04-09 14:01+0000\n"
+"PO-Revision-Date: 2021-04-09 15:50+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Portuguese\n"
 "Language: pt\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108457\n"
-"X-Loco-Api-Version: 1.0.25 20210310-1"
+"X-Loco-Api-Version: 1.0.25 20210310-1\n"
 
-#: loco:606b7673febdde060052b5e2
-msgid "You follow each other"
-msgstr ""
-
-#: loco:606b7673febdde060052b5e3
-msgid "Images"
-msgstr "Imagens"
-
-#: loco:606b7673febdde060052b5e4
-msgid "Followers"
-msgstr "Seguidores"
-
-#: loco:606b7673febdde060052b5e5
-msgid "Following"
-msgstr "Seguindo"
-
-#: loco:606b7673febdde060052b5e6
-msgid "User"
-msgstr "Usuário"
-
-#: loco:606b7673febdde060052b5e7
-msgid "No users."
-msgstr "Sem usuários."
-
-#: loco:606b7673febdde060052b5e8
-msgid "Administrator"
-msgstr "Administrador"
-
-#: loco:606b7673febdde060052b5e9
-msgid "Image moderator"
-msgstr "Moderador de imagem"
-
-#: loco:606b7673febdde060052b5ea
-msgid "IOTD Submitter"
-msgstr "Remetente de IDD"
-
-#: loco:606b7673febdde060052b5eb
-msgid "IOTD Reviewer"
-msgstr "Revisor de IDD"
-
-#: loco:606b7673febdde060052b5ec
-msgid "IOTD Judge"
-msgstr "Juiz de IDD"
-
-#: loco:606b7673febdde060052b5ed
-msgid "Premium member"
-msgstr "Membro Premium"
-
-#: loco:606b7673febdde060052b5ee
-msgid ""
-"Your email bounce reports have been removed from AstroBin. Please make sure "
-"that your email works well or you will get the same warning message again. "
-"Thanks!"
-msgstr ""
-
-#: loco:606b7673febdde060052b5ef
-msgid ""
-"Your spam reports have been removed from AstroBin. Please make sure you "
-"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
-"don't want to receive emails from AstroBin, look for the settings link "
-"that's at the bottom of every email. Thanks!"
-msgstr ""
-
-#: loco:606b76b7d0c7060d4277e6b8
 msgid "Type your comment here..."
 msgstr ""
 
-#: loco:606b76b7d0c7060d4277e6b9
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: loco:606b76b7d0c7060d4277e6ba
 msgid "Add a comment"
 msgstr "Adicionar um comentário"
 
-#: loco:606b76b7d0c7060d4277e6bb
 #, python-format
 msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s\">"
-"sign up</a> to leave a comment."
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
+"\">sign up</a> to leave a comment."
 msgstr ""
 
-#: loco:606b76b7d0c7060d4277e6bc
 msgid "There are no comments yet."
 msgstr "Ainda não há comentários."
 
-#: loco:606b76b7d0c7060d4277e6bd
 msgid "This comment is pending moderation and will be reviewed shortly."
 msgstr ""
 
-#: loco:606b76b7d0c7060d4277e6be
 msgid "(deleted)"
 msgstr "(excluído)"
 
-#: loco:606b76b7d0c7060d4277e6bf
 msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr ""
 
-#: loco:606b76b7d0c7060d4277e6c0
 msgctxt "Noun, e.g. 'This element has 1 like'"
 msgid "like"
 msgstr ""
 
-#: loco:606b76b7d0c7060d4277e6c1
 msgid "Link"
 msgstr "Link"
 
-#: loco:606b76b7d0c7060d4277e6c2
 msgid "Undelete"
 msgstr "Recuperar"
 
-#: loco:606b76b7d0c7060d4277e6c3
 msgid "Delete"
 msgstr "Excluir"
 
-#: loco:606b76b7d0c7060d4277e6c4
 msgid "Edit"
 msgstr "Editar"
 
-#: loco:606b76b7d0c7060d4277e6c5
 msgid "Reply"
 msgstr "Responder"
 
-#: loco:606b76b7d0c7060d4277e6c6
 msgid "Like"
 msgstr ""
 
-#: loco:606b76b7d0c7060d4277e6c7
 msgid "Unlike"
 msgstr ""
 
-#: loco:606b76b7d0c7060d4277e6c8
 msgid "The comment cannot be empty."
 msgstr "O comentário não pode estar vazio."
 
-#: loco:606b76b7d0c7060d4277e6c9
 msgid "Submit"
 msgstr ""
+
+#~ msgid "Images"
+#~ msgstr "Imagens"
+
+#~ msgid "Followers"
+#~ msgstr "Seguidores"
+
+#~ msgid "Following"
+#~ msgstr "Seguindo"
+
+#~ msgid "User"
+#~ msgstr "Usuário"
+
+#~ msgid "No users."
+#~ msgstr "Sem usuários."
+
+#~ msgid "Administrator"
+#~ msgstr "Administrador"
+
+#~ msgid "Image moderator"
+#~ msgstr "Moderador de imagem"
+
+#~ msgid "IOTD Submitter"
+#~ msgstr "Remetente de IDD"
+
+#~ msgid "IOTD Reviewer"
+#~ msgstr "Revisor de IDD"
+
+#~ msgid "IOTD Judge"
+#~ msgstr "Juiz de IDD"
+
+#~ msgid "Premium member"
+#~ msgstr "Membro Premium"

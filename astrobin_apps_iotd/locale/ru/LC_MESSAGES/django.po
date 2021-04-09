@@ -2,50 +2,42 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: IOTD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 16:14+0200\n"
-"PO-Revision-Date: 2021-04-05 22:44+0200\n"
+"POT-Creation-Date: 2021-04-09 14:06+0000\n"
+"PO-Revision-Date: 2021-04-09 15:49+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
-"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
+"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108442\n"
-"X-Loco-Api-Version: 1.0.25 20210310-1"
+"X-Loco-Api-Version: 1.0.25 20210310-1\n"
 
-#: loco:606b763113912c50b948d6e2
 msgid "Sorry, it's now too late to retract this submission."
 msgstr "Извините, уже слишком поздно отменять эту заявку."
 
-#: loco:606b763113912c50b948d6e3
 msgid "Sorry, it's now too late to retract this vote."
 msgstr "Извините, уже слишком поздно отменять этот голос."
 
-#: loco:606b763113912c50b948d6e4
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "Вы не участник списка Номинирующих для Изображения Дня."
 
-#: loco:606b763113912c50b948d6e5
 msgid "You cannot submit your own image."
 msgstr "Вы не можете отправить своё собственное изображение."
 
-#: loco:606b763113912c50b948d6e6
 msgid "Images in the staging area cannot be submitted."
 msgstr "Изображения в студии не могут быть номинированы."
 
-#: loco:606b763113912c50b948d6e7
 msgid "This user has chosen to be excluded from competitions."
 msgstr "Этот пользователь хочет быть исключенным из соревнования."
 
-#: loco:606b763113912c50b948d6e8
 msgid "This user has been banned from competitions."
 msgstr "Этот пользователь был заблокирован от участия в соревнованиях."
 
-#: loco:606b763113912c50b948d6e9
 #, python-format
 msgid ""
 "You cannot submit an image that was published more than %(max_days)s days "
@@ -54,40 +46,31 @@ msgstr ""
 "Вы не можете номинировать изображения которые были опубликованы более, чем "
 "%(max_days)s дней назад."
 
-#: loco:606b763113912c50b948d6ea
 msgid "Users with a Free membership cannot participate in the IOTD."
 msgstr "Пользователи с бесплатной подпиской не могут участвовать в IOTD."
 
-#: loco:606b763113912c50b948d6eb
 msgid "This image has already been an IOTD in the past"
 msgstr "Это изображение уже было Изображением Дня в прошлом"
 
-#: loco:606b763113912c50b948d6ec
 #, python-format
 msgid "You have already submitted %(max_allowed)s images today."
 msgstr "Вы уже номинировали %(max_allowed)s изображений на сегодня."
 
-#: loco:606b763113912c50b948d6ed
 msgid "You are not a member of the IOTD Reviewers board."
 msgstr "Вы не участник списка Рецензентов Изображения Дня."
 
-#: loco:606b763113912c50b948d6ee
 msgid "You cannot vote for your own image."
 msgstr "Вы не можете голосовать за собственные изображения."
 
-#: loco:606b763113912c50b948d6ef
 msgid "Images in the staging area cannot be voted for."
 msgstr "За изображения в студии нельзя голосовать."
 
-#: loco:606b763113912c50b948d6f0
 msgid "You cannot vote for an image that has not been submitted."
 msgstr "Вы не можете голосовать за изображения, которые не были номинированы."
 
-#: loco:606b763113912c50b948d6f1
 msgid "You cannot vote for your own submission."
 msgstr "Вы не можете голосовать за свою заявку."
 
-#: loco:606b763113912c50b948d6f2
 #, python-format
 msgid ""
 "You cannot vote for an image that has been in the submission queue for more "
@@ -96,36 +79,28 @@ msgstr ""
 "Вы не можете голосовать за изображение, которое находилось в очереди "
 "отправки более %(max_days)s дней."
 
-#: loco:606b763113912c50b948d6f3
 #, python-format
 msgid "You have already voted for %(max_allowed)s images today."
 msgstr "Вы уже проголосовали за %(max_allowed)s изображений на сегодня."
 
-#: loco:606b763113912c50b948d6f4
 msgid "You are not a member of the IOTD Judges board."
 msgstr "Вы не участника списка судей для Изображения Дня."
 
-#: loco:606b763113912c50b948d6f5
 msgid "You cannot elect your own image."
 msgstr "Вы не можете выбирать собственные изображения."
 
-#: loco:606b763113912c50b948d6f6
 msgid "Images in the staging area cannot be elected."
 msgstr "Изображения в студии не могут быть выбраны."
 
-#: loco:606b763113912c50b948d6f7
 msgid "You cannot elect an image that has not been voted."
 msgstr "Вы не можете выбирать изображения за которые нет голосов."
 
-#: loco:606b763113912c50b948d6f8
 msgid "You cannot elect your own submission."
 msgstr "Вы не можете выбрать собственную заявку."
 
-#: loco:606b763113912c50b948d6f9
 msgid "You cannot elect an image you voted for."
 msgstr "Вы не можете выбрать изображение за которое вы голосовали."
 
-#: loco:606b763113912c50b948d6fa
 #, python-format
 msgid ""
 "You cannot elect an image that has been in the review queue for more than "
@@ -134,63 +109,50 @@ msgstr ""
 "Вы не можете выбирать изображение которое находится в очереди рецензий более "
 "чем %(max_days)s дней."
 
-#: loco:606b763113912c50b948d6fb
 #, python-format
 msgid "You have already elected %(max_allowed)s images today."
 msgstr "Вы уже выбрали %(max_allowed)s изображений на сегодня."
 
-#: loco:606b763113912c50b948d6fc
 #, python-format
 msgid "You have already scheduled %(max_allowed)s IOTDs."
 msgstr "Вы уже запланировали %(max_allowed)s Изображений Дня."
 
-#: loco:606b763113912c50b948d6fd
 msgid "You cannot unelect your own submission."
 msgstr "Вы не можете отозвать свою заявку."
 
-#: loco:606b763113912c50b948d6fe
 msgid "You cannot unelect an image you voted for."
 msgstr "Вы не можете отозвать изображение за которое голосовали."
 
-#: loco:606b763113912c50b948d6ff
 msgid "You cannot unelect an image elected by another judge."
 msgstr "Вы не можете отменить выбор изображения другого судьи."
 
-#: loco:606b763113912c50b948d700
 msgid "You cannot unelect a past or current IOTD."
 msgstr "Вы не можете переизбрать прошлые или текущие Изображения Дня."
 
-#: loco:606b763113912c50b948d701
 #, python-format
 msgid "you already selected %s IOTD today (UTC)"
 msgstr "вы уже выбрали %s IOTD сегодня (UTC)"
 
-#: loco:606b763113912c50b948d702
 #, python-format
 msgid "you already selected %s scheduled IOTDs"
 msgstr "Вы уже выбрали %s запланированных Изображений Дня"
 
-#: loco:606b763113912c50b948d703
 #, python-format
 msgid "there are already %s scheduled IOTDs"
 msgstr "Уже есть %s запланированных Изображений Дня"
 
-#: loco:606b763113912c50b948d704
 msgid "Image of the day"
 msgstr "Изображение Дня"
 
-#: loco:606b763113912c50b948d705
 msgid "IOTD Judgement Queue"
 msgstr "IOTD Очередь Решения"
 
-#: loco:606b763113912c50b948d706
 msgid ""
 "Please select the images that you want to elect to IOTD by clicking on them."
 msgstr ""
 "Пожалуйста отметьте изображения, которые вы хотите выбрать для ИД, нажимая "
 "на них."
 
-#: loco:606b763113912c50b948d707
 #, python-format
 msgid ""
 "Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
@@ -199,19 +161,15 @@ msgstr ""
 "К сожалению, вы не можете выбрать IOTD прямо сейчас: %(reason)s. Повторите "
 "попытку через <strong>%(time)s</strong>."
 
-#: loco:606b763113912c50b948d708
 msgid "This queue is currently empty."
 msgstr "Пока эта очередь пуста."
 
-#: loco:606b763113912c50b948d709
 msgid "Error"
 msgstr "Ошибка"
 
-#: loco:606b763113912c50b948d70a
 msgid "You cannot unelect an IOTD elected by another judge."
 msgstr "Вы не можете отменить выбор ИД от другого судьи."
 
-#: loco:606b763113912c50b948d70b
 #, python-format
 msgid "All IOTD slots for the next %(days)s days are already filled."
 msgstr "Все места для ИД на следующие %(days)s дней уже заполнены."
