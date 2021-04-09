@@ -27,4 +27,5 @@ class ImageUploadSerializer(serializers.ModelSerializer):
             'w',
             'h',
             'uploader_in_progress',
+            'license'
         )
