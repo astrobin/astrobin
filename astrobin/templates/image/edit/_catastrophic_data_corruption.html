@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load tags %}
+{% load common_tags %}
 
 <div class="alert alert-danger">
     <h4 class="alert-heading">
@@ -44,7 +45,7 @@
                 </li>
 
                 <li>
-                    <strong>{% trans "Uploaded" %}:</strong> {{ image.uploaded|to_user_timezone:request.user|date:"SHORT_DATE_FORMAT" }}
+                    <strong>{% trans "Uploaded" %}:</strong> {% timestamp image.uploaded %}
                 </li>
             </ul>
         {% elif revision %}
@@ -69,11 +70,11 @@
                 </li>
 
                 <li>
-                    <strong>{% trans "Image uploaded" %}:</strong> {{ revision.image.uploaded|to_user_timezone:request.user|date:"SHORT_DATE_FORMAT" }}
+                    <strong>{% trans "Image uploaded" %}:</strong> {% timestamp revision.image.uploaded %}
                 </li>
 
                 <li>
-                    <strong>{% trans "Revision uploaded" %}:</strong> {{ revision.uploaded|to_user_timezone:request.user|date:"SHORT_DATE_FORMAT" }}
+                    <strong>{% trans "Revision uploaded" %}:</strong> {% timestamp revision.uploaded %}
                 </li>
             </ul>
         {% endif %}

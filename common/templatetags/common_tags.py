@@ -223,3 +223,8 @@ def app_redirection_service(request, path):
 @register.filter
 def is_future(dt):
     return dt > DateTimeService.now()
+
+
+@register.simple_tag
+def timestamp(dt):
+    return mark_safe('<abbr class="timestamp" data-epoch="%s">...</abbr>' % DateTimeService.epoch(dt))

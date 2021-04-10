@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load static %}
 {% load tags %}
+{% load common_tags %}
 
 <tr
     class="notification-item{% if n.read %} notification-read{% else %} notification-unread{% endif %}"
@@ -14,11 +15,7 @@
         {% autoescape off %}{{n.message}}{% endautoescape %}
     </td>
 
-    <td class="notification-date">
-        <abbr class="timeago" title="{{n.created|to_user_timezone:n.user|date:'Y-m-d\TH:i:s'}}">
-            {{n.created|to_user_timezone:n.user|date:'Y-m-d\TH:i:s'}}
-        </abbr>
-    </td>
+    <td class="notification-date">{% timestamp n.created %}</td>
 
     <td class="notification-mark-as-read">
         {% if not n.read %}

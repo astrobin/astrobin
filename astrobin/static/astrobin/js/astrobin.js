@@ -668,7 +668,7 @@ astrobin_common = {
         $check_mark.remove();
         $loading.show();
 
-        return new Promise(function(resolve) {
+        return new Promise(function (resolve) {
             if ($row.hasClass("notification-read")) {
                 $loading.hide();
                 return resolve();
@@ -730,7 +730,7 @@ astrobin_common = {
         });
     },
 
-    get_links_in_text: function(text) {
+    get_links_in_text: function (text) {
         var regex = /href="(.*?)"/gm;
         var m;
         var links = [];
@@ -752,7 +752,7 @@ astrobin_common = {
         return links;
     },
 
-    add_or_update_url_param: function(url, name, value) {
+    add_or_update_url_param: function (url, name, value) {
         var regex = new RegExp("[&\\?]" + name + "=");
 
         if (regex.test(url)) {
@@ -767,7 +767,7 @@ astrobin_common = {
         return url + "?" + name + "=" + value;
     },
 
-    remove_url_param: function(url, parameter) {
+    remove_url_param: function (url, parameter) {
         var urlParts = url.split('?');
 
         if (urlParts.length >= 2) {
@@ -804,16 +804,22 @@ astrobin_common = {
             changeYear: true
         });
 
-        $('abbr.timeago').each(function(index, element) {
+        $('abbr.timestamp').each(function (index, element) {
             var $el = $(element);
-            var date = $el.attr('title');
+            var datetime = new Date(0);
+            var locale = window.navigator.userLanguage || window.navigator.language;
 
-            if (!astrobin_common.config.timezone) {
-                // Fallback to browser timezone.
-                $el.attr('title', new Date(new Date(date + 'Z')).toISOString());
+            datetime.setUTCSeconds($el.data('epoch') / 1000);
+
+            $el.attr('title', datetime.toISOString());
+
+            if (new Date() - datetime < 1000 * 60 * 60 * 24 * 30) {
+                $el.text(datetime.toLocaleString(locale));
+                $el.timeago();
+            } else {
+                $el.text(datetime.toLocaleDateString(locale));
+                $el.attr('title', datetime.toLocaleTimeString(locale));
             }
-
-            $el.timeago();
         });
 
         if (window.innerWidth >= 980) {

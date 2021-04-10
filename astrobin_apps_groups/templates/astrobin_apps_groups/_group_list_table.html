@@ -1,5 +1,6 @@
 {% load tags %}
 {% load i18n %}
+{% load common_tags %}
 
 <table class="table group-list">
     <thead>
@@ -37,9 +38,7 @@
                 </td>
                 <td class="group-name"><a href="{% url 'group_detail' group.pk %}">{{group.name}}</a></td>
                 <td class="group-category hidden-phone hidden-tablet">{{group.category_humanized}}</td>
-                <td class="group-last-activity hidden-phone hidden-tablet">
-                    <abbr class="timeago" title="{{group.date_updated|to_user_timezone:request.user|date:'Y-m-d\TH:i:s'}}"></abbr>
-                </td>
+                <td class="group-last-activity hidden-phone hidden-tablet">{% timestamp group.date_updated %}</td>
                 <td class="group-members hidden-phone">{{group.members_count}}</td>
                 <td class="group-images hidden-phone">{{group.images_count}}</td>
                 <td class="group-forum-posts hidden-phone">{{group.forum.post_count}}</td>

@@ -2,6 +2,7 @@
 {% load bbcode_tags %}
 {% load tags %}
 {% load astrobin_apps_users_tags %}
+{% load common_tags %}
 
 <div class="message">
     <div class="avatar">
@@ -11,10 +12,7 @@
     </div>
 
     <div class="sender">
-        {% astrobin_username message.sender %}
-        <abbr class="timeago"
-              title="{{ message.sent_at|to_user_timezone:request.user|date:'Y-m-d\TH:i:s' }}">
-        </abbr>
+        {% astrobin_username message.sender %} {% timestamp message.sent_at %}
     </div>
 
     <div class="body">

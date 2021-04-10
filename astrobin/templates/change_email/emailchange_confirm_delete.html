@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
 {% load tags %}
+{% load common_tags %}
 
 {% block breadcrumbs %}
     {{ block.super }}
@@ -27,7 +28,7 @@
         </thead>
         <tbody>
             <tr>
-                <td><abbr class="timeago" title="{{object.date|to_user_timezone:request.user|date:'Y-m-d\TH:i:s'}}"></abbr></td>
+                <td>{% timestamp object.date %}<td>
                 <td><a href="mailto:{{object.new_email}}">{{object.new_email}}</a></td>
                 <td>
                     <form class="form-horizontal" method="post" action="">{% csrf_token %}

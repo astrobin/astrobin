@@ -89,7 +89,7 @@
                             &middot;
                             <a href="{% url 'user_page' topic.user %}">{{ topic.user.userprofile.get_display_name|truncatechars:30 }}</a>
                             &middot;
-                            {% pybb_time topic.created %}
+                            {% timestamp topic.created %}
 
                             {% with topic|pybb_topic_inline_pagination as pages %}
                                 {% if pages|length > 1 %}

@@ -5,6 +5,7 @@
 {% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_notifications_tags %}
 {% load tags %}
+{% load common_tags %}
 
 {% block title %}{% trans "Notifications" %}{% endblock %}
 
@@ -19,16 +20,12 @@
             {% for n in notification_list %}
                 <tr class="notification-item {% if n.read %}notification-read{% else %}notification-unread{% endif %}">
                     <td class="notification-state">
-                        <div class="state-indicator">
+                        <div class="state-indicator"></div>
                     </td>
                     <td class="notification-content">
                         {% autoescape off %}{{n.message}}{% endautoescape %}
                     </td>
-                    <td class="notification-date hidden-phone">
-                        <abbr class="timeago" title="{{n.created|to_user_timezone:n.user|date:'Y-m-d\TH:i:s'}}">
-                            {{n.created|to_user_timezone:n.user|date:'Y-m-d\TH:i:s'}}
-                        </abbr>
-                    </td>
+                    <td class="notification-date hidden-phone">{% timestamp n.created %}</td>
                 </tr>
             {% empty %}
                 <tr>

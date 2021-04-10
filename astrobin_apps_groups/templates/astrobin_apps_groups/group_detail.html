@@ -7,6 +7,7 @@
 {% load sanitizer %}
 {% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_groups_tags %}
+{% load common_tags %}
 
 {% block title %}{{object.name}}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
@@ -187,7 +188,9 @@
     <div class="subtitle">
         <i class="icon icon-info-sign"></i>
         {% url 'user_page' object.owner.username as owner_url %}
-        {% blocktrans trimmed with date_created=object.date_created|to_user_timezone:request.user|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile category=object.category_humanized %}A group created on {{date_created}}, owned by <a href="{{owner_url}}">{{owner}}</a>, categorized as <strong>{{category}}</strong>.{% endblocktrans %}
+        {% blocktrans trimmed with date_created=object.date_created|to_user_timezone:request.user|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile category=object.category_humanized %}
+            A group created on {{date_created}}, owned by <a href="{{owner_url}}">{{owner}}</a>, categorized as <strong>{{category}}</strong>.
+        {% endblocktrans %}
     </div>
 
     <div class="group-description">
