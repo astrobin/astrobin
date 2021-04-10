@@ -1,10 +1,8 @@
 {% load i18n %}
 {% load static %}
-
 {% load avatar_tags %}
 {% load pybb_tags %}
 {% load bbcode_tags %}
-
 {% load astrobin_apps_users_tags %}
 {% load common_tags %}
 {% load toggleproperty_tags %}
@@ -45,7 +43,7 @@
         </div>
         <div class="post-updated">
             <a class="permalink" href="{{ post.get_absolute_url }}">#</a>
-            {% pybb_time post.created %}
+            {% timestamp post.created %}
         </div>
         <div class="post-likes">
             {% toggleproperties_for_object 'like' post as likes_count %}
@@ -84,7 +82,7 @@
             {% endif %}
 
             {% if post.updated %}
-                <div class="updated-message">{% trans "Edited" %} {% pybb_time post.updated %}</div>
+                <div class="updated-message">{% trans "Edited" %} {% timestamp post.updated %}</div>
             {% endif %}
 
             <div class="post-related">

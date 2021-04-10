@@ -1,6 +1,7 @@
 {% load i18n pybb_tags %}
 {% load astrobin_apps_users_tags %}
 {% load tags %}
+{% load common_tags %}
 
 <form method="post" action="{% url 'forum_moderation_mark_as_spam' %}">{% csrf_token %}
     <table class="table table-striped topic-list">
@@ -71,7 +72,7 @@
                             {% trans "(deleted)" %}
                         {% endif %}
                         &middot;
-                        {% pybb_time topic.created %}
+                        {% timestamp topic.created %}
 
                         {% with topic|pybb_topic_inline_pagination as pages %}
                             {% if pages|length > 1 %}

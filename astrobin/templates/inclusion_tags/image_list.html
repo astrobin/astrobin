@@ -35,9 +35,9 @@
                     </td>
                     <td class="published hidden-phone">
                         {% if image.published %}
-                            {{image.published|to_user_timezone:request.user|date:"SHORT_DATE_FORMAT"}}
+                            {% timestamp image.published %}
                         {% else %}
-                            {{image.uploaded|to_user_timezone:request.user|date:"SHORT_DATE_FORMAT"}}
+                            {% timestamp image.uploaded %}
                         {% endif %}
                     </td>
                     <td class="views hidden-phone">{% get_hit_count for image %}</td>

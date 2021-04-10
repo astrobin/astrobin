@@ -1147,7 +1147,7 @@ def user_page(request, username):
         qs = wip_qs
         section = 'staging'
         subsection = None
-    if 'trash' in request.GET:
+    elif 'trash' in request.GET:
         if request.user != user or not can_restore_from_trash(request.user) and not request.user.is_superuser:
             return HttpResponseForbidden()
         qs = Image.deleted_objects.filter(user=user)
@@ -1176,8 +1176,7 @@ def user_page(request, username):
         # UPLOADED #
         ############
         if subsection == 'uploaded':
-            # All good already
-            pass
+            qs = qs.order_by('-published', '-uploaded')
 
         ############
         # ACQUIRED #

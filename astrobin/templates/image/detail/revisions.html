@@ -2,6 +2,7 @@
 {% load sanitizer %}
 {% load tags %}
 {% load astrobin_apps_images_tags %}
+{% load common_tags %}
 
 {% if revisions %}
     <div class="subtle-container revisions-container">
@@ -29,7 +30,11 @@
                                     </li>
                                     <li class="nav-header">
                                         {% trans "Uploaded" %}:
-                                        <abbr class="data published timeago" title="{{ image.published|to_user_timezone:request.user|date:'Y-m-d\TH:i:s' }}"></abbr>
+                                        {% if image.published %}
+                                            {% timestamp image.published %}
+                                        {% else %}
+                                            {% timestamp image.uploaded %}
+                                        {% endif %}
                                     </li>
                                     <li class="divider"></li>
 
@@ -94,9 +99,7 @@
                                         {% trans "Revision" %} {{ r.label }}
                                     </li>
                                     <li class="nav-header">
-                                        {% trans "Uploaded" %}
-                                        <abbr class="data published timeago"
-                                              title="{{ r.uploaded|to_user_timezone:request.user|date:'Y-m-d\TH:i:s' }}"></abbr>
+                                        {% trans "Uploaded" %} {% timestamp r.uploaded %}
                                     </li>
                                     <li class="divider"></li>
 
@@ -164,8 +167,7 @@
                         {% endif %}
                     </p>
                     <p>
-                        <strong>{% trans "Uploaded" %}:</strong>&nbsp;
-                        <abbr class="data published timeago" title="{{ r.uploaded|to_user_timezone:request.user|date:'Y-m-d\TH:i:s' }}"></abbr>
+                        <strong>{% trans "Uploaded" %}:</strong>&nbsp;{% timestamp r.uploaded %}
                     </p>
                 </div>
             {% endfor %}
