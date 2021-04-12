@@ -11,6 +11,7 @@ from haystack.indexes import SearchIndex
 from hitcount.models import HitCount
 from pybb.models import Post, Topic
 
+from astrobin.enums.license import License
 from astrobin.models import DeepSky_Acquisition
 from astrobin.models import Image
 from astrobin.models import SolarSystem_Acquisition
@@ -551,7 +552,8 @@ class ImageIndex(SearchIndex, Indexable):
     is_top_pick = BooleanField()
     is_top_pick_nomination = BooleanField()
 
-    license = IntegerField(model_attr='license')
+    license = IntegerField()
+    license_name = CharField()
 
     min_aperture = IntegerField()
     max_aperture = IntegerField()
@@ -645,6 +647,12 @@ class ImageIndex(SearchIndex, Indexable):
 
     def prepare_views(self, obj):
         return _prepare_views(obj, 'image')
+
+    def prepare_license(self, obj):
+        return License.to_deprecated_integer(obj.license)
+
+    def prepare_license_name(self, obj):
+        return obj.license
 
     def prepare_bookmarks(self, obj):
         return _prepare_bookmarks(obj)

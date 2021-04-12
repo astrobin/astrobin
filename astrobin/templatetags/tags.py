@@ -8,15 +8,18 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import Library
 from django.template.defaultfilters import timesince
+from django.utils.safestring import mark_safe, SafeString
 from django.utils.translation import ugettext as _
 from pybb.models import Post
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from subscription.models import UserSubscription, Subscription
 from threaded_messages.models import Participant
 
 from astrobin import utils
 from astrobin.enums import SubjectType
+from astrobin.enums.license import License
 from astrobin.gear import is_gear_complete, get_correct_gear
-from astrobin.models import GearUserInfo, UserProfile, Image
+from astrobin.models import GearUserInfo, UserProfile, Image, LICENSE_CHOICES
 from astrobin.services.utils_service import UtilsService
 from astrobin.utils import get_image_resolution, decimal_to_hours_minutes_seconds, decimal_to_degrees_minutes_seconds
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
@@ -781,3 +784,28 @@ def first_unread_post_link(topic, request):
         return settings.BASE_URL + post.get_absolute_url()
 
     return None
+
+
+@register.simple_tag
+def license_logo(image):
+    # type: (Image) -> SafeString
+
+    icons = {
+        License.ALL_RIGHTS_RESERVED: 'cc/c.png',
+        License.ATTRIBUTION_NON_COMMERCIAL_SHARE_ALIKE: 'cc/cc-by-nc-sa.png',
+        License.ATTRIBUTION_NON_COMMERCIAL: 'cc/cc-by-nc.png',
+        License.ATTRIBUTION_NON_COMMERCIAL_NO_DERIVS: 'cc/cc-by-nc-nd.png',
+        License.ATTRIBUTION: 'cc/cc-by.png',
+        License.ATTRIBUTION_SHARE_ALIKE: 'cc/cc-by-sa.png',
+        License.ATTRIBUTION_NO_DERIVS: 'cc/cc-by-nd.png',
+    }
+
+    license = image.license
+
+    if type(image.license) == int:
+        license = License.from_deprecated_integer(license)
+
+    icon = static('astrobin/icons/%s' %  icons[license])
+    title = [x[1] for x in LICENSE_CHOICES if x[0] == license][0]
+
+    return mark_safe('<img class="license" src="%s" alt="%s" title="%s" />' % (icon, title, title))
