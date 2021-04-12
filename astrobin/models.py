@@ -17,6 +17,7 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator, Regex
 from image_cropping import ImageRatioField
 
 from astrobin.enums import SubjectType, SolarSystemSubject
+from astrobin.enums.license import License
 from astrobin.fields import CountryField, get_country_name
 from astrobin.services import CloudflareService
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
@@ -97,13 +98,13 @@ def image_hash():
 
 
 LICENSE_CHOICES = (
-    (0, _("None (All rights reserved)")),
-    (1, _("Attribution-NonCommercial-ShareAlike Creative Commons")),
-    (2, _("Attribution-NonCommercial Creative Commons")),
-    (3, _("Attribution-NonCommercial-NoDerivs Creative Commons")),
-    (4, _("Attribution Creative Commons")),
-    (5, _("Attribution-ShareAlike Creative Commons")),
-    (6, _("Attribution-NoDerivs Creative Commons")),
+    (License.ALL_RIGHTS_RESERVED, _("None (All rights reserved)")),
+    (License.ATTRIBUTION_NON_COMMERCIAL_SHARE_ALIKE, _("Attribution-NonCommercial-ShareAlike Creative Commons")),
+    (License.ATTRIBUTION_NON_COMMERCIAL, _("Attribution-NonCommercial Creative Commons")),
+    (License.ATTRIBUTION_NON_COMMERCIAL_NO_DERIVS, _("Attribution-NonCommercial-NoDerivs Creative Commons")),
+    (License.ATTRIBUTION, _("Attribution Creative Commons")),
+    (License.ATTRIBUTION_SHARE_ALIKE, _("Attribution-ShareAlike Creative Commons")),
+    (License.ATTRIBUTION_NO_DERIVS, _("Attribution-NoDerivs Creative Commons")),
 )
 
 LANGUAGE_CHOICES = (
@@ -1053,9 +1054,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     h = models.IntegerField(editable=False, default=0)
     animated = models.BooleanField(editable=False, default=False)
 
-    license = models.IntegerField(
+    license = models.CharField(
+        max_length = 40,
         choices=LICENSE_CHOICES,
-        default=0,
+        default=License.ALL_RIGHTS_RESERVED,
         verbose_name=_("License"),
     )
 
@@ -2224,14 +2226,12 @@ class UserProfile(SafeDeleteModel):
                     "on your gallery page."),
     )
 
-    default_license = models.IntegerField(
+    default_license = models.CharField(
+        max_length=40,
         choices=LICENSE_CHOICES,
-        default=0,
+        default=License.ALL_RIGHTS_RESERVED,
         verbose_name=_("Default license"),
-        help_text=_(
-            "The license you select here is automatically applied to "
-            "all your new images."
-        ),
+        help_text=_("The license you select here is automatically applied to all your new images."),
     )
 
     default_watermark_text = models.CharField(

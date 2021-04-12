@@ -8,6 +8,7 @@ from tastypie import fields, http
 from tastypie.authentication import Authentication
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 
+from astrobin.enums.license import License
 from astrobin.models import Location, Image, ImageRevision, ImageOfTheDay, App, Collection, UserProfile
 from astrobin.views import get_image_or_404
 from astrobin_apps_images.services import ImageService
@@ -192,6 +193,7 @@ class ImageResource(ModelResource):
     locations = fields.ToManyField(LocationResource, 'locations')
     data_source = fields.CharField('data_source', null=True)
     remote_source = fields.CharField('remote_source', null=True)
+    license_name = fields.CharField('license')
 
     url_thumb = fields.CharField()
     url_gallery = fields.CharField()
@@ -247,8 +249,8 @@ class ImageResource(ModelResource):
             'animated',
             'link',
             'link_to_fits',
-            'license',
-            # TODO: likes
+            'license', # Deprecated
+            'license_name',
 
             'is_final',
             'is_solved',
@@ -354,6 +356,9 @@ class ImageResource(ModelResource):
     def dehydrate_imaging_cameras(self, bundle):
         cameras = bundle.obj.imaging_cameras.all()
         return [unicode(x) for x in cameras]
+
+    def dehydrate_license(self, bundle):
+        return License.to_deprecated_integer(bundle.obj.license)
 
     def dehydrate_likes(self, bundle):
         return ToggleProperty.objects.toggleproperties_for_object('like', bundle.obj).count()

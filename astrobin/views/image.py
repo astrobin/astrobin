@@ -9,7 +9,6 @@ from braces.views import (
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.exceptions import PermissionDenied
 from django.core.files.images import get_image_dimensions
 from django.core.urlresolvers import reverse_lazy, reverse
@@ -54,12 +53,11 @@ from astrobin.models import (
     DeepSky_Acquisition,
     SolarSystem_Acquisition,
     LANGUAGES,
-    LICENSE_CHOICES,
 )
 from astrobin.stories import add_story
 from astrobin_apps_notifications.tasks import push_notification_for_new_image
 from astrobin.templatetags.tags import can_like
-from astrobin.utils import to_user_timezone, get_image_resolution
+from astrobin.utils import get_image_resolution
 from astrobin_apps_groups.forms import GroupSelectForm
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
@@ -515,16 +513,6 @@ class ImageDetailView(ImageDetailViewBase):
             if revision_image.solution.skyplot_zoom1:
                 skyplot_zoom1 = revision_image.solution.skyplot_zoom1
 
-        licenses = (
-            (0, 'cc/c.png', LICENSE_CHOICES[0][1]),
-            (1, 'cc/cc-by-nc-sa.png', LICENSE_CHOICES[1][1]),
-            (2, 'cc/cc-by-nc.png', LICENSE_CHOICES[2][1]),
-            (3, 'cc/cc-by-nc-nd.png', LICENSE_CHOICES[3][1]),
-            (4, 'cc/cc-by.png', LICENSE_CHOICES[4][1]),
-            (5, 'cc/cc-by-sa.png', LICENSE_CHOICES[5][1]),
-            (6, 'cc/cc-by-nd.png', LICENSE_CHOICES[6][1]),
-        )
-
         locations = '; '.join([u'%s' % (x) for x in image.locations.all()])
 
         #######################
@@ -704,8 +692,6 @@ class ImageDetailView(ImageDetailViewBase):
             'constellation': ImageService.get_constellation(revision_image.solution) \
                 if revision_image \
                 else ImageService.get_constellation(image.solution),
-            'license_icon': static('astrobin/icons/%s' % licenses[image.license][1]),
-            'license_title': licenses[image.license][2],
             'resolution': '%dx%d' % (w, h) if (w and h) else None,
             'locations': locations,
             'solar_system_main_subject': ImageService(image).get_solar_system_main_subject_label(),

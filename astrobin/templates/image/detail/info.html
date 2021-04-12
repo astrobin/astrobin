@@ -32,10 +32,7 @@
         <span class="visible-phone">{% astrobin_username image.user %}</span>
         <div class="data">
             <div>
-                <img class="license"
-                     src="{{license_icon}}"
-                     alt="{% trans "License" %}: {{license_title}}"
-                     title="{% trans "License" %}: {{license_title}}" />
+                {% license_logo image %}
 
                 {% if image.published %}
                     {% timestamp image.published %}

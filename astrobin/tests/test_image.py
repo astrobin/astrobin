@@ -14,6 +14,7 @@ from mock import patch
 from subscription.models import Subscription, UserSubscription
 
 from astrobin.enums import SubjectType
+from astrobin.enums.license import License
 from astrobin.models import (
     Image,
     ImageRevision,
@@ -2314,7 +2315,7 @@ class ImageTest(TestCase):
         def post_data(image):
             return {
                 'image_id': image.get_id(),
-                'license': 1,
+                'license': License.ATTRIBUTION_NO_DERIVS,
             }
 
         def get_url(args=None):
@@ -2365,7 +2366,7 @@ class ImageTest(TestCase):
             target_status_code=200)
         self._assert_message(response, "success unread", "Form saved")
         image = Image.objects.get(pk=image.pk)
-        self.assertEquals(image.license, 1)
+        self.assertEquals(image.license, License.ATTRIBUTION_NO_DERIVS)
 
         self.client.logout()
 

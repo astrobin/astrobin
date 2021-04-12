@@ -251,7 +251,7 @@ class AstroBinSearchForm(SearchForm):
 
         if license is not None and license != "":
             licenses = license.split(',')
-            results = results.filter(license__in=licenses)
+            results = results.filter(license_name__in=licenses)
 
         return results
 
