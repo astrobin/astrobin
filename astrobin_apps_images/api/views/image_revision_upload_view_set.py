@@ -9,6 +9,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.reverse import reverse
 
+from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.models import ImageRevision, Image
 from astrobin_apps_images.api.filters import ImageRevisionFilter
 from astrobin_apps_images.api.mixins import TusPatchMixin, TusHeadMixin, TusTerminateMixin, \
