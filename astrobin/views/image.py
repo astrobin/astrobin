@@ -18,9 +18,9 @@ from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest, H
 from django.shortcuts import redirect
 from django.utils.encoding import iri_to_uri
 
-# Temp compat fix, drop when moved to python3
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 
+# Temp compat fix, drop when moved to python3
 if six.PY2:
     from django.utils.encoding import smart_unicode
 else:
