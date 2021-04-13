@@ -18,6 +18,7 @@ from image_cropping import ImageRatioField
 
 from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.enums.license import License
+from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.fields import CountryField, get_country_name
 from astrobin.services import CloudflareService
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
@@ -67,7 +68,7 @@ except:
 from astrobin_apps_images.managers import ImagesManager, PublicImagesManager, WipImagesManager, ImageRevisionsManager, \
     UploadsInProgressImagesManager, UploadsInProgressImageRevisionsManager
 from astrobin_apps_notifications.utils import push_notification
-from astrobin_apps_platesolving.models import Solution
+from astrobin_apps_platesolving.models import Solution, PlateSolvingSettings, PlateSolvingAdvancedSettings
 from nested_comments.models import NestedComment
 
 log = logging.getLogger('apps')
@@ -783,9 +784,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     )
 
     MOUSE_HOVER_CHOICES = [
-        (None, _("Nothing")),
-        ("SOLUTION", _("Plate-solution annotations (if available)")),
-        ("INVERTED", _("Inverted monochrome")),
+        (MouseHoverImage.NOTHING, _("Nothing")),
+        (MouseHoverImage.SOLUTION, _("Plate-solution annotations (if available)")),
+        (MouseHoverImage.INVERTED, _("Inverted monochrome")),
     ]
 
     GEAR_CLASS_LOOKUP = {
@@ -1055,7 +1056,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     animated = models.BooleanField(editable=False, default=False)
 
     license = models.CharField(
-        max_length = 40,
+        max_length=40,
         choices=LICENSE_CHOICES,
         default=License.ALL_RIGHTS_RESERVED,
         verbose_name=_("License"),
@@ -1076,7 +1077,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     mouse_hover_image = models.CharField(
         null=True,
         blank=True,
-        default="SOLUTION",
+        default=MouseHoverImage.SOLUTION,
         max_length=16,
     )
 
@@ -1590,7 +1591,7 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     mouse_hover_image = models.CharField(
         null=True,
         blank=True,
-        default="SOLUTION",
+        default=MouseHoverImage.SOLUTION,
         max_length=16,
     )
 
@@ -1653,6 +1654,24 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
                 .update(is_final=False)
 
         super(ImageRevision, self).save(*args, **kwargs)
+
+        if self.image.solution and self.image.solution.settings:
+            solution, created = Solution.objects.get_or_create(
+                content_type=ContentType.objects.get_for_model(ImageRevision),
+                object_id=self.pk)
+            if created:
+                settings = self.image.solution.settings  # type: PlateSolvingSettings
+                settings.pk = None
+                settings.save()
+                solution.settings = settings
+
+                if self.image.solution.advanced_settings:
+                    advanced_settings = self.image.solution.advanced_settings  # type: PlateSolvingAdvancedSettings
+                    advanced_settings.pk = None
+                    advanced_settings.save()
+                    solution.advanced_settings = advanced_settings
+
+                solution.save()
 
     def get_absolute_url(self, revision='nd', size='regular'):
         # We can ignore the revision argument of course

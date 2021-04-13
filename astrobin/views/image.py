@@ -18,6 +18,8 @@ from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest, H
 from django.shortcuts import redirect
 from django.utils.encoding import iri_to_uri
 
+from astrobin.enums.mouse_hover_image import MouseHoverImage
+
 # Temp compat fix, drop when moved to python3
 if six.PY2:
     from django.utils.encoding import smart_unicode
@@ -656,10 +658,10 @@ class ImageDetailView(ImageDetailViewBase):
             'revision_label': r,
 
             'instance_to_platesolve': instance_to_platesolve,
-            'show_solution': instance_to_platesolve.mouse_hover_image == "SOLUTION"
+            'show_solution': instance_to_platesolve.mouse_hover_image == MouseHoverImage.SOLUTION
                              and instance_to_platesolve.solution
                              and instance_to_platesolve.solution.status >= Solver.SUCCESS,
-            'show_advanced_solution': instance_to_platesolve.mouse_hover_image == "SOLUTION"
+            'show_advanced_solution': instance_to_platesolve.mouse_hover_image == MouseHoverImage.SOLUTION
                                       and instance_to_platesolve.solution
                                       and instance_to_platesolve.solution.status == Solver.ADVANCED_SUCCESS,
             'skyplot_zoom1': skyplot_zoom1,

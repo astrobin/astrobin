@@ -15,6 +15,7 @@ from subscription.models import Subscription, UserSubscription
 
 from astrobin.enums import SubjectType
 from astrobin.enums.license import License
+from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.models import (
     Image,
     ImageRevision,
@@ -33,6 +34,7 @@ from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_notifications.utils import get_unseen_notifications
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
+from astrobin_apps_platesolving.tests.platesolving_generators import PlateSolvingGenerators
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
@@ -718,7 +720,7 @@ class ImageTest(TestCase):
             content_object=image
         )
 
-        image.mouse_hover_image = "INVERTED"
+        image.mouse_hover_image = MouseHoverImage.INVERTED
         image.save()
 
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
@@ -820,7 +822,7 @@ class ImageTest(TestCase):
             content_object=revision
         )
 
-        revision.mouse_hover_image = "INVERTED"
+        revision.mouse_hover_image = MouseHoverImage.INVERTED
         revision.save()
 
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), "r": revision.label}))
@@ -2426,14 +2428,33 @@ class ImageTest(TestCase):
 
     def test_image_revision_keeps_mouse_hover_from_image(self):
         image = Generators.image(user=self.user)
-        image.mouse_hover_image = 'INVERTED'
+        image.mouse_hover_image = MouseHoverImage.INVERTED
         image.save(keep_deleted=True)
 
         revision = Generators.imageRevision(image=image)
 
         self.client.login(username='test', password='password')
         response = self.client.get(reverse('image_edit_revision', args=(revision.pk,)))
-        self.assertContains(response, '<option value="INVERTED" selected>')
+        self.assertContains(response, '<option value="' + MouseHoverImage.INVERTED + '" selected>')
+
+    def test_image_revision_keeps_plate_solving_settings_from_image(self):
+        image = Generators.image(user=self.user)
+        solution = PlateSolvingGenerators.solution(image)
+        settings = PlateSolvingGenerators.settings(blind=False)
+        advanced_settings = PlateSolvingGenerators.advanced_settings(scaled_font_size='S')
+        solution.settings = settings
+        solution.advanced_settings = advanced_settings
+        solution.save()
+        image.save(keep_deleted=True)
+
+        revision = Generators.imageRevision(image=image)
+
+        self.assertIsNotNone(revision.solution)
+        self.assertIsNotNone(revision.solution.settings)
+        self.assertIsNotNone(revision.solution.advanced_settings)
+        self.assertFalse(revision.solution.settings.blind)
+        self.assertEquals('S', revision.solution.advanced_settings.scaled_font_size)
+
 
     def test_image_delete_has_permanently_deleted_text(self):
         self.client.login(username='test', password='password')
