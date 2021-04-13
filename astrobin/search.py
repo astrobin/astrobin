@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.auth.models import User
 from haystack.forms import SearchForm
 from haystack.generic_views import SearchView
+from haystack.inputs import Clean, BaseInput
 from haystack.query import SearchQuerySet
 from pybb.models import Post, Topic
 
@@ -49,6 +50,22 @@ FIELDS = (
     # Sorting
     'sort'
 )
+
+
+class CustomContain(BaseInput):
+    """
+    An input type for making wildcard matches.
+    """
+    input_type_name = 'custom_contain'
+
+    def prepare(self, query_obj):
+        query_string = super(CustomContain, self).prepare(query_obj)
+        query_string = query_obj.clean(query_string)
+
+        exact_bits = [Clean(bit).prepare(query_obj) for bit in query_string.split(' ') if bit]
+        query_string = u' '.join(exact_bits)
+
+        return u'*{}*'.format(query_string)
 
 
 class AstroBinSearchForm(SearchForm):
@@ -372,6 +389,7 @@ class AstroBinSearchForm(SearchForm):
 
     def search(self):
         q = self.cleaned_data.get('q')
+        domain = self.cleaned_data.get('d')
 
         try:
             q = unicodedata.normalize('NFKD', q).encode('ascii', 'ignore')
@@ -381,7 +399,10 @@ class AstroBinSearchForm(SearchForm):
         if q is None or q == u"":
             sqs = SearchQuerySet().all()
         else:
-            sqs = self.searchqueryset.auto_query(q)
+            if domain == 'u':
+                sqs = self.searchqueryset.filter(text=CustomContain(q))
+            else:
+                sqs = self.searchqueryset.auto_query(q)
 
         sqs = self.filter_by_domain(sqs)
 
