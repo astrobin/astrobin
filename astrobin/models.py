@@ -2232,6 +2232,7 @@ class UserProfile(SafeDeleteModel):
             (4, _("Gear")),
             (5, _("Collections")),
             (6, _("Title")),
+            (7, _("Constellation")),
         ),
         default=0,
         null=False,

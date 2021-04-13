@@ -64,6 +64,7 @@ from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, prem
     premium_user_has_valid_subscription
 from astrobin_apps_users.services import UserService
 from common.services import AppRedirectionService
+from common.services.constellations_service import ConstellationsService
 from toggleproperties.models import ToggleProperty
 
 log = logging.getLogger('apps')
@@ -1119,6 +1120,8 @@ def user_page(request, username):
             subsection = 'collections'
         elif subsection == 6:
             subsection = 'title'
+        elif subsection == 7:
+            subsection = 'constellation'
         else:
             subsection = 'uploaded'
 
@@ -1281,6 +1284,35 @@ def user_page(request, username):
 
             elif active == 'OTHER':
                 qs = qs.filter(subject_type=SubjectType.OTHER)
+
+        elif subsection == 'constellation':
+            qs = qs.filter(subject_type=SubjectType.DEEP_SKY)
+
+            images_by_constellation = {
+                'n/a': []
+            }
+
+            for image in qs.iterator():
+                image_constellation = ImageService.get_constellation(image.solution)
+                if image_constellation:
+                    if not images_by_constellation.get(image_constellation.get('abbreviation')):
+                        images_by_constellation[image_constellation.get('abbreviation')] = []
+                    images_by_constellation.get(image_constellation.get('abbreviation')).append(image)
+                else:
+                    images_by_constellation.get('n/a').append(image)
+
+            menu += [('ALL', _('All'))]
+            for constellation in ConstellationsService.constellation_table:
+                if images_by_constellation.get(constellation[0]):
+                    menu += [(constellation[0], constellation[1])]
+            if images_by_constellation.get('n/a') and len(images_by_constellation.get('n/a')) > 0:
+                menu += [('n/a', _('n/a'))]
+
+            if active is None:
+                active = 'ALL'
+
+            if active != 'ALL':
+                qs = qs.filter(pk__in=[x.pk for x in images_by_constellation[active]])
 
         ###########
         # NO DATA #
