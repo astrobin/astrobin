@@ -224,6 +224,9 @@
                 <li><a href="{% url 'user_page' requested_user.username %}{% query_string "public=,sub=gear" "staging,active" %}">
                     <i class="icon-cog"></i>
                     {% trans "Gear" %}</a></li>
+                <li><a href="{% url 'user_page' requested_user.username %}{% query_string "public=,sub=constellation" "staging,active" %}">
+                    <i class="icon-star-empty"></i>
+                    {% trans "Constellation" %}</a></li>
                 <li class="divider"></li>
                 <li><a href="{% url 'user_page' requested_user.username %}{% query_string "public=,sub=nodata" "staging,active" %}">
                     <i class="icon-warning-sign"></i>
