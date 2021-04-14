@@ -1004,7 +1004,7 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
 
             if not previously_published:
                 if not skip_notifications:
-                    push_notification_for_new_image.apply_async(args=(request.user.pk, image.pk,))
+                    push_notification_for_new_image.apply_async(args=(request.user.pk, image.pk,), countdown=10)
                 add_story(image.user, verb='VERB_UPLOADED_IMAGE', action_object=image)
 
             messages.success(request, _("Image moved to the public area."))

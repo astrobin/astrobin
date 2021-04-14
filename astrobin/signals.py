@@ -155,7 +155,7 @@ post_softdelete.connect(image_post_delete, sender=Image)
 
 def imagerevision_post_save(sender, instance, created, **kwargs):
     if created and not instance.image.is_wip and not instance.skip_notifications:
-        push_notification_for_new_image_revision.apply_async(args=(instance.pk,))
+        push_notification_for_new_image_revision.apply_async(args=(instance.pk,), countdown=10)
         add_story(instance.image.user,
                   verb='VERB_UPLOADED_REVISION',
                   action_object=instance,
