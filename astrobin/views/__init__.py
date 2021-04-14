@@ -1304,9 +1304,12 @@ def user_page(request, username):
             menu += [('ALL', _('All'))]
             for constellation in ConstellationsService.constellation_table:
                 if images_by_constellation.get(constellation[0]):
-                    menu += [(constellation[0], constellation[1])]
+                    menu += [(
+                        constellation[0],
+                        constellation[1] + ' (%d)' % len(images_by_constellation.get(constellation[0]))
+                    )]
             if images_by_constellation.get('n/a') and len(images_by_constellation.get('n/a')) > 0:
-                menu += [('n/a', _('n/a'))]
+                menu += [('n/a', _('n/a') + ' (%d)' % len(images_by_constellation.get('n/a')))]
 
             if active is None:
                 active = 'ALL'
