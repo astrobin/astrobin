@@ -2127,8 +2127,26 @@ form.avatar-change label.control-label {
   }
 }
 
-.user-gallery .astrobin-image-container.wip figure img {
-  opacity: .4;
+.user-gallery {
+  @media screen and (hover: hover) {
+    .user-gallery-subsections {
+      max-height: 58px;
+      @include mask-image(40px);
+      overflow: hidden;
+      animation: height 2s linear;
+
+      &:hover {
+        max-height: unset;
+        overflow: initial;
+        @include no-mask-image;
+
+      }
+    }
+  }
+
+  .astrobin-image-container.wip figure img {
+    opacity: .4;
+  }
 }
 
 .iotd-archive-image {
@@ -3352,7 +3370,7 @@ pre {
 
   @media screen and (max-width: 767px) {
     display: flex;
-    justify-content:center;
+    justify-content: center;
     flex-wrap: wrap;
   }
 
