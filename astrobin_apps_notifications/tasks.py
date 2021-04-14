@@ -21,7 +21,7 @@ def purge_old_notifications():
     call_command("purge_old_notifications")
 
 
-@shared_task(time_limit=1200)
+@shared_task(time_limit=1800)
 def push_notification_for_new_image(user_pk, image_pk):
     try:
         image = Image.objects_including_wip.get(pk=image_pk)
@@ -47,12 +47,12 @@ def push_notification_for_new_image(user_pk, image_pk):
             'image_thumbnail': thumb.url if thumb else None
         })
     else:
-        logger.error('push_notification_for_new_image called for image %d whose author %d has no followes' % (
+        logger.error('push_notification_for_new_image called for image %d whose author %d has no followers' % (
             image_pk, user_pk)
         )
 
 
-@shared_task(time_limit=1200)
+@shared_task(time_limit=1800)
 def push_notification_for_new_image_revision(revision_pk):
     try:
         revision = ImageRevision.objects.get(pk=revision_pk)
