@@ -121,6 +121,7 @@ from astrobin.views import (
 
     set_language
 )
+from astrobin.views.contact import ContactRedirectView
 from astrobin.views.profile.download_data_view import DownloadDataView
 
 admin.autodiscover()
@@ -184,7 +185,7 @@ urlpatterns += [
     url(r'^activity/', include('actstream.urls')),
     url(r'^avatar/', include('avatar.urls')),
     url(r'^comments/', include('django_comments.urls')),
-    url(r'^contact/', RedirectView.as_view(url='https://welcome.astrobin.com/contact', permanent=True), name='contact'),
+    url(r'^contact/', ContactRedirectView.as_view(), name='contact'),
     url(r'^forum/', include('pybb.urls', namespace='pybb')),
     url(r'hitcount/', include('hitcount.urls', namespace='hitcount')),
     url(r'^persistent_messages/', include('persistent_messages.urls')),

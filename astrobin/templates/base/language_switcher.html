@@ -51,8 +51,7 @@
             <li class="divider"></li>
 
             <li>
-                <a href="https://welcome.astrobin.com/contact?subject=Help%20with%20translations&username={{ request.user.username }}&email={{ request.user.email }}"
-                   target="_blank">
+                <a href="{% url 'contact' %}?subject=Help%20with%20translations" target="_blank">
                     <i class="icon-tasks"></i>
                     {% trans "Help with translations!" %}
                 </a>
