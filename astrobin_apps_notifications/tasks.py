@@ -80,7 +80,7 @@ def push_notification_for_new_image_revision(revision_pk):
         )
 
 
-@shared_task(time_limit=300)
+@shared_task(time_limit=300, acks_late=True)
 def clear_old_bouncy_objects():
     Delivery.objects.filter(created_at__lte=DateTimeService.now() - timedelta(7)).delete()
     Bounce.objects.filter(created_at__lte=DateTimeService.now() - timedelta(30)).delete()

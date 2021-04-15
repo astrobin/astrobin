@@ -11,7 +11,7 @@ from astrobin_apps_payments.models import ExchangeRate
 log = logging.getLogger("apps")
 
 
-@shared_task(time_limit=60)
+@shared_task(time_limit=60, acks_late=True)
 def fetch_exchange_rates():
     source = 'CHF'
     api_url = 'https://api.transferwise.com/v1/rates?source=%s&target=%s'

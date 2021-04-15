@@ -11,7 +11,7 @@ from astrobin_apps_premium.models import DataLossCompensationRequest
 log = logging.getLogger("apps")
 
 
-@shared_task(time_limit=60)
+@shared_task(time_limit=60, acks_late=True)
 def fix_expired_subscriptions():
     call_command("fix_expired_subscriptions")
 
@@ -23,7 +23,7 @@ def send_expiration_notifications():
     call_command("send_expired_subscription_notifications")
 
 
-@shared_task(time_limit=60)
+@shared_task(time_limit=60, acks_late=True)
 def reactivate_previous_subscription_when_ultimate_compensation_expires():
     expiring_ultimates = UserSubscription.objects.filter(
         subscription__name="AstroBin Ultimate 2020+",

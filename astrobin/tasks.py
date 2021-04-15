@@ -101,7 +101,7 @@ def global_stats():
     gs.save()
 
 
-@shared_task(time_limit=60)
+@shared_task(time_limit=60, acks_late=True)
 def sync_iotd_api():
     call_command("image_of_the_day")
 
@@ -111,12 +111,12 @@ def merge_gear():
     call_command("merge_gear")
 
 
-@shared_task(time_limit=60)
+@shared_task(time_limit=60, acks_late=True)
 def hitcount_cleanup():
     call_command("hitcount_cleanup")
 
 
-@shared_task(time_limit=60)
+@shared_task(time_limit=60, acks_late=True)
 def contain_temporary_files_size():
     subprocess.call(['scripts/contain_directory_size.sh', '/astrobin-temporary-files/files', '120'])
 
@@ -127,7 +127,7 @@ addresses.
 """
 
 
-@shared_task(time_limit=60)
+@shared_task(time_limit=60, acks_late=True)
 def delete_inactive_bounced_accounts():
     bounces = Bounce.objects.filter(
         hard=True,
@@ -138,7 +138,7 @@ def delete_inactive_bounced_accounts():
     bounces.delete()
 
 
-@shared_task(time_limit=120)
+@shared_task(time_limit=120, acks_late=True)
 def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     from astrobin.models import Image
 
@@ -174,7 +174,7 @@ def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     logger.debug('retrieve_thumbnail task is already running')
 
 
-@shared_task(time_limit=900)
+@shared_task(time_limit=900, acks_late=True)
 def update_index(model, age_in_minutes, batch_size):
     start = datetime.now() - timedelta(minutes=age_in_minutes)
     end = datetime.now()
@@ -260,7 +260,7 @@ def delete_never_activated_accounts():
     logger.debug("Deleted %d inactive accounts" % count)
 
 
-@shared_task(time_limit=3600)
+@shared_task(time_limit=2700, acks_late=True)
 def prepare_download_data_archive(request_id):
     # type: (str) -> None
 
@@ -421,7 +421,7 @@ def prepare_download_data_archive(request_id):
         data_download_request.save()
 
 
-@shared_task(time_limit=60)
+@shared_task(time_limit=60, acks_late=True)
 def expire_download_data_requests():
     DataDownloadRequest.objects \
         .exclude(status="EXPIRED") \
@@ -429,7 +429,7 @@ def expire_download_data_requests():
         .update(status="EXPIRED")
 
 
-@shared_task(time_limit=60)
+@shared_task(time_limit=60, acks_late=True)
 def purge_expired_incomplete_uploads():
     deleted = Image.uploads_in_progress.filter(uploader_expires__lt=DateTimeService.now()).delete()
 
@@ -584,7 +584,7 @@ def perform_wise_payouts(
     process_wise_payouts()
 
 
-@shared_task(time_limit=300)
+@shared_task(time_limit=300, acks_late=True)
 def assign_upload_length():
     """
     Run this tasks every hour to assign `uploader_upload_length` to images that lack it.
