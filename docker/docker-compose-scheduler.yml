@@ -8,7 +8,7 @@ services:
       - bash
       - -c
       - |
-        python manage.py collectstatic --noinput && \
+        LOCAL_STATIC_STORAGE=true python manage.py collectstatic --noinput && \
         celery -A astrobin beat -l debug --pidfile= --scheduler django_celery_beat.schedulers:DatabaseScheduler
     env_file:
       - ./astrobin.env

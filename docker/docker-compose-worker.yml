@@ -8,7 +8,7 @@ services:
      - bash
      - -c
      - |
-       python manage.py collectstatic --noinput && \
+       LOCAL_STATIC_STORAGE=true python manage.py collectstatic --noinput && \
        celery worker -A astrobin -Q default -c 1 -l debug -E --uid=nobody --gid=nogroup
     links:
       - memcached
