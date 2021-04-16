@@ -78,9 +78,9 @@
                         <span class="title">{{ image.title|escape|default:_("(no title)") }}</span>
                         <span class="subtitle">
                             {% if image.published %}
-                                {{ image.published }}
+                                {% timestamp image.published %}
                             {% else %}
-                                {{ image.uploaded }}
+                                {% timestamp image.uploaded %}
                             {% endif %}
 
                             {% url 'user_page' image.user.username as the_url %}
@@ -258,6 +258,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         astrobin_common.init_ajax_csrf_token();
+        astrobin_common.init_timestamps();
 
         function zoom() {
             function getRealImage() {
