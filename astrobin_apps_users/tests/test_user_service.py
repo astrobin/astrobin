@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User, Group, AnonymousUser
 from django.test import TestCase
 from django.utils import timezone
 from mock import patch
@@ -427,3 +427,22 @@ class TestUserService(TestCase):
         self.assertEquals(1, len(UserService.get_users_in_group_sample(group.name, 10)))
         self.assertEquals(5, len(UserService.get_users_in_group_sample(group.name, 50)))
         self.assertEquals(9, len(UserService.get_users_in_group_sample(group.name, 100)))
+
+    def test_shadow_bans(self):
+        a = Generators.user()
+        b = Generators.user()
+
+        self.assertFalse(UserService(a).shadow_bans(b))
+        self.assertFalse(UserService(b).shadow_bans(a))
+
+        a.userprofile.shadow_bans.add(b.userprofile)
+
+        self.assertTrue(UserService(a).shadow_bans(b))
+        self.assertFalse(UserService(b).shadow_bans(a))
+
+    def test_shadow_bans_anonymous(self):
+        a = AnonymousUser()
+        b = Generators.user()
+
+        self.assertFalse(UserService(a).shadow_bans(b))
+        self.assertFalse(UserService(b).shadow_bans(a))

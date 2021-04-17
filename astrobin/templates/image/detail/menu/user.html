@@ -26,22 +26,24 @@
             </a>
         </li>
 
-        {% if not request.user|shadow_bans:image.user %}
-            <li>
-                <a class="shadow-ban danger" href="#" data-toggle="modal" data-target="#shadow-ban-modal"
-                   data-user-pk="{{ image.user.pk }}">
-                    <i class="icon-ban-circle"></i>
-                    {% trans "Shadow-ban" %}
-                </a>
-            </li>
-        {% else %}
-            <li>
-                <a class="remove-shadow-ban" href="#" data-toggle="modal" data-target="#remove-shadow-ban-modal"
-                   data-user-pk="{{ image.user.pk }}">
-                    <i class="icon-ban-circle"></i>
-                    {% trans "Remove shadow-ban" %}
-                </a>
-            </li>
+        {% if request.user.is_authenticated %}
+            {% if not request.user|shadow_bans:image.user %}
+                <li>
+                    <a class="shadow-ban danger" href="#" data-toggle="modal" data-target="#shadow-ban-modal"
+                       data-user-pk="{{ image.user.pk }}">
+                        <i class="icon-ban-circle"></i>
+                        {% trans "Shadow-ban" %}
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                    <a class="remove-shadow-ban" href="#" data-toggle="modal" data-target="#remove-shadow-ban-modal"
+                       data-user-pk="{{ image.user.pk }}">
+                        <i class="icon-ban-circle"></i>
+                        {% trans "Remove shadow-ban" %}
+                    </a>
+                </li>
+            {% endif %}
         {% endif %}
     </ul>
 </li> <!-- user -->

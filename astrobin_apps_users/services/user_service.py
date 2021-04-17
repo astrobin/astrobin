@@ -131,6 +131,10 @@ class UserService:
 
     def shadow_bans(self, other):
         # type: (User) -> bool
+
+        if not hasattr(self.user, 'userprofile') or not hasattr(other, 'userprofile'):
+            return False
+
         return other.userprofile in self.user.userprofile.shadow_bans.all()
 
     def _real_can_like(self, obj):
