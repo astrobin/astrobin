@@ -206,6 +206,15 @@ class ImageService:
         cutoff = DateTimeService.now() - timedelta(minutes=10)
         print "query cutoff"
         print cutoff
+        print "total images"
+        print Image.objects_including_wip.all().count()
+        if Image.objects_including_wip.all().count() > 0:
+            print Image.objects_including_wip.all().first().uploaded
+            print Image.objects_including_wip.all().first().moderator_decision
+        print "matching images"
+        Image.objects_including_wip.filter(
+            moderator_decision=0,
+            uploaded__lt=cutoff)
         return Image.objects_including_wip.filter(
             moderator_decision=0,
             uploaded__lt=cutoff)
