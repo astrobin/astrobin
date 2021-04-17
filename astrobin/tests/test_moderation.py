@@ -74,7 +74,6 @@ class ModerationTest(TestCase):
 
         # An image that was just uploaded is not there
         response = self.client.get(reverse('image_moderation'))
-        print response.content
         self.assertContains(response, "The moderation queue is empty")
         self.assertNotContains(response, "Moderation test")
 
@@ -91,6 +90,7 @@ class ModerationTest(TestCase):
 
         # Moderator can see the image in the queue
         response = self.client.get(reverse('image_moderation'))
+        print response.content
         self.assertNotContains(response, "The moderation queue is empty")
         self.assertContains(response, "Moderation test")
 
