@@ -8,5 +8,4 @@ coverage run \
     ./manage.py test \
         --noinput \
         --failfast \
-        --verbosity=2 \
-        astrobin.tests.test_moderation.ModerationTest
+        --verbosity=2
