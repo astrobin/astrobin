@@ -12,6 +12,7 @@ from astrobin.utils import base26_encode, base26_decode, decimal_to_hours_minute
     decimal_to_degrees_minutes_seconds
 from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_platesolving.models import Solution
+from common.services import DateTimeService
 from common.services.constellations_service import ConstellationsService, ConstellationException
 
 logger = logging.getLogger("apps")
@@ -202,7 +203,7 @@ class ImageService:
                 return solar_system_subject[1]
 
     def get_images_pending_moderation(self):
-        cutoff = datetime.now() - timedelta(minutes=10)
+        cutoff = DateTimeService.now() - timedelta(minutes=10)
         print "query cutoff"
         print cutoff
         return Image.objects_including_wip.filter(
