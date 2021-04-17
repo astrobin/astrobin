@@ -74,6 +74,8 @@ class ModerationTest(TestCase):
 
         # An image that was just uploaded is not there
         response = self.client.get(reverse('image_moderation'))
+        print response.content
+        self.assertContains(response, "The moderation queue is empty")
         self.assertNotContains(response, "Moderation test")
 
         # We need to make it be more than 10 minutes in the past
