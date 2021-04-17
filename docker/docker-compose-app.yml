@@ -21,7 +21,7 @@ services:
       - -c
       - |
         LOCAL_STATIC_STORAGE=true python manage.py collectstatic --noinput && \
-        aws s3 sync /media/static s3://${AWS_STORAGE_BUCKET_NAME}/static && \
+        aws s3 sync /media/static s3://${AWS_STORAGE_BUCKET_NAME}/static --storage-class INTELLIGENT_TIERING && \
         python manage.py migrate --noinput && \
         python manage.py migrate --run-syncdb --noinput && \
         gunicorn wsgi:application \
