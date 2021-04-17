@@ -786,6 +786,26 @@ astrobin_common = {
         return url;
     },
 
+    init_timestamps: function() {
+        $('abbr.timestamp').each(function (index, element) {
+            var $el = $(element);
+            var datetime = new Date(0);
+            var locale = window.navigator.userLanguage || window.navigator.language;
+
+            datetime.setUTCSeconds($el.data('epoch') / 1000);
+
+            $el.attr('title', datetime.toISOString());
+
+            if (new Date() - datetime < 1000 * 60 * 60 * 24 * 30) {
+                $el.text(datetime.toLocaleString(locale));
+                $el.timeago();
+            } else {
+                $el.text(datetime.toLocaleDateString(locale));
+                $el.attr('title', datetime.toLocaleTimeString(locale));
+            }
+        });
+    },
+
     init: function (config) {
         /* Init */
         $.extend(true, astrobin_common.config, config);
@@ -804,23 +824,7 @@ astrobin_common = {
             changeYear: true
         });
 
-        $('abbr.timestamp').each(function (index, element) {
-            var $el = $(element);
-            var datetime = new Date(0);
-            var locale = window.navigator.userLanguage || window.navigator.language;
-
-            datetime.setUTCSeconds($el.data('epoch') / 1000);
-
-            $el.attr('title', datetime.toISOString());
-
-            if (new Date() - datetime < 1000 * 60 * 60 * 24 * 30) {
-                $el.text(datetime.toLocaleString(locale));
-                $el.timeago();
-            } else {
-                $el.text(datetime.toLocaleDateString(locale));
-                $el.attr('title', datetime.toLocaleTimeString(locale));
-            }
-        });
+        astrobin_common.init_timestamps()
 
         if (window.innerWidth >= 980) {
             $("select:not([multiple])").select2({theme: "flat"});

@@ -202,9 +202,12 @@ class ImageService:
                 return solar_system_subject[1]
 
     def get_images_pending_moderation(self):
+        cutoff = datetime.now() - timedelta(minutes=10)
+        print "query cutoff"
+        print cutoff
         return Image.objects_including_wip.filter(
             moderator_decision=0,
-            uploaded__lt=datetime.now() - timedelta(minutes=10))
+            uploaded__lt=cutoff)
 
     def get_hemisphere(self, revision_label=None):
         # type: (str) -> str

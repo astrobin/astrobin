@@ -78,9 +78,9 @@
                         <span class="title">{{ image.title|escape|default:_("(no title)") }}</span>
                         <span class="subtitle">
                             {% if image.published %}
-                                {{ image.published }}
+                                {% timestamp image.published %}
                             {% else %}
-                                {{ image.uploaded }}
+                                {% timestamp image.uploaded %}
                             {% endif %}
 
                             {% url 'user_page' image.user.username as the_url %}
@@ -242,11 +242,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
         integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
         crossorigin="anonymous"></script>
-<script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
-<script type="text/javascript" src="{% static 'astrobin_apps_images/js/astrobin_apps_images.js' %}"></script>
-<script src="{% static 'astrobin_apps_platesolving/js/CoordinateInterpolation.js' %}"></script>
-<script src="{% static 'astrobin_apps_platesolving/js/astrobin_apps_platesolving_mousemove.js' %}"></script>
-<script type="text/javascript" src="{% static 'astrobin/js/astrobin.js' %}"></script>
+<script type="text/javascript" src="{% static 'cookielaw/js/cookielaw.js' %}?t=20210416"></script>
+<script type="text/javascript" src="{% static 'astrobin_apps_images/js/astrobin_apps_images.js' %}?t=20210416"></script>
+<script src="{% static 'astrobin_apps_platesolving/js/CoordinateInterpolation.js' %}?t=20210416"></script>
+<script src="{% static 'astrobin_apps_platesolving/js/astrobin_apps_platesolving_mousemove.js' %}?t=20210416"></script>
+<script type="text/javascript" src="{% static 'astrobin/js/astrobin.js' %}?t=20210416"></script>
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap2-toggle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js"
         integrity="sha512-m5kAjE5cCBN5pwlVFi4ABsZgnLuKPEx0fOnzaH5v64Zi3wKnhesNUYq4yKmHQyTa3gmkR6YeSKW1S+siMvgWtQ=="
@@ -254,10 +254,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"
         integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw=="
         crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="{% static 'astrobin/js/jquery.timeago.js' %}?t=20210416"></script>
+{% with 'astrobin/js/locale/jquery.timeago.'|add:LANGUAGE_CODE|add:'.js' as timeago_static %}
+    <script type="text/javascript" src="{% static timeago_static %}?t=20210416"></script>
+{% endwith %}
+
 {% insert_hit_count_js_variables for image %}
 <script type="text/javascript">
     $(document).ready(function () {
         astrobin_common.init_ajax_csrf_token();
+        astrobin_common.init_timestamps();
 
         function zoom() {
             function getRealImage() {
