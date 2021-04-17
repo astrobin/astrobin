@@ -212,7 +212,7 @@ class ImageService:
             print Image.objects_including_wip.all().first().uploaded
             print Image.objects_including_wip.all().first().moderator_decision
         print "matching images"
-        Image.objects_including_wip.filter(
+        print Image.objects_including_wip.filter(
             moderator_decision=0,
             uploaded__lt=cutoff)
         return Image.objects_including_wip.filter(
