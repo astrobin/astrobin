@@ -12,6 +12,7 @@ from astrobin.utils import base26_encode, base26_decode, decimal_to_hours_minute
     decimal_to_degrees_minutes_seconds
 from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_platesolving.models import Solution
+from common.services import DateTimeService
 from common.services.constellations_service import ConstellationsService, ConstellationException
 
 logger = logging.getLogger("apps")
@@ -204,7 +205,7 @@ class ImageService:
     def get_images_pending_moderation(self):
         return Image.objects_including_wip.filter(
             moderator_decision=0,
-            uploaded__lt=datetime.now() - timedelta(minutes=10))
+            uploaded__lt=DateTimeService.now() - timedelta(minutes=10))
 
     def get_hemisphere(self, revision_label=None):
         # type: (str) -> str

@@ -7,7 +7,6 @@ from braces.views import (
     JSONResponseMixin,
     SuperuserRequiredMixin,
 )
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -31,15 +30,19 @@ class ImageModerationListView(LoginRequiredMixin, GroupRequiredMixin, ListView):
     group_required = "image_moderators"
     raise_exception = True
     model = Image
-    queryset = ImageService().get_images_pending_moderation()
     template_name = "moderation/image_list.html"
+
+    def get_queryset(self):
+        return ImageService().get_images_pending_moderation()
 
 
 class ImageModerationSpamListView(LoginRequiredMixin, SuperuserRequiredMixin, ListView):
     raise_exception = True
     model = Image
-    queryset = Image.objects_including_wip.filter(moderator_decision=2)
     template_name = "moderation/spam_list.html"
+
+    def get_queryset(self):
+        return Image.objects_including_wip.filter(moderator_decision=2)
 
 
 class ImageModerationMarkAsSpamView(LoginRequiredMixin, GroupRequiredMixin, JSONResponseMixin, View):

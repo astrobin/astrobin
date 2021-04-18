@@ -1,9 +1,9 @@
 import datetime
+import time
 
 from django.contrib.auth.models import Group, User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-from mock import patch
 from mock import patch
 
 from astrobin.models import Image
@@ -41,7 +41,6 @@ class ModerationTest(TestCase):
         return Image.objects_including_wip.all().order_by('-id')[0]
 
     @patch("astrobin.models.UserProfile.get_scores")
-
     def test_image_moderation_queue_view(self, get_scores):
         get_scores.return_value = {
             'user_scores_index': None,
@@ -75,6 +74,7 @@ class ModerationTest(TestCase):
 
         # An image that was just uploaded is not there
         response = self.client.get(reverse('image_moderation'))
+        self.assertContains(response, "The moderation queue is empty")
         self.assertNotContains(response, "Moderation test")
 
         # We need to make it be more than 10 minutes in the past
@@ -83,6 +83,7 @@ class ModerationTest(TestCase):
 
         # Moderator can see the image in the queue
         response = self.client.get(reverse('image_moderation'))
+        self.assertNotContains(response, "The moderation queue is empty")
         self.assertContains(response, "Moderation test")
 
         # Moderator can approve it
