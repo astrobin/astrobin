@@ -78,19 +78,11 @@ class ModerationTest(TestCase):
         self.assertNotContains(response, "Moderation test")
 
         # We need to make it be more than 10 minutes in the past
-        print "updated upload time before"
-        print image.uploaded
         image.uploaded = datetime.datetime.now() - datetime.timedelta(minutes=15)
-        image.moderator_decision = 0
-        print "updated upload time after"
-        print image.uploaded
         image.save(keep_deleted=True)
-
-        time.sleep(1)
 
         # Moderator can see the image in the queue
         response = self.client.get(reverse('image_moderation'))
-        print response.content
         self.assertNotContains(response, "The moderation queue is empty")
         self.assertContains(response, "Moderation test")
 
