@@ -118,6 +118,44 @@ THUMBNAIL_ALIASES = {
             'quality': 90
         },
 
+        'regular_large': {
+            'size': (744, 0),
+            'crop': 'smart',
+            'watermark': True,
+            'keep_icc_profile': True,
+            'quality': 95
+        },
+        'regular_large_anonymized': {
+            'size': (744, 0),
+            'crop': 'smart',
+            'watermark': False,
+            'keep_icc_profile': True,
+            'quality': 95
+        },
+        'regular_large_inverted': {
+            'size': (744, 0),
+            'crop': 'smart',
+            'invert': True,
+            'watermark': True,
+            'quality': 95
+        },
+        'regular_large_sharpened': {
+            'size': (744, 0),
+            'crop': 'smart',
+            'watermark': True,
+            'detail': True,
+            'keep_icc_profile': True,
+            'quality': 95
+        },
+        'regular_large_sharpened_inverted': {
+            'size': (744, 0),
+            'crop': 'smart',
+            'watermark': True,
+            'detail': True,
+            'invert': True,
+            'quality': 95
+        },
+
         'gallery': {
             'size': (130, 130),
             'crop': 'smart',

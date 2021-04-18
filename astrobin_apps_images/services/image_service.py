@@ -6,6 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.files.images import get_image_dimensions
 from django.db.models import Q
+from django.urls import reverse
 
 from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
 from astrobin.utils import base26_encode, base26_decode, decimal_to_hours_minutes_seconds, \
@@ -269,6 +270,43 @@ class ImageService:
 
         image.thumbnails.filter(revision=new_original.label).update(revision='0')
         new_original.delete()
+
+
+    def get_enhanced_thumb_url(self, field, alias, revision, animated, secure, target_alias):
+        get_enhanced_thumb_url = None
+        enhanced_thumb_url = None
+
+        if alias == 'regular' or alias == 'regular_sharpened':
+            enhanced_alias = target_alias if alias == 'regular' else '%s_sharpened' % target_alias
+            cache_key = self.image.thumbnail_cache_key(field, enhanced_alias)
+            if animated:
+                cache_key += '_animated'
+            enhanced_thumb_url = cache.get(cache_key)
+            # Force HTTPS
+            if enhanced_thumb_url and secure:
+                enhanced_thumb_url = enhanced_thumb_url.replace('http://', 'https://', 1)
+
+            # If we're testing, we want to bypass the placeholder thing and force-get
+            # the enhanced thumb url.
+            if enhanced_thumb_url is None and settings.TESTING:
+                enhanced_thumb = self.image.thumbnail_raw(enhanced_alias, revision)
+                if enhanced_thumb:
+                    enhanced_thumb_url = enhanced_thumb.url
+
+            if enhanced_thumb_url is None:
+                get_enhanced_thumb_kwargs = {
+                    'id': self.image.hash if self.image.hash else self.image.id,
+                    'alias': enhanced_alias,
+                }
+
+                if revision is None or revision != 'final':
+                    get_enhanced_thumb_kwargs['r'] = revision
+
+                get_enhanced_thumb_url = reverse('image_thumb', kwargs=get_enhanced_thumb_kwargs)
+                if animated:
+                    get_enhanced_thumb_url += '?animated'
+
+        return get_enhanced_thumb_url, enhanced_thumb_url
 
     @staticmethod
     def get_constellation(solution):

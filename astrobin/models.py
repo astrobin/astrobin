@@ -1349,7 +1349,15 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         # If this is an animated gif, let's just return the full size URL
         # because right now we can't thumbnail gifs preserving animation
-        if kwargs.pop('animated', False) and alias in ('regular', 'regular_sharpened', 'hd', 'hd_sharpened', 'real'):
+        if kwargs.pop('animated', False) and alias in (
+            'regular',
+            'regular_sharpened',
+            'regular_large',
+            'regular_large_sharpened',
+            'hd',
+            'hd_sharpened',
+            'real',
+        ):
             url = settings.IMAGES_URL + field.name
             cache.set(cache_key + '_animated', url, 60 * 60 * 24)
             return normalize_url_security(url, thumbnail_settings)
