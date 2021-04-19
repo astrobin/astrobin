@@ -565,10 +565,10 @@ class ImageDetailView(ImageDetailViewBase):
             if nav_ctx == 'user':
                 image_next = Image.objects \
                                  .exclude(corrupted=True) \
-                                 .filter(user=image.user, pk__gt=image.pk).order_by('published', 'uploaded')[0:1]
+                                 .filter(user=image.user, published__gt=image.published).order_by('published')[0:1]
                 image_prev = Image.objects \
                                  .exclude(corrupted=True) \
-                                 .filter(user=image.user, pk__lt=image.pk).order_by('-published', '-uploaded')[0:1]
+                                 .filter(user=image.user, published__lt=image.published).order_by('-published')[0:1]
             elif nav_ctx == 'collection':
                 try:
                     try:
@@ -599,11 +599,11 @@ class ImageDetailView(ImageDetailViewBase):
                         image_next = Image.objects \
                                          .exclude(corrupted=True) \
                                          .filter(user=image.user, collections=collection,
-                                                 pk__gt=image.pk).order_by('published', 'uploaded')[0:1]
+                                                 published__gt=image.published).order_by('published')[0:1]
                         image_prev = Image.objects \
                                          .exclude(corrupted=True) \
                                          .filter(user=image.user, collections=collection,
-                                                 pk__lt=image.pk).order_by('-published', '-uploaded')[0:1]
+                                                 published__lt=image.published).order_by('-published')[0:1]
                 except Collection.DoesNotExist:
                     # image_prev and image_next will remain None
                     pass
@@ -613,20 +613,24 @@ class ImageDetailView(ImageDetailViewBase):
                     if group.public:
                         image_next = Image.objects \
                                          .exclude(corrupted=True) \
-                                         .filter(part_of_group_set=group, pk__gt=image.pk).order_by('published',
-                                                                                                    'uploaded')[0:1]
+                                         .filter(part_of_group_set=group, published__gt=image.published) \
+                                         .order_by('published')[0:1]
                         image_prev = Image.objects \
                                          .exclude(corrupted=True) \
-                                         .filter(part_of_group_set=group, pk__lt=image.pk).order_by('-published',
-                                                                                                    '-uploaded')[0:1]
+                                         .filter(part_of_group_set=group, published__lt=image.published) \
+                                         .order_by('-published')[0:1]
                 except (Group.DoesNotExist, ValueError):
                     # image_prev and image_next will remain None
                     pass
             elif nav_ctx == 'all':
-                image_next = Image.objects.exclude(corrupted=True).filter(pk__gt=image.pk).order_by('published',
-                                                                                                    'uploaded')[0:1]
-                image_prev = Image.objects.exclude(corrupted=True).filter(pk__lt=image.pk).order_by('-published',
-                                                                                                    '-uploaded')[0:1]
+                image_next = Image.objects \
+                                 .exclude(corrupted=True) \
+                                 .filter(published__gt=image.published) \
+                                 .order_by('published')[0:1]
+                image_prev = Image.objects \
+                                 .exclude(corrupted=True) \
+                                 .filter(published__lt=image.published) \
+                                 .order_by('-published')[0:1]
         except Image.DoesNotExist:
             image_next = None
             image_prev = None
