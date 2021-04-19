@@ -3,7 +3,6 @@ import random
 import string
 import zlib
 
-from PIL import Image as PILImage
 from PIL.Image import DecompressionBombError
 from django.conf import settings
 from django.core.cache import cache
@@ -12,10 +11,12 @@ from django.template import Library
 from django.utils.translation import ugettext as _
 
 from astrobin.models import Image, ImageRevision
+from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
 
 register = Library()
 logger = logging.getLogger('apps')
+
 
 # Returns the URL of an image, taking into account the fact that it might be
 # a commercial gear image.
@@ -138,9 +139,12 @@ def astrobin_image(context, image, alias, **kwargs):
             logger.warning("astrobin_image tag: unable to get image dimensions for revision %d: %s" % (
                 image_revision.pk, str(e)))
 
-    if alias in ('regular', 'regular_inverted', 'regular_sharpened',
-                 'hd', 'hd_inverted', 'hd_sharpened',
-                 'real', 'real_inverted'):
+    if alias in (
+            'regular', 'regular_inverted', 'regular_sharpened',
+            'regular_large', 'regular_large_inverted', 'regular_large_sharpened',
+            'hd', 'hd_inverted', 'hd_sharpened',
+            'real', 'real_inverted'
+    ):
         size = (size[0], int(size[0] / (w / float(h))))
         response_dict['provide_size'] = False
 
@@ -159,7 +163,11 @@ def astrobin_image(context, image, alias, **kwargs):
         field.name = 'images/' + field.name
 
     animated = field.name.lower().endswith('.gif') and \
-               alias in ('regular', 'regular_sharpened', 'hd', 'hd_sharpened', 'real')
+               alias in (
+                   'regular', 'regular_sharpened',
+                   'regular_large', 'regular_large_sharpened',
+                   'hd', 'hd_sharpened',
+                   'real')
 
     url = get_image_url(image, url_revision, url_size)
 
@@ -176,7 +184,9 @@ def astrobin_image(context, image, alias, **kwargs):
 
     if alias in (
             'thumb', 'gallery', 'gallery_inverted',
-            'regular', 'regular_inverted', 'regular_sharpened'):
+            'regular', 'regular_inverted', 'regular_sharpened',
+            'regular_large', 'regular_large_inverted', 'regular_large_sharpened',
+    ):
 
         if IotdService().is_iotd(image):
             badges.append('iotd')
@@ -228,37 +238,12 @@ def astrobin_image(context, image, alias, **kwargs):
         if animated:
             get_thumb_url += '?animated'
 
-    get_enhanced_thumb_url = None
-    enhanced_thumb_url = None
-    if alias == 'regular' or alias == 'regular_sharpened':
-        enhanced_alias = 'hd' if alias == 'regular' else 'hd_sharpened'
-        cache_key = image.thumbnail_cache_key(field, enhanced_alias)
-        if animated:
-            cache_key += '_animated'
-        enhanced_thumb_url = cache.get(cache_key)
-        # Force HTTPS
-        if enhanced_thumb_url and request.is_secure():
-            enhanced_thumb_url = enhanced_thumb_url.replace('http://', 'https://', 1)
+    get_regular_large_thumb_url, regular_large_thumb_url = ImageService(image).get_enhanced_thumb_url(
+        field, alias, revision, animated, request.is_secure(), 'regular_large')
 
-        # If we're testing, we want to bypass the placeholder thing and force-get
-        # the enhanced thumb url.
-        if enhanced_thumb_url is None and settings.TESTING:
-            enhanced_thumb = image.thumbnail_raw(enhanced_alias, revision)
-            if enhanced_thumb:
-                enhanced_thumb_url = enhanced_thumb.url
+    get_enhanced_thumb_url, enhanced_thumb_url = ImageService(image).get_enhanced_thumb_url(
+        field, alias, revision, animated, request.is_secure(), 'hd')
 
-        if enhanced_thumb_url is None:
-            get_enhanced_thumb_kwargs = {
-                'id': image.hash if image.hash else image.id,
-                'alias': enhanced_alias,
-            }
-
-            if revision is None or revision != 'final':
-                get_enhanced_thumb_kwargs['r'] = revision
-
-            get_enhanced_thumb_url = reverse('image_thumb', kwargs=get_enhanced_thumb_kwargs)
-            if animated:
-                get_enhanced_thumb_url += '?animated'
 
     return dict(response_dict.items() + {
         'status': 'success',
@@ -285,6 +270,8 @@ def astrobin_image(context, image, alias, **kwargs):
         'classes': classes,
         'enhanced_thumb_url': enhanced_thumb_url,
         'get_enhanced_thumb_url': get_enhanced_thumb_url,
+        'regular_large_thumb_url': regular_large_thumb_url,
+        'get_regular_large_thumb_url': get_regular_large_thumb_url,
         'corrupted': image_revision.corrupted,
         'recovered': image_revision.recovered is not None,
         'is_revision': hasattr(image_revision, 'label'),

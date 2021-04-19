@@ -33,7 +33,7 @@
                 {% if badges %}
                     <ul class="badges">
                         {% for badge in badges %}
-                            {% if badge == 'iotd' and alias != 'regular' and alias != 'regular_sharpened' %}
+                            {% if badge == 'iotd' and alias != 'regular' and alias != 'regular_sharpened' and alias != 'regular_large' and alias != 'regular_large_sharpened' %}
                                 <li>
                                     <i class="icon-trophy iotd-badge badge"></i>
                                 </li>
@@ -95,6 +95,17 @@
                         data-revision-id="{{ revision_id }}"
                      {% endif %}
                      data-get-thumb-url="{{get_thumb_url}}"
+
+                     {% if 'regular' in alias and 'regular_large' not in alias %}
+                         data-regular-large-loaded="false"
+                         {% if regular_large_thumb_url %}
+                            data-regular-large-thumb-url="{{ regular_large_thumb_url }}"
+                         {% endif %}
+
+                         {% if get_regular_large_thumb_url %}
+                            data-get-regular-large-thumb-url="{{ get_regular_large_thumb_url }}"
+                         {% endif %}
+                     {% endif %}
                      
                      data-hires-loaded="false"
                      {% if enhanced_thumb_url %}
