@@ -141,16 +141,8 @@ class UserService:
         if self.user.is_superuser:
             return True, None
 
-        index = 0
-        min_index_to_like = settings.MIN_INDEX_TO_LIKE
-
-        if self.user.is_authenticated():
-            index = self.user.userprofile.get_scores()['user_scores_index']
-        else:
+        if not self.user.is_authenticated():
             return False, "ANONYMOUS"
-
-        if is_free(self.user) and index < min_index_to_like:
-            return False, "INDEX"
 
         if obj.__class__.__name__ == 'Image':
             return self.user != obj.user, "OWNER"
