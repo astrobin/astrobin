@@ -77,22 +77,9 @@ class ImageSingleObjectMixin(SingleObjectMixin):
             queryset = self.get_queryset()
 
         id = self.kwargs.get(self.pk_url_kwarg)
+        image = ImageService.get_object(id, queryset)
 
-        # hashes will always have at least a letter
-        if id.isdigit():
-            # old style numerical pk
-            image = super(ImageSingleObjectMixin, self).get_object(queryset)
-            if image is not None:
-                # if an image has a hash, we don't allow getting it by pk
-                if image.hash is not None:
-                    raise Http404
-                return image
-
-        # we always allow getting by hash
-        queryset = queryset.filter(hash=id)
-        try:
-            image = queryset.get()
-        except queryset.model.DoesNotExist:
+        if image is None:
             raise Http404
 
         return image
@@ -801,19 +788,12 @@ class ImageFullView(ImageDetailView):
         if mod in settings.AVAILABLE_IMAGE_MODS:
             alias += "_%s" % mod
 
-        file_size = image.uploader_upload_length
-        if self.revision_label not in (None, '0'):
-            revision = ImageService(image).get_revision(self.revision_label)
-            if revision:
-                file_size = revision.uploader_upload_length
-
         response_dict = context.copy()
         response_dict.update({
             'real': real,
             'alias': alias,
             'mod': mod,
             'revision_label': self.revision_label,
-            'file_size': file_size or 0,
             'max_file_size_before_warning': 25 * 1024 * 1024,
         })
 

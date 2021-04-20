@@ -120,22 +120,23 @@
                                 <span class="hidden-phone hidden-tablet">{% trans "Fit to window" %}</span>
                             </a>
                         {% elif request.user|can_see_real_resolution:image %}
-                            {% if file_size < max_file_size_before_warning %}
-                                <a class="btn btn-primary navbar-btn"
-                                   href="{% get_image_url image revision_label 'full' %}{% query_string "mod=mod,real=''" "" %}"
-                                >
-                            {% else  %}
-                                <a class="btn btn-primary navbar-btn"
-                                   data-toggle="modal"
-                                   href="#large-size-full-resolution-warning"
-                                >
-                            {% endif %}
+                            <a class="btn btn-primary navbar-btn real-full-resolution-link"
+                               href="{% get_image_url image revision_label 'full' %}{% query_string "mod=mod,real=''" "" %}"
+                            >
                                 <i class="icon-fullscreen"></i>
                                 <span class="hidden-phone hidden-tablet">
                                     {% trans "Full resolution" %}
-                                    {% if file_size %}
-                                        (~{{ file_size|filesizeformat }})
-                                    {% endif %}
+                                    <span class="zoom-image-content-length"></span>
+                                </span>
+                            </a>
+                            <a class="btn btn-primary navbar-btn warning-full-resolution-link"
+                               data-toggle="modal"
+                               href="#large-size-full-resolution-warning"
+                            >
+                                <i class="icon-fullscreen"></i>
+                                <span class="hidden-phone hidden-tablet">
+                                    {% trans "Full resolution" %}
+                                    <span class="zoom-image-content-length"></span>
                                 </span>
                             </a>
                         {% endif %}
@@ -217,9 +218,9 @@
 
     <div class="modal-body">
         <p>
-            {% blocktrans trimmed with size=file_size|filesizeformat %}
-                You are about to open a large file of about {{size}}. Depending on your download speed, it might take
-                several seconds or even minutes to view the file.
+            {% blocktrans trimmed %}
+                You are about to open a large file. Depending on your download speed, it might take several seconds
+                or even minutes to view the file.
             {% endblocktrans %}
         </p>
 
@@ -262,86 +263,7 @@
 
 {% insert_hit_count_js_variables for image %}
 <script type="text/javascript">
-    $(document).ready(function () {
-        astrobin_common.init_ajax_csrf_token();
-        astrobin_common.init_timestamps();
-
-        function zoom() {
-            function getRealImage() {
-                return new Promise(function(resolve) {
-                    $.ajax({
-                        url: '{% url "image_thumb" image.get_id revision_label "real" %}',
-                        dataType: 'json',
-                        success: function (response) {
-                            if (response.url.indexOf('placeholder') > -1) {
-                                setTimeout(function() {
-                                    resolve(getRealImage());
-                                }, 500);
-                            } else {
-                                $.ajax({
-                                    url: response.url,
-                                    type: 'HEAD',
-                                    success: function (responseText, textStatus, jqXHR) {
-                                        var contentLength = +jqXHR.getResponseHeader('content-length');
-                                        if (contentLength > 0) {
-                                            $('.zoom-image-content-length').text(
-                                                '(' + (contentLength / 1024 / 1024).toFixed(2) + ' MB)');
-                                        }
-                                        resolve(response.url);
-                                    },
-                                    error: function () {
-                                        resolve(response.url);
-                                    }
-                                });
-                            }
-                        }
-                    });
-                });
-            }
-
-            {% if request|show_click_and_drag_zoom:image and file_size < max_file_size_before_warning %}
-                if(!('ontouchend' in document) && (window.innerWidth < {{ image.w }})) {
-                    $('.loading-zoom').removeClass('hidden');
-                    getRealImage().then(function(url) {
-                    $('#full-size-image').zoom({
-                        on: 'grab',
-                        url: url,
-                        callback: function () {
-                            $('.loading-zoom').addClass('hidden');
-                            if (!$.cookie('astrobin_click_and_drag_toast_seen')) {
-                                $.toast({
-                                    text: "{% trans "Click-and-drag anywhere on the image." %}",
-                                    heading: "{% trans "Want to zoom in?" %}",
-                                    showHideTransition: 'slide',
-                                    allowToastClose: true,
-                                    hideAfter: false,
-                                    position: 'bottom-right',
-                                    loader: true,
-                                    afterHidden: function () {
-                                        $.ajax({
-                                            url: '/json-api/user/mark-click-and-drag-toast-as-seen/',
-                                            type: 'POST',
-                                            dataType: 'json',
-                                            timeout: 5000
-                                        });
-                                    }
-                                });
-                            }
-                        },
-                        onZoomIn: function() {
-                            $(this).addClass('zoomed-in');
-                            $('.hover-overlay').hide();
-                        },
-                        onZoomOut: function() {
-                            $(this).removeClass('zoomed-in');
-                            $('.hover-overlay:not(.hover-overlay-disabled)').show();
-                        }
-                    });
-                });
-                }
-            {% endif %}
-        }
-
+    function setupAdvancedSolution() {
         {% if show_advanced_solution and not real %}
             if ($('#enable-solution-overlay').is(':checked')) {
                 $('.hover-overlay').removeClass('hover-overlay-disabled');
@@ -350,7 +272,7 @@
                 $('.hover-overlay').addClass('hover-overlay-disabled');
             }
 
-            $('#enable-solution-overlay').change(function() {
+            $('#enable-solution-overlay').change(function () {
                 if (this.checked) {
                     $('.hover-overlay').removeClass('hover-overlay-disabled');
                     $('.hover-overlay').show();
@@ -380,8 +302,107 @@
                 {{ instance_to_platesolve | thumbnail_height:'hd' }}
             );
         {% endif %}
+    }
 
-        zoom();
+    function setupZoom() {
+        function getRealImage() {
+            return new Promise(function (resolve) {
+                $.ajax({
+                    url: '{% url "image_thumb" image.get_id revision_label "real" %}',
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.url.indexOf('placeholder') > -1) {
+                            setTimeout(function () {
+                                resolve(getRealImage());
+                            }, 500);
+                        } else {
+                            $.ajax({
+                                url: response.url,
+                                type: 'HEAD',
+                                success: function (responseText, textStatus, jqXHR) {
+                                    var contentLength = +jqXHR.getResponseHeader('content-length');
+                                    if (contentLength > 0) {
+                                        $('.zoom-image-content-length').text(
+                                            '(' + (contentLength / 1024 / 1024).toFixed(2) + ' MB)');
+                                    }
+                                    resolve({url: response.url, contentLength: contentLength});
+                                },
+                                error: function () {
+                                    resolve({url: response.url, contentLength: -1});
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+        }
+
+        getRealImage().then(function (result) {
+            var url = result.url;
+            var contentLength = result.contentLength;
+
+            if (contentLength < {{ max_file_size_before_warning }}) {
+                $(".real-full-resolution-link").attr("style", "display: block !important;");
+
+                {% if request|show_click_and_drag_zoom:image %}
+                    $('.loading-zoom').removeClass('hidden');
+                    $('#full-size-image').zoom({
+                        on: 'grab',
+                        url: url,
+                        callback: function () {
+                            $('.loading-zoom').addClass('hidden');
+                            if (!$.cookie('astrobin_click_and_drag_toast_seen')) {
+                                $.toast({
+                                    text: "{% trans "Click-and-drag anywhere on the image." %}",
+                                    heading: "{% trans "Want to zoom in?" %}",
+                                    showHideTransition: 'slide',
+                                    allowToastClose: true,
+                                    hideAfter: false,
+                                    position: 'bottom-right',
+                                    loader: false,
+                                    afterHidden: function () {
+                                        $.ajax({
+                                            url: '/json-api/user/mark-click-and-drag-toast-as-seen/',
+                                            type: 'POST',
+                                            dataType: 'json',
+                                            timeout: 5000
+                                        });
+                                    }
+                                });
+                            }
+                        },
+                        onZoomIn: function () {
+                            $(this).addClass('zoomed-in');
+                            $('.hover-overlay').hide();
+                        },
+                        onZoomOut: function () {
+                            $(this).removeClass('zoomed-in');
+                            $('.hover-overlay:not(.hover-overlay-disabled)').show();
+                        }
+                    });
+                {% endif %}
+            } else {
+                $(".warning-full-resolution-link").attr("style", "display: block !important;");
+
+                $.toast({
+                    text: "{% trans "The full resolution version of this image is too large to offer the the click-and-drag zoom." %}",
+                    heading: "{% trans "Click-and-drag zoom not available" %}",
+                    showHideTransition: 'slide',
+                    allowToastClose: true,
+                    hideAfter: 10000,
+                    position: 'bottom-right',
+                    loader: false
+                });
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        astrobin_common.init_ajax_csrf_token();
+        astrobin_common.init_timestamps();
+
+        setupAdvancedSolution();
+        setupZoom();
     });
 </script>
 </body>

@@ -1743,6 +1743,13 @@ div.token-input-dropdown {
   }
 }
 
+body.full {
+  .real-full-resolution-link,
+  .warning-full-resolution-link {
+    display: none !important;
+  }
+}
+
 #full-size-image {
   text-align: center;
   position: relative;

@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime, timedelta
 
+from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
@@ -338,3 +339,17 @@ class ImageService:
             return False
 
         return True
+
+    @staticmethod
+    def get_object(id, queryset):
+        # hashes will always have at least a letter
+        if id.isdigit():
+            # old style numerical pk
+            image = get_object_or_None(queryset, id=id)
+            if image is not None:
+                # if an image has a hash, we don't allow getting it by pk
+                if image.hash is not None:
+                    return None
+                return image
+
+        return get_object_or_None(queryset, hash=id)
