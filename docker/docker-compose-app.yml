@@ -21,7 +21,7 @@ services:
       - -c
       - |
         LOCAL_STATIC_STORAGE=true python manage.py collectstatic --noinput && \
-        grep LOCAL_STATIC_STORAGE=false /astrobin/docker/astrobin.env && \
+        [[ $LOCAL_STATIC_STORAGE != "true" ]] && \
         aws s3 sync /media/static s3://${AWS_STORAGE_BUCKET_NAME}/static --storage-class INTELLIGENT_TIERING || true && \
         python manage.py migrate --noinput && \
         python manage.py migrate --run-syncdb --noinput && \
