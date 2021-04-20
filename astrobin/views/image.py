@@ -550,90 +550,100 @@ class ImageDetailView(ImageDetailViewBase):
         ##############
         image_next = None
         image_prev = None
-        try:
-            nav_ctx = self.request.GET.get('nc')
-            if nav_ctx is None:
-                nav_ctx = self.request.session.get('nav_ctx')
-            if nav_ctx is None:
-                nav_ctx = 'user'
 
-            nav_ctx_extra = self.request.GET.get('nce')
-            if nav_ctx_extra is None:
-                nav_ctx_extra = self.request.session.get('nav_ctx_extra')
+        nav_ctx = self.request.GET.get('nc')
+        if nav_ctx is None:
+            nav_ctx = self.request.session.get('nav_ctx')
+        if nav_ctx is None:
+            nav_ctx = 'user'
 
-            # Always only lookup public, non corrupted images!
-            if nav_ctx == 'user':
-                image_next = Image.objects \
-                                 .exclude(corrupted=True) \
-                                 .filter(user=image.user, published__gt=image.published).order_by('published')[0:1]
-                image_prev = Image.objects \
-                                 .exclude(corrupted=True) \
-                                 .filter(user=image.user, published__lt=image.published).order_by('-published')[0:1]
-            elif nav_ctx == 'collection':
-                try:
+        nav_ctx_extra = self.request.GET.get('nce')
+        if nav_ctx_extra is None:
+            nav_ctx_extra = self.request.session.get('nav_ctx_extra')
+
+        if not image.is_wip and image.published is not None:
+            try:
+                # Always only lookup public, non corrupted images!
+                if nav_ctx == 'user':
+                    image_next = Image.objects \
+                                     .exclude(corrupted=True) \
+                                     .filter(user=image.user, published__isnull=False, published__gt=image.published) \
+                                     .order_by('published')[0:1]
+                    image_prev = Image.objects \
+                                     .exclude(corrupted=True) \
+                                     .filter(user=image.user, published__isnull=False, published__lt=image.published) \
+                                     .order_by('-published')[0:1]
+                elif nav_ctx == 'collection':
                     try:
-                        collection = image.collections.get(pk=nav_ctx_extra)
-                    except ValueError:
-                        # Maybe this image is in a single collection
-                        collection = image.collections.all()[0]
+                        try:
+                            collection = image.collections.get(pk=nav_ctx_extra)
+                        except ValueError:
+                            # Maybe this image is in a single collection
+                            collection = image.collections.all()[0]
 
-                    if collection.order_by_tag:
-                        collection_images = Image.objects \
-                            .exclude(corrupted=True) \
-                            .filter(user=image.user, collections=collection, keyvaluetags__key=collection.order_by_tag) \
-                            .order_by('keyvaluetags__value')
+                        if collection.order_by_tag:
+                            collection_images = Image.objects \
+                                .exclude(corrupted=True) \
+                                .filter(user=image.user,
+                                        collections=collection,
+                                        keyvaluetags__key=collection.order_by_tag) \
+                                .order_by('keyvaluetags__value')
 
-                        current_index = 0
-                        for iter_image in collection_images.all():
-                            if iter_image.pk == image.pk:
-                                break
-                            current_index += 1
+                            current_index = 0
+                            for iter_image in collection_images.all():
+                                if iter_image.pk == image.pk:
+                                    break
+                                current_index += 1
 
-                        image_next = collection_images.all()[current_index + 1] \
-                            if current_index < collection_images.count() - 1 \
-                            else None
-                        image_prev = collection_images.all()[current_index - 1] \
-                            if current_index > 0 \
-                            else None
-                    else:
-                        image_next = Image.objects \
-                                         .exclude(corrupted=True) \
-                                         .filter(user=image.user, collections=collection,
-                                                 published__gt=image.published).order_by('published')[0:1]
-                        image_prev = Image.objects \
-                                         .exclude(corrupted=True) \
-                                         .filter(user=image.user, collections=collection,
-                                                 published__lt=image.published).order_by('-published')[0:1]
-                except Collection.DoesNotExist:
-                    # image_prev and image_next will remain None
-                    pass
-            elif nav_ctx == 'group':
-                try:
-                    group = image.part_of_group_set.get(pk=nav_ctx_extra)
-                    if group.public:
-                        image_next = Image.objects \
-                                         .exclude(corrupted=True) \
-                                         .filter(part_of_group_set=group, published__gt=image.published) \
-                                         .order_by('published')[0:1]
-                        image_prev = Image.objects \
-                                         .exclude(corrupted=True) \
-                                         .filter(part_of_group_set=group, published__lt=image.published) \
-                                         .order_by('-published')[0:1]
-                except (Group.DoesNotExist, ValueError):
-                    # image_prev and image_next will remain None
-                    pass
-            elif nav_ctx == 'all':
-                image_next = Image.objects \
-                                 .exclude(corrupted=True) \
-                                 .filter(published__gt=image.published) \
-                                 .order_by('published')[0:1]
-                image_prev = Image.objects \
-                                 .exclude(corrupted=True) \
-                                 .filter(published__lt=image.published) \
-                                 .order_by('-published')[0:1]
-        except Image.DoesNotExist:
-            image_next = None
-            image_prev = None
+                            image_next = collection_images.all()[current_index + 1] \
+                                if current_index < collection_images.count() - 1 \
+                                else None
+                            image_prev = collection_images.all()[current_index - 1] \
+                                if current_index > 0 \
+                                else None
+                        else:
+                            image_next = Image.objects \
+                                             .exclude(corrupted=True) \
+                                             .filter(user=image.user, collections=collection,
+                                                     published__gt=image.published).order_by('published')[0:1]
+                            image_prev = Image.objects \
+                                             .exclude(corrupted=True) \
+                                             .filter(user=image.user, collections=collection,
+                                                     published__lt=image.published).order_by('-published')[0:1]
+                    except Collection.DoesNotExist:
+                        # image_prev and image_next will remain None
+                        pass
+                elif nav_ctx == 'group':
+                    try:
+                        group = image.part_of_group_set.get(pk=nav_ctx_extra)
+                        if group.public:
+                            image_next = Image.objects \
+                                             .exclude(corrupted=True) \
+                                             .filter(part_of_group_set=group,
+                                                     published__isnull=False,
+                                                     published__gt=image.published) \
+                                             .order_by('published')[0:1]
+                            image_prev = Image.objects \
+                                             .exclude(corrupted=True) \
+                                             .filter(part_of_group_set=group,
+                                                     published__isnull=False,
+                                                     published__lt=image.published) \
+                                             .order_by('-published')[0:1]
+                    except (Group.DoesNotExist, ValueError):
+                        # image_prev and image_next will remain None
+                        pass
+                elif nav_ctx == 'all':
+                    image_next = Image.objects \
+                                     .exclude(corrupted=True) \
+                                     .filter(published__isnull=False, published__gt=image.published) \
+                                     .order_by('published')[0:1]
+                    image_prev = Image.objects \
+                                     .exclude(corrupted=True) \
+                                     .filter(published__isnull=False, published__lt=image.published) \
+                                     .order_by('-published')[0:1]
+            except Image.DoesNotExist:
+                image_next = None
+                image_prev = None
 
         if image_next and isinstance(image_next, QuerySet):
             image_next = image_next[0]
