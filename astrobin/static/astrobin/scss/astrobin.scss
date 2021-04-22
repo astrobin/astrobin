@@ -1059,6 +1059,15 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 .main-image {
   max-width: 620px;
   overflow: hidden;
+  position: relative;
+
+  .enhancement-loading-indicator {
+    z-index: 2;
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    display: none;
+  }
 
   .main-image-inner {
     z-index: 1;

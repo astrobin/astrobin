@@ -2,7 +2,7 @@ $(document).ready(function () {
     window.loadAstroBinImages = function (fragment) {
         var tries = {};
 
-        $(fragment).find('img.astrobin-image').each(function (index) {
+        $(fragment).find('img.astrobin-image').each(function () {
             var $img = $(this),
                 randomTimeout = Math.floor(Math.random() * 100) + 100, // 100-200 ms
                 id = $img.data('id'),
@@ -46,27 +46,41 @@ $(document).ready(function () {
             revision = $img.data('revision'),
             alias = $img.data('alias'),
             regularLargeThumbnailUrl = $img.data('regular-large-thumb-url'),
-            getRegularLargeThumbnailUrl = $img.data('get-regular-large-thumb-url');
+            getRegularLargeThumbnailUrl = $img.data('get-regular-large-thumb-url'),
+            $enhancementLoadingIndicator = $('.main-image > .enhancement-loading-indicator');
 
         if ($img.attr('data-regular-large-loaded') === 'true') {
             return;
         }
 
-        if ($img.width() > 620 && devicePixelRatio === 1) {
-            if (regularLargeThumbnailUrl !== undefined) {
-                $img.attr('data-regular-large-loaded', true);
-                $img.attr('src', regularLargeThumbnailUrl);
-            } else if (getRegularLargeThumbnailUrl !== undefined) {
-                $img.attr('data-regular-large-loaded', false);
-                setTimeout(function () {
-                    load(getRegularLargeThumbnailUrl, id, revision, alias, tries, false, randomTimeout).then(function (url) {
-                        $img.attr('data-loaded', 'true')
-                            .attr('data-regular-large-loaded', true)
-                            .attr('data-hires-loaded', false)
-                            .attr('src', url);
+        if ($img.width() <= 620 || devicePixelRatio > 1) {
+            return;
+        }
+
+        $enhancementLoadingIndicator.show();
+
+        if (regularLargeThumbnailUrl !== undefined) {
+            $img.attr('data-regular-large-loaded', true);
+            $img.one('load', function () {
+                $enhancementLoadingIndicator.hide();
+            });
+            $img.attr('src', regularLargeThumbnailUrl);
+            return;
+        }
+
+        if (getRegularLargeThumbnailUrl !== undefined) {
+            $img.attr('data-regular-large-loaded', false);
+            setTimeout(function () {
+                load(getRegularLargeThumbnailUrl, id, revision, alias, tries, false, randomTimeout).then(function (url) {
+                    $img.one('load', function () {
+                        $enhancementLoadingIndicator.hide();
                     });
-                }, randomTimeout);
-            }
+                    $img.attr('data-loaded', 'true')
+                        .attr('data-regular-large-loaded', true)
+                        .attr('data-hires-loaded', false)
+                        .attr('src', url);
+                });
+            }, randomTimeout);
         }
     }
 
@@ -78,26 +92,40 @@ $(document).ready(function () {
             revision = $img.data('revision'),
             alias = $img.data('alias'),
             enhancedThumbnailUrl = $img.data('enhanced-thumb-url'),
-            getEnhancedThumbnailUrl = $img.data('get-enhanced-thumb-url');
+            getEnhancedThumbnailUrl = $img.data('get-enhanced-thumb-url'),
+            $enhancementLoadingIndicator = $('.main-image > .enhancement-loading-indicator');
 
         if ($img.attr('data-hires-loaded') === 'true') {
             return;
         }
 
-        if (devicePixelRatio > 1) {
-            if (enhancedThumbnailUrl !== undefined) {
-                $img.attr('data-hires-loaded', true);
-                $img.attr('src', enhancedThumbnailUrl);
-            } else if (getEnhancedThumbnailUrl !== undefined) {
-                $img.attr('data-hires-loaded', false);
-                setTimeout(function () {
-                    load(getEnhancedThumbnailUrl, id, revision, alias, tries, true, randomTimeout).then(function(url) {
-                        $img.attr('data-loaded', 'true')
-                            .attr('data-hires-loaded', true)
-                            .attr('src', url);
+        if (devicePixelRatio <= 1) {
+            return;
+        }
+
+        $enhancementLoadingIndicator.show();
+
+        if (enhancedThumbnailUrl !== undefined) {
+            $img.attr('data-hires-loaded', true);
+            $img.one('load', function() {
+                $enhancementLoadingIndicator.hide();
+            });
+            $img.attr('src', enhancedThumbnailUrl);
+            return;
+        }
+
+        if (getEnhancedThumbnailUrl !== undefined) {
+            $img.attr('data-hires-loaded', false);
+            setTimeout(function () {
+                load(getEnhancedThumbnailUrl, id, revision, alias, tries, true, randomTimeout).then(function(url) {
+                    $img.one('load', function () {
+                        $enhancementLoadingIndicator.hide();
                     });
-                }, randomTimeout);
-            }
+                    $img.attr('data-loaded', 'true')
+                        .attr('data-hires-loaded', true)
+                        .attr('src', url);
+                });
+            }, randomTimeout);
         }
     }
 
