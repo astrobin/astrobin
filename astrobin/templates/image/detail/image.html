@@ -10,6 +10,10 @@
 {% endblock %}
 
 <div class="main-image{% if show_advanced_solution %} has-advanced-solution{% endif %}">
+    <div class="enhancement-loading-indicator">
+        <div class="ld ld-ring ld-spin"></div>
+    </div>
+
     <div class="main-image-inner">
         {% astrobin_image image alias revision=revision_label url_size='full' %}
 
