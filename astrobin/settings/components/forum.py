@@ -87,23 +87,10 @@ def pybb_premoderation(user, post_content, forum):
     if not is_free(user):
         return True
 
-    # Users with sufficient index are always approved
-    from django.conf import settings
-    index = user.userprofile.get_scores()['user_scores_index']
-    if index >= settings.MIN_INDEX_TO_LIKE:
-        return True
+    from pybb.models import Post
 
-    from pybb.models import Post, Topic
-
-    # Users that have had 5 posts approved before are always approved
-    if Post.objects.filter(user=user, on_moderation=False).count() >= 5:
-        return True
-
-    # Users that have had topic approved in the same topic are always approved
-    if Topic.objects.filter(user=user, on_moderation=False).exists():
-        return True
-
-    return False
+    # Users that have not had some posts approved before are always rejected
+    return Post.objects.filter(user=user, on_moderation=False).count() >= 3
 
 PYBB_PREMODERATION = pybb_premoderation
 

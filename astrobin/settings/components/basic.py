@@ -38,7 +38,6 @@ BASE_URL = os.environ.get('BASE_URL', 'http://localhost').strip()
 SHORT_BASE_URL = os.environ.get('SHORT_BASE_URL', BASE_URL).strip()
 BASE_PATH = os.path.dirname(__file__)
 
-MIN_INDEX_TO_LIKE = float(os.environ.get('MIN_INDEX_TO_LIKE', '1.00').strip())
 GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID', 'invalid').strip()
 GOOGLE_ADS_ID = os.environ.get('GOOGLE_ADS_ID', 'invalid').strip()
 

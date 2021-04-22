@@ -221,14 +221,14 @@ class TestUserService(TestCase):
 
     @patch('astrobin_apps_premium.templatetags.astrobin_apps_premium_tags.is_free')
     @patch('astrobin.models.UserProfile.get_scores')
-    def test_can_like_image_index_too_low(self, get_scores, is_free):
+    def test_can_like_image_index_zero(self, get_scores, is_free):
         user = Generators.user()
         image = Generators.image()
 
         is_free.return_value = True
-        get_scores.return_value = {'user_scores_index': .5}
+        get_scores.return_value = {'user_scores_index': 0}
 
-        self.assertFalse(UserService(user).can_like(image))
+        self.assertTrue(UserService(user).can_like(image))
 
     @patch('astrobin_apps_premium.templatetags.astrobin_apps_premium_tags.is_free')
     @patch('astrobin.models.UserProfile.get_scores')
@@ -237,7 +237,6 @@ class TestUserService(TestCase):
         image = Generators.image(user=user)
 
         is_free.return_value = False
-        get_scores.return_value = {'user_scores_index': 2}
 
         self.assertFalse(UserService(user).can_like(image))
 
@@ -248,7 +247,6 @@ class TestUserService(TestCase):
         image = Generators.image()
 
         is_free.return_value = False
-        get_scores.return_value = {'user_scores_index': 2}
 
         self.assertTrue(UserService(user).can_like(image))
 
@@ -259,7 +257,6 @@ class TestUserService(TestCase):
         comment = NestedCommentsGenerators.comment(author=user)
 
         is_free.return_value = False
-        get_scores.return_value = {'user_scores_index': 2}
 
         self.assertFalse(UserService(user).can_like(comment))
 
@@ -270,7 +267,6 @@ class TestUserService(TestCase):
         comment = NestedCommentsGenerators.comment()
 
         is_free.return_value = False
-        get_scores.return_value = {'user_scores_index': 2}
 
         self.assertTrue(UserService(user).can_like(comment))
 
@@ -281,7 +277,6 @@ class TestUserService(TestCase):
         comment = NestedCommentsGenerators.comment(author=user)
 
         is_free.return_value = False
-        get_scores.return_value = {'user_scores_index': 2}
 
         self.assertFalse(UserService(user).can_like(comment))
 
@@ -292,7 +287,6 @@ class TestUserService(TestCase):
         post = Generators.forum_post()
 
         is_free.return_value = False
-        get_scores.return_value = {'user_scores_index': 2}
 
         self.assertTrue(UserService(user).can_like(post))
 
@@ -303,7 +297,6 @@ class TestUserService(TestCase):
         post = Generators.forum_post(user=user)
 
         is_free.return_value = False
-        get_scores.return_value = {'user_scores_index': 2}
 
         self.assertFalse(UserService(user).can_like(post))
 
@@ -317,7 +310,6 @@ class TestUserService(TestCase):
         post.topic.save()
 
         is_free.return_value = False
-        get_scores.return_value = {'user_scores_index': 2}
 
         self.assertFalse(UserService(user).can_like(post))
 

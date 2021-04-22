@@ -90,7 +90,8 @@ class ForumTest(TestCase):
         form = self._get_post_form()
         post, topic = form.save(commit=False)
 
-        self.assertEqual(post.on_moderation, False)
+        # Index doesn't matter, you still get moderated.
+        self.assertEqual(post.on_moderation, True)
 
     @patch('astrobin.models.UserProfile.get_scores')
     def test_create_post_multiple_approved_but_not_enough(self, get_scores):
@@ -105,7 +106,7 @@ class ForumTest(TestCase):
         post.on_moderation = False
         post.save()
 
-        for i in range(0, 4):
+        for i in range(0, 2):
             form = self._get_post_form(self.user, topic)
             post, topic = form.save(commit=True)
             post.on_moderation = False
@@ -134,25 +135,6 @@ class ForumTest(TestCase):
             post, topic = form.save(commit=True)
             post.on_moderation = False
             post.save()
-
-        form = self._get_post_form()
-        post, topic = form.save(commit=False)
-
-        self.assertEqual(post.on_moderation, False)
-
-    @patch('astrobin.models.UserProfile.get_scores')
-    def test_create_post_topic_approved(self, get_scores):
-        get_scores.return_value = {
-            'user_scores_index': 0
-        }
-
-        form = self._get_post_form()
-        post, topic = form.save(commit=True)
-
-        topic.on_moderation = False
-        topic.save()
-        post.on_moderation = False
-        post.save()
 
         form = self._get_post_form()
         post, topic = form.save(commit=False)

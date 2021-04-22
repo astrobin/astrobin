@@ -955,23 +955,9 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertEqual(response.context[0]['user_can_like'], False)
 
-        # Test whether the Like button is active: index 0 can't like
+        # Test whether the Like button is active: index 0 can like
         self.client.logout()
         self.client.login(username='test2', password='password')
-        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertEqual(response.context[0]['user_can_like'], False)
-
-        # Test whether the Like button is active: index 0 but Premium can like
-        g, created = Group.objects.get_or_create(name="astrobin_premium")
-        s, created = Subscription.objects.get_or_create(
-            name="AstroBin Premium",
-            price=1,
-            group=g,
-            category="premium")
-        us, created = UserSubscription.objects.get_or_create(
-            user=self.user2,
-            subscription=s)
-        us.subscribe()
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertEqual(response.context[0]['user_can_like'], True)
 
@@ -1001,12 +987,6 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 404)
 
-        us.unsubscribe()
-        us.delete()
-        s.delete()
-        g.delete()
-
-        image.delete()
 
     def test_image_detail_view_revision_redirect_to_original_if_no_revisions(self):
         image = Generators.image()
