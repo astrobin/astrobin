@@ -195,7 +195,7 @@ astrobin_common = {
                     }
                 ],
                 smiley_columns: 10,
-                smiley_path: '/static/astrobin/emoticons/',
+                smiley_path: 'https://cdn.astrobin.com/static/astrobin/emoticons/',
                 smiley_descriptions: [
                     'angel',
                     'angry-1',
