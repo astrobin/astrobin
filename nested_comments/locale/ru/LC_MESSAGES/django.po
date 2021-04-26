@@ -2,136 +2,168 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Comments\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-09 14:01+0000\n"
-"PO-Revision-Date: 2021-04-09 15:50+0200\n"
+"POT-Creation-Date: 2021-04-05 16:19+0200\n"
+"PO-Revision-Date: 2021-04-26 21:23+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
-"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108457\n"
-"X-Loco-Api-Version: 1.0.25 20210310-1\n"
+"X-Loco-Api-Version: 1.0.25 20210310-1"
 
+#: loco:606b7673febdde060052b5e2
+msgid "You follow each other"
+msgstr "Вы подписаны друг к другу"
+
+#: loco:606b7673febdde060052b5e3
+msgid "Images"
+msgstr "Изображения"
+
+#: loco:606b7673febdde060052b5e4
+msgid "Followers"
+msgstr "Подписчики"
+
+#: loco:606b7673febdde060052b5e5
+msgid "Following"
+msgstr "Подписан"
+
+#: loco:606b7673febdde060052b5e6
+msgid "User"
+msgstr "Пользователь"
+
+#: loco:606b7673febdde060052b5e7
+msgid "No users."
+msgstr "Нет пользователей."
+
+#: loco:606b7673febdde060052b5e8
+msgid "Administrator"
+msgstr "Администратор"
+
+#: loco:606b7673febdde060052b5e9
+msgid "Image moderator"
+msgstr "Модератор изобр."
+
+#: loco:606b7673febdde060052b5ea
+msgid "IOTD Submitter"
+msgstr "ИД Номинирующий"
+
+#: loco:606b7673febdde060052b5eb
+msgid "IOTD Reviewer"
+msgstr "ИД Рецензент"
+
+#: loco:606b7673febdde060052b5ec
+msgid "IOTD Judge"
+msgstr "ИД Судья"
+
+#: loco:606b7673febdde060052b5ed
+msgid "Premium member"
+msgstr "Премиум участник"
+
+#: loco:606b7673febdde060052b5ee
+msgid ""
+"Your email bounce reports have been removed from AstroBin. Please make sure "
+"that your email works well or you will get the same warning message again. "
+"Thanks!"
+msgstr ""
+"Отчеты о сбоях электронной почты были удалены из AstroBin. Убедитесь, что "
+"ваша электронная почта работает нормально, иначе вы снова получите то же "
+"предупреждение. Спасибо!"
+
+#: loco:606b7673febdde060052b5ef
+msgid ""
+"Your spam reports have been removed from AstroBin. Please make sure you "
+"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
+"don't want to receive emails from AstroBin, look for the settings link "
+"that's at the bottom of every email. Thanks!"
+msgstr ""
+"Ваши сообщения о спаме были удалены из AstroBin. Убедитесь, что у вас нет "
+"фильтра или правила, чтобы всегда отмечать электронные письма AstroBin как "
+"спам! Если вы не хотите получать электронные письма от AstroBin, найдите "
+"ссылку настроек, которая находится внизу каждого электронного письма. "
+"Спасибо!"
+
+#: loco:606b76b7d0c7060d4277e6b8
 msgid "Type your comment here..."
 msgstr "Введите ваш комментарий здесь..."
 
+#: loco:606b76b7d0c7060d4277e6b9
 msgid "Cancel"
 msgstr "Отмена"
 
+#: loco:606b76b7d0c7060d4277e6ba
 msgid "Add a comment"
 msgstr "Добавить комментарий"
 
+#: loco:606b76b7d0c7060d4277e6bb
 #, python-format
 msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
-"\">sign up</a> to leave a comment."
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s\">"
+"sign up</a> to leave a comment."
 msgstr ""
-"Пожалуйста, <a href=\"%(login_url)s\">войдите</a> или <a href="
-"\"%(signup_url)s\">зарегистрируйтесь</a>, чтобы оставить комментарий."
+"Пожалуйста, <a href=\"%(login_url)s\">войдите</a> или <a href=\"%(signup_url)"
+"s\">зарегистрируйтесь</a>, чтобы оставить комментарий."
 
+#: loco:606b76b7d0c7060d4277e6bc
 msgid "There are no comments yet."
 msgstr "Пока ещё нет комментариев."
 
+#: loco:606b76b7d0c7060d4277e6bd
 msgid "This comment is pending moderation and will be reviewed shortly."
 msgstr ""
 "Этот комментарий ожидает модерации и будет рассмотрен в ближайшее время."
 
+#: loco:606b76b7d0c7060d4277e6be
 msgid "(deleted)"
 msgstr "(удалено)"
 
+#: loco:606b76b7d0c7060d4277e6bf
 msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr "понравилось"
 
+#: loco:606b76b7d0c7060d4277e6c0
 msgctxt "Noun, e.g. 'This element has 1 like'"
 msgid "like"
 msgstr "нравится"
 
+#: loco:606b76b7d0c7060d4277e6c1
 msgid "Link"
 msgstr "Ссылка"
 
+#: loco:606b76b7d0c7060d4277e6c2
 msgid "Undelete"
 msgstr "Восстановить"
 
+#: loco:606b76b7d0c7060d4277e6c3
 msgid "Delete"
 msgstr "Удалить"
 
+#: loco:606b76b7d0c7060d4277e6c4
 msgid "Edit"
 msgstr "Правка"
 
+#: loco:606b76b7d0c7060d4277e6c5
 msgid "Reply"
 msgstr "Ответ"
 
+#: loco:606b76b7d0c7060d4277e6c6
 msgid "Like"
 msgstr "Нравится"
 
+#: loco:606b76b7d0c7060d4277e6c7
 msgid "Unlike"
 msgstr "Не нравится"
 
+#: loco:606b76b7d0c7060d4277e6c8
 msgid "The comment cannot be empty."
 msgstr "Комментарий не может быть пустым."
 
+#: loco:606b76b7d0c7060d4277e6c9
 msgid "Submit"
 msgstr "Отправить"
-
-#~ msgid "You follow each other"
-#~ msgstr "Вы подписаны друг к другу"
-
-#~ msgid "Images"
-#~ msgstr "Изображения"
-
-#~ msgid "Followers"
-#~ msgstr "Подписчики"
-
-#~ msgid "Following"
-#~ msgstr "Подписан"
-
-#~ msgid "User"
-#~ msgstr "Пользователь"
-
-#~ msgid "No users."
-#~ msgstr "Нет пользователей."
-
-#~ msgid "Administrator"
-#~ msgstr "Администратор"
-
-#~ msgid "Image moderator"
-#~ msgstr "Модератор изобр."
-
-#~ msgid "IOTD Submitter"
-#~ msgstr "ИД Номинирующий"
-
-#~ msgid "IOTD Reviewer"
-#~ msgstr "ИД Рецензент"
-
-#~ msgid "IOTD Judge"
-#~ msgstr "ИД Судья"
-
-#~ msgid "Premium member"
-#~ msgstr "Премиум участник"
-
-#~ msgid ""
-#~ "Your email bounce reports have been removed from AstroBin. Please make "
-#~ "sure that your email works well or you will get the same warning message "
-#~ "again. Thanks!"
-#~ msgstr ""
-#~ "Отчеты о сбоях электронной почты были удалены из AstroBin. Убедитесь, что "
-#~ "ваша электронная почта работает нормально, иначе вы снова получите то же "
-#~ "предупреждение. Спасибо!"
-
-#~ msgid ""
-#~ "Your spam reports have been removed from AstroBin. Please make sure you "
-#~ "don't have a filter or rule to always mark AstroBin's emails as spam! If "
-#~ "you don't want to receive emails from AstroBin, look for the settings "
-#~ "link that's at the bottom of every email. Thanks!"
-#~ msgstr ""
-#~ "Ваши сообщения о спаме были удалены из AstroBin. Убедитесь, что у вас нет "
-#~ "фильтра или правила, чтобы всегда отмечать электронные письма AstroBin "
-#~ "как спам! Если вы не хотите получать электронные письма от AstroBin, "
-#~ "найдите ссылку настроек, которая находится внизу каждого электронного "
-#~ "письма. Спасибо!"

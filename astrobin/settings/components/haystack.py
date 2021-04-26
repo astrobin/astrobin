@@ -55,7 +55,9 @@ if 'es.amazonaws.com' in HAYSTACK_CONNECTIONS['default']['URL']:
     }
 else:
     HAYSTACK_CONNECTIONS['default']['KWARGS'] = {
-        'port': 9200
+        'port': 9200,
+        'use_ssl': False,
+        'verify_certs': False,
     }
 
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.BaseSignalProcessor'

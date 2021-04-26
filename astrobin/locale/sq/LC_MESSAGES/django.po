@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-09 14:00+0000\n"
+"POT-Creation-Date: 2021-04-26 19:18+0000\n"
 "PO-Revision-Date: 2015-01-20 21:30+0000\n"
 "Last-Translator: jordi <jordi.inyigo@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1875,6 +1875,9 @@ msgstr "Viti"
 msgid "Collections"
 msgstr ""
 
+msgid "Constellation"
+msgstr ""
+
 msgid "Default gallery sorting"
 msgstr ""
 
@@ -3375,9 +3378,6 @@ msgstr ""
 msgid "Southern"
 msgstr ""
 
-msgid "Constellation"
-msgstr ""
-
 msgid "Contains"
 msgstr "Permban"
 
@@ -3682,28 +3682,6 @@ msgid "Loading"
 msgstr ""
 
 msgid "Sorry"
-msgstr ""
-
-#, python-format
-msgid ""
-"We're really sorry, but giving likes requires an Image Index of <strong>"
-"%(min_index_to_like)s</strong> or greater."
-msgstr ""
-
-msgid ""
-"Such limitation improves the website as a whole by discouraging people from "
-"creating fake accounts to like their own content. Thank you for "
-"understanding!"
-msgstr ""
-
-#, python-format
-msgid "Currently, your Image Index is <strong>%(index)s</strong>."
-msgstr ""
-
-#, python-format
-msgid ""
-"To learn more about the Image Index, please visit %(_0)sthe FAQ page%(_1)s. "
-"Thanks!"
 msgstr ""
 
 msgid "You cannot remove a like that you gave more than one hour ago."
@@ -4121,17 +4099,23 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#, python-format
 msgid ""
-"You are about to open a large file of about %(size)s. Depending on your "
-"download speed, it might take several seconds or even minutes to view the "
-"file."
+"You are about to open a large file. Depending on your download speed, it "
+"might take several seconds or even minutes to view the file."
 msgstr ""
 
 msgid "Click-and-drag anywhere on the image."
 msgstr ""
 
 msgid "Want to zoom in?"
+msgstr ""
+
+msgid ""
+"The full resolution version of this image is too large to offer the the "
+"click-and-drag zoom."
+msgstr ""
+
+msgid "Click-and-drag zoom not available"
 msgstr ""
 
 msgid "No gear yet."
@@ -5376,6 +5360,9 @@ msgstr ""
 
 msgid "Relevance"
 msgstr "Rëndësisë"
+
+msgid "Publication time"
+msgstr ""
 
 msgid "Large field radius"
 msgstr ""
