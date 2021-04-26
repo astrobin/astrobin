@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-09 14:00+0000\n"
+"POT-Creation-Date: 2021-04-26 19:18+0000\n"
 "PO-Revision-Date: 2015-12-30 10:50+0000\n"
 "Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -1871,6 +1871,9 @@ msgstr "Vuosi"
 msgid "Collections"
 msgstr ""
 
+msgid "Constellation"
+msgstr ""
+
 msgid "Default gallery sorting"
 msgstr ""
 
@@ -3419,9 +3422,6 @@ msgstr ""
 msgid "Southern"
 msgstr ""
 
-msgid "Constellation"
-msgstr ""
-
 msgid "Contains"
 msgstr "Sisältää"
 
@@ -3727,28 +3727,6 @@ msgstr ""
 
 msgid "Sorry"
 msgstr "Pahoittelut"
-
-#, python-format
-msgid ""
-"We're really sorry, but giving likes requires an Image Index of <strong>"
-"%(min_index_to_like)s</strong> or greater."
-msgstr ""
-
-msgid ""
-"Such limitation improves the website as a whole by discouraging people from "
-"creating fake accounts to like their own content. Thank you for "
-"understanding!"
-msgstr ""
-
-#, python-format
-msgid "Currently, your Image Index is <strong>%(index)s</strong>."
-msgstr ""
-
-#, python-format
-msgid ""
-"To learn more about the Image Index, please visit %(_0)sthe FAQ page%(_1)s. "
-"Thanks!"
-msgstr ""
 
 msgid "You cannot remove a like that you gave more than one hour ago."
 msgstr ""
@@ -4164,17 +4142,23 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#, python-format
 msgid ""
-"You are about to open a large file of about %(size)s. Depending on your "
-"download speed, it might take several seconds or even minutes to view the "
-"file."
+"You are about to open a large file. Depending on your download speed, it "
+"might take several seconds or even minutes to view the file."
 msgstr ""
 
 msgid "Click-and-drag anywhere on the image."
 msgstr ""
 
 msgid "Want to zoom in?"
+msgstr ""
+
+msgid ""
+"The full resolution version of this image is too large to offer the the "
+"click-and-drag zoom."
+msgstr ""
+
+msgid "Click-and-drag zoom not available"
 msgstr ""
 
 msgid "No gear yet."
@@ -5432,6 +5416,9 @@ msgstr "Järjestä"
 
 msgid "Relevance"
 msgstr "Relevanssi"
+
+msgid "Publication time"
+msgstr ""
 
 msgid "Large field radius"
 msgstr ""

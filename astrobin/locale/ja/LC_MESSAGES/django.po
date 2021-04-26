@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-09 14:00+0000\n"
+"POT-Creation-Date: 2021-04-26 19:18+0000\n"
 "PO-Revision-Date: 2020-11-27 01:58+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1898,6 +1898,9 @@ msgstr "年"
 msgid "Collections"
 msgstr "コレクション"
 
+msgid "Constellation"
+msgstr ""
+
 msgid "Default gallery sorting"
 msgstr "デフォルトのギャラリーのソート方法"
 
@@ -3505,9 +3508,6 @@ msgstr "北緯"
 msgid "Southern"
 msgstr "南緯"
 
-msgid "Constellation"
-msgstr ""
-
 msgid "Contains"
 msgstr "説明"
 
@@ -3810,30 +3810,6 @@ msgstr "読み込み中"
 
 msgid "Sorry"
 msgstr "申し訳ありません"
-
-#, python-format
-msgid ""
-"We're really sorry, but giving likes requires an Image Index of <strong>"
-"%(min_index_to_like)s</strong> or greater."
-msgstr ""
-"ほんとうに申し訳ありません。しかし、画像を「いいね」するにはAstroBinインデッ"
-"クスが<strong>%(min_index_to_like)s</strong>以上必要です。"
-
-msgid ""
-"Such limitation improves the website as a whole by discouraging people from "
-"creating fake accounts to like their own content. Thank you for "
-"understanding!"
-msgstr ""
-
-#, python-format
-msgid "Currently, your Image Index is <strong>%(index)s</strong>."
-msgstr ""
-
-#, python-format
-msgid ""
-"To learn more about the Image Index, please visit %(_0)sthe FAQ page%(_1)s. "
-"Thanks!"
-msgstr ""
 
 msgid "You cannot remove a like that you gave more than one hour ago."
 msgstr ""
@@ -4261,17 +4237,23 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#, python-format
 msgid ""
-"You are about to open a large file of about %(size)s. Depending on your "
-"download speed, it might take several seconds or even minutes to view the "
-"file."
+"You are about to open a large file. Depending on your download speed, it "
+"might take several seconds or even minutes to view the file."
 msgstr ""
 
 msgid "Click-and-drag anywhere on the image."
 msgstr ""
 
 msgid "Want to zoom in?"
+msgstr ""
+
+msgid ""
+"The full resolution version of this image is too large to offer the the "
+"click-and-drag zoom."
+msgstr ""
+
+msgid "Click-and-drag zoom not available"
 msgstr ""
 
 msgid "No gear yet."
@@ -5576,6 +5558,9 @@ msgstr "並び替え"
 msgid "Relevance"
 msgstr "関連度"
 
+msgid "Publication time"
+msgstr ""
+
 msgid "Large field radius"
 msgstr ""
 
@@ -6571,3 +6556,10 @@ msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid ""
+#~ "We're really sorry, but giving likes requires an Image Index of <strong>"
+#~ "%(min_index_to_like)s</strong> or greater."
+#~ msgstr ""
+#~ "ほんとうに申し訳ありません。しかし、画像を「いいね」するにはAstroBinイン"
+#~ "デックスが<strong>%(min_index_to_like)s</strong>以上必要です。"
