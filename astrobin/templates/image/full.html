@@ -335,6 +335,10 @@
             });
         }
 
+        function showClickAndDragZoom(imageWidth) {
+            return !('ontouchend' in document) && (window.innerWidth < imageWidth);
+        }
+
         getRealImage().then(function (result) {
             var url = result.url;
             var contentLength = result.contentLength;
@@ -343,54 +347,58 @@
                 $(".real-full-resolution-link").attr("style", "display: block !important;");
 
                 {% if request|show_click_and_drag_zoom:image %}
-                    $('.loading-zoom').removeClass('hidden');
-                    $('#full-size-image').zoom({
-                        on: 'grab',
-                        url: url,
-                        callback: function () {
-                            $('.loading-zoom').addClass('hidden');
-                            if (!$.cookie('astrobin_click_and_drag_toast_seen')) {
-                                $.toast({
-                                    text: "{% trans "Click-and-drag anywhere on the image." %}",
-                                    heading: "{% trans "Want to zoom in?" %}",
-                                    showHideTransition: 'slide',
-                                    allowToastClose: true,
-                                    hideAfter: false,
-                                    position: 'bottom-right',
-                                    loader: false,
-                                    afterHidden: function () {
-                                        $.ajax({
-                                            url: '/json-api/user/mark-click-and-drag-toast-as-seen/',
-                                            type: 'POST',
-                                            dataType: 'json',
-                                            timeout: 5000
-                                        });
-                                    }
-                                });
+                    if(showClickAndDragZoom({{ image.w }})) {
+                        $('.loading-zoom').removeClass('hidden');
+                        $('#full-size-image').zoom({
+                            on: 'grab',
+                            url: url,
+                            callback: function () {
+                                $('.loading-zoom').addClass('hidden');
+                                if (!$.cookie('astrobin_click_and_drag_toast_seen')) {
+                                    $.toast({
+                                        text: "{% trans "Click-and-drag anywhere on the image." %}",
+                                        heading: "{% trans "Want to zoom in?" %}",
+                                        showHideTransition: 'slide',
+                                        allowToastClose: true,
+                                        hideAfter: false,
+                                        position: 'bottom-right',
+                                        loader: false,
+                                        afterHidden: function () {
+                                            $.ajax({
+                                                url: '/json-api/user/mark-click-and-drag-toast-as-seen/',
+                                                type: 'POST',
+                                                dataType: 'json',
+                                                timeout: 5000
+                                            });
+                                        }
+                                    });
+                                }
+                            },
+                            onZoomIn: function () {
+                                $(this).addClass('zoomed-in');
+                                $('.hover-overlay').hide();
+                            },
+                            onZoomOut: function () {
+                                $(this).removeClass('zoomed-in');
+                                $('.hover-overlay:not(.hover-overlay-disabled)').show();
                             }
-                        },
-                        onZoomIn: function () {
-                            $(this).addClass('zoomed-in');
-                            $('.hover-overlay').hide();
-                        },
-                        onZoomOut: function () {
-                            $(this).removeClass('zoomed-in');
-                            $('.hover-overlay:not(.hover-overlay-disabled)').show();
-                        }
-                    });
+                        });
+                    }
                 {% endif %}
             } else {
                 $(".warning-full-resolution-link").attr("style", "display: block !important;");
 
-                $.toast({
-                    text: "{% trans "The full resolution version of this image is too large to offer the the click-and-drag zoom." %}",
-                    heading: "{% trans "Click-and-drag zoom not available" %}",
-                    showHideTransition: 'slide',
-                    allowToastClose: true,
-                    hideAfter: 10000,
-                    position: 'bottom-right',
-                    loader: false
-                });
+                if (showClickAndDragZoom({{ image.w }})) {
+                    $.toast({
+                        text: "{% trans "The full resolution version of this image is too large to offer the the click-and-drag zoom." %}",
+                        heading: "{% trans "Click-and-drag zoom not available" %}",
+                        showHideTransition: 'slide',
+                        allowToastClose: true,
+                        hideAfter: 10000,
+                        position: 'bottom-right',
+                        loader: false
+                    });
+                }
             }
         });
     }
