@@ -865,7 +865,7 @@ class ImageTest(TestCase):
         self.assertIsNotNone(re.search(
             r'data-id="%d"\s+data-alias="%s"\s+data-revision="%s"' % (image.pk, "regular", "B"),
             response.content))
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "thumb"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "gallery"), response.content))
 
         # Revision resolution differs from original
         self.assertContains(response, "<strong class=\"card-label\">Resolution:</strong> 200x165")
@@ -893,7 +893,7 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': '0'}))
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "regular"), response.content))
         self.assertIsNotNone(re.search(
-            r'data-id="%d"\s+data-alias="%s"\s+data-revision="%s"' % (image.pk, "thumb", "B"),
+            r'data-id="%d"\s+data-alias="%s"\s+data-revision="%s"' % (image.pk, "gallery", "B"),
             response.content))
 
         # Inverted displayed

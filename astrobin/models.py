@@ -1281,7 +1281,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         # Compatibility
         if alias in ('revision', 'runnerup'):
-            alias = 'thumb'
+            alias = 'gallery'
 
         field = self.get_thumbnail_field(revision_label)
         if not field.name:
@@ -1334,7 +1334,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         # For compatibility:
         if alias in ('revision', 'runnerup'):
-            alias = 'thumb'
+            alias = 'gallery'
 
         if revision_label in (None, 'None', 'final'):
             revision_label = ImageService(self).get_final_revision_label()

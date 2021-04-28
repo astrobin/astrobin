@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 @font-face {
   font-family: LeagueGothicRegular;
@@ -204,6 +205,24 @@
   .top-picks-item img {
     width: 354px !important;
   }
+
+  .revisions-container {
+    li.revisions {
+      .revision {
+        &.current {
+          @include rounded-corners(16px);
+        }
+
+        .label {
+          @include rounded-corners-bottom(12px);
+        }
+
+        .final .text {
+          @include rounded-corners-top(12px);
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -327,6 +346,19 @@
   div.image-title {
     padding: 0 12px;
     text-align: center;
+  }
+
+  .revisions-container {
+    li.revisions {
+      &,
+      figure {
+        width: 110px;
+      }
+
+      .astrobin-image {
+        width: 100%;
+      }
+    }
   }
 
   .btn-block-mobile {

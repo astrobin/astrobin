@@ -81,7 +81,7 @@ def astrobin_image(context, image, alias, **kwargs):
     }
 
     if alias == '':
-        alias = 'thumb'
+        alias = 'gallery'
 
     if alias in ('gallery_inverted', 'regular_inverted', 'hd_inverted', 'real_inverted'):
         mod = 'inverted'
