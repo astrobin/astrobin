@@ -2339,8 +2339,13 @@ form.avatar-change label.control-label {
 .revisions-container {
   overflow: visible;
 
+  .astrobin-thumbnails {
+    justify-content: center;
+  }
+
   li.revisions {
     padding: 4px;
+    width: calc(50% - 12px);
 
     .revision {
       position: relative;
@@ -2357,13 +2362,15 @@ form.avatar-change label.control-label {
           position: absolute;
           border: 0;
           margin: 0;
-          padding: $spacer-small $spacer-medium;
-          background-color: #111;
-          background-color: rgba(0, 0, 0, 0.6);
-          @include rounded-corners;
-          top: -10px;
-          left: -4px;
-          @include rotate(-8deg);
+          padding: $spacer-small 0;
+          @include rounded-corners-top(20px);
+          top: 0;
+          left: 0;
+          text-align: center;
+          background: $link-color;
+          color: $white;
+          font-weight: bold;
+          width: 100%;
         }
       }
 
@@ -2407,8 +2414,8 @@ form.avatar-change label.control-label {
         bottom: 0;
 
         margin: 0;
-        padding: 2px 0;
-        width: 80px;
+        padding: $spacer-small 0;
+        width: 100%;
 
         background: $grey-6-dark;
         background-color: rgba(0, 0, 0, 0.3);
@@ -2417,7 +2424,7 @@ form.avatar-change label.control-label {
         text-align: center;
         font-weight: bold;
 
-        @include rounded-corners(0 0 12px 12px);
+        @include rounded-corners-bottom(20px);
 
         &.active {
           background: white;
@@ -2428,7 +2435,7 @@ form.avatar-change label.control-label {
 
       &.current {
         box-shadow: 0 0 1rem $link-color;
-        border-radius: 12px;
+        @include rounded-corners(20px);
 
         .label {
           background-color: $link-color;
