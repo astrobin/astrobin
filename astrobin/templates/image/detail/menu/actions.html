@@ -77,13 +77,15 @@
                 </li>
             {% endif %} <!-- image.is_wip -->
 
-            <li class="divider"></li>
-            <li>
-                <a data-toggle="modal" href="#send-to-group-modal">
-                    <i class="icon-group"></i>
-                    {% trans "Send to group" %}
-                </a>
-            </li>
+            {% if not image.is_wip %}
+                <li class="divider"></li>
+                <li>
+                    <a data-toggle="modal" href="#send-to-group-modal">
+                        <i class="icon-group"></i>
+                        {% trans "Send to group" %}
+                    </a>
+                </li>
+            {% endif %} <!-- not image.is_wip -->
 
             <li class="divider"></li>
 

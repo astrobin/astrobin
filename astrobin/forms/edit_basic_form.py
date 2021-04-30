@@ -39,6 +39,7 @@ class ImageEditBasicForm(forms.ModelForm):
         label=_("Mouse hover image"),
         help_text=_("Choose what will be displayed when somebody hovers the mouse over this image. Please note: only "
                     "revisions with the same width and height of your original image can be considered."),
+        choices=Image.MOUSE_HOVER_CHOICES
     )
 
     keyvaluetags = forms.CharField(
@@ -55,7 +56,6 @@ class ImageEditBasicForm(forms.ModelForm):
 
         self.__initLocations()
         self.__initGroups()
-        self.__initMouseHoverImage()
         self.__initRevisions()
         self.__initKeyValueTags()
 
@@ -67,6 +67,10 @@ class ImageEditBasicForm(forms.ModelForm):
             self.fields.pop('locations')
 
     def __initGroups(self):
+        if self.instance.is_wip:
+            del self.fields['groups']
+            return
+
         groups = Group.objects.filter(autosubmission=False, members=self.instance.user)
         if groups.count() > 0:
             self.fields['groups'].choices = [(x.pk, x.name) for x in groups]
@@ -76,9 +80,6 @@ class ImageEditBasicForm(forms.ModelForm):
                     members=self.instance.user)]
         else:
             self.fields.pop('groups')
-
-    def __initMouseHoverImage(self):
-        self.fields['mouse_hover_image'].choices = Image.MOUSE_HOVER_CHOICES
 
     def __initRevisions(self):
         revisions = self.instance.revisions
