@@ -16,7 +16,11 @@ ASTROBIN_APPS = [
     'toggleproperties'
 ]
 
-INSTALLED_APPS = [
+INSTALLED_APPS = []
+
+INSTALLED_APPS += ASTROBIN_APPS
+
+INSTALLED_APPS += [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -74,7 +78,6 @@ INSTALLED_APPS = [
     'astrobin.apps.AstroBinAppConfig',
 ]
 
-INSTALLED_APPS += ASTROBIN_APPS
 
 if DEBUG:
     INSTALLED_APPS += [
