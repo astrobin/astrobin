@@ -51,7 +51,12 @@
 
 
                     <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
-                        <a href="{{ topic.get_absolute_url }}">{{ topic.name|truncatechars:120 }}</a>
+                        <a href="{{ topic.get_absolute_url }}">
+                            {% if topic.poll_type %}
+                                <span class="poll">[{% trans 'Poll' %}]</span>
+                            {% endif %}
+                            {{ topic.name|truncatechars:120 }}
+                        </a>
                         {% if topic.sticky %} &nbsp;[{% trans "Sticky" %}] {% endif %}
 
                         {% if topic.closed %} &nbsp;[{% trans "Closed" %}] {% endif %}
