@@ -382,7 +382,7 @@ def show_adsense_ads(context):
                 image_owner_is_ultimate = is_any_ultimate(data['requested_user'])
 
     return is_anon and not image_owner_is_ultimate and \
-           context["COOKIELAW_ACCEPTED"] is not False and \
+           (context["COOKIELAW_ACCEPTED"] is not False or not show_cookie_banner(context.request)) and \
            not context['request'].get_host().startswith("localhost")
 
 
