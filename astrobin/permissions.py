@@ -9,11 +9,6 @@ from astrobin_apps_groups.models import Group
 
 
 class CustomForumPermissions(DefaultPermissionHandler):
-    # Disable forum polls
-    def may_create_poll(self, user):
-        return False
-
-
     def may_view_forum(self, user, forum):
         may = super(CustomForumPermissions, self).may_view_forum(user, forum)
 

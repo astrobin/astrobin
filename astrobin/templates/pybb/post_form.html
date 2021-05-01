@@ -32,7 +32,10 @@
                 {% endif %}
 
                 {% if request.user|pybb_may_create_poll and form.poll_type %}
-                    {% include "pybb/poll_edit_form.html" %}
+                    <div class="poll-edit-container">
+                        <h2>{% trans "Include a poll" %}</h2>
+                        {% include "pybb/poll_edit_form.html" %}
+                    </div>
                 {% endif %}
                 {% include "pybb/attachments_formset.html" %}
                 <p class="submit">{% include "pybb/_button_submit.html" %}</p>
@@ -52,6 +55,7 @@
 
 
 {% block extra_js %}
+    <script type="text/javascript" src="{% static 'pybb/js/jquery.formset.min.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             var textarea = $('#id_body');
