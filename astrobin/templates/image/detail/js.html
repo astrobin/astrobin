@@ -5,7 +5,7 @@
 {% load tags %}
 {% load staticfiles %}
 
-{% ifnotequal request.user image.user %} 
+{% ifnotequal request.user image.user %}
     <script src="{% static 'hitcount/jquery.postcsrf.js' %}"></script>
 
     {% get_hit_count_js_variables for image as hitcount %}
@@ -27,6 +27,36 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    function showProperImageSize() {
+        var containerWidth = $(".astrobin-container").width();
+        var imageWidth = {{ w }};
+        var imageHeight = {{ h }};
+        var actualImageHeight = containerWidth / imageWidth * imageHeight;
+        var viewportHeight = window.innerHeight;
+
+        var $partial = $(".partial-width-image-container");
+        var $full = $(".full-width-image-container");
+
+
+        function showFull() {
+            $partial.remove();
+            $full.show();
+        }
+
+        function showPartial() {
+            $full.remove();
+            $partial.show();
+        }
+
+        if ($full.length && viewportHeight - actualImageHeight > 250) {
+            showFull();
+        } else {
+            showPartial();
+        }
+
+        $(".loading-correct-image-size").remove();
+    }
+
     $('form.copy select').change(function() {
         var sharing_mode = parseInt($('select[name=sharing_mode] option:selected').val());
         var image_size = parseInt($('select[name=sharing_image_size] option:selected').val());
@@ -109,6 +139,7 @@ $(document).ready(function() {
         textarea.val(content);
     });
 
+    showProperImageSize();
     astrobin_common.setup_gear_popovers();
     astrobin_common.setup_subject_popovers();
 
