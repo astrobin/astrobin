@@ -96,12 +96,25 @@
 
     {% include 'image/detail/menu/root.html' %}
 
+    {% if image_uses_full_width %}
+        <div class="row-fluid">
+            <div class="span12">
+                {% include 'image/detail/iotd_banner.html' %}
+                {% include 'image/detail/solve_status.html' %}
+                {% include 'image/detail/image.html' %}
+                {% include 'image/detail/image_title.html' %}
+            </div>
+        </div>
+    {% endif %}
+
     <div class="row-fluid"> <!-- main row -->
         <div class="span8 image-page-left-pane"> <!-- left pane -->
-            {% include 'image/detail/iotd_banner.html' %}
-            {% include 'image/detail/solve_status.html' %}
-            {% include 'image/detail/image.html' %}
-            {% include 'image/detail/image_title.html' %}
+            {% if not image_uses_full_width %}
+                {% include 'image/detail/iotd_banner.html' %}
+                {% include 'image/detail/solve_status.html' %}
+                {% include 'image/detail/image.html' %}
+                {% include 'image/detail/image_title.html' %}
+            {% endif %}
 
             {% if request.user_agent.is_mobile %}
                 <div class="visible-phone">

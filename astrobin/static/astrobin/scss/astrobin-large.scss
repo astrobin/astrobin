@@ -54,10 +54,6 @@
 
   .main-image {
     max-width: unset;
-
-    img:not([data-smaller-than-regular='true']) {
-      width: 100%;
-    }
   }
 
   .sky-plot {

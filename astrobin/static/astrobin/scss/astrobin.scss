@@ -1057,7 +1057,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 }
 
 .main-image {
-  max-width: 620px;
   overflow: hidden;
   position: relative;
 
@@ -1080,6 +1079,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       top: 0;
       left: 0;
       z-index: 1;
+
+      &:not([data-smaller-than-regular='true']) {
+        width: 100%;
+      }
     }
   }
 }
