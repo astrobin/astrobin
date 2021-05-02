@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-05 15:32+0200\n"
-"PO-Revision-Date: 2021-04-26 21:30+0200\n"
+"PO-Revision-Date: 2021-04-29 21:50+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.25 20210310-1"
+"X-Loco-Api-Version: 1.0.25 20210428-1"
 
 #: loco:606b75eb6516df53d777ec62
 msgid "United Kingdom"
@@ -3606,23 +3606,27 @@ msgstr "AstroBin ist im NUR-LESEN-Modus "
 #: loco:606b75eb6516df53d777efac
 #, python-format
 msgid "<a href=\"%(user_page)s\">%(user)s</a> uploaded a new image."
-msgstr ""
+msgstr "<a href=\"%(user_page)s\">%(user)s</a> hat ein neues Bild hochgeladen."
 
 #: loco:606b75eb6516df53d777efad
 #, python-format
 msgid "<a href=\"%(user_page)s\">%(user)s</a> uploaded a new image revision."
 msgstr ""
+"<a href=\"%(user_page)s\">%(user)s</a> hat eine neue Bildrevision "
+"hochgeladen."
 
 #: loco:606b75eb6516df53d777efae
 #, python-format
 msgid ""
 "<a href=\"%(user_page)s\">%(user)s</a> and %(count)s others like this image."
 msgstr ""
+"<a href=\"%(user_page)s\">%(user)s</a> und %(count)s andere mögen dieses "
+"Bild."
 
 #: loco:606b75eb6516df53d777efaf
 #, python-format
 msgid "<a href=\"%(user_page)s\">%(user)s</a> likes this image."
-msgstr ""
+msgstr "<a href=\"%(user_page)s\">%(user)s</a> mag dieses Bild."
 
 #: loco:606b75eb6516df53d777efb0
 #, python-format
@@ -3630,11 +3634,15 @@ msgid ""
 "<a href=\"%(user_page)s\">%(user)s</a> and %(count)s others bookmarked this "
 "image."
 msgstr ""
+"<a href=\"%(user_page)s\">%(user)s</a>  und %(count)s andere haben dieses "
+"Bild mit einem Lesezeichen versehen."
 
 #: loco:606b75eb6516df53d777efb1
 #, python-format
 msgid "<a href=\"%(user_page)s\">%(user)s</a> bookmarked this image."
 msgstr ""
+"<a href=\"%(user_page)s\">%(user)s</a> hat dieses Bild mit einem Lesezeichen "
+"versehen."
 
 #: loco:606b75eb6516df53d777efb2
 #, python-format
@@ -3642,21 +3650,25 @@ msgid ""
 "<a href=\"%(user_page)s\">%(user)s</a> and %(count)s others commented this "
 "image."
 msgstr ""
+"<a href=\"%(user_page)s\">%(user)s</a> und %(count)s andere haben dieses "
+"Bild kommentiert."
 
 #: loco:606b75eb6516df53d777efb3
 #, python-format
 msgid "<a href=\"%(user_page)s\">%(user)s</a> commented this image."
-msgstr ""
+msgstr "<a href=\"%(user_page)s\">%(user)s</a> hat das Bild kommentiert."
 
 #: loco:606b75eb6516df53d777efb4
 #, python-format
 msgid "<a href=\"%(user_page)s\">%(user)s</a> created a new public group."
 msgstr ""
+"<a href=\"%(user_page)s\">%(user)s</a> hat eine neue öffentliche Gruppe "
+"erstellt."
 
 #: loco:606b75eb6516df53d777efb5
 #, python-format
 msgid "<a href=\"%(user_page)s\">%(user)s</a> joined a group."
-msgstr ""
+msgstr "<a href=\"%(user_page)s\">%(user)s</a>ist einer Gruppe beigetreten."
 
 #: loco:606b75eb6516df53d777efb6
 msgid "Remove ads"
@@ -4054,12 +4066,13 @@ msgstr "Bist du wirklich sicher?"
 #: loco:606b75eb6516df53d777f007
 msgid ""
 "We know, we're all used to the fact that ads on the Internet are annoying."
-msgstr ""
+msgstr "Uns alle nerven Anzeigen im Internet schon aus Gewohnheit."
 
 #: loco:606b75eb6516df53d777f008
 msgid ""
 "However, please let us offer you a good reason to allow ads on AstroBin:"
 msgstr ""
+"Wir möchten Ihnen einen guten Grund bieten, Werbung auf AstroBin zuzulassen:"
 
 #: loco:606b75eb6516df53d777f009
 msgid ""
@@ -4067,6 +4080,9 @@ msgid ""
 "and approval. Nothing fishy, nothing off-topic, and nothing that will use "
 "any of your private information."
 msgstr ""
+"Es gibt nur Astronomie-Anzeigen auf AstroBin, die nach meiner Überprüfung "
+"und Genehmigung veröffentlicht werden. nichts faules, nichts off-topic, und "
+"nichts, das irgendwelche Ihrer privaten Informationen verwendet."
 
 #: loco:606b75eb6516df53d777f00a
 #, python-format
@@ -4074,6 +4090,10 @@ msgid ""
 "If you still feel that you would rather not see these ads, you can change "
 "this on <a href=\"%(profile_url)s\">your settings page</a>."
 msgstr ""
+"If you still feel that you would rather not see these ads, you can change "
+"this on <a href=\"%(profile_url)s\">your settings page</a>.\n"
+"Wenn Sie trotzdem diese Anzeigen lieber nicht sehen möchten, können Sie dies "
+"auf <a href=\"%(profile_url)s\">Ihrer Einstellungsseite</a> ändern."
 
 #: loco:606b75eb6516df53d777f00b
 msgid "Thank you!"
@@ -4603,6 +4623,9 @@ msgid ""
 "the image soon. Remember that you can also <a href=\"%(message_url)s\">send "
 "them a message</a>."
 msgstr ""
+"<strong>%(username)s</strong> wurde benachrichtigt. Wir offen, dass sie das "
+"Bild bald aktualisieren. Denken Sie daran, dass Sie ihnen auch eine <a "
+"href=\"%(message_url)s\">Nachricht senden können</a>."
 
 #: loco:606b75eb6516df53d777f066
 msgid "Return to image"
@@ -4750,14 +4773,14 @@ msgstr "WCS-Transformation"
 
 #: loco:606b75eb6516df53d777f087
 msgid "Find images in the same area"
-msgstr ""
+msgstr "Bilder im gleichen Bereich finden"
 
 #: loco:606b75eb6516df53d777f088
 #, python-format
 msgid "Around <strong>1</strong> degree"
 msgid_plural "Around <strong>%(n)s</strong> degrees"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Umfeld <strong>1</strong> Grad"
+msgstr[1] "Umfeld <strong>%(n)s</strong> Grad"
 
 #: loco:606b75eb6516df53d777f08a
 msgid "Resolution"
@@ -4997,6 +5020,12 @@ msgid ""
 "body ephemerides and find planets and asteroids in your image (provided you "
 "also add location information to your image)."
 msgstr ""
+"Um die Genauigkeit der Astrometrierung noch weiter zu verbessern, laden Sie "
+"bitte eine der XISF- oder FITS-Dateien aus Ihrem Datensatz hoch. Solche "
+"Dateien haben normalerweise Datums- und Zeit-Header, die es AstroBin "
+"ermöglichen, Ephemeriden von Sonnensystemkörpern zu berechnen und Planeten "
+"und Asteroiden in Ihrem Bild zu finden (vorausgesetzt, Sie fügen auch "
+"Ortsinformationen zu Ihrem Bild hinzu)."
 
 #: loco:606b75eb6516df53d777f0c0
 #, python-format
@@ -5005,6 +5034,9 @@ msgid ""
 "open format XISF. Learn more about XISF here: <a href=\"%(xisf_url)s\" "
 "target=\"_blank\">%(xisf_url)s</a>"
 msgstr ""
+"Für maximale Genauigkeit wird empfohlen, das native und offene Format XISF "
+"von PixInsight zu verwenden. Erfahren Sie hier mehr über XISF: <a "
+"href=\"%(xisf_url)s\" target=\"_blank\">%(xisf_url)s</a>"
 
 #: loco:606b75eb6516df53d777f0c1
 msgid ""
@@ -5014,6 +5046,12 @@ msgid ""
 "plate-solution, calibrate your file the usual way (dark/bias/flats) but you "
 "don't need to stretch it."
 msgstr ""
+"<strong>Bitte beachten Sie:</strong> Es ist sehr wichtig, dass die XISF- "
+"oder FITS-Datei, die Sie hochladen, an Ihrem verarbeiteten Bild ausgerichtet "
+"ist, da sonst die Objektbeschriftungen nicht übereinstimmen. Um Ihre Chancen "
+"auf eine erfolgreiche, genaue Astrometrierung zu verbessern, kalibrieren Sie "
+"Ihre Datei auf die übliche Weise (Dunkelheit/Bias/Flats), aber Sie müssen "
+"sie nicht strecken."
 
 #: loco:606b75eb6516df53d777f0c2
 msgid "The following people bookmarked this image"
@@ -5331,6 +5369,10 @@ msgid ""
 "still have your file (the information on this form should provide you with "
 "enough context)."
 msgstr ""
+"Es tut uns sehr, sehr leid, aber es scheint, dass Ihr Bild eine verheerende "
+"Schädigung erlitten hat und nicht wieder hergestellt werden kann. "
+"Hoffentlich haben Sie Ihre Datei noch. (Die Informationen auf diesem "
+"Formular sollten Ihnen genügend Informationen liefern.)"
 
 #: loco:606b75eb6516df53d777f0f6
 msgid ""
@@ -5338,6 +5380,9 @@ msgid ""
 "Save button down below. All the data you had previously associated to your "
 "image is still here."
 msgstr ""
+"Bitte verwenden Sie den Lade-Dialog unten, um es erneut hochzuladen, und "
+"klicken Sie dann unten auf die Schaltfläche Speichern. Alle Daten, die Sie "
+"zuvor mit Ihrem Bild verknüpft hatten, sind noch vorhanden."
 
 #: loco:606b75eb6516df53d777f0f7
 msgid "Here's some detail about the image to give you some context."
@@ -6393,6 +6438,7 @@ msgstr ""
 #, python-format
 msgid "%(user)s added your image \"%(title)s\" to their bookmarks!"
 msgstr ""
+"%(user)s haben Ihr Bild \"%(title)s\" zu ihren Lesezeichen hinzugefügt!"
 
 #: loco:606b75eb6516df53d777f1a9
 #, python-format
@@ -7784,6 +7830,10 @@ msgid ""
 "catastrophic data corruption, and cannot be retrieved. Please read more <a "
 "href=\"%(data_corruption_url)s\">here</a>."
 msgstr ""
+"Es tut uns sehr, sehr leid, aber es scheint, dass einige Ihrer Bilder eine "
+"verheerende Datenschädigung erlitten haben und nicht wiederhergestellt "
+"werden können. Bitte lesen Sie mehr <a href=\"%(data_corruption_url)s\">"
+"hier</a>."
 
 #: loco:606b75eb6516df53d777f291
 msgid ""
@@ -7791,6 +7841,9 @@ msgid ""
 "image files that you still have on your computer or backups to their pages "
 "again."
 msgstr ""
+"Bitte klicken Sie auf die mit dem Sanduhr-Symbol versehenen Vorschaubilder, "
+"um die Bilddateien, die Sie noch auf Ihrem Computer oder in Sicherungskopien "
+"haben, wieder auf ihre Seite zu laden."
 
 #: loco:606b75eb6516df53d777f292
 msgid ""
@@ -7798,10 +7851,13 @@ msgid ""
 "equipment used, acquisition details, comments, likes, bookmarks, and so on, "
 "is still intact and safe."
 msgstr ""
+"Die mit den betroffenen Bildern verknüpften Daten wie Titel, Beschreibung, "
+"verwendetes Equipment, Aufnahmedetails, Kommentare, Likes, Lesezeichen usw. "
+"sind weiterhin intakt und sicher."
 
 #: loco:606b75eb6516df53d777f293
 msgid "AstroBin would like to offer you its sincerest apologies. :("
-msgstr ""
+msgstr "AstroBin möchte sich aufrichtig bei Ihnen entschuldigen. :("
 
 #: loco:606b75eb6516df53d777f294
 msgid "Okay, don't show this again"
@@ -7857,6 +7913,7 @@ msgstr "Konto gelöscht"
 #: loco:606b75eb6516df53d777f29c
 msgid "Your account was deleted. Thanks for using AstroBin until now!"
 msgstr ""
+"Ihr Konto wurde gelöscht. Vielen Dank für die bisherige Nutzung von AstroBin!"
 
 #: loco:606b75eb6516df53d777f29d
 msgid "Edit your basic information"
@@ -8801,28 +8858,33 @@ msgstr ""
 
 #: loco:60705b727e470e4f1446e593
 msgid "Constellations"
-msgstr ""
+msgstr "Sternbilder"
 
 #: loco:60705b727e470e4f1446e594
 msgid "Constellation"
-msgstr ""
+msgstr "Sternbild"
 
 #: loco:6087132723807d10187ab5f2
 msgid ""
 "You are about to open a large file. Depending on your download speed, it "
 "might take several seconds or even minutes to view the file."
 msgstr ""
+"Sie sind im Begriff, eine große Datei zu öffnen. Je nach Download-"
+"Geschwindigkeit kann es einige Sekunden oder sogar Minuten dauern, bis die "
+"Datei angezeigt wird."
 
 #: loco:6087132723807d10187ab5f3
 msgid ""
 "The full resolution version of this image is too large to offer the the "
 "click-and-drag zoom."
 msgstr ""
+"Die Version mit voller Auflösung dieses Bildes ist zu groß für den Click-and-"
+"Drag Zoom."
 
 #: loco:6087132723807d10187ab5f4
 msgid "Click-and-drag zoom not available"
-msgstr ""
+msgstr "Click-and-Drag-Zoom nicht verfügbar"
 
 #: loco:6087132723807d10187ab5f5
 msgid "Publication time"
-msgstr ""
+msgstr "Veröffentlichungszeitpunkt"
