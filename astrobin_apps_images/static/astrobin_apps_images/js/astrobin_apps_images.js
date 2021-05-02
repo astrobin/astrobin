@@ -28,7 +28,7 @@ $(document).ready(function () {
                 }
 
                 if (enhancedThumbnailUrl || getEnhancedThumbnailUrl) {
-                    loadHighDPI($img);
+                    loadEnhanced($img);
                 }
             }
         });
@@ -53,7 +53,7 @@ $(document).ready(function () {
             return;
         }
 
-        if ($img.width() <= 620 || devicePixelRatio > 1) {
+        if ($img.width() <= 620 || $img.width() >= 744 || devicePixelRatio > 1) {
             return;
         }
 
@@ -84,7 +84,7 @@ $(document).ready(function () {
         }
     }
 
-    function loadHighDPI($img) {
+    function loadEnhanced($img) {
         var tries = {},
             devicePixelRatio = window.devicePixelRatio,
             randomTimeout = Math.floor(Math.random() * 100) + 100, // 100-200 ms
@@ -99,7 +99,7 @@ $(document).ready(function () {
             return;
         }
 
-        if (devicePixelRatio <= 1) {
+        if ($img.width() < 744 && devicePixelRatio <= 1) {
             return;
         }
 
@@ -187,7 +187,7 @@ $(document).ready(function () {
                         if (!hires && ([
                             'regular', 'regular_sharpened', 'regular_large', 'regular_large_sharpened'
                         ].indexOf(alias) > -1)) {
-                            loadHighDPI($img);
+                            loadEnhanced($img);
                         }
 
                         resolve(data.url);
