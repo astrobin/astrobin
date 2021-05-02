@@ -2,188 +2,145 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Notifications\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 16:16+0200\n"
+"POT-Creation-Date: 2021-05-02 09:39+0000\n"
 "PO-Revision-Date: 2021-04-26 21:23+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Simplified Chinese\n"
 "Language: zh-Hans\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108445\n"
-"X-Loco-Api-Version: 1.0.25 20210428-1"
+"X-Loco-Api-Version: 1.0.25 20210428-1\n"
 
-#: loco:606b76429c83b8364f3f0a42
 msgid "Notifications"
 msgstr "通知"
 
-#: loco:606b76429c83b8364f3f0a43
 msgid "You have no notifications."
 msgstr "您没有通知。"
 
-#: loco:606b76429c83b8364f3f0a44
 msgid "Settings"
 msgstr "设置"
 
-#: loco:606b76429c83b8364f3f0a45
 msgid "Mark all as read"
 msgstr "全部标记为已读"
 
-#: loco:606b76429c83b8364f3f0a46
 msgid "You have no new notifications."
 msgstr "您没有新通知。"
 
-#: loco:606b76429c83b8364f3f0a47
 msgid "You have a new follower"
 msgstr "您有新的粉丝"
 
-#: loco:606b76429c83b8364f3f0a48
 msgid "New image from a user you follow"
 msgstr "新作品-来自您关注的人"
 
-#: loco:606b76429c83b8364f3f0a49
 msgid "New image revision from a user you follow"
 msgstr "新修订版作品-来自您关注的人"
 
-#: loco:606b76429c83b8364f3f0a4a
 msgid "Your image was plate-solved"
 msgstr "您的作品已被解析"
 
-#: loco:606b76429c83b8364f3f0a4b
 msgid "Your image could not be plate-solved"
 msgstr "您的作品无法被解析"
 
-#: loco:606b76429c83b8364f3f0a4c
 msgid "Your image received a new comment"
 msgstr "您的作品收到了新评论"
 
-#: loco:606b76429c83b8364f3f0a4d
 msgid "There was a reply to your comment"
 msgstr "您的评论有了新回复"
 
-#: loco:606b76429c83b8364f3f0a4e
 msgid "Your comment was approved"
 msgstr "您的评论已通过审核"
 
-#: loco:606b76429c83b8364f3f0a4f
 msgid "Your image was bookmarked"
 msgstr "您的作品已被收藏"
 
-#: loco:606b76429c83b8364f3f0a50
 msgid "Your image was liked"
 msgstr "您的作品获得了赞"
 
-#: loco:606b76429c83b8364f3f0a51
 msgid "Your comment was liked"
 msgstr "您的评论获得了赞"
 
-#: loco:606b76429c83b8364f3f0a52
 msgid "Your forum post was liked"
 msgstr "您的帖子获得了赞"
 
-#: loco:606b76429c83b8364f3f0a53
 msgid "Your API Key request has been approved"
 msgstr "您的API Key申请被通过"
 
-#: loco:606b76429c83b8364f3f0a54
 msgid "A user you follow joined a public group"
 msgstr "您关注的人加入了公开小组"
 
-#: loco:606b76429c83b8364f3f0a55
 msgid "You are invited to a group"
 msgstr "您被邀请加入一个小组"
 
-#: loco:606b76429c83b8364f3f0a56
 msgid "A user requested to join a group you moderate"
 msgstr "一个用户申请加入您管理的小组"
 
-#: loco:606b76429c83b8364f3f0a57
 msgid "A group moderator approved your request to join"
 msgstr "组长通过了您的加入申请"
 
-#: loco:606b76429c83b8364f3f0a58
 msgid "A group moderator rejected your request to join"
 msgstr "组长拒绝了您的加入申请"
 
-#: loco:606b76429c83b8364f3f0a59
 msgid "A user you follow created a new public group"
 msgstr "您关注的人创建了一个新的公开小组"
 
-#: loco:606b76429c83b8364f3f0a5a
 msgid "New forum topic in a group you are a member of"
 msgstr "新主题-来自您所在的小组"
 
-#: loco:606b76429c83b8364f3f0a5b
 msgid "You have received a new private message"
 msgstr "您收到新私信"
 
-#: loco:606b76429c83b8364f3f0a5c
 msgid "Your premium subscription will expire in one week"
 msgstr "您的Premium订阅将在一周内到期"
 
-#: loco:606b76429c83b8364f3f0a5d
 msgid "Your premium subscription has just expired"
 msgstr "您的Premium订阅已到期"
 
-#: loco:606b76429c83b8364f3f0a5e
 msgid "Your subscription will be renewed in one week"
 msgstr "您的订阅将在一周内续订"
 
-#: loco:606b76429c83b8364f3f0a5f
 msgid "Your subscription will be renewed in one 30 days"
 msgstr "您的订阅将在30天内续订"
 
-#: loco:606b76429c83b8364f3f0a60
 msgid "You have images with a missing \"Data source\""
 msgstr "您有作品缺少“数据源”"
 
-#: loco:606b76429c83b8364f3f0a61
 msgid "You have images with a missing \"Remote source\""
 msgstr "您有作品缺少“远程数据来源”"
 
-#: loco:606b76429c83b8364f3f0a62
 msgid "Would you like to activate your account?"
 msgstr "激活您的账号？"
 
-#: loco:606b76429c83b8364f3f0a63
 msgid "You were mentioned in a forum post"
 msgstr "您在帖子中被提到"
 
-#: loco:606b76429c83b8364f3f0a64
 msgid "You were mentioned in a comment"
 msgstr "您在评论中被提到"
 
-#: loco:606b76429c83b8364f3f0a65
 msgid "Welcome to AstroBin!"
 msgstr "欢迎来到 AstroBin！"
 
-#: loco:606b76429c83b8364f3f0a66
 msgid "Congratulations for your first image on AstroBin!"
 msgstr "恭喜您在 AstroBin 上发布了第一张作品！"
 
-#: loco:606b76429c83b8364f3f0a67
 msgid "Thank you for getting a subscription!"
 msgstr "感谢您的订阅！"
 
-#: loco:606b76429c83b8364f3f0a68
 msgid "Thank you for your payment!"
 msgstr "感谢您支付！"
 
-#: loco:606b76429c83b8364f3f0a69
 msgid "You were removed from the IOTD staff"
 msgstr "您已被从“今日最佳”工作人员中被移除"
 
-#: loco:606b76429c83b8364f3f0a6a
 msgid "You have been inactive as an IOTD staff member"
 msgstr "作为“今日最佳”工作人员，您一直处于不活跃状态"
 
-#: loco:606b76429c83b8364f3f0a6b
 msgid "An image you promoted made it to Top Pick"
 msgstr "您的作品被选为“热门精选”"
 
-#: loco:606b76429c83b8364f3f0a6c
 msgid "An image you promoted made it to IOTD"
 msgstr "您的作品被选为“今日最佳”"
