@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-26 19:18+0000\n"
+"POT-Creation-Date: 2021-05-02 09:30+0000\n"
 "PO-Revision-Date: 2020-09-25 11:30+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5113,6 +5113,19 @@ msgstr ""
 msgid "New reply to a forum topic you subscribe to"
 msgstr "Nová odpoveď ku téme vo fórume, na ktorú ste sa prihlásili"
 
+msgid "This topic contains a poll."
+msgstr ""
+
+msgid "Cancel my poll vote"
+msgstr ""
+
+#, python-format
+msgid "<a href=\"%(login_url)s\">Login</a> to vote and view results."
+msgstr ""
+
+msgid "Include a poll"
+msgstr ""
+
 msgid "Please note: this post will be published only after moderation."
 msgstr ""
 
@@ -5203,6 +5216,9 @@ msgid "Topic"
 msgstr ""
 
 msgid "Last post"
+msgstr ""
+
+msgid "Poll"
 msgstr ""
 
 msgid "Sticky"

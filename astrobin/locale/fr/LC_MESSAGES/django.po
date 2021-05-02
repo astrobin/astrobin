@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-05 15:32+0200\n"
-"PO-Revision-Date: 2021-04-26 21:30+0200\n"
+"PO-Revision-Date: 2021-05-02 16:35+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.25 20210310-1"
+"X-Loco-Api-Version: 1.0.25 20210428-1"
 
 #: loco:606b75eb6516df53d777ec62
 msgid "United Kingdom"
@@ -8816,4 +8816,25 @@ msgstr ""
 
 #: loco:6087132723807d10187ab5f5
 msgid "Publication time"
+msgstr ""
+
+#: loco:608eb84aa85c4f4df56b8c02
+msgid "This topic contains a poll."
+msgstr ""
+
+#: loco:608eb84aa85c4f4df56b8c03
+msgid "Cancel my poll vote"
+msgstr ""
+
+#: loco:608eb84aa85c4f4df56b8c04
+#, python-format
+msgid "<a href=\"%(login_url)s\">Login</a> to vote and view results."
+msgstr ""
+
+#: loco:608eb84aa85c4f4df56b8c05
+msgid "Include a poll"
+msgstr ""
+
+#: loco:608eb84aa85c4f4df56b8c06
+msgid "Poll"
 msgstr ""
