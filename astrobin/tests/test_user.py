@@ -184,19 +184,21 @@ class UserTest(TestCase):
         # Test "acquisition time" sorting
         image1 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE1")
         image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
+        image3 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE3")
         acquisition1 = Acquisition.objects.create(image=image1, date=today)
         acquisition2 = Acquisition.objects.create(
             image=image2, date=today + timedelta(days=1))
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=acquired")
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(
-            response.content.find("IMAGE2") < response.content.find("IMAGE1"), True)
+        self.assertTrue(response.content.find("IMAGE2") > response.content.find("IMAGE1"))
+        self.assertNotContains(response, "IMAGE3")
 
         acquisition1.delete()
         acquisition2.delete()
         image1.delete()
         image2.delete()
+        image3.delete()
 
         # Test "subject type" sub-section
         image1 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE1_DEEP")

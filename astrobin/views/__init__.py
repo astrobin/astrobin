@@ -1189,8 +1189,10 @@ def user_page(request, username):
                       'WHERE date IS NOT NULL AND image_id = astrobin_image.id ' \
                       'ORDER BY date DESC ' \
                       'LIMIT 1'
-            qs = qs.extra(select={'last_acquisition_date': lad_sql},
-                          order_by=['-last_acquisition_date'])
+            qs = qs \
+                .filter(acquisition__isnull=False) \
+                .extra(select={'last_acquisition_date': lad_sql}, order_by=['last_acquisition_date']) \
+                .distinct()
 
         ########
         # YEAR #
