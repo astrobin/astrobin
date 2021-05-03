@@ -184,7 +184,6 @@ class UserTest(TestCase):
         # Test "acquisition time" sorting
         image1 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE1")
         image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
-        image3 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE3")
         acquisition1 = Acquisition.objects.create(image=image1, date=today)
         acquisition2 = Acquisition.objects.create(
             image=image2, date=today + timedelta(days=1))
@@ -192,7 +191,13 @@ class UserTest(TestCase):
             reverse('user_page', args=('user',)) + "?sub=acquired")
         self.assertEquals(response.status_code, 200)
         self.assertTrue(response.content.find("IMAGE2") < response.content.find("IMAGE1"))
+        self.assertNotContains(response,  "Images without an acquisition date are not shown")
+
+        image3 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE3")
+        response = self.client.get(
+            reverse('user_page', args=('user',)) + "?sub=acquired")
         self.assertNotContains(response, "IMAGE3")
+        self.assertContains(response, "Images without an acquisition date are not shown")
 
         acquisition1.delete()
         acquisition2.delete()

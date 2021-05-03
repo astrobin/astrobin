@@ -1427,6 +1427,7 @@ def user_page(request, username):
         'stats': data['stats'] if 'stats' in data else None,
         'alias': 'gallery',
         'corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user),
+        'public_images_without_acquisition': UserService(user).get_public_images().filter(acquisition__isnull=True),
     }
 
     try:

@@ -82,7 +82,7 @@
         </div>
 
         <div class="span9 user-gallery"> <!-- images -->
-            {% if subsection == 'acquired' %}
+            {% if subsection == 'acquired' and public_images_without_acquisition|length > 0 %}
                 <div class="alert alert-info">
                     <i class="icon-info-sign"></i>
                     {% blocktrans trimmed %}
