@@ -20,6 +20,8 @@ from django.utils.translation import ugettext_lazy as _, gettext, override
 from gadjo.requestprovider.signals import get_request
 from persistent_messages.models import Message
 from pybb.models import Forum, Topic, Post, TopicReadTracker
+from pybb.permissions import perms
+from pybb.util import get_pybb_profile
 from rest_framework.authtoken.models import Token
 from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete
@@ -579,7 +581,7 @@ m2m_changed.connect(group_members_changed, sender=Group.members.through)
 
 def group_images_changed(sender, instance, **kwargs):
     if kwargs['action'] == 'post_add' and 'pk_set' in kwargs:
-        for i in sender.group.get_queryset().filter(pk__in=kwargs.get('pk_set'), autosubmission = True).iterator():
+        for i in sender.group.get_queryset().filter(pk__in=kwargs.get('pk_set'), autosubmission=True).iterator():
             i.save()  # trigger date_updated update
 
 
@@ -670,6 +672,9 @@ def forum_post_pre_save(sender, instance, **kwargs):
 
         cache.set("user.%d.forum_post_pre_save_mentions" % instance.user.pk, mentions, 2)
 
+        if not instance.on_moderation and Post.objects.filter(pk=instance.pk, on_moderation=True).exists():
+            cache.set("user.%d.forum_post_pre_save_approved" % instance.user.pk, True, 2)
+
     for attribute in ['body', 'body_text', 'body_html']:
         for language in settings.LANGUAGES:
             with override(language[0]):
@@ -695,12 +700,40 @@ pre_save.connect(forum_post_pre_save, sender=Post)
 
 
 def forum_post_post_save(sender, instance, created, **kwargs):
+    def notify_subscribers():
+        push_notification(
+            list(instance.topic.subscribers.exclude(pk=instance.user.pk)),
+            instance.user,
+            'new_forum_reply',
+            {
+                'user': instance.user.userprofile.get_display_name(),
+                'user_url': settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user}),
+                'post_url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
+                'topic_url': build_notification_url(
+                    settings.BASE_URL + instance.topic.get_absolute_url(), instance.user),
+                'topic_name': instance.topic.name,
+                'unsubscribe_url': build_notification_url(
+                    settings.BASE_URL + reverse_url('pybb:delete_subscription', args=[instance.topic.id]), instance.user)
+            }
+        )
+
     if created:
         mentions = MentionsService.get_mentions(instance.body)
+
         if hasattr(instance.topic.forum, 'group'):
             instance.topic.forum.group.save()  # trigger date_updated update
+
+        if get_pybb_profile(instance.user).autosubscribe and \
+                perms.may_subscribe_topic(instance.user, instance.topic):
+            instance.topic.subscribers.add(instance.user)
+
+        if not instance.on_moderation:
+            notify_subscribers()
     else:
         mentions = cache.get("user.%d.forum_post_pre_save_mentions" % instance.user.pk, [])
+
+        if cache.get("user.%d.forum_post_pre_save_approved" % instance.user.pk):
+            notify_subscribers()
 
     for username in mentions:
         try:

@@ -1,3 +1,4 @@
+PYBB_DISABLE_NOTIFICATIONS = True
 PYBB_BODY_CLEANERS = []
 PYBB_DEFAULT_TITLE = "AstroBin Forum"
 PYBB_DEFAULT_FROM_EMAIL = "AstroBin Forum <noreply@astrobin.com>"
