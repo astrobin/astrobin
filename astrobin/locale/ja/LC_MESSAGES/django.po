@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-02 09:30+0000\n"
+"POT-Creation-Date: 2021-05-03 20:04+0000\n"
 "PO-Revision-Date: 2020-11-27 01:58+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4935,6 +4935,32 @@ msgstr ""
 
 #, python-format
 msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> replied in topic to which you are "
+"subscribed."
+msgstr ""
+
+#, python-format
+msgid ""
+"Follow <a href=\"%(post_url)s\">this link</a> to see the new post on the "
+"topic <a href=\"%(topic_url)s\">%(topic_name)s</a>."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you don't want to receive notifications on new posts in this topic visit "
+"<a href=\"%(unsubscribe_url)s\">this link.</a>"
+msgstr ""
+
+#, python-format
+msgid "<strong>%(user)s</strong> replied in topic to which you are subscribed"
+msgstr ""
+
+#, python-format
+msgid "%(user)s replied in topic to which you are subscribed"
+msgstr ""
+
+#, python-format
+msgid ""
 "%(inviter)s invited you to join the group: \"%(group_name)s\"\n"
 "\n"
 "Visit the group here: <a href=\"%(group_page)s\">%(group_page)s</a>"
@@ -5846,6 +5872,11 @@ msgid "AstroBin would like to offer you its sincerest apologies. :("
 msgstr ""
 
 msgid "Okay, don't show this again"
+msgstr ""
+
+msgid ""
+"Images without an acquisition date are not shown when sorting by acquisition "
+"date."
 msgstr ""
 
 msgid "These images don't have enough data. It's a shame..."
