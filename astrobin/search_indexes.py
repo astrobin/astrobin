@@ -713,7 +713,10 @@ class ForumTopicIndex(SearchIndex, Indexable):
         return Topic
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(on_moderation=False)
+        return self.get_model().objects.filter(
+            on_moderation=False,
+            forum__hidden=False,
+            forum__category__hidden=False)
 
     def get_updated_field(self):
         return "updated"
@@ -728,7 +731,10 @@ class ForumPostIndex(SearchIndex, Indexable):
         return Post
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(on_moderation=False)
+        return self.get_model().objects.filter(
+            on_moderation=False,
+            topic__forum__hidden=False,
+            topic__forum__category__hidden=False)
 
     def get_updated_field(self):
         return "updated"
