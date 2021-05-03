@@ -1191,7 +1191,7 @@ def user_page(request, username):
                       'LIMIT 1'
             qs = qs \
                 .filter(acquisition__isnull=False) \
-                .extra(select={'last_acquisition_date': lad_sql}, order_by=['last_acquisition_date']) \
+                .extra(select={'last_acquisition_date': lad_sql}, order_by=['-last_acquisition_date']) \
                 .distinct()
 
         ########
