@@ -181,6 +181,12 @@ NOTICE_TYPES = (
         2
     ),
     (
+        'new_forum_reply',
+        _('New reply in a subscribed forum topic'),
+        '',
+        2,
+    ),
+    (
         'new_forum_post_mention',
         _('You were mentioned in a forum post'),
         '',

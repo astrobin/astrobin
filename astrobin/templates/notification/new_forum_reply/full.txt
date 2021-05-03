@@ -1,0 +1,16 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    <a href="{{user_url}}">{{user}}</a> replied in topic to which you are subscribed.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Follow <a href="{{post_url}}">this link</a> to see the new post on the topic
+    <a href="{{topic_url}}">{{topic_name}}</a>.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    If you don't want to receive notifications on new posts in this topic visit
+    <a href="{{unsubscribe_url}}">this link.</a>
+{% endblocktrans %}
+
