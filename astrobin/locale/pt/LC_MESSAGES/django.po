@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-05 15:32+0200\n"
-"PO-Revision-Date: 2021-05-02 16:35+0200\n"
+"PO-Revision-Date: 2021-05-03 22:15+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Portuguese\n"
 "Language: pt\n"
@@ -8568,4 +8568,41 @@ msgstr ""
 
 #: loco:608eb84aa85c4f4df56b8c06
 msgid "Poll"
+msgstr ""
+
+#: loco:609058fad4fdf61cc210f0a2
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> replied in topic to which you are "
+"subscribed."
+msgstr ""
+
+#: loco:609058fad4fdf61cc210f0a3
+#, python-format
+msgid ""
+"Follow <a href=\"%(post_url)s\">this link</a> to see the new post on the "
+"topic <a href=\"%(topic_url)s\">%(topic_name)s</a>."
+msgstr ""
+
+#: loco:609058fad4fdf61cc210f0a4
+#, python-format
+msgid ""
+"If you don't want to receive notifications on new posts in this topic visit "
+"<a href=\"%(unsubscribe_url)s\">this link.</a>"
+msgstr ""
+
+#: loco:609058fad4fdf61cc210f0a5
+#, python-format
+msgid "<strong>%(user)s</strong> replied in topic to which you are subscribed"
+msgstr ""
+
+#: loco:609058fad4fdf61cc210f0a6
+#, python-format
+msgid "%(user)s replied in topic to which you are subscribed"
+msgstr ""
+
+#: loco:609058fad4fdf61cc210f0a7
+msgid ""
+"Images without an acquisition date are not shown when sorting by acquisition "
+"date."
 msgstr ""
