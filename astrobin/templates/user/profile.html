@@ -82,13 +82,24 @@
         </div>
 
         <div class="span9 user-gallery"> <!-- images -->
-            {% if subsection == 'nodata' %}
-            <div class="well">
-                {% blocktrans %}These images don't have enough data. It's a shame...{% endblocktrans %}
-                {% if request.user == requested_user %}
-                    {% blocktrans %}If you want your images to be categorized in albums, you should really fill in some data. Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions are very important too.{% endblocktrans %}
-                {% endif %}
-            </div>
+            {% if subsection == 'acquired' %}
+                <div class="alert alert-info">
+                    <i class="icon-info-sign"></i>
+                    {% blocktrans trimmed %}
+                        Images without an acquisition date are not shown when sorting by acquisition date.
+                    {% endblocktrans %}
+                </div>
+            {% elif subsection == 'nodata' %}
+                <div class="well">
+                    {% blocktrans trimmed %}These images don't have enough data. It's a shame...{% endblocktrans %}
+                    {% if request.user == requested_user %}
+                        {% blocktrans trimmed %}
+                            If you want your images to be categorized in albums, you should really fill in some data.
+                            Imaging telescopes, imaging cameras and subjects are the bare minimum. Dates of acquisitions
+                            are very important too.
+                        {% endblocktrans %}
+                    {% endif %}
+                </div>
             {% endif %}
 
             {% if section == 'recovered' %}
