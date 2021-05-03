@@ -191,7 +191,7 @@ class UserTest(TestCase):
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=acquired")
         self.assertEquals(response.status_code, 200)
-        self.assertTrue(response.content.find("IMAGE2") > response.content.find("IMAGE1"))
+        self.assertTrue(response.content.find("IMAGE2") < response.content.find("IMAGE1"))
         self.assertNotContains(response, "IMAGE3")
 
         acquisition1.delete()
