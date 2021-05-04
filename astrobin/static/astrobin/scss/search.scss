@@ -1,11 +1,5 @@
 body#search {
 
-  .main-search-input {
-    width: calc(100% - 34px);
-    color: #bbb;
-    padding: 16px;
-  }
-
   .search-filters-app {
     position: relative;
     margin-bottom: 30px;
@@ -102,13 +96,32 @@ body#search {
     align-items: center;
 
     label {
-      margin-bottom: 0;
-      margin-right: 5px;
+      label {
+        margin-bottom: 0;
+        margin-right: 5px;
 
-      &:not(:first-child) {
-        margin-left: 10px;
+        &:not(:first-child) {
+          margin-left: 10px;
+        }
       }
     }
   }
 
+  .basic-search-form {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    input[type="text"] {
+      flex: 1;
+      color: #bbb;
+      margin: 0;
+      padding: 16px;
+    }
+
+    .btn {
+      height: 56px;
+      margin-left: .5rem;
+    }
+  }
 }
