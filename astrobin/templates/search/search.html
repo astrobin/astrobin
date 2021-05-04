@@ -116,12 +116,15 @@
     {% include "ads/full_width_wide_ad.html" %}
 
     {% if not request.user|can_access_advanced_search %}
-        <form action="{% url 'haystack_search' %}" method="get">
+        <form action="{% url 'haystack_search' %}" method="get" class="basic-search-form">
             <input type="text"
                    name="q"
-                   class="main-search-input"
                    value="{{ request.GET.q }}"
                    placeholder="{% trans "Search for celestial objects, equipment items, users, etc..." %}" />
+            <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit">
+                {% trans "Search" %}
+                {% button_loading_indicator %}
+            </button>
         </form>
     {% endif %}
 
