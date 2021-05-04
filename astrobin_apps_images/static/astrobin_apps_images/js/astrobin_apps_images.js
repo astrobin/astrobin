@@ -2,6 +2,13 @@ $(document).ready(function () {
     window.loadAstroBinImages = function (fragment) {
         var tries = {};
 
+        if ($(".loading-correct-image-size").length > 0) {
+            setTimeout(function () {
+                window.loadAstroBinImages(fragment);
+            }, 100);
+            return;
+        }
+
         $(fragment).find('img.astrobin-image').each(function () {
             var $img = $(this),
                 randomTimeout = Math.floor(Math.random() * 100) + 100, // 100-200 ms
