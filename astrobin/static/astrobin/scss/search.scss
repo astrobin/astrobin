@@ -134,6 +134,7 @@ body#search {
 
         &.tooltip-fixed {
           margin-bottom: 2rem;
+
           .noUi-tooltip {
             display: block !important;
             bottom: unset;
@@ -220,5 +221,9 @@ body#search {
       height: 56px;
       margin-left: .5rem;
     }
+  }
+
+  ul.astrobin-thumbnails {
+    justify-content: center;
   }
 }

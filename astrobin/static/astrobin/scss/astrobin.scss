@@ -211,9 +211,9 @@ ul.astrobin-thumbnails {
   clear: both;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
 
   @media screen and (max-width: 767px) {
+    justify-content: center;
     padding-left: .5rem;
     padding-right: .5rem;
   }
