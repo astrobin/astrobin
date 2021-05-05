@@ -9,6 +9,13 @@ body#search {
       flex-flow: column wrap;
     }
 
+    #search-app {
+      text-align: center;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    #search-app,
     .search-filters-app {
       flex: 1;
 
