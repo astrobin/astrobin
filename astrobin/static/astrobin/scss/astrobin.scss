@@ -4041,6 +4041,19 @@ table.api-examples {
       display: block;
     }
   }
+
+  .noUi-pips {
+    color: darken($grey-4, 15%);
+    font-size: 11px;
+
+    .noUi-marker-large {
+      background: darken($grey-4, 15%);
+    }
+
+    .noUi-marker-normal {
+      background: $grey-5;
+    }
+  }
 }
 
 .search-results {

@@ -42,7 +42,12 @@
                 step: 1,
                 tooltips: true,
                 connect: true,
-                behaviour: 'tap-drag'
+                behaviour: 'tap-drag',
+                pips: {
+                    mode: 'count',
+                    values: 7,
+                    density: 2
+                }
             });
 
             slider.on("change", function () {
