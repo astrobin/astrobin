@@ -63,33 +63,47 @@ body#search {
       }
     }
 
+    .accordion-inner {
+      padding: 0;
+
+      > form {
+        margin: 0;
+      }
+    }
+
+    .accordion-footer {
+      margin: 0;
+      padding: 1.5rem 1rem;
+      border-radius: 0 0 4px 4px;
+      text-align: center;
+    }
+
     .search-filter {
       display: block;
-      border: 1px solid #404040;
-      padding: 15px;
-      margin: 0 0 1rem 0;
+      padding: 1rem 1rem 1.75rem;
       position: relative;
       vertical-align: top;
-      width: calc(100% - 32px);
+      background: $grey-7;
 
       .search-filter-remove {
-        color: #6e4747;
+        color: $grey-5;
         position: absolute;
         right: 0;
         top: 0;
-        padding: 10px;
+        padding: .5rem;
         cursor: pointer;
+        font-size: 1.25rem;
 
         &:hover {
-          color: white;
+          color: $grey-2;
         }
       }
 
       .search-filter-title {
         color: white;
         background: #111;
-        padding: 10px;
-        margin: -15px -15px 12px -15px;
+        padding: .5rem 1rem;
+        margin: -1rem calc(-1rem - 1px) 1.5rem;
       }
 
       input, select {
