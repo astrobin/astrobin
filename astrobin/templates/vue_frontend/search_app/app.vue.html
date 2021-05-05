@@ -3,7 +3,7 @@
 {% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="app-template">
-    <div class="accordion search-filters-app">
+    <div class="accordion search-filters-app" :class="{collapsed: collapsed}">
         <div class="accordion-group">
 
             {% if request.user|can_access_advanced_search %}

@@ -1,24 +1,83 @@
+@import "variables";
+
 body#search {
+
+  .search-container {
+    display: flex;
+
+    @media screen and (max-width: 979px) {
+      flex-flow: wrap;
+    }
+
+    .search-filters-app {
+      flex: 1;
+
+      @media screen and (max-width: 979px) {
+        width: 100%;
+        margin-right: 0;
+      }
+
+      @media screen and (min-width: 980px) and (max-width: 1240px) {
+        width: 256px;
+        min-width: 256px;
+        max-width: 256px;
+      }
+
+      @media screen and (min-width: 1241px) {
+        width: 262px;
+        min-width: 262px;
+        max-width: 262px;
+      }
+    }
+  }
 
   .search-filters-app {
     position: relative;
-    margin-bottom: 30px;
+    margin-right: 1rem;
     z-index: 2;
 
+    @media screen and (min-width: 980px) {
+      &.collapsed {
+        width: 40px;
+        min-width: 40px;
+        max-width: 40px;
+
+        .accordion-toggle {
+          padding: 20px 15px;
+
+          span {
+            writing-mode: vertical-lr;
+            margin-left: -4px;
+          }
+
+          i {
+            margin-top: .75rem;
+            margin-left: 0;
+            transform: rotate(-90deg);
+          }
+        }
+
+        .accordion-group {
+          border: 0;
+        }
+      }
+    }
+
     .search-filter {
-      display: inline-block;
-      border: 1px dashed #494949;
+      display: block;
+      border: 1px solid #404040;
       padding: 15px;
-      margin: 0 10px 10px 0;
+      margin: 0 0 1rem 0;
       position: relative;
       vertical-align: top;
+      width: calc(100% - 32px);
 
       .search-filter-remove {
-        color: #848484;
+        color: #6e4747;
         position: absolute;
         right: 0;
         top: 0;
-        padding: 4px 8px;
+        padding: 10px;
         cursor: pointer;
 
         &:hover {
@@ -29,33 +88,8 @@ body#search {
       .search-filter-title {
         color: white;
         background: #111;
-        padding: 4px 30px 4px 8px;
+        padding: 10px;
         margin: -15px -15px 12px -15px;
-      }
-
-      .form-group {
-        height: 30px;
-        display: table-cell;
-        vertical-align: middle;
-
-        &.highlighted {
-          animation: pop-in 0.3s cubic-bezier(.36, .07, .19, .97) both;
-        }
-
-        &.slider-form-group {
-          .min-max {
-            margin-top: 1rem;
-            display: flex;
-            justify-content: space-between;
-
-            .min,
-            .max {
-              * {
-                display: inline-block;
-              }
-            }
-          }
-        }
       }
 
       input, select {
@@ -70,25 +104,16 @@ body#search {
       }
 
       .slider-filter {
-        width: 150px;
         padding: 0 8px;
-
-        &#field-radius-slider,
-        &#coord-ra-slider,
-        &#coord-dec-slider {
-          @media screen and (min-width: 481px) {
-            // This must be quite large because otherwise it's too difficult to set finely.
-            width: 300px;
-          }
-        }
       }
 
-      @media screen and (max-width: 480px) {
+      .form-group {
+        height: auto;
         display: block;
+        vertical-align: middle;
 
-        .form-group {
-          display: block;
-          height: auto;
+        &.highlighted {
+          animation: pop-in 0.3s cubic-bezier(.36, .07, .19, .97) both;
         }
 
         input:not([type='checkbox']):not(.slider-input),
@@ -96,15 +121,49 @@ body#search {
           width: 100%;
         }
 
-        input[type='text'] {
-          width: calc(100% - 14px);
+        .slider-input {
+          width: 50px;
         }
+
+        input[type='text'] {
+          width: calc(100% - 14px) !important;
+        }
+
+        &.slider-form-group {
+          .min-max {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+
+            .min,
+            .max {
+              * {
+                display: inline-block;
+              }
+
+              label {
+                color: $grey-4;
+              }
+            }
+          }
+        }
+      }
+
+      .multiselect--above .multiselect__content-wrapper,
+      .multiselect__content-wrapper {
+        min-width: calc(100% - 2px);
+        width: auto;
+      }
+
+      .multiselect__input:focus {
+        box-shadow: none;
       }
     }
   }
 
-  .date-published-filter .datepickerclass:first-child {
-    margin-right: .5rem !important;
+  .date-published-filter .datepickerclass:first-child,
+  .date-acquired-filter .datepickerclass:first-child {
+    margin-bottom: .5rem !important;
   }
 
   .search-integration-time-form-group {
