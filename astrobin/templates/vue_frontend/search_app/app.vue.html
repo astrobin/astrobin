@@ -168,12 +168,7 @@
         el: '#search-app',
         template: "#app-template",
         data: {
-            collapsed:
-                {% if request.GET.q == None %}
-                    true
-                {% else %}
-                    false
-                {% endif %},
+            collapsed: window.innerWidth < 768,
 
             q: "{{ request.GET.q }}",
             searchDomain:
