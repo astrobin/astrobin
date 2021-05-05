@@ -6,7 +6,7 @@ body#search {
     display: flex;
 
     @media screen and (max-width: 979px) {
-      flex-flow: wrap;
+      flex-flow: column wrap;
     }
 
     .search-filters-app {
@@ -130,6 +130,10 @@ body#search {
           animation: pop-in 0.3s cubic-bezier(.36, .07, .19, .97) both;
         }
 
+        > input[type='text'] {
+          width: calc(100% - 1rem) !important;
+        }
+
         input:not([type='checkbox']):not(.slider-input),
         .slider-filter {
           width: 100%;
@@ -137,10 +141,6 @@ body#search {
 
         .slider-input {
           width: 50px;
-        }
-
-        input[type='text'] {
-          width: calc(100% - 14px) !important;
         }
 
         &.slider-form-group {
