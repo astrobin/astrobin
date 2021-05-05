@@ -80,7 +80,7 @@ body#search {
 
     .search-filter {
       display: block;
-      padding: 1rem 1rem 1.75rem;
+      padding: 1.5rem 1rem 1.75rem;
       position: relative;
       vertical-align: top;
       background: $grey-7;
@@ -100,10 +100,10 @@ body#search {
       }
 
       .search-filter-title {
-        color: white;
+        color: $grey-2;
         background: #111;
         padding: .5rem 1rem;
-        margin: -1rem calc(-1rem - 1px) 1.5rem;
+        margin: -1.5rem calc(-1rem - 1px) 2rem;
       }
 
       input, select {
