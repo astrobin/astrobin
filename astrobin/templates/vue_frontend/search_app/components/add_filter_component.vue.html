@@ -6,7 +6,7 @@
         <div class="search-filter-widget">
             <div class="form-group">
                 <v-multiselect v-model="value" @input="onAddFilter" :options="options" track-by="name" label="label"
-                               selectLabel="" deselectLabel="" :searchable="false" placeholder="{% trans "Select" %}">
+                               selectLabel="" deselectLabel="" :searchable="true" placeholder="{% trans "Select" %}">
                 </v-multiselect>
             </div>
         </div>
@@ -22,7 +22,9 @@
         data: function () {
             return {
                 value: null,
-                options: this.availableFilters
+                options: this.availableFilters.sort(function compare(a, b) {
+                    return a.label > b.label
+                })
             }
         },
         methods: {
@@ -33,7 +35,9 @@
         },
         watch: {
             availableFilters: function(newValue) {
-                this.options = newValue;
+                this.options = newValue.sort(function compare(a, b) {
+                    return a.label > b.label
+                });
             }
         }
     });
