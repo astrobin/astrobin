@@ -3,7 +3,7 @@
 <script type="text/x-template" id="coord-ra-filter-template">
     {% if request.user|can_access_full_search %}
         <div class="form-group" :class="{highlighted: highlighted}">
-            <div id="coord-ra-slider" class="slider-filter"></div>
+            <div id="coord-ra-slider" class="slider-filter tooltip-fixed"></div>
 
             <input id="coord-ra-min-value" name="coord_ra_min" type="hidden" :value="coordRaMin" />
             <input id="coord-ra-max-value" name="coord_ra_max" type="hidden" :value="coordRaMax" />
@@ -37,12 +37,22 @@
                 start: [this.coordRaMin, this.coordRaMax],
                 range: {min: 0, max: 360},
                 step: 15.0 / 12.0, // Step in degrees. Equal to 1h/12 = 5m.
-                tooltips: [{to: raFmt}, {to: raFmt}]
+                tooltips: [{to: raFmt}, {to: raFmt}],
+                connect: true,
+                behaviour: 'tap-drag'
             });
 
             slider.on("change", function () {
                 $("#coord-ra-min-value").val(slider.get()[0]);
                 $("#coord-ra-max-value").val(slider.get()[1]);
+            });
+
+            $("#coord-ra-min-value").on("change", function () {
+                slider.set([$("#icoord-ra-min-value").val(), $("#coord-ra-max-value").val()]);
+            });
+
+            $("#integration-time-max-value").on("change", function () {
+                slider.set([$("#coord-ra-min-value").val(), $("#coord-ra-max-value").val()]);
             });
         }
     });

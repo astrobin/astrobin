@@ -3,7 +3,7 @@
 <script type="text/x-template" id="pixel-scale-filter-template">
     {% if request.user|can_access_full_search %}
         <div class="form-group" :class="{highlighted: highlighted}">
-            <div id="pixel-scale-slider" class="slider-filter"></div>
+            <div id="pixel-scale-slider" class="slider-filter tooltip-fixed"></div>
 
             <input id="pixel-scale-min-value" name="pixel_scale_min" type="hidden" :value="pixelScaleMin" />
             <input id="pixel-scale-max-value" name="pixel_scale_max" type="hidden" :value="pixelScaleMax" />
@@ -28,12 +28,22 @@
                 start: [this.pixelScaleMin, this.pixelScaleMax],
                 range: {min: 0, max: 10},
                 step: 0.1,
-                tooltips: true
+                tooltips: true,
+                connect: true,
+                behaviour: 'tap-drag'
             });
 
             slider.on("change", function () {
                 $("#pixel-scale-min-value").val(slider.get()[0]);
                 $("#pixel-scale-max-value").val(slider.get()[1]);
+            });
+
+            $("#pixel-scale-min-value").on("change", function () {
+                slider.set([$("#pixel-scale-min-value").val(), $("#pixel-scale-max-value").val()]);
+            });
+
+            $("#pixel-scale-max-value").on("change", function () {
+                slider.set([$("#pixel-scale-min-value").val(), $("#pixel-scale-max-value").val()]);
             });
         }
     });

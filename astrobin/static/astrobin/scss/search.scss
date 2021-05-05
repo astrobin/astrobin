@@ -119,6 +119,15 @@ body#search {
 
       .slider-filter {
         padding: 0 8px;
+
+        &.tooltip-fixed {
+          margin-bottom: 2rem;
+          .noUi-tooltip {
+            display: block !important;
+            bottom: unset;
+            top: 120%;
+          }
+        }
       }
 
       .form-group {
@@ -181,22 +190,6 @@ body#search {
   .date-published-filter .datepickerclass:first-child,
   .date-acquired-filter .datepickerclass:first-child {
     margin-bottom: .5rem !important;
-  }
-
-  .search-integration-time-form-group {
-    display: flex !important;
-    align-items: center;
-
-    label {
-      label {
-        margin-bottom: 0;
-        margin-right: 5px;
-
-        &:not(:first-child) {
-          margin-left: 10px;
-        }
-      }
-    }
   }
 
   .basic-search-form {

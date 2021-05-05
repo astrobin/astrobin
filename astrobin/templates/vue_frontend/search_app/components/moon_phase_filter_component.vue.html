@@ -1,9 +1,22 @@
+{% load i18n %}
+
 <script type="text/x-template" id="moon-phase-filter-template">
-    <div class="form-group" :class="{highlighted: highlighted}">
+    <div class="form-group slider-form-group" :class="{highlighted: highlighted}">
         <div id="moon-phase-slider" class="slider-filter"></div>
 
-        <input id="moon-phase-min-value" name="moon_phase_min" type="hidden" :value="moonPhaseMin" />
-        <input id="moon-phase-max-value" name="moon_phase_max" type="hidden" :value="moonPhaseMax" />
+        <div class="min-max">
+            <div class="min">
+                <input class="slider-input" id="moon-phase-min-value" name="moon_phase_min" type="number"
+                       min="0" max="100" step=".01" :value="moonPhaseMin" />
+                <label for="moon-phase-min-value">{% trans 'Min' %}</label>
+            </div>
+
+            <div class="max">
+                <label for="moon-phase-max-value">{% trans 'Max' %}</label>
+                <input class="slider-input" id="moon-phase-max-value" name="moon_phase_max" type="number"
+                       min="0" max="100" step=".01" :value="moonPhaseMax" />
+            </div>
+        </div>
     </div>
 </script>
 
@@ -22,12 +35,23 @@
                 start: [this.moonPhaseMin, this.moonPhaseMax],
                 range: {min: 0, max: 100},
                 step: 1,
-                tooltips: true
+                tooltips: true,
+                connect: true,
+                behaviour: 'tap-drag'
             });
 
             slider.on("change", function () {
                 $("#moon-phase-min-value").val(slider.get()[0]);
                 $("#moon-phase-max-value").val(slider.get()[1]);
+            });
+
+
+            $("#moon-phase-min-value").on("change", function () {
+                slider.set([$("#moon-phase-min-value").val(), $("#moon-phase-max-value").val()]);
+            });
+
+            $("#moon-phase-max-value").on("change", function () {
+                slider.set([$("#moon-phase-min-value").val(), $("#moon-phase-max-value").val()]);
             });
         }
     });

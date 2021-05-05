@@ -10,11 +10,11 @@
                 <div class="min">
                     <input class="slider-input" id="field-radius-min-value" name="field_radius_min" type="number"
                            min="0" max="180" step=".01" :value="fieldRadiusMin" />
-                    <label for="field-radius-min-value">{% trans 'min' %}</label>
+                    <label for="field-radius-min-value">{% trans 'Min' %}</label>
                 </div>
 
                 <div class="max">
-                    <label for="field-radius-min-value">{% trans 'max' %}</label>
+                    <label for="field-radius-min-value">{% trans 'Max' %}</label>
                     <input class="slider-input" id="field-radius-max-value" name="field_radius_max" type="number"
                            min="0" max="180" step=".01" :value="fieldRadiusMax" />
                 </div>
@@ -51,11 +51,11 @@
             });
 
             $("#field-radius-min-value").on("change", function() {
-                slider.set($("#field-radius-min-value").val(), $("#field-radius-max-value").val());
+                slider.set([$("#field-radius-min-value").val(), $("#field-radius-max-value").val()]);
             });
 
             $("#field-radius-max-value").on("change", function () {
-                slider.set($("#field-radius-min-value").val(), $("#field-radius-max-value").val());
+                slider.set([$("#field-radius-min-value").val(), $("#field-radius-max-value").val()]);
             });
         }
     });
