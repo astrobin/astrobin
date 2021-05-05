@@ -1,3 +1,5 @@
+@import "variables";
+
 .multiselect * {
   box-sizing: initial;
   cursor: pointer;
@@ -38,6 +40,7 @@
 
 .multiselect--above .multiselect__content-wrapper,
 .multiselect__content-wrapper {
+  min-width: calc(100% - 2px);
   width: auto;
   background: #404040;
   border-color: $grey-7;
@@ -52,18 +55,15 @@
 }
 
 .multiselect__tags {
-  padding-top: 0;
+  padding-top: 4px;
+  padding-bottom: 3px;
   border-color: $grey-7;
   background: #404040;
   color: #f0f0f0;
 }
 
-.multiselect__tags-wrap {
-  padding: 2px;
-}
-
 .multiselect__tag {
-  margin-top: 2px;
+  margin-top: 4px;
   margin-bottom: 0;
   font-size: 13px;
   background-color: $link-color;
@@ -125,4 +125,8 @@
 
 .multiselect__option--highlight {
   background-color: lighten($link-color, 5%);
+}
+
+.multiselect__input:focus {
+  box-shadow: none;
 }
