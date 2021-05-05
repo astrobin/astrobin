@@ -76,6 +76,11 @@ body#search {
       padding: 1.5rem 1rem;
       border-radius: 0 0 4px 4px;
       text-align: center;
+
+      .result-count {
+        margin-top: 1rem;
+        color: $grey-4;
+      }
     }
 
     .search-filter {

@@ -144,7 +144,7 @@
                             </button>
 
                             {% if paginator and request.GET.q and paginator.count > 100 %}
-                                <span class="result-count pull-right">
+                                <span class="result-count">
                                     {% trans "Results" %}: ~{{ paginator.count }}
                                 </span>
                             {% endif %}
