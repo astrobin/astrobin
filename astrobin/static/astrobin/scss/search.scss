@@ -41,6 +41,21 @@ body#search {
         &.highlighted {
           animation: pop-in 0.3s cubic-bezier(.36, .07, .19, .97) both;
         }
+
+        &.slider-form-group {
+          .min-max {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+
+            .min,
+            .max {
+              * {
+                display: inline-block;
+              }
+            }
+          }
+        }
       }
 
       input, select {
@@ -76,7 +91,8 @@ body#search {
           height: auto;
         }
 
-        input:not([type='checkbox']), .slider-filter {
+        input:not([type='checkbox']):not(.slider-input),
+        .slider-filter {
           width: 100%;
         }
 

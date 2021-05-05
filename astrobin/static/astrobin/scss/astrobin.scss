@@ -4024,6 +4024,10 @@ table.api-examples {
   box-shadow: none;
   z-index: 0;
 
+  .noUi-connect {
+    background: $link-color;
+  }
+
   .noUi-handle, .noUi-tooltip {
     border-color: #202020;
     background: #595959;

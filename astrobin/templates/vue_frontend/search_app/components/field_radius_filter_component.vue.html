@@ -1,12 +1,24 @@
+{% load i18n %}
 {% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="field-radius-filter-template">
     {% if request.user|can_access_full_search %}
-        <div class="form-group" :class="{highlighted: highlighted}">
+        <div class="form-group slider-form-group" :class="{highlighted: highlighted}">
             <div id="field-radius-slider" class="slider-filter"></div>
 
-            <input id="field-radius-min-value" name="field_radius_min" type="hidden" :value="fieldRadiusMin" />
-            <input id="field-radius-max-value" name="field_radius_max" type="hidden" :value="fieldRadiusMax" />
+            <div class="min-max">
+                <div class="min">
+                    <input class="slider-input" id="field-radius-min-value" name="field_radius_min" type="number"
+                           min="0" max="180" step=".01" :value="fieldRadiusMin" />
+                    <label for="field-radius-min-value">{% trans 'min' %}</label>
+                </div>
+
+                <div class="max">
+                    <label for="field-radius-min-value">{% trans 'max' %}</label>
+                    <input class="slider-input" id="field-radius-max-value" name="field_radius_max" type="number"
+                           min="0" max="180" step=".01" :value="fieldRadiusMax" />
+                </div>
+            </div>
         </div>
     {% else %}
         {% include "./_filter_not_allowed.html" %}
@@ -28,12 +40,22 @@
                 start: [this.fieldRadiusMin, this.fieldRadiusMax],
                 range: {min: 0, max: 180},
                 step: 1,
-                tooltips: true
+                tooltips: true,
+                connect: true,
+                behaviour: 'tap-drag'
             });
 
             slider.on("change", function () {
                 $("#field-radius-min-value").val(slider.get()[0]);
                 $("#field-radius-max-value").val(slider.get()[1]);
+            });
+
+            $("#field-radius-min-value").on("change", function() {
+                slider.set($("#field-radius-min-value").val(), $("#field-radius-max-value").val());
+            });
+
+            $("#field-radius-max-value").on("change", function () {
+                slider.set($("#field-radius-min-value").val(), $("#field-radius-max-value").val());
             });
         }
     });
