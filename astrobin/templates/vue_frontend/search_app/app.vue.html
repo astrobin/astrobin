@@ -343,7 +343,8 @@
             allFilters: [
                 {
                     name: "q",
-                    label: "{% trans "Search terms" %}"
+                    label: "{% trans "Search terms" %}",
+                    removable: true
                 },
                 {
                     name: "subject",
@@ -365,7 +366,8 @@
                 },
                 {
                     name: "d",
-                    label: "{% trans "Search domain" %}"
+                    label: "{% trans "Search domain" %}",
+                    removable: true
                 },
                 {
                     name: "t",
@@ -496,32 +498,31 @@
             enabledFilters: []
         },
         created: function () {
-            this.enabledFilters.push(this.getFilterByName("q"));
-            this.enabledFilters.push(this.getFilterByName("d"));
-
-            if (this.subject) {
-                this.enabledFilters.push(this.getFilterByName("subject"));
-            }
-
-            if (this.telescope) {
-                this.enabledFilters.push(this.getFilterByName("telescope"));
-            }
-
-            if (this.camera) {
-                this.enabledFilters.push(this.getFilterByName("camera"));
-            }
-
             if (this.searchDomain === undefined) {
                 this.searchDomain = "i";
-            }
-
-            if (this.searchDomain === "i") {
-                this.enabledFilters.push(this.getFilterByName("t"));
             }
 
             if (this.searchBy === undefined) {
                 this.searchBy = "all";
             }
+
+            this.enabledFilters.push(this.getFilterByName("q"));
+
+            {% if request.user|can_access_advanced_search %}
+                if (this.isImageSearch()) {
+                    this.enabledFilters.push(this.getFilterByName("subject"));
+                    this.enabledFilters.push(this.getFilterByName("telescope"));
+                    this.enabledFilters.push(this.getFilterByName("camera"));
+                } else {
+                    this.enabledFilters.push(this.getFilterByName("d"));
+                }
+            {% else %}
+                this.enabledFilters.push(this.getFilterByName("d"));
+
+                if (this.searchDomain === "i") {
+                    this.enabledFilters.push(this.getFilterByName("t"));
+                }
+            {% endif %}
 
             if (this.animated) {
                 this.enabledFilters.push(this.getFilterByName("animated"));
@@ -650,7 +651,10 @@
                 this.searchDomain = val;
                 if (this.searchDomain !== "i") {
                     this.enabledFilters = this.enabledFilters.filter(function (filter) {
-                        return !filter.removable;
+                        return [
+                            "q",
+                            "d"
+                        ].indexOf(filter.name) > -1
                     });
                 }
             }
