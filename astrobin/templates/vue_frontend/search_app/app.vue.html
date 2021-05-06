@@ -33,6 +33,9 @@
                                 <telescope-search-terms-filter v-if="filter.name === 'telescope'"
                                                              :telescope="telescope"></telescope-search-terms-filter>
 
+                                <camera-search-terms-filter v-if="filter.name === 'camera'"
+                                                               :camera="camera"></camera-search-terms-filter>
+
                                 <search-domain-filter v-if="filter.name === 'd'" :searchDomain="searchDomain"
                                                       @input="onSearchDomainChanged($event)"></search-domain-filter>
 
@@ -146,6 +149,14 @@
                 {% else %}
                     undefined
                 {% endif %},
+
+            camera:
+                {% if "camera" in request.GET %}
+                    "{{ request.GET.camera }}"
+                {% else %}
+                    undefined
+                {% endif %},
+
             searchDomain:
                 {% if "d" in request.GET %}
                     "{{ request.GET.d }}"
@@ -347,6 +358,12 @@
                     restricted: "ADVANCED"
                 },
                 {
+                    name: "camera",
+                    label: "{% trans "Camera" %}",
+                    removable: true,
+                    restricted: "ADVANCED"
+                },
+                {
                     name: "d",
                     label: "{% trans "Search domain" %}"
                 },
@@ -488,6 +505,10 @@
 
             if (this.telescope) {
                 this.enabledFilters.push(this.getFilterByName("telescope"));
+            }
+
+            if (this.camera) {
+                this.enabledFilters.push(this.getFilterByName("camera"));
             }
 
             if (this.searchDomain === undefined) {

@@ -51,6 +51,7 @@ FIELDS = (
     'constellation',
     'subject',
     'telescope',
+    'camera',
 
     # Sorting
     'sort'
@@ -109,6 +110,7 @@ class AstroBinSearchForm(SearchForm):
     constellation = forms.CharField(required=False)
     subject = forms.CharField(required=False)
     telescope = forms.CharField(required=False)
+    camera = forms.CharField(required=False)
 
     def __init__(self, *args, **kwargs):
         super(AstroBinSearchForm, self).__init__(args, kwargs)
@@ -395,6 +397,14 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filter_by_camera(self, results):
+        camera = self.cleaned_data.get("camera")
+
+        if camera is not None and camera != "":
+            results = results.filter(imaging_cameras=CustomContain(camera))
+
+        return results
+
     def sort(self, results):
         order_by = None
         domain = self.cleaned_data.get('d', 'i')
@@ -467,6 +477,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_constellation(sqs)
         sqs = self.filter_by_subject(sqs)
         sqs = self.filter_by_telescope(sqs)
+        sqs = self.filter_by_camera(sqs)
 
         sqs = self.sort(sqs)
 
