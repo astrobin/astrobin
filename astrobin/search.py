@@ -1,7 +1,10 @@
+import re
 import unicodedata
+from operator import or_
 
 from django import forms
 from django.contrib.auth.models import User
+from django.db.models import Q
 from haystack.forms import SearchForm
 from haystack.generic_views import SearchView
 from haystack.inputs import Clean, BaseInput
@@ -46,6 +49,7 @@ FIELDS = (
     'integration_time_min',
     'integration_time_max',
     'constellation',
+    'subject',
 
     # Sorting
     'sort'
@@ -102,6 +106,7 @@ class AstroBinSearchForm(SearchForm):
     integration_time_min = forms.FloatField(required=False)
     integration_time_max = forms.FloatField(required=False)
     constellation = forms.CharField(required=False)
+    subject = forms.CharField(required=False)
 
     def __init__(self, *args, **kwargs):
         super(AstroBinSearchForm, self).__init__(args, kwargs)
@@ -357,6 +362,29 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filter_by_subject(self, results):
+        subject = self.cleaned_data.get("subject")
+
+        if subject is not None and subject != "":
+            catalog_entries = []
+
+            regex = r"(?P<catalog>M|NGC|IC)(?P<id>\d+)"
+            matches = re.finditer(regex, subject, re.IGNORECASE)
+
+            for matchNum, match in enumerate(matches, start=1):
+                catalog_entries.append(match.string)
+
+                groups = match.groups()
+                catalog_entries.append("%s %s" % (groups[0], groups[1]))
+
+            if catalog_entries:
+                query = reduce(or_, (Q(objects_in_field__icontains=x) for x in catalog_entries))
+                results = results.filter(query)
+            else:
+                results = results.filter(objects_in_field__icontains=subject)
+
+        return results
+
     def sort(self, results):
         order_by = None
         domain = self.cleaned_data.get('d', 'i')
@@ -427,6 +455,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_telescope_type(sqs)
         sqs = self.filter_by_integration_time(sqs)
         sqs = self.filter_by_constellation(sqs)
+        sqs = self.filter_by_subject(sqs)
 
         sqs = self.sort(sqs)
 

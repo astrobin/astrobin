@@ -194,7 +194,7 @@
 
 {% else %}
 
-    {% if request.GET.q %}
+    {% if request.GET.q or request.GET.subject %}
         <div class="alert alert-warning">
             {% trans "No results. Sorry." %}
         </div>

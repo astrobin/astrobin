@@ -30,102 +30,131 @@
 
                                 <search-terms-filter
                                         v-if="filter.name === 'q'"
-                                        :q="q"></search-terms-filter>
+                                        :q="q">
+                                </search-terms-filter>
+
+                                <subject-search-terms-filter
+                                        v-if="filter.name === 'subject'"
+                                        :subject="subject">
+                                </subject-search-terms-filter>
 
                                 <search-domain-filter
                                         v-if="filter.name === 'd'"
                                         :searchDomain="searchDomain"
-                                        @input="onSearchDomainChanged($event)"></search-domain-filter>
+                                        @input="onSearchDomainChanged($event)">
+                                </search-domain-filter>
 
                                 <search-by-filter
                                         v-if="filter.name === 't'"
-                                        :searchBy="searchBy"></search-by-filter>
+                                        :searchBy="searchBy">
+                                </search-by-filter>
 
                                 <animated-filter
                                         v-if="filter.name === 'animated'"
-                                        :animated="animated"></animated-filter>
+                                        :animated="animated">
+                                </animated-filter>
 
                                 <award-filter
                                         v-if="filter.name === 'award'"
-                                        :award="award"></award-filter>
+                                        :award="award">
+                                </award-filter>
 
                                 <date-published-filter
                                         v-if="filter.name === 'date_published'"
                                         :date-published-min="datePublishedMin"
-                                        :date-published-max="datePublishedMax"></date-published-filter>
+                                        :date-published-max="datePublishedMax">
+                                </date-published-filter>
 
                                 <date-acquired-filter v-if="filter.name === 'date_acquired'"
                                        :date-acquired-min="dateAcquiredMin"
-                                       :date-acquired-max="dateAcquiredMax"></date-acquired-filter>
+                                       :date-acquired-max="dateAcquiredMax">
+                                </date-acquired-filter>
                 
                                 <camera-type-filter
                                         v-if="filter.name === 'camera_type'"
-                                        :camera-type="cameraType"></camera-type-filter>
+                                        :camera-type="cameraType">
+                                </camera-type-filter>
 
                                 <country-filter
                                         v-if="filter.name === 'country'"
-                                        :country="country"></country-filter>
+                                        :country="country">
+                                </country-filter>
 
                                 <acquisition-type-filter
                                         v-if="filter.name === 'acquisition_type'"
-                                        :acquisition-type="acquisitionType"></acquisition-type-filter>
+                                        :acquisition-type="acquisitionType">
+                                </acquisition-type-filter>
 
                                 <data-source-filter
                                         v-if="filter.name === 'data_source'"
-                                        :data-source="dataSource"></data-source-filter>
+                                        :data-source="dataSource">
+                                </data-source-filter>
 
                                 <field-radius-filter
                                         v-if="filter.name === 'field_radius'"
                                         :field-radius-min="fieldRadiusMin"
-                                        :field-radius-max="fieldRadiusMax"></field-radius-filter>
+                                        :field-radius-max="fieldRadiusMax">
+                                </field-radius-filter>
 
                                 <license-filter
                                         v-if="filter.name === 'license'"
-                                        :license="license"></license-filter>
+                                        :license="license">
+                                </license-filter>
 
                                 <minimum-data-filter
                                         v-if="filter.name === 'minimum_data'"
-                                        :minimum-data="minimumData"></minimum-data-filter>
+                                        :minimum-data="minimumData">
+                                </minimum-data-filter>
 
                                 <moon-phase-filter
                                         v-if="filter.name === 'moon_phase'"
                                         :moon-phase-min="moonPhaseMin"
-                                        :moon-phase-max="moonPhaseMax"></moon-phase-filter>
+                                        :moon-phase-max="moonPhaseMax">
+                                </moon-phase-filter>
 
                                 <coord-ra-filter
                                         v-if="filter.name === 'coord_ra'"
                                         :coord-ra-min="coordRaMin"
-                                        :coord-ra-max="coordRaMax"></coord-ra-filter>
+                                        :coord-ra-max="coordRaMax">
+                                </coord-ra-filter>
 
                                 <coord-dec-filter
                                         v-if="filter.name === 'coord_dec'"
                                         :coord-dec-min="coordDecMin"
-                                        :coord-dec-max="coordDecMax"></coord-dec-filter>
+                                        :coord-dec-max="coordDecMax">
+                                </coord-dec-filter>
 
                                 <pixel-scale-filter
                                         v-if="filter.name === 'pixel_scale'"
                                         :pixel-scale-min="pixelScaleMin"
-                                        :pixel-scale-max="pixelScaleMax"></pixel-scale-filter>
+                                        :pixel-scale-max="pixelScaleMax">
+                                </pixel-scale-filter>
 
                                 <remote-source-filter
                                         v-if="filter.name === 'remote_source'"
-                                        :remote-source="remoteSource"></remote-source-filter>
+                                        :remote-source="remoteSource">
+                                </remote-source-filter>
 
                                 <subject-type-filter
                                         v-if="filter.name === 'subject_type'"
-                                        :subject-type="subjectType"></subject-type-filter>
+                                        :subject-type="subjectType">
+                                </subject-type-filter>
 
                                 <telescope-type-filter
                                         v-if="filter.name === 'telescope_type'"
-                                        :telescope-type="telescopeType"></telescope-type-filter>
+                                        :telescope-type="telescopeType">
+                                </telescope-type-filter>
 
-                                <integration-time-filter v-if="filter.name === 'integration_time'"
-                                                    :integration-time-min="integrationTimeMin"
-                                                    :integration-time-max="integrationTimeMax">
+                                <integration-time-filter
+                                        v-if="filter.name === 'integration_time'"
+                                        :integration-time-min="integrationTimeMin"
+                                        :integration-time-max="integrationTimeMax">
                                 </integration-time-filter>
 
-                                <constellation-filter v-if="filter.name === 'constellation'"
-                                                     :constellation="constellation"></constellation-filter>
+                                <constellation-filter
+                                        v-if="filter.name === 'constellation'"
+                                        :constellation="constellation">
+                                </constellation-filter>
                             </div>
 
                             <add-filter
@@ -162,6 +191,14 @@
             collapsed: window.innerWidth < 768,
 
             q: "{{ request.GET.q }}",
+
+            subject:
+                {% if "subject" in request.GET %}
+                    "{{ request.GET.subject }}"
+                {% else %}
+                    undefined
+                {% endif %},
+
             searchDomain:
                 {% if "d" in request.GET %}
                     "{{ request.GET.d }}"
@@ -351,6 +388,11 @@
                     label: "{% trans "Search terms" %}"
                 },
                 {
+                    name: "subject",
+                    label: "{% trans "Subject" %}",
+                    restricted: "ADVANCED"
+                },
+                {
                     name: "d",
                     label: "{% trans "Search domain" %}"
                 },
@@ -479,12 +521,22 @@
                     removable: true,
                     restricted: "ADVANCED"
                 },
+                {
+                    name: "subject",
+                    label: "{% trans "Subject" %}",
+                    removable: true,
+                    restricted: "ADVANCED"
+                },
             ],
             enabledFilters: []
         },
         created: function () {
             this.enabledFilters.push(this.getFilterByName("q"));
             this.enabledFilters.push(this.getFilterByName("d"));
+
+            if (this.subject) {
+                this.enabledFilters.push(this.getFilterByName("subject"));
+            }
 
             if (this.searchDomain === undefined) {
                 this.searchDomain = "i";

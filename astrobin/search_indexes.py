@@ -17,6 +17,7 @@ from astrobin.models import Image
 from astrobin.models import SolarSystem_Acquisition
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
+from astrobin_apps_platesolving.services import SolutionService
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
@@ -683,7 +684,7 @@ class ImageIndex(SearchIndex, Indexable):
                not IotdService().is_iotd(obj)
 
     def prepare_objects_in_field(self, obj):
-        return obj.solution.objects_in_field if obj.solution else None
+        return SolutionService(obj.solution).get_objects_in_field() if obj.solution else None
 
     def prepare_countries(self, obj):
         return ' '.join([x.country for x in obj.locations.all() if x.country])

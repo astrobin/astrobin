@@ -1,0 +1,33 @@
+{% load i18n %}
+{% load astrobin_apps_premium_tags %}
+
+<script type="text/x-template" id="subject-search-terms-filter-template">
+    {% if request.user|can_access_advanced_search %}
+        <div class="form-group">
+            <input type="text" :value="subject" name="subject" autocomplete="off" />
+            <span class="help-block">
+                {% blocktrans trimmed %}
+                    What deep-sky astronomical subject are you looking for? E.g. M 31, NGC 2976, IC 405... (for solar
+                    system objects please use the "Subject type" filter)
+                {% endblocktrans %}
+            </span>
+        </div>
+    {% else %}
+        <div>
+            {% include "./_filter_requires_lite_or_premium.html" %}
+            {% include "./_filter_can_do_similar_search.html" %}
+        </div>
+    {% endif %}
+</script>
+
+<script>
+    Vue.component("subject-search-terms-filter", {
+        template: "#subject-search-terms-filter-template",
+        props: [
+            "subject"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ]
+    });
+</script>
