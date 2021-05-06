@@ -382,10 +382,10 @@ class AstroBinSearchForm(SearchForm):
                 catalog_entries.append("%s %s" % (groups[0], groups[1]))
 
             if catalog_entries:
-                query = reduce(or_, (Q(objects_in_field__icontains=x) for x in catalog_entries))
+                query = reduce(or_, (Q(objects_in_field=CustomContain(x)) for x in catalog_entries))
                 results = results.filter(query)
             else:
-                results = results.filter(objects_in_field__icontains=subject)
+                results = results.filter(objects_in_field=CustomContain(subject))
 
         return results
 
