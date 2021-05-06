@@ -162,7 +162,7 @@ body#search {
         }
 
         .slider-input {
-          width: 50px;
+          width: 55px;
           height: 1.5rem;
         }
 
@@ -181,6 +181,14 @@ body#search {
               label {
                 color: $grey-4;
               }
+            }
+
+            .min .slider-input {
+              margin-right: .25rem;
+            }
+
+            .max .slider-input {
+              margin-left: .25rem;
             }
           }
         }
