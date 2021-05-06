@@ -1,6 +1,11 @@
+{% load i18n %}
+
 <script type="text/x-template" id="search-terms-filter-template">
     <div class="form-group">
         <input type="text" :value="q" name="q" autocomplete="off" />
+        <span class="help-block">
+            {% trans "What are you looking for?" %}
+        </span>
     </div>
 </script>
 
