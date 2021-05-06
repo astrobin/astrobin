@@ -50,6 +50,7 @@ FIELDS = (
     'integration_time_max',
     'constellation',
     'subject',
+    'telescope',
 
     # Sorting
     'sort'
@@ -107,6 +108,7 @@ class AstroBinSearchForm(SearchForm):
     integration_time_max = forms.FloatField(required=False)
     constellation = forms.CharField(required=False)
     subject = forms.CharField(required=False)
+    telescope = forms.CharField(required=False)
 
     def __init__(self, *args, **kwargs):
         super(AstroBinSearchForm, self).__init__(args, kwargs)
@@ -385,6 +387,14 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filter_by_telescope(self, results):
+        telescope = self.cleaned_data.get("telescope")
+
+        if telescope is not None and telescope != "":
+            results = results.filter(imaging_telescopes=CustomContain(telescope))
+
+        return results
+
     def sort(self, results):
         order_by = None
         domain = self.cleaned_data.get('d', 'i')
@@ -456,6 +466,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_integration_time(sqs)
         sqs = self.filter_by_constellation(sqs)
         sqs = self.filter_by_subject(sqs)
+        sqs = self.filter_by_telescope(sqs)
 
         sqs = self.sort(sqs)
 
