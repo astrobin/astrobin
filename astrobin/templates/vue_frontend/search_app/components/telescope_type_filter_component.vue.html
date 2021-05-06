@@ -1,13 +1,18 @@
 {% load i18n %}
+{% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="telescope-type-filter-template">
-    <div class="form-group" :class="{highlighted: highlighted}">
-        <v-multiselect class="multiselect--grouped" v-model="value" :options="optionGroups" track-by="id" label="label"
-                       group-values="options" group-label="group" selectLabel="" deselectLabel="" selectedLabel=""
-                       :multiple="true" :searchable="false" placeholder="{% trans "Select" %}">
-        </v-multiselect>
-        <input type="hidden" name="telescope_type" :value="getFormValue()">
-    </div>
+    {% if request.user|can_access_advanced_search %}
+        <div class="form-group" :class="{highlighted: highlighted}">
+            <v-multiselect class="multiselect--grouped" v-model="value" :options="optionGroups" track-by="id" label="label"
+                           group-values="options" group-label="group" selectLabel="" deselectLabel="" selectedLabel=""
+                           :multiple="true" :searchable="false" placeholder="{% trans "Select" %}">
+            </v-multiselect>
+            <input type="hidden" name="telescope_type" :value="getFormValue()">
+        </div>
+    {% else %}
+        {% include "./_filter_requires_lite_or_premium.html" %}
+    {% endif %}
 </script>
 
 <script>

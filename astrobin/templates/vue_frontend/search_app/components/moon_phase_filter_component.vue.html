@@ -1,23 +1,28 @@
 {% load i18n %}
+{% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="moon-phase-filter-template">
-    <div class="form-group slider-form-group" :class="{highlighted: highlighted}">
-        <div id="moon-phase-slider" class="slider-filter"></div>
+    {% if request.user|can_access_advanced_search %}
+        <div class="form-group slider-form-group" :class="{highlighted: highlighted}">
+            <div id="moon-phase-slider" class="slider-filter"></div>
 
-        <div class="min-max">
-            <div class="min">
-                <input class="slider-input" id="moon-phase-min-value" name="moon_phase_min" type="number"
-                       min="0" max="100" step=".01" :value="moonPhaseMin" />
-                <label for="moon-phase-min-value">{% trans 'Min' %}</label>
-            </div>
+            <div class="min-max">
+                <div class="min">
+                    <input class="slider-input" id="moon-phase-min-value" name="moon_phase_min" type="number"
+                           min="0" max="100" step=".01" :value="moonPhaseMin" />
+                    <label for="moon-phase-min-value">{% trans 'Min' %}</label>
+                </div>
 
-            <div class="max">
-                <label for="moon-phase-max-value">{% trans 'Max' %}</label>
-                <input class="slider-input" id="moon-phase-max-value" name="moon_phase_max" type="number"
-                       min="0" max="100" step=".01" :value="moonPhaseMax" />
+                <div class="max">
+                    <label for="moon-phase-max-value">{% trans 'Max' %}</label>
+                    <input class="slider-input" id="moon-phase-max-value" name="moon_phase_max" type="number"
+                           min="0" max="100" step=".01" :value="moonPhaseMax" />
+                </div>
             </div>
         </div>
-    </div>
+    {% else %}
+        {% include "./_filter_requires_lite_or_premium.html" %}
+    {% endif %}
 </script>
 
 <script>

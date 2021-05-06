@@ -1,13 +1,18 @@
 {% load i18n %}
+{% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="constellation-filter-template">
-    <div class="form-group" :class="{highlighted: highlighted}">
-        <v-multiselect v-model="value" :options="options" track-by="id" label="label"
-                       selectLabel="" deselectLabel="" selectedLabel=""
-                       :searchable="true" placeholder="{% trans "Select" %}">
-        </v-multiselect>
-        <input type="hidden" name="constellation" :value="getValue()">
-    </div>
+    {% if request.user|can_access_advanced_search %}
+        <div class="form-group" :class="{highlighted: highlighted}">
+            <v-multiselect v-model="value" :options="options" track-by="id" label="label"
+                           selectLabel="" deselectLabel="" selectedLabel=""
+                           :searchable="true" placeholder="{% trans "Select" %}">
+            </v-multiselect>
+            <input type="hidden" name="constellation" :value="getValue()">
+        </div>
+    {% else %}
+        {% include "./_filter_requires_lite_or_premium.html" %}
+    {% endif %}
 </script>
 
 <script>

@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="add-filter-template">
     <div class="search-filter">
@@ -7,6 +8,17 @@
             <div class="form-group">
                 <v-multiselect v-model="value" @input="onAddFilter" :options="options" track-by="name" label="label"
                                selectLabel="" deselectLabel="" :searchable="true" placeholder="{% trans "Select" %}">
+
+                    <template slot="option" slot-scope="props">
+                        {% if not request.user|can_access_advanced_search %}
+                            <i class="icon-lock" v-if="props.option.restricted"></i>
+                        {% elif not request.user|can_access_full_search %}
+                            <i class="icon-lock" v-if="props.option.restricted === 'FULL'"></i>
+                        {% endif %}
+
+                        <span v-html="props.option.label"></span>
+                    </template>
+
                 </v-multiselect>
             </div>
         </div>

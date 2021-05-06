@@ -5,8 +5,6 @@
 <script type="text/x-template" id="app-template">
     <div class="accordion search-filters-app" :class="{collapsed: collapsed}">
         <div class="accordion-group">
-
-            {% if request.user|can_access_advanced_search %}
             <div class="accordion-heading">
                 <a class="accordion-toggle" @click="toggleCollapsed">
                     <span v-if="collapsed">
@@ -152,13 +150,6 @@
                     </form>
                 </div>
             </div>
-            {% else %}
-                <div class="accordion-heading">
-                    <a class="accordion-toggle" data-toggle="modal" href="#feature-restricted-modal">
-                        {% trans "Show filters" %} <i class="pull-right icon-angle-down"></i>
-                    </a>
-                </div>
-            {% endif %}
         </div>
     </div>
 </script>
@@ -371,102 +362,122 @@
                 {
                     name: "animated",
                     label: "{% trans "Only animated" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "ADVANCED"
                 },
                 {
                     name: "award",
                     label: "{% trans "Award" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "ADVANCED"
                 },
                 {
                     name: "date_published",
                     label: "{% trans "Publication date range" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "ADVANCED"
                 },
                 {
                     name: "date_acquired",
                     label: "{% trans "Acquisition date range" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "ADVANCED"
                 },
                 {
                     name: "camera_type",
                     label: "{% trans "Camera type" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "ADVANCED"
                 },
                 {
                     name: "country",
                     label: "{% trans "Country" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "ADVANCED"
                 },
                 {
                     name: "acquisition_type",
                     label: "{% trans "Acquisition type" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "ADVANCED"
                 },
                 {
                     name: "data_source",
                     label: "{% trans "Data source" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "FULL"
                 },
                 {
                     name: "field_radius",
                     label: "{% trans "Field radius (deg)" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "FULL"
                 },
                 {
                     name: "license",
                     label: "{% trans "License" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "ADVANCED"
                 },
                 {
                     name: "minimum_data",
                     label: "{% trans "Minimum data" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "FULL"
                 },
                 {
                     name: "moon_phase",
                     label: "{% trans "Moon phase (%)" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "ADVANCED"
                 },
                 {
                     name: "coord_ra",
                     label: "{% trans "Right ascension" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "FULL"
                 },
                 {
                     name: "coord_dec",
                     label: "{% trans "Declination" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "FULL"
                 },
                 {
                     name: "pixel_scale",
                     label: "{% trans "Pixel scale (arcsec/pixel)" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "FULL"
                 },
                 {
                     name: "remote_source",
                     label: "{% trans "Remote source" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "FULL"
                 },
                 {
                     name: "subject_type",
                     label: "{% trans "Subject type" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "ADVANCED"
                 },
                 {
                     name: "telescope_type",
                     label: "{% trans "Telescope type" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "ADVANCED"
                 },
                 {
                     name: "integration_time",
                     label: "{% trans "Integration time (hours)" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "FULL"
                 },
                 {
                     name: "constellation",
                     label: "{% trans "Constellation" %}",
-                    removable: true
+                    removable: true,
+                    restricted: "ADVANCED"
                 },
             ],
             enabledFilters: []
