@@ -91,8 +91,9 @@ def get_query_string(p_list, p_dict, new_params, remove, context):
             p_list[i][1] = mark_safe('&amp;'.join([u'%s=%s' % (p_list[i][0], k) for k in p_list[i][1]]))
             p_list[i][0] = ''
 
-        protected_keywords = ['block']
-        if p_list[i][1] not in protected_keywords:
+        protected_keys = ['q']
+        protected_values = ['block']
+        if p_list[i][0] not in protected_keys and p_list[i][1] not in protected_values:
             try:
                 p_list[i][1] = template.Variable(p_list[i][1]).resolve(context)
             except:
