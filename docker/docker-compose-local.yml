@@ -128,7 +128,7 @@ services:
 
 
   debug_email:
-    image: python:2.7-alpine
+    image: python:3.9-alpine
     command: python -m smtpd -n -c DebuggingServer 0.0.0.0:25
     ports:
       - "25"
