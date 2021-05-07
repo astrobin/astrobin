@@ -134,25 +134,25 @@
         data: {
             collapsed: window.innerWidth < 768,
 
-            q: "{{ request.GET.q }}",
+            q: "{{ request.GET.q|escapejs }}",
 
             subject:
                 {% if "subject" in request.GET %}
-                    "{{ request.GET.subject }}"
+                    "{{ request.GET.subject|escapejs }}"
                 {% else %}
                     undefined
                 {% endif %},
 
             telescope:
                 {% if "telescope" in request.GET %}
-                    "{{ request.GET.telescope }}"
+                    "{{ request.GET.telescope|escapejs }}"
                 {% else %}
                     undefined
                 {% endif %},
 
             camera:
                 {% if "camera" in request.GET %}
-                    "{{ request.GET.camera }}"
+                    "{{ request.GET.camera|escapejs }}"
                 {% else %}
                     undefined
                 {% endif %},
