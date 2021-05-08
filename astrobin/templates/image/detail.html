@@ -68,7 +68,7 @@
             <strong>{% trans "Contains" %}:</strong>&nbsp;
             {% if image.subject_type == enums.SubjectType.DEEP_SKY %}
                 {% for s in subjects|slice:":30" %}
-                    <a href="/search/?q={{s|escape}}">{{s|escape}}</a>
+                    <a href="/search/?q=%22{{s|escape}}%22">{{s|escape}}</a>
                     {% if not forloop.last %}&nbsp;&middot;&nbsp;{% endif %}
                 {% endfor %}
 

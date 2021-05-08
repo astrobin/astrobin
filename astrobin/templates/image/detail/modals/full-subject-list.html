@@ -8,7 +8,7 @@
 
     <div class="modal-body">
         {% for s in subjects %}
-            <a href="/search/?q={{ s|escape }}">{{ s|escape }}</a>
+            <a href="/search/?q=%22{{ s|escape }}%22">{{ s|escape }}</a>
             {% if not forloop.last %}&nbsp;&middot;&nbsp;{% endif %}
         {% endfor %}
     </div>
