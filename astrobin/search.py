@@ -152,18 +152,22 @@ class AstroBinSearchForm(SearchForm):
 
     def filter_by_award(self, results):
         award = self.cleaned_data.get("award")
+        queries = []
 
         if award is not None and award != "":
             types = award.split(',')
 
             if "iotd" in types:
-                results = results.filter(is_iotd=True)
+                queries.append(Q(is_iotd=True))
 
             if "top-pick" in types:
-                results = results.filter(is_top_pick=True)
+                queries.append(Q(is_top_pick=True))
 
             if "top-pick-nomination" in types:
-                results = results.filter(is_top_pick_nomination=True)
+                queries.append(Q(is_top_pick_nomination=True))
+
+        if len(queries) > 0:
+            results = results.filter(reduce(or_, queries))
 
         return results
 
