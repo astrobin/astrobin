@@ -1,10 +1,16 @@
+{% load astrobin_apps_premium_tags %}
+
 <script type="text/x-template" id="date-acquired-filter-template">
-    <div class="form-group date-acquired-filter" :class="{highlighted: highlighted}">
-        <input id="date-acquired-min-value" name="date_acquired_min" autocomplete="off" class="datepickerclass"
-               type="text" :value="dateAcquiredMin" />
-        <input id="date-acquired-max-value" name="date_acquired_max" autocomplete="off" class="datepickerclass"
-               type="text" :value="dateAcquiredMax" />
-    </div>
+    {% if request.user|can_access_advanced_search %}
+        <div class="form-group date-acquired-filter" :class="{highlighted: highlighted}">
+            <input id="date-acquired-min-value" name="date_acquired_min" autocomplete="off" class="datepickerclass"
+                   type="text" :value="dateAcquiredMin" />
+            <input id="date-acquired-max-value" name="date_acquired_max" autocomplete="off" class="datepickerclass"
+                   type="text" :value="dateAcquiredMax" />
+        </div>
+    {% else %}
+        {% include "./_filter_requires_lite_or_premium.html" %}
+    {% endif %}
 </script>
 
 <script>

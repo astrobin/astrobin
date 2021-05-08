@@ -6,6 +6,10 @@
                        group-values="options" group-label="group" selectLabel="" deselectLabel="" selectedLabel=""
                        :searchable="false" placeholder="{% trans "Select" %}">
         </v-multiselect>
+        <span class="help-block">
+            {% trans "In which data field should we look for your search terms?" %}
+        </span>
+
         <input type="hidden" name="t" :value="value.id">
     </div>
 </script>

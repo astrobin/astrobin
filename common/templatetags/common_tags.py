@@ -3,7 +3,7 @@ import datetime
 from django import template
 from django.contrib.contenttypes.models import ContentType
 from django.template import Library, Node
-from django.template.defaultfilters import stringfilter
+from django.template.defaultfilters import stringfilter, urlencode
 from django.utils.encoding import force_unicode
 from django.utils.functional import allow_lazy
 from django.utils.safestring import mark_safe
@@ -91,14 +91,15 @@ def get_query_string(p_list, p_dict, new_params, remove, context):
             p_list[i][1] = mark_safe('&amp;'.join([u'%s=%s' % (p_list[i][0], k) for k in p_list[i][1]]))
             p_list[i][0] = ''
 
-        protected_keywords = ['block']
-        if p_list[i][1] not in protected_keywords:
+        protected_keys = ['q', 'subject', 'telescope', 'camera']
+        protected_values = ['block']
+        if p_list[i][0] not in protected_keys and p_list[i][1] not in protected_values:
             try:
                 p_list[i][1] = template.Variable(p_list[i][1]).resolve(context)
             except:
                 pass
 
-    return mark_safe('?' + '&amp;'.join([k[1] if k[0] == '' else u'%s=%s' % (k[0], k[1]) for k in p_list if
+    return mark_safe('?' + '&amp;'.join([k[1] if k[0] == '' else u'%s=%s' % (k[0], urlencode(k[1])) for k in p_list if
                                          k[1] is not None and k[1] != 'None']).replace(' ', '%20'))
 
 

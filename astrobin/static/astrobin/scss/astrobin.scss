@@ -4019,10 +4019,14 @@ table.api-examples {
 }
 
 .noUi-target {
-  background: $grey-7;
+  background: $grey-6;
   border-color: #3a3a3a;
   box-shadow: none;
   z-index: 0;
+
+  .noUi-connect {
+    background: $link-color;
+  }
 
   .noUi-handle, .noUi-tooltip {
     border-color: #202020;
@@ -4035,6 +4039,20 @@ table.api-examples {
 
     &.noUi-active .noUi-tooltip {
       display: block;
+    }
+  }
+
+  .noUi-pips {
+    color: darken($grey-4, 15%);
+    font-size: 11px;
+    height: auto;
+
+    .noUi-marker-large {
+      background: darken($grey-4, 15%);
+    }
+
+    .noUi-marker-normal {
+      background: $grey-5;
     }
   }
 }

@@ -3,17 +3,25 @@
 
 <script type="text/x-template" id="integration-time-filter-template">
     {% if request.user|can_access_full_search %}
-        <div class="form-group search-integration-time-form-group" :class="{highlighted: highlighted}">
-            <label for="integration-time-min-value">{% trans "Min" %}</label>
-            <input id="integration-time-min-value" name="integration_time_min" type="number" min="0" max="999"
-                   step="0.1" :value="integrationTimeMin" />
+        <div class="form-group search-integration-time-form-group slider-form-group" :class="{highlighted: highlighted}">
+            <div id="integration-time-slider" class="slider-filter"></div>
 
-            <label for="integration-time-min-value">{% trans "Max" %}</label>
-            <input id="integration-time-max-value" name="integration_time_max" type="number" min="0" max="999"
-                   step="0.1" :value="integrationTimeMax" />
+            <div class="min-max">
+                <div class="min">
+                    <input class="slider-input" id="integration-time-min-value" name="integration_time_min"
+                           type="number" min="0" max="999" step="0.1" :value="integrationTimeMin" />
+                    <label for="integration-time-min-value">{% trans "Min" %}</label>
+                </div>
+
+                <div class="max">
+                    <label for="integration-time-max-value">{% trans "Max" %}</label>
+                    <input class="slider-input" id="integration-time-max-value" name="integration_time_max"
+                           type="number" min="0" max="999" step="0.1" :value="integrationTimeMax" />
+                </div>
+            </div>
         </div>
     {% else %}
-        {% include "./_filter_not_allowed.html" %}
+        {% include "./_filter_requires_ultimate.html" %}
     {% endif %}
 </script>
 
@@ -26,6 +34,29 @@
         ],
         mixins: [
             FilterComponentMixin
-        ]
+        ],
+        mounted() {
+            var slider = noUiSlider.create($('#integration-time-slider')[0], {
+                start: [this.integrationTimeMin, this.integrationTimeMax],
+                range: {min: 0, max: 999},
+                step: 1,
+                tooltips: true,
+                connect: true,
+                behaviour: 'tap-drag'
+            });
+
+            slider.on("change", function () {
+                $("#integration-time-min-value").val(slider.get()[0]);
+                $("#integration-time-max-value").val(slider.get()[1]);
+            });
+
+            $("#integration-time-min-value").on("change", function () {
+                slider.set([$("#integration-time-min-value").val(), $("#integration-time-max-value").val()]);
+            });
+
+            $("#integration-time-max-value").on("change", function () {
+                slider.set([$("#integration-time-min-value").val(), $("#integration-time-max-value").val()]);
+            });
+        }
     });
 </script>

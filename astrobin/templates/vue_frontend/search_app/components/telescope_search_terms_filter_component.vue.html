@@ -1,0 +1,32 @@
+{% load i18n %}
+{% load astrobin_apps_premium_tags %}
+
+<script type="text/x-template" id="telescope-search-terms-filter-template">
+    {% if request.user|can_access_advanced_search %}
+        <div class="form-group">
+            <input type="text" :value="telescope" name="telescope" autocomplete="off" />
+            <span class="help-block">
+                {% blocktrans trimmed %}
+                    What telescope was used in the acquisition of the image?
+                {% endblocktrans %}
+            </span>
+        </div>
+    {% else %}
+        <div>
+            {% include "./_filter_requires_lite_or_premium.html" %}
+            {% include "./_filter_can_do_similar_search.html" %}
+        </div>
+    {% endif %}
+</script>
+
+<script>
+    Vue.component("telescope-search-terms-filter", {
+        template: "#telescope-search-terms-filter-template",
+        props: [
+            "telescope"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ]
+    });
+</script>

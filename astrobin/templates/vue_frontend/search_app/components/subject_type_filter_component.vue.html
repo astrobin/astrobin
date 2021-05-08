@@ -1,13 +1,18 @@
 {% load i18n %}
+{% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="subject-type-filter-template">
-    <div class="form-group" :class="{highlighted: highlighted}">
-        <v-multiselect class="multiselect--grouped" v-model="value" :options="options" track-by="id" label="label"
-                       selectLabel="" deselectLabel="" selectedLabel="" :searchable="false"
-                       placeholder="{% trans "Select" %}">
-        </v-multiselect>
-        <input type="hidden" name="subject_type" :value="getValue()">
-    </div>
+    {% if request.user|can_access_advanced_search %}
+        <div class="form-group" :class="{highlighted: highlighted}">
+            <v-multiselect class="multiselect--grouped" v-model="value" :options="options" track-by="id" label="label"
+                           selectLabel="" deselectLabel="" selectedLabel="" :searchable="false"
+                           placeholder="{% trans "Select" %}">
+            </v-multiselect>
+            <input type="hidden" name="subject_type" :value="getValue()">
+        </div>
+    {% else %}
+        {% include "./_filter_requires_lite_or_premium.html" %}
+    {% endif %}
 </script>
 
 <script>

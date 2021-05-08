@@ -1,7 +1,10 @@
+import re
 import unicodedata
+from operator import or_
 
 from django import forms
 from django.contrib.auth.models import User
+from django.db.models import Q
 from haystack.forms import SearchForm
 from haystack.generic_views import SearchView
 from haystack.inputs import Clean, BaseInput
@@ -46,6 +49,9 @@ FIELDS = (
     'integration_time_min',
     'integration_time_max',
     'constellation',
+    'subject',
+    'telescope',
+    'camera',
 
     # Sorting
     'sort'
@@ -84,11 +90,11 @@ class AstroBinSearchForm(SearchForm):
     date_published_max = forms.CharField(required=False)
     date_acquired_min = forms.CharField(required=False)
     date_acquired_max = forms.CharField(required=False)
-    field_radius_min = forms.IntegerField(required=False)
-    field_radius_max = forms.IntegerField(required=False)
+    field_radius_min = forms.FloatField(required=False)
+    field_radius_max = forms.FloatField(required=False)
     minimum_data = forms.CharField(required=False)
-    moon_phase_min = forms.IntegerField(required=False)
-    moon_phase_max = forms.IntegerField(required=False)
+    moon_phase_min = forms.FloatField(required=False)
+    moon_phase_max = forms.FloatField(required=False)
     license = forms.CharField(required=False)
     coord_ra_min = forms.FloatField(required=False)
     coord_ra_max = forms.FloatField(required=False)
@@ -102,6 +108,9 @@ class AstroBinSearchForm(SearchForm):
     integration_time_min = forms.FloatField(required=False)
     integration_time_max = forms.FloatField(required=False)
     constellation = forms.CharField(required=False)
+    subject = forms.CharField(required=False)
+    telescope = forms.CharField(required=False)
+    camera = forms.CharField(required=False)
 
     def __init__(self, *args, **kwargs):
         super(AstroBinSearchForm, self).__init__(args, kwargs)
@@ -143,18 +152,22 @@ class AstroBinSearchForm(SearchForm):
 
     def filter_by_award(self, results):
         award = self.cleaned_data.get("award")
+        queries = []
 
         if award is not None and award != "":
             types = award.split(',')
 
             if "iotd" in types:
-                results = results.filter(is_iotd=True)
+                queries.append(Q(is_iotd=True))
 
             if "top-pick" in types:
-                results = results.filter(is_top_pick=True)
+                queries.append(Q(is_top_pick=True))
 
             if "top-pick-nomination" in types:
-                results = results.filter(is_top_pick_nomination=True)
+                queries.append(Q(is_top_pick_nomination=True))
+
+        if len(queries) > 0:
+            results = results.filter(reduce(or_, queries))
 
         return results
 
@@ -357,6 +370,45 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filter_by_subject(self, results):
+        subject = self.cleaned_data.get("subject")
+
+        if subject is not None and subject != "":
+            catalog_entries = []
+
+            regex = r"(?P<catalog>M|NGC|IC)(?P<id>\d+)"
+            matches = re.finditer(regex, subject, re.IGNORECASE)
+
+            for matchNum, match in enumerate(matches, start=1):
+                catalog_entries.append(match.string)
+
+                groups = match.groups()
+                catalog_entries.append("%s %s" % (groups[0], groups[1]))
+
+            if catalog_entries:
+                query = reduce(or_, (Q(objects_in_field=x) for x in catalog_entries))
+                results = results.filter(query)
+            else:
+                results = results.filter(objects_in_field=CustomContain(subject))
+
+        return results
+
+    def filter_by_telescope(self, results):
+        telescope = self.cleaned_data.get("telescope")
+
+        if telescope is not None and telescope != "":
+            results = results.filter(imaging_telescopes=CustomContain(telescope))
+
+        return results
+
+    def filter_by_camera(self, results):
+        camera = self.cleaned_data.get("camera")
+
+        if camera is not None and camera != "":
+            results = results.filter(imaging_cameras=CustomContain(camera))
+
+        return results
+
     def sort(self, results):
         order_by = None
         domain = self.cleaned_data.get('d', 'i')
@@ -427,6 +479,9 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_telescope_type(sqs)
         sqs = self.filter_by_integration_time(sqs)
         sqs = self.filter_by_constellation(sqs)
+        sqs = self.filter_by_subject(sqs)
+        sqs = self.filter_by_telescope(sqs)
+        sqs = self.filter_by_camera(sqs)
 
         sqs = self.sort(sqs)
 

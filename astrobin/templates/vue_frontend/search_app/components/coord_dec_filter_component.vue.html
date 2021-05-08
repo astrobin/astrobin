@@ -3,13 +3,13 @@
 <script type="text/x-template" id="coord-dec-filter-template">
     {% if request.user|can_access_full_search %}
         <div class="form-group" :class="{highlighted: highlighted}">
-            <div id="coord-dec-slider" class="slider-filter"></div>
+            <div id="coord-dec-slider" class="slider-filter tooltip-fixed"></div>
 
             <input id="coord-dec-min-value" name="coord_dec_min" type="hidden" :value="coordDecMin" />
             <input id="coord-dec-max-value" name="coord_dec_max" type="hidden" :value="coordDecMax" />
         </div>
     {% else %}
-        {% include "./_filter_not_allowed.html" %}
+        {% include "./_filter_requires_ultimate.html" %}
     {% endif %}
 </script>
 
@@ -35,13 +35,23 @@
             var slider = noUiSlider.create($('#coord-dec-slider')[0], {
                 start: [this.coordDecMin, this.coordDecMax],
                 range: {min: -90, max: 90},
-                step: 1.0,
-                tooltips: [{to: decFmt}, {to: decFmt}]
+                step: .5,
+                tooltips: [{to: decFmt}, {to: decFmt}],
+                connect: true,
+                behaviour: 'tap-drag'
             });
 
             slider.on("change", function () {
                 $("#coord-dec-min-value").val(slider.get()[0]);
                 $("#coord-dec-max-value").val(slider.get()[1]);
+            });
+
+            $("#coord-dec-min-value").on("change", function () {
+                slider.set([$("#icoord-dec-min-value").val(), $("#coord-dec-max-value").val()]);
+            });
+
+            $("#integration-time-max-value").on("change", function () {
+                slider.set([$("#coord-dec-min-value").val(), $("#coord-dec-max-value").val()]);
             });
         }
     });

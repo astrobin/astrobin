@@ -1,9 +1,14 @@
 {% load i18n %}
+{% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="animated-filter-template">
-    <div class="form-group" :class="{highlighted: highlighted}">
-        <input type="checkbox" v-model="value" name="animated" /> {% trans "Yes" %}
-    </div>
+    {% if request.user|can_access_advanced_search %}
+        <div class="form-group" :class="{highlighted: highlighted}">
+            <input type="checkbox" v-model="value" name="animated" /> {% trans "Yes" %}
+        </div>
+    {% else %}
+        {% include "./_filter_requires_lite_or_premium.html" %}
+    {% endif %}
 </script>
 
 <script>

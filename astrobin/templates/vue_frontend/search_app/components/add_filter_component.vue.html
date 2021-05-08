@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="add-filter-template">
     <div class="search-filter">
@@ -6,7 +7,18 @@
         <div class="search-filter-widget">
             <div class="form-group">
                 <v-multiselect v-model="value" @input="onAddFilter" :options="options" track-by="name" label="label"
-                               selectLabel="" deselectLabel="" :searchable="false" placeholder="{% trans "Select" %}">
+                               selectLabel="" deselectLabel="" :searchable="true" placeholder="{% trans "Select" %}">
+
+                    <template slot="option" slot-scope="props">
+                        {% if not request.user|can_access_advanced_search %}
+                            <i class="icon-lock" v-if="props.option.restricted"></i>
+                        {% elif not request.user|can_access_full_search %}
+                            <i class="icon-lock" v-if="props.option.restricted === 'FULL'"></i>
+                        {% endif %}
+
+                        <span v-html="props.option.label"></span>
+                    </template>
+
                 </v-multiselect>
             </div>
         </div>
@@ -14,6 +26,10 @@
 </script>
 
 <script>
+    function compare(a, b) {
+        return (a.label > b.label) ? 1 : ((b.label > a.label) ? -1 : 0);
+    }
+
     Vue.component("add-filter", {
         template: "#add-filter-template",
         props: [
@@ -22,7 +38,7 @@
         data: function () {
             return {
                 value: null,
-                options: this.availableFilters
+                options: this.availableFilters.sort(compare)
             }
         },
         methods: {
@@ -33,7 +49,7 @@
         },
         watch: {
             availableFilters: function(newValue) {
-                this.options = newValue;
+                this.options = newValue.sort(compare);
             }
         }
     });

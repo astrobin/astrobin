@@ -6,6 +6,10 @@
                        selectLabel="" deselectLabel="" selectedLabel="" :searchable="false"
                        placeholder="{% trans "Select" %}">
         </v-multiselect>
+        <span class="help-block">
+            {% trans "What kind of search results do you want?" %}
+        </span>
+
         <input type="hidden" name="d" :value="value.id">
     </div>
 </script>
