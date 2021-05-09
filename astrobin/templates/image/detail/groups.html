@@ -14,7 +14,7 @@
             </tbody>
         </table>
 
-        {% if image.user == request.user %}
+        {% if image.is_wip and image.user == request.user %}
             <div class="alert alert-warning">
                 <i class="icon-warning-sign"></i>
                 {% blocktrans trimmed %}
