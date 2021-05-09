@@ -1,8 +1,8 @@
 {% load astrobin_apps_images_tags %}
 {% load i18n %}
 
-{% if in_public_groups %}
-    <div class="subtle-container">
+{% if in_public_groups and not image.is_wip or image.user == request.user %}
+    <div class="subtle-container image-groups">
         <div class="header"><h4><i class="icon-group"></i> {% trans "In these public groups" %}</h4></div>
         <table class="table table-condensed table-striped">
             <tbody>
@@ -13,6 +13,15 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        {% if image.user == request.user %}
+            <div class="alert alert-warning">
+                <i class="icon-warning-sign"></i>
+                {% blocktrans trimmed %}
+                    The image is not actually visible in these groups until you promote it to your public area.
+                {% endblocktrans %}
+            </div>
+        {% endif %}
     </div>
 {% endif %}
 
