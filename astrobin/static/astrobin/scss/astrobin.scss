@@ -1195,6 +1195,12 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
+.image-groups {
+  .alert {
+    margin-top: 1rem;
+  }
+}
+
 .subtle-container {
   background: url('../images/subtle-panel-tile.png');
   @include common-border;

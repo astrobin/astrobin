@@ -142,3 +142,8 @@
     color: $text-color;
   }
 }
+
+select[multiple="multiple"][disabled="disabled"] + .ui-multiselect {
+  opacity: .33;
+  pointer-events: none;
+}

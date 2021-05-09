@@ -68,8 +68,9 @@ class ImageEditBasicForm(forms.ModelForm):
 
     def __initGroups(self):
         if self.instance.is_wip:
-            del self.fields['groups']
-            return
+            self.fields['groups'].widget.attrs['disabled'] = 'disabled'
+            self.fields['groups'].help_text =\
+                _("Editing groups is not allowed while the image is not in your public area.")
 
         groups = Group.objects.filter(autosubmission=False, members=self.instance.user)
         if groups.count() > 0:
