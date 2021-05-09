@@ -173,7 +173,9 @@ $(document).ready(function () {
 
                         if (data.url === undefined || data.url === null || data.url.indexOf("placeholder") > -1) {
                             setTimeout(function () {
-                                load(url, id, revision, alias, tries, hires, randomTimeout);
+                                load(url, id, revision, alias, tries, hires, randomTimeout).then(function(url) {
+                                    resolve(url);
+                                })
                             }, randomTimeout * Math.pow(2, tries[key]));
                             return;
                         }
