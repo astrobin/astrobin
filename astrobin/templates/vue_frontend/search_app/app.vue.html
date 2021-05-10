@@ -102,6 +102,9 @@
 
                                 <constellation-filter v-if="filter.name === 'constellation'"
                                                       :constellation="constellation"></constellation-filter>
+                                
+                                <bortle-scale-filter v-if="filter.name === 'bortle_scale'" :bortle-scale-min="bortleScaleMin"
+                                                   :bortle-scale-max="bortleScaleMax"></bortle-scale-filter>
                             </div>
 
                             <add-filter v-if="availableFilters().length > 0 && isImageSearch()"
@@ -339,6 +342,18 @@
                 {% else %}
                     undefined
                 {% endif %},
+            bortleScaleMin:
+                {% if "bortle_scale_min" in request.GET and request.GET.bortle_scale_min %}
+                    {{ request.GET.bortle_scale_min }}
+                {% else %}
+                    1
+                {% endif %},
+            bortleScaleMax:
+                {% if "bortle_scale_max" in request.GET and request.GET.bortle_scale_max %}
+                    {{ request.GET.bortle_scale_max }}
+                {% else %}
+                    9
+                {% endif %},
 
             allFilters: [
                 {
@@ -494,6 +509,12 @@
                     removable: true,
                     restricted: "ADVANCED"
                 },
+                {
+                    name: "bortle_scale",
+                    label: "{% trans "Bortle Dark-Sky Scale" %}",
+                    removable: true,
+                    restricted: "FULL"
+                },
             ],
             enabledFilters: []
         },
@@ -603,6 +624,10 @@
             if (this.constellation) {
                 this.enabledFilters.push(this.getFilterByName("constellation"));
             }
+
+            {% if "bortle_scale_min" in request.GET or "bortle_scale_max" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("bortle_scale"));
+            {% endif %}
         },
         methods: {
             toggleCollapsed: function () {

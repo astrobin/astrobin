@@ -1,0 +1,68 @@
+{% load i18n %}
+{% load astrobin_apps_premium_tags %}
+
+<script type="text/x-template" id="bortle-scale-filter-template">
+    {% if request.user|can_access_full_search %}
+        <div class="form-group slider-form-group" :class="{highlighted: highlighted}">
+            <div id="bortle-scale-slider" class="slider-filter"></div>
+
+            <div class="min-max">
+                <div class="min">
+                    <input class="slider-input" id="bortle-scale-min-value" name="bortle_scale_min" type="number"
+                           min="1" max="9" step=".25" :value="bortleScaleMin" />
+                    <label for="bortle-scale-min-value">{% trans 'Min' %}</label>
+                </div>
+
+                <div class="max">
+                    <label for="bortle-scale-max-value">{% trans 'Max' %}</label>
+                    <input class="slider-input" id="bortle-scale-max-value" name="bortle_scale_max" type="number"
+                           min="1" max="9" step=".25" :value="bortleScaleMax" />
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {% include "./_filter_requires_ultimate.html" %}
+    {% endif %}
+</script>
+
+<script>
+    Vue.component("bortle-scale-filter", {
+        template: "#bortle-scale-filter-template",
+        props: [
+            "bortleScaleMin",
+            "bortleScaleMax"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        mounted() {
+            var slider = noUiSlider.create($('#bortle-scale-slider')[0], {
+                start: [this.bortleScaleMin, this.bortleScaleMax],
+                range: {min: 1, max: 9},
+                step: .25,
+                tooltips: true,
+                connect: true,
+                behaviour: 'tap-drag',
+                pips: {
+                    mode: 'count',
+                    values: 9,
+                    density: 2
+                }
+            });
+
+            slider.on("change", function () {
+                $("#bortle-scale-min-value").val(slider.get()[0]);
+                $("#bortle-scale-max-value").val(slider.get()[1]);
+            });
+
+
+            $("#bortle-scale-min-value").on("change", function () {
+                slider.set([$("#bortle-scale-min-value").val(), $("#bortle-scale-max-value").val()]);
+            });
+
+            $("#bortle-scale-max-value").on("change", function () {
+                slider.set([$("#bortle-scale-min-value").val(), $("#bortle-scale-max-value").val()]);
+            });
+        }
+    });
+</script>

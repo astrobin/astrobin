@@ -581,6 +581,8 @@ class ImageIndex(SearchIndex, Indexable):
 
     objects_in_field = CharField()
 
+    bortle_scale = FloatField()
+
     def index_queryset(self, using=None):
         return self.get_model().objects.filter(moderator_decision=1).exclude(corrupted=True)
 
@@ -688,6 +690,14 @@ class ImageIndex(SearchIndex, Indexable):
 
     def prepare_countries(self, obj):
         return ' '.join([x.country for x in obj.locations.all() if x.country])
+
+    def prepare_bortle_scale(self, obj):
+        deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj, bortle__isnull=False)
+
+        if deep_sky_acquisitions.exists():
+            return sum([x.bortle for x in deep_sky_acquisitions]) / float(deep_sky_acquisitions.count())
+
+        return None
 
 
 class NestedCommentIndex(SearchIndex, Indexable):
