@@ -52,6 +52,8 @@ FIELDS = (
     'subject',
     'telescope',
     'camera',
+    'bortle_scale_min',
+    'bortle_scale_max',
 
     # Sorting
     'sort'
@@ -111,6 +113,8 @@ class AstroBinSearchForm(SearchForm):
     subject = forms.CharField(required=False)
     telescope = forms.CharField(required=False)
     camera = forms.CharField(required=False)
+    bortle_scale_min = forms.FloatField(required=False)
+    bortle_scale_max = forms.FloatField(required=False)
 
     def __init__(self, *args, **kwargs):
         super(AstroBinSearchForm, self).__init__(args, kwargs)
@@ -409,6 +413,21 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filter_by_bortle_scale(self, results):
+        try:
+            min = float(self.cleaned_data.get("bortle_scale_min"))
+            results = results.filter(bortle_scale__gte=min)
+        except TypeError:
+            pass
+
+        try:
+            max = float(self.cleaned_data.get("bortle_scale_max"))
+            results = results.filter(bortle_scale__lte=max)
+        except TypeError:
+            pass
+
+        return results
+
     def sort(self, results):
         order_by = None
         domain = self.cleaned_data.get('d', 'i')
@@ -482,6 +501,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_subject(sqs)
         sqs = self.filter_by_telescope(sqs)
         sqs = self.filter_by_camera(sqs)
+        sqs = self.filter_by_bortle_scale(sqs)
 
         sqs = self.sort(sqs)
 
