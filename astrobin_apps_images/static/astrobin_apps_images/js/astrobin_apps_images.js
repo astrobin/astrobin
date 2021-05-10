@@ -25,8 +25,9 @@ $(document).ready(function () {
             if (!loaded) {
                 setTimeout(function () {
                     load(url, id, revision, alias, tries, false, randomTimeout).then(function (url) {
-                        $img.attr('data-loaded', 'true')
-                            .attr('src', url);
+                        var $refreshedImg =
+                            $('[data-id="' + id + '"][data-alias="' + alias + '"][data-revision="' + revision + '"]');
+                        $refreshedImg.attr('data-loaded', 'true').attr('src', url);
                     });
                 }, randomTimeout);
             } else {
