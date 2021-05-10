@@ -4,16 +4,9 @@
 {% load toggleproperty_tags %}
 
 {% if request.user.is_authenticated and request.user != image.user %}
-    {% if not request.user|can_like:image %}
-        <span class="toggleproperty-add-remove property-like">
-            <a class="btn btn-primary disabled" data-toggle="modal" href="#cant-like">
-                <i class="icon-thumbs-up"></i>
-                <span class="toggleproperties-label">
-                    {% trans "Like" %}
-                </span>
-            </a>
-        </span>
-    {% elif READONLY_MODE %}
+    {% is_toggled 'like' image request.user as already_liked %}
+
+    {% if READONLY_MODE %}
         <span class="toggleproperty-add-remove property-like">
             <a class="btn btn-primary disabled" data-toggle="modal" href="#readonly-mode-modal">
                 <i class="icon-thumbs-up"></i>
@@ -22,9 +15,28 @@
                 </span>
             </a>
         </span>
+    {% elif not already_liked and not request.user|can_like:image %}
+        <span class="toggleproperty-add-remove property-like">
+            <a class="btn btn-primary disabled" data-toggle="modal" href="#cant-like">
+                <i class="icon-thumbs-up"></i>
+                <span class="toggleproperties-label">
+                    {% trans "Like" %}
+                </span>
+            </a>
+        </span>
+    {% elif already_liked and not request.user|can_unlike:image %}
+        <span class="toggleproperty-add-remove property-like">
+            <a class="btn btn-primary disabled" data-toggle="modal" href="#cant-unlike">
+                <i class="icon-thumbs-up"></i>
+                <span class="toggleproperties-label">
+                    {% trans "Unlike" %}
+                </span>
+            </a>
+        </span>
     {% else %}
         {% setvar request.user|can_like:image as can_like %}
         {% setvar request.user|can_unlike:image as can_unlike %}
+
         {% add_remove_toggleproperty "like" image request.user can_add=can_like can_remove=can_unlike %}
     {% endif %}
 {% endif %}

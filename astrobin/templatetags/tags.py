@@ -525,6 +525,11 @@ def can_unlike(user, target):
 
 
 @register.filter
+def can_unlike_reason(user, target):
+    return UserService(user).can_unlike_reason(target)
+
+
+@register.filter
 def humanize_image_acquisition_type(type):
     for choice in Image.ACQUISITION_TYPE_CHOICES:
         if type == choice[0]:

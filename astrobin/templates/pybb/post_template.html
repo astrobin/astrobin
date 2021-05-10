@@ -122,16 +122,7 @@
                             </a>
                         </span>
                     {% elif not user|can_like:post %}
-                        {% if user|can_like_reason:post == "INDEX" %}
-                            <span class="toggleproperty-add-remove property-like">
-                                <a class="btn btn-primary disabled" data-toggle="modal" href="#cant-like">
-                                    <i class="icon-thumbs-up"></i>
-                                    <span class="toggleproperties-label">
-                                        {% trans "Like" %}
-                                    </span>
-                                </a>
-                            </span>
-                        {% elif user|can_like_reason:post == "TOPIC_CLOSED" %}
+                        {% if user|can_like_reason:post == "TOPIC_CLOSED" %}
                             <span class="toggleproperty-add-remove property-like">
                                 <a class="btn btn-primary disabled" data-toggle="modal" href="#cant-like-topic-closed">
                                     <i class="icon-thumbs-up"></i>
@@ -185,6 +176,11 @@
 </table>
 
 {% block modals %}
+    {% with post as item %}
+        {% include 'cant_like.html' %}
+        {% include 'cant_unlike.html' %}
+    {% endwith %}
+
     <div class="modal hide fade" id="post-editing-not-allowed-modal">
         <div class="modal-header">
             <a class="close" data-dismiss="modal">&times;</a>
@@ -213,8 +209,6 @@
             <a class="btn btn-primary" data-dismiss="modal">{% trans "OK" %}</a>
         </div>
     </div>
-
-    {% include 'image/detail/modals/cant_unlike.html' %}
 {% endblock %}
 
 {% block extra_js %}

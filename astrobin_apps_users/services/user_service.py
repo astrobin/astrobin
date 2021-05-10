@@ -163,16 +163,24 @@ class UserService:
     def can_like_reason(self, obj):
         return self._real_can_like(obj)[1]
 
-    def can_unlike(self, obj):
+    def _real_can_unlike(self, obj):
         if not self.user.is_authenticated():
-            return False
+            return False, "ANONYMOUS"
 
         property = ToggleProperty.objects.toggleproperties_for_object('like', obj, self.user)  # type: QuerySet
         if property.exists():
             one_hour_ago = timezone.now() - timedelta(hours=1)
-            return property.first().created_on > one_hour_ago
+            if property.first().created_on > one_hour_ago:
+                return True, None
+            return False, "TOO_LATE"
 
-        return False
+        return False, "NEVER_LIKED"
+
+    def can_unlike(self, obj):
+        return self._real_can_unlike(obj)[0]
+
+    def can_unlike_reason(self, obj):
+        return self._real_can_unlike(obj)[1]
 
     def get_all_comments(self):
         return NestedComment.objects.filter(author=self.user, deleted=False)
