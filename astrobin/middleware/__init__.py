@@ -3,3 +3,4 @@ from .logout_deleted_user_middleware import LogoutDeletedUserMiddleware
 from .mark_notification_as_read_middleware import MarkNotificationAsReadMiddleware
 from .previous_topic_read_marker import PreviousTopicReadMarkerMiddleware
 from .profile_middleware import ProfileMiddleware
+from .rest_framework_token_cookie_middleware import RestFrameworkTokenCookieMiddleware
