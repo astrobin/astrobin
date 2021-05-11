@@ -8,7 +8,11 @@
 {% load toggleproperty_tags %}
 {% load staticfiles %}
 
-{% block title %}{% blocktrans trimmed with user=requested_user.userprofile %}{{user}}'s gallery{% endblocktrans %}{% endblock %}
+{% block title %}
+    {% blocktrans trimmed with user=requested_user.userprofile.get_display_name %}
+        {{user}}'s gallery{% endblocktrans %}
+{% endblock %}
+
 {% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block breadcrumbs %}

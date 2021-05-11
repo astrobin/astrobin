@@ -3,7 +3,12 @@
 {% load django_bootstrap_breadcrumbs %}
 {% load tags %}
 
-{% block title %}{% blocktrans trimmed with user=user %}{{user}}'s bookmarks{% endblocktrans %}{% endblock %}
+{% block title %}
+    {% blocktrans trimmed with user=requested_user.userprofile.get_display_name %}
+        {{user}}'s bookmarks
+    {% endblocktrans %}
+{% endblock %}
+
 {% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block breadcrumbs %}
