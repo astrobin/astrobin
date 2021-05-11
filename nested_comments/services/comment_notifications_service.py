@@ -17,8 +17,8 @@ class CommentNotificationsService:
         # type: (NestedComment) -> None
         self.comment = comment
 
-    def send_notifications(self):
-        if self.comment.pending_moderation:
+    def send_notifications(self, force=False):
+        if self.comment.pending_moderation and not force:
             return
 
         instance = self.comment
