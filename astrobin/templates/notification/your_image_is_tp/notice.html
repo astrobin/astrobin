@@ -1,0 +1,7 @@
+{% load i18n %}
+
+<a href="{{ base_url }}{% url 'image_detail' image.get_id %}">
+    {% trans "Congratulations!" %}
+    {% blocktrans %}Your image was voted Top Pick{% endblocktrans %}: {{ image.title }}
+</a>
+

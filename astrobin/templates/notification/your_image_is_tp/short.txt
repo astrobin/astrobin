@@ -1,0 +1,3 @@
+{% load i18n %}
+
+{% trans "Congratulations!" %} {% blocktrans %}Your image was voted Top Pick{% endblocktrans %}: {{image.title}}
