@@ -6,7 +6,9 @@
 {% load tags %}
 
 {% block title %}
-    {% blocktrans trimmed with user=requested_user.userprofile %}{{user}}'s friends{% endblocktrans %}
+    {% blocktrans trimmed with user=requested_user.userprofile.get_display_name %}
+        {{user}}'s friends
+    {% endblocktrans %}
 {% endblock %}
 
 {% block container_extra_classes %}has-subnav{% endblock %}
