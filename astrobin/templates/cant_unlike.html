@@ -1,4 +1,6 @@
 {% load i18n %}
+{% load common_tags %}
+{% load tags %}
 
 <div class="modal hide fade" id="cant-unlike">
     <div class="modal-header">
@@ -7,9 +9,18 @@
     </div>
 
     <div class="modal-body">
+        {% setvar request.user|can_unlike:item as can_unlike %}
+        {% setvar request.user|can_unlike_reason:item as can_unlike_reason %}
+
+        {% if can_unlike_reason == 'TOO_LATE' %}
             {% blocktrans trimmed %}
                 You cannot remove a like that you gave more than one hour ago.
             {% endblocktrans %}
+        {% else %}
+            {% blocktrans trimmed %}
+                You cannot remove your like from this item.
+            {% endblocktrans %}
+        {% endif %}
     </div>
 
     <div class="modal-footer">

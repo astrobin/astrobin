@@ -159,6 +159,11 @@
 {% endblock %}
 
 {% block modals %}
+    {% with image as item %}
+        {% include 'cant_like.html' %}
+        {% include 'cant_unlike.html' %}
+    {% endwith %}
+
     {% include 'image/detail/modals/share.html' %}
     {% include 'image/detail/modals/upload_revision.html' %}
     {% include 'image/detail/modals/upload_uncompressed_source.html' %}
@@ -167,7 +172,6 @@
     {% include 'image/detail/modals/like_this.html' %}
     {% include 'image/detail/modals/bookmarked_this.html' %}
     {% include 'image/detail/modals/send_to_group.html' %}
-    {% include 'image/detail/modals/cant_unlike.html' %}
     {% include 'image/detail/modals/flag_thumbnails.html' %}
     {% include 'image/detail/modals/demote.html' %}
     {% include 'image/detail/modals/promote.html' %}

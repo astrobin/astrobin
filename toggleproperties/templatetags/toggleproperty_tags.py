@@ -7,7 +7,7 @@ from toggleproperties.models import ToggleProperty
 register = template.Library()
 
 
-@register.filter
+@register.simple_tag
 def is_toggled(property_type, target, user):
     if not user or not user.is_authenticated():
         return False

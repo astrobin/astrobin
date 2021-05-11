@@ -2,10 +2,12 @@
     <button class="btn btn-primary{% if is_toggled %} active{% endif %}"
             data-toggle="button"
             id="toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}"
-            {% if property_tooltip_on and property_tooltip_off %}
+
+            {% if not disabled and property_tooltip_on and property_tooltip_off %}
                 rel="tooltip"
+                title="{% if is_toggled %}{{ property_tooltip_on | safe }}{% else %}{{ property_tooltip_off | safe }}{% endif %}"
             {% endif %}
-            title="{% if is_toggled %}{{ property_tooltip_on | safe }}{% else %}{{ property_tooltip_off | safe }}{% endif %}"
+
             {% if disabled %}
                 disabled="disabled"
             {% endif %}

@@ -321,6 +321,7 @@ class TestUserService(TestCase):
         is_authenticated.return_value = False
 
         self.assertFalse(UserService(like.user).can_unlike(image))
+        self.assertEquals("ANONYMOUS", UserService(like.user).can_unlike_reason(image))
 
     @patch('django.contrib.auth.models.User.is_authenticated')
     def test_can_unlike_never_liked(self, is_authenticated):
@@ -330,9 +331,10 @@ class TestUserService(TestCase):
         user = Generators.user()
 
         self.assertFalse(UserService(user).can_unlike(image))
+        self.assertEquals("NEVER_LIKED", UserService(user).can_unlike_reason(image))
 
     @patch('django.contrib.auth.models.User.is_authenticated')
-    def test_can_unlike_out_of_window(self, is_authenticated):
+    def test_can_unlike_too_late(self, is_authenticated):
         is_authenticated.return_value = True
 
         image = Generators.image()
@@ -342,6 +344,7 @@ class TestUserService(TestCase):
         like.save()
 
         self.assertFalse(UserService(like.user).can_unlike(image))
+        self.assertEquals("TOO_LATE", UserService(like.user).can_unlike_reason(image))
 
     @patch('django.contrib.auth.models.User.is_authenticated')
     def test_can_unlike(self, is_authenticated):
