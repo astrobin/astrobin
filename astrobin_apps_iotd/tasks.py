@@ -81,3 +81,8 @@ def send_notifications_when_promoted_image_becomes_iotd():
         'image': image,
         'image_thumbnail': thumb.url if thumb else None
     })
+
+    push_notification([image.user], None, 'your_image_is_iotd', {
+        'image': image,
+        'image_thumbnail': thumb.url if thumb else None
+    })

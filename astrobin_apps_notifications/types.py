@@ -245,5 +245,23 @@ NOTICE_TYPES = (
         _("An image you promoted made it to IOTD"),
         '',
         2
-    )
+    ),
+    (
+        'your_image_is_tpn',
+        _("Your image was nominated to be a Top Pick"),
+        '',
+        2
+    ),
+    (
+        'your_image_is_tp',
+        _("Your image was voted Top Pick"),
+        '',
+        2
+    ),
+    (
+        'your_image_is_iotd',
+        _("Your image was voted Image of the Day"),
+        '',
+        2
+    ),
 )

@@ -30,7 +30,7 @@ from subscription.signals import paid, signed_up
 from threaded_messages.models import Thread
 
 from astrobin_apps_groups.models import Group
-from astrobin_apps_iotd.models import IotdSubmission, IotdVote, TopPickArchive
+from astrobin_apps_iotd.models import IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_notifications.tasks import push_notification_for_new_image, push_notification_for_new_image_revision
 from astrobin_apps_notifications.utils import push_notification, clear_notifications_template_cache, \
     build_notification_url
@@ -820,6 +820,20 @@ def persistent_message_post_save(sender, instance, **kwargs):
 post_save.connect(persistent_message_post_save, sender=Message)
 
 
+def top_pick_nominations_archive_post_save(sender, instance, created, **kwargs):
+    if created:
+        image = instance.image
+        thumb = image.thumbnail_raw('gallery', None, sync=True)
+
+        push_notification([image.user], None, 'your_image_is_tpn', {
+            'image': image,
+            'image_thumbnail': thumb.url if thumb else None
+        })
+
+
+post_save.connect(top_pick_nominations_archive_post_save, sender=TopPickNominationsArchive)
+
+
 def top_pick_archive_item_post_save(sender, instance, created, **kwargs):
     if created:
         image = instance.image
@@ -833,6 +847,11 @@ def top_pick_archive_item_post_save(sender, instance, created, **kwargs):
 
         reviewers = [x.reviewer for x in IotdVote.objects.filter(image=image)]
         push_notification(reviewers, None, 'image_you_promoted_is_tp', {
+            'image': image,
+            'image_thumbnail': thumb.url if thumb else None
+        })
+
+        push_notification([image.user], None, 'your_image_is_tp', {
             'image': image,
             'image_thumbnail': thumb.url if thumb else None
         })

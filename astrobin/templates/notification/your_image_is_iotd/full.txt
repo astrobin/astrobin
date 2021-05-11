@@ -1,0 +1,13 @@
+{% load i18n %}
+{% load astrobin_apps_notifications_tags %}
+
+{% trans "Congratulations!" %}
+{% blocktrans %}Your image was voted Image of the Day{% endblocktrans %}: {{image.title}}
+
+{{ base_url }}{% url 'image_detail' image.get_id %}?{% notification_url_params_for_email %}
+
+{% blocktrans %}
+    Want to learn about the IOTD/TP process?
+{% endblocktrans %}
+
+https://welcome.astrobin.com/iotd
