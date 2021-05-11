@@ -46,3 +46,10 @@ class AppRedirectionService:
             url = url + '?%s' % query_string
 
         return url
+
+    @staticmethod
+    def cookie_domain(request):
+        if 'HTTP_HOST' in request.META and 'astrobin.com' in request.META['HTTP_HOST']:
+            return '.astrobin.com'
+
+        return 'localhost'
