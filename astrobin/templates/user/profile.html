@@ -111,7 +111,7 @@
             {% elif section == 'trash' %}
                 {% include "user/profile/trash_image_list.html" %}
             {% else %}
-                {% if request.user == requested_user and section == 'public' and public_images_no == 0 and wip_images_no > 0 %}
+                {% if request.user == requested_user and section == 'public' and public_images_no == 0 and wip_images_no > 0 and not requested_user.userprofile.display_wip_images_on_public_gallery %}
                     <div class="alert alert-warning">
                         <button class="close" data-dismiss="alert">&times;</button>
 
