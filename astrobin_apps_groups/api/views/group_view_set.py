@@ -13,5 +13,5 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     filter_class = GroupFilter
-    permissions = [IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
     http_method_names = ['get', 'post', 'head', 'put', 'patch', 'delete']
