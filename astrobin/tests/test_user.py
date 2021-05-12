@@ -7,7 +7,6 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase, override_settings
 from django.utils import timezone, formats
 from django_bouncy.models import Bounce
-from mock import patch
 
 from astrobin.enums import SubjectType
 from astrobin.models import (
@@ -130,7 +129,6 @@ class UserTest(TestCase):
         response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
         self.assertEquals(response.status_code, 200)
 
-
     def test_user_page_view(self):
         now = datetime.now()
         today = date.today()
@@ -191,7 +189,7 @@ class UserTest(TestCase):
             reverse('user_page', args=('user',)) + "?sub=acquired")
         self.assertEquals(response.status_code, 200)
         self.assertTrue(response.content.find("IMAGE2") < response.content.find("IMAGE1"))
-        self.assertNotContains(response,  "Images without an acquisition date are not shown")
+        self.assertNotContains(response, "Images without an acquisition date are not shown")
 
         image3 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE3")
         response = self.client.get(
@@ -302,7 +300,7 @@ class UserTest(TestCase):
         image3 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE3")
 
         today = date.today()
-        one_year_ago = datetime(today.year - 1,today.month, today.day, 0, 0, 0)
+        one_year_ago = datetime(today.year - 1, today.month, today.day, 0, 0, 0)
         acquisition1 = Acquisition.objects.create(image=image1, date=today)
         acquisition2 = Acquisition.objects.create(
             image=image2, date=one_year_ago)
@@ -434,7 +432,6 @@ class UserTest(TestCase):
         image.delete()
         self.client.logout()
 
-
     def test_user_page_view_wip_image_not_visible_by_others(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST STAGING IMAGE", True)
@@ -446,7 +443,6 @@ class UserTest(TestCase):
         self.assertEquals(image.title in response.content, False)
 
     @override_settings(PREMIUM_RESTRICTS_IOTD=False)
-
     def test_user_profile_exclude_from_competitions(self):
         self.client.login(username="user", password="password")
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -501,7 +497,6 @@ class UserTest(TestCase):
         IOTD_REVIEW_MIN_PROMOTIONS=2,
         IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(days=365)
     )
-
     def test_user_profile_banned_from_competitions(self):
         self.client.login(username="user", password="password")
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -565,7 +560,6 @@ class UserTest(TestCase):
         response = self.client.get(reverse('user_page', args=(self.user.username,)))
         self.assertContains(response, 'top-pick-nomination-badge')
 
-
     def test_corrupted_images_not_shown_to_others(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST IMAGE")
@@ -576,7 +570,6 @@ class UserTest(TestCase):
         response = self.client.get(reverse("user_page", args=(self.user.username,)))
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, "data-id=\"%d\"" % image.pk)
-
 
     def test_corrupted_images_shown_to_owner(self):
         self.client.login(username="user", password="password")
@@ -593,7 +586,6 @@ class UserTest(TestCase):
         response = self.client.get(reverse("user_page_bookmarks", args=(self.user.username,)))
         self.assertEqual(response.status_code, 200)
         self.client.logout()
-
 
     def test_liked(self):
         self.client.login(username="user", password="password")
@@ -618,7 +610,6 @@ class UserTest(TestCase):
 
         profile = UserProfile.objects.get(user=self.user)
         self.assertNotEquals(updated, profile.updated)
-
 
     def test_profile_updated_when_image_saved(self):
         updated = self.user.userprofile.updated
@@ -1136,3 +1127,29 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('profile_download_data'))
         self.assertTrue(response.context["exceeded_requests_quota"])
+
+    def test_all_images_in_staging_warning_when_image_is_public(self):
+        image = Generators.image()
+        self.client.login(username=image.user.username, password='password')
+
+        response = self.client.get(reverse('user_page', args=(image.user.username,)))
+
+        self.assertNotContains(response, "Can't find your images?")
+
+    def test_all_images_in_staging_warning_when_image_is_wip(self):
+        image = Generators.image(is_wip=True)
+        self.client.login(username=image.user.username, password='password')
+
+        response = self.client.get(reverse('user_page', args=(image.user.username,)))
+
+        self.assertContains(response, "Can't find your images?")
+
+    def test_all_images_in_staging_warning_when_image_is_wip_and_display_wip_images_on_public_gallery(self):
+        image = Generators.image(is_wip=True)
+        image.user.userprofile.display_wip_images_on_public_gallery = True
+        image.user.userprofile.save()
+        self.client.login(username=image.user.username, password='password')
+
+        response = self.client.get(reverse('user_page', args=(image.user.username,)))
+
+        self.assertNotContains(response, "Can't find your images?")
