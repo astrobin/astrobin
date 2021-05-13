@@ -31,6 +31,7 @@ from threaded_messages.models import Thread
 
 from astrobin_apps_groups.models import Group
 from astrobin_apps_iotd.models import IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
+from astrobin_apps_notifications.services import NotificationsService
 from astrobin_apps_notifications.tasks import push_notification_for_new_image, push_notification_for_new_image_revision
 from astrobin_apps_notifications.utils import push_notification, clear_notifications_template_cache, \
     build_notification_url
@@ -202,6 +203,9 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
             # We do it only if created, because the content_object needs to
             # only be updated if the number of comments changes.
             instance.content_object.save(keep_deleted=True)
+
+        if instance.pending_moderation:
+            CommentNotificationsService.send_moderation_required_email()
     else:
         mentions = cache.get("user.%d.comment_pre_save_mentions" % instance.author.pk, [])
 
@@ -729,6 +733,12 @@ def forum_post_post_save(sender, instance, created, **kwargs):
 
         if not instance.on_moderation:
             notify_subscribers()
+        else:
+            NotificationsService.email_superusers(
+                'New forum post needs moderation',
+                '%s%s' % (settings.BASE_URL, instance.get_absolute_url())
+            )
+
     else:
         mentions = cache.get("user.%d.forum_post_pre_save_mentions" % instance.user.pk, [])
 

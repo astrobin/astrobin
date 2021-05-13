@@ -23,6 +23,7 @@ from astrobin.fields import CountryField, get_country_name
 from astrobin.services import CloudflareService
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
+from astrobin_apps_notifications.services import NotificationsService
 from common.upload_paths import uncompressed_source_upload_path, image_upload_path, data_download_upload_path
 from common.validators import FileValidator
 
@@ -2689,15 +2690,10 @@ class AppApiKeyRequest(models.Model):
         return 'API request: %s' % self.name
 
     def save(self, *args, **kwargs):
-        from django.core.mail.message import EmailMessage
-        message = {
-            'from_email': 'astrobin@astrobin.com',
-            'to': ['astrobin@astrobin.com'],
-            'subject': 'App API Key request from %s' % self.registrar.username,
-            'body': 'Check the site\'s admin.',
-        }
-        EmailMessage(**message).send(fail_silently=False)
-
+        NotificationsService.email_superusers(
+            'App API Key request from %s' % self.registrar.username,
+            '%s/admin/astrobin/appapikeyrequest/' % settings.BASE_URL
+        )
         return super(AppApiKeyRequest, self).save(*args, **kwargs)
 
     def approve(self):
