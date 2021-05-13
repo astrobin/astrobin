@@ -60,7 +60,7 @@ class CommentNotificationsService:
                     }
                 )
 
-            if not instance.pending_moderation and not obj.is_wip:
+            if (force or not instance.pending_moderation) and not obj.is_wip:
                 add_story(instance.author,
                           verb='VERB_COMMENTED_IMAGE',
                           action_object=instance,
