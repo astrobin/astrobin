@@ -5,6 +5,7 @@ from django.urls import reverse
 
 from astrobin.models import Image
 from astrobin.stories import add_story
+from astrobin_apps_notifications.services import NotificationsService
 from astrobin_apps_notifications.utils import push_notification, build_notification_url
 from astrobin_apps_users.services import UserService
 from nested_comments.models import NestedComment
@@ -70,3 +71,10 @@ class CommentNotificationsService:
             push_notification([self.comment.author], None, 'comment_approved', {
                 'url': build_notification_url(settings.BASE_URL + self.comment.get_absolute_url())
             })
+
+    @staticmethod
+    def send_moderation_required_email():
+        NotificationsService.email_superusers(
+            'New comment needs moderation',
+            '%s/admin/nested_comments/nestedcomment/?pending_moderation__exact=1' % settings.BASE_URL
+        )
