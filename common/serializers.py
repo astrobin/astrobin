@@ -1,14 +1,13 @@
+from avatar.utils import get_primary_avatar, get_default_avatar_url
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-
-from avatar.utils import get_primary_avatar, get_default_avatar_url
 from rest_framework import serializers
-
 from rest_framework.fields import BooleanField, IntegerField, FloatField, CharField
 from rest_framework.relations import PrimaryKeyRelatedField
 from subscription.models import UserSubscription, Subscription, Transaction
 
-from astrobin.models import UserProfile
+from astrobin.api2.serializers.location_serializer import LocationSerializer
+from astrobin.models import UserProfile, Location
 from astrobin_apps_users.services import UserService
 from toggleproperties.models import ToggleProperty
 
@@ -66,6 +65,9 @@ class TogglePropertySerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    def update(self, instance, validated_data):
+        return super(serializers.ModelSerializer, self).update(instance, validated_data)
+
     class Meta:
         model = UserProfile
         exclude = (
@@ -75,8 +77,20 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializerPrivate(UserProfileSerializer):
-    astrobin_index = FloatField(read_only=True, source="get_scores.user_scores_index")
-    followers = IntegerField(read_only=True, source="get_scores.user_scores_followers")
+    astrobin_index = FloatField(read_only=True, source='get_scores.user_scores_index')
+    followers = IntegerField(read_only=True, source='get_scores.user_scores_followers')
+    locations = LocationSerializer(many=True, source='location_set')
+
+    def update(self, instance, validated_data):
+        locations = validated_data.pop('location_set', [])
+        instance = super(UserProfileSerializer, self).update(instance, validated_data)
+        instance.location_set.clear()
+
+        for location_data in locations:
+            location = Location.objects.get(pk=location_data.get('id'))
+            instance.location_set.add(location)
+
+        return instance
 
     class Meta(UserProfileSerializer.Meta):
         exclude = ()
