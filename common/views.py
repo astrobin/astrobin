@@ -6,7 +6,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import generics, mixins
 from rest_framework.exceptions import ValidationError
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 from subscription.models import Subscription, UserSubscription, Transaction
 
@@ -129,6 +129,7 @@ class CurrentUserProfileDetail(generics.ListAPIView):
 class UserProfilePartialUpdate(generics.GenericAPIView, mixins.UpdateModelMixin):
     model = UserProfile
     serializer_class = UserProfileSerializerPrivate
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         if self.request.user.is_authenticated():
