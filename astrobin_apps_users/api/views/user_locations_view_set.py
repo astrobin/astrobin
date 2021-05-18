@@ -12,5 +12,5 @@ class UserLocationsViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         if self.request.user.is_authenticated():
-            return Location.objects.filter(image__user=self.request.user)
+            return Location.objects.filter(image__user=self.request.user).distinct()
         return Location.objects.none()
