@@ -66,4 +66,5 @@ class ImageSerializer(serializers.ModelSerializer):
             'watermark_opacity',
             'sharpen_thumbnails',
             'key_value_tags',
+            'locations'
         )

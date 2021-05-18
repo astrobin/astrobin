@@ -4,7 +4,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
-from rest_framework import generics
+from rest_framework import generics, mixins
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.renderers import BrowsableAPIRenderer
@@ -87,6 +87,7 @@ class TogglePropertyDetail(generics.RetrieveDestroyAPIView):
 
         raise ValidationError('Cannot delete another user\'s toggleproperty')
 
+
 class UserProfileList(generics.ListAPIView):
     model = UserProfile
     serializer_class = UserProfileSerializer
@@ -123,6 +124,19 @@ class CurrentUserProfileDetail(generics.ListAPIView):
         if self.request.user.is_authenticated():
             return self.queryset.filter(user=self.request.user)
         return self.model.objects.none()
+
+
+class UserProfilePartialUpdate(generics.GenericAPIView, mixins.UpdateModelMixin):
+    model = UserProfile
+    serializer_class = UserProfileSerializerPrivate
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated():
+            return self.model.objects.filter(user=self.request.user)
+        return self.model.objects.none()
+
+    def put(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)
 
 
 @method_decorator(cache_page(60 * 60 * 24), name='dispatch')

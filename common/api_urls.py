@@ -3,7 +3,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 from common.views import ContentTypeList, ContentTypeDetail, UserList, UserDetail, UserProfileList, UserProfileDetail, \
     CurrentUserProfileDetail, SubscriptionList, SubscriptionDetail, UserSubscriptionList, UserSubscriptionDetail, \
-    TogglePropertyList, TogglePropertyDetail, PaymentList
+    TogglePropertyList, TogglePropertyDetail, PaymentList, UserProfilePartialUpdate
 
 urlpatterns = (
     url(r'^contenttypes/$', ContentTypeList.as_view(), name='contenttype-list'),
@@ -19,6 +19,7 @@ urlpatterns = (
     url(r'^userprofiles/$', UserProfileList.as_view(), name='userprofile-list'),
     url(r'^userprofiles/(?P<pk>\d+)/$', UserProfileDetail.as_view(), name='userprofile-detail'),
     url(r'^userprofiles/current/$', CurrentUserProfileDetail.as_view(), name='userprofile-detail-current'),
+    url(r'^userprofiles/(?P<pk>\d+)/partial/$', UserProfilePartialUpdate.as_view(), name='userprofile-partial-update'),
 
     url(r'^subscriptions/$', SubscriptionList.as_view(), name='subscription-list'),
     url(r'^subscriptions/(?P<pk>\d+)/$', SubscriptionDetail.as_view(), name='subscription-detail'),
