@@ -31,6 +31,6 @@ class GroupDetailView(RestrictPrivateGroupToMembersMixin, DetailView):
         # Forum
         topics = group.forum.topics.order_by('-sticky', '-updated', '-id').select_related()
         topics = perms.filter_topics(self.request.user, topics)
-        context['topics'] = topics[:5]
+        context['topics'] = topics[:25]
 
         return context
