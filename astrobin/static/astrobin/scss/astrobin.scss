@@ -1107,6 +1107,12 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   .image-license {
     text-align: right;
   }
+
+  .download-original-file {
+    .private {
+      margin-left: .25rem;
+    }
+  }
 }
 
 .image-basic-data {
