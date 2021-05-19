@@ -19,6 +19,7 @@ from django.shortcuts import redirect
 from django.utils.encoding import iri_to_uri
 
 from astrobin.enums.mouse_hover_image import MouseHoverImage
+from common.services import DateTimeService
 
 # Temp compat fix, drop when moved to python3
 if six.PY2:
@@ -412,9 +413,14 @@ class ImageDetailView(ImageDetailViewBase):
                     dsa_data['frames'][key][
                         'sensor_cooling'] = '%dC' % a.sensor_cooling if a.sensor_cooling is not None else ''
                     dsa_data['frames'][key]['binning'] = 'bin %sx%s' % (a.binning, a.binning) if a.binning else ''
-                    dsa_data['frames'][key]['integration'] = '%sx%s"' % (current_number + a.number, a.duration)
+                    dsa_data['frames'][key]['integration'] = \
+                        '%sx%s" <span class="total-frame-integration">(%s)</span>' % (
+                            current_number + a.number,
+                            a.duration,
+                            DateTimeService.human_time_duration(a.number * a.duration)
+                        )
 
-                    dsa_data['integration'] += (a.duration * a.number / 3600.0)
+                    dsa_data['integration'] += a.duration * a.number
 
                 for i in ['darks', 'flats', 'flat_darks', 'bias']:
                     if a.filter and getattr(a, i):
@@ -450,7 +456,7 @@ class ImageDetailView(ImageDetailViewBase):
                      "%s %s %s %s %s" % (
                          f[1]['integration'], f[1]['iso'], f[1]['gain'], f[1]['sensor_cooling'], f[1]['binning']),
                  ) for f in frames_list)),
-                (_('Integration'), "%.1f %s" % (dsa_data['integration'], _("hours"))),
+                (_('Integration'), DateTimeService.human_time_duration(dsa_data['integration'])),
                 (_('Darks'),
                  '~%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['darks'])) / len(dsa_data['darks'])) if
                  dsa_data['darks'] else 0),

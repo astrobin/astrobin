@@ -1170,6 +1170,12 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       text-shadow: 0 0 3px rgba(0, 0, 0, .33);
     }
   }
+
+  .acquisition {
+    .total-frame-integration {
+      color: darken($grey-4, 15%);
+    }
+  }
 }
 
 .card-label {
