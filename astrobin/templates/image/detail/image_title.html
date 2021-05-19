@@ -33,17 +33,17 @@
     {% endif %}
 
     {% if request.user == image.user or request.user.is_superuser %}
-        <div class="row-fluid">
+        <div class="row-fluid download-original-file">
             <div class="span12">
                 <strong>{% trans "Download original file" %}</strong>:
 
                 {% if revision_image %}
                     <a href="{{ revision_image.image_file.url }}" target="_blank">
-                        {% private_abbr %} {{ revision_image.image_file.url }}
+                        {% private_abbr %} {% trans "Download" %}
                     </a>
                 {% else %}
                     <a href="{{ image.image_file.url }}" target="_blank">
-                        {% private_abbr %} {{ image.image_file.url }}
+                        {% private_abbr %} {% trans "Download" %}
                     </a>
                 {% endif %}
             </div>
