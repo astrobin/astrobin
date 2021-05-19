@@ -185,45 +185,73 @@
         </ul>
     </div> <!-- subnav -->
 
-    <div class="subtitle">
-        <i class="icon icon-info-sign"></i>
-        {% url 'user_page' object.owner.username as owner_url %}
-        {% blocktrans trimmed with date_created=object.date_created|to_user_timezone:request.user|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile category=object.category_humanized %}
-            A group created on {{date_created}}, owned by <a href="{{owner_url}}">{{owner}}</a>, categorized as <strong>{{category}}</strong>.
-        {% endblocktrans %}
-    </div>
+    <div class="group-detail">
+        <div class="subtitle">
+            <i class="icon icon-info-sign"></i>
+            {% url 'user_page' object.owner.username as owner_url %}
+            {% blocktrans trimmed with date_created=object.date_created|to_user_timezone:request.user|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile category=object.category_humanized %}
+                A group created on {{ date_created }}, owned by <a href="{{ owner_url }}">{{ owner }}</a>, categorized
+                as
+                <strong>{{ category }}</strong>.
+            {% endblocktrans %}
+        </div>
 
-    <div class="group-description">
-        {{object.description|strip_html|safe|linebreaks}}
-    </div>
-
-    <div class="group-forum">
-        <h2>
-            {% trans "Group forum" %}
-            <small>
-                {% blocktrans trimmed with post_count=object.forum.post_count topic_count=object.forum.topic_count %}<strong>{{post_count}}</strong> posts in <strong>{{topic_count}}</strong> topics{% endblocktrans %}
-            </small>
-        </h2>
-        {% if request.user in object.members.all %}
-            {% with topic_list=topics forum=object.forum %}
-                {% include 'pybb/topic_list.html' %}
-            {% endwith %}
-            <div class="group-forum-buttons">
-                <a class="btn btn-primary" href="{% url 'pybb:forum' object.forum.id %}">{% trans "View all" %}</a>
-                {% if request.user|pybb_may_create_topic:object.forum %}
-                    <a class="btn btn-primary" href="{% url 'pybb:add_topic' object.forum.id %}">{% trans "New topic" %}</a>
+        <div class="row-fluid">
+            <div class="span9">
+                <h1>{{ group.name }}</h1>
+            </div>
+            <div class="span3 text-right hidden-phone">
+                {% if not user_is_member %}
+                    <a
+                            {% if request.user|has_access_to_premium_group_features %}
+                                href="#join-modal"
+                            {% else %}
+                                href="#feature-restricted-modal"
+                            {% endif %}
+                                data-toggle="modal" class="btn btn-primary btn-large join-group">
+                        <i class="icon icon-signin"></i>
+                        {% trans "Join group" %}
+                    </a>
                 {% endif %}
             </div>
-        {% else %}
-            <div class="alert alert-warning">
-                {% trans "Please join the group to view its forum." %}
-            </div>
-        {% endif %}
-    </div>
+        </div>
 
-    <div class="group-images">
-        <h2>{% trans "Images" %}</h2>
-        {% image_list image_list paginate_by=paginate_by nav_ctx='group' nav_ctx_extra=object.pk %}
+        <div class="well">
+            {{object.description|strip_html|safe|linebreaks}}
+        </div>
+
+        <div class="group-forum">
+            <h2>
+                {% trans "Group forum" %}
+                <small>
+                    {% blocktrans trimmed with post_count=object.forum.post_count topic_count=object.forum.topic_count %}<strong>{{post_count}}</strong> posts in <strong>{{topic_count}}</strong> topics{% endblocktrans %}
+                </small>
+            </h2>
+            {% if request.user in object.members.all %}
+                {% with topic_list=topics forum=object.forum %}
+                    {% include 'pybb/topic_list.html' %}
+                {% endwith %}
+                <div class="group-forum-buttons">
+                    <a class="btn" href="{% url 'pybb:forum' object.forum.id %}">{% trans "View all" %}</a>
+
+                    {% if request.user|pybb_may_create_topic:object.forum %}
+                        <a class="btn btn-primary" href="{% url 'pybb:add_topic' object.forum.id %}">
+                            <i class="icon-plus-sign"></i>
+                            {% trans "New topic" %}
+                        </a>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="alert alert-warning">
+                    {% trans "Please join the group to view its forum." %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="group-images">
+            <h2>{% trans "Images" %}</h2>
+            {% image_list image_list paginate_by=paginate_by nav_ctx='group' nav_ctx_extra=object.pk %}
+        </div>
     </div>
 {% endblock %}
 
@@ -250,32 +278,35 @@
             <h3>{% trans "Join group?" %}</h3>
         </div>
         <div class="modal-body">
-            <div class="well">
-                <p>
-                    {% if group.public %}
-                        {% trans "This is a public group: all content, including the members list, is available to non-members." %}
-                    {% else %}
-                        {% trans "This is a private group: only members have access to its contents." %}
-                    {% endif %}
-                </p>
-                <p>
-                    {% if group.moderated %}
-                        {% trans "This is a moderated group, join requests, images and forum posts might go through a moderation queue." %}
-                    {% else %}
-                        {% trans "This is a non-moderated group." %}
-                    {% endif %}
-                </p>
-                <p>
-                    {% if group.autosubmission %}
-                        {% trans "This is an automatic submission group: all of your images will instantly appear here without any need for action." %}
-                    {% else %}
-                        {% trans "This is a non-automatic submission group: you will pick and choose which images you want to submit." %}
-                    {% endif %}
-                </p>
-            </div>
+            <p>
+                {% if group.public %}
+                    {% trans "This is a public group: all content, including the members list, is available to non-members." %}
+                {% else %}
+                    {% trans "This is a private group: only members have access to its contents." %}
+                {% endif %}
+            </p>
+            <p>
+                {% if group.moderated %}
+                    {% trans "This is a moderated group, join requests, images and forum posts might go through a moderation queue." %}
+                {% else %}
+                    {% trans "This is a non-moderated group." %}
+                {% endif %}
+            </p>
+            <p>
+                {% if group.autosubmission %}
+                    {% trans "This is an automatic submission group: all of your images will instantly appear here without any need for action." %}
+                {% else %}
+                    {% trans "This is a non-automatic submission group: you will pick and choose which images you want to submit." %}
+                {% endif %}
+            </p>
+        </div>
 
-            <form class="form-inline" action="{% url 'group_join' group.pk %}" method="post">{% csrf_token %}
-                <input class="btn btn-primary" type="submit" value="{% trans "Join group" %}"/>
+        <div class="modal-footer">
+            <form action="{% url 'group_join' group.pk %}" method="post">{% csrf_token %}
+                <button class="btn btn-primary {% button_loading_class %}" type="submit">
+                    {% trans "Join group" %}
+                    {% button_loading_indicator %}
+                </button>
             </form>
         </div>
     </div>
@@ -286,12 +317,17 @@
             <h3>{% trans "Leave group?" %}</h3>
         </div>
         <div class="modal-body">
-            <div class="well">
-            {% trans "By leaving this group, your image submissions will no longer be visible to group members, while your forum posts will remain. Are you sure?" %}
-            </div>
+            <p>
+                {% trans "By leaving this group, your image submissions will no longer be visible to group members, while your forum posts will remain. Are you sure?" %}
+            </p>
+        </div>
 
-            <form class="form-inline" action="{% url 'group_leave' group.pk %}" method="post">{% csrf_token %}
-                <input class="btn btn-primary" type="submit" value="{% trans "Leave group" %}"/>
+        <div class="modal-footer">
+            <form action="{% url 'group_leave' group.pk %}" method="post">{% csrf_token %}
+                <button class="btn btn-primary {% button_loading_class %}" type="submit">
+                    {% trans "Leave group" %}
+                    {% button_loading_indicator %}
+                </button>
             </form>
         </div>
     </div>

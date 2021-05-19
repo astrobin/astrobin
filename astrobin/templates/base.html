@@ -90,6 +90,7 @@
         {% include "base/global_alerts.html" %}
 
         <div class="container extra-alerts">
+            {% include "base/alerts.html" %}
             {% block extra_alerts %}{% endblock %}
         </div>
 
@@ -138,7 +139,7 @@
             {% block breadcrumb %} {# Use a block to allow forum template to override this #}
                 {% render_breadcrumbs %}
             {% endblock %}
-            {% include "base/alerts.html" %}
+
             {% block content %}{% endblock %}
         </div> <!-- container -->
 

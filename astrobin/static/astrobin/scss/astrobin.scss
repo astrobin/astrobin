@@ -3610,19 +3610,19 @@ pre {
   }
 }
 
-.group-description {
-  color: $grey-2;
-}
-
 .group-forum h2 small strong {
   color: white;
 }
 
 .group-forum .group-forum-buttons {
-  margin-top: 8px;
-  text-align: center;
-  padding-top: 8px;
-  border-top: 1px solid #393939;
+  margin-top: -18px;
+  padding: 1.5rem;
+  text-align: right;
+  background: #303030 url(../images/darker-panel-tile.png);
+
+  .btn:first-child {
+    margin-right: .5rem;
+  }
 }
 
 div.group-list {
@@ -3631,6 +3631,10 @@ div.group-list {
   a.create-group {
     margin-top: 14px;
   }
+}
+
+.group-detail .join-group {
+  margin-top: 14px;
 }
 
 table.group-list, table.group-member-list {
