@@ -402,7 +402,7 @@ class ImageDetailView(ImageDetailViewBase):
                     except KeyError:
                         current_frames = '0x0"'
 
-                    integration_re = re.match(r'^(\d+)x(\d+)"$', current_frames)
+                    integration_re = re.match(r'^(\d+)x(\d+)"', current_frames)
                     current_number = int(integration_re.group(1))
 
                     dsa_data['frames'][key] = {}
