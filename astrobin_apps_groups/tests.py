@@ -1001,11 +1001,11 @@ class GroupsTest(TestCase):
 
         # Group must be moderated
         self.client.login(username='user1', password='password')
-        self.group.moderated = False;
+        self.group.moderated = False
         self.group.save()
         response = self.client.post(url, follow=True)
         self.assertEqual(response.status_code, 403)
-        self.group.moderated = True;
+        self.group.moderated = True
         self.group.save()
 
         # User must be in the join requests list
@@ -1050,11 +1050,11 @@ class GroupsTest(TestCase):
 
         # Group must be moderated
         self.client.login(username='user1', password='password')
-        self.group.moderated = False;
+        self.group.moderated = False
         self.group.save()
         response = self.client.post(url, follow=True)
         self.assertEqual(response.status_code, 403)
-        self.group.moderated = True;
+        self.group.moderated = True
         self.group.save()
 
         # User must be in the join requests list
