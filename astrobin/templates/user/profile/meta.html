@@ -97,6 +97,21 @@
         <div class="header">
             <h4>
                 {% trans "Stats" %}
+
+                <div
+                        class="info"
+                        rel="tooltip"
+                        title="
+                            {% trans 'The <strong>Last seen online</strong> field is updated hourly.' %}
+                            {% if request.user == requested_user %}
+                                <br/>
+                                {% trans "To change the visibility of these fields, edit your privacy settings." %}
+                            {% endif %}"
+                        data-container="body"
+                        data-html="true"
+                        data-placement="bottom">
+                    <i class="icon-info-sign"></i>
+                </div>
             </h4>
         </div>
 
@@ -104,7 +119,13 @@
             {% if i.1 %}
                 <p>
                     {{i.0}}<br/>
-                    <strong>{{i.1}}</strong>
+                    <strong>
+                        {% if i.2 and i.2 == 'datetime' %}
+                            {% timestamp i.1 %}
+                        {% else %}
+                            {{i.1}}
+                        {% endif %}
+                    </strong>
                 </p>
             {% endif %}
         {% empty %}

@@ -2067,6 +2067,16 @@ class UserProfile(SafeDeleteModel):
         blank=True,
     )
 
+    display_member_since = models.BooleanField(
+        default=True,
+        verbose_name=_("Allow others to see when you created your AstroBin account"),
+    )
+
+    display_last_seen = models.BooleanField(
+        default=True,
+        verbose_name=_("Allow others to see when you last visited AstroBin"),
+    )
+
     # Basic Information
     real_name = models.CharField(
         verbose_name=_("Real name"),

@@ -21,7 +21,7 @@ class LastSeenMiddleware(object):
                 profile.last_seen = datetime.now()
                 profile.save(keep_deleted=True)
 
-                max_age = 60 * 60 * 24
+                max_age = 60 * 60
                 expires = datetime.strftime(datetime.utcnow() + timedelta(seconds=max_age), "%a, %d-%b-%Y %H:%M:%S GMT")
                 response.set_cookie(LAST_SEEN_COOKIE, 1, max_age=max_age, expires=expires)
             except UserProfile.DoesNotExist:

@@ -5,14 +5,14 @@
 {% load tags %}
 {% load common_tags %}
 
-{% block title %}{% trans "Edit your locations" %}{% endblock %}
+{% block title %}{% trans "Privacy settings" %}{% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb_safe 'Users' None %}
     {% breadcrumb request.user.userprofile.get_display_name 'user_page' request.user.username %}
     {% breadcrumb 'Settings' None %}
-    {% breadcrumb 'Locations' None %}
+    {% breadcrumb 'Privacy' None %}
 {% endblock %}
 
 {% block content %}
@@ -22,20 +22,9 @@
             {% if READONLY_MODE %}
                 {% include 'readonly_mode.html' %}
             {% else %}
-                <div class="well">
-                    {% blocktrans %}Use the form below to add a new location. After you add one, a new empty form will be created at the bottom, in case you want to add more.{% endblocktrans %}
-                    <br/>
-                    {% blocktrans %}AstroBin will not share your location details with other users.{% endblocktrans %}
-                </div>
-
-                <form class="form-horizontal" method="post" action="{% url 'profile_save_locations' %}">{% csrf_token %}
-                    {% for form in formset %}
-                        <div class="well">
-                            {{form|as_bootstrap}}
-                        </div>
-                    {% endfor %}
-
-                    {{formset.management_form}}
+                <form id="profile-edit-privacy-form" class="form-horizontal" method="post"
+                      action="{% url 'profile_save_privacy' %}">{% csrf_token %}
+                    {{ form|as_bootstrap }}
 
                     <div class="form-actions">
                         <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit">

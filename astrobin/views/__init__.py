@@ -47,13 +47,14 @@ from astrobin.forms import ImageUploadForm, ImageLicenseForm, PrivateMessageForm
     GearUserInfoForm, LocationEditForm, ImageEditWatermarkForm, DeepSky_AcquisitionForm, \
     UserProfileEditPreferencesForm, \
     ImageRevisionUploadForm, UserProfileEditGearForm, DeleteAccountForm
+from astrobin.forms.profile_edit_privacy_form import UserProfileEditPrivacyForm
 from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import Image, UserProfile, Gear, Location, ImageRevision, DeepSky_Acquisition, \
     SolarSystem_Acquisition, GearUserInfo, Telescope, Mount, Camera, FocalReducer, Software, Filter, \
     Accessory, GlobalStat, App, GearMakeAutoRename, Acquisition
 from astrobin.shortcuts import ajax_response, ajax_success
 from astrobin.templatetags.tags import in_upload_wizard
-from astrobin.utils import to_user_timezone, get_client_country_code
+from astrobin.utils import get_client_country_code
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
@@ -1364,19 +1365,6 @@ def user_page(request, username):
                     Q(acquisition=None))
 
     # Calculate some stats
-    from django.template.defaultfilters import timesince
-
-    date_time = user.date_joined.replace(tzinfo=None)
-    span = timesince(date_time)
-    if span == "0 " + _("minutes"):
-        member_since = _("seconds ago")
-    else:
-        member_since = _("%s ago") % span
-
-    last_login = user.last_login
-    if request.user.is_authenticated():
-        viewer_profile = request.user.userprofile
-        last_login = to_user_timezone(user.last_login, viewer_profile)
 
     followers = ToggleProperty.objects.toggleproperties_for_object("follow", user).count()
     following = ToggleProperty.objects.filter(
@@ -1386,15 +1374,19 @@ def user_page(request, username):
 
     key = "User.%d.Stats.%s" % (user.pk, getattr(request, 'LANGUAGE_CODE', 'en'))
     data = cache.get(key)
-    if data is None:
+    if not data:
         user_sqs = SearchQuerySet().models(User).filter(django_id=user.pk)
         data = {}
 
         if user_sqs.count():
             try:
                 data['stats'] = (
-                    (_('Member since'), member_since),
-                    (_('Last login'), last_login),
+                    (_('Member since'), user.date_joined \
+                        if user.userprofile.display_member_since \
+                        else None, 'datetime'),
+                    (_('Last seen online'), user.userprofile.last_seen or user.last_login \
+                        if user.userprofile.display_last_seen \
+                        else None, 'datetime'),
                     (_('Total integration time'),
                      "%.1f %s" % (user_sqs[0].integration, _("hours")) if user_sqs[0].integration else None),
                     (_('Average integration time'),
@@ -2189,6 +2181,31 @@ def user_profile_save_preferences(request):
 
     messages.success(request, _("Form saved. Thank you!"))
     return response
+
+
+@never_cache
+@login_required
+@require_GET
+def user_profile_edit_privacy(request):
+    return render(request, "user/profile/edit/privacy.html", {
+        'form': UserProfileEditPrivacyForm(instance=request.user.userprofile),
+    })
+
+
+@login_required
+@require_POST
+def user_profile_save_privacy(request):
+    form = UserProfileEditPrivacyForm(data=request.POST, instance=request.user.userprofile)
+
+    if form.is_valid():
+        form.save()
+        for lang in settings.LANGUAGES:
+            cache.delete("User.%d.Stats.%s" % (request.user.pk, lang[0]))
+
+        messages.success(request, _("Form saved. Thank you!"))
+        return HttpResponseRedirect("/profile/edit/privacy/")
+
+    return render(request, "user/profile/edit/privacy.html", {'form': form})
 
 
 @never_cache
