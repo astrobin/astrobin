@@ -40,6 +40,12 @@
                 <i class="icon-chevron-right"></i>
             </a>
         </li>
+        <li class="{% current request '^/profile/(edit|save)/privacy/$' %}">
+            <a href="{% url 'profile_edit_privacy' %}">
+                <i class="icon-lock"></i> {% trans "Privacy" %}
+                <i class="icon-chevron-right"></i>
+            </a>
+        </li>
         <li>
             <a href="{% url 'astrobin_apps_notifications.settings' %}">
                 <i class="icon-bell-alt"></i> {% trans "Notifications" %}
