@@ -24,6 +24,11 @@ class NotificationListView(RedirectView):
         return AppRedirectionService.redirect(self.request, '/notifications')
 
 
+class NotificationSettingsView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        return AppRedirectionService.redirect(self.request, '/notifications/settings')
+
+
 class NotificationMarkAllAsReadView(View):
     def post(self, request, *args, **kwargs):
         Message.objects.filter(user=request.user).update(read=True)
