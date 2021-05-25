@@ -417,7 +417,7 @@ class ImageDetailView(ImageDetailViewBase):
                         '%sx%s" <span class="total-frame-integration">(%s)</span>' % (
                             current_number + a.number,
                             a.duration,
-                            DateTimeService.human_time_duration(a.number * a.duration)
+                            DateTimeService.human_time_duration((current_number + a.number) * a.duration)
                         )
 
                     dsa_data['integration'] += a.duration * a.number
