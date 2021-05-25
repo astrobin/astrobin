@@ -132,7 +132,9 @@
 
                 {% include './profile/image_navigation_menu.html' %}
 
-                {% image_list image_list paginate_by=paginate_by nav_ctx='user' %}
+                <div class="gallery-section-{{ section }}">
+                    {% image_list image_list paginate_by=paginate_by nav_ctx='user' %}
+                </div>
             {% endif %}
         </div> <!-- images -->
     </div> <!-- row -->
