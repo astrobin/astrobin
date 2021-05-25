@@ -16,9 +16,9 @@ class GroupUpdateBaseForm(forms.ModelForm):
                 GroupCategory.INTERNET_COMMUNITY,
                 GroupCategory.FRIENDS_OR_PARTNERS,
                 GroupCategory.GEOGRAPHICAL_AREA):
-            msg = "Only the following category support autosubmission: " \
+            msg = _("Only the following category support autosubmission: " \
                   "Professional network, Club or association, " \
-                  "Internet commmunity, Friends or partners, Geographical area"
+                  "Internet community, Friends or partners, Geographical area")
 
             self._errors['category'] = self.error_class([msg])
             del cleaned_data['category']
