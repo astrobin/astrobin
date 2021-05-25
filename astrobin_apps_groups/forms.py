@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext as _
 
-from astrobin_apps_groups.models import Group
+from astrobin_apps_groups.models import Group, GroupCategory
 
 
 class GroupUpdateBaseForm(forms.ModelForm):
@@ -10,10 +10,15 @@ class GroupUpdateBaseForm(forms.ModelForm):
         category = cleaned_data.get("category")
         autosubmission = cleaned_data.get("autosubmission")
 
-        if autosubmission and category not in (1, 11, 21, 31, 41):
-            msg = "Only the following category support autosubmission: " \
+        if autosubmission and category not in (
+                GroupCategory.PROFESSIONAL_NETWORK,
+                GroupCategory.CLUB_OR_ASSOCIATION,
+                GroupCategory.INTERNET_COMMUNITY,
+                GroupCategory.FRIENDS_OR_PARTNERS,
+                GroupCategory.GEOGRAPHICAL_AREA):
+            msg = _("Only the following category support autosubmission: " \
                   "Professional network, Club or association, " \
-                  "Internet commmunity, Friends or partners, Geographical area"
+                  "Internet community, Friends or partners, Geographical area")
 
             self._errors['category'] = self.error_class([msg])
             del cleaned_data['category']
