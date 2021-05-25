@@ -1318,7 +1318,11 @@ def user_page(request, username):
                 active = 'ALL'
 
             if active != 'ALL':
-                qs = qs.filter(pk__in=[x.pk for x in images_by_constellation[active]])
+                try:
+                    qs = qs.filter(pk__in=[x.pk for x in images_by_constellation[active]])
+                except KeyError:
+                    log.warning("Requested missing constellation %s for user %d" % (active, user.pk))
+                    qs = Image.objects.none()
 
         ###########
         # NO DATA #
