@@ -213,7 +213,7 @@ class GroupsTest(TestCase):
         self.assertFormError(response, 'form', 'category',
                              "Only the following category support autosubmission: " \
                              "Professional network, Club or association, " \
-                             "Internet commmunity, Friends or partners, Geographical area"
+                             "Internet community, Friends or partners, Geographical area"
                              )
 
         self.client.logout()
