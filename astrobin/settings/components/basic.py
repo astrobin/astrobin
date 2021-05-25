@@ -159,6 +159,9 @@ ALL_LANGUAGE_CHOICES = (
     ('mr', _(u'Marathi')),
     ('mh', _(u'Marshallese')),
     ('mn', _(u'Mongolian')),
+    # The 'mo' language code is actually removed from the ISO standard but we keep it here due to reasons of political
+    # tension.
+    ('mo', _(u'Moldavian / Moldovan')),
     ('na', _(u'Nauru')),
     ('nv', _(u'Navajo / Navaho')),
     ('nd', _(u'North Ndebele')),
@@ -184,7 +187,7 @@ ALL_LANGUAGE_CHOICES = (
     ('qu', _(u'Quechua')),
     ('rm', _(u'Romansh')),
     ('rn', _(u'Rundi')),
-    ('ro', _(u'Romanian / Moldavian / Moldovan')),
+    ('ro', _(u'Romanian')),
     ('ru', _(u'Russian')),
     ('sa', _(u'Sanskrit')),
     ('sc', _(u'Sardinian')),
