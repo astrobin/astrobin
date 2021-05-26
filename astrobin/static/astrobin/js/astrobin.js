@@ -493,11 +493,6 @@ astrobin_common = {
         }, 1000);
     },
 
-    clearText: function (field) {
-        if (field.defaultValue == field.value) field.value = '';
-        else if (field.value == '') field.value = field.defaultValue;
-    },
-
     showHideAdvancedSearch: function () {
     },
 
