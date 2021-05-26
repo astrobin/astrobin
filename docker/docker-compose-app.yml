@@ -3,7 +3,7 @@ version: '3'
 services:
 
   nginx:
-    image: astrobin/nginx-${NGINX_MODE}-20200605.1
+    image: ${DOCKER_REGISTRY}/astrobin-nginx:${ASTROBIN_BUILD}
     links:
       - astrobin
     ports:
