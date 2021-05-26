@@ -21,6 +21,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libfreetype6 libfreetype6-dev \
     liblcms2-dev \
     zlib1g-dev \
+    libffi-dev \
+    libssl-dev \
+    libpq-dev \
     ruby ruby-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 

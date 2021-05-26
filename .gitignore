@@ -32,5 +32,7 @@ astrobin.css
 *.scssc
 *.css.map
 node_modules
-/cypress/videos
-/cypress/screenshots
+/cypress/videos/*
+!/cypress/videos/.empty
+/cypress/screenshots/*
+!/cypress/screenshots/.empty

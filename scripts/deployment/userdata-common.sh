@@ -16,6 +16,7 @@ export USER=ubuntu
 export ASTROBIN_TEMPORARY_FILES=/astrobin-temporary-files
 export USER=ubuntu
 export GROUP=ubuntu
+export ARCH=$(uname -m)
 
 # Get initial packages:
 
@@ -43,7 +44,7 @@ aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
 aws configure set aws_region ${AWS_REGION}
 rm /usr/bin/docker-credential-secretservice
 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${DOCKER_REGISTRY}
-docker pull ${DOCKER_REGISTRY}/astrobin:${RELEASE_TAG}
+docker pull ${DOCKER_REGISTRY}/astrobin-${ARCH}:${RELEASE_TAG}
 
 # Install efs-utils:
 
