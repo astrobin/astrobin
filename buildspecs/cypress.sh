@@ -36,4 +36,4 @@ while [[ "$(curl -s -o /dev/null http://127.0.0.1:4400)" ]]; do
     sleep 5
 done
 
-$(npm bin)/cypress run
+CYPRESS_baseUrl=http://127.0.0.1:8083 $(npm bin)/cypress run
