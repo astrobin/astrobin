@@ -3,7 +3,6 @@
 export CORES=$(cat /proc/cpuinfo | grep processor | wc -l)
 export ASTROBIN_GUNICORN_WORKERS=$((++CORES))
 export ASTROBIN_BUILD=${RELEASE_TAG}
-export NGINX_MODE=prod
 
 # Create docker stack:
 

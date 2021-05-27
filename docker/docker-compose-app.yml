@@ -1,19 +1,6 @@
 version: '3'
 
 services:
-
-  nginx:
-    image: astrobin/nginx-${NGINX_MODE}-20200605.1
-    links:
-      - astrobin
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - media:/media
-      - letsencrypt:/etc/letsencrypt
-
-
   astrobin:
     image: ${DOCKER_REGISTRY}/astrobin-${ARCH}:${ASTROBIN_BUILD}
     command:

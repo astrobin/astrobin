@@ -14,9 +14,6 @@ production copy is run on https://www.astrobin.com/.
 AstroBin is composed by several components. The following paragraphs shortly
 describes what they are, what they do, and what their relationships are.
 
-### nginx
-The proxy server that sits in front of the app and forwards the requests.
-
 ### AstroBin app
 The actual main app.
 
@@ -98,7 +95,6 @@ And then bring up the stack:
 export DOCKER_REGISTRY=astrobin
 export ASTROBIN_BUILD=dev
 export ASTROBIN_GUNICORN_WORKERS=1
-export NGINX_MODE=dev
 compose up -d
 ```
 
@@ -145,7 +141,7 @@ the following credentials:
 ## Step 8: Debugging server
 
 For debugging purposes, it is recommended that you launch a simple development
-server on port 8084, and then access it directly bypassing nginx.
+server on port 8084, and then access it directly.
 
 ```bash
 docker exec -it astrobin python manage.py runserver 0.0.0.0:8084
@@ -289,22 +285,11 @@ create index on nested_comments_nestedcomment using btree(deleted, object_id);
 You may want to configure `work_mem` to be your RAM in GB, times 16, divided by
 the number of CPUs in your server.
 
-# Note on building the nginx container
-
-```bash
-export ENV=prod
-docker build -t astrobin/nginx-${ENV} \
-    --build-arg ENV=${ENV} \
-    -f docker/nginx.${ENV}.dockerfile . \
-    && docker push astrobin/nginx-${ENV}
-```
-
 # Docker Swarm deployment
 
 To deploy with docker stack:
 
 ```bash
-export NGINX_MODE=dev # or prod
 export ASTROBIN_GUNICORN_WORKERS=1 # or number of CPU cores + 1
 docker swarm init
 docker stack deploy \

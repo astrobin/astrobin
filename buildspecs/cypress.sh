@@ -1,6 +1,5 @@
 #!/bin/bash -ex
 
-export NGINX_MODE=dev
 export ASTROBIN_BUILD=${CODEBUILD_RESOLVED_SOURCE_VERSION}
 export ASTROBIN_GUNICORN_WORKERS=1
 export ARCH=$(uname -m)
@@ -20,7 +19,7 @@ docker-compose \
    up -d &
 
 
-while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://127.0.0.1/accounts/login/)" != "200" ]]; do
+while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://127.0.0.1:8083/accounts/login/)" != "200" ]]; do
     echo "Waiting for astrobin..."
     sleep 5
 done
