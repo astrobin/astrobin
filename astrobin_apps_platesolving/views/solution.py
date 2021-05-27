@@ -23,6 +23,7 @@ from astrobin.models import DeepSky_Acquisition
 from astrobin.utils import degrees_minutes_seconds_to_decimal_degrees
 from astrobin_apps_platesolving.annotate import Annotator
 from astrobin_apps_platesolving.api_filters.solution_list_filter import SolutionListFilter
+from astrobin_apps_platesolving.backends.astrometry_net.errors import RequestError
 from astrobin_apps_platesolving.models import PlateSolvingAdvancedTask
 from astrobin_apps_platesolving.models import PlateSolvingSettings
 from astrobin_apps_platesolving.models import Solution
@@ -171,18 +172,29 @@ class SolutionUpdateView(base.View):
         solution = get_object_or_404(Solution, pk=kwargs.pop('pk'))
         solver = None
         status = None
+        error = None
 
-        if solution.status < SolverBase.ADVANCED_PENDING:
-            solver = Solver()
-            status = solver.status(solution.submission_id)
-        else:
-            status = solution.status
+        try:
+            if solution.status < SolverBase.ADVANCED_PENDING:
+                solver = Solver()
+                status = solver.status(solution.submission_id)
+            else:
+                status = solution.status
 
-        if status == Solver.MISSING:
-            solution.status = status
+            if status == Solver.MISSING:
+                solution.status = status
+                solution.save()
+        except Exception as e:
+            log.error("Error during basic plate-solving: %s" % str(e))
+            solution.status = Solver.MISSING
+            solution.submission_id = None
             solution.save()
+            error = str(e)
 
-        context = {'status': status}
+        context = {
+            'status': status,
+            'error': error
+        }
         return HttpResponse(simplejson.dumps(context), content_type='application/json')
 
 
@@ -211,12 +223,16 @@ class SolutionFinalizeView(CsrfExemptMixin, base.View):
                 return HttpResponse(simplejson.dumps(context), content_type='application/json')
 
             # Annotate image
-            annotations_obj = solver.annotations(solution.submission_id)
-            solution.annotations = simplejson.dumps(annotations_obj)
-            annotator = Annotator(solution)
-
             try:
+                annotations_obj = solver.annotations(solution.submission_id)
+                solution.annotations = simplejson.dumps(annotations_obj)
+                annotator = Annotator(solution)
                 annotated_image = annotator.annotate()
+            except RequestError as e:
+                solution.status = Solver.FAILED
+                solution.save()
+                context = {'status': solution.status, 'error': str(e)}
+                return HttpResponse(simplejson.dumps(context), content_type='application/json')
             except ThumbnailNotReadyException:
                 solution.status = Solver.PENDING
                 solution.save()

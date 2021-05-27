@@ -4,7 +4,7 @@ from email.mime.application import MIMEApplication
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from urllib import urlencode
-from urllib2 import urlopen, Request
+from urllib2 import urlopen, Request, HTTPError
 
 import requests
 from django.conf import settings
@@ -93,7 +93,13 @@ class Solver(AbstractPlateSolvingBackend):
 
         request = Request(url=url, headers=headers, data=data)
 
-        response = urlopen(request, timeout=30)
+        try:
+            response = urlopen(request, timeout=30)
+        except HTTPError as e:
+            error_message = str(e)
+            log.error("Astrometry.net request error: %s" % error_message)
+            raise RequestError('Server error message: ' + error_message)
+
         text = response.read()
         result = json2python(text)
         status = result.get('status')

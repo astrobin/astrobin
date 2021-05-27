@@ -17,16 +17,10 @@
         this.finalizeURL = '/platesolving/finalize/';
         this.finalizeAdvancedURL = '/platesolving/finalize-advanced/';
 
-        this.$root = $('#platesolving-status');
-        this.$content = this.$root.find('.progress-text');
-        this.$progress = this.$root.find('.progress');
-        this.$bar = this.$root.find('.bar');
-        this.$icon = this.$root.find('i');
-
         this.i18n = config.i18n;
 
         this.missingCounter = 0;
-        this.connectionRefusedErrorShown = false;
+        this.errorAlreadyShown = false;
 
         $.extend(this, config);
 
@@ -35,13 +29,15 @@
 
     Platesolving.prototype = {
         process: function () {
-            if (this.solution_id === 0 || this.solution_status === Status.MISSING) {
+            var self = this;
+
+            if (self.solution_id === 0 || self.solution_status === Status.MISSING) {
                 /* The plate-solving has never been attempted on this resource. */
-                this.solve();
-            } else if (this.solution_status === Status.SUCCESS && this.perform_advanced === "True") {
-                this.solveAdvanced();
+                self.solve();
+            } else if (self.solution_status === Status.SUCCESS && self.perform_advanced === "True") {
+                self.solveAdvanced();
             } else {
-                this.getStatus();
+                self.getStatus();
             }
         },
 
@@ -51,37 +47,19 @@
             self.onStarting();
 
             $.ajax({
-                url: this.solveURL + this.object_id + '/' + this.content_type_id + '/',
+                url: self.solveURL + self.object_id + '/' + self.content_type_id + '/',
                 type: 'post',
                 timeout: 60000,
                 success: function (data, textStatus, jqXHR) {
                     self.solution_id = data.solution;
 
-                    if (data.status <= Status.PENDING) {
-                        self.onStarted();
+                    if (data.error) {
+                        self.onError(data.error);
+                        return;
                     }
 
-                    if (!self.connectionRefusedErrorShown && data.error) {
-                        var message = "";
-
-                        if (data.error.indexOf("Connection refused") > -1 || data.error.indexOf("timed out") > -1) {
-                            message = self.i18n.connectionRefused;
-                        } else if (data.error.indexOf("500") > -1) {
-                            message = self.i18n.internalError;
-                        }
-
-                        $.toast({
-                            heading: self.i18n.error,
-                            text: message,
-                            showHideTransition: 'slide',
-                            allowToastClose: true,
-                            position: 'top-right',
-                            loader: false,
-                            hideAfter: false,
-                            icon: 'error'
-                        });
-                        self.connectionRefusedErrorShown = true;
-                        self.onStatusFailed();
+                    if (data.status <= Status.PENDING) {
+                        self.onStarted();
                     }
                 }
             });
@@ -93,7 +71,7 @@
             self.onStartingAdvanced();
 
             $.ajax({
-                url: this.solveAdvancedURL + this.object_id + '/' + this.content_type_id + '/',
+                url: self.solveAdvancedURL + self.object_id + '/' + self.content_type_id + '/',
                 type: 'post',
                 timeout: 60000,
                 success: function (data, textStatus, jqXHR) {
@@ -113,6 +91,11 @@
                 url: self.apiURL + self.solution_id + '/',
                 cache: false,
                 success: function (data, textStatus, jqXHR) {
+                    if (data.error) {
+                        self.onError(data.error);
+                        return;
+                    }
+
                     switch (data.status) {
                         case Status.MISSING:
                             self.onStatusMissing();
@@ -148,6 +131,11 @@
                 type: 'post',
                 timeout: 30000,
                 success: function (data, textStatus, jqXHR) {
+                    if (data.error) {
+                        self.onError(data.error);
+                        return;
+                    }
+
                     switch (data.status) {
                         case Status.MISSING:
                             self.onStatusMissing();
@@ -156,53 +144,73 @@
                             self.onStatusPending();
                             break;
                         case Status.FAILED:
-                            self.$bar.css({"width": "75%"});
-                            self.$icon.attr('class', 'icon-warning-sign');
-                            self.$content.text(self.solveFinalizingMsg);
+                            self._setProgressBar(75);
+                            self._setIcon('icon-warning-sign');
+                            self._setProgressText(self.solveFinalizingMsg);
                             $.ajax({
                                 url: self.finalizeURL + self.solution_id + '/',
                                 type: 'post',
                                 timeout: 30000,
                                 success: function (data, textStatus, jqXHR) {
+                                    if (data.error) {
+                                        self.onError(data.error);
+                                        return;
+                                    }
+
                                     self.onStatusFailed();
                                 }
                             });
                             break;
                         case Status.SUCCESS:
-                            self.$bar.css({"width": self.perform_advanced === "True" ? "50%" : "75%"});
-                            self.$icon.attr('class', 'icon-warning-sign');
-                            self.$content.text(self.solveFinalizingMsg);
+                            self._setProgressBar(self.perform_advanced === "True" ? 50 : 75);
+                            self._setIcon('icon-warning-sign');
+                            self._setProgressText(self.solveFinalizingMsg);
                             $.ajax({
                                 url: self.finalizeURL + self.solution_id + '/',
                                 type: 'post',
                                 timeout: 30000,
                                 success: function (data, textStatus, jqXHR) {
+                                    if (data.error) {
+                                        self.onError(data.error);
+                                        return;
+                                    }
+
                                     self.onStatusSuccess();
                                 }
                             });
                             break;
                         case Status.ADVANCED_SUCCESS:
-                            self.$bar.css({"width": "75%"});
-                            self.$icon.attr('class', 'icon-warning-sign');
-                            self.$content.text(self.solveFinalizingMsg);
+                            self._setProgressBar(75);
+                            self._setIcon('icon-warning-sign');
+                            self._setProgressText(self.solveFinalizingMsg);
                             $.ajax({
                                 url: self.finalizeAdvancedURL + self.solution_id + '/',
                                 type: 'post',
                                 timeout: 30000,
                                 success: function (data, textStatus, jqXHR) {
+                                    if (data.error) {
+                                        self.onError(data.error);
+                                        return;
+                                    }
+
                                     self.onStatusAdvancedSuccess();
                                 }
                             });
                             break;
                         case Status.ADVANCED_FAILED:
-                            self.$bar.css({"width": "75%"});
-                            self.$icon.attr('class', 'icon-warning-sign');
-                            self.$content.text(self.solveFinalizingMsg);
+                            self._setProgressBar(75);
+                            self._setIcon('icon-warning-sign');
+                            self._setProgressText(self.solveFinalizingMsg);
                             $.ajax({
                                 url: self.finalizeAdvancedURL + self.solution_id + '/',
                                 type: 'post',
                                 timeout: 30000,
                                 success: function (data, textStatus, jqXHR) {
+                                    if (data.error) {
+                                        self.onError(data.error);
+                                        return;
+                                    }
+
                                     self.onStatusAdvancedFailed();
                                 }
                             });
@@ -216,30 +224,39 @@
         },
 
         onStarting: function () {
-            this.missingCounter = 0;
-            this.$root.removeClass('hide');
-            this.$bar.css({"width": "12.5%"});
-            this.$content.text(this.beforeSolveMsg);
+            var self = this;
+
+            self.missingCounter = 0;
+            self._showStatus();
+            self._setProgressBar(12.5);
+            self._setProgressText(self.beforeSolveMsg);
         },
 
         onStartingAdvanced: function () {
-            this.missingCounter = 0;
-            this.$root.removeClass('hide');
-            this.$icon.attr('class', 'icon-ok');
-            this.$bar.css({"width": "75%"});
-            this.$content.text(this.beforeSolveAdvancedMsg);
+            var self = this;
+
+            self.missingCounter = 0;
+            self._showStatus();
+            self._setIcon('icon-ok');
+            self._setProgressBar(75);
+            self._setProgressText(self.beforeSolveAdvancedMsg);
         },
 
         onStarted: function () {
-            this.onStatusPending();
+            var self = this;
+
+            self.onStatusPending();
         },
 
         onStartedAdvanced: function () {
-            this.onStatusAdvancedPending();
+            var self = this;
+
+            self.onStatusAdvancedPending();
         },
 
         onStatusMissing: function () {
             var self = this;
+
             if (self.missingCounter < 5)
                 self.solve();
             else
@@ -253,11 +270,10 @@
         onStatusPending: function () {
             var self = this;
 
-            self.$icon.attr('class', 'icon-ok');
-            self.$bar.css({"width": self.perform_advanced === "True" ? "25%" : "50%"});
-            self.$content.text(self.solveStartedMsg);
-
-            self.$root.removeClass('hide');
+            self._setIcon('icon-ok');
+            self._setProgressBar(self.perform_advanced === "True" ? 25 : 50);
+            self._setProgressText(self.solveStartedMsg);
+            self._showStatus();
 
             setTimeout(function () {
                 self.update();
@@ -267,11 +283,10 @@
         onStatusAdvancedPending: function () {
             var self = this;
 
-            self.$icon.attr('class', 'icon-ok');
-            self.$bar.css({"width": "75%"});
-            self.$content.text(self.solveAdvancedStartedMsg);
-
-            self.$root.removeClass('hide');
+            self._setIcon('icon-ok');
+            self._setProgressBar(75);
+            self._setProgressText(self.solveAdvancedStartedMsg);
+            self._showStatus();
 
             setTimeout(function () {
                 self.update();
@@ -279,46 +294,103 @@
         },
 
         onStatusFailed: function () {
-            this.$icon.attr('class', 'icon-fire');
-            this.$progress.removeClass('progress-info').addClass('progress-danger');
-            this.$bar.css({"width": "100%"});
-            this.$content.text(this.solveFailedMsg);
-            this.removeStatus();
+            var self = this;
+
+            self._setIcon('icon-fire');
+            self._switchProgressClasses('progress-info', 'progress-danger');
+            self._setProgressBar(100);
+            self._setProgressText(self.solveFailedMsg);
+            self._removeStatus();
         },
 
         onStatusAdvancedFailed: function () {
-            this.$icon.attr('class', 'icon-fire');
-            this.$progress.removeClass('progress-info').addClass('progress-danger');
-            this.$bar.css({"width": "100%"});
-            this.$content.text(this.solveAdvancedFailedMsg);
-            this.removeStatus();
+            var self = this;
+
+            self._setIcon('icon-fire');
+            self._switchProgressClasses('progress-info', 'progress-danger');
+            self._setProgressBar(100);
+            self._setProgressText(self.solveAdvancedFailedMsg);
+            self._removeStatus();
         },
 
         onStatusSuccess: function () {
-            if (this.perform_advanced === "True") {
-                this.solveAdvanced();
+            var self = this;
+
+            if (self.perform_advanced === "True") {
+                self.solveAdvanced();
             } else {
-                this.$content.text(this.solveSuccessMsg);
-                this.$icon.attr('class', 'icon-ok');
-                this.$progress.removeClass('progress-info').addClass('progress-success');
-                this.$bar.css({"width": this.perform_advanced === "True" ? "50%" : "100%"});
-                this.removeStatus();
+                self._setProgressText(self.solveSuccessMsg);
+                self._setIcon('icon-ok');
+                self._switchProgressClasses('progress-info', 'progress-success');
+                self._setProgressBar(self.perform_advanced === "True" ? 50 :100);
+                self._removeStatus();
             }
         },
 
         onStatusAdvancedSuccess: function () {
-            this.$icon.attr('class', 'icon-ok');
-            this.$progress.removeClass('progress-info').addClass('progress-success');
-            this.$bar.css({"width": "100%"});
-            this.$content.text(this.solveAdvancedSuccessMsg);
-            this.removeStatus();
+            var self = this;
+
+            self._setIcon('icon-ok');
+            self._switchProgressClasses('progress-info', 'progress-success');
+            self._setProgressBar(100);
+            self._setProgressText(self.solveAdvancedSuccessMsg);
+            self._removeStatus();
         },
 
-        removeStatus: function () {
+        onError: function (error) {
+            var self = this;
+            var message;
+
+            if (error.indexOf("Connection refused") > -1 || error.indexOf("timed out") > -1) {
+                message = self.i18n.connectionRefused;
+            } else if (error.indexOf("500") > -1) {
+                message = self.i18n.internalError;
+            } else {
+                message = self.i18n.unexpectedError;
+            }
+
+            if (!self.errorAlreadyShown) {
+                $.toast({
+                    heading: self.i18n.error,
+                    text: message,
+                    showHideTransition: 'slide',
+                    allowToastClose: true,
+                    position: 'top-right',
+                    loader: false,
+                    hideAfter: false,
+                    icon: 'error'
+                });
+                self.errorAlreadyShown = true;
+            }
+
+            self.onStatusFailed();
+        },
+
+        _setProgressBar: function(percentage) {
+            $('#platesolving-status').find('.bar').css({"width": percentage + "%"});
+        },
+
+        _setProgressText: function (text) {
+            $('#platesolving-status').find('.progress-text').text(text);
+        },
+
+        _switchProgressClasses: function (removeClass, addClass) {
+            $('#platesolving-status').find('.progress').removeClass(removeClass).addClass(addClass);
+        },
+
+        _setIcon: function(icon) {
+            $('#platesolving-status').find('i').attr('class', icon);
+        },
+
+        _showStatus() {
+            $('#platesolving-status').removeClass('hide');
+        },
+
+        _removeStatus: function () {
             var self = this;
 
             setTimeout(function () {
-                self.$root.hide('slow');
+                $('#platesolving-status').hide('slow');
             }, 5000);
         }
     };
@@ -326,8 +398,8 @@
     Platesolving.advancedSvgLoaded = function () {
         var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
             navigator.userAgent &&
-            navigator.userAgent.indexOf('CriOS') == -1 &&
-            navigator.userAgent.indexOf('FxiOS') == -1;
+            navigator.userAgent.indexOf('CriOS') === -1 &&
+            navigator.userAgent.indexOf('FxiOS') === -1;
 
         if (isSafari) {
             var contentDocument = document.getElementById("advanced-plate-solution-svg").contentDocument;
