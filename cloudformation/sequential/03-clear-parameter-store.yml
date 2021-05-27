@@ -1,0 +1,74 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AstroBin Parameter store
+
+Resources:
+
+  AmqpAdminHost:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: AMQP_ADMIN_HOST
+      Type: String
+      Value: rabbitmq.services.astrobin.com
+
+  AmqpAdminUsername:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: AMQP_ADMIN_USERNAME
+      Type: String
+      Value: astrobin
+
+  AmqpHost:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: AMQP_HOST
+      Type: String
+      Value: rabbitmq.services.astrobin.com
+
+  AmqpUsername:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: AMQP_USERNAME
+      Type: String
+      Value: astrobin
+
+  CachalotEnabled:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: CACHALOT_ENABLED
+      Type: String
+      Value: false
+
+  DonationsEnabled:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: DONATIONS_ENABLED
+      Type: String
+      Value: true
+
+  LocalStaticStorage:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: LOCAL_STATIC_STORAGE
+      Type: String
+      Value: false
+
+  MemcachedHost:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: MEMCACHED_HOST
+      Type: String
+      Value: memcached.services.astrobin.com
+
+  RabbitmqDefaultUser:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: RABBITMQ_DEFAULT_USER
+      Type: String
+      Value: astrobin
+
+  S3Enabled:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: S3_ENABLED
+      Type: String
+      Value: true

@@ -1,0 +1,92 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AstroBin Flower service
+
+Resources:
+
+  FlowerLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /ecs/flower-task
+      RetentionInDays: 30
+
+  FlowerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Flower security group
+      VpcId: !ImportValue VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 5555
+          ToPort: 5555
+          CidrIp: 0.0.0.0/0
+
+  FlowerTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      NetworkMode: "awsvpc"
+      RequiresCompatibilities: ["FARGATE"]
+      Cpu: 256
+      Memory: 512
+      ExecutionRoleArn: !ImportValue ExecutionRole
+      ContainerDefinitions:
+        - Name: "flower"
+          Image: "totem/celery-flower-docker"
+          Essential: true
+          PortMappings:
+            - ContainerPort: 5555
+              HostPort: 5555
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: /ecs/flower-task
+              awslogs-region: !Sub ${AWS::Region}
+              awslogs-stream-prefix: flower-task
+          Secrets:
+            - Name: AMQP_ADMIN_HOST
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/AMQP_ADMIN_HOST"
+            - Name: AMQP_ADMIN_PASSWORD
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/AMQP_ADMIN_PASSWORD"
+            - Name: AMQP_ADMIN_USERNAME
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/AMQP_ADMIN_USERNAME"
+            - Name: AMQP_HOST
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/AMQP_HOST"
+            - Name: AMQP_PASSWORD
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/AMQP_PASSWORD"
+            - Name: AMQP_USERNAME
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/AMQP_USERNAME"
+
+  FlowerService:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster: !ImportValue Cluster
+      LaunchType: "FARGATE"
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 100
+      DesiredCount: 1
+      TaskDefinition: !Ref FlowerTaskDefinition
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: "ENABLED"
+          SecurityGroups:
+            - !Ref FlowerSecurityGroup
+          Subnets:
+            - !ImportValue Subnet1
+            - !ImportValue Subnet2
+
+Outputs:
+
+  FlowerSecurityGroup:
+    Value: !Ref FlowerSecurityGroup
+    Export:
+      Name: 'FlowerSecurityGroup'
+
+  FlowerTaskDefinition:
+    Value: !Ref FlowerTaskDefinition
+    Export:
+      Name: 'FlowerTaskDefinition'
+
+  FlowerService:
+    Value: !Ref FlowerService
+    Export:
+      Name: 'FlowerService'

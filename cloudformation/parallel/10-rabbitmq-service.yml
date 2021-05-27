@@ -1,0 +1,101 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AstroBin RabbitMQ service
+
+Resources:
+
+  RabbitMQLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /ecs/rabbitmq-task
+      RetentionInDays: 30
+
+  RabbitMQSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: RabbitMQ security group
+      VpcId: !ImportValue VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 5672
+          ToPort: 5672
+          CidrIp: 0.0.0.0/0
+
+  RabbitMQTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      NetworkMode: "awsvpc"
+      RequiresCompatibilities: ["FARGATE"]
+      Cpu: 256
+      Memory: 512
+      ExecutionRoleArn: !ImportValue ExecutionRole
+      ContainerDefinitions:
+        - Name: "rabbitmq"
+          Image: "rabbitmq:management-alpine"
+          Essential: true
+          PortMappings:
+            - ContainerPort: 5672
+              HostPort: 5672
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: /ecs/rabbitmq-task
+              awslogs-region: !Sub ${AWS::Region}
+              awslogs-stream-prefix: rabbitmq-task
+          Secrets:
+            - Name: RABBITMQ_DEFAULT_USER
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/RABBITMQ_DEFAULT_USER"
+            - Name: RABBITMQ_DEFAULT_PASS
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/RABBITMQ_DEFAULT_PASS"
+
+  RabbitMQServiceDiscovery:
+    Type: AWS::ServiceDiscovery::Service
+    Properties:
+      Name: rabbitmq
+      NamespaceId: !ImportValue PrivateDnsNamespace
+      DnsConfig:
+        RoutingPolicy: MULTIVALUE
+        DnsRecords:
+          - Type: A
+            TTL: "10"
+          - Type: SRV
+            TTL: "10"
+
+  RabbitMQService:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster: !ImportValue Cluster
+      LaunchType: "FARGATE"
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 100
+      DesiredCount: 1
+      TaskDefinition: !Ref RabbitMQTaskDefinition
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: "ENABLED"
+          SecurityGroups:
+            - !Ref RabbitMQSecurityGroup
+          Subnets:
+            - !ImportValue Subnet1
+            - !ImportValue Subnet2
+      ServiceRegistries:
+        - RegistryArn: !GetAtt RabbitMQServiceDiscovery.Arn
+          ContainerName: rabbitmq
+          ContainerPort: 5672
+
+Outputs:
+
+  RabbitMQSecurityGroup:
+    Value: !Ref RabbitMQSecurityGroup
+    Export:
+      Name: 'RabbitMQSecurityGroup'
+
+  RabbitMQTaskDefinition:
+    Value: !Ref RabbitMQTaskDefinition
+    Export:
+      Name: 'RabbitMQTaskDefinition'
+
+  RabbitMQService:
+    Value: !Ref RabbitMQService
+    Export:
+      Name: 'RabbitMQService'

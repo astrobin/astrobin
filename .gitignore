@@ -23,6 +23,7 @@ cover/
 coverage.xml
 env/dev
 /src
+/cloudformation/*.env.json
 /docker/astrobin.env
 /docker/secrets.env
 /ssl-certs

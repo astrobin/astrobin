@@ -1,0 +1,136 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AstroBin Celery Email service
+
+Resources:
+
+  CeleryEmailLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /ecs/celery-email-task
+      RetentionInDays: 30
+
+  CeleryEmailTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      NetworkMode: "awsvpc"
+      RequiresCompatibilities: ["FARGATE"]
+      Cpu: 2048
+      Memory: 4096
+      ExecutionRoleArn: !ImportValue ExecutionRole
+      ContainerDefinitions:
+        - Name: celery-email-container
+          Image: "astrobin/astrobin-ecs"
+          Essential: true
+          EntryPoint:
+            - /bin/sh
+            - -c
+          Command:
+            - /bin/sh -c "useradd astrobin && chown -R astrobin:astrobin /code && python manage.py collectstatic --noinput && celery worker --uid astrobin --gid astrobin -A astrobin -Q email -c 4 -l debug"
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: /ecs/celery-email-task
+              awslogs-region: !Sub ${AWS::Region}
+              awslogs-stream-prefix: celery-email-task
+          Secrets:
+            - Name: AWS_ACCESS_KEY_ID
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/ACCESS_KEY_ID"
+            - Name: ADSENSE_PUBLISHER_ID
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/ADSENSE_PUBLISHER_ID"
+            - Name: ADS_ENABLED
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/ADS_ENABLED"
+            - Name: ASTROMETRY_NET_API_KEY
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/ASTROMETRY_NET_API_KEY"
+            - Name: BASE_URL
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/BASE_URL"
+            - Name: BROKER_URL
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/BROKER_URL"
+            - Name: CACHALOT_ENABLED
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/CACHALOT_ENABLED"
+            - Name: CLOUDFLARE_TOKEN
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/CLOUDFLARE_TOKEN"
+            - Name: CLOUDFLARE_ZONE_ID
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/CLOUDFLARE_ZONE_ID"
+            - Name: DEBUG
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/DEBUG"
+            - Name: DJANGO_SECRET_KEY
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/DJANGO_SECRET_KEY"
+            - Name: DONATIONS_ENABLED
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/DONATIONS_ENABLED"
+            - Name: ELASTICSEARCH_URL
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/ELASTICSEARCH_URL"
+            - Name: EMAIL_HOST
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/EMAIL_HOST"
+            - Name: EMAIL_HOST_PASSWORD
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/EMAIL_HOST_PASSWORD"
+            - Name: EMAIL_HOST_PORT
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/EMAIL_HOST_PORT"
+            - Name: EMAIL_HOST_USER
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/EMAIL_HOST_USER"
+            - Name: EMAIL_USE_SSL
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/EMAIL_USE_SSL"
+            - Name: FLICKR_API_KEY
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/FLICKR_API_KEY"
+            - Name: FLICKR_SECRET
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/FLICKR_SECRET"
+            - Name: GOOGLE_ADS_ID
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/GOOGLE_ADS_ID"
+            - Name: GOOGLE_ANALYTICS_ID
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/GOOGLE_ANALYTICS_ID"
+            - Name: LOCAL_STATIC_STORAGE
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/LOCAL_STATIC_STORAGE"
+            - Name: MEMCACHED_HOST
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/MEMCACHED_HOST"
+            - Name: PAYPAL_MERCHANT_ID
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/PAYPAL_MERCHANT_ID"
+            - Name: PIXINSIGHT_PASSWORD
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/PIXINSIGHT_PASSWORD"
+            - Name: PIXINSIGHT_USERNAME
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/PIXINSIGHT_USERNAME"
+            - Name: POSTGRES_HOST
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/POSTGRES_HOST"
+            - Name: POSTGRES_PASSWORD
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/POSTGRES_PASSWORD"
+            - Name: POSTGRES_READ_REPLICA_HOST
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/POSTGRES_READ_REPLICA_HOST"
+            - Name: READONLY_MODE
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/READONLY_MODE"
+            - Name: REGION_NAME
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/REGION_NAME"
+            - Name: AWS_S3_ENABLED
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/S3_ENABLED"
+            - Name: AWS_SECRET_ACCESS_KEY
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/SECRET_ACCESS_KEY"
+            - Name: SEND_EMAILS
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/SEND_EMAILS"
+            - Name: SHORT_BASE_URL
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/SHORT_BASE_URL"
+
+  CeleryEmailService:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster: !ImportValue Cluster
+      LaunchType: "FARGATE"
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 100
+      DesiredCount: 1
+      TaskDefinition: !Ref CeleryEmailTaskDefinition
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: "ENABLED"
+          Subnets:
+            - !ImportValue Subnet1
+            - !ImportValue Subnet2
+
+Outputs:
+
+  CeleryEmailTaskDefinition:
+    Value: !Ref CeleryEmailTaskDefinition
+    Export:
+      Name: 'CeleryEmailTaskDefinition'
+
+  CeleryEmailService:
+    Value: !Ref CeleryEmailService
+    Export:
+      Name: 'CeleryEmailService'

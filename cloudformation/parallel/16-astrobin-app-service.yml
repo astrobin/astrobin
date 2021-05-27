@@ -1,0 +1,288 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AstroBin App service
+
+Parameters:
+
+  CertificateArnParameter:
+    Type: String
+
+Resources:
+
+  AstroBinAppLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /ecs/astrobin-app-task
+      RetentionInDays: 30
+
+  AstroBinAppSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: AstroBin App security group
+      VpcId: !ImportValue VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 8083
+          ToPort: 8083
+          CidrIp: 0.0.0.0/0
+
+  AstroBinAppTaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      NetworkMode: "awsvpc"
+      RequiresCompatibilities: [ "FARGATE" ]
+      Cpu: 2048
+      Memory: 4096
+      ExecutionRoleArn: !ImportValue ExecutionRole
+      ContainerDefinitions:
+        - Name: astrobin-app-container
+          Image: "astrobin/astrobin-ecs"
+          Essential: true
+          PortMappings:
+            - ContainerPort: 8083
+              HostPort: 8083
+          EntryPoint:
+            - /bin/sh
+            - -c
+          Command:
+            - /bin/sh -c "./scripts/init.sh && gunicorn wsgi:application -w 4 -b :8083 --max-requests 500 --max-requests-jitter 50 --timeout 300 --graceful-timeout 300 -k gevent"
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: /ecs/astrobin-app-task
+              awslogs-region: !Sub ${AWS::Region}
+              awslogs-stream-prefix: astrobin-app-task
+          Secrets:
+            - Name: AWS_ACCESS_KEY_ID
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/ACCESS_KEY_ID"
+            - Name: ADSENSE_PUBLISHER_ID
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/ADSENSE_PUBLISHER_ID"
+            - Name: ADS_ENABLED
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/ADS_ENABLED"
+            - Name: ASTROMETRY_NET_API_KEY
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/ASTROMETRY_NET_API_KEY"
+            - Name: BASE_URL
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/BASE_URL"
+            - Name: BROKER_URL
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/BROKER_URL"
+            - Name: CACHALOT_ENABLED
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/CACHALOT_ENABLED"
+            - Name: CLOUDFLARE_TOKEN
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/CLOUDFLARE_TOKEN"
+            - Name: CLOUDFLARE_ZONE_ID
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/CLOUDFLARE_ZONE_ID"
+            - Name: DEBUG
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/DEBUG"
+            - Name: DJANGO_SECRET_KEY
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/DJANGO_SECRET_KEY"
+            - Name: DONATIONS_ENABLED
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/DONATIONS_ENABLED"
+            - Name: ELASTICSEARCH_URL
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/ELASTICSEARCH_URL"
+            - Name: EMAIL_HOST
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/EMAIL_HOST"
+            - Name: EMAIL_HOST_PASSWORD
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/EMAIL_HOST_PASSWORD"
+            - Name: EMAIL_HOST_PORT
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/EMAIL_HOST_PORT"
+            - Name: EMAIL_HOST_USER
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/EMAIL_HOST_USER"
+            - Name: EMAIL_USE_SSL
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/EMAIL_USE_SSL"
+            - Name: FLICKR_API_KEY
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/FLICKR_API_KEY"
+            - Name: FLICKR_SECRET
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/FLICKR_SECRET"
+            - Name: GOOGLE_ADS_ID
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/GOOGLE_ADS_ID"
+            - Name: GOOGLE_ANALYTICS_ID
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/GOOGLE_ANALYTICS_ID"
+            - Name: LOCAL_STATIC_STORAGE
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/LOCAL_STATIC_STORAGE"
+            - Name: MEMCACHED_HOST
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/MEMCACHED_HOST"
+            - Name: PAYPAL_MERCHANT_ID
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/PAYPAL_MERCHANT_ID"
+            - Name: PIXINSIGHT_PASSWORD
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/PIXINSIGHT_PASSWORD"
+            - Name: PIXINSIGHT_USERNAME
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/PIXINSIGHT_USERNAME"
+            - Name: POSTGRES_HOST
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/POSTGRES_HOST"
+            - Name: POSTGRES_PASSWORD
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/POSTGRES_PASSWORD"
+            - Name: POSTGRES_READ_REPLICA_HOST
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/POSTGRES_READ_REPLICA_HOST"
+            - Name: READONLY_MODE
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/READONLY_MODE"
+            - Name: REGION_NAME
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/REGION_NAME"
+            - Name: AWS_S3_ENABLED
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/S3_ENABLED"
+            - Name: AWS_SECRET_ACCESS_KEY
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/SECRET_ACCESS_KEY"
+            - Name: SEND_EMAILS
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/SEND_EMAILS"
+            - Name: SHORT_BASE_URL
+              ValueFrom: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/SHORT_BASE_URL"
+
+  AstroBinAppLoadBalancerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for load balancer
+      VpcId: !ImportValue VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+
+  AstroBinAppListener2:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Properties:
+      Actions:
+        - Type: forward
+          TargetGroupArn: !Ref AstroBinAppTargetGroup2
+      Conditions:
+        - Field: path-pattern
+          PathPatternConfig:
+            Values: [ "/api/v2/images/*" ]
+      ListenerArn: !Ref AstroBinAppLoadBalancerSecureListener
+      Priority: 1
+
+  AstroBinAppLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: astrobin-app-load-balancer
+      Subnets:
+        - !ImportValue Subnet1
+        - !ImportValue Subnet2
+      SecurityGroups:
+        - !Ref AstroBinAppLoadBalancerSecurityGroup
+
+  AstroBinAppLoadBalancerSecureListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref AstroBinAppLoadBalancer
+      Port: 443
+      Protocol: HTTPS
+      Certificates:
+        - CertificateArn: !Ref CertificateArnParameter
+      DefaultActions:
+        - Type: forward
+          ForwardConfig:
+            TargetGroups:
+              - TargetGroupArn: !Ref AstroBinAppTargetGroup
+                Weight: 1
+              - TargetGroupArn: !Ref AstroBinAppTargetGroup2
+                Weight: 1
+
+  AstroBinAppLoadBalancerListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref AstroBinAppLoadBalancer
+      Port: 80
+      Protocol: HTTP
+      DefaultActions:
+        - RedirectConfig:
+            Host: "#{host}"
+            Path: "/#{path}"
+            Port: 443
+            Protocol: "HTTPS"
+            Query: "#{query}"
+            StatusCode: HTTP_301
+          Type: "redirect"
+
+  AstroBinAppTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      TargetType: ip
+      Name: astrobin-app-target-group
+      HealthCheckPath: /accounts/login/
+      Port: 80
+      Protocol: HTTP
+      VpcId: !ImportValue VPC
+
+  AstroBinAppTargetGroup2:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      TargetType: ip
+      Name: astrobin-app-target-group-2
+      HealthCheckPath: /accounts/login/
+      Port: 80
+      Protocol: HTTP
+      VpcId: !ImportValue VPC
+
+  AstroBinAppService:
+    Type: AWS::ECS::Service
+    DependsOn: AstroBinAppLoadBalancerSecureListener
+    Properties:
+      Cluster: !ImportValue Cluster
+      LaunchType: "FARGATE"
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 100
+      DesiredCount: 1
+      TaskDefinition: !Ref AstroBinAppTaskDefinition
+      LoadBalancers:
+        - TargetGroupArn: !Ref AstroBinAppTargetGroup
+          ContainerPort: 8083
+          ContainerName: astrobin-app-container
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: "ENABLED"
+          SecurityGroups:
+            - !Ref AstroBinAppSecurityGroup
+          Subnets:
+            - !ImportValue Subnet1
+            - !ImportValue Subnet2
+
+  AstroBinAppService2:
+    Type: AWS::ECS::Service
+    DependsOn: AstroBinAppLoadBalancerSecureListener
+    Properties:
+      Cluster: !ImportValue Cluster
+      LaunchType: "FARGATE"
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 100
+      DesiredCount: 1
+      TaskDefinition: !Ref AstroBinAppTaskDefinition
+      LoadBalancers:
+        - TargetGroupArn: !Ref AstroBinAppTargetGroup2
+          ContainerPort: 8083
+          ContainerName: astrobin-app-container
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: "ENABLED"
+          SecurityGroups:
+            - !Ref AstroBinAppSecurityGroup
+          Subnets:
+            - !ImportValue Subnet1
+            - !ImportValue Subnet2
+
+
+Outputs:
+
+  AstroBinAppSecurityGroup:
+    Value: !Ref AstroBinAppSecurityGroup
+    Export:
+      Name: 'AstroBinAppSecurityGroup'
+
+  AstroBinAppTaskDefinition:
+    Value: !Ref AstroBinAppTaskDefinition
+    Export:
+      Name: 'AstroBinAppTaskDefinition'
+
+  AstroBinAppService:
+    Value: !Ref AstroBinAppService
+    Export:
+      Name: 'AstroBinAppService'
+
+  AstroBinAppService2:
+    Value: !Ref AstroBinAppService2
+    Export:
+      Name: 'AstroBinAppService2'

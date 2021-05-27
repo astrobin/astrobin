@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AstroBin Cluster
+
+Resources:
+
+  Cluster:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: astrobin-cluster
+      ClusterSettings:
+        - Name: containerInsights
+          Value: enabled
+
+Outputs:
+
+  Cluster:
+    Value: !Ref Cluster
+    Export:
+      Name: 'Cluster'

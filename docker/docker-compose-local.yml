@@ -3,12 +3,6 @@ version: '3'
 # This file is meant to be used by docker-compose to build images locally. It's useful for development.
 
 services:
-  nginx:
-    build:
-      context: ../
-      dockerfile: docker/nginx.${NGINX_MODE}.dockerfile
-
-
   elasticsearch:
     image: elasticsearch:2.4.6-alpine
     volumes:

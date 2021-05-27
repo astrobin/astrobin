@@ -75,6 +75,11 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
+        'celery.worker': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        }
     }
 }
 

@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AstroBin Security Groups
+
+Resources:
+
+  PrivateDnsNamespace:
+    Type: AWS::ServiceDiscovery::PrivateDnsNamespace
+    Properties:
+      Name: services.astrobin.com
+      Vpc: !ImportValue VPC
+
+Outputs:
+
+  PrivateDnsNamespace:
+    Value: !Ref PrivateDnsNamespace
+    Export:
+      Name: 'PrivateDnsNamespace'
