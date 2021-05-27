@@ -5,9 +5,6 @@
 {% load astrobin_apps_images_tags %}
 {% load astrobin_apps_platesolving_tags %}
 
-{% block extra_head %}
-    <script src="{% static 'astrobin_apps_platesolving/js/astrobin_apps_platesolving.js' %}"></script>
-{% endblock %}
 
 <div class="main-image{% if show_advanced_solution %} has-advanced-solution{% endif %}">
     <div class="enhancement-loading-indicator">

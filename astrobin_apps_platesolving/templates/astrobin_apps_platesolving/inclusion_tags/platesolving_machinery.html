@@ -20,7 +20,13 @@
         var $img = $('.main-image img').first();
 
         function attemptPlatesolving()  {
-            if ($img.attr('data-loaded') === 'true') {
+            function shouldProcess() {
+                var imageLoaded = $img.attr('data-loaded') === 'true';
+
+                return imageLoaded;
+            }
+
+            if (shouldProcess()) {
                 var solving = new AstroBinPlatesolving({
                     object_id: {{object_id}},
                     content_type_id: {{content_type_id}},
@@ -41,7 +47,8 @@
                     i18n: {
                         error: "{% trans 'Error' %}",
                         connectionRefused: "{% trans 'AstroBin could not plate-solve this image because it was not possible to establish a connection to nova.astrometry.net. Please try again later!' %}",
-                        internalError: "{% trans 'AstroBin could not plate-solve this image because nova.astrometry.net reported an internal server error.' %}"
+                        internalError: "{% trans 'AstroBin could not plate-solve this image because nova.astrometry.net reported an internal server error.' %}",
+                        unexpectedError: "{% trans 'AstroBin could not plate-solve this image because nova.astrometry.net reported an unepexted error.' %}"
                     }
                 });
 
@@ -49,10 +56,10 @@
             } else {
                 setTimeout(function() {
                     attemptPlatesolving()
-                }, 2000);
+                }, 1000);
             }
         }
 
-        attemptPlatesolving();
+        window.attemptPlatesolving = attemptPlatesolving;
     });
 </script>

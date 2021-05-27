@@ -54,6 +54,10 @@ $(document).ready(function() {
             showPartial();
         }
 
+        if (window.attemptPlatesolving !== undefined) {
+            window.attemptPlatesolving();
+        }
+
         $(".loading-correct-image-size").remove();
     }
 
