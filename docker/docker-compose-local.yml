@@ -3,18 +3,6 @@ version: '3'
 # This file is meant to be used by docker-compose to build images locally. It's useful for development.
 
 services:
-  nginx:
-    build:
-      context: ../
-      dockerfile: docker/nginx.${NGINX_MODE}.dockerfile
-
-
-  elasticsearch:
-    image: elasticsearch:2.4.6-alpine
-    volumes:
-      - elasticsearch-data:/usr/share/elasticsearch/data:cached
-
-
   memcached:
     image: memcached:alpine
 
@@ -62,7 +50,6 @@ services:
     links:
       - debug_email
       - postgres
-      - elasticsearch
       - redis
       - memcached
 
@@ -73,7 +60,6 @@ services:
       dockerfile: docker/astrobin.dockerfile
     links:
       - postgres
-      - elasticsearch
       - redis
 
 
@@ -83,7 +69,6 @@ services:
       dockerfile: docker/astrobin.dockerfile
     links:
       - postgres
-      - elasticsearch
       - redis
 
 
@@ -93,7 +78,6 @@ services:
       dockerfile: docker/astrobin.dockerfile
     links:
       - postgres
-      - elasticsearch
       - redis
 
 
@@ -103,7 +87,6 @@ services:
       dockerfile: docker/astrobin.dockerfile
     links:
       - postgres
-      - elasticsearch
       - redis
 
 
@@ -113,7 +96,6 @@ services:
       dockerfile: docker/astrobin.dockerfile
     links:
       - postgres
-      - elasticsearch
       - redis
 
 
@@ -123,7 +105,6 @@ services:
       dockerfile: docker/astrobin.dockerfile
     links:
       - postgres
-      - elasticsearch
       - redis
 
 
@@ -136,7 +117,7 @@ services:
 
 volumes:
   postgres-data: { }
-  elasticsearch-data: { }
+
   tmp: { }
   media: { }
   letsencrypt: { }

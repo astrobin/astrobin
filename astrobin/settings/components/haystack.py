@@ -29,35 +29,47 @@ class AWS4AuthEncodingFix(AWS4Auth):
 HAYSTACK_DEFAULT_OPERATOR = 'AND'
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 60
 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': os.environ.get('ELASTICSEARCH_URL', 'http://elasticsearch').strip(),
-        'INDEX_NAME': 'astrobin',
-        'EXCLUDED_INDEXES': [
-            'threaded_messages.search_indexes.Thread',
-            'threaded_messages.search_indexes.ThreadIndex',
-        ]
-    },
-}
-
-if 'es.amazonaws.com' in HAYSTACK_CONNECTIONS['default']['URL']:
-    HAYSTACK_CONNECTIONS['default']['KWARGS'] = {
-        'port': 443,
-        'http_auth': AWS4AuthEncodingFix(
-            os.environ.get('AWS_ACCESS_KEY_ID').strip(),
-            os.environ.get('AWS_SECRET_ACCESS_KEY').strip(),
-            os.environ.get('ELASTIC_SEARCH_AWS_REGION', 'us-east-1').strip(),
-            'es'),
-        'use_ssl': True,
-        'verify_certs': True,
-        'connection_class': RequestsHttpConnection,
+if os.environ.get('ELASTICSEARCH_URL'):
+    HAYSTACK_CONNECTIONS = {
+        'default': {
+            'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+            'URL': os.environ.get('ELASTICSEARCH_URL').strip(),
+            'INDEX_NAME': 'astrobin',
+            'EXCLUDED_INDEXES': [
+                'threaded_messages.search_indexes.Thread',
+                'threaded_messages.search_indexes.ThreadIndex',
+            ]
+        },
     }
+
+    if 'es.amazonaws.com' in HAYSTACK_CONNECTIONS['default']['URL']:
+        HAYSTACK_CONNECTIONS['default']['KWARGS'] = {
+            'port': 443,
+            'http_auth': AWS4AuthEncodingFix(
+                os.environ.get('AWS_ACCESS_KEY_ID').strip(),
+                os.environ.get('AWS_SECRET_ACCESS_KEY').strip(),
+                os.environ.get('ELASTIC_SEARCH_AWS_REGION', 'us-east-1').strip(),
+                'es'),
+            'use_ssl': True,
+            'verify_certs': True,
+            'connection_class': RequestsHttpConnection,
+        }
+    else:
+        HAYSTACK_CONNECTIONS['default']['KWARGS'] = {
+            'port': 9200,
+            'use_ssl': False,
+            'verify_certs': False,
+        }
 else:
-    HAYSTACK_CONNECTIONS['default']['KWARGS'] = {
-        'port': 9200,
-        'use_ssl': False,
-        'verify_certs': False,
+    HAYSTACK_CONNECTIONS = {
+        'default': {
+            'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+            'INDEX_NAME': 'astrobin',
+            'EXCLUDED_INDEXES': [
+                'threaded_messages.search_indexes.Thread',
+                'threaded_messages.search_indexes.ThreadIndex',
+            ]
+        },
     }
 
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.BaseSignalProcessor'

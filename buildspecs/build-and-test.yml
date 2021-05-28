@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      docker: 19
+      nodejs: 12
+
+  build:
+    commands:
+      - buildspecs/build.sh
+      - buildspecs/test.sh
+      - buildspecs/cypress.sh
+
+  post_build:
+    commands:
+      - buildspecs/push-image.sh
+
+    finally:
+      - aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
+      - aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
+      - aws s3 cp $CODEBUILD_SRC_DIR/cypress s3://astrobin-cypress-output/ --recursive
+
+artifacts:
+  base-directory: $CODEBUILD_SRC_DIR/cypress/
+  files:
+    - videos/*
+    - screenshots/*

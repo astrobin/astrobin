@@ -3,7 +3,7 @@ version: '3'
 services:
 
   celery_default:
-    image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
+    image: ${DOCKER_REGISTRY}/astrobin-${ARCH}:${ASTROBIN_BUILD}
     command:
      - bash
      - -c
@@ -27,7 +27,7 @@ services:
 
 
   celery_email:
-    image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
+    image: ${DOCKER_REGISTRY}/astrobin-${ARCH}:${ASTROBIN_BUILD}
     command:
       - bash
       - -c
@@ -49,7 +49,7 @@ services:
 
 
   celery_thumbnails:
-    image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
+    image: ${DOCKER_REGISTRY}/astrobin-${ARCH}:${ASTROBIN_BUILD}
     command:
       - bash
       - -c
@@ -71,7 +71,7 @@ services:
 
 
   celery_haystack:
-    image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
+    image: ${DOCKER_REGISTRY}/astrobin-${ARCH}:${ASTROBIN_BUILD}
     command:
       - bash
       - -c

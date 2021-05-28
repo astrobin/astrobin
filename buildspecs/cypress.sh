@@ -1,8 +1,14 @@
 #!/bin/bash -ex
 
-export NGINX_MODE=dev
 export ASTROBIN_BUILD=${CODEBUILD_RESOLVED_SOURCE_VERSION}
 export ASTROBIN_GUNICORN_WORKERS=1
+export ARCH=$(uname -m)
+
+if [ $ARCH == "aarch64" ]; then
+    # https://docs.cypress.io/guides/getting-started/installing-cypress#Download-URLs
+    echo "Skipping Cypress tests on aarch64 because Cypress does not support it yet."
+    exit 0
+fi
 
 npm ci &
 docker-compose \
@@ -13,7 +19,7 @@ docker-compose \
    up -d &
 
 
-while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://127.0.0.1/accounts/login/)" != "200" ]]; do
+while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://127.0.0.1:8083/accounts/login/)" != "200" ]]; do
     echo "Waiting for astrobin..."
     sleep 5
 done
@@ -30,4 +36,4 @@ while [[ "$(curl -s -o /dev/null http://127.0.0.1:4400)" ]]; do
     sleep 5
 done
 
-$(npm bin)/cypress run
+CYPRESS_baseUrl=http://127.0.0.1:8083 $(npm bin)/cypress run

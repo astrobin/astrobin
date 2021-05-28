@@ -3,7 +3,7 @@ version: '3'
 services:
 
   beat:
-    image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
+    image: ${DOCKER_REGISTRY}/astrobin-${ARCH}:${ASTROBIN_BUILD}
     command:
       - bash
       - -c
@@ -29,7 +29,7 @@ services:
 
 
   celery_monitor:
-    image: ${DOCKER_REGISTRY}/astrobin:${ASTROBIN_BUILD}
+    image: ${DOCKER_REGISTRY}/astrobin-${ARCH}:${ASTROBIN_BUILD}
     command:
       - bash
       - -c
