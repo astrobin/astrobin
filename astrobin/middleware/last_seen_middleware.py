@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 from astrobin.models import UserProfile
+from astrobin.utils import get_client_country_code
 
 LAST_SEEN_COOKIE = 'astrobin_last_seen_set'
 
@@ -19,6 +20,14 @@ class LastSeenMiddleware(object):
             try:
                 profile = UserProfile.objects.get(user=request.user)
                 profile.last_seen = datetime.now()
+
+                country_code = get_client_country_code(request)
+                if country_code and country_code != 'UNKNOWN':
+                    try:
+                        profile.last_seen_in_country = country_code.lower()[0:2]
+                    except IndexError:
+                        pass
+
                 profile.save(keep_deleted=True)
 
                 max_age = 60 * 60
