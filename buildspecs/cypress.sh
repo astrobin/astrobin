@@ -10,6 +10,8 @@ if [ $ARCH == "aarch64" ]; then
     exit 0
 fi
 
+docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD} || exit 1
+
 npm ci &
 docker-compose \
    -f docker/docker-compose-app.yml \
