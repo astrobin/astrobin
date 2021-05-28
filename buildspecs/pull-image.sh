@@ -7,4 +7,6 @@ aws ecr get-login-password --region us-east-1 | docker login \
     --password-stdin \
     $DOCKER_REGISTRY &&
 docker pull $DOCKER_REGISTRY/astrobin-${ARCH}:$CODEBUILD_RESOLVED_SOURCE_VERSION &&
-docker image tag astrobin-${ARCH}:$CODEBUILD_RESOLVED_SOURCE_VERSION
+docker image tag \
+    $DOCKER_REGISTRY/astrobin-${ARCH}:$CODEBUILD_RESOLVED_SOURCE_VERSION \
+    astrobin-${ARCH}:$CODEBUILD_RESOLVED_SOURCE_VERSION
