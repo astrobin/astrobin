@@ -802,14 +802,20 @@ astrobin_common = {
     },
 
     init_page_loading_indicator: function() {
-        $('a:not(.bb-quote-link').click(function (event) {
+        $('a:not(.bb-quote-link)').click(function (event) {
             var url = $(this).attr('href');
 
             if (!url) {
                 return;
             }
 
+            // Skip external links.
             if (url.indexOf('astrobin.com') === -1 && url.indexOf('localhost') === -1 && url[0] !== '/') {
+                return;
+            }
+
+            // Skip endless pagination.
+            if ($(event.target).hasClass('endless_more')) {
                 return;
             }
 
