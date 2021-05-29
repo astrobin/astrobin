@@ -801,11 +801,8 @@ astrobin_common = {
         });
     },
 
-    init: function (config) {
-        /* Init */
-        $.extend(true, astrobin_common.config, config);
-
-        $('a').click(function(event)  {
+    init_page_loading_indicator: function() {
+        $('a:not(.bb-quote-link').click(function (event) {
             var url = $(this).attr('href');
 
             if (!url) {
@@ -817,8 +814,8 @@ astrobin_common = {
             }
 
             var target = $(this).attr('target');
-            var $pageLoader = $('#page-loader');
-            var $pageLoaderBackdrop = $('#page-loader-backdrop');
+            var $pageLoader = $('#page-loading-indicator');
+            var $pageLoaderBackdrop = $('#page-loading-indicator-backdrop');
 
             if (!target) {
                 target = '_self';
@@ -826,7 +823,7 @@ astrobin_common = {
 
             $pageLoaderBackdrop.css('width', '100%');
             $pageLoaderBackdrop.css('height', '100%');
-            $pageLoaderBackdrop.css('opacity', .4);
+            $pageLoaderBackdrop.css('opacity', .5);
 
             $pageLoader.css('width', '100%');
             $pageLoader.css('height', '100%');
@@ -835,6 +832,11 @@ astrobin_common = {
             window.open(url, target);
             event.preventDefault();
         });
+    },
+
+    init: function (config) {
+        /* Init */
+        $.extend(true, astrobin_common.config, config);
 
         $('.dropdown-toggle').dropdown();
         $('.carousel').carousel();
@@ -850,7 +852,8 @@ astrobin_common = {
             changeYear: true
         });
 
-        astrobin_common.init_timestamps()
+        astrobin_common.init_timestamps();
+        astrobin_common.init_page_loading_indicator();
 
         if (window.innerWidth >= 980) {
             $("select:not([multiple])").select2({theme: "flat"});

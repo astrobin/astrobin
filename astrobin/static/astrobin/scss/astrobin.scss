@@ -4286,7 +4286,7 @@ form.edit-thumbnails {
   }
 }
 
-#page-loader {
+#page-loading-indicator {
   position: fixed;
   top: 0;
   left: 0;
@@ -4298,16 +4298,16 @@ form.edit-thumbnails {
   transition: opacity .25s;
 
   .ld {
-    font-size: 1rem;
-    height: 1rem;
-    width: 1rem;
+    font-size: 1.5rem;
+    height: 1.5rem;
+    width: 1.5rem;
     position: absolute;
-    top: calc(50% - .5rem);
-    left: calc(50% - .5rem);
+    top: calc(50% - .75rem);
+    left: calc(50% - .75rem);
   }
 }
 
-#page-loader-backdrop {
+#page-loading-indicator-backdrop {
   position: fixed;
   top: 0;
   left: 0;
