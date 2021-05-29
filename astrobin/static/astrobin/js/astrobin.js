@@ -801,6 +801,39 @@ astrobin_common = {
         });
     },
 
+    init_page_loading_indicator: function() {
+        $('a:not(.bb-quote-link').click(function (event) {
+            var url = $(this).attr('href');
+
+            if (!url) {
+                return;
+            }
+
+            if (url.indexOf('astrobin.com') === -1 && url.indexOf('localhost') === -1 && url[0] !== '/') {
+                return;
+            }
+
+            var target = $(this).attr('target');
+            var $pageLoader = $('#page-loading-indicator');
+            var $pageLoaderBackdrop = $('#page-loading-indicator-backdrop');
+
+            if (!target) {
+                target = '_self';
+            }
+
+            $pageLoaderBackdrop.css('width', '100%');
+            $pageLoaderBackdrop.css('height', '100%');
+            $pageLoaderBackdrop.css('opacity', .5);
+
+            $pageLoader.css('width', '100%');
+            $pageLoader.css('height', '100%');
+            $pageLoader.css('opacity', 1);
+
+            window.open(url, target);
+            event.preventDefault();
+        });
+    },
+
     init: function (config) {
         /* Init */
         $.extend(true, astrobin_common.config, config);
@@ -819,7 +852,8 @@ astrobin_common = {
             changeYear: true
         });
 
-        astrobin_common.init_timestamps()
+        astrobin_common.init_timestamps();
+        astrobin_common.init_page_loading_indicator();
 
         if (window.innerWidth >= 980) {
             $("select:not([multiple])").select2({theme: "flat"});

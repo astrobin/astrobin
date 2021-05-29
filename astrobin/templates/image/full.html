@@ -142,7 +142,7 @@
                         {% endif %}
                     </li>
                     <li>
-                        <a class="btn navbar-btn" href=" {% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "real" %}{% endif %}">
+                        <a class="btn navbar-btn" href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "real" %}{% endif %}">
                             <i class="icon-list-alt"></i>
                             <span class="hidden-phone hidden-tablet">{% trans "Technical card" %}</span>
                         </a>
@@ -209,6 +209,8 @@
         </div>
 </div>
 {% endif %}
+
+{% include "base/page_loading_indicator.html" %}
 
 <div class="modal hide fade" id="large-size-full-resolution-warning">
     <div class="modal-header">
@@ -406,6 +408,7 @@
     $(document).ready(function () {
         astrobin_common.init_ajax_csrf_token();
         astrobin_common.init_timestamps();
+        astrobin_common.init_page_loading_indicator();
 
         setupAdvancedSolution();
         setupZoom();
