@@ -805,6 +805,37 @@ astrobin_common = {
         /* Init */
         $.extend(true, astrobin_common.config, config);
 
+        $('a').click(function(event)  {
+            var url = $(this).attr('href');
+
+            if (!url) {
+                return;
+            }
+
+            if (url.indexOf('astrobin.com') === -1 && url.indexOf('localhost') === -1 && url[0] !== '/') {
+                return;
+            }
+
+            var target = $(this).attr('target');
+            var $pageLoader = $('#page-loader');
+            var $pageLoaderBackdrop = $('#page-loader-backdrop');
+
+            if (!target) {
+                target = '_self';
+            }
+
+            $pageLoaderBackdrop.css('width', '100%');
+            $pageLoaderBackdrop.css('height', '100%');
+            $pageLoaderBackdrop.css('opacity', .4);
+
+            $pageLoader.css('width', '100%');
+            $pageLoader.css('height', '100%');
+            $pageLoader.css('opacity', 1);
+
+            window.open(url, target);
+            event.preventDefault();
+        });
+
         $('.dropdown-toggle').dropdown();
         $('.carousel').carousel();
         $('.nav-tabs').tab();

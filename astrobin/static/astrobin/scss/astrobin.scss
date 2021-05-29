@@ -4285,3 +4285,36 @@ form.edit-thumbnails {
     }
   }
 }
+
+#page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: 999999;
+  text-align: center;
+  opacity: 0;
+  transition: opacity .25s;
+
+  .ld {
+    font-size: 1rem;
+    height: 1rem;
+    width: 1rem;
+    position: absolute;
+    top: calc(50% - .5rem);
+    left: calc(50% - .5rem);
+  }
+}
+
+#page-loader-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  background: #000;
+  z-index: 999998;
+  opacity: 0;
+  transition: opacity .25s;
+}
