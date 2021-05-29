@@ -4298,12 +4298,13 @@ form.edit-thumbnails {
   transition: opacity .25s;
 
   .ld {
-    font-size: 1.5rem;
-    height: 1.5rem;
-    width: 1.5rem;
+    font-size: 2.25rem;
+    height: 2.25rem;
+    width: 2.25rem;
     position: absolute;
-    top: calc(50% - .75rem);
-    left: calc(50% - .75rem);
+    top: calc(50% - 1.125rem);
+    left: calc(50% - 1.125rem);
+    color: $white;
   }
 }
 

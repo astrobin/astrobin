@@ -829,7 +829,7 @@ astrobin_common = {
 
             $pageLoaderBackdrop.css('width', '100%');
             $pageLoaderBackdrop.css('height', '100%');
-            $pageLoaderBackdrop.css('opacity', .5);
+            $pageLoaderBackdrop.css('opacity', .65);
 
             $pageLoader.css('width', '100%');
             $pageLoader.css('height', '100%');
