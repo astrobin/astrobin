@@ -802,7 +802,7 @@ astrobin_common = {
     },
 
     init_page_loading_indicator: function() {
-        $('a:not(.bb-quote-link)').click(function (event) {
+        $('a:not(.bb-quote-link)').live('click', function (event) {
             var url = $(this).attr('href');
 
             if (!url) {
