@@ -17,3 +17,9 @@ class UtilsService:
         return \
             first_code_anniversary <= today < first_code_anniversary + one_week or \
             publication_anniversary <= today < publication_anniversary + one_week
+
+    @staticmethod
+    def unique(sequence):
+        # Return unique items preserving order.
+        seen = set()
+        return [x for x in sequence if not (x in seen or seen.add(x))]

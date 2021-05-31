@@ -1,13 +1,16 @@
+import os
 import re
 
 import simplejson
 from avatar.utils import get_primary_avatar, get_default_avatar_url
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponse
 from django.utils.encoding import smart_str
 from django.views.decorators.http import require_GET
 
+from astrobin_apps_images.services import ImageService
 from .models import Accessory, Image
 from .models import Camera
 from .models import Filter
@@ -17,6 +20,7 @@ from .models import Mount
 from .models import Software
 from .models import Telescope
 from .models import UserProfile
+from .services.utils_service import UtilsService
 
 
 @require_GET
@@ -81,16 +85,43 @@ def autocomplete_usernames(request):
         HttpResponse(simplejson.dumps([]))
 
     q = request.GET['q']
+    referer_header = request.META.get('HTTP_REFERER', '')
+    from_forums = '/forum' in referer_header
+    from_comments = re.match(r'%s\/?([a-zA-Z0-9]{6})\/.*' % settings.BASE_URL, referer_header)
+    users = []
+    results = []
+    limit = 10
 
     # Replace non-breaking space with regular space
     q = q.replace(unichr(160), ' ')
 
-    users = UserProfile.objects.filter(
-        Q(user__username__icontains=q) |
-        Q(real_name__icontains=q)
-    ).distinct()[:10]
+    if from_forums:
+        referer = request.META.get('HTTP_REFERER')
 
-    results = []
+        if '?' in referer:
+            slug = os.path.basename(os.path.normpath(referer.rsplit('/', 1)[0]))
+        else:
+            slug = os.path.basename(os.path.normpath(referer))
+
+        users = list(UserProfile.objects.filter(
+            Q(user__posts__topic__slug=slug) & (Q(user__username__icontains=q) | Q(real_name__icontains=q))
+        ).distinct()[:limit])
+    elif from_comments:
+        image_id = from_comments.group(1)
+        image = ImageService.get_object(image_id, Image.objects_including_wip.all())
+        users = UtilsService.unique(
+            [image.user.userprofile] + list(UserProfile.objects.filter(
+                Q(
+                    Q(user__comments__object_id=image.id) & Q(user__comments__deleted=False)
+                ) &
+                Q(
+                    Q(user__username__icontains=q) | Q(real_name__icontains=q)
+                )
+            ).distinct())[:limit])[:limit]
+
+    users = UtilsService.unique(users + list(UserProfile.objects.filter(
+        Q(user__username__icontains=q) | Q(real_name__icontains=q)
+    ).distinct()[:limit]))[:limit]
 
     for user in users:
         avatar = get_primary_avatar(user, 40)
