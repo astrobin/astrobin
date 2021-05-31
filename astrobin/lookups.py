@@ -109,15 +109,17 @@ def autocomplete_usernames(request):
     elif from_comments:
         image_id = from_comments.group(1)
         image = ImageService.get_object(image_id, Image.objects_including_wip.all())
-        users = UtilsService.unique(
-            [image.user.userprofile] + list(UserProfile.objects.filter(
+        users = list(UserProfile.objects.filter(
                 Q(
-                    Q(user__comments__object_id=image.id) & Q(user__comments__deleted=False)
-                ) &
+                    Q(user__image=image) |
+                    Q(
+                        Q(user__comments__object_id=image.id) & Q(user__comments__deleted=False)
+                    )
+                )&
                 Q(
                     Q(user__username__icontains=q) | Q(real_name__icontains=q)
                 )
-            ).distinct())[:limit])[:limit]
+            ).distinct()[:limit])
 
     users = UtilsService.unique(users + list(UserProfile.objects.filter(
         Q(user__username__icontains=q) | Q(real_name__icontains=q)
