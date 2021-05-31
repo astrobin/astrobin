@@ -74,3 +74,11 @@ class UtilsServiceTest(TestCase):
 
         today.return_value = datetime(2021, 12, 3).date()
         self.assertTrue(UtilsService.show_10_year_anniversary_logo())
+
+    def test_unique(self):
+        self.assertEquals([], UtilsService.unique([]))
+        self.assertEquals([1], UtilsService.unique([1]))
+        self.assertEquals([1], UtilsService.unique([1, 1]))
+        self.assertEquals([1, 2], UtilsService.unique([1, 2]))
+        self.assertEquals([1, 2], UtilsService.unique([1, 2, 1]))
+        self.assertEquals([2, 1], UtilsService.unique([2, 1, 2]))
