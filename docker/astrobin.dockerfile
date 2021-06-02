@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     gettext \
     python-pip \
-    libjpeg62 libjpeg62-dev libjpeg-dev \
+    libjpeg8 libjpeg8-dev libjpeg-dev \
     libtiff5 libtiff5-dev libtiff-tools \
     libfreetype6 libfreetype6-dev \
     liblcms2-dev \
