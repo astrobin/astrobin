@@ -689,7 +689,8 @@ class ImageIndex(SearchIndex, Indexable):
         return SolutionService(obj.solution).get_objects_in_field() if obj.solution else None
 
     def prepare_countries(self, obj):
-        return ' '.join([x.country for x in obj.locations.all() if x.country])
+        # Escape with __ because for whatever reason some country codes don't work, including IT.
+        return ' '.join(['__%s__' % x.country for x in obj.locations.all() if x.country]).strip() or None
 
     def prepare_bortle_scale(self, obj):
         deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj, bortle__isnull=False)

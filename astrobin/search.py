@@ -188,7 +188,7 @@ class AstroBinSearchForm(SearchForm):
         country = self.cleaned_data.get("country")
 
         if country is not None and country != "":
-            results = results.filter(countries=country)
+            results = results.filter(countries=CustomContain('__%s__' % country))
 
         return results
 
