@@ -1,6 +1,4 @@
 {% load i18n %}
-{% load astrobin_apps_users_tags %}
-{% load static %}
 
 <div class="modal hide fade" id="people-bookmarked-this-modal">
     <div class="modal-header">
@@ -8,19 +6,29 @@
         <h3><i class="icon-bookmark"></i> {% trans "The following people bookmarked this image" %}</h3>
     </div>
     <div class="modal-body">
-        <img src="{% static "astrobin/images/ajax-loader.gif" %}" alt="{% trans "Loading" %}" />
+        <div class="loading">
+            <div class="ld ld-ring ld-spin"></div>
+        </div>
+        <table class="table hide"></table>
     </div>
 </div>
+
+{% include 'image/detail/modals/_like_or_bookmarked_this_success.html' %}
 
 <script type="text/javascript">
     $('#people-bookmarked-this-modal').on('show', function() {
         var $modal = $(this);
+        var $loading = $modal.find('.loading');
+        var $table = $modal.find('.table');
+
+        $loading.show();
+        $table.addClass('hide');
 
         $.ajax({
-            url: '{% url 'astrobin_apps_users.toggleproperty_users_ajax' "bookmark" image.id image_ct.id %}',
+            url: '{% url 'astrobin_apps_users.toggleproperty_users_ajax' 'bookmark' image.id image_ct.id %}',
             timeout: 0,
             success: function(data, textStatus, jqXHR) {
-                $modal.find('.modal-body').html(data);
+                onLikeOrBoorkmarkedSuccess(data, $loading, $table);
             }
         });
     });
