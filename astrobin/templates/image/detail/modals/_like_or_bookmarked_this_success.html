@@ -13,23 +13,27 @@
 
 <script type="text/javascript">
     function onLikeOrBoorkmarkedSuccess(data, $loading, $table) {
-        var likes = JSON.parse(data);
+        var properties = JSON.parse(data);
 
         $loading.hide();
         $table.removeClass('hide');
         $table.find('tr').remove();
 
-        if (likes.length === 0) {
+        if (properties.length === 0) {
             {% trans "There doesn't seem to be anything here." as message %}
             var message = '{{ message|escapejs }}';
             $table.append('<tr><td>' + message + '</td></tr>');
         } else {
             var t = document.querySelector('#like-or-bookmarked-template');
 
-            likes.forEach(function (like) {
-                t.content.querySelector('.user a').textContent = like[1] || like[0];
-                t.content.querySelector('.user a').href = '/users/' + like[0] + '/';
-                t.content.querySelector('.created-on abbr').setAttribute('data-epoch', new Date(like[2]).getTime());
+            properties.forEach(function (property) {
+                var displayName = property[1] || property[0];
+                var username = property[0];
+                var createdOn = property[2];
+
+                t.content.querySelector('.user a').textContent = displayName;
+                t.content.querySelector('.user a').href = '/users/' + username + '/';
+                t.content.querySelector('.created-on abbr').setAttribute('data-epoch', new Date(createdOn + 'Z').getTime());
                 $table.append(document.importNode(t.content, true));
             });
 
