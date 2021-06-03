@@ -1,0 +1,39 @@
+{% load i18n %}
+
+<template id="like-or-bookmarked-template">
+    <tr>
+        <td class="user">
+            <a href=""></a>
+        </td>
+        <td class="created-on">
+            <abbr class="timestamp" data-epoch="">...</abbr>
+        </td>
+    </tr>
+</template>
+
+<script type="text/javascript">
+    function onLikeOrBoorkmarkedSuccess(data, $loading, $table) {
+        var likes = JSON.parse(data);
+
+        $loading.hide();
+        $table.removeClass('hide');
+        $table.find('tr').remove();
+
+        if (likes.length === 0) {
+            {% trans "There doesn't seem to be anything here." as message %}
+            var message = '{{ message|escapejs }}';
+            $table.append('<tr><td>' + message + '</td></tr>');
+        } else {
+            var t = document.querySelector('#like-or-bookmarked-template');
+
+            likes.forEach(function (like) {
+                t.content.querySelector('.user a').textContent = like[1] || like[0];
+                t.content.querySelector('.user a').href = '/users/' + like[0] + '/';
+                t.content.querySelector('.created-on abbr').setAttribute('data-epoch', new Date(like[2]).getTime());
+                $table.append(document.importNode(t.content, true));
+            });
+
+            astrobin_common.init_timestamps();
+        }
+    }
+</script>
