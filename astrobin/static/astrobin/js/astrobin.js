@@ -786,12 +786,13 @@ astrobin_common = {
             var $el = $(element);
             var datetime = new Date(0);
             var locale = window.navigator.userLanguage || window.navigator.language;
+            var now = new Date()
 
             datetime.setUTCSeconds($el.data('epoch') / 1000);
 
             $el.attr('title', datetime.toISOString());
 
-            if (new Date() - datetime < 1000 * 60 * 60 * 24 * 30) {
+            if (datetime < now && now - datetime < 1000 * 60 * 60 * 24 * 30) {
                 $el.text(datetime.toLocaleString(locale));
                 $el.timeago();
             } else {

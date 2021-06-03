@@ -856,7 +856,7 @@ class UserTest(TestCase):
         self.assertContains(
             response,
             "<strong data-test='expiration-date'>" +
-            formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
+            "<abbr class='timestamp' data-epoch='%s000'>...</abbr>" % us.expires.strftime('%s') +
             "</strong>",
             html=True)
         self.assertContains(response, "<strong data-test='uploads-used'>0 / 123</strong>", html=True)
@@ -882,7 +882,7 @@ class UserTest(TestCase):
         self.assertContains(
             response,
             "<strong data-test='expiration-date'>" +
-            formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
+            "<abbr class='timestamp' data-epoch='%s000'>...</abbr>" % us.expires.strftime('%s') +
             "</strong>",
             html=True)
         self.assertContains(response, "<strong data-test='images-used'>0 / 123</strong>", html=True)
@@ -907,7 +907,7 @@ class UserTest(TestCase):
         self.assertContains(
             response,
             "<strong data-test='expiration-date'>" +
-            formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
+            "<abbr class='timestamp' data-epoch='%s000'>...</abbr>" % us.expires.strftime('%s') +
             "</strong>",
             html=True)
 
@@ -932,7 +932,7 @@ class UserTest(TestCase):
         self.assertContains(
             response,
             "<strong data-test='expiration-date'>" +
-            formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
+            "<abbr class='timestamp' data-epoch='%s000'>...</abbr>" % us.expires.strftime('%s') +
             "</strong>",
             html=True)
 
@@ -956,7 +956,7 @@ class UserTest(TestCase):
         self.assertContains(
             response,
             "<strong data-test='expiration-date'>" +
-            formats.date_format(us.expires, "SHORT_DATE_FORMAT") +
+            "<abbr class='timestamp' data-epoch='%s000'>...</abbr>" % us.expires.strftime('%s') +
             "</strong>",
             html=True)
 
