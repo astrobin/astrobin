@@ -44,7 +44,7 @@
                 {% trans "Expiration date" %}<br/>
                 <strong data-test="expiration-date">
                     {% with expiration=requested_user|get_premium_subscription_expiration %}
-                        {{expiration|date:"SHORT_DATE_FORMAT"}}
+                        {% timestamp expiration %}
                     {% endwith %}
                 </strong>
             </p>
