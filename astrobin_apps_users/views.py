@@ -36,7 +36,7 @@ class TogglePropertyUsersAjaxView(JsonRequestResponseMixin, base.View):
                 'displayName': toggle_property.user.userprofile.get_display_name(),
                 'createdOn': toggle_property.created_on,
                 'following': ToggleProperty.objects.toggleproperties_for_object(
-                    'follow', toggle_property.user, request.user).exists()
+                    'follow', toggle_property.user, request.user).exists() if request.user.is_authenticated() else False
             })
 
         return self.render_json_response(json.dumps(data, cls=DjangoJSONEncoder))
