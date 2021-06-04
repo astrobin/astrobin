@@ -8,6 +8,7 @@ from braces.views import (
 )
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
 from django.core.files.images import get_image_dimensions
@@ -678,6 +679,7 @@ class ImageDetailView(ImageDetailViewBase):
             'skyplot_zoom1': skyplot_zoom1,
 
             'image_ct': ContentType.objects.get_for_model(Image),
+            'user_ct': ContentType.objects.get_for_model(User),
             'like_this': like_this,
             'user_can_like': can_like(self.request.user, image),
             'bookmarked_this': bookmarked_this,

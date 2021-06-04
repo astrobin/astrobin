@@ -22,12 +22,24 @@ class TogglePropertyUsersAjaxView(JsonRequestResponseMixin, base.View):
         object_id = kwargs.pop('object_id')
         content_type = ContentType.objects.get_for_id(kwargs.pop('content_type_id'))
 
-        likes = ToggleProperty.objects.filter(
+        toggle_properties = ToggleProperty.objects.filter(
             property_type=property_type,
             object_id=object_id,
-            content_type=content_type).values_list('user__username', 'user__userprofile__real_name', 'created_on')
+            content_type=content_type)
 
-        return self.render_json_response(json.dumps(list(likes), cls=DjangoJSONEncoder))
+        data = []
+        for toggle_property in toggle_properties.iterator():
+            data.append({
+                'id': toggle_property.id,
+                'userId': toggle_property.user.id,
+                'username': toggle_property.user.username,
+                'displayName': toggle_property.user.userprofile.get_display_name(),
+                'createdOn': toggle_property.created_on,
+                'following': ToggleProperty.objects.toggleproperties_for_object(
+                    'follow', toggle_property.user, request.user).exists()
+            })
+
+        return self.render_json_response(json.dumps(data, cls=DjangoJSONEncoder))
 
 
 class UserSearchView(JSONResponseMixin, base.View):
