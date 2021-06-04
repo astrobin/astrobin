@@ -13,8 +13,6 @@
     </div>
 </div>
 
-{% include 'image/detail/modals/_like_or_bookmarked_this_success.html' %}
-
 <script type="text/javascript">
     $('#people-bookmarked-this-modal').on('show', function() {
         var $modal = $(this);
@@ -28,7 +26,7 @@
             url: '{% url 'astrobin_apps_users.toggleproperty_users_ajax' 'bookmark' image.id image_ct.id %}',
             timeout: 0,
             success: function(data, textStatus, jqXHR) {
-                onLikeOrBoorkmarkedSuccess(data, $loading, $table);
+                onLikeOrBookmarkedSuccess(data, $loading, $table);
             }
         });
     });

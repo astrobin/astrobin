@@ -4319,3 +4319,20 @@ form.edit-thumbnails {
   opacity: 0;
   transition: opacity .25s;
 }
+
+
+#people-like-this-modal {
+  td.created-on {
+    text-align: right;
+  }
+
+  td.follow-unfollow {
+    width: 2rem;
+  }
+
+  .timestamp {
+    display: inline-block;
+    margin-left: .5rem;
+    color: $grey-4;
+  }
+}

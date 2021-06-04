@@ -5,38 +5,141 @@
         <td class="user">
             <a href=""></a>
         </td>
+
         <td class="created-on">
             <abbr class="timestamp" data-epoch="">...</abbr>
         </td>
+
+        {% if request.user.is_authenticated %}
+            <td class="follow-unfollow">
+                <a class="btn btn-mini btn-primary" href="#"><i class="icon-plus"></i></a>
+            </td>
+        {% endif %}
     </tr>
 </template>
 
 <script type="text/javascript">
-    function onLikeOrBoorkmarkedSuccess(data, $loading, $table) {
+    function onLikeOrBookmarkedSuccess(data, $loading, $table) {
         var properties = JSON.parse(data);
 
-        $loading.hide();
-        $table.removeClass('hide');
-        $table.find('tr').remove();
+        function init() {
+            $loading.hide();
+            $table.removeClass('hide');
+            $table.find('tr').remove();
+        }
 
-        if (properties.length === 0) {
+        function disableButton($button) {
+            $button.attr('disabled', 'disabled');
+            $button.css('opacity', .5);
+            $button.html('&hellip;')
+        }
+
+        function enableButton($button) {
+            $button.removeAttr('disabled');
+            $button.css('opacity', 1);
+            $button.html('<i class="icon-plus"></i>')
+        }
+
+        function perform_follow($button, contentType, userId, requesterId) {
+            disableButton($button);
+
+            $.ajax({
+                type: 'post',
+                url: '/api/v2/common/toggleproperties/',
+                data: {
+                    property_type: 'follow',
+                    content_type: contentType,
+                    object_id: userId,
+                    user: requesterId
+                },
+                timeout: 5000,
+                success: function (response) {
+                    $button.addClass('active');
+                    enableButton($button);
+                },
+                error: function () {
+                    enableButton($button);
+                }
+            });
+        }
+
+        function perform_unfollow($button, contentType, userId, requesterId) {
+            disableButton($button);
+
+            $.ajax({
+               type: 'get',
+               url: '/api/v2/common/toggleproperties/' +
+                   "?property_type=follow" +
+                   "&content_type=" + contentType +
+                   "&object_id=" + userId +
+                   "&user=" + requesterId,
+                timeout: 5000,
+                success: function(response) {
+                    var togglePropertyId = response.results[0].pk;
+
+                    $.ajax({
+                        type: 'delete',
+                        url: '/api/v2/common/toggleproperties/' + togglePropertyId + "/",
+                        timeout: 5000,
+                        success: function () {
+                            $button.removeClass('active');
+                            enableButton($button);
+                        },
+                        error: function () {
+                            enableButton($button);
+                        }
+                    });
+                },
+                error: function () {
+                    enableButton($button);
+                }
+            });
+        }
+
+        function noData() {
             {% trans "There doesn't seem to be anything here." as message %}
             var message = '{{ message|escapejs }}';
             $table.append('<tr><td>' + message + '</td></tr>');
-        } else {
+        }
+
+        function addData() {
             var t = document.querySelector('#like-or-bookmarked-template');
 
             properties.forEach(function (property) {
-                var displayName = property[1] || property[0];
-                var username = property[0];
-                var createdOn = property[2];
+                t.content.querySelector('.user a').textContent = property['displayName'];
+                t.content.querySelector('.user a').href = '/users/' + property['username'] + '/';
+                t.content.querySelector('.timestamp').setAttribute(
+                    'data-epoch', new Date(property['createdOn'] + 'Z').getTime());
 
-                t.content.querySelector('.user a').textContent = displayName;
-                t.content.querySelector('.user a').href = '/users/' + username + '/';
-                t.content.querySelector('.created-on abbr').setAttribute('data-epoch', new Date(createdOn + 'Z').getTime());
+                {% if request.user.is_authenticated %}
+                    var button = t.content.querySelector('.follow-unfollow .btn');
+                    button.setAttribute('data-user', property['userId']);
+
+                    if (property['following']) {
+                        button.classList.add('active');
+                    }
+                {% endif %}
+
                 $table.append(document.importNode(t.content, true));
-            });
 
+                {% if request.user.is_authenticated %}
+                    $('.follow-unfollow .btn:not(.active)[data-user=' + property['userId'] + ']').live('click', function () {
+                        perform_follow($(this), {{ user_ct.id }}, property['userId'], {{ request.user.id }});
+                    });
+
+                    $('.follow-unfollow .btn.active[data-user=' + property['userId'] + ']').live('click', function () {
+                        perform_unfollow($(this), {{ user_ct.id }}, property['userId'], {{ request.user.id }});
+                    });
+                {% endif %}
+            });
+        }
+
+        init();
+
+        if (properties.length === 0) {
+            noData();
+        } else {
+            addData();
             astrobin_common.init_timestamps();
         }
     }
