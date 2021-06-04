@@ -220,7 +220,8 @@ class ImageResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = Image.objects.filter(corrupted=False, is_wip=False)
+        queryset = Image.all_objects.filter(
+            corrupted=False, is_wip=False, deleted__isnull=True, uploader_in_progress__isnull=True)
         fields = [
             'id',
             'hash',
