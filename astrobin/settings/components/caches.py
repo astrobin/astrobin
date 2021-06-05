@@ -6,7 +6,7 @@ if CACHE_TYPE == 'redis':
     CACHES = {
         'default': {
             'BACKEND': 'django_redis.cache.RedisCache',
-            'LOCATION': os.environ.get('BROKER_URL', 'redis://redis:6379/0').strip(),
+            'LOCATION': os.environ.get('CACHE_URL', 'redis://redis:6379/1').strip(),
             'OPTIONS': {
                 'CLIENT_CLASS': 'django_redis.client.DefaultClient'
             },
