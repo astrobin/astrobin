@@ -7,6 +7,7 @@
 {% load tags %}
 {% load toggleproperty_tags %}
 {% load staticfiles %}
+{% load cache %}
 
 {% block title %}
     {% blocktrans trimmed with user=requested_user.userprofile.get_display_name %}
@@ -133,7 +134,13 @@
                 {% include './profile/image_navigation_menu.html' %}
 
                 <div class="gallery-section-{{ section }}">
-                    {% image_list image_list paginate_by=paginate_by nav_ctx='user' %}
+                    {% if section == 'public' and subsection == 'title' or subsection == 'uploaded' %}
+                        {% cache 43200 user_gallery_image_list requested_user.pk LANGUAGE_CODE section subsection %}
+                            {% image_list image_list paginate_by=paginate_by nav_ctx='user' %}
+                        {% endcache %}
+                    {% else %}
+                        {% image_list image_list paginate_by=paginate_by nav_ctx='user' %}
+                    {% endif %}
                 </div>
             {% endif %}
         </div> <!-- images -->
