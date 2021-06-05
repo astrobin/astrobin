@@ -122,6 +122,8 @@ def image_post_save(sender, instance, created, **kwargs):
             except UserProfile.DoesNotExist:
                 pass
 
+        UserService(instance.user).clear_gallery_image_list_cache()
+
 
 post_save.connect(image_post_save, sender=Image)
 
@@ -133,6 +135,7 @@ def image_post_delete(sender, instance, **kwargs):
             user.userprofile.save(keep_deleted=True)
 
     ImageIndex().remove_object(instance)
+    UserService(instance.user).clear_gallery_image_list_cache()
 
     try:
         if instance.uploaded > datetime.datetime.now() - relativedelta(hours=24):
@@ -164,8 +167,18 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
                   action_object=instance,
                   target=instance.image)
 
+    UserService(instance.image.user).clear_gallery_image_list_cache()
+
 
 post_save.connect(imagerevision_post_save, sender=ImageRevision)
+
+
+def imagerevision_post_delete(sender, instance, **kwargs):
+    UserService(instance.image.user).clear_gallery_image_list_cache()
+
+
+post_softdelete.connect(imagerevision_post_delete, sender=ImageRevision)
+
 
 
 def nested_comment_pre_save(sender, instance, **kwargs):

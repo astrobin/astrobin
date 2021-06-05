@@ -5,6 +5,8 @@ import numpy as np
 from django.conf import settings
 from django.contrib.auth.models import User, Group
 from django.contrib.contenttypes.models import ContentType
+from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
 from django.db.models import QuerySet, Q
 from django.utils import timezone
 from pybb.models import Post
@@ -205,3 +207,17 @@ class UserService:
             ).count()
 
         return likes
+
+    def clear_gallery_image_list_cache(self):
+        sections = ('public',)
+        subsections = ('title', 'uploaded',)
+        languages = settings.LANGUAGES
+
+        def _do_clear(language, section, subsection):
+            key = make_template_fragment_key('user_gallery_image_list', [self.user.pk, language, section, subsection])
+            cache.delete(key)
+
+        for language in languages:
+            for section in sections:
+                for subsection in subsections:
+                    _do_clear(language[0], section, subsection)
