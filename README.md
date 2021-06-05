@@ -34,7 +34,7 @@ The background task worker. Background tasks include:
 The postgres database that holds all the data.
 
 ### cache
-The memcache daemon that store transient data for performance reasons.
+The redis daemon that store transient data for performance reasons.
 
 ### search
 The Elasticsearch engine that handles the search index. It's accessed by

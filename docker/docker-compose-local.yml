@@ -3,10 +3,6 @@ version: '3'
 # This file is meant to be used by docker-compose to build images locally. It's useful for development.
 
 services:
-  memcached:
-    image: memcached:alpine
-
-
   redis:
     image: redis:6.2.4-alpine
     ports:
@@ -51,7 +47,6 @@ services:
       - debug_email
       - postgres
       - redis
-      - memcached
 
 
   celery_default:
