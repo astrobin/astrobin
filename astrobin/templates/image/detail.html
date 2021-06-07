@@ -44,8 +44,8 @@
 {% endblock %}
 
 {% block content %}
-    {% with cache_timeout=request.user.is_authenticated|yesno:"0,300" %}
-        {% cache cache_timeout image_page_cache user.is_authenticated image.pk image.updated %}
+    {% with cache_timeout=request.user.is_authenticated|yesno:"0,600" %}
+        {% cache cache_timeout image_page_cache user.is_authenticated LANGUAGE_CODE image.pk image.updated %}
             {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" or constellation or show_contains %}
                 <div class="subtitle">
                 {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" %}

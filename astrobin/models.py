@@ -1663,6 +1663,8 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
                 .update(is_final=False)
 
         super(ImageRevision, self).save(*args, **kwargs)
+        Image.all_objects.filter(pk=self.image.pk).update(updated=timezone.now())
+        UserProfile.all_objects.filter(pk=self.image.user.pk).update(updated=timezone.now())
 
         if self.image.solution and self.image.solution.settings:
             solution, created = Solution.objects.get_or_create(
