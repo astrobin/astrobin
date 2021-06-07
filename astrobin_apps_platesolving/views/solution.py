@@ -328,6 +328,7 @@ class SolutionPixInsightWebhook(base.View):
         if status == 'OK':
             svg_hd = request.POST.get('svgAnnotation', None)
             svg_regular = request.POST.get('svgAnnotationSmall', svg_hd)
+            pixscale = request.POST.get('resolution', None)
 
             solution.pixinsight_svg_annotation_hd.save(serial_number + ".svg", ContentFile(svg_hd))
             solution.pixinsight_svg_annotation_regular.save(serial_number + ".svg", ContentFile(svg_regular))
@@ -346,7 +347,9 @@ class SolutionPixInsightWebhook(base.View):
             solution.advanced_dec_bottom_right = request.POST.get('bottomRightDec', None)
 
             solution.advanced_orientation = request.POST.get('rotation', None)
-            solution.advanced_pixscale = corrected_pixscale(solution, request.POST.get('resolution', None))
+            solution.advanced_pixscale = pixscale \
+                if solution.advanced_settings and solution.advanced_settings.sample_raw_frame_file \
+                else corrected_pixscale(solution, pixscale)
             solution.advanced_flipped = request.POST.get('flipped', None) == 'true'
             solution.advanced_wcs_transformation = request.POST.get('wcs_transformation', None)
 
