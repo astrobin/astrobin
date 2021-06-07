@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load cache %}
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_donations_tags %}
@@ -43,127 +44,131 @@
 {% endblock %}
 
 {% block content %}
-    {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" or constellation or show_contains %}
-    <div class="subtitle">
-        {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" %}
-            <i class="icon icon-globe"></i>
-            <strong>{% trans "Hemisphere" %}:</strong>&nbsp;
-            {% if hemisphere == "HEMISPHERE_TYPE_NORTHERN" %}
-                {% trans "Northern" %}
-            {% else %}
-                {% trans "Southern" %}
-            {% endif %}
+    {% with cache_timeout=request.user.is_authenticated|yesno:"0,600" %}
+        {% cache cache_timeout image_page_cache user.is_authenticated LANGUAGE_CODE image.pk image.updated %}
+            {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" or constellation or show_contains %}
+                <div class="subtitle">
+                {% if hemisphere != "HEMISPHERE_TYPE_UNKNOWN" %}
+                    <i class="icon icon-globe"></i>
+                    <strong>{% trans "Hemisphere" %}:</strong>&nbsp;
+                    {% if hemisphere == "HEMISPHERE_TYPE_NORTHERN" %}
+                        {% trans "Northern" %}
+                    {% else %}
+                        {% trans "Southern" %}
+                    {% endif %}
 
-            {% if constellation or show_contains %}
-                &nbsp;&middot;&nbsp;
-            {% endif %}
-        {% endif %}
-
-        {% if constellation %}
-            <i class="icon icon-star-empty"></i>
-            <strong>{% trans "Constellation" %}:</strong>
-            <a href="{% url 'haystack_search' %}?d=i&constellation={{ constellation.abbreviation }}">
-                {{ constellation.name }} ({{ constellation.abbreviation }})
-            </a>
-
-            {% if show_contains %}
-                &nbsp;&middot;&nbsp;
-            {% endif %}
-        {% endif %}
-
-        {% if show_contains %}
-            <i class="icon icon-paperclip"></i>
-            <strong>{% trans "Contains" %}:</strong>&nbsp;
-            {% if image.subject_type == enums.SubjectType.DEEP_SKY %}
-                {% for s in subjects|slice:":30" %}
-                    <a href="/search/?q=%22{{s|escape}}%22">{{s|escape}}</a>
-                    {% if not forloop.last %}&nbsp;&middot;&nbsp;{% endif %}
-                {% endfor %}
-
-                {% if subjects|length > 30 %}
-                    &nbsp;&middot;&nbsp;
-                    <a href="#full-subject-list-modal" data-toggle="modal">
-                        {% blocktrans trimmed with count=subjects|length|add:"-30" %}
-                            And {{ count }} more.
-                        {% endblocktrans %}
-                    </a>
+                    {% if constellation or show_contains %}
+                        &nbsp;&middot;&nbsp;
+                    {% endif %}
                 {% endif %}
-            {% else %}
-                {{subject_type}}
+
+                {% if constellation %}
+                    <i class="icon icon-star-empty"></i>
+                    <strong>{% trans "Constellation" %}:</strong>
+                    <a href="{% url 'haystack_search' %}?d=i&constellation={{ constellation.abbreviation }}">
+                        {{ constellation.name }} ({{ constellation.abbreviation }})
+                    </a>
+
+                    {% if show_contains %}
+                        &nbsp;&middot;&nbsp;
+                    {% endif %}
+                {% endif %}
+
+                {% if show_contains %}
+                    <i class="icon icon-paperclip"></i>
+                    <strong>{% trans "Contains" %}:</strong>&nbsp;
+                    {% if image.subject_type == enums.SubjectType.DEEP_SKY %}
+                        {% for s in subjects|slice:":30" %}
+                            <a href="/search/?q=%22{{s|escape}}%22">{{s|escape}}</a>
+                            {% if not forloop.last %}&nbsp;&middot;&nbsp;{% endif %}
+                        {% endfor %}
+
+                        {% if subjects|length > 30 %}
+                            &nbsp;&middot;&nbsp;
+                            <a href="#full-subject-list-modal" data-toggle="modal">
+                                {% blocktrans trimmed with count=subjects|length|add:"-30" %}
+                                    And {{ count }} more.
+                                {% endblocktrans %}
+                            </a>
+                        {% endif %}
+                    {% else %}
+                        {{subject_type}}
+                    {% endif %}
+                {% endif %}
+            </div> <!-- subtitle -->
             {% endif %}
-        {% endif %}
-    </div> <!-- subtitle -->
-    {% endif %}
-
-    {% if request.user_agent.is_mobile %}
-        {% with ad_container_classes='visible-phone' %}
-            {% with image|image_ad_key_value_pairs as key_value_pairs %}
-                {% include 'ads/wide_ad.html' %}
-            {% endwith %}
-        {% endwith %}
-    {% endif %}
-
-    {% include 'image/detail/menu/root.html' %}
-
-    <div class="loading-correct-image-size text-center">
-        <img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="" />
-    </div>
-
-    {% if image_uses_full_width %}
-        <div class="full-width-image-container">
-            <div class="row-fluid">
-                <div class="span12">
-                    {% include 'image/detail/iotd_banner.html' %}
-                    {% include 'image/detail/solve_status.html' %}
-                    {% include 'image/detail/image.html' %}
-                    {% include 'image/detail/image_title.html' %}
-                </div>
-            </div>
-        </div>
-    {% endif %}
-
-    <div class="row-fluid"> <!-- main row -->
-        <div class="span8 image-page-left-pane"> <!-- left pane -->
-            <div class="partial-width-image-container">
-                {% include 'image/detail/iotd_banner.html' %}
-                {% include 'image/detail/solve_status.html' %}
-                {% include 'image/detail/image.html' %}
-                {% include 'image/detail/image_title.html' %}
-            </div>
 
             {% if request.user_agent.is_mobile %}
-                <div class="visible-phone">
-                    {% include 'image/detail/info.html' %}
-                    {% include 'image/detail/like.html' %}
-                    {% include 'image/detail/bookmark.html' %}
-                </div>
-            {% endif %}
-
-            {% include 'image/detail/image_card.html' %}
-            {% include 'image/detail/image_description.html' %}
-            {% include 'image/detail/comments.html' %}
-        </div> <!-- /left pane -->
-
-        <div class="span4 image-page-right-pane"> <!-- right pane -->
-            {% if request.user_agent.is_pc or request.user_agent.is_tablet or TESTING %}
-                <div class="hidden-phone">
-                    {% include 'image/detail/info.html' %}
-                    {% include 'image/detail/like.html' %}
-                    {% include 'image/detail/bookmark.html' %}
-                </div>
-
-                {% with ad_container_classes='hidden-phone' %}
-                    {% include 'image/detail/ad.html' %}
+                {% with ad_container_classes='visible-phone' %}
+                    {% with image|image_ad_key_value_pairs as key_value_pairs %}
+                        {% include 'ads/wide_ad.html' %}
+                    {% endwith %}
                 {% endwith %}
             {% endif %}
 
-            {% include 'image/detail/revisions.html' %}
-            {% include 'image/detail/remote_source_affiliate.html' %}
-            {% include 'image/detail/skyplot.html' %}
-            {% include 'image/detail/histogram.html' %}
-            {% include 'image/detail/groups.html' %}
-        </div> <!-- /left pane -->
-    </div> <!-- /main row-->
+            {% include 'image/detail/menu/root.html' %}
+
+            <div class="loading-correct-image-size text-center">
+                <img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="" />
+            </div>
+
+            {% if image_uses_full_width %}
+                <div class="full-width-image-container">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            {% include 'image/detail/iotd_banner.html' %}
+                            {% include 'image/detail/solve_status.html' %}
+                            {% include 'image/detail/image.html' %}
+                            {% include 'image/detail/image_title.html' %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="row-fluid"> <!-- main row -->
+                <div class="span8 image-page-left-pane"> <!-- left pane -->
+                    <div class="partial-width-image-container">
+                        {% include 'image/detail/iotd_banner.html' %}
+                        {% include 'image/detail/solve_status.html' %}
+                        {% include 'image/detail/image.html' %}
+                        {% include 'image/detail/image_title.html' %}
+                    </div>
+
+                    {% if request.user_agent.is_mobile %}
+                        <div class="visible-phone">
+                            {% include 'image/detail/info.html' %}
+                            {% include 'image/detail/like.html' %}
+                            {% include 'image/detail/bookmark.html' %}
+                        </div>
+                    {% endif %}
+
+                    {% include 'image/detail/image_card.html' %}
+                    {% include 'image/detail/image_description.html' %}
+                    {% include 'image/detail/comments.html' %}
+                </div> <!-- /left pane -->
+
+                <div class="span4 image-page-right-pane"> <!-- right pane -->
+                    {% if request.user_agent.is_pc or request.user_agent.is_tablet or TESTING %}
+                        <div class="hidden-phone">
+                            {% include 'image/detail/info.html' %}
+                            {% include 'image/detail/like.html' %}
+                            {% include 'image/detail/bookmark.html' %}
+                        </div>
+
+                        {% with ad_container_classes='hidden-phone' %}
+                            {% include 'image/detail/ad.html' %}
+                        {% endwith %}
+                    {% endif %}
+
+                    {% include 'image/detail/revisions.html' %}
+                    {% include 'image/detail/remote_source_affiliate.html' %}
+                    {% include 'image/detail/skyplot.html' %}
+                    {% include 'image/detail/histogram.html' %}
+                    {% include 'image/detail/groups.html' %}
+                </div> <!-- /left pane -->
+            </div> <!-- /main row-->
+        {% endcache %}
+    {% endwith %}
 {% endblock %}
 
 {% block modals %}

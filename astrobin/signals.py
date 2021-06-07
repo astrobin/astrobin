@@ -16,6 +16,7 @@ from django.db import transaction
 from django.db.models import Q
 from django.db.models.signals import (
     pre_save, post_save, post_delete, m2m_changed)
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _, gettext, override
 from gadjo.requestprovider.signals import get_request
 from persistent_messages.models import Message
@@ -271,6 +272,8 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
 
             if instance.content_type == ContentType.objects.get_for_model(Image):
                 image = instance.content_type.get_object_for_this_type(id=instance.object_id)
+                Image.all_objects.filter(pk=instance.content_object.pk).update(updated=timezone.now())
+
                 if image.is_wip:
                     return
 
@@ -304,8 +307,7 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                         'comment': instance.content_object.text
                     })
 
-                # Trigger index update on the user, which will recalculate the Contribution Index.
-                instance.content_object.author.save()
+                UserProfile.all_objects.filter(user=instance.content_object.author).update(updated=timezone.now())
 
             elif instance.content_type == ContentType.objects.get_for_model(Post):
                 push_notification(
@@ -319,8 +321,7 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                         'post': instance.content_object.topic.name
                     })
 
-                # Trigger index update on the user, which will recalculate the Contribution Index.
-                instance.content_object.user.save()
+                UserProfile.all_objects.filter(user=instance.content_object.user).update(updated=timezone.now())
 
             if verb is not None:
                 add_story(instance.user,
