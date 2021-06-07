@@ -135,7 +135,7 @@
 
                 <div class="gallery-section-{{ section }}">
                     {% if section == 'public' and subsection == 'title' or subsection == 'uploaded' %}
-                        {% cache 43200 user_gallery_image_list requested_user.pk LANGUAGE_CODE section subsection %}
+                        {% cache 43200 user_gallery_image_list requested_user.pk LANGUAGE_CODE section subsection view %}
                             {% image_list image_list paginate_by=paginate_by nav_ctx='user' %}
                         {% endcache %}
                     {% else %}

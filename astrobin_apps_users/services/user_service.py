@@ -211,13 +211,15 @@ class UserService:
     def clear_gallery_image_list_cache(self):
         sections = ('public',)
         subsections = ('title', 'uploaded',)
+        views = ('default', 'table',)
         languages = settings.LANGUAGES
 
-        def _do_clear(language, section, subsection):
-            key = make_template_fragment_key('user_gallery_image_list', [self.user.pk, language, section, subsection])
+        def _do_clear(language, section, subsection, view):
+            key = make_template_fragment_key('user_gallery_image_list', [self.user.pk, language, section, subsection, view])
             cache.delete(key)
 
         for language in languages:
             for section in sections:
                 for subsection in subsections:
-                    _do_clear(language[0], section, subsection)
+                    for view in views:
+                        _do_clear(language[0], section, subsection, view)
