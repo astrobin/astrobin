@@ -631,13 +631,19 @@ astrobin_common = {
                 target = '_self';
             }
 
-            $pageLoaderBackdrop.css('width', '100%');
-            $pageLoaderBackdrop.css('height', '100%');
-            $pageLoaderBackdrop.css('opacity', .65);
+            if (event.metaKey || event.ctrlKey) {
+                target = '_blank';
+            }
 
-            $pageLoader.css('width', '100%');
-            $pageLoader.css('height', '100%');
-            $pageLoader.css('opacity', 1);
+            if (target === '_self') {
+                $pageLoaderBackdrop.css('width', '100%');
+                $pageLoaderBackdrop.css('height', '100%');
+                $pageLoaderBackdrop.css('opacity', .65);
+
+                $pageLoader.css('width', '100%');
+                $pageLoader.css('height', '100%');
+                $pageLoader.css('opacity', 1);
+            }
 
             window.open(url, target);
             event.preventDefault();
