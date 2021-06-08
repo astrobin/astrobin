@@ -1,11 +1,8 @@
-from braces.views import JSONResponseMixin
-from django.http import HttpResponse, HttpResponseForbidden
-from django.shortcuts import redirect
+from django.http import HttpResponse
 from django.views.generic.base import View, RedirectView
-from persistent_messages.models import Message
 
 from astrobin.models import UserProfile
-from astrobin_apps_notifications.utils import clear_notifications_template_cache, push_notification
+from astrobin_apps_notifications.utils import push_notification
 from common.services import AppRedirectionService
 
 
@@ -27,10 +24,3 @@ class NotificationListView(RedirectView):
 class NotificationSettingsView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         return AppRedirectionService.redirect(self.request, '/notifications/settings')
-
-
-class NotificationMarkAllAsReadView(View):
-    def post(self, request, *args, **kwargs):
-        Message.objects.filter(user=request.user).update(read=True)
-        clear_notifications_template_cache(request.user.username)
-        return redirect(request.POST.get('next', '/'))

@@ -24,38 +24,6 @@ def push_notification(recipients, from_user, notice_type, data):
         clear_notifications_template_cache(recipient.username)
 
 
-def get_recent_notifications(user, n=10):
-    if not user.is_authenticated():
-        return None
-
-    notifications = Message.objects.filter(user=user).order_by('-created')
-    if n >= 0:
-        notifications = notifications[:n]
-    return notifications
-
-
-def get_unseen_notifications(user, n=10):
-    if not user.is_authenticated():
-        return None
-
-    notifications = \
-        Message.objects.filter(user=user, read=False).order_by('-created')
-    if n >= 0:
-        notifications = notifications[:n]
-    return notifications
-
-
-def get_seen_notifications(user, n=10):
-    if not user.is_authenticated():
-        return None
-
-    notifications = \
-        Message.objects.filter(user=user, read=True).order_by('-created')
-    if n >= 0:
-        notifications = notifications[:n]
-    return notifications
-
-
 def get_notification_url_params_for_email(from_user=None):
     return dict(
         utm_source='astrobin',

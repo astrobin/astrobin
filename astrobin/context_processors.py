@@ -8,16 +8,6 @@ from astrobin.fields import COUNTRIES
 from astrobin.models import Image
 from astrobin.utils import get_client_country_code
 from astrobin_apps_images.services import ImageService
-from astrobin_apps_notifications.utils import get_unseen_notifications
-
-
-def notices_count(request):
-    response = {}
-    if request.user.is_authenticated():
-        count = get_unseen_notifications(request.user, -1).count()
-        response['notifications_count'] = count
-
-    return response
 
 
 def user_language(request):

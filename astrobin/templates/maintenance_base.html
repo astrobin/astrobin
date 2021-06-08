@@ -268,18 +268,6 @@
 
                             <li class="divider-vertical"></li>
 
-                            <li class="dropdown notice-container hidden-phone hidden-tablet">
-                                {% if notifications_count > 0 %}
-                                    <span id="notifications_count" class="notice-count">{{notifications_count}}</span>
-                                {% endif %}
-                                <a class="dropdown notifications" data-toggle="dropdown" title="{% trans "Notifications" %}" href="#">
-                                    <i class="icon icon-bell-alt"></i>
-                                </a>
-                                <ul class="dropdown-menu" id="notifications-popup">
-                                    {% notification_list request.user %}
-                                </ul>
-                            </li> <!-- notifications -->
-
                             {% else %} <!-- request.user.is_authenticated -->
                             <li>
                                 <a href="{% url 'auth_login' %}{% if request.path|slice:"9" != "/accounts" %}?next={{request.path}}{% endif %}">
@@ -401,25 +389,6 @@
                     searchable: false,
                     dividerLocation: 0.5
                 });
-
-                $('.notice-container a.notifications').click(function(event) {
-                    setTimeout(function() {
-                        notifications_mark_seen();
-                    }, 1000);
-                });
-
-                var notifications_read_timer = 0;
-                var notifications_mark_seen = function() {
-                    $.ajax(
-                    {
-                        url: '/notifications/seen/',
-                        dataType: 'json',
-                        success: function() {
-                            $('#notifications-popup li.unread').removeClass('unread');
-                            $('#notifications_count').remove();
-                        }
-                    });
-                };
             });
         </script>
 

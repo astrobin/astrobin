@@ -31,7 +31,6 @@ from astrobin.models import (
     Location)
 from astrobin.tests.generators import Generators
 from astrobin_apps_groups.models import Group as AstroBinGroup
-from astrobin_apps_notifications.utils import get_unseen_notifications
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_platesolving.tests.platesolving_generators import PlateSolvingGenerators
@@ -2785,7 +2784,6 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 200)
         image = Image.objects.get(pk=public_image.pk)
         self.assertEquals(image.is_wip, False)
-        self.assertEquals(len(get_unseen_notifications(self.user2)), 0)
 
         # Test WIP image
         self.assertIsNone(wip_image.published)
@@ -2795,9 +2793,6 @@ class ImageTest(TestCase):
         wip_image = Image.objects.get(pk=wip_image.pk)
         self.assertFalse(wip_image.is_wip)
         self.assertIsNotNone(wip_image.published)
-        notifications = get_unseen_notifications(self.user2)
-        self.assertEquals(len(notifications), 1)
-        self.assertTrue("a new image" in notifications[0].message)
 
         # Test that previously published images don't trigger a notification
         wip_image.is_wip = True
@@ -2807,7 +2802,6 @@ class ImageTest(TestCase):
         wip_image = Image.objects.get(pk=wip_image.pk)
         self.assertFalse(wip_image.is_wip)
         self.assertIsNotNone(wip_image.published)
-        self.assertEquals(len(get_unseen_notifications(self.user2)), 1)  # Same as before
 
         # Test that skip_notifications doesn't trigger a notification
         wip_image.is_wip = True
@@ -2817,7 +2811,6 @@ class ImageTest(TestCase):
         wip_image = Image.objects.get(pk=wip_image.pk)
         self.assertFalse(wip_image.is_wip)
         self.assertIsNotNone(wip_image.published)
-        self.assertEquals(len(get_unseen_notifications(self.user2)), 1)  # Same as before
 
         image.delete()
 

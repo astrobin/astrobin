@@ -26,7 +26,6 @@ TEMPLATES = [
 
                 'pybb.context_processors.processor',
 
-                'astrobin.context_processors.notices_count',
                 'astrobin.context_processors.user_language',
                 'astrobin.context_processors.user_profile',
                 'astrobin.context_processors.user_scores',

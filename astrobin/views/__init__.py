@@ -37,7 +37,7 @@ from flickrapi.auth import FlickrAccessToken
 from haystack.query import SearchQuerySet
 from silk.profiling.profiler import silk_profile
 
-from astrobin.context_processors import notices_count, user_language, user_scores, common_variables
+from astrobin.context_processors import user_language, user_scores, common_variables
 from astrobin.enums import SubjectType
 from astrobin.forms import ImageUploadForm, ImageLicenseForm, PrivateMessageForm, UserProfileEditBasicForm, \
     DeepSky_AcquisitionBasicForm, SolarSystem_AcquisitionForm, \
@@ -196,7 +196,6 @@ def object_list(request, queryset, paginate_by=None, page=None,
     t = template_loader.get_template(template_name)
 
     context = c.flatten()
-    context.update(notices_count(request))
     context.update(user_language(request))
     context.update(user_scores(request))
     context.update(common_variables(request))

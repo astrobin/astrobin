@@ -3,8 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from notification import urls as notification_urls
 
-from astrobin_apps_notifications.views import TestNotificationView, NotificationListView, NotificationMarkAllAsReadView, \
-    NotificationSettingsView
+from astrobin_apps_notifications.views import TestNotificationView, NotificationListView, NotificationSettingsView
 
 urlpatterns = (
     url(
@@ -19,10 +18,5 @@ urlpatterns = (
         r'settings/$',
         never_cache(login_required(NotificationSettingsView.as_view())),
         name='astrobin_apps_notifications.settings'),
-    url(
-        r'mark-all-as-read/$',
-        never_cache(login_required(NotificationMarkAllAsReadView.as_view())),
-        name='astrobin_apps_notifications.mark_all_as_read'),
-
     url(r'_/', include(notification_urls)),
 )
