@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 
 {% load astrobin_apps_donations_tags %}
+{% load astrobin_apps_images_tags %}
 {% load avatar_tags %}
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
 {% load tags %}
 {% load toggleproperty_tags %}
 {% load staticfiles %}
+{% load cache %}
 
 {% block title %}
     {% blocktrans trimmed with user=requested_user.userprofile.get_display_name %}
@@ -133,7 +135,14 @@
                 {% include './profile/image_navigation_menu.html' %}
 
                 <div class="gallery-section-{{ section }}">
-                    {% image_list image_list paginate_by=paginate_by nav_ctx='user' %}
+                    {% cache_image_list as cache_image_list %}
+                    {% if cache_image_list %}
+                        {% cache 43200 user_gallery_image_list2 requested_user.pk LANGUAGE_CODE section subsection view %}
+                            {% image_list image_list paginate_by=paginate_by nav_ctx='user' %}
+                        {% endcache %}
+                    {% else %}
+                        {% image_list image_list paginate_by=paginate_by nav_ctx='user' %}
+                    {% endif %}
                 </div>
             {% endif %}
         </div> <!-- images -->

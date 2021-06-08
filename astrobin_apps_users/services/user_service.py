@@ -215,7 +215,7 @@ class UserService:
         languages = settings.LANGUAGES
 
         def _do_clear(language, section, subsection, view):
-            key = make_template_fragment_key('user_gallery_image_list', [self.user.pk, language, section, subsection, view])
+            key = make_template_fragment_key('user_gallery_image_list2', [self.user.pk, language, section, subsection, view])
             cache.delete(key)
 
         for language in languages:
