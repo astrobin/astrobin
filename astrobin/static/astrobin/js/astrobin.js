@@ -657,7 +657,9 @@ astrobin_common = {
             dataType: 'json',
             timeout: 5000,
             success: function(data) {
-                $('#notifications-count').text(data).show();
+                if (data) {
+                    $('#notifications-count').text(data).show();
+                }
             }
         });
     },
