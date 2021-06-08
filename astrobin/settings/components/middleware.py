@@ -15,7 +15,6 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
     'gadjo.requestprovider.middleware.RequestProvider',
-    'pybb.middleware.PybbMiddleware',
 ]
 
 if not TESTING:

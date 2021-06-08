@@ -163,7 +163,7 @@ class IotdService:
         next_time_due_to_max_scheduled = \
             DateTimeService.next_midnight() if \
                 Iotd.objects.filter(date__gte=today).count() >= settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS \
-            else now
+                else now
 
         return max(
             next_time_due_to_max_per_day,
