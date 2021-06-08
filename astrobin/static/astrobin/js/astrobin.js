@@ -4,12 +4,6 @@
 astrobin_common = {
     config: {
         image_detail_url: '/',
-
-        /* Notifications */
-        notifications_base_url: '/activity?id=notification_',
-        notifications_element_empty: 'ul#notification-feed li#empty',
-        notifications_element_image: 'img#notifications',
-        notifications_element_ul: 'ul#notification-feed'
     },
 
     globals: {
@@ -433,69 +427,6 @@ astrobin_common = {
         }
     },
 
-    listen_for_notifications: function (username, last_modified, etag) {
-        astrobin_common.globals.smart_ajax({
-            'beforeSend': function (xhr) {
-                xhr.setRequestHeader("If-None-Match", etag);
-                xhr.setRequestHeader("If-Modified-Since", last_modified);
-            },
-            url: astrobin_common.config.notifications_base_url + username,
-            dataType: 'text',
-            type: 'get',
-            cache: 'false',
-            success: function (data, textStatus, xhr) {
-                etag = xhr.getResponseHeader('Etag');
-                last_modified = xhr.getResponseHeader('Last-Modified');
-
-                json = jQuery.parseJSON(data);
-
-                $(astrobin_common.config.notifications_element_empty).remove();
-                $(astrobin_common.config.notifications_element_ul)
-                    .prepend('<li class="unread">' + json['message'] + '</li>');
-
-                /* Start the next long poll. */
-                astrobin_common.listen_for_notifications(username, last_modified, etag);
-            }
-        });
-    },
-
-    start_listeners: function (username) {
-        astrobin_common.globals.smart_ajax = function (settings) {
-            // override complete() operation
-            var complete = settings.complete;
-            settings.complete = function (xhr) {
-                if (xhr) {
-                    // xhr may be undefined, for example when downloading JavaScript
-                    for (var i = 0, len = astrobin_common.globals.requests.length; i < len; ++i) {
-                        if (astrobin_common.globals.requests[i] == xhr) {
-                            // drop completed xhr from list
-                            astrobin_common.globals.requests.splice(i, 1);
-                            break;
-                        }
-                    }
-                }
-                // execute base
-                if (complete) {
-                    complete.apply(this, arguments)
-                }
-            }
-
-            var r = $.ajax.apply(this, arguments);
-            if (r) {
-                // r may be undefined, for example when downloading JavaScript
-                astrobin_common.globals.requests.push(r);
-            }
-            return r;
-        };
-
-        setTimeout(function () {
-            astrobin_common.listen_for_notifications(username, '', '');
-        }, 1000);
-    },
-
-    showHideAdvancedSearch: function () {
-    },
-
     init_ajax_csrf_token: function () {
         $(document).ajaxSend(function (event, xhr, settings) {
             function getCookie(name) {
@@ -653,134 +584,6 @@ astrobin_common = {
         });
     },
 
-    mark_notification_as_read: function (notification_id) {
-        var $row = $('#notifications-modal tr[data-id=' + notification_id + ']'),
-            $check_mark = $row.find('td.notification-mark-as-read a'),
-            $loading = $row.find(".notification-mark-as-read .loading"),
-            $count_badge = $('#notifications_count'),
-            count;
-
-        $check_mark.remove();
-        $loading.show();
-
-        return new Promise(function (resolve) {
-            if ($row.hasClass("notification-read")) {
-                $loading.hide();
-                return resolve();
-            }
-
-            $.ajax({
-                url: '/persistent_messages/mark_read/' + notification_id + '/',
-                dataType: 'json',
-                success: function () {
-                    $row.removeClass('notification-unread');
-                    $row.addClass('notification-read');
-                    $loading.hide();
-
-                    if ($count_badge.length > 0) {
-                        count = parseInt($count_badge.text());
-                        if (count === 1) {
-                            $count_badge.remove();
-                        } else {
-                            $count_badge.text(count - 1);
-                        }
-                    }
-
-                    resolve();
-                }
-            });
-        });
-
-    },
-
-    register_notification_on_click: function (options = {}) {
-        $(document).ready(function () {
-            var url_without_nid = astrobin_common.remove_url_param(window.location.href, "nid");
-            window.history.replaceState('', document.title, url_without_nid);
-
-            $(".notifications-modal .notification-item .notification-content a").click(function () {
-                var $item = $(this).closest(".notification-item");
-                var $loading = $item.find(".notification-mark-as-read .loading")
-                var id = $item.data("id");
-                var links = astrobin_common.get_links_in_text($item.find(".notification-content").html());
-                var open_in_new_tab = !!options && options.open_notifications_in_new_tab;
-
-                if (links.length > 0) {
-                    var link = astrobin_common.add_or_update_url_param(links[0], "nid", id);
-
-                    if (open_in_new_tab) {
-                        astrobin_common.mark_notification_as_read(id);
-                    } else {
-                        $loading.show();
-                    }
-
-                    Object.assign(document.createElement("a"), {
-                        target: open_in_new_tab ? "_blank" : "_self",
-                        href: link,
-                    }).click();
-                }
-
-                return false;
-            })
-        });
-    },
-
-    get_links_in_text: function (text) {
-        var regex = /href="(.*?)"/gm;
-        var m;
-        var links = [];
-
-        while ((m = regex.exec(text)) !== null) {
-            // This is necessary to avoid infinite loops with zero-width matches
-            if (m.index === regex.lastIndex) {
-                regex.lastIndex++;
-            }
-
-            // The result can be accessed through the `m`-variable.
-            m.forEach((match, groupIndex) => {
-                if (match.indexOf("href") !== 0) {
-                    links.push(match);
-                }
-            });
-        }
-
-        return links;
-    },
-
-    add_or_update_url_param: function (url, name, value) {
-        var regex = new RegExp("[&\\?]" + name + "=");
-
-        if (regex.test(url)) {
-            regex = new RegExp("([&\\?])" + name + "=\\S+");
-            return url.replace(regex, "$1" + name + "=" + value);
-        }
-
-        if (url.indexOf("?") > -1) {
-            return url + "&" + name + "=" + value;
-        }
-
-        return url + "?" + name + "=" + value;
-    },
-
-    remove_url_param: function (url, parameter) {
-        var urlParts = url.split('?');
-
-        if (urlParts.length >= 2) {
-            var prefix = encodeURIComponent(parameter) + '=';
-            var pars = urlParts[1].split(/[&;]/g);
-
-            for (var i = pars.length; i-- > 0;) {
-                if (pars[i].lastIndexOf(prefix, 0) !== -1) {
-                    pars.splice(i, 1);
-                }
-            }
-
-            return urlParts[0] + (pars.length > 0 ? '?' + pars.join('&') : '');
-        }
-
-        return url;
-    },
-
     init_timestamps: function() {
         $('abbr.timestamp').each(function (index, element) {
             var $el = $(element);
@@ -841,6 +644,18 @@ astrobin_common = {
         });
     },
 
+    get_notifications_count: function() {
+        $.ajax({
+            url: '/api/v2/notifications/notification/get_unread_count/',
+            method: 'GET',
+            dataType: 'json',
+            timeout: 5000,
+            success: function(data) {
+                $('#notifications-count').text(data).show();
+            }
+        });
+    },
+
     init: function (config) {
         /* Init */
         $.extend(true, astrobin_common.config, config);
@@ -876,6 +691,7 @@ astrobin_common = {
         });
 
         astrobin_common.init_ajax_csrf_token();
+        astrobin_common.get_notifications_count();
     }
 };
 

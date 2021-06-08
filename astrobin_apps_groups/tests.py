@@ -11,7 +11,6 @@ from pybb.models import Forum, Topic
 from astrobin.models import Image
 from astrobin.tests.generators import Generators
 from astrobin_apps_groups.models import Group, GroupCategory
-from astrobin_apps_notifications.utils import get_unseen_notifications
 from toggleproperties.models import ToggleProperty
 
 
@@ -184,8 +183,6 @@ class GroupsTest(TestCase):
         self.assertTrue(group.owner in group.members.all())
         self.assertTrue(group.owner in group.moderators.all())
         self.assertTrue(group.forum != None)
-        self.assertTrue(len(get_unseen_notifications(self.user2)) > 0)
-        self.assertIn("created a new public group", get_unseen_notifications(self.user2)[0].message)
         group.delete()
 
         # Creating a private group does not trigger notifications
@@ -199,7 +196,6 @@ class GroupsTest(TestCase):
         self._assertMessage(response, "success unread", "Your new group was created successfully")
         group = Group.objects.all().order_by('-pk')[0]
         self.assertEqual(group.public, False)
-        self.assertEqual(len(get_unseen_notifications(self.user2)), 1)  # Notitication from before
         group.delete()
 
         # Test the autosubmission/category combo
@@ -355,8 +351,6 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self._assertMessage(response, "warning unread",
                             "This is a moderated group, and your join request will be reviewed by a moderator")
-        self.assertTrue(len(get_unseen_notifications(self.user1)) > 0)
-        self.assertIn("requested to join the group", get_unseen_notifications(self.user1)[0].message)
         self.assertTrue(self.user2 in self.group.join_requests.all())
         self.group.moderated = False;
         self.group.save()
@@ -368,8 +362,6 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self._assertMessage(response, "success unread", "You have joined the group")
         self.assertTrue(self.user2 in self.group.members.all())
-        self.assertTrue(len(get_unseen_notifications(self.user1)) > 0)
-        self.assertIn("joined the public group", get_unseen_notifications(self.user1)[0].message)
 
         # Second attempt results in error "already joined"
         response = self.client.post(url, follow=True)
@@ -525,7 +517,6 @@ class GroupsTest(TestCase):
         self.assertRedirects(response, detail_url, status_code=302, target_status_code=200)
         self.group = Group.objects.get(pk=self.group.pk)
         self.assertEqual(self.group.invited_users.count(), 1)
-        self.assertEqual(len(get_unseen_notifications(self.user2)), 1)
         self.group.invited_users.clear()
 
         # AJAX invitation successful
@@ -535,7 +526,6 @@ class GroupsTest(TestCase):
         self.group = Group.objects.get(pk=self.group.pk)
         self.assertEqual(json.loads(response.content)['invited_users'][0]['id'], self.user2.pk)
         self.assertEqual(self.group.invited_users.count(), 1)
-        self.assertEqual(len(get_unseen_notifications(self.user2)), 2)
 
         self.client.logout()
 
@@ -1025,10 +1015,6 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(self.user2 in self.group.members.all())
         self.assertFalse(self.user2 in self.group.join_requests.all())
-        self.assertTrue(len(get_unseen_notifications(self.user2)) > 0)
-        self.assertIn("APPROVED", get_unseen_notifications(self.user2)[0].message)
-        self.assertTrue(len(get_unseen_notifications(self.user1)) > 0)
-        self.assertIn("joined the public group", get_unseen_notifications(self.user1)[0].message)
 
     def test_group_reject_join_request_view(self):
         url = reverse('group_reject_join_request', kwargs={'pk': self.group.pk})
@@ -1073,8 +1059,6 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertFalse(self.user2 in self.group.members.all())
         self.assertFalse(self.user2 in self.group.join_requests.all())
-        self.assertTrue(len(get_unseen_notifications(self.user2)) > 0)
-        self.assertIn("REJECTED", get_unseen_notifications(self.user2)[0].message)
 
     def test_group_autosubmission_sync(self):
         def _upload():

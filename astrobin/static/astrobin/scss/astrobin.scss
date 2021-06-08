@@ -1585,17 +1585,18 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
-.notice-count {
+#notifications-count {
+  display: none;
   position: absolute;
   top: 5px;
   right: 3px;
+  padding: 3px 4px;
   font-size: 75%;
   font-weight: bold;
   line-height: 75%;
   background-color: $red;
   color: $strong-text-color;
   @include text-shadow;
-  padding: 3px 4px;
   @include rounded-corners(6px);
   @include box-shadow;
   z-index: 1049;

@@ -4,47 +4,6 @@
 {% load astrobin_apps_premium_tags %}
 {% load common_tags %}
 
-<div class="modal hide fade" id="notifications-modal">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal">&times;</a>
-        <h3>{% trans "Notifications" %}</h3>
-    </div>
-
-    <div class="modal-body">
-        {% notifications_table request.user 20 10 %}
-    </div>
-
-    <div class="modal-footer">
-
-        <form action="{% url 'astrobin_apps_notifications.mark_all_as_read' %}" method="post">{% csrf_token %}
-            <a class="btn btn-primary" href="{% url 'astrobin_apps_notifications.all' %}">
-                {% trans "View all" %}
-            </a>
-
-            {% if READONLY_MODE %}
-                <a class="btn disabled" href="#readonly-mode-modal" data-toggle="modal">
-            {% else %}
-                <a class="btn" href="{% url 'astrobin_apps_notifications.settings' %}">
-            {% endif %}
-            {% trans "Settings" %}
-            </a>
-
-            {% if request.user|has_unseen_notifications %}
-                {% if READONLY_MODE %}
-                    <a class="btn disabled" href="#readonly-mode-modal" data-toggle="modal">
-                        {% trans "Mark all as read" %}
-                    </a>
-                {% else %}
-                    <input type="submit"
-                           class="btn btn-danger"
-                           value="{% trans "Mark all as read" %}" />
-                {% endif %}
-            {% endif %}
-
-            <input type="hidden" name="next" value="{{ request.path }}">
-        </form>
-    </div>
-</div>
 
 <div class="modal hide fade" id="readonly-mode-modal">
     <div class="modal-header">

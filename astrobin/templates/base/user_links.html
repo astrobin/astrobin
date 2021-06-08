@@ -11,22 +11,10 @@
             {% if request.user.is_authenticated %}
 
                 <li class="notice-container">
-                    {% if notifications_count > 0 %}
-                        <span id="notifications_count" class="notice-count">
-                            {{notifications_count}}
-                        </span>
-                    {% endif %}
+                    <span id="notifications-count"></span>
 
                     <a
-                        class="notifications hidden-phone"
-                        title="{% trans "Notifications" %}"
-                        data-toggle="modal"
-                        href="#notifications-modal">
-                        <i class="icon-bell-alt"></i>
-                    </a>
-
-                    <a
-                        class="notifications visible-phone"
+                        class="notifications"
                         title="{% trans "Notifications" %}"
                         href="{% url 'astrobin_apps_notifications.all' %}">
                         <i class="icon-bell-alt"></i>
