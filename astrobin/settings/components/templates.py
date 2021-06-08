@@ -28,7 +28,6 @@ TEMPLATES = [
 
                 'astrobin.context_processors.user_language',
                 'astrobin.context_processors.user_profile',
-                'astrobin.context_processors.user_scores',
                 'astrobin.context_processors.common_variables',
             ],
             'loaders': [('django.template.loaders.cached.Loader', LOADERS)],

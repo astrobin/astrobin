@@ -664,6 +664,29 @@ astrobin_common = {
         });
     },
 
+    get_indexes: function() {
+        $.ajax({
+            url: '/api/v2/common/userprofiles/current/',
+            method: 'GET',
+            dataType: 'json',
+            timeout: 5000,
+            success: function (data) {
+                var userprofile = data[0];
+
+                if (!userprofile.exclude_from_competitions) {
+                    $('#astrobin-index').text(userprofile.astrobin_index.toFixed(2));
+                    $('#astrobin-index-popover').text(userprofile.astrobin_index.toFixed(2));
+                    $('#astrobin-index-mobile-header').text(userprofile.astrobin_index.toFixed(2));
+
+                    $('#contribution-index').text(userprofile.contribution_index.toFixed(2));
+                    $('#contribution-index-popover').text(userprofile.contribution_index.toFixed(2));
+
+                    $('#navbar-user-scores').show();
+                }
+            }
+        });
+    },
+
     init: function (config) {
         /* Init */
         $.extend(true, astrobin_common.config, config);
@@ -700,6 +723,7 @@ astrobin_common = {
 
         astrobin_common.init_ajax_csrf_token();
         astrobin_common.get_notifications_count();
+        astrobin_common.get_indexes();
     }
 };
 
