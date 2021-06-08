@@ -291,3 +291,16 @@ def random_id(context, size=8, chars=string.ascii_uppercase + string.digits):
     id = ''.join(random.choice(chars) for x in range(size))
     context['randomid'] = id
     return ''
+
+
+@register.simple_tag(takes_context=True)
+def cache_image_list(context):
+    if context['requested_user'] and \
+            context['requested_user'].userprofile.display_wip_images_on_public_gallery and \
+            context['request'].user == context['requested_user']:
+        return False
+
+    if context['request'].GET.get('image_list_page'):
+        return False
+
+    return context['section'] == 'public' and (context['subsection'] in ('title', 'uploaded',))

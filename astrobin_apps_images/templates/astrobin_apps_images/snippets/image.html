@@ -27,7 +27,7 @@
 
         {% if alias != 'histogram' %}
             {% if link %}
-            <a href="{{url}}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,recent_images_page,public,staging,sub,s,q,t,d,license,camera_type,telescope_type,subject_type,pixel_scale_min,pixel_scale_max,field_radius_min,field_radius_max,integration_time_min,integration_time_max,moon_phase_min,moon_phase_max,country,award,subject,telescope,camera" %}">
+            <a href="{{url}}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,recent_images_page,public,staging,trash,corrupted,image_list_page,sub,s,q,t,d,license,camera_type,telescope_type,subject_type,pixel_scale_min,pixel_scale_max,field_radius_min,field_radius_max,integration_time_min,integration_time_max,moon_phase_min,moon_phase_max,country,award,subject,telescope,camera" %}">
             {% endif %}
 
                 {% if badges %}
