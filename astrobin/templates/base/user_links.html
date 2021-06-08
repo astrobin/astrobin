@@ -29,25 +29,11 @@
                             {{ request.user.userprofile }}
                         </span>
                         <span id="navbar-user-scores">
-                            {% show_competitive_feature request.user None as show_competitive_feature %}
-                            {% if show_competitive_feature or request.user.is_superuser %}
-                                {% if user_scores_index is not None %}
-                                    <span id="astrobin-index">
-                                          {{user_scores_index|floatformat:2}}
-                                    </span> &middot;
+                            <span id="astrobin-index">
+                            </span> &middot;
 
-                                    <span id="contribution-index">
-                                        {{ user_scores_contribution_index|floatformat:2 }}
-                                    </span>
-                                {% else %}
-                                    <span id="astrobin-index">
-                                          {% trans "n/a" %}
-                                    </span> &middot;
-                                    <span id="contribution-index">
-                                      {% trans "n/a" %}
-                                </span>
-                                {% endif %}
-                            {% endif %}
+                            <span id="contribution-index">
+                            </span>
                         </span>
                     </a>
                     <a href="#" class="btn btn-primary dropdown-toggle user-dropdown" data-toggle="dropdown">
@@ -109,7 +95,6 @@
 
                 {% if not request.user.userprofile.exclude_from_competitions %}
                     <li id="astrobin-index-mobile-header" class="visible-phone">
-                        {{user_scores_index|floatformat:2}}
                     </li>
                 {% endif %}
 
@@ -132,7 +117,7 @@
     </div> <!-- user-nav -->
 
     <div id="user-scores-popover" style="display: none">
-        <h4>{% trans "Image Index" %}: {{ user_scores_index|floatformat:2|default:"n/a" }}</h4>
+        <h4>{% trans "Image Index" %}: <span id="astrobin-index-popover"></span></h4>
         <p>
             {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/features/image-index" target="_blank">' as _0 and '</a>' as _1 %}
                 The <strong>Image Index</strong> is a system based on likes received on images, that
@@ -142,7 +127,7 @@
 
         <hr />
 
-        <h4>{% trans "Contribution Index" %} {% trans "(beta)" %}: {{ user_scores_contribution_index|floatformat:2|default:"n/a" }}</h4>
+        <h4>{% trans "Contribution Index" %} {% trans "(beta)" %}: <span id="contribution-index-popover"></span></h4>
         <p>
             {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/features/contribution-index" target="_blank">' as _0 and '</a>' as _1 %}
                 The <strong>Contribution Index (beta)</strong> is system to reward informative,

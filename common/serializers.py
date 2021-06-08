@@ -80,6 +80,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 class UserProfileSerializerPrivate(UserProfileSerializer):
     astrobin_index = FloatField(read_only=True, source='get_scores.user_scores_index')
+    contribution_index = FloatField(read_only=True, source='get_scores.user_scores_contribution_index')
     followers = IntegerField(read_only=True, source='get_scores.user_scores_followers')
     locations = LocationSerializer(many=True, source='location_set')
 

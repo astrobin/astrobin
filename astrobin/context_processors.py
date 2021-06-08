@@ -33,19 +33,6 @@ def user_profile(request):
     return d
 
 
-def user_scores(request):
-    scores = {
-        'user_scores_index': None,
-        'user_scores_contribution_index': None,
-        'user_scores_followers': None,
-    }
-
-    if request.user.is_authenticated():
-        scores = request.user.userprofile.get_scores()
-
-    return scores
-
-
 def common_variables(request):
     from django_user_agents.utils import get_and_set_user_agent
     from django_bouncy.models import Bounce, Complaint

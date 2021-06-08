@@ -42,15 +42,6 @@
             </fieldset>
         {% endwith %}
     </form>
-
-    {% if user_scores_index < 1 %}
-        <div class="alert alert-warning">
-            <p>
-                <strong><i class="icon icon-warning-sign"></i></strong>
-                {% blocktrans %}Please note: this post will be published only after moderation.{% endblocktrans %}
-            </p>
-        </div>
-    {% endif %}
 {% endif %} {# READONLY #}
 
 
