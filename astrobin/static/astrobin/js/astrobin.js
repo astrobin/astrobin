@@ -650,18 +650,198 @@ astrobin_common = {
         });
     },
 
-    get_notifications_count: function() {
+    get_notifications: function () {
         $.ajax({
-            url: '/api/v2/notifications/notification/get_unread_count/',
+            url: '/api/v2/notifications/notification/?read=False',
             method: 'GET',
             dataType: 'json',
             timeout: 5000,
-            success: function(data) {
-                if (data) {
-                    $('#notifications-count').text(data).show();
+            success: function (data) {
+                var $modal = $('#notifications-modal');
+
+                if (!data.count) {
+                    return;
                 }
+
+                var t = document.querySelector('#notification-row-template');
+                var $tbody = $modal.find('.table tbody');
+
+                data.results.forEach(function(notification) {
+                    t.content.querySelector('.notification-unread').setAttribute('data-id', notification['id']);
+                    t.content.querySelector('.notification-content').innerHTML = notification['message'];
+                    t.content.querySelector('.timestamp').setAttribute('data-epoch', new Date(notification['created'] + 'Z').getTime());
+                    $tbody.append(document.importNode(t.content, true));
+
+                    $tbody.find('.notification-unread[data-id=' + notification['id'] + '] .notification-mark-as-read a').live('click', function() {
+                        astrobin_common.mark_notification_as_read(notification['id']);
+                    })
+                });
+
+                $tbody.find('.no-new-notifications').hide();
+                astrobin_common.init_timestamps();
+
+                $('#notifications-count').text(data.count).show();
+
+                $('#mark-all-notifications-as-read').removeAttr('disabled').click(function() {
+                   astrobin_common.mark_all_notifications_as_read().then(function() {
+                       $tbody.find('.no-new-notifications').show();
+                       $('#mark-all-notifications-as-read').attr('disabled', 'disabled');
+                       $modal.modal('hide');
+                   });
+                });
             }
         });
+    },
+
+    mark_notification_as_read: function (notification_id) {
+        var $row = $('#notifications-modal tr[data-id=' + notification_id + ']'),
+            $check_mark = $row.find('td.notification-mark-as-read a'),
+            $loading = $row.find(".notification-mark-as-read .loading"),
+            $count_badge = $('#notifications-count'),
+            count;
+
+        $check_mark.remove();
+        $loading.show();
+
+        return new Promise(function (resolve) {
+            if ($row.hasClass("notification-read")) {
+                $loading.hide();
+                return resolve();
+            }
+
+            $.ajax({
+                url: '/persistent_messages/mark_read/' + notification_id + '/',
+                dataType: 'json',
+                success: function () {
+                    $row.removeClass('notification-unread');
+                    $row.addClass('notification-read');
+                    $loading.hide();
+
+                    if ($count_badge.length > 0) {
+                        count = parseInt($count_badge.text());
+                        if (count === 1) {
+                            $count_badge.remove();
+                        } else {
+                            $count_badge.text(count - 1);
+                        }
+                    }
+
+                    resolve();
+                }
+            });
+        });
+
+    },
+
+    mark_all_notifications_as_read: function() {
+        var $rows = $('#notifications-modal tr:not(.no-new-notifications)'),
+            $count_badge = $('#notifications-count'),
+            count;
+
+        return new Promise(function (resolve) {
+            $.ajax({
+                url: '/api/v2/notifications/notification/mark_all_as_read/',
+                type: 'post',
+                dataType: 'json',
+                success: function () {
+                    $rows.remove();
+
+                    if ($count_badge.length > 0) {
+                        $count_badge.remove();
+                    }
+
+                    resolve();
+                }
+            });
+        });
+    },
+
+    register_notification_on_click: function (options = {}) {
+        $(document).ready(function () {
+            var url_without_nid = astrobin_common.remove_url_param(window.location.href, "nid");
+            window.history.replaceState('', document.title, url_without_nid);
+
+            $(".notifications-modal .notification-item .notification-content a").click(function () {
+                var $item = $(this).closest(".notification-item");
+                var $loading = $item.find(".notification-mark-as-read .loading")
+                var id = $item.data("id");
+                var links = astrobin_common.get_links_in_text($item.find(".notification-content").html());
+                var open_in_new_tab = !!options && options.open_notifications_in_new_tab;
+
+                if (links.length > 0) {
+                    var link = astrobin_common.add_or_update_url_param(links[0], "nid", id);
+
+                    if (open_in_new_tab) {
+                        astrobin_common.mark_notification_as_read(id);
+                    } else {
+                        $loading.show();
+                    }
+
+                    Object.assign(document.createElement("a"), {
+                        target: open_in_new_tab ? "_blank" : "_self",
+                        href: link,
+                    }).click();
+                }
+
+                return false;
+            })
+        });
+    },
+
+    get_links_in_text: function (text) {
+        var regex = /href="(.*?)"/gm;
+        var m;
+        var links = [];
+
+        while ((m = regex.exec(text)) !== null) {
+            // This is necessary to avoid infinite loops with zero-width matches
+            if (m.index === regex.lastIndex) {
+                regex.lastIndex++;
+            }
+
+            // The result can be accessed through the `m`-variable.
+            m.forEach((match, groupIndex) => {
+                if (match.indexOf("href") !== 0) {
+                    links.push(match);
+                }
+            });
+        }
+
+        return links;
+    },
+
+    add_or_update_url_param: function (url, name, value) {
+        var regex = new RegExp("[&\\?]" + name + "=");
+
+        if (regex.test(url)) {
+            regex = new RegExp("([&\\?])" + name + "=\\S+");
+            return url.replace(regex, "$1" + name + "=" + value);
+        }
+
+        if (url.indexOf("?") > -1) {
+            return url + "&" + name + "=" + value;
+        }
+
+        return url + "?" + name + "=" + value;
+    },
+
+    remove_url_param: function (url, parameter) {
+        var urlParts = url.split('?');
+
+        if (urlParts.length >= 2) {
+            var prefix = encodeURIComponent(parameter) + '=';
+            var pars = urlParts[1].split(/[&;]/g);
+
+            for (var i = pars.length; i-- > 0;) {
+                if (pars[i].lastIndexOf(prefix, 0) !== -1) {
+                    pars.splice(i, 1);
+                }
+            }
+
+            return urlParts[0] + (pars.length > 0 ? '?' + pars.join('&') : '');
+        }
+
+        return url;
     },
 
     get_indexes: function() {
@@ -722,8 +902,11 @@ astrobin_common = {
         });
 
         astrobin_common.init_ajax_csrf_token();
-        astrobin_common.get_notifications_count();
         astrobin_common.get_indexes();
+        setTimeout(function() {
+            astrobin_common.get_notifications();
+        }, 2000);
+
     }
 };
 

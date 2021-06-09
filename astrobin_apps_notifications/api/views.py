@@ -7,6 +7,7 @@ from rest_framework.decorators import list_route
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
+from astrobin_apps_notifications.api.filters import NotificationFilter
 from astrobin_apps_notifications.api.serializers import NotificationSerializer, NoticeSettingSerializers, \
     NoticeTypeSerializer
 from common.permissions import ReadOnly
@@ -14,6 +15,7 @@ from common.permissions import ReadOnly
 
 class NotificationViewSet(viewsets.ModelViewSet):
     serializer_class = NotificationSerializer
+    filter_class = NotificationFilter
     permission_classes = [permissions.IsAuthenticated]
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [CamelCaseJSONParser]
