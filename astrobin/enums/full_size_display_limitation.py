@@ -1,5 +1,5 @@
 class FullSizeDisplayLimitation:
-    EVERYBODY = None
+    EVERYBODY = 'EVERYBODY'
     PAYING_MEMBERS_ONLY = 'PAYING'
     MEMBERS_ONLY = 'MEMBERS'
     ME_ONLY = 'ME'
