@@ -1,10 +1,15 @@
+from django.utils.decorators import method_decorator
+from django.views.decorators.http import last_modified
+from django.views.decorators.vary import vary_on_cookie
 from django.views.generic import ListView
 
 from astrobin.models import Image
 from astrobin_apps_iotd.models import TopPickArchive
 from astrobin_apps_iotd.services import IotdService
+from common.services.caching_service import CachingService
 
 
+@method_decorator([last_modified(CachingService.get_latest_top_pick_datetime), vary_on_cookie], name='dispatch')
 class TopPicksView(ListView):
     model = TopPickArchive
     template_name = 'top_picks.html'
@@ -41,6 +46,9 @@ class TopPicksView(ListView):
         return context
 
 
+@method_decorator(
+    [last_modified(CachingService.get_latest_top_pick_nomination_datetime), vary_on_cookie],
+    name='dispatch')
 class TopPickNominationsView(TopPicksView):
     template_name = 'top_pick_nominations.html'
     model = TopPickArchive

@@ -260,8 +260,8 @@ urlpatterns += [
     ### EXPLORE VIEWS                                                       ###
     ###########################################################################
 
-    url(r'^explore/top-picks/$', never_cache(explore_views.TopPicksView.as_view()), name='top_picks'),
-    url(r'^explore/top-pick-nominations/$', never_cache(explore_views.TopPickNominationsView.as_view()),
+    url(r'^explore/top-picks/$', explore_views.TopPicksView.as_view(), name='top_picks'),
+    url(r'^explore/top-pick-nominations/$', explore_views.TopPickNominationsView.as_view(),
         name='top_pick_nominations'),
 
     ###########################################################################
@@ -280,12 +280,13 @@ urlpatterns += [
     url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/update/$',
         never_cache(collections_views.UserCollectionsUpdate.as_view()), name='user_collections_update'),
     url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/add-remove-images/$',
-        never_cache(collections_views.UserCollectionsAddRemoveImages.as_view()), name='user_collections_add_remove_images'),
+        never_cache(collections_views.UserCollectionsAddRemoveImages.as_view()),
+        name='user_collections_add_remove_images'),
     url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/quick-edit/key-value-pairs$',
         never_cache(collections_views.UserCollectionsQuickEditKeyValueTags.as_view()),
         name='user_collections_quick_edit_key_value_tags'),
     url(r'^users/(?P<username>[\w.@+-]*)/collections/(?P<collection_pk>\d+)/delete/$',
-        never_cache( collections_views.UserCollectionsDelete.as_view()), name='user_collections_delete'),
+        never_cache(collections_views.UserCollectionsDelete.as_view()), name='user_collections_delete'),
     url(r'^users/(?P<username>[\w.@+-]*)/apikeys/$', user_page_api_keys, name='user_page_api_keys'),
     url(r'^users/(?P<username>[\w.@+-]*)/ban/$', user_ban, name='user_ban'),
     url(r'^users/(?P<username>[\w.@+-]*)/bookmarks/$', user_page_bookmarks, name='user_page_bookmarks'),

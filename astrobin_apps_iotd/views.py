@@ -9,7 +9,10 @@ from django.conf import settings
 from django.http import HttpResponseForbidden, HttpResponsePermanentRedirect
 from django.shortcuts import get_object_or_404
 from django.utils import formats
+from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext
+from django.views.decorators.http import last_modified
+from django.views.decorators.vary import vary_on_cookie
 from django.views.generic import (
     ListView)
 from django.views.generic.base import View
@@ -20,6 +23,7 @@ from astrobin_apps_iotd.permissions import may_elect_iotd
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.templatetags.astrobin_apps_iotd_tags import iotd_elections_today
 from common.services import AppRedirectionService
+from common.services.caching_service import CachingService
 
 log = logging.getLogger('apps')
 
@@ -120,6 +124,7 @@ class IotdToggleJudgementAjaxView(
         return HttpResponseForbidden()
 
 
+@method_decorator([last_modified(CachingService.get_latest_iotd_datetime), vary_on_cookie], name='dispatch')
 class IotdArchiveView(ListView):
     model = Iotd
     template_name = 'astrobin_apps_iotd/iotd_archive.html'

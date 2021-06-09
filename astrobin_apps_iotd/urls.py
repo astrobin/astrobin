@@ -33,7 +33,7 @@ urlpatterns = (
     # Archive
     url(
         r'^archive/$',
-        never_cache(IotdArchiveView.as_view()),
+        IotdArchiveView.as_view(),
         name='iotd_archive'),
 
     # Feeds
