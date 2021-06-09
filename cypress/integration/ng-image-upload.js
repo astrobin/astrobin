@@ -16,7 +16,7 @@ describe("Login", () => {
         cy.get("label.upload-btn .file").should("contain.text", "test.jpg (28.4 KB)");
         cy.get("[type='submit']").click();
 
-        cy.url().should("contain", "login/?next=/edit/thumbnails");
+        cy.url({timeout: 30000}).should("contain", "login/?next=/edit/thumbnails");
 
         cy.fillInLogin();
 
