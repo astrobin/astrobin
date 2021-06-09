@@ -13,10 +13,10 @@
                 <li class="notice-container">
                     <span id="notifications-count"></span>
 
-                    <a
-                        class="notifications"
-                        title="{% trans "Notifications" %}"
-                        href="{% url 'astrobin_apps_notifications.all' %}">
+                    <a class="notifications"
+                       title="{% trans "Notifications" %}"
+                       data-toggle="modal"
+                       href="#notifications-modal">
                         <i class="icon-bell-alt"></i>
                     </a>
                 </li>

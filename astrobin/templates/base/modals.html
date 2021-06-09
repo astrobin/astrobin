@@ -4,6 +4,58 @@
 {% load astrobin_apps_premium_tags %}
 {% load common_tags %}
 
+<div class="modal hide fade" id="notifications-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>{% trans "Notifications" %}</h3>
+    </div>
+
+    <div class="modal-body">
+        <table class="table table-condensed table-striped notifications-modal">
+            <tbody>
+                <template id="notification-row-template">
+                    <tr class="notification-unread" data-id="">
+                        <td class="notification-state"><div class="state-indicator"></div></td>
+                        <td class="notification-content"></td>
+                        <td class="notification-date"><abbr class="timestamp" data-epoch="">...</abbr></td>
+                        <td class="notification-mark-as-read">
+                            <a href="#"><i class="icon icon-ok"></i></a>
+                            <div class="loading"><div class="ld ld-ring ld-spin"></div></div>
+                        </td>
+                    </tr>
+                </template>
+
+                <tr class="no-new-notifications">
+                    <td colspan="4">
+                        {% trans "You have no new notifications." %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal-footer">
+        <a class="btn btn-primary" href="{% url 'astrobin_apps_notifications.all' %}">
+            {% trans "View all" %}
+        </a>
+
+        {% if READONLY_MODE %}
+            <a class="btn disabled" href="#readonly-mode-modal" data-toggle="modal">
+        {% else %}
+            <a class="btn" href="{% url 'astrobin_apps_notifications.settings' %}">
+        {% endif %}
+            {% trans "Settings" %}
+        </a>
+
+        {% if READONLY_MODE %}
+            <a class="btn disabled" href="#readonly-mode-modal" data-toggle="modal">
+        {% else %}
+            <a class="btn btn-danger" id="mark-all-notifications-as-read" disabled="disabled">
+        {% endif %}
+            {% trans "Mark all as read" %}
+        </a>
+    </div>
+</div>
 
 <div class="modal hide fade" id="readonly-mode-modal">
     <div class="modal-header">
