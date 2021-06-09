@@ -7,6 +7,7 @@ MIDDLEWARE_CLASSES = [
     'silk.middleware.SilkyMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'astrobin.middleware.RequestLanguageMiddleware',
     'astrobin.middleware.LastSeenMiddleware',
     'astrobin.middleware.LogoutDeletedUserMiddleware',
     'astrobin.middleware.MarkNotificationAsReadMiddleware',
