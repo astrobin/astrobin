@@ -5,8 +5,9 @@ from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.db.models import QuerySet, Q
 from django.template import Library
-from subscription.models import Subscription, UserSubscription
+from subscription.models import UserSubscription
 
+from astrobin.enums.full_size_display_limitation import FullSizeDisplayLimitation
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from common.services import DateTimeService
 
@@ -192,7 +193,19 @@ def can_perform_advanced_platesolving(user):
 
 @register.filter
 def can_see_real_resolution(user, image):
-    return True
+    if image.full_size_display_limitation == FullSizeDisplayLimitation.EVERYBODY:
+        return True
+
+    if image.full_size_display_limitation == FullSizeDisplayLimitation.PAYING_MEMBERS_ONLY:
+        return not is_free(user) or user == image.user
+
+    if image.full_size_display_limitation == FullSizeDisplayLimitation.MEMBERS_ONLY:
+        return user.is_authenticated()
+
+    if image.full_size_display_limitation == FullSizeDisplayLimitation.ME_ONLY:
+        return user == image.user
+
+    return False
 
 
 @register.filter

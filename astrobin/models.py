@@ -17,6 +17,7 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator, Regex
 from image_cropping import ImageRatioField
 
 from astrobin.enums import SubjectType, SolarSystemSubject
+from astrobin.enums.full_size_display_limitation import FullSizeDisplayLimitation
 from astrobin.enums.license import License
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.fields import CountryField, get_country_name
@@ -790,6 +791,14 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         (MouseHoverImage.INVERTED, _("Inverted monochrome")),
     ]
 
+    FULL_SIZE_DISPLAY_LIMITATION_CHOICES = [
+        (FullSizeDisplayLimitation.EVERYBODY, _('Everybody')),
+        (FullSizeDisplayLimitation.PAYING_MEMBERS_ONLY, _('Paying members only')),
+        (FullSizeDisplayLimitation.MEMBERS_ONLY, _('Members only')),
+        (FullSizeDisplayLimitation.ME_ONLY, _('Me only')),
+        (FullSizeDisplayLimitation.NOBODY, _('Nobody')),
+    ]
+
     GEAR_CLASS_LOOKUP = {
         'imaging_telescopes': Telescope,
         'guiding_telescopes': Telescope,
@@ -978,6 +987,16 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         verbose_name=_('Sharpen thumbnails'),
         help_text=_('If selected, AstroBin will use a resizing algorithm that slightly sharpens the image\'s '
                     'thumbnails. This setting applies to all revisions.'),
+    )
+
+    full_size_display_limitation = models.CharField(
+        max_length=16,
+        null=True,
+        blank=True,
+        default=FullSizeDisplayLimitation.EVERYBODY,
+        verbose_name=_('Allow full-size display'),
+        help_text=_('Specify what user groups are allowed to view this image at its full size.'),
+        choices=FULL_SIZE_DISPLAY_LIMITATION_CHOICES
     )
 
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
