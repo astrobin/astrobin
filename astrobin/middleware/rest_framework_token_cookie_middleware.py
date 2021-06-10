@@ -11,6 +11,7 @@ class RestFrameworkTokenCookieMiddleware(object):
                 hasattr(request, 'user') and
                 request.user.is_authenticated() and
                 not request.is_ajax() and
+                not 'HTTP_AUTHORIZATION' in request.META and
                 not request.COOKIES.get(REST_FRAMEWORK_TOKEN_COOKIE)
         )
 
