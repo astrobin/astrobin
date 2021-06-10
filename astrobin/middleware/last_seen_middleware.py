@@ -12,6 +12,7 @@ class LastSeenMiddleware(object):
                 hasattr(request, 'user') and
                 request.user.is_authenticated() and
                 not request.is_ajax() and
+                not 'HTTP_AUTHORIZATION' in request.META and
                 not request.COOKIES.get(LAST_SEEN_COOKIE)
         )
 
