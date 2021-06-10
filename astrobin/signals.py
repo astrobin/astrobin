@@ -386,6 +386,7 @@ def subscription_paid(sender, **kwargs):
     subscription = kwargs.get('subscription')
     user = kwargs.get('user')
 
+    UserProfile.all_objects.filter(user=user).update(updated=timezone.now())
     PremiumService.clear_subscription_status_cache_keys(user.pk)
 
     if subscription.group.name == 'astrobin_lite':
@@ -410,6 +411,7 @@ def subscription_signed_up(sender, **kwargs):
     user_subscription = kwargs.get('usersubscription')
     user = kwargs.get('user')
 
+    UserProfile.all_objects.filter(user=user).update(updated=timezone.now())
     PremiumService.clear_subscription_status_cache_keys(user.pk)
 
     if 'premium' in subscription.category:
