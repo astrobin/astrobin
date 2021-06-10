@@ -4,6 +4,7 @@ from dateutil.relativedelta import relativedelta
 from django.contrib.auth.models import User, Group
 from django.core.urlresolvers import reverse
 from django.test import TestCase, override_settings
+from subscription.models import Subscription
 
 from astrobin.models import Image, UserProfile
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import *
