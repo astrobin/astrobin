@@ -353,39 +353,6 @@ def image_ad_key_value_pairs(image):
     return None
 
 
-@register.simple_tag(takes_context=True)
-def show_adsense_ads(context):
-    if not settings.ADSENSE_ENABLED:
-        return False
-
-    is_anon = not context['request'].user.is_authenticated()
-    image_owner_is_ultimate = False
-
-    if context.template_name.startswith('registration/'):
-        return False
-    elif context.template_name == 'image/detail.html':
-        for data in context.dicts:
-            if 'image' in data:
-                image_owner_is_ultimate = is_any_ultimate(data['image'].user)
-    elif context.template_name in (
-            'user/profile.html',
-            'user_collections_list.html',
-            'user_collections_detail.html',
-            'user/bookmarks.html',
-            'user/liked.html',
-            'user/following.html',
-            'user/followers.html',
-            'user/plots.html',
-    ):
-        for data in context.dicts:
-            if 'requested_user' in data:
-                image_owner_is_ultimate = is_any_ultimate(data['requested_user'])
-
-    return is_anon and not image_owner_is_ultimate and \
-           (context["COOKIELAW_ACCEPTED"] is not False or not show_cookie_banner(context.request)) and \
-           not context['request'].get_host().startswith("localhost")
-
-
 @register.filter
 def valid_subscriptions(user):
     if user.is_anonymous():

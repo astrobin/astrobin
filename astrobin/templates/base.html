@@ -58,11 +58,7 @@
         {% block extrahead %}{% endblock %}
     </head>
 
-    {% show_adsense_ads as show_adsense_ads %}
-    <body id="{% block page_body_id %}none{% endblock %}" data-offset="60"
-          {% if show_adsense_ads %}
-              class="with-ads-sidebar"
-          {% endif %}>
+    <body id="{% block page_body_id %}none{% endblock %}" data-offset="60">
 
         <!-- Google Tag Manager (noscript) -->
         <noscript>
@@ -95,47 +91,6 @@
         </div>
 
         <div id="top" class="container astrobin-container {% block container_extra_classes %}{% endblock %}">
-            {% if show_adsense_ads %}
-                <div class="ads-sidebar-left"></div>
-                <div class="ads-sidebar-right"></div>
-
-                <script>
-                    if (window.innerWidth >= 1180) {
-                        var externalScript = document.createElement("script");
-                        externalScript.type = "text/javascript";
-                        externalScript.setAttribute("async", "async");
-                        externalScript.src = "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
-                        document.getElementsByTagName("body")[0].appendChild(externalScript);
-
-                        var inlineScript = document.createElement("script");
-                        inlineScript.type = "text/javascript";
-                        inlineScript.text = "(adsbygoogle = window.adsbygoogle || []).push({});";
-
-                        var ins = document.createElement("ins");
-                        ins.setAttribute("class", "adsbygoogle");
-                        ins.setAttribute("style", "display:inline-block;width:160px;height:600px;");
-                        ins.setAttribute("data-ad-client", "ca-pub-6593405236842139");
-                        ins.setAttribute("data-ad-slot", "8733694975");
-                        document.getElementsByClassName("ads-sidebar-right")[0].appendChild(ins);
-                        document.getElementsByClassName("ads-sidebar-right")[0].appendChild(inlineScript);
-
-                        if (window.innerWidth >= 1366) {
-                            inlineScript = document.createElement("script");
-                            inlineScript.type = "text/javascript";
-                            inlineScript.text = "(adsbygoogle = window.adsbygoogle || []).push({});";
-
-                            ins = document.createElement("ins");
-                            ins.setAttribute("class", "adsbygoogle");
-                            ins.setAttribute("style", "display:inline-block;width:160px;height:600px;");
-                            ins.setAttribute("data-ad-client", "ca-pub-6593405236842139");
-                            ins.setAttribute("data-ad-slot", "5954677296");
-                            document.getElementsByClassName("ads-sidebar-left")[0].appendChild(ins);
-                            document.getElementsByClassName("ads-sidebar-left")[0].appendChild(inlineScript);
-                        }
-                    }
-                </script>
-            {% endif %} {# ./show adsense ads #}
-
             {% block breadcrumb %} {# Use a block to allow forum template to override this #}
                 {% render_breadcrumbs %}
             {% endblock %}
