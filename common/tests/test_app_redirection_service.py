@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import urllib
 
 from django.contrib.auth.models import AnonymousUser
@@ -39,7 +41,23 @@ class AppRedirectionServiceTest(TestCase):
 
         url = service.contact_redirect(request)
 
-        self.assertTrue('username=%s' % urllib.quote(request.user.username) in url)
+        self.assertTrue('username=%s' % urllib.quote(unicode(request.user.username).encode('utf-8')) in url)
+        self.assertTrue('email=%s' % urllib.quote(request.user.email) in url)
+
+    def test_contact_redirect_with_user_with_non_ascii_username(self):
+        request = self.request_factory.get('/contact')
+
+        user = Generators.user()
+        user.username = u'ABCóE'
+        user.save()
+
+        request.user = user
+
+        service = AppRedirectionService()
+
+        url = service.contact_redirect(request)
+
+        self.assertTrue('username=%s' % urllib.quote(unicode(request.user.username).encode('utf-8')) in url)
         self.assertTrue('email=%s' % urllib.quote(request.user.email) in url)
 
     def test_contact_redirect_with_request_data(self):

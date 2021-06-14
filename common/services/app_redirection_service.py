@@ -28,14 +28,14 @@ class AppRedirectionService:
         params = {}
 
         if user.is_authenticated:
-            params['username'] = user.username
+            params['username'] = unicode(user.username).encode('utf-8')
             params['email'] = user.email
 
         if 'subject' in request.GET:
-            params['subject'] = urllib.unquote(request.GET.get('subject'))
+            params['subject'] = unicode(urllib.unquote(request.GET.get('subject'))).encode('utf-8')
 
         if 'message' in request.GET:
-            params['message'] = urllib.unquote(request.GET.get('message'))
+            params['message'] = unicode(urllib.unquote(request.GET.get('message'))).encode('utf-8')
 
         original_quote_plus = urllib.quote_plus
         urllib.quote_plus = urllib.quote
