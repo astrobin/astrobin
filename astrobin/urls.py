@@ -34,7 +34,6 @@ from astrobin.views import (
     moderation as moderation_views,
     collections as collections_views,
     registration as registration_views,
-    special as special_views,
 
     index,
 
@@ -245,7 +244,6 @@ urlpatterns += [
     ### SPECIAL VIEWS                                                       ###
     ###########################################################################
 
-    url(r'^ads.txt$', special_views.AdsTxtView.as_view(), name='ads_txt'),
     url(r'^favicon.ico$',
         RedirectView.as_view(url=staticfiles_storage.url('astrobin/favicon.ico'), permanent=False),
         name='favicon'),
