@@ -584,7 +584,7 @@ astrobin_common = {
         });
     },
 
-    init_timestamps: function() {
+    init_timestamps: function () {
         $('abbr.timestamp').each(function (index, element) {
             var $el = $(element);
             var datetime = new Date(0);
@@ -605,7 +605,22 @@ astrobin_common = {
         });
     },
 
-    init_page_loading_indicator: function() {
+    init_page_loading_indicator: function () {
+        var $pageLoader = $('#page-loading-indicator');
+        var $pageLoaderBackdrop = $('#page-loading-indicator-backdrop');
+
+        $(window).bind("pagehide", function () {
+            setTimeout(function () {
+                $pageLoaderBackdrop.css('width', 0);
+                $pageLoaderBackdrop.css('height', 0);
+                $pageLoaderBackdrop.css('opacity', 0);
+
+                $pageLoader.css('width', 0);
+                $pageLoader.css('height', 0);
+                $pageLoader.css('opacity', 0);
+            }, 10);
+        });
+
         $('a:not(.bb-quote-link)').live('click', function (event) {
             var url = $(this).attr('href');
 
@@ -624,8 +639,7 @@ astrobin_common = {
             }
 
             var target = $(this).attr('target');
-            var $pageLoader = $('#page-loading-indicator');
-            var $pageLoaderBackdrop = $('#page-loading-indicator-backdrop');
+
 
             if (!target) {
                 target = '_self';
@@ -666,13 +680,13 @@ astrobin_common = {
                 var t = document.querySelector('#notification-row-template');
                 var $tbody = $modal.find('.table tbody');
 
-                data.results.forEach(function(notification) {
+                data.results.forEach(function (notification) {
                     t.content.querySelector('.notification-unread').setAttribute('data-id', notification['id']);
                     t.content.querySelector('.notification-content').innerHTML = notification['message'];
                     t.content.querySelector('.timestamp').setAttribute('data-epoch', new Date(notification['created'] + 'Z').getTime());
                     $tbody.append(document.importNode(t.content, true));
 
-                    $tbody.find('.notification-unread[data-id=' + notification['id'] + '] .notification-mark-as-read a').live('click', function() {
+                    $tbody.find('.notification-unread[data-id=' + notification['id'] + '] .notification-mark-as-read a').live('click', function () {
                         astrobin_common.mark_notification_as_read(notification['id']);
                     })
                 });
@@ -682,12 +696,12 @@ astrobin_common = {
 
                 $('#notifications-count').text(data.count).show();
 
-                $('#mark-all-notifications-as-read').removeAttr('disabled').click(function() {
-                   astrobin_common.mark_all_notifications_as_read().then(function() {
-                       $tbody.find('.no-new-notifications').show();
-                       $('#mark-all-notifications-as-read').attr('disabled', 'disabled');
-                       $modal.modal('hide');
-                   });
+                $('#mark-all-notifications-as-read').removeAttr('disabled').click(function () {
+                    astrobin_common.mark_all_notifications_as_read().then(function () {
+                        $tbody.find('.no-new-notifications').show();
+                        $('#mark-all-notifications-as-read').attr('disabled', 'disabled');
+                        $modal.modal('hide');
+                    });
                 });
             }
         });
@@ -733,7 +747,7 @@ astrobin_common = {
 
     },
 
-    mark_all_notifications_as_read: function() {
+    mark_all_notifications_as_read: function () {
         var $rows = $('#notifications-modal tr:not(.no-new-notifications)'),
             $count_badge = $('#notifications-count'),
             count;
@@ -846,7 +860,7 @@ astrobin_common = {
         return url;
     },
 
-    get_indexes: function() {
+    get_indexes: function () {
         $.ajax({
             url: '/api/v2/common/userprofiles/current/',
             method: 'GET',
@@ -905,7 +919,7 @@ astrobin_common = {
 
         astrobin_common.init_ajax_csrf_token();
         astrobin_common.get_indexes();
-        setTimeout(function() {
+        setTimeout(function () {
             astrobin_common.get_notifications();
         }, 2000);
 
