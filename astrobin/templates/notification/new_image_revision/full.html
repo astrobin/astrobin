@@ -1,2 +1,32 @@
 {% load i18n %}
-{% blocktrans %}{{originator}} has published a new image revision! Check it out at the following url: <a href="{{object_url}}">{{object_url}}</a>{% endblocktrans %}
+
+<a>
+    {% blocktrans trimmed %}
+        <a href="{{ user_url }}">{{ user }}</a> has published a new image revision on <strong>"{{ title }}"</strong>.
+    {% endblocktrans %}
+</a>
+
+<br /><br />
+
+{% if description %}
+    <p>
+        {% blocktrans %}Description{% endblocktrans %}: <em>"{{ description }}"</em>.
+    </p>
+
+    <br />
+{% endif %}
+
+{% if image_thumbnail %}
+    <a href="{{ url }}">
+        <img src="{{ image_thumbnail }}" alt="{{ title }}" />
+    </a>
+{% endif %}
+
+
+<br /><br />
+
+<p>
+    {% blocktrans trimmed %}
+        The previous update to this image happened on <strong>{{ previous_update_date }}</strong>.
+    {% endblocktrans %}
+</p>

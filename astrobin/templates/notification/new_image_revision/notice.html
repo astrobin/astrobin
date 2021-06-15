@@ -1,2 +1,11 @@
 {% load i18n %}
-{% blocktrans %}<a href="{{object_url}}"><strong>{{originator}}</strong> has published a new image revision.</a>{% endblocktrans %}
+
+<a href="{{ url }}">
+    {% blocktrans trimmed %}
+        <strong>{{ user }}</strong> has published a new image revision on "{{ title }}".
+    {% endblocktrans %}
+
+    {% if description %}
+        {% blocktrans %}Description{% endblocktrans %}: <em>"{{ description }}"</em>.
+    {% endif %}
+</a>

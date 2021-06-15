@@ -1,11 +1,12 @@
 import logging
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 from celery import shared_task
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.management import call_command
+from django.utils import formats
 from django_bouncy.models import Delivery, Bounce, Complaint
 
 from astrobin.models import Image, UserProfile, ImageRevision
@@ -13,8 +14,8 @@ from astrobin_apps_notifications.utils import push_notification, build_notificat
 from common.services import DateTimeService
 from toggleproperties.models import ToggleProperty
 
-
 logger = logging.getLogger('apps')
+
 
 @shared_task(time_limit=300)
 def purge_old_notifications():
@@ -47,7 +48,7 @@ def push_notification_for_new_image(user_pk, image_pk):
             'image_thumbnail': thumb.url if thumb else None
         })
     else:
-        logger.error('push_notification_for_new_image called for image %d whose author %d has no followers' % (
+        logger.info('push_notification_for_new_image called for image %d whose author %d has no followers' % (
             image_pk, user_pk)
         )
 
@@ -70,12 +71,28 @@ def push_notification_for_new_image_revision(revision_pk):
         object_id=revision.image.user.pk)]
 
     if len(followers) > 0:
+        previous_revision = ImageRevision.objects \
+            .filter(image=revision.image) \
+            .exclude(pk=revision.pk) \
+            .order_by('-uploaded').first()
+
+        thumb = revision.thumbnail_raw('gallery', sync=True)
+
         push_notification(followers, revision.image.user, 'new_image_revision', {
-            'object_url': build_notification_url(settings.BASE_URL + revision.get_absolute_url(), revision.image.user),
-            'originator': revision.image.user.userprofile.get_display_name(),
+            'url': build_notification_url(settings.BASE_URL + revision.get_absolute_url(), revision.image.user),
+            'user_url': build_notification_url(
+                settings.BASE_URL + revision.image.user.userprofile.get_absolute_url(), revision.image.user),
+            'user': revision.image.user.userprofile.get_display_name(),
+            'title': revision.image.title,
+            'description': revision.description,
+            'previous_update_date': formats.date_format(max(
+                revision.image.published,
+                previous_revision.uploaded if previous_revision is not None else datetime.min
+            ), "DATE_FORMAT"),
+            'image_thumbnail': thumb.url if thumb else None,
         })
     else:
-        logger.error(
+        logger.info(
             'push_notification_for_new_image called for revision %d whose author has no followers' % revision_pk
         )
 
