@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-03 20:04+0000\n"
+"POT-Creation-Date: 2021-06-15 11:44+0000\n"
 "PO-Revision-Date: 2015-12-30 11:27+0000\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -821,6 +821,10 @@ msgid ""
 "be used to sort images by arbitrary properties."
 msgstr ""
 
+msgid ""
+"Editing groups is not possible while the image is not in your public area."
+msgstr ""
+
 msgid "This field is required."
 msgstr "Dit veld is verplicht."
 
@@ -1474,6 +1478,21 @@ msgstr ""
 msgid "Inverted monochrome"
 msgstr "Negatief zwart-wit"
 
+msgid "Everybody"
+msgstr ""
+
+msgid "Paying members only"
+msgstr ""
+
+msgid "Members only"
+msgstr ""
+
+msgid "Me only"
+msgstr ""
+
+msgid "Nobody"
+msgstr ""
+
 msgid "Title"
 msgstr "Titel"
 
@@ -1541,6 +1560,13 @@ msgstr ""
 msgid ""
 "If selected, AstroBin will use a resizing algorithm that slightly sharpens "
 "the image's thumbnails. This setting applies to all revisions."
+msgstr ""
+
+msgid "Allow full-size display"
+msgstr ""
+
+msgid ""
+"Specify what user groups are allowed to view this image at its full size."
 msgstr ""
 
 msgid "Apply watermark to image"
@@ -1787,6 +1813,12 @@ msgstr ""
 msgid "I prefer not to say"
 msgstr ""
 
+msgid "Allow others to see when you created your AstroBin account"
+msgstr ""
+
+msgid "Allow others to see when you last visited AstroBin"
+msgstr ""
+
 msgid "Real name"
 msgstr "Echte naam"
 
@@ -1868,8 +1900,8 @@ msgstr ""
 msgid "Default front page view"
 msgstr ""
 
-msgid "Upload time"
-msgstr "Datum van publicatie"
+msgid "Publication time"
+msgstr ""
 
 msgid "Acquisition time"
 msgstr "Belichtingstijd"
@@ -2340,6 +2372,9 @@ msgid "Marshallese"
 msgstr ""
 
 msgid "Mongolian"
+msgstr ""
+
+msgid "Moldavian / Moldovan"
 msgstr ""
 
 msgid "Navajo / Navaho"
@@ -2979,6 +3014,9 @@ msgstr "Gelieve uw taal te kiezen uit bovenstaande opties."
 msgid "Notifications"
 msgstr "Kennisgevingen"
 
+msgid "You have no new notifications."
+msgstr ""
+
 msgid "View all"
 msgstr ""
 
@@ -3119,9 +3157,6 @@ msgstr "Hulp"
 msgid "Contact"
 msgstr "Contact"
 
-msgid "n/a"
-msgstr "n/a"
-
 msgid "Would you like to start using your real name on AstroBin?"
 msgstr "Wens je om je echte naam te gebruiken op AstroBin?"
 
@@ -3177,6 +3212,19 @@ msgstr "Mijn instellingen"
 
 msgid "Logout"
 msgstr "Uitloggen"
+
+msgid "Sorry"
+msgstr "Helaas"
+
+#, python-format
+msgid "You cannot like this item. Reason: \"%(reason)s\"."
+msgstr ""
+
+msgid "You cannot remove a like that you gave more than one hour ago."
+msgstr ""
+
+msgid "You cannot remove your like from this item."
+msgstr ""
 
 msgid "E-mail change confirmation"
 msgstr ""
@@ -3479,6 +3527,11 @@ msgstr "De commentaren zijn afgesloten"
 msgid "In these public groups"
 msgstr ""
 
+msgid ""
+"The image is not actually visible in these groups until you promote it to "
+"your public area."
+msgstr ""
+
 msgid "Histogram"
 msgstr "Histogram"
 
@@ -3715,6 +3768,9 @@ msgid ""
 "sure?"
 msgstr "Deze revisie wordt onherroepelijk gewist. Ben je zeker?"
 
+msgid "There doesn't seem to be anything here."
+msgstr ""
+
 msgid "Associate XISF/FITS file"
 msgstr ""
 
@@ -3743,15 +3799,6 @@ msgstr ""
 
 msgid "The following people bookmarked this image"
 msgstr "De volgende mensen hebben deze foto als bladwijzer toegevoegd"
-
-msgid "Loading"
-msgstr "Bezig met laden..."
-
-msgid "Sorry"
-msgstr "Helaas"
-
-msgid "You cannot remove a like that you gave more than one hour ago."
-msgstr ""
 
 msgid "Delete image and all its revisions?"
 msgstr "Foto wissen, inclusief alle revisies?"
@@ -3955,6 +4002,9 @@ msgstr "Gelieve te wachten..."
 
 msgid "AstroBin is processing your thumbnails."
 msgstr ""
+
+msgid "Loading"
+msgstr "Bezig met laden..."
 
 msgid "Edit your image: acquisition details"
 msgstr "Wijzig je foto: details ivm de realisatie"
@@ -4921,29 +4971,42 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(originator)s has published a new image revision! Check it out at the "
-"following url: <a href=\"%(object_url)s\">%(object_url)s</a>"
+"<a href=\"%(user_url)s\">%(user)s</a> has published a new image revision on "
+"<strong>\"%(title)s\"</strong>."
 msgstr ""
 
 #, python-format
 msgid ""
-"%(originator)s has published a new image revision! Check it out at the "
-"following url: %(object_url)s"
+"The previous update to this image happened on <strong>"
+"%(previous_update_date)s</strong>."
 msgstr ""
-"%(originator)s heeft een nieuwe revisie gepost! Hier te bekijken: "
-"%(object_url)s"
+
+#, python-format
+msgid "%(user)s has published a new image revision on \"%(title)s\"."
+msgstr ""
+
+#, python-format
+msgid "The previous update to this image happened on %(previous_update_date)s."
+msgstr ""
+
+msgid "See the new revision"
+msgstr ""
 
 #, python-format
 msgid ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published a "
-"new image revision.</a>"
+"<strong>%(user)s</strong> has published a new image revision on \"%(title)s"
+"\"."
 msgstr ""
-"<a href=\"%(object_url)s\"><strong>%(originator)s</strong> heeft een nieuwe "
-"revisie gepost.</a>"
 
 #, python-format
-msgid "New image revision by %(originator)s"
-msgstr "Nieuwe revisie van %(originator)s"
+msgid ""
+"<strong>%(user)s</strong> has published a new image revision on <strong>"
+"\"%(title)s\"</strong>."
+msgstr ""
+
+#, python-format
+msgid "New image revision by %(user)s on \"%(title)s\""
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5028,12 +5091,6 @@ msgstr ""
 
 #, python-format
 msgid "%(user)s posted a new topic to the group: \"%(group_name)s\""
-msgstr ""
-
-msgid "Notification settings"
-msgstr ""
-
-msgid "Notification Type"
 msgstr ""
 
 msgid ""
@@ -5129,6 +5186,29 @@ msgid "If you want, why not introduce yourself on the forums?"
 msgstr ""
 
 msgid "Welcome!"
+msgstr ""
+
+msgid "Congratulations!"
+msgstr ""
+
+msgid "Your image was voted Image of the Day"
+msgstr ""
+
+msgid "Want to learn about the IOTD/TP process?"
+msgstr ""
+
+msgid "Read the manifesto."
+msgstr ""
+
+msgid ""
+"\n"
+"    Want to learn about the IOTD/TP process?\n"
+msgstr ""
+
+msgid "Your image was voted Top Pick"
+msgstr ""
+
+msgid "Your image was nominated to be a Top Pick"
 msgstr ""
 
 msgid "Object not found"
@@ -5270,9 +5350,6 @@ msgid "<a href=\"%(login_url)s\">Login</a> to vote and view results."
 msgstr ""
 
 msgid "Include a poll"
-msgstr ""
-
-msgid "Please note: this post will be published only after moderation."
 msgstr ""
 
 msgid "Type your forum post here..."
@@ -5493,9 +5570,6 @@ msgstr "Sorteer"
 msgid "Relevance"
 msgstr "Relevantie"
 
-msgid "Publication time"
-msgstr ""
-
 msgid "Large field radius"
 msgstr ""
 
@@ -5506,9 +5580,6 @@ msgid "Large pixel scale"
 msgstr ""
 
 msgid "Small pixel scale"
-msgstr ""
-
-msgid "Search for celestial objects, equipment items, users, etc..."
 msgstr ""
 
 #, python-format
@@ -5834,9 +5905,6 @@ msgstr "Status"
 msgid "File size"
 msgstr ""
 
-msgid "There doesn't seem to be anything here."
-msgstr ""
-
 msgid "Quota exceeded"
 msgstr ""
 
@@ -5914,11 +5982,17 @@ msgstr "AstroBin zal je locatie-details niet tonen aan andere gebruikers."
 msgid "Import from Flickr"
 msgstr "Importeren vanuit Flickr"
 
+msgid "Privacy"
+msgstr ""
+
 msgid "Change your username"
 msgstr ""
 
 msgid "Edit your site preferences"
 msgstr "Wijzig je voorkeuren voor deze site"
+
+msgid "Privacy settings"
+msgstr ""
 
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
@@ -5988,6 +6062,12 @@ msgid "Thanks for your support!"
 msgstr "Bedankt voor je steun!"
 
 msgid "Your payments"
+msgstr ""
+
+msgid "The <strong>Last seen online</strong> field is updated hourly."
+msgstr ""
+
+msgid "To change the visibility of these fields, edit your privacy settings."
 msgstr ""
 
 msgid "This data is currently not available and will be recalculated shortly."
@@ -6174,6 +6254,12 @@ msgstr ""
 msgid "Search terms"
 msgstr ""
 
+msgid "Telescope"
+msgstr ""
+
+msgid "Camera"
+msgstr ""
+
 msgid "Search domain"
 msgstr ""
 
@@ -6214,6 +6300,17 @@ msgstr "Telescoop type"
 msgid "Integration time (hours)"
 msgstr ""
 
+msgid ""
+"However, you can still perform a similar search using the free text search "
+"terms field."
+msgstr ""
+
+#, python-format
+msgid ""
+"Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Lite or Premium</"
+"a> subscription."
+msgstr ""
+
 #, python-format
 msgid ""
 "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Ultimate</a> "
@@ -6235,13 +6332,16 @@ msgstr ""
 msgid "Top pick nomination"
 msgstr ""
 
-msgid "Guider/planetary"
-msgstr ""
-
 msgid "Min"
 msgstr ""
 
 msgid "Max"
+msgstr ""
+
+msgid "What camera was used in the acquisition of the image?"
+msgstr ""
+
+msgid "Guider/planetary"
 msgstr ""
 
 msgid "Imaging telescopes"
@@ -6249,6 +6349,9 @@ msgstr ""
 
 msgid "Astrometry"
 msgstr "Astrometrie"
+
+msgid "In which data field should we look for your search terms?"
+msgstr ""
 
 msgid "Everything"
 msgstr ""
@@ -6268,13 +6371,32 @@ msgstr ""
 msgid "Guiding telescopes"
 msgstr ""
 
+msgid "What kind of search results do you want?"
+msgstr ""
+
 msgid "Comments & forums"
+msgstr ""
+
+msgid "What are you looking for? Use this field to perform a free-text search."
+msgstr ""
+
+msgid ""
+"Alternatively, you can use the Subject/Telescope/Camera filters or any other "
+"advanced filters to fine-tune your search."
+msgstr ""
+
+msgid ""
+"What deep-sky astronomical subject are you looking for? E.g. M 31, NGC 2976, "
+"IC 405... (for solar system objects please use the \"Subject type\" filter)"
 msgstr ""
 
 msgid "Earth's moon"
 msgstr ""
 
 msgid "Other solar system object"
+msgstr ""
+
+msgid "What telescope was used in the acquisition of the image?"
 msgstr ""
 
 msgid "Achromatic"
@@ -6390,6 +6512,9 @@ msgstr "Er werden geen telescopen of lenzen ingevoerd waarmee je beelden maakt"
 msgid "Gear images"
 msgstr "Foto's van apparatuur"
 
+msgid "n/a"
+msgstr "n/a"
+
 msgid "No subjects specified"
 msgstr "Geen onderwerpen ingevoerd"
 
@@ -6397,8 +6522,8 @@ msgid "No acquisition details specified"
 msgstr ""
 "Geen details ingevoerd omtrent de manier van het verkrijgen van het beeld"
 
-msgid "Last login"
-msgstr "Laatste login"
+msgid "Last seen online"
+msgstr ""
 
 msgid "Total integration time"
 msgstr "Totale integratietijd"
@@ -6496,3 +6621,26 @@ msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid "Upload time"
+#~ msgstr "Datum van publicatie"
+
+#~ msgid ""
+#~ "%(originator)s has published a new image revision! Check it out at the "
+#~ "following url: %(object_url)s"
+#~ msgstr ""
+#~ "%(originator)s heeft een nieuwe revisie gepost! Hier te bekijken: "
+#~ "%(object_url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> has published "
+#~ "a new image revision.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(object_url)s\"><strong>%(originator)s</strong> heeft een "
+#~ "nieuwe revisie gepost.</a>"
+
+#~ msgid "New image revision by %(originator)s"
+#~ msgstr "Nieuwe revisie van %(originator)s"
+
+#~ msgid "Last login"
+#~ msgstr "Laatste login"
