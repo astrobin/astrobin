@@ -295,11 +295,11 @@ def random_id(context, size=8, chars=string.ascii_uppercase + string.digits):
 
 @register.simple_tag(takes_context=True)
 def cache_image_list(context):
-    if context['requested_user'] and \
-            context['requested_user'].userprofile.display_wip_images_on_public_gallery and \
-            context['request'].user == context['requested_user']:
+    # Don't cache for gallery owner.
+    if context['requested_user'] and context['request'].user == context['requested_user']:
         return False
 
+    # Don't cache pages.
     if context['request'].GET.get('image_list_page'):
         return False
 
