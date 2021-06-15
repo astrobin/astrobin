@@ -1,4 +1,5 @@
 from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_control
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_cookie
 from django.views.generic import ListView
@@ -9,12 +10,7 @@ from astrobin_apps_iotd.services import IotdService
 from common.services.caching_service import CachingService
 
 
-@method_decorator([last_modified(CachingService.get_latest_top_pick_datetime), vary_on_cookie], name='dispatch')
-class TopPicksView(ListView):
-    model = TopPickArchive
-    template_name = 'top_picks.html'
-    paginate_by = 30
-
+class TopPickBaseView(ListView):
     def filter_by_datasource(self, queryset):
         data_source = self.request.GET.get("source")
         if data_source is not None:
@@ -33,23 +29,36 @@ class TopPicksView(ListView):
 
         return queryset
 
+    def get_context_data(self, **kwargs):
+        context = super(TopPickBaseView, self).get_context_data(**kwargs)
+        context['source'] = self.request.GET.get('source')
+        context['acquisition_type'] = self.request.GET.get('acquisition_type')
+        return context
+
+
+@method_decorator([
+    last_modified(CachingService.get_latest_top_pick_datetime),
+    cache_control(private=True, no_cache=True),
+    vary_on_cookie
+], name='dispatch')
+class TopPicksView(TopPickBaseView):
+    model = TopPickArchive
+    template_name = 'top_picks.html'
+    paginate_by = 30
+
     def get_queryset(self):
         queryset = IotdService().get_top_picks()
         queryset = self.filter_by_datasource(queryset)
         queryset = self.filter_by_acquisition_type(queryset)
         return queryset
 
-    def get_context_data(self, **kwargs):
-        context = super(TopPicksView, self).get_context_data(**kwargs)
-        context['source'] = self.request.GET.get('source')
-        context['acquisition_type'] = self.request.GET.get('acquisition_type')
-        return context
 
-
-@method_decorator(
-    [last_modified(CachingService.get_latest_top_pick_nomination_datetime), vary_on_cookie],
-    name='dispatch')
-class TopPickNominationsView(TopPicksView):
+@method_decorator([
+    last_modified(CachingService.get_latest_top_pick_nomination_datetime),
+    cache_control(private=True, no_cache=True),
+    vary_on_cookie
+], name='dispatch')
+class TopPickNominationsView(TopPickBaseView):
     template_name = 'top_pick_nominations.html'
     model = TopPickArchive
 

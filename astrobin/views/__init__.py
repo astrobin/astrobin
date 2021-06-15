@@ -31,6 +31,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.translation import ngettext as _n
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 from el_pagination.decorators import page_template
 from flickrapi.auth import FlickrAccessToken
@@ -2090,6 +2091,7 @@ def user_profile_seen_realname(request):
 @never_cache
 @login_required
 @require_POST
+@csrf_exempt
 def user_profile_shadow_ban(request):
     user_pk = request.POST.get('userPk')
 
@@ -2115,6 +2117,7 @@ def user_profile_shadow_ban(request):
 @never_cache
 @login_required
 @require_POST
+@csrf_exempt
 def user_profile_remove_shadow_ban(request):
     user_pk = request.POST.get('userPk')
 

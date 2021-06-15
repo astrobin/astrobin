@@ -1,3 +1,7 @@
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_control
+from django.views.decorators.http import last_modified
+from django.views.decorators.vary import vary_on_cookie
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from notification.models import NoticeSetting, NoticeType, NOTICE_MEDIA
@@ -11,8 +15,14 @@ from astrobin_apps_notifications.api.filters import NotificationFilter
 from astrobin_apps_notifications.api.serializers import NotificationSerializer, NoticeSettingSerializers, \
     NoticeTypeSerializer
 from common.permissions import ReadOnly
+from common.services.caching_service import CachingService
 
 
+@method_decorator([
+    last_modified(CachingService.get_last_notification_time),
+    cache_control(private=True, no_cache=True),
+    vary_on_cookie
+], name='dispatch')
 class NotificationViewSet(viewsets.ModelViewSet):
     serializer_class = NotificationSerializer
     filter_class = NotificationFilter

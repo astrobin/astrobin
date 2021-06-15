@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
+from django.views.decorators.cache import cache_page, cache_control
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_cookie
 from django_filters.rest_framework import DjangoFilterBackend
@@ -48,7 +48,10 @@ class UserList(generics.ListAPIView):
     queryset = User.objects.all()
 
 
-@method_decorator([last_modified(CachingService.get_user_detail_last_modified)], name='dispatch')
+@method_decorator([
+    last_modified(CachingService.get_user_detail_last_modified),
+    cache_control(private=True, no_cache=True),
+], name='dispatch')
 class UserDetail(generics.RetrieveAPIView):
     model = User
     serializer_class = UserSerializer
@@ -112,7 +115,11 @@ class UserProfileDetail(generics.RetrieveAPIView):
         return UserProfileSerializer
 
 
-@method_decorator([last_modified(CachingService.get_current_user_profile_last_modified), vary_on_cookie], name='dispatch')
+@method_decorator([
+    last_modified(CachingService.get_current_user_profile_last_modified),
+    cache_control(private=True, no_cache=True),
+    vary_on_cookie
+], name='dispatch')
 class CurrentUserProfileDetail(generics.ListAPIView):
     model = UserProfile
     permission_classes = (ReadOnly,)
