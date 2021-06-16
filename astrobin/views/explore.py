@@ -5,7 +5,7 @@ from django.views.decorators.vary import vary_on_cookie
 from django.views.generic import ListView
 
 from astrobin.models import Image
-from astrobin_apps_iotd.models import TopPickArchive
+from astrobin_apps_iotd.models import TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_iotd.services import IotdService
 from common.services.caching_service import CachingService
 
@@ -60,7 +60,7 @@ class TopPicksView(TopPickBaseView):
 ], name='dispatch')
 class TopPickNominationsView(TopPickBaseView):
     template_name = 'top_pick_nominations.html'
-    model = TopPickArchive
+    model = TopPickNominationsArchive
 
     def get_queryset(self):
         queryset = IotdService().get_top_pick_nominations()
