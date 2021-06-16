@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404
 from django.utils import formats
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext
+from django.views.decorators.cache import cache_control
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_cookie
 from django.views.generic import (
@@ -124,7 +125,11 @@ class IotdToggleJudgementAjaxView(
         return HttpResponseForbidden()
 
 
-@method_decorator([last_modified(CachingService.get_latest_iotd_datetime), vary_on_cookie], name='dispatch')
+@method_decorator([
+    last_modified(CachingService.get_latest_iotd_datetime),
+    cache_control(private=True, no_cache=True),
+    vary_on_cookie
+], name='dispatch')
 class IotdArchiveView(ListView):
     model = Iotd
     template_name = 'astrobin_apps_iotd/iotd_archive.html'

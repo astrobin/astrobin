@@ -160,7 +160,6 @@
     </div>
     <div class="modal-footer">
         <form action="{% url 'profile_shadow_ban' %}" method="post">
-            {% csrf_token %}
             <input type="hidden" name="userPk" id="userPk" value="" />
             <input type="hidden" name="next" id="next" value="{{ request.path }}" />
             <button class="btn btn-secondary btn-block-mobile" data-dismiss="modal">{% trans "Cancel" %}</button>
@@ -187,7 +186,6 @@
     </div>
     <div class="modal-footer">
         <form action="{% url 'profile_remove_shadow_ban' %}" method="post">
-            {% csrf_token %}
             <input type="hidden" name="userPk" id="userPk" value="" />
             <input type="hidden" name="next" id="next" value="{{ request.path }}" />
             <button class="btn btn-secondary btn-block-mobile" data-dismiss="modal">{% trans "Cancel" %}</button>

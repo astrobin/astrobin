@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from persistent_messages.models import Message
 from rest_framework.authtoken.models import Token
 
 from astrobin.models import UserProfile
@@ -48,3 +49,15 @@ class CachingService:
             return userprofile.updated
         except UserProfile.DoesNotExist:
             return DateTimeService.now()
+
+    @staticmethod
+    def get_last_notification_time(request):
+        if request.user.is_authenticated():
+            return Message.objects.filter(user=request.user).latest('created').created
+
+        if 'HTTP_AUTHORIZATION' in request.META:
+            token_in_header = request.META['HTTP_AUTHORIZATION'].replace('Token ', '')
+            token = Token.objects.get(key=token_in_header)
+            return Message.objects.filter(user=token.user).latest('created').created
+
+        return DateTimeService.now()
