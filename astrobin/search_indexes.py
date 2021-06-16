@@ -303,10 +303,6 @@ class UserIndex(SearchIndex, Indexable):
     # Total number of likes on all "likeable" elements that can be associated to a user.
     total_likes_received = IntegerField()
 
-    # User reputation based on text content
-    # DEPRECATED: remove once contribution_index is populated
-    reputation = FloatField()
-
     # Index based on text content
     contribution_index = FloatField()
 
@@ -438,12 +434,6 @@ class UserIndex(SearchIndex, Indexable):
             forum_post_likes_received = self.prepare_forum_post_likes_received(obj)
 
         return likes + comment_likes_received + forum_post_likes_received
-
-    # DEPRECATED: remove once contribution_index is populated
-    def prepare_reputation(self, obj):
-        comments_contribution_index = _prepare_comment_contribution_index(NestedComment.objects.filter(author=obj))
-        forum_post_contribution_index = _prepare_forum_post_contribution_index(Post.objects.filter(user=obj))
-        return comments_contribution_index + forum_post_contribution_index
 
     def prepare_contribution_index(self, obj):
         comments_contribution_index = _prepare_comment_contribution_index(NestedComment.objects.filter(author=obj))

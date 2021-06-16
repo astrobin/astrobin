@@ -2522,8 +2522,7 @@ class UserProfile(SafeDeleteModel):
 
             scores = {
                 'user_scores_index': user_search_result.normalized_likes,
-                # DEPRECATED: remove once contribution_index is populated
-                'user_scores_contribution_index': user_search_result.reputation,
+                'user_scores_contribution_index': user_search_result.contribution_index,
                 'user_scores_followers': user_search_result.followers,
             }
 
