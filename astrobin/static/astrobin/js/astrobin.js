@@ -918,10 +918,13 @@ astrobin_common = {
         });
 
         astrobin_common.init_ajax_csrf_token();
-        astrobin_common.get_indexes();
-        setTimeout(function () {
-            astrobin_common.get_notifications();
-        }, 2000);
+
+        if (config.is_authenticated) {
+            astrobin_common.get_indexes();
+            setTimeout(function () {
+                astrobin_common.get_notifications();
+            }, 500);
+        }
 
     }
 };

@@ -75,6 +75,7 @@
 
     $(document).ready(function() {
         astrobin_common.init({
+            is_authenticated: {{ request.user.is_authenticated|yesno:"true,false" }},
             timezone:
                 {% if request.user.is_authenticated and request.user.userprofile.timezone %}
                     '{{ request.user.userprofile.timezone }}'
