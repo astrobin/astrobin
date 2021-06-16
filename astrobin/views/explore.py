@@ -54,7 +54,6 @@ class TopPicksView(TopPickBaseView):
 
 
 @method_decorator([
-    last_modified(CachingService.get_latest_top_pick_nomination_datetime),
     cache_control(private=True, no_cache=True),
     vary_on_cookie
 ], name='dispatch')
