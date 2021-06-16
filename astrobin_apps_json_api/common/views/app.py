@@ -47,6 +47,7 @@ class AppConfig(JSONResponseMixin, View):
             u'IOTD_QUEUES_PAGE_SIZE': settings.IOTD_QUEUES_PAGE_SIZE,
             u'IMAGE_UPLOAD_ENDPOINT': '/api/v2/images/image-upload/',
             u'IMAGE_REVISION_UPLOAD_ENDPOINT': '/api/v2/images/image-revision-upload/',
+            u'DATA_UPLOAD_MAX_MEMORY_SIZE': settings.DATA_UPLOAD_MAX_MEMORY_SIZE,
         })
 
     def __get_i18n_hash__(self):
