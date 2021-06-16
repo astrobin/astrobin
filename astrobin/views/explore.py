@@ -54,12 +54,14 @@ class TopPicksView(TopPickBaseView):
 
 
 @method_decorator([
+    last_modified(CachingService.get_latest_top_pick_nomination_datetime),
     cache_control(private=True, no_cache=True),
     vary_on_cookie
 ], name='dispatch')
 class TopPickNominationsView(TopPickBaseView):
-    template_name = 'top_pick_nominations.html'
     model = TopPickNominationsArchive
+    template_name = 'top_pick_nominations.html'
+    paginate_by = 30
 
     def get_queryset(self):
         queryset = IotdService().get_top_pick_nominations()
