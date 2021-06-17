@@ -37,8 +37,11 @@ class CachingService:
 
         if 'HTTP_AUTHORIZATION' in request.META:
             token_in_header = request.META['HTTP_AUTHORIZATION'].replace('Token ', '')
-            token = Token.objects.get(key=token_in_header)
-            return token.user.userprofile.updated
+            try:
+                token = Token.objects.get(key=token_in_header)
+                return token.user.userprofile.updated
+            except Token.DoesNotExist:
+                pass
 
         return DateTimeService.now()
 
@@ -57,7 +60,10 @@ class CachingService:
 
         if 'HTTP_AUTHORIZATION' in request.META:
             token_in_header = request.META['HTTP_AUTHORIZATION'].replace('Token ', '')
-            token = Token.objects.get(key=token_in_header)
-            return Message.objects.filter(user=token.user).latest('created').created
+            try:
+                token = Token.objects.get(key=token_in_header)
+                return Message.objects.filter(user=token.user).latest('created').created
+            except Token.DoesNotExist:
+                pass
 
         return DateTimeService.now()

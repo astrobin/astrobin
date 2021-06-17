@@ -172,8 +172,8 @@ class SubscriptionDetail(generics.RetrieveAPIView):
 
 
 @method_decorator([
-    cache_page(600),
     last_modified(CachingService.get_current_user_profile_last_modified),
+    cache_control(private=True, no_cache=True),
     vary_on_cookie
 ], name='dispatch')
 class UserSubscriptionList(generics.ListAPIView):
