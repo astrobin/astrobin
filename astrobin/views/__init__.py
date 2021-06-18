@@ -30,7 +30,7 @@ from django.template.loader import render_to_string
 from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.translation import ngettext as _n
 from django.utils.translation import ugettext as _
-from django.views.decorators.cache import never_cache, cache_control
+from django.views.decorators.cache import never_cache, cache_control, cache_page
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST, last_modified
 from django.views.decorators.vary import vary_on_cookie
@@ -328,7 +328,9 @@ def upload_max_revisions_error(request, max_revisions, image):
 
 # VIEWS
 
-@never_cache
+@cache_page(120)
+@vary_on_cookie
+@cache_control(private=True)
 @page_template('index/stream_page.html', key='stream_page')
 @page_template('index/recent_images_page.html', key='recent_images_page')
 @silk_profile('Index')

@@ -11,7 +11,7 @@ from django.shortcuts import get_object_or_404
 from django.utils import formats
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext
-from django.views.decorators.cache import cache_control
+from django.views.decorators.cache import cache_control, cache_page
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_cookie
 from django.views.generic import (
@@ -126,8 +126,9 @@ class IotdToggleJudgementAjaxView(
 
 
 @method_decorator([
+    cache_page(3600),
     last_modified(CachingService.get_latest_iotd_datetime),
-    cache_control(private=True, no_cache=True),
+    cache_control(private=True),
     vary_on_cookie
 ], name='dispatch')
 class IotdArchiveView(ListView):
