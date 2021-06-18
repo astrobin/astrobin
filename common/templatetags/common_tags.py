@@ -60,11 +60,17 @@ class QueryStringNode(Node):
         p_list = []
         p_dict = {}
         query = context["request"].GET
+
         for k in query:
             p_list.append([k, query.getlist(k)])
             p_dict[k] = query.getlist(k)
 
-        return get_query_string(p_list, p_dict, self.add, self.remove, context)
+        result = get_query_string(p_list, p_dict, self.add, self.remove, context)
+
+        if result == '?':
+            return ''
+
+        return result
 
 
 def get_query_string(p_list, p_dict, new_params, remove, context):

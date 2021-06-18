@@ -13,7 +13,7 @@
             </li>
 
             <li>
-                <a{% if nav_ctx == 'user' %} class="active"{% endif %} href="{{ request.path }}{% query_string "nc='user'" "nce" %}">
+                <a{% if nav_ctx == 'user' or nav_ctx == None %} class="active"{% endif %} href="{{ request.path }}{% query_string "" "nc,nce" %}">
                     <i class="icon-user"></i>
                     {% trans "User gallery" %}
                 </a>
