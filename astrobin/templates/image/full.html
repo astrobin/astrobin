@@ -42,7 +42,7 @@
     <script src="{% static 'astrobin_apps_platesolving/js/astrobin_apps_platesolving.js' %}"></script>
 </head>
 
-<body class="full">
+<body class="full" data-instant-intensity="viewport-all" data-instant-whitelist data-instant-allow-query-string>
 
 {% if request|show_cookie_banner %}
     {% cookielaw_banner %}
@@ -53,21 +53,21 @@
         <div class="container-fluid">
             {% show_10_year_anniversary_logo as show_10_year_anniversary_logo %}
             {% if show_10_year_anniversary_logo %}
-                <a class="brand ten-year-anniversary hidden-phone hidden-tablet"
+                <a data-instant class="brand ten-year-anniversary hidden-phone hidden-tablet"
                    href="https://welcome.astrobin.com/blog/celebrating-10-years-of-astrobin" target="_blank">
                     <img src="{% static 'astrobin/images/astrobin-logo-10-years.png' %}" alt="AstroBin" />
                 </a>
 
-                <a class="brand-mobile ten-year-anniversary hidden-desktop"
+                <a data-instant class="brand-mobile ten-year-anniversary hidden-desktop"
                    href="https://welcome.astrobin.com/celebrating-10-years-of-astrobin" target="_blank">
                     🎉
                 </a>
             {% else %}
-                <a class="brand hidden-phone hidden-tablet" href="{% url 'index' %}">
+                <a data-instant class="brand hidden-phone hidden-tablet" href="{% url 'index' %}">
                     <img src="{% static 'astrobin/images/astrobin-logo-small.png' %}" alt="AstroBin" />
                 </a>
 
-                <a class="brand-mobile hidden-desktop" href="{% url 'index' %}">
+                <a data-instant class="brand-mobile hidden-desktop" href="{% url 'index' %}">
                     <img src="{% static 'astrobin/images/astrobin-logo-small.png' %}" alt="AstroBin" />
                 </a>
             {% endif %}
@@ -142,7 +142,7 @@
                         {% endif %}
                     </li>
                     <li>
-                        <a class="btn navbar-btn" href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "real" %}{% endif %}">
+                        <a data-instant class="btn navbar-btn" href="{% get_image_url image revision_label %}{% if mod %}{% query_string "mod=mod" "real" %}{% endif %}">
                             <i class="icon-list-alt"></i>
                             <span class="hidden-phone hidden-tablet">{% trans "Technical card" %}</span>
                         </a>
@@ -255,7 +255,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"
         integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw=="
         crossorigin="anonymous"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js"
+        integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript" src="{% static 'astrobin/js/jquery.timeago.js' %}?t=20210416"></script>
 {% with 'astrobin/js/locale/jquery.timeago.'|add:LANGUAGE_CODE|add:'.js' as timeago_static %}
     <script type="text/javascript" src="{% static timeago_static %}?t=20210416"></script>

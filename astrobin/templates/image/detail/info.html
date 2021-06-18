@@ -16,7 +16,7 @@
     </div>
 
     <div class="avatar">
-        <a href="{% url 'user_page' image.user %}">
+        <a data-instant href="{% url 'user_page' image.user %}">
             {% avatar image.user 106 %}
 
             {% if DONATIONS_ENABLED %}
