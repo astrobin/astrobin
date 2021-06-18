@@ -65,7 +65,10 @@ class CachingService:
     @staticmethod
     def get_last_notification_time(request):
         if request.user.is_authenticated():
-            return Message.objects.filter(user=request.user).latest('modified').modified
+            try:
+                return Message.objects.filter(user=request.user).latest('modified').modified
+            except (Message.DoesNotExist, AttributeError):
+                pass
 
         if 'HTTP_AUTHORIZATION' in request.META:
             token_in_header = request.META['HTTP_AUTHORIZATION'].replace('Token ', '')
