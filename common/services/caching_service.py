@@ -14,21 +14,21 @@ class CachingService:
     def get_latest_top_pick_nomination_datetime(request):
         try:
             return TopPickNominationsArchive.objects.latest('image__published').image.published
-        except TopPickNominationsArchive.DoesNotExist:
+        except (TopPickNominationsArchive.DoesNotExist, AttributeError):
             return DateTimeService.now()
 
     @staticmethod
     def get_latest_top_pick_datetime(request):
         try:
             return TopPickArchive.objects.latest('image__published').image.published
-        except TopPickArchive.DoesNotExist:
+        except (TopPickArchive.DoesNotExist, AttributeError):
             return DateTimeService.now()
 
     @staticmethod
     def get_latest_iotd_datetime(request):
         try:
             return datetime.combine(Iotd.objects.latest('date').date, datetime.min.time())
-        except Iotd.DoesNotExist:
+        except (Iotd.DoesNotExist, AttributeError):
             return DateTimeService.now()
 
     @staticmethod
@@ -41,7 +41,7 @@ class CachingService:
             try:
                 token = Token.objects.get(key=token_in_header)
                 return token.user.userprofile.updated
-            except Token.DoesNotExist:
+            except (Token.DoesNotExist, AttributeError):
                 pass
 
         return DateTimeService.now()
@@ -59,7 +59,7 @@ class CachingService:
         try:
             userprofile = UserProfile.objects.get(user__username=username)
             return userprofile.updated
-        except UserProfile.DoesNotExist:
+        except (UserProfile.DoesNotExist, AttributeError):
             return DateTimeService.now()
 
     @staticmethod
@@ -82,7 +82,7 @@ class CachingService:
         try:
             image = ImageService.get_object(id, Image.objects_including_wip)
             return image.updated
-        except Image.DoesNotExist:
+        except (Image.DoesNotExist, AttributeError):
             return DateTimeService.now()
 
     @staticmethod
