@@ -255,9 +255,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"
         integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw=="
         crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js"
-        integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript" src="{% static 'astrobin/js/jquery.timeago.js' %}?t=20210416"></script>
 {% with 'astrobin/js/locale/jquery.timeago.'|add:LANGUAGE_CODE|add:'.js' as timeago_static %}
     <script type="text/javascript" src="{% static timeago_static %}?t=20210416"></script>
@@ -265,6 +262,15 @@
 
 {% insert_hit_count_js_variables for image %}
 <script type="text/javascript">
+    if (!window.Cypress) {
+        s = document.createElement('script');
+        s.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js");
+        s.setAttribute("integrity", "sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==");
+        s.setAttribute("crossorigin", "anonymoous");
+        s.setAttribute("referrerPolicy", "no-referrer");
+        document.body.appendChild(s);
+    }
+
     function setupAdvancedSolution() {
         {% if show_advanced_solution and not real %}
             if ($('#enable-solution-overlay').is(':checked')) {
