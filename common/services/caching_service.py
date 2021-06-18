@@ -75,7 +75,7 @@ class CachingService:
             try:
                 token = Token.objects.get(key=token_in_header)
                 return Message.objects.filter(user=token.user).latest('modified').modified
-            except Token.DoesNotExist:
+            except (Token.DoesNotExist, Message.DoesNotExist, AttributeError):
                 pass
 
         return DateTimeService.now()
