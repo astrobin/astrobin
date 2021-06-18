@@ -484,9 +484,9 @@ urlpatterns += [
     ### IMAGE VIEWS                                                         ###
     ###########################################################################
 
-    url(r'^full/(?P<id>\w+)/(?:(?P<r>\w+)/)?$', never_cache(image_views.ImageFullView.as_view()), name='image_full'),
+    url(r'^full/(?P<id>\w+)/(?:(?P<r>\w+)/)?$', image_views.ImageFullView.as_view(), name='image_full'),
     url(r'^(?P<id>\w+)/flagthumbs/$', never_cache(image_views.ImageFlagThumbsView.as_view()), name='image_flag_thumbs'),
-    url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?$', never_cache(image_views.ImageDetailView.as_view()), name='image_detail'),
+    url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?$', image_views.ImageDetailView.as_view(), name='image_detail'),
     url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:get.jpg)?$', image_views.ImageRawThumbView.as_view(),
         name='image_rawthumb'),
     url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?thumb/(?P<alias>\w+)/$', image_views.ImageThumbView.as_view(),

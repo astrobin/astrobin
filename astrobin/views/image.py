@@ -17,10 +17,15 @@ from django.db.models import Q
 from django.db.models.query import QuerySet
 from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest, HttpResponseForbidden, HttpResponse
 from django.shortcuts import redirect
+from django.utils.decorators import method_decorator
 from django.utils.encoding import iri_to_uri
+from django.views.decorators.cache import cache_control
+from django.views.decorators.http import last_modified
+from django.views.decorators.vary import vary_on_cookie
 
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from common.services import DateTimeService
+from common.services.caching_service import CachingService
 
 # Temp compat fix, drop when moved to python3
 if six.PY2:
@@ -123,6 +128,10 @@ class ImageFlagThumbsView(
         return super(ImageFlagThumbsView, self).post(self.request, args, kwargs)
 
 
+@method_decorator([
+    last_modified(CachingService.get_image_thumb_last_modified),
+    cache_control(public=True, no_cache=True)
+], name='dispatch')
 class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
     model = Image
     queryset = Image.all_objects.all()
@@ -157,6 +166,10 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
         })
 
 
+@method_decorator([
+    last_modified(CachingService.get_image_thumb_last_modified),
+    cache_control(public=True, no_cache=True),
+], name='dispatch')
 class ImageRawThumbView(ImageDetailViewBase):
     model = Image
     queryset = Image.objects_including_wip.all()
@@ -194,6 +207,11 @@ class ImageRawThumbView(ImageDetailViewBase):
         return redirect(smart_unicode(url))
 
 
+@method_decorator([
+    last_modified(CachingService.get_image_last_modified),
+    cache_control(private=True, no_cache=True),
+    vary_on_cookie
+], name='dispatch')
 class ImageDetailView(ImageDetailViewBase):
     model = Image
     pk_url_kwarg = 'id'
@@ -727,6 +745,11 @@ class ImageDetailView(ImageDetailViewBase):
         return response_dict
 
 
+@method_decorator([
+    last_modified(CachingService.get_image_last_modified),
+    cache_control(private=True, no_cache=True),
+    vary_on_cookie
+], name='dispatch')
 class ImageFullView(ImageDetailView):
     model = Image
     pk_url_kwarg = 'id'

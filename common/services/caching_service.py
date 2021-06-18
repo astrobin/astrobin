@@ -3,7 +3,8 @@ from datetime import datetime
 from persistent_messages.models import Message
 from rest_framework.authtoken.models import Token
 
-from astrobin.models import UserProfile
+from astrobin.models import UserProfile, Image
+from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import TopPickNominationsArchive, Iotd, TopPickArchive
 from common.services import DateTimeService
 
@@ -54,6 +55,14 @@ class CachingService:
             return DateTimeService.now()
 
     @staticmethod
+    def get_user_page_last_modified(request, username):
+        try:
+            userprofile = UserProfile.objects.get(user__username=username)
+            return userprofile.updated
+        except UserProfile.DoesNotExist:
+            return DateTimeService.now()
+
+    @staticmethod
     def get_last_notification_time(request):
         if request.user.is_authenticated():
             return Message.objects.filter(user=request.user).latest('modified').modified
@@ -67,3 +76,15 @@ class CachingService:
                 pass
 
         return DateTimeService.now()
+
+    @staticmethod
+    def get_image_last_modified(request, id, r):
+        try:
+            image = ImageService.get_object(id, Image.objects_including_wip)
+            return image.updated
+        except Image.DoesNotExist:
+            return DateTimeService.now()
+
+    @staticmethod
+    def get_image_thumb_last_modified(request, id, r, alias):
+        return CachingService.get_image_last_modified(request, id, r)

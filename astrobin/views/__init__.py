@@ -30,9 +30,10 @@ from django.template.loader import render_to_string
 from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.translation import ngettext as _n
 from django.utils.translation import ugettext as _
-from django.views.decorators.cache import never_cache
+from django.views.decorators.cache import never_cache, cache_control
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.http import require_GET, require_POST, last_modified
+from django.views.decorators.vary import vary_on_cookie
 from el_pagination.decorators import page_template
 from flickrapi.auth import FlickrAccessToken
 from haystack.query import SearchQuerySet
@@ -66,6 +67,7 @@ from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, prem
     premium_user_has_valid_subscription
 from astrobin_apps_users.services import UserService
 from common.services import AppRedirectionService
+from common.services.caching_service import CachingService
 from common.services.constellations_service import ConstellationsService
 from toggleproperties.models import ToggleProperty
 
@@ -1079,8 +1081,10 @@ def me(request):
     return HttpResponseRedirect('/users/%s/?%s' % (request.user.username, request.META['QUERY_STRING']))
 
 
-@never_cache
 @require_GET
+@last_modified(CachingService.get_user_page_last_modified)
+@cache_control(private=True, no_cache=True)
+@vary_on_cookie
 @silk_profile('User page')
 def user_page(request, username):
     try:
