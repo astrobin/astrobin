@@ -869,7 +869,7 @@ astrobin_common = {
             success: function (data) {
                 var userprofile = data[0];
 
-                if (!userprofile.exclude_from_competitions) {
+                if (!userprofile.exclude_from_competitions && userprofile.astrobin_index && userprofile.contribution_index) {
                     $('#astrobin-index').text(userprofile.astrobin_index.toFixed(2));
                     $('#astrobin-index-popover').text(userprofile.astrobin_index.toFixed(2));
                     $('#astrobin-index-mobile-header').text(userprofile.astrobin_index.toFixed(2));

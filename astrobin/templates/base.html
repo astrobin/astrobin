@@ -124,11 +124,13 @@
 
             /* Adblock Check */
             function checkAds() {
-                var ad = document.getElementById('adsense');
-                if(!ad || ad.innerHTML.length == 0 || ad.clientHeight === 0) {
-                    document.write("<script>gtag('set', {'Adblock': 'Blocked'});<\/sc" + "ript>");
-                } else {
-                    document.write("<script>gtag('set', {'Adblock': 'Unblocked'});<\/sc" + "ript>");
+                if (gtag !== undefined) {
+                    var ad = document.getElementById('adsense');
+                    if (!ad || ad.innerHTML.length == 0 || ad.clientHeight === 0) {
+                        document.write("<script>gtag('set', {'Adblock': 'Blocked'});<\/sc" + "ript>");
+                    } else {
+                        document.write("<script>gtag('set', {'Adblock': 'Unblocked'});<\/sc" + "ript>");
+                    }
                 }
             }
             /* End Adblock Check */
