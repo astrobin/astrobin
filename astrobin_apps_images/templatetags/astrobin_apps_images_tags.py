@@ -57,8 +57,9 @@ def astrobin_image(context, image, alias, **kwargs):
         nav_ctx = context.get('nav_ctx')
     if nav_ctx is None:
         nav_ctx = request.session.get('nav_ctx')
-    if nav_ctx is None:
-        nav_ctx = 'user'
+    if nav_ctx == 'user':
+        # None is considered to be default for 'user'
+        nav_ctx = None
 
     if nav_ctx_extra is None:
         nav_ctx_extra = request.GET.get('nce')
