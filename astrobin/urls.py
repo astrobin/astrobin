@@ -501,14 +501,22 @@ urlpatterns += [
 
 if not settings.AWS_S3_ENABLED:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += [url(r'^media/(?P<path>.*)$', serve, {
-        'document_root': settings.MEDIA_ROOT,
-        'show_indexes': True
-    })]
+    urlpatterns += [
+        url(r'^media/(?P<path>.*)$', serve, {
+            'document_root': settings.MEDIA_ROOT,
+            'show_indexes': True
+        })
+    ]
 
 if settings.LOCAL_STATIC_STORAGE:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += [url(r'^static/(?P<path>.*)$', serve, {
-        'document_root': settings.STATIC_ROOT,
-        'show_indexes': True
-    })]
+    urlpatterns += [
+        url(r'^static/(?P<path>.*)$', serve, {
+            'document_root': settings.STATIC_ROOT,
+            'show_indexes': True
+        }),
+        url(r'^media/static/(?P<path>.*)$', serve, {
+            'document_root': settings.STATIC_ROOT,
+            'show_indexes': True
+        })
+    ]
