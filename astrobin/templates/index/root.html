@@ -49,9 +49,9 @@
             </div>
 
             {% if request.user_agent.is_mobile %}
-                {% astrobin_image iotd.image 'iotd_mobile' %}
+                {% astrobin_image iotd.image 'iotd_mobile' instant=True %}
             {% else %}
-                {% astrobin_image iotd.image 'iotd' %}
+                {% astrobin_image iotd.image 'iotd' instant=True %}
             {% endif %}
         </div>
     {% endif %}

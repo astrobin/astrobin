@@ -48,6 +48,7 @@ def astrobin_image(context, image, alias, **kwargs):
     nav_ctx = kwargs.get('nav_ctx', None)
     nav_ctx_extra = kwargs.get('nav_ctx_extra', None)
     classes = kwargs.get('classes', '')
+    instant = kwargs.get('instant', False)
 
     if nav_ctx is None:
         nav_ctx = request.GET.get('nc')
@@ -106,6 +107,7 @@ def astrobin_image(context, image, alias, **kwargs):
             'corrupted': False,
             'recovered': False,
             'is_revision': False,
+            'instant': False
         }
 
     # Old images might not have a size in the database, let's fix it.
@@ -279,6 +281,7 @@ def astrobin_image(context, image, alias, **kwargs):
         'revision_id': image_revision.pk,
         'w': w,
         'h': h,
+        'instant': instant,
     }.items())
 
 
