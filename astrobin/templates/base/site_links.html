@@ -34,7 +34,7 @@
 <div class="site-nav nav-collapse collapse pull-left">
     <ul class="nav">
         <li class="home-menu visible-phone visible-tablet">
-            <a data-instant href="/">{% trans "Home" %}</a>
+            <a href="/">{% trans "Home" %}</a>
         </li>
 
         {% if request.user|is_content_moderator %}
@@ -127,7 +127,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li class="explore-menu-search">
-                    <a data-instant href="{% url 'haystack_search' %}?d=i">
+                    <a href="{% url 'haystack_search' %}?d=i">
                         <i class="icon-search"></i>
                         {% trans "The Big Wall" %} / {% trans "Advanced search" %}
                     </a>
@@ -142,19 +142,19 @@
 
                 <li class="divider"></li>
                 <li class="explore-menu-top-pick-nominations">
-                    <a data-instant href="{% url 'top_pick_nominations' %}">
+                    <a href="{% url 'top_pick_nominations' %}">
                         <i class="icon-arrow-up"></i>
                         {% trans "Top pick nominations" %}
                     </a>
                 </li>
                 <li class="explore-menu-top-picks">
-                    <a data-instant href="{% url 'top_picks' %}">
+                    <a href="{% url 'top_picks' %}">
                         <i class="icon-star"></i>
                         {% trans "Top picks" %}
                     </a>
                 </li>
                 <li class="explore-menu-iotd">
-                    <a data-instant href="{% url 'iotd_archive' %}">
+                    <a href="{% url 'iotd_archive' %}">
                         <i class="icon-trophy"></i>
                         {% trans "Image of the day" %}
                     </a>

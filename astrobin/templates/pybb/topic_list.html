@@ -51,7 +51,7 @@
 
 
                     <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
-                        <a data-instant href="{{ topic.get_absolute_url }}">
+                        <a href="{{ topic.get_absolute_url }}">
                             {% if topic.poll_type %}
                                 <span class="poll">[{% trans 'Poll' %}]</span>
                             {% endif %}
@@ -94,7 +94,7 @@
                                 </span>
                             {% endif %}
                         {% endwith %}
-                        <a data-instant href="{{ topic.get_absolute_url }}?first-unread=1" class="first-unread-post-link">&#8680;</a>
+                        <a href="{{ topic.get_absolute_url }}?first-unread=1" class="first-unread-post-link">&#8680;</a>
                     </td>
 
                     {% if forum %}

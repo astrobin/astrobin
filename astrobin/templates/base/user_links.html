@@ -23,7 +23,7 @@
 
                 <li class="dropdown hidden-phone">
                 <div class="btn-group">
-                    <a data-instant href="{% url 'user_page' request.user.username %}" class="btn btn-primary">
+                    <a href="{% url 'user_page' request.user.username %}" class="btn btn-primary">
                         <span class="visible-phone"><i class="icon icon-user"></i></span>
                         <span class="hidden-phone username">
                             {{ request.user.userprofile }}
