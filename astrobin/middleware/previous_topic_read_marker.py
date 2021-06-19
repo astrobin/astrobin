@@ -5,7 +5,7 @@ from common.services.forum_service import ForumService
 
 class PreviousTopicReadMarkerMiddleware(object):
     def process_request(self, request):
-        if not request.path.startswith('/forum/c/'):
+        if not request.user.is_authenticated() or not request.path.startswith('/forum/c/'):
             return
 
         parts = request.path.split('/')
