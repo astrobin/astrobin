@@ -68,7 +68,7 @@
                         {% endif %}
 
                         <div class="image">
-                            {% astrobin_image image 'gallery' revision='0' tooltip=False %}
+                            {% astrobin_image image 'gallery' revision='0' tooltip=False instant=True %}
                         </div>
 
                         <div class="label{% if revision_label == '0' %} active{% endif %}">
@@ -142,7 +142,7 @@
                         {% endif %}
 
                         <div class="image">
-                            {% astrobin_image r.image 'gallery' revision=r.label tooltip=False %}
+                            {% astrobin_image r.image 'gallery' revision=r.label tooltip=False instant=True %}
                         </div>
 
                         <div class="label{% if revision_label == r.label %} active{% endif %}">
