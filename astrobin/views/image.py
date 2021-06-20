@@ -19,7 +19,7 @@ from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest, H
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.utils.encoding import iri_to_uri
-from django.views.decorators.cache import cache_control
+from django.views.decorators.cache import cache_control, never_cache
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_cookie
 
@@ -129,8 +129,7 @@ class ImageFlagThumbsView(
 
 
 @method_decorator([
-    last_modified(CachingService.get_image_thumb_last_modified),
-    cache_control(public=True, no_cache=True)
+    never_cache
 ], name='dispatch')
 class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
     model = Image
@@ -167,8 +166,7 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
 
 
 @method_decorator([
-    last_modified(CachingService.get_image_thumb_last_modified),
-    cache_control(public=True, no_cache=True),
+    never_cache
 ], name='dispatch')
 class ImageRawThumbView(ImageDetailViewBase):
     model = Image
