@@ -716,6 +716,7 @@ class ForumTopicIndex(SearchIndex, Indexable):
 
     def index_queryset(self, using=None):
         return self.get_model().objects.filter(
+            forum__group__isnull=True,
             on_moderation=False,
             forum__hidden=False,
             forum__category__hidden=False)
@@ -734,6 +735,7 @@ class ForumPostIndex(SearchIndex, Indexable):
 
     def index_queryset(self, using=None):
         return self.get_model().objects.filter(
+            topic__forum__group__isnull=True,
             on_moderation=False,
             topic__forum__hidden=False,
             topic__forum__category__hidden=False)
