@@ -2421,7 +2421,7 @@ def contributors_list(request):
 
     default_sorting = [
         # DEPRECATED: remove once contribution_index is populated
-        '-reputation',
+        '-contribution_index',
         '-comment_likes_received',
         '-forum_post_likes_received',
         '-comments_written',
@@ -2441,16 +2441,14 @@ def contributors_list(request):
             'comment_likes_received',
             'forum_posts',
             'forum_post_likes_received',
-            # DEPRECATED: remove once contribution_index is populated
-            'reputation',
+            'contribution_index',
 
             '-comments_written',
             '-comments',
             '-comment_likes_received',
             '-forum_posts',
             '-forum_post_likes_received',
-            # DEPRECATED: remove once contribution_index is populated
-            '-reputation'
+            '-contribution_index'
     ):
         raise Http404
 

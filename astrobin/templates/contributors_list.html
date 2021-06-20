@@ -101,8 +101,7 @@
                     <!-- contribution index -->
 
                     <th class="contributors-list-contribution-index">
-                        {# DEPRECATED: remove once contribution_index is populated #}
-                        <a href="{% url 'contributors_list' %}{% query_string "sort='-reputation'" "" %}">
+                        <a href="{% url 'contributors_list' %}{% query_string "sort='-contribution_index'" "" %}">
                             {% trans "Contribution Index" %} {% trans "(beta)" %} <i class="icon-sort"></i>
                         </a>
                     </th>
@@ -154,8 +153,7 @@
                     <!-- contribution index -->
 
                     <td class="contributors-list-contribution-index">
-                        {# DEPRECATED: remove once contribution_index is populated #}
-                        {{ u.reputation|floatformat:2 }}
+                        {{ u.contribution_index|floatformat:2 }}
                     </td>
                 </tr>
             {% empty %}
