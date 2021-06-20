@@ -869,13 +869,16 @@ astrobin_common = {
             success: function (data) {
                 var userprofile = data[0];
 
-                if (!userprofile.exclude_from_competitions && userprofile.astrobin_index && userprofile.contribution_index) {
-                    $('#astrobin-index').text(userprofile.astrobin_index.toFixed(2));
-                    $('#astrobin-index-popover').text(userprofile.astrobin_index.toFixed(2));
-                    $('#astrobin-index-mobile-header').text(userprofile.astrobin_index.toFixed(2));
+                if (!userprofile.exclude_from_competitions) {
+                    var image_index = userprofile.astrobin_index || 0;
+                    var contribution_index = userprofile.contribution_index || 0;
 
-                    $('#contribution-index').text(userprofile.contribution_index.toFixed(2));
-                    $('#contribution-index-popover').text(userprofile.contribution_index.toFixed(2));
+                    $('#astrobin-index').text(image_index.toFixed(2));
+                    $('#astrobin-index-popover').text(image_index.toFixed(2));
+                    $('#astrobin-index-mobile-header').text(image_index.toFixed(2));
+
+                    $('#contribution-index').text(contribution_index.toFixed(2));
+                    $('#contribution-index-popover').text(contribution_index.toFixed(2));
 
                     $('#navbar-user-scores').show();
                 }
