@@ -193,8 +193,7 @@ def contribution_index(user):
             log.warning("contribution_index filter: unable to get contribution_index for user %d" % user.pk)
             return None
 
-        # DEPRECATED: remove once contribution_index is populated
-        contribution_index = results[0].reputation
+        contribution_index = results[0].contribution_index
         cache.set(cache_key, contribution_index, 300)
 
     return contribution_index
