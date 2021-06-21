@@ -833,6 +833,7 @@ def userprofile_post_delete(sender, instance, **kwargs):
 
     instance.user.save()
     Image.objects_including_wip.filter(user=instance.user).delete()
+    NestedComment.objects.filter(author=instance.user, deleted=False).update(deleted=True)
     UserIndex().remove_object(instance.user)
 
 
