@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-15 11:44+0000\n"
-"PO-Revision-Date: 2021-06-15 13:19+0200\n"
+"POT-Creation-Date: 2021-06-21 19:56+0000\n"
+"PO-Revision-Date: 2021-06-17 21:20+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -834,6 +834,8 @@ msgstr ""
 msgid ""
 "Editing groups is not possible while the image is not in your public area."
 msgstr ""
+"Das Bearbeiten von Gruppen ist nicht möglich, solange sich das Bild nicht in "
+"Ihrem öffentlichen Bereich befindet."
 
 msgid "This field is required."
 msgstr "Dies ist ein Pflichtfeld."
@@ -1496,19 +1498,19 @@ msgid "Inverted monochrome"
 msgstr "Monochromes Negativ"
 
 msgid "Everybody"
-msgstr ""
+msgstr "Alle"
 
 msgid "Paying members only"
-msgstr ""
+msgstr "Nur zahlende Mitglieder"
 
 msgid "Members only"
-msgstr ""
+msgstr "Nur für Mitglieder"
 
 msgid "Me only"
-msgstr ""
+msgstr "Nur ich"
 
 msgid "Nobody"
-msgstr ""
+msgstr "Niemand"
 
 msgid "Title"
 msgstr "Titel"
@@ -1593,11 +1595,13 @@ msgstr ""
 "alle Revisionen."
 
 msgid "Allow full-size display"
-msgstr ""
+msgstr "Anzeige in voller Größe zulassen"
 
 msgid ""
 "Specify what user groups are allowed to view this image at its full size."
 msgstr ""
+"Legen Sie fest, welche Benutzergruppen dieses Bild in seiner vollen Größe "
+"anzeigen dürfen."
 
 msgid "Apply watermark to image"
 msgstr "Wasserzeichen hinzufügen"
@@ -1847,9 +1851,10 @@ msgstr "Möchte ich lieber nicht sagen"
 
 msgid "Allow others to see when you created your AstroBin account"
 msgstr ""
+"Erlauben Sie anderen zu sehen, wann Sie Ihr AstroBin-Konto erstellt haben"
 
 msgid "Allow others to see when you last visited AstroBin"
-msgstr ""
+msgstr "Erlauben Sie anderen zu sehen, wann Sie zuletzt AstroBin besucht haben"
 
 msgid "Real name"
 msgstr "Richtiger Name"
@@ -2444,7 +2449,7 @@ msgid "Mongolian"
 msgstr "Mongolisch"
 
 msgid "Moldavian / Moldovan"
-msgstr ""
+msgstr "Moldawisch / Moldauisch"
 
 msgid "Navajo / Navaho"
 msgstr "Navajo"
@@ -2515,7 +2520,7 @@ msgid "Rundi"
 msgstr "Rundi"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Rumänisch"
 
 msgid "Sanskrit"
 msgstr "Sanskrit"
@@ -3134,7 +3139,7 @@ msgid "Notifications"
 msgstr "Benachrichtigungen"
 
 msgid "You have no new notifications."
-msgstr ""
+msgstr "Sie haben keine neuen Benachrichtigungen."
 
 msgid "View all"
 msgstr "Alle anzeigen"
@@ -3363,7 +3368,7 @@ msgstr "Entschuldigung"
 
 #, python-format
 msgid "You cannot like this item. Reason: \"%(reason)s\"."
-msgstr ""
+msgstr "Sie können diesen Beitrag nicht liken. Grund: \"%(reason)s\"."
 
 msgid "You cannot remove a like that you gave more than one hour ago."
 msgstr ""
@@ -3371,7 +3376,7 @@ msgstr ""
 "entfernen."
 
 msgid "You cannot remove your like from this item."
-msgstr ""
+msgstr "Sie können Ihr Like nicht von diesem Beitrag entfernen."
 
 msgid "E-mail change confirmation"
 msgstr "E-Mail-Änderungsbestätigung"
@@ -3710,6 +3715,8 @@ msgid ""
 "The image is not actually visible in these groups until you promote it to "
 "your public area."
 msgstr ""
+"Das Bild ist in diesen Gruppen erst dann sichtbar, wenn Sie es in Ihren "
+"öffentlichen Bereich befördern."
 
 msgid "Histogram"
 msgstr "Histogramm"
@@ -5397,39 +5404,48 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> has published a new image revision on "
 "<strong>\"%(title)s\"</strong>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> hat eine neue Bildrevision auf <strong>"
+"\"%(title)s\"</strong> veröffentlicht."
 
 #, python-format
 msgid ""
 "The previous update to this image happened on <strong>"
 "%(previous_update_date)s</strong>."
 msgstr ""
+"Die letzte Aktualisierung dieses Bildes erfolgte am <strong>"
+"%(previous_update_date)s</strong>."
 
 #, python-format
 msgid "%(user)s has published a new image revision on \"%(title)s\"."
-msgstr ""
+msgstr "%(user)s hat eine neue Bildrevision auf \"%(title)s\" veröffentlicht."
 
 #, python-format
 msgid "The previous update to this image happened on %(previous_update_date)s."
 msgstr ""
+"Die letzte Aktualisierung dieses Bildes erfolgte am %(previous_update_date)s."
 
 msgid "See the new revision"
-msgstr ""
+msgstr "Siehe die neue Revision"
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> has published a new image revision on \"%(title)s"
 "\"."
 msgstr ""
+"<strong>%(user)s</strong> hat eine neue Bildrevision auf \"%(title)s\" "
+"veröffentlicht."
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> has published a new image revision on <strong>"
 "\"%(title)s\"</strong>."
 msgstr ""
+"<strong>%(user)s</strong> hat eine neue Bildrevision auf <strong>\"%(title)s"
+"\"</strong> veröffentlicht."
 
 #, python-format
 msgid "New image revision by %(user)s on \"%(title)s\""
-msgstr ""
+msgstr "Neue Bildrevision von %(user)s auf \"%(title)s\""
 
 #, python-format
 msgid ""
@@ -5570,12 +5586,8 @@ msgid ""
 "You have received a private message on AstroBin!\n"
 "Read it at the following link:\n"
 "\n"
-"http://astrobin.com/messages/inbox/"
+"https://www.astrobin.com/messages/inbox/"
 msgstr ""
-"Du hast eine private Nachricht auf AstroBin erhalten!\n"
-"Klick diesen Link um sie zu lesen:\n"
-"\n"
-"http://astrobin.com/messages/inbox/"
 
 msgid "You have received a new private message."
 msgstr "Du hast eine neue private Nachricht."
@@ -5672,27 +5684,29 @@ msgid "Welcome!"
 msgstr "Willkommen!"
 
 msgid "Congratulations!"
-msgstr ""
+msgstr "Glückwunsch!"
 
 msgid "Your image was voted Image of the Day"
-msgstr ""
+msgstr "Ihr Bild wurde zum Bild des Tages gewählt"
 
 msgid "Want to learn about the IOTD/TP process?"
-msgstr ""
+msgstr "Möchten Sie sich über den IOTD/TP-Prozess informieren?"
 
 msgid "Read the manifesto."
-msgstr ""
+msgstr "Lesen Sie das Manifest."
 
 msgid ""
 "\n"
 "    Want to learn about the IOTD/TP process?\n"
 msgstr ""
+"\n"
+"Möchten Sie sich über den IOTD/TP-Prozess informieren?\n"
 
 msgid "Your image was voted Top Pick"
-msgstr ""
+msgstr "Ihr Bild wurde zum Top Pick gewählt"
 
 msgid "Your image was nominated to be a Top Pick"
-msgstr ""
+msgstr "Ihr Bild wurde als Top Pick nominiert"
 
 msgid "Object not found"
 msgstr "Objekt nicht gefunden"
@@ -6553,7 +6567,7 @@ msgid "Import from Flickr"
 msgstr "Aus Flickr importieren"
 
 msgid "Privacy"
-msgstr ""
+msgstr "Datenschutz"
 
 msgid "Change your username"
 msgstr "Ändere deinen Benutzernamen"
@@ -6562,7 +6576,7 @@ msgid "Edit your site preferences"
 msgstr "Deine Site-Einstellungen bearbeiten"
 
 msgid "Privacy settings"
-msgstr ""
+msgstr "Datenschutz-Einstellungen"
 
 msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
@@ -6639,10 +6653,12 @@ msgid "Your payments"
 msgstr "Deine Zahlungen"
 
 msgid "The <strong>Last seen online</strong> field is updated hourly."
-msgstr ""
+msgstr "Das Feld <strong>zuletzt Online</strong> wird stündlich aktualisiert."
 
 msgid "To change the visibility of these fields, edit your privacy settings."
 msgstr ""
+"Um die Sichtbarkeit dieser Felder zu ändern, bearbeiten Sie Ihre "
+"Datenschutzeinstellungen."
 
 msgid "This data is currently not available and will be recalculated shortly."
 msgstr ""
@@ -6858,10 +6874,10 @@ msgid "Search terms"
 msgstr "Begriffe suchen"
 
 msgid "Telescope"
-msgstr ""
+msgstr "Teleskop"
 
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 msgid "Search domain"
 msgstr "Bereich suchen"
@@ -6907,12 +6923,16 @@ msgid ""
 "However, you can still perform a similar search using the free text search "
 "terms field."
 msgstr ""
+"Sie können aber trotzdem eine ähnliche Suche mit dem Feld für "
+"Volltextsuchbegriffe durchführen."
 
 #, python-format
 msgid ""
 "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Lite or Premium</"
 "a> subscription."
 msgstr ""
+"Entschuldigung, dieser Filter erfordert ein <a href=\"%(url)s\">AstroBin "
+"Lite oder Premium</a> Abonnement."
 
 #, python-format
 msgid ""
@@ -6944,7 +6964,7 @@ msgid "Max"
 msgstr "Max"
 
 msgid "What camera was used in the acquisition of the image?"
-msgstr ""
+msgstr "Welche Kamera wurde zur Aufnahme des Bildes verwendet?"
 
 msgid "Guider/planetary"
 msgstr "Führer/planetarisch"
@@ -6956,7 +6976,7 @@ msgid "Astrometry"
 msgstr "Astrometrie"
 
 msgid "In which data field should we look for your search terms?"
-msgstr ""
+msgstr "In welchem Datenfeld sollen wir nach Ihren Suchbegriffen suchen?"
 
 msgid "Everything"
 msgstr "Alles"
@@ -6977,23 +6997,30 @@ msgid "Guiding telescopes"
 msgstr "Leitende Teleskope"
 
 msgid "What kind of search results do you want?"
-msgstr ""
+msgstr "Welche Art von Suchergebnissen wünschen Sie?"
 
 msgid "Comments & forums"
 msgstr "Kommentare und Foren"
 
 msgid "What are you looking for? Use this field to perform a free-text search."
 msgstr ""
+"Wonach suchen Sie? Verwenden Sie dieses Feld, um eine Volltextsuche "
+"durchzuführen."
 
 msgid ""
 "Alternatively, you can use the Subject/Telescope/Camera filters or any other "
 "advanced filters to fine-tune your search."
 msgstr ""
+"Alternativ können Sie die Filter Motiv/Teleskop/Kamera oder andere "
+"erweiterte Filter verwenden, um Ihre Suche zu verfeinern."
 
 msgid ""
 "What deep-sky astronomical subject are you looking for? E.g. M 31, NGC 2976, "
 "IC 405... (for solar system objects please use the \"Subject type\" filter)"
 msgstr ""
+"Welches astronomische Deep-Sky-Motiv suchen Sie? Z.B. M 31, NGC 2976, IC "
+"405... (für Objekte des Sonnensystems verwenden Sie bitte den Filter "
+"\"Objekttyp\")"
 
 msgid "Earth's moon"
 msgstr "Mond der Erde"
@@ -7002,7 +7029,7 @@ msgid "Other solar system object"
 msgstr "Anderes Objekt im Sonnensystem"
 
 msgid "What telescope was used in the acquisition of the image?"
-msgstr ""
+msgstr "Welches Teleskop wurde zur Aufnahme des Bildes verwendet?"
 
 msgid "Achromatic"
 msgstr "Achromatisch"
@@ -7128,7 +7155,7 @@ msgid "No acquisition details specified"
 msgstr "Keine Aufnahmedetails angegeben"
 
 msgid "Last seen online"
-msgstr ""
+msgstr "Zuletzt online"
 
 msgid "Total integration time"
 msgstr "Gesamtaufnahmedauer"
@@ -7306,6 +7333,17 @@ msgstr ""
 
 #~ msgid "Notification Type"
 #~ msgstr "Benachrichtigungsart"
+
+#~ msgid ""
+#~ "You have received a private message on AstroBin!\n"
+#~ "Read it at the following link:\n"
+#~ "\n"
+#~ "http://astrobin.com/messages/inbox/"
+#~ msgstr ""
+#~ "Du hast eine private Nachricht auf AstroBin erhalten!\n"
+#~ "Klick diesen Link um sie zu lesen:\n"
+#~ "\n"
+#~ "http://astrobin.com/messages/inbox/"
 
 #~ msgid "Please note: this post will be published only after moderation."
 #~ msgstr ""

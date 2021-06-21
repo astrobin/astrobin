@@ -318,6 +318,7 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                         'user': instance.user.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse_url(
                             'user_page', kwargs={'username': instance.user.username}),
+
                         'post': instance.content_object.topic.name
                     })
 
