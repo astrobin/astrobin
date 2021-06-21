@@ -621,7 +621,7 @@ astrobin_common = {
             }, 10);
         });
 
-        $('a:not(.bb-quote-link)').live('click', function (event) {
+        $('a:not(.no-page-loader)').live('click', function (event) {
             var url = $(this).attr('href');
 
             if (!url) {
@@ -635,6 +635,11 @@ astrobin_common = {
 
             // Skip endless pagination.
             if ($(event.target).hasClass('endless_more')) {
+                return;
+            }
+
+            // Skip notifications if the user elected to have them open in a new tab
+            if ($(event.toElement).closest('.notification-item').length && astrobin_common.config.open_notifications_in_new_tab) {
                 return;
             }
 
@@ -770,10 +775,17 @@ astrobin_common = {
         });
     },
 
-    register_notification_on_click: function (options = {}) {
+    register_notification_on_click: function () {
         $(document).ready(function () {
             var urlWithoutNid = astrobin_common.remove_url_param(window.location.href, "nid");
             window.history.replaceState('', document.title, urlWithoutNid);
+
+            function go(link, openInNewTab) {
+                Object.assign(document.createElement("a"), {
+                    target: openInNewTab ? "_blank" : "_self",
+                    href: link,
+                }).click();
+            }
 
             $(".notifications-modal .notification-item .notification-content a").live('click', function () {
                 var $item = $(this).closest(".notification-item");
@@ -781,22 +793,20 @@ astrobin_common = {
                 var $readMarker = $item.find(".notification-mark-as-read .icon")
                 var id = $item.data("id");
                 var links = astrobin_common.get_links_in_text($item.find(".notification-content").html());
-                var openInNewTab = !!options && options.open_notifications_in_new_tab;
+                var openInNewTab = astrobin_common.config.open_notifications_in_new_tab;
 
                 if (links.length > 0) {
                     var link = astrobin_common.add_or_update_url_param(links[0], "nid", id);
 
                     if (openInNewTab) {
-                        astrobin_common.mark_notification_as_read(id);
+                        astrobin_common.mark_notification_as_read(id).then(function() {
+                            go(link, openInNewTab);
+                        });
                     } else {
                         $readMarker.hide();
                         $loading.show();
+                        go(link, openInNewTab);
                     }
-
-                    Object.assign(document.createElement("a"), {
-                        target: openInNewTab ? "_blank" : "_self",
-                        href: link,
-                    }).click();
                 }
 
                 return false;

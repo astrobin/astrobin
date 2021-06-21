@@ -88,7 +88,7 @@
             <div class="post-related">
                 {% if user|pybb_may_create_post:post.topic %}
                     <a href="{% url 'pybb:add_post' topic.id %}?quote_id={{ post.id }}"
-                       class="btn btn-mini bb-quote-link">
+                       class="btn btn-mini bb-quote-link no-page-loader">
                         <i class="icon-comment"></i> {% trans "quote" %}
                     </a>
                     <a href="#" class="btn btn-mini bb-quote-selected-link">
