@@ -611,7 +611,7 @@ class IotdServiceTest(TestCase):
 
         self.assertEquals(1, len(IotdService().get_submission_queue(submitter)))
 
-    def test_get_submission_queue_already_submitted_yesterday(self):
+    def test_get_submission_queue_already_submitted_before_window(self):
         user = Generators.user()
         Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
 
@@ -624,7 +624,7 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
-        image.published = datetime.now() - timedelta(hours=24)
+        image.published = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
         image.save()
 
         self.assertEquals(0, len(IotdService().get_submission_queue(submitter)))
