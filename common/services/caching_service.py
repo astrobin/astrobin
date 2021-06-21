@@ -63,20 +63,26 @@ class CachingService:
             return DateTimeService.now()
 
     @staticmethod
-    def get_last_notification_time(request):
-        if request.user.is_authenticated():
+    def get_last_notification_time(request, pk=None):
+        if pk:
             try:
-                return Message.objects.filter(user=request.user).latest('modified').modified
+                return Message.objects.get(pk=pk).modified
             except (Message.DoesNotExist, AttributeError):
                 pass
+        else:
+            if request.user.is_authenticated():
+                try:
+                    return Message.objects.filter(user=request.user).latest('modified').modified
+                except (Message.DoesNotExist, AttributeError):
+                    pass
 
-        if 'HTTP_AUTHORIZATION' in request.META:
-            token_in_header = request.META['HTTP_AUTHORIZATION'].replace('Token ', '')
-            try:
-                token = Token.objects.get(key=token_in_header)
-                return Message.objects.filter(user=token.user).latest('modified').modified
-            except (Token.DoesNotExist, Message.DoesNotExist, AttributeError):
-                pass
+            if 'HTTP_AUTHORIZATION' in request.META:
+                token_in_header = request.META['HTTP_AUTHORIZATION'].replace('Token ', '')
+                try:
+                    token = Token.objects.get(key=token_in_header)
+                    return Message.objects.filter(user=token.user).latest('modified').modified
+                except (Token.DoesNotExist, Message.DoesNotExist, AttributeError):
+                    pass
 
         return DateTimeService.now()
 
