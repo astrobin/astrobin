@@ -85,6 +85,12 @@ NOTICE_TYPES = (
         2,
     ),
     (
+        'forum_post_approved',
+        _('Your forum post was approved'),
+        '',
+        2,
+    ),
+    (
         'api_key_request_approved',
         _('Your API Key request has been approved'),
         '',

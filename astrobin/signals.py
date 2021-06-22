@@ -760,6 +760,9 @@ def forum_post_post_save(sender, instance, created, **kwargs):
         mentions = cache.get("user.%d.forum_post_pre_save_mentions" % instance.user.pk, [])
 
         if cache.get("user.%d.forum_post_pre_save_approved" % instance.user.pk):
+            push_notification([instance.user], None, 'forum_post_approved', {
+                'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url())
+            })
             notify_subscribers()
 
     for username in mentions:
