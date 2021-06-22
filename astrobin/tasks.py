@@ -10,7 +10,9 @@ import zipfile
 
 import six
 from django.db import IntegrityError
+from django.db.models import OuterRef, Exists
 from django.template.defaultfilters import filesizeformat
+from hitcount.models import HitCount
 
 from common.services import DateTimeService
 
@@ -619,3 +621,15 @@ def assign_upload_length():
 
     process(images)
     process(revisions)
+
+
+@shared_task(time_limit=30)
+def clear_duplicate_hit_counts():
+    duplicates = HitCount.objects \
+        .exclude(pk=OuterRef('pk')) \
+        .filter(
+        content_type_id=OuterRef('content_type_id'),
+        object_pk=OuterRef('object_pk')
+    )
+
+    HitCount.objects.annotate(has_other=Exists(duplicates)).filter(has_other=True).delete()
