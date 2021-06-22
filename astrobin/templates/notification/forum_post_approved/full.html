@@ -1,0 +1,21 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans %}Your forum post was approved!{% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        As a new user on AstroBin, your first 3 forum posts will go through a moderation queue, to prevent spam.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        The following forum post of yours was just approved by a moderator.
+    {% endblocktrans %}
+</p>
+
+<a href="{{ url }}">
+    {% trans "View forum post" %}
+</a>
