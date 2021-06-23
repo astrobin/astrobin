@@ -6,6 +6,12 @@ from django.db import models
 from django.db.models import SET_NULL
 from safedelete.models import SafeDeleteModel
 
+from common.upload_paths import upload_path
+
+
+def logo_upload_path(instance, filename):
+    return upload_path('equipment_brand_logos', instance.created_by.pk if instance.created_by else 0, filename)
+
 
 class EquipmentBrand(SafeDeleteModel):
     created_by = models.ForeignKey(
@@ -33,6 +39,18 @@ class EquipmentBrand(SafeDeleteModel):
         null=False,
         blank=False,
         unique=True,
+    )
+
+    website = models.URLField(
+        unique=True,
+        null=True,
+        blank=True,
+    )
+
+    logo = models.ImageField(
+        upload_to=logo_upload_path,
+        null=True,
+        blank=True,
     )
 
     def __unicode__(self):
