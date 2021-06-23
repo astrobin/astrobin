@@ -115,7 +115,7 @@ def string_to_date(date):
 def image_list(context, object_list, **kwargs):
     paginate_by = kwargs.get('paginate_by', settings.EL_PAGINATION_PER_PAGE)
     alias = kwargs.get('alias', 'gallery')
-    nav_ctx = kwargs.get('nav_ctx', 'all')
+    nav_ctx = kwargs.get('nav_ctx', None)
     nav_ctx_extra = kwargs.get('nav_ctx_extra', None)
 
     view = kwargs.get('view')
