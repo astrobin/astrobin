@@ -5,4 +5,6 @@ from astrobin_apps_equipment.models import Camera
 
 class CameraViewSet(EquipmentItemViewSet):
     serializer_class = CameraSerializer
-    queryset = Camera.objects.all()
+
+    def get_queryset(self):
+        return Camera.objects.all()

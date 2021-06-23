@@ -5,4 +5,6 @@ from astrobin_apps_equipment.models import Sensor
 
 class SensorViewSet(EquipmentItemViewSet):
     serializer_class = SensorSerializer
-    queryset = Sensor.objects.all()
+
+    def get_queryset(self):
+        return Sensor.objects.all()
