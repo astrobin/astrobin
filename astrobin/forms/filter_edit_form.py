@@ -8,4 +8,4 @@ class FilterEditForm(forms.ModelForm):
 
     class Meta:
         model = Filter
-        exclude = ('make', 'name')
+        exclude = ('make', 'name', 'migration_flag', 'migration_content_type', 'migration_object_id')

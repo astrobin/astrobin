@@ -8,4 +8,4 @@ class TelescopeEditForm(forms.ModelForm):
 
     class Meta:
         model = Telescope
-        exclude = ('make', 'name')
+        exclude = ('make', 'name', 'migration_flag', 'migration_content_type', 'migration_object_id')
