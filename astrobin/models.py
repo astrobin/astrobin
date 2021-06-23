@@ -50,10 +50,10 @@ from django.utils.translation import ugettext_lazy as _
 
 try:
     # Django < 1.10
-    from django.contrib.contenttypes.generic import GenericRelation
+    from django.contrib.contenttypes.generic import GenericRelation, GenericForeignKey
 except ImportError:
     # Django >= 1.10
-    from django.contrib.contenttypes.fields import GenericRelation
+    from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
 
 from celery.result import AsyncResult
 from model_utils.managers import InheritanceManager
@@ -285,6 +285,22 @@ class Gear(models.Model):
         related_name='gear_items',
         editable=False,
     )
+
+    # Items related to the migration to the new equipment database in astrobin_apps_equipment
+    migration_flag = models.CharField(
+        max_length=16,
+        null=True,
+        blank=True,
+        choices=(
+            ('WRONG_TYPE', 'This item is the wrong time'),
+            ('MULTIPLE_ITEMS', 'This item collates multiple objects'),
+            ('DIY', 'This item is a DIY object'),
+            ('MIGRATE', 'This item is ready for migration')
+        ),
+    )
+    migration_content_type = models.ForeignKey(ContentType, null=True, blank=True)
+    migration_object_id = models.PositiveIntegerField(null=True, blank=True)
+    migration_content_object = GenericForeignKey('migration_content_type', 'migration_object_id')
 
     def __unicode__(self):
         make = self.get_make()
