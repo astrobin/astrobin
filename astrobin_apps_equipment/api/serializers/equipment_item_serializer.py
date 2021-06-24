@@ -18,7 +18,7 @@ class EquipmentItemSerializer(serializers.Serializer):
         user = self.context['request'].user
 
         if not user.groups.filter(name='equipment_moderators').exists():
-            raise ValidationError('You don\'t have permission to create an equipmen item')
+            raise ValidationError('You don\'t have permission to create an equipment item')
 
         validated_data['created_by'] = user
         return super(EquipmentItemSerializer, self).create(validated_data)
