@@ -15,6 +15,7 @@ class EquipmentGenerators:
     @staticmethod
     def brand(**kwargs):
         random_name = Generators.randomString()
+
         return EquipmentBrand.objects.create(
             created_by=kwargs.get('created_by', Generators.user()),
             name=kwargs.get('name', 'Test brand %s' % random_name),
@@ -24,9 +25,12 @@ class EquipmentGenerators:
 
     @staticmethod
     def sensor(**kwargs):
+        random_name = Generators.randomString()
+
         return Sensor.objects.create(
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
+            name=kwargs.get('name', 'Test sensor %s' % random_name),
             quantum_efficiency=kwargs.get('quantum_efficiency', 90),
             pixel_size=kwargs.get('pixel_size', 1.5),
             pixel_width=kwargs.get('pixel_width', 1024),
@@ -38,14 +42,16 @@ class EquipmentGenerators:
             frame_rate=kwargs.get('frame_rate', 60),
             adc=kwargs.get('adc', 12),
             color_or_mono=kwargs.get('color_or_mono', 'M'),
-
         )
 
     @staticmethod
     def camera(**kwargs):
+        random_name = Generators.randomString()
+
         return Camera.objects.create(
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
+            name=kwargs.get('name', 'Test camera %s' % random_name),
             type=kwargs.get('type', 'CCD'),
             sensor=kwargs.get('sensor', EquipmentGenerators.sensor()),
             cooled=kwargs.get('cooled', True),
