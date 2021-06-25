@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import last_modified
@@ -40,7 +41,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['post'])
     def mark_all_as_read(self, request):
-        self.get_queryset().update(read=True)
+        self.get_queryset().filter(read=False).update(read=True, modified=timezone.now())
         return Response(status=200)
 
 
