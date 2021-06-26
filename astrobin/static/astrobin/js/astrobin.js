@@ -664,8 +664,12 @@ astrobin_common = {
                 $pageLoader.css('opacity', 1);
             }
 
-            window.open(url, target);
+            setTimeout(function() {
+                window.open(url, target);
+            }, 10);
+
             event.preventDefault();
+            return false;
         });
     },
 
