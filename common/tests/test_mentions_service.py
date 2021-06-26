@@ -1,5 +1,7 @@
 from django.test import TestCase
+from notification.models import NoticeSetting, NoticeType
 
+from astrobin.tests.generators import Generators
 from common.services.mentions_service import MentionsService
 
 
@@ -82,3 +84,40 @@ class MentionsServiceTest(TestCase):
         mentions = MentionsService.get_mentions(text)
         self.assertTrue("foo" in mentions)
         self.assertTrue("bar" in mentions)
+
+    def test_get_mentioned_users_with_notification_enabled_no_users(self):
+        self.assertEquals([], MentionsService.get_mentioned_users_with_notification_enabled(
+            [], 'new_forum_post_mention'))
+
+    def test_get_mentioned_users_with_notification_enabled_no_users_with_notifications_enabled(self):
+        user = Generators.user()
+        self.assertEquals([], MentionsService.get_mentioned_users_with_notification_enabled(
+            [user.username], 'new_forum_post_mention'))
+
+    def test_get_mentioned_users_with_notification_enabled_users_with_notifications_enabled(self):
+        user = Generators.user()
+        notice_type = NoticeType.objects.create(
+            label='new_forum_post_mention',
+            display='',
+            description='',
+            default=2)
+        NoticeSetting.for_user(user, notice_type, 1)
+        self.assertEquals(
+            [user],
+            MentionsService.get_mentioned_users_with_notification_enabled([user.username], 'new_forum_post_mention'))
+
+    def test_get_mentioned_users_with_notification_enabled_users_with_notifications_enabled_using_real_name(self):
+        user = Generators.user()
+        user.userprofile.real_name = "Foo"
+        user.userprofile.save()
+        notice_type = NoticeType.objects.create(
+            label='new_forum_post_mention',
+            display='',
+            description='',
+            default=2
+        )
+        NoticeSetting.for_user(user, notice_type, 1)
+        self.assertEquals(
+            [user],
+            MentionsService.get_mentioned_users_with_notification_enabled(
+                [user.userprofile.real_name], 'new_forum_post_mention'))

@@ -3,6 +3,7 @@ import logging
 import re
 from itertools import chain
 
+from annoying.functions import get_object_or_None
 from dateutil.relativedelta import relativedelta
 from django.conf import settings
 from django.contrib import messages
@@ -29,6 +30,7 @@ from safedelete.signals import post_softdelete
 from subscription.models import UserSubscription, Transaction
 from subscription.signals import paid, signed_up
 from threaded_messages.models import Thread
+from typing import List
 
 from astrobin_apps_groups.models import Group
 from astrobin_apps_iotd.models import IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
@@ -224,8 +226,10 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
         mentions = cache.get("user.%d.comment_pre_save_mentions" % instance.author.pk, [])
 
     for username in mentions:
-        try:
-            user = User.objects.get(username=username)
+        user = get_object_or_None(User, username=username)
+        if not user:
+            user = get_object_or_None(UserProfile, real_name=username)
+        if user:
             push_notification(
                 [user], instance.author, 'new_comment_mention',
                 {
@@ -235,8 +239,6 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                         'user_page', kwargs={'username': instance.author}),
                 }
             )
-        except User.DoesNotExist:
-            pass
 
 
 post_save.connect(nested_comment_post_save, sender=NestedComment)
@@ -721,9 +723,17 @@ pre_save.connect(forum_post_pre_save, sender=Post)
 
 
 def forum_post_post_save(sender, instance, created, **kwargs):
-    def notify_subscribers():
+    def notify_subscribers(mentions):
+        # type: (List[unicode]) -> None
         push_notification(
-            list(instance.topic.subscribers.exclude(pk=instance.user.pk)),
+            list(instance.topic.subscribers.exclude(
+                pk__in=list(set(
+                    [instance.user.pk] +
+                    [x.pk for x in MentionsService.get_mentioned_users_with_notification_enabled(
+                        mentions, 'new_forum_post_mention')
+                     ])
+                ))
+            ),
             instance.user,
             'new_forum_reply',
             {
@@ -734,7 +744,8 @@ def forum_post_post_save(sender, instance, created, **kwargs):
                     settings.BASE_URL + instance.topic.get_absolute_url(), instance.user),
                 'topic_name': instance.topic.name,
                 'unsubscribe_url': build_notification_url(
-                    settings.BASE_URL + reverse_url('pybb:delete_subscription', args=[instance.topic.id]), instance.user)
+                    settings.BASE_URL + reverse_url('pybb:delete_subscription', args=[instance.topic.id]), instance.user
+                )
             }
         )
 
@@ -749,7 +760,7 @@ def forum_post_post_save(sender, instance, created, **kwargs):
             instance.topic.subscribers.add(instance.user)
 
         if not instance.on_moderation:
-            notify_subscribers()
+            notify_subscribers(mentions)
         else:
             NotificationsService.email_superusers(
                 'New forum post needs moderation',
@@ -763,7 +774,7 @@ def forum_post_post_save(sender, instance, created, **kwargs):
             push_notification([instance.user], None, 'forum_post_approved', {
                 'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url())
             })
-            notify_subscribers()
+            notify_subscribers(mentions)
 
     for username in mentions:
         try:
