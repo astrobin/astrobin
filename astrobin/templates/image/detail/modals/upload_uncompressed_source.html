@@ -3,12 +3,8 @@
 {% load bootstrap_toolkit %}
 {% load i18n %}
 {% load staticfiles %}
-{% load progress_bar %}
 {% load common_tags %}
 
-{% block extra_head %}
-    {% progress_bar_media %}
-{% endblock %}
 
 <div class="modal hide fade" id="upload-uncompressed-source-modal">
     <form id="upload-uncompressed-source-form" class="form-inline"
@@ -46,7 +42,6 @@
             {% endif %}
 
             {{ upload_uncompressed_source_form|as_bootstrap }}
-            {% progress_bar %}
 
             <input type="hidden" name="image_id" value="{{ image.get_id }}" />
         </div>
