@@ -9,6 +9,9 @@ from astrobin.models import UserProfile
 class QuoteBBCodeTag(BBCodeTag):
     name = 'quote'
 
+    class Options:
+        strip = True
+
     def render(self, value, option=None, parent=None):
         if option:
             username = option.replace('"', '')
