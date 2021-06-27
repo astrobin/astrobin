@@ -1,4 +1,5 @@
 from annoying.functions import get_object_or_None
+from django.core.exceptions import MultipleObjectsReturned
 from precise_bbcode.bbcode.tag import BBCodeTag
 from precise_bbcode.tag_pool import tag_pool
 
@@ -13,7 +14,13 @@ class QuoteBBCodeTag(BBCodeTag):
             username = option.replace('"', '')
             profile = get_object_or_None(UserProfile, user__username=username)
             if not profile:
-                profile = get_object_or_None(UserProfile, real_name=username)
+                try:
+                    profile = get_object_or_None(UserProfile, real_name=username)
+                except MultipleObjectsReturned:
+                    return '<blockquote><em>{}</em>:<br/>{}</blockquote>'.format(
+                        username,
+                        value
+                    )
             if profile:
                 return '<blockquote><a href="/users/{}">{}</a>:<br/>{}</blockquote>'.format(
                     profile.user.username,

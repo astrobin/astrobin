@@ -11,6 +11,7 @@ from django.contrib.auth.models import User, Group as DjangoGroup
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
+from django.core.exceptions import MultipleObjectsReturned
 from django.core.urlresolvers import reverse as reverse_url
 from django.db import IntegrityError
 from django.db import transaction
@@ -228,7 +229,10 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
     for username in mentions:
         user = get_object_or_None(User, username=username)
         if not user:
-            user = get_object_or_None(UserProfile, real_name=username)
+            try:
+                user = get_object_or_None(UserProfile, real_name=username)
+            except MultipleObjectsReturned:
+                user = None
         if user:
             push_notification(
                 [user], instance.author, 'new_comment_mention',
