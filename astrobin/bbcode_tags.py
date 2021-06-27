@@ -2,7 +2,6 @@ from annoying.functions import get_object_or_None
 from django.core.exceptions import MultipleObjectsReturned
 from precise_bbcode.bbcode.tag import BBCodeTag
 from precise_bbcode.tag_pool import tag_pool
-from unidecode import unidecode
 
 from astrobin.models import UserProfile
 
@@ -14,10 +13,10 @@ class QuoteBBCodeTag(BBCodeTag):
         strip = True
 
     def render(self, value, option=None, parent=None):
-        content = unidecode(value)
+        content = unicode(value)
 
         if option:
-            username = unidecode(option).replace('"', '')
+            username = unicode(option).replace('"', '')
             profile = get_object_or_None(UserProfile, user__username=username)
             if not profile:
                 try:
@@ -30,7 +29,7 @@ class QuoteBBCodeTag(BBCodeTag):
             if profile:
                 return u'<blockquote><a href="/users/{}">{}</a>:<br/>{}</blockquote>'.format(
                     profile.user.username,
-                    unidecode(profile.get_display_name()),
+                    unicode(profile.get_display_name()),
                     content
                 )
 
