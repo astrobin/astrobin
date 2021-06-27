@@ -1,5 +1,6 @@
 from annoying.functions import get_object_or_None
 from django.core.exceptions import MultipleObjectsReturned
+from django.utils.encoding import smart_str
 from precise_bbcode.bbcode.tag import BBCodeTag
 from precise_bbcode.tag_pool import tag_pool
 
@@ -13,8 +14,10 @@ class QuoteBBCodeTag(BBCodeTag):
         strip = True
 
     def render(self, value, option=None, parent=None):
+        content = smart_str(value)
+
         if option:
-            username = option.replace('"', '')
+            username = smart_str(option).replace('"', '')
             profile = get_object_or_None(UserProfile, user__username=username)
             if not profile:
                 try:
@@ -22,16 +25,16 @@ class QuoteBBCodeTag(BBCodeTag):
                 except MultipleObjectsReturned:
                     return '<blockquote><em>{}</em>:<br/>{}</blockquote>'.format(
                         username,
-                        value
+                        content
                     )
             if profile:
                 return '<blockquote><a href="/users/{}">{}</a>:<br/>{}</blockquote>'.format(
                     profile.user.username,
-                    profile.get_display_name(),
-                    value
+                    smart_str(profile.get_display_name()),
+                    content
                 )
 
-        return '<blockquote>{}</blockquote>'.format(value)
+        return '<blockquote>{}</blockquote>'.format(content)
 
 
 tag_pool.register_tag(QuoteBBCodeTag)
