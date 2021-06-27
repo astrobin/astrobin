@@ -57,10 +57,6 @@ STATICFILES_FINDERS = (
 MESSAGE_STORAGE = 'persistent_messages.storage.PersistentMessageStorage'
 
 FILE_UPLOAD_HANDLERS = (
-    "progressbarupload.uploadhandler.ProgressBarUploadHandler",
     "django.core.files.uploadhandler.MemoryFileUploadHandler",
     "django.core.files.uploadhandler.TemporaryFileUploadHandler",
 )
-
-PROGRESSBARUPLOAD_INCLUDE_JQUERY = False
-
