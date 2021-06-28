@@ -8,6 +8,7 @@ from astrobin.stories import add_story
 from astrobin_apps_notifications.services import NotificationsService
 from astrobin_apps_notifications.utils import push_notification, build_notification_url
 from astrobin_apps_users.services import UserService
+from common.services.mentions_service import MentionsService
 from nested_comments.models import NestedComment
 
 log = logging.getLogger('apps')
@@ -27,6 +28,7 @@ class CommentNotificationsService:
         model_class = instance.content_type.model_class()
         obj = instance.content_type.get_object_for_this_type(id=instance.object_id)
         url = settings.BASE_URL + instance.get_absolute_url()
+        mentions = MentionsService.get_mentions(instance.text)
 
         if model_class == Image:
             if UserService(obj.user).shadow_bans(instance.author):
@@ -34,31 +36,37 @@ class CommentNotificationsService:
                     obj.user.pk, instance.author.pk))
                 return
 
+            exclude = MentionsService.get_mentioned_users_with_notification_enabled(mentions, 'new_comment_mention')
+
             if instance.parent and \
                     instance.parent.author != instance.author and \
                     not instance.pending_moderation:
-                push_notification(
-                    [instance.parent.author], instance.author, 'new_comment_reply',
-                    {
-                        'url': build_notification_url(url, instance.author),
-                        'user': instance.author.userprofile.get_display_name(),
-                        'user_url': settings.BASE_URL + reverse(
-                            'user_page', kwargs={'username': instance.author.username}),
-                    }
-                )
+                recipients = [x for x in [instance.parent.author] if x not in exclude]
+                if recipients:
+                    push_notification(
+                        recipients, instance.author, 'new_comment_reply',
+                        {
+                            'url': build_notification_url(url, instance.author),
+                            'user': instance.author.userprofile.get_display_name(),
+                            'user_url': settings.BASE_URL + reverse(
+                                'user_page', kwargs={'username': instance.author.username}),
+                        }
+                    )
 
             if instance.author != obj.user and \
                     (instance.parent is None or instance.parent.author != obj.user) and \
                     not instance.pending_moderation:
-                push_notification(
-                    [obj.user], instance.author, 'new_comment',
-                    {
-                        'url': build_notification_url(url, instance.author),
-                        'user': instance.author.userprofile.get_display_name(),
-                        'user_url': settings.BASE_URL + reverse(
-                            'user_page', kwargs={'username': instance.author.username}),
-                    }
-                )
+                recipients = [x for x in [obj.user] if x not in exclude]
+                if recipients:
+                    push_notification(
+                        recipients, instance.author, 'new_comment',
+                        {
+                            'url': build_notification_url(url, instance.author),
+                            'user': instance.author.userprofile.get_display_name(),
+                            'user_url': settings.BASE_URL + reverse(
+                                'user_page', kwargs={'username': instance.author.username}),
+                        }
+                    )
 
             if (force or not instance.pending_moderation) and not obj.is_wip:
                 add_story(instance.author,

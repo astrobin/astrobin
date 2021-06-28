@@ -3,7 +3,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page, cache_control
 from django.views.decorators.http import last_modified
-from django.views.decorators.vary import vary_on_cookie
+from django.views.decorators.vary import vary_on_headers
 from django_filters.rest_framework import DjangoFilterBackend
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import generics, mixins
@@ -118,7 +118,7 @@ class UserProfileDetail(generics.RetrieveAPIView):
 @method_decorator([
     last_modified(CachingService.get_current_user_profile_last_modified),
     cache_control(private=True, no_cache=True),
-    vary_on_cookie
+    vary_on_headers('Cookie', 'Authorization')
 ], name='dispatch')
 class CurrentUserProfileDetail(generics.ListAPIView):
     model = UserProfile
@@ -174,7 +174,7 @@ class SubscriptionDetail(generics.RetrieveAPIView):
 @method_decorator([
     last_modified(CachingService.get_current_user_profile_last_modified),
     cache_control(private=True, no_cache=True),
-    vary_on_cookie
+    vary_on_headers('Cookie', 'Authorization')
 ], name='dispatch')
 class UserSubscriptionList(generics.ListAPIView):
     model = UserSubscription

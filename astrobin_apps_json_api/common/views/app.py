@@ -8,7 +8,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
-from django.views.decorators.vary import vary_on_cookie
+from django.views.decorators.vary import vary_on_headers
 from django.views.generic.base import View
 
 from astrobin import utils
@@ -16,7 +16,7 @@ from astrobin.models import Image
 from common.utils import get_project_root
 
 
-@method_decorator([cache_page(3600), vary_on_cookie], name='dispatch')
+@method_decorator([cache_page(3600), vary_on_headers('Cookie', 'Authorization')], name='dispatch')
 class AppConfig(JSONResponseMixin, View):
     def get(self, request, *args, **kwargs):
         return self.render_json_response({

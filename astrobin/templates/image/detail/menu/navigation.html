@@ -13,7 +13,7 @@
             </li>
 
             <li>
-                <a{% if nav_ctx == 'user' or nav_ctx == None %} class="active"{% endif %} href="{{ request.path }}{% query_string "" "nc,nce" %}">
+                <a{% if nav_ctx == 'user' or nav_ctx == None %} class="active"{% endif %} href="{{ request.path }}{% query_string "nc='user'" "nce" %}">
                     <i class="icon-user"></i>
                     {% trans "User gallery" %}
                 </a>
@@ -50,7 +50,7 @@
     <li class="image-navigation pull-right{% if not image_next %} disabled{% endif %}">
         <a
             {% if image_next %}
-                href="{% url 'image_detail' image_next.get_id %}"
+                href="{% url 'image_detail' image_next.get_id %}{% query_string "nc=nav_ctx,nce=nav_ctx_extra" "" %}"
                 rel="tooltip"
                 data-placement="bottom"
                 data-test="image-next-{{ image_next.get_id }}"
@@ -67,7 +67,7 @@
     <li class="image-navigation pull-right{% if not image_prev %} disabled{% endif %}">
         <a
             {% if image_prev %}
-                href="{% url 'image_detail' image_prev.get_id %}"
+                href="{% url 'image_detail' image_prev.get_id %}{% query_string "nc=nav_ctx,nce=nav_ctx_extra" "" %}"
                 rel="tooltip"
                 data-placement="bottom"
                 data-test="image-prev-{{ image_prev.get_id }}"

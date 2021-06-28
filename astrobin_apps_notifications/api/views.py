@@ -1,7 +1,8 @@
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import last_modified
-from django.views.decorators.vary import vary_on_cookie
+from django.views.decorators.vary import vary_on_headers
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from notification.models import NoticeSetting, NoticeType, NOTICE_MEDIA
@@ -21,7 +22,7 @@ from common.services.caching_service import CachingService
 @method_decorator([
     last_modified(CachingService.get_last_notification_time),
     cache_control(private=True, no_cache=True),
-    vary_on_cookie
+    vary_on_headers('Cookie', 'Authorization')
 ], name='dispatch')
 class NotificationViewSet(viewsets.ModelViewSet):
     serializer_class = NotificationSerializer
@@ -40,7 +41,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
 
     @list_route(methods=['post'])
     def mark_all_as_read(self, request):
-        self.get_queryset().update(read=True)
+        self.get_queryset().filter(read=False).update(read=True, modified=timezone.now())
         return Response(status=200)
 
 

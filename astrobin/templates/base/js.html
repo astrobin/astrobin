@@ -97,21 +97,20 @@
             }
         );
 
-        $("form:not(.ajax)").on("submit", function (event) {
+        $("form:not(.ajax) :submit").one("click", function (event) {
             var $target = $(event.target);
-            var formId = $target.attr("id");
+            var $form = $target.closest("form");
 
-            // let the submit values get submitted before we disable them
-            window.setTimeout(function () {
+            $form.find(":submit").addClass("running");
 
-                // disable all submits inside the form
-                $target.find("[type=submit]")
-                    .prop("disabled", true)
-                    .addClass("running");
+            // Have a timeout to make sure the browser shows the spinning indicator.
+            window.setTimeout(function() {
+                $target.trigger(event.type);
+                $(":submit").prop("disabled", true);
+            }, 10);
 
-                // disable all HTML5 submits outside the form
-                $("[form=" + formId + "][type=submit]").prop("disabled", true);
-            }, 2);
+            event.preventDefault();
+            return false;
         });
 
         $(".shadow-ban").click(function () {
