@@ -1,4 +1,4 @@
-describe("Forums", () => {
+describe("Forum polls", () => {
     before(() => {
         cy.login({next: "/forum/"});
     });
@@ -16,8 +16,7 @@ describe("Forums", () => {
         cy.get('#i-have-read').click();
         cy.get('#forum-usage-modal .btn-primary').click();
 
-        // Give the editor 10 seconds to appear
-        cy.get(".post-form input[name='name']", {timeout: 10000}).should('be.visible');
+        cy.get(".post-form input[name='name']").should('be.visible');
 
         cy.get(".post-form input[name='name']").type("Test topic");
         cy.get("#cke_id_body .cke_wysiwyg_div").type("Hello, this is a test topic.");
