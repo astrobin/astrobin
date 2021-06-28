@@ -97,25 +97,19 @@
             }
         );
 
-        $("form:not(.ajax)").one("submit", function (event) {
+        $("form:not(.ajax) :submit").one("click", function (event) {
             var $target = $(event.target);
-            var formId = $target.attr("id");
+            var $form = $target.closest("form");
 
-            window.setTimeout(function () {
-                // Disable all submit buttons inside the form.
-                $target.find("[type=submit]")
-                    .prop("disabled", true)
-                    .addClass("running");
+            $form.find(":submit").addClass("running");
 
-                // Disable all HTML5 submits outside the form.
-                $("[form=" + formId + "][type=submit]").prop("disabled", true);
-
-                // Have a timeout to make sure the browser shows the spinning indicator.
-                window.setTimeout(function() {
-                   $target.submit();
-                }, 10);
+            // Have a timeout to make sure the browser shows the spinning indicator.
+            window.setTimeout(function() {
+                $target.trigger(event.type);
+                $(":submit").prop("disabled", true);
             }, 10);
 
+            event.preventDefault();
             return false;
         });
 
