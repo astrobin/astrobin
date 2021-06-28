@@ -27,7 +27,7 @@ class QuoteBBCodeTag(BBCodeTag):
                         content
                     )
             if profile:
-                return u'<blockquote><a href="/users/{}">{}</a>:<br/>{}</blockquote>'.format(
+                return u'<blockquote><a href="/users/{}/">{}</a>:<br/>{}</blockquote>'.format(
                     profile.user.username,
                     unicode(profile.get_display_name()),
                     content
