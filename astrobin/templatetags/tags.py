@@ -283,7 +283,7 @@ def show_ads_on_page(context):
     if context.template_name == 'image/detail.html':
         for data in context.dicts:
             if 'image' in data:
-                return show_ads(request.user) and not is_any_ultimate(data['image'].user)
+                return not is_any_ultimate(data['image'].user)
     elif context.template_name in (
             'user/profile.html',
             'user_collections_list.html',
@@ -296,7 +296,7 @@ def show_ads_on_page(context):
     ):
         for data in context.dicts:
             if 'requested_user' in data:
-                return show_ads(request.user) and not is_any_ultimate(data['requested_user'])
+                return not is_any_ultimate(data['requested_user'])
     elif context.template_name == 'index/root.html':
         return show_ads(request.user) and is_free(request.user)
     elif context.template_name in (
@@ -304,7 +304,7 @@ def show_ads_on_page(context):
             'top_picks.html',
             'astrobin_apps_iotd/iotd_archive.html'
     ):
-        return show_ads(request.user) and (not request.user.is_authenticated() or is_free(request.user))
+        return not request.user.is_authenticated() or is_free(request.user)
 
     return False
 
@@ -341,6 +341,44 @@ def show_secondary_ad_on_page(context):
                        not is_any_ultimate(data['requested_user'])
 
     return False
+
+
+@register.simple_tag(takes_context=True)
+def show_skyscraper_ads_on_page(context):
+    request = context['request']
+
+    if not show_ads(request.user):
+        return False
+
+    country = utils.get_client_country_code(request)
+    if country.lower() not in ('us', 'ca'):
+        return False
+
+    is_anon = not context['request'].user.is_authenticated()
+    image_owner_is_ultimate = False
+
+    if context.template_name.startswith('registration/'):
+        return False
+    elif context.template_name == 'image/detail.html':
+        for data in context.dicts:
+            if 'image' in data:
+                image_owner_is_ultimate = is_any_ultimate(data['image'].user)
+    elif context.template_name in (
+            'user/profile.html',
+            'user_collections_list.html',
+            'user_collections_detail.html',
+            'user/bookmarks.html',
+            'user/liked.html',
+            'user/following.html',
+            'user/followers.html',
+            'user/plots.html',
+    ):
+        for data in context.dicts:
+            if 'requested_user' in data:
+                image_owner_is_ultimate = is_any_ultimate(data['requested_user'])
+
+    return (is_anon or is_free(request.user)) and not image_owner_is_ultimate and \
+           (context["COOKIELAW_ACCEPTED"] is not False or not show_cookie_banner(context.request))
 
 
 @register.filter()
