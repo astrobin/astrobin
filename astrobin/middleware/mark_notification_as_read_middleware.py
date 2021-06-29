@@ -1,5 +1,6 @@
 import logging
 
+from django.utils import timezone
 from persistent_messages.models import Message
 
 log = logging.getLogger("apps")
@@ -48,4 +49,4 @@ class MarkNotificationAsReadMiddleware(object):
                 except ValueError:
                     pass
 
-            notifications.update(read=True)
+            notifications.update(read=True, modified=timezone.now())

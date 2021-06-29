@@ -940,7 +940,7 @@ astrobin_common = {
             astrobin_common.get_indexes();
             setTimeout(function () {
                 astrobin_common.get_notifications();
-            }, 500);
+            }, 1500);
         }
 
     }
