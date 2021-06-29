@@ -22,6 +22,18 @@
                 '{{ NATIVE_RESPONSIVE_RECTANGULAR_SLOT_2 }}'
             ).setTargeting('format', ['rectangular']).addService(googletag.pubads());
 
+            googletag.defineSlot(
+                '/{{ ADMANAGER_PUBLISHER_ID }}/astrobin-native-responsive-skyscraper-1',
+                ['fluid'],
+                '{{ NATIVE_RESPONSIVE_SKYSCRAPER_SLOT_1 }}'
+            ).setTargeting('format', ['skyscraper']).addService(googletag.pubads());
+
+            googletag.defineSlot(
+                '/{{ ADMANAGER_PUBLISHER_ID }}/astrobin-native-responsive-skyscraper-2',
+                ['fluid'],
+                '{{ NATIVE_RESPONSIVE_SKYSCRAPER_SLOT_2 }}'
+            ).setTargeting('format', ['skyscraper']).addService(googletag.pubads());
+
             googletag.enableServices();
         });
     </script>
