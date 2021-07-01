@@ -6,6 +6,7 @@ from pybb.permissions import DefaultPermissionHandler
 
 # AstroBin apps
 from astrobin_apps_groups.models import Group
+from astrobin_apps_groups.utils import has_access_to_premium_group_features
 
 
 class CustomForumPermissions(DefaultPermissionHandler):
@@ -16,8 +17,8 @@ class CustomForumPermissions(DefaultPermissionHandler):
             if forum.group is not None:
                 if user.is_authenticated():
                     return may and (
-                        forum.group.public or \
-                        user == forum.group.owner or \
+                        forum.group.public or
+                        user == forum.group.owner or
                         user in forum.group.members.all())
                 else:
                     return may and forum.group.public
@@ -31,12 +32,15 @@ class CustomForumPermissions(DefaultPermissionHandler):
         f = super(CustomForumPermissions, self).filter_forums(user, qs)
 
         if user.is_authenticated():
-            f = f.filter(
-                Q(group = None) |
-                Q(group__owner = user) |
-                Q(group__members = user)).distinct()
+            if has_access_to_premium_group_features(user):
+                f = f.filter(
+                    Q(group = None) |
+                    Q(group__owner = user) |
+                    Q(group__members = user)).distinct()
+            else:
+                f = f.filter(group=None)
         else:
-            f = f.filter(group = None)
+            f = f.filter(group=None)
 
         return f
 
@@ -54,10 +58,16 @@ class CustomForumPermissions(DefaultPermissionHandler):
             return True
 
         try:
-            if topic.forum.group and user.is_authenticated():
-                may = user == topic.forum.group.owner or \
-                      user in topic.forum.group.members.all() or \
-                      user in topic.subscribers.all()
+            if topic.forum.group:
+                if user.is_authenticated():
+                    may = (
+                          topic.forum.group.public or
+                          user == topic.forum.group.owner or
+                          user in topic.forum.group.members.all() or
+                          user in topic.subscribers.all()
+                    )
+                else:
+                    may = topic.forum.group.public
         except Group.DoesNotExist:
             pass
 
@@ -68,12 +78,18 @@ class CustomForumPermissions(DefaultPermissionHandler):
         f = super(CustomForumPermissions, self).filter_topics(user, qs)
 
         if user.is_authenticated():
-            f = f.filter(
-                Q(forum__group = None) |
-                Q(forum__group__owner = user) |
-                Q(forum__group__members = user)).distinct()
+            if has_access_to_premium_group_features(user):
+                f = f.filter(
+                    Q(forum__group = None) |
+                    Q(forum__group__public = True) |
+                    Q(forum__group__owner = user) |
+                    Q(forum__group__members = user)).distinct()
+            else:
+                f = f.filter(
+                    Q(forum__group=None) |
+                    Q(forum__group__public=True)).distinct()
         else:
-            f = f.filter(forum__group = None)
+            f = f.filter(Q(forum__group=None) | Q(forum__group__public=True))
 
         return f
 
@@ -83,7 +99,7 @@ class CustomForumPermissions(DefaultPermissionHandler):
 
         try:
             if forum.group is not None:
-                return may and (
+                return may and has_access_to_premium_group_features(user) and (
                     user == forum.group.owner or
                     user in forum.group.members.all())
         except Group.DoesNotExist:

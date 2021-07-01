@@ -169,7 +169,7 @@ class ForumTest(TestCase):
             category=101,
             public=True,
             forum=self.forum)
-        self.assertFalse(perms.may_view_topic(user2, topic))
+        self.assertTrue(perms.may_view_topic(user2, topic))
 
         # user2 becomes a subscriber
         topic.subscribers.add(user2)

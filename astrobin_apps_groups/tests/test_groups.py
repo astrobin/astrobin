@@ -41,11 +41,6 @@ class GroupsTest(TestCase):
             autosubmission=True
         )
 
-    def tearDown(self):
-        self.user1.delete()
-        self.user2.delete()
-        self.group.delete()
-
     def test_misc_ui_elements(self):
         response = self.client.get(reverse('group_list'))
         bss = BSS(response.content)
@@ -56,7 +51,7 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<h1>Public groups<small>Open to the whole community.</small></h1>', html=True)
         self.assertContains(response, '<td class="group-name"><a href="' + reverse('group_detail', args=(
-        self.group.pk,)) + '">Test group</a></td>', html=True)
+            self.group.pk,)) + '">Test group</a></td>', html=True)
         self.assertContains(response, '<td class="group-members hidden-phone">1</td>', html=True)
         self.assertContains(response, '<td class="group-images hidden-phone">0</td>', html=True)
 
@@ -75,7 +70,7 @@ class GroupsTest(TestCase):
         self.assertContains(response, '<td class="group-images hidden-phone">1</td>', html=True)
 
         # Test that WIP images don't work
-        image.is_wip = True;
+        image.is_wip = True
         image.save(keep_deleted=True)
         response = self.client.get(reverse('group_list'))
         self.assertContains(response, '<td class="group-images hidden-phone">0</td>', html=True)
@@ -85,11 +80,6 @@ class GroupsTest(TestCase):
         self.group.save()
         response = self.client.get(reverse('group_list'))
         self.assertNotContains(response, 'Test group')
-
-        image.delete()
-        self.group.members.clear()
-        self.group.public = True
-        self.group.save()
 
     def test_group_detail_view(self):
         # Everything okay when it's empty
@@ -111,14 +101,14 @@ class GroupsTest(TestCase):
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "gallery"), response.content))
 
         # Test that WIP images are not rendered here
-        image.is_wip = True;
+        image.is_wip = True
         image.save(keep_deleted=True)
         response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk}))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<li>No images.</li>', html=True)
 
         # Test that corrupted images are not rendered here
-        image.corrupted = True;
+        image.corrupted = True
         image.save(keep_deleted=True)
         response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk}))
         self.assertEqual(response.status_code, 200)
@@ -137,12 +127,6 @@ class GroupsTest(TestCase):
         response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk}))
         self.assertEqual(response.status_code, 200)
         self.client.logout()
-
-        # Restore previous state
-        image.delete()
-        self.group.members.remove(self.user1)
-        self.group.public = True
-        self.group.save()
 
     def test_group_create_view(self):
         url = reverse('group_create')
@@ -212,10 +196,6 @@ class GroupsTest(TestCase):
                              "Internet community, Friends or partners, Geographical area"
                              )
 
-        self.client.logout()
-
-        us.delete()
-
     def test_group_update_view(self):
         url = reverse('group_update', kwargs={'pk': self.group.pk})
         response = self.client.get(url)
@@ -257,16 +237,6 @@ class GroupsTest(TestCase):
         self.assertEqual(self.group.forum.name, self.group.name)
         self.assertEqual(self.group.images.count(), 0)
 
-        # Restore previous group data
-        self.group.name = 'Test group'
-        self.group.description = None
-        self.group.category = GroupCategory.OTHER
-        self.group.public = True
-        self.group.moderated = False
-        self.group.save()
-
-        self.client.logout()
-
     def test_group_delete_view(self):
         group = Group.objects.create(
             creator=self.user1,
@@ -304,8 +274,6 @@ class GroupsTest(TestCase):
         self.assertEqual(Group.objects.filter(name='Delete me').count(), 0)
         self.assertEqual(Forum.objects.filter(category__slug='group-forums', name='Delete me').count(), 0)
 
-        self.client.logout()
-
     def test_group_join_view(self):
         url = reverse('group_join', kwargs={'pk': self.group.pk})
 
@@ -336,15 +304,15 @@ class GroupsTest(TestCase):
         us2 = Generators.premium_subscription(self.user2, "AstroBin Ultimate 2020+")
 
         # Private group, uninvited user
-        self.group.public = False;
+        self.group.public = False
         self.group.save()
         response = self.client.post(url, follow=True)
         self.assertEqual(response.status_code, 403)
-        self.group.public = True;
+        self.group.public = True
         self.group.save()
 
         # Public group, but moderated
-        self.group.moderated = True;
+        self.group.moderated = True
         self.group.save()
         self.group.moderators.add(self.group.owner)
         response = self.client.post(url, follow=True)
@@ -352,7 +320,7 @@ class GroupsTest(TestCase):
         self._assertMessage(response, "warning unread",
                             "This is a moderated group, and your join request will be reviewed by a moderator")
         self.assertTrue(self.user2 in self.group.join_requests.all())
-        self.group.moderated = False;
+        self.group.moderated = False
         self.group.save()
         self.group.moderators.clear()
 
@@ -370,7 +338,7 @@ class GroupsTest(TestCase):
         self.group.members.remove(self.user2)
 
         # If the group is not public, only invited members can join
-        self.group.public = False;
+        self.group.public = False
         self.group.save()
         response = self.client.post(url, follow=True)
         self.assertEqual(response.status_code, 403)
@@ -381,18 +349,6 @@ class GroupsTest(TestCase):
         self._assertMessage(response, "success unread", "You have joined the group")
         self.assertTrue(self.user2 in self.group.members.all())
         self.assertFalse(self.user2 in self.group.invited_users.all())
-
-        # Restore group state
-        self.group.invited_users.clear()
-        self.group.members.clear()
-        self.group.join_requests.clear()
-        self.group.public = True
-        self.group.save()
-
-        self.client.logout()
-
-        us1.delete()
-        us2.delete()
 
     def test_group_leave_view(self):
         url = reverse('group_leave', kwargs={'pk': self.group.pk})
@@ -420,14 +376,14 @@ class GroupsTest(TestCase):
         image = Image.objects.all().order_by('-pk')[0]
 
         # Private group
-        self.group.public = False;
+        self.group.public = False
         self.group.save()
         response = self.client.post(url, follow=True)
         self.assertFalse(self.user1 in self.group.members.all())
         self.assertFalse(image in self.group.images.all())
         self.assertRedirects(response, reverse('group_list'))
         self._assertMessage(response, "success unread", "You have left the group")
-        self.group.public = True;
+        self.group.public = True
         self.group.save()
         self.group.members.add(self.user1)
 
@@ -440,13 +396,13 @@ class GroupsTest(TestCase):
         self.group.members.add(self.user1)
 
         # Try with non-autosub group, to test for image removal
-        self.group.autosubmission = False;
+        self.group.autosubmission = False
         self.group.save()
         self.group.images.add(image)
         response = self.client.post(url, follow=True)
         self.assertFalse(self.user1 in self.group.members.all())
         self.assertFalse(image in self.group.images.all())
-        self.group.autosubmission = True;
+        self.group.autosubmission = True
         self.group.save()
 
         # Second attempt results in error 403
@@ -461,19 +417,13 @@ class GroupsTest(TestCase):
         self.assertTrue(self.user1 in topic.subscribers.all())
         topic.delete()
 
-        self.group.public = False;
+        self.group.public = False
         self.group.save()
         self.group.members.add(self.user1)
         topic = Topic.objects.create(forum=self.group.forum, name='Test', user=self.user1)
         topic.subscribers.add(self.user1)
-        response = self.client.post(url, follow=True)
+        self.client.post(url, follow=True)
         self.assertFalse(self.user1 in topic.subscribers.all())
-        topic.delete()
-        self.group.public = True;
-        self.group.save()
-
-        image.delete()
-        self.client.logout()
 
     def test_group_invite_view(self):
         url = reverse('group_invite', kwargs={'pk': self.group.pk})
@@ -500,34 +450,39 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 404)
 
         # Invited user does not exist
-        response = self.client.post(url,
-                                    {
-                                        'users[]': [999],
-                                    },
-                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest',
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'users[]': [999],
+            },
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+            follow=True)
         self.assertEqual(response.status_code, 200)
         self.group = Group.objects.get(pk=self.group.pk)
         self.assertEqual(self.group.invited_users.count(), 0)
 
         # Invitation successful
-        response = self.client.post(url, {
-            'users[]': [self.user2.pk, ],
-        }, )
+        response = self.client.post(
+            url,
+            {
+                'users[]': [self.user2.pk, ],
+            }
+        )
         self.assertRedirects(response, detail_url, status_code=302, target_status_code=200)
         self.group = Group.objects.get(pk=self.group.pk)
         self.assertEqual(self.group.invited_users.count(), 1)
         self.group.invited_users.clear()
 
         # AJAX invitation successful
-        response = self.client.post(url, {
-            'users[]': [self.user2.pk, ],
-        }, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        response = self.client.post(
+            url,
+            {
+                'users[]': [self.user2.pk, ],
+            },
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.group = Group.objects.get(pk=self.group.pk)
         self.assertEqual(json.loads(response.content)['invited_users'][0]['id'], self.user2.pk)
         self.assertEqual(self.group.invited_users.count(), 1)
-
-        self.client.logout()
 
     def test_group_revoke_invitation_view(self):
         url = reverse('group_revoke_invitation', kwargs={'pk': self.group.pk})
@@ -553,26 +508,26 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 404)
 
         # User does not exist
-        response = self.client.post(url,
-                                    {
-                                        'user': "invalid",
-                                    },
-                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest',
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'user': "invalid",
+            },
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+            follow=True)
         self.assertEqual(response.status_code, 404)
 
         # Success
         self.group.invited_users.add(self.user2)
-        response = self.client.post(url,
-                                    {
-                                        'user': "user2",
-                                    },
-                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest',
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'user': "user2",
+            },
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+            follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.group.invited_users.count(), 0)
-
-        self.client.logout()
 
     def test_group_add_remove_images_view(self):
         url = reverse('group_add_remove_images', kwargs={'pk': self.group.pk})
@@ -608,12 +563,13 @@ class GroupsTest(TestCase):
         image2 = Image.objects.all().order_by('-pk')[0]
 
         # Cannot add/remove on autosubmission groups
-        response = self.client.post(url,
-                                    {
-                                        'images[]': "%d" % image.pk,
-                                    },
-                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest',
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'images[]': "%d" % image.pk,
+            },
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+            follow=True)
         self.assertEqual(response.status_code, 403)
 
         self.group.autosubmission = False
@@ -621,29 +577,25 @@ class GroupsTest(TestCase):
 
         # Successfully add
         self.group.members.add(self.user2)
-        response = self.client.post(url,
-                                    {
-                                        'images[]': [image.pk, image2.pk],
-                                    },
-                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest',
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'images[]': [image.pk, image2.pk],
+            },
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+            follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.group.images.count(), 2)
         self.group.members.remove(self.user2)
 
         # Successfully remove
-        response = self.client.post(url,
-                                    {},
-                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest',
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {},
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+            follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.group.images.count(), 0)
-
-        # Clean up
-        image.delete()
-        self.group.members.remove(self.user1)
-        self.group.autosubmission = True
-        self.client.logout()
 
     def test_group_add_image_view(self):
         url = reverse('group_add_image', kwargs={'pk': self.group.pk})
@@ -674,34 +626,37 @@ class GroupsTest(TestCase):
         self.group.images.remove(image)
 
         # Cannot add/remove on autosubmission groups
-        response = self.client.post(url,
-                                    {
-                                        'images[]': "%d" % image.pk,
-                                    },
-                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest',
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'images[]': "%d" % image.pk,
+            },
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+            follow=True)
         self.assertEqual(response.status_code, 403)
 
         self.group.autosubmission = False
         self.group.save()
 
         # Only AJAX allowed
-        response = self.client.post(url,
-                                    {
-                                        'image': "%d" % image.pk,
-                                    },
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'image': "%d" % image.pk,
+            },
+            follow=True)
         self.assertEqual(response.status_code, 403)
 
         # Successfully add
         self.group.members.add(self.user2)
         self.assertEqual(self.group.images.count(), 0)
-        response = self.client.post(url,
-                                    {
-                                        'image': "%d" % image.pk,
-                                    },
-                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest',
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'image': "%d" % image.pk,
+            },
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+            follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.group.images.count(), 1)
         self.group.members.remove(self.user2)
@@ -714,12 +669,6 @@ class GroupsTest(TestCase):
                 self.group.name),
             html=True)
 
-        # Clean up
-        image.delete()
-        self.group.members.remove(self.user1)
-        self.group.autosubmission = True
-        self.client.logout()
-
     def test_group_remove_member_view(self):
         url = reverse('group_remove_member', kwargs={'pk': self.group.pk})
 
@@ -729,12 +678,13 @@ class GroupsTest(TestCase):
 
         # Owner required
         self.client.login(username='user2', password='password')
-        response = self.client.post(url,
-                                    {
-                                        'user': "%d" % self.user1.pk,
-                                    },
-                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest',
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+            follow=True)
         self.assertEqual(response.status_code, 403)
         self.client.logout()
         self.client.login(username='user1', password='password')
@@ -744,35 +694,35 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 404)
 
         # Only AJAX allowed
-        response = self.client.post(url,
-                                    {
-                                        'user': "%d" % self.user1.pk,
-                                    },
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            follow=True)
         self.assertEqual(response.status_code, 403)
 
         # User must be member
-        response = self.client.post(url,
-                                    {
-                                        'user': "%d" % self.user2.pk,
-                                    },
-                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest',
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'user': "%d" % self.user2.pk,
+            },
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+            follow=True)
         self.assertEqual(response.status_code, 403)
 
         # Successfully remove
         self.group.members.add(self.user2)
-        response = self.client.post(url,
-                                    {
-                                        'user': "%d" % self.user2.pk,
-                                    },
-                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest',
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'user': "%d" % self.user2.pk,
+            },
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+            follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.group.members.count(), 1)  # Just user1 left
-
-        # Clean up
-        self.client.logout()
 
     def test_group_add_moderator_view(self):
         url = reverse('group_add_moderator', kwargs={'pk': self.group.pk})
@@ -794,40 +744,39 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 404)
 
         # Only AJAX allowed
-        response = self.client.post(url,
-                                    {
-                                        'user': "%d" % self.user1.pk,
-                                    },
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            follow=True)
         self.assertEqual(response.status_code, 403)
 
         # Group is not moderated
-        self.group.moderated = False;
+        self.group.moderated = False
         self.group.save()
-        response = self.client.post(url,
-                                    {
-                                        'user': "%d" % self.user1.pk,
-                                    },
-                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest',
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+            follow=True)
         self.assertEqual(response.status_code, 403)
-        self.group.moderated = True;
+        self.group.moderated = True
         self.group.save()
 
         # Successfully add
-        response = self.client.post(url,
-                                    {
-                                        'user': "%d" % self.user1.pk,
-                                    },
-                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest',
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+            follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(self.user1 in self.group.moderators.all())
         self.assertTrue(self.user1 in self.group.forum.moderators.all())
-
-        # Clean up
-        self.group.moderators.clear()
-        self.client.logout()
 
     def test_group_remove_moderator_view(self):
         url = reverse('group_remove_moderator', kwargs={'pk': self.group.pk})
@@ -843,49 +792,50 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 404)
 
         # Only AJAX allowed
-        response = self.client.post(url,
-                                    {
-                                        'user': "%d" % self.user1.pk,
-                                    },
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            follow=True)
         self.assertEqual(response.status_code, 403)
 
         # Group is not moderated
-        self.group.moderated = False;
+        self.group.moderated = False
         self.group.save()
-        response = self.client.post(url,
-                                    {
-                                        'user': "%d" % self.user1.pk,
-                                    },
-                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest',
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+            follow=True)
         self.assertEqual(response.status_code, 403)
-        self.group.moderated = True;
+        self.group.moderated = True
         self.group.save()
 
         # User must be moderator
-        response = self.client.post(url,
-                                    {
-                                        'user': "%d" % self.user1.pk,
-                                    },
-                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest',
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+            follow=True)
         self.assertEqual(response.status_code, 403)
 
         # Successfully remove
         self.group.moderators.add(self.user1)
-        response = self.client.post(url,
-                                    {
-                                        'user': "%d" % self.user1.pk,
-                                    },
-                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest',
-                                    follow=True)
+        response = self.client.post(
+            url,
+            {
+                'user': "%d" % self.user1.pk,
+            },
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
+            follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertFalse(self.user1 in self.group.moderators.all())
         self.assertFalse(self.user1 in self.group.forum.moderators.all())
-
-        # Clean up
-        self.client.logout()
 
     def test_group_members_list_view(self):
         url = reverse('group_members_list', kwargs={'pk': self.group.pk})
@@ -902,11 +852,11 @@ class GroupsTest(TestCase):
 
         # User must be member if the group is private
         self.client.login(username='user2', password='password')
-        self.group.public = False;
+        self.group.public = False
         self.group.save()
         response = self.client.get(url)
         self.assertEqual(response.status_code, 403)
-        self.group.public = True;
+        self.group.public = True
         self.group.save()
         self.client.logout()
 
@@ -923,9 +873,6 @@ class GroupsTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "This group has no members")
-        self.client.logout()
-
-        self.group.members.add(self.user1)
 
     def test_group_moderate_join_requests_view(self):
         url = reverse('group_moderate_join_requests', kwargs={'pk': self.group.pk})
@@ -948,11 +895,11 @@ class GroupsTest(TestCase):
 
         # Group must be moderated
         self.client.login(username='user1', password='password')
-        self.group.moderated = False;
+        self.group.moderated = False
         self.group.save()
         response = self.client.get(url, follow=True)
         self.assertEqual(response.status_code, 403)
-        self.group.moderated = True;
+        self.group.moderated = True
         self.group.save()
         self.client.logout()
 
@@ -969,7 +916,6 @@ class GroupsTest(TestCase):
         self.group.join_requests.add(self.user2)
         response = self.client.get(url)
         self.assertContains(response, self.user2.username)
-        self.client.logout()
 
     def test_group_approve_join_request_view(self):
         url = reverse('group_approve_join_request', kwargs={'pk': self.group.pk})
@@ -1091,12 +1037,12 @@ class GroupsTest(TestCase):
         # WIP images are NOT added
         image = _upload()
         self.assertTrue(image in group.images.all())
-        image.is_wip = True;
+        image.is_wip = True
         image.save(keep_deleted=True)
         self.assertFalse(image in group.images.all())
 
         # When a member leaves a group, their images are gone
-        image.is_wip = False;
+        image.is_wip = False
         image.save(keep_deleted=True)
         self.assertTrue(image in group.images.all())
         group.members.remove(self.user2)
@@ -1105,7 +1051,7 @@ class GroupsTest(TestCase):
         # When a group changes from autosubmission to non-autosubmission, images are unaffected
         group.members.add(self.user2)
         self.assertTrue(image in group.images.all())
-        group.autosubmission = False;
+        group.autosubmission = False
         group.save()
         self.assertTrue(image in group.images.all())
 
@@ -1113,12 +1059,7 @@ class GroupsTest(TestCase):
         image2 = _upload()
         self.assertTrue(image in group.images.all())
         self.assertFalse(image2 in group.images.all())
-        group.autosubmission = True;
+        group.autosubmission = True
         group.save()
         self.assertTrue(image in group.images.all())
         self.assertTrue(image2 in group.images.all())
-
-        # Clean up
-        image.delete()
-        image2.delete()
-        group.delete()

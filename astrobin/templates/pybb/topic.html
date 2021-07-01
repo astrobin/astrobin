@@ -108,10 +108,10 @@
         {% else %}
             {% if topic.closed %}
                 {% include 'pybb/_topic_closed.html' %}
-            {% else %}
-                {% if not user.is_authenticated %}
-                    {% include 'pybb/_need_to_login_message.html' %}
-                {% endif %}
+            {% elif not user.is_authenticated %}
+                {% include 'pybb/_need_to_login_message.html' %}
+            {% elif topic.forum.group %}
+                {% include 'pybb/_need_to_join_group_message.html' %}
             {% endif %}
         {% endif %}
 

@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load pybb_tags %}
 {% load static %}
 
 <div class="forum-tools">
@@ -9,10 +10,17 @@
     </form>
 
     {% if forum %}
-        <a class="btn btn-primary" href="{% url 'pybb:add_topic' forum.id %}">
-            <i class="icon-plus icon-white"></i>
-            {% trans "New topic" %}
-        </a>
+        {% if request.user|pybb_may_create_topic:forum %}
+            <a class="btn btn-primary" href="{% url 'pybb:add_topic' forum.id %}">
+                <i class="icon-plus icon-white"></i>
+                {% trans "New topic" %}
+            </a>
+        {% else %}
+            <a class="btn btn-primary" data-toggle="modal" href="#posting-restricted-to-members-modal">
+                <i class="icon-plus-sign icon-white"></i>
+                {% trans "New topic" %}
+            </a>
+        {% endif %}
     {% else %}
         <a class="btn btn-primary" href="#select-forum-modal" data-toggle="modal">
             <i class="icon-plus icon-white"></i>
