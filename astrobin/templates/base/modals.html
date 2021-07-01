@@ -94,6 +94,29 @@
     </div>
 </div>
 
+<div class="modal hide fade" id="posting-restricted-to-members-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>{% trans "Sorry :-(" %}</h3>
+    </div>
+
+    <div class="modal-body">
+        <div class="row-fluid">
+            <div class="span3 visible-desktop">
+                <img src="{% static 'astrobin/images/red-lock.png' %}" alt="{% trans 'Access denied' %}" />
+            </div>
+            <div class="span9 upgrade-info">
+                <p>{% trans "Only group members can post in a group's forum." %}</p>
+                <p>{% trans "Please join or request to join the group, and then you'll be able to post a new topic." %}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-primary">{% trans "OK" %}</button>
+    </div>
+</div>
+
 {% if request.user|can_remove_ads %}
     <div class="modal hide fade" id="remove-ads-modal">
         <div class="modal-header">
