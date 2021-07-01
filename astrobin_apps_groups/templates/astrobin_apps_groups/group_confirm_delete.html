@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load common_tags %}
 
 {% block title %}
     {% trans "Delete group?" %}
@@ -15,7 +16,10 @@
 
     <form class="form-horizontal" action="" method="post">{% csrf_token %}
         <div class="form-actions">
-            <input class="btn btn-primary" type="submit" value="{% trans "Delete group" %}"/>
+            <button class="btn btn-primary {% button_loading_class %}" type="submit">
+                {% button_loading_indicator %}
+                {% trans "Delete group" %}
+            </button>
         </div>
     </form>
 {% endblock %}

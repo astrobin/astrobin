@@ -265,9 +265,15 @@
             <div class="alert alert-danger">
                 {% trans "Careful! Do you really want to delete this group? This operation cannot be undone and the group's forum and all its topics will be irreversibly deleted!" %}
             </div>
+        </div>
 
-            <form class="form-inline" action="{% url 'group_delete' group.pk %}" method="post">{% csrf_token %}
-                <input class="btn btn-danger" type="submit" value="{% trans "Delete group" %}"/>
+        <div class="modal-footer">
+            <form class="form-horizontal" action="{% url 'group_delete' group.pk %}" method="post">{% csrf_token %}
+                <button class="btn" data-dismiss="modal">{% trans "Cancel" %}</button>
+                <button class="btn btn-danger {% button_loading_class %}" type="submit">
+                    {% button_loading_indicator %}
+                    {% trans "Delete group" %}
+                </button>
             </form>
         </div>
     </div>

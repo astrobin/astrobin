@@ -93,7 +93,7 @@
             }
         );
 
-        $("form:not(.ajax) :submit").one("click", function (event) {
+        $("form:not(.ajax) [type='submit']").one("click", function (event) {
             var $target = $(event.target);
             var $form = $target.closest("form");
 
