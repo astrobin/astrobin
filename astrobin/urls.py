@@ -331,8 +331,6 @@ urlpatterns += [
     ### AUTOCOMPLETE VIEWS                                                 ###
     ###########################################################################
 
-    url(r'^autocomplete/(?P<what>\w+)/$', lookups.autocomplete, name='autocomplete'),
-    url(r'^autocomplete_user/(?P<what>\w+)/$', lookups.autocomplete_user, name='autocomplete_user'),
     url(r'^autocomplete_usernames/$', lookups.autocomplete_usernames, name='autocomplete_usernames'),
     url(r'^autocomplete_images/$', lookups.autocomplete_images, name='autocomplete_images'),
 
