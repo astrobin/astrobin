@@ -85,10 +85,6 @@
                 {% endif %}
         });
 
-        {% if request.user.is_authenticated %}
-            astrobin_common.register_notification_on_click();
-        {% endif %}
-
         astrobin_common.setup_user_popovers();
 
         $('input:checkbox, input:radio, input:file').uniform(
