@@ -331,6 +331,8 @@ urlpatterns += [
     ### AUTOCOMPLETE VIEWS                                                 ###
     ###########################################################################
 
+    url(r'^autocomplete-private-message-recipients/$', lookups.autocomplete_private_message_recipients,
+        name='autocomplete_private_message_recipients'),
     url(r'^autocomplete_usernames/$', lookups.autocomplete_usernames, name='autocomplete_usernames'),
     url(r'^autocomplete_images/$', lookups.autocomplete_images, name='autocomplete_images'),
 

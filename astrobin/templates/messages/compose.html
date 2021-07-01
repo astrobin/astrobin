@@ -19,14 +19,14 @@
         {% include 'readonly_mode.html' %}
     {% else %}
         <form action="" method="post" class="form-horizontal" novalidate>{% csrf_token %}
-            {{form|as_bootstrap }}
+            {{ form|as_bootstrap }}
             <div class="form-actions">
                 <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit">
                     {% trans "Send" %}
                     {% button_loading_indicator %}
                 </button>
                 {% if 'next' in request.GET %}
-                    <a class="btn btn-block-mobile" href="{{request.GET.next}}">{% trans "Cancel" %}</a>
+                    <a class="btn btn-block-mobile" href="{{ request.GET.next }}">{% trans "Cancel" %}</a>
                 {% endif %}
             </div>
         </form>
@@ -35,7 +35,7 @@
 
 {% block extra_js %}
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             {% if 'subject' in request.GET %}
                 $('input#id_subject').val("{{request.GET.subject}}");
             {% endif %}
@@ -53,6 +53,14 @@
             var recipients = $("#id_recipient").val().split(',');
             $("#id_recipient").val("");
 
+            var formatter = function(item) {
+                if (item.realName) {
+                    return `<li>${item.realName} (${item.id})</li>`;
+                }
+
+                return `<li>${item.id}</li>`;
+            }
+
             var parameters = {
                 classes: {
                     tokenList: "token-input-list",
@@ -69,7 +77,11 @@
                 hintText: "{% trans "Type in a search term" %}",
                 noResultsText: "{% trans "No results" %}",
                 searchingText: "{% trans "Searching" %}...",
-                queryParam: "term"
+                minChars: 3,
+                propertyToSearch: "displayName",
+                tokenFormatter: formatter,
+                resultsFormatter: formatter,
+                preventDuplicates: true
             };
 
             if (recipients !== undefined) {
@@ -84,7 +96,7 @@
                 }
             }
 
-            $("#id_recipient").tokenInput("{% url 'recipient_search' %}?format=json", parameters);
+            $("#id_recipient").tokenInput("{% url 'autocomplete_private_message_recipients' %}", parameters);
         });
     </script>
 {% endblock %}
