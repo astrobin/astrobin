@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
+{% load common_tags %}
 
 {% block title %}
     {% trans "Create new group" %}
@@ -22,7 +23,10 @@
         <form class="form-horizontal" action="" method="post">{% csrf_token %}
             {{form|as_bootstrap}}
             <div class="form-actions">
-                <input class="btn btn-primary" type="submit" value="{% trans "Create new group" %}"/>
+                <button class="btn btn-primary {% button_loading_class %}" type="submit">
+                    {% button_loading_indicator %}
+                    {% trans "Create new group" %}
+                </button>
                 <a class="btn" href="{% url 'group_list' %}">{% trans "Cancel" %}</a>
             </div>
         </form>
