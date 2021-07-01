@@ -112,13 +112,17 @@
                     'data-epoch', new Date(property['createdOn'] + 'Z').getTime());
 
                 {% if request.user.is_authenticated %}
-                    var button = t.content.querySelector('.follow-unfollow .btn');
-                    button.setAttribute('data-user', property['userId']);
+                    if (property['userId'] !== {{ request.user.pk }}) {
+                        var button = t.content.querySelector('.follow-unfollow .btn');
+                        button.setAttribute('data-user', property['userId']);
 
-                    if (property['following']) {
-                        button.classList.add('active');
+                        if (property['following']) {
+                            button.classList.add('active');
+                        } else {
+                            button.classList.remove('active');
+                        }
                     } else {
-                        button.classList.remove('active');
+                        t.content.querySelector('.follow-unfollow .btn').remove();
                     }
                 {% endif %}
 
