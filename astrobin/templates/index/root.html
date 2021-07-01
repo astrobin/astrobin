@@ -79,7 +79,15 @@
                         </td>
 
                         <td class="topic-name{% if topic.unread %} topic-unread{% endif %}">
-                            <a href="{{topic.get_absolute_url}}">{{topic.name|truncatechars:90}}</a>
+                            <a href="{{ topic.get_absolute_url }}">
+                                {% if topic.poll_type %}
+                                    <span class="poll">[{% trans 'Poll' %}]</span>
+                                {% endif %}
+                                {% if topic.post_count == 1 %}
+                                    <span class="unanswered">[{% trans 'Unanswered' %}]</span>
+                                {% endif %}
+                                {{ topic.name|truncatechars:120 }}
+                            </a>
 
                             <br />
 
@@ -112,6 +120,14 @@
                             <a href="{{ topic.get_absolute_url }}?first-unread=1" class="first-unread-post-link">
                                 &#8680;
                             </a>
+                        </td>
+
+                        <td class="topic-post-count hidden-phone">
+                            {% if topic.post_count == 1 %}
+                                <img class="no-replies" src="{% static 'astrobin/emoticons/sad.png' %}" alt=""
+                                     rel="tooltip" title="{% trans 'This topic has no replies.' %}" />
+                            {% endif %}
+                            {{ topic.post_count|add:"-1" }} / {{ topic|pybbm_calc_topic_views }}
                         </td>
 
                         <td class="topic-last-post hidden-phone hidden-tablet">
