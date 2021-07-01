@@ -1702,6 +1702,7 @@ ul.token-input-list {
     input, textarea {
       margin: $spacer-small 0;
       background: none;
+      width: calc(100% - 1rem);
     }
   }
 

@@ -14,7 +14,6 @@ from threaded_messages.views import compose as messages_compose
 from threaded_messages.views import delete as messages_delete
 from threaded_messages.views import inbox as messages_inbox
 from threaded_messages.views import message_ajax_reply as messages_message_ajax_reply
-from threaded_messages.views import recipient_search as messages_recipient_search
 from threaded_messages.views import view as messages_view
 
 from astrobin import lookups
@@ -331,6 +330,8 @@ urlpatterns += [
     ### AUTOCOMPLETE VIEWS                                                 ###
     ###########################################################################
 
+    url(r'^autocomplete-private-message-recipients/$', lookups.autocomplete_private_message_recipients,
+        name='autocomplete_private_message_recipients'),
     url(r'^autocomplete_usernames/$', lookups.autocomplete_usernames, name='autocomplete_usernames'),
     url(r'^autocomplete_images/$', lookups.autocomplete_images, name='autocomplete_images'),
 
@@ -381,7 +382,6 @@ urlpatterns += [
     ### MESSAGES VIEWS                                                      ###
     ###########################################################################
 
-    url(r"^messages/recipient-search/$", messages_recipient_search, name="recipient_search"),
     url(r'^messages/batch-update/$', messages_batch_update, name='messages_batch_update'),
     url(r'^messages/compose/$', messages_compose, {'template_name': 'messages/compose.html'}, name='messages_compose'),
     url(r'^messages/compose/(?P<recipient>[\w.@+-]+)/$', messages_compose, {'template_name': 'messages/compose.html'},

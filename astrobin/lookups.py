@@ -17,9 +17,32 @@ from .services.utils_service import UtilsService
 
 @login_required
 @require_GET
+def autocomplete_private_message_recipients(request):
+    if 'q' not in request.GET:
+        return HttpResponse(simplejson.dumps([]))
+
+    q = unicode(request.GET['q']).replace(unichr(160), ' ')
+    limit = 10
+    results = []
+
+    users = list(UserProfile.objects.filter(
+        Q(user__username__icontains=q) | Q(real_name__icontains=q)
+    ).distinct()[:limit])
+
+    for user in users:
+        results.append({
+            'id': user.user.username,
+            'realName': user.user.userprofile.real_name,
+            'displayName': user.user.userprofile.real_name if user.user.userprofile.real_name else user.user.username,
+        })
+
+    return HttpResponse(simplejson.dumps(results))
+
+@login_required
+@require_GET
 def autocomplete_usernames(request):
     if 'q' not in request.GET:
-        HttpResponse(simplejson.dumps([]))
+        return HttpResponse(simplejson.dumps([]))
 
     q = request.GET['q']
     referer_header = request.META.get('HTTP_REFERER', '')
