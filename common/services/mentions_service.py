@@ -2,6 +2,7 @@ import re
 
 from annoying.functions import get_object_or_None
 from django.contrib.auth.models import User
+from django.core.exceptions import MultipleObjectsReturned
 from notification.models import NoticeSetting
 
 
@@ -27,7 +28,10 @@ class MentionsService(object):
         for mention in mentions:  # type: unicode
             user = get_object_or_None(User, username=mention)  # type: Optional[User]
             if not user:
-                user = get_object_or_None(User, userprofile__real_name=mention)
+                try:
+                    user = get_object_or_None(User, userprofile__real_name=mention)
+                except MultipleObjectsReturned:
+                    user = None
             if user:
                 gets_mention_notifications = NoticeSetting.objects.filter(
                     user=user,
