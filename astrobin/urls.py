@@ -18,13 +18,15 @@ from threaded_messages.views import view as messages_view
 
 from astrobin import lookups
 from astrobin.api import (
+    TopPickNominationResource,
     TopPickResource,
     ImageOfTheDayResource,
     ImageResource,
     ImageRevisionResource,
     LocationResource,
     CollectionResource,
-    UserProfileResource)
+    UserProfileResource
+)
 from astrobin.search import AstroBinSearchView
 from astrobin.views import (
     api as api_views,
@@ -131,6 +133,7 @@ v1_api = Api(api_name='v1')
 v1_api.register(LocationResource())
 v1_api.register(ImageResource())
 v1_api.register(ImageRevisionResource())
+v1_api.register(TopPickNominationResource())
 v1_api.register(TopPickResource())
 v1_api.register(ImageOfTheDayResource())
 v1_api.register(CollectionResource())
