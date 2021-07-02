@@ -188,7 +188,7 @@ th.forum-name {
 
 .post-content {
   font-size: 14.5px;
-  line-height: 20px;
+  line-height: 20px !important;
   padding: 1.5rem 18px !important;
 
   /* These are technically the same, but use both */
