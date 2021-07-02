@@ -639,7 +639,7 @@ astrobin_common = {
             }
 
             // Skip notifications.
-            if ($(event.toElement).closest('.notification-item').length) {
+            if ($(event.target).closest('.notification-item').length) {
                 return;
             }
 
