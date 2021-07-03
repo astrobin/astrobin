@@ -324,7 +324,7 @@ class ImageService:
              self.image.solar_system_main_subject == SolarSystemSubject.COMET)
 
     def is_platesolving_attempted(self):
-        return sself.image.solution and self.image.solution.status != Solver.MISSING
+        return self.image.solution and self.image.solution.status != Solver.MISSING
 
     @staticmethod
     def get_constellation(solution):
