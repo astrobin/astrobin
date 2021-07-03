@@ -308,3 +308,13 @@ def cache_image_list(context):
         return False
 
     return context['section'] == 'public' and (context['subsection'] in ('title', 'uploaded',))
+
+
+@register.filter()
+def is_platesolvable(image):
+    return ImageService(image).is_platesolvable()
+
+
+@register.filter()
+def needs_premium_subscription_to_platesolve(image):
+    return ImageService(image).needs_premium_subscription_to_platesolve()

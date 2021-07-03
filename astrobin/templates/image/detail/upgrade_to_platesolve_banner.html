@@ -1,0 +1,19 @@
+{% load i18n %}
+{% load astrobin_apps_images_tags %}
+
+{% if request.user == image.user and image|needs_premium_subscription_to_platesolve %}
+    <div class="alert alert-info">
+        <p>
+            {% blocktrans trimmed %}
+                Upgrade your account to enable plate-solving.
+            {% endblocktrans %}
+
+            <a href="https://welcome.astrobin.com/pricing">
+                {% blocktrans trimmed %}
+                    Learn more.
+                {% endblocktrans %}
+            </a>
+        </p>
+    </div>
+{% endif %}
+

@@ -447,6 +447,13 @@ def subscription_signed_up(sender, **kwargs):
 signed_up.connect(subscription_signed_up)
 
 
+def user_subscription_post_delete(sender, instance, **kwargs):
+    PremiumService.clear_subscription_status_cache_keys(instance.user.pk)
+
+
+post_delete.connect(user_subscription_post_delete, sender=UserSubscription)
+
+
 def group_pre_save(sender, instance, **kwargs):
     try:
         group = sender.objects.get(pk=instance.pk)

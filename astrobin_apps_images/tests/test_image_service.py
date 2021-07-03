@@ -1,6 +1,7 @@
 from django.test import TestCase
 from mock import patch
 
+from astrobin.enums import SubjectType
 from astrobin.models import Image
 from astrobin.tests.generators import Generators
 from astrobin_apps_images.services import ImageService
@@ -325,3 +326,37 @@ class TestImageService(TestCase):
         self.assertFalse(image.is_final)
         self.assertEquals(1, ImageService(image).get_revisions().count())
         self.assertEquals('C', ImageService(image).get_revisions().first().label)
+
+    @patch.object(ImageService, 'is_platesolvable')
+    def test_needs_premium_subscription_to_platesolve_solar_system(self, is_platesolvable):
+        image = Generators.image()
+
+        is_platesolvable.return_value = False
+
+        self.assertFalse(ImageService(image).needs_premium_subscription_to_platesolve())
+
+    @patch.object(ImageService, 'is_platesolvable')
+    @patch.object(ImageService, 'is_platesolving_attempted')
+    def test_needs_premium_subscription_to_platesolve_solving_already_attempted(
+            self, is_platesolving_attempted, is_platesolvable):
+        image = Generators.image()
+
+        is_platesolving_attempted.return_value = True
+        is_platesolvable.return_value = True
+
+        self.assertFalse(ImageService(image).needs_premium_subscription_to_platesolve())
+
+    @patch.object(ImageService, 'is_platesolvable')
+    @patch.object(ImageService, 'is_platesolving_attempted')
+    @patch('astrobin_apps_images.services.image_service.is_free')
+    def test_needs_premium_subscription_to_platesolve_solving_already_attempted(
+            self, is_free, is_platesolving_attempted, is_platesolvable):
+        image = Generators.image()
+        image.subject_type = SubjectType.DEEP_SKY
+        image.save()
+
+        is_free.return_value = False
+        is_platesolving_attempted.return_value = False
+        is_platesolvable.return_value = True
+
+        self.assertFalse(ImageService(image).needs_premium_subscription_to_platesolve())
