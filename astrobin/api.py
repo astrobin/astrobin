@@ -72,6 +72,7 @@ class ImageRevisionResource(ModelResource):
     url_duckduckgo_small = fields.CharField()
     url_histogram = fields.CharField()
     url_skyplot = fields.CharField()
+    url_solution = fields.CharField()
 
     is_solved = fields.BooleanField()
 
@@ -100,6 +101,7 @@ class ImageRevisionResource(ModelResource):
             'url_duckduckgo_small',
             'url_histogram',
             'url_skyplot',
+            'url_solution',
 
             'is_final',
             'is_solved',
@@ -146,6 +148,11 @@ class ImageRevisionResource(ModelResource):
     def dehydrate_url_skyplot(self, bundle):
         return bundle.obj.solution.skyplot_zoom1.url \
             if bundle.obj.solution and bundle.obj.solution.skyplot_zoom1 \
+            else None
+
+    def dehydrate_url_solution(self, bundle):
+        return bundle.obj.solution.image_file.url \
+            if bundle.obj.solution and bundle.obj.solution.image_file \
             else None
 
     def dehydrate_is_solved(self, bundle):
@@ -204,6 +211,7 @@ class ImageResource(ModelResource):
     url_duckduckgo_small = fields.CharField()
     url_histogram = fields.CharField()
     url_skyplot = fields.CharField()
+    url_solution = fields.CharField()
 
     is_solved = fields.BooleanField()
 
@@ -241,6 +249,7 @@ class ImageResource(ModelResource):
             'url_duckduckgo_small',
             'url_histogram',
             'url_skyplot',
+            'url_solution',
 
             'uploaded',
             'published',
@@ -307,6 +316,11 @@ class ImageResource(ModelResource):
     def dehydrate_url_skyplot(self, bundle):
         return bundle.obj.solution.skyplot_zoom1.url \
             if bundle.obj.solution and bundle.obj.solution.skyplot_zoom1 \
+            else None
+
+    def dehydrate_url_solution(self, bundle):
+        return bundle.obj.solution.image_file.url \
+            if bundle.obj.solution and bundle.obj.solution.image_file \
             else None
 
     def dehydrate_is_solved(self, bundle):
