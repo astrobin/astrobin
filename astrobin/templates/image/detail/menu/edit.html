@@ -1,5 +1,6 @@
 {% load common_tags %}
 {% load i18n %}
+{% load astrobin_apps_images_tags %}
 {% load astrobin_apps_premium_tags %}
 {% load astrobin_apps_platesolving_tags %}
 {% load tags %}
@@ -64,7 +65,7 @@
                 </a>
             </li>
 
-            {% if image.is_platesolvable %}
+            {% if image|is_platesolvable %}
                 <li class="divider"></li>
 
                 <li>

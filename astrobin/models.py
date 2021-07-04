@@ -1370,13 +1370,13 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         # If this is an animated gif, let's just return the full size URL
         # because right now we can't thumbnail gifs preserving animation
         if kwargs.pop('animated', False) and alias in (
-            'regular',
-            'regular_sharpened',
-            'regular_large',
-            'regular_large_sharpened',
-            'hd',
-            'hd_sharpened',
-            'real',
+                'regular',
+                'regular_sharpened',
+                'regular_large',
+                'regular_large_sharpened',
+                'hd',
+                'hd_sharpened',
+                'real',
         ):
             url = settings.IMAGES_URL + field.name
             cache.set(cache_key + '_animated', url, 60 * 60 * 24)
@@ -1486,13 +1486,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             return ""
 
         return '\r\n'.join([str(x) for x in self.keyvaluetags.all()])
-
-    def is_platesolvable(self):
-        return \
-            (self.subject_type == SubjectType.DEEP_SKY) or \
-            (self.subject_type == SubjectType.WIDE_FIELD) or \
-            (self.subject_type == SubjectType.SOLAR_SYSTEM and \
-             self.solar_system_main_subject == SolarSystemSubject.COMET)
 
     @staticmethod
     def by_gear(gear, gear_type=None):

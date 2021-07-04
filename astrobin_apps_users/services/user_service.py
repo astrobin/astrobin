@@ -12,7 +12,6 @@ from django.utils import timezone
 from pybb.models import Post
 
 from astrobin.models import Image
-from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
 
@@ -149,7 +148,7 @@ class UserService:
         if obj.__class__.__name__ == 'Image':
             return self.user != obj.user, "OWNER"
         elif obj.__class__.__name__ == 'NestedComment':
-            return  self.user != obj.author, "OWNER"
+            return self.user != obj.author, "OWNER"
         elif obj.__class__.__name__ == 'Post':
             if self.user == obj.user:
                 return False, "OWNER"
@@ -215,7 +214,9 @@ class UserService:
         languages = settings.LANGUAGES
 
         def _do_clear(language, section, subsection, view):
-            key = make_template_fragment_key('user_gallery_image_list2', [self.user.pk, language, section, subsection, view])
+            key = make_template_fragment_key(
+                'user_gallery_image_list2',
+                [self.user.pk, language, section, subsection, view])
             cache.delete(key)
 
         for language in languages:

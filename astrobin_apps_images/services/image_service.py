@@ -1,5 +1,5 @@
 import logging
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from annoying.functions import get_object_or_None
 from django.conf import settings
@@ -9,11 +9,14 @@ from django.core.files.images import get_image_dimensions
 from django.db.models import Q
 from django.urls import reverse
 
+from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
 from astrobin.utils import base26_encode, base26_decode, decimal_to_hours_minutes_seconds, \
     decimal_to_degrees_minutes_seconds
 from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_platesolving.models import Solution
+from astrobin_apps_platesolving.solver import Solver
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 from common.services import DateTimeService
 from common.services.constellations_service import ConstellationsService, ConstellationException
 
@@ -272,7 +275,6 @@ class ImageService:
         image.thumbnails.filter(revision=new_original.label).update(revision='0')
         new_original.delete()
 
-
     def get_enhanced_thumb_url(self, field, alias, revision, animated, secure, target_alias):
         get_enhanced_thumb_url = None
         enhanced_thumb_url = None
@@ -308,6 +310,21 @@ class ImageService:
                     get_enhanced_thumb_url += '?animated'
 
         return get_enhanced_thumb_url, enhanced_thumb_url
+
+    def needs_premium_subscription_to_platesolve(self):
+        return self.is_platesolvable() and \
+               not self.is_platesolving_attempted() and \
+               is_free(self.image.user)
+
+    def is_platesolvable(self):
+        return \
+            (self.image.subject_type == SubjectType.DEEP_SKY) or \
+            (self.image.subject_type == SubjectType.WIDE_FIELD) or \
+            (self.image.subject_type == SubjectType.SOLAR_SYSTEM and
+             self.image.solar_system_main_subject == SolarSystemSubject.COMET)
+
+    def is_platesolving_attempted(self):
+        return self.image.solution and self.image.solution.status != Solver.MISSING
 
     @staticmethod
     def get_constellation(solution):
