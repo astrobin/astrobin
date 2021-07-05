@@ -11,12 +11,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     git \
     build-essential \
-    python-dev \
+    python3-dev \
     pkg-config \
     libxslt1-dev \
     libxml2-dev \
     gettext \
-    python-pip \
+    python3-pip \
     libjpeg8 libjpeg8-dev libjpeg-dev \
     libtiff5 libtiff5-dev libtiff-tools \
     libfreetype6 libfreetype6-dev \
@@ -27,6 +27,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev \
     ruby ruby-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 
 # Set the locale
 RUN locale-gen en_US.UTF-8
@@ -49,10 +51,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 RUN mkdir /code
 COPY requirements.txt /code
 WORKDIR /code
-RUN python -m pip install pip==20.3.4 && \
-    apt-get purge -y python-pip && \
-    python -m pip install "setuptools<45" && \
-    pip install --no-deps -r requirements.txt --src /src
+RUN pip3 install --no-deps -r requirements.txt --src /src
 
 # Install global node dependencies
 RUN yarn global add \
