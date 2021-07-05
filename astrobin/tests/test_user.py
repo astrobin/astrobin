@@ -30,10 +30,6 @@ class UserTest(TestCase):
             username="user_2", email="user_2@example.com",
             password="password")
 
-    def tearDown(self):
-        self.user.delete()
-        self.user_2.delete()
-
     def _get_last_image(self):
         return Image.objects_including_wip.all().order_by('-id')[0]
 
@@ -429,9 +425,6 @@ class UserTest(TestCase):
         response = self.client.get(reverse('user_page', args=('user',)))
         self.assertEquals(response.status_code, 404)
 
-        image.delete()
-        self.client.logout()
-
     def test_user_page_view_wip_image_not_visible_by_others(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST STAGING IMAGE", True)
@@ -627,9 +620,6 @@ class UserTest(TestCase):
         profile = UserProfile.objects.get(user=self.user)
         self.assertNotEquals(updated, profile.updated)
 
-        image.delete()
-        self.client.logout()
-
     def test_profile_softdelete(self):
         user = User.objects.create_user(
             username="softdelete", email="softdelete@example.com",
@@ -664,8 +654,6 @@ class UserTest(TestCase):
         response = self.client.get(reverse('index'))
         self.assertContains(response, "Change your e-mail")
 
-        bounce.delete()
-
     def test_corrupted_image_not_shown_to_anon(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
@@ -677,8 +665,6 @@ class UserTest(TestCase):
 
         self.assertEquals(200, response.status_code)
         self.assertNotContains(response, "CORRUPTED_IMAGE")
-
-        image.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_final_image_revision_not_shown_to_anon(self):
@@ -694,9 +680,6 @@ class UserTest(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertNotContains(response, "CORRUPTED_IMAGE")
 
-        image.delete()
-        revision.delete()
-
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_image_with_ok_final_revision_shown_to_anon(self):
         self.client.login(username="user", password="password")
@@ -710,9 +693,6 @@ class UserTest(TestCase):
 
         self.assertEquals(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
-
-        image.delete()
-        revision.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_image_with_ok_non_final_revision_not_shown_to_anon(self):
@@ -733,9 +713,6 @@ class UserTest(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertNotContains(response, "CORRUPTED_IMAGE")
 
-        image.delete()
-        revision.delete()
-
     def test_corrupted_image_shown_to_owner(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
@@ -751,8 +728,6 @@ class UserTest(TestCase):
 
         self.assertEquals(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
-
-        image.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_final_image_revision_shown_to_owner(self):
@@ -772,9 +747,6 @@ class UserTest(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
 
-        image.delete()
-        revision.delete()
-
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_image_with_ok_final_revision_shown_to_owner(self):
         self.client.login(username="user", password="password")
@@ -792,9 +764,6 @@ class UserTest(TestCase):
 
         self.assertEquals(200, response.status_code)
         self.assertNotContains(response, "CORRUPTED_IMAGE")
-
-        image.delete()
-        revision.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_image_with_ok_non_final_revision_shown_to_owner(self):
@@ -818,9 +787,6 @@ class UserTest(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
 
-        image.delete()
-        revision.delete()
-
     @override_settings(PREMIUM_MAX_IMAGES_FREE_2020=123)
     def test_user_page_subscription_free(self):
         image = Generators.image()
@@ -835,9 +801,6 @@ class UserTest(TestCase):
         self.assertContains(response, "<strong data-test='subscription-type'>AstroBin Free</strong>", html=True)
         self.assertNotContains(response, "data-test=\"expiration-date\"")
         self.assertContains(response, "<strong data-test='uploads-used'>0 / 123</strong>", html=True)
-
-        self.client.logout()
-        image.delete()
 
     @override_settings(PREMIUM_MAX_IMAGES_LITE=123)
     def test_user_page_subscription_lite(self):
@@ -861,10 +824,6 @@ class UserTest(TestCase):
             html=True)
         self.assertContains(response, "<strong data-test='uploads-used'>0 / 123</strong>", html=True)
 
-        self.client.logout()
-        us.delete()
-        image.delete()
-
     @override_settings(PREMIUM_MAX_IMAGES_LITE_2020=123)
     def test_user_page_subscription_lite_2020(self):
         image = Generators.image()
@@ -887,10 +846,6 @@ class UserTest(TestCase):
             html=True)
         self.assertContains(response, "<strong data-test='images-used'>0 / 123</strong>", html=True)
 
-        self.client.logout()
-        us.delete()
-        image.delete()
-
     def test_user_page_subscription_premium(self):
         image = Generators.image()
         image.user = self.user
@@ -910,10 +865,6 @@ class UserTest(TestCase):
             "<abbr class='timestamp' data-epoch='%s000'>...</abbr>" % us.expires.strftime('%s') +
             "</strong>",
             html=True)
-
-        self.client.logout()
-        us.delete()
-        image.delete()
 
     @override_settings(PREMIUM_MAX_IMAGES_PREMIUM_2020=123)
     def test_user_page_subscription_premium_2020(self):
@@ -936,10 +887,6 @@ class UserTest(TestCase):
             "</strong>",
             html=True)
 
-        self.client.logout()
-        us.delete()
-        image.delete()
-
     def test_user_page_subscription_ultimate(self):
         image = Generators.image()
         image.user = self.user
@@ -960,17 +907,12 @@ class UserTest(TestCase):
             "</strong>",
             html=True)
 
-        self.client.logout()
-        us.delete()
-        image.delete()
-
     @override_settings(ADS_ENABLED=True)
     def test_user_preferences_allow_astronomy_ads_free(self):
         self.client.login(username='user', password='password')
         self.assertContains(
             self.client.get(reverse('profile_edit_preferences')),
             'name="allow_astronomy_ads" disabled')
-        self.client.logout()
 
     @override_settings(ADS_ENABLED=True)
     def test_user_preferences_allow_astronomy_ads_lite(self):
@@ -979,8 +921,6 @@ class UserTest(TestCase):
         self.assertNotContains(
             self.client.get(reverse('profile_edit_preferences')),
             'name="allow_astronomy_ads" disabled')
-        self.client.logout()
-        us.delete()
 
     @override_settings(ADS_ENABLED=True)
     def test_user_preferences_allow_astronomy_ads_lite_2020(self):
@@ -989,8 +929,6 @@ class UserTest(TestCase):
         self.assertContains(
             self.client.get(reverse('profile_edit_preferences')),
             'name="allow_astronomy_ads" disabled')
-        self.client.logout()
-        us.delete()
 
     @override_settings(ADS_ENABLED=True)
     def test_user_preferences_allow_astronomy_ads_premium(self):
@@ -1009,8 +947,6 @@ class UserTest(TestCase):
         self.assertNotContains(
             self.client.get(reverse('profile_edit_preferences')),
             'name="allow_astronomy_ads" disabled')
-        self.client.logout()
-        us.delete()
 
     @override_settings(ADS_ENABLED=True)
     def test_user_preferences_allow_astronomy_ads_ultimate_2020(self):
@@ -1019,8 +955,6 @@ class UserTest(TestCase):
         self.assertNotContains(
             self.client.get(reverse('profile_edit_preferences')),
             'name="allow_astronomy_ads" disabled')
-        self.client.logout()
-        us.delete()
 
     def test_user_can_access_trash_free(self):
         self.client.login(username='user', password='password')
