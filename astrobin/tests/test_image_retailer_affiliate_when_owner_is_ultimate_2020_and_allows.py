@@ -1,6 +1,6 @@
 # -*- coding: UTF-8
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase, override_settings
 from mock import patch
 

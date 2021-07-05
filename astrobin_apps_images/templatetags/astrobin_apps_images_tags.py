@@ -6,7 +6,7 @@ import zlib
 from PIL.Image import DecompressionBombError
 from django.conf import settings
 from django.core.cache import cache
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.template import Library
 from django.utils.translation import ugettext as _
 

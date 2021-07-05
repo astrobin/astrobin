@@ -2,7 +2,7 @@ import logging
 from datetime import date, timedelta
 
 from annoying.functions import get_object_or_None
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponseForbidden
 from django.shortcuts import redirect
 from django.views.generic.edit import FormView, CreateView

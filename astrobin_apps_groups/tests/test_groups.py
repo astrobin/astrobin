@@ -4,7 +4,7 @@ import re
 import simplejson as json
 from beautifulsoupselect import BeautifulSoupSelect as BSS
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase
 from pybb.models import Forum, Topic
 

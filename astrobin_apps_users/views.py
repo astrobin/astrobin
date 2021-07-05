@@ -4,7 +4,7 @@ from braces.views import JSONResponseMixin, LoginRequiredMixin, JsonRequestRespo
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.core.serializers.json import DjangoJSONEncoder
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.utils.translation import gettext

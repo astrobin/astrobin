@@ -12,7 +12,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import MultipleObjectsReturned
-from django.core.urlresolvers import reverse as reverse_url
+from django.urls import reverse as reverse_url
 from django.db import IntegrityError
 from django.db import transaction
 from django.db.models import Q

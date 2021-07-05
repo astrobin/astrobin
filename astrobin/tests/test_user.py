@@ -3,7 +3,7 @@ from datetime import date, timedelta, datetime
 
 from django.conf import settings
 from django.contrib.auth.models import Group
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase, override_settings
 from django.utils import timezone, formats
 from django_bouncy.models import Bounce
