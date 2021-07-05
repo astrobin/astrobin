@@ -23,6 +23,10 @@
     margin-bottom: 12px;
   }
 
+  p:only-child {
+    margin: 0;
+  }
+
   ul,
   ol {
     list-style: initial;

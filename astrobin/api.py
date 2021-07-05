@@ -12,7 +12,7 @@ from astrobin.enums.license import License
 from astrobin.models import Location, Image, ImageRevision, ImageOfTheDay, App, Collection, UserProfile
 from astrobin.views import get_image_or_404
 from astrobin_apps_images.services import ImageService
-from astrobin_apps_iotd.models import IotdVote
+from astrobin_apps_iotd.models import TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from toggleproperties.models import ToggleProperty
@@ -72,6 +72,7 @@ class ImageRevisionResource(ModelResource):
     url_duckduckgo_small = fields.CharField()
     url_histogram = fields.CharField()
     url_skyplot = fields.CharField()
+    url_solution = fields.CharField()
 
     is_solved = fields.BooleanField()
 
@@ -100,6 +101,7 @@ class ImageRevisionResource(ModelResource):
             'url_duckduckgo_small',
             'url_histogram',
             'url_skyplot',
+            'url_solution',
 
             'is_final',
             'is_solved',
@@ -146,6 +148,11 @@ class ImageRevisionResource(ModelResource):
     def dehydrate_url_skyplot(self, bundle):
         return bundle.obj.solution.skyplot_zoom1.url \
             if bundle.obj.solution and bundle.obj.solution.skyplot_zoom1 \
+            else None
+
+    def dehydrate_url_solution(self, bundle):
+        return bundle.obj.solution.image_file.url \
+            if bundle.obj.solution and bundle.obj.solution.image_file \
             else None
 
     def dehydrate_is_solved(self, bundle):
@@ -204,6 +211,7 @@ class ImageResource(ModelResource):
     url_duckduckgo_small = fields.CharField()
     url_histogram = fields.CharField()
     url_skyplot = fields.CharField()
+    url_solution = fields.CharField()
 
     is_solved = fields.BooleanField()
 
@@ -241,6 +249,7 @@ class ImageResource(ModelResource):
             'url_duckduckgo_small',
             'url_histogram',
             'url_skyplot',
+            'url_solution',
 
             'uploaded',
             'published',
@@ -250,7 +259,7 @@ class ImageResource(ModelResource):
             'animated',
             'link',
             'link_to_fits',
-            'license', # Deprecated
+            'license',  # Deprecated
             'license_name',
 
             'is_final',
@@ -307,6 +316,11 @@ class ImageResource(ModelResource):
     def dehydrate_url_skyplot(self, bundle):
         return bundle.obj.solution.skyplot_zoom1.url \
             if bundle.obj.solution and bundle.obj.solution.skyplot_zoom1 \
+            else None
+
+    def dehydrate_url_solution(self, bundle):
+        return bundle.obj.solution.image_file.url \
+            if bundle.obj.solution and bundle.obj.solution.image_file \
             else None
 
     def dehydrate_is_solved(self, bundle):
@@ -476,19 +490,40 @@ class ImageOfTheDayResource(ModelResource):
 
 class TopPickResource(ModelResource):
     image = fields.ForeignKey('astrobin.api.ImageResource', 'image')
-    date = fields.DateField('date')
+    date = fields.DateField('date', null=True)
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = IotdVote.objects.filter(image__corrupted=False)
+        queryset = TopPickArchive.objects.all()
         fields = [
             'image',
-            'date'
         ]
         allowed_methods = ['get']
 
     def dehydrate_image(self, bundle):
         return "/api/v1/image/%s" % bundle.obj.image.get_id()
+
+    def dehydrate_date(self, bundle):
+        return bundle.obj.image.published
+
+
+class TopPickNominationResource(ModelResource):
+    image = fields.ForeignKey('astrobin.api.ImageResource', 'image')
+    date = fields.DateField('date', null=True)
+
+    class Meta:
+        authentication = AppAuthentication()
+        queryset = TopPickNominationsArchive.objects.all()
+        fields = [
+            'image',
+        ]
+        allowed_methods = ['get']
+
+    def dehydrate_image(self, bundle):
+        return "/api/v1/image/%s" % bundle.obj.image.get_id()
+
+    def dehydrate_date(self, bundle):
+        return bundle.obj.image.published
 
 
 class CollectionResource(ModelResource):

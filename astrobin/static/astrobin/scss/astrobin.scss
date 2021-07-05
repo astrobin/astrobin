@@ -146,7 +146,7 @@ body.full {
       top: 0;
       left: -170px;
       width: 160px;
-      height: 600px;
+      height: 639px;
     }
 
     .ads-sidebar-right {
@@ -154,7 +154,7 @@ body.full {
       top: 0;
       right: -170px;
       width: 160px;
-      height: 600px;
+      height: 639px;
     }
   }
 
@@ -1702,6 +1702,7 @@ ul.token-input-list {
     input, textarea {
       margin: $spacer-small 0;
       background: none;
+      width: calc(100% - 1rem);
     }
   }
 

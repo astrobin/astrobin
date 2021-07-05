@@ -227,25 +227,26 @@
                     {% blocktrans trimmed with post_count=object.forum.post_count topic_count=object.forum.topic_count %}<strong>{{post_count}}</strong> posts in <strong>{{topic_count}}</strong> topics{% endblocktrans %}
                 </small>
             </h2>
-            {% if request.user in object.members.all %}
-                {% with topic_list=topics forum=object.forum %}
-                    {% include 'pybb/topic_list.html' %}
-                {% endwith %}
-                <div class="group-forum-buttons">
-                    <a class="btn" href="{% url 'pybb:forum' object.forum.id %}">{% trans "View all" %}</a>
 
-                    {% if request.user|pybb_may_create_topic:object.forum %}
-                        <a class="btn btn-primary" href="{% url 'pybb:add_topic' object.forum.id %}">
-                            <i class="icon-plus-sign"></i>
-                            {% trans "New topic" %}
-                        </a>
-                    {% endif %}
-                </div>
-            {% else %}
-                <div class="alert alert-warning">
-                    {% trans "Please join the group to view its forum." %}
-                </div>
-            {% endif %}
+            {% with topic_list=topics forum=object.forum %}
+                {% include 'pybb/topic_list.html' %}
+            {% endwith %}
+
+            <div class="group-forum-buttons">
+                <a class="btn" href="{% url 'pybb:forum' object.forum.id %}">{% trans "View all" %}</a>
+
+                {% if request.user|pybb_may_create_topic:object.forum %}
+                    <a class="btn btn-primary" href="{% url 'pybb:add_topic' object.forum.id %}">
+                        <i class="icon-plus-sign"></i>
+                        {% trans "New topic" %}
+                    </a>
+                {% else %}
+                    <a class="btn btn-primary" data-toggle="modal" href="#posting-restricted-to-members-modal">
+                        <i class="icon-plus-sign"></i>
+                        {% trans "New topic" %}
+                    </a>
+                {% endif %}
+            </div>
         </div>
 
         <div class="group-images">
@@ -265,9 +266,15 @@
             <div class="alert alert-danger">
                 {% trans "Careful! Do you really want to delete this group? This operation cannot be undone and the group's forum and all its topics will be irreversibly deleted!" %}
             </div>
+        </div>
 
-            <form class="form-inline" action="{% url 'group_delete' group.pk %}" method="post">{% csrf_token %}
-                <input class="btn btn-danger" type="submit" value="{% trans "Delete group" %}"/>
+        <div class="modal-footer">
+            <form class="form-horizontal" action="{% url 'group_delete' group.pk %}" method="post">{% csrf_token %}
+                <button class="btn" data-dismiss="modal">{% trans "Cancel" %}</button>
+                <button class="btn btn-danger {% button_loading_class %}" type="submit">
+                    {% button_loading_indicator %}
+                    {% trans "Delete group" %}
+                </button>
             </form>
         </div>
     </div>

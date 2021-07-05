@@ -1,0 +1,61 @@
+{% load i18n %}
+{% load tags %}
+{% load astrobin_apps_premium_tags %}
+
+<div class="subtle-container advertisement ads-sidebar-left {{ ad_container_classes }}">
+    <div class="header">
+        <h4><i class="icon-bullhorn hidden-phone"></i></h4>
+
+        <a class="remove" data-toggle="modal"
+                {% if request.user|can_remove_ads %}
+           href="#remove-ads-modal"
+                {% else %}
+           href="#feature-restricted-modal"
+                {% endif %}
+        >
+            {% trans "Remove ads" %} <i class="icon-remove"></i>
+        </a>
+    </div>
+
+    <div id='{{ NATIVE_RESPONSIVE_SKYSCRAPER_SLOT_1 }}'>
+        <script>
+            googletag.cmd.push(function () {
+                {% if key_value_pairs %}
+                    {% for key, value in key_value_pairs.items %}
+                        googletag.pubads().setTargeting("{{ key }}", "{{ value }}");
+                    {% endfor %}
+                {% endif %}
+                googletag.display('{{ NATIVE_RESPONSIVE_SKYSCRAPER_SLOT_1 }}');
+            });
+        </script>
+    </div>
+</div>
+
+<div class="subtle-container advertisement ads-sidebar-right {{ ad_container_classes }}">
+    <div class="header">
+        <h4><i class="icon-bullhorn hidden-phone"></i></h4>
+
+        <a class="remove" data-toggle="modal"
+                {% if request.user|can_remove_ads %}
+           href="#remove-ads-modal"
+                {% else %}
+           href="#feature-restricted-modal"
+                {% endif %}
+        >
+            {% trans "Remove ads" %} <i class="icon-remove"></i>
+        </a>
+    </div>
+
+    <div id='{{ NATIVE_RESPONSIVE_SKYSCRAPER_SLOT_2 }}'>
+        <script>
+            googletag.cmd.push(function () {
+                {% if key_value_pairs %}
+                    {% for key, value in key_value_pairs.items %}
+                        googletag.pubads().setTargeting("{{ key }}", "{{ value }}");
+                    {% endfor %}
+                {% endif %}
+                googletag.display('{{ NATIVE_RESPONSIVE_SKYSCRAPER_SLOT_2 }}');
+            });
+        </script>
+    </div>
+</div>

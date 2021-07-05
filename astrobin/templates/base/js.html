@@ -85,10 +85,6 @@
                 {% endif %}
         });
 
-        {% if request.user.is_authenticated %}
-            astrobin_common.register_notification_on_click();
-        {% endif %}
-
         astrobin_common.setup_user_popovers();
 
         $('input:checkbox, input:radio, input:file').uniform(
@@ -97,7 +93,7 @@
             }
         );
 
-        $("form:not(.ajax) :submit").one("click", function (event) {
+        $("form:not(.ajax) [type='submit']").one("click", function (event) {
             var $target = $(event.target);
             var $form = $target.closest("form");
 

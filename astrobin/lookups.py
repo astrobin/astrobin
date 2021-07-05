@@ -7,82 +7,42 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponse
-from django.utils.encoding import smart_str
 from django.views.decorators.http import require_GET
 
 from astrobin_apps_images.services import ImageService
-from .models import Accessory, Image
-from .models import Camera
-from .models import Filter
-from .models import FocalReducer
-from .models import Location
-from .models import Mount
-from .models import Software
-from .models import Telescope
+from .models import Image
 from .models import UserProfile
 from .services.utils_service import UtilsService
 
 
-@require_GET
-def autocomplete(request, what):
-    values = []
-    if 'q' not in request.GET:
-        return HttpResponse(simplejson.dumps([{}]))
-
-    q = smart_str(request.GET['q'])
-    limit = 10
-
-    regex = ".*%s.*" % re.escape(q)
-    for k, v in {'locations': Location,
-                 'telescopes': Telescope,
-                 'imaging_telescopes': Telescope,
-                 'guiding_telescopes': Telescope,
-                 'mounts': Mount,
-                 'cameras': Camera,
-                 'imaging_cameras': Camera,
-                 'guiding_cameras': Camera,
-                 'focal_reducers': FocalReducer,
-                 'software': Software,
-                 'filters': Filter,
-                 'accessories': Accessory}.iteritems():
-        if what == k:
-            values = v.objects.filter(Q(make__iregex=r'%s' % regex) |
-                                      Q(name__iregex=r'%s' % regex))[:limit]
-            if k == 'locations':
-                return HttpResponse(simplejson.dumps([{'id': str(v.id), 'name': v.name} for v in values]))
-            else:
-                return HttpResponse(simplejson.dumps([{'id': str(v.id), 'name': unicode(v)} for v in values]))
-
-    return HttpResponse(simplejson.dumps([{}]))
-
-
 @login_required
 @require_GET
-def autocomplete_user(request, what):
-    profile = request.user.userprofile
-    values = ()
-    for k, v in {'telescopes': profile.telescopes,
-                 'imaging_telescopes': profile.telescopes,
-                 'guiding_telescopes': profile.telescopes,
-                 'mounts': profile.mounts,
-                 'cameras': profile.cameras,
-                 'imaging_cameras': profile.cameras,
-                 'guiding_cameras': profile.cameras,
-                 'focal_reducers': profile.focal_reducers,
-                 'software': profile.software,
-                 'filters': profile.filters,
-                 'accessories': profile.accessories}.iteritems():
-        if what == k:
-            values = v.all().filter(Q(name__icontains=request.GET['q']))
+def autocomplete_private_message_recipients(request):
+    if 'q' not in request.GET:
+        return HttpResponse(simplejson.dumps([]))
 
-    return HttpResponse(simplejson.dumps([{'id': str(v.id), 'name': v.name} for v in values]))
+    q = unicode(request.GET['q']).replace(unichr(160), ' ')
+    limit = 10
+    results = []
 
+    users = list(UserProfile.objects.filter(
+        Q(user__username__icontains=q) | Q(real_name__icontains=q)
+    ).distinct()[:limit])
+
+    for user in users:
+        results.append({
+            'id': user.user.username,
+            'realName': user.user.userprofile.real_name,
+            'displayName': user.user.userprofile.real_name if user.user.userprofile.real_name else user.user.username,
+        })
+
+    return HttpResponse(simplejson.dumps(results))
 
 @login_required
 @require_GET
 def autocomplete_usernames(request):
     if 'q' not in request.GET:
-        HttpResponse(simplejson.dumps([]))
+        return HttpResponse(simplejson.dumps([]))
 
     q = request.GET['q']
     referer_header = request.META.get('HTTP_REFERER', '')
@@ -110,16 +70,16 @@ def autocomplete_usernames(request):
         image_id = from_comments.group(1)
         image = ImageService.get_object(image_id, Image.objects_including_wip.all())
         users = list(UserProfile.objects.filter(
+            Q(
+                Q(user__image=image) |
                 Q(
-                    Q(user__image=image) |
-                    Q(
-                        Q(user__comments__object_id=image.id) & Q(user__comments__deleted=False)
-                    )
-                )&
-                Q(
-                    Q(user__username__icontains=q) | Q(real_name__icontains=q)
+                    Q(user__comments__object_id=image.id) & Q(user__comments__deleted=False)
                 )
-            ).distinct()[:limit])
+            ) &
+            Q(
+                Q(user__username__icontains=q) | Q(real_name__icontains=q)
+            )
+        ).distinct()[:limit])
 
     users = UtilsService.unique(users + list(UserProfile.objects.filter(
         Q(user__username__icontains=q) | Q(real_name__icontains=q)

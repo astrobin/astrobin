@@ -21,6 +21,12 @@ log = logging.getLogger('apps')
 
 
 class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
+    def delete_object(self, obj):
+        delete_kwargs = {}
+        if issubclass(type(obj), SafeDeleteModel):
+            delete_kwargs['force_policy'] = HARD_DELETE
+        obj.delete(**delete_kwargs)
+
     def get_file_field_name(self):
         raise NotImplementedError
 
@@ -70,6 +76,7 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
         # Validate upload_offset
         if upload_offset != self.get_cached_property("offset", object):
             log.warning("Chunked uploader (%d) (%d): offset conflict" % (request.user.pk, object.pk))
+            self.delete_object(object)
             raise Conflict
 
         temporary_file = get_or_create_temporary_file(object)
@@ -77,7 +84,7 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             # Initial request in the series of PATCH request was handled on a different server instance.
             msg = 'Previous chunks not found on this server.'
             log.warning("Chunked uploader (%d) (%d): %s" % (request.user.pk, object.pk, msg))
-            return HttpResponse(msg, status=status.HTTP_400_BAD_REQUEST)
+            return HttpResponse(msg, status=status.HTTP_423_LOCKED)
 
         # Get chunk from request
         chunk_bytes = self.get_chunk(request)
@@ -86,6 +93,7 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
         if not chunk_bytes:
             msg = 'No data.'
             log.warning("Chunked uploader (%d) (%d): %s" % (request.user.pk, object.pk, msg))
+            self.delete_object(object)
             return HttpResponse(msg, status=status.HTTP_400_BAD_REQUEST)
 
         # Check checksum (http://tus.io/protocols/resumable-upload.html#checksum)
@@ -94,10 +102,12 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             if upload_checksum[0] not in TUS_API_CHECKSUM_ALGORITHMS:
                 msg = 'Unsupported Checksum Algorithm: {}.'.format(upload_checksum[0])
                 log.warning("Chunked uploader (%d) (%d): %s" % (request.user.pk, object.pk, msg))
+                self.delete_object(object)
                 return HttpResponse(msg, status=status.HTTP_400_BAD_REQUEST)
             elif not checksum_matches(upload_checksum[0], upload_checksum[1], chunk_bytes):
                 msg = 'Checksum Mismatch.'
                 log.warning("Chunked uploader (%d) (%d) : %s" % (request.user.pk, object.pk, msg))
+                self.delete_object(object)
                 return HttpResponse(msg, status=460)
 
         # Run chunk validator
@@ -107,6 +117,7 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
         if not chunk_bytes:
             msg = 'No data. Make sure "validate_chunk" returns data.'
             log.warning("Chunked uploader (%d) (%d): %s" % (request.user.pk, object.pk, msg))
+            self.delete_object(object)
             return HttpResponse(msg, status=status.HTTP_400_BAD_REQUEST)
 
         # Write file
@@ -116,6 +127,7 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
         except Exception as e:
             msg = str(e)
             log.warning("Chunked uploader (%d) (%d): exception writing data: %s" % (request.user.pk, object.pk, msg))
+            self.delete_object(object)
             return HttpResponse(msg, status=status.HTTP_400_BAD_REQUEST)
 
         headers = {
@@ -132,9 +144,10 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             temporary_file = get_or_create_temporary_file(object)
 
             if not self.verify_file(temporary_file):
-                os.remove(temporary_file)
                 msg = "file verification failed"
                 log.warning("Chunked uploader (%d) (%d): %s" % (request.user.pk, object.pk, msg))
+                os.remove(temporary_file)
+                self.delete_object(object)
                 return HttpResponse(msg, status=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
 
             log.debug("Chunked uploader (%d) (%d): saving object to temporary file %s" % (
@@ -148,17 +161,17 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
 
                 if hasattr(object, 'uploader_in_progress'):
                     object.uploader_in_progress = None
-                    object.save(keep_deleted=True)
+
+                    save_kwargs = {}
+                    if issubclass(type(object), SafeDeleteModel):
+                        save_kwargs['keep_deleted'] = True
+                    object.save(**save_kwargs)
             except Exception as e:
                 log.error("Chunked uploader (%d) (%d): exception: %s" % (
                     request.user.pk, object.pk, e.message
                 ))
                 os.remove(temporary_file)
-
-                delete_kwargs = {}
-                if issubclass(type(object), SafeDeleteModel):
-                    delete_kwargs['force_policy'] = HARD_DELETE
-                object.delete(**delete_kwargs)
+                self.delete_object(object)
                 return HttpResponse(e.message, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
             signals.saved.send(object)

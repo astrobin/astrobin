@@ -1,0 +1,15 @@
+{% load i18n %}
+
+<div class="alert alert-warning">
+    {% if topic %}
+        {% url 'group_detail' topic.forum.group.pk as group_page %}
+        {% blocktrans trimmed with group_name=topic.forum.group.name %}
+            Please join the <a href="{{ group_page }}">{{ group_name }}</a> group to post in this forum.
+        {% endblocktrans %}
+    {% elif forum %}
+        {% url 'group_detail' topic.forum.group.pk as group_page %}
+        {% blocktrans trimmed with group_name=forum.group.name %}
+            Please join the <a href="{{ group_page }}">{{ group_name }}</a> group to post in this forum.
+        {% endblocktrans %}
+    {% endif %}
+</div>

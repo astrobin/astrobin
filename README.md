@@ -92,7 +92,7 @@ alias compose="docker-compose \
 And then bring up the stack:
 
 ```bash
-export ARCH=x86_64 # (or aarch64)
+export ARCH=aarch64 # (or x86_64)
 export DOCKER_REGISTRY=astrobin
 export ASTROBIN_BUILD=dev
 export ASTROBIN_GUNICORN_WORKERS=1

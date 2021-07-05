@@ -638,8 +638,8 @@ astrobin_common = {
                 return;
             }
 
-            // Skip notifications if the user elected to have them open in a new tab
-            if ($(event.toElement).closest('.notification-item').length && astrobin_common.config.open_notifications_in_new_tab) {
+            // Skip notifications.
+            if ($(event.target).closest('.notification-item').length) {
                 return;
             }
 
@@ -757,9 +757,9 @@ astrobin_common = {
     },
 
     mark_all_notifications_as_read: function () {
-        var $rows = $('#notifications-modal tr:not(.no-new-notifications)'),
-            $count_badge = $('#notifications-count'),
-            count;
+        var $rows = $('#notifications-modal tr:not(.' +
+            'no-new-notifications)'),
+            $count_badge = $('#notifications-count');
 
         return new Promise(function (resolve) {
             $.ajax({
@@ -791,7 +791,9 @@ astrobin_common = {
                 }).click();
             }
 
-            $(".notifications-modal .notification-item .notification-content a").live('click', function () {
+            $(".notifications-modal .notification-item .notification-content a").live('click', function (event) {
+                event.preventDefault();
+
                 var $item = $(this).closest(".notification-item");
                 var $loading = $item.find(".notification-mark-as-read .loading")
                 var $readMarker = $item.find(".notification-mark-as-read .icon")
@@ -938,9 +940,10 @@ astrobin_common = {
 
         if (config.is_authenticated) {
             astrobin_common.get_indexes();
+            astrobin_common.register_notification_on_click();
             setTimeout(function () {
                 astrobin_common.get_notifications();
-            }, 500);
+            }, 1500);
         }
 
     }

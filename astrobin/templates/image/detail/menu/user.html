@@ -20,7 +20,7 @@
         </li>
 
         <li>
-            <a class="send-private-message" href="{% url 'messages_compose_to' image.user.username %}{% query_string "next=request.path, subject=image.title" "" %}">
+            <a class="send-private-message" href="{% url 'messages_compose_to' image.user.username %}?subject={{image.title}}">
                 <i class="icon-envelope"></i>
                 {% trans "Send private message" %}
             </a>

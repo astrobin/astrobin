@@ -14,18 +14,19 @@ from threaded_messages.views import compose as messages_compose
 from threaded_messages.views import delete as messages_delete
 from threaded_messages.views import inbox as messages_inbox
 from threaded_messages.views import message_ajax_reply as messages_message_ajax_reply
-from threaded_messages.views import recipient_search as messages_recipient_search
 from threaded_messages.views import view as messages_view
 
 from astrobin import lookups
 from astrobin.api import (
+    TopPickNominationResource,
     TopPickResource,
     ImageOfTheDayResource,
     ImageResource,
     ImageRevisionResource,
     LocationResource,
     CollectionResource,
-    UserProfileResource)
+    UserProfileResource
+)
 from astrobin.search import AstroBinSearchView
 from astrobin.views import (
     api as api_views,
@@ -132,6 +133,7 @@ v1_api = Api(api_name='v1')
 v1_api.register(LocationResource())
 v1_api.register(ImageResource())
 v1_api.register(ImageRevisionResource())
+v1_api.register(TopPickNominationResource())
 v1_api.register(TopPickResource())
 v1_api.register(ImageOfTheDayResource())
 v1_api.register(CollectionResource())
@@ -332,8 +334,8 @@ urlpatterns += [
     ### AUTOCOMPLETE VIEWS                                                 ###
     ###########################################################################
 
-    url(r'^autocomplete/(?P<what>\w+)/$', lookups.autocomplete, name='autocomplete'),
-    url(r'^autocomplete_user/(?P<what>\w+)/$', lookups.autocomplete_user, name='autocomplete_user'),
+    url(r'^autocomplete-private-message-recipients/$', lookups.autocomplete_private_message_recipients,
+        name='autocomplete_private_message_recipients'),
     url(r'^autocomplete_usernames/$', lookups.autocomplete_usernames, name='autocomplete_usernames'),
     url(r'^autocomplete_images/$', lookups.autocomplete_images, name='autocomplete_images'),
 
@@ -384,7 +386,6 @@ urlpatterns += [
     ### MESSAGES VIEWS                                                      ###
     ###########################################################################
 
-    url(r"^messages/recipient-search/$", messages_recipient_search, name="recipient_search"),
     url(r'^messages/batch-update/$', messages_batch_update, name='messages_batch_update'),
     url(r'^messages/compose/$', messages_compose, {'template_name': 'messages/compose.html'}, name='messages_compose'),
     url(r'^messages/compose/(?P<recipient>[\w.@+-]+)/$', messages_compose, {'template_name': 'messages/compose.html'},
