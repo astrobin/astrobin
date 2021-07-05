@@ -1,12 +1,10 @@
-import urlparse
-from urllib import urlencode
+from urllib.parse import urlparse, urlencode
 
 from django.conf import settings
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 
 from notification import models as notification
-from persistent_messages.models import Message
 
 
 def clear_notifications_template_cache(username):

@@ -9,7 +9,7 @@ import string
 import unicodedata
 import uuid
 from datetime import datetime
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 import boto3
 from django.core.files.images import get_image_dimensions
@@ -59,13 +59,6 @@ from celery.result import AsyncResult
 from model_utils.managers import InheritanceManager
 from safedelete.models import SafeDeleteModel
 from toggleproperties.models import ToggleProperty
-
-try:
-    # Django < 1.10
-    from timezones.forms import PRETTY_TIMEZONE_CHOICES
-except:
-    # Django >= 1.10
-    from timezones.zones import PRETTY_TIMEZONE_CHOICES
 
 from astrobin_apps_images.managers import ImagesManager, PublicImagesManager, WipImagesManager, ImageRevisionsManager, \
     UploadsInProgressImagesManager, UploadsInProgressImageRevisionsManager
@@ -2146,13 +2139,6 @@ class UserProfile(SafeDeleteModel):
         blank=True
     )
 
-    timezone = models.CharField(
-        max_length=255,
-        choices=PRETTY_TIMEZONE_CHOICES,
-        blank=True, null=True,
-        verbose_name=_("Timezone"),
-        help_text=_("By selecting this, you will see all the dates on AstroBin in your timezone."))
-
     about = models.TextField(
         null=True,
         blank=True,
@@ -2796,10 +2782,10 @@ class ImageOfTheDayCandidate(models.Model):
 
     def save(self, *args, **kwargs):
         if self.image.user.userprofile.exclude_from_competitions:
-            raise ValidationError, "User is excluded from competitions"
+            raise ValidationError("User is excluded from competitions")
 
         if self.image.user.userprofile.banned_from_competitions:
-            raise ValidationError, "User is banned from competitions"
+            raise ValidationError("User is banned from competitions")
 
         super(ImageOfTheDayCandidate, self).save(*args, **kwargs)
 

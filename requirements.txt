@@ -1,10 +1,10 @@
 -e git+https://github.com/astrobin/django-activity-stream.git@c6eb3bab372414f1db9fc38515295d7235b032e8#egg=django_activity_stream
 -e git+https://github.com/astrobin/django-change-email.git@e64be68dd0b3b36e8c683fd4a101842d0fe4e1cb#egg=django_change_email
 -e git+https://github.com/astrobin/django-hitcount.git@3acf5bdb9728ca8c38cd792dd746114c9076ae88#egg=django_hitcount
--e git+https://github.com/astrobin/django-notification.git@094c70829e2540f13268adf006b2f0f040cb3b27#egg=django_notification
--e git+https://github.com/astrobin/django-persistent-messages.git@624d4d34fb745b96a30e69c02940efb651c84baf#egg=django_persistent_messages
+-e git+https://github.com/astrobin/django-notification.git@73245cf2a2a1d8ece270fb3f6627b492b9687541#egg=django_notification
+-e git+https://github.com/astrobin/django-persistent-messages.git@74b989f6e2932496d66a62c07f01eb4e390f8b2a#egg=django_persistent_messages
 -e git+https://github.com/astrobin/django-subscription.git@1fa6a749f21549dd96591a6dfa267c3712c4f21f#egg=django_subscription
--e git+https://github.com/astrobin/django-threaded-messages.git@da86dea6dd854f9ab37201d3953f9d028faa85e9#egg=django_threaded_messages
+-e git+https://github.com/astrobin/django-threaded-messages.git@ece1082d445a6cc8f1fdfb3885ca43aab9c81abd#egg=django_threaded_messages
 -e git+https://github.com/astrobin/easy-thumbnails.git@9b57a875ff3c99801f30e8ab25b7938a654934e4#egg=easy-thumbnails
 -e git+https://github.com/nickhargreaves/django-bootstrap-toolkit.git@edbfafbd01705aed0580205a81323d1545e4d733#egg=django_bootstrap_toolkit
 -e git+https://github.com/siovene/django-ember.git@b925ecd22c8008ccb339a4977d0081972c58f39f#egg=django_ember
@@ -40,7 +40,7 @@ contextlib2==0.6.0.post1
 coverage==5.5
 cryptography==2.9.2
 cssmin==0.2.0
-cssselect==1.1.0
+cssselect==1.1.0views/__init__.py
 defusedxml==0.7.1
 django-annoying==0.10.6
 django-appconf==1.0.2
@@ -85,7 +85,6 @@ django-staticfiles==1.2.1
 django-storages==1.9.1
 django-tagging==0.5.0
 django-tastypie==0.14.3
-django-timezones==0.2
 django-tinymce==2.9.0
 django-user-agents==0.4.0
 django-xmlrpc==0.1.8

@@ -4,7 +4,7 @@ from django import template
 from django.contrib.contenttypes.models import ContentType
 from django.template import Library, Node
 from django.template.defaultfilters import stringfilter, urlencode
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 from django.utils.functional import allow_lazy
 from django.utils.safestring import mark_safe
 
@@ -146,7 +146,7 @@ def string_to_list(string):
 
 
 def truncate_chars(s, num):
-    s = force_unicode(s)
+    s = force_text(s)
     length = int(num)
     if len(s) > length:
         length = length - 3
