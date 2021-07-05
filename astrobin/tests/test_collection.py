@@ -4,7 +4,6 @@ import simplejson
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-from mock import patch
 
 from astrobin.models import Collection
 from astrobin.models import Image
@@ -18,10 +17,6 @@ class CollectionTest(TestCase):
 
         self.user.default_gallery_section = 5
         self.user.save()
-
-    def tearDown(self):
-        self.user.delete()
-        self.user2.delete()
 
     ###########################################################################
     # HELPERS                                                                 #
@@ -89,9 +84,6 @@ class CollectionTest(TestCase):
         # Collection has no images
         self.assertContains(response, "collection-image empty")
 
-        image.delete()
-        collection.delete()
-
     def test_collection_update_view(self):
         self.client.login(username='test', password='password')
         self._create_collection(self.user, 'test_collection', 'test_description')
@@ -127,10 +119,6 @@ class CollectionTest(TestCase):
         )
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image1.pk, "collection"), response.content))
 
-        image1.delete()
-        image2.delete()
-        collection.delete()
-
     def test_collection_delete_view(self):
         # Create a collection
         self.client.login(username='test', password='password')
@@ -142,8 +130,6 @@ class CollectionTest(TestCase):
             reverse('user_collections_delete', args=(self.user.username, collection.pk)),
             follow=True)
         self.assertNotContains(response, "test_collection")
-
-        image.delete()
 
     def test_collection_add_remove_images_view(self):
         # Create a collection
@@ -169,11 +155,6 @@ class CollectionTest(TestCase):
             follow=True)
 
         self.assertEqual(collection.images.count(), 2)
-
-        image.delete()
-        image2.delete()
-        collection.delete()
-
 
     def test_collection_order_by_tag(self):
         self.client.login(username='test', password='password')
@@ -217,11 +198,6 @@ class CollectionTest(TestCase):
         self.assertContains(response, image1.hash)
         self.assertContains(response, image2.hash)
         self.assertTrue(encoded_response.find(image1.hash) < encoded_response.find(image2.hash))
-
-        image1.delete()
-        image2.delete()
-        collection.delete()
-
 
     def test_collection_quick_edit_key_value_tags(self):
         self.client.login(username='test', password='password')
@@ -268,12 +244,7 @@ class CollectionTest(TestCase):
         self.assertEqual("9", image1.keyvaluetags.get(key="b").value)
 
         self.assertEqual(2, image2.keyvaluetags.count())
-        self.assertEqual("10", image2   .keyvaluetags.get(key="b").value)
-
-        image1.delete()
-        image2.delete()
-        collection.delete()
-
+        self.assertEqual("10", image2.keyvaluetags.get(key="b").value)
 
     def test_collection_navigation_links(self):
         self.client.login(username='test', password='password')
@@ -304,7 +275,3 @@ class CollectionTest(TestCase):
 
         self.assertContains(response, "data-test=\"image-prev-" + image2.get_id() + "\"")
         self.assertContains(response, "data-test=\"image-next-none\"")
-
-        image1.delete()
-        image2.delete()
-        collection.delete()
