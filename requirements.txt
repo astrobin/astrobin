@@ -21,7 +21,6 @@ awscli==1.19.105
 backports-abc==0.5
 bbcode==1.1.0
 beautifulsoup4==4.6.0
-BeautifulSoup==3.2.2
 beautifulsoupselect==0.2
 billiard==3.6.4.0
 bleach==3.1.4
@@ -100,13 +99,12 @@ fanstatic==1.1
 flickrapi==2.4.0
 funcsigs==1.0.2
 future==0.18.2
-futures==3.3.0
+futures==3.1.1
 fuzzywuzzy[speedup]==0.18
 geoip2==3.0.0
 gevent==20.6.0
 gprof2dot==2021.2.21
 greenlet==0.4.16
-gunicorn-console==0.1.16
 gunicorn==19.10.0
 html5lib==1.1
 httplib2==0.19.1
@@ -144,7 +142,7 @@ pbr==5.6.0
 pem==21.2.0
 Pillow==6.2.2
 ply==3.11
-psycopg2==2.7.1
+psycopg2==2.9.1
 pyasn1==0.4.8
 pycodestyle==2.7.0
 pycparser==2.20
@@ -153,7 +151,6 @@ Pygments==2.5.2
 pyOpenSSL==20.0.1
 pyparsing==2.4.7
 pyquery==1.4.3
-pyrg==0.2.6
 pystache==0.5.4
 python-daemon==2.3.0
 python-dateutil==2.8.1
@@ -173,7 +170,6 @@ rjsmin==1.1.0
 rsa==4.5
 s3transfer==0.4.2
 scandir==1.10.0
-setproctitle==1.1.10
 simplejson==3.17.2
 singledispatch==3.6.2
 six==1.16.0
@@ -186,7 +182,6 @@ stripe==2.58.0
 tblib==1.7.0
 termcolor==1.1.0
 tornado==5.1.1
-typing==3.10.0.0
 ua-parser==0.10.0
 uncompyle6==3.7.4
 Unidecode==1.2.0
