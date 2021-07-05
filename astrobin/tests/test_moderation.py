@@ -20,13 +20,6 @@ class ModerationTest(TestCase):
 
         self.moderator.groups.add(self.content_moderators, self.image_moderators)
 
-    def tearDown(self):
-        self.content_moderators.delete()
-        self.image_moderators.delete()
-        self.user.delete()
-        self.moderator.delete()
-        self.superuser.delete()
-
     def _do_upload(self, filename, wip=False):
         data = {'image_file': open(filename, 'rb')}
         if wip:
@@ -99,9 +92,6 @@ class ModerationTest(TestCase):
         self.assertEqual(response.status_code, 200)
         image = Image.objects_including_wip.get(pk=image.pk)
         self.assertEqual(image.moderator_decision, 2)
-
-        image.delete()
-
 
     def test_spam_user_gallery(self):
         self.client.login(username='user', password='password')
