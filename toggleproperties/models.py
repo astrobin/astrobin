@@ -3,6 +3,7 @@ import logging
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.db import models, IntegrityError
+from django.db.models import SET_NULL, CASCADE
 from django.dispatch import receiver
 
 log = logging.getLogger("apps")
@@ -87,8 +88,8 @@ class TogglePropertyManager(models.Manager):
 
 class ToggleProperty(models.Model):
     property_type = models.CharField(max_length=64)
-    user = models.ForeignKey(User)
-    content_type = models.ForeignKey(ContentType)
+    user = models.ForeignKey(User, on_delete=SET_NULL)
+    content_type = models.ForeignKey(ContentType, on_delete=CASCADE)
     object_id = models.TextField()
     content_object = GenericForeignKey('content_type', 'object_id')
 

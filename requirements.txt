@@ -1,8 +1,8 @@
 -e git+https://github.com/astrobin/django-activity-stream.git@c6eb3bab372414f1db9fc38515295d7235b032e8#egg=django_activity_stream
 -e git+https://github.com/astrobin/django-change-email.git@e64be68dd0b3b36e8c683fd4a101842d0fe4e1cb#egg=django_change_email
 -e git+https://github.com/astrobin/django-hitcount.git@3acf5bdb9728ca8c38cd792dd746114c9076ae88#egg=django_hitcount
--e git+https://github.com/astrobin/django-notification.git@73245cf2a2a1d8ece270fb3f6627b492b9687541#egg=django_notification
--e git+https://github.com/astrobin/django-persistent-messages.git@74b989f6e2932496d66a62c07f01eb4e390f8b2a#egg=django_persistent_messages
+-e git+https://github.com/astrobin/django-notification.git@cdd49112efae4c2fde338a9e0714432bf9afd031#egg=django_notification
+-e git+https://github.com/astrobin/django-persistent-messages.git@c7341eed3db9addfa77c0a7b6b4f8d99c54b41a2#egg=django_persistent_messages
 -e git+https://github.com/astrobin/django-subscription.git@1fa6a749f21549dd96591a6dfa267c3712c4f21f#egg=django_subscription
 -e git+https://github.com/astrobin/django-threaded-messages.git@066d046f2f92e5d1e590cb41baf7d17e3718e96c#egg=django_threaded_messages
 -e git+https://github.com/astrobin/easy-thumbnails.git@9b57a875ff3c99801f30e8ab25b7938a654934e4#egg=easy-thumbnails
@@ -62,9 +62,9 @@ django-debug-toolbar==1.11.1
 django-easysettings==2.0.1
 django-el-pagination==3.3.0
 django-extensions==2.2.9
-django-filter==1.1.0
+django-filter==2.4.0
 django-haystack==2.8.1
-django-image-cropping==1.1.0
+django-image-cropping==1.5.0
 django-keyedcache==1.5.1
 django-kombu==0.9.4
 django-maintenancemode==0.11.4
@@ -88,7 +88,7 @@ django-tastypie==0.14.3
 django-tinymce==2.9.0
 django-user-agents==0.4.0
 django-xmlrpc==0.1.8
-Django==1.11.29
+Django==2.2.24
 djangorestframework-camel-case==1.0.3
 djangorestframework==3.6.3
 docutils==0.17.1

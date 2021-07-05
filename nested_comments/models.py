@@ -1,5 +1,6 @@
 # Django
 from django.contrib.auth.models import User
+from django.db.models import CASCADE
 
 from toggleproperties.models import ToggleProperty
 
@@ -22,6 +23,7 @@ def get_sentinel_user():
 class NestedComment(models.Model):
     content_type = models.ForeignKey(
         ContentType,
+        on_delete=CASCADE
     )
 
     object_id = models.PositiveIntegerField()
