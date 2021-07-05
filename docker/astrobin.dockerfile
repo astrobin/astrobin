@@ -51,9 +51,8 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 RUN mkdir /code
 COPY requirements.txt /code
 WORKDIR /code
-RUN
-    pip3 install --upgrade pip && \
-    pip3 install "setuptools" && \
+RUN pip3 install --upgrade pip && \
+    pip3 install setuptools && \
     pip3 install --no-deps -r requirements.txt --src /src
 
 # Install global node dependencies
