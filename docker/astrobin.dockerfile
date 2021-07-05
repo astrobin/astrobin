@@ -1,5 +1,5 @@
 # Get the base
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 MAINTAINER Salvatore Iovene <salvatore@astrobin.com>
 
 # Install build prerequisites
@@ -51,7 +51,10 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 RUN mkdir /code
 COPY requirements.txt /code
 WORKDIR /code
-RUN pip3 install --no-deps -r requirements.txt --src /src
+RUN
+    pip3 install --upgrade pip && \
+    pip3 install "setuptools" && \
+    pip3 install --no-deps -r requirements.txt --src /src
 
 # Install global node dependencies
 RUN yarn global add \
