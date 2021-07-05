@@ -513,7 +513,7 @@ def group_members_changed(sender, instance, **kwargs):
         'IOTD Reviewers': ['iotd_reviewers', 'content_moderators', 'iotd_staff'],
         'IOTD Judges': ['iotd_judges', 'content_moderators', 'iotd_staff'],
     }
-    if instance.name in group_sync_map.keys():
+    if instance.name in list(group_sync_map.keys()):
         for django_group in group_sync_map[instance.name]:
             DjangoGroup.objects.get_or_create(name=django_group)
         django_groups = DjangoGroup.objects.filter(name__in=group_sync_map[instance.name])
@@ -552,7 +552,7 @@ def group_members_changed(sender, instance, **kwargs):
                 instance.images.add(image)
 
         # Sync IOTD AstroBin groups with django groups
-        if instance.name in group_sync_map.keys():
+        if instance.name in list(group_sync_map.keys()):
             for django_group in django_groups:
                 django_group.user_set.add(*list(users))
             if iotd_staff_group:
@@ -571,12 +571,12 @@ def group_members_changed(sender, instance, **kwargs):
                 topic.subscribers.remove(*User.objects.filter(pk__in=kwargs['pk_set']))
 
         # Sync IOTD AstroBin groups with django groups
-        if instance.name in group_sync_map.keys():
+        if instance.name in list(group_sync_map.keys()):
             all_members = []
             all_members_chain = chain([
                 x.members.all()
                 for x in Group.objects \
-                    .filter(name__in=group_sync_map.keys()) \
+                    .filter(name__in=list(group_sync_map.keys())) \
                     .exclude(name=instance.name)
             ])
             for chain_item in all_members_chain:
@@ -590,12 +590,12 @@ def group_members_changed(sender, instance, **kwargs):
     elif action == 'pre_clear':
         # Sync IOTD AstroBin groups with django groups
         users = instance.members.all()
-        if instance.name in group_sync_map.keys():
+        if instance.name in list(group_sync_map.keys()):
             all_members = []
             all_members_chain = chain([
                 x.members.all()
                 for x in Group.objects \
-                    .filter(name__in=group_sync_map.keys()) \
+                    .filter(name__in=list(group_sync_map.keys())) \
                     .exclude(name=instance.name)
             ])
             for chain_item in all_members_chain:

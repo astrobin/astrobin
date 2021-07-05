@@ -3,8 +3,9 @@ from email.encoders import encode_noop
 from email.mime.application import MIMEApplication
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
-from urllib import urlencode
-from urllib2 import urlopen, Request, HTTPError
+from urllib.parse import urlencode
+from urllib.request import urlopen, Request
+from urllib.error import HTTPError
 
 import requests
 from django.conf import settings
@@ -12,8 +13,8 @@ from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 
 from astrobin_apps_platesolving.backends.base import AbstractPlateSolvingBackend
-from errors import RequestError
-from utils import json2python, python2json
+from .errors import RequestError
+from .utils import json2python, python2json
 
 base_url = 'http://nova.astrometry.net'
 default_url = base_url + '/api/'
@@ -52,7 +53,7 @@ class Solver(AbstractPlateSolvingBackend):
             mp = MIMEMultipart('form-data', None, [m1, m2])
 
             # Make a custom generator to format it the way we need.
-            from cStringIO import StringIO
+            from io import StringIO
             from email.generator import Generator
 
             class MyGenerator(Generator):
@@ -69,7 +70,7 @@ class Solver(AbstractPlateSolvingBackend):
                     # We need to use \r\n line-terminator, but Generator
                     # doesn't provide the flexibility to override, so we
                     # have to copy-n-paste-n-modify.
-                    for h, v in msg.items():
+                    for h, v in list(msg.items()):
                         self._fp.write('%s: %s\r\n' % (h, v))
 
                     # A blank line always separates headers from body

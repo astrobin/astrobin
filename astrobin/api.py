@@ -366,11 +366,11 @@ class ImageResource(ModelResource):
 
     def dehydrate_imaging_telescopes(self, bundle):
         telescopes = bundle.obj.imaging_telescopes.all()
-        return [unicode(x) for x in telescopes]
+        return [str(x) for x in telescopes]
 
     def dehydrate_imaging_cameras(self, bundle):
         cameras = bundle.obj.imaging_cameras.all()
-        return [unicode(x) for x in cameras]
+        return [str(x) for x in cameras]
 
     def dehydrate_license(self, bundle):
         return License.to_deprecated_integer(bundle.obj.license)

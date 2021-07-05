@@ -35,14 +35,14 @@ class Command(BaseCommand):
                 if matches[i] != item.make:
                     print('\t%d. %s' % (i, matches[i]))
 
-            to_merge = raw_input("Which ones do I merge [space separated, or q]? ")
+            to_merge = input("Which ones do I merge [space separated, or q]? ")
 
             if to_merge == 'q':
                 return
             elif to_merge == '':
                 continue
 
-            new_make = raw_input("New make name [%s]? " % item.make).decode(sys.stdin.encoding)
+            new_make = input("New make name [%s]? " % item.make).decode(sys.stdin.encoding)
             if new_make == '':
                 new_make = item.make
 

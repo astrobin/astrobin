@@ -40,10 +40,10 @@ def query_string(parser, token):
     try:
         tag_name, add_string, remove_string = token.split_contents()
     except ValueError:
-        raise template.TemplateSyntaxError, "%r tag requires two arguments" % token.contents.split()[0]
+        raise template.TemplateSyntaxError("%r tag requires two arguments" % token.contents.split()[0])
     if not (add_string[0] == add_string[-1] and add_string[0] in ('"', "'")) or not (
             remove_string[0] == remove_string[-1] and remove_string[0] in ('"', "'")):
-        raise template.TemplateSyntaxError, "%r tag's argument should be in quotes" % tag_name
+        raise template.TemplateSyntaxError("%r tag's argument should be in quotes" % tag_name)
 
     add = string_to_dict(add_string[1:-1])
     remove = string_to_list(remove_string[1:-1])
@@ -79,7 +79,7 @@ def get_query_string(p_list, p_dict, new_params, remove, context):
     """
     for r in remove:
         p_list = [[x[0], x[1]] for x in p_list if not x[0].startswith(r)]
-    for k, v in new_params.items():
+    for k, v in list(new_params.items()):
         if k in p_dict and v is None:
             p_list = [[x[0], x[1]] for x in p_list if not x[0] == k]
         elif k in p_dict and v is not None:
@@ -94,7 +94,7 @@ def get_query_string(p_list, p_dict, new_params, remove, context):
         if len(p_list[i][1]) == 1:
             p_list[i][1] = p_list[i][1][0]
         else:
-            p_list[i][1] = mark_safe('&amp;'.join([u'%s=%s' % (p_list[i][0], k) for k in p_list[i][1]]))
+            p_list[i][1] = mark_safe('&amp;'.join(['%s=%s' % (p_list[i][0], k) for k in p_list[i][1]]))
             p_list[i][0] = ''
 
         protected_keys = ['q', 'subject', 'telescope', 'camera']
@@ -105,7 +105,7 @@ def get_query_string(p_list, p_dict, new_params, remove, context):
             except:
                 pass
 
-    return mark_safe('?' + '&amp;'.join([k[1] if k[0] == '' else u'%s=%s' % (k[0], urlencode(k[1])) for k in p_list if
+    return mark_safe('?' + '&amp;'.join([k[1] if k[0] == '' else '%s=%s' % (k[0], urlencode(k[1])) for k in p_list if
                                          k[1] is not None and k[1] != 'None']).replace(' ', '%20'))
 
 
@@ -155,7 +155,7 @@ def truncate_chars(s, num):
     return s
 
 
-truncate_chars = allow_lazy(truncate_chars, unicode)
+truncate_chars = allow_lazy(truncate_chars, str)
 
 
 @register.filter

@@ -74,7 +74,7 @@ class TestDataLossCompensationRequestView(TestCase):
 
         self.client.login(username='test', password='password')
         response = self.client.get(reverse('astrobin_apps_premium.data_loss_compensation_request'))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_already_done(self):
         user = User.objects.create_user('test', 'test@test.com', 'password')
@@ -113,7 +113,7 @@ class TestDataLossCompensationRequestView(TestCase):
             target_status_code=200)
 
         compensation_request = DataLossCompensationRequest.objects.get(user=user)
-        self.assertEquals(compensation_request.requested_compensation, 'NOT_REQUIRED')
+        self.assertEqual(compensation_request.requested_compensation, 'NOT_REQUIRED')
 
     def test_submit_1_mo_ultimate(self):
         user = User.objects.create_user('test', 'test@test.com', 'password')
@@ -136,7 +136,7 @@ class TestDataLossCompensationRequestView(TestCase):
             target_status_code=200)
 
         compensation_request = DataLossCompensationRequest.objects.get(user=user)
-        self.assertEquals(compensation_request.requested_compensation, '1_MO_ULTIMATE')
+        self.assertEqual(compensation_request.requested_compensation, '1_MO_ULTIMATE')
 
         ultimate = get_object_or_None(UserSubscription, user=user, subscription__name='AstroBin Ultimate 2020+')
         premium = get_object_or_None(UserSubscription, user=user, subscription__name='AstroBin Premium')
@@ -173,7 +173,7 @@ class TestDataLossCompensationRequestView(TestCase):
             target_status_code=200)
 
         compensation_request = DataLossCompensationRequest.objects.get(user=user)
-        self.assertEquals(compensation_request.requested_compensation, '3_MO_ULTIMATE')
+        self.assertEqual(compensation_request.requested_compensation, '3_MO_ULTIMATE')
 
         ultimate = get_object_or_None(UserSubscription, user=user, subscription__name='AstroBin Ultimate 2020+')
 
@@ -206,7 +206,7 @@ class TestDataLossCompensationRequestView(TestCase):
             target_status_code=200)
 
         compensation_request = DataLossCompensationRequest.objects.get(user=user)
-        self.assertEquals(compensation_request.requested_compensation, '6_MO_ULTIMATE')
+        self.assertEqual(compensation_request.requested_compensation, '6_MO_ULTIMATE')
 
         ultimate = get_object_or_None(UserSubscription, user=user, subscription__name='AstroBin Ultimate 2020+')
 
@@ -244,7 +244,7 @@ class TestDataLossCompensationRequestView(TestCase):
             target_status_code=200)
 
         compensation_request = DataLossCompensationRequest.objects.get(user=user)
-        self.assertEquals(compensation_request.requested_compensation, '6_MO_ULTIMATE')
+        self.assertEqual(compensation_request.requested_compensation, '6_MO_ULTIMATE')
 
         ultimate = get_object_or_None(UserSubscription, user=user, subscription__name='AstroBin Ultimate 2020+')
 

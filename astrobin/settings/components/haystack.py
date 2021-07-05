@@ -16,10 +16,10 @@ class AWS4AuthEncodingFix(AWS4Auth):
     def _encode_header_to_utf8(self, request, header_name):
         value = request.headers[header_name]
 
-        if isinstance(value, unicode):
+        if isinstance(value, str):
             value = value.encode('utf-8')
 
-        if isinstance(header_name, unicode):
+        if isinstance(header_name, str):
             del request.headers[header_name]
             header_name = header_name.encode('utf-8')
 

@@ -111,7 +111,7 @@ class ImageTest(TestCase):
             data['skip_notifications'] = True
 
         if mark_as_final:
-            data['mark_as_final'] = u'on'
+            data['mark_as_final'] = 'on'
 
         return self.client.post(
             reverse('image_revision_upload_process'),
@@ -223,7 +223,7 @@ class ImageTest(TestCase):
             status_code=302,
             target_status_code=200)
 
-        self.assertEqual(image.title, u"")
+        self.assertEqual(image.title, "")
         self.assertTrue((image.published - image.uploaded).total_seconds() < 1)
 
         # Test thumbnails
@@ -2498,7 +2498,7 @@ class ImageTest(TestCase):
             reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
-        self.assertEquals(image.acquisition_set.count(), 1)
+        self.assertEqual(image.acquisition_set.count(), 1)
         dsa = DeepSky_Acquisition.objects.filter(image=image)[0]
         post_data = post_data_deep_sky_simple(image)
         self.assertEqual(dsa.date.strftime("%Y-%m-%d"), post_data['date'])
@@ -2512,7 +2512,7 @@ class ImageTest(TestCase):
         response = self.client.post(post_url(), post_data)
         self.assertEqual(response.status_code, 200)
         self._assert_message(response, "error unread", "errors processing the form")
-        self.assertEquals(image.acquisition_set.count(), 0)
+        self.assertEqual(image.acquisition_set.count(), 0)
 
         # POST advanced deep sky
         response = self.client.post(
@@ -2524,7 +2524,7 @@ class ImageTest(TestCase):
             reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
-        self.assertEquals(image.acquisition_set.count(), 1)
+        self.assertEqual(image.acquisition_set.count(), 1)
         dsa = DeepSky_Acquisition.objects.filter(image=image)[0]
         post_data = post_data_deep_sky_advanced(image)
         self.assertEqual(dsa.date.strftime("%Y-%m-%d"), post_data['deepsky_acquisition_set-0-date'])
@@ -2549,7 +2549,7 @@ class ImageTest(TestCase):
         post_data['add_more'] = True
         response = self.client.post(post_url(), post_data)
         self.assertEqual(response.status_code, 200)
-        self.assertEquals(image.acquisition_set.count(), 1)
+        self.assertEqual(image.acquisition_set.count(), 1)
         image.acquisition_set.all().delete()
 
         # POST advanced deep sky invalid form
@@ -2558,7 +2558,7 @@ class ImageTest(TestCase):
         response = self.client.post(post_url(), post_data)
         self.assertEqual(response.status_code, 200)
         self._assert_message(response, "error unread", "errors processing the form")
-        self.assertEquals(image.acquisition_set.count(), 0)
+        self.assertEqual(image.acquisition_set.count(), 0)
 
         # POST with missing image_id
         response = self.client.post(post_url(), {}, follow=True)
@@ -2570,7 +2570,7 @@ class ImageTest(TestCase):
         response = self.client.post(post_url(), post_data, follow=True)
         self.assertEqual(response.status_code, 200)
         self._assert_message(response, "error unread", "errors processing the form")
-        self.assertEquals(image.acquisition_set.count(), 0)
+        self.assertEqual(image.acquisition_set.count(), 0)
 
         # POST with existing SSA
         ssa, created = SolarSystem_Acquisition.objects.get_or_create(
@@ -2583,7 +2583,7 @@ class ImageTest(TestCase):
             reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
-        self.assertEquals(image.acquisition_set.count(), 1)
+        self.assertEqual(image.acquisition_set.count(), 1)
         ssa = SolarSystem_Acquisition.objects.filter(image=image)[0]
         post_data = post_data_solar_system(image)
         self.assertEqual(ssa.date.strftime("%Y-%m-%d"), post_data['date'])
@@ -2655,7 +2655,7 @@ class ImageTest(TestCase):
             target_status_code=200)
         self._assert_message(response, "success unread", "Form saved")
         image = Image.objects.get(pk=image.pk)
-        self.assertEquals(image.license, License.ATTRIBUTION_NO_DERIVS)
+        self.assertEqual(image.license, License.ATTRIBUTION_NO_DERIVS)
 
         self.client.logout()
 
@@ -2708,7 +2708,7 @@ class ImageTest(TestCase):
             target_status_code=200)
         self._assert_message(response, "success unread", "Form saved")
         revision = ImageRevision.objects.get(pk=revision.pk)
-        self.assertEquals(revision.description, "Updated revision description")
+        self.assertEqual(revision.description, "Updated revision description")
 
         self.client.logout()
 
@@ -2739,7 +2739,7 @@ class ImageTest(TestCase):
         self.assertIsNotNone(revision.solution.settings)
         self.assertIsNotNone(revision.solution.advanced_settings)
         self.assertFalse(revision.solution.settings.blind)
-        self.assertEquals('S', revision.solution.advanced_settings.scaled_font_size)
+        self.assertEqual('S', revision.solution.advanced_settings.scaled_font_size)
 
     def test_image_delete_has_permanently_deleted_text(self):
         self.client.login(username='test', password='password')
@@ -2803,7 +2803,7 @@ class ImageTest(TestCase):
             reverse('user_page', kwargs={'username': image.user.username}),
             status_code=302,
             target_status_code=200)
-        self.assertEquals(Image.objects_including_wip.filter(pk=image.pk).count(), 0)
+        self.assertEqual(Image.objects_including_wip.filter(pk=image.pk).count(), 0)
 
         # Test for success
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -2814,7 +2814,7 @@ class ImageTest(TestCase):
             reverse('user_page', kwargs={'username': image.user.username}),
             status_code=302,
             target_status_code=200)
-        self.assertEquals(Image.objects_including_wip.filter(pk=image.pk).count(), 0)
+        self.assertEqual(Image.objects_including_wip.filter(pk=image.pk).count(), 0)
         self.client.logout()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
@@ -2851,7 +2851,7 @@ class ImageTest(TestCase):
             reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
-        self.assertEquals(ImageRevision.objects.filter(pk=revision.pk).count(), 0)
+        self.assertEqual(ImageRevision.objects.filter(pk=revision.pk).count(), 0)
         self.assertTrue(image.is_final)
         self.assertFalse(ImageRevision.deleted_objects.get(pk=revision.pk).is_final)
         self.client.logout()
@@ -2877,8 +2877,8 @@ class ImageTest(TestCase):
         # Test when there are no revisions
         self.client.login(username='test', password='password')
         response = self.client.post(post_url((image.get_id(),)))
-        self.assertEquals(400, response.status_code)
-        self.assertEquals(Image.objects.filter(pk=image.pk).count(), 1)
+        self.assertEqual(400, response.status_code)
+        self.assertEqual(Image.objects.filter(pk=image.pk).count(), 1)
 
         # Test for success when image was not final
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -2891,7 +2891,7 @@ class ImageTest(TestCase):
             reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
-        self.assertEquals(ImageRevision.objects.filter(image=image).count(), 0)
+        self.assertEqual(ImageRevision.objects.filter(image=image).count(), 0)
         image.delete()
 
         # Test for success when image was final
@@ -2911,7 +2911,7 @@ class ImageTest(TestCase):
             reverse('image_detail', kwargs={'id': image.get_id()}),
             status_code=302,
             target_status_code=200)
-        self.assertEquals(ImageRevision.objects.filter(image=image).count(), 0)
+        self.assertEqual(ImageRevision.objects.filter(image=image).count(), 0)
         image.delete()
 
         self.client.logout()
@@ -2933,8 +2933,8 @@ class ImageTest(TestCase):
 
         self.client.login(username='test', password='password')
         response = self.client.post(reverse('image_delete_other_versions', args=(image.pk,)))
-        self.assertEquals(400, response.status_code)
-        self.assertEquals(1, Image.objects.filter(pk=image.pk).count())
+        self.assertEqual(400, response.status_code)
+        self.assertEqual(1, Image.objects.filter(pk=image.pk).count())
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_delete_other_versions_view_on_original_with_one_final_revision(self):
@@ -2951,12 +2951,12 @@ class ImageTest(TestCase):
 
         response = self.client.post(reverse('image_delete_other_versions', args=(image.pk,)), follow=True)
 
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
 
         image = Image.objects_including_wip.get(pk=image.pk)
 
-        self.assertEquals(0, image.revisions.count())
-        self.assertEquals("foo", image.description)
+        self.assertEqual(0, image.revisions.count())
+        self.assertEqual("foo", image.description)
         self.assertTrue(image.is_final)
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
@@ -2979,11 +2979,11 @@ class ImageTest(TestCase):
 
         response = self.client.post(reverse('image_delete_other_versions', args=(image.pk,)), follow=True)
 
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
 
         image = Image.objects_including_wip.get(pk=image.pk)
 
-        self.assertEquals(0, image.revisions.count())
+        self.assertEqual(0, image.revisions.count())
         self.assertTrue(image.is_final)
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
@@ -3010,11 +3010,11 @@ class ImageTest(TestCase):
 
         response = self.client.post(reverse('image_delete_other_versions', args=(image.pk,)), follow=True)
 
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
 
         image = Image.objects_including_wip.get(pk=image.pk)
 
-        self.assertEquals(0, image.revisions.count())
+        self.assertEqual(0, image.revisions.count())
         self.assertTrue(image.is_final)
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
@@ -3037,12 +3037,12 @@ class ImageTest(TestCase):
             },
             follow=True)
 
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
 
         image = Image.objects_including_wip.get(pk=image.pk)
 
-        self.assertEquals(0, image.revisions.count())
-        self.assertEquals("foo\nbar", image.description)
+        self.assertEqual(0, image.revisions.count())
+        self.assertEqual("foo\nbar", image.description)
         self.assertTrue(image.is_final)
 
     def test_image_promote_view(self):
@@ -3079,7 +3079,7 @@ class ImageTest(TestCase):
         response = self.client.post(post_url((public_image.get_id(),)), follow=True)
         self.assertEqual(response.status_code, 200)
         image = Image.objects.get(pk=public_image.pk)
-        self.assertEquals(image.is_wip, False)
+        self.assertEqual(image.is_wip, False)
 
         # Test WIP image
         self.assertIsNone(wip_image.published)
@@ -3152,15 +3152,15 @@ class ImageTest(TestCase):
         # Test when image was not WIP
         response = self.client.post(post_url((image.get_id(),)))
         image = Image.objects_including_wip.get(pk=image.pk)
-        self.assertEquals(image.is_wip, True)
+        self.assertEqual(image.is_wip, True)
 
         # Test when image was WIP
         response = self.client.post(post_url((image.get_id(),)))
         image = Image.objects_including_wip.get(pk=image.pk)
-        self.assertEquals(image.is_wip, True)
+        self.assertEqual(image.is_wip, True)
 
         # Test that we can't get the image via the regular manager
-        self.assertEquals(Image.objects.filter(pk=image.pk).count(), 0)
+        self.assertEqual(Image.objects.filter(pk=image.pk).count(), 0)
 
         self.client.logout()
         image.delete()
@@ -3177,19 +3177,19 @@ class ImageTest(TestCase):
 
         # As the test user does not have a high enough Image Index, the
         # image should be in the moderation queue.
-        self.assertEquals(image.moderator_decision, 0)
-        self.assertEquals(image.moderated_when, None)
-        self.assertEquals(image.moderated_by, None)
+        self.assertEqual(image.moderator_decision, 0)
+        self.assertEqual(image.moderated_when, None)
+        self.assertEqual(image.moderated_by, None)
 
         # The image should not appear on the front page when logged out
         self.client.logout()
         response = self.client.get(reverse('index'))
-        self.assertEquals(image.title in response.content, False)
+        self.assertEqual(image.title in response.content, False)
 
         # Nor when logged in
         self.client.login(username='test', password='password')
         response = self.client.get(reverse('index'))
-        self.assertEquals(image.title in response.content, False)
+        self.assertEqual(image.title in response.content, False)
 
         # TODO: test image promotion
 
@@ -3204,17 +3204,17 @@ class ImageTest(TestCase):
 
         prop = ToggleProperty.objects.create_toggleproperty('like', image, self.user2)
         image = self._get_last_image()
-        self.assertNotEquals(updated, image.updated)
+        self.assertNotEqual(updated, image.updated)
 
         updated = image.updated
         prop = ToggleProperty.objects.create_toggleproperty('bookmark', image, self.user2)
         image = self._get_last_image()
-        self.assertNotEquals(updated, image.updated)
+        self.assertNotEqual(updated, image.updated)
 
         updated = image.updated
         prop.delete()
         image = self._get_last_image()
-        self.assertNotEquals(updated, image.updated)
+        self.assertNotEqual(updated, image.updated)
 
         image.delete()
         self.client.logout()
@@ -3242,7 +3242,7 @@ class ImageTest(TestCase):
             follow=True)
 
         image = self._get_last_image()
-        self.assertNotEquals(updated, image.updated)
+        self.assertNotEqual(updated, image.updated)
 
         image.delete()
         self.client.logout()
@@ -3262,7 +3262,7 @@ class ImageTest(TestCase):
             text="Test")
 
         image = self._get_last_image()
-        self.assertNotEquals(updated, image.updated)
+        self.assertNotEqual(updated, image.updated)
 
         image.delete()
         self.client.logout()
@@ -3284,13 +3284,13 @@ class ImageTest(TestCase):
         revision = self._get_last_image_revision()
 
         image = Image.objects.get(pk=image.pk)
-        self.assertEquals(1, image.revisions.count())
+        self.assertEqual(1, image.revisions.count())
 
         revision.delete()
         with self.assertRaises(ImageRevision.DoesNotExist):
             revision = ImageRevision.objects.get(pk=revision.pk)
         image = Image.objects.get(pk=image.pk)
-        self.assertEquals(0, image.revisions.count())
+        self.assertEqual(0, image.revisions.count())
         self.assertFalse(ImageRevision.objects.filter(pk=revision.pk).exists())
         self.assertTrue(ImageRevision.all_objects.filter(pk=revision.pk).exists())
 
@@ -3304,7 +3304,7 @@ class ImageTest(TestCase):
         image.save()
 
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertEquals(404, response.status_code)
+        self.assertEqual(404, response.status_code)
 
     def test_image_corrupted_goes_to_404_if_anon_and_r0(self):
         self.client.login(username='test', password='password')
@@ -3316,7 +3316,7 @@ class ImageTest(TestCase):
         image.save()
 
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': '0'}), follow=True)
-        self.assertEquals(404, response.status_code)
+        self.assertEqual(404, response.status_code)
 
     def test_image_corrupted_goes_to_edit_if_owner(self):
         self.client.login(username='test', password='password')
@@ -3356,7 +3356,7 @@ class ImageTest(TestCase):
         self.client.logout()
 
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': revision.label}))
-        self.assertEquals(404, response.status_code)
+        self.assertEqual(404, response.status_code)
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_revision_corrupted_ok_if_anon_and_r0(self):
@@ -3374,7 +3374,7 @@ class ImageTest(TestCase):
         self.client.logout()
 
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': '0'}))
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_revision_corrupted_ok_if_owner_and_r0(self):
@@ -3390,7 +3390,7 @@ class ImageTest(TestCase):
         revision.save()
 
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': '0'}))
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_revision_corrupted_goes_to_edit_revision_if_owner(self):
@@ -3423,10 +3423,10 @@ class ImageTest(TestCase):
         self.client.logout()
 
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}), follow=True)
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
 
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': revision.label}))
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_corrupted_404_if_non_final_revision_and_anon(self):
@@ -3448,7 +3448,7 @@ class ImageTest(TestCase):
         self.client.logout()
 
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}), follow=True)
-        self.assertEquals(404, response.status_code)
+        self.assertEqual(404, response.status_code)
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_corrupted_goes_to_edit_if_non_final_revision_and_owner(self):
@@ -3490,7 +3490,7 @@ class ImageTest(TestCase):
         self.client.logout()
 
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': revision.label}))
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_corrupted_ok_if_non_final_revision_direct_link_and_owner(self):
@@ -3511,7 +3511,7 @@ class ImageTest(TestCase):
 
         response = self.client.get(
             reverse('image_detail', kwargs={'id': image.get_id(), 'r': revision.label}))
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
 
     #
 
@@ -3525,7 +3525,7 @@ class ImageTest(TestCase):
         image.save()
 
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id()}))
-        self.assertEquals(404, response.status_code)
+        self.assertEqual(404, response.status_code)
 
     def test_image_full_corrupted_goes_to_404_if_anon_and_r0(self):
         self.client.login(username='test', password='password')
@@ -3537,7 +3537,7 @@ class ImageTest(TestCase):
         image.save()
 
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': '0'}), follow=True)
-        self.assertEquals(404, response.status_code)
+        self.assertEqual(404, response.status_code)
 
     def test_image_full_corrupted_goes_to_edit_if_owner(self):
         self.client.login(username='test', password='password')
@@ -3577,7 +3577,7 @@ class ImageTest(TestCase):
         self.client.logout()
 
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': revision.label}))
-        self.assertEquals(404, response.status_code)
+        self.assertEqual(404, response.status_code)
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_full_revision_corrupted_ok_if_anon_and_r0(self):
@@ -3595,7 +3595,7 @@ class ImageTest(TestCase):
         self.client.logout()
 
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': '0'}))
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_full_revision_corrupted_ok_if_owner_and_r0(self):
@@ -3611,7 +3611,7 @@ class ImageTest(TestCase):
         revision.save()
 
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': '0'}))
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_full_revision_corrupted_goes_to_edit_revision_if_owner(self):
@@ -3644,10 +3644,10 @@ class ImageTest(TestCase):
         self.client.logout()
 
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id()}), follow=True)
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
 
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': revision.label}))
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_full_corrupted_404_if_non_final_revision_and_anon(self):
@@ -3669,7 +3669,7 @@ class ImageTest(TestCase):
         self.client.logout()
 
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id()}), follow=True)
-        self.assertEquals(404, response.status_code)
+        self.assertEqual(404, response.status_code)
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_full_corrupted_goes_to_edit_if_non_final_revision_and_owner(self):
@@ -3711,7 +3711,7 @@ class ImageTest(TestCase):
         self.client.logout()
 
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': revision.label}))
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_full_corrupted_ok_if_non_final_revision_direct_link_and_owner(self):
@@ -3732,7 +3732,7 @@ class ImageTest(TestCase):
 
         response = self.client.get(
             reverse('image_full', kwargs={'id': image.get_id(), 'r': revision.label}))
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
 
     def test_image_platesolving_not_available_on_free(self):
         image = Generators.image()
@@ -3822,7 +3822,7 @@ class ImageTest(TestCase):
 
         image = Generators.image()
 
-        self.assertEquals(2, image.designated_iotd_submitters.count())
+        self.assertEqual(2, image.designated_iotd_submitters.count())
 
     def test_image_designated_iotd_reviewers(self):
         group = Group.objects.create(name='iotd_reviewers')
@@ -3833,4 +3833,4 @@ class ImageTest(TestCase):
 
         image = Generators.image()
 
-        self.assertEquals(2, image.designated_iotd_reviewers.count())
+        self.assertEqual(2, image.designated_iotd_reviewers.count())

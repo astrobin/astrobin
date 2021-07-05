@@ -14,7 +14,7 @@ from common.validators import FileValidator
 def sample_frame_upload_path(instance, filename):
     model = instance.solution.content_object._meta.model_name
     user = instance.solution.content_object.user \
-        if model == u'image' \
+        if model == 'image' \
         else instance.solution.content_object.image.user
     return upload_path('sample_frames', user.pk, filename)
 

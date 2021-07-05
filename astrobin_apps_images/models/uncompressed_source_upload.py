@@ -64,7 +64,7 @@ class UncompressedSourceUpload(models.Model):
     )
 
     def __unicode__(self):
-        return u"UncompressedSourceUpload for image %s: %s" % (self.image.pk, self.uncompressed_source_file)
+        return "UncompressedSourceUpload for image %s: %s" % (self.image.pk, self.uncompressed_source_file)
 
     class Meta:
         app_label = "astrobin_apps_images"

@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 import csv
 import json
@@ -17,7 +17,7 @@ from hitcount.models import HitCount
 from common.services import DateTimeService
 
 if six.PY2:
-    from StringIO import StringIO
+    from io import StringIO
 else:
     from io import StringIO
 from datetime import datetime, timedelta
@@ -371,33 +371,33 @@ def prepare_download_data_archive(request_id):
 
             csv_writer.writerow([
                 image.get_id(),
-                unicode(image.title).encode('utf-8'),
+                str(image.title).encode('utf-8'),
                 image.acquisition_type,
                 ImageService(image).get_subject_type_label(),
                 image.data_source,
                 image.remote_source,
                 image.solar_system_main_subject,
-                ';'.join([unicode(x).encode('utf-8') for x in image.locations.all()]),
-                unicode(image.description).encode('utf-8'),
-                unicode(image.link).encode('utf-8'),
-                unicode(image.link_to_fits).encode('utf-8'),
+                ';'.join([str(x).encode('utf-8') for x in image.locations.all()]),
+                str(image.description).encode('utf-8'),
+                str(image.link).encode('utf-8'),
+                str(image.link_to_fits).encode('utf-8'),
                 image.image_file.url,
                 image.uncompressed_source_file.url if image.uncompressed_source_file else "",
                 image.uploaded,
                 image.published,
                 image.updated,
                 image.watermark,
-                unicode(image.watermark_text).encode('utf-8'),
+                str(image.watermark_text).encode('utf-8'),
                 image.watermark_opacity,
-                ';'.join([unicode(x).encode('utf-8') for x in image.imaging_telescopes.all()]),
-                ';'.join([unicode(x).encode('utf-8') for x in image.guiding_telescopes.all()]),
-                ';'.join([unicode(x).encode('utf-8') for x in image.mounts.all()]),
-                ';'.join([unicode(x).encode('utf-8') for x in image.imaging_cameras.all()]),
-                ';'.join([unicode(x).encode('utf-8') for x in image.guiding_cameras.all()]),
-                ';'.join([unicode(x).encode('utf-8') for x in image.focal_reducers.all()]),
-                ';'.join([unicode(x).encode('utf-8') for x in image.software.all()]),
-                ';'.join([unicode(x).encode('utf-8') for x in image.filters.all()]),
-                ';'.join([unicode(x).encode('utf-8') for x in image.accessories.all()]),
+                ';'.join([str(x).encode('utf-8') for x in image.imaging_telescopes.all()]),
+                ';'.join([str(x).encode('utf-8') for x in image.guiding_telescopes.all()]),
+                ';'.join([str(x).encode('utf-8') for x in image.mounts.all()]),
+                ';'.join([str(x).encode('utf-8') for x in image.imaging_cameras.all()]),
+                ';'.join([str(x).encode('utf-8') for x in image.guiding_cameras.all()]),
+                ';'.join([str(x).encode('utf-8') for x in image.focal_reducers.all()]),
+                ';'.join([str(x).encode('utf-8') for x in image.software.all()]),
+                ';'.join([str(x).encode('utf-8') for x in image.filters.all()]),
+                ';'.join([str(x).encode('utf-8') for x in image.accessories.all()]),
                 image.is_wip,
                 image.w,
                 image.h,
@@ -461,7 +461,7 @@ def perform_wise_payouts(
         return result_json
 
     def get_profile_id(profiles):
-        return [x for x in profiles if x['type'] == u'business' and x['details']['name'] == u'AstroBin'][0]['id']
+        return [x for x in profiles if x['type'] == 'business' and x['details']['name'] == 'AstroBin'][0]['id']
 
     def get_accounts(profile_id):
         result = requests.get('%s/v1/borderless-accounts?profileId=%d' % (BASE_URL, profile_id), headers=HEADERS)

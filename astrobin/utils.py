@@ -206,7 +206,7 @@ def uniq(seq):
     keys = {}
     for e in seq:
         keys[e] = 1
-    return keys.keys()
+    return list(keys.keys())
 
 
 def uniq_id_tuple(seq):

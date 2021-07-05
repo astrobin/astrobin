@@ -18,7 +18,7 @@ class MessagesTest(TestCase):
 
         response = self.client.get(reverse('messages_inbox'))
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_messages_page_when_logged_out(self):
         response = self.client.get(reverse('messages_inbox'), follow=True)
@@ -38,7 +38,7 @@ class MessagesTest(TestCase):
             'body': 'I am a body'
         }, follow=True)
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertContains(response, subject)
 
         self.client.logout()
@@ -64,6 +64,6 @@ class MessagesTest(TestCase):
 
         response = self.client.get(reverse('messages_detail', args=(thread.id,)), follow=True)
 
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertContains(response, subject)
         self.assertContains(response, body)

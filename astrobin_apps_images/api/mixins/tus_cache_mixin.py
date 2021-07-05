@@ -10,5 +10,5 @@ class TusCacheMixin():
         return utils.get_cached_property(property, object)
 
     def set_cached_property(self, property, object, value):
-        log.debug("Chunked uploader (-) (%d): set in cache: %s = %s" % (object.pk, property, unicode(value)))
+        log.debug("Chunked uploader (-) (%d): set in cache: %s = %s" % (object.pk, property, str(value)))
         utils.set_cached_property(property, object, value)

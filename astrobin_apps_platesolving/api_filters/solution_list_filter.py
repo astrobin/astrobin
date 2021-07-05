@@ -6,6 +6,7 @@ from django_filters import rest_framework as filters
 from astrobin.models import Image
 from astrobin_apps_platesolving.models import Solution
 from common.filters.list_filter import ListFilter
+from functools import reduce
 
 
 def filter_image_object_id(queryset, name, value):

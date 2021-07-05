@@ -15,10 +15,10 @@ class UtilsTest(TestCase):
         mock_country.return_value = "CH"
         mock_get_client_ip.return_value = "123.123.123.123"
 
-        self.assertEquals("CH", utils.get_client_country_code(None))
+        self.assertEqual("CH", utils.get_client_country_code(None))
 
     def test_never_activated_accounts_no_users(self):
-        self.assertEquals(0, utils.never_activated_accounts().count())
+        self.assertEqual(0, utils.never_activated_accounts().count())
 
     def test_never_activated_accounts_none_found_too_recent(self):
         u = Generators.user()
@@ -28,7 +28,7 @@ class UtilsTest(TestCase):
 
         accounts = utils.never_activated_accounts()
 
-        self.assertEquals(0, accounts.count())
+        self.assertEqual(0, accounts.count())
 
     def test_never_activated_accounts_none_found_already_activated(self):
         u = Generators.user()
@@ -38,7 +38,7 @@ class UtilsTest(TestCase):
 
         accounts = utils.never_activated_accounts()
 
-        self.assertEquals(0, accounts.count())
+        self.assertEqual(0, accounts.count())
 
     def test_never_activated_accounts_none_found_already_sent_reminder(self):
         u = Generators.user()
@@ -51,7 +51,7 @@ class UtilsTest(TestCase):
 
         accounts = utils.never_activated_accounts()
 
-        self.assertEquals(0, accounts.count())
+        self.assertEqual(0, accounts.count())
 
     def test_never_activated_accounts_one_found(self):
         u = Generators.user()
@@ -61,8 +61,8 @@ class UtilsTest(TestCase):
 
         accounts = utils.never_activated_accounts()
 
-        self.assertEquals(1, accounts.count())
-        self.assertEquals(u, accounts.first())
+        self.assertEqual(1, accounts.count())
+        self.assertEqual(u, accounts.first())
 
     def test_never_activated_accounts_two_found(self):
         first = Generators.user()
@@ -77,10 +77,10 @@ class UtilsTest(TestCase):
 
         accounts = utils.never_activated_accounts()
 
-        self.assertEquals(2, accounts.count())
+        self.assertEqual(2, accounts.count())
 
     def test_never_activated_accounts_to_be_deleted_no_users(self):
-        self.assertEquals(0, utils.never_activated_accounts_to_be_deleted().count())
+        self.assertEqual(0, utils.never_activated_accounts_to_be_deleted().count())
 
     def test_never_activated_accounts_to_be_deleted_none_found_too_recent(self):
         u = Generators.user()
@@ -93,7 +93,7 @@ class UtilsTest(TestCase):
 
         accounts = utils.never_activated_accounts_to_be_deleted()
 
-        self.assertEquals(0, accounts.count())
+        self.assertEqual(0, accounts.count())
 
     def test_never_activated_accounts_to_be_deleted_none_found_already_activated(self):
         u = Generators.user()
@@ -106,7 +106,7 @@ class UtilsTest(TestCase):
 
         accounts = utils.never_activated_accounts_to_be_deleted()
 
-        self.assertEquals(0, accounts.count())
+        self.assertEqual(0, accounts.count())
 
     def test_never_activated_accounts_to_be_deleted_none_does_not_have_already_sent_reminder(self):
         u = Generators.user()
@@ -116,7 +116,7 @@ class UtilsTest(TestCase):
 
         accounts = utils.never_activated_accounts_to_be_deleted()
 
-        self.assertEquals(0, accounts.count())
+        self.assertEqual(0, accounts.count())
 
     def test_never_activated_accounts_to_be_deleted_userprofile_deleted(self):
         u = Generators.user()
@@ -130,7 +130,7 @@ class UtilsTest(TestCase):
 
         accounts = utils.never_activated_accounts_to_be_deleted()
 
-        self.assertEquals(0, accounts.count())
+        self.assertEqual(0, accounts.count())
 
     def test_never_activated_accounts_to_be_deleted_one_found(self):
         u = Generators.user()
@@ -143,8 +143,8 @@ class UtilsTest(TestCase):
 
         accounts = utils.never_activated_accounts_to_be_deleted()
 
-        self.assertEquals(1, accounts.count())
-        self.assertEquals(u, accounts.first())
+        self.assertEqual(1, accounts.count())
+        self.assertEqual(u, accounts.first())
 
     def test_never_activated_accounts_to_be_deleted_two_found(self):
         first = Generators.user()
@@ -165,7 +165,7 @@ class UtilsTest(TestCase):
 
         accounts = utils.never_activated_accounts_to_be_deleted()
 
-        self.assertEquals(2, accounts.count())
+        self.assertEqual(2, accounts.count())
 
     def test_unique_items(self):
         list_with_duplicates = ['foo', 'bar', 'baz', 'foo', 2, 6, 10, 2]

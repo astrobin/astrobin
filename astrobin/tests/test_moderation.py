@@ -106,7 +106,7 @@ class ModerationTest(TestCase):
     def test_spam_user_gallery(self):
         self.client.login(username='user', password='password')
         response = self.client.get(reverse('user_page', args=('user',)))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
@@ -115,19 +115,19 @@ class ModerationTest(TestCase):
 
         # Same user gets 404
         response = self.client.get(reverse('user_page', args=('user',)))
-        self.assertEquals(response.status_code, 404)
+        self.assertEqual(response.status_code, 404)
 
         # Anon gets 404
         self.client.logout()
         response = self.client.get(reverse('user_page', args=('user',)))
-        self.assertEquals(response.status_code, 404)
+        self.assertEqual(response.status_code, 404)
 
         # Moderator gets 200
         self.client.login(username='moderator', password='password')
         response = self.client.get(reverse('user_page', args=('user',)))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         # Superuser gets 200
         self.client.login(username='superuser', password='password')
         response = self.client.get(reverse('user_page', args=('user',)))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)

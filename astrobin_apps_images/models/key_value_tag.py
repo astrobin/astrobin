@@ -9,7 +9,7 @@ class KeyValueTag(models.Model):
     value = models.CharField(max_length=100, null=False, blank=False)
 
     def __unicode__(self):
-        return u"%s=%s" % (self.key, self.value)
+        return "%s=%s" % (self.key, self.value)
 
     class Meta:
         app_label = "astrobin_apps_images"

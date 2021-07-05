@@ -211,6 +211,6 @@ class ForumTest(TestCase):
         self.client.login()
 
         self.assertContains(response, "2 topics deleted")
-        self.assertEquals(1, Topic.objects.filter(id=topic1.id).count())
-        self.assertEquals(1, Topic.objects.filter(id=topic2.id).count())
-        self.assertEquals(0, UserProfile.objects.filter(user=self.user).count())
+        self.assertEqual(1, Topic.objects.filter(id=topic1.id).count())
+        self.assertEqual(1, Topic.objects.filter(id=topic2.id).count())
+        self.assertEqual(0, UserProfile.objects.filter(user=self.user).count())

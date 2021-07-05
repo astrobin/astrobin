@@ -50,8 +50,8 @@ class SubscriptionsTest(TestCase):
         self.client.login(username=user.username, password=user.password)
         response = self.client.get('%s?user=%d' % (reverse('usersubscription-list'), user.pk))
         response_json = json.loads(response.content)
-        self.assertEquals(1, len(response_json))
-        self.assertEquals(user.pk, response_json[0]['user'])
+        self.assertEqual(1, len(response_json))
+        self.assertEqual(user.pk, response_json[0]['user'])
 
     def test_offer_subscription_validity(self):
         with self.settings(PREMIUM_ENABLED=True):

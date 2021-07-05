@@ -30,17 +30,17 @@ class APITest(TestCase):
 
         self.client.login(username = 'test', password = 'password')
         response = self.client.get(reverse('app_api_key_request'))
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals('form' in response.context[0], True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual('form' in response.context[0], True)
 
         response = self.client.post(reverse('app_api_key_request'), {
             'name': 'Test',
             'description': 'Description'
         }, follow = True)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         requests = AppApiKeyRequest.objects.filter(
             name = 'Test', description = 'Description')
-        self.assertEquals(requests.count(), 1)
+        self.assertEqual(requests.count(), 1)
         requests.delete()
         self.client.logout()
 
@@ -59,7 +59,7 @@ class APITest(TestCase):
             'name': 'Test',
             'description': 'Description'
         }, follow = True)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         request = AppApiKeyRequest.objects.all()[0]
         request.approve()

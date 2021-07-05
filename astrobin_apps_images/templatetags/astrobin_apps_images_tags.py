@@ -248,7 +248,7 @@ def astrobin_image(context, image, alias, **kwargs):
         field, alias, revision, animated, request.is_secure(), 'hd')
 
 
-    return dict(response_dict.items() + {
+    return dict(list(response_dict.items()) + list({
         'status': 'success',
         'image': image,
         'alias': alias,
@@ -282,7 +282,7 @@ def astrobin_image(context, image, alias, **kwargs):
         'w': w,
         'h': h,
         'instant': instant,
-    }.items())
+    }.items()))
 
 
 register.inclusion_tag(

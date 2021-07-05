@@ -8,10 +8,10 @@ from django.shortcuts import redirect
 from django.views.generic.edit import FormView, CreateView
 from subscription.models import Transaction, Subscription, UserSubscription
 
-import utils as premium_utils
+from . import utils as premium_utils
 from astrobin_apps_donations import utils as donation_utils
 from astrobin_apps_premium.models import DataLossCompensationRequest
-from forms import MigrateDonationsForm, DataLossCompensationRequestForm
+from .forms import MigrateDonationsForm, DataLossCompensationRequestForm
 
 log = logging.getLogger('apps')
 

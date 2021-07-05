@@ -42,8 +42,8 @@ class ImageEditBasicFormTest(TestCase):
 
         image = form.save(commit=False)
 
-        self.assertEquals(1, image.keyvaluetags.count())
-        self.assertEquals("bar", image.keyvaluetags.get(key="foo").value)
+        self.assertEqual(1, image.keyvaluetags.count())
+        self.assertEqual("bar", image.keyvaluetags.get(key="foo").value)
 
     def test_parse_key_value_tags_valid_data_multiple_lines(self):
         data = self.__get_valid_data({"keyvaluetags": "foo=bar\r\ngoo=tar"})

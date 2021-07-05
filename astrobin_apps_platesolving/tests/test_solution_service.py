@@ -29,8 +29,8 @@ class SolutionServiceTest(TestCase):
         advanced_settings, created = SolutionService.get_or_create_advanced_settings(
             Generators.imageRevision(image=image))
 
-        self.assertNotEquals(advanced_settings.sample_raw_frame_file.name, "")
-        self.assertEquals(advanced_settings.scaled_font_size, "L")
+        self.assertNotEqual(advanced_settings.sample_raw_frame_file.name, "")
+        self.assertEqual(advanced_settings.scaled_font_size, "L")
         self.assertFalse(created)
 
     def test_get_or_create_advanced_settings_image_does_not_inherit_file(self):
@@ -49,5 +49,5 @@ class SolutionServiceTest(TestCase):
         advanced_settings, created = SolutionService.get_or_create_advanced_settings(Generators.image(user=image.user))
 
         self.assertIsNone(advanced_settings.sample_raw_frame_file.name)
-        self.assertEquals(advanced_settings.scaled_font_size, "L")
+        self.assertEqual(advanced_settings.scaled_font_size, "L")
         self.assertFalse(created)

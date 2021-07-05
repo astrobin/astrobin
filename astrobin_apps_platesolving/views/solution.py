@@ -1,7 +1,7 @@
 import logging
 import os
 import time
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 import simplejson
 from braces.views import CsrfExemptMixin
@@ -41,7 +41,7 @@ class SolveView(base.View):
         solution = get_solution(kwargs.get('object_id'), kwargs.get('content_type_id'))
         error = None
 
-        if target._meta.model_name == u'image':
+        if target._meta.model_name == 'image':
             image = target
         else:
             image = target.image
@@ -56,7 +56,7 @@ class SolveView(base.View):
             try:
                 url = image.thumbnail(
                     'hd_sharpened' if image.sharpen_thumbnails else 'hd',
-                    '0' if target._meta.model_name == u'image' else target.label,
+                    '0' if target._meta.model_name == 'image' else target.label,
                     sync=True)
 
                 if solution.settings.blind:
@@ -109,7 +109,7 @@ class SolveAdvancedView(base.View):
                 longitude = None
                 altitude = None
 
-                if target._meta.model_name == u'image':
+                if target._meta.model_name == 'image':
                     image = target
                 else:
                     image = target.image
@@ -119,7 +119,7 @@ class SolveAdvancedView(base.View):
                 else:
                     url = image.thumbnail(
                         'hd_sharpened' if image.sharpen_thumbnails else 'hd',
-                        '0' if target._meta.model_name == u'image' else target.label,
+                        '0' if target._meta.model_name == 'image' else target.label,
                         sync=True)
 
                 acquisitions = DeepSky_Acquisition.objects.filter(image=image)
@@ -248,7 +248,7 @@ class SolutionFinalizeView(CsrfExemptMixin, base.View):
             url = solver.sky_plot_zoom1_image_url(solution.submission_id)
             if url:
                 img = NamedTemporaryFile(delete=True)
-                img.write(urllib2.urlopen(url).read())
+                img.write(urllib.request.urlopen(url).read())
                 img.flush()
                 img.seek(0)
                 f = File(img)

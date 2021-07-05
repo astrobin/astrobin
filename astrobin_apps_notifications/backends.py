@@ -104,7 +104,7 @@ class EmailBackend(BaseEmailBackend):
             message = messages["full.txt"]
 
         html_body = render_to_string("notification/email_body.html", dict(context, **{
-            "message": mark_safe(unicode(message))
+            "message": mark_safe(str(message))
         }))
 
         send_mail(

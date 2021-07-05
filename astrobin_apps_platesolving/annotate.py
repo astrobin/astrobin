@@ -2,7 +2,7 @@ import logging
 import os
 import six
 if six.PY2:
-    from StringIO import StringIO
+    from io import StringIO
 else:
     from io import StringIO
 

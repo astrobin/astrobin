@@ -20,4 +20,4 @@ class ConfirmRevisionRecovery(JsonRequestResponseMixin, LoginRequiredMixin, View
 
             messages.success(request, _("%(number)s revisions(s) recovered." % {"number": len(pks)}))
 
-        return self.render_json_response({u"status": u"OK"})
+        return self.render_json_response({"status": "OK"})

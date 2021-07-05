@@ -26,6 +26,7 @@ from django.views.decorators.vary import vary_on_cookie
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from common.services import DateTimeService
 from common.services.caching_service import CachingService
+from functools import reduce
 
 # Temp compat fix, drop when moved to python3
 if six.PY2:
@@ -355,9 +356,9 @@ class ImageDetailView(ImageDetailViewBase):
         )
 
         makes_list = ','.join(
-            filter(None, reduce(
+            [_f for _f in reduce(
                 lambda x, y: x + y,
-                [list(x.values_list('make', flat=True)) for x in [y[1] for y in gear_list]])))
+                [list(x.values_list('make', flat=True)) for x in [y[1] for y in gear_list]]) if _f])
 
         deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
         ssa = None
@@ -468,7 +469,7 @@ class ImageDetailView(ImageDetailViewBase):
                 (_('Dates'), sorted(dsa_data['dates'])),
                 (_('Frames'),
                  ('\n' if len(frames_list) > 1 else '') +
-                 u'\n'.join("%s %s" % (
+                 '\n'.join("%s %s" % (
                      "<a href=\"%s\">%s</a>:" % (f[1]['filter_url'], f[1]['filter']) if f[1]['filter'] else '',
                      "%s %s %s %s %s" % (
                          f[1]['integration'], f[1]['iso'], f[1]['gain'], f[1]['sensor_cooling'], f[1]['binning']),
@@ -525,7 +526,7 @@ class ImageDetailView(ImageDetailViewBase):
             if revision_image.solution.skyplot_zoom1:
                 skyplot_zoom1 = revision_image.solution.skyplot_zoom1
 
-        locations = '; '.join([u'%s' % (x) for x in image.locations.all()])
+        locations = '; '.join(['%s' % (x) for x in image.locations.all()])
 
         #######################
         # PREFERRED LANGUAGES #
@@ -540,12 +541,12 @@ class ImageDetailView(ImageDetailViewBase):
         else:
             user_language = _("English")
 
-        preferred_languages = [unicode(user_language)]
+        preferred_languages = [str(user_language)]
         if image.user.userprofile.other_languages:
             for language in image.user.userprofile.other_languages.split(','):
                 language_label = [x for x in settings.ALL_LANGUAGE_CHOICES if x[0] == language][0][1]
                 if language_label != user_language:
-                    preferred_languages.append(unicode(language_label))
+                    preferred_languages.append(str(language_label))
 
         preferred_languages = ', '.join(preferred_languages)
 

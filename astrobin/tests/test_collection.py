@@ -81,8 +81,8 @@ class CollectionTest(TestCase):
 
         image = self._get_last_image()
         collection = self._get_last_collection()
-        self.assertEquals(collection.name, 'test_collection')
-        self.assertEquals(collection.description, 'test_description')
+        self.assertEqual(collection.name, 'test_collection')
+        self.assertEqual(collection.description, 'test_description')
         response = self.client.get(reverse('user_collections_list', args=(self.user.username,)))
         self.assertContains(response, "test_collection")
 
