@@ -2,6 +2,9 @@
 FROM ubuntu:20.04
 MAINTAINER Salvatore Iovene <salvatore@astrobin.com>
 
+ARG DEBIAN_FRONTEND=noninteractive
+ARG APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
+
 # Install build prerequisites
 RUN apt-get update && apt-get install -y --no-install-recommends \
     locales \
@@ -39,14 +42,6 @@ ENV LC_ALL en_US.UTF-8
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
     && apt-get install -y nodejs
 
-# Install yarn
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-    && apt-get update \
-    && apt-get install -y \
-        yarn \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-
 # Install pip dependencies
 RUN mkdir /code
 COPY requirements.txt /code
@@ -56,8 +51,7 @@ RUN pip3 install --upgrade pip && \
     pip3 install --no-deps -r requirements.txt --src /src
 
 # Install global node dependencies
-RUN yarn global add \
-    yuglify
+RUN npm install -g yuglify
 
 # Install compass
 RUN gem install compass
