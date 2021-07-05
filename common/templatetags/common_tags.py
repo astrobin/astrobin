@@ -5,7 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.template import Library, Node
 from django.template.defaultfilters import stringfilter, urlencode
 from django.utils.encoding import force_text
-from django.utils.functional import allow_lazy
+from django.utils.functional import keep_lazy
 from django.utils.safestring import mark_safe
 
 from common.services import AppRedirectionService, DateTimeService
@@ -155,7 +155,7 @@ def truncate_chars(s, num):
     return s
 
 
-truncate_chars = allow_lazy(truncate_chars, str)
+truncate_chars = keep_lazy(truncate_chars, str)
 
 
 @register.filter

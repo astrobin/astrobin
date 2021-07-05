@@ -75,7 +75,7 @@ class IotdVote(models.Model):
 
 class Iotd(models.Model):
     judge = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    image = models.OneToOneField(Image)
+    image = models.OneToOneField(Image, on_delete=models.CASCADE)
     date = models.DateField(unique=True)
     created = models.DateTimeField(auto_now_add=True)
 
