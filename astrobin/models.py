@@ -2678,7 +2678,7 @@ class App(models.Model):
         # Get a random UUID.
         new_uuid = uuid.uuid4()
         # Hmac that beast.
-        return hmac.new(str(new_uuid), digestmod=sha1).hexdigest()
+        return hmac.new(b'key', str(new_uuid).encode('utf-8'), digestmod=sha1).hexdigest()
 
 
 class AppApiKeyRequest(models.Model):
