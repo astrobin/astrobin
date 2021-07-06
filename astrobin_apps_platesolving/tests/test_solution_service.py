@@ -18,7 +18,7 @@ class SolutionServiceTest(TestCase):
 
         solution = PlateSolvingGenerators.solution(image)
         advanced_settings, created = SolutionService.get_or_create_advanced_settings(image)
-        advanced_settings.sample_raw_frame_file = File(open('astrobin/fixtures/test.fits'), "test.fits")
+        advanced_settings.sample_raw_frame_file = File(open('astrobin/fixtures/test.fits', 'rb'), "test.fits")
         advanced_settings.scaled_font_size = "L"
 
         solution.advanced_settings = advanced_settings
@@ -38,7 +38,7 @@ class SolutionServiceTest(TestCase):
 
         solution = PlateSolvingGenerators.solution(image)
         advanced_settings, created = SolutionService.get_or_create_advanced_settings(image)
-        advanced_settings.sample_raw_frame_file = File(open('astrobin/fixtures/test.fits'), "test.fits")
+        advanced_settings.sample_raw_frame_file = File(open('astrobin/fixtures/test.fits', 'rb'), "test.fits")
         advanced_settings.scaled_font_size = "L"
 
         solution.advanced_settings = advanced_settings

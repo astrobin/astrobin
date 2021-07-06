@@ -5,7 +5,7 @@ from django import template
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.template import Library, Node
-from django.template.defaultfilters import stringfilter, urlencode
+from django.template.defaultfilters import urlencode
 from django.utils.encoding import force_text
 from django.utils.functional import keep_lazy
 from django.utils.safestring import mark_safe
@@ -147,35 +147,31 @@ def string_to_list(string):
     return args
 
 
-def truncate_chars(s, num):
-    s = force_text(s)
-    length = int(num)
-    if len(s) > length:
-        length = length - 3
-        s = s[:length].strip()
-        s += '...'
-    return s
 
 
-truncate_chars = keep_lazy(truncate_chars, str)
 
-
-@register.filter
+@register.filter(is_safe=True)
 def truncatechars(value, arg):
     """
     Truncates a string after a certain number of characters, but respects word boundaries.
 
     Argument: Number of characters to truncate after.
     """
+
+    def do_truncatechars(s, num):
+        s = force_text(s)
+        length = int(num)
+        if len(s) > length:
+            length = length - 3
+            s = s[:length].strip()
+            s += '...'
+        return s
+
     try:
         length = int(arg)
     except ValueError:  # If the argument is not a valid integer.
         return value  # Fail silently.
-    return truncate_chars(value, length)
-
-
-truncatechars.is_safe = True
-truncatechars = stringfilter(truncatechars)
+    return do_truncatechars(value, length)
 
 
 @register.filter(name='get_class')

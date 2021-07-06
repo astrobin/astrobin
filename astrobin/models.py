@@ -1317,7 +1317,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         try:
             thumb = thumbnailer.get_thumbnail(self.get_thumbnail_options(alias, revision_label, thumbnail_settings))
         except Exception as e:
-            log.error("Image %d: unable to generate thumbnail: %s." % (self.id, e.message))
+            log.error("Image %d: unable to generate thumbnail: %s." % (self.id, str(e)))
             return None
 
         return thumb

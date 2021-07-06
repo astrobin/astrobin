@@ -23,7 +23,7 @@ class ImageEditBasicFormTest(TestCase):
         return {
             'image_file': SimpleUploadedFile(
                 'test.jpg',
-                open('astrobin/fixtures/test.jpg').read(),
+                open('astrobin/fixtures/test.jpg', 'rb').read(),
                 'image/jpeg'
             )
         }

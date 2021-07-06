@@ -9,10 +9,6 @@ class MessagesTest(TestCase):
         self.user = User.objects.create_user('user', 'user@test.com', 'password')
         self.user2 = User.objects.create_user('user2', 'user2@test.com', 'password')
 
-    def tearDown(self):
-        self.user.delete()
-        self.user2.delete()
-
     def test_messages_page_opens(self):
         self.client.login(username='user', password='password')
 
@@ -25,7 +21,7 @@ class MessagesTest(TestCase):
 
         self.assertRedirects(
             response,
-            'http://testserver/accounts/login/?next=/messages/inbox/',
+            '/accounts/login/?next=/messages/inbox/',
             status_code=302, target_status_code=200)
 
     def test_messages_send(self):

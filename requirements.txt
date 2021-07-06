@@ -1,7 +1,7 @@
 -e git+https://github.com/astrobin/django-change-email.git@a3508ea9736758081f460b1bae49dcb0153f7507#egg=django_change_email
 -e git+https://github.com/astrobin/django-hitcount.git@3acf5bdb9728ca8c38cd792dd746114c9076ae88#egg=django_hitcount
 -e git+https://github.com/astrobin/django-notification.git@cdd49112efae4c2fde338a9e0714432bf9afd031#egg=django_notification
--e git+https://github.com/astrobin/django-persistent-messages.git@7cc77ebec671bf5bb9cf19f8bd8c12112897fe17#egg=django_persistent_messages
+-e git+https://github.com/astrobin/django-persistent-messages.git@54552660aa975d7065c5e82ff1963cae835e6293#egg=django_persistent_messages
 -e git+https://github.com/astrobin/django-subscription.git@0dcfcab91680528c655f7cb140661c21eb4554ba#egg=django_subscription
 -e git+https://github.com/astrobin/django-threaded-messages.git@9966694e8c92f4814ca4635dffadef5fdf70d37b#egg=django_threaded_messages
 -e git+https://github.com/astrobin/easy-thumbnails.git@09174c9c4fef1e2b4363e8f0e43c854a82f3b7f6#egg=easy-thumbnails
@@ -17,7 +17,6 @@ awscli==1.19.105
 backports-abc==0.5
 bbcode==1.1.0
 beautifulsoup4==4.9.3
-beautifulsoupselect==0.2
 billiard==3.6.4.0
 bleach==3.3.0
 boto3==1.17.105
@@ -172,6 +171,7 @@ simplejson==3.17.2
 singledispatch==3.6.2
 six==1.16.0
 slimit==0.8.1
+soupsieve==2.2.1
 spark-parser==1.8.9
 sphinx-me==0.3
 SQLAlchemy==1.4.20

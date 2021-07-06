@@ -57,7 +57,7 @@ class UserTest(TestCase):
     def _get_last_image_revision(self):
         return ImageRevision.objects.all().order_by('-id')[0]
 
-    def _do_upload_revision(self, image, filename, description=None):
+    def _do_upload_revision(self, image, filename, description=''):
         self.client.post(
             reverse('image_revision_upload_process'),
             {
@@ -138,7 +138,7 @@ class UserTest(TestCase):
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST BASIC IMAGE")
         response = self.client.get(reverse('user_page', args=('user',)))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image.title in response.content, True)
+        self.assertContains(response, image.title)
         image.delete()
 
         # Test staging when anonymous
@@ -154,11 +154,11 @@ class UserTest(TestCase):
             reverse('user_page', args=('user',)) + '?staging')
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image.title in response.content, True)
+        self.assertContains(response, image.title)
 
         response = self.client.get(reverse('user_page', args=('user',)))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image.title in response.content, True)
+        self.assertContains(response, image.title)
 
         image.delete()
 
@@ -173,8 +173,8 @@ class UserTest(TestCase):
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=uploaded")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(
-            response.content.find("IMAGE2") < response.content.find("IMAGE1"), True)
+        self.assertTrue(
+            response.content.decode('utf-8').find("IMAGE2") < response.content.decode('utf-8').find("IMAGE1"))
 
         image1.delete()
         image2.delete()
@@ -188,7 +188,8 @@ class UserTest(TestCase):
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=acquired")
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(response.content.find("IMAGE2") < response.content.find("IMAGE1"))
+        self.assertTrue(
+            response.content.decode('utf-8').find("IMAGE2") < response.content.decode('utf-8').find("IMAGE1"))
         self.assertNotContains(response, "Images without an acquisition date are not shown")
 
         image3 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE3")
@@ -226,66 +227,66 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?sub=subject")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image1.title in response.content, True)
-        self.assertEqual(image2.title in response.content, False)
-        self.assertEqual(image3.title in response.content, False)
-        self.assertEqual(image4.title in response.content, False)
-        self.assertEqual(image5.title in response.content, False)
-        self.assertEqual(image6.title in response.content, False)
+        self.assertContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
+        self.assertNotContains(response, image4.title)
+        self.assertNotContains(response, image5.title)
+        self.assertNotContains(response, image6.title)
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?sub=subject&active=DEEP")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image1.title in response.content, True)
-        self.assertEqual(image2.title in response.content, False)
-        self.assertEqual(image3.title in response.content, False)
-        self.assertEqual(image4.title in response.content, False)
-        self.assertEqual(image5.title in response.content, False)
-        self.assertEqual(image6.title in response.content, False)
+        self.assertContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
+        self.assertNotContains(response, image4.title)
+        self.assertNotContains(response, image5.title)
+        self.assertNotContains(response, image6.title)
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?sub=subject&active=SOLAR")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image1.title in response.content, False)
-        self.assertEqual(image2.title in response.content, True)
-        self.assertEqual(image3.title in response.content, False)
-        self.assertEqual(image4.title in response.content, False)
-        self.assertEqual(image5.title in response.content, False)
-        self.assertEqual(image6.title in response.content, False)
+        self.assertNotContains(response, image1.title)
+        self.assertContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
+        self.assertNotContains(response, image4.title)
+        self.assertNotContains(response, image5.title)
+        self.assertNotContains(response, image6.title)
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?sub=subject&active=WIDE")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image1.title in response.content, False)
-        self.assertEqual(image2.title in response.content, False)
-        self.assertEqual(image3.title in response.content, True)
-        self.assertEqual(image4.title in response.content, False)
-        self.assertEqual(image5.title in response.content, False)
-        self.assertEqual(image6.title in response.content, False)
+        self.assertNotContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertContains(response, image3.title)
+        self.assertNotContains(response, image4.title)
+        self.assertNotContains(response, image5.title)
+        self.assertNotContains(response, image6.title)
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?sub=subject&active=TRAILS")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image1.title in response.content, False)
-        self.assertEqual(image2.title in response.content, False)
-        self.assertEqual(image3.title in response.content, False)
-        self.assertEqual(image4.title in response.content, True)
-        self.assertEqual(image5.title in response.content, False)
-        self.assertEqual(image6.title in response.content, False)
+        self.assertNotContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
+        self.assertContains(response, image4.title)
+        self.assertNotContains(response, image5.title)
+        self.assertNotContains(response, image6.title)
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?sub=subject&active=GEAR")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image1.title in response.content, False)
-        self.assertEqual(image2.title in response.content, False)
-        self.assertEqual(image3.title in response.content, False)
-        self.assertEqual(image4.title in response.content, False)
-        self.assertEqual(image5.title in response.content, True)
-        self.assertEqual(image6.title in response.content, False)
+        self.assertNotContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
+        self.assertNotContains(response, image4.title)
+        self.assertContains(response, image5.title)
+        self.assertNotContains(response, image6.title)
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?sub=subject&active=OTHER")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image1.title in response.content, False)
-        self.assertEqual(image2.title in response.content, False)
-        self.assertEqual(image3.title in response.content, False)
-        self.assertEqual(image4.title in response.content, False)
-        self.assertEqual(image5.title in response.content, False)
-        self.assertEqual(image6.title in response.content, True)
+        self.assertNotContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
+        self.assertNotContains(response, image4.title)
+        self.assertNotContains(response, image5.title)
+        self.assertContains(response, image6.title)
 
         image1.delete()
         image2.delete()
@@ -308,30 +309,30 @@ class UserTest(TestCase):
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=year")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image1.title in response.content, True)
-        self.assertEqual(image2.title in response.content, False)
-        self.assertEqual(image3.title in response.content, False)
+        self.assertContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=year&active=%d" % today.year)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image1.title in response.content, True)
-        self.assertEqual(image2.title in response.content, False)
-        self.assertEqual(image3.title in response.content, False)
+        self.assertContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=year&active=%d" % (today.year - 1))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image1.title in response.content, False)
-        self.assertEqual(image2.title in response.content, True)
-        self.assertEqual(image3.title in response.content, False)
+        self.assertNotContains(response, image1.title)
+        self.assertContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=year&active=0")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image1.title in response.content, False)
-        self.assertEqual(image2.title in response.content, False)
-        self.assertEqual(image3.title in response.content, True)
+        self.assertNotContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertContains(response, image3.title)
 
         acquisition1.delete()
         acquisition2.delete()
@@ -360,34 +361,34 @@ class UserTest(TestCase):
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=gear&active=%d" % telescope1.pk)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image1.title in response.content, True)
-        self.assertEqual(image2.title in response.content, False)
-        self.assertEqual(image3.title in response.content, False)
-        self.assertEqual(image4.title in response.content, False)
+        self.assertContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
+        self.assertNotContains(response, image4.title)
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=gear&active=%d" % telescope2.pk)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image1.title in response.content, False)
-        self.assertEqual(image2.title in response.content, True)
-        self.assertEqual(image3.title in response.content, False)
-        self.assertEqual(image4.title in response.content, False)
+        self.assertNotContains(response, image1.title)
+        self.assertContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
+        self.assertNotContains(response, image4.title)
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=gear&active=0")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image1.title in response.content, False)
-        self.assertEqual(image2.title in response.content, False)
-        self.assertEqual(image3.title in response.content, True)
-        self.assertEqual(image4.title in response.content, False)
+        self.assertNotContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertContains(response, image3.title)
+        self.assertNotContains(response, image4.title)
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=gear&active=-1")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image1.title in response.content, False)
-        self.assertEqual(image2.title in response.content, False)
-        self.assertEqual(image3.title in response.content, False)
-        self.assertEqual(image4.title in response.content, True)
+        self.assertNotContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
+        self.assertContains(response, image4.title)
 
         telescope1.delete()
         telescope2.delete()
@@ -403,7 +404,7 @@ class UserTest(TestCase):
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=nodata")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image.title in response.content, True)
+        self.assertContains(response, image.title)
 
         image.subject_type = SubjectType.SOLAR_SYSTEM
         image.solar_system_main_subject = None
@@ -411,17 +412,17 @@ class UserTest(TestCase):
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=nodata")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image.title in response.content, True)
+        self.assertContains(response, image.title)
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=nodata&active=GEAR")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image.title in response.content, True)
+        self.assertContains(response, image.title)
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=nodata&active=ACQ")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image.title in response.content, True)
+        self.assertContains(response, image.title)
 
         # Users with at least one spam image should be 404
         image.moderator_decision = 2
@@ -440,7 +441,7 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(image.title in response.content, False)
+        self.assertNotContains(response, image.title)
 
     @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_user_profile_exclude_from_competitions(self):

@@ -8,8 +8,8 @@ from datetime import date, timedelta
 from django.conf import settings
 from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes.models import ContentType
-from django.urls import reverse
 from django.test import TestCase, override_settings
+from django.urls import reverse
 from mock import patch
 
 from astrobin.enums import SubjectType
@@ -75,13 +75,13 @@ class ImageTest(TestCase):
                 make="Test make", name="Test accessory")]
 
         profile = self.user.userprofile
-        profile.telescopes = self.imaging_telescopes + self.guiding_telescopes
-        profile.mounts = self.mounts
-        profile.cameras = self.imaging_cameras + self.guiding_cameras
-        profile.focal_reducers = self.focal_reducers
-        profile.software = self.software
-        profile.filters = self.filters
-        profile.accessories = self.accessories
+        profile.telescopes.set(self.imaging_telescopes + self.guiding_telescopes)
+        profile.mounts.set(self.mounts)
+        profile.cameras.set(self.imaging_cameras + self.guiding_cameras)
+        profile.focal_reducers.set(self.focal_reducers)
+        profile.software.set(self.software)
+        profile.filters.set(self.filters)
+        profile.accessories.set(self.accessories)
 
     ###########################################################################
     # HELPERS                                                                 #
@@ -100,7 +100,7 @@ class ImageTest(TestCase):
             data,
             follow=True)
 
-    def _do_upload_revision(self, image, filename, description=None, skip_notifications=False, mark_as_final=True):
+    def _do_upload_revision(self, image, filename, description='', skip_notifications=False, mark_as_final=True):
         data = {
             'image_id': image.get_id(),
             'image_file': open(filename, 'rb'),
@@ -816,7 +816,8 @@ class ImageTest(TestCase):
         # Basic view
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 200)
-        self.assertIsNotNone(re.search(r'data-id="%s"\s+data-alias="%s"' % (image.pk, "regular"), response.content))
+        self.assertIsNotNone(
+            re.search(r'data-id="%s"\s+data-alias="%s"' % (image.pk, "regular"), response.content.decode('utf-8')))
 
         # Image resolution
         self.assertContains(response, "<strong class=\"card-label\">Resolution:</strong> 340x280")
@@ -835,8 +836,9 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': 'B'}))
         self.assertIsNotNone(re.search(
             r'data-id="%d"\s+data-alias="%s"\s+data-revision="%s"' % (image.pk, "regular", "B"),
-            response.content))
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "gallery"), response.content))
+            response.content.decode('utf-8')))
+        self.assertIsNotNone(
+            re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "gallery"), response.content.decode('utf-8')))
 
         # Revision resolution differs from original
         self.assertContains(response, "<strong class=\"card-label\">Resolution:</strong> 200x165")
@@ -859,23 +861,25 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('user_page', kwargs={'username': 'test'}))
         self.assertIsNotNone(re.search(
             r'data-id="%d"\s+data-alias="%s"\s+data-revision="%s"' % (image.pk, "gallery", "final"),
-            response.content))
+            response.content.decode('utf-8')))
 
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': '0'}))
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "regular"), response.content))
+        self.assertIsNotNone(re.search(
+            r'data-id="%d"\s+data-alias="%s"' % (image.pk, "regular"), response.content.decode('utf-8')))
         self.assertIsNotNone(re.search(
             r'data-id="%d"\s+data-alias="%s"\s+data-revision="%s"' % (image.pk, "gallery", "B"),
-            response.content))
+            response.content.decode('utf-8')))
 
         # Inverted displayed
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': '0'}) + "?mod=inverted")
         self.assertIsNotNone(
-            re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "regular_inverted"), response.content))
+            re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "regular_inverted"), response.content.decode(
+                'utf-8')))
 
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': 'B'}) + "?mod=inverted")
         self.assertIsNotNone(re.search(
             r'data-id="%d"\s+data-alias="%s"\s+data-revision="%s"' % (image.pk, "regular_inverted", "B"),
-            response.content))
+            response.content.decode('utf-8')))
 
         revision.delete()
 
@@ -1135,7 +1139,8 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context[0]['alias'], 'hd')
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "hd"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "hd"), response.content.decode(
+            'utf-8')))
 
         # Revision redirect
         self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
@@ -1151,9 +1156,10 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': 'B'}))
         self.assertIsNotNone(re.search(
             r'data-id="%d"\s+data-alias="%s"\s+data-revision="%s"' % (image.pk, "hd", "B"),
-            response.content))
+            response.content.decode('utf-8')))
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': '0'}))
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "hd"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "hd"), response.content.decode(
+            'utf-8')))
 
         revision.delete()
 
@@ -1163,7 +1169,9 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context[0]['mod'], 'inverted')
         self.assertEqual(response.context[0]['alias'], 'hd_inverted')
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "hd_inverted"), response.content))
+        self.assertIsNotNone(
+            re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "hd_inverted"), response.content.decode(
+                'utf-8')))
 
         image.delete()
 
@@ -1176,7 +1184,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
 
@@ -1192,7 +1201,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
 
@@ -1208,7 +1218,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
 
@@ -1224,7 +1235,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
 
@@ -1240,7 +1252,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
 
@@ -1256,7 +1269,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertNotEqual('real', response.context[0]['alias'])
-        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
 
@@ -1270,7 +1284,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
 
@@ -1287,7 +1302,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
 
@@ -1304,7 +1320,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertNotEqual('real', response.context[0]['alias'])
-        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
 
@@ -1321,7 +1338,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertNotEqual('real', response.context[0]['alias'])
-        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
 
@@ -1338,7 +1356,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertNotEqual('real', response.context[0]['alias'])
-        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
 
@@ -1355,7 +1374,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertNotEqual('real', response.context[0]['alias'])
-        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
 
@@ -1371,7 +1391,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
 
@@ -1390,7 +1411,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
 
@@ -1409,7 +1431,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertNotEqual('real', response.context[0]['alias'])
-        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
 
@@ -1427,7 +1450,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
 
@@ -1446,7 +1470,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertNotEqual('real', response.context[0]['alias'])
-        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
 
@@ -1465,7 +1490,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertNotEqual('real', response.context[0]['alias'])
-        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
 
@@ -1483,7 +1509,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -1505,7 +1532,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -1527,7 +1555,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -1549,7 +1578,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -1571,7 +1601,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertNotEqual('real', response.context[0]['alias'])
-        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -1593,7 +1624,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertNotEqual('real', response.context[0]['alias'])
-        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -1612,7 +1644,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -1630,7 +1663,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -1649,7 +1683,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -1668,7 +1703,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -1687,7 +1723,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -1706,7 +1743,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -1725,7 +1763,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -1744,7 +1783,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -1763,7 +1803,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -1782,7 +1823,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -1801,7 +1843,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -1820,7 +1863,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -1839,7 +1883,8 @@ class ImageTest(TestCase):
             reverse('image_full', kwargs={'id': image.get_id()}) + "?real")
         self.assertEqual(200, response.status_code)
         self.assertEqual('real', response.context[0]['alias'])
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
+            'utf-8')))
 
         image.delete()
         us.delete()
@@ -2295,8 +2340,8 @@ class ImageTest(TestCase):
         response = self.client.get(get_url((image.get_id(),)))
         self.assertContains(response, "Can't see anything here?")
 
-        self.user.userprofile.telescopes = self.imaging_telescopes + self.guiding_telescopes
-        self.user.userprofile.cameras = self.imaging_cameras + self.guiding_cameras
+        self.user.userprofile.telescopes.set(self.imaging_telescopes + self.guiding_telescopes)
+        self.user.userprofile.cameras.set(self.imaging_cameras + self.guiding_cameras)
 
         # Check that the user's other images are available to copy from
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -3181,15 +3226,10 @@ class ImageTest(TestCase):
         self.assertEqual(image.moderated_when, None)
         self.assertEqual(image.moderated_by, None)
 
-        # The image should not appear on the front page when logged out
-        self.client.logout()
-        response = self.client.get(reverse('index'))
-        self.assertEqual(image.title in response.content, False)
-
-        # Nor when logged in
+        # The image should not appear on the front page
         self.client.login(username='test', password='password')
         response = self.client.get(reverse('index'))
-        self.assertEqual(image.title in response.content, False)
+        self.assertNotContains(response, image.title)
 
         # TODO: test image promotion
 

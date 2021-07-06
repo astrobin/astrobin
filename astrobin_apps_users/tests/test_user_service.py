@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from django.contrib.auth.models import User, Group, AnonymousUser
 from django.test import TestCase
 from django.utils import timezone
-from mock import patch
+from mock import patch, PropertyMock
 
 from astrobin.tests.generators import Generators
 from astrobin_apps_users.services import UserService
@@ -210,7 +210,7 @@ class TestUserService(TestCase):
 
         self.assertTrue(UserService(user).can_like(image))
 
-    @patch('django.contrib.auth.models.User.is_authenticated')
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
     def test_can_like_image_anon(self, is_authenticated):
         user = Generators.user()
         image = Generators.image()
@@ -222,98 +222,106 @@ class TestUserService(TestCase):
     @patch('astrobin_apps_premium.templatetags.astrobin_apps_premium_tags.is_free')
     @patch('astrobin.models.UserProfile.get_scores')
     def test_can_like_image_index_zero(self, get_scores, is_free):
+        get_scores.return_value = {'user_scores_index': 0}
+        is_free.return_value = True
+
         user = Generators.user()
         image = Generators.image()
-
-        is_free.return_value = True
-        get_scores.return_value = {'user_scores_index': 0}
 
         self.assertTrue(UserService(user).can_like(image))
 
     @patch('astrobin_apps_premium.templatetags.astrobin_apps_premium_tags.is_free')
     @patch('astrobin.models.UserProfile.get_scores')
     def test_can_like_image_same_user(self, get_scores, is_free):
+        get_scores.return_value = {'user_scores_index': 0}
+        is_free.return_value = False
+
         user = Generators.user()
         image = Generators.image(user=user)
-
-        is_free.return_value = False
 
         self.assertFalse(UserService(user).can_like(image))
 
     @patch('astrobin_apps_premium.templatetags.astrobin_apps_premium_tags.is_free')
     @patch('astrobin.models.UserProfile.get_scores')
     def test_can_like_image_ok(self, get_scores, is_free):
+        get_scores.return_value = {'user_scores_index': 0}
+        is_free.return_value = False
+
         user = Generators.user()
         image = Generators.image()
-
-        is_free.return_value = False
 
         self.assertTrue(UserService(user).can_like(image))
 
     @patch('astrobin_apps_premium.templatetags.astrobin_apps_premium_tags.is_free')
     @patch('astrobin.models.UserProfile.get_scores')
     def test_can_like_comment_same_user(self, get_scores, is_free):
+        get_scores.return_value = {'user_scores_index': 0}
+        is_free.return_value = False
+
         user = Generators.user()
         comment = NestedCommentsGenerators.comment(author=user)
-
-        is_free.return_value = False
 
         self.assertFalse(UserService(user).can_like(comment))
 
     @patch('astrobin_apps_premium.templatetags.astrobin_apps_premium_tags.is_free')
     @patch('astrobin.models.UserProfile.get_scores')
     def test_can_like_comment_ok(self, get_scores, is_free):
+        get_scores.return_value = {'user_scores_index': 0}
+        is_free.return_value = False
+
         user = Generators.user()
         comment = NestedCommentsGenerators.comment()
-
-        is_free.return_value = False
 
         self.assertTrue(UserService(user).can_like(comment))
 
     @patch('astrobin_apps_premium.templatetags.astrobin_apps_premium_tags.is_free')
     @patch('astrobin.models.UserProfile.get_scores')
     def test_can_like_comment_same_user(self, get_scores, is_free):
+        get_scores.return_value = {'user_scores_index': 0}
+        is_free.return_value = False
+
         user = Generators.user()
         comment = NestedCommentsGenerators.comment(author=user)
-
-        is_free.return_value = False
 
         self.assertFalse(UserService(user).can_like(comment))
 
     @patch('astrobin_apps_premium.templatetags.astrobin_apps_premium_tags.is_free')
     @patch('astrobin.models.UserProfile.get_scores')
     def test_can_like_post_ok(self, get_scores, is_free):
+        get_scores.return_value = {'user_scores_index': 0}
+        is_free.return_value = False
+
         user = Generators.user()
         post = Generators.forum_post()
-
-        is_free.return_value = False
 
         self.assertTrue(UserService(user).can_like(post))
 
     @patch('astrobin_apps_premium.templatetags.astrobin_apps_premium_tags.is_free')
     @patch('astrobin.models.UserProfile.get_scores')
     def test_can_like_post_same_user(self, get_scores, is_free):
+        get_scores.return_value = {'user_scores_index': 0}
+        is_free.return_value = False
+
         user = Generators.user()
         post = Generators.forum_post(user=user)
-
-        is_free.return_value = False
 
         self.assertFalse(UserService(user).can_like(post))
 
     @patch('astrobin_apps_premium.templatetags.astrobin_apps_premium_tags.is_free')
     @patch('astrobin.models.UserProfile.get_scores')
     def test_can_like_post_closed_topic(self, get_scores, is_free):
+        get_scores.return_value = {'user_scores_index': 0}
+        is_free.return_value = False
+
         user = Generators.user()
         post = Generators.forum_post()
 
         post.topic.closed = True
         post.topic.save()
 
-        is_free.return_value = False
-
         self.assertFalse(UserService(user).can_like(post))
 
-    @patch('django.contrib.auth.models.User.is_authenticated')
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
     def test_can_unlike_anon(self, is_authenticated):
         image = Generators.image()
         like = Generators.like(image)
@@ -323,7 +331,7 @@ class TestUserService(TestCase):
         self.assertFalse(UserService(like.user).can_unlike(image))
         self.assertEqual("ANONYMOUS", UserService(like.user).can_unlike_reason(image))
 
-    @patch('django.contrib.auth.models.User.is_authenticated')
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
     def test_can_unlike_never_liked(self, is_authenticated):
         is_authenticated.return_value = True
 
@@ -333,7 +341,7 @@ class TestUserService(TestCase):
         self.assertFalse(UserService(user).can_unlike(image))
         self.assertEqual("NEVER_LIKED", UserService(user).can_unlike_reason(image))
 
-    @patch('django.contrib.auth.models.User.is_authenticated')
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
     def test_can_unlike_too_late(self, is_authenticated):
         is_authenticated.return_value = True
 
@@ -346,7 +354,7 @@ class TestUserService(TestCase):
         self.assertFalse(UserService(like.user).can_unlike(image))
         self.assertEqual("TOO_LATE", UserService(like.user).can_unlike_reason(image))
 
-    @patch('django.contrib.auth.models.User.is_authenticated')
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
     def test_can_unlike(self, is_authenticated):
         is_authenticated.return_value = True
 

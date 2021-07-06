@@ -65,7 +65,7 @@ def image_pre_save(sender, instance, **kwargs):
     try:
         image = sender.objects_including_wip.get(pk=instance.pk)
     except sender.DoesNotExist:
-        user_scores_index = instance.user.userprofile.get_scores()['user_scores_index']
+        user_scores_index = instance.user.userprofile.get_scores()['user_scores_index'] or 0
         if user_scores_index >= 1.00 or is_any_premium_subscription(instance.user):
             instance.moderated_when = datetime.date.today()
             instance.moderator_decision = 1
@@ -714,7 +714,7 @@ def forum_post_pre_save(sender, instance, **kwargs):
                     '*** Type your forum post here ***',
                     '*** Type your reply here ***',
                 ]:
-                    translated = gettext(message).decode('utf-8')
+                    translated = gettext(message)
                     content = getattr(instance, attribute)
                     setattr(
                         instance,

@@ -393,7 +393,7 @@ def image_ad_key_value_pairs(image):
 
 @register.filter
 def valid_subscriptions(user):
-    if user.is_anonymous():
+    if user.is_anonymous:
         return []
 
     us = UserSubscription.active_objects.filter(user=user)
@@ -403,7 +403,7 @@ def valid_subscriptions(user):
 
 @register.filter
 def inactive_subscriptions(user):
-    if user.is_anonymous():
+    if user.is_anonymous:
         return []
 
     return [x.subscription
@@ -414,7 +414,7 @@ def inactive_subscriptions(user):
 
 @register.filter
 def has_valid_subscription(user, subscription_pk):
-    if user.is_anonymous():
+    if user.is_anonymous:
         return False
 
     us = UserSubscription.active_objects.filter(
@@ -428,7 +428,7 @@ def has_valid_subscription(user, subscription_pk):
 
 @register.filter
 def has_valid_subscription_in_category(user, category):
-    if user.is_anonymous():
+    if user.is_anonymous:
         return False
 
     us = UserSubscription.active_objects.filter(
@@ -442,7 +442,7 @@ def has_valid_subscription_in_category(user, category):
 
 @register.filter
 def get_premium_subscription_expiration(user):
-    if user.is_anonymous():
+    if user.is_anonymous:
         return None
 
     us = premium_get_valid_usersubscription(user)
@@ -451,7 +451,7 @@ def get_premium_subscription_expiration(user):
 
 @register.filter
 def has_subscription_by_name(user, name):
-    if user.is_anonymous():
+    if user.is_anonymous:
         return False
 
     return UserSubscription.objects.filter(
@@ -460,7 +460,7 @@ def has_subscription_by_name(user, name):
 
 @register.filter
 def get_usersubscription_by_name(user, name):
-    if user.is_anonymous():
+    if user.is_anonymous:
         return None
 
     return UserSubscription.objects.get(

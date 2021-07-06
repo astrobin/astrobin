@@ -1,14 +1,12 @@
 from datetime import datetime, timedelta, date
 
 import simplejson as json
-from beautifulsoupselect import BeautifulSoupSelect as BSS
 from bs4 import BeautifulSoup as BS
 from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core.cache import cache
 from django.core.management import call_command
 from django.test import TestCase, override_settings
-from mock import patch
 
 from astrobin.enums import SubjectType
 from astrobin.tests.generators import Generators
@@ -707,8 +705,8 @@ class IotdTest(TestCase):
         # Check that multiple votes for the same image result in one single image rendered
         vote_2 = IotdVote.objects.create(reviewer=self.reviewer_2, image=self.image)
         response = self.client.get(url)
-        bss = BSS(response.content)
-        self.assertEqual(len(bss('.astrobin-image-container')), 1)
+        bs = BS(response.content, 'lxml')
+        self.assertEqual(len(bs.select('.astrobin-image-container')), 1)
 
 
         # Check for may-not-select class
@@ -716,7 +714,7 @@ class IotdTest(TestCase):
         vote_1.reviewer = self.judge_1
         vote_1.save()
         response = self.client.get(url)
-        bs = BS(response.content, "lxml")
+        bs = BS(response.content, 'lxml')
         self.assertEqual(len(bs.select('.iotd-queue-item.may-not-select')), 1)
         self.reviewers.user_set.remove(self.judge_1)
         vote_1.reviewer = self.reviewer_1

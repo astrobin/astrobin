@@ -207,9 +207,6 @@ class ForumTest(TestCase):
             },
             follow=True)
 
-        self.client.logout()
-        self.client.login()
-
         self.assertContains(response, "2 topics deleted")
         self.assertEqual(1, Topic.objects.filter(id=topic1.id).count())
         self.assertEqual(1, Topic.objects.filter(id=topic2.id).count())

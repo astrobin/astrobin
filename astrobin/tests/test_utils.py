@@ -168,14 +168,14 @@ class UtilsTest(TestCase):
         self.assertEqual(2, accounts.count())
 
     def test_unique_items(self):
-        list_with_duplicates = ['foo', 'bar', 'baz', 'foo', 2, 6, 10, 2]
-        expected_result = ['foo', 'bar', 'baz', 2, 6, 10]
+        list_with_duplicates = ['foo', 'bar', 'baz', 'foo', '2', '6', '10', '2']
+        expected_result = ['foo', 'bar', 'baz', '2', '6', '10']
 
         self.assertEqual(sorted(expected_result), sorted(utils.unique_items(list_with_duplicates)))
 
     def test_unique_items_list_not_flat(self):
         list_with_duplicates = ['foo', 'bar', 'baz', 'foo',
-                                2, ['b', 'c', 'a'], 6, 10, 2, ['b', 'c', 'a']]
-        expected_result = ['foo', 'bar', 'baz', 2, ['b', 'c', 'a'], 6, 10]
+                                '2', ['b', 'c', 'a'], '6', '10', '2', ['b', 'c', 'a']]
+        expected_result = ['foo', 'bar', 'baz', '2', ['b', 'c', 'a'], '6', '10']
 
         self.assertEqual(expected_result, utils.unique_items(list_with_duplicates))
