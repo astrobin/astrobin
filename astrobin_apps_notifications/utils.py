@@ -1,4 +1,4 @@
-from urllib.parse import urlparse, urlencode
+from urllib.parse import parse_qsl, urlparse, urlencode, urlunparse
 
 from django.conf import settings
 from django.core.cache import cache
@@ -33,10 +33,10 @@ def get_notification_url_params_for_email(from_user=None):
 
 def build_notification_url(url, from_user=None):
     params = get_notification_url_params_for_email(from_user)
-    url_parse = urlparse.urlparse(url)
+    url_parse = urlparse(url)
     query = url_parse.query
-    url_dict = dict(urlparse.parse_qsl(query))
+    url_dict = dict(parse_qsl(query))
     url_dict.update(params)
     url_new_query = urlencode(url_dict)
     url_parse = url_parse._replace(query=url_new_query)
-    return urlparse.urlunparse(url_parse)
+    return urlunparse(url_parse)
