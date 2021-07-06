@@ -38,7 +38,9 @@ class MentionsServiceTest(TestCase):
     def test_get_mentions_two_mentions_multiline(self):
         text = "Hello [url=https://www.astrobin.com/users/foo/]@Foo Smith[/url]\nHello " \
                "[url=https://www.astrobin.com/users/bar/]@Bar Test[/url]"
-        self.assertEqual(["foo", "bar"], MentionsService.get_mentions(text))
+        mentions = MentionsService.get_mentions(text)
+        self.assertTrue("foo" in mentions)
+        self.assertTrue("bar" in mentions)
 
     def test_get_mentions_unique_mentions(self):
         text = "Hello [url=https://www.astrobin.com/users/foo/]@Foo Smith[/url] and " \
