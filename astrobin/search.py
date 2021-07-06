@@ -68,7 +68,7 @@ class CustomContain(BaseInput):
     input_type_name = 'custom_contain'
 
     def prepare(self, query_obj):
-        query_string = super(CustomContain, self).prepare(query_obj)
+        query_string = super(CustomContain, self).prepare(query_obj).decode('utf-8')
         query_string = query_obj.clean(query_string)
 
         exact_bits = [Clean(bit).prepare(query_obj) for bit in query_string.split(' ') if bit]
@@ -464,7 +464,7 @@ class AstroBinSearchForm(SearchForm):
         domain = self.cleaned_data.get('d')
 
         try:
-            q = unicodedata.normalize('NFKD', q).encode('ascii', 'ignore')
+            q = unicodedata.normalize('NFKD', q).encode('ascii', 'ignore').decode('utf-8')
         except:
             pass
 
