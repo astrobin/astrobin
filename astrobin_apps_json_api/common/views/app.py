@@ -66,7 +66,7 @@ class AppConfig(JSONResponseMixin, View):
                 try:
                     with open(po_file, "r") as f:
                         for chunk in iter(lambda: f.read(4096), b""):
-                            language_app_md5.update(chunk)
+                            language_app_md5.update(chunk.encode('utf-8'))
                     hashes.append(language_app_md5.hexdigest())
                 except IOError:
                     continue
