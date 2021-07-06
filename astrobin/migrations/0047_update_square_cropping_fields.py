@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='image',
             name='square_cropping',
-            field=image_cropping.fields.ImageRatioField(b'image_file', '130x130', adapt_rotation=False,
+            field=image_cropping.fields.ImageRatioField('image_file', '130x130', adapt_rotation=False,
                                                         allow_fullsize=False, free_crop=False,
                                                         help_text='Select an area of the image to be used as thumbnail in your gallery.',
                                                         hide_image_field=False, size_warning=True,
@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='imagerevision',
             name='square_cropping',
-            field=image_cropping.fields.ImageRatioField(b'image_file', '130x130', adapt_rotation=False,
+            field=image_cropping.fields.ImageRatioField('image_file', '130x130', adapt_rotation=False,
                                                         allow_fullsize=False, free_crop=False,
                                                         help_text='Select an area of the image to be used as thumbnail in your gallery.',
                                                         hide_image_field=False, size_warning=True,

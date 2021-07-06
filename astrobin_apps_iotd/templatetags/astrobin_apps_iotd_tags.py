@@ -3,7 +3,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.template import Library
 
-from astrobin_apps_iotd.models import IotdSubmission, IotdVote, Iotd
+from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_iotd.permissions import may_toggle_submission_image, may_toggle_vote_image, may_elect_iotd, \
     may_unelect_iotd
 from astrobin_apps_iotd.services import IotdService
@@ -15,17 +15,17 @@ register = Library()
 
 @register.filter
 def is_iotd_submitter(user):
-    return user.groups.filter(name = 'iotd_submitters').exists()
+    return user.groups.filter(name='iotd_submitters').exists()
 
 
 @register.filter
 def is_iotd_reviewer(user):
-    return user.groups.filter(name = 'iotd_reviewers').exists()
+    return user.groups.filter(name='iotd_reviewers').exists()
 
 
 @register.filter
 def is_iotd_judge(user):
-    return user.groups.filter(name = 'iotd_judges').exists()
+    return user.groups.filter(name='iotd_judges').exists()
 
 
 # Permissions
@@ -83,17 +83,17 @@ def may_not_unelect_reason(user, image):
 
 @register.filter
 def is_iotd(image):
-    return Iotd.objects.filter(image = image).exists()
+    return Iotd.objects.filter(image=image).exists()
 
 
 @register.filter
 def is_current_or_past_iotd(image):
-    return Iotd.objects.filter(image = image, date__lte = datetime.now().date())
+    return Iotd.objects.filter(image=image, date__lte=datetime.now().date())
 
 
 @register.filter
 def iotd_elections_today(user):
-    return Iotd.objects.filter(judge = user, created__contains = datetime.now().date()).count()
+    return Iotd.objects.filter(judge=user, created__contains=datetime.now().date()).count()
 
 
 # Getters
@@ -101,22 +101,25 @@ def iotd_elections_today(user):
 @register.filter
 def iotd_date_for_image(image):
     try:
-        iotd = Iotd.objects.get(image = image)
+        iotd = Iotd.objects.get(image=image)
         return iotd.date
     except Iotd.DoesNotExist:
         return ""
 
-@register.assignment_tag
+
+@register.simple_tag
 def get_iotd():
-    iotds = Iotd.objects.filter(date__lte = datetime.now().date()).order_by('-date')
+    iotds = Iotd.objects.filter(date__lte=datetime.now().date()).order_by('-date')
     if iotds:
         return iotds[0]
     return None
+
 
 @register.filter
 def judge_cannot_select_now_reason(judge):
     # type: (User) -> Union[str, None]
     return IotdService().judge_cannot_select_now_reason(judge)
+
 
 @register.filter
 def get_next_available_selection_time_for_judge(judge):

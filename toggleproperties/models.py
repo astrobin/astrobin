@@ -6,6 +6,8 @@ from django.db import models, IntegrityError
 from django.db.models import SET_NULL, CASCADE
 from django.dispatch import receiver
 
+from common.utils import get_sentinel_user
+
 log = logging.getLogger("apps")
 
 try:
@@ -88,7 +90,7 @@ class TogglePropertyManager(models.Manager):
 
 class ToggleProperty(models.Model):
     property_type = models.CharField(max_length=64)
-    user = models.ForeignKey(User, on_delete=SET_NULL)
+    user = models.ForeignKey(User, on_delete=models.SET(get_sentinel_user))
     content_type = models.ForeignKey(ContentType, on_delete=CASCADE)
     object_id = models.TextField()
     content_object = GenericForeignKey('content_type', 'object_id')

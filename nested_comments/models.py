@@ -2,6 +2,7 @@
 from django.contrib.auth.models import User
 from django.db.models import CASCADE
 
+from common.utils import get_sentinel_user
 from toggleproperties.models import ToggleProperty
 
 try:
@@ -14,10 +15,6 @@ except ImportError:
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.db import models
-
-
-def get_sentinel_user():
-    return User.objects.get_or_create(username='deleted')[0]
 
 
 class NestedComment(models.Model):

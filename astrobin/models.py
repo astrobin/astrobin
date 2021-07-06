@@ -26,6 +26,7 @@ from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBran
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_notifications.services import NotificationsService
 from common.upload_paths import uncompressed_source_upload_path, image_upload_path, data_download_upload_path
+from common.utils import get_sentinel_user
 from common.validators import FileValidator
 from functools import reduce
 
@@ -2629,7 +2630,7 @@ class App(models.Model):
         User,
         editable=False,
         related_name='app_api_key',
-        on_delete=SET_NULL
+        on_delete=models.SET(get_sentinel_user)
     )
 
     name = models.CharField(

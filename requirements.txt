@@ -1,12 +1,11 @@
--e git+https://github.com/astrobin/django-change-email.git@4e7e2d9e3cbee51db2de95620a7c22f18184dca4#egg=django_change_email
+-e git+https://github.com/astrobin/django-change-email.git@a3508ea9736758081f460b1bae49dcb0153f7507#egg=django_change_email
 -e git+https://github.com/astrobin/django-hitcount.git@3acf5bdb9728ca8c38cd792dd746114c9076ae88#egg=django_hitcount
 -e git+https://github.com/astrobin/django-notification.git@cdd49112efae4c2fde338a9e0714432bf9afd031#egg=django_notification
--e git+https://github.com/astrobin/django-persistent-messages.git@c7341eed3db9addfa77c0a7b6b4f8d99c54b41a2#egg=django_persistent_messages
--e git+https://github.com/astrobin/django-subscription.git@2649c4afbc7507ae186f59e9a129c25ed58df1db#egg=django_subscription
--e git+https://github.com/astrobin/django-threaded-messages.git@f50a70e20a33187045e91bb7a09f24debf8a438b#egg=django_threaded_messages
+-e git+https://github.com/astrobin/django-persistent-messages.git@a11f84d5aab3798284e3f543286845069e68c631#egg=django_persistent_messages
+-e git+https://github.com/astrobin/django-subscription.git@0dcfcab91680528c655f7cb140661c21eb4554ba#egg=django_subscription
+-e git+https://github.com/astrobin/django-threaded-messages.git@0a18b67b62ea53205917d7bf0ef67811527b220a#egg=django_threaded_messages
 -e git+https://github.com/astrobin/easy-thumbnails.git@9b57a875ff3c99801f30e8ab25b7938a654934e4#egg=easy-thumbnails
 -e git+https://github.com/nickhargreaves/django-bootstrap-toolkit.git@edbfafbd01705aed0580205a81323d1545e4d733#egg=django_bootstrap_toolkit
--e git+https://github.com/siovene/django-ember.git@b925ecd22c8008ccb339a4977d0081972c58f39f#egg=django_ember
 -e git+https://github.com/siovene/django.js.git@bee62fca8fb814fdccd8cbd837008e2e761a277f#egg=django.js
 -e git+https://github.com/siovene/pybbm.git@947bccb116bcdd840999fb5a1081a9cde99af384#egg=pybbm
 -e git+https://github.com/siovene/snakecheese.git@72c5c7be4a5ae19c9054f11c8cedb68dd661fd65#egg=django_contrib_requestprovider&subdirectory=gadjolib

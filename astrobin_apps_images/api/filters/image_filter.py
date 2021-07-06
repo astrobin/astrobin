@@ -12,8 +12,8 @@ class ImageFilter(FilterSet):
     class Meta:
         model = Image
         fields = {
-            'ids': (),
-            'hashes': (),
+            'id': (),
+            'hash': (),
             'user': ('exact',),
             'uploaded': ('lt', 'lte', 'exact', 'gt', 'gte'),
             'published': ('lt', 'lte', 'exact', 'gt', 'gte'),
