@@ -14,7 +14,6 @@ MIDDLEWARE = [
     'astrobin.middleware.RestFrameworkTokenCookieMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
-    'gadjo.requestprovider.middleware.RequestProvider',
 ]
 
 if not TESTING:

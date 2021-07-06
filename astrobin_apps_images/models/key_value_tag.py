@@ -8,7 +8,7 @@ class KeyValueTag(models.Model):
     key = models.CharField(max_length=100, null=False, blank=False)
     value = models.CharField(max_length=100, null=False, blank=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s=%s" % (self.key, self.value)
 
     class Meta:

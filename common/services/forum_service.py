@@ -9,7 +9,7 @@ class ForumService:
     def get_topic_first_unread(topic, user):
         # type: (Topic, User) -> Union[Post, None]
 
-        if not user.is_authenticated():
+        if not user.is_authenticated:
             return None
 
         read_dates = []

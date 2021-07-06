@@ -55,7 +55,6 @@ INSTALLED_APPS += [
     'el_pagination',
     'django_user_agents',
     'pybb',
-    'sanitizer',
     'precise_bbcode',
     'django_bootstrap_breadcrumbs',
     'silk',

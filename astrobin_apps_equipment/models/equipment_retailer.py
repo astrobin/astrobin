@@ -58,5 +58,5 @@ class EquipmentRetailer(SafeDeleteModel):
         blank=True,
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name

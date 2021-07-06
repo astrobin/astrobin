@@ -1,5 +1,5 @@
 {% load i18n %}
-{% load staticfiles %}
+{% load static %}
 
 {% load avatar_tags %}
 
@@ -11,7 +11,7 @@
 <div id="nested-comments-language-code" data-value="{{LANGUAGE_CODE}}"></div>
 <div id="nested-comments-user-id" data-value="{{request.user.id}}"></div>
 <div id="nested-comments-user-name" data-value="{{request.user.username}}"></div>
-<div id="nested-comments-user-is-authenticated" data-value="{{ request.user.is_authenticated.value }}"></div>
+<div id="nested-comments-user-is-authenticated" data-value="{{ request.user.is_authenticated }}"></div>
 <div id="nested-comments-user-is-superuser" data-value="{{ request.user.is_superuser }}"></div>
 <div id="nested-comments-comments-content-type-id" data-value="{% nestedcomments_content_type_id %}"></div>
 
@@ -28,21 +28,32 @@
 </div>
 
 <script type="text/x-handlebars" data-template-name="nested-comments">
+{% verbatim %}
     {{outlet top-level}}
     {{outlet comments}}
+{% endverbatim %}
 </script>
 
 
 <script type="text/x-handlebars" data-template-name="top-level">
+{% verbatim %}
     {{#if view.userIsAuthenticated}}
         {{#unless view.collapsed}}
+{% endverbatim %}
             {% include '_contribution_index_alert.html' %}
+{% verbatim %}
             <form>
                 {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
+{% endverbatim %}
                 {% include '_rich_content_editor_help.html' %}
 
+{% verbatim %}
                 {{view view.SaveCommentButtonView}}
-                <a class="btn btn-mini" href="#" {{action "collapse" target="view"}}>{% trans "Cancel" %}</a>
+                <a class="btn btn-mini" href="#" {{action "collapse" target="view"}}>
+{% endverbatim %}
+                  {% trans "Cancel" %}
+{% verbatim %}
+                </a>
 
                 {{#if view.submitting}}
                     {{view NestedCommentsApp.LoaderView}}
@@ -51,24 +62,35 @@
         {{else}}
             <a href="#"
                class="uncollapse add-top-level label label-important"
-               {{action "uncollapse" target="view"}}>{% trans "Add a comment" %}
+               {{action "uncollapse" target="view"}}>
+{% endverbatim %}
+               {% trans "Add a comment" %}
+{% verbatim %}
             </a>
         {{/unless}}
     {{else}}
         <p class="please-login">
+{% endverbatim %}
             {% url 'auth_login' as login_url %}
             {% blocktrans trimmed with signup_url="https://welcome.astrobin.com/pricing" %}
                 Please <a href="{{login_url}}">log in</a> or <a href="{{signup_url}}">sign up</a> to leave a comment.
             {% endblocktrans %}
         </p>
+{% verbatim %}
     {{/if}}
+{% endverbatim %}
 </script>
 
 
 <script type="text/x-handlebars" data-template-name="comments">
+{% verbatim %}
     {{#if controller.ready}}
         {{#unless controller.content.length}}
-           <p class="comment">{% trans "There are no comments yet." %}</p>
+           <p class="comment">
+{% endverbatim %}
+             {% trans "There are no comments yet." %}
+{% verbatim %}
+           </p>
         {{/unless}}
 
         {{#each controller.content}}
@@ -77,10 +99,12 @@
     {{else}}
         {{view NestedCommentsApp.LoaderView}}
     {{/if}}
+{% endverbatim %}
 </script>
 
 
 <script type="text/x-handlebars" data-template-name="singleComment">
+{% verbatim %}
     {{#unless view.node.deleted}}
         <div class="avatar visible-desktop">
             <a class="author" {{bindAttr href="view.node.author_url"}}>
@@ -95,12 +119,18 @@
     <div class="comment-container" {{ bindAttr id="view.node.cid"}}>
         {{#if view.node.pending_moderation}}
             <div class="content pending-moderation">
-                <em>{% trans "This comment is pending moderation and will be reviewed shortly." %}</em>
+                <em>
+{% endverbatim %}
+                  {% trans "This comment is pending moderation and will be reviewed shortly." %}
+{% verbatim %}
+                </em>
             </div>
         {{else}}
             <div class="meta">
                 {{#if view.node.deleted}}
+{% endverbatim %}
                     {% trans "(deleted)" %}
+{% verbatim %}
                 {{else}}
                     <a class="author" {{bindAttr href="view.node.author_url"}}>
                         {{view.node.author_username}}
@@ -112,15 +142,24 @@
                 &middot;
 
                 {{#if view.node.hasNoLikes}}
-                    {{ view.node.likesCount }} {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" %}
+                    {{ view.node.likesCount }}
+{% endverbatim %}
+                    {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" %}
+{% verbatim %}
                 {{/if}}
 
                 {{#if view.node.hasOneLike}}
-                    {{ view.node.likesCount }} {% trans "like" context "Noun, e.g. 'This element has 1 like'" %}
+                    {{ view.node.likesCount }}
+{% endverbatim %}
+                    {% trans "like" context "Noun, e.g. 'This element has 1 like'" %}
+{% verbatim %}
                 {{/if}}
 
                 {{#if view.node.hasManyLikes}}
-                    {{ view.node.likesCount }} {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" %}
+                    {{ view.node.likesCount }}
+{% endverbatim %}
+                    {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" %}
+{% verbatim %}
                 {{/if}}
 
                 {{#unless view.collapsed}}
@@ -137,7 +176,11 @@
 
                 <div class="content">
                     {{#if view.node.deleted}}
-                        <p>{% trans "(deleted)" %}</p>
+                        <p>
+{% endverbatim %}
+                            {% trans "(deleted)" %}
+{% verbatim %}
+                        </p>
                     {{else}}
                         {{#if view.editing}}
                             {{view view.EditView commentBinding="view.node"}}
@@ -153,34 +196,53 @@
 
                 <div class="links">
                     <a {{bindAttr href="view.node.url"}} {{action "link" target="view"}} class="no-page-loader">
-                        <i class="icon-link"></i> {% trans "Link" %}
+                        <i class="icon-link"></i>
+{% endverbatim %}
+                        {% trans "Link" %}
+{% verbatim %}
                     </a>
 
                     {{#if view.node.authorIsRequestingUser}}
                         {{#if view.node.deleted}}
                             <a href="#" {{action "undelete" target="view"}}>
+{% endverbatim %}
                                 {% trans "Undelete" %}
+{% verbatim %}
                             </a>
                         {{else}}
                             <a href="#" {{action "delete_" target="view"}}>
-                                <i class="icon-trash"></i> {% trans "Delete" %}
+                                <i class="icon-trash"></i>
+{% endverbatim %}
+                                {% trans "Delete" %}
+{% verbatim %}
                             </a>
                         {{/if}}
 
                         {{#if view.node.allowEditing}}
                             {{#unless view.editing}}
-                                <i class="icon-pencil"></i> <a href="#" {{action "edit" target="view"}}>{% trans "Edit" %}</a>
+                                <i class="icon-pencil"></i>
+                                <a href="#" {{action "edit" target="view"}}>
+{% endverbatim %}
+                                    {% trans "Edit" %}
+{% verbatim %}
+                                </a>
                             {{/unless}}
                         {{/if}}
 
                         {{#if view.userIsSuperuser}}
                             <a href="#" class="label label-important" {{action "reply" target="view"}}>
-                                <i class="icon-reply"></i> {% trans "Reply" %}
+                                <i class="icon-reply"></i>
+{% endverbatim %}
+                                {% trans "Reply" %}
+{% verbatim %}
                             </a>
                         {{/if}}
                     {{else}}
                         <a href="#" class="label label-important" {{action "reply" target="view"}}>
-                            <i class="icon-reply"></i> {% trans "Reply" %}
+                            <i class="icon-reply"></i>
+{% endverbatim %}
+                            {% trans "Reply" %}
+{% verbatim %}
                         </a>
 
                         {{#unless view.node.liked}}
@@ -188,14 +250,19 @@
                                class="label label-important comment-like"
                                {{bindAttr class="view.node.liking:liking"}}
                                {{action "like" target="view"}}>
-                                <i class="icon-thumbs-up"></i> {% trans "Like" %}
+                                <i class="icon-thumbs-up"></i>
+{% endverbatim %}
+                                {% trans "Like" %}
+{% verbatim %}
                             </a>
                         {{else}}
                             <a href="#"
                                class="label comment-unlike"
                                {{bindAttr class="view.node.unliking:unliking"}}
                                {{action "unlike" target="view"}}>
+{% endverbatim %}
                                 {% trans "Unlike" %}
+{% verbatim %}
                             </a>
                         {{/unless}}
                     {{/if}}
@@ -220,51 +287,79 @@
             {{/unless}}
         {{/if}}
     </div>
+{% endverbatim %}
 </script>
 
 
 <script type="text/x-handlebars" data-template-name="edit">
     {% include '_contribution_index_alert.html' %}
-    {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
+
+    {% verbatim %}
+        {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
+    {% endverbatim %}
+
     {% include '_rich_content_editor_help.html' %}
 
-    {{view view.SaveEditButtonView commentBinding="view.comment"}}
-    <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>{% trans "Cancel" %}</a>
+    {% verbatim %}
+        {{view view.SaveEditButtonView commentBinding="view.comment"}}
+        <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>
+{% endverbatim %}
+          {% trans "Cancel" %}
+{% verbatim %}
+        </a>
 
-    {{#unless view.comment.getHTML}}
-        <small>{% trans "The comment cannot be empty." %}</small>
-    {{/unless}}
+        {{#unless view.comment.getHTML}}
+            <small>
+{% endverbatim %}
+                {% trans "The comment cannot be empty." %}
+{% verbatim %}
+            </small>
+        {{/unless}}
 
-    {{#if view.parentView.submitting}}
-        {{view NestedCommentsApp.LoaderView}}
-    {{/if}}
+        {{#if view.parentView.submitting}}
+            {{view NestedCommentsApp.LoaderView}}
+        {{/if}}
+    {% endverbatim %}
 </script>
 
 <script type="text/x-handlebars" data-template-name="reply">
+{% verbatim %}
     {{#if view.userIsAuthenticated}}
+{% endverbatim %}
         {% include '_contribution_index_alert.html' %}
+{% verbatim %}
         {{view Ember.TextArea rows=6 valueBinding="view.comment.text"}}
+{% endverbatim %}
         {% include '_rich_content_editor_help.html' %}
-
+{% verbatim %}
         {{view view.SaveReplyButtonView}}
-        <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>{% trans "Cancel" %}</a>
+        <a class="btn btn-mini" href="#" {{action "cancel" target="view"}}>
+{% endverbatim %}
+          {% trans "Cancel" %}
+{% verbatim %}
+        </a>
 
         {{#if view.parentView.submitting}}
             {{view NestedCommentsApp.LoaderView}}
         {{/if}}
     {{else}}
         <p class="please-login">
+{% endverbatim %}
             {% url 'auth_login' as login_url %}
             {% blocktrans trimmed with signup_url="https://welcome.astrobin.com/pricing" %}
                 Please <a href="{{ login_url }}">log in</a> or <a href="{{ signup_url }}">sign up</a> to leave a comment.
             {% endblocktrans %}
+{% verbatim %}
         </p>
     {{/if}}
+{% endverbatim %}
 </script>
 
 
 <script type="text/x-handlebars" data-template-name="timeago">
+{% verbatim %}
     {{view.value}}
+{% endverbatim %}
 </script>
 
 
@@ -274,7 +369,9 @@
 
 
 <script type="text/x-handlebars" data-template-name="loader">
+{% verbatim %}
     <img alt="" {{bindAttr src="view.loaderUrl"}}/>
+{% endverbatim %}
 </script>
 
 

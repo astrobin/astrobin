@@ -224,7 +224,7 @@ class GearMakeAutoRename(models.Model):
         null=False,
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s --> %s" % (self.rename_from, self.rename_to)
 
     class Meta:
@@ -281,7 +281,7 @@ class Gear(models.Model):
         editable=False,
     )
 
-    def __unicode__(self):
+    def __str__(self):
         make = self.get_make()
         name = self.get_name()
 
@@ -405,7 +405,7 @@ class GearUserInfo(models.Model):
         blank=True,
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s (%s)" % (self.alias, self.gear.name)
 
     class Meta:
@@ -418,7 +418,7 @@ class GearAssistedMerge(models.Model):
     slave = models.ForeignKey(Gear, related_name='assisted_slave', null=True, on_delete=CASCADE)
     cutoff = models.DecimalField(default=0, max_digits=3, decimal_places=2)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.master.name
 
     class Meta:
@@ -430,7 +430,7 @@ class GearHardMergeRedirect(models.Model):
     fro = models.IntegerField()
     to = models.IntegerField()
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s -> %s" % (self.fro, self.to)
 
     class Meta:
@@ -1136,7 +1136,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     wip = WipImagesManager()
     uploads_in_progress = UploadsInProgressImagesManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title if self.title is not None else _("(no title)")
 
     def get_id(self):
@@ -1333,7 +1333,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             self.square_cropping)
 
         from hashlib import sha256
-        return sha256(cache_key).hexdigest()
+        return sha256(cache_key.encode('utf-8')).hexdigest()
 
     def thumbnail(self, alias, revision_label, **kwargs):
         def normalize_url_security(url, thumbnail_settings):
@@ -1647,7 +1647,7 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     objects = ImageRevisionsManager()
     uploads_in_progress = UploadsInProgressImageRevisionsManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.image.title
 
     def save(self, *args, **kwargs):
@@ -1789,7 +1789,7 @@ class Acquisition(models.Model):
     class Meta:
         app_label = 'astrobin'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.image.title
 
     def save(self, *args, **kwargs):
@@ -2003,7 +2003,7 @@ class Request(models.Model):
 
     objects = InheritanceManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s %s: %s' % (_('Request from'), self.from_user.username, self.message)
 
     def get_absolute_url(self):
@@ -2467,9 +2467,9 @@ class UserProfile(SafeDeleteModel):
     )
 
     def get_display_name(self):
-        return self.real_name if self.real_name else self.user.__unicode__()
+        return self.real_name if self.real_name else str(self.user)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.get_display_name()
 
     def get_absolute_url(self):
@@ -2496,8 +2496,7 @@ class UserProfile(SafeDeleteModel):
 
         if not scores:
             try:
-                user_search_result = \
-                    SearchQuerySet().models(User).filter(django_id=self.user.pk)[0]
+                user_search_result = SearchQuerySet().models(User).filter(django_id=self.user.pk)[0]
             except (IndexError, SearchFieldError):
                 return {
                     'user_scores_index': None,
@@ -2615,7 +2614,7 @@ class Location(models.Model):
         on_delete = CASCADE
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return ', '.join([_f for _f in [
             self.name, self.city, self.state,
             str(get_country_name(self.country))
@@ -2664,7 +2663,7 @@ class App(models.Model):
     class Meta:
         ordering = ['-created']
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s for %s" % (self.key, self.registrar)
 
     def save(self, *args, **kwargs):
@@ -2712,7 +2711,7 @@ class AppApiKeyRequest(models.Model):
     class Meta:
         ordering = ['-created']
 
-    def __unicode__(self):
+    def __str__(self):
         return 'API request: %s' % self.name
 
     def save(self, *args, **kwargs):
@@ -2778,7 +2777,7 @@ class ImageOfTheDay(models.Model):
         ordering = ['-date']
         app_label = 'astrobin'
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s as an Image of the Day" % self.image.title
 
 
@@ -2806,7 +2805,7 @@ class ImageOfTheDayCandidate(models.Model):
         ordering = ['-date', 'position']
         app_label = 'astrobin'
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s as an Image of the Day Candidate" % self.image.title
 
 
@@ -2823,7 +2822,7 @@ class GlobalStat(models.Model):
         ordering = ['-date']
         app_label = 'astrobin'
 
-    def __unicode__(self):
+    def __str__(self):
         return "%d users, %d images, %d hours of integration time" % (
             self.users, self.images, self.integration)
 
@@ -2834,7 +2833,7 @@ class BroadcastEmail(models.Model):
     message = models.TextField()
     message_html = models.TextField(null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.subject
 
 

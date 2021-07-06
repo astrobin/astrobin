@@ -37,6 +37,7 @@ services:
           --max-requests-jitter 50 \
           --timeout 300 \
           --graceful-timeout 300 \
+          --preload
           -k gevent
     ports:
       - "8083:8083"

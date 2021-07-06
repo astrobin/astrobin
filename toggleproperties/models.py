@@ -53,7 +53,7 @@ class TogglePropertyManager(models.Manager):
             results.setdefault(c['object_id'], {})['count'] = c['count']
             results.setdefault(c['object_id'], {})['is_toggled'] = False
             results.setdefault(c['object_id'], {})['content_type_id'] = content_type.id
-        if user and user.is_authenticated():
+        if user and user.is_authenticated:
             qs = qs.filter(user=user)
             for f in qs:
                 results.setdefault(f.object_id, {})['is_toggled'] = True
@@ -105,7 +105,7 @@ class ToggleProperty(models.Model):
         unique_together = (('property_type', 'user', 'content_type', 'object_id'),)
         ordering = ('-created_on',)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"%s (%s) %s" % (self.user, self.property_type, self.content_object)
 
 

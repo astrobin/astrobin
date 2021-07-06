@@ -1,6 +1,8 @@
 import datetime
 
+import bleach
 from django import template
+from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.template import Library, Node
 from django.template.defaultfilters import stringfilter, urlencode
@@ -235,3 +237,13 @@ def is_future(dt):
 @register.simple_tag
 def timestamp(dt):
     return mark_safe('<abbr class="timestamp" data-epoch="%s">...</abbr>' % DateTimeService.epoch(dt))
+
+
+@register.filter
+def strip_html(value):
+    if isinstance(value, str):
+        value = bleach.clean(
+            value, tags=settings.SANITIZER_ALLOWED_TAGS,
+            attributes=settings.SANITIZER_ALLOWED_ATTRIBUTES,
+            styles=[], strip=True)
+    return value

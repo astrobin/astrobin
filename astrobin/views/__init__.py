@@ -338,7 +338,7 @@ def upload_max_revisions_error(request, max_revisions, image):
 def index(request, template='index/root.html', extra_context=None):
     """Main page"""
 
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         from django.shortcuts import redirect
         return redirect("https://welcome.astrobin.com/")
 
@@ -1104,7 +1104,7 @@ def user_page(request, username):
         raise Http404
 
     if Image.objects_including_wip.filter(user=user, moderator_decision=2).count() > 0:
-        if (not request.user.is_authenticated() or \
+        if (not request.user.is_authenticated or \
                 not request.user.is_superuser and \
                 not request.user.userprofile.is_image_moderator()):
             raise Http404
@@ -1537,7 +1537,7 @@ def user_page_following(request, username, extra_context=None):
 
     response_dict = {
         'request_user': UserProfile.objects.get(
-            user=request.user).user if request.user.is_authenticated() else None,
+            user=request.user).user if request.user.is_authenticated else None,
         'requested_user': user,
         'user_list': followed_users,
         'view': request.GET.get('view', 'default'),
@@ -1572,7 +1572,7 @@ def user_page_followers(request, username, extra_context=None):
 
     response_dict = {
         'request_user': UserProfile.objects.get(
-            user=request.user).user if request.user.is_authenticated() else None,
+            user=request.user).user if request.user.is_authenticated else None,
         'requested_user': user,
         'user_list': followers,
         'view': request.GET.get('view', 'default'),
@@ -1615,7 +1615,7 @@ def user_page_friends(request, username, extra_context=None):
 
     response_dict = {
         'request_user': UserProfile.objects.get(
-            user=request.user).user if request.user.is_authenticated() else None,
+            user=request.user).user if request.user.is_authenticated else None,
         'requested_user': user,
         'user_list': friends,
         'view': request.GET.get('view', 'default'),
@@ -2347,7 +2347,7 @@ def stats(request):
 @never_cache
 @require_GET
 def astrophotographers_list(request):
-    if request.user.is_authenticated() and \
+    if request.user.is_authenticated and \
             request.user.userprofile.exclude_from_competitions and \
             not request.user.is_superuser:
         return HttpResponseForbidden()
@@ -2413,7 +2413,7 @@ def astrophotographers_list(request):
 @never_cache
 @require_GET
 def contributors_list(request):
-    if request.user.is_authenticated() and \
+    if request.user.is_authenticated and \
             request.user.userprofile.exclude_from_competitions and \
             not request.user.is_superuser:
         return HttpResponseForbidden()
@@ -2512,7 +2512,7 @@ def set_language(request, language_code):
         )
         activate(language_code)
 
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             profile = request.user.userprofile
             profile.language = language_code
             profile.save(keep_deleted=True)
@@ -2747,7 +2747,7 @@ def gear_popover_ajax(request, id, image_id):
         'user': request.user,
         'gear': gear,
         'image': image,
-        'is_authenticated': request.user.is_authenticated(),
+        'is_authenticated': request.user.is_authenticated,
         'IMAGES_URL': settings.IMAGES_URL,
         'REQUEST_COUNTRY': get_client_country_code(request),
     })
@@ -2783,7 +2783,7 @@ def user_popover_ajax(request, username):
                                 'user': profile.user,
                                 'images': Image.objects.filter(user=profile.user).count(),
                                 'member_since': member_since,
-                                'is_authenticated': request.user.is_authenticated(),
+                                'is_authenticated': request.user.is_authenticated,
                                 'request': request,
                             })
 

@@ -8,7 +8,7 @@ class AWS4AuthEncodingFix(AWS4Auth):
     def __call__(self, request):
         request = super(AWS4AuthEncodingFix, self).__call__(request)
 
-        for header_name in request.headers:
+        for header_name in request.headers.copy():
             self._encode_header_to_utf8(request, header_name)
 
         return request

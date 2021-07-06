@@ -229,7 +229,7 @@ class ImageDetailView(ImageDetailViewBase):
         image = self.get_object(Image.objects_including_wip)
 
         if image.moderator_decision == 2:
-            if not request.user.is_authenticated() or \
+            if not request.user.is_authenticated or \
                     not request.user.is_superuser and \
                     not request.user.userprofile.is_image_moderator():
                 raise Http404
@@ -502,7 +502,7 @@ class ImageDetailView(ImageDetailViewBase):
             image_type = 'solar_system'
 
         profile = None
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             profile = self.request.user.userprofile
 
         ##############
@@ -730,7 +730,7 @@ class ImageDetailView(ImageDetailViewBase):
             'content_type': ContentType.objects.get(app_label='astrobin', model='image'),
             'preferred_languages': preferred_languages,
             'select_group_form': GroupSelectForm(
-                user=self.request.user) if self.request.user.is_authenticated() else None,
+                user=self.request.user) if self.request.user.is_authenticated else None,
             'in_public_groups': Group.objects.filter(Q(public=True, images=image)),
             'image_next': image_next,
             'image_prev': image_prev,
@@ -845,7 +845,7 @@ class ImageDeleteView(LoginRequiredMixin, ImageDeleteViewBase):
     def dispatch(self, request, *args, **kwargs):
         image = self.get_object()
 
-        if request.user.is_authenticated() and request.user != image.user and not request.user.is_superuser:
+        if request.user.is_authenticated and request.user != image.user and not request.user.is_superuser:
             raise PermissionDenied
 
         return super(ImageDeleteView, self).dispatch(request, *args, **kwargs)
@@ -876,7 +876,7 @@ class ImageRevisionDeleteView(LoginRequiredMixin, DeleteView):
         except ImageRevision.DoesNotExist:
             raise Http404
 
-        if request.user.is_authenticated() and request.user != revision.image.user:
+        if request.user.is_authenticated and request.user != revision.image.user:
             raise PermissionDenied
 
         # Save this so it's accessible in get_success_url
@@ -990,7 +990,7 @@ class ImageDemoteView(LoginRequiredMixin, ImageUpdateViewBase):
     def dispatch(self, request, *args, **kwargs):
         image = self.get_object()
 
-        if request.user.is_authenticated() and request.user != image.user and not request.user.is_superuser:
+        if request.user.is_authenticated and request.user != image.user and not request.user.is_superuser:
             raise PermissionDenied
 
         return super(ImageDemoteView, self).dispatch(request, *args, **kwargs)
@@ -1020,7 +1020,7 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
     def dispatch(self, request, *args, **kwargs):
         image = self.get_object()
 
-        if request.user.is_authenticated() and request.user != image.user and not request.user.is_superuser:
+        if request.user.is_authenticated and request.user != image.user and not request.user.is_superuser:
             raise PermissionDenied
 
         return super(ImagePromoteView, self).dispatch(request, *args, **kwargs)
@@ -1061,7 +1061,7 @@ class ImageEditBaseView(LoginRequiredMixin, ImageUpdateViewBase):
 
         image = self.get_object()
 
-        if request.user.is_authenticated() and request.user != image.user and not request.user.is_superuser:
+        if request.user.is_authenticated and request.user != image.user and not request.user.is_superuser:
             raise PermissionDenied
 
         return super(ImageEditBaseView, self).dispatch(request, *args, **kwargs)
@@ -1183,7 +1183,7 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
         except self.model.DoesNotExist:
             raise Http404
 
-        if request.user.is_authenticated() and request.user != revision.image.user and not request.user.is_superuser:
+        if request.user.is_authenticated and request.user != revision.image.user and not request.user.is_superuser:
             raise PermissionDenied
 
         return super(ImageEditRevisionView, self).dispatch(request, *args, **kwargs)

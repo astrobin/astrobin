@@ -37,7 +37,6 @@ if TESTING:
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
-        'gadjo.requestprovider.middleware.RequestProvider',
         'debug_toolbar.middleware.DebugToolbarMiddleware',
     ]
 

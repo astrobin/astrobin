@@ -65,7 +65,7 @@ class UncompressedSourceUpload(models.Model):
         editable=False,
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return "UncompressedSourceUpload for image %s: %s" % (self.image.pk, self.uncompressed_source_file)
 
     class Meta:

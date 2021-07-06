@@ -50,7 +50,7 @@ class EquipmentBrandListing(SafeDeleteModel):
         blank=True,
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s by %s" % (self.brand, self.retailer)
 
     class Meta:

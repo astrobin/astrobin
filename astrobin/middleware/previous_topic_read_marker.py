@@ -1,11 +1,12 @@
 from pybb.models import Topic
 
+from astrobin.middleware.mixins import MiddlewareParentClass
 from common.services.forum_service import ForumService
 
 
-class PreviousTopicReadMarkerMiddleware(object):
+class PreviousTopicReadMarkerMiddleware(MiddlewareParentClass):
     def process_request(self, request):
-        if not request.user.is_authenticated() or not request.path.startswith('/forum/c/'):
+        if not request.user.is_authenticated or not request.path.startswith('/forum/c/'):
             return
 
         parts = request.path.split('/')

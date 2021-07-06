@@ -86,7 +86,7 @@ class NestedComment(models.Model):
             property_type='like'
         ).values_list('user__pk', flat=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return "Comment %d" % self.pk
 
     def get_absolute_url(self):

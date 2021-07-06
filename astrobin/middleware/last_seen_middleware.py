@@ -1,16 +1,17 @@
 from datetime import datetime, timedelta
 
+from astrobin.middleware.mixins import MiddlewareParentClass
 from astrobin.models import UserProfile
 from astrobin.utils import get_client_country_code
 
 LAST_SEEN_COOKIE = 'astrobin_last_seen_set'
 
 
-class LastSeenMiddleware(object):
+class LastSeenMiddleware(MiddlewareParentClass):
     def _process(self, request):
         return (
                 hasattr(request, 'user') and
-                request.user.is_authenticated() and
+                request.user.is_authenticated and
                 not request.is_ajax() and
                 not 'HTTP_AUTHORIZATION' in request.META and
                 not request.COOKIES.get(LAST_SEEN_COOKIE)
