@@ -21,6 +21,8 @@ docker-compose \
    -f docker/docker-compose-local.yml \
    up &
 
+docker-compose logs -f docker_astrobin_1 &
+
 
 while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://127.0.0.1:8083/accounts/login/)" != "200" ]]; do
     echo "Waiting for astrobin..."
