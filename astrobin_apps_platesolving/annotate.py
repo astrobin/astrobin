@@ -1,10 +1,6 @@
 import logging
 import os
-import six
-if six.PY2:
-    from io import StringIO
-else:
-    from io import StringIO
+from io import StringIO
 
 import simplejson
 from PIL import Image, ImageDraw, ImageFont
