@@ -3,6 +3,7 @@
 export ASTROBIN_BUILD=${CODEBUILD_RESOLVED_SOURCE_VERSION}
 export ASTROBIN_GUNICORN_WORKERS=1
 export ARCH=$(uname -m)
+export USER=ubuntu
 
 if [ "$ARCH" == "aarch64" ]; then
     UBUNTU_ARCH=arm64
