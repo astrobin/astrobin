@@ -1,11 +1,8 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      docker: 19
-
   build:
     commands:
+      - buildspecs/install-docker.sh
       - buildspecs/pull-image.sh
       - buildspecs/test.sh
