@@ -1,6 +1,8 @@
 import hashlib
+import logging
 from os.path import join
 
+import os
 from PIL import Image as PILImage
 from braces.views import JSONResponseMixin
 from django.conf import settings
@@ -13,7 +15,9 @@ from django.views.generic.base import View
 
 from astrobin import utils
 from astrobin.models import Image
-from common.utils import get_project_root
+from common.utils import get_project_root, read_in_chunks
+
+log = logging.getLogger('apps')
 
 
 @method_decorator([cache_page(3600), vary_on_headers('Cookie', 'Authorization')], name='dispatch')
@@ -62,17 +66,22 @@ class AppConfig(JSONResponseMixin, View):
         for language in [x[0] for x in settings.LANGUAGES]:  # type: str
             for app in ['astrobin'] + settings.ASTROBIN_APPS:  # type: str
                 po_file = join(project_root, app, 'locale', language, 'LC_MESSAGES', 'django.po')  # type: str
+
+                if not os.path.exists(po_file):
+                    continue
+
                 language_app_md5 = hashlib.md5()
                 try:
-                    with open(po_file, "r") as f:
-                        for chunk in iter(lambda: f.read(4096), b""):
-                            language_app_md5.update(chunk.encode('utf-8'))
+                    with open(po_file, "rb") as f:
+                        for chunk in read_in_chunks(f, 4096):
+                            language_app_md5.update(chunk)
                     hashes.append(language_app_md5.hexdigest())
-                except IOError:
+                except IOError as e:
+                    log.error('IOError while reading PO file %s: %s' % (po_file, str(e)))
                     continue
 
         total_md5 = hashlib.md5()
-        total_md5.update(str(hashes))
+        total_md5.update(str(hashes).encode('utf-8'))
         digest = total_md5.hexdigest()
 
         cache.set(cache_key, digest, 3600)
