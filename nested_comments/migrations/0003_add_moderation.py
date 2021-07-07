@@ -6,6 +6,7 @@ import django.db.models.deletion
 from django.conf import settings
 from django.db import migrations, models
 
+import common.utils
 import nested_comments.models
 
 
@@ -30,7 +31,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='nestedcomment',
             name='author',
-            field=models.ForeignKey(editable=False, on_delete=models.SET(nested_comments.models.get_sentinel_user),
+            field=models.ForeignKey(editable=False, on_delete=models.SET(common.utils.get_sentinel_user),
                                     related_name='comments', to=settings.AUTH_USER_MODEL),
         ),
     ]

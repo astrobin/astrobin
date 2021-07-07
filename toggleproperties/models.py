@@ -5,6 +5,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models, IntegrityError
 from django.dispatch import receiver
 
+from common.utils import get_sentinel_user
+
 log = logging.getLogger("apps")
 
 try:
@@ -87,8 +89,8 @@ class TogglePropertyManager(models.Manager):
 
 class ToggleProperty(models.Model):
     property_type = models.CharField(max_length=64)
-    user = models.ForeignKey(User)
-    content_type = models.ForeignKey(ContentType)
+    user = models.ForeignKey(User, on_delete=models.SET(get_sentinel_user))
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.TextField()
     content_object = GenericForeignKey('content_type', 'object_id')
 

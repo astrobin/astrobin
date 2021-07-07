@@ -1,6 +1,7 @@
 # Django
 from django.contrib.auth.models import User
 
+from common.utils import get_sentinel_user
 from toggleproperties.models import ToggleProperty
 
 try:
@@ -15,13 +16,10 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 
-def get_sentinel_user():
-    return User.objects.get_or_create(username='deleted')[0]
-
-
 class NestedComment(models.Model):
     content_type = models.ForeignKey(
         ContentType,
+        on_delete = models.CASCADE
     )
 
     object_id = models.PositiveIntegerField()

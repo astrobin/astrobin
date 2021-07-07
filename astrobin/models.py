@@ -8,7 +8,6 @@ import random
 import string
 import unicodedata
 import uuid
-from datetime import datetime
 from urlparse import urlparse
 
 import boto3
@@ -26,6 +25,7 @@ from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBran
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_notifications.services import NotificationsService
 from common.upload_paths import uncompressed_source_upload_path, image_upload_path, data_download_upload_path
+from common.utils import get_sentinel_user
 from common.validators import FileValidator
 
 try:
@@ -252,7 +252,7 @@ class Gear(models.Model):
         blank=False,
     )
 
-    master = models.ForeignKey('self', null=True, editable=False)
+    master = models.ForeignKey('self', null=True, editable=False, on_delete=models.SET_NULL)
 
     updated = models.DateTimeField(
         editable=False,
@@ -379,11 +379,13 @@ class GearUserInfo(models.Model):
     gear = models.ForeignKey(
         Gear,
         editable=False,
+        on_delete=models.CASCADE
     )
 
     user = models.ForeignKey(
         User,
         editable=False,
+        on_delete=models.CASCADE
     )
 
     alias = models.CharField(
@@ -410,8 +412,8 @@ class GearUserInfo(models.Model):
 
 
 class GearAssistedMerge(models.Model):
-    master = models.ForeignKey(Gear, related_name='assisted_master', null=True)
-    slave = models.ForeignKey(Gear, related_name='assisted_slave', null=True)
+    master = models.ForeignKey(Gear, related_name='assisted_master', null=True, on_delete=models.CASCADE)
+    slave = models.ForeignKey(Gear, related_name='assisted_slave', null=True, on_delete=models.CASCADE)
     cutoff = models.DecimalField(default=0, max_digits=3, decimal_places=2)
 
     def __unicode__(self):
@@ -1056,7 +1058,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     filters = models.ManyToManyField(Filter, blank=True, verbose_name=_("Filters"))
     accessories = models.ManyToManyField(Accessory, blank=True, verbose_name=_("Accessories"))
 
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     plot_is_overlay = models.BooleanField(editable=False, default=False)
     is_wip = models.BooleanField(default=False)
@@ -1518,7 +1520,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     image = models.ForeignKey(
         Image,
-        related_name='revisions'
+        related_name='revisions',
+        on_delete=models.CASCADE,
     )
 
     solutions = GenericRelation(Solution)
@@ -1721,7 +1724,7 @@ class Collection(models.Model):
         editable=False,
     )
 
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     name = models.CharField(
         max_length=256,
@@ -1778,6 +1781,7 @@ class Acquisition(models.Model):
     image = models.ForeignKey(
         Image,
         verbose_name=_("Image"),
+        on_delete=models.CASCADE,
     )
 
     class Meta:
@@ -1989,8 +1993,8 @@ class SolarSystem_Acquisition(Acquisition):
 
 
 class Request(models.Model):
-    from_user = models.ForeignKey(User, editable=False, related_name='requester')
-    to_user = models.ForeignKey(User, editable=False, related_name='requestee')
+    from_user = models.ForeignKey(User, editable=False, related_name='requester', on_delete=models.CASCADE)
+    to_user = models.ForeignKey(User, editable=False, related_name='requestee', on_delete=models.CASCADE)
     fulfilled = models.BooleanField()
     message = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
@@ -2015,7 +2019,7 @@ class ImageRequest(Request):
         ('HIRES', _('Higher resolution')),
     )
 
-    image = models.ForeignKey(Image, editable=False)
+    image = models.ForeignKey(Image, editable=False, on_delete=models.CASCADE)
     type = models.CharField(max_length=8, choices=TYPE_CHOICES)
 
 
@@ -2059,7 +2063,7 @@ class UserProfile(SafeDeleteModel):
         (DELETE_REASON_OTHER, _('Other')),
     )
 
-    user = models.OneToOneField(User, editable=False)
+    user = models.OneToOneField(User, editable=False, on_delete=models.CASCADE)
 
     updated = models.DateTimeField(
         editable=False,
@@ -2585,6 +2589,7 @@ class Location(models.Model):
         UserProfile,
         editable=False,
         null=True,
+        on_delete=models.CASCADE
     )
 
     def __unicode__(self):
@@ -2601,7 +2606,8 @@ class App(models.Model):
     registrar = models.ForeignKey(
         User,
         editable=False,
-        related_name='app_api_key')
+        related_name='app_api_key',
+        on_delete=models.SET(get_sentinel_user))
 
     name = models.CharField(
         max_length=256,
@@ -2656,7 +2662,8 @@ class AppApiKeyRequest(models.Model):
     registrar = models.ForeignKey(
         User,
         editable=False,
-        related_name='app_api_key_request')
+        related_name='app_api_key_request',
+        on_delete=models.CASCADE)
 
     name = models.CharField(
         verbose_name=_("Name"),
@@ -2715,7 +2722,8 @@ class AppApiKeyRequest(models.Model):
 class ImageOfTheDay(models.Model):
     image = models.ForeignKey(
         Image,
-        related_name='image_of_the_day')
+        related_name='image_of_the_day',
+        on_delete=models.CASCADE)
 
     date = models.DateField(
         auto_now_add=True)
@@ -2752,7 +2760,8 @@ class ImageOfTheDay(models.Model):
 class ImageOfTheDayCandidate(models.Model):
     image = models.ForeignKey(
         Image,
-        related_name='image_of_the_day_candidate')
+        related_name='image_of_the_day_candidate',
+        on_delete=models.CASCADE)
 
     date = models.DateField(
         auto_now_add=True)
@@ -2813,7 +2822,7 @@ class DataDownloadRequest(models.Model):
         ("EXPIRED", _("Expired")),
     )
 
-    user = models.ForeignKey(User, editable=False)
+    user = models.ForeignKey(User, editable=False, on_delete=models.CASCADE)
 
     created = models.DateTimeField(
         null=False,
