@@ -6,7 +6,8 @@ from django.utils.translation import ugettext_lazy as _
 class DataLossCompensationRequest(models.Model):
     user = models.ForeignKey(
         User,
-        editable=False
+        editable=False,
+        on_delete=models.CASCADE
     )
 
     created = models.DateTimeField(

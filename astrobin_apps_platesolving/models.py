@@ -243,7 +243,9 @@ class Solution(models.Model):
     settings = models.OneToOneField(
         PlateSolvingSettings,
         related_name='solution',
-        null=True)
+        null=True,
+        on_delete=models.CASCADE
+    )
 
     status = models.PositiveIntegerField(
         default=Solver.MISSING,
@@ -255,7 +257,7 @@ class Solution(models.Model):
         blank=True,
     )
 
-    content_type = models.ForeignKey(ContentType)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.TextField()
     content_object = fields.GenericForeignKey('content_type', 'object_id')
 
@@ -338,6 +340,7 @@ class Solution(models.Model):
         PlateSolvingAdvancedSettings,
         related_name='solution',
         null=True,
+        on_delete = models.CASCADE
     )
 
     advanced_ra = models.DecimalField(

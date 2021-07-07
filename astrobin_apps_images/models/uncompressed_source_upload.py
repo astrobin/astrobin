@@ -10,7 +10,9 @@ from common.validators import FileValidator
 class UncompressedSourceUpload(models.Model):
     image = models.ForeignKey(
         Image,
-        related_name="uncompressed_source_upload")
+        related_name="uncompressed_source_upload",
+        on_delete=models.CASCADE
+    )
 
     uncompressed_source_file = models.FileField(
         upload_to=uncompressed_source_upload_path,

@@ -7,6 +7,7 @@ class ThumbnailGroup(models.Model):
     image = models.ForeignKey(
         Image,
         related_name='thumbnails',
+        on_delete=models.CASCADE
     )
 
     revision = models.CharField(
