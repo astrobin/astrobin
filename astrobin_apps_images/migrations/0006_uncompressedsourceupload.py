@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
             name='UncompressedSourceUpload',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('uncompressed_source_file', models.FileField(help_text='You can store the final processed image that came out of your favorite image editor (e.g. PixInsight, Adobe Photoshop, etc) here on AstroBin, for archival purposes. This file is stored privately and only you will have access to it.', max_length=256, null=True, upload_to=common.upload_paths.uncompressed_source_upload_path, validators=[common.validators.file_validator.FileValidator(allowed_extensions=(b'xisf', b'fits', b'fit', b'fts', b'psd', b'tiff'))], verbose_name='Uncompressed source (max 100 MB)')),
+                ('uncompressed_source_file', models.FileField(help_text='You can store the final processed image that came out of your favorite image editor (e.g. PixInsight, Adobe Photoshop, etc) here on AstroBin, for archival purposes. This file is stored privately and only you will have access to it.', max_length=256, null=True, upload_to=common.upload_paths.uncompressed_source_upload_path, validators=[common.validators.file_validator.FileValidator(allowed_extensions=('xisf', 'fits', 'fit', 'fts', 'psd', 'tiff'))], verbose_name='Uncompressed source (max 100 MB)')),
                 ('image', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='uncompressed_source_upload', to='astrobin.Image')),
             ],
         ),

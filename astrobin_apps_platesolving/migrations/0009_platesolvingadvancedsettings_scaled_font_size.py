@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='platesolvingadvancedsettings',
             name='scaled_font_size',
-            field=models.CharField(choices=[(b'S', 'Small'), (b'M', 'Medium'), (b'L', 'Large')], default=b'M',
+            field=models.CharField(choices=[('S', 'Small'), ('M', 'Medium'), ('L', 'Large')], default='M',
                                    max_length=1, verbose_name='Scaled font size',
                                    help_text='Font size of the annotations on your main image page'),
         ),

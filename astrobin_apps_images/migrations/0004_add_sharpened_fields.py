@@ -25,6 +25,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='thumbnailgroup',
             name='revision',
-            field=models.CharField(default=b'0', max_length=3),
+            field=models.CharField(default='0', max_length=3),
         ),
     ]

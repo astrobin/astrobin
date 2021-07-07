@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                                    max_length=256, null=True,
                                    upload_to=astrobin_apps_platesolving.models.sample_frame_upload_path, validators=[
                     common.validators.file_validator.FileValidator(
-                        allowed_extensions=(b'xisf', b'fits', b'fit', b'fts'))],
+                        allowed_extensions=('xisf', 'fits', 'fit', 'fts'))],
                                    verbose_name='Sample raw frame (max 200 MB)'),
         ),
     ]

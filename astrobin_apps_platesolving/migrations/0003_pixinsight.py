@@ -95,6 +95,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='solution',
             name='status',
-            field=models.PositiveIntegerField(choices=[(0, b'Missing'), (1, b'Pending'), (2, b'Failed'), (3, b'Success'), (4, b'Advanced pending'), (5, b'Advanced failed'), (6, b'Advanced success')], default=0),
+            field=models.PositiveIntegerField(choices=[(0, 'Missing'), (1, 'Pending'), (2, 'Failed'), (3, 'Success'), (4, 'Advanced pending'), (5, 'Advanced failed'), (6, 'Advanced success')], default=0),
         ),
     ]

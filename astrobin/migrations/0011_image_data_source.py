@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='image',
             name='data_source',
-            field=models.CharField(choices=[(None, b'---------'), ('Self acquired', ((b'BACKYARD', 'Backyard'), (b'TRAVELLER', 'Traveller'), (b'OWN_REMOTE', 'Own remote observatory'))), ('Downloaded', ((b'AMATEUR_HOSTING', 'Amateur hosting facility'), (b'PUBLIC_AMATEUR_DATA', 'Public amateur data'), (b'PRO_DATA', 'Professional, scientific grade data'))), ('Other', ((b'MIX', 'Mix of multiple sources'), (b'OTHER', 'None of the above'), (b'UNKNOWN', 'Unknown')))], default=b'UNKNOWN', help_text='Where does the data for this image come from?', max_length=32, verbose_name='Data source'),
+            field=models.CharField(choices=[(None, '---------'), ('Self acquired', (('BACKYARD', 'Backyard'), ('TRAVELLER', 'Traveller'), ('OWN_REMOTE', 'Own remote observatory'))), ('Downloaded', (('AMATEUR_HOSTING', 'Amateur hosting facility'), ('PUBLIC_AMATEUR_DATA', 'Public amateur data'), ('PRO_DATA', 'Professional, scientific grade data'))), ('Other', (('MIX', 'Mix of multiple sources'), ('OTHER', 'None of the above'), ('UNKNOWN', 'Unknown')))], default=b'UNKNOWN', help_text='Where does the data for this image come from?', max_length=32, verbose_name='Data source'),
         ),
     ]

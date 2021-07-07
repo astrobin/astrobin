@@ -16,11 +16,11 @@ class Migration(migrations.Migration):
             name='acquisition_type',
             field=models.CharField(
                 choices=[
-                    (b'REGULAR', 'Regular (e.g. medium/long exposure with a CCD or DSLR)'),
-                    (b'EAA', 'Electronically-Assisted Astronomy (EAA, e.g. based on a live video feed)'),
-                    (b'LUCKY', 'Lucky imaging'),
-                    (b'DRAWING', 'Drawing/Sketch'),
-                    (b'OTHER', 'Other/Unknown')],
+                    ('REGULAR', 'Regular (e.g. medium/long exposure with a CCD or DSLR)'),
+                    ('EAA', 'Electronically-Assisted Astronomy (EAA, e.g. based on a live video feed)'),
+                    ('LUCKY', 'Lucky imaging'),
+                    ('DRAWING', 'Drawing/Sketch'),
+                    ('OTHER', 'Other/Unknown')],
                 default=b'REGULAR',
                 max_length=32,
                 verbose_name='Acquisition type'),

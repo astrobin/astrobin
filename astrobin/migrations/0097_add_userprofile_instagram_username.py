@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                     django.core.validators.MinLengthValidator(4),
                     django.core.validators.MaxLengthValidator(30),
                     django.core.validators.RegexValidator(
-                        b'^@[\w](?!.*?\.{2})[\w.]{1,28}[\w]$',
+                        '^@[\w](?!.*?\.{2})[\w.]{1,28}[\w]$',
                         'An Instagram username must be between 3 and 30 characters, start with an @ sign, and only '
                         'have letters, numbers, periods, and underlines.'
                     )

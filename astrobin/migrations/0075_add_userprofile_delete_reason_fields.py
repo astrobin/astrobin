@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='userprofile',
             name='delete_reason',
-            field=models.CharField(blank=True, choices=[(b'NOT_ACTIVE', 'I am no longer active in astrophotography'), (b'DID_NOT_MEET_EXPECTATIONS', 'This website did not meet my expectations'), (b'DOESNT_WORK', "Something on this website doesn't work for me"), (b'TOO_EXPENSIVE', 'The paid subscriptions are too expensive'), (b'PREFER_NOT_TO_SAY', 'I prefer not to say'), (b'OTHER', 'Other')], help_text='Why are you deleting your AstroBin account?', max_length=32, null=True, verbose_name='Delete reason'),
+            field=models.CharField(blank=True, choices=[('NOT_ACTIVE', 'I am no longer active in astrophotography'), ('DID_NOT_MEET_EXPECTATIONS', 'This website did not meet my expectations'), ('DOESNT_WORK', "Something on this website doesn't work for me"), ('TOO_EXPENSIVE', 'The paid subscriptions are too expensive'), ('PREFER_NOT_TO_SAY', 'I prefer not to say'), ('OTHER', 'Other')], help_text='Why are you deleting your AstroBin account?', max_length=32, null=True, verbose_name='Delete reason'),
         ),
         migrations.AddField(
             model_name='userprofile',

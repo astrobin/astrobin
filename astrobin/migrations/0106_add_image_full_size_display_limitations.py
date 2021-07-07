@@ -16,11 +16,11 @@ class Migration(migrations.Migration):
             name='full_size_display_limitation',
             field=models.CharField(
                 blank=True, choices=[
-                    (b'EVERYBODY', 'Everybody'),
-                    (b'PAYING', 'Paying members only'),
-                    (b'MEMBERS', 'Members only'),
-                    (b'ME', 'Me only'),
-                    (b'NOBODY', 'Nobody')
+                    ('EVERYBODY', 'Everybody'),
+                    ('PAYING', 'Paying members only'),
+                    ('MEMBERS', 'Members only'),
+                    ('ME', 'Me only'),
+                    ('NOBODY', 'Nobody')
                 ],
                 default=b'EVERYBODY',
                 help_text='Specify what user groups are allowed to view this image at its full size.',

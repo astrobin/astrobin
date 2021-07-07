@@ -25,8 +25,8 @@ class Migration(migrations.Migration):
                  models.FileField(max_length=256, null=True, upload_to=astrobin.models.data_download_upload_path)),
                 ('file_size', models.IntegerField(null=True)),
                 ('status', models.CharField(
-                    choices=[(b'PENDING', 'Pending'), (b'PROCESSING', 'Processing'), (b'READY', 'Ready'),
-                             (b'ERROR', 'Error'), (b'Expired', 'Expired')], default=b'PENDING', max_length=20)),
+                    choices=[('PENDING', 'Pending'), ('PROCESSING', 'Processing'), ('READY', 'Ready'),
+                             ('ERROR', 'Error'), ('Expired', 'Expired')], default=b'PENDING', max_length=20)),
                 ('user', models.ForeignKey(editable=False, on_delete=django.db.models.deletion.CASCADE,
                                            to=settings.AUTH_USER_MODEL)),
             ],

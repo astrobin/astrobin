@@ -23,8 +23,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='datadownloadrequest',
             name='status',
-            field=models.CharField(choices=[(b'PENDING', 'Pending'), (b'PROCESSING', 'Processing'), (b'READY', 'Ready'),
-                                            (b'ERROR', 'Error'), (b'EXPIRED', 'Expired')], default=b'PENDING',
+            field=models.CharField(choices=[('PENDING', 'Pending'), ('PROCESSING', 'Processing'), ('READY', 'Ready'),
+                                            ('ERROR', 'Error'), ('EXPIRED', 'Expired')], default=b'PENDING',
                                    max_length=20),
         ),
     ]

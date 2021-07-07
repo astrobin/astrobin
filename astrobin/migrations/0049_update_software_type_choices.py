@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             model_name='software',
             name='type',
             field=models.CharField(blank=True,
-                                   choices=[(b'OPEN_SOURCE_OR_FREEWARE', 'Open source or freeware'), (b'PAID', 'Paid')],
+                                   choices=[('OPEN_SOURCE_OR_FREEWARE', 'Open source or freeware'), ('PAID', 'Paid')],
                                    max_length=64, null=True, verbose_name='Type'),
         )
     ]
