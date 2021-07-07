@@ -408,7 +408,7 @@ class ConstellationsService(object):
         ['Ara', 'Ara', 'Arae'],
         ['Ari', 'Aries', 'Arietis'],
         ['Aur', 'Auriga', 'Aurigae'],
-        ['Boo', 'Bo\\u00f6tes', 'Bo\\u00f6tis'],
+        ['Boo', 'Bo\u00f6tes', 'Bo\u00f6tis'],
         ['CMa', 'Canis Major', 'Canis Majoris'],
         ['CMi', 'Canis Minor', 'Canis Minoris'],
         ['CVn', 'Canes Venatici', 'Canum Venaticorum'],

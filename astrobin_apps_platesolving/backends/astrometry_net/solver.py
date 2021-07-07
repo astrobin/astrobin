@@ -21,8 +21,6 @@ default_url = base_url + '/api/'
 
 log = logging.getLogger('apps')
 
-# TODO: for python3 compat, StringIO must be imported differently (from io module)
-
 
 class Solver(AbstractPlateSolvingBackend):
     def __init__(self, api_url=default_url):
@@ -41,55 +39,31 @@ class Solver(AbstractPlateSolvingBackend):
 
         # If we're sending a file, format a multipart/form-data
         if file_args is not None:
-            m1 = MIMEBase('text', 'plain')
-            m1.add_header('Content-disposition', 'form-data; name="request-json"')
-            m1.set_payload(json)
-
-            m2 = MIMEApplication(file_args[1], 'octet-stream', encode_noop)
-            m2.add_header(
-                'Content-disposition',
-                'form-data; name="file"; filename="%s"' % file_args[0])
-
-            mp = MIMEMultipart('form-data', None, [m1, m2])
-
-            # Make a custom generator to format it the way we need.
-            from io import StringIO
-            from email.generator import Generator
-
-            class MyGenerator(Generator):
-                def __init__(self, fp, root=True):
-                    Generator.__init__(self, fp, mangle_from_=False, maxheaderlen=0)
-                    self.root = root
-
-                def _write_headers(self, msg):
-                    # We don't want to write the top-level headers;
-                    # they go into Request(headers) instead.
-                    if self.root:
-                        return
-
-                    # We need to use \r\n line-terminator, but Generator
-                    # doesn't provide the flexibility to override, so we
-                    # have to copy-n-paste-n-modify.
-                    for h, v in list(msg.items()):
-                        self._fp.write('%s: %s\r\n' % (h, v))
-
-                    # A blank line always separates headers from body
-                    self._fp.write('\r\n')
-
-                # The _write_multipart method calls "clone" for the
-                # sub-parts.  We hijack that, setting root=False.
-                def clone(self, fp):
-                    return MyGenerator(fp, root=False)
-
-            fp = StringIO()
-            g = MyGenerator(fp)
-            g.flatten(mp)
-            data = fp.getvalue()
-            headers = {'Content-type': mp.get('Content-type')}
+            import random
+            boundary_key = ''.join([random.choice('0123456789') for i in range(19)])
+            boundary = '===============%s==' % boundary_key
+            headers = {'Content-Type':
+                           'multipart/form-data; boundary="%s"' % boundary}
+            data_pre = (
+                    '--' + boundary + '\n' +
+                    'Content-Type: text/plain\r\n' +
+                    'MIME-Version: 1.0\r\n' +
+                    'Content-disposition: form-data; name="request-json"\r\n' +
+                    '\r\n' +
+                    json + '\n' +
+                    '--' + boundary + '\n' +
+                    'Content-Type: application/octet-stream\r\n' +
+                    'MIME-Version: 1.0\r\n' +
+                    'Content-disposition: form-data; name="file"; filename="%s"' % file_args[0] +
+                    '\r\n' + '\r\n')
+            data_post = (
+                    '\n' + '--' + boundary + '--\n')
+            data = data_pre.encode() + file_args[1] + data_post.encode()
         else:
             # Else send x-www-form-encoded
             data = {'request-json': json}
             data = urlencode(data)
+            data = data.encode('utf-8')
             headers = {}
 
         request = Request(url=url, headers=headers, data=data)

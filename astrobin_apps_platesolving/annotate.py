@@ -1,6 +1,6 @@
 import logging
 import os
-from io import StringIO
+from io import BytesIO
 
 import simplejson
 from PIL import Image, ImageDraw, ImageFont
@@ -192,7 +192,7 @@ class Annotator:
             self.drawAnnotations(draw, annotationsObj)
             del draw
 
-            image_io = StringIO()
+            image_io = BytesIO()
             image = Image.alpha_composite(base, overlay)
             image = image.resize((hd_w, hd_h), Image.ANTIALIAS)
             image = image.convert('RGB')
