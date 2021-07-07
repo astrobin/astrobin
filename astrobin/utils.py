@@ -68,12 +68,6 @@ def base26_decode(string, alphabet=ALPHABET):
     return num
 
 
-def now_timezone():
-    return datetime.now() \
-        .replace(tzinfo=pytz.timezone(settings.TIME_ZONE)) \
-        .astimezone(pytz.timezone(settings.TIME_ZONE))
-
-
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
