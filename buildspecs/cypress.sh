@@ -15,7 +15,6 @@ docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD} || exit
 npm ci &
 
 docker-compose \
-   --verbose \
    -f docker/docker-compose-app.yml \
    -f docker/docker-compose-worker.yml \
    -f docker/docker-compose-scheduler.yml \
