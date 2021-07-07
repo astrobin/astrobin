@@ -60,13 +60,6 @@ from model_utils.managers import InheritanceManager
 from safedelete.models import SafeDeleteModel
 from toggleproperties.models import ToggleProperty
 
-try:
-    # Django < 1.10
-    from timezones.forms import PRETTY_TIMEZONE_CHOICES
-except:
-    # Django >= 1.10
-    from timezones.zones import PRETTY_TIMEZONE_CHOICES
-
 from astrobin_apps_images.managers import ImagesManager, PublicImagesManager, WipImagesManager, ImageRevisionsManager, \
     UploadsInProgressImagesManager, UploadsInProgressImageRevisionsManager
 from astrobin_apps_notifications.utils import push_notification
@@ -2146,13 +2139,6 @@ class UserProfile(SafeDeleteModel):
         blank=True
     )
 
-    timezone = models.CharField(
-        max_length=255,
-        choices=PRETTY_TIMEZONE_CHOICES,
-        blank=True, null=True,
-        verbose_name=_("Timezone"),
-        help_text=_("By selecting this, you will see all the dates on AstroBin in your timezone."))
-
     about = models.TextField(
         null=True,
         blank=True,
@@ -2406,27 +2392,6 @@ class UserProfile(SafeDeleteModel):
         default=False,
         editable=False,
     )
-
-    # PYBBM proxy fields
-    @property
-    def time_zone(self):
-        import pytz
-        from datetime import timedelta
-
-        tz = self.timezone
-        if tz is None:
-            return 0
-
-        now = datetime.now()
-        try:
-            offset = pytz.timezone(tz).utcoffset(now)
-        except (pytz.NonExistentTimeError, pytz.AmbiguousTimeError):
-            # If you're really unluckly, this offset results in a time that
-            # doesn't actually exist because it's within the hour that gets
-            # skipped when you enter DST.
-            offset = pytz.timezone(tz).utcoffset(now + timedelta(hours=1))
-
-        return offset.seconds / 3600
 
     # PYBBM fields
     signature = models.TextField(

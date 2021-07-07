@@ -600,7 +600,6 @@ class UserProfileResource(ModelResource):
             'recovered_images_notice_sent',
             'referral_code',
             'resource_uri',
-            'timezone',
             'total_notifications_count',
             'unread_notifications_count',
             'updated',

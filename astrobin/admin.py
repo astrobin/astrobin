@@ -39,7 +39,6 @@ class UserProfileAdmin(admin.ModelAdmin):
         'website',
         'job',
         'hobbies',
-        'timezone',
         'telescopes',
         'mounts',
         'cameras',

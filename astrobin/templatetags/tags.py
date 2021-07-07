@@ -507,14 +507,6 @@ def is_forum_moderator(user):
 
 
 @register.filter
-def to_user_timezone(value, user):
-    from astrobin.utils import to_user_timezone as tut
-    if user.is_authenticated():
-        return tut(value, user.userprofile)
-    return value
-
-
-@register.filter
 def can_like(user, target):
     return UserService(user).can_like(target)
 

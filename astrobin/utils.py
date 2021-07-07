@@ -68,30 +68,6 @@ def base26_decode(string, alphabet=ALPHABET):
     return num
 
 
-# need to translate to a non-naive timezone, even if timezone ==
-# settings.TIME_ZONE, so we can compare two dates
-def to_user_timezone(date, profile):
-    if date is None:
-        return None
-
-    tz = profile.timezone if profile.timezone else settings.TIME_ZONE
-    return date.replace(tzinfo=pytz.timezone(settings.TIME_ZONE)).astimezone(pytz.timezone(tz))
-
-
-def to_system_timezone(date, profile):
-    if date is None:
-        return None
-
-    tz = profile.timezone if profile.timezone else settings.TIME_ZONE
-    return date.replace(tzinfo=pytz.timezone(tz)).astimezone(pytz.timezone(settings.TIME_ZONE))
-
-
-def now_timezone():
-    return datetime.now() \
-        .replace(tzinfo=pytz.timezone(settings.TIME_ZONE)) \
-        .astimezone(pytz.timezone(settings.TIME_ZONE))
-
-
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
