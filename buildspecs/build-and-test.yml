@@ -9,7 +9,7 @@ phases:
   build:
     commands:
       - buildspecs/build.sh
-      - buildspecs/test.sh
+      - #buildspecs/test.sh
       - buildspecs/cypress.sh
 
   post_build:
