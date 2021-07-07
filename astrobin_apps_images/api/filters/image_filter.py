@@ -6,8 +6,8 @@ from common.filters.list_filter import ListFilter
 
 
 class ImageFilter(FilterSet):
-    ids = ListFilter(name="id", lookup_expr='in')
-    hashes = ListFilter(name="hash", lookup_expr='in')
+    id = ListFilter(name="id", lookup_expr='in')
+    hash = ListFilter(name="hash", lookup_expr='in')
 
     class Meta:
         model = Image

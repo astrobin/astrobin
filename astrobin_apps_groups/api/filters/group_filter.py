@@ -7,8 +7,8 @@ from common.filters.list_filter import ListFilter
 
 
 class GroupFilter(FilterSet):
-    ids = ListFilter(name="id", lookup_expr='in')
-    member = ListFilter(name="members", lookup_expr='in')
+    id = ListFilter(name="id", lookup_expr='in')
+    members = ListFilter(name="members", lookup_expr='in')
 
     class Meta:
         model = Group
