@@ -35,7 +35,7 @@ def filter_image_object_id(queryset, name, value):
 
 class SolutionListFilter(filters.FilterSet):
     object_id = filters.CharFilter(method=filter_image_object_id, name='object_id')
-    object_ids = ListFilter(name='object_id', lookup_expr='in')
+    object_ids = ListFilter(field_name='object_id', lookup_expr='in')
 
     class Meta:
         model = Solution

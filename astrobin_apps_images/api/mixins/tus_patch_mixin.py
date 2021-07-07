@@ -156,7 +156,7 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
             try:
                 getattr(object, self.get_file_field_name()).save(
                     self.get_upload_path_function()(object, self.get_cached_property("name", object)),
-                    File(open(temporary_file))
+                    File(open(temporary_file, 'rb'))
                 )
 
                 if hasattr(object, 'uploader_in_progress'):
