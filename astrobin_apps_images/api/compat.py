@@ -4,7 +4,7 @@
 try:
     from django.urls import reverse
 except ImportError:
-    from django.urls import reverse
+    from django.core.urlresolvers import reverse
 
 try:
     from base64 import b64encode as encode_base64
