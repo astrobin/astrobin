@@ -570,7 +570,7 @@ def image_upload_process(request):
                 messages.warning(request, _(indexed_png_error))
                 log.warning("Upload error (%d): %s" % (request.user.pk, indexed_png_error))
         except Exception as e:
-            log.warning("Upload error (%d): %s" % (request.user.pk, e.message))
+            log.warning("Upload error (%d): %s" % (request.user.pk, str(e)))
             return upload_error(request)
 
     profile = request.user.userprofile
@@ -1406,7 +1406,7 @@ def user_page(request, username):
                     (_('Likes'), "%d" % user_sqs[0].total_likes_received if user_sqs[0].total_likes_received else 0),
                 )
             except Exception as e:
-                log.error("User page (%d): unable to get stats from search index: %s" % (user.pk, e.message))
+                log.error("User page (%d): unable to get stats from search index: %s" % (user.pk, str(e)))
 
             cache.set(key, data, 300)
         else:

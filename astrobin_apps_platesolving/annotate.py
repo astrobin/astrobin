@@ -159,7 +159,7 @@ class Annotator:
         try:
             annotationsObj = simplejson.loads(self.solution.annotations)['annotations']
         except TypeError as e:
-            log.warning("annotate.py: TypeError when trying to parse annotations: %s" % e.message)
+            log.warning("annotate.py: TypeError when trying to parse annotations: %s" % str(e))
             return None
 
         w, h = self.solution.content_object.w, self.solution.content_object.h
@@ -175,10 +175,10 @@ class Annotator:
                     get_from_storage(self.solution.content_object, 'hd')
                 ).convert('RGBA')
             except ThumbnailNotReadyException as e:
-                log.warning("annotate.py: ThumbnailNotReadyException when trying to open the image: %s" % e.message)
+                log.warning("annotate.py: ThumbnailNotReadyException when trying to open the image: %s" % str(e))
                 return None
             except IOError as e:
-                log.warning("annotate.py: IOError when trying to open the image: %s" % e.message)
+                log.warning("annotate.py: IOError when trying to open the image: %s" % str(e))
                 return None
 
             if self.resampling_factor != 1:

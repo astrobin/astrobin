@@ -154,7 +154,7 @@ class SolveAdvancedView(base.View):
                 solution.pixinsight_serial_number = submission
                 solution.save()
             except Exception as e:
-                log.error("Error during advanced plate-solving: %s" % e.message)
+                log.error("Error during advanced plate-solving: %s" % str(e))
                 solution.status = Solver.MISSING
                 solution.submission_id = None
                 solution.save()

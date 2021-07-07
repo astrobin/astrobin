@@ -150,13 +150,14 @@ def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     acquire_lock = lambda: cache.add(lock_id, 'true', LOCK_EXPIRE)
     release_lock = lambda: cache.delete(lock_id)
 
-    def set_thumb():
+    def drop_retrieval_cache():
         field = image.get_thumbnail_field(revision_label)
         cache_key = image.thumbnail_cache_key(field, alias)
-
-        ImageService(image).set_thumb(alias, revision_label, thumb.url)
-
         cache.delete('%s.retrieve' % cache_key)
+
+    def set_thumb():
+        ImageService(image).set_thumb(alias, revision_label, thumb.url)
+        drop_retrieval_cache()
 
     if acquire_lock():
         try:
@@ -167,8 +168,10 @@ def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
                 set_thumb()
             else:
                 logger.debug("Image %d: unable to generate thumbnail." % image.pk)
+                drop_retrieval_cache()
         except Exception as e:
-            logger.debug("Error retrieving thumbnail: %s" % e.message)
+            logger.debug("Error retrieving thumbnail: %s" % str(e))
+            drop_retrieval_cache()
         finally:
             release_lock()
         return
@@ -361,11 +364,11 @@ def prepare_download_data_archive(request_id):
                                     )
                                 )
                     except Exception as e:
-                        logger.warning("prepare_download_data_archive error: %s" % e.message)
+                        logger.warning("prepare_download_data_archive error: %s" % str(e))
                         logger.debug("prepare_download_data_archive: skipping revision %s" % label)
                         continue
             except Exception as e:
-                logger.warning("prepare_download_data_archive error: %s" % e.message)
+                logger.warning("prepare_download_data_archive error: %s" % str(e))
                 logger.debug("prepare_download_data_archive: skipping image %s" % id)
                 continue
 
@@ -418,7 +421,7 @@ def prepare_download_data_archive(request_id):
 
         logger.info("prepare_download_data_archive: completed for request %d" % request_id)
     except Exception as e:
-        logger.exception("prepare_download_data_archive error: %s" % e.message)
+        logger.exception("prepare_download_data_archive error: %s" % str(e))
         data_download_request.status = "ERROR"
         data_download_request.save()
 

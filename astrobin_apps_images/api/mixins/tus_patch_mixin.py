@@ -168,11 +168,11 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
                     object.save(**save_kwargs)
             except Exception as e:
                 log.error("Chunked uploader (%d) (%d): exception: %s" % (
-                    request.user.pk, object.pk, e.message
+                    request.user.pk, object.pk, str(e)
                 ))
                 os.remove(temporary_file)
                 self.delete_object(object)
-                return HttpResponse(e.message, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return HttpResponse(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
             signals.saved.send(object)
 
