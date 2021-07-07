@@ -6,13 +6,17 @@ from common.filters.list_filter import ListFilter
 
 
 class ImageFilter(FilterSet):
+    id = ListFilter(name="id", lookup_expr='in')
     ids = ListFilter(name="id", lookup_expr='in')
+    hash = ListFilter(name="hash", lookup_expr='in')
     hashes = ListFilter(name="hash", lookup_expr='in')
 
     class Meta:
         model = Image
         fields = {
+            'id': (),
             'ids': (),
+            'hash': (),
             'hashes': (),
             'user': ('exact',),
             'uploaded': ('lt', 'lte', 'exact', 'gt', 'gte'),
