@@ -1,20 +1,18 @@
-
-
 import hmac
 import logging
-import operator
 import os
 import random
 import string
 import unicodedata
 import uuid
-from datetime import datetime
-from urllib.parse import urlparse
+from functools import reduce
 
 import boto3
+import operator
 from django.core.files.images import get_image_dimensions
 from django.core.validators import MinLengthValidator, MaxLengthValidator, RegexValidator
 from image_cropping import ImageRatioField
+from urllib.parse import urlparse
 
 from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.enums.full_size_display_limitation import FullSizeDisplayLimitation
@@ -28,7 +26,6 @@ from astrobin_apps_notifications.services import NotificationsService
 from common.upload_paths import uncompressed_source_upload_path, image_upload_path, data_download_upload_path
 from common.utils import get_sentinel_user
 from common.validators import FileValidator
-from functools import reduce
 
 try:
     from hashlib import sha1
@@ -44,7 +41,7 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError, models
-from django.db.models import Q, SET_NULL, CASCADE
+from django.db.models import Q
 from django.db.models.signals import post_save
 from django.template.defaultfilters import slugify
 from django.utils import timezone
@@ -254,7 +251,7 @@ class Gear(models.Model):
         blank=False,
     )
 
-    master = models.ForeignKey('self', null=True, editable=False, on_delete=SET_NULL)
+    master = models.ForeignKey('self', null=True, editable=False, on_delete=models.SET_NULL)
 
     updated = models.DateTimeField(
         editable=False,
@@ -381,13 +378,13 @@ class GearUserInfo(models.Model):
     gear = models.ForeignKey(
         Gear,
         editable=False,
-        on_delete=CASCADE
+        on_delete=models.CASCADE
     )
 
     user = models.ForeignKey(
         User,
         editable=False,
-        on_delete=CASCADE
+        on_delete=models.CASCADE
     )
 
     alias = models.CharField(
@@ -414,8 +411,8 @@ class GearUserInfo(models.Model):
 
 
 class GearAssistedMerge(models.Model):
-    master = models.ForeignKey(Gear, related_name='assisted_master', null=True, on_delete = CASCADE)
-    slave = models.ForeignKey(Gear, related_name='assisted_slave', null=True, on_delete=CASCADE)
+    master = models.ForeignKey(Gear, related_name='assisted_master', null=True, on_delete=models.CASCADE)
+    slave = models.ForeignKey(Gear, related_name='assisted_slave', null=True, on_delete=models.CASCADE)
     cutoff = models.DecimalField(default=0, max_digits=3, decimal_places=2)
 
     def __str__(self):
@@ -1060,7 +1057,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     filters = models.ManyToManyField(Filter, blank=True, verbose_name=_("Filters"))
     accessories = models.ManyToManyField(Accessory, blank=True, verbose_name=_("Accessories"))
 
-    user = models.ForeignKey(User, on_delete=CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     plot_is_overlay = models.BooleanField(editable=False, default=False)
     is_wip = models.BooleanField(default=False)
@@ -1523,7 +1520,7 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     image = models.ForeignKey(
         Image,
         related_name='revisions',
-        on_delete=CASCADE
+        on_delete=models.CASCADE,
     )
 
     solutions = GenericRelation(Solution)
@@ -1726,7 +1723,7 @@ class Collection(models.Model):
         editable=False,
     )
 
-    user = models.ForeignKey(User, on_delete=CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     name = models.CharField(
         max_length=256,
@@ -1783,7 +1780,7 @@ class Acquisition(models.Model):
     image = models.ForeignKey(
         Image,
         verbose_name=_("Image"),
-        on_delete=CASCADE
+        on_delete=models.CASCADE,
     )
 
     class Meta:
@@ -1995,8 +1992,8 @@ class SolarSystem_Acquisition(Acquisition):
 
 
 class Request(models.Model):
-    from_user = models.ForeignKey(User, editable=False, related_name='requester', on_delete=CASCADE)
-    to_user = models.ForeignKey(User, editable=False, related_name='requestee', on_delete=CASCADE)
+    from_user = models.ForeignKey(User, editable=False, related_name='requester', on_delete=models.CASCADE)
+    to_user = models.ForeignKey(User, editable=False, related_name='requestee', on_delete=models.CASCADE)
     fulfilled = models.BooleanField()
     message = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
@@ -2021,7 +2018,7 @@ class ImageRequest(Request):
         ('HIRES', _('Higher resolution')),
     )
 
-    image = models.ForeignKey(Image, editable=False, on_delete=CASCADE)
+    image = models.ForeignKey(Image, editable=False, on_delete=models.CASCADE)
     type = models.CharField(max_length=8, choices=TYPE_CHOICES)
 
 
@@ -2590,7 +2587,7 @@ class Location(models.Model):
         UserProfile,
         editable=False,
         null=True,
-        on_delete = CASCADE
+        on_delete=models.CASCADE
     )
 
     def __str__(self):
@@ -2665,7 +2662,7 @@ class AppApiKeyRequest(models.Model):
         User,
         editable=False,
         related_name='app_api_key_request',
-        on_delete=CASCADE)
+        on_delete=models.CASCADE)
 
     name = models.CharField(
         verbose_name=_("Name"),
@@ -2725,8 +2722,7 @@ class ImageOfTheDay(models.Model):
     image = models.ForeignKey(
         Image,
         related_name='image_of_the_day',
-        on_delete=CASCADE
-    )
+        on_delete=models.CASCADE)
 
     date = models.DateField(
         auto_now_add=True)
@@ -2764,7 +2760,7 @@ class ImageOfTheDayCandidate(models.Model):
     image = models.ForeignKey(
         Image,
         related_name='image_of_the_day_candidate',
-        on_delete=CASCADE)
+        on_delete=models.CASCADE)
 
     date = models.DateField(
         auto_now_add=True)
@@ -2825,7 +2821,7 @@ class DataDownloadRequest(models.Model):
         ("EXPIRED", _("Expired")),
     )
 
-    user = models.ForeignKey(User, editable=False, on_delete=CASCADE)
+    user = models.ForeignKey(User, editable=False, on_delete=models.CASCADE)
 
     created = models.DateTimeField(
         null=False,

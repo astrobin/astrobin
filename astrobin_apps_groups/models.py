@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
-from django.urls import reverse
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from pybb.models import Forum, Category
 
@@ -54,7 +54,7 @@ class Group(models.Model):
         blank=False,
         editable=False,
         related_name='created_group_set',
-        on_delete=models.SET(get_sentinel_user),
+        on_delete=models.SET(get_sentinel_user)
     )
 
     owner = models.ForeignKey(
@@ -143,7 +143,7 @@ class Group(models.Model):
         blank=True,
         editable=False,
         related_name='group',
-        on_delete = models.SET_NULL
+        on_delete=models.SET_NULL
     )
 
     @property

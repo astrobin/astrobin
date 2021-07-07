@@ -7,7 +7,7 @@ class DataLossCompensationRequest(models.Model):
     user = models.ForeignKey(
         User,
         editable=False,
-        on_delete = models.CASCADE
+        on_delete=models.CASCADE
     )
 
     created = models.DateTimeField(
