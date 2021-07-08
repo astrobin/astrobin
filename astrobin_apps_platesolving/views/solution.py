@@ -330,8 +330,9 @@ class SolutionPixInsightWebhook(base.View):
             svg_regular = request.POST.get('svgAnnotationSmall', svg_hd)
             pixscale = request.POST.get('resolution', None)
 
-            solution.pixinsight_svg_annotation_hd.save(serial_number + ".svg", ContentFile(svg_hd))
-            solution.pixinsight_svg_annotation_regular.save(serial_number + ".svg", ContentFile(svg_regular))
+            solution.pixinsight_svg_annotation_hd.save(serial_number + ".svg", ContentFile(svg_hd.encode('utf-8')))
+            solution.pixinsight_svg_annotation_regular.save(
+                serial_number + ".svg", ContentFile(svg_regular.encode('utf-8')))
             solution.status = Solver.ADVANCED_SUCCESS
 
             solution.advanced_ra = request.POST.get('centerRA', None)
