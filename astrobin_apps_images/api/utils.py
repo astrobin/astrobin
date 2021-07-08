@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 import base64
 import hashlib
@@ -58,7 +58,7 @@ def encode_upload_metadata(upload_metadata):
     """
     # Prepare encoded data
     encoded_data = [(key, encode_base64_to_string(value))
-                    for (key, value) in sorted(upload_metadata.items(), key=lambda item: item[0])]
+                    for (key, value) in sorted(list(upload_metadata.items()), key=lambda item: item[0])]
 
     # Encode into string
     return ','.join([' '.join([key, encoded_value]) for key, encoded_value in encoded_data])
@@ -196,7 +196,7 @@ def write_data(object, bytes):
 
 
 def apply_headers_to_response(response, headers):
-    for item in headers.items():
+    for item in list(headers.items()):
         response[item[0]] = item[1]
 
     return response

@@ -15,7 +15,7 @@ class CustomForumPermissions(DefaultPermissionHandler):
 
         try:
             if forum.group is not None:
-                if user.is_authenticated():
+                if user.is_authenticated:
                     return may and (
                         forum.group.public or
                         user == forum.group.owner or
@@ -31,7 +31,7 @@ class CustomForumPermissions(DefaultPermissionHandler):
     def filter_forums(self, user, qs):
         f = super(CustomForumPermissions, self).filter_forums(user, qs)
 
-        if user.is_authenticated():
+        if user.is_authenticated:
             if has_access_to_premium_group_features(user):
                 f = f.filter(
                     Q(group = None) |
@@ -59,7 +59,7 @@ class CustomForumPermissions(DefaultPermissionHandler):
 
         try:
             if topic.forum.group:
-                if user.is_authenticated():
+                if user.is_authenticated:
                     may = (
                           topic.forum.group.public or
                           user == topic.forum.group.owner or
@@ -77,7 +77,7 @@ class CustomForumPermissions(DefaultPermissionHandler):
     def filter_topics(self, user, qs):
         f = super(CustomForumPermissions, self).filter_topics(user, qs)
 
-        if user.is_authenticated():
+        if user.is_authenticated:
             if has_access_to_premium_group_features(user):
                 f = f.filter(
                     Q(forum__group = None) |

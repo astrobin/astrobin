@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from pybb.models import Forum, Category
 
@@ -177,7 +177,7 @@ class Group(models.Model):
     def get_absolute_url(self):
         return reverse('group_detail', kwargs={'pk': self.pk})
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:

@@ -1,3 +1,4 @@
+import functools
 import sys
 from datetime import datetime
 
@@ -65,7 +66,7 @@ def premium_get_usersubscription(user):
     if us.count() == 1:
         return us[0]
 
-    return sorted(list(us), cmp=_compareNames)[0]
+    return sorted(list(us), key=functools.cmp_to_key(_compareNames))[0]
 
 
 def premium_get_valid_usersubscription(user):
@@ -89,8 +90,8 @@ def premium_get_valid_usersubscription(user):
     elif len(us) == 1:
         result = us[0]
     else:
-        sortedByName = sorted(us, cmp=_compareNames)
-        sortedByValidity = sorted(sortedByName, cmp=_compareValidity)
+        sortedByName = sorted(us, key=functools.cmp_to_key(_compareNames))
+        sortedByValidity = sorted(sortedByName, key=functools.cmp_to_key(_compareValidity))
         result = sortedByName[0]
 
     cache.set(cache_key, result, 300)
@@ -111,8 +112,8 @@ def premium_get_invalid_usersubscription(user):
     if len(us) == 1:
         return us[0]
 
-    sortedByName = sorted(us, cmp=_compareNames)
-    sortedByValidity = sorted(sortedByName, cmp=_compareValidity)
+    sortedByName = sorted(us, key=functools.cmp_to_key(_compareNames))
+    sortedByValidity = sorted(sortedByName, key=functools.cmp_to_key(_compareValidity))
 
     return sortedByName[0]
 

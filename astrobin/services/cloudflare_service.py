@@ -40,4 +40,4 @@ class CloudflareService:
         try:
             requests.get(url, data, headers=headers, timeout=1)
         except Exception as e:
-            log.warning("Unable to purge Cloudflare cache for file %s: %s" % (path, e.message))
+            log.warning("Unable to purge Cloudflare cache for file %s: %s" % (path, str(e)))

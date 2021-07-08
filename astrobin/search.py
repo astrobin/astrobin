@@ -15,6 +15,7 @@ from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin_apps_equipment.models import EquipmentBrandListing
 from nested_comments.models import NestedComment
 from .models import Image
+from functools import reduce
 
 FIELDS = (
     # Filtering
@@ -67,13 +68,13 @@ class CustomContain(BaseInput):
     input_type_name = 'custom_contain'
 
     def prepare(self, query_obj):
-        query_string = super(CustomContain, self).prepare(query_obj)
+        query_string = super(CustomContain, self).prepare(query_obj).decode('utf-8')
         query_string = query_obj.clean(query_string)
 
         exact_bits = [Clean(bit).prepare(query_obj) for bit in query_string.split(' ') if bit]
-        query_string = u' '.join(exact_bits)
+        query_string = ' '.join(exact_bits)
 
-        return u'*{}*'.format(query_string)
+        return '*{}*'.format(query_string)
 
 
 class AstroBinSearchForm(SearchForm):
@@ -335,9 +336,9 @@ class AstroBinSearchForm(SearchForm):
     def filter_by_subject_type(self, results):
         subject_type = self.cleaned_data.get("subject_type")
 
-        if subject_type in vars(SubjectType).keys():
+        if subject_type in list(vars(SubjectType).keys()):
             results = results.filter(subject_type_char=subject_type)
-        elif subject_type in vars(SolarSystemSubject).keys():
+        elif subject_type in list(vars(SolarSystemSubject).keys()):
             results = results.filter(solar_system_main_subject_char=subject_type)
 
         return results
@@ -463,11 +464,11 @@ class AstroBinSearchForm(SearchForm):
         domain = self.cleaned_data.get('d')
 
         try:
-            q = unicodedata.normalize('NFKD', q).encode('ascii', 'ignore')
+            q = unicodedata.normalize('NFKD', q).encode('ascii', 'ignore').decode('utf-8')
         except:
             pass
 
-        if q is None or q == u"":
+        if q is None or q == "":
             sqs = SearchQuerySet().all()
         else:
             if domain == 'u':

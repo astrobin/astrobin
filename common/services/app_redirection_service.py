@@ -1,4 +1,4 @@
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from django.http import HttpRequest
 
@@ -28,19 +28,19 @@ class AppRedirectionService:
         params = {}
 
         if user.is_authenticated:
-            params['username'] = unicode(user.username).encode('utf-8')
+            params['username'] = str(user.username).encode('utf-8')
             params['email'] = user.email
 
         if 'subject' in request.GET:
-            params['subject'] = unicode(urllib.unquote(request.GET.get('subject'))).encode('utf-8')
+            params['subject'] = str(urllib.parse.unquote(request.GET.get('subject'))).encode('utf-8')
 
         if 'message' in request.GET:
-            params['message'] = unicode(urllib.unquote(request.GET.get('message'))).encode('utf-8')
+            params['message'] = str(urllib.parse.unquote(request.GET.get('message'))).encode('utf-8')
 
-        original_quote_plus = urllib.quote_plus
-        urllib.quote_plus = urllib.quote
-        query_string = urllib.urlencode(params)
-        urllib.quote_plus = original_quote_plus
+        original_quote_plus = urllib.parse.quote_plus
+        urllib.parse.quote_plus = urllib.parse.quote
+        query_string = urllib.parse.urlencode(params)
+        urllib.parse.quote_plus = original_quote_plus
 
         if query_string and query_string != '':
             url = url + '?%s' % query_string

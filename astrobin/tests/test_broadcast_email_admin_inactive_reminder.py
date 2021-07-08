@@ -89,7 +89,7 @@ class BroadcastEmailAdminInactiveReminderTest(TestCase):
 
         args, kwargs = taskMock.call_args
         taskMock.assert_called()
-        self.assertEquals(["email@email.com"], list(args[1]))
+        self.assertEqual(["email@email.com"], list(args[1]))
 
     @patch("astrobin.tasks.send_broadcast_email.delay")
     @patch("django.contrib.admin.ModelAdmin.message_user")
@@ -108,4 +108,4 @@ class BroadcastEmailAdminInactiveReminderTest(TestCase):
 
         args, kwargs = taskMock.call_args
         taskMock.assert_called()
-        self.assertEquals(["email@email.com"], list(args[1]))
+        self.assertEqual(["email@email.com"], list(args[1]))

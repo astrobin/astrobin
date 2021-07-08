@@ -1,6 +1,3 @@
-from exceptions import Exception
-
-
 class MalformedResponse(Exception):
     pass
 

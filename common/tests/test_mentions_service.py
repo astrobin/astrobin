@@ -7,26 +7,26 @@ from common.services.mentions_service import MentionsService
 
 class MentionsServiceTest(TestCase):
     def test_get_mentions_empty_string(self):
-        self.assertEquals([], MentionsService.get_mentions(""))
+        self.assertEqual([], MentionsService.get_mentions(""))
 
     def test_get_mentions_no_mentions(self):
-        self.assertEquals([], MentionsService.get_mentions("hello"))
+        self.assertEqual([], MentionsService.get_mentions("hello"))
 
     def test_get_mentions_one_mention(self):
         text = "Hello [url=https://www.astrobin.com/users/foo/]@Foo Bar[/url]"
-        self.assertEquals(["foo"], MentionsService.get_mentions(text))
+        self.assertEqual(["foo"], MentionsService.get_mentions(text))
 
     def test_get_mentions_http(self):
         text = "Hello [url=http://www.astrobin.com/users/foo/]@Foo Bar[/url]"
-        self.assertEquals(["foo"], MentionsService.get_mentions(text))
+        self.assertEqual(["foo"], MentionsService.get_mentions(text))
 
     def test_get_mentions_no_www(self):
         text = "Hello [url=https://astrobin.com/users/foo/]@Foo Bar[/url]"
-        self.assertEquals(["foo"], MentionsService.get_mentions(text))
+        self.assertEqual(["foo"], MentionsService.get_mentions(text))
 
     def test_get_mentions_localhost_and_port(self):
         text = "Hello [url=http://localhost:8084/users/foo/]@Foo Bar[/url]"
-        self.assertEquals(["foo"], MentionsService.get_mentions(text))
+        self.assertEqual(["foo"], MentionsService.get_mentions(text))
 
     def test_get_mentions_two_mentions(self):
         text = "Hello [url=https://www.astrobin.com/users/foo/]@Foo Smith[/url] and " \
@@ -38,20 +38,22 @@ class MentionsServiceTest(TestCase):
     def test_get_mentions_two_mentions_multiline(self):
         text = "Hello [url=https://www.astrobin.com/users/foo/]@Foo Smith[/url]\nHello " \
                "[url=https://www.astrobin.com/users/bar/]@Bar Test[/url]"
-        self.assertEquals(["foo", "bar"], MentionsService.get_mentions(text))
+        mentions = MentionsService.get_mentions(text)
+        self.assertTrue("foo" in mentions)
+        self.assertTrue("bar" in mentions)
 
     def test_get_mentions_unique_mentions(self):
         text = "Hello [url=https://www.astrobin.com/users/foo/]@Foo Smith[/url] and " \
                "[url=https://www.astrobin.com/users/foo/]@Foo Smith[/url]"
-        self.assertEquals(["foo"], MentionsService.get_mentions(text))
+        self.assertEqual(["foo"], MentionsService.get_mentions(text))
 
     def test_get_mentions_one_quote(self):
         text = "[quote=\"foo\"]Test message[/quote]"
-        self.assertEquals(["foo"], MentionsService.get_mentions(text))
+        self.assertEqual(["foo"], MentionsService.get_mentions(text))
 
     def test_get_mentions_two_quotes(self):
         text = "[quote=\"foo\"]Test message[/quote] OK [quote=\"foo\"]Test message[/quote]"
-        self.assertEquals(["foo"], MentionsService.get_mentions(text))
+        self.assertEqual(["foo"], MentionsService.get_mentions(text))
 
     def test_get_mentions_two_unique_quotes(self):
         text = "[quote=\"foo\"]Test message[/quote] OK [quote=\"bar\"]Test message[/quote]"
@@ -73,11 +75,11 @@ class MentionsServiceTest(TestCase):
 
     def test_get_mentions_quote_without_user(self):
         text = "[quote]Test message[/url]"
-        self.assertEquals([], MentionsService.get_mentions(text))
+        self.assertEqual([], MentionsService.get_mentions(text))
 
     def test_get_mentions_quote_and_mention_same_user(self):
         text = "[quote=\"foo\"]Test message[/quote] Hello [url=https://www.astrobin.com/users/foo/]@Foo Bar[/url]"
-        self.assertEquals(["foo"], MentionsService.get_mentions(text))
+        self.assertEqual(["foo"], MentionsService.get_mentions(text))
 
     def test_get_mentions_quote_and_mention_unique_users(self):
         text = "[quote=\"bar\"]Test message[/quote] Hello [url=https://www.astrobin.com/users/foo/]@Foo Bar[/url]"
@@ -86,12 +88,12 @@ class MentionsServiceTest(TestCase):
         self.assertTrue("bar" in mentions)
 
     def test_get_mentioned_users_with_notification_enabled_no_users(self):
-        self.assertEquals([], MentionsService.get_mentioned_users_with_notification_enabled(
+        self.assertEqual([], MentionsService.get_mentioned_users_with_notification_enabled(
             [], 'new_forum_post_mention'))
 
     def test_get_mentioned_users_with_notification_enabled_no_users_with_notifications_enabled(self):
         user = Generators.user()
-        self.assertEquals([], MentionsService.get_mentioned_users_with_notification_enabled(
+        self.assertEqual([], MentionsService.get_mentioned_users_with_notification_enabled(
             [user.username], 'new_forum_post_mention'))
 
     def test_get_mentioned_users_with_notification_enabled_users_with_notifications_enabled(self):
@@ -102,7 +104,7 @@ class MentionsServiceTest(TestCase):
             description='',
             default=2)
         NoticeSetting.for_user(user, notice_type, 1)
-        self.assertEquals(
+        self.assertEqual(
             [user],
             MentionsService.get_mentioned_users_with_notification_enabled([user.username], 'new_forum_post_mention'))
 
@@ -117,7 +119,7 @@ class MentionsServiceTest(TestCase):
             default=2
         )
         NoticeSetting.for_user(user, notice_type, 1)
-        self.assertEquals(
+        self.assertEqual(
             [user],
             MentionsService.get_mentioned_users_with_notification_enabled(
                 [user.userprofile.real_name], 'new_forum_post_mention'))

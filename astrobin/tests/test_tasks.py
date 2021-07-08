@@ -44,5 +44,5 @@ class TaskTest(TestCase):
 
         expire_download_data_requests.apply()
 
-        self.assertEquals("EXPIRED", DataDownloadRequest.objects.get(pk=old_request.pk).status)
-        self.assertEquals("PENDING", DataDownloadRequest.objects.get(pk=recent_request.pk).status)
+        self.assertEqual("EXPIRED", DataDownloadRequest.objects.get(pk=old_request.pk).status)
+        self.assertEqual("PENDING", DataDownloadRequest.objects.get(pk=recent_request.pk).status)

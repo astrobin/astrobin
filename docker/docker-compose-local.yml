@@ -5,12 +5,22 @@ version: '3'
 services:
   redis:
     image: redis:6.2.4-alpine
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 1s
+      timeout: 3s
+      retries: 60
     ports:
       - "6379:6379"
 
 
   postgres:
     image: postgres:alpine
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "astrobin" ]
+      interval: 1s
+      timeout: 3s
+      retries: 60
     environment:
       - POSTGRES_DB=astrobin
       - POSTGRES_USER=astrobin
@@ -25,6 +35,16 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
+    healthcheck:
+      test: curl --fail http://localhost:8083/accounts/login/ || exit 1
+      interval: 1s
+      timeout: 3s
+      retries: 120
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
     command:
       - bash
       - -c
@@ -53,6 +73,9 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
+    depends_on:
+      astrobin:
+        condition: service_healthy
     links:
       - postgres
       - redis
@@ -62,6 +85,9 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
+    depends_on:
+      astrobin:
+        condition: service_healthy
     links:
       - postgres
       - redis
@@ -71,6 +97,9 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
+    depends_on:
+      astrobin:
+        condition: service_healthy
     links:
       - postgres
       - redis
@@ -80,6 +109,9 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
+    depends_on:
+      astrobin:
+        condition: service_healthy
     links:
       - postgres
       - redis
@@ -89,6 +121,9 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
+    depends_on:
+      astrobin:
+        condition: service_healthy
     links:
       - postgres
       - redis
@@ -98,6 +133,9 @@ services:
     build:
       context: ../
       dockerfile: docker/astrobin.dockerfile
+    depends_on:
+      astrobin:
+        condition: service_healthy
     links:
       - postgres
       - redis
@@ -115,4 +153,3 @@ volumes:
 
   tmp: { }
   media: { }
-  letsencrypt: { }

@@ -8,7 +8,7 @@ def upload_path(prefix, user_pk, filename):
 
 
 def image_upload_path(instance, filename):
-    user = instance.user if instance._meta.model_name == u'image' else instance.image.user
+    user = instance.user if instance._meta.model_name == 'image' else instance.image.user
     return upload_path('images', user.pk, filename)
 
 
@@ -22,6 +22,6 @@ def data_download_upload_path(instance, filename):
 
 
 def uncompressed_source_upload_path(instance, filename):
-    user = instance.user if instance._meta.model_name == u'image' else instance.image.user
+    user = instance.user if instance._meta.model_name == 'image' else instance.image.user
     return upload_path('uncompressed', user.pk, filename)
 

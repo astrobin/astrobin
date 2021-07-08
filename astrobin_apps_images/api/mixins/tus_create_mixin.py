@@ -64,7 +64,7 @@ class TusCreateMixin(TusCacheMixin, mixins.CreateModelMixin):
         try:
             serializer = self.get_object_serializer(request, filename, upload_length, upload_metadata)
         except KeyError as e:
-            msg = 'Invalid data: %s' % e.message
+            msg = 'Invalid data: %s' % str(e)
             log.warning("Chunked uploader (%d): %s" % (request.user.pk, msg))
             return HttpResponse(msg, status=status.HTTP_400_BAD_REQUEST)
 

@@ -4,7 +4,7 @@ from braces.views import JSONResponseMixin, LoginRequiredMixin, JsonRequestRespo
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.core.serializers.json import DjangoJSONEncoder
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.utils.translation import gettext
@@ -36,7 +36,7 @@ class TogglePropertyUsersAjaxView(JsonRequestResponseMixin, base.View):
                 'displayName': toggle_property.user.userprofile.get_display_name(),
                 'createdOn': toggle_property.created_on,
                 'following': ToggleProperty.objects.toggleproperties_for_object(
-                    'follow', toggle_property.user, request.user).exists() if request.user.is_authenticated() else False
+                    'follow', toggle_property.user, request.user).exists() if request.user.is_authenticated else False
             })
 
         return self.render_json_response(json.dumps(data, cls=DjangoJSONEncoder))

@@ -1,5 +1,5 @@
-from models import DeepSky_Acquisition, Image, UserProfile, Gear, User, Camera, Telescope
-from utils import unique_items
+from .models import DeepSky_Acquisition, Image, UserProfile, Gear, User, Camera, Telescope
+from .utils import unique_items
 
 from django.utils.translation import ugettext as _
 from django.db.models import Q
@@ -12,6 +12,7 @@ import time
 import unicodedata
 from collections import defaultdict
 import operator
+from functools import reduce
 
 
 def daterange(start, end):
@@ -67,7 +68,7 @@ def integration_hours(user, period='monthly', since=0):
         for date in daterange(all[0].date, datetime.today().date()):
             grouped_date = date.strftime(_map[period][1])
             t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
-            if grouped_date in data.keys():
+            if grouped_date in list(data.keys()):
                 flot_data.append([t, data[grouped_date]])
             else:
                 flot_data.append([t, 0])
@@ -112,7 +113,7 @@ def integration_hours_by_gear(user, period='monthly'):
                 all = all.filter(image__imaging_cameras = g)
 
             g_dict = {
-                'label': _map[period][0] + ": " + unicodedata.normalize('NFKD', unicode(g)).encode('ascii', 'ignore'),
+                'label': _map[period][0] + ": " + unicodedata.normalize('NFKD', str(g)).encode('ascii', 'ignore'),
                 'stage_data': {},
                 'data': [],
                 'lines': {'lineWidth': thickness},
@@ -132,7 +133,7 @@ def integration_hours_by_gear(user, period='monthly'):
                 for date in daterange(all[0].date, datetime.today().date()):
                     grouped_date = date.strftime(_map[period][1])
                     t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
-                    if grouped_date in g_dict['stage_data'].keys():
+                    if grouped_date in list(g_dict['stage_data'].keys()):
                         g_dict['data'].append([t, g_dict['stage_data'][grouped_date]])
                     else:
                         g_dict['data'].append([t, 0])
@@ -185,7 +186,7 @@ def uploaded_images(user, period='monthly'):
         for date in daterange(all[0].uploaded.date(), datetime.today().date()):
             grouped_date = date.strftime(_map[period][1])
             t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
-            if grouped_date in data.keys():
+            if grouped_date in list(data.keys()):
                 flot_data.append([t, data[grouped_date]])
             else:
                 flot_data.append([t, 0])
@@ -231,7 +232,7 @@ def views(user, period='monthly'):
         for date in daterange(all[0].created.date(), datetime.today().date()):
             grouped_date = date.strftime(_map[period][1])
             t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
-            if grouped_date in data.keys():
+            if grouped_date in list(data.keys()):
                 flot_data.append([t, data[grouped_date]])
             else:
                 flot_data.append([t, 0])
@@ -276,7 +277,7 @@ def image_views(image_id, period='monthly'):
         for date in daterange(all[0].created.date(), datetime.today().date()):
             grouped_date = date.strftime(_map[period][1])
             t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
-            if grouped_date in data.keys():
+            if grouped_date in list(data.keys()):
                 flot_data.append([t, data[grouped_date]])
             else:
                 flot_data.append([t, 0])
@@ -314,7 +315,7 @@ def subject_images_monthly(subject_id):
     if all:
         for date in daterange(all[0].uploaded.date(), datetime.today().date()):
             grouped_date = date.strftime('%m')
-            if grouped_date in data.keys():
+            if grouped_date in list(data.keys()):
                 flot_data.append([grouped_date, data[grouped_date]])
             else:
                 flot_data.append([grouped_date, 0])
@@ -355,7 +356,7 @@ def subject_integration_monthly(subject_id):
     if all:
         for date in daterange(all[0].date, datetime.today().date()):
             grouped_date = date.strftime('%m')
-            if grouped_date in data.keys():
+            if grouped_date in list(data.keys()):
                 flot_data.append([grouped_date, data[grouped_date]])
             else:
                 flot_data.append([grouped_date, 0])
@@ -400,7 +401,7 @@ def subject_total_images(subject_id):
         for date in daterange(all[0].uploaded.date(), datetime.today().date()):
             grouped_date = date.strftime(_map[period][1])
             t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
-            if grouped_date in data.keys():
+            if grouped_date in list(data.keys()):
                 flot_data.append([t, data[grouped_date]])
             else:
                 flot_data.append([t, 0])
@@ -428,7 +429,7 @@ def subject_camera_types(subject_id, lang = 'en'):
     }
 
     cache_key = 'stats.subjects.camera_types.%d.%s' % (int(subject_id), lang)
-    if not cache.has_key(cache_key):
+    if cache_key not in cache:
         all = Image.objects.all() \
                            .exclude(imaging_cameras__type = None) \
                            .order_by('uploaded')
@@ -439,13 +440,13 @@ def subject_camera_types(subject_id, lang = 'en'):
         data = {}
         for i in all:
             for c in i.imaging_cameras.all():
-                key = unicode(Camera.CAMERA_TYPES[c.type][1])
+                key = str(Camera.CAMERA_TYPES[c.type][1])
                 if key in data:
                     data[key] += 1
                 else:
                     data[key] = 1
 
-        for label, value in data.iteritems():
+        for label, value in data.items():
             flot_data.append({'label': label, 'data': value * 100.0 / all.count()})
 
         flot_data = cache.set(cache_key, flot_data, 7*24*60*60)
@@ -474,7 +475,7 @@ def subject_telescope_types(subject_id, lang='en'):
     }
 
     cache_key = 'stats.subjects.telescope_types.%d.%s' % (int(subject_id), lang)
-    if not cache.has_key(cache_key):
+    if cache_key not in cache:
         all = Image.objects.all() \
                            .exclude(imaging_telescopes__type = None) \
                            .order_by('uploaded')
@@ -485,13 +486,13 @@ def subject_telescope_types(subject_id, lang='en'):
         data = {}
         for i in all:
             for c in i.imaging_telescopes.all():
-                key = unicode(Telescope.TELESCOPE_TYPES[c.type][1])
+                key = str(Telescope.TELESCOPE_TYPES[c.type][1])
                 if key in data:
                     data[key] += 1
                 else:
                     data[key] = 1
 
-        for label, value in data.iteritems():
+        for label, value in data.items():
             flot_data.append({'label': label, 'data': value * 100.0 / all.count()})
 
         flot_data = cache.set(cache_key, flot_data, 7*24*60*60)
@@ -532,7 +533,7 @@ def camera_types_trend():
             .order_by('date')
 
         g_dict = {
-            'label': unicode(g[1]),
+            'label': str(g[1]),
             'stage_data': {},
             'data': [],
         }
@@ -551,7 +552,7 @@ def camera_types_trend():
             for date in daterange(all[0].date, datetime.today().date()):
                 grouped_date = date.strftime(_map[period][1])
                 t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
-                if grouped_date in g_dict['stage_data'].keys():
+                if grouped_date in list(g_dict['stage_data'].keys()):
                     g_dict['data'].append([t, g_dict['stage_data'][grouped_date]])
                 else:
                     g_dict['data'].append([t, 0])
@@ -585,12 +586,12 @@ def telescope_types_trend():
     }
 
     telescope_types = {
-        _('Refractor'): range(0, 6),
-        _('Reflector'): range(6, 12),
-        _('Catadioptric'): range(12, 21),
+        _('Refractor'): list(range(0, 6)),
+        _('Reflector'): list(range(6, 12)),
+        _('Catadioptric'): list(range(12, 21)),
         _('Camera lens'): [21,],
     }
-    for key, value in telescope_types.items():
+    for key, value in list(telescope_types.items()):
         filters = reduce(operator.or_, [Q(**{'image__imaging_telescopes__type': x}) for x in value])
         all = DeepSky_Acquisition.objects \
             .filter(filters & Q(date__gte = '2011-01-01')) \
@@ -616,7 +617,7 @@ def telescope_types_trend():
             for date in daterange(all[0].date, datetime.today().date()):
                 grouped_date = date.strftime(_map[period][1])
                 t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
-                if grouped_date in g_dict['stage_data'].keys():
+                if grouped_date in list(g_dict['stage_data'].keys()):
                     g_dict['data'].append([t, g_dict['stage_data'][grouped_date]])
                 else:
                     g_dict['data'].append([t, 0])
@@ -653,7 +654,7 @@ def subject_type_trend():
             .order_by('uploaded')
 
         g_dict = {
-            'label': unicode(g[1]),
+            'label': str(g[1]),
             'stage_data': {},
             'data': [],
         }
@@ -669,7 +670,7 @@ def subject_type_trend():
             for date in daterange(all[0].uploaded.date(), datetime.today().date()):
                 grouped_date = date.strftime(_map[period][1])
                 t = time.mktime(datetime.strptime(grouped_date, _map[period][1]).timetuple()) * 1000
-                if grouped_date in g_dict['stage_data'].keys():
+                if grouped_date in list(g_dict['stage_data'].keys()):
                     g_dict['data'].append([t, g_dict['stage_data'][grouped_date]])
                 else:
                     g_dict['data'].append([t, 0])

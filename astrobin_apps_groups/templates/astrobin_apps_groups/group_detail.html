@@ -4,7 +4,6 @@
 {% load i18n %}
 {% load tags %}
 {% load pybb_tags %}
-{% load sanitizer %}
 {% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_groups_tags %}
 {% load common_tags %}
@@ -191,8 +190,7 @@
             {% url 'user_page' object.owner.username as owner_url %}
             {% blocktrans trimmed with date_created=object.date_created|date:"SHORT_DATE_FORMAT" owner=object.owner.userprofile category=object.category_humanized %}
                 A group created on {{ date_created }}, owned by <a href="{{ owner_url }}">{{ owner }}</a>, categorized
-                as
-                <strong>{{ category }}</strong>.
+                as <strong>{{ category }}</strong>.
             {% endblocktrans %}
         </div>
 

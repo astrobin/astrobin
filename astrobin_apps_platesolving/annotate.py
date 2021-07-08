@@ -1,10 +1,6 @@
 import logging
 import os
-import six
-if six.PY2:
-    from StringIO import StringIO
-else:
-    from io import StringIO
+from io import BytesIO
 
 import simplejson
 from PIL import Image, ImageDraw, ImageFont
@@ -163,7 +159,7 @@ class Annotator:
         try:
             annotationsObj = simplejson.loads(self.solution.annotations)['annotations']
         except TypeError as e:
-            log.warning("annotate.py: TypeError when trying to parse annotations: %s" % e.message)
+            log.warning("annotate.py: TypeError when trying to parse annotations: %s" % str(e))
             return None
 
         w, h = self.solution.content_object.w, self.solution.content_object.h
@@ -179,10 +175,10 @@ class Annotator:
                     get_from_storage(self.solution.content_object, 'hd')
                 ).convert('RGBA')
             except ThumbnailNotReadyException as e:
-                log.warning("annotate.py: ThumbnailNotReadyException when trying to open the image: %s" % e.message)
+                log.warning("annotate.py: ThumbnailNotReadyException when trying to open the image: %s" % str(e))
                 return None
             except IOError as e:
-                log.warning("annotate.py: IOError when trying to open the image: %s" % e.message)
+                log.warning("annotate.py: IOError when trying to open the image: %s" % str(e))
                 return None
 
             if self.resampling_factor != 1:
@@ -196,7 +192,7 @@ class Annotator:
             self.drawAnnotations(draw, annotationsObj)
             del draw
 
-            image_io = StringIO()
+            image_io = BytesIO()
             image = Image.alpha_composite(base, overlay)
             image = image.resize((hd_w, hd_h), Image.ANTIALIAS)
             image = image.convert('RGB')

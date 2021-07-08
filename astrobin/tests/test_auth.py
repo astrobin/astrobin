@@ -1,6 +1,6 @@
 # Django
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase
 
 class LoginTest(TestCase):
@@ -33,4 +33,4 @@ class LoginTest(TestCase):
 
     def test_password_reset_view(self):
         response = self.client.get(reverse('password_reset'))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)

@@ -1,6 +1,9 @@
 # Get the base
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 MAINTAINER Salvatore Iovene <salvatore@astrobin.com>
+
+ARG DEBIAN_FRONTEND=noninteractive
+ARG APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 
 # Install build prerequisites
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -11,12 +14,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     git \
     build-essential \
-    python-dev \
+    python3-dev \
     pkg-config \
     libxslt1-dev \
     libxml2-dev \
     gettext \
-    python-pip \
+    python3-pip \
     libjpeg8 libjpeg8-dev libjpeg-dev \
     libtiff5 libtiff5-dev libtiff-tools \
     libfreetype6 libfreetype6-dev \
@@ -28,6 +31,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ruby ruby-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 1
+
 # Set the locale
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
@@ -37,26 +42,16 @@ ENV LC_ALL en_US.UTF-8
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
     && apt-get install -y nodejs
 
-# Install yarn
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-    && apt-get update \
-    && apt-get install -y \
-        yarn \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-
 # Install pip dependencies
 RUN mkdir /code
 COPY requirements.txt /code
 WORKDIR /code
-RUN python -m pip install pip==20.3.4 && \
-    apt-get purge -y python-pip && \
-    python -m pip install "setuptools<45" && \
-    pip install --no-deps -r requirements.txt --src /src
+RUN pip3 install --upgrade pip && \
+    pip3 install setuptools && \
+    pip3 install --no-deps -r requirements.txt --src /src
 
 # Install global node dependencies
-RUN yarn global add \
-    yuglify
+RUN npm install -g yuglify
 
 # Install compass
 RUN gem install compass

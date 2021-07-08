@@ -19,7 +19,7 @@ from django.db import models
 class NestedComment(models.Model):
     content_type = models.ForeignKey(
         ContentType,
-        on_delete = models.CASCADE
+        on_delete=models.CASCADE
     )
 
     object_id = models.PositiveIntegerField()
@@ -85,7 +85,7 @@ class NestedComment(models.Model):
             property_type='like'
         ).values_list('user__pk', flat=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return "Comment %d" % self.pk
 
     def get_absolute_url(self):

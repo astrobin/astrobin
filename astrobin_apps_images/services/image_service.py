@@ -346,7 +346,7 @@ class ImageService:
     @staticmethod
     def verify_file(path):
         try:
-            with open(path) as f:
+            with open(path, 'rb') as f:
                 from PIL import Image as PILImage
                 trial_image = PILImage.open(f)
                 trial_image.verify()

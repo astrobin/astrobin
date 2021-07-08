@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import mixins

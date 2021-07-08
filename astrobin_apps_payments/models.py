@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 from django.db import models
 
@@ -9,7 +9,7 @@ class ExchangeRate(models.Model):
     target = models.CharField(max_length=3)
     time = models.DateTimeField()
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s 1 = %s %f.5 on %s" % (
             self.source,
             self.target,

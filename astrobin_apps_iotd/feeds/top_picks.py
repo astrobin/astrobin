@@ -34,7 +34,7 @@ class TopPickFeed(Feed):
 
     def item_author_name(self, item):
         name = item.image.user.userprofile.get_display_name().encode('ascii', 'ignore').decode('ascii')
-        if name == u'':
+        if name == '':
             name = item.image.user.username.encode('ascii', 'ignore').decode('ascii')
 
         return name

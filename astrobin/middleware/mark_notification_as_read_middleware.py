@@ -3,16 +3,18 @@ import logging
 from django.utils import timezone
 from persistent_messages.models import Message
 
+from astrobin.middleware.mixins import MiddlewareParentClass
+
 log = logging.getLogger("apps")
 
 
-class MarkNotificationAsReadMiddleware(object):
+class MarkNotificationAsReadMiddleware(MiddlewareParentClass):
     def _process_with_nid(self, request):
         return (
                 'nid' in request.GET and
                 not request.is_ajax() and
                 hasattr(request, 'user') and
-                request.user.is_authenticated()
+                request.user.is_authenticated
         )
 
     def _process_with_email_medium(self, request):
@@ -25,7 +27,7 @@ class MarkNotificationAsReadMiddleware(object):
                 request.GET.get('utm_campaign') == 'notification' and
                 not request.is_ajax() and
                 hasattr(request, 'user') and
-                request.user.is_authenticated()
+                request.user.is_authenticated
         )
 
     def process_request(self, request):

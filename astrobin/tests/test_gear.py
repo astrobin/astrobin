@@ -1,6 +1,6 @@
 # Django
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase
 
 # AstroBin
@@ -33,19 +33,19 @@ class GearTest(TestCase):
         g, created = Gear.objects.get_or_create(
             make = "Test make",
             name = "Test name")
-        self.assertEqual(g.__unicode__(), "Test make Test name")
+        self.assertEqual(str(g), "Test make Test name")
         g.delete()
 
         g, created = Gear.objects.get_or_create(
             make = "Test",
             name = "Test name")
-        self.assertEqual(g.__unicode__(), "Test name")
+        self.assertEqual(str(g), "Test name")
         g.delete()
 
         g, created = Gear.objects.get_or_create(
             make = "",
             name = "Test name")
-        self.assertEqual(g.__unicode__(), "Test name")
+        self.assertEqual(str(g), "Test name")
         g.delete()
 
     def test_attributes(self):

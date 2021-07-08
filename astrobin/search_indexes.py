@@ -20,6 +20,7 @@ from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_platesolving.services import SolutionService
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
+from functools import reduce
 
 
 logger = logging.getLogger('apps')
@@ -146,7 +147,7 @@ def _prepare_bookmarks(obj):
 
 
 def _prepare_moon_phase(obj):
-    from moon import MoonPhase
+    from .moon import MoonPhase
 
     deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj)
     moon_illuminated_list = []
@@ -230,9 +231,9 @@ def _prepare_min_aperture(obj):
 
 def _prepare_max_aperture(obj):
     import sys
-    d = sys.maxint
+    d = sys.maxsize
     for telescope in obj.imaging_telescopes.all():
-        if telescope.aperture is not None and (d == sys.maxint or telescope.aperture > d):
+        if telescope.aperture is not None and (d == sys.maxsize or telescope.aperture > d):
             d = int(telescope.aperture)
     return d
 
@@ -247,9 +248,9 @@ def _prepare_min_pixel_size(obj):
 
 def _prepare_max_pixel_size(obj):
     import sys
-    s = sys.maxint
+    s = sys.maxsize
     for camera in obj.imaging_cameras.all():
-        if camera.pixel_size is not None and (s == sys.maxint or camera.pixel_size > s):
+        if camera.pixel_size is not None and (s == sys.maxsize or camera.pixel_size > s):
             s = int(camera.pixel_size)
     return s
 

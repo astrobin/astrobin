@@ -1,6 +1,6 @@
 {% load i18n %}
 {% load pipeline %}
-{% load staticfiles %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="{% if request.user.is_authenticated and user_language %}{{user_language}}{% else %}en{% endif %}">

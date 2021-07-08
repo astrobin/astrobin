@@ -133,7 +133,7 @@ class CurrentUserProfileDetail(generics.ListAPIView):
         return UserProfileSerializer
 
     def get_queryset(self):
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             return self.queryset.filter(user=self.request.user)
         return self.model.objects.none()
 
@@ -144,7 +144,7 @@ class UserProfilePartialUpdate(generics.GenericAPIView, mixins.UpdateModelMixin)
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             return self.model.objects.filter(user=self.request.user)
         return self.model.objects.none()
 
@@ -203,6 +203,6 @@ class PaymentList(generics.ListAPIView):
     filter_fields = ('user',)
 
     def get_queryset(self):
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             return self.queryset.filter(user=self.request.user)
         return self.model.objects.none()

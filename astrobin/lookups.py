@@ -21,7 +21,7 @@ def autocomplete_private_message_recipients(request):
     if 'q' not in request.GET:
         return HttpResponse(simplejson.dumps([]))
 
-    q = unicode(request.GET['q']).replace(unichr(160), ' ')
+    q = str(request.GET['q']).replace(chr(160), ' ')
     limit = 10
     results = []
 
@@ -53,7 +53,7 @@ def autocomplete_usernames(request):
     limit = 10
 
     # Replace non-breaking space with regular space
-    q = q.replace(unichr(160), ' ')
+    q = q.replace(chr(160), ' ')
 
     if from_forums:
         referer = request.META.get('HTTP_REFERER')
@@ -112,7 +112,7 @@ def autocomplete_images(request):
     q = request.GET['q']
 
     # Replace non-breaking space with regular space
-    q = q.replace(unichr(160), ' ')
+    q = q.replace(chr(160), ' ')
 
     images = Image.objects_including_wip.filter(user=request.user, title__icontains=q)[:10]
 

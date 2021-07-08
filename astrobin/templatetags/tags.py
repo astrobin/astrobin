@@ -207,7 +207,7 @@ def gear_alias(gear, user):
 @register.simple_tag
 def gear_name_iriencoded(gear):
     from django.template.defaultfilters import iriencode
-    name = unicode(gear)
+    name = str(gear)
     return iriencode(name)
 
 
@@ -304,7 +304,7 @@ def show_ads_on_page(context):
             'top_picks.html',
             'astrobin_apps_iotd/iotd_archive.html'
     ):
-        return not request.user.is_authenticated() or is_free(request.user)
+        return not request.user.is_authenticated or is_free(request.user)
 
     return False
 
@@ -323,7 +323,7 @@ def show_secondary_ad_on_page(context):
     if context.template_name == 'image/detail.html':
         for data in context.dicts:
             if 'image' in data:
-                return (not request.user.is_authenticated() or is_free(request.user)) and \
+                return (not request.user.is_authenticated or is_free(request.user)) and \
                        not is_any_ultimate(data['image'].user)
     elif context.template_name in (
             'user/profile.html',
@@ -337,7 +337,7 @@ def show_secondary_ad_on_page(context):
     ):
         for data in context.dicts:
             if 'requested_user' in data:
-                return (not request.user.is_authenticated() or is_free(request.user)) and \
+                return (not request.user.is_authenticated or is_free(request.user)) and \
                        not is_any_ultimate(data['requested_user'])
 
     return False
@@ -354,7 +354,7 @@ def show_skyscraper_ads_on_page(context):
     if country.lower() not in ('us', 'ca'):
         return False
 
-    is_anon = not context['request'].user.is_authenticated()
+    is_anon = not context['request'].user.is_authenticated
     image_owner_is_ultimate = False
 
     if context.template_name.startswith('registration/'):
@@ -393,7 +393,7 @@ def image_ad_key_value_pairs(image):
 
 @register.filter
 def valid_subscriptions(user):
-    if user.is_anonymous():
+    if user.is_anonymous:
         return []
 
     us = UserSubscription.active_objects.filter(user=user)
@@ -403,7 +403,7 @@ def valid_subscriptions(user):
 
 @register.filter
 def inactive_subscriptions(user):
-    if user.is_anonymous():
+    if user.is_anonymous:
         return []
 
     return [x.subscription
@@ -414,7 +414,7 @@ def inactive_subscriptions(user):
 
 @register.filter
 def has_valid_subscription(user, subscription_pk):
-    if user.is_anonymous():
+    if user.is_anonymous:
         return False
 
     us = UserSubscription.active_objects.filter(
@@ -428,7 +428,7 @@ def has_valid_subscription(user, subscription_pk):
 
 @register.filter
 def has_valid_subscription_in_category(user, category):
-    if user.is_anonymous():
+    if user.is_anonymous:
         return False
 
     us = UserSubscription.active_objects.filter(
@@ -442,7 +442,7 @@ def has_valid_subscription_in_category(user, category):
 
 @register.filter
 def get_premium_subscription_expiration(user):
-    if user.is_anonymous():
+    if user.is_anonymous:
         return None
 
     us = premium_get_valid_usersubscription(user)
@@ -451,7 +451,7 @@ def get_premium_subscription_expiration(user):
 
 @register.filter
 def has_subscription_by_name(user, name):
-    if user.is_anonymous():
+    if user.is_anonymous:
         return False
 
     return UserSubscription.objects.filter(
@@ -460,7 +460,7 @@ def has_subscription_by_name(user, name):
 
 @register.filter
 def get_usersubscription_by_name(user, name):
-    if user.is_anonymous():
+    if user.is_anonymous:
         return None
 
     return UserSubscription.objects.get(
@@ -484,7 +484,7 @@ def get_subscription_url_by_name(name):
 
 @register.filter
 def is_content_moderator(user):
-    if not user.is_authenticated():
+    if not user.is_authenticated:
         return False
 
     return user.groups.filter(name='content_moderators').count() > 0
@@ -492,7 +492,7 @@ def is_content_moderator(user):
 
 @register.filter
 def is_image_moderator(user):
-    if not user.is_authenticated():
+    if not user.is_authenticated:
         return False
 
     return user.groups.filter(name='image_moderators').count() > 0
@@ -500,7 +500,7 @@ def is_image_moderator(user):
 
 @register.filter
 def is_forum_moderator(user):
-    if not user.is_authenticated():
+    if not user.is_authenticated:
         return False
 
     return user.groups.filter(name='forum_moderators').count() > 0
@@ -713,7 +713,7 @@ def show_competitive_feature(requesting_user, target_user):
     if target_user and target_user.userprofile.exclude_from_competitions:
         return False
 
-    if requesting_user.is_authenticated() and requesting_user.userprofile.exclude_from_competitions:
+    if requesting_user.is_authenticated and requesting_user.userprofile.exclude_from_competitions:
         return False
 
     return True

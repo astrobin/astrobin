@@ -46,7 +46,7 @@ class PricingService:
 
         price = PricingService.get_full_price(product, currency)
 
-        if user and user.is_authenticated():
+        if user and user.is_authenticated:
             coupon = PricingService.get_stripe_coupon(user)
             customer = PricingService.get_stripe_customer(user)
 

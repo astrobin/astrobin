@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.db import models
 
 from astrobin.models import Image
@@ -15,7 +15,7 @@ class IotdSubmission(models.Model):
     class Meta:
         unique_together = ['image', 'submitter']
 
-    def __unicode__(self):
+    def __str__(self):
         return "IOTD submission by %s: %s (%d)" % (
             self.submitter.username,
             self.image.title,
@@ -50,7 +50,7 @@ class IotdVote(models.Model):
     class Meta:
         unique_together = ['reviewer', 'image']
 
-    def __unicode__(self):
+    def __str__(self):
         return "IOTD vote by %s: %s" % (
             self.reviewer.username,
             self.image.title)
@@ -82,7 +82,7 @@ class Iotd(models.Model):
     class Meta:
         ordering = ['-date']
 
-    def __unicode__(self):
+    def __str__(self):
         return "IOTD: %s" % self.image.title
 
     def clean(self):
@@ -105,7 +105,7 @@ class IotdHiddenImage(models.Model):
         ordering = ['-created']
         unique_together = ('user', 'image')
 
-    def __unicode__(self):
+    def __str__(self):
         return "IOTD hidden image: %d / %s" % (self.user.pk, self.image.get_id())
 
 
@@ -118,7 +118,7 @@ class IotdDismissedImage(models.Model):
         ordering = ['-created']
         unique_together = ('user', 'image')
 
-    def __unicode__(self):
+    def __str__(self):
         return "IOTD dismissed image: %d / %s" % (self.user.pk, self.image.get_id())
 
 

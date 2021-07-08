@@ -36,7 +36,7 @@ class Command(BaseCommand):
             count = to_update.count()
 
             print("[%s]:%d" % (make, count))
-            new_make = raw_input("")
+            new_make = input("")
             seen.append(make)
 
             if new_make == '':

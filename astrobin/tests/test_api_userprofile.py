@@ -5,9 +5,9 @@ from django.contrib.auth.models import User, Group
 from django.test import TestCase
 from persistent_messages.models import Message
 from subscription.models import Subscription, UserSubscription
-from toggleproperties.models import ToggleProperty
 
 from astrobin.models import App, Image
+from toggleproperties.models import ToggleProperty
 
 
 class APITest(TestCase):
@@ -27,10 +27,6 @@ class APITest(TestCase):
             key="test-key",
             secret="test-secret",
         )
-
-    def tearDown(self):
-        self.app.delete()
-        self.user.delete()
 
     def _get(self):
         return self.client.get("/api/v1/userprofile/%d/?api_key=%s&api_secret=%s&format=json" % (
@@ -79,10 +75,6 @@ class APITest(TestCase):
 
         self.assertContains(self._get(), "\"received_likes_count\": 1")
 
-        like.delete()
-        image.delete()
-
-
     def test_api_userprofile_followers_count(self):
         self.assertContains(self._get(), "\"followers_count\": 0")
 
@@ -95,8 +87,6 @@ class APITest(TestCase):
 
         self.assertContains(self._get(), "\"followers_count\": 1")
 
-        follow.delete()
-
     def test_api_userprofile_following_count(self):
         self.assertContains(self._get(), "\"following_count\": 0")
 
@@ -108,8 +98,6 @@ class APITest(TestCase):
         )
 
         self.assertContains(self._get(), "\"following_count\": 1")
-
-        follow.delete()
 
     def test_api_userprofile_notifications_count(self):
         self.assertContains(self._get(), "\"total_notifications_count\": 0")
@@ -133,8 +121,6 @@ class APITest(TestCase):
         self.assertContains(self._get(), "\"total_notifications_count\": 1")
         self.assertContains(self._get(), "\"unread_notifications_count\": 0")
 
-        notification.delete()
-
     def test_api_userprofilee_premium_subscription(self):
         self.assertContains(self._get(), "\"premium_subscription\": null")
         self.assertContains(self._get(), "\"premium_subscription_expiration\": null")
@@ -156,7 +142,3 @@ class APITest(TestCase):
 
         self.assertContains(self._get(), "\"premium_subscription\": \"AstroBin Premium\"")
         self.assertContains(self._get(), "\"premium_subscription_expiration\": \"%s\"" % premium_us.expires.isoformat())
-
-        premium_us.delete()
-        premium_sub.delete()
-        group.delete()

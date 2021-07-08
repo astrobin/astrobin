@@ -182,7 +182,7 @@ def uniq(seq):
     keys = {}
     for e in seq:
         keys[e] = 1
-    return keys.keys()
+    return list(keys.keys())
 
 
 def uniq_id_tuple(seq):
@@ -201,7 +201,7 @@ def get_image_resolution(image):
         w, h = image.w, image.h
         if not (w and h):
             w, h = get_image_dimensions(image.image_file)
-    except TypeError as e:
+    except (FileNotFoundError, TypeError) as e:
         # This might happen in unit tests
         logger.warning("utils.get_image_resolution: unable to get image dimensions for %d: %s" % (image.pk, str(e)))
         w, h = 0, 0

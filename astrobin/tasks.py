@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 import csv
 import json
@@ -17,7 +17,7 @@ from hitcount.models import HitCount
 from common.services import DateTimeService
 
 if six.PY2:
-    from StringIO import StringIO
+    from io import StringIO
 else:
     from io import StringIO
 from datetime import datetime, timedelta
@@ -150,13 +150,14 @@ def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     acquire_lock = lambda: cache.add(lock_id, 'true', LOCK_EXPIRE)
     release_lock = lambda: cache.delete(lock_id)
 
-    def set_thumb():
+    def drop_retrieval_cache():
         field = image.get_thumbnail_field(revision_label)
         cache_key = image.thumbnail_cache_key(field, alias)
-
-        ImageService(image).set_thumb(alias, revision_label, thumb.url)
-
         cache.delete('%s.retrieve' % cache_key)
+
+    def set_thumb():
+        ImageService(image).set_thumb(alias, revision_label, thumb.url)
+        drop_retrieval_cache()
 
     if acquire_lock():
         try:
@@ -167,8 +168,10 @@ def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
                 set_thumb()
             else:
                 logger.debug("Image %d: unable to generate thumbnail." % image.pk)
+                drop_retrieval_cache()
         except Exception as e:
-            logger.debug("Error retrieving thumbnail: %s" % e.message)
+            logger.debug("Error retrieving thumbnail: %s" % str(e))
+            drop_retrieval_cache()
         finally:
             release_lock()
         return
@@ -361,43 +364,43 @@ def prepare_download_data_archive(request_id):
                                     )
                                 )
                     except Exception as e:
-                        logger.warning("prepare_download_data_archive error: %s" % e.message)
+                        logger.warning("prepare_download_data_archive error: %s" % str(e))
                         logger.debug("prepare_download_data_archive: skipping revision %s" % label)
                         continue
             except Exception as e:
-                logger.warning("prepare_download_data_archive error: %s" % e.message)
+                logger.warning("prepare_download_data_archive error: %s" % str(e))
                 logger.debug("prepare_download_data_archive: skipping image %s" % id)
                 continue
 
             csv_writer.writerow([
                 image.get_id(),
-                unicode(image.title).encode('utf-8'),
+                str(image.title).encode('utf-8'),
                 image.acquisition_type,
                 ImageService(image).get_subject_type_label(),
                 image.data_source,
                 image.remote_source,
                 image.solar_system_main_subject,
-                ';'.join([unicode(x).encode('utf-8') for x in image.locations.all()]),
-                unicode(image.description).encode('utf-8'),
-                unicode(image.link).encode('utf-8'),
-                unicode(image.link_to_fits).encode('utf-8'),
+                ';'.join([str(x).encode('utf-8') for x in image.locations.all()]),
+                str(image.description).encode('utf-8'),
+                str(image.link).encode('utf-8'),
+                str(image.link_to_fits).encode('utf-8'),
                 image.image_file.url,
                 image.uncompressed_source_file.url if image.uncompressed_source_file else "",
                 image.uploaded,
                 image.published,
                 image.updated,
                 image.watermark,
-                unicode(image.watermark_text).encode('utf-8'),
+                str(image.watermark_text).encode('utf-8'),
                 image.watermark_opacity,
-                ';'.join([unicode(x).encode('utf-8') for x in image.imaging_telescopes.all()]),
-                ';'.join([unicode(x).encode('utf-8') for x in image.guiding_telescopes.all()]),
-                ';'.join([unicode(x).encode('utf-8') for x in image.mounts.all()]),
-                ';'.join([unicode(x).encode('utf-8') for x in image.imaging_cameras.all()]),
-                ';'.join([unicode(x).encode('utf-8') for x in image.guiding_cameras.all()]),
-                ';'.join([unicode(x).encode('utf-8') for x in image.focal_reducers.all()]),
-                ';'.join([unicode(x).encode('utf-8') for x in image.software.all()]),
-                ';'.join([unicode(x).encode('utf-8') for x in image.filters.all()]),
-                ';'.join([unicode(x).encode('utf-8') for x in image.accessories.all()]),
+                ';'.join([str(x).encode('utf-8') for x in image.imaging_telescopes.all()]),
+                ';'.join([str(x).encode('utf-8') for x in image.guiding_telescopes.all()]),
+                ';'.join([str(x).encode('utf-8') for x in image.mounts.all()]),
+                ';'.join([str(x).encode('utf-8') for x in image.imaging_cameras.all()]),
+                ';'.join([str(x).encode('utf-8') for x in image.guiding_cameras.all()]),
+                ';'.join([str(x).encode('utf-8') for x in image.focal_reducers.all()]),
+                ';'.join([str(x).encode('utf-8') for x in image.software.all()]),
+                ';'.join([str(x).encode('utf-8') for x in image.filters.all()]),
+                ';'.join([str(x).encode('utf-8') for x in image.accessories.all()]),
                 image.is_wip,
                 image.w,
                 image.h,
@@ -418,7 +421,7 @@ def prepare_download_data_archive(request_id):
 
         logger.info("prepare_download_data_archive: completed for request %d" % request_id)
     except Exception as e:
-        logger.exception("prepare_download_data_archive error: %s" % e.message)
+        logger.exception("prepare_download_data_archive error: %s" % str(e))
         data_download_request.status = "ERROR"
         data_download_request.save()
 
@@ -461,7 +464,7 @@ def perform_wise_payouts(
         return result_json
 
     def get_profile_id(profiles):
-        return [x for x in profiles if x['type'] == u'business' and x['details']['name'] == u'AstroBin'][0]['id']
+        return [x for x in profiles if x['type'] == 'business' and x['details']['name'] == 'AstroBin'][0]['id']
 
     def get_accounts(profile_id):
         result = requests.get('%s/v1/borderless-accounts?profileId=%d' % (BASE_URL, profile_id), headers=HEADERS)
