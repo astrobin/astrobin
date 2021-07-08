@@ -68,7 +68,11 @@ class CustomContain(BaseInput):
     input_type_name = 'custom_contain'
 
     def prepare(self, query_obj):
-        query_string = super(CustomContain, self).prepare(query_obj).decode('utf-8')
+        query_string = super(CustomContain, self).prepare(query_obj)
+        try:
+            query_string = query_string.decode('utf-8')
+        except AttributeError:
+            pass
         query_string = query_obj.clean(query_string)
 
         exact_bits = [Clean(bit).prepare(query_obj) for bit in query_string.split(' ') if bit]
