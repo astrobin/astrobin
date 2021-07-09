@@ -738,7 +738,7 @@ class ImageDetailView(ImageDetailViewBase):
             'nav_ctx_extra': nav_ctx_extra,
             'w': w,
             'h': h,
-            'image_uses_full_width': w >= 940,
+            'image_uses_full_width': w is not None and w >= 940,
         })
 
         return response_dict
