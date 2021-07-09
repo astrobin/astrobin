@@ -14,7 +14,7 @@ def user_language(request):
     d = {
         'user_language': getattr(request, "LANGUAGE_CODE", "en"),
     }
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         profile = request.user.userprofile
         d['user_language'] = profile.language if profile.language else "en"
 
@@ -26,7 +26,7 @@ def user_profile(request):
         'userprofile': None,
     }
 
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         profile = request.user.userprofile
         d['userprofile'] = profile
 
@@ -43,7 +43,7 @@ def common_variables(request):
     soft_bounces = None
     complained = False
 
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         cache_key = 'hard_bounces_%d' % request.user.pk
         hard_bounces = cache.get(cache_key)
         if hard_bounces is None:
@@ -127,7 +127,7 @@ def common_variables(request):
             user=request.user,
             corrupted=True,
             recovered__isnull=False).order_by('recovered').first().recovered + timedelta(days=14) \
-            if request.user.is_authenticated() and \
+            if request.user.is_authenticated and \
                Image.all_objects.filter(
                    user=request.user,
                    corrupted=True,
@@ -139,7 +139,7 @@ def common_variables(request):
         },
     }
 
-    if request.user.is_authenticated() and request.user.userprofile.is_image_moderator():
+    if request.user.is_authenticated and request.user.userprofile.is_image_moderator():
         d['images_pending_moderation_no'] = ImageService().get_images_pending_moderation().count()
 
     return d

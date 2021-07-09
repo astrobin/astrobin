@@ -37,7 +37,7 @@ def donor_badge(user, size='large'):
 
 @register.filter
 def is_donor(user):
-    if settings.DONATIONS_ENABLED and user.is_authenticated():
+    if settings.DONATIONS_ENABLED and user.is_authenticated:
         cache_key = "astrobin_is_donor_%d" % user.pk
         cached = cache.get(cache_key)
         if cached is not None:
@@ -83,7 +83,7 @@ def is_donor(user):
 
 @register.filter
 def has_donation_subscription(user, name):
-    if settings.DONATIONS_ENABLED and user.is_authenticated():
+    if settings.DONATIONS_ENABLED and user.is_authenticated:
         us = UserSubscription.objects.filter(
             Q(user=user) & Q(subscription__name=name))
 
@@ -112,7 +112,7 @@ def donation_form_selected(context, name):
 
 @register.simple_tag
 def user_donation_subscription(user):
-    if settings.DONATIONS_ENABLED and user.is_authenticated():
+    if settings.DONATIONS_ENABLED and user.is_authenticated:
         try:
             us = UserSubscription.objects.get(
                 Q(user=user) &

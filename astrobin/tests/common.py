@@ -2,7 +2,7 @@
 import datetime
 
 # Django
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 # AstroBin
 from astrobin.models import Image, ImageRevision

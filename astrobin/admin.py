@@ -39,7 +39,6 @@ class UserProfileAdmin(admin.ModelAdmin):
         'website',
         'job',
         'hobbies',
-        'timezone',
         'telescopes',
         'mounts',
         'cameras',
@@ -152,7 +151,7 @@ class GearAssistedMergeAdmin(admin.ModelAdmin):
     delete_gear_items.short_description = "Delete gear items"
 
     def hard_merge(modeladmin, request, queryset):
-        from utils import unique_items
+        from .utils import unique_items
         masters = unique_items([x.master for x in queryset])
         if len(masters) > 1:
             return

@@ -9,7 +9,6 @@ from django.template.loader import get_template, render_to_string
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext
 from django_bouncy.models import Bounce, Complaint
-from gadjo.requestprovider.signals import get_request
 from notification.backends import BaseBackend
 from notification.backends.email import EmailBackend as BaseEmailBackend
 from persistent_messages.models import Message
@@ -41,13 +40,8 @@ class PersistentMessagesBackend(BaseBackend):
         template = 'notice.html'
         message = self.get_formatted_messages([template], notice_type.label, context)[template]
         level = persistent_messages.INFO
-
-        try:
-            request = get_request()
-            persistent_messages.add_message(request, level, message, user=recipient, from_user=sender)
-        except IndexError:
-            persistent_message = Message(user=recipient, from_user=sender, level=level, message=message)
-            persistent_message.save()
+        persistent_message = Message(user=recipient, from_user=sender, level=level, message=message)
+        persistent_message.save()
 
 
 class EmailBackend(BaseEmailBackend):
@@ -104,7 +98,7 @@ class EmailBackend(BaseEmailBackend):
             message = messages["full.txt"]
 
         html_body = render_to_string("notification/email_body.html", dict(context, **{
-            "message": mark_safe(unicode(message))
+            "message": mark_safe(str(message))
         }))
 
         send_mail(

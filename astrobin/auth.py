@@ -3,9 +3,9 @@ from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
 
 
-# Class to permit the athentication using email or username
+# Class to permit the authentication using email or username
 class CustomBackend(ModelBackend):
-    def authenticate(self, username=None, password=None, **kwargs):
+    def authenticate(self, request, username=None, password=None, **kwargs):
         UserModel = get_user_model()
 
         try:

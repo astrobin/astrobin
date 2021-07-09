@@ -2,25 +2,24 @@ import datetime
 import logging
 import re
 from itertools import chain
+from typing import List
 
 from annoying.functions import get_object_or_None
 from dateutil.relativedelta import relativedelta
 from django.conf import settings
-from django.contrib import messages
 from django.contrib.auth.models import User, Group as DjangoGroup
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import MultipleObjectsReturned
-from django.core.urlresolvers import reverse as reverse_url
 from django.db import IntegrityError
 from django.db import transaction
 from django.db.models import Q
 from django.db.models.signals import (
     pre_save, post_save, post_delete, m2m_changed)
+from django.urls import reverse as reverse_url
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _, gettext, override
-from gadjo.requestprovider.signals import get_request
+from django.utils.translation import gettext, override
 from persistent_messages.models import Message
 from pybb.models import Forum, Topic, Post, TopicReadTracker
 from pybb.permissions import perms
@@ -30,8 +29,6 @@ from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete
 from subscription.models import UserSubscription, Transaction
 from subscription.signals import paid, signed_up
-from threaded_messages.models import Thread
-from typing import List
 
 from astrobin_apps_groups.models import Group
 from astrobin_apps_iotd.models import IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
@@ -68,7 +65,7 @@ def image_pre_save(sender, instance, **kwargs):
     try:
         image = sender.objects_including_wip.get(pk=instance.pk)
     except sender.DoesNotExist:
-        user_scores_index = instance.user.userprofile.get_scores()['user_scores_index']
+        user_scores_index = instance.user.userprofile.get_scores()['user_scores_index'] or 0
         if user_scores_index >= 1.00 or is_any_premium_subscription(instance.user):
             instance.moderated_when = datetime.date.today()
             instance.moderator_decision = 1
@@ -185,7 +182,6 @@ def imagerevision_post_delete(sender, instance, **kwargs):
 post_softdelete.connect(imagerevision_post_delete, sender=ImageRevision)
 post_delete.connect(imagerevision_post_delete, sender=ImageRevision)
 
-
 def nested_comment_pre_save(sender, instance, **kwargs):
     if instance.pk:
         try:
@@ -197,7 +193,8 @@ def nested_comment_pre_save(sender, instance, **kwargs):
 
         cache.set("user.%d.comment_pre_save_mentions" % instance.author.pk, mentions, 2)
     else:
-        insufficient_index = instance.author.userprofile.get_scores()['user_scores_index'] < 1.00
+        insufficient_index = instance.author.userprofile.get_scores()['user_scores_index'] is not None and \
+                             instance.author.userprofile.get_scores()['user_scores_index'] < 1.00
         free_account = is_free(instance.author)
         insufficient_previous_approvals = NestedComment.objects.filter(
             Q(author=instance.author) & ~Q(pending_moderation=True)
@@ -514,7 +511,7 @@ def group_members_changed(sender, instance, **kwargs):
         'IOTD Reviewers': ['iotd_reviewers', 'content_moderators', 'iotd_staff'],
         'IOTD Judges': ['iotd_judges', 'content_moderators', 'iotd_staff'],
     }
-    if instance.name in group_sync_map.keys():
+    if instance.name in list(group_sync_map.keys()):
         for django_group in group_sync_map[instance.name]:
             DjangoGroup.objects.get_or_create(name=django_group)
         django_groups = DjangoGroup.objects.filter(name__in=group_sync_map[instance.name])
@@ -553,7 +550,7 @@ def group_members_changed(sender, instance, **kwargs):
                 instance.images.add(image)
 
         # Sync IOTD AstroBin groups with django groups
-        if instance.name in group_sync_map.keys():
+        if instance.name in list(group_sync_map.keys()):
             for django_group in django_groups:
                 django_group.user_set.add(*list(users))
             if iotd_staff_group:
@@ -572,12 +569,12 @@ def group_members_changed(sender, instance, **kwargs):
                 topic.subscribers.remove(*User.objects.filter(pk__in=kwargs['pk_set']))
 
         # Sync IOTD AstroBin groups with django groups
-        if instance.name in group_sync_map.keys():
+        if instance.name in list(group_sync_map.keys()):
             all_members = []
             all_members_chain = chain([
                 x.members.all()
                 for x in Group.objects \
-                    .filter(name__in=group_sync_map.keys()) \
+                    .filter(name__in=list(group_sync_map.keys())) \
                     .exclude(name=instance.name)
             ])
             for chain_item in all_members_chain:
@@ -591,12 +588,12 @@ def group_members_changed(sender, instance, **kwargs):
     elif action == 'pre_clear':
         # Sync IOTD AstroBin groups with django groups
         users = instance.members.all()
-        if instance.name in group_sync_map.keys():
+        if instance.name in list(group_sync_map.keys()):
             all_members = []
             all_members_chain = chain([
                 x.members.all()
                 for x in Group.objects \
-                    .filter(name__in=group_sync_map.keys()) \
+                    .filter(name__in=list(group_sync_map.keys())) \
                     .exclude(name=instance.name)
             ])
             for chain_item in all_members_chain:
@@ -718,7 +715,7 @@ def forum_post_pre_save(sender, instance, **kwargs):
                     '*** Type your forum post here ***',
                     '*** Type your reply here ***',
                 ]:
-                    translated = gettext(message).decode('utf-8')
+                    translated = gettext(message)
                     content = getattr(instance, attribute)
                     setattr(
                         instance,
@@ -823,20 +820,6 @@ def topic_read_tracker_post_save(sender, instance, created, **kwargs):
 
 
 post_save.connect(topic_read_tracker_post_save, sender=TopicReadTracker)
-
-
-def threaded_messages_thread_post_save(sender, instance, created, **kwargs):
-    if created:
-        try:
-            request = get_request()
-        except IndexError:
-            # This may happen during unit testing
-            return
-
-        messages.success(request, _("Message sent"))
-
-
-post_save.connect(threaded_messages_thread_post_save, sender=Thread)
 
 
 def user_post_save(sender, instance, created, **kwargs):

@@ -259,4 +259,4 @@ THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
 IMAGE_CROPPING_JQUERY_URL = None
 IMAGE_CROPPING_SIZE_WARNING = True
 IMAGE_CROPPING_THUMB_SIZE = (620, 0)
-IMAGE_CROPPING_BACKEND = 'astrobin.widgets.hidden_image_crop_widget.EasyThumbnailsBackend'
+IMAGE_CROPPING_BACKEND = 'astrobin.widgets.hidden_image_crop_widget.CustomEasyThumbnailsBackend'

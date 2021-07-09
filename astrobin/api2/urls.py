@@ -6,9 +6,9 @@ from astrobin.api2.views.location_view_set import LocationViewSet
 from astrobin.api2.views.telescope_view_set import TelescopeViewSet
 
 router = routers.DefaultRouter()
-router.register(r'telescope', TelescopeViewSet, base_name='telescope')
-router.register(r'camera', CameraViewSet, base_name='camera')
-router.register(r'location', LocationViewSet, base_name='location')
+router.register(r'telescope', TelescopeViewSet, basename='telescope')
+router.register(r'camera', CameraViewSet, basename='camera')
+router.register(r'location', LocationViewSet, basename='location')
 
 urlpatterns = [
     url('', include(router.urls)),

@@ -33,7 +33,7 @@ class CachingService:
 
     @staticmethod
     def get_current_user_profile_last_modified(request):
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             return request.user.userprofile.updated
 
         if 'HTTP_AUTHORIZATION' in request.META:
@@ -70,7 +70,7 @@ class CachingService:
             except (Message.DoesNotExist, AttributeError):
                 pass
         else:
-            if request.user.is_authenticated():
+            if request.user.is_authenticated:
                 try:
                     return Message.objects.filter(user=request.user).latest('modified').modified
                 except (Message.DoesNotExist, AttributeError):

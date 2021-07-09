@@ -72,7 +72,7 @@ class Command(BaseCommand):
             else:
                 data[transaction.user]["amount"] += transaction.amount
 
-        for user, values in data.iteritems():
+        for user, values in data.items():
             amount = values["amount"]
             first_payment = values["first_payment"]
             self.process_user(user, amount, first_payment)

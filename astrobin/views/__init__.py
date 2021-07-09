@@ -2,7 +2,7 @@ import csv
 import logging
 import operator
 import os
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 import flickrapi
 import simplejson
@@ -16,7 +16,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.exceptions import MultipleObjectsReturned
 from django.core.paginator import Paginator, InvalidPage
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db.models import Q
 from django.forms.models import inlineformset_factory
 from django.http import Http404, HttpResponse, HttpResponseBadRequest
@@ -70,6 +70,7 @@ from common.services import AppRedirectionService
 from common.services.caching_service import CachingService
 from common.services.constellations_service import ConstellationsService
 from toggleproperties.models import ToggleProperty
+from functools import reduce
 
 log = logging.getLogger('apps')
 
@@ -186,7 +187,7 @@ def object_list(request, queryset, paginate_by=None, page=None,
         if not allow_empty and len(queryset) == 0:
             raise Http404
 
-    for key, value in extra_context.items():
+    for key, value in list(extra_context.items()):
         if callable(value):
             c[key] = value()
         else:
@@ -237,7 +238,7 @@ def valueReader(source, field):
     reader = csv.reader(utf_8_encoder([value]),
                         skipinitialspace=True)
     for row in reader:
-        items += [unicode_truncate(unicode(x, 'utf-8'), 64) for x in row if x != '']
+        items += [unicode_truncate(str(x, 'utf-8'), 64) for x in row if x != '']
 
     return items, value
 
@@ -337,7 +338,7 @@ def upload_max_revisions_error(request, max_revisions, image):
 def index(request, template='index/root.html', extra_context=None):
     """Main page"""
 
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         from django.shortcuts import redirect
         return redirect("https://welcome.astrobin.com/")
 
@@ -569,7 +570,7 @@ def image_upload_process(request):
                 messages.warning(request, _(indexed_png_error))
                 log.warning("Upload error (%d): %s" % (request.user.pk, indexed_png_error))
         except Exception as e:
-            log.warning("Upload error (%d): %s" % (request.user.pk, e.message))
+            log.warning("Upload error (%d): %s" % (request.user.pk, str(e)))
             return upload_error(request)
 
     profile = request.user.userprofile
@@ -1103,7 +1104,7 @@ def user_page(request, username):
         raise Http404
 
     if Image.objects_including_wip.filter(user=user, moderator_decision=2).count() > 0:
-        if (not request.user.is_authenticated() or \
+        if (not request.user.is_authenticated or \
                 not request.user.is_superuser and \
                 not request.user.userprofile.is_image_moderator()):
             raise Http404
@@ -1242,8 +1243,8 @@ def user_page(request, username):
             nd = _("No imaging telescopes or lenses, or no imaging cameras specified")
             gi = _("Gear images")
 
-            menu += [(x.id, unicode(x)) for x in telescopes]
-            menu += [(x.id, unicode(x)) for x in cameras]
+            menu += [(x.id, str(x)) for x in telescopes]
+            menu += [(x.id, str(x)) for x in cameras]
             menu += [(0, nd)]
             menu += [(-1, gi)]
 
@@ -1405,7 +1406,7 @@ def user_page(request, username):
                     (_('Likes'), "%d" % user_sqs[0].total_likes_received if user_sqs[0].total_likes_received else 0),
                 )
             except Exception as e:
-                log.error("User page (%d): unable to get stats from search index: %s" % (user.pk, e.message))
+                log.error("User page (%d): unable to get stats from search index: %s" % (user.pk, str(e)))
 
             cache.set(key, data, 300)
         else:
@@ -1536,7 +1537,7 @@ def user_page_following(request, username, extra_context=None):
 
     response_dict = {
         'request_user': UserProfile.objects.get(
-            user=request.user).user if request.user.is_authenticated() else None,
+            user=request.user).user if request.user.is_authenticated else None,
         'requested_user': user,
         'user_list': followed_users,
         'view': request.GET.get('view', 'default'),
@@ -1571,7 +1572,7 @@ def user_page_followers(request, username, extra_context=None):
 
     response_dict = {
         'request_user': UserProfile.objects.get(
-            user=request.user).user if request.user.is_authenticated() else None,
+            user=request.user).user if request.user.is_authenticated else None,
         'requested_user': user,
         'user_list': followers,
         'view': request.GET.get('view', 'default'),
@@ -1614,7 +1615,7 @@ def user_page_friends(request, username, extra_context=None):
 
     response_dict = {
         'request_user': UserProfile.objects.get(
-            user=request.user).user if request.user.is_authenticated() else None,
+            user=request.user).user if request.user.is_authenticated else None,
         'requested_user': user,
         'user_list': friends,
         'view': request.GET.get('view', 'default'),
@@ -1817,7 +1818,7 @@ def user_profile_edit_gear(request):
         keys = {}
         for e in seq:
             keys[e] = 1
-        return keys.keys()
+        return list(keys.keys())
 
     response_dict = {
         'initial': 'initial' in request.GET,
@@ -1926,7 +1927,7 @@ def user_profile_save_gear(request):
                  "software": [Software, profile.software],
                  "filters": [Filter, profile.filters],
                  "accessories": [Accessory, profile.accessories],
-                 }.iteritems():
+                 }.items():
         (names, value) = valueReader(request.POST, k)
         for name in names:
             try:
@@ -1978,12 +1979,12 @@ def user_profile_flickr_import(request):
                                  username=request.user.username,
                                  token=flickr_token)
 
-    if not flickr.token_valid(perms=u'read'):
+    if not flickr.token_valid(perms='read'):
         # We were never authenticated, or authentication expired. We need
         # to reauthenticate.
         log.debug("Flickr import (user %d): token not valid" % request.user.pk)
         flickr.get_request_token(settings.BASE_URL + reverse('flickr_auth_callback'))
-        authorize_url = flickr.auth_url(perms=u'read')
+        authorize_url = flickr.auth_url(perms='read')
         request.session['request_token'] = flickr.flickr_oauth.resource_owner_key
         request.session['request_token_secret'] = flickr.flickr_oauth.resource_owner_secret
         request.session['requested_permissions'] = flickr.flickr_oauth.requested_permissions
@@ -2038,7 +2039,7 @@ def user_profile_flickr_import(request):
                     source = found_size.attrib['source']
 
                     img = NamedTemporaryFile(delete=True)
-                    img.write(urllib2.urlopen(source).read())
+                    img.write(urllib.request.urlopen(source).read())
                     img.flush()
                     img.seek(0)
                     f = File(img)
@@ -2301,7 +2302,7 @@ def image_revision_upload_process(request):
     image_revision.user = request.user
     image_revision.image = image
     image_revision.label = ImageService(image).get_next_available_revision_label()
-    image_revision.is_final = request.POST.get(u'mark_as_final', None) == u'on'
+    image_revision.is_final = request.POST.get('mark_as_final', None) == 'on'
     image_revision.save(keep_deleted=True)
 
     messages.success(request, _("Image uploaded. Thank you!"))
@@ -2346,7 +2347,7 @@ def stats(request):
 @never_cache
 @require_GET
 def astrophotographers_list(request):
-    if request.user.is_authenticated() and \
+    if request.user.is_authenticated and \
             request.user.userprofile.exclude_from_competitions and \
             not request.user.is_superuser:
         return HttpResponseForbidden()
@@ -2412,7 +2413,7 @@ def astrophotographers_list(request):
 @never_cache
 @require_GET
 def contributors_list(request):
-    if request.user.is_authenticated() and \
+    if request.user.is_authenticated and \
             request.user.userprofile.exclude_from_competitions and \
             not request.user.is_superuser:
         return HttpResponseForbidden()
@@ -2511,7 +2512,7 @@ def set_language(request, language_code):
         )
         activate(language_code)
 
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             profile = request.user.userprofile
             profile.language = language_code
             profile.save(keep_deleted=True)
@@ -2746,7 +2747,7 @@ def gear_popover_ajax(request, id, image_id):
         'user': request.user,
         'gear': gear,
         'image': image,
-        'is_authenticated': request.user.is_authenticated(),
+        'is_authenticated': request.user.is_authenticated,
         'IMAGES_URL': settings.IMAGES_URL,
         'REQUEST_COUNTRY': get_client_country_code(request),
     })
@@ -2782,7 +2783,7 @@ def user_popover_ajax(request, username):
                                 'user': profile.user,
                                 'images': Image.objects.filter(user=profile.user).count(),
                                 'member_since': member_since,
-                                'is_authenticated': request.user.is_authenticated(),
+                                'is_authenticated': request.user.is_authenticated,
                                 'request': request,
                             })
 

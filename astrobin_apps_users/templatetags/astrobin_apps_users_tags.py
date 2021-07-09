@@ -109,7 +109,7 @@ def astrobin_user(context, user, **kwargs):
         content_type=user_ct).count()
 
     request_user = None
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         request_user = UserProfile.objects.get(user=request.user).user
 
     view = kwargs.get('view')
@@ -145,7 +145,7 @@ def astrobin_apps_users_list(context, user_list, **kwargs):
     request = context['request']
 
     request_user = None
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         request_user = UserProfile.objects.get(user=request.user).user
 
     view = kwargs.get('view')

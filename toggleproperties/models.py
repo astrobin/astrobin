@@ -5,6 +5,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models, IntegrityError
 from django.dispatch import receiver
 
+from common.utils import get_sentinel_user
+
 log = logging.getLogger("apps")
 
 try:
@@ -50,7 +52,7 @@ class TogglePropertyManager(models.Manager):
             results.setdefault(c['object_id'], {})['count'] = c['count']
             results.setdefault(c['object_id'], {})['is_toggled'] = False
             results.setdefault(c['object_id'], {})['content_type_id'] = content_type.id
-        if user and user.is_authenticated():
+        if user and user.is_authenticated:
             qs = qs.filter(user=user)
             for f in qs:
                 results.setdefault(f.object_id, {})['is_toggled'] = True
@@ -79,7 +81,7 @@ class TogglePropertyManager(models.Manager):
             try:
                 tp.save()
             except IntegrityError as e:
-                log.warning("Integrity error while trying to save ToggleProperty: %s" % e.message)
+                log.warning("Integrity error while trying to save ToggleProperty: %s" % str(e))
                 pass
 
         return tp
@@ -87,8 +89,8 @@ class TogglePropertyManager(models.Manager):
 
 class ToggleProperty(models.Model):
     property_type = models.CharField(max_length=64)
-    user = models.ForeignKey(User)
-    content_type = models.ForeignKey(ContentType)
+    user = models.ForeignKey(User, on_delete=models.SET(get_sentinel_user))
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.TextField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
@@ -102,7 +104,7 @@ class ToggleProperty(models.Model):
         unique_together = (('property_type', 'user', 'content_type', 'object_id'),)
         ordering = ('-created_on',)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"%s (%s) %s" % (self.user, self.property_type, self.content_object)
 
 

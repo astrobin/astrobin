@@ -11,6 +11,6 @@ class UserLocationsViewSet(viewsets.ModelViewSet):
     http_method_names = ["get", "options", "head"]
 
     def get_queryset(self):
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             return Location.objects.filter(image__user=self.request.user).distinct()
         return Location.objects.none()

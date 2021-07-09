@@ -2,8 +2,8 @@ import re
 
 import simplejson
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
 from django.test import TestCase
+from django.urls import reverse
 
 from astrobin.models import Collection
 from astrobin.models import Image
@@ -76,8 +76,8 @@ class CollectionTest(TestCase):
 
         image = self._get_last_image()
         collection = self._get_last_collection()
-        self.assertEquals(collection.name, 'test_collection')
-        self.assertEquals(collection.description, 'test_description')
+        self.assertEqual(collection.name, 'test_collection')
+        self.assertEqual(collection.description, 'test_description')
         response = self.client.get(reverse('user_collections_list', args=(self.user.username,)))
         self.assertContains(response, "test_collection")
 
@@ -101,7 +101,8 @@ class CollectionTest(TestCase):
         response = self.client.get(
             reverse('user_collections_list', args=(self.user.username,))
         )
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image2.pk, "collection"), response.content))
+        self.assertIsNotNone(
+            re.search(r'data-id="%d"\s+data-alias="%s"' % (image2.pk, "collection"), response.content.decode('utf-8')))
 
         response = self.client.post(
             reverse('user_collections_update', args=(self.user.username, collection.pk)),
@@ -117,14 +118,13 @@ class CollectionTest(TestCase):
         response = self.client.get(
             reverse('user_collections_list', args=(self.user.username,))
         )
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image1.pk, "collection"), response.content))
+        self.assertIsNotNone(
+            re.search(r'data-id="%d"\s+data-alias="%s"' % (image1.pk, "collection"), response.content.decode('utf-8')))
 
     def test_collection_delete_view(self):
-        # Create a collection
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
         self._create_collection(self.user, 'test_collection', 'test_description')
-        image = self._get_last_image()
         collection = self._get_last_collection()
         response = self.client.post(
             reverse('user_collections_delete', args=(self.user.username, collection.pk)),

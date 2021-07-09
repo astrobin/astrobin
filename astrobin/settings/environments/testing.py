@@ -31,13 +31,12 @@ if TESTING:
 
     CACHALOT_ENABLED = False
 
-    MIDDLEWARE_CLASSES = [
+    MIDDLEWARE = [
         'django.middleware.common.CommonMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
-        'gadjo.requestprovider.middleware.RequestProvider',
         'debug_toolbar.middleware.DebugToolbarMiddleware',
     ]
 

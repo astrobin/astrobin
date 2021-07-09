@@ -251,8 +251,8 @@ class IotdServiceTest(TestCase):
 
         iotds = IotdService().get_iotds()
 
-        self.assertEquals(1, iotds.count())
-        self.assertEquals(iotd_image, iotds.first().image)
+        self.assertEqual(1, iotds.count())
+        self.assertEqual(iotd_image, iotds.first().image)
 
     def test_get_iotds_future_date(self):
         iotd_image = Generators.image()
@@ -265,7 +265,7 @@ class IotdServiceTest(TestCase):
 
         iotds = IotdService().get_iotds()
 
-        self.assertEquals(0, iotds.count())
+        self.assertEqual(0, iotds.count())
 
     def test_get_iotds_corrupted(self):
         iotd_image = Generators.image(corrupted=True)
@@ -278,7 +278,7 @@ class IotdServiceTest(TestCase):
 
         iotds = IotdService().get_iotds()
 
-        self.assertEquals(0, iotds.count())
+        self.assertEqual(0, iotds.count())
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -299,8 +299,8 @@ class IotdServiceTest(TestCase):
 
         top_picks = IotdService().get_top_picks()
 
-        self.assertEquals(1, top_picks.count())
-        self.assertEquals(top_pick_image, top_picks.first().image)
+        self.assertEqual(1, top_picks.count())
+        self.assertEqual(top_pick_image, top_picks.first().image)
 
     def test_get_top_picks_still_in_queue(self):
         top_pick_image = Generators.image()
@@ -317,7 +317,7 @@ class IotdServiceTest(TestCase):
 
         top_picks = IotdService().get_top_picks()
 
-        self.assertEquals(0, top_picks.count())
+        self.assertEqual(0, top_picks.count())
 
     def test_get_top_picks_corrupted(self):
         top_pick_image = Generators.image(corrupted=True)
@@ -331,7 +331,7 @@ class IotdServiceTest(TestCase):
 
         top_picks = IotdService().get_top_picks()
 
-        self.assertEquals(0, top_picks.count())
+        self.assertEqual(0, top_picks.count())
 
     def test_get_top_picks_is_past_iotd(self):
         image = Generators.image()
@@ -346,7 +346,7 @@ class IotdServiceTest(TestCase):
 
         top_picks = IotdService().get_top_picks()
 
-        self.assertEquals(0, top_picks.count())
+        self.assertEqual(0, top_picks.count())
 
     def test_get_top_picks_is_current_iotd(self):
         image = Generators.image()
@@ -361,7 +361,7 @@ class IotdServiceTest(TestCase):
 
         top_picks = IotdService().get_top_picks()
 
-        self.assertEquals(0, top_picks.count())
+        self.assertEqual(0, top_picks.count())
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -382,8 +382,8 @@ class IotdServiceTest(TestCase):
 
         top_picks = IotdService().get_top_picks()
 
-        self.assertEquals(1, top_picks.count())
-        self.assertEquals(image, top_picks.first().image)
+        self.assertEqual(1, top_picks.count())
+        self.assertEqual(image, top_picks.first().image)
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -404,7 +404,7 @@ class IotdServiceTest(TestCase):
 
         IotdService().update_top_pick_archive()
 
-        self.assertEquals(0, IotdService().get_top_picks().count())
+        self.assertEqual(0, IotdService().get_top_picks().count())
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -425,7 +425,7 @@ class IotdServiceTest(TestCase):
 
         IotdService().update_top_pick_archive()
 
-        self.assertEquals(1, IotdService().get_top_picks().count())
+        self.assertEqual(1, IotdService().get_top_picks().count())
 
     @override_settings(
         IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
@@ -445,7 +445,7 @@ class IotdServiceTest(TestCase):
 
         nominations = IotdService().get_top_pick_nominations()
 
-        self.assertEquals(0, nominations.count())
+        self.assertEqual(0, nominations.count())
 
     @override_settings(
         IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
@@ -465,7 +465,7 @@ class IotdServiceTest(TestCase):
 
         nominations = IotdService().get_top_pick_nominations()
 
-        self.assertEquals(1, nominations.count())
+        self.assertEqual(1, nominations.count())
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     def test_get_top_pick_nominations(self):
@@ -484,8 +484,8 @@ class IotdServiceTest(TestCase):
 
         nominations = IotdService().get_top_pick_nominations()
 
-        self.assertEquals(1, nominations.count())
-        self.assertEquals(image, nominations.first().image)
+        self.assertEqual(1, nominations.count())
+        self.assertEqual(image, nominations.first().image)
 
     def test_get_top_pick_nominations_too_soon(self):
         image = Generators.image()
@@ -498,7 +498,7 @@ class IotdServiceTest(TestCase):
 
         nominations = IotdService().get_top_pick_nominations()
 
-        self.assertEquals(0, nominations.count())
+        self.assertEqual(0, nominations.count())
 
     def test_get_top_pick_nominations_corrupted(self):
         image = Generators.image(corrupted=True)
@@ -511,7 +511,7 @@ class IotdServiceTest(TestCase):
 
         nominations = IotdService().get_top_pick_nominations()
 
-        self.assertEquals(0, nominations.count())
+        self.assertEqual(0, nominations.count())
 
     def test_get_top_pick_nominations_has_vote(self):
         image = Generators.image()
@@ -525,7 +525,7 @@ class IotdServiceTest(TestCase):
 
         nominations = IotdService().get_top_pick_nominations()
 
-        self.assertEquals(0, nominations.count())
+        self.assertEqual(0, nominations.count())
 
     def test_get_top_pick_nominations_has_no_submission(self):
         image = Generators.image()
@@ -536,7 +536,7 @@ class IotdServiceTest(TestCase):
 
         nominations = IotdService().get_top_pick_nominations()
 
-        self.assertEquals(0, nominations.count())
+        self.assertEqual(0, nominations.count())
 
     def test_get_submission_queue_spam(self):
         user = Generators.user()
@@ -546,7 +546,7 @@ class IotdServiceTest(TestCase):
         image = Generators.image(user=user)
         image.designated_iotd_submitters.add(submitter)
 
-        self.assertEquals(1, len(IotdService().get_submission_queue(submitter)))
+        self.assertEqual(1, len(IotdService().get_submission_queue(submitter)))
 
     def test_get_submission_queue(self):
         user = Generators.user()
@@ -558,7 +558,7 @@ class IotdServiceTest(TestCase):
         image.moderator_decision = 2
         image.save()
 
-        self.assertEquals(0, len(IotdService().get_submission_queue(submitter)))
+        self.assertEqual(0, len(IotdService().get_submission_queue(submitter)))
 
     def test_get_submission_queue_published_too_long_ago(self):
         user = Generators.user()
@@ -570,7 +570,7 @@ class IotdServiceTest(TestCase):
         image.published = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(hours=1)
         image.save()
 
-        self.assertEquals(0, len(IotdService().get_submission_queue(submitter)))
+        self.assertEqual(0, len(IotdService().get_submission_queue(submitter)))
 
     def test_get_submission_queue_other_type(self):
         user = Generators.user()
@@ -582,7 +582,7 @@ class IotdServiceTest(TestCase):
         image.subject_type = SubjectType.OTHER
         image.save()
 
-        self.assertEquals(0, len(IotdService().get_submission_queue(submitter)))
+        self.assertEqual(0, len(IotdService().get_submission_queue(submitter)))
 
     def test_get_submission_queue_gear_type(self):
         user = Generators.user()
@@ -594,7 +594,7 @@ class IotdServiceTest(TestCase):
         image.subject_type = SubjectType.GEAR
         image.save()
 
-        self.assertEquals(0, len(IotdService().get_submission_queue(submitter)))
+        self.assertEqual(0, len(IotdService().get_submission_queue(submitter)))
 
     def test_get_submission_queue_already_submitted_today(self):
         user = Generators.user()
@@ -609,7 +609,7 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
-        self.assertEquals(1, len(IotdService().get_submission_queue(submitter)))
+        self.assertEqual(1, len(IotdService().get_submission_queue(submitter)))
 
     def test_get_submission_queue_already_submitted_before_window(self):
         user = Generators.user()
@@ -627,7 +627,7 @@ class IotdServiceTest(TestCase):
         image.published = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
         image.save()
 
-        self.assertEquals(0, len(IotdService().get_submission_queue(submitter)))
+        self.assertEqual(0, len(IotdService().get_submission_queue(submitter)))
 
     def test_get_submission_queue_dismissed(self):
         user = Generators.user()
@@ -642,7 +642,7 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
-        self.assertEquals(0, len(IotdService().get_submission_queue(submitter)))
+        self.assertEqual(0, len(IotdService().get_submission_queue(submitter)))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     def test_get_review_queue(self):
@@ -667,7 +667,7 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
-        self.assertEquals(1, len(IotdService().get_review_queue(reviewer)))
+        self.assertEqual(1, len(IotdService().get_review_queue(reviewer)))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     def test_get_review_queue_deleted(self):
@@ -694,7 +694,7 @@ class IotdServiceTest(TestCase):
 
         image.delete()
 
-        self.assertEquals(0, len(IotdService().get_review_queue(reviewer)))
+        self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
 
     @override_settings(
         IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS + 1)
@@ -717,7 +717,7 @@ class IotdServiceTest(TestCase):
 
         image.published = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START + timedelta(hours=1)
 
-        self.assertEquals(0, len(IotdService().get_review_queue(reviewer)))
+        self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
 
     def test_get_review_queue_not_enough_submissions_before_cutoff(self):
         uploader = Generators.user()
@@ -738,7 +738,7 @@ class IotdServiceTest(TestCase):
         image.published = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(1)
         image.save()
 
-        self.assertEquals(0, len(IotdService().get_review_queue(reviewer)))
+        self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
 
     def test_get_review_queue_not_designated(self):
         uploader = Generators.user()
@@ -756,7 +756,7 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
-        self.assertEquals(0, len(IotdService().get_review_queue(reviewer)))
+        self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
 
     def test_get_review_queue_too_long_ago(self):
         uploader = Generators.user()
@@ -777,7 +777,7 @@ class IotdServiceTest(TestCase):
         submission.date = datetime.now() - timedelta(days=settings.IOTD_REVIEW_WINDOW_DAYS + 1)
         submission.save()
 
-        self.assertEquals(0, len(IotdService().get_review_queue(reviewer)))
+        self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -806,7 +806,7 @@ class IotdServiceTest(TestCase):
         submission.date = datetime.now() - timedelta(days=2)
         submission.save()
 
-        self.assertEquals(1, len(IotdService().get_review_queue(reviewer)))
+        self.assertEqual(1, len(IotdService().get_review_queue(reviewer)))
 
     def test_get_review_queue_current_iotd(self):
         uploader = Generators.user()
@@ -837,7 +837,7 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
-        self.assertEquals(0, len(IotdService().get_review_queue(reviewer2)))
+        self.assertEqual(0, len(IotdService().get_review_queue(reviewer2)))
 
     def test_get_review_queue_past_iotd(self):
         uploader = Generators.user()
@@ -868,7 +868,7 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
-        self.assertEquals(0, len(IotdService().get_review_queue(reviewer2)))
+        self.assertEqual(0, len(IotdService().get_review_queue(reviewer2)))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -913,7 +913,7 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
-        self.assertEquals(1, len(IotdService().get_review_queue(reviewer3)))
+        self.assertEqual(1, len(IotdService().get_review_queue(reviewer3)))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1)
     def test_get_review_queue_already_reviewed_today(self):
@@ -943,7 +943,7 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
-        self.assertEquals(1, len(IotdService().get_review_queue(reviewer)))
+        self.assertEqual(1, len(IotdService().get_review_queue(reviewer)))
 
     def test_get_review_queue_already_reviewed_yesterday(self):
         uploader = Generators.user()
@@ -969,7 +969,7 @@ class IotdServiceTest(TestCase):
         vote.date = datetime.now() - timedelta(days=1)
         vote.save()
 
-        self.assertEquals(0, len(IotdService().get_review_queue(reviewer)))
+        self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
 
     def test_get_review_queue_dismissed(self):
         uploader = Generators.user()
@@ -992,7 +992,7 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
-        self.assertEquals(0, len(IotdService().get_review_queue(reviewer)))
+        self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -1029,7 +1029,7 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
-        self.assertEquals(1, len(IotdService().get_judgement_queue()))
+        self.assertEqual(1, len(IotdService().get_judgement_queue()))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -1068,7 +1068,7 @@ class IotdServiceTest(TestCase):
 
         image.delete()
 
-        self.assertEquals(0, len(IotdService().get_judgement_queue()))
+        self.assertEqual(0, len(IotdService().get_judgement_queue()))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -1111,7 +1111,7 @@ class IotdServiceTest(TestCase):
         vote2.date = datetime.now() - timedelta(days=settings.IOTD_JUDGEMENT_WINDOW_DAYS + 1)
         vote2.save()
 
-        self.assertEquals(0, len(IotdService().get_judgement_queue()))
+        self.assertEqual(0, len(IotdService().get_judgement_queue()))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -1155,7 +1155,7 @@ class IotdServiceTest(TestCase):
             date=date.today() + timedelta(1)
         )
 
-        self.assertEquals(1, len(IotdService().get_judgement_queue()))
+        self.assertEqual(1, len(IotdService().get_judgement_queue()))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -1199,7 +1199,7 @@ class IotdServiceTest(TestCase):
             date=date.today()
         )
 
-        self.assertEquals(0, len(IotdService().get_judgement_queue()))
+        self.assertEqual(0, len(IotdService().get_judgement_queue()))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -1243,7 +1243,7 @@ class IotdServiceTest(TestCase):
             date=date.today() - timedelta(1)
         )
 
-        self.assertEquals(0, len(IotdService().get_judgement_queue()))
+        self.assertEqual(0, len(IotdService().get_judgement_queue()))
 
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
@@ -1278,7 +1278,7 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
-        self.assertEquals(0, len(IotdService().get_judgement_queue()))
+        self.assertEqual(0, len(IotdService().get_judgement_queue()))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -1315,21 +1315,21 @@ class IotdServiceTest(TestCase):
         image.published = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(hours=1)
         image.save()
 
-        self.assertEquals(0, len(IotdService().get_judgement_queue()))
+        self.assertEqual(0, len(IotdService().get_judgement_queue()))
 
     @patch('common.services.DateTimeService.now')
     def test_judge_cannot_select_now_reason_none_no_iotds(self, now):
         now.return_value = datetime.now()
         judge = Generators.user(groups=['iotd_judges'])
         self.assertIsNone(IotdService().judge_cannot_select_now_reason(judge))
-        self.assertEquals(IotdService().get_next_available_selection_time_for_judge(judge), DateTimeService.now())
+        self.assertEqual(IotdService().get_next_available_selection_time_for_judge(judge), DateTimeService.now())
 
     @patch('common.services.DateTimeService.now')
     def test_judge_cannot_select_now_reason_none_no_scheduled_iotds(self, now):
         now.return_value = datetime.now()
         iotd = self._create_iotd(date=date.today() - timedelta(1))
         self.assertIsNone(IotdService().judge_cannot_select_now_reason(iotd.judge))
-        self.assertEquals(IotdService().get_next_available_selection_time_for_judge(iotd.judge), DateTimeService.now())
+        self.assertEqual(IotdService().get_next_available_selection_time_for_judge(iotd.judge), DateTimeService.now())
 
     @override_settings(IOTD_JUDGEMENT_MAX_PER_DAY=1)
     @patch('common.services.DateTimeService.now')
@@ -1339,7 +1339,7 @@ class IotdServiceTest(TestCase):
         reason = IotdService().judge_cannot_select_now_reason(iotd.judge)
         self.assertIsNotNone(reason)
         self.assertTrue('you already selected 1 IOTD today' in reason)
-        self.assertEquals(
+        self.assertEqual(
             IotdService().get_next_available_selection_time_for_judge(iotd.judge),
             DateTimeService.next_midnight())
 
@@ -1352,7 +1352,7 @@ class IotdServiceTest(TestCase):
         reason = IotdService().judge_cannot_select_now_reason(iotd.judge)
         self.assertIsNotNone(reason)
         self.assertTrue('you already selected 2 scheduled IOTDs' in reason)
-        self.assertEquals(
+        self.assertEqual(
             IotdService().get_next_available_selection_time_for_judge(iotd.judge),
             DateTimeService.next_midnight(iotd.date))
 
@@ -1369,7 +1369,7 @@ class IotdServiceTest(TestCase):
         reason = IotdService().judge_cannot_select_now_reason(iotd.judge)
         self.assertIsNotNone(reason)
         self.assertTrue('there are already 2 scheduled IOTDs' in reason)
-        self.assertEquals(
+        self.assertEqual(
             IotdService().get_next_available_selection_time_for_judge(iotd.judge),
             DateTimeService.next_midnight())
 

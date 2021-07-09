@@ -5,7 +5,7 @@ from django.conf import settings
 from mock import patch
 
 from django.contrib.auth.models import User, Group
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.test import TestCase, override_settings
 
 from astrobin_apps_iotd.models import IotdSubmission, IotdVote

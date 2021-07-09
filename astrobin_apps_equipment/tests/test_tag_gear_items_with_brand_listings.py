@@ -9,7 +9,7 @@ class TestTagGearItemsWithBrandListings(TestCase):
     def test_no_listings(self):
         image = Generators.image()
 
-        self.assertEquals(0, gear_items_with_brand_listings(image, 'us').count())
+        self.assertEqual(0, gear_items_with_brand_listings(image, 'us').count())
 
     def test_with_gear_but_no_listings(self):
         telescope = Generators.telescope()
@@ -17,7 +17,7 @@ class TestTagGearItemsWithBrandListings(TestCase):
         image = Generators.image()
         image.imaging_telescopes.add(telescope)
 
-        self.assertEquals(0, gear_items_with_brand_listings(image, 'us').count())
+        self.assertEqual(0, gear_items_with_brand_listings(image, 'us').count())
 
     def test_with_gear_and_listing_in_wrong_country(self):
         listing = EquipmentGenerators.equipment_brand_listing()
@@ -30,7 +30,7 @@ class TestTagGearItemsWithBrandListings(TestCase):
         image = Generators.image()
         image.imaging_telescopes.add(telescope)
 
-        self.assertEquals(0, gear_items_with_brand_listings(image, 'us').count())
+        self.assertEqual(0, gear_items_with_brand_listings(image, 'us').count())
 
     def test_with_gear_and_listing_in_no_country(self):
         listing = EquipmentGenerators.equipment_brand_listing()
@@ -41,7 +41,7 @@ class TestTagGearItemsWithBrandListings(TestCase):
         image = Generators.image()
         image.imaging_telescopes.add(telescope)
 
-        self.assertEquals(1, gear_items_with_brand_listings(image, 'us').count())
+        self.assertEqual(1, gear_items_with_brand_listings(image, 'us').count())
 
     def test_with_gear_and_listing_in_right_country(self):
         listing = EquipmentGenerators.equipment_brand_listing()
@@ -54,4 +54,4 @@ class TestTagGearItemsWithBrandListings(TestCase):
         image = Generators.image()
         image.imaging_telescopes.add(telescope)
 
-        self.assertEquals(1, gear_items_with_brand_listings(image, 'us').count())
+        self.assertEqual(1, gear_items_with_brand_listings(image, 'us').count())

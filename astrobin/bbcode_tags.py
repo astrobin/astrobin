@@ -13,27 +13,27 @@ class QuoteBBCodeTag(BBCodeTag):
         strip = True
 
     def render(self, value, option=None, parent=None):
-        content = unicode(value)
+        content = str(value)
 
         if option:
-            username = unicode(option).replace('"', '')
+            username = str(option).replace('"', '')
             profile = get_object_or_None(UserProfile, user__username=username)
             if not profile:
                 try:
                     profile = get_object_or_None(UserProfile, real_name=username)
                 except MultipleObjectsReturned:
-                    return u'<blockquote><em>{}</em>:<br/>{}</blockquote>'.format(
+                    return '<blockquote><em>{}</em>:<br/>{}</blockquote>'.format(
                         username,
                         content
                     )
             if profile:
-                return u'<blockquote><a href="/users/{}/">{}</a>:<br/>{}</blockquote>'.format(
+                return '<blockquote><a href="/users/{}/">{}</a>:<br/>{}</blockquote>'.format(
                     profile.user.username,
-                    unicode(profile.get_display_name()),
+                    str(profile.get_display_name()),
                     content
                 )
 
-        return u'<blockquote>{}</blockquote>'.format(content)
+        return '<blockquote>{}</blockquote>'.format(content)
 
 
 tag_pool.register_tag(QuoteBBCodeTag)

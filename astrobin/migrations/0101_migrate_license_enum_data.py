@@ -24,13 +24,13 @@ def get_user_profiles(apps):
 
 
 def migrate_license_values(apps, schema_editor):
-    for old_value, new_value in LICENSE_MIGRATION_MAP.iteritems():
+    for old_value, new_value in LICENSE_MIGRATION_MAP.items():
         get_images(apps).filter(license=old_value).update(license=new_value)
         get_user_profiles(apps).filter(default_license=old_value).update(default_license=new_value)
 
 
 def reverse_migrate_license_values(apps, schema_editor):
-    for old_value, new_value in LICENSE_MIGRATION_MAP.iteritems():
+    for old_value, new_value in LICENSE_MIGRATION_MAP.items():
         get_images(apps).filter(license=new_value).update(license=old_value)
         get_user_profiles(apps).filter(default_license=new_value).update(default_license=old_value)
 

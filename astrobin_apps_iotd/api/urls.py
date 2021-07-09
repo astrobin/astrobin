@@ -9,12 +9,12 @@ from astrobin_apps_iotd.api.views.submission_view_set import SubmissionViewSet
 from astrobin_apps_iotd.api.views.vote_view_set import VoteViewSet
 
 router = routers.DefaultRouter()
-router.register(r'submission-queue', SubmissionQueueViewSet, base_name='submission-queue')
-router.register(r'submission', SubmissionViewSet, base_name='submission-detail')
-router.register(r'review-queue', ReviewQueueViewSet, base_name='review-queue')
-router.register(r'vote', VoteViewSet, base_name='vote-detail')
-router.register(r'hidden-image', HiddenImageViewSet, base_name='hidden-image')
-router.register(r'dismissed-image', DismissedImageViewSet, base_name='dismissed-image')
+router.register(r'submission-queue', SubmissionQueueViewSet, basename='submission-queue')
+router.register(r'submission', SubmissionViewSet, basename='submission-detail')
+router.register(r'review-queue', ReviewQueueViewSet, basename='review-queue')
+router.register(r'vote', VoteViewSet, basename='vote-detail')
+router.register(r'hidden-image', HiddenImageViewSet, basename='hidden-image')
+router.register(r'dismissed-image', DismissedImageViewSet, basename='dismissed-image')
 
 urlpatterns = [
     url('', include(router.urls)),

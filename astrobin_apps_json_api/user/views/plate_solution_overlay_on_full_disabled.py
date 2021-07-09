@@ -20,7 +20,7 @@ class PlateSolutionOverlayOnFullDisabled(JsonRequestResponseMixin, LoginRequired
         profile.save(keep_deleted=True)
 
         response = self.render_json_response({
-            u"plate_solution_overlay_on_full_disabled": profile.plate_solution_overlay_on_full_disabled
+            "plate_solution_overlay_on_full_disabled": profile.plate_solution_overlay_on_full_disabled
         })
 
         return response

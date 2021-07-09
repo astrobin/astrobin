@@ -1,20 +1,18 @@
-from __future__ import absolute_import
-
 import hmac
 import logging
-import operator
 import os
 import random
 import string
 import unicodedata
 import uuid
-from datetime import datetime
-from urlparse import urlparse
+from functools import reduce
 
 import boto3
+import operator
 from django.core.files.images import get_image_dimensions
 from django.core.validators import MinLengthValidator, MaxLengthValidator, RegexValidator
 from image_cropping import ImageRatioField
+from urllib.parse import urlparse
 
 from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.enums.full_size_display_limitation import FullSizeDisplayLimitation
@@ -26,6 +24,7 @@ from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBran
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_notifications.services import NotificationsService
 from common.upload_paths import uncompressed_source_upload_path, image_upload_path, data_download_upload_path
+from common.utils import get_sentinel_user
 from common.validators import FileValidator
 
 try:
@@ -59,13 +58,6 @@ from celery.result import AsyncResult
 from model_utils.managers import InheritanceManager
 from safedelete.models import SafeDeleteModel
 from toggleproperties.models import ToggleProperty
-
-try:
-    # Django < 1.10
-    from timezones.forms import PRETTY_TIMEZONE_CHOICES
-except:
-    # Django >= 1.10
-    from timezones.zones import PRETTY_TIMEZONE_CHOICES
 
 from astrobin_apps_images.managers import ImagesManager, PublicImagesManager, WipImagesManager, ImageRevisionsManager, \
     UploadsInProgressImagesManager, UploadsInProgressImageRevisionsManager
@@ -229,7 +221,7 @@ class GearMakeAutoRename(models.Model):
         null=False,
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s --> %s" % (self.rename_from, self.rename_to)
 
     class Meta:
@@ -259,7 +251,7 @@ class Gear(models.Model):
         blank=False,
     )
 
-    master = models.ForeignKey('self', null=True, editable=False)
+    master = models.ForeignKey('self', null=True, editable=False, on_delete=models.SET_NULL)
 
     updated = models.DateTimeField(
         editable=False,
@@ -286,7 +278,7 @@ class Gear(models.Model):
         editable=False,
     )
 
-    def __unicode__(self):
+    def __str__(self):
         make = self.get_make()
         name = self.get_name()
 
@@ -300,7 +292,7 @@ class Gear(models.Model):
         return []
 
     def get_absolute_url(self):
-        return '/search/?q=%s' % unicode(self)
+        return '/search/?q=%s' % str(self)
 
     def slug(self):
         return slugify("%s %s" % (self.get_make(), self.get_name()))
@@ -316,7 +308,7 @@ class Gear(models.Model):
         # Find matching slaves in images
         images = Image.by_gear(slave)
         for image in images:
-            for name, klass in Image.GEAR_CLASS_LOOKUP.iteritems():
+            for name, klass in Image.GEAR_CLASS_LOOKUP.items():
                 s = getattr(image, name).filter(pk=slave.pk)
                 if s:
                     try:
@@ -329,7 +321,7 @@ class Gear(models.Model):
         filters = reduce(operator.or_, [Q(**{'%s__gear_ptr__pk' % t: slave.pk}) for t in UserProfile.GEAR_CLASS_LOOKUP])
         owners = UserProfile.objects.filter(filters).distinct()
         for owner in owners:
-            for name, klass in UserProfile.GEAR_CLASS_LOOKUP.iteritems():
+            for name, klass in UserProfile.GEAR_CLASS_LOOKUP.items():
                 s = getattr(owner, name).filter(pk=slave.pk)
                 if s:
                     try:
@@ -386,11 +378,13 @@ class GearUserInfo(models.Model):
     gear = models.ForeignKey(
         Gear,
         editable=False,
+        on_delete=models.CASCADE
     )
 
     user = models.ForeignKey(
         User,
         editable=False,
+        on_delete=models.CASCADE
     )
 
     alias = models.CharField(
@@ -408,7 +402,7 @@ class GearUserInfo(models.Model):
         blank=True,
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s (%s)" % (self.alias, self.gear.name)
 
     class Meta:
@@ -417,11 +411,11 @@ class GearUserInfo(models.Model):
 
 
 class GearAssistedMerge(models.Model):
-    master = models.ForeignKey(Gear, related_name='assisted_master', null=True)
-    slave = models.ForeignKey(Gear, related_name='assisted_slave', null=True)
+    master = models.ForeignKey(Gear, related_name='assisted_master', null=True, on_delete=models.CASCADE)
+    slave = models.ForeignKey(Gear, related_name='assisted_slave', null=True, on_delete=models.CASCADE)
     cutoff = models.DecimalField(default=0, max_digits=3, decimal_places=2)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.master.name
 
     class Meta:
@@ -433,7 +427,7 @@ class GearHardMergeRedirect(models.Model):
     fro = models.IntegerField()
     to = models.IntegerField()
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s -> %s" % (self.fro, self.to)
 
     class Meta:
@@ -1063,7 +1057,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     filters = models.ManyToManyField(Filter, blank=True, verbose_name=_("Filters"))
     accessories = models.ManyToManyField(Accessory, blank=True, verbose_name=_("Accessories"))
 
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     plot_is_overlay = models.BooleanField(editable=False, default=False)
     is_wip = models.BooleanField(default=False)
@@ -1139,7 +1133,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     wip = WipImagesManager()
     uploads_in_progress = UploadsInProgressImagesManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title if self.title is not None else _("(no title)")
 
     def get_id(self):
@@ -1320,7 +1314,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         try:
             thumb = thumbnailer.get_thumbnail(self.get_thumbnail_options(alias, revision_label, thumbnail_settings))
         except Exception as e:
-            log.error("Image %d: unable to generate thumbnail: %s." % (self.id, e.message))
+            log.error("Image %d: unable to generate thumbnail: %s." % (self.id, str(e)))
             return None
 
         return thumb
@@ -1331,12 +1325,12 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             self._meta.object_name).lower()
         cache_key = 'easy_thumb_alias_cache_%s.%s_%s_%s' % (
             app_model,
-            unicodedata.normalize('NFKD', unicode(field)).encode('ascii', 'ignore'),
+            unicodedata.normalize('NFKD', str(field)).encode('ascii', 'ignore'),
             alias,
             self.square_cropping)
 
         from hashlib import sha256
-        return sha256(cache_key).hexdigest()
+        return sha256(cache_key.encode('utf-8')).hexdigest()
 
     def thumbnail(self, alias, revision_label, **kwargs):
         def normalize_url_security(url, thumbnail_settings):
@@ -1433,7 +1427,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     def thumbnail_invalidate_real(self, field, revision_label, delete=True):
         from astrobin_apps_images.models import ThumbnailGroup
 
-        for alias, thumbnail_settings in settings.THUMBNAIL_ALIASES[''].iteritems():
+        for alias, thumbnail_settings in settings.THUMBNAIL_ALIASES[''].items():
             cache_key = self.thumbnail_cache_key(field, alias)
             if cache.get(cache_key):
                 cache.delete(cache_key)
@@ -1525,7 +1519,8 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     image = models.ForeignKey(
         Image,
-        related_name='revisions'
+        related_name='revisions',
+        on_delete=models.CASCADE,
     )
 
     solutions = GenericRelation(Solution)
@@ -1649,7 +1644,7 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     objects = ImageRevisionsManager()
     uploads_in_progress = UploadsInProgressImageRevisionsManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.image.title
 
     def save(self, *args, **kwargs):
@@ -1728,7 +1723,7 @@ class Collection(models.Model):
         editable=False,
     )
 
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     name = models.CharField(
         max_length=256,
@@ -1785,12 +1780,13 @@ class Acquisition(models.Model):
     image = models.ForeignKey(
         Image,
         verbose_name=_("Image"),
+        on_delete=models.CASCADE,
     )
 
     class Meta:
         app_label = 'astrobin'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.image.title
 
     def save(self, *args, **kwargs):
@@ -1996,15 +1992,15 @@ class SolarSystem_Acquisition(Acquisition):
 
 
 class Request(models.Model):
-    from_user = models.ForeignKey(User, editable=False, related_name='requester')
-    to_user = models.ForeignKey(User, editable=False, related_name='requestee')
+    from_user = models.ForeignKey(User, editable=False, related_name='requester', on_delete=models.CASCADE)
+    to_user = models.ForeignKey(User, editable=False, related_name='requestee', on_delete=models.CASCADE)
     fulfilled = models.BooleanField()
     message = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
 
     objects = InheritanceManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s %s: %s' % (_('Request from'), self.from_user.username, self.message)
 
     def get_absolute_url(self):
@@ -2022,7 +2018,7 @@ class ImageRequest(Request):
         ('HIRES', _('Higher resolution')),
     )
 
-    image = models.ForeignKey(Image, editable=False)
+    image = models.ForeignKey(Image, editable=False, on_delete=models.CASCADE)
     type = models.CharField(max_length=8, choices=TYPE_CHOICES)
 
 
@@ -2066,7 +2062,7 @@ class UserProfile(SafeDeleteModel):
         (DELETE_REASON_OTHER, _('Other')),
     )
 
-    user = models.OneToOneField(User, editable=False)
+    user = models.OneToOneField(User, editable=False, on_delete=models.CASCADE)
 
     updated = models.DateTimeField(
         editable=False,
@@ -2145,13 +2141,6 @@ class UserProfile(SafeDeleteModel):
         null=True,
         blank=True
     )
-
-    timezone = models.CharField(
-        max_length=255,
-        choices=PRETTY_TIMEZONE_CHOICES,
-        blank=True, null=True,
-        verbose_name=_("Timezone"),
-        help_text=_("By selecting this, you will see all the dates on AstroBin in your timezone."))
 
     about = models.TextField(
         null=True,
@@ -2337,38 +2326,38 @@ class UserProfile(SafeDeleteModel):
 
     receive_important_communications = models.BooleanField(
         default=False,
-        verbose_name=_(u'I accept to receive rare important communications via email'),
+        verbose_name=_('I accept to receive rare important communications via email'),
         help_text=_(
-            u'This is highly recommended. These are very rare and contain information that you probably want to have.')
+            'This is highly recommended. These are very rare and contain information that you probably want to have.')
     )
 
     receive_newsletter = models.BooleanField(
         default=False,
-        verbose_name=_(u'I accept to receive occasional newsletters via email'),
+        verbose_name=_('I accept to receive occasional newsletters via email'),
         help_text=_(
-            u'Newsletters do not have a fixed schedule, but in any case they are not sent out more often than once per month.')
+            'Newsletters do not have a fixed schedule, but in any case they are not sent out more often than once per month.')
     )
 
     receive_marketing_and_commercial_material = models.BooleanField(
         default=False,
-        verbose_name=_(u'I accept to receive occasional marketing and commercial material via email'),
-        help_text=_(u'These emails may contain offers, commercial news, and promotions from AstroBin or its partners.')
+        verbose_name=_('I accept to receive occasional marketing and commercial material via email'),
+        help_text=_('These emails may contain offers, commercial news, and promotions from AstroBin or its partners.')
     )
 
     allow_astronomy_ads = models.BooleanField(
         default=True,
-        verbose_name=_(u'Allow astronomy ads from our partners'),
-        help_text=_(u'It would mean a lot if you chose to allow astronomy relevant, non intrusive ads on this website. '
-                    u'AstroBin is a small business run by a single person, and this kind of support would be amazing. '
-                    u'Thank you in advance!')
+        verbose_name=_('Allow astronomy ads from our partners'),
+        help_text=_('It would mean a lot if you chose to allow astronomy relevant, non intrusive ads on this website. '
+                    'AstroBin is a small business run by a single person, and this kind of support would be amazing. '
+                    'Thank you in advance!')
     )
 
     allow_retailer_integration = models.BooleanField(
         default=True,
-        verbose_name=_(u'Allow retailer integration'),
-        help_text=_(u'AstroBin may associate with retailers of astronomy and astrophotography equipment to enhance '
-                    u'the display of equipment items with links to sponsoring partners. The integration is subtle '
-                    u'and non intrusive, and it would help a lot if you didn\'t disable it. Thank you in advance!')
+        verbose_name=_('Allow retailer integration'),
+        help_text=_('AstroBin may associate with retailers of astronomy and astrophotography equipment to enhance '
+                    'the display of equipment items with links to sponsoring partners. The integration is subtle '
+                    'and non intrusive, and it would help a lot if you didn\'t disable it. Thank you in advance!')
     )
 
     inactive_account_reminder_sent = models.DateTimeField(
@@ -2406,27 +2395,6 @@ class UserProfile(SafeDeleteModel):
         default=False,
         editable=False,
     )
-
-    # PYBBM proxy fields
-    @property
-    def time_zone(self):
-        import pytz
-        from datetime import timedelta
-
-        tz = self.timezone
-        if tz is None:
-            return 0
-
-        now = datetime.now()
-        try:
-            offset = pytz.timezone(tz).utcoffset(now)
-        except (pytz.NonExistentTimeError, pytz.AmbiguousTimeError):
-            # If you're really unluckly, this offset results in a time that
-            # doesn't actually exist because it's within the hour that gets
-            # skipped when you enter DST.
-            offset = pytz.timezone(tz).utcoffset(now + timedelta(hours=1))
-
-        return offset.seconds / 3600
 
     # PYBBM fields
     signature = models.TextField(
@@ -2475,9 +2443,9 @@ class UserProfile(SafeDeleteModel):
     )
 
     def get_display_name(self):
-        return self.real_name if self.real_name else self.user.__unicode__()
+        return self.real_name if self.real_name else str(self.user)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.get_display_name()
 
     def get_absolute_url(self):
@@ -2504,8 +2472,7 @@ class UserProfile(SafeDeleteModel):
 
         if not scores:
             try:
-                user_search_result = \
-                    SearchQuerySet().models(User).filter(django_id=self.user.pk)[0]
+                user_search_result = SearchQuerySet().models(User).filter(django_id=self.user.pk)[0]
             except (IndexError, SearchFieldError):
                 return {
                     'user_scores_index': None,
@@ -2620,13 +2587,14 @@ class Location(models.Model):
         UserProfile,
         editable=False,
         null=True,
+        on_delete=models.CASCADE
     )
 
-    def __unicode__(self):
-        return u', '.join(filter(None, [
+    def __str__(self):
+        return ', '.join([_f for _f in [
             self.name, self.city, self.state,
-            unicode(get_country_name(self.country))
-        ]))
+            str(get_country_name(self.country))
+        ] if _f])
 
     class Meta:
         app_label = 'astrobin'
@@ -2636,7 +2604,9 @@ class App(models.Model):
     registrar = models.ForeignKey(
         User,
         editable=False,
-        related_name='app_api_key')
+        related_name='app_api_key',
+        on_delete=models.SET(get_sentinel_user)
+    )
 
     name = models.CharField(
         max_length=256,
@@ -2669,8 +2639,8 @@ class App(models.Model):
     class Meta:
         ordering = ['-created']
 
-    def __unicode__(self):
-        return u"%s for %s" % (self.key, self.registrar)
+    def __str__(self):
+        return "%s for %s" % (self.key, self.registrar)
 
     def save(self, *args, **kwargs):
         if not self.key:
@@ -2684,14 +2654,15 @@ class App(models.Model):
         # Get a random UUID.
         new_uuid = uuid.uuid4()
         # Hmac that beast.
-        return hmac.new(str(new_uuid), digestmod=sha1).hexdigest()
+        return hmac.new(b'key', str(new_uuid).encode('utf-8'), digestmod=sha1).hexdigest()
 
 
 class AppApiKeyRequest(models.Model):
     registrar = models.ForeignKey(
         User,
         editable=False,
-        related_name='app_api_key_request')
+        related_name='app_api_key_request',
+        on_delete=models.CASCADE)
 
     name = models.CharField(
         verbose_name=_("Name"),
@@ -2716,7 +2687,7 @@ class AppApiKeyRequest(models.Model):
     class Meta:
         ordering = ['-created']
 
-    def __unicode__(self):
+    def __str__(self):
         return 'API request: %s' % self.name
 
     def save(self, *args, **kwargs):
@@ -2750,7 +2721,8 @@ class AppApiKeyRequest(models.Model):
 class ImageOfTheDay(models.Model):
     image = models.ForeignKey(
         Image,
-        related_name='image_of_the_day')
+        related_name='image_of_the_day',
+        on_delete=models.CASCADE)
 
     date = models.DateField(
         auto_now_add=True)
@@ -2780,14 +2752,15 @@ class ImageOfTheDay(models.Model):
         ordering = ['-date']
         app_label = 'astrobin'
 
-    def __unicode__(self):
-        return u"%s as an Image of the Day" % self.image.title
+    def __str__(self):
+        return "%s as an Image of the Day" % self.image.title
 
 
 class ImageOfTheDayCandidate(models.Model):
     image = models.ForeignKey(
         Image,
-        related_name='image_of_the_day_candidate')
+        related_name='image_of_the_day_candidate',
+        on_delete=models.CASCADE)
 
     date = models.DateField(
         auto_now_add=True)
@@ -2796,10 +2769,10 @@ class ImageOfTheDayCandidate(models.Model):
 
     def save(self, *args, **kwargs):
         if self.image.user.userprofile.exclude_from_competitions:
-            raise ValidationError, "User is excluded from competitions"
+            raise ValidationError("User is excluded from competitions")
 
         if self.image.user.userprofile.banned_from_competitions:
-            raise ValidationError, "User is banned from competitions"
+            raise ValidationError("User is banned from competitions")
 
         super(ImageOfTheDayCandidate, self).save(*args, **kwargs)
 
@@ -2807,8 +2780,8 @@ class ImageOfTheDayCandidate(models.Model):
         ordering = ['-date', 'position']
         app_label = 'astrobin'
 
-    def __unicode__(self):
-        return u"%s as an Image of the Day Candidate" % self.image.title
+    def __str__(self):
+        return "%s as an Image of the Day Candidate" % self.image.title
 
 
 class GlobalStat(models.Model):
@@ -2824,8 +2797,8 @@ class GlobalStat(models.Model):
         ordering = ['-date']
         app_label = 'astrobin'
 
-    def __unicode__(self):
-        return u"%d users, %d images, %d hours of integration time" % (
+    def __str__(self):
+        return "%d users, %d images, %d hours of integration time" % (
             self.users, self.images, self.integration)
 
 
@@ -2835,7 +2808,7 @@ class BroadcastEmail(models.Model):
     message = models.TextField()
     message_html = models.TextField(null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.subject
 
 
@@ -2848,7 +2821,7 @@ class DataDownloadRequest(models.Model):
         ("EXPIRED", _("Expired")),
     )
 
-    user = models.ForeignKey(User, editable=False)
+    user = models.ForeignKey(User, editable=False, on_delete=models.CASCADE)
 
     created = models.DateTimeField(
         null=False,

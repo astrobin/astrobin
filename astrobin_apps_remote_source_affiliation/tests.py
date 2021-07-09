@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 import datetime
 
@@ -53,4 +53,4 @@ class RemoteSourceAffiliateTest(TestCase):
             name="doo",
             url="http://example.com"
         ).save()
-        self.assertEquals(remote_source_affiliate_url("foo"), "http://example.com")
+        self.assertEqual(remote_source_affiliate_url("foo"), "http://example.com")

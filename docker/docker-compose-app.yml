@@ -26,7 +26,7 @@ services:
     env_file:
       - ./astrobin.env
     environment:
-      - PYTHONPATH=/usr/lib/python2.7/dist-packages
+      - PYTHONPATH=/usr/lib/python3/dist-packages
       - DJANGO_SETTINGS_MODULE=astrobin.settings
       - POSTGRES_DB=astrobin
       - POSTGRES_USER=astrobin
@@ -42,5 +42,4 @@ services:
 
 volumes:
   media: { }
-  letsencrypt: { }
   tmp: { }

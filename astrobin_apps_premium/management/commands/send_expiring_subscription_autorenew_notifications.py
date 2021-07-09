@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 # Django
 from django.conf import settings
 from django.core.management.base import BaseCommand
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 # Third party
 from subscription.models import UserSubscription

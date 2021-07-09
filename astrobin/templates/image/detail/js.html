@@ -3,7 +3,7 @@
 {% load hitcount_tags %}
 {% load i18n %}
 {% load tags %}
-{% load staticfiles %}
+{% load static %}
 
 {% ifnotequal request.user image.user %}
     <script src="{% static 'hitcount/jquery.postcsrf.js' %}"></script>

@@ -142,7 +142,7 @@ class UserService:
         if self.user.is_superuser:
             return True, None
 
-        if not self.user.is_authenticated():
+        if not self.user.is_authenticated:
             return False, "ANONYMOUS"
 
         if obj.__class__.__name__ == 'Image':
@@ -165,7 +165,7 @@ class UserService:
         return self._real_can_like(obj)[1]
 
     def _real_can_unlike(self, obj):
-        if not self.user.is_authenticated():
+        if not self.user.is_authenticated:
             return False, "ANONYMOUS"
 
         property = ToggleProperty.objects.toggleproperties_for_object('like', obj, self.user)  # type: QuerySet

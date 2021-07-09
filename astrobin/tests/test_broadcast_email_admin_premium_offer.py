@@ -41,7 +41,7 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
 
         args, kwargs = taskMock.call_args
         taskMock.assert_called()
-        self.assertEquals(["email@email.com"], list(args[1]))
+        self.assertEqual(["email@email.com"], list(args[1]))
         self.assertEqual(1, taskMock.call_count)
         user.userprofile.refresh_from_db()
         self.assertIsNotNone(user.userprofile.premium_offer_sent)
@@ -124,7 +124,7 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
         admin.submit_premium_offer_discount(request, BroadcastEmail.objects.filter(pk=email.pk))
         args, kwargs = taskMock.call_args
         taskMock.assert_called()
-        self.assertEquals(["email@email.com"], list(args[1]))
+        self.assertEqual(["email@email.com"], list(args[1]))
 
     @patch("astrobin.tasks.send_broadcast_email.delay")
     def test_submit_premium_offer_discount_already_lite(self, taskMock):
@@ -209,7 +209,7 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
 
         args, kwargs = taskMock.call_args
         taskMock.assert_called()
-        self.assertEquals(["email@email.com", "email2@email.com"], list(args[1]))
+        self.assertEqual(["email@email.com", "email2@email.com"], list(args[1]))
         user.userprofile.refresh_from_db()
         user2.userprofile.refresh_from_db()
         self.assertIsNotNone(user.userprofile.premium_offer_sent)
@@ -234,7 +234,7 @@ class BroadcastEmailAdminPremiumOfferTest(TestCase):
 
         args, kwargs = taskMock.call_args
         taskMock.assert_called()
-        self.assertEquals(["email@email.com"], list(args[1]))
+        self.assertEqual(["email@email.com"], list(args[1]))
         user.userprofile.refresh_from_db()
         self.assertTrue(user.userprofile.premium_offer_sent > datetime.now() - timedelta(minutes=1))
 

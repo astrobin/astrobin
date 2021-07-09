@@ -4,7 +4,7 @@ export ARCH=$(uname -m)
 
 docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD} || exit 1
 
-docker pull ubuntu:16.04 || exit 1
+docker pull ubuntu:20.04 || exit 1
 
 docker build \
     -t astrobin-${ARCH}:$CODEBUILD_RESOLVED_SOURCE_VERSION \

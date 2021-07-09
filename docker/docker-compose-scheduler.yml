@@ -14,7 +14,7 @@ services:
       - ./astrobin.env
     environment:
       - C_FORCE_ROOT=true
-      - PYTHONPATH=/usr/lib/python2.7/dist-packages
+      - PYTHONPATH=/usr/lib/python3/dist-packages
       - DJANGO_SETTINGS_MODULE=astrobin.settings
       - CELERY_RDB_HOST=0.0.0.0
       - CELERY_RDB_PORT=6900
@@ -41,7 +41,7 @@ services:
       - ./astrobin.env
     environment:
       - C_FORCE_ROOT=true
-      - PYTHONPATH=/usr/lib/python2.7/dist-packages
+      - PYTHONPATH=/usr/lib/python3/dist-packages
       - DJANGO_SETTINGS_MODULE=astrobin.settings
       - CELERY_RDB_HOST=0.0.0.0
       - CELERY_RDB_PORT=6900

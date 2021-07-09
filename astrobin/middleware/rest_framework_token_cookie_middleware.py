@@ -1,15 +1,16 @@
 from rest_framework.authtoken.models import Token
 
+from astrobin.middleware.mixins import MiddlewareParentClass
 from common.services import AppRedirectionService
 
 REST_FRAMEWORK_TOKEN_COOKIE = 'classic-auth-token'
 
 
-class RestFrameworkTokenCookieMiddleware(object):
+class RestFrameworkTokenCookieMiddleware(MiddlewareParentClass):
     def _process(self, request):
         return (
                 hasattr(request, 'user') and
-                request.user.is_authenticated() and
+                request.user.is_authenticated and
                 not request.is_ajax() and
                 not 'HTTP_AUTHORIZATION' in request.META and
                 not request.COOKIES.get(REST_FRAMEWORK_TOKEN_COOKIE)
