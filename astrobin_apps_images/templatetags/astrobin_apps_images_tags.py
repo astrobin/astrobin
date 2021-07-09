@@ -156,7 +156,7 @@ def astrobin_image(context, image, alias, **kwargs):
         if placehold_size[i] > 1920:
             placehold_size[i] = 1920
 
-    if w < placehold_size[0]:
+    if w is not None and w < placehold_size[0]:
         placehold_size[0] = w
         placehold_size[1] = h
 
