@@ -113,7 +113,7 @@ def integration_hours_by_gear(user, period='monthly'):
                 all = all.filter(image__imaging_cameras = g)
 
             g_dict = {
-                'label': _map[period][0] + ": " + unicodedata.normalize('NFKD', str(g)).encode('ascii', 'ignore'),
+                'label': str(_map[period][0]) + ": " + str(unicodedata.normalize('NFKD', str(g)).encode('ascii', 'ignore')),
                 'stage_data': {},
                 'data': [],
                 'lines': {'lineWidth': thickness},
