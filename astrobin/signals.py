@@ -158,6 +158,7 @@ def image_post_delete(sender, instance, **kwargs):
 
 
 post_softdelete.connect(image_post_delete, sender=Image)
+post_delete.connect(image_post_delete, sender=Image)
 
 
 def imagerevision_post_save(sender, instance, created, **kwargs):
@@ -179,7 +180,7 @@ def imagerevision_post_delete(sender, instance, **kwargs):
 
 
 post_softdelete.connect(imagerevision_post_delete, sender=ImageRevision)
-
+post_delete.connect(imagerevision_post_delete, sender=ImageRevision)
 
 def nested_comment_pre_save(sender, instance, **kwargs):
     if instance.pk:

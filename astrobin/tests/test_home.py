@@ -10,11 +10,7 @@ class HomeTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user('test', 'test@test.com', 'password')
 
-    def tearDown(self):
-        self.user.delete()
-
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=2)
-
     def test_global_stream(self):
         url = reverse('index') + '?s=global'
         self.client.login(username='test', password='password')
@@ -37,17 +33,15 @@ class HomeTest(TestCase):
         self.assertNotContains(response, 'UPLOADED_IMAGE.actor-%d.action-object-%d.en-us' % (self.user.pk, image.pk))
         # Still contains action for image2 tho
         self.assertContains(response, 'UPLOADED_IMAGE.actor-%d.action-object-%d.en-us' % (self.user.pk, image2.pk))
-        self.assertContains(response, 'UPLOADED_REVISION.actor-%d.action-object-%d.target-%d.en-us' % (self.user.pk,
-                                                                                                       revision.pk,
-                                                                                                       image.pk))
+        self.assertContains(response, 'UPLOADED_REVISION.actor-%d.action-object-%d.target-%d.en-us' % (
+            self.user.pk, revision.pk, image.pk))
 
         # Uploading another revision removes the previous revisions' stream actions
         response, revision2 = test_utils_upload_revision(self, image)
         response = self.client.get(url)
         self.assertNotContains(response, 'UPLOADED_IMAGE.actor-%d.action-object-%d.en-us' % (self.user.pk, revision.pk))
-        self.assertContains(response, 'UPLOADED_REVISION.actor-%d.action-object-%d.target-%d.en-us' % (self.user.pk,
-                                                                                                       revision2.pk,
-                                                                                                       image.pk))
+        self.assertContains(response, 'UPLOADED_REVISION.actor-%d.action-object-%d.target-%d.en-us' % (
+            self.user.pk, revision2.pk, image.pk))
 
 
     def test_complaint_alert(self):
@@ -62,5 +56,3 @@ class HomeTest(TestCase):
 
         self.assertContains(
             response, "AstroBin is not delivering you emails because you have marked some of them as spam.")
-
-        complaint.delete()

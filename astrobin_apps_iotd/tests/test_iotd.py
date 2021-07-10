@@ -52,22 +52,6 @@ class IotdTest(TestCase):
         self.image.subject_type = SubjectType.DEEP_SKY
         self.image.save(keep_deleted=True)
 
-    def tearDown(self):
-        self.submitters.delete()
-        self.submitter_1.delete()
-        self.submitter_2.delete()
-        self.submitter_3.delete()
-
-        self.reviewers.delete()
-        self.reviewer_1.delete()
-        self.reviewer_2.delete()
-        self.reviewer_3.delete()
-
-        self.judges.delete()
-        self.judge_1.delete()
-        self.judge_2.delete()
-
-        self.user.delete()
 
     # Models
 
@@ -219,8 +203,6 @@ class IotdTest(TestCase):
             IotdSubmission.objects.create(
                 submitter=self.submitter_2,
                 image=self.image)
-        vote.delete()
-        iotd.delete()
 
     def test_submission_model_can_submit_image_by_judge(self):
         self.image.user = self.judge_1
@@ -492,10 +474,6 @@ class IotdTest(TestCase):
                     reviewer=self.reviewer_1,
                     image=submission_2.image)
 
-        submission_1.delete()
-        submission_2.delete()
-        image2.delete()
-
     def test_iotd_model(self):
         # User must be judge
         with self.assertRaisesRegex(ValidationError, "not a member"):
@@ -663,15 +641,6 @@ class IotdTest(TestCase):
                     judge=self.judge_1,
                     image=image3)
 
-        iotd.delete()
-        vote_1.delete()
-        vote_2.delete()
-        vote_3.delete()
-        submission_1.delete()
-        submission_2.delete()
-        submission_3.delete()
-        image_author_us.delete()
-
     # Views
 
     @override_settings(
@@ -741,10 +710,6 @@ class IotdTest(TestCase):
         self.assertContains(response, 'data-id="%s"' % self.image.pk)
         self.image.user = self.user
         self.image.save(keep_deleted=True)
-
-        submission_1.delete()
-        vote_1.delete()
-        iotd.delete()
 
     @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_toggle_judgement_ajax_view(self):
@@ -889,25 +854,6 @@ class IotdTest(TestCase):
             self.assertFalse('iotd' in json.loads(response.content))
             self.assertTrue("already scheduled" in json.loads(response.content)['error'])
             self.assertEqual(Iotd.objects.count(), 3)
-
-        # Clean up
-        image2.delete()
-        image3.delete()
-        image4.delete()
-
-        submission.delete()
-        submission2.delete()
-        submission3.delete()
-        submission4.delete()
-
-        vote.delete()
-        vote2.delete()
-        vote3.delete()
-        vote4.delete()
-
-        iotd.delete()
-        iotd2.delete()
-        iotd3.delete()
 
     @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_group_sync(self):
@@ -1056,20 +1002,6 @@ class IotdTest(TestCase):
         self.assertTrue(self.user in staff_group_dj.user_set.all())
         self.assertTrue(self.user in content_moderators_group_dj.user_set.all())
 
-        # Clean up
-        group_creator.delete()
-
-        submitters_group.delete()
-        reviewers_group.delete()
-        judges_group.delete()
-        staff_group.delete()
-
-        submitters_group_dj.delete()
-        reviewers_group_dj.delete()
-        judges_group_dj.delete()
-        staff_group_dj.delete()
-        content_moderators_group_dj.delete()
-
     @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_iotd_deleted_images(self):
         """Deleted images should not appear in the IOTD archive"""
@@ -1085,5 +1017,3 @@ class IotdTest(TestCase):
 
         response = self.client.get(reverse_lazy('iotd_archive'))
         self.assertNotContains(response, self.image.title)
-
-        self.image.undelete()
