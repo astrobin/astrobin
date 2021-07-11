@@ -9,7 +9,7 @@ from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerato
 class TestTagEquipmentItemListings(TestCase):
     def test_no_listings(self):
         telescope = Generators.telescope()
-        self.assertEquals(0, equipment_item_listings(telescope, 'us').count())
+        self.assertEqual(0, equipment_item_listings(telescope, 'us').count())
 
     def test_listing_in_wrong_country(self):
         listing = EquipmentGenerators.equipment_item_listing()
@@ -19,7 +19,7 @@ class TestTagEquipmentItemListings(TestCase):
         telescope = Generators.telescope()
         telescope.equipment_item_listings.add(listing)
 
-        self.assertEquals(0, equipment_item_listings(telescope, 'us').count())
+        self.assertEqual(0, equipment_item_listings(telescope, 'us').count())
 
     def test_listing_correct_country(self):
         listing = EquipmentGenerators.equipment_item_listing()
@@ -29,7 +29,7 @@ class TestTagEquipmentItemListings(TestCase):
         telescope = Generators.telescope()
         telescope.equipment_item_listings.add(listing)
 
-        self.assertEquals(1, equipment_item_listings(telescope, 'us').count())
+        self.assertEqual(1, equipment_item_listings(telescope, 'us').count())
 
     def test_listing_no_country(self):
         listing = EquipmentGenerators.equipment_item_listing()
@@ -37,7 +37,7 @@ class TestTagEquipmentItemListings(TestCase):
         telescope = Generators.telescope()
         telescope.equipment_item_listings.add(listing)
 
-        self.assertEquals(1, equipment_item_listings(telescope, 'us').count())
+        self.assertEqual(1, equipment_item_listings(telescope, 'us').count())
 
     def test_listing_country_is_none(self):
         listing = EquipmentGenerators.equipment_item_listing()
@@ -45,4 +45,4 @@ class TestTagEquipmentItemListings(TestCase):
         telescope = Generators.telescope()
         telescope.equipment_item_listings.add(listing)
 
-        self.assertEquals(0, equipment_item_listings(telescope, None).count())
+        self.assertEqual(0, equipment_item_listings(telescope, None).count())

@@ -151,7 +151,7 @@ urlpatterns += [
     ### DJANGO VIEWS                                                        ###
     ###########################################################################
 
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
 
     ###########################################################################
     ### THIRD PARTY APPS VIEWS                                              ###
@@ -161,22 +161,22 @@ urlpatterns += [
 
     # override the default urls
     url(r'^accounts/password/change/$',
-        auth_views.password_change,
+        auth_views.PasswordChangeView.as_view(),
         name='password_change'),
     url(r'^accounts/password/change/done/$',
-        auth_views.password_change_done,
+        auth_views.PasswordChangeDoneView.as_view(),
         name='password_change_done'),
     url(r'^accounts/password/reset/$',
-        auth_views.password_reset,
+        auth_views.PasswordResetView.as_view(),
         name='password_reset'),
     url(r'^accounts/password/reset/done/$',
-        auth_views.password_reset_done,
+        auth_views.PasswordResetDoneView.as_view(),
         name='password_reset_done'),
     url(r'^accounts/password/reset/complete/$',
-        auth_views.password_reset_complete,
+        auth_views.PasswordResetCompleteView.as_view(),
         name='password_reset_complete'),
     url(r'^accounts/password/reset/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',
-        auth_views.password_reset_confirm,
+        auth_views.PasswordResetConfirmView.as_view(),
         name='password_reset_confirm'),
     # and now add the registration urls
     url(r'^accounts/register/$',
@@ -207,19 +207,19 @@ urlpatterns += [
     url(r'^api/request-key/complete/$', never_cache(api_views.AppApiKeyRequestCompleteView.as_view()),
         name='app_api_key_request_complete'),
     url(r'^api/v2/api-auth-token/', obtain_auth_token),
-    url(r'^api/v2/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/v2/api-auth/', include(('rest_framework.urls', 'rest_framework'))),
     url(r'^api/v2/common/', include('common.api_urls')),
     url(r'^api/v2/astrobin/', include('astrobin.api2.urls')),
     url(r'^api/v2/nestedcomments/', include('nested_comments.api_urls')),
     url(r'^api/v2/platesolving/', include('astrobin_apps_platesolving.api_urls')),
     url(r'^api/v2/notifications/', include('astrobin_apps_notifications.api.urls')),
-    url(r'^api/v2/images/', include('astrobin_apps_images.api.urls', namespace="astrobin_apps_images")),
-    url(r'^api/v2/payments/', include('astrobin_apps_payments.api.urls', namespace="astrobin_apps_payments")),
-    url(r'^api/v2/iotd/', include('astrobin_apps_iotd.api.urls', namespace="astrobin_apps_iotd")),
-    url(r'^api/v2/remote-source-affiliation/', include('astrobin_apps_remote_source_affiliation.api.urls',
-                                                       namespace="astrobin_apps_remote_source_affiliation")),
-    url(r'^api/v2/groups/', include('astrobin_apps_groups.api.urls', namespace="astrobin_apps_groups")),
-    url(r'^api/v2/users/', include('astrobin_apps_users.api.urls', namespace="astrobin_apps_users")),
+    url(r'^api/v2/images/', include(('astrobin_apps_images.api.urls', 'astrobin_apps_images'))),
+    url(r'^api/v2/payments/', include(('astrobin_apps_payments.api.urls', 'astrobin_apps_payments'))),
+    url(r'^api/v2/iotd/', include(('astrobin_apps_iotd.api.urls', 'astrobin_apps_iotd'))),
+    url(r'^api/v2/remote-source-affiliation/', include(
+        ('astrobin_apps_remote_source_affiliation.api.urls', 'astrobin_apps_remote_source_affiliation'))),
+    url(r'^api/v2/groups/', include(('astrobin_apps_groups.api.urls', 'astrobin_apps_groups'))),
+    url(r'^api/v2/users/', include(('astrobin_apps_users.api.urls', 'astrobin_apps_users'))),
     url(r'^api/v2/equipment/', include('astrobin_apps_equipment.api.urls', namespace="astrobin_apps_equipment")),
 
     ###########################################################################

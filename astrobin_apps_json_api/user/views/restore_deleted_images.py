@@ -17,4 +17,4 @@ class RestoreDeletedImages(JsonRequestResponseMixin, LoginRequiredMixin, View):
         images.undelete()
 
         messages.success(request, _("%(number)s image(s) restored." % {"number": len(pks)}))
-        return self.render_json_response({u"status": u"OK"})
+        return self.render_json_response({"status": "OK"})

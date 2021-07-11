@@ -7,6 +7,7 @@ class ThumbnailGroup(models.Model):
     image = models.ForeignKey(
         Image,
         related_name='thumbnails',
+        on_delete=models.CASCADE
     )
 
     revision = models.CharField(
@@ -94,7 +95,7 @@ class ThumbnailGroup(models.Model):
             self.instagram_story,
         ]
 
-    def __unicode__(self):
+    def __str__(self):
         return "Thumbnails for image %s" % self.image.title
 
     class Meta:

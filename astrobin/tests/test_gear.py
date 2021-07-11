@@ -1,6 +1,6 @@
 # Django
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase
 
 # AstroBin
@@ -33,33 +33,30 @@ class GearTest(TestCase):
         g, created = Gear.objects.get_or_create(
             make = "Test make",
             name = "Test name")
-        self.assertEqual(g.__unicode__(), "Test make Test name")
+        self.assertEqual(str(g), "Test make Test name")
         g.delete()
 
         g, created = Gear.objects.get_or_create(
             make = "Test",
             name = "Test name")
-        self.assertEqual(g.__unicode__(), "Test name")
+        self.assertEqual(str(g), "Test name")
         g.delete()
 
         g, created = Gear.objects.get_or_create(
             make = "",
             name = "Test name")
-        self.assertEqual(g.__unicode__(), "Test name")
-        g.delete()
+        self.assertEqual(str(g), "Test name")
 
     def test_attributes(self):
         g, created = Gear.objects.get_or_create(
             name = "Test name")
         self.assertEqual(g.attributes(), [])
-        g.delete()
 
     def test_slug(self):
         g, created = Gear.objects.get_or_create(
             make = "Test make",
             name = "Test name")
         self.assertEqual(g.slug(), "test-make-test-name")
-        g.delete()
 
     def test_get_absolute_url(self):
          g, created = Gear.objects.get_or_create(make = "Test make", name = "Test name")
@@ -100,7 +97,3 @@ class GearTest(TestCase):
 
         dsa = DeepSky_Acquisition.objects.get(pk = dsa.pk)
         self.assertEqual(dsa.filter, g1)
-
-        g1.delete()
-        i.delete()
-        u.delete()

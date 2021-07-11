@@ -2,9 +2,9 @@
 import re
 
 import simplejson as json
-from beautifulsoupselect import BeautifulSoupSelect as BSS
+from bs4 import BeautifulSoup as BS
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase
 from pybb.models import Forum, Topic
 
@@ -43,8 +43,8 @@ class GroupsTest(TestCase):
 
     def test_misc_ui_elements(self):
         response = self.client.get(reverse('group_list'))
-        bss = BSS(response.content)
-        self.assertEqual(len(bss('.explore-menu-groups')), 1)
+        bs = BS(response.content, 'lxml')
+        self.assertEqual(len(bs.select('.explore-menu-groups')), 1)
 
     def test_group_list_view(self):
         response = self.client.get(reverse('group_list'))
@@ -98,7 +98,8 @@ class GroupsTest(TestCase):
         self.group.members.add(self.user1)
         response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk}))
         self.assertEqual(response.status_code, 200)
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "gallery"), response.content))
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "gallery"), response.content.decode(
+            'utf-8')))
 
         # Test that WIP images are not rendered here
         image.is_wip = True

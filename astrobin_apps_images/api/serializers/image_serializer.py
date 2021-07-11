@@ -2,9 +2,10 @@ from rest_framework import serializers
 
 from astrobin.models import Image, UserProfile
 from astrobin_apps_images.api.fields import KeyValueTagsSerializerField
+from common.mixins import RequestUserRestSerializerMixin
 
 
-class ImageSerializer(serializers.ModelSerializer):
+class ImageSerializer(RequestUserRestSerializerMixin, serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
     hash = serializers.PrimaryKeyRelatedField(read_only=True)
     w = serializers.IntegerField()

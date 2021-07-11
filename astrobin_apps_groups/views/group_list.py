@@ -23,7 +23,7 @@ class GroupListView(ListView):
         except KeyError:
             pass
 
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             context['private_groups'] = \
                 self.get_queryset() \
                     .filter(public=False) \

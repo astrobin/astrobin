@@ -12,7 +12,7 @@ class SolutionService:
     def get_or_create_advanced_settings(target):
         # type: (Union[Image, ImageRevision]) -> (PlateSolvingAdvancedSettings, bool)
 
-        if target._meta.model_name == u'image':
+        if target._meta.model_name == 'image':
             images = Image.objects_including_wip.filter(user=target.user).order_by('-pk')  # type: QuerySet[Image]
             for image in images:
                 if image.solution and image.solution.advanced_settings:

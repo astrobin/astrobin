@@ -5,7 +5,7 @@ from astrobin_apps_remote_source_affiliation.api.views.remote_source_affiliate_v
     RemoteSourceAffiliateViewSet
 
 router = routers.DefaultRouter()
-router.register(r'remote-source-affiliate', RemoteSourceAffiliateViewSet, base_name='remote-source-affiliate')
+router.register(r'remote-source-affiliate', RemoteSourceAffiliateViewSet, basename='remote-source-affiliate')
 
 urlpatterns = [
     url('', include(router.urls)),

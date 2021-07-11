@@ -1,11 +1,13 @@
 import datetime
 
+import bleach
 from django import template
+from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.template import Library, Node
-from django.template.defaultfilters import stringfilter, urlencode
-from django.utils.encoding import force_unicode
-from django.utils.functional import allow_lazy
+from django.template.defaultfilters import urlencode
+from django.utils.encoding import force_text
+from django.utils.functional import keep_lazy
 from django.utils.safestring import mark_safe
 
 from common.services import AppRedirectionService, DateTimeService
@@ -40,10 +42,10 @@ def query_string(parser, token):
     try:
         tag_name, add_string, remove_string = token.split_contents()
     except ValueError:
-        raise template.TemplateSyntaxError, "%r tag requires two arguments" % token.contents.split()[0]
+        raise template.TemplateSyntaxError("%r tag requires two arguments" % token.contents.split()[0])
     if not (add_string[0] == add_string[-1] and add_string[0] in ('"', "'")) or not (
             remove_string[0] == remove_string[-1] and remove_string[0] in ('"', "'")):
-        raise template.TemplateSyntaxError, "%r tag's argument should be in quotes" % tag_name
+        raise template.TemplateSyntaxError("%r tag's argument should be in quotes" % tag_name)
 
     add = string_to_dict(add_string[1:-1])
     remove = string_to_list(remove_string[1:-1])
@@ -79,7 +81,7 @@ def get_query_string(p_list, p_dict, new_params, remove, context):
     """
     for r in remove:
         p_list = [[x[0], x[1]] for x in p_list if not x[0].startswith(r)]
-    for k, v in new_params.items():
+    for k, v in list(new_params.items()):
         if k in p_dict and v is None:
             p_list = [[x[0], x[1]] for x in p_list if not x[0] == k]
         elif k in p_dict and v is not None:
@@ -94,7 +96,7 @@ def get_query_string(p_list, p_dict, new_params, remove, context):
         if len(p_list[i][1]) == 1:
             p_list[i][1] = p_list[i][1][0]
         else:
-            p_list[i][1] = mark_safe('&amp;'.join([u'%s=%s' % (p_list[i][0], k) for k in p_list[i][1]]))
+            p_list[i][1] = mark_safe('&amp;'.join(['%s=%s' % (p_list[i][0], k) for k in p_list[i][1]]))
             p_list[i][0] = ''
 
         protected_keys = ['q', 'subject', 'telescope', 'camera']
@@ -105,7 +107,7 @@ def get_query_string(p_list, p_dict, new_params, remove, context):
             except:
                 pass
 
-    return mark_safe('?' + '&amp;'.join([k[1] if k[0] == '' else u'%s=%s' % (k[0], urlencode(k[1])) for k in p_list if
+    return mark_safe('?' + '&amp;'.join([k[1] if k[0] == '' else '%s=%s' % (k[0], urlencode(k[1])) for k in p_list if
                                          k[1] is not None and k[1] != 'None']).replace(' ', '%20'))
 
 
@@ -145,35 +147,31 @@ def string_to_list(string):
     return args
 
 
-def truncate_chars(s, num):
-    s = force_unicode(s)
-    length = int(num)
-    if len(s) > length:
-        length = length - 3
-        s = s[:length].strip()
-        s += '...'
-    return s
 
 
-truncate_chars = allow_lazy(truncate_chars, unicode)
 
-
-@register.filter
+@register.filter(is_safe=True)
 def truncatechars(value, arg):
     """
     Truncates a string after a certain number of characters, but respects word boundaries.
 
     Argument: Number of characters to truncate after.
     """
+
+    def do_truncatechars(s, num):
+        s = force_text(s)
+        length = int(num)
+        if len(s) > length:
+            length = length - 3
+            s = s[:length].strip()
+            s += '...'
+        return s
+
     try:
         length = int(arg)
     except ValueError:  # If the argument is not a valid integer.
         return value  # Fail silently.
-    return truncate_chars(value, length)
-
-
-truncatechars.is_safe = True
-truncatechars = stringfilter(truncatechars)
+    return do_truncatechars(value, length)
 
 
 @register.filter(name='get_class')
@@ -235,3 +233,13 @@ def is_future(dt):
 @register.simple_tag
 def timestamp(dt):
     return mark_safe('<abbr class="timestamp" data-epoch="%s">...</abbr>' % DateTimeService.epoch(dt))
+
+
+@register.filter
+def strip_html(value):
+    if isinstance(value, str):
+        value = bleach.clean(
+            value, tags=settings.SANITIZER_ALLOWED_TAGS,
+            attributes=settings.SANITIZER_ALLOWED_ATTRIBUTES,
+            styles=[], strip=True)
+    return value

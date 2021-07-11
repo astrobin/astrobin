@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -50,7 +50,7 @@ class EquipmentBrandListing(SafeDeleteModel):
         blank=True,
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s by %s" % (self.brand, self.retailer)
 
     class Meta:

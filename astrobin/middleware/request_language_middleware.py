@@ -1,17 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals
-
 import django
 from django.utils import translation
 from pybb.compat import is_authenticated
 
-if django.VERSION < (1, 10):  # pragma: no cover
-    MiddlewareParentClass = object
-else:  # pragma: no cover
-    from django.utils.deprecation import MiddlewareMixin
-
-    MiddlewareParentClass = MiddlewareMixin
+from astrobin.middleware.mixins import MiddlewareParentClass
 
 
 class RequestLanguageMiddleware(MiddlewareParentClass):

@@ -54,7 +54,7 @@ def tojdn(year, month, day):
 def fromjdn(thejdn):
     """Returns a date corresponding to the given Julian day number."""
     if not isinstance(thejdn, int):
-        raise TypeError, "%s is not an integer." % str(thejdn)
+        raise TypeError("%s is not an integer." % str(thejdn))
 
     a = thejdn + 32044
     b = (4*a + 3)//146097

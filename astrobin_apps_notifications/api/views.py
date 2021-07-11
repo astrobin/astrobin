@@ -8,7 +8,7 @@ from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from notification.models import NoticeSetting, NoticeType, NOTICE_MEDIA
 from persistent_messages.models import Message
 from rest_framework import viewsets, permissions
-from rest_framework.decorators import list_route
+from rest_framework.decorators import action
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 
@@ -35,11 +35,11 @@ class NotificationViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Message.objects.filter(user=self.request.user).order_by('-created')
 
-    @list_route(methods=['get'])
+    @action(detail=False, methods=['get'])
     def get_unread_count(self, request):
         return Response(status=200, data=self.get_queryset().filter(read=False).count())
 
-    @list_route(methods=['post'])
+    @action(detail=False, methods=['post'])
     def mark_all_as_read(self, request):
         self.get_queryset().filter(read=False).update(read=True, modified=timezone.now())
         return Response(status=200)

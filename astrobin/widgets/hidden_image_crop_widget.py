@@ -50,7 +50,7 @@ if settings.AWS_S3_ENABLED:
     image_cropping.widgets.get_attrs = _s3_get_attrs
 
 
-class EasyThumbnailsBackend(EasyThumbnailsBackend):
+class CustomEasyThumbnailsBackend(EasyThumbnailsBackend):
     def get_thumbnail_url(self, path, thumbnail_options):
         try:
             target = Image.all_objects.get(image_file=path)
@@ -60,11 +60,11 @@ class EasyThumbnailsBackend(EasyThumbnailsBackend):
             except ImageRevision.DoesNotExist:
                 return None
 
-        thumb = get_thumbnailer(target.image_file.file, path)
+        thumbnailer = get_thumbnailer(target.image_file.file, str(path))
 
-        return thumb.get_thumbnail(settings.THUMBNAIL_ALIASES['']['regular']).url
+        return thumbnailer.get_thumbnail(settings.THUMBNAIL_ALIASES['']['regular']).url
 
 
 class HiddenImageCropWidget(BaseHiddenImageCropWidget):
-    def render(self, name, value, attrs=None):
-        return super(BaseHiddenImageCropWidget, self).render(name, value, attrs)
+    def render(self, name, value, attrs=None, renderer=None):
+        return super(BaseHiddenImageCropWidget, self).render(name, value, attrs, renderer)

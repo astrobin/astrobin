@@ -4,7 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 
-from models import ToggleProperty
+from .models import ToggleProperty
 
 try:
     from django.utils import simplejson

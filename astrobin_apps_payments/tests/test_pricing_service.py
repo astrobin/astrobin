@@ -43,17 +43,17 @@ class PricingServiceTest(TestCase):
         )
 
     def test_chf(self):
-        self.assertEquals(20, PricingService.get_price('lite', 'CHF'))
-        self.assertEquals(40, PricingService.get_price('premium', 'CHF'))
-        self.assertEquals(60, PricingService.get_price('ultimate', 'CHF'))
+        self.assertEqual(20, PricingService.get_price('lite', 'CHF'))
+        self.assertEqual(40, PricingService.get_price('premium', 'CHF'))
+        self.assertEqual(60, PricingService.get_price('ultimate', 'CHF'))
 
 
     def test_usd(self):
-        self.assertEquals(22.0, PricingService.get_price('lite', 'USD'))
-        self.assertEquals(44.0, PricingService.get_price('premium', 'USD'))
-        self.assertEquals(66.0, PricingService.get_price('ultimate', 'USD'))
+        self.assertEqual(22.0, PricingService.get_price('lite', 'USD'))
+        self.assertEqual(44.0, PricingService.get_price('premium', 'USD'))
+        self.assertEqual(66.0, PricingService.get_price('ultimate', 'USD'))
 
     def test_eur_with_50c_rounding_up(self):
-        self.assertEquals(22.5, PricingService.get_price('lite', 'EUR'))
-        self.assertEquals(44.5, PricingService.get_price('premium', 'EUR'))
-        self.assertEquals(66.5, PricingService.get_price('ultimate', 'EUR'))
+        self.assertEqual(22.5, PricingService.get_price('lite', 'EUR'))
+        self.assertEqual(44.5, PricingService.get_price('premium', 'EUR'))
+        self.assertEqual(66.5, PricingService.get_price('ultimate', 'EUR'))

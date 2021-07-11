@@ -33,4 +33,4 @@ class TagTests(TestCase):
         image.save()
         result = astrobin_image(context, image, "regular")
 
-        self.assertEquals("/%s/" % image.hash, result["url"])
+        self.assertEqual("/%s/" % image.hash, result["url"])

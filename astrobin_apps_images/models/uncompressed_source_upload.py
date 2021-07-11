@@ -10,7 +10,9 @@ from common.validators import FileValidator
 class UncompressedSourceUpload(models.Model):
     image = models.ForeignKey(
         Image,
-        related_name="uncompressed_source_upload")
+        related_name="uncompressed_source_upload",
+        on_delete=models.CASCADE
+    )
 
     uncompressed_source_file = models.FileField(
         upload_to=uncompressed_source_upload_path,
@@ -63,8 +65,8 @@ class UncompressedSourceUpload(models.Model):
         editable=False,
     )
 
-    def __unicode__(self):
-        return u"UncompressedSourceUpload for image %s: %s" % (self.image.pk, self.uncompressed_source_file)
+    def __str__(self):
+        return "UncompressedSourceUpload for image %s: %s" % (self.image.pk, self.uncompressed_source_file)
 
     class Meta:
         app_label = "astrobin_apps_images"

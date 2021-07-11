@@ -366,11 +366,11 @@ class ImageResource(ModelResource):
 
     def dehydrate_imaging_telescopes(self, bundle):
         telescopes = bundle.obj.imaging_telescopes.all()
-        return [unicode(x) for x in telescopes]
+        return [str(x) for x in telescopes]
 
     def dehydrate_imaging_cameras(self, bundle):
         cameras = bundle.obj.imaging_cameras.all()
-        return [unicode(x) for x in cameras]
+        return [str(x) for x in cameras]
 
     def dehydrate_license(self, bundle):
         return License.to_deprecated_integer(bundle.obj.license)
@@ -554,6 +554,7 @@ class UserProfileResource(ModelResource):
     username = fields.CharField("user__username")
     last_login = fields.DateTimeField("user__last_login", null=True)
     date_joined = fields.DateTimeField("user__date_joined")
+    timezone = fields.CharField()
 
     image_count = fields.IntegerField()
     received_likes_count = fields.IntegerField()
@@ -600,7 +601,6 @@ class UserProfileResource(ModelResource):
             'recovered_images_notice_sent',
             'referral_code',
             'resource_uri',
-            'timezone',
             'total_notifications_count',
             'unread_notifications_count',
             'updated',
@@ -608,6 +608,11 @@ class UserProfileResource(ModelResource):
             'website',
         ]
         ordering = ['-date_joined']
+
+    def dehydrate_timezone(self, bundle):
+        # Hardcode to GMT for compatibility reasons.
+        # See https://github.com/astrobin/astrobin/pull/2429
+        return 'Etc/GMT'
 
     def dehydrate_image_count(self, bundle):
         return Image.objects.filter(user=bundle.obj.user, corrupted=False, is_wip=False).count()

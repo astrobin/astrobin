@@ -1,7 +1,7 @@
 import logging
 import random
 import string
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from django.conf import settings
 
@@ -102,7 +102,7 @@ class Solver(AbstractPlateSolvingBackend):
 
         task = PlateSolvingAdvancedTask.objects.create(
             serial_number=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(32)),
-            task_params=urllib.quote('\n'.join(task_params)),
+            task_params=urllib.parse.quote('\n'.join(task_params)),
         )
 
         log.debug("PixInsight plate-solving: created task %s" % task.serial_number)

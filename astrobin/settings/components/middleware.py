@@ -1,4 +1,4 @@
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'multidb.middleware.PinningRouterMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -14,20 +14,19 @@ MIDDLEWARE_CLASSES = [
     'astrobin.middleware.RestFrameworkTokenCookieMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'maintenancemode.middleware.MaintenanceModeMiddleware',
-    'gadjo.requestprovider.middleware.RequestProvider',
 ]
 
 if not TESTING:
-    MIDDLEWARE_CLASSES += [
+    MIDDLEWARE += [
         'django.middleware.locale.LocaleMiddleware',
     ]
 
 if not DEBUG:
-    MIDDLEWARE_CLASSES += [
+    MIDDLEWARE += [
         'django.middleware.gzip.GZipMiddleware',
         'pipeline.middleware.MinifyHTMLMiddleware',
     ]
 
-MIDDLEWARE_CLASSES += [
+MIDDLEWARE += [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]

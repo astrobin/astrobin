@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
@@ -13,7 +13,7 @@ class LocationViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        if not self.request.user.is_authenticated():
+        if not self.request.user.is_authenticated:
             return Location.objects.none()
 
         if not hasattr(self.request.user, 'userprofile'):

@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
@@ -18,28 +18,28 @@ from astrobin_apps_notifications.utils import push_notification
 class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTermsOfService):
     referral_code = forms.fields.CharField(
         required=False,
-        label=_(u'Referral code (optional)'),
+        label=_('Referral code (optional)'),
     )
 
     important_communications = forms.fields.BooleanField(
         widget=forms.CheckboxInput,
         required=False,
-        label=_(u'I accept to receive rare important communications via email'),
+        label=_('I accept to receive rare important communications via email'),
         help_text=_(
-            u'This is highly recommended. These are very rare and contain information that you probably want to have.'))
+            'This is highly recommended. These are very rare and contain information that you probably want to have.'))
 
     newsletter = forms.fields.BooleanField(
         widget=forms.CheckboxInput,
         required=False,
-        label=_(u'I accept to receive occasional newsletters via email'),
+        label=_('I accept to receive occasional newsletters via email'),
         help_text=_(
-            u'Newsletters do not have a fixed schedule, but in any case they are not sent out more often than once per month.'))
+            'Newsletters do not have a fixed schedule, but in any case they are not sent out more often than once per month.'))
 
     marketing_material = forms.fields.BooleanField(
         widget=forms.CheckboxInput,
         required=False,
-        label=_(u'I accept to receive occasional marketing and commercial material via email'),
-        help_text=_(u'These emails may contain offers, commercial news, and promotions from AstroBin or its partners.'))
+        label=_('I accept to receive occasional marketing and commercial material via email'),
+        help_text=_('These emails may contain offers, commercial news, and promotions from AstroBin or its partners.'))
 
     recaptcha = ReCaptchaField(
         label=_('Are you a robot?'),
@@ -55,7 +55,7 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
         if username_value is not None and User.objects.filter(username__iexact=username_value).exists():
             self.add_error(
                 User.USERNAME_FIELD,
-                _(u'Sorry, this username already exists with a different capitalization.'))
+                _('Sorry, this username already exists with a different capitalization.'))
 
         super(AstroBinRegistrationForm, self).clean()
 
@@ -69,7 +69,7 @@ def user_created(sender, user, request, **kwargs):
     profile, created = UserProfile.objects.get_or_create(user=user)
     changed = False
 
-    if 'referral_code' in form.data and form.data['referral_code'] != u'':
+    if 'referral_code' in form.data and form.data['referral_code'] != '':
         profile.referral_code = form.data['referral_code']
         changed = True
 

@@ -15,7 +15,7 @@ class Command(BaseCommand):
             'IOTD Reviewers': [['iotd_reviewers'], ['iotd_staff', 'content_moderators'], [], ['IOTD Staff']],
             'IOTD Judges': [['iotd_judges'], ['iotd_staff', 'content_moderators'], [], ['IOTD Staff']],
         }
-        agroups = AGroup.objects.filter(name__in = map_.keys())
+        agroups = AGroup.objects.filter(name__in = list(map_.keys()))
         all_members = []
 
         for agroup in agroups:

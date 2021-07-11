@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from models import ToggleProperty
+from toggleproperties.models import ToggleProperty
 
 
 class TogglePropertyTest(TestCase):

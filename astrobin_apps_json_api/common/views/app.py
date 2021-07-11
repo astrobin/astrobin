@@ -1,6 +1,8 @@
 import hashlib
+import logging
 from os.path import join
 
+import os
 from PIL import Image as PILImage
 from braces.views import JSONResponseMixin
 from django.conf import settings
@@ -13,41 +15,43 @@ from django.views.generic.base import View
 
 from astrobin import utils
 from astrobin.models import Image
-from common.utils import get_project_root
+from common.utils import get_project_root, read_in_chunks
+
+log = logging.getLogger('apps')
 
 
 @method_decorator([cache_page(3600), vary_on_headers('Cookie', 'Authorization')], name='dispatch')
 class AppConfig(JSONResponseMixin, View):
     def get(self, request, *args, **kwargs):
         return self.render_json_response({
-            u'i18nHash': self.__get_i18n_hash__(),
-            u'readOnly': self.__get_read_only_mode__(),
-            u'PREMIUM_MAX_IMAGES_FREE': settings.PREMIUM_MAX_IMAGES_FREE,
-            u'PREMIUM_MAX_IMAGES_LITE': settings.PREMIUM_MAX_IMAGES_LITE,
-            u'PREMIUM_MAX_IMAGES_FREE_2020': settings.PREMIUM_MAX_IMAGES_FREE_2020,
-            u'PREMIUM_MAX_IMAGES_LITE_2020': settings.PREMIUM_MAX_IMAGES_LITE_2020,
-            u'PREMIUM_MAX_IMAGES_PREMIUM_2020': settings.PREMIUM_MAX_IMAGES_PREMIUM_2020,
-            u'PREMIUM_MAX_IMAGE_SIZE_FREE_2020': settings.PREMIUM_MAX_IMAGE_SIZE_FREE_2020,
-            u'PREMIUM_MAX_IMAGE_SIZE_LITE_2020': settings.PREMIUM_MAX_IMAGE_SIZE_LITE_2020,
-            u'PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020': settings.PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020,
-            u'PREMIUM_MAX_REVISIONS_FREE_2020': settings.PREMIUM_MAX_REVISIONS_FREE_2020,
-            u'PREMIUM_MAX_REVISIONS_LITE_2020': settings.PREMIUM_MAX_REVISIONS_LITE_2020,
-            u'PREMIUM_MAX_REVISIONS_PREMIUM_2020': settings.PREMIUM_MAX_REVISIONS_PREMIUM_2020,
-            u'PREMIUM_PRICE_FREE_2020': settings.PREMIUM_PRICE_FREE_2020,
-            u'PREMIUM_PRICE_LITE_2020': settings.PREMIUM_PRICE_LITE_2020,
-            u'PREMIUM_PRICE_PREMIUM_2020': settings.PREMIUM_PRICE_PREMIUM_2020,
-            u'PREMIUM_PRICE_ULTIMATE_2020': settings.PREMIUM_PRICE_ULTIMATE_2020,
-            u'MAX_IMAGE_PIXELS': PILImage.MAX_IMAGE_PIXELS,
-            u'GOOGLE_ADS_ID': settings.GOOGLE_ADS_ID,
-            u'REQUEST_COUNTRY': utils.get_client_country_code(request),
-            u'IMAGE_CONTENT_TYPE_ID': ContentType.objects.get_for_model(Image).id,
-            u'THUMBNAIL_ALIASES': settings.THUMBNAIL_ALIASES[''],
-            u'IOTD_SUBMISSION_MAX_PER_DAY': settings.IOTD_SUBMISSION_MAX_PER_DAY,
-            u'IOTD_REVIEW_MAX_PER_DAY': settings.IOTD_REVIEW_MAX_PER_DAY,
-            u'IOTD_QUEUES_PAGE_SIZE': settings.IOTD_QUEUES_PAGE_SIZE,
-            u'IMAGE_UPLOAD_ENDPOINT': '/api/v2/images/image-upload/',
-            u'IMAGE_REVISION_UPLOAD_ENDPOINT': '/api/v2/images/image-revision-upload/',
-            u'DATA_UPLOAD_MAX_MEMORY_SIZE': settings.DATA_UPLOAD_MAX_MEMORY_SIZE,
+            'i18nHash': self.__get_i18n_hash__(),
+            'readOnly': self.__get_read_only_mode__(),
+            'PREMIUM_MAX_IMAGES_FREE': settings.PREMIUM_MAX_IMAGES_FREE,
+            'PREMIUM_MAX_IMAGES_LITE': settings.PREMIUM_MAX_IMAGES_LITE,
+            'PREMIUM_MAX_IMAGES_FREE_2020': settings.PREMIUM_MAX_IMAGES_FREE_2020,
+            'PREMIUM_MAX_IMAGES_LITE_2020': settings.PREMIUM_MAX_IMAGES_LITE_2020,
+            'PREMIUM_MAX_IMAGES_PREMIUM_2020': settings.PREMIUM_MAX_IMAGES_PREMIUM_2020,
+            'PREMIUM_MAX_IMAGE_SIZE_FREE_2020': settings.PREMIUM_MAX_IMAGE_SIZE_FREE_2020,
+            'PREMIUM_MAX_IMAGE_SIZE_LITE_2020': settings.PREMIUM_MAX_IMAGE_SIZE_LITE_2020,
+            'PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020': settings.PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020,
+            'PREMIUM_MAX_REVISIONS_FREE_2020': settings.PREMIUM_MAX_REVISIONS_FREE_2020,
+            'PREMIUM_MAX_REVISIONS_LITE_2020': settings.PREMIUM_MAX_REVISIONS_LITE_2020,
+            'PREMIUM_MAX_REVISIONS_PREMIUM_2020': settings.PREMIUM_MAX_REVISIONS_PREMIUM_2020,
+            'PREMIUM_PRICE_FREE_2020': settings.PREMIUM_PRICE_FREE_2020,
+            'PREMIUM_PRICE_LITE_2020': settings.PREMIUM_PRICE_LITE_2020,
+            'PREMIUM_PRICE_PREMIUM_2020': settings.PREMIUM_PRICE_PREMIUM_2020,
+            'PREMIUM_PRICE_ULTIMATE_2020': settings.PREMIUM_PRICE_ULTIMATE_2020,
+            'MAX_IMAGE_PIXELS': PILImage.MAX_IMAGE_PIXELS,
+            'GOOGLE_ADS_ID': settings.GOOGLE_ADS_ID,
+            'REQUEST_COUNTRY': utils.get_client_country_code(request),
+            'IMAGE_CONTENT_TYPE_ID': ContentType.objects.get_for_model(Image).id,
+            'THUMBNAIL_ALIASES': settings.THUMBNAIL_ALIASES[''],
+            'IOTD_SUBMISSION_MAX_PER_DAY': settings.IOTD_SUBMISSION_MAX_PER_DAY,
+            'IOTD_REVIEW_MAX_PER_DAY': settings.IOTD_REVIEW_MAX_PER_DAY,
+            'IOTD_QUEUES_PAGE_SIZE': settings.IOTD_QUEUES_PAGE_SIZE,
+            'IMAGE_UPLOAD_ENDPOINT': '/api/v2/images/image-upload/',
+            'IMAGE_REVISION_UPLOAD_ENDPOINT': '/api/v2/images/image-revision-upload/',
+            'DATA_UPLOAD_MAX_MEMORY_SIZE': settings.DATA_UPLOAD_MAX_MEMORY_SIZE,
         })
 
     def __get_i18n_hash__(self):
@@ -62,17 +66,22 @@ class AppConfig(JSONResponseMixin, View):
         for language in [x[0] for x in settings.LANGUAGES]:  # type: str
             for app in ['astrobin'] + settings.ASTROBIN_APPS:  # type: str
                 po_file = join(project_root, app, 'locale', language, 'LC_MESSAGES', 'django.po')  # type: str
+
+                if not os.path.exists(po_file):
+                    continue
+
                 language_app_md5 = hashlib.md5()
                 try:
-                    with open(po_file, "r") as f:
-                        for chunk in iter(lambda: f.read(4096), b""):
+                    with open(po_file, "rb") as f:
+                        for chunk in read_in_chunks(f, 4096):
                             language_app_md5.update(chunk)
                     hashes.append(language_app_md5.hexdigest())
-                except IOError:
+                except IOError as e:
+                    log.error('IOError while reading PO file %s: %s' % (po_file, str(e)))
                     continue
 
         total_md5 = hashlib.md5()
-        total_md5.update(str(hashes))
+        total_md5.update(str(hashes).encode('utf-8'))
         digest = total_md5.hexdigest()
 
         cache.set(cache_key, digest, 3600)

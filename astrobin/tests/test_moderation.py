@@ -2,7 +2,7 @@ import datetime
 import time
 
 from django.contrib.auth.models import Group, User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase
 from mock import patch
 
@@ -19,13 +19,6 @@ class ModerationTest(TestCase):
         self.image_moderators = Group.objects.create(name='image_moderators')
 
         self.moderator.groups.add(self.content_moderators, self.image_moderators)
-
-    def tearDown(self):
-        self.content_moderators.delete()
-        self.image_moderators.delete()
-        self.user.delete()
-        self.moderator.delete()
-        self.superuser.delete()
 
     def _do_upload(self, filename, wip=False):
         data = {'image_file': open(filename, 'rb')}
@@ -100,13 +93,10 @@ class ModerationTest(TestCase):
         image = Image.objects_including_wip.get(pk=image.pk)
         self.assertEqual(image.moderator_decision, 2)
 
-        image.delete()
-
-
     def test_spam_user_gallery(self):
         self.client.login(username='user', password='password')
         response = self.client.get(reverse('user_page', args=('user',)))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
@@ -115,19 +105,19 @@ class ModerationTest(TestCase):
 
         # Same user gets 404
         response = self.client.get(reverse('user_page', args=('user',)))
-        self.assertEquals(response.status_code, 404)
+        self.assertEqual(response.status_code, 404)
 
         # Anon gets 404
         self.client.logout()
         response = self.client.get(reverse('user_page', args=('user',)))
-        self.assertEquals(response.status_code, 404)
+        self.assertEqual(response.status_code, 404)
 
         # Moderator gets 200
         self.client.login(username='moderator', password='password')
         response = self.client.get(reverse('user_page', args=('user',)))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
         # Superuser gets 200
         self.client.login(username='superuser', password='password')
         response = self.client.get(reverse('user_page', args=('user',)))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)

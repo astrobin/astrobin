@@ -13,7 +13,7 @@ class ThumbnailNotReadyException(Exception):
 
 
 def get_from_storage(target, alias):
-    if target._meta.model_name == u'imagerevision':
+    if target._meta.model_name == 'imagerevision':
         url = target.thumbnail(alias, sync=True)
     else:
         url = target.thumbnail(alias, '0', sync=True)

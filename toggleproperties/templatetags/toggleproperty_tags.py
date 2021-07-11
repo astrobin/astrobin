@@ -9,7 +9,7 @@ register = template.Library()
 
 @register.simple_tag
 def is_toggled(property_type, target, user):
-    if not user or not user.is_authenticated():
+    if not user or not user.is_authenticated:
         return False
     return ToggleProperty.objects.toggleproperties_for_object(property_type, target, user).count() > 0
 
@@ -24,7 +24,7 @@ def add_remove_toggleproperty(context, property_type, target, user, can_add=True
     toggle_property = None
     content_type = ContentType.objects.get_for_model(target)
 
-    if user and user.is_authenticated():
+    if user and user.is_authenticated:
         toggle_property = ToggleProperty.objects.toggleproperties_for_object(property_type, target, user=user)
         if toggle_property.exists():
             toggle_property = toggle_property[0]

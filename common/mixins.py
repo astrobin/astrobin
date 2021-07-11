@@ -26,3 +26,15 @@ class AjaxableResponseMixin(object):
             return self.render_to_json_response(data)
         else:
             return super(AjaxableResponseMixin, self).form_valid(form)
+
+
+class RequestUserRestSerializerMixin(object):
+    def create(self, validated_data):
+        """Override ``create`` to provide a user via request.user by default.
+
+        This is required since the read_only ``user`` field is not included by
+        default anymore since https://github.com/encode/django-rest-framework/pull/5886.
+        """
+        if 'user' not in validated_data:
+            validated_data['user'] = self.context['request'].user
+        return super(RequestUserRestSerializerMixin, self).create(validated_data)

@@ -3,7 +3,7 @@ from datetime import date, timedelta, datetime
 
 from django.conf import settings
 from django.contrib.auth.models import Group
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase, override_settings
 from django.utils import timezone, formats
 from django_bouncy.models import Bounce
@@ -30,10 +30,6 @@ class UserTest(TestCase):
             username="user_2", email="user_2@example.com",
             password="password")
 
-    def tearDown(self):
-        self.user.delete()
-        self.user_2.delete()
-
     def _get_last_image(self):
         return Image.objects_including_wip.all().order_by('-id')[0]
 
@@ -57,14 +53,14 @@ class UserTest(TestCase):
     def _get_last_image_revision(self):
         return ImageRevision.objects.all().order_by('-id')[0]
 
-    def _do_upload_revision(self, image, filename, description=None):
+    def _do_upload_revision(self, image, filename, description=''):
         self.client.post(
             reverse('image_revision_upload_process'),
             {
                 'image_id': image.get_id(),
                 'image_file': open(filename, 'rb'),
                 'description': description,
-                'mark_as_final': u'on'
+                'mark_as_final': 'on'
             },
             follow=True)
 
@@ -74,60 +70,60 @@ class UserTest(TestCase):
 
     def test_user_page_view_anon_cannot_access_trash(self):
         response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
-        self.assertEquals(response.status_code, 403)
+        self.assertEqual(response.status_code, 403)
 
     def test_user_page_view_cannot_access_another_users_trash(self):
         Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
         self.client.login(username="user", password="password")
         response = self.client.get(reverse('user_page', args=('user_2',)) + '?trash')
-        self.assertEquals(response.status_code, 403)
+        self.assertEqual(response.status_code, 403)
 
     def test_user_page_view_free_cannot_access_trash(self):
         self.client.login(username="user", password="password")
         response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
-        self.assertEquals(response.status_code, 403)
+        self.assertEqual(response.status_code, 403)
 
     def test_user_page_view_lite_cannot_access_trash(self):
         Generators.premium_subscription(self.user, "AstroBin Lite")
         self.client.login(username="user", password="password")
         response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
-        self.assertEquals(response.status_code, 403)
+        self.assertEqual(response.status_code, 403)
 
     def test_user_page_view_lite_autorenew_cannot_access_trash(self):
         Generators.premium_subscription(self.user, "AstroBin Lite (autorenew)")
         self.client.login(username="user", password="password")
         response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
-        self.assertEquals(response.status_code, 403)
+        self.assertEqual(response.status_code, 403)
 
     def test_user_page_view_lite_2020_cannot_access_trash(self):
         Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
         self.client.login(username="user", password="password")
         response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
-        self.assertEquals(response.status_code, 403)
+        self.assertEqual(response.status_code, 403)
 
     def test_user_page_view_premium_cannot_access_trash(self):
         Generators.premium_subscription(self.user, "AstroBin Premium")
         self.client.login(username="user", password="password")
         response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
-        self.assertEquals(response.status_code, 403)
+        self.assertEqual(response.status_code, 403)
 
     def test_user_page_view_premium_autorenew_cannot_access_trash(self):
         Generators.premium_subscription(self.user, "AstroBin Premium (autorenew)")
         self.client.login(username="user", password="password")
         response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
-        self.assertEquals(response.status_code, 403)
+        self.assertEqual(response.status_code, 403)
 
     def test_user_page_view_premium_2020_cannot_access_trash(self):
         Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
         self.client.login(username="user", password="password")
         response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
-        self.assertEquals(response.status_code, 403)
+        self.assertEqual(response.status_code, 403)
 
     def test_user_page_view_ultimate_2020_can_access_trash(self):
         Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
         self.client.login(username="user", password="password")
         response = self.client.get(reverse('user_page', args=('user',)) + '?trash')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_user_page_view(self):
         now = datetime.now()
@@ -137,15 +133,15 @@ class UserTest(TestCase):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST BASIC IMAGE")
         response = self.client.get(reverse('user_page', args=('user',)))
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image.title in response.content, True)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, image.title)
         image.delete()
 
         # Test staging when anonymous
         self.client.logout()
         response = self.client.get(
             reverse('user_page', args=('user',)) + '?staging')
-        self.assertEquals(response.status_code, 403)
+        self.assertEqual(response.status_code, 403)
         self.client.login(username="user", password="password")
 
         # Test staging images
@@ -153,12 +149,12 @@ class UserTest(TestCase):
         response = self.client.get(
             reverse('user_page', args=('user',)) + '?staging')
 
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image.title in response.content, True)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, image.title)
 
         response = self.client.get(reverse('user_page', args=('user',)))
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image.title in response.content, True)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, image.title)
 
         image.delete()
 
@@ -172,9 +168,9 @@ class UserTest(TestCase):
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=uploaded")
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(
-            response.content.find("IMAGE2") < response.content.find("IMAGE1"), True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(
+            response.content.decode('utf-8').find("IMAGE2") < response.content.decode('utf-8').find("IMAGE1"))
 
         image1.delete()
         image2.delete()
@@ -187,8 +183,9 @@ class UserTest(TestCase):
             image=image2, date=today + timedelta(days=1))
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=acquired")
-        self.assertEquals(response.status_code, 200)
-        self.assertTrue(response.content.find("IMAGE2") < response.content.find("IMAGE1"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(
+            response.content.decode('utf-8').find("IMAGE2") < response.content.decode('utf-8').find("IMAGE1"))
         self.assertNotContains(response, "Images without an acquisition date are not shown")
 
         image3 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE3")
@@ -225,67 +222,67 @@ class UserTest(TestCase):
         image6.save(keep_deleted=True)
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?sub=subject")
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image1.title in response.content, True)
-        self.assertEquals(image2.title in response.content, False)
-        self.assertEquals(image3.title in response.content, False)
-        self.assertEquals(image4.title in response.content, False)
-        self.assertEquals(image5.title in response.content, False)
-        self.assertEquals(image6.title in response.content, False)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
+        self.assertNotContains(response, image4.title)
+        self.assertNotContains(response, image5.title)
+        self.assertNotContains(response, image6.title)
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?sub=subject&active=DEEP")
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image1.title in response.content, True)
-        self.assertEquals(image2.title in response.content, False)
-        self.assertEquals(image3.title in response.content, False)
-        self.assertEquals(image4.title in response.content, False)
-        self.assertEquals(image5.title in response.content, False)
-        self.assertEquals(image6.title in response.content, False)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
+        self.assertNotContains(response, image4.title)
+        self.assertNotContains(response, image5.title)
+        self.assertNotContains(response, image6.title)
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?sub=subject&active=SOLAR")
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image1.title in response.content, False)
-        self.assertEquals(image2.title in response.content, True)
-        self.assertEquals(image3.title in response.content, False)
-        self.assertEquals(image4.title in response.content, False)
-        self.assertEquals(image5.title in response.content, False)
-        self.assertEquals(image6.title in response.content, False)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, image1.title)
+        self.assertContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
+        self.assertNotContains(response, image4.title)
+        self.assertNotContains(response, image5.title)
+        self.assertNotContains(response, image6.title)
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?sub=subject&active=WIDE")
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image1.title in response.content, False)
-        self.assertEquals(image2.title in response.content, False)
-        self.assertEquals(image3.title in response.content, True)
-        self.assertEquals(image4.title in response.content, False)
-        self.assertEquals(image5.title in response.content, False)
-        self.assertEquals(image6.title in response.content, False)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertContains(response, image3.title)
+        self.assertNotContains(response, image4.title)
+        self.assertNotContains(response, image5.title)
+        self.assertNotContains(response, image6.title)
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?sub=subject&active=TRAILS")
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image1.title in response.content, False)
-        self.assertEquals(image2.title in response.content, False)
-        self.assertEquals(image3.title in response.content, False)
-        self.assertEquals(image4.title in response.content, True)
-        self.assertEquals(image5.title in response.content, False)
-        self.assertEquals(image6.title in response.content, False)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
+        self.assertContains(response, image4.title)
+        self.assertNotContains(response, image5.title)
+        self.assertNotContains(response, image6.title)
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?sub=subject&active=GEAR")
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image1.title in response.content, False)
-        self.assertEquals(image2.title in response.content, False)
-        self.assertEquals(image3.title in response.content, False)
-        self.assertEquals(image4.title in response.content, False)
-        self.assertEquals(image5.title in response.content, True)
-        self.assertEquals(image6.title in response.content, False)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
+        self.assertNotContains(response, image4.title)
+        self.assertContains(response, image5.title)
+        self.assertNotContains(response, image6.title)
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?sub=subject&active=OTHER")
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image1.title in response.content, False)
-        self.assertEquals(image2.title in response.content, False)
-        self.assertEquals(image3.title in response.content, False)
-        self.assertEquals(image4.title in response.content, False)
-        self.assertEquals(image5.title in response.content, False)
-        self.assertEquals(image6.title in response.content, True)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
+        self.assertNotContains(response, image4.title)
+        self.assertNotContains(response, image5.title)
+        self.assertContains(response, image6.title)
 
         image1.delete()
         image2.delete()
@@ -307,31 +304,31 @@ class UserTest(TestCase):
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=year")
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image1.title in response.content, True)
-        self.assertEquals(image2.title in response.content, False)
-        self.assertEquals(image3.title in response.content, False)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=year&active=%d" % today.year)
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image1.title in response.content, True)
-        self.assertEquals(image2.title in response.content, False)
-        self.assertEquals(image3.title in response.content, False)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=year&active=%d" % (today.year - 1))
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image1.title in response.content, False)
-        self.assertEquals(image2.title in response.content, True)
-        self.assertEquals(image3.title in response.content, False)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, image1.title)
+        self.assertContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=year&active=0")
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image1.title in response.content, False)
-        self.assertEquals(image2.title in response.content, False)
-        self.assertEquals(image3.title in response.content, True)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertContains(response, image3.title)
 
         acquisition1.delete()
         acquisition2.delete()
@@ -359,35 +356,35 @@ class UserTest(TestCase):
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=gear&active=%d" % telescope1.pk)
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image1.title in response.content, True)
-        self.assertEquals(image2.title in response.content, False)
-        self.assertEquals(image3.title in response.content, False)
-        self.assertEquals(image4.title in response.content, False)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
+        self.assertNotContains(response, image4.title)
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=gear&active=%d" % telescope2.pk)
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image1.title in response.content, False)
-        self.assertEquals(image2.title in response.content, True)
-        self.assertEquals(image3.title in response.content, False)
-        self.assertEquals(image4.title in response.content, False)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, image1.title)
+        self.assertContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
+        self.assertNotContains(response, image4.title)
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=gear&active=0")
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image1.title in response.content, False)
-        self.assertEquals(image2.title in response.content, False)
-        self.assertEquals(image3.title in response.content, True)
-        self.assertEquals(image4.title in response.content, False)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertContains(response, image3.title)
+        self.assertNotContains(response, image4.title)
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=gear&active=-1")
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image1.title in response.content, False)
-        self.assertEquals(image2.title in response.content, False)
-        self.assertEquals(image3.title in response.content, False)
-        self.assertEquals(image4.title in response.content, True)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, image1.title)
+        self.assertNotContains(response, image2.title)
+        self.assertNotContains(response, image3.title)
+        self.assertContains(response, image4.title)
 
         telescope1.delete()
         telescope2.delete()
@@ -402,35 +399,32 @@ class UserTest(TestCase):
         image.save(keep_deleted=True)
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=nodata")
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image.title in response.content, True)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, image.title)
 
         image.subject_type = SubjectType.SOLAR_SYSTEM
         image.solar_system_main_subject = None
         image.save(keep_deleted=True)
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=nodata")
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image.title in response.content, True)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, image.title)
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=nodata&active=GEAR")
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image.title in response.content, True)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, image.title)
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=nodata&active=ACQ")
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image.title in response.content, True)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, image.title)
 
         # Users with at least one spam image should be 404
         image.moderator_decision = 2
         image.save(keep_deleted=True)
         response = self.client.get(reverse('user_page', args=('user',)))
-        self.assertEquals(response.status_code, 404)
-
-        image.delete()
-        self.client.logout()
+        self.assertEqual(response.status_code, 404)
 
     def test_user_page_view_wip_image_not_visible_by_others(self):
         self.client.login(username="user", password="password")
@@ -439,8 +433,8 @@ class UserTest(TestCase):
         self.client.logout()
 
         response = self.client.get(reverse('user_page', args=('user',)))
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(image.title in response.content, False)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, image.title)
 
     @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_user_profile_exclude_from_competitions(self):
@@ -609,7 +603,7 @@ class UserTest(TestCase):
         self.user.save()
 
         profile = UserProfile.objects.get(user=self.user)
-        self.assertNotEquals(updated, profile.updated)
+        self.assertNotEqual(updated, profile.updated)
 
     def test_profile_updated_when_image_saved(self):
         updated = self.user.userprofile.updated
@@ -618,17 +612,14 @@ class UserTest(TestCase):
         image = self._do_upload('astrobin/fixtures/test.jpg', "TEST IMAGE")
 
         profile = UserProfile.objects.get(user=self.user)
-        self.assertNotEquals(updated, profile.updated)
+        self.assertNotEqual(updated, profile.updated)
 
         updated = self.user.userprofile.updated
         image.title = "TEST IMAGE UPDATED"
         image.save(keep_deleted=True)
 
         profile = UserProfile.objects.get(user=self.user)
-        self.assertNotEquals(updated, profile.updated)
-
-        image.delete()
-        self.client.logout()
+        self.assertNotEqual(updated, profile.updated)
 
     def test_profile_softdelete(self):
         user = User.objects.create_user(
@@ -664,8 +655,6 @@ class UserTest(TestCase):
         response = self.client.get(reverse('index'))
         self.assertContains(response, "Change your e-mail")
 
-        bounce.delete()
-
     def test_corrupted_image_not_shown_to_anon(self):
         self.client.login(username="user", password="password")
         image = self._do_upload('astrobin/fixtures/test.jpg', "CORRUPTED_IMAGE")
@@ -675,10 +664,8 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)))
 
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
         self.assertNotContains(response, "CORRUPTED_IMAGE")
-
-        image.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_final_image_revision_not_shown_to_anon(self):
@@ -691,11 +678,8 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)))
 
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
         self.assertNotContains(response, "CORRUPTED_IMAGE")
-
-        image.delete()
-        revision.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_image_with_ok_final_revision_shown_to_anon(self):
@@ -708,11 +692,8 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)))
 
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
-
-        image.delete()
-        revision.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_image_with_ok_non_final_revision_not_shown_to_anon(self):
@@ -730,11 +711,8 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)))
 
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
         self.assertNotContains(response, "CORRUPTED_IMAGE")
-
-        image.delete()
-        revision.delete()
 
     def test_corrupted_image_shown_to_owner(self):
         self.client.login(username="user", password="password")
@@ -744,15 +722,13 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)))
 
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?corrupted")
 
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
-
-        image.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_final_image_revision_shown_to_owner(self):
@@ -764,16 +740,13 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)))
 
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?corrupted")
 
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
-
-        image.delete()
-        revision.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_image_with_ok_final_revision_shown_to_owner(self):
@@ -785,16 +758,13 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)))
 
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?corrupted")
 
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
         self.assertNotContains(response, "CORRUPTED_IMAGE")
-
-        image.delete()
-        revision.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_corrupted_image_with_ok_non_final_revision_shown_to_owner(self):
@@ -810,16 +780,13 @@ class UserTest(TestCase):
 
         response = self.client.get(reverse('user_page', args=('user',)))
 
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
 
         response = self.client.get(reverse('user_page', args=('user',)) + "?corrupted")
 
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
         self.assertContains(response, "CORRUPTED_IMAGE")
-
-        image.delete()
-        revision.delete()
 
     @override_settings(PREMIUM_MAX_IMAGES_FREE_2020=123)
     def test_user_page_subscription_free(self):
@@ -835,9 +802,6 @@ class UserTest(TestCase):
         self.assertContains(response, "<strong data-test='subscription-type'>AstroBin Free</strong>", html=True)
         self.assertNotContains(response, "data-test=\"expiration-date\"")
         self.assertContains(response, "<strong data-test='uploads-used'>0 / 123</strong>", html=True)
-
-        self.client.logout()
-        image.delete()
 
     @override_settings(PREMIUM_MAX_IMAGES_LITE=123)
     def test_user_page_subscription_lite(self):
@@ -861,10 +825,6 @@ class UserTest(TestCase):
             html=True)
         self.assertContains(response, "<strong data-test='uploads-used'>0 / 123</strong>", html=True)
 
-        self.client.logout()
-        us.delete()
-        image.delete()
-
     @override_settings(PREMIUM_MAX_IMAGES_LITE_2020=123)
     def test_user_page_subscription_lite_2020(self):
         image = Generators.image()
@@ -887,10 +847,6 @@ class UserTest(TestCase):
             html=True)
         self.assertContains(response, "<strong data-test='images-used'>0 / 123</strong>", html=True)
 
-        self.client.logout()
-        us.delete()
-        image.delete()
-
     def test_user_page_subscription_premium(self):
         image = Generators.image()
         image.user = self.user
@@ -910,10 +866,6 @@ class UserTest(TestCase):
             "<abbr class='timestamp' data-epoch='%s000'>...</abbr>" % us.expires.strftime('%s') +
             "</strong>",
             html=True)
-
-        self.client.logout()
-        us.delete()
-        image.delete()
 
     @override_settings(PREMIUM_MAX_IMAGES_PREMIUM_2020=123)
     def test_user_page_subscription_premium_2020(self):
@@ -936,10 +888,6 @@ class UserTest(TestCase):
             "</strong>",
             html=True)
 
-        self.client.logout()
-        us.delete()
-        image.delete()
-
     def test_user_page_subscription_ultimate(self):
         image = Generators.image()
         image.user = self.user
@@ -960,17 +908,12 @@ class UserTest(TestCase):
             "</strong>",
             html=True)
 
-        self.client.logout()
-        us.delete()
-        image.delete()
-
     @override_settings(ADS_ENABLED=True)
     def test_user_preferences_allow_astronomy_ads_free(self):
         self.client.login(username='user', password='password')
         self.assertContains(
             self.client.get(reverse('profile_edit_preferences')),
             'name="allow_astronomy_ads" disabled')
-        self.client.logout()
 
     @override_settings(ADS_ENABLED=True)
     def test_user_preferences_allow_astronomy_ads_lite(self):
@@ -979,8 +922,6 @@ class UserTest(TestCase):
         self.assertNotContains(
             self.client.get(reverse('profile_edit_preferences')),
             'name="allow_astronomy_ads" disabled')
-        self.client.logout()
-        us.delete()
 
     @override_settings(ADS_ENABLED=True)
     def test_user_preferences_allow_astronomy_ads_lite_2020(self):
@@ -989,8 +930,6 @@ class UserTest(TestCase):
         self.assertContains(
             self.client.get(reverse('profile_edit_preferences')),
             'name="allow_astronomy_ads" disabled')
-        self.client.logout()
-        us.delete()
 
     @override_settings(ADS_ENABLED=True)
     def test_user_preferences_allow_astronomy_ads_premium(self):
@@ -1009,8 +948,6 @@ class UserTest(TestCase):
         self.assertNotContains(
             self.client.get(reverse('profile_edit_preferences')),
             'name="allow_astronomy_ads" disabled')
-        self.client.logout()
-        us.delete()
 
     @override_settings(ADS_ENABLED=True)
     def test_user_preferences_allow_astronomy_ads_ultimate_2020(self):
@@ -1019,55 +956,53 @@ class UserTest(TestCase):
         self.assertNotContains(
             self.client.get(reverse('profile_edit_preferences')),
             'name="allow_astronomy_ads" disabled')
-        self.client.logout()
-        us.delete()
 
     def test_user_can_access_trash_free(self):
         self.client.login(username='user', password='password')
         response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
-        self.assertEquals(403, response.status_code)
+        self.assertEqual(403, response.status_code)
 
     def test_user_can_access_trash_lite(self):
         self.client.login(username='user', password='password')
         Generators.premium_subscription(self.user, "AstroBin Lite")
         response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
-        self.assertEquals(403, response.status_code)
+        self.assertEqual(403, response.status_code)
 
     def test_user_can_access_trash_lite_autorenew(self):
         self.client.login(username='user', password='password')
         Generators.premium_subscription(self.user, "AstroBin Lite (autorenew)")
         response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
-        self.assertEquals(403, response.status_code)
+        self.assertEqual(403, response.status_code)
 
     def test_user_can_access_trash_lite_2020(self):
         self.client.login(username='user', password='password')
         Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
         response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
-        self.assertEquals(403, response.status_code)
+        self.assertEqual(403, response.status_code)
 
     def test_user_can_access_trash_premium(self):
         self.client.login(username='user', password='password')
         Generators.premium_subscription(self.user, "AstroBin Premium")
         response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
-        self.assertEquals(403, response.status_code)
+        self.assertEqual(403, response.status_code)
 
     def test_user_can_access_trash_premium_autorenew(self):
         self.client.login(username='user', password='password')
         Generators.premium_subscription(self.user, "AstroBin Premium (autorenew)")
         response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
-        self.assertEquals(403, response.status_code)
+        self.assertEqual(403, response.status_code)
 
     def test_user_can_access_trash_premium_2020(self):
         self.client.login(username='user', password='password')
         Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
         response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
-        self.assertEquals(403, response.status_code)
+        self.assertEqual(403, response.status_code)
 
     def test_user_can_access_trash_ultimate_2020(self):
         self.client.login(username='user', password='password')
         Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
         response = self.client.get(reverse('user_page', args=('user',)) + "?trash")
-        self.assertEquals(200, response.status_code)
+        self.assertEqual(200, response.status_code)
 
     def test_user_can_access_data_download_free(self):
         self.client.login(username='user', password='password')
@@ -1096,25 +1031,25 @@ class UserTest(TestCase):
         Generators.premium_subscription(self.user, "AstroBin Premium")
         self.client.login(username='user', password='password')
         response = self.client.get(reverse('profile_download_data'))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_user_can_access_data_download_premium_autorenew(self):
         Generators.premium_subscription(self.user, "AstroBin Premium (autorenew)")
         self.client.login(username='user', password='password')
         response = self.client.get(reverse('profile_download_data'))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_user_can_access_data_download_premium_2020(self):
         Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
         self.client.login(username='user', password='password')
         response = self.client.get(reverse('profile_download_data'))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_user_can_access_data_download_ultimate_2020(self):
         Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
         self.client.login(username='user', password='password')
         response = self.client.get(reverse('profile_download_data'))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_download_data_view_quota(self):
         Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")

@@ -5,7 +5,7 @@ from astrobin_apps_payments.api.views.exchange_rate_view_set import ExchangeRate
 from astrobin_apps_payments.api.views.pricing_view import PricingView
 
 router = routers.DefaultRouter()
-router.register(r'exchange-rate', ExchangeRateViewSet, base_name='exchange-rate')
+router.register(r'exchange-rate', ExchangeRateViewSet, basename='exchange-rate')
 
 urlpatterns = [
     url('', include(router.urls)),
