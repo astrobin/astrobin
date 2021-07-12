@@ -220,7 +220,7 @@ urlpatterns += [
         ('astrobin_apps_remote_source_affiliation.api.urls', 'astrobin_apps_remote_source_affiliation'))),
     url(r'^api/v2/groups/', include(('astrobin_apps_groups.api.urls', 'astrobin_apps_groups'))),
     url(r'^api/v2/users/', include(('astrobin_apps_users.api.urls', 'astrobin_apps_users'))),
-    url(r'^api/v2/equipment/', include('astrobin_apps_equipment.api.urls', namespace="astrobin_apps_equipment")),
+    url(r'^api/v2/equipment/', include(('astrobin_apps_equipment.api.urls', 'astrobin_apps_equipment'))),
 
     ###########################################################################
     ### OWN APPS VIEWS                                                      ###

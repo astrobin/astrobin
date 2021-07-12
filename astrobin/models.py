@@ -290,7 +290,7 @@ class Gear(models.Model):
             ('MIGRATE', 'This item is ready for migration')
         ),
     )
-    migration_content_type = models.ForeignKey(ContentType, null=True, blank=True)
+    migration_content_type = models.ForeignKey(ContentType, null=True, blank=True, on_delete=models.SET_NULL)
     migration_object_id = models.PositiveIntegerField(null=True, blank=True)
     migration_content_object = GenericForeignKey('migration_content_type', 'migration_object_id')
 
