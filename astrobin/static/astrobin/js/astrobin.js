@@ -345,6 +345,9 @@ astrobin_common = {
                 case "private-message":
                     options['height'] = 300;
                     break;
+                case "image-description":
+                    options['height'] = 300;
+                    break;
                 default:
                     console.error("Unhandled CkEditor options context");
                     return {}

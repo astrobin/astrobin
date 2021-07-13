@@ -102,21 +102,22 @@
         }
     }
 
-    $(document).ready(function() {
-        $('.ui-multiselect').show();
+    function formatRemoteSource(remoteSource) {
+        var affiliates = {% remote_source_affiliates %};
 
-        function formatRemoteSource(remoteSource) {
-            var affiliates = {% remote_source_affiliates %};
-
-            if (remoteSource.id && affiliates.indexOf(remoteSource.id) > -1) {
-                return $(
-                    '<span class="remote-source-affiliate">' + remoteSource.text + '</span>' +
-                    '&nbsp;<span class="remote-source-affiliate-sponsor">({% trans "sponsor" %})</span>'
-                );
-            }
-
-            return remoteSource.text;
+        if (remoteSource.id && affiliates.indexOf(remoteSource.id) > -1) {
+            return $(
+                '<span class="remote-source-affiliate">' + remoteSource.text + '</span>' +
+                '&nbsp;<span class="remote-source-affiliate-sponsor">({% trans "sponsor" %})</span>'
+            );
         }
+
+        return remoteSource.text;
+    }
+
+    $(document).ready(function() {
+
+        $('.ui-multiselect').show();
 
         $("#id_remote_source").select2({
             templateResult: formatRemoteSource,
@@ -135,6 +136,15 @@
 
         $('form#basic').removeClass("hidden");
         $('img.loading').parent().remove();
+
+        CKEDITOR.replace(
+            "id_description",
+            astrobin_common.utils.ckeditorOptions(
+                "image-description",
+                "{{ LANGUAGE_CODE }}",
+                "{% trans 'Insert your image description here...' %}"
+            )
+        );
     });
 </script>
 {% endblock %}

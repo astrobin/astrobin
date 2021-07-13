@@ -934,7 +934,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         null=True,
         blank=True,
         verbose_name=_("Description"),
-        help_text=_("HTML tags are allowed."),
     )
 
     link = models.CharField(

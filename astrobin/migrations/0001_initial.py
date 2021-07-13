@@ -183,7 +183,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(blank=True, help_text='HTML tags are allowed.', null=True, verbose_name='Description')),
                 ('link', models.CharField(blank=True, max_length=256, null=True)),
                 ('link_to_fits', models.CharField(blank=True, max_length=256, null=True)),
-                ('image_file', models.ImageField(height_field=b'h', max_length=256, null=True, upload_to=astrobin.models.image_upload_path, width_field=b'w')),
+                ('image_file', models.ImageField(height_field='h', max_length=256, null=True, upload_to=astrobin.models.image_upload_path, width_field='w')),
                 ('uploaded', models.DateTimeField(auto_now_add=True)),
                 ('published', models.DateTimeField(blank=True, editable=False, null=True)),
                 ('updated', models.DateTimeField(auto_now=True, null=True)),
@@ -238,7 +238,7 @@ class Migration(migrations.Migration):
             name='ImageRevision',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image_file', models.ImageField(height_field=b'h', max_length=256, null=True, upload_to=astrobin.models.image_upload_path, width_field=b'w')),
+                ('image_file', models.ImageField(height_field='h', max_length=256, null=True, upload_to=astrobin.models.image_upload_path, width_field='w')),
                 ('description', models.TextField(blank=True, help_text='HTML tags are allowed.', null=True, verbose_name='Description')),
                 ('uploaded', models.DateTimeField(auto_now_add=True)),
                 ('w', models.IntegerField(default=0, editable=False)),
