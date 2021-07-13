@@ -19,7 +19,10 @@ docker-compose \
    -f docker/docker-compose-worker.yml \
    -f docker/docker-compose-scheduler.yml \
    -f docker/docker-compose-local.yml \
-   up &
+   up -d &
+
+sleep 5
+compose logs -f &
 
 while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://127.0.0.1:8083/accounts/login/)" != "200" ]]; do
     echo "Waiting for astrobin..."
