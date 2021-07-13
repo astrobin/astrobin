@@ -5,6 +5,7 @@ from datetime import datetime, date
 import dateutil
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.template import Library
@@ -12,8 +13,6 @@ from django.template.defaultfilters import timesince
 from django.utils.safestring import mark_safe, SafeString
 from django.utils.translation import ugettext as _
 from pybb.models import Post, Topic
-from django.contrib.staticfiles.templatetags.staticfiles import static
-from pybb.permissions import perms
 from subscription.models import UserSubscription, Subscription
 from threaded_messages.models import Participant
 
@@ -809,7 +808,7 @@ def license_logo(image):
     if type(image.license) == int:
         license = License.from_deprecated_integer(license)
 
-    icon = static('astrobin/icons/%s' %  icons[license])
+    icon = static('astrobin/icons/%s' % icons[license])
     title = [x[1] for x in LICENSE_CHOICES if x[0] == license][0]
 
     return mark_safe('<img class="license" src="%s" alt="%s" title="%s" />' % (icon, title, title))
@@ -828,7 +827,5 @@ def forum_latest_topics(context, cnt=5, user=None):
         )
     else:
         qs = Topic.objects.filter(forum__group=None)
-
-    qs = perms.filter_topics(user, qs)
 
     return qs.order_by('-updated', '-id')[:cnt]

@@ -2,7 +2,6 @@ from django.conf import settings
 from django.db.models import Q
 from django.views import generic
 from pybb.models import Topic
-from pybb.permissions import perms
 from pybb.views import PaginatorMixin
 
 
@@ -23,5 +22,4 @@ class LatestTopicsView(PaginatorMixin, generic.ListView):
 
         qs = qs.select_related()
 
-        qs = perms.filter_topics(self.request.user, qs)
         return qs.order_by('-updated', '-id')[:settings.PYBB_TOPIC_PAGE_SIZE * 2]
