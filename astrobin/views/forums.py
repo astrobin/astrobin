@@ -20,6 +20,6 @@ class LatestTopicsView(PaginatorMixin, generic.ListView):
         else:
             qs = Topic.objects.filter(forum__group=None)
 
-        qs = qs.select_related()
+        qs = qs.distinct().select_related()
 
         return qs.order_by('-updated', '-id')[:settings.PYBB_TOPIC_PAGE_SIZE * 2]

@@ -828,4 +828,6 @@ def forum_latest_topics(context, cnt=5, user=None):
     else:
         qs = Topic.objects.filter(forum__group=None)
 
+    qs = qs.distinct().select_related()
+
     return qs.order_by('-updated', '-id')[:cnt]
