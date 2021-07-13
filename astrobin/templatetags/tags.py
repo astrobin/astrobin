@@ -817,14 +817,18 @@ def license_logo(image):
 
 @register.simple_tag(takes_context=True)
 def forum_latest_topics(context, cnt=5, user=None):
-    qs = Topic.objects.filter(
-        Q(forum__group=None) |
-        Q(forum__group__owner=user) |
-        Q(forum__group__members=user)
-    ).order_by('-updated', '-created', '-id').distinct()
-
     if not user:
         user = context['user']
+
+    if user:
+        qs = Topic.objects.filter(
+            Q(forum__group=None) |
+            Q(forum__group__owner=user) |
+            Q(forum__group__members=user)
+        )
+    else:
+        qs = Topic.objects.filter(forum__group=None)
+
     qs = perms.filter_topics(user, qs)
 
-    return qs[:cnt]
+    return qs.order_by('-updated', '-id')[:cnt]

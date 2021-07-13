@@ -1,13 +1,13 @@
+from django.conf import settings
 from django.db.models import Q
 from django.views import generic
-from pybb import defaults
 from pybb.models import Topic
 from pybb.permissions import perms
 from pybb.views import PaginatorMixin
 
 
 class LatestTopicsView(PaginatorMixin, generic.ListView):
-    paginate_by = defaults.PYBB_FORUM_PAGE_SIZE
+    paginate_by = settings.PYBB_TOPIC_PAGE_SIZE
     context_object_name = 'topic_list'
     template_name = 'pybb/latest_topics.html'
 
@@ -21,10 +21,7 @@ class LatestTopicsView(PaginatorMixin, generic.ListView):
         else:
             qs = Topic.objects.filter(forum__group=None)
 
-        qs = qs\
-            .order_by('-updated', '-created', '-id') \
-            .distinct() \
-            .select_related()
+        qs = qs.select_related()
 
         qs = perms.filter_topics(self.request.user, qs)
-        return qs.order_by('-updated', '-id')
+        return qs.order_by('-updated', '-id')[:settings.PYBB_TOPIC_PAGE_SIZE * 2]
