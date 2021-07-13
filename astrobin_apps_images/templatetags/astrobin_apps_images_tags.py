@@ -45,38 +45,14 @@ def astrobin_image(context, image, alias, **kwargs):
     url_revision = kwargs.get('url_revision', revision)
     link = kwargs.get('link', True)
     tooltip = kwargs.get('tooltip', True)
-    nav_ctx = kwargs.get('nav_ctx', None)
-    nav_ctx_extra = kwargs.get('nav_ctx_extra', None)
+    nav_ctx = kwargs.get('nav_ctx', request.GET.get('nc', context.get('nav_ctx')))
+    nav_ctx_extra = kwargs.get('nav_ctx_extra', request.GET.get('nce', context.get('nav_ctx_extra')))
     classes = kwargs.get('classes', '')
     instant = kwargs.get('instant', False)
 
-    if nav_ctx is None:
-        nav_ctx = request.GET.get('nc')
-        if nav_ctx is not None:
-            request.session['nav_ctx'] = nav_ctx
-    if nav_ctx is None:
-        nav_ctx = context.get('nav_ctx')
-    if nav_ctx is None:
-        nav_ctx = request.session.get('nav_ctx')
     if nav_ctx == 'user':
         # None is considered to be default for 'user'
         nav_ctx = None
-
-    if nav_ctx_extra is None:
-        nav_ctx_extra = request.GET.get('nce')
-        if nav_ctx_extra is not None:
-            request.session['nav_ctx_extra'] = nav_ctx_extra
-    if nav_ctx_extra is None:
-        nav_ctx_extra = context.get('nav_ctx_extra')
-    if nav_ctx_extra is None:
-        nav_ctx_extra = request.session.get('nav_ctx_extra')
-
-    if 'nav_ctx_extra' in request.session and nav_ctx not in (
-            # Contexts that support the extra argument
-            'collection',
-            'group',):
-        del request.session['nav_ctx_extra']
-        nav_ctx_extra = None
 
     response_dict = {
         'provide_size': True,

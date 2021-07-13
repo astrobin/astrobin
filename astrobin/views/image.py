@@ -562,15 +562,8 @@ class ImageDetailView(ImageDetailViewBase):
         image_next = None
         image_prev = None
 
-        nav_ctx = self.request.GET.get('nc')
-        if nav_ctx is None:
-            nav_ctx = self.request.session.get('nav_ctx')
-        if nav_ctx is None:
-            nav_ctx = 'user'
-
+        nav_ctx = self.request.GET.get('nc', 'user')
         nav_ctx_extra = self.request.GET.get('nce')
-        if nav_ctx_extra is None:
-            nav_ctx_extra = self.request.session.get('nav_ctx_extra')
 
         if not image.is_wip and image.published is not None:
             try:
