@@ -1,18 +1,18 @@
 import hmac
 import logging
+import operator
 import os
 import random
 import string
 import unicodedata
 import uuid
 from functools import reduce
+from urllib.parse import urlparse
 
 import boto3
-import operator
 from django.core.files.images import get_image_dimensions
 from django.core.validators import MinLengthValidator, MaxLengthValidator, RegexValidator
 from image_cropping import ImageRatioField
-from urllib.parse import urlparse
 
 from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.enums.full_size_display_limitation import FullSizeDisplayLimitation
@@ -46,13 +46,7 @@ from django.db.models.signals import post_save
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
-try:
-    # Django < 1.10
-    from django.contrib.contenttypes.generic import GenericRelation, GenericForeignKey
-except ImportError:
-    # Django >= 1.10
-    from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
+from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
 
 from celery.result import AsyncResult
 from model_utils.managers import InheritanceManager
