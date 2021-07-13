@@ -6,12 +6,14 @@ import dateutil
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 from django.template import Library
 from django.template.defaultfilters import timesince
 from django.utils.safestring import mark_safe, SafeString
 from django.utils.translation import ugettext as _
-from pybb.models import Post
+from pybb.models import Post, Topic
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from pybb.permissions import perms
 from subscription.models import UserSubscription, Subscription
 from threaded_messages.models import Participant
 
@@ -811,3 +813,18 @@ def license_logo(image):
     title = [x[1] for x in LICENSE_CHOICES if x[0] == license][0]
 
     return mark_safe('<img class="license" src="%s" alt="%s" title="%s" />' % (icon, title, title))
+
+
+@register.simple_tag(takes_context=True)
+def forum_latest_topics(context, cnt=5, user=None):
+    qs = Topic.objects.filter(
+        Q(forum__group=None) |
+        Q(forum__group__owner=user) |
+        Q(forum__group__members=user)
+    ).order_by('-updated', '-created', '-id').distinct()
+
+    if not user:
+        user = context['user']
+    qs = perms.filter_topics(user, qs)
+
+    return qs[:cnt]

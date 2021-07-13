@@ -124,6 +124,7 @@ from astrobin.views import (
     set_language
 )
 from astrobin.views.contact import ContactRedirectView
+from astrobin.views.forums import LatestTopicsView
 from astrobin.views.profile.download_data_view import DownloadDataView
 
 admin.autodiscover()
@@ -189,6 +190,8 @@ urlpatterns += [
     url(r'^avatar/', include('avatar.urls')),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^contact/', ContactRedirectView.as_view(), name='contact'),
+    # Override pybb's LatestTopicsView to omit topics from groups the user has not joined.
+    url(r'^forum/topic/latest/$', LatestTopicsView.as_view(), name='topic_latest'),
     url(r'^forum/', include('pybb.urls', namespace='pybb')),
     url(r'hitcount/', include('hitcount.urls', namespace='hitcount')),
     url(r'^persistent_messages/', include('persistent_messages.urls')),
