@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('contenttypes', '0002_remove_content_type_name'),
-        ('astrobin', '0106_add_image_full_size_display_limitations'),
+        ('astrobin', '0108_add_on_delete'),
     ]
 
     operations = [
