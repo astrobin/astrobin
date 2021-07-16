@@ -48,6 +48,7 @@ class ImageSerializer(RequestUserRestSerializerMixin, serializers.ModelSerialize
             'published',
             'license',
             'description',
+            'description_bbcode',
             'link',
             'link_to_fits',
             'acquisition_type',
