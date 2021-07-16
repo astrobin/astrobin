@@ -13,7 +13,7 @@
                 </div>
 
                 {% if image.description_bbcode %}
-                    {{ image.description|bbcode|safe }}
+                    {{ image.description_bbcode|bbcode|safe }}
                 {% else %}
                     {{ image.description|strip_html|safe|linebreaks }}
                 {% endif %}
