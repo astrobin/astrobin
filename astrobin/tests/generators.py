@@ -44,6 +44,7 @@ class Generators:
             corrupted=kwargs.pop('corrupted', False),
             recovered=kwargs.pop('recovered', None),
             recovery_ignored=kwargs.pop('recovery_ignored', None),
+            description_bbcode=kwargs.pop('description_bbcode', None),
         )
 
     @staticmethod

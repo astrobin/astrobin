@@ -1,0 +1,7 @@
+{% load i18n %}
+
+<a href="{{ url }}">
+    {% blocktrans trimmed %}
+        <strong>{{user}}</strong> mentioned you in an image description!
+    {% endblocktrans %}
+</a>

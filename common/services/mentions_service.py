@@ -9,7 +9,11 @@ from notification.models import NoticeSetting
 class MentionsService(object):
     @staticmethod
     def get_mentions(text):
-        # type: (unicode) -> list[unicode]
+        # type: (str) -> list[str]
+
+        if not text:
+            return []
+
         regex = r'\[url=.*?\/users\/(.*?)\/\]@.*?\[\/url\]|\[quote="(.*?)"\].*?\[\/quote\]'
         matches = re.finditer(regex, text, re.MULTILINE)
         mentions = []
@@ -23,7 +27,8 @@ class MentionsService(object):
 
     @staticmethod
     def get_mentioned_users_with_notification_enabled(mentions, notice_type):
-        # type: (List[User]) -> List[User]
+        # type: (list[User], str) -> list[User]
+
         mentioned_user_with_notification_enabled = []  # type: List[User]
         for mention in mentions:  # type: unicode
             user = get_object_or_None(User, username=mention)  # type: Optional[User]
