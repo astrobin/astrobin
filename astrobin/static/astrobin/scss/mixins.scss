@@ -1,5 +1,3 @@
-@import "variables";
-
 @mixin rotate($amount: 45deg) {
   -webkit-transform: rotate($amount);
   -moz-transform: rotate($amount);

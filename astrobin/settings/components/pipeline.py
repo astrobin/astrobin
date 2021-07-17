@@ -1,3 +1,24 @@
+THIRD_PARTY_STYLESHEETS = (
+    'astrobin/css/jquery-ui.css',
+    'astrobin/css/jquery-ui-astrobin/jquery-ui-1.8.17.custom.css',
+    'astrobin/css/ui.multiselect.css',
+    'astrobin/css/validationEngine.jquery.css',
+    'astrobin/css/token-input.css',
+    'astrobin/css/jquery.multiselect.css',
+    'astrobin/css/jquery.qtip.css',
+
+    'astrobin_apps_donations/css/astrobin_apps_donations.css',
+    'astrobin_apps_premium/css/astrobin_apps_premium.css',
+
+    'astrobin/css/reset.css',
+    'astrobin/css/bootstrap.css',
+    'astrobin/css/bootstrap-responsive.css',
+
+    'common/fancybox/jquery.fancybox.css',
+    'common/css/ldbtn.min.css',
+    'common/css/loading.min.css',
+)
+
 PIPELINE = {
     'PIPELINE_ENABLED': not DEBUG,
     'PIPELINE_COLLECTOR_ENABLED': False,
@@ -41,32 +62,20 @@ PIPELINE = {
     },
     'STYLESHEETS': {
         'screen': {
-            'source_filenames': (
-                'astrobin/css/jquery-ui.css',
-                'astrobin/css/jquery-ui-astrobin/jquery-ui-1.8.17.custom.css',
-                'astrobin/css/ui.multiselect.css',
-                'astrobin/css/validationEngine.jquery.css',
-                'astrobin/css/token-input.css',
-                'astrobin/css/jquery.multiselect.css',
-                'astrobin/css/jquery.qtip.css',
-
-                'astrobin_apps_donations/css/astrobin_apps_donations.css',
-                'astrobin_apps_premium/css/astrobin_apps_premium.css',
-
-                'astrobin/css/reset.css',
-                'astrobin/css/bootstrap.css',
-                'astrobin/css/bootstrap-responsive.css',
-
-                'common/fancybox/jquery.fancybox.css',
-                'common/css/ldbtn.min.css',
-                'common/css/loading.min.css',
-
+            'source_filenames': THIRD_PARTY_STYLESHEETS + (
                 'astrobin/scss/astrobin.scss',
-                'astrobin/scss/astrobin-mobile.scss',
-                'astrobin/scss/astrobin-large.scss',
             ),
             'output_filename': 'astrobin/css/astrobin_screen.css',
             'extra_content':  {
+                'media': 'screen, projection',
+            },
+        },
+        'screen_protanomaly': {
+            'source_filenames': THIRD_PARTY_STYLESHEETS + (
+                'astrobin/scss/astrobin-protanomaly.scss',
+            ),
+            'output_filename': 'astrobin/css/astrobin_screen_protanomaly.css',
+            'extra_content': {
                 'media': 'screen, projection',
             },
         }

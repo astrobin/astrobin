@@ -1,0 +1,58 @@
+/* Color palette: http://www.colourlovers.com/palette/322645/Mambo_For_Cats */
+$black: #000;
+$blue: #3092CF;
+$orange: #CC4B2E;
+$dark-orange: #B74329;
+$white: #FCFCFC;
+$green: #277344;
+$red: #FF0000;
+
+$gold: #F3BB46;
+$silver: #CACACA;
+$bronze: #B56500;
+
+$grey-1: #EEE;
+$grey-2: #DDD;
+$grey-3: #AAA;
+$grey-4: #999;
+$grey-5: #444;
+$grey-6: #333;
+$grey-6-dark: #303030;
+$grey-7: #282828;
+$grey-8: #222;
+$grey-9: #111;
+
+$background-color: $grey-6;
+$link-color: $blue;
+$strong-text-color: $white;
+$logo-color: $blue;
+
+$header-color: $strong-text-color;
+$text-color: $strong-text-color - $grey-6;
+$input-color: $background-color;
+
+$hilight-factor: 1.12;
+$strong-hilight-factor: 1.25;
+$strongest-hilight-factor: 1.4;
+$border-color: $background-color / $hilight-factor;
+$border-bottom-color: $background-color * $strong-hilight-factor;
+$border-top-color: $background-color * $strongest-hilight-factor;
+$border-color-inverted: $strong-text-color;
+$border-shadow-color: $background-color / $strong-hilight-factor;
+$border-shadow-color-inverted: $text-color + #030303;
+$dark-panel-color: $background-color / $hilight-factor;
+$regular-panel-color: $background-color / ((1 + $hilight-factor) / 2);
+$light-panel-color: $background-color * $hilight-factor;
+$light-panel-border-color: $background-color / $strong-hilight-factor;
+
+$base-font-size: 14px;
+$spacer-small: 4px;
+$spacer-xsmall: $spacer-small * .5;
+$spacer-medium: $spacer-small * 2;
+$spacer-large: $spacer-small * 3;
+$spacer-xlarge: $spacer-small * 4;
+$spacer-xxlarge: $spacer-small * 7;
+$spacer-xxxlarge: $spacer-small * 13;
+
+$headers-font: "Noto Sans", Helvetica, Arial, sans-serif;
+$regular-font: "Noto Sans", Helvetica, Arial, sans-serif;
