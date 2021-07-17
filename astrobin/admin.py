@@ -21,7 +21,7 @@ class ImageAdmin(admin.ModelAdmin):
         'hash',
         'title',
         'description',
-        'description_bbcode'
+        'description_bbcode',
         'license',
     )
 
