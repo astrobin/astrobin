@@ -58,6 +58,7 @@ class ImageEditBasicForm(forms.ModelForm):
         self.__initGroups()
         self.__initRevisions()
         self.__initKeyValueTags()
+        self.__initDescription()
 
     def __initLocations(self):
         locations = Location.objects.filter(user=self.instance.user.userprofile)
@@ -98,6 +99,12 @@ class ImageEditBasicForm(forms.ModelForm):
             initial += "%s=%s\r\n" % (tag.key, tag.value)
 
         self.fields['keyvaluetags'].initial = initial
+
+    def __initDescription(self):
+        if not self.instance.description or (self.instance.description and self.instance.description_bbcode):
+            del self.fields['description']
+        else:
+            del self.fields['description_bbcode']
 
     def __saveGroups(self, instance):
         if 'groups' in self.cleaned_data:
@@ -166,7 +173,7 @@ class ImageEditBasicForm(forms.ModelForm):
 
     class Meta:
         model = Image
-        fields = (
+        fields = [
             'image_file',
             'title',
             'link',
@@ -179,8 +186,9 @@ class ImageEditBasicForm(forms.ModelForm):
             'locations',
             'groups',
             'description',
+            'description_bbcode',
             'keyvaluetags',
             'mouse_hover_image',
             'full_size_display_limitation',
             'allow_comments',
-        )
+        ]

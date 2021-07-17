@@ -32,6 +32,11 @@
   color: $white !important;
 }
 
+.cke_button_icon {
+  width: 15px !important;
+  height: 15px !important;
+}
+
 .cke_source {
   padding: 8px !important;
 }
@@ -319,6 +324,7 @@ select.cke_dialog_ui_input_select {
   background-color: $grey-5 !important;
   color: $grey-1 !important;
   padding: 8px !important;
+  min-height: 20rem;
 
   a {
     color: $link-color !important;

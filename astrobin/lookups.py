@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponse
 from django.views.decorators.http import require_GET
+from rest_framework.authtoken.models import Token
 
 from astrobin_apps_images.services import ImageService
 from .models import Image
@@ -38,11 +39,19 @@ def autocomplete_private_message_recipients(request):
 
     return HttpResponse(simplejson.dumps(results))
 
-@login_required
 @require_GET
 def autocomplete_usernames(request):
     if 'q' not in request.GET:
         return HttpResponse(simplejson.dumps([]))
+
+    if request.user.is_anonymous:
+        if 'token' not in request.GET:
+            return HttpResponse(simplejson.dumps([]))
+
+        try:
+            Token.objects.get(key=request.GET.get('token'))
+        except Token.DoesNotExist:
+            return HttpResponse(simplejson.dumps([]))
 
     q = request.GET['q']
     referer_header = request.META.get('HTTP_REFERER', '')
@@ -103,18 +112,29 @@ def autocomplete_usernames(request):
     return HttpResponse(simplejson.dumps(results))
 
 
-@login_required
 @require_GET
 def autocomplete_images(request):
     if 'q' not in request.GET:
         HttpResponse(simplejson.dumps([]))
+
+    if request.user.is_anonymous:
+        if 'token' not in request.GET:
+            return HttpResponse(simplejson.dumps([]))
+
+        try:
+            token = Token.objects.get(key=request.GET.get('token'))
+            user = token.user
+        except Token.DoesNotExist:
+            return HttpResponse(simplejson.dumps([]))
+    else:
+        user = request.user
 
     q = request.GET['q']
 
     # Replace non-breaking space with regular space
     q = q.replace(chr(160), ' ')
 
-    images = Image.objects_including_wip.filter(user=request.user, title__icontains=q)[:10]
+    images = Image.objects_including_wip.filter(user=user, title__icontains=q)[:10]
 
     results = []
 

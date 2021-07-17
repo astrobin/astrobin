@@ -197,6 +197,7 @@ class ImageResource(ModelResource):
     published = fields.DateField('published')
     updated = fields.DateField('updated')
 
+    description = fields.CharField()
     locations = fields.ToManyField(LocationResource, 'locations')
     data_source = fields.CharField('data_source', null=True)
     remote_source = fields.CharField('remote_source', null=True)
@@ -371,6 +372,11 @@ class ImageResource(ModelResource):
     def dehydrate_imaging_cameras(self, bundle):
         cameras = bundle.obj.imaging_cameras.all()
         return [str(x) for x in cameras]
+
+    def dehydrate_description(self, bundle):
+        if bundle.obj.description_bbcode:
+            return bundle.obj.description_bbcode
+        return bundle.obj.description
 
     def dehydrate_license(self, bundle):
         return License.to_deprecated_integer(bundle.obj.license)

@@ -270,4 +270,10 @@ NOTICE_TYPES = (
         '',
         2
     ),
+    (
+        'new_image_description_mention',
+        _("You were mentioned in an image description"),
+        '',
+        2
+    ),
 )

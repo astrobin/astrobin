@@ -80,6 +80,7 @@ astrobin_common = {
                 extraPlugins: '' +
                     'ajax,' +
                     'autocomplete,' +
+                    'autogrow,' +
                     'autolink,' +
                     'basicstyles,' +
                     'bbcode,' +
@@ -343,6 +344,9 @@ astrobin_common = {
                     options['height'] = 250;
                     break;
                 case "private-message":
+                    options['height'] = 300;
+                    break;
+                case "image-description":
                     options['height'] = 300;
                     break;
                 default:

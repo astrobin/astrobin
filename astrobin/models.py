@@ -937,6 +937,12 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         help_text=_("HTML tags are allowed."),
     )
 
+    description_bbcode = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name=_("Description"),
+    )
+
     link = models.CharField(
         max_length=256,
         null=True,

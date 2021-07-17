@@ -21,49 +21,36 @@
     {% include 'image/edit/menu.html' %}
 
     <div class="text-center">
-        <img class="loading"
-             src="{% static 'astrobin/images/ajax-loader.gif' %}"
-             alt="{% trans "Loading..." %}" />
+        <img class="loading" src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="{% trans "Loading..." %}" />
     </div>
 
-    <form
-            class="form-horizontal hidden"
-            id="basic"
-            action=""
-            method="post"
-            novalidate
-            enctype="multipart/form-data">
+    <form class="form-horizontal hidden" id="basic" action="" method="post" novalidate enctype="multipart/form-data">
         {% csrf_token %}
 
         {% if 'corrupted' in request.GET and image.corrupted and not image.recovered %}
             {% include './_catastrophic_data_corruption.html' %}
         {% endif %}
 
-        {{form|as_bootstrap}}
+        {{ form|as_bootstrap }}
 
-        <input type="hidden" name="image_id" value="{{image.get_id}}" />
+        <input type="hidden" name="image_id" value="{{ image.get_id }}" />
 
         {% if image.subject_type and image.subject_type == enums.SubjectType.GEAR or image.subject_type == enums.SubjectType.OTHER %}
-            <input type="hidden" name="skip_rest" value="true"/>
+            <input type="hidden" name="skip_rest" value="true" />
         {% endif %}
 
         <div class="form-actions">
-            <button
-                    class="btn btn-primary btn-block-mobile {% button_loading_class %}"
-                    type="submit"
+            <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit"
                     name="submit_save">
                 {% trans "Save" %}
                 {% button_loading_indicator %}
             </button>
 
             {% if image|can_add_technical_details and image|in_upload_wizard:request %}
-            <button
-                    class="btn btn-primary btn-block-mobile {% button_loading_class %}"
-                    type="submit"
-                    name="submit_gear">
-                {% trans "Next step: gear used" %} &rarr;
-                {% button_loading_indicator %}
-            </button>
+                <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit"
+                        name="submit_gear">
+                    {% trans "Next step: gear used" %} &rarr; {% button_loading_indicator %}
+                </button>
             {% endif %}
 
             <a data-toggle="modal" class="btn btn-danger btn-block-mobile" href="#delete-modal">
@@ -71,39 +58,36 @@
             </a>
 
             {% if not image|in_upload_wizard:request %}
-                <a class="btn btn-block-mobile" href="{{image.get_absolute_url}}">{% trans "Cancel" %}</a>
+                <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">{% trans "Cancel" %}</a>
             {% endif %}
         </div>
     </form>
 {% endblock %}
 
 {% block extra_js %}
-<script language="javascript">
-    function showHideRemoteSource() {
-        var dataSource = $('#id_data_source').val();
-        var $remoteSourceGroup = $('#id_remote_source').closest('.control-group');
+    <script language="javascript">
+        function showHideRemoteSource() {
+            var dataSource = $('#id_data_source').val();
+            var $remoteSourceGroup = $('#id_remote_source').closest('.control-group');
 
-        if (['OWN_REMOTE', 'AMATEUR_HOSTING'].indexOf(dataSource) === -1) {
-            $remoteSourceGroup.hide();
-            $('#id_remote_source').val("");
-        } else {
-            $remoteSourceGroup.show();
+            if (['OWN_REMOTE', 'AMATEUR_HOSTING'].indexOf(dataSource) === -1) {
+                $remoteSourceGroup.hide();
+                $('#id_remote_source').val("");
+            } else {
+                $remoteSourceGroup.show();
+            }
         }
-    }
 
-    function showHideNextStepGearButton() {
-        var subjectType = $('#id_subject_type').val();
-        var $nextStepGearButton = $('.btn[name="submit_gear"]');
+        function showHideNextStepGearButton() {
+            var subjectType = $('#id_subject_type').val();
+            var $nextStepGearButton = $('.btn[name="submit_gear"]');
 
-        if ($nextStepGearButton.length > 0 && subjectType === 'OTHER') {
-            $nextStepGearButton.hide();
-        } else {
-            $nextStepGearButton.show();
+            if ($nextStepGearButton.length > 0 && subjectType === 'OTHER') {
+                $nextStepGearButton.hide();
+            } else {
+                $nextStepGearButton.show();
+            }
         }
-    }
-
-    $(document).ready(function() {
-        $('.ui-multiselect').show();
 
         function formatRemoteSource(remoteSource) {
             var affiliates = {% remote_source_affiliates %};
@@ -118,25 +102,40 @@
             return remoteSource.text;
         }
 
-        $("#id_remote_source").select2({
-            templateResult: formatRemoteSource,
-            theme: "flat"
-        });
+        $(document).ready(function () {
 
-        showHideRemoteSource();
-        $(document).on('change', '#id_data_source', function () {
+            $('.ui-multiselect').show();
+
+            $("#id_remote_source").select2({
+                templateResult: formatRemoteSource,
+                theme: "flat"
+            });
+
             showHideRemoteSource();
-        });
+            $(document).on('change', '#id_data_source', function () {
+                showHideRemoteSource();
+            });
 
-        showHideNextStepGearButton();
-        $(document).on('change', '#id_subject_type', function () {
             showHideNextStepGearButton();
-        });
+            $(document).on('change', '#id_subject_type', function () {
+                showHideNextStepGearButton();
+            });
 
-        $('form#basic').removeClass("hidden");
-        $('img.loading').parent().remove();
-    });
-</script>
+            $('form#basic').removeClass("hidden");
+            $('img.loading').parent().remove();
+
+            if ($('#id_description_bbcode').length) {
+                CKEDITOR.replace(
+                    "id_description_bbcode",
+                    astrobin_common.utils.ckeditorOptions(
+                        "image-description",
+                        "{{ LANGUAGE_CODE }}",
+                        "{% trans 'Insert your image description here...' %}"
+                    )
+                );
+            }
+        });
+    </script>
 {% endblock %}
 
 {% block modals %}

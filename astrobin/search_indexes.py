@@ -505,7 +505,7 @@ class ImageIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
 
     title = CharField(model_attr='title')
-    description = CharField(model_attr='description', null=True)
+    description = CharField(null=True)
     published = DateTimeField(model_attr='published')
     uploaded = DateTimeField(model_attr='uploaded')
     imaging_telescopes = CharField()
@@ -582,6 +582,9 @@ class ImageIndex(SearchIndex, Indexable):
 
     def get_updated_field(self):
         return "updated"
+
+    def prepare_description(self, obj):
+        return obj.description_bbcode or obj.description
 
     def prepare_imaging_telescopes(self, obj):
         return ["%s, %s" % (x.get("make"), x.get("name")) for x in obj.imaging_telescopes.all().values('make', 'name')]
