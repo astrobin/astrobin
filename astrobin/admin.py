@@ -18,18 +18,10 @@ from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 
 class ImageAdmin(admin.ModelAdmin):
     fields = (
+        'hash',
         'title',
         'description',
-        'imaging_telescopes',
-        'guiding_telescopes',
-        'mounts',
-        'imaging_cameras',
-        'guiding_cameras',
-        'focal_reducers',
-        'software',
-        'filters',
-        'accessories',
-        'user',
+        'description_bbcode'
         'license',
     )
 

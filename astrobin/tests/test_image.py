@@ -284,7 +284,7 @@ class ImageTest(TestCase):
                 'acquisition_type': 'REGULAR',
                 'subject_type': SubjectType.OTHER,
                 'locations': [location.pk],
-                'description': "Image description",
+                'description_bbcode': "Image description",
                 'allow_comments': True
             },
             follow=True)
@@ -302,7 +302,7 @@ class ImageTest(TestCase):
                 'data_source': 'AMATEUR_HOSTING',
                 'subject_type': SubjectType.OTHER,
                 'locations': [location.pk],
-                'description': "Image description",
+                'description_bbcode': "Image description",
                 'allow_comments': True
             },
             follow=True)
@@ -319,7 +319,7 @@ class ImageTest(TestCase):
                 'data_source': 'OTHER',
                 'subject_type': SubjectType.OTHER,
                 'locations': [location.pk],
-                'description': "Image description",
+                'description_bbcode': "Image description",
                 'allow_comments': True
             },
             follow=True)
@@ -336,7 +336,7 @@ class ImageTest(TestCase):
         self.assertEqual(image.solar_system_main_subject, None)
         self.assertEqual(image.locations.count(), 1)
         self.assertEqual(image.locations.all().first().pk, location.pk)
-        self.assertEqual(image.description, "Image description")
+        self.assertEqual(image.description_bbcode, "Image description")
         self.assertEqual(image.allow_comments, True)
         self.user.userprofile.location_set.clear()
 
@@ -2048,7 +2048,7 @@ class ImageTest(TestCase):
                 'data_source': 'OTHER',
                 'subject_type': SubjectType.OTHER,
                 'locations': [x.pk for x in image.user.userprofile.location_set.all()],
-                'description': "Image description",
+                'description_bbcode': "Image description",
                 'allow_comments': True
             }
 
@@ -2096,7 +2096,7 @@ class ImageTest(TestCase):
         self.assertEqual(image.solar_system_main_subject, None)
         self.assertEqual(image.locations.count(), 1)
         self.assertEqual(image.locations.all().first().pk, image.user.userprofile.location_set.all().first().pk)
-        self.assertEqual(image.description, "Image description")
+        self.assertEqual(image.description_bbcode, "Image description")
         self.assertEqual(image.allow_comments, True)
 
         # Test that groups are updated
@@ -2191,7 +2191,7 @@ class ImageTest(TestCase):
             'data_source': 'OTHER',
             'subject_type': SubjectType.OTHER,
             'locations': [],
-            'description': "Image description",
+            'description_bbcode': "Image description",
             'allow_comments': True
         }
 
@@ -3963,7 +3963,7 @@ class ImageTest(TestCase):
     })
     @patch('astrobin.signals.push_notification')
     def test_image_description_mention_notification_after_created_mention_added(self, push_notification):
-        user1 = Generators.user(username='foo')
+        Generators.user(username='foo')
         user2 = Generators.user(username='bar')
         image = Generators.image(description_bbcode='[url=https://www.astrobin.com/users/foo/]@Foo[/url]')
 
@@ -3977,3 +3977,17 @@ class ImageTest(TestCase):
         push_notification.assert_has_calls([
             mock.call([user2], image.user, 'new_image_description_mention', mock.ANY),
         ])
+
+    def test_image_description_in_view(self):
+        image = Generators.image(description="Test description")
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "Test description")
+
+    def test_image_description_bbcode_in_view(self):
+        image = Generators.image(
+            description="Test HTML description",
+            description_bbcode="Test BBCode description"
+        )
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "Test BBCode description")
+        self.assertNotContains(response, "Test HTML description")

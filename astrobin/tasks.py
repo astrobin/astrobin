@@ -342,7 +342,7 @@ def prepare_download_data_archive(request_id):
 
                 for revision in ImageRevision.objects.filter(image=image, corrupted=False):  # type: ImageRevision
                     try:
-                        label = revision.label  # type: unicode
+                        label = revision.label  # type: str
                         path = ntpath.basename(revision.image_file.name)  # type: str
 
                         logger.debug("prepare_download_data_archive: image %s revision %s = iterating" % (id, label))
@@ -381,7 +381,7 @@ def prepare_download_data_archive(request_id):
                 image.remote_source,
                 image.solar_system_main_subject,
                 ';'.join([str(x).encode('utf-8') for x in image.locations.all()]),
-                str(image.description).encode('utf-8'),
+                str(image.description_bbcode if image.description_bbcode else image.description).encode('utf-8'),
                 str(image.link).encode('utf-8'),
                 str(image.link_to_fits).encode('utf-8'),
                 image.image_file.url,
