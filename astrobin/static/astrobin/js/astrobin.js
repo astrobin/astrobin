@@ -80,6 +80,7 @@ astrobin_common = {
                 extraPlugins: '' +
                     'ajax,' +
                     'autocomplete,' +
+                    'autogrow,' +
                     'autolink,' +
                     'basicstyles,' +
                     'bbcode,' +
