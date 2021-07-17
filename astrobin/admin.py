@@ -17,12 +17,25 @@ from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 
 
 class ImageAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'hash',
+        'title',
+        'user',
+    )
+
     fields = (
         'hash',
         'title',
         'description',
         'description_bbcode',
         'license',
+    )
+
+    search_fields = (
+        'hash',
+        'title',
+        'user__username',
     )
 
 
