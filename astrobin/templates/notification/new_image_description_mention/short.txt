@@ -1,5 +1,5 @@
 {% load i18n %}
 
 {% blocktrans trimmed %}
-    {{user}} mentioned you in an image description!
+    {{user}} mentioned you in an image description.
 {% endblocktrans %}

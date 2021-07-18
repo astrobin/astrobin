@@ -3891,6 +3891,14 @@ class ImageTest(TestCase):
         push_notification.assert_called_with([user], image.user, 'new_image_description_mention', mock.ANY)
 
     @patch('astrobin.signals.push_notification')
+    def test_image_description_mention_notification_created_one_mention_image_owner(self, push_notification):
+        user = Generators.user(username='foo')
+        image = Generators.image(user=user, description_bbcode='[url=https://www.astrobin.com/users/foo/]@Foo[/url]')
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([user], image.user, 'new_image_description_mention', mock.ANY)
+
+    @patch('astrobin.signals.push_notification')
     def test_image_description_mention_notification_created_two_mentions(self, push_notification):
         user1 = Generators.user(username='foo')
         user2 = Generators.user(username='bar')
@@ -3932,6 +3940,21 @@ class ImageTest(TestCase):
         image.save()
 
         push_notification.assert_called_with([user], image.user, 'new_image_description_mention', mock.ANY)
+
+    @override_settings(CACHES={
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        }
+    })
+    @patch('astrobin.signals.push_notification')
+    def test_image_description_mention_notification_after_created_one_mention(self, push_notification):
+        user = Generators.user(username='foo')
+        image = Generators.image(user=user)
+        image.description_bbcode = '[url=https://www.astrobin.com/users/foo/]@Foo[/url]'
+        image.save()
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([user], image.user, 'new_image_description_mention', mock.ANY)
 
     @override_settings(CACHES={
         'default': {
