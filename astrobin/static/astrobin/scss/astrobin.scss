@@ -34,6 +34,10 @@ strong, .strong {
   font-weight: bold;
 }
 
+a strong {
+  color: $link-color;
+}
+
 abbr[title] {
   border: 0;
 
