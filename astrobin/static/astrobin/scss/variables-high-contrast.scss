@@ -1,29 +1,29 @@
 /* Color palette: http://www.colourlovers.com/palette/322645/Mambo_For_Cats */
 $black: #000;
-$blue: #3092CF;
-$orange: #CC4B2E;
-$dark-orange: #B74329;
-$white: #FCFCFC;
-$green: #277344;
-$red: #FF0000;
+$blue: #FFF;
+$orange: #FFF;
+$dark-orange: #DDD;
+$white: #FFF;
+$green: #FFF;
+$red: #FFF;
 
-$gold: #F3BB46;
+$gold: #FFF;
 $silver: #CACACA;
-$bronze: #B56500;
+$bronze: #999;
 
-$grey-1: #EEE;
-$grey-2: #DDD;
-$grey-3: #AAA;
-$grey-4: #999;
+$grey-1: #F0F0F0;
+$grey-2: #D5D5D5;
+$grey-3: #CCC;
+$grey-4: #AAA;
 $grey-5: #444;
 $grey-6: #333;
-$grey-6-dark: #303030;
-$grey-7: #282828;
-$grey-8: #222;
-$grey-9: #111;
+$grey-6-dark: #282828;
+$grey-7: #222;
+$grey-8: #111;
+$grey-9: #0A0A0A;
 
-$background-color: $grey-6;
-$link-color: $blue;
+$background-color: $grey-9;
+$link-color: $white;
 $strong-text-color: $white;
 $logo-color: $blue;
 
@@ -31,9 +31,9 @@ $header-color: $strong-text-color;
 $text-color: $strong-text-color - $grey-6;
 $input-color: $background-color;
 
-$hilight-factor: 1.12;
-$strong-hilight-factor: 1.25;
-$strongest-hilight-factor: 1.4;
+$hilight-factor: 1.5;
+$strong-hilight-factor: 2;
+$strongest-hilight-factor: 3;
 $border-color: $background-color / $hilight-factor;
 $border-bottom-color: $background-color * $strong-hilight-factor;
 $border-top-color: $background-color * $strongest-hilight-factor;

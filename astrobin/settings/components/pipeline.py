@@ -70,11 +70,11 @@ PIPELINE = {
                 'media': 'screen, projection',
             },
         },
-        'screen_protanomaly': {
+        'screen_high_contrast': {
             'source_filenames': THIRD_PARTY_STYLESHEETS + (
-                'astrobin/scss/astrobin-protanomaly.scss',
+                'astrobin/scss/astrobin-high-contrast.scss',
             ),
-            'output_filename': 'astrobin/css/astrobin_screen_protanomaly.css',
+            'output_filename': 'astrobin/css/astrobin_screen_high_contrast.css',
             'extra_content': {
                 'media': 'screen, projection',
             },

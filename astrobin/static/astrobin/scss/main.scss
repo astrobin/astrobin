@@ -4038,15 +4038,15 @@ table.api-examples {
   }
 
   &.astrobin-iotd-staff {
-    background-color: #ce9931;
+    background-color: $gold;
   }
 
   &.astrobin-image-moderator {
-    background-color: #1f9028;
+    background-color: $green;
   }
 
   &.astrobin-superuser {
-    background: #3092d1;
+    background: $blue;
   }
 
   + .contribution-index {
