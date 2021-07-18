@@ -123,10 +123,13 @@ def image_post_save(sender, instance, created, **kwargs):
                 user = get_object_or_None(UserProfile, real_name=username)
             except MultipleObjectsReturned:
                 user = None
-        if user:
+        if user and user != instance.user:
+            thumb = instance.thumbnail_raw('gallery', None, sync=True)
             push_notification(
                 [user], instance.user, 'new_image_description_mention',
                 {
+                    'image': instance,
+                    'image_thumbnail': thumb.url if thumb else None,
                     'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
                     'user': instance.user.userprofile.get_display_name(),
                     'user_url': settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user}),
