@@ -1,8 +1,4 @@
-{% load i18n %}
-{% load static %}
-{% load astrobin_apps_notifications_tags %}
-{% load astrobin_apps_premium_tags %}
-{% load common_tags %}
+{% load i18n %}{% load static %}{% load astrobin_apps_notifications_tags %}{% load astrobin_apps_premium_tags %}{% load common_tags %}
 
 <div class="modal hide fade" id="notifications-modal">
     <div class="modal-header">
@@ -13,23 +9,27 @@
     <div class="modal-body">
         <table class="table table-condensed table-striped notifications-modal">
             <tbody>
-                <template id="notification-row-template">
-                    <tr class="notification-item notification-unread" data-id="">
-                        <td class="notification-state"><div class="state-indicator"></div></td>
-                        <td class="notification-content"></td>
-                        <td class="notification-date"><abbr class="timestamp" data-epoch="">...</abbr></td>
-                        <td class="notification-mark-as-read">
-                            <a href="#"><i class="icon icon-ok"></i></a>
-                            <div class="loading"><div class="ld ld-ring ld-spin"></div></div>
-                        </td>
-                    </tr>
-                </template>
-
-                <tr class="no-new-notifications">
-                    <td colspan="4">
-                        {% trans "You have no new notifications." %}
+            <template id="notification-row-template">
+                <tr class="notification-item notification-unread" data-id="">
+                    <td class="notification-state">
+                        <div class="state-indicator"></div>
+                    </td>
+                    <td class="notification-content"></td>
+                    <td class="notification-date"><abbr class="timestamp" data-epoch="">...</abbr></td>
+                    <td class="notification-mark-as-read">
+                        <a href="#"><i class="icon icon-ok"></i></a>
+                        <div class="loading">
+                            <div class="ld ld-ring ld-spin"></div>
+                        </div>
                     </td>
                 </tr>
+            </template>
+
+            <tr class="no-new-notifications">
+                <td colspan="4">
+                    {% trans "You have no new notifications." %}
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
@@ -44,7 +44,7 @@
         {% else %}
             <a class="btn" href="{% url 'astrobin_apps_notifications.settings' %}">
         {% endif %}
-            {% trans "Settings" %}
+        {% trans "Settings" %}
         </a>
 
         {% if READONLY_MODE %}
@@ -52,8 +52,8 @@
         {% else %}
             <a class="btn btn-danger" id="mark-all-notifications-as-read" disabled="disabled">
         {% endif %}
-            <i class="icon-exclamation-sign"></i>
-            {% trans "Mark all as read" %}
+        <i class="icon-exclamation-sign"></i>
+        {% trans "Mark all as read" %}
         </a>
     </div>
 </div>
@@ -195,28 +195,32 @@
     </div>
 </div>
 
-<div class="modal hide fade" id="remove-shadow-ban-modal">
+<div class="modal hide fade" id="this-operation-will-reload-page-modal">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">&times;</a>
-        <h3><i class="icon-ban-circle"></i> {% trans "Are you really sure?" %}</h3>
+        <h3><i class="icon-warning-sign"></i> {% trans "Warning!" %}</h3>
     </div>
     <div class="modal-body">
         <p>
+            {% blocktrans trimmed %}This operation will reload the current page.{% endblocktrans %}
+            {% blocktrans trimmed %}If you have any unsaved information in a form, it will be lost.{% endblocktrans %}
+        </p>
+
+        <p>
             {% blocktrans trimmed %}
-                You will remove your shadow-ban on this user, and their comments, messages, etc, will appear again on
-                your content.
+                You can also dismiss this window, and your operation will be applied at the next page navigation.
             {% endblocktrans %}
         </p>
     </div>
     <div class="modal-footer">
-        <form action="{% url 'profile_remove_shadow_ban' %}" method="post">
-            <input type="hidden" name="userPk" id="userPk" value="" />
-            <input type="hidden" name="next" id="next" value="{{ request.path }}" />
-            <button class="btn btn-secondary btn-block-mobile" data-dismiss="modal">{% trans "Cancel" %}</button>
-            <button type="submit" class="btn btn-primary btn-block-mobile {% button_loading_class %}">
-                {% trans 'Continue' %}
-                {% button_loading_indicator %}
-            </button>
+        <button class="btn btn-secondary btn-block-mobile" data-dismiss="modal">{% trans "Cancel" %}</button>
+        <button onclick="
+                        $(this).attr('disabled', 'disabled').addClass('btn-disabled running');
+                        setTimeout(function () {location.reload(); }, 500)"
+                class="btn btn-primary btn-block-mobile {% button_loading_class %}">
+            {% trans 'Continue' %}
+            {% button_loading_indicator %}
+        </button>
         </form>
     </div>
 </div>

@@ -16,7 +16,7 @@ body.full {
         text-shadow: none;
 
         &.btn-primary {
-          color: white;
+          color: $white;
           background-color: $link-color;
 
           &:hover {

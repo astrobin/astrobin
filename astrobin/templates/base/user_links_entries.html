@@ -69,6 +69,19 @@
     </a>
 </li>
 
+<li>
+    <a href="#" class="toggle-high-contrast-theme">
+        <i class="icon-adjust"></i>
+
+        {% use_high_contrast_theme as use_high_contrast_theme %}
+        {% if use_high_contrast_theme %}
+            {% trans "Disable high contrast theme" %}
+        {% else %}
+            {% trans "Enable high contrast theme" %}
+        {% endif %}
+    </a>
+</li>
+
 <li class="divider"></li>
 
 <li>

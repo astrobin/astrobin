@@ -3,251 +3,282 @@
 @import "astrobin-mobile";
 @import "astrobin-large";
 
-body {
-  a {
-    border-bottom: 1px dotted $grey-4;
+a {
+  border-bottom: 1px dotted $grey-4;
+}
+
+.btn {
+  background-color: $grey-7;
+  background-image: none;
+  border: 1px solid $grey-6;
+  color: $grey-2;
+  box-shadow: none;
+  text-shadow: none;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    background-color: $grey-8;
+    color: $grey-1;
   }
 
-  .btn {
-    background-color: $grey-7;
-    background-image: none;
-    border: 1px solid $grey-6;
-    color: $grey-2;
-    box-shadow: none;
-    text-shadow: none;
-
-    &:hover,
-    &:focus,
-    &:active,
-    &.active {
-      background-color: $grey-8;
-      color: $grey-1;
-    }
-
-    &.disabled,
-    &[disabled] {
-      background-color: $grey-5;
-    }
-
-    .caret {
-      border-top-color: $grey-2;
-      border-bottom-color: $grey-2;
-    }
+  &.disabled,
+  &[disabled] {
+    background-color: $grey-5;
   }
 
-  .btn-primary {
-    background-color: $grey-1;
-    background-image: none;
-    border: 1px solid $grey-7;
+  .caret {
+    border-top-color: $grey-2;
+    border-bottom-color: $grey-2;
+  }
+}
+
+.btn-primary {
+  background-color: $grey-1;
+  background-image: none;
+  border: 1px solid $grey-7;
+  color: $grey-9;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    background-color: $white;
     color: $grey-9;
+  }
 
-    &:hover,
-    &:focus,
-    &:active,
-    &.active {
-      background-color: $white;
+  &.disabled,
+  &[disabled] {
+    background-color: $grey-4;
+  }
+
+  .caret {
+    border-top-color: $grey-9;
+    border-bottom-color: $grey-9;
+  }
+}
+
+.btn-danger {
+  color: $black !important;
+  background: $grey-2 !important;
+  text-shadow: none !important;
+
+  &:hover,
+  &:active {
+    background: $grey-1 !important;
+  }
+}
+
+.btn-group.open .btn-primary.dropdown-toggle {
+  background: $grey-2;
+}
+
+.astrobin-container .subtitle .icon {
+  color: $grey-2;
+}
+
+#notifications-count {
+  background: $white;
+  color: $black;
+  text-shadow: none;
+}
+
+.dropdown-menu > li > a {
+  border: 0;
+
+  &.danger {
+    color: $black !important;
+  }
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-submenu:hover > a,
+.dropdown-submenu:focus > a,
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+  color: $grey-1 !important;
+  background-color: $grey-9;
+  background-image: -moz-linear-gradient(top, $grey-9, $black);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from($grey-9), to($black));
+  background-image: -webkit-linear-gradient(top, $grey-9, $black);
+  background-image: -o-linear-gradient(top, $grey-9, $black);
+  background-image: linear-gradient(to bottom, $grey-9, $black);
+
+  strong {
+    background-color: inherit;
+  }
+}
+
+.nav-pills {
+  > .active {
+    > a,
+    > a:hover,
+    > a:focus {
+      background-color: $grey-1;
       color: $grey-9;
     }
-
-    &.disabled,
-    &[disabled] {
-      background-color: $grey-4;
-    }
-
-    .caret {
-      border-top-color: $grey-9;
-      border-bottom-color: $grey-9;
-    }
   }
 
-  .btn-group.open .btn-primary.dropdown-toggle {
-    background: $grey-2;
-  }
-
-  .astrobin-container .subtitle .icon {
-    color: $grey-2;
-  }
-
-  #notifications-count {
-    background: $white;
-    color: $black;
-    text-shadow: none;
-  }
-
-  .dropdown-menu > li > a {
+  a {
     border: 0;
 
-    &.danger {
-      color: $black !important;
-    }
-  }
-
-  .dropdown-menu > li > a:hover,
-  .dropdown-menu > li > a:focus,
-  .dropdown-submenu:hover > a,
-  .dropdown-submenu:focus > a,
-  .dropdown-menu > .active > a,
-  .dropdown-menu > .active > a:hover,
-  .dropdown-menu > .active > a:focus {
-    color: $grey-1 !important;
-    background-color: $grey-9;
-    background-image: -moz-linear-gradient(top, $grey-9, $black);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from($grey-9), to($black));
-    background-image: -webkit-linear-gradient(top, $grey-9, $black);
-    background-image: -o-linear-gradient(top, $grey-9, $black);
-    background-image: linear-gradient(to bottom, $grey-9, $black);
-
-    strong {
-      background-color: inherit;
-    }
-  }
-
-  .nav-pills {
-    > .active {
-      > a,
-      > a:hover,
-      > a:focus {
-        background-color: $grey-1;
-        color: $grey-9;
-      }
-    }
-
-    a {
-      border: 0;
-
-      &:hover,
-      &:focus {
-        background-color: $grey-1;
-        color: $grey-9;
-      }
-    }
-  }
-
-  .navbar {
-    .brand {
-      border: 0;
-    }
-
-    .nav > li > a {
-      border: 0;
-      text-shadow: 0 1px 0 $black;
-    }
-  }
-
-  #navbar-user-scores {
-    color: $grey-8;
-
-    span {
-      border-bottom-color: $grey-8;
-    }
-  }
-
-  #donate-header-button {
-    background-color: $grey-1 !important;
-    background-image: none !important;
-    color: $grey-9 !important;
-  }
-
-  .subnav {
-    background: $black;
-    border-color: $grey-8;
-
-    a {
-      border: 0;
-    }
-
-    > .nav {
-      > li > a:hover {
-        background: $grey-7;
-      }
-
-      .open .dropdown-toggle,
-      .open .dropdown-toggle:hover {
-        background: $grey-7;
-      }
-    }
-
-    .image-navigation {
-      i {
-        color: $white;
-      }
-
-      &.disabled i {
-        color: $grey-6;
-      }
-    }
-
-    .group-info {
-      background-color: $grey-7;
-
-      a {
-        .icon-inactive {
-          color: $grey-4;
-        }
-      }
-    }
-  }
-
-  .breadcrumb > li:last-of-type {
-    background-color: $white;
-    color: $black;
-    text-shadow: none;
-  }
-
-  .post {
-    .post-related .btn-primary {
+    &:hover,
+    &:focus {
+      background-color: $grey-1;
       color: $grey-9;
-      text-shadow: none;
+    }
+  }
+}
 
-      &:hover {
-        color: $grey-9;
-        background: $grey-3;
+.navbar {
+  .brand {
+    border: 0;
+  }
+
+  .nav > li > a {
+    border: 0;
+    text-shadow: 0 1px 0 $black;
+  }
+}
+
+#navbar-user-scores {
+  color: $grey-8;
+
+  span {
+    border-bottom-color: $grey-8;
+  }
+}
+
+#donate-header-button {
+  background-color: $grey-1 !important;
+  background-image: none !important;
+  color: $grey-9 !important;
+}
+
+.subnav {
+  background: $black;
+  border-color: $grey-8;
+
+  a {
+    border: 0;
+  }
+
+  > .nav {
+    > li > a:hover {
+      background: $grey-7;
+    }
+
+    .open .dropdown-toggle,
+    .open .dropdown-toggle:hover {
+      background: $grey-7;
+    }
+  }
+
+  .image-navigation {
+    i {
+      color: $white;
+    }
+
+    &.disabled i {
+      color: $grey-6;
+    }
+  }
+
+  .group-info {
+    background-color: $grey-7;
+
+    a {
+      .icon-inactive {
+        color: $grey-4;
       }
     }
   }
+}
 
-  .help-block,
-  .rich-content-help {
-    color: $grey-4;
-  }
+.breadcrumb > li:last-of-type {
+  background-color: $white;
+  color: $black;
+  text-shadow: none;
+}
 
-  .profile-details {
-    a {
-      border: 0;
-    }
-  }
-
-  .alert-warning {
-    color: $grey-8;
-
-    a:not(.btn) {
-      color: $grey-7;
-    }
-  }
-
-  .astrobin-username {
-    &.astrobin-image-moderator, &.astrobin-iotd-staff, &.astrobin-superuser {
-      border: 0;
-      background-color: transparent;
-    }
-  }
-
-  .cke_button_icon {
-    filter: grayscale(100%) brightness(250%);
-  }
-
-  ul.token-input-list li.token-input-token {
-    color: $black;
+.post {
+  .post-related .btn-primary {
+    color: $grey-9;
     text-shadow: none;
 
-    .token-input-delete-token {
-      color: $black;
+    &:hover {
+      color: $grey-9;
+      background: $grey-3;
     }
   }
+}
 
-  .forums {
-    .forum-name a {
-      border: 0;
+.help-block,
+.rich-content-help {
+  color: $grey-4;
+}
+
+.profile-details {
+  a {
+    border: 0;
+  }
+}
+
+.alert-warning {
+  color: $grey-8;
+
+  a:not(.btn) {
+    color: $grey-7;
+  }
+}
+
+.astrobin-username {
+  &.astrobin-image-moderator, &.astrobin-iotd-staff, &.astrobin-superuser {
+    border: 0;
+    background-color: transparent;
+  }
+}
+
+.cke_button_icon {
+  filter: grayscale(100%) brightness(250%);
+}
+
+.cke_dialog_footer_buttons a.cke_dialog_ui_button span {
+  color: $black !important;
+  text-shadow: none;
+}
+
+ul.token-input-list li.token-input-token {
+  color: $black;
+  text-shadow: none;
+
+  .token-input-delete-token {
+    color: $black;
+  }
+}
+
+.forums {
+  .forum-name a {
+    border: 0;
+  }
+}
+
+.multiselect__tag,
+.multiselect__option--highlight {
+  background-color: $black !important;
+}
+
+
+body.full {
+  .nav.buttons > li {
+    .btn {
+      &.btn-primary {
+        color: $black !important;
+        background-color: $link-color !important;
+      }
     }
   }
 }
