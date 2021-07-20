@@ -1,11 +1,14 @@
 from datetime import datetime, timedelta
 
 from braces.views import JsonRequestResponseMixin
+from django.utils.decorators import method_decorator
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 
 from common.services import AppRedirectionService
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class ToggleUseHighContrastThemeCookie(JsonRequestResponseMixin, View):
     def post(self, request, *args, **kwargs):
         cookie_name = "astrobin_use_high_contrast_theme"
