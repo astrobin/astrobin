@@ -148,7 +148,7 @@
                 {% endif %}
             {% endwith %}
 
-            $(document.body).bind("mouseup", function (e) {
+            $(document.body).bind("mouseup touchend", function (e) {
                 setTimeout(function () {
                     var selection = astrobin_common.get_selected_text()
 
