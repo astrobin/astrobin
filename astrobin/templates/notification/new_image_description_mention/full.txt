@@ -1,5 +1,11 @@
 {% load i18n %}
 
 {% blocktrans trimmed %}
-    {{user}} mentioned you in an image description: {{url}}
+    {{user}} mentioned you in an image description.
 {% endblocktrans %}
+
+{% if image.title %}
+    {{ image.title }}
+{% endif %}
+
+{{ url }}
