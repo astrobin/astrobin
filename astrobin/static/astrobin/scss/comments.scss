@@ -178,15 +178,11 @@
       font-size: 0.85em;
     }
 
-    .btn {
-      margin-top: $spacer-large;
-    }
-
     .links {
       padding: $spacer-small 0 $spacer-xlarge 0;
       border-bottom: 1px dashed #4C4C4C;
 
-      a {
+      a:not(.btn) {
         text-transform: lowercase;
         margin-right: $spacer-medium;
         color: grey;
