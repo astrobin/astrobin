@@ -1546,13 +1546,17 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   text-align: left;
   cursor: default;
   margin: 2px;
+  background-color: $grey-1 !important;
 
   .labels {
     float: left;
     padding-right: 8px;
-    border-right: 1px solid white;
+    border-right: 1px solid $grey-2;
 
-    .make {
+    .make,
+    .name,
+    .alias {
+      color: $grey-8;
     }
 
     .name {
@@ -1562,7 +1566,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     .alias {
       font-size: 85%;
       font-style: italic;
-      color: #555;
     }
   }
 
@@ -1570,16 +1573,20 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     float: right;
     width: 16px;
     padding: 0 0 0 $spacer-medium;
-    border-left: 1px solid $grey-2;
     border-top: 0;
+
+    a {
+      color: $grey-8;
+      border-bottom: 0;
+    }
   }
 }
 
 .btn-gear.incomplete {
   .labels {
-    color: $link-color;
-    border-left: 12px solid $link-color;
-    padding-left: 4px;
+    color: $red;
+    border-left: $spacer-small solid $red;
+    padding-left: $spacer-small;
   }
 }
 
