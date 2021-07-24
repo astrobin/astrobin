@@ -61,7 +61,7 @@
             </form>
         {{else}}
             <a href="#"
-               class="uncollapse add-top-level label label-important"
+               class="uncollapse add-top-level btn btn-primary"
                {{action "uncollapse" target="view"}}>
 {% endverbatim %}
                {% trans "Add a comment" %}
@@ -230,7 +230,7 @@
                         {{/if}}
 
                         {{#if view.userIsSuperuser}}
-                            <a href="#" class="label label-important" {{action "reply" target="view"}}>
+                            <a href="#" class="btn btn-mini btn-primary" {{action "reply" target="view"}}>
                                 <i class="icon-reply"></i>
 {% endverbatim %}
                                 {% trans "Reply" %}
@@ -238,7 +238,7 @@
                             </a>
                         {{/if}}
                     {{else}}
-                        <a href="#" class="label label-important" {{action "reply" target="view"}}>
+                        <a href="#" class="btn btn-mini btn-primary" {{action "reply" target="view"}}>
                             <i class="icon-reply"></i>
 {% endverbatim %}
                             {% trans "Reply" %}
@@ -247,7 +247,7 @@
 
                         {{#unless view.node.liked}}
                             <a href="#"
-                               class="label label-important comment-like"
+                               class="btn btn-mini btn-primary comment-like"
                                {{bindAttr class="view.node.liking:liking"}}
                                {{action "like" target="view"}}>
                                 <i class="icon-thumbs-up"></i>
@@ -257,7 +257,7 @@
                             </a>
                         {{else}}
                             <a href="#"
-                               class="label comment-unlike"
+                               class="btn btn-mini comment-unlike"
                                {{bindAttr class="view.node.unliking:unliking"}}
                                {{action "unlike" target="view"}}>
 {% endverbatim %}

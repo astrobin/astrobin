@@ -32,6 +32,7 @@
                 <td><a href="mailto:{{object.new_email}}">{{object.new_email}}</a></td>
                 <td>
                     <a href="{% url 'change_email_delete' object.pk %}" class="btn btn-danger">
+                        <i class="icon-exclamation-sign"></i>
                         {% trans "Delete and start new request" %}
                     </a>
                 </td>

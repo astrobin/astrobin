@@ -831,3 +831,13 @@ def forum_latest_topics(context, cnt=5, user=None):
     qs = qs.distinct().select_related()
 
     return qs.order_by('-updated', '-id')[:cnt]
+
+
+@register.simple_tag(takes_context=True)
+def use_high_contrast_theme(context):
+    if 'request' not in context:
+        return False
+
+    request = context.get('request')
+    cookie = request.COOKIES.get('astrobin_use_high_contrast_theme')
+    return cookie is not None

@@ -38,7 +38,10 @@
                 </button>
 
                 <a class="btn btn-danger btn-block-mobile"
-                   href="{% url 'image_edit_acquisition_reset' image.get_id %}">{% trans "Remove data" %}</a>
+                   href="{% url 'image_edit_acquisition_reset' image.get_id %}">
+                    <i class="icon-exclamation-sign"></i>
+                    {% trans "Remove data" %}
+                </a>
 
                 <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">{% trans "Cancel" %}</a>
             </div>
@@ -91,6 +94,7 @@
 
                         <a class="btn btn-block-mobile btn-danger"
                            href="{% url 'image_edit_acquisition_reset' image.get_id %}">
+                            <i class="icon-exclamation-sign"></i>
                             {% trans "Remove data" %}
                         </a>
 
@@ -121,6 +125,7 @@
 
                         <a class="btn btn-danger btn-block-mobile"
                            href="{% url 'image_edit_acquisition_reset' image.get_id %}">
+                            <i class="icon-exclamation-sign"></i>
                             {% trans "Remove data" %}
                         </a>
 
