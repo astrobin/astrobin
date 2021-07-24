@@ -300,6 +300,10 @@ th.forum-name {
     [class^="icon-"] {
       margin-right: $spacer-small;
     }
+
+    &[disabled] {
+      cursor: not-allowed;
+    }
   }
 
   .btn-primary {

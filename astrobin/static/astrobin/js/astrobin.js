@@ -880,6 +880,14 @@ astrobin_common = {
         return url;
     },
 
+    get_selected_text: function () {
+        if (document.selection) {
+            return document.selection.createRange().text;
+        } else {
+            return window.getSelection().toString();
+        }
+    },
+
     get_indexes: function () {
         $.ajax({
             url: '/api/v2/common/userprofiles/current/',

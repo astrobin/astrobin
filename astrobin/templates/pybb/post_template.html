@@ -88,10 +88,17 @@
             <div class="post-related">
                 {% if user|pybb_may_create_post:post.topic %}
                     <a href="{% url 'pybb:add_post' topic.id %}?quote_id={{ post.id }}"
-                       class="btn btn-mini bb-quote-link no-page-loader">
+                       class="btn btn-mini bb-quote-link no-page-loader {% button_loading_class %}"
+                       rel="tooltip"
+                       title="{% trans "Quote this entire post in your reply." %}">
                         <i class="icon-comment"></i> {% trans "quote" %}
+                        {% button_loading_indicator %}
                     </a>
-                    <a href="#" class="btn btn-mini bb-quote-selected-link">
+                    <a href="#"
+                       class="btn btn-mini bb-quote-selected-link"
+                       disabled="disabled"
+                       rel="tooltip"
+                       title="{% trans "You must select some text first." %}">
                         <i class="icon-quote-right"></i> {% trans "quote selected" %}
                     </a>
                 {% endif %}
