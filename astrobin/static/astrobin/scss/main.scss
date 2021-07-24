@@ -43,6 +43,10 @@ abbr[title] {
 
 a {
   color: $link-color;
+
+  strong {
+    color: $link-color;
+  }
 }
 
 a:hover,
