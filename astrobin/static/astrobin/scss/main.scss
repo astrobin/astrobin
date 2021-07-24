@@ -2070,14 +2070,14 @@ form.avatar-change label.control-label {
 
     h1 {
       font-size: 20px !important;
-      color: lighten($gold, 30%);
+      color: $text-on-gold;
       text-shadow: 1px 1px 1px rgba(0, 0, 0, .4);
       margin: 0;
       padding: 5px 10px;
       border-bottom: none;
 
       .date {
-        color: #fff;
+        color: $strong-text-on-gold;
       }
 
       .chosen-by {
@@ -2088,7 +2088,7 @@ form.avatar-change label.control-label {
 
       .info {
         float: right;
-        color: $strong-text-color;
+        color: $strong-text-on-gold;
       }
     }
 
