@@ -621,6 +621,7 @@ def get_other_languages():
         'ru',
         'sq',
         'tr',
+        'zh-hant',
     )
 
 
@@ -648,6 +649,7 @@ def get_language_name(language_code):
         'sq': 'Shqipe',
         'tr': 'Türkçe',
         'zh-hans': '中文 (简体)',
+        'zh-hant': '中文 (繁體)',
     }
 
     try:
@@ -680,6 +682,7 @@ def get_language_code_display(language_code):
         'sq': 'SQ',
         'tr': 'TR',
         'zh-hans': 'ZH (CN)',
+        'zh-hant': 'ZH (TW/HK)',
     }
 
     try:
