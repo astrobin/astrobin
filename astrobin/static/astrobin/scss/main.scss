@@ -3491,7 +3491,7 @@ pre {
       text-shadow: 1px 1px 1px black;
 
       &.empty {
-        background: url('../images/collection-frame-empty.png');
+        background-image: url('../images/collection-frame-empty.png');
       }
 
       > a {
