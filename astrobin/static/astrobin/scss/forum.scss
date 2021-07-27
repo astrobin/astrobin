@@ -1,5 +1,3 @@
-@import 'variables';
-
 @keyframes highlighted {
   from {
     background-color: rgba(255, 255, 255, 0.4);
@@ -302,6 +300,10 @@ th.forum-name {
     [class^="icon-"] {
       margin-right: $spacer-small;
     }
+
+    &[disabled] {
+      cursor: not-allowed;
+    }
   }
 
   .btn-primary {
@@ -317,6 +319,7 @@ th.forum-name {
   .toggleproperty-add-remove {
     width: auto !important;
     margin: 0 2px 0 0 !important;
+    display: inline !important;
 
     .btn {
       width: auto;

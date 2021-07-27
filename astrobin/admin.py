@@ -17,20 +17,25 @@ from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 
 
 class ImageAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'hash',
+        'title',
+        'user',
+    )
+
     fields = (
+        'hash',
         'title',
         'description',
-        'imaging_telescopes',
-        'guiding_telescopes',
-        'mounts',
-        'imaging_cameras',
-        'guiding_cameras',
-        'focal_reducers',
-        'software',
-        'filters',
-        'accessories',
-        'user',
+        'description_bbcode',
         'license',
+    )
+
+    search_fields = (
+        'hash',
+        'title',
+        'user__username',
     )
 
 

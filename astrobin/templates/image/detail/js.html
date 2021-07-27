@@ -4,6 +4,8 @@
 {% load i18n %}
 {% load tags %}
 {% load static %}
+{% load astrobin_apps_platesolving_tags %}
+
 
 {% ifnotequal request.user image.user %}
     <script src="{% static 'hitcount/jquery.postcsrf.js' %}"></script>
@@ -57,6 +59,20 @@ $(document).ready(function() {
         if (window.attemptPlatesolving !== undefined) {
             window.attemptPlatesolving();
         }
+
+        {% if instance_to_platesolve.solution|is_advanced_success_status %}
+            $(document).ready(function () {
+                new AstroBinPlatesolvingMouseMove(
+                    '{{ instance_to_platesolve.solution.advanced_ra_matrix }}'.split(',').map(parseFloat),
+                    '{{ instance_to_platesolve.solution.advanced_dec_matrix }}'.split(',').map(parseFloat),
+                    '{{ instance_to_platesolve.solution.advanced_matrix_rect }}'.split(',').map(parseFloat),
+                    parseFloat('{{ instance_to_platesolve.solution.advanced_matrix_delta }}'),
+                    {{ instance_to_platesolve | thumbnail_width:'hd' }},
+                    {{ instance_to_platesolve | thumbnail_height:'hd' }},
+                    {% thumbnail_scale image.w 'hd' 'regular' %}
+                );
+            });
+        {% endif %}
 
         $(".loading-correct-image-size").remove();
     }

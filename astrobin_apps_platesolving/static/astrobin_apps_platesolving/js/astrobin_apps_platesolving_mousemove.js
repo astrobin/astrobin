@@ -1,12 +1,20 @@
 (function (win) {
     function PlatesolvingMouseMove(raMatrix, decMatrix, matrixRect, matrixDelta, solvedSizeX, solvedSizeY, scale) {
-
         var self = this;
 
-        self.$image = $('.show-ra-dec-coordinates');
-        self.$tooltip = $('#ra-dec-coordinates');
-        self.$xRuler = $('#x-ruler');
-        self.$yRuler = $('#y-ruler');
+        // On detail view, there probably are two versions of the image (one for full width view, one for the narrower
+        // view, and only one is shown at a time.
+        var pickFirst = true;
+
+        self.$image = $('.show-ra-dec-coordinates').first();
+        if (self.$image.outerWidth() === 0) {
+            self.$image = $('.show-ra-dec-coordinates').last();
+            pickFirst = false;
+
+        }
+        self.$tooltip = pickFirst ? $('#ra-dec-coordinates').first() : $('#ra-dec-coordinates').last();
+        self.$xRuler = pickFirst ? $('#x-ruler').first() : $('#x-ruler').last();
+        self.$yRuler = pickFirst ? $('#y-ruler').first() : $('#y-ruler').last();
 
         self.enableCall = true;
 

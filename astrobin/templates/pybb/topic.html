@@ -147,6 +147,24 @@
                     }
                 {% endif %}
             {% endwith %}
+
+            $(document.body).bind("mouseup touchend", function (e) {
+                setTimeout(function () {
+                    var selection = astrobin_common.get_selected_text()
+
+                    if (selection !== "") {
+                        $(".bb-quote-selected-link")
+                            .removeAttr("disabled")
+                            .attr("data-original-title", "{% trans "Quote the selected text in your reply" %}")
+                            .tooltip();
+                    } else {
+                        $(".bb-quote-selected-link")
+                            .attr("disabled", "disabled")
+                            .attr("data-original-title", "{% trans "You must select some text first." %}")
+                            .tooltip();
+                    }
+                }, 50);
+            });
         });
     </script>
 {% endblock %}

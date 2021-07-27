@@ -5,3 +5,4 @@ from .mark_corrupted_images_banner_as_seen import MarkCorruptedImagesBannerAsSee
 from .mark_forum_usage_modal_as_seen import MarkForumUsageModalAsSeen
 from .plate_solution_overlay_on_full_disabled import PlateSolutionOverlayOnFullDisabled
 from .restore_deleted_images import RestoreDeletedImages
+from .toggle_use_high_contrast_theme_cookie import ToggleUseHighContrastThemeCookie

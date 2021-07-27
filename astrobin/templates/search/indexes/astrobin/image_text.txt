@@ -1,7 +1,13 @@
 {{object.user.username}}
 {{object.user.userprofile.real_name}}
 {{object.title}}
-{{object.description}}
+
+{% if object.description_bbcode %}
+    {{object.description_bbcode}}
+{% else %}
+    {{object.description}}
+{% endif %}
+
 {{object.get_remote_source}}
 
 {% for i in object.locations.all %}

@@ -1,15 +1,24 @@
 {% load i18n %}
+{% load bbcode_tags %}
 {% load common_tags %}
 
+{% if image.description_bbcode or image.description %}
+    <div class="image-description row-fluid">
+        <div class="span12">
+            <div class="subtle-container">
+                <div class="header">
+                    <h4>
+                        <i class="icon-align-left"></i> {% trans "Description" %}
+                    </h4>
+                </div>
 
-{% if image.description %}
-<div class="image-description row-fluid">
-    <div class="span12">
-        <div class="subtle-container">
-            <div class="header"><h4><i class="icon-align-left"></i> {% trans "Description" %}</h4></div>
-            {{image.description|strip_html|safe|linebreaks}}
+                {% if image.description_bbcode %}
+                    {{ image.description_bbcode|bbcode|safe }}
+                {% else %}
+                    {{ image.description|strip_html|safe|linebreaks }}
+                {% endif %}
+            </div>
         </div>
     </div>
-</div>
 {% endif %}
 

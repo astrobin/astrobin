@@ -1,5 +1,3 @@
-@import "variables";
-
 .rich-content-help {
   margin-top: 0;
   color: #866158;
@@ -30,6 +28,11 @@
 .cke_dialog_contents {
   background: $grey-8 !important;
   color: $white !important;
+}
+
+.cke_button_icon {
+  width: 15px !important;
+  height: 15px !important;
 }
 
 .cke_source {
@@ -319,6 +322,7 @@ select.cke_dialog_ui_input_select {
   background-color: $grey-5 !important;
   color: $grey-1 !important;
   padding: 8px !important;
+  min-height: 20rem;
 
   a {
     color: $link-color !important;

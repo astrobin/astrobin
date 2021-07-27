@@ -5,6 +5,7 @@ import sys
 import time
 from datetime import date, timedelta
 
+import mock
 from django.conf import settings
 from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes.models import ContentType
@@ -283,7 +284,7 @@ class ImageTest(TestCase):
                 'acquisition_type': 'REGULAR',
                 'subject_type': SubjectType.OTHER,
                 'locations': [location.pk],
-                'description': "Image description",
+                'description_bbcode': "Image description",
                 'allow_comments': True
             },
             follow=True)
@@ -301,7 +302,7 @@ class ImageTest(TestCase):
                 'data_source': 'AMATEUR_HOSTING',
                 'subject_type': SubjectType.OTHER,
                 'locations': [location.pk],
-                'description': "Image description",
+                'description_bbcode': "Image description",
                 'allow_comments': True
             },
             follow=True)
@@ -318,7 +319,7 @@ class ImageTest(TestCase):
                 'data_source': 'OTHER',
                 'subject_type': SubjectType.OTHER,
                 'locations': [location.pk],
-                'description': "Image description",
+                'description_bbcode': "Image description",
                 'allow_comments': True
             },
             follow=True)
@@ -335,7 +336,7 @@ class ImageTest(TestCase):
         self.assertEqual(image.solar_system_main_subject, None)
         self.assertEqual(image.locations.count(), 1)
         self.assertEqual(image.locations.all().first().pk, location.pk)
-        self.assertEqual(image.description, "Image description")
+        self.assertEqual(image.description_bbcode, "Image description")
         self.assertEqual(image.allow_comments, True)
         self.user.userprofile.location_set.clear()
 
@@ -2047,7 +2048,7 @@ class ImageTest(TestCase):
                 'data_source': 'OTHER',
                 'subject_type': SubjectType.OTHER,
                 'locations': [x.pk for x in image.user.userprofile.location_set.all()],
-                'description': "Image description",
+                'description_bbcode': "Image description",
                 'allow_comments': True
             }
 
@@ -2095,7 +2096,7 @@ class ImageTest(TestCase):
         self.assertEqual(image.solar_system_main_subject, None)
         self.assertEqual(image.locations.count(), 1)
         self.assertEqual(image.locations.all().first().pk, image.user.userprofile.location_set.all().first().pk)
-        self.assertEqual(image.description, "Image description")
+        self.assertEqual(image.description_bbcode, "Image description")
         self.assertEqual(image.allow_comments, True)
 
         # Test that groups are updated
@@ -2190,7 +2191,7 @@ class ImageTest(TestCase):
             'data_source': 'OTHER',
             'subject_type': SubjectType.OTHER,
             'locations': [],
-            'description': "Image description",
+            'description_bbcode': "Image description",
             'allow_comments': True
         }
 
@@ -3874,3 +3875,142 @@ class ImageTest(TestCase):
         image = Generators.image()
 
         self.assertEqual(2, image.designated_iotd_reviewers.count())
+
+    @patch('astrobin.signals.push_notification')
+    def test_image_description_mention_notification_created_no_mentions(self, push_notification):
+        Generators.image()
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with(mock.ANY, mock.ANY, 'new_image_description_mention', mock.ANY)
+
+    @patch('astrobin.signals.push_notification')
+    def test_image_description_mention_notification_created_one_mention(self, push_notification):
+        user = Generators.user(username='foo')
+        image = Generators.image(description_bbcode='[url=https://www.astrobin.com/users/foo/]@Foo[/url]')
+
+        push_notification.assert_called_with([user], image.user, 'new_image_description_mention', mock.ANY)
+
+    @patch('astrobin.signals.push_notification')
+    def test_image_description_mention_notification_created_one_mention_image_owner(self, push_notification):
+        user = Generators.user(username='foo')
+        image = Generators.image(user=user, description_bbcode='[url=https://www.astrobin.com/users/foo/]@Foo[/url]')
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([user], image.user, 'new_image_description_mention', mock.ANY)
+
+    @patch('astrobin.signals.push_notification')
+    def test_image_description_mention_notification_created_two_mentions(self, push_notification):
+        user1 = Generators.user(username='foo')
+        user2 = Generators.user(username='bar')
+        image = Generators.image(
+            description_bbcode= \
+                '[url=https://www.astrobin.com/users/foo/]@Foo[/url]' +
+                '[url=https://www.astrobin.com/users/bar/]@Bar[/url]'
+        )
+
+        push_notification.assert_has_calls([
+            mock.call([user1], image.user, 'new_image_description_mention', mock.ANY),
+            mock.call([user2], image.user, 'new_image_description_mention', mock.ANY),
+        ], any_order=True)
+
+    @override_settings(CACHES={
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        }
+    })
+    @patch('astrobin.signals.push_notification')
+    def test_image_description_mention_notification_after_created_no_mentions(self, push_notification):
+        image = Generators.image()
+        image.description_bbcode = "test"
+        image.save()
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with(mock.ANY, mock.ANY, 'new_image_description_mention', mock.ANY)
+
+    @override_settings(CACHES={
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        }
+    })
+    @patch('astrobin.signals.push_notification')
+    def test_image_description_mention_notification_after_created_one_mention(self, push_notification):
+        user = Generators.user(username='foo')
+        image = Generators.image()
+        image.description_bbcode = '[url=https://www.astrobin.com/users/foo/]@Foo[/url]'
+        image.save()
+
+        push_notification.assert_called_with([user], image.user, 'new_image_description_mention', mock.ANY)
+
+    @override_settings(CACHES={
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        }
+    })
+    @patch('astrobin.signals.push_notification')
+    def test_image_description_mention_notification_after_created_one_mention(self, push_notification):
+        user = Generators.user(username='foo')
+        image = Generators.image(user=user)
+        image.description_bbcode = '[url=https://www.astrobin.com/users/foo/]@Foo[/url]'
+        image.save()
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([user], image.user, 'new_image_description_mention', mock.ANY)
+
+    @override_settings(CACHES={
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        }
+    })
+    @patch('astrobin.signals.push_notification')
+    def test_image_description_mention_notification_after_created_two_mentions(self, push_notification):
+        user1 = Generators.user(username='foo')
+        user2 = Generators.user(username='bar')
+        image = Generators.image()
+
+        push_notification.reset_mock()
+
+        image.description_bbcode = \
+            '[url=https://www.astrobin.com/users/foo/]@Foo[/url]' \
+            '[url=https://www.astrobin.com/users/bar/]@Bar[/url]'
+        image.save()
+
+        push_notification.assert_has_calls([
+            mock.call([user1], image.user, 'new_image_description_mention', mock.ANY),
+            mock.call([user2], image.user, 'new_image_description_mention', mock.ANY),
+        ], any_order=True)
+
+    @override_settings(CACHES={
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        }
+    })
+    @patch('astrobin.signals.push_notification')
+    def test_image_description_mention_notification_after_created_mention_added(self, push_notification):
+        Generators.user(username='foo')
+        user2 = Generators.user(username='bar')
+        image = Generators.image(description_bbcode='[url=https://www.astrobin.com/users/foo/]@Foo[/url]')
+
+        push_notification.reset_mock()
+
+        image.description_bbcode = \
+            '[url=https://www.astrobin.com/users/foo/]@Foo[/url]' \
+            '[url=https://www.astrobin.com/users/bar/]@Bar[/url]'
+        image.save()
+
+        push_notification.assert_has_calls([
+            mock.call([user2], image.user, 'new_image_description_mention', mock.ANY),
+        ])
+
+    def test_image_description_in_view(self):
+        image = Generators.image(description="Test description")
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "Test description")
+
+    def test_image_description_bbcode_in_view(self):
+        image = Generators.image(
+            description="Test HTML description",
+            description_bbcode="Test BBCode description"
+        )
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "Test BBCode description")
+        self.assertNotContains(response, "Test HTML description")

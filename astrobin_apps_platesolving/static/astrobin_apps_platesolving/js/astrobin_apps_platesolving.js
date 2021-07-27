@@ -400,8 +400,9 @@
             navigator.userAgent &&
             navigator.userAgent.indexOf('CriOS') === -1 &&
             navigator.userAgent.indexOf('FxiOS') === -1;
+        var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
-        if (isSafari) {
+        if (isSafari || isFirefox) {
             var contentDocument = document.getElementById("advanced-plate-solution-svg").contentDocument;
             contentDocument.querySelector("svg > g").removeAttribute("filter");
         }

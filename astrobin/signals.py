@@ -78,6 +78,10 @@ def image_pre_save(sender, instance, **kwargs):
         if not instance.is_wip and not instance.published:
             instance.published = datetime.datetime.now()
 
+        previous_mentions = MentionsService.get_mentions(image.description_bbcode)
+        current_mentions = MentionsService.get_mentions(instance.description_bbcode)
+        mentions = [item for item in current_mentions if item not in previous_mentions]
+        cache.set("image.%d.image_pre_save_mentions" % instance.pk, mentions, 2)
 
 pre_save.connect(image_pre_save, sender=Image)
 
@@ -107,6 +111,30 @@ def image_post_save(sender, instance, created, **kwargs):
                 'PREMIUM_MAX_IMAGES_FREE': settings.PREMIUM_MAX_IMAGES_FREE,
                 'url': reverse_url('image_detail', args=(instance.get_id(),))
             })
+
+        mentions = MentionsService.get_mentions(instance.description_bbcode)
+    else:
+        mentions = cache.get("image.%d.image_pre_save_mentions" % instance.pk, [])
+
+    for username in mentions:
+        user = get_object_or_None(User, username=username)
+        if not user:
+            try:
+                user = get_object_or_None(UserProfile, real_name=username)
+            except MultipleObjectsReturned:
+                user = None
+        if user and user != instance.user:
+            thumb = instance.thumbnail_raw('gallery', None, sync=True)
+            push_notification(
+                [user], instance.user, 'new_image_description_mention',
+                {
+                    'image': instance,
+                    'image_thumbnail': thumb.url if thumb else None,
+                    'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
+                    'user': instance.user.userprofile.get_display_name(),
+                    'user_url': settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user}),
+                }
+            )
 
     if not instance.uploader_in_progress:
         groups = instance.user.joined_group_set.filter(autosubmission=True)

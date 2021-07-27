@@ -404,7 +404,7 @@ class ImageDetailView(ImageDetailViewBase):
                 if a.number and a.duration:
                     key = ""
                     if a.filter is not None:
-                        key = "filter(%s)" % a.filter.get_name()
+                        key = "filter(%s)" % a.filter
                     if a.iso is not None:
                         key += '-ISO(%d)' % a.iso
                     if a.gain is not None:
@@ -562,15 +562,8 @@ class ImageDetailView(ImageDetailViewBase):
         image_next = None
         image_prev = None
 
-        nav_ctx = self.request.GET.get('nc')
-        if nav_ctx is None:
-            nav_ctx = self.request.session.get('nav_ctx')
-        if nav_ctx is None:
-            nav_ctx = 'user'
-
+        nav_ctx = self.request.GET.get('nc', 'user')
         nav_ctx_extra = self.request.GET.get('nce')
-        if nav_ctx_extra is None:
-            nav_ctx_extra = self.request.session.get('nav_ctx_extra')
 
         if not image.is_wip and image.published is not None:
             try:

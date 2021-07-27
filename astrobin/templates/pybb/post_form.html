@@ -60,30 +60,32 @@
                 )
             );
 
-            function getSelectedText() {
-                if (document.selection) {
-                    return document.selection.createRange().text;
-                } else {
-                    return window.getSelection().toString();
-                }
-            }
-
             $('.bb-quote-link').on('click', function (e) {
                 e.preventDefault();
+                var self = this;
                 var url = $(this).attr('href');
-                $.get(
-                    url,
-                    function (data) {
+                $(this).addClass("running");
+                $.ajax({
+                    url: url,
+                    timeout: 2000,
+                    success: function (data) {
                         var instance = CKEDITOR.instances[textarea.attr("id")];
 
                         if (instance.mode === 'source') {
                             window.alert("{% trans "Please first exit 'Source' mode to quote a message." %}");
                         } else {
                             instance.setData(instance.getData() + '\n' + data + '\n{% trans "*** Type your reply here ***" %}')
-                            window.location.hash = '#cke_id_body';
+                            $([document.documentElement, document.body]).animate({
+                                scrollTop: $("#cke_id_body").offset().top
+                            }, 750);
+                            $(self).removeClass("running");
                         }
+                    },
+                    error: function () {
+                        $(self).removeClass("running");
+                        alert("{% trans "Something went wrong, sorry! Please try again." %}");
                     }
-                );
+                });
             });
 
             $('.bb-quote-selected-link').on('click', function (e) {
@@ -91,7 +93,7 @@
                     return true;
                 }
                 e.preventDefault();
-                var selectedText = getSelectedText();
+                var selectedText = astrobin_common.get_selected_text();
                 if (selectedText !== '') {
                     var username = '';
                     var instance = CKEDITOR.instances[textarea.attr("id")];
@@ -105,7 +107,10 @@
                         }
                         instance.setData(
                             instance.getData() + '\n' + window.pybb.markup.quote(selectedText, username) + '\n{% trans "*** Type your reply here ***" %}');
-                        window.location.hash = '#cke_id_body';
+
+                        $([document.documentElement, document.body]).animate({
+                            scrollTop: $("#cke_id_body").offset().top
+                        }, 750);
                     }
                 }
             });

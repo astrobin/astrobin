@@ -69,7 +69,7 @@
         </div>
 
         {% cache 120 home_page_latest_from_forums request.user.pk LANGUAGE_CODE %}
-            {% pybb_get_latest_topics cnt=6 as topic_list %}
+            {% forum_latest_topics cnt=6 user=request.user as topic_list %}
             <table class="table table-striped topic-list index-recent-topics">
             <tbody>
                 {% for topic in topic_list|pybb_topic_unread:request.user %}

@@ -1,5 +1,3 @@
-@import "variables";
-
 .btn {
   padding: 8px 16px;
 
@@ -18,6 +16,35 @@
 }
 
 .btn-primary {
+  $lighter-link-color: lighten($link-color, 10%);
+  $darker-link-color: darken($lighter-link-color, 10%);
+
+  background-color: $link-color;
+  background-image: -moz-linear-gradient(top, $lighter-link-color, $darker-link-color);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from($lighter-link-color), to($darker-link-color));
+  background-image: -webkit-linear-gradient(top, $lighter-link-color, $darker-link-color);
+  background-image: -o-linear-gradient(top, $lighter-link-color, $darker-link-color);
+  background-image: linear-gradient(to bottom, $lighter-link-color, $darker-link-color);
+  background-repeat: repeat-x;
+  border-color: $darker-link-color;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: $darker-link-color;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  &.disabled,
+  &[disabled] {
+    background-color: $darker-link-color;
+    *background-color: darken($darker-link-color, 10%);
+  }
+
+  &:active,
+  &.active {
+    background-color: darken($darker-link-color, 5%) \9;
+  }
+
   strong {
     color: $white;
   }

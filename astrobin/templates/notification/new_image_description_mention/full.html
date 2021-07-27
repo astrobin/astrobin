@@ -1,0 +1,17 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    <a href="{{user_url}}">{{user}}</a> mentioned you in an image description.
+{% endblocktrans %}
+
+<br /><br />
+
+{% if image.title %}
+    <strong>{{ image.title }}</strong>
+{% endif %}
+
+<br /><br />
+
+<a href="{{ url }}">
+    <img src="{{ image_thumbnail }}" />
+</a>

@@ -80,6 +80,7 @@ astrobin_common = {
                 extraPlugins: '' +
                     'ajax,' +
                     'autocomplete,' +
+                    'autogrow,' +
                     'autolink,' +
                     'basicstyles,' +
                     'bbcode,' +
@@ -345,6 +346,9 @@ astrobin_common = {
                 case "private-message":
                     options['height'] = 300;
                     break;
+                case "image-description":
+                    options['height'] = 300;
+                    break;
                 default:
                     console.error("Unhandled CkEditor options context");
                     return {}
@@ -427,24 +431,24 @@ astrobin_common = {
         }
     },
 
+    get_cookie: function (name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    },
+
     init_ajax_csrf_token: function () {
         $(document).ajaxSend(function (event, xhr, settings) {
-            function getCookie(name) {
-                var cookieValue = null;
-                if (document.cookie && document.cookie != '') {
-                    var cookies = document.cookie.split(';');
-                    for (var i = 0; i < cookies.length; i++) {
-                        var cookie = jQuery.trim(cookies[i]);
-                        // Does this cookie string begin with the name we want?
-                        if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                            break;
-                        }
-                    }
-                }
-                return cookieValue;
-            }
-
             function sameOrigin(url) {
                 // url could be relative or scheme relative or absolute
                 var host = document.location.host; // host + port
@@ -452,8 +456,8 @@ astrobin_common = {
                 var sr_origin = '//' + host;
                 var origin = protocol + sr_origin;
                 // Allow absolute or scheme relative URLs to same origin
-                return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
-                    (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+                return (url === origin || url.slice(0, origin.length + 1) === origin + '/') ||
+                    (url === sr_origin || url.slice(0, sr_origin.length + 1) === sr_origin + '/') ||
                     // or any other URL that isn't scheme relative or absolute i.e relative.
                     !(/^(\/\/|http:|https:).*/.test(url));
             }
@@ -463,7 +467,7 @@ astrobin_common = {
             }
 
             if (!safeMethod(settings.type) && sameOrigin(settings.url)) {
-                xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                xhr.setRequestHeader("X-CSRFToken", astrobin_common.get_cookie('csrftoken'));
             }
         });
     },
@@ -664,7 +668,7 @@ astrobin_common = {
                 $pageLoader.css('opacity', 1);
             }
 
-            setTimeout(function() {
+            setTimeout(function () {
                 window.open(url, target);
             }, 10);
 
@@ -805,7 +809,7 @@ astrobin_common = {
                     var link = astrobin_common.add_or_update_url_param(links[0], "nid", id);
 
                     if (openInNewTab) {
-                        astrobin_common.mark_notification_as_read(id).then(function() {
+                        astrobin_common.mark_notification_as_read(id).then(function () {
                             go(link, openInNewTab);
                         });
                     } else {
@@ -876,6 +880,14 @@ astrobin_common = {
         return url;
     },
 
+    get_selected_text: function () {
+        if (document.selection) {
+            return document.selection.createRange().text;
+        } else {
+            return window.getSelection().toString();
+        }
+    },
+
     get_indexes: function () {
         $.ajax({
             url: '/api/v2/common/userprofiles/current/',
@@ -899,6 +911,24 @@ astrobin_common = {
                     $('#navbar-user-scores').show();
                 }
             }
+        });
+    },
+
+    init_toggle_high_contrast_theme: function () {
+        $(document).ready(function () {
+            $('.toggle-high-contrast-theme').on('click', function (event) {
+                event.preventDefault();
+
+                $.ajax({
+                    url: '/json-api/user/toggle-use-high-contrast-theme-cookie/',
+                    type: 'POST',
+                    dataType: 'json',
+                    timeout: 5000,
+                    success: function () {
+                        $('#this-operation-will-reload-page-modal').modal('show');
+                    }
+                });
+            });
         });
     },
 
@@ -946,6 +976,7 @@ astrobin_common = {
             }, 1500);
         }
 
+        astrobin_common.init_toggle_high_contrast_theme();
     }
 };
 
