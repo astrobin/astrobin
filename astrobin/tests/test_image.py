@@ -4014,3 +4014,22 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "Test BBCode description")
         self.assertNotContains(response, "Test HTML description")
+
+    def test_navigation_context_after_revision_redirect(self):
+        image = Generators.image()
+        revision = Generators.imageRevision(image=image, is_final=True)
+        collection = Generators.collection(user=image.user)
+        url_params = '?nc=collection&nce=%d' % collection.pk
+
+        response = self.client.get(
+            reverse('image_detail', kwargs={'id': image.get_id()}) + url_params,
+            follow=True
+        )
+
+        self.assertRedirects(
+            response,
+            reverse(
+                'image_detail',
+                kwargs={'id': image.get_id(), 'r': revision.label}
+            ) + url_params
+        )

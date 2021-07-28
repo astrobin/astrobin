@@ -268,8 +268,10 @@ class ImageDetailView(ImageDetailViewBase):
                     url = reverse_lazy(
                         'image_detail',
                         args=(image.get_id(), final[0].label,))
-                    if 'ctx' in request.GET:
-                        url += '?ctx=%s' % request.GET.get('ctx')
+                    if 'nc' in request.GET:
+                        url += '?nc=%s' % request.GET.get('nc')
+                        if 'nce' in request.GET:
+                            url += '&nce=%s' % request.GET.get('nce')
                     return redirect(url)
 
         return super(ImageDetailView, self).dispatch(request, *args, **kwargs)
@@ -788,8 +790,10 @@ class ImageFullView(ImageDetailView):
                     url = reverse_lazy(
                         'image_full',
                         args=(image.get_id(), final[0].label,))
-                    if 'ctx' in request.GET:
-                        url += '?ctx=%s' % request.GET.get('ctx')
+                    if 'nc' in request.GET:
+                        url += '?nc=%s' % request.GET.get('nc')
+                        if 'nce' in request.GET:
+                            url += '&nce=%s' % request.GET.get('nce')
                     return redirect(url)
 
             try:
