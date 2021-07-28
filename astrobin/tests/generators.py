@@ -6,7 +6,7 @@ from django.contrib.auth.models import User, Group
 from pybb.models import Post, Category, Forum, Topic
 from subscription.models import Subscription, UserSubscription
 
-from astrobin.models import Image, ImageRevision, Telescope, Mount
+from astrobin.models import Image, ImageRevision, Telescope, Mount, Collection
 from toggleproperties.models import ToggleProperty
 
 
@@ -154,3 +154,10 @@ class Generators:
     def like(target, **kwargs):
         return ToggleProperty.objects.create_toggleproperty(
             'like', target, kwargs.pop('user', Generators.user()))
+
+    @staticmethod
+    def collection(**kwargs):
+        return Collection.objects.create(
+            user=kwargs.pop('user', Generators.user()),
+            name=kwargs.pop('name', Generators.randomString()),
+        )
