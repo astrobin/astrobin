@@ -3,7 +3,7 @@
 
 from django.contrib import admin
 
-from astrobin_apps_equipment.models import Sensor, Camera
+from astrobin_apps_equipment.models import Sensor, Camera, Telescope
 from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
@@ -60,9 +60,18 @@ class CameraAdmin(admin.ModelAdmin):
         'created',
     )
 
+
+class TelescopeAdmin(admin.ModelAdmin):
+    list_display = (
+        'brand',
+        'name',
+        'created',
+    )
+
 admin.site.register(EquipmentBrand, EquipmentBrandAdmin)
 admin.site.register(EquipmentRetailer, EquipmentRetailerAdmin)
 admin.site.register(EquipmentBrandListing, EquipmentBrandListingAdmin)
 admin.site.register(EquipmentItemListing, EquipmentItemListingAdmin)
 admin.site.register(Sensor, SensorAdmin)
 admin.site.register(Camera, CameraAdmin)
+admin.site.register(Telescope, TelescopeAdmin)

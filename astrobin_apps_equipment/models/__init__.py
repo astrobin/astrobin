@@ -5,3 +5,4 @@ from .equipment_item_listing import EquipmentItemListing
 from .equipment_item import EquipmentItem
 from .sensor import Sensor
 from .camera import Camera
+from .telescope import Telescope
