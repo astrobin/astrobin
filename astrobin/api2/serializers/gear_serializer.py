@@ -10,4 +10,9 @@ class GearSerializer(serializers.ModelSerializer):
             'pk',
             'make',
             'name',
+            'migration_flag',
+            'migration_flag_moderator',
+            'migration_flag_timestamp',
+            'migration_content_type',
+            'migration_object_id',
         )
