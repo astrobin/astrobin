@@ -18,6 +18,9 @@ class MigratableItemMixin:
     def set_migration(self, request, pk):
         obj = self.get_object()  # type: Gear
 
+        if obj.migration_flag is not None:
+            return Response(status=409)
+
         migrationFlag = request.data.get('migrationFlag')
         itemType = request.data.get('itemType')
         itemId = request.data.get('itemId')

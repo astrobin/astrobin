@@ -278,7 +278,7 @@ class Gear(models.Model):
         null=True,
         blank=True,
         choices=(
-            ('WRONG_TYPE', 'This item is the wrong time'),
+            ('WRONG_TYPE', 'This item is the wrong type'),
             ('MULTIPLE_ITEMS', 'This item collates multiple objects'),
             ('DIY', 'This item is a DIY object'),
             ('MIGRATE', 'This item is ready for migration')
