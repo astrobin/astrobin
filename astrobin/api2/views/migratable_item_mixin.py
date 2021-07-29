@@ -4,7 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from astrobin.models import Gear
-from astrobin_apps_equipment.models import Camera
+from astrobin_apps_equipment.models import Camera, Telescope
 
 
 class MigratableItemMixin:
@@ -35,6 +35,8 @@ class MigratableItemMixin:
 
             if itemType == 'CAMERA':
                 item = Camera.objects.get(pk=itemId)
+            elif itemType == 'TELESCOPE':
+                item = Telescope.objects.get(pk=itemId)
             else:
                 return HttpResponseBadRequest('Bad item type')
 
