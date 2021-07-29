@@ -48,8 +48,6 @@ class EquipmentItem(SafeDeleteModel):
 
     image = models.ImageField(
         upload_to=image_upload_path,
-        null=True,
-        blank=True,
     )
 
     def __unicode__(self):
