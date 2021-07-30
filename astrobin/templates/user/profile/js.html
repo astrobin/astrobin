@@ -17,14 +17,16 @@ $(document).ready(function() {
         })
     });
 
-    if (astrobin_common.utils.isTouchDevice() && window.innerWidth >= 375) {
-        $('#show-gallery-mouse-hovers input').bootstrapToggle('off');
-        $('#show-gallery-mouse-hovers .toggle').css('height', '18px');
-        $('#show-gallery-mouse-hovers').show();
+    {% ifequal request.GET.view None %}
+        if (astrobin_common.utils.isTouchDevice() && window.innerWidth >= 375) {
+            $('#show-gallery-mouse-hovers input').bootstrapToggle('off');
+            $('#show-gallery-mouse-hovers .toggle').css('height', '18px');
+            $('#show-gallery-mouse-hovers').show();
 
-        $('#show-gallery-mouse-hovers input').change(function () {
-            $('.astrobin-thumbnail figcaption').css('opacity', $(this).prop('checked') ? 1 : '');
-        });
-    }
+            $('#show-gallery-mouse-hovers input').change(function () {
+                $('.astrobin-thumbnail figcaption').css('opacity', $(this).prop('checked') ? 1 : '');
+            });
+        }
+    {% endifequal %}
 });
 </script>
