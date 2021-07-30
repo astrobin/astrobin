@@ -75,7 +75,7 @@
                             </td>
                             <td>
                                 {% if item.status == "READY" and item.zip_file %}
-                                    <a href="{{ item.zip_file.url }}">
+                                    <a href="{{ item.zip_file.url }}" class="no-page-loader">
                                         {% private_abbr %} {% trans "Download" %}
                                     </a>
                                 {% endif %}

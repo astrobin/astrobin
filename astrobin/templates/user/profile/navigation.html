@@ -289,13 +289,15 @@
             {% endifequal %}
         </li>
 
-        <li class="pull-right">
-            <div class="checkbox hide" id="show-gallery-mouse-hovers">
-                <label>
-                    {% trans "Thumbnail overlays" %}
-                    <input data-toggle="toggle" data-size="mini" type="checkbox" />
-                </label>
-            </div>
-        </li>
+        {% ifequal request.GET.view None %}
+            <li class="pull-right">
+                <div class="checkbox hide" id="show-gallery-mouse-hovers">
+                    <label>
+                        {% trans "Thumbnail overlays" %}
+                        <input data-toggle="toggle" data-size="mini" type="checkbox" />
+                    </label>
+                </div>
+            </li>
+        {% endifequal %}
     </ul>
 </div>
