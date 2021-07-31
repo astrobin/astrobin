@@ -22,6 +22,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='equipmentbrand',
             name='website',
-            field=models.URLField(blank=True, null=True, unique=True),
+            field=models.URLField(unique=True),
         ),
     ]
