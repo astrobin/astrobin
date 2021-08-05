@@ -1,6 +1,7 @@
+import mock
 from django.contrib.auth.models import User, Group
 from django.urls import reverse
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from mock import patch
 from pybb.forms import PostForm
 from pybb.models import Post, Topic, Forum, Category
@@ -211,3 +212,136 @@ class ForumTest(TestCase):
         self.assertEqual(1, Topic.objects.filter(id=topic1.id).count())
         self.assertEqual(1, Topic.objects.filter(id=topic2.id).count())
         self.assertEqual(0, UserProfile.objects.filter(user=self.user).count())
+
+    @override_settings(CACHES={
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        }
+    })
+    @patch("astrobin.signals.MentionsService.get_mentions")
+    @patch("astrobin.signals.push_notification")
+    def test_save_new_notifications(self, push_notification, get_mentions):
+        mentioned = Generators.user()
+
+        get_mentions.return_value = [mentioned]
+
+        post = Generators.forum_post()
+
+        push_notification.assert_has_calls([
+            mock.call([mentioned], post.user, 'new_forum_post_mention', mock.ANY),
+        ], any_order=True)
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with(mock.ANY, post.user, 'new_forum_reply', mock.ANY)
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([post.user], None, 'forum_post_approved', mock.ANY)
+
+    @override_settings(CACHES={
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        }
+    })
+    @patch("astrobin.signals.MentionsService.get_mentions")
+    @patch("astrobin.signals.push_notification")
+    def test_save_existing_notifications(self, push_notification, get_mentions):
+        mentioned = Generators.user()
+
+        get_mentions.return_value = [mentioned]
+
+        post = Generators.forum_post()
+
+        push_notification.reset_mock()
+        get_mentions.reset_mock()
+
+        post.body = "foo"
+        post.save()
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([mentioned], post.user, 'new_forum_post_mention', mock.ANY)
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with(mock.ANY, post.user, 'new_forum_reply', mock.ANY)
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([post.user], None, 'forum_post_approved', mock.ANY)
+
+    @override_settings(CACHES={
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        }
+    })
+    @patch("astrobin.signals.MentionsService.get_mentions")
+    @patch("astrobin.signals.push_notification")
+    def test_save_new_on_moderation_notifications(self, push_notification, get_mentions):
+        mentioned = Generators.user()
+
+        get_mentions.return_value = [mentioned]
+
+        post = Generators.forum_post(on_moderation=True)
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([mentioned], post.user, 'new_forum_post_mention', mock.ANY)
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with(mock.ANY, post.user, 'new_forum_reply', mock.ANY)
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([post.user], None, 'forum_post_approved', mock.ANY)
+
+    @override_settings(CACHES={
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        }
+    })
+    @patch("astrobin.signals.MentionsService.get_mentions")
+    @patch("astrobin.signals.push_notification")
+    def test_save_existing_on_moderation_notifications(self, push_notification, get_mentions):
+        mentioned = Generators.user()
+
+        get_mentions.return_value = [mentioned]
+
+        post = Generators.forum_post(on_moderation=True)
+
+        push_notification.reset_mock()
+        get_mentions.reset_mock()
+
+        post.body = "foo"
+        post.save()
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([mentioned], post.user, 'new_forum_post_mention', mock.ANY)
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with(mock.ANY, post.user, 'new_forum_reply', mock.ANY)
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([post.user], None, 'forum_post_approved', mock.ANY)
+
+    @override_settings(CACHES={
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        }
+    })
+    @patch("astrobin.signals.MentionsService.get_mentions")
+    @patch("astrobin.signals.push_notification")
+    def test_save_existing_and_approve_notifications(self, push_notification, get_mentions):
+        mentioned = Generators.user()
+
+        get_mentions.return_value = [mentioned]
+
+        post = Generators.forum_post(on_moderation=True)
+
+        push_notification.reset_mock()
+        get_mentions.reset_mock()
+
+        post.on_moderation = False
+        post.save()
+
+        push_notification.assert_has_calls([
+            mock.call([mentioned], post.user, 'new_forum_post_mention', mock.ANY),
+            mock.call([post.user], None, 'forum_post_approved', mock.ANY),
+        ], any_order=True)
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with(mock.ANY, post.user, 'new_forum_reply', mock.ANY)

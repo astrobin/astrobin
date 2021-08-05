@@ -726,14 +726,17 @@ def forum_post_pre_save(sender, instance, **kwargs):
         try:
             previous_mentions = MentionsService.get_mentions(sender.objects.get(pk=instance.pk).body)
             current_mentions = MentionsService.get_mentions(instance.body)
-            mentions = [item for item in current_mentions if item not in previous_mentions]
+            if Post.objects.filter(pk=instance.pk, on_moderation=True).exists():
+                mentions = current_mentions
+            else:
+                mentions = [item for item in current_mentions if item not in previous_mentions]
         except sender.DoesNotExist:
             mentions = []
 
-        cache.set("user.%d.forum_post_pre_save_mentions" % instance.user.pk, mentions, 2)
+        cache.set("post.%d.forum_post_pre_save_mentions" % instance.pk, mentions, 2)
 
         if not instance.on_moderation and Post.objects.filter(pk=instance.pk, on_moderation=True).exists():
-            cache.set("user.%d.forum_post_pre_save_approved" % instance.user.pk, True, 2)
+            cache.set("post.%d.forum_post_pre_save_approved" % instance.pk, True, 2)
 
     for attribute in ['body', 'body_text', 'body_html']:
         for language in settings.LANGUAGES:
@@ -761,34 +764,58 @@ pre_save.connect(forum_post_pre_save, sender=Post)
 
 def forum_post_post_save(sender, instance, created, **kwargs):
     def notify_subscribers(mentions):
-        # type: (List[unicode]) -> None
-        push_notification(
-            list(instance.topic.subscribers.exclude(
-                pk__in=list(set(
-                    [instance.user.pk] +
-                    [x.pk for x in MentionsService.get_mentioned_users_with_notification_enabled(
-                        mentions, 'new_forum_post_mention')
-                     ])
-                ))
-            ),
-            instance.user,
-            'new_forum_reply',
-            {
-                'user': instance.user.userprofile.get_display_name(),
-                'user_url': settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user}),
-                'post_url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
-                'topic_url': build_notification_url(
-                    settings.BASE_URL + instance.topic.get_absolute_url(), instance.user),
-                'topic_name': instance.topic.name,
-                'unsubscribe_url': build_notification_url(
-                    settings.BASE_URL + reverse_url('pybb:delete_subscription', args=[instance.topic.id]), instance.user
-                )
-            }
+        # type: (List[str]) -> None
+        recipients = list(instance.topic.subscribers.exclude(
+            pk__in=list(set(
+                [instance.user.pk] +
+                [x.pk for x in MentionsService.get_mentioned_users_with_notification_enabled(
+                    mentions, 'new_forum_post_mention')
+                 ])
+            ))
         )
 
-    if created:
-        mentions = MentionsService.get_mentions(instance.body)
+        if recipients:
+            push_notification(
+                recipients,
+                instance.user,
+                'new_forum_reply',
+                {
+                    'user': instance.user.userprofile.get_display_name(),
+                    'user_url': settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user}),
+                    'post_url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
+                    'topic_url': build_notification_url(
+                        settings.BASE_URL + instance.topic.get_absolute_url(), instance.user),
+                    'topic_name': instance.topic.name,
+                    'unsubscribe_url': build_notification_url(
+                        settings.BASE_URL + reverse_url('pybb:delete_subscription', args=[instance.topic.id]), instance.user
+                    )
+                }
+            )
 
+    def notify_mentioned(mentions):
+        # type: (List[str]) -> None
+        for username in mentions:
+            user = get_object_or_None(User, username=username)
+            if user is None:
+                try:
+                    user = get_object_or_None(UserProfile, real_name=username)
+                except MultipleObjectsReturned:
+                    user = None
+            if user:
+                push_notification(
+                    [user],
+                    instance.user,
+                    'new_forum_post_mention',
+                    {
+                        'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
+                        'user': instance.user.userprofile.get_display_name(),
+                        'user_url': settings.BASE_URL + reverse_url(
+                            'user_page', kwargs={'username': instance.user}),
+                        'post': instance.topic.name,
+                    }
+                )
+
+    if created:
         if hasattr(instance.topic.forum, 'group'):
             instance.topic.forum.group.save()  # trigger date_updated update
 
@@ -796,8 +823,10 @@ def forum_post_post_save(sender, instance, created, **kwargs):
                 perms.may_subscribe_topic(instance.user, instance.topic):
             instance.topic.subscribers.add(instance.user)
 
+        mentions = MentionsService.get_mentions(instance.body)
         if not instance.on_moderation:
             notify_subscribers(mentions)
+            notify_mentioned(mentions)
         else:
             NotificationsService.email_superusers(
                 'New forum post needs moderation',
@@ -805,31 +834,15 @@ def forum_post_post_save(sender, instance, created, **kwargs):
             )
 
     else:
-        mentions = cache.get("user.%d.forum_post_pre_save_mentions" % instance.user.pk, [])
-
-        if cache.get("user.%d.forum_post_pre_save_approved" % instance.user.pk):
+        mentions = cache.get("post.%d.forum_post_pre_save_mentions" % instance.pk, [])
+        cache.delete("post.%d.forum_post_pre_save_mentions" % instance.pk)
+        if cache.get("post.%d.forum_post_pre_save_approved" % instance.pk):
             push_notification([instance.user], None, 'forum_post_approved', {
                 'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url())
             })
             notify_subscribers(mentions)
-
-    for username in mentions:
-        try:
-            user = User.objects.get(username=username)
-            push_notification(
-                [user],
-                instance.user,
-                'new_forum_post_mention',
-                {
-                    'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
-                    'user': instance.user.userprofile.get_display_name(),
-                    'user_url': settings.BASE_URL + reverse_url(
-                        'user_page', kwargs={'username': instance.user}),
-                    'post': instance.topic.name,
-                }
-            )
-        except User.DoesNotExist:
-            pass
+            notify_mentioned(mentions)
+            cache.delete("post.%d.forum_post_pre_save_approved" % instance.pk)
 
     cache_key = make_template_fragment_key(
         'home_page_latest_from_forums',

@@ -148,6 +148,7 @@ class Generators:
             topic=kwargs.pop('topic', Generators.forum_topic(user=user)),
             user=kwargs.pop('user', user),
             body=kwargs.pop('body', Generators.randomString(150)),
+            on_moderation=kwargs.pop('on_moderation', False),
         )
 
     @staticmethod
