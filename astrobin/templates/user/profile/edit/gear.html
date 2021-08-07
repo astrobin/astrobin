@@ -153,6 +153,7 @@
 
                         $form.find('.form-content').html(data['form']);
                         $form.find('.btn-primary').removeClass('disabled');
+                        $form.find('.btn-primary').removeAttr('disabled');
                         $form.find('.btn-primary').val("{% trans "Save" %}");
                         $form.find('input[name=gear_id]').val(id);
                         $form.find('.form-actions').removeClass('hidden');
@@ -160,6 +161,7 @@
                         $form.find('input, select').bind('change keyup', function(event) {
                             var $btn = $form.find('.btn-primary')
                             $btn.removeClass('disabled');
+                            $btn.removeAttr('disabled');
                             $btn.val("{% trans "Save" %}");
                         });
 
@@ -178,6 +180,7 @@
                             success: function(responseJson, statusText, xhr, $form) {
                                 var $btn = $form.find('.btn-primary')
                                 $btn.removeClass('disabled');
+                                $btn.removeAttr('disabled');
 
                                 if (responseJson['success']) {
                                     $btn.val("{% trans "Form saved. Thank you!" %}");
@@ -200,6 +203,7 @@
                                 } else {
                                     $form.find('.form-content').html(responseJson['form']);
                                     $btn.removeClass('disabled');
+                                    $btn.removeAttr('disabled');
                                     $btn.val("{% trans "Save" %}");
                                 }
 
@@ -207,6 +211,7 @@
                             error: function(responseText, statusText, xhr, $form) {
                                 var $btn = $form.find('.btn-primary')
                                 $btn.removeClass('disabled');
+                                $btn.removeAttr('disabled');
                                 $btn.val("{% trans "Save" %}");
                             }
                         };
@@ -236,6 +241,7 @@
                         $form.find('input, select').bind('change keyup', function(event) {
                             var $btn = $form.find('.btn-primary')
                             $btn.removeClass('disabled');
+                            $btn.removeAttr('disabled');
                             $btn.val("{% trans "Save" %}");
                         });
 
@@ -255,11 +261,12 @@
                             success: function(responseJson, statusText, xhr, $form) {
                                 var $btn = $form.find('.btn-primary')
                                 $btn.removeClass('disabled');
+                                $btn.removeAttr('disabled');
                                 $btn.val("{% trans "Form saved. Thank you!" %}");
 
                                 if (responseJson['success']) {
                                     var alias = $form.find('input[name=alias]').val();
-                                    if (alias != '')
+                                    if (alias !== '')
                                         $btn_gear.find('.alias').text('(' + alias + ')');
                                 } else {
                                     $form.find('.form-content').html(responseJson['form']);
@@ -268,6 +275,7 @@
                             error: function(responseText, statusText, xhr, $form) {
                                 var $btn = $form.find('.btn-primary')
                                 $btn.removeClass('disabled');
+                                $btn.removeAttr('disabled');
                                 $btn.val("{% trans "Save" %}");
                             }
                         };
@@ -299,6 +307,7 @@
 
                         $form.find('.form-content').html(data['form']);
                         $form.find('.btn-primary').removeClass('disabled');
+                        $form.find('.btn-primary').removeAttr('disabled');
                         $form.find('.btn-primary').val("{% trans "Save" %}");
                         $form.find('.form-actions').removeClass('hidden');
 
@@ -328,7 +337,7 @@
 
                         $name.focus(function(e) {
                             var make = $.trim($make.val());
-                            if (make != '') {
+                            if (make !== '') {
                                 $.ajax({
                                     url: '/gear/by-make/' + make + '/?klass=' + gear_type,
                                     dataType: 'json',
@@ -360,6 +369,7 @@
                             success: function(responseJson, statusText, xhr, $form) {
                                 var $btn = $form.find('input[name=save]')
                                 $btn.removeClass('disabled');
+                                $btn.removeAttr('disabled');
                                 $btn.val("{% trans "Save" %}");
 
                                 if (responseJson['success']) {
@@ -387,7 +397,7 @@
                                     $new_button.find('.name').text(responseJson['name']);
                                     $new_button.find('.alias').text('(' + responseJson['alias'] + ')');
 
-                                    if(responseJson['complete'] == false) {
+                                    if(responseJson['complete'] === false) {
                                         $new_button.addClass('incomplete');
                                     }
 
@@ -410,7 +420,7 @@
                                             '<input type="hidden" name="gear_id" value="' + responseJson.gear_id + '" />');
                                     }
 
-                                    if (responseJson.type == 'gear_type_missing') {
+                                    if (responseJson.type === 'gear_type_missing') {
                                         alert(responseJson.error);
                                     }
                                 }
@@ -419,6 +429,7 @@
                             error: function(responseText, statusText, xhr, $form) {
                                 var $btn = $form.find('input[name=save]')
                                 $btn.removeClass('disabled');
+                                $btn.removeAttr('disabled');
                                 $btn.val("{% trans "Save" %}");
                             }
                         };
