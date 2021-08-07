@@ -114,6 +114,14 @@
                 {% if request.user.is_authenticated %}
                     if (property['userId'] !== {{ request.user.pk }}) {
                         var button = t.content.querySelector('.follow-unfollow .btn');
+
+                        if (!button) {
+                            var buttonContainer = t.content.querySelector('.follow-unfollow');
+                            buttonContainer.innerHTML =
+                                '<a class="btn btn-mini btn-primary" href="#"><i class="icon-plus"></i></a>';
+                            button = t.content.querySelector('.follow-unfollow .btn');
+                        }
+
                         button.setAttribute('data-user', property['userId']);
 
                         if (property['following']) {
@@ -122,7 +130,10 @@
                             button.classList.remove('active');
                         }
                     } else {
-                        t.content.querySelector('.follow-unfollow .btn').remove();
+                        var button = t.content.querySelector('.follow-unfollow .btn');
+                        if (!!button) {
+                            button.remove();
+                        }
                     }
                 {% endif %}
 
