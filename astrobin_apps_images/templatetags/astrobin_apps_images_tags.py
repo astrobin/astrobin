@@ -98,7 +98,7 @@ def astrobin_image(context, image, alias, **kwargs):
     w = image_revision.w
     h = image_revision.h
 
-    if w == 0 or h == 0:
+    if w == 0 or h == 0 or w is None or h is None:
         try:
             from django.core.files.images import get_image_dimensions
             (w, h) = get_image_dimensions(image_revision.image_file.file)
