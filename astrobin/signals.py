@@ -263,8 +263,8 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
             if not user:
                 try:
                     profile = get_object_or_None(UserProfile, real_name=username)
-                if profile:
-                    user = profile.user
+                    if profile:
+                        user = profile.user
                 except MultipleObjectsReturned:
                     user = None
             if user:
