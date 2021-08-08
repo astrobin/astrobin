@@ -98,13 +98,19 @@ def astrobin_image(context, image, alias, **kwargs):
     w = image_revision.w
     h = image_revision.h
 
-    if w == 0 or h == 0:
+    if w == 0 or h == 0 or w is None or h is None:
         try:
             from django.core.files.images import get_image_dimensions
             (w, h) = get_image_dimensions(image_revision.image_file.file)
-            image_revision.w = w
-            image_revision.h = h
-            image_revision.save(keep_deleted=True)
+            if w and h:
+                image_revision.w = w
+                image_revision.h = h
+                image_revision.save(keep_deleted=True)
+            else:
+                logger.warning("astrobin_image tag: unable to get image dimensions for revision %d: %s" % (
+                    image_revision.pk))
+                response_dict['status'] = 'error'
+                response_dict['error_message'] = _("Data corruption. Please upload this image again. Sorry!")
         except (IOError, ValueError, DecompressionBombError) as e:
             w = size[0]
             h = size[1] if size[1] > 0 else w

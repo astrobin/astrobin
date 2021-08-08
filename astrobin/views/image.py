@@ -10,7 +10,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, MultipleObjectsReturned
 from django.core.files.images import get_image_dimensions
 from django.urls import reverse_lazy, reverse
 from django.db.models import Q
@@ -141,6 +141,9 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
         image = self.get_object()
 
         alias = kwargs.pop('alias')
+        if alias not in list(settings.THUMBNAIL_ALIASES[''].keys()):
+            raise Http404
+
         revision_label = kwargs.pop('r', None)
 
         force = request.GET.get('force')
@@ -176,7 +179,11 @@ class ImageRawThumbView(ImageDetailViewBase):
 
     def get(self, request, *args, **kwargs):
         image = self.get_object()
+
         alias = kwargs.pop('alias')
+        if alias not in list(settings.THUMBNAIL_ALIASES[''].keys()):
+            raise Http404
+
         revision_label = kwargs.pop('r', None)
 
         force = request.GET.get('force')
@@ -376,6 +383,8 @@ class ImageDetailView(ImageDetailViewBase):
             ssa = SolarSystem_Acquisition.objects.get(image=image)
         except SolarSystem_Acquisition.DoesNotExist:
             pass
+        except MultipleObjectsReturned:
+            ssa = SolarSystem_Acquisition.objects.filter(image=image).first()
 
         if deep_sky_acquisitions:
             image_type = 'deep_sky'
@@ -945,7 +954,7 @@ class ImageDeleteOtherVersionsView(LoginRequiredMixin, View):
             image.w = revision.w
             image.h = revision.h
             if revision.description:
-                image.description = image.description + '\n' + revision.description
+                image.description = (image.description or '') + '\n' + revision.description
             image_modified = True
 
             if revision.solution:
