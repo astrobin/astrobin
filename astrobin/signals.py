@@ -120,7 +120,9 @@ def image_post_save(sender, instance, created, **kwargs):
         user = get_object_or_None(User, username=username)
         if not user:
             try:
-                user = get_object_or_None(UserProfile, real_name=username)
+                profile = get_object_or_None(UserProfile, real_name=username)
+                if profile:
+                    user = profile.user
             except MultipleObjectsReturned:
                 user = None
         if user and user != instance.user:
@@ -256,7 +258,9 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
         user = get_object_or_None(User, username=username)
         if not user:
             try:
-                user = get_object_or_None(UserProfile, real_name=username)
+                profile = get_object_or_None(UserProfile, real_name=username)
+                if profile:
+                    user = profile.user
             except MultipleObjectsReturned:
                 user = None
         if user:
@@ -798,7 +802,9 @@ def forum_post_post_save(sender, instance, created, **kwargs):
             user = get_object_or_None(User, username=username)
             if user is None:
                 try:
-                    user = get_object_or_None(UserProfile, real_name=username)
+                    profile = get_object_or_None(UserProfile, real_name=username)
+                    if profile:
+                        user = profile.user
                 except MultipleObjectsReturned:
                     user = None
             if user:
