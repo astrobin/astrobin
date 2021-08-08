@@ -141,6 +141,9 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
         image = self.get_object()
 
         alias = kwargs.pop('alias')
+        if alias not in list(settings.THUMBNAIL_ALIASES[''].keys()):
+            raise Http404
+
         revision_label = kwargs.pop('r', None)
 
         force = request.GET.get('force')
@@ -176,7 +179,11 @@ class ImageRawThumbView(ImageDetailViewBase):
 
     def get(self, request, *args, **kwargs):
         image = self.get_object()
+
         alias = kwargs.pop('alias')
+        if alias not in list(settings.THUMBNAIL_ALIASES[''].keys()):
+            raise Http404
+
         revision_label = kwargs.pop('r', None)
 
         force = request.GET.get('force')
