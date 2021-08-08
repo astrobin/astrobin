@@ -1,16 +1,14 @@
-{% load i18n %}
-{% load static %}
+{% load i18n %}{% load static %}
 
 {% load avatar_tags %}
 
-{% load common_tags %}
-{% load nestedcomments_tags %}
+{% load common_tags %}{% load nestedcomments_tags %}
 
 
-<div id="nested-comments-path" data-value="{{request.path}}"></div>
-<div id="nested-comments-language-code" data-value="{{LANGUAGE_CODE}}"></div>
-<div id="nested-comments-user-id" data-value="{{request.user.id}}"></div>
-<div id="nested-comments-user-name" data-value="{{request.user.username}}"></div>
+<div id="nested-comments-path" data-value="{{ request.path }}"></div>
+<div id="nested-comments-language-code" data-value="{{ LANGUAGE_CODE }}"></div>
+<div id="nested-comments-user-id" data-value="{{ request.user.id }}"></div>
+<div id="nested-comments-user-name" data-value="{{ request.user.username }}"></div>
 <div id="nested-comments-user-is-authenticated" data-value="{{ request.user.is_authenticated }}"></div>
 <div id="nested-comments-user-is-superuser" data-value="{{ request.user.is_superuser }}"></div>
 <div id="nested-comments-comments-content-type-id" data-value="{% nestedcomments_content_type_id %}"></div>
@@ -19,7 +17,7 @@
     <div id="nested-comments-shadow-bans" data-value="{{ image.user.userprofile.shadow_bans.all|get_pks }}"></div>
 {% endif %}
 
-<div id="nested-comments-page-url" data-value="{{request.get_full_path}}"></div>
+<div id="nested-comments-page-url" data-value="{{ request.get_full_path }}"></div>
 <div id="nested-comments-loaderGif-url" data-value="{% static 'astrobin/images/ajax-loader.gif' %}"></div>
 <div id="nested-comments-editor-placeholder" data-value="{% trans 'Type your comment here...' %}"></div>
 
@@ -32,6 +30,9 @@
     {{outlet top-level}}
     {{outlet comments}}
 {% endverbatim %}
+
+
+
 </script>
 
 
@@ -73,12 +74,15 @@
 {% endverbatim %}
             {% url 'auth_login' as login_url %}
             {% blocktrans trimmed with signup_url="https://welcome.astrobin.com/pricing" %}
-                Please <a href="{{login_url}}">log in</a> or <a href="{{signup_url}}">sign up</a> to leave a comment.
+                Please <a href="{{ login_url }}">log in</a> or <a href="{{ signup_url }}">sign up</a> to leave a comment.
             {% endblocktrans %}
         </p>
 {% verbatim %}
     {{/if}}
 {% endverbatim %}
+
+
+
 </script>
 
 
@@ -100,6 +104,9 @@
         {{view NestedCommentsApp.LoaderView}}
     {{/if}}
 {% endverbatim %}
+
+
+
 </script>
 
 
@@ -120,9 +127,36 @@
         {{#if view.node.pending_moderation}}
             <div class="content pending-moderation">
                 <em>
+                    {{#if view.node.authorIsRequestingUser}}
 {% endverbatim %}
-                  {% trans "This comment is pending moderation and will be reviewed shortly." %}
+                    <p>
+                        {% blocktrans trimmed %}
+                            Your comment is pending moderation and should be reviewed shortly by the author or owner of
+                            the content object that you commented on. If they do not take action within 24 hours, an
+                            AstroBin moderator will take over and review your comment on their behalf.
+                        {% endblocktrans %}
+                    </p>
+
+                    <p>
+                        {% blocktrans trimmed %}
+                            This process is necessary to prevent spam on AstroBin.
+                        {% endblocktrans %}
+                    </p>
+
+                    <p>
+                        {% blocktrans trimmed %}
+                            Thank you for understanding!
+                        {% endblocktrans %}
+                    </p>
 {% verbatim %}
+                    {{else}}
+                        {{#if view.node.authorIsContentOwner}}
+                        {{else}}
+{% endverbatim %}
+                            {% trans "This comment is pending moderation and will be reviewed shortly." %}
+{% verbatim %}
+                        {{/fi}}
+                    {{/fi}}
                 </em>
             </div>
         {{else}}
@@ -288,6 +322,9 @@
         {{/if}}
     </div>
 {% endverbatim %}
+
+
+
 </script>
 
 
@@ -320,6 +357,9 @@
             {{view NestedCommentsApp.LoaderView}}
         {{/if}}
     {% endverbatim %}
+
+
+
 </script>
 
 <script type="text/x-handlebars" data-template-name="reply">
@@ -353,6 +393,9 @@
         </p>
     {{/if}}
 {% endverbatim %}
+
+
+
 </script>
 
 
@@ -360,11 +403,17 @@
 {% verbatim %}
     {{view.value}}
 {% endverbatim %}
+
+
+
 </script>
 
 
 <script type="text/x-handlebars" data-template-name="saveButton">
     {% trans "Submit" %}
+
+
+
 </script>
 
 
@@ -372,6 +421,9 @@
 {% verbatim %}
     <img alt="" {{bindAttr src="view.loaderUrl"}}/>
 {% endverbatim %}
+
+
+
 </script>
 
 

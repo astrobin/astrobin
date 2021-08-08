@@ -61,7 +61,7 @@ class SignalsTest(TestCase):
 
     @patch("astrobin.signals.MentionsService.get_mentions")
     @patch("astrobin.signals.CommentNotificationsService.send_notifications")
-    @patch("astrobin.signals.CommentNotificationsService.send_moderation_required_email")
+    @patch("astrobin.signals.CommentNotificationsService.send_moderation_required_email_to_superuser")
     def test_nested_comment_post_save_sends_moderation_required_email(
             self, send_moderation_required_email, send_notifications, get_mentions):
         comment = NestedCommentsGenerators.comment()

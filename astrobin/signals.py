@@ -239,36 +239,40 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
     if created:
         mentions = MentionsService.get_mentions(instance.text)
 
-        CommentNotificationsService(instance).send_notifications()
-
         if hasattr(instance.content_object, "updated"):
             # This will trigger the auto_now fields in the content_object
             # We do it only if created, because the content_object needs to
             # only be updated if the number of comments changes.
-            instance.content_object.save(keep_deleted=True)
+            save_kwargs = {}
+            if issubclass(type(instance.content_object), SafeDeleteModel):
+                save_kwargs['keep_deleted'] = True
+            instance.content_object.save(**save_kwargs)
 
         if instance.pending_moderation:
-            CommentNotificationsService.send_moderation_required_email()
+            CommentNotificationsService(instance).send_moderation_required_notification()
+        else:
+            CommentNotificationsService(instance).send_notifications()
     else:
         mentions = cache.get("user.%d.comment_pre_save_mentions" % instance.author.pk, [])
 
-    for username in mentions:
-        user = get_object_or_None(User, username=username)
-        if not user:
-            try:
-                user = get_object_or_None(UserProfile, real_name=username)
-            except MultipleObjectsReturned:
-                user = None
-        if user:
-            push_notification(
-                [user], instance.author, 'new_comment_mention',
-                {
-                    'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.author),
-                    'user': instance.author.userprofile.get_display_name(),
-                    'user_url': settings.BASE_URL + reverse_url(
-                        'user_page', kwargs={'username': instance.author}),
-                }
-            )
+    if not instance.pending_moderation:
+        for username in mentions:
+            user = get_object_or_None(User, username=username)
+            if not user:
+                try:
+                    user = get_object_or_None(UserProfile, real_name=username)
+                except MultipleObjectsReturned:
+                    user = None
+            if user:
+                push_notification(
+                    [user], instance.author, 'new_comment_mention',
+                    {
+                        'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.author),
+                        'user': instance.author.userprofile.get_display_name(),
+                        'user_url': settings.BASE_URL + reverse_url(
+                            'user_page', kwargs={'username': instance.author}),
+                    }
+                )
 
 
 post_save.connect(nested_comment_post_save, sender=NestedComment)

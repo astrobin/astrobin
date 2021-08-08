@@ -4,6 +4,7 @@ from mock import patch
 from notification.models import NoticeType, NoticeSetting
 
 from astrobin.tests.generators import Generators
+from nested_comments.services import CommentNotificationsService
 from nested_comments.tests.nested_comments_generators import NestedCommentsGenerators
 
 
@@ -384,3 +385,38 @@ class CommentNotificationServiceTest(TestCase):
             comment.author, verb='VERB_COMMENTED_IMAGE',
             action_object=comment,
             target=comment.content_object)
+
+    @patch("nested_comments.services.comment_notifications_service.push_notification")
+    def test_send_moderation_required_notification_non_pending_moderation(self, push_notification):
+        image = Generators.image()
+        comment = NestedCommentsGenerators.comment(target=image)
+
+        push_notification.reset_mock()
+
+        CommentNotificationsService(comment).send_moderation_required_notification()
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([image.user], None, 'new_image_comment_moderation', mock.ANY)
+
+    @patch("nested_comments.services.comment_notifications_service.push_notification")
+    def test_send_moderation_required_notification_non_image_target(self, push_notification):
+        post = Generators.forum_post()
+        comment = NestedCommentsGenerators.comment(target=post, pending_moderation=True)
+
+        push_notification.reset_mock()
+
+        CommentNotificationsService(comment).send_moderation_required_notification()
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([post.user], None, 'new_image_comment_moderation', mock.ANY)
+
+    @patch("nested_comments.services.comment_notifications_service.push_notification")
+    def test_send_moderation_required_notification_send_notification(self, push_notification):
+        image = Generators.image()
+        comment = NestedCommentsGenerators.comment(target=image, pending_moderation=True)
+
+        push_notification.reset_mock()
+
+        CommentNotificationsService(comment).send_moderation_required_notification()
+
+        push_notification.assert_called_with([image.user], None, 'new_image_comment_moderation', mock.ANY)
