@@ -945,7 +945,7 @@ class ImageDeleteOtherVersionsView(LoginRequiredMixin, View):
             image.w = revision.w
             image.h = revision.h
             if revision.description:
-                image.description = image.description + '\n' + revision.description
+                image.description = (image.description or '') + '\n' + revision.description
             image_modified = True
 
             if revision.solution:
