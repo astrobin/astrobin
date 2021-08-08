@@ -10,7 +10,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, MultipleObjectsReturned
 from django.core.files.images import get_image_dimensions
 from django.urls import reverse_lazy, reverse
 from django.db.models import Q
@@ -376,6 +376,8 @@ class ImageDetailView(ImageDetailViewBase):
             ssa = SolarSystem_Acquisition.objects.get(image=image)
         except SolarSystem_Acquisition.DoesNotExist:
             pass
+        except MultipleObjectsReturned:
+            ssa = SolarSystem_Acquisition.objects.filter(image=image).first()
 
         if deep_sky_acquisitions:
             image_type = 'deep_sky'
