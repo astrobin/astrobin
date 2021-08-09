@@ -44,6 +44,7 @@ def astrobin_image(context, image, alias, **kwargs):
     url_size = kwargs.get('url_size', 'regular')
     url_revision = kwargs.get('url_revision', revision)
     link = kwargs.get('link', True)
+    link_alias = kwargs.get('link_alias', alias)
     tooltip = kwargs.get('tooltip', True)
     nav_ctx = kwargs.get('nav_ctx', request.GET.get('nc', context.get('nav_ctx')))
     nav_ctx_extra = kwargs.get('nav_ctx_extra', request.GET.get('nce', context.get('nav_ctx_extra')))
@@ -61,7 +62,7 @@ def astrobin_image(context, image, alias, **kwargs):
     if alias == '':
         alias = 'gallery'
 
-    if alias in ('gallery_inverted', 'regular_inverted', 'hd_inverted', 'real_inverted'):
+    if link_alias in ('gallery_inverted', 'regular_inverted', 'hd_inverted', 'real_inverted'):
         mod = 'inverted'
     else:
         mod = None
