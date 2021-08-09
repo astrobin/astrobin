@@ -204,6 +204,10 @@ $(function() {
             return this.likes.length > 1;
         }.property('likes'),
 
+        isPendingModeration: function() {
+            return this.pending_moderation && !this.deleted;
+        }.property('pending_moderation', 'deleted'),
+
         // Functions
         init: function () {
             this._super();

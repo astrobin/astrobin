@@ -115,6 +115,10 @@
       &.pending-moderation {
         color: $grey-3;
         padding: $spacer-large 0 $spacer-xxxlarge 0;
+
+        p:not(:last-child) {
+          margin-bottom: $spacer-medium !important;
+        }
       }
 
       p {
