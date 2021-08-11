@@ -1,9 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import permissions
 from rest_framework import viewsets
 from rest_framework.decorators import action
-from rest_framework.exceptions import APIException, PermissionDenied
+from rest_framework.exceptions import APIException, PermissionDenied, ValidationError
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
@@ -33,6 +34,9 @@ class NestedCommentViewSet(viewsets.ModelViewSet):
         comment = get_object_or_404(self.get_queryset(), pk=pk)  # type: NestedComment
         content_type = comment.content_type
 
+        if not comment.pending_moderation:
+            raise ValidationError('Comment already moderated')
+
         try:
             target = content_type.get_object_for_this_type(pk=comment.object_id)
         except content_type.model_class().DoesNotExist:
@@ -48,7 +52,7 @@ class NestedCommentViewSet(viewsets.ModelViewSet):
                 moderator=request.user,
             )
         else:
-            raise APIException('Unsupported content object model')
+            raise ValidationError('Unsupported content object model')
 
         return Response(status=200)
 
@@ -56,6 +60,9 @@ class NestedCommentViewSet(viewsets.ModelViewSet):
     def reject(self, request, pk):
         comment = get_object_or_404(self.get_queryset(), pk=pk)  # type: NestedComment
         content_type = comment.content_type
+
+        if not comment.pending_moderation:
+            raise ValidationError('Comment already moderated')
 
         try:
             target = content_type.get_object_for_this_type(pk=comment.object_id)
@@ -73,6 +80,6 @@ class NestedCommentViewSet(viewsets.ModelViewSet):
                 moderator=request.user,
             )
         else:
-            raise APIException('Unsupported content object model')
+            raise ValidationError('Unsupported content object model')
 
         return Response(status=200)

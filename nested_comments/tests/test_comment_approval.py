@@ -1,13 +1,24 @@
 from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
 from mock import patch
+from notification.models import NoticeType, NoticeSetting
+from rest_framework.reverse import reverse
+from rest_framework.test import APIClient
 
 from astrobin.models import Image
 from astrobin.tests.generators import Generators
+from nested_comments.models import NestedComment
 from nested_comments.tests.nested_comments_generators import NestedCommentsGenerators
 
 
 class CommentApprovalTest(TestCase):
+    def setUp(self) -> None:
+        NoticeType.objects.create(
+            label='new_image_comment_moderation',
+            display='',
+            description='',
+            default=2)
+
     @patch("astrobin.models.UserProfile.get_scores")
     def test_mark_as_pending(self, get_scores):
         # Index:             NOT OK
@@ -148,3 +159,98 @@ class CommentApprovalTest(TestCase):
         )
 
         self.assertIsNone(comment.pending_moderation)
+
+    def test_approval_api_login_required(self):
+        client = APIClient()
+
+        image = Generators.image()
+        comment = NestedCommentsGenerators.comment(target=image, pending_moderation=True)
+
+        response = client.post(reverse('nested_comments:nestedcomments-approve', args=(comment.pk,)))
+        self.assertEqual(401, response.status_code)
+
+    def test_approval_api_not_owner(self):
+        client = APIClient()
+
+        image = Generators.image()
+        comment = NestedCommentsGenerators.comment(target=image, pending_moderation=True)
+
+        client.force_authenticate(user=comment.author)
+
+        response = client.post(reverse('nested_comments:nestedcomments-approve', args=(comment.pk,)))
+        self.assertEqual(403, response.status_code)
+
+    def test_approval_api_not_pending_moderation(self):
+        client = APIClient()
+
+        image = Generators.image()
+        comment = NestedCommentsGenerators.comment(target=image, pending_moderation=False)
+
+        client.force_authenticate(user=image.user)
+
+        response = client.post(reverse('nested_comments:nestedcomments-approve', args=(comment.pk,)))
+        self.assertEqual(400, response.status_code)
+
+    def test_approval_api_all_ok(self):
+        client = APIClient()
+
+        image = Generators.image()
+        comment = NestedCommentsGenerators.comment(target=image, pending_moderation=True)
+
+        client.force_authenticate(user=image.user)
+
+        response = client.post(reverse('nested_comments:nestedcomments-approve', args=(comment.pk,)))
+        self.assertEqual(200, response.status_code)
+
+        comment = NestedComment.objects.get(pk=comment.pk)
+
+        self.assertFalse(comment.pending_moderation)
+        self.assertEqual(image.user, comment.moderator)
+
+    def test_rejection_api_login_required(self):
+        client = APIClient()
+
+        image = Generators.image()
+        comment = NestedCommentsGenerators.comment(target=image, pending_moderation=True)
+
+        response = client.post(reverse('nested_comments:nestedcomments-reject', args=(comment.pk,)))
+        self.assertEqual(401, response.status_code)
+
+    def test_rejection_api_not_owner(self):
+        client = APIClient()
+
+        image = Generators.image()
+        comment = NestedCommentsGenerators.comment(target=image, pending_moderation=True)
+
+        client.force_authenticate(user=comment.author)
+
+        response = client.post(reverse('nested_comments:nestedcomments-reject', args=(comment.pk,)))
+        self.assertEqual(403, response.status_code)
+
+    def test_rejection_api_not_pending_moderation(self):
+        client = APIClient()
+
+        image = Generators.image()
+        comment = NestedCommentsGenerators.comment(target=image, pending_moderation=False)
+
+        client.force_authenticate(user=image.user)
+
+        response = client.post(reverse('nested_comments:nestedcomments-reject', args=(comment.pk,)))
+        self.assertEqual(400, response.status_code)
+
+    def test_rejection_api_all_ok(self):
+        client = APIClient()
+
+        image = Generators.image()
+        comment = NestedCommentsGenerators.comment(target=image, pending_moderation=True)
+
+        client.force_authenticate(user=image.user)
+
+        response = client.post(reverse('nested_comments:nestedcomments-reject', args=(comment.pk,)))
+        self.assertEqual(200, response.status_code)
+
+        comment = NestedComment.objects.get(pk=comment.pk)
+
+        self.assertFalse(comment.pending_moderation)
+        self.assertEqual(image.user, comment.moderator)
+        self.assertTrue(comment.deleted)
