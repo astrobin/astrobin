@@ -43,6 +43,23 @@ $(function() {
      * BASE VIEWS
      *******************************************************************/
 
+    nc_app.I18nView = Em.View.extend({
+        templateName: "i18n",
+        tagName: 'span',
+
+        translated: function() {
+            return window.astrobin_nestedcomments_i18n[this.value];
+        }.property('value')
+    });
+
+    nc_app.ContributionIndexAlertView = Em.View.extend({
+        templateName: "contribution-index-alert"
+    });
+
+    nc_app.RichContentEditorHelpView = Em.View.extend({
+        templateName: "rich-content-editor-help"
+    });
+
     // A view used to DRY the logic common to views with textareas (top
     // level, edit, reply).
     nc_app.TextareaView = Em.View.extend({
@@ -669,6 +686,18 @@ $(function() {
     nc_app.SingleCommentView = Em.View.extend({
         templateName: 'singleComment',
         classNames: ['comment']
+    });
+
+    nc_app.PendingModerationInfoForContentObjectOwnerView = Em.View.extend({
+        templateName: 'pending-moderation-info-for-content-object-owner'
+    });
+
+    nc_app.PendingModerationInfoForObjectOwnerView = Em.View.extend({
+        templateName: 'pending-moderation-info-for-object-owner'
+    });
+
+    nc_app.PendingModerationInfoForEveryoneElseView = Em.View.extend({
+        templateName: 'pending-moderation-info-for-everyone-else'
     });
 
     nc_app.SingleCommentRenderView = Em.View.extend({
