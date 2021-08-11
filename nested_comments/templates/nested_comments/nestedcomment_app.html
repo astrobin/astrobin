@@ -43,6 +43,8 @@
         likeVerb: "{% trans 'Like' context "Verb (imperative)" %}",
         unlikeVerb: "{% trans 'Unlike' context "Verb (imperative)" %}",
         replyVerb: "{% trans 'Reply' context "Verb (imperative)" %}",
+        approveVerb: "{% trans 'Approve' context "Verb (imperative)" %}",
+        rejectVerb: "{% trans 'Reject' context "Verb (imperative)" %}",
         loginOrSignUp: '{% trans 'Please <a href="{{ login_url }}">log in</a> or <a href="{{ signup_url }}">sign up</a> to leave a comment.' %}'
     };
 </script>
@@ -185,80 +187,99 @@
             {{/if}}
         </div>
 
-        <div class="links">
-            <a {{bindAttr href="view.node.url"}} {{action "link" target="view"}} class="no-page-loader">
-                <i class="icon-link"></i>
-                {{view NestedCommentsApp.I18nView value="link"}}
-            </a>
-
-            {{#if view.node.authorIsRequestingUser}}
-                {{#if view.node.deleted}}
-                    <a href="#" {{action "undelete" target="view"}}>
-                        {{view NestedCommentsApp.I18nView value="undelete"}}
+        {{#if view.node.isPendingModeration}}
+            {{#if view.node.authorIsContentObjectOwner}}
+                <div class="links">
+                    <a href="#"{{action "approve" target="view"}} class="btn btn-success btn-mini"
+                       {{bindAttr class="view.node.loading:loading"}}>
+                        <i class="icon-ok"></i>
+                        {{view NestedCommentsApp.I18nView value="approveVerb"}}
                     </a>
-                {{else}}
-                    <a href="#" {{action "delete_" target="view"}}>
-                        <i class="icon-trash"></i>
-                        {{view NestedCommentsApp.I18nView value="delete"}}
-                    </a>
-                {{/if}}
 
-                {{#if view.node.allowEditing}}
-                    {{#unless view.editing}}
-                        <i class="icon-pencil"></i>
-                        <a href="#" {{action "edit" target="view"}}>
-                            {{view NestedCommentsApp.I18nView value="edit"}}
+                    <a href="#" {{action "reject" target="view"}} class="btn btn-danger btn-mini"
+                       {{bindAttr class="view.node.loading:loading"}}>
+                        <i class="icon-remove"></i>
+                        {{view NestedCommentsApp.I18nView value="rejectVerb"}}
+                    </a>
+                </div>
+            {{else}}
+                Uh?
+            {{/if}}
+        {{else}}
+            <div class="links">
+                <a {{bindAttr href="view.node.url"}} {{action "link" target="view"}} class="no-page-loader">
+                    <i class="icon-link"></i>
+                    {{view NestedCommentsApp.I18nView value="link"}}
+                </a>
+
+                {{#if view.node.authorIsRequestingUser}}
+                    {{#if view.node.deleted}}
+                        <a href="#" {{action "undelete" target="view"}}>
+                            {{view NestedCommentsApp.I18nView value="undelete"}}
                         </a>
-                    {{/unless}}
-                {{/if}}
+                    {{else}}
+                        <a href="#" {{action "delete_" target="view"}}>
+                            <i class="icon-trash"></i>
+                            {{view NestedCommentsApp.I18nView value="delete"}}
+                        </a>
+                    {{/if}}
 
-                {{#if view.userIsSuperuser}}
+                    {{#if view.node.allowEditing}}
+                        {{#unless view.editing}}
+                            <i class="icon-pencil"></i>
+                            <a href="#" {{action "edit" target="view"}}>
+                                {{view NestedCommentsApp.I18nView value="edit"}}
+                            </a>
+                        {{/unless}}
+                    {{/if}}
+
+                    {{#if view.userIsSuperuser}}
+                        <a href="#" class="btn btn-mini btn-primary" {{action "reply" target="view"}}>
+                            <i class="icon-reply"></i>
+                            {{view NestedCommentsApp.I18nView value="replyVerb"}}
+                        </a>
+                    {{/if}}
+                {{else}}
                     <a href="#" class="btn btn-mini btn-primary" {{action "reply" target="view"}}>
                         <i class="icon-reply"></i>
                         {{view NestedCommentsApp.I18nView value="replyVerb"}}
                     </a>
+
+                    {{#unless view.node.liked}}
+                        <a href="#"
+                           class="btn btn-mini btn-primary comment-like"
+                           {{bindAttr class="view.node.liking:liking"}}
+                           {{action "like" target="view"}}>
+                            <i class="icon-thumbs-up"></i>
+                            {{view NestedCommentsApp.I18nView value="likeVerb"}}
+                        </a>
+                    {{else}}
+                        <a href="#"
+                           class="btn btn-mini comment-unlike"
+                           {{bindAttr class="view.node.unliking:unliking"}}
+                           {{action "unlike" target="view"}}>
+                            {{view NestedCommentsApp.I18nView value="unlikeVerb"}}
+                        </a>
+                    {{/unless}}
                 {{/if}}
-            {{else}}
-                <a href="#" class="btn btn-mini btn-primary" {{action "reply" target="view"}}>
-                    <i class="icon-reply"></i>
-                    {{view NestedCommentsApp.I18nView value="replyVerb"}}
-                </a>
-
-                {{#unless view.node.liked}}
-                    <a href="#"
-                       class="btn btn-mini btn-primary comment-like"
-                       {{bindAttr class="view.node.liking:liking"}}
-                       {{action "like" target="view"}}>
-                        <i class="icon-thumbs-up"></i>
-                        {{view NestedCommentsApp.I18nView value="likeVerb"}}
-                    </a>
-                {{else}}
-                    <a href="#"
-                       class="btn btn-mini comment-unlike"
-                       {{bindAttr class="view.node.unliking:unliking"}}
-                       {{action "unlike" target="view"}}>
-                        {{view NestedCommentsApp.I18nView value="unlikeVerb"}}
-                    </a>
-                {{/unless}}
-            {{/if}}
-        </div>
-
-        {{#if view.replying}}
-            <div class="reply">
-                {{view view.ReplyView parentBinding="view.node.comment"}}
             </div>
-        {{/if}}
 
-        {{#if view.node.shouldNotIndent}}
-            <div class="children no-indentation">
-        {{else}}
-            <div class="children">
-        {{/if}}
+            {{#if view.replying}}
+                <div class="reply">
+                    {{view view.ReplyView parentBinding="view.node.comment"}}
+                </div>
+            {{/if}}
 
-        {{#each view.node.children}}
-            {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
-        {{/each}}
-        </div>
+            {{#if view.node.shouldNotIndent}}
+                <div class="children no-indentation">
+            {{else}}
+                <div class="children">
+            {{/if}}
+
+            {{#each view.node.children}}
+                {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
+            {{/each}}
+        {{/if}}
     {{/unless}}
 {% endverbatim %}
 </script>
@@ -395,7 +416,7 @@
         {{/if}}
     {{else}}
         <p class="please-login">
-        {{view NestedCommentsApp.I18nView value="loginOrSignup"}}
+            {{view NestedCommentsApp.I18nView value="loginOrSignup"}}
         </p>
     {{/if}}
 {% endverbatim %}

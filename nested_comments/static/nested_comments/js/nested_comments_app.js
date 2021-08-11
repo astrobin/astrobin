@@ -48,7 +48,7 @@ $(function() {
         tagName: 'span',
 
         translated: function() {
-            return window.astrobin_nestedcomments_i18n[this.value];
+            return Em.String.htmlSafe(window.astrobin_nestedcomments_i18n[this.value]);
         }.property('value')
     });
 
@@ -225,7 +225,7 @@ $(function() {
 
         isPendingModeration: function() {
             return this.pending_moderation && !this.deleted;
-        }.property('pending_moderation', 'deleted'),
+        }.property('pending_moderation'),
 
         // Functions
         init: function () {
@@ -645,6 +645,41 @@ $(function() {
             });
         },
 
+        approve: function(comment) {
+            comment.set('loading', true);
+
+            $.ajax({
+                type: 'post',
+                url: nc_app.commentsApiUrl + comment.get('id') + '/approve/',
+                timeout: nc_app.ajaxTimeout,
+                success: function () {
+                    comment.set('loading', false);
+                    comment.set('pending_moderation', false);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    comment.set('loading', false);
+                }
+            });
+        },
+
+        reject: function (comment) {
+            comment.set('loading', true);
+
+            $.ajax({
+                type: 'post',
+                url: nc_app.commentsApiUrl + comment.get('id') + '/reject/',
+                timeout: nc_app.ajaxTimeout,
+                success: function () {
+                    comment.set('loading', false);
+                    comment.set('deleted', true);
+                    comment.set('pending_moderation', false);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    comment.set('loading', false);
+                }
+            });
+        },
+
         saveNewComment: function (comment) {
             var self = this,
                 data = self.dump(comment);
@@ -806,6 +841,14 @@ $(function() {
 
         unlike: function () {
             nc_app.get('router.commentsController').unlike(this.get('node'));
+        },
+
+        approve: function () {
+            nc_app.get('router.commentsController').approve(this.get('node'));
+        },
+
+        reject: function () {
+            nc_app.get('router.commentsController').reject(this.get('node'));
         },
 
         saveReply: function () {
