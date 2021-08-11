@@ -1,4 +1,5 @@
-{% load i18n %}{% load static %}
+{% load i18n %}
+{% load static %}
 
 {% load avatar_tags %}
 
@@ -340,7 +341,7 @@
 
 <script type="text/x-handlebars" data-template-name="singleComment">
 {% verbatim %}
-    {{#unless view.node.deleted}}
+    {{#if view.node.displayAvatar}}
         <div class="avatar visible-desktop">
             <a class="author" {{bindAttr href="view.node.author_url"}}>
                 <img
@@ -349,7 +350,14 @@
                     width="40" height="40" />
             </a>
         </div>
-    {{/unless}}
+    {{else}}
+        <div class="avatar visible-desktop">
+            <img src="https://cdn.astrobin.com/static/astrobin/images/astrobin-default-avatar.png?v=1"
+                 alt=""
+                 width="40"
+                 height="40" />
+        </div>
+    {{/if}}
 
     <div class="comment-container" {{ bindAttr id="view.node.cid"}}>
         {{#if view.node.isPendingModeration}}

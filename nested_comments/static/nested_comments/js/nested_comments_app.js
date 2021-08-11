@@ -223,9 +223,13 @@ $(function() {
             return this.likes.length > 1;
         }.property('likes'),
 
-        isPendingModeration: function() {
+        isPendingModeration: function () {
             return this.pending_moderation && !this.deleted;
-        }.property('pending_moderation'),
+        }.property('pending_moderation', 'deleted'),
+
+        displayAvatar: function () {
+            return !this.pending_moderation && !this.deleted;
+        }.property('pending_moderation', 'deleted'),
 
         // Functions
         init: function () {
