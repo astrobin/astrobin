@@ -203,8 +203,6 @@
                         {{view NestedCommentsApp.I18nView value="rejectVerb"}}
                     </a>
                 </div>
-            {{else}}
-                Uh?
             {{/if}}
         {{else}}
             <div class="links">
@@ -311,25 +309,27 @@
 
 
 <script type="text/x-handlebars" data-template-name="pending-moderation-info-for-comment-owner">
-    <p>
-        {% blocktrans trimmed %}
-            Your comment is pending moderation and should be reviewed shortly by the author or owner of
-            the content object that you commented on. If they do not take action within 24 hours, an
-            AstroBin moderator will take over and review your comment on their behalf.
-        {% endblocktrans %}
-    </p>
+    <div class="alert alert-info">
+        <p>
+            {% blocktrans trimmed %}
+                Your comment is pending moderation and should be reviewed shortly by the author or owner of
+                the content object that you commented on. If they do not take action within 24 hours, an
+                AstroBin moderator will take over and review your comment on their behalf.
+            {% endblocktrans %}
+        </p>
 
-    <p>
-        {% blocktrans trimmed %}
-            This process is necessary to prevent spam on AstroBin.
-        {% endblocktrans %}
-    </p>
+        <p>
+            {% blocktrans trimmed %}
+                This process is necessary to prevent spam on AstroBin.
+            {% endblocktrans %}
+        </p>
 
-    <p>
-        {% blocktrans trimmed %}
-            Thank you for understanding!
-        {% endblocktrans %}
-    </p>
+        <p>
+            {% blocktrans trimmed %}
+                Thank you for understanding!
+            {% endblocktrans %}
+        </p>
+    </div>
 </script>
 
 

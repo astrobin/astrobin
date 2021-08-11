@@ -727,8 +727,8 @@ $(function() {
         templateName: 'pending-moderation-info-for-content-object-owner'
     });
 
-    nc_app.PendingModerationInfoForObjectOwnerView = Em.View.extend({
-        templateName: 'pending-moderation-info-for-object-owner'
+    nc_app.PendingModerationInfoForCommentOwnerView = Em.View.extend({
+        templateName: 'pending-moderation-info-for-comment-owner'
     });
 
     nc_app.PendingModerationInfoForEveryoneElseView = Em.View.extend({
