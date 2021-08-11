@@ -30,9 +30,6 @@
     {{outlet top-level}}
     {{outlet comments}}
 {% endverbatim %}
-
-
-
 </script>
 
 
@@ -80,9 +77,6 @@
 {% verbatim %}
     {{/if}}
 {% endverbatim %}
-
-
-
 </script>
 
 
@@ -104,9 +98,171 @@
         {{view NestedCommentsApp.LoaderView}}
     {{/if}}
 {% endverbatim %}
+</script>
 
 
+<script type="text/x-handlebars" data-template-name="singleCommentRender">
+{% verbatim %}
+    <div class="meta">
+        {{#if view.node.deleted}}
+{% endverbatim %}
+            {% trans "(deleted)" %}
+{% verbatim %}
+        {{else}}
+            <a class="author" {{bindAttr href="view.node.author_url"}}>
+                {{view.node.author_username}}
+            </a>
+        {{/if}}
 
+        {{view NestedCommentsApp.TimeagoView valueBinding="view.node.created"}}
+
+        &middot;
+
+        {{#if view.node.hasNoLikes}}
+            {{ view.node.likesCount }}
+{% endverbatim %}
+            {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" %}
+{% verbatim %}
+        {{/if}}
+
+        {{#if view.node.hasOneLike}}
+            {{ view.node.likesCount }}
+{% endverbatim %}
+            {% trans "like" context "Noun, e.g. 'This element has 1 like'" %}
+{% verbatim %}
+        {{/if}}
+
+        {{#if view.node.hasManyLikes}}
+            {{ view.node.likesCount }}
+{% endverbatim %}
+            {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" %}
+{% verbatim %}
+        {{/if}}
+
+        {{#unless view.collapsed}}
+            <a href="#" class="collapse" {{action "collapse" target="view"}}>[-]</a>
+        {{else}}
+            <a href="#" class="collapse" {{action "uncollapse" target="view"}}>[+]</a>
+        {{/unless}}
+    </div>
+
+    {{#unless view.collapsed}}
+        <div class="converter" style="display: none">
+            {{view Ember.TextArea rows=6 valueBinding="view.node.text"}}
+        </div>
+
+        <div class="content">
+            {{#if view.node.deleted}}
+                <p>
+{% endverbatim %}
+                    {% trans "(deleted)" %}
+{% verbatim %}
+                </p>
+            {{else}}
+                {{#if view.editing}}
+                    {{view view.EditView commentBinding="view.node"}}
+                {{else}}
+                    {{# if view.node.ready}}
+                        {{{view.node.getHTML}}}
+                    {{else}}
+                        {{view NestedCommentsApp.LoaderView}}
+                    {{/if}}
+                {{/if}}
+            {{/if}}
+        </div>
+
+        <div class="links">
+            <a {{bindAttr href="view.node.url"}} {{action "link" target="view"}} class="no-page-loader">
+                <i class="icon-link"></i>
+{% endverbatim %}
+                {% trans "Link" %}
+{% verbatim %}
+            </a>
+
+            {{#if view.node.authorIsRequestingUser}}
+                {{#if view.node.deleted}}
+                    <a href="#" {{action "undelete" target="view"}}>
+{% endverbatim %}
+                        {% trans "Undelete" %}
+{% verbatim %}
+                    </a>
+                {{else}}
+                    <a href="#" {{action "delete_" target="view"}}>
+                        <i class="icon-trash"></i>
+{% endverbatim %}
+                        {% trans "Delete" %}
+{% verbatim %}
+                    </a>
+                {{/if}}
+
+                {{#if view.node.allowEditing}}
+                    {{#unless view.editing}}
+                        <i class="icon-pencil"></i>
+                        <a href="#" {{action "edit" target="view"}}>
+{% endverbatim %}
+                            {% trans "Edit" %}
+{% verbatim %}
+                        </a>
+                    {{/unless}}
+                {{/if}}
+
+                {{#if view.userIsSuperuser}}
+                    <a href="#" class="btn btn-mini btn-primary" {{action "reply" target="view"}}>
+                        <i class="icon-reply"></i>
+{% endverbatim %}
+                        {% trans "Reply" %}
+{% verbatim %}
+                    </a>
+                {{/if}}
+            {{else}}
+                <a href="#" class="btn btn-mini btn-primary" {{action "reply" target="view"}}>
+                    <i class="icon-reply"></i>
+{% endverbatim %}
+                    {% trans "Reply" %}
+{% verbatim %}
+                </a>
+
+                {{#unless view.node.liked}}
+                    <a href="#"
+                       class="btn btn-mini btn-primary comment-like"
+                       {{bindAttr class="view.node.liking:liking"}}
+                       {{action "like" target="view"}}>
+                        <i class="icon-thumbs-up"></i>
+{% endverbatim %}
+                        {% trans "Like" %}
+{% verbatim %}
+                    </a>
+                {{else}}
+                    <a href="#"
+                       class="btn btn-mini comment-unlike"
+                       {{bindAttr class="view.node.unliking:unliking"}}
+                       {{action "unlike" target="view"}}>
+{% endverbatim %}
+                        {% trans "Unlike" %}
+{% verbatim %}
+                    </a>
+                {{/unless}}
+            {{/if}}
+        </div>
+
+        {{#if view.replying}}
+            <div class="reply">
+                {{view view.ReplyView parentBinding="view.node.comment"}}
+            </div>
+        {{/if}}
+
+        {{#if view.node.shouldNotIndent}}
+            <div class="children no-indentation">
+        {{else}}
+            <div class="children">
+        {{/if}}
+
+        {{#each view.node.children}}
+            {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
+        {{/each}}
+        </div>
+    {{/unless}}
+{% endverbatim %}
 </script>
 
 
@@ -127,33 +283,54 @@
         {{#if view.node.isPendingModeration}}
             <div class="content pending-moderation">
                 <em>
-                    {{#if view.node.authorIsRequestingUser}}
+                    {{#if view.node.authorIsContentObjectOwner}}
 {% endverbatim %}
-                    <div class="alert alert-info">
-                        <p>
-                            {% blocktrans trimmed %}
-                                Your comment is pending moderation and should be reviewed shortly by the author or owner of
-                                the content object that you commented on. If they do not take action within 24 hours, an
-                                AstroBin moderator will take over and review your comment on their behalf.
-                            {% endblocktrans %}
-                        </p>
+                     <div class="alert alert-warning">
+                            <p>
+                                {% blocktrans trimmed %}
+                                    This comment is pending moderation. Please approve or reject it using the buttons
+                                    below.
+                                {% endblocktrans %}
+                            </p>
 
-                        <p>
-                            {% blocktrans trimmed %}
-                                This process is necessary to prevent spam on AstroBin.
-                            {% endblocktrans %}
-                        </p>
+                            <p>
+                                {% blocktrans trimmed %}
+                                    Please only reject comments if they are spam or offensive in nature.
+                                {% endblocktrans %}
+                            </p>
 
-                        <p>
-                            {% blocktrans trimmed %}
-                                Thank you for understanding!
-                            {% endblocktrans %}
-                        </p>
-                    </div>
+                            <p>
+                                {% blocktrans trimmed %}
+                                    Thank you for your cooperation!
+                                {% endblocktrans %}
+                            </p>
+                        </div>
 {% verbatim %}
+                        {{ view NestedCommentsApp.SingleCommentRenderView nodeBinding="this"}}
                     {{else}}
-                        {{#if view.node.authorIsContentOwner}}
-                            ciao
+                        {{#if view.node.authorIsContentObjectOwner}}
+{% endverbatim %}
+                            <p>
+                                {% blocktrans trimmed %}
+                                    Your comment is pending moderation and should be reviewed shortly by the author or owner of
+                                    the content object that you commented on. If they do not take action within 24 hours, an
+                                    AstroBin moderator will take over and review your comment on their behalf.
+                                {% endblocktrans %}
+                            </p>
+
+                            <p>
+                                {% blocktrans trimmed %}
+                                    This process is necessary to prevent spam on AstroBin.
+                                {% endblocktrans %}
+                            </p>
+
+                            <p>
+                                {% blocktrans trimmed %}
+                                    Thank you for understanding!
+                                {% endblocktrans %}
+                            </p>
+{% verbatim %}
+                            {{ view NestedCommentsApp.SingleCommentRenderView nodeBinding="this"}}
                         {{else}}
 {% endverbatim %}
                             {% trans "This comment is pending moderation and will be reviewed shortly." %}
@@ -163,171 +340,10 @@
                 </em>
             </div>
         {{else}}
-            <div class="meta">
-                {{#if view.node.deleted}}
-{% endverbatim %}
-                    {% trans "(deleted)" %}
-{% verbatim %}
-                {{else}}
-                    <a class="author" {{bindAttr href="view.node.author_url"}}>
-                        {{view.node.author_username}}
-                    </a>
-                {{/if}}
-
-                {{view NestedCommentsApp.TimeagoView valueBinding="view.node.created"}}
-
-                &middot;
-
-                {{#if view.node.hasNoLikes}}
-                    {{ view.node.likesCount }}
-{% endverbatim %}
-                    {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" %}
-{% verbatim %}
-                {{/if}}
-
-                {{#if view.node.hasOneLike}}
-                    {{ view.node.likesCount }}
-{% endverbatim %}
-                    {% trans "like" context "Noun, e.g. 'This element has 1 like'" %}
-{% verbatim %}
-                {{/if}}
-
-                {{#if view.node.hasManyLikes}}
-                    {{ view.node.likesCount }}
-{% endverbatim %}
-                    {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" %}
-{% verbatim %}
-                {{/if}}
-
-                {{#unless view.collapsed}}
-                    <a href="#" class="collapse" {{action "collapse" target="view"}}>[-]</a>
-                {{else}}
-                    <a href="#" class="collapse" {{action "uncollapse" target="view"}}>[+]</a>
-                {{/unless}}
-            </div>
-
-            {{#unless view.collapsed}}
-                <div class="converter" style="display: none">
-                    {{view Ember.TextArea rows=6 valueBinding="view.node.text"}}
-                </div>
-
-                <div class="content">
-                    {{#if view.node.deleted}}
-                        <p>
-{% endverbatim %}
-                            {% trans "(deleted)" %}
-{% verbatim %}
-                        </p>
-                    {{else}}
-                        {{#if view.editing}}
-                            {{view view.EditView commentBinding="view.node"}}
-                        {{else}}
-                            {{# if view.node.ready}}
-                                {{{view.node.getHTML}}}
-                            {{else}}
-                                {{view NestedCommentsApp.LoaderView}}
-                            {{/if}}
-                        {{/if}}
-                    {{/if}}
-                </div>
-
-                <div class="links">
-                    <a {{bindAttr href="view.node.url"}} {{action "link" target="view"}} class="no-page-loader">
-                        <i class="icon-link"></i>
-{% endverbatim %}
-                        {% trans "Link" %}
-{% verbatim %}
-                    </a>
-
-                    {{#if view.node.authorIsRequestingUser}}
-                        {{#if view.node.deleted}}
-                            <a href="#" {{action "undelete" target="view"}}>
-{% endverbatim %}
-                                {% trans "Undelete" %}
-{% verbatim %}
-                            </a>
-                        {{else}}
-                            <a href="#" {{action "delete_" target="view"}}>
-                                <i class="icon-trash"></i>
-{% endverbatim %}
-                                {% trans "Delete" %}
-{% verbatim %}
-                            </a>
-                        {{/if}}
-
-                        {{#if view.node.allowEditing}}
-                            {{#unless view.editing}}
-                                <i class="icon-pencil"></i>
-                                <a href="#" {{action "edit" target="view"}}>
-{% endverbatim %}
-                                    {% trans "Edit" %}
-{% verbatim %}
-                                </a>
-                            {{/unless}}
-                        {{/if}}
-
-                        {{#if view.userIsSuperuser}}
-                            <a href="#" class="btn btn-mini btn-primary" {{action "reply" target="view"}}>
-                                <i class="icon-reply"></i>
-{% endverbatim %}
-                                {% trans "Reply" %}
-{% verbatim %}
-                            </a>
-                        {{/if}}
-                    {{else}}
-                        <a href="#" class="btn btn-mini btn-primary" {{action "reply" target="view"}}>
-                            <i class="icon-reply"></i>
-{% endverbatim %}
-                            {% trans "Reply" %}
-{% verbatim %}
-                        </a>
-
-                        {{#unless view.node.liked}}
-                            <a href="#"
-                               class="btn btn-mini btn-primary comment-like"
-                               {{bindAttr class="view.node.liking:liking"}}
-                               {{action "like" target="view"}}>
-                                <i class="icon-thumbs-up"></i>
-{% endverbatim %}
-                                {% trans "Like" %}
-{% verbatim %}
-                            </a>
-                        {{else}}
-                            <a href="#"
-                               class="btn btn-mini comment-unlike"
-                               {{bindAttr class="view.node.unliking:unliking"}}
-                               {{action "unlike" target="view"}}>
-{% endverbatim %}
-                                {% trans "Unlike" %}
-{% verbatim %}
-                            </a>
-                        {{/unless}}
-                    {{/if}}
-                </div>
-
-                {{#if view.replying}}
-                    <div class="reply">
-                        {{view view.ReplyView parentBinding="view.node.comment"}}
-                    </div>
-                {{/if}}
-
-                {{#if view.node.shouldNotIndent}}
-                    <div class="children no-indentation">
-                {{else}}
-                    <div class="children">
-                {{/if}}
-
-                {{#each view.node.children}}
-                    {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
-                {{/each}}
-                </div>
-            {{/unless}}
+            {{view NestedCommentsApp.SingleCommentRenderView nodeBinding="this"}}
         {{/if}}
     </div>
 {% endverbatim %}
-
-
-
 </script>
 
 
@@ -360,9 +376,6 @@
             {{view NestedCommentsApp.LoaderView}}
         {{/if}}
     {% endverbatim %}
-
-
-
 </script>
 
 <script type="text/x-handlebars" data-template-name="reply">
@@ -396,9 +409,6 @@
         </p>
     {{/if}}
 {% endverbatim %}
-
-
-
 </script>
 
 
@@ -406,17 +416,11 @@
 {% verbatim %}
     {{view.value}}
 {% endverbatim %}
-
-
-
 </script>
 
 
 <script type="text/x-handlebars" data-template-name="saveButton">
     {% trans "Submit" %}
-
-
-
 </script>
 
 
@@ -424,9 +428,6 @@
 {% verbatim %}
     <img alt="" {{bindAttr src="view.loaderUrl"}}/>
 {% endverbatim %}
-
-
-
 </script>
 
 
