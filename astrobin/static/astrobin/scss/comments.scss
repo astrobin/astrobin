@@ -209,6 +209,25 @@
           color: $white;
         }
       }
+
+      .btn.loading {
+        pointer-events: none;
+        cursor: not-allowed;
+        opacity: .5;
+        position: relative;
+
+        * {
+          visibility: hidden;
+        }
+
+        &::after {
+          display: block;
+          content: "...";
+          position: absolute;
+          top: 0;
+          left: 50%;
+        }
+      }
     }
 
     form {
