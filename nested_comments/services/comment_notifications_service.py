@@ -87,7 +87,7 @@ class CommentNotificationsService:
             if ct.model == 'image':
                 image = self.comment.content_object
                 push_notification([image.user], None, 'new_image_comment_moderation', {
-                    'image': image,
+                    'title': image.title,
                     'url': build_notification_url(settings.BASE_URL + self.comment.get_absolute_url())
                 })
 

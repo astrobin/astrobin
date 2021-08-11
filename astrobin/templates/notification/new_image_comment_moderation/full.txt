@@ -3,7 +3,7 @@
 {% blocktrans %}A new comment on your image requires moderation{% endblocktrans %}.
 
 {% blocktrans trimmed %}
-    Your image "{{ image.title }}" received a comment by a new user on AstroBin, and it requires your moderation
+    Your image "{{ title }}" received a comment by a new user on AstroBin, and it requires your moderation
     before it's displayed publicly.
 {% endblocktrans %}
 
