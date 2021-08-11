@@ -12,13 +12,6 @@ from nested_comments.tests.nested_comments_generators import NestedCommentsGener
 
 
 class CommentApprovalTest(TestCase):
-    def setUp(self) -> None:
-        NoticeType.objects.create(
-            label='new_image_comment_moderation',
-            display='',
-            description='',
-            default=2)
-
     @patch("astrobin.models.UserProfile.get_scores")
     def test_mark_as_pending(self, get_scores):
         # Index:             NOT OK
