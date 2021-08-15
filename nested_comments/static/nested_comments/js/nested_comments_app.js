@@ -314,7 +314,7 @@ $(function() {
             this.sync(true);
             nc_app.get('router.commentsController').saveNewComment(self.get('comment'))
                 .then(function (response, statusText, xhr) {
-                    self.reset();
+                    self.collapse();
                 });
         },
 
