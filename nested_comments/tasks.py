@@ -32,7 +32,7 @@ def auto_approve_comments() -> None:
     delta: timedelta = timedelta(hours=36)
     superuser: Optional[User] = get_object_or_None(User, username="astrobin")
 
-    queryset: QuerySet[NestedComment] = NestedComment.objects.filter(
+    queryset: QuerySet = NestedComment.objects.filter(
         deleted=False,
         pending_moderation=True,
         created__lt=now - delta,
