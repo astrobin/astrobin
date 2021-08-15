@@ -1,7 +1,9 @@
 import logging
 
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.db.models import QuerySet
 from django.urls import reverse
 
 from astrobin.models import Image
@@ -97,3 +99,11 @@ class CommentNotificationsService:
             'New comment needs moderation',
             '%s/admin/nested_comments/nestedcomment/?pending_moderation__exact=1' % settings.BASE_URL
         )
+
+    @staticmethod
+    def approve_comments(queryset: QuerySet[NestedComment], moderator: User) -> None:
+        queryset.update(pending_moderation=None, moderator=moderator)
+
+        for comment in queryset:
+            CommentNotificationsService(comment).send_notifications(force=True)
+            CommentNotificationsService(comment).send_approval_notification()

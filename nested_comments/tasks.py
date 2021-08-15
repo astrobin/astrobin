@@ -1,8 +1,10 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
+from typing import Optional, Any
 
 from annoying.functions import get_object_or_None
 from celery import shared_task
 from django.contrib.auth.models import User
+from django.db.models import QuerySet
 from django.utils import timezone
 
 from nested_comments.models import NestedComment
@@ -25,16 +27,15 @@ def notify_superuser_of_comments_pending_approval():
 
 
 @shared_task(time_limit=5, acks_late=True)
-def auto_approve_comments():
-    now = timezone.now()
-    delta = timedelta(hours=36)
-    superuser = get_object_or_None(User, username="astrobin")
+def auto_approve_comments() -> None:
+    now: datetime = timezone.now()
+    delta: timedelta = timedelta(hours=36)
+    superuser: Optional[User] = get_object_or_None(User, username="astrobin")
 
-    queryset = NestedComment.objects.filter(
+    queryset: QuerySet[NestedComment] = NestedComment.objects.filter(
         deleted=False,
         pending_moderation=True,
         created__lt=now - delta,
     )
 
-    if queryset.exists():
-        queryset.update(pending_moderation=False, moderator=superuser)
+    CommentNotificationsService.approve_comments(queryset, superuser)

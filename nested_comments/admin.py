@@ -34,12 +34,7 @@ class NestedCommentAdmin(admin.ModelAdmin):
     )
 
     def approve(self, request, queryset):
-        queryset.update(pending_moderation=None)
-        queryset.update(moderator=request.user)
-
-        for comment in queryset:
-            CommentNotificationsService(comment).send_notifications(force=True)
-            CommentNotificationsService(comment).send_approval_notification()
+        CommentNotificationsService.approve_comments(queryset, request.user)
 
     approve.short_description = 'Approve'
 
