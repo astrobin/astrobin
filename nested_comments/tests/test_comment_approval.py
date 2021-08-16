@@ -1,7 +1,6 @@
 from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
 from mock import patch
-from notification.models import NoticeType, NoticeSetting
 from rest_framework.reverse import reverse
 from rest_framework.test import APIClient
 
@@ -17,13 +16,13 @@ class CommentApprovalTest(TestCase):
         # Index:             NOT OK
         # Membership:        NOT OK
         # Approved comments: NOT OK
+        # Content owner:         OK
 
         get_scores.return_value = {'user_scores_index': 0}
 
         image = Generators.image()
         comment = NestedCommentsGenerators.comment(
-            content_type=ContentType.objects.get_for_model(Image),
-            oject_id=image.id,
+            target=image,
         )
 
         self.assertTrue(comment.pending_moderation)
@@ -33,13 +32,13 @@ class CommentApprovalTest(TestCase):
         # Index:                 OK
         # Membership:        NOT OK
         # Approved comments: NOT OK
+        # Content owner:         OK
 
         get_scores.return_value = {'user_scores_index': 10}
 
         image = Generators.image()
         comment = NestedCommentsGenerators.comment(
-            content_type=ContentType.objects.get_for_model(Image),
-            oject_id=image.id,
+            target=image,
         )
 
         self.assertIsNone(comment.pending_moderation)
@@ -49,6 +48,8 @@ class CommentApprovalTest(TestCase):
         # Index:             NOT OK
         # Membership:            OK
         # Approved comments: NOT OK
+        # Content owner:         OK
+
         get_scores.return_value = {'user_scores_index': 0}
 
         image = Generators.image()
@@ -57,8 +58,7 @@ class CommentApprovalTest(TestCase):
 
         comment = NestedCommentsGenerators.comment(
             author=author,
-            content_type=ContentType.objects.get_for_model(Image),
-            oject_id=image.id,
+            target=image,
         )
 
         self.assertIsNone(comment.pending_moderation)
@@ -68,6 +68,7 @@ class CommentApprovalTest(TestCase):
         # Index:             NOT OK
         # Membership:        NOT OK
         # Approved comments: NOT OK
+        # Content owner:         OK
 
         get_scores.return_value = {'user_scores_index': 0}
 
@@ -85,8 +86,7 @@ class CommentApprovalTest(TestCase):
 
         comment = NestedCommentsGenerators.comment(
             author=author,
-            content_type=ContentType.objects.get_for_model(Image),
-            oject_id=image.id,
+            target=image,
         )
 
         self.assertTrue(comment.pending_moderation)
@@ -96,6 +96,7 @@ class CommentApprovalTest(TestCase):
         # Index:             NOT OK
         # Membership:        NOT OK
         # Approved comments: NOT OK
+        # Content owner:         OK
 
         get_scores.return_value = {'user_scores_index': 0}
 
@@ -105,31 +106,47 @@ class CommentApprovalTest(TestCase):
         for i in range(0, 2):
             comment = NestedCommentsGenerators.comment(
                 author=author,
-                content_type=ContentType.objects.get_for_model(Image),
-                oject_id=image.id,
+                target=image,
             )
             comment.pending_moderation = None
             comment.save()
 
         NestedCommentsGenerators.comment(
             author=author,
-            content_type=ContentType.objects.get_for_model(Image),
-            oject_id=image.id,
+            target=image,
         )
 
         comment = NestedCommentsGenerators.comment(
             author=author,
-            content_type=ContentType.objects.get_for_model(Image),
-            oject_id=image.id,
+            target=image,
         )
 
         self.assertTrue(comment.pending_moderation)
+
+    @patch("astrobin.models.UserProfile.get_scores")
+    def test_do_not_mark_as_pending_due_author_being_content_owner(self, get_scores):
+        # Index:             NOT OK
+        # Membership:        NOT OK
+        # Approved comments:     OK
+        # Content owner:     NOT OK
+
+        get_scores.return_value = {'user_scores_index': 0}
+
+        image = Generators.image()
+
+        comment = NestedCommentsGenerators.comment(
+            author=image.user,
+            target=image,
+        )
+
+        self.assertIsNone(comment.pending_moderation)
 
     @patch("astrobin.models.UserProfile.get_scores")
     def test_do_not_mark_as_pending_due_to_sufficient_previously_approved_comments(self, get_scores):
         # Index:             NOT OK
         # Membership:        NOT OK
         # Approved comments:     OK
+        # Content owner:         OK
 
         get_scores.return_value = {'user_scores_index': 0}
 
@@ -139,16 +156,14 @@ class CommentApprovalTest(TestCase):
         for i in range(0, 3):
             comment = NestedCommentsGenerators.comment(
                 author=author,
-                content_type=ContentType.objects.get_for_model(Image),
-                oject_id=image.id,
+                target=image,
             )
             comment.pending_moderation = None
             comment.save()
 
         comment = NestedCommentsGenerators.comment(
             author=author,
-            content_type=ContentType.objects.get_for_model(Image),
-            oject_id=image.id,
+            target=image,
         )
 
         self.assertIsNone(comment.pending_moderation)

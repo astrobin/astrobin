@@ -230,7 +230,12 @@ def nested_comment_pre_save(sender, instance, **kwargs):
             Q(author=instance.author) & ~Q(pending_moderation=True)
         ).count() < 3
 
-        if insufficient_index and free_account and insufficient_previous_approvals:
+        is_content_owner = False
+        ct = ContentType.objects.get_for_id(instance.content_type_id)
+        if ct.model == 'image':
+            is_content_owner = instance.author == instance.content_object.user
+
+        if insufficient_index and free_account and insufficient_previous_approvals and not is_content_owner:
             instance.pending_moderation = True
 
 
