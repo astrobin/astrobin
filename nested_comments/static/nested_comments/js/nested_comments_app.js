@@ -1,10 +1,10 @@
-$(function() {
+$(function () {
 
     var languageCode = $('#nested-comments-language-code').attr('data-value');
 
     /*******************************************************************
-    * APP
-    *******************************************************************/
+     * APP
+     *******************************************************************/
 
     var nc_app = Em.Application.create({
         rootElement: '#nested-comments',
@@ -47,7 +47,7 @@ $(function() {
         templateName: "i18n",
         tagName: 'span',
 
-        translated: function() {
+        translated: function () {
             return Em.String.htmlSafe(window.astrobin_nestedcomments_i18n[this.value]);
         }.property('value')
     });
@@ -507,6 +507,18 @@ $(function() {
                 timeout: nc_app.ajaxTimeout,
                 success: function (response) {
                     comment.set('deleted', response.deleted);
+                },
+                error: function (response) {
+                    const text = JSON.parse(response.responseText)[0];
+                    $.toast({
+                        text: text,
+                        showHideTransition: 'slide',
+                        allowToastClose: true,
+                        position: 'top-right',
+                        loader: false,
+                        hideAfter: false,
+                        icon: 'error',
+                    });
                 }
             });
         },
@@ -649,7 +661,7 @@ $(function() {
             });
         },
 
-        approve: function(comment) {
+        approve: function (comment) {
             comment.set('loading', true);
 
             $.ajax({
@@ -666,22 +678,33 @@ $(function() {
             });
         },
 
-        reject: function (comment) {
+        reportAbuse: function (comment) {
             comment.set('loading', true);
 
-            $.ajax({
-                type: 'post',
-                url: nc_app.commentsApiUrl + comment.get('id') + '/reject/',
-                timeout: nc_app.ajaxTimeout,
-                success: function () {
-                    comment.set('loading', false);
-                    comment.set('deleted', true);
-                    comment.set('pending_moderation', false);
+            astrobin_common.show_abuse_report_modal().then(
+                function (reason, additionalInformation) {
+                    $.ajax({
+                        type: 'post',
+                        url: '{0}{1}/report-abuse/'.format(nc_app.commentsApiUrl, comment.get('id')),
+                        data: {
+                            'reason': reason,
+                            'additional_information': additionalInformation
+                        },
+                        timeout: nc_app.ajaxTimeout,
+                        success: function () {
+                            comment.set('loading', false);
+                            comment.set('deleted', true);
+                            comment.set('pending_moderation', false);
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            comment.set('loading', false);
+                        }
+                    });
                 },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                function () {
                     comment.set('loading', false);
                 }
-            });
+            );
         },
 
         saveNewComment: function (comment) {
@@ -851,8 +874,8 @@ $(function() {
             nc_app.get('router.commentsController').approve(this.get('node'));
         },
 
-        reject: function () {
-            nc_app.get('router.commentsController').reject(this.get('node'));
+        reportAbuse: function () {
+            nc_app.get('router.commentsController').reportAbuse(this.get('node'));
         },
 
         saveReply: function () {
@@ -976,4 +999,28 @@ $(function() {
     // Initialize hidden CKEDITOR to access BBCode transformation methods.
     ckeditorOptions = astrobin_common.utils.ckeditorOptions("comments", languageCode);
     CKEDITOR.replace("hidden-textarea", ckeditorOptions);
+
+
+    /*****************************************************************
+     * Utility prototype overrides
+     *****************************************************************/
+
+    String.prototype.format = String.prototype.format ||
+        function () {
+            "use strict";
+            let str = this.toString();
+            if (arguments.length) {
+                const t = typeof arguments[0];
+                let key;
+                const args = ("string" === t || "number" === t) ?
+                    Array.prototype.slice.call(arguments)
+                    : arguments[0];
+
+                for (key in args) {
+                    str = str.replace(new RegExp("\\{" + key + "\\}", "gi"), args[key]);
+                }
+            }
+
+            return str;
+        };
 });

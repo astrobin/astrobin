@@ -936,6 +936,48 @@ astrobin_common = {
         });
     },
 
+    show_abuse_report_modal: function () {
+        return new Promise(function (resolve, reject) {
+            const $modal = $('#report-abuse-modal');
+            const $reason = $modal.find('#id_reason');
+            const $additionalInformation = $modal.find('#id_additional_information');
+            const $reportAbuseButton = $modal.find('.btn-primary');
+            const $cancelButton = $modal.find('.btn-secondary');
+
+            $reason.val(null).trigger('change');
+            $additionalInformation.val('');
+            $reportAbuseButton.attr('disabled', 'disabled');
+
+            $reason.change(function () {
+                if ($reason.val()) {
+                    $reportAbuseButton.removeAttr('disabled');
+                } else {
+                    $reportAbuseButton.attr('disabled', 'disabled');
+                }
+            });
+
+            $reportAbuseButton.click(function () {
+                resolve($reason.val(),$additionalInformation.val());
+                astrobin_common.hide_abuse_report_modal();
+            });
+
+            $modal.on('hidden', function () {
+                reject();
+            })
+
+            $cancelButton.click(function () {
+                reject();
+            });
+
+            $modal.modal('show');
+        });
+    },
+
+    hide_abuse_report_modal: function () {
+        const $modal = $('#report-abuse-modal');
+        $modal.modal('hide');
+    },
+
     init: function (config) {
         /* Init */
         $.extend(true, astrobin_common.config, config);

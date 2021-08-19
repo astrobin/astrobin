@@ -8,6 +8,7 @@ from astrobin.fields import COUNTRIES
 from astrobin.models import Image
 from astrobin.utils import get_client_country_code
 from astrobin_apps_images.services import ImageService
+from common.forms.abuse_report_form import AbuseReportForm
 
 
 def user_language(request):
@@ -137,6 +138,7 @@ def common_variables(request):
         'enums': {
             'SubjectType': SubjectType,
         },
+        'abuse_report_form': AbuseReportForm()
     }
 
     if request.user.is_authenticated and request.user.userprofile.is_image_moderator():

@@ -31,6 +31,7 @@
     {% setvar "https://welcome.astrobin.com/pricing" as signup_url %}
 
     window.astrobin_nestedcomments_i18n = {
+        error: "{{ _('Error') | escapejs }}",
         cancel: "{{ _('Cancel') | escapejs }}",
         addAComment: "{{ _('Add a comment') | escapejs }}",
         noCommentsYet: "{{ _('There are no comments yet.') | escapejs }}",
@@ -46,7 +47,7 @@
         unlikeVerb: "{% trans 'Unlike' context "Verb (imperative)" %}",
         replyVerb: "{% trans 'Reply' context "Verb (imperative)" %}",
         approveVerb: "{% trans 'Approve' context "Verb (imperative)" %}",
-        rejectVerb: "{% trans 'Reject' context "Verb (imperative)" %}",
+        reportAbuse: "{% trans 'Report abuse' %}",
         loginOrSignUp: '{% trans 'Please <a href="{{ login_url }}">log in</a> or <a href="{{ signup_url }}">sign up</a> to leave a comment.' %}'
     };
 </script>
@@ -198,10 +199,10 @@
                         {{view NestedCommentsApp.I18nView value="approveVerb"}}
                     </a>
 
-                    <a href="#" {{action "reject" target="view"}} class="btn btn-danger btn-mini"
+                    <a href="#" {{action "reportAbuse" target="view"}} class="btn btn-danger btn-mini"
                        {{bindAttr class="view.node.loading:loading"}}>
                         <i class="icon-remove"></i>
-                        {{view NestedCommentsApp.I18nView value="rejectVerb"}}
+                        {{view NestedCommentsApp.I18nView value="reportAbuse"}}
                     </a>
                 </div>
             {{/if}}
@@ -286,14 +287,7 @@
      <div class="alert alert-warning">
         <p>
             {% blocktrans trimmed %}
-                This comment is pending moderation. Please approve or reject it using the buttons
-                below.
-            {% endblocktrans %}
-        </p>
-
-        <p>
-            {% blocktrans trimmed %}
-                Please only reject comments if they are spam or offensive in nature.
+                This comment is pending moderation. Please approve it or report an abuse using the buttons below.
             {% endblocktrans %}
         </p>
 
