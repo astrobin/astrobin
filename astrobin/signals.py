@@ -43,6 +43,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_lite, is_any_premium_subscription, is_lite_2020, is_any_ultimate, is_premium_2020, is_premium, is_free)
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from astrobin_apps_users.services import UserService
+from common.models import AbuseReport
 from common.services import DateTimeService
 from common.services.mentions_service import MentionsService
 from nested_comments.models import NestedComment
@@ -951,3 +952,14 @@ def top_pick_archive_item_post_save(sender, instance, created, **kwargs):
 
 
 post_save.connect(top_pick_archive_item_post_save, sender=TopPickArchive)
+
+
+def abuse_report_post_save(sender, instance, created, **kwargs):
+    if created:
+        NotificationsService.email_superusers(
+            'New abuse report',
+            '%s/admin/common/abusereport/%d/' % (settings.BASE_URL, instance.pk)
+        )
+
+
+post_save.connect(abuse_report_post_save, sender=AbuseReport)

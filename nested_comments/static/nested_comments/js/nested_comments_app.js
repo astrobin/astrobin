@@ -682,13 +682,13 @@ $(function () {
             comment.set('loading', true);
 
             astrobin_common.show_abuse_report_modal().then(
-                function (reason, additionalInformation) {
+                function (data) {
                     $.ajax({
                         type: 'post',
                         url: '{0}{1}/report-abuse/'.format(nc_app.commentsApiUrl, comment.get('id')),
                         data: {
-                            'reason': reason,
-                            'additional_information': additionalInformation
+                            'reason': data.reason,
+                            'additional_information': data.additionalInformation
                         },
                         timeout: nc_app.ajaxTimeout,
                         success: function () {
@@ -696,7 +696,17 @@ $(function () {
                             comment.set('deleted', true);
                             comment.set('pending_moderation', false);
                         },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        error: function (response) {
+                            const text = JSON.parse(response.responseText)[0];
+                            $.toast({
+                                text: text,
+                                showHideTransition: 'slide',
+                                allowToastClose: true,
+                                position: 'top-right',
+                                loader: false,
+                                hideAfter: false,
+                                icon: 'error',
+                            });
                             comment.set('loading', false);
                         }
                     });

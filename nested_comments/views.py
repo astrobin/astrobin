@@ -1,6 +1,9 @@
+from datetime import timedelta
+
 from annoying.functions import get_object_or_None
 from django.contrib.contenttypes.models import ContentType
 from django.http import Http404
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import permissions
@@ -77,11 +80,7 @@ class NestedCommentViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['post'], url_path='report-abuse')
     def report_abuse(self, request, pk):
-        comment = get_object_or_404(self.get_queryset(), pk=pk)  # type: NestedComment
         content_type = ContentType.objects.get_for_model(NestedComment)
-
-        if not comment.pending_moderation:
-            raise ValidationError('Comment already moderated')
 
         abuse_report = get_object_or_None(
             AbuseReport,
@@ -91,7 +90,13 @@ class NestedCommentViewSet(viewsets.ModelViewSet):
         )
 
         if abuse_report:
-            raise ValidationError('Comment already reported by this user')
+            raise ValidationError('Application error: comment already reported by this user')
+
+        if AbuseReport.objects.filter(
+            user=request.user,
+            created__gt=timezone.now() - timedelta(hours=24)
+        ).count() >= 5:
+            raise ValidationError(_('You have reached your abuse report quota.'))
 
         self.get_queryset().filter(pk=pk).update(
             pending_moderation=False,

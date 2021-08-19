@@ -213,6 +213,14 @@
                         <i class="icon-link"></i>
                         {{view NestedCommentsApp.I18nView value="link"}}
                     </a>
+
+                    {{#unless view.node.authorIsRequestingUser}}
+                        <a href="#" {{action "reportAbuse" target="view"}}
+                           {{bindAttr class="view.node.loading:loading"}}>
+                            <i class="icon-flag"></i>
+                            {{view NestedCommentsApp.I18nView value="reportAbuse"}}
+                        </a>
+                    {{/unless}}
                 {{/unless}}
 
                 {{#if view.node.authorIsRequestingUser}}

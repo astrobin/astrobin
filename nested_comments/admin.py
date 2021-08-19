@@ -31,6 +31,7 @@ class NestedCommentAdmin(admin.ModelAdmin):
         'approve',
         'delete_and_ban_user',
         'set_pending_moderation',
+        'undelete',
     )
 
     def approve(self, request, queryset):
@@ -56,5 +57,11 @@ class NestedCommentAdmin(admin.ModelAdmin):
         queryset.update(pending_moderation=True)
 
     set_pending_moderation.short_description = 'Set pending moderation'
+
+    def undelete(self, request, queryset):
+        queryset.update(deleted=False)
+
+    undelete.short_description = 'Undelete'
+
 
 admin.site.register(NestedComment, NestedCommentAdmin)

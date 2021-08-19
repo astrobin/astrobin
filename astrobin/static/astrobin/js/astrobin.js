@@ -957,7 +957,10 @@ astrobin_common = {
             });
 
             $reportAbuseButton.click(function () {
-                resolve($reason.val(),$additionalInformation.val());
+                resolve({
+                    reason: $reason.val(),
+                    additionalInformation: $additionalInformation.val()
+                });
                 astrobin_common.hide_abuse_report_modal();
             });
 
