@@ -13,7 +13,7 @@ from rest_framework.exceptions import PermissionDenied, ValidationError
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
-from common.models import AbuseReport, ABUSE_REPORT_DECISION_CONFIRMED
+from common.models import AbuseReport, ABUSE_REPORT_DECISION_CONFIRMED, ABUSE_REPORT_DECISION_OVERRULED
 from .models import NestedComment
 from .permissions import IsOwnerOrReadOnly
 from .serializers import NestedCommentSerializer
@@ -80,23 +80,33 @@ class NestedCommentViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['post'], url_path='report-abuse')
     def report_abuse(self, request, pk):
+        comment = get_object_or_404(self.get_queryset(), pk=pk)  # type: NestedComment
         content_type = ContentType.objects.get_for_model(NestedComment)
 
-        abuse_report = get_object_or_None(
-            AbuseReport,
-            user=request.user,
-            content_type=content_type,
-            object_id=pk
-        )
-
-        if abuse_report:
-            raise ValidationError('Application error: comment already reported by this user')
-
         if AbuseReport.objects.filter(
-            user=request.user,
-            created__gt=timezone.now() - timedelta(hours=24)
+                user=request.user,
+                created__gt=timezone.now() - timedelta(hours=24)
         ).count() >= 5:
             raise ValidationError(_('You have reached your abuse report quota.'))
+
+        if AbuseReport.objects.filter(
+                content_type=content_type,
+                object_id=pk,
+                created__gt=comment.updated,
+                decision=ABUSE_REPORT_DECISION_OVERRULED
+        ):
+            raise ValidationError(_('This item cannot be reported again because it was approved by a moderator.'))
+
+        if get_object_or_None(
+                AbuseReport,
+                user=request.user,
+                content_type=content_type,
+                object_id=pk,
+                created__gt=comment.updated
+        ):
+            raise ValidationError(
+                _('You many not report the same item more than once.')
+            )
 
         self.get_queryset().filter(pk=pk).update(
             pending_moderation=False,
