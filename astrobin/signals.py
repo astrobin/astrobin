@@ -43,7 +43,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_lite, is_any_premium_subscription, is_lite_2020, is_any_ultimate, is_premium_2020, is_premium, is_free)
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from astrobin_apps_users.services import UserService
-from common.models import AbuseReport
+from common.models import AbuseReport, ABUSE_REPORT_DECISION_OVERRULED
 from common.services import DateTimeService
 from common.services.mentions_service import MentionsService
 from nested_comments.models import NestedComment
@@ -83,6 +83,7 @@ def image_pre_save(sender, instance, **kwargs):
         current_mentions = MentionsService.get_mentions(instance.description_bbcode)
         mentions = [item for item in current_mentions if item not in previous_mentions]
         cache.set("image.%d.image_pre_save_mentions" % instance.pk, mentions, 2)
+
 
 pre_save.connect(image_pre_save, sender=Image)
 
@@ -212,6 +213,7 @@ def imagerevision_post_delete(sender, instance, **kwargs):
 
 post_softdelete.connect(imagerevision_post_delete, sender=ImageRevision)
 post_delete.connect(imagerevision_post_delete, sender=ImageRevision)
+
 
 def nested_comment_pre_save(sender, instance, **kwargs):
     if instance.pk:
@@ -801,7 +803,8 @@ def forum_post_post_save(sender, instance, created, **kwargs):
                         settings.BASE_URL + instance.topic.get_absolute_url(), instance.user),
                     'topic_name': instance.topic.name,
                     'unsubscribe_url': build_notification_url(
-                        settings.BASE_URL + reverse_url('pybb:delete_subscription', args=[instance.topic.id]), instance.user
+                        settings.BASE_URL + reverse_url('pybb:delete_subscription', args=[instance.topic.id]),
+                        instance.user
                     )
                 }
             )
@@ -960,6 +963,16 @@ def abuse_report_post_save(sender, instance, created, **kwargs):
             'New abuse report',
             '%s/admin/common/abusereport/%d/' % (settings.BASE_URL, instance.pk)
         )
+
+        if AbuseReport.objects.filter(
+                content_owner=instance.content_owner
+        ).exclude(
+            decision=ABUSE_REPORT_DECISION_OVERRULED
+        ).count() == 5:
+            NotificationsService.email_superusers(
+                'User received 5 abuse reports',
+                '%s/admin/common/abusereport/%d/' % (settings.BASE_URL, instance.pk)
+            )
 
 
 post_save.connect(abuse_report_post_save, sender=AbuseReport)

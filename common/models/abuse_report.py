@@ -25,6 +25,14 @@ class AbuseReport(models.Model):
     object_id = models.TextField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
+    content_owner = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='abuse_reports_received'
+    )
+
     user = models.ForeignKey(
         User,
         null=True,

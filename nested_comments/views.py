@@ -117,6 +117,7 @@ class NestedCommentViewSet(viewsets.ModelViewSet):
         AbuseReport.objects.create(
             content_type=content_type,
             object_id=pk,
+            content_owner=comment.author,
             user=request.user,
             reason=request.POST.get('reason'),
             additional_information=request.POST.get('additional_information'),
