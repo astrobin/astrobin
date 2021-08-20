@@ -970,7 +970,7 @@ def abuse_report_post_save(sender, instance, created, **kwargs):
             decision=ABUSE_REPORT_DECISION_OVERRULED
         ).count() == 5:
             NotificationsService.email_superusers(
-                'User received 5 abuse reports',
+                'User %s received 5 abuse reports' % instance.content_owner,
                 '%s/admin/common/abusereport/%d/' % (settings.BASE_URL, instance.pk)
             )
 
