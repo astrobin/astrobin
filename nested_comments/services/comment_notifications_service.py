@@ -102,7 +102,7 @@ class CommentNotificationsService:
 
     @staticmethod
     def approve_comments(queryset: QuerySet, moderator: User) -> None:
-        queryset.update(pending_moderation=None, moderator=moderator)
+        queryset.update(pending_moderation=False, moderator=moderator)
 
         for comment in queryset:
             CommentNotificationsService(comment).send_notifications(force=True)

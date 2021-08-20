@@ -17,6 +17,7 @@ from common.models import AbuseReport, ABUSE_REPORT_DECISION_CONFIRMED, ABUSE_RE
 from .models import NestedComment
 from .permissions import IsOwnerOrReadOnly
 from .serializers import NestedCommentSerializer
+from .services import CommentNotificationsService
 
 
 class NestedCommentViewSet(viewsets.ModelViewSet):
@@ -68,13 +69,13 @@ class NestedCommentViewSet(viewsets.ModelViewSet):
             user = target.user
             if request.user != user:
                 raise PermissionDenied()
-
-            self.get_queryset().filter(pk=pk).update(
-                pending_moderation=False,
-                moderator=request.user,
-            )
         else:
             raise ValidationError('Unsupported content object model')
+
+        CommentNotificationsService.approve_comments(
+            self.get_queryset().filter(pk=pk),
+            request.user
+        )
 
         return Response(status=200)
 
