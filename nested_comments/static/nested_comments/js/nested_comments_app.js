@@ -780,6 +780,7 @@ $(function () {
         disallowSavingBinding: 'node.disallowSaving',
         collapsed: false,
         userIsSuperuser: null,
+        userIsAuthenticated: null,
 
         scroll: function () {
             /* Using a timeout here, because the "reply" view is still
@@ -801,6 +802,7 @@ $(function () {
 
         didInsertElement: function () {
             this.set('userIsSuperuser', nc_app.userIsSuperuser);
+            this.set('userIsAuthenticated', nc_app.userIsAuthenticated);
 
             var self = this,
                 hilighted_comment = location.hash.substr(1);
@@ -832,6 +834,10 @@ $(function () {
             setTimeout(function () {
                 nodeReady();
             }, 1);
+        },
+
+        loginAndGoToComment: function () {
+            window.location.href = '/accounts/login/?next={0}#{1}'.format(nc_app.path, this.get('node.cid'));
         },
 
         link: function () {

@@ -215,11 +215,17 @@
                     </a>
 
                     {{#unless view.node.authorIsRequestingUser}}
-                        <a href="#" {{action "reportAbuse" target="view"}}
-                           {{bindAttr class="view.node.loading:loading"}}>
-                            <i class="icon-flag"></i>
-                            {{view NestedCommentsApp.I18nView value="reportAbuse"}}
-                        </a>
+                        {{#if view.userIsAuthenticated}}
+                            <a href="#" {{action "reportAbuse" target="view"}}>
+                                <i class="icon-flag"></i>
+                                {{view NestedCommentsApp.I18nView value="reportAbuse"}}
+                            </a>
+                        {{else}}
+                            <a href="#" {{action "loginAndGoToComment" target="view"}}>
+                                <i class="icon-flag"></i>
+                                {{view NestedCommentsApp.I18nView value="reportAbuse"}}
+                            </a>
+                        {{/if}}
                     {{/unless}}
                 {{/unless}}
 
