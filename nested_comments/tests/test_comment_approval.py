@@ -221,30 +221,8 @@ class CommentApprovalTest(TestCase):
         image = Generators.image()
         comment = NestedCommentsGenerators.comment(target=image, pending_moderation=True)
 
-        response = client.post(reverse('nested_comments:nestedcomments-reject', args=(comment.pk,)))
+        response = client.post(reverse('nested_comments:nestedcomments-report-abuse', args=(comment.pk,)))
         self.assertEqual(401, response.status_code)
-
-    def test_rejection_api_not_owner(self):
-        client = APIClient()
-
-        image = Generators.image()
-        comment = NestedCommentsGenerators.comment(target=image, pending_moderation=True)
-
-        client.force_authenticate(user=comment.author)
-
-        response = client.post(reverse('nested_comments:nestedcomments-reject', args=(comment.pk,)))
-        self.assertEqual(403, response.status_code)
-
-    def test_rejection_api_not_pending_moderation(self):
-        client = APIClient()
-
-        image = Generators.image()
-        comment = NestedCommentsGenerators.comment(target=image, pending_moderation=False)
-
-        client.force_authenticate(user=image.user)
-
-        response = client.post(reverse('nested_comments:nestedcomments-reject', args=(comment.pk,)))
-        self.assertEqual(400, response.status_code)
 
     def test_rejection_api_all_ok(self):
         client = APIClient()
@@ -254,7 +232,7 @@ class CommentApprovalTest(TestCase):
 
         client.force_authenticate(user=image.user)
 
-        response = client.post(reverse('nested_comments:nestedcomments-reject', args=(comment.pk,)))
+        response = client.post(reverse('nested_comments:nestedcomments-report-abuse', args=(comment.pk,)))
         self.assertEqual(200, response.status_code)
 
         comment = NestedComment.objects.get(pk=comment.pk)
