@@ -936,7 +936,7 @@ astrobin_common = {
         });
     },
 
-    show_abuse_report_modal: function () {
+    abuse_report_modal_show: function () {
         return new Promise(function (resolve, reject) {
             const $modal = $('#report-abuse-modal');
             const $reason = $modal.find('#id_reason');
@@ -947,6 +947,7 @@ astrobin_common = {
             $reason.val(null).trigger('change');
             $additionalInformation.val('');
             $reportAbuseButton.attr('disabled', 'disabled');
+            $reportAbuseButton.removeClass('running');
 
             $reason.change(function () {
                 if ($reason.val()) {
@@ -961,7 +962,6 @@ astrobin_common = {
                     reason: $reason.val(),
                     additionalInformation: $additionalInformation.val()
                 });
-                astrobin_common.hide_abuse_report_modal();
             });
 
             $modal.on('hidden', function () {
@@ -976,9 +976,17 @@ astrobin_common = {
         });
     },
 
-    hide_abuse_report_modal: function () {
+    abuse_report_modal_hide: function () {
         const $modal = $('#report-abuse-modal');
         $modal.modal('hide');
+    },
+
+    abuse_report_modal_set_loading: function () {
+        const $modal = $('#report-abuse-modal');
+        const $reportAbuseButton = $modal.find('.btn-primary');
+
+        $reportAbuseButton.attr('disabled', 'disabled');
+        $reportAbuseButton.addClass('running');
     },
 
     init: function (config) {

@@ -681,8 +681,10 @@ $(function () {
         reportAbuse: function (comment) {
             comment.set('loading', true);
 
-            astrobin_common.show_abuse_report_modal().then(
+            astrobin_common.abuse_report_modal_show().then(
                 function (data) {
+                    astrobin_common.abuse_report_modal_set_loading();
+
                     $.ajax({
                         type: 'post',
                         url: '{0}{1}/report-abuse/'.format(nc_app.commentsApiUrl, comment.get('id')),
@@ -695,6 +697,8 @@ $(function () {
                             comment.set('loading', false);
                             comment.set('deleted', true);
                             comment.set('pending_moderation', false);
+
+                            astrobin_common.abuse_report_modal_hide();
                         },
                         error: function (response) {
                             const text = JSON.parse(response.responseText)[0];
@@ -707,12 +711,16 @@ $(function () {
                                 hideAfter: false,
                                 icon: 'error',
                             });
+
                             comment.set('loading', false);
+
+                            astrobin_common.abuse_report_modal_hide();
                         }
                     });
                 },
                 function () {
                     comment.set('loading', false);
+                    astrobin_common.abuse_report_modal_hide();
                 }
             );
         },
