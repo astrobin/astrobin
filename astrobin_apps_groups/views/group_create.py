@@ -15,7 +15,7 @@ class GroupCreateView(LoginRequiredMixin, RedirectToGroupDetailMixin, RestrictTo
         if 'public' in self.request.GET:
             return {
                 'public': self.request.GET.get('public')
-            };
+            }
 
         return super(GroupCreateView, self).get_initial()
 
