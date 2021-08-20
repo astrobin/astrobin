@@ -27,9 +27,6 @@
 </div>
 
 <script type="application/javascript">
-    {% url 'auth_login' as login_url %}
-    {% setvar "https://welcome.astrobin.com/pricing" as signup_url %}
-
     window.astrobin_nestedcomments_i18n = {
         error: "{{ _('Error') | escapejs }}",
         cancel: "{{ _('Cancel') | escapejs }}",
@@ -47,8 +44,7 @@
         unlikeVerb: "{% trans 'Unlike' context "Verb (imperative)" %}",
         replyVerb: "{% trans 'Reply' context "Verb (imperative)" %}",
         approveVerb: "{% trans 'Approve' context "Verb (imperative)" %}",
-        reportAbuse: "{% trans 'Report abuse' %}",
-        loginOrSignUp: '{% trans 'Please <a href="{{ login_url }}">log in</a> or <a href="{{ signup_url }}">sign up</a> to leave a comment.' %}'
+        reportAbuse: "{% trans 'Report abuse' %}"
     };
 </script>
 
@@ -57,6 +53,17 @@
 {% verbatim %}
     {{view.translated}}
 {% endverbatim %}
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="login-or-sign-up">
+    <p class="please-login">
+        {% url 'auth_login' as login_url %}
+        {% setvar "https://welcome.astrobin.com/pricing" as signup_url %}
+        {% blocktrans trimmed with login_url as login_url and signup_url as signup_url %}
+            Please <a href="{{ login_url }}">log in</a> or <a href="{{ signup_url }}">sign up</a> to leave a comment.
+        {% endblocktrans %}
+    </p>
 </script>
 
 
@@ -103,9 +110,7 @@
             </a>
         {{/unless}}
     {{else}}
-        <p class="please-login">
-            {{view NestedCommentsApp.I18nView value="loginOrSignUp"}}
-        </p>
+        {{view NestedCommentsApp.LoginOrSignUpView}}
     {{/if}}
 {% endverbatim %}
 </script>
@@ -429,9 +434,7 @@
             {{view NestedCommentsApp.LoaderView}}
         {{/if}}
     {{else}}
-        <p class="please-login">
-            {{view NestedCommentsApp.I18nView value="loginOrSignUp"}}
-        </p>
+        {{view NestedCommentsApp.LoginOrSignUpView}}
     {{/if}}
 {% endverbatim %}
 </script>

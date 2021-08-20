@@ -52,6 +52,11 @@ $(function () {
         }.property('value')
     });
 
+
+    nc_app.LoginOrSignUpView = Em.View.extend({
+        templateName: 'login-or-sign-up'
+    });
+
     nc_app.ContributionIndexAlertView = Em.View.extend({
         templateName: "contribution-index-alert"
     });
@@ -761,7 +766,6 @@ $(function () {
         templateName: 'comments',
         classNames: ['comments']
     });
-
 
     nc_app.SingleCommentView = Em.View.extend({
         templateName: 'singleComment',
