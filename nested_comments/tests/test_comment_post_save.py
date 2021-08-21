@@ -63,6 +63,10 @@ class CommentPostSaveTest(TestCase):
         comment = NestedCommentsGenerators.comment()
         comment.pending_moderation = True
 
+        send_moderation_required_notification.reset_mock()
+        send_notifications.reset_mock()
+        get_mentions.reset_mock()
+
         nested_comment_post_save(None, comment, True)
 
         self.assertTrue(get_mentions.called)
