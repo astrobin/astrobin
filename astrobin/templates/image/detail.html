@@ -35,7 +35,7 @@
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb 'Image' None %}
-    {% breadcrumb image.title|escape|default:_("(no title)") None %}
+    {% breadcrumb image.title|default:_("(no title)") None %}
 {% endblock %}
 
 {% block extra_alerts %}
