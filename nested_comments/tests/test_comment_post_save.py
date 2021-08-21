@@ -8,15 +8,17 @@ from nested_comments.tests.nested_comments_generators import NestedCommentsGener
 
 
 class CommentPostSaveTest(TestCase):
+    @patch("astrobin.signals.CommentNotificationsService.send_moderation_required_notification")
     @patch('astrobin.signals.CommentNotificationsService.send_moderation_required_email_to_superuser')
     @patch('astrobin.signals.CommentNotificationsService.send_notifications')
     @patch('astrobin.signals.push_notification')
     def test_pending_moderation_sends_correct_notifications(
             self, push_notification, send_notifications,
-            send_moderation_required_email):
+            send_moderation_required_email, send_moderation_required_notification):
         comment = NestedCommentsGenerators.comment(pending_moderation=True)
 
-        send_moderation_required_email.assert_called()
+        send_moderation_required_email.assert_not_called()
+        send_moderation_required_notification.assert_called()
         send_notifications.assert_not_called()
 
         with self.assertRaises(AssertionError):
