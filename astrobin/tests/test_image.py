@@ -6,6 +6,7 @@ import time
 from datetime import date, timedelta
 
 import mock
+from bs4 import BeautifulSoup
 from django.conf import settings
 from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes.models import ContentType
@@ -983,6 +984,13 @@ class ImageTest(TestCase):
         b.delete()
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), 'r': b.label}))
         self.assertRedirects(response, "/%s/%s/" % (image.hash, c.label))
+
+    def test_image_detail_view_with_special_character_in_title(self):
+        image = Generators.image(title='Test\'1')
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        soup = BeautifulSoup(response.content, 'lxml')
+        self.assertEqual(1, len(soup.select('.breadcrumb li:last-child:contains("Test\'1")')))
+        self.assertEqual(0, len(soup.select('.breadcrumb li:last-child:contains("Test&#39;1")')))
 
     def test_image_7_digit_gain(self):
         self.client.login(username='test', password='password')

@@ -38,6 +38,7 @@ class Generators:
     def image(*args, **kwargs):
         return Image.objects.create(
             user=kwargs.pop('user', Generators.user()),
+            title=kwargs.pop('title', Generators.randomString()),
             image_file=kwargs.pop('image_file', 'images/foo.jpg'),
             is_wip=kwargs.pop('is_wip', False),
             is_final=kwargs.pop('is_final', True),

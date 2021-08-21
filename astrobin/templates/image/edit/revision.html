@@ -15,7 +15,7 @@
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb 'Image' None %}
-    {% breadcrumb revision.image.title|escape|default:_("(no title)") 'image_detail' revision.image.get_id %}
+    {% breadcrumb revision.image.title|default:_("(no title)") 'image_detail' revision.image.get_id %}
     {% breadcrumb 'Revision' None %}
 {% endblock %}
 
