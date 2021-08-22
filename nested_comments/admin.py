@@ -17,6 +17,7 @@ class NestedCommentAdmin(admin.ModelAdmin):
         'created',
         'deleted',
         'pending_moderation',
+        'moderator',
     )
 
     search_fields = (
