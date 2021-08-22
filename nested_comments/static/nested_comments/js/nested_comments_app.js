@@ -342,7 +342,7 @@ $(function () {
                         return comment;
                 }
             } else {
-                if (root.get('id') == id)
+                if (root.get('id') === id)
                     return root;
                 for (var i = 0; i < root.get('children').length; i++) {
                     var comment = self.findCommentById(id, root.get('children')[i]);
@@ -417,8 +417,8 @@ $(function () {
                     success: function (response) {
                         $.each(response, function (i, nc_data) {
                             var comment = nc_app.Comment.create(nc_data);
-                            comment.set('authorIsRequestingUser', nc_app.userId == comment.get('author'));
-                            comment.set('authorIsContentObjectOwner', nc_app.userId == nc_app.contentObjectOwnerId);
+                            comment.set('authorIsRequestingUser', nc_app.userId === comment.get('author'));
+                            comment.set('authorIsContentObjectOwner', nc_app.userId === nc_app.contentObjectOwnerId);
                             comment.set('deleted', nc_data.deleted);
                             self.fetchAuthor(comment);
 

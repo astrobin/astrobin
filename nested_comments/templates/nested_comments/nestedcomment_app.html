@@ -135,6 +135,51 @@
 </script>
 
 
+<script type="text/x-handlebars" data-template-name="singleComment">
+{% verbatim %}
+    {{#if view.node.displayAvatar}}
+        <div class="avatar visible-desktop">
+            <a class="author" {{bindAttr href="view.node.author_url"}}>
+                <img
+                    {{bindAttr src="view.node.author_avatar"}}
+                    {{bindAttr alt="view.node.author_username"}}
+                    width="40" height="40" />
+            </a>
+        </div>
+    {{else}}
+        <div class="avatar visible-desktop">
+            <img src="https://cdn.astrobin.com/static/astrobin/images/astrobin-default-avatar.png?v=1"
+                 alt=""
+                 width="40"
+                 height="40" />
+        </div>
+    {{/if}}
+
+    <div class="comment-container" {{ bindAttr id="view.node.cid"}}>
+        {{#if view.node.isPendingModeration}}
+            <div class="content pending-moderation">
+                <em>
+                    {{#if view.node.authorIsContentObjectOwner}}
+                        {{view NestedCommentsApp.PendingModerationInfoForContentObjectOwnerView}}
+                        {{view NestedCommentsApp.SingleCommentRenderView nodeBinding="this"}}
+                    {{else}}
+                        {{#if view.node.authorIsRequestingUser}}
+                            {{view NestedCommentsApp.PendingModerationInfoForCommentOwnerView}}
+                            {{view NestedCommentsApp.SingleCommentRenderView nodeBinding="this"}}
+                        {{else}}
+                            {{view NestedCommentsApp.PendingModerationInfoForEveryoneElseView}}
+                        {{/if}}
+                    {{/if}}
+                </em>
+            </div>
+        {{else}}
+            {{view NestedCommentsApp.SingleCommentRenderView nodeBinding="this"}}
+        {{/if}}
+    </div>
+{% endverbatim %}
+</script>
+
+
 <script type="text/x-handlebars" data-template-name="singleCommentRender">
 {% verbatim %}
     <div class="meta">
@@ -293,9 +338,10 @@
                 <div class="children">
             {{/if}}
 
-            {{#each view.node.children}}
-                {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
-            {{/each}}
+                {{#each view.node.children}}
+                    {{view NestedCommentsApp.SingleCommentView nodeBinding="this"}}
+                {{/each}}
+            </div>
         {{/if}}
     {{/unless}}
 {% endverbatim %}
@@ -346,51 +392,6 @@
 
 <script type="text/x-handlebars" data-template-name="pending-moderation-info-for-everyone-else">
     {% trans "This comment is pending moderation and will be reviewed shortly." %}
-</script>
-
-
-<script type="text/x-handlebars" data-template-name="singleComment">
-{% verbatim %}
-    {{#if view.node.displayAvatar}}
-        <div class="avatar visible-desktop">
-            <a class="author" {{bindAttr href="view.node.author_url"}}>
-                <img
-                    {{bindAttr src="view.node.author_avatar"}}
-                    {{bindAttr alt="view.node.author_username"}}
-                    width="40" height="40" />
-            </a>
-        </div>
-    {{else}}
-        <div class="avatar visible-desktop">
-            <img src="https://cdn.astrobin.com/static/astrobin/images/astrobin-default-avatar.png?v=1"
-                 alt=""
-                 width="40"
-                 height="40" />
-        </div>
-    {{/if}}
-
-    <div class="comment-container" {{ bindAttr id="view.node.cid"}}>
-        {{#if view.node.isPendingModeration}}
-            <div class="content pending-moderation">
-                <em>
-                    {{#if view.node.authorIsContentObjectOwner}}
-                        {{view NestedCommentsApp.PendingModerationInfoForContentObjectOwnerView}}
-                        {{view NestedCommentsApp.SingleCommentRenderView nodeBinding="this"}}
-                    {{else}}
-                        {{#if view.node.authorIsRequestingUser}}
-                            {{view NestedCommentsApp.PendingModerationInfoForCommentOwnerView}}
-                            {{view NestedCommentsApp.SingleCommentRenderView nodeBinding="this"}}
-                        {{else}}
-                            {{view NestedCommentsApp.PendingModerationInfoForEveryoneElseView}}
-                        {{/if}}
-                    {{/if}}
-                </em>
-            </div>
-        {{else}}
-            {{view NestedCommentsApp.SingleCommentRenderView nodeBinding="this"}}
-        {{/if}}
-    </div>
-{% endverbatim %}
 </script>
 
 
