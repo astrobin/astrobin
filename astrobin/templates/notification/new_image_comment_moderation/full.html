@@ -1,0 +1,22 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans %}A new comment on your image requires moderation{% endblocktrans %}.
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        Your image "{{ title }}" received a comment by a new user on AstroBin, and it requires your moderation
+        before it's displayed publicly.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        Please take a minute to review and approve or reject the following comment:
+    {% endblocktrans %}
+</p>
+
+<a href="{{ url }}">
+    {% trans "View comment" %}
+</a>

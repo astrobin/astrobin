@@ -1,4 +1,5 @@
 import re
+from typing import Optional, List
 
 from annoying.functions import get_object_or_None
 from django.contrib.auth.models import User
@@ -27,21 +28,22 @@ class MentionsService(object):
 
     @staticmethod
     def get_mentioned_users_with_notification_enabled(mentions, notice_type):
-        # type: (list[User], str) -> list[User]
+        # type: (list[str], str) -> list[User]
 
-        mentioned_user_with_notification_enabled = []  # type: List[User]
-        for mention in mentions:  # type: unicode
-            user = get_object_or_None(User, username=mention)  # type: Optional[User]
+        mentioned_user_with_notification_enabled: List[User] = []
+        mention: str
+        for mention in mentions:
+            user: Optional[User] = get_object_or_None(User, username=mention)
             if not user:
                 try:
                     user = get_object_or_None(User, userprofile__real_name=mention)
                 except MultipleObjectsReturned:
                     user = None
             if user:
-                gets_mention_notifications = NoticeSetting.objects.filter(
+                gets_mention_notifications: bool = NoticeSetting.objects.filter(
                     user=user,
                     notice_type__label=notice_type,
-                    send=True).exists()  # type: bool
+                    send=True).exists()
                 if gets_mention_notifications:
                     mentioned_user_with_notification_enabled.append(user)
 

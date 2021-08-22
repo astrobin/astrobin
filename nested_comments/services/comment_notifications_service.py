@@ -1,6 +1,9 @@
 import logging
 
 from django.conf import settings
+from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.db.models import QuerySet
 from django.urls import reverse
 
 from astrobin.models import Image
@@ -80,9 +83,27 @@ class CommentNotificationsService:
                 'url': build_notification_url(settings.BASE_URL + self.comment.get_absolute_url())
             })
 
+    def send_moderation_required_notification(self):
+        if self.comment.pending_moderation:
+            ct = ContentType.objects.get_for_id(self.comment.content_type_id)
+            if ct.model == 'image':
+                image = self.comment.content_object
+                push_notification([image.user], None, 'new_image_comment_moderation', {
+                    'title': image.title,
+                    'url': build_notification_url(settings.BASE_URL + self.comment.get_absolute_url())
+                })
+
     @staticmethod
-    def send_moderation_required_email():
+    def send_moderation_required_email_to_superuser():
         NotificationsService.email_superusers(
             'New comment needs moderation',
             '%s/admin/nested_comments/nestedcomment/?pending_moderation__exact=1' % settings.BASE_URL
         )
+
+    @staticmethod
+    def approve_comments(queryset: QuerySet, moderator: User) -> None:
+        queryset.update(pending_moderation=False, moderator=moderator)
+
+        for comment in queryset:
+            CommentNotificationsService(comment).send_notifications(force=True)
+            CommentNotificationsService(comment).send_approval_notification()

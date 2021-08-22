@@ -167,7 +167,7 @@ class GroupsTest(TestCase):
         self.assertEqual(group.moderated, True)
         self.assertTrue(group.owner in group.members.all())
         self.assertTrue(group.owner in group.moderators.all())
-        self.assertTrue(group.forum != None)
+        self.assertIsNotNone(group.forum)
         group.delete()
 
         # Creating a private group does not trigger notifications
@@ -191,11 +191,7 @@ class GroupsTest(TestCase):
             'autosubmission': True,
         }, follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertFormError(response, 'form', 'category',
-                             "Only the following category support autosubmission: " \
-                             "Professional network, Club or association, " \
-                             "Internet community, Friends or partners, Geographical area"
-                             )
+        self.assertContains(response, 'Only the following category support autosubmission:')
 
     def test_group_update_view(self):
         url = reverse('group_update', kwargs={'pk': self.group.pk})

@@ -213,7 +213,7 @@ urlpatterns += [
     url(r'^api/v2/api-auth/', include(('rest_framework.urls', 'rest_framework'))),
     url(r'^api/v2/common/', include('common.api_urls')),
     url(r'^api/v2/astrobin/', include('astrobin.api2.urls')),
-    url(r'^api/v2/nestedcomments/', include('nested_comments.api_urls')),
+    url(r'^api/v2/nestedcomments/', include(('nested_comments.api_urls', 'nested_comments'))),
     url(r'^api/v2/platesolving/', include('astrobin_apps_platesolving.api_urls')),
     url(r'^api/v2/notifications/', include('astrobin_apps_notifications.api.urls')),
     url(r'^api/v2/images/', include(('astrobin_apps_images.api.urls', 'astrobin_apps_images'))),

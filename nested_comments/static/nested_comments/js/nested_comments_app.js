@@ -1,10 +1,10 @@
-$(function() {
+$(function () {
 
     var languageCode = $('#nested-comments-language-code').attr('data-value');
 
     /*******************************************************************
-    * APP
-    *******************************************************************/
+     * APP
+     *******************************************************************/
 
     var nc_app = Em.Application.create({
         rootElement: '#nested-comments',
@@ -30,6 +30,7 @@ $(function() {
             this.loaderGif = $('#nested-comments-loaderGif-url').attr('data-value');
             this.editorPlaceholder = $('#nested-comments-editor-placeholder').attr('data-value');
             this.contentTypeId = $(this.rootElement).attr('data-content-type-id');
+            this.contentObjectOwnerId = $(this.rootElement).attr('data-content-object-owner-id');
             this.nestedcommentsContentTypeId = $('#nested-comments-comments-content-type-id').attr('data-value');
             this.objectId = $(this.rootElement).attr('data-object-id');
 
@@ -41,6 +42,28 @@ $(function() {
     /*******************************************************************
      * BASE VIEWS
      *******************************************************************/
+
+    nc_app.I18nView = Em.View.extend({
+        templateName: "i18n",
+        tagName: 'span',
+
+        translated: function () {
+            return Em.String.htmlSafe(window.astrobin_nestedcomments_i18n[this.value]);
+        }.property('value')
+    });
+
+
+    nc_app.LoginOrSignUpView = Em.View.extend({
+        templateName: 'login-or-sign-up'
+    });
+
+    nc_app.ContributionIndexAlertView = Em.View.extend({
+        templateName: "contribution-index-alert"
+    });
+
+    nc_app.RichContentEditorHelpView = Em.View.extend({
+        templateName: "rich-content-editor-help"
+    });
 
     // A view used to DRY the logic common to views with textareas (top
     // level, edit, reply).
@@ -142,6 +165,7 @@ $(function() {
         author_url: null,
         author_avatar: null,
         authorIsRequestingUser: null,
+        authorIsContentObjectOwner: null,
         editing: null,
         submitting: null,
         original_text: null, // Text before editing starts
@@ -203,6 +227,14 @@ $(function() {
         hasManyLikes: function () {
             return this.likes.length > 1;
         }.property('likes'),
+
+        isPendingModeration: function () {
+            return this.pending_moderation && !this.deleted;
+        }.property('pending_moderation', 'deleted'),
+
+        displayAvatar: function () {
+            return !this.pending_moderation && !this.deleted;
+        }.property('pending_moderation', 'deleted'),
 
         // Functions
         init: function () {
@@ -287,7 +319,7 @@ $(function() {
             this.sync(true);
             nc_app.get('router.commentsController').saveNewComment(self.get('comment'))
                 .then(function (response, statusText, xhr) {
-                    self.reset();
+                    self.collapse();
                 });
         },
 
@@ -386,6 +418,7 @@ $(function() {
                         $.each(response, function (i, nc_data) {
                             var comment = nc_app.Comment.create(nc_data);
                             comment.set('authorIsRequestingUser', nc_app.userId == comment.get('author'));
+                            comment.set('authorIsContentObjectOwner', nc_app.userId == nc_app.contentObjectOwnerId);
                             comment.set('deleted', nc_data.deleted);
                             self.fetchAuthor(comment);
 
@@ -479,6 +512,18 @@ $(function() {
                 timeout: nc_app.ajaxTimeout,
                 success: function (response) {
                     comment.set('deleted', response.deleted);
+                },
+                error: function (response) {
+                    const text = JSON.parse(response.responseText)[0];
+                    $.toast({
+                        text: text,
+                        showHideTransition: 'slide',
+                        allowToastClose: true,
+                        position: 'top-right',
+                        loader: false,
+                        hideAfter: false,
+                        icon: 'error',
+                    });
                 }
             });
         },
@@ -621,6 +666,70 @@ $(function() {
             });
         },
 
+        approve: function (comment) {
+            comment.set('loading', true);
+
+            $.ajax({
+                type: 'post',
+                url: nc_app.commentsApiUrl + comment.get('id') + '/approve/',
+                timeout: nc_app.ajaxTimeout,
+                success: function () {
+                    comment.set('loading', false);
+                    comment.set('pending_moderation', false);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    comment.set('loading', false);
+                }
+            });
+        },
+
+        reportAbuse: function (comment) {
+            comment.set('loading', true);
+
+            astrobin_common.abuse_report_modal_show().then(
+                function (data) {
+                    astrobin_common.abuse_report_modal_set_loading();
+
+                    $.ajax({
+                        type: 'post',
+                        url: '{0}{1}/report-abuse/'.format(nc_app.commentsApiUrl, comment.get('id')),
+                        data: {
+                            'reason': data.reason,
+                            'additional_information': data.additionalInformation
+                        },
+                        timeout: nc_app.ajaxTimeout,
+                        success: function () {
+                            comment.set('loading', false);
+                            comment.set('deleted', true);
+                            comment.set('pending_moderation', false);
+
+                            astrobin_common.abuse_report_modal_hide();
+                        },
+                        error: function (response) {
+                            const text = JSON.parse(response.responseText)[0];
+                            $.toast({
+                                text: text,
+                                showHideTransition: 'slide',
+                                allowToastClose: true,
+                                position: 'top-right',
+                                loader: false,
+                                hideAfter: false,
+                                icon: 'error',
+                            });
+
+                            comment.set('loading', false);
+
+                            astrobin_common.abuse_report_modal_hide();
+                        }
+                    });
+                },
+                function () {
+                    comment.set('loading', false);
+                    astrobin_common.abuse_report_modal_hide();
+                }
+            );
+        },
+
         saveNewComment: function (comment) {
             var self = this,
                 data = self.dump(comment);
@@ -658,16 +767,32 @@ $(function() {
         classNames: ['comments']
     });
 
-
     nc_app.SingleCommentView = Em.View.extend({
         templateName: 'singleComment',
-        classNames: ['comment'],
+        classNames: ['comment']
+    });
+
+    nc_app.PendingModerationInfoForContentObjectOwnerView = Em.View.extend({
+        templateName: 'pending-moderation-info-for-content-object-owner'
+    });
+
+    nc_app.PendingModerationInfoForCommentOwnerView = Em.View.extend({
+        templateName: 'pending-moderation-info-for-comment-owner'
+    });
+
+    nc_app.PendingModerationInfoForEveryoneElseView = Em.View.extend({
+        templateName: 'pending-moderation-info-for-everyone-else'
+    });
+
+    nc_app.SingleCommentRenderView = Em.View.extend({
+        templateName: 'singleCommentRender',
         editingBinding: 'node.editing',
         replyingBinding: 'node.replying',
         submittingBinding: 'node.submitting',
         disallowSavingBinding: 'node.disallowSaving',
         collapsed: false,
         userIsSuperuser: null,
+        userIsAuthenticated: null,
 
         scroll: function () {
             /* Using a timeout here, because the "reply" view is still
@@ -689,6 +814,7 @@ $(function() {
 
         didInsertElement: function () {
             this.set('userIsSuperuser', nc_app.userIsSuperuser);
+            this.set('userIsAuthenticated', nc_app.userIsAuthenticated);
 
             var self = this,
                 hilighted_comment = location.hash.substr(1);
@@ -720,6 +846,10 @@ $(function() {
             setTimeout(function () {
                 nodeReady();
             }, 1);
+        },
+
+        loginAndGoToComment: function () {
+            window.location.href = '/accounts/login/?next={0}#{1}'.format(nc_app.path, this.get('node.cid'));
         },
 
         link: function () {
@@ -766,6 +896,14 @@ $(function() {
 
         unlike: function () {
             nc_app.get('router.commentsController').unlike(this.get('node'));
+        },
+
+        approve: function () {
+            nc_app.get('router.commentsController').approve(this.get('node'));
+        },
+
+        reportAbuse: function () {
+            nc_app.get('router.commentsController').reportAbuse(this.get('node'));
         },
 
         saveReply: function () {

@@ -115,6 +115,10 @@
       &.pending-moderation {
         color: $grey-3;
         padding: $spacer-large 0 $spacer-xxxlarge 0;
+
+        p:not(:last-child) {
+          margin-bottom: $spacer-medium !important;
+        }
       }
 
       p {
@@ -203,6 +207,25 @@
 
         &.comment-unlike {
           color: $white;
+        }
+      }
+
+      .btn.loading {
+        pointer-events: none;
+        cursor: not-allowed;
+        opacity: .5;
+        position: relative;
+
+        * {
+          visibility: hidden;
+        }
+
+        &::after {
+          display: block;
+          content: "...";
+          position: absolute;
+          top: 0;
+          left: 50%;
         }
       }
     }

@@ -1,6 +1,30 @@
+/*****************************************************************
+ * Utility prototype overrides
+ *****************************************************************/
+
+String.prototype.format = String.prototype.format ||
+    function () {
+        "use strict";
+        let str = this.toString();
+        if (arguments.length) {
+            const t = typeof arguments[0];
+            let key;
+            const args = ("string" === t || "number" === t) ?
+                Array.prototype.slice.call(arguments)
+                : arguments[0];
+
+            for (key in args) {
+                str = str.replace(new RegExp("\\{" + key + "\\}", "gi"), args[key]);
+            }
+        }
+
+        return str;
+    };
+
 /**********************************************************************
  * Common
  *********************************************************************/
+
 astrobin_common = {
     config: {
         image_detail_url: '/',
@@ -934,6 +958,59 @@ astrobin_common = {
                 });
             });
         });
+    },
+
+    abuse_report_modal_show: function () {
+        return new Promise(function (resolve, reject) {
+            const $modal = $('#report-abuse-modal');
+            const $reason = $modal.find('#id_reason');
+            const $additionalInformation = $modal.find('#id_additional_information');
+            const $reportAbuseButton = $modal.find('.btn-primary');
+            const $cancelButton = $modal.find('.btn-secondary');
+
+            $reason.val(null).trigger('change');
+            $additionalInformation.val('');
+            $reportAbuseButton.attr('disabled', 'disabled');
+            $reportAbuseButton.removeClass('running');
+
+            $reason.change(function () {
+                if ($reason.val()) {
+                    $reportAbuseButton.removeAttr('disabled');
+                } else {
+                    $reportAbuseButton.attr('disabled', 'disabled');
+                }
+            });
+
+            $reportAbuseButton.click(function () {
+                resolve({
+                    reason: $reason.val(),
+                    additionalInformation: $additionalInformation.val()
+                });
+            });
+
+            $modal.on('hidden', function () {
+                reject();
+            })
+
+            $cancelButton.click(function () {
+                reject();
+            });
+
+            $modal.modal('show');
+        });
+    },
+
+    abuse_report_modal_hide: function () {
+        const $modal = $('#report-abuse-modal');
+        $modal.modal('hide');
+    },
+
+    abuse_report_modal_set_loading: function () {
+        const $modal = $('#report-abuse-modal');
+        const $reportAbuseButton = $modal.find('.btn-primary');
+
+        $reportAbuseButton.attr('disabled', 'disabled');
+        $reportAbuseButton.addClass('running');
     },
 
     init: function (config) {

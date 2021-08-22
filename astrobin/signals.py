@@ -43,6 +43,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_lite, is_any_premium_subscription, is_lite_2020, is_any_ultimate, is_premium_2020, is_premium, is_free)
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from astrobin_apps_users.services import UserService
+from common.models import AbuseReport, ABUSE_REPORT_DECISION_OVERRULED
 from common.services import DateTimeService
 from common.services.mentions_service import MentionsService
 from nested_comments.models import NestedComment
@@ -82,6 +83,7 @@ def image_pre_save(sender, instance, **kwargs):
         current_mentions = MentionsService.get_mentions(instance.description_bbcode)
         mentions = [item for item in current_mentions if item not in previous_mentions]
         cache.set("image.%d.image_pre_save_mentions" % instance.pk, mentions, 2)
+
 
 pre_save.connect(image_pre_save, sender=Image)
 
@@ -212,6 +214,7 @@ def imagerevision_post_delete(sender, instance, **kwargs):
 post_softdelete.connect(imagerevision_post_delete, sender=ImageRevision)
 post_delete.connect(imagerevision_post_delete, sender=ImageRevision)
 
+
 def nested_comment_pre_save(sender, instance, **kwargs):
     if instance.pk:
         try:
@@ -230,7 +233,12 @@ def nested_comment_pre_save(sender, instance, **kwargs):
             Q(author=instance.author) & ~Q(pending_moderation=True)
         ).count() < 3
 
-        if insufficient_index and free_account and insufficient_previous_approvals:
+        is_content_owner = False
+        ct = ContentType.objects.get_for_id(instance.content_type_id)
+        if ct.model == 'image':
+            is_content_owner = instance.author == instance.content_object.user
+
+        if insufficient_index and free_account and insufficient_previous_approvals and not is_content_owner:
             instance.pending_moderation = True
 
 
@@ -241,38 +249,42 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
     if created:
         mentions = MentionsService.get_mentions(instance.text)
 
-        CommentNotificationsService(instance).send_notifications()
-
         if hasattr(instance.content_object, "updated"):
             # This will trigger the auto_now fields in the content_object
             # We do it only if created, because the content_object needs to
             # only be updated if the number of comments changes.
-            instance.content_object.save(keep_deleted=True)
+            save_kwargs = {}
+            if issubclass(type(instance.content_object), SafeDeleteModel):
+                save_kwargs['keep_deleted'] = True
+            instance.content_object.save(**save_kwargs)
 
         if instance.pending_moderation:
-            CommentNotificationsService.send_moderation_required_email()
+            CommentNotificationsService(instance).send_moderation_required_notification()
+        else:
+            CommentNotificationsService(instance).send_notifications()
     else:
         mentions = cache.get("user.%d.comment_pre_save_mentions" % instance.author.pk, [])
 
-    for username in mentions:
-        user = get_object_or_None(User, username=username)
-        if not user:
-            try:
-                profile = get_object_or_None(UserProfile, real_name=username)
-                if profile:
-                    user = profile.user
-            except MultipleObjectsReturned:
-                user = None
-        if user:
-            push_notification(
-                [user], instance.author, 'new_comment_mention',
-                {
-                    'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.author),
-                    'user': instance.author.userprofile.get_display_name(),
-                    'user_url': settings.BASE_URL + reverse_url(
-                        'user_page', kwargs={'username': instance.author}),
-                }
-            )
+    if not instance.pending_moderation:
+        for username in mentions:
+            user = get_object_or_None(User, username=username)
+            if not user:
+                try:
+                    profile = get_object_or_None(UserProfile, real_name=username)
+                    if profile:
+                        user = profile.user
+                except MultipleObjectsReturned:
+                    user = None
+            if user:
+                push_notification(
+                    [user], instance.author, 'new_comment_mention',
+                    {
+                        'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.author),
+                        'user': instance.author.userprofile.get_display_name(),
+                        'user_url': settings.BASE_URL + reverse_url(
+                            'user_page', kwargs={'username': instance.author}),
+                    }
+                )
 
 
 post_save.connect(nested_comment_post_save, sender=NestedComment)
@@ -791,7 +803,8 @@ def forum_post_post_save(sender, instance, created, **kwargs):
                         settings.BASE_URL + instance.topic.get_absolute_url(), instance.user),
                     'topic_name': instance.topic.name,
                     'unsubscribe_url': build_notification_url(
-                        settings.BASE_URL + reverse_url('pybb:delete_subscription', args=[instance.topic.id]), instance.user
+                        settings.BASE_URL + reverse_url('pybb:delete_subscription', args=[instance.topic.id]),
+                        instance.user
                     )
                 }
             )
@@ -942,3 +955,24 @@ def top_pick_archive_item_post_save(sender, instance, created, **kwargs):
 
 
 post_save.connect(top_pick_archive_item_post_save, sender=TopPickArchive)
+
+
+def abuse_report_post_save(sender, instance, created, **kwargs):
+    if created:
+        NotificationsService.email_superusers(
+            'New abuse report',
+            '%s/admin/common/abusereport/%d/' % (settings.BASE_URL, instance.pk)
+        )
+
+        if AbuseReport.objects.filter(
+                content_owner=instance.content_owner
+        ).exclude(
+            decision=ABUSE_REPORT_DECISION_OVERRULED
+        ).count() == 5:
+            NotificationsService.email_superusers(
+                'User %s received 5 abuse reports' % instance.content_owner,
+                '%s/admin/common/abusereport/%d/' % (settings.BASE_URL, instance.pk)
+            )
+
+
+post_save.connect(abuse_report_post_save, sender=AbuseReport)

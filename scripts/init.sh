@@ -249,6 +249,13 @@ Group.objects.get_or_create(name='iotd_reviewers')
 Group.objects.get_or_create(name='iotd_judges')
 
 try:
+    User.objects.get(username='astrobin')
+except User.DoesNotExist:
+    u = User.objects.create_superuser('astrobin', 'astrobin@astrobin.com', 'astrobin')
+    Group.objects.get(name='content_moderators').user_set.add(u)
+    Group.objects.get(name='image_moderators').user_set.add(u)
+
+try:
     User.objects.get(username='astrobin_dev')
 except User.DoesNotExist:
     u = User.objects.create_superuser('astrobin_dev', 'dev@astrobin.com', 'astrobin_dev')

@@ -50,10 +50,3 @@ CELERY_ROUTES = {
         'routing_key': 'email',
     },
 }
-
-CELERY_BEAT_SCHEDULE = {
-    'send_notifications_when_promoted_image_becomes_iotd': {
-        'task': 'astrobin_apps_iotd.tasks.send_notifications_when_promoted_image_becomes_iotd',
-        'schedule': crontab(hour=1, minute=5),
-    },
-}

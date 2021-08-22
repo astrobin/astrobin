@@ -14,6 +14,11 @@
     outline: none;
     box-shadow: 0 0 2rem transparentize($link-color, .5);
   }
+
+  &.disabled,
+  &[disabled] {
+    pointer-events: none;
+  }
 }
 
 .btn-primary {

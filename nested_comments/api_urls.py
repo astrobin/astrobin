@@ -1,12 +1,12 @@
 from django.conf.urls import url
-from rest_framework.urlpatterns import format_suffix_patterns
+from django.urls import include
+from rest_framework import routers
 
-from nested_comments.views import NestedCommentList, NestedCommentDetail
+from nested_comments.views import NestedCommentViewSet
 
-urlpatterns = (
-    url(r'^nestedcomments/$', NestedCommentList.as_view(), name='nestedcomment-list'),
-    url(r'^nestedcomments/(?P<pk>\d+)/$', NestedCommentDetail.as_view(), name='nestedcomment-detail'),
-)
+router = routers.DefaultRouter()
+router.register(r'nestedcomments', NestedCommentViewSet, basename='nestedcomments')
 
-# Format suffixes
-urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'api'])
+urlpatterns = [
+    url('', include(router.urls)),
+]

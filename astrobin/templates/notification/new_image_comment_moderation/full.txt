@@ -1,0 +1,14 @@
+{% load i18n %}
+
+{% blocktrans %}A new comment on your image requires moderation{% endblocktrans %}.
+
+{% blocktrans trimmed %}
+    Your image "{{ title }}" received a comment by a new user on AstroBin, and it requires your moderation
+    before it's displayed publicly.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Please take a minute to review and approve or reject the following comment:
+{% endblocktrans %}
+
+{{url}}
