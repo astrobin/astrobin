@@ -159,7 +159,7 @@
         {{#if view.node.isPendingModeration}}
             <div class="content pending-moderation">
                 <em>
-                    {{#if view.node.authorIsContentObjectOwner}}
+                    {{#if view.node.userIsContentObjectOwner}}
                         {{view NestedCommentsApp.PendingModerationInfoForContentObjectOwnerView}}
                         {{view NestedCommentsApp.SingleCommentRenderView nodeBinding="this"}}
                     {{else}}
@@ -173,6 +173,12 @@
                 </em>
             </div>
         {{else}}
+            {{#if view.node.moderationRequested }}
+                {{#if view.node.userIsContentObjectOwner}}
+                    {{view NestedCommentsApp.ModerationRequestedButUnneeded}}
+                {{/if}}
+            {{/if}}
+
             {{view NestedCommentsApp.SingleCommentRenderView nodeBinding="this"}}
         {{/if}}
     </div>
@@ -241,7 +247,7 @@
         </div>
 
         {{#if view.node.isPendingModeration}}
-            {{#if view.node.authorIsContentObjectOwner}}
+            {{#if view.node.userIsContentObjectOwner}}
                 <div class="links">
                     <a href="#"{{action "approve" target="view"}} class="btn btn-success btn-mini"
                        {{bindAttr class="view.node.loading:loading"}}>
@@ -359,6 +365,17 @@
         <p>
             {% blocktrans trimmed %}
                 Thank you for your cooperation!
+            {% endblocktrans %}
+        </p>
+    </div>
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="moderation-requested-but-unneeded">
+     <div class="alert alert-info">
+        <p>
+            {% blocktrans trimmed %}
+                This comment was already moderated by you or an AstroBin moderator.
             {% endblocktrans %}
         </p>
     </div>

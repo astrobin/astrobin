@@ -22,17 +22,22 @@ def push_notification(recipients, from_user, notice_type, data):
         clear_notifications_template_cache(recipient.username)
 
 
-def get_notification_url_params_for_email(from_user=None):
-    return dict(
+def get_notification_url_params_for_email(from_user=None, additional_query_args=None):
+    result = dict(
         utm_source='astrobin',
         utm_medium='email',
         utm_campaign='notification',
         from_user=from_user.pk if from_user else None
     )
 
+    if additional_query_args:
+        result = {**result, **additional_query_args}
 
-def build_notification_url(url, from_user=None):
-    params = get_notification_url_params_for_email(from_user)
+    return result
+
+
+def build_notification_url(url, from_user=None, additional_query_args=None):
+    params = get_notification_url_params_for_email(from_user, additional_query_args)
     url_parse = urlparse(url)
     query = url_parse.query
     url_dict = dict(parse_qsl(query))

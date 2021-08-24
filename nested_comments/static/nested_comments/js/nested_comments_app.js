@@ -30,7 +30,7 @@ $(function () {
             this.loaderGif = $('#nested-comments-loaderGif-url').attr('data-value');
             this.editorPlaceholder = $('#nested-comments-editor-placeholder').attr('data-value');
             this.contentTypeId = $(this.rootElement).attr('data-content-type-id');
-            this.contentObjectOwnerId = $(this.rootElement).attr('data-content-object-owner-id');
+            this.contentObjectOwnerId = parseInt($(this.rootElement).attr('data-content-object-owner-id'));
             this.nestedcommentsContentTypeId = $('#nested-comments-comments-content-type-id').attr('data-value');
             this.objectId = $(this.rootElement).attr('data-object-id');
 
@@ -165,7 +165,7 @@ $(function () {
         author_url: null,
         author_avatar: null,
         authorIsRequestingUser: null,
-        authorIsContentObjectOwner: null,
+        userIsContentObjectOwner: null,
         editing: null,
         submitting: null,
         original_text: null, // Text before editing starts
@@ -418,7 +418,10 @@ $(function () {
                         $.each(response, function (i, nc_data) {
                             var comment = nc_app.Comment.create(nc_data);
                             comment.set('authorIsRequestingUser', nc_app.userId === comment.get('author'));
-                            comment.set('authorIsContentObjectOwner', nc_app.userId === nc_app.contentObjectOwnerId);
+                            comment.set('userIsContentObjectOwner', nc_app.userId === nc_app.contentObjectOwnerId);
+                            comment.set('moderationRequested',
+                                window.location.search.indexOf('moderate-comment') > -1 &&
+                                window.location.hash === '#c{0}'.format(comment.get('id')));
                             comment.set('deleted', nc_data.deleted);
                             self.fetchAuthor(comment);
 
@@ -776,6 +779,10 @@ $(function () {
         templateName: 'pending-moderation-info-for-content-object-owner'
     });
 
+    nc_app.ModerationRequestedButUnneeded = Em.View.extend({
+        templateName: 'moderation-requested-but-unneeded'
+    });
+
     nc_app.PendingModerationInfoForCommentOwnerView = Em.View.extend({
         templateName: 'pending-moderation-info-for-comment-owner'
     });
@@ -854,7 +861,7 @@ $(function () {
 
         link: function () {
             this.hilight();
-            window.location.href = '#' + this.get('node.cid');
+            window.location.assign(window.location.pathname + '#' + this.get('node.cid'));
             this.scroll();
         },
 
