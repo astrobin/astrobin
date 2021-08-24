@@ -26,10 +26,6 @@
     }
   }
 
-  > form {
-    margin-bottom: 0;
-  }
-
   .modal-body {
     max-height: 66.67vh;
 
@@ -48,6 +44,20 @@
 
     p {
       margin-bottom: $spacer-xlarge;
+    }
+
+    .form-vertical {
+      margin-bottom: 0;
+
+      .select2,
+      .select2-container {
+        width: 100% !important;
+      }
+
+      input[type='text'],
+      textarea {
+        width: calc(100% - 12px) !important;
+      }
     }
   }
 }

@@ -16,27 +16,27 @@
 
         {% if is_revision %}
             {% if revision_image.mouse_hover_image == "INVERTED" %}
-                {% astrobin_image image "regular_inverted" revision=revision_image.label url_size='full' classes="hover-overlay hover-overlay-revision-inverted" instant=True %}
+                {% astrobin_image image "regular_inverted" revision=revision_image.label url_size='full' link_alias='hd' classes="hover-overlay hover-overlay-revision-inverted" instant=True %}
             {% endif %}
 
             {% if revision_image.mouse_hover_image|startswith:"REVISION" %}
                 {% with revision_image.mouse_hover_image|split:"__" as revision_label_split %}
-                    {% astrobin_image image alias revision=revision_label_split.1 url_size='full' url_revision=revision_image.label classes="hover-overlay hover-overlay-revision-revision" instant=True %}
+                    {% astrobin_image image alias revision=revision_label_split.1 url_size='full' url_revision=revision_image.label link_alias='hd' classes="hover-overlay hover-overlay-revision-revision" instant=True %}
                 {% endwith %}
             {% endif %}
 
             {% if revision_image.mouse_hover_image == "ORIGINAL" %}
-                {% astrobin_image image alias revision='0' url_size='full' url_revision=revision_image.label classes="hover-overlay hover-overlay-revision-original" instant=True %}
+                {% astrobin_image image alias revision='0' url_size='full' url_revision=revision_image.label link_alias='hd' classes="hover-overlay hover-overlay-revision-original" instant=True %}
             {% endif %}
         {% else %}
             {% if image.mouse_hover_image %}
                 {% if image.mouse_hover_image == "INVERTED" %}
-                    {% astrobin_image image "regular_inverted" revision=revision_label url_size='full' classes="hover-overlay hover-overlay-original-inverted" instant=True %}
+                    {% astrobin_image image "regular_inverted" revision=revision_label url_size='full' link_alias='hd' classes="hover-overlay hover-overlay-original-inverted" instant=True %}
                 {% endif %}
 
                 {% if image.mouse_hover_image|startswith:"REVISION" %}
                     {% with image.mouse_hover_image|split:"__" as revision_label_split %}
-                        {% astrobin_image image alias revision=revision_label_split.1 url_size='full' url_revision=revision_label classes="hover-overlay hover-overlay-original-revision" instant=True %}
+                        {% astrobin_image image alias revision=revision_label_split.1 url_size='full' url_revision=revision_label link_alias='hd' classes="hover-overlay hover-overlay-original-revision" instant=True %}
                     {% endwith %}
                 {% endif %}
             {% endif %}
@@ -69,7 +69,7 @@
                         <img
                                 onerror="solution_image_error(this)"
                                 src="{{ IMAGES_URL }}{{ instance_to_platesolve.solution.image_file }}"
-                                alt="{{ image.title|escape }}" />
+                                alt="{{ image.title }}" />
                     {% endif %}
                 </a>
             </div>

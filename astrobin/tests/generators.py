@@ -38,6 +38,7 @@ class Generators:
     def image(*args, **kwargs):
         return Image.objects.create(
             user=kwargs.pop('user', Generators.user()),
+            title=kwargs.pop('title', Generators.randomString()),
             image_file=kwargs.pop('image_file', 'images/foo.jpg'),
             is_wip=kwargs.pop('is_wip', False),
             is_final=kwargs.pop('is_final', True),
@@ -148,6 +149,7 @@ class Generators:
             topic=kwargs.pop('topic', Generators.forum_topic(user=user)),
             user=kwargs.pop('user', user),
             body=kwargs.pop('body', Generators.randomString(150)),
+            on_moderation=kwargs.pop('on_moderation', False),
         )
 
     @staticmethod

@@ -55,6 +55,12 @@ NOTICE_TYPES = (
         2,
     ),
     (
+        'new_image_comment_moderation',
+        _('A new comment on your image requires moderation'),
+        '',
+        2,
+    ),
+    (
         'comment_approved',
         _('Your comment was approved'),
         '',

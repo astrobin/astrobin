@@ -41,6 +41,8 @@ def split(value, arg):
 
 @register.filter
 def startswith(x, y):
+    if x is None or y is None:
+        return False
     return x.startswith(y)
 
 

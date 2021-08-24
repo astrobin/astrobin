@@ -5,13 +5,19 @@
     color: $black;
   }
 
-  &.active:not(.btn-link), &:active:not(.btn-link) {
+  &.active:not(.btn-link),
+  &:active:not(.btn-link) {
     box-shadow: 0 8px 8px rgba(0, 0, 0, 0.33) inset, 0 -2px 2px rgba(255, 255, 255, 0.1) inset;
   }
 
   &:focus:not(.btn-link) {
     outline: none;
     box-shadow: 0 0 2rem transparentize($link-color, .5);
+  }
+
+  &.disabled,
+  &[disabled] {
+    pointer-events: none;
   }
 }
 
@@ -26,9 +32,7 @@
   background-image: -o-linear-gradient(top, $lighter-link-color, $darker-link-color);
   background-image: linear-gradient(to bottom, $lighter-link-color, $darker-link-color);
   background-repeat: repeat-x;
-  border-color: $darker-link-color;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: $darker-link-color;
 
   &:hover,
   &:focus,
@@ -37,20 +41,11 @@
   &.disabled,
   &[disabled] {
     background-color: $darker-link-color;
-    *background-color: darken($darker-link-color, 10%);
-  }
-
-  &:active,
-  &.active {
-    background-color: darken($darker-link-color, 5%) \9;
+    color: lighten($link-color, 20%);
   }
 
   strong {
     color: $white;
-  }
-
-  &.active, &:active {
-    color: lighten($link-color, 5%);
   }
 }
 

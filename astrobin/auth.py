@@ -10,7 +10,7 @@ class CustomBackend(ModelBackend):
 
         try:
             users = UserModel.objects.filter(
-                Q(username__iexact=username) |
+                Q(username__exact=username) |
                 Q(email__iexact=username)
             ).distinct()
         except UserModel.DoesNotExist:

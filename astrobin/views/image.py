@@ -1,5 +1,6 @@
 import logging
 import re
+from functools import reduce
 
 import six
 from braces.views import (
@@ -10,13 +11,13 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, MultipleObjectsReturned
 from django.core.files.images import get_image_dimensions
-from django.urls import reverse_lazy, reverse
 from django.db.models import Q
 from django.db.models.query import QuerySet
 from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest, HttpResponseForbidden, HttpResponse
 from django.shortcuts import redirect
+from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.utils.encoding import iri_to_uri
 from django.views.decorators.cache import cache_control, never_cache
@@ -26,7 +27,6 @@ from django.views.decorators.vary import vary_on_cookie
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from common.services import DateTimeService
 from common.services.caching_service import CachingService
-from functools import reduce
 
 # Temp compat fix, drop when moved to python3
 if six.PY2:
@@ -141,6 +141,9 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
         image = self.get_object()
 
         alias = kwargs.pop('alias')
+        if alias not in list(settings.THUMBNAIL_ALIASES[''].keys()):
+            raise Http404
+
         revision_label = kwargs.pop('r', None)
 
         force = request.GET.get('force')
@@ -176,7 +179,11 @@ class ImageRawThumbView(ImageDetailViewBase):
 
     def get(self, request, *args, **kwargs):
         image = self.get_object()
+
         alias = kwargs.pop('alias')
+        if alias not in list(settings.THUMBNAIL_ALIASES[''].keys()):
+            raise Http404
+
         revision_label = kwargs.pop('r', None)
 
         force = request.GET.get('force')
@@ -376,6 +383,8 @@ class ImageDetailView(ImageDetailViewBase):
             ssa = SolarSystem_Acquisition.objects.get(image=image)
         except SolarSystem_Acquisition.DoesNotExist:
             pass
+        except MultipleObjectsReturned:
+            ssa = SolarSystem_Acquisition.objects.filter(image=image).first()
 
         if deep_sky_acquisitions:
             image_type = 'deep_sky'
@@ -682,12 +691,25 @@ class ImageDetailView(ImageDetailViewBase):
             'revision_label': r,
 
             'instance_to_platesolve': instance_to_platesolve,
-            'show_solution': instance_to_platesolve.mouse_hover_image == MouseHoverImage.SOLUTION
-                             and instance_to_platesolve.solution
-                             and instance_to_platesolve.solution.status >= Solver.SUCCESS,
-            'show_advanced_solution': instance_to_platesolve.mouse_hover_image == MouseHoverImage.SOLUTION
-                                      and instance_to_platesolve.solution
-                                      and instance_to_platesolve.solution.status == Solver.ADVANCED_SUCCESS,
+            'show_solution': (
+                                     instance_to_platesolve.mouse_hover_image == MouseHoverImage.SOLUTION
+                                     and instance_to_platesolve.solution
+                                     and instance_to_platesolve.solution.status >= Solver.SUCCESS)
+                             or (
+                                     mod == 'solved'
+                                     and instance_to_platesolve.solution
+                                     and instance_to_platesolve.solution.status >= Solver.SUCCESS
+                             ),
+            'show_advanced_solution': (
+                                              instance_to_platesolve.mouse_hover_image == MouseHoverImage.SOLUTION
+                                              and instance_to_platesolve.solution
+                                              and instance_to_platesolve.solution.status == Solver.ADVANCED_SUCCESS
+                                      )
+                                      or (
+                                              mod == 'solved'
+                                              and instance_to_platesolve.solution
+                                              and instance_to_platesolve.solution.status >= Solver.ADVANCED_SUCCESS
+                                      ),
             'skyplot_zoom1': skyplot_zoom1,
 
             'image_ct': ContentType.objects.get_for_model(Image),
@@ -945,7 +967,7 @@ class ImageDeleteOtherVersionsView(LoginRequiredMixin, View):
             image.w = revision.w
             image.h = revision.h
             if revision.description:
-                image.description = image.description + '\n' + revision.description
+                image.description = (image.description or '') + '\n' + revision.description
             image_modified = True
 
             if revision.solution:

@@ -128,12 +128,15 @@ class ImageEditBasicForm(forms.ModelForm):
             if tags is None:
                 return
 
-            for tag in parseKeyValueTags(tags):
-                KeyValueTag.objects.create(
-                    image=instance,
-                    key=tag["key"],
-                    value=tag["value"]
-                )
+            try:
+                for tag in parseKeyValueTags(tags):
+                    KeyValueTag.objects.create(
+                        image=instance,
+                        key=tag["key"],
+                        value=tag["value"]
+                    )
+            except ValueError:
+                raise forms.ValidationError(_("Unable to parse."))
 
     def save(self, commit=True):
         instance = super(ImageEditBasicForm, self).save(commit=False)
