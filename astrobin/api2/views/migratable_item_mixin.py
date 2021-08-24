@@ -1,4 +1,4 @@
-from django.http import HttpResponseBadRequest
+from django.http import HttpResponseBadRequest, HttpRequest
 from django.utils import timezone
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -10,13 +10,37 @@ from astrobin_apps_equipment.models import Camera, Telescope
 class MigratableItemMixin:
     @action(detail=False, methods=['get'], url_path='random-non-migrated')
     def random_non_migrated(self, request):
-        queryset = self.get_queryset().filter(migration_flag__isnull=True).order_by('?')[:1]
+        queryset = self.get_queryset().filter(
+            migration_flag__isnull=True, migration_flag_moderator_lock__isnull=True).order_by('?')[:1]
         serializer = self.get_serializer(queryset, many=True, context=self.get_serializer_context())
         return Response(serializer.data)
 
+    @action(detail=False, methods=['get'], url_path='pending-migration-moderation-items')
+    def pending_migration_moderation_items(self, request):
+        queryset = self.get_queryset().filter(migration_flag__isnull=False, migration_flag_moderator__isnull=True)
+        serializer = self.get_serializer(queryset, many=True, context=self.get_serializer_context())
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['put'], url_path='lock-for-migration')
+    def lock_for_migration(self, request: HttpRequest, pk: int) -> Response:
+        obj: Gear = self.get_object()
+
+        if obj.migration_flag is not None:
+            return Response(status=409)
+
+        if obj.migration_flag_moderator_lock is not None:
+            return Response(status=409)
+
+        obj.migration_flag_moderator_lock = request.user
+        obj.migration_flag_moderator_lock_timestamp = timezone.now()
+
+        obj.save()
+
+        return Response(status=200)
+
     @action(detail=True, methods=['put'], url_path='set-migration')
     def set_migration(self, request, pk):
-        obj = self.get_object()  # type: Gear
+        obj: Gear = self.get_object()
 
         if obj.migration_flag is not None:
             return Response(status=409)

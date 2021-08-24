@@ -1,5 +1,3 @@
-
-
 import csv
 import json
 import ntpath
@@ -41,7 +39,7 @@ from haystack.query import SearchQuerySet
 from registration.backends.hmac.views import RegistrationView
 from requests import Response
 
-from astrobin.models import BroadcastEmail, Image, DataDownloadRequest, ImageRevision
+from astrobin.models import BroadcastEmail, Image, DataDownloadRequest, ImageRevision, Gear
 from astrobin.utils import inactive_accounts, never_activated_accounts, never_activated_accounts_to_be_deleted
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
@@ -636,3 +634,12 @@ def clear_duplicate_hit_counts():
     )
 
     HitCount.objects.annotate(has_other=Exists(duplicates)).filter(has_other=True).delete()
+
+
+@shared_task(time_limit=30)
+def expire_gear_migration_locks():
+    Gear.objects \
+        .filter(migration_flag_moderator_lock__isnull=False,
+                migration_flag_moderator_lock_timestamp__lt=timezone.now() - timedelta(hours=1)) \
+        .update(migration_flag_moderator_lock=None,
+                migration_flag_moderator_lock_timestamp=None)
