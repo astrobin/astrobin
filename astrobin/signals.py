@@ -505,7 +505,7 @@ def group_pre_save(sender, instance, **kwargs):
         # Group is becoming autosubmission
         if not group.autosubmission and instance.autosubmission:
             instance.images.clear()
-            images = Image.objects_including_wip.filter(user__in=instance.members.all())
+            images = Image.objects.filter(user__in=instance.members.all())
             for image in images:
                 instance.images.add(image)
 
@@ -657,8 +657,8 @@ m2m_changed.connect(group_members_changed, sender=Group.members.through)
 
 def group_images_changed(sender, instance, **kwargs):
     if kwargs['action'] == 'post_add' and 'pk_set' in kwargs:
-        for i in sender.group.get_queryset().filter(pk__in=kwargs.get('pk_set'), autosubmission=True).iterator():
-            i.save()  # trigger date_updated update
+        group = sender.group.get_queryset().first()
+        group.save()  # trigger date_updated update
 
 
 m2m_changed.connect(group_images_changed, sender=Group.images.through)
