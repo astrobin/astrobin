@@ -90,7 +90,9 @@ class CommentNotificationsService:
                 image = self.comment.content_object
                 push_notification([image.user], None, 'new_image_comment_moderation', {
                     'title': image.title,
-                    'url': build_notification_url(settings.BASE_URL + self.comment.get_absolute_url())
+                    'url': build_notification_url(
+                        '%s%s#c%d' % (settings.BASE_URL, image.get_absolute_url(), self.comment.pk),
+                        additional_query_args={'moderate-comment': 1})
                 })
 
     @staticmethod
