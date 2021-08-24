@@ -39,7 +39,6 @@ $(document).ready(function() {
         var $partial = $(".partial-width-image-container");
         var $full = $(".full-width-image-container");
 
-
         function showFull() {
             $partial.remove();
             $full.show();
@@ -75,6 +74,15 @@ $(document).ready(function() {
         {% endif %}
 
         $(".loading-correct-image-size").remove();
+    }
+
+    function setupSmallerThanRegularAttribute() {
+        var containerWidth = $(".astrobin-image-container").width();
+        var imageWidth = {{ w }};
+
+        if (imageWidth < containerWidth) {
+            $(".main-image .astrobin-image").attr("data-smaller-than-regular", "true");
+        }
     }
 
     $('form.copy select').change(function() {
@@ -160,6 +168,8 @@ $(document).ready(function() {
     });
 
     showProperImageSize();
+    setupSmallerThanRegularAttribute();
+
     astrobin_common.setup_gear_popovers();
     astrobin_common.setup_subject_popovers();
 

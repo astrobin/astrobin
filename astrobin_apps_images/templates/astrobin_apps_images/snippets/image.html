@@ -116,10 +116,6 @@
                          data-get-enhanced-thumb-url="{{get_enhanced_thumb_url}}"
                      {% endif %}
 
-                     {% if w < 620 %}
-                         data-smaller-than-regular="true"
-                     {% endif %}
-
                      alt="{{image.title|escape}}, {% astrobin_username image.user link=False %}"
                 />
 
