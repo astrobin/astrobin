@@ -31,7 +31,8 @@ class MessagesTest(TestCase):
         response = self.client.post(reverse('messages_compose'), {
             'recipient': 'user2',
             'subject': subject,
-            'body': 'I am a body'
+            'body': 'I am a body',
+            'g-recaptcha-response': '1',
         }, follow=True)
 
         self.assertEqual(response.status_code, 200)
