@@ -15,9 +15,9 @@ class MigratableItemMixin:
         serializer = self.get_serializer(queryset, many=True, context=self.get_serializer_context())
         return Response(serializer.data)
 
-    @action(detail=False, methods=['get'], url_path='pending-migration-moderation')
-    def pending_migration_moderation(self, request):
-        queryset = self.get_queryset().filter(migration_flag__isnull=False, migration_flag_moderator__isnull=True)
+    @action(detail=False, methods=['get'], url_path='pending-migration-review')
+    def pending_migration_review(self, request):
+        queryset = self.get_queryset().filter(migration_flag__isnull=False, migration_flag_reviewer__isnull=True)
         serializer = self.get_serializer(queryset, many=True, context=self.get_serializer_context())
         return Response(serializer.data)
 
@@ -33,6 +33,23 @@ class MigratableItemMixin:
 
         obj.migration_flag_moderator_lock = request.user
         obj.migration_flag_moderator_lock_timestamp = timezone.now()
+
+        obj.save()
+
+        return Response(status=200)
+
+    @action(detail=True, methods=['put'], url_path='lock-for-migration-review')
+    def lock_for_migration_review(self, request: HttpRequest, pk: int) -> Response:
+        obj: Gear = self.get_object()
+
+        if obj.migration_flag is not None:
+            return Response(status=409)
+
+        if obj.migration_flag_reviewer_lock is not None:
+            return Response(status=409)
+
+        obj.migration_flag_reviewer_lock = request.user
+        obj.migration_flag_reviewer_lock_timestamp = timezone.now()
 
         obj.save()
 

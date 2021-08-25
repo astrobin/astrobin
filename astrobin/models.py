@@ -284,15 +284,21 @@ class Gear(models.Model):
             ('MIGRATE', 'This item is ready for migration')
         ),
     )
+    migration_flag_timestamp = models.DateTimeField(null=True, blank=True)
+    migration_content_type = models.ForeignKey(ContentType, null=True, blank=True, on_delete=models.SET_NULL)
+    migration_object_id = models.PositiveIntegerField(null=True, blank=True)
+    migration_content_object = GenericForeignKey('migration_content_type', 'migration_object_id')
     migration_flag_moderator = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.SET_NULL, related_name='migrated_gear_items')
     migration_flag_moderator_lock = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.SET_NULL, related_name='migrated_gear_item_locks')
     migration_flag_moderator_lock_timestamp = models.DateTimeField(null=True, blank=True)
-    migration_flag_timestamp = models.DateTimeField(null=True, blank=True)
-    migration_content_type = models.ForeignKey(ContentType, null=True, blank=True, on_delete=models.SET_NULL)
-    migration_object_id = models.PositiveIntegerField(null=True, blank=True)
-    migration_content_object = GenericForeignKey('migration_content_type', 'migration_object_id')
+
+    migration_flag_reviewer = models.ForeignKey(
+        User, null=True, blank=True, on_delete=models.SET_NULL, related_name='reviewed_for_migration_gear_items')
+    migration_flag_reviewer_lock = models.ForeignKey(
+        User, null=True, blank=True, on_delete=models.SET_NULL, related_name='reviewed_for_migration_gear_item_locks')
+    migration_flag_reviewer_lock_timestamp = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         make = self.get_make()
