@@ -15,8 +15,8 @@ class MigratableItemMixin:
         serializer = self.get_serializer(queryset, many=True, context=self.get_serializer_context())
         return Response(serializer.data)
 
-    @action(detail=False, methods=['get'], url_path='pending-migration-moderation-items')
-    def pending_migration_moderation_items(self, request):
+    @action(detail=False, methods=['get'], url_path='pending-migration-moderation')
+    def pending_migration_moderation(self, request):
         queryset = self.get_queryset().filter(migration_flag__isnull=False, migration_flag_moderator__isnull=True)
         serializer = self.get_serializer(queryset, many=True, context=self.get_serializer_context())
         return Response(serializer.data)
