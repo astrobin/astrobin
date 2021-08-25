@@ -41,7 +41,7 @@ from silk.profiling.profiler import silk_profile
 
 from astrobin.context_processors import user_language, common_variables
 from astrobin.enums import SubjectType
-from astrobin.forms import ImageUploadForm, ImageLicenseForm, PrivateMessageForm, UserProfileEditBasicForm, \
+from astrobin.forms import ImageUploadForm, ImageLicenseForm, UserProfileEditBasicForm, \
     DeepSky_AcquisitionBasicForm, SolarSystem_AcquisitionForm, \
     DefaultImageLicenseForm, TelescopeEditNewForm, MountEditNewForm, CameraEditNewForm, \
     FocalReducerEditNewForm, SoftwareEditNewForm, FilterEditNewForm, AccessoryEditNewForm, TelescopeEditForm, \
@@ -1421,7 +1421,6 @@ def user_page(request, username):
         'view': request.GET.get('view', 'default'),
         'requested_user': user,
         'profile': profile,
-        'private_message_form': PrivateMessageForm(),
         'section': section,
         'subsection': subsection,
         'active': active,
@@ -1479,7 +1478,6 @@ def user_page_bookmarks(request, username):
         'requested_user': user,
         'image_list': UserService(user).get_bookmarked_images(),
         'paginate_by': settings.PAGINATE_USER_PAGE_BY,
-        'private_message_form': PrivateMessageForm(),
         'alias': 'gallery',
     }
 
@@ -1501,7 +1499,6 @@ def user_page_liked(request, username):
         'requested_user': user,
         'image_list': UserService(user).get_liked_images(),
         'paginate_by': settings.PAGINATE_USER_PAGE_BY,
-        'private_message_form': PrivateMessageForm(),
         'alias': 'gallery',
     }
 
@@ -1541,7 +1538,6 @@ def user_page_following(request, username, extra_context=None):
         'requested_user': user,
         'user_list': followed_users,
         'view': request.GET.get('view', 'default'),
-        'private_message_form': PrivateMessageForm(),
     }
 
     response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
@@ -1576,7 +1572,6 @@ def user_page_followers(request, username, extra_context=None):
         'requested_user': user,
         'user_list': followers,
         'view': request.GET.get('view', 'default'),
-        'private_message_form': PrivateMessageForm(),
     }
 
     response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
@@ -1619,7 +1614,6 @@ def user_page_friends(request, username, extra_context=None):
         'requested_user': user,
         'user_list': friends,
         'view': request.GET.get('view', 'default'),
-        'private_message_form': PrivateMessageForm(),
     }
 
     response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))

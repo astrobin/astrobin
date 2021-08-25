@@ -27,6 +27,7 @@ from astrobin.api import (
     CollectionResource,
     UserProfileResource
 )
+from astrobin.forms.private_message_form import PrivateMessageForm
 from astrobin.search import AstroBinSearchView
 from astrobin.views import (
     api as api_views,
@@ -389,8 +390,10 @@ urlpatterns += [
     ###########################################################################
 
     url(r'^messages/batch-update/$', messages_batch_update, name='messages_batch_update'),
-    url(r'^messages/compose/$', messages_compose, {'template_name': 'messages/compose.html'}, name='messages_compose'),
-    url(r'^messages/compose/(?P<recipient>[\w.@+-]+)/$', messages_compose, {'template_name': 'messages/compose.html'},
+    url(r'^messages/compose/$', messages_compose, {'template_name': 'messages/compose.html',
+                                                   'form_class': PrivateMessageForm}, name='messages_compose'),
+    url(r'^messages/compose/(?P<recipient>[\w.@+-]+)/$', messages_compose,
+        {'template_name': 'messages/compose.html', 'form_class': PrivateMessageForm},
         name='messages_compose_to'),
     url(r'^messages/delete/(?P<thread_id>[\d]+)/$', messages_delete, name='messages_delete'),
     url(r'^messages/inbox/$', messages_inbox, {'template_name': 'messages/inbox.html'}, name='messages_inbox'),
