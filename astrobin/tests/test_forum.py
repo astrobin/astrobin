@@ -33,11 +33,6 @@ class ForumTest(TestCase):
 
         self.client.login(username="user", password="password")
 
-    def tearDown(self):
-        self.forum.delete()
-        self.category.delete()
-        self.user.delete()
-        self.content_moderators.delete()
 
     def _get_post_form(self, user=None, topic=None):
         if topic is None:
@@ -58,6 +53,19 @@ class ForumTest(TestCase):
 
         self.assertEqual(post.on_moderation, True)
 
+    def test_create_post_auto_approve_domain(self):
+        old_email = self.user.email
+        self.user.email = 'test@highpointscientific.com'
+        self.user.save()
+
+        form = self._get_post_form()
+        post, topic = form.save(commit=False)
+
+        self.assertEqual(post.on_moderation, False)
+
+        self.user.email = old_email
+        self.user.save()
+
     def test_create_post_premium(self):
         # Premium members have a free pass
         g, created = Group.objects.get_or_create(name="astrobin_premium")
@@ -77,10 +85,6 @@ class ForumTest(TestCase):
         post, topic = form.save(commit=False)
 
         self.assertEqual(post.on_moderation, False)
-
-        us.delete()
-        s.delete()
-        g.delete()
 
     @patch('astrobin.models.UserProfile.get_scores')
     def test_create_post_high_index(self, get_scores):
@@ -190,10 +194,6 @@ class ForumTest(TestCase):
         # Restore status
         self.client.logout()
         self.client.login(username="user", password="password")
-
-        user2.delete()
-        post.delete()
-        group.delete()
 
     def test_mark_as_spam(self):
         topic1 = Topic.objects.create(forum=self.forum, name="Test topic 1", user=self.user)
