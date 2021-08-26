@@ -16,7 +16,8 @@ class CommentApprovalTest(TestCase):
         # Index:             NOT OK
         # Membership:        NOT OK
         # Approved comments: NOT OK
-        # Content owner:         OK
+        # Content owner:     NOT OK
+        # Auto approve:      NOT OK
 
         get_scores.return_value = {'user_scores_index': 0}
 
@@ -28,11 +29,31 @@ class CommentApprovalTest(TestCase):
         self.assertTrue(comment.pending_moderation)
 
     @patch("astrobin.models.UserProfile.get_scores")
+    def test_do_not_mark_as_pending_due_to_domain(self, get_scores):
+        # Index:             NOT OK
+        # Membership:        NOT OK
+        # Approved comments: NOT OK
+        # Content owner:     NOT OK
+        # Auto approve:          OK
+
+        get_scores.return_value = {'user_scores_index': 0}
+
+        image = Generators.image()
+        author = Generators.user(email='test@highpointscientific.com')
+        comment = NestedCommentsGenerators.comment(
+            target=image,
+            author=author
+        )
+
+        self.assertIsNone(comment.pending_moderation)
+
+    @patch("astrobin.models.UserProfile.get_scores")
     def test_do_not_mark_as_pending_due_to_index(self, get_scores):
         # Index:                 OK
         # Membership:        NOT OK
         # Approved comments: NOT OK
-        # Content owner:         OK
+        # Content owner:     NOT OK
+        # Auto approve:      NOT OK
 
         get_scores.return_value = {'user_scores_index': 10}
 
@@ -48,7 +69,8 @@ class CommentApprovalTest(TestCase):
         # Index:             NOT OK
         # Membership:            OK
         # Approved comments: NOT OK
-        # Content owner:         OK
+        # Content owner:     NOT OK
+        # Auto approve:      NOT OK
 
         get_scores.return_value = {'user_scores_index': 0}
 
@@ -68,7 +90,8 @@ class CommentApprovalTest(TestCase):
         # Index:             NOT OK
         # Membership:        NOT OK
         # Approved comments: NOT OK
-        # Content owner:         OK
+        # Content owner:     NOT OK
+        # Auto approve:      NOT OK
 
         get_scores.return_value = {'user_scores_index': 0}
 
@@ -96,7 +119,8 @@ class CommentApprovalTest(TestCase):
         # Index:             NOT OK
         # Membership:        NOT OK
         # Approved comments: NOT OK
-        # Content owner:         OK
+        # Content owner:     NOT OK
+        # Auto approve:      NOT OK
 
         get_scores.return_value = {'user_scores_index': 0}
 
@@ -127,8 +151,9 @@ class CommentApprovalTest(TestCase):
     def test_do_not_mark_as_pending_due_author_being_content_owner(self, get_scores):
         # Index:             NOT OK
         # Membership:        NOT OK
-        # Approved comments:     OK
-        # Content owner:     NOT OK
+        # Approved comments: NOT OK
+        # Content owner:         OK
+        # Auto approve:      NOT OK
 
         get_scores.return_value = {'user_scores_index': 0}
 
@@ -146,7 +171,8 @@ class CommentApprovalTest(TestCase):
         # Index:             NOT OK
         # Membership:        NOT OK
         # Approved comments:     OK
-        # Content owner:         OK
+        # Content owner:     NOT OK
+        # Auto approve:      NOT OK
 
         get_scores.return_value = {'user_scores_index': 0}
 
