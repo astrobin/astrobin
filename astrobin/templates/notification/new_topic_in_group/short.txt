@@ -1,2 +1,3 @@
 {% load i18n %}
+
 {% blocktrans %}{{user}} posted a new topic to the group: "{{group_name}}"{% endblocktrans %}

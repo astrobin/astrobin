@@ -1,7 +1,14 @@
 {% load i18n %}
-{% blocktrans %}{{user}} posted a new topic to the group: "{{group_name}}"
 
-"{{topic_title}}"
+{% blocktrans trimmed %}
+    <a href="{{ user_url }}">{{ user }}</a> posted a new topic to the group
+    <a href="{{ group_url }}">{{ group_name }}</a>.
+{% endblocktrans %}
 
-View the topic: <a href="{{url}}">{{url}}</a>
-View the group: <a href="{{group_url}}">{{group_url}}</a>{% endblocktrans %}
+<br /><br />
+
+<strong>{{ topic_title }}</strong>
+
+<br /><br />
+
+<a href="{{ url }}" class="btn btn-primary">{% trans "View topic" %}</a>
