@@ -932,7 +932,7 @@ def image_edit_save_watermark(request):
     except MultiValueDictKeyError:
         raise Http404
 
-    image = get_image_or_404(Image.objects_including_wip, image_id)
+    image: Image = get_image_or_404(Image.objects_including_wip, image_id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -948,7 +948,7 @@ def image_edit_save_watermark(request):
     form.save()
 
     # Save defaults in profile
-    profile = image.user.userprofile
+    profile: UserProfile = image.user.userprofile
     profile.default_watermark = form.cleaned_data['watermark']
     profile.default_watermark_text = form.cleaned_data['watermark_text']
     profile.default_watermark_position = form.cleaned_data['watermark_position']
@@ -962,6 +962,9 @@ def image_edit_save_watermark(request):
 
     # Force new thumbnails
     image.thumbnail_invalidate()
+    revision: ImageRevision
+    for revision in ImageService(image).get_revisions():
+        revision.thumbnail_invalidate()
 
     return HttpResponseRedirect(image.get_absolute_url())
 
