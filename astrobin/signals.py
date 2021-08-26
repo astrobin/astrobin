@@ -691,6 +691,8 @@ def forum_topic_pre_save(sender, instance, **kwargs):
                 instance.user,
                 'new_topic_in_group',
                 {
+                    'user_url': build_notification_url(
+                        settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user})),
                     'user': instance.user.userprofile.get_display_name(),
                     'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
                     'group_url': build_notification_url(
@@ -719,6 +721,8 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
             instance.user,
             'new_topic_in_group',
             {
+                'user_url': build_notification_url(
+                    settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user})),
                 'user': instance.user.userprofile.get_display_name(),
                 'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
                 'group_url': build_notification_url(
