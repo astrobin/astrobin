@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.test import TestCase
 from threaded_messages.models import Thread
 
+from astrobin.tests.generators import Generators
+
 
 class MessagesTest(TestCase):
     def setUp(self):
@@ -46,18 +48,42 @@ class MessagesTest(TestCase):
         self.assertContains(response, subject)
 
     def test_messages_view(self):
-        subject = 'I am a subject'  # type: basestring
-        body = 'I am a body'  # type: basestring
+        subject = 'I am a subject'
+        body = 'I am a body'
 
         self.client.login(username='user', password='password')
 
         self.client.post(reverse('messages_compose'), {
             'recipient': 'user2',
             'subject': subject,
-            'body': body
+            'body': body,
+            'g-recaptcha-response': '1',
         }, follow=True)
 
         thread = Thread.objects.all()[0]  # type: Thread
+
+        response = self.client.get(reverse('messages_detail', args=(thread.id,)), follow=True)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, subject)
+        self.assertContains(response, body)
+
+    def test_messages_view_paid_account(self):
+        subject = 'I am a subject'
+        body = 'I am a body'
+
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+
+        self.client.login(username='user', password='password')
+
+        self.client.post(reverse('messages_compose'), {
+            'recipient': 'user2',
+            'subject': subject,
+            'body': body,
+            # No 'g-recaptcha-response' parameter!
+        }, follow=True)
+
+        thread: Thread = Thread.objects.all()[0]
 
         response = self.client.get(reverse('messages_detail', args=(thread.id,)), follow=True)
 
