@@ -3,6 +3,8 @@ $flat-theme-dark-color: $grey-6;
 
 .select2-container {
   min-width: 200px;
+  max-width: 624px;
+  width: calc(100% - 3px) !important;
 
   .remote-source-affiliate {
     color: gold;

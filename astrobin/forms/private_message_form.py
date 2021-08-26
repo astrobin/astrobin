@@ -13,6 +13,8 @@ class PrivateMessageForm(ComposeForm):
 
     body = forms.CharField(widget=forms.Textarea, max_length=4096, required=True)
 
+
+class PrivateMessageFormWithRecaptcha(PrivateMessageForm):
     recaptcha = ReCaptchaField(
         label=_('Are you a robot?'),
         widget=ReCaptchaV2Checkbox(

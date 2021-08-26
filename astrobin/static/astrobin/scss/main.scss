@@ -17,6 +17,7 @@
 @import "toast";
 @import "toggle";
 @import "toggleproperties";
+@import "token-input";
 @import "uniform";
 @import "ui-tooltip";
 @import "ui-datepicker";
@@ -664,45 +665,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   @include rounded-corners-bottom;
   border-top: none;
   margin-top: 0;
-}
-
-.ui-multiselect {
-  display: none;
-  border: none;
-
-  div.available {
-    border-color: $grey-7;
-  }
-
-  ul.available, ul.selected {
-    background: ($light-panel-color) url('../images/light-panel-tile.png');
-    min-height: 75px;
-  }
-
-  .ui-state-default {
-    color: $link-color;
-    background: $light-panel-color * 1.1;
-  }
-
-  .ui-state-highlight {
-    background: $light-panel-color * 1.2;
-    border-color: $border-top-color;
-  }
-
-  .ui-widget-header {
-    color: $text-color;
-    background: $light-panel-color * 1.2;
-  }
-
-  input.search {
-    margin: 7px 4px 0 4px;
-    background: $strong-text-color;
-    color: $background-color;
-  }
-
-  .remove-all, .add-all {
-    color: $link-color;
-  }
 }
 
 .progressbar {
@@ -1689,67 +1651,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
 .message-form {
   margin-top: $spacer-xxxlarge;
-}
-
-ul.token-input-list {
-  display: inline-block;
-  list-style-type: none;
-  padding: $spacer-medium $spacer-small;
-  margin: $spacer-small 0;
-  overflow: auto;
-  background-color: #404040;
-  border: 1px solid $grey-7;
-  width: 610px;
-  max-width: 97%;
-
-  li.token-input-token {
-    display: inline-block;
-    font-weight: initial;
-    color: white;
-    text-shadow: 1px 1px 0 black;
-
-    span {
-      padding-left: $spacer-medium;
-      color: $grey-1;
-      font-weight: bold;
-    }
-  }
-
-  li.token-input-input-token {
-    border: none;
-
-    input, textarea {
-      margin: $spacer-small 0;
-      background: none;
-      width: calc(100% - 1rem);
-    }
-  }
-
-  input, input:focus {
-    background: none;
-    border: none;
-    box-shadow: none;
-  }
-}
-
-div.token-input-dropdown {
-  z-index: 1049;
-  background-color: $strong-text-color;
-  color: $background-color;
-
-  li.token-input-selected-dropdown-item {
-    color: $text-color;
-  }
-
-  li.token-input-dropdown-item,
-  li.token-input-dropdown-item2 {
-    color: $background-color;
-    background-color: $link-color;
-  }
-
-  p {
-    color: $text-color;
-  }
 }
 
 .plot {

@@ -10,7 +10,6 @@ from django.views.static import serve
 from rest_framework.authtoken.views import obtain_auth_token
 from tastypie.api import Api
 from threaded_messages.views import batch_update as messages_batch_update
-from threaded_messages.views import compose as messages_compose
 from threaded_messages.views import delete as messages_delete
 from threaded_messages.views import inbox as messages_inbox
 from threaded_messages.views import message_ajax_reply as messages_message_ajax_reply
@@ -126,6 +125,7 @@ from astrobin.views import (
 )
 from astrobin.views.contact import ContactRedirectView
 from astrobin.views.forums import LatestTopicsView
+from astrobin.views.messages import messages_compose
 from astrobin.views.profile.download_data_view import DownloadDataView
 
 admin.autodiscover()
@@ -390,10 +390,8 @@ urlpatterns += [
     ###########################################################################
 
     url(r'^messages/batch-update/$', messages_batch_update, name='messages_batch_update'),
-    url(r'^messages/compose/$', messages_compose, {'template_name': 'messages/compose.html',
-                                                   'form_class': PrivateMessageForm}, name='messages_compose'),
-    url(r'^messages/compose/(?P<recipient>[\w.@+-]+)/$', messages_compose,
-        {'template_name': 'messages/compose.html', 'form_class': PrivateMessageForm},
+    url(r'^messages/compose/$', messages_compose, {'template_name': 'messages/compose.html'}, name='messages_compose'),
+    url(r'^messages/compose/(?P<recipient>[\w.@+-]+)/$', messages_compose, {'template_name': 'messages/compose.html'},
         name='messages_compose_to'),
     url(r'^messages/delete/(?P<thread_id>[\d]+)/$', messages_delete, name='messages_delete'),
     url(r'^messages/inbox/$', messages_inbox, {'template_name': 'messages/inbox.html'}, name='messages_inbox'),

@@ -61,14 +61,20 @@ input:focus, textarea:focus {
   input[type=password],
   textarea,
   .cke,
+  select,
   .help-block {
-    width: 610px;
-    max-width: 96%;
+    max-width: 610px;
+    width: calc(100% - 1rem);
+  }
+
+  .cke {
+    max-width: 624px;
+    width: calc(100% - 3px);
   }
 
   select {
-    width: 624px;
-    max-width: 99%;
+    max-width: 624px;
+    width: calc(100% - 2px);
   }
 
   .control-label {
