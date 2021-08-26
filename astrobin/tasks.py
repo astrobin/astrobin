@@ -1,5 +1,3 @@
-
-
 import csv
 import json
 import ntpath
@@ -8,7 +6,6 @@ import tempfile
 import uuid
 import zipfile
 
-import six
 from django.db import IntegrityError
 from django.db.models import OuterRef, Exists
 from django.template.defaultfilters import filesizeformat
@@ -16,10 +13,7 @@ from hitcount.models import HitCount
 
 from common.services import DateTimeService
 
-if six.PY2:
-    from io import StringIO
-else:
-    from io import StringIO
+from io import StringIO
 from datetime import datetime, timedelta
 from time import sleep
 from zipfile import ZipFile
