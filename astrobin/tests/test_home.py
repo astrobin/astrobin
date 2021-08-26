@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.test import TestCase, override_settings
 from django_bouncy.models import Complaint
-from mock import patch
 
 from astrobin.tests.common import *
 
@@ -46,7 +45,7 @@ class HomeTest(TestCase):
 
     def test_complaint_alert(self):
         self.client.login(username='test', password='password')
-        complaint = Complaint.objects.create(
+        Complaint.objects.create(
             address=self.user.email,
             mail_timestamp=datetime.datetime.now()
         )

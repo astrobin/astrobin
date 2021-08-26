@@ -145,3 +145,48 @@ select[multiple="multiple"][disabled="disabled"] + .ui-multiselect {
   opacity: .33;
   pointer-events: none;
 }
+
+.ui-multiselect {
+  display: none;
+  border: none;
+  max-width: 621px;
+  width: calc(100% - 6px) !important;
+
+  .ui-widget-content {
+    width: calc(50% - 1px) !important;
+  }
+
+  div.available {
+    border-color: $grey-7;
+  }
+
+  ul.available, ul.selected {
+    background: ($light-panel-color) url('../images/light-panel-tile.png');
+    min-height: 75px;
+  }
+
+  .ui-state-default {
+    color: $link-color;
+    background: $light-panel-color * 1.1;
+  }
+
+  .ui-state-highlight {
+    background: $light-panel-color * 1.2;
+    border-color: $border-top-color;
+  }
+
+  .ui-widget-header {
+    color: $text-color;
+    background: $light-panel-color * 1.2;
+  }
+
+  input.search {
+    margin: 7px 4px 0 4px;
+    background: $strong-text-color;
+    color: $background-color;
+  }
+
+  .remove-all, .add-all {
+    color: $link-color;
+  }
+}

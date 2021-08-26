@@ -53,7 +53,6 @@ from astrobin.forms import (
     ImageFlagThumbsForm,
     ImagePromoteForm,
     ImageRevisionUploadForm,
-    PrivateMessageForm,
     ImageEditThumbnailsForm,
     ImageEditCorruptedRevisionForm)
 from astrobin.forms.uncompressed_source_upload_form import UncompressedSourceUploadForm
@@ -728,7 +727,6 @@ class ImageDetailView(ImageDetailViewBase):
             'image_type': image_type,
             'ssa': ssa,
             'deep_sky_data': deep_sky_data,
-            'private_message_form': PrivateMessageForm(),
             'promote_form': ImagePromoteForm(instance=image),
             'upload_revision_form': ImageRevisionUploadForm(),
             'upload_uncompressed_source_form': UncompressedSourceUploadForm(instance=image),
