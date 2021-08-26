@@ -26,7 +26,6 @@ from astrobin.api import (
     CollectionResource,
     UserProfileResource
 )
-from astrobin.forms.private_message_form import PrivateMessageForm
 from astrobin.search import AstroBinSearchView
 from astrobin.views import (
     api as api_views,
@@ -125,7 +124,7 @@ from astrobin.views import (
 )
 from astrobin.views.contact import ContactRedirectView
 from astrobin.views.forums import LatestTopicsView
-from astrobin.views.messages import messages_compose
+from astrobin.views.threaded_messages import messages_compose
 from astrobin.views.profile.download_data_view import DownloadDataView
 
 admin.autodiscover()
