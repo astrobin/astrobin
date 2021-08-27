@@ -647,6 +647,7 @@ class GroupsTest(TestCase):
         # Successfully add
         self.group.members.add(self.user2)
         self.assertEqual(self.group.images.count(), 0)
+        updated = self.group.date_updated
         response = self.client.post(
             url,
             {
@@ -655,7 +656,9 @@ class GroupsTest(TestCase):
             HTTP_X_REQUESTED_WITH='XMLHttpRequest',
             follow=True)
         self.assertEqual(response.status_code, 200)
+        self.group.refresh_from_db()
         self.assertEqual(self.group.images.count(), 1)
+        self.assertTrue(self.group.date_updated > updated)
         self.group.members.remove(self.user2)
 
         response = self.client.get(reverse('image_detail', args=(image.get_id(),)))

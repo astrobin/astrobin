@@ -1,7 +1,10 @@
 {% load i18n %}
-{% blocktrans %}{{user}} posted a new topic to the group: "{{group_name}}"
 
-"{{topic_title}}"
+{% blocktrans trimmed %}
+    {{user}} posted a new topic to the following group: {{group_name}}.
+{% endblocktrans %}
 
-View the topic: {{url}}
-View the group: {{group_url}}{% endblocktrans %}
+{% trans "Title" %}: {{topic_title}}
+{% trans "View the topic" %}: {{url}}
+{% trans "View the group" %}: {{group_url}}
+

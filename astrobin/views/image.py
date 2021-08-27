@@ -2,7 +2,6 @@ import logging
 import re
 from functools import reduce
 
-import six
 from braces.views import (
     JSONResponseMixin,
     LoginRequiredMixin,
@@ -20,20 +19,11 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.utils.encoding import iri_to_uri
+from django.utils.encoding import smart_text as smart_unicode
+from django.utils.translation import ugettext as _
 from django.views.decorators.cache import cache_control, never_cache
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_cookie
-
-from astrobin.enums.mouse_hover_image import MouseHoverImage
-from common.services import DateTimeService
-from common.services.caching_service import CachingService
-
-# Temp compat fix, drop when moved to python3
-if six.PY2:
-    from django.utils.encoding import smart_unicode
-else:
-    from django.utils.encoding import smart_text as smart_unicode
-from django.utils.translation import ugettext as _
 from django.views.generic import (
     DeleteView,
     DetailView,
@@ -44,6 +34,7 @@ from django.views.generic.detail import SingleObjectMixin
 from silk.profiling.profiler import silk_profile
 
 from astrobin.enums import SubjectType
+from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.forms import (
     CopyGearForm,
     ImageDemoteForm,
@@ -53,7 +44,6 @@ from astrobin.forms import (
     ImageFlagThumbsForm,
     ImagePromoteForm,
     ImageRevisionUploadForm,
-    PrivateMessageForm,
     ImageEditThumbnailsForm,
     ImageEditCorruptedRevisionForm)
 from astrobin.forms.uncompressed_source_upload_form import UncompressedSourceUploadForm
@@ -65,15 +55,17 @@ from astrobin.models import (
     LANGUAGES,
 )
 from astrobin.stories import add_story
-from astrobin_apps_notifications.tasks import push_notification_for_new_image
 from astrobin.templatetags.tags import can_like
 from astrobin.utils import get_image_resolution
 from astrobin_apps_groups.forms import GroupSelectForm
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
+from astrobin_apps_notifications.tasks import push_notification_for_new_image
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
+from common.services import DateTimeService
+from common.services.caching_service import CachingService
 from nested_comments.models import NestedComment
 
 logger = logging.getLogger("apps")
@@ -728,7 +720,6 @@ class ImageDetailView(ImageDetailViewBase):
             'image_type': image_type,
             'ssa': ssa,
             'deep_sky_data': deep_sky_data,
-            'private_message_form': PrivateMessageForm(),
             'promote_form': ImagePromoteForm(instance=image),
             'upload_revision_form': ImageRevisionUploadForm(),
             'upload_uncompressed_source_form': UncompressedSourceUploadForm(instance=image),
@@ -1263,7 +1254,7 @@ class ImageEditThumbnailsView(ImageEditBaseView):
         return image.get_absolute_url()
 
     def post(self, request, *args, **kwargs):
-        image = self.get_object()  # type: Image
+        image: Image = self.get_object()
         image.thumbnail_invalidate()
 
         return super(ImageEditThumbnailsView, self).post(request, *args, **kwargs)

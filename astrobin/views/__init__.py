@@ -41,7 +41,7 @@ from silk.profiling.profiler import silk_profile
 
 from astrobin.context_processors import user_language, common_variables
 from astrobin.enums import SubjectType
-from astrobin.forms import ImageUploadForm, ImageLicenseForm, PrivateMessageForm, UserProfileEditBasicForm, \
+from astrobin.forms import ImageUploadForm, ImageLicenseForm, UserProfileEditBasicForm, \
     DeepSky_AcquisitionBasicForm, SolarSystem_AcquisitionForm, \
     DefaultImageLicenseForm, TelescopeEditNewForm, MountEditNewForm, CameraEditNewForm, \
     FocalReducerEditNewForm, SoftwareEditNewForm, FilterEditNewForm, AccessoryEditNewForm, TelescopeEditForm, \
@@ -932,7 +932,7 @@ def image_edit_save_watermark(request):
     except MultiValueDictKeyError:
         raise Http404
 
-    image = get_image_or_404(Image.objects_including_wip, image_id)
+    image: Image = get_image_or_404(Image.objects_including_wip, image_id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
@@ -948,7 +948,7 @@ def image_edit_save_watermark(request):
     form.save()
 
     # Save defaults in profile
-    profile = image.user.userprofile
+    profile: UserProfile = image.user.userprofile
     profile.default_watermark = form.cleaned_data['watermark']
     profile.default_watermark_text = form.cleaned_data['watermark_text']
     profile.default_watermark_position = form.cleaned_data['watermark_position']
@@ -962,6 +962,9 @@ def image_edit_save_watermark(request):
 
     # Force new thumbnails
     image.thumbnail_invalidate()
+    revision: ImageRevision
+    for revision in ImageService(image).get_revisions():
+        revision.thumbnail_invalidate()
 
     return HttpResponseRedirect(image.get_absolute_url())
 
@@ -1421,7 +1424,6 @@ def user_page(request, username):
         'view': request.GET.get('view', 'default'),
         'requested_user': user,
         'profile': profile,
-        'private_message_form': PrivateMessageForm(),
         'section': section,
         'subsection': subsection,
         'active': active,
@@ -1479,7 +1481,6 @@ def user_page_bookmarks(request, username):
         'requested_user': user,
         'image_list': UserService(user).get_bookmarked_images(),
         'paginate_by': settings.PAGINATE_USER_PAGE_BY,
-        'private_message_form': PrivateMessageForm(),
         'alias': 'gallery',
     }
 
@@ -1501,7 +1502,6 @@ def user_page_liked(request, username):
         'requested_user': user,
         'image_list': UserService(user).get_liked_images(),
         'paginate_by': settings.PAGINATE_USER_PAGE_BY,
-        'private_message_form': PrivateMessageForm(),
         'alias': 'gallery',
     }
 
@@ -1541,7 +1541,6 @@ def user_page_following(request, username, extra_context=None):
         'requested_user': user,
         'user_list': followed_users,
         'view': request.GET.get('view', 'default'),
-        'private_message_form': PrivateMessageForm(),
     }
 
     response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
@@ -1576,7 +1575,6 @@ def user_page_followers(request, username, extra_context=None):
         'requested_user': user,
         'user_list': followers,
         'view': request.GET.get('view', 'default'),
-        'private_message_form': PrivateMessageForm(),
     }
 
     response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
@@ -1619,7 +1617,6 @@ def user_page_friends(request, username, extra_context=None):
         'requested_user': user,
         'user_list': friends,
         'view': request.GET.get('view', 'default'),
-        'private_message_form': PrivateMessageForm(),
     }
 
     response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))

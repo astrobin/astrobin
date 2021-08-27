@@ -240,3 +240,9 @@ ALL_LANGUAGE_CHOICES = (
     ('za', _('Zhuang / Chuang')),
     ('zu', _('Zulu')),
 )
+
+# Automatically approve content from users with email addresses in the following domains.
+AUTO_APPROVE_DOMAINS = (
+    '@astrobin.com',
+    '@highpointscientific.com',
+)

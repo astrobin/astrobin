@@ -46,6 +46,7 @@ from astrobin_apps_users.services import UserService
 from common.models import AbuseReport, ABUSE_REPORT_DECISION_OVERRULED
 from common.services import DateTimeService
 from common.services.mentions_service import MentionsService
+from common.services.moderation_service import ModerationService
 from nested_comments.models import NestedComment
 from nested_comments.services.comment_notifications_service import CommentNotificationsService
 from toggleproperties.models import ToggleProperty
@@ -67,7 +68,9 @@ def image_pre_save(sender, instance, **kwargs):
         image = sender.objects_including_wip.get(pk=instance.pk)
     except sender.DoesNotExist:
         user_scores_index = instance.user.userprofile.get_scores()['user_scores_index'] or 0
-        if user_scores_index >= 1.00 or is_any_premium_subscription(instance.user):
+        if user_scores_index >= 1.00 or \
+                is_any_premium_subscription(instance.user) or \
+                ModerationService.auto_approve(instance.user):
             instance.moderated_when = datetime.date.today()
             instance.moderator_decision = 1
     else:
@@ -238,7 +241,11 @@ def nested_comment_pre_save(sender, instance, **kwargs):
         if ct.model == 'image':
             is_content_owner = instance.author == instance.content_object.user
 
-        if insufficient_index and free_account and insufficient_previous_approvals and not is_content_owner:
+        if insufficient_index and \
+                free_account and \
+                insufficient_previous_approvals and \
+                not is_content_owner and \
+                not ModerationService.auto_approve(instance.author):
             instance.pending_moderation = True
 
 
@@ -505,7 +512,7 @@ def group_pre_save(sender, instance, **kwargs):
         # Group is becoming autosubmission
         if not group.autosubmission and instance.autosubmission:
             instance.images.clear()
-            images = Image.objects_including_wip.filter(user__in=instance.members.all())
+            images = Image.objects.filter(user__in=instance.members.all())
             for image in images:
                 instance.images.add(image)
 
@@ -657,8 +664,8 @@ m2m_changed.connect(group_members_changed, sender=Group.members.through)
 
 def group_images_changed(sender, instance, **kwargs):
     if kwargs['action'] == 'post_add' and 'pk_set' in kwargs:
-        for i in sender.group.get_queryset().filter(pk__in=kwargs.get('pk_set'), autosubmission=True).iterator():
-            i.save()  # trigger date_updated update
+        group = sender.group.get_queryset().first()
+        group.save()  # trigger date_updated update
 
 
 m2m_changed.connect(group_images_changed, sender=Group.images.through)
@@ -691,6 +698,8 @@ def forum_topic_pre_save(sender, instance, **kwargs):
                 instance.user,
                 'new_topic_in_group',
                 {
+                    'user_url': build_notification_url(
+                        settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user})),
                     'user': instance.user.userprofile.get_display_name(),
                     'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
                     'group_url': build_notification_url(
@@ -719,6 +728,8 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
             instance.user,
             'new_topic_in_group',
             {
+                'user_url': build_notification_url(
+                    settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user})),
                 'user': instance.user.userprofile.get_display_name(),
                 'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
                 'group_url': build_notification_url(

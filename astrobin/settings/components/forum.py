@@ -83,6 +83,11 @@ def pybb_premoderation(user, post_content, forum):
     if forum and forum.name in ('Anything goes', 'Other'):
         return False
 
+    # Users in auto-approve list always approved
+    from common.services.moderation_service import ModerationService
+    if ModerationService.auto_approve(user):
+        return True
+
     # Paying members always approved
     from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
     if not is_free(user):

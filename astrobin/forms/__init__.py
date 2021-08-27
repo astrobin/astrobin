@@ -31,7 +31,6 @@ from .location_edit_form import LocationEditForm
 from .moderator_gear_fix_form import ModeratorGearFixForm
 from .mount_edit_form import MountEditForm
 from .mount_edit_new_form import MountEditNewForm
-from .private_message_form import PrivateMessageForm
 from .profile_edit_gear_form import UserProfileEditGearForm
 from .profile_edit_gear_form import UserProfileEditGearForm
 from .profile_edit_preferences_form import UserProfileEditPreferencesForm

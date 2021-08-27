@@ -10,7 +10,6 @@ from django.views.static import serve
 from rest_framework.authtoken.views import obtain_auth_token
 from tastypie.api import Api
 from threaded_messages.views import batch_update as messages_batch_update
-from threaded_messages.views import compose as messages_compose
 from threaded_messages.views import delete as messages_delete
 from threaded_messages.views import inbox as messages_inbox
 from threaded_messages.views import message_ajax_reply as messages_message_ajax_reply
@@ -125,6 +124,7 @@ from astrobin.views import (
 )
 from astrobin.views.contact import ContactRedirectView
 from astrobin.views.forums import LatestTopicsView
+from astrobin.views.threaded_messages import messages_compose
 from astrobin.views.profile.download_data_view import DownloadDataView
 
 admin.autodiscover()
