@@ -1,5 +1,6 @@
 import re
 import unicodedata
+from datetime import timedelta, datetime
 from operator import or_
 
 from django import forms
@@ -221,7 +222,9 @@ class AstroBinSearchForm(SearchForm):
             results = results.filter(published__gte=date_published_min)
 
         if date_published_max is not None and date_published_max != "":
-            results = results.filter(published__lte=date_published_max)
+            results = results.filter(
+                published__lt=datetime.strptime(date_published_max, '%Y-%m-%d') + timedelta(1)
+            )
 
         return results
 
@@ -233,7 +236,9 @@ class AstroBinSearchForm(SearchForm):
             results = results.filter(first_acquisition_date__gte=date_acquired_min)
 
         if date_acquired_max is not None and date_acquired_max != "":
-            results = results.filter(last_acquisition_date__lte=date_acquired_max)
+            results = results.filter(
+                last_acquisition_date__lt=datetime.strptime(date_acquired_max, '%Y-%m-%d') + timedelta(1)
+            )
 
         return results
 
