@@ -1,6 +1,5 @@
-from functools import reduce
-
 import operator
+from functools import reduce
 
 from django.db.models import Q
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
