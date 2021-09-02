@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.http import HttpResponseBadRequest, HttpRequest
 from django.utils import timezone
 from rest_framework.decorators import action
@@ -11,7 +12,9 @@ class MigratableItemMixin:
     @action(detail=False, methods=['get'], url_path='random-non-migrated')
     def random_non_migrated(self, request):
         queryset = self.get_queryset().filter(
-            migration_flag__isnull=True, migration_flag_moderator_lock__isnull=True).order_by('?')[:1]
+            Q(migration_flag__isnull=True) & Q(
+                Q(migration_flag_moderator_lock__isnull=True) |
+                Q(migration_flag_moderator_lock=request.user))).order_by('?')[:1]
         serializer = self.get_serializer(queryset, many=True, context=self.get_serializer_context())
         return Response(serializer.data)
 
@@ -28,11 +31,25 @@ class MigratableItemMixin:
         if obj.migration_flag is not None:
             return Response(status=409)
 
-        if obj.migration_flag_moderator_lock is not None:
+        if obj.migration_flag_moderator_lock not in (None, request.user):
             return Response(status=409)
 
         obj.migration_flag_moderator_lock = request.user
         obj.migration_flag_moderator_lock_timestamp = timezone.now()
+
+        obj.save()
+
+        return Response(status=200)
+
+    @action(detail=True, methods=['put'], url_path='release-lock-for-migration')
+    def release_lock_for_migration(self, request: HttpRequest, pk: int) -> Response:
+        obj: Gear = self.get_object()
+
+        if obj.migration_flag_moderator_lock is None:
+            return Response(status=409)
+
+        obj.migration_flag_moderator_lock = None
+        obj.migration_flag_moderator_lock_timestamp = None
 
         obj.save()
 
