@@ -11,13 +11,11 @@ class Camera(EquipmentItem):
         null=False,
         max_length=64,
         choices=(
-            ('CCD', _('CCD')),
-            ('CMOS', _('CMOS')),
-            ('DSLR', _('DSLR')),
-            ('GUIDER/PLANETARY', _('Guider/Planetary')),
-            ('FILM', _('Film')),
-            ('COMPACT', _('Compact')),
-            ('VIDEO', _('Video camera')),
+            ('DEDICATED_DEEP_SKY', _('Dedicated deep-sky camera')),
+            ('DSLR_MIRRORLESS', _('General purpose DSLR or mirrorless camera')),
+            ('GUIDER_PLANETARY', _('Guider/Planetary camera')),
+            ('VIDEO', _('General purpose video camera')),
+            ('FILM', _('Film camera')),
         ),
     )
 
