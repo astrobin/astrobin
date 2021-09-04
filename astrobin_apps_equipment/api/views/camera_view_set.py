@@ -1,3 +1,7 @@
+from rest_framework.decorators import action
+from rest_framework.parsers import MultiPartParser, FormParser
+
+from astrobin_apps_equipment.api.serializers.camera_image_serializer import CameraImageSerializer
 from astrobin_apps_equipment.api.serializers.camera_serializer import CameraSerializer
 from astrobin_apps_equipment.api.views.equipment_item_view_set import EquipmentItemViewSet
 
@@ -5,3 +9,11 @@ from astrobin_apps_equipment.api.views.equipment_item_view_set import EquipmentI
 class CameraViewSet(EquipmentItemViewSet):
     serializer_class = CameraSerializer
 
+    @action(
+        detail=True,
+        methods=['PUT'],
+        serializer_class=CameraImageSerializer,
+        parser_classes=[MultiPartParser, FormParser],
+    )
+    def image(self, request, pk):
+        return super(CameraViewSet, self).image_upload(request, pk)

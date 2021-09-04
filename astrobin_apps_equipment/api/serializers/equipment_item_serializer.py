@@ -12,6 +12,7 @@ class EquipmentItemSerializer(serializers.Serializer):
             'name',
             'image',
         ]
+        read_only_fields = ['image']
         abstract = True
 
     def create(self, validated_data):

@@ -5,6 +5,8 @@ from django.db.models import Q
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.renderers import BrowsableAPIRenderer
+from rest_framework.response import Response
+from rest_framework.status import HTTP_400_BAD_REQUEST
 
 from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_read_only import IsEquipmentModeratorOrReadOnly
 
@@ -25,6 +27,16 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             return manager.filter(name_filters | brand_filters)
 
         return manager.all()
+
+    def image_upload(self, request, pk):
+        obj = self.get_object()
+        serializer = self.serializer_class(obj, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+        return Response(serializer.errors, HTTP_400_BAD_REQUEST)
 
     class Meta:
         abstract = True

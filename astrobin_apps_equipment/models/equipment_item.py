@@ -43,11 +43,12 @@ class EquipmentItem(SafeDeleteModel):
         max_length=128,
         null=False,
         blank=False,
-        unique=True,
     )
 
     image = models.ImageField(
         upload_to=image_upload_path,
+        null=True,
+        blank=True,
     )
 
     def __unicode__(self):
@@ -57,5 +58,9 @@ class EquipmentItem(SafeDeleteModel):
         abstract = True
         ordering = [
             'brand__name',
+            'name'
+        ]
+        unique_together = [
+            'brand',
             'name'
         ]
