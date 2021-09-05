@@ -8,6 +8,7 @@ class BrandSerializer(serializers.ModelSerializer):
     class Meta:
         model = EquipmentBrand
         fields = '__all__'
+        read_only_fields = ['logo']
 
     def create(self, validated_data):
         user = self.context['request'].user

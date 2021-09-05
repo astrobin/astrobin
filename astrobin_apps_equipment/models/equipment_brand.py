@@ -41,9 +41,7 @@ class EquipmentBrand(SafeDeleteModel):
         unique=True,
     )
 
-    website = models.URLField(
-        unique=True,
-    )
+    website = models.URLField()
 
     logo = models.ImageField(
         upload_to=logo_upload_path,
