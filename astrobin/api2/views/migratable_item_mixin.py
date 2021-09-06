@@ -9,14 +9,20 @@ from astrobin_apps_equipment.models import Camera, Telescope
 
 
 class MigratableItemMixin:
+    def __random_non_migrated_queryset(self):
+        return self.get_queryset().filter(migration_flag__isnull=True)
+
     @action(detail=False, methods=['get'], url_path='random-non-migrated')
     def random_non_migrated(self, request):
-        queryset = self.get_queryset().filter(
-            Q(migration_flag__isnull=True) & Q(
+        queryset = self.__random_non_migrated_queryset().filter(
                 Q(migration_flag_moderator_lock__isnull=True) |
-                Q(migration_flag_moderator_lock=request.user))).order_by('?')[:1]
+                Q(migration_flag_moderator_lock=request.user)).order_by('?')[:1]
         serializer = self.get_serializer(queryset, many=True, context=self.get_serializer_context())
         return Response(serializer.data)
+
+    @action(detail=False, methods=['get'], url_path='non-migrated-count')
+    def non_migrated_count(self, request):
+        return Response(self.__random_non_migrated_queryset().count())
 
     @action(detail=False, methods=['get'], url_path='pending-migration-review')
     def pending_migration_review(self, request):
