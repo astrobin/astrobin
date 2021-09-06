@@ -3,9 +3,11 @@ from functools import reduce
 
 from django.contrib.postgres.search import TrigramDistance
 from django.db.models import Q
+from django.utils import timezone
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.generics import get_object_or_404
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
@@ -49,6 +51,40 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 .order_by('distance')[:10]
 
         serializer = self.serializer_class(objects, many=True)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['PUT'])
+    def approve(self, request, pk):
+        item = get_object_or_404(self.get_serializer().Meta.model.objects, pk=pk)
+
+        if item.reviewed_by is not None:
+            return Response("This item was already reviewed", HTTP_400_BAD_REQUEST)
+
+        item.reviewed_by = request.user
+        item.reviewed_timestamp = timezone.now()
+        item.reviewer_decision = 'APPROVED'
+        item.reviewer_comment = request.data.get('comment')
+
+        item.save()
+
+        serializer = self.serializer_class(item)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['PUT'])
+    def reject(self, request, pk):
+        item = get_object_or_404(self.get_serializer().Meta.model.objects, pk=pk)
+
+        if item.reviewed_by is not None:
+            return Response("This item was already reviewed", HTTP_400_BAD_REQUEST)
+
+        item.reviewed_by = request.user
+        item.reviewed_timestamp = timezone.now()
+        item.reviewer_decision = 'REJECTED'
+        item.reviewer_comment = request.data.get('comment')
+
+        item.save()
+
+        serializer = self.serializer_class(item)
         return Response(serializer.data)
 
     def image_upload(self, request, pk):

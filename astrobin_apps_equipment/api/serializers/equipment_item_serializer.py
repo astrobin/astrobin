@@ -6,6 +6,11 @@ class EquipmentItemSerializer(serializers.Serializer):
     class Meta:
         fields = [
             'created_by',
+            'reviewed_by',
+            'reviewed_timestamp',
+            'reviewer_decision',
+            'reviewer_rejection_reason',
+            'reviewer_comment',
             'created',
             'updated',
             'brand',

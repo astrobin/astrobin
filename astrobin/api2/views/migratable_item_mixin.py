@@ -2,6 +2,7 @@ from django.db.models import Q
 from django.http import HttpResponseBadRequest, HttpRequest
 from django.utils import timezone
 from rest_framework.decorators import action
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 
 from astrobin.models import Gear
@@ -34,6 +35,9 @@ class MigratableItemMixin:
     def lock_for_migration(self, request: HttpRequest, pk: int) -> Response:
         obj: Gear = self.get_object()
 
+        if not request.user.groups.filter(name='equipment_moderators').exists():
+            raise PermissionDenied
+
         if obj.migration_flag is not None:
             return Response(status=409)
 
@@ -45,11 +49,15 @@ class MigratableItemMixin:
 
         obj.save()
 
-        return Response(status=200)
+        serializer = self.get_serializer(obj)
+        return Response(serializer.data)
 
     @action(detail=True, methods=['put'], url_path='release-lock-for-migration')
     def release_lock_for_migration(self, request: HttpRequest, pk: int) -> Response:
         obj: Gear = self.get_object()
+
+        if not request.user.groups.filter(name='equipment_moderators').exists():
+            raise PermissionDenied
 
         if obj.migration_flag_moderator_lock is None:
             return Response(status=409)
@@ -59,16 +67,20 @@ class MigratableItemMixin:
 
         obj.save()
 
-        return Response(status=200)
+        serializer = self.get_serializer(obj)
+        return Response(serializer.data)
 
     @action(detail=True, methods=['put'], url_path='lock-for-migration-review')
     def lock_for_migration_review(self, request: HttpRequest, pk: int) -> Response:
         obj: Gear = self.get_object()
 
-        if obj.migration_flag is not None:
+        if not request.user.groups.filter(name='equipment_moderators').exists():
+            raise PermissionDenied
+
+        if obj.migration_flag is None:
             return Response(status=409)
 
-        if obj.migration_flag_reviewer_lock is not None:
+        if obj.migration_flag_reviewer_lock not in (None, request.user):
             return Response(status=409)
 
         obj.migration_flag_reviewer_lock = request.user
@@ -76,11 +88,33 @@ class MigratableItemMixin:
 
         obj.save()
 
-        return Response(status=200)
+        serializer = self.get_serializer(obj)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['put'], url_path='release-lock-for-migration-review')
+    def release_lock_for_migration_review(self, request: HttpRequest, pk: int) -> Response:
+        obj: Gear = self.get_object()
+
+        if not request.user.groups.filter(name='equipment_moderators').exists():
+            raise PermissionDenied
+
+        if obj.migration_flag_reviewer_lock is None:
+            return Response(status=409)
+
+        obj.migration_flag_reviewer_lock = None
+        obj.migration_flag_reviewer_lock_timestamp = None
+
+        obj.save()
+
+        serializer = self.get_serializer(obj)
+        return Response(serializer.data)
 
     @action(detail=True, methods=['put'], url_path='set-migration')
     def set_migration(self, request, pk):
         obj: Gear = self.get_object()
+
+        if not request.user.groups.filter(name='equipment_moderators').exists():
+            raise PermissionDenied
 
         if obj.migration_flag is not None:
             return Response(status=409)
@@ -113,4 +147,24 @@ class MigratableItemMixin:
 
         obj.save()
 
-        return Response(status=200)
+        serializer = self.get_serializer(obj)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['put'], url_path='accept-migration')
+    def accept_migration(self, request, pk):
+        obj: Gear = self.get_object()
+
+        if not request.user.groups.filter(name='equipment_moderators').exists():
+            raise PermissionDenied
+
+        if obj.migration_flag is None:
+            return Response(status=409)
+
+        if request.user == obj.migration_flag_moderator:
+            raise PermissionDenied
+
+        obj.migration_flag_reviewer = request.user
+        obj.save()
+
+        serializer = self.get_serializer(obj)
+        return Response(serializer.data)

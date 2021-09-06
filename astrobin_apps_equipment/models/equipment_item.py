@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import SET_NULL, PROTECT
+from django.utils.translation import ugettext_lazy as _
 from safedelete.models import SafeDeleteModel
 
 from astrobin_apps_equipment.models import EquipmentBrand
@@ -16,6 +17,48 @@ class EquipmentItem(SafeDeleteModel):
         User,
         related_name='%(app_label)s_%(class)ss_created',
         on_delete=SET_NULL,
+        null=True,
+        editable=False,
+    )
+
+    reviewed_by = models.ForeignKey(
+        User,
+        related_name='%(app_label)s_%(class)ss_reviewed',
+        on_delete=SET_NULL,
+        null=True,
+        editable=False,
+    )
+
+    reviewed_timestamp = models.DateTimeField(
+        auto_now=False,
+        null=True,
+        editable=False,
+    )
+
+    reviewer_decision = models.CharField(
+        max_length=8,
+        choices=[
+            ('ACCEPTED', _('Accepted')),
+            ('REJECTED', _('Rejected')),
+        ],
+        null=True,
+        editable=False,
+    )
+
+    reviewer_rejection_reason = models.CharField(
+        max_length=32,
+        choices=[
+            ('TYPO', 'There\'s a typo in the name of the item'),
+            ('WRONG_BRAND', 'The item was assigned to the wrong brand'),
+            ('INACCURATE_DATA', 'Some data is inaccurate'),
+            ('INSUFFICIENT_DATA', 'Some important data is missing'),
+            ('OTHER', _('Other'))
+        ],
+        null=True,
+        editable=False,
+    )
+
+    reviewer_comment = models.TextField(
         null=True,
         editable=False,
     )
