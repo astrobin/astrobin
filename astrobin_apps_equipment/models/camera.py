@@ -16,6 +16,7 @@ class Camera(EquipmentItem):
             ('GUIDER_PLANETARY', _('Guider/Planetary camera')),
             ('VIDEO', _('General purpose video camera')),
             ('FILM', _('Film camera')),
+            ('OTHER', _('Other')),
         ),
     )
 
