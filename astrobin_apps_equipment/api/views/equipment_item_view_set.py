@@ -26,7 +26,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             words = q.split(' ')
             name_filters = reduce(operator.or_, [Q(**{'name__icontains': x}) for x in words])
             brand_filters = reduce(operator.or_, [Q(**{'brand__name__icontains': x}) for x in words])
-            return manager.filter(name_filters | brand_filters)
+            return manager.filter(name_filters | brand_filters)[:10]
 
         return manager.all()
 

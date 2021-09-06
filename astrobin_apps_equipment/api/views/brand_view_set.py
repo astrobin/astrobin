@@ -30,7 +30,7 @@ class BrandViewSet(viewsets.ModelViewSet):
 
         return manager.annotate(
             distance=TrigramDistance('name', q)
-        ).filter(Q(distance__lte=.7) | Q(name__icontains=q)).order_by('distance')
+        ).filter(Q(distance__lte=.7) | Q(name__icontains=q)).order_by('distance')[:10]
 
     @action(
         detail=True,
