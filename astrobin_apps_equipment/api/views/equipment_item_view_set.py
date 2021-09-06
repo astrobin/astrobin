@@ -1,9 +1,11 @@
 import operator
 from functools import reduce
 
+from django.contrib.postgres.search import TrigramDistance
 from django.db.models import Q
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
@@ -27,6 +29,27 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             return manager.filter(name_filters | brand_filters)
 
         return manager.all()
+
+    @action(
+        detail=False,
+        methods=['GET'],
+        url_path='find-similar-in-brand',
+    )
+    def find_similar_in_brand(self, request):
+        brand = request.GET.get('brand')
+        q = request.GET.get('q')
+
+        manager = self.get_serializer().Meta.model.objects
+        objects = manager.none()
+
+        if brand and q:
+            objects = manager \
+                .annotate(distance=TrigramDistance('name', q)) \
+                .filter(Q(brand=int(brand)) & Q(Q(distance__lte=.7) | Q(name__icontains=q))) \
+                .order_by('distance')[:10]
+
+        serializer = self.serializer_class(objects, many=True)
+        return Response(serializer.data)
 
     def image_upload(self, request, pk):
         obj = self.get_object()
