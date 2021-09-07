@@ -44,7 +44,7 @@ class TestApiCameraViewSet(TestCase):
             'brand': EquipmentGenerators.brand().pk,
             'sensor': EquipmentGenerators.sensor().pk,
             'name': 'Camera Foo',
-            'type': 'CCD'
+            'type': 'DEDICATED_DEEP_SKY'
         }, format='json')
         self.assertEquals(403, response.status_code)
 
@@ -56,7 +56,7 @@ class TestApiCameraViewSet(TestCase):
             'brand': EquipmentGenerators.brand().pk,
             'sensor': EquipmentGenerators.sensor().pk,
             'name': 'Camera Foo',
-            'type': 'CCD'
+            'type': 'DEDICATED_DEEP_SKY'
         }, format='json')
         self.assertEquals(403, response.status_code)
 
@@ -71,7 +71,7 @@ class TestApiCameraViewSet(TestCase):
             'brand': EquipmentGenerators.brand().pk,
             'sensor': EquipmentGenerators.sensor().pk,
             'name': 'Camera Foo',
-            'type': 'CCD'
+            'type': 'DEDICATED_DEEP_SKY'
         }, format='json')
         self.assertEquals(201, response.status_code)
         self.assertEquals(user.pk, response.data['created_by'])
