@@ -31,7 +31,9 @@ class MigratableItemMixin:
 
     @action(detail=False, methods=['get'], url_path='pending-migration-review')
     def pending_migration_review(self, request):
-        queryset = self.get_queryset().filter(migration_flag__isnull=False, migration_flag_reviewer__isnull=True)
+        queryset = self.get_queryset()\
+            .filter(migration_flag__isnull=False, migration_flag_reviewer__isnull=True)\
+            .order_by('migration_flag_timestamp')[:50]
         serializer = self.get_serializer(queryset, many=True, context=self.get_serializer_context())
         return Response(serializer.data)
 
