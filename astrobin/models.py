@@ -300,6 +300,19 @@ class Gear(models.Model):
     migration_flag_reviewer_lock = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.SET_NULL, related_name='reviewed_for_migration_gear_item_locks')
     migration_flag_reviewer_lock_timestamp = models.DateTimeField(null=True, blank=True)
+    migration_flag_reviewer_decision = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True,
+        choices=[
+            ("ACCEPTED", "Accepted"),
+            ("REJECTED_INCORRECT_STRATEGY", "Rejected: incorrect migration strategy"),
+            ("REJECTED_WRONG_MIGRATION_TARGET", "Rejected: wrong migration target"),
+            ("REJECTED_BAD_MIGRATION_TARGET", "Rejected: bad migration target"),
+            ("REJECTED_OTHER", "Rejected: other"),
+        ]
+    )
+    migration_flag_reviewer_rejection_comment = models.TextField(null=True, blank=True)
 
     def __str__(self):
         make = self.get_make()

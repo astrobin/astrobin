@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from astrobin.models import Camera, Gear
+from astrobin.models import Gear
 
 
 class GearSerializer(serializers.ModelSerializer):
@@ -20,4 +20,6 @@ class GearSerializer(serializers.ModelSerializer):
             'migration_flag_reviewer',
             'migration_flag_reviewer_lock',
             'migration_flag_reviewer_lock_timestamp',
+            'migration_flag_reviewer_decision',
+            'migration_flag_reviewer_rejection_comment',
         )

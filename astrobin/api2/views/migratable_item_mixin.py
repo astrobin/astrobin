@@ -170,6 +170,39 @@ class MigratableItemMixin:
             raise PermissionDenied
 
         obj.migration_flag_reviewer = request.user
+        obj.migration_flag_reviewer_decision = 'ACCEPTED'
+        obj.migration_flag_reviewer_rejection_comment = None
+        obj.save()
+
+        serializer = self.get_serializer(obj)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['put'], url_path='reject-migration')
+    def reject_migration(self, request, pk):
+        obj: Gear = self.get_object()
+
+        if not request.user.groups.filter(name='equipment_moderators').exists():
+            raise PermissionDenied
+
+        if obj.migration_flag is None:
+            return Response(status=409)
+
+        if request.user == obj.migration_flag_moderator:
+            raise PermissionDenied
+
+        obj.migration_flag = None
+        obj.migration_flag_timestamp = None
+        obj.migration_content_type = None
+        obj.migration_object_id = None
+        obj.migration_flag_moderator = None
+        obj.migration_flag_moderator_lock = None
+        obj.migration_flag_moderator_lock_timestamp = None
+        obj.migration_flag_reviewer = None
+        obj.migration_flag_reviewer_lock = None
+        obj.migration_flag_reviewer_lock_timestamp = None
+        obj.migration_flag_reviewer_decision = request.data.get('reason')
+        obj.migration_flag_reviewer_rejection_comment = request.data.get('comment')
+
         obj.save()
 
         serializer = self.get_serializer(obj)

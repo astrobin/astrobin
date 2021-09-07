@@ -1,6 +1,7 @@
 import operator
 from functools import reduce
 
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
 from django.db.models import Q
 from django.utils import timezone
@@ -12,7 +13,9 @@ from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
 
+from astrobin.models import Gear
 from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_read_only import IsEquipmentModeratorOrReadOnly
+from astrobin_apps_equipment.models import EquipmentItem
 
 
 class EquipmentItemViewSet(viewsets.ModelViewSet):
@@ -72,17 +75,38 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['PUT'])
     def reject(self, request, pk):
-        item = get_object_or_404(self.get_serializer().Meta.model.objects, pk=pk)
+        model = self.get_serializer().Meta.model
+        item: EquipmentItem = get_object_or_404(model.objects, pk=pk)
 
-        if item.reviewed_by is not None:
-            return Response("This item was already reviewed", HTTP_400_BAD_REQUEST)
+        if item.reviewed_by is not None and item.reviewer_decision == 'APPROVED':
+            return Response("This item was already approved", HTTP_400_BAD_REQUEST)
 
         item.reviewed_by = request.user
         item.reviewed_timestamp = timezone.now()
         item.reviewer_decision = 'REJECTED'
         item.reviewer_comment = request.data.get('comment')
+        item.name = '[DELETED] %s' % item.name
 
         item.save()
+        item.delete()
+
+        Gear.objects.filter(
+            migration_flag='MIGRATE',
+            migration_content_type=ContentType.objects.get_for_model(model),
+            migration_object_id=item.id,
+        ).update(
+            migration_flag=None,
+            migration_content_type=None,
+            migration_object_id=None,
+            migration_flag_moderator=None,
+            migration_flag_moderator_lock=None,
+            migration_flag_moderator_lock_timestamp=None,
+            migration_flag_reviewer=None,
+            migration_flag_reviewer_lock=None,
+            migration_flag_reviewer_lock_timestamp=None,
+            migration_flag_reviewer_decision='REJECTED_BAD_MIGRATION_TARGET',
+            migration_flag_reviewer_rejection_comment=request.data.get('comment')
+        )
 
         serializer = self.serializer_class(item)
         return Response(serializer.data)
