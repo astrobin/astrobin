@@ -281,6 +281,7 @@ class Gear(models.Model):
             ('WRONG_TYPE', 'This item is the wrong type'),
             ('MULTIPLE_ITEMS', 'This item collates multiple objects'),
             ('DIY', 'This item is a DIY object'),
+            ('NOT_ENOUGH_INFO', 'This item does not have enough information to decide on a migration strategy'),
             ('MIGRATE', 'This item is ready for migration')
         ),
     )

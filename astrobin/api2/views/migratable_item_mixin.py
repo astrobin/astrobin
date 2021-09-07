@@ -124,7 +124,7 @@ class MigratableItemMixin:
         itemId = request.data.get('itemId')
         item = None
 
-        if migrationFlag not in ('WRONG_TYPE', 'MULTIPLE_ITEMS', 'DIY', 'MIGRATE'):
+        if migrationFlag not in ('WRONG_TYPE', 'MULTIPLE_ITEMS', 'DIY', 'NOT_ENOUGH_INFO', 'MIGRATE'):
             return HttpResponseBadRequest('Bad migration flag')
 
         if migrationFlag == 'MIGRATE':
