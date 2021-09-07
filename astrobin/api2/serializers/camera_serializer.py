@@ -5,4 +5,9 @@ from astrobin.models import Camera
 class CameraSerializer(GearSerializer):
     class Meta:
         model = Camera
-        fields = GearSerializer.Meta.fields
+        fields = GearSerializer.Meta.fields + (
+            'pixel_size',
+            'sensor_width',
+            'sensor_height',
+            'type'
+        )
