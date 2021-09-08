@@ -4,7 +4,7 @@ export ASTROBIN_BUILD=${CODEBUILD_RESOLVED_SOURCE_VERSION}
 export ASTROBIN_GUNICORN_WORKERS=1
 export ARCH=$(uname -m)
 
-export RANDOM_CHARS==$(echo $(for((i=1;i<=4;i++)); do printf '%s' "${RANDOM:0:1}"; done) | tr '[0-9]' '[a-z]')
+export TIMESTAMP=$(date +"%s")
 export POSTGRES_PASSWORD="v3rys3cr3t"
 export SUBNET_GROUP_NAME="default-vpc-b5c428ce"
 
@@ -26,7 +26,7 @@ npm ci || exit 1
 
 aws rds create-db-instance \
     --db-name astrobin \
-    --db-instance-identifier astrobin-test-${RANDOM_CHARS} \
+    --db-instance-identifier astrobin-test-${TIMESTAMP} \
     --allocated-storage 100 \
     --engine postgres \
     --db-instance-class db.r5.large \
@@ -38,7 +38,7 @@ aws rds create-db-instance \
     --no-deletion-protection \
     --db-subnet-group-name ${SUBNET_GROUP_NAME} 2>&1 >/dev/null || exit 1
 
-GET_POSTGRES_HOST="aws rds describe-db-instances --db-instance-identifier astrobin-test-${RANDOM_CHARS}"
+GET_POSTGRES_HOST="aws rds describe-db-instances --db-instance-identifier astrobin-test-${TIMESTAMP}"
 JQ_GET_POSTGRES_HOST="jq -r ".DBInstances[0].Endpoint.Address""
 POSTGRES_HOST="null"
 while [[ "${POSTGRES_HOST}" == "null" ]]; do
@@ -87,6 +87,6 @@ CYPRESS_baseUrl=http://127.0.0.1:8083 $(npm bin)/cypress run || exit 1
 compose down || exit 1
 
 aws rds delete-db-instance \
-    --db-instance-identifier astrobin-test-${RANDOM_CHARS}
+    --db-instance-identifier astrobin-test-${TIMESTAMP}
     --skip-final-snapshot \
     --delete-automated-backups 2>&1 >/dev/null || exit 1
