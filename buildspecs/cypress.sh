@@ -31,7 +31,7 @@ aws rds create-db-instance \
     --db-instance-identifier astrobin-test-${TIMESTAMP} \
     --allocated-storage 100 \
     --engine postgres \
-    --db-instance-class db.m3.medium \
+    --db-instance-class db.r5.large \
     --master-username astrobin \
     --master-user-password ${POSTGRES_PASSWORD} \
     --availability-zone us-east-1a \
