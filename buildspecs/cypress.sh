@@ -40,17 +40,19 @@ aws rds create-db-instance \
     --no-deletion-protection \
     --db-subnet-group-name ${SUBNET_GROUP_NAME} 2>&1 >/dev/null || exit 1
 
-GET_POSTGRES_HOST="aws rds describe-db-instances --db-instance-identifier astrobin-test-${TIMESTAMP}"
-JQ_GET_POSTGRES_HOST="jq -r ".DBInstances[0].Endpoint.Address""
-POSTGRES_HOST="null"
-while [[ "${POSTGRES_HOST}" == "null" ]]; do
-    echo -n "Getting postgres host... "
-    POSTGRES_HOST=$(${GET_POSTGRES_HOST} | ${JQ_GET_POSTGRES_HOST})
-    echo ${POSTGRES_HOST}
+GET_POSTGRES_ENDPOINT="aws rds describe-db-instances --db-instance-identifier astrobin-test-${TIMESTAMP}"
+JQ_GET_POSTGRES_ENDPOINT="jq -r ".DBInstances[0].Endpoint.Address""
+POSTGRES_ENDPOINT="null"
+while [[ "${POSTGRES_ENDPOINT}" == "null" ]]; do
+    echo -n "Getting postgres endpoint... "
+    POSTGRES_ENDPOINT=$(${GET_POSTGRES_ENDPOINT} | ${JQ_GET_POSTGRES_ENDPOINT})
+    echo ${POSTGRES_ENDPOINT}
     sleep 5
 done
 
-until nc -zvw2 ${POSTGRES_HOST} 5432
+export POSTGRES_HOST=${POSTGRES_ENDPOINT}
+
+until nc -zvw2 ${POSTGRES_ENDPOINT} 5432
 do
     sleep 5
 done
