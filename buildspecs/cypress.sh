@@ -52,6 +52,10 @@ done
 
 export POSTGRES_HOST=${POSTGRES_ENDPOINT}
 
+cat <<EOF > docker/astrobin.env
+POSTGRES_HOST=${POSTGRES_HOST=}
+EOF
+
 until nc -zvw2 ${POSTGRES_ENDPOINT} 5432
 do
     sleep 5
