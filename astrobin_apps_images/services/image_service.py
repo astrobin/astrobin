@@ -32,7 +32,7 @@ class ImageService:
 
     def get_revision(self, label):
         # type: (str) -> ImageRevision
-        if label is None or label is 0 or label is '0':
+        if label is None or label == 0 or label == '0':
             raise ValueError("`label` must be a revision label (B or more)")
 
         if label == 'final':
