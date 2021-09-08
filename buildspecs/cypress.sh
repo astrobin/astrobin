@@ -21,9 +21,9 @@ docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD} || exit
 
 npm ci || exit 2
 
-nohup compose up &
+compose up &
 
-sleep 5
+sleep 30
 
 compose logs -f 2>&1 &
 
