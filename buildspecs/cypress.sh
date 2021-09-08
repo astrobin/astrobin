@@ -20,6 +20,8 @@ if [ $ARCH == "aarch64" ]; then
     exit 0
 fi
 
+apt-get install -y ncat || exit 1
+
 docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD} || exit 1
 
 npm ci || exit 1
@@ -29,7 +31,7 @@ aws rds create-db-instance \
     --db-instance-identifier astrobin-test-${TIMESTAMP} \
     --allocated-storage 100 \
     --engine postgres \
-    --db-instance-class db.r5.large \
+    --db-instance-class db.r5.medium \
     --master-username astrobin \
     --master-user-password ${POSTGRES_PASSWORD} \
     --availability-zone us-east-1a \
