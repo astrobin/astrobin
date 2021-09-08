@@ -43,24 +43,16 @@ aws rds create-db-instance \
 GET_POSTGRES_HOST="aws rds describe-db-instances --db-instance-identifier astrobin-test-${TIMESTAMP}"
 JQ_GET_POSTGRES_HOST="jq -r ".DBInstances[0].Endpoint.Address""
 POSTGRES_HOST="null"
-postgres_host_attempts=0
-max_postgres_host_attempts=24
 while [[ "${POSTGRES_HOST}" == "null" ]]; do
-    [[ $postgres_host_attempts -eq $max_postgres_host_attempts ]] && echo "Failed!" && exit 1
     echo -n "Getting postgres host... "
     POSTGRES_HOST=$(${GET_POSTGRES_HOST} | ${JQ_GET_POSTGRES_HOST})
     echo ${POSTGRES_HOST}
     sleep 5
-    ((postgres_host_attempts++))
 done
 
-postgres_connect_attempts=0
-max_postgres_connect_attempts=24
 until nc -zvw2 ${POSTGRES_HOST} 5432
 do
-    [[ $postgres_connect_attempts -eq $max_postgres_connect_attempts ]] && echo "Failed!" && exit 1
     sleep 5
-    ((postgres_connect_attempts++))
 done
 
 ${compose} up &
