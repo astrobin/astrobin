@@ -33,7 +33,7 @@ docker-compose \
 astrobin_attempts=0
 astrobin_max_attempts=24
 while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://127.0.0.1:8083/accounts/login/)" != "200" ]]; do
-   [[ $astrobin_attempts -eq $astrobin_max_attempts  ]] && echo "Failed!" && exit 1
+    [[ $astrobin_attempts -eq $astrobin_max_attempts  ]] && echo "Failed!" && exit 2
     echo "Waiting for astrobin..."
     sleep 5
     ((astrobin_attempts++))
@@ -49,7 +49,7 @@ done
 astrobin_ng_attempts=0
 astrobin_ng_max_attempts=24
 while [[ "$(curl -s -o /dev/null http://127.0.0.1:4400)" ]]; do
-   [[ $astrobin_ng_attempts -eq $astrobin_ng_max_attempts  ]] && echo "Failed!" && exit 1
+    [[ $astrobin_ng_attempts -eq $astrobin_ng_max_attempts  ]] && echo "Failed!" && exit 3
     echo "Waiting for astrobin-ng..."
     sleep 5
     ((astrobin_ng_attempts++))
