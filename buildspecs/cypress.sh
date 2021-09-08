@@ -4,12 +4,11 @@ export ASTROBIN_BUILD=${CODEBUILD_RESOLVED_SOURCE_VERSION}
 export ASTROBIN_GUNICORN_WORKERS=1
 export ARCH=$(uname -m)
 
-alias compose="docker-compose \
+alias comp="docker-compose \
     -f docker/docker-compose-app.yml \
     -f docker/docker-compose-worker.yml \
     -f docker/docker-compose-scheduler.yml \
-    -f docker/docker-compose-local.yml \
-    up"
+    -f docker/docker-compose-local.yml"
 
 if [ $ARCH == "aarch64" ]; then
     # https://docs.cypress.io/guides/getting-started/installing-cypress#Download-URLs
@@ -21,11 +20,11 @@ docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD} || exit
 
 npm ci || exit 2
 
-compose up &
+comp up &
 
 sleep 30
 
-compose logs -f 2>&1 &
+comp logs -f 2>&1 &
 
 astrobin_attempts=0
 astrobin_max_attempts=24
