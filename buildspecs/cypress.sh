@@ -8,8 +8,7 @@ compose="docker-compose \
     -f docker/docker-compose-app.yml \
     -f docker/docker-compose-worker.yml \
     -f docker/docker-compose-scheduler.yml \
-    -f docker/docker-compose-local.yml \
-    up"
+    -f docker/docker-compose-local.yml"
 
 if [ $ARCH == "aarch64" ]; then
     # https://docs.cypress.io/guides/getting-started/installing-cypress#Download-URLs
