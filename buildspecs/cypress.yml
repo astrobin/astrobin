@@ -17,8 +17,6 @@ phases:
   build:
     commands:
       - buildspecs/cypress.sh
-
-    finaly:
       - buildspecs/delete-test-db.sh
 
   post_build:
