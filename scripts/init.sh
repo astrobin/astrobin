@@ -243,6 +243,7 @@ except Subscription.DoesNotExist:
 
 Group.objects.get_or_create(name='content_moderators')
 Group.objects.get_or_create(name='image_moderators')
+Group.objects.get_or_create(name='equipment_moderators')
 Group.objects.get_or_create(name='iotd_staff')
 Group.objects.get_or_create(name='iotd_submitters')
 Group.objects.get_or_create(name='iotd_reviewers')
