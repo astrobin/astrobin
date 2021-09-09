@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ARCH=$(uname -m)
+export ARCH=$(uname -m)
 
 if [ $ARCH == "aarch64" ]; then
     # https://docs.cypress.io/guides/getting-started/installing-cypress#Download-URLs

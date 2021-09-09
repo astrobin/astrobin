@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ARCH=$(uname -m)
+export ARCH=$(uname -m)
 
 if [ $ARCH == "aarch64" ]; then
     # https://docs.cypress.io/guides/getting-started/installing-cypress#Download-URLs
@@ -9,6 +9,6 @@ if [ $ARCH == "aarch64" ]; then
 fi
 
 aws rds delete-db-instance \
-    --db-instance-identifier astrobin-test-${CODEBUILD_BUILD_NUMBER}
+    --db-instance-identifier astrobin-test-${CODEBUILD_BUILD_NUMBER} \
     --skip-final-snapshot \
     --delete-automated-backups
