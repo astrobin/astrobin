@@ -19,7 +19,6 @@ if [ $ARCH == "aarch64" ]; then
     exit 0
 fi
 
-
 GET_POSTGRES_ENDPOINT="aws rds describe-db-instances --db-instance-identifier astrobin-test-${CODEBUILD_BUILD_NUMBER}"
 JQ_GET_POSTGRES_ENDPOINT="jq -r ".DBInstances[0].Endpoint.Address""
 POSTGRES_ENDPOINT="null"
