@@ -33,3 +33,5 @@ else:
         REPLICA_DATABASES = ['reader']
         MULTIDB_PINNING_SECONDS = 15
         DATABASE_ROUTERS = ('multidb.PinningReplicaRouter',)
+
+print("POSTGRES_HOST = %s" % DATABASES['default']['HOST'])

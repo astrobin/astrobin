@@ -52,6 +52,7 @@ done
 
 export POSTGRES_HOST=${POSTGRES_ENDPOINT}
 
+ls
 cat <<EOF > docker/astrobin.env
 POSTGRES_HOST=${POSTGRES_HOST}
 POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -65,6 +66,8 @@ done
 ${compose} up &
 
 sleep 30
+
+${compose} stop postgres &
 
 ${compose} logs -f 2>&1 &
 
