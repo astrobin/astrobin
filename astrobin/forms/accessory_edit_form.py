@@ -1,11 +1,8 @@
-from django import forms
-
+from astrobin.forms.migratable_gear_item_edit_form import MigratableGearItemEditForm
 from astrobin.models import Accessory
 
 
-class AccessoryEditForm(forms.ModelForm):
-    error_css_class = 'error'
-
+class AccessoryEditForm(MigratableGearItemEditForm):
     class Meta:
         model = Accessory
-        exclude = ('make', 'name', 'migration_flag', 'migration_content_type', 'migration_object_id')
+        exclude = MigratableGearItemEditForm.Meta.exclude
