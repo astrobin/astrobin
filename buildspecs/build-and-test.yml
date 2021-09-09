@@ -18,10 +18,10 @@ phases:
       - buildspecs/test.sh
       - buildspecs/create-test-db.sh
       - buildspecs/cypress.sh
-      - buildspecs/delete-test-db.sh
 
   post_build:
     commands:
+      - buildspecs/delete-test-db.sh
       - buildspecs/push-image.sh
 
     finally:
