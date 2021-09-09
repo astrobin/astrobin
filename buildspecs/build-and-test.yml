@@ -5,7 +5,7 @@ phases:
     runtime-versions:
       nodejs: 12
 
-  pre-build:
+  pre_build:
     commands:
       - buildspecs/create-test-db.sh
       - buildspecs/install-docker.sh
