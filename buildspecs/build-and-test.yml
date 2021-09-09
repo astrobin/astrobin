@@ -16,7 +16,7 @@ phases:
   build:
     commands:
       - buildspecs/build.sh
-#      - buildspecs/test.sh
+      - buildspecs/test.sh
       - buildspecs/create-test-db.sh
       - buildspecs/cypress.sh
       - buildspecs/delete-test-db.sh
