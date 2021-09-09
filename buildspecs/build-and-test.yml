@@ -8,7 +8,6 @@ phases:
   pre_build:
     commands:
       - buildspecs/install-docker.sh
-      - apt-get install -y ncat
       - npm ci
       - docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
 
