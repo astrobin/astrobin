@@ -5,11 +5,21 @@ phases:
     runtime-versions:
       nodejs: 12
 
+  pre_build:
+    comments:
+      - buildspecs/create-test-db.sh
+      - buildspecs/install-docker.sh
+      - apt-get install -y ncat
+      - npm ci
+      - docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
+      - buildspecs/pull-image.sh
+
   build:
     commands:
-      - buildspecs/install-docker.sh
-      - buildspecs/pull-image.sh
       - buildspecs/cypress.sh
+
+    finaly:
+      - buildspecs/delete-test-db.sh
 
   post_build:
     finally:

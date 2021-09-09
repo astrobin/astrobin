@@ -77,4 +77,4 @@ done
 
 CYPRESS_baseUrl=http://127.0.0.1:8083 $(npm bin)/cypress run || exit 1
 
-compose down || exit 1
+${compose} down || exit 1

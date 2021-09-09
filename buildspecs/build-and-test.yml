@@ -15,7 +15,6 @@ phases:
 
 
   build:
-    on-failure: ABORT
     commands:
       - buildspecs/build.sh
 #      - buildspecs/test.sh
