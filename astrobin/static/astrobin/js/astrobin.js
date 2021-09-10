@@ -740,7 +740,6 @@ astrobin_common = {
                 $('#mark-all-notifications-as-read').removeAttr('disabled').click(function () {
                     astrobin_common.mark_all_notifications_as_read().then(function () {
                         $tbody.find('.no-new-notifications').show();
-                        $('#mark-all-notifications-as-read').attr('disabled', 'disabled');
                         $modal.modal('hide');
                     });
                 });
@@ -792,6 +791,11 @@ astrobin_common = {
         var $rows = $('#notifications-modal tr:not(.' +
             'no-new-notifications)'),
             $count_badge = $('#notifications-count');
+        
+        var $btn = $('#mark-all-notifications-as-read');
+        
+        $btn.addClass('running');
+        $btn.attr('disabled', 'disabled');
 
         return new Promise(function (resolve) {
             $.ajax({
@@ -799,6 +803,7 @@ astrobin_common = {
                 type: 'post',
                 dataType: 'json',
                 success: function () {
+                    $btn.removeClass('running');
                     $rows.remove();
 
                     if ($count_badge.length > 0) {

@@ -441,13 +441,16 @@ post_save.connect(solution_post_save, sender=Solution)
 def subscription_paid(sender, **kwargs):
     subscription = kwargs.get('subscription')
     user = kwargs.get('user')
+    profile = user.userprofile
 
     UserProfile.all_objects.filter(user=user).update(updated=timezone.now())
     PremiumService.clear_subscription_status_cache_keys(user.pk)
 
     if subscription.group.name == 'astrobin_lite':
-        profile = user.userprofile
         profile.premium_counter = 0
+        profile.save(keep_deleted=True)
+    elif subscription.group.name == 'astrobin_lite_2020':
+        profile.premium_counter = Image.objects_including_wip.filter(user=user).count()
         profile.save(keep_deleted=True)
 
     if 'premium' in subscription.category and Transaction.objects.filter(
