@@ -59,7 +59,7 @@ class SolutionService:
                         number = matches[0][1]
                         advanced_annotation = "%s %s" % (catalog, number)
 
-                if header == "Label" and advanced_annotation not in objects and advanced_annotation != '':
+                if advanced_annotation.lower() not in [x.lower() for x in objects] and advanced_annotation != '':
                     objects.append(advanced_annotation)
 
         return sorted(objects)

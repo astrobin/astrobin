@@ -107,7 +107,7 @@ class SolutionServiceTest(TestCase):
         self.assertEqual(
             ["16 Tau", "17 Tau", "18 Tau", "19 q Tau", "20 Tau", "21 Tau", "22 Tau", "23 Tau", "24 Tau", "25 eta Tau",
              "26 Tau", "27 Tau", "28 Tau", "Alcyone", "Asterope", "Atlas", "Barnard's Merope Nebula", "Celaeno",
-             "Electra", "IC 349", "M 45", "Maia", "Maia Nebula", "Merope", "Merope Nebula", "Merope nebula",
+             "Electra", "IC 349", "M 45", "Maia", "Maia Nebula", "Merope", "Merope Nebula",
              "NGC 1432", "NGC 1435", "Pleiades", "Pleione", "Sterope II", "Taygeta", "The star 18Tau",
              "The star Atlas (27Tau)", "The star Celaeno (16Tau)", "The star Electra (17Tau)",
              "The star Merope (23Tau)", "The star Pleione (28Tau)", "The star Sterope I (21Tau)",
@@ -178,3 +178,15 @@ class SolutionServiceTest(TestCase):
 
         self.assertEqual(['M 45', 'M45'], SolutionService(solution).get_objects_in_field(clean=False))
         self.assertEqual(['M 45'], SolutionService(solution).get_objects_in_field())
+
+    def test_get_objects_in_field_capitals(self):
+        basic = 'Merope nebula'
+        advanced = 'Label,1,2,3,Merope Nebula'
+
+        image = Generators.image()
+        solution = PlateSolvingGenerators.solution(image)
+        solution.objects_in_field = basic
+        solution.advanced_annotations = advanced
+
+        self.assertEqual(['Merope nebula'], SolutionService(solution).get_objects_in_field(clean=False))
+        self.assertEqual(['Merope nebula'], SolutionService(solution).get_objects_in_field())
