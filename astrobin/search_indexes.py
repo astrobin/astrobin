@@ -680,7 +680,7 @@ class ImageIndex(SearchIndex, Indexable):
                not IotdService().is_iotd(obj)
 
     def prepare_objects_in_field(self, obj):
-        return SolutionService(obj.solution).get_objects_in_field() if obj.solution else None
+        return SolutionService(obj.solution).get_objects_in_field(clean=False) if obj.solution else None
 
     def prepare_countries(self, obj):
         # Escape with __ because for whatever reason some country codes don't work, including IT.
