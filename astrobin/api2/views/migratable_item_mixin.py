@@ -39,8 +39,8 @@ class MigratableItemMixin:
         serializer = self.get_serializer(queryset, many=True, context=self.get_serializer_context())
         return Response(serializer.data)
 
-    @action(detail=True, methods=['get'], url_path='similar')
-    def similar(self, request, pk):
+    @action(detail=True, methods=['get'], url_path='similar-non-migrated')
+    def similar_non_migrated(self, request, pk):
         limit = self.request.GET.get('limit', 100)
         manager = self.get_serializer().Meta.model.objects
         obj = get_object_or_404(manager, pk=pk)
