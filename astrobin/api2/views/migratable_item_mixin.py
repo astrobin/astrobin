@@ -1,8 +1,10 @@
+from django.contrib.postgres.search import TrigramDistance
 from django.db.models import Q
 from django.http import HttpResponseBadRequest, HttpRequest
 from django.utils import timezone
 from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from astrobin.models import Gear
@@ -31,9 +33,24 @@ class MigratableItemMixin:
 
     @action(detail=False, methods=['get'], url_path='pending-migration-review')
     def pending_migration_review(self, request):
-        queryset = self.get_queryset()\
-            .filter(migration_flag__isnull=False, migration_flag_reviewer__isnull=True)\
-            .order_by('migration_flag_timestamp')[:50]
+        queryset = self.get_queryset() \
+                       .filter(migration_flag__isnull=False, migration_flag_reviewer__isnull=True) \
+                       .order_by('migration_flag_timestamp')[:50]
+        serializer = self.get_serializer(queryset, many=True, context=self.get_serializer_context())
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['get'], url_path='similar')
+    def similar(self, request, pk):
+        limit = self.request.GET.get('limit', 100)
+        manager = self.get_serializer().Meta.model.objects
+        obj = get_object_or_404(manager, pk=pk)
+
+        queryset = manager \
+                   .annotate(name_distance=TrigramDistance('name', obj.name),
+                             brand_distance=TrigramDistance('name', obj.name)) \
+                   .filter(Q(name_distance__lte=.7) & Q(brand_distance__lte=.7) & ~Q(pk=pk)) \
+                   .order_by('name_distance')[:limit]
+
         serializer = self.get_serializer(queryset, many=True, context=self.get_serializer_context())
         return Response(serializer.data)
 
