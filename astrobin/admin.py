@@ -11,6 +11,7 @@ from astrobin.models import Gear, GearUserInfo, GearAssistedMerge, GearMakeAutoR
     Mount, Camera, FocalReducer, Software, Filter, Accessory, DeepSky_Acquisition, SolarSystem_Acquisition, Image, \
     ImageRevision, Request, ImageRequest, UserProfile, Location, AppApiKeyRequest, App, ImageOfTheDay, \
     ImageOfTheDayCandidate, Collection, GlobalStat, BroadcastEmail
+from astrobin.services.gear_service import GearService
 from astrobin.tasks import send_broadcast_email
 from astrobin.utils import inactive_accounts
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
@@ -71,7 +72,7 @@ class GearAdmin(admin.ModelAdmin):
     list_display = ('id', 'make', 'name', 'master', 'updated', 'moderator_fixed')
     list_editable = ('make', 'name',)
     search_fields = ('id', 'make', 'name',)
-    actions = ['assisted_merge', 'soft_merge', ]
+    actions = ['assisted_merge', 'soft_merge', 'reset_migration_fields']
 
     def assisted_merge(modeladmin, request, queryset):
         GearAssistedMerge.objects.all().delete()
@@ -125,6 +126,11 @@ class GearAdmin(admin.ModelAdmin):
             slave.save()
 
     soft_merge.short_description = 'Soft merge'
+
+    def reset_migration_fields(selfmodeladmin, request, queryset):
+        GearService.reset_migration_fields(queryset)
+
+    reset_migration_fields.short_description = 'Reset migration fields'
 
 
 class GearAssistedMergeAdmin(admin.ModelAdmin):

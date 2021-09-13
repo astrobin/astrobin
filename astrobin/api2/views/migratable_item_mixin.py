@@ -45,7 +45,7 @@ class MigratableItemMixin:
         manager = self.get_serializer().Meta.model.objects
         obj = get_object_or_404(manager, pk=pk)
 
-        queryset = manager \
+        queryset = self.__random_non_migrated_queryset(request.user) \
                    .annotate(name_distance=TrigramDistance('name', obj.name),
                              brand_distance=TrigramDistance('name', obj.name)) \
                    .filter(Q(name_distance__lte=.7) & Q(brand_distance__lte=.7) & ~Q(pk=pk)) \
