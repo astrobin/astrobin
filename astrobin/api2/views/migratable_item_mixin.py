@@ -23,16 +23,34 @@ class MigratableItemMixin:
 
     @action(detail=False, methods=['get'], url_path='random-non-migrated')
     def random_non_migrated(self, request):
+        if not request.user.is_authenticated:
+            raise PermissionDenied
+
+        if not request.user.groups.filter(name='equipment_moderators').exists():
+            raise PermissionDenied
+
         queryset = self.__random_non_migrated_queryset(request.user).order_by('?')[:1]
         serializer = self.get_serializer(queryset, many=True, context=self.get_serializer_context())
         return Response(serializer.data)
 
     @action(detail=False, methods=['get'], url_path='non-migrated-count')
     def non_migrated_count(self, request):
+        if not request.user.is_authenticated:
+            raise PermissionDenied
+
+        if not request.user.groups.filter(name='equipment_moderators').exists():
+            raise PermissionDenied
+
         return Response(self.__random_non_migrated_queryset(request.user).count())
 
     @action(detail=False, methods=['get'], url_path='pending-migration-review')
     def pending_migration_review(self, request):
+        if not request.user.is_authenticated:
+            raise PermissionDenied
+
+        if not request.user.groups.filter(name='equipment_moderators').exists():
+            raise PermissionDenied
+
         queryset = self.get_queryset() \
                        .filter(migration_flag__isnull=False, migration_flag_reviewer__isnull=True) \
                        .order_by('migration_flag_timestamp')[:50]
@@ -41,6 +59,12 @@ class MigratableItemMixin:
 
     @action(detail=True, methods=['get'], url_path='similar-non-migrated')
     def similar_non_migrated(self, request, pk):
+        if not request.user.is_authenticated:
+            raise PermissionDenied
+
+        if not request.user.groups.filter(name='equipment_moderators').exists():
+            raise PermissionDenied
+
         try:
             max_distance = float(self.request.GET.get('max-distance', .7))
         except ValueError:
@@ -63,6 +87,9 @@ class MigratableItemMixin:
     def lock_for_migration(self, request: HttpRequest, pk: int) -> Response:
         obj: Gear = self.get_object()
 
+        if not request.user.is_authenticated:
+            raise PermissionDenied
+
         if not request.user.groups.filter(name='equipment_moderators').exists():
             raise PermissionDenied
 
@@ -84,6 +111,9 @@ class MigratableItemMixin:
     def release_lock_for_migration(self, request: HttpRequest, pk: int) -> Response:
         obj: Gear = self.get_object()
 
+        if not request.user.is_authenticated:
+            raise PermissionDenied
+
         if not request.user.groups.filter(name='equipment_moderators').exists():
             raise PermissionDenied
 
@@ -101,6 +131,9 @@ class MigratableItemMixin:
     @action(detail=True, methods=['put'], url_path='lock-for-migration-review')
     def lock_for_migration_review(self, request: HttpRequest, pk: int) -> Response:
         obj: Gear = self.get_object()
+
+        if not request.user.is_authenticated:
+            raise PermissionDenied
 
         if not request.user.groups.filter(name='equipment_moderators').exists():
             raise PermissionDenied
@@ -123,6 +156,9 @@ class MigratableItemMixin:
     def release_lock_for_migration_review(self, request: HttpRequest, pk: int) -> Response:
         obj: Gear = self.get_object()
 
+        if not request.user.is_authenticated:
+            raise PermissionDenied
+
         if not request.user.groups.filter(name='equipment_moderators').exists():
             raise PermissionDenied
 
@@ -140,6 +176,9 @@ class MigratableItemMixin:
     @action(detail=True, methods=['put'], url_path='set-migration')
     def set_migration(self, request, pk):
         obj: Gear = self.get_object()
+
+        if not request.user.is_authenticated:
+            raise PermissionDenied
 
         if not request.user.groups.filter(name='equipment_moderators').exists():
             raise PermissionDenied
@@ -182,6 +221,9 @@ class MigratableItemMixin:
     def accept_migration(self, request, pk):
         obj: Gear = self.get_object()
 
+        if not request.user.is_authenticated:
+            raise PermissionDenied
+
         if not request.user.groups.filter(name='equipment_moderators').exists():
             raise PermissionDenied
 
@@ -202,6 +244,9 @@ class MigratableItemMixin:
     @action(detail=True, methods=['put'], url_path='reject-migration')
     def reject_migration(self, request, pk):
         obj: Gear = self.get_object()
+
+        if not request.user.is_authenticated:
+            raise PermissionDenied
 
         if not request.user.groups.filter(name='equipment_moderators').exists():
             raise PermissionDenied
