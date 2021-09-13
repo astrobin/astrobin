@@ -41,6 +41,11 @@ class MigratableItemMixin:
 
     @action(detail=True, methods=['get'], url_path='similar-non-migrated')
     def similar_non_migrated(self, request, pk):
+        try:
+            max_distance = float(self.request.GET.get('max-distance', .7))
+        except ValueError:
+            max_distance = .7
+
         limit = self.request.GET.get('limit', 100)
         manager = self.get_serializer().Meta.model.objects
         obj = get_object_or_404(manager, pk=pk)
@@ -48,7 +53,7 @@ class MigratableItemMixin:
         queryset = self.__random_non_migrated_queryset(request.user) \
                    .annotate(name_distance=TrigramDistance('name', obj.name),
                              brand_distance=TrigramDistance('name', obj.name)) \
-                   .filter(Q(name_distance__lte=.7) & Q(brand_distance__lte=.7) & ~Q(pk=pk)) \
+                   .filter(Q(name_distance__lte=max_distance) & Q(brand_distance__lte=max_distance) & ~Q(pk=pk)) \
                    .order_by('name_distance')[:limit]
 
         serializer = self.get_serializer(queryset, many=True, context=self.get_serializer_context())
