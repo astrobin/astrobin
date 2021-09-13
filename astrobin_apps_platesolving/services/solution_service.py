@@ -1,3 +1,4 @@
+import re
 from django.db.models import QuerySet
 from django.urls import reverse
 
@@ -34,7 +35,7 @@ class SolutionService:
 
         self.solution = solution
 
-    def get_objects_in_field(self):
+    def get_objects_in_field(self, clean=True):
         # type: () -> List[str]
 
         objects = []
@@ -43,9 +44,22 @@ class SolutionService:
         if self.solution.advanced_annotations:
             advanced_annotations_lines = self.solution.advanced_annotations.split('\n')
             for line in advanced_annotations_lines:
-                advanced_annotation = line.split(',')[-1]
                 header = line.split(',')[0]
-                if header == "Label" and advanced_annotation not in objects and advanced_annotation != '':
+
+                if header != "Label":
+                    continue
+
+                advanced_annotation = line.split(',')[-1]
+
+                if clean:
+                    regex = r"^(?P<catalog>M|NGC|IC)(?P<id>\d+)$"
+                    matches = re.findall(regex, advanced_annotation)
+                    if len(matches) == 1:
+                        catalog = matches[0][0]
+                        number = matches[0][1]
+                        advanced_annotation = "%s %s" % (catalog, number)
+
+                if advanced_annotation.lower() not in [x.lower() for x in objects] and advanced_annotation != '':
                     objects.append(advanced_annotation)
 
         return sorted(objects)

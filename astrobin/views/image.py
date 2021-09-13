@@ -479,15 +479,15 @@ class ImageDetailView(ImageDetailViewBase):
                  ) for f in frames_list)),
                 (_('Integration'), DateTimeService.human_time_duration(dsa_data['integration'])),
                 (_('Darks'),
-                 '~%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['darks'])) / len(dsa_data['darks'])) if
+                 '%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['darks'])) / len(dsa_data['darks'])) if
                  dsa_data['darks'] else 0),
                 (_('Flats'),
-                 '~%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['flats'])) / len(dsa_data['flats'])) if
+                 '%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['flats'])) / len(dsa_data['flats'])) if
                  dsa_data['flats'] else 0),
-                (_('Flat darks'), '~%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['flat_darks'])) / len(
+                (_('Flat darks'), '%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['flat_darks'])) / len(
                     dsa_data['flat_darks'])) if dsa_data['flat_darks'] else 0),
                 (_('Bias'),
-                 '~%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['bias'])) / len(dsa_data['bias'])) if
+                 '%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['bias'])) / len(dsa_data['bias'])) if
                  dsa_data['bias'] else 0),
                 (_('Avg. Moon age'), ("%.2f " % (average(moon_age_list),) + _("days")) if moon_age_list else None),
                 (_('Avg. Moon phase'), "%.2f%%" % (average(moon_illuminated_list),) if moon_illuminated_list else None),
