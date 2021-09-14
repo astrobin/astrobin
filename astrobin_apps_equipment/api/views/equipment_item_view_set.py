@@ -21,7 +21,7 @@ from astrobin_apps_equipment.models import EquipmentItem
 class EquipmentItemViewSet(viewsets.ModelViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     permission_classes = [IsEquipmentModeratorOrReadOnly]
-    http_method_names = ['get', 'post', 'head', 'put', 'patch']
+    http_method_names = ['get', 'post', 'head']
 
     def get_queryset(self):
         q = self.request.GET.get('q')

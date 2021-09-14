@@ -13,7 +13,7 @@ class CameraViewSet(EquipmentItemViewSet):
 
     @action(
         detail=True,
-        methods=['PUT'],
+        methods=['post'],
         serializer_class=CameraImageSerializer,
         parser_classes=[MultiPartParser, FormParser],
     )

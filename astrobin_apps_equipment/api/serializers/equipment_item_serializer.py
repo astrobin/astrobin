@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework.exceptions import PermissionDenied
 
 
-class EquipmentItemSerializer(serializers.Serializer):
+class EquipmentItemSerializer(serializers.ModelSerializer):
     class Meta:
         fields = [
             'created_by',

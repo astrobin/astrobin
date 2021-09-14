@@ -77,7 +77,7 @@ class EquipmentItem(SafeDeleteModel):
 
     brand = models.ForeignKey(
         EquipmentBrand,
-        related_name='%(app_label)s_%(class)ss',
+        related_name='%(app_label)s_brand_%(class)ss',
         on_delete=PROTECT,
         null=False,
     )
