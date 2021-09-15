@@ -59,6 +59,23 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(objects, many=True)
         return Response(serializer.data)
 
+    @action(
+        detail=False,
+        methods=['GET'],
+        url_path='others-in-brand',
+    )
+    def others_in_brand(self, request):
+        brand = request.GET.get('brand')
+
+        manager = self.get_serializer().Meta.model.objects
+        objects = manager.none()
+
+        if brand:
+            objects = manager.filter(brand=int(brand)).order_by('name')
+
+        serializer = self.serializer_class(objects, many=True)
+        return Response(serializer.data)
+
     @action(detail=True, methods=['PUT'])
     def approve(self, request, pk):
         item = get_object_or_404(self.get_serializer().Meta.model.objects, pk=pk)
