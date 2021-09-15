@@ -50,7 +50,10 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         if brand and q:
             objects = manager \
                 .annotate(distance=TrigramDistance('name', q)) \
-                .filter(Q(brand=int(brand)) & Q(Q(distance__lte=.7) | Q(name__icontains=q))) \
+                .filter(
+                Q(brand=int(brand)) &
+                Q(Q(distance__lte=.7) | Q(name__icontains=q)) &
+                ~Q(name=q)) \
                 .order_by('distance')[:10]
 
         serializer = self.serializer_class(objects, many=True)
