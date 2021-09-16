@@ -4,6 +4,7 @@ from astrobin_apps_equipment.api.serializers.equipment_item_serializer import Eq
 class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
     class Meta(EquipmentItemSerializer.Meta):
         fields = [
+            'edit_proposal_target',
             'edit_proposal_by',
             'edit_proposal_created',
             'edit_proposal_updated',

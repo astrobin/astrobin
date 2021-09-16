@@ -5,6 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
 from django.db.models import Q
 from django.utils import timezone
+from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.decorators import action
@@ -20,6 +21,7 @@ from astrobin_apps_equipment.models import EquipmentItem
 
 class EquipmentItemViewSet(viewsets.ModelViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
+    parser_classes = [CamelCaseJSONParser]
     permission_classes = [IsEquipmentModeratorOrReadOnly]
     http_method_names = ['get', 'post', 'head']
 

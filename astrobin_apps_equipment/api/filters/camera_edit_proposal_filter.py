@@ -3,6 +3,5 @@ from astrobin_apps_equipment.models import CameraEditProposal
 
 
 class CameraEditProposalFilter(CameraFilter):
-    class Meta:
+    class Meta(CameraFilter.Meta):
         model = CameraEditProposal
-        fields = CameraFilter.Meta.fields

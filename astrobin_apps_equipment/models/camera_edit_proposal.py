@@ -9,4 +9,5 @@ class CameraEditProposal(CameraBaseModel, EquipmentItemEditProposalMixin):
     edit_proposal_target = models.ForeignKey(Camera, on_delete=models.CASCADE, related_name="edit_proposals")
 
     class Meta(CameraBaseModel.Meta):
+        unique_together = []
         abstract = False
