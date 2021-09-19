@@ -56,12 +56,13 @@ class EquipmentItemEditProposalMixin(models.Model):
     )
 
     edit_proposal_review_status = models.CharField(
-        max_length=8,
+        max_length=10,
         null=True,
         blank=True,
         choices=[
             ('ACCEPTED', _("Accepted")),
             ('REJECTED', _("Rejected")),
+            ('SUPERSEDED', _("Superseded"))
         ],
     )
 
