@@ -23,10 +23,6 @@ table.topic-list {
 table.forums, table.topic-list {
   table-layout: auto;
 
-  th {
-    white-space: nowrap;
-  }
-
   td {
     @media screen and (min-width: 980px) {
       text-overflow: clip;
