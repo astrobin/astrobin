@@ -133,7 +133,7 @@ class AstroBinSearchForm(SearchForm):
             d = "i"
 
         if d == "i":
-            results = results.models(Image, EquipmentBrandListing).order_by('-django_ct')
+            results = results.models(Image)
         elif d == "u":
             results = results.models(User)
         elif d == "cf":
