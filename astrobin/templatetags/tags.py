@@ -5,6 +5,7 @@ from datetime import datetime, date
 import dateutil
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.contrib.postgres.search import TrigramDistance
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
@@ -22,8 +23,10 @@ from astrobin.enums.license import License
 from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import GearUserInfo, UserProfile, Image, LICENSE_CHOICES
 from astrobin.services.utils_service import UtilsService
-from astrobin.utils import get_image_resolution, decimal_to_hours_minutes_seconds, decimal_to_degrees_minutes_seconds
+from astrobin.utils import get_image_resolution, decimal_to_hours_minutes_seconds, decimal_to_degrees_minutes_seconds, \
+    get_client_country_code
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
+from astrobin_apps_equipment.models import EquipmentBrandListing
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium_2020, is_premium, is_ultimate_2020, \
     is_lite, is_any_ultimate, is_free, is_lite_2020
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
@@ -143,10 +146,23 @@ register.inclusion_tag('inclusion_tags/image_list.html', takes_context=True)(ima
 
 @register.inclusion_tag('inclusion_tags/search_image_list.html', takes_context=True)
 def search_image_list(context, paginate=True, **kwargs):
+    request = context['request']
+    q = request.GET.get('q')
+    country = get_client_country_code(request)
+    equipment_brand_listing = None
+
+    if q:
+        listings = EquipmentBrandListing.objects\
+            .annotate(distance=TrigramDistance('brand__name', q))\
+            .filter(distance__lte=.85, retailer__countries__icontains=country)
+        if listings.count() > 0:
+            equipment_brand_listing = listings[0]
+
     context.update({
         'paginate': paginate,
         'search_domain': context['request'].GET.get('d'),
         'sort': context['request'].GET.get('sort'),
+        'equipment_brand_listing': equipment_brand_listing
     })
 
     return context

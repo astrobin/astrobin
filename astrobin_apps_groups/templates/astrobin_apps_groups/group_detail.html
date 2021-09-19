@@ -15,7 +15,7 @@
     {{ block.super }}
     {% breadcrumb_safe 'Explore' None %}
     {% breadcrumb 'Groups' 'group_list' %}
-    {% breadcrumb object.name|escape|safe None %}
+    {% breadcrumb object.name None %}
 {% endblock %}
 
 {% block content %}
