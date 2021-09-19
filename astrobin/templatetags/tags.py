@@ -5,6 +5,7 @@ from datetime import datetime, date
 import dateutil
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.contrib.postgres.search import TrigramDistance
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
@@ -12,7 +13,6 @@ from django.template import Library
 from django.template.defaultfilters import timesince
 from django.utils.safestring import mark_safe, SafeString
 from django.utils.translation import ugettext as _
-from haystack.query import SearchQuerySet
 from pybb.models import Post, Topic
 from subscription.models import UserSubscription, Subscription
 from threaded_messages.models import Participant
@@ -152,14 +152,11 @@ def search_image_list(context, paginate=True, **kwargs):
     equipment_brand_listing = None
 
     if q:
-        equipment_brand_listing = SearchQuerySet()\
-            .models(EquipmentBrandListing)\
-            .filter(countries=country)\
-            .auto_query(q)
-        if equipment_brand_listing.count() > 0:
-            equipment_brand_listing = equipment_brand_listing[0].object
-        else:
-            equipment_brand_listing = None
+        listings = EquipmentBrandListing.objects\
+            .annotate(distance=TrigramDistance('brand__name', q))\
+            .filter(distance__lte=.85, retailer__countries__icontains=country)
+        if listings.count() > 0:
+            equipment_brand_listing = listings[0]
 
     context.update({
         'paginate': paginate,
