@@ -13,7 +13,7 @@ class SensorViewSet(EquipmentItemViewSet):
 
     @action(
         detail=True,
-        methods=['PUT'],
+        methods=['POST'],
         serializer_class=SensorImageSerializer,
         parser_classes=[MultiPartParser, FormParser],
     )

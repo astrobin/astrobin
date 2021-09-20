@@ -19,7 +19,7 @@ class BrandViewSet(viewsets.ModelViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     permission_classes = [IsEquipmentModeratorOrReadOnly]
     filter_class = EquipmentBrandFilter
-    http_method_names = ['get', 'post', 'head', 'put', 'patch']
+    http_method_names = ['get', 'post', 'head']
 
     def get_queryset(self):
         q = self.request.GET.get('q')
@@ -34,7 +34,7 @@ class BrandViewSet(viewsets.ModelViewSet):
 
     @action(
         detail=True,
-        methods=['PUT'],
+        methods=['POST'],
         serializer_class=BrandImageSerializer,
         parser_classes=[MultiPartParser, FormParser],
     )

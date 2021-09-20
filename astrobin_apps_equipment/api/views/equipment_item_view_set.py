@@ -78,7 +78,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(objects, many=True)
         return Response(serializer.data)
 
-    @action(detail=True, methods=['PUT'])
+    @action(detail=True, methods=['POST'])
     def approve(self, request, pk):
         item = get_object_or_404(self.get_serializer().Meta.model.objects, pk=pk)
 
@@ -95,7 +95,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(item)
         return Response(serializer.data)
 
-    @action(detail=True, methods=['PUT'])
+    @action(detail=True, methods=['POST'])
     def reject(self, request, pk):
         model = self.get_serializer().Meta.model
         item: EquipmentItem = get_object_or_404(model.objects, pk=pk)
