@@ -240,6 +240,11 @@ class Solution(models.Model):
         (Solver.ADVANCED_SUCCESS, 'Advanced success'),
     )
 
+    created = models.DateTimeField(
+        editable=False,
+        auto_now_add=True,
+    )
+
     settings = models.OneToOneField(
         PlateSolvingSettings,
         related_name='solution',
