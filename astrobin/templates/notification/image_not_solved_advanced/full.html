@@ -1,0 +1,23 @@
+{% load i18n %}
+{% load astrobin_apps_notifications_tags %}
+
+<a href="{{ object_url }}">
+    {% blocktrans trimmed %}
+        Unfortunately, AstroBin failed to perform the advanced plate-solution of your image: <strong>{{ title }}</strong>.
+    {% endblocktrans %}
+</a>
+
+<br /><br />
+
+{% if image_thumbnail %}
+    <a href="{{ object_url }}">
+        <img src="{{ image_thumbnail }}" />
+    </a>
+{% endif %}
+
+<br /><br />
+
+{% blocktrans trimmed %}
+    Apologies for the inconvenience. AstroBin and PixInsight work continuously to improve the quality and performance
+    of the service.
+{% endblocktrans %}
