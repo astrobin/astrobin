@@ -49,7 +49,7 @@ NOTICE_TYPES = (
         1,
     ),
     (
-        'image_not_solved',
+        'image_not_solved_advanced',
         _('Your image could not be plate-solved (advanced)'),
         '',
         1,
