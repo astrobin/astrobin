@@ -1,0 +1,9 @@
+{% load i18n %}
+
+<a href="{{ object_url }}">
+    {% blocktrans trimmed %}
+        Unfortunately, AstroBin failed to perform the advanced plate-solution of your image: <strong>{{ title }}</strong>.
+    {% endblocktrans %}
+</a>
+
+
