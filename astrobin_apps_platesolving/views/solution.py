@@ -1,7 +1,9 @@
 import logging
 import os
 import time
-import urllib.request, urllib.error, urllib.parse
+import urllib.error
+import urllib.parse
+import urllib.request
 
 import simplejson
 from braces.views import CsrfExemptMixin
@@ -31,6 +33,7 @@ from astrobin_apps_platesolving.serializers import SolutionSerializer
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_platesolving.solver import Solver, AdvancedSolver, SolverBase
 from astrobin_apps_platesolving.utils import ThumbnailNotReadyException, get_target, get_solution, corrected_pixscale
+from common.utils import lock_table
 
 log = logging.getLogger('apps')
 
@@ -283,13 +286,14 @@ class SolutionPixInsightNextTask(base.View):
         if username != settings.PIXINSIGHT_USERNAME or password != settings.PIXINSIGHT_PASSWORD:
             return HttpResponseForbidden()
 
-        task = PlateSolvingAdvancedTask.objects.filter(active=True).order_by('-created').first()
+        with lock_table(PlateSolvingAdvancedTask):
+            task = PlateSolvingAdvancedTask.objects.filter(active=True).order_by('-created').last()
 
-        if task is None:
-            return HttpResponse('')
+            if task is None:
+                return HttpResponse('')
 
-        task.active = False
-        task.save()
+            task.active = False
+            task.save()
 
         response = \
             'OK\n' \
