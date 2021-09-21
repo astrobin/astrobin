@@ -423,7 +423,7 @@ def solution_post_save(sender, instance, created, **kwargs):
     elif ct.model == 'imagerevision':
         user = target.image.user
         title = target.image.title
-        thumb = target.image.thumbnail_raw('gallery', target.revision_label, sync=True)
+        thumb = target.image.thumbnail_raw('gallery', target.label, sync=True)
     else:
         return
 
