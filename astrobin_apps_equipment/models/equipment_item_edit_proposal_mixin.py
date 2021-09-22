@@ -4,6 +4,11 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class EquipmentItemEditProposalMixin(models.Model):
+    edit_proposal_original_properties = models.TextField(
+        null=False,
+        blank=False,
+    )
+
     edit_proposal_by = models.ForeignKey(
         User,
         null=True,

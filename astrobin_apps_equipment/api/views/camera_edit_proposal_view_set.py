@@ -5,7 +5,6 @@ from astrobin_apps_equipment.api.filters.camera_edit_proposal_filter import Came
 from astrobin_apps_equipment.api.serializers.camera_edit_proposal_image_serializer import \
     CameraEditProposalImageSerializer
 from astrobin_apps_equipment.api.serializers.camera_edit_proposal_serializer import CameraEditProposalSerializer
-from astrobin_apps_equipment.api.serializers.camera_image_serializer import CameraImageSerializer
 from astrobin_apps_equipment.api.views.equipment_item_edit_proposal_view_set import EquipmentItemEditProposalViewSet
 
 
