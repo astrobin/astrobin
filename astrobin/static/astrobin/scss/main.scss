@@ -9,6 +9,7 @@
 @import "buttons";
 @import "ckeditor";
 @import "forms";
+@import "meter";
 @import "modal";
 @import "multiselect";
 @import "nav";
@@ -3052,27 +3053,6 @@ table#private-shared-folders tr:hover a.delete-folder {
       .header .info {
         float: right;
       }
-    }
-  }
-}
-
-.progress {
-  margin-bottom: 4px;
-}
-
-#platesolving-status {
-  .progress {
-    height: 32px;
-    position: relative;
-    background-color: $grey-6;
-    background-image: linear-gradient(to bottom, $grey-8, $grey-5);
-
-    .progress-content {
-      color: gold;
-      text-shadow: 1px 1px 1px black;
-      position: absolute;
-      top: 6px;
-      left: 8px;
     }
   }
 }
