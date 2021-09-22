@@ -148,12 +148,14 @@ register.inclusion_tag('inclusion_tags/image_list.html', takes_context=True)(ima
 def search_image_list(context, paginate=True, **kwargs):
     request = context['request']
     q = request.GET.get('q')
+    telescope = request.GET.get('telescope')
+    camera = request.GET.get('camera')
     country = get_client_country_code(request)
     equipment_brand_listing = None
 
-    if q:
+    if telescope or camera or q:
         listings = EquipmentBrandListing.objects\
-            .annotate(distance=TrigramDistance('brand__name', q))\
+            .annotate(distance=TrigramDistance('brand__name', telescope or camera or q))\
             .filter(distance__lte=.85, retailer__countries__icontains=country)
         if listings.count() > 0:
             equipment_brand_listing = listings[0]

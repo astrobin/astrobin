@@ -418,8 +418,12 @@ def solution_post_save(sender, instance, created, **kwargs):
 
     if ct.model == 'image':
         user = target.user
+        title = target.title
+        thumb = target.thumbnail_raw('gallery', None, sync=True)
     elif ct.model == 'imagerevision':
         user = target.image.user
+        title = target.image.title
+        thumb = target.image.thumbnail_raw('gallery', target.label, sync=True)
     else:
         return
 
@@ -427,12 +431,23 @@ def solution_post_save(sender, instance, created, **kwargs):
         notification = 'image_not_solved'
     elif instance.status == Solver.SUCCESS:
         notification = 'image_solved'
+    elif instance.status == Solver.ADVANCED_SUCCESS:
+        notification = 'image_solved_advanced'
+    elif instance.status == Solver.ADVANCED_FAILED:
+        notification = 'image_not_solved_advanced'
     else:
         return
 
     push_notification(
-        [user], None, notification,
-        {'object_url': build_notification_url(settings.BASE_URL + target.get_absolute_url())})
+        [user],
+        None,
+        notification,
+        {
+            'object_url': build_notification_url(settings.BASE_URL + target.get_absolute_url()),
+            'title': title,
+            'image_thumbnail': thumb.url if thumb else None,
+        }
+    )
 
 
 post_save.connect(solution_post_save, sender=Solution)

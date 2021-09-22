@@ -1,0 +1,8 @@
+{% load i18n %}
+{% load astrobin_apps_notifications_tags %}
+
+{% blocktrans trimmed %}
+    AstroBin completed the advanced plate-solution of your image: <strong>{{ title }}</strong>.
+{% endblocktrans %}
+
+{{ object_url }}
