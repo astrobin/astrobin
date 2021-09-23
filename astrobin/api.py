@@ -461,7 +461,7 @@ class ImageResource(ModelResource):
                     return '%s%s' % (fix_catalog(m.group('catalog')), m.group('name'))
                 return name
 
-            qs = Solution.objects.filter(objects_in_field__icontains=fix_name(subjects))
+            qs = Solution.objects.filter(objects_in_field__icontains=fix_name(subjects))[:100]
             orm_filters['pk__in'] = [i.object_id for i in qs]
 
         if ids:

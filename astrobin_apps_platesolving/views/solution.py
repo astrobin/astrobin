@@ -18,21 +18,25 @@ from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import base
+from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import generics
 from rest_framework import permissions
+from rest_framework.renderers import BrowsableAPIRenderer
 
 from astrobin.models import DeepSky_Acquisition
 from astrobin.utils import degrees_minutes_seconds_to_decimal_degrees
 from astrobin_apps_platesolving.annotate import Annotator
+from astrobin_apps_platesolving.api_filters.advanced_task_filter import AdvancedTaskFilter
 from astrobin_apps_platesolving.api_filters.solution_list_filter import SolutionListFilter
 from astrobin_apps_platesolving.backends.astrometry_net.errors import RequestError
 from astrobin_apps_platesolving.models import PlateSolvingAdvancedTask
 from astrobin_apps_platesolving.models import PlateSolvingSettings
 from astrobin_apps_platesolving.models import Solution
-from astrobin_apps_platesolving.serializers import SolutionSerializer
+from astrobin_apps_platesolving.serializers import SolutionSerializer, AdvancedTaskSerializer
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_platesolving.solver import Solver, AdvancedSolver, SolverBase
 from astrobin_apps_platesolving.utils import ThumbnailNotReadyException, get_target, get_solution, corrected_pixscale
+from common.permissions import ReadOnly
 from common.utils import lock_table
 
 log = logging.getLogger('apps')
@@ -176,6 +180,7 @@ class SolutionUpdateView(base.View):
         solver = None
         status = None
         error = None
+        queue_size = None
 
         try:
             if solution.status < SolverBase.ADVANCED_PENDING:
@@ -183,6 +188,14 @@ class SolutionUpdateView(base.View):
                 status = solver.status(solution.submission_id)
             else:
                 status = solution.status
+
+                try:
+                    task = PlateSolvingAdvancedTask.objects.get(serial_number=solution.pixinsight_serial_number)
+                    queue_size = PlateSolvingAdvancedTask.objects.filter(active=True, created__lt=task.created).count()
+                    error = task.error_message
+                except PlateSolvingAdvancedTask.DoesNotExist:
+                    log.error("PixInsight task %s does not exist!" % solution.pixinsight_serial_number)
+
 
             if status == Solver.MISSING:
                 solution.status = status
@@ -196,6 +209,10 @@ class SolutionUpdateView(base.View):
 
         context = {
             'status': status,
+            'started': solution.created.timestamp() * 1000,
+            'submission_id': solution.submission_id,
+            'pixinsight_serial_number': solution.pixinsight_serial_number,
+            'queue_size': queue_size,
             'error': error
         }
         return HttpResponse(simplejson.dumps(context), content_type='application/json')
@@ -324,8 +341,14 @@ class SolutionPixInsightWebhook(base.View):
     def post(self, request, *args, **kwargs):
         serial_number = request.POST.get('serialNumber')
         status = request.POST.get('status', 'ERROR')
+        error_message = request.POST.get('errorMessage')
 
         log.debug("PixInsight Webhook called for %s: %s" % (serial_number, status))
+
+        PlateSolvingAdvancedTask.objects.filter(serial_number=serial_number).update(
+            status=status,
+            error_message=error_message,
+        )
 
         solution = get_object_or_404(Solution, pixinsight_serial_number=serial_number)
 
@@ -393,3 +416,12 @@ class SolutionDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SolutionSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Solution.objects.all()
+
+
+class AdvancedTaskList(generics.ListAPIView):
+    model = PlateSolvingAdvancedTask
+    queryset = PlateSolvingAdvancedTask.objects.order_by('-created')
+    serializer_class = AdvancedTaskSerializer
+    permission_classes = (ReadOnly,)
+    filter_class = AdvancedTaskFilter
+    renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]

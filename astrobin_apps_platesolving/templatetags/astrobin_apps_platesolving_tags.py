@@ -1,5 +1,6 @@
 from django.contrib.contenttypes.models import ContentType
 from django.template import Library
+from django.utils.translation import ugettext_lazy as _
 
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.services import SolutionService
@@ -55,3 +56,11 @@ def get_search_query_around(solution, degrees):
 def supports_search_around(solution):
     # type: (Solution) -> bool
     return (solution.advanced_ra or solution.ra) and (solution.advanced_dec or solution.dec)
+
+
+@register.filter
+def humanize_solution_status(solution: Solution) -> str:
+    for status in Solution.STATUS_CHOICES:
+        if solution.status == status[0]:
+            return status[1]
+    return _("Invalid")

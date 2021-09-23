@@ -1,7 +1,7 @@
 # Django
 from django.contrib import admin
 
-from astrobin_apps_platesolving.models import Solution
+from astrobin_apps_platesolving.models import Solution, PlateSolvingAdvancedTask
 
 
 class SolutionAdmin(admin.ModelAdmin):
@@ -10,5 +10,11 @@ class SolutionAdmin(admin.ModelAdmin):
         'status', 'submission_id', 'image_file')
     list_filter = ('status',)
 
-admin.site.register(Solution, SolutionAdmin)
 
+class AdvancedTaskAdmin(admin.ModelAdmin):
+    list_display = ('serial_number', 'created', 'active',)
+    list_filter = ('active',)
+
+
+admin.site.register(Solution, SolutionAdmin)
+admin.site.register(PlateSolvingAdvancedTask, AdvancedTaskAdmin)

@@ -126,6 +126,8 @@
         update: function () {
             var self = this;
 
+            self._setInfoModalLoading(true);
+
             $.ajax({
                 url: self.updateURL + self.solution_id + '/',
                 type: 'post',
@@ -135,6 +137,24 @@
                         self.onError(data.error);
                         return;
                     }
+
+                    self._setInfoModalLoading(false);
+
+
+                    self._updateInfoModal("status", self._humanizeStatus(data.status));
+
+                    self._updateInfoModal(
+                        "started",
+                        `<abbr class="timestamp" data-epoch="${data.started}">...</abbr>`
+                    );
+                    astrobin_common.init_timestamps();
+
+                    self._updateInfoModal(
+                        "astrometry-job",
+                        `<a href="http://nova.astrometry.net/status/${data.submission_id}" target="_blank">${data.submission_id}</a>`
+                    );
+
+                    self._updateInfoModal("pixinsight-job", data.pixinsight_serial_number);
 
                     switch (data.status) {
                         case Status.MISSING:
@@ -216,7 +236,7 @@
                             });
                             break;
                         case Status.ADVANCED_PENDING:
-                            self.onStatusAdvancedPending();
+                            self.onStatusAdvancedPending(data.queue_size);
                             break;
                     }
                 }
@@ -280,12 +300,17 @@
             }, 3000);
         },
 
-        onStatusAdvancedPending: function () {
+        onStatusAdvancedPending: function (queueSize) {
             var self = this;
 
             self._setIcon('icon-ok');
             self._setProgressBar(75);
             self._setProgressText(self.solveAdvancedStartedMsg);
+
+            if (queueSize !== null && queueSize !== undefined) {
+                self._updateInfoModal("pixinsight-queue-size", queueSize);
+            }
+
             self._showStatus();
 
             setTimeout(function () {
@@ -297,20 +322,18 @@
             var self = this;
 
             self._setIcon('icon-fire');
-            self._switchProgressClasses('progress-info', 'progress-danger');
+            self._switchProgressClasses('info', 'danger');
             self._setProgressBar(100);
             self._setProgressText(self.solveFailedMsg);
-            self._removeStatus();
         },
 
         onStatusAdvancedFailed: function () {
             var self = this;
 
             self._setIcon('icon-fire');
-            self._switchProgressClasses('progress-info', 'progress-danger');
+            self._switchProgressClasses('info', 'danger');
             self._setProgressBar(100);
             self._setProgressText(self.solveAdvancedFailedMsg);
-            self._removeStatus();
         },
 
         onStatusSuccess: function () {
@@ -321,9 +344,8 @@
             } else {
                 self._setProgressText(self.solveSuccessMsg);
                 self._setIcon('icon-ok');
-                self._switchProgressClasses('progress-info', 'progress-success');
+                self._switchProgressClasses('info', 'success');
                 self._setProgressBar(self.perform_advanced === "True" ? 50 :100);
-                self._removeStatus();
             }
         },
 
@@ -331,10 +353,9 @@
             var self = this;
 
             self._setIcon('icon-ok');
-            self._switchProgressClasses('progress-info', 'progress-success');
+            self._switchProgressClasses('info', 'success');
             self._setProgressBar(100);
             self._setProgressText(self.solveAdvancedSuccessMsg);
-            self._removeStatus();
         },
 
         onError: function (error) {
@@ -371,27 +392,56 @@
         },
 
         _setProgressText: function (text) {
-            $('#platesolving-status').find('.progress-text').text(text);
+            $('#platesolving-status').find('.meter .text').text(text);
         },
 
         _switchProgressClasses: function (removeClass, addClass) {
-            $('#platesolving-status').find('.progress').removeClass(removeClass).addClass(addClass);
+            $('#platesolving-status').find('.meter').removeClass(removeClass).addClass(addClass);
         },
 
         _setIcon: function(icon) {
-            $('#platesolving-status').find('i').attr('class', icon);
+            $('#platesolving-status').find('.text i').attr('class', icon);
         },
 
         _showStatus() {
             $('#platesolving-status').removeClass('hide');
         },
 
-        _removeStatus: function () {
-            var self = this;
+        _setInfoModalLoading(loading) {
+            if (loading) {
+                $("#plate-solving-information-modal").find(".loading").show();
+            } else {
+                setTimeout(() => {
+                    $("#plate-solving-information-modal").find(".loading").hide();
+                }, 500);
+            }
+        },
 
-            setTimeout(function () {
-                $('#platesolving-status').hide('slow');
-            }, 5000);
+        _updateInfoModal(property, value) {
+            $("#plate-solving-information-modal").find("." + property).html(
+                value === null || value === undefined ? this.i18n.na : value
+            );
+        },
+
+        _humanizeStatus(status) {
+            switch (status) {
+                case Status.MISSING:
+                    return this.i18n.statusMissing;
+                case Status.PENDING:
+                    return this.i18n.statusPending;
+                case Status.SUCCESS:
+                    return this.i18n.statusSuccess;
+                case Status.FAILED:
+                    return this.i18n.statusFailed;
+                case Status.ADVANCED_PENDING:
+                    return this.i18n.statusAdvancedPending;
+                case Status.ADVANCED_SUCCESS:
+                    return this.i18n.statusAdvancedSuccess;
+                case Status.ADVANCED_FAILED:
+                    return this.i18n.statusAdvancedFailed;
+                default:
+                    return this.i18n.statusInvalid;
+            }
         }
     };
 

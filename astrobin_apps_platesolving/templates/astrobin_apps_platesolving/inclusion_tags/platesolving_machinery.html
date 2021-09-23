@@ -3,18 +3,23 @@
 {% load astrobin_apps_premium_tags %}
 
 <div id="platesolving-status" class="hide">
-    <div class="progress progress-striped progress-info active">
-        <div class="bar" style="width:10%"></div>
-        <span class="progress-content">
+    <div class="meter">
+        <div class="bar info" style="width:10%"></div>
+        <span class="text">
             <strong><i class="icon-warning-sign"></i></strong>
             <span class="progress-text">
                 {% trans "Getting plate-solving status, please wait..." %}
             </span>
         </span>
+        <span class="info-button">
+            <a href="#plate-solving-information-modal" data-toggle="modal">
+                <i class="icon-info-sign"></i>
+            </a>
+        </span>
     </div>
 </div>
 
-<script src="{% get_static_prefix %}astrobin_apps_platesolving/js/astrobin_apps_platesolving.js?v=54c15348bc1062b3739acf9d659621d3aad90c05"></script>
+<script src="{% static "astrobin_apps_platesolving/js/astrobin_apps_platesolving.js" %}?t=20210923-3"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         var $img = $('.main-image img').first();
@@ -47,8 +52,16 @@
                     i18n: {
                         error: "{% trans 'Error' %}",
                         connectionRefused: "{% trans 'AstroBin could not plate-solve this image because it was not possible to establish a connection to nova.astrometry.net. Please try again later!' %}",
-                        internalError: "{% trans 'AstroBin could not plate-solve this image because nova.astrometry.net reported an internal server error.' %}",
-                        unexpectedError: "{% trans 'AstroBin could not plate-solve this image because nova.astrometry.net reported an unepexted error.' %}"
+                        internalError: "{% trans 'AstroBin could not plate-solve this image because nova.astrometry.net reported an intertnal server error.' %}",
+                        unexpectedError: "{% trans 'AstroBin could not plate-solve this image because nova.astrometry.net reported an unepexted error.' %}",
+                        statusMissing: "{% trans 'Missing' %}",
+                        statusPending: "{% trans 'Basic pending' %}",
+                        statusSuccess: "{% trans 'Basic success' %}",
+                        statusFailed: "{% trans 'Basic failed' %}",
+                        statusAdvancedPending: "{% trans 'Advanced pending' %}",
+                        statusAdvancedSuccess: "{% trans 'Advanced success' %}",
+                        statusAdvancedFailed: "{% trans 'Advanced failed' %}",
+                        na: "{% trans 'n/a' %}"
                     }
                 });
 
