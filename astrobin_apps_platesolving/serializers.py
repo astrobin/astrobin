@@ -1,8 +1,6 @@
-# restframework
 from rest_framework import serializers
 
-# This app
-from astrobin_apps_platesolving.models import Solution
+from astrobin_apps_platesolving.models import Solution, PlateSolvingAdvancedTask
 
 
 class SolutionSerializer(serializers.ModelSerializer):
@@ -28,3 +26,9 @@ class SolutionSerializer(serializers.ModelSerializer):
             'advanced_orientation',
             'advanced_piixscale',
         )
+
+
+class AdvancedTaskSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PlateSolvingAdvancedTask
+        fields = '__all__'
