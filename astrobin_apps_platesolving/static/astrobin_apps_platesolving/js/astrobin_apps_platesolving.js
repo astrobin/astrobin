@@ -126,6 +126,8 @@
         update: function () {
             var self = this;
 
+            self._setInfoModalLoading(true);
+
             $.ajax({
                 url: self.updateURL + self.solution_id + '/',
                 type: 'post',
@@ -135,6 +137,9 @@
                         self.onError(data.error);
                         return;
                     }
+
+                    self._setInfoModalLoading(false);
+
 
                     self._updateInfoModal("status", self._humanizeStatus(data.status));
 
@@ -400,6 +405,16 @@
 
         _showStatus() {
             $('#platesolving-status').removeClass('hide');
+        },
+
+        _setInfoModalLoading(loading) {
+            if (loading) {
+                $("#plate-solving-information-modal").find(".loading").show();
+            } else {
+                setTimeout(() => {
+                    $("#plate-solving-information-modal").find(".loading").hide();
+                }, 500);
+            }
         },
 
         _updateInfoModal(property, value) {
