@@ -216,7 +216,7 @@
                             });
                             break;
                         case Status.ADVANCED_PENDING:
-                            self.onStatusAdvancedPending();
+                            self.onStatusAdvancedPending(data.queue_size);
                             break;
                     }
                 }
@@ -280,12 +280,19 @@
             }, 3000);
         },
 
-        onStatusAdvancedPending: function () {
+        onStatusAdvancedPending: function (queueSize) {
             var self = this;
 
             self._setIcon('icon-ok');
             self._setProgressBar(75);
-            self._setProgressText(self.solveAdvancedStartedMsg);
+
+            if (!!queueSize) {
+                self._setProgressText(self.solveAdvancedStartedMsg + " " + self.jobsInQueueMsg + " " + queueSize + ".");
+            } else {
+                self._setProgressText(self.solveAdvancedStartedMsg);
+            }
+
+
             self._showStatus();
 
             setTimeout(function () {
@@ -297,20 +304,18 @@
             var self = this;
 
             self._setIcon('icon-fire');
-            self._switchProgressClasses('progress-info', 'progress-danger');
+            self._switchProgressClasses('info', 'danger');
             self._setProgressBar(100);
             self._setProgressText(self.solveFailedMsg);
-            self._removeStatus();
         },
 
         onStatusAdvancedFailed: function () {
             var self = this;
 
             self._setIcon('icon-fire');
-            self._switchProgressClasses('progress-info', 'progress-danger');
+            self._switchProgressClasses('info', 'danger');
             self._setProgressBar(100);
             self._setProgressText(self.solveAdvancedFailedMsg);
-            self._removeStatus();
         },
 
         onStatusSuccess: function () {
@@ -321,9 +326,8 @@
             } else {
                 self._setProgressText(self.solveSuccessMsg);
                 self._setIcon('icon-ok');
-                self._switchProgressClasses('progress-info', 'progress-success');
+                self._switchProgressClasses('info', 'success');
                 self._setProgressBar(self.perform_advanced === "True" ? 50 :100);
-                self._removeStatus();
             }
         },
 
@@ -331,10 +335,9 @@
             var self = this;
 
             self._setIcon('icon-ok');
-            self._switchProgressClasses('progress-info', 'progress-success');
+            self._switchProgressClasses('info', 'success');
             self._setProgressBar(100);
             self._setProgressText(self.solveAdvancedSuccessMsg);
-            self._removeStatus();
         },
 
         onError: function (error) {
@@ -371,11 +374,11 @@
         },
 
         _setProgressText: function (text) {
-            $('#platesolving-status').find('.progress-text').text(text);
+            $('#platesolving-status').find('.meter .text').text(text);
         },
 
         _switchProgressClasses: function (removeClass, addClass) {
-            $('#platesolving-status').find('.progress').removeClass(removeClass).addClass(addClass);
+            $('#platesolving-status').find('.meter').removeClass(removeClass).addClass(addClass);
         },
 
         _setIcon: function(icon) {
@@ -384,14 +387,6 @@
 
         _showStatus() {
             $('#platesolving-status').removeClass('hide');
-        },
-
-        _removeStatus: function () {
-            var self = this;
-
-            setTimeout(function () {
-                $('#platesolving-status').hide('slow');
-            }, 5000);
         }
     };
 

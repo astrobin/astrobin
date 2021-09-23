@@ -176,6 +176,7 @@ class SolutionUpdateView(base.View):
         solver = None
         status = None
         error = None
+        queue_size = None
 
         try:
             if solution.status < SolverBase.ADVANCED_PENDING:
@@ -183,6 +184,14 @@ class SolutionUpdateView(base.View):
                 status = solver.status(solution.submission_id)
             else:
                 status = solution.status
+
+                try:
+                    task = PlateSolvingAdvancedTask.objects.get(serial_number=solution.pixinsight_serial_number)
+                    queue_size = PlateSolvingAdvancedTask.objects.filter(active=True, created__lt=task.created).count()
+                    error = task.error_message
+                except PlateSolvingAdvancedTask.DoesNotExist:
+                    log.error("PixInsight task %s does not exist!" % solution.pixinsight_serial_number)
+
 
             if status == Solver.MISSING:
                 solution.status = status
@@ -196,6 +205,7 @@ class SolutionUpdateView(base.View):
 
         context = {
             'status': status,
+            'queue_size': queue_size,
             'error': error
         }
         return HttpResponse(simplejson.dumps(context), content_type='application/json')
@@ -324,8 +334,14 @@ class SolutionPixInsightWebhook(base.View):
     def post(self, request, *args, **kwargs):
         serial_number = request.POST.get('serialNumber')
         status = request.POST.get('status', 'ERROR')
+        error_message = request.POST.get('errorMessage')
 
         log.debug("PixInsight Webhook called for %s: %s" % (serial_number, status))
+
+        PlateSolvingAdvancedTask.objects.filter(serial_number=serial_number).update(
+            status=status,
+            error_message=error_message,
+        )
 
         solution = get_object_or_404(Solution, pixinsight_serial_number=serial_number)
 

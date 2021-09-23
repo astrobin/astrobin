@@ -228,6 +228,19 @@ class PlateSolvingAdvancedTask(models.Model):
         blank=False,
     )
 
+    status = models.CharField(
+        max_length=8,
+        null=True,
+        editable=False,
+        choices=(("OK", "OK"), ("ERROR", "ERROR")),
+    )
+
+    error_message = models.CharField(
+        max_length=512,
+        null=True,
+        editable=False,
+    )
+
 
 class Solution(models.Model):
     STATUS_CHOICES = (

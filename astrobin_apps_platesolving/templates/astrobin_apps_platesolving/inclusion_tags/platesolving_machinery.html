@@ -3,9 +3,9 @@
 {% load astrobin_apps_premium_tags %}
 
 <div id="platesolving-status" class="hide">
-    <div class="progress progress-striped progress-info active">
-        <div class="bar" style="width:10%"></div>
-        <span class="progress-content">
+    <div class="meter">
+        <div class="bar info" style="width:10%"></div>
+        <span class="text">
             <strong><i class="icon-warning-sign"></i></strong>
             <span class="progress-text">
                 {% trans "Getting plate-solving status, please wait..." %}
@@ -43,6 +43,7 @@
                     solveAdvancedFailedMsg: "{% trans "The advanced plate-solving failed." %}",
                     solveSuccessMsg: "{% trans "This image has been plate-solved. Refresh the page to see new data!" %}",
                     solveAdvancedSuccessMsg: "{% trans "The advanced plate-solved finished. Refresh the page to see new data!" %}",
+                    jobsInQueueMsg: "{% trans "Jobs in the queue:" %}",
 
                     i18n: {
                         error: "{% trans 'Error' %}",
