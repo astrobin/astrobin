@@ -205,6 +205,9 @@ class SolutionUpdateView(base.View):
 
         context = {
             'status': status,
+            'started': solution.created.timestamp() * 1000,
+            'submission_id': solution.submission_id,
+            'pixinsight_serial_number': solution.pixinsight_serial_number,
             'queue_size': queue_size,
             'error': error
         }

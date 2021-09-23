@@ -136,6 +136,21 @@
                         return;
                     }
 
+                    self._updateInfoModal("status", self._humanizeStatus(data.status));
+
+                    self._updateInfoModal(
+                        "started",
+                        `<abbr class="timestamp" data-epoch="${data.started}">...</abbr>`
+                    );
+                    astrobin_common.init_timestamps();
+
+                    self._updateInfoModal(
+                        "astrometry-job",
+                        `<a href="http://nova.astrometry.net/status/${data.submission_id}" target="_blank">${data.submission_id}</a>`
+                    );
+
+                    self._updateInfoModal("pixinsight-job", data.pixinsight_serial_number);
+
                     switch (data.status) {
                         case Status.MISSING:
                             self.onStatusMissing();
@@ -285,13 +300,11 @@
 
             self._setIcon('icon-ok');
             self._setProgressBar(75);
+            self._setProgressText(self.solveAdvancedStartedMsg);
 
-            if (!!queueSize) {
-                self._setProgressText(self.solveAdvancedStartedMsg + " " + self.jobsInQueueMsg + " " + queueSize + ".");
-            } else {
-                self._setProgressText(self.solveAdvancedStartedMsg);
+            if (queueSize !== null && queueSize !== undefined) {
+                self._updateInfoModal("pixinsight-queue-size", queueSize);
             }
-
 
             self._showStatus();
 
@@ -382,11 +395,38 @@
         },
 
         _setIcon: function(icon) {
-            $('#platesolving-status').find('i').attr('class', icon);
+            $('#platesolving-status').find('.text i').attr('class', icon);
         },
 
         _showStatus() {
             $('#platesolving-status').removeClass('hide');
+        },
+
+        _updateInfoModal(property, value) {
+            $("#plate-solving-information-modal").find("." + property).html(
+                value === null || value === undefined ? this.i18n.na : value
+            );
+        },
+
+        _humanizeStatus(status) {
+            switch (status) {
+                case Status.MISSING:
+                    return this.i18n.statusMissing;
+                case Status.PENDING:
+                    return this.i18n.statusPending;
+                case Status.SUCCESS:
+                    return this.i18n.statusSuccess;
+                case Status.FAILED:
+                    return this.i18n.statusFailed;
+                case Status.ADVANCED_PENDING:
+                    return this.i18n.statusAdvancedPending;
+                case Status.ADVANCED_SUCCESS:
+                    return this.i18n.statusAdvancedSuccess;
+                case Status.ADVANCED_FAILED:
+                    return this.i18n.statusAdvancedFailed;
+                default:
+                    return this.i18n.statusInvalid;
+            }
         }
     };
 

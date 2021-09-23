@@ -244,13 +244,13 @@ class PlateSolvingAdvancedTask(models.Model):
 
 class Solution(models.Model):
     STATUS_CHOICES = (
-        (Solver.MISSING, 'Missing'),
-        (Solver.PENDING, 'Pending'),
-        (Solver.FAILED, 'Failed'),
-        (Solver.SUCCESS, 'Success'),
-        (Solver.ADVANCED_PENDING, 'Advanced pending'),
-        (Solver.ADVANCED_FAILED, 'Advanced failed'),
-        (Solver.ADVANCED_SUCCESS, 'Advanced success'),
+        (Solver.MISSING, _('Missing')),
+        (Solver.PENDING, _('Basic pending')),
+        (Solver.FAILED, _('Basic failed')),
+        (Solver.SUCCESS, _('Basic success')),
+        (Solver.ADVANCED_PENDING, _('Advanced pending')),
+        (Solver.ADVANCED_FAILED, _('Advanced failed')),
+        (Solver.ADVANCED_SUCCESS, _('Advanced success')),
     )
 
     created = models.DateTimeField(

@@ -57,8 +57,16 @@
   > .text {
     position: relative;
     z-index: 1;
-    text-shadow: 0 1px 1px black;
-    color: white;
+    text-shadow: 0 1px 1px $black;
+    color: $white;
+    padding-right: 2rem;
+  }
+
+  > .info-button {
+    position: relative;
+    z-index: 1;
+    float: right;
+    text-shadow: 0 0 3px $black;
   }
 
   &.success > .bar {

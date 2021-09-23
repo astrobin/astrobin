@@ -4,6 +4,10 @@
   table-layout: fixed;
   margin-bottom: 0;
 
+  &.auto-layout {
+    table-layout: auto;
+  }
+
   &.table-bordered {
     border-color: $grey-7;
   }

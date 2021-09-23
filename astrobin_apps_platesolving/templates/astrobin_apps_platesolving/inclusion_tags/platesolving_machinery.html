@@ -11,10 +11,15 @@
                 {% trans "Getting plate-solving status, please wait..." %}
             </span>
         </span>
+        <span class="info-button">
+            <a href="#plate-solving-information-modal" data-toggle="modal">
+                <i class="icon-info-sign"></i>
+            </a>
+        </span>
     </div>
 </div>
 
-<script src="{% static "astrobin_apps_platesolving/js/astrobin_apps_platesolving.js" %}?t=20210923-1"></script>
+<script src="{% static "astrobin_apps_platesolving/js/astrobin_apps_platesolving.js" %}?t=20210923-2"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         var $img = $('.main-image img').first();
@@ -43,13 +48,20 @@
                     solveAdvancedFailedMsg: "{% trans "The advanced plate-solving failed." %}",
                     solveSuccessMsg: "{% trans "This image has been plate-solved. Refresh the page to see new data!" %}",
                     solveAdvancedSuccessMsg: "{% trans "The advanced plate-solved finished. Refresh the page to see new data!" %}",
-                    jobsInQueueMsg: "{% trans "Jobs in the queue:" %}",
 
                     i18n: {
                         error: "{% trans 'Error' %}",
                         connectionRefused: "{% trans 'AstroBin could not plate-solve this image because it was not possible to establish a connection to nova.astrometry.net. Please try again later!' %}",
-                        internalError: "{% trans 'AstroBin could not plate-solve this image because nova.astrometry.net reported an internal server error.' %}",
-                        unexpectedError: "{% trans 'AstroBin could not plate-solve this image because nova.astrometry.net reported an unepexted error.' %}"
+                        internalError: "{% trans 'AstroBin could not plate-solve this image because nova.astrometry.net reported an intertnal server error.' %}",
+                        unexpectedError: "{% trans 'AstroBin could not plate-solve this image because nova.astrometry.net reported an unepexted error.' %}",
+                        statusMissing: "{% trans 'Missing' %}",
+                        statusPending: "{% trans 'Basic pending' %}",
+                        statusSuccess: "{% trans 'Basic success' %}",
+                        statusFailed: "{% trans 'Basic failed' %}",
+                        statusAdvancedPending: "{% trans 'Advanced pending' %}",
+                        statusAdvancedSuccess: "{% trans 'Advanced success' %}",
+                        statusAdvancedFailed: "{% trans 'Advanced failed' %}",
+                        na: "{% trans 'n/a' %}"
                     }
                 });
 

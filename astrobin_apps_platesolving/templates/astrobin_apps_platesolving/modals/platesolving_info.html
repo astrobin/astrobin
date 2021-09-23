@@ -1,0 +1,70 @@
+{% load i18n %}
+{% load common_tags %}
+{% load astrobin_apps_platesolving_tags %}
+
+<div class="modal hide fade" id="plate-solving-information-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3><i class="icon-location-arrow"></i> {% trans "Plate-solving information" %}</h3>
+    </div>
+
+    <div class="modal-body">
+        <table class="table table-striped auto-layout">
+            <tbody>
+                <tr>
+                    <td>{% trans "Status" %}</td>
+                    <td class="status">
+                        {% if instance_to_platesolve.solution %}
+                            {{ instance_to_platesolve.solution | humanize_solution_status }}
+                        {% else %}
+                            {% trans "n/a" %}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{% trans "Started" %}</td>
+                    <td class="started">
+                        {% if instance_to_platesolve.solution %}
+                            {% timestamp instance_to_platesolve.solution.created %}
+                        {% else %}
+                            {% trans "n/a" %}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{% trans "Astrometry.net job" %}</td>
+                    <td class="astrometry-job">
+                        {% if instance_to_platesolve.solution and instance_to_platesolve.solution.submission_id %}
+                            <a href="http://nova.astrometry.net/status/{{ instance_to_platesolve.solution.submission_id }}"
+                               target="_blank">
+                                {{ instance_to_platesolve.solution.submission_id }}
+                            </a>
+                        {% else %}
+                            {% trans "n/a" %}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{% trans "PixInsight job" %}</td>
+                    <td class="pixinsight-job">
+                        {% if instance_to_platesolve.solution %}
+                            {{ instance_to_platesolve.solution.pixinsight_serial_number | default:_('n/a') }}
+                        {% else %}
+                            {% trans "n/a" %}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{% trans "PixInsight queue size" %}</td>
+                    <td class="pixinsight-queue-size">
+                        {% trans "n/a" %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
+    </div>
+</div>
