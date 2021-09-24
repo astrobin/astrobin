@@ -73,6 +73,7 @@ class ImageRevisionResource(ModelResource):
     url_histogram = fields.CharField()
     url_skyplot = fields.CharField()
     url_solution = fields.CharField()
+    url_advanced_solution = fields.CharField()
 
     is_solved = fields.BooleanField()
 
@@ -86,9 +87,11 @@ class ImageRevisionResource(ModelResource):
         authentication = AppAuthentication()
         queryset = ImageRevision.objects.filter(image__is_wip=False, corrupted=False)
         fields = [
+            'id',
             'uploaded',
             'w',
             'h',
+            'label',
 
             'url_thumb',
             'url_gallery',
@@ -102,6 +105,7 @@ class ImageRevisionResource(ModelResource):
             'url_histogram',
             'url_skyplot',
             'url_solution',
+            'url_advanced_solution',
 
             'is_final',
             'is_solved',
@@ -153,6 +157,11 @@ class ImageRevisionResource(ModelResource):
     def dehydrate_url_solution(self, bundle):
         return bundle.obj.solution.image_file.url \
             if bundle.obj.solution and bundle.obj.solution.image_file \
+            else None
+
+    def dehydrate_url_advanced_solution(self, bundle):
+        return bundle.obj.solution.pixinsight_svg_annotation_hd.url \
+            if bundle.obj.solution and bundle.obj.solution.pixinsight_svg_annotation_hd \
             else None
 
     def dehydrate_is_solved(self, bundle):
@@ -213,6 +222,7 @@ class ImageResource(ModelResource):
     url_histogram = fields.CharField()
     url_skyplot = fields.CharField()
     url_solution = fields.CharField()
+    url_advanced_solution = fields.CharField()
 
     is_solved = fields.BooleanField()
 
@@ -251,6 +261,7 @@ class ImageResource(ModelResource):
             'url_histogram',
             'url_skyplot',
             'url_solution',
+            'url_advanced_solution',
 
             'uploaded',
             'published',
@@ -322,6 +333,11 @@ class ImageResource(ModelResource):
     def dehydrate_url_solution(self, bundle):
         return bundle.obj.solution.image_file.url \
             if bundle.obj.solution and bundle.obj.solution.image_file \
+            else None
+
+    def dehydrate_url_advanced_solution(self, bundle):
+        return bundle.obj.solution.pixinsight_svg_annotation_hd.url \
+            if bundle.obj.solution and bundle.obj.solution.pixinsight_svg_annotation_hd \
             else None
 
     def dehydrate_is_solved(self, bundle):

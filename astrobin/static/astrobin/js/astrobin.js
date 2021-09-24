@@ -675,33 +675,26 @@ astrobin_common = {
                 return;
             }
 
-            var target = $(this).attr('target');
 
-
-            if (!target) {
-                target = '_self';
-            }
-
+            // Skip CTRL/Meta clicks
             if (event.metaKey || event.ctrlKey) {
-                target = '_blank';
+                return;
             }
 
-            if (target === '_self') {
-                $pageLoaderBackdrop.css('width', '100%');
-                $pageLoaderBackdrop.css('height', '100%');
-                $pageLoaderBackdrop.css('opacity', .65);
-
-                $pageLoader.css('width', '100%');
-                $pageLoader.css('height', '100%');
-                $pageLoader.css('opacity', 1);
+            // Skip links to new tab/window.
+            if (($(this).attr('target') || '_self') !== '_self') {
+                return;
             }
 
-            setTimeout(function () {
-                window.open(url, target);
-            }, 10);
+            $pageLoaderBackdrop.css('width', '100%');
+            $pageLoaderBackdrop.css('height', '100%');
+            $pageLoaderBackdrop.css('opacity', .65);
 
-            event.preventDefault();
-            return false;
+            $pageLoader.css('width', '100%');
+            $pageLoader.css('height', '100%');
+            $pageLoader.css('opacity', 1);
+
+            return true;
         });
     },
 
@@ -822,14 +815,10 @@ astrobin_common = {
             window.history.replaceState('', document.title, urlWithoutNid);
 
             function go(link, openInNewTab) {
-                Object.assign(document.createElement("a"), {
-                    target: openInNewTab ? "_blank" : "_self",
-                    href: link,
-                }).click();
+                window.open(link, openInNewTab ? "_blank" : "_self");
             }
 
             $(".notifications-modal .notification-item .notification-content a").live('click', function (event) {
-                event.preventDefault();
 
                 var $item = $(this).closest(".notification-item");
                 var $loading = $item.find(".notification-mark-as-read .loading")
@@ -841,18 +830,27 @@ astrobin_common = {
                 if (links.length > 0) {
                     var link = astrobin_common.add_or_update_url_param(links[0], "nid", id);
 
-                    if (openInNewTab) {
+                    if (openInNewTab || event.metaKey || event.ctrlKey) {
                         astrobin_common.mark_notification_as_read(id).then(function () {
-                            go(link, openInNewTab);
+                            if (openInNewTab) {
+                                go(link, true);
+                            } else {
+                                return true;
+                            }
                         });
                     } else {
                         $readMarker.hide();
                         $loading.show();
-                        go(link, openInNewTab);
+                        return true;
                     }
                 }
 
-                return false;
+                if (!openInNewTab && (event.metaKey || event.ctrlKey)) {
+                    return;
+                }
+
+                event.preventDefault();
+                return true;
             })
         });
     },
