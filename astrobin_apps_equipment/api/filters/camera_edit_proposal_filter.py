@@ -1,7 +1,7 @@
-from astrobin_apps_equipment.api.filters.camera_filter import CameraFilter
+from astrobin_apps_equipment.api.filters.equipment_item_edit_proposal_filter import EquipmentItemEditProposalFilter
 from astrobin_apps_equipment.models import CameraEditProposal
 
 
-class CameraEditProposalFilter(CameraFilter):
-    class Meta(CameraFilter.Meta):
+class CameraEditProposalFilter(EquipmentItemEditProposalFilter):
+    class Meta(EquipmentItemEditProposalFilter.Meta):
         model = CameraEditProposal

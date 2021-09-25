@@ -1,11 +1,7 @@
-from django_filters import FilterSet
-
+from astrobin_apps_equipment.api.filters.equipment_item_filter import EquipmentItemFilter
 from astrobin_apps_equipment.models import Sensor
 
 
-class SensorFilter(FilterSet):
-    class Meta:
+class SensorFilter(EquipmentItemFilter):
+    class Meta(EquipmentItemFilter.Meta):
         model = Sensor
-        fields = {
-            'name': ["exact"],
-        }
