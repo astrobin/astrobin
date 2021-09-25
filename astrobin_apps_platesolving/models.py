@@ -170,6 +170,16 @@ class PlateSolvingAdvancedSettings(models.Model):
         verbose_name=_("Show Barnard objects"),
     )
 
+    show_lbn = models.BooleanField(
+        default=True,
+        verbose_name=_("Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"),
+    )
+
+    show_ldn = models.BooleanField(
+        default=True,
+        verbose_name=_("Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"),
+    )
+
     show_pgc = models.BooleanField(
         default=False,
         verbose_name=_("Show PGC objects"),
@@ -205,6 +215,13 @@ class PlateSolvingAdvancedSettings(models.Model):
         verbose_name=_("Show CGPN objects"),
         help_text=mark_safe(
             '<a href="https://ui.adsabs.harvard.edu/abs/2001A%26A...378..843K/abstract">Catalogue of Galactic Planetary Nebulae</a>'),
+    )
+
+    show_quasars = models.BooleanField(
+        default=False,
+        verbose_name=_("Show quasars"),
+        help_text=mark_safe(
+            '<a href="https://heasarc.gsfc.nasa.gov/W3Browse/all/milliquas.html">MILLIQUAS - Million Quasars Catalog</a>'),
     )
 
 

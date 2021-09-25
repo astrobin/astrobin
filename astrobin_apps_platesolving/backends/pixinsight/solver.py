@@ -74,6 +74,10 @@ class Solver(AbstractPlateSolvingBackend):
                 layers.append('Sharpless')
             if advanced_settings.show_barnard:
                 layers.append('Barnard')
+            if advanced_settings.show_lbn:
+                layers.append('LBN')
+            if advanced_settings.show_ldn:
+                layers.append('LDN')
             if advanced_settings.show_pgc:
                 layers.append('PGC')
             if advanced_settings.show_planets:
@@ -86,6 +90,8 @@ class Solver(AbstractPlateSolvingBackend):
                 layers.append('TYCHO-2')
             if advanced_settings.show_cgpn:
                 layers.append('CGPN')
+            if advanced_settings.show_quasars:
+                layers.append('Milliquas')
 
             if advanced_settings.scaled_font_size == 'S':
                 task_params.append('smallSizeTextRatio=%f' % .66)
