@@ -1,7 +1,7 @@
 {% load i18n %}
 
 {% blocktrans trimmed %}
-    Unfortunately, AstroBin failed to perform the advanced plate-solution of your image: <strong>{{ title }}</strong>.
+    Unfortunately, AstroBin failed to perform the advanced plate-solution of your image: {{ title }}.
 {% endblocktrans %}
 
 
