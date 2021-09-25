@@ -303,23 +303,6 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
         self.submit_email(request, obj, recipients.values_list('user__email', flat=True))
         recipients.update(inactive_account_reminder_sent=timezone.now())
 
-    def submit_february_2020_data_loss_premium_upgrade(self, request, obj):
-        recipients = User.objects \
-            .filter(
-            usersubscription__subscription__name="AstroBin Premium",
-            usersubscription__expires=date(2021, 2, 20)) \
-            .values_list('email', flat=True)
-        self.submit_email(request, obj, recipients)
-
-    def submit_february_2020_data_loss_ultimate_upgrade(self, request, obj):
-        recipients = User.objects.filter(
-            Q(usersubscription__subscription__name__in=("AstroBin Premium", 'AstroBin Premium (autorenew)')),
-            Q(usersubscription__active=True),
-            Q(usersubscription__expires__gte=date(2020, 2, 15)) & ~Q(usersubscription__expires=date(2021, 2, 20))) \
-            .exclude(usersubscription__subscription__name="AstroBin Ultimate 2020+") \
-            .values_list('email', flat=True)
-        self.submit_email(request, obj, recipients)
-
     def submit_recovered_images_notice_de(self, request, obj):
         recipients = User.objects \
             .filter(userprofile__deleted=None, userprofile__language='de',
@@ -401,12 +384,6 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
     submit_inactive_email_reminder.short_description = 'Submit inactive account reminder'
     submit_inactive_email_reminder.allow_tags = True
 
-    submit_february_2020_data_loss_premium_upgrade.short_description = 'Submit February 2020 data loss Premium upgrade'
-    submit_february_2020_data_loss_premium_upgrade.allow_tags = True
-
-    submit_february_2020_data_loss_ultimate_upgrade.short_description = 'Submit February 2020 data loss Ultimate upgrade'
-    submit_february_2020_data_loss_ultimate_upgrade.allow_tags = True
-
     submit_recovered_images_notice_de.short_description = '[de] Submit recovered images notice'
     submit_recovered_images_notice_de.allow_tags = True
 
@@ -433,8 +410,6 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
         'submit_marketing_and_commercial_material',
         'submit_premium_offer_discount',
         'submit_inactive_email_reminder',
-        'submit_february_2020_data_loss_premium_upgrade',
-        'submit_february_2020_data_loss_ultimate_upgrade',
         'submit_recovered_images_notice_de',
         'submit_recovered_images_notice_en',
         'submit_recovered_images_notice_es',
