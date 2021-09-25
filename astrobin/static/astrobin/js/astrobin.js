@@ -819,6 +819,7 @@ astrobin_common = {
             }
 
             $(".notifications-modal .notification-item .notification-content a").live('click', function (event) {
+                event.preventDefault();
 
                 var $item = $(this).closest(".notification-item");
                 var $loading = $item.find(".notification-mark-as-read .loading")
@@ -832,25 +833,14 @@ astrobin_common = {
 
                     if (openInNewTab || event.metaKey || event.ctrlKey) {
                         astrobin_common.mark_notification_as_read(id).then(function () {
-                            if (openInNewTab) {
-                                go(link, true);
-                            } else {
-                                return true;
-                            }
+                            go(link, true);
                         });
                     } else {
                         $readMarker.hide();
                         $loading.show();
-                        return true;
+                        go(link, false);
                     }
                 }
-
-                if (!openInNewTab && (event.metaKey || event.ctrlKey)) {
-                    return;
-                }
-
-                event.preventDefault();
-                return true;
             })
         });
     },
