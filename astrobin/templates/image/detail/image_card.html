@@ -235,11 +235,13 @@
                             <strong class="card-label">{% trans "RA center" %}:</strong>
 
                             {% if instance_to_platesolve.solution.advanced_ra is not None %}
-                                <abbr title="{{ instance_to_platesolve.solution.advanced_ra }} {% trans "degrees" %}">
+                                <abbr title="{{ instance_to_platesolve.solution.advanced_ra }} {% trans "degrees" %}"
+                                      class="ra-coordinates">
                                     {{ instance_to_platesolve.solution.advanced_ra | ra_to_hms:3 }}
                                 </abbr>
                             {% else %}
-                                <abbr title="{{ instance_to_platesolve.solution.ra }} {% trans "degrees" %}">
+                                <abbr title="{{ instance_to_platesolve.solution.ra }} {% trans "degrees" %}"
+                                      class="ra-coordinates">
                                     {{ instance_to_platesolve.solution.ra | ra_to_hms }}
                                 </abbr>
                             {% endif %}
@@ -251,11 +253,13 @@
                             <strong class="card-label">{% trans "DEC center" %}:</strong>
 
                             {% if instance_to_platesolve.solution.advanced_dec is not None %}
-                                <abbr title="{{ instance_to_platesolve.solution.advanced_dec }} {% trans "degrees" %}">
-                                    {{ instance_to_platesolve.solution.advanced_dec | dec_to_dms:3 }}
+                                <abbr title="{{ instance_to_platesolve.solution.advanced_dec }} {% trans "degrees" %}"
+                                      class="dec-coordinates">
+                                    {{ instance_to_platesolve.solution.advanced_dec | dec_to_dms:2 }}
                                 </abbr>
                             {% else %}
-                                <abbr title="{{ instance_to_platesolve.solution.dec }} {% trans "degrees" %}">
+                                <abbr title="{{ instance_to_platesolve.solution.dec }} {% trans "degrees" %}"
+                                      class="dec-coordinates">
                                     {{ instance_to_platesolve.solution.dec | dec_to_dms }}
                                 </abbr>
                             {% endif %}

@@ -37,7 +37,7 @@ strong, .strong {
 }
 
 abbr[title] {
-  border: 0;
+  text-decoration: none;
 
   &.private {
     display: inline-block;
@@ -4235,5 +4235,18 @@ form.edit-thumbnails {
     display: inline-block;
     margin-left: .5rem;
     color: $grey-4;
+  }
+}
+
+.ra-coordinates,
+.dec-coordinates {
+  font-family: Monaco, monospace;
+  font-size: .9rem;
+
+  .symbol {
+    vertical-align: super;
+    color: $grey-4-dark;
+    font-size: .85rem;
+    margin-right: $spacer-small;
   }
 }
