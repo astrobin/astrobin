@@ -120,7 +120,7 @@ LANGUAGE_CHOICES = (
     ('ar', _("Arabic")),
     ('ja', _("Japanese")),
     ('zh-hans', _("Chinese (Simplified)")),
-    ('se', _("Swedish")),
+    ('sv', _("Swedish")),
 )
 
 LANGUAGES = {
@@ -141,7 +141,7 @@ LANGUAGES = {
     'ar': _("Arabic"),
     'ja': _("Japanese"),
     'zh-hans': _("Chinese (Simplified)"),
-    'se': _("Swedish"),
+    'sv': _("Swedish"),
 }
 
 SUBJECT_LABELS = {
