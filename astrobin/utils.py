@@ -2,8 +2,6 @@
 import datetime
 import logging
 
-import pytz
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.gis.geoip2 import GeoIP2
 from django.core.files.images import get_image_dimensions
@@ -11,6 +9,7 @@ from django.db.models import Count
 from django.utils import timezone
 
 logger = logging.getLogger('apps')
+
 
 def unique_items(list_with_possible_duplicates):
     """
@@ -209,31 +208,33 @@ def get_image_resolution(image):
     return w, h
 
 
-def decimal_to_hours_minutes_seconds(value, hour_symbol="h", minute_symbol="'", second_symbol="\""):
+def decimal_to_hours_minutes_seconds(value, hour_symbol="h", minute_symbol="'", second_symbol="\"", precision=0):
     is_positive = value >= 0
     value = abs(value)
     hours = int(value / 15)
     minutes = int(((value / 15) - hours) * 60)
     seconds = ((((value / 15) - hours) * 60) - minutes) * 60
 
-    return "%s%d%s %d%s %d%s" % (
-        "" if is_positive else "-",
-        hours, hour_symbol,
-        minutes, minute_symbol,
-        seconds, second_symbol)
+    if precision == 0:
+        seconds = int(round(seconds))
+    else:
+        seconds = round(seconds, precision)
+
+    return f'{"" if is_positive else "-"}{hours}{hour_symbol} {minutes}{minute_symbol} {seconds}{second_symbol}'
 
 
-def decimal_to_degrees_minutes_seconds(value, degree_symbol="°", minute_symbol="'", second_symbol="\""):
+def decimal_to_degrees_minutes_seconds(value, degree_symbol="°", minute_symbol="'", second_symbol="\"", precision=0):
     is_positive = value >= 0
     value = abs(value)
     minutes, seconds = divmod(value * 3600, 60)
     degrees, minutes = divmod(minutes, 60)
 
-    return "%s%d%s %d%s %d%s" % (
-        "+" if is_positive else "-",
-        degrees, degree_symbol,
-        minutes, minute_symbol,
-        seconds, second_symbol)
+    if precision == 0:
+        seconds = int(round(seconds))
+    else:
+        seconds = round(float(seconds), precision)
+
+    return f'{"+" if is_positive else "-"}{int(degrees)}{degree_symbol} {int(minutes)}{minute_symbol} {seconds}{second_symbol}'
 
 
 def degrees_minutes_seconds_to_decimal_degrees(degrees, minutes, seconds, direction):

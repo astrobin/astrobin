@@ -28,7 +28,25 @@ class TagsTest(TestCase):
         self.assertEqual('10h 20\' 15"', ra_to_hms(155.0625 ))
         self.assertEqual('0h 0\' 0"', ra_to_hms(0))
 
+    def test_ra_to_hms_with_precision_2(self):
+        self.assertEqual('3h 22\' 0.0"', ra_to_hms(50.5, precision=2))
+        self.assertEqual('3h 22\' 2.4"', ra_to_hms(50.51, precision=2))
+        self.assertEqual('-3h 22\' 0.0"', ra_to_hms(-50.5, precision=2))
+        self.assertEqual('-3h 22\' 2.4"', ra_to_hms(-50.51, precision=2))
+        self.assertEqual('10h 20\' 15.0"', ra_to_hms(155.0625, precision=2))
+        self.assertEqual('10h 20\' 15.01"', ra_to_hms(155.06255, precision=2))
+        self.assertEqual('0h 0\' 24.0"', ra_to_hms(0.1, precision=2))
+        self.assertEqual('0h 0\' 0.0"', ra_to_hms(0, precision=2))
+
     def test_dec_to_dms(self):
         self.assertEqual('+50° 30\' 0"', dec_to_dms(50.5))
         self.assertEqual('-50° 30\' 0"', dec_to_dms(-50.5))
         self.assertEqual('+0° 0\' 0"', dec_to_dms(0))
+
+    def test_dec_to_dms_with_precision_2(self):
+        self.assertEqual('+50° 30\' 0.0"', dec_to_dms(50.5, precision=2))
+        self.assertEqual('+50° 30\' 36.0"', dec_to_dms(50.51, precision=2))
+        self.assertEqual('-50° 30\' 0.0"', dec_to_dms(-50.5, precision=2))
+        self.assertEqual('-50° 30\' 36.0"', dec_to_dms(-50.51, precision=2))
+        self.assertEqual('+0° 6\' 0.0"', dec_to_dms(0.1, precision=2))
+        self.assertEqual('+0° 0\' 0.0"', dec_to_dms(0, precision=2))
