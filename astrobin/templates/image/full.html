@@ -178,18 +178,20 @@
                     max-width: {{ instance_to_platesolve | thumbnail_width:'hd' }}px;
                     max-height: {{ instance_to_platesolve | thumbnail_height:'hd' }}px;
                 ">
-            <object
-                    id="advanced-plate-solution-svg"
-                    onload="AstroBinPlatesolving.advancedSvgLoaded()"
-                    type="image/svg+xml"
-                    data="{% url 'astrobin_apps_platesolving.serve_svg' instance_to_platesolve.solution.pk 'hd' %}"
-                    style="
-                            max-width: {{ instance_to_platesolve | thumbnail_width:'hd' }}px;
-                            max-height: {{ instance_to_platesolve | thumbnail_height:'hd' }}px;
-                    ">
-            </object>
-            <div id="x-ruler"></div>
-            <div id="y-ruler"></div>
+            <a href="#">
+                <object
+                        id="advanced-plate-solution-svg"
+                        onload="AstroBinPlatesolving.advancedSvgLoaded()"
+                        type="image/svg+xml"
+                        data="{% url 'astrobin_apps_platesolving.serve_svg' instance_to_platesolve.solution.pk 'hd' %}"
+                        style="
+                                max-width: {{ instance_to_platesolve | thumbnail_width:'hd' }}px;
+                                max-height: {{ instance_to_platesolve | thumbnail_height:'hd' }}px;
+                        ">
+                </object>
+                <div id="x-ruler"></div>
+                <div id="y-ruler"></div>
+            </a>
         </div>
     {% endif %}
 </div>
