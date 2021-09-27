@@ -16,7 +16,7 @@
     </div>
 
     <div class="modal-body">
-        <table class="table table-striped auto-layout">
+        <table class="table table-striped auto-layout valign-baseline">
             <tbody>
                 <tr>
                     <td>{% trans "Status" %}</td>
@@ -78,31 +78,46 @@
                     <tr>
                         <td>{% trans "RA" %} ({% trans "center" %})</td>
                         <td>
-                            {{ instance_to_platesolve.solution.advanced_ra | ra_to_hms:6 }}
+                            <abbr title="{{ instance_to_platesolve.solution.advanced_ra }} {% trans "degrees" %}"
+                                  class="ra-coordinates">
+                                {{ instance_to_platesolve.solution.advanced_ra | ra_to_hms:3 }}
+                            </abbr>
                         </td>
                     </tr>
                     <tr>
                         <td>{% trans "RA" %} ({% trans "top/left" %})</td>
                         <td>
-                            {{ instance_to_platesolve.solution.advanced_ra_top_left | ra_to_hms:8 }}
+                            <abbr title="{{ instance_to_platesolve.solution.advanced_ra_top_left }} {% trans "degrees" %}"
+                                  class="ra-coordinates">
+                                {{ instance_to_platesolve.solution.advanced_ra_top_left | ra_to_hms:3 }}
+                            </abbr>
                         </td>
                     </tr>
                     <tr>
                         <td>{% trans "RA" %} ({% trans "top/right" %})</td>
                         <td>
-                            {{ instance_to_platesolve.solution.advanced_ra_top_right | ra_to_hms:8 }}
+                            <abbr title="{{ instance_to_platesolve.solution.advanced_ra_top_right }} {% trans "degrees" %}"
+                                  class="ra-coordinates">
+                                {{ instance_to_platesolve.solution.advanced_ra_top_right | ra_to_hms:3 }}
+                            </abbr>
                         </td>
                     </tr>
                     <tr>
                         <td>{% trans "RA" %} ({% trans "bottom/right" %})</td>
                         <td>
-                            {{ instance_to_platesolve.solution.advanced_ra_bottom_right | ra_to_hms:8 }}
+                            <abbr title="{{ instance_to_platesolve.solution.advanced_ra_bottom_right }} {% trans "degrees" %}"
+                                  class="ra-coordinates">
+                                {{ instance_to_platesolve.solution.advanced_ra_bottom_right | ra_to_hms:3 }}
+                            </abbr>
                         </td>
                     </tr>
                     <tr>
                         <td>{% trans "RA" %} ({% trans "bottom/left" %})</td>
                         <td>
-                            {{ instance_to_platesolve.solution.advanced_ra_bottom_left | ra_to_hms:8 }}
+                            <abbr title="{{ instance_to_platesolve.solution.advanced_ra_bottom_left }} {% trans "degrees" %}"
+                                  class="ra-coordinates">
+                                {{ instance_to_platesolve.solution.advanced_ra_bottom_left | ra_to_hms:3 }}
+                            </abbr>
                         </td>
                     </tr>
 
@@ -115,31 +130,50 @@
                     <tr>
                         <td>{% trans "Dec" %} ({% trans "center" %})</td>
                         <td>
-                            {{ instance_to_platesolve.solution.advanced_dec | ra_to_hms:6 }}
+                            <abbr title="{{ instance_to_platesolve.solution.advanced_dec }} {% trans "degrees" %}"
+                                  class="dec-coordinates">
+                                {{ instance_to_platesolve.solution.advanced_dec | dec_to_dms:2 }}
+                            </abbr>
                         </td>
                     </tr>
                     <tr>
                         <td>{% trans "Dec" %} ({% trans "top/left" %})</td>
                         <td>
-                            {{ instance_to_platesolve.solution.advanced_dec_top_left | ra_to_hms:8 }}
+                            <abbr title="{{ instance_to_platesolve.solution.advanced_dec_top_left }} {% trans "degrees" %}"
+                                  class="dec-coordinates">
+                                {{ instance_to_platesolve.solution.advanced_dec_top_left | dec_to_dms:2 }}
+                            </abbr>
+                        </td>
                         </td>
                     </tr>
                     <tr>
                         <td>{% trans "Dec" %} ({% trans "top/right" %})</td>
                         <td>
-                            {{ instance_to_platesolve.solution.advanced_dec_top_right | ra_to_hms:8 }}
+                            <abbr title="{{ instance_to_platesolve.solution.advanced_dec_top_right }} {% trans "degrees" %}"
+                                  class="dec-coordinates">
+                                {{ instance_to_platesolve.solution.advanced_dec_top_right | dec_to_dms:2 }}
+                            </abbr>
+                        </td>
                         </td>
                     </tr>
                     <tr>
                         <td>{% trans "Dec" %} ({% trans "bottom/right" %})</td>
                         <td>
-                            {{ instance_to_platesolve.solution.advanced_dec_bottom_right | ra_to_hms:8 }}
+                            <abbr title="{{ instance_to_platesolve.solution.advanced_dec_bottom_right }} {% trans "degrees" %}"
+                                  class="dec-coordinates">
+                                {{ instance_to_platesolve.solution.advanced_dec_bottom_right | dec_to_dms:2 }}
+                            </abbr>
+                        </td>
                         </td>
                     </tr>
                     <tr>
                         <td>{% trans "Dec" %} ({% trans "bottom/left" %})</td>
                         <td>
-                            {{ instance_to_platesolve.solution.advanced_dec_bottom_left | ra_to_hms:8 }}
+                            <abbr title="{{ instance_to_platesolve.solution.advanced_dec_bottom_left }} {% trans "degrees" %}"
+                                  class="dec-coordinates">
+                                {{ instance_to_platesolve.solution.advanced_dec_bottom_left | dec_to_dms:2 }}
+                            </abbr>
+                        </td>
                         </td>
                     </tr>
                 {% endif %}
