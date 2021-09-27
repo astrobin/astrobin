@@ -556,13 +556,13 @@ def humanize_image_acquisition_type(type):
 
 
 @register.filter
-def ra_to_hms(degrees):
-    return decimal_to_hours_minutes_seconds(degrees)
+def ra_to_hms(degrees, precision=0):
+    return decimal_to_hours_minutes_seconds(degrees, precision=precision)
 
 
 @register.filter
-def dec_to_dms(degrees):
-    return decimal_to_degrees_minutes_seconds(degrees)
+def dec_to_dms(degrees, precision=0):
+    return decimal_to_degrees_minutes_seconds(degrees, precision=precision)
 
 
 @register.filter

@@ -558,6 +558,8 @@ class Solution(models.Model):
         self.advanced_dec_top_right = None
         self.advanced_pixscale = None
         self.advanced_orientation = None
+        self.advanced_flipped = None
+        self.advanced_wcs_transformation = None
         self.advanced_radius = None
         self.advanced_ra_matrix = None
         self.advanced_dec_matrix = None

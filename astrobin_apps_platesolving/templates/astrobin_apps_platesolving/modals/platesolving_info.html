@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load tags %}
 {% load common_tags %}
 {% load astrobin_apps_platesolving_tags %}
 
@@ -66,6 +67,82 @@
                         {% trans "n/a" %}
                     </td>
                 </tr>
+
+                {% if instance_to_platesolve.solution.advanced_ra %}
+                    <tr>
+                        <td colspan="2">
+                            <hr />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>{% trans "RA" %} ({% trans "center" %})</td>
+                        <td>
+                            {{ instance_to_platesolve.solution.advanced_ra | ra_to_hms:6 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "RA" %} ({% trans "top/left" %})</td>
+                        <td>
+                            {{ instance_to_platesolve.solution.advanced_ra_top_left | ra_to_hms:8 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "RA" %} ({% trans "top/right" %})</td>
+                        <td>
+                            {{ instance_to_platesolve.solution.advanced_ra_top_right | ra_to_hms:8 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "RA" %} ({% trans "bottom/right" %})</td>
+                        <td>
+                            {{ instance_to_platesolve.solution.advanced_ra_bottom_right | ra_to_hms:8 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "RA" %} ({% trans "bottom/left" %})</td>
+                        <td>
+                            {{ instance_to_platesolve.solution.advanced_ra_bottom_left | ra_to_hms:8 }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <hr />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>{% trans "Dec" %} ({% trans "center" %})</td>
+                        <td>
+                            {{ instance_to_platesolve.solution.advanced_dec | ra_to_hms:6 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "Dec" %} ({% trans "top/left" %})</td>
+                        <td>
+                            {{ instance_to_platesolve.solution.advanced_dec_top_left | ra_to_hms:8 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "Dec" %} ({% trans "top/right" %})</td>
+                        <td>
+                            {{ instance_to_platesolve.solution.advanced_dec_top_right | ra_to_hms:8 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "Dec" %} ({% trans "bottom/right" %})</td>
+                        <td>
+                            {{ instance_to_platesolve.solution.advanced_dec_bottom_right | ra_to_hms:8 }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{% trans "Dec" %} ({% trans "bottom/left" %})</td>
+                        <td>
+                            {{ instance_to_platesolve.solution.advanced_dec_bottom_left | ra_to_hms:8 }}
+                        </td>
+                    </tr>
+                {% endif %}
             </tbody>
         </table>
     </div>
