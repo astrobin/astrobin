@@ -106,6 +106,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         item.reviewed_by = request.user
         item.reviewed_timestamp = timezone.now()
         item.reviewer_decision = 'REJECTED'
+        item.reviewer_rejection_reason = request.data.get('reason')
         item.reviewer_comment = request.data.get('comment')
         item.name = '[DELETED] %s' % item.name
 
