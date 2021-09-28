@@ -14,7 +14,10 @@ class EquipmentItemFilter(FilterSet):
         else:
             queryset = queryset.exclude(edit_proposals__gt=0)
 
-        return queryset.filter(edit_proposals__deleted__isnull=True).distinct()
+        return queryset.filter(
+            edit_proposals__deleted__isnull=True,
+            edit_proposals__edit_proposal_review_status__isnull=True
+        ).distinct()
 
     class Meta:
         abstract = True
