@@ -21,5 +21,9 @@ class CameraEditProposalViewSet(EquipmentItemEditProposalViewSet):
     def image(self, request, pk):
         return super(CameraEditProposalViewSet, self).image_upload(request, pk)
 
+    @action(detail=True, methods=['POST'])
+    def approve(self, request, pk):
+        pass
+
     class Meta(EquipmentItemEditProposalViewSet.Meta):
         abstract = False
