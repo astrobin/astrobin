@@ -11,8 +11,8 @@ from django.urls import reverse
 
 from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
-from astrobin.utils import base26_encode, base26_decode, decimal_to_hours_minutes_seconds, \
-    decimal_to_degrees_minutes_seconds
+from astrobin.utils import base26_encode, base26_decode, decimal_to_hours_minutes_seconds_string, \
+    decimal_to_degrees_minutes_seconds_string
 from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
@@ -332,10 +332,10 @@ class ImageService:
             return None
 
         ra = solution.advanced_ra if solution.advanced_ra else solution.ra
-        ra_hms = decimal_to_hours_minutes_seconds(ra, hour_symbol='', minute_symbol='', second_symbol='')
+        ra_hms = decimal_to_hours_minutes_seconds_string(ra, hour_symbol='', minute_symbol='', second_symbol='', precision=0)
 
         dec = solution.advanced_dec if solution.advanced_dec else solution.dec
-        dec_dms = decimal_to_degrees_minutes_seconds(dec, degree_symbol='', minute_symbol='', second_symbol='')
+        dec_dms = decimal_to_degrees_minutes_seconds_string(dec, degree_symbol='', minute_symbol='', second_symbol='', precision=0)
 
         try:
             return ConstellationsService.get_constellation('%s %s' % (ra_hms, dec_dms))

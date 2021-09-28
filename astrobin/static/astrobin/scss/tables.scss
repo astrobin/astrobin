@@ -8,6 +8,13 @@
     table-layout: auto;
   }
 
+  &.valign-baseline {
+    th,
+    td {
+      vertical-align: baseline;
+    }
+  }
+
   &.table-bordered {
     border-color: $grey-7;
   }

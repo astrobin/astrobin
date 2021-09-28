@@ -67,15 +67,6 @@ class CommandsTest(TestCase):
         self.assertEqual("AstroBin Premium", user_subscription.subscription.name)
         self.assertEqual(date.today() + relativedelta(years=1), user_subscription.expires)
 
-    def test_upgrade_free_to_premium_when_joined_after_data_loss(self):
-        self.user.date_joined = date(2020, 2, 16)
-        self.user.save()
-
-        call_command('upgrade_free_and_lite_to_premium')
-
-        user_subscription = premium_get_valid_usersubscription(self.user)
-        self.assertIsNone(user_subscription)
-
     def test_upgrade_free_to_premium_when_deleted(self):
         self.user.userprofile.delete()
 

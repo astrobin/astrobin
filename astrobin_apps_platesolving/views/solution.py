@@ -379,7 +379,7 @@ class SolutionPixInsightWebhook(base.View):
                 if solution.advanced_settings and solution.advanced_settings.sample_raw_frame_file \
                 else corrected_pixscale(solution, pixscale)
             solution.advanced_flipped = request.POST.get('flipped', None) == 'true'
-            solution.advanced_wcs_transformation = request.POST.get('wcs_transformation', None)
+            solution.advanced_wcs_transformation = request.POST.get('wcsTransformation', None)
 
             solution.advanced_matrix_rect = request.POST.get('matrixRect', None)
             solution.advanced_matrix_delta = request.POST.get('matrixDelta', None)

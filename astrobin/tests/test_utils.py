@@ -179,3 +179,15 @@ class UtilsTest(TestCase):
         expected_result = ['foo', 'bar', 'baz', '2', ['b', 'c', 'a'], '6', '10']
 
         self.assertEqual(expected_result, utils.unique_items(list_with_duplicates))
+
+    def test_number_unit_decimals(self):
+        self.assertEquals('10h', utils.number_unit_decimals(10, 'h', 0))
+        self.assertEquals('10h.00', utils.number_unit_decimals(10, 'h', 2))
+        self.assertEquals('10h.123', utils.number_unit_decimals(10.123, 'h', 3))
+        self.assertEquals('10h.1230', utils.number_unit_decimals(10.123, 'h', 4))
+
+    def test_number_unit_decimals_html(self):
+        self.assertEquals('10<span class="symbol">h</span>', utils.number_unit_decimals_html(10, 'h', 0))
+        self.assertEquals('10<span class="symbol">h</span>.00', utils.number_unit_decimals_html(10, 'h', 2))
+        self.assertEquals('10<span class="symbol">h</span>.123', utils.number_unit_decimals_html(10.123, 'h', 3))
+        self.assertEquals('10<span class="symbol">h</span>.1230', utils.number_unit_decimals_html(10.123, 'h', 4))

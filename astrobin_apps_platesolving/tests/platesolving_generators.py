@@ -41,10 +41,13 @@ class PlateSolvingGenerators:
             show_vdb=kwargs.get('show_vdb', True),
             show_sharpless=kwargs.get('show_sharpless', True),
             show_barnard=kwargs.get('show_barnard', True),
+            show_ldn=kwargs.get('show_ldn', True),
+            show_lbn=kwargs.get('show_lbn', True),
             show_pgc=kwargs.get('show_pgc', False),
             show_planets=kwargs.get('show_planets', True),
             show_asteroids=kwargs.get('show_asteroids', True),
             show_gcvs=kwargs.get('show_gcvs', False),
             show_tycho_2=kwargs.get('show_tycho_2', False),
             show_cgpn=kwargs.get('show_cgpn', False),
+            show_quasars=kwargs.get('show_quasars', False),
         )

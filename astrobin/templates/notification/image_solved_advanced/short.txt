@@ -1,7 +1,7 @@
 {% load i18n %}
 
 {% blocktrans trimmed %}
-    AstroBin completed the advanced plate-solution of your image: <strong>{{ title }}</strong>.
+    AstroBin completed the advanced plate-solution of your image: {{ title }}.
 {% endblocktrans %}
 
 
