@@ -65,7 +65,7 @@ class EquipmentItemEditProposalMixin(models.Model):
         null=True,
         blank=True,
         choices=[
-            ('ACCEPTED', _("Accepted")),
+            ('APPROVED', _("Approved")),
             ('REJECTED', _("Rejected")),
             ('SUPERSEDED', _("Superseded"))
         ],

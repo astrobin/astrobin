@@ -217,8 +217,8 @@ class MigratableItemMixin:
         serializer = self.get_serializer(obj)
         return Response(serializer.data)
 
-    @action(detail=True, methods=['put'], url_path='accept-migration')
-    def accept_migration(self, request, pk):
+    @action(detail=True, methods=['put'], url_path='approve-migration')
+    def approve_migration(self, request, pk):
         obj: Gear = self.get_object()
 
         if not request.user.is_authenticated:
@@ -234,7 +234,7 @@ class MigratableItemMixin:
             raise PermissionDenied
 
         obj.migration_flag_reviewer = request.user
-        obj.migration_flag_reviewer_decision = 'ACCEPTED'
+        obj.migration_flag_reviewer_decision = 'APPROVED'
         obj.migration_flag_reviewer_rejection_comment = None
         obj.save()
 

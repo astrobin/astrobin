@@ -305,7 +305,7 @@ class Gear(models.Model):
         null=True,
         blank=True,
         choices=[
-            ("ACCEPTED", "Accepted"),
+            ("APPROVED", "Approved"),
             ("REJECTED_INCORRECT_STRATEGY", "Rejected: incorrect migration strategy"),
             ("REJECTED_WRONG_MIGRATION_TARGET", "Rejected: wrong migration target"),
             ("REJECTED_BAD_MIGRATION_TARGET", "Rejected: bad migration target"),

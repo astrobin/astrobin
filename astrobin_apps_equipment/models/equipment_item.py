@@ -38,7 +38,7 @@ class EquipmentItem(SafeDeleteModel):
     reviewer_decision = models.CharField(
         max_length=8,
         choices=[
-            ('ACCEPTED', _('Accepted')),
+            ('APPROVED', _('Approved')),
             ('REJECTED', _('Rejected')),
         ],
         null=True,
