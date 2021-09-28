@@ -25,7 +25,7 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
         edit_proposal.edit_proposal_reviewed_by = request.user
         edit_proposal.edit_proposal_review_ip = request.META.get('REMOTE_ADDR')
         edit_proposal.edit_proposal_review_timestamp = timezone.now()
-        edit_proposal.edit_proposal_review_comment = request.POST.get('editProposalReviewComment')
+        edit_proposal.edit_proposal_review_comment = request.data.get('comment')
         edit_proposal.edit_proposal_review_status = 'REJECTED'
 
         edit_proposal.save()
