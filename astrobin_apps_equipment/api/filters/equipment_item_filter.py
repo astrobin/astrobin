@@ -3,8 +3,16 @@ from django_filters.rest_framework import FilterSet
 
 
 class EquipmentItemFilter(FilterSet):
-    pending_review = django_filters.BooleanFilter(field_name='reviewer_decision', lookup_expr='isnull')
+    pending_review = django_filters.BooleanFilter(method='has_pending_review')
     pending_edit = django_filters.BooleanFilter(method='has_pending_edit_proposals')
+
+    def has_pending_review(self, queryset, value, *args, **kwargs):
+        condition = args[0]
+
+        if condition:
+            queryset = queryset.filter(reviewer_decision__isnull=True).exclude(created_by=self.request.user)
+
+        return queryset
 
     def has_pending_edit_proposals(self, queryset, value, *args, **kwargs):
         condition = args[0]
