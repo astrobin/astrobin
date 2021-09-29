@@ -4,6 +4,7 @@ from functools import reduce
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
 from django.db.models import Q
+from django.db.models.functions import Lower
 from django.utils import timezone
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
@@ -27,15 +28,21 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         q = self.request.GET.get('q')
+        sort = self.request.GET.get('sort')
+
         manager = self.get_serializer().Meta.model.objects
+        queryset = manager.all()
 
         if q:
             words = q.split(' ')
             name_filters = reduce(operator.or_, [Q(**{'name__icontains': x}) for x in words])
             brand_filters = reduce(operator.or_, [Q(**{'brand__name__icontains': x}) for x in words])
-            return manager.filter(name_filters | brand_filters)[:10]
+            queryset = queryset.filter(name_filters | brand_filters)[:10]
 
-        return manager.all()
+        if sort == "az":
+            queryset = queryset.order_by(Lower('brand__name'), Lower('name'))
+
+        return queryset
 
     @action(
         detail=False,
@@ -51,12 +58,12 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         if brand and q:
             objects = manager \
-                .annotate(distance=TrigramDistance('name', q)) \
-                .filter(
+                          .annotate(distance=TrigramDistance('name', q)) \
+                          .filter(
                 Q(brand=int(brand)) &
                 Q(Q(distance__lte=.7) | Q(name__icontains=q)) &
                 ~Q(name=q)) \
-                .order_by('distance')[:10]
+                          .order_by('distance')[:10]
 
         serializer = self.serializer_class(objects, many=True)
         return Response(serializer.data)
