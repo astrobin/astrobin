@@ -85,6 +85,9 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         if item.reviewed_by is not None:
             return Response("This item was already reviewed", HTTP_400_BAD_REQUEST)
 
+        if item.created_by == request.user:
+            return Response("You cannot review an item that you created", HTTP_400_BAD_REQUEST)
+
         item.reviewed_by = request.user
         item.reviewed_timestamp = timezone.now()
         item.reviewer_decision = 'APPROVED'
@@ -102,6 +105,9 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         if item.reviewed_by is not None and item.reviewer_decision == 'APPROVED':
             return Response("This item was already approved", HTTP_400_BAD_REQUEST)
+
+        if item.created_by == request.user:
+            return Response("You cannot review an item that you created", HTTP_400_BAD_REQUEST)
 
         item.reviewed_by = request.user
         item.reviewed_timestamp = timezone.now()
