@@ -368,11 +368,13 @@
                 message = self.i18n.connectionRefused;
             } else if (error.indexOf("500") > -1) {
                 message = self.i18n.internalError;
+            } else if (error.indexOf("Failure to plate solve image") > -1) {
+                message = null;
             } else {
                 message = self.i18n.unexpectedError;
             }
 
-            if (!self.errorAlreadyShown) {
+            if (!self.errorAlreadyShown && !!message) {
                 $.toast({
                     heading: self.i18n.error,
                     text: message,

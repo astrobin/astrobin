@@ -19,7 +19,7 @@
     </div>
 </div>
 
-<script src="{% static "astrobin_apps_platesolving/js/astrobin_apps_platesolving.js" %}?t=20210930"></script>
+<script src="{% static "astrobin_apps_platesolving/js/astrobin_apps_platesolving.js" %}?t=20210930-1"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         var $img = $('.main-image img').first();
@@ -52,8 +52,8 @@
                     i18n: {
                         error: "{% trans 'Error' %}",
                         connectionRefused: "{% trans 'AstroBin could not plate-solve this image because it was not possible to establish a connection to nova.astrometry.net. Please try again later!' %}",
-                        internalError: "{% trans 'AstroBin could not plate-solve this image because nova.astrometry.net reported an intertnal server error.' %}",
-                        unexpectedError: "{% trans 'AstroBin could not plate-solve this image because nova.astrometry.net reported an unepexted error.' %}",
+                        internalError: "{% trans 'AstroBin could not plate-solve this image because nova.astrometry.net reported an internal server error.' %}",
+                        unexpectedError: "{% trans 'AstroBin could not plate-solve this image because of an unexpected error.' %}",
                         statusMissing: "{% trans 'Missing' %}",
                         statusPending: "{% trans 'Basic pending' %}",
                         statusSuccess: "{% trans 'Basic success' %}",
