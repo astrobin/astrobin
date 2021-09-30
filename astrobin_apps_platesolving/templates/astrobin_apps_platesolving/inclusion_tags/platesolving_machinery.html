@@ -19,7 +19,7 @@
     </div>
 </div>
 
-<script src="{% static "astrobin_apps_platesolving/js/astrobin_apps_platesolving.js" %}?t=20210923-3"></script>
+<script src="{% static "astrobin_apps_platesolving/js/astrobin_apps_platesolving.js" %}?t=20210930"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         var $img = $('.main-image img').first();
@@ -61,7 +61,14 @@
                         statusAdvancedPending: "{% trans 'Advanced pending' %}",
                         statusAdvancedSuccess: "{% trans 'Advanced success' %}",
                         statusAdvancedFailed: "{% trans 'Advanced failed' %}",
-                        na: "{% trans 'n/a' %}"
+                        na: "{% trans 'n/a' %}",
+                        pixInsightStageStartTask: "{% trans 'Starting task...' %}",
+                        pixInsightStageDownloadingImage: "{% trans 'Downloading image...' %}",
+                        pixInsightStagePlateSolvingImage: "{% trans 'Plate-solving image...' %}",
+                        pixInsightStageGeneratingImageAnnotations: "{% trans 'Generating image annotations...' %}",
+                        pixInsightStageProcessingSvgDocuments: "{% trans 'Processing SVG documents...' %}",
+                        pixInsightStageUploadingResults: "{% trans 'Uploading results...' %}",
+                        pixInsightStageEndTask: "{% trans 'Task completed' %}",
                     }
                 });
 

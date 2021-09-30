@@ -4250,3 +4250,20 @@ form.edit-thumbnails {
     margin-right: $spacer-small;
   }
 }
+
+#plate-solving-information-modal {
+  .table hr {
+    margin: 10px;
+  }
+
+  .pixinsight-log {
+    padding: 0;
+
+    textarea {
+      width: calc(100% - 14px);
+      font-family: "Courier New", Courier, monospace;
+      font-size: .8rem;
+      background-color: $grey-8;
+    }
+  }
+}
