@@ -408,7 +408,26 @@ def create_auth_token(sender, instance, created, **kwargs):
 post_save.connect(create_auth_token, sender=User)
 
 
-def solution_post_save(sender, instance, created, **kwargs):
+def solution_pre_save(sender, instance, **kwargs):
+    try:
+        solution_before_save = Solution.objects.get(pk=instance.pk)
+    except Solution.DoesNotExist:
+        return
+
+    if solution_before_save.status >= instance.status:
+        return
+
+    if instance.status == Solver.FAILED:
+        notification = 'image_not_solved'
+    elif instance.status == Solver.SUCCESS:
+        notification = 'image_solved'
+    elif instance.status == Solver.ADVANCED_SUCCESS:
+        notification = 'image_solved_advanced'
+    elif instance.status == Solver.ADVANCED_FAILED:
+        notification = 'image_not_solved_advanced'
+    else:
+        return
+
     ct = instance.content_type
 
     try:
@@ -427,17 +446,6 @@ def solution_post_save(sender, instance, created, **kwargs):
     else:
         return
 
-    if instance.status == Solver.FAILED:
-        notification = 'image_not_solved'
-    elif instance.status == Solver.SUCCESS:
-        notification = 'image_solved'
-    elif instance.status == Solver.ADVANCED_SUCCESS:
-        notification = 'image_solved_advanced'
-    elif instance.status == Solver.ADVANCED_FAILED:
-        notification = 'image_not_solved_advanced'
-    else:
-        return
-
     push_notification(
         [user],
         None,
@@ -450,7 +458,7 @@ def solution_post_save(sender, instance, created, **kwargs):
     )
 
 
-post_save.connect(solution_post_save, sender=Solution)
+pre_save.connect(solution_pre_save, sender=Solution)
 
 
 def subscription_paid(sender, **kwargs):
