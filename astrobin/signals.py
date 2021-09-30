@@ -438,7 +438,7 @@ def solution_pre_save(sender, instance, **kwargs):
     if ct.model == 'image':
         user = target.user
         title = target.title
-        thumb = target.thumbnail_raw('gallery', None, sync=True)
+        thumb = target.thumbnail_raw('gallery', '0', sync=True)
     elif ct.model == 'imagerevision':
         user = target.image.user
         title = target.image.title
