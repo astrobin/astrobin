@@ -55,8 +55,9 @@ class SolveView(base.View):
             image = target.image
 
         if solution.settings is None:
-            solution.settings = PlateSolvingSettings.objects.create()
-            solution.save()
+            settings = PlateSolvingSettings.objects.create()
+            solution.settings = settings
+            Solution.objects.filter(pk=solution.pk).update(settings=settings)
 
         if solution.submission_id is None:
             solver = Solver()
@@ -106,7 +107,7 @@ class SolveAdvancedView(base.View):
         if solution.advanced_settings is None:
             advanced_settings, created = SolutionService.get_or_create_advanced_settings(target)
             solution.advanced_settings = advanced_settings
-            solution.save()
+            Solution.objects.filter(pk=solution.pk).update(advanced_settings=advanced_settings)
 
         if solution.pixinsight_serial_number is None or solution.status == SolverBase.SUCCESS:
             solver = AdvancedSolver()
