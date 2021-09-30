@@ -3,7 +3,8 @@ from django.conf.urls import url
 from astrobin_apps_platesolving.views import ServeAdvancedSvg
 from astrobin_apps_platesolving.views.solution import \
     SolutionFinalizeView, SolveAdvancedView, SolutionUpdateView, \
-    SolveView, SolutionPixInsightWebhook, SolutionFinalizeAdvancedView, SolutionPixInsightNextTask
+    SolveView, SolutionPixInsightWebhook, SolutionFinalizeAdvancedView, SolutionPixInsightNextTask, \
+    SolutionPixInsightLiveLogWebhook
 
 urlpatterns = (
     url(
@@ -40,6 +41,11 @@ urlpatterns = (
         r'pixinsight/webhook/$',
         SolutionPixInsightWebhook.as_view(),
         name='astrobin_apps_platesolving.pixinsight_webhook'),
+
+    url(
+        r'pixinsight/live-log-webhook/$',
+        SolutionPixInsightLiveLogWebhook.as_view(),
+        name='astrobin_apps_platesolving.pixinsight_live_log_webhook'),
 
     url(
         r'solution/(?P<pk>\d+)/svg/(?P<resolution>\w+)/$',

@@ -4,6 +4,7 @@ import string
 import urllib.request, urllib.parse, urllib.error
 
 from django.conf import settings
+from django.urls import reverse
 
 from astrobin.templatetags.tags import thumbnail_scale
 from astrobin_apps_platesolving.backends.base import AbstractPlateSolvingBackend
@@ -36,6 +37,7 @@ class Solver(AbstractPlateSolvingBackend):
             'smallSizeRatio=%f' % smallSizeRatio,
             'imageResolution=%f' % pixscale,
             'fontsBaseURL=%s' % settings.STATIC_URL + 'astrobin/fonts',
+            'liveLogURL=%s' % settings.BASE_URL + reverse('astrobin_apps_platesolving.pixinsight_live_log_webhook')
         ]
 
         observation_time = kwargs.pop('observation_time')

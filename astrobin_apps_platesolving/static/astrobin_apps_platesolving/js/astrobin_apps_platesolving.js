@@ -155,6 +155,7 @@
                     );
 
                     self._updateInfoModal("pixinsight-job", data.pixinsight_serial_number);
+                    self._updateInfoModal("pixinsight-stage", self._humanizePixInsightStage(data.pixinsight_stage));
 
                     switch (data.status) {
                         case Status.MISSING:
@@ -356,6 +357,7 @@
             self._switchProgressClasses('info', 'success');
             self._setProgressBar(100);
             self._setProgressText(self.solveAdvancedSuccessMsg);
+            self._updateInfoModal("pixinsight-stage", self._humanizePixInsightStage("END_TASK"));
         },
 
         onError: function (error) {
@@ -441,6 +443,27 @@
                     return this.i18n.statusAdvancedFailed;
                 default:
                     return this.i18n.statusInvalid;
+            }
+        },
+
+        _humanizePixInsightStage(stage) {
+            switch (stage) {
+                case "START_TASK":
+                    return this.i18n.pixInsightStageStartTask;
+                case "DOWNLOADING_IMAGE":
+                    return this.i18n.pixInsightStageDownloadingImage;
+                case "PLATE_SOLVING_IMAGE":
+                    return this.i18n.pixInsightStagePlateSolvingImage;
+                case "GENERATING_IMAGE_ANNOTATIONS":
+                    return this.i18n.pixInsightStageGeneratingImageAnnotations;
+                case "PROCESSING_SVG_DOCUMENTS":
+                    return this.i18n.pixInsightStageProcessingSvgDocuments;
+                case "UPLOADING_RESULT":
+                    return this.i18n.pixInsightStageUploadingResults;
+                case "END_TASK":
+                    return this.i18n.pixInsightStageEndTask;
+                default:
+                    return this.i18n.na;
             }
         }
     };
