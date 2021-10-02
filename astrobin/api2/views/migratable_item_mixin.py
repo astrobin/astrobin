@@ -21,6 +21,36 @@ class MigratableItemMixin:
             )
         )
 
+    def __similar_non_migrated(self, request, make, name, pk=None):
+        if not request.user.is_authenticated:
+            raise PermissionDenied
+
+        if not request.user.groups.filter(name='equipment_moderators').exists():
+            raise PermissionDenied
+
+        try:
+            max_distance = float(request.GET.get('max-distance', .7))
+        except ValueError:
+            max_distance = .7
+
+        limit = request.GET.get('limit', 100)
+        manager = self.get_serializer().Meta.model.objects
+
+
+
+        queryset = self.__random_non_migrated_queryset(request.user) \
+                       .annotate(name_distance=TrigramDistance('name', name),
+                                 make_distance=TrigramDistance('make', make)) \
+                       .filter(Q(name_distance__lte=max_distance) & Q(make_distance__lte=max_distance))
+
+        if pk:
+            queryset = queryset.exclude(pk=pk)
+
+        queryset = queryset.order_by('name_distance')[:limit]
+
+        serializer = self.get_serializer(queryset, many=True, context=self.get_serializer_context())
+        return Response(serializer.data)
+
     @action(detail=False, methods=['get'], url_path='random-non-migrated')
     def random_non_migrated(self, request):
         if not request.user.is_authenticated:
@@ -59,29 +89,14 @@ class MigratableItemMixin:
 
     @action(detail=True, methods=['get'], url_path='similar-non-migrated')
     def similar_non_migrated(self, request, pk):
-        if not request.user.is_authenticated:
-            raise PermissionDenied
-
-        if not request.user.groups.filter(name='equipment_moderators').exists():
-            raise PermissionDenied
-
-        try:
-            max_distance = float(self.request.GET.get('max-distance', .7))
-        except ValueError:
-            max_distance = .7
-
-        limit = self.request.GET.get('limit', 100)
         manager = self.get_serializer().Meta.model.objects
         obj = get_object_or_404(manager, pk=pk)
 
-        queryset = self.__random_non_migrated_queryset(request.user) \
-                   .annotate(name_distance=TrigramDistance('name', obj.name),
-                             brand_distance=TrigramDistance('name', obj.name)) \
-                   .filter(Q(name_distance__lte=max_distance) & Q(brand_distance__lte=max_distance) & ~Q(pk=pk)) \
-                   .order_by('name_distance')[:limit]
+        return self.__similar_non_migrated(request, obj.make, obj.name, pk)
 
-        serializer = self.get_serializer(queryset, many=True, context=self.get_serializer_context())
-        return Response(serializer.data)
+    @action(detail=False, methods=['get'], url_path='similar-non-migrated')
+    def similar_non_migrated_by_make_and_name(self, request):
+        return self.__similar_non_migrated(request, request.GET.get('make'), request.GET.get('name'))
 
     @action(detail=True, methods=['put'], url_path='lock-for-migration')
     def lock_for_migration(self, request: HttpRequest, pk: int) -> Response:
