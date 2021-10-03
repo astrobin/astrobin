@@ -85,6 +85,15 @@ $(document).ready(function() {
         }
     }
 
+    function detectForceClassicRevisionUploader() {
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const params = Object.fromEntries(urlSearchParams.entries());
+
+        if (params["forceClassicRevisionUploader"] !== undefined) {
+            $("#upload-revision-modal").modal("show");
+        }
+    }
+
     $('form.copy select').change(function() {
         var sharing_mode = parseInt($('select[name=sharing_mode] option:selected').val());
         var image_size = parseInt($('select[name=sharing_image_size] option:selected').val());
@@ -198,6 +207,8 @@ $(document).ready(function() {
         var revisionLabel = $(this).data("revision-label");
         $("#delete-all-other-versions-modal #id_revision").val(revisionLabel);
     });
+
+    detectForceClassicRevisionUploader();
 });
 </script>
 
