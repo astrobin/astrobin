@@ -14,7 +14,9 @@ from astrobin_apps_images.api import signals
 from astrobin_apps_images.api.mixins import TusPatchMixin, TusHeadMixin, TusTerminateMixin, \
     TusCreateMixin
 from astrobin_apps_images.api.parsers import TusUploadStreamParser
-from astrobin_apps_images.api.permissions import HasUploaderAccessOrReadOnly, IsImageOwnerOrReadOnly
+from astrobin_apps_images.api.permissions import IsImageOwnerOrReadOnly
+from astrobin_apps_images.api.permissions.has_uncompressed_source_uploader_access_or_read_only import \
+    HasUncompressedSourceUploaderAccessOrReadOnly
 from astrobin_apps_images.api.serializers import UncompressedSourceUploadSerializer
 from astrobin_apps_images.api.views.image_upload_view_set import UploadMetadata
 from astrobin_apps_images.models import UncompressedSourceUpload
@@ -36,7 +38,7 @@ class UncompressedSourceUploadViewSet(TusCreateMixin,
     parser_classes = [TusUploadStreamParser]
     permission_classes = [
         IsAuthenticatedOrReadOnly,
-        HasUploaderAccessOrReadOnly,
+        HasUncompressedSourceUploaderAccessOrReadOnly,
         IsImageOwnerOrReadOnly
     ]
     http_method_names = ['get', 'post', 'head', 'put', 'patch']
