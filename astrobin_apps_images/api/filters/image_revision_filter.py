@@ -9,6 +9,7 @@ class ImageRevisionFilter(FilterSet):
         model = ImageRevision
         fields = {
             'uploaded': ('lt', 'lte', 'exact', 'gt', 'gte'),
+            'image': ('exact',),
         }
 
     filter_overrides = {

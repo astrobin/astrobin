@@ -408,23 +408,13 @@ def create_auth_token(sender, instance, created, **kwargs):
 post_save.connect(create_auth_token, sender=User)
 
 
-def solution_post_save(sender, instance, created, **kwargs):
-    ct = instance.content_type
-
+def solution_pre_save(sender, instance, **kwargs):
     try:
-        target = ct.get_object_for_this_type(pk=instance.object_id)
-    except ct.model_class().DoesNotExist:
+        solution_before_save = Solution.objects.get(pk=instance.pk)
+    except Solution.DoesNotExist:
         return
 
-    if ct.model == 'image':
-        user = target.user
-        title = target.title
-        thumb = target.thumbnail_raw('gallery', None, sync=True)
-    elif ct.model == 'imagerevision':
-        user = target.image.user
-        title = target.image.title
-        thumb = target.image.thumbnail_raw('gallery', target.label, sync=True)
-    else:
+    if solution_before_save.status >= instance.status:
         return
 
     if instance.status == Solver.FAILED:
@@ -435,6 +425,24 @@ def solution_post_save(sender, instance, created, **kwargs):
         notification = 'image_solved_advanced'
     elif instance.status == Solver.ADVANCED_FAILED:
         notification = 'image_not_solved_advanced'
+    else:
+        return
+
+    ct = instance.content_type
+
+    try:
+        target = ct.get_object_for_this_type(pk=instance.object_id)
+    except ct.model_class().DoesNotExist:
+        return
+
+    if ct.model == 'image':
+        user = target.user
+        title = target.title
+        thumb = target.thumbnail_raw('gallery', '0', sync=True)
+    elif ct.model == 'imagerevision':
+        user = target.image.user
+        title = target.image.title
+        thumb = target.image.thumbnail_raw('gallery', target.label, sync=True)
     else:
         return
 
@@ -450,7 +458,7 @@ def solution_post_save(sender, instance, created, **kwargs):
     )
 
 
-post_save.connect(solution_post_save, sender=Solution)
+pre_save.connect(solution_pre_save, sender=Solution)
 
 
 def subscription_paid(sender, **kwargs):

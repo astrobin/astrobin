@@ -7,12 +7,13 @@ import urllib.request
 
 import simplejson
 from braces.views import CsrfExemptMixin
+from dateutil import parser
 from django.conf import settings
 from django.core.files import File
 from django.core.files.base import ContentFile
 from django.core.files.temp import NamedTemporaryFile
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.utils.decorators import method_decorator
@@ -29,7 +30,7 @@ from astrobin_apps_platesolving.annotate import Annotator
 from astrobin_apps_platesolving.api_filters.advanced_task_filter import AdvancedTaskFilter
 from astrobin_apps_platesolving.api_filters.solution_list_filter import SolutionListFilter
 from astrobin_apps_platesolving.backends.astrometry_net.errors import RequestError
-from astrobin_apps_platesolving.models import PlateSolvingAdvancedTask
+from astrobin_apps_platesolving.models import PlateSolvingAdvancedTask, PlateSolvingAdvancedLiveLogEntry
 from astrobin_apps_platesolving.models import PlateSolvingSettings
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.serializers import SolutionSerializer, AdvancedTaskSerializer
@@ -54,8 +55,9 @@ class SolveView(base.View):
             image = target.image
 
         if solution.settings is None:
-            solution.settings = PlateSolvingSettings.objects.create()
-            solution.save()
+            settings = PlateSolvingSettings.objects.create()
+            solution.settings = settings
+            Solution.objects.filter(pk=solution.pk).update(settings=settings)
 
         if solution.submission_id is None:
             solver = Solver()
@@ -105,7 +107,7 @@ class SolveAdvancedView(base.View):
         if solution.advanced_settings is None:
             advanced_settings, created = SolutionService.get_or_create_advanced_settings(target)
             solution.advanced_settings = advanced_settings
-            solution.save()
+            Solution.objects.filter(pk=solution.pk).update(advanced_settings=advanced_settings)
 
         if solution.pixinsight_serial_number is None or solution.status == SolverBase.SUCCESS:
             solver = AdvancedSolver()
@@ -181,6 +183,8 @@ class SolutionUpdateView(base.View):
         status = None
         error = None
         queue_size = None
+        pixinsight_stage = None
+        pixinsight_log = None
 
         try:
             if solution.status < SolverBase.ADVANCED_PENDING:
@@ -196,6 +200,10 @@ class SolutionUpdateView(base.View):
                 except PlateSolvingAdvancedTask.DoesNotExist:
                     log.error("PixInsight task %s does not exist!" % solution.pixinsight_serial_number)
 
+                live_log_entry = PlateSolvingAdvancedLiveLogEntry.objects.filter(serial_number=solution.pixinsight_serial_number).order_by('-timestamp').first()
+                if live_log_entry:
+                    pixinsight_stage = live_log_entry.stage
+                    pixinsight_log = live_log_entry.log
 
             if status == Solver.MISSING:
                 solution.status = status
@@ -212,6 +220,8 @@ class SolutionUpdateView(base.View):
             'started': solution.created.timestamp() * 1000,
             'submission_id': solution.submission_id,
             'pixinsight_serial_number': solution.pixinsight_serial_number,
+            'pixinsight_stage': pixinsight_stage,
+            'pixinsight_log': pixinsight_log,
             'queue_size': queue_size,
             'error': error
         }
@@ -393,6 +403,30 @@ class SolutionPixInsightWebhook(base.View):
             log.error(request.POST.get('errorMessage', 'Unknown error'))
 
         solution.save()
+
+        return HttpResponse("OK")
+
+
+class SolutionPixInsightLiveLogWebhook(base.View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(SolutionPixInsightLiveLogWebhook, self).dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        serial_number = request.POST.get('serialNumber')
+        timestamp = request.POST.get('timestamp')
+        stage = request.POST.get('stage')
+        log = request.POST.get('log')
+
+        if None in (serial_number, timestamp, stage):
+            return HttpResponseBadRequest("The following arguments are mandatory: serialNumber, timestamp, stage.")
+
+        PlateSolvingAdvancedLiveLogEntry.objects.create(
+            serial_number=serial_number,
+            timestamp=parser.parse(timestamp),
+            stage=stage,
+            log=log,
+        )
 
         return HttpResponse("OK")
 

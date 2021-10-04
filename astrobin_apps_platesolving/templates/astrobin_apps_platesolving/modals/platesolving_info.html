@@ -67,6 +67,28 @@
                         {% trans "n/a" %}
                     </td>
                 </tr>
+                <tr>
+                    <td>{% trans "PixInsight stage" %}</td>
+                    <td class="pixinsight-stage">
+                        {% if advanced_solution_last_live_log_entry %}
+                            {{ advanced_solution_last_live_log_entry.stage }}
+                        {% else %}
+                            {% trans "n/a" %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% if advanced_solution_last_live_log_entry and advanced_solution_last_live_log_entry.log %}
+                    <tr>
+                        <td colspan="2">{% trans "PixInsight log" %}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="pixinsight-log">
+                            <textarea rows="15">
+                                {{ advanced_solution_last_live_log_entry.log }}
+                            </textarea>
+                        </td>
+                    </tr>
+                {% endif %}
 
                 {% if instance_to_platesolve.solution.advanced_ra %}
                     <tr>

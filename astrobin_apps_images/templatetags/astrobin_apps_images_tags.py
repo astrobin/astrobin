@@ -13,6 +13,7 @@ from django.utils.translation import ugettext as _
 from astrobin.models import Image, ImageRevision
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
+from common.services import AppRedirectionService
 
 register = Library()
 logger = logging.getLogger('apps')
@@ -301,3 +302,8 @@ def is_platesolvable(image):
 @register.filter()
 def needs_premium_subscription_to_platesolve(image):
     return ImageService(image).needs_premium_subscription_to_platesolve()
+
+
+@register.filter()
+def revision_upload_url(image: Image, request):
+    return AppRedirectionService.redirect(request, '/uploader/revision/%d' % image.pk)

@@ -2449,6 +2449,10 @@ form.avatar-change label.control-label {
     margin: 0 -1rem;
     padding: 1rem;
 
+    .alert {
+      line-height: 1.1rem;
+    }
+
     .equipment-brand-listing {
       position: relative;
       padding: .5rem;
@@ -4248,5 +4252,22 @@ form.edit-thumbnails {
     color: $grey-4-dark;
     font-size: .85rem;
     margin-right: $spacer-small;
+  }
+}
+
+#plate-solving-information-modal {
+  .table hr {
+    margin: 10px;
+  }
+
+  .pixinsight-log {
+    padding: 0;
+
+    textarea {
+      width: calc(100% - 14px);
+      font-family: "Courier New", Courier, monospace;
+      font-size: .8rem;
+      background-color: $grey-8;
+    }
   }
 }

@@ -61,7 +61,7 @@ from astrobin_apps_groups.forms import GroupSelectForm
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.tasks import push_notification_for_new_image
-from astrobin_apps_platesolving.models import Solution
+from astrobin_apps_platesolving.models import Solution, PlateSolvingAdvancedLiveLogEntry
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
 from common.services import DateTimeService
@@ -702,6 +702,11 @@ class ImageDetailView(ImageDetailViewBase):
                                               and instance_to_platesolve.solution
                                               and instance_to_platesolve.solution.status >= Solver.ADVANCED_SUCCESS
                                       ),
+            'advanced_solution_last_live_log_entry':
+                PlateSolvingAdvancedLiveLogEntry.objects.filter(
+                    serial_number=instance_to_platesolve.solution.pixinsight_serial_number).order_by('-timestamp').first() \
+                    if instance_to_platesolve.solution \
+                    else None,
             'skyplot_zoom1': skyplot_zoom1,
 
             'image_ct': ContentType.objects.get_for_model(Image),
