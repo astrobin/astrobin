@@ -102,11 +102,6 @@ def sync_iotd_api():
     call_command("image_of_the_day")
 
 
-@shared_task(time_limit=60)
-def merge_gear():
-    call_command("merge_gear")
-
-
 @shared_task(time_limit=60, acks_late=True)
 def hitcount_cleanup():
     call_command("hitcount_cleanup")

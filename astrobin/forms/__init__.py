@@ -28,7 +28,6 @@ from .focal_reducer_edit_new_form import FocalReducerEditNewForm
 from .gear_user_info_form import GearUserInfoForm
 from .license_form import ImageLicenseForm
 from .location_edit_form import LocationEditForm
-from .moderator_gear_fix_form import ModeratorGearFixForm
 from .mount_edit_form import MountEditForm
 from .mount_edit_new_form import MountEditNewForm
 from .profile_edit_gear_form import UserProfileEditGearForm

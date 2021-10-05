@@ -53,7 +53,7 @@ from astrobin.forms.profile_edit_privacy_form import UserProfileEditPrivacyForm
 from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import Image, UserProfile, Gear, Location, ImageRevision, DeepSky_Acquisition, \
     SolarSystem_Acquisition, GearUserInfo, Telescope, Mount, Camera, FocalReducer, Software, Filter, \
-    Accessory, GlobalStat, App, GearMakeAutoRename, Acquisition
+    Accessory, GlobalStat, App, Acquisition
 from astrobin.shortcuts import ajax_response, ajax_success
 from astrobin.templatetags.tags import in_upload_wizard
 from astrobin.utils import get_client_country_code
@@ -2994,57 +2994,3 @@ def get_makes_by_type(request, klass):
     return HttpResponse(
         simplejson.dumps(ret),
         content_type='application/javascript')
-
-
-@require_GET
-@login_required
-def gear_fix(request, id):
-    # Disable this view for now. We're good.
-    return HttpResponseForbidden()
-
-    # gear = get_object_or_404(Gear, id=id)
-    # form = ModeratorGearFixForm(instance=gear)
-    # next_gear = Gear.objects.filter(moderator_fixed=None).order_by('?')[:1].get()
-    #
-    # return render(request, 'gear/fix.html', {
-    #     'form': form,
-    #     'gear': gear,
-    #     'next_gear': next_gear,
-    #     'already_fixed': Gear.objects.exclude(moderator_fixed=None).count(),
-    #     'remaining': Gear.objects.filter(moderator_fixed=None).count(),
-    # })
-
-
-@never_cache
-@require_POST
-@login_required
-def gear_fix_save(request):
-    # Disable this view for now. We're good.
-    return HttpResponseForbidden()
-
-    # id = request.POST.get('gear_id')
-    # gear = get_object_or_404(Gear, id=id)
-    # form = ModeratorGearFixForm(data=request.POST, instance=gear)
-    # next_gear = Gear.objects.filter(moderator_fixed=None).order_by('?')[:1].get()
-    #
-    # if not form.is_valid():
-    #     return render(request, 'gear/fix.html', {
-    #         'form': form,
-    #         'gear': gear,
-    #         'next_gear': next_gear,
-    #         'already_fixed': Gear.objects.exclude(moderator_fixed=None).count(),
-    #         'remaining': Gear.objects.filter(moderator_fixed=None).count(),
-    #     })
-    #
-    # form.save()
-    # return HttpResponseRedirect('/gear/fix/%d/' % next_gear.id)
-
-
-@never_cache
-@require_GET
-@login_required
-def gear_fix_thanks(request):
-    # Disable this view for now. We're good.
-    return HttpResponseForbidden()
-
-    return render(request, 'gear/fix_thanks.html')

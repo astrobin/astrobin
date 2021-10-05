@@ -206,28 +206,6 @@ WATERMARK_POSITION_CHOICES = (
 )
 
 
-class GearMakeAutoRename(models.Model):
-    rename_from = models.CharField(
-        verbose_name="Rename form",
-        max_length=128,
-        primary_key=True,
-        blank=False,
-    )
-
-    rename_to = models.CharField(
-        verbose_name="Rename to",
-        max_length=128,
-        blank=False,
-        null=False,
-    )
-
-    def __str__(self):
-        return "%s --> %s" % (self.rename_from, self.rename_to)
-
-    class Meta:
-        app_label = 'astrobin'
-
-
 class Gear(models.Model):
     created = models.DateTimeField(
         auto_now_add=True,
@@ -256,12 +234,6 @@ class Gear(models.Model):
     updated = models.DateTimeField(
         editable=False,
         auto_now=True,
-        null=True,
-        blank=True,
-    )
-
-    moderator_fixed = models.DateTimeField(
-        editable=False,
         null=True,
         blank=True,
     )
@@ -296,70 +268,6 @@ class Gear(models.Model):
 
     def slug(self):
         return slugify("%s %s" % (self.get_make(), self.get_name()))
-
-    def hard_merge(self, slave):
-        from astrobin.gear import get_correct_gear
-        unused, master_gear_type = get_correct_gear(self.id)
-        unused, slave_gear_type = get_correct_gear(slave.id)
-
-        if master_gear_type != slave_gear_type:
-            return
-
-        # Find matching slaves in images
-        images = Image.by_gear(slave)
-        for image in images:
-            for name, klass in Image.GEAR_CLASS_LOOKUP.items():
-                s = getattr(image, name).filter(pk=slave.pk)
-                if s:
-                    try:
-                        getattr(image, name).add(klass.objects.get(pk=self.pk))
-                        getattr(image, name).remove(s[0])
-                    except klass.DoesNotExist:
-                        continue
-
-        # Find matching slaves in user profiles
-        filters = reduce(operator.or_, [Q(**{'%s__gear_ptr__pk' % t: slave.pk}) for t in UserProfile.GEAR_CLASS_LOOKUP])
-        owners = UserProfile.objects.filter(filters).distinct()
-        for owner in owners:
-            for name, klass in UserProfile.GEAR_CLASS_LOOKUP.items():
-                s = getattr(owner, name).filter(pk=slave.pk)
-                if s:
-                    try:
-                        getattr(owner, name).add(klass.objects.get(pk=self.pk))
-                        getattr(owner, name).remove(s[0])
-                    except klass.DoesNotExist:
-                        continue
-
-        # Find matching slaves in deep sky acquisitions
-        try:
-            filter = Filter.objects.get(pk=self.pk)
-            DeepSky_Acquisition.objects.filter(filter__pk=slave.pk).update(
-                filter=filter)
-        except Filter.DoesNotExist:
-            pass
-
-        # Find matching comments and move them to the master
-        NestedComment.objects.filter(
-            content_type=ContentType.objects.get(app_label='astrobin', model='gear'),
-            object_id=slave.id
-        ).update(object_id=self.id)
-
-        # Fetch slave's master if this hard-merge's master doesn't have a soft-merge master
-        if not self.master:
-            self.master = slave.master
-            self.save()
-
-        GearHardMergeRedirect(fro=slave.pk, to=self.pk).save()
-        slave.delete()
-
-    def save(self, *args, **kwargs):
-        try:
-            autorename = GearMakeAutoRename.objects.get(rename_from=self.make)
-            self.make = autorename.rename_to
-        except:
-            pass
-
-        super(Gear, self).save(*args, **kwargs)
 
     def get_make(self):
         if self.make:
@@ -408,30 +316,6 @@ class GearUserInfo(models.Model):
     class Meta:
         app_label = 'astrobin'
         unique_together = ('gear', 'user')
-
-
-class GearAssistedMerge(models.Model):
-    master = models.ForeignKey(Gear, related_name='assisted_master', null=True, on_delete=models.CASCADE)
-    slave = models.ForeignKey(Gear, related_name='assisted_slave', null=True, on_delete=models.CASCADE)
-    cutoff = models.DecimalField(default=0, max_digits=3, decimal_places=2)
-
-    def __str__(self):
-        return self.master.name
-
-    class Meta:
-        app_label = 'astrobin'
-
-
-class GearHardMergeRedirect(models.Model):
-    # Remembers what gears we merged, so we can perform URL redirects.
-    fro = models.IntegerField()
-    to = models.IntegerField()
-
-    def __str__(self):
-        return "%s -> %s" % (self.fro, self.to)
-
-    class Meta:
-        app_label = 'astrobin'
 
 
 class Telescope(Gear):
