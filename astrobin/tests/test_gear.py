@@ -61,39 +61,3 @@ class GearTest(TestCase):
     def test_get_absolute_url(self):
          g, created = Gear.objects.get_or_create(make = "Test make", name = "Test name")
          self.assertEqual('/search/?q=Test make Test name', g.get_absolute_url())
-
-    def test_hard_merge(self):
-        # Check with diffrent gear types
-        g1, created = Telescope.objects.get_or_create(name = "1")
-        g2, created = Camera.objects.get_or_create(name = "2")
-        g1.hard_merge(g2)
-        self.assertEqual(Gear.objects.filter(name = "2").count(), 1)
-        g1.delete()
-        g2.delete()
-
-        # Check successful merge
-        g1, created = Filter.objects.get_or_create(name = "1")
-        g2, created = Filter.objects.get_or_create(name = "2")
-
-        # Assign slave to profile
-        u = User.objects.create_user('test', 'test@test.com', 'password')
-        u.userprofile.filters.add(g2)
-        u.userprofile.save(keep_deleted=True)
-
-        # Assign slave to image
-        i, created  = Image.objects.get_or_create(user = u)
-        i.filters.add(g2)
-        i.save(keep_deleted=True)
-
-        # Check DSA too
-        dsa, created = DeepSky_Acquisition.objects.get_or_create(
-            image = i, filter = g2)
-
-        g1.hard_merge(g2)
-
-        self.assertEqual(Gear.objects.filter(name = "2").count(), 0)
-        self.assertEqual(u.userprofile.filters.all()[0], g1)
-        self.assertEqual(i.filters.all()[0], g1)
-
-        dsa = DeepSky_Acquisition.objects.get(pk = dsa.pk)
-        self.assertEqual(dsa.filter, g1)
