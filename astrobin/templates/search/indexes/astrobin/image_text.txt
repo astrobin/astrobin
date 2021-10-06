@@ -18,11 +18,11 @@
 {{object.solution.advanced_annotations}}
 
 {% for i in object.imaging_telescopes.all %}
-    {{i}}
+    {{i}} {{i.type}}
 {% endfor %}
 
 {% for i in object.imaging_cameras.all %}
-    {{i}}
+    {{i}} {{i.type}}
 {% endfor %}
 
 {% for i in object.guiding_telescopes.all %}
