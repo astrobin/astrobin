@@ -1,5 +1,6 @@
 import datetime
 import logging
+from functools import reduce
 
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -20,11 +21,8 @@ from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_platesolving.services import SolutionService
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
-from functools import reduce
-
 
 logger = logging.getLogger('apps')
-
 
 PREPARED_FIELD_CACHE_EXPIRATION = 3600
 PREPARED_MOON_PHASE_CACHE_KEY = 'search_index_prepared_moon_phase.%d'
@@ -33,6 +31,7 @@ PREPARED_BOOKMARKS_CACHE_KEY = 'search_index_prepared_bookmarks.%d'
 PREPARED_LIKES_CACHE_KEY = 'search_index_prepared_likes.%d'
 PREPARED_COMMENTS_CACHE_KEY = 'search_index_prepared_comments.%d'
 PREPARED_INTEGRATION_CACHE_KEY = 'search_index_prepared_integration.%d'
+
 
 def _average(values):
     length = len(values)
@@ -139,6 +138,7 @@ def _prepare_likes(obj):
     result = ToggleProperty.objects.toggleproperties_for_object("like", obj).count()
     cache.set(PREPARED_LIKES_CACHE_KEY % obj.pk, result, PREPARED_FIELD_CACHE_EXPIRATION)
     return result
+
 
 def _prepare_bookmarks(obj):
     result = ToggleProperty.objects.toggleproperties_for_object("bookmark", obj).count()
@@ -369,7 +369,7 @@ class UserIndex(SearchIndex, Indexable):
 
     def prepare_likes_given(self, obj):
         return ToggleProperty.objects.toggleproperties_for_model('like', Image, obj).count()
-    
+
     def prepare_average_likes(self, obj):
         likes = self.prepared_data.get('likes')
         if likes is None:
@@ -501,6 +501,7 @@ class UserIndex(SearchIndex, Indexable):
     def prepare_iotds(self, obj):
         return IotdService().get_iotds().filter(image__user=obj).count()
 
+
 class ImageIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
 
@@ -581,25 +582,33 @@ class ImageIndex(SearchIndex, Indexable):
         return Image
 
     def get_updated_field(self):
-        return "updated"
+        return 'updated'
 
     def prepare_description(self, obj):
         return obj.description_bbcode or obj.description
 
     def prepare_imaging_telescopes(self, obj):
-        return ["%s, %s" % (x.get("make"), x.get("name")) for x in obj.imaging_telescopes.all().values('make', 'name')]
+        return [
+            f"{x.get('make')} {x.get('name')} {x.get('type')}" for x in obj.imaging_telescopes \
+                .all() \
+                .values('make', 'name', 'type')
+        ]
 
     def prepare_guiding_telescopes(self, obj):
-        return ["%s, %s" % (x.get("make"), x.get("name")) for x in obj.guiding_telescopes.all().values('make', 'name')]
+        return [f"{x.get('make')} {x.get('name')}" for x in obj.guiding_telescopes.all().values('make', 'name')]
 
     def prepare_mounts(self, obj):
-        return ["%s, %s" % (x.get("make"), x.get("name")) for x in obj.mounts.all().values('make', 'name')]
+        return [f"{x.get('make')} {x.get('name')}" for x in obj.mounts.all().values('make', 'name')]
 
     def prepare_imaging_cameras(self, obj):
-        return ["%s, %s" % (x.get("make"), x.get("name")) for x in obj.imaging_cameras.all().values('make', 'name')]
+        return [
+            f"{x.get('make')} {x.get('name')} {x.get('type')}" for x in obj.imaging_cameras \
+                .all() \
+                .values('make', 'name', 'type')
+        ]
 
     def prepare_guiding_cameras(self, obj):
-        return ["%s, %s" % (x.get("make"), x.get("name")) for x in obj.guiding_cameras.all().values('make', 'name')]
+        return [f"{x.get('make')} {x.get('name')}" for x in obj.guiding_cameras.all().values('make', 'name')]
 
     def prepare_coord_ra_min(self, obj):
         if obj.solution is not None and obj.solution.ra is not None and obj.solution.radius is not None:
