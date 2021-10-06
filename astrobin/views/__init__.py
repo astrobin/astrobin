@@ -2952,12 +2952,6 @@ def gear_by_make(request, make):
 
     from astrobin.gear import CLASS_LOOKUP
 
-    try:
-        autorename = GearMakeAutoRename.objects.get(rename_from=make)
-        ret['make'] = autorename.rename_to
-    except:
-        pass
-
     if klass != Gear:
         klass = CLASS_LOOKUP[klass]
 
