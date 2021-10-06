@@ -346,12 +346,79 @@ class GearUserInfo(models.Model):
         blank=True,
     )
 
+    modded = models.NullBooleanField(
+        verbose_name=_("Modded"),
+        help_text=_("Has this object been modified for astrophotography? (especially applicable to cameras)"),
+        null=True,
+        blank=True,
+    )
+
     def __str__(self):
         return "%s (%s)" % (self.alias, self.gear.name)
 
     class Meta:
         app_label = 'astrobin'
         unique_together = ('gear', 'user')
+
+
+class ImageGearMergeRecord(models.Model):
+    from_gear = models.ForeignKey(
+        Gear,
+        editable=False,
+        on_delete=models.CASCADE,
+        related_name='image_gear_merge_records_as_from',
+    )
+
+    to_gear = models.ForeignKey(
+        Gear,
+        editable=False,
+        on_delete=models.CASCADE,
+        related_name='image_gear_merge_records_as_to',
+    )
+
+    image = models.ForeignKey(
+        "astrobin.Image",
+        editable=False,
+        on_delete=models.CASCADE,
+        related_name='gear_merge_records',
+    )
+
+    created = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+        app_label = 'astrobin'
+
+
+class UserProfileGearMergeRecord(models.Model):
+    from_gear = models.ForeignKey(
+        Gear,
+        editable=False,
+        on_delete=models.CASCADE,
+        related_name='user_profile_gear_merge_records_as_from',
+    )
+
+    to_gear = models.ForeignKey(
+        Gear,
+        editable=False,
+        on_delete=models.CASCADE,
+        related_name='user_profile_gear_merge_records_as_to',
+    )
+
+    user_profile = models.ForeignKey(
+        "astrobin.UserProfile",
+        editable=False,
+        on_delete=models.CASCADE,
+        related_name='gear_merge_records',
+    )
+
+    created = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+        app_label = 'astrobin'
 
 
 class Telescope(Gear):
