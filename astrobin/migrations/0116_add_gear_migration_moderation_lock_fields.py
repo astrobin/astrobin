@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('astrobin', '0112_add_gear_migration_flag_moderator_and_timestamp'),
+        ('astrobin', '0115_add_gear_migration_flag_moderator_and_timestamp'),
     ]
 
     operations = [

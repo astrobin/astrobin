@@ -1,11 +1,13 @@
 from django.template.defaultfilters import slugify
 
 from astrobin.tests.generators import Generators
-from astrobin_apps_equipment.models import Camera, Sensor
+from astrobin_apps_equipment.models import Camera, Sensor, Telescope
+from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_equipment.models.equipment_retailer import EquipmentRetailer
+from astrobin_apps_equipment.models.telescope_base_model import TelescopeType
 
 
 class EquipmentGenerators:
@@ -52,11 +54,27 @@ class EquipmentGenerators:
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
             name=kwargs.get('name', 'Test camera %s' % random_name),
-            type=kwargs.get('type', 'CCD'),
+            type=kwargs.get('type', CameraType.DEDICATED_DEEP_SKY),
             sensor=kwargs.get('sensor', EquipmentGenerators.sensor()),
             cooled=kwargs.get('cooled', True),
             max_cooling=kwargs.get('max_cooling', 40),
             back_focus=kwargs.get('back_focus', 18),
+        )
+
+    @staticmethod
+    def telescope(**kwargs):
+        random_name = Generators.randomString()
+
+        return Telescope.objects.create(
+            created_by=kwargs.get('created_by', Generators.user()),
+            brand=kwargs.get('brand', EquipmentGenerators.brand()),
+            name=kwargs.get('name', 'Test telescope %s' % random_name),
+            type=kwargs.get('type', TelescopeType.REFRACTOR_ACHROMATIC),
+            min_aperture=kwargs.get('min_aperture', 50),
+            max_aperture=kwargs.get('max_aperture', 50),
+            min_focal_length=kwargs.get('min_focal_length', 50),
+            max_focal_length=kwargs.get('max_focal_length', 200),
+            weight=kwargs.get('weight', 200),
         )
 
     @staticmethod

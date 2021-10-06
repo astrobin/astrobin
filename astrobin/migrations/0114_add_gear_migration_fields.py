@@ -9,7 +9,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
     dependencies = [
         ('contenttypes', '0002_remove_content_type_name'),
-        ('astrobin', '0110_migrate_itelescope_code'),
+        ('astrobin', '0113_add_gearuserinfo_modded'),
     ]
 
     operations = [

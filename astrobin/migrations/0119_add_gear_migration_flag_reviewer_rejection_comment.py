@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('astrobin', '0115_add_NOT_ENOUGH_INFO_gear_migration_flag'),
+        ('astrobin', '0118_add_NOT_ENOUGH_INFO_gear_migration_flag'),
     ]
 
     operations = [

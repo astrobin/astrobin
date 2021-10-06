@@ -1,9 +1,18 @@
+from enum import Enum
+
 from django.db import models
 from django.db.models import PROTECT
 from django.utils.translation import ugettext_lazy as _
 
 from astrobin_apps_equipment.models import EquipmentItem, Sensor
 
+class CameraType(Enum):
+    DEDICATED_DEEP_SKY = 'DEDICATED_DEEP_SKY'
+    DSLR_MIRRORLESS = 'DSLR_MIRRORLESS'
+    GUIDER_PLANETARY = 'GUIDER_PLANETARY'
+    VIDEO = 'VIDEO'
+    FILM = 'FILM'
+    OTHER = 'OTHER'
 
 class CameraBaseModel(EquipmentItem):
     type = models.CharField(
@@ -11,12 +20,12 @@ class CameraBaseModel(EquipmentItem):
         null=False,
         max_length=64,
         choices=(
-            ('DEDICATED_DEEP_SKY', _('Dedicated deep-sky camera')),
-            ('DSLR_MIRRORLESS', _('General purpose DSLR or mirrorless camera')),
-            ('GUIDER_PLANETARY', _('Guider/Planetary camera')),
-            ('VIDEO', _('General purpose video camera')),
-            ('FILM', _('Film camera')),
-            ('OTHER', _('Other')),
+            (CameraType.DEDICATED_DEEP_SKY, _('Dedicated deep-sky camera')),
+            (CameraType.DSLR_MIRRORLESS, _('General purpose DSLR or mirrorless camera')),
+            (CameraType.GUIDER_PLANETARY, _('Guider/Planetary camera')),
+            (CameraType.VIDEO, _('General purpose video camera')),
+            (CameraType.FILM, _('Film camera')),
+            (CameraType.OTHER, _('Other')),
         ),
     )
 
