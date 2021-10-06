@@ -1,13 +1,11 @@
-import difflib
-from datetime import timedelta, datetime, date
+from datetime import timedelta, datetime
 
 from django.contrib import admin, messages
 from django.contrib.auth.models import User
 from django.db.models import Q
-from django.http import HttpResponseRedirect
 from django.utils import timezone
 
-from astrobin.models import Gear, GearUserInfo, GearAssistedMerge, GearMakeAutoRename, GearHardMergeRedirect, Telescope, \
+from astrobin.models import Gear, GearUserInfo, Telescope, \
     Mount, Camera, FocalReducer, Software, Filter, Accessory, DeepSky_Acquisition, SolarSystem_Acquisition, Image, \
     ImageRevision, Request, ImageRequest, UserProfile, Location, AppApiKeyRequest, App, ImageOfTheDay, \
     ImageOfTheDayCandidate, Collection, GlobalStat, BroadcastEmail
@@ -69,63 +67,10 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 
 class GearAdmin(admin.ModelAdmin):
-    list_display = ('id', 'make', 'name', 'master', 'updated', 'moderator_fixed')
+    list_display = ('id', 'make', 'name', 'master', 'updated',)
     list_editable = ('make', 'name',)
     search_fields = ('id', 'make', 'name',)
-    actions = ['assisted_merge', 'soft_merge', 'reset_migration_fields']
-
-    def assisted_merge(modeladmin, request, queryset):
-        GearAssistedMerge.objects.all().delete()
-
-        if queryset.count() > 1:
-            return
-
-        orphans = queryset.filter(master=None)
-        for orphan in orphans:
-            matches = difflib.get_close_matches(orphan.name, [x.name for x in queryset], cutoff=0.6)
-            for match in matches:
-                slaves = Gear.objects.filter(name=match).exclude(pk=orphan.pk)
-                for slave in slaves:
-                    # The following line needs some explaining:
-                    # With the first Q(), I exclude mutual master/slave
-                    # relationship (like a -> b and b -> a).
-                    # With the second Q(), I exclude dependencies that generate
-                    # a tree deeper than 2 level (a -> b -> c).
-                    if not GearAssistedMerge.objects.filter(Q(slave=orphan) | Q(master=slave)):
-                        s = difflib.SequenceMatcher(None, orphan.name, match)
-                        merge, created = GearAssistedMerge.objects.get_or_create(master=orphan, slave=slave)
-                        merge.cutoff = s.quick_ratio()
-                        merge.save()
-
-        return HttpResponseRedirect('/admin/astrobin/gearassistedmerge/')
-
-    assisted_merge.short_description = 'Assisted hard merge'
-
-    def soft_merge(modeladmin, request, queryset):
-        masters = [x.master for x in queryset]
-        if not all(x == masters[0] for x in masters):
-            # They're not all the same!
-            return
-
-        master = masters[0]
-        slaves = [x.slave for x in queryset if x != master]
-
-        for slave in slaves:
-            # These are all the items that are slave to this slave.
-            slaves_slaves = Gear.objects.filter(master=slave)
-
-            if slave.master:
-                slave.master.master = master
-                slave.master.master.save()
-
-            for slaves_slave in slaves_slaves:
-                slaves_slave.master = master
-                slaves_slave.save()
-
-            slave.master = master
-            slave.save()
-
-    soft_merge.short_description = 'Soft merge'
+    actions = ('reset_migration_fields',)
 
     def reset_migration_fields(selfmodeladmin, request, queryset):
         GearService.reset_migration_fields(queryset)
@@ -133,54 +78,8 @@ class GearAdmin(admin.ModelAdmin):
     reset_migration_fields.short_description = 'Reset migration fields'
 
 
-class GearAssistedMergeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'master', 'slave', 'cutoff')
-    list_per_page = 10
-    ordering = ('-cutoff', 'master')
-    search_fields = ('master',)
-    actions = ['hard_merge', 'invert', 'delete_gear_items', ]
-
-    def invert(modeladmin, request, queryset):
-        for merge in queryset:
-            master = merge.master
-            slave = merge.slave
-            merge.master = slave
-            merge.slave = master
-            merge.save()
-
-    invert.short_description = 'Invert'
-
-    def delete_gear_items(modeladmin, request, queryset):
-        for merge in queryset:
-            try:
-                merge.master.delete()
-                merge.slave.delete()
-            except Gear.DoesNotExist:
-                pass
-            merge.delete()
-
-    delete_gear_items.short_description = "Delete gear items"
-
-    def hard_merge(modeladmin, request, queryset):
-        from .utils import unique_items
-        masters = unique_items([x.master for x in queryset])
-        if len(masters) > 1:
-            return
-
-        master = masters[0]
-        for merge in queryset:
-            master.hard_merge(merge.slave)
-
-        # Finally, clear up the temporary model
-        queryset.delete()
-
-        return HttpResponseRedirect('/admin/astrobin/gear/')
-
-    hard_merge.short_description = 'Hard merge'
-
-
 class MountAdmin(admin.ModelAdmin):
-    list_display = ('id', 'make', 'name', 'master', 'updated', 'moderator_fixed')
+    list_display = ('id', 'make', 'name', 'master', 'updated',)
     list_editable = ('make', 'name',)
     search_fields = ('id', 'make', 'name',)
 
@@ -429,9 +328,6 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
 
 admin.site.register(Gear, GearAdmin)
 admin.site.register(GearUserInfo)
-admin.site.register(GearAssistedMerge, GearAssistedMergeAdmin)
-admin.site.register(GearMakeAutoRename)
-admin.site.register(GearHardMergeRedirect)
 admin.site.register(Telescope)
 admin.site.register(Mount, MountAdmin)
 admin.site.register(Camera)
