@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from astrobin_apps_equipment.models import EquipmentItem, Sensor
 
-class CameraType(Enum):
+class CameraType:
     DEDICATED_DEEP_SKY = 'DEDICATED_DEEP_SKY'
     DSLR_MIRRORLESS = 'DSLR_MIRRORLESS'
     GUIDER_PLANETARY = 'GUIDER_PLANETARY'

@@ -32,15 +32,17 @@ class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
 
         validated_data['edit_proposal_by'] = self.context['request'].user
         validated_data['edit_proposal_ip'] = self.context['request'].META.get("REMOTE_ADDR")
-        validated_data['edit_proposal_original_properties'] = \
-            'name=%s,image=%s,type=%s,sensor=%s,cooled=%s,max_cooling=%s,back_focus=%s' % (
-                target.name.replace('=', '\='),
-                target.image if target.image else "",
-                target.type,
-                str(target.sensor.pk if target.sensor else ""),
-                str(target.cooled),
-                str(target.max_cooling) if target.max_cooling else "",
-                str(target.back_focus) if target.back_focus else ""
-            )
+
+        original_properties = {
+            'name': target.name.replace('=', '\='),
+            'image': target.image,
+        }
+
+        if self.get_original_properties:
+            original_properties.update(self.get_original_properties(target))
+
+        validated_data['edit_proposal_original_properties'] = ','.join([
+            '%s=%s' % (str(x), y if y else '') for x, y in original_properties.items()
+        ])
 
         return super(EquipmentItemEditProposalSerializer, self).create(validated_data)

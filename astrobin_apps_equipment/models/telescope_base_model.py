@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from astrobin_apps_equipment.models import EquipmentItem
 
 
-class TelescopeType(Enum):
+class TelescopeType:
     REFRACTOR_ACHROMATIC = 'REFRACTOR_ACHROMATIC'
     REFRACTOR_SEMI_APOCHROMATIC = 'REFRACTOR_SEMI_APOCHROMATIC'
     REFRACTOR_APOCHROMATIC = 'REFRACTOR_APOCHROMATIC'
@@ -72,16 +72,8 @@ class TelescopeBaseModel(EquipmentItem):
         choices=TELESCOPE_TYPES,
     )
 
-    min_aperture = models.DecimalField(
-        verbose_name=_("Min. aperture (mm)"),
-        null=True,
-        blank=True,
-        max_digits=8,
-        decimal_places=2,
-    )
-
-    max_aperture = models.DecimalField(
-        verbose_name=_("Max. aperture (mm)"),
+    aperture = models.DecimalField(
+        verbose_name=_("Aperture (mm)"),
         null=True,
         blank=True,
         max_digits=8,

@@ -280,8 +280,6 @@ class MigratableItemMixin:
         obj.migration_flag_moderator_lock = None
         obj.migration_flag_moderator_lock_timestamp = None
         obj.migration_flag_reviewer = None
-        obj.migration_flag_reviewer_lock = None
-        obj.migration_flag_reviewer_lock_timestamp = None
         obj.migration_flag_reviewer_decision = request.data.get('reason')
         obj.migration_flag_reviewer_rejection_comment = request.data.get('comment')
 

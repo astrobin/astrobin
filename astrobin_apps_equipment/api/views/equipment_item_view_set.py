@@ -138,8 +138,6 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             migration_flag_moderator_lock=None,
             migration_flag_moderator_lock_timestamp=None,
             migration_flag_reviewer=None,
-            migration_flag_reviewer_lock=None,
-            migration_flag_reviewer_lock_timestamp=None,
             migration_flag_reviewer_decision='REJECTED_BAD_MIGRATION_TARGET',
             migration_flag_reviewer_rejection_comment=request.data.get('comment')
         )

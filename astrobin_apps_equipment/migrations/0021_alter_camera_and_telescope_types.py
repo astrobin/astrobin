@@ -21,16 +21,16 @@ class Migration(migrations.Migration):
             name='type',
             field=models.CharField(
                 choices=[
-                    (astrobin_apps_equipment.models.camera_base_model.CameraType('DEDICATED_DEEP_SKY'),
+                    (astrobin_apps_equipment.models.camera_base_model.CameraType.DEDICATED_DEEP_SKY,
                      'Dedicated deep-sky camera'),
-                    (astrobin_apps_equipment.models.camera_base_model.CameraType('DSLR_MIRRORLESS'),
+                    (astrobin_apps_equipment.models.camera_base_model.CameraType.DSLR_MIRRORLESS,
                      'General purpose DSLR or mirrorless camera'),
-                    (astrobin_apps_equipment.models.camera_base_model.CameraType('GUIDER_PLANETARY'),
+                    (astrobin_apps_equipment.models.camera_base_model.CameraType.GUIDER_PLANETARY,
                      'Guider/Planetary camera'),
-                    (astrobin_apps_equipment.models.camera_base_model.CameraType('VIDEO'),
+                    (astrobin_apps_equipment.models.camera_base_model.CameraType.VIDEO,
                      'General purpose video camera'),
-                    (astrobin_apps_equipment.models.camera_base_model.CameraType('FILM'), 'Film camera'),
-                    (astrobin_apps_equipment.models.camera_base_model.CameraType('OTHER'), 'Other')
+                    (astrobin_apps_equipment.models.camera_base_model.CameraType.FILM, 'Film camera'),
+                    (astrobin_apps_equipment.models.camera_base_model.CameraType.OTHER, 'Other')
                 ],
                 max_length=64,
                 verbose_name='Type'
@@ -41,17 +41,14 @@ class Migration(migrations.Migration):
             name='type',
             field=models.CharField(
                 choices=[
-                    (astrobin_apps_equipment.models.camera_base_model.CameraType(
-                        'DEDICATED_DEEP_SKY'), 'Dedicated deep-sky camera'),
-                    (astrobin_apps_equipment.models.camera_base_model.CameraType(
-                        'DSLR_MIRRORLESS'), 'General purpose DSLR or mirrorless camera'),
-                    (astrobin_apps_equipment.models.camera_base_model.CameraType(
-                        'GUIDER_PLANETARY'), 'Guider/Planetary camera'),
-                    (astrobin_apps_equipment.models.camera_base_model.CameraType('VIDEO'),
+                    (astrobin_apps_equipment.models.camera_base_model.CameraType.DEDICATED_DEEP_SKY, 'Dedicated deep-sky camera'),
+                    (astrobin_apps_equipment.models.camera_base_model.CameraType.DSLR_MIRRORLESS, 'General purpose DSLR or mirrorless camera'),
+                    (astrobin_apps_equipment.models.camera_base_model.CameraType.GUIDER_PLANETARY, 'Guider/Planetary camera'),
+                    (astrobin_apps_equipment.models.camera_base_model.CameraType.VIDEO,
                      'General purpose video camera'),
-                    (astrobin_apps_equipment.models.camera_base_model.CameraType('FILM'),
+                    (astrobin_apps_equipment.models.camera_base_model.CameraType.FILM,
                      'Film camera'),
-                    (astrobin_apps_equipment.models.camera_base_model.CameraType('OTHER'),
+                    (astrobin_apps_equipment.models.camera_base_model.CameraType.OTHER,
                      'Other')
                 ],
                 max_length=64,
@@ -61,61 +58,37 @@ class Migration(migrations.Migration):
             model_name='telescope',
             name='type',
             field=models.CharField(choices=[
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'REFRACTOR_ACHROMATIC'), 'Refractor: achromatic'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'REFRACTOR_SEMI_APOCHROMATIC'), 'Refractor: semi-apochromatic'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'REFRACTOR_APOCHROMATIC'), 'Refractor: apochromatic'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'REFRACTOR_NON_ACHROMATIC_GALILEAN'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.REFRACTOR_ACHROMATIC, 'Refractor: achromatic'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.REFRACTOR_SEMI_APOCHROMATIC, 'Refractor: semi-apochromatic'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.REFRACTOR_APOCHROMATIC, 'Refractor: apochromatic'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.REFRACTOR_NON_ACHROMATIC_GALILEAN,
                  'Refractor: non-achromatic Galilean'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'REFRACTOR_NON_ACHROMATIC_KEPLERIAN'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.REFRACTOR_NON_ACHROMATIC_KEPLERIAN,
                  'Refractor: non-achromatic Keplerian'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'REFRACTOR_SUPERACHROMAT'), 'Refractor: superachromat'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'REFLECTOR_DALL_KIRKHAM'), 'Reflector: Dall-Kirkham'), (
-                    astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                        'REFLECTOR_NASMYTH'), 'Reflector: Nasmyth'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'REFLECTOR_RITCHEY_CHRETIEN'), 'Reflector: Ritchey Chretien'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'REFLECTOR_GREGORIAN'), 'Reflector: Gregorian'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'REFLECTOR_HERSCHELLIAN'), 'Reflector: Herschellian'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'REFLECTOR_NEWTONIAN'), 'Reflector: Newtonian'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'CATADIOPTRIC_ARGUNOV_CASSEGRAIN'), 'Catadioptric: Argunov-Cassegrain'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'CATADIOPTRIC_KLEVTSOV_CASSEGRAIN'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.REFRACTOR_SUPERACHROMAT, 'Refractor: superachromat'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.REFLECTOR_DALL_KIRKHAM, 'Reflector: Dall-Kirkham'), (
+                    astrobin_apps_equipment.models.telescope_base_model.TelescopeType.REFLECTOR_NASMYTH, 'Reflector: Nasmyth'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.REFLECTOR_RITCHEY_CHRETIEN, 'Reflector: Ritchey Chretien'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.REFLECTOR_GREGORIAN, 'Reflector: Gregorian'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.REFLECTOR_HERSCHELLIAN, 'Reflector: Herschellian'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.REFLECTOR_NEWTONIAN, 'Reflector: Newtonian'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.CATADIOPTRIC_ARGUNOV_CASSEGRAIN, 'Catadioptric: Argunov-Cassegrain'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.CATADIOPTRIC_KLEVTSOV_CASSEGRAIN,
                  'Catadioptric: Klevtsov-Cassegrain'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'CATADIOPTRIC_LURIE_HOUGHTON'), 'Catadioptric: Lurie-Houghton'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'CATADIOPTRIC_MAKSUTOV'), 'Catadioptric: Maksutov'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'CATADIOPTRIC_MAKSUTOV_CASSEGRAIN'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.CATADIOPTRIC_LURIE_HOUGHTON, 'Catadioptric: Lurie-Houghton'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.CATADIOPTRIC_MAKSUTOV, 'Catadioptric: Maksutov'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.CATADIOPTRIC_MAKSUTOV_CASSEGRAIN,
                  'Catadioptric: Maksutov-Cassegrain'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'CATADIOPTRIC_MAKSUTOV_CASSEGRAIN'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.CATADIOPTRIC_MAKSUTOV_CASSEGRAIN,
                  'Catadioptric: modified Dall-Kirkham'), (
-                    astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                        'CATADIOPTRIC_MODIFIED_DALL_KIRKHAM'), 'Catadioptric: Schmidt camera'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'CATADIOPTRIC_SCHMIDT_CASSEGRAIN'), 'Catadioptric: Schmidt-Cassegrain'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'CATADIOPTRIC_ACF_SCHMIDT_CASSEGRAIN'),
+                    astrobin_apps_equipment.models.telescope_base_model.TelescopeType.CATADIOPTRIC_MODIFIED_DALL_KIRKHAM, 'Catadioptric: Schmidt camera'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.CATADIOPTRIC_SCHMIDT_CASSEGRAIN, 'Catadioptric: Schmidt-Cassegrain'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.CATADIOPTRIC_ACF_SCHMIDT_CASSEGRAIN,
                  'Catadioptric: ACF Schmidt-Cassegrain'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'CATADIOPTRIC_ROWE_ACKERMAN_SCHMIDT'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.CATADIOPTRIC_ROWE_ACKERMAN_SCHMIDT,
                  'Catadioptric: Rowe-Atkinson Schmidt astrograph'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'CAMERA_LENS'), 'Camera lens'),
-                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType(
-                    'BINOCULARS'), 'Binoculars')
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.CAMERA_LENS, 'Camera lens'),
+                (astrobin_apps_equipment.models.telescope_base_model.TelescopeType.BINOCULARS, 'Binoculars')
             ],
                 max_length=64,
                 verbose_name='Type'),
