@@ -58,9 +58,3 @@ class EquipmentItemListing(SafeDeleteModel):
 
     def __str__(self):
         return "%s by %s" % (self.name, self.retailer)
-
-    class Meta:
-        unique_together = (
-            'name',
-            'retailer',
-        )
