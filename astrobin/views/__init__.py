@@ -2,7 +2,10 @@ import csv
 import logging
 import operator
 import os
-import urllib.request, urllib.error, urllib.parse
+import urllib.error
+import urllib.parse
+import urllib.request
+from functools import reduce
 
 import flickrapi
 import simplejson
@@ -16,7 +19,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.exceptions import MultipleObjectsReturned
 from django.core.paginator import Paginator, InvalidPage
-from django.urls import reverse
 from django.db.models import Q
 from django.forms.models import inlineformset_factory
 from django.http import Http404, HttpResponse, HttpResponseBadRequest
@@ -27,6 +29,7 @@ from django.shortcuts import render
 from django.template import loader, RequestContext
 from django.template.defaultfilters import filesizeformat
 from django.template.loader import render_to_string
+from django.urls import reverse
 from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.translation import ngettext as _n
 from django.utils.translation import ugettext as _
@@ -70,7 +73,6 @@ from common.services import AppRedirectionService
 from common.services.caching_service import CachingService
 from common.services.constellations_service import ConstellationsService
 from toggleproperties.models import ToggleProperty
-from functools import reduce
 
 log = logging.getLogger('apps')
 
@@ -1195,13 +1197,15 @@ def user_page(request, username):
         # ACQUIRED #
         ############
         elif subsection == 'acquired':
-            lad_sql = 'SELECT date FROM astrobin_acquisition ' \
-                      'WHERE date IS NOT NULL AND image_id = astrobin_image.id ' \
-                      'ORDER BY date DESC ' \
-                      'LIMIT 1'
+            last_acquisition_date_sql = 'SELECT date FROM astrobin_acquisition ' \
+                                        'WHERE date IS NOT NULL AND image_id = astrobin_image.id ' \
+                                        'ORDER BY date DESC ' \
+                                        'LIMIT 1'
             qs = qs \
                 .filter(acquisition__isnull=False) \
-                .extra(select={'last_acquisition_date': lad_sql}, order_by=['-last_acquisition_date']) \
+                .extra(
+                select={'last_acquisition_date': last_acquisition_date_sql},
+                order_by=['-last_acquisition_date', '-published']) \
                 .distinct()
 
         ########
