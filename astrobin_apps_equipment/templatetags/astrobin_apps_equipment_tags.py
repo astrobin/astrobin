@@ -36,6 +36,9 @@ def equipment_item_listings(gear, country):
 
 @register.simple_tag
 def equipment_listing_url_with_utm_tags(url):
+    if 'utm_' in url:
+        return url
+
     tags_separator = '?'
     if tags_separator in url:
         tags_separator = '&'
