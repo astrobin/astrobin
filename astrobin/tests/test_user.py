@@ -175,7 +175,7 @@ class UserTest(TestCase):
         image1.delete()
         image2.delete()
 
-        # Test "acquisition time" sorting
+        # Test "acquisition" sorting
         image1 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE1")
         image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
         acquisition1 = Acquisition.objects.create(image=image1, date=today)
