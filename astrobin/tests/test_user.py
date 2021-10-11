@@ -292,26 +292,50 @@ class UserTest(TestCase):
         image6.delete()
 
         # Test "year" sub-section
+        image0 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE0")
         image1 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE1")
         image2 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE2")
         image3 = self._do_upload('astrobin/fixtures/test.jpg', "IMAGE3")
 
         today = date.today()
         one_year_ago = datetime(today.year - 1, today.month, today.day, 0, 0, 0)
+        acquisition0 = Acquisition.objects.create(image=image0, date=today)
         acquisition1 = Acquisition.objects.create(image=image1, date=today)
         acquisition2 = Acquisition.objects.create(
             image=image2, date=one_year_ago)
 
+        image0.published = datetime.now() - timedelta(1)
+        image0.save()
+
+        image1.published = datetime.now()
+        image1.save()
+
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=year")
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, image0.title)
         self.assertContains(response, image1.title)
+        self.assertTrue(
+            response.content.decode('utf-8').find("IMAGE1") < response.content.decode('utf-8').find("IMAGE0"))
         self.assertNotContains(response, image2.title)
         self.assertNotContains(response, image3.title)
+
+        # Check secondary sorting by '-published'
+        image0.published = datetime.now()
+        image0.save()
+
+        image1.published = datetime.now() - timedelta(1)
+        image1.save()
+
+        response = self.client.get(
+            reverse('user_page', args=('user',)) + "?sub=year")
+        self.assertTrue(
+            response.content.decode('utf-8').find("IMAGE1") > response.content.decode('utf-8').find("IMAGE0"))
 
         response = self.client.get(
             reverse('user_page', args=('user',)) + "?sub=year&active=%d" % today.year)
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, image0.title)
         self.assertContains(response, image1.title)
         self.assertNotContains(response, image2.title)
         self.assertNotContains(response, image3.title)
@@ -330,8 +354,11 @@ class UserTest(TestCase):
         self.assertNotContains(response, image2.title)
         self.assertContains(response, image3.title)
 
+        acquisition0.delete()
         acquisition1.delete()
         acquisition2.delete()
+
+        image0.delete()
         image1.delete()
         image2.delete()
         image3.delete()
