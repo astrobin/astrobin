@@ -1212,14 +1212,14 @@ def user_page(request, username):
         # YEAR #
         ########
         elif subsection == 'year':
-            acq = Acquisition.objects.filter(
+            acquisitions = Acquisition.objects.filter(
                 image__user=user,
                 image__is_wip=False,
                 image__deleted=None)
-            if acq:
-                years = sorted(list(set([a.date.year for a in acq if a.date])), reverse=True)
-                nd = _("No date specified")
-                menu = [(str(x), str(x)) for x in years] + [(0, nd)]
+            if acquisitions:
+                distinct_years = sorted(list(set([a.date.year for a in acquisitions if a.date])), reverse=True)
+                no_date_message = _("No date specified")
+                menu = [(str(year), str(year)) for year in distinct_years] + [('0', no_date_message)]
 
                 if active == '0':
                     qs = qs.filter(
@@ -1233,12 +1233,11 @@ def user_page(request, username):
                         )) &
                         Q(acquisition=None) | Q(acquisition__date=None)).distinct()
                 else:
-                    if active is None:
-                        if years:
-                            active = str(years[0])
+                    if active is None and distinct_years:
+                            active = str(distinct_years[0])
 
                     if active:
-                        qs = qs.filter(acquisition__date__year=active).distinct()
+                        qs = qs.filter(acquisition__date__year=active).order_by('-published').distinct()
 
         ########
         # GEAR #
@@ -1247,12 +1246,12 @@ def user_page(request, username):
             telescopes = profile.telescopes.all()
             cameras = profile.cameras.all()
 
-            nd = _("No imaging telescopes or lenses, or no imaging cameras specified")
+            no_date_message = _("No imaging telescopes or lenses, or no imaging cameras specified")
             gi = _("Gear images")
 
             menu += [(x.id, str(x)) for x in telescopes]
             menu += [(x.id, str(x)) for x in cameras]
-            menu += [(0, nd)]
+            menu += [(0, no_date_message)]
             menu += [(-1, gi)]
 
             if active == '0':
