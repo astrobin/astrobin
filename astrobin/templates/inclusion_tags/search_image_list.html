@@ -11,7 +11,7 @@
 {% if paginator.object_list %}
 
     {% if search_domain == None or search_domain == 'i' %}
-        {% if equipment_brand_listing %}
+        {% if equipment_brand_listings %}
             <div class="equipment-listing-search-result alert alert-info">
                 <a class="close" data-toggle="modal" title="{% trans "Remove ads" %}"
                         {% if request.user|can_remove_ads %}
@@ -23,19 +23,49 @@
                     &times;
                 </a>
 
-                <span class="text">
-                    <i class="icon-bullhorn"></i>
-                    {% blocktrans trimmed with brand=equipment_brand_listing.brand retailer=equipment_brand_listing.retailer %}
-                        Interested in <strong>{{ brand }}</strong>? Our sponsor
-                        <strong>{{ retailer }}</strong> sells this brand!
-                    {% endblocktrans %}
-                </span>
+                {% with equipment_brand_listings_count=equipment_brand_listings|length %}
+                    {% if equipment_brand_listings_count == 1 %}
+                        <span class="text">
+                            <i class="icon-bullhorn"></i>
+                            {% blocktrans trimmed with brand=equipment_brand_listings.0.brand retailer=equipment_brand_listings.0.retailer %}
+                                Interested in <strong>{{ brand }}</strong>? Our sponsor
+                                <strong>{{ retailer }}</strong> sells this brand!
+                            {% endblocktrans %}
+                        </span>
 
-                {% with url=equipment_brand_listing.url %}
-                    <a class="btn btn-primary" href="{% equipment_listing_url_with_utm_tags url %}"
-                       onclick="getOutboundLink('{{ url }}', '{{ request.path }}')" target="_blank">
-                        {% trans "Shop now" %}
-                    </a>
+                        {% with url=equipment_brand_listing.0.url %}
+                            <a class="btn btn-primary" href="{% equipment_listing_url_with_utm_tags url %}"
+                               onclick="getOutboundLink('{{ url }}', '{{ request.path }}')" target="_blank">
+                                <i class="icon-shopping-cart"></i>
+                                {% trans "Shop now" %}
+                            </a>
+                        {% endwith %}
+                    {% elif equipment_brand_listings_count > 1 %}
+                        <span class="text">
+                            <i class="icon-bullhorn"></i>
+                            {% blocktrans trimmed with brand=equipment_brand_listings.0.brand %}
+                                Interested in <strong>{{ brand }}</strong>? Our sponsors sells this brand!
+                            {% endblocktrans %}
+                        </span>
+
+                        <div class="btn-group">
+                            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="icon-shopping-cart"></i>
+                                {% trans "Shop now" %}
+                                <span class="caret hidden-phone"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% for listing in equipment_brand_listings %}
+                                    <li>
+                                        <a href="{% equipment_listing_url_with_utm_tags listing.url %}"
+                                           onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')" target="_blank">
+                                            {{ listing.retailer }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
                 {% endwith %}
             </div>
         {% endif %}
