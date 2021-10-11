@@ -4041,8 +4041,13 @@ table.api-examples {
     align-items: center;
     position: relative;
 
-    .text i {
+    .text i,
+    .btn i {
       margin-right: .5rem;
+    }
+
+    .btn {
+      margin-left: 1rem;
     }
   }
 }
