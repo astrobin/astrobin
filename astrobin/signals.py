@@ -196,15 +196,29 @@ post_softdelete.connect(image_post_delete, sender=Image)
 post_delete.connect(image_post_delete, sender=Image)
 
 
+def imagerevision_pre_save(sender, instance, **kwargs):
+    if instance.pk:
+        pre_save_instance = get_object_or_None(ImageRevision.uploads_in_progress, pk=instance.pk)
+        if pre_save_instance and not instance.uploader_in_progress:
+            cache.set("image_revision.%s.just_completed_upload" % instance.pk, True, 10)
+
+pre_save.connect(imagerevision_pre_save, sender=ImageRevision)
+
+
 def imagerevision_post_save(sender, instance, created, **kwargs):
-    if created and not instance.image.is_wip and not instance.skip_notifications:
+    wip = instance.image.is_wip
+    skip = instance.skip_notifications
+    uploading = instance.uploader_in_progress
+    just_completed_upload = cache.get("image_revision.%s.just_completed_upload" % instance.pk)
+
+    UserService(instance.image.user).clear_gallery_image_list_cache()
+
+    if (created and not wip and not skip and not uploading) or just_completed_upload:
         push_notification_for_new_image_revision.apply_async(args=(instance.pk,), countdown=10)
         add_story(instance.image.user,
                   verb='VERB_UPLOADED_REVISION',
                   action_object=instance,
                   target=instance.image)
-
-    UserService(instance.image.user).clear_gallery_image_list_cache()
 
 
 post_save.connect(imagerevision_post_save, sender=ImageRevision)
