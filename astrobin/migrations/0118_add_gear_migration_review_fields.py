@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('astrobin', '0116_add_gear_migration_moderation_lock_fields'),
+        ('astrobin', '0117_add_gear_migration_moderation_lock_fields'),
     ]
 
     operations = [
