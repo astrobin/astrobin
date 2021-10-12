@@ -1375,7 +1375,7 @@ class ImageDownloadView(View):
             background = PILImage.open(local_hd.name)
             foreground = PILImage.open(local_jpg.name)
             background.paste(foreground, (0, 0), foreground)
-            background.save(local_jpg.name)
+            background.save(local_jpg.name, keep_icc_profile=True)
 
             result_path: str = f'tmp/{solution.pixinsight_serial_number}.jpg'
 
