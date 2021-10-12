@@ -1,9 +1,6 @@
 from django.test import TestCase
 
-from astrobin.tests.generators import Generators
-from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import equipment_brand_listings, \
-    equipment_listing_url_with_utm_tags
-from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
+from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import equipment_listing_url_with_utm_tags
 
 
 class TestTagEquipmentListingUrlWithUtmTags(TestCase):
@@ -27,3 +24,7 @@ class TestTagEquipmentListingUrlWithUtmTags(TestCase):
             'https://www.example.com/search?q=foo&utm_source=astrobin&utm_medium=link&utm_campaign=webshop-integration',
             url
         )
+
+    def test_url_with_utm_params(self):
+        url = equipment_listing_url_with_utm_tags('https://www.example.com/search?q=foo&utm_source=foo')
+        self.assertEqual('https://www.example.com/search?q=foo&utm_source=foo', url)

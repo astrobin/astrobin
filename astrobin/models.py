@@ -2247,8 +2247,8 @@ class UserProfile(SafeDeleteModel):
 
     default_gallery_sorting = models.SmallIntegerField(
         choices=(
-            (0, _("Publication time")),
-            (1, _("Acquisition time")),
+            (0, _("Publication")),
+            (1, _("Acquisition")),
             (2, _("Subject type")),
             (3, _("Year")),
             (4, _("Gear")),

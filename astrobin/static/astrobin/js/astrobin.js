@@ -1006,6 +1006,48 @@ astrobin_common = {
         $reportAbuseButton.addClass('running');
     },
 
+    init_action_stream_hit_counter: function () {
+        const $window = $(window);
+        let debounce;
+
+        // During the same session, don't try to record the same hit twice.
+        window.astrobinProcessedActstreamHits = [];
+
+        const isInViewport = function (el) {
+            const elementTop = $(el).offset().top;
+            const elementBottom = elementTop + $(el).outerHeight();
+
+            const viewportTop = $(window).scrollTop();
+            const viewportBottom = viewportTop + $(window).height();
+
+            return elementBottom > viewportTop && elementTop < viewportBottom;
+        };
+
+        if($('.activity-actions').length > 0) {
+            $window.on('scroll', function () {
+                if (!!debounce) {
+                    clearTimeout(debounce);
+                }
+
+                debounce = setTimeout(function () {
+                    debounce = null;
+                    $('.activity-actions .action .astrobin-image').each(function (index, image) {
+                        const id = $(image).data('id');
+
+                        if (window.astrobinProcessedActstreamHits.indexOf(id) === -1 && isInViewport(image)) {
+                            window.astrobinProcessedActstreamHits.push(id);
+                            $.ajax({
+                               url: `/api/v2/images/image/${id}/hit/`,
+                               type: 'PUT',
+                               timeout: 3000
+                           });
+                       }
+                    });
+                }, 1000);
+            });
+        }
+    },
+
     init: function (config) {
         /* Init */
         $.extend(true, astrobin_common.config, config);
@@ -1026,6 +1068,7 @@ astrobin_common = {
 
         astrobin_common.init_timestamps();
         astrobin_common.init_page_loading_indicator();
+        astrobin_common.init_action_stream_hit_counter();
 
         if (window.innerWidth >= 980) {
             $("select:not([multiple])").select2({theme: "flat"});

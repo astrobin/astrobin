@@ -2,7 +2,10 @@ import csv
 import logging
 import operator
 import os
-import urllib.request, urllib.error, urllib.parse
+import urllib.error
+import urllib.parse
+import urllib.request
+from functools import reduce
 
 import flickrapi
 import simplejson
@@ -16,7 +19,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.exceptions import MultipleObjectsReturned
 from django.core.paginator import Paginator, InvalidPage
-from django.urls import reverse
 from django.db.models import Q
 from django.forms.models import inlineformset_factory
 from django.http import Http404, HttpResponse, HttpResponseBadRequest
@@ -27,6 +29,7 @@ from django.shortcuts import render
 from django.template import loader, RequestContext
 from django.template.defaultfilters import filesizeformat
 from django.template.loader import render_to_string
+from django.urls import reverse
 from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.translation import ngettext as _n
 from django.utils.translation import ugettext as _
@@ -70,7 +73,6 @@ from common.services import AppRedirectionService
 from common.services.caching_service import CachingService
 from common.services.constellations_service import ConstellationsService
 from toggleproperties.models import ToggleProperty
-from functools import reduce
 
 log = logging.getLogger('apps')
 
@@ -1195,27 +1197,29 @@ def user_page(request, username):
         # ACQUIRED #
         ############
         elif subsection == 'acquired':
-            lad_sql = 'SELECT date FROM astrobin_acquisition ' \
-                      'WHERE date IS NOT NULL AND image_id = astrobin_image.id ' \
-                      'ORDER BY date DESC ' \
-                      'LIMIT 1'
+            last_acquisition_date_sql = 'SELECT date FROM astrobin_acquisition ' \
+                                        'WHERE date IS NOT NULL AND image_id = astrobin_image.id ' \
+                                        'ORDER BY date DESC ' \
+                                        'LIMIT 1'
             qs = qs \
                 .filter(acquisition__isnull=False) \
-                .extra(select={'last_acquisition_date': lad_sql}, order_by=['-last_acquisition_date']) \
+                .extra(
+                select={'last_acquisition_date': last_acquisition_date_sql},
+                order_by=['-last_acquisition_date', '-published']) \
                 .distinct()
 
         ########
         # YEAR #
         ########
         elif subsection == 'year':
-            acq = Acquisition.objects.filter(
+            acquisitions = Acquisition.objects.filter(
                 image__user=user,
                 image__is_wip=False,
                 image__deleted=None)
-            if acq:
-                years = sorted(list(set([a.date.year for a in acq if a.date])), reverse=True)
-                nd = _("No date specified")
-                menu = [(str(x), str(x)) for x in years] + [(0, nd)]
+            if acquisitions:
+                distinct_years = sorted(list(set([a.date.year for a in acquisitions if a.date])), reverse=True)
+                no_date_message = _("No date specified")
+                menu = [(str(year), str(year)) for year in distinct_years] + [('0', no_date_message)]
 
                 if active == '0':
                     qs = qs.filter(
@@ -1229,12 +1233,11 @@ def user_page(request, username):
                         )) &
                         Q(acquisition=None) | Q(acquisition__date=None)).distinct()
                 else:
-                    if active is None:
-                        if years:
-                            active = str(years[0])
+                    if active is None and distinct_years:
+                            active = str(distinct_years[0])
 
                     if active:
-                        qs = qs.filter(acquisition__date__year=active).distinct()
+                        qs = qs.filter(acquisition__date__year=active).order_by('-published').distinct()
 
         ########
         # GEAR #
@@ -1243,12 +1246,12 @@ def user_page(request, username):
             telescopes = profile.telescopes.all()
             cameras = profile.cameras.all()
 
-            nd = _("No imaging telescopes or lenses, or no imaging cameras specified")
+            no_date_message = _("No imaging telescopes or lenses, or no imaging cameras specified")
             gi = _("Gear images")
 
             menu += [(x.id, str(x)) for x in telescopes]
             menu += [(x.id, str(x)) for x in cameras]
-            menu += [(0, nd)]
+            menu += [(0, no_date_message)]
             menu += [(-1, gi)]
 
             if active == '0':
@@ -2951,12 +2954,6 @@ def gear_by_make(request, make):
     }
 
     from astrobin.gear import CLASS_LOOKUP
-
-    try:
-        autorename = GearMakeAutoRename.objects.get(rename_from=make)
-        ret['make'] = autorename.rename_to
-    except:
-        pass
 
     if klass != Gear:
         klass = CLASS_LOOKUP[klass]

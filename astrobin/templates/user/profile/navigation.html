@@ -213,10 +213,10 @@
                     {% trans "Title" %}</a></li>
                 <li><a href="{% url 'user_page' requested_user.username %}{% query_string "public=,sub=uploaded" "staging,active" %}">
                     <i class="icon-upload-alt"></i>
-                    {% trans "Publication time" %}</a></li>
+                    {% trans "Publication" %}</a></li>
                 <li><a href="{% url 'user_page' requested_user.username %}{% query_string "public=,sub=acquired" "staging,active" %}">
-                    <i class="icon-time"></i>
-                    {% trans "Acquisition time" %}</a></li>
+                    <i class="icon-camera"></i>
+                    {% trans "Acquisition" %}</a></li>
                 <li><a href="{% url 'user_page' requested_user.username %}{% query_string "public=,sub=subject" "staging,active" %}">
                     <i class="icon-tags"></i>
                     {% trans "Subject type" %}</a></li>

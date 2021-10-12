@@ -151,20 +151,18 @@ def search_image_list(context, paginate=True, **kwargs):
     telescope = request.GET.get('telescope')
     camera = request.GET.get('camera')
     country = get_client_country_code(request)
-    equipment_brand_listing = None
+    equipment_brand_listings = None
 
     if telescope or camera or q:
-        listings = EquipmentBrandListing.objects \
+        equipment_brand_listings = EquipmentBrandListing.objects \
             .annotate(distance=TrigramDistance('brand__name', telescope or camera or q)) \
             .filter(distance__lte=.85, retailer__countries__icontains=country)
-        if listings.count() > 0:
-            equipment_brand_listing = listings[0]
 
     context.update({
         'paginate': paginate,
         'search_domain': context['request'].GET.get('d'),
         'sort': context['request'].GET.get('sort'),
-        'equipment_brand_listing': equipment_brand_listing
+        'equipment_brand_listings': equipment_brand_listings
     })
 
     return context

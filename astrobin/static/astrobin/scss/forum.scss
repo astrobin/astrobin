@@ -449,8 +449,17 @@ table.post th.post-avatar {
   margin-top: 40px;
   display: none;
 
-  li {
-    list-style: initial;
+  ul, ol {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+  }
+
+  ul li {
+    list-style: disc;
+  }
+
+  ol li {
+    list-style: decimal;
   }
 
   input, textarea, select {
