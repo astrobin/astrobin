@@ -4218,13 +4218,24 @@ form.edit-thumbnails {
   }
 }
 
+#page-loading-text {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  top: calc(50% + 2.5rem);
+  left: 0;
+  position: absolute;
+  font-size: 1.15rem;
+  color: $white;
+}
+
 #page-loading-indicator-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 0;
   height: 0;
-  background: #000;
+  background: $black;
   z-index: 999998;
   opacity: 0;
   transition: opacity .25s;

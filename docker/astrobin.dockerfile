@@ -25,6 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libfreetype6 libfreetype6-dev \
     liblcms2-dev \
     zlib1g-dev \
+    libcairo2 \
     libffi-dev \
     libssl-dev \
     libpq-dev \

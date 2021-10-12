@@ -32,6 +32,11 @@ def platesolving_machinery(context, target):
 
 
 @register.filter
+def is_basic_success_status(solution):
+    return solution is not None and solution.status >= SolverBase.SUCCESS
+
+
+@register.filter
 def is_advanced_success_status(solution):
     return solution is not None and solution.status == SolverBase.ADVANCED_SUCCESS
 
