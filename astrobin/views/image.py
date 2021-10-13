@@ -1,17 +1,26 @@
 import logging
+import os
 import re
+import time
 from functools import reduce
+from typing import Union, Optional
 
+import mimetypes
+
+import boto3
+import requests
 from braces.views import (
     JSONResponseMixin,
     LoginRequiredMixin,
 )
+from cairosvg import svg2png
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied, MultipleObjectsReturned
 from django.core.files.images import get_image_dimensions
+from django.core.files.temp import NamedTemporaryFile
 from django.db.models import Q
 from django.db.models.query import QuerySet
 from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest, HttpResponseForbidden, HttpResponse
@@ -31,6 +40,7 @@ from django.views.generic import (
 )
 from django.views.generic.base import View
 from django.views.generic.detail import SingleObjectMixin
+from PIL import Image as PILImage
 from silk.profiling.profiler import silk_profile
 
 from astrobin.enums import SubjectType
@@ -1285,3 +1295,108 @@ class ImageUploadUncompressedSource(ImageEditBaseView):
     def form_invalid(self, form):
         messages.error(self.request, form.errors["uncompressed_source_file"])
         return redirect(self.get_success_url())
+
+
+class ImageDownloadView(View):
+    def download(self, url):
+        response = requests.get(
+            url,
+            allow_redirects=True,
+            headers={'User-Agent': 'Mozilla/5.0'}
+        )
+        content_type = mimetypes.guess_type(os.path.basename(url))
+
+        ret = HttpResponse(response.content, content_type=content_type)
+        ret['Content-Disposition'] = 'inline; filename=' + os.path.basename(url)
+        return ret
+
+    def get(self, request, *args, **kwargs) -> HttpResponse:
+        id: Union[str, int] = self.kwargs.pop('id')
+        revision_label: str = self.kwargs.pop('revision_label')
+        version: str = self.kwargs.pop('version')
+
+        image: Image = ImageService.get_object(id, Image.objects_including_wip)
+        revision: Optional[ImageRevision] = None
+
+        if image is None:
+            raise Http404
+
+        if revision_label not in (None, 0, '0'):
+            try:
+                revision = ImageService(image).get_revision(revision_label)
+            except ImageRevision.DoesNotExist:
+                raise Http404
+
+        if version == 'original':
+            if request.user != image.user and not request.user.is_superuser:
+                return HttpResponseForbidden()
+            return self.download(revision.image_file.url if revision else image.image_file.url)
+
+        if version == 'basic_annotations':
+            return self.download(revision.solution.image_file.url if revision else image.solution.image_file.url)
+
+        if version == 'advanced_annotations':
+            solution: Solution = revision.solution if revision and revision.solution else image.solution
+
+            # Download SVG
+            response = requests.get(
+                f'{settings.MEDIA_URL}{solution.pixinsight_svg_annotation_hd}',
+                allow_redirects=True,
+                headers={'User-Agent': 'Mozilla/5.0'}
+            )
+            local_svg: NamedTemporaryFile = NamedTemporaryFile('w+b', suffix='.svg', delete=False)
+            for block in response.iter_content(1024 * 8):
+                if not block:
+                    break
+                local_svg.write(block)
+            local_svg.seek(0)
+            local_svg.close()
+
+            # Download HD thumbnail
+            thumbnail_url = image.thumbnail('hd', revision_label, sync=True)
+            response = requests.get(
+                thumbnail_url,
+                allow_redirects=True,
+                headers={'User-Agent': 'Mozilla/5.0'}
+            )
+            local_hd: NamedTemporaryFile = NamedTemporaryFile('w+b', delete=False)
+            for block in response.iter_content(1024 * 8):
+                if not block:
+                    break
+                local_hd.write(block)
+            local_hd.seek(0)
+            local_hd.close()
+
+            # Build image
+            local_result: NamedTemporaryFile = NamedTemporaryFile('w+b', suffix='.jpg', delete=False)
+            svg2png(url=local_svg.name, write_to=local_result.name)
+            local_result.seek(0)
+            local_result.close()
+
+            background = PILImage.open(local_hd.name)
+            foreground = PILImage.open(local_result.name)
+
+            icc_profile = background.info.get('icc_profile')
+            background.paste(foreground, (0, 0), foreground)
+            background.save(local_result.name, format='JPEG', icc_profile=icc_profile)
+
+            result_path: str = f'tmp/{solution.pixinsight_serial_number}-{int(time.time())}.jpg'
+
+            with open(local_result.name, 'rb') as result_file:
+                session = boto3.session.Session(
+                    aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+                    aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY
+                )
+                s3 = session.resource('s3')
+                s3.Bucket(settings.AWS_STORAGE_BUCKET_NAME).put_object(Key=result_path, Body=result_file)
+
+            response =  self.download(f'https://{settings.AWS_STORAGE_BUCKET_NAME}/{result_path}')
+
+            os.unlink(local_svg.name)
+            os.unlink(local_hd.name)
+            os.unlink(local_result.name)
+
+            return response
+
+        thumbnail_url = image.thumbnail(version, revision_label, sync=True)
+        return self.download(thumbnail_url)

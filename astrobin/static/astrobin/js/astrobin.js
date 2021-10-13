@@ -638,18 +638,23 @@ astrobin_common = {
     },
 
     init_page_loading_indicator: function () {
-        var $pageLoader = $('#page-loading-indicator');
-        var $pageLoaderBackdrop = $('#page-loading-indicator-backdrop');
+        var $pageLoadingIndicator = $('#page-loading-indicator');
+        var $pageLoadingText = $('#page-loading-text');
+        var $pageLoadingBackdrop = $('#page-loading-indicator-backdrop');
 
         $(window).bind("pagehide", function () {
             setTimeout(function () {
-                $pageLoaderBackdrop.css('width', 0);
-                $pageLoaderBackdrop.css('height', 0);
-                $pageLoaderBackdrop.css('opacity', 0);
+                $pageLoadingBackdrop.css('width', 0);
+                $pageLoadingBackdrop.css('height', 0);
+                $pageLoadingBackdrop.css('opacity', 0);
 
-                $pageLoader.css('width', 0);
-                $pageLoader.css('height', 0);
-                $pageLoader.css('opacity', 0);
+                $pageLoadingIndicator.css('width', 0);
+                $pageLoadingIndicator.css('height', 0);
+                $pageLoadingIndicator.css('opacity', 0);
+
+                $pageLoadingText.css('width', 0);
+                $pageLoadingText.css('height', 0);
+                $pageLoadingText.css('opacity', 0);
             }, 10);
         });
 
@@ -675,7 +680,6 @@ astrobin_common = {
                 return;
             }
 
-
             // Skip CTRL/Meta clicks
             if (event.metaKey || event.ctrlKey) {
                 return;
@@ -686,13 +690,20 @@ astrobin_common = {
                 return;
             }
 
-            $pageLoaderBackdrop.css('width', '100%');
-            $pageLoaderBackdrop.css('height', '100%');
-            $pageLoaderBackdrop.css('opacity', .65);
+            $pageLoadingBackdrop.css('width', '100%');
+            $pageLoadingBackdrop.css('height', '100%');
+            $pageLoadingBackdrop.css('opacity', .65);
 
-            $pageLoader.css('width', '100%');
-            $pageLoader.css('height', '100%');
-            $pageLoader.css('opacity', 1);
+            $pageLoadingIndicator.css('width', '100%');
+            $pageLoadingIndicator.css('height', '100%');
+            $pageLoadingIndicator.css('opacity', 1);
+
+            if ($(this).data('loading-text')) {
+                $pageLoadingText.html($(this).data('loading-text'));
+                $pageLoadingText.css('width', '100%');
+                $pageLoadingText.css('height', '100%');
+                $pageLoadingText.css('opacity', 1);
+            }
 
             return true;
         });
