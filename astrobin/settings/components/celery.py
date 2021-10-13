@@ -1,6 +1,5 @@
 import os
 
-from celery.schedules import crontab
 from kombu import Exchange, Queue
 
 
