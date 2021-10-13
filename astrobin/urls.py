@@ -121,8 +121,8 @@ from astrobin.views import (
 )
 from astrobin.views.contact import ContactRedirectView
 from astrobin.views.forums import LatestTopicsView
-from astrobin.views.threaded_messages import messages_compose
 from astrobin.views.profile.download_data_view import DownloadDataView
+from astrobin.views.threaded_messages import messages_compose
 
 admin.autodiscover()
 
@@ -472,6 +472,8 @@ urlpatterns += [
     url(r'^edit/revision/(?P<id>\w+)/$',
         never_cache(image_views.ImageEditRevisionView.as_view()), name='image_edit_revision'),
     url(r'^promote/(?P<id>\w+)/$', never_cache(image_views.ImagePromoteView.as_view()), name='image_promote'),
+    url(r'^download/(?P<id>\w+)/(?P<revision_label>\w+)/(?P<version>\w+)/$',
+        never_cache(image_views.ImageDownloadView.as_view()), name='image_download'),
     url(r'^upload/$', image_upload, name='image_upload'),
     url(r'^upload/process/$', image_upload_process, name='image_upload_process'),
     url(r'^upload/revision/process/$', image_revision_upload_process, name='image_revision_upload_process'),
