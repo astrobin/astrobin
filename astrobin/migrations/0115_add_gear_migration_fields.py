@@ -9,7 +9,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
     dependencies = [
         ('contenttypes', '0002_remove_content_type_name'),
-        ('astrobin', '0114_'),
+        ('astrobin', '0114_remove_word_time_from_publication_and_acquisition_sorting'),
     ]
 
     operations = [

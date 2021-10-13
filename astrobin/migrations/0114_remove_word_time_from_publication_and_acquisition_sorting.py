@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('astrobin', '0114_remove_word_time_from_publication_and_acquisition_sorting'),
+        ('astrobin', '0113_add_gearuserinfo_modded'),
     ]
 
     operations = [
