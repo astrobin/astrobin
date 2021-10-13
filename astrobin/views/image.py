@@ -1,6 +1,7 @@
 import logging
 import os
 import re
+import time
 from functools import reduce
 from typing import Union, Optional
 
@@ -1367,31 +1368,33 @@ class ImageDownloadView(View):
             local_hd.close()
 
             # Build image
-            local_jpg: NamedTemporaryFile = NamedTemporaryFile('w+b', suffix='.jpg', delete=False)
-            svg2png(url=local_svg.name, write_to=local_jpg.name)
-            local_jpg.seek(0)
-            local_jpg.close()
+            local_result: NamedTemporaryFile = NamedTemporaryFile('w+b', suffix='.jpg', delete=False)
+            svg2png(url=local_svg.name, write_to=local_result.name)
+            local_result.seek(0)
+            local_result.close()
 
             background = PILImage.open(local_hd.name)
-            foreground = PILImage.open(local_jpg.name)
+            foreground = PILImage.open(local_result.name)
+
+            icc_profile = background.info.get('icc_profile')
             background.paste(foreground, (0, 0), foreground)
-            background.save(local_jpg.name, keep_icc_profile=True)
+            background.save(local_result.name, format='JPEG', icc_profile=icc_profile)
 
-            result_path: str = f'tmp/{solution.pixinsight_serial_number}.jpg'
+            result_path: str = f'tmp/{solution.pixinsight_serial_number}-{int(time.time())}.jpg'
 
-            with open(local_jpg.name, 'rb') as png_file:
+            with open(local_result.name, 'rb') as result_file:
                 session = boto3.session.Session(
                     aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
                     aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY
                 )
                 s3 = session.resource('s3')
-                s3.Bucket(settings.AWS_STORAGE_BUCKET_NAME).put_object(Key=result_path, Body=png_file)
+                s3.Bucket(settings.AWS_STORAGE_BUCKET_NAME).put_object(Key=result_path, Body=result_file)
 
             response =  self.download(f'https://{settings.AWS_STORAGE_BUCKET_NAME}/{result_path}')
 
             os.unlink(local_svg.name)
             os.unlink(local_hd.name)
-            os.unlink(local_jpg.name)
+            os.unlink(local_result.name)
 
             return response
 
