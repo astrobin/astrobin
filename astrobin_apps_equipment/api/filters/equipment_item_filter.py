@@ -10,7 +10,9 @@ class EquipmentItemFilter(FilterSet):
         condition = args[0]
 
         if condition:
-            queryset = queryset.filter(reviewer_decision__isnull=True).exclude(created_by=self.request.user)
+            queryset = queryset.filter(reviewer_decision__isnull=True)
+            if self.request.user.is_authenticated:
+                queryset = queryset.exclude(created_by=self.request.user)
 
         return queryset
 
