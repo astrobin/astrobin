@@ -213,7 +213,10 @@ def imagerevision_post_save(sender, instance, created, **kwargs):
 
     UserService(instance.image.user).clear_gallery_image_list_cache()
 
-    if (created and not wip and not skip and not uploading) or just_completed_upload:
+    if wip or skip:
+        return
+
+    if (created and not uploading) or just_completed_upload:
         push_notification_for_new_image_revision.apply_async(args=(instance.pk,), countdown=10)
         add_story(instance.image.user,
                   verb='VERB_UPLOADED_REVISION',
