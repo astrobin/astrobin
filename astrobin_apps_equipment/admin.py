@@ -8,6 +8,7 @@ from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_equipment.models.equipment_retailer import EquipmentRetailer
+from astrobin_apps_equipment.models.sensor_edit_proposal import SensorEditProposal
 from astrobin_apps_equipment.models.telescope_edit_proposal import TelescopeEditProposal
 
 
@@ -54,6 +55,14 @@ class SensorAdmin(admin.ModelAdmin):
     )
 
 
+class SensorEditProposalAdmin(admin.ModelAdmin):
+    list_display = (
+        'brand',
+        'name',
+        'edit_proposal_created',
+    )
+
+
 class CameraAdmin(admin.ModelAdmin):
     list_display = (
         'brand',
@@ -91,6 +100,7 @@ admin.site.register(EquipmentRetailer, EquipmentRetailerAdmin)
 admin.site.register(EquipmentBrandListing, EquipmentBrandListingAdmin)
 admin.site.register(EquipmentItemListing, EquipmentItemListingAdmin)
 admin.site.register(Sensor, SensorAdmin)
+admin.site.register(SensorEditProposal, SensorEditProposalAdmin)
 admin.site.register(Camera, CameraAdmin)
 admin.site.register(CameraEditProposal, CameraEditProposalAdmin)
 admin.site.register(Telescope, TelescopeAdmin)

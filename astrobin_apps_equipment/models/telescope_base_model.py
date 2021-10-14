@@ -1,5 +1,3 @@
-from enum import Enum
-
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -37,32 +35,32 @@ class TelescopeType:
 
 class TelescopeBaseModel(EquipmentItem):
     TELESCOPE_TYPES = (
-        (TelescopeType.REFRACTOR_ACHROMATIC,  _("Refractor: achromatic")),
-        (TelescopeType.REFRACTOR_SEMI_APOCHROMATIC,  _("Refractor: semi-apochromatic")),
-        (TelescopeType.REFRACTOR_APOCHROMATIC,  _("Refractor: apochromatic")),
-        (TelescopeType.REFRACTOR_NON_ACHROMATIC_GALILEAN,  _("Refractor: non-achromatic Galilean")),
-        (TelescopeType.REFRACTOR_NON_ACHROMATIC_KEPLERIAN,  _("Refractor: non-achromatic Keplerian")),
-        (TelescopeType.REFRACTOR_SUPERACHROMAT,  _("Refractor: superachromat")),
+        (TelescopeType.REFRACTOR_ACHROMATIC, _("Refractor: achromatic")),
+        (TelescopeType.REFRACTOR_SEMI_APOCHROMATIC, _("Refractor: semi-apochromatic")),
+        (TelescopeType.REFRACTOR_APOCHROMATIC, _("Refractor: apochromatic")),
+        (TelescopeType.REFRACTOR_NON_ACHROMATIC_GALILEAN, _("Refractor: non-achromatic Galilean")),
+        (TelescopeType.REFRACTOR_NON_ACHROMATIC_KEPLERIAN, _("Refractor: non-achromatic Keplerian")),
+        (TelescopeType.REFRACTOR_SUPERACHROMAT, _("Refractor: superachromat")),
 
-        (TelescopeType.REFLECTOR_DALL_KIRKHAM,  _("Reflector: Dall-Kirkham")),
-        (TelescopeType.REFLECTOR_NASMYTH,  _("Reflector: Nasmyth")),
-        (TelescopeType.REFLECTOR_RITCHEY_CHRETIEN,  _("Reflector: Ritchey Chretien")),
-        (TelescopeType.REFLECTOR_GREGORIAN,  _("Reflector: Gregorian")),
-        (TelescopeType.REFLECTOR_HERSCHELLIAN,  _("Reflector: Herschellian")),
-        (TelescopeType.REFLECTOR_NEWTONIAN,  _("Reflector: Newtonian")),
+        (TelescopeType.REFLECTOR_DALL_KIRKHAM, _("Reflector: Dall-Kirkham")),
+        (TelescopeType.REFLECTOR_NASMYTH, _("Reflector: Nasmyth")),
+        (TelescopeType.REFLECTOR_RITCHEY_CHRETIEN, _("Reflector: Ritchey Chretien")),
+        (TelescopeType.REFLECTOR_GREGORIAN, _("Reflector: Gregorian")),
+        (TelescopeType.REFLECTOR_HERSCHELLIAN, _("Reflector: Herschellian")),
+        (TelescopeType.REFLECTOR_NEWTONIAN, _("Reflector: Newtonian")),
 
-        (TelescopeType.CATADIOPTRIC_ARGUNOV_CASSEGRAIN,  _("Catadioptric: Argunov-Cassegrain")),
-        (TelescopeType.CATADIOPTRIC_KLEVTSOV_CASSEGRAIN,  _("Catadioptric: Klevtsov-Cassegrain")),
-        (TelescopeType.CATADIOPTRIC_LURIE_HOUGHTON,  _("Catadioptric: Lurie-Houghton")),
-        (TelescopeType.CATADIOPTRIC_MAKSUTOV,  _("Catadioptric: Maksutov")),
-        (TelescopeType.CATADIOPTRIC_MAKSUTOV_CASSEGRAIN,  _("Catadioptric: Maksutov-Cassegrain")),
-        (TelescopeType.CATADIOPTRIC_MAKSUTOV_CASSEGRAIN,  _("Catadioptric: modified Dall-Kirkham")),
-        (TelescopeType.CATADIOPTRIC_MODIFIED_DALL_KIRKHAM,  _("Catadioptric: Schmidt camera")),
-        (TelescopeType.CATADIOPTRIC_SCHMIDT_CASSEGRAIN,  _("Catadioptric: Schmidt-Cassegrain")),
-        (TelescopeType.CATADIOPTRIC_ACF_SCHMIDT_CASSEGRAIN,  _("Catadioptric: ACF Schmidt-Cassegrain")),
-        (TelescopeType.CATADIOPTRIC_ROWE_ACKERMAN_SCHMIDT,  _("Catadioptric: Rowe-Atkinson Schmidt astrograph")),
-        (TelescopeType.CAMERA_LENS,  _("Camera lens")),
-        (TelescopeType.BINOCULARS,  _("Binoculars"))
+        (TelescopeType.CATADIOPTRIC_ARGUNOV_CASSEGRAIN, _("Catadioptric: Argunov-Cassegrain")),
+        (TelescopeType.CATADIOPTRIC_KLEVTSOV_CASSEGRAIN, _("Catadioptric: Klevtsov-Cassegrain")),
+        (TelescopeType.CATADIOPTRIC_LURIE_HOUGHTON, _("Catadioptric: Lurie-Houghton")),
+        (TelescopeType.CATADIOPTRIC_MAKSUTOV, _("Catadioptric: Maksutov")),
+        (TelescopeType.CATADIOPTRIC_MAKSUTOV_CASSEGRAIN, _("Catadioptric: Maksutov-Cassegrain")),
+        (TelescopeType.CATADIOPTRIC_MAKSUTOV_CASSEGRAIN, _("Catadioptric: modified Dall-Kirkham")),
+        (TelescopeType.CATADIOPTRIC_MODIFIED_DALL_KIRKHAM, _("Catadioptric: Schmidt camera")),
+        (TelescopeType.CATADIOPTRIC_SCHMIDT_CASSEGRAIN, _("Catadioptric: Schmidt-Cassegrain")),
+        (TelescopeType.CATADIOPTRIC_ACF_SCHMIDT_CASSEGRAIN, _("Catadioptric: ACF Schmidt-Cassegrain")),
+        (TelescopeType.CATADIOPTRIC_ROWE_ACKERMAN_SCHMIDT, _("Catadioptric: Rowe-Atkinson Schmidt astrograph")),
+        (TelescopeType.CAMERA_LENS, _("Camera lens")),
+        (TelescopeType.BINOCULARS, _("Binoculars"))
     )
 
     type = models.CharField(
@@ -103,7 +101,6 @@ class TelescopeBaseModel(EquipmentItem):
         max_digits=6,
         decimal_places=2
     )
-
 
     class Meta(EquipmentItem.Meta):
         abstract = True
