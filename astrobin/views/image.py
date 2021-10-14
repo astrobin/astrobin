@@ -1368,7 +1368,7 @@ class ImageDownloadView(View):
             local_hd.close()
 
             # Build image
-            local_result: NamedTemporaryFile = NamedTemporaryFile('w+b', suffix='.jpg', delete=False)
+            local_result: NamedTemporaryFile = NamedTemporaryFile('w+b', suffix='.png', delete=False)
             svg2png(url=local_svg.name, write_to=local_result.name)
             local_result.seek(0)
             local_result.close()
@@ -1378,7 +1378,13 @@ class ImageDownloadView(View):
 
             icc_profile = background.info.get('icc_profile')
             background.paste(foreground, (0, 0), foreground)
-            background.save(local_result.name, format='JPEG', icc_profile=icc_profile)
+
+            if background.mode != 'RGBA':
+                local_result.name = local_result.name.replace('.png', '.jpg')
+                save_format = 'JPEG'
+            else:
+                save_format = 'PNG'
+            background.save(local_result.name, format=save_format, icc_profile=icc_profile)
 
             result_path: str = f'tmp/{solution.pixinsight_serial_number}-{int(time.time())}.jpg'
 
