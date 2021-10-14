@@ -36,12 +36,10 @@ class MigratableItemMixin:
         limit = request.GET.get('limit', 100)
         manager = self.get_serializer().Meta.model.objects
 
-
-
         queryset = self.__random_non_migrated_queryset(request.user) \
-                       .annotate(name_distance=TrigramDistance('name', name),
-                                 make_distance=TrigramDistance('make', make)) \
-                       .filter(Q(name_distance__lte=max_distance) & Q(make_distance__lte=max_distance))
+            .annotate(name_distance=TrigramDistance('name', name),
+                      make_distance=TrigramDistance('make', make)) \
+            .filter(Q(name_distance__lte=max_distance) & Q(make_distance__lte=max_distance))
 
         if pk:
             queryset = queryset.exclude(pk=pk)
@@ -81,9 +79,18 @@ class MigratableItemMixin:
         if not request.user.groups.filter(name='equipment_moderators').exists():
             raise PermissionDenied
 
-        queryset = self.get_queryset() \
-                       .filter(migration_flag__isnull=False, migration_flag_reviewer__isnull=True) \
-                       .order_by('migration_flag_timestamp')[:50]
+        queryset = \
+            self.get_queryset() \
+                .filter(
+                Q(migration_flag__isnull=False) &
+                Q(migration_flag_reviewer__isnull=True) &
+                Q(
+                    Q(migration_flag_reviewer_lock__isnull=True) |
+                    Q(migration_flag_reviewer_lock=request.user)
+                ) &
+                ~Q(migration_flag_moderator=request.user)
+            ) \
+                .order_by('migration_flag_timestamp')[:50]
         serializer = self.get_serializer(queryset, many=True, context=self.get_serializer_context())
         return Response(serializer.data)
 
