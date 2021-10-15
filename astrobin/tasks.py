@@ -10,6 +10,7 @@ from django.db import IntegrityError
 from django.db.models import OuterRef, Exists
 from django.template.defaultfilters import filesizeformat
 from hitcount.models import HitCount
+from pybb.models import Post
 
 from common.services import DateTimeService
 
@@ -39,6 +40,7 @@ from astrobin.models import BroadcastEmail, Image, DataDownloadRequest, ImageRev
 from astrobin.utils import inactive_accounts, never_activated_accounts, never_activated_accounts_to_be_deleted
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
+from nested_comments.models import NestedComment
 
 logger = get_task_logger(__name__)
 
@@ -250,8 +252,15 @@ def send_never_activated_account_reminder():
 def delete_never_activated_accounts():
     users = never_activated_accounts_to_be_deleted()
     count = users.count()
-    users.delete()
-    logger.debug("Deleted %d inactive accounts" % count)
+
+    logger.debug("Processing %d inactive accounts..." % count)
+
+    for user in users.iterator():
+        images = Image.all_objects.filter(user=user).count()
+        posts = Post.objects.filter(user=user).count()
+        comments = NestedComment.objects.filter(author=user).count()
+        if images + posts + comments == 0:
+            user.delete()
 
 
 @shared_task(time_limit=2700, acks_late=True)
