@@ -26,6 +26,9 @@ class I18nMessages(HeaderMixin, View):
         if code == 'zh-hans':
             code = 'zh_Hans'
 
+        if code == 'zh-hant':
+            code = 'zh_Hant'
+
         cache_key = "astrobin_i18n_messages_%s" % code
         content = cache.get(cache_key)
         if content is not None:

@@ -139,6 +139,7 @@ LANGUAGES = {
     'ar': _("Arabic"),
     'ja': _("Japanese"),
     'zh-hans': _("Chinese (Simplified)"),
+    'zh-hant': _("Chinese (Traditional)"),
 }
 
 SUBJECT_LABELS = {
