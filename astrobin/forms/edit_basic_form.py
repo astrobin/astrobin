@@ -193,5 +193,6 @@ class ImageEditBasicForm(forms.ModelForm):
             'keyvaluetags',
             'mouse_hover_image',
             'full_size_display_limitation',
+            'download_limitation',
             'allow_comments',
         ]

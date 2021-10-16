@@ -70,4 +70,5 @@ class ImageSerializer(RequestUserRestSerializerMixin, serializers.ModelSerialize
             'key_value_tags',
             'locations',
             'full_size_display_limitation',
+            'download_limitation',
         )

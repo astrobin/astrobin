@@ -307,3 +307,8 @@ def needs_premium_subscription_to_platesolve(image):
 @register.filter()
 def revision_upload_url(image: Image, request):
     return AppRedirectionService.redirect(request, '/uploader/revision/%d' % image.pk)
+
+
+@register.filter
+def display_download_menu(user, image):
+    return ImageService(image).display_download_menu(user)
