@@ -10,5 +10,5 @@ class SensorEditProposal(SensorBaseModel, EquipmentItemEditProposalMixin):
 
     class Meta(SensorBaseModel.Meta):
         unique_together = []
-        ordering = ['-created']
+        ordering = ['-edit_proposal_created']
         abstract = False

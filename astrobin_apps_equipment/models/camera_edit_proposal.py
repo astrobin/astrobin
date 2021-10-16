@@ -10,5 +10,5 @@ class CameraEditProposal(CameraBaseModel, EquipmentItemEditProposalMixin):
 
     class Meta(CameraBaseModel.Meta):
         unique_together = []
-        ordering = ['-created']
+        ordering = ['-edit_proposal_created']
         abstract = False
