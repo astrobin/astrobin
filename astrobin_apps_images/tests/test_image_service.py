@@ -1,7 +1,9 @@
+from django.contrib.auth.models import AnonymousUser
 from django.test import TestCase
 from mock import patch
 
 from astrobin.enums import SubjectType
+from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.models import Image
 from astrobin.tests.generators import Generators
 from astrobin_apps_images.services import ImageService
@@ -360,3 +362,21 @@ class TestImageService(TestCase):
         is_platesolvable.return_value = True
 
         self.assertFalse(ImageService(image).needs_premium_subscription_to_platesolve())
+
+    def test_display_download_menu_me_only(self):
+        image = Generators.image(download_limitations=DownloadLimitation.ME_ONLY)
+        self.assertTrue(ImageService(image).display_download_menu(image.user))
+        self.assertFalse(ImageService(image).display_download_menu(Generators.user()))
+        self.assertFalse(ImageService(image).display_download_menu(AnonymousUser))
+
+    def test_display_download_menu_null(self):
+        image = Generators.image(download_limitations=None)
+        self.assertTrue(ImageService(image).display_download_menu(image.user))
+        self.assertFalse(ImageService(image).display_download_menu(Generators.user()))
+        self.assertFalse(ImageService(image).display_download_menu(AnonymousUser))
+
+    def test_display_download_menu_everybody(self):
+        image = Generators.image(download_limitations=DownloadLimitation.EVERYBODY)
+        self.assertTrue(ImageService(image).display_download_menu(image.user))
+        self.assertTrue(ImageService(image).display_download_menu(Generators.user()))
+        self.assertTrue(ImageService(image).display_download_menu(AnonymousUser))

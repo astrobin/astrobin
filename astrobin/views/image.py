@@ -24,7 +24,7 @@ from django.core.files.temp import NamedTemporaryFile
 from django.db.models import Q
 from django.db.models.query import QuerySet
 from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest, HttpResponseForbidden, HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.utils.encoding import iri_to_uri
@@ -1310,6 +1310,15 @@ class ImageDownloadView(View):
         ret['Content-Disposition'] = 'inline; filename=' + os.path.basename(url)
         return ret
 
+    def dispatch(self, request, *args, **kwargs):
+        id: Union[str, int] = self.kwargs.get('id')
+        image: Image = ImageService.get_object(id, Image.objects_including_wip)
+
+        if not ImageService(image).display_download_menu(request.user):
+            return render(request, "403.html", {})
+
+        return super().dispatch(request, args, kwargs)
+
     def get(self, request, *args, **kwargs) -> HttpResponse:
         id: Union[str, int] = self.kwargs.pop('id')
         revision_label: str = self.kwargs.pop('revision_label')
@@ -1329,7 +1338,7 @@ class ImageDownloadView(View):
 
         if version == 'original':
             if request.user != image.user and not request.user.is_superuser:
-                return HttpResponseForbidden()
+                return render(request, "403.html", {})
             return self.download(revision.image_file.url if revision else image.image_file.url)
 
         if version == 'basic_annotations':

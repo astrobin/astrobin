@@ -15,6 +15,7 @@ from image_cropping import ImageRatioField
 from urllib.parse import urlparse
 
 from astrobin.enums import SubjectType, SolarSystemSubject
+from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.enums.full_size_display_limitation import FullSizeDisplayLimitation
 from astrobin.enums.license import License
 from astrobin.enums.mouse_hover_image import MouseHoverImage
@@ -744,6 +745,11 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         (FullSizeDisplayLimitation.NOBODY, _('Nobody')),
     ]
 
+    DOWNLOAD_LIMITATION_CHOICES = [
+        (DownloadLimitation.EVERYBODY, _('Everybody')),
+        (DownloadLimitation.ME_ONLY, _('Me only')),
+    ]
+
     GEAR_CLASS_LOOKUP = {
         'imaging_telescopes': Telescope,
         'guiding_telescopes': Telescope,
@@ -948,6 +954,19 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         verbose_name=_('Allow full-size display'),
         help_text=_('Specify what user groups are allowed to view this image at its full size.'),
         choices=FULL_SIZE_DISPLAY_LIMITATION_CHOICES
+    )
+
+    download_limitation = models.CharField(
+        max_length=16,
+        null=True,
+        blank=True,
+        choices=DOWNLOAD_LIMITATION_CHOICES,
+        default=DownloadLimitation.ME_ONLY,
+        verbose_name=_("Display download menu"),
+        help_text=_(
+            "Please note: even if you allow everyone to access download options, only you will be able to download the "
+            "originally uploaded file."
+        ),
     )
 
     uploaded = models.DateTimeField(editable=False, auto_now_add=True)
