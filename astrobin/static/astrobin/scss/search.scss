@@ -214,9 +214,15 @@ body#search {
     }
   }
 
-  .date-published-filter .datepickerclass:first-child,
-  .date-acquired-filter .datepickerclass:first-child {
-    margin-bottom: .5rem !important;
+  .date-published-filter,
+  .date-acquired-filter {
+    .datepickerclass:first-child {
+      margin-bottom: .5rem !important;
+    }
+
+    .quick-ranges {
+      margin-top: .5rem;
+    }
   }
 
   .basic-search-form {

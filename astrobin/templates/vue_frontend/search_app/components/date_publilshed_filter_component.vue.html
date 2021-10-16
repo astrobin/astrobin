@@ -1,9 +1,28 @@
+{% load i18n %}
+
 <script type="text/x-template" id="date-published-filter-template">
     <div class="form-group date-published-filter" :class="{highlighted: highlighted}">
         <input id="date-published-min-value" name="date_published_min" autocomplete="off" class="datepickerclass"
                type="text" :value="datePublishedMin" />
         <input id="date-published-max-value" name="date_published_max" autocomplete="off" class="datepickerclass"
                type="text" :value="datePublishedMax" />
+
+        <div class="quick-ranges">
+            <select>
+                <option value="">{% trans "Select range" %}</option>
+                <optgroup label="">
+                    <option value="last-7-days">{% trans "Last 7 days" %}</option>
+                    <option value="last-30-days">{% trans "Last 30 days" %}</option>
+                    <option value="last-90-days">{% trans "Last 90 days" %}</option>
+                </optgroup>
+
+                <optgroup label="">
+                    <option value="current-week">{% trans "Current week" %}</option>
+                    <option value="current-month">{% trans "Current month" %}</option>
+                    <option value="current-year">{% trans "Current year" %}</option>
+                </optgroup>
+            </select>
+        </div>
     </div>
 </script>
 
@@ -22,6 +41,57 @@
                 dateFormat: 'yy-mm-dd',
                 changeMonth: true,
                 changeYear: true
+            });
+
+            $('.date-published-filter .quick-ranges select').change(function (event) {
+                const $min = $('#date-published-min-value');
+                const $max = $('#date-published-max-value');
+                let d = new Date();
+
+                const getPreviousMonday = function (date) {
+                    const day = date.getDay();
+                    const previousMonday = new Date();
+
+                    if (date.getDay() === 0) {
+                        previousMonday.setDate(date.getDate() - 7);
+                    } else {
+                        previousMonday.setDate(date.getDate() - (day - 1));
+                    }
+
+                    return previousMonday;
+                }
+
+                const formatDate = function (d) {
+                    return d.getFullYear() + '-' +
+                        String((d.getMonth() + 1)).padStart(2, '0') + '-' +
+                        String(d.getDate()).padStart(2, '0');
+                }
+
+                switch (event.target.value) {
+                    case "last-7-days":
+                        d.setDate(d.getDate() - 7);
+                        break;
+                    case "last-30-days":
+                        d.setDate(d.getDate() - 30);
+                        break;
+                    case "last-90-days":
+                        d.setDate(d.getDate() - 90);
+                        break;
+                    case "current-week":
+                        d = getPreviousMonday(d);
+                        break;
+                    case "current-month":
+                        d = new Date(d.getFullYear(), d.getMonth(), 1);
+                        break;
+                    case "current-year":
+                        d = new Date(d.getFullYear(), 0, 1);
+                        break;
+                }
+
+                if (!!event.target.value) {
+                    $min.val(formatDate(d));
+                    $max.val(formatDate(new Date()));
+                }
             });
         }
     });
