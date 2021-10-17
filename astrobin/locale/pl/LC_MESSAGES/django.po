@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-21 19:56+0000\n"
+"POT-Creation-Date: 2021-10-17 08:44+0000\n"
 "PO-Revision-Date: 2020-10-26 10:36+0000\n"
 "Last-Translator: Łukasz Sujka <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -830,11 +830,11 @@ msgid ""
 "Editing groups is not possible while the image is not in your public area."
 msgstr ""
 
-msgid "This field is required."
-msgstr "To pole jest wymagane."
-
 msgid "Unable to parse."
 msgstr "Nie można przetworzyć elementu"
+
+msgid "This field is required."
+msgstr "To pole jest wymagane."
 
 msgid "Please select a remote source if this image was acquired remotely."
 msgstr ""
@@ -907,6 +907,12 @@ msgstr "Długość geograficzna (w minutach)"
 
 msgid "Longitude (seconds)"
 msgstr "Długość geograficzna (w sekundach)"
+
+msgid "Recipients"
+msgstr ""
+
+msgid "Are you a robot?"
+msgstr ""
 
 msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
@@ -1207,6 +1213,14 @@ msgstr "Komentarz"
 msgid ""
 "Information, description or comment about your own copy of this product."
 msgstr "Informacje, opis lub komentarze na temat Twojego egzemplarza."
+
+msgid "Modded"
+msgstr ""
+
+msgid ""
+"Has this object been modified for astrophotography? (especially applicable "
+"to cameras)"
+msgstr ""
 
 msgid "Refractor: achromatic"
 msgstr "Refraktor: achromatyczny"
@@ -1575,6 +1589,14 @@ msgid ""
 "Specify what user groups are allowed to view this image at its full size."
 msgstr ""
 
+msgid "Display download menu"
+msgstr ""
+
+msgid ""
+"Please note: even if you allow everyone to access download options, only you "
+"will be able to download the originally uploaded file."
+msgstr ""
+
 msgid "Apply watermark to image"
 msgstr "Wstaw znako wodny do zdjęcia"
 
@@ -1851,15 +1873,6 @@ msgid ""
 "sign, and only have letters, numbers, periods, and underlines."
 msgstr ""
 
-msgid "Timezone"
-msgstr "Strefa czasowa"
-
-msgid ""
-"By selecting this, you will see all the dates on AstroBin in your timezone."
-msgstr ""
-"Wybierając ta opcję wszystkie daty na AstroBin będą prezentowane z "
-"uwzględnieniem Twojej strefy czasowej."
-
 msgid "About you"
 msgstr "O sobie"
 
@@ -1904,11 +1917,11 @@ msgstr "Nowe zdjęcie opublikowane przez użytkowników, których obserwujesz"
 msgid "Default front page view"
 msgstr "Domyślny wygląd pierwszej strony"
 
-msgid "Publication time"
+msgid "Publication"
 msgstr ""
 
-msgid "Acquisition time"
-msgstr "Czas naświetlania"
+msgid "Acquisition"
+msgstr ""
 
 msgid "Year"
 msgstr "Rok"
@@ -2601,9 +2614,6 @@ msgstr ""
 msgid "Zulu"
 msgstr ""
 
-msgid "Message sent"
-msgstr "Wiadomość wysłana"
-
 msgid "Integration hours, yearly"
 msgstr "Sumaryczny czas naświetlania, rocznie"
 
@@ -3061,6 +3071,17 @@ msgstr "Nie, dziękuję"
 msgid "Tell me more!"
 msgstr ""
 
+msgid "Only group members can post in a group's forum."
+msgstr ""
+
+msgid ""
+"Please join or request to join the group, and then you'll be able to post a "
+"new topic."
+msgstr ""
+
+msgid "OK"
+msgstr "OK"
+
 msgid "Are you really sure?"
 msgstr ""
 
@@ -3101,9 +3122,27 @@ msgstr ""
 msgid "Continue"
 msgstr "Kontynuuj"
 
+msgid "This operation will reload the current page."
+msgstr ""
+
+msgid "If you have any unsaved information in a form, it will be lost."
+msgstr ""
+
 msgid ""
-"You will remove your shadow-ban on this user, and their comments, messages, "
-"etc, will appear again on your content."
+"You can also dismiss this window, and your operation will be applied at the "
+"next page navigation."
+msgstr ""
+
+msgid "Report abuse"
+msgstr ""
+
+msgid ""
+"When you report abuse on some content on AstroBin, the content will be "
+"hidden until a moderator reviews it. Abuse reports are anonymous and the "
+"content's owner will not be notified."
+msgstr ""
+
+msgid "Please specify a reason for this abuse report."
 msgstr ""
 
 msgid "Quick search"
@@ -3173,9 +3212,6 @@ msgid "Would you like to start using your real name on AstroBin?"
 msgstr ""
 "Czy chcesz używać swojego imienia i nazwiska zamiast nicka na AstroBin ?"
 
-msgid "OK"
-msgstr "OK"
-
 msgid "Login"
 msgstr "Zaloguj"
 
@@ -3222,6 +3258,12 @@ msgstr "Klucze API"
 
 msgid "My settings"
 msgstr "Moje ustawienia"
+
+msgid "Disable high contrast theme"
+msgstr ""
+
+msgid "Enable high contrast theme"
+msgstr ""
 
 msgid "Logout"
 msgstr "Wyloguj"
@@ -3333,163 +3375,6 @@ msgstr "Zgadzam się"
 msgid "More"
 msgstr "Więcej"
 
-msgid "Instructions and examples"
-msgstr "Instrukcje i przykłady"
-
-msgid ""
-"AstroBin's gear database is a little messy: many users have used different "
-"names for the same object, ignoring the suggestions. But don't worry, we can "
-"fix it, and after it's fixed, it shouldn't get very messy in the future."
-msgstr ""
-"Baza danych sprzętu AstroBin jest nieco zabałaganiona: użytkownicy używali "
-"różnych nazw tego samego sprzętu i ignorowali sugestie. Ale nie martw się, "
-"możemy to naprawić. Kiedy już uda sie posprzątać bałagan, podobne problemy "
-"nie powinny się zdarzyć w przyszłości."
-
-msgid "Please read the instructions and the example below, they are important!"
-msgstr "Przeczytaj instrukcje i przykład poniżej - są ważne!"
-
-msgid ""
-"In a wiki-style collaborative effort, we can all work together, a few items "
-"at a time, to improve the situation. It's very simple! This is what you need "
-"to do:"
-msgstr ""
-"Pracując wspólnie, używając wiki-stylów, po kilka sztuk, możemy poprawić "
-"sytuację. To bardzo proste! Oto, co należy uczynić:"
-
-msgid "Make sure both the make and the name are in English."
-msgstr "Upewnij się, że marka i nazwa są po angielsku."
-
-msgid "Make sure the make is not written again in the name field."
-msgstr "Upewnij się, że marka nie jest wpisana ponownie w polu nazwy."
-
-msgid ""
-"Make sure there are no words other than the simple make and name of the "
-"product."
-msgstr "Upewnij się, że nie ma innych wyrazów niż marka i nazwa produktu."
-
-msgid "Make sure the words are properly capitalized."
-msgstr "Upewnij się, że wielkie litery są użyte poprawnie."
-
-msgid "Here's some good examples:"
-msgstr "Oto kilka dobrych przykładów:"
-
-msgid "And here's some bad examples, that need fixing, and why:"
-msgstr "A oto kilka złych przykładów, wymagających poprawy. Oto dlaczego:"
-
-msgid ""
-"The words are not properly capitalized. It should be \"Meade\" and \"LX200\"."
-msgstr ""
-"Wielkie litery nie są użyte poprawnie. Powinno być \"Meade\" i \"LX200\"."
-
-msgid ""
-"The word \"Celestron\" appears also in the name of the product. That should "
-"just be the name of the model, not the make name too."
-msgstr ""
-"Słowo \"Celestron\" pojawia się także w nazwie produktu. Tam powinna się "
-"znaleźć wyłacznie nazwa modelu, a nie marka."
-
-msgid ""
-"\"sold\" is an information that refers only to a particular user. Gear "
-"objects are shared among everyone, in the database. The word \"(sold)\" "
-"should be removed."
-msgstr ""
-"\"sprzedany\" jest informacją, która odnosi się do konkretnego egzemplarza. "
-"Informacje o sprzęcie w bazie danych są używane przez wszystkich "
-"użytkowników, więc słowo \"(sprzedany)\" powinno zostać usunięte."
-
-msgid ""
-"\"modified\" is an information that refers only to a particular user. Gear "
-"objects are shared among everyone, in the database. The word \"(modified)\" "
-"should be removed."
-msgstr ""
-"\"zmodyfikowany\" jest informacją, która odnosi się do konkretnego "
-"egzemplarza. Informacje o sprzęcie w bazie danych są używane przez "
-"wszystkich użytkowników, więc słowo \"(zmodyfikowany)\" powinno zostać "
-"usunięte."
-
-msgid ""
-"Obviously, the user who created this mount in the database, has it on a "
-"fixed pier. But this doesn't mean that SkyWatcher sells a NEQ-6 that you can "
-"only buy on a pier! \"on a fixed pier\" should be removed."
-msgstr ""
-"Oczywiście użytkownik, który dodał ten montaż do bazy danych, używa go na "
-"stacjonarnym słupie. Ale to nie znaczy, że SkyWatcher sprzedaje NEQ-6 tylko "
-"do montażu na słupie! \"na stacjonarnym słupie\" powinno zostać usunięte."
-
-msgid ""
-"The name of the telescope is not written in English, and that is a "
-"description, not the actual product name. Here I would assume \"80ED\". "
-"Moreover, \"80mm\" is a property of the telescope, not part of its name."
-msgstr ""
-"Nazwa teleskopu nie jest zapisana po angielsku i jest to raczej opis a nie "
-"nazwa produktu. Tutaj najlepszym przybliżeniem jest \"80ED\". Co więcej, "
-"\"80mm\" jest właściwością teleskopu, a nie częścią jego nazwy."
-
-msgid ""
-"\"5.4&mu;\" is a property of the CCD, not part of its name. It should be "
-"removed. But sometimes a property can be part of the name of the object, "
-"because it's such a generic name: for example, Newton 8\" f/6 would be okay, "
-"because just \"Newton\" would not be enough."
-msgstr ""
-"\"5.4&mu;\" jest właściwością sensora CCD, a nie częścią jego nazwy. Powinno "
-"zostać usunięte. Czasami jednag właściwość może być częścią nazwy, ponieważ "
-"jest to bardzo ogólna nazwa. Na przykład Newton 8'' f/6 jest dobrą nazwą, "
-"ponieważ samo \"Newton\" byłoby niewystarczające."
-
-msgid ""
-"\"CS5\" is the version of Photoshop, but the procut name is just \"Photoshop"
-"\". \"CS5\" should be removed."
-msgstr ""
-"\"CS5\" jest nazwą wersji Photoshopa, ale nazwa produktu to po prostu "
-"\"Photoshop\". \"CS5\" powinno zostać usunięte."
-
-msgid ""
-"Thanks for reading so far. If you are not sure about how to fix a gear item, "
-"just make assumptions and hope you are right. Mistakes will surface "
-"eventually."
-msgstr ""
-"Dziękujemy za uwagę. Jeżeli nie jesteś pewny, jak naprawić informacje o "
-"sprzęcie, przyjmij jakieś założenia - najprawdopodobniej będą poprawne. "
-"Pomyłki zostaną w końcu naprawione."
-
-msgid ""
-"Now let's get to work, good luck and thank you on behalf of the whole "
-"AstroBin community!"
-msgstr ""
-"A teraz bierzmy się do pracy. Dziękujemy i życzymy powodzenia w imieniu "
-"całej społeczności AstroBin!"
-
-msgid "After you fix an item, another one at random will be offered."
-msgstr "Po zakończeniu edycji sprzętu, kolejny będzie zaproponowany losowo."
-
-msgid "Already fixed:"
-msgstr "Już naprawione:"
-
-msgid "Remaining:"
-msgstr "Do naprawy:"
-
-msgid "Fix"
-msgstr "Popraw"
-
-msgid "Mark as good"
-msgstr "Zaznacz jako poprawne."
-
-msgid "Skip"
-msgstr "Pomiń"
-
-msgid "Enough for now"
-msgstr "Na razie wystarczy"
-
-msgid "Thanks!"
-msgstr "Dziękujemy!"
-
-msgid ""
-"Your contribute was very important, and the whole AstroBin community is "
-"grateful."
-msgstr ""
-"Twój wkład jest bardzo ważny i cała społeczność AstroBin jest wdzięczna."
-
 msgid "Additional information requested"
 msgstr "Zostałeś poproszony o dodatkowe informacje"
 
@@ -3579,6 +3464,10 @@ msgstr ""
 msgid "Shop %(name)s at %(retailer)s"
 msgstr ""
 
+#, python-format
+msgid "Shop %(name)s at AstroBin's partners"
+msgstr ""
+
 msgid "Frames"
 msgstr "Klatki"
 
@@ -3610,6 +3499,12 @@ msgid "Field radius"
 msgstr "Szerokość pola"
 
 msgid "WCS transformation"
+msgstr ""
+
+msgid "More info"
+msgstr ""
+
+msgid "Open"
 msgstr ""
 
 msgid "Find images in the same area"
@@ -3691,6 +3586,27 @@ msgstr "Administrator"
 msgid "Ban user"
 msgstr "Zablokuj użytkownika"
 
+msgid "AstroBin is preparing your download. Please wait..."
+msgstr ""
+
+msgid "Medium size"
+msgstr ""
+
+msgid "Large size"
+msgstr "Duży rozmiar"
+
+msgid "Original size"
+msgstr ""
+
+msgid "Basic annotations"
+msgstr ""
+
+msgid "Advanced annotations"
+msgstr ""
+
+msgid "Original file"
+msgstr ""
+
 msgid "Thumbnails"
 msgstr ""
 
@@ -3759,9 +3675,6 @@ msgstr "Podpisane"
 
 msgid "Normal"
 msgstr "Zwykły"
-
-msgid "Large size"
-msgstr "Duży rozmiar"
 
 msgid "Full size"
 msgstr "Pełny rozmiar"
@@ -3951,10 +3864,6 @@ msgstr ""
 "Poprawiłeś obróbkę swojego zdjęcia? Opublikuj nową \n"
 "wersję!"
 
-#, python-format
-msgid "Over 100 MB? Try the <a href=\"%(url)s/%(id)s\">new beta uploader</a>!"
-msgstr ""
-
 msgid ""
 "Please note: AstroBin is not officially a backup service. So please also "
 "keep additional copies of your file. However, by storing your work here, you "
@@ -3965,6 +3874,10 @@ msgstr ""
 msgid ""
 "Read about how AstroBin stores your files safely on the <a href=\"%(faq_url)s"
 "\">FAQ page</a>."
+msgstr ""
+
+#, python-format
+msgid "Over 100 MB? Try the <a href=\"%(url)s/%(id)s\">new beta uploader</a>!"
 msgstr ""
 
 msgid "Clear"
@@ -3994,6 +3907,12 @@ msgstr "Wersja"
 
 msgid "Sky plot"
 msgstr "Mapa nieba"
+
+msgid "Upgrade your account to enable plate-solving."
+msgstr ""
+
+msgid "Learn more."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -4109,6 +4028,9 @@ msgid "Next step: gear used"
 msgstr "Następny krok: użyty sprzęt"
 
 msgid "sponsor"
+msgstr ""
+
+msgid "Insert your image description here..."
 msgstr ""
 
 msgid "Edit your image: gear used"
@@ -4297,6 +4219,11 @@ msgstr ""
 msgid "Shop now"
 msgstr ""
 
+#, python-format
+msgid ""
+"Interested in <strong>%(brand)s</strong>? Our sponsors sells this brand!"
+msgstr ""
+
 msgid "Integration"
 msgstr "Naświetlanie"
 
@@ -4323,6 +4250,15 @@ msgstr "Dom dla Astrofotografii"
 
 msgid "Latest from the forums"
 msgstr "Najnowsze wpisy z forum"
+
+msgid "Poll"
+msgstr ""
+
+msgid "Unanswered"
+msgstr ""
+
+msgid "This topic has no replies."
+msgstr ""
 
 msgid "Recent images"
 msgstr "Najnowsze zdjęcia"
@@ -4453,11 +4389,8 @@ msgid "Your comment was approved!"
 msgstr ""
 
 msgid ""
-"As a new user on AstroBin, your first 3 comments will go through a "
-"moderation queue, to prevent spam."
-msgstr ""
-
-msgid "The following comment of yours was just approved by a moderator."
+"The following comment of yours was just approved by a moderator or the owner "
+"of the content that you commented."
 msgstr ""
 
 msgid "View comment"
@@ -4559,6 +4492,20 @@ msgid ""
 "AstroBin.\n"
 msgstr ""
 
+msgid "Your forum post was approved!"
+msgstr ""
+
+msgid ""
+"As a new user on AstroBin, your first 3 forum posts will go through a "
+"moderation queue, to prevent spam."
+msgstr ""
+
+msgid "The following forum post of yours was just approved by a moderator."
+msgstr ""
+
+msgid "View forum post"
+msgstr ""
+
 #, python-format
 msgid ""
 "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
@@ -4609,6 +4556,23 @@ msgid "Your image could not be plate-solved."
 msgstr "Automatyczna fotoastrometria Twojego zdjęcia nie powiodła się."
 
 #, python-format
+msgid ""
+"Unfortunately, AstroBin failed to perform the advanced plate-solution of "
+"your image: <strong>%(title)s</strong>."
+msgstr ""
+
+msgid ""
+"Apologies for the inconvenience. AstroBin and PixInsight work continuously "
+"to improve the quality and performance of the service."
+msgstr ""
+
+#, python-format
+msgid ""
+"Unfortunately, AstroBin failed to perform the advanced plate-solution of "
+"your image: %(title)s."
+msgstr ""
+
+#, python-format
 msgid "<a href=\"%(object_url)s\">Your image</a> was plate-solved."
 msgstr ""
 "Automatyczna fotoastrometria <a href=\"%(object_url)s\">Twojego zdjęcia</a> "
@@ -4628,6 +4592,17 @@ msgstr ""
 
 msgid "Your image has been successfully plate-solved."
 msgstr "Automatyczna fotoastrometria Twojego zdjęcia powiodła się."
+
+#, python-format
+msgid ""
+"AstroBin completed the advanced plate-solution of your image: <strong>"
+"%(title)s</strong>."
+msgstr ""
+
+#, python-format
+msgid ""
+"AstroBin completed the advanced plate-solution of your image: %(title)s."
+msgstr ""
 
 msgid "An image you promoted made it to IOTD"
 msgstr ""
@@ -5051,6 +5026,32 @@ msgstr "<strong>%(user)s</strong> opublikował nowe zdjęcie"
 msgid "New image by %(user)s"
 msgstr "Nowe zdjęcie %(user)s"
 
+msgid "A new comment on your image requires moderation"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your image \"%(title)s\" received a comment by a new user on AstroBin, and "
+"it requires your moderation before it's displayed publicly."
+msgstr ""
+
+msgid ""
+"Please take a minute to review and approve or reject the following comment:"
+msgstr ""
+
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in an image description."
+msgstr ""
+
+#, python-format
+msgid "%(user)s mentioned you in an image description."
+msgstr ""
+
+#, python-format
+msgid "<strong>%(user)s</strong> mentioned you in an image description."
+msgstr ""
+
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> has published a new image revision on "
@@ -5151,22 +5152,21 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(user)s posted a new topic to the group: \"%(group_name)s\"\n"
-"\n"
-"\"%(topic_title)s\"\n"
-"\n"
-"View the topic: <a href=\"%(url)s\">%(url)s</a>\n"
-"View the group: <a href=\"%(group_url)s\">%(group_url)s</a>"
+"<a href=\"%(user_url)s\">%(user)s</a> posted a new topic to the group <a "
+"href=\"%(group_url)s\">%(group_name)s</a>."
+msgstr ""
+
+msgid "View topic"
 msgstr ""
 
 #, python-format
-msgid ""
-"%(user)s posted a new topic to the group: \"%(group_name)s\"\n"
-"\n"
-"\"%(topic_title)s\"\n"
-"\n"
-"View the topic: %(url)s\n"
-"View the group: %(group_url)s"
+msgid "%(user)s posted a new topic to the following group: %(group_name)s."
+msgstr ""
+
+msgid "View the topic"
+msgstr ""
+
+msgid "View the group"
 msgstr ""
 
 #, python-format
@@ -5310,6 +5310,16 @@ msgstr "Następna strona"
 msgid "No additional information available for this item."
 msgstr ""
 
+msgid ""
+"Please support AstroBin by shopping for this item at one of our partners!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Please support AstroBin by shopping <strong>%(brand)s</strong> at one of our "
+"partners!"
+msgstr ""
+
 msgid "Find images"
 msgstr "Znajdź zdjęcia"
 
@@ -5340,6 +5350,12 @@ msgid ""
 msgstr ""
 
 msgid "View forums"
+msgstr ""
+
+#, python-format
+msgid ""
+"Please join the <a href=\"%(group_page)s\">%(group_name)s</a> group to post "
+"in this forum."
 msgstr ""
 
 msgid "This topic was closed by a moderator."
@@ -5448,6 +5464,9 @@ msgstr ""
 msgid "*** Type your reply here ***"
 msgstr ""
 
+msgid "Something went wrong, sorry! Please try again."
+msgstr ""
+
 msgid "(deleted)"
 msgstr ""
 
@@ -5466,8 +5485,14 @@ msgstr ""
 msgid "Edited"
 msgstr "Edytowany"
 
+msgid "Quote this entire post in your reply."
+msgstr ""
+
 msgid "quote"
 msgstr "cytat"
+
+msgid "You must select some text first."
+msgstr ""
 
 msgid "quote selected"
 msgstr "cytuj wybrane"
@@ -5522,14 +5547,17 @@ msgstr ""
 msgid "Click here"
 msgstr ""
 
+msgid "Quote the selected text in your reply"
+msgstr ""
+
 msgid "Topic"
 msgstr "Temat"
 
+msgid "Replies"
+msgstr ""
+
 msgid "Last post"
 msgstr "Ostatni wpis"
-
-msgid "Poll"
-msgstr ""
 
 msgid "Sticky"
 msgstr "Przyklejone"
@@ -6207,6 +6235,9 @@ msgstr ""
 msgid "Key/value pairs"
 msgstr ""
 
+msgid "Overlays"
+msgstr ""
+
 msgid "Please confirm your recovered images"
 msgstr ""
 
@@ -6441,6 +6472,27 @@ msgid "What camera was used in the acquisition of the image?"
 msgstr ""
 
 msgid "Guider/planetary"
+msgstr ""
+
+msgid "Select range"
+msgstr ""
+
+msgid "Last 7 days"
+msgstr ""
+
+msgid "Last 30 days"
+msgstr ""
+
+msgid "Last 90 days"
+msgstr ""
+
+msgid "Current week"
+msgstr ""
+
+msgid "Current month"
+msgstr ""
+
+msgid "Current year"
 msgstr ""
 
 msgid "Imaging telescopes"
@@ -6714,11 +6766,186 @@ msgstr ""
 msgid "Referral code (optional)"
 msgstr ""
 
-msgid "Are you a robot?"
-msgstr ""
-
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid "Timezone"
+#~ msgstr "Strefa czasowa"
+
+#~ msgid ""
+#~ "By selecting this, you will see all the dates on AstroBin in your "
+#~ "timezone."
+#~ msgstr ""
+#~ "Wybierając ta opcję wszystkie daty na AstroBin będą prezentowane z "
+#~ "uwzględnieniem Twojej strefy czasowej."
+
+#~ msgid "Acquisition time"
+#~ msgstr "Czas naświetlania"
+
+#~ msgid "Message sent"
+#~ msgstr "Wiadomość wysłana"
+
+#~ msgid "Instructions and examples"
+#~ msgstr "Instrukcje i przykłady"
+
+#~ msgid ""
+#~ "AstroBin's gear database is a little messy: many users have used "
+#~ "different names for the same object, ignoring the suggestions. But don't "
+#~ "worry, we can fix it, and after it's fixed, it shouldn't get very messy "
+#~ "in the future."
+#~ msgstr ""
+#~ "Baza danych sprzętu AstroBin jest nieco zabałaganiona: użytkownicy "
+#~ "używali różnych nazw tego samego sprzętu i ignorowali sugestie. Ale nie "
+#~ "martw się, możemy to naprawić. Kiedy już uda sie posprzątać bałagan, "
+#~ "podobne problemy nie powinny się zdarzyć w przyszłości."
+
+#~ msgid ""
+#~ "Please read the instructions and the example below, they are important!"
+#~ msgstr "Przeczytaj instrukcje i przykład poniżej - są ważne!"
+
+#~ msgid ""
+#~ "In a wiki-style collaborative effort, we can all work together, a few "
+#~ "items at a time, to improve the situation. It's very simple! This is what "
+#~ "you need to do:"
+#~ msgstr ""
+#~ "Pracując wspólnie, używając wiki-stylów, po kilka sztuk, możemy poprawić "
+#~ "sytuację. To bardzo proste! Oto, co należy uczynić:"
+
+#~ msgid "Make sure both the make and the name are in English."
+#~ msgstr "Upewnij się, że marka i nazwa są po angielsku."
+
+#~ msgid "Make sure the make is not written again in the name field."
+#~ msgstr "Upewnij się, że marka nie jest wpisana ponownie w polu nazwy."
+
+#~ msgid ""
+#~ "Make sure there are no words other than the simple make and name of the "
+#~ "product."
+#~ msgstr "Upewnij się, że nie ma innych wyrazów niż marka i nazwa produktu."
+
+#~ msgid "Make sure the words are properly capitalized."
+#~ msgstr "Upewnij się, że wielkie litery są użyte poprawnie."
+
+#~ msgid "Here's some good examples:"
+#~ msgstr "Oto kilka dobrych przykładów:"
+
+#~ msgid "And here's some bad examples, that need fixing, and why:"
+#~ msgstr "A oto kilka złych przykładów, wymagających poprawy. Oto dlaczego:"
+
+#~ msgid ""
+#~ "The words are not properly capitalized. It should be \"Meade\" and "
+#~ "\"LX200\"."
+#~ msgstr ""
+#~ "Wielkie litery nie są użyte poprawnie. Powinno być \"Meade\" i \"LX200\"."
+
+#~ msgid ""
+#~ "The word \"Celestron\" appears also in the name of the product. That "
+#~ "should just be the name of the model, not the make name too."
+#~ msgstr ""
+#~ "Słowo \"Celestron\" pojawia się także w nazwie produktu. Tam powinna się "
+#~ "znaleźć wyłacznie nazwa modelu, a nie marka."
+
+#~ msgid ""
+#~ "\"sold\" is an information that refers only to a particular user. Gear "
+#~ "objects are shared among everyone, in the database. The word \"(sold)\" "
+#~ "should be removed."
+#~ msgstr ""
+#~ "\"sprzedany\" jest informacją, która odnosi się do konkretnego "
+#~ "egzemplarza. Informacje o sprzęcie w bazie danych są używane przez "
+#~ "wszystkich użytkowników, więc słowo \"(sprzedany)\" powinno zostać "
+#~ "usunięte."
+
+#~ msgid ""
+#~ "\"modified\" is an information that refers only to a particular user. "
+#~ "Gear objects are shared among everyone, in the database. The word "
+#~ "\"(modified)\" should be removed."
+#~ msgstr ""
+#~ "\"zmodyfikowany\" jest informacją, która odnosi się do konkretnego "
+#~ "egzemplarza. Informacje o sprzęcie w bazie danych są używane przez "
+#~ "wszystkich użytkowników, więc słowo \"(zmodyfikowany)\" powinno zostać "
+#~ "usunięte."
+
+#~ msgid ""
+#~ "Obviously, the user who created this mount in the database, has it on a "
+#~ "fixed pier. But this doesn't mean that SkyWatcher sells a NEQ-6 that you "
+#~ "can only buy on a pier! \"on a fixed pier\" should be removed."
+#~ msgstr ""
+#~ "Oczywiście użytkownik, który dodał ten montaż do bazy danych, używa go na "
+#~ "stacjonarnym słupie. Ale to nie znaczy, że SkyWatcher sprzedaje NEQ-6 "
+#~ "tylko do montażu na słupie! \"na stacjonarnym słupie\" powinno zostać "
+#~ "usunięte."
+
+#~ msgid ""
+#~ "The name of the telescope is not written in English, and that is a "
+#~ "description, not the actual product name. Here I would assume \"80ED\". "
+#~ "Moreover, \"80mm\" is a property of the telescope, not part of its name."
+#~ msgstr ""
+#~ "Nazwa teleskopu nie jest zapisana po angielsku i jest to raczej opis a "
+#~ "nie nazwa produktu. Tutaj najlepszym przybliżeniem jest \"80ED\". Co "
+#~ "więcej, \"80mm\" jest właściwością teleskopu, a nie częścią jego nazwy."
+
+#~ msgid ""
+#~ "\"5.4&mu;\" is a property of the CCD, not part of its name. It should be "
+#~ "removed. But sometimes a property can be part of the name of the object, "
+#~ "because it's such a generic name: for example, Newton 8\" f/6 would be "
+#~ "okay, because just \"Newton\" would not be enough."
+#~ msgstr ""
+#~ "\"5.4&mu;\" jest właściwością sensora CCD, a nie częścią jego nazwy. "
+#~ "Powinno zostać usunięte. Czasami jednag właściwość może być częścią "
+#~ "nazwy, ponieważ jest to bardzo ogólna nazwa. Na przykład Newton 8'' f/6 "
+#~ "jest dobrą nazwą, ponieważ samo \"Newton\" byłoby niewystarczające."
+
+#~ msgid ""
+#~ "\"CS5\" is the version of Photoshop, but the procut name is just "
+#~ "\"Photoshop\". \"CS5\" should be removed."
+#~ msgstr ""
+#~ "\"CS5\" jest nazwą wersji Photoshopa, ale nazwa produktu to po prostu "
+#~ "\"Photoshop\". \"CS5\" powinno zostać usunięte."
+
+#~ msgid ""
+#~ "Thanks for reading so far. If you are not sure about how to fix a gear "
+#~ "item, just make assumptions and hope you are right. Mistakes will surface "
+#~ "eventually."
+#~ msgstr ""
+#~ "Dziękujemy za uwagę. Jeżeli nie jesteś pewny, jak naprawić informacje o "
+#~ "sprzęcie, przyjmij jakieś założenia - najprawdopodobniej będą poprawne. "
+#~ "Pomyłki zostaną w końcu naprawione."
+
+#~ msgid ""
+#~ "Now let's get to work, good luck and thank you on behalf of the whole "
+#~ "AstroBin community!"
+#~ msgstr ""
+#~ "A teraz bierzmy się do pracy. Dziękujemy i życzymy powodzenia w imieniu "
+#~ "całej społeczności AstroBin!"
+
+#~ msgid "After you fix an item, another one at random will be offered."
+#~ msgstr "Po zakończeniu edycji sprzętu, kolejny będzie zaproponowany losowo."
+
+#~ msgid "Already fixed:"
+#~ msgstr "Już naprawione:"
+
+#~ msgid "Remaining:"
+#~ msgstr "Do naprawy:"
+
+#~ msgid "Fix"
+#~ msgstr "Popraw"
+
+#~ msgid "Mark as good"
+#~ msgstr "Zaznacz jako poprawne."
+
+#~ msgid "Skip"
+#~ msgstr "Pomiń"
+
+#~ msgid "Enough for now"
+#~ msgstr "Na razie wystarczy"
+
+#~ msgid "Thanks!"
+#~ msgstr "Dziękujemy!"
+
+#~ msgid ""
+#~ "Your contribute was very important, and the whole AstroBin community is "
+#~ "grateful."
+#~ msgstr ""
+#~ "Twój wkład jest bardzo ważny i cała społeczność AstroBin jest wdzięczna."
 
 #~ msgid ""
 #~ "You have received a private message on AstroBin!\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-21 19:59+0000\n"
+"POT-Creation-Date: 2021-10-17 08:44+0000\n"
 "PO-Revision-Date: 2013-11-12 19:56+0000\n"
 "Last-Translator: Koen_Dierckens <koen.dierckens@pandora.be>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,58 +18,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.0\n"
 "X-POOTLE-MTIME: 1384286190.885627\n"
-
-msgid "Perform a blind solve"
-msgstr ""
-
-msgid ""
-"Attempt to solve with no hints. In most cases this will work, but it will "
-"take longer."
-msgstr ""
-
-msgid "Width of the field in degrees"
-msgstr ""
-
-msgid "Width of the field in arcminutes"
-msgstr ""
-
-msgid "Resolution of the field in arcseconds/pixel"
-msgstr ""
-
-msgid "Field size units"
-msgstr ""
-
-msgid "Min field size"
-msgstr ""
-
-msgid "Estimate the lower bound for the width of this field."
-msgstr ""
-
-msgid "Max field size"
-msgstr ""
-
-msgid "Estimate the upper bound for the width of this field."
-msgstr ""
-
-msgid "Center RA"
-msgstr ""
-
-msgid "Center RA of the field in degrees, 0.000 to 360.000"
-msgstr ""
-
-msgid "Center dec"
-msgstr ""
-
-msgid "Center dec of the field in degrees, -90.000 to +90.000"
-msgstr ""
-
-msgid "Radius"
-msgstr ""
-
-msgid ""
-"Tells the plate-solving engine to look within these many degrees of the "
-"given center RA and dec position."
-msgstr ""
 
 msgid "Small"
 msgstr ""
@@ -131,6 +79,14 @@ msgstr ""
 msgid "Show Barnard objects"
 msgstr ""
 
+msgid ""
+"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
+msgstr ""
+
+msgid ""
+"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+msgstr ""
+
 msgid "Show PGC objects"
 msgstr ""
 
@@ -155,6 +111,82 @@ msgid "Show Tycho-2 catalog"
 msgstr ""
 
 msgid "Show CGPN objects"
+msgstr ""
+
+msgid "Show quasars"
+msgstr ""
+
+msgid "Perform a blind solve"
+msgstr ""
+
+msgid ""
+"Attempt to solve with no hints. In most cases this will work, but it will "
+"take longer."
+msgstr ""
+
+msgid "Width of the field in degrees"
+msgstr ""
+
+msgid "Width of the field in arcminutes"
+msgstr ""
+
+msgid "Resolution of the field in arcseconds/pixel"
+msgstr ""
+
+msgid "Field size units"
+msgstr ""
+
+msgid "Min field size"
+msgstr ""
+
+msgid "Estimate the lower bound for the width of this field."
+msgstr ""
+
+msgid "Max field size"
+msgstr ""
+
+msgid "Estimate the upper bound for the width of this field."
+msgstr ""
+
+msgid "Center RA"
+msgstr ""
+
+msgid "Center RA of the field in degrees, 0.000 to 360.000"
+msgstr ""
+
+msgid "Center dec"
+msgstr ""
+
+msgid "Center dec of the field in degrees, -90.000 to +90.000"
+msgstr ""
+
+msgid "Radius"
+msgstr ""
+
+msgid ""
+"Tells the plate-solving engine to look within these many degrees of the "
+"given center RA and dec position."
+msgstr ""
+
+msgid "Missing"
+msgstr ""
+
+msgid "Basic pending"
+msgstr ""
+
+msgid "Basic failed"
+msgstr ""
+
+msgid "Basic success"
+msgstr ""
+
+msgid "Advanced pending"
+msgstr ""
+
+msgid "Advanced failed"
+msgstr ""
+
+msgid "Advanced success"
 msgstr ""
 
 msgid "Getting plate-solving status, please wait..."
@@ -201,6 +233,83 @@ msgid ""
 msgstr ""
 
 msgid ""
-"AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an unepexted error."
+"AstroBin could not plate-solve this image because of an unexpected error."
+msgstr ""
+
+msgid "n/a"
+msgstr ""
+
+msgid "Starting task..."
+msgstr ""
+
+msgid "Downloading image..."
+msgstr ""
+
+msgid "Plate-solving image..."
+msgstr ""
+
+msgid "Generating image annotations..."
+msgstr ""
+
+msgid "Processing SVG documents..."
+msgstr ""
+
+msgid "Uploading results..."
+msgstr ""
+
+msgid "Task completed"
+msgstr ""
+
+msgid "Plate-solving information"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Started"
+msgstr ""
+
+msgid "Astrometry.net job"
+msgstr ""
+
+msgid "PixInsight job"
+msgstr ""
+
+msgid "PixInsight queue size"
+msgstr ""
+
+msgid "PixInsight stage"
+msgstr ""
+
+msgid "PixInsight log"
+msgstr ""
+
+msgid "RA"
+msgstr ""
+
+msgid "center"
+msgstr ""
+
+msgid "degrees"
+msgstr ""
+
+msgid "top/left"
+msgstr ""
+
+msgid "top/right"
+msgstr ""
+
+msgid "bottom/right"
+msgstr ""
+
+msgid "bottom/left"
+msgstr ""
+
+msgid "Dec"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Invalid"
 msgstr ""
