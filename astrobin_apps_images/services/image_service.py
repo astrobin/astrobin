@@ -3,6 +3,7 @@ from datetime import timedelta
 
 from annoying.functions import get_object_or_None
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.files.images import get_image_dimensions
@@ -10,6 +11,7 @@ from django.db.models import Q
 from django.urls import reverse
 
 from astrobin.enums import SubjectType, SolarSystemSubject
+from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
 from astrobin.utils import base26_encode, base26_decode, decimal_to_hours_minutes_seconds_string, \
     decimal_to_degrees_minutes_seconds_string
@@ -325,6 +327,12 @@ class ImageService:
 
     def is_platesolving_attempted(self):
         return self.image.solution and self.image.solution.status != Solver.MISSING
+
+    def display_download_menu(self, user: User) -> bool:
+        if self.image.download_limitation == DownloadLimitation.EVERYBODY:
+            return True
+
+        return user == self.image.user
 
     @staticmethod
     def get_constellation(solution):

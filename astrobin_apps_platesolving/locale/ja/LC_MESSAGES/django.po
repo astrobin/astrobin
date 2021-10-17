@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-21 19:59+0000\n"
+"POT-Creation-Date: 2021-10-17 08:44+0000\n"
 "PO-Revision-Date: 2020-11-25 03:08+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,62 +18,6 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.8\n"
 "X-POOTLE-MTIME: 1606273722.000000\n"
-
-msgid "Perform a blind solve"
-msgstr "ブラインド解析が実施されました"
-
-msgid ""
-"Attempt to solve with no hints. In most cases this will work, but it will "
-"take longer."
-msgstr ""
-"ノーヒントで実行しようとしています。ほとんどの場合、これはうまくいきますが、"
-"時間がかかります。"
-
-msgid "Width of the field in degrees"
-msgstr "度数によるフィールドの大きさ"
-
-msgid "Width of the field in arcminutes"
-msgstr "分角によるフィールドの大きさ"
-
-msgid "Resolution of the field in arcseconds/pixel"
-msgstr "秒角/ピクセルによるフィールドの解像度"
-
-msgid "Field size units"
-msgstr "フィールドサイズの単位"
-
-msgid "Min field size"
-msgstr "最小のフィールドサイズ"
-
-msgid "Estimate the lower bound for the width of this field."
-msgstr "このフィールドの幅の下限を推定します。"
-
-msgid "Max field size"
-msgstr "最大フィールドサイズ"
-
-msgid "Estimate the upper bound for the width of this field."
-msgstr "このフィールドの幅の上限を推定します。"
-
-msgid "Center RA"
-msgstr "赤経座標の中心"
-
-msgid "Center RA of the field in degrees, 0.000 to 360.000"
-msgstr "赤経座標の中心を0から360の角度で指定"
-
-msgid "Center dec"
-msgstr "赤緯座標の中心"
-
-msgid "Center dec of the field in degrees, -90.000 to +90.000"
-msgstr "赤緯座標の中心を-90から90の角度で指定"
-
-msgid "Radius"
-msgstr "角度"
-
-msgid ""
-"Tells the plate-solving engine to look within these many degrees of the "
-"given center RA and dec position."
-msgstr ""
-"星図化エンジンに与えられた赤経中心座標と赤緯中心座標から大きい角度があると"
-"言っています。"
 
 msgid "Small"
 msgstr "小"
@@ -146,6 +90,14 @@ msgstr "Sharpless天体を表示"
 msgid "Show Barnard objects"
 msgstr "バーナード天体を表示"
 
+msgid ""
+"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
+msgstr ""
+
+msgid ""
+"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+msgstr ""
+
 msgid "Show PGC objects"
 msgstr "PGC天体を表示"
 
@@ -171,6 +123,86 @@ msgstr "Tycho-2カタログを表示"
 
 msgid "Show CGPN objects"
 msgstr "CGPN天体を表示"
+
+msgid "Show quasars"
+msgstr ""
+
+msgid "Perform a blind solve"
+msgstr "ブラインド解析が実施されました"
+
+msgid ""
+"Attempt to solve with no hints. In most cases this will work, but it will "
+"take longer."
+msgstr ""
+"ノーヒントで実行しようとしています。ほとんどの場合、これはうまくいきますが、"
+"時間がかかります。"
+
+msgid "Width of the field in degrees"
+msgstr "度数によるフィールドの大きさ"
+
+msgid "Width of the field in arcminutes"
+msgstr "分角によるフィールドの大きさ"
+
+msgid "Resolution of the field in arcseconds/pixel"
+msgstr "秒角/ピクセルによるフィールドの解像度"
+
+msgid "Field size units"
+msgstr "フィールドサイズの単位"
+
+msgid "Min field size"
+msgstr "最小のフィールドサイズ"
+
+msgid "Estimate the lower bound for the width of this field."
+msgstr "このフィールドの幅の下限を推定します。"
+
+msgid "Max field size"
+msgstr "最大フィールドサイズ"
+
+msgid "Estimate the upper bound for the width of this field."
+msgstr "このフィールドの幅の上限を推定します。"
+
+msgid "Center RA"
+msgstr "赤経座標の中心"
+
+msgid "Center RA of the field in degrees, 0.000 to 360.000"
+msgstr "赤経座標の中心を0から360の角度で指定"
+
+msgid "Center dec"
+msgstr "赤緯座標の中心"
+
+msgid "Center dec of the field in degrees, -90.000 to +90.000"
+msgstr "赤緯座標の中心を-90から90の角度で指定"
+
+msgid "Radius"
+msgstr "角度"
+
+msgid ""
+"Tells the plate-solving engine to look within these many degrees of the "
+"given center RA and dec position."
+msgstr ""
+"星図化エンジンに与えられた赤経中心座標と赤緯中心座標から大きい角度があると"
+"言っています。"
+
+msgid "Missing"
+msgstr ""
+
+msgid "Basic pending"
+msgstr ""
+
+msgid "Basic failed"
+msgstr ""
+
+msgid "Basic success"
+msgstr ""
+
+msgid "Advanced pending"
+msgstr ""
+
+msgid "Advanced failed"
+msgstr ""
+
+msgid "Advanced success"
+msgstr ""
 
 msgid "Getting plate-solving status, please wait..."
 msgstr "図版化を実施中です。しばらくお待ちください。"
@@ -220,6 +252,83 @@ msgid ""
 msgstr ""
 
 msgid ""
-"AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an unepexted error."
+"AstroBin could not plate-solve this image because of an unexpected error."
+msgstr ""
+
+msgid "n/a"
+msgstr ""
+
+msgid "Starting task..."
+msgstr ""
+
+msgid "Downloading image..."
+msgstr ""
+
+msgid "Plate-solving image..."
+msgstr ""
+
+msgid "Generating image annotations..."
+msgstr ""
+
+msgid "Processing SVG documents..."
+msgstr ""
+
+msgid "Uploading results..."
+msgstr ""
+
+msgid "Task completed"
+msgstr ""
+
+msgid "Plate-solving information"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Started"
+msgstr ""
+
+msgid "Astrometry.net job"
+msgstr ""
+
+msgid "PixInsight job"
+msgstr ""
+
+msgid "PixInsight queue size"
+msgstr ""
+
+msgid "PixInsight stage"
+msgstr ""
+
+msgid "PixInsight log"
+msgstr ""
+
+msgid "RA"
+msgstr ""
+
+msgid "center"
+msgstr ""
+
+msgid "degrees"
+msgstr ""
+
+msgid "top/left"
+msgstr ""
+
+msgid "top/right"
+msgstr ""
+
+msgid "bottom/right"
+msgstr ""
+
+msgid "bottom/left"
+msgstr ""
+
+msgid "Dec"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Invalid"
 msgstr ""

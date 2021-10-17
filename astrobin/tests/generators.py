@@ -6,6 +6,7 @@ from django.contrib.auth.models import User, Group
 from pybb.models import Post, Category, Forum, Topic
 from subscription.models import Subscription, UserSubscription
 
+from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.models import Image, ImageRevision, Telescope, Mount, Collection
 from toggleproperties.models import ToggleProperty
 
@@ -47,6 +48,7 @@ class Generators:
             recovery_ignored=kwargs.pop('recovery_ignored', None),
             description=kwargs.pop('description', None),
             description_bbcode=kwargs.pop('description_bbcode', None),
+            download_limitation=kwargs.pop('download_limitations', DownloadLimitation.ME_ONLY),
         )
 
     @staticmethod

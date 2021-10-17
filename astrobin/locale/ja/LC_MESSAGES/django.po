@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-21 19:56+0000\n"
+"POT-Creation-Date: 2021-10-17 08:44+0000\n"
 "PO-Revision-Date: 2020-11-27 01:58+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -834,11 +834,11 @@ msgid ""
 "Editing groups is not possible while the image is not in your public area."
 msgstr ""
 
-msgid "This field is required."
-msgstr "この項目は必須です。"
-
 msgid "Unable to parse."
 msgstr "解析できません。"
+
+msgid "This field is required."
+msgstr "この項目は必須です。"
 
 msgid "Please select a remote source if this image was acquired remotely."
 msgstr ""
@@ -914,6 +914,12 @@ msgstr "経度 (分)"
 
 msgid "Longitude (seconds)"
 msgstr "経度 (秒)"
+
+msgid "Recipients"
+msgstr ""
+
+msgid "Are you a robot?"
+msgstr ""
 
 msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
@@ -1217,6 +1223,14 @@ msgstr "コメント"
 msgid ""
 "Information, description or comment about your own copy of this product."
 msgstr "あなたが所持しているこの製品の情報や説明、コメントを記入してください。"
+
+msgid "Modded"
+msgstr ""
+
+msgid ""
+"Has this object been modified for astrophotography? (especially applicable "
+"to cameras)"
+msgstr ""
 
 msgid "Refractor: achromatic"
 msgstr "アクロマート屈折望遠鏡"
@@ -1586,6 +1600,14 @@ msgid ""
 "Specify what user groups are allowed to view this image at its full size."
 msgstr ""
 
+msgid "Display download menu"
+msgstr ""
+
+msgid ""
+"Please note: even if you allow everyone to access download options, only you "
+"will be able to download the originally uploaded file."
+msgstr ""
+
 msgid "Apply watermark to image"
 msgstr "著作権表記を画像に適用"
 
@@ -1862,15 +1884,6 @@ msgid ""
 "sign, and only have letters, numbers, periods, and underlines."
 msgstr ""
 
-msgid "Timezone"
-msgstr "タイムゾーン"
-
-msgid ""
-"By selecting this, you will see all the dates on AstroBin in your timezone."
-msgstr ""
-"これを選択した場合には、AstroBinでは選択したタイムゾーンで日付が表示されま"
-"す。"
-
 msgid "About you"
 msgstr "あなたについて"
 
@@ -1918,11 +1931,11 @@ msgstr "あなたがフォローしている人がアップロードした全画
 msgid "Default front page view"
 msgstr "デフォルトのフロントページ表示"
 
-msgid "Publication time"
+msgid "Publication"
 msgstr ""
 
-msgid "Acquisition time"
-msgstr "撮影時刻"
+msgid "Acquisition"
+msgstr ""
 
 msgid "Year"
 msgstr "年"
@@ -2623,9 +2636,6 @@ msgstr ""
 msgid "Zulu"
 msgstr ""
 
-msgid "Message sent"
-msgstr "メッセージを送信"
-
 msgid "Integration hours, yearly"
 msgstr "露出時間（何年）"
 
@@ -3093,6 +3103,17 @@ msgstr "結構です"
 msgid "Tell me more!"
 msgstr "もっと教えてください！"
 
+msgid "Only group members can post in a group's forum."
+msgstr ""
+
+msgid ""
+"Please join or request to join the group, and then you'll be able to post a "
+"new topic."
+msgstr ""
+
+msgid "OK"
+msgstr "OK"
+
 msgid "Are you really sure?"
 msgstr "実行しますか？"
 
@@ -3138,12 +3159,28 @@ msgstr ""
 msgid "Continue"
 msgstr "続行"
 
-msgid ""
-"You will remove your shadow-ban on this user, and their comments, messages, "
-"etc, will appear again on your content."
+msgid "This operation will reload the current page."
 msgstr ""
-"このユーザーのシャドウBANを解除すると、そのユーザーのコメントやメッセージなど"
-"があなたのコンテンツに再び表示されるようになります。"
+
+msgid "If you have any unsaved information in a form, it will be lost."
+msgstr ""
+
+msgid ""
+"You can also dismiss this window, and your operation will be applied at the "
+"next page navigation."
+msgstr ""
+
+msgid "Report abuse"
+msgstr ""
+
+msgid ""
+"When you report abuse on some content on AstroBin, the content will be "
+"hidden until a moderator reviews it. Abuse reports are anonymous and the "
+"content's owner will not be notified."
+msgstr ""
+
+msgid "Please specify a reason for this abuse report."
+msgstr ""
 
 msgid "Quick search"
 msgstr "クイック検索"
@@ -3211,9 +3248,6 @@ msgstr "連絡先"
 msgid "Would you like to start using your real name on AstroBin?"
 msgstr "あなたの本当の名前を使ってAstroBinを始めようとしてますか?"
 
-msgid "OK"
-msgstr "OK"
-
 msgid "Login"
 msgstr "ログイン"
 
@@ -3265,6 +3299,12 @@ msgstr "APIキー"
 
 msgid "My settings"
 msgstr "設定"
+
+msgid "Disable high contrast theme"
+msgstr ""
+
+msgid "Enable high contrast theme"
+msgstr ""
 
 msgid "Logout"
 msgstr "ログアウト"
@@ -3379,161 +3419,6 @@ msgstr "同意する"
 msgid "More"
 msgstr "もっと"
 
-msgid "Instructions and examples"
-msgstr "手順と例"
-
-msgid ""
-"AstroBin's gear database is a little messy: many users have used different "
-"names for the same object, ignoring the suggestions. But don't worry, we can "
-"fix it, and after it's fixed, it shouldn't get very messy in the future."
-msgstr ""
-"AstroBinの機材データベースは少し散らかってます。多くのユーザーは提案を無視し"
-"て、同じ機材に別の名前を使っています。しかし、心配しないでいいです。我々はそ"
-"れを修正することができるし、修正後は、それは整理されるでしょう。"
-
-msgid "Please read the instructions and the example below, they are important!"
-msgstr "説明書と以下の例を読んでください。それはとても大切です!"
-
-msgid ""
-"In a wiki-style collaborative effort, we can all work together, a few items "
-"at a time, to improve the situation. It's very simple! This is what you need "
-"to do:"
-msgstr ""
-"Wikiスタイルの共同作業によって、我々は全ての環境の改良作業を皆で同時にするこ"
-"とができます。"
-
-msgid "Make sure both the make and the name are in English."
-msgstr "メーカーと英語名が同じになるようにしてください。"
-
-msgid "Make sure the make is not written again in the name field."
-msgstr "名前の項目にメーカー名をもう一度入力しないようにしてください。"
-
-msgid ""
-"Make sure there are no words other than the simple make and name of the "
-"product."
-msgstr "単純なメーカー名と製品名以外の言葉が無いようにしてください。"
-
-msgid "Make sure the words are properly capitalized."
-msgstr "言葉を適切に大文字化するようにしてください。"
-
-msgid "Here's some good examples:"
-msgstr "いくつかの良い例を記載します"
-
-msgid "And here's some bad examples, that need fixing, and why:"
-msgstr "ここに間違った例があったら、それを修正してください。なぜなら。。。"
-
-msgid ""
-"The words are not properly capitalized. It should be \"Meade\" and \"LX200\"."
-msgstr ""
-"言葉は適当に大文字化しないでください。\"Meade\" や \"LX200\"のようにしてくだ"
-"さい。"
-
-msgid ""
-"The word \"Celestron\" appears also in the name of the product. That should "
-"just be the name of the model, not the make name too."
-msgstr ""
-"\"Celestron\"という言葉は製品の名前です。それはモデル名であって、メーカー名で"
-"はないです。"
-
-msgid ""
-"\"sold\" is an information that refers only to a particular user. Gear "
-"objects are shared among everyone, in the database. The word \"(sold)\" "
-"should be removed."
-msgstr ""
-"\"sold\"は特定のユーザーだけが適用できる情報です。各々機材はデータベース上で"
-"はすべての人々に共有されています。\"(sold)\"という言葉があれば削除します。"
-
-msgid ""
-"\"modified\" is an information that refers only to a particular user. Gear "
-"objects are shared among everyone, in the database. The word \"(modified)\" "
-"should be removed."
-msgstr ""
-"\"modified\"は特定のユーザーだけが適用できる情報です。各々の装備品はデータ"
-"ベース上ではすべての人々に共有されています。\"(modified)\"という言葉があれば"
-"削除します。"
-
-msgid ""
-"Obviously, the user who created this mount in the database, has it on a "
-"fixed pier. But this doesn't mean that SkyWatcher sells a NEQ-6 that you can "
-"only buy on a pier! \"on a fixed pier\" should be removed."
-msgstr ""
-"データベースにある赤道儀を登録したユーザーは明らかにピラーをもっています。し"
-"かし、SkyWatcherはピラー付きのNEQ-6を売ったということを意味しているかわかりま"
-"せんので、\"on a fixed pier\"という言葉は削除します。"
-
-msgid ""
-"The name of the telescope is not written in English, and that is a "
-"description, not the actual product name. Here I would assume \"80ED\". "
-"Moreover, \"80mm\" is a property of the telescope, not part of its name."
-msgstr ""
-"望遠鏡の名前は英語ではありません。それは説明文であって、実際の製品名ではあり"
-"ません。\"80ED\"が最適だと私は考えるし、\"80mm\"は望遠鏡の性能であって、名前"
-"の一部ではありません。"
-
-msgid ""
-"\"5.4&mu;\" is a property of the CCD, not part of its name. It should be "
-"removed. But sometimes a property can be part of the name of the object, "
-"because it's such a generic name: for example, Newton 8\" f/6 would be okay, "
-"because just \"Newton\" would not be enough."
-msgstr ""
-"\"5.4&mu;\" はCCDの性能で名前の一部ではありません。なので、それは削除されま"
-"す。しかし時々、一般的な名前となっているのであれば、特性は名前の一部となって"
-"いることがあります。例えばNewtonだけでは不十分なので、Newton 8\" f/6はOKにし"
-"ています。"
-
-msgid ""
-"\"CS5\" is the version of Photoshop, but the procut name is just \"Photoshop"
-"\". \"CS5\" should be removed."
-msgstr ""
-"\"CS5\" はPhotoshopのバージョンであって、\"Photoshop\"が製品名です。\"CS5\"は"
-"削除されます。"
-
-msgid ""
-"Thanks for reading so far. If you are not sure about how to fix a gear item, "
-"just make assumptions and hope you are right. Mistakes will surface "
-"eventually."
-msgstr ""
-"ここまで読んでくれてありがとう。もしあなたが装備を修正する方法がわからいけ"
-"ど、修正ができればと思っているのであれば、それはあなたは正しいです。ミスは最"
-"終的には表面化してしまうのです。"
-
-msgid ""
-"Now let's get to work, good luck and thank you on behalf of the whole "
-"AstroBin community!"
-msgstr ""
-"さあ、作業をはじめましょう。すべてのAstroBinのコミュニティの代表として、あな"
-"たに幸運と感謝を願います。"
-
-msgid "After you fix an item, another one at random will be offered."
-msgstr "アイテムを修正した後、他の誰かにそれは提供されるでしょう。"
-
-msgid "Already fixed:"
-msgstr "修正済み"
-
-msgid "Remaining:"
-msgstr "残り"
-
-msgid "Fix"
-msgstr "修正"
-
-msgid "Mark as good"
-msgstr "goodとしてマーク"
-
-msgid "Skip"
-msgstr "スキップ"
-
-msgid "Enough for now"
-msgstr "今のところ十分"
-
-msgid "Thanks!"
-msgstr "ありがとう!"
-
-msgid ""
-"Your contribute was very important, and the whole AstroBin community is "
-"grateful."
-msgstr ""
-"あなたの貢献はとても大事でした。全てのAstrobinコミュニティが感謝しています。"
-
 msgid "Additional information requested"
 msgstr "追加情報を求めます"
 
@@ -3623,6 +3508,10 @@ msgstr "小売店との連携を無効にする"
 msgid "Shop %(name)s at %(retailer)s"
 msgstr "%(retailer)sの%(name)s"
 
+#, python-format
+msgid "Shop %(name)s at AstroBin's partners"
+msgstr ""
+
 msgid "Frames"
 msgstr "撮影フレーム"
 
@@ -3655,6 +3544,12 @@ msgstr "視野半径"
 
 msgid "WCS transformation"
 msgstr "WCS変換"
+
+msgid "More info"
+msgstr ""
+
+msgid "Open"
+msgstr ""
 
 msgid "Find images in the same area"
 msgstr ""
@@ -3733,6 +3628,27 @@ msgstr "管理者"
 msgid "Ban user"
 msgstr "禁止ユーザー"
 
+msgid "AstroBin is preparing your download. Please wait..."
+msgstr ""
+
+msgid "Medium size"
+msgstr ""
+
+msgid "Large size"
+msgstr "大きいサイズ"
+
+msgid "Original size"
+msgstr ""
+
+msgid "Basic annotations"
+msgstr ""
+
+msgid "Advanced annotations"
+msgstr ""
+
+msgid "Original file"
+msgstr ""
+
 msgid "Thumbnails"
 msgstr "サムネイル"
 
@@ -3801,9 +3717,6 @@ msgstr "注釈"
 
 msgid "Normal"
 msgstr "普通"
-
-msgid "Large size"
-msgstr "大きいサイズ"
 
 msgid "Full size"
 msgstr "フルサイズ"
@@ -3983,10 +3896,6 @@ msgstr ""
 "画像を再修正しましたか？\n"
 "それを新しいバーションとしてアップロードしよう！"
 
-#, python-format
-msgid "Over 100 MB? Try the <a href=\"%(url)s/%(id)s\">new beta uploader</a>!"
-msgstr ""
-
 msgid ""
 "Please note: AstroBin is not officially a backup service. So please also "
 "keep additional copies of your file. However, by storing your work here, you "
@@ -3997,6 +3906,10 @@ msgstr ""
 msgid ""
 "Read about how AstroBin stores your files safely on the <a href=\"%(faq_url)s"
 "\">FAQ page</a>."
+msgstr ""
+
+#, python-format
+msgid "Over 100 MB? Try the <a href=\"%(url)s/%(id)s\">new beta uploader</a>!"
 msgstr ""
 
 msgid "Clear"
@@ -4024,6 +3937,12 @@ msgstr "リビジョン"
 
 msgid "Sky plot"
 msgstr "星図"
+
+msgid "Upgrade your account to enable plate-solving."
+msgstr ""
+
+msgid "Learn more."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -4139,6 +4058,9 @@ msgid "Next step: gear used"
 msgstr "次のステップは「使用機材」"
 
 msgid "sponsor"
+msgstr ""
+
+msgid "Insert your image description here..."
 msgstr ""
 
 msgid "Edit your image: gear used"
@@ -4327,6 +4249,11 @@ msgstr ""
 msgid "Shop now"
 msgstr ""
 
+#, python-format
+msgid ""
+"Interested in <strong>%(brand)s</strong>? Our sponsors sells this brand!"
+msgstr ""
+
 msgid "Integration"
 msgstr "総露出時間"
 
@@ -4353,6 +4280,15 @@ msgstr ""
 
 msgid "Latest from the forums"
 msgstr "フォーラムの最後"
+
+msgid "Poll"
+msgstr ""
+
+msgid "Unanswered"
+msgstr ""
+
+msgid "This topic has no replies."
+msgstr ""
 
 msgid "Recent images"
 msgstr "最新画像"
@@ -4481,11 +4417,8 @@ msgid "Your comment was approved!"
 msgstr ""
 
 msgid ""
-"As a new user on AstroBin, your first 3 comments will go through a "
-"moderation queue, to prevent spam."
-msgstr ""
-
-msgid "The following comment of yours was just approved by a moderator."
+"The following comment of yours was just approved by a moderator or the owner "
+"of the content that you commented."
 msgstr ""
 
 msgid "View comment"
@@ -4587,6 +4520,20 @@ msgid ""
 "AstroBin.\n"
 msgstr ""
 
+msgid "Your forum post was approved!"
+msgstr ""
+
+msgid ""
+"As a new user on AstroBin, your first 3 forum posts will go through a "
+"moderation queue, to prevent spam."
+msgstr ""
+
+msgid "The following forum post of yours was just approved by a moderator."
+msgstr ""
+
+msgid "View forum post"
+msgstr ""
+
 #, python-format
 msgid ""
 "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
@@ -4625,6 +4572,23 @@ msgid "Your image could not be plate-solved."
 msgstr "あなたの画像は図画化できませんでした。"
 
 #, python-format
+msgid ""
+"Unfortunately, AstroBin failed to perform the advanced plate-solution of "
+"your image: <strong>%(title)s</strong>."
+msgstr ""
+
+msgid ""
+"Apologies for the inconvenience. AstroBin and PixInsight work continuously "
+"to improve the quality and performance of the service."
+msgstr ""
+
+#, python-format
+msgid ""
+"Unfortunately, AstroBin failed to perform the advanced plate-solution of "
+"your image: %(title)s."
+msgstr ""
+
+#, python-format
 msgid "<a href=\"%(object_url)s\">Your image</a> was plate-solved."
 msgstr ""
 
@@ -4639,6 +4603,17 @@ msgstr "<a href=\"%(object_url)s\">あなたの画像は図画化に成功しま
 
 msgid "Your image has been successfully plate-solved."
 msgstr "あなたの画像は図画化に成功しました。"
+
+#, python-format
+msgid ""
+"AstroBin completed the advanced plate-solution of your image: <strong>"
+"%(title)s</strong>."
+msgstr ""
+
+#, python-format
+msgid ""
+"AstroBin completed the advanced plate-solution of your image: %(title)s."
+msgstr ""
 
 msgid "An image you promoted made it to IOTD"
 msgstr ""
@@ -5065,6 +5040,32 @@ msgstr "<strong>%(user)s</strong>が新しい画像を公開"
 msgid "New image by %(user)s"
 msgstr "%(user)s の新着画像"
 
+msgid "A new comment on your image requires moderation"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your image \"%(title)s\" received a comment by a new user on AstroBin, and "
+"it requires your moderation before it's displayed publicly."
+msgstr ""
+
+msgid ""
+"Please take a minute to review and approve or reject the following comment:"
+msgstr ""
+
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in an image description."
+msgstr ""
+
+#, python-format
+msgid "%(user)s mentioned you in an image description."
+msgstr ""
+
+#, python-format
+msgid "<strong>%(user)s</strong> mentioned you in an image description."
+msgstr ""
+
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> has published a new image revision on "
@@ -5165,22 +5166,21 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(user)s posted a new topic to the group: \"%(group_name)s\"\n"
-"\n"
-"\"%(topic_title)s\"\n"
-"\n"
-"View the topic: <a href=\"%(url)s\">%(url)s</a>\n"
-"View the group: <a href=\"%(group_url)s\">%(group_url)s</a>"
+"<a href=\"%(user_url)s\">%(user)s</a> posted a new topic to the group <a "
+"href=\"%(group_url)s\">%(group_name)s</a>."
+msgstr ""
+
+msgid "View topic"
 msgstr ""
 
 #, python-format
-msgid ""
-"%(user)s posted a new topic to the group: \"%(group_name)s\"\n"
-"\n"
-"\"%(topic_title)s\"\n"
-"\n"
-"View the topic: %(url)s\n"
-"View the group: %(group_url)s"
+msgid "%(user)s posted a new topic to the following group: %(group_name)s."
+msgstr ""
+
+msgid "View the topic"
+msgstr ""
+
+msgid "View the group"
 msgstr ""
 
 #, python-format
@@ -5324,6 +5324,16 @@ msgstr ""
 msgid "No additional information available for this item."
 msgstr ""
 
+msgid ""
+"Please support AstroBin by shopping for this item at one of our partners!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Please support AstroBin by shopping <strong>%(brand)s</strong> at one of our "
+"partners!"
+msgstr ""
+
 msgid "Find images"
 msgstr "画像を検索"
 
@@ -5354,6 +5364,12 @@ msgid ""
 msgstr ""
 
 msgid "View forums"
+msgstr ""
+
+#, python-format
+msgid ""
+"Please join the <a href=\"%(group_page)s\">%(group_name)s</a> group to post "
+"in this forum."
 msgstr ""
 
 msgid "This topic was closed by a moderator."
@@ -5462,6 +5478,9 @@ msgstr ""
 msgid "*** Type your reply here ***"
 msgstr ""
 
+msgid "Something went wrong, sorry! Please try again."
+msgstr ""
+
 msgid "(deleted)"
 msgstr ""
 
@@ -5480,8 +5499,14 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
+msgid "Quote this entire post in your reply."
+msgstr ""
+
 msgid "quote"
 msgstr "引用文"
+
+msgid "You must select some text first."
+msgstr ""
 
 msgid "quote selected"
 msgstr "引用を選択済み"
@@ -5536,13 +5561,16 @@ msgstr ""
 msgid "Click here"
 msgstr ""
 
+msgid "Quote the selected text in your reply"
+msgstr ""
+
 msgid "Topic"
 msgstr ""
 
-msgid "Last post"
+msgid "Replies"
 msgstr ""
 
-msgid "Poll"
+msgid "Last post"
 msgstr ""
 
 msgid "Sticky"
@@ -6215,6 +6243,9 @@ msgstr ""
 msgid "Key/value pairs"
 msgstr ""
 
+msgid "Overlays"
+msgstr ""
+
 msgid "Please confirm your recovered images"
 msgstr ""
 
@@ -6445,6 +6476,27 @@ msgid "What camera was used in the acquisition of the image?"
 msgstr ""
 
 msgid "Guider/planetary"
+msgstr ""
+
+msgid "Select range"
+msgstr ""
+
+msgid "Last 7 days"
+msgstr ""
+
+msgid "Last 30 days"
+msgstr ""
+
+msgid "Last 90 days"
+msgstr ""
+
+msgid "Current week"
+msgstr ""
+
+msgid "Current month"
+msgstr ""
+
+msgid "Current year"
 msgstr ""
 
 msgid "Imaging telescopes"
@@ -6717,11 +6769,191 @@ msgstr ""
 msgid "Referral code (optional)"
 msgstr ""
 
-msgid "Are you a robot?"
-msgstr ""
-
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid "Timezone"
+#~ msgstr "タイムゾーン"
+
+#~ msgid ""
+#~ "By selecting this, you will see all the dates on AstroBin in your "
+#~ "timezone."
+#~ msgstr ""
+#~ "これを選択した場合には、AstroBinでは選択したタイムゾーンで日付が表示されま"
+#~ "す。"
+
+#~ msgid "Acquisition time"
+#~ msgstr "撮影時刻"
+
+#~ msgid "Message sent"
+#~ msgstr "メッセージを送信"
+
+#~ msgid ""
+#~ "You will remove your shadow-ban on this user, and their comments, "
+#~ "messages, etc, will appear again on your content."
+#~ msgstr ""
+#~ "このユーザーのシャドウBANを解除すると、そのユーザーのコメントやメッセージ"
+#~ "などがあなたのコンテンツに再び表示されるようになります。"
+
+#~ msgid "Instructions and examples"
+#~ msgstr "手順と例"
+
+#~ msgid ""
+#~ "AstroBin's gear database is a little messy: many users have used "
+#~ "different names for the same object, ignoring the suggestions. But don't "
+#~ "worry, we can fix it, and after it's fixed, it shouldn't get very messy "
+#~ "in the future."
+#~ msgstr ""
+#~ "AstroBinの機材データベースは少し散らかってます。多くのユーザーは提案を無視"
+#~ "して、同じ機材に別の名前を使っています。しかし、心配しないでいいです。我々"
+#~ "はそれを修正することができるし、修正後は、それは整理されるでしょう。"
+
+#~ msgid ""
+#~ "Please read the instructions and the example below, they are important!"
+#~ msgstr "説明書と以下の例を読んでください。それはとても大切です!"
+
+#~ msgid ""
+#~ "In a wiki-style collaborative effort, we can all work together, a few "
+#~ "items at a time, to improve the situation. It's very simple! This is what "
+#~ "you need to do:"
+#~ msgstr ""
+#~ "Wikiスタイルの共同作業によって、我々は全ての環境の改良作業を皆で同時にする"
+#~ "ことができます。"
+
+#~ msgid "Make sure both the make and the name are in English."
+#~ msgstr "メーカーと英語名が同じになるようにしてください。"
+
+#~ msgid "Make sure the make is not written again in the name field."
+#~ msgstr "名前の項目にメーカー名をもう一度入力しないようにしてください。"
+
+#~ msgid ""
+#~ "Make sure there are no words other than the simple make and name of the "
+#~ "product."
+#~ msgstr "単純なメーカー名と製品名以外の言葉が無いようにしてください。"
+
+#~ msgid "Make sure the words are properly capitalized."
+#~ msgstr "言葉を適切に大文字化するようにしてください。"
+
+#~ msgid "Here's some good examples:"
+#~ msgstr "いくつかの良い例を記載します"
+
+#~ msgid "And here's some bad examples, that need fixing, and why:"
+#~ msgstr "ここに間違った例があったら、それを修正してください。なぜなら。。。"
+
+#~ msgid ""
+#~ "The words are not properly capitalized. It should be \"Meade\" and "
+#~ "\"LX200\"."
+#~ msgstr ""
+#~ "言葉は適当に大文字化しないでください。\"Meade\" や \"LX200\"のようにしてく"
+#~ "ださい。"
+
+#~ msgid ""
+#~ "The word \"Celestron\" appears also in the name of the product. That "
+#~ "should just be the name of the model, not the make name too."
+#~ msgstr ""
+#~ "\"Celestron\"という言葉は製品の名前です。それはモデル名であって、メーカー"
+#~ "名ではないです。"
+
+#~ msgid ""
+#~ "\"sold\" is an information that refers only to a particular user. Gear "
+#~ "objects are shared among everyone, in the database. The word \"(sold)\" "
+#~ "should be removed."
+#~ msgstr ""
+#~ "\"sold\"は特定のユーザーだけが適用できる情報です。各々機材はデータベース上"
+#~ "ではすべての人々に共有されています。\"(sold)\"という言葉があれば削除しま"
+#~ "す。"
+
+#~ msgid ""
+#~ "\"modified\" is an information that refers only to a particular user. "
+#~ "Gear objects are shared among everyone, in the database. The word "
+#~ "\"(modified)\" should be removed."
+#~ msgstr ""
+#~ "\"modified\"は特定のユーザーだけが適用できる情報です。各々の装備品はデータ"
+#~ "ベース上ではすべての人々に共有されています。\"(modified)\"という言葉があれ"
+#~ "ば削除します。"
+
+#~ msgid ""
+#~ "Obviously, the user who created this mount in the database, has it on a "
+#~ "fixed pier. But this doesn't mean that SkyWatcher sells a NEQ-6 that you "
+#~ "can only buy on a pier! \"on a fixed pier\" should be removed."
+#~ msgstr ""
+#~ "データベースにある赤道儀を登録したユーザーは明らかにピラーをもっています。"
+#~ "しかし、SkyWatcherはピラー付きのNEQ-6を売ったということを意味しているかわ"
+#~ "かりませんので、\"on a fixed pier\"という言葉は削除します。"
+
+#~ msgid ""
+#~ "The name of the telescope is not written in English, and that is a "
+#~ "description, not the actual product name. Here I would assume \"80ED\". "
+#~ "Moreover, \"80mm\" is a property of the telescope, not part of its name."
+#~ msgstr ""
+#~ "望遠鏡の名前は英語ではありません。それは説明文であって、実際の製品名ではあ"
+#~ "りません。\"80ED\"が最適だと私は考えるし、\"80mm\"は望遠鏡の性能であって、"
+#~ "名前の一部ではありません。"
+
+#~ msgid ""
+#~ "\"5.4&mu;\" is a property of the CCD, not part of its name. It should be "
+#~ "removed. But sometimes a property can be part of the name of the object, "
+#~ "because it's such a generic name: for example, Newton 8\" f/6 would be "
+#~ "okay, because just \"Newton\" would not be enough."
+#~ msgstr ""
+#~ "\"5.4&mu;\" はCCDの性能で名前の一部ではありません。なので、それは削除され"
+#~ "ます。しかし時々、一般的な名前となっているのであれば、特性は名前の一部と"
+#~ "なっていることがあります。例えばNewtonだけでは不十分なので、Newton 8\" f/6"
+#~ "はOKにしています。"
+
+#~ msgid ""
+#~ "\"CS5\" is the version of Photoshop, but the procut name is just "
+#~ "\"Photoshop\". \"CS5\" should be removed."
+#~ msgstr ""
+#~ "\"CS5\" はPhotoshopのバージョンであって、\"Photoshop\"が製品名で"
+#~ "す。\"CS5\"は削除されます。"
+
+#~ msgid ""
+#~ "Thanks for reading so far. If you are not sure about how to fix a gear "
+#~ "item, just make assumptions and hope you are right. Mistakes will surface "
+#~ "eventually."
+#~ msgstr ""
+#~ "ここまで読んでくれてありがとう。もしあなたが装備を修正する方法がわからいけ"
+#~ "ど、修正ができればと思っているのであれば、それはあなたは正しいです。ミスは"
+#~ "最終的には表面化してしまうのです。"
+
+#~ msgid ""
+#~ "Now let's get to work, good luck and thank you on behalf of the whole "
+#~ "AstroBin community!"
+#~ msgstr ""
+#~ "さあ、作業をはじめましょう。すべてのAstroBinのコミュニティの代表として、あ"
+#~ "なたに幸運と感謝を願います。"
+
+#~ msgid "After you fix an item, another one at random will be offered."
+#~ msgstr "アイテムを修正した後、他の誰かにそれは提供されるでしょう。"
+
+#~ msgid "Already fixed:"
+#~ msgstr "修正済み"
+
+#~ msgid "Remaining:"
+#~ msgstr "残り"
+
+#~ msgid "Fix"
+#~ msgstr "修正"
+
+#~ msgid "Mark as good"
+#~ msgstr "goodとしてマーク"
+
+#~ msgid "Skip"
+#~ msgstr "スキップ"
+
+#~ msgid "Enough for now"
+#~ msgstr "今のところ十分"
+
+#~ msgid "Thanks!"
+#~ msgstr "ありがとう!"
+
+#~ msgid ""
+#~ "Your contribute was very important, and the whole AstroBin community is "
+#~ "grateful."
+#~ msgstr ""
+#~ "あなたの貢献はとても大事でした。全てのAstrobinコミュニティが感謝していま"
+#~ "す。"
 
 #~ msgid ""
 #~ "You have received a private message on AstroBin!\n"

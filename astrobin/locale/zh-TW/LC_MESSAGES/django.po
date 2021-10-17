@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-21 19:56+0000\n"
+"POT-Creation-Date: 2021-10-17 08:44+0000\n"
 "PO-Revision-Date: 2015-12-30 10:07+0000\n"
 "Last-Translator: marmotstar <marmot.subaru@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -822,11 +822,11 @@ msgid ""
 "Editing groups is not possible while the image is not in your public area."
 msgstr ""
 
-msgid "This field is required."
-msgstr "必填"
-
 msgid "Unable to parse."
 msgstr ""
+
+msgid "This field is required."
+msgstr "必填"
 
 msgid "Please select a remote source if this image was acquired remotely."
 msgstr ""
@@ -898,6 +898,12 @@ msgstr "經度(minutes)"
 
 msgid "Longitude (seconds)"
 msgstr "經度(seconds)"
+
+msgid "Recipients"
+msgstr ""
+
+msgid "Are you a robot?"
+msgstr ""
 
 msgid ""
 "All the telescopes and lenses you own, including the ones you use for "
@@ -1188,6 +1194,14 @@ msgstr ""
 
 msgid ""
 "Information, description or comment about your own copy of this product."
+msgstr ""
+
+msgid "Modded"
+msgstr ""
+
+msgid ""
+"Has this object been modified for astrophotography? (especially applicable "
+"to cameras)"
 msgstr ""
 
 msgid "Refractor: achromatic"
@@ -1550,6 +1564,14 @@ msgid ""
 "Specify what user groups are allowed to view this image at its full size."
 msgstr ""
 
+msgid "Display download menu"
+msgstr ""
+
+msgid ""
+"Please note: even if you allow everyone to access download options, only you "
+"will be able to download the originally uploaded file."
+msgstr ""
+
 msgid "Apply watermark to image"
 msgstr ""
 
@@ -1822,13 +1844,6 @@ msgid ""
 "sign, and only have letters, numbers, periods, and underlines."
 msgstr ""
 
-msgid "Timezone"
-msgstr ""
-
-msgid ""
-"By selecting this, you will see all the dates on AstroBin in your timezone."
-msgstr ""
-
 msgid "About you"
 msgstr ""
 
@@ -1873,10 +1888,10 @@ msgstr ""
 msgid "Default front page view"
 msgstr ""
 
-msgid "Publication time"
+msgid "Publication"
 msgstr ""
 
-msgid "Acquisition time"
+msgid "Acquisition"
 msgstr ""
 
 msgid "Year"
@@ -2560,9 +2575,6 @@ msgstr ""
 msgid "Zulu"
 msgstr ""
 
-msgid "Message sent"
-msgstr ""
-
 msgid "Integration hours, yearly"
 msgstr ""
 
@@ -3001,6 +3013,17 @@ msgstr ""
 msgid "Tell me more!"
 msgstr ""
 
+msgid "Only group members can post in a group's forum."
+msgstr ""
+
+msgid ""
+"Please join or request to join the group, and then you'll be able to post a "
+"new topic."
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
 msgid "Are you really sure?"
 msgstr ""
 
@@ -3041,9 +3064,27 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
+msgid "This operation will reload the current page."
+msgstr ""
+
+msgid "If you have any unsaved information in a form, it will be lost."
+msgstr ""
+
 msgid ""
-"You will remove your shadow-ban on this user, and their comments, messages, "
-"etc, will appear again on your content."
+"You can also dismiss this window, and your operation will be applied at the "
+"next page navigation."
+msgstr ""
+
+msgid "Report abuse"
+msgstr ""
+
+msgid ""
+"When you report abuse on some content on AstroBin, the content will be "
+"hidden until a moderator reviews it. Abuse reports are anonymous and the "
+"content's owner will not be notified."
+msgstr ""
+
+msgid "Please specify a reason for this abuse report."
 msgstr ""
 
 msgid "Quick search"
@@ -3112,9 +3153,6 @@ msgstr ""
 msgid "Would you like to start using your real name on AstroBin?"
 msgstr ""
 
-msgid "OK"
-msgstr ""
-
 msgid "Login"
 msgstr ""
 
@@ -3160,6 +3198,12 @@ msgid "API Keys"
 msgstr ""
 
 msgid "My settings"
+msgstr ""
+
+msgid "Disable high contrast theme"
+msgstr ""
+
+msgid "Enable high contrast theme"
 msgstr ""
 
 msgid "Logout"
@@ -3254,129 +3298,6 @@ msgstr ""
 msgid "More"
 msgstr ""
 
-msgid "Instructions and examples"
-msgstr ""
-
-msgid ""
-"AstroBin's gear database is a little messy: many users have used different "
-"names for the same object, ignoring the suggestions. But don't worry, we can "
-"fix it, and after it's fixed, it shouldn't get very messy in the future."
-msgstr ""
-
-msgid "Please read the instructions and the example below, they are important!"
-msgstr ""
-
-msgid ""
-"In a wiki-style collaborative effort, we can all work together, a few items "
-"at a time, to improve the situation. It's very simple! This is what you need "
-"to do:"
-msgstr ""
-
-msgid "Make sure both the make and the name are in English."
-msgstr ""
-
-msgid "Make sure the make is not written again in the name field."
-msgstr ""
-
-msgid ""
-"Make sure there are no words other than the simple make and name of the "
-"product."
-msgstr ""
-
-msgid "Make sure the words are properly capitalized."
-msgstr ""
-
-msgid "Here's some good examples:"
-msgstr ""
-
-msgid "And here's some bad examples, that need fixing, and why:"
-msgstr ""
-
-msgid ""
-"The words are not properly capitalized. It should be \"Meade\" and \"LX200\"."
-msgstr ""
-
-msgid ""
-"The word \"Celestron\" appears also in the name of the product. That should "
-"just be the name of the model, not the make name too."
-msgstr ""
-
-msgid ""
-"\"sold\" is an information that refers only to a particular user. Gear "
-"objects are shared among everyone, in the database. The word \"(sold)\" "
-"should be removed."
-msgstr ""
-
-msgid ""
-"\"modified\" is an information that refers only to a particular user. Gear "
-"objects are shared among everyone, in the database. The word \"(modified)\" "
-"should be removed."
-msgstr ""
-
-msgid ""
-"Obviously, the user who created this mount in the database, has it on a "
-"fixed pier. But this doesn't mean that SkyWatcher sells a NEQ-6 that you can "
-"only buy on a pier! \"on a fixed pier\" should be removed."
-msgstr ""
-
-msgid ""
-"The name of the telescope is not written in English, and that is a "
-"description, not the actual product name. Here I would assume \"80ED\". "
-"Moreover, \"80mm\" is a property of the telescope, not part of its name."
-msgstr ""
-
-msgid ""
-"\"5.4&mu;\" is a property of the CCD, not part of its name. It should be "
-"removed. But sometimes a property can be part of the name of the object, "
-"because it's such a generic name: for example, Newton 8\" f/6 would be okay, "
-"because just \"Newton\" would not be enough."
-msgstr ""
-
-msgid ""
-"\"CS5\" is the version of Photoshop, but the procut name is just \"Photoshop"
-"\". \"CS5\" should be removed."
-msgstr ""
-
-msgid ""
-"Thanks for reading so far. If you are not sure about how to fix a gear item, "
-"just make assumptions and hope you are right. Mistakes will surface "
-"eventually."
-msgstr ""
-
-msgid ""
-"Now let's get to work, good luck and thank you on behalf of the whole "
-"AstroBin community!"
-msgstr ""
-
-msgid "After you fix an item, another one at random will be offered."
-msgstr ""
-
-msgid "Already fixed:"
-msgstr ""
-
-msgid "Remaining:"
-msgstr ""
-
-msgid "Fix"
-msgstr ""
-
-msgid "Mark as good"
-msgstr ""
-
-msgid "Skip"
-msgstr ""
-
-msgid "Enough for now"
-msgstr ""
-
-msgid "Thanks!"
-msgstr ""
-
-msgid ""
-"Your contribute was very important, and the whole AstroBin community is "
-"grateful."
-msgstr ""
-
 msgid "Additional information requested"
 msgstr ""
 
@@ -3466,6 +3387,10 @@ msgstr ""
 msgid "Shop %(name)s at %(retailer)s"
 msgstr ""
 
+#, python-format
+msgid "Shop %(name)s at AstroBin's partners"
+msgstr ""
+
 msgid "Frames"
 msgstr ""
 
@@ -3497,6 +3422,12 @@ msgid "Field radius"
 msgstr ""
 
 msgid "WCS transformation"
+msgstr ""
+
+msgid "More info"
+msgstr ""
+
+msgid "Open"
 msgstr ""
 
 msgid "Find images in the same area"
@@ -3577,6 +3508,27 @@ msgstr ""
 msgid "Ban user"
 msgstr ""
 
+msgid "AstroBin is preparing your download. Please wait..."
+msgstr ""
+
+msgid "Medium size"
+msgstr ""
+
+msgid "Large size"
+msgstr ""
+
+msgid "Original size"
+msgstr ""
+
+msgid "Basic annotations"
+msgstr ""
+
+msgid "Advanced annotations"
+msgstr ""
+
+msgid "Original file"
+msgstr ""
+
 msgid "Thumbnails"
 msgstr ""
 
@@ -3644,9 +3596,6 @@ msgid "Annotated"
 msgstr ""
 
 msgid "Normal"
-msgstr ""
-
-msgid "Large size"
 msgstr ""
 
 msgid "Full size"
@@ -3820,10 +3769,6 @@ msgid ""
 "                    revision!"
 msgstr ""
 
-#, python-format
-msgid "Over 100 MB? Try the <a href=\"%(url)s/%(id)s\">new beta uploader</a>!"
-msgstr ""
-
 msgid ""
 "Please note: AstroBin is not officially a backup service. So please also "
 "keep additional copies of your file. However, by storing your work here, you "
@@ -3834,6 +3779,10 @@ msgstr ""
 msgid ""
 "Read about how AstroBin stores your files safely on the <a href=\"%(faq_url)s"
 "\">FAQ page</a>."
+msgstr ""
+
+#, python-format
+msgid "Over 100 MB? Try the <a href=\"%(url)s/%(id)s\">new beta uploader</a>!"
 msgstr ""
 
 msgid "Clear"
@@ -3860,6 +3809,12 @@ msgid "Revision"
 msgstr ""
 
 msgid "Sky plot"
+msgstr ""
+
+msgid "Upgrade your account to enable plate-solving."
+msgstr ""
+
+msgid "Learn more."
 msgstr ""
 
 #, python-format
@@ -3965,6 +3920,9 @@ msgid "Next step: gear used"
 msgstr ""
 
 msgid "sponsor"
+msgstr ""
+
+msgid "Insert your image description here..."
 msgstr ""
 
 msgid "Edit your image: gear used"
@@ -4138,6 +4096,11 @@ msgstr ""
 msgid "Shop now"
 msgstr ""
 
+#, python-format
+msgid ""
+"Interested in <strong>%(brand)s</strong>? Our sponsors sells this brand!"
+msgstr ""
+
 msgid "Integration"
 msgstr ""
 
@@ -4163,6 +4126,15 @@ msgid "Home of Astrophotography"
 msgstr ""
 
 msgid "Latest from the forums"
+msgstr ""
+
+msgid "Poll"
+msgstr ""
+
+msgid "Unanswered"
+msgstr ""
+
+msgid "This topic has no replies."
 msgstr ""
 
 msgid "Recent images"
@@ -4290,11 +4262,8 @@ msgid "Your comment was approved!"
 msgstr ""
 
 msgid ""
-"As a new user on AstroBin, your first 3 comments will go through a "
-"moderation queue, to prevent spam."
-msgstr ""
-
-msgid "The following comment of yours was just approved by a moderator."
+"The following comment of yours was just approved by a moderator or the owner "
+"of the content that you commented."
 msgstr ""
 
 msgid "View comment"
@@ -4396,6 +4365,20 @@ msgid ""
 "AstroBin.\n"
 msgstr ""
 
+msgid "Your forum post was approved!"
+msgstr ""
+
+msgid ""
+"As a new user on AstroBin, your first 3 forum posts will go through a "
+"moderation queue, to prevent spam."
+msgstr ""
+
+msgid "The following forum post of yours was just approved by a moderator."
+msgstr ""
+
+msgid "View forum post"
+msgstr ""
+
 #, python-format
 msgid ""
 "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
@@ -4434,6 +4417,23 @@ msgid "Your image could not be plate-solved."
 msgstr ""
 
 #, python-format
+msgid ""
+"Unfortunately, AstroBin failed to perform the advanced plate-solution of "
+"your image: <strong>%(title)s</strong>."
+msgstr ""
+
+msgid ""
+"Apologies for the inconvenience. AstroBin and PixInsight work continuously "
+"to improve the quality and performance of the service."
+msgstr ""
+
+#, python-format
+msgid ""
+"Unfortunately, AstroBin failed to perform the advanced plate-solution of "
+"your image: %(title)s."
+msgstr ""
+
+#, python-format
 msgid "<a href=\"%(object_url)s\">Your image</a> was plate-solved."
 msgstr ""
 
@@ -4447,6 +4447,17 @@ msgid ""
 msgstr ""
 
 msgid "Your image has been successfully plate-solved."
+msgstr ""
+
+#, python-format
+msgid ""
+"AstroBin completed the advanced plate-solution of your image: <strong>"
+"%(title)s</strong>."
+msgstr ""
+
+#, python-format
+msgid ""
+"AstroBin completed the advanced plate-solution of your image: %(title)s."
 msgstr ""
 
 msgid "An image you promoted made it to IOTD"
@@ -4820,6 +4831,32 @@ msgstr ""
 msgid "New image by %(user)s"
 msgstr ""
 
+msgid "A new comment on your image requires moderation"
+msgstr ""
+
+#, python-format
+msgid ""
+"Your image \"%(title)s\" received a comment by a new user on AstroBin, and "
+"it requires your moderation before it's displayed publicly."
+msgstr ""
+
+msgid ""
+"Please take a minute to review and approve or reject the following comment:"
+msgstr ""
+
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in an image description."
+msgstr ""
+
+#, python-format
+msgid "%(user)s mentioned you in an image description."
+msgstr ""
+
+#, python-format
+msgid "<strong>%(user)s</strong> mentioned you in an image description."
+msgstr ""
+
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> has published a new image revision on "
@@ -4916,22 +4953,21 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(user)s posted a new topic to the group: \"%(group_name)s\"\n"
-"\n"
-"\"%(topic_title)s\"\n"
-"\n"
-"View the topic: <a href=\"%(url)s\">%(url)s</a>\n"
-"View the group: <a href=\"%(group_url)s\">%(group_url)s</a>"
+"<a href=\"%(user_url)s\">%(user)s</a> posted a new topic to the group <a "
+"href=\"%(group_url)s\">%(group_name)s</a>."
+msgstr ""
+
+msgid "View topic"
 msgstr ""
 
 #, python-format
-msgid ""
-"%(user)s posted a new topic to the group: \"%(group_name)s\"\n"
-"\n"
-"\"%(topic_title)s\"\n"
-"\n"
-"View the topic: %(url)s\n"
-"View the group: %(group_url)s"
+msgid "%(user)s posted a new topic to the following group: %(group_name)s."
+msgstr ""
+
+msgid "View the topic"
+msgstr ""
+
+msgid "View the group"
 msgstr ""
 
 #, python-format
@@ -5069,6 +5105,16 @@ msgstr ""
 msgid "No additional information available for this item."
 msgstr ""
 
+msgid ""
+"Please support AstroBin by shopping for this item at one of our partners!"
+msgstr ""
+
+#, python-format
+msgid ""
+"Please support AstroBin by shopping <strong>%(brand)s</strong> at one of our "
+"partners!"
+msgstr ""
+
 msgid "Find images"
 msgstr ""
 
@@ -5099,6 +5145,12 @@ msgid ""
 msgstr ""
 
 msgid "View forums"
+msgstr ""
+
+#, python-format
+msgid ""
+"Please join the <a href=\"%(group_page)s\">%(group_name)s</a> group to post "
+"in this forum."
 msgstr ""
 
 msgid "This topic was closed by a moderator."
@@ -5207,6 +5259,9 @@ msgstr ""
 msgid "*** Type your reply here ***"
 msgstr ""
 
+msgid "Something went wrong, sorry! Please try again."
+msgstr ""
+
 msgid "(deleted)"
 msgstr ""
 
@@ -5225,7 +5280,13 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
+msgid "Quote this entire post in your reply."
+msgstr ""
+
 msgid "quote"
+msgstr ""
+
+msgid "You must select some text first."
 msgstr ""
 
 msgid "quote selected"
@@ -5281,13 +5342,16 @@ msgstr ""
 msgid "Click here"
 msgstr ""
 
+msgid "Quote the selected text in your reply"
+msgstr ""
+
 msgid "Topic"
 msgstr ""
 
-msgid "Last post"
+msgid "Replies"
 msgstr ""
 
-msgid "Poll"
+msgid "Last post"
 msgstr ""
 
 msgid "Sticky"
@@ -5903,6 +5967,9 @@ msgstr ""
 msgid "Key/value pairs"
 msgstr ""
 
+msgid "Overlays"
+msgstr ""
+
 msgid "Please confirm your recovered images"
 msgstr ""
 
@@ -6133,6 +6200,27 @@ msgid "What camera was used in the acquisition of the image?"
 msgstr ""
 
 msgid "Guider/planetary"
+msgstr ""
+
+msgid "Select range"
+msgstr ""
+
+msgid "Last 7 days"
+msgstr ""
+
+msgid "Last 30 days"
+msgstr ""
+
+msgid "Last 90 days"
+msgstr ""
+
+msgid "Current week"
+msgstr ""
+
+msgid "Current month"
+msgstr ""
+
+msgid "Current year"
 msgstr ""
 
 msgid "Imaging telescopes"
@@ -6396,9 +6484,6 @@ msgid ""
 msgstr ""
 
 msgid "Referral code (optional)"
-msgstr ""
-
-msgid "Are you a robot?"
 msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
