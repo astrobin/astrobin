@@ -644,6 +644,55 @@ class IotdServiceTest(TestCase):
 
         self.assertEqual(0, len(IotdService().get_submission_queue(submitter)))
 
+    def test_get_submission_queue_dismissed_3_times(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+        image = Generators.image(user=user)
+
+        submitter1 = Generators.user(groups=['iotd_submitters'])
+        submitter2 = Generators.user(groups=['iotd_submitters'])
+        submitter3 = Generators.user(groups=['iotd_submitters'])
+        submitter4 = Generators.user(groups=['iotd_submitters'])
+
+        image.designated_iotd_submitters.add(submitter4)
+
+        IotdDismissedImage.objects.create(user=submitter1, image=image)
+        IotdDismissedImage.objects.create(user=submitter2, image=image)
+
+        self.assertEqual(1, len(IotdService().get_submission_queue(submitter4)))
+
+        IotdDismissedImage.objects.create(user=submitter3, image=image)
+
+        self.assertEqual(0, len(IotdService().get_submission_queue(submitter4)))
+
+    def test_get_submission_queue_already_iotd(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+        image = Generators.image(user=user)
+        image.designated_iotd_submitters.add(submitter)
+
+        IotdGenerators.submission(image=image)
+        IotdGenerators.vote(image=image)
+        IotdGenerators.iotd(image=image, date=datetime.now().date() - timedelta(1))
+
+        self.assertEqual(0, len(IotdService().get_submission_queue(submitter)))
+
+    def test_get_submission_queue_future_iotd(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+        image = Generators.image(user=user)
+        image.designated_iotd_submitters.add(submitter)
+
+        IotdGenerators.submission(image=image)
+        IotdGenerators.vote(image=image)
+        IotdGenerators.iotd(image=image, date=datetime.now().date() + timedelta(1))
+
+        self.assertEqual(1, len(IotdService().get_submission_queue(submitter)))
+
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     def test_get_review_queue(self):
         uploader = Generators.user()
@@ -973,24 +1022,52 @@ class IotdServiceTest(TestCase):
 
     def test_get_review_queue_dismissed(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
+        submitter1 = Generators.user(groups=['iotd_submitters'])
+        submitter2 = Generators.user(groups=['iotd_submitters'])
+        submitter3 = Generators.user(groups=['iotd_submitters'])
         reviewer = Generators.user(groups=['iotd_reviewers'])
 
         Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
 
         image = Generators.image(user=uploader)
-        image.designated_iotd_submitters.add(submitter)
+        image.designated_iotd_submitters.add(submitter1, submitter2, submitter3)
         image.designated_iotd_reviewers.add(reviewer)
 
-        IotdSubmission.objects.create(
-            submitter=submitter,
-            image=image
-        )
+        IotdSubmission.objects.create(submitter=submitter1, image=image)
+        IotdSubmission.objects.create(submitter=submitter2, image=image)
+        IotdSubmission.objects.create(submitter=submitter3, image=image)
 
-        IotdDismissedImage.objects.create(
-            user=reviewer,
-            image=image
-        )
+        self.assertEqual(1, len(IotdService().get_review_queue(reviewer)))
+
+        IotdDismissedImage.objects.create(user=reviewer, image=image)
+
+        self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
+
+    def test_get_review_queue_dismissed_3_times_by_submitters(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+        image = Generators.image(user=user)
+
+        submitter1 = Generators.user(groups=['iotd_submitters'])
+        submitter2 = Generators.user(groups=['iotd_submitters'])
+        submitter3 = Generators.user(groups=['iotd_submitters'])
+        reviewer = Generators.user(groups=['iotd_reviewers'])
+
+        image.designated_iotd_submitters.add(submitter1, submitter2, submitter3)
+        image.designated_iotd_reviewers.add(reviewer)
+
+        IotdSubmission.objects.create(submitter=submitter1, image=image)
+        IotdSubmission.objects.create(submitter=submitter2, image=image)
+        IotdSubmission.objects.create(submitter=submitter3, image=image)
+
+        self.assertEqual(1, len(IotdService().get_review_queue(reviewer)))
+
+        IotdDismissedImage.objects.create(user=submitter1, image=image)
+        IotdDismissedImage.objects.create(user=submitter2, image=image)
+
+        self.assertEqual(1, len(IotdService().get_review_queue(reviewer)))
+
+        IotdDismissedImage.objects.create(user=submitter3, image=image)
 
         self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
 
@@ -1067,6 +1144,52 @@ class IotdServiceTest(TestCase):
         )
 
         image.delete()
+
+        self.assertEqual(0, len(IotdService().get_judgement_queue()))
+
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
+    @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
+    def test_get_judgement_queue_dismissed_3_times(self):
+        uploader = Generators.user()
+        submitter1 = Generators.user(groups=['iotd_submitters'])
+        submitter2 = Generators.user(groups=['iotd_submitters'])
+        reviewer1 = Generators.user(groups=['iotd_reviewers'])
+        reviewer2 = Generators.user(groups=['iotd_reviewers'])
+
+        Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
+
+        image = Generators.image(user=uploader)
+        image.designated_iotd_submitters.add(submitter1, submitter2)
+        image.designated_iotd_reviewers.add(reviewer1, reviewer2)
+
+        IotdSubmission.objects.create(
+            submitter=submitter1,
+            image=image
+        )
+
+        IotdSubmission.objects.create(
+            submitter=submitter2,
+            image=image
+        )
+
+        IotdVote.objects.create(
+            reviewer=reviewer1,
+            image=image
+        )
+
+        IotdVote.objects.create(
+            reviewer=reviewer2,
+            image=image
+        )
+
+        self.assertEqual(1, len(IotdService().get_judgement_queue()))
+
+        IotdDismissedImage.objects.create(image=image, user=submitter1)
+        IotdDismissedImage.objects.create(image=image, user=submitter2)
+
+        self.assertEqual(1, len(IotdService().get_judgement_queue()))
+
+        IotdDismissedImage.objects.create(image=image, user=reviewer1)
 
         self.assertEqual(0, len(IotdService().get_judgement_queue()))
 

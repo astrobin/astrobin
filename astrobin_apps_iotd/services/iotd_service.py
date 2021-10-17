@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta, date
+from typing import List
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -44,30 +45,36 @@ class IotdService:
     def get_top_pick_nominations(self):
         return TopPickNominationsArchive.objects.all()
 
-    def get_submission_queue(self, submitter):
-        # type: (User) -> list[Image]
-
-        def can_add(image):
-            # type: (Image) -> bool
-
+    def get_submission_queue(self, submitter: User) -> List[Image]:
+        def can_add(image: Image) -> bool:
             # Since the introduction of the 2020 plans, Free users cannot participate in the IOTD/TP.
-            user_is_free = is_free(image.user)  # type: bool
-            already_iotd = Iotd.objects.filter(image=image, date__lte=datetime.now().date()).exists()  # type: bool
+            user_is_free: bool = is_free(image.user)
 
-            return not user_is_free and not already_iotd
+            return not user_is_free
 
         images = Image.objects \
+            .annotate(
+            num_dismissals=Count('iotddismissedimage', distinct=True)
+        ) \
             .filter(
             Q(
                 Q(moderator_decision=1) &
                 Q(published__gte=datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)) &
-                Q(designated_iotd_submitters=submitter)
+                Q(designated_iotd_submitters=submitter) &
+                Q(num_dismissals__lt=3) &
+                Q(
+                    Q(iotd__isnull=True) |
+                    Q(iotd__date__gt=datetime.now().date())
+                )
             ) &
             ~Q(
                 Q(user__userprofile__exclude_from_competitions=True) |
                 Q(user=submitter) |
                 Q(subject_type__in=(SubjectType.GEAR, SubjectType.OTHER)) |
-                Q(Q(iotdsubmission__submitter=submitter) & Q(iotdsubmission__date__lt=date.today())) |
+                Q(
+                    Q(iotdsubmission__submitter=submitter) &
+                    Q(iotdsubmission__date__lt=date.today())
+                ) |
                 Q(iotddismissedimage__user=submitter)
             )
         ).order_by(
@@ -82,26 +89,28 @@ class IotdService:
         return sorted(list(set([
             x.image
             for x in IotdSubmission.objects.annotate(
-                num_submissions=Count('image__iotdsubmission', distinct=True)
+                num_submissions=Count('image__iotdsubmission', distinct=True),
+                num_dismissals=Count('image__iotddismissedimage', distinct=True)
             ).filter(
                 Q(image__deleted__isnull=True),
                 Q(date__gte=cutoff) &
                 Q(image__designated_iotd_reviewers=reviewer) &
-                Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS)
+                Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) &
+                Q(num_dismissals__lt=3) &
+                Q(
+                    Q(image__iotd__isnull=True) |
+                    Q(image__iotd__date__gt=datetime.now().date())
+                )
             ).exclude(
                 Q(submitter=reviewer) |
                 Q(image__user=reviewer) |
                 Q(image__iotddismissedimage__user=reviewer)
             )
-            if (
-                    not Iotd.objects.filter(
-                        image=x.image,
-                        date__lte=datetime.now().date()).exists()
-                    and not IotdVote.objects.filter(
+            if not IotdVote.objects.filter(
                 reviewer=reviewer,
                 image=x.image,
-                date__lt=date.today()).exists()
-            )
+                date__lt=date.today()
+            ).exists()
         ])), key=lambda x: x.published, reverse=True)
 
     def get_judgement_queue(self):
@@ -110,15 +119,18 @@ class IotdService:
         return sorted(list(set([
             x.image
             for x in IotdVote.objects.annotate(
-                num_votes=Count('image__iotdvote', distinct=True)
+                num_votes=Count('image__iotdvote', distinct=True),
+                num_dismissals=Count('image__iotddismissedimage', distinct=True)
             ).filter(
                 Q(image__deleted__isnull=True),
                 Q(date__gte=cutoff) &
-                Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS)
+                Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) &
+                Q(num_dismissals__lt=3) &
+                Q(
+                    Q(image__iotd__isnull=True) |
+                    Q(image__iotd__date__gt=datetime.now().date())
+                )
             )
-            if not Iotd.objects.filter(
-                image=x.image,
-                date__lte=datetime.now().date()).exists()
         ])), key=lambda x: x.published, reverse=True)
 
     def judge_cannot_select_now_reason(self, judge):
