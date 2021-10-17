@@ -455,17 +455,20 @@ body.full {
   }
 }
 
-.nav-tabs li a {
-  border-color: #404040 !important;
-}
+.nav-tabs {
+  border-bottom-color: $grey-5;
+  li a {
+    border-color: $grey-5 !important;
+  }
 
-.nav-tabs .active a,
-.nav-tabs .active a:hover,
-.nav-tabs .active a:focus {
-  background-color: $grey-2;
-  color: $grey-8;
-  font-style: italic;
-  font-weight: bold;
+  .active a,
+  .active a:hover,
+  .active a:focus {
+    background-color: $link-color;
+    color: $white;
+    font-style: italic;
+    font-weight: bold;
+  }
 }
 
 .navbar .navbar-inner {
