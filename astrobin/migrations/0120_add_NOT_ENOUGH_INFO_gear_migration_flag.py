@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('astrobin', '0118_add_gear_migration_review_fields'),
+        ('astrobin', '0119_add_gear_migration_review_fields'),
     ]
 
     operations = [

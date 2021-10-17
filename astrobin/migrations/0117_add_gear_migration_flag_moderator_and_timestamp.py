@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('astrobin', '0115_add_gear_migration_fields'),
+        ('astrobin', '0116_add_gear_migration_fields'),
     ]
 
     operations = [

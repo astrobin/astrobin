@@ -6,7 +6,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('astrobin', '0121_gear_migration_flag_reviewer_decision'),
+        ('astrobin', '0122_gear_migration_flag_reviewer_decision'),
     ]
 
     operations = [
