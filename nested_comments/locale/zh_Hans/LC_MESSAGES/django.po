@@ -2,99 +2,206 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Comments\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-17 08:44+0000\n"
-"PO-Revision-Date: 2021-09-27 18:34+0200\n"
+"POT-Creation-Date: 2021-04-05 16:19+0200\n"
+"PO-Revision-Date: 2021-10-17 10:52+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Simplified Chinese\n"
 "Language: zh-Hans\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108457\n"
-"X-Loco-Api-Version: 1.0.25 20211001-1\n"
+"X-Loco-Api-Version: 1.0.25 20211001-1"
 
+#: loco:606b7673febdde060052b5e2
+msgid "You follow each other"
+msgstr "互相关注"
+
+#: loco:606b7673febdde060052b5e3
+msgid "Images"
+msgstr "作品"
+
+#: loco:606b7673febdde060052b5e4
+msgid "Followers"
+msgstr "粉丝"
+
+#: loco:606b7673febdde060052b5e5
+msgid "Following"
+msgstr "关注的人"
+
+#: loco:606b7673febdde060052b5e6
+msgid "User"
+msgstr "用户"
+
+#: loco:606b7673febdde060052b5e7
+msgid "No users."
+msgstr "没有用户。"
+
+#: loco:606b7673febdde060052b5e8
+msgid "Administrator"
+msgstr "管理员"
+
+#: loco:606b7673febdde060052b5e9
+msgid "Image moderator"
+msgstr "作品审核者"
+
+#: loco:606b7673febdde060052b5ea
+msgid "IOTD Submitter"
+msgstr "“今日最佳”提名人"
+
+#: loco:606b7673febdde060052b5eb
+msgid "IOTD Reviewer"
+msgstr "“今日最佳”审查委员"
+
+#: loco:606b7673febdde060052b5ec
+msgid "IOTD Judge"
+msgstr "“今日最佳”评审"
+
+#: loco:606b7673febdde060052b5ed
+msgid "Premium member"
+msgstr "Premium会员"
+
+#: loco:606b7673febdde060052b5ee
+msgid ""
+"Your email bounce reports have been removed from AstroBin. Please make sure "
+"that your email works well or you will get the same warning message again. "
+"Thanks!"
+msgstr "您的电子邮件退回报告已从 AstroBin 中删除。请确保您的邮箱一切正常，否则您将再次收到相同的警告消息。谢谢！"
+
+#: loco:606b7673febdde060052b5ef
+msgid ""
+"Your spam reports have been removed from AstroBin. Please make sure you "
+"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
+"don't want to receive emails from AstroBin, look for the settings link "
+"that's at the bottom of every email. Thanks!"
+msgstr ""
+"您的垃圾邮件报告已从 AstroBin 中删除。请确保您没有自动过滤，或在规则中将 AstroBin 的电子邮件标记为垃圾邮件！ 如果您不想接收来自 "
+"AstroBin 的电子邮件，请在任意一封电子邮件的底部查找设置链接。谢谢！"
+
+#: loco:606b76b7d0c7060d4277e6b8
 msgid "Type your comment here..."
 msgstr "在此输入您的评论..."
 
-msgid "Error"
-msgstr ""
-
+#: loco:606b76b7d0c7060d4277e6b9
 msgid "Cancel"
 msgstr "取消"
 
+#: loco:606b76b7d0c7060d4277e6ba
 msgid "Add a comment"
 msgstr "添加评论"
 
+#: loco:606b76b7d0c7060d4277e6bb
+#, python-format
+msgid ""
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s\">"
+"sign up</a> to leave a comment."
+msgstr ""
+"请<a href=\"%(login_url)s\">l登录</a> 或 <a href=\"%(signup_url)s\">注册</a> 来进行评论"
+
+#: loco:606b76b7d0c7060d4277e6bc
 msgid "There are no comments yet."
 msgstr "现在还没有评论"
 
-msgid "The comment cannot be empty."
-msgstr "评论不能是空的"
+#: loco:606b76b7d0c7060d4277e6bd
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr "此评论正在等待审核。"
 
+#: loco:606b76b7d0c7060d4277e6be
 msgid "(deleted)"
 msgstr "（已删除）"
 
-msgid "Delete"
-msgstr "删除"
-
-msgid "Undelete"
-msgstr "恢复删除"
-
-msgid "Edit"
-msgstr "编辑"
-
-msgid "Link"
-msgstr "链接"
-
+#: loco:606b76b7d0c7060d4277e6bf
 msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr "赞"
 
+#: loco:606b76b7d0c7060d4277e6c0
 msgctxt "Noun, e.g. 'This element has 1 like'"
 msgid "like"
 msgstr "赞"
 
+#: loco:606b76b7d0c7060d4277e6c1
+msgid "Link"
+msgstr "链接"
+
+#: loco:606b76b7d0c7060d4277e6c2
+msgid "Undelete"
+msgstr "恢复删除"
+
+#: loco:606b76b7d0c7060d4277e6c3
+msgid "Delete"
+msgstr "删除"
+
+#: loco:606b76b7d0c7060d4277e6c4
+msgid "Edit"
+msgstr "编辑"
+
+#: loco:606b76b7d0c7060d4277e6c5
+msgid "Reply"
+msgstr "回复"
+
+#: loco:606b76b7d0c7060d4277e6c6
+msgid "Like"
+msgstr "赞"
+
+#: loco:606b76b7d0c7060d4277e6c7
+msgid "Unlike"
+msgstr "取消赞"
+
+#: loco:606b76b7d0c7060d4277e6c8
+msgid "The comment cannot be empty."
+msgstr "评论不能是空的"
+
+#: loco:606b76b7d0c7060d4277e6c9
+msgid "Submit"
+msgstr "提名"
+
+#: loco:616be328c4a14262d43819c2
+msgid "Error"
+msgstr ""
+
+#: loco:616be328c4a14262d43819c3
 msgctxt "Verb (imperative)"
 msgid "Like"
 msgstr ""
 
+#: loco:616be328c4a14262d43819c4
 msgctxt "Verb (imperative)"
 msgid "Unlike"
 msgstr ""
 
+#: loco:616be328c4a14262d43819c5
 msgctxt "Verb (imperative)"
 msgid "Reply"
 msgstr ""
 
+#: loco:616be328c4a14262d43819c6
 msgctxt "Verb (imperative)"
 msgid "Approve"
 msgstr ""
 
+#: loco:616be328c4a14262d43819c7
 msgid "Report abuse"
 msgstr ""
 
-#, python-format
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
-"\">sign up</a> to leave a comment."
-msgstr ""
-"请<a href=\"%(login_url)s\">l登录</a> 或 <a href=\"%(signup_url)s\">注册</a> "
-"来进行评论"
-
+#: loco:616be328c4a14262d43819c8
 msgid ""
 "This comment is pending moderation. Please approve it or report an abuse "
 "using the buttons below."
 msgstr ""
 
+#: loco:616be328c4a14262d43819c9
 msgid "Thank you for your cooperation!"
 msgstr ""
 
+#: loco:616be328c4a14262d43819ca
 msgid "This comment was already moderated by you or an AstroBin moderator."
 msgstr ""
 
+#: loco:616be328c4a14262d43819cb
 msgid ""
 "Your comment is pending moderation and should be reviewed shortly by the "
 "author or owner of the content object that you commented on. If they do not "
@@ -102,93 +209,30 @@ msgid ""
 "your comment on their behalf."
 msgstr ""
 
+#: loco:616be328c4a14262d43819cc
 msgid "This process is necessary to prevent spam on AstroBin."
 msgstr ""
 
+#: loco:616be328c4a14262d43819cd
 msgid "Thank you for understanding!"
 msgstr ""
 
-msgid "This comment is pending moderation and will be reviewed shortly."
-msgstr "此评论正在等待审核。"
-
-msgid "Submit"
-msgstr "提名"
-
+#: loco:616be328c4a14262d43819ce
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
 "contact us."
 msgstr ""
 
+#: loco:616be328c4a14262d43819cf
 msgid "You have reached your abuse report quota."
 msgstr ""
 
+#: loco:616be328c4a14262d43819d0
 msgid ""
 "This item cannot be reported again because it was approved by a moderator."
 msgstr ""
 
+#: loco:616be328c4a14262d43819d1
 msgid "You many not report the same item more than once."
 msgstr ""
-
-#~ msgid "You follow each other"
-#~ msgstr "互相关注"
-
-#~ msgid "Images"
-#~ msgstr "作品"
-
-#~ msgid "Followers"
-#~ msgstr "粉丝"
-
-#~ msgid "Following"
-#~ msgstr "关注的人"
-
-#~ msgid "User"
-#~ msgstr "用户"
-
-#~ msgid "No users."
-#~ msgstr "没有用户。"
-
-#~ msgid "Administrator"
-#~ msgstr "管理员"
-
-#~ msgid "Image moderator"
-#~ msgstr "作品审核者"
-
-#~ msgid "IOTD Submitter"
-#~ msgstr "“今日最佳”提名人"
-
-#~ msgid "IOTD Reviewer"
-#~ msgstr "“今日最佳”审查委员"
-
-#~ msgid "IOTD Judge"
-#~ msgstr "“今日最佳”评审"
-
-#~ msgid "Premium member"
-#~ msgstr "Premium会员"
-
-#~ msgid ""
-#~ "Your email bounce reports have been removed from AstroBin. Please make "
-#~ "sure that your email works well or you will get the same warning message "
-#~ "again. Thanks!"
-#~ msgstr ""
-#~ "您的电子邮件退回报告已从 AstroBin 中删除。请确保您的邮箱一切正常，否则您将"
-#~ "再次收到相同的警告消息。谢谢！"
-
-#~ msgid ""
-#~ "Your spam reports have been removed from AstroBin. Please make sure you "
-#~ "don't have a filter or rule to always mark AstroBin's emails as spam! If "
-#~ "you don't want to receive emails from AstroBin, look for the settings "
-#~ "link that's at the bottom of every email. Thanks!"
-#~ msgstr ""
-#~ "您的垃圾邮件报告已从 AstroBin 中删除。请确保您没有自动过滤，或在规则中将 "
-#~ "AstroBin 的电子邮件标记为垃圾邮件！ 如果您不想接收来自 AstroBin 的电子邮"
-#~ "件，请在任意一封电子邮件的底部查找设置链接。谢谢！"
-
-#~ msgid "Reply"
-#~ msgstr "回复"
-
-#~ msgid "Like"
-#~ msgstr "赞"
-
-#~ msgid "Unlike"
-#~ msgstr "取消赞"
