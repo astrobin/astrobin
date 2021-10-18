@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% load common_tags %}
 {% load i18n %}
 {% load avatar_tags %}
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
 
 {% block title %}
-    {% trans "Avatar" %}
+    {% trans "Change avatar" %}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -14,49 +15,70 @@
     {% breadcrumb request.user.userprofile.get_display_name 'user_page' request.user.username %}
     {% breadcrumb 'Settings' None %}
     {% breadcrumb 'Avatar' None %}
+    {% breadcrumb 'Change' None %}
 {% endblock %}
 
 {% block content %}
-<div class="row-fluid">
-    {% include 'user/profile/edit/navigation.html' %}
-    <div class="span9">
-        {% if READONLY_MODE %}
-            {% include 'readonly_mode.html' %}
-        {% else %}
-            <div class="row-fluid">
+    <div class="row-fluid">
+        {% include 'user/profile/edit/navigation.html' %}
+        <div class="span9">
+            {% if READONLY_MODE %}
+
+                {% include 'readonly_mode.html' %}
+
+            {% else %}
+
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="{% url 'avatar_change' %}">{% trans "Change" %}</a></li>
+                    <li><a href="{% url 'avatar_delete' %}">{% trans "Delete" %}</a></li>
+                </ul>
+
                 {% if avatars %}
-                    <div class="span2">
-                        <div class="well"><strong>{% trans "Current avatar" %}</strong></div>
-                        {% avatar user %}
+                    <div class="subtle-container">
+                        <div class="header">
+                            <h4>{% trans "Current avatar" %}</h4>
+                        </div>
+                        <div class="subtle-container-body">
+                            <form class="current-avatar">
+                                {% avatar user %}
+                            </form>
+                        </div>
                     </div>
 
-                {% else %}
-                    <div class="span12">
-                        <div class="alert alert-warning">
-                            {% trans "You do not yet have an avatar. Please upload one now." %}
+                    <div class="subtle-container">
+                        <div class="header">
+                            <h4>{% trans "Choose new default" %}</h4>
+                        </div>
+                        <div class="subtle-container-body">
+                            <form method="POST" action="{% url 'avatar_change' %}" class="avatar-change">
+                                {% csrf_token %}
+                                {{ primary_avatar_form|as_bootstrap }}
+                                <button class="btn btn-primary {% button_loading_class %}" type="submit">
+                                    {% trans "Choose new default" %}
+                                    {% button_loading_indicator %}
+                                </button>
+                            </form>
                         </div>
                     </div>
                 {% endif %}
 
-                {% if avatars %}
-                    <div class="span10">
-                        <div class="well"><strong>{% trans "Previously uploaded" %}</strong></div>
-                        <form method="POST" action="{% url 'avatar_change' %}" class="avatar-change"> {% csrf_token %}
-                            {{primary_avatar_form|as_bootstrap}}
-                            <input class="btn btn-primary" type="submit" value="{% trans "Choose new default" %}" />
-                        </form>
+                <div class="subtle-container">
+                    <div class="header">
+                        <h4>{% trans "Upload a new image" %}</h4>
                     </div>
-                {% endif %}
-                    <div class="span12">
-                        <div class="well"><strong>{% trans "Upload a new image" %}</div>
-                        <form enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}" class="form-inline"> {% csrf_token %}
+                    <div class="subtle-container-body">
+                        <form enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}">
+                            {% csrf_token %}
                             <input type="file" name="avatar" value="{% trans "Avatar image" %}" />
-                            <input class="btn btn-primary" type="submit" value="{% trans "Upload" %}" />
+                            <button class="btn btn-primary {% button_loading_class %}" type="submit">
+                                {% trans "Upload" %}
+                                {% button_loading_indicator %}
+                            </button>
                         </form>
                     </div>
                 </div>
-            </div>
-        {% endif %} {# READONLY #}
+
+            {% endif %} {# READONLY #}
+        </div>
     </div>
-</div>
 {% endblock %}

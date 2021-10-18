@@ -1,4 +1,4 @@
-from avatar.utils import get_primary_avatar, get_default_avatar_url
+from avatar.templatetags.avatar_tags import avatar_url
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
@@ -23,12 +23,8 @@ class ContentTypeSerializer(serializers.ModelSerializer):
 
 
 class AvatarField(serializers.Field):
-    def to_representation(self, obj):
-        avatar = get_primary_avatar(obj, 40)
-        if avatar is None:
-            return get_default_avatar_url()
-
-        return avatar.get_absolute_url()
+    def to_representation(self, user):
+        return avatar_url(user, 40)
 
 
 class UserSerializer(serializers.ModelSerializer):

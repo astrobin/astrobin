@@ -1952,8 +1952,45 @@ a.button {
   word-spacing: 0px;
 }
 
-form.avatar-change label.control-label {
-  display: none;
+form.current-avatar,
+form.avatar-change,
+form.avatar-delete {
+  margin: 0;
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  label.control-label {
+    display: none;
+  }
+
+  label.radio,
+  label.checkbox {
+    display: flex;
+    flex-direction: column-reverse;
+    width: auto;
+    margin: .5rem;
+    padding: .5rem;
+    border: 1px solid $grey-5;
+    border-radius: 6px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    > .radio,
+    > .checker {
+      margin-left: 30px;
+      margin-top: 8px;
+    }
+  }
 }
 
 .iotd-ribbon-container {
