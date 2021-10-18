@@ -220,6 +220,19 @@ class IotdTest(TestCase):
         self.assertEqual(submission.submitter, self.submitter_1)
         self.assertEqual(submission.image, self.image)
 
+    def test_submission_model_cannot_submit_image_that_was_dismissed(self):
+        Generators.premium_subscription(self.judge_1, "AstroBin Ultimate 2020+")
+
+        try:
+            submission = IotdSubmission.objects.create(
+                submitter=self.submitter_1,
+                image=self.image)
+        except ValidationError as e:
+            self.fail(e)
+
+        self.assertEqual(submission.submitter, self.submitter_1)
+        self.assertEqual(submission.image, self.image)
+
     def test_vote_model_user_must_be_reviewer(self):
         Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
         with self.assertRaisesRegex(ValidationError, "not a member"):

@@ -61,7 +61,7 @@ class IotdService:
                 Q(moderator_decision=1) &
                 Q(published__gte=datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)) &
                 Q(designated_iotd_submitters=submitter) &
-                Q(num_dismissals__lt=3) &
+                Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &
                 Q(
                     Q(iotd__isnull=True) |
                     Q(iotd__date__gt=datetime.now().date())
@@ -96,7 +96,7 @@ class IotdService:
                 Q(date__gte=cutoff) &
                 Q(image__designated_iotd_reviewers=reviewer) &
                 Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) &
-                Q(num_dismissals__lt=3) &
+                Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &
                 Q(
                     Q(image__iotd__isnull=True) |
                     Q(image__iotd__date__gt=datetime.now().date())
@@ -125,7 +125,7 @@ class IotdService:
                 Q(image__deleted__isnull=True),
                 Q(date__gte=cutoff) &
                 Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) &
-                Q(num_dismissals__lt=3) &
+                Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &
                 Q(
                     Q(image__iotd__isnull=True) |
                     Q(image__iotd__date__gt=datetime.now().date())

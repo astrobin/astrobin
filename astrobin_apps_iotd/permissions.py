@@ -25,6 +25,14 @@ def may_toggle_submission_image(user, image):
     if image.user.userprofile.banned_from_competitions:
         return False, _("This user has been banned from competitions.")
 
+    from astrobin_apps_iotd.models import IotdDismissedImage
+
+    if IotdDismissedImage.objects.filter(image=image, user=user).exists():
+        return False, _("You cannot submit an image that you already dismissed.")
+
+    if IotdDismissedImage.objects.filter(image=image).count() >= settings.IOTD_MAX_DISMISSALS:
+        return False, _("You cannot submit an image that has been dismissed by 3 members of the IOTD Staff.")
+
     days = settings.IOTD_SUBMISSION_WINDOW_DAYS
     if image.published < datetime.now() - timedelta(days):
         return False, _("You cannot submit an image that was published more than %(max_days)s days ago.") % {
@@ -72,6 +80,14 @@ def may_toggle_vote_image(user, image):
 
     if image.user.userprofile.banned_from_competitions:
         return False, _("This user has been banned from competitions.")
+
+    from astrobin_apps_iotd.models import IotdDismissedImage
+
+    if IotdDismissedImage.objects.filter(image=image, user=user).exists():
+        return False, _("You cannot vote for an image that you already dismissed.")
+
+    if IotdDismissedImage.objects.filter(image=image).count() >= settings.IOTD_MAX_DISMISSALS:
+        return False, _("You cannot vote for an image that has been dismissed by 3 members of the IOTD Staff.")
 
     # Import here to avoid circular dependency
     from astrobin_apps_iotd.models import IotdSubmission, IotdVote, Iotd
@@ -127,6 +143,11 @@ def may_elect_iotd(user, image):
 
     if image.user.userprofile.banned_from_competitions:
         return False, _("This user has been banned from competitions.")
+
+    from astrobin_apps_iotd.models import IotdDismissedImage
+
+    if IotdDismissedImage.objects.filter(image=image).count() >= settings.IOTD_MAX_DISMISSALS:
+        return False, _("You cannot elect an image that has been dismissed by 3 members of the IOTD Staff.")
 
     if settings.PREMIUM_RESTRICTS_IOTD:
         if is_free(image.user):
