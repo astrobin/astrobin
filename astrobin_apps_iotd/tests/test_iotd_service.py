@@ -644,6 +644,7 @@ class IotdServiceTest(TestCase):
 
         self.assertEqual(0, len(IotdService().get_submission_queue(submitter)))
 
+    @override_settings(IOTD_MAX_DISMISSALS=3)
     def test_get_submission_queue_dismissed_3_times(self):
         user = Generators.user()
         Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
@@ -1043,6 +1044,7 @@ class IotdServiceTest(TestCase):
 
         self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
 
+    @override_settings(IOTD_MAX_DISMISSALS=3)
     def test_get_review_queue_dismissed_3_times_by_submitters(self):
         user = Generators.user()
         Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
@@ -1149,6 +1151,7 @@ class IotdServiceTest(TestCase):
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
+    @override_settings(IOTD_MAX_DISMISSALS=3)
     def test_get_judgement_queue_dismissed_3_times(self):
         uploader = Generators.user()
         submitter1 = Generators.user(groups=['iotd_submitters'])
