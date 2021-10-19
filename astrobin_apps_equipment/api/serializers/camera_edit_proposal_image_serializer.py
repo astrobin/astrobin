@@ -5,4 +5,4 @@ from astrobin_apps_equipment.models import CameraEditProposal
 class CameraEditProposalImageSerializer(EquipmentItemImageSerializer):
     class Meta(EquipmentItemImageSerializer.Meta):
         model = CameraEditProposal
-        abstract = True
+        abstract = False

@@ -5,4 +5,4 @@ from astrobin_apps_equipment.models.telescope_edit_proposal import TelescopeEdit
 class TelescopeEditProposalImageSerializer(EquipmentItemImageSerializer):
     class Meta(EquipmentItemImageSerializer.Meta):
         model = TelescopeEditProposal
-        abstract = True
+        abstract = False
