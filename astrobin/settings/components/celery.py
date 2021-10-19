@@ -8,6 +8,7 @@ BROKER_TRANSPORT_OPTIONS = {
     'visibility_timeout': 3600,
     'fanout_prefix': True,
     'fanout_patterns': True,
+    'health_check_interval': 5,
 }
 CELERY_RESULT_BACKEND = BROKER_URL
 CELERY_IMPORTS = (

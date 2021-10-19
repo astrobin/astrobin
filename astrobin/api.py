@@ -14,6 +14,7 @@ from astrobin.views import get_image_or_404
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_platesolving.services import SolutionService
+from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from toggleproperties.models import ToggleProperty
 
@@ -76,6 +77,7 @@ class ImageRevisionResource(ModelResource):
     url_advanced_solution = fields.CharField()
 
     is_solved = fields.BooleanField()
+    solution_status = fields.CharField()
 
     ra = fields.DecimalField()
     dec = fields.DecimalField()
@@ -109,6 +111,7 @@ class ImageRevisionResource(ModelResource):
 
             'is_final',
             'is_solved',
+            'solution_status',
 
             'ra',
             'dec',
@@ -165,7 +168,32 @@ class ImageRevisionResource(ModelResource):
             else None
 
     def dehydrate_is_solved(self, bundle):
-        return bundle.obj.solution != None
+        solution = bundle.obj.solution
+        return solution != None and solution.status >= Solver.SUCCESS
+
+    def dehydrate_solution_status(self, bundle):
+        solution = bundle.obj.solution
+
+        if solution is None or solution.status == Solver.MISSING:
+            return "MISSING"
+
+        if solution.status == Solver.PENDING:
+            return "PENDING"
+
+        if solution.status == Solver.FAILED:
+            return "FAILED"
+
+        if solution.status == Solver.SUCCESS:
+            return "SUCCESS"
+
+        if solution.status == Solver.ADVANCED_PENDING:
+            return "ADVANCED_PENDING"
+
+        if solution.status == Solver.ADVANCED_FAILED:
+            return "ADVANCED_FAILED"
+
+        if solution.status == Solver.ADVANCED_SUCCESS:
+            return "ADVANCED_SUCCESS"
 
     def dehydrate_ra(self, bundle):
         if bundle.obj.solution:
@@ -225,6 +253,7 @@ class ImageResource(ModelResource):
     url_advanced_solution = fields.CharField()
 
     is_solved = fields.BooleanField()
+    solution_status = fields.CharField()
 
     ra = fields.DecimalField()
     dec = fields.DecimalField()
@@ -276,6 +305,7 @@ class ImageResource(ModelResource):
 
             'is_final',
             'is_solved',
+            'solution_status',
 
             'ra',
             'dec',
@@ -341,7 +371,32 @@ class ImageResource(ModelResource):
             else None
 
     def dehydrate_is_solved(self, bundle):
-        return bundle.obj.solution != None
+        solution = bundle.obj.solution
+        return solution != None and solution.status >= Solver.SUCCESS
+
+    def dehydrate_solution_status(self, bundle):
+        solution = bundle.obj.solution
+
+        if solution is None or solution.status == Solver.MISSING:
+            return "MISSING"
+
+        if solution.status == Solver.PENDING:
+            return "PENDING"
+
+        if solution.status == Solver.FAILED:
+            return "FAILED"
+
+        if solution.status == Solver.SUCCESS:
+            return "SUCCESS"
+
+        if solution.status == Solver.ADVANCED_PENDING:
+            return "ADVANCED_PENDING"
+
+        if solution.status == Solver.ADVANCED_FAILED:
+            return "ADVANCED_FAILED"
+
+        if solution.status == Solver.ADVANCED_SUCCESS:
+            return "ADVANCED_SUCCESS"
 
     def dehydrate_subjects(self, bundle):
         if bundle.obj.solution:
