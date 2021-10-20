@@ -569,6 +569,8 @@ class ImageIndex(SearchIndex, Indexable):
 
     remote_source = CharField(model_attr='remote_source', null=True)
 
+    groups = CharField()
+
     username = CharField(model_attr='user__username')
 
     objects_in_field = CharField()
@@ -694,6 +696,9 @@ class ImageIndex(SearchIndex, Indexable):
     def prepare_countries(self, obj):
         # Escape with __ because for whatever reason some country codes don't work, including IT.
         return ' '.join(['__%s__' % x.country for x in obj.locations.all() if x.country]).strip() or None
+
+    def prepare_groups(self, obj):
+        return ' '.join([f'__{x.pk}__' for x in obj.part_of_group_set.all()]).strip() or None
 
     def prepare_bortle_scale(self, obj):
         deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=obj, bortle__isnull=False)

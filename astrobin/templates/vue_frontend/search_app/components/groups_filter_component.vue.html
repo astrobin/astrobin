@@ -1,0 +1,67 @@
+{% load i18n %}
+{% load astrobin_apps_premium_tags %}
+{% load astrobin_apps_groups_tags %}
+
+<script type="text/x-template" id="groups-filter-template">
+    {% if request.user|can_access_advanced_search %}
+        <div class="form-groups" :class="{highlighted: highlighted}">
+            <v-multiselect v-model="value" :options="options" track-by="id" label="label" selectLabel=""
+                           deselectLabel="" selectedLabel="" :multiple="true" :searchable="false"
+                           placeholder="{% trans "Select" %}"></v-multiselect>
+            <input type="hidden" name="groups" :value="getFormValue()">
+        </div>
+    {% else %}
+        {% include "./_filter_requires_lite_or_premium.html" %}
+    {% endif %}
+</script>
+
+<script>
+    Vue.component("groups-filter", {
+        template: "#groups-filter-template",
+        props: [
+            "groups"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        data: function () {
+            return {
+                value: [],
+                options: [
+                    {% for group in request.user|groups_for_user %}
+                        {
+                            id: "{{ group.pk }}",
+                            label: "{{ group.name }}"
+                        },
+                    {% endfor %}
+                ]
+            }
+        },
+        created: function () {
+            if (this.groups) {
+                const ids = this.groups.split(',');
+
+                for (let i = 0; i < this.options.length; i++) {
+                    if (ids.indexOf(this.options[i].id) > -1) {
+                        this.value.push(this.options[i]);
+                    }
+                }
+            }
+        },
+        methods: {
+            getFormValue: function () {
+                if (Array.isArray(this.value)) {
+                    return this.value.map(function (v) {
+                        return v.id;
+                    }).join(',');
+                }
+
+                if (this.value) {
+                    return this.value.id;
+                }
+
+                return null;
+            }
+        }
+    });
+</script>
