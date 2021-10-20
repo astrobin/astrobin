@@ -230,6 +230,8 @@ class MigratableItemMixin:
         obj.migration_flag = migrationFlag
         obj.migration_flag_moderator = request.user
         obj.migration_flag_timestamp = timezone.now()
+        obj.migration_flag_moderator_lock = None
+        obj.migration_flag_moderator_lock_timestamp = None
 
         if item:
             obj.migration_content_object = item
