@@ -1314,6 +1314,9 @@ class ImageDownloadView(View):
         id: Union[str, int] = self.kwargs.get('id')
         image: Image = ImageService.get_object(id, Image.objects_including_wip)
 
+        if image is None:
+            raise Http404
+
         if not ImageService(image).display_download_menu(request.user):
             return render(request, "403.html", {})
 
