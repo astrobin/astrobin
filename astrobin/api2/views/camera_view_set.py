@@ -6,11 +6,12 @@ from rest_framework import viewsets
 from rest_framework.renderers import BrowsableAPIRenderer
 
 from astrobin.api2.serializers.camera_serializer import CameraSerializer
+from astrobin.api2.views.migratable_item_mixin import MigratableItemMixin
 from astrobin.models import Camera
 from common.permissions import ReadOnly
 
 
-class CameraViewSet(viewsets.ModelViewSet):
+class CameraViewSet(MigratableItemMixin, viewsets.ModelViewSet):
     serializer_class = CameraSerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     permission_classes = [ReadOnly]

@@ -6,6 +6,7 @@ phases:
       nodejs: 12
 
   build:
+    on-failure: ABORT
     commands:
       - buildspecs/install-docker.sh
       - buildspecs/build.sh

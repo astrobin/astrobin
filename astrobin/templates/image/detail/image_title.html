@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load tags %}
+{% load common_tags %}
 
 <div class="image-title">
     <div class="row-fluid">
@@ -11,7 +12,7 @@
     {% if image.link %}
         <div class="row-fluid">
             <div class="span12">
-                <strong>{% trans "Link" %}</strong>: <a href="{{image.link}}" target="_blank">{{image.link}}</a>
+                <strong>{% trans "Link" %}</strong>: <a href="{{image.link | ensure_url_protocol }}" target="_blank">{{image.link}}</a>
             </div>
         </div>
     {% endif %}
@@ -19,7 +20,7 @@
     {% if image.link_to_fits %}
         <div class="row-fluid">
             <div class="span12">
-                <strong>{% trans "Link to TIFF/FITS" %}</strong>: <a href="{{image.link_to_fits}}" target="_blank">{{image.link_to_fits}}</a>
+                <strong>{% trans "Link to TIFF/FITS" %}</strong>: <a href="{{image.link_to_fits | ensure_url_protocol }}" target="_blank">{{image.link_to_fits}}</a>
             </div>
         </div>
     {% endif %}

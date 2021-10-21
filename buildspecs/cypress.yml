@@ -5,13 +5,22 @@ phases:
     runtime-versions:
       nodejs: 12
 
+  pre_build:
+    comments:
+      - buildspecs/create-test-db.sh
+      - buildspecs/install-docker.sh
+      - npm ci
+      - docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
+      - buildspecs/pull-image.sh
+
   build:
     commands:
-      - buildspecs/install-docker.sh
-      - buildspecs/pull-image.sh
       - buildspecs/cypress.sh
 
   post_build:
+    commands:
+      - buildspecs/delete-test-db.sh
+
     finally:
       - aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
       - aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}

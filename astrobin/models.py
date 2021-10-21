@@ -1,18 +1,18 @@
 import hmac
 import logging
+import operator
 import os
 import random
 import string
 import unicodedata
 import uuid
 from functools import reduce
+from urllib.parse import urlparse
 
 import boto3
-import operator
 from django.core.files.images import get_image_dimensions
 from django.core.validators import MinLengthValidator, MaxLengthValidator, RegexValidator
 from image_cropping import ImageRatioField
-from urllib.parse import urlparse
 
 from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.enums.display_image_download_menu import DownloadLimitation
@@ -47,13 +47,7 @@ from django.db.models.signals import post_save
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
-try:
-    # Django < 1.10
-    from django.contrib.contenttypes.generic import GenericRelation
-except ImportError:
-    # Django >= 1.10
-    from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
 
 from celery.result import AsyncResult
 from model_utils.managers import InheritanceManager
@@ -250,6 +244,48 @@ class Gear(models.Model):
         related_name='gear_items',
         editable=False,
     )
+
+    # Items related to the migration to the new equipment database in astrobin_apps_equipment
+    migration_flag = models.CharField(
+        max_length=16,
+        null=True,
+        blank=True,
+        choices=(
+            ('WRONG_TYPE', 'This item is the wrong type'),
+            ('MULTIPLE_ITEMS', 'This item collates multiple objects'),
+            ('DIY', 'This item is a DIY object'),
+            ('NOT_ENOUGH_INFO', 'This item does not have enough information to decide on a migration strategy'),
+            ('MIGRATE', 'This item is ready for migration')
+        ),
+    )
+    migration_flag_timestamp = models.DateTimeField(null=True, blank=True)
+    migration_content_type = models.ForeignKey(ContentType, null=True, blank=True, on_delete=models.SET_NULL)
+    migration_object_id = models.PositiveIntegerField(null=True, blank=True)
+    migration_content_object = GenericForeignKey('migration_content_type', 'migration_object_id')
+    migration_flag_moderator = models.ForeignKey(
+        User, null=True, blank=True, on_delete=models.SET_NULL, related_name='migrated_gear_items')
+    migration_flag_moderator_lock = models.ForeignKey(
+        User, null=True, blank=True, on_delete=models.SET_NULL, related_name='migrated_gear_item_locks')
+    migration_flag_moderator_lock_timestamp = models.DateTimeField(null=True, blank=True)
+
+    migration_flag_reviewer = models.ForeignKey(
+        User, null=True, blank=True, on_delete=models.SET_NULL, related_name='reviewed_for_migration_gear_items')
+    migration_flag_reviewer_lock = models.ForeignKey(
+        User, null=True, blank=True, on_delete=models.SET_NULL, related_name='reviewed_for_migration_gear_item_locks')
+    migration_flag_reviewer_lock_timestamp = models.DateTimeField(null=True, blank=True)
+    migration_flag_reviewer_decision = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True,
+        choices=[
+            ("APPROVED", "Approved"),
+            ("REJECTED_INCORRECT_STRATEGY", "Rejected: incorrect migration strategy"),
+            ("REJECTED_WRONG_MIGRATION_TARGET", "Rejected: wrong migration target"),
+            ("REJECTED_BAD_MIGRATION_TARGET", "Rejected: bad migration target"),
+            ("REJECTED_OTHER", "Rejected: other"),
+        ]
+    )
+    migration_flag_reviewer_rejection_comment = models.TextField(null=True, blank=True)
 
     def __str__(self):
         make = self.get_make()

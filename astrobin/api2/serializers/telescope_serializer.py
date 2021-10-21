@@ -1,13 +1,12 @@
-from rest_framework import serializers
-
+from astrobin.api2.serializers.gear_serializer import GearSerializer
 from astrobin.models import Telescope
 
 
-class TelescopeSerializer(serializers.ModelSerializer):
+class TelescopeSerializer(GearSerializer):
     class Meta:
         model = Telescope
-        fields = (
-            'pk',
-            'make',
-            'name',
+        fields = GearSerializer.Meta.fields + (
+            'aperture',
+            'focal_length',
+            'type',
         )

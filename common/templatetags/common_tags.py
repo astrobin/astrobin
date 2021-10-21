@@ -7,7 +7,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.template import Library, Node
 from django.template.defaultfilters import urlencode
 from django.utils.encoding import force_text
-from django.utils.functional import keep_lazy
 from django.utils.safestring import mark_safe
 
 from common.services import AppRedirectionService, DateTimeService
@@ -147,9 +146,6 @@ def string_to_list(string):
     return args
 
 
-
-
-
 @register.filter(is_safe=True)
 def truncatechars(value, arg):
     """
@@ -243,3 +239,10 @@ def strip_html(value):
             attributes=settings.SANITIZER_ALLOWED_ATTRIBUTES,
             styles=[], strip=True)
     return value
+
+@register.filter
+def ensure_url_protocol(url: str) -> str:
+    if '://' in url:
+        return url
+
+    return f'http://{url}'

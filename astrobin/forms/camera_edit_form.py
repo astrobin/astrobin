@@ -1,11 +1,8 @@
-from django import forms
-
+from astrobin.forms.migratable_gear_item_edit_form import MigratableGearItemEditForm
 from astrobin.models import Camera
 
 
-class CameraEditForm(forms.ModelForm):
-    error_css_class = 'error'
-
+class CameraEditForm(MigratableGearItemEditForm):
     class Meta:
         model = Camera
-        exclude = ('make', 'name')
+        exclude = MigratableGearItemEditForm.Meta.exclude
