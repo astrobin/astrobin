@@ -139,8 +139,8 @@ class MigratableItemMixin:
         if not request.user.groups.filter(name='equipment_moderators').exists():
             raise PermissionDenied
 
-        if obj.migration_flag_moderator_lock is None:
-            return Response(status=409)
+        if obj.migration_flag_moderator_lock not in (None, request.user):
+            raise PermissionDenied
 
         obj.migration_flag_moderator_lock = None
         obj.migration_flag_moderator_lock_timestamp = None
@@ -184,8 +184,8 @@ class MigratableItemMixin:
         if not request.user.groups.filter(name='equipment_moderators').exists():
             raise PermissionDenied
 
-        if obj.migration_flag_reviewer_lock is None:
-            return Response(status=409)
+        if obj.migration_flag_reviewer_lock not in (None, request.user):
+            raise PermissionDenied
 
         obj.migration_flag_reviewer_lock = None
         obj.migration_flag_reviewer_lock_timestamp = None
