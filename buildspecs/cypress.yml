@@ -6,7 +6,7 @@ phases:
       nodejs: 12
 
   pre_build:
-    comments:
+    commands:
       - buildspecs/create-test-db.sh
       - buildspecs/install-docker.sh
       - npm ci
