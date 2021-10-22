@@ -46,10 +46,12 @@
             </div>
         </div>
     {% else %}
-        <a class="add-about-section" href="{% url 'profile_edit_basic' %}">
-            <i class="icon-plus-sign"></i>
-            {% trans "Add about section" %}
-        </a>
+        {% if requested_user == request.user %}
+            <a class="add-about-section" href="{% url 'profile_edit_basic' %}">
+                <i class="icon-plus-sign"></i>
+                {% trans "Add about section" %}
+            </a>
+        {% endif %}
     {% endif %}
 
     {% with ad_container_classes='hidden-phone' %}
