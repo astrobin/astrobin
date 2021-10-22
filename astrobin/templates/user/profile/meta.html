@@ -20,6 +20,24 @@
 <div class="profile-meta{% if mobile_header_background %} mobile-header-background{% endif %}">
     {% astrobin_user requested_user view='default'%}
 
+    {% if requested_user.userprofile.about %}
+    <div class="subtle-container about">
+        <div class="header">
+            <h4>{% trans "About" %}</h4>
+        </div>
+
+        <div class="about-content">
+            {{ requested_user.userprofile.about|truncatechars:250 }}
+
+            {% if requested_user.userprofile.about|length > 250 %}
+                <a class="read-more" href="#profile-about-modal" data-toggle="modal">
+                    {% trans "(read more)" %}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
     {% with ad_container_classes='hidden-phone' %}
         {% include 'ads/rectangular_ad.html' %}
     {% endwith %}

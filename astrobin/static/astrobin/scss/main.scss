@@ -3098,6 +3098,16 @@ table#private-shared-folders tr:hover a.delete-folder {
   }
 }
 
+#profile-about-modal {
+  h4 {
+    margin: 1.5rem 0 .5rem 0;
+  }
+
+  p {
+    line-height: 1.25rem;
+  }
+}
+
 .toggleproperty-add-remove.property-like {
   display: inline-block;
   width: calc(70% - 6px);

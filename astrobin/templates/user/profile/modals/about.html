@@ -1,0 +1,39 @@
+{% load i18n %}
+
+<div class="modal hide fade" id="profile-about-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>
+            {% blocktrans trimmed with user=requested_user.userprofile.get_display_name %}
+                About {{user}}
+            {% endblocktrans %}
+        </h3>
+    </div>
+
+    <div class="modal-body">
+        <p>
+            {{ requested_user.userprofile.about }}
+        </p>
+
+        {% if requested_user.userprofile.website %}
+            <h4>{% trans "Website" %}</h4>
+            <a href="{{ requested_user.userprofile.website }}" target="_blank">
+                {{ requested_user.userprofile.website }}
+            </a>
+        {% endif %}
+
+        {% if requested_user.userprofile.job %}
+            <h4>{% trans "Job" %}</h4>
+            <p>{{ requested_user.userprofile.job }}</p>
+        {% endif %}
+
+        {% if requested_user.userprofile.hobbies %}
+            <h4>{% trans "Hobbies" %}</h4>
+            <p>{{ requested_user.userprofile.hobbies }}</p>
+        {% endif %}
+    </div>
+
+    <div class="modal-footer">
+        <a class="btn" data-dismiss="modal">{% trans "Close" %}</a>
+    </div>
+</div>
