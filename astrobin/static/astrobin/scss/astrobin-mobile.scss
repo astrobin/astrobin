@@ -481,7 +481,8 @@
 
     .profile-meta {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       margin-top: -20px;
       margin-bottom: 12px;
       padding: 2rem 0;
@@ -491,6 +492,18 @@
       > .user-card {
         margin: 0;
         box-shadow: 0 0 2rem $black;
+      }
+
+      > .about {
+        background: rgba(0, 0, 0, .5);
+        padding: 1rem;
+        margin-top: 1rem;
+        border: 0;
+        border-radius: .5rem;
+
+        .header {
+          display: none;
+        }
       }
     }
   }

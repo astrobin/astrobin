@@ -21,30 +21,35 @@
     {% astrobin_user requested_user view='default'%}
 
     {% if requested_user.userprofile.about %}
-    <div class="subtle-container about">
-        <div class="header">
-            <h4>
-                {% trans "About" %}
-                {% if requested_user == request.user %}
-                    <div class="actions">
-                        <a href="{% url 'profile_edit_basic' %}">
-                            <i class="icon-pencil"></i>
-                        </a>
-                    </div>
+        <div class="subtle-container about">
+            <div class="header">
+                <h4>
+                    {% trans "About" %}
+                    {% if requested_user == request.user %}
+                        <div class="actions">
+                            <a href="{% url 'profile_edit_basic' %}">
+                                <i class="icon-pencil"></i>
+                            </a>
+                        </div>
+                    {% endif %}
+                </h4>
+            </div>
+
+            <div class="about-content">
+                {{ requested_user.userprofile.about|truncatechars:250 }}
+
+                {% if requested_user.userprofile.about|length > 250 or requested_user.userprofile.job or requested_user.userprofile.hobbies or requested_user.userprofile.website %}
+                    <a class="read-more" href="#profile-about-modal" data-toggle="modal">
+                        {% trans "(read more)" %}
+                    </a>
                 {% endif %}
-            </h4>
+            </div>
         </div>
-
-        <div class="about-content">
-            {{ requested_user.userprofile.about|truncatechars:250 }}
-
-            {% if requested_user.userprofile.about|length > 250 or requested_user.userprofile.job or requested_user.userprofile.hobbies or requested_user.userprofile.website %}
-                <a class="read-more" href="#profile-about-modal" data-toggle="modal">
-                    {% trans "(read more)" %}
-                </a>
-            {% endif %}
-        </div>
-    </div>
+    {% else %}
+        <a class="add-about-section" href="{% url 'profile_edit_basic' %}">
+            <i class="icon-plus-sign"></i>
+            {% trans "Add about section" %}
+        </a>
     {% endif %}
 
     {% with ad_container_classes='hidden-phone' %}

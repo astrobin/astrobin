@@ -3090,6 +3090,13 @@ table#private-shared-folders tr:hover a.delete-folder {
 
 .user-page {
   .profile-meta {
+    .add-about-section {
+      display: block;
+      text-align: center;
+      padding: .5rem;
+      margin-bottom: 1rem;
+    }
+
     .stats {
       .header .info {
         float: right;
