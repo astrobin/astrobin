@@ -4,6 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 
+from astrobin_apps_images.services import ImageService
 from .models import ToggleProperty
 
 try:
@@ -29,6 +30,12 @@ def ajax_add_toggleproperty(request):
 
         # if not create it
         tp = ToggleProperty.objects.create_toggleproperty(property_type, obj, request.user)
+
+        if content_type.model == 'image':
+            ImageService(obj).record_hit(request)
+        elif content_type.model == 'imagerevision':
+            ImageService(obj.image).record_hit(request)
+
         if settings.TOGGLEPROPERTIES.get('show_count'):
             count = ToggleProperty.objects.toggleproperties_for_object(property_type, obj).count()
             response_dict['count'] = count

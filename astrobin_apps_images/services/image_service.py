@@ -1,4 +1,5 @@
 import logging
+from collections import namedtuple
 from datetime import timedelta
 
 from annoying.functions import get_object_or_None
@@ -9,6 +10,8 @@ from django.core.cache import cache
 from django.core.files.images import get_image_dimensions
 from django.db.models import Q
 from django.urls import reverse
+from hitcount.models import HitCount
+from hitcount.views import HitCountMixin
 
 from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.enums.display_image_download_menu import DownloadLimitation
@@ -333,6 +336,13 @@ class ImageService:
             return True
 
         return user == self.image.user
+
+    def record_hit(self, request):
+        if request.user != self.image.user:
+            UpdateHitCountResponse = namedtuple('UpdateHitCountResponse', 'hit_counted hit_message')
+            hit_count: HitCount = HitCount.objects.get_for_object(self.image)
+            hit_count_response: UpdateHitCountResponse = HitCountMixin.hit_count(request, hit_count)
+            return hit_count_response
 
     @staticmethod
     def get_constellation(solution):
