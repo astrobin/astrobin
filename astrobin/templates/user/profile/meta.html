@@ -23,7 +23,16 @@
     {% if requested_user.userprofile.about %}
     <div class="subtle-container about">
         <div class="header">
-            <h4>{% trans "About" %}</h4>
+            <h4>
+                {% trans "About" %}
+                {% if requested_user == request.user %}
+                    <div class="actions">
+                        <a href="{% url 'profile_edit_basic' %}">
+                            <i class="icon-pencil"></i>
+                        </a>
+                    </div>
+                {% endif %}
+            </h4>
         </div>
 
         <div class="about-content">

@@ -35,5 +35,11 @@
 
     <div class="modal-footer">
         <a class="btn" data-dismiss="modal">{% trans "Close" %}</a>
+
+        {% if requested_user == request.user %}
+            <a class="btn btn-primary" href="{% url 'profile_edit_basic' %}">
+                {% trans "Edit" %}
+            </a>
+        {% endif %}
     </div>
 </div>
