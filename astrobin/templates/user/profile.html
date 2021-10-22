@@ -153,6 +153,8 @@
     {% if request.user == requested_user and requested_user|is_donor %}
         {% cancel_donation_modal %}
     {% endif %}
+
+    {% include 'user/profile/modals/about.html' %}
 {% endblock %}
 
 {% block extra_js %}

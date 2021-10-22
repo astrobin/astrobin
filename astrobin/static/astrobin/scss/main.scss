@@ -3090,11 +3090,28 @@ table#private-shared-folders tr:hover a.delete-folder {
 
 .user-page {
   .profile-meta {
+    .add-about-section {
+      display: block;
+      text-align: center;
+      padding: .5rem;
+      margin-bottom: 1rem;
+    }
+
     .stats {
       .header .info {
         float: right;
       }
     }
+  }
+}
+
+#profile-about-modal {
+  h4 {
+    margin: 1.5rem 0 .5rem 0;
+  }
+
+  p {
+    line-height: 1.25rem;
   }
 }
 
