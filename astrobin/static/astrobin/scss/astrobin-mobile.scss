@@ -485,7 +485,7 @@
       align-items: center;
       margin-top: -20px;
       margin-bottom: 12px;
-      padding: 2rem 0;
+      padding-top: 2rem;
       background-size: cover;
       background-position: center;
 
@@ -498,8 +498,8 @@
         background: rgba(0, 0, 0, .5);
         padding: 1rem;
         margin-top: 1rem;
+        margin-bottom: 0;
         border: 0;
-        border-radius: .5rem;
 
         .header {
           display: none;

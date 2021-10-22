@@ -12,14 +12,16 @@
 
     <div class="modal-body">
         <p>
-            {{ requested_user.userprofile.about }}
+            {{ requested_user.userprofile.about | safe | escape }}
         </p>
 
         {% if requested_user.userprofile.website %}
             <h4>{% trans "Website" %}</h4>
-            <a href="{{ requested_user.userprofile.website }}" target="_blank">
-                {{ requested_user.userprofile.website }}
-            </a>
+            <p>
+                <a href="{{ requested_user.userprofile.website }}" target="_blank">
+                    {{ requested_user.userprofile.website }}
+                </a>
+            </p>
         {% endif %}
 
         {% if requested_user.userprofile.job %}
