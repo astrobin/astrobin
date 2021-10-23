@@ -485,7 +485,7 @@
       align-items: center;
       margin-top: -20px;
       margin-bottom: 12px;
-      padding-top: 2rem;
+      padding: 2rem 0;
       background-size: cover;
       background-position: center;
 
@@ -494,11 +494,12 @@
         box-shadow: 0 0 2rem $black;
       }
 
-      > .about {
+      > .about,
+      > .add-about-section {
         background: rgba(0, 0, 0, .5);
         padding: 1rem;
         margin-top: 1rem;
-        margin-bottom: 0;
+        margin-bottom: -2rem;
         border: 0;
 
         .header {
