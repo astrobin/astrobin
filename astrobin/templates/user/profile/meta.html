@@ -36,7 +36,7 @@
             </div>
 
             <div class="about-content">
-                {{ requested_user.userprofile.about|safe|escape|truncatechars_html:250 }}
+                {{ requested_user.userprofile.about|strip_html|safe|linebreaks|truncatechars_html:250 }}
 
                 {% if requested_user.userprofile.about|length > 250 or requested_user.userprofile.job or requested_user.userprofile.hobbies or requested_user.userprofile.website %}
                     <a class="read-more" href="#profile-about-modal" data-toggle="modal">
