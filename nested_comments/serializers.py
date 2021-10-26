@@ -1,3 +1,4 @@
+from precise_bbcode.bbcode import get_parser
 from rest_framework import serializers
 
 from common.serializers import AvatarField
@@ -11,6 +12,14 @@ class NestedCommentSerializer(serializers.ModelSerializer):
 
     author_avatar = AvatarField(source='author', required=False)
 
+    html = serializers.CharField(read_only=True)
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        parser = get_parser()
+        data["html"] = parser.render(instance.text)
+        return data
+
     class Meta:
         model = NestedComment
         fields = (
@@ -20,6 +29,7 @@ class NestedCommentSerializer(serializers.ModelSerializer):
             'content_type',
             'object_id',
             'text',
+            'html',
             'created',
             'updated',
             'deleted',
