@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load common_tags %}
 
 <div class="modal hide fade" id="profile-about-modal">
     <div class="modal-header">
@@ -12,7 +13,7 @@
 
     <div class="modal-body">
         <p>
-            {{ requested_user.userprofile.about | safe | escape }}
+            {{ requested_user.userprofile.about|strip_html|safe|linebreaks }}
         </p>
 
         {% if requested_user.userprofile.website %}
