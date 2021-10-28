@@ -24,7 +24,7 @@
                 {% trans "Warning!" %}
             </h4>
 
-            {% app_redirection_service request '/uploader' as beta_uploader_url %}
+            {% app_redirection_service '/uploader' as beta_uploader_url %}
             <p>
                 {% blocktrans trimmed with beta_uploader_url as url %}
                     The classic uploader will be discontinued soon. If you are still using it, please begin using the

@@ -1,5 +1,8 @@
-import urllib.request, urllib.parse, urllib.error
+import urllib.error
+import urllib.parse
+import urllib.request
 
+from django.conf import settings
 from django.http import HttpRequest
 
 
@@ -8,16 +11,8 @@ class AppRedirectionService:
         pass
 
     @staticmethod
-    def redirect(request, path):
-        # type: (HttpRequest, str) -> str
-
-        host = None
-        if 'HTTP_HOST' in request.META and 'astrobin.com' in request.META['HTTP_HOST']:
-            host = 'app.astrobin.com'
-        else:
-            host = 'localhost:4400'
-
-        return '{}://{}{}'.format(request.scheme, host, path)
+    def redirect(path: str) -> str:
+        return f'{settings.APP_URL}{path}'
 
     @staticmethod
     def contact_redirect(request):

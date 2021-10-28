@@ -3,7 +3,7 @@
 import urllib.request, urllib.parse, urllib.error
 
 from django.contrib.auth.models import AnonymousUser
-from django.test import TestCase, RequestFactory
+from django.test import TestCase, RequestFactory, override_settings
 
 from astrobin.tests.generators import Generators
 from common.services import AppRedirectionService
@@ -13,19 +13,15 @@ class AppRedirectionServiceTest(TestCase):
     def setUp(self):
         self.request_factory = RequestFactory()
 
+    @override_settings(APP_BASE='http://localhost:4400')
     def test_redirect_from_localhost(self):
-        request = self.request_factory.get('/')
         service = AppRedirectionService()
+        self.assertEqual('http://localhost:4400/foo', service.redirect('/foo'))
 
-        request.META['HTTP_HOST'] = 'localhost:8083'
-        self.assertEqual('http://localhost:4400/foo', service.redirect(request, '/foo'), )
-
+    @override_settings(APP_BASE='https://app.astrobin.com')
     def test_redirect_from_astrobin(self):
-        request = self.request_factory.get("/")
         service = AppRedirectionService()
-
-        request.META['HTTP_HOST'] = 'www.astrobin.com   '
-        self.assertEqual('http://app.astrobin.com/foo', service.redirect(request, '/foo'), )
+        self.assertEqual('https://app.astrobin.com/foo', service.redirect('/foo'))
 
     def test_contact_redirect(self):
         request = self.request_factory.get('/contact')

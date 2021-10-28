@@ -34,6 +34,7 @@ ADS_ENABLED = os.environ.get('ADS_ENABLED', 'false').strip() == 'true'
 DONATIONS_ENABLED = os.environ.get('DONATIONS_ENABLED', 'false').strip() == 'true'
 PREMIUM_ENABLED = os.environ.get('PREMIUM_ENABLED', 'true').strip() == 'true'
 
+APP_URL = os.environ.get('APP_URL', 'http://localhost:4400').strip()
 BASE_URL = os.environ.get('BASE_URL', 'http://localhost:8083').strip()
 SHORT_BASE_URL = os.environ.get('SHORT_BASE_URL', BASE_URL).strip()
 BASE_PATH = os.path.dirname(__file__)

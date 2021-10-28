@@ -217,8 +217,8 @@ def page_counter(counter, page_number, items_per_page):
 
 
 @register.simple_tag
-def app_redirection_service(request, path):
-    return AppRedirectionService.redirect(request, path)
+def app_redirection_service(path):
+    return AppRedirectionService.redirect(path)
 
 
 @register.filter

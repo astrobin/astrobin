@@ -78,7 +78,7 @@
 
                 {% if request.user|is_iotd_submitter %}
                     <li>
-                        <a href="{% app_redirection_service request '/iotd/submission-queue' %}">
+                        <a href="{% app_redirection_service '/iotd/submission-queue' %}">
                             <i class="icon-upload"></i>
                             {% trans "Submission queue" %}
                         </a>
@@ -87,7 +87,7 @@
 
                 {% if request.user|is_iotd_reviewer %}
                     <li>
-                        <a href="{% app_redirection_service request '/iotd/review-queue' %}">
+                        <a href="{% app_redirection_service '/iotd/review-queue' %}">
                             <i class="icon-star"></i>
                             {% trans "Review queue" %}
                         </a>
@@ -134,7 +134,7 @@
                 </li>
 
                 <li class="explore-menu-constellations">
-                    <a href="{% app_redirection_service request '/explore/constellations' %}">
+                    <a href="{% app_redirection_service '/explore/constellations' %}">
                         <i class="icon-star"></i>
                         {% trans "Constellations" %}
                     </a>
