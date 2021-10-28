@@ -13,12 +13,12 @@ class AppRedirectionServiceTest(TestCase):
     def setUp(self):
         self.request_factory = RequestFactory()
 
-    @override_settings(APP_BASE='http://localhost:4400')
+    @override_settings(APP_URL='http://localhost:4400')
     def test_redirect_from_localhost(self):
         service = AppRedirectionService()
         self.assertEqual('http://localhost:4400/foo', service.redirect('/foo'))
 
-    @override_settings(APP_BASE='https://app.astrobin.com')
+    @override_settings(APP_URL='https://app.astrobin.com')
     def test_redirect_from_astrobin(self):
         service = AppRedirectionService()
         self.assertEqual('https://app.astrobin.com/foo', service.redirect('/foo'))
