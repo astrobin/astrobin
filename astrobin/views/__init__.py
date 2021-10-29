@@ -493,7 +493,7 @@ def index(request, template='index/root.html', extra_context=None):
 @login_required
 def image_upload(request):
     if not settings.TESTING and "forceClassicUploader" not in request.GET:
-        return redirect(AppRedirectionService.redirect(request, "/uploader"))
+        return redirect(AppRedirectionService.redirect("/uploader"))
 
     from astrobin_apps_premium.utils import (
         premium_used_percent,

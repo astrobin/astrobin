@@ -18,9 +18,9 @@ class TestNotificationView(View):
 
 class NotificationListView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        return AppRedirectionService.redirect(self.request, '/notifications')
+        return AppRedirectionService.redirect('/notifications')
 
 
 class NotificationSettingsView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        return AppRedirectionService.redirect(self.request, '/notifications/settings')
+        return AppRedirectionService.redirect('/notifications/settings')

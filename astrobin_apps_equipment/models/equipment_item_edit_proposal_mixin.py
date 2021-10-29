@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
+
+from common.services import AppRedirectionService
 
 
 class EquipmentItemEditProposalMixin(models.Model):
@@ -70,6 +73,13 @@ class EquipmentItemEditProposalMixin(models.Model):
             ('SUPERSEDED', _("Superseded"))
         ],
     )
+
+    def get_absolute_url_base(self, type: str) -> str:
+        target_id: int = self.edit_proposal_target.id
+        slug: str = slugify(f'{self.brand.name} {self.name}')
+        id: int = self.id
+
+        return AppRedirectionService.redirect(f'/equipment/explorer/{type}/{target_id}/{slug}/edit-proposals/{id}')
 
     class Meta:
         abstract = True

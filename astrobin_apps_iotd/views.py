@@ -38,12 +38,12 @@ class IotdBaseQueueView(View):
 
 class IotdSubmissionQueueView(View):
     def dispatch(self, request, *args, **kwargs):
-        return HttpResponsePermanentRedirect(AppRedirectionService.redirect(request, '/iotd/submission-queue'))
+        return HttpResponsePermanentRedirect(AppRedirectionService.redirect('/iotd/submission-queue'))
 
 
 class IotdReviewQueueView(View):
     def dispatch(self, request, *args, **kwargs):
-        return HttpResponsePermanentRedirect(AppRedirectionService.redirect(request, '/iotd/review-queue'))
+        return HttpResponsePermanentRedirect(AppRedirectionService.redirect('/iotd/review-queue'))
 
 
 class IotdJudgementQueueView(

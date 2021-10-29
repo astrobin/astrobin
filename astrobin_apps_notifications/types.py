@@ -61,6 +61,12 @@ NOTICE_TYPES = (
         2,
     ),
     (
+        'new_comment_to_edit_proposal',
+        _('Your edit proposal received a new comment'),
+        '',
+        2,
+    ),
+    (
         'new_comment_reply',
         _('There was a reply to your comment'),
         '',

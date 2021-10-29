@@ -8,6 +8,9 @@ from astrobin_apps_equipment.models.equipment_item_edit_proposal_mixin import Eq
 class CameraEditProposal(CameraBaseModel, EquipmentItemEditProposalMixin):
     edit_proposal_target = models.ForeignKey(Camera, on_delete=models.CASCADE, related_name="edit_proposals")
 
+    def get_absolute_url(self):
+        return self.get_absolute_url_base('camera')
+
     class Meta(CameraBaseModel.Meta):
         unique_together = []
         ordering = ['-edit_proposal_created']
