@@ -670,6 +670,11 @@ astrobin_common = {
                 return;
             }
 
+            // Skip CKEditor attachments.
+            if (url.indexOf('ckeditor-files') > -1) {
+                return;
+            }
+
             // Skip endless pagination.
             if ($(event.target).hasClass('endless_more')) {
                 return;
