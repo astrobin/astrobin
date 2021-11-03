@@ -1,6 +1,19 @@
 {% load i18n %}
 
-{% if skyplot_zoom1 %}
+{% if pixinsight_finding_chart %}
+    <div class="subtle-container pixinsight-finding-chart">
+        <div class="header"><h4><i class="icon-hand-up"></i> {% trans "Sky plot" %}</h4></div>
+        <div class="image">
+            {% if pixinsight_finding_chart_small %}
+                <a href="{{ IMAGES_URL }}{{ pixinsight_finding_chart_small }}" class="fancybox">
+                  <img src="{{ IMAGES_URL }}{{ pixinsight_finding_chart }}" alt="{% trans "Sky plot" %}" />
+                </a>
+            {% else %}
+                <img src="{{ IMAGES_URL }}{{ pixinsight_finding_chart }}" alt="{% trans "Sky plot" %}" />
+            {% endif %}
+        </div>
+    </div>
+{% elif skyplot_zoom1 %}
     <div class="subtle-container sky-plot">
         <div class="header"><h4><i class="icon-hand-up"></i> {% trans "Sky plot" %}</h4></div>
         <div class="image">

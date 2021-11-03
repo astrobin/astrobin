@@ -3299,17 +3299,22 @@ ul.astrobin-users {
   }
 }
 
-.sky-plot .image {
-  text-align: center;
-  margin: -12px;
+.sky-plot,
+.pixinsight-finding-chart {
+  .image {
+    text-align: center;
+    margin: -12px;
 
-  img {
-    @include grayscale;
-
-    @media screen and (min-width: 768px) {
-      width: 100%;
+    img {
+      @media screen and (min-width: 768px) {
+        width: 100%;
+      }
     }
   }
+}
+
+.sky-plot .image img {
+  @include grayscale;
 }
 
 .form-donate {

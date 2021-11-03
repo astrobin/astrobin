@@ -1,9 +1,11 @@
+import base64
 import logging
 import os
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
+import uuid
 
 import simplejson
 from braces.views import CsrfExemptMixin
@@ -200,7 +202,8 @@ class SolutionUpdateView(base.View):
                 except PlateSolvingAdvancedTask.DoesNotExist:
                     log.error("PixInsight task %s does not exist!" % solution.pixinsight_serial_number)
 
-                live_log_entry = PlateSolvingAdvancedLiveLogEntry.objects.filter(serial_number=solution.pixinsight_serial_number).order_by('-timestamp').first()
+                live_log_entry = PlateSolvingAdvancedLiveLogEntry.objects.filter(
+                    serial_number=solution.pixinsight_serial_number).order_by('-timestamp').first()
                 if live_log_entry:
                     pixinsight_stage = live_log_entry.stage
                     pixinsight_log = live_log_entry.log
@@ -363,41 +366,55 @@ class SolutionPixInsightWebhook(base.View):
         solution = get_object_or_404(Solution, pixinsight_serial_number=serial_number)
 
         if status == 'OK':
-            svg_hd = request.POST.get('svgAnnotation', None)
+            svg_hd = request.POST.get('svgAnnotation')
             svg_regular = request.POST.get('svgAnnotationSmall', svg_hd)
-            pixscale = request.POST.get('resolution', None)
+            pixscale = request.POST.get('resolution')
+            finding_chart = request.POST.get('findingChart')
+            finding_chart_small = request.POST.get('findingChartSmall')
 
-            solution.pixinsight_svg_annotation_hd.save(serial_number + ".svg", ContentFile(svg_hd.encode('utf-8')))
-            solution.pixinsight_svg_annotation_regular.save(
-                serial_number + ".svg", ContentFile(svg_regular.encode('utf-8')))
+            if svg_hd:
+                solution.pixinsight_svg_annotation_hd.save(serial_number + ".svg", ContentFile(svg_hd.encode('utf-8')))
+
+            if svg_regular:
+                solution.pixinsight_svg_annotation_regular.save(
+                    serial_number + ".svg", ContentFile(svg_regular.encode('utf-8')))
+
+            if finding_chart:
+                data = base64.b64decode(urllib.parse.unquote(finding_chart))
+                solution.pixinsight_finding_chart = ContentFile(data, name=f'{uuid.uuid4()}.png')
+
+            if finding_chart_small:
+                data = base64.b64decode(urllib.parse.unquote(finding_chart_small))
+                solution.pixinsight_finding_chart_small = ContentFile(data, name=f'{uuid.uuid4()}.png')
+
             solution.status = Solver.ADVANCED_SUCCESS
 
-            solution.advanced_ra = request.POST.get('centerRA', None)
-            solution.advanced_ra_top_left = request.POST.get('topLeftRA', None)
-            solution.advanced_ra_top_right = request.POST.get('topRightRA', None)
-            solution.advanced_ra_bottom_left = request.POST.get('bottomLeftRA', None)
-            solution.advanced_ra_bottom_right = request.POST.get('bottomRightRA', None)
+            solution.advanced_ra = request.POST.get('centerRA')
+            solution.advanced_ra_top_left = request.POST.get('topLeftRA')
+            solution.advanced_ra_top_right = request.POST.get('topRightRA')
+            solution.advanced_ra_bottom_left = request.POST.get('bottomLeftRA')
+            solution.advanced_ra_bottom_right = request.POST.get('bottomRightRA')
 
-            solution.advanced_dec = request.POST.get('centerDec', None)
-            solution.advanced_dec_top_left = request.POST.get('topLeftDec', None)
-            solution.advanced_dec_top_right = request.POST.get('topRightDec', None)
-            solution.advanced_dec_bottom_left = request.POST.get('bottomLeftDec', None)
-            solution.advanced_dec_bottom_right = request.POST.get('bottomRightDec', None)
+            solution.advanced_dec = request.POST.get('centerDec')
+            solution.advanced_dec_top_left = request.POST.get('topLeftDec')
+            solution.advanced_dec_top_right = request.POST.get('topRightDec')
+            solution.advanced_dec_bottom_left = request.POST.get('bottomLeftDec')
+            solution.advanced_dec_bottom_right = request.POST.get('bottomRightDec')
 
-            solution.advanced_orientation = request.POST.get('rotation', None)
+            solution.advanced_orientation = request.POST.get('rotation')
             solution.advanced_pixscale = pixscale \
                 if solution.advanced_settings and solution.advanced_settings.sample_raw_frame_file \
                 else corrected_pixscale(solution, pixscale)
-            solution.advanced_flipped = request.POST.get('flipped', None) == 'true'
-            solution.advanced_wcs_transformation = request.POST.get('wcsTransformation', None)
+            solution.advanced_flipped = request.POST.get('flipped') == 'true'
+            solution.advanced_wcs_transformation = request.POST.get('wcsTransformation')
 
-            solution.advanced_matrix_rect = request.POST.get('matrixRect', None)
-            solution.advanced_matrix_delta = request.POST.get('matrixDelta', None)
-            solution.advanced_ra_matrix = request.POST.get('raMatrix', None)
-            solution.advanced_dec_matrix = request.POST.get('decMatrix', None)
+            solution.advanced_matrix_rect = request.POST.get('matrixRect')
+            solution.advanced_matrix_delta = request.POST.get('matrixDelta')
+            solution.advanced_ra_matrix = request.POST.get('raMatrix')
+            solution.advanced_dec_matrix = request.POST.get('decMatrix')
 
-            solution.advanced_annotations = request.POST.get('labelInfo', None)
-            solution.advanced_annotations_regular = request.POST.get('labelInfoSmall', None)
+            solution.advanced_annotations = request.POST.get('labelInfo')
+            solution.advanced_annotations_regular = request.POST.get('labelInfoSmall')
         else:
             solution.status = Solver.ADVANCED_FAILED
             log.error(request.POST.get('errorMessage', 'Unknown error'))

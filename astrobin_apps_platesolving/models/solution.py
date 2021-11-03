@@ -120,6 +120,18 @@ class Solution(models.Model):
         blank=True,
     )
 
+    pixinsight_finding_chart = models.ImageField(
+        upload_to='pixinsight-finding-charts',
+        null=True,
+        blank=True,
+    )
+
+    pixinsight_finding_chart_small = models.ImageField(
+        upload_to='pixinsight-finding-charts',
+        null=True,
+        blank=True,
+    )
+
     advanced_settings = models.OneToOneField(
         PlateSolvingAdvancedSettings,
         related_name='solution',
