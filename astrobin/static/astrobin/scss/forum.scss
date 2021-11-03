@@ -143,6 +143,15 @@ th.forum-name {
     right: 0;
   }
 
+  .contribution-index {
+    position: absolute;
+    right: 60px;
+    top: calc(50% - 6px);
+    font-weight: normal;
+    font-size: 12px;
+    color: $grey-5;
+  }
+
   .post-author {
     font-size: 16px;
     line-height: 18px;
@@ -155,10 +164,15 @@ th.forum-name {
     font-weight: normal;
     display: inline-block;
     margin-left: .5rem;
+
+    .timestamp {
+      border: 0;
+    }
   }
 
+  .post-views,
   .post-likes {
-    color: $white;
+    color: $grey-4;
     font-size: 11px;
     font-weight: normal;
     display: inline-block;

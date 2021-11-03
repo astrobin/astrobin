@@ -221,6 +221,7 @@ urlpatterns += [
     url(r'^api/v2/groups/', include(('astrobin_apps_groups.api.urls', 'astrobin_apps_groups'))),
     url(r'^api/v2/users/', include(('astrobin_apps_users.api.urls', 'astrobin_apps_users'))),
     url(r'^api/v2/equipment/', include(('astrobin_apps_equipment.api.urls', 'astrobin_apps_equipment'))),
+    url(r'^api/v2/forum/', include(('astrobin_apps_forum.api.urls', 'astrobin_apps_forum'))),
 
     ###########################################################################
     ### OWN APPS VIEWS                                                      ###
