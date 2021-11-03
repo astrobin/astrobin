@@ -531,7 +531,7 @@ class ImageDetailView(ImageDetailViewBase):
         pixinsight_finding_chart = None
         pixinsight_finding_chart_small = None
 
-        if image.solution:
+        if not is_revision and image.solution:
             subjects = SolutionService(image.solution).get_objects_in_field()
             skyplot_zoom1 = image.solution.skyplot_zoom1
             pixinsight_finding_chart = image.solution.pixinsight_finding_chart
