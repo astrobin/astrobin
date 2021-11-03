@@ -460,8 +460,8 @@
                     return this.i18n.pixInsightStageGeneratingImageAnnotations;
                 case "PROCESSING_SVG_DOCUMENTS":
                     return this.i18n.pixInsightStageProcessingSvgDocuments;
-                case "GENERATING_FINDING_CHART":
-                    return this.i18n.pixInsightStageGeneratingFindingChart;
+                case "GENERATING_FINDING_CHARTS":
+                    return this.i18n.pixInsightStageGeneratingFindingCharts;
                 case "UPLOADING_RESULT":
                     return this.i18n.pixInsightStageUploadingResults;
                 case "END_TASK":
