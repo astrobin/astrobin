@@ -1353,6 +1353,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       .number {
         color: $strong-text-color;
         font-weight: bold;
+        margin-left: $spacer-small;
       }
     }
 
