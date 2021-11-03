@@ -1,14 +1,14 @@
 import logging
+import mimetypes
 import os
 import re
 import time
 from functools import reduce
 from typing import Union, Optional
 
-import mimetypes
-
 import boto3
 import requests
+from PIL import Image as PILImage
 from braces.views import (
     JSONResponseMixin,
     LoginRequiredMixin,
@@ -40,7 +40,6 @@ from django.views.generic import (
 )
 from django.views.generic.base import View
 from django.views.generic.detail import SingleObjectMixin
-from PIL import Image as PILImage
 from silk.profiling.profiler import silk_profile
 
 from astrobin.enums import SubjectType
@@ -529,15 +528,21 @@ class ImageDetailView(ImageDetailViewBase):
 
         subjects = []
         skyplot_zoom1 = None
+        pixinsight_finding_chart = None
+        pixinsight_finding_chart_small = None
 
-        if image.solution:
+        if not is_revision and image.solution:
             subjects = SolutionService(image.solution).get_objects_in_field()
             skyplot_zoom1 = image.solution.skyplot_zoom1
+            pixinsight_finding_chart = image.solution.pixinsight_finding_chart
+            pixinsight_finding_chart_small = image.solution.pixinsight_finding_chart_small
 
         if is_revision and revision_image.solution:
             subjects = SolutionService(revision_image.solution).get_objects_in_field()
             if revision_image.solution.skyplot_zoom1:
                 skyplot_zoom1 = revision_image.solution.skyplot_zoom1
+                pixinsight_finding_chart = revision_image.solution.pixinsight_finding_chart
+                pixinsight_finding_chart_small = revision_image.solution.pixinsight_finding_chart_small
 
         locations = '; '.join(['%s' % (x) for x in image.locations.all()])
 
@@ -714,10 +719,13 @@ class ImageDetailView(ImageDetailViewBase):
                                       ),
             'advanced_solution_last_live_log_entry':
                 PlateSolvingAdvancedLiveLogEntry.objects.filter(
-                    serial_number=instance_to_platesolve.solution.pixinsight_serial_number).order_by('-timestamp').first() \
+                    serial_number=instance_to_platesolve.solution.pixinsight_serial_number) \
+                    .order_by('-timestamp').first() \
                     if instance_to_platesolve.solution \
                     else None,
             'skyplot_zoom1': skyplot_zoom1,
+            'pixinsight_finding_chart': pixinsight_finding_chart,
+            'pixinsight_finding_chart_small': pixinsight_finding_chart_small,
 
             'image_ct': ContentType.objects.get_for_model(Image),
             'user_ct': ContentType.objects.get_for_model(User),
@@ -1408,7 +1416,7 @@ class ImageDownloadView(View):
                 s3 = session.resource('s3')
                 s3.Bucket(settings.AWS_STORAGE_BUCKET_NAME).put_object(Key=result_path, Body=result_file)
 
-            response =  self.download(f'https://{settings.AWS_STORAGE_BUCKET_NAME}/{result_path}')
+            response = self.download(f'https://{settings.AWS_STORAGE_BUCKET_NAME}/{result_path}')
 
             os.unlink(local_svg.name)
             os.unlink(local_hd.name)

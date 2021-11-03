@@ -114,10 +114,6 @@
 {% block extra_js %}
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.fancybox').fancybox({
-                type: 'image'
-            });
-
             $('.iotd-queue-item a.elect').click(function(e) {
                 var $item = $(this).closest('.iotd-queue-item'),
                     url = $(this).data('toggle-url');
