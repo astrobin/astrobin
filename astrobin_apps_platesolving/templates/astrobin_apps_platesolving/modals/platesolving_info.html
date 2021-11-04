@@ -102,7 +102,7 @@
                         <td>
                             <abbr title="{{ instance_to_platesolve.solution.advanced_ra }} {% trans "degrees" %}"
                                   class="ra-coordinates">
-                                {{ instance_to_platesolve.solution.advanced_ra | ra_to_hms:3 }}
+                                {{ instance_to_platesolve.solution.advanced_ra | ra_to_hms:instance_to_platesolve.solution.advanced_pixscale }}
                             </abbr>
                         </td>
                     </tr>
@@ -111,7 +111,7 @@
                         <td>
                             <abbr title="{{ instance_to_platesolve.solution.advanced_ra_top_left }} {% trans "degrees" %}"
                                   class="ra-coordinates">
-                                {{ instance_to_platesolve.solution.advanced_ra_top_left | ra_to_hms:3 }}
+                                {{ instance_to_platesolve.solution.advanced_ra_top_left | ra_to_hms:instance_to_platesolve.solution.advanced_pixscale }}
                             </abbr>
                         </td>
                     </tr>
@@ -120,7 +120,7 @@
                         <td>
                             <abbr title="{{ instance_to_platesolve.solution.advanced_ra_top_right }} {% trans "degrees" %}"
                                   class="ra-coordinates">
-                                {{ instance_to_platesolve.solution.advanced_ra_top_right | ra_to_hms:3 }}
+                                {{ instance_to_platesolve.solution.advanced_ra_top_right | ra_to_hms:instance_to_platesolve.solution.advanced_pixscale }}
                             </abbr>
                         </td>
                     </tr>
@@ -129,7 +129,7 @@
                         <td>
                             <abbr title="{{ instance_to_platesolve.solution.advanced_ra_bottom_right }} {% trans "degrees" %}"
                                   class="ra-coordinates">
-                                {{ instance_to_platesolve.solution.advanced_ra_bottom_right | ra_to_hms:3 }}
+                                {{ instance_to_platesolve.solution.advanced_ra_bottom_right | ra_to_hms:instance_to_platesolve.solution.advanced_pixscale }}
                             </abbr>
                         </td>
                     </tr>
@@ -138,7 +138,7 @@
                         <td>
                             <abbr title="{{ instance_to_platesolve.solution.advanced_ra_bottom_left }} {% trans "degrees" %}"
                                   class="ra-coordinates">
-                                {{ instance_to_platesolve.solution.advanced_ra_bottom_left | ra_to_hms:3 }}
+                                {{ instance_to_platesolve.solution.advanced_ra_bottom_left | ra_to_hms:instance_to_platesolve.solution.advanced_pixscale }}
                             </abbr>
                         </td>
                     </tr>
@@ -154,7 +154,7 @@
                         <td>
                             <abbr title="{{ instance_to_platesolve.solution.advanced_dec }} {% trans "degrees" %}"
                                   class="dec-coordinates">
-                                {{ instance_to_platesolve.solution.advanced_dec | dec_to_dms:2 }}
+                                {{ instance_to_platesolve.solution.advanced_dec | dec_to_dms:instance_to_platesolve.solution.advanced_pixscale }}
                             </abbr>
                         </td>
                     </tr>
@@ -163,7 +163,7 @@
                         <td>
                             <abbr title="{{ instance_to_platesolve.solution.advanced_dec_top_left }} {% trans "degrees" %}"
                                   class="dec-coordinates">
-                                {{ instance_to_platesolve.solution.advanced_dec_top_left | dec_to_dms:2 }}
+                                {{ instance_to_platesolve.solution.advanced_dec_top_left | dec_to_dms:instance_to_platesolve.solution.advanced_pixscale }}
                             </abbr>
                         </td>
                         </td>
@@ -173,7 +173,7 @@
                         <td>
                             <abbr title="{{ instance_to_platesolve.solution.advanced_dec_top_right }} {% trans "degrees" %}"
                                   class="dec-coordinates">
-                                {{ instance_to_platesolve.solution.advanced_dec_top_right | dec_to_dms:2 }}
+                                {{ instance_to_platesolve.solution.advanced_dec_top_right | dec_to_dms:instance_to_platesolve.solution.advanced_pixscale }}
                             </abbr>
                         </td>
                         </td>
@@ -183,7 +183,7 @@
                         <td>
                             <abbr title="{{ instance_to_platesolve.solution.advanced_dec_bottom_right }} {% trans "degrees" %}"
                                   class="dec-coordinates">
-                                {{ instance_to_platesolve.solution.advanced_dec_bottom_right | dec_to_dms:2 }}
+                                {{ instance_to_platesolve.solution.advanced_dec_bottom_right | dec_to_dms:instance_to_platesolve.solution.advanced_pixscale }}
                             </abbr>
                         </td>
                         </td>
@@ -193,7 +193,7 @@
                         <td>
                             <abbr title="{{ instance_to_platesolve.solution.advanced_dec_bottom_left }} {% trans "degrees" %}"
                                   class="dec-coordinates">
-                                {{ instance_to_platesolve.solution.advanced_dec_bottom_left | dec_to_dms:2 }}
+                                {{ instance_to_platesolve.solution.advanced_dec_bottom_left | dec_to_dms:instance_to_platesolve.solution.advanced_pixscale }}
                             </abbr>
                         </td>
                         </td>

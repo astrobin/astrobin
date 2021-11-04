@@ -6,6 +6,7 @@ from mock import patch
 
 from astrobin import utils
 from astrobin.tests.generators import Generators
+from astrobin.utils import ra_decimal_precision_from_pixel_scale, dec_decimal_precision_from_pixel_scale
 
 
 class UtilsTest(TestCase):
@@ -191,3 +192,21 @@ class UtilsTest(TestCase):
         self.assertEquals('10<span class="symbol">h</span>.00', utils.number_unit_decimals_html(10, 'h', 2))
         self.assertEquals('10<span class="symbol">h</span>.123', utils.number_unit_decimals_html(10.123, 'h', 3))
         self.assertEquals('10<span class="symbol">h</span>.1230', utils.number_unit_decimals_html(10.123, 'h', 4))
+
+    def test_dec_decimal_precision_from_pixel_scale(self):
+        self.assertEqual(0, dec_decimal_precision_from_pixel_scale(0))
+        self.assertEqual(0, dec_decimal_precision_from_pixel_scale(11))
+        self.assertEqual(1, dec_decimal_precision_from_pixel_scale(10))
+        self.assertEqual(1, dec_decimal_precision_from_pixel_scale(9))
+        self.assertEqual(1, dec_decimal_precision_from_pixel_scale(1.1))
+        self.assertEqual(2, dec_decimal_precision_from_pixel_scale(1))
+        self.assertEqual(2, dec_decimal_precision_from_pixel_scale(.1))
+
+    def test_ra_decimal_precision_from_pixel_scale(self):
+        self.assertEqual(1, ra_decimal_precision_from_pixel_scale(0))
+        self.assertEqual(1, ra_decimal_precision_from_pixel_scale(100))
+        self.assertEqual(2, ra_decimal_precision_from_pixel_scale(10))
+        self.assertEqual(2, ra_decimal_precision_from_pixel_scale(9))
+        self.assertEqual(2, ra_decimal_precision_from_pixel_scale(1.1))
+        self.assertEqual(3, ra_decimal_precision_from_pixel_scale(1))
+        self.assertEqual(3, ra_decimal_precision_from_pixel_scale(.1))
