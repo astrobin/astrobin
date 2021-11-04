@@ -13,7 +13,8 @@ ASTROBIN_APPS = [
     'astrobin_apps_equipment',
     'astrobin_apps_json_api',
     'astrobin_apps_payments',
-    'toggleproperties'
+    'toggleproperties',
+    'astrobin_apps_forum',
 ]
 
 INSTALLED_APPS = []
