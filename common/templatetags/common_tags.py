@@ -1,6 +1,7 @@
 import datetime
 
 import bleach
+from dateutil import parser
 from django import template
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
@@ -225,6 +226,9 @@ def app_redirection_service(path):
 def is_future(dt):
     return dt > DateTimeService.now()
 
+@register.filter
+def is_after_datetime(dt, after_string):
+    return dt > parser.parse(after_string)
 
 @register.simple_tag
 def timestamp(dt):

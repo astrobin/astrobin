@@ -52,7 +52,7 @@
         </div>
 
         {% get_hit_count for post as hit_count %}
-        {% if hit_count|add:"0" > 0 %}
+        {% if post.created|is_after_datetime:"2021-11-04T08:00:00" and hit_count|add:"0" > 0 %}
             <div class="post-views">
                 &middot;&nbsp;
                 {{ hit_count }}
