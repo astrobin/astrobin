@@ -26,6 +26,7 @@ from astrobin.api import (
     CollectionResource,
     UserProfileResource
 )
+from astrobin.forms.password_reset_form import PasswordResetForm
 from astrobin.search import AstroBinSearchView
 from astrobin.views import (
     api as api_views,
@@ -165,7 +166,7 @@ urlpatterns += [
         auth_views.PasswordChangeDoneView.as_view(),
         name='password_change_done'),
     url(r'^accounts/password/reset/$',
-        auth_views.PasswordResetView.as_view(),
+        auth_views.PasswordResetView.as_view(form_class=PasswordResetForm),
         name='password_reset'),
     url(r'^accounts/password/reset/done/$',
         auth_views.PasswordResetDoneView.as_view(),
