@@ -626,12 +626,22 @@ def group_members_changed(sender, instance, **kwargs):
                         x.user for x in
                         ToggleProperty.objects.toggleproperties_for_object("follow", user)
                     ]
-                    push_notification(followers, user, 'user_joined_public_group',
-                                      {
-                                          'user': user.userprofile.get_display_name(),
-                                          'group_name': instance.name,
-                                          'url': settings.BASE_URL + reverse_url('group_detail', args=(instance.pk,)),
-                                      })
+                    push_notification(
+                        followers + [instance.owner],
+                        user,
+                        'user_joined_public_group',
+                        {
+                            'user': user.userprofile.get_display_name(),
+                            'user_url': build_notification_url(
+                                settings.BASE_URL + reverse_url('user_page', kwargs={'username': user.username}),
+                                user
+                            ),
+                            'group_name': instance.name,
+                            'url': build_notification_url(
+                                settings.BASE_URL + reverse_url('group_detail', args=(instance.pk,)),
+                                user
+                            ),
+                        })
 
                     add_story(
                         user,
