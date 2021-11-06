@@ -55,3 +55,8 @@ class CameraBaseModel(EquipmentItem):
 
     class Meta(EquipmentItem.Meta):
         abstract = True
+        unique_together = [
+            'brand',
+            'name',
+            'modified',
+        ]

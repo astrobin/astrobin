@@ -59,6 +59,7 @@ class EquipmentGenerators:
             cooled=kwargs.get('cooled', True),
             max_cooling=kwargs.get('max_cooling', 40),
             back_focus=kwargs.get('back_focus', 18),
+            modified=kwargs.get('modified', False),
         )
 
     @staticmethod

@@ -67,6 +67,7 @@ class CameraAdmin(admin.ModelAdmin):
     list_display = (
         'brand',
         'name',
+        'modified',
         'created',
     )
 
