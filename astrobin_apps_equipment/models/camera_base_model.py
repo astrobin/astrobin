@@ -1,5 +1,3 @@
-from enum import Enum
-
 from django.db import models
 from django.db.models import PROTECT
 from django.utils.translation import ugettext_lazy as _

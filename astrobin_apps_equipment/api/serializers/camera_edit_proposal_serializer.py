@@ -1,3 +1,5 @@
+from rest_framework.exceptions import ValidationError
+
 from astrobin_apps_equipment.api.serializers.equipment_item_edit_proposal_serializer import \
     EquipmentItemEditProposalSerializer
 from astrobin_apps_equipment.models import CameraEditProposal, Camera
@@ -13,6 +15,13 @@ class CameraEditProposalSerializer(EquipmentItemEditProposalSerializer):
             'back_focus': target.back_focus,
 
         }
+
+    def create(self, validated_data):
+        target = validated_data['edit_proposal_target']
+        if target.modified:
+            raise ValidationError('Modified cameras do not support edit proposals. Edit the regular variant instead.')
+
+        return super().create(validated_data)
 
     class Meta(EquipmentItemEditProposalSerializer.Meta):
         model = CameraEditProposal

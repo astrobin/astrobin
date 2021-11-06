@@ -12,3 +12,4 @@ class Camera(CameraBaseModel):
 
     class Meta(CameraBaseModel.Meta):
         abstract = False
+        ordering = CameraBaseModel.Meta.ordering + ['modified']

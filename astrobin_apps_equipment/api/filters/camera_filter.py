@@ -5,3 +5,4 @@ from astrobin_apps_equipment.models import Camera
 class CameraFilter(EquipmentItemFilter):
     class Meta(EquipmentItemFilter.Meta):
         model = Camera
+        fields = EquipmentItemFilter.Meta.fields + ['modified']

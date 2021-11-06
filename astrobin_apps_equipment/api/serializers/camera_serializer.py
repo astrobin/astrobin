@@ -5,7 +5,7 @@ from astrobin_apps_equipment.models import Camera
 
 
 class CameraSerializer(EquipmentItemSerializer):
-    modified = serializers.BooleanField()
+    modified = serializers.BooleanField(required=False, default=False)
 
     class Meta(EquipmentItemSerializer.Meta):
         model = Camera
