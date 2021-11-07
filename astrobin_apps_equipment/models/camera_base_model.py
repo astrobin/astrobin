@@ -1,5 +1,3 @@
-from enum import Enum
-
 from django.db import models
 from django.db.models import PROTECT
 from django.utils.translation import ugettext_lazy as _
@@ -55,3 +53,8 @@ class CameraBaseModel(EquipmentItem):
 
     class Meta(EquipmentItem.Meta):
         abstract = True
+        unique_together = [
+            'brand',
+            'name',
+            'modified',
+        ]

@@ -7,6 +7,7 @@ from astrobin_apps_equipment.models.equipment_item_edit_proposal_mixin import Eq
 
 class CameraEditProposal(CameraBaseModel, EquipmentItemEditProposalMixin):
     edit_proposal_target = models.ForeignKey(Camera, on_delete=models.CASCADE, related_name="edit_proposals")
+    create_modified_variant = models.BooleanField(default=False)
 
     def get_absolute_url(self):
         return self.get_absolute_url_base('camera')

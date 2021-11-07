@@ -1,10 +1,7 @@
-import operator
-from functools import reduce
-
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
-from django.db.models import Q
-from django.db.models.functions import Lower
+from django.db.models import Q, Value
+from django.db.models.functions import Lower, Concat
 from django.utils import timezone
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
@@ -34,12 +31,15 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         queryset = manager.all()
 
         if q:
-            words = q.split(' ')
-            name_filters = reduce(operator.or_, [Q(**{'name__icontains': x}) for x in words])
-            brand_filters = reduce(operator.or_, [Q(**{'brand__name__icontains': x}) for x in words])
-            queryset = queryset.filter(name_filters | brand_filters)[:10]
-
-        if sort == "az":
+            queryset = queryset.annotate(
+                full_name=Concat('brand__name', Value(' '), 'name'),
+                distance=TrigramDistance('full_name', q)
+            ).filter(
+                distance__lte=.8
+            ).order_by(
+                'distance'
+            )[:10]
+        elif sort == "az":
             queryset = queryset.order_by(Lower('brand__name'), Lower('name'))
 
         return queryset
