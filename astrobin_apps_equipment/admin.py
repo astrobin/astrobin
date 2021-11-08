@@ -2,6 +2,7 @@
 
 
 from django.contrib import admin
+from safedelete import HARD_DELETE
 
 from astrobin_apps_equipment.models import Sensor, Camera, Telescope, CameraEditProposal
 from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
@@ -47,7 +48,16 @@ class EquipmentItemListingAdmin(admin.ModelAdmin):
     )
 
 
-class SensorAdmin(admin.ModelAdmin):
+class EquipmentItemAdmin(admin.ModelAdmin):
+    def delete_permanently(self, request, queryset):
+        queryset.delete(force_policy=HARD_DELETE)
+
+    delete_permanently.short_description = 'Delete selected items   permanently'
+
+    actions = ['delete_permanently']
+
+
+class SensorAdmin(EquipmentItemAdmin):
     list_display = (
         'brand',
         'name',
@@ -63,11 +73,12 @@ class SensorEditProposalAdmin(admin.ModelAdmin):
     )
 
 
-class CameraAdmin(admin.ModelAdmin):
+class CameraAdmin(EquipmentItemAdmin):
     list_display = (
         'brand',
         'name',
         'modified',
+        'cooled',
         'created',
     )
 
@@ -80,7 +91,7 @@ class CameraEditProposalAdmin(admin.ModelAdmin):
     )
 
 
-class TelescopeAdmin(admin.ModelAdmin):
+class TelescopeAdmin(EquipmentItemAdmin):
     list_display = (
         'brand',
         'name',

@@ -13,15 +13,15 @@ from rest_framework.decorators import action
 from rest_framework.renderers import BrowsableAPIRenderer
 
 from astrobin_apps_forum.api.filters.post_filter import PostFilter
-from astrobin_apps_forum.api.permissions.is_post_author_or_readonly import IsPostAuthorOrReadonly
 from astrobin_apps_forum.api.serializers.post_serializer import PostSerializer
+from common.permissions import IsObjectUserOrReadOnly
 
 
 class PostViewSet(viewsets.ModelViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [CamelCaseJSONParser]
     serializer_class = PostSerializer
-    permission_classes = [IsPostAuthorOrReadonly]
+    permission_classes = [IsObjectUserOrReadOnly]
     filter_class = PostFilter
     http_method_names = ['get', 'post', 'put', 'head']
     queryset = Post.objects.filter(on_moderation=False)

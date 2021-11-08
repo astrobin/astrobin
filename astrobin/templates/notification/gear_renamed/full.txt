@@ -1,0 +1,11 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    A gear item that you used was renamed
+{% endblocktrans %}:
+
+{% trans "Old brand" %}: {{ gear.make }}
+{% trans "Old name" %}: {{ gear.name }}
+
+{% trans "New brand" %}: {{ item.brand.name }}
+{% trans "New name" %}: {{ item.name }}
