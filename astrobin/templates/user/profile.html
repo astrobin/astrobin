@@ -9,6 +9,7 @@
 {% load toggleproperty_tags %}
 {% load static %}
 {% load cache %}
+{% load common_tags %}
 
 {% block title %}
     {% blocktrans trimmed with user=requested_user.userprofile.get_display_name %}
@@ -159,4 +160,25 @@
 
 {% block extra_js %}
     {% include 'user/profile/js.html' %}
+{% endblock %}
+
+{% block extra_alerts %}
+    {% if HAS_CAMERA_RENAME_PROPOSALS %}
+
+        <div class="alert alert-warning global-alert">
+            <p>
+                {% blocktrans trimmed %}
+                    AstroBin would like to rename some of your cameras in order to be more consistent with
+                    naming conventions. Please use the button below to review the rename proposals.
+                {% endblocktrans %}
+            </p>
+
+            <a
+                class="btn btn-small btn-primary"
+                href="{% app_redirection_service '/equipment/review-gear-renaming-proposals/camera' %}">
+                {% trans "Review proposals" %}
+            </a>
+        </div>
+
+    {% endif %}
 {% endblock %}

@@ -21,6 +21,7 @@ from astrobin.enums.license import License
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.fields import CountryField, get_country_name
 from astrobin.services import CloudflareService
+from astrobin_apps_equipment.models import Sensor
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_notifications.services import NotificationsService
@@ -360,6 +361,135 @@ class GearUserInfo(models.Model):
     class Meta:
         app_label = 'astrobin'
         unique_together = ('gear', 'user')
+
+
+class GearRenameProposal(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+
+    gear = models.ForeignKey(
+        Gear,
+        on_delete=models.CASCADE,
+    )
+
+    created = models.DateTimeField(
+        auto_now_add=True,
+        editable=False,
+    )
+
+    old_make = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+    )
+
+    old_name = models.CharField(
+        max_length=128,
+        null=False,
+        blank=False,
+    )
+
+    new_make = models.CharField(
+        max_length=128,
+        null=False,
+        blank=False,
+    )
+
+    new_name = models.CharField(
+        max_length=128,
+        null=False,
+        blank=False,
+    )
+
+    status = models.CharField(
+        max_length=13,
+        null=False,
+        blank=False,
+        default='PENDING',
+        choices=(
+            ('PENDING', _('Pending')),
+            ('APPROVED', _('Approved')),
+            ('AUTO_APPROVED', _('Automatically approved')),
+            ('REJECTED', _('Rejected')),
+        )
+    )
+
+    reject_reason = models.TextField(
+        null=True,
+        blank=True,
+    )
+
+    class Meta:
+        abstract = True
+        unique_together = ['user', 'gear']
+
+
+class CameraRenameProposal(GearRenameProposal):
+    type = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+    )
+
+    modified = models.BooleanField(
+        default=False,
+    )
+
+    cooled = models.BooleanField(
+        default=False,
+    )
+
+    sensor_make = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+    )
+
+    sensor_name = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+    )
+
+
+class GearRenameRecord(models.Model):
+    gear = models.ForeignKey(
+        Gear,
+        editable=False,
+        on_delete=models.CASCADE,
+        unique=True,
+    )
+
+    created = models.DateTimeField(
+        auto_now_add=True,
+        editable=False,
+    )
+
+    old_make = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+    )
+
+    old_name = models.CharField(
+        max_length=128,
+        null=False,
+        blank=False,
+    )
+
+    new_make = models.CharField(
+        max_length=128,
+        null=False,
+        blank=False,
+    )
+
+    new_name = models.CharField(
+        max_length=128,
+        null=False,
+        blank=False,
+    )
 
 
 class ImageGearMergeRecord(models.Model):

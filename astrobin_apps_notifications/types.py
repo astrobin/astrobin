@@ -300,4 +300,10 @@ NOTICE_TYPES = (
         '',
         2
     ),
+    (
+        'gear_renamed',
+        _("A gear item that you used was renamed"),
+        '',
+        2
+    ),
 )

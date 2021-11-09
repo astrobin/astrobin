@@ -5,7 +5,7 @@ from django.core.cache import cache
 
 from astrobin.enums import SubjectType
 from astrobin.fields import COUNTRIES
-from astrobin.models import Image
+from astrobin.models import Image, CameraRenameProposal
 from astrobin.utils import get_client_country_code
 from astrobin_apps_images.services import ImageService
 from common.forms.abuse_report_form import AbuseReportForm
@@ -124,6 +124,9 @@ def common_variables(request):
         'HAS_COMPLAINT': complained,
         'COUNTRIES': COUNTRIES,
         'COOKIELAW_ACCEPTED': request.COOKIES.get('cookielaw_accepted', False),
+        'HAS_CAMERA_RENAME_PROPOSALS': CameraRenameProposal.objects.filter(user=request.user) \
+            if request.user.is_authenticated \
+            else CameraRenameProposal.objects.none(),
 
         'enums': {
             'SubjectType': SubjectType,
