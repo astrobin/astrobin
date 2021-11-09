@@ -5,7 +5,6 @@ from django.views import View
 
 from astrobin_apps_groups.models import Group
 from astrobin_apps_groups.utils import has_access_to_premium_group_features
-from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 
 
 class RestrictToGroupMembersMixin(View):

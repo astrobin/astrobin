@@ -75,14 +75,7 @@
                 <ul class="dropdown-menu">
                     {% if not user_is_member %}
                         <li>
-                            <a
-                                    {% if request.user|has_access_to_premium_group_features %}
-                                        href="#join-modal"
-                                    {% else %}
-                                        href="#feature-restricted-modal"
-                                    {% endif %}
-                                    data-toggle="modal"
-                            >
+                            <a href="#join-modal" data-toggle="modal">
                                 <i class="icon icon-signin"></i>
                                 {% trans "Join group" %}
                             </a>
@@ -200,13 +193,7 @@
             </div>
             <div class="span3 text-right hidden-phone">
                 {% if not user_is_member %}
-                    <a
-                            {% if request.user|has_access_to_premium_group_features %}
-                                href="#join-modal"
-                            {% else %}
-                                href="#feature-restricted-modal"
-                            {% endif %}
-                                data-toggle="modal" class="btn btn-primary btn-large join-group">
+                    <a href="#join-modal" data-toggle="modal" class="btn btn-primary btn-large join-group">
                         <i class="icon icon-signin"></i>
                         {% trans "Join group" %}
                     </a>
