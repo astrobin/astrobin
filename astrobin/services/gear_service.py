@@ -72,6 +72,12 @@ class GearService:
                 type = CameraType.DSLR_MIRRORLESS
             elif proposal.type == 'Dedicated deep-sky camera':
                 type = CameraType.DEDICATED_DEEP_SKY
+            elif proposal.type == 'Guider/Planetary camera':
+                type = CameraType.GUIDER_PLANETARY
+            elif proposal.type == 'General purpose video camera':
+                type = CameraType.VIDEO
+            elif proposal.type == 'Film camera':
+                type = CameraType.FILM
             else:
                 type = CameraType.OTHER
 
