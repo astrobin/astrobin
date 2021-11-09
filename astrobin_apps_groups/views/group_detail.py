@@ -1,4 +1,7 @@
 from django.conf import settings
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.utils.text import slugify
 from django.views.generic import DetailView
 from pybb.permissions import perms
 
@@ -13,6 +16,13 @@ class GroupDetailView(RestrictPrivateGroupToMembersMixin, DetailView):
         if self.request.is_ajax():
             return 'inclusion_tags/image_list_entries.html'
         return 'astrobin_apps_groups/group_detail.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if kwargs.get('slug') is None:
+            group = self.get_object()
+            return HttpResponseRedirect(reverse('group_detail', args=(group.pk, slugify(group.name),)))
+
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(GroupDetailView, self).get_context_data(**kwargs)

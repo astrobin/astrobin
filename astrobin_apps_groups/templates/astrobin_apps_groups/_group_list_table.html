@@ -1,6 +1,27 @@
 {% load tags %}
 {% load i18n %}
 {% load common_tags %}
+{% load el_pagination_tags %}
+
+
+{% lazy_paginate 1 groups using "page" %}
+
+{% if show_group_search %}
+    <div class="group-list-tools">
+        <form class="group-list-search-form" action="{% url 'group_list' %}" method="get" autocomplete="off">
+            <input
+                id="q"
+                name="q"
+                class="tbox"
+                type="text"
+                value="{{ request.GET.q }}"
+                placeholder="{% trans 'Search' %}" />
+            {% if request.GET.sort %}
+                <input type="hidden" name="sort" value="{{ request.GET.sort }}" />
+            {% endif %}
+        </form>
+    </div>
+{% endif %}
 
 <table class="table group-list">
     <thead>
@@ -46,3 +67,7 @@
         {% endfor %}
     </tbody>
 </table>
+
+<div class="pagination pagination-centered">
+    {% show_pages %}
+</div>

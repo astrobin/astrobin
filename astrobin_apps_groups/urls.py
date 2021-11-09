@@ -34,6 +34,10 @@ urlpatterns = (
         GroupDetailView.as_view(),
         name='group_detail'),
     url(
+        r'^(?P<pk>\d+)/(?P<slug>[a-z0-9]+(?:-[a-z0-9]+)*)/$',
+        GroupDetailView.as_view(),
+        name='group_detail'),
+    url(
         r'^(?P<pk>\d+)/edit/$',
         GroupUpdateView.as_view(),
         name='group_update'),
