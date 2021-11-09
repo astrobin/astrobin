@@ -1,3 +1,5 @@
+import math
+
 from django.contrib.auth.models import User
 
 from astrobin.models import CameraRenameProposal, Gear, GearRenameRecord, UserProfile
@@ -33,7 +35,7 @@ class GearService:
         pending = CameraRenameProposal.objects.filter(gear=proposal.gear, status='PENDING').count()
         total = approvals + rejections + pending
 
-        if rejections == 0 and (approvals >= 5 or approvals >= total / 2):
+        if rejections == 0 and (approvals == 5 or (approvals > 0 and approvals == math.ceil(total / 2))):
             Gear.objects \
                 .filter(pk=proposal.gear.pk) \
                 .update(make=proposal.new_make, name=proposal.new_name)

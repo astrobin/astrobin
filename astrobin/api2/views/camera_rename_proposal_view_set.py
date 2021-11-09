@@ -6,7 +6,7 @@ from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
-from rest_framework.status import HTTP_403_FORBIDDEN, HTTP_400_BAD_REQUEST
+from rest_framework.status import HTTP_403_FORBIDDEN
 
 from astrobin.api2.serializers.camera_rename_proposal_serializer import CameraRenameProposalSerializer
 from astrobin.api2.views.migratable_item_mixin import MigratableItemMixin
@@ -36,14 +36,11 @@ class CameraRenameProposalViewSet(MigratableItemMixin, viewsets.ModelViewSet):
         if request.user != proposal.user:
             return Response(status=HTTP_403_FORBIDDEN)
 
-        if proposal.status != 'PENDING':
-            return Response(status=HTTP_400_BAD_REQUEST)
-
         proposal.status = 'APPROVED'
+        proposal.reject_reason = None
         proposal.save()
 
         return Response(self.serializer_class(proposal).data)
-
 
     @action(detail=True, methods=['put'])
     def reject(self, request, pk):
@@ -51,9 +48,6 @@ class CameraRenameProposalViewSet(MigratableItemMixin, viewsets.ModelViewSet):
 
         if request.user != proposal.user:
             return Response(status=HTTP_403_FORBIDDEN)
-
-        if proposal.status != 'PENDING':
-            return Response(status=HTTP_400_BAD_REQUEST)
 
         proposal.status = 'REJECTED'
         proposal.reject_reason = request.data.get('reject_reason')
