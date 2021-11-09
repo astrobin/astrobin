@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 from pybb.models import Forum, Category
 
@@ -20,6 +21,12 @@ class GroupCategory:
     OTHER = 'OTHER'
 
 
+class GroupImageSorting:
+    PUBLICATION = "PUBLICATION"
+    TITLE = "TITLE"
+    TAG = "TAG"
+
+
 class Group(models.Model):
     GROUP_CATEGORY_CHOICES = (
         (GroupCategory.PROFESSIONAL_NETWORK, _("Professional network")),
@@ -32,6 +39,12 @@ class Group(models.Model):
         (GroupCategory.SPECIFIC_TO_TARGET, _("Specific to an astrophotography target")),
         (GroupCategory.SPECIFIC_TO_EQUIPMENT, _("Specific to certain equipment")),
         (GroupCategory.OTHER, _("Other")),
+    )
+
+    GROUP_IMAGE_SORTING_CHOICES = (
+        (GroupImageSorting.PUBLICATION, _("Publication")),
+        (GroupImageSorting.TITLE, _("Title")),
+        (GroupImageSorting.TAG, _("Key/value tag")),
     )
 
     date_created = models.DateTimeField(
@@ -86,6 +99,26 @@ class Group(models.Model):
         null=False,
         blank=False,
         verbose_name=_("Category"),
+    )
+
+    default_image_sorting = models.CharField(
+        max_length=16,
+        choices=GROUP_IMAGE_SORTING_CHOICES,
+        default=GroupImageSorting.PUBLICATION,
+        null=False,
+        blank=False,
+        verbose_name=_("Default image sorting"),
+    )
+
+    image_tag_sorting = models.CharField(
+        max_length=16,
+        null=True,
+        blank=True,
+        verbose_name=_("Image key/value tag sorting"),
+        help_text=_(
+            "If images are sorted by a key/value tag, please specify which one. "
+            "<a target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn more.</a>"
+        )
     )
 
     public = models.BooleanField(
@@ -147,6 +180,10 @@ class Group(models.Model):
     )
 
     @property
+    def slug(self):
+        return slugify(self.name)
+
+    @property
     def members_count(self):
         return self.members.count()
 
@@ -175,7 +212,7 @@ class Group(models.Model):
         super(Group, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('group_detail', kwargs={'pk': self.pk})
+        return reverse('group_detail', kwargs={'pk': self.pk, 'slug': self.slug})
 
     def __str__(self):
         return self.name

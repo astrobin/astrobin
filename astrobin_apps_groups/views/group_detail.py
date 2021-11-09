@@ -1,4 +1,6 @@
 from django.conf import settings
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.views.generic import DetailView
 from pybb.permissions import perms
 
@@ -14,12 +16,28 @@ class GroupDetailView(RestrictPrivateGroupToMembersMixin, DetailView):
             return 'inclusion_tags/image_list_entries.html'
         return 'astrobin_apps_groups/group_detail.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        if kwargs.get('slug') is None:
+            group = self.get_object()
+            return HttpResponseRedirect(reverse('group_detail', args=(group.pk, group.slug)))
+
+        return super().dispatch(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super(GroupDetailView, self).get_context_data(**kwargs)
         group = self.get_object()
 
+        images = group.images.all()
+        sort = self.request.GET.get('sort', group.default_image_sorting.lower())
+        if sort == 'title':
+            images = images.order_by('title')
+        elif sort == 'publication':
+            images = images.order_by('-published')
+        elif sort == 'tag':
+            images = images.filter(keyvaluetags__key=group.image_tag_sorting).order_by('keyvaluetags__value')
+
         # Images
-        context['image_list'] = group.images.all()
+        context['image_list'] = images
         context['alias'] = 'gallery'
         context['paginate_by'] = settings.PAGINATE_GROUP_DETAIL_PAGE_BY
 

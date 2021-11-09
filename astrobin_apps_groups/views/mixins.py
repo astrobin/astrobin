@@ -52,7 +52,7 @@ class RedirectToGroupDetailMixin(View):
             group = getattr(self, 'object')
         except AttributeError:
             group = self.get_object()
-        return reverse('group_detail', kwargs = {'pk': group.pk})
+        return reverse('group_detail', kwargs = {'pk': group.pk, 'slug': group.slug})
 
 
 class RestrictPrivateGroupToMembersMixin(View):

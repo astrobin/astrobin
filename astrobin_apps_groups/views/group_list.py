@@ -11,7 +11,8 @@ class GroupListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(GroupListView, self).get_context_data(**kwargs)
 
-        sort = self.request.GET.get('sort', 'activity')
+        default_sort = 'activity'
+        sort = self.request.GET.get('sort', default_sort)
         try:
             sort = {
                 'name': 'name',
@@ -21,7 +22,9 @@ class GroupListView(ListView):
                 'posts': '-forum__post_count',
             }[sort]
         except KeyError:
-            pass
+            sort = '-date_updated'
+
+        q = self.request.GET.get('q')
 
         if self.request.user.is_authenticated:
             context['private_groups'] = \
@@ -36,5 +39,8 @@ class GroupListView(ListView):
 
         context['public_groups'] = \
             self.get_queryset().filter(public=True).order_by(sort)
+
+        if q:
+            context['public_groups'] = context['public_groups'].filter(name__icontains=q)
 
         return context

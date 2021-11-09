@@ -113,6 +113,36 @@
                 {% endif %} {# READONLY #}
             </li>
 
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-sort"></i>
+                    {% trans "Sort images" %}
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'group_detail' group.pk group.slug %}?sort=title">
+                            <i class="icon-sort-by-alphabet"></i>
+                            {% trans "Title" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'group_detail' group.pk group.slug %}?sort=publication">
+                            <i class="icon-upload-alt"></i>
+                            {% trans "Publication" %}
+                        </a>
+                    </li>
+                    {% if group.image_tag_sorting %}
+                        <li>
+                            <a href="{% url 'group_detail' group.pk group.slug %}?sort=tag">
+                                <i class="icon-tag"></i>
+                                {% trans "Key/value tag" %}: "<strong>{{ group.image_tag_sorting }}</strong>"
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </li>
+
             <li class="group-info pull-right">
                 <a href="">
                     {% if object.public %}

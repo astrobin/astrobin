@@ -152,7 +152,7 @@
                     </div>
                 </div>
                 <div class="astrobin-image-container">
-                    <a href="{% url 'group_detail' group.pk %}">
+                    <a href="{% url 'group_detail' group.pk group.slug %}">
                         <img src="{% static 'astrobin/images/actstream-group-action.png' %}" alt="Group action" />
                     </a>
                 </div>
@@ -178,7 +178,7 @@
                     </div>
                 </div>
                 <div class="astrobin-image-container">
-                    <a href="{% url 'group_detail' group.pk %}">
+                    <a href="{% url 'group_detail' group.pk group.slug %}">
                         <img src="{% static 'astrobin/images/actstream-group-action.png' %}" alt="Group action" />
                     </a>
                 </div>

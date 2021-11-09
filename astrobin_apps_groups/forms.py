@@ -16,9 +16,9 @@ class GroupUpdateBaseForm(forms.ModelForm):
                 GroupCategory.INTERNET_COMMUNITY,
                 GroupCategory.FRIENDS_OR_PARTNERS,
                 GroupCategory.GEOGRAPHICAL_AREA):
-            msg = _("Only the following category support autosubmission: " \
-                  "Professional network, Club or association, " \
-                  "Internet community, Friends or partners, Geographical area")
+            msg = _("Only the following category support autosubmission: " +
+                    "Professional network, Club or association, " +
+                    "Internet community, Friends or partners, Geographical area")
 
             self._errors['category'] = self.error_class([msg])
             del cleaned_data['category']
@@ -29,7 +29,8 @@ class GroupUpdateBaseForm(forms.ModelForm):
 class GroupCreateForm(GroupUpdateBaseForm):
     class Meta:
         model = Group
-        fields = ['name', 'description', 'category', 'public', 'moderated', 'autosubmission', ]
+        fields = ['name', 'description', 'category', 'default_image_sorting', 'image_tag_sorting', 'public',
+                  'moderated', 'autosubmission', ]
 
 
 class GroupUpdateForm(GroupUpdateBaseForm):
@@ -47,7 +48,7 @@ class GroupUpdateForm(GroupUpdateBaseForm):
     class Meta:
         model = Group
         fields = [
-            'name', 'description', 'category', 'public', 'moderated',
+            'name', 'description', 'category', 'default_image_sorting', 'image_tag_sorting', 'public', 'moderated',
             'autosubmission', 'autosubmission_deactivation_strategy', ]
 
 

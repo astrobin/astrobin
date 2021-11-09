@@ -110,7 +110,7 @@
                 </div>
             </div>
 
-            {% with private_groups as groups %}
+            {% with groups=private_groups show_group_search=False %}
                 {% include 'astrobin_apps_groups/_group_list_table.html' %}
             {% endwith %}
         </div>
@@ -141,7 +141,7 @@
                 </div>
             </div>
 
-            {% with public_groups as groups %}
+            {% with groups=public_groups show_group_search=True %}
                 {% include 'astrobin_apps_groups/_group_list_table.html' %}
             {% endwith %}
         </div>

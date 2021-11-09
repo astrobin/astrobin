@@ -3629,7 +3629,37 @@ div.group-list {
   margin-top: 14px;
 }
 
+.group-list-tools {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  @media screen and (max-width: 579px) {
+    flex-direction: column;
+  }
+
+  @media screen and (max-width: 767px) {
+    padding: 0 1rem;
+  }
+
+  .group-list-search-form {
+    margin-bottom: 0;
+
+    @media screen and (min-width: 579px) {
+      min-width: 300px;
+    }
+
+    input[type="text"] {
+      width: calc(100% - 1rem);
+    }
+  }
+}
+
 table.group-list, table.group-member-list {
+  & + .pagination {
+    margin-top: 3rem;
+  }
+
   td {
     white-space: nowrap;
   }
