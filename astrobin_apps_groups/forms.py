@@ -29,7 +29,7 @@ class GroupUpdateBaseForm(forms.ModelForm):
 class GroupCreateForm(GroupUpdateBaseForm):
     class Meta:
         model = Group
-        fields = ['name', 'description', 'category', 'public', 'moderated', 'autosubmission', ]
+        fields = ['name', 'description', 'category', 'default_image_sorting', 'public', 'moderated', 'autosubmission', ]
 
 
 class GroupUpdateForm(GroupUpdateBaseForm):
@@ -47,7 +47,7 @@ class GroupUpdateForm(GroupUpdateBaseForm):
     class Meta:
         model = Group
         fields = [
-            'name', 'description', 'category', 'public', 'moderated',
+            'name', 'description', 'category', 'default_image_sorting', 'public', 'moderated',
             'autosubmission', 'autosubmission_deactivation_strategy', ]
 
 

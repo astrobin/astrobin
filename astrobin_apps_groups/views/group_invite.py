@@ -35,7 +35,7 @@ class GroupInviteView(
                     'inviter_page': reverse('user_page', args=(request.user.username,)),
                     'group_name': group.name,
                     'group_page': build_notification_url(
-                        settings.BASE_URL + reverse('group_detail', args=(group.pk,)), request.user),
+                        settings.BASE_URL + reverse('group_detail', args=(group.pk, group.slug)), request.user),
                 })
 
         if request.is_ajax():

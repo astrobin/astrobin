@@ -8,7 +8,7 @@
             <tbody>
                 {% for group in in_public_groups %}
                     <tr><td>
-                        <a href="{% url 'group_detail' group.pk %}">{{group.name}}</a>
+                        <a href="{% url 'group_detail' group.pk group.slug %}">{{group.name}}</a>
                     </td></tr>
                 {% endfor %}
             </tbody>

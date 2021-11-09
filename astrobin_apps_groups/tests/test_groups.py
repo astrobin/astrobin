@@ -51,7 +51,7 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<h1>Public groups<small>Open to the whole community.</small></h1>', html=True)
         self.assertContains(response, '<td class="group-name"><a href="' + reverse('group_detail', args=(
-            self.group.pk,)) + '">Test group</a></td>', html=True)
+            self.group.pk, self.group.slug)) + '">Test group</a></td>', html=True)
         self.assertContains(response, '<td class="group-members hidden-phone">1</td>', html=True)
         self.assertContains(response, '<td class="group-images hidden-phone">0</td>', html=True)
 
@@ -83,7 +83,7 @@ class GroupsTest(TestCase):
 
     def test_group_detail_view(self):
         # Everything okay when it's empty
-        response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk}))
+        response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk, 'slug': self.group.slug}))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<li>No images.</li>', html=True)
 
@@ -96,7 +96,7 @@ class GroupsTest(TestCase):
         self.client.logout()
         image = Image.objects.all().order_by('-pk')[0]
         self.group.members.add(self.user1)
-        response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk}))
+        response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk, 'slug': self.group.slug}))
         self.assertEqual(response.status_code, 200)
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "gallery"), response.content.decode(
             'utf-8')))
@@ -104,28 +104,28 @@ class GroupsTest(TestCase):
         # Test that WIP images are not rendered here
         image.is_wip = True
         image.save(keep_deleted=True)
-        response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk}))
+        response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk, 'slug': self.group.slug}))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<li>No images.</li>', html=True)
 
         # Test that corrupted images are not rendered here
         image.corrupted = True
         image.save(keep_deleted=True)
-        response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk}))
+        response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk, 'slug': self.group.slug}))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<li>No images.</li>', html=True)
 
         # Test that the group is not accessible if it's private
         self.group.public = False
         self.group.save()
-        response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk}))
+        response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk, 'slug': self.group.slug}))
         self.assertEqual(response.status_code, 403)
 
         # However, invitees can access
         self.client.login(username='user2', password='password')
         self.group.members.remove(self.user1)
         self.group.invited_users.add(self.user2)
-        response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk}))
+        response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk, 'slug': self.group.slug}))
         self.assertEqual(response.status_code, 200)
         self.client.logout()
 
@@ -388,7 +388,7 @@ class GroupsTest(TestCase):
         response = self.client.post(url, follow=True)
         self.assertFalse(self.user1 in self.group.members.all())
         self.assertFalse(image in self.group.images.all())
-        self.assertRedirects(response, reverse('group_detail', kwargs={'pk': self.group.pk}))
+        self.assertRedirects(response, reverse('group_detail', kwargs={'pk': self.group.pk, 'slug': self.group.slug}))
         self._assertMessage(response, "success unread", "You have left the group")
         self.group.members.add(self.user1)
 
@@ -424,7 +424,7 @@ class GroupsTest(TestCase):
 
     def test_group_invite_view(self):
         url = reverse('group_invite', kwargs={'pk': self.group.pk})
-        detail_url = reverse('group_detail', kwargs={'pk': self.group.pk})
+        detail_url = reverse('group_detail', kwargs={'pk': self.group.pk, 'slug': self.group.slug})
 
         # Login required
         response = self.client.get(url)
@@ -665,7 +665,7 @@ class GroupsTest(TestCase):
         self.assertContains(
             response,
             '<tr><td><a href="%s">%s</a></td></tr>' % (
-                reverse('group_detail', args=(self.group.pk,)),
+                reverse('group_detail', args=(self.group.pk, self.group.slug)),
                 self.group.name),
             html=True)
 
