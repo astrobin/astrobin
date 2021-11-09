@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 blank=True,
                 help_text=
                     "If images are sorted by a key/value tag, please specify which one. "
-                    "<a target='_blank' href='https://welcome.astrobin.com/image-collections'>Learn more.</a>",
+                    "<a target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn more.</a>",
                 max_length=16,
                 null=True,
                 verbose_name='Image key/value tag sorting'

@@ -117,7 +117,7 @@ class Group(models.Model):
         verbose_name=_("Image key/value tag sorting"),
         help_text=_(
             "If images are sorted by a key/value tag, please specify which one. "
-            "<a target='_blank' href='https://welcome.astrobin.com/image-collections'>Learn more.</a>"
+            "<a target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn more.</a>"
         )
     )
 
