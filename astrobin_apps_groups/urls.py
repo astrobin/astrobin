@@ -96,7 +96,7 @@ urlpatterns = (
 
     # Leave this last or the slug will always match.
     url(
-        r'^(?P<pk>\d+)/(?:(?P<slug>[a-z0-9]+(?:-[a-z0-9]+)*)/)?$',
+        r'^(?P<pk>\d+)/(?:(?P<slug>[a-z0-9]+(?:[-_][a-z0-9]+)*)/)?$',
         GroupDetailView.as_view(),
         name='group_detail'),
 )
