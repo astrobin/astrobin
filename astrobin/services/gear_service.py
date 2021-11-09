@@ -30,6 +30,9 @@ class GearService:
 
     @staticmethod
     def process_camera_rename_proposal(proposal: CameraRenameProposal):
+        if proposal.status != 'APPROVED':
+            return
+
         approvals = CameraRenameProposal.objects.filter(gear=proposal.gear, status='APPROVED').count()
         rejections = CameraRenameProposal.objects.filter(gear=proposal.gear, status='REJECTED').count()
         pending = CameraRenameProposal.objects.filter(gear=proposal.gear, status='PENDING').count()

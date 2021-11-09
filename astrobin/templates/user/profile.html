@@ -173,8 +173,11 @@
                 {% endblocktrans %}
             </p>
 
-            <a class="btn btn-small btn-primary"
-               href="{% app_redirection_service '/equipment/review-legacy-gear-rename-proposals' %}">{% trans "Review proposals" %}</a>
+            <a
+                class="btn btn-small btn-primary"
+                href="{% app_redirection_service '/equipment/review-gear-renaming-proposals/camera' %}">
+                {% trans "Review proposals" %}
+            </a>
         </div>
 
     {% endif %}
