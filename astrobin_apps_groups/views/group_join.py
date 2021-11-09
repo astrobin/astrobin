@@ -8,11 +8,11 @@ from django.utils.translation import ugettext as _
 from django.views.generic import UpdateView
 
 from astrobin_apps_groups.models import Group
-from astrobin_apps_groups.views.mixins import RedirectToGroupDetailMixin, RestrictToPremiumMembersMixin
+from astrobin_apps_groups.views.mixins import RedirectToGroupDetailMixin
 from astrobin_apps_notifications.utils import push_notification, build_notification_url
 
 
-class GroupJoinView(LoginRequiredMixin, RedirectToGroupDetailMixin, RestrictToPremiumMembersMixin, UpdateView):
+class GroupJoinView(LoginRequiredMixin, RedirectToGroupDetailMixin, UpdateView):
     http_method_names = ['post', ]
     model = Group
 

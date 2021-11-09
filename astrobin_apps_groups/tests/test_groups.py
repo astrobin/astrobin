@@ -280,10 +280,10 @@ class GroupsTest(TestCase):
 
         self.client.login(username='user1', password='password')
 
-        # Free users can't access.
+        # Free users can access.
         self.client.login(username='user1', password='password')
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 403)
+        self.assertNotEqual(response.status_code, 403)
 
         us1 = Generators.premium_subscription(self.user1, "AstroBin Ultimate 2020+")
 
