@@ -24,6 +24,7 @@ class GroupCategory:
 class GroupImageSorting:
     PUBLICATION = "PUBLICATION"
     TITLE = "TITLE"
+    TAG = "TAG"
 
 
 class Group(models.Model):
@@ -43,6 +44,7 @@ class Group(models.Model):
     GROUP_IMAGE_SORTING_CHOICES = (
         (GroupImageSorting.PUBLICATION, _("Publication")),
         (GroupImageSorting.TITLE, _("Title")),
+        (GroupImageSorting.TAG, _("Key/value tag")),
     )
 
     date_created = models.DateTimeField(
@@ -106,6 +108,17 @@ class Group(models.Model):
         null=False,
         blank=False,
         verbose_name=_("Default image sorting"),
+    )
+
+    image_tag_sorting = models.CharField(
+        max_length=16,
+        null=True,
+        blank=True,
+        verbose_name=_("Image key/value tag sorting"),
+        help_text=_(
+            "If images are sorted by a key/value tag, please specify which one. "
+            "<a target='_blank' href='https://welcome.astrobin.com/image-collections'>Learn more.</a>"
+        )
     )
 
     public = models.BooleanField(

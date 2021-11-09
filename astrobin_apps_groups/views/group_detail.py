@@ -28,11 +28,13 @@ class GroupDetailView(RestrictPrivateGroupToMembersMixin, DetailView):
         group = self.get_object()
 
         images = group.images.all()
-        sort = self.request.GET.get('sort', group.default_image_sorting)
+        sort = self.request.GET.get('sort', group.default_image_sorting.lower())
         if sort == 'title':
             images = images.order_by('title')
         elif sort == 'publication':
             images = images.order_by('-published')
+        elif sort == 'tag':
+            images = images.filter(keyvaluetags__key=group.image_tag_sorting).order_by('keyvaluetags__value')
 
         # Images
         context['image_list'] = images

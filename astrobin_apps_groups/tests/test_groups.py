@@ -1,4 +1,3 @@
-# Python
 import re
 
 import simplejson as json
@@ -10,7 +9,7 @@ from pybb.models import Forum, Topic
 
 from astrobin.models import Image
 from astrobin.tests.generators import Generators
-from astrobin_apps_groups.models import Group, GroupCategory
+from astrobin_apps_groups.models import Group, GroupCategory, GroupImageSorting
 from toggleproperties.models import ToggleProperty
 
 
@@ -152,6 +151,7 @@ class GroupsTest(TestCase):
             'name': 'Test create group',
             'description': 'Description',
             'category': GroupCategory.OTHER,
+            'default_image_sorting': GroupImageSorting.PUBLICATION,
             'public': True,
             'moderated': True,
         }, follow=True)
@@ -175,6 +175,7 @@ class GroupsTest(TestCase):
             'name': 'Test create group',
             'description': 'Description',
             'category': GroupCategory.OTHER,
+            'default_image_sorting': GroupImageSorting.PUBLICATION,
             'public': False,
         }, follow=True)
         self.assertEqual(response.status_code, 200)
@@ -188,6 +189,7 @@ class GroupsTest(TestCase):
             'name': 'Test create group',
             'description': 'Description',
             'category': GroupCategory.OTHER,
+            'default_image_sorting': GroupImageSorting.PUBLICATION,
             'autosubmission': True,
         }, follow=True)
         self.assertEqual(response.status_code, 200)
@@ -218,6 +220,7 @@ class GroupsTest(TestCase):
             'name': 'Updated group name',
             'description': 'Updated group description',
             'category': GroupCategory.PROFESSIONAL_NETWORK,
+            'default_image_sorting': GroupImageSorting.PUBLICATION,
             'public': False,
             'moderated': True,
             'autosubmission': False,

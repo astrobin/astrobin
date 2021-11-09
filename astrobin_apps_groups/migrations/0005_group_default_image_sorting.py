@@ -13,6 +13,14 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='group',
             name='default_image_sorting',
-            field=models.CharField(choices=[('PUBLICATION', 'Publication'), ('TITLE', 'Title')], default='PUBLICATION', max_length=16, verbose_name='Default image sorting'),
+            field=models.CharField(
+                choices=[
+                    ('PUBLICATION', 'Publication'),
+                    ('TITLE', 'Title')
+                ],
+                default='PUBLICATION',
+                max_length=16,
+                verbose_name='Default image sorting'
+            ),
         ),
     ]
