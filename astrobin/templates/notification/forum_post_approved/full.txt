@@ -10,4 +10,5 @@
     The following forum post of yours was just approved by a moderator.
 {% endblocktrans %}
 
+{% trans "View forum post" %}:
 {{url}}
