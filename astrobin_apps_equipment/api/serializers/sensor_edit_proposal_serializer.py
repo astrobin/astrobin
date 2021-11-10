@@ -18,6 +18,7 @@ class SensorEditProposalSerializer(EquipmentItemEditProposalSerializer):
             'frame_rate': target.frame_rate,
             'adc': target.adc,
             'color_or_mono': target.color_or_mono,
+            'specification_url': target.specification_url,
         }
 
     class Meta(EquipmentItemEditProposalSerializer.Meta):

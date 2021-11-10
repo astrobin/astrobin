@@ -77,5 +77,10 @@ class SensorBaseModel(EquipmentItem):
         )
     )
 
+    specification_url = models.URLField(
+        blank=True,
+        null=True,
+    )
+
     class Meta(EquipmentItem.Meta):
         abstract = True
