@@ -68,13 +68,12 @@ class SensorBaseModel(EquipmentItem):
     )
 
     color_or_mono = models.CharField(
-        max_length=2,
+        max_length=1,
         null=True,
         blank=True,
         choices=(
-            ('M', _('Monochromatic')),
             ('C', _('Color')),
-            ('MC', _('Monochromatic/Color'))
+            ('M', _('Monochromatic')),
         )
     )
 

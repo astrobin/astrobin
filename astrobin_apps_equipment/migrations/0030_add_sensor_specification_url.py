@@ -20,14 +20,4 @@ class Migration(migrations.Migration):
             name='specification_url',
             field=models.URLField(blank=True, null=True),
         ),
-        migrations.AlterField(
-            model_name='sensor',
-            name='color_or_mono',
-            field=models.CharField(blank=True, choices=[('M', 'Monochromatic'), ('C', 'Color'), ('MC', 'Monochromatic/Color')], max_length=2, null=True),
-        ),
-        migrations.AlterField(
-            model_name='sensoreditproposal',
-            name='color_or_mono',
-            field=models.CharField(blank=True, choices=[('M', 'Monochromatic'), ('C', 'Color'), ('MC', 'Monochromatic/Color')], max_length=2, null=True),
-        ),
     ]
