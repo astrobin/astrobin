@@ -68,13 +68,19 @@ class SensorBaseModel(EquipmentItem):
     )
 
     color_or_mono = models.CharField(
-        max_length=1,
+        max_length=2,
         null=True,
         blank=True,
         choices=(
-            ('C', _('Color')),
             ('M', _('Monochromatic')),
+            ('C', _('Color')),
+            ('MC', _('Monochromatic/Color'))
         )
+    )
+
+    specification_url = models.URLField(
+        blank=True,
+        null=True,
     )
 
     class Meta(EquipmentItem.Meta):
