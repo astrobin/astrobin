@@ -3,6 +3,7 @@ from urllib.parse import parse_qsl, urlparse, urlencode, urlunparse
 from django.conf import settings
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
+from django.utils.safestring import mark_safe
 
 from notification import models as notification
 
@@ -44,4 +45,4 @@ def build_notification_url(url, from_user=None, additional_query_args=None):
     url_dict.update(params)
     url_new_query = urlencode(url_dict)
     url_parse = url_parse._replace(query=url_new_query)
-    return urlunparse(url_parse)
+    return mark_safe(urlunparse(url_parse))

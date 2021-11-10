@@ -1,7 +1,9 @@
+from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
 from django.db.models import Q, Value
 from django.db.models.functions import Lower, Concat
+from django.urls import reverse
 from django.utils import timezone
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
@@ -15,6 +17,9 @@ from rest_framework.status import HTTP_400_BAD_REQUEST
 from astrobin.models import Gear
 from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_read_only import IsEquipmentModeratorOrReadOnly
 from astrobin_apps_equipment.models import EquipmentItem
+from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
+from astrobin_apps_notifications.utils import push_notification, build_notification_url
+from common.services import AppRedirectionService
 
 
 class EquipmentItemViewSet(viewsets.ModelViewSet):
@@ -100,6 +105,24 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         item.reviewer_decision = 'APPROVED'
         item.reviewer_comment = request.data.get('comment')
 
+        if item.created_by:
+            push_notification(
+                [item.created_by],
+                request.user,
+                'equipment-item-approved',
+                {
+                    'user': request.user.userprofile.get_display_name(),
+                    'user_url': build_notification_url(
+                        settings.BASE_URL + reverse('user_page', args=(request.user.username,))),
+                    'item': f'{item.brand.name} {item.name}',
+                    'item_url': build_notification_url(
+                        AppRedirectionService.redirect(
+                            f'/equipment/explorer/{EquipmentItemService(item).get_type()}/{item.pk}')
+                    ),
+                    'comment': item.reviewer_comment,
+                }
+            )
+
         item.save()
 
         serializer = self.serializer_class(item)
@@ -121,8 +144,23 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         item.reviewer_decision = 'REJECTED'
         item.reviewer_rejection_reason = request.data.get('reason')
         item.reviewer_comment = request.data.get('comment')
-        item.name = '[DELETED] %s' % item.name
 
+        if item.created_by:
+            push_notification(
+                [item.created_by],
+                request.user,
+                'equipment-item-rejected',
+                {
+                    'user': request.user.userprofile.get_display_name(),
+                    'user_url': build_notification_url(
+                        settings.BASE_URL + reverse('user_page', args=(request.user.username,))),
+                    'item': f'{item.brand.name} {item.name}',
+                    'reject_reason': item.reviewer_rejection_reason,
+                    'comment': item.reviewer_comment,
+                }
+            )
+
+        item.name = '[DELETED] %s' % item.name
         item.save()
         item.delete()
 

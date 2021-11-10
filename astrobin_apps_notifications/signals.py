@@ -1,14 +1,8 @@
-# Django
 from django.apps import apps
 from django.db.models.signals import post_migrate
 
-# AstroBin
-from astrobin.apps import AstroBinAppConfig
-
-# Third party apps
 from notification import models as notification
 
-# This app
 from .types import NOTICE_TYPES
 
 
