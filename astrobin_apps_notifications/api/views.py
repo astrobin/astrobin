@@ -44,6 +44,23 @@ class NotificationViewSet(viewsets.ModelViewSet):
         self.get_queryset().filter(read=False).update(read=True, modified=timezone.now())
         return Response(status=200)
 
+    @action(detail=False, methods=['post'], url_path='mark-as-read-by-path-and-user')
+    def mark_as_read_by_path_and_user(self, request):
+        path: str = request.data.get('path')
+        from_user_pk: int = request.data.get('fromUserPk')
+
+        if path is None:
+            return
+
+        notifications = Message.objects.filter(user=request.user, message__contains=path, read=False)
+
+        if from_user_pk is not None:
+            notifications = notifications.filter(from_user__pk=from_user_pk)
+
+        notifications.update(read=True, modified=timezone.now())
+
+        return Response(status=200)
+
 
 class NoticeTypeViewSet(viewsets.ModelViewSet):
     serializer_class = NoticeTypeSerializer

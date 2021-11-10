@@ -1,0 +1,20 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    {{ user }} approved the equipment item "{{ item }}" that you created.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    This item can now be added to images by anyone on AstroBin.
+{% endblocktrans %}
+
+{% if comment %}
+    {% blocktrans trimmed %}
+        The reviewer left the following comment:
+    {% endblocktrans %}
+
+    {{ comment }}
+{% endif %}
+
+{% trans "View item" %}:
+{{ item_url }}

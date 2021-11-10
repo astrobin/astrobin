@@ -1,0 +1,38 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    <a href="{{ user_url }}">{{ user }}</a> rejected the equipment item <strong>{{ item }}</strong> that you created.
+{% endblocktrans %}
+
+<br /><br />
+
+{% blocktrans trimmed %}
+    This item has been deleted. Please contact AstroBin if you think this was in error.
+{% endblocktrans %}
+
+<br /><br />
+
+{% if reject_reason %}
+    {% blocktrans trimmed %}
+        The reviewer cited the following code as the reason for the rejection:
+    {% endblocktrans %}
+
+    <br />
+
+    "<strong>{{ reject_reason }}</strong>"
+
+    {% if comment %}
+        <br /><br />
+    {% endif %}
+{% endif %}
+
+{% if comment %}
+    {% blocktrans trimmed %}
+        The reviewer left the following comment:
+    {% endblocktrans %}
+
+    <br />
+
+    "<em>{{ comment }}</em>"
+{% endif %}
+

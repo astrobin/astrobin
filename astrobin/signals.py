@@ -51,7 +51,7 @@ from common.services.moderation_service import ModerationService
 from nested_comments.models import NestedComment
 from nested_comments.services.comment_notifications_service import CommentNotificationsService
 from toggleproperties.models import ToggleProperty
-from .models import Image, ImageRevision, UserProfile, CameraRenameProposal, GearRenameRecord, Gear
+from .models import Image, ImageRevision, UserProfile, CameraRenameProposal
 from .search_indexes import ImageIndex, UserIndex
 from .stories import add_story
 
