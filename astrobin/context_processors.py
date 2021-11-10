@@ -124,7 +124,7 @@ def common_variables(request):
         'HAS_COMPLAINT': complained,
         'COUNTRIES': COUNTRIES,
         'COOKIELAW_ACCEPTED': request.COOKIES.get('cookielaw_accepted', False),
-        'HAS_CAMERA_RENAME_PROPOSALS': CameraRenameProposal.objects.filter(user=request.user) \
+        'HAS_CAMERA_RENAME_PROPOSALS': CameraRenameProposal.objects.filter(user=request.user, status="PENDING") \
             if request.user.is_authenticated \
             else CameraRenameProposal.objects.none(),
 
