@@ -43,6 +43,7 @@ class SensorEditProposalViewSet(EquipmentItemEditProposalViewSet):
         sensor.frame_rate = edit_proposal.frame_rate
         sensor.adc = edit_proposal.adc
         sensor.color_or_mono = edit_proposal.color_or_mono
+        sensor.specification_url = edit_proposal.specification_url
 
         sensor.save()
 
