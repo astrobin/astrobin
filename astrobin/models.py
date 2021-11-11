@@ -21,7 +21,6 @@ from astrobin.enums.license import License
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.fields import CountryField, get_country_name
 from astrobin.services import CloudflareService
-from astrobin_apps_equipment.models import Sensor
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_notifications.services import NotificationsService
