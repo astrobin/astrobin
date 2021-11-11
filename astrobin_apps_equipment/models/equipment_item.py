@@ -1,10 +1,12 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import SET_NULL, PROTECT
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 from safedelete.models import SafeDeleteModel
 
 from astrobin_apps_equipment.models import EquipmentBrand
+from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
 from common.upload_paths import upload_path
 
 
@@ -93,6 +95,14 @@ class EquipmentItem(SafeDeleteModel):
         null=True,
         blank=True,
     )
+
+    @property
+    def item_type(self):
+        return EquipmentItemService(self).get_type()
+
+    @property
+    def slug(self):
+        return slugify(f'{self.brand.name} {self.name}').replace('_', '-')
 
     def __unicode__(self):
         return '%s %s' % (self.brand.name, self.name)

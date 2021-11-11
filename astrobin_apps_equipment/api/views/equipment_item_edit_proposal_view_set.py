@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from django.conf import settings
+from django.urls import reverse
 from django.utils import timezone
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
@@ -11,6 +13,8 @@ from rest_framework.status import HTTP_400_BAD_REQUEST
 from astrobin_apps_equipment.api.views.equipment_item_view_set import EquipmentItemViewSet
 from astrobin_apps_equipment.models import EquipmentItem
 from astrobin_apps_equipment.models.equipment_item_edit_proposal_mixin import EquipmentItemEditProposalMixin
+from astrobin_apps_notifications.utils import push_notification, build_notification_url
+from common.services import AppRedirectionService
 
 
 class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
@@ -46,6 +50,37 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
         target.save()
         edit_proposal.save()
 
+        push_notification(
+            list({edit_proposal.edit_proposal_by, target.created_by}),
+            request.user,
+            'equipment-edit-proposal-approved',
+            {
+                'user': request.user.userprofile.get_display_name(),
+                'user_url': build_notification_url(
+                    settings.BASE_URL + reverse('user_page', args=(request.user.username,))),
+                'item': f'{target.brand.name} {target.name}',
+                'item_url': build_notification_url(
+                    AppRedirectionService.redirect(
+                        f'/equipment'
+                        f'/explorer'
+                        f'/{target.item_type}/{target.pk}'
+                        f'/{target.slug}'
+                    )
+                ),
+                'edit_proposal_url': build_notification_url(
+                    AppRedirectionService.redirect(
+                        f'/equipment'
+                        f'/explorer'
+                        f'/{target.item_type}/{target.pk}'
+                        f'/{target.slug}'
+                        f'/edit-proposals'
+                        f'/{edit_proposal.pk}/'
+                    )
+                ),
+                'comment': edit_proposal.edit_proposal_review_comment
+            }
+        )
+
         serializer = self.serializer_class(edit_proposal)
         return Response(serializer.data)
 
@@ -64,6 +99,39 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
         edit_proposal.edit_proposal_review_status = 'REJECTED'
 
         edit_proposal.save()
+
+        target = edit_proposal.edit_proposal_target
+
+        push_notification(
+            list({edit_proposal.edit_proposal_by, target.created_by}),
+            request.user,
+            'equipment-edit-proposal-rejected',
+            {
+                'user': request.user.userprofile.get_display_name(),
+                'user_url': build_notification_url(
+                    settings.BASE_URL + reverse('user_page', args=(request.user.username,))),
+                'item': f'{target.brand.name} {target.name}',
+                'item_url': build_notification_url(
+                    AppRedirectionService.redirect(
+                        f'/equipment'
+                        f'/explorer'
+                        f'/{target.item_type}/{target.pk}'
+                        f'/{target.slug}'
+                    )
+                ),
+                'edit_proposal_url': build_notification_url(
+                    AppRedirectionService.redirect(
+                        f'/equipment'
+                        f'/explorer'
+                        f'/{target.item_type}/{target.pk}'
+                        f'/{target.slug}'
+                        f'/edit-proposals'
+                        f'/{edit_proposal.pk}/'
+                    )
+                ),
+                'comment': edit_proposal.edit_proposal_review_comment
+            }
+        )
 
         serializer = self.serializer_class(edit_proposal)
         return Response(serializer.data)

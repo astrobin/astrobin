@@ -1,0 +1,17 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    {{ user }} proposed an edit to the equipment item "{{ item }}".
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Please review it as soon as possible.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    You received this notification because you created this equipment item, or you created/approved/rejected/commented
+    an edit proposal for this item in the past.
+{% endblocktrans %}
+
+{% trans "View edit proposal" %}:
+{{ edit_proposal_url }}
