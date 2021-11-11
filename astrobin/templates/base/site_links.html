@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load tags %}
 {% load astrobin_apps_iotd_tags %}
+{% load astrobin_apps_equipment_tags %}
 {% load static %}
 {% load common_tags %}
 
@@ -102,6 +103,17 @@
                         </a>
                     </li>
                 {% endif %}
+
+                {% if request.user|is_equipment_moderator %}
+                    <li class="nav-header">{% trans "Equipment" %}</li>
+
+                    <li>
+                        <a href="{% app_redirection_service '/equipment/migration-tool' %}">
+                            <i class="icon-arrow-right"></i>
+                            {% trans "Migration tool" %}
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </li>
         {% endif %}
@@ -132,6 +144,15 @@
                         {% trans "The Big Wall" %} / {% trans "Advanced search" %}
                     </a>
                 </li>
+
+                {% if request.user|can_access_basic_equipment_functions %}
+                    <li class="explore-menu-equipment">
+                        <a href="{% app_redirection_service '/equipment/explorer' %}">
+                            <i class="icon-camera"></i>
+                            {% trans "Equipment" %}
+                        </a>
+                    </li>
+                {% endif %}
 
                 <li class="explore-menu-constellations">
                     <a href="{% app_redirection_service '/explore/constellations' %}">
