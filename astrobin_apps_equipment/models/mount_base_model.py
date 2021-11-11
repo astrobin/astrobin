@@ -1,0 +1,78 @@
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
+from astrobin_apps_equipment.models import EquipmentItem
+
+
+class MountType:
+    ALTAZIMUTH = 'ALTAZIMUTH'
+    WEDGED_ALTAZIMUTH = 'WEDGED_ALTAZIMUTH'
+    EQUATORIAL = 'EQUATORIAL'
+    GERMAN_EQUATORIAL = 'GERMAN_EQUATORIAL'
+    FORK = 'FORK'
+    DOBSONIAN = 'DOBSONIAN'
+    PORTABLE_ENGLISH = 'PORTABLE_ENGLISH'
+    STAR_TRACKER = 'BARN_DOOR_TRACKER'
+    ALT_ALT = 'ALT_ALT'
+    TRANSIT = 'TRANSIT'
+    HEXAPOD = 'HEXAPOD'
+    OTHER = 'OTHER'
+
+
+class MountBaseModel(EquipmentItem):
+    MOUNT_TYPES = (
+        (MountType.ALTAZIMUTH, _("Alt-Az (altazimuth)")),
+        (MountType.WEDGED_ALTAZIMUTH, _("Wedged alt-Az")),
+        (MountType.EQUATORIAL, _("Equatorial")),
+        (MountType.GERMAN_EQUATORIAL, _("German equatorial")),
+        (MountType.FORK, _("Fork")),
+        (MountType.DOBSONIAN, _("Dobsonian")),
+        (MountType.PORTABLE_ENGLISH, _("Portable English")),
+        (MountType.STAR_TRACKER, _("Star tracker")),
+        (MountType.ALT_ALT, _("Alt-Alt (altitude-altitude)")),
+        (MountType.TRANSIT, _("Transit")),
+        (MountType.HEXAPOD, _("Hexapod")),
+        (MountType.OTHER, _("Other")),
+    )
+
+    type = models.CharField(
+        verbose_name=_('Type'),
+        null=False,
+        max_length=32,
+        choices=MOUNT_TYPES,
+    )
+
+    tracking_accuracy = models.PositiveSmallIntegerField(
+        verbose_name=_("Tracking accuracy (arcsec)"),
+        null=True,
+        blank=True,
+    )
+
+    pec = models.BooleanField(
+        verbose_name=_("Periodic error correction"),
+        null=True,
+        blank=True,
+    )
+
+    max_payload = models.PositiveSmallIntegerField(
+        verbose_name=_("Payload (kg)"),
+        null=True,
+        blank=True,
+    )
+
+    computerized = models.BooleanField(
+        verbose_name=_("Computerized"),
+        null=True,
+        blank=True,
+    )
+
+    slew_speed = models.DecimalField(
+        verbose_name=_("Slew speed (deg/sec)"),
+        max_digits=4,
+        decimal_places=2,
+        null=True,
+        blank=True,
+    )
+
+    class Meta(EquipmentItem.Meta):
+        abstract = True

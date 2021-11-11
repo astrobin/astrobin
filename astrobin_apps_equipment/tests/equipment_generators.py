@@ -1,12 +1,13 @@
 from django.template.defaultfilters import slugify
 
 from astrobin.tests.generators import Generators
-from astrobin_apps_equipment.models import Camera, Sensor, Telescope
+from astrobin_apps_equipment.models import Camera, Sensor, Telescope, Mount
 from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_equipment.models.equipment_retailer import EquipmentRetailer
+from astrobin_apps_equipment.models.mount_base_model import MountType
 from astrobin_apps_equipment.models.telescope_base_model import TelescopeType
 
 
@@ -76,6 +77,22 @@ class EquipmentGenerators:
             min_focal_length=kwargs.get('min_focal_length', 50),
             max_focal_length=kwargs.get('max_focal_length', 200),
             weight=kwargs.get('weight', 200),
+        )
+
+    @staticmethod
+    def mount(**kwargs):
+        random_name = Generators.randomString()
+
+        return Mount.objects.create(
+            created_by=kwargs.get('created_by', Generators.user()),
+            brand=kwargs.get('brand', EquipmentGenerators.brand()),
+            name=kwargs.get('name', 'Test mount %s' % random_name),
+            type=kwargs.get('type', MountType.GERMAN_EQUATORIAL),
+            tracking_accuracy=kwargs.get('tracking_accuracy', 1),
+            pec=kwargs.get('pec', True),
+            max_payload=kwargs.get('max_payload', 50),
+            computerized=kwargs.get('computerized', True),
+            slew_speed=kwargs.get('slew_speed', 10),
         )
 
     @staticmethod
