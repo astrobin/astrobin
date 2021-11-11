@@ -40,7 +40,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 full_name=Concat('brand__name', Value(' '), 'name'),
                 distance=TrigramDistance('full_name', q)
             ).filter(
-                distance__lte=.8
+                Q(distance__lte=.8) | Q(full_name__icontains=q)
             ).order_by(
                 'distance'
             )[:10]
