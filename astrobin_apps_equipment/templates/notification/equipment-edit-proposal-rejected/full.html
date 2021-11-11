@@ -1,0 +1,37 @@
+{% load i18n %}
+
+
+<p>
+    {% blocktrans trimmed %}
+        <a href="{{ user_url }}">{{ user }}</a> rejected an edit proposal on the equipment item
+        <a href="{{ item_url }}">{{ item }}</a>.
+    {% endblocktrans %}
+</p>
+
+<p>
+    <em>
+        {% blocktrans trimmed %}
+            You received this notification because you created this equipment item or this edit proposal.
+        {% endblocktrans %}
+    </em>
+</p>
+
+
+{% if comment %}
+    <p>
+        {% blocktrans trimmed %}
+            The reviewer left the following comment:
+        {% endblocktrans %}
+
+        <br />
+
+        "<em>{{ comment }}</em>"
+    </p>
+{% endif %}
+
+
+<p>
+    <a href="{{ edit_proposal_url }}" class="btn btn-primary">
+        {% trans "View edit proposal" %}
+    </a>
+</p>
