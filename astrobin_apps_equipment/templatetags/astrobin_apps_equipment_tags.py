@@ -120,3 +120,13 @@ def unique_equipment_item_listings(image, country):
             pks.append(listing.pk)
 
     return EquipmentItemListing.objects.filter(pk__in=pks)
+
+
+@register.filter
+def is_equipment_moderator(user) -> bool:
+    return user.is_authenticated and user.groups.filter(name='equipment_moderators').exists()
+
+
+@register.filter
+def can_access_basic_equipment_functions(user) -> bool:
+    return is_equipment_moderator(user)
