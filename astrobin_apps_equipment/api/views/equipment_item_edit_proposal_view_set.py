@@ -63,7 +63,7 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
                     AppRedirectionService.redirect(
                         f'/equipment'
                         f'/explorer'
-                        f'/{target.type}/{target.pk}'
+                        f'/{target.item_type}/{target.pk}'
                         f'/{target.slug}'
                     )
                 ),
@@ -71,7 +71,7 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
                     AppRedirectionService.redirect(
                         f'/equipment'
                         f'/explorer'
-                        f'/{target.type}/{target.pk}'
+                        f'/{target.item_type}/{target.pk}'
                         f'/{target.slug}'
                         f'/edit-proposals'
                         f'/{edit_proposal.pk}/'
@@ -115,7 +115,7 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
                     AppRedirectionService.redirect(
                         f'/equipment'
                         f'/explorer'
-                        f'/{target.type}/{target.pk}'
+                        f'/{target.item_type}/{target.pk}'
                         f'/{target.slug}'
                     )
                 ),
@@ -123,7 +123,7 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
                     AppRedirectionService.redirect(
                         f'/equipment'
                         f'/explorer'
-                        f'/{target.type}/{target.pk}'
+                        f'/{target.item_type}/{target.pk}'
                         f'/{target.slug}'
                         f'/edit-proposals'
                         f'/{edit_proposal.pk}/'

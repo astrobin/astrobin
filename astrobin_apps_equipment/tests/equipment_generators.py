@@ -39,11 +39,12 @@ class EquipmentGenerators:
             pixel_height=kwargs.get('pixel_height', 1024),
             sensor_width=kwargs.get('sensor_width', 1024),
             sensor_height=kwargs.get('sensor_height', 1024),
-            full_well_capacity=kwargs.get('full_well_capacity', 30000),
+            full_well_capacity=kwargs.get('full_well_capacity', 30),
             read_noise=kwargs.get('read_noise', 5),
             frame_rate=kwargs.get('frame_rate', 60),
             adc=kwargs.get('adc', 12),
             color_or_mono=kwargs.get('color_or_mono', 'M'),
+            specification_url=kwargs.get('specification_url')
         )
 
     @staticmethod

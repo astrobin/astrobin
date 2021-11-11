@@ -88,7 +88,7 @@ def send_edit_proposal_created_notification(sender, instance, created, **kwargs)
                         AppRedirectionService.redirect(
                             f'/equipment'
                             f'/explorer'
-                            f'/{target.type}/{target.pk}'
+                            f'/{target.item_type}/{target.pk}'
                             f'/{target.slug}'
                         )
                     ),
@@ -96,7 +96,7 @@ def send_edit_proposal_created_notification(sender, instance, created, **kwargs)
                         AppRedirectionService.redirect(
                             f'/equipment'
                             f'/explorer'
-                            f'/{target.type}/{target.pk}'
+                            f'/{target.item_type}/{target.pk}'
                             f'/{target.slug}'
                             f'/edit-proposals'
                             f'/{instance.pk}/'

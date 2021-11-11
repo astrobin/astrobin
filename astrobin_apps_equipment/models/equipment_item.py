@@ -97,7 +97,7 @@ class EquipmentItem(SafeDeleteModel):
     )
 
     @property
-    def type(self):
+    def item_type(self):
         return EquipmentItemService(self).get_type()
 
     @property
