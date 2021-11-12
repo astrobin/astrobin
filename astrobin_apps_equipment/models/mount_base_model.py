@@ -22,7 +22,7 @@ class MountType:
 class MountBaseModel(EquipmentItem):
     MOUNT_TYPES = (
         (MountType.ALTAZIMUTH, _("Alt-Az (altazimuth)")),
-        (MountType.WEDGED_ALTAZIMUTH, _("Wedged alt-Az")),
+        (MountType.WEDGED_ALTAZIMUTH, _("Wedged Alt-Az")),
         (MountType.EQUATORIAL, _("Equatorial")),
         (MountType.GERMAN_EQUATORIAL, _("German equatorial")),
         (MountType.FORK, _("Fork")),
