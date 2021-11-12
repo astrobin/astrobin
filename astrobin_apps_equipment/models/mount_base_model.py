@@ -42,18 +42,6 @@ class MountBaseModel(EquipmentItem):
         choices=MOUNT_TYPES,
     )
 
-    tracking_accuracy = models.PositiveSmallIntegerField(
-        verbose_name=_("Tracking accuracy (arcsec)"),
-        null=True,
-        blank=True,
-    )
-
-    pec = models.BooleanField(
-        verbose_name=_("Periodic error correction"),
-        null=True,
-        blank=True,
-    )
-
     max_payload = models.PositiveSmallIntegerField(
         verbose_name=_("Payload (kg)"),
         null=True,
@@ -62,6 +50,18 @@ class MountBaseModel(EquipmentItem):
 
     computerized = models.BooleanField(
         verbose_name=_("Computerized"),
+        null=True,
+        blank=True,
+    )
+
+    tracking_accuracy = models.PositiveSmallIntegerField(
+        verbose_name=_("Tracking accuracy (arcsec)"),
+        null=True,
+        blank=True,
+    )
+
+    pec = models.BooleanField(
+        verbose_name=_("Periodic error correction"),
         null=True,
         blank=True,
     )
