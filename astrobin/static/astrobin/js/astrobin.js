@@ -1026,18 +1026,41 @@ astrobin_common = {
         /* Init */
         $.extend(true, astrobin_common.config, config);
 
-        $('.dropdown-toggle').dropdown();
-        $('.carousel').carousel();
-        $('.nav-tabs').tab();
-        $('[rel=tooltip]').tooltip();
-        $('.collapse.in').collapse();
+        $(".dropdown-toggle").dropdown();
+        $(".carousel").carousel();
+        $(".nav-tabs").tab();
+        $("[rel=tooltip]").tooltip();
+        $(".collapse.in").collapse();
 
         // date and time pickers
-        $('input').filter('.timepickerclass').timepicker({});
-        $('input').filter('.datepickerclass').datepicker({
+        $("input")
+            .filter(".timepickerclass").timepicker({})
+            .filter(".datepickerclass").datepicker({
             dateFormat: 'yy-mm-dd',
             changeMonth: true,
             changeYear: true
+        });
+
+        $("#quick-search input").focus(() => {
+            if ($(window).width() >= 520) {
+                $(".search-nav").css({
+                    width: 'calc(100% - ' + (
+                        $(".site-nav").outerWidth() + $(".user-nav").outerWidth() + $(".brand").outerWidth()
+                    ) + 'px'
+                });
+            }
+        }).blur(() => {
+            if ($(window).width() >= 520) {
+                $(".search-nav").css({width: "auto"});
+            }
+        });
+
+        $(window).resize(() => {
+            if ($(window).width() >= 520) {
+                $(".search-nav").css({width: "auto"});
+            } else {
+                $(".search-nav").css({width: "calc(100% - 10px)"});
+            }
         });
 
         astrobin_common.init_timestamps();
