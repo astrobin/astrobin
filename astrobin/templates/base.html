@@ -93,9 +93,17 @@
                 <div class="container">
 
                     {% include "base/site_links.html" %}
-                    {% include "base/search_form.html" %}
+
+                    <span class="non-mobile-search">
+                        {% include "base/search_form.html" %}
+                    </span>
+
                     {% include "base/user_links.html" %}
 
+                </div>
+
+                <div class="container mobile-search-container">
+                    {% include "base/search_form.html" %}
                 </div>
             </div>
         </div>

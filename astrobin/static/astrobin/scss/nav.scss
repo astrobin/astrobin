@@ -186,19 +186,6 @@ body.full {
   background-color: $grey-8;
 }
 
-.navbar-search {
-  margin-top: 4px;
-
-  input {
-    color: $grey-2;
-    background-color: $grey-5;
-    border-color: $grey-6;
-    border-radius: 8px;
-    width: 120px;
-    margin-bottom: 0;
-  }
-}
-
 .navbar .bubble input {
   @include rounded-corners(2px);
   width: auto;
@@ -212,7 +199,59 @@ body.full {
   overflow: visible;
 }
 
-/* Fixes dropdowns on IE */
+.non-mobile-search {
+  @media screen and (max-width: 519.9px) {
+    display: none;
+  }
+
+  .search-nav {
+    @media screen and (max-width: 979px) {
+      margin-left: 110px;
+    }
+  }
+}
+
+.mobile-search-container {
+  @media screen and (min-width: 520px) {
+    display: none;
+  }
+
+  .search-nav {
+    width: calc(100% - 10px);
+
+    .nav,
+    form {
+      margin-top: 0;
+    }
+  }
+}
+
+.search-nav {
+  display: inline-block;
+
+  .nav,
+  .nav li,
+  .nav li form {
+    width: 100%;
+  }
+
+  .nav li form input {
+    width: calc(100% - 15px);
+  }
+
+  .navbar-search {
+    margin-top: 4px;
+
+    input {
+      color: $grey-2;
+      background-color: $grey-5;
+      border-color: $grey-6;
+      border-radius: 8px;
+      width: auto;
+      margin-bottom: 0;
+    }
+  }
+}
 
 .user-nav {
   > .nav {
@@ -252,6 +291,12 @@ body.full {
 
   #donate-header-button {
     margin-left: $spacer-small;
+  }
+
+  .language-switcher {
+    @media screen and (max-width: 360px) {
+      display: none;
+    }
   }
 }
 
