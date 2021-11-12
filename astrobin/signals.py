@@ -1044,8 +1044,8 @@ def abuse_report_post_save(sender, instance, created, **kwargs):
 post_save.connect(abuse_report_post_save, sender=AbuseReport)
 
 
-def gear_rename_proposal_post_save(sender, instance: CameraRenameProposal, created: bool, **kwargs):
+def camera_rename_proposal_post_save(sender, instance: CameraRenameProposal, created: bool, **kwargs):
     process_camera_rename_proposal.delay(instance.pk)
 
 
-post_save.connect(gear_rename_proposal_post_save, sender=CameraRenameProposal)
+post_save.connect(camera_rename_proposal_post_save, sender=CameraRenameProposal)
