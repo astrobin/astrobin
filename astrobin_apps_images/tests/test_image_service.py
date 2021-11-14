@@ -40,6 +40,13 @@ class TestImageService(TestCase):
 
         self.assertEqual(ImageService(image).get_revisions_with_title_or_description().count(), 1)
 
+    def test_get_revisions_with_title_or_description_only_title_but_empty(self):
+        image = Generators.image(is_wip=True)
+        Generators.imageRevision(image=image)
+        Generators.imageRevision(image=image, label='C', title='')
+
+        self.assertEqual(ImageService(image).get_revisions_with_title_or_description().count(), 0)
+
     def test_get_revisions_with_title_or_description(self):
         image = Generators.image(is_wip=True)
         Generators.imageRevision(image=image)

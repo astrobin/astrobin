@@ -86,10 +86,9 @@ class ImageService:
 
     def get_revisions_with_title_or_description(self, include_corrupted=False):
         # type: (bool) -> QuerySet
-        return self.get_revisions(include_corrupted).filter(
-            Q(description__isnull=False) | Q(title__isnull=False)
-        ).exclude(
-            Q(description='') & Q(title='')
+        return self.get_revisions(include_corrupted).exclude(
+            Q(Q(title='') | Q(title__isnull=True)) &
+            Q(Q(description='') | Q(description__isnull=True))
         )
 
     def get_default_cropping(self, revision_label=None):
