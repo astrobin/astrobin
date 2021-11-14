@@ -26,12 +26,26 @@ class TestImageService(TestCase):
 
         self.assertEqual(ImageService(image).get_revisions(include_corrupted=True).count(), 2)
 
-    def test_get_revisions_with_description(self):
+    def test_get_revisions_with_title_or_description_only_description(self):
         image = Generators.image(is_wip=True)
         Generators.imageRevision(image=image)
         Generators.imageRevision(image=image, label='C', description='Foo')
 
-        self.assertEqual(ImageService(image).get_revisions_with_description().count(), 1)
+        self.assertEqual(ImageService(image).get_revisions_with_title_or_description().count(), 1)
+
+    def test_get_revisions_with_title_or_description_only_title(self):
+        image = Generators.image(is_wip=True)
+        Generators.imageRevision(image=image)
+        Generators.imageRevision(image=image, label='C', title='Foo')
+
+        self.assertEqual(ImageService(image).get_revisions_with_title_or_description().count(), 1)
+
+    def test_get_revisions_with_title_or_description(self):
+        image = Generators.image(is_wip=True)
+        Generators.imageRevision(image=image)
+        Generators.imageRevision(image=image, label='C', title='Foo', description='Bar')
+
+        self.assertEqual(ImageService(image).get_revisions_with_title_or_description().count(), 1)
 
     def test_get_next_available_revision_label(self):
         image = Generators.image(is_wip=True)
@@ -266,6 +280,42 @@ class TestImageService(TestCase):
 
         self.assertEqual(0, Image.objects.all().count())
         self.assertEqual(0, Solution.objects.all().count())
+
+    def test_delete_original_preserves_title_and_description(self):
+        image = Generators.image(image_file='original.jpg', title='Foo', description='Foo')
+        revision = Generators.imageRevision(image=image, image_file='revision.jpg', title='Bar', description='Bar')
+
+        ImageService(image).delete_original()
+
+        image = Image.objects.get(pk=image.pk)
+        self.assertEqual('revision.jpg', image.image_file)
+        self.assertEqual('Foo (Bar)', image.title)
+        self.assertEqual('Foo\nBar', image.description)
+        self.assertEqual(1, Image.objects.all().count())
+
+    def test_delete_original_preserves_title_and_description_when_original_has_none(self):
+        image = Generators.image(image_file='original.jpg', title='Foo')
+        revision = Generators.imageRevision(image=image, image_file='revision.jpg', title='Bar', description='Bar')
+
+        ImageService(image).delete_original()
+
+        image = Image.objects.get(pk=image.pk)
+        self.assertEqual('revision.jpg', image.image_file)
+        self.assertEqual('Foo (Bar)', image.title)
+        self.assertEqual('Bar', image.description)
+        self.assertEqual(1, Image.objects.all().count())
+
+    def test_delete_original_preserves_title_and_description_when_deleted_revision_has_none(self):
+        image = Generators.image(image_file='original.jpg', title='Foo')
+        revision = Generators.imageRevision(image=image, image_file='revision.jpg')
+
+        ImageService(image).delete_original()
+
+        image = Image.objects.get(pk=image.pk)
+        self.assertEqual('revision.jpg', image.image_file)
+        self.assertEqual('Foo', image.title)
+        self.assertEqual(None, image.description)
+        self.assertEqual(1, Image.objects.all().count())
 
     def test_delete_original_when_one_revision_and_original_is_final(self):
         image = Generators.image(image_file='original.jpg')

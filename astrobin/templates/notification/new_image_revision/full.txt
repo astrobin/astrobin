@@ -1,8 +1,12 @@
 {% load i18n %}
 
 {% blocktrans trimmed %}
-    {{user}} has published a new image revision on "{{title}}".
+    {{user}} has published a new image revision on "{{image_title}}".
 {% endblocktrans %}
+
+{% if title %}
+    {% blocktrans %}Title{% endblocktrans %}: "{{title}}".
+{% endif %}
 
 {% if description %}
     {% blocktrans %}Description{% endblocktrans %}: "{{description}}".

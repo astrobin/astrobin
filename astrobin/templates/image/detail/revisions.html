@@ -152,21 +152,34 @@
             {% endfor %}
         </ul> <!-- thumbnails -->
 
-        {% if revisions_with_description %}
-            {% for r in revisions_with_description %}
+        {% if revisions_with_title_or_description %}
+            {% for r in revisions_with_title_or_description %}
                 <div class="revision-description">
                     <h3>{{r.label}}</h3>
+
+                    {% if r.title %}
+                        <p>
+                            <strong>{% trans "Title" %}:</strong> {{ r.title }}
+                        </p>
+                    {% endif %}
+
+                    {% if r.description %}
+                        <p>
+                            <strong>{% trans "Description" %}:</strong> {{r.description|strip_html|safe}}
+                        </p>
+                    {% endif %}
+
                     <p>
-                        <strong>{% trans "Description" %}:</strong> {{r.description|strip_html|safe}}
+                        <strong>{% trans "Uploaded" %}:</strong>&nbsp;{% timestamp r.uploaded %}
+                    </p>
+
+                    <p>
                         {% if request.user == image.user or request.user.is_superuser %}
                             <a href="{% url 'image_edit_revision' r.pk %}">
                                 {% private_abbr %}
                                 {% trans "Edit" %}
                             </a>
                         {% endif %}
-                    </p>
-                    <p>
-                        <strong>{% trans "Uploaded" %}:</strong>&nbsp;{% timestamp r.uploaded %}
                     </p>
                 </div>
             {% endfor %}

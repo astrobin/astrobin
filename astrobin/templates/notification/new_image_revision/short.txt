@@ -1,5 +1,5 @@
 {% load i18n %}
 
 {% blocktrans trimmed %}
-    New image revision by {{ user }} on "{{ title }}"
+    New image revision by {{ user }} on "{{ image_title }}"
 {% endblocktrans %}

@@ -83,7 +83,8 @@ def push_notification_for_new_image_revision(revision_pk):
             'user_url': build_notification_url(
                 settings.BASE_URL + revision.image.user.userprofile.get_absolute_url(), revision.image.user),
             'user': revision.image.user.userprofile.get_display_name(),
-            'title': revision.image.title,
+            'image_title': revision.image.title,
+            'title': revision.title,
             'description': revision.description,
             'previous_update_date': formats.date_format(max(
                 revision.image.published,

@@ -63,6 +63,7 @@ class Generators:
             is_final=kwargs.pop('is_final', False),
             corrupted=kwargs.pop('corrupted', False),
             label=kwargs.pop('label', 'B'),
+            title=kwargs.pop('title', None),
             description=kwargs.pop('description', None),
             recovery_ignored=kwargs.pop('recovery_ignored', None),
         )
