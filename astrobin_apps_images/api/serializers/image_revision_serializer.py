@@ -18,6 +18,7 @@ class ImageRevisionSerializer(serializers.HyperlinkedModelSerializer):
             'uploaded',
             'image',
             'image_file',
+            'title',
             'description',
             'skip_notifications',
             'label',

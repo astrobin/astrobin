@@ -94,6 +94,8 @@ class ImageRevisionResource(ModelResource):
             'w',
             'h',
             'label',
+            'title',
+            'description',
 
             'url_thumb',
             'url_gallery',

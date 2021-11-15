@@ -1738,6 +1738,14 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         help_text=_("Select an area of the image to be used as thumbnail in your gallery.")
     )
 
+    title = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+        verbose_name=_("Title"),
+        help_text=_("The revision's title will be shown as an addendum to the original image's title.")
+    )
+
     description = models.TextField(
         null=True,
         blank=True,

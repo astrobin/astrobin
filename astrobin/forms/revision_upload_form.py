@@ -15,7 +15,7 @@ class ImageRevisionUploadForm(forms.ModelForm):
 
     class Meta:
         model = ImageRevision
-        fields = ('image_file', 'description', 'skip_notifications', 'mark_as_final')
+        fields = ('image_file', 'title', 'description', 'skip_notifications', 'mark_as_final')
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4}),
             'skip_notifications': forms.CheckboxInput()

@@ -71,6 +71,7 @@ class ImageRevisionUploadViewSet(TusCreateMixin,
             'upload_length': upload_length,
             'upload_metadata': json.dumps(upload_metadata),
             'filename': filename,
+            'title': upload_metadata['title'] if upload_metadata['title'] != 'NO_VALUE' else None,
             'description': upload_metadata['description'] if upload_metadata['description'] != 'NO_VALUE' else '',
             'skip_notifications': upload_metadata[
                 'skip_notifications'] if 'skip_notifications' in upload_metadata else False,

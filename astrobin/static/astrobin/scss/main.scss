@@ -1073,6 +1073,14 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 .image-title {
   margin-bottom: $spacer-xlarge;
 
+  .revision-title {
+    margin-top: -.5rem;
+  }
+
+  .title-heading {
+    color: $grey-4;
+  }
+
   .image-title {
     margin-bottom: 1rem;
     line-height: 26px;

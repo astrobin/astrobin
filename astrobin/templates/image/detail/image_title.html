@@ -5,7 +5,15 @@
 <div class="image-title">
     <div class="row-fluid">
         <div class="span12">
-            <h3 class="image-title">{{image.title|default:_("(no title)")}}</h3>
+            <h3 class="image-title">
+                {{image.title|default:_("(no title)")}}
+            </h3>
+            {% if revision_image and revision_image.title %}
+                <h4 class="revision-title">
+                    <span class="title-heading">{% trans "Revision title" %}: </span>
+                    {{ revision_image.title }}
+                </h4>
+            {% endif %}
         </div>
     </div>
 

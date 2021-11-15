@@ -2,10 +2,6 @@
 
 <a href="{{ url }}">
     {% blocktrans trimmed %}
-        <strong>{{ user }}</strong> has published a new image revision on "{{ title }}".
+        <strong>{{ user }}</strong> has published a new image revision on "{{ image_title }}".
     {% endblocktrans %}
-
-    {% if description %}
-        {% blocktrans %}Description{% endblocktrans %}: <em>"{{ description }}"</em>.
-    {% endif %}
 </a>

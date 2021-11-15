@@ -84,9 +84,12 @@ class ImageService:
 
         return base26_encode(base26_decode(highest_label) + 1)
 
-    def get_revisions_with_description(self, include_corrupted=False):
+    def get_revisions_with_title_or_description(self, include_corrupted=False):
         # type: (bool) -> QuerySet
-        return self.get_revisions(include_corrupted).exclude(Q(description=None) | Q(description=''))
+        return self.get_revisions(include_corrupted).exclude(
+            Q(Q(title='') | Q(title__isnull=True)) &
+            Q(Q(description='') | Q(description__isnull=True))
+        )
 
     def get_default_cropping(self, revision_label=None):
         if revision_label is None or revision_label == '0':
@@ -268,6 +271,17 @@ class ImageService:
         image.w = new_original.w
         image.h = new_original.h
         image.is_final = image.is_final or new_original.is_final
+
+        if new_original.title:
+            image.title = f'{image.title} ({new_original.title})'
+
+        if image.description:
+            image.description = f'{image.description}\n{new_original.description}' \
+                if new_original.description \
+                else new_original.description
+        else:
+            image.description = new_original.description
+
         image.save(keep_deleted=True)
 
         if new_original.solution:
@@ -350,10 +364,12 @@ class ImageService:
             return None
 
         ra = solution.advanced_ra if solution.advanced_ra else solution.ra
-        ra_hms = decimal_to_hours_minutes_seconds_string(ra, hour_symbol='', minute_symbol='', second_symbol='', precision=0)
+        ra_hms = decimal_to_hours_minutes_seconds_string(ra, hour_symbol='', minute_symbol='', second_symbol='',
+                                                         precision=0)
 
         dec = solution.advanced_dec if solution.advanced_dec else solution.dec
-        dec_dms = decimal_to_degrees_minutes_seconds_string(dec, degree_symbol='', minute_symbol='', second_symbol='', precision=0)
+        dec_dms = decimal_to_degrees_minutes_seconds_string(dec, degree_symbol='', minute_symbol='', second_symbol='',
+                                                            precision=0)
 
         try:
             return ConstellationsService.get_constellation('%s %s' % (ra_hms, dec_dms))

@@ -690,8 +690,8 @@ class ImageDetailView(ImageDetailViewBase):
             'revisions': ImageService(image) \
                 .get_revisions(include_corrupted=self.request.user == image.user) \
                 .select_related('image__user__userprofile'),
-            'revisions_with_description': ImageService(image) \
-                .get_revisions_with_description(include_corrupted=self.request.user == image.user) \
+            'revisions_with_title_or_description': ImageService(image) \
+                .get_revisions_with_title_or_description(include_corrupted=self.request.user == image.user) \
                 .select_related('image__user__userprofile'),
             'is_revision': is_revision,
             'revision_image': revision_image,
@@ -980,8 +980,13 @@ class ImageDeleteOtherVersionsView(LoginRequiredMixin, View):
             image.updated = revision.uploaded
             image.w = revision.w
             image.h = revision.h
+
+            if revision.title:
+                image.title = f'{image.title} ({revision.title})'
+
             if revision.description:
                 image.description = (image.description or '') + '\n' + revision.description
+
             image_modified = True
 
             if revision.solution:
