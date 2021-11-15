@@ -8,7 +8,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from astrobin.models import Gear, Filter
-from astrobin_apps_equipment.models import Camera, Telescope, Mount
+from astrobin_apps_equipment.models import Camera, Telescope, Mount, Accessory
 
 
 class MigratableItemMixin:
@@ -229,6 +229,8 @@ class MigratableItemMixin:
                 item = Mount.objects.get(pk=itemId)
             elif itemType == 'FILTER':
                 item = Filter.objects.get(pk=itemId)
+            elif itemType == 'ACCESSORY':
+                item = Accessory.objects.get(pk=itemId)
             else:
                 return HttpResponseBadRequest('Bad item type')
 
