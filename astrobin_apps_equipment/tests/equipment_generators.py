@@ -1,12 +1,13 @@
 from django.template.defaultfilters import slugify
 
 from astrobin.tests.generators import Generators
-from astrobin_apps_equipment.models import Camera, Sensor, Telescope, Mount
+from astrobin_apps_equipment.models import Camera, Sensor, Telescope, Mount, Filter
 from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_equipment.models.equipment_retailer import EquipmentRetailer
+from astrobin_apps_equipment.models.filter_base_model import FilterType
 from astrobin_apps_equipment.models.mount_base_model import MountType
 from astrobin_apps_equipment.models.telescope_base_model import TelescopeType
 
@@ -93,6 +94,19 @@ class EquipmentGenerators:
             max_payload=kwargs.get('max_payload', 50),
             computerized=kwargs.get('computerized', True),
             slew_speed=kwargs.get('slew_speed', 10),
+        )
+
+    @staticmethod
+    def filter(**kwargs):
+        random_name = Generators.randomString()
+
+        return Filter.objects.create(
+            created_by=kwargs.get('created_by', Generators.user()),
+            brand=kwargs.get('brand', EquipmentGenerators.brand()),
+            name=kwargs.get('name', 'Test filter %s' % random_name),
+            type=kwargs.get('type', FilterType.L),
+            bandwidth=kwargs.get('bandwidth', 12),
+            size=kwargs.get('size', 31),
         )
 
     @staticmethod
