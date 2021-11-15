@@ -4,6 +4,8 @@ from rest_framework import routers
 from astrobin_apps_equipment.api.views.brand_view_set import BrandViewSet
 from astrobin_apps_equipment.api.views.camera_edit_proposal_view_set import CameraEditProposalViewSet
 from astrobin_apps_equipment.api.views.camera_view_set import CameraViewSet
+from astrobin_apps_equipment.api.views.filter_edit_proposal_view_set import FilterEditProposalViewSet
+from astrobin_apps_equipment.api.views.filter_view_set import FilterViewSet
 from astrobin_apps_equipment.api.views.mount_edit_proposal_view_set import MountEditProposalViewSet
 from astrobin_apps_equipment.api.views.mount_view_set import MountViewSet
 from astrobin_apps_equipment.api.views.sensor_edit_proposal_view_set import SensorEditProposalViewSet
@@ -26,6 +28,9 @@ router.register(r'telescope-edit-proposal', TelescopeEditProposalViewSet, basena
 
 router.register(r'mount', MountViewSet, basename='mount')
 router.register(r'mount-edit-proposal', MountEditProposalViewSet, basename='mount-edit-proposal')
+
+router.register(r'filter', FilterViewSet, basename='filter')
+router.register(r'filter-edit-proposal', FilterEditProposalViewSet, basename='filter-edit-proposal')
 
 urlpatterns = [
     url('', include(router.urls)),

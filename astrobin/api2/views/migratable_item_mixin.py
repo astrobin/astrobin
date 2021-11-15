@@ -7,7 +7,7 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
-from astrobin.models import Gear
+from astrobin.models import Gear, Filter
 from astrobin_apps_equipment.models import Camera, Telescope, Mount
 
 
@@ -227,6 +227,8 @@ class MigratableItemMixin:
                 item = Telescope.objects.get(pk=itemId)
             elif itemType == 'MOUNT':
                 item = Mount.objects.get(pk=itemId)
+            elif itemType == 'FILTER':
+                item = Filter.objects.get(pk=itemId)
             else:
                 return HttpResponseBadRequest('Bad item type')
 
