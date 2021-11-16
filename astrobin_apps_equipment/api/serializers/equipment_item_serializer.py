@@ -16,6 +16,7 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
             'updated',
             'brand',
             'name',
+            'website',
             'image',
         ]
         read_only_fields = ['image']

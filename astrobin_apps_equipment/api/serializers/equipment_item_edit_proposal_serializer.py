@@ -22,6 +22,7 @@ class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
             'edit_proposal_review_status',
             'brand',
             'name',
+            'website',
             'image',
         ]
         read_only_fields = ['image']
@@ -35,6 +36,7 @@ class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
 
         original_properties = {
             'name': target.name.replace('=', '\='),
+            'website': target.website,
             'image': target.image,
         }
 
