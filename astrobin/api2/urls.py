@@ -8,6 +8,7 @@ from astrobin.api2.views.filter_view_set import FilterViewSet
 from astrobin.api2.views.gear_view_set import GearViewSet
 from astrobin.api2.views.location_view_set import LocationViewSet
 from astrobin.api2.views.mount_view_set import MountViewSet
+from astrobin.api2.views.software_view_set import SoftwareViewSet
 from astrobin.api2.views.telescope_view_set import TelescopeViewSet
 
 router = routers.DefaultRouter()
@@ -18,6 +19,7 @@ router.register(r'telescope', TelescopeViewSet, basename='telescope')
 router.register(r'mount', MountViewSet, basename='mount')
 router.register(r'filter', FilterViewSet, basename='filter')
 router.register(r'accessory', AccessoryViewSet, basename='accessory')
+router.register(r'software', SoftwareViewSet, basename='softwarek')
 router.register(r'location', LocationViewSet, basename='location')
 
 urlpatterns = [

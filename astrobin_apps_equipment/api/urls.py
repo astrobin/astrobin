@@ -12,6 +12,8 @@ from astrobin_apps_equipment.api.views.mount_edit_proposal_view_set import Mount
 from astrobin_apps_equipment.api.views.mount_view_set import MountViewSet
 from astrobin_apps_equipment.api.views.sensor_edit_proposal_view_set import SensorEditProposalViewSet
 from astrobin_apps_equipment.api.views.sensor_view_set import SensorViewSet
+from astrobin_apps_equipment.api.views.software_edit_proposal_view_set import SoftwareEditProposalViewSet
+from astrobin_apps_equipment.api.views.software_view_set import SoftwareViewSet
 from astrobin_apps_equipment.api.views.telescope_edit_proposal_view_set import TelescopeEditProposalViewSet
 from astrobin_apps_equipment.api.views.telescope_view_set import TelescopeViewSet
 
@@ -36,6 +38,9 @@ router.register(r'filter-edit-proposal', FilterEditProposalViewSet, basename='fi
 
 router.register(r'accessory', AccessoryViewSet, basename='accessory')
 router.register(r'accessory-edit-proposal', AccessoryEditProposalViewSet, basename='accessory-edit-proposal')
+
+router.register(r'software', SoftwareViewSet, basename='software')
+router.register(r'software-edit-proposal', SoftwareEditProposalViewSet, basename='software-edit-proposal')
 
 urlpatterns = [
     url('', include(router.urls)),

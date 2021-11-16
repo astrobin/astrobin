@@ -120,8 +120,19 @@ class EquipmentGenerators:
         return Accessory.objects.create(
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
-            name=kwargs.get('name', 'Test filter %s' % random_name),
+            name=kwargs.get('name', 'Test software %s' % random_name),
             website=kwargs.get('website', 'https://www.test-accessory-%s.com/' % random_name),
+        )
+
+    @staticmethod
+    def software(**kwargs):
+        random_name = Generators.randomString()
+
+        return Accessory.objects.create(
+            created_by=kwargs.get('created_by', Generators.user()),
+            brand=kwargs.get('brand', EquipmentGenerators.brand()),
+            name=kwargs.get('name', 'Test software %s' % random_name),
+            website=kwargs.get('website', 'https://www.test-software-%s.com/' % random_name),
         )
 
     @staticmethod
