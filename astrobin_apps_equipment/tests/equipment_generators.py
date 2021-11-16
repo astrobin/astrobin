@@ -35,6 +35,7 @@ class EquipmentGenerators:
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
             name=kwargs.get('name', 'Test sensor %s' % random_name),
+            website=kwargs.get('website', 'https://www.test-sensor-%s.com/' % random_name),
             quantum_efficiency=kwargs.get('quantum_efficiency', 90),
             pixel_size=kwargs.get('pixel_size', 1.5),
             pixel_width=kwargs.get('pixel_width', 1024),
@@ -46,7 +47,6 @@ class EquipmentGenerators:
             frame_rate=kwargs.get('frame_rate', 60),
             adc=kwargs.get('adc', 12),
             color_or_mono=kwargs.get('color_or_mono', 'M'),
-            specification_url=kwargs.get('specification_url')
         )
 
     @staticmethod
@@ -57,6 +57,7 @@ class EquipmentGenerators:
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
             name=kwargs.get('name', 'Test camera %s' % random_name),
+            website=kwargs.get('website', 'https://www.test-camera-%s.com/' % random_name),
             type=kwargs.get('type', CameraType.DEDICATED_DEEP_SKY),
             sensor=kwargs.get('sensor', EquipmentGenerators.sensor()),
             cooled=kwargs.get('cooled', True),
@@ -73,6 +74,7 @@ class EquipmentGenerators:
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
             name=kwargs.get('name', 'Test telescope %s' % random_name),
+            website=kwargs.get('website', 'https://www.test-telescope-%s.com/' % random_name),
             type=kwargs.get('type', TelescopeType.REFRACTOR_ACHROMATIC),
             aperture=kwargs.get('aperture', 75),
             min_focal_length=kwargs.get('min_focal_length', 50),
@@ -88,6 +90,7 @@ class EquipmentGenerators:
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
             name=kwargs.get('name', 'Test mount %s' % random_name),
+            website=kwargs.get('website', 'https://www.test-mount-%s.com/' % random_name),
             type=kwargs.get('type', MountType.GERMAN_EQUATORIAL),
             tracking_accuracy=kwargs.get('tracking_accuracy', 1),
             pec=kwargs.get('pec', True),
@@ -104,6 +107,7 @@ class EquipmentGenerators:
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
             name=kwargs.get('name', 'Test filter %s' % random_name),
+            website=kwargs.get('website', 'https://www.test-filter-%s.com/' % random_name),
             type=kwargs.get('type', FilterType.L),
             bandwidth=kwargs.get('bandwidth', 12),
             size=kwargs.get('size', 31),
@@ -117,6 +121,7 @@ class EquipmentGenerators:
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
             name=kwargs.get('name', 'Test filter %s' % random_name),
+            website=kwargs.get('website', 'https://www.test-accessory-%s.com/' % random_name),
         )
 
     @staticmethod

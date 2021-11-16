@@ -78,11 +78,6 @@ class SensorBaseModel(EquipmentItem):
         )
     )
 
-    specification_url = models.URLField(
-        blank=True,
-        null=True,
-    )
-
     def save(self, keep_deleted=False, **kwargs):
         self.klass = EquipmentItemKlass.SENSOR
         super().save(keep_deleted, **kwargs)

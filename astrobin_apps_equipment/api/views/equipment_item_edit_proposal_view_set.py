@@ -45,6 +45,7 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
 
         target = edit_proposal.edit_proposal_target
         target.name = edit_proposal.name
+        target.website = edit_proposal.website
         target.image = edit_proposal.image
 
         target.save()

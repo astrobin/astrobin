@@ -23,6 +23,7 @@ class EquipmentItemKlass:
     ACCESSORY = "ACCESSORY"
     SOFTWARE = "SOFTWARE"
 
+
 class EquipmentItem(SafeDeleteModel):
     klass = models.CharField(
         max_length=16,
@@ -111,6 +112,11 @@ class EquipmentItem(SafeDeleteModel):
         max_length=128,
         null=False,
         blank=False,
+    )
+
+    website = models.URLField(
+        blank=True,
+        null=True,
     )
 
     image = models.ImageField(
