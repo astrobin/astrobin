@@ -1,7 +1,7 @@
 from django.template.defaultfilters import slugify
 
 from astrobin.tests.generators import Generators
-from astrobin_apps_equipment.models import Camera, Sensor, Telescope, Mount, Filter, Accessory
+from astrobin_apps_equipment.models import Camera, Sensor, Telescope, Mount, Filter, Accessory, Software
 from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
@@ -128,7 +128,7 @@ class EquipmentGenerators:
     def software(**kwargs):
         random_name = Generators.randomString()
 
-        return Accessory.objects.create(
+        return Software.objects.create(
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
             name=kwargs.get('name', 'Test software %s' % random_name),
