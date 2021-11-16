@@ -5,6 +5,7 @@ from django.contrib import admin
 from safedelete import HARD_DELETE
 
 from astrobin_apps_equipment.models import Sensor, Camera, Telescope, CameraEditProposal, Mount, Filter
+from astrobin_apps_equipment.models.accessory_edit_proposal import AccessoryEditProposal
 from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
@@ -141,6 +142,22 @@ class FilterEditProposalAdmin(admin.ModelAdmin):
     )
 
 
+class AccessoryAdmin(EquipmentItemAdmin):
+    list_display = (
+        'brand',
+        'name',
+        'created',
+    )
+
+
+class AccessoryEditProposalAdmin(admin.ModelAdmin):
+    list_display = (
+        'brand',
+        'name',
+        'edit_proposal_created',
+    )
+
+
 admin.site.register(EquipmentBrand, EquipmentBrandAdmin)
 admin.site.register(EquipmentRetailer, EquipmentRetailerAdmin)
 admin.site.register(EquipmentBrandListing, EquipmentBrandListingAdmin)
@@ -155,3 +172,4 @@ admin.site.register(Mount, MountAdmin)
 admin.site.register(MountEditProposal, MountEditProposalAdmin)
 admin.site.register(Filter, FilterAdmin)
 admin.site.register(FilterEditProposal, FilterEditProposalAdmin)
+admin.site.register(AccessoryEditProposal, AccessoryEditProposalAdmin)

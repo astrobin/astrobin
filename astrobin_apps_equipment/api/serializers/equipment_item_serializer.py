@@ -5,6 +5,7 @@ from rest_framework.exceptions import PermissionDenied
 class EquipmentItemSerializer(serializers.ModelSerializer):
     class Meta:
         fields = [
+            'klass',
             'created_by',
             'reviewed_by',
             'reviewed_timestamp',

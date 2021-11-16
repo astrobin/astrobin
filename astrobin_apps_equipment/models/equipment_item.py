@@ -14,7 +14,30 @@ def image_upload_path(instance, filename):
     return upload_path('equipment_item_images', instance.created_by.pk if instance.created_by else 0, filename)
 
 
+class EquipmentItemKlass:
+    SENSOR = "SENSOR"
+    CAMERA = "CAMERA"
+    TELESCOPE = "TELESCOPE"
+    MOUNT = "MOUNT"
+    FILTER = "FILTER"
+    ACCESSORY = "ACCESSORY"
+    SOFTWARE = "SOFTWARE"
+
 class EquipmentItem(SafeDeleteModel):
+    klass = models.CharField(
+        max_length=16,
+        null=True,
+        blank=False,
+        choices=(
+            (EquipmentItemKlass.SENSOR, _("Sensor")),
+            (EquipmentItemKlass.CAMERA, _("Camera")),
+            (EquipmentItemKlass.TELESCOPE, _("Telescope")),
+            (EquipmentItemKlass.MOUNT, _("Mount")),
+            (EquipmentItemKlass.FILTER, _("Filter")),
+            (EquipmentItemKlass.ACCESSORY, _("Accessory")),
+            (EquipmentItemKlass.SOFTWARE, _("Software")),
+        )
+    )
     created_by = models.ForeignKey(
         User,
         related_name='%(app_label)s_%(class)ss_created',

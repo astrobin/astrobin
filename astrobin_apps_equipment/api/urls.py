@@ -1,6 +1,8 @@
 from django.conf.urls import url, include
 from rest_framework import routers
 
+from astrobin_apps_equipment.api.views.accessory_edit_proposal_view_set import AccessoryEditProposalViewSet
+from astrobin_apps_equipment.api.views.accessory_view_set import AccessoryViewSet
 from astrobin_apps_equipment.api.views.brand_view_set import BrandViewSet
 from astrobin_apps_equipment.api.views.camera_edit_proposal_view_set import CameraEditProposalViewSet
 from astrobin_apps_equipment.api.views.camera_view_set import CameraViewSet
@@ -31,6 +33,9 @@ router.register(r'mount-edit-proposal', MountEditProposalViewSet, basename='moun
 
 router.register(r'filter', FilterViewSet, basename='filter')
 router.register(r'filter-edit-proposal', FilterEditProposalViewSet, basename='filter-edit-proposal')
+
+router.register(r'accessory', AccessoryViewSet, basename='accessory')
+router.register(r'accessory-edit-proposal', AccessoryEditProposalViewSet, basename='accessory-edit-proposal')
 
 urlpatterns = [
     url('', include(router.urls)),

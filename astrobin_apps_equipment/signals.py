@@ -9,6 +9,7 @@ from django.urls import reverse
 from notification import models as notification
 
 from astrobin_apps_equipment.models import Camera, CameraEditProposal
+from astrobin_apps_equipment.models.accessory_edit_proposal import AccessoryEditProposal
 from astrobin_apps_equipment.models.filter_edit_proposal import FilterEditProposal
 from astrobin_apps_equipment.models.mount_edit_proposal import MountEditProposal
 from astrobin_apps_equipment.models.sensor_edit_proposal import SensorEditProposal
@@ -47,6 +48,7 @@ def mirror_modified_camera(sender, instance: Camera, **kwargs):
 @receiver(post_save, sender=TelescopeEditProposal)
 @receiver(post_save, sender=MountEditProposal)
 @receiver(post_save, sender=FilterEditProposal)
+@receiver(post_save, sender=AccessoryEditProposal)
 def send_edit_proposal_created_notification(sender, instance, created, **kwargs):
     if created and instance.edit_proposal_target.created_by:
         target = instance.edit_proposal_target

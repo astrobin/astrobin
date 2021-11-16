@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from astrobin_apps_equipment.models import EquipmentItem
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemKlass
 
 
 class SensorBaseModel(EquipmentItem):
@@ -81,6 +82,10 @@ class SensorBaseModel(EquipmentItem):
         blank=True,
         null=True,
     )
+
+    def save(self, keep_deleted=False, **kwargs):
+        self.klass = EquipmentItemKlass.SENSOR
+        super().save(keep_deleted, **kwargs)
 
     class Meta(EquipmentItem.Meta):
         abstract = True

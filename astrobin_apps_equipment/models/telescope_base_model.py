@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from astrobin_apps_equipment.models import EquipmentItem
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemKlass
 
 
 class TelescopeType:
@@ -101,6 +102,10 @@ class TelescopeBaseModel(EquipmentItem):
         max_digits=6,
         decimal_places=2
     )
+
+    def save(self, keep_deleted=False, **kwargs):
+        self.klass = EquipmentItemKlass.TELESCOPE
+        super().save(keep_deleted, **kwargs)
 
     class Meta(EquipmentItem.Meta):
         abstract = True

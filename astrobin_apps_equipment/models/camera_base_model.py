@@ -3,6 +3,8 @@ from django.db.models import PROTECT
 from django.utils.translation import ugettext_lazy as _
 
 from astrobin_apps_equipment.models import EquipmentItem, Sensor
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemKlass
+
 
 class CameraType:
     DEDICATED_DEEP_SKY = 'DEDICATED_DEEP_SKY'
@@ -50,6 +52,10 @@ class CameraBaseModel(EquipmentItem):
         null=True,
         blank=True,
     )
+
+    def save(self, keep_deleted=False, **kwargs):
+        self.klass = EquipmentItemKlass.CAMERA
+        super().save(keep_deleted, **kwargs)
 
     class Meta(EquipmentItem.Meta):
         abstract = True
