@@ -4,7 +4,8 @@
 from django.contrib import admin
 from safedelete import HARD_DELETE
 
-from astrobin_apps_equipment.models import Sensor, Camera, Telescope, CameraEditProposal, Mount, Filter
+from astrobin_apps_equipment.models import Sensor, Camera, Telescope, CameraEditProposal, Mount, Filter, Accessory, \
+    Software
 from astrobin_apps_equipment.models.accessory_edit_proposal import AccessoryEditProposal
 from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
@@ -13,6 +14,7 @@ from astrobin_apps_equipment.models.equipment_retailer import EquipmentRetailer
 from astrobin_apps_equipment.models.filter_edit_proposal import FilterEditProposal
 from astrobin_apps_equipment.models.mount_edit_proposal import MountEditProposal
 from astrobin_apps_equipment.models.sensor_edit_proposal import SensorEditProposal
+from astrobin_apps_equipment.models.software_edit_proposal import SoftwareEditProposal
 from astrobin_apps_equipment.models.telescope_edit_proposal import TelescopeEditProposal
 
 
@@ -158,6 +160,22 @@ class AccessoryEditProposalAdmin(admin.ModelAdmin):
     )
 
 
+class SoftwareAdmin(EquipmentItemAdmin):
+    list_display = (
+        'brand',
+        'name',
+        'created',
+    )
+
+
+class SoftwareEditProposalAdmin(admin.ModelAdmin):
+    list_display = (
+        'brand',
+        'name',
+        'edit_proposal_created',
+    )
+
+
 admin.site.register(EquipmentBrand, EquipmentBrandAdmin)
 admin.site.register(EquipmentRetailer, EquipmentRetailerAdmin)
 admin.site.register(EquipmentBrandListing, EquipmentBrandListingAdmin)
@@ -172,4 +190,7 @@ admin.site.register(Mount, MountAdmin)
 admin.site.register(MountEditProposal, MountEditProposalAdmin)
 admin.site.register(Filter, FilterAdmin)
 admin.site.register(FilterEditProposal, FilterEditProposalAdmin)
+admin.site.register(Accessory, AccessoryAdmin)
 admin.site.register(AccessoryEditProposal, AccessoryEditProposalAdmin)
+admin.site.register(Software, SoftwareAdmin)
+admin.site.register(SoftwareEditProposal, SoftwareEditProposalAdmin)

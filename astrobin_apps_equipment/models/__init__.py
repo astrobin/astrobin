@@ -10,3 +10,4 @@ from .telescope import Telescope
 from .mount import Mount
 from .filter import Filter
 from .accessory import Accessory
+from .software import Software
