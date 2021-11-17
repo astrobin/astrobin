@@ -30,7 +30,7 @@ class TestApiEquipmentItemGroupViewSet(TestCase):
         response = client.get(reverse('astrobin_apps_equipment:equipment-item-group-list'), format='json')
         self.assertEquals(1, response.data['count'])
         self.assertEquals(group.name, response.data['results'][0]['name'])
-        self.assertEquals(2, len(response.data['results'][0]['telescopes']))
+        self.assertEquals(2, len(response.data['results'][0]['telescope_set']))
 
     def test_deleting_not_allowed(self):
         client = APIClient()
