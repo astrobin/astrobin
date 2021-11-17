@@ -3,6 +3,7 @@ from .equipment_brand import EquipmentBrand
 from .equipment_retailer import EquipmentRetailer
 from .equipment_item_listing import EquipmentItemListing
 from .equipment_item import EquipmentItem
+from .equipment_item_group import EquipmentItemGroup
 from .sensor import Sensor
 from .camera import Camera
 from .camera_edit_proposal import CameraEditProposal

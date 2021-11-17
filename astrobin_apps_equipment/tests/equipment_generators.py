@@ -1,10 +1,12 @@
 from django.template.defaultfilters import slugify
 
 from astrobin.tests.generators import Generators
-from astrobin_apps_equipment.models import Camera, Sensor, Telescope, Mount, Filter, Accessory, Software
+from astrobin_apps_equipment.models import Camera, Sensor, Telescope, Mount, Filter, Accessory, Software, \
+    EquipmentItemGroup
 from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
+from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_equipment.models.equipment_retailer import EquipmentRetailer
 from astrobin_apps_equipment.models.filter_base_model import FilterType
@@ -133,6 +135,13 @@ class EquipmentGenerators:
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
             name=kwargs.get('name', 'Test software %s' % random_name),
             website=kwargs.get('website', 'https://www.test-software-%s.com/' % random_name),
+        )
+
+    @staticmethod
+    def equipment_item_group(**kwargs):
+        return EquipmentItemGroup.objects.create(
+            klass=kwargs.get('klass', EquipmentItemKlass.TELESCOPE),
+            name=Generators.randomString()
         )
 
     @staticmethod

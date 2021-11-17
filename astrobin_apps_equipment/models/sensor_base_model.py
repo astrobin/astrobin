@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from astrobin_apps_equipment.models import EquipmentItem
-from astrobin_apps_equipment.models.equipment_item import EquipmentItemKlass
+from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 
 
 class SensorBaseModel(EquipmentItem):

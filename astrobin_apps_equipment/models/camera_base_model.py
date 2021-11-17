@@ -3,7 +3,7 @@ from django.db.models import PROTECT
 from django.utils.translation import ugettext_lazy as _
 
 from astrobin_apps_equipment.models import EquipmentItem, Sensor
-from astrobin_apps_equipment.models.equipment_item import EquipmentItemKlass
+from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 
 
 class CameraType:
