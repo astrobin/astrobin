@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from safedelete.models import SafeDeleteModel
 
 from astrobin_apps_equipment.models import EquipmentBrand
+from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemGroup, EQUIPMENT_ITEM_KLASS_CHOICES
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
 from common.upload_paths import upload_path
 
@@ -14,31 +15,14 @@ def image_upload_path(instance, filename):
     return upload_path('equipment_item_images', instance.created_by.pk if instance.created_by else 0, filename)
 
 
-class EquipmentItemKlass:
-    SENSOR = "SENSOR"
-    CAMERA = "CAMERA"
-    TELESCOPE = "TELESCOPE"
-    MOUNT = "MOUNT"
-    FILTER = "FILTER"
-    ACCESSORY = "ACCESSORY"
-    SOFTWARE = "SOFTWARE"
-
-
 class EquipmentItem(SafeDeleteModel):
     klass = models.CharField(
         max_length=16,
         null=True,
         blank=False,
-        choices=(
-            (EquipmentItemKlass.SENSOR, _("Sensor")),
-            (EquipmentItemKlass.CAMERA, _("Camera")),
-            (EquipmentItemKlass.TELESCOPE, _("Telescope")),
-            (EquipmentItemKlass.MOUNT, _("Mount")),
-            (EquipmentItemKlass.FILTER, _("Filter")),
-            (EquipmentItemKlass.ACCESSORY, _("Accessory")),
-            (EquipmentItemKlass.SOFTWARE, _("Software")),
-        )
+        choices=EQUIPMENT_ITEM_KLASS_CHOICES
     )
+
     created_by = models.ForeignKey(
         User,
         related_name='%(app_label)s_%(class)ss_created',
@@ -121,6 +105,13 @@ class EquipmentItem(SafeDeleteModel):
 
     image = models.ImageField(
         upload_to=image_upload_path,
+        null=True,
+        blank=True,
+    )
+
+    group = models.ForeignKey(
+        EquipmentItemGroup,
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
     )

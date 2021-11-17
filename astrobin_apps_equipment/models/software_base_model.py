@@ -1,5 +1,5 @@
 from astrobin_apps_equipment.models import EquipmentItem
-from astrobin_apps_equipment.models.equipment_item import EquipmentItemKlass
+from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 
 
 class SoftwareBaseModel(EquipmentItem):
