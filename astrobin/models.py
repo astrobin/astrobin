@@ -506,6 +506,21 @@ class ImageGearMergeRecord(models.Model):
         related_name='image_gear_merge_records_as_to',
     )
 
+    type = models.CharField(
+        max_length=17,
+        choices=(
+            ('imaging_telescope', 'Imaging telescope'),
+            ('guiding_telescope', 'Guiding telescope'),
+            ('imaging_camera', 'Imaging camera'),
+            ('guiding_camera', 'Guiding camera'),
+            ('filter', 'Filter'),
+            ('focal_reducer', 'Focal reducer'),
+            ('mount', 'Mount'),
+            ('accessory', 'Accessory'),
+            ('software', 'Software'),
+        )
+    )
+
     image = models.ForeignKey(
         "astrobin.Image",
         editable=False,
