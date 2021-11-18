@@ -19,7 +19,7 @@ router.register(r'telescope', TelescopeViewSet, basename='telescope')
 router.register(r'mount', MountViewSet, basename='mount')
 router.register(r'filter', FilterViewSet, basename='filter')
 router.register(r'accessory', AccessoryViewSet, basename='accessory')
-router.register(r'software', SoftwareViewSet, basename='softwarek')
+router.register(r'software', SoftwareViewSet, basename='software')
 router.register(r'location', LocationViewSet, basename='location')
 
 urlpatterns = [
