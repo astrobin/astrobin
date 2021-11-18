@@ -461,6 +461,14 @@ class SolutionList(generics.ListCreateAPIView):
     filter_class = SolutionListFilter
     pagination_class = None
 
+    def list(self, request, *args, **kwargs):
+        object_ids = request.query_params.get('object_ids')
+        max_object_ids = 100
+        if object_ids:
+            object_ids = object_ids.split(',')
+            if len(object_ids) > max_object_ids:
+                return HttpResponseBadRequest(f'Please do not request more than {max_object_ids} object ids.')
+        return super().list(request, *args, **kwargs)
 
 class SolutionDetail(generics.RetrieveUpdateDestroyAPIView):
     model = Solution
