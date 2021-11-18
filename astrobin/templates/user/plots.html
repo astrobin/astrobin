@@ -23,125 +23,23 @@
     <a class="anchor" name="page_anchor"></a>
     {% include 'user/profile/navigation.html' %}
 
-    {% ifequal request.user requested_user %}
-    <p class="alert alert-info">
-        {% url 'user_page' requested_user as user_page %}
-        {% blocktrans trimmed with requested_user.username as user %}Hey <strong>{{user}}</strong>! I just wanted to let you know that you could make these plots more useful if you added all data to your images. Please make sure by checking whether you have images which lack data <a href="{{user_page}}?public&sub=nodata">here</a>.{% endblocktrans %}
-    </p>
-    {% endifequal %}
-
-    <div class="row-fluid section">
-        <div class="span6">
-            <div class="subtle-container">
-                <a class="anchor" name="stats_integration_hours_anchor"></a>
-                <div class="header">{% trans "Total integration hours, plotted against time." %}</div>
-                <div id="stats_integration_hours" class="plot" style="width:420px;height:200px;">
-                    <div class="loading">
-                        <p>{% trans "Please wait: the plot is loading..." %}</p>
-                        <img alt="{% trans "Loading..." %}" src="{% static 'astrobin/images/ajax-loader.gif' %}" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="span6">
-            <div class="subtle-container">
-                <a class="anchor" name="stats_integration_hours_by_gear_anchor"></a>
-                <div class="header">{% trans "Total integration hours, plotted against time and arranged by imaging telescopes and lenses, and imaging cameras." %}</div>
-                <div id="stats_integration_hours_by_gear" class="plot" style="width:420px;height:200px;">
-                    <div class="loading">
-                        <p>{% trans "Please wait: the plot is loading..." %}</p>
-                        <img alt="{% trans "Loading..." %}" src="{% static 'astrobin/images/ajax-loader.gif' %}" />
-                    </div>
-                </div>
-                <div id="stats_integration_hours_by_gear_legend" class="legend"></div>
-            </div>
-        </div>
+    <div class="alert alert-info">
+        <h4>{% trans "Sorry" %}</h4>
+        <p>
+            {% blocktrans trimmed %}
+                This page has been temporarily retired because of performance reasons.
+            {% endblocktrans %}
+        </p>
+        <p>
+            {% blocktrans trimmed %}
+                Please keep up-to-date with AstroBin's developments by following the newsletter and the the social
+                accounts!
+            {% endblocktrans %}
+        </p>
+        <p>
+            {% blocktrans trimmed %}
+                Thank you for your understanding.
+            {% endblocktrans %}
+        </p>
     </div>
-
-    <div class="row-fluid">
-        <div class="span6">
-            <div class="subtle-container">
-                <a class="anchor" name="stats_views_anchor"></a>
-                <div class="header">{% trans "Combined view count for all the user's images, plotted against time." %}</div>
-                <div id="stats_views" class="plot" style="width:420px;height:200px;">
-                    <div class="loading">
-                        <p>{% trans "Please wait: the plot is loading..." %}</p>
-                        <img alt="{% trans "Loading..." %}" src="{% static 'astrobin/images/ajax-loader.gif' %}" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="span6">
-            <div class="subtle-container">
-                <a class="anchor" name="stats_uploaded_images_anchor"></a>
-                <div class="header">{% trans "Image uploads, plotted against time." %}</div>
-                <div id="stats_uploaded_images" class="plot" style="width:420px;height:200px;">
-                    <div class="loading">
-                        <p>{% trans "Please wait: the plot is loading..." %}</p>
-                        <img alt="{% trans "Loading..." %}" src="{% static 'astrobin/images/ajax-loader.gif' %}" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock %}
-
-{% block extra_js %}
-{% include 'user/profile/js.html' %}
-
-<script type="text/javascript">
-$(document).ready(function() {
-    astrobin_stats.init();
-
-    astrobin_stats.plot(
-        '#stats_integration_hours',
-        {% if 's_ihp' in request.GET %}
-        "{% url 'stats_integration_hours' requested_user.username request.GET.s_ihp 0 %}",
-        {% else %}
-        "{% url 'stats_integration_hours' requested_user.username 'monthly' 0 %}",
-        {% endif %}
-        30000);
-    astrobin_stats.enableTooltips("#stats_integration_hours");
-
-    astrobin_stats.plot(
-        '#stats_uploaded_images',
-        {% if 's_uip' in request.GET %}
-        "{% url 'stats_uploaded_images' requested_user.username request.GET.s_uip %}",
-        {% else %}
-        "{% url 'stats_uploaded_images' requested_user.username 'monthly' %}",
-        {% endif %}
-        30000);
-    astrobin_stats.enableTooltips("#stats_uploaded_images");
-
-    $.ajax({
-        {% if 's_ihgp' in request.GET %}
-            url: "{% url 'stats_integration_hours_by_gear' requested_user.username request.GET.s_ihgp %}",
-        {% else %}
-            url: "{% url 'stats_integration_hours_by_gear' requested_user.username 'monthly' %}",
-        {% endif %}
-        method: 'GET',
-        dataType: 'json',
-        timeout: 60000,
-        success: function(series) {
-            series['flot_options']['legend']['container'] = $('#stats_integration_hours_by_gear_legend');
-            $.plot($('#stats_integration_hours_by_gear'),
-                series['flot_data'],
-                series['flot_options']);
-        }
-    });
-    astrobin_stats.enableTooltips("#stats_integration_hours_by_gear");
-
-    astrobin_stats.plot(
-        '#stats_views',
-        {% if 's_vp' in request.GET %}
-        "{% url 'stats_views' requested_user.username request.GET.s_vp %}",
-        {% else %}
-        "{% url 'stats_views' requested_user.username 'monthly' %}",
-        {% endif %}
-        30000);
-    astrobin_stats.enableTooltips("#stats_views");
-});
-</script>
 {% endblock %}

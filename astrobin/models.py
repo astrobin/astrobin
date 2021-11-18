@@ -2948,24 +2948,6 @@ class ImageOfTheDayCandidate(models.Model):
         return "%s as an Image of the Day Candidate" % self.image.title
 
 
-class GlobalStat(models.Model):
-    date = models.DateField(
-        editable=False,
-        auto_now_add=True)
-
-    users = models.IntegerField()
-    images = models.IntegerField()
-    integration = models.IntegerField()
-
-    class Meta:
-        ordering = ['-date']
-        app_label = 'astrobin'
-
-    def __str__(self):
-        return "%d users, %d images, %d hours of integration time" % (
-            self.users, self.images, self.integration)
-
-
 class BroadcastEmail(models.Model):
     subject = models.CharField(max_length=200)
     created = models.DateTimeField(default=timezone.now)

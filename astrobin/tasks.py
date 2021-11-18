@@ -80,26 +80,6 @@ def update_top100_ids():
         'Top100 ids task is already being run by another worker')
 
 
-@shared_task(time_limit=60)
-def global_stats():
-    from astrobin.models import Image, GlobalStat
-    sqs = SearchQuerySet()
-
-    users = sqs.models(User).all().count()
-    images = sqs.models(Image).all().count()
-
-    integration = 0
-    for i in sqs.models(Image).all():
-        integration += i.integration
-    integration = int(integration / 3600.0)
-
-    gs = GlobalStat(
-        users=users,
-        images=images,
-        integration=integration)
-    gs.save()
-
-
 @shared_task(time_limit=60, acks_late=True)
 def sync_iotd_api():
     call_command("image_of_the_day")
