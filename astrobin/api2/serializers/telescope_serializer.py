@@ -3,7 +3,7 @@ from astrobin.models import Telescope
 
 
 class TelescopeSerializer(GearSerializer):
-    class Meta:
+    class Meta(GearSerializer.Meta):
         model = Telescope
         fields = GearSerializer.Meta.fields + (
             'aperture',

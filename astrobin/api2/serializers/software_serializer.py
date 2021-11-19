@@ -3,5 +3,5 @@ from astrobin.models import Software
 
 
 class SoftwareSerializer(GearSerializer):
-    class Meta:
+    class Meta(GearSerializer.Meta):
         model = Software

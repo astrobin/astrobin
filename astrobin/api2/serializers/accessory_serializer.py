@@ -3,5 +3,5 @@ from astrobin.models import Accessory
 
 
 class AccessorySerializer(GearSerializer):
-    class Meta:
+    class Meta(GearSerializer.Meta):
         model = Accessory

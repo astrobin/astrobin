@@ -3,7 +3,7 @@ from astrobin.models import Mount
 
 
 class MountSerializer(GearSerializer):
-    class Meta:
+    class Meta(GearSerializer.Meta):
         model = Mount
         fields = GearSerializer.Meta.fields + (
             'max_payload',
