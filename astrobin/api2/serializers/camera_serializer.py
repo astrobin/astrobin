@@ -3,7 +3,7 @@ from astrobin.models import Camera
 
 
 class CameraSerializer(GearSerializer):
-    class Meta:
+    class Meta(GearSerializer.Meta):
         model = Camera
         fields = GearSerializer.Meta.fields + (
             'pixel_size',
