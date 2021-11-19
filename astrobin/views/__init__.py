@@ -56,7 +56,7 @@ from astrobin.forms.profile_edit_privacy_form import UserProfileEditPrivacyForm
 from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import Image, UserProfile, Gear, Location, ImageRevision, DeepSky_Acquisition, \
     SolarSystem_Acquisition, GearUserInfo, Telescope, Mount, Camera, FocalReducer, Software, Filter, \
-    Accessory, GlobalStat, App, Acquisition
+    Accessory, App, Acquisition
 from astrobin.shortcuts import ajax_response, ajax_success
 from astrobin.templatetags.tags import in_upload_wizard
 from astrobin.utils import get_client_country_code
@@ -1234,7 +1234,7 @@ def user_page(request, username):
                         Q(acquisition=None) | Q(acquisition__date=None)).distinct()
                 else:
                     if active is None and distinct_years:
-                            active = str(distinct_years[0])
+                        active = str(distinct_years[0])
 
                     if active:
                         qs = qs.filter(acquisition__date__year=active).order_by('-published').distinct()
@@ -1664,84 +1664,6 @@ def user_page_api_keys(request, username):
     response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
 
     return render(request, 'user/api_keys.html', response_dict)
-
-
-@never_cache
-@require_GET
-def user_profile_stats_get_integration_hours_ajax(request, username, period='monthly', since=0):
-    user = get_object_or_404(UserProfile, user__username=username).user
-
-    import astrobin.stats as _s
-    (label, data, options) = _s.integration_hours(user, period, int(since))
-    response_dict = {
-        'flot_label': label,
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@never_cache
-@require_GET
-def user_profile_stats_get_integration_hours_by_gear_ajax(request, username, period='monthly'):
-    user = get_object_or_404(UserProfile, user__username=username).user
-
-    import astrobin.stats as _s
-    (data, options) = _s.integration_hours_by_gear(user, period)
-    response_dict = {
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@never_cache
-@require_GET
-def user_profile_stats_get_uploaded_images_ajax(request, username, period='monthly'):
-    user = get_object_or_404(UserProfile, user__username=username).user
-
-    import astrobin.stats as _s
-    (label, data, options) = _s.uploaded_images(user, period)
-    response_dict = {
-        'flot_label': label,
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@require_GET
-def user_profile_stats_get_views_ajax(request, username, period='monthly'):
-    user = get_object_or_404(UserProfile, user__username=username).user
-
-    import astrobin.stats as _s
-    (label, data, options) = _s.views(user, period)
-    response_dict = {
-        'flot_label': label,
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@never_cache
-@require_GET
-def stats_get_image_views_ajax(request, id, period='monthly'):
-    import astrobin.stats as _s
-
-    (label, data, options) = _s.image_views(id, period)
-
-    response_dict = {
-        'flot_label': label,
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
 
 
 @never_cache
@@ -2311,41 +2233,6 @@ def image_revision_upload_process(request):
 
 @never_cache
 @require_GET
-@user_passes_test(lambda u: u.is_superuser)
-def stats(request):
-    response_dict = {}
-
-    sqs = SearchQuerySet()
-    gs = GlobalStat.objects.first()
-
-    if gs:
-        response_dict['total_users'] = gs.users
-        response_dict['total_images'] = gs.images
-        response_dict['total_integration'] = gs.integration
-
-    sort = '-user_integration'
-    if 'sort' in request.GET:
-        sort = request.GET.get('sort')
-        if sort == 'tot_integration':
-            sort = '-user_integration'
-        elif sort == 'avg_integration':
-            sort = '-user_avg_integration'
-        elif sort == 'images':
-            sort = '-user_images'
-
-    queryset = sqs.filter(user_images__gt=0).models(User).order_by(sort)
-
-    return object_list(
-        request,
-        queryset=queryset,
-        template_name='stats.html',
-        template_object_name='user',
-        extra_context=response_dict,
-    )
-
-
-@never_cache
-@require_GET
 def astrophotographers_list(request):
     if request.user.is_authenticated and \
             request.user.userprofile.exclude_from_competitions and \
@@ -2795,130 +2682,6 @@ def user_popover_ajax(request, username):
     return HttpResponse(
         simplejson.dumps(response_dict),
         content_type='application/javascript')
-
-
-@never_cache
-@require_GET
-def stats_subject_images_monthly_ajax(request, id):
-    import astrobin.stats as _s
-
-    (label, data, options) = _s.subject_images_monthly(id)
-
-    response_dict = {
-        'flot_label': label,
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@never_cache
-@require_GET
-def stats_subject_integration_monthly_ajax(request, id):
-    import astrobin.stats as _s
-
-    (label, data, options) = _s.subject_integration_monthly(id)
-
-    response_dict = {
-        'flot_label': label,
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@never_cache
-@require_GET
-def stats_subject_total_images_ajax(request, id):
-    import astrobin.stats as _s
-
-    (label, data, options) = _s.subject_total_images(id)
-
-    response_dict = {
-        'flot_label': label,
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@never_cache
-@require_GET
-def stats_subject_camera_types_ajax(request, id):
-    import astrobin.stats as _s
-
-    (label, data, options) = _s.subject_camera_types(id, request.LANGUAGE_CODE)
-
-    response_dict = {
-        'flot_label': label,
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@never_cache
-@require_GET
-def stats_subject_telescope_types_ajax(request, id):
-    import astrobin.stats as _s
-
-    (label, data, options) = _s.subject_telescope_types(id, request.LANGUAGE_CODE)
-
-    response_dict = {
-        'flot_label': label,
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@never_cache
-@require_GET
-def stats_camera_types_trend_ajax(request):
-    import astrobin.stats as _s
-
-    (data, options) = _s.camera_types_trend()
-
-    response_dict = {
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@never_cache
-@require_GET
-def stats_telescope_types_trend_ajax(request):
-    import astrobin.stats as _s
-
-    (data, options) = _s.telescope_types_trend()
-
-    response_dict = {
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@require_GET
-def stats_subject_type_trend_ajax(request):
-    import astrobin.stats as _s
-
-    (data, options) = _s.subject_type_trend()
-
-    response_dict = {
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
 
 
 @never_cache

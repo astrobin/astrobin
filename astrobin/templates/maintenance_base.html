@@ -99,13 +99,6 @@
 
                                     {% show_competitive_feature request.user None as show_competitive_feature %}
                                     {% if show_competitive_feature or request.user.is_superuser %}
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="{% url 'stats' %}">
-                                                <i class="icon-bar-chart"></i>
-                                                {% trans "Stats" %}
-                                            </a>
-                                        </li>
                                         <li>
                                             <a href="{% url 'astrophotographers_list' %}">
                                                 <i class="icon-list-ol"></i>

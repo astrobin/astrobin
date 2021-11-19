@@ -55,7 +55,6 @@ from astrobin.views import (
     image_upload_process,
     image_revision_upload_process,
 
-    stats_get_image_views_ajax,
     me,
     user_page,
     user_page_api_keys,
@@ -66,10 +65,6 @@ from astrobin.views import (
     user_page_following,
     user_page_friends,
     user_page_plots,
-    user_profile_stats_get_integration_hours_ajax,
-    user_profile_stats_get_integration_hours_by_gear_ajax,
-    user_profile_stats_get_uploaded_images_ajax,
-    user_profile_stats_get_views_ajax,
 
     flickr_auth_callback,
     user_profile_delete,
@@ -104,19 +99,9 @@ from astrobin.views import (
     save_gear_user_info,
     user_popover_ajax,
 
-    stats_camera_types_trend_ajax,
-    stats_telescope_types_trend_ajax,
-    stats_subject_type_trend_ajax,
-    stats_subject_images_monthly_ajax,
-    stats_subject_camera_types_ajax,
-    stats_subject_telescope_types_ajax,
-    stats_subject_total_images_ajax,
-    stats_subject_integration_monthly_ajax,
-
     api_help,
     astrophotographers_list,
     contributors_list,
-    stats,
 
     set_language
 )
@@ -270,7 +255,6 @@ urlpatterns += [
     ### USER VIEWS                                                          ###
     ###########################################################################
 
-    url(r'^(?P<id>\d+)/stats/views/(?P<period>\w+)/$', stats_get_image_views_ajax, name='stats_image_views'),
     url(r'^me/$', me, name='me'),
     url(r'^users/(?P<username>[\w.@+-]*)/$', user_page, name='user_page'),
     url(r'^users/(?P<username>[\w.@+-]*)/collections/$', collections_views.UserCollectionsList.as_view(),
@@ -297,14 +281,6 @@ urlpatterns += [
     url(r'^users/(?P<username>[\w.@+-]*)/following/$', user_page_following, name='user_page_following'),
     url(r'^users/(?P<username>[\w.@+-]*)/friends/$', user_page_friends, name='user_page_friends'),
     url(r'^users/(?P<username>[\w.@+-]*)/plots/$', user_page_plots, name='user_page_plots'),
-    url(r'^users/(?P<username>[\w.@+-]*)/stats/integration_hours/(?P<period>\w+)/(?P<since>\d+)/$',
-        user_profile_stats_get_integration_hours_ajax, name='stats_integration_hours'),
-    url(r'^users/(?P<username>[\w.@+-]*)/stats/integration_hours_by_gear/(?P<period>\w+)/$',
-        user_profile_stats_get_integration_hours_by_gear_ajax, name='stats_integration_hours_by_gear'),
-    url(r'^users/(?P<username>[\w.@+-]*)/stats/uploaded_images/(?P<period>\w+)/$',
-        user_profile_stats_get_uploaded_images_ajax, name='stats_uploaded_images'),
-    url(r'^users/(?P<username>[\w.@+-]*)/stats/views/(?P<period>\w+)/$', user_profile_stats_get_views_ajax,
-        name='stats_views'),
 
     ###########################################################################
     ### PROFILE VIEWS                                                       ###
@@ -359,29 +335,6 @@ urlpatterns += [
     url(r'^user_popover_ajax/(?P<username>[\w.@+-]+)/$', user_popover_ajax, name='user_popover_ajax'),
 
     ###########################################################################
-    ### STATS VIEWS                                                         ###
-    ###########################################################################
-
-    url(r'^stats/camera-types-trend/$', stats_camera_types_trend_ajax, name='stats_camera_types_trend'),
-    url(r'^stats/subject-type-trend/$', stats_subject_type_trend_ajax, name='stats_subject_type_trend'),
-    url(r'^stats/telescope-types-trend/$', stats_telescope_types_trend_ajax, name='stats_telescope_types_trend'),
-
-    ###########################################################################
-    ### SUBJECT VIEWS                                                       ###
-    ###########################################################################
-
-    url(r'^subject/stats/camera-types/(?P<id>\d+)/$', stats_subject_camera_types_ajax,
-        name='stats_subject_camera_types'),
-    url(r'^subject/stats/images-monthly/(?P<id>\d+)/$', stats_subject_images_monthly_ajax,
-        name='stats_subject_images_monthly'),
-    url(r'^subject/stats/integration-monthly/(?P<id>\d+)/$', stats_subject_integration_monthly_ajax,
-        name='stats_subject_integration_monthly'),
-    url(r'^subject/stats/telescope-types/(?P<id>\d+)/$', stats_subject_telescope_types_ajax,
-        name='stats_subject_telescope_types'),
-    url(r'^subject/stats/total-images/(?P<id>\d+)/$', stats_subject_total_images_ajax,
-        name='stats_subject_total_images'),
-
-    ###########################################################################
     ### MESSAGES VIEWS                                                      ###
     ###########################################################################
 
@@ -429,7 +382,6 @@ urlpatterns += [
     url(r'^contributors-list/',
         contributors_list,
         name='contributors_list'),
-    url(r'^stats/', stats, name='stats'),
 
     ###########################################################################
     ### I18N VIEWS                                                          ###

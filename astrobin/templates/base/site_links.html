@@ -132,7 +132,7 @@
             </ul>
         </li>
 
-        <li class="dropdown explore-menu {% current request "^/explore/|^/search/|^/stats/|^/astrophotographers-list/" %}">
+        <li class="dropdown explore-menu {% current request "^/explore/|^/search/|^/astrophotographers-list/" %}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 {% trans "Explore" %}
                 <i class="icon-caret-down"></i>
@@ -212,17 +212,6 @@
                         <a href="{% url 'contributors_list' %}">
                             <i class="icon-file-text"></i>
                             {% trans "Contributors list" %} {% trans "(beta)" %}
-                        </a>
-                    </li>
-                {% endif %}
-
-                {% if request.user.is_superuser %}
-                    <li class="divider"></li>
-
-                    <li class="explore-menu-stats">
-                        <a href="{% url 'stats' %}">
-                            <i class="icon-bar-chart"></i>
-                            {% trans "Stats" %}
                         </a>
                     </li>
                 {% endif %}

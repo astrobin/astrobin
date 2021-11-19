@@ -8,7 +8,7 @@ from django.utils import timezone
 from astrobin.models import Gear, GearUserInfo, Telescope, \
     Mount, Camera, FocalReducer, Software, Filter, Accessory, DeepSky_Acquisition, SolarSystem_Acquisition, Image, \
     ImageRevision, Request, ImageRequest, UserProfile, Location, AppApiKeyRequest, App, ImageOfTheDay, \
-    ImageOfTheDayCandidate, Collection, GlobalStat, BroadcastEmail, CameraRenameProposal, GearRenameRecord
+    ImageOfTheDayCandidate, Collection, BroadcastEmail, CameraRenameProposal, GearRenameRecord
 from astrobin.services.gear_service import GearService
 from astrobin.tasks import send_broadcast_email
 from astrobin.utils import inactive_accounts
@@ -357,5 +357,4 @@ admin.site.register(App, AppAdmin)
 admin.site.register(ImageOfTheDay, ImageOfTheDayAdmin)
 admin.site.register(ImageOfTheDayCandidate, ImageOfTheDayCandidateAdmin)
 admin.site.register(Collection, CollectionAdmin)
-admin.site.register(GlobalStat)
 admin.site.register(BroadcastEmail, BroadcastEmailAdmin)
