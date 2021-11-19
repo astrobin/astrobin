@@ -14,7 +14,7 @@ class Command(BaseCommand):
         count_revisions = 0
         for user in User.objects.all():
             print("%s:" % user.username)
-            images = Image.objects_including_wip.filter(user=user).exclude(corrupted=True)
+            images = Image.objects_including_wip.filter(user=user)
             for image in images:
                 print("  - %d " % image.pk)
                 if image.solution and image.solution.annotations:
@@ -33,7 +33,7 @@ class Command(BaseCommand):
                 else:
                     print("/")
 
-                revisions = ImageRevision.objects.filter(image=image).exclude(corrupted=True)
+                revisions = ImageRevision.objects.filter(image=image)
                 for revision in revisions:
                     print("    - %s " % revision.label)
                     if revision.solution and revision.solution.annotations:

@@ -66,27 +66,22 @@ class ImageService:
 
         return self.get_revision(label)
 
-    def get_revisions(self, include_corrupted=False, include_deleted=False):
+    def get_revisions(self, include_deleted=False):
         # type: (bool, bool) -> QuerySet
         manager = ImageRevision.all_objects if include_deleted else ImageRevision.objects
-        revisions = manager.filter(image=self.image)
-
-        if not include_corrupted:
-            revisions = revisions.filter(corrupted=False)
-
-        return revisions
+        return manager.filter(image=self.image)
 
     def get_next_available_revision_label(self):
         # type: () -> str
         highest_label = 'A'
-        for r in self.get_revisions(True, True):
+        for r in self.get_revisions(True):
             highest_label = r.label
 
         return base26_encode(base26_decode(highest_label) + 1)
 
-    def get_revisions_with_title_or_description(self, include_corrupted=False):
-        # type: (bool) -> QuerySet
-        return self.get_revisions(include_corrupted).exclude(
+    def get_revisions_with_title_or_description(self):
+        # type: () -> QuerySet
+        return self.get_revisions().exclude(
             Q(Q(title='') | Q(title__isnull=True)) &
             Q(Q(description='') | Q(description__isnull=True))
         )

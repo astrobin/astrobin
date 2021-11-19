@@ -55,7 +55,6 @@ PIPELINE = {
                 'astrobin/js/respond.src.js',
                 'astrobin/js/astrobin.js',
                 'astrobin/js/astrobin_trash.js',
-                'astrobin/js/astrobin_recovery_process.js'
             ),
             'output_filename': 'astrobin/js/astrobin_bundle.js',
         }

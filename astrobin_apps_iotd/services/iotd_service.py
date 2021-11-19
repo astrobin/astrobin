@@ -25,8 +25,7 @@ class IotdService:
     def get_iotds(self):
         return Iotd.objects.filter(
             Q(date__lte=datetime.now().date()) &
-            Q(image__deleted__isnull=True) &
-            ~Q(image__corrupted=True))
+            Q(image__deleted__isnull=True))
 
     def is_top_pick(self, image):
         # type: (Image) -> bool
@@ -177,7 +176,6 @@ class IotdService:
         items = Image.objects.annotate(
             num_submissions=Count('iotdsubmission', distinct=True)
         ).filter(
-            ~Q(corrupted=True) &
             Q(
                 Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) |
                 Q(
@@ -203,7 +201,6 @@ class IotdService:
         items = Image.objects.annotate(
             num_votes=Count('iotdvote', distinct=True)
         ).filter(
-            ~Q(corrupted=True) &
             Q(published__lt=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)) &
             Q(Q(iotd=None) | Q(iotd__date__gt=datetime.now().date())) &
             Q(

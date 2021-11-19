@@ -107,13 +107,6 @@ class GroupsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '<li>No images.</li>', html=True)
 
-        # Test that corrupted images are not rendered here
-        image.corrupted = True
-        image.save(keep_deleted=True)
-        response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk, 'slug': self.group.slug}))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<li>No images.</li>', html=True)
-
         # Test that the group is not accessible if it's private
         self.group.public = False
         self.group.save()

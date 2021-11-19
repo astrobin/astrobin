@@ -87,7 +87,7 @@ class ImageRevisionResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = ImageRevision.objects.filter(image__is_wip=False, corrupted=False)
+        queryset = ImageRevision.objects.filter(image__is_wip=False)
         fields = [
             'id',
             'uploaded',
@@ -270,8 +270,7 @@ class ImageResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = Image.all_objects.filter(
-            corrupted=False, is_wip=False, deleted__isnull=True, uploader_in_progress__isnull=True)
+        queryset = Image.all_objects.filter(is_wip=False, deleted__isnull=True, uploader_in_progress__isnull=True)
         fields = [
             'id',
             'hash',
@@ -553,7 +552,7 @@ class ImageOfTheDayResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = ImageOfTheDay.objects.filter(image__corrupted=False)
+        queryset = ImageOfTheDay.objects.filter()
         fields = [
             'image',
             'runnerup_1',
@@ -663,8 +662,6 @@ class UserProfileResource(ModelResource):
             'hobbies',
             'id',
             'image_count',
-            'image_recovery_process_completed',
-            'image_recovery_process_started',
             'job',
             'language',
             'last_login',
@@ -676,7 +673,6 @@ class UserProfileResource(ModelResource):
             'premium_subscription_expiration',
             'real_name',
             'received_likes_count',
-            'recovered_images_notice_sent',
             'referral_code',
             'resource_uri',
             'total_notifications_count',
@@ -693,7 +689,7 @@ class UserProfileResource(ModelResource):
         return 'Etc/GMT'
 
     def dehydrate_image_count(self, bundle):
-        return Image.objects.filter(user=bundle.obj.user, corrupted=False, is_wip=False).count()
+        return Image.objects.filter(user=bundle.obj.user, is_wip=False).count()
 
     def dehydrate_received_likes_count(self, bundle):
         likes = 0

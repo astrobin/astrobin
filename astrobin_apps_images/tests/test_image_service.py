@@ -12,20 +12,6 @@ from astrobin_apps_platesolving.tests.platesolving_generators import PlateSolvin
 
 
 class TestImageService(TestCase):
-    def test_get_revisions_excludes_corrupted(self):
-        image = Generators.image(is_wip=True)
-        Generators.imageRevision(image=image)
-        Generators.imageRevision(image=image, corrupted=True, label='C')
-
-        self.assertEqual(ImageService(image).get_revisions().count(), 1)
-
-    def test_get_revisions_includes_corrupted(self):
-        image = Generators.image(is_wip=True)
-        Generators.imageRevision(image=image)
-        Generators.imageRevision(image=image, corrupted=True, label='C')
-
-        self.assertEqual(ImageService(image).get_revisions(include_corrupted=True).count(), 2)
-
     def test_get_revisions_with_title_or_description_only_description(self):
         image = Generators.image(is_wip=True)
         Generators.imageRevision(image=image)
@@ -64,16 +50,10 @@ class TestImageService(TestCase):
         Generators.imageRevision(image=image, label='Z')
         self.assertEqual(ImageService(image).get_next_available_revision_label(), 'BA')
 
-    def test_get_next_available_revision_label_with_corrupted_revision(self):
-        image = Generators.image(is_wip=True)
-        Generators.imageRevision(image=image)
-        Generators.imageRevision(image=image, corrupted=True, label='C')
-        self.assertEqual(ImageService(image).get_next_available_revision_label(), 'D')
-
     def test_get_next_available_revision_label_with_deleted_revision(self):
         image = Generators.image(is_wip=True)
         Generators.imageRevision(image=image)
-        to_delete = Generators.imageRevision(image=image, corrupted=True, label='C')
+        to_delete = Generators.imageRevision(image=image, label='C')
         to_delete.delete()
         self.assertEqual(ImageService(image).get_next_available_revision_label(), 'D')
 

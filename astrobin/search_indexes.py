@@ -578,7 +578,7 @@ class ImageIndex(SearchIndex, Indexable):
     bortle_scale = FloatField()
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(moderator_decision=1).exclude(corrupted=True)
+        return self.get_model().objects.filter(moderator_decision=1)
 
     def get_model(self):
         return Image

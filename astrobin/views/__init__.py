@@ -1148,13 +1148,9 @@ def user_page(request, username):
     else:
         qs = UserService(user).get_public_images()
     wip_qs = UserService(user).get_wip_images()
-    corrupted_qs = UserService(user).get_corrupted_images()
-    recovered_qs = UserService(user).get_recovered_images()
 
     if request.user != user:
-        qs = qs \
-            .exclude(is_wip=True) \
-            .exclude(pk__in=[x.pk for x in corrupted_qs])
+        qs = qs.exclude(is_wip=True)
 
     if 'staging' in request.GET:
         if request.user != user and not request.user.is_superuser:
@@ -1167,18 +1163,6 @@ def user_page(request, username):
             return HttpResponseForbidden()
         qs = Image.deleted_objects.filter(user=user)
         section = 'trash'
-        subsection = None
-    elif 'corrupted' in request.GET:
-        if request.user != user and not request.user.is_superuser:
-            return HttpResponseForbidden()
-        qs = corrupted_qs
-        section = 'corrupted'
-        subsection = None
-    elif 'recovered' in request.GET:
-        if request.user != user and not request.user.is_superuser:
-            return HttpResponseForbidden()
-        qs = recovered_qs
-        section = 'recovered'
         subsection = None
     else:
         #########
@@ -1433,7 +1417,6 @@ def user_page(request, username):
         'menu': menu,
         'stats': data['stats'] if 'stats' in data else None,
         'alias': 'gallery',
-        'corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user),
         'public_images_without_acquisition': UserService(user).get_public_images().filter(acquisition__isnull=True),
     }
 
@@ -1445,7 +1428,7 @@ def user_page(request, username):
     except IOError:
         response_dict['mobile_header_background'] = None
 
-    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+    response_dict.update(UserService(user).get_image_numbers())
 
     template_name = 'user/profile.html'
     if request.is_ajax():
@@ -1487,7 +1470,7 @@ def user_page_bookmarks(request, username):
         'alias': 'gallery',
     }
 
-    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+    response_dict.update(UserService(user).get_image_numbers())
 
     return render(request, template_name, response_dict)
 
@@ -1508,7 +1491,7 @@ def user_page_liked(request, username):
         'alias': 'gallery',
     }
 
-    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+    response_dict.update(UserService(user).get_image_numbers())
 
     return render(request, template_name, response_dict)
 
@@ -1546,7 +1529,7 @@ def user_page_following(request, username, extra_context=None):
         'view': request.GET.get('view', 'default'),
     }
 
-    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+    response_dict.update(UserService(user).get_image_numbers())
 
     return render(request, template_name, response_dict)
 
@@ -1580,7 +1563,7 @@ def user_page_followers(request, username, extra_context=None):
         'view': request.GET.get('view', 'default'),
     }
 
-    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+    response_dict.update(UserService(user).get_image_numbers())
 
     return render(request, template_name, response_dict)
 
@@ -1622,7 +1605,7 @@ def user_page_friends(request, username, extra_context=None):
         'view': request.GET.get('view', 'default'),
     }
 
-    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+    response_dict.update(UserService(user).get_image_numbers())
 
     return render(request, template_name, response_dict)
 
@@ -1639,7 +1622,7 @@ def user_page_plots(request, username):
         'profile': profile,
     }
 
-    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+    response_dict.update(UserService(user).get_image_numbers())
 
     return render(request, 'user/plots.html', response_dict)
 
@@ -1661,7 +1644,7 @@ def user_page_api_keys(request, username):
         'api_keys': keys,
     }
 
-    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+    response_dict.update(UserService(user).get_image_numbers())
 
     return render(request, 'user/api_keys.html', response_dict)
 

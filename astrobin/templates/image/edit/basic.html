@@ -27,10 +27,6 @@
     <form class="form-horizontal hidden" id="basic" action="" method="post" novalidate enctype="multipart/form-data">
         {% csrf_token %}
 
-        {% if 'corrupted' in request.GET and image.corrupted and not image.recovered %}
-            {% include './_catastrophic_data_corruption.html' %}
-        {% endif %}
-
         {{ form|as_bootstrap }}
 
         <input type="hidden" name="image_id" value="{{ image.get_id }}" />
