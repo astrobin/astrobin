@@ -99,8 +99,6 @@ def astrobin_user(context, user, **kwargs):
 
     user_ct = ContentType.objects.get_for_model(User)
     images = Image.objects.filter(user=user)
-    if request.user != user:
-        images = images.exclude(UserService.corrupted_query())
 
     followers = ToggleProperty.objects.toggleproperties_for_object("follow", user).count()
     following = ToggleProperty.objects.filter(

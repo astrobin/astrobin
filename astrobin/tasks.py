@@ -297,7 +297,7 @@ def prepare_download_data_archive(request_id):
             'mouse_hover_image'
         ])
 
-        images = Image.objects_including_wip.filter(user=data_download_request.user, corrupted=False)
+        images = Image.objects_including_wip.filter(user=data_download_request.user)
         for image in images:
             id = image.get_id()  # type: str
 
@@ -319,7 +319,7 @@ def prepare_download_data_archive(request_id):
                         archive.writestr("%s-%s/solution/%s" % (id, title, path), response.content)
                         logger.debug("prepare_download_data_archive: solution of image %s = written" % id)
 
-                for revision in ImageRevision.objects.filter(image=image, corrupted=False):  # type: ImageRevision
+                for revision in ImageRevision.objects.filter(image=image):  # type: ImageRevision
                     try:
                         label = revision.label  # type: str
                         path = ntpath.basename(revision.image_file.name)  # type: str
@@ -597,9 +597,8 @@ def assign_upload_length():
                 ))
 
     time_cut = DateTimeService.now() - timedelta(hours=2)
-    images = Image.all_objects.filter(uploader_upload_length__isnull=True, uploaded__gte=time_cut, corrupted=False)
-    revisions = ImageRevision.all_objects.filter(uploader_upload_length__isnull=True, uploaded__gte=time_cut,
-                                                 corrupted=False)
+    images = Image.all_objects.filter(uploader_upload_length__isnull=True, uploaded__gte=time_cut)
+    revisions = ImageRevision.all_objects.filter(uploader_upload_length__isnull=True, uploaded__gte=time_cut)
 
     process(images)
     process(revisions)

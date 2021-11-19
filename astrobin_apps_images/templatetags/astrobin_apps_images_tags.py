@@ -82,8 +82,6 @@ def astrobin_image(context, image, alias, **kwargs):
             'nav_ctx': nav_ctx,
             'nav_ctx_extra': nav_ctx_extra,
             'classes': classes,
-            'corrupted': False,
-            'recovered': False,
             'is_revision': False,
             'instant': False
         }
@@ -259,8 +257,6 @@ def astrobin_image(context, image, alias, **kwargs):
         'get_enhanced_thumb_url': get_enhanced_thumb_url,
         'regular_large_thumb_url': regular_large_thumb_url,
         'get_regular_large_thumb_url': get_regular_large_thumb_url,
-        'corrupted': image_revision.corrupted,
-        'recovered': image_revision.recovered is not None,
         'is_revision': hasattr(image_revision, 'label'),
         'revision_id': image_revision.pk,
         'w': w,

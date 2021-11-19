@@ -16,11 +16,6 @@ class DeleteRevisions(JsonRequestResponseMixin, LoginRequiredMixin, View):
             if len(pks) != revisions.count():
                 return self.render_bad_request_response()
 
-            for revision in revisions:
-                if revision.corrupted and revision.recovered:
-                    revision.corrupted = False
-                    revision.save(keep_deleted=True)
-
             revisions.delete()
 
             messages.success(request, _("%(number)s revisions(s) deleted." % {"number": len(pks)}))

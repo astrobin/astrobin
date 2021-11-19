@@ -40,13 +40,3 @@ class ImageNavigationTest(TestCase):
 
         response = self.client.get(reverse('image_detail', args=(current.get_id(),)))
         self.assertContains(response, "image-prev-none")
-
-    def test_next_prev_accounts_for_corrupted(self):
-        prev = Generators.image(user=self.user, corrupted=True)
-        prev.save()
-
-        current = Generators.image(user=self.user)
-        current.save()
-
-        response = self.client.get(reverse('image_detail', args=(current.get_id(),)))
-        self.assertContains(response, "image-prev-none")

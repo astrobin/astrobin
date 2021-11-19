@@ -787,11 +787,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       -moz-transition: all .3s ease-in-out;
       -o-transition: all .3s ease-in-out;
       transition: all .3s ease-in-out;
-
-      &.corrupted {
-        opacity: .5;
-        border: 1px solid $red;
-      }
     }
 
     figcaption {
@@ -4171,107 +4166,6 @@ form.edit-thumbnails {
   .upgrade-info {
     @media (min-width: 768px) {
       padding-top: 20px;
-    }
-  }
-}
-
-.recovery-process {
-  .astrobin-image-container {
-
-    &.corrupted.recovered {
-      cursor: pointer;
-
-      &:not(.recovery-process-recover-selected):not(.recovery-process-delete-selected) {
-        cursor: help;
-      }
-    }
-
-    &:not(.corrupted) {
-      cursor: not-allowed;
-    }
-
-    &.recovery-process-recover-selected::after {
-      content: "recover";
-      background: $green;
-      display: block;
-      opacity: .6;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      text-align: center;
-      color: white;
-      text-transform: uppercase;
-      text-shadow: 1px 1px 3px black;
-      padding-top: 1rem;
-    }
-
-    &.recovery-process-delete-selected::after {
-      content: "delete";
-      background: $red;
-      display: block;
-      opacity: .6;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      text-align: center;
-      color: white;
-      text-transform: uppercase;
-      text-shadow: 1px 1px 3px black;
-      padding-top: 1rem;
-    }
-  }
-
-  dl {
-    width: 100%;
-    overflow: hidden;
-    padding: 0;
-    margin: 0
-  }
-
-  dt {
-    float: left;
-    width: 35%;
-    padding: 0;
-    margin: 0
-  }
-
-  dd {
-    float: left;
-    width: 65%;
-    padding: 0;
-    margin: 0;
-
-    .icon-ok,
-    .corrupted-no,
-    .recovered-yes,
-    .deleted-no {
-      color: $green;
-    }
-
-    .icon-remove,
-    .corrupted-yes,
-    .recovered-no,
-    .deleted-yes {
-      color: $red;
-    }
-  }
-
-  .form-actions {
-    position: fixed;
-    bottom: 0;
-    right: 1rem;
-    background: $black;
-    border: 1px solid $white;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, .5);
-
-    .alert {
-      max-width: 400px;
-      margin-top: 1.25rem;
-      text-align: left;
     }
   }
 }

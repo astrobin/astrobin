@@ -53,8 +53,8 @@ from astrobin.forms import (
     ImageFlagThumbsForm,
     ImagePromoteForm,
     ImageRevisionUploadForm,
-    ImageEditThumbnailsForm,
-    ImageEditCorruptedRevisionForm)
+    ImageEditThumbnailsForm
+)
 from astrobin.forms.uncompressed_source_upload_form import UncompressedSourceUploadForm
 from astrobin.models import (
     Collection,
@@ -243,20 +243,9 @@ class ImageDetailView(ImageDetailViewBase):
                 raise Http404
 
         revision_label = kwargs.get('r')
-        if image.corrupted and (revision_label == '0' or (revision_label in [None, 'final'] and image.is_final)):
-            if request.user == image.user:
-                return redirect(reverse('image_edit_basic', args=(image.get_id(),)) + '?corrupted')
-            else:
-                raise Http404
-
         if revision_label is not None and revision_label != '0':
             try:
-                revision = ImageService(image).get_revisions(include_corrupted=True).get(label=revision_label)
-                if revision.corrupted:
-                    if request.user == image.user:
-                        return redirect(reverse('image_edit_revision', args=(revision.pk,)) + '?corrupted')
-                    else:
-                        raise Http404
+                revision = ImageService(image).get_revisions().get(label=revision_label)
             except ImageRevision.DoesNotExist:
                 revision = ImageService(image).get_final_revision()
                 redirect_revision_label = revision.label if hasattr(revision, 'label') else '0'
@@ -585,14 +574,12 @@ class ImageDetailView(ImageDetailViewBase):
 
         if not image.is_wip and image.published is not None:
             try:
-                # Always only lookup public, non corrupted images!
+                # Always only lookup public images!
                 if nav_ctx == 'user':
                     image_next = Image.objects \
-                                     .exclude(corrupted=True) \
                                      .filter(user=image.user, published__isnull=False, published__gt=image.published) \
                                      .order_by('published')[0:1]
                     image_prev = Image.objects \
-                                     .exclude(corrupted=True) \
                                      .filter(user=image.user, published__isnull=False, published__lt=image.published) \
                                      .order_by('-published')[0:1]
                 elif nav_ctx == 'collection':
@@ -605,7 +592,6 @@ class ImageDetailView(ImageDetailViewBase):
 
                         if collection.order_by_tag:
                             collection_images = Image.objects \
-                                .exclude(corrupted=True) \
                                 .filter(user=image.user,
                                         collections=collection,
                                         keyvaluetags__key=collection.order_by_tag) \
@@ -625,11 +611,9 @@ class ImageDetailView(ImageDetailViewBase):
                                 else None
                         else:
                             image_next = Image.objects \
-                                             .exclude(corrupted=True) \
                                              .filter(user=image.user, collections=collection,
                                                      published__gt=image.published).order_by('published')[0:1]
                             image_prev = Image.objects \
-                                             .exclude(corrupted=True) \
                                              .filter(user=image.user, collections=collection,
                                                      published__lt=image.published).order_by('-published')[0:1]
                     except Collection.DoesNotExist:
@@ -640,13 +624,11 @@ class ImageDetailView(ImageDetailViewBase):
                         group = image.part_of_group_set.get(pk=nav_ctx_extra)
                         if group.public:
                             image_next = Image.objects \
-                                             .exclude(corrupted=True) \
                                              .filter(part_of_group_set=group,
                                                      published__isnull=False,
                                                      published__gt=image.published) \
                                              .order_by('published')[0:1]
                             image_prev = Image.objects \
-                                             .exclude(corrupted=True) \
                                              .filter(part_of_group_set=group,
                                                      published__isnull=False,
                                                      published__lt=image.published) \
@@ -656,11 +638,9 @@ class ImageDetailView(ImageDetailViewBase):
                         pass
                 elif nav_ctx == 'all':
                     image_next = Image.objects \
-                                     .exclude(corrupted=True) \
                                      .filter(published__isnull=False, published__gt=image.published) \
                                      .order_by('published')[0:1]
                     image_prev = Image.objects \
-                                     .exclude(corrupted=True) \
                                      .filter(published__isnull=False, published__lt=image.published) \
                                      .order_by('-published')[0:1]
             except Image.DoesNotExist:
@@ -688,10 +668,10 @@ class ImageDetailView(ImageDetailViewBase):
             'alias': alias,
             'mod': mod,
             'revisions': ImageService(image) \
-                .get_revisions(include_corrupted=self.request.user == image.user) \
+                .get_revisions() \
                 .select_related('image__user__userprofile'),
             'revisions_with_title_or_description': ImageService(image) \
-                .get_revisions_with_title_or_description(include_corrupted=self.request.user == image.user) \
+                .get_revisions_with_title_or_description() \
                 .select_related('image__user__userprofile'),
             'is_revision': is_revision,
             'revision_image': revision_image,
@@ -798,22 +778,9 @@ class ImageFullView(ImageDetailView):
             raise Http404
 
         self.revision_label = kwargs['r']
-
-        if image.corrupted and (
-                self.revision_label == '0' or (self.revision_label in [None, 'final'] and image.is_final)):
-            if request.user == image.user:
-                return redirect(reverse('image_edit_basic', args=(image.get_id(),)) + '?corrupted')
-            else:
-                raise Http404
-
         if self.revision_label != '0':
             try:
                 revision = image.revisions.get(label=self.revision_label)
-                if revision.corrupted:
-                    if request.user == image.user:
-                        return redirect(reverse('image_edit_revision', args=(revision.pk,)) + '?corrupted')
-                    else:
-                        raise Http404
             except ImageRevision.DoesNotExist:
                 pass
 
@@ -1119,10 +1086,6 @@ class ImageEditBasicView(ImageEditBaseView):
     form_class = ImageEditBasicForm
     template_name = 'image/edit/basic.html'
 
-    def form_valid(self, form):
-        self.object.corrupted = False
-        return super(ImageEditBasicView, self).form_valid(form)
-
     def get_success_url(self):
         image = self.get_object()
         if 'submit_gear' in self.request.POST:
@@ -1196,9 +1159,7 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
     pk_url_kwarg = 'id'
     template_name = 'image/edit/revision.html'
     context_object_name = 'revision'
-
-    def get_form_class(self):
-        return ImageEditCorruptedRevisionForm if self.object.corrupted else ImageEditRevisionForm
+    form_class = ImageEditRevisionForm
 
     def get_initial(self):
         revision = self.get_object()  # type: ImageRevision
@@ -1228,7 +1189,6 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         messages.success(self.request, _("Form saved. Thank you!"))
-        self.object.corrupted = False
         return super(ImageEditRevisionView, self).form_valid(form)
 
     def post(self, request, *args, **kwargs):

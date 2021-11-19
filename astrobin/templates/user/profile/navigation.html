@@ -29,16 +29,13 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="icon-eye-open icon-white"></i>
                 <span class="hidden-phone">{% trans "View" %}</span>
-                {% if corrupted_no > 0 and request.user == requested_user %}
-                    <i class="icon-warning-sign hidden-phone"></i>
-                {% endif %}
                 <span class="caret hidden-phone"></span>
             </a>
             <ul class="dropdown-menu">
                 <li class="nav-header">{% trans "Gallery" %}</li>
 
                 <li>
-                    <a href="{% url 'user_page' requested_user.username %}{% query_string "" "sub,active,staging,corrupted,recovered,trash" %}">
+                    <a href="{% url 'user_page' requested_user.username %}{% query_string "" "sub,active,staging,trash" %}">
                         <i class="icon-bullhorn"></i>
                         {% trans "Public Area" %}
                         <span class="badge badge-success">
@@ -49,7 +46,7 @@
 
                 {% ifequal requested_user request.user %}
                     <li>
-                        <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,staging=" "public,active,corrupted,recovered,trash" %}">
+                        <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,staging=" "public,active,trash" %}">
                             <i class="icon-lock"></i>
                             {% trans "Staging Area" %}
                             <span class="badge badge-success">
@@ -58,34 +55,9 @@
                         </a>
                     </li>
 
-                    {% if corrupted_no > 0 %}
-                        <li>
-                            <a href="{% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,corrupted=" "public,active,staging,recovered,trash" %}">
-                                <i class="icon-ambulance"></i>
-                                {% trans "Corrupted" %}
-                                <span class="badge badge-important">
-                                {{ corrupted_no }}
-                            </span>
-                            </a>
-                        </li>
-                    {% endif %}
-
-                    {% if recovered_no > 0 %}
-                        <li>
-                            <a href="
-                                    {% url 'user_page' requested_user.username %}{% query_string "sub=uploaded,recovered=" "public,active,staging,corrupted,trash" %}">
-                                <i class="icon-medkit"></i>
-                                {% trans "Recovered" %}
-                                <span class="badge badge-important">
-                                {{ recovered_no }}
-                            </span>
-                            </a>
-                        </li>
-                    {% endif %}
-
                     {% if request.user|can_restore_from_trash %}
                         <li>
-                            <a href="{% url 'user_page' requested_user.username %}{% query_string "trash=" "public,active,sub,staging,corrupted,recovered" %}">
+                            <a href="{% url 'user_page' requested_user.username %}{% query_string "trash=" "public,active,sub,staging" %}">
                                 <i class="icon-trash"></i>
                                 {% trans "Trash" %}
                                 <span class="badge badge-success">
