@@ -6,6 +6,7 @@ from hitcount.models import HitCount
 from persistent_messages.models import Message
 from tastypie import fields, http
 from tastypie.authentication import Authentication
+from tastypie.exceptions import InvalidFilterError
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 
 from astrobin.enums.license import License
@@ -537,6 +538,9 @@ class ImageResource(ModelResource):
             orm_filters['pk__in'] = [i.object_id for i in qs]
 
         if ids:
+            max = 100
+            if len(ids) > max:
+                raise InvalidFilterError(f'Please do not request over {max} image IDs')
             orm_filters['pk__in'] = ids.split(',')
 
         if user:
