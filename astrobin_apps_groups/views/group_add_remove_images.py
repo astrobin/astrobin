@@ -1,6 +1,6 @@
 from braces.views import JSONResponseMixin, LoginRequiredMixin
 from django.contrib import messages
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponseBadRequest
 from django.urls import reverse
 from django.utils.translation import ugettext as _
 from django.views.generic import UpdateView
@@ -29,9 +29,14 @@ class GroupAddRemoveImages(
 
     def post(self, request, *args, **kwargs):
         if request.is_ajax():
+            pks = request.POST.getlist('images[]')
+            max = 100
+            if len(pks) > max:
+                return HttpResponseBadRequest(f'Please do not request more than {max} images.')
+
             group = self.get_object()
             group.images.remove(*Image.objects_including_wip.filter(user=request.user))
-            images = Image.objects.filter(pk__in=request.POST.getlist('images[]'))
+            images = Image.objects.filter(pk__in=pks)
             if images:
                 if images[0].user == request.user:
                     group.images.add(*images)

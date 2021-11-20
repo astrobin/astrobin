@@ -61,25 +61,32 @@
 {% block extra_js %}
     <script type="text/javascript">
         $(document).ready(function() {
+            window.astrobinGroupAddRemoveNumberAdded = 0;
             $('.astrobin-thumbnail a').click(function(e) {
-                var $spam;
-
                 e.preventDefault();
 
-                $added = $(this).find('.added-thumbnail-overlay');
-                if ($added.length == 0)
+                let $added = $(this).find('.added-thumbnail-overlay');
+                if ($added.length === 0) {
                     $added = $(this).parent('.astrobin-image-container').siblings('.added-thumbnail-overlay')
+                }
+
+                if (window.astrobinGroupAddRemoveNumberAdded === 100 && !$added.hasClass('added')) {
+                    alert('{{ _("Please don't add more than 100 images in one go, thanks!") | escapejs }}');
+                    return;
+                }
 
                 $added.toggleClass('added');
-                if ($added.css('visibility') == 'hidden') {
+                if ($added.css('visibility') === 'hidden') {
                     $added.css('visibility', 'visible');
+                    window.astrobinGroupAddRemoveNumberAdded++;
                 } else {
                     $added.css('visibility', 'hidden');
+                    window.astrobinGroupAddRemoveNumberAdded--;
                 }
             });
 
             $('#save-button').click(function(e) {
-                var $btn, added_ids;
+                let $btn, added_ids;
 
                 e.preventDefault();
 
