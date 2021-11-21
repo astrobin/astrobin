@@ -1,3 +1,4 @@
+from annoying.functions import get_object_or_None
 from braces.views import JsonRequestResponseMixin, LoginRequiredMixin
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
@@ -11,12 +12,12 @@ class DeleteRevisions(JsonRequestResponseMixin, LoginRequiredMixin, View):
         pks = self.request_json["revisions"]
 
         if len(pks) > 0:
-            revisions = ImageRevision.all_objects.filter(image__user=request.user, pk__in=pks)
+            for pk in pks:
+                revision: ImageRevision = get_object_or_None(ImageRevision.all_objects, pk=pk)
+                if revision is None or revision.image.user != request.user:
+                    return self.render_bad_request_response()
 
-            if len(pks) != revisions.count():
-                return self.render_bad_request_response()
-
-            revisions.delete()
+                revision.delete()
 
             messages.success(request, _("%(number)s revisions(s) deleted." % {"number": len(pks)}))
 
