@@ -6,7 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from django.utils import timezone
 
-from astrobin.models import CameraRenameProposal, Gear, GearRenameRecord
+from astrobin.models import CameraRenameProposal, Gear, GearRenameRecord, GearMigrationStrategy
 from astrobin_apps_equipment.models import Camera, EquipmentBrand, Sensor
 from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_notifications.utils import push_notification
@@ -17,19 +17,12 @@ class GearService:
 
     @staticmethod
     def reset_migration_fields(queryset):
+        for item in queryset.iterator():
+            GearMigrationStrategy.objects.filter(gear=item).delete()
+
         queryset.update(
-            migration_flag=None,
-            migration_flag_timestamp=None,
-            migration_content_type=None,
-            migration_object_id=None,
-            migration_flag_moderator=None,
             migration_flag_moderator_lock=None,
             migration_flag_moderator_lock_timestamp=None,
-            migration_flag_reviewer=None,
-            migration_flag_reviewer_lock=None,
-            migration_flag_reviewer_lock_timestamp=None,
-            migration_flag_reviewer_decision=None,
-            migration_flag_reviewer_rejection_comment=None
         )
 
     @staticmethod
@@ -154,18 +147,6 @@ class GearService:
                         reviewed_timestamp=timezone.now(),
                         reviewer_decision='APPROVED',
                     )
-
-            for updateProposalGear in CameraRenameProposal.objects \
-                .filter(Q(status='APPROVED') | Q(status='AUTO_APPROVED'), gear=proposal.gear) \
-                .iterator():
-                updateProposalGear.gear.migration_flag='MIGRATE'
-                updateProposalGear.gear.migration_flat_timestamp=timezone.now()
-                updateProposalGear.gear.migration_content_type=ContentType.objects.get_for_model(Camera)
-                updateProposalGear.gear.migration_object_id=camera.pk
-                updateProposalGear.gear.flag_moderator=astrobin_user
-                updateProposalGear.gear.migration_flag_reviewer=astrobin_user
-                updateProposalGear.gear.migration_flag_reviewer_decision='APPROVED'
-                updateProposalGear.gear.save()
 
             push_notification(
                 list(set(list(User.objects.filter(userprofile__cameras__pk=proposal.gear.pk)))),

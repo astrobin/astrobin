@@ -7,6 +7,7 @@ from django.db.models.signals import pre_save, post_migrate, post_save
 from django.dispatch import receiver
 from django.urls import reverse
 from notification import models as notification
+from safedelete.signals import post_softdelete
 
 from astrobin_apps_equipment.models import Camera, CameraEditProposal
 from astrobin_apps_equipment.models.accessory_edit_proposal import AccessoryEditProposal
@@ -28,7 +29,7 @@ def create_notice_types(sender, **kwargs):
 
 
 @receiver(pre_save, sender=Camera)
-def mirror_modified_camera(sender, instance: Camera, **kwargs):
+def mirror_modified_camera_update(sender, instance: Camera, **kwargs):
     if not instance.modified:
         before_saving = get_object_or_None(Camera, pk=instance.pk)
         if before_saving:
@@ -41,6 +42,12 @@ def mirror_modified_camera(sender, instance: Camera, **kwargs):
                 max_cooling=instance.max_cooling,
                 back_focus=instance.back_focus
             )
+
+
+@receiver(post_softdelete, sender=Camera)
+def mirror_modified_camera_softdelete(sender, instance: Camera, **kwargs):
+    if not instance.modified:
+        Camera.objects.filter(brand=instance.brand, name=instance.name, modified=True).delete()
 
 
 @receiver(post_save, sender=SensorEditProposal)

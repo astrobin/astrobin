@@ -128,5 +128,10 @@ def is_equipment_moderator(user) -> bool:
 
 
 @register.filter
+def is_own_equipment_migrator(user) -> bool:
+    return user.is_authenticated and user.groups.filter(name='own_equipment_migrators').exists()
+
+
+@register.filter
 def can_access_basic_equipment_functions(user) -> bool:
-    return is_equipment_moderator(user)
+    return is_equipment_moderator(user) or is_own_equipment_migrator(user)

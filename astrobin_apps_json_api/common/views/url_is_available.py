@@ -16,7 +16,7 @@ class UrlIsAvailable(JSONResponseMixin, View):
             if not '://' in url:
                 url = f'http://{url}'
             try:
-                requests.get(url, timeout=5)
+                requests.head(url, timeout=5)
                 available = True
             except requests.ConnectionError:
                 pass

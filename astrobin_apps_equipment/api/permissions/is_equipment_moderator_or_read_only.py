@@ -6,4 +6,4 @@ class IsEquipmentModeratorOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return request.user.groups.filter(name='equipment_moderators').exists()
+        return request.user.groups.filter(name__in=['equipment_moderators', 'own_equipment_migrators']).exists()

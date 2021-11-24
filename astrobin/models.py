@@ -245,47 +245,18 @@ class Gear(models.Model):
         editable=False,
     )
 
-    # Items related to the migration to the new equipment database in astrobin_apps_equipment
-    migration_flag = models.CharField(
-        max_length=16,
-        null=True,
-        blank=True,
-        choices=(
-            ('WRONG_TYPE', 'This item is the wrong type'),
-            ('MULTIPLE_ITEMS', 'This item collates multiple objects'),
-            ('DIY', 'This item is a DIY object'),
-            ('NOT_ENOUGH_INFO', 'This item does not have enough information to decide on a migration strategy'),
-            ('MIGRATE', 'This item is ready for migration')
-        ),
-    )
-    migration_flag_timestamp = models.DateTimeField(null=True, blank=True)
-    migration_content_type = models.ForeignKey(ContentType, null=True, blank=True, on_delete=models.SET_NULL)
-    migration_object_id = models.PositiveIntegerField(null=True, blank=True)
-    migration_content_object = GenericForeignKey('migration_content_type', 'migration_object_id')
-    migration_flag_moderator = models.ForeignKey(
-        User, null=True, blank=True, on_delete=models.SET_NULL, related_name='migrated_gear_items')
     migration_flag_moderator_lock = models.ForeignKey(
-        User, null=True, blank=True, on_delete=models.SET_NULL, related_name='migrated_gear_item_locks')
-    migration_flag_moderator_lock_timestamp = models.DateTimeField(null=True, blank=True)
-
-    migration_flag_reviewer = models.ForeignKey(
-        User, null=True, blank=True, on_delete=models.SET_NULL, related_name='reviewed_for_migration_gear_items')
-    migration_flag_reviewer_lock = models.ForeignKey(
-        User, null=True, blank=True, on_delete=models.SET_NULL, related_name='reviewed_for_migration_gear_item_locks')
-    migration_flag_reviewer_lock_timestamp = models.DateTimeField(null=True, blank=True)
-    migration_flag_reviewer_decision = models.CharField(
-        max_length=32,
+        User,
         null=True,
         blank=True,
-        choices=[
-            ("APPROVED", "Approved"),
-            ("REJECTED_INCORRECT_STRATEGY", "Rejected: incorrect migration strategy"),
-            ("REJECTED_WRONG_MIGRATION_TARGET", "Rejected: wrong migration target"),
-            ("REJECTED_BAD_MIGRATION_TARGET", "Rejected: bad migration target"),
-            ("REJECTED_OTHER", "Rejected: other"),
-        ]
+        on_delete=models.SET_NULL,
+        related_name='migrated_gear_item_locks',
     )
-    migration_flag_reviewer_rejection_comment = models.TextField(null=True, blank=True)
+
+    migration_flag_moderator_lock_timestamp = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
 
     def __str__(self):
         make = self.get_make()
@@ -360,6 +331,104 @@ class GearUserInfo(models.Model):
     class Meta:
         app_label = 'astrobin'
         unique_together = ('gear', 'user')
+
+
+class GearMigrationStrategy(models.Model):
+    gear = models.ForeignKey(
+        Gear,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+        related_name='migration_strategies',
+    )
+
+    user = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name='gear_migration_strateogies',
+    )
+
+    migration_flag = models.CharField(
+        max_length=16,
+        null=False,
+        blank=False,
+        choices=(
+            ('WRONG_TYPE', 'This item is the wrong type'),
+            ('MULTIPLE_ITEMS', 'This item collates multiple objects'),
+            ('DIY', 'This item is a DIY object'),
+            ('NOT_ENOUGH_INFO', 'This item does not have enough information to decide on a migration strategy'),
+            ('MIGRATE', 'This item is ready for migration')
+        ),
+    )
+
+    migration_flag_timestamp = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
+    migration_content_type = models.ForeignKey(
+        ContentType,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL
+    )
+
+    migration_object_id = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+    )
+
+    migration_content_object = GenericForeignKey(
+        'migration_content_type',
+        'migration_object_id',
+    )
+
+    migration_flag_moderator = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='migrated_gear_items',
+    )
+
+    migration_flag_reviewer_lock = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='reviewed_for_migration_gear_item_locks',
+    )
+
+    migration_flag_reviewer_lock_timestamp = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
+    migration_flag_reviewer = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='reviewed_for_migration_gear_items',
+    )
+
+    migration_flag_reviewer_decision = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True,
+        choices=[
+            ("APPROVED", "Approved"),
+        ],
+    )
+
+    class Meta:
+        app_label = 'astrobin'
+        unique_together = (
+            'gear',
+            'user',
+        )
 
 
 class GearRenameProposal(models.Model):

@@ -14,9 +14,10 @@ from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
 
-from astrobin.models import Gear
+from astrobin.models import GearMigrationStrategy
 from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_read_only import IsEquipmentModeratorOrReadOnly
 from astrobin_apps_equipment.models import EquipmentItem
+from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
 from astrobin_apps_notifications.utils import push_notification, build_notification_url
 from common.services import AppRedirectionService
@@ -130,6 +131,15 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['POST'])
     def reject(self, request, pk):
+        from astrobin_apps_equipment.models import Sensor
+        from astrobin_apps_equipment.models import Camera
+        from astrobin_apps_equipment.models import CameraEditProposal
+        from astrobin_apps_equipment.models import Telescope
+        from astrobin_apps_equipment.models import Mount
+        from astrobin_apps_equipment.models import Filter
+        from astrobin_apps_equipment.models import Accessory
+        from astrobin_apps_equipment.models import Software
+
         model = self.get_serializer().Meta.model
         item: EquipmentItem = get_object_or_404(model.objects, pk=pk)
 
@@ -160,25 +170,33 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 }
             )
 
-        item.name = '[DELETED] %s' % item.name
-        item.save()
+        if '[DELETED] ' not in item.name:
+            item.name = f'[DELETED] ({item.id}) {item.name}'
+            item.save()
+
+        if item.klass == EquipmentItemKlass.SENSOR:
+            Camera.all_objects.filter(sensor=item).update(sensor=None)
+            CameraEditProposal.all_objects.filter(sensor=item).update(sensor=None)
+
         item.delete()
 
-        Gear.objects.filter(
+        GearMigrationStrategy.objects.filter(
             migration_flag='MIGRATE',
             migration_content_type=ContentType.objects.get_for_model(model),
             migration_object_id=item.id,
-        ).update(
-            migration_flag=None,
-            migration_content_type=None,
-            migration_object_id=None,
-            migration_flag_moderator=None,
-            migration_flag_moderator_lock=None,
-            migration_flag_moderator_lock_timestamp=None,
-            migration_flag_reviewer=None,
-            migration_flag_reviewer_decision='REJECTED_BAD_MIGRATION_TARGET',
-            migration_flag_reviewer_rejection_comment=request.data.get('comment')
-        )
+        ).delete()
+
+        brand_has_items = False
+        for klass in (Sensor, Camera, Telescope, Mount, Filter, Accessory, Software):
+            if klass.objects.filter(brand=item.brand).exists():
+                brand_has_items = True
+                break
+
+        if not brand_has_items:
+            if '[DELETED] ' not in item.brand.name:
+                item.brand.name = f'[DELETED] ({item.brand.id}) {item.brand.name}'
+                item.brand.save()
+            item.brand.delete()
 
         serializer = self.serializer_class(item)
         return Response(serializer.data)
