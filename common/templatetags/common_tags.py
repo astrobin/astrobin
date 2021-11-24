@@ -11,6 +11,7 @@ from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 
 from common.services import AppRedirectionService, DateTimeService
+from common.services.highlighting_service import HighlightingService
 from common.services.pagination_service import PaginationService
 
 register = Library()
@@ -250,3 +251,42 @@ def ensure_url_protocol(url: str) -> str:
         return url
 
     return f'http://{url}'
+
+
+class HighlightTextNode(template.Node):
+
+    def __init__(self, text, terms):
+        self.text = template.Variable(text)
+        self.terms = template.Variable(terms)
+
+    def render(self, context):
+        text = str(self.text.resolve(context))
+        terms = str(self.terms.resolve(context))
+
+        return HighlightingService(text, terms).render_html()
+
+
+@register.tag
+def highlight_text(parser, token):
+    bits = token.split_contents()
+    tag_name = bits[0]
+    text = bits[1]
+
+    if len(bits) < 4:
+        raise template.TemplateSyntaxError(
+            "'%s' tag requires an object and a query provided by 'with'." % tag_name
+        )
+
+    if bits[2] != "with":
+        raise template.TemplateSyntaxError(
+            "'%s' tag's second argument should be 'with'." % tag_name
+        )
+
+    query = bits[3]
+
+    return HighlightTextNode(text, query)
+
+
+@register.filter
+def highlight_text_filter(text, terms):
+    return HighlightingService(text, terms).render_html()

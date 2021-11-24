@@ -750,6 +750,7 @@ class ImageDetailView(ImageDetailViewBase):
             'w': w,
             'h': h,
             'image_uses_full_width': w is not None and w >= 940,
+            'search_query': f'{self.request.GET.get("q", "")} {self.request.GET.get("telescope", "")} {self.request.GET.get("camera", "")}'.strip(),
         })
 
         return response_dict
