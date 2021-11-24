@@ -37,7 +37,8 @@ from haystack.query import SearchQuerySet
 from registration.backends.hmac.views import RegistrationView
 from requests import Response
 
-from astrobin.models import BroadcastEmail, Image, DataDownloadRequest, ImageRevision, Gear, CameraRenameProposal
+from astrobin.models import BroadcastEmail, Image, DataDownloadRequest, ImageRevision, Gear, CameraRenameProposal, \
+    GearMigrationStrategy
 from astrobin.utils import inactive_accounts, never_activated_accounts, never_activated_accounts_to_be_deleted
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
@@ -623,6 +624,12 @@ def expire_gear_migration_locks():
                 migration_flag_moderator_lock_timestamp__lt=timezone.now() - timedelta(hours=1)) \
         .update(migration_flag_moderator_lock=None,
                 migration_flag_moderator_lock_timestamp=None)
+
+    GearMigrationStrategy.objects \
+        .filter(migration_flag_reviewer_lock__isnull=False,
+                migration_flag_reviewer_lock_timestamp__lt=timezone.now() - timedelta(hours=1)) \
+        .update(migration_flag_reviewer_lock=None,
+                migration_flag_reviewer_lock_timestamp=None)
 
 
 @shared_task(time_limit=600, acks_late=True)

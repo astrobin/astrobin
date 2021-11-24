@@ -26,3 +26,22 @@ class SignalsTest(TestCase):
         modified = Camera.objects.get(pk=modified.pk)
 
         self.assertEqual(camera.name, modified.name)
+
+    def test_mirror_modified_camera_deletion(self):
+        camera = EquipmentGenerators.camera()
+        modified = EquipmentGenerators.camera(
+            created_by=camera.created_by,
+            brand=camera.brand,
+            name=camera.name,
+            image=camera.image,
+            type=camera.type,
+            sensor=camera.sensor,
+            cooled=camera.cooled,
+            max_cooling=camera.max_cooling,
+            back_focus=camera.back_focus,
+            modified=True,
+        )
+
+        camera.delete()
+
+        self.assertFalse(Camera.objects.filter(pk=modified.pk).exists())

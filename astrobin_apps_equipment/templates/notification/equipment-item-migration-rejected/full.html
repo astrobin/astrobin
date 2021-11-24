@@ -1,0 +1,53 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans trimmed with user=user make=legacy_item.make name=legacy_item.name %}
+        <a href="{{ user_url }}">{{ user }}</a> rejected the equipment item for
+        <em><strong>{{ make }}</strong> {{ name }}</em>
+        that you created.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans %}Proposed strategy{% endblocktrans %}: <strong>{{ migration_flag }}</strong>
+</p>
+
+{% if target_item %}
+    <p>
+        {% blocktrans %}Target item{% endblocktrans %}: <a href="{{ target_url }}">{{ target_item }}</a>
+    </p>
+{% endif %}
+
+<p>
+    {% blocktrans %}Reviewer's reason{% endblocktrans %}: <strong>{{ reason }}</strong>
+
+    <br/>
+
+    {% blocktrans %}Reviewer's comment{% endblocktrans %}: <em>{{ comment | default:'-' }}</em>
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        The equipment item still needs to be migrated to the new database, so please try again after reading the reason
+        and the comment provided by the reviewer below.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        To try again with different parameters, please visit this page:
+    {% endblocktrans %}
+</p>
+
+<a href="{{ migration_tool_url }}" class="btn btn-primary">
+    {% trans "Migration tool" %}
+</a>
+
+<br/>
+<br/>
+
+<p>
+    {% blocktrans trimmed %}
+        Thanks for your cooperation!
+    {% endblocktrans %}
+</p>

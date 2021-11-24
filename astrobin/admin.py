@@ -8,7 +8,7 @@ from django.utils import timezone
 from astrobin.models import Gear, GearUserInfo, Telescope, \
     Mount, Camera, FocalReducer, Software, Filter, Accessory, DeepSky_Acquisition, SolarSystem_Acquisition, Image, \
     ImageRevision, Request, ImageRequest, UserProfile, Location, AppApiKeyRequest, App, ImageOfTheDay, \
-    ImageOfTheDayCandidate, Collection, BroadcastEmail, CameraRenameProposal, GearRenameRecord
+    ImageOfTheDayCandidate, Collection, BroadcastEmail, CameraRenameProposal, GearRenameRecord, GearMigrationStrategy
 from astrobin.services.gear_service import GearService
 from astrobin.tasks import send_broadcast_email
 from astrobin.utils import inactive_accounts
@@ -76,6 +76,10 @@ class GearAdmin(admin.ModelAdmin):
         GearService.reset_migration_fields(queryset)
 
     reset_migration_fields.short_description = 'Reset migration fields'
+
+
+class GearMigrationStrategyAdmin(admin.ModelAdmin):
+    list_display = ('gear', 'user', 'migration_flag',)
 
 
 class CameraRenameProposalAdmin(admin.ModelAdmin):
@@ -250,6 +254,7 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Gear, GearAdmin)
+admin.site.register(GearMigrationStrategy, GearMigrationStrategyAdmin)
 admin.site.register(GearUserInfo)
 admin.site.register(GearRenameRecord)
 admin.site.register(Telescope)

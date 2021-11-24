@@ -5,6 +5,7 @@ from astrobin.api2.views.accessory_view_set import AccessoryViewSet
 from astrobin.api2.views.camera_rename_proposal_view_set import CameraRenameProposalViewSet
 from astrobin.api2.views.camera_view_set import CameraViewSet
 from astrobin.api2.views.filter_view_set import FilterViewSet
+from astrobin.api2.views.gear_migration_strategy_view_set import GearMigrationStrategyViewSet
 from astrobin.api2.views.gear_view_set import GearViewSet
 from astrobin.api2.views.location_view_set import LocationViewSet
 from astrobin.api2.views.mount_view_set import MountViewSet
@@ -13,6 +14,7 @@ from astrobin.api2.views.telescope_view_set import TelescopeViewSet
 
 router = routers.DefaultRouter()
 router.register(r'gear', GearViewSet, basename='gear')
+router.register(r'gear-migration-strategy', GearMigrationStrategyViewSet, basename='gear-migration-strategy')
 router.register(r'camera', CameraViewSet, basename='camera')
 router.register(r'camera-rename-proposal', CameraRenameProposalViewSet, basename='camera-rename-proposal')
 router.register(r'telescope', TelescopeViewSet, basename='telescope')

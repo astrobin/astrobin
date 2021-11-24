@@ -1,0 +1,9 @@
+{% load i18n %}
+
+<a href="{{ item_url }}">
+    {% blocktrans trimmed with user=user make=legacy_item.make name=legacy_item.name %}
+        <strong>{{ user }}</strong> rejected the equipment item for
+        <em><strong>{{ make }}</strong> {{ name }}</em>
+        that you created.
+    {% endblocktrans %}
+</a>
