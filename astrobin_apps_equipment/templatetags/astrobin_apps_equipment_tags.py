@@ -37,15 +37,17 @@ def equipment_item_listings(gear, country):
 
 
 @register.simple_tag
-def equipment_listing_url_with_utm_tags(url):
-    if 'utm_' in url:
+def equipment_listing_url_with_tags(listing: EquipmentBrandListing, source: str) -> str:
+    url = listing.url
+
+    if 'brand' in url or 'retailer' in url or 'source' in url:
         return url
 
     tags_separator = '?'
     if tags_separator in url:
         tags_separator = '&'
 
-    return "%s%sutm_source=astrobin&utm_medium=link&utm_campaign=webshop-integration" % (url, tags_separator)
+    return f'{url}{tags_separator}brand={listing.brand.name}&retailer={listing.retailer.name}&source={source}'
 
 
 @register.filter
