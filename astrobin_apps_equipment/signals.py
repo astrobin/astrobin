@@ -3,9 +3,10 @@ from django.apps import apps
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.db.models.signals import pre_save, post_migrate, post_save
+from django.db.models.signals import post_migrate, post_save, pre_save
 from django.dispatch import receiver
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
 from notification import models as notification
 from safedelete.signals import post_softdelete
 
@@ -17,7 +18,7 @@ from astrobin_apps_equipment.models.sensor_edit_proposal import SensorEditPropos
 from astrobin_apps_equipment.models.software_edit_proposal import SoftwareEditProposal
 from astrobin_apps_equipment.models.telescope_edit_proposal import TelescopeEditProposal
 from astrobin_apps_equipment.notice_types import EQUIPMENT_NOTICE_TYPES
-from astrobin_apps_notifications.utils import push_notification, build_notification_url
+from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.services import AppRedirectionService
 from nested_comments.models import NestedComment
 
@@ -68,14 +69,18 @@ def send_edit_proposal_created_notification(sender, instance, created, **kwargs)
         if owner != user:
             recipients.append(owner)
 
-        previous_proposals = User.objects.filter(**{
-            f'astrobin_apps_equipment_{instance.__class__.__name__.lower()}_edit_proposals__'
-            f'edit_proposal_target': target
-        })
-        previous_proposals_reviewed = User.objects.filter(**{
-            f'astrobin_apps_equipment_{instance.__class__.__name__.lower()}_edit_proposals_reviewed__'
-            f'edit_proposal_target': target
-        })
+        previous_proposals = User.objects.filter(
+            **{
+                f'astrobin_apps_equipment_{instance.__class__.__name__.lower()}_edit_proposals__'
+                f'edit_proposal_target': target
+            }
+        )
+        previous_proposals_reviewed = User.objects.filter(
+            **{
+                f'astrobin_apps_equipment_{instance.__class__.__name__.lower()}_edit_proposals_reviewed__'
+                f'edit_proposal_target': target
+            }
+        )
         commenters = User.objects.filter(
             pk__in=NestedComment.objects.filter(
                 content_type=ContentType.objects.get_for_model(instance.__class__),
@@ -96,8 +101,9 @@ def send_edit_proposal_created_notification(sender, instance, created, **kwargs)
                 {
                     'user': user.userprofile.get_display_name(),
                     'user_url': build_notification_url(
-                        settings.BASE_URL + reverse('user_page', args=(user.username,))),
-                    'item': f'{target.brand.name} {target.name}',
+                        settings.BASE_URL + reverse('user_page', args=(user.username,))
+                    ),
+                    'item': f'{target.brand.name if target.brand else _("(DIY)")} {target.name}',
                     'item_url': build_notification_url(
                         AppRedirectionService.redirect(
                             f'/equipment'

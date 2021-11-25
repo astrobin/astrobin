@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from django.db.models import QuerySet, Q
+from django.db.models import Q, QuerySet
 from django.http import HttpRequest
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.decorators import action
@@ -14,7 +15,7 @@ from rest_framework.response import Response
 from astrobin.api2.serializers.gear_migration_strategy_serializer import GearMigrationStrategySerializer
 from astrobin.models import GearMigrationStrategy
 from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_read_only import IsEquipmentModeratorOrReadOnly
-from astrobin_apps_notifications.utils import push_notification, build_notification_url
+from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.services import AppRedirectionService
 
 
@@ -109,12 +110,13 @@ class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
             {
                 'user': request.user.userprofile.get_display_name(),
                 'user_url': build_notification_url(
-                    settings.BASE_URL + reverse('user_page', args=(request.user.username,))),
+                    settings.BASE_URL + reverse('user_page', args=(request.user.username,))
+                ),
                 'migration_flag': strategy.migration_flag,
                 'reason': request.data.get('reason'),
                 'comment': request.data.get('comment'),
                 'legacy_item': strategy.gear,
-                'target_item': f'{target.brand.name} {target.name}' if target else None,
+                'target_item': f'{target.brand.name if target.brand else _("(DIY)")} {target.name}' if target else None,
                 'target_url': build_notification_url(
                     AppRedirectionService.redirect(
                         f'/equipment'
@@ -151,12 +153,13 @@ class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
             {
                 'user': request.user.userprofile.get_display_name(),
                 'user_url': build_notification_url(
-                    settings.BASE_URL + reverse('user_page', args=(request.user.username,))),
+                    settings.BASE_URL + reverse('user_page', args=(request.user.username,))
+                ),
                 'migration_flag': strategy.migration_flag,
                 'reason': request.data.get('reason'),
                 'comment': request.data.get('comment'),
                 'legacy_item': strategy.gear,
-                'target_item': f'{target.brand.name} {target.name}' if target else None,
+                'target_item': f'{target.brand.name if target.brand else _("(DIY)")} {target.name}' if target else None,
                 'target_url': build_notification_url(
                     AppRedirectionService.redirect(
                         f'/equipment'

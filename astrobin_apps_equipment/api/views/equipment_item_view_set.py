@@ -2,9 +2,10 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
 from django.db.models import Q, Value
-from django.db.models.functions import Lower, Concat
+from django.db.models.functions import Concat, Lower
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
@@ -19,7 +20,7 @@ from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_read_only
 from astrobin_apps_equipment.models import EquipmentItem
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
-from astrobin_apps_notifications.utils import push_notification, build_notification_url
+from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.services import AppRedirectionService
 
 
@@ -68,7 +69,8 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                           .filter(
                 Q(brand=int(brand)) &
                 Q(Q(distance__lte=.7) | Q(name__icontains=q)) &
-                ~Q(name=q)) \
+                ~Q(name=q)
+            ) \
                           .order_by('distance')[:10]
 
         serializer = self.serializer_class(objects, many=True)
@@ -106,7 +108,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         item.reviewer_decision = 'APPROVED'
         item.reviewer_comment = request.data.get('comment')
 
-        if item.created_by:
+        if item.created_by and item.created_by != request.user:
             push_notification(
                 [item.created_by],
                 request.user,
@@ -114,11 +116,13 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 {
                     'user': request.user.userprofile.get_display_name(),
                     'user_url': build_notification_url(
-                        settings.BASE_URL + reverse('user_page', args=(request.user.username,))),
-                    'item': f'{item.brand.name} {item.name}',
+                        settings.BASE_URL + reverse('user_page', args=(request.user.username,))
+                    ),
+                    'item': f'{item.brand.name if item.brand else _("(DIY)")} {item.name}',
                     'item_url': build_notification_url(
                         AppRedirectionService.redirect(
-                            f'/equipment/explorer/{EquipmentItemService(item).get_type()}/{item.pk}')
+                            f'/equipment/explorer/{EquipmentItemService(item).get_type()}/{item.pk}'
+                        )
                     ),
                     'comment': item.reviewer_comment,
                 }
@@ -155,7 +159,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         item.reviewer_rejection_reason = request.data.get('reason')
         item.reviewer_comment = request.data.get('comment')
 
-        if item.created_by:
+        if item.created_by and item.created_by != request.user:
             push_notification(
                 [item.created_by],
                 request.user,
@@ -163,8 +167,9 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 {
                     'user': request.user.userprofile.get_display_name(),
                     'user_url': build_notification_url(
-                        settings.BASE_URL + reverse('user_page', args=(request.user.username,))),
-                    'item': f'{item.brand.name} {item.name}',
+                        settings.BASE_URL + reverse('user_page', args=(request.user.username,))
+                    ),
+                    'item': f'{item.brand.name if item.brand else _("(DIY)")} {item.name}',
                     'reject_reason': item.reviewer_rejection_reason,
                     'comment': item.reviewer_comment,
                 }
@@ -186,17 +191,18 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             migration_object_id=item.id,
         ).delete()
 
-        brand_has_items = False
-        for klass in (Sensor, Camera, Telescope, Mount, Filter, Accessory, Software):
-            if klass.objects.filter(brand=item.brand).exists():
-                brand_has_items = True
-                break
+        if item.brand:
+            brand_has_items = False
+            for klass in (Sensor, Camera, Telescope, Mount, Filter, Accessory, Software):
+                if klass.objects.filter(brand=item.brand).exists():
+                    brand_has_items = True
+                    break
 
-        if not brand_has_items:
-            if '[DELETED] ' not in item.brand.name:
-                item.brand.name = f'[DELETED] ({item.brand.id}) {item.brand.name}'
-                item.brand.save()
-            item.brand.delete()
+            if not brand_has_items:
+                if '[DELETED] ' not in item.brand.name:
+                    item.brand.name = f'[DELETED] ({item.brand.id}) {item.brand.name}'
+                    item.brand.save()
+                item.brand.delete()
 
         serializer = self.serializer_class(item)
         return Response(serializer.data)

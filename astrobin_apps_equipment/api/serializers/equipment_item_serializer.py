@@ -1,8 +1,12 @@
 from rest_framework import serializers
 from rest_framework.exceptions import PermissionDenied
 
+from astrobin_apps_equipment.models import EquipmentBrand
+
 
 class EquipmentItemSerializer(serializers.ModelSerializer):
+    # brand = serializers.PrimaryKeyRelatedField(required=False, queryset=EquipmentBrand.objects.all)
+
     class Meta:
         fields = [
             'klass',

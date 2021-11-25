@@ -76,7 +76,7 @@ class EquipmentItemEditProposalMixin(models.Model):
 
     def get_absolute_url_base(self, type: str) -> str:
         target_id: int = self.edit_proposal_target.id
-        slug: str = slugify(f'{self.brand.name} {self.name}')
+        slug: str = slugify(f'{self.brand.name if self.brand else "diy"} {self.name}')
         id: int = self.id
 
         return AppRedirectionService.redirect(f'/equipment/explorer/{type}/{target_id}/{slug}/edit-proposals/{id}')

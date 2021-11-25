@@ -3,17 +3,17 @@ from __future__ import annotations
 from django.conf import settings
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
-
 from rest_framework.status import HTTP_400_BAD_REQUEST
 
 from astrobin_apps_equipment.api.views.equipment_item_view_set import EquipmentItemViewSet
 from astrobin_apps_equipment.models import EquipmentItem
 from astrobin_apps_equipment.models.equipment_item_edit_proposal_mixin import EquipmentItemEditProposalMixin
-from astrobin_apps_notifications.utils import push_notification, build_notification_url
+from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.services import AppRedirectionService
 
 
@@ -31,7 +31,8 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
 
     def approve(self, request, pk):
         edit_proposal: (EquipmentItemEditProposalMixin | EquipmentItem) = get_object_or_404(
-            self.get_serializer().Meta.model, pk=pk)
+            self.get_serializer().Meta.model, pk=pk
+        )
 
         check_permissions, response = self.check_edit_proposal_permissions(request, edit_proposal)
         if not check_permissions:
@@ -52,14 +53,15 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
         edit_proposal.save()
 
         push_notification(
-            list({edit_proposal.edit_proposal_by, target.created_by}),
+            [x for x in list({edit_proposal.edit_proposal_by, target.created_by}) if x != request.user],
             request.user,
             'equipment-edit-proposal-approved',
             {
                 'user': request.user.userprofile.get_display_name(),
                 'user_url': build_notification_url(
-                    settings.BASE_URL + reverse('user_page', args=(request.user.username,))),
-                'item': f'{target.brand.name} {target.name}',
+                    settings.BASE_URL + reverse('user_page', args=(request.user.username,))
+                ),
+                'item': f'{target.brand.name if target.brand else _("(DIY)")} {target.name}',
                 'item_url': build_notification_url(
                     AppRedirectionService.redirect(
                         f'/equipment'
@@ -104,14 +106,15 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
         target = edit_proposal.edit_proposal_target
 
         push_notification(
-            list({edit_proposal.edit_proposal_by, target.created_by}),
+            [x for x in list({edit_proposal.edit_proposal_by, target.created_by}) if x != request.user],
             request.user,
             'equipment-edit-proposal-rejected',
             {
                 'user': request.user.userprofile.get_display_name(),
                 'user_url': build_notification_url(
-                    settings.BASE_URL + reverse('user_page', args=(request.user.username,))),
-                'item': f'{target.brand.name} {target.name}',
+                    settings.BASE_URL + reverse('user_page', args=(request.user.username,))
+                ),
+                'item': f'{target.brand.name if target.brand else _("(DIY)")} {target.name}',
                 'item_url': build_notification_url(
                     AppRedirectionService.redirect(
                         f'/equipment'
