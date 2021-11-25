@@ -89,7 +89,8 @@ class EquipmentItem(SafeDeleteModel):
         EquipmentBrand,
         related_name='%(app_label)s_brand_%(class)ss',
         on_delete=PROTECT,
-        null=False,
+        null=True,
+        blank=True,
     )
 
     name = models.CharField(
@@ -122,10 +123,10 @@ class EquipmentItem(SafeDeleteModel):
 
     @property
     def slug(self):
-        return slugify(f'{self.brand.name} {self.name}').replace('_', '-')
+        return slugify(f'{self.brand.name if self.brand else "diy"} {self.name}').replace('_', '-')
 
-    def __unicode__(self):
-        return '%s %s' % (self.brand.name, self.name)
+    def __str__(self):
+        return '%s %s' % (self.brand.name if self.brand else "DIY", self.name)
 
     class Meta:
         abstract = True
