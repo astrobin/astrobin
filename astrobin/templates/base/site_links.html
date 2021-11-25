@@ -149,7 +149,7 @@
                     <li class="explore-menu-equipment">
                         <a href="{% app_redirection_service '/equipment/explorer' %}">
                             <i class="icon-camera"></i>
-                            {% trans "Equipment" %} <em>(beta)</em>
+                            {% trans "Equipment" %} <em>{% trans "(beta)" %}</em>
                         </a>
                     </li>
                 {% endif %}
@@ -211,7 +211,7 @@
                     <li class="explore-menu-contributors-list">
                         <a href="{% url 'contributors_list' %}">
                             <i class="icon-file-text"></i>
-                            {% trans "Contributors list" %} {% trans "(beta)" %}
+                            {% trans "Contributors list" %} <em>{% trans "(beta)" %}</em>
                         </a>
                     </li>
                 {% endif %}
