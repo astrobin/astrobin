@@ -35,7 +35,11 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         sort = self.request.GET.get('sort')
 
         manager = self.get_serializer().Meta.model.objects
-        queryset = manager.all()
+
+        if self.request.user.is_authenticated:
+            queryset = manager.filter(Q(brand__isnull=False) | Q(created_by=self.request.user))
+        else:
+            queryset = manager.filter(brand__isnull=False)
 
         if q:
             queryset = queryset.annotate(

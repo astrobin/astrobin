@@ -74,3 +74,21 @@ class TestApiTelescopeViewSet(TestCase):
         self.assertEquals(201, response.status_code)
         self.assertEquals(user.pk, response.data['created_by'])
 
+    def test_list_returns_only_own_DIYs(self):
+        user = Generators.user()
+        first = EquipmentGenerators.telescope(created_by=user)
+        first.brand = None
+        first.save()
+
+        second = EquipmentGenerators.telescope()
+        second.brand = None
+        second.save()
+
+        client = APIClient()
+        client.force_authenticate(user=user)
+
+        response = client.get(reverse('astrobin_apps_equipment:telescope-list'), format='json')
+        self.assertEquals(1, response.data['count'])
+        self.assertEquals(first.name, response.data['results'][0]['name'])
+
+
