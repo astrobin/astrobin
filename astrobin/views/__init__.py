@@ -2620,6 +2620,7 @@ def gear_popover_ajax(request, id, image_id):
         'is_authenticated': request.user.is_authenticated,
         'IMAGES_URL': settings.IMAGES_URL,
         'REQUEST_COUNTRY': get_client_country_code(request),
+        'search_query': request.GET.get('q', ''),
     })
 
     response_dict = {

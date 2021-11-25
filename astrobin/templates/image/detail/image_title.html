@@ -6,12 +6,17 @@
     <div class="row-fluid">
         <div class="span12">
             <h3 class="image-title">
-                {{image.title|default:_("(no title)")}}
+                {% if image.title %}
+                    {% highlight_text image.title with search_query %}
+                {% else %}
+                    {% trans "(no title)" %}
+                {% endif %}
+
             </h3>
             {% if revision_image and revision_image.title %}
                 <h4 class="revision-title">
                     <span class="title-heading">{% trans "Revision title" %}: </span>
-                    {{ revision_image.title }}
+                    {% highlight_text revision_image.title with search_query %}
                 </h4>
             {% endif %}
         </div>

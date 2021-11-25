@@ -13,9 +13,9 @@
                 </div>
 
                 {% if image.description_bbcode %}
-                    {{ image.description_bbcode|bbcode|safe }}
+                    {{ image.description_bbcode|bbcode|highlight_text_filter:search_query|safe }}
                 {% else %}
-                    {{ image.description|strip_html|safe|linebreaks }}
+                    {{ image.description|strip_html|highlight_text_filter:search_query|safe|linebreaks }}
                 {% endif %}
             </div>
         </div>

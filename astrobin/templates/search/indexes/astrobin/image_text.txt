@@ -2,6 +2,11 @@
 {{object.user.userprofile.real_name}}
 {{object.title}}
 
+{% for r in object.revisions.all %}
+    {{r.title}}
+    {{r.description}}
+{% endfor %}
+
 {% if object.description_bbcode %}
     {{object.description_bbcode}}
 {% else %}

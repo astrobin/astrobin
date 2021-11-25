@@ -1,5 +1,7 @@
 from django.db.models import QuerySet, Q
 from django.template import Library
+from fuzzywuzzy import fuzz
+from fuzzywuzzy.utils import asciidammit
 
 from astrobin.models import Gear, Image
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
@@ -135,3 +137,17 @@ def is_own_equipment_migrator(user) -> bool:
 @register.filter
 def can_access_basic_equipment_functions(user) -> bool:
     return is_equipment_moderator(user) or is_own_equipment_migrator(user)
+
+
+@register.filter
+def has_matching_brand_request_query(gear: Gear, q) -> bool:
+    brand = gear.make
+
+    if brand in (None, '') or q in (None, ''):
+        return False
+
+    similarity = fuzz.partial_ratio(asciidammit(q.lower()), asciidammit(brand.lower()))
+
+    return similarity > 85
+
+

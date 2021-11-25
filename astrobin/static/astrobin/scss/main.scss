@@ -78,6 +78,20 @@ body {
   }
 }
 
+span.highlighted-text {
+  color: $grey-7;
+  background: gold;
+  padding: 0 4px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+a {
+  span.highlighted-text {
+    color: inherit;
+  }
+}
+
 body.full {
   padding-top: 0;
 
@@ -2468,7 +2482,6 @@ form.avatar-delete {
   padding: 0;
   color: $link-color;
   cursor: pointer;
-
 
   &:hover {
     border-bottom: 1px dotted $link-color;

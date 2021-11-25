@@ -157,13 +157,13 @@
 
                     {% if r.title %}
                         <p>
-                            <strong>{% trans "Title" %}:</strong> {{ r.title }}
+                            <strong>{% trans "Title" %}:</strong> {% highlight_text r.title with search_query %}
                         </p>
                     {% endif %}
 
                     {% if r.description %}
                         <p>
-                            <strong>{% trans "Description" %}:</strong> {{r.description|strip_html|safe}}
+                            <strong>{% trans "Description" %}:</strong> {{r.description|strip_html|highlight_text_filter:search_query|safe}}
                         </p>
                     {% endif %}
 
