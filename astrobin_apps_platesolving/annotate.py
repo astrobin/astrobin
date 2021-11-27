@@ -23,22 +23,21 @@ class Annotator:
     def drawAnnotations(self, draw, annotations):
         def getAnnotationFont(annotation):
             font_path = os.path.join(os.getcwd(), 'astrobin/static/astrobin/fonts/arial.ttf')
-            font_small = ImageFont.truetype(font_path, int(round(16 * self.resampling_factor)))
-            font_medium = ImageFont.truetype(font_path, int(round(32 * self.resampling_factor)))
-            font_large = ImageFont.truetype(font_path, int(round(48 * self.resampling_factor)))
-            font_xlarge = ImageFont.truetype(font_path, int(round(64 * self.resampling_factor)))
 
             radius = annotation['radius']
             if radius < 10 * self.resampling_factor:
-                font = font_small
+                size = 16
             elif radius < 50 * self.resampling_factor:
-                font = font_medium
+                size = 30
             elif radius < 100 * self.resampling_factor:
-                font = font_large
+                size = 44
             else:
-                font = font_xlarge
+                size = 58
 
-            return font
+            if annotation['type'] in [ 'bright', 'hd']:
+                size = size / 2
+
+            return ImageFont.truetype(font_path, int(round(size * self.resampling_factor)))
 
         def getAnnotationText(annotation):
             return ' / '.join(annotation['names'])
@@ -113,6 +112,8 @@ class Annotator:
         annotations.sort(key=lambda x: x['radius'])
         for annotation in annotations:
             if annotation['type'] in supported_types:
+                if annotation['type'] == 'bright' and 'vmag' in annotation and annotation['vmag'] > 2:
+                    continue
                 x = annotation['pixelx'] = annotation['pixelx'] * self.resampling_factor
                 y = annotation['pixely'] = annotation['pixely'] * self.resampling_factor
                 radius = annotation['radius'] = \
