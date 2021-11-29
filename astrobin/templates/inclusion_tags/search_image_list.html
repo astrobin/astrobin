@@ -33,7 +33,7 @@
                             {% endblocktrans %}
                         </span>
 
-                        {% equipment_listing_url_with_tags equipment_brand_listing.0 'search' as url_with_tags %}
+                        {% equipment_listing_url_with_tags equipment_brand_listings.0 'search' as url_with_tags %}
                         <a class="btn btn-primary" href="{{ url_with_tags }}"
                            onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')" target="_blank">
                             <i class="icon-shopping-cart"></i>
