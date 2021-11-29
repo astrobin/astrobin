@@ -158,23 +158,23 @@ class EquipmentGenerators:
         )
 
     @staticmethod
-    def equipment_brand_listing():
-        brand = EquipmentGenerators.equipment_brand()
-        retailer = EquipmentGenerators.equipment_retailer()
+    def equipment_brand_listing(**kwargs):
+        brand = kwargs.get('brand', EquipmentGenerators.equipment_brand())
+        retailer = kwargs.get('retailer', EquipmentGenerators.equipment_retailer())
 
         return EquipmentBrandListing.objects.create(
             brand=brand,
             retailer=retailer,
-            url="%s/shop/%s" % (retailer.website, slugify(brand)),
+            url=kwargs.get('url', "%s/shop/%s" % (retailer.website, slugify(brand))),
         )
 
     @staticmethod
-    def equipment_item_listing():
-        brand = EquipmentGenerators.equipment_brand()
-        retailer = EquipmentGenerators.equipment_retailer()
+    def equipment_item_listing(**kwargs):
+        brand = kwargs.get('brand', EquipmentGenerators.equipment_brand())
+        retailer = kwargs.get('retailer', EquipmentGenerators.equipment_retailer())
 
         return EquipmentItemListing.objects.create(
-            name=Generators.randomString(),
+            name=kwargs.get('name', Generators.randomString()),
             retailer=retailer,
-            url="%s/shop/%s" % (retailer.website, slugify(brand)),
+            url=kwargs.get('url', "%s/shop/%s" % (retailer.website, slugify(brand))),
         )
