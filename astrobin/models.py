@@ -1340,56 +1340,56 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     ####################################################################################################################
     # LEGACY GEAR
     ####################################################################################################################
-    imaging_telescopes_v2 = models.ManyToManyField(
+    imaging_telescopes_2 = models.ManyToManyField(
         TelescopeV2,
         blank=True,
         related_name='images_using_for_imaging',
         verbose_name=_("Imaging telescopes or lenses")
     )
 
-    guiding_telescopes_v2 = models.ManyToManyField(
+    guiding_telescopes_2 = models.ManyToManyField(
         TelescopeV2,
         blank=True,
         related_name='images_using_for_guiding',
         verbose_name=_("Guiding telescopes or lenses")
     )
 
-    mounts_v2 = models.ManyToManyField(
+    mounts_2 = models.ManyToManyField(
         MountV2,
         blank=True,
         related_name='images_using',
         verbose_name=_("Mounts")
     )
 
-    imaging_cameras_v2 = models.ManyToManyField(
+    imaging_cameras_2 = models.ManyToManyField(
         CameraV2,
         blank=True,
         related_name='images_using_for_imaging',
         verbose_name=_("Imaging cameras")
     )
 
-    guiding_cameras_v2 = models.ManyToManyField(
+    guiding_cameras_2 = models.ManyToManyField(
         CameraV2,
         blank=True,
         related_name='images_using_for_guiding',
         verbose_name=_("Guiding cameras")
     )
 
-    software_v2 = models.ManyToManyField(
+    software_2 = models.ManyToManyField(
         SoftwareV2,
         blank=True,
         related_name='images_using',
         verbose_name=_("Software")
     )
 
-    filters_v2 = models.ManyToManyField(
+    filters_2 = models.ManyToManyField(
         FilterV2,
         blank=True,
         related_name='images_using',
         verbose_name=_("Filters")
     )
 
-    accessories_v2 = models.ManyToManyField(
+    accessories_2 = models.ManyToManyField(
         AccessoryV2,
         blank=True,
         related_name='images_using',
