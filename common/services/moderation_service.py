@@ -9,4 +9,7 @@ class ModerationService(object):
             if user.email.endswith(domain):
                 return True
 
+        if user.groups.filter(name="auto_approve_content").exists():
+            return True
+
         return False
