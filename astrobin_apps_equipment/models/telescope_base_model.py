@@ -26,6 +26,7 @@ class TelescopeType:
     CATADIOPTRIC_MAKSUTOV = 'CATADIOPTRIC_MAKSUTOV'
     CATADIOPTRIC_MAKSUTOV_CASSEGRAIN = 'CATADIOPTRIC_MAKSUTOV_CASSEGRAIN'
     CATADIOPTRIC_MODIFIED_DALL_KIRKHAM = 'CATADIOPTRIC_MODIFIED_DALL_KIRKHAM'
+    CATADIOPTRIC_SCHMIDT_CAMERA = 'CATADIOPTRIC_SCHMIDT_CAMERA'
     CATADIOPTRIC_SCHMIDT_CASSEGRAIN = 'CATADIOPTRIC_SCHMIDT_CASSEGRAIN'
     CATADIOPTRIC_ACF_SCHMIDT_CASSEGRAIN = 'CATADIOPTRIC_ACF_SCHMIDT_CASSEGRAIN'
     CATADIOPTRIC_ROWE_ACKERMAN_SCHMIDT = 'CATADIOPTRIC_ROWE_ACKERMAN_SCHMIDT'
@@ -55,8 +56,8 @@ class TelescopeBaseModel(EquipmentItem):
         (TelescopeType.CATADIOPTRIC_LURIE_HOUGHTON, _("Catadioptric: Lurie-Houghton")),
         (TelescopeType.CATADIOPTRIC_MAKSUTOV, _("Catadioptric: Maksutov")),
         (TelescopeType.CATADIOPTRIC_MAKSUTOV_CASSEGRAIN, _("Catadioptric: Maksutov-Cassegrain")),
-        (TelescopeType.CATADIOPTRIC_MAKSUTOV_CASSEGRAIN, _("Catadioptric: modified Dall-Kirkham")),
-        (TelescopeType.CATADIOPTRIC_MODIFIED_DALL_KIRKHAM, _("Catadioptric: Schmidt camera")),
+        (TelescopeType.CATADIOPTRIC_MODIFIED_DALL_KIRKHAM, _("Catadioptric: modified Dall-Kirkham")),
+        (TelescopeType.CATADIOPTRIC_SCHMIDT_CAMERA, _("Catadioptric: Schmidt camera")),
         (TelescopeType.CATADIOPTRIC_SCHMIDT_CASSEGRAIN, _("Catadioptric: Schmidt-Cassegrain")),
         (TelescopeType.CATADIOPTRIC_ACF_SCHMIDT_CASSEGRAIN, _("Catadioptric: ACF Schmidt-Cassegrain")),
         (TelescopeType.CATADIOPTRIC_ROWE_ACKERMAN_SCHMIDT, _("Catadioptric: Rowe-Atkinson Schmidt astrograph")),
