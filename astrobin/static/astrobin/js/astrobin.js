@@ -1033,9 +1033,8 @@ astrobin_common = {
         $(".collapse.in").collapse();
 
         // date and time pickers
-        $("input")
-            .filter(".timepickerclass").timepicker({})
-            .filter(".datepickerclass").datepicker({
+        $("input.timepickerclass").timepicker({});
+        $("input.datepickerclass").datepicker({
             dateFormat: 'yy-mm-dd',
             changeMonth: true,
             changeYear: true
