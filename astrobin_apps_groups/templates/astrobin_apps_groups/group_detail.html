@@ -75,7 +75,13 @@
                 <ul class="dropdown-menu">
                     {% if not user_is_member %}
                         <li>
-                            <a href="#join-modal" data-toggle="modal">
+                            <a
+                                {% if user.is_authenticated %}
+                                    href="#join-modal" data-toggle="modal"
+                                {% else %}
+                                    href="{% url 'auth_login' %}?next={{ request.path }}"
+                                {% endif %}
+                            >
                                 <i class="icon icon-signin"></i>
                                 {% trans "Join group" %}
                             </a>
@@ -223,7 +229,14 @@
             </div>
             <div class="span3 text-right hidden-phone">
                 {% if not user_is_member %}
-                    <a href="#join-modal" data-toggle="modal" class="btn btn-primary btn-large join-group">
+                    <a
+                        {% if user.is_authenticated %}
+                            href="#join-modal" data-toggle="modal"
+                        {% else %}
+                            href="{% url 'auth_login' %}?next={{ request.path }}"
+                        {% endif %}
+                        class="btn btn-primary btn-large join-group"
+                    >
                         <i class="icon icon-signin"></i>
                         {% trans "Join group" %}
                     </a>
