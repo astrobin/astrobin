@@ -951,6 +951,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("CS", "ChileScope"),
         ("DSNM", "Dark Sky New Mexico"),
         ("DSP", "Dark Sky Portal"),
+        ("DSV", "Deepsky Villa"),
         ("DSC", "DeepSkyChile"),
         ("DSW", "DeepSkyWest"),
         ("eEyE", "e-EyE Extremadura"),
