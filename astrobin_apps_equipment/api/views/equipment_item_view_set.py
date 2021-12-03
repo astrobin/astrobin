@@ -64,6 +64,17 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         manager = self.get_serializer().Meta.model.objects
         objects = manager.none()
 
+        from astrobin_apps_equipment.models import Sensor
+        from astrobin_apps_equipment.models import Camera
+        from astrobin_apps_equipment.models import Telescope
+        from astrobin_apps_equipment.models import Mount
+        from astrobin_apps_equipment.models import Filter
+        from astrobin_apps_equipment.models import Accessory
+        from astrobin_apps_equipment.models import Software
+
+        if manager.model == Sensor:
+            return Response("This API does not support sensors", HTTP_400_BAD_REQUEST)
+
         if request.user.is_authenticated:
             usage_type = request.query_params.get('usage-type')
             recent_items = []
@@ -73,14 +84,6 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             for image in images.iterator():
                 if len(recent_items) > 5:
                     break
-
-                from astrobin_apps_equipment.models import Sensor
-                from astrobin_apps_equipment.models import Camera
-                from astrobin_apps_equipment.models import Telescope
-                from astrobin_apps_equipment.models import Mount
-                from astrobin_apps_equipment.models import Filter
-                from astrobin_apps_equipment.models import Accessory
-                from astrobin_apps_equipment.models import Software
 
                 property: str
                 if manager.model == Camera:
@@ -105,8 +108,6 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                     property = 'accessories_2'
                 elif manager.model == Software:
                     property = 'software_2'
-                elif manager.model == Sensor:
-                    return Response("This API does not support sensors", HTTP_400_BAD_REQUEST)
 
                 for x in getattr(image, property).all():
                     recent_items.append(x.pk)

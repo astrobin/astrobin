@@ -93,3 +93,45 @@ class TestApiCameraViewSet(TestCase):
         response = client.get(reverse('astrobin_apps_equipment:camera-list'), format='json')
         self.assertEquals(1, response.data['count'])
         self.assertEquals(first.name, response.data['results'][0]['name'])
+
+    def test_find_recently_used_no_usages(self):
+        user = Generators.user()
+
+        client = APIClient()
+        client.force_authenticate(user=user)
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:camera-list') + 'recently-used/?usage-type=imaging', format='json'
+        )
+
+        self.assertEquals(0, len(response.data))
+
+    def test_find_recently_used_one_usage(self):
+        user = Generators.user()
+        camera = EquipmentGenerators.camera(created_by=user)
+        image = Generators.image(user=user)
+        image.imaging_cameras_2.add(camera)
+
+        client = APIClient()
+        client.force_authenticate(user=user)
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:camera-list') + 'recently-used/?usage-type=imaging', format='json'
+        )
+
+        self.assertEquals(1, len(response.data))
+
+    def test_find_recently_used_wrong_usage_type(self):
+        user = Generators.user()
+        camera = EquipmentGenerators.camera(created_by=user)
+        image = Generators.image(user=user)
+        image.imaging_cameras_2.add(camera)
+
+        client = APIClient()
+        client.force_authenticate(user=user)
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:camera-list') + 'recently-used/?usage-type=guiding', format='json'
+        )
+
+        self.assertEquals(0, len(response.data))
