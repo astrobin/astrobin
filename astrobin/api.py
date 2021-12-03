@@ -74,6 +74,8 @@ class ImageRevisionResource(ModelResource):
     url_duckduckgo_small = fields.CharField()
     url_histogram = fields.CharField()
     url_skyplot = fields.CharField()
+    url_advanced_skyplot = fields.CharField()
+    url_advanced_skyplot_small = fields.CharField()
     url_solution = fields.CharField()
     url_advanced_solution = fields.CharField()
 
@@ -109,6 +111,8 @@ class ImageRevisionResource(ModelResource):
             'url_duckduckgo_small',
             'url_histogram',
             'url_skyplot',
+            'url_advanced_skyplot',
+            'url_advanced_skyplot_small',
             'url_solution',
             'url_advanced_solution',
 
@@ -158,6 +162,16 @@ class ImageRevisionResource(ModelResource):
     def dehydrate_url_skyplot(self, bundle):
         return bundle.obj.solution.skyplot_zoom1.url \
             if bundle.obj.solution and bundle.obj.solution.skyplot_zoom1 \
+            else None
+
+    def dehydrate_url_advanced_skyplot(self, bundle):
+        return bundle.obj.solution.pixinsight_finding_chart.url \
+            if bundle.obj.solution and bundle.obj.solution.pixinsight_finding_chart \
+            else None
+
+    def dehydrate_url_advanced_skyplot_small(self, bundle):
+        return bundle.obj.solution.pixinsight_finding_chart_small.url \
+            if bundle.obj.solution and bundle.obj.solution.pixinsight_finding_chart_small \
             else None
 
     def dehydrate_url_solution(self, bundle):
@@ -252,6 +266,8 @@ class ImageResource(ModelResource):
     url_duckduckgo_small = fields.CharField()
     url_histogram = fields.CharField()
     url_skyplot = fields.CharField()
+    url_advanced_skyplot = fields.CharField()
+    url_advanced_skyplot_small = fields.CharField()
     url_solution = fields.CharField()
     url_advanced_solution = fields.CharField()
 
@@ -291,6 +307,8 @@ class ImageResource(ModelResource):
             'url_duckduckgo_small',
             'url_histogram',
             'url_skyplot',
+            'url_advanced_skyplot',
+            'url_advanced_skyplot_small',
             'url_solution',
             'url_advanced_solution',
 
@@ -360,6 +378,16 @@ class ImageResource(ModelResource):
     def dehydrate_url_skyplot(self, bundle):
         return bundle.obj.solution.skyplot_zoom1.url \
             if bundle.obj.solution and bundle.obj.solution.skyplot_zoom1 \
+            else None
+
+    def dehydrate_url_advanced_skyplot(self, bundle):
+        return bundle.obj.solution.pixinsight_finding_chart.url \
+            if bundle.obj.solution and bundle.obj.solution.pixinsight_finding_chart \
+            else None
+
+    def dehydrate_url_advanced_skyplot_small(self, bundle):
+        return bundle.obj.solution.pixinsight_finding_chart_small.url \
+            if bundle.obj.solution and bundle.obj.solution.pixinsight_finding_chart_small \
             else None
 
     def dehydrate_url_solution(self, bundle):
