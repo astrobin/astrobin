@@ -86,3 +86,17 @@ class TestApiSensorViewSet(TestCase):
         response = client.get(reverse('astrobin_apps_equipment:sensor-list'), format='json')
         self.assertEquals(1, response.data['count'])
         self.assertEquals(first.name, response.data['results'][0]['name'])
+
+    def test_find_recently_used_not_supported(self):
+        user = Generators.user()
+
+        client = APIClient()
+        client.force_authenticate(user=user)
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:sensor-list') + 'recently-used/', format='json'
+        )
+
+        self.assertEquals(400, response.status_code)
+
+

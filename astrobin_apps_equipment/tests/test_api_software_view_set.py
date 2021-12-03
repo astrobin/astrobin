@@ -86,3 +86,32 @@ class TestApiSoftwareViewSet(TestCase):
         response = client.get(reverse('astrobin_apps_equipment:software-list'), format='json')
         self.assertEquals(1, response.data['count'])
         self.assertEquals(first.name, response.data['results'][0]['name'])
+
+    def test_find_recently_used_no_usages(self):
+        user = Generators.user()
+
+        client = APIClient()
+        client.force_authenticate(user=user)
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:software-list') + 'recently-used/', format='json'
+        )
+
+        self.assertEquals(0, len(response.data))
+
+    def test_find_recently_used_one_usage(self):
+        user = Generators.user()
+        software = EquipmentGenerators.software(created_by=user)
+        image = Generators.image(user=user)
+        image.software_2.add(software)
+
+        client = APIClient()
+        client.force_authenticate(user=user)
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:software-list') + 'recently-used/', format='json'
+        )
+
+        self.assertEquals(1, len(response.data))
+
+
