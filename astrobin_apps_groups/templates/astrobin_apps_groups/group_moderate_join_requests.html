@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block content %}
-    <table class="table table-striped requestinig-users">
+    <table class="table table-striped requesting-users">
         <thead>
             <tr>
                 <th class="user">{% trans "Name" %}</th>
@@ -81,7 +81,7 @@
                         $table.find('tbody').append(
                                 $('<tr>' +
                                        '<td class="empty-table" colspan="2">' +
-                                            '{% trans "This group has no join requests." %}' +
+                                            '{{ _("This group has no join requests.") | escapejs }}' +
                                        '</td>' +
                                   '</tr>')
                         );
