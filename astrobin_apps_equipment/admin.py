@@ -4,8 +4,11 @@
 from django.contrib import admin
 from safedelete import HARD_DELETE
 
-from astrobin_apps_equipment.models import Sensor, Camera, Telescope, CameraEditProposal, Mount, Filter, Accessory, \
-    Software, EquipmentItemGroup
+from astrobin_apps_equipment.models import (
+    EquipmentPreset, Sensor, Camera, Telescope, CameraEditProposal, Mount,
+    Filter, Accessory,
+    Software, EquipmentItemGroup,
+)
 from astrobin_apps_equipment.models.accessory_edit_proposal import AccessoryEditProposal
 from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
@@ -200,3 +203,4 @@ admin.site.register(AccessoryEditProposal, AccessoryEditProposalAdmin)
 admin.site.register(Software, SoftwareAdmin)
 admin.site.register(SoftwareEditProposal, SoftwareEditProposalAdmin)
 admin.site.register(EquipmentItemGroup, EquipmentItemGroupAdmin)
+admin.site.register(EquipmentPreset)
