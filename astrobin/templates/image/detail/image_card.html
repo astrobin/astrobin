@@ -343,7 +343,7 @@
                         </p>
                     {% endif %}
 
-                    {% if instance_to_platesolve.solution|supports_search_around %}
+                    {% if instance_to_platesolve.solution and instance_to_platesolve.solution|supports_search_around %}
                         <div class="dropdown search-around">
                             <a class="dropdown-toggle btn btn-primary" data-toggle="dropdown" href="#">
                                 <i class="icon-search"></i> {% trans "Find images in the same area" %} <span class="caret"></span>
