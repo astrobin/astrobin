@@ -241,10 +241,6 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 }
             )
 
-        if '[DELETED] ' not in item.name:
-            item.name = f'[DELETED] ({item.id}) {item.name}'
-            item.save()
-
         if item.klass == EquipmentItemKlass.SENSOR:
             Camera.all_objects.filter(sensor=item).update(sensor=None)
             CameraEditProposal.all_objects.filter(sensor=item).update(sensor=None)
@@ -265,9 +261,6 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                     break
 
             if not brand_has_items:
-                if '[DELETED] ' not in item.brand.name:
-                    item.brand.name = f'[DELETED] ({item.brand.id}) {item.brand.name}'
-                    item.brand.save()
                 item.brand.delete()
 
         serializer = self.serializer_class(item)

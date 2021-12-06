@@ -10,7 +10,10 @@ from django.utils.translation import ugettext_lazy as _
 from notification import models as notification
 from safedelete.signals import post_softdelete
 
-from astrobin_apps_equipment.models import Camera, CameraEditProposal
+from astrobin_apps_equipment.models import (
+    Accessory, Camera, CameraEditProposal, EquipmentBrand, EquipmentPreset, Filter, Mount, Sensor,
+    Software, Telescope,
+)
 from astrobin_apps_equipment.models.accessory_edit_proposal import AccessoryEditProposal
 from astrobin_apps_equipment.models.filter_edit_proposal import FilterEditProposal
 from astrobin_apps_equipment.models.mount_edit_proposal import MountEditProposal
@@ -49,6 +52,73 @@ def mirror_modified_camera_update(sender, instance: Camera, **kwargs):
 def mirror_modified_camera_softdelete(sender, instance: Camera, **kwargs):
     if not instance.modified:
         Camera.objects.filter(brand=instance.brand, name=instance.name, modified=True).delete()
+
+
+@receiver(post_softdelete, sender=Sensor)
+@receiver(post_softdelete, sender=Camera)
+@receiver(post_softdelete, sender=Telescope)
+@receiver(post_softdelete, sender=Mount)
+@receiver(post_softdelete, sender=Filter)
+@receiver(post_softdelete, sender=Accessory)
+@receiver(post_softdelete, sender=Software)
+def rename_equipment_item_after_deletion(sender, instance, **kwargs):
+    if '[DELETED] ' not in instance.name:
+        instance.name = f'[DELETED] ({instance.id}) {instance.name}'
+        instance.save(keep_deleted=True)
+
+
+@receiver(post_softdelete, sender=Camera)
+def remove_camera_from_presets_after_deletion(sender, instance, **kwargs):
+    preset: EquipmentPreset
+
+    for preset in EquipmentPreset.objects.filter(imaging_cameras=instance).iterator():
+        preset.imaging_cameras.remove(instance)
+
+    for preset in EquipmentPreset.objects.filter(guiding_cameras=instance).iterator():
+        preset.guiding_cameras.remove(instance)
+
+
+@receiver(post_softdelete, sender=Telescope)
+def remove_telescope_from_presets_after_deletion(sender, instance, **kwargs):
+    preset: EquipmentPreset
+
+    for preset in EquipmentPreset.objects.filter(imaging_telescopes=instance).iterator():
+        preset.imaging_telescopes.remove(instance)
+
+    for preset in EquipmentPreset.objects.filter(guiding_telescopes=instance).iterator():
+        preset.guiding_telescopes.remove(instance)
+
+
+@receiver(post_softdelete, sender=Mount)
+def remove_mount_from_presets_after_deletion(sender, instance, **kwargs):
+    preset: EquipmentPreset
+
+    for preset in EquipmentPreset.objects.filter(mounts=instance).iterator():
+        preset.mounts.remove(instance)
+
+
+@receiver(post_softdelete, sender=Filter)
+def remove_filter_from_presets_after_deletion(sender, instance, **kwargs):
+    preset: EquipmentPreset
+
+    for preset in EquipmentPreset.objects.filter(filters=instance).iterator():
+        preset.filters.remove(instance)
+
+
+@receiver(post_softdelete, sender=Accessory)
+def remove_accessory_from_presets_after_deletion(sender, instance, **kwargs):
+    preset: EquipmentPreset
+
+    for preset in EquipmentPreset.objects.filter(accessories=instance).iterator():
+        preset.accessories.remove(instance)
+
+
+@receiver(post_softdelete, sender=Software)
+def remove_software_from_presets_after_deletion(sender, instance, **kwargs):
+    preset: EquipmentPreset
+
+    for preset in EquipmentPreset.objects.filter(software=instance).iterator():
+        preset.software.remove(instance)
 
 
 @receiver(post_save, sender=SensorEditProposal)
@@ -124,3 +194,17 @@ def send_edit_proposal_created_notification(sender, instance, created, **kwargs)
                     ),
                 }
             )
+
+
+@receiver(post_softdelete, sender=EquipmentBrand)
+def rename_equipment_brand_after_deletion(sender, instance: EquipmentBrand, **kwargs):
+    if '[DELETED] ' not in instance.name:
+        instance.name = f'[DELETED] {instance.name} ({instance.pk}'
+        instance.save(keep_deleted=True)
+
+
+@receiver(post_softdelete, sender=EquipmentPreset)
+def rename_equipment_preset_after_deletion(sender, instance: EquipmentPreset, **kwargs):
+    if '[DELETED] ' not in instance.name:
+        instance.name = f'[DELETED] {instance.name} ({instance.pk}'
+        instance.save(keep_deleted=True)

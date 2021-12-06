@@ -7,6 +7,7 @@ from astrobin_apps_equipment.api.views.brand_view_set import BrandViewSet
 from astrobin_apps_equipment.api.views.camera_edit_proposal_view_set import CameraEditProposalViewSet
 from astrobin_apps_equipment.api.views.camera_view_set import CameraViewSet
 from astrobin_apps_equipment.api.views.equipment_item_group_view_set import EquipmentItemGroupViewSet
+from astrobin_apps_equipment.api.views.equipment_preset_view_set import EquipmentPresetViewSet
 from astrobin_apps_equipment.api.views.filter_edit_proposal_view_set import FilterEditProposalViewSet
 from astrobin_apps_equipment.api.views.filter_view_set import FilterViewSet
 from astrobin_apps_equipment.api.views.mount_edit_proposal_view_set import MountEditProposalViewSet
@@ -44,6 +45,8 @@ router.register(r'software', SoftwareViewSet, basename='software')
 router.register(r'software-edit-proposal', SoftwareEditProposalViewSet, basename='software-edit-proposal')
 
 router.register(r'equipment-item-group', EquipmentItemGroupViewSet, basename='equipment-item-group')
+
+router.register(r'equipment-preset', EquipmentPresetViewSet, basename='equipment-preset')
 
 urlpatterns = [
     url('', include(router.urls)),
