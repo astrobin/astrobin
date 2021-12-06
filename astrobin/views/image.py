@@ -296,7 +296,7 @@ class ImageDetailView(ImageDetailViewBase):
         #############################
         # GENERATE ACQUISITION DATA #
         #############################
-        from astrobin.moon import MoonPhase;
+        from astrobin.moon import MoonPhase
 
         gear_list = (
             (
@@ -353,11 +353,6 @@ class ImageDetailView(ImageDetailViewBase):
                 'accessories'
             ),
         )
-
-        makes_list = ','.join(
-            [_f for _f in reduce(
-                lambda x, y: x + y,
-                [list(x.values_list('make', flat=True)) for x in [y[1] for y in gear_list]]) if _f])
 
         deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
         ssa = None
@@ -719,7 +714,6 @@ class ImageDetailView(ImageDetailViewBase):
                 content_type__model='image',
                 object_id=image.id).count(),
             'gear_list': gear_list,
-            'makes_list': makes_list,
             'image_type': image_type,
             'ssa': ssa,
             'deep_sky_data': deep_sky_data,
