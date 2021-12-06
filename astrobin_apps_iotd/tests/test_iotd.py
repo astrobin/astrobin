@@ -220,6 +220,21 @@ class IotdTest(TestCase):
         self.assertEqual(submission.submitter, self.submitter_1)
         self.assertEqual(submission.image, self.image)
 
+    def test_submission_model_cannot_submit_image_that_was_dismissed(self):
+        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        IotdDismissedImage.objects.create(image=self.image, user=self.submitter_1)
+        with self.assertRaisesRegex(ValidationError, "you already dismissed"):
+            IotdSubmission.objects.create(submitter=self.submitter_1, image=self.image)
+
+    @override_settings(IOTD_MAX_DISMISSALS=3)
+    def test_submission_model_cannot_submit_image_that_was_dismissed_3_times(self):
+        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=['iotd_submitters']))
+        IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=['iotd_submitters']))
+        IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=['iotd_submitters']))
+        with self.assertRaisesRegex(ValidationError, " has been dismissed by 3 members"):
+            IotdSubmission.objects.create(submitter=self.submitter_1, image=self.image)
+
     def test_vote_model_user_must_be_reviewer(self):
         Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
         with self.assertRaisesRegex(ValidationError, "not a member"):
@@ -327,6 +342,23 @@ class IotdTest(TestCase):
             self.fail(e)
         self.image.user = self.user
         self.image.save(keep_deleted=True)
+
+    def test_vote_model_cannot_vote_image_that_was_dismissed(self):
+        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        IotdSubmission.objects.create(submitter=self.submitter_1, image=self.image)
+        IotdDismissedImage.objects.create(image=self.image, user=self.reviewer_1)
+        with self.assertRaisesRegex(ValidationError, "you already dismissed"):
+            IotdVote.objects.create(reviewer=self.reviewer_1, image=self.image)
+
+    @override_settings(IOTD_MAX_DISMISSALS=3)
+    def test_vote_model_cannot_vote_image_that_was_dismissed_3_times(self):
+        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        IotdSubmission.objects.create(submitter=self.submitter_1, image=self.image)
+        IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=['iotd_submitters']))
+        IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=['iotd_submitters']))
+        IotdDismissedImage.objects.create(image=self.image, user=Generators.user(groups=['iotd_submitters']))
+        with self.assertRaisesRegex(ValidationError, " has been dismissed by 3 members"):
+            IotdVote.objects.create(reviewer=self.reviewer_1, image=self.image)
 
     def test_vote_model_cannot_vote_own_submission(self):
         Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
