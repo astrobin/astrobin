@@ -24,7 +24,8 @@ from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import GearUserInfo, UserProfile, Image, LICENSE_CHOICES
 from astrobin.services.utils_service import UtilsService
 from astrobin.utils import get_image_resolution, get_client_country_code, decimal_to_hours_minutes_seconds_html, \
-    decimal_to_degrees_minutes_seconds_html
+    decimal_to_degrees_minutes_seconds_html, dec_decimal_precision_from_pixel_scale, \
+    ra_decimal_precision_from_pixel_scale
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
 from astrobin_apps_equipment.models import EquipmentBrandListing
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium_2020, is_premium, is_ultimate_2020, \
@@ -238,26 +239,12 @@ def gear_owners(gear):
 
 
 @register.simple_tag
-def gear_set_images(gear_set):
-    images = 0
-    for g in gear_set.all():
-        images += gear_images(g)
-
-    return images
-
-
-@register.simple_tag
 def gear_set_owners(gear_set):
     owners = 0
     for g in gear_set.all():
         owners += gear_owners(g)
 
     return owners
-
-
-@register.simple_tag
-def gear_images(gear):
-    return Image.by_gear(gear).count()
 
 
 @register.simple_tag
@@ -554,12 +541,14 @@ def humanize_image_acquisition_type(type):
 
 
 @register.filter
-def ra_to_hms(degrees, precision=0):
+def ra_to_hms(degrees, pixel_scale=0):
+    precision = ra_decimal_precision_from_pixel_scale(pixel_scale)
     return mark_safe(decimal_to_hours_minutes_seconds_html(degrees, precision=precision))
 
 
 @register.filter
-def dec_to_dms(degrees, precision=0):
+def dec_to_dms(degrees, pixel_scale=0):
+    precision = dec_decimal_precision_from_pixel_scale(pixel_scale)
     return mark_safe(decimal_to_degrees_minutes_seconds_html(degrees, precision=precision))
 
 

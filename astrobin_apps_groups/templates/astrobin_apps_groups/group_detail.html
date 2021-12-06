@@ -76,12 +76,11 @@
                     {% if not user_is_member %}
                         <li>
                             <a
-                                    {% if request.user|has_access_to_premium_group_features %}
-                                        href="#join-modal"
-                                    {% else %}
-                                        href="#feature-restricted-modal"
-                                    {% endif %}
-                                    data-toggle="modal"
+                                {% if user.is_authenticated %}
+                                    href="#join-modal" data-toggle="modal"
+                                {% else %}
+                                    href="{% url 'auth_login' %}?next={{ request.path }}"
+                                {% endif %}
                             >
                                 <i class="icon icon-signin"></i>
                                 {% trans "Join group" %}
@@ -118,6 +117,36 @@
                     {% endif %}
                 </ul>
                 {% endif %} {# READONLY #}
+            </li>
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-sort"></i>
+                    {% trans "Sort images" %}
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'group_detail' group.pk group.slug %}?sort=title">
+                            <i class="icon-sort-by-alphabet"></i>
+                            {% trans "Title" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'group_detail' group.pk group.slug %}?sort=publication">
+                            <i class="icon-upload-alt"></i>
+                            {% trans "Publication" %}
+                        </a>
+                    </li>
+                    {% if group.image_tag_sorting %}
+                        <li>
+                            <a href="{% url 'group_detail' group.pk group.slug %}?sort=tag">
+                                <i class="icon-tag"></i>
+                                {% trans "Key/value tag" %}: "<strong>{{ group.image_tag_sorting }}</strong>"
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
             </li>
 
             <li class="group-info pull-right">
@@ -201,12 +230,13 @@
             <div class="span3 text-right hidden-phone">
                 {% if not user_is_member %}
                     <a
-                            {% if request.user|has_access_to_premium_group_features %}
-                                href="#join-modal"
-                            {% else %}
-                                href="#feature-restricted-modal"
-                            {% endif %}
-                                data-toggle="modal" class="btn btn-primary btn-large join-group">
+                        {% if user.is_authenticated %}
+                            href="#join-modal" data-toggle="modal"
+                        {% else %}
+                            href="{% url 'auth_login' %}?next={{ request.path }}"
+                        {% endif %}
+                        class="btn btn-primary btn-large join-group"
+                    >
                         <i class="icon icon-signin"></i>
                         {% trans "Join group" %}
                     </a>

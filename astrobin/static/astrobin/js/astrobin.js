@@ -658,7 +658,7 @@ astrobin_common = {
             }, 10);
         });
 
-        $('a:not(.no-page-loader)').live('click', function (event) {
+        $('a:not(.no-page-loader):not(.fancybox)').live('click', function (event) {
             var url = $(this).attr('href');
 
             if (!url) {
@@ -667,6 +667,11 @@ astrobin_common = {
 
             // Skip external links.
             if (url.indexOf('astrobin.com') === -1 && url.indexOf('localhost') === -1 && url[0] !== '/') {
+                return;
+            }
+
+            // Skip CKEditor attachments.
+            if (url.indexOf('ckeditor-files') > -1) {
                 return;
             }
 
@@ -1017,69 +1022,48 @@ astrobin_common = {
         $reportAbuseButton.addClass('running');
     },
 
-    init_action_stream_hit_counter: function () {
-        const $window = $(window);
-        let debounce;
-
-        // During the same session, don't try to record the same hit twice.
-        window.astrobinProcessedActstreamHits = [];
-
-        const isInViewport = function (el) {
-            const elementTop = $(el).offset().top;
-            const elementBottom = elementTop + $(el).outerHeight();
-
-            const viewportTop = $(window).scrollTop();
-            const viewportBottom = viewportTop + $(window).height();
-
-            return elementBottom > viewportTop && elementTop < viewportBottom;
-        };
-
-        if($('.activity-actions').length > 0) {
-            $window.on('scroll', function () {
-                if (!!debounce) {
-                    clearTimeout(debounce);
-                }
-
-                debounce = setTimeout(function () {
-                    debounce = null;
-                    $('.activity-actions .action .astrobin-image').each(function (index, image) {
-                        const id = $(image).data('id');
-
-                        if (window.astrobinProcessedActstreamHits.indexOf(id) === -1 && isInViewport(image)) {
-                            window.astrobinProcessedActstreamHits.push(id);
-                            $.ajax({
-                               url: `/api/v2/images/image/${id}/hit/`,
-                               type: 'PUT',
-                               timeout: 3000
-                           });
-                       }
-                    });
-                }, 1000);
-            });
-        }
-    },
-
     init: function (config) {
         /* Init */
         $.extend(true, astrobin_common.config, config);
 
-        $('.dropdown-toggle').dropdown();
-        $('.carousel').carousel();
-        $('.nav-tabs').tab();
-        $('[rel=tooltip]').tooltip();
-        $('.collapse.in').collapse();
+        $(".dropdown-toggle").dropdown();
+        $(".carousel").carousel();
+        $(".nav-tabs").tab();
+        $("[rel=tooltip]").tooltip();
+        $(".collapse.in").collapse();
 
         // date and time pickers
-        $('input').filter('.timepickerclass').timepicker({});
-        $('input').filter('.datepickerclass').datepicker({
+        $("input.timepickerclass").timepicker({});
+        $("input.datepickerclass").datepicker({
             dateFormat: 'yy-mm-dd',
             changeMonth: true,
             changeYear: true
         });
 
+        $("#quick-search input").focus(() => {
+            if ($(window).width() >= 520) {
+                $(".search-nav").css({
+                    width: 'calc(100% - ' + (
+                        $(".site-nav").outerWidth() + $(".user-nav").outerWidth() + $(".brand").outerWidth()
+                    ) + 'px'
+                });
+            }
+        }).blur(() => {
+            if ($(window).width() >= 520) {
+                $(".search-nav").css({width: "auto"});
+            }
+        });
+
+        $(window).resize(() => {
+            if ($(window).width() >= 520) {
+                $(".search-nav").css({width: "auto"});
+            } else {
+                $(".search-nav").css({width: "calc(100% - 10px)"});
+            }
+        });
+
         astrobin_common.init_timestamps();
         astrobin_common.init_page_loading_indicator();
-        astrobin_common.init_action_stream_hit_counter();
 
         if (window.innerWidth >= 980) {
             $("select:not([multiple])").select2({theme: "flat"});

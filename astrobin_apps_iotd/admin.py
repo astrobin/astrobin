@@ -25,7 +25,7 @@ admin.site.register(IotdVote, IotdVoteAdmin)
 
 class IotdAdmin(admin.ModelAdmin):
     fields = ('judge', 'image', 'date')
-    list_display = ('pk', 'judge', 'image', 'created')
+    list_display = ('pk', 'judge', 'image', 'date', 'created')
     list_filter = ('judge',)
 
 

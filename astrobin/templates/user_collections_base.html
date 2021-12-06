@@ -35,6 +35,9 @@
     {% if request.user == user and user|is_donor %}
         {% cancel_donation_modal %}
     {% endif %}
+
+    {% include 'user_collections_delete_modal.html' %}
+    {% include 'user/profile/modals/about.html' %}
 {% endblock %}
 
 {% block extra_js %}

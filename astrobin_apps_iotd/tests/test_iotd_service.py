@@ -267,19 +267,6 @@ class IotdServiceTest(TestCase):
 
         self.assertEqual(0, iotds.count())
 
-    def test_get_iotds_corrupted(self):
-        iotd_image = Generators.image(corrupted=True)
-        Generators.image()
-        Generators.premium_subscription(iotd_image.user, 'AstroBin Ultimate 2020+')
-
-        IotdGenerators.submission(image=iotd_image)
-        IotdGenerators.vote(image=iotd_image)
-        IotdGenerators.iotd(image=iotd_image)
-
-        iotds = IotdService().get_iotds()
-
-        self.assertEqual(0, iotds.count())
-
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_get_top_picks(self):
@@ -312,20 +299,6 @@ class IotdServiceTest(TestCase):
 
         top_pick_image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) + timedelta(hours=1)
         top_pick_image.save()
-
-        IotdService().update_top_pick_archive()
-
-        top_picks = IotdService().get_top_picks()
-
-        self.assertEqual(0, top_picks.count())
-
-    def test_get_top_picks_corrupted(self):
-        top_pick_image = Generators.image(corrupted=True)
-        Generators.image()
-        Generators.premium_subscription(top_pick_image.user, 'AstroBin Ultimate 2020+')
-
-        IotdGenerators.submission(image=top_pick_image)
-        IotdGenerators.vote(image=top_pick_image)
 
         IotdService().update_top_pick_archive()
 
@@ -489,19 +462,6 @@ class IotdServiceTest(TestCase):
 
     def test_get_top_pick_nominations_too_soon(self):
         image = Generators.image()
-        Generators.image()
-        Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
-
-        IotdGenerators.submission(image=image)
-
-        IotdService().update_top_pick_nomination_archive()
-
-        nominations = IotdService().get_top_pick_nominations()
-
-        self.assertEqual(0, nominations.count())
-
-    def test_get_top_pick_nominations_corrupted(self):
-        image = Generators.image(corrupted=True)
         Generators.image()
         Generators.premium_subscription(image.user, 'AstroBin Ultimate 2020+')
 

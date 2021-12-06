@@ -1,0 +1,41 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    A gear item that you used was renamed
+{% endblocktrans %}:
+
+<br /><br />
+
+{% trans "Old brand" %}: <strong>{{ gear.make }}</strong><br />
+{% trans "Old name" %}: {{ gear.name }}
+
+<br /><br />
+
+{% trans "New brand" %}: <strong>{{ item.brand.name }}</strong><br />
+{% trans "New name" %}: {{ item.name }}
+
+<br /><br />
+
+{% blocktrans trimmed %}
+    This operation was performed because at least 5 owners of this equipment item (or more than half, whichever is
+    greatest), approved it, while nobody rejected it.
+{% endblocktrans %}
+
+<br /><br />
+
+{% url 'contact' as contact_url %}
+{% blocktrans trimmed with url=base_url|add:contact_url %}
+    If you think this operation was incorrect, please <a href="{{ url }}">get in touch</a> and let us know why!
+{% endblocktrans %}
+
+<br /><br />
+
+{% blocktrans trimmed %}
+    We will evaluate your report and revert the operation if needed.
+{% endblocktrans %}
+
+<br /><br />
+
+{% blocktrans trimmed %}
+    Thanks for your cooperation!
+{% endblocktrans %}

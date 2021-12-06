@@ -1,0 +1,7 @@
+{% load i18n %}
+
+<a href="{{ item_url }}">
+    {% blocktrans trimmed %}
+        Please review an edit proposal for equipment item <strong>{{ item }}</strong> by <strong>{{ user }}</strong>
+    {% endblocktrans %}
+</a>

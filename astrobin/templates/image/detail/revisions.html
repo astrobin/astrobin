@@ -7,75 +7,73 @@
     <div class="subtle-container revisions-container">
         <div class="header"><h4><i class="icon-picture"></i> {% trans "Revisions" %}</h4></div>
         <ul class="thumbnails astrobin-thumbnails">
-            {% if not image.corrupted %}
-                <li class="thumbnail astrobin-thumbnail revisions">
-                    <div class="revision{% if revision_label == '0' or revision_label == None %} current{% endif %}">
-                        {% if image.is_final %}
-                            <div class="final">
-                                <span class="text">
-                                    {% trans "Final" %}
-                                </span>
-                            </div>
-                        {% endif %}
+            <li class="thumbnail astrobin-thumbnail revisions">
+                <div class="revision{% if revision_label == '0' or revision_label == None %} current{% endif %}">
+                    {% if image.is_final %}
+                        <div class="final">
+                            <span class="text">
+                                {% trans "Final" %}
+                            </span>
+                        </div>
+                    {% endif %}
 
-                        {% if request.user == image.user or request.user.is_superuser %}
-                            <div class="contextual-menu">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="icon-ellipsis-vertical icon-white"></i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-header">
-                                        {% trans "Original" %}
-                                    </li>
-                                    <li class="nav-header">
-                                        {% trans "Uploaded" %}:
-                                        {% if image.published %}
-                                            {% timestamp image.published %}
-                                        {% else %}
-                                            {% timestamp image.uploaded %}
-                                        {% endif %}
-                                    </li>
-                                    <li class="divider"></li>
-
-                                    {% if not image.is_final %}
-                                        <li>
-                                            <a href="{% url 'image_edit_make_final' image.get_id %}">
-                                                <i class="icon-ok"></i>
-                                                <span class="hidden-phone">
-                                                    {% trans "Mark this revision as final" %}
-                                                </span>
-                                            </a>
-                                        </li>
+                    {% if request.user == image.user or request.user.is_superuser %}
+                        <div class="contextual-menu">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="icon-ellipsis-vertical icon-white"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-header">
+                                    {% trans "Original" %}
+                                </li>
+                                <li class="nav-header">
+                                    {% trans "Uploaded" %}:
+                                    {% if image.published %}
+                                        {% timestamp image.published %}
+                                    {% else %}
+                                        {% timestamp image.uploaded %}
                                     {% endif %}
+                                </li>
+                                <li class="divider"></li>
 
+                                {% if not image.is_final %}
                                     <li>
-                                        <a data-toggle="modal" class="danger" href="#delete-original-image-modal">
-                                            <i class="icon-trash"></i>
+                                        <a href="{% url 'image_edit_make_final' image.get_id %}">
+                                            <i class="icon-ok"></i>
                                             <span class="hidden-phone">
-                                                {% trans "Delete" %}
+                                                {% trans "Mark this revision as final" %}
                                             </span>
                                         </a>
                                     </li>
+                                {% endif %}
 
-                                    <li>
-                                        <a href="{{ image.image_file.url }}" target="_blank">
-                                            <i class="icon-download-alt"></i> {% trans "Download original file" %}
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        {% endif %}
+                                <li>
+                                    <a data-toggle="modal" class="danger" href="#delete-original-image-modal">
+                                        <i class="icon-trash"></i>
+                                        <span class="hidden-phone">
+                                            {% trans "Delete" %}
+                                        </span>
+                                    </a>
+                                </li>
 
-                        <div class="image">
-                            {% astrobin_image image 'gallery' revision='0' tooltip=False instant=True %}
+                                <li>
+                                    <a href="{{ image.image_file.url }}" target="_blank">
+                                        <i class="icon-download-alt"></i> {% trans "Download original file" %}
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
+                    {% endif %}
 
-                        <div class="label{% if revision_label == '0' %} active{% endif %}">
-                            {% trans "Original" %}
-                        </div>
-                    </div> <!-- .revision -->
-                </li>
-            {% endif %}
+                    <div class="image">
+                        {% astrobin_image image 'gallery' revision='0' tooltip=False instant=True %}
+                    </div>
+
+                    <div class="label{% if revision_label == '0' %} active{% endif %}">
+                        {% trans "Original" %}
+                    </div>
+                </div> <!-- .revision -->
+            </li>
 
             {% for r in revisions %}
                 <li class="thumbnail astrobin-thumbnail revisions">
@@ -152,21 +150,34 @@
             {% endfor %}
         </ul> <!-- thumbnails -->
 
-        {% if revisions_with_description %}
-            {% for r in revisions_with_description %}
+        {% if revisions_with_title_or_description %}
+            {% for r in revisions_with_title_or_description %}
                 <div class="revision-description">
                     <h3>{{r.label}}</h3>
+
+                    {% if r.title %}
+                        <p>
+                            <strong>{% trans "Title" %}:</strong> {% highlight_text r.title with search_query %}
+                        </p>
+                    {% endif %}
+
+                    {% if r.description %}
+                        <p>
+                            <strong>{% trans "Description" %}:</strong> {{r.description|strip_html|highlight_text_filter:search_query|safe}}
+                        </p>
+                    {% endif %}
+
                     <p>
-                        <strong>{% trans "Description" %}:</strong> {{r.description|strip_html|safe}}
+                        <strong>{% trans "Uploaded" %}:</strong>&nbsp;{% timestamp r.uploaded %}
+                    </p>
+
+                    <p>
                         {% if request.user == image.user or request.user.is_superuser %}
                             <a href="{% url 'image_edit_revision' r.pk %}">
                                 {% private_abbr %}
                                 {% trans "Edit" %}
                             </a>
                         {% endif %}
-                    </p>
-                    <p>
-                        <strong>{% trans "Uploaded" %}:</strong>&nbsp;{% timestamp r.uploaded %}
                     </p>
                 </div>
             {% endfor %}

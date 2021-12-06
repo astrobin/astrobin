@@ -1,11 +1,14 @@
 from datetime import timedelta, datetime
 
+from annoying.functions import get_object_or_None
 from django.conf import settings
+from django.contrib.auth.models import Group, User
 from django.core.cache import cache
+from django.db.models import Q, Count
 
 from astrobin.enums import SubjectType
 from astrobin.fields import COUNTRIES
-from astrobin.models import Image
+from astrobin.models import Image, CameraRenameProposal
 from astrobin.utils import get_client_country_code
 from astrobin_apps_images.services import ImageService
 from common.forms.abuse_report_form import AbuseReportForm
@@ -70,6 +73,17 @@ def common_variables(request):
             complained = Complaint.objects.filter(address=request.user.email).exists()
             cache.set(cache_key, complained, 3600)
 
+    def has_unmigrated_legacy_gear_items(user: User) -> bool:
+        if user.groups.filter(name='own_equipment_migrators').exists():
+            for klass in ('telescopes', 'cameras', 'mounts', 'filters', 'focal_reducers', 'accessories', 'software'):
+                if getattr(user.userprofile, klass)\
+                        .annotate(count=Count('migration_strategies'))\
+                        .filter(count=0)\
+                        .exists():
+                    return True
+
+        return False
+
     d = {
         'True': True,
         'False': False,
@@ -124,17 +138,10 @@ def common_variables(request):
         'HAS_COMPLAINT': complained,
         'COUNTRIES': COUNTRIES,
         'COOKIELAW_ACCEPTED': request.COOKIES.get('cookielaw_accepted', False),
-        'AUTOMATIC_RECOVERY_CONFIRMATION_BEGINS': Image.all_objects.filter(
-            user=request.user,
-            corrupted=True,
-            recovered__isnull=False).order_by('recovered').first().recovered + timedelta(days=14) \
-            if request.user.is_authenticated and \
-               Image.all_objects.filter(
-                   user=request.user,
-                   corrupted=True,
-                   recovered__isnull=False).exists() \
-            else None,
-
+        'HAS_CAMERA_RENAME_PROPOSALS': CameraRenameProposal.objects.filter(user=request.user, status="PENDING") \
+            if request.user.is_authenticated \
+            else CameraRenameProposal.objects.none(),
+        'HAS_UNMIGRATED_LEGACY_GEAR_ITEMS': has_unmigrated_legacy_gear_items(request.user),
         'enums': {
             'SubjectType': SubjectType,
         },

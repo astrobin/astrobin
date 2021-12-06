@@ -11,6 +11,7 @@ CORS_ALLOW_METHODS = [
 CORS_ALLOW_HEADERS = [
     'x-requested-with',
     'content-type',
+    'content-disposition',
     'accept',
     'origin',
     'authorization',

@@ -30,6 +30,7 @@ from safedelete.signals import post_softdelete
 from subscription.models import UserSubscription, Transaction
 from subscription.signals import paid, signed_up
 
+from astrobin.tasks import process_camera_rename_proposal
 from astrobin_apps_groups.models import Group
 from astrobin_apps_iotd.models import IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_notifications.services import NotificationsService
@@ -50,7 +51,7 @@ from common.services.moderation_service import ModerationService
 from nested_comments.models import NestedComment
 from nested_comments.services.comment_notifications_service import CommentNotificationsService
 from toggleproperties.models import ToggleProperty
-from .models import Image, ImageRevision, UserProfile
+from .models import Image, ImageRevision, UserProfile, CameraRenameProposal
 from .search_indexes import ImageIndex, UserIndex
 from .stories import add_story
 
@@ -201,6 +202,7 @@ def imagerevision_pre_save(sender, instance, **kwargs):
         pre_save_instance = get_object_or_None(ImageRevision.uploads_in_progress, pk=instance.pk)
         if pre_save_instance and not instance.uploader_in_progress:
             cache.set("image_revision.%s.just_completed_upload" % instance.pk, True, 10)
+
 
 pre_save.connect(imagerevision_pre_save, sender=ImageRevision)
 
@@ -626,12 +628,22 @@ def group_members_changed(sender, instance, **kwargs):
                         x.user for x in
                         ToggleProperty.objects.toggleproperties_for_object("follow", user)
                     ]
-                    push_notification(followers, user, 'user_joined_public_group',
-                                      {
-                                          'user': user.userprofile.get_display_name(),
-                                          'group_name': instance.name,
-                                          'url': settings.BASE_URL + reverse_url('group_detail', args=(instance.pk,)),
-                                      })
+                    push_notification(
+                        followers + [instance.owner],
+                        user,
+                        'user_joined_public_group',
+                        {
+                            'user': user.userprofile.get_display_name(),
+                            'user_url': build_notification_url(
+                                settings.BASE_URL + reverse_url('user_page', kwargs={'username': user.username}),
+                                user
+                            ),
+                            'group_name': instance.name,
+                            'url': build_notification_url(
+                                settings.BASE_URL + reverse_url('group_detail', args=(instance.pk,)),
+                                user
+                            ),
+                        })
 
                     add_story(
                         user,
@@ -1030,3 +1042,10 @@ def abuse_report_post_save(sender, instance, created, **kwargs):
 
 
 post_save.connect(abuse_report_post_save, sender=AbuseReport)
+
+
+def camera_rename_proposal_post_save(sender, instance: CameraRenameProposal, created: bool, **kwargs):
+    process_camera_rename_proposal.delay(instance.pk)
+
+
+post_save.connect(camera_rename_proposal_post_save, sender=CameraRenameProposal)

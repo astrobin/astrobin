@@ -67,7 +67,7 @@
 
     {% with brand_listings=gear|equipment_brand_listings:REQUEST_COUNTRY item_listings=gear|equipment_item_listings:REQUEST_COUNTRY %}
         {% if brand_listings or item_listings %}
-            {% if request.user|allow_lite_retailer_integration:image.user or request.user|allow_full_retailer_integration:image.user %}
+            {% if request.user|allow_lite_retailer_integration:image.user or request.user|allow_full_retailer_integration:image.user or gear|has_matching_brand_request_query:search_query %}
                 <div class="equipment-brand-listings">
                     {% if item_listings|length %}
                         <p class="alert alert-info">
@@ -89,16 +89,18 @@
                                     &times;
                                 </a>
 
+                                {% equipment_listing_url_with_tags listing 'card' as url_with_tags %}
+
                                 {% if request.user|allow_full_retailer_integration:image.user and listing.retailer.logo %}
-                                    <a href="{% equipment_listing_url_with_utm_tags listing.url %}"
-                                       onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')" target="_blank">
+                                    <a href="{{ url_with_tags }}"
+                                       onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')" target="_blank">
                                         <img class="logo" src="{{ listing.retailer.logo.url }}"
                                              alt="{{ listing.retailer }}">
                                     </a>
                                 {% endif %}
 
-                                <a href="{% equipment_listing_url_with_utm_tags listing.url %}"
-                                   onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')" target="_blank"
+                                <a href="{{ url_with_tags }}"
+                                   onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')" target="_blank"
                                    class="shop-button btn btn-block">
                                     <i class="icon-shopping-cart"></i>
                                     {% blocktrans trimmed with name=listing.name retailer=listing.retailer %}
@@ -130,18 +132,20 @@
                                     &times;
                                 </a>
 
+                                {% equipment_listing_url_with_tags listing 'card' as url_with_tags %}
+
                                 {% if request.user|allow_full_retailer_integration:image.user and listing.retailer.logo %}
                                     <a
-                                        href="{% equipment_listing_url_with_utm_tags listing.url %}"
-                                        onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')"
+                                        href="{{ url_with_tags }}"
+                                        onclick="getOutboundLink('{{url_with_tags }}', '{{ request.path }}')"
                                         target="_blank">
                                         <img class="logo" src="{{ listing.retailer.logo.url }}" alt="{{ listing.retailer }}">
                                     </a>
                                 {% endif %}
 
                                 <a
-                                    href="{% equipment_listing_url_with_utm_tags listing.url %}"
-                                    onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')"
+                                    href="{{ url_with_tags }}"
+                                    onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')"
                                     target="_blank"
                                     class="shop-button btn btn-block">
                                     <i class="icon-shopping-cart"></i>

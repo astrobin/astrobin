@@ -1,7 +1,11 @@
+import logging
 from rest_framework import serializers
 
 from astrobin.forms.utils import parseKeyValueTags
 from astrobin_apps_images.models import KeyValueTag
+
+
+log = logging.getLogger('apps')
 
 
 class KeyValueTagsSerializerField(serializers.Field):
@@ -21,11 +25,14 @@ class KeyValueTagsSerializerField(serializers.Field):
         if data is None:
             return value
 
-        for tag in parseKeyValueTags(data):
-            value.append(KeyValueTag.objects.create(
-                image=instance,
-                key=tag["key"],
-                value=tag["value"]
-            ))
+        try:
+            for tag in parseKeyValueTags(data):
+                value.append(KeyValueTag.objects.create(
+                    image=instance,
+                    key=tag["key"],
+                    value=tag["value"]
+                ))
+        except ValueError:
+            log.error(f'KeyValueTagsSerializerField: unable to parse: {data}')
 
         return value

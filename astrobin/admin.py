@@ -8,7 +8,8 @@ from django.utils import timezone
 from astrobin.models import Gear, GearUserInfo, Telescope, \
     Mount, Camera, FocalReducer, Software, Filter, Accessory, DeepSky_Acquisition, SolarSystem_Acquisition, Image, \
     ImageRevision, Request, ImageRequest, UserProfile, Location, AppApiKeyRequest, App, ImageOfTheDay, \
-    ImageOfTheDayCandidate, Collection, GlobalStat, BroadcastEmail
+    ImageOfTheDayCandidate, Collection, BroadcastEmail, CameraRenameProposal, GearRenameRecord, GearMigrationStrategy
+from astrobin.services.gear_service import GearService
 from astrobin.tasks import send_broadcast_email
 from astrobin.utils import inactive_accounts
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
@@ -69,6 +70,23 @@ class GearAdmin(admin.ModelAdmin):
     list_display = ('id', 'make', 'name', 'master', 'updated',)
     list_editable = ('make', 'name',)
     search_fields = ('id', 'make', 'name',)
+    actions = ('reset_migration_fields',)
+
+    def reset_migration_fields(selfmodeladmin, request, queryset):
+        GearService.reset_migration_fields(queryset)
+
+    reset_migration_fields.short_description = 'Reset migration fields'
+
+
+class GearMigrationStrategyAdmin(admin.ModelAdmin):
+    list_display = ('gear', 'user', 'migration_flag',)
+
+
+class CameraRenameProposalAdmin(admin.ModelAdmin):
+    list_display = ('id', 'old_make', 'old_name', 'new_make', 'new_name', 'status', 'reject_reason',)
+    list_editable = ('new_make', 'new_name', 'status',)
+    search_fields = ('old_name',)
+    list_filter = ('status',)
 
 
 class MountAdmin(admin.ModelAdmin):
@@ -201,66 +219,6 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
         self.submit_email(request, obj, recipients.values_list('user__email', flat=True))
         recipients.update(inactive_account_reminder_sent=timezone.now())
 
-    def submit_recovered_images_notice_de(self, request, obj):
-        recipients = User.objects \
-            .filter(userprofile__deleted=None, userprofile__language='de',
-                    userprofile__recovered_images_notice_sent=None,
-                    image__recovered__isnull=False) \
-            .distinct() \
-            .values_list('email', flat=True)
-        self.submit_email(request, obj, recipients)
-        UserProfile.objects.filter(user__email__in=recipients).update(recovered_images_notice_sent=datetime.now())
-
-    def submit_recovered_images_notice_en(self, request, obj):
-        recipients = User.objects \
-            .filter(userprofile__deleted=None, userprofile__recovered_images_notice_sent=None,
-                    image__recovered__isnull=False) \
-            .exclude(userprofile__language__in=['it', 'fr', 'de', 'es', 'pt']) \
-            .distinct() \
-            .values_list('email', flat=True)
-        self.submit_email(request, obj, recipients)
-        UserProfile.objects.filter(user__email__in=recipients).update(recovered_images_notice_sent=datetime.now())
-
-    def submit_recovered_images_notice_es(self, request, obj):
-        recipients = User.objects \
-            .filter(userprofile__deleted=None, userprofile__language='es',
-                    userprofile__recovered_images_notice_sent=None,
-                    image__recovered__isnull=False) \
-            .distinct() \
-            .values_list('email', flat=True)
-        self.submit_email(request, obj, recipients)
-        UserProfile.objects.filter(user__email__in=recipients).update(recovered_images_notice_sent=datetime.now())
-
-    def submit_recovered_images_notice_fr(self, request, obj):
-        recipients = User.objects \
-            .filter(userprofile__deleted=None, userprofile__language='fr',
-                    userprofile__recovered_images_notice_sent=None,
-                    image__recovered__isnull=False) \
-            .distinct() \
-            .values_list('email', flat=True)
-        self.submit_email(request, obj, recipients)
-        UserProfile.objects.filter(user__email__in=recipients).update(recovered_images_notice_sent=datetime.now())
-
-    def submit_recovered_images_notice_it(self, request, obj):
-        recipients = User.objects \
-            .filter(userprofile__deleted=None, userprofile__language='it',
-                    userprofile__recovered_images_notice_sent=None,
-                    image__recovered__isnull=False) \
-            .distinct() \
-            .values_list('email', flat=True)
-        self.submit_email(request, obj, recipients)
-        UserProfile.objects.filter(user__email__in=recipients).update(recovered_images_notice_sent=datetime.now())
-
-    def submit_recovered_images_notice_pt(self, request, obj):
-        recipients = User.objects \
-            .filter(userprofile__deleted=None, userprofile__language='pt',
-                    userprofile__recovered_images_notice_sent=None,
-                    image__recovered__isnull=False) \
-            .distinct() \
-            .values_list('email', flat=True)
-        self.submit_email(request, obj, recipients)
-        UserProfile.objects.filter(user__email__in=recipients).update(recovered_images_notice_sent=datetime.now())
-
     submit_mass_email.short_description = 'Submit mass email (select one only) - DO NOT ABUSE'
     submit_mass_email.allow_tags = True
 
@@ -282,24 +240,6 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
     submit_inactive_email_reminder.short_description = 'Submit inactive account reminder'
     submit_inactive_email_reminder.allow_tags = True
 
-    submit_recovered_images_notice_de.short_description = '[de] Submit recovered images notice'
-    submit_recovered_images_notice_de.allow_tags = True
-
-    submit_recovered_images_notice_en.short_description = '[en] Submit recovered images notice'
-    submit_recovered_images_notice_en.allow_tags = True
-
-    submit_recovered_images_notice_es.short_description = '[es] Submit recovered images notice'
-    submit_recovered_images_notice_es.allow_tags = True
-
-    submit_recovered_images_notice_fr.short_description = '[fr] Submit recovered images notice'
-    submit_recovered_images_notice_fr.allow_tags = True
-
-    submit_recovered_images_notice_it.short_description = '[it] Submit recovered images notice'
-    submit_recovered_images_notice_it.allow_tags = True
-
-    submit_recovered_images_notice_pt.short_description = '[pt] Submit recovered images notice'
-    submit_recovered_images_notice_pt.allow_tags = True
-
     actions = [
         'submit_mass_email',
         'submit_superuser_email',
@@ -308,22 +248,19 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
         'submit_marketing_and_commercial_material',
         'submit_premium_offer_discount',
         'submit_inactive_email_reminder',
-        'submit_recovered_images_notice_de',
-        'submit_recovered_images_notice_en',
-        'submit_recovered_images_notice_es',
-        'submit_recovered_images_notice_fr',
-        'submit_recovered_images_notice_it',
-        'submit_recovered_images_notice_pt',
     ]
     list_display = ("subject", "created")
     search_fields = ['subject', ]
 
 
 admin.site.register(Gear, GearAdmin)
+admin.site.register(GearMigrationStrategy, GearMigrationStrategyAdmin)
 admin.site.register(GearUserInfo)
+admin.site.register(GearRenameRecord)
 admin.site.register(Telescope)
 admin.site.register(Mount, MountAdmin)
 admin.site.register(Camera)
+admin.site.register(CameraRenameProposal, CameraRenameProposalAdmin)
 admin.site.register(FocalReducer)
 admin.site.register(Software)
 admin.site.register(Filter)
@@ -341,5 +278,4 @@ admin.site.register(App, AppAdmin)
 admin.site.register(ImageOfTheDay, ImageOfTheDayAdmin)
 admin.site.register(ImageOfTheDayCandidate, ImageOfTheDayCandidateAdmin)
 admin.site.register(Collection, CollectionAdmin)
-admin.site.register(GlobalStat)
 admin.site.register(BroadcastEmail, BroadcastEmailAdmin)

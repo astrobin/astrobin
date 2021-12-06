@@ -1,0 +1,12 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    <a href="{{user_url}}">{{user}}</a> joined the public group: <strong>"{{group_name}}"</strong>.
+{% endblocktrans %}
+
+<br />
+<br />
+
+<a href="{{ url }}" class="btn btn-primary">{% trans "View group" %}</a>
+
+

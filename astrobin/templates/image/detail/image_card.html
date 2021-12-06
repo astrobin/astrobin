@@ -30,8 +30,9 @@
                                                     {% with image|unique_equipment_brand_listings:REQUEST_COUNTRY as listings %}
                                                         {% for listing in listings %}
                                                             <li>
-                                                                <a href="{% equipment_listing_url_with_utm_tags listing.url %}"
-                                                                   onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')"
+                                                                {% equipment_listing_url_with_tags listing 'card' as url_with_tags %}
+                                                                <a href="{{ url_with_tags }}"
+                                                                   onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')"
                                                                    target="_blank">
                                                                    {% blocktrans trimmed with name=listing.brand retailer=listing.retailer %}
                                                                        Shop <strong>{{ name }}</strong> at {{ retailer }}
@@ -52,8 +53,9 @@
                                                     {% with image|unique_equipment_item_listings:REQUEST_COUNTRY as listings %}
                                                         {% for listing in listings %}
                                                             <li>
-                                                                <a href="{% equipment_listing_url_with_utm_tags listing.url %}"
-                                                                   onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')"
+                                                                {% equipment_listing_url_with_tags listing 'card' as url_with_tags %}
+                                                                <a href="{{ url_with_tags }}"
+                                                                   onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')"
                                                                    target="_blank">
                                                                     {% blocktrans trimmed with name=listing.name retailer=listing.retailer %}
                                                                         Shop <strong>{{ name }}</strong> at {{ retailer }}
@@ -95,45 +97,43 @@
                                         <strong class="card-label">{% trans i.0 %}:</strong>
                                         {% for g in i.1 %}
                                             <span rel="popover" class="gear-popover-label"
-                                                  data-load="{% url 'gear_popover_ajax' g.id image.id %}{% if 'DEBUG_COUNTRY' in request.GET %}?DEBUG_COUNTRY={{ request.GET|get_item:'DEBUG_COUNTRY' }}{% endif %}">
-                                                {{ g }}
+                                                  data-load="{% url 'gear_popover_ajax' g.id image.id %}?q={{ search_query|urlencode }}{% if 'DEBUG_COUNTRY' in request.GET %}&DEBUG_COUNTRY={{ request.GET|get_item:'DEBUG_COUNTRY' }}{% endif %}">
+                                                {% highlight_text g with search_query %}
                                             </span>
 
-                                            {% if request.user|allow_full_retailer_integration:image.user %}
+                                            {% if request.user|allow_full_retailer_integration:image.user or g|has_matching_brand_request_query:search_query %}
                                                 {% if g|equipment_item_listings:REQUEST_COUNTRY|length %}
                                                     {% with g|equipment_item_listings:REQUEST_COUNTRY as listings %}
-                                                        {% with url=listings.all.0.url %}
-                                                            <a class="retailer-affiliate-cart-link"
-                                                               href="{% equipment_listing_url_with_utm_tags url %}"
-                                                               onclick="getOutboundLink('{{ url }}', '{{ request.path }}')"
-                                                               target="_blank">
-                                                                <i class="icon-shopping-cart" rel="tooltip"
-                                                                   data-placement="bottom" title="
-                                                                       {% blocktrans trimmed with name=listings.all.0.name retailer=listings.all.0.retailer %}
-                                                                           Shop {{ name }} at {{ retailer }}
-                                                                       {% endblocktrans %}
-                                                                    "></i>
-                                                            </a>
-                                                        {% endwith %}
+                                                        {% equipment_listing_url_with_tags listings.all.0 'card' as url_with_tags %}
+                                                        <a class="retailer-affiliate-cart-link"
+                                                           href="{{ url_with_tags }}"
+                                                           onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')"
+                                                           target="_blank">
+                                                            <i class="icon-shopping-cart" rel="tooltip"
+                                                               data-placement="bottom" title="
+                                                                   {% blocktrans trimmed with name=listings.all.0.name retailer=listings.all.0.retailer %}
+                                                                       Shop {{ name }} at {{ retailer }}
+                                                                   {% endblocktrans %}
+                                                                "></i>
+                                                        </a>
                                                     {% endwith %}
                                                 {% elif g|equipment_brand_listings:REQUEST_COUNTRY|length %}
                                                     {% with g|equipment_brand_listings:REQUEST_COUNTRY as listings %}
                                                         {% if listings|length == 1 %}
-                                                            {% with url=listings.all.0.url %}
-                                                                <a
-                                                                    class="retailer-affiliate-cart-link"
-                                                                    href="{% equipment_listing_url_with_utm_tags url %}"
-                                                                    onclick="getOutboundLink('{{ url }}', '{{ request.path }}')"
-                                                                    target="_blank"
-                                                                >
-                                                                    <i class="icon-shopping-cart" rel="tooltip"
-                                                                       data-placement="bottom" title="
-                                                                       {% blocktrans trimmed with name=listings.all.0.brand retailer=listings.all.0.retailer %}
-                                                                           Shop {{ name }} at {{ retailer }}
-                                                                       {% endblocktrans %}
-                                                                    "></i>
-                                                                </a>
-                                                            {% endwith %}
+                                                            {% equipment_listing_url_with_tags listings.all.0 'card' as url_with_tags %}
+                                                            <a
+                                                                class="retailer-affiliate-cart-link"
+                                                                href="{{ url_with_tags }}"
+                                                                onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')"
+                                                                target="_blank"
+                                                            >
+                                                                <i class="icon-shopping-cart" rel="tooltip"
+                                                                   data-placement="bottom" title="
+                                                                   {% blocktrans trimmed with name=listings.all.0.brand retailer=listings.all.0.retailer %}
+                                                                       Shop {{ name }} at {{ retailer }}
+                                                                   {% endblocktrans %}
+                                                                "></i>
+                                                            </a>
                                                         {% else %}
                                                             <span
                                                                     rel="popover"
@@ -259,7 +259,7 @@
                             {% if instance_to_platesolve.solution.advanced_ra is not None %}
                                 <abbr title="{{ instance_to_platesolve.solution.advanced_ra }} {% trans "degrees" %}"
                                       class="ra-coordinates">
-                                    {{ instance_to_platesolve.solution.advanced_ra | ra_to_hms:3 }}
+                                    {{ instance_to_platesolve.solution.advanced_ra | ra_to_hms:instance_to_platesolve.solution.advanced_pixscale }}
                                 </abbr>
                             {% else %}
                                 <abbr title="{{ instance_to_platesolve.solution.ra }} {% trans "degrees" %}"
@@ -277,7 +277,7 @@
                             {% if instance_to_platesolve.solution.advanced_dec is not None %}
                                 <abbr title="{{ instance_to_platesolve.solution.advanced_dec }} {% trans "degrees" %}"
                                       class="dec-coordinates">
-                                    {{ instance_to_platesolve.solution.advanced_dec | dec_to_dms:2 }}
+                                    {{ instance_to_platesolve.solution.advanced_dec | dec_to_dms:instance_to_platesolve.solution.advanced_pixscale }}
                                 </abbr>
                             {% else %}
                                 <abbr title="{{ instance_to_platesolve.solution.dec }} {% trans "degrees" %}"
@@ -376,7 +376,10 @@
                 {% endif %}
 
                 {% if locations %}
-                    <p><strong class="card-label">{% trans "Locations" %}:</strong> {{ locations }}</p>
+                    <p>
+                        <strong class="card-label">{% trans "Locations" %}:</strong>
+                        {% highlight_text locations with search_query %}
+                    </p>
                 {% endif %}
 
                 {% if request.user == image.user and image.uncompressed_source_file %}
@@ -409,10 +412,10 @@
                                 <a href="{{ image.remote_source|remote_source_affiliate_url }}?{% remote_source_affiliate_utm_tags %}"
                                    onclick="getOutboundLink('{{ image.remote_source|remote_source_affiliate_url }}', '{{ request.path }}')"
                                    target="_blank">
-                                    {{ image.get_remote_source }}
+                                    {% highlight_text image.get_remote_source with search_query %}
                                 </a>
                             {% else %}
-                                {{ image.get_remote_source }}
+                                {% highlight_text image.get_remote_source with search_query %}
                             {% endif %}
                         </p>
                     {% endif %}

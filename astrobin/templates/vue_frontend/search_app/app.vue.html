@@ -46,6 +46,8 @@
 
                                 <award-filter v-if="filter.name === 'award'" :award="award"></award-filter>
 
+                                <groups-filter v-if="filter.name === 'groups'" :groups="groups"></groups-filter>
+
                                 <date-published-filter v-if="filter.name === 'date_published'"
                                                        :date-published-min="datePublishedMin"
                                                        :date-published-max="datePublishedMax"></date-published-filter>
@@ -183,6 +185,12 @@
             award:
                 {% if "award" in request.GET %}
                     "{{ request.GET.award }}"
+                {% else %}
+                    undefined
+                {% endif %},
+            groups:
+                {% if "groups" in request.GET %}
+                    "{{ request.GET.groups }}"
                 {% else %}
                     undefined
                 {% endif %},
@@ -402,6 +410,12 @@
                     restricted: "ADVANCED"
                 },
                 {
+                    name: "groups",
+                    label: "{% trans "Groups" %}",
+                    removable: true,
+                    restricted: "ADVANCED"
+                },
+                {
                     name: "date_published",
                     label: "{% trans "Publication date range" %}",
                     removable: true,
@@ -551,6 +565,10 @@
 
             if (this.award) {
                 this.enabledFilters.push(this.getFilterByName("award"));
+            }
+
+            if (this.groups) {
+                this.enabledFilters.push(this.getFilterByName("groups"));
             }
 
             if (this.datePublishedMin || this.datePublishedMax) {

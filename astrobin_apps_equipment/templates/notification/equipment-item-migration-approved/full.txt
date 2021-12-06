@@ -1,0 +1,20 @@
+{% load i18n %}
+
+{% blocktrans trimmed with user=user make=legacy_item.make name=legacy_item.name %}
+    {{ user }} approved the equipment item for "{{ make }} {{ name }}" that you created.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    The migrations is now staged for execution and will be applied at a later time.
+{% endblocktrans %}
+
+{% blocktrans %}Proposed strategy{% endblocktrans %}: {{ migration_flag }}
+
+{% if target_item %}
+    {% blocktrans %}Target item{% endblocktrans %}:
+    {{ target_item }} ({{ target_url }})
+{% endif %}
+
+{% blocktrans trimmed %}
+    Thanks for your cooperation!
+{% endblocktrans %}

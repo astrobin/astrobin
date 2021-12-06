@@ -22,13 +22,11 @@
 <script src="{% static "astrobin_apps_platesolving/js/astrobin_apps_platesolving.js" %}?t=20210930-1"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        var $img = $('.main-image img').first();
 
         function attemptPlatesolving()  {
             function shouldProcess() {
-                var imageLoaded = $img.attr('data-loaded') === 'true';
-
-                return imageLoaded;
+                const $img = $('.main-image img').first();
+                return $img.attr('data-loaded') === 'true';
             }
 
             if (shouldProcess()) {
@@ -67,6 +65,7 @@
                         pixInsightStagePlateSolvingImage: "{% trans 'Plate-solving image...' %}",
                         pixInsightStageGeneratingImageAnnotations: "{% trans 'Generating image annotations...' %}",
                         pixInsightStageProcessingSvgDocuments: "{% trans 'Processing SVG documents...' %}",
+                        pixInsightStageGeneratingFindingCharts: "{% trans 'Generating finding charts...' %}",
                         pixInsightStageUploadingResults: "{% trans 'Uploading results...' %}",
                         pixInsightStageEndTask: "{% trans 'Task completed' %}",
                     }

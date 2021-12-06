@@ -6,6 +6,7 @@ from hitcount.models import HitCount
 from persistent_messages.models import Message
 from tastypie import fields, http
 from tastypie.authentication import Authentication
+from tastypie.exceptions import InvalidFilterError
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 
 from astrobin.enums.license import License
@@ -14,6 +15,7 @@ from astrobin.views import get_image_or_404
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_platesolving.services import SolutionService
+from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from toggleproperties.models import ToggleProperty
 
@@ -72,10 +74,13 @@ class ImageRevisionResource(ModelResource):
     url_duckduckgo_small = fields.CharField()
     url_histogram = fields.CharField()
     url_skyplot = fields.CharField()
+    url_advanced_skyplot = fields.CharField()
+    url_advanced_skyplot_small = fields.CharField()
     url_solution = fields.CharField()
     url_advanced_solution = fields.CharField()
 
     is_solved = fields.BooleanField()
+    solution_status = fields.CharField()
 
     ra = fields.DecimalField()
     dec = fields.DecimalField()
@@ -85,13 +90,15 @@ class ImageRevisionResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = ImageRevision.objects.filter(image__is_wip=False, corrupted=False)
+        queryset = ImageRevision.objects.filter(image__is_wip=False)
         fields = [
             'id',
             'uploaded',
             'w',
             'h',
             'label',
+            'title',
+            'description',
 
             'url_thumb',
             'url_gallery',
@@ -104,11 +111,14 @@ class ImageRevisionResource(ModelResource):
             'url_duckduckgo_small',
             'url_histogram',
             'url_skyplot',
+            'url_advanced_skyplot',
+            'url_advanced_skyplot_small',
             'url_solution',
             'url_advanced_solution',
 
             'is_final',
             'is_solved',
+            'solution_status',
 
             'ra',
             'dec',
@@ -154,6 +164,16 @@ class ImageRevisionResource(ModelResource):
             if bundle.obj.solution and bundle.obj.solution.skyplot_zoom1 \
             else None
 
+    def dehydrate_url_advanced_skyplot(self, bundle):
+        return bundle.obj.solution.pixinsight_finding_chart.url \
+            if bundle.obj.solution and bundle.obj.solution.pixinsight_finding_chart \
+            else None
+
+    def dehydrate_url_advanced_skyplot_small(self, bundle):
+        return bundle.obj.solution.pixinsight_finding_chart_small.url \
+            if bundle.obj.solution and bundle.obj.solution.pixinsight_finding_chart_small \
+            else None
+
     def dehydrate_url_solution(self, bundle):
         return bundle.obj.solution.image_file.url \
             if bundle.obj.solution and bundle.obj.solution.image_file \
@@ -165,7 +185,32 @@ class ImageRevisionResource(ModelResource):
             else None
 
     def dehydrate_is_solved(self, bundle):
-        return bundle.obj.solution != None
+        solution = bundle.obj.solution
+        return solution != None and solution.status >= Solver.SUCCESS
+
+    def dehydrate_solution_status(self, bundle):
+        solution = bundle.obj.solution
+
+        if solution is None or solution.status == Solver.MISSING:
+            return "MISSING"
+
+        if solution.status == Solver.PENDING:
+            return "PENDING"
+
+        if solution.status == Solver.FAILED:
+            return "FAILED"
+
+        if solution.status == Solver.SUCCESS:
+            return "SUCCESS"
+
+        if solution.status == Solver.ADVANCED_PENDING:
+            return "ADVANCED_PENDING"
+
+        if solution.status == Solver.ADVANCED_FAILED:
+            return "ADVANCED_FAILED"
+
+        if solution.status == Solver.ADVANCED_SUCCESS:
+            return "ADVANCED_SUCCESS"
 
     def dehydrate_ra(self, bundle):
         if bundle.obj.solution:
@@ -221,10 +266,13 @@ class ImageResource(ModelResource):
     url_duckduckgo_small = fields.CharField()
     url_histogram = fields.CharField()
     url_skyplot = fields.CharField()
+    url_advanced_skyplot = fields.CharField()
+    url_advanced_skyplot_small = fields.CharField()
     url_solution = fields.CharField()
     url_advanced_solution = fields.CharField()
 
     is_solved = fields.BooleanField()
+    solution_status = fields.CharField()
 
     ra = fields.DecimalField()
     dec = fields.DecimalField()
@@ -239,8 +287,7 @@ class ImageResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = Image.all_objects.filter(
-            corrupted=False, is_wip=False, deleted__isnull=True, uploader_in_progress__isnull=True)
+        queryset = Image.all_objects.filter(is_wip=False, deleted__isnull=True, uploader_in_progress__isnull=True)
         fields = [
             'id',
             'hash',
@@ -260,6 +307,8 @@ class ImageResource(ModelResource):
             'url_duckduckgo_small',
             'url_histogram',
             'url_skyplot',
+            'url_advanced_skyplot',
+            'url_advanced_skyplot_small',
             'url_solution',
             'url_advanced_solution',
 
@@ -276,6 +325,7 @@ class ImageResource(ModelResource):
 
             'is_final',
             'is_solved',
+            'solution_status',
 
             'ra',
             'dec',
@@ -330,6 +380,16 @@ class ImageResource(ModelResource):
             if bundle.obj.solution and bundle.obj.solution.skyplot_zoom1 \
             else None
 
+    def dehydrate_url_advanced_skyplot(self, bundle):
+        return bundle.obj.solution.pixinsight_finding_chart.url \
+            if bundle.obj.solution and bundle.obj.solution.pixinsight_finding_chart \
+            else None
+
+    def dehydrate_url_advanced_skyplot_small(self, bundle):
+        return bundle.obj.solution.pixinsight_finding_chart_small.url \
+            if bundle.obj.solution and bundle.obj.solution.pixinsight_finding_chart_small \
+            else None
+
     def dehydrate_url_solution(self, bundle):
         return bundle.obj.solution.image_file.url \
             if bundle.obj.solution and bundle.obj.solution.image_file \
@@ -341,7 +401,32 @@ class ImageResource(ModelResource):
             else None
 
     def dehydrate_is_solved(self, bundle):
-        return bundle.obj.solution != None
+        solution = bundle.obj.solution
+        return solution != None and solution.status >= Solver.SUCCESS
+
+    def dehydrate_solution_status(self, bundle):
+        solution = bundle.obj.solution
+
+        if solution is None or solution.status == Solver.MISSING:
+            return "MISSING"
+
+        if solution.status == Solver.PENDING:
+            return "PENDING"
+
+        if solution.status == Solver.FAILED:
+            return "FAILED"
+
+        if solution.status == Solver.SUCCESS:
+            return "SUCCESS"
+
+        if solution.status == Solver.ADVANCED_PENDING:
+            return "ADVANCED_PENDING"
+
+        if solution.status == Solver.ADVANCED_FAILED:
+            return "ADVANCED_FAILED"
+
+        if solution.status == Solver.ADVANCED_SUCCESS:
+            return "ADVANCED_SUCCESS"
 
     def dehydrate_subjects(self, bundle):
         if bundle.obj.solution:
@@ -481,6 +566,9 @@ class ImageResource(ModelResource):
             orm_filters['pk__in'] = [i.object_id for i in qs]
 
         if ids:
+            max = 100
+            if len(ids) > max:
+                raise InvalidFilterError(f'Please do not request over {max} image IDs')
             orm_filters['pk__in'] = ids.split(',')
 
         if user:
@@ -496,7 +584,7 @@ class ImageOfTheDayResource(ModelResource):
 
     class Meta:
         authentication = AppAuthentication()
-        queryset = ImageOfTheDay.objects.filter(image__corrupted=False)
+        queryset = ImageOfTheDay.objects.filter()
         fields = [
             'image',
             'runnerup_1',
@@ -606,8 +694,6 @@ class UserProfileResource(ModelResource):
             'hobbies',
             'id',
             'image_count',
-            'image_recovery_process_completed',
-            'image_recovery_process_started',
             'job',
             'language',
             'last_login',
@@ -619,7 +705,6 @@ class UserProfileResource(ModelResource):
             'premium_subscription_expiration',
             'real_name',
             'received_likes_count',
-            'recovered_images_notice_sent',
             'referral_code',
             'resource_uri',
             'total_notifications_count',
@@ -636,7 +721,7 @@ class UserProfileResource(ModelResource):
         return 'Etc/GMT'
 
     def dehydrate_image_count(self, bundle):
-        return Image.objects.filter(user=bundle.obj.user, corrupted=False, is_wip=False).count()
+        return Image.objects.filter(user=bundle.obj.user, is_wip=False).count()
 
     def dehydrate_received_likes_count(self, bundle):
         likes = 0

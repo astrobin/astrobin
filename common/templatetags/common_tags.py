@@ -1,16 +1,17 @@
 import datetime
 
 import bleach
+from dateutil import parser
 from django import template
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.template import Library, Node
 from django.template.defaultfilters import urlencode
 from django.utils.encoding import force_text
-from django.utils.functional import keep_lazy
 from django.utils.safestring import mark_safe
 
 from common.services import AppRedirectionService, DateTimeService
+from common.services.highlighting_service import HighlightingService
 from common.services.pagination_service import PaginationService
 
 register = Library()
@@ -147,9 +148,6 @@ def string_to_list(string):
     return args
 
 
-
-
-
 @register.filter(is_safe=True)
 def truncatechars(value, arg):
     """
@@ -221,14 +219,17 @@ def page_counter(counter, page_number, items_per_page):
 
 
 @register.simple_tag
-def app_redirection_service(request, path):
-    return AppRedirectionService.redirect(request, path)
+def app_redirection_service(path):
+    return AppRedirectionService.redirect(path)
 
 
 @register.filter
 def is_future(dt):
     return dt > DateTimeService.now()
 
+@register.filter
+def is_after_datetime(dt, after_string):
+    return dt > parser.parse(after_string)
 
 @register.simple_tag
 def timestamp(dt):
@@ -243,3 +244,49 @@ def strip_html(value):
             attributes=settings.SANITIZER_ALLOWED_ATTRIBUTES,
             styles=[], strip=True)
     return value
+
+@register.filter
+def ensure_url_protocol(url: str) -> str:
+    if '://' in url:
+        return url
+
+    return f'http://{url}'
+
+
+class HighlightTextNode(template.Node):
+
+    def __init__(self, text, terms):
+        self.text = template.Variable(text)
+        self.terms = template.Variable(terms)
+
+    def render(self, context):
+        text = str(self.text.resolve(context))
+        terms = str(self.terms.resolve(context))
+
+        return HighlightingService(text, terms).render_html()
+
+
+@register.tag
+def highlight_text(parser, token):
+    bits = token.split_contents()
+    tag_name = bits[0]
+    text = bits[1]
+
+    if len(bits) < 4:
+        raise template.TemplateSyntaxError(
+            "'%s' tag requires an object and a query provided by 'with'." % tag_name
+        )
+
+    if bits[2] != "with":
+        raise template.TemplateSyntaxError(
+            "'%s' tag's second argument should be 'with'." % tag_name
+        )
+
+    query = bits[3]
+
+    return HighlightTextNode(text, query)
+
+
+@register.filter
+def highlight_text_filter(text, terms):
+    return HighlightingService(text, terms).render_html()

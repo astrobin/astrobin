@@ -12,6 +12,7 @@ from django.template.defaultfilters import filesizeformat
 from hitcount.models import HitCount
 from pybb.models import Post
 
+from astrobin.services.gear_service import GearService
 from common.services import DateTimeService
 
 from io import StringIO
@@ -36,7 +37,8 @@ from haystack.query import SearchQuerySet
 from registration.backends.hmac.views import RegistrationView
 from requests import Response
 
-from astrobin.models import BroadcastEmail, Image, DataDownloadRequest, ImageRevision
+from astrobin.models import BroadcastEmail, Image, DataDownloadRequest, ImageRevision, Gear, CameraRenameProposal, \
+    GearMigrationStrategy
 from astrobin.utils import inactive_accounts, never_activated_accounts, never_activated_accounts_to_be_deleted
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
@@ -77,26 +79,6 @@ def update_top100_ids():
 
     logger.debug(
         'Top100 ids task is already being run by another worker')
-
-
-@shared_task(time_limit=60)
-def global_stats():
-    from astrobin.models import Image, GlobalStat
-    sqs = SearchQuerySet()
-
-    users = sqs.models(User).all().count()
-    images = sqs.models(Image).all().count()
-
-    integration = 0
-    for i in sqs.models(Image).all():
-        integration += i.integration
-    integration = int(integration / 3600.0)
-
-    gs = GlobalStat(
-        users=users,
-        images=images,
-        integration=integration)
-    gs.save()
 
 
 @shared_task(time_limit=60, acks_late=True)
@@ -316,7 +298,7 @@ def prepare_download_data_archive(request_id):
             'mouse_hover_image'
         ])
 
-        images = Image.objects_including_wip.filter(user=data_download_request.user, corrupted=False)
+        images = Image.objects_including_wip.filter(user=data_download_request.user)
         for image in images:
             id = image.get_id()  # type: str
 
@@ -338,7 +320,7 @@ def prepare_download_data_archive(request_id):
                         archive.writestr("%s-%s/solution/%s" % (id, title, path), response.content)
                         logger.debug("prepare_download_data_archive: solution of image %s = written" % id)
 
-                for revision in ImageRevision.objects.filter(image=image, corrupted=False):  # type: ImageRevision
+                for revision in ImageRevision.objects.filter(image=image):  # type: ImageRevision
                     try:
                         label = revision.label  # type: str
                         path = ntpath.basename(revision.image_file.name)  # type: str
@@ -616,9 +598,8 @@ def assign_upload_length():
                 ))
 
     time_cut = DateTimeService.now() - timedelta(hours=2)
-    images = Image.all_objects.filter(uploader_upload_length__isnull=True, uploaded__gte=time_cut, corrupted=False)
-    revisions = ImageRevision.all_objects.filter(uploader_upload_length__isnull=True, uploaded__gte=time_cut,
-                                                 corrupted=False)
+    images = Image.all_objects.filter(uploader_upload_length__isnull=True, uploaded__gte=time_cut)
+    revisions = ImageRevision.all_objects.filter(uploader_upload_length__isnull=True, uploaded__gte=time_cut)
 
     process(images)
     process(revisions)
@@ -634,3 +615,24 @@ def clear_duplicate_hit_counts():
     )
 
     HitCount.objects.annotate(has_other=Exists(duplicates)).filter(has_other=True).delete()
+
+
+@shared_task(time_limit=30)
+def expire_gear_migration_locks():
+    Gear.objects \
+        .filter(migration_flag_moderator_lock__isnull=False,
+                migration_flag_moderator_lock_timestamp__lt=timezone.now() - timedelta(hours=1)) \
+        .update(migration_flag_moderator_lock=None,
+                migration_flag_moderator_lock_timestamp=None)
+
+    GearMigrationStrategy.objects \
+        .filter(migration_flag_reviewer_lock__isnull=False,
+                migration_flag_reviewer_lock_timestamp__lt=timezone.now() - timedelta(hours=1)) \
+        .update(migration_flag_reviewer_lock=None,
+                migration_flag_reviewer_lock_timestamp=None)
+
+
+@shared_task(time_limit=600, acks_late=True)
+def process_camera_rename_proposal(gear_rename_proposal_pk: int):
+    proposal = CameraRenameProposal.objects.get(pk=gear_rename_proposal_pk)
+    GearService.process_camera_rename_proposal(proposal)

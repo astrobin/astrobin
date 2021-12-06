@@ -43,9 +43,6 @@ class Generators:
             image_file=kwargs.pop('image_file', 'images/foo.jpg'),
             is_wip=kwargs.pop('is_wip', False),
             is_final=kwargs.pop('is_final', True),
-            corrupted=kwargs.pop('corrupted', False),
-            recovered=kwargs.pop('recovered', None),
-            recovery_ignored=kwargs.pop('recovery_ignored', None),
             description=kwargs.pop('description', None),
             description_bbcode=kwargs.pop('description_bbcode', None),
             download_limitation=kwargs.pop('download_limitations', DownloadLimitation.ME_ONLY),
@@ -61,10 +58,9 @@ class Generators:
             image=image,
             image_file=kwargs.pop('image_file', 'images/foo.jpg'),
             is_final=kwargs.pop('is_final', False),
-            corrupted=kwargs.pop('corrupted', False),
             label=kwargs.pop('label', 'B'),
+            title=kwargs.pop('title', None),
             description=kwargs.pop('description', None),
-            recovery_ignored=kwargs.pop('recovery_ignored', None),
         )
 
     @staticmethod

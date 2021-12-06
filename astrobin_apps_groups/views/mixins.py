@@ -5,7 +5,6 @@ from django.views import View
 
 from astrobin_apps_groups.models import Group
 from astrobin_apps_groups.utils import has_access_to_premium_group_features
-from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 
 
 class RestrictToGroupMembersMixin(View):
@@ -53,7 +52,7 @@ class RedirectToGroupDetailMixin(View):
             group = getattr(self, 'object')
         except AttributeError:
             group = self.get_object()
-        return reverse('group_detail', kwargs = {'pk': group.pk})
+        return reverse('group_detail', kwargs = {'pk': group.pk, 'slug': group.slug})
 
 
 class RestrictPrivateGroupToMembersMixin(View):

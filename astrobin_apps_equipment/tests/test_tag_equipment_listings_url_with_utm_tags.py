@@ -1,30 +1,34 @@
 from django.test import TestCase
 
-from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import equipment_listing_url_with_utm_tags
+from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import equipment_listing_url_with_tags
+from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 
 
 class TestTagEquipmentListingUrlWithUtmTags(TestCase):
     def test_simple_url(self):
-        url = equipment_listing_url_with_utm_tags('https://www.example.com')
+        listing = EquipmentGenerators.equipment_brand_listing(url='https://www.example.com')
         self.assertEqual(
-            'https://www.example.com?utm_source=astrobin&utm_medium=link&utm_campaign=webshop-integration',
-            url
+            f'https://www.example.com?brand={listing.brand.name}&retailer={listing.retailer.name}&source=foo',
+            equipment_listing_url_with_tags(listing, 'foo')
         )
 
     def test_complex_url(self):
-        url = equipment_listing_url_with_utm_tags('https://www.example.com/1/2/3/')
+        listing = EquipmentGenerators.equipment_brand_listing(url='https://www.example.com/1/2/3/')
         self.assertEqual(
-            'https://www.example.com/1/2/3/?utm_source=astrobin&utm_medium=link&utm_campaign=webshop-integration',
-            url
+            f'https://www.example.com/1/2/3/?brand={listing.brand.name}&retailer={listing.retailer.name}&source=foo',
+            equipment_listing_url_with_tags(listing, 'foo')
         )
 
     def test_url_with_params(self):
-        url = equipment_listing_url_with_utm_tags('https://www.example.com/search?q=foo')
+        listing = EquipmentGenerators.equipment_brand_listing(url='https://www.example.com/search?q=foo')
         self.assertEqual(
-            'https://www.example.com/search?q=foo&utm_source=astrobin&utm_medium=link&utm_campaign=webshop-integration',
-            url
+            f'https://www.example.com/search?q=foo&brand={listing.brand.name}&retailer={listing.retailer.name}&source=foo',
+            equipment_listing_url_with_tags(listing, 'foo')
         )
 
-    def test_url_with_utm_params(self):
-        url = equipment_listing_url_with_utm_tags('https://www.example.com/search?q=foo&utm_source=foo')
-        self.assertEqual('https://www.example.com/search?q=foo&utm_source=foo', url)
+    def test_url_with_conflicting_params(self):
+        listing = EquipmentGenerators.equipment_brand_listing(url='https://www.example.com/search?q=foo&source=foo')
+        self.assertEqual(
+            'https://www.example.com/search?q=foo&source=foo',
+            equipment_listing_url_with_tags(listing, 'bar')
+        )

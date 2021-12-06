@@ -1,5 +1,7 @@
 from django.db.models import QuerySet, Q
 from django.template import Library
+from fuzzywuzzy import fuzz
+from fuzzywuzzy.utils import asciidammit
 
 from astrobin.models import Gear, Image
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
@@ -35,15 +37,17 @@ def equipment_item_listings(gear, country):
 
 
 @register.simple_tag
-def equipment_listing_url_with_utm_tags(url):
-    if 'utm_' in url:
+def equipment_listing_url_with_tags(listing: EquipmentBrandListing, source: str) -> str:
+    url = listing.url
+
+    if 'brand' in url or 'retailer' in url or 'source' in url:
         return url
 
     tags_separator = '?'
     if tags_separator in url:
         tags_separator = '&'
 
-    return "%s%sutm_source=astrobin&utm_medium=link&utm_campaign=webshop-integration" % (url, tags_separator)
+    return f'{url}{tags_separator}brand={listing.brand.name}&retailer={listing.retailer.name}&source={source}'
 
 
 @register.filter
@@ -120,3 +124,32 @@ def unique_equipment_item_listings(image, country):
             pks.append(listing.pk)
 
     return EquipmentItemListing.objects.filter(pk__in=pks)
+
+
+@register.filter
+def is_equipment_moderator(user) -> bool:
+    return user.is_authenticated and user.groups.filter(name='equipment_moderators').exists()
+
+
+@register.filter
+def is_own_equipment_migrator(user) -> bool:
+    return user.is_authenticated and user.groups.filter(name='own_equipment_migrators').exists()
+
+
+@register.filter
+def can_access_basic_equipment_functions(user) -> bool:
+    return is_equipment_moderator(user) or is_own_equipment_migrator(user)
+
+
+@register.filter
+def has_matching_brand_request_query(gear: Gear, q) -> bool:
+    brand = gear.make
+
+    if brand in (None, '') or q in (None, ''):
+        return False
+
+    similarity = fuzz.partial_ratio(asciidammit(q.lower()), asciidammit(brand.lower()))
+
+    return similarity > 85
+
+

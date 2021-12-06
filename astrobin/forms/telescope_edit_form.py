@@ -1,11 +1,8 @@
-from django import forms
-
+from astrobin.forms.migratable_gear_item_edit_form import MigratableGearItemEditForm
 from astrobin.models import Telescope
 
 
-class TelescopeEditForm(forms.ModelForm):
-    error_css_class = 'error'
-
+class TelescopeEditForm(MigratableGearItemEditForm):
     class Meta:
         model = Telescope
-        exclude = ('make', 'name')
+        exclude = MigratableGearItemEditForm.Meta.exclude

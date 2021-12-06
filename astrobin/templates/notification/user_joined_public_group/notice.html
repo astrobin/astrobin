@@ -1,4 +1,7 @@
 {% load i18n %}
+
 <a href="{{url}}">
-    {% blocktrans %}<strong>{{user}}</strong> joined the public group: "{{group_name}}"{% endblocktrans %}
+    {% blocktrans trimmed %}
+        <strong>{{user}}</strong> joined the public group: "{{group_name}}"
+    {% endblocktrans %}
 </a>

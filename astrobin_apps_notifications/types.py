@@ -61,6 +61,12 @@ NOTICE_TYPES = (
         2,
     ),
     (
+        'new_comment_to_edit_proposal',
+        _('Your edit proposal received a new comment'),
+        '',
+        2,
+    ),
+    (
         'new_comment_reply',
         _('There was a reply to your comment'),
         '',
@@ -291,6 +297,12 @@ NOTICE_TYPES = (
     (
         'new_image_description_mention',
         _("You were mentioned in an image description"),
+        '',
+        2
+    ),
+    (
+        'gear_renamed',
+        _("A gear item that you used was renamed"),
         '',
         2
     ),

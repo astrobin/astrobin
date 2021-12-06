@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    {{ user }} approved the equipment item "{{ item }}" that you created
+{% endblocktrans %}

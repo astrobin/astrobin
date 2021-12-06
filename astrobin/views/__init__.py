@@ -56,7 +56,7 @@ from astrobin.forms.profile_edit_privacy_form import UserProfileEditPrivacyForm
 from astrobin.gear import is_gear_complete, get_correct_gear
 from astrobin.models import Image, UserProfile, Gear, Location, ImageRevision, DeepSky_Acquisition, \
     SolarSystem_Acquisition, GearUserInfo, Telescope, Mount, Camera, FocalReducer, Software, Filter, \
-    Accessory, GlobalStat, App, Acquisition
+    Accessory, App, Acquisition
 from astrobin.shortcuts import ajax_response, ajax_success
 from astrobin.templatetags.tags import in_upload_wizard
 from astrobin.utils import get_client_country_code
@@ -493,7 +493,7 @@ def index(request, template='index/root.html', extra_context=None):
 @login_required
 def image_upload(request):
     if not settings.TESTING and "forceClassicUploader" not in request.GET:
-        return redirect(AppRedirectionService.redirect(request, "/uploader"))
+        return redirect(AppRedirectionService.redirect("/uploader"))
 
     from astrobin_apps_premium.utils import (
         premium_used_percent,
@@ -1148,13 +1148,9 @@ def user_page(request, username):
     else:
         qs = UserService(user).get_public_images()
     wip_qs = UserService(user).get_wip_images()
-    corrupted_qs = UserService(user).get_corrupted_images()
-    recovered_qs = UserService(user).get_recovered_images()
 
     if request.user != user:
-        qs = qs \
-            .exclude(is_wip=True) \
-            .exclude(pk__in=[x.pk for x in corrupted_qs])
+        qs = qs.exclude(is_wip=True)
 
     if 'staging' in request.GET:
         if request.user != user and not request.user.is_superuser:
@@ -1167,18 +1163,6 @@ def user_page(request, username):
             return HttpResponseForbidden()
         qs = Image.deleted_objects.filter(user=user)
         section = 'trash'
-        subsection = None
-    elif 'corrupted' in request.GET:
-        if request.user != user and not request.user.is_superuser:
-            return HttpResponseForbidden()
-        qs = corrupted_qs
-        section = 'corrupted'
-        subsection = None
-    elif 'recovered' in request.GET:
-        if request.user != user and not request.user.is_superuser:
-            return HttpResponseForbidden()
-        qs = recovered_qs
-        section = 'recovered'
         subsection = None
     else:
         #########
@@ -1234,7 +1218,7 @@ def user_page(request, username):
                         Q(acquisition=None) | Q(acquisition__date=None)).distinct()
                 else:
                     if active is None and distinct_years:
-                            active = str(distinct_years[0])
+                        active = str(distinct_years[0])
 
                     if active:
                         qs = qs.filter(acquisition__date__year=active).order_by('-published').distinct()
@@ -1433,7 +1417,6 @@ def user_page(request, username):
         'menu': menu,
         'stats': data['stats'] if 'stats' in data else None,
         'alias': 'gallery',
-        'corrupted_images': Image.objects_including_wip.filter(corrupted=True, user=user),
         'public_images_without_acquisition': UserService(user).get_public_images().filter(acquisition__isnull=True),
     }
 
@@ -1445,7 +1428,7 @@ def user_page(request, username):
     except IOError:
         response_dict['mobile_header_background'] = None
 
-    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+    response_dict.update(UserService(user).get_image_numbers())
 
     template_name = 'user/profile.html'
     if request.is_ajax():
@@ -1487,7 +1470,7 @@ def user_page_bookmarks(request, username):
         'alias': 'gallery',
     }
 
-    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+    response_dict.update(UserService(user).get_image_numbers())
 
     return render(request, template_name, response_dict)
 
@@ -1508,7 +1491,7 @@ def user_page_liked(request, username):
         'alias': 'gallery',
     }
 
-    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+    response_dict.update(UserService(user).get_image_numbers())
 
     return render(request, template_name, response_dict)
 
@@ -1546,7 +1529,7 @@ def user_page_following(request, username, extra_context=None):
         'view': request.GET.get('view', 'default'),
     }
 
-    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+    response_dict.update(UserService(user).get_image_numbers())
 
     return render(request, template_name, response_dict)
 
@@ -1580,7 +1563,7 @@ def user_page_followers(request, username, extra_context=None):
         'view': request.GET.get('view', 'default'),
     }
 
-    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+    response_dict.update(UserService(user).get_image_numbers())
 
     return render(request, template_name, response_dict)
 
@@ -1622,7 +1605,7 @@ def user_page_friends(request, username, extra_context=None):
         'view': request.GET.get('view', 'default'),
     }
 
-    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+    response_dict.update(UserService(user).get_image_numbers())
 
     return render(request, template_name, response_dict)
 
@@ -1639,7 +1622,7 @@ def user_page_plots(request, username):
         'profile': profile,
     }
 
-    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+    response_dict.update(UserService(user).get_image_numbers())
 
     return render(request, 'user/plots.html', response_dict)
 
@@ -1661,87 +1644,9 @@ def user_page_api_keys(request, username):
         'api_keys': keys,
     }
 
-    response_dict.update(UserService(user).get_image_numbers(include_corrupted=request.user == user))
+    response_dict.update(UserService(user).get_image_numbers())
 
     return render(request, 'user/api_keys.html', response_dict)
-
-
-@never_cache
-@require_GET
-def user_profile_stats_get_integration_hours_ajax(request, username, period='monthly', since=0):
-    user = get_object_or_404(UserProfile, user__username=username).user
-
-    import astrobin.stats as _s
-    (label, data, options) = _s.integration_hours(user, period, int(since))
-    response_dict = {
-        'flot_label': label,
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@never_cache
-@require_GET
-def user_profile_stats_get_integration_hours_by_gear_ajax(request, username, period='monthly'):
-    user = get_object_or_404(UserProfile, user__username=username).user
-
-    import astrobin.stats as _s
-    (data, options) = _s.integration_hours_by_gear(user, period)
-    response_dict = {
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@never_cache
-@require_GET
-def user_profile_stats_get_uploaded_images_ajax(request, username, period='monthly'):
-    user = get_object_or_404(UserProfile, user__username=username).user
-
-    import astrobin.stats as _s
-    (label, data, options) = _s.uploaded_images(user, period)
-    response_dict = {
-        'flot_label': label,
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@require_GET
-def user_profile_stats_get_views_ajax(request, username, period='monthly'):
-    user = get_object_or_404(UserProfile, user__username=username).user
-
-    import astrobin.stats as _s
-    (label, data, options) = _s.views(user, period)
-    response_dict = {
-        'flot_label': label,
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@never_cache
-@require_GET
-def stats_get_image_views_ajax(request, id, period='monthly'):
-    import astrobin.stats as _s
-
-    (label, data, options) = _s.image_views(id, period)
-
-    response_dict = {
-        'flot_label': label,
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
 
 
 @never_cache
@@ -2311,41 +2216,6 @@ def image_revision_upload_process(request):
 
 @never_cache
 @require_GET
-@user_passes_test(lambda u: u.is_superuser)
-def stats(request):
-    response_dict = {}
-
-    sqs = SearchQuerySet()
-    gs = GlobalStat.objects.first()
-
-    if gs:
-        response_dict['total_users'] = gs.users
-        response_dict['total_images'] = gs.images
-        response_dict['total_integration'] = gs.integration
-
-    sort = '-user_integration'
-    if 'sort' in request.GET:
-        sort = request.GET.get('sort')
-        if sort == 'tot_integration':
-            sort = '-user_integration'
-        elif sort == 'avg_integration':
-            sort = '-user_avg_integration'
-        elif sort == 'images':
-            sort = '-user_images'
-
-    queryset = sqs.filter(user_images__gt=0).models(User).order_by(sort)
-
-    return object_list(
-        request,
-        queryset=queryset,
-        template_name='stats.html',
-        template_object_name='user',
-        extra_context=response_dict,
-    )
-
-
-@never_cache
-@require_GET
 def astrophotographers_list(request):
     if request.user.is_authenticated and \
             request.user.userprofile.exclude_from_competitions and \
@@ -2750,6 +2620,7 @@ def gear_popover_ajax(request, id, image_id):
         'is_authenticated': request.user.is_authenticated,
         'IMAGES_URL': settings.IMAGES_URL,
         'REQUEST_COUNTRY': get_client_country_code(request),
+        'search_query': request.GET.get('q', ''),
     })
 
     response_dict = {
@@ -2795,130 +2666,6 @@ def user_popover_ajax(request, username):
     return HttpResponse(
         simplejson.dumps(response_dict),
         content_type='application/javascript')
-
-
-@never_cache
-@require_GET
-def stats_subject_images_monthly_ajax(request, id):
-    import astrobin.stats as _s
-
-    (label, data, options) = _s.subject_images_monthly(id)
-
-    response_dict = {
-        'flot_label': label,
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@never_cache
-@require_GET
-def stats_subject_integration_monthly_ajax(request, id):
-    import astrobin.stats as _s
-
-    (label, data, options) = _s.subject_integration_monthly(id)
-
-    response_dict = {
-        'flot_label': label,
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@never_cache
-@require_GET
-def stats_subject_total_images_ajax(request, id):
-    import astrobin.stats as _s
-
-    (label, data, options) = _s.subject_total_images(id)
-
-    response_dict = {
-        'flot_label': label,
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@never_cache
-@require_GET
-def stats_subject_camera_types_ajax(request, id):
-    import astrobin.stats as _s
-
-    (label, data, options) = _s.subject_camera_types(id, request.LANGUAGE_CODE)
-
-    response_dict = {
-        'flot_label': label,
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@never_cache
-@require_GET
-def stats_subject_telescope_types_ajax(request, id):
-    import astrobin.stats as _s
-
-    (label, data, options) = _s.subject_telescope_types(id, request.LANGUAGE_CODE)
-
-    response_dict = {
-        'flot_label': label,
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@never_cache
-@require_GET
-def stats_camera_types_trend_ajax(request):
-    import astrobin.stats as _s
-
-    (data, options) = _s.camera_types_trend()
-
-    response_dict = {
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@never_cache
-@require_GET
-def stats_telescope_types_trend_ajax(request):
-    import astrobin.stats as _s
-
-    (data, options) = _s.telescope_types_trend()
-
-    response_dict = {
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
-
-
-@require_GET
-def stats_subject_type_trend_ajax(request):
-    import astrobin.stats as _s
-
-    (data, options) = _s.subject_type_trend()
-
-    response_dict = {
-        'flot_data': data,
-        'flot_options': options,
-    }
-
-    return ajax_response(response_dict)
 
 
 @never_cache

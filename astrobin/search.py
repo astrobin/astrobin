@@ -14,6 +14,7 @@ from haystack.query import SearchQuerySet
 from pybb.models import Post, Topic
 
 from astrobin.enums import SolarSystemSubject, SubjectType
+from astrobin_apps_groups.models import Group
 from nested_comments.models import NestedComment
 from .models import Image
 
@@ -24,6 +25,7 @@ FIELDS = (
     't',
     'animated',
     'award',
+    'groups',
     'camera_type',
     'country',
     'acquisition_type',
@@ -89,6 +91,7 @@ class AstroBinSearchForm(SearchForm):
 
     animated = forms.BooleanField(required=False)
     award = forms.CharField(required=False)
+    groups = forms.CharField(required=False)
     camera_type = forms.CharField(required=False)
     country = forms.CharField(required=False)
     acquisition_type = forms.CharField(required=False)
@@ -124,6 +127,7 @@ class AstroBinSearchForm(SearchForm):
     def __init__(self, *args, **kwargs):
         super(AstroBinSearchForm, self).__init__(args, kwargs)
         self.data = {x: kwargs.pop(x, None) for x in FIELDS}
+        self.request = kwargs.pop('request')
 
     def filter_by_domain(self, results):
         d = self.cleaned_data.get("d")
@@ -174,6 +178,23 @@ class AstroBinSearchForm(SearchForm):
 
             if "top-pick-nomination" in types:
                 queries.append(Q(is_top_pick_nomination=True))
+
+        if len(queries) > 0:
+            results = results.filter(reduce(or_, queries))
+
+        return results
+
+    def filter_by_groups(self, results):
+        groups = self.cleaned_data.get("groups")
+        queries = []
+
+        if groups is not None and groups != "":
+            pks = groups.split(',')
+            if len(pks) > 0:
+                groups = Group.objects.filter(pk__in=pks)
+                for group in groups:
+                    if self.request.user in group.members.all():
+                        queries.append(Q(groups=CustomContain(f'_{group.pk}__')))
 
         if len(queries) > 0:
             results = results.filter(reduce(or_, queries))
@@ -496,6 +517,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_type(sqs)
         sqs = self.filter_by_animated(sqs)
         sqs = self.filter_by_award(sqs)
+        sqs = self.filter_by_groups(sqs)
         sqs = self.filter_by_camera_type(sqs)
         sqs = self.filter_by_country(sqs)
         sqs = self.filter_by_acquisition_type(sqs)
@@ -529,7 +551,12 @@ class AstroBinSearchView(SearchView):
     form_class = AstroBinSearchForm
 
     def get_form(self, form_class=None):
-        return self.get_form_class()(**{x: self.request.GET.get(x, None) for x in FIELDS})
+        context = {'request': self.request}
+        data = {x: self.request.GET.get(x, None) for x in FIELDS}
+
+        context.update(data)
+
+        return self.get_form_class()(**context)
 
     def get_context_data(self, **kwargs):
         context = super(AstroBinSearchView, self).get_context_data(**kwargs)

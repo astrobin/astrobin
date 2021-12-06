@@ -1,4 +1,5 @@
 import logging
+from collections import namedtuple
 from datetime import timedelta
 
 from annoying.functions import get_object_or_None
@@ -9,6 +10,8 @@ from django.core.cache import cache
 from django.core.files.images import get_image_dimensions
 from django.db.models import Q
 from django.urls import reverse
+from hitcount.models import HitCount
+from hitcount.views import HitCountMixin
 
 from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.enums.display_image_download_menu import DownloadLimitation
@@ -63,27 +66,25 @@ class ImageService:
 
         return self.get_revision(label)
 
-    def get_revisions(self, include_corrupted=False, include_deleted=False):
+    def get_revisions(self, include_deleted=False):
         # type: (bool, bool) -> QuerySet
         manager = ImageRevision.all_objects if include_deleted else ImageRevision.objects
-        revisions = manager.filter(image=self.image)
-
-        if not include_corrupted:
-            revisions = revisions.filter(corrupted=False)
-
-        return revisions
+        return manager.filter(image=self.image)
 
     def get_next_available_revision_label(self):
         # type: () -> str
         highest_label = 'A'
-        for r in self.get_revisions(True, True):
+        for r in self.get_revisions(True):
             highest_label = r.label
 
         return base26_encode(base26_decode(highest_label) + 1)
 
-    def get_revisions_with_description(self, include_corrupted=False):
-        # type: (bool) -> QuerySet
-        return self.get_revisions(include_corrupted).exclude(Q(description=None) | Q(description=''))
+    def get_revisions_with_title_or_description(self):
+        # type: () -> QuerySet
+        return self.get_revisions().exclude(
+            Q(Q(title='') | Q(title__isnull=True)) &
+            Q(Q(description='') | Q(description__isnull=True))
+        )
 
     def get_default_cropping(self, revision_label=None):
         if revision_label is None or revision_label == '0':
@@ -265,6 +266,17 @@ class ImageService:
         image.w = new_original.w
         image.h = new_original.h
         image.is_final = image.is_final or new_original.is_final
+
+        if new_original.title:
+            image.title = f'{image.title} ({new_original.title})'
+
+        if image.description:
+            image.description = f'{image.description}\n{new_original.description}' \
+                if new_original.description \
+                else new_original.description
+        else:
+            image.description = new_original.description
+
         image.save(keep_deleted=True)
 
         if new_original.solution:
@@ -334,16 +346,25 @@ class ImageService:
 
         return user == self.image.user
 
+    def record_hit(self, request):
+        if request.user != self.image.user:
+            UpdateHitCountResponse = namedtuple('UpdateHitCountResponse', 'hit_counted hit_message')
+            hit_count: HitCount = HitCount.objects.get_for_object(self.image)
+            hit_count_response: UpdateHitCountResponse = HitCountMixin.hit_count(request, hit_count)
+            return hit_count_response
+
     @staticmethod
     def get_constellation(solution):
         if solution is None or solution.ra is None or solution.dec is None:
             return None
 
         ra = solution.advanced_ra if solution.advanced_ra else solution.ra
-        ra_hms = decimal_to_hours_minutes_seconds_string(ra, hour_symbol='', minute_symbol='', second_symbol='', precision=0)
+        ra_hms = decimal_to_hours_minutes_seconds_string(ra, hour_symbol='', minute_symbol='', second_symbol='',
+                                                         precision=0)
 
         dec = solution.advanced_dec if solution.advanced_dec else solution.dec
-        dec_dms = decimal_to_degrees_minutes_seconds_string(dec, degree_symbol='', minute_symbol='', second_symbol='', precision=0)
+        dec_dms = decimal_to_degrees_minutes_seconds_string(dec, degree_symbol='', minute_symbol='', second_symbol='',
+                                                            precision=0)
 
         try:
             return ConstellationsService.get_constellation('%s %s' % (ra_hms, dec_dms))

@@ -207,6 +207,20 @@ def get_image_resolution(image):
 
     return w, h
 
+
+def dec_decimal_precision_from_pixel_scale(pixel_scale: float = 0) -> int:
+    if pixel_scale == 0 or pixel_scale > 10:
+        return 0
+
+    if pixel_scale > 1:
+        return 1
+
+    return 2
+
+def ra_decimal_precision_from_pixel_scale(pixel_scale: float = 0) -> int:
+    return dec_decimal_precision_from_pixel_scale(pixel_scale) + 1
+
+
 def number_unit_decimals(value, unit, precision):
     if precision == 0:
         value = f'{int(round(value))}{unit}'

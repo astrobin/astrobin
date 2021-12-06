@@ -1,3 +1,4 @@
+from annoying.functions import get_object_or_None
 from braces.views import JsonRequestResponseMixin, LoginRequiredMixin
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
@@ -11,17 +12,12 @@ class DeleteImages(JsonRequestResponseMixin, LoginRequiredMixin, View):
         pks = self.request_json["images"]
 
         if len(pks) > 0:
-            images = Image.all_objects.filter(user=request.user, pk__in=pks)
+            for pk in pks:
+                image: Image = get_object_or_None(Image.all_objects, pk=pk)
+                if image is None or image.user != request.user:
+                    return self.render_bad_request_response()
 
-            if len(pks) != images.count():
-                return self.render_bad_request_response()
-
-            for image in images:
-                if image.corrupted and image.recovered:
-                    image.corrupted = False
-                    image.save(keep_deleted=True)
-
-            images.delete()
+                image.delete()
 
             messages.success(request, _("%(number)s image(s) deleted." % {"number": len(pks)}))
 

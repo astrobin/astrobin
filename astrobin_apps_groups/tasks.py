@@ -35,7 +35,7 @@ def push_notification_for_group_join_request_approval(group_pk, user_pk, moderat
         {
             'group_name': group.name,
             'url': build_notification_url(
-                settings.BASE_URL + reverse('group_detail', args=(group.pk,)), moderator
+                settings.BASE_URL + reverse('group_detail', args=(group.pk, group.slug)), moderator
             ),
         })
 

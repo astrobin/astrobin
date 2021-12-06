@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load tags %}
 {% load astrobin_apps_iotd_tags %}
+{% load astrobin_apps_equipment_tags %}
 {% load static %}
 {% load common_tags %}
 
@@ -78,7 +79,7 @@
 
                 {% if request.user|is_iotd_submitter %}
                     <li>
-                        <a href="{% app_redirection_service request '/iotd/submission-queue' %}">
+                        <a href="{% app_redirection_service '/iotd/submission-queue' %}">
                             <i class="icon-upload"></i>
                             {% trans "Submission queue" %}
                         </a>
@@ -87,7 +88,7 @@
 
                 {% if request.user|is_iotd_reviewer %}
                     <li>
-                        <a href="{% app_redirection_service request '/iotd/review-queue' %}">
+                        <a href="{% app_redirection_service '/iotd/review-queue' %}">
                             <i class="icon-star"></i>
                             {% trans "Review queue" %}
                         </a>
@@ -99,6 +100,17 @@
                         <a href="{% url 'iotd_judgement_queue' %}">
                             <i class="icon-legal"></i>
                             {% trans "Judgement queue" %}
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if request.user|is_equipment_moderator %}
+                    <li class="nav-header">{% trans "Equipment" %}</li>
+
+                    <li>
+                        <a href="{% app_redirection_service '/equipment/migration-tool' %}">
+                            <i class="icon-arrow-right"></i>
+                            {% trans "Migration tool" %}
                         </a>
                     </li>
                 {% endif %}
@@ -120,7 +132,7 @@
             </ul>
         </li>
 
-        <li class="dropdown explore-menu {% current request "^/explore/|^/search/|^/stats/|^/astrophotographers-list/" %}">
+        <li class="dropdown explore-menu {% current request "^/explore/|^/search/|^/astrophotographers-list/" %}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 {% trans "Explore" %}
                 <i class="icon-caret-down"></i>
@@ -133,8 +145,17 @@
                     </a>
                 </li>
 
+                {% if request.user|can_access_basic_equipment_functions %}
+                    <li class="explore-menu-equipment">
+                        <a href="{% app_redirection_service '/equipment/explorer' %}">
+                            <i class="icon-camera"></i>
+                            {% trans "Equipment" %} <em>{% trans "(beta)" %}</em>
+                        </a>
+                    </li>
+                {% endif %}
+
                 <li class="explore-menu-constellations">
-                    <a href="{% app_redirection_service request '/explore/constellations' %}">
+                    <a href="{% app_redirection_service '/explore/constellations' %}">
                         <i class="icon-star"></i>
                         {% trans "Constellations" %}
                     </a>
@@ -190,18 +211,7 @@
                     <li class="explore-menu-contributors-list">
                         <a href="{% url 'contributors_list' %}">
                             <i class="icon-file-text"></i>
-                            {% trans "Contributors list" %} {% trans "(beta)" %}
-                        </a>
-                    </li>
-                {% endif %}
-
-                {% if request.user.is_superuser %}
-                    <li class="divider"></li>
-
-                    <li class="explore-menu-stats">
-                        <a href="{% url 'stats' %}">
-                            <i class="icon-bar-chart"></i>
-                            {% trans "Stats" %}
+                            {% trans "Contributors list" %} <em>{% trans "(beta)" %}</em>
                         </a>
                     </li>
                 {% endif %}

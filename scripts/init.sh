@@ -241,8 +241,10 @@ except Subscription.DoesNotExist:
         group=Group.objects.get(name='astrobin-donor-platinum-yearly'),
         category='donor')
 
+Group.objects.get_or_create(name='auto_approve_content')
 Group.objects.get_or_create(name='content_moderators')
 Group.objects.get_or_create(name='image_moderators')
+Group.objects.get_or_create(name='equipment_moderators')
 Group.objects.get_or_create(name='iotd_staff')
 Group.objects.get_or_create(name='iotd_submitters')
 Group.objects.get_or_create(name='iotd_reviewers')

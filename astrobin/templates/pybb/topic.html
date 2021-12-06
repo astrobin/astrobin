@@ -165,6 +165,63 @@
                     }
                 }, 50);
             });
+
+            function init_post_hit_counter() {
+                const $window = $(window);
+                let debounce;
+
+                // During the same session, don't try to record the same hit twice.
+                window.astrobinProcessedPostHits = [];
+
+                const isInViewport = function (el) {
+                    const headerHeight = 60;
+                    const postPadding = 20;
+                    const postRelatedHeight = 28;
+                    const siteHeaderHeight = 50;
+
+                    const totalMinimumHeight = headerHeight + postPadding + siteHeaderHeight;
+
+                    const elementTop = $(el).offset().top + totalMinimumHeight;
+                    const elementBottom = $(el).offset().top + $(el).outerHeight() - totalMinimumHeight - postRelatedHeight;
+
+                    const viewportTop = $(window).scrollTop();
+                    const viewportBottom = viewportTop + $(window).height();
+
+                    return elementBottom > viewportTop && elementTop < viewportBottom;
+                };
+
+                const processPosts = function () {
+                    $('.post').each(function (index, post) {
+                        const id = $(post).data('id');
+
+                        if (window.astrobinProcessedPostHits.indexOf(id) === -1 && isInViewport(post)) {
+                            window.astrobinProcessedPostHits.push(id);
+                            $.ajax({
+                                url: `/api/v2/forum/post/${id}/hit/`,
+                                type: 'PUT',
+                                timeout: 3000
+                            });
+                        }
+                    });
+                }
+
+                if ($('.post').length > 0) {
+                    processPosts();
+
+                    $window.on('scroll', function () {
+                        if (!!debounce) {
+                            clearTimeout(debounce);
+                        }
+
+                        debounce = setTimeout(function () {
+                            debounce = null;
+                            processPosts();
+                        }, 1000);
+                    });
+                }
+            }
+
+            init_post_hit_counter();
         });
     </script>
 {% endblock %}

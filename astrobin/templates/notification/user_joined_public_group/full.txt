@@ -1,2 +1,11 @@
 {% load i18n %}
-{% blocktrans %}{{user}} joined the public group: "{{group_name}}"{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    {{user}} joined the public group: "{{group_name}}".
+{% endblocktrans %}
+
+{% trans "View group" %}:
+{{url}}
+
+{% trans "View user" %}:
+{{user_url}}

@@ -106,7 +106,7 @@ class NestedCommentViewSet(viewsets.ModelViewSet):
                 created__gt=comment.updated
         ):
             raise ValidationError(
-                _('You many not report the same item more than once.')
+                _('You may not report the same item more than once.')
             )
 
         self.get_queryset().filter(pk=pk).update(

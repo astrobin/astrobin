@@ -1,0 +1,9 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    <a href="{{user_url}}">{{user}}</a> commented on your edit proposal.
+{% endblocktrans %}
+
+<br /><br />
+
+<a href="{{ url }}" class="btn btn-primary">{% trans "View comment" %}</a>

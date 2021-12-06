@@ -127,14 +127,6 @@
     {% endif %}
 {% endblock %}
 
-{% block modals %}
-    {% include 'user_collections_delete_modal.html' %}
-
-    {% if request.user == requested_user and requested_user|is_donor %}
-        {% cancel_donation_modal %}
-    {% endif %}
-{% endblock %}
-
 {% block extra_js %}
     <script type="text/javascript">
         $(document).ready(function() {

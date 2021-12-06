@@ -1,14 +1,14 @@
 import logging
+import mimetypes
 import os
 import re
 import time
 from functools import reduce
 from typing import Union, Optional
 
-import mimetypes
-
 import boto3
 import requests
+from PIL import Image as PILImage
 from braces.views import (
     JSONResponseMixin,
     LoginRequiredMixin,
@@ -40,7 +40,6 @@ from django.views.generic import (
 )
 from django.views.generic.base import View
 from django.views.generic.detail import SingleObjectMixin
-from PIL import Image as PILImage
 from silk.profiling.profiler import silk_profile
 
 from astrobin.enums import SubjectType
@@ -54,8 +53,8 @@ from astrobin.forms import (
     ImageFlagThumbsForm,
     ImagePromoteForm,
     ImageRevisionUploadForm,
-    ImageEditThumbnailsForm,
-    ImageEditCorruptedRevisionForm)
+    ImageEditThumbnailsForm
+)
 from astrobin.forms.uncompressed_source_upload_form import UncompressedSourceUploadForm
 from astrobin.models import (
     Collection,
@@ -244,20 +243,9 @@ class ImageDetailView(ImageDetailViewBase):
                 raise Http404
 
         revision_label = kwargs.get('r')
-        if image.corrupted and (revision_label == '0' or (revision_label in [None, 'final'] and image.is_final)):
-            if request.user == image.user:
-                return redirect(reverse('image_edit_basic', args=(image.get_id(),)) + '?corrupted')
-            else:
-                raise Http404
-
         if revision_label is not None and revision_label != '0':
             try:
-                revision = ImageService(image).get_revisions(include_corrupted=True).get(label=revision_label)
-                if revision.corrupted:
-                    if request.user == image.user:
-                        return redirect(reverse('image_edit_revision', args=(revision.pk,)) + '?corrupted')
-                    else:
-                        raise Http404
+                revision = ImageService(image).get_revisions().get(label=revision_label)
             except ImageRevision.DoesNotExist:
                 revision = ImageService(image).get_final_revision()
                 redirect_revision_label = revision.label if hasattr(revision, 'label') else '0'
@@ -308,7 +296,7 @@ class ImageDetailView(ImageDetailViewBase):
         #############################
         # GENERATE ACQUISITION DATA #
         #############################
-        from astrobin.moon import MoonPhase;
+        from astrobin.moon import MoonPhase
 
         gear_list = (
             (
@@ -365,11 +353,6 @@ class ImageDetailView(ImageDetailViewBase):
                 'accessories'
             ),
         )
-
-        makes_list = ','.join(
-            [_f for _f in reduce(
-                lambda x, y: x + y,
-                [list(x.values_list('make', flat=True)) for x in [y[1] for y in gear_list]]) if _f])
 
         deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
         ssa = None
@@ -529,15 +512,21 @@ class ImageDetailView(ImageDetailViewBase):
 
         subjects = []
         skyplot_zoom1 = None
+        pixinsight_finding_chart = None
+        pixinsight_finding_chart_small = None
 
-        if image.solution:
+        if not is_revision and image.solution:
             subjects = SolutionService(image.solution).get_objects_in_field()
             skyplot_zoom1 = image.solution.skyplot_zoom1
+            pixinsight_finding_chart = image.solution.pixinsight_finding_chart
+            pixinsight_finding_chart_small = image.solution.pixinsight_finding_chart_small
 
         if is_revision and revision_image.solution:
             subjects = SolutionService(revision_image.solution).get_objects_in_field()
             if revision_image.solution.skyplot_zoom1:
                 skyplot_zoom1 = revision_image.solution.skyplot_zoom1
+                pixinsight_finding_chart = revision_image.solution.pixinsight_finding_chart
+                pixinsight_finding_chart_small = revision_image.solution.pixinsight_finding_chart_small
 
         locations = '; '.join(['%s' % (x) for x in image.locations.all()])
 
@@ -580,14 +569,12 @@ class ImageDetailView(ImageDetailViewBase):
 
         if not image.is_wip and image.published is not None:
             try:
-                # Always only lookup public, non corrupted images!
+                # Always only lookup public images!
                 if nav_ctx == 'user':
                     image_next = Image.objects \
-                                     .exclude(corrupted=True) \
                                      .filter(user=image.user, published__isnull=False, published__gt=image.published) \
                                      .order_by('published')[0:1]
                     image_prev = Image.objects \
-                                     .exclude(corrupted=True) \
                                      .filter(user=image.user, published__isnull=False, published__lt=image.published) \
                                      .order_by('-published')[0:1]
                 elif nav_ctx == 'collection':
@@ -600,7 +587,6 @@ class ImageDetailView(ImageDetailViewBase):
 
                         if collection.order_by_tag:
                             collection_images = Image.objects \
-                                .exclude(corrupted=True) \
                                 .filter(user=image.user,
                                         collections=collection,
                                         keyvaluetags__key=collection.order_by_tag) \
@@ -620,11 +606,9 @@ class ImageDetailView(ImageDetailViewBase):
                                 else None
                         else:
                             image_next = Image.objects \
-                                             .exclude(corrupted=True) \
                                              .filter(user=image.user, collections=collection,
                                                      published__gt=image.published).order_by('published')[0:1]
                             image_prev = Image.objects \
-                                             .exclude(corrupted=True) \
                                              .filter(user=image.user, collections=collection,
                                                      published__lt=image.published).order_by('-published')[0:1]
                     except Collection.DoesNotExist:
@@ -635,13 +619,11 @@ class ImageDetailView(ImageDetailViewBase):
                         group = image.part_of_group_set.get(pk=nav_ctx_extra)
                         if group.public:
                             image_next = Image.objects \
-                                             .exclude(corrupted=True) \
                                              .filter(part_of_group_set=group,
                                                      published__isnull=False,
                                                      published__gt=image.published) \
                                              .order_by('published')[0:1]
                             image_prev = Image.objects \
-                                             .exclude(corrupted=True) \
                                              .filter(part_of_group_set=group,
                                                      published__isnull=False,
                                                      published__lt=image.published) \
@@ -651,11 +633,9 @@ class ImageDetailView(ImageDetailViewBase):
                         pass
                 elif nav_ctx == 'all':
                     image_next = Image.objects \
-                                     .exclude(corrupted=True) \
                                      .filter(published__isnull=False, published__gt=image.published) \
                                      .order_by('published')[0:1]
                     image_prev = Image.objects \
-                                     .exclude(corrupted=True) \
                                      .filter(published__isnull=False, published__lt=image.published) \
                                      .order_by('-published')[0:1]
             except Image.DoesNotExist:
@@ -683,10 +663,10 @@ class ImageDetailView(ImageDetailViewBase):
             'alias': alias,
             'mod': mod,
             'revisions': ImageService(image) \
-                .get_revisions(include_corrupted=self.request.user == image.user) \
+                .get_revisions() \
                 .select_related('image__user__userprofile'),
-            'revisions_with_description': ImageService(image) \
-                .get_revisions_with_description(include_corrupted=self.request.user == image.user) \
+            'revisions_with_title_or_description': ImageService(image) \
+                .get_revisions_with_title_or_description() \
                 .select_related('image__user__userprofile'),
             'is_revision': is_revision,
             'revision_image': revision_image,
@@ -714,10 +694,13 @@ class ImageDetailView(ImageDetailViewBase):
                                       ),
             'advanced_solution_last_live_log_entry':
                 PlateSolvingAdvancedLiveLogEntry.objects.filter(
-                    serial_number=instance_to_platesolve.solution.pixinsight_serial_number).order_by('-timestamp').first() \
+                    serial_number=instance_to_platesolve.solution.pixinsight_serial_number) \
+                    .order_by('-timestamp').first() \
                     if instance_to_platesolve.solution \
                     else None,
             'skyplot_zoom1': skyplot_zoom1,
+            'pixinsight_finding_chart': pixinsight_finding_chart,
+            'pixinsight_finding_chart_small': pixinsight_finding_chart_small,
 
             'image_ct': ContentType.objects.get_for_model(Image),
             'user_ct': ContentType.objects.get_for_model(User),
@@ -731,7 +714,6 @@ class ImageDetailView(ImageDetailViewBase):
                 content_type__model='image',
                 object_id=image.id).count(),
             'gear_list': gear_list,
-            'makes_list': makes_list,
             'image_type': image_type,
             'ssa': ssa,
             'deep_sky_data': deep_sky_data,
@@ -762,6 +744,7 @@ class ImageDetailView(ImageDetailViewBase):
             'w': w,
             'h': h,
             'image_uses_full_width': w is not None and w >= 940,
+            'search_query': f'{self.request.GET.get("q", "")} {self.request.GET.get("telescope", "")} {self.request.GET.get("camera", "")}'.strip(),
         })
 
         return response_dict
@@ -790,22 +773,9 @@ class ImageFullView(ImageDetailView):
             raise Http404
 
         self.revision_label = kwargs['r']
-
-        if image.corrupted and (
-                self.revision_label == '0' or (self.revision_label in [None, 'final'] and image.is_final)):
-            if request.user == image.user:
-                return redirect(reverse('image_edit_basic', args=(image.get_id(),)) + '?corrupted')
-            else:
-                raise Http404
-
         if self.revision_label != '0':
             try:
                 revision = image.revisions.get(label=self.revision_label)
-                if revision.corrupted:
-                    if request.user == image.user:
-                        return redirect(reverse('image_edit_revision', args=(revision.pk,)) + '?corrupted')
-                    else:
-                        raise Http404
             except ImageRevision.DoesNotExist:
                 pass
 
@@ -972,8 +942,13 @@ class ImageDeleteOtherVersionsView(LoginRequiredMixin, View):
             image.updated = revision.uploaded
             image.w = revision.w
             image.h = revision.h
+
+            if revision.title:
+                image.title = f'{image.title} ({revision.title})'
+
             if revision.description:
                 image.description = (image.description or '') + '\n' + revision.description
+
             image_modified = True
 
             if revision.solution:
@@ -1106,10 +1081,6 @@ class ImageEditBasicView(ImageEditBaseView):
     form_class = ImageEditBasicForm
     template_name = 'image/edit/basic.html'
 
-    def form_valid(self, form):
-        self.object.corrupted = False
-        return super(ImageEditBasicView, self).form_valid(form)
-
     def get_success_url(self):
         image = self.get_object()
         if 'submit_gear' in self.request.POST:
@@ -1183,9 +1154,7 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
     pk_url_kwarg = 'id'
     template_name = 'image/edit/revision.html'
     context_object_name = 'revision'
-
-    def get_form_class(self):
-        return ImageEditCorruptedRevisionForm if self.object.corrupted else ImageEditRevisionForm
+    form_class = ImageEditRevisionForm
 
     def get_initial(self):
         revision = self.get_object()  # type: ImageRevision
@@ -1215,7 +1184,6 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         messages.success(self.request, _("Form saved. Thank you!"))
-        self.object.corrupted = False
         return super(ImageEditRevisionView, self).form_valid(form)
 
     def post(self, request, *args, **kwargs):
@@ -1314,6 +1282,9 @@ class ImageDownloadView(View):
         id: Union[str, int] = self.kwargs.get('id')
         image: Image = ImageService.get_object(id, Image.objects_including_wip)
 
+        if image is None:
+            raise Http404
+
         if not ImageService(image).display_download_menu(request.user):
             return render(request, "403.html", {})
 
@@ -1405,7 +1376,7 @@ class ImageDownloadView(View):
                 s3 = session.resource('s3')
                 s3.Bucket(settings.AWS_STORAGE_BUCKET_NAME).put_object(Key=result_path, Body=result_file)
 
-            response =  self.download(f'https://{settings.AWS_STORAGE_BUCKET_NAME}/{result_path}')
+            response = self.download(f'https://{settings.AWS_STORAGE_BUCKET_NAME}/{result_path}')
 
             os.unlink(local_svg.name)
             os.unlink(local_hd.name)

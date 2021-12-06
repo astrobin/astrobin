@@ -71,9 +71,8 @@ def create_checkout_session(request, user_pk, product, currency):
 
         kwargs = {
             'success_url': AppRedirectionService.redirect(
-                request,
                 '/subscriptions/success?product=' + product + '&session_id={CHECKOUT_SESSION_ID}'),
-            'cancel_url': AppRedirectionService.redirect(request, '/subscriptions/cancelled/'),
+            'cancel_url': AppRedirectionService.redirect('/subscriptions/cancelled/'),
             'mode': 'payment',
             'payment_method_types': payment_method_types,
             'client_reference_id': user.pk,

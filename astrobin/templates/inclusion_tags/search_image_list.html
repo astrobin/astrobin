@@ -33,13 +33,12 @@
                             {% endblocktrans %}
                         </span>
 
-                        {% with url=equipment_brand_listing.0.url %}
-                            <a class="btn btn-primary" href="{% equipment_listing_url_with_utm_tags url %}"
-                               onclick="getOutboundLink('{{ url }}', '{{ request.path }}')" target="_blank">
-                                <i class="icon-shopping-cart"></i>
-                                {% trans "Shop now" %}
-                            </a>
-                        {% endwith %}
+                        {% equipment_listing_url_with_tags equipment_brand_listings.0 'search' as url_with_tags %}
+                        <a class="btn btn-primary" href="{{ url_with_tags }}"
+                           onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')" target="_blank">
+                            <i class="icon-shopping-cart"></i>
+                            {% trans "Shop now" %}
+                        </a>
                     {% elif equipment_brand_listings_count > 1 %}
                         <span class="text">
                             <i class="icon-bullhorn"></i>
@@ -57,8 +56,9 @@
                             <ul class="dropdown-menu">
                                 {% for listing in equipment_brand_listings %}
                                     <li>
-                                        <a href="{% equipment_listing_url_with_utm_tags listing.url %}"
-                                           onclick="getOutboundLink('{{ listing.url }}', '{{ request.path }}')" target="_blank">
+                                        {% equipment_listing_url_with_tags listing 'search' as url_with_tags %}
+                                        <a href="{{ url_with_tags }}"
+                                           onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')" target="_blank">
                                             {{ listing.retailer }}
                                         </a>
                                     </li>

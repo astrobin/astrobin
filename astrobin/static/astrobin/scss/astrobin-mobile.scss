@@ -29,7 +29,8 @@
     &.ten-year-anniversary {
       font-size: 24px;
       line-height: 42px;
-      margin-left: 12px;
+      margin-left: 6px;
+      margin-top: -12px
     }
   }
 
@@ -258,6 +259,10 @@
     padding: 0 12px;
   }
 
+  .alert .btn {
+    margin-left: 12px;
+  }
+
   @media screen and (max-width: 1019px) {
     .extra-alerts .alert {
       margin: 10px 0px;
@@ -391,7 +396,7 @@
     padding-bottom: 24px;
   }
 
-  form {
+  form:not(.navbar-search) {
     padding-left: 12px;
     padding-right: 12px;
   }
@@ -481,7 +486,8 @@
 
     .profile-meta {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       margin-top: -20px;
       margin-bottom: 12px;
       padding: 2rem 0;
@@ -491,6 +497,19 @@
       > .user-card {
         margin: 0;
         box-shadow: 0 0 2rem $black;
+      }
+
+      > .about,
+      > .add-about-section {
+        background: rgba(0, 0, 0, .5);
+        padding: 1rem;
+        margin-top: 1rem;
+        margin-bottom: -2rem;
+        border: 0;
+
+        .header {
+          display: none;
+        }
       }
     }
   }

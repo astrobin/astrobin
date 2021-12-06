@@ -5,14 +5,12 @@ import random
 import string
 import unicodedata
 import uuid
-from functools import reduce
+from urllib.parse import urlparse
 
 import boto3
-import operator
 from django.core.files.images import get_image_dimensions
 from django.core.validators import MinLengthValidator, MaxLengthValidator, RegexValidator
 from image_cropping import ImageRatioField
-from urllib.parse import urlparse
 
 from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.enums.display_image_download_menu import DownloadLimitation
@@ -32,7 +30,6 @@ try:
     from hashlib import sha1
 except ImportError:
     import sha
-
     sha1 = sha.sha
 
 from django.conf import settings
@@ -42,23 +39,23 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError, models
-from django.db.models import Q
 from django.db.models.signals import post_save
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
-try:
-    # Django < 1.10
-    from django.contrib.contenttypes.generic import GenericRelation
-except ImportError:
-    # Django >= 1.10
-    from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
 
 from celery.result import AsyncResult
 from model_utils.managers import InheritanceManager
 from safedelete.models import SafeDeleteModel
 from toggleproperties.models import ToggleProperty
+
+from astrobin_apps_equipment.models import Telescope as TelescopeV2
+from astrobin_apps_equipment.models import Camera as CameraV2
+from astrobin_apps_equipment.models import Mount as MountV2
+from astrobin_apps_equipment.models import Software as SoftwareV2
+from astrobin_apps_equipment.models import Filter as FilterV2
+from astrobin_apps_equipment.models import Accessory as AccessoryV2
 
 from astrobin_apps_images.managers import ImagesManager, PublicImagesManager, WipImagesManager, ImageRevisionsManager, \
     UploadsInProgressImagesManager, UploadsInProgressImageRevisionsManager
@@ -251,6 +248,19 @@ class Gear(models.Model):
         editable=False,
     )
 
+    migration_flag_moderator_lock = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='migrated_gear_item_locks',
+    )
+
+    migration_flag_moderator_lock_timestamp = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
     def __str__(self):
         make = self.get_make()
         name = self.get_name()
@@ -326,6 +336,233 @@ class GearUserInfo(models.Model):
         unique_together = ('gear', 'user')
 
 
+class GearMigrationStrategy(models.Model):
+    gear = models.ForeignKey(
+        Gear,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+        related_name='migration_strategies',
+    )
+
+    user = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name='gear_migration_strateogies',
+    )
+
+    migration_flag = models.CharField(
+        max_length=16,
+        null=False,
+        blank=False,
+        choices=(
+            ('WRONG_TYPE', 'This item is the wrong type'),
+            ('MULTIPLE_ITEMS', 'This item collates multiple objects'),
+            ('DIY', 'This item is a DIY object'),
+            ('NOT_ENOUGH_INFO', 'This item does not have enough information to decide on a migration strategy'),
+            ('MIGRATE', 'This item is ready for migration')
+        ),
+    )
+
+    migration_flag_timestamp = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
+    migration_content_type = models.ForeignKey(
+        ContentType,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL
+    )
+
+    migration_object_id = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+    )
+
+    migration_content_object = GenericForeignKey(
+        'migration_content_type',
+        'migration_object_id',
+    )
+
+    migration_flag_moderator = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='migrated_gear_items',
+    )
+
+    migration_flag_reviewer_lock = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='reviewed_for_migration_gear_item_locks',
+    )
+
+    migration_flag_reviewer_lock_timestamp = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
+    migration_flag_reviewer = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='reviewed_for_migration_gear_items',
+    )
+
+    migration_flag_reviewer_decision = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True,
+        choices=[
+            ("APPROVED", "Approved"),
+        ],
+    )
+
+    class Meta:
+        app_label = 'astrobin'
+        unique_together = (
+            'gear',
+            'user',
+        )
+
+
+class GearRenameProposal(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+
+    gear = models.ForeignKey(
+        Gear,
+        on_delete=models.CASCADE,
+    )
+
+    created = models.DateTimeField(
+        auto_now_add=True,
+        editable=False,
+    )
+
+    old_make = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+    )
+
+    old_name = models.CharField(
+        max_length=128,
+        null=False,
+        blank=False,
+    )
+
+    new_make = models.CharField(
+        max_length=128,
+        null=False,
+        blank=False,
+    )
+
+    new_name = models.CharField(
+        max_length=128,
+        null=False,
+        blank=False,
+    )
+
+    status = models.CharField(
+        max_length=13,
+        null=False,
+        blank=False,
+        default='PENDING',
+        choices=(
+            ('PENDING', _('Pending')),
+            ('APPROVED', _('Approved')),
+            ('AUTO_APPROVED', _('Automatically approved')),
+            ('REJECTED', _('Rejected')),
+        )
+    )
+
+    reject_reason = models.TextField(
+        null=True,
+        blank=True,
+    )
+
+    class Meta:
+        abstract = True
+        unique_together = ['user', 'gear']
+
+
+class CameraRenameProposal(GearRenameProposal):
+    type = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+    )
+
+    modified = models.BooleanField(
+        default=False,
+    )
+
+    cooled = models.BooleanField(
+        default=False,
+    )
+
+    sensor_make = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+    )
+
+    sensor_name = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+    )
+
+
+class GearRenameRecord(models.Model):
+    gear = models.ForeignKey(
+        Gear,
+        editable=False,
+        on_delete=models.CASCADE,
+        unique=True,
+    )
+
+    created = models.DateTimeField(
+        auto_now_add=True,
+        editable=False,
+    )
+
+    old_make = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+    )
+
+    old_name = models.CharField(
+        max_length=128,
+        null=False,
+        blank=False,
+    )
+
+    new_make = models.CharField(
+        max_length=128,
+        null=False,
+        blank=False,
+    )
+
+    new_name = models.CharField(
+        max_length=128,
+        null=False,
+        blank=False,
+    )
+
+
 class ImageGearMergeRecord(models.Model):
     from_gear = models.ForeignKey(
         Gear,
@@ -339,6 +576,21 @@ class ImageGearMergeRecord(models.Model):
         editable=False,
         on_delete=models.CASCADE,
         related_name='image_gear_merge_records_as_to',
+    )
+
+    type = models.CharField(
+        max_length=17,
+        choices=(
+            ('imaging_telescope', 'Imaging telescope'),
+            ('guiding_telescope', 'Guiding telescope'),
+            ('imaging_camera', 'Imaging camera'),
+            ('guiding_camera', 'Guiding camera'),
+            ('filter', 'Filter'),
+            ('focal_reducer', 'Focal reducer'),
+            ('mount', 'Mount'),
+            ('accessory', 'Accessory'),
+            ('software', 'Software'),
+        )
     )
 
     image = models.ForeignKey(
@@ -699,6 +951,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("CS", "ChileScope"),
         ("DSNM", "Dark Sky New Mexico"),
         ("DSP", "Dark Sky Portal"),
+        ("DSV", "Deepsky Villa"),
         ("DSC", "DeepSkyChile"),
         ("DSW", "DeepSkyWest"),
         ("eEyE", "e-EyE Extremadura"),
@@ -1018,20 +1271,132 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         default=10,
     )
 
-    # gear
-    imaging_telescopes = models.ManyToManyField(Telescope, blank=True, related_name='imaging_telescopes',
-                                                verbose_name=_("Imaging telescopes or lenses"))
-    guiding_telescopes = models.ManyToManyField(Telescope, blank=True, related_name='guiding_telescopes',
-                                                verbose_name=_("Guiding telescopes or lenses"))
-    mounts = models.ManyToManyField(Mount, blank=True, verbose_name=_("Mounts"))
-    imaging_cameras = models.ManyToManyField(Camera, blank=True, related_name='imaging_cameras',
-                                             verbose_name=_("Imaging cameras"))
-    guiding_cameras = models.ManyToManyField(Camera, blank=True, related_name='guiding_cameras',
-                                             verbose_name=_("Guiding cameras"))
-    focal_reducers = models.ManyToManyField(FocalReducer, blank=True, verbose_name=_("Focal reducers"))
-    software = models.ManyToManyField(Software, blank=True, verbose_name=_("Software"))
-    filters = models.ManyToManyField(Filter, blank=True, verbose_name=_("Filters"))
-    accessories = models.ManyToManyField(Accessory, blank=True, verbose_name=_("Accessories"))
+    ####################################################################################################################
+    # LEGACY GEAR
+    ####################################################################################################################
+    imaging_telescopes = models.ManyToManyField(
+        Telescope,
+        blank=True,
+        related_name='images_using_for_imaging',
+        verbose_name=_("Imaging telescopes or lenses")
+    )
+
+    guiding_telescopes = models.ManyToManyField(
+        Telescope,
+        blank=True,
+        related_name='images_using_for_guiding',
+        verbose_name=_("Guiding telescopes or lenses")
+    )
+
+    mounts = models.ManyToManyField(
+        Mount,
+        blank=True,
+        related_name='images_using',
+        verbose_name=_("Mounts")
+    )
+
+    imaging_cameras = models.ManyToManyField(
+        Camera,
+        blank=True,
+        related_name='images_using_for_imaging',
+        verbose_name=_("Imaging cameras")
+    )
+
+    guiding_cameras = models.ManyToManyField(
+        Camera,
+        blank=True,
+        related_name='images_using_for_guiding',
+        verbose_name=_("Guiding cameras")
+    )
+
+    focal_reducers = models.ManyToManyField(
+        FocalReducer,
+        blank=True,
+        related_name='images_using',
+        verbose_name=_("Focal reducers")
+    )
+
+    software = models.ManyToManyField(
+        Software,
+        blank=True,
+        related_name='images_using',
+        verbose_name=_("Software")
+    )
+
+    filters = models.ManyToManyField(
+        Filter,
+        blank=True,
+        related_name='images_using',
+        verbose_name=_("Filters")
+    )
+
+    accessories = models.ManyToManyField(
+        Accessory,
+        blank=True,
+        related_name='images_using',
+        verbose_name=_("Accessories")
+    )
+    ####################################################################################################################
+
+    ####################################################################################################################
+    # NEW EQUIPMENT DATABASE
+    ####################################################################################################################
+    imaging_telescopes_2 = models.ManyToManyField(
+        TelescopeV2,
+        blank=True,
+        related_name='images_using_for_imaging',
+        verbose_name=_("Imaging telescopes or lenses")
+    )
+
+    guiding_telescopes_2 = models.ManyToManyField(
+        TelescopeV2,
+        blank=True,
+        related_name='images_using_for_guiding',
+        verbose_name=_("Guiding telescopes or lenses")
+    )
+
+    mounts_2 = models.ManyToManyField(
+        MountV2,
+        blank=True,
+        related_name='images_using',
+        verbose_name=_("Mounts")
+    )
+
+    imaging_cameras_2 = models.ManyToManyField(
+        CameraV2,
+        blank=True,
+        related_name='images_using_for_imaging',
+        verbose_name=_("Imaging cameras")
+    )
+
+    guiding_cameras_2 = models.ManyToManyField(
+        CameraV2,
+        blank=True,
+        related_name='images_using_for_guiding',
+        verbose_name=_("Guiding cameras")
+    )
+
+    software_2 = models.ManyToManyField(
+        SoftwareV2,
+        blank=True,
+        related_name='images_using',
+        verbose_name=_("Software")
+    )
+
+    filters_2 = models.ManyToManyField(
+        FilterV2,
+        blank=True,
+        related_name='images_using',
+        verbose_name=_("Filters")
+    )
+
+    accessories_2 = models.ManyToManyField(
+        AccessoryV2,
+        blank=True,
+        related_name='images_using',
+        verbose_name=_("Accessories")
+    )
+    ####################################################################################################################
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -1457,40 +1822,6 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         return '\r\n'.join([str(x) for x in self.keyvaluetags.all()])
 
-    @staticmethod
-    def by_gear(gear, gear_type=None):
-        images = Image.objects.all()
-
-        if gear_type:
-            image_attr_lookup = {
-                'Telescope': 'imaging_telescopes',
-                'Camera': 'imaging_cameras',
-                'Mount': 'mounts',
-                'FocalReducer': 'focal_reducers',
-                'Software': 'software',
-                'Filter': 'filters',
-                'Accessory': 'accessories',
-            }
-
-            images = images.filter(**{image_attr_lookup[gear_type]: gear})
-        else:
-            types = {
-                'imaging_telescopes': Telescope,
-                'guiding_telescopes': Telescope,
-                'mounts': Mount,
-                'imaging_cameras': Camera,
-                'guiding_cameras': Camera,
-                'focal_reducers': FocalReducer,
-                'software': Software,
-                'filters': Filter,
-                'accessories': Accessory,
-            }
-
-            filters = reduce(operator.or_, [Q(**{'%s__gear_ptr__pk' % t: gear.pk}) for t in types])
-            images = images.filter(filters).distinct()
-
-        return images
-
 
 class ImageRevision(HasSolutionMixin, SafeDeleteModel):
     image = models.ForeignKey(
@@ -1573,6 +1904,14 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
         help_text=_("Select an area of the image to be used as thumbnail in your gallery.")
     )
 
+    title = models.CharField(
+        max_length=128,
+        null=True,
+        blank=True,
+        verbose_name=_("Title"),
+        help_text=_("The revision's title will be shown as an addendum to the original image's title.")
+    )
+
     description = models.TextField(
         null=True,
         blank=True,
@@ -1640,7 +1979,7 @@ class ImageRevision(HasSolutionMixin, SafeDeleteModel):
                 self.image.is_final = False
                 self.image.save(keep_deleted=True)
             from astrobin_apps_images.services import ImageService
-            ImageService(self.image).get_revisions(True, True) \
+            ImageService(self.image).get_revisions(True) \
                 .filter(is_final=True) \
                 .exclude(label=self.label) \
                 .update(is_final=False)
@@ -2204,16 +2543,54 @@ class UserProfile(SafeDeleteModel):
     )
 
     # Gear
-    telescopes = models.ManyToManyField(Telescope, blank=True, verbose_name=_("Telescopes and lenses"),
-                                        related_name='telescopes')
-    mounts = models.ManyToManyField(Mount, blank=True, verbose_name=_("Mounts"), related_name='mounts')
-    cameras = models.ManyToManyField(Camera, blank=True, verbose_name=_("Cameras"), related_name='cameras')
-    focal_reducers = models.ManyToManyField(FocalReducer, blank=True, verbose_name=_("Focal reducers"),
-                                            related_name='focal_reducers')
-    software = models.ManyToManyField(Software, blank=True, verbose_name=_("Software"), related_name='software')
-    filters = models.ManyToManyField(Filter, blank=True, verbose_name=_("Filters"), related_name='filters')
-    accessories = models.ManyToManyField(Accessory, blank=True, verbose_name=_("Accessories"),
-                                         related_name='accessories')
+    telescopes = models.ManyToManyField(
+        Telescope,
+        blank=True,
+        verbose_name=_("Telescopes and lenses"),
+        related_name='users_using',
+    )
+
+    mounts = models.ManyToManyField(
+        Mount,
+        blank=True,
+        verbose_name=_("Mounts"),
+        related_name='users_using',
+    )
+
+    cameras = models.ManyToManyField(
+        Camera,
+        blank=True,
+        verbose_name=_("Cameras"),
+        related_name='users_using',
+    )
+
+    focal_reducers = models.ManyToManyField(
+        FocalReducer,
+        blank=True,
+        verbose_name=_("Focal reducers"),
+        related_name='users_using',
+    )
+
+    software = models.ManyToManyField(
+        Software,
+        blank=True,
+        verbose_name=_("Software"),
+        related_name='users_using',
+    )
+
+    filters = models.ManyToManyField(
+        Filter,
+        blank=True,
+        verbose_name=_("Filters"),
+        related_name='users_using',
+    )
+
+    accessories = models.ManyToManyField(
+        Accessory,
+        blank=True,
+        verbose_name=_("Accessories"),
+        related_name='users_using',
+    )
 
     default_frontpage_section = models.CharField(
         choices=(
@@ -2758,24 +3135,6 @@ class ImageOfTheDayCandidate(models.Model):
 
     def __str__(self):
         return "%s as an Image of the Day Candidate" % self.image.title
-
-
-class GlobalStat(models.Model):
-    date = models.DateField(
-        editable=False,
-        auto_now_add=True)
-
-    users = models.IntegerField()
-    images = models.IntegerField()
-    integration = models.IntegerField()
-
-    class Meta:
-        ordering = ['-date']
-        app_label = 'astrobin'
-
-    def __str__(self):
-        return "%d users, %d images, %d hours of integration time" % (
-            self.users, self.images, self.integration)
 
 
 class BroadcastEmail(models.Model):
