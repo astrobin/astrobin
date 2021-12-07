@@ -1,10 +1,13 @@
 from django import forms
 from django.conf import settings
 from django.forms import SelectMultiple
+from django.utils.translation import ugettext_lazy as _
 
 from astrobin.models import UserProfile
-from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_remove_ads, \
-    can_remove_retailer_integration
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
+    can_remove_ads,
+    can_remove_retailer_integration,
+)
 
 
 class UserProfileEditPreferencesForm(forms.ModelForm):
@@ -18,6 +21,7 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             'display_wip_images_on_public_gallery',
             'open_notifications_in_new_tab',
             'exclude_from_competitions',
+            'auto_submit_to_iotd_tp_process',
             'receive_important_communications',
             'receive_newsletter',
             'receive_marketing_and_commercial_material',
@@ -49,3 +53,19 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
             return cleaned_data
 
         return data
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        exclude_from_competitions = cleaned_data.get('exclude_from_competitions')
+        auto_submit_to_iotd_tp_process = cleaned_data.get('auto_submit_to_iotd_tp_process')
+
+        if exclude_from_competitions and auto_submit_to_iotd_tp_process:
+            raise forms.ValidationError(
+                _(
+                    'You cannot be excluded from competitions and automatically submit images for IOTD/TP '
+                    'consideration at the same time.'
+                )
+            )
+
+        return cleaned_data

@@ -440,6 +440,10 @@ urlpatterns += [
 
     url(r'^full/(?P<id>\w+)/(?:(?P<r>\w+)/)?$', image_views.ImageFullView.as_view(), name='image_full'),
     url(r'^(?P<id>\w+)/flagthumbs/$', never_cache(image_views.ImageFlagThumbsView.as_view()), name='image_flag_thumbs'),
+    url(
+        r'^(?P<id>\w+)/submit-to-iotd-tp/$', never_cache(image_views.ImageSubmitToIotdTpProcessView.as_view()),
+        name='image_submit_to_iotd_tp'
+    ),
     url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?$', image_views.ImageDetailView.as_view(), name='image_detail'),
     url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:get.jpg)?$', image_views.ImageRawThumbView.as_view(),
         name='image_rawthumb'),

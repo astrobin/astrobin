@@ -1,0 +1,52 @@
+{% load common_tags %}
+{% load bootstrap_toolkit %}
+{% load i18n %}
+{% load astrobin_apps_iotd_tags %}
+
+{% if not request.user|may_submit_to_iotd_tp_process:image %}
+    <div class="modal hide fade" id="may-not-submit-to-iotd-tp-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3><i class="icon-warning-sign"></i>{% trans "Warning" %}</h3>
+        </div>
+
+        <div class="modal-body">
+            <p>
+                {% blocktrans trimmed %}
+                    This image cannot be submitted for the IOTD/TP consideration.
+                {% endblocktrans %}
+            </p>
+
+            <p><strong>{% trans 'Reason' %}:</strong></p>
+
+            <p>
+                {% with reason=request.user|may_submit_to_iotd_tp_process_reason:image %}
+                    {% if reason == 'UNAUTHENTICATED' %}
+                        {% trans "You are not authenticated. Please log in." %}
+                    {% elif reason == 'NOT_OWNER' %}
+                        {% trans "You are not the owner of this image." %}
+                    {% elif reason == 'NOT_PUBLISHED' %}
+                        {% trans "This image is tagged as a work in progress and hasn't been published yet." %}
+                    {% elif reason == 'TOO_LATE' %}
+                        {% blocktrans trimmed with num_days=IOTD_SUBMISSION_WINDOW_DAYS %}
+                            Unfortunately it's too late: images can be submitted only within {{ num_days }} days
+                            after publication.
+                        {% endblocktrans %}
+                    {% elif reason == 'ALREADY_SUBMITTED' %}
+                        {% trans "This image was already submitted." %}
+                    {% elif reason == 'EXCLUDED_FROM_COMPETITION' %}
+                        {% trans "Your settings indicate that you opted to be excluded from competitions." %}
+                    {% elif reason == 'BANNED_FROM_COMPETITION' %}
+                        {% trans "You are currently serving a ban from competitions on AstroBin." %}
+                    {% else %}
+                        {% trans "Unknown reason. This should never happen, please contact us!" %}
+                    {% endif %}
+                {% endwith %}
+            </p>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-primary" data-dismiss="modal">{% trans "OK" %}</button>
+        </div>
+    </div>
+{% endif %} {# not may_submit_to_iotd_tp_process #}

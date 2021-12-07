@@ -7,51 +7,53 @@ from typing import List
 from annoying.functions import get_object_or_None
 from dateutil.relativedelta import relativedelta
 from django.conf import settings
-from django.contrib.auth.models import User, Group as DjangoGroup
+from django.contrib.auth.models import Group as DjangoGroup, User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import MultipleObjectsReturned
-from django.db import IntegrityError
-from django.db import transaction
+from django.db import IntegrityError, transaction
 from django.db.models import Q
-from django.db.models.signals import (
-    pre_save, post_save, post_delete, m2m_changed)
+from django.db.models.signals import (m2m_changed, post_delete, post_save, pre_save)
 from django.urls import reverse as reverse_url
 from django.utils import timezone
 from django.utils.translation import gettext, override
 from persistent_messages.models import Message
-from pybb.models import Forum, Topic, Post, TopicReadTracker
+from pybb.models import Forum, Post, Topic, TopicReadTracker
 from pybb.permissions import perms
 from pybb.util import get_pybb_profile
 from rest_framework.authtoken.models import Token
 from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete
-from subscription.models import UserSubscription, Transaction
+from subscription.models import Transaction, UserSubscription
 from subscription.signals import paid, signed_up
 
 from astrobin.tasks import process_camera_rename_proposal
 from astrobin_apps_groups.models import Group
 from astrobin_apps_iotd.models import IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
+from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_notifications.services import NotificationsService
 from astrobin_apps_notifications.tasks import push_notification_for_new_image, push_notification_for_new_image_revision
-from astrobin_apps_notifications.utils import push_notification, clear_notifications_template_cache, \
-    build_notification_url
+from astrobin_apps_notifications.utils import (
+    build_notification_url, clear_notifications_template_cache,
+    push_notification,
+)
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
-    is_lite, is_any_premium_subscription, is_lite_2020, is_any_ultimate, is_premium_2020, is_premium, is_free)
+    is_any_premium_subscription, is_any_ultimate, is_free, is_lite, is_lite_2020, is_premium, is_premium_2020,
+)
 from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from astrobin_apps_users.services import UserService
-from common.models import AbuseReport, ABUSE_REPORT_DECISION_OVERRULED
+from common.models import ABUSE_REPORT_DECISION_OVERRULED, AbuseReport
 from common.services import DateTimeService
 from common.services.mentions_service import MentionsService
 from common.services.moderation_service import ModerationService
 from nested_comments.models import NestedComment
 from nested_comments.services.comment_notifications_service import CommentNotificationsService
 from toggleproperties.models import ToggleProperty
-from .models import Image, ImageRevision, UserProfile, CameraRenameProposal
+from .models import CameraRenameProposal, Image, ImageRevision, UserProfile
 from .search_indexes import ImageIndex, UserIndex
 from .stories import add_story
 
@@ -99,11 +101,9 @@ def image_post_save(sender, instance, created, **kwargs):
         instance.user.userprofile.premium_counter += 1
         instance.user.userprofile.save(keep_deleted=True)
 
-        if not instance.user.userprofile.exclude_from_competitions:
-            instance.designated_iotd_submitters.add(*UserService.get_users_in_group_sample(
-                'iotd_submitters', settings.IOTD_DESIGNATED_SUBMITTERS_PERCENTAGE, instance.user))
-            instance.designated_iotd_reviewers.add(*UserService.get_users_in_group_sample(
-                'iotd_reviewers', settings.IOTD_DESIGNATED_REVIEWERS_PERCENTAGE, instance.user))
+        if not instance.user.userprofile.exclude_from_competitions and \
+                instance.user.userprofile.auto_submit_to_iotd_tp_process:
+            IotdService.submit_to_iotd_tp_process(instance.user, instance, False)
 
         if not instance.is_wip:
             if not instance.skip_notifications:

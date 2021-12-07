@@ -1,6 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext as _
 
+from astrobin.models import UserProfile
 from astrobin_apps_groups.models import Group, GroupCategory
 
 
@@ -75,3 +76,11 @@ class GroupSelectForm(forms.Form):
             .filter(autosubmission=False, members=user) \
             .distinct() \
             .values_list('id', 'name')
+
+
+class AutoSubmitToIotdTpProcessForm(forms.Form):
+    auto_submit_to_iotd_tp_process = forms.BooleanField(
+        label=UserProfile._meta.get_field('auto_submit_to_iotd_tp_process').verbose_name,
+        help_text=UserProfile._meta.get_field('auto_submit_to_iotd_tp_process').help_text,
+        required=False,
+    )

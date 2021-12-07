@@ -4,7 +4,7 @@ import os
 import re
 import time
 from functools import reduce
-from typing import Union, Optional
+from typing import Optional, Union
 
 import boto3
 import requests
@@ -18,17 +18,16 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import PermissionDenied, MultipleObjectsReturned
+from django.core.exceptions import MultipleObjectsReturned, PermissionDenied
 from django.core.files.images import get_image_dimensions
 from django.core.files.temp import NamedTemporaryFile
 from django.db.models import Q
 from django.db.models.query import QuerySet
-from django.http import Http404, HttpResponseRedirect, HttpResponseBadRequest, HttpResponseForbidden, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import redirect, render
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.utils.encoding import iri_to_uri
-from django.utils.encoding import smart_text as smart_unicode
+from django.utils.encoding import iri_to_uri, smart_text as smart_unicode
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import cache_control, never_cache
 from django.views.decorators.http import last_modified
@@ -45,32 +44,20 @@ from silk.profiling.profiler import silk_profile
 from astrobin.enums import SubjectType
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.forms import (
-    CopyGearForm,
-    ImageDemoteForm,
-    ImageEditBasicForm,
-    ImageEditGearForm,
-    ImageEditRevisionForm,
-    ImageFlagThumbsForm,
-    ImagePromoteForm,
-    ImageRevisionUploadForm,
-    ImageEditThumbnailsForm
+    CopyGearForm, ImageDemoteForm, ImageEditBasicForm, ImageEditGearForm, ImageEditRevisionForm,
+    ImageEditThumbnailsForm, ImageFlagThumbsForm, ImagePromoteForm, ImageRevisionUploadForm,
 )
 from astrobin.forms.uncompressed_source_upload_form import UncompressedSourceUploadForm
-from astrobin.models import (
-    Collection,
-    Image, ImageRevision,
-    DeepSky_Acquisition,
-    SolarSystem_Acquisition,
-    LANGUAGES,
-)
+from astrobin.models import (Collection, DeepSky_Acquisition, Image, ImageRevision, LANGUAGES, SolarSystem_Acquisition)
 from astrobin.stories import add_story
 from astrobin.templatetags.tags import can_like
 from astrobin.utils import get_image_resolution
-from astrobin_apps_groups.forms import GroupSelectForm
+from astrobin_apps_groups.forms import AutoSubmitToIotdTpProcessForm, GroupSelectForm
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
+from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_notifications.tasks import push_notification_for_new_image
-from astrobin_apps_platesolving.models import Solution, PlateSolvingAdvancedLiveLogEntry
+from astrobin_apps_platesolving.models import PlateSolvingAdvancedLiveLogEntry, Solution
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
 from common.services import DateTimeService
@@ -735,8 +722,12 @@ class ImageDetailView(ImageDetailViewBase):
             'content_type': ContentType.objects.get(app_label='astrobin', model='image'),
             'preferred_languages': preferred_languages,
             'select_group_form': GroupSelectForm(
-                user=self.request.user) if self.request.user.is_authenticated else None,
+                user=self.request.user
+            ) if self.request.user.is_authenticated else None,
             'in_public_groups': Group.objects.filter(Q(public=True, images=image)),
+            'auto_submit_to_iotd_tp_process_form': AutoSubmitToIotdTpProcessForm() \
+                if self.request.user.is_authenticated \
+                else None,
             'image_next': image_next,
             'image_prev': image_prev,
             'nav_ctx': nav_ctx,
@@ -1386,3 +1377,50 @@ class ImageDownloadView(View):
 
         thumbnail_url = image.thumbnail(version, revision_label, sync=True)
         return self.download(thumbnail_url)
+
+
+class ImageSubmitToIotdTpProcessView(View):
+    def dispatch(self, request, *args, **kwargs):
+        id: Union[str, int] = self.kwargs.get('id')
+        image: Image = ImageService.get_object(id, Image)
+
+        if image is None:
+            raise Http404
+
+        return super().dispatch(request, args, kwargs)
+
+    def post(self, request, *args, **kwargs):
+        id: Union[str, int] = self.kwargs.get('id')
+        auto_submit = request.POST.get('auto_submit_to_iotd_tp_process') == 'on'
+        image: Image = ImageService.get_object(id, Image)
+
+        may, reason = IotdService.submit_to_iotd_tp_process(request.user, image, auto_submit)
+
+        if not may:
+            if reason == 'UNAUTHENTICATED' or reason == 'NOT_OWNER':
+                return render(request, "403.html", {})
+            elif reason == 'NOT_PUBLISHED':
+                return HttpResponseBadRequest("This image has not been published yet.")
+            elif reason == 'ALREADY_SUBMITTED':
+                return HttpResponseBadRequest("This image has already been submitted to the IOTD/TP process.")
+            elif reason == 'EXCLUDED_FROM_COMPETITION':
+                return HttpResponseBadRequest(
+                    "This image cannot be submitted to the IOTD/TP process because the user has selected to be excluded "
+                    "from competitions."
+                )
+            elif reason == 'BANNED_FROM_COMPETITIONS':
+                return HttpResponseBadRequest(
+                    "This image cannot be submitted to the IOTD/TP process because the user has been banned from "
+                    "competitions."
+                )
+            elif reason == 'TOO_LATE':
+                return HttpResponseBadRequest(
+                    "Too late: images can be submitted to the IOTD/TP process only %s days after publication." % (
+                        settings.IOTD_SUBMISSION_WINDOW_DAYS
+                    )
+                )
+            else:
+                return HttpResponseBadRequest("Unknown error")
+
+        messages.success(request, _("Image submitted to the IOTD/TP process!"))
+        return HttpResponseRedirect(request.POST.get('next'))

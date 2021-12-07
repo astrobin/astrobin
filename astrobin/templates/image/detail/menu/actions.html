@@ -2,6 +2,7 @@
 {% load common_tags %}
 {% load astrobin_apps_premium_tags %}
 {% load astrobin_apps_images_tags %}
+{% load astrobin_apps_iotd_tags %}
 
 
 {% if request.user == image.user or request.user.is_superuser %}
@@ -89,6 +90,26 @@
                     </a>
                 </li>
             {% endif %} <!-- not image.is_wip -->
+
+            {% if request.user == image.user %}
+                <li>
+                    {% with reason=request.user|may_submit_to_iotd_tp_process_reason:image %}
+                        <a data-toggle="modal"
+                                {% if request.user|may_submit_to_iotd_tp_process:image %}
+                           href="#submit-to-iotd-tp-modal"
+                                {% else %}
+                           href="#may-not-submit-to-iotd-tp-modal"
+                                {% endif %}
+                                {% if reason == 'ALREADY_SUBMITTED' %}
+                           class="disabled"
+                                {% endif %}
+                        >
+                            <i class="icon-rocket"></i>
+                            {% trans "Submit to IOTD/TP process" %}
+                        </a>
+                    {% endwith %}
+                </li>
+            {% endif %}
 
             <li class="divider"></li>
 

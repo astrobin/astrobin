@@ -1,12 +1,12 @@
-from datetime import timedelta, date, datetime
+from datetime import date, datetime, timedelta
 
 from django.conf import settings
 from django.test import TestCase, override_settings
-from mock import patch
+from mock import PropertyMock, patch
 
 from astrobin.enums import SubjectType
 from astrobin.tests.generators import Generators
-from astrobin_apps_iotd.models import IotdSubmission, IotdVote, Iotd, IotdDismissedImage
+from astrobin_apps_iotd.models import Iotd, IotdDismissedImage, IotdSubmission, IotdVote
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.tests.iotd_generators import IotdGenerators
 from common.services import DateTimeService
@@ -1550,3 +1550,134 @@ class IotdServiceTest(TestCase):
         IotdGenerators.vote(reviewer=reviewer, image=image)
 
         self.assertFalse(reviewer in IotdService().get_inactive_submitter_and_reviewers(3))
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    def test_may_submit_to_iotd_tp_process_unauthenticated(self, is_authenticated):
+        is_authenticated.return_value = False
+
+        image = Generators.image()
+        user = Generators.user()
+
+        self.assertEqual((False, 'UNAUTHENTICATED'), IotdService.may_submit_to_iotd_tp_process(user, image))
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    def test_may_submit_to_iotd_tp_process_not_owner(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image()
+        user = Generators.user()
+
+        self.assertEqual((False, 'NOT_OWNER'), IotdService.may_submit_to_iotd_tp_process(user, image))
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    def test_may_submit_to_iotd_tp_process_not_published(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image(is_wip=True)
+
+        self.assertEqual((False, 'NOT_PUBLISHED'), IotdService.may_submit_to_iotd_tp_process(image.user, image))
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    def test_may_submit_to_iotd_tp_process_already_submitted(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image()
+        image.designated_iotd_submitters.add(Generators.user(groups=['iotd_staff', 'iotd_submitters']))
+        image.designated_iotd_reviewers.add(Generators.user(groups=['iotd_staff', 'iotd_reviewers']))
+
+        self.assertEqual((False, 'ALREADY_SUBMITTED'), IotdService.may_submit_to_iotd_tp_process(image.user, image))
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    def test_may_submit_to_iotd_tp_process_excluded_from_competitions(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image()
+        image.user.userprofile.exclude_from_competitions = True
+        image.user.userprofile.save(keep_deleted=True)
+
+        self.assertEqual(
+            (False, 'EXCLUDED_FROM_COMPETITIONS'), IotdService.may_submit_to_iotd_tp_process(image.user, image)
+        )
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    def test_may_submit_to_iotd_tp_process_banned_from_competitions(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image()
+        image.user.userprofile.banned_from_competitions = datetime.now()
+        image.user.userprofile.save(keep_deleted=True)
+
+        self.assertEqual(
+            (False, 'BANNED_FROM_COMPETITIONS'), IotdService.may_submit_to_iotd_tp_process(image.user, image)
+        )
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    def test_may_submit_to_iotd_tp_process_too_late(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image()
+        image.published = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
+        image.save(keep_deleted=True)
+
+        self.assertEqual(
+            (False, 'TOO_LATE'), IotdService.may_submit_to_iotd_tp_process(image.user, image)
+        )
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    def test_may_submit_to_iotd_tp_process_all_ok(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image()
+
+        self.assertEqual(
+            (True, None), IotdService.may_submit_to_iotd_tp_process(image.user, image)
+        )
+
+    @patch('astrobin_apps_iotd.services.IotdService.may_submit_to_iotd_tp_process')
+    def test_submit_to_iotd_tp_process_no_autosubmit(self, may_submit_to_iotd_tp_process):
+        may_submit_to_iotd_tp_process.return_value = True, None
+
+        submitter = Generators.user(groups=['iotd_staff', 'iotd_submitters'])
+        reviewer = Generators.user(groups=['iotd_staff', 'iotd_reviewers'])
+        image = Generators.image()
+
+        IotdService.submit_to_iotd_tp_process(image.user, image, False)
+
+        self.assertTrue(image.designated_iotd_submitters.exists())
+        self.assertTrue(submitter, image.designated_iotd_submitters.first())
+
+        self.assertTrue(image.designated_iotd_reviewers.exists())
+        self.assertTrue(reviewer, image.designated_iotd_reviewers.first())
+
+        self.assertFalse(image.user.userprofile.auto_submit_to_iotd_tp_process)
+
+    @patch('astrobin_apps_iotd.services.IotdService.may_submit_to_iotd_tp_process')
+    def test_submit_to_iotd_tp_process_autosubmit(self, may_submit_to_iotd_tp_process):
+        may_submit_to_iotd_tp_process.return_value = True, None
+
+        submitter = Generators.user(groups=['iotd_staff', 'iotd_submitters'])
+        reviewer = Generators.user(groups=['iotd_staff', 'iotd_reviewers'])
+        image = Generators.image()
+
+        IotdService.submit_to_iotd_tp_process(image.user, image, True)
+
+        self.assertTrue(image.designated_iotd_submitters.exists())
+        self.assertTrue(submitter, image.designated_iotd_submitters.first())
+
+        self.assertTrue(image.designated_iotd_reviewers.exists())
+        self.assertTrue(reviewer, image.designated_iotd_reviewers.first())
+
+        self.assertTrue(image.user.userprofile.auto_submit_to_iotd_tp_process)
+
+    @patch('astrobin_apps_iotd.services.IotdService.may_submit_to_iotd_tp_process')
+    def test_submit_to_iotd_tp_process_may_not(self, may_submit_to_iotd_tp_process):
+        may_submit_to_iotd_tp_process.return_value = False, 'ALREADY_SUBMITTED'
+
+        Generators.user(groups=['iotd_staff', 'iotd_submitters'])
+        Generators.user(groups=['iotd_staff', 'iotd_reviewers'])
+        image = Generators.image()
+
+        IotdService.submit_to_iotd_tp_process(image.user, image, False)
+
+        self.assertFalse(image.designated_iotd_submitters.exists())
+        self.assertFalse(image.designated_iotd_reviewers.exists())
