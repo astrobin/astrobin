@@ -1,0 +1,44 @@
+{% load i18n %}
+{% load static %}
+
+<h1>
+    {% blocktrans trimmed %}
+        Your image was submitted for IOTD/TP consideration!
+    {% endblocktrans %}
+</h1>
+
+<br/><br/>
+
+<p>
+    {% blocktrans trimmed %}
+        The “AstroBin Image of the Day and Top Picks” is a long-running system to promote beautiful,
+        interesting, peculiar, or otherwise amazing astrophotographs, with a focus on technical
+        excellence.
+    {% endblocktrans %}
+</p>
+
+<p>
+{% blocktrans trimmed %}
+    If you haven't already, please take a few minutes to learn how the process works:
+{% endblocktrans %}
+</p>
+
+<p>
+    <a href="https://welcome.astrobin.com/iotd" class="btn btn-primary">
+        {% trans "Image of the Day" %}
+    </a>
+</p>
+
+<p>
+    {% blocktrans trimmed with url="https://welcome.astrobin.com/iotd#faq" %}
+        If you have any questions, have a look at the <a href="{{ url }}">frequently asked questions</a>.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% url 'contact' as contact_url %}
+    {% blocktrans trimmed with url=base_url|add:contact_url %}
+        Finally, should you need any support, simply use the <a href="{{ url }}">contact form</a> or send
+        an email to <a href="mailto:support@astrobin.com">support@astrobin.com</a>.
+    {% endblocktrans %}
+</p>

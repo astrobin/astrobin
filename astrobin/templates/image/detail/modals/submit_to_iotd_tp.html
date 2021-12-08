@@ -1,0 +1,45 @@
+{% load common_tags %}
+{% load bootstrap_toolkit %}
+{% load i18n %}
+{% load astrobin_apps_iotd_tags %}
+
+{% if request.user|may_submit_to_iotd_tp_process:image %}
+    <form class="form form-inline" method="post" action="{% url 'image_submit_to_iotd_tp' image.get_id %}">
+        {% csrf_token %}
+        <div class="modal hide fade" id="submit-to-iotd-tp-modal">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">&times;</a>
+                <h3>{% trans "Submit for IOTD/TP consideration" %}</h3>
+            </div>
+
+            <div class="modal-body">
+                <p>
+                    {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/iotd" target="_blank">' as _0 and '</a>' as _1 %}
+                        Would you like to submit your image for {{ _0 }}IOTD/TP{{ _1 }} consideration?
+                    {% endblocktrans %}
+                </p>
+
+                <p class="alert alert-info">
+                    {% blocktrans trimmed %}
+                        The “AstroBin Image of the Day and Top Picks” is a long-running system to promote beautiful,
+                        interesting, peculiar, or otherwise amazing astrophotographs, with a focus on technical
+                        excellence.
+                    {% endblocktrans %}
+                </p>
+
+                {% if not request.user.userprofile.auto_submit_to_iotd_tp_process %}
+                    {{ auto_submit_to_iotd_tp_process_form | as_bootstrap }}
+                {% endif %}
+                <input type="hidden" name="next" value="{{ request.path }}" />
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">{% trans "Cancel" %}</button>
+                <button class="btn btn-primary {% button_loading_class %}" type="submit">
+                    {% trans "Submit" %}
+                    {% button_loading_indicator %}
+                </button>
+            </div>
+        </div>
+    </form>
+{% endif %} {# may_submit_to_iotd_tp_process #}

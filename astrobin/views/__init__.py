@@ -69,7 +69,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_re
 from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, premium_get_max_allowed_revisions, \
     premium_user_has_valid_subscription
 from astrobin_apps_users.services import UserService
-from common.services import AppRedirectionService
+from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService
 from common.services.constellations_service import ConstellationsService
 from toggleproperties.models import ToggleProperty
@@ -1995,6 +1995,17 @@ def flickr_auth_callback(request):
 def user_profile_seen_realname(request):
     profile = request.user.userprofile
     profile.seen_realname = True
+    profile.save(keep_deleted=True)
+
+    return HttpResponseRedirect(request.POST.get('next', '/'))
+
+
+@never_cache
+@login_required
+@require_POST
+def user_profile_seen_iotd_tp_is_explicit_submission(request):
+    profile = request.user.userprofile
+    profile.seen_iotd_tp_is_explicit_submission = DateTimeService.now()
     profile.save(keep_deleted=True)
 
     return HttpResponseRedirect(request.POST.get('next', '/'))

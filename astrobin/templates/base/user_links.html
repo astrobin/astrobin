@@ -2,136 +2,144 @@
 {% load tags %}
 {% load astrobin_apps_donations_tags %}
 {% load static %}
+{% load common_tags %}
 
-    <div class="user-nav pull-right">
-        <ul class="nav">
+<div class="user-nav pull-right">
+    <ul class="nav">
 
-            {% include "base/language_switcher.html" %}
+        {% include "base/language_switcher.html" %}
 
-            {% if request.user.is_authenticated %}
+        {% if request.user.is_authenticated %}
 
-                <li class="notice-container">
-                    <span id="notifications-count"></span>
+            <li class="notice-container">
+                <span id="notifications-count"></span>
 
-                    <a class="notifications"
-                       title="{% trans "Notifications" %}"
-                       data-toggle="modal"
-                       href="#notifications-modal">
-                        <i class="icon-bell-alt"></i>
-                    </a>
-                </li>
+                <a class="notifications"
+                   title="{% trans "Notifications" %}"
+                   data-toggle="modal"
+                   href="#notifications-modal">
+                    <i class="icon-bell-alt"></i>
+                </a>
+            </li>
 
-                <li class="dropdown hidden-phone">
-                <div class="btn-group">
-                    <a href="{% url 'user_page' request.user.username %}" class="btn btn-primary">
-                        <span class="visible-phone"><i class="icon icon-user"></i></span>
-                        <span class="hidden-phone username">
-                            {{ request.user.userprofile }}
+            <li class="dropdown hidden-phone">
+            <div class="btn-group">
+                <a href="{% url 'user_page' request.user.username %}" class="btn btn-primary">
+                    <span class="visible-phone"><i class="icon icon-user"></i></span>
+                    <span class="hidden-phone username">
+                        {{ request.user.userprofile }}
+                    </span>
+                    <span id="navbar-user-scores">
+                        <span id="astrobin-index">
+                        </span> &middot;
+
+                        <span id="contribution-index">
                         </span>
-                        <span id="navbar-user-scores">
-                            <span id="astrobin-index">
-                            </span> &middot;
+                    </span>
+                </a>
+                <a href="#" class="btn btn-primary dropdown-toggle user-dropdown" data-toggle="dropdown">
+                    <i class="icon-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    {% include "base/user_links_entries.html" %}
+                </ul>
+            </div> <!-- btn-group -->
 
-                            <span id="contribution-index">
-                            </span>
-                        </span>
-                    </a>
-                    <a href="#" class="btn btn-primary dropdown-toggle user-dropdown" data-toggle="dropdown">
-                        <i class="icon-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        {% include "base/user_links_entries.html" %}
-                    </ul>
-                </div> <!-- btn-group -->
+            {% if DONATIONS_ENABLED and not request.user|is_donor %}
+                <a
+                        id="donate-header-button"
+                        data-toggle="modal"
+                        href="https://welcome.astrobin.com/voluntary-donations"
+                        target="_blank"
+                        class="btn btn-success">
+                    <i class="icon-gift"></i>
+                </a>
+            {% endif %}
 
-                {% if DONATIONS_ENABLED and not request.user|is_donor %}
-                    <a
-                            id="donate-header-button"
-                            data-toggle="modal"
-                            href="https://welcome.astrobin.com/voluntary-donations"
-                            target="_blank"
-                            class="btn btn-success">
-                        <i class="icon-gift"></i>
-                    </a>
-                {% endif %}
+            {% if request.user.is_authenticated and not request.user.userprofile.real_name and request.path != "/profile/edit/basic/" and not request.user.userprofile.seen_realname %}
+                <div id="realname-prompt">
+                    <div class="bubble alert alert-warning">
+                        <p>
+                            {% blocktrans trimmed %}
+                                Would you like to start using your real name on AstroBin?
+                            {% endblocktrans %}
+                        </p>
 
-                {% if request.user.is_authenticated and not request.user.userprofile.real_name and request.path != "/profile/edit/basic/" and not request.user.userprofile.seen_realname %}
-                    <div id="realname-prompt">
-                        <div class="bubble">
-                            {% blocktrans %}Would you like to start using your real name on AstroBin?{% endblocktrans %}
-                            <form method="POST" action="{% url 'profile_seen_realname' %}">{% csrf_token %}
-                                <a
-                                    class="btn btn-mini btn-primary"
-                                    href="{% url 'profile_edit_basic' %}?hl=rn">
-                                    {% trans "OK" %}
-                                </a>
+                        <form method="POST" action="{% url 'profile_seen_realname' %}">{% csrf_token %}
+                            <a
+                                class="btn btn-mini btn-primary"
+                                href="{% url 'profile_edit_basic' %}?hl=rn">
+                                {% trans "OK" %}
+                            </a>
 
-                                <input
-                                    type="submit"
-                                    class="btn btn-mini btn-secondary navbar-popup-input"
-                                    value="{% trans "No, thanks" %}" />
+                            <button
+                                type="submit"
+                                class="btn btn-mini btn-secondary navbar-popup-input {% button_loading_class %}">
+                                {% trans "No, thanks" %}
+                                {% button_loading_indicator %}
+                            </button>
 
-                                <input
-                                    type="hidden"
-                                    name="next"
-                                    value="{{request.path}}" />
-                            </form>
-                        </div>
+                            <input
+                                type="hidden"
+                                name="next"
+                                value="{{request.path}}" />
+                        </form>
                     </div>
-                {% endif %}
-            </li> <!-- user menu -->
+                </div>
+            {% endif %}
+        </li> <!-- user menu -->
 
-                <li class="visible-phone">
-                    <a href="{% url 'user_page' request.user.username %}">
-                        <i class="icon-user"></i>
-                    </a>
+            <li class="visible-phone">
+                <a href="{% url 'user_page' request.user.username %}">
+                    <i class="icon-user"></i>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'image_upload' %}" class="upload-button" title="{% trans "Upload" %}">
+                    <i class="icon icon-upload-alt"></i>
+                </a>
+            </li>
+
+            {% if not request.user.userprofile.exclude_from_competitions %}
+                <li id="astrobin-index-mobile-header" class="visible-phone">
                 </li>
+            {% endif %}
 
+        {% else %} {# request.user.is_authenticated #}
+
+            <li class="{% current request "^/accounts/login/" %}">
+                <a href="
+                        {% url 'auth_login' %}{% if request.path|slice:"9" != "/accounts" %}?next={{ request.path }}{% endif %}">
+                    {% trans "Login" %}
+                </a>
+            </li>
+            {% if not privatebeta_enabled %}
                 <li>
-                    <a href="{% url 'image_upload' %}" class="upload-button" title="{% trans "Upload" %}">
-                        <i class="icon icon-upload-alt"></i>
-                    </a>
+                    <a href="https://welcome.astrobin.com/pricing">{% trans "Register" %}</a>
                 </li>
+            {% endif %}
 
-                {% if not request.user.userprofile.exclude_from_competitions %}
-                    <li id="astrobin-index-mobile-header" class="visible-phone">
-                    </li>
-                {% endif %}
+        {% endif %} {# user.is_authenticated #}
+    </ul>
+</div> <!-- user-nav -->
 
-            {% else %} {# request.user.is_authenticated #}
+<div id="user-scores-popover" style="display: none">
+    <h4>{% trans "Image Index" %}: <span id="astrobin-index-popover"></span></h4>
+    <p>
+        {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/features/image-index" target="_blank">' as _0 and '</a>' as _1 %}
+            The <strong>Image Index</strong> is a system based on likes received on images, that
+            incentivizes the most active and liked members of the community. {{_0}}Learn more.{{_1}}
+        {% endblocktrans %}
+    </p>
 
-                <li class="{% current request "^/accounts/login/" %}">
-                    <a href="
-                            {% url 'auth_login' %}{% if request.path|slice:"9" != "/accounts" %}?next={{ request.path }}{% endif %}">
-                        {% trans "Login" %}
-                    </a>
-                </li>
-                {% if not privatebeta_enabled %}
-                    <li>
-                        <a href="https://welcome.astrobin.com/pricing">{% trans "Register" %}</a>
-                    </li>
-                {% endif %}
+    <hr />
 
-            {% endif %} {# user.is_authenticated #}
-        </ul>
-    </div> <!-- user-nav -->
-
-    <div id="user-scores-popover" style="display: none">
-        <h4>{% trans "Image Index" %}: <span id="astrobin-index-popover"></span></h4>
-        <p>
-            {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/features/image-index" target="_blank">' as _0 and '</a>' as _1 %}
-                The <strong>Image Index</strong> is a system based on likes received on images, that
-                incentivizes the most active and liked members of the community. {{_0}}Learn more.{{_1}}
-            {% endblocktrans %}
-        </p>
-
-        <hr />
-
-        <h4>{% trans "Contribution Index" %} <em>{% trans "(beta)" %}</em>: <span id="contribution-index-popover"></span></h4>
-        <p>
-            {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/features/contribution-index" target="_blank">' as _0 and '</a>' as _1 %}
-                The <strong>Contribution Index (beta)</strong> is system to reward informative,
-                constructive, and valuable commentary on AstroBin. {{_0}}Learn more.{{_1}}
-            {% endblocktrans %}
-        </p>
-    </div>
+    <h4>{% trans "Contribution Index" %} <em>{% trans "(beta)" %}</em>: <span id="contribution-index-popover"></span></h4>
+    <p>
+        {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/features/contribution-index" target="_blank">' as _0 and '</a>' as _1 %}
+            The <strong>Contribution Index (beta)</strong> is system to reward informative,
+            constructive, and valuable commentary on AstroBin. {{_0}}Learn more.{{_1}}
+        {% endblocktrans %}
+    </p>
+</div>

@@ -2522,6 +2522,15 @@ class UserProfile(SafeDeleteModel):
             "and Contribution Index."),
     )
 
+    auto_submit_to_iotd_tp_process = models.BooleanField(
+        default=False,
+        verbose_name=_("Automatically submit images for IOTD/TP consideration"),
+        help_text=_(
+            "Check this box to automatically submit your images for %(0)sIOTD/TP%(1)s consideration when they are "
+            "published." % {'0': '<a href="https://welcome.astrobin.com/iotd" target="_blank">', '1': '</a>'}
+        ),
+    )
+
     banned_from_competitions = models.DateTimeField(
         null=True,
         blank=True,
@@ -2747,6 +2756,11 @@ class UserProfile(SafeDeleteModel):
     seen_realname = models.BooleanField(
         default=False,
         editable=False,
+    )
+
+    seen_iotd_tp_is_explicit_submission = models.DateTimeField(
+        null=True,
+        blank=True,
     )
 
     # PYBBM fields

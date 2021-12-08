@@ -3,6 +3,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.template import Library
 
+from astrobin.models import Image
 from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_iotd.permissions import may_toggle_submission_image, may_toggle_vote_image, may_elect_iotd, \
     may_unelect_iotd
@@ -77,6 +78,17 @@ def may_not_unelect_reason(user, image):
     may, reason = may_unelect_iotd(user, image)
     return reason
 
+
+@register.filter
+def may_submit_to_iotd_tp_process(user: User, image: Image) -> bool:
+    may, reason = IotdService.may_submit_to_iotd_tp_process(user, image)
+    return may
+
+
+@register.filter
+def may_submit_to_iotd_tp_process_reason(user: User, image: Image) -> str:
+    may, reason = IotdService.may_submit_to_iotd_tp_process(user, image)
+    return reason
 
 # Statuses
 

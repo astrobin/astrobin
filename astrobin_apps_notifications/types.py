@@ -241,6 +241,12 @@ NOTICE_TYPES = (
         2
     ),
     (
+        'image_submitted_to_iotd_tp',
+        _("Your image was submitted for IOTD/TP consideration"),
+        '',
+        2
+    ),
+    (
         'new_subscription',
         _("Thank you for getting a subscription!"),
         '',

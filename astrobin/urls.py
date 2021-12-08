@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.conf.urls import url, include
+from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
@@ -9,101 +9,35 @@ from django.views.generic import RedirectView
 from django.views.static import serve
 from rest_framework.authtoken.views import obtain_auth_token
 from tastypie.api import Api
-from threaded_messages.views import batch_update as messages_batch_update
-from threaded_messages.views import delete as messages_delete
-from threaded_messages.views import inbox as messages_inbox
-from threaded_messages.views import message_ajax_reply as messages_message_ajax_reply
-from threaded_messages.views import view as messages_view
+from threaded_messages.views import (
+    batch_update as messages_batch_update, delete as messages_delete,
+    inbox as messages_inbox, message_ajax_reply as messages_message_ajax_reply, view as messages_view,
+)
 
 from astrobin import lookups
 from astrobin.api import (
-    TopPickNominationResource,
-    TopPickResource,
-    ImageOfTheDayResource,
-    ImageResource,
-    ImageRevisionResource,
-    LocationResource,
-    CollectionResource,
-    UserProfileResource
+    CollectionResource, ImageOfTheDayResource, ImageResource, ImageRevisionResource, LocationResource,
+    TopPickNominationResource, TopPickResource, UserProfileResource,
 )
 from astrobin.forms.password_reset_form import PasswordResetForm
 from astrobin.search import AstroBinSearchView
 from astrobin.views import (
-    api as api_views,
-    explore as explore_views,
-    image as image_views,
-    moderation as moderation_views,
-    collections as collections_views,
-    registration as registration_views,
-
-    index,
-
-    image_edit_acquisition,
-    image_edit_acquisition_reset,
-    image_edit_license,
-    image_edit_platesolving_settings,
-    image_restart_platesolving,
-    image_edit_platesolving_advanced_settings,
-    image_restart_advanced_platesolving,
-    image_edit_make_final,
-    image_edit_revision_make_final,
-    image_edit_save_acquisition,
-    image_edit_save_license,
-    image_edit_save_watermark,
-    image_edit_watermark,
-    image_upload,
-    image_upload_process,
-    image_revision_upload_process,
-
-    me,
-    user_page,
-    user_page_api_keys,
-    user_ban,
-    user_page_bookmarks,
-    user_page_liked,
-    user_page_followers,
-    user_page_following,
-    user_page_friends,
-    user_page_plots,
-
-    flickr_auth_callback,
-    user_profile_delete,
-    user_profile_edit_basic,
-    user_profile_flickr_import,
-    user_profile_edit_gear,
-    user_profile_edit_gear_remove,
-    user_profile_edit_license,
-    user_profile_edit_locations,
-    user_profile_edit_preferences,
-    user_profile_edit_privacy,
-    user_profile_save_basic,
-    user_profile_save_gear,
-    user_profile_save_license,
-    user_profile_save_locations,
-    user_profile_save_preferences,
-    user_profile_save_privacy,
-    user_profile_seen_realname,
-    user_profile_shadow_ban,
-    user_profile_remove_shadow_ban,
-
-    gear_by_ids,
-    gear_by_image,
-    gear_by_make,
-    gear_popover_ajax,
-    get_makes_by_type,
-    get_edit_gear_form,
-    get_empty_edit_gear_form,
-    get_gear_user_info_form,
-    get_is_gear_complete,
-    save_gear_details,
-    save_gear_user_info,
-    user_popover_ajax,
-
-    api_help,
-    astrophotographers_list,
-    contributors_list,
-
-    set_language
+    api as api_views, api_help, astrophotographers_list, collections as collections_views, contributors_list,
+    explore as explore_views, flickr_auth_callback, gear_by_ids, gear_by_image, gear_by_make, gear_popover_ajax,
+    get_edit_gear_form, get_empty_edit_gear_form, get_gear_user_info_form, get_is_gear_complete, get_makes_by_type,
+    image as image_views, image_edit_acquisition, image_edit_acquisition_reset, image_edit_license,
+    image_edit_make_final, image_edit_platesolving_advanced_settings, image_edit_platesolving_settings,
+    image_edit_revision_make_final, image_edit_save_acquisition, image_edit_save_license, image_edit_save_watermark,
+    image_edit_watermark, image_restart_advanced_platesolving, image_restart_platesolving,
+    image_revision_upload_process, image_upload, image_upload_process, index, me, moderation as moderation_views,
+    registration as registration_views, save_gear_details, save_gear_user_info, set_language, user_ban, user_page,
+    user_page_api_keys, user_page_bookmarks, user_page_followers, user_page_following, user_page_friends,
+    user_page_liked, user_page_plots, user_popover_ajax, user_profile_delete, user_profile_edit_basic,
+    user_profile_edit_gear, user_profile_edit_gear_remove, user_profile_edit_license, user_profile_edit_locations,
+    user_profile_edit_preferences, user_profile_edit_privacy, user_profile_flickr_import,
+    user_profile_remove_shadow_ban, user_profile_save_basic, user_profile_save_gear, user_profile_save_license,
+    user_profile_save_locations, user_profile_save_preferences, user_profile_save_privacy,
+    user_profile_seen_iotd_tp_is_explicit_submission, user_profile_seen_realname, user_profile_shadow_ban,
 )
 from astrobin.views.contact import ContactRedirectView
 from astrobin.views.forums import LatestTopicsView
@@ -305,6 +239,10 @@ urlpatterns += [
     url(r'^profile/save/preferences/$', user_profile_save_preferences, name='profile_save_preferences'),
     url(r'^profile/save/privacy/$', user_profile_save_privacy, name='profile_save_privacy'),
     url(r'^profile/seen/realname/$', user_profile_seen_realname, name='profile_seen_realname'),
+    url(
+        r'^profile/seen/iotd-tp-is-explicit-submission/$', user_profile_seen_iotd_tp_is_explicit_submission,
+        name='profile_seen_iotd_tp_is_explicit_submission'
+    ),
     url(r'^profile/shadow-ban/', user_profile_shadow_ban, name='profile_shadow_ban'),
     url(r'^profile/remove-shadow-ban/', user_profile_remove_shadow_ban, name='profile_remove_shadow_ban'),
 
@@ -440,6 +378,10 @@ urlpatterns += [
 
     url(r'^full/(?P<id>\w+)/(?:(?P<r>\w+)/)?$', image_views.ImageFullView.as_view(), name='image_full'),
     url(r'^(?P<id>\w+)/flagthumbs/$', never_cache(image_views.ImageFlagThumbsView.as_view()), name='image_flag_thumbs'),
+    url(
+        r'^(?P<id>\w+)/submit-to-iotd-tp/$', never_cache(image_views.ImageSubmitToIotdTpProcessView.as_view()),
+        name='image_submit_to_iotd_tp'
+    ),
     url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?$', image_views.ImageDetailView.as_view(), name='image_detail'),
     url(r'^(?P<id>\w+)/(?:(?P<r>\w+)/)?rawthumb/(?P<alias>\w+)/(?:get.jpg)?$', image_views.ImageRawThumbView.as_view(),
         name='image_rawthumb'),
