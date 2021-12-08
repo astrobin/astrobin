@@ -17,7 +17,7 @@ Cypress.Commands.add('login', (opts={}) => {
 
     cy.get("body").then((body) => {
         if (body.find("#realname-prompt").length > 0) {
-            cy.get("#realname-prompt input[type='submit']").click();
+            cy.get("#realname-prompt .btn[type='submit']").click();
         }
     });
 });
