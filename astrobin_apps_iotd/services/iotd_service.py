@@ -10,6 +10,7 @@ from django.utils.translation import gettext
 from astrobin.enums import SubjectType
 from astrobin.models import Image
 from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
+from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 from astrobin_apps_users.services import UserService
 from common.services import DateTimeService
@@ -279,6 +280,8 @@ class IotdService:
                 image.user.userprofile.auto_submit_to_iotd_tp_process = True
                 image.user.userprofile.save(keep_deleted=True)
 
+            push_notification([image.user], None, 'image_submitted_to_iotd_tp', {})
+
         return may, reason
 
     @staticmethod
@@ -289,11 +292,17 @@ class IotdService:
         if user != image.user:
             return False, 'NOT_OWNER'
 
+        if is_free(user):
+            return False, 'IS_FREE'
+
         if image.is_wip:
             return False, 'NOT_PUBLISHED'
 
         if image.designated_iotd_submitters.exists() or image.designated_iotd_reviewers.exists():
             return False, 'ALREADY_SUBMITTED'
+
+        if image.subject_type in (SubjectType.GEAR, SubjectType.OTHER):
+            return False, 'BAD_SUBJECT_TYPE'
 
         if image.user.userprofile.exclude_from_competitions:
             return False, 'EXCLUDED_FROM_COMPETITIONS'

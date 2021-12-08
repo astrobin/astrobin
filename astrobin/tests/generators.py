@@ -6,6 +6,7 @@ from django.contrib.auth.models import User, Group
 from pybb.models import Post, Category, Forum, Topic
 from subscription.models import Subscription, UserSubscription
 
+from astrobin.enums import SubjectType
 from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.models import Image, ImageRevision, Telescope, Mount, Collection
 from toggleproperties.models import ToggleProperty
@@ -46,6 +47,7 @@ class Generators:
             description=kwargs.pop('description', None),
             description_bbcode=kwargs.pop('description_bbcode', None),
             download_limitation=kwargs.pop('download_limitations', DownloadLimitation.ME_ONLY),
+            subject_type=kwargs.pop('subject_type', SubjectType.DEEP_SKY),
         )
 
     @staticmethod

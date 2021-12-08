@@ -1881,23 +1881,25 @@ p.small {
   }
 }
 
-#realname-prompt {
+#realname-prompt,
+#iotd-tp-is-explicit-submission-prompt
+{
   position: absolute;
   top: 40px;
   left: 0;
   z-index: 999;
 
   .bubble {
-    width: 145px;
-    color: #C09853;
-    background-color: #FCF8E3;
-    border: 1px solid #FBEED5;
-    text-align: left;
-
+    width: 200px;
   }
 
   .bubble:after {
     left: 20px;
+  }
+
+  form {
+    margin-top: 1rem;
+    margin-bottom: 0;
   }
 }
 

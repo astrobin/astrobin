@@ -60,7 +60,7 @@
 
     {% if request.user.is_authenticated and not user_language %}
         <div id="language-prompt">
-            <div class="bubble">
+            <div class="bubble alert alert-warning">
                 {% blocktrans %}Please select your language from the options above.{% endblocktrans %}
             </div>
         </div>

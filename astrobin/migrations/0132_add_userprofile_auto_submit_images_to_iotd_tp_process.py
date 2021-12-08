@@ -20,4 +20,9 @@ class Migration(migrations.Migration):
                 verbose_name='Automatically submit images for IOTD/TP consideration'
             ),
         ),
+        migrations.AddField(
+            model_name='userprofile',
+            name='seen_iotd_tp_is_explicit_submission',
+            field=models.DateTimeField(blank=True, null=True),
+        ),
     ]

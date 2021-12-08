@@ -2758,6 +2758,11 @@ class UserProfile(SafeDeleteModel):
         editable=False,
     )
 
+    seen_iotd_tp_is_explicit_submission = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
     # PYBBM fields
     signature = models.TextField(
         _('Signature'),

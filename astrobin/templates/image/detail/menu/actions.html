@@ -20,6 +20,34 @@
             <span class="hidden-phone">{% trans "Actions" %}</span>
             <span class="caret hidden-phone"></span>
         </a>
+        {% if request.user|may_submit_to_iotd_tp_process:image and not request.user.userprofile.seen_iotd_tp_is_explicit_submission and not request.user.userprofile.auto_submit_to_iotd_tp_process %}
+            <div id="iotd-tp-is-explicit-submission-prompt">
+                <div class="bubble alert alert-warning">
+                    <p>
+                        {% blocktrans trimmed with '<a href="https://welcome.astrobin.com/iotd" target="_blank">' as _0 and '</a>' as _1 %}
+                            Submission for {{ _0 }}IOTD/TP{{ _1 }} consideration is not automatic anymore. Please use
+                            the <strong>Actions</strong> from now on, if you want to submit.
+                        {% endblocktrans %}
+                    </p>
+
+                    <p>
+                        {% blocktrans trimmed %}
+                            If you want, you can set up auto-submission in your preferences.
+                        {% endblocktrans %}
+                    </p>
+
+                    <form method="POST" action="{% url 'profile_seen_iotd_tp_is_explicit_submission' %}">
+                        {% csrf_token %}
+                        <button type="submit"
+                                class="btn btn-mini btn-primary navbar-popup-input {% button_loading_class %}">
+                            {% trans "Got it" %}
+                            {% button_loading_indicator %}
+                        </button>
+                        <input type="hidden" name="next" value="{{ request.path }}" />
+                    </form>
+                </div>
+            </div>
+        {% endif %}
         <ul class="dropdown-menu">
             <li>
                 <a class="upload-uncompressed-source"
@@ -105,7 +133,7 @@
                                 {% endif %}
                         >
                             <i class="icon-rocket"></i>
-                            {% trans "Submit to IOTD/TP process" %}
+                            {% trans "Submit for IOTD/TP consideration" %}
                         </a>
                     {% endwith %}
                 </li>

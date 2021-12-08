@@ -1570,10 +1570,19 @@ class IotdServiceTest(TestCase):
         self.assertEqual((False, 'NOT_OWNER'), IotdService.may_submit_to_iotd_tp_process(user, image))
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    def test_may_submit_to_iotd_tp_process_is_free(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image()
+
+        self.assertEqual((False, 'IS_FREE'), IotdService.may_submit_to_iotd_tp_process(image.user, image))
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
     def test_may_submit_to_iotd_tp_process_not_published(self, is_authenticated):
         is_authenticated.return_value = True
 
         image = Generators.image(is_wip=True)
+        Generators.premium_subscription(image.user, "AstroBin Ultimate 2020+")
 
         self.assertEqual((False, 'NOT_PUBLISHED'), IotdService.may_submit_to_iotd_tp_process(image.user, image))
 
@@ -1582,16 +1591,27 @@ class IotdServiceTest(TestCase):
         is_authenticated.return_value = True
 
         image = Generators.image()
+        Generators.premium_subscription(image.user, "AstroBin Ultimate 2020+")
         image.designated_iotd_submitters.add(Generators.user(groups=['iotd_staff', 'iotd_submitters']))
         image.designated_iotd_reviewers.add(Generators.user(groups=['iotd_staff', 'iotd_reviewers']))
 
         self.assertEqual((False, 'ALREADY_SUBMITTED'), IotdService.may_submit_to_iotd_tp_process(image.user, image))
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
+    def test_may_submit_to_iotd_tp_process_already_bad_type(self, is_authenticated):
+        is_authenticated.return_value = True
+
+        image = Generators.image(subject_type=SubjectType.GEAR)
+        Generators.premium_subscription(image.user, "AstroBin Ultimate 2020+")
+
+        self.assertEqual((False, 'BAD_SUBJECT_TYPE'), IotdService.may_submit_to_iotd_tp_process(image.user, image))
+
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=PropertyMock)
     def test_may_submit_to_iotd_tp_process_excluded_from_competitions(self, is_authenticated):
         is_authenticated.return_value = True
 
         image = Generators.image()
+        Generators.premium_subscription(image.user, "AstroBin Ultimate 2020+")
         image.user.userprofile.exclude_from_competitions = True
         image.user.userprofile.save(keep_deleted=True)
 
@@ -1604,6 +1624,7 @@ class IotdServiceTest(TestCase):
         is_authenticated.return_value = True
 
         image = Generators.image()
+        Generators.premium_subscription(image.user, "AstroBin Ultimate 2020+")
         image.user.userprofile.banned_from_competitions = datetime.now()
         image.user.userprofile.save(keep_deleted=True)
 
@@ -1616,6 +1637,7 @@ class IotdServiceTest(TestCase):
         is_authenticated.return_value = True
 
         image = Generators.image()
+        Generators.premium_subscription(image.user, "AstroBin Ultimate 2020+")
         image.published = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
         image.save(keep_deleted=True)
 
@@ -1628,6 +1650,7 @@ class IotdServiceTest(TestCase):
         is_authenticated.return_value = True
 
         image = Generators.image()
+        Generators.premium_subscription(image.user, "AstroBin Ultimate 2020+")
 
         self.assertEqual(
             (True, None), IotdService.may_submit_to_iotd_tp_process(image.user, image)
