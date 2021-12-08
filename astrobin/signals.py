@@ -85,9 +85,6 @@ def image_pre_save(sender, instance, **kwargs):
         if not instance.is_wip and not instance.published:
             # This image is being published
             instance.published = datetime.datetime.now()
-            if not instance.user.userprofile.exclude_from_competitions and \
-                    instance.user.userprofile.auto_submit_to_iotd_tp_process:
-                IotdService.submit_to_iotd_tp_process(instance.user, instance, False)
 
         previous_mentions = MentionsService.get_mentions(image.description_bbcode)
         current_mentions = MentionsService.get_mentions(instance.description_bbcode)
@@ -160,6 +157,9 @@ def image_post_save(sender, instance, created, **kwargs):
                 pass
 
         UserService(instance.user).clear_gallery_image_list_cache()
+
+        if instance.user.userprofile.auto_submit_to_iotd_tp_process:
+            IotdService.submit_to_iotd_tp_process(instance.user, instance, False)
 
 
 post_save.connect(image_post_save, sender=Image)

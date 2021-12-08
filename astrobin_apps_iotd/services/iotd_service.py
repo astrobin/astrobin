@@ -301,7 +301,7 @@ class IotdService:
         if image.designated_iotd_submitters.exists() or image.designated_iotd_reviewers.exists():
             return False, 'ALREADY_SUBMITTED'
 
-        if image.subject_type in (SubjectType.GEAR, SubjectType.OTHER):
+        if image.subject_type in (SubjectType.GEAR, SubjectType.OTHER, '', None):
             return False, 'BAD_SUBJECT_TYPE'
 
         if image.user.userprofile.exclude_from_competitions:

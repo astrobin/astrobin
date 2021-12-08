@@ -3422,25 +3422,37 @@ class ImageTest(TestCase):
         telescope.delete()
         image.delete()
 
-    def test_image_designated_iotd_submitters(self):
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=mock.PropertyMock)
+    def test_image_designated_iotd_submitters(self, is_authenticated):
         group = Group.objects.create(name='iotd_submitters')
+        is_authenticated.return_value = True
 
         for i in range(10):
             user = Generators.user()
             user.groups.add(group)
 
-        image = Generators.image()
+        user = Generators.user()
+        user.userprofile.auto_submit_to_iotd_tp_process = True
+        user.userprofile.save(keep_deleted=True)
+        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+        image = Generators.image(user=user)
 
         self.assertEqual(2, image.designated_iotd_submitters.count())
 
-    def test_image_designated_iotd_reviewers(self):
+    @patch('django.contrib.auth.models.User.is_authenticated', new_callable=mock.PropertyMock)
+    def test_image_designated_iotd_reviewers(self, is_authenticated):
         group = Group.objects.create(name='iotd_reviewers')
+        is_authenticated.return_value = True
 
         for i in range(10):
             user = Generators.user()
             user.groups.add(group)
 
-        image = Generators.image()
+        user = Generators.user()
+        user.userprofile.auto_submit_to_iotd_tp_process = True
+        user.userprofile.save(keep_deleted=True)
+        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+        image = Generators.image(user=user)
 
         self.assertEqual(2, image.designated_iotd_reviewers.count())
 
