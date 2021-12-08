@@ -1391,7 +1391,7 @@ class ImageSubmitToIotdTpProcessView(View):
 
     def post(self, request, *args, **kwargs):
         id: Union[str, int] = self.kwargs.get('id')
-        auto_submit = request.POST.get('auto_submit_to_iotd_tp_process') == 'on'
+        auto_submit = request.POST.get('auto_submit_to_iotd_tp_process').lower() == 'on'
         image: Image = ImageService.get_object(id, Image)
 
         may, reason = IotdService.submit_to_iotd_tp_process(request.user, image, auto_submit)
