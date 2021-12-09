@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: IOTD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 16:47+0000\n"
-"PO-Revision-Date: 2021-10-17 11:34+0200\n"
+"POT-Creation-Date: 2021-12-09 18:40+0000\n"
+"PO-Revision-Date: 2021-12-09 17:54+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -23,10 +23,10 @@ msgid "Sorry, it's now too late to retract this vote."
 msgstr "Spiacenti, è troppo tardi per ritirare questo voto."
 
 msgid "Newest first"
-msgstr ""
+msgstr "Nuovi prima"
 
 msgid "Oldest first"
-msgstr ""
+msgstr "Vecchi prima"
 
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "Non sei un membro del gruppo di submitter Foto del Giorno."
@@ -44,13 +44,15 @@ msgid "This user has been banned from competitions."
 msgstr "Questo utente è stato bannato dalle competizioni."
 
 msgid "You cannot submit an image that you already dismissed."
-msgstr ""
+msgstr "Non puoi promuovere un'immagine che hai già scartato."
 
 #, python-format
 msgid ""
 "You cannot submit an image that has been dismissed by %(number)s members of "
 "the IOTD Staff."
 msgstr ""
+"Non puoi promuovere un'immagine che è stata scartata da %(number)s membri "
+"dello staff IOTD."
 
 #, python-format
 msgid ""
@@ -80,13 +82,15 @@ msgid "Images in the staging area cannot be voted for."
 msgstr "Le immagini nell'area di lavoro non possono essere votate."
 
 msgid "You cannot vote for an image that you already dismissed."
-msgstr ""
+msgstr "Non puoi votare per un'immagine che hai già scartato."
 
 #, python-format
 msgid ""
 "You cannot vote for an image that has been dismissed by %(number)s members "
 "of the IOTD Staff."
 msgstr ""
+"Non puoi votare per un'immagine che è stata scartata da %(number)s membri "
+"dello staff IOTD."
 
 msgid "You cannot vote for an image that has not been submitted."
 msgstr "Non puoi votare un'immagine che non è stata proposta."
