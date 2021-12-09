@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: AstroBin Apps: Plate-solving\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-05 16:17+0200\n"
-"PO-Revision-Date: 2021-10-17 10:58+0200\n"
+"PO-Revision-Date: 2021-10-18 18:46+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108448\n"
-"X-Loco-Api-Version: 1.0.25 20211001-1"
+"X-Loco-Api-Version: 1.0.25 20211027-1"
 
 #: loco:606b765229f20946c1545c55
 msgid "Perform a blind solve"
@@ -292,149 +292,152 @@ msgstr ""
 msgid ""
 "Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
 msgstr ""
+"Objekte aus dem Lynds-Katalog der hellen Nebel (LBN) anzeigen (Lynds 1965)"
 
 #: loco:616be31ce8c08b526e123ef3
 msgid ""
 "Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
-msgstr ""
+msgstr "Zeige Objekte aus dem Lynds-Katalog der Dunkelnebel (LDN) (Lynds 1962)"
 
 #: loco:616be31ce8c08b526e123ef4
 msgid "Show quasars"
-msgstr ""
+msgstr "Quasare anzeigen"
 
 #: loco:616be31ce8c08b526e123ef5
 msgid "Missing"
-msgstr ""
+msgstr "Fehlend"
 
 #: loco:616be31ce8c08b526e123ef6
 msgid "Basic pending"
-msgstr ""
+msgstr "Standard ausstehend"
 
 #: loco:616be31ce8c08b526e123ef7
 msgid "Basic failed"
-msgstr ""
+msgstr "Standard fehlgeschlagen"
 
 #: loco:616be31ce8c08b526e123ef8
 msgid "Basic success"
-msgstr ""
+msgstr "Standard erfolgreich"
 
 #: loco:616be31ce8c08b526e123ef9
 msgid "Advanced pending"
-msgstr ""
+msgstr "Erweitert ausstehend"
 
 #: loco:616be31ce8c08b526e123efa
 msgid "Advanced failed"
-msgstr ""
+msgstr "Erweitert gescheitert"
 
 #: loco:616be31ce8c08b526e123efb
 msgid "Advanced success"
-msgstr ""
+msgstr "Erweitert erfolgreich"
 
 #: loco:616be31ce8c08b526e123efc
 msgid ""
 "AstroBin could not plate-solve this image because of an unexpected error."
 msgstr ""
+"AstroBin konnte dieses Bild wegen eines unerwarteten Fehlers nicht "
+"astrometrieren."
 
 #: loco:616be31ce8c08b526e123efd
 msgid "n/a"
-msgstr ""
+msgstr "k.A."
 
 #: loco:616be31ce8c08b526e123efe
 msgid "Starting task..."
-msgstr ""
+msgstr "Vorgang starten..."
 
 #: loco:616be31ce8c08b526e123eff
 msgid "Downloading image..."
-msgstr ""
+msgstr "Bild herunterladen..."
 
 #: loco:616be31ce8c08b526e123f00
 msgid "Plate-solving image..."
-msgstr ""
+msgstr "Bild astrometrieren..."
 
 #: loco:616be31ce8c08b526e123f01
 msgid "Generating image annotations..."
-msgstr ""
+msgstr "Erzeugen der Bildbeschriftungen..."
 
 #: loco:616be31ce8c08b526e123f02
 msgid "Processing SVG documents..."
-msgstr ""
+msgstr "Verarbeitung der SVG-Dokumente..."
 
 #: loco:616be31ce8c08b526e123f03
 msgid "Uploading results..."
-msgstr ""
+msgstr "Resultate hochladen..."
 
 #: loco:616be31ce8c08b526e123f04
 msgid "Task completed"
-msgstr ""
+msgstr "Vorgang abgeschlossen"
 
 #: loco:616be31ce8c08b526e123f05
 msgid "Plate-solving information"
-msgstr ""
+msgstr "Astrometrie Information"
 
 #: loco:616be31ce8c08b526e123f06
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: loco:616be31ce8c08b526e123f07
 msgid "Started"
-msgstr ""
+msgstr "Gestartet"
 
 #: loco:616be31ce8c08b526e123f08
 msgid "Astrometry.net job"
-msgstr ""
+msgstr "Astrometry.net Job"
 
 #: loco:616be31ce8c08b526e123f09
 msgid "PixInsight job"
-msgstr ""
+msgstr "PixInsight Job"
 
 #: loco:616be31ce8c08b526e123f0a
 msgid "PixInsight queue size"
-msgstr ""
+msgstr "Größe der PixInsight-Warteschlange"
 
 #: loco:616be31ce8c08b526e123f0b
 msgid "PixInsight stage"
-msgstr ""
+msgstr "PixInsight Stage"
 
 #: loco:616be31ce8c08b526e123f0c
 msgid "PixInsight log"
-msgstr ""
+msgstr "PixInsight Log"
 
 #: loco:616be31ce8c08b526e123f0d
 msgid "RA"
-msgstr ""
+msgstr "RA"
 
 #: loco:616be31ce8c08b526e123f0e
 msgid "center"
-msgstr ""
+msgstr "Zentrum"
 
 #: loco:616be31ce8c08b526e123f0f
 msgid "degrees"
-msgstr ""
+msgstr "Grad"
 
 #: loco:616be31ce8c08b526e123f10
 msgid "top/left"
-msgstr ""
+msgstr "Oben/links"
 
 #: loco:616be31ce8c08b526e123f11
 msgid "top/right"
-msgstr ""
+msgstr "Oben/rechts"
 
 #: loco:616be31ce8c08b526e123f12
 msgid "bottom/right"
-msgstr ""
+msgstr "Unten/rechts"
 
 #: loco:616be31ce8c08b526e123f13
 msgid "bottom/left"
-msgstr ""
+msgstr "Unten/links"
 
 #: loco:616be31ce8c08b526e123f14
 msgid "Dec"
-msgstr ""
+msgstr "Dec"
 
 #: loco:616be31ce8c08b526e123f15
 msgid "Close"
-msgstr ""
+msgstr "Schließen"
 
 #: loco:616be31ce8c08b526e123f16
 msgid "Invalid"
-msgstr ""
+msgstr "Ungültig"
