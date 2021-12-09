@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-17 08:44+0000\n"
+"POT-Creation-Date: 2021-12-09 16:47+0000\n"
 "PO-Revision-Date: 2020-05-18 11:06+0000\n"
 "Last-Translator: Milosz Wasilewski <milosz.wasilewski@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,6 +26,12 @@ msgstr ""
 msgid "Sorry, it's now too late to retract this vote."
 msgstr ""
 
+msgid "Newest first"
+msgstr ""
+
+msgid "Oldest first"
+msgstr ""
+
 msgid "You are not a member of the IOTD Submitters board."
 msgstr "Nie jesteś członkiem zespołu wybierającego IOTD"
 
@@ -39,6 +45,15 @@ msgid "This user has chosen to be excluded from competitions."
 msgstr "Ten użytkownik został wyłączony z ubiegania się o IOTD"
 
 msgid "This user has been banned from competitions."
+msgstr ""
+
+msgid "You cannot submit an image that you already dismissed."
+msgstr ""
+
+#, python-format
+msgid ""
+"You cannot submit an image that has been dismissed by %(number)s members of "
+"the IOTD Staff."
 msgstr ""
 
 #, python-format
@@ -68,6 +83,15 @@ msgstr "Nie możesz zagłosować na swoje własne zdjęcie."
 
 msgid "Images in the staging area cannot be voted for."
 msgstr "Zdjęcia ze strefy roboczej nie mogą być oceniane."
+
+msgid "You cannot vote for an image that you already dismissed."
+msgstr ""
+
+#, python-format
+msgid ""
+"You cannot vote for an image that has been dismissed by %(number)s members "
+"of the IOTD Staff."
+msgstr ""
 
 msgid "You cannot vote for an image that has not been submitted."
 msgstr "Nie możesz zagłosować na zdjęcie które nie zostało zgłoszone."

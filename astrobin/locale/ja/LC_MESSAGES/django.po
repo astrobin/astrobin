@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-17 08:44+0000\n"
+"POT-Creation-Date: 2021-12-09 16:47+0000\n"
 "PO-Revision-Date: 2020-11-27 01:58+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -947,6 +947,11 @@ msgstr "望遠鏡とレンズ"
 msgid "Cameras"
 msgstr "カメラ"
 
+msgid ""
+"You cannot be excluded from competitions and automatically submit images for "
+"IOTD/TP consideration at the same time."
+msgstr ""
+
 msgid "If you have a personal website, put the address here."
 msgstr "あなたが個人サイトを持っているのであれば、そのURLを記入してください。"
 
@@ -1230,6 +1235,18 @@ msgstr ""
 msgid ""
 "Has this object been modified for astrophotography? (especially applicable "
 "to cameras)"
+msgstr ""
+
+msgid "Pending"
+msgstr "保留中"
+
+msgid "Approved"
+msgstr ""
+
+msgid "Automatically approved"
+msgstr ""
+
+msgid "Rejected"
 msgstr ""
 
 msgid "Refractor: achromatic"
@@ -1638,6 +1655,11 @@ msgstr "(無題)"
 msgid "Mix of multiple source"
 msgstr "複数ソースのミックス"
 
+msgid ""
+"The revision's title will be shown as an addendum to the original image's "
+"title."
+msgstr ""
+
 msgid "Do not notify your followers about this revision."
 msgstr "このリビジョンについてフォロアーに通知しないでください。"
 
@@ -1913,6 +1935,15 @@ msgstr ""
 "ムコンテストなどのコンテストから除外されます。これにより、あなたはリーダー"
 "ボードから除外され、AstroBin Indexが非表示になります。"
 
+msgid "Automatically submit images for IOTD/TP consideration"
+msgstr ""
+
+#, python-format
+msgid ""
+"Check this box to automatically submit your images for %(0)sIOTD/TP%(1)s "
+"consideration when they are published."
+msgstr ""
+
 msgid "Open notifications in a new tab"
 msgstr ""
 
@@ -2105,9 +2136,6 @@ msgid ""
 msgstr ""
 "あなたのアプリケーションの目的と、そのAPIをどのように使おうとしているのかを説"
 "明してください。"
-
-msgid "Pending"
-msgstr "保留中"
 
 msgid "Processing"
 msgstr "処理中"
@@ -2636,60 +2664,6 @@ msgstr ""
 msgid "Zulu"
 msgstr ""
 
-msgid "Integration hours, yearly"
-msgstr "露出時間（何年）"
-
-msgid "Integration hours, monthly"
-msgstr "露出時間（何ヶ月）"
-
-msgid "Integration hours, daily"
-msgstr "露出時間（何日）"
-
-msgid "Integration hours by gear, yearly"
-msgstr "機材による露出時間（何年）"
-
-msgid "Integration hours by gear, monthly"
-msgstr "機材による露出時間（何ヶ月）"
-
-msgid "Integration hours by gear, daily"
-msgstr "機材による露出時間（何日）"
-
-msgid "Uploaded images, yearly"
-msgstr "アップロード画像数（年間）"
-
-msgid "Uploaded images, monthly"
-msgstr "アップロード画像数（月間）"
-
-msgid "Uploaded images, daily"
-msgstr "アップロード画像数（日間）"
-
-msgid "Views, yearly"
-msgstr "ビュー数（年間）"
-
-msgid "Views, monthly"
-msgstr "ビュー数（月間）"
-
-msgid "Views, daily"
-msgstr "ビュー数（日間）"
-
-msgid "Total images"
-msgstr "総イメージ数"
-
-msgid "Integration hours by camera type"
-msgstr "カメラタイプでの総露出時間"
-
-msgid "Refractor"
-msgstr "屈折望遠鏡"
-
-msgid "Reflector"
-msgstr "反射望遠鏡"
-
-msgid "Catadioptric"
-msgstr "カタディオプトリック"
-
-msgid "Number of images by subject type"
-msgstr "被写体のタイプごとの画像数"
-
 msgid "You are not allowed to see this page."
 msgstr "このページの閲覧を許可されていません。"
 
@@ -2885,18 +2859,17 @@ msgstr "Image Index"
 msgid "There isn't enough data yet, please come back later!"
 msgstr "まだデータが十分でないので、あとで戻ってきてください"
 
-msgid "Avatar"
-msgstr "アバター"
+msgid "Change avatar"
+msgstr ""
+
+msgid "Change"
+msgstr ""
+
+msgid "Delete"
+msgstr "削除"
 
 msgid "Current avatar"
 msgstr "現在のアバター"
-
-msgid "You do not yet have an avatar. Please upload one now."
-msgstr ""
-"あなたはまだアバターを設定してません。いますぐそれをアップロードしましょう。"
-
-msgid "Previously uploaded"
-msgstr "前にアップロードしたもの"
 
 msgid "Choose new default"
 msgstr "新規のデフォルトを選択"
@@ -2910,8 +2883,14 @@ msgstr "アバター画像"
 msgid "Upload"
 msgstr "Upload"
 
-msgid "Please select the avatars that you would like to delete."
-msgstr "削除したいアバターを選択してください。"
+msgid "Delete avatars"
+msgstr ""
+
+msgid "Delete avatar"
+msgstr ""
+
+msgid "Delete selected"
+msgstr ""
 
 msgid "Hey!"
 msgstr "はじめまして!"
@@ -3046,6 +3025,15 @@ msgid ""
 msgstr ""
 
 msgid "Resume emails"
+msgstr ""
+
+msgid "AstroBin is rebuilding its equipment database!"
+msgstr ""
+
+msgid "Please migrate your gear."
+msgstr ""
+
+msgid "Begin migration"
 msgstr ""
 
 msgid "Cancel"
@@ -3203,6 +3191,12 @@ msgstr "レビューのキュー"
 msgid "Judgement queue"
 msgstr "評価のキュー"
 
+msgid "Equipment"
+msgstr ""
+
+msgid "Migration tool"
+msgstr ""
+
 msgid "Latest topics"
 msgstr "最後のトピックス"
 
@@ -3218,6 +3212,9 @@ msgstr "ビックウォール"
 msgid "Advanced search"
 msgstr "詳細検索"
 
+msgid "(beta)"
+msgstr "（β）"
+
 msgid "Constellations"
 msgstr ""
 
@@ -3232,12 +3229,6 @@ msgstr "リモート撮影による天体写真"
 
 msgid "Contributors list"
 msgstr "寄稿者一覧"
-
-msgid "(beta)"
-msgstr "（β）"
-
-msgid "Stats"
-msgstr "Stats"
 
 msgid "Help"
 msgstr "ヘルプ"
@@ -3571,6 +3562,9 @@ msgstr "ダウンロード"
 msgid "Remote source"
 msgstr "リモート撮影のソース"
 
+msgid "Revision title"
+msgstr ""
+
 msgid "Download original file"
 msgstr ""
 
@@ -3582,6 +3576,18 @@ msgstr "によって選択"
 
 msgid "Actions"
 msgstr "アクション"
+
+#, python-format
+msgid ""
+"Submission for %(_0)sIOTD/TP%(_1)s consideration is not automatic anymore. "
+"Please use the <strong>Actions</strong> from now on, if you want to submit."
+msgstr ""
+
+msgid "If you want, you can set up auto-submission in your preferences."
+msgstr ""
+
+msgid "Got it"
+msgstr ""
 
 msgid "Upload uncompressed source (XISF/FITS/PSD/TIFF)"
 msgstr "非圧縮ファイルをアップロード (XISF/FITS/PSD/TIFF)"
@@ -3601,11 +3607,11 @@ msgstr "ステージングエリアに移す"
 msgid "Send to group"
 msgstr "グループに送信"
 
+msgid "Submit for IOTD/TP consideration"
+msgstr ""
+
 msgid "Delete image and all revisions"
 msgstr "全ての画像やリビジョンを削除"
-
-msgid "Delete"
-msgstr "削除"
 
 msgid "Delete original image"
 msgstr "元画像を削除"
@@ -3833,6 +3839,51 @@ msgstr "閉じる"
 msgid "The following people like this image"
 msgstr "フォローしている人々はこの画像にLikeしました"
 
+msgid "Warning"
+msgstr ""
+
+msgid "This image cannot be submitted for the IOTD/TP consideration."
+msgstr ""
+
+msgid "Reason"
+msgstr ""
+
+msgid "You are not authenticated. Please log in."
+msgstr ""
+
+msgid "You are not the owner of this image."
+msgstr ""
+
+#, python-format
+msgid "Sorry, this feature requires a <a href=\"%(url)s\">paid account</a>."
+msgstr ""
+
+msgid "This image is in your staging area and hasn't been published yet."
+msgstr ""
+
+#, python-format
+msgid ""
+"Unfortunately it's too late: images can be submitted only within "
+"%(num_days)s days after publication."
+msgstr ""
+
+msgid "This image was already submitted."
+msgstr ""
+
+msgid ""
+"Images with subject type set to 'Gear' or 'Other' are not eligible for IOTD/"
+"TP consideration."
+msgstr ""
+
+msgid "Your settings indicate that you opted to be excluded from competitions."
+msgstr ""
+
+msgid "You are currently serving a ban from competitions on AstroBin."
+msgstr ""
+
+msgid "Unknown reason. This should never happen, please contact us!"
+msgstr ""
+
 msgid ""
 "This will move this image to your public area, making it listed. As this "
 "image had already been published before, your followers will not be notified."
@@ -3888,6 +3939,17 @@ msgstr "画像モード"
 
 msgid "Copy this"
 msgstr "これをコピー"
+
+#, python-format
+msgid ""
+"Would you like to submit your image for %(_0)sIOTD/TP%(_1)s consideration?"
+msgstr ""
+
+msgid ""
+"The “AstroBin Image of the Day and Top Picks” is a long-running system to "
+"promote beautiful, interesting, peculiar, or otherwise amazing "
+"astrophotographs, with a focus on technical excellence."
+msgstr ""
 
 msgid ""
 "Did you improve the post-processing of your image? Upload the new\n"
@@ -3952,31 +4014,6 @@ msgid ""
 "menu below. Use that link to post this image to Internet forums and get "
 "feedback on it. When you are satisfied, perhaps after uploading some "
 "revisions, promote it to the <a href=\"%(profile_url)s\">Public Area</a>."
-msgstr ""
-
-msgid "Oh no!"
-msgstr ""
-
-msgid ""
-"We are very, very sorry, but it appears that your image suffered a "
-"catastrophic data corruption, and it cannot be retrieved. Hopefully you "
-"still have your file (the information on this form should provide you with "
-"enough context)."
-msgstr ""
-
-msgid ""
-"Please use the file input below to upload it again, and then click on the "
-"Save button down below. All the data you had previously associated to your "
-"image is still here."
-msgstr ""
-
-msgid "Here's some detail about the image to give you some context."
-msgstr ""
-
-msgid "Image uploaded"
-msgstr ""
-
-msgid "Revision uploaded"
 msgstr ""
 
 msgid "Please wait..."
@@ -4206,9 +4243,6 @@ msgstr ""
 msgid "Galactic latitude"
 msgstr ""
 
-msgid "Warning"
-msgstr ""
-
 msgid ""
 "You are about to open a large file. Depending on your download speed, it "
 "might take several seconds or even minutes to view the file."
@@ -4313,6 +4347,9 @@ msgstr "ギャラリー"
 
 msgid "Preferences"
 msgstr "設定"
+
+msgid "Avatar"
+msgstr "アバター"
 
 msgid "Compose message"
 msgstr "メッセージの作成"
@@ -4534,6 +4571,44 @@ msgstr ""
 msgid "View forum post"
 msgstr ""
 
+msgid "A gear item that you used was renamed"
+msgstr ""
+
+msgid "Old brand"
+msgstr ""
+
+msgid "Old name"
+msgstr ""
+
+msgid "New brand"
+msgstr ""
+
+msgid "New name"
+msgstr ""
+
+msgid ""
+"This operation was performed because at least 5 owners of this equipment "
+"item (or more than half, whichever is greatest), approved it, while nobody "
+"rejected it."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you think this operation was incorrect, please <a href=\"%(url)s\">get in "
+"touch</a> and let us know why!"
+msgstr ""
+
+msgid "We will evaluate your report and revert the operation if needed."
+msgstr ""
+
+msgid "Thanks for your cooperation!"
+msgstr ""
+
+msgid ""
+"If you think this operation was incorrect, please get in touch and let us "
+"know why!"
+msgstr ""
+
 #, python-format
 msgid ""
 "Your request to join the group \"%(group_name)s\" has been APPROVED.\n"
@@ -4613,6 +4688,17 @@ msgstr ""
 #, python-format
 msgid ""
 "AstroBin completed the advanced plate-solution of your image: %(title)s."
+msgstr ""
+
+msgid "Your image was submitted for IOTD/TP consideration!"
+msgstr ""
+
+msgid ""
+"If you haven't already, please take a few minutes to learn how the process "
+"works:"
+msgstr ""
+
+msgid "Image of the Day"
 msgstr ""
 
 msgid "An image you promoted made it to IOTD"
@@ -4864,12 +4950,8 @@ msgid "%(user)s mentioned you in a comment!"
 msgstr ""
 
 #, python-format
-msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it out "
-"at the following url: <a href=\"%(url)s\">%(url)s</a>"
+msgid "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user)s</a> があなたのコメントに返信しました。以下"
-"のURLをチェックしてください。<a href=\"%(url)s\">%(url)s</a>"
 
 #, python-format
 msgid ""
@@ -4888,6 +4970,27 @@ msgstr ""
 #, python-format
 msgid "%(user)s replied to your comment."
 msgstr "%(user)sがあなたのコメントに返信しました。"
+
+#, python-format
+msgid "<a href=\"%(user_url)s\">%(user)s</a> commented on your edit proposal."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your edit proposal."
+msgstr ""
+
+msgid "Check it out at the following url:"
+msgstr ""
+
+#, python-format
+msgid ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> commented on your edit "
+"proposal.</a>"
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your edit proposal"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -5069,7 +5172,7 @@ msgstr ""
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> has published a new image revision on "
-"<strong>\"%(title)s\"</strong>."
+"<strong>\"%(image_title)s\"</strong>."
 msgstr ""
 
 #, python-format
@@ -5079,7 +5182,7 @@ msgid ""
 msgstr ""
 
 #, python-format
-msgid "%(user)s has published a new image revision on \"%(title)s\"."
+msgid "%(user)s has published a new image revision on \"%(image_title)s\"."
 msgstr ""
 
 #, python-format
@@ -5091,18 +5194,18 @@ msgstr ""
 
 #, python-format
 msgid ""
-"<strong>%(user)s</strong> has published a new image revision on \"%(title)s"
-"\"."
+"<strong>%(user)s</strong> has published a new image revision on "
+"\"%(image_title)s\"."
 msgstr ""
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> has published a new image revision on <strong>"
-"\"%(title)s\"</strong>."
+"\"%(image_title)s\"</strong>."
 msgstr ""
 
 #, python-format
-msgid "New image revision by %(user)s on \"%(title)s\""
+msgid "New image revision by %(user)s on \"%(image_title)s\""
 msgstr ""
 
 #, python-format
@@ -5217,7 +5320,19 @@ msgid "You have received a new private message."
 msgstr "新しいプライベートメッセージが届いています。"
 
 #, python-format
-msgid "%(user)s joined the public group: \"%(group_name)s\""
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> joined the public group: <strong>"
+"\"%(group_name)s\"</strong>."
+msgstr ""
+
+msgid "View group"
+msgstr ""
+
+#, python-format
+msgid "%(user)s joined the public group: \"%(group_name)s\"."
+msgstr ""
+
+msgid "View user"
 msgstr ""
 
 #, python-format
@@ -5225,7 +5340,7 @@ msgid "<strong>%(user)s</strong> joined the public group: \"%(group_name)s\""
 msgstr ""
 
 #, python-format
-msgid "%(user)s joined the public group: \"%(group_name)s\""
+msgid "%(user)s joined the public group: \"%(group_name)s\""
 msgstr ""
 
 msgid "Welcome to AstroBin!"
@@ -5398,9 +5513,6 @@ msgid ""
 "\"%(contact_url)s\">contact us</a>: we really value your input!"
 msgstr ""
 
-msgid "Thanks for your cooperation!"
-msgstr ""
-
 msgid "I have read the text above"
 msgstr ""
 
@@ -5482,6 +5594,14 @@ msgid "Something went wrong, sorry! Please try again."
 msgstr ""
 
 msgid "(deleted)"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 1 view'"
+msgid "view"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 views'"
+msgid "views"
 msgstr ""
 
 msgctxt "Noun, e.g. 'This element has 1 like'"
@@ -5659,9 +5779,21 @@ msgstr "パスワードのリセットに失敗した"
 msgid "Email with password reset instructions has been sent."
 msgstr "パスワードのリセット指示もメールが送信されました。"
 
-#, python-format
-msgid "Reset password at %(site_name)s"
-msgstr "%(site_name)sでパスワードをリセット"
+msgid ""
+"We sent you an email with a link to reset your password. Please check your "
+"inbox and spam folder!"
+msgstr ""
+
+msgid "Reset your AstroBin password"
+msgstr ""
+
+msgid "Did you forget your password or just want to reset it?"
+msgstr ""
+
+msgid ""
+"Please use the text field below to tell us the email address with which you "
+"signed up with AstroBin."
+msgstr ""
 
 msgid "Registration completed"
 msgstr "登録完了"
@@ -5710,34 +5842,6 @@ msgstr "ピクセルサイズ大"
 
 msgid "Small pixel scale"
 msgstr "ピクセルサイズ小"
-
-#, python-format
-msgid ""
-"<strong>%(total_users)s</strong> users uploaded <strong>%(total_images)s</"
-"strong> images, reaching <strong>%(total_integration)s</strong> hours of "
-"integration time."
-msgstr ""
-"<strong>%(total_users)s</strong>利用者は<strong>%(total_images)s</strong> 枚"
-"の画像をアップロードし、総露光時間が<strong>%(total_integration)s</strong>時"
-"間に達しました。"
-
-msgid "Total integration hours in the last 12 months"
-msgstr "過去12ヶ月間の総露出時間"
-
-msgid "Please wait: the plot is loading..."
-msgstr "分析結果を読み込んでいますので、お待ちください"
-
-msgid "Global distribution of camera types"
-msgstr "カメラのタイプの全体分布"
-
-msgid "Global distribution of telescope types"
-msgstr "望遠鏡のタイプの全体分布"
-
-msgid "CCD vs DLSR: the global trend"
-msgstr "CCD vs DLSRの全体の傾向"
-
-msgid "Global trend of telescope types"
-msgstr "望遠鏡タイプの全体の傾向"
 
 msgid "This list is currently empty."
 msgstr ""
@@ -5895,33 +5999,16 @@ msgstr "未发现用户："
 msgid "%(user)s's plots"
 msgstr "%(user)sの分析結果"
 
-#, python-format
-msgid ""
-"Hey <strong>%(user)s</strong>! I just wanted to let you know that you could "
-"make these plots more useful if you added all data to your images. Please "
-"make sure by checking whether you have images which lack data <a href="
-"\"%(user_page)s?public&sub=nodata\">here</a>."
+msgid "This page has been temporarily retired because of performance reasons."
 msgstr ""
-"こんにちは、<strong>%(user)s</strong>さん! もし、あなたの画像に全部のデータを"
-"加筆するのであれば、あなたはそれらの図画がとても使いやすいものになると、あな"
-"たに知らせたいです。あなたは<a href=\"%(user_page)s?public&sub=nodata\">ここ"
-"に</a>データが欠損した画像を持っています。"
-
-msgid "Total integration hours, plotted against time."
-msgstr "総粗出時間を時間に対してプロットした。"
 
 msgid ""
-"Total integration hours, plotted against time and arranged by imaging "
-"telescopes and lenses, and imaging cameras."
+"Please keep up-to-date with AstroBin's developments by following the "
+"newsletter and the the social accounts!"
 msgstr ""
-"総露出時間は時間に対してプロットされ、望遠鏡やレンズ、カメラによって配置され"
-"ている。"
 
-msgid "Combined view count for all the user's images, plotted against time."
-msgstr "全ての利用者の画像の視聴回数を合計し、時間に対してプロットした。"
-
-msgid "Image uploads, plotted against time."
-msgstr "アップロード画像を時間に対してプロットした。"
+msgid "Thank you for your understanding."
+msgstr ""
 
 #, python-format
 msgid "%(user)s's gallery"
@@ -5940,31 +6027,6 @@ msgid ""
 "These are your \"deleted\" images: only you can see this list. Click the "
 "images you want to\n"
 "            restore, and then use the button below to confirm."
-msgstr ""
-
-#, python-format
-msgid ""
-"We are very, very sorry, but it appears that some of your images suffered a "
-"catastrophic data corruption, and cannot be retrieved. Please read more <a "
-"href=\"%(data_corruption_url)s\">here</a>."
-msgstr ""
-
-msgid ""
-"Please click on the thumbnails stuck with the hourglass icon to upload the "
-"image files that you still have on your computer or backups to their pages "
-"again."
-msgstr ""
-
-msgid ""
-"The data associated to your affected images, such as title, description, "
-"equipment used, acquisition details, comments, likes, bookmarks, and so on, "
-"is still intact and safe."
-msgstr ""
-
-msgid "AstroBin would like to offer you its sincerest apologies. :("
-msgstr ""
-
-msgid "Okay, don't show this again"
 msgstr ""
 
 msgid ""
@@ -5992,6 +6054,15 @@ msgid ""
 "All your images are still unpublished. <a href=\"%(user_page)s?staging"
 "\">Visit your Staging Area</a> to find them, or <a href="
 "\"%(staging_area_learn_more_link)s\">learn more</a>."
+msgstr ""
+
+msgid ""
+"AstroBin would like to rename some of your cameras in order to be more "
+"consistent with naming conventions. Please use the button below to review "
+"the rename proposals."
+msgstr ""
+
+msgid "Review proposals"
 msgstr ""
 
 msgid "Delete account"
@@ -6180,6 +6251,12 @@ msgstr ""
 "離れてたりして、このウィンドウから移動しないでください：これはしばらく時間が"
 "かかるかもしれません！"
 
+msgid "(read more)"
+msgstr ""
+
+msgid "Add about section"
+msgstr ""
+
 msgid "Subscription"
 msgstr ""
 
@@ -6195,6 +6272,9 @@ msgstr ""
 msgid "Your payments"
 msgstr ""
 
+msgid "Stats"
+msgstr "Stats"
+
 msgid "The <strong>Last seen online</strong> field is updated hourly."
 msgstr ""
 
@@ -6207,14 +6287,12 @@ msgstr ""
 msgid "Please check again in a bit, thanks!"
 msgstr ""
 
+#, python-format
+msgid "About %(user)s"
+msgstr ""
+
 msgid "Public Area"
 msgstr "公開エリア"
-
-msgid "Corrupted"
-msgstr ""
-
-msgid "Recovered"
-msgstr ""
 
 msgid "Trash"
 msgstr ""
@@ -6244,81 +6322,6 @@ msgid "Key/value pairs"
 msgstr ""
 
 msgid "Overlays"
-msgstr ""
-
-msgid "Please confirm your recovered images"
-msgstr ""
-
-#, python-format
-msgid ""
-"Following the <a href=\"%(url)s\" target=\"_blank\">data loss incident in "
-"February 2020</a>, these images <strong>were automatically recovered</"
-"strong>."
-msgstr ""
-
-msgid "Now you need to <strong>manually confirm or reject</strong> them."
-msgstr ""
-
-msgid "Instructions"
-msgstr ""
-
-msgid ""
-"Below, you see the list of all your images impacted by the automatic "
-"recovery process."
-msgstr ""
-
-msgid ""
-"The big thumbnail represents the original upload, and the small thumbnails "
-"represent revisions."
-msgstr ""
-
-msgid ""
-"Click on a thumbnail once to mark it for recovery, again to mark it for "
-"deletion, once more to return to the \"do nothing\" state."
-msgstr ""
-
-msgid ""
-"You can also use the \"Recover all\" and \"Delete all\" buttons at the "
-"bottom."
-msgstr ""
-
-msgid ""
-"When you are ready, click on the \"Submit selected\" button to confirm your "
-"selection."
-msgstr ""
-
-msgid ""
-"You will return to this page, and the images for which you didn't make a "
-"selection will still be here."
-msgstr ""
-
-msgid ""
-"The recovered images will return to your gallery (public or staging, "
-"depending on where they were before the data loss)."
-msgstr ""
-
-msgid "Original upload"
-msgstr ""
-
-msgid "Staging area"
-msgstr ""
-
-msgid "Deleted"
-msgstr ""
-
-msgid "Recover all"
-msgstr ""
-
-msgid "Delete all"
-msgstr ""
-
-msgid "Reset"
-msgstr "リセット"
-
-msgid "Submit selected"
-msgstr ""
-
-msgid "There are no images to recover."
 msgstr ""
 
 msgid "Restore selected"
@@ -6457,9 +6460,6 @@ msgstr ""
 msgid "Add filter:"
 msgstr ""
 
-msgid "Image of the Day"
-msgstr ""
-
 msgid "Top pick"
 msgstr ""
 
@@ -6554,6 +6554,9 @@ msgstr ""
 msgid "What telescope was used in the acquisition of the image?"
 msgstr ""
 
+msgid "Refractor"
+msgstr "屈折望遠鏡"
+
 msgid "Achromatic"
 msgstr ""
 
@@ -6572,6 +6575,9 @@ msgstr ""
 msgid "Superchromat"
 msgstr ""
 
+msgid "Reflector"
+msgstr "反射望遠鏡"
+
 msgid "Dall-Kirkham"
 msgstr ""
 
@@ -6589,6 +6595,9 @@ msgstr ""
 
 msgid "Newtonian"
 msgstr ""
+
+msgid "Catadioptric"
+msgstr "カタディオプトリック"
 
 msgid "Argunov-Cassegrain"
 msgstr ""
@@ -6757,6 +6766,9 @@ msgstr ""
 msgid "Image moved to the public area."
 msgstr ""
 
+msgid "Image submitted to the IOTD/TP process!"
+msgstr ""
+
 #, python-format
 msgid "%s topics deleted"
 msgstr ""
@@ -6771,6 +6783,129 @@ msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid "Integration hours, yearly"
+#~ msgstr "露出時間（何年）"
+
+#~ msgid "Integration hours, monthly"
+#~ msgstr "露出時間（何ヶ月）"
+
+#~ msgid "Integration hours, daily"
+#~ msgstr "露出時間（何日）"
+
+#~ msgid "Integration hours by gear, yearly"
+#~ msgstr "機材による露出時間（何年）"
+
+#~ msgid "Integration hours by gear, monthly"
+#~ msgstr "機材による露出時間（何ヶ月）"
+
+#~ msgid "Integration hours by gear, daily"
+#~ msgstr "機材による露出時間（何日）"
+
+#~ msgid "Uploaded images, yearly"
+#~ msgstr "アップロード画像数（年間）"
+
+#~ msgid "Uploaded images, monthly"
+#~ msgstr "アップロード画像数（月間）"
+
+#~ msgid "Uploaded images, daily"
+#~ msgstr "アップロード画像数（日間）"
+
+#~ msgid "Views, yearly"
+#~ msgstr "ビュー数（年間）"
+
+#~ msgid "Views, monthly"
+#~ msgstr "ビュー数（月間）"
+
+#~ msgid "Views, daily"
+#~ msgstr "ビュー数（日間）"
+
+#~ msgid "Total images"
+#~ msgstr "総イメージ数"
+
+#~ msgid "Integration hours by camera type"
+#~ msgstr "カメラタイプでの総露出時間"
+
+#~ msgid "Number of images by subject type"
+#~ msgstr "被写体のタイプごとの画像数"
+
+#~ msgid "You do not yet have an avatar. Please upload one now."
+#~ msgstr ""
+#~ "あなたはまだアバターを設定してません。いますぐそれをアップロードしましょ"
+#~ "う。"
+
+#~ msgid "Previously uploaded"
+#~ msgstr "前にアップロードしたもの"
+
+#~ msgid "Please select the avatars that you would like to delete."
+#~ msgstr "削除したいアバターを選択してください。"
+
+#~ msgid ""
+#~ "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it "
+#~ "out at the following url: <a href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "<a href=\"%(user_url)s\">%(user)s</a> があなたのコメントに返信しました。以"
+#~ "下のURLをチェックしてください。<a href=\"%(url)s\">%(url)s</a>"
+
+#~ msgid "Reset password at %(site_name)s"
+#~ msgstr "%(site_name)sでパスワードをリセット"
+
+#~ msgid ""
+#~ "<strong>%(total_users)s</strong> users uploaded <strong>%(total_images)s</"
+#~ "strong> images, reaching <strong>%(total_integration)s</strong> hours of "
+#~ "integration time."
+#~ msgstr ""
+#~ "<strong>%(total_users)s</strong>利用者は<strong>%(total_images)s</strong> "
+#~ "枚の画像をアップロードし、総露光時間が<strong>%(total_integration)s</"
+#~ "strong>時間に達しました。"
+
+#~ msgid "Total integration hours in the last 12 months"
+#~ msgstr "過去12ヶ月間の総露出時間"
+
+#~ msgid "Please wait: the plot is loading..."
+#~ msgstr "分析結果を読み込んでいますので、お待ちください"
+
+#~ msgid "Global distribution of camera types"
+#~ msgstr "カメラのタイプの全体分布"
+
+#~ msgid "Global distribution of telescope types"
+#~ msgstr "望遠鏡のタイプの全体分布"
+
+#~ msgid "CCD vs DLSR: the global trend"
+#~ msgstr "CCD vs DLSRの全体の傾向"
+
+#~ msgid "Global trend of telescope types"
+#~ msgstr "望遠鏡タイプの全体の傾向"
+
+#~ msgid ""
+#~ "Hey <strong>%(user)s</strong>! I just wanted to let you know that you "
+#~ "could make these plots more useful if you added all data to your images. "
+#~ "Please make sure by checking whether you have images which lack data <a "
+#~ "href=\"%(user_page)s?public&sub=nodata\">here</a>."
+#~ msgstr ""
+#~ "こんにちは、<strong>%(user)s</strong>さん! もし、あなたの画像に全部のデー"
+#~ "タを加筆するのであれば、あなたはそれらの図画がとても使いやすいものになる"
+#~ "と、あなたに知らせたいです。あなたは<a href=\"%(user_page)s?"
+#~ "public&sub=nodata\">ここに</a>データが欠損した画像を持っています。"
+
+#~ msgid "Total integration hours, plotted against time."
+#~ msgstr "総粗出時間を時間に対してプロットした。"
+
+#~ msgid ""
+#~ "Total integration hours, plotted against time and arranged by imaging "
+#~ "telescopes and lenses, and imaging cameras."
+#~ msgstr ""
+#~ "総露出時間は時間に対してプロットされ、望遠鏡やレンズ、カメラによって配置さ"
+#~ "れている。"
+
+#~ msgid "Combined view count for all the user's images, plotted against time."
+#~ msgstr "全ての利用者の画像の視聴回数を合計し、時間に対してプロットした。"
+
+#~ msgid "Image uploads, plotted against time."
+#~ msgstr "アップロード画像を時間に対してプロットした。"
+
+#~ msgid "Reset"
+#~ msgstr "リセット"
 
 #~ msgid "Timezone"
 #~ msgstr "タイムゾーン"
