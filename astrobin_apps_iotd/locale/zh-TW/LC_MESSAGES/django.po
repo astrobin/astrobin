@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-17 08:44+0000\n"
+"POT-Creation-Date: 2021-12-09 18:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,12 @@ msgid "Sorry, it's now too late to retract this submission."
 msgstr ""
 
 msgid "Sorry, it's now too late to retract this vote."
+msgstr ""
+
+msgid "Newest first"
+msgstr ""
+
+msgid "Oldest first"
 msgstr ""
 
 msgid "You are not a member of the IOTD Submitters board."
@@ -31,6 +37,15 @@ msgid "This user has chosen to be excluded from competitions."
 msgstr ""
 
 msgid "This user has been banned from competitions."
+msgstr ""
+
+msgid "You cannot submit an image that you already dismissed."
+msgstr ""
+
+#, python-format
+msgid ""
+"You cannot submit an image that has been dismissed by %(number)s members of "
+"the IOTD Staff."
 msgstr ""
 
 #, python-format
@@ -56,6 +71,15 @@ msgid "You cannot vote for your own image."
 msgstr ""
 
 msgid "Images in the staging area cannot be voted for."
+msgstr ""
+
+msgid "You cannot vote for an image that you already dismissed."
+msgstr ""
+
+#, python-format
+msgid ""
+"You cannot vote for an image that has been dismissed by %(number)s members "
+"of the IOTD Staff."
 msgstr ""
 
 msgid "You cannot vote for an image that has not been submitted."
