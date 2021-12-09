@@ -1,11 +1,15 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.urls import reverse_lazy
 from django.db import models
+from django.urls import reverse_lazy
+from django.utils.translation import ugettext_lazy as _
 
 from astrobin.models import Image
-from astrobin_apps_iotd.permissions import may_toggle_submission_image, may_toggle_vote_image, may_elect_iotd
+from astrobin_apps_iotd.permissions import may_elect_iotd, may_toggle_submission_image, may_toggle_vote_image
 
+class IotdQueueSortOrder:
+    NEWEST_FIRST = 'NEWEST_FIRST'
+    OLDEST_FIRST = 'OLDEST_FIRST'
 
 class IotdSubmission(models.Model):
     submitter = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
@@ -128,8 +132,26 @@ class TopPickNominationsArchive(models.Model):
     class Meta:
         ordering = ['-image__published']
 
+
 class TopPickArchive(models.Model):
     image = models.OneToOneField(Image, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['-image__published']
+
+
+class IotdStaffMemberSettings(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='iotd_staff_member_settings',
+    )
+
+    queue_sort_order = models.CharField(
+        max_length=16,
+        choices=(
+            (IotdQueueSortOrder.NEWEST_FIRST, _('Newest first')),
+            (IotdQueueSortOrder.OLDEST_FIRST, _('Oldest first'))
+        ),
+        default=IotdQueueSortOrder.NEWEST_FIRST,
+    )

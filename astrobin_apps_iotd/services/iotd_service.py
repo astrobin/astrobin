@@ -9,7 +9,10 @@ from django.utils.translation import gettext
 
 from astrobin.enums import SubjectType
 from astrobin.models import Image
-from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
+from astrobin_apps_iotd.models import (
+    Iotd, IotdQueueSortOrder, IotdStaffMemberSettings, IotdSubmission, IotdVote, TopPickArchive,
+    TopPickNominationsArchive,
+)
 from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 from astrobin_apps_users.services import UserService
@@ -46,12 +49,24 @@ class IotdService:
     def get_top_pick_nominations(self):
         return TopPickNominationsArchive.objects.all()
 
-    def get_submission_queue(self, submitter: User) -> List[Image]:
+    def get_submission_queue(self, submitter: User, queue_sort_order: str = None) -> List[Image]:
         def can_add(image: Image) -> bool:
             # Since the introduction of the 2020 plans, Free users cannot participate in the IOTD/TP.
             user_is_free: bool = is_free(image.user)
 
             return not user_is_free
+
+        member_settings: IotdStaffMemberSettings
+        member_settings, created = IotdStaffMemberSettings.objects.get_or_create(user=submitter)
+
+        if queue_sort_order in ('newest', 'oldest'):
+            before = member_settings.queue_sort_order
+            member_settings.queue_sort_order = IotdQueueSortOrder.NEWEST_FIRST \
+                if queue_sort_order == 'newest' \
+                else IotdQueueSortOrder.OLDEST_FIRST
+
+            if member_settings.queue_sort_order != before:
+                member_settings.save()
 
         images = Image.objects \
             .annotate(
@@ -79,14 +94,27 @@ class IotdService:
                 Q(iotddismissedimage__user=submitter)
             )
         ).order_by(
-            '-published'
+            '-published' if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST else 'published'
         )
 
         return [x for x in images if can_add(x)]
 
-    def get_review_queue(self, reviewer):
+    def get_review_queue(self, reviewer, queue_sort_order: str = None):
         days = settings.IOTD_REVIEW_WINDOW_DAYS
         cutoff = datetime.now() - timedelta(days)
+
+        member_settings: IotdStaffMemberSettings
+        member_settings, created = IotdStaffMemberSettings.objects.get_or_create(user=reviewer)
+
+        if queue_sort_order in ('newest', 'oldest'):
+            before = member_settings.queue_sort_order
+            member_settings.queue_sort_order = IotdQueueSortOrder.NEWEST_FIRST \
+                if queue_sort_order == 'newest' \
+                else IotdQueueSortOrder.OLDEST_FIRST
+
+            if member_settings.queue_sort_order != before:
+                member_settings.save()
+
         return sorted(list(set([
             x.image
             for x in IotdSubmission.objects.annotate(
@@ -112,7 +140,7 @@ class IotdService:
                 image=x.image,
                 date__lt=date.today()
             ).exists()
-        ])), key=lambda x: x.published, reverse=True)
+        ])), key=lambda x: x.published, reverse=member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST)
 
     def get_judgement_queue(self):
         days = settings.IOTD_JUDGEMENT_WINDOW_DAYS

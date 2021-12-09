@@ -20,4 +20,4 @@ class SubmissionQueueViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'head']
 
     def get_queryset(self):
-        return IotdService().get_submission_queue(self.request.user)
+        return IotdService().get_submission_queue(self.request.user, self.request.GET.get('sort', None))
