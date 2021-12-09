@@ -49,7 +49,7 @@ class IotdService:
     def get_top_pick_nominations(self):
         return TopPickNominationsArchive.objects.all()
 
-    def get_submission_queue(self, submitter: User, queue_sort_order: str) -> List[Image]:
+    def get_submission_queue(self, submitter: User, queue_sort_order: str = None) -> List[Image]:
         def can_add(image: Image) -> bool:
             # Since the introduction of the 2020 plans, Free users cannot participate in the IOTD/TP.
             user_is_free: bool = is_free(image.user)
@@ -99,7 +99,7 @@ class IotdService:
 
         return [x for x in images if can_add(x)]
 
-    def get_review_queue(self, reviewer, queue_sort_order: str):
+    def get_review_queue(self, reviewer, queue_sort_order: str = None):
         days = settings.IOTD_REVIEW_WINDOW_DAYS
         cutoff = datetime.now() - timedelta(days)
 
