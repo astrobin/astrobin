@@ -23,5 +23,5 @@ class ReviewQueueViewSet(viewsets.ModelViewSet):
         return IotdService().get_review_queue(
             self.request.user,
             self.request.GET.get('sort', None),
-            self.request.GET.get('hidden-last', True),
+            self.request.GET.get('hidden-last', 'true') == 'true',
         )
