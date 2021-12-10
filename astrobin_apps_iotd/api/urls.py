@@ -4,6 +4,7 @@ from rest_framework import routers
 from astrobin_apps_iotd.api.views.dismissed_image_view_set import DismissedImageViewSet
 from astrobin_apps_iotd.api.views.hidden_image_view_set import HiddenImageViewSet
 from astrobin_apps_iotd.api.views.review_queue_view_set import ReviewQueueViewSet
+from astrobin_apps_iotd.api.views.staff_member_settings_view_set import StaffMemberSettingsViewSet
 from astrobin_apps_iotd.api.views.submission_queue_view_set import SubmissionQueueViewSet
 from astrobin_apps_iotd.api.views.submission_view_set import SubmissionViewSet
 from astrobin_apps_iotd.api.views.vote_view_set import VoteViewSet
@@ -15,6 +16,7 @@ router.register(r'review-queue', ReviewQueueViewSet, basename='review-queue')
 router.register(r'vote', VoteViewSet, basename='vote-detail')
 router.register(r'hidden-image', HiddenImageViewSet, basename='hidden-image')
 router.register(r'dismissed-image', DismissedImageViewSet, basename='dismissed-image')
+router.register(r'staff-member-settings', StaffMemberSettingsViewSet, basename='staff-member-settings')
 
 urlpatterns = [
     url('', include(router.urls)),

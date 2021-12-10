@@ -49,7 +49,8 @@ class IotdService:
     def get_top_pick_nominations(self):
         return TopPickNominationsArchive.objects.all()
 
-    def get_submission_queue(self, submitter: User, queue_sort_order: str = None) -> List[Image]:
+    def get_submission_queue(self, submitter: User, queue_sort_order: str = None) -> \
+            List[Image]:
         def can_add(image: Image) -> bool:
             # Since the introduction of the 2020 plans, Free users cannot participate in the IOTD/TP.
             user_is_free: bool = is_free(image.user)
@@ -58,19 +59,24 @@ class IotdService:
 
         member_settings: IotdStaffMemberSettings
         member_settings, created = IotdStaffMemberSettings.objects.get_or_create(user=submitter)
+        queue_sort_order_before = member_settings.queue_sort_order
 
         if queue_sort_order in ('newest', 'oldest'):
-            before = member_settings.queue_sort_order
             member_settings.queue_sort_order = IotdQueueSortOrder.NEWEST_FIRST \
                 if queue_sort_order == 'newest' \
                 else IotdQueueSortOrder.OLDEST_FIRST
 
-            if member_settings.queue_sort_order != before:
-                member_settings.save()
+        if member_settings.queue_sort_order != queue_sort_order_before:
+            member_settings.save()
+
+        order_by = [
+            '-published' if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST else 'published'
+        ]
 
         images = Image.objects \
             .annotate(
-            num_dismissals=Count('iotddismissedimage', distinct=True)
+            num_dismissals=Count('iotddismissedimage', distinct=True),
+            is_hidden=Count('iotdhiddenimage', filter=Q(iotdhiddenimage__user=submitter))
         ) \
             .filter(
             Q(
@@ -93,54 +99,53 @@ class IotdService:
                 ) |
                 Q(iotddismissedimage__user=submitter)
             )
-        ).order_by(
-            '-published' if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST else 'published'
-        )
+        ).order_by(*order_by)
 
         return [x for x in images if can_add(x)]
 
-    def get_review_queue(self, reviewer, queue_sort_order: str = None):
+    def get_review_queue(self, reviewer, queue_sort_order: str = None) -> List[Image]:
         days = settings.IOTD_REVIEW_WINDOW_DAYS
         cutoff = datetime.now() - timedelta(days)
 
         member_settings: IotdStaffMemberSettings
         member_settings, created = IotdStaffMemberSettings.objects.get_or_create(user=reviewer)
+        queue_sort_order_before = member_settings.queue_sort_order
 
         if queue_sort_order in ('newest', 'oldest'):
-            before = member_settings.queue_sort_order
             member_settings.queue_sort_order = IotdQueueSortOrder.NEWEST_FIRST \
                 if queue_sort_order == 'newest' \
                 else IotdQueueSortOrder.OLDEST_FIRST
 
-            if member_settings.queue_sort_order != before:
-                member_settings.save()
+        if member_settings.queue_sort_order != queue_sort_order_before:
+            member_settings.save()
 
-        return sorted(list(set([
-            x.image
-            for x in IotdSubmission.objects.annotate(
-                num_submissions=Count('image__iotdsubmission', distinct=True),
-                num_dismissals=Count('image__iotddismissedimage', distinct=True)
-            ).filter(
-                Q(image__deleted__isnull=True),
-                Q(date__gte=cutoff) &
-                Q(image__designated_iotd_reviewers=reviewer) &
-                Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) &
-                Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &
-                Q(
-                    Q(image__iotd__isnull=True) |
-                    Q(image__iotd__date__gt=datetime.now().date())
-                )
-            ).exclude(
-                Q(submitter=reviewer) |
-                Q(image__user=reviewer) |
-                Q(image__iotddismissedimage__user=reviewer)
+        order_by = [
+            '-published' if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST else 'published'
+        ]
+
+        return [x for x in Image.objects.annotate(
+            num_submissions=Count('iotdsubmission', distinct=True),
+            num_dismissals=Count('iotddismissedimage', distinct=True),
+            is_hidden=Count('iotdhiddenimage', filter=Q(iotdhiddenimage__user=reviewer))
+        ).filter(
+            Q(deleted__isnull=True),
+            Q(iotdsubmission__date__gte=cutoff) &
+            Q(designated_iotd_reviewers=reviewer) &
+            Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) &
+            Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &
+            Q(
+                Q(iotd__isnull=True) |
+                Q(iotd__date__gt=datetime.now().date())
             )
-            if not IotdVote.objects.filter(
-                reviewer=reviewer,
-                image=x.image,
-                date__lt=date.today()
-            ).exists()
-        ])), key=lambda x: x.published, reverse=member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST)
+        ).exclude(
+            Q(iotdsubmission__submitter=reviewer) |
+            Q(user=reviewer) |
+            Q(iotddismissedimage__user=reviewer) |
+            Q(
+                Q(iotdvote__reviewer=reviewer) &
+                Q(iotdvote__date__lt=DateTimeService.today())
+            )
+        ).order_by(*order_by)]
 
     def get_judgement_queue(self):
         days = settings.IOTD_JUDGEMENT_WINDOW_DAYS

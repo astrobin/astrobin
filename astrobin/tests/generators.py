@@ -48,6 +48,7 @@ class Generators:
             description_bbcode=kwargs.pop('description_bbcode', None),
             download_limitation=kwargs.pop('download_limitations', DownloadLimitation.ME_ONLY),
             subject_type=kwargs.pop('subject_type', SubjectType.DEEP_SKY),
+            published=kwargs.pop('published', None),
         )
 
     @staticmethod

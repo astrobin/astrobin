@@ -6,7 +6,10 @@ from mock import PropertyMock, patch
 
 from astrobin.enums import SubjectType
 from astrobin.tests.generators import Generators
-from astrobin_apps_iotd.models import Iotd, IotdDismissedImage, IotdSubmission, IotdVote
+from astrobin_apps_iotd.models import (
+    Iotd, IotdDismissedImage, IotdHiddenImage, IotdQueueSortOrder, IotdStaffMemberSettings, IotdSubmission,
+    IotdVote,
+)
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.tests.iotd_generators import IotdGenerators
 from common.services import DateTimeService
@@ -654,6 +657,33 @@ class IotdServiceTest(TestCase):
 
         self.assertEqual(1, len(IotdService().get_submission_queue(submitter)))
 
+    def test_get_submission_queue_sort_order(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+        image1 = Generators.image(user=user, published=DateTimeService.now() - timedelta(hours=1))
+        image2 = Generators.image(user=user, published=DateTimeService.now())
+
+        submitter = Generators.user(groups=['iotd_submitters'])
+
+        image1.designated_iotd_submitters.add(submitter)
+        image2.designated_iotd_submitters.add(submitter)
+
+        queue = IotdService().get_submission_queue(submitter)
+        self.assertEqual(2, len(queue))
+        self.assertEqual(image1, queue[1])
+        self.assertEqual(image2, queue[0])
+
+        queue = IotdService().get_submission_queue(submitter, 'oldest')
+        self.assertEqual(2, len(queue))
+        self.assertEqual(image1, queue[0])
+        self.assertEqual(image2, queue[1])
+
+        self.assertTrue(
+            IotdStaffMemberSettings.objects
+                .filter(user=submitter, queue_sort_order=IotdQueueSortOrder.OLDEST_FIRST)
+                .exists()
+        )
+
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     def test_get_review_queue(self):
         uploader = Generators.user()
@@ -1032,6 +1062,47 @@ class IotdServiceTest(TestCase):
         IotdDismissedImage.objects.create(user=submitter3, image=image)
 
         self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
+
+    def test_get_review_queue_sort_order(self):
+        user = Generators.user()
+        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+        image1 = Generators.image(user=user, published=DateTimeService.now() - timedelta(hours=1))
+        image2 = Generators.image(user=user, published=DateTimeService.now())
+
+        submitter1 = Generators.user(groups=['iotd_submitters'])
+        submitter2 = Generators.user(groups=['iotd_submitters'])
+        submitter3 = Generators.user(groups=['iotd_submitters'])
+        reviewer = Generators.user(groups=['iotd_reviewers'])
+
+        image1.designated_iotd_submitters.add(submitter1, submitter2, submitter3)
+        image1.designated_iotd_reviewers.add(reviewer)
+
+        image2.designated_iotd_submitters.add(submitter1, submitter2, submitter3)
+        image2.designated_iotd_reviewers.add(reviewer)
+
+        IotdSubmission.objects.create(submitter=submitter1, image=image1)
+        IotdSubmission.objects.create(submitter=submitter2, image=image1)
+        IotdSubmission.objects.create(submitter=submitter3, image=image1)
+
+        IotdSubmission.objects.create(submitter=submitter1, image=image2)
+        IotdSubmission.objects.create(submitter=submitter2, image=image2)
+        IotdSubmission.objects.create(submitter=submitter3, image=image2)
+
+        queue = IotdService().get_review_queue(reviewer)
+        self.assertEqual(2, len(queue))
+        self.assertEqual(image1, queue[1])
+        self.assertEqual(image2, queue[0])
+
+        queue = IotdService().get_review_queue(reviewer, 'oldest')
+        self.assertEqual(2, len(queue))
+        self.assertEqual(image1, queue[0])
+        self.assertEqual(image2, queue[1])
+
+        self.assertTrue(
+            IotdStaffMemberSettings.objects
+                .filter(user=reviewer, queue_sort_order=IotdQueueSortOrder.OLDEST_FIRST)
+                .exists()
+        )
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
