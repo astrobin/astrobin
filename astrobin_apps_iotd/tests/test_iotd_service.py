@@ -684,35 +684,6 @@ class IotdServiceTest(TestCase):
                 .exists()
         )
 
-    def test_get_submission_queue_hidden_appear_last(self):
-        user = Generators.user()
-        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
-        image1 = Generators.image(user=user, published=DateTimeService.now() - timedelta(hours=1))
-        image2 = Generators.image(user=user, published=DateTimeService.now())
-
-        submitter = Generators.user(groups=['iotd_submitters'])
-
-        image1.designated_iotd_submitters.add(submitter)
-        image2.designated_iotd_submitters.add(submitter)
-
-        IotdHiddenImage.objects.create(image=image1, user=submitter)
-
-        queue = IotdService().get_submission_queue(submitter, 'oldest')
-        self.assertEqual(2, len(queue))
-        self.assertEqual(image1, queue[1])
-        self.assertEqual(image2, queue[0])
-
-        queue = IotdService().get_submission_queue(submitter, 'oldest', False)
-        self.assertEqual(2, len(queue))
-        self.assertEqual(image1, queue[0])
-        self.assertEqual(image2, queue[1])
-
-        self.assertTrue(
-            IotdStaffMemberSettings.objects
-                .filter(user=submitter, hidden_appear_last=False)
-                .exists()
-        )
-
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     def test_get_review_queue(self):
         uploader = Generators.user()
@@ -1130,49 +1101,6 @@ class IotdServiceTest(TestCase):
         self.assertTrue(
             IotdStaffMemberSettings.objects
                 .filter(user=reviewer, queue_sort_order=IotdQueueSortOrder.OLDEST_FIRST)
-                .exists()
-        )
-
-    def test_get_review_queue_hidden_appear_last(self):
-        user = Generators.user()
-        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
-        image1 = Generators.image(user=user, published=DateTimeService.now() - timedelta(hours=1))
-        image2 = Generators.image(user=user, published=DateTimeService.now())
-
-        submitter1 = Generators.user(groups=['iotd_submitters'])
-        submitter2 = Generators.user(groups=['iotd_submitters'])
-        submitter3 = Generators.user(groups=['iotd_submitters'])
-        reviewer = Generators.user(groups=['iotd_reviewers'])
-
-        image1.designated_iotd_submitters.add(submitter1, submitter2, submitter3)
-        image1.designated_iotd_reviewers.add(reviewer)
-
-        image2.designated_iotd_submitters.add(submitter1, submitter2, submitter3)
-        image2.designated_iotd_reviewers.add(reviewer)
-
-        IotdSubmission.objects.create(submitter=submitter1, image=image1)
-        IotdSubmission.objects.create(submitter=submitter2, image=image1)
-        IotdSubmission.objects.create(submitter=submitter3, image=image1)
-
-        IotdSubmission.objects.create(submitter=submitter1, image=image2)
-        IotdSubmission.objects.create(submitter=submitter2, image=image2)
-        IotdSubmission.objects.create(submitter=submitter3, image=image2)
-
-        IotdHiddenImage.objects.create(image=image1, user=reviewer)
-
-        queue = IotdService().get_review_queue(reviewer, 'oldest')
-        self.assertEqual(2, len(queue))
-        self.assertEqual(image1, queue[1])
-        self.assertEqual(image2, queue[0])
-
-        queue = IotdService().get_review_queue(reviewer, 'oldest', False)
-        self.assertEqual(2, len(queue))
-        self.assertEqual(image1, queue[0])
-        self.assertEqual(image2, queue[1])
-
-        self.assertTrue(
-            IotdStaffMemberSettings.objects
-                .filter(user=reviewer, hidden_appear_last=False)
                 .exists()
         )
 

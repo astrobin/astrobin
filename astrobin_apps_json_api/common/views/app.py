@@ -20,7 +20,7 @@ from common.utils import get_project_root, read_in_chunks
 log = logging.getLogger('apps')
 
 
-@method_decorator([cache_page(3600), vary_on_headers('Cookie', 'Authorization')], name='dispatch')
+# @method_decorator([cache_page(3600), vary_on_headers('Cookie', 'Authorization')], name='dispatch')
 class AppConfig(JSONResponseMixin, View):
     def get(self, request, *args, **kwargs):
         return self.render_json_response({

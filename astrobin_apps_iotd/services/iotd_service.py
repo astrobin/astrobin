@@ -49,7 +49,7 @@ class IotdService:
     def get_top_pick_nominations(self):
         return TopPickNominationsArchive.objects.all()
 
-    def get_submission_queue(self, submitter: User, queue_sort_order: str = None, hidden_appear_last: bool = True) -> \
+    def get_submission_queue(self, submitter: User, queue_sort_order: str = None) -> \
             List[Image]:
         def can_add(image: Image) -> bool:
             # Since the introduction of the 2020 plans, Free users cannot participate in the IOTD/TP.
@@ -60,27 +60,18 @@ class IotdService:
         member_settings: IotdStaffMemberSettings
         member_settings, created = IotdStaffMemberSettings.objects.get_or_create(user=submitter)
         queue_sort_order_before = member_settings.queue_sort_order
-        hidden_appear_last_before = member_settings.hidden_appear_last
 
         if queue_sort_order in ('newest', 'oldest'):
             member_settings.queue_sort_order = IotdQueueSortOrder.NEWEST_FIRST \
                 if queue_sort_order == 'newest' \
                 else IotdQueueSortOrder.OLDEST_FIRST
 
-        member_settings.hidden_appear_last = hidden_appear_last
-
-        if member_settings.queue_sort_order != queue_sort_order_before or \
-                member_settings.hidden_appear_last != hidden_appear_last_before:
+        if member_settings.queue_sort_order != queue_sort_order_before:
             member_settings.save()
 
-        order_by = []
-
-        if hidden_appear_last:
-            order_by.append('is_hidden')
-
-        order_by.append(
+        order_by = [
             '-published' if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST else 'published'
-        )
+        ]
 
         images = Image.objects \
             .annotate(
@@ -112,34 +103,25 @@ class IotdService:
 
         return [x for x in images if can_add(x)]
 
-    def get_review_queue(self, reviewer, queue_sort_order: str = None, hidden_appear_last: bool = True) -> List[Image]:
+    def get_review_queue(self, reviewer, queue_sort_order: str = None) -> List[Image]:
         days = settings.IOTD_REVIEW_WINDOW_DAYS
         cutoff = datetime.now() - timedelta(days)
 
         member_settings: IotdStaffMemberSettings
         member_settings, created = IotdStaffMemberSettings.objects.get_or_create(user=reviewer)
         queue_sort_order_before = member_settings.queue_sort_order
-        hidden_appear_last_before = member_settings.hidden_appear_last
 
         if queue_sort_order in ('newest', 'oldest'):
             member_settings.queue_sort_order = IotdQueueSortOrder.NEWEST_FIRST \
                 if queue_sort_order == 'newest' \
                 else IotdQueueSortOrder.OLDEST_FIRST
 
-        member_settings.hidden_appear_last = hidden_appear_last
-
-        if member_settings.queue_sort_order != queue_sort_order_before or \
-                member_settings.hidden_appear_last != hidden_appear_last_before:
+        if member_settings.queue_sort_order != queue_sort_order_before:
             member_settings.save()
 
-        order_by = []
-
-        if hidden_appear_last:
-            order_by.append('is_hidden')
-
-        order_by.append(
+        order_by = [
             '-published' if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST else 'published'
-        )
+        ]
 
         return [x for x in Image.objects.annotate(
             num_submissions=Count('iotdsubmission', distinct=True),
