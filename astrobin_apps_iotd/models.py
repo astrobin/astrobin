@@ -156,3 +156,5 @@ class IotdStaffMemberSettings(models.Model):
         ),
         default=IotdQueueSortOrder.NEWEST_FIRST,
     )
+
+    hidden_appear_last = models.BooleanField(default=True)
