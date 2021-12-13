@@ -12,6 +12,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 
+from astrobin_apps_iotd.api.permissions.is_iotd_submitter import IsIotdSubmitter
 from astrobin_apps_iotd.api.serializers.submission_serializer import SubmissionSerializer
 from astrobin_apps_iotd.models import IotdSubmission
 
@@ -20,7 +21,7 @@ class SubmissionViewSet(viewsets.ModelViewSet):
     serializer_class = SubmissionSerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     pagination_class = None
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsIotdSubmitter]
     model = IotdSubmission
 
     def get_queryset(self):

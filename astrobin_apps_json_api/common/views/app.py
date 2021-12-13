@@ -48,6 +48,8 @@ class AppConfig(JSONResponseMixin, View):
             'THUMBNAIL_ALIASES': settings.THUMBNAIL_ALIASES[''],
             'IOTD_SUBMISSION_MAX_PER_DAY': settings.IOTD_SUBMISSION_MAX_PER_DAY,
             'IOTD_REVIEW_MAX_PER_DAY': settings.IOTD_REVIEW_MAX_PER_DAY,
+            'IOTD_JUDGEMENT_MAX_PER_DAY': settings.IOTD_JUDGEMENT_MAX_PER_DAY,
+            'IOTD_JUDGEMENT_MAX_FUTURE_DAYS': settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS,
             'IOTD_QUEUES_PAGE_SIZE': settings.IOTD_QUEUES_PAGE_SIZE,
             'IOTD_MAX_DISMISSALS': settings.IOTD_MAX_DISMISSALS,
             'IMAGE_UPLOAD_ENDPOINT': '/api/v2/images/image-upload/',
