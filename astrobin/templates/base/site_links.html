@@ -97,7 +97,7 @@
 
                 {% if request.user|is_iotd_judge %}
                     <li>
-                        <a href="{% url 'iotd_judgement_queue' %}">
+                        <a href="{% app_redirection_service '/iotd/judgement-queue' %}">
                             <i class="icon-legal"></i>
                             {% trans "Judgement queue" %}
                         </a>
