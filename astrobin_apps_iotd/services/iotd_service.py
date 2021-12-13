@@ -178,7 +178,7 @@ class IotdService:
                 Q(iotd__date__gt=datetime.now().date())
             )
         ).exclude(
-            Q(iotdvote__reviewer=judge),
+            Q(iotdvote__reviewer=judge) |
             Q(iotddismissedimage__user=judge) |
             Q(user=judge)
         ).order_by(*order_by)]
