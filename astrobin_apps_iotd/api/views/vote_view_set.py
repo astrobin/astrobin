@@ -12,6 +12,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 
+from astrobin_apps_iotd.api.permissions.is_iotd_reviewer import IsIotdReviewer
 from astrobin_apps_iotd.api.serializers.vote_serializer import VoteSerializer
 from astrobin_apps_iotd.models import IotdVote
 
@@ -20,7 +21,7 @@ class VoteViewSet(viewsets.ModelViewSet):
     serializer_class = VoteSerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     pagination_class = None
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsIotdReviewer]
     model = IotdVote
 
     def get_queryset(self):

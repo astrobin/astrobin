@@ -7,8 +7,7 @@ from mock import PropertyMock, patch
 from astrobin.enums import SubjectType
 from astrobin.tests.generators import Generators
 from astrobin_apps_iotd.models import (
-    Iotd, IotdDismissedImage, IotdHiddenImage, IotdQueueSortOrder, IotdStaffMemberSettings, IotdSubmission,
-    IotdVote,
+    Iotd, IotdDismissedImage, IotdQueueSortOrder, IotdStaffMemberSettings, IotdSubmission, IotdVote
 )
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_iotd.tests.iotd_generators import IotdGenerators
@@ -1112,6 +1111,7 @@ class IotdServiceTest(TestCase):
         submitter2 = Generators.user(groups=['iotd_submitters'])
         reviewer = Generators.user(groups=['iotd_reviewers'])
         reviewer2 = Generators.user(groups=['iotd_reviewers'])
+        judge = Generators.user(groups=['iotd_judges'])
 
         Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
 
@@ -1139,7 +1139,7 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
-        self.assertEqual(1, len(IotdService().get_judgement_queue()))
+        self.assertEqual(1, len(IotdService().get_judgement_queue(judge)))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -1149,6 +1149,7 @@ class IotdServiceTest(TestCase):
         submitter2 = Generators.user(groups=['iotd_submitters'])
         reviewer = Generators.user(groups=['iotd_reviewers'])
         reviewer2 = Generators.user(groups=['iotd_reviewers'])
+        judge = Generators.user(groups=['iotd_judges'])
 
         Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
 
@@ -1178,7 +1179,7 @@ class IotdServiceTest(TestCase):
 
         image.delete()
 
-        self.assertEqual(0, len(IotdService().get_judgement_queue()))
+        self.assertEqual(0, len(IotdService().get_judgement_queue(judge)))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -1189,6 +1190,7 @@ class IotdServiceTest(TestCase):
         submitter2 = Generators.user(groups=['iotd_submitters'])
         reviewer1 = Generators.user(groups=['iotd_reviewers'])
         reviewer2 = Generators.user(groups=['iotd_reviewers'])
+        judge = Generators.user(groups=['iotd_judges'])
 
         Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
 
@@ -1216,16 +1218,16 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
-        self.assertEqual(1, len(IotdService().get_judgement_queue()))
+        self.assertEqual(1, len(IotdService().get_judgement_queue(judge)))
 
         IotdDismissedImage.objects.create(image=image, user=submitter1)
         IotdDismissedImage.objects.create(image=image, user=submitter2)
 
-        self.assertEqual(1, len(IotdService().get_judgement_queue()))
+        self.assertEqual(1, len(IotdService().get_judgement_queue(judge)))
 
         IotdDismissedImage.objects.create(image=image, user=reviewer1)
 
-        self.assertEqual(0, len(IotdService().get_judgement_queue()))
+        self.assertEqual(0, len(IotdService().get_judgement_queue(judge)))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -1235,6 +1237,7 @@ class IotdServiceTest(TestCase):
         submitter2 = Generators.user(groups=['iotd_submitters'])
         reviewer = Generators.user(groups=['iotd_reviewers'])
         reviewer2 = Generators.user(groups=['iotd_reviewers'])
+        judge = Generators.user(groups=['iotd_judges'])
 
         Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
 
@@ -1268,7 +1271,7 @@ class IotdServiceTest(TestCase):
         vote2.date = datetime.now() - timedelta(days=settings.IOTD_JUDGEMENT_WINDOW_DAYS + 1)
         vote2.save()
 
-        self.assertEqual(0, len(IotdService().get_judgement_queue()))
+        self.assertEqual(0, len(IotdService().get_judgement_queue(judge)))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -1312,7 +1315,7 @@ class IotdServiceTest(TestCase):
             date=date.today() + timedelta(1)
         )
 
-        self.assertEqual(1, len(IotdService().get_judgement_queue()))
+        self.assertEqual(1, len(IotdService().get_judgement_queue(judge)))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -1356,7 +1359,7 @@ class IotdServiceTest(TestCase):
             date=date.today()
         )
 
-        self.assertEqual(0, len(IotdService().get_judgement_queue()))
+        self.assertEqual(0, len(IotdService().get_judgement_queue(judge)))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -1400,7 +1403,7 @@ class IotdServiceTest(TestCase):
             date=date.today() - timedelta(1)
         )
 
-        self.assertEqual(0, len(IotdService().get_judgement_queue()))
+        self.assertEqual(0, len(IotdService().get_judgement_queue(judge)))
 
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
@@ -1413,6 +1416,7 @@ class IotdServiceTest(TestCase):
         submitter = Generators.user(groups=['iotd_submitters'])
         submitter2 = Generators.user(groups=['iotd_submitters'])
         reviewer = Generators.user(groups=['iotd_reviewers'])
+        judge = Generators.user(groups=['iotd_judges'])
 
         Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
 
@@ -1435,7 +1439,7 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
-        self.assertEqual(0, len(IotdService().get_judgement_queue()))
+        self.assertEqual(0, len(IotdService().get_judgement_queue(judge)))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
@@ -1447,6 +1451,7 @@ class IotdServiceTest(TestCase):
         submitter = Generators.user(groups=['iotd_submitters'])
         submitter2 = Generators.user(groups=['iotd_submitters'])
         reviewer = Generators.user(groups=['iotd_reviewers'])
+        judge = Generators.user(groups=['iotd_judges'])
 
         Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
 
@@ -1472,7 +1477,7 @@ class IotdServiceTest(TestCase):
         image.published = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(hours=1)
         image.save()
 
-        self.assertEqual(0, len(IotdService().get_judgement_queue()))
+        self.assertEqual(0, len(IotdService().get_judgement_queue(judge)))
 
     @patch('common.services.DateTimeService.now')
     def test_judge_cannot_select_now_reason_none_no_iotds(self, now):
@@ -1484,7 +1489,10 @@ class IotdServiceTest(TestCase):
     @patch('common.services.DateTimeService.now')
     def test_judge_cannot_select_now_reason_none_no_scheduled_iotds(self, now):
         now.return_value = datetime.now()
+
         iotd = self._create_iotd(date=date.today() - timedelta(1))
+        Iotd.objects.filter(pk=iotd.pk).update(created=datetime.now() - timedelta(1))
+
         self.assertIsNone(IotdService().judge_cannot_select_now_reason(iotd.judge))
         self.assertEqual(IotdService().get_next_available_selection_time_for_judge(iotd.judge), DateTimeService.now())
 
@@ -1495,23 +1503,27 @@ class IotdServiceTest(TestCase):
         iotd = self._create_iotd(date=date.today())
         reason = IotdService().judge_cannot_select_now_reason(iotd.judge)
         self.assertIsNotNone(reason)
-        self.assertTrue('you already selected 1 IOTD today' in reason)
+        self.assertTrue('you already selected 1 IOTD(s) today' in reason)
         self.assertEqual(
             IotdService().get_next_available_selection_time_for_judge(iotd.judge),
             DateTimeService.next_midnight())
 
     @override_settings(IOTD_JUDGEMENT_MAX_PER_DAY=2, IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE=2)
     @patch('common.services.DateTimeService.now')
-    def test_judge_cannot_select_now_reason_already_2_scheduled(self, now):
+    def test_judge_cannot_select_now_reason_already_max_scheduled_by_judge(self, now):
         now.return_value = datetime.now()
-        iotd = self._create_iotd(date=date.today() + timedelta(1))
-        self._create_iotd(judge=iotd.judge, date=date.today() + timedelta(2))
-        reason = IotdService().judge_cannot_select_now_reason(iotd.judge)
+        iotd1 = self._create_iotd(date=date.today() + timedelta(1))
+        iotd2 = self._create_iotd(judge=iotd1.judge, date=date.today() + timedelta(2))
+
+        Iotd.objects.filter(pk=iotd1.pk).update(created=datetime.now() - timedelta(2))
+        Iotd.objects.filter(pk=iotd2.pk).update(created=datetime.now() - timedelta(3))
+
+        reason = IotdService().judge_cannot_select_now_reason(iotd1.judge)
         self.assertIsNotNone(reason)
-        self.assertTrue('you already selected 2 scheduled IOTDs' in reason)
+        self.assertTrue('you already selected 2 scheduled IOTD(s)' in reason)
         self.assertEqual(
-            IotdService().get_next_available_selection_time_for_judge(iotd.judge),
-            DateTimeService.next_midnight(iotd.date))
+            IotdService().get_next_available_selection_time_for_judge(iotd2.judge),
+            DateTimeService.next_midnight(iotd2.date))
 
     @override_settings(
         IOTD_JUDGEMENT_MAX_PER_DAY=2,
@@ -1519,15 +1531,19 @@ class IotdServiceTest(TestCase):
         IOTD_JUDGEMENT_MAX_FUTURE_DAYS=2
     )
     @patch('common.services.DateTimeService.now')
-    def test_judge_cannot_select_now_reason_already_2_scheduled(self, now):
+    def test_judge_cannot_select_now_reason_already_max_scheduled(self, now):
         now.return_value = datetime.now()
-        iotd = self._create_iotd(date=date.today() + timedelta(1))
-        self._create_iotd(judge=iotd.judge, date=date.today() + timedelta(2))
-        reason = IotdService().judge_cannot_select_now_reason(iotd.judge)
+        iotd1 = self._create_iotd(date=date.today() + timedelta(1))
+        iotd2 = self._create_iotd(judge=iotd1.judge, date=date.today() + timedelta(2))
+
+        Iotd.objects.filter(pk=iotd1.pk).update(created=datetime.now() - timedelta(2))
+        Iotd.objects.filter(pk=iotd2.pk).update(created=datetime.now() - timedelta(3))
+
+        reason = IotdService().judge_cannot_select_now_reason(iotd1.judge)
         self.assertIsNotNone(reason)
-        self.assertTrue('there are already 2 scheduled IOTDs' in reason)
+        self.assertTrue('there are already 2 scheduled IOTD(s)' in reason)
         self.assertEqual(
-            IotdService().get_next_available_selection_time_for_judge(iotd.judge),
+            IotdService().get_next_available_selection_time_for_judge(iotd1.judge),
             DateTimeService.next_midnight())
 
     def test_inactive_submitters_no_submissions(self):

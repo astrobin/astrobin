@@ -76,7 +76,6 @@ class IotdService:
         images = Image.objects \
             .annotate(
             num_dismissals=Count('iotddismissedimage', distinct=True),
-            is_hidden=Count('iotdhiddenimage', filter=Q(iotdhiddenimage__user=submitter))
         ) \
             .filter(
             Q(
@@ -103,7 +102,7 @@ class IotdService:
 
         return [x for x in images if can_add(x)]
 
-    def get_review_queue(self, reviewer, queue_sort_order: str = None) -> List[Image]:
+    def get_review_queue(self, reviewer: User, queue_sort_order: str = None) -> List[Image]:
         days = settings.IOTD_REVIEW_WINDOW_DAYS
         cutoff = datetime.now() - timedelta(days)
 
@@ -126,7 +125,6 @@ class IotdService:
         return [x for x in Image.objects.annotate(
             num_submissions=Count('iotdsubmission', distinct=True),
             num_dismissals=Count('iotddismissedimage', distinct=True),
-            is_hidden=Count('iotdhiddenimage', filter=Q(iotdhiddenimage__user=reviewer))
         ).filter(
             Q(deleted__isnull=True),
             Q(iotdsubmission__date__gte=cutoff) &
@@ -147,41 +145,59 @@ class IotdService:
             )
         ).order_by(*order_by)]
 
-    def get_judgement_queue(self):
+    def get_judgement_queue(self, judge: User, queue_sort_order: str = None):
         days = settings.IOTD_JUDGEMENT_WINDOW_DAYS
         cutoff = datetime.now() - timedelta(days)
-        return sorted(list(set([
-            x.image
-            for x in IotdVote.objects.annotate(
-                num_votes=Count('image__iotdvote', distinct=True),
-                num_dismissals=Count('image__iotddismissedimage', distinct=True)
-            ).filter(
-                Q(image__deleted__isnull=True),
-                Q(date__gte=cutoff) &
-                Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) &
-                Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &
-                Q(
-                    Q(image__iotd__isnull=True) |
-                    Q(image__iotd__date__gt=datetime.now().date())
-                )
+
+        member_settings: IotdStaffMemberSettings
+        member_settings, created = IotdStaffMemberSettings.objects.get_or_create(user=judge)
+        queue_sort_order_before = member_settings.queue_sort_order
+
+        if queue_sort_order in ('newest', 'oldest'):
+            member_settings.queue_sort_order = IotdQueueSortOrder.NEWEST_FIRST \
+                if queue_sort_order == 'newest' \
+                else IotdQueueSortOrder.OLDEST_FIRST
+
+        if member_settings.queue_sort_order != queue_sort_order_before:
+            member_settings.save()
+
+        order_by = [
+            '-published' if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST else 'published'
+        ]
+
+        return [x for x in Image.objects.annotate(
+            num_votes=Count('iotdvote', distinct=True),
+            num_dismissals=Count('iotddismissedimage', distinct=True)
+        ).filter(
+            Q(deleted__isnull=True),
+            Q(iotdvote__date__gte=cutoff) &
+            Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) &
+            Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &
+            Q(
+                Q(iotd__isnull=True) |
+                Q(iotd__date__gt=datetime.now().date())
             )
-        ])), key=lambda x: x.published, reverse=True)
+        ).exclude(
+            Q(iotdvote__reviewer=judge),
+            Q(iotddismissedimage__user=judge) |
+            Q(user=judge)
+        ).order_by(*order_by)]
 
     def judge_cannot_select_now_reason(self, judge):
         # type: (User) -> Union[str, None]
 
         if Iotd.objects.filter(
                 judge=judge,
-                date=DateTimeService.today()).count() >= settings.IOTD_JUDGEMENT_MAX_PER_DAY:
-            return gettext("you already selected %s IOTD today (UTC)" % settings.IOTD_JUDGEMENT_MAX_PER_DAY)
+                created__date=DateTimeService.today()).count() >= settings.IOTD_JUDGEMENT_MAX_PER_DAY:
+            return gettext("you already selected %s IOTD(s) today (UTC)" % settings.IOTD_JUDGEMENT_MAX_PER_DAY)
 
         if Iotd.objects.filter(
                 judge=judge,
                 date__gt=DateTimeService.today()).count() >= settings.IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE:
-            return gettext("you already selected %s scheduled IOTDs" % settings.IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE)
+            return gettext("you already selected %s scheduled IOTD(s)" % settings.IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE)
 
-        if Iotd.objects.filter(date__gte=DateTimeService.today()).count() >= settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS:
-            return gettext("there are already %s scheduled IOTDs" % settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS)
+        if Iotd.objects.filter(date__gt=DateTimeService.today()).count() >= settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS:
+            return gettext("there are already %s scheduled IOTD(s)" % settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS)
 
         return None
 
@@ -195,7 +211,7 @@ class IotdService:
             DateTimeService.next_midnight() if \
                 Iotd.objects.filter(
                     judge=judge,
-                    date=today).count() >= settings.IOTD_JUDGEMENT_MAX_PER_DAY \
+                    created__date=today).count() >= settings.IOTD_JUDGEMENT_MAX_PER_DAY \
                 else now  # datetime
 
         latest_scheduled = Iotd.objects.filter(judge=judge).order_by('-date').first()  # Iotd

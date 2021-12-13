@@ -7,9 +7,6 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_fre
 
 
 def may_toggle_submission_image(user, image):
-    if user.is_superuser:
-        return True, None
-
     if not user.groups.filter(name='iotd_submitters').exists():
         return False, _("You are not a member of the IOTD Submitters board.")
 
@@ -38,7 +35,7 @@ def may_toggle_submission_image(user, image):
 
     days = settings.IOTD_SUBMISSION_WINDOW_DAYS
     if image.published < datetime.now() - timedelta(days):
-        return False, _("You cannot submit an image that was published more than %(max_days)s days ago.") % {
+        return False, _("You cannot submit an image that was published more than %(max_days)s day(s) ago.") % {
             'max_days': days
         }
 
@@ -58,7 +55,7 @@ def may_toggle_submission_image(user, image):
         date__contains=datetime.now().date()).count()
     toggling_on = not IotdSubmission.objects.filter(submitter=user, image=image).exists()
     if submitted_today >= max_allowed and toggling_on:
-        return False, _("You have already submitted %(max_allowed)s images today.") % {
+        return False, _("You have already submitted %(max_allowed)s image(s) today.") % {
             'max_allowed': max_allowed
         }
 
@@ -66,9 +63,6 @@ def may_toggle_submission_image(user, image):
 
 
 def may_toggle_vote_image(user, image):
-    if user.is_superuser:
-        return True, None
-
     if not user.groups.filter(name='iotd_reviewers').exists():
         return False, _("You are not a member of the IOTD Reviewers board.")
 
@@ -110,7 +104,7 @@ def may_toggle_vote_image(user, image):
     days = settings.IOTD_REVIEW_WINDOW_DAYS
     if IotdSubmission.first_for_image(image).date < datetime.now() - timedelta(days):
         return False, _(
-            "You cannot vote for an image that has been in the submission queue for more than %(max_days)s days.") % {
+            "You cannot vote for an image that has been in the submission queue for more than %(max_days)s day(s).") % {
                    'max_days': days
                }
 
@@ -120,7 +114,7 @@ def may_toggle_vote_image(user, image):
         date__contains=datetime.now().date()).count()
     toggling_on = not IotdVote.objects.filter(reviewer=user, image=image).exists()
     if reviewed_today >= max_allowed and toggling_on:
-        return False, _("You have already voted for %(max_allowed)s images today.") % {
+        return False, _("You have already voted for %(max_allowed)s image(s) today.") % {
             'max_allowed': max_allowed
         }
 
@@ -132,9 +126,6 @@ def may_toggle_vote_image(user, image):
 
 
 def may_elect_iotd(user, image):
-    if user.is_superuser:
-        return True, None
-
     if not user.groups.filter(name='iotd_judges').exists():
         return False, _("You are not a member of the IOTD Judges board.")
 
@@ -154,7 +145,7 @@ def may_elect_iotd(user, image):
 
     if IotdDismissedImage.objects.filter(image=image).count() >= settings.IOTD_MAX_DISMISSALS:
         return False, _(
-            "You cannot submit an image that has been dismissed by %(number)s members of the IOTD Staff.") % {
+            "You cannot submit an image that has been dismissed by %(number)s member(s) of the IOTD Staff.") % {
                    'number': settings.IOTD_MAX_DISMISSALS
                }
 
@@ -180,7 +171,7 @@ def may_elect_iotd(user, image):
     days = settings.IOTD_JUDGEMENT_WINDOW_DAYS
     if IotdVote.first_for_image(image).date < datetime.now() - timedelta(days):
         return False, _(
-            "You cannot elect an image that has been in the review queue for more than %(max_days)s days.") % {
+            "You cannot elect an image that has been in the review queue for more than %(max_days)s day(s).") % {
                    'max_days': days
                }
 
@@ -190,7 +181,7 @@ def may_elect_iotd(user, image):
         created__contains=datetime.now().date()).count()
     toggling_on = not Iotd.objects.filter(image=image).exists()
     if judged_today >= max_allowed and toggling_on:
-        return False, _("You have already elected %(max_allowed)s images today.") % {
+        return False, _("You have already elected %(max_allowed)s image(s) today.") % {
             'max_allowed': max_allowed
         }
 
@@ -200,7 +191,7 @@ def may_elect_iotd(user, image):
         date__gt=datetime.now().date()).count()
     toggling_on = not Iotd.objects.filter(image=image).exists()
     if scheduled >= max_allowed and toggling_on:
-        return False, _("You have already scheduled %(max_allowed)s IOTDs.") % {
+        return False, _("You have already scheduled %(max_allowed)s IOTD(s).") % {
             'max_allowed': max_allowed
         }
 
@@ -208,9 +199,6 @@ def may_elect_iotd(user, image):
 
 
 def may_unelect_iotd(user, image):
-    if user.is_superuser:
-        return True, None
-
     if not user.groups.filter(name='iotd_judges').exists():
         return False, _("You are not a member of the IOTD Judges board.")
 
