@@ -3437,7 +3437,7 @@ class ImageTest(TestCase):
         Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
         image = Generators.image(user=user)
 
-        self.assertEqual(2, image.designated_iotd_submitters.count())
+        self.assertEqual(3, image.designated_iotd_submitters.count())
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=mock.PropertyMock)
     def test_image_designated_iotd_reviewers(self, is_authenticated):
@@ -3454,7 +3454,7 @@ class ImageTest(TestCase):
         Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
         image = Generators.image(user=user)
 
-        self.assertEqual(2, image.designated_iotd_reviewers.count())
+        self.assertEqual(5, image.designated_iotd_reviewers.count())
 
     @patch('astrobin.signals.push_notification')
     def test_image_description_mention_notification_created_no_mentions(self, push_notification):
