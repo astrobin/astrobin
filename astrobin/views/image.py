@@ -117,9 +117,12 @@ class ImageFlagThumbsView(
         return super(ImageFlagThumbsView, self).post(self.request, args, kwargs)
 
 
-@method_decorator([
-    never_cache
-], name='dispatch')
+@method_decorator(
+    [
+        last_modified(CachingService.get_image_thumb_last_modified),
+        cache_control(public=True, no_cache=True, must_revalidate=True, maxAge=0),
+    ], name='dispatch'
+)
 class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
     model = Image
     queryset = Image.all_objects.all()
@@ -157,9 +160,12 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
         })
 
 
-@method_decorator([
-    never_cache
-], name='dispatch')
+@method_decorator(
+    [
+        last_modified(CachingService.get_image_thumb_last_modified),
+        cache_control(public=True, no_cache=True, must_revalidate=True, maxAge=0),
+    ], name='dispatch'
+)
 class ImageRawThumbView(ImageDetailViewBase):
     model = Image
     queryset = Image.objects_including_wip.all()
