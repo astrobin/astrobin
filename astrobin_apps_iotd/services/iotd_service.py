@@ -126,7 +126,7 @@ class IotdService:
             num_submissions=Count('iotdsubmission', distinct=True),
             num_dismissals=Count('iotddismissedimage', distinct=True),
         ).filter(
-            Q(deleted__isnull=True),
+            Q(deleted__isnull=True) &
             Q(iotdsubmission__date__gte=cutoff) &
             Q(designated_iotd_reviewers=reviewer) &
             Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) &
@@ -169,7 +169,7 @@ class IotdService:
             num_votes=Count('iotdvote', distinct=True),
             num_dismissals=Count('iotddismissedimage', distinct=True)
         ).filter(
-            Q(deleted__isnull=True),
+            Q(deleted__isnull=True) &
             Q(iotdvote__date__gte=cutoff) &
             Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) &
             Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &
