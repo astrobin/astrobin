@@ -32,6 +32,20 @@ class ImageSerializer(RequestUserRestSerializerMixin, serializers.ModelSerialize
 
         return instance
 
+    def to_representation(self, instance: Image):
+        representation = super().to_representation(instance)
+        representation.update({
+            'thumbnails': [
+                {
+                    'alias': alias,
+                    'id': instance.pk,
+                    'revision': 'final',
+                    'url': instance.thumbnail(alias, None, sync=True)
+                } for alias in ('story', 'regular', 'hd')
+            ]
+        })
+        return representation
+
     class Meta:
         model = Image
         fields = (
