@@ -22,6 +22,7 @@ from astrobin.services import CloudflareService
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_notifications.services import NotificationsService
+from common.services import DateTimeService
 from common.upload_paths import uncompressed_source_upload_path, image_upload_path, data_download_upload_path
 from common.utils import get_sentinel_user
 from common.validators import FileValidator
@@ -1786,6 +1787,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=urlparse(url).path.strip('/'))
 
             self.thumbnails.get(revision=revision_label).delete()
+            Image.objects_including_wip.filter(pk=self.pk).update(updated=DateTimeService.now())
         except ThumbnailGroup.DoesNotExist:
             pass
 
