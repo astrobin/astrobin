@@ -8,9 +8,11 @@ from django.urls import reverse
 
 from astrobin.models import Image
 from astrobin.stories import add_story
+from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_notifications.services import NotificationsService
-from astrobin_apps_notifications.utils import push_notification, build_notification_url
+from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from astrobin_apps_users.services import UserService
+from common.services import AppRedirectionService
 from common.services.mentions_service import MentionsService
 from nested_comments.models import NestedComment
 
@@ -43,6 +45,10 @@ class CommentNotificationsService:
             object_owner = obj.edit_proposal_by
             notification = 'new_comment_to_edit_proposal'
             url = instance.get_absolute_url()
+        elif model_class == Iotd:
+            object_owner = obj.judge
+            notification = 'new_comment_to_scheduled_iotd'
+            url = AppRedirectionService.redirect(f'/iotd/judgement-queue#comments-{obj.pk}-{instance.pk}')
 
         if UserService(object_owner).shadow_bans(instance.author):
             log.info("Skipping notification for comment because %d shadow-bans %d" % (
@@ -62,7 +68,8 @@ class CommentNotificationsService:
                         'url': build_notification_url(url, instance.author),
                         'user': instance.author.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse(
-                            'user_page', kwargs={'username': instance.author.username}),
+                            'user_page', kwargs={'username': instance.author.username}
+                        ),
                     }
                 )
 
@@ -85,7 +92,8 @@ class CommentNotificationsService:
                             'url': build_notification_url(url, instance.author),
                             'user': instance.author.userprofile.get_display_name(),
                             'user_url': settings.BASE_URL + reverse(
-                                'user_page', kwargs={'username': instance.author.username}),
+                                'user_page', kwargs={'username': instance.author.username}
+                            ),
                         }
                     )
 

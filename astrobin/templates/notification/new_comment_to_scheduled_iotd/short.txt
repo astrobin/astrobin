@@ -1,0 +1,3 @@
+{% load i18n %}
+
+{% blocktrans %}{{user}} commented on your scheduled IOTD{% endblocktrans %}
