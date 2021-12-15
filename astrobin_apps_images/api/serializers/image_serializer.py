@@ -1,6 +1,19 @@
 from rest_framework import serializers
 
+from astrobin.api2.serializers.accessory_serializer import AccessorySerializer
+from astrobin.api2.serializers.camera_serializer import CameraSerializer
+from astrobin.api2.serializers.filter_serializer import FilterSerializer
+from astrobin.api2.serializers.focal_reducer_serializer import FocalReducerSerializer
+from astrobin.api2.serializers.mount_serializer import MountSerializer
+from astrobin.api2.serializers.software_serializer import SoftwareSerializer
+from astrobin.api2.serializers.telescope_serializer import TelescopeSerializer
 from astrobin.models import Image, UserProfile
+from astrobin_apps_equipment.api.serializers.accessory_serializer import AccessorySerializer as AccessorySerializer2
+from astrobin_apps_equipment.api.serializers.camera_serializer import CameraSerializer as CameraSerializer2
+from astrobin_apps_equipment.api.serializers.filter_serializer import FilterSerializer as FilterSerializer2
+from astrobin_apps_equipment.api.serializers.mount_serializer import MountSerializer as MountSerializer2
+from astrobin_apps_equipment.api.serializers.software_serializer import SoftwareSerializer as SoftwareSerializer2
+from astrobin_apps_equipment.api.serializers.telescope_serializer import TelescopeSerializer as TelescopeSerializer2
 from astrobin_apps_images.api.fields import KeyValueTagsSerializerField
 from common.mixins import RequestUserRestSerializerMixin
 
@@ -12,6 +25,25 @@ class ImageSerializer(RequestUserRestSerializerMixin, serializers.ModelSerialize
     h = serializers.IntegerField()
     uploader_in_progress = serializers.NullBooleanField(read_only=True)
     key_value_tags = KeyValueTagsSerializerField(source='keyvaluetags')
+
+    imaging_telescopes = TelescopeSerializer(many=True, read_only=True)
+    imaging_cameras = CameraSerializer(many=True, read_only=True)
+    guiding_telescopes = TelescopeSerializer(many=True, read_only=True)
+    guiding_cameras = CameraSerializer(many=True, read_only=True)
+    focal_reducers = FocalReducerSerializer(many=True, read_only=True)
+    mounts = MountSerializer(many=True, read_only=True)
+    filters = FilterSerializer(many=True, read_only=True)
+    accessories = AccessorySerializer(many=True, read_only=True)
+    software = SoftwareSerializer(many=True, read_only=True)
+
+    imaging_telescopes_2 = TelescopeSerializer2(many=True, read_only=True)
+    imaging_cameras_2 = CameraSerializer2(many=True, read_only=True)
+    guiding_telescopes_2 = TelescopeSerializer2(many=True, read_only=True)
+    guiding_cameras_2 = CameraSerializer2(many=True, read_only=True)
+    mounts_2 = MountSerializer2(many=True, read_only=True)
+    filters_2 = FilterSerializer2(many=True, read_only=True)
+    accessories_2 = AccessorySerializer2(many=True, read_only=True)
+    software_2 = SoftwareSerializer2(many=True, read_only=True)
 
     def update(self, instance, validated_data):
         instance = super(ImageSerializer, self).update(instance, validated_data)  # type: Image
@@ -61,6 +93,7 @@ class ImageSerializer(RequestUserRestSerializerMixin, serializers.ModelSerialize
             'imaging_cameras',
             'guiding_telescopes',
             'guiding_cameras',
+            'focal_reducers',
             'mounts',
             'filters',
             'accessories',
