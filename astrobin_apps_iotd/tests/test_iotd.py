@@ -266,7 +266,7 @@ class IotdTest(TestCase):
                 datetime.now() - \
                 timedelta(settings.IOTD_REVIEW_WINDOW_DAYS + 1))
 
-        with self.assertRaisesRegex(ValidationError, "in the submission queue for more than"):
+        with self.assertRaisesRegex(ValidationError, "in the review queue for more than"):
             IotdVote.objects.create(
                 reviewer=self.reviewer_1,
                 image=submission_1.image)
