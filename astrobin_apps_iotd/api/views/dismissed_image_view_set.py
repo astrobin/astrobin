@@ -31,7 +31,8 @@ class DismissedImageViewSet(viewsets.ModelViewSet):
 
         return self.model.objects.filter(
             user=self.request.user,
-            created__gte=datetime.now() - timedelta(days=max_days))
+            published__gte=datetime.now() - timedelta(days=max_days)
+        )
 
     def create(self, request, *args, **kwargs):
         try:

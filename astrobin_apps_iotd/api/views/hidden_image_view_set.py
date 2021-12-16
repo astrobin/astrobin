@@ -6,7 +6,6 @@ from datetime import datetime, timedelta
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseForbidden
-from django.utils.translation import ugettext_lazy as _
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
@@ -31,7 +30,8 @@ class HiddenImageViewSet(viewsets.ModelViewSet):
 
         return self.model.objects.filter(
             user=self.request.user,
-            created__gte=datetime.now() - timedelta(days=max_days))
+            published__gte=datetime.now() - timedelta(days=max_days)
+        )
 
     def create(self, request, *args, **kwargs):
         try:

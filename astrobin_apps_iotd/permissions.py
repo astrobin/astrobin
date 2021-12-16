@@ -104,7 +104,7 @@ def may_toggle_vote_image(user, image):
     days = settings.IOTD_REVIEW_WINDOW_DAYS
     if IotdSubmission.first_for_image(image).date < datetime.now() - timedelta(days):
         return False, _(
-            "You cannot vote for an image that has been in the submission queue for more than %(max_days)s day(s).") % {
+            "You cannot vote for an image that has been in the review queue for more than %(max_days)s day(s).") % {
                    'max_days': days
                }
 
