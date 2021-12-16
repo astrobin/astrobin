@@ -26,7 +26,7 @@ class IotdSubmission(models.Model):
             self.image.pk)
 
     @classmethod
-    def first_for_image(cls, image):
+    def last_for_image(cls, image):
         qs = IotdSubmission.objects.filter(image=image).order_by('-date')
         if qs:
             return qs[0]
@@ -60,7 +60,7 @@ class IotdVote(models.Model):
             self.image.title)
 
     @classmethod
-    def first_for_image(cls, image):
+    def last_for_image(cls, image):
         qs = IotdVote.objects.filter(image=image).order_by('-date')
         if qs:
             return qs[0]

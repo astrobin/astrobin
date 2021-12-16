@@ -758,6 +758,7 @@ class IotdServiceTest(TestCase):
 
         self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1)
     def test_get_review_queue_not_enough_submissions_before_cutoff(self):
         uploader = Generators.user()
         submitter = Generators.user(groups=['iotd_submitters'])
@@ -769,15 +770,29 @@ class IotdServiceTest(TestCase):
         image.designated_iotd_submitters.add(submitter)
         image.designated_iotd_reviewers.add(reviewer)
 
-        IotdSubmission.objects.create(
+        submission = IotdSubmission.objects.create(
             submitter=submitter,
             image=image
         )
+
+        submission.date = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS + 1)
+        submission.save()
 
         image.published = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(1)
         image.save()
 
         self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
+
+        image.published = datetime.now()
+        image.save()
+
+        submission.date = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS - 1)
+        submission.save()
+
+        image.published = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(1)
+        image.save()
+
+        self.assertEqual(1, len(IotdService().get_review_queue(reviewer)))
 
     def test_get_review_queue_not_designated(self):
         uploader = Generators.user()
@@ -818,32 +833,33 @@ class IotdServiceTest(TestCase):
 
         self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
 
-    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
-    @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
-    def test_get_review_queue_submitted_two_days_ago(self):
+    @override_settings(
+        IOTD_SUBMISSION_WINDOW_DAYS=1,
+        IOTD_SUBMISSION_MIN_PROMOTIONS=2,
+        IOTD_REVIEW_QUEUE_WINDOW=1,
+        IOTD_REVIEW_WINDOW_DAYS=2,
+    )
+    def test_get_review_queue_submitted_outside_of_window(self):
         uploader = Generators.user()
-        submitter = Generators.user(groups=['iotd_submitters'])
+        submitter1 = Generators.user(groups=['iotd_submitters'])
         submitter2 = Generators.user(groups=['iotd_submitters'])
         reviewer = Generators.user(groups=['iotd_reviewers'])
 
         Generators.premium_subscription(uploader, "AstroBin Ultimate 2020+")
 
-        image = Generators.image(user=uploader)
-        image.designated_iotd_submitters.add(submitter, submitter2)
+        image = Generators.image(user=uploader, published=datetime.now() - timedelta(4))
+        image.designated_iotd_submitters.add(submitter1, submitter2)
         image.designated_iotd_reviewers.add(reviewer)
 
-        submission = IotdSubmission.objects.create(
-            submitter=submitter,
-            image=image,
-        )
+        submission1 = IotdGenerators.submission(submitter=submitter1, image=image)
+        IotdSubmission.objects.filter(pk=submission1.pk).update(date=datetime.now() - timedelta(3))
 
-        IotdSubmission.objects.create(
-            submitter=submitter2,
-            image=image,
-        )
+        submission2 = IotdGenerators.submission(submitter=submitter2, image=image)
+        IotdSubmission.objects.filter(pk=submission2.pk).update(date=datetime.now() - timedelta(3))
 
-        submission.date = datetime.now() - timedelta(days=2)
-        submission.save()
+        self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
+
+        IotdSubmission.objects.filter(pk=submission2.pk).update(date=datetime.now() - timedelta(1))
 
         self.assertEqual(1, len(IotdService().get_review_queue(reviewer)))
 
