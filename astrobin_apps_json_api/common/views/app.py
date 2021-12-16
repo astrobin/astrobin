@@ -1,8 +1,8 @@
 import hashlib
 import logging
+import os
 from os.path import join
 
-import os
 from PIL import Image as PILImage
 from braces.views import JSONResponseMixin
 from django.conf import settings
@@ -46,8 +46,11 @@ class AppConfig(JSONResponseMixin, View):
             'REQUEST_COUNTRY': utils.get_client_country_code(request),
             'IMAGE_CONTENT_TYPE_ID': ContentType.objects.get_for_model(Image).id,
             'THUMBNAIL_ALIASES': settings.THUMBNAIL_ALIASES[''],
+            'IOTD_SUBMISSION_WINDOW_DAYS': settings.IOTD_SUBMISSION_WINDOW_DAYS,
             'IOTD_SUBMISSION_MAX_PER_DAY': settings.IOTD_SUBMISSION_MAX_PER_DAY,
+            'IOTD_REVIEW_WINDOW_DAYS': settings.IOTD_REVIEW_WINDOW_DAYS,
             'IOTD_REVIEW_MAX_PER_DAY': settings.IOTD_REVIEW_MAX_PER_DAY,
+            'IOTD_JUDGEMENT_WINDOW_DAYS': settings.IOTD_JUDGEMENT_WINDOW_DAYS,
             'IOTD_JUDGEMENT_MAX_PER_DAY': settings.IOTD_JUDGEMENT_MAX_PER_DAY,
             'IOTD_JUDGEMENT_MAX_FUTURE_DAYS': settings.IOTD_JUDGEMENT_MAX_FUTURE_DAYS,
             'IOTD_QUEUES_PAGE_SIZE': settings.IOTD_QUEUES_PAGE_SIZE,
