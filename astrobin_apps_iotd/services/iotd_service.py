@@ -4,13 +4,14 @@ from typing import List
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.db.models import Count, OuterRef, Q, Subquery
+from django.db.models import Count, OuterRef, Q, QuerySet, Subquery, Value
 from django.utils.translation import gettext
 
 from astrobin.enums import SubjectType
 from astrobin.models import Image
 from astrobin_apps_iotd.models import (
-    Iotd, IotdQueueSortOrder, IotdStaffMemberSettings, IotdSubmission, IotdVote, TopPickArchive,
+    Iotd, IotdJudgementQueueEntry, IotdQueueSortOrder, IotdStaffMemberSettings, IotdSubmission, IotdVote,
+    TopPickArchive,
     TopPickNominationsArchive,
 )
 from astrobin_apps_notifications.utils import push_notification
@@ -149,9 +150,6 @@ class IotdService:
         ).order_by(*order_by)]
 
     def get_judgement_queue(self, judge: User, queue_sort_order: str = None):
-        days = settings.IOTD_JUDGEMENT_WINDOW_DAYS
-        cutoff = datetime.now() - timedelta(days)
-
         member_settings: IotdStaffMemberSettings
         member_settings, created = IotdStaffMemberSettings.objects.get_or_create(user=judge)
         queue_sort_order_before = member_settings.queue_sort_order
@@ -170,24 +168,16 @@ class IotdService:
                 else 'last_vote_timestamp'
         ]
 
-        return [x for x in Image.objects.annotate(
-            num_votes=Count('iotdvote', distinct=True),
-            num_dismissals=Count('iotddismissedimage', distinct=True),
-            last_vote_timestamp = Subquery(IotdVote.last_for_image(OuterRef('pk')).values('date'))
-        ).filter(
-            Q(deleted__isnull=True) &
-            Q(last_vote_timestamp__gte=cutoff) &
-            Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) &
-            Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &
-            Q(
-                Q(iotd__isnull=True) |
-                Q(iotd__date__gt=datetime.now().date())
-            )
-        ).exclude(
-            Q(iotdvote__reviewer=judge) |
-            Q(iotddismissedimage__user=judge) |
-            Q(user=judge)
-        ).order_by(*order_by)]
+        images = []
+
+        for entry in IotdJudgementQueueEntry.objects \
+                .select_related('image') \
+                .filter(judge=judge).order_by(*order_by).iterator():
+            image = entry.image
+            image.last_vote_timestamp = entry.last_vote_timestamp
+            images.append(image)
+
+        return images
 
     def judge_cannot_select_now_reason(self, judge):
         # type: (User) -> Union[str, None]
@@ -289,6 +279,40 @@ class IotdService:
                 TopPickArchive.objects.create(image=item)
             except IntegrityError:
                 continue
+
+    def update_judgement_queues(self):
+        def _compute_queue(judge: User):
+            days = settings.IOTD_JUDGEMENT_WINDOW_DAYS
+            cutoff = datetime.now() - timedelta(days)
+
+            return Image.objects.annotate(
+                num_votes=Count('iotdvote', distinct=True),
+                num_dismissals=Count('iotddismissedimage', distinct=True),
+                last_vote_timestamp=Subquery(IotdVote.last_for_image(OuterRef('pk')).values('date'))
+            ).filter(
+                Q(deleted__isnull=True) &
+                Q(last_vote_timestamp__gte=cutoff) &
+                Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) &
+                Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &
+                Q(
+                    Q(iotd__isnull=True) |
+                    Q(iotd__date__gt=datetime.now().date())
+                )
+            ).exclude(
+                Q(iotdvote__reviewer=judge) |
+                Q(iotddismissedimage__user=judge) |
+                Q(user=judge)
+            )
+
+        IotdJudgementQueueEntry.objects.all().delete()
+        for judge in User.objects.filter(groups__name='iotd_judges'):
+            for image in _compute_queue(judge).iterator():
+                last_vote = IotdVote.last_for_image(image.pk).first()
+                IotdJudgementQueueEntry.objects.create(
+                    judge=judge,
+                    image=image,
+                    last_vote_timestamp=last_vote.date
+                )
 
     def get_inactive_submitter_and_reviewers(self, days):
         inactive_members = []

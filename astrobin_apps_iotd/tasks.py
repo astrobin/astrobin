@@ -86,3 +86,9 @@ def send_notifications_when_promoted_image_becomes_iotd():
         'image': image,
         'image_thumbnail': thumb.url if thumb else None
     })
+
+
+@shared_task(time_limit=120)
+def update_judgement_queues():
+    IotdService().update_judgement_queues()
+    logger.info("update_judgement_queues completed")

@@ -10,6 +10,7 @@ from astrobin_apps_iotd.models import (
     Iotd, IotdDismissedImage, IotdQueueSortOrder, IotdStaffMemberSettings, IotdSubmission, IotdVote,
 )
 from astrobin_apps_iotd.services import IotdService
+from astrobin_apps_iotd.tasks import update_judgement_queues
 from astrobin_apps_iotd.tests.iotd_generators import IotdGenerators
 from common.services import DateTimeService
 
@@ -1204,6 +1205,8 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
+        update_judgement_queues()
+
         self.assertEqual(1, len(IotdService().get_judgement_queue(judge)))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
@@ -1283,6 +1286,8 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
+        update_judgement_queues()
+
         self.assertEqual(1, len(IotdService().get_judgement_queue(judge)))
 
         IotdDismissedImage.objects.create(image=image, user=submitter1)
@@ -1291,6 +1296,8 @@ class IotdServiceTest(TestCase):
         self.assertEqual(1, len(IotdService().get_judgement_queue(judge)))
 
         IotdDismissedImage.objects.create(image=image, user=reviewer1)
+
+        update_judgement_queues()
 
         self.assertEqual(0, len(IotdService().get_judgement_queue(judge)))
 
@@ -1379,6 +1386,8 @@ class IotdServiceTest(TestCase):
             image=image,
             date=date.today() + timedelta(1)
         )
+
+        update_judgement_queues()
 
         self.assertEqual(1, len(IotdService().get_judgement_queue(judge)))
 
@@ -1593,7 +1602,10 @@ class IotdServiceTest(TestCase):
         vote4.date = DateTimeService.now() - timedelta(minutes=1)
         vote4.save()
 
+        update_judgement_queues()
+
         queue = IotdService().get_judgement_queue(judge)
+
         self.assertEqual(1, len(queue))
         self.assertEqual(image, queue[0])
         self.assertEqual(vote3.date, queue[0].last_vote_timestamp)
