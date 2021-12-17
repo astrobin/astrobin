@@ -127,9 +127,7 @@ class IotdService:
         return [x for x in Image.objects.annotate(
             num_submissions=Count('iotdsubmission', distinct=True),
             num_dismissals=Count('iotddismissedimage', distinct=True),
-            last_submission_timestamp=Subquery(
-                IotdSubmission.objects.filter(image__pk=OuterRef('pk')).order_by('-date').values('date')[:1]
-            )
+            last_submission_timestamp=Subquery(IotdSubmission.last_for_image(OuterRef('pk')).values('date'))
         ).filter(
             Q(deleted__isnull=True) &
             Q(last_submission_timestamp__gte=cutoff) &
@@ -175,9 +173,7 @@ class IotdService:
         return [x for x in Image.objects.annotate(
             num_votes=Count('iotdvote', distinct=True),
             num_dismissals=Count('iotddismissedimage', distinct=True),
-            last_vote_timestamp = Subquery(
-                IotdVote.objects.filter(image__pk=OuterRef('pk')).order_by('-date').values('date')[:1]
-            )
+            last_vote_timestamp = Subquery(IotdVote.last_for_image(OuterRef('pk')).values('date'))
         ).filter(
             Q(deleted__isnull=True) &
             Q(last_vote_timestamp__gte=cutoff) &

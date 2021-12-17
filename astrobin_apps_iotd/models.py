@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -6,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from astrobin.models import Image
 from astrobin_apps_iotd.permissions import may_elect_iotd, may_toggle_submission_image, may_toggle_vote_image
+
 
 class IotdQueueSortOrder:
     NEWEST_FIRST = 'NEWEST_FIRST'
@@ -26,11 +28,10 @@ class IotdSubmission(models.Model):
             self.image.pk)
 
     @classmethod
-    def last_for_image(cls, image):
-        qs = IotdSubmission.objects.filter(image=image).order_by('-date')
-        if qs:
-            return qs[0]
-        return None
+    def last_for_image(cls, pk):
+        submissions = IotdSubmission.objects.filter(image__pk=pk).order_by('date')
+        limit = settings.IOTD_SUBMISSION_MIN_PROMOTIONS
+        return submissions[limit - 1: limit]
 
     def clean(self):
         may, reason = may_toggle_submission_image(self.submitter, self.image)
@@ -60,11 +61,10 @@ class IotdVote(models.Model):
             self.image.title)
 
     @classmethod
-    def last_for_image(cls, image):
-        qs = IotdVote.objects.filter(image=image).order_by('-date')
-        if qs:
-            return qs[0]
-        return None
+    def last_for_image(cls, pk):
+        votes = IotdVote.objects.filter(image__pk=pk).order_by('date')
+        limit = settings.IOTD_REVIEW_MIN_PROMOTIONS
+        return votes[limit - 1:limit]
 
     def clean(self):
         may, reason = may_toggle_vote_image(self.reviewer, self.image)
