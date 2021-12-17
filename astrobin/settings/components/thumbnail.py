@@ -214,7 +214,7 @@ THUMBNAIL_ALIASES = {
         'story': {
             'size': (460, 320),
             'crop': 'smart',
-            'quality': 90
+            'quality': 80
         },
         'story_crop': {
             'size': (460, 320),
@@ -223,7 +223,7 @@ THUMBNAIL_ALIASES = {
             'upscale': True,
             'watermark': False,
             'keep_icc_profile': True,
-            'quality': 90
+            'quality': 80
         },
 
         # Duckduckgo
