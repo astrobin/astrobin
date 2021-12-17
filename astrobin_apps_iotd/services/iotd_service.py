@@ -304,8 +304,8 @@ class IotdService:
                 Q(user=judge)
             )
 
-        IotdJudgementQueueEntry.objects.all().delete()
         for judge in User.objects.filter(groups__name='iotd_judges'):
+            IotdJudgementQueueEntry.objects.filter(judge=judge).delete()
             for image in _compute_queue(judge).iterator():
                 last_vote = IotdVote.last_for_image(image.pk).first()
                 IotdJudgementQueueEntry.objects.create(
