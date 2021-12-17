@@ -28,7 +28,6 @@ class AstroBinAppConfig(AppConfig):
     def ready(self):
         from astrobin import signals  # noqa
         from astrobin_apps_notifications import signals  # noqa
-        from astrobin_apps_iotd import signals  # noqa
         from astrobin.locale_extras import LOCALE_EXTRAS  # noqa
 
         self.registerActStreamModels()
