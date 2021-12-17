@@ -463,7 +463,7 @@ class UserTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, image.title)
 
-    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1, IOTD_REVIEW_MIN_PROMOTIONS=1, PREMIUM_RESTRICTS_IOTD=False)
     def test_user_profile_exclude_from_competitions(self):
         self.client.login(username="user", password="password")
         self._do_upload('astrobin/fixtures/test.jpg')

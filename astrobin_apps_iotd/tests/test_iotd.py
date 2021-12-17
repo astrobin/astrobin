@@ -183,6 +183,7 @@ class IotdTest(TestCase):
                 submitter=self.submitter_1,
                 image=self.image)
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1, IOTD_REVIEW_MIN_PROMOTIONS=1)
     def test_submission_model_image_cannot_be_past_iotd(self):
         Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
 
@@ -255,6 +256,7 @@ class IotdTest(TestCase):
                 submitter=self.submitter_1,
                 image=self.image)
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1)
     def test_vote_model_submission_must_be_within_window(self):
         Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
         submission_1 = IotdSubmission.objects.create(
@@ -323,6 +325,7 @@ class IotdTest(TestCase):
         self.image.user = self.user
         self.image.save(keep_deleted=True)
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1)
     def test_vote_model_can_vote_image_by_judge(self):
         Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
 
@@ -381,7 +384,7 @@ class IotdTest(TestCase):
     @override_settings(
         IOTD_SUBMISSION_MIN_PROMOTIONS=2,
         IOTD_REVIEW_MIN_PROMOTIONS=2,
-        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(365)
+        IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START=datetime.now() - timedelta(365),
     )
     def test_vote_model(self):
         Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
@@ -501,11 +504,16 @@ class IotdTest(TestCase):
             submitter=self.submitter_2,
             image=image2)
         with self.assertRaisesRegex(ValidationError, "already voted.*today"):
-            with self.settings(IOTD_REVIEW_MAX_PER_DAY=1):
+            with self.settings(
+                    IOTD_SUBMISSION_MIN_PROMOTIONS=1,
+                    IOTD_REVIEW_MIN_PROMOTIONS=1,
+                    IOTD_REVIEW_MAX_PER_DAY=1
+            ):
                 IotdVote.objects.create(
                     reviewer=self.reviewer_1,
                     image=submission_2.image)
 
+    @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1, IOTD_REVIEW_MIN_PROMOTIONS=1)
     def test_iotd_model(self):
         # User must be judge
         with self.assertRaisesRegex(ValidationError, "not a member"):
@@ -675,7 +683,7 @@ class IotdTest(TestCase):
 
     # Views
 
-    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
+    @override_settings(PREMIUM_RESTRICTS_IOTD=False, IOTD_SUBMISSION_MIN_PROMOTIONS=1, IOTD_REVIEW_MIN_PROMOTIONS=1)
     def test_toggle_judgement_ajax_view(self):
         url = reverse_lazy('iotd_toggle_judgement_ajax', kwargs={'pk': self.image.pk})
 
@@ -966,7 +974,11 @@ class IotdTest(TestCase):
         self.assertTrue(self.user in staff_group_dj.user_set.all())
         self.assertTrue(self.user in content_moderators_group_dj.user_set.all())
 
-    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
+    @override_settings(
+        IOTD_SUBMISSION_MIN_PROMOTIONS=1,
+        IOTD_REVIEW_MIN_PROMOTIONS=1,
+        PREMIUM_RESTRICTS_IOTD=False
+    )
     def test_iotd_deleted_images(self):
         """Deleted images should not appear in the IOTD archive"""
 

@@ -101,12 +101,18 @@ def may_toggle_vote_image(user, image):
     if Iotd.objects.filter(image=image, date__lte=datetime.now().date()).exists():
         return False, _("This image has already been an IOTD in the past")
 
-    days = settings.IOTD_REVIEW_WINDOW_DAYS
-    if IotdSubmission.last_for_image(image).date < datetime.now() - timedelta(days):
+    if IotdSubmission.objects.filter(image=image).count() < settings.IOTD_SUBMISSION_MIN_PROMOTIONS:
         return False, _(
-            "You cannot vote for an image that has been in the review queue for more than %(max_days)s day(s).") % {
-                   'max_days': days
-               }
+            "You cannot vote for an image that has not been submitted at least %(num)s times." % {
+                'num': settings.IOTD_SUBMISSION_MIN_PROMOTIONS
+            }
+        )
+
+    days = settings.IOTD_REVIEW_WINDOW_DAYS
+    if IotdSubmission.last_for_image(image.pk)[0].date < datetime.now() - timedelta(days):
+        return False, _(
+            "You cannot vote for an image that has been in the review queue for more than %(max_days)s day(s)."
+        ) % {'max_days': days}
 
     max_allowed = settings.IOTD_REVIEW_MAX_PER_DAY
     reviewed_today = IotdVote.objects.filter(
@@ -169,9 +175,10 @@ def may_elect_iotd(user, image):
         return False, _("This image has already been an IOTD in the past")
 
     days = settings.IOTD_JUDGEMENT_WINDOW_DAYS
-    if IotdVote.last_for_image(image).date < datetime.now() - timedelta(days):
+    if IotdVote.last_for_image(image.pk)[0].date < datetime.now() - timedelta(days):
         return False, _(
-            "You cannot elect an image that has been in the review queue for more than %(max_days)s day(s).") % {
+            "You cannot elect an image that has been in the review queue for more than %(max_days)s day(s)."
+        ) % {
                    'max_days': days
                }
 
@@ -188,12 +195,20 @@ def may_elect_iotd(user, image):
     max_allowed = settings.IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE
     scheduled = Iotd.objects.filter(
         judge=user,
-        date__gt=datetime.now().date()).count()
+        date__gt=datetime.now().date()
+    ).count()
     toggling_on = not Iotd.objects.filter(image=image).exists()
     if scheduled >= max_allowed and toggling_on:
         return False, _("You have already scheduled %(max_allowed)s IOTD(s).") % {
             'max_allowed': max_allowed
         }
+
+    if IotdVote.objects.filter(image=image).count() < settings.IOTD_REVIEW_MIN_PROMOTIONS:
+        return False, _(
+            "You cannot elect for an image that has not been voted at least %(num)s times." % {
+                'num': settings.IOTD_REVIEW_MIN_PROMOTIONS
+            }
+        )
 
     return True, None
 
