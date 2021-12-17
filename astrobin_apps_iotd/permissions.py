@@ -102,9 +102,9 @@ def may_toggle_vote_image(user, image):
         return False, _("This image has already been an IOTD in the past")
 
     days = settings.IOTD_REVIEW_WINDOW_DAYS
-    if IotdSubmission.first_for_image(image).date < datetime.now() - timedelta(days):
+    if IotdSubmission.last_for_image(image).date < datetime.now() - timedelta(days):
         return False, _(
-            "You cannot vote for an image that has been in the submission queue for more than %(max_days)s day(s).") % {
+            "You cannot vote for an image that has been in the review queue for more than %(max_days)s day(s).") % {
                    'max_days': days
                }
 
@@ -169,7 +169,7 @@ def may_elect_iotd(user, image):
         return False, _("This image has already been an IOTD in the past")
 
     days = settings.IOTD_JUDGEMENT_WINDOW_DAYS
-    if IotdVote.first_for_image(image).date < datetime.now() - timedelta(days):
+    if IotdVote.last_for_image(image).date < datetime.now() - timedelta(days):
         return False, _(
             "You cannot elect an image that has been in the review queue for more than %(max_days)s day(s).") % {
                    'max_days': days

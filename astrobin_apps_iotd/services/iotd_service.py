@@ -4,7 +4,7 @@ from typing import List
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.db.models import Count, Q
+from django.db.models import Count, OuterRef, Q, Subquery
 from django.utils.translation import gettext
 
 from astrobin.enums import SubjectType
@@ -119,15 +119,20 @@ class IotdService:
             member_settings.save()
 
         order_by = [
-            '-published' if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST else 'published'
+            '-last_submission_timestamp' \
+                if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST \
+                else 'last_submission_timestamp'
         ]
 
         return [x for x in Image.objects.annotate(
             num_submissions=Count('iotdsubmission', distinct=True),
             num_dismissals=Count('iotddismissedimage', distinct=True),
+            last_submission_timestamp=Subquery(
+                IotdSubmission.objects.filter(image__pk=OuterRef('pk')).order_by('-date').values('date')[:1]
+            )
         ).filter(
             Q(deleted__isnull=True) &
-            Q(iotdsubmission__date__gte=cutoff) &
+            Q(last_submission_timestamp__gte=cutoff) &
             Q(designated_iotd_reviewers=reviewer) &
             Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) &
             Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &
@@ -162,15 +167,20 @@ class IotdService:
             member_settings.save()
 
         order_by = [
-            '-published' if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST else 'published'
+            '-last_vote_timestamp' \
+                if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST \
+                else 'last_vote_timestamp'
         ]
 
         return [x for x in Image.objects.annotate(
             num_votes=Count('iotdvote', distinct=True),
-            num_dismissals=Count('iotddismissedimage', distinct=True)
+            num_dismissals=Count('iotddismissedimage', distinct=True),
+            last_vote_timestamp = Subquery(
+                IotdVote.objects.filter(image__pk=OuterRef('pk')).order_by('-date').values('date')[:1]
+            )
         ).filter(
             Q(deleted__isnull=True) &
-            Q(iotdvote__date__gte=cutoff) &
+            Q(last_vote_timestamp__gte=cutoff) &
             Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) &
             Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &
             Q(
