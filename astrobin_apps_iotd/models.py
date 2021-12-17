@@ -156,3 +156,30 @@ class IotdStaffMemberSettings(models.Model):
         ),
         default=IotdQueueSortOrder.NEWEST_FIRST,
     )
+
+
+class IotdJudgementQueueEntry(models.Model):
+    judge = models.ForeignKey(
+        User,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+        related_name='judgement_queue_entry',
+    )
+
+    image = models.ForeignKey(
+        Image,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+        related_name='judgement_queue_entry',
+    )
+
+    last_vote_timestamp = models.DateTimeField(
+        null=False,
+        blank=False,
+    )
+
+    class Meta:
+        unique_together = ('judge', 'image',)
+        ordering = ('last_vote_timestamp',)
