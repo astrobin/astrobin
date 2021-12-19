@@ -650,6 +650,7 @@ def image_edit_acquisition(request, id):
         advanced = request.GET['advanced'] if 'advanced' in request.GET else advanced
         advanced = True if advanced == 'true' else advanced
         advanced = False if advanced == 'false' else advanced
+
         if advanced:
             extra = 0
             if 'add_more' in request.GET:
@@ -994,28 +995,38 @@ def image_edit_save_acquisition(request):
     }
 
     dsa_qs = DeepSky_Acquisition.objects.filter(image=image)
+    filter_queryset = image.user.userprofile.filters.all()
 
     for a in SolarSystem_Acquisition.objects.filter(image=image):
         a.delete()
 
     if edit_type == 'deep_sky' or image.solution:
         if advanced:
-            DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, can_delete=False,
-                                               form=DeepSky_AcquisitionForm)
+            DSAFormSet = inlineformset_factory(
+                Image,
+                DeepSky_Acquisition,
+                can_delete=False,
+                form=DeepSky_AcquisitionForm
+            )
+
             saving_data = {}
+
             for i in request.POST:
                 saving_data[i] = request.POST[i]
+
             saving_data['advanced'] = advanced
-            deep_sky_acquisition_formset = DSAFormSet(saving_data, instance=image)
+            deep_sky_acquisition_formset = DSAFormSet(
+                saving_data, instance=image, form_kwargs = { 'queryset': filter_queryset }
+            )
             response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
             response_dict['advanced'] = True
+
             if deep_sky_acquisition_formset.is_valid():
                 deep_sky_acquisition_formset.save()
                 if 'add_more' in request.POST:
-                    DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=1, can_delete=False,
-                                                       form=DeepSky_AcquisitionForm)
-                    profile = image.user.userprofile
-                    filter_queryset = profile.filters.all()
+                    DSAFormSet = inlineformset_factory(
+                        Image, DeepSky_Acquisition, extra=1, can_delete=False, form=DeepSky_AcquisitionForm
+                    )
                     deep_sky_acquisition_formset = DSAFormSet(instance=image, form_kwargs={'queryset': filter_queryset})
                     response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
                     response_dict['next_acquisition_session'] = deep_sky_acquisition_formset.total_form_count() - 1
