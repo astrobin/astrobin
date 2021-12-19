@@ -39,6 +39,8 @@ from astrobin.views import (
     user_profile_save_locations, user_profile_save_preferences, user_profile_save_privacy,
     user_profile_seen_iotd_tp_is_explicit_submission, user_profile_seen_realname, user_profile_shadow_ban,
 )
+from astrobin.views.auth.login import LoginView
+from astrobin.views.auth.logout import LogoutView
 from astrobin.views.contact import ContactRedirectView
 from astrobin.views.forums import LatestTopicsView
 from astrobin.views.profile.download_data_view import DownloadDataView
@@ -72,37 +74,67 @@ urlpatterns += [
     url(r'^admin/', admin.site.urls),
 
     ###########################################################################
+    ### ACCOUNTS VIEWS                                                      ###
+    ###########################################################################
+
+    url(
+        r'^accounts/password/change/$',
+        auth_views.PasswordChangeView.as_view(),
+        name='password_change'
+    ),
+    url(
+        r'^accounts/password/change/done/$',
+        auth_views.PasswordChangeDoneView.as_view(),
+        name='password_change_done'
+    ),
+    url(
+        r'^accounts/password/reset/$',
+        auth_views.PasswordResetView.as_view(form_class=PasswordResetForm),
+        name='password_reset'
+    ),
+    url(
+        r'^accounts/password/reset/done/$',
+        auth_views.PasswordResetDoneView.as_view(),
+        name='password_reset_done'
+    ),
+    url(
+        r'^accounts/password/reset/complete/$',
+        auth_views.PasswordResetCompleteView.as_view(),
+        name='password_reset_complete'
+    ),
+    url(
+        r'^accounts/password/reset/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',
+        auth_views.PasswordResetConfirmView.as_view(),
+        name='password_reset_confirm'
+    ),
+    # and now add the registration urls
+    url(
+        r'^accounts/register/$',
+        never_cache(registration_views.AstroBinRegistrationView.as_view()),
+        name='registration_register'
+    ),
+    url(r'^accounts/email/', include('change_email.urls')),
+    url(
+        r'^accounts/login/$',
+        LoginView.as_view(
+            template_name='registration/login.html'
+        ),
+        name='auth_login'
+    ),
+    url(
+        r'^accounts/logout/$',
+        LogoutView.as_view(
+            template_name='registration/logout.html'
+        ),
+        name='auth_logout'
+    ),
+    url(r'^accounts/', include('registration.backends.hmac.urls')),
+
+    ###########################################################################
     ### THIRD PARTY APPS VIEWS                                              ###
     ###########################################################################
 
     url(r'^silk/', include('silk.urls', namespace='silk')),
-
-    # override the default urls
-    url(r'^accounts/password/change/$',
-        auth_views.PasswordChangeView.as_view(),
-        name='password_change'),
-    url(r'^accounts/password/change/done/$',
-        auth_views.PasswordChangeDoneView.as_view(),
-        name='password_change_done'),
-    url(r'^accounts/password/reset/$',
-        auth_views.PasswordResetView.as_view(form_class=PasswordResetForm),
-        name='password_reset'),
-    url(r'^accounts/password/reset/done/$',
-        auth_views.PasswordResetDoneView.as_view(),
-        name='password_reset_done'),
-    url(r'^accounts/password/reset/complete/$',
-        auth_views.PasswordResetCompleteView.as_view(),
-        name='password_reset_complete'),
-    url(r'^accounts/password/reset/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',
-        auth_views.PasswordResetConfirmView.as_view(),
-        name='password_reset_confirm'),
-    # and now add the registration urls
-    url(r'^accounts/register/$',
-        never_cache(registration_views.AstroBinRegistrationView.as_view()),
-        name='registration_register'),
-    url(r'^accounts/', include('registration.backends.hmac.urls')),
-    url(r'^accounts/email/', include('change_email.urls')),
-
     url(r'^activity/', include('actstream.urls')),
     url(r'^avatar/', include('avatar.urls')),
     url(r'^comments/', include('django_comments.urls')),
