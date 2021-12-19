@@ -389,6 +389,14 @@ body.full {
         }
       }
     }
+
+    .status-icon {
+      float: right;
+
+      &.status-icon-success {
+        color: $green;
+      }
+    }
   }
 
   .dropdown-menu {

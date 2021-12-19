@@ -134,6 +134,10 @@
                         >
                             <i class="icon-rocket"></i>
                             {% trans "Submit for IOTD/TP consideration" %}
+
+                            {% if reason == 'ALREADY_SUBMITTED' %}
+                                <i class="status-icon status-icon-success icon-ok"></i>
+                            {% endif %}
                         </a>
                     {% endwith %}
                 </li>
