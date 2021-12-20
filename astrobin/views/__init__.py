@@ -657,11 +657,14 @@ def image_edit_acquisition(request, id):
                 extra = 1
             if not dsa_qs:
                 extra = 1
-            DSAFormSet = inlineformset_factory(Image, DeepSky_Acquisition, extra=extra, can_delete=False,
-                                               form=DeepSky_AcquisitionForm)
-            profile = image.user.userprofile
-            filter_queryset = profile.filters.all()
-            deep_sky_acquisition_formset = DSAFormSet(instance=image, form_kwargs={'queryset': filter_queryset})
+            DSAFormSet = inlineformset_factory(
+                Image, DeepSky_Acquisition, extra=extra, form=DeepSky_AcquisitionForm
+            )
+            deep_sky_acquisition_formset = DSAFormSet(
+                instance=image,
+                form_kwargs={'user': request.user},
+                queryset=DeepSky_Acquisition.objects.filter(image=image).order_by('pk')
+            )
         else:
             dsa = dsa_qs[0] if dsa_qs else DeepSky_Acquisition({image: image, advanced: False})
             deep_sky_acquisition_basic_form = DeepSky_AcquisitionBasicForm(instance=dsa)
@@ -995,7 +998,6 @@ def image_edit_save_acquisition(request):
     }
 
     dsa_qs = DeepSky_Acquisition.objects.filter(image=image)
-    filter_queryset = image.user.userprofile.filters.all()
 
     for a in SolarSystem_Acquisition.objects.filter(image=image):
         a.delete()
@@ -1005,7 +1007,6 @@ def image_edit_save_acquisition(request):
             DSAFormSet = inlineformset_factory(
                 Image,
                 DeepSky_Acquisition,
-                can_delete=False,
                 form=DeepSky_AcquisitionForm
             )
 
@@ -1016,7 +1017,10 @@ def image_edit_save_acquisition(request):
 
             saving_data['advanced'] = advanced
             deep_sky_acquisition_formset = DSAFormSet(
-                saving_data, instance=image, form_kwargs = { 'queryset': filter_queryset }
+                saving_data,
+                instance=image,
+                form_kwargs = { 'user': request.user },
+                queryset=DeepSky_Acquisition.objects.filter(image=image).order_by('pk')
             )
             response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
             response_dict['advanced'] = True
@@ -1025,17 +1029,23 @@ def image_edit_save_acquisition(request):
                 deep_sky_acquisition_formset.save()
                 if 'add_more' in request.POST:
                     DSAFormSet = inlineformset_factory(
-                        Image, DeepSky_Acquisition, extra=1, can_delete=False, form=DeepSky_AcquisitionForm
+                        Image, DeepSky_Acquisition, extra=1, form=DeepSky_AcquisitionForm
                     )
-                    deep_sky_acquisition_formset = DSAFormSet(instance=image, form_kwargs={'queryset': filter_queryset})
+                    deep_sky_acquisition_formset = DSAFormSet(
+                        instance=image,
+                        form_kwargs={'user': request.user},
+                        queryset=DeepSky_Acquisition.objects.filter(image=image).order_by('pk')
+                    )
                     response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
                     response_dict['next_acquisition_session'] = deep_sky_acquisition_formset.total_form_count() - 1
                     if not dsa_qs:
                         messages.info(request, _("Fill in one session, before adding more."))
                     return render(request, 'image/edit/acquisition.html', response_dict)
             else:
-                messages.error(request, _(
-                    "There was one or more errors processing the form. You may need to scroll down to see them."))
+                messages.error(
+                    request,
+                    _("There was one or more errors processing the form. You may need to scroll down to see them.")
+                )
                 return render(request, 'image/edit/acquisition.html', response_dict)
         else:
             DeepSky_Acquisition.objects.filter(image=image).delete()

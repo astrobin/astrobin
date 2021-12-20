@@ -3,7 +3,7 @@ from datetime import datetime as dt
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from astrobin.models import DeepSky_Acquisition
+from astrobin.models import DeepSky_Acquisition, Filter
 
 
 class DeepSky_AcquisitionForm(forms.ModelForm):
@@ -22,15 +22,15 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
         exclude = []
 
     def __init__(self, user=None, **kwargs):
-        queryset = None
-        try:
-            queryset = kwargs.pop('queryset')
-        except KeyError:
-            pass
+        super().__init__(**kwargs)
 
-        super(DeepSky_AcquisitionForm, self).__init__(**kwargs)
-        if queryset:
-            self.fields['filter'].queryset = queryset
+        filters_from_profile = list(user.userprofile.filters.values_list('pk', flat=True))
+        filters_from_images = list(
+            Filter.objects.filter(images_using__user=user).distinct().values_list('pk', flat=True)
+        )
+        filter_queryset = Filter.objects.filter(pk__in=set(filters_from_images + filters_from_profile))
+
+        self.fields['filter'].queryset = filter_queryset
         self.fields['number'].required = True
         self.fields['duration'].required = True
 
