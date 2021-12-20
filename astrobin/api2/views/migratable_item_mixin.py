@@ -1,5 +1,6 @@
 from typing import List
 
+from annoying.functions import get_object_or_None
 from django.contrib.auth.models import User
 from django.contrib.postgres.search import TrigramDistance
 from django.db.models import Q, QuerySet, Count
@@ -7,7 +8,6 @@ from django.http import HttpResponseBadRequest, HttpRequest
 from django.utils import timezone
 from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
-from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from astrobin.models import Gear, Filter, UserProfile, GearMigrationStrategy
@@ -36,6 +36,7 @@ class MigratableItemMixin:
         itemPks.extend([x.pk for x in profile.mounts.all()])
         itemPks.extend([x.pk for x in profile.filters.all()])
         itemPks.extend([x.pk for x in profile.accessories.all()])
+        itemPks.extend([x.pk for x in profile.focal_reducers.all()])
         itemPks.extend([x.pk for x in profile.software.all()])
 
         return queryset.filter(pk__in=itemPks)
@@ -115,7 +116,11 @@ class MigratableItemMixin:
     def similar_non_migrated(self, request, pk):
         self.__check_permissions(request.user, allow_own_equipment_migrators=True)
         manager = self.get_serializer().Meta.model.objects
-        obj = get_object_or_404(manager, pk=pk)
+        obj = get_object_or_None(manager, pk=pk)
+
+        if obj is None:
+            serializer = self.get_serializer(manager.none(), many=True, context=self.get_serializer_context())
+            return Response(serializer.data)
 
         return self.__similar_non_migrated(request, obj.make, obj.name, pk)
 
