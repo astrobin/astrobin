@@ -14,7 +14,7 @@ class LogoutView(BaseLogoutView):
         try:
             domain = 'localhost' if 'localhost' in request.META.get('HTTP_REFERER') else '.astrobin.com'
         except:
-            domain = 'astrobin.com'
+            domain = '.astrobin.com'
 
         response.delete_cookie('classic-auth-token', '/', domain)
 
