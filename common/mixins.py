@@ -35,6 +35,14 @@ class RequestUserRestSerializerMixin(object):
         This is required since the read_only ``user`` field is not included by
         default anymore since https://github.com/encode/django-rest-framework/pull/5886.
         """
-        if 'user' not in validated_data:
-            validated_data['user'] = self.context['request'].user
-        return super(RequestUserRestSerializerMixin, self).create(validated_data)
+        validated_data['user'] = self.context['request'].user
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        """Override ``update`` to provide a user via request.user by default.
+
+        This is required since the read_only ``user`` field is not included by
+        default anymore since https://github.com/encode/django-rest-framework/pull/5886.
+        """
+        validated_data['user'] = self.context['request'].user
+        return super().update(instance, validated_data)
