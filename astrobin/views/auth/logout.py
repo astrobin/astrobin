@@ -10,7 +10,12 @@ class LogoutView(BaseLogoutView):
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, args, kwargs)
 
-        domain = 'localhost' if 'localhost' in request.META.get('HTTP_REFERER') else '.astrobin.com'
+        # noinspection PyBroadException
+        try:
+            domain = 'localhost' if 'localhost' in request.META.get('HTTP_REFERER') else '.astrobin.com'
+        except:
+            domain = 'astrobin.com'
+
         response.delete_cookie('classic-auth-token', '/', domain)
 
         return response
