@@ -54,13 +54,17 @@
 
         {% if READONLY_MODE %}
             <a class="btn disabled" href="#readonly-mode-modal" data-toggle="modal">
+                <i class="icon-exclamation-sign"></i>
+                {% trans "Mark all as read" %}
+                {% button_loading_indicator %}
+            </a>
         {% else %}
             <button class="btn btn-danger {% button_loading_class %}" id="mark-all-notifications-as-read" disabled="disabled">
+                <i class="icon-exclamation-sign"></i>
+                {% trans "Mark all as read" %}
+                {% button_loading_indicator %}
+            </button>
         {% endif %}
-        <i class="icon-exclamation-sign"></i>
-        {% trans "Mark all as read" %}
-        {% button_loading_indicator %}
-        </button>
     </div>
 </div>
 

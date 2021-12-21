@@ -732,7 +732,7 @@ astrobin_common = {
 
                 data.results.forEach(function (notification) {
                     t.content.querySelector('.notification-unread').setAttribute('data-id', notification['id']);
-                    t.content.querySelector('.notification-content').innerHTML = notification['message'];
+                    t.content.querySelector('.notification-content').innerHTML = notification['message'].replace('<a ', '<a data-no-instant ');
                     t.content.querySelector('.timestamp').setAttribute('data-epoch', new Date(notification['created'] + 'Z').getTime());
                     $tbody.append(document.importNode(t.content, true));
 
