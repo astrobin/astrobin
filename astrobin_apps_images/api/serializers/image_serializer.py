@@ -15,10 +15,9 @@ from astrobin_apps_equipment.api.serializers.mount_serializer import MountSerial
 from astrobin_apps_equipment.api.serializers.software_serializer import SoftwareSerializer as SoftwareSerializer2
 from astrobin_apps_equipment.api.serializers.telescope_serializer import TelescopeSerializer as TelescopeSerializer2
 from astrobin_apps_images.api.fields import KeyValueTagsSerializerField
-from common.mixins import RequestUserRestSerializerMixin
 
 
-class ImageSerializer(RequestUserRestSerializerMixin, serializers.ModelSerializer):
+class ImageSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
     hash = serializers.PrimaryKeyRelatedField(read_only=True)
     w = serializers.IntegerField()
@@ -36,17 +35,23 @@ class ImageSerializer(RequestUserRestSerializerMixin, serializers.ModelSerialize
     accessories = AccessorySerializer(many=True, read_only=True)
     software = SoftwareSerializer(many=True, read_only=True)
 
-    imaging_telescopes_2 = TelescopeSerializer2(many=True, read_only=True)
-    imaging_cameras_2 = CameraSerializer2(many=True, read_only=True)
-    guiding_telescopes_2 = TelescopeSerializer2(many=True, read_only=True)
-    guiding_cameras_2 = CameraSerializer2(many=True, read_only=True)
-    mounts_2 = MountSerializer2(many=True, read_only=True)
-    filters_2 = FilterSerializer2(many=True, read_only=True)
-    accessories_2 = AccessorySerializer2(many=True, read_only=True)
-    software_2 = SoftwareSerializer2(many=True, read_only=True)
+    imaging_telescopes_2 = TelescopeSerializer2(many=True, required=False)
+    imaging_cameras_2 = CameraSerializer2(many=True, required=False)
+    guiding_telescopes_2 = TelescopeSerializer2(many=True, required=False)
+    guiding_cameras_2 = CameraSerializer2(many=True, required=False)
+    mounts_2 = MountSerializer2(many=True, required=False)
+    filters_2 = FilterSerializer2(many=True, required=False)
+    accessories_2 = AccessorySerializer2(many=True, required=False)
+    software_2 = SoftwareSerializer2(many=True, required=False)
+
+    def create(self, validated_data):
+        validated_data['user'] = self.context['request'].user
+        return super().create(validated_data)
 
     def update(self, instance, validated_data):
-        instance = super(ImageSerializer, self).update(instance, validated_data)  # type: Image
+        validated_data['user'] = self.context['request'].user
+
+        instance: Image = super().update(instance, validated_data)
 
         profile = instance.user.userprofile  # type: UserProfile
 
