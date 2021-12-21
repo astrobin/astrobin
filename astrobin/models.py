@@ -2103,12 +2103,9 @@ class Acquisition(models.Model):
     class Meta:
         app_label = 'astrobin'
 
-    def __str__(self):
-        return self.image.title
-
     def save(self, *args, **kwargs):
-        super(Acquisition, self).save(*args, **kwargs)
-        self.image.save(keep_deleted=True)
+        super().save(*args, **kwargs)
+        Image.objects_including_wip.filter(pk=self.image.pk).update(updated=DateTimeService.now())
 
 
 class DeepSky_Acquisition(Acquisition):
@@ -2133,63 +2130,88 @@ class DeepSky_Acquisition(Acquisition):
 
     is_synthetic = models.BooleanField(
         _("Synthetic channel"),
-        default=False)
+        default=False,
+    )
 
     filter = models.ForeignKey(
         Filter,
-        null=True, blank=True,
+        null=True,
+        blank=True,
         verbose_name=_("Filter"),
-        on_delete=models.SET_NULL)
+        on_delete=models.SET_NULL,
+        related_name='deep_sky_acquisitions',
+    )
 
     binning = models.IntegerField(
-        null=True, blank=True,
+        null=True,
+        blank=True,
         choices=BINNING_CHOICES,
         default=0,
-        verbose_name=_("Binning"))
+        verbose_name=_("Binning"),
+    )
 
     number = models.IntegerField(
         _("Number"),
-        null=True, blank=True,
-        help_text=_("The number of sub-frames."))
+        null=True,
+        blank=True,
+        help_text=_("The number of sub-frames."),
+    )
 
     duration = models.IntegerField(
         _("Duration"),
-        null=True, blank=True,
-        help_text=_("Duration of each sub-frame, in seconds."))
+        null=True,
+        blank=True,
+        help_text=_("Duration of each sub-frame, in seconds."),
+    )
 
     iso = models.IntegerField(
         _("ISO"),
-        null=True, blank=True)
+        null=True,
+        blank=True,
+    )
 
     gain = models.DecimalField(
         _("Gain"),
-        null=True, blank=True,
-        max_digits=7, decimal_places=2)
+        null=True,
+        blank=True,
+        max_digits=7,
+        decimal_places=2,
+    )
 
     sensor_cooling = models.IntegerField(
         _("Sensor cooling"),
-        null=True, blank=True,
-        help_text=_("The temperature of the chip. E.g.: -20."))
+        null=True,
+        blank=True,
+        help_text=_("The temperature of the chip. E.g.: -20."),
+    )
 
     darks = models.IntegerField(
         _("Darks"),
-        null=True, blank=True,
-        help_text=_("The number of dark frames."))
+        null=True,
+        blank=True,
+        help_text=_("The number of dark frames."),
+    )
 
     flats = models.IntegerField(
         _("Flats"),
-        null=True, blank=True,
-        help_text=_("The number of flat frames."))
+        null=True,
+        blank=True,
+        help_text=_("The number of flat frames."),
+    )
 
     flat_darks = models.IntegerField(
         _("Flat darks"),
-        null=True, blank=True,
-        help_text=_("The number of dark flat frames."))
+        null=True,
+        blank=True,
+        help_text=_("The number of dark flat frames."),
+    )
 
     bias = models.IntegerField(
         _("Bias"),
-        null=True, blank=True,
-        help_text=_("The number of bias/offset frames."))
+        null=True,
+        blank=True,
+        help_text=_("The number of bias/offset frames."),
+    )
 
     bortle = models.IntegerField(
         verbose_name=_("Bortle Dark-Sky Scale"),
@@ -2197,38 +2219,49 @@ class DeepSky_Acquisition(Acquisition):
         blank=True,
         choices=BORTLE_CHOICES,
         help_text=_(
-            "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."),
+            "Quality of the sky according to <a href=\"http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale\" target=\"_blank\">the Bortle Scale</a>."
+        ),
     )
 
     mean_sqm = models.DecimalField(
         verbose_name=_("Mean mag/arcsec^2"),
         help_text=_("As measured with your Sky Quality Meter."),
-        null=True, blank=True,
-        max_digits=5, decimal_places=2)
+        null=True,
+        blank=True,
+        max_digits=5,
+        decimal_places=2,
+    )
 
     mean_fwhm = models.DecimalField(
         _("Mean FWHM"),
-        null=True, blank=True,
-        max_digits=5, decimal_places=2)
+        null=True,
+        blank=True,
+        max_digits=5,
+        decimal_places=2,
+    )
 
     temperature = models.DecimalField(
         _("Temperature"),
         null=True, blank=True,
-        max_digits=5, decimal_places=2,
-        help_text=_("Ambient temperature (in Centigrade degrees)."))
+        max_digits=5,
+        decimal_places=2,
+        help_text=_("Ambient temperature (in Centigrade degrees)."),
+    )
 
     advanced = models.BooleanField(
         editable=False,
-        default=False)
+        default=False,
+    )
 
     saved_on = models.DateTimeField(
         editable=False,
         auto_now=True,
-        null=True)
+        null=True,
+    )
 
     class Meta:
         app_label = 'astrobin'
-        ordering = ['-saved_on', 'filter']
+        ordering = ['saved_on']
 
 
 class SolarSystem_Acquisition(Acquisition):
@@ -2293,7 +2326,7 @@ class SolarSystem_Acquisition(Acquisition):
         verbose_name=_("Transparency"),
         help_text=_("Your estimation of the transparency, on a scale from 1 to 10. Larger is better."),
         null=True,
-        blank=True
+        blank=True,
     )
 
     time = models.CharField(

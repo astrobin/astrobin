@@ -10,64 +10,65 @@ from functools import reduce
 import flickrapi
 import simplejson
 from actstream.models import Action
+from annoying.functions import get_object_or_None
 from django.conf import settings
-from django.contrib import auth
-from django.contrib import messages
+from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.exceptions import MultipleObjectsReturned
-from django.core.paginator import Paginator, InvalidPage
+from django.core.paginator import InvalidPage, Paginator
 from django.db.models import Q
 from django.forms.models import inlineformset_factory
-from django.http import Http404, HttpResponse, HttpResponseBadRequest
-from django.http import HttpResponseForbidden
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect
-from django.shortcuts import render
-from django.template import loader, RequestContext
+from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, render
+from django.template import RequestContext, loader
 from django.template.defaultfilters import filesizeformat
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.datastructures import MultiValueDictKeyError
-from django.utils.translation import ngettext as _n
-from django.utils.translation import ugettext as _
-from django.views.decorators.cache import never_cache, cache_control, cache_page
+from django.utils.translation import ngettext as _n, ugettext as _
+from django.views.decorators.cache import cache_control, cache_page, never_cache
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_GET, require_POST, last_modified
+from django.views.decorators.http import last_modified, require_GET, require_POST
 from django.views.decorators.vary import vary_on_cookie
 from el_pagination.decorators import page_template
 from flickrapi.auth import FlickrAccessToken
 from haystack.query import SearchQuerySet
 from silk.profiling.profiler import silk_profile
 
-from astrobin.context_processors import user_language, common_variables
+from astrobin.context_processors import common_variables, user_language
 from astrobin.enums import SubjectType
-from astrobin.forms import ImageUploadForm, ImageLicenseForm, UserProfileEditBasicForm, \
-    DeepSky_AcquisitionBasicForm, SolarSystem_AcquisitionForm, \
-    DefaultImageLicenseForm, TelescopeEditNewForm, MountEditNewForm, CameraEditNewForm, \
-    FocalReducerEditNewForm, SoftwareEditNewForm, FilterEditNewForm, AccessoryEditNewForm, TelescopeEditForm, \
-    MountEditForm, CameraEditForm, FocalReducerEditForm, SoftwareEditForm, FilterEditForm, AccessoryEditForm, \
-    GearUserInfoForm, LocationEditForm, ImageEditWatermarkForm, DeepSky_AcquisitionForm, \
-    UserProfileEditPreferencesForm, \
-    ImageRevisionUploadForm, UserProfileEditGearForm, DeleteAccountForm
+from astrobin.forms import (
+    AccessoryEditForm, AccessoryEditNewForm, CameraEditForm, CameraEditNewForm,
+    DeepSky_AcquisitionBasicForm, DeepSky_AcquisitionForm, DefaultImageLicenseForm, DeleteAccountForm, FilterEditForm,
+    FilterEditNewForm, FocalReducerEditForm, FocalReducerEditNewForm, GearUserInfoForm, ImageEditWatermarkForm,
+    ImageLicenseForm, ImageRevisionUploadForm, ImageUploadForm, LocationEditForm, MountEditForm, MountEditNewForm,
+    SoftwareEditForm, SoftwareEditNewForm, SolarSystem_AcquisitionForm, TelescopeEditForm, TelescopeEditNewForm,
+    UserProfileEditBasicForm, UserProfileEditGearForm, UserProfileEditPreferencesForm,
+)
 from astrobin.forms.profile_edit_privacy_form import UserProfileEditPrivacyForm
-from astrobin.gear import is_gear_complete, get_correct_gear
-from astrobin.models import Image, UserProfile, Gear, Location, ImageRevision, DeepSky_Acquisition, \
-    SolarSystem_Acquisition, GearUserInfo, Telescope, Mount, Camera, FocalReducer, Software, Filter, \
-    Accessory, App, Acquisition
+from astrobin.gear import get_correct_gear, is_gear_complete
+from astrobin.models import (
+    Accessory, Acquisition, App, Camera, DeepSky_Acquisition, Filter, FocalReducer, Gear,
+    GearUserInfo, Image, ImageRevision, Location, Mount, Software, SolarSystem_Acquisition, Telescope, UserProfile,
+)
 from astrobin.shortcuts import ajax_response, ajax_success
 from astrobin.templatetags.tags import in_upload_wizard
 from astrobin.utils import get_client_country_code
 from astrobin_apps_images.services import ImageService
-from astrobin_apps_platesolving.forms import PlateSolvingSettingsForm, PlateSolvingAdvancedSettingsForm
+from astrobin_apps_platesolving.forms import PlateSolvingAdvancedSettingsForm, PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
 from astrobin_apps_platesolving.services import SolutionService
-from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_restore_from_trash, \
-    can_perform_advanced_platesolving
-from astrobin_apps_premium.utils import premium_get_max_allowed_image_size, premium_get_max_allowed_revisions, \
-    premium_user_has_valid_subscription
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
+    can_perform_advanced_platesolving,
+    can_restore_from_trash,
+)
+from astrobin_apps_premium.utils import (
+    premium_get_max_allowed_image_size, premium_get_max_allowed_revisions,
+    premium_user_has_valid_subscription,
+)
 from astrobin_apps_users.services import UserService
 from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService
@@ -646,10 +647,7 @@ def image_edit_acquisition(request, id):
     deep_sky_acquisition_basic_form = None
     advanced = False
     if edit_type == 'deep_sky' or (image.solution and image.solution.status != Solver.FAILED):
-        advanced = dsa_qs[0].advanced if dsa_qs else False
-        advanced = request.GET['advanced'] if 'advanced' in request.GET else advanced
-        advanced = True if advanced == 'true' else advanced
-        advanced = False if advanced == 'false' else advanced
+        advanced = request.GET.get('advanced', 'false') == 'true' or dsa_qs.count() > 0
 
         if advanced:
             extra = 0
@@ -1015,11 +1013,40 @@ def image_edit_save_acquisition(request):
             for i in request.POST:
                 saving_data[i] = request.POST[i]
 
+            for i in range(0, int(saving_data['deepsky_acquisition_set-INITIAL_FORMS'])):
+                id = saving_data[f'deepsky_acquisition_set-{i}-acquisition_ptr']
+                if id and get_object_or_None(DeepSky_Acquisition, id=id) is None:
+                    obj = DeepSky_Acquisition.objects.create(
+                        date=saving_data[f'deepsky_acquisition_set-{i}-date'] or None,
+                        image=Image.objects_including_wip.get(id=saving_data[f'deepsky_acquisition_set-{i}-image']),
+                        is_synthetic=saving_data[
+                            f'deepsky_acquisition_set-{i}-is_synthetic'] if f'deepsky_acquisition_set-{i}-is_synthetic' in saving_data else False,
+                        filter=get_object_or_None(Filter, id=saving_data[f'deepsky_acquisition_set-{i}-filter']) \
+                            if saving_data[f'deepsky_acquisition_set-{i}-filter'] \
+                            else None,
+                        binning=saving_data[f'deepsky_acquisition_set-{i}-binning'] or None,
+                        number=saving_data[f'deepsky_acquisition_set-{i}-number'],
+                        duration=saving_data[f'deepsky_acquisition_set-{i}-duration'],
+                        iso=saving_data[f'deepsky_acquisition_set-{i}-iso'] or None,
+                        gain=saving_data[f'deepsky_acquisition_set-{i}-gain'] or None,
+                        sensor_cooling=saving_data[f'deepsky_acquisition_set-{i}-sensor_cooling'] or None,
+                        darks=saving_data[f'deepsky_acquisition_set-{i}-darks'] or None,
+                        flats=saving_data[f'deepsky_acquisition_set-{i}-flats'] or None,
+                        flat_darks=saving_data[f'deepsky_acquisition_set-{i}-flat_darks'] or None,
+                        bias=saving_data[f'deepsky_acquisition_set-{i}-bias'] or None,
+                        bortle=saving_data[f'deepsky_acquisition_set-{i}-bortle'] or None,
+                        mean_sqm=saving_data[f'deepsky_acquisition_set-{i}-mean_sqm'] or None,
+                        mean_fwhm=saving_data[f'deepsky_acquisition_set-{i}-mean_fwhm'] or None,
+                        temperature=saving_data[f'deepsky_acquisition_set-{i}-temperature'] or None,
+                        advanced=True,
+                    )
+                    saving_data[f'deepsky_acquisition_set-{i}-acquisition_ptr'] = obj.acquisition_ptr.id
+
             saving_data['advanced'] = advanced
             deep_sky_acquisition_formset = DSAFormSet(
                 saving_data,
                 instance=image,
-                form_kwargs = { 'user': request.user },
+                form_kwargs={'user': request.user},
                 queryset=DeepSky_Acquisition.objects.filter(image=image).order_by('pk')
             )
             response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
