@@ -38,7 +38,7 @@
                 </button>
 
                 <a class="btn btn-danger btn-block-mobile"
-                   href="{% url 'image_edit_acquisition_reset' image.get_id %}">
+                   href="{% url 'image_edit_acquisition_reset' image.get_id %}" data-no-instant>>
                     <i class="icon-exclamation-sign"></i>
                     {% trans "Remove data" %}
                 </a>
@@ -60,7 +60,8 @@
                     {% url 'image_edit_acquisition' image.get_id as basic_form_url %}
                     {% blocktrans trimmed %}
                         Is this too much data for you to handle? Go to the
-                        <a class="button" href="{{ basic_form_url }}?edit_type=deep_sky&advanced=false">basic form</a>.
+                        <a class="button" href="{{ basic_form_url }}?edit_type=deep_sky&advanced=false" data-no-instant>
+                            basic form</a>.
                     {% endblocktrans %}
                 </div>
 
@@ -120,7 +121,9 @@
                         </button>
 
                         <a class="btn btn-block-mobile btn-danger"
-                           href="{% url 'image_edit_acquisition_reset' image.get_id %}">
+                           href="{% url 'image_edit_acquisition_reset' image.get_id %}"
+                           data-no-instant
+                        >
                             <i class="icon-exclamation-sign"></i>
                             {% trans "Remove data" %}
                         </a>
@@ -134,8 +137,8 @@
                     <i class="icon icon-info-sign"></i>
                     {% blocktrans trimmed %}With this form you can input the basic details for the acquisition of your
                         image. If you want to be more thorough or fill in separate details for each filter, go to the
-                        <a class="button" href="{{ advanced_form_url }}?edit_type=deep_sky&advanced=true">advanced
-                            form</a>.{% endblocktrans %}
+                        <a class="button" href="{{ advanced_form_url }}?edit_type=deep_sky&advanced=true"
+                           data-no-instant>advanced form</a>.{% endblocktrans %}
                 </div>
                 <form class="form-horizontal" id="image_acquisition" action="{% url 'image_edit_save_acquisition' %}"
                       method="post">{% csrf_token %}
@@ -151,7 +154,9 @@
                         </button>
 
                         <a class="btn btn-danger btn-block-mobile"
-                           href="{% url 'image_edit_acquisition_reset' image.get_id %}">
+                           href="{% url 'image_edit_acquisition_reset' image.get_id %}"
+                           data-no-instant
+                        >
                             <i class="icon-exclamation-sign"></i>
                             {% trans "Remove data" %}
                         </a>
@@ -165,14 +170,14 @@
             <form class="form-horizontal">{% csrf_token %}
                 <div class="form-actions">
                     <a class="btn btn-primary btn-block-mobile"
-                       href="{% url 'image_edit_acquisition' image.get_id %}?edit_type=solar_system">
+                       href="{% url 'image_edit_acquisition' image.get_id %}?edit_type=solar_system" data-no-instant>
                         {% trans "Solar system" %}
                     </a>
                     <a class="btn btn-primary btn-block-mobile"
-                       href="{% url 'image_edit_acquisition' image.get_id %}?edit_type=deep_sky">
+                       href="{% url 'image_edit_acquisition' image.get_id %}?edit_type=deep_sky" data-no-instant>
                         {% trans "Deep sky" %}
                     </a>
-                    <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">
+                    <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}" data-no-instant>
                         {% trans "Other" %}
                     </a>
                 </div>
