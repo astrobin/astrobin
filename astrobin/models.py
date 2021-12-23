@@ -1712,7 +1712,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
                 'regular_large_sharpened',
                 'hd',
                 'hd_sharpened',
+                'hd_anonymized',
                 'real',
+                'real_anonymized'
         ):
             url = settings.IMAGES_URL + field.name
             cache.set(cache_key + '_animated', url, 60 * 60 * 24)
