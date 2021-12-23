@@ -24,7 +24,7 @@ $(document).ready(function () {
 
             if (!loaded) {
                 setTimeout(function () {
-                    load(url, id, revision, alias, tries, false, randomTimeout).then(function (url) {
+                    load(url, id, revision, alias, tries, false, randomTimeout, false).then(function (url) {
                         var $refreshedImg =
                             $('[data-id="' + id + '"][data-alias="' + alias + '"][data-revision="' + revision + '"]');
                         $refreshedImg.attr('data-loaded', 'true').attr('src', url);
@@ -125,7 +125,7 @@ $(document).ready(function () {
         if (getEnhancedThumbnailUrl !== undefined) {
             $img.attr('data-hires-loaded', false);
             setTimeout(function () {
-                load(getEnhancedThumbnailUrl, id, revision, alias, tries, true, randomTimeout).then(function(url) {
+                load(getEnhancedThumbnailUrl, id, revision, alias, tries, true, randomTimeout, false).then(function(url) {
                     $img.one('load', function () {
                         $enhancementLoadingIndicator.hide();
                     });
@@ -137,7 +137,7 @@ $(document).ready(function () {
         }
     }
 
-    function load(url, id, revision, alias, tries, hires, randomTimeout) {
+    function load(url, id, revision, alias, tries, hires, randomTimeout, bustCache) {
         return new Promise(function(resolve) {
             if (url !== "") {
                 key = getKey(id, revision, alias);
@@ -152,7 +152,7 @@ $(document).ready(function () {
 
                 $.ajax({
                     dataType: 'json',
-                    cache: true,
+                    cache: !bustCache,
                     context: [url, id, revision, alias, hires, tries, randomTimeout],
                     url: url,
                     timeout: 60000,
@@ -170,7 +170,7 @@ $(document).ready(function () {
 
                         if (data.url === undefined || data.url === null || data.url.indexOf("placeholder") > -1) {
                             setTimeout(function () {
-                                load(url, id, revision, alias, tries, hires, randomTimeout).then(function(url) {
+                                load(url, id, revision, alias, tries, hires, randomTimeout, true).then(function(url) {
                                     resolve(url);
                                 })
                             }, randomTimeout * Math.pow(2, tries[key]));
