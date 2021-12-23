@@ -22,7 +22,7 @@ class FutureIotdsViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated, IsIotdJudge]
 
     def get_queryset(self):
-        return self.serializer_class.Meta.model.objects.filter(date__gt=DateTimeService.today())
+        return self.serializer_class.Meta.model.objects.filter(date__gt=DateTimeService.today()).order_by('date')
 
     def create(self, request, *args, **kwargs):
         try:
