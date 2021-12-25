@@ -52,6 +52,7 @@ from astrobin.models import (Collection, DeepSky_Acquisition, Image, ImageRevisi
 from astrobin.stories import add_story
 from astrobin.templatetags.tags import can_like
 from astrobin.utils import get_image_resolution
+from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import can_access_basic_equipment_functions
 from astrobin_apps_groups.forms import AutoSubmitToIotdTpProcessForm, GroupSelectForm
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
@@ -60,7 +61,7 @@ from astrobin_apps_notifications.tasks import push_notification_for_new_image
 from astrobin_apps_platesolving.models import PlateSolvingAdvancedLiveLogEntry, Solution
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
-from common.services import DateTimeService
+from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService
 from nested_comments.models import NestedComment
 
@@ -1085,6 +1086,18 @@ class ImageEditBasicView(ImageEditBaseView):
 
         return image.get_absolute_url()
 
+    def dispatch(self, request, *args, **kwargs):
+        image = self.get_object()
+
+        if can_access_basic_equipment_functions(request.user):
+            return redirect(
+                AppRedirectionService.redirect(
+                    f'/i/{image.get_id()}/edit#1'
+                )
+            )
+
+        return super().dispatch(request, args, kwargs)
+
     def post(self, request, *args, **kwargs):
         image = self.get_object()  # type: Image
         previous_url = image.image_file.url
@@ -1144,6 +1157,18 @@ class ImageEditGearView(ImageEditBaseView):
                 user=image.user, instance=image, data=self.request.POST)
         else:
             return form_class(user=image.user, instance=image)
+
+    def dispatch(self, request, *args, **kwargs):
+        image = self.get_object()
+
+        if can_access_basic_equipment_functions(request.user):
+            return redirect(
+                AppRedirectionService.redirect(
+                    f'/i/{image.get_id()}/edit#5'
+                )
+            )
+
+        return super().dispatch(request, args, kwargs)
 
 
 class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
@@ -1232,6 +1257,18 @@ class ImageEditThumbnailsView(ImageEditBaseView):
         if 'submit_watermark' in self.request.POST:
             return reverse_lazy('image_edit_watermark', kwargs={'id': image.get_id()}) + "?upload"
         return image.get_absolute_url()
+
+    def dispatch(self, request, *args, **kwargs):
+        image = self.get_object()
+
+        if can_access_basic_equipment_functions(request.user):
+            return redirect(
+                AppRedirectionService.redirect(
+                    f'/i/{image.get_id()}/edit#3'
+                )
+            )
+
+        return super().dispatch(request, args, kwargs)
 
     def post(self, request, *args, **kwargs):
         image: Image = self.get_object()
