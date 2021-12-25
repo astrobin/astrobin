@@ -57,6 +57,7 @@ from astrobin.models import (
 from astrobin.shortcuts import ajax_response, ajax_success
 from astrobin.templatetags.tags import in_upload_wizard
 from astrobin.utils import get_client_country_code
+from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import can_access_basic_equipment_functions
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_platesolving.forms import PlateSolvingAdvancedSettingsForm, PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
@@ -596,6 +597,13 @@ def image_edit_watermark(request, id):
     image = get_image_or_404(Image.objects_including_wip, id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
+
+    if can_access_basic_equipment_functions(request.user):
+        return redirect(
+            AppRedirectionService.redirect(
+                f'/i/{image.get_id()}/edit#4'
+            )
+        )
 
     profile = image.user.userprofile
     if not profile.default_watermark_text or profile.default_watermark_text == '':
