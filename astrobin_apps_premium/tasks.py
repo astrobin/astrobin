@@ -1,10 +1,7 @@
 import logging
-from datetime import date
 
-from annoying.functions import get_object_or_None
 from celery import shared_task
 from django.core.management import call_command
-from subscription.models import UserSubscription
 
 log = logging.getLogger("apps")
 
