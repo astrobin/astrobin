@@ -2,11 +2,9 @@ import math
 
 from annoying.functions import get_object_or_None
 from django.contrib.auth.models import User
-from django.contrib.contenttypes.models import ContentType
-from django.db.models import Q
 from django.utils import timezone
 
-from astrobin.models import CameraRenameProposal, Gear, GearRenameRecord, GearMigrationStrategy
+from astrobin.models import CameraRenameProposal, Gear, GearMigrationStrategy, GearRenameRecord
 from astrobin_apps_equipment.models import Camera, EquipmentBrand, Sensor
 from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_notifications.utils import push_notification
