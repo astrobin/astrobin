@@ -102,8 +102,8 @@
   }
 
   .user-card .avatar {
-    width: 142px;
-    height: 142px;
+    width: 140px;
+    height: 140px;
     margin-top: -10px;
   }
 
@@ -278,7 +278,7 @@
   }
 
   .subtle-container .header {
-    width: calc(100% - 12px);
+    width: calc(100% - 8px);
     text-align: center;
 
     .actions {
@@ -352,6 +352,10 @@
     text-align: center;
   }
 
+  .image-description .subtle-container .body {
+    padding: 0 .75rem;
+  }
+
   .revisions-container {
     li.revisions {
       &,
@@ -413,7 +417,11 @@
   }
 
   .subtle-container {
-    padding: 0;
+    padding: 1.5rem 0;
+
+    .header {
+      margin-top: -24px;
+    }
   }
 
   .breadcrumb {
@@ -468,7 +476,7 @@
     }
   }
 
-  .technical-card {
+  .technical-card-acquisition {
     .astrometry-header {
       padding: 0 $spacer-large;
     }

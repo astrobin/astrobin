@@ -51,7 +51,7 @@ from astrobin.forms.uncompressed_source_upload_form import UncompressedSourceUpl
 from astrobin.models import (Collection, DeepSky_Acquisition, Image, ImageRevision, LANGUAGES, SolarSystem_Acquisition)
 from astrobin.stories import add_story
 from astrobin.templatetags.tags import can_like
-from astrobin.utils import get_image_resolution
+from astrobin.utils import get_client_country_code, get_image_resolution
 from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import can_access_basic_equipment_functions
 from astrobin_apps_groups.forms import AutoSubmitToIotdTpProcessForm, GroupSelectForm
 from astrobin_apps_groups.models import Group
@@ -292,62 +292,6 @@ class ImageDetailView(ImageDetailViewBase):
         #############################
         from astrobin.moon import MoonPhase
 
-        gear_list = (
-            (
-                _('Imaging telescopes or lenses'),
-                image.imaging_telescopes.all(),
-                'imaging_telescopes'
-            ),
-
-            (
-                _('Imaging cameras'),
-                image.imaging_cameras.all(),
-                'imaging_cameras'
-            ),
-
-            (
-                _('Mounts'),
-                image.mounts.all(),
-                'mounts'
-            ),
-
-            (
-                _('Guiding telescopes or lenses'),
-                image.guiding_telescopes.all(),
-                'guiding_telescopes'
-            ),
-
-            (
-                _('Guiding cameras'),
-                image.guiding_cameras.all(),
-                'guiding_cameras'
-            ),
-
-            (
-                _('Focal reducers'),
-                image.focal_reducers.all(),
-                'focal_reducers'
-            ),
-
-            (
-                _('Software'),
-                image.software.all(),
-                'software'
-            ),
-
-            (
-                _('Filters'),
-                image.filters.all(),
-                'filters'
-            ),
-
-            (
-                _('Accessory'),
-                image.accessories.all(),
-                'accessories'
-            ),
-        )
-
         deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image)
         ssa = None
         image_type = None
@@ -458,12 +402,13 @@ class ImageDetailView(ImageDetailViewBase):
             deep_sky_data = (
                 (_('Dates'), sorted(dsa_data['dates'])),
                 (_('Frames'),
-                 ('\n' if len(frames_list) > 1 else '') +
+                 '<div class="frames">' +
                  '\n'.join("%s %s" % (
                      "<a href=\"%s\">%s</a>:" % (f[1]['filter_url'], f[1]['filter']) if f[1]['filter'] else '',
                      "%s %s %s %s %s" % (
                          f[1]['integration'], f[1]['iso'], f[1]['gain'], f[1]['sensor_cooling'], f[1]['binning']),
-                 ) for f in frames_list)),
+                 ) for f in frames_list) +
+                 '</div>'),
                 (_('Integration'), DateTimeService.human_time_duration(dsa_data['integration'])),
                 (_('Darks'),
                  '%d' % (int(reduce(lambda x, y: int(x) + int(y), dsa_data['darks'])) / len(dsa_data['darks'])) if
@@ -650,6 +595,8 @@ class ImageDetailView(ImageDetailViewBase):
         if skyplot_zoom1 and not skyplot_zoom1.name.startswith('images/'):
             skyplot_zoom1.name = 'images/' + skyplot_zoom1.name
 
+        search_query = f'{self.request.GET.get("q", "")} {self.request.GET.get("telescope", "")} {self.request.GET.get("camera", "")}'.strip()
+
         response_dict = context.copy()
         response_dict.update({
             'SHARE_PATH': settings.SHORT_BASE_URL,
@@ -707,7 +654,9 @@ class ImageDetailView(ImageDetailViewBase):
                 content_type__app_label='astrobin',
                 content_type__model='image',
                 object_id=image.id).count(),
-            'gear_list': gear_list,
+            'equipment_list': ImageService(image).get_equipment_list(
+                get_client_country_code(self.request)
+            ),
             'image_type': image_type,
             'ssa': ssa,
             'deep_sky_data': deep_sky_data,
@@ -742,7 +691,7 @@ class ImageDetailView(ImageDetailViewBase):
             'w': w,
             'h': h,
             'image_uses_full_width': w is not None and w >= 940,
-            'search_query': f'{self.request.GET.get("q", "")} {self.request.GET.get("telescope", "")} {self.request.GET.get("camera", "")}'.strip(),
+            'search_query': search_query,
         })
 
         return response_dict

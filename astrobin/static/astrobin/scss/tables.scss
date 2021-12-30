@@ -19,6 +19,13 @@
     border-color: $grey-7;
   }
 
+  &.table-borderless {
+    &, tr, td, th {
+      border: 0;
+      background: none;
+    }
+  }
+
   .pagination {
     td {
       padding-top: 60px;

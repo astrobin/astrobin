@@ -6,6 +6,7 @@ from astrobin.enums import SubjectType
 from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.models import Image
 from astrobin.tests.generators import Generators
+from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.tests.platesolving_generators import PlateSolvingGenerators
@@ -417,3 +418,237 @@ class TestImageService(TestCase):
         self.assertTrue(ImageService(image).display_download_menu(image.user))
         self.assertTrue(ImageService(image).display_download_menu(Generators.user()))
         self.assertTrue(ImageService(image).display_download_menu(AnonymousUser))
+
+    def test_get_equipment_list_when_empty(self):
+        image = Generators.image()
+
+        equipment_list = ImageService(image).get_equipment_list()
+
+        self.assertEqual(0, len(equipment_list['imaging_telescopes']))
+        self.assertEqual(0, len(equipment_list['imaging_cameras']))
+        self.assertEqual(0, len(equipment_list['mounts']))
+        self.assertEqual(0, len(equipment_list['filters']))
+        self.assertEqual(0, len(equipment_list['accessories']))
+        self.assertEqual(0, len(equipment_list['software']))
+        self.assertEqual(0, len(equipment_list['guiding_telescopes']))
+        self.assertEqual(0, len(equipment_list['guiding_cameras']))
+
+    def test_get_equipment_list_when_only_legacy_gear(self):
+        image = Generators.image()
+
+        image.imaging_telescopes.add(Generators.telescope(make='My make', name='My imaging telescope'))
+        image.imaging_cameras.add(Generators.camera(make='My make', name='My imaging camera'))
+        image.mounts.add(Generators.mount(make='My make', name='My mount'))
+        image.filters.add(Generators.filter(make='My make', name='My filter'))
+        image.accessories.add(Generators.accessory(make='My make', name='My accessory'))
+        image.focal_reducers.add(Generators.focal_reducer(make='My make', name='My focal reducer'))
+        image.software.add(Generators.software(make='My make', name='My software'))
+        image.guiding_telescopes.add(Generators.telescope(make='My make', name='My guiding telescope'))
+        image.guiding_cameras.add(Generators.camera(make='My make', name='My guiding camera'))
+
+        equipment_list = ImageService(image).get_equipment_list()
+
+        self.assertEqual(1, len(equipment_list['imaging_telescopes']))
+        self.assertEqual(1, len(equipment_list['imaging_cameras']))
+        self.assertEqual(1, len(equipment_list['mounts']))
+        self.assertEqual(1, len(equipment_list['filters']))
+        self.assertEqual(2, len(equipment_list['accessories']))
+        self.assertEqual(1, len(equipment_list['software']))
+        self.assertEqual(1, len(equipment_list['guiding_telescopes']))
+        self.assertEqual(1, len(equipment_list['guiding_cameras']))
+
+        self.assertTrue('id' in equipment_list['imaging_telescopes'][0])
+        self.assertEqual('My make My imaging telescope', equipment_list['imaging_telescopes'][0]['label'])
+        self.assertEqual('LEGACY', equipment_list['imaging_telescopes'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['imaging_cameras'][0])
+        self.assertEqual('My make My imaging camera', equipment_list['imaging_cameras'][0]['label'])
+        self.assertEqual('LEGACY', equipment_list['imaging_cameras'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['mounts'][0])
+        self.assertEqual('My make My mount', equipment_list['mounts'][0]['label'])
+        self.assertEqual('LEGACY', equipment_list['mounts'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['filters'][0])
+        self.assertEqual('My make My filter', equipment_list['filters'][0]['label'])
+        self.assertEqual('LEGACY', equipment_list['filters'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['accessories'][0])
+        self.assertEqual('My make My accessory', equipment_list['accessories'][0]['label'])
+        self.assertEqual('LEGACY', equipment_list['accessories'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['accessories'][1])
+        self.assertEqual('My make My focal reducer', equipment_list['accessories'][1]['label'])
+        self.assertEqual('LEGACY', equipment_list['accessories'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['software'][0])
+        self.assertEqual('My make My software', equipment_list['software'][0]['label'])
+        self.assertEqual('LEGACY', equipment_list['software'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['guiding_telescopes'][0])
+        self.assertEqual('My make My guiding telescope', equipment_list['guiding_telescopes'][0]['label'])
+        self.assertEqual('LEGACY', equipment_list['guiding_telescopes'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['guiding_cameras'][0])
+        self.assertEqual('My make My guiding camera', equipment_list['guiding_cameras'][0]['label'])
+        self.assertEqual('LEGACY', equipment_list['guiding_cameras'][0]['version'])
+
+    def test_get_equipment_list_when_only_new_equipment(self):
+        image = Generators.image()
+
+        brand = EquipmentGenerators.brand(name='My brand')
+
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope(brand=brand, name='My new imaging telescope'))
+        image.imaging_cameras_2.add(EquipmentGenerators.camera(brand=brand, name='My new imaging camera'))
+        image.mounts_2.add(EquipmentGenerators.mount(brand=brand, name='My new mount'))
+        image.filters_2.add(EquipmentGenerators.filter(brand=brand, name='My new filter'))
+        image.accessories_2.add(EquipmentGenerators.accessory(brand=brand, name='My new accessory'))
+        image.software_2.add(EquipmentGenerators.software(brand=brand, name='My new software'))
+        image.guiding_telescopes_2.add(EquipmentGenerators.telescope(brand=brand, name='My new guiding telescope'))
+        image.guiding_cameras_2.add(EquipmentGenerators.camera(brand=brand, name='My new guiding camera'))
+
+        equipment_list = ImageService(image).get_equipment_list()
+
+        self.assertEqual(1, len(equipment_list['imaging_telescopes']))
+        self.assertEqual(1, len(equipment_list['imaging_cameras']))
+        self.assertEqual(1, len(equipment_list['mounts']))
+        self.assertEqual(1, len(equipment_list['filters']))
+        self.assertEqual(1, len(equipment_list['accessories']))
+        self.assertEqual(1, len(equipment_list['software']))
+        self.assertEqual(1, len(equipment_list['guiding_telescopes']))
+        self.assertEqual(1, len(equipment_list['guiding_cameras']))
+
+        self.assertTrue('id' in equipment_list['imaging_telescopes'][0])
+        self.assertEqual('My brand My new imaging telescope', equipment_list['imaging_telescopes'][0]['label'])
+        self.assertEqual('NEW', equipment_list['imaging_telescopes'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['imaging_cameras'][0])
+        self.assertEqual('My brand My new imaging camera', equipment_list['imaging_cameras'][0]['label'])
+        self.assertEqual('NEW', equipment_list['imaging_cameras'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['mounts'][0])
+        self.assertEqual('My brand My new mount', equipment_list['mounts'][0]['label'])
+        self.assertEqual('NEW', equipment_list['mounts'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['filters'][0])
+        self.assertEqual('My brand My new filter', equipment_list['filters'][0]['label'])
+        self.assertEqual('NEW', equipment_list['filters'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['accessories'][0])
+        self.assertEqual('My brand My new accessory', equipment_list['accessories'][0]['label'])
+        self.assertEqual('NEW', equipment_list['accessories'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['software'][0])
+        self.assertEqual('My brand My new software', equipment_list['software'][0]['label'])
+        self.assertEqual('NEW', equipment_list['software'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['guiding_telescopes'][0])
+        self.assertEqual('My brand My new guiding telescope', equipment_list['guiding_telescopes'][0]['label'])
+        self.assertEqual('NEW', equipment_list['guiding_telescopes'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['guiding_cameras'][0])
+        self.assertEqual('My brand My new guiding camera', equipment_list['guiding_cameras'][0]['label'])
+        self.assertEqual('NEW', equipment_list['guiding_cameras'][0]['version'])
+
+    def test_get_equipment_list_when_mix(self):
+        image = Generators.image()
+
+        image.imaging_telescopes.add(Generators.telescope(make='My make', name='My imaging telescope'))
+        image.imaging_cameras.add(Generators.camera(make='My make', name='My imaging camera'))
+        image.mounts.add(Generators.mount(make='My make', name='My mount'))
+        image.filters.add(Generators.filter(make='My make', name='My filter'))
+        image.accessories.add(Generators.accessory(make='My make', name='My accessory'))
+        image.focal_reducers.add(Generators.focal_reducer(make='My make', name='My focal reducer'))
+        image.software.add(Generators.software(make='My make', name='My software'))
+        image.guiding_telescopes.add(Generators.telescope(make='My make', name='My guiding telescope'))
+        image.guiding_cameras.add(Generators.camera(make='My make', name='My guiding camera'))
+
+        brand = EquipmentGenerators.brand(name='My brand')
+
+        image.imaging_telescopes_2.add(EquipmentGenerators.telescope(brand=brand, name='My new imaging telescope'))
+        image.imaging_cameras_2.add(EquipmentGenerators.camera(brand=brand, name='My new imaging camera'))
+        image.mounts_2.add(EquipmentGenerators.mount(brand=brand, name='My new mount'))
+        image.filters_2.add(EquipmentGenerators.filter(brand=brand, name='My new filter'))
+        image.accessories_2.add(EquipmentGenerators.accessory(brand=brand, name='My new accessory'))
+        image.software_2.add(EquipmentGenerators.software(brand=brand, name='My new software'))
+        image.guiding_telescopes_2.add(EquipmentGenerators.telescope(brand=brand, name='My new guiding telescope'))
+        image.guiding_cameras_2.add(EquipmentGenerators.camera(brand=brand, name='My new guiding camera'))
+
+        equipment_list = ImageService(image).get_equipment_list()
+
+        self.assertEqual(2, len(equipment_list['imaging_telescopes']))
+        self.assertEqual(2, len(equipment_list['imaging_cameras']))
+        self.assertEqual(2, len(equipment_list['mounts']))
+        self.assertEqual(2, len(equipment_list['filters']))
+        self.assertEqual(3, len(equipment_list['accessories']))
+        self.assertEqual(2, len(equipment_list['software']))
+        self.assertEqual(2, len(equipment_list['guiding_telescopes']))
+        self.assertEqual(2, len(equipment_list['guiding_cameras']))
+
+        self.assertTrue('id' in equipment_list['imaging_telescopes'][0])
+        self.assertEqual('My brand My new imaging telescope', equipment_list['imaging_telescopes'][0]['label'])
+        self.assertEqual('NEW', equipment_list['imaging_telescopes'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['imaging_cameras'][0])
+        self.assertEqual('My brand My new imaging camera', equipment_list['imaging_cameras'][0]['label'])
+        self.assertEqual('NEW', equipment_list['imaging_cameras'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['mounts'][0])
+        self.assertEqual('My brand My new mount', equipment_list['mounts'][0]['label'])
+        self.assertEqual('NEW', equipment_list['mounts'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['filters'][0])
+        self.assertEqual('My brand My new filter', equipment_list['filters'][0]['label'])
+        self.assertEqual('NEW', equipment_list['filters'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['accessories'][0])
+        self.assertEqual('My brand My new accessory', equipment_list['accessories'][0]['label'])
+        self.assertEqual('NEW', equipment_list['accessories'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['software'][0])
+        self.assertEqual('My brand My new software', equipment_list['software'][0]['label'])
+        self.assertEqual('NEW', equipment_list['software'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['guiding_telescopes'][0])
+        self.assertEqual('My brand My new guiding telescope', equipment_list['guiding_telescopes'][0]['label'])
+        self.assertEqual('NEW', equipment_list['guiding_telescopes'][0]['version'])
+
+        self.assertTrue('id' in equipment_list['guiding_cameras'][0])
+        self.assertEqual('My brand My new guiding camera', equipment_list['guiding_cameras'][0]['label'])
+        self.assertEqual('NEW', equipment_list['guiding_cameras'][0]['version'])
+        
+        self.assertTrue('id' in equipment_list['imaging_telescopes'][1])
+        self.assertEqual('My make My imaging telescope', equipment_list['imaging_telescopes'][1]['label'])
+        self.assertEqual('LEGACY', equipment_list['imaging_telescopes'][1]['version'])
+
+        self.assertTrue('id' in equipment_list['imaging_cameras'][1])
+        self.assertEqual('My make My imaging camera', equipment_list['imaging_cameras'][1]['label'])
+        self.assertEqual('LEGACY', equipment_list['imaging_cameras'][1]['version'])
+
+        self.assertTrue('id' in equipment_list['mounts'][1])
+        self.assertEqual('My make My mount', equipment_list['mounts'][1]['label'])
+        self.assertEqual('LEGACY', equipment_list['mounts'][1]['version'])
+
+        self.assertTrue('id' in equipment_list['filters'][1])
+        self.assertEqual('My make My filter', equipment_list['filters'][1]['label'])
+        self.assertEqual('LEGACY', equipment_list['filters'][1]['version'])
+
+        self.assertTrue('id' in equipment_list['accessories'][1])
+        self.assertEqual('My make My accessory', equipment_list['accessories'][1]['label'])
+        self.assertEqual('LEGACY', equipment_list['accessories'][1]['version'])
+
+        self.assertTrue('id' in equipment_list['accessories'][2])
+        self.assertEqual('My make My focal reducer', equipment_list['accessories'][2]['label'])
+        self.assertEqual('LEGACY', equipment_list['accessories'][2]['version'])
+
+        self.assertTrue('id' in equipment_list['software'][1])
+        self.assertEqual('My make My software', equipment_list['software'][1]['label'])
+        self.assertEqual('LEGACY', equipment_list['software'][1]['version'])
+
+        self.assertTrue('id' in equipment_list['guiding_telescopes'][1])
+        self.assertEqual('My make My guiding telescope', equipment_list['guiding_telescopes'][1]['label'])
+        self.assertEqual('LEGACY', equipment_list['guiding_telescopes'][1]['version'])
+
+        self.assertTrue('id' in equipment_list['guiding_cameras'][1])
+        self.assertEqual('My make My guiding camera', equipment_list['guiding_cameras'][1]['label'])
+        self.assertEqual('LEGACY', equipment_list['guiding_cameras'][1]['version'])

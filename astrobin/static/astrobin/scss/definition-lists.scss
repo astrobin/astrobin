@@ -1,0 +1,49 @@
+dl {
+  @media (max-width: 767px) {
+    padding-left: .75rem;
+    padding-right: .75rem;
+  }
+
+  dt {
+    color: $white;
+    font-weight: bold;
+  }
+
+  &.dl-horizontal {
+    @media (max-width: 979px) {
+      dt {
+        margin-bottom: .5rem;
+        float: none !important;
+        clear: none !important;
+        width: auto !important;
+        text-align: left !important;
+      }
+
+      dd {
+        margin-left: 0 !important;
+
+        &:not(:last-child) {
+          margin-bottom: 1.5rem;
+        }
+      }
+    }
+
+    @media (min-width: 980px) {
+      dt {
+        float: left !important;
+        width: auto !important;
+        clear: left !important;
+        text-align: left !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        margin-right: .5rem;
+      }
+
+      dd {
+        margin-left: 0;
+        margin-bottom: .5rem;
+      }
+    }
+  }
+}

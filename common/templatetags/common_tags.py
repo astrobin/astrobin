@@ -290,3 +290,8 @@ def highlight_text(parser, token):
 @register.filter
 def highlight_text_filter(text, terms):
     return HighlightingService(text, terms).render_html()
+
+
+@register.simple_tag
+def get_verbose_field_name(instance, field_name):
+    return instance._meta.get_field(field_name).verbose_name.title()

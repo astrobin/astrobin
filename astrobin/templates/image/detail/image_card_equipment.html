@@ -1,0 +1,179 @@
+{% load common_tags %}
+{% load astrobin_apps_equipment_tags %}
+{% load astrobin_apps_premium_tags %}
+{% load astrobin_apps_platesolving_tags %}
+{% load astrobin_apps_remote_source_affiliation_tags %}
+{% load i18n %}
+{% load tags %}
+
+{% if image|can_add_technical_details %}
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="subtle-container technical-card-equipment">
+                <div class="header">
+                    <h4>
+                        <i class="icon-camera"></i> {% trans "Equipment" %}
+
+                        {% if request.user|allow_lite_retailer_integration:image.user %}
+                            {# Lighter retailer integration for those who disabled ads. #}
+                            {% with gear_with_brand_listings=image|gear_items_with_brand_listings:REQUEST_COUNTRY gear_with_item_listings=image|gear_items_with_item_listings:REQUEST_COUNTRY %}
+                                <div class="actions">
+                                    {% if gear_with_brand_listings|length or gear_with_item_listings|length %}
+                                        <div class="dropdown retailer-affiliate-products-lite">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <i class="icon-shopping-cart"></i>
+                                            </a>
+                                            <ul class="dropdown-menu pull-right">
+                                                {% if gear_with_brand_listings|length %}
+                                                    <li class="nav-header">{% trans "Sponsored brands" %}</li>
+                                                    {% with image|unique_equipment_brand_listings:REQUEST_COUNTRY as listings %}
+                                                        {% for listing in listings %}
+                                                            <li>
+                                                                {% equipment_listing_url_with_tags listing 'card' as url_with_tags %}
+                                                                <a href="{{ url_with_tags }}"
+                                                                   onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')"
+                                                                   target="_blank">
+                                                                    {% blocktrans trimmed with name=listing.brand retailer=listing.retailer %}
+                                                                        Shop <strong>{{ name }}</strong> at
+                                                                        {{ retailer }}
+                                                                    {% endblocktrans %}
+                                                                </a>
+                                                            </li>
+                                                        {% endfor %}
+                                                    {% endwith %}
+                                                {% endif %}
+
+                                                {% if gear_with_item_listings|length %}
+
+                                                    {% if gear_with_brand_listings|length %}
+                                                        <li class="divider"></li>
+                                                    {% endif %}
+
+                                                    <li class="nav-header">{% trans "Sponsored items" %}</li>
+                                                    {% with image|unique_equipment_item_listings:REQUEST_COUNTRY as listings %}
+                                                        {% for listing in listings %}
+                                                            <li>
+                                                                {% equipment_listing_url_with_tags listing 'card' as url_with_tags %}
+                                                                <a href="{{ url_with_tags }}"
+                                                                   onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')"
+                                                                   target="_blank">
+                                                                    {% blocktrans trimmed with name=listing.name retailer=listing.retailer %}
+                                                                        Shop <strong>{{ name }}</strong> at
+                                                                        {{ retailer }}
+                                                                    {% endblocktrans %}
+                                                                </a>
+                                                            </li>
+                                                        {% endfor %}
+                                                    {% endwith %}
+                                                {% endif %}
+
+                                                <li class="divider"></li>
+
+                                                <li>
+                                                    <a data-toggle="modal"
+                                                            {% if request.user|can_remove_ads %}
+                                                       href="#remove-ads-modal"
+                                                            {% else %}
+                                                       href="#feature-restricted-modal"
+                                                            {% endif %}
+                                                    >
+                                                        {% trans "Disable retailer integration" %}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    {% endif %} {# gear_with_brand_listings|length or gear_with_item_listings|length #}
+                                </div> {# ./actions #}
+                            {% endwith %} {# gear_with_brand_listings and gear_with_item_listings #}
+                        {% endif %}
+                    </h4>
+                </div> <!-- header -->
+
+                <div class="body">
+                    <dl class="dl-horizontal">
+                        {% for klass, items in equipment_list.items %}
+                            {% if items|length > 0 %}
+                                <dt>{% get_verbose_field_name image klass %}</dt>
+                                <dd>
+                                    {% for item in items %}
+                                        {% if item.version == 'LEGACY' %}
+                                            <span
+                                                rel="popover"
+                                                class="gear-popover-label"
+                                                data-load="{% url 'gear_popover_ajax' item.id image.id %}?q={{ search_query|urlencode }}{% if 'DEBUG_COUNTRY' in request.GET %}&DEBUG_COUNTRY={{ request.GET|get_item:'DEBUG_COUNTRY' }}{% endif %}"
+                                            >
+                                                {% highlight_text item.label with search_query %}
+                                            </span>
+
+                                            {# Shopping cart #}
+                                            {% if request.user|allow_full_retailer_integration:image.user or item.object|has_matching_brand_request_query:search_query %}
+                                                {% if item.object|equipment_item_listings:REQUEST_COUNTRY|length %}
+                                                    {% with item.object|equipment_item_listings:REQUEST_COUNTRY as listings %}
+                                                        {% equipment_listing_url_with_tags listings.all.0 'card' as url_with_tags %}
+                                                        <a class="retailer-affiliate-cart-link"
+                                                           href="{{ url_with_tags }}"
+                                                           onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')"
+                                                           target="_blank">
+                                                            <i class="icon-shopping-cart" rel="tooltip"
+                                                               data-placement="bottom" title="
+                                                                   {% blocktrans trimmed with name=listings.all.0.name retailer=listings.all.0.retailer %}
+                                                                       Shop {{ name }} at {{ retailer }}
+                                                                   {% endblocktrans %}
+                                                                "></i>
+                                                        </a>
+                                                    {% endwith %}
+                                                {% elif item.object|equipment_brand_listings:REQUEST_COUNTRY|length %}
+                                                    {% with item.object|equipment_brand_listings:REQUEST_COUNTRY as listings %}
+                                                        {% if listings|length == 1 %}
+                                                            {% equipment_listing_url_with_tags listings.all.0 'card' as url_with_tags %}
+                                                            <a class="retailer-affiliate-cart-link"
+                                                               href="{{ url_with_tags }}"
+                                                               onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')"
+                                                               target="_blank">
+                                                                <i class="icon-shopping-cart" rel="tooltip"
+                                                                   data-placement="bottom" title="
+                                                                   {% blocktrans trimmed with name=listings.all.0.brand retailer=listings.all.0.retailer %}
+                                                                       Shop {{ name }} at {{ retailer }}
+                                                                   {% endblocktrans %}
+                                                                "></i>
+                                                            </a>
+                                                        {% else %}
+                                                            <span rel="popover"
+                                                                  class="gear-popover-label"
+                                                                  data-load="{% url 'gear_popover_ajax' item.id image.id %}{% if 'DEBUG_COUNTRY' in request.GET %}?DEBUG_COUNTRY={{ request.GET|get_item:'DEBUG_COUNTRY' }}{% endif %}">
+                                                                <i class="icon-shopping-cart"
+                                                                   rel="tooltip"
+                                                                   data-placement="bottom"
+                                                                   title="{% blocktrans trimmed with name=listings.all.0.brand %}Shop {{ name }} at AstroBin's partners{% endblocktrans %}"
+                                                                >
+                                                                </i>
+                                                            </span>
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                {% endif %}
+                                            {% endif %}
+                                            {# ./Shopping cart #}
+                                        {% else %}
+                                            {% with url='/equipment/explorer/'|add:item.type|add:'/'|add:item.id %}
+                                                <a href="{% app_redirection_service url %}">
+                                                    {% highlight_text item.label with search_query %}
+                                                </a>
+                                            {% endwith %}
+                                        {% endif %}
+
+                                        {% if not forloop.last %}
+                                            &middot;
+                                        {% endif %}
+                                    {% endfor %}
+                                </dd>
+                            {% endif %}
+                        {% endfor %}
+                    </dl>
+                </div>
+            </div> <!-- ./subtle-container -->
+        </div> <!-- ./span -->
+    </div> <!-- ./row -->
+
+{% endif %} {# ./image|can_add_technical_details #}
+
