@@ -3405,7 +3405,7 @@ class ImageTest(TestCase):
     def test_image_gear_list_is_hidden(self):
         image = Generators.image()
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertNotContains(response, "<div class=\"technical-card-equipment\">")
+        self.assertNotContains(response, "<div class=\"subtle-container technical-card-equipment\">")
         image.delete()
 
     def test_image_gear_list_is_shown(self):
@@ -3417,7 +3417,7 @@ class ImageTest(TestCase):
         image.save()
 
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "<div class=\"technical-card-equipment\">")
+        self.assertContains(response, "<div class=\"subtle-container technical-card-equipment\">")
 
         telescope.delete()
         image.delete()
