@@ -6,7 +6,7 @@
 {% load i18n %}
 {% load tags %}
 
-{% if image|can_add_technical_details %}
+{% if image|can_add_technical_details and equipment_list|equipment_list_has_items %}
 
     <div class="row-fluid">
         <div class="span12">
