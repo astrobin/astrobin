@@ -1,15 +1,22 @@
 {% load astrobin_apps_images_tags %}
 {% load i18n %}
 
-{% if in_public_groups and not image.is_wip or image.user == request.user %}
+{% if in_public_groups %}
     <div class="subtle-container image-groups">
-        <div class="header"><h4><i class="icon-group"></i> {% trans "In these public groups" %}</h4></div>
+        <div class="header">
+            <h4>
+                <i class="icon-group"></i> {% trans "In these public groups" %}
+            </h4>
+        </div>
+
         <table class="table table-condensed table-striped">
             <tbody>
                 {% for group in in_public_groups %}
-                    <tr><td>
-                        <a href="{% url 'group_detail' group.pk group.slug %}">{{group.name}}</a>
-                    </td></tr>
+                    <tr>
+                        <td>
+                            <a href="{% url 'group_detail' group.pk group.slug %}">{{group.name}}</a>
+                        </td>
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>
