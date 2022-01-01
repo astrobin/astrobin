@@ -158,6 +158,60 @@ class IotdStaffMemberSettings(models.Model):
     )
 
 
+class IotdSubmissionQueueEntry(models.Model):
+    submitter = models.ForeignKey(
+        User,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+        related_name='submission_queue_entries',
+    )
+
+    image = models.ForeignKey(
+        Image,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+        related_name='submission_queue_entries',
+    )
+
+    published = models.DateTimeField(
+        null=False,
+        blank=False,
+    )
+
+    class Meta:
+        unique_together = ('submitter', 'image',)
+        ordering = ('published',)
+
+
+class IotdReviewQueueEntry(models.Model):
+    reviewer = models.ForeignKey(
+        User,
+        null = False,
+        blank = False,
+        on_delete = models.CASCADE,
+        related_name = 'review_queue_entries',
+    )
+
+    image = models.ForeignKey(
+        Image,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+        related_name='review_queue_entries',
+    )
+
+    last_submission_timestamp = models.DateTimeField(
+        null=False,
+        blank=False,
+    )
+
+    class Meta:
+        unique_together = ('reviewer', 'image',)
+        ordering = ('last_submission_timestamp',)
+
+
 class IotdJudgementQueueEntry(models.Model):
     judge = models.ForeignKey(
         User,

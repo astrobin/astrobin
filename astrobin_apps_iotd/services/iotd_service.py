@@ -4,13 +4,14 @@ from typing import List
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.db.models import Count, OuterRef, Q, QuerySet, Subquery, Value
+from django.db.models import Count, OuterRef, Q, Subquery
 from django.utils.translation import gettext
 
 from astrobin.enums import SubjectType
 from astrobin.models import Image
 from astrobin_apps_iotd.models import (
-    Iotd, IotdJudgementQueueEntry, IotdQueueSortOrder, IotdStaffMemberSettings, IotdSubmission, IotdVote,
+    Iotd, IotdJudgementQueueEntry, IotdQueueSortOrder, IotdReviewQueueEntry, IotdStaffMemberSettings, IotdSubmission,
+    IotdSubmissionQueueEntry, IotdVote,
     TopPickArchive,
     TopPickNominationsArchive,
 )
@@ -50,14 +51,7 @@ class IotdService:
     def get_top_pick_nominations(self):
         return TopPickNominationsArchive.objects.all()
 
-    def get_submission_queue(self, submitter: User, queue_sort_order: str = None) -> \
-            List[Image]:
-        def can_add(image: Image) -> bool:
-            # Since the introduction of the 2020 plans, Free users cannot participate in the IOTD/TP.
-            user_is_free: bool = is_free(image.user)
-
-            return not user_is_free
-
+    def get_submission_queue(self, submitter: User, queue_sort_order: str = None) -> List[Image]:
         member_settings: IotdStaffMemberSettings
         member_settings, created = IotdStaffMemberSettings.objects.get_or_create(user=submitter)
         queue_sort_order_before = member_settings.queue_sort_order
@@ -74,39 +68,13 @@ class IotdService:
             '-published' if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST else 'published'
         ]
 
-        images = Image.objects \
-            .annotate(
-            num_dismissals=Count('iotddismissedimage', distinct=True),
-        ) \
-            .filter(
-            Q(
-                Q(moderator_decision=1) &
-                Q(published__gte=datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS)) &
-                Q(designated_iotd_submitters=submitter) &
-                Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &
-                Q(
-                    Q(iotd__isnull=True) |
-                    Q(iotd__date__gt=datetime.now().date())
-                )
-            ) &
-            ~Q(
-                Q(user__userprofile__exclude_from_competitions=True) |
-                Q(user=submitter) |
-                Q(subject_type__in=(SubjectType.GEAR, SubjectType.OTHER)) |
-                Q(
-                    Q(iotdsubmission__submitter=submitter) &
-                    Q(iotdsubmission__date__lt=date.today())
-                ) |
-                Q(iotddismissedimage__user=submitter)
-            )
-        ).order_by(*order_by)
-
-        return [x for x in images if can_add(x)]
+        return [
+            x.image for x in IotdSubmissionQueueEntry.objects \
+                .select_related('image') \
+                .filter(submitter=submitter).order_by(*order_by)
+        ]
 
     def get_review_queue(self, reviewer: User, queue_sort_order: str = None) -> List[Image]:
-        days = settings.IOTD_REVIEW_WINDOW_DAYS
-        cutoff = datetime.now() - timedelta(days)
-
         member_settings: IotdStaffMemberSettings
         member_settings, created = IotdStaffMemberSettings.objects.get_or_create(user=reviewer)
         queue_sort_order_before = member_settings.queue_sort_order
@@ -125,29 +93,16 @@ class IotdService:
                 else 'last_submission_timestamp'
         ]
 
-        return [x for x in Image.objects.annotate(
-            num_submissions=Count('iotdsubmission', distinct=True),
-            num_dismissals=Count('iotddismissedimage', distinct=True),
-            last_submission_timestamp=Subquery(IotdSubmission.last_for_image(OuterRef('pk')).values('date'))
-        ).filter(
-            Q(deleted__isnull=True) &
-            Q(last_submission_timestamp__gte=cutoff) &
-            Q(designated_iotd_reviewers=reviewer) &
-            Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) &
-            Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &
-            Q(
-                Q(iotd__isnull=True) |
-                Q(iotd__date__gt=datetime.now().date())
-            )
-        ).exclude(
-            Q(iotdsubmission__submitter=reviewer) |
-            Q(user=reviewer) |
-            Q(iotddismissedimage__user=reviewer) |
-            Q(
-                Q(iotdvote__reviewer=reviewer) &
-                Q(iotdvote__date__lt=DateTimeService.today())
-            )
-        ).order_by(*order_by)]
+        images = []
+
+        for entry in IotdReviewQueueEntry.objects \
+                .select_related('image') \
+                .filter(reviewer=reviewer).order_by(*order_by).iterator():
+            image = entry.image
+            image.last_submission_timestamp = entry.last_submission_timestamp
+            images.append(image)
+
+        return images
 
     def get_judgement_queue(self, judge: User, queue_sort_order: str = None):
         member_settings: IotdStaffMemberSettings
@@ -279,6 +234,93 @@ class IotdService:
                 TopPickArchive.objects.create(image=item)
             except IntegrityError:
                 continue
+
+    def update_submission_queues(self):
+        def _can_add(image: Image) -> bool:
+            # Since the introduction of the 2020 plans, Free users cannot participate in the IOTD/TP.
+            user_is_free: bool = is_free(image.user)
+
+            return not user_is_free
+
+        def _compute_queue(submitter: User):
+            days = settings.IOTD_SUBMISSION_WINDOW_DAYS
+            cutoff = datetime.now() - timedelta(days)
+
+            return Image.objects \
+                .annotate(
+                num_dismissals=Count('iotddismissedimage', distinct=True),
+            ) \
+                .filter(
+                Q(
+                    Q(moderator_decision=1) &
+                    Q(published__gte=cutoff) &
+                    Q(designated_iotd_submitters=submitter) &
+                    Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &
+                    Q(
+                        Q(iotd__isnull=True) |
+                        Q(iotd__date__gt=datetime.now().date())
+                    )
+                ) &
+                ~Q(
+                    Q(user__userprofile__exclude_from_competitions=True) |
+                    Q(user=submitter) |
+                    Q(subject_type__in=(SubjectType.GEAR, SubjectType.OTHER)) |
+                    Q(
+                        Q(iotdsubmission__submitter=submitter) &
+                        Q(iotdsubmission__date__lt=date.today())
+                    ) |
+                    Q(iotddismissedimage__user=submitter)
+                )
+            )
+
+        for submitter in User.objects.filter(groups__name='iotd_submitters'):
+            IotdSubmissionQueueEntry.objects.filter(submitter=submitter).delete()
+            for image in _compute_queue(submitter).iterator():
+                if _can_add(image):
+                    IotdSubmissionQueueEntry.objects.create(
+                        submitter=submitter,
+                        image=image,
+                        published=image.published
+                    )
+
+    def update_review_queues(self):
+        def _compute_queue(reviewer: User):
+            days = settings.IOTD_REVIEW_WINDOW_DAYS
+            cutoff = datetime.now() - timedelta(days)
+
+            return Image.objects.annotate(
+                num_submissions=Count('iotdsubmission', distinct=True),
+                num_dismissals=Count('iotddismissedimage', distinct=True),
+                last_submission_timestamp=Subquery(IotdSubmission.last_for_image(OuterRef('pk')).values('date'))
+            ).filter(
+                Q(deleted__isnull=True) &
+                Q(last_submission_timestamp__gte=cutoff) &
+                Q(designated_iotd_reviewers=reviewer) &
+                Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) &
+                Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &
+                Q(
+                    Q(iotd__isnull=True) |
+                    Q(iotd__date__gt=datetime.now().date())
+                )
+            ).exclude(
+                Q(iotdsubmission__submitter=reviewer) |
+                Q(user=reviewer) |
+                Q(iotddismissedimage__user=reviewer) |
+                Q(
+                    Q(iotdvote__reviewer=reviewer) &
+                    Q(iotdvote__date__lt=DateTimeService.today())
+                )
+            )
+
+        for reviewer in User.objects.filter(groups__name='iotd_reviewers'):
+            IotdReviewQueueEntry.objects.filter(reviewer=reviewer).delete()
+            for image in _compute_queue(reviewer).iterator():
+                last_submission = IotdSubmission.last_for_image(image.pk).first()
+                IotdReviewQueueEntry.objects.create(
+                    reviewer=reviewer,
+                    image=image,
+                    last_submission_timestamp=last_submission.date
+                )
 
     def update_judgement_queues(self):
         def _compute_queue(judge: User):

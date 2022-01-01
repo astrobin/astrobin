@@ -10,7 +10,7 @@ from astrobin_apps_iotd.models import (
     Iotd, IotdDismissedImage, IotdQueueSortOrder, IotdStaffMemberSettings, IotdSubmission, IotdVote,
 )
 from astrobin_apps_iotd.services import IotdService
-from astrobin_apps_iotd.tasks import update_judgement_queues
+from astrobin_apps_iotd.tasks import update_judgement_queues, update_review_queues, update_submission_queues
 from astrobin_apps_iotd.tests.iotd_generators import IotdGenerators
 from common.services import DateTimeService
 
@@ -517,6 +517,8 @@ class IotdServiceTest(TestCase):
         image = Generators.image(user=user)
         image.designated_iotd_submitters.add(submitter)
 
+        update_submission_queues()
+
         self.assertEqual(1, len(IotdService().get_submission_queue(submitter)))
 
     def test_get_submission_queue(self):
@@ -580,6 +582,8 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
+        update_submission_queues()
+
         self.assertEqual(1, len(IotdService().get_submission_queue(submitter)))
 
     def test_get_submission_queue_already_submitted_before_window(self):
@@ -631,9 +635,13 @@ class IotdServiceTest(TestCase):
         IotdDismissedImage.objects.create(user=submitter1, image=image)
         IotdDismissedImage.objects.create(user=submitter2, image=image)
 
+        update_submission_queues()
+
         self.assertEqual(1, len(IotdService().get_submission_queue(submitter4)))
 
         IotdDismissedImage.objects.create(user=submitter3, image=image)
+
+        update_submission_queues()
 
         self.assertEqual(0, len(IotdService().get_submission_queue(submitter4)))
 
@@ -665,6 +673,8 @@ class IotdServiceTest(TestCase):
         IotdGenerators.vote(image=image)
         IotdGenerators.iotd(image=image, date=datetime.now().date() + timedelta(1))
 
+        update_submission_queues()
+
         self.assertEqual(1, len(IotdService().get_submission_queue(submitter)))
 
     def test_get_submission_queue_sort_order(self):
@@ -678,10 +688,14 @@ class IotdServiceTest(TestCase):
         image1.designated_iotd_submitters.add(submitter)
         image2.designated_iotd_submitters.add(submitter)
 
+        update_submission_queues()
+
         queue = IotdService().get_submission_queue(submitter)
         self.assertEqual(2, len(queue))
         self.assertEqual(image1, queue[1])
         self.assertEqual(image2, queue[0])
+
+        update_submission_queues()
 
         queue = IotdService().get_submission_queue(submitter, 'oldest')
         self.assertEqual(2, len(queue))
@@ -716,6 +730,8 @@ class IotdServiceTest(TestCase):
             submitter=submitter2,
             image=image
         )
+
+        update_review_queues()
 
         self.assertEqual(1, len(IotdService().get_review_queue(reviewer)))
 
@@ -792,6 +808,8 @@ class IotdServiceTest(TestCase):
         image.published = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(1)
         image.save()
 
+        update_review_queues()
+
         self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
 
         image.published = datetime.now()
@@ -802,6 +820,8 @@ class IotdServiceTest(TestCase):
 
         image.published = settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START - timedelta(1)
         image.save()
+
+        update_review_queues()
 
         self.assertEqual(1, len(IotdService().get_review_queue(reviewer)))
 
@@ -868,9 +888,13 @@ class IotdServiceTest(TestCase):
         submission2 = IotdGenerators.submission(submitter=submitter2, image=image)
         IotdSubmission.objects.filter(pk=submission2.pk).update(date=datetime.now() - timedelta(3))
 
+        update_review_queues()
+
         self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
 
         IotdSubmission.objects.filter(pk=submission2.pk).update(date=datetime.now() - timedelta(1))
+
+        update_review_queues()
 
         self.assertEqual(1, len(IotdService().get_review_queue(reviewer)))
 
@@ -981,6 +1005,8 @@ class IotdServiceTest(TestCase):
             image=image
         )
 
+        update_review_queues()
+
         self.assertEqual(1, len(IotdService().get_review_queue(reviewer3)))
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1)
@@ -1010,6 +1036,8 @@ class IotdServiceTest(TestCase):
             reviewer=reviewer,
             image=image
         )
+
+        update_review_queues()
 
         self.assertEqual(1, len(IotdService().get_review_queue(reviewer)))
 
@@ -1057,9 +1085,13 @@ class IotdServiceTest(TestCase):
         IotdSubmission.objects.create(submitter=submitter2, image=image)
         IotdSubmission.objects.create(submitter=submitter3, image=image)
 
+        update_review_queues()
+
         self.assertEqual(1, len(IotdService().get_review_queue(reviewer)))
 
         IotdDismissedImage.objects.create(user=reviewer, image=image)
+
+        update_review_queues()
 
         self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
 
@@ -1081,14 +1113,20 @@ class IotdServiceTest(TestCase):
         IotdSubmission.objects.create(submitter=submitter2, image=image)
         IotdSubmission.objects.create(submitter=submitter3, image=image)
 
+        update_review_queues()
+
         self.assertEqual(1, len(IotdService().get_review_queue(reviewer)))
 
         IotdDismissedImage.objects.create(user=submitter1, image=image)
         IotdDismissedImage.objects.create(user=submitter2, image=image)
 
+        update_review_queues()
+
         self.assertEqual(1, len(IotdService().get_review_queue(reviewer)))
 
         IotdDismissedImage.objects.create(user=submitter3, image=image)
+
+        update_review_queues()
 
         self.assertEqual(0, len(IotdService().get_review_queue(reviewer)))
 
@@ -1117,10 +1155,14 @@ class IotdServiceTest(TestCase):
         IotdSubmission.objects.create(submitter=submitter2, image=image2)
         IotdSubmission.objects.create(submitter=submitter3, image=image2)
 
+        update_review_queues()
+
         queue = IotdService().get_review_queue(reviewer)
         self.assertEqual(2, len(queue))
         self.assertEqual(image1, queue[1])
         self.assertEqual(image2, queue[0])
+
+        update_review_queues()
 
         queue = IotdService().get_review_queue(reviewer, 'oldest')
         self.assertEqual(2, len(queue))
@@ -1163,6 +1205,8 @@ class IotdServiceTest(TestCase):
 
         submission4.date = DateTimeService.now() - timedelta(minutes=1)
         submission4.save()
+
+        update_review_queues()
 
         queue = IotdService().get_review_queue(reviewer)
         self.assertEqual(1, len(queue))
