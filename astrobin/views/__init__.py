@@ -1269,6 +1269,7 @@ def user_page(request, username):
                             SubjectType.WIDE_FIELD,
                             SubjectType.STAR_TRAILS,
                             SubjectType.NORTHERN_LIGHTS,
+                            SubjectType.NOCTILUCENT_CLOUDS,
                             SubjectType.OTHER
                         )) &
                         Q(acquisition=None) | Q(acquisition__date=None)).distinct()
@@ -1316,6 +1317,8 @@ def user_page(request, username):
             menu += [('SOLAR', _("Solar system"))]
             menu += [('WIDE', _("Extremely wide field"))]
             menu += [('TRAILS', _("Star trails"))]
+            menu += [('NORTHERN_LIGHTS', _("Northern lights"))]
+            menu += [('NOCTILUCENT_CLOUDS', _("Noctilucent clouds"))]
             menu += [('GEAR', _("Gear"))]
             menu += [('OTHER', _("Other"))]
 
@@ -1333,6 +1336,12 @@ def user_page(request, username):
 
             elif active == 'TRAILS':
                 qs = qs.filter(subject_type=SubjectType.STAR_TRAILS)
+
+            elif active == 'NORTHERN_LIGHTS':
+                qs = qs.filter(subject_type=SubjectType.NORTHERN_LIGHTS)
+
+            elif active == 'NOCTILUCENT_CLOUDS':
+                qs = qs.filter(subject_type=SubjectType.NOCTILUCENT_CLOUDS)
 
             elif active == 'GEAR':
                 qs = qs.filter(subject_type=SubjectType.GEAR)
@@ -1389,7 +1398,14 @@ def user_page(request, username):
 
             if active == 'SUB':
                 qs = qs.filter(
-                    (Q(subject_type=SubjectType.DEEP_SKY) | Q(subject_type=SubjectType.SOLAR_SYSTEM)) &
+                    (
+                            Q(subject_type=SubjectType.DEEP_SKY) |
+                            Q(subject_type=SubjectType.SOLAR_SYSTEM) |
+                            Q(subject_type=SubjectType.WIDE_FIELD) |
+                            Q(subject_type=SubjectType.STAR_TRAILS) |
+                            Q(subject_type=SubjectType.NORTHERN_LIGHTS) |
+                            Q(subject_type=SubjectType.NOCTILUCENT_CLOUDS)
+                    ) &
                     (Q(solar_system_main_subject=None)))
                 qs = [x for x in qs if (x.solution is None or x.solution.objects_in_field is None)]
                 for i in qs:
@@ -1406,6 +1422,7 @@ def user_page(request, username):
                         SubjectType.WIDE_FIELD,
                         SubjectType.STAR_TRAILS,
                         SubjectType.NORTHERN_LIGHTS,
+                        SubjectType.NOCTILUCENT_CLOUDS,
                     )) &
                     (Q(imaging_telescopes=None) | Q(imaging_cameras=None)))
 
@@ -1417,6 +1434,7 @@ def user_page(request, username):
                         SubjectType.WIDE_FIELD,
                         SubjectType.STAR_TRAILS,
                         SubjectType.NORTHERN_LIGHTS,
+                        SubjectType.NOCTILUCENT_CLOUDS,
                     )) &
                     Q(acquisition=None))
 
