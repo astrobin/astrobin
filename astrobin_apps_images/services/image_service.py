@@ -13,17 +13,20 @@ from django.urls import reverse
 from hitcount.models import HitCount
 from hitcount.views import HitCountMixin
 
-from astrobin.enums import SubjectType, SolarSystemSubject
+from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
-from astrobin.utils import base26_encode, base26_decode, decimal_to_hours_minutes_seconds_string, \
-    decimal_to_degrees_minutes_seconds_string
+from astrobin.utils import (
+    base26_decode, base26_encode, decimal_to_degrees_minutes_seconds_string,
+    decimal_to_hours_minutes_seconds_string,
+)
+from astrobin_apps_equipment.models import EquipmentBrandListing
 from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 from common.services import DateTimeService
-from common.services.constellations_service import ConstellationsService, ConstellationException
+from common.services.constellations_service import ConstellationException, ConstellationsService
 
 logger = logging.getLogger("apps")
 
@@ -353,14 +356,60 @@ class ImageService:
             hit_count_response: UpdateHitCountResponse = HitCountMixin.hit_count(request, hit_count)
             return hit_count_response
 
+    def get_equipment_list(self, country=None):
+        def item_data(item, version):
+            data = {
+                'id': str(item.id),
+                'object': item,
+                'type': item.__class__.__name__.lower(),
+                'label': str(item),
+                'version': version,
+            }
+
+            if version == 'LEGACY':
+                # TODO: implement
+                brand_listings = EquipmentBrandListing.objects.none()
+            else:
+                # TODO: implement
+                brand_listings = EquipmentBrandListing.objects.none()
+
+            data['brand_listings'] = brand_listings
+
+            return data
+
+        equipment_list = {
+            'imaging_telescopes': [],
+            'imaging_cameras': [],
+            'mounts': [],
+            'filters': [],
+            'accessories': [],
+            'software': [],
+            'guiding_telescopes': [],
+            'guiding_cameras': [],
+        }
+
+        for klass in equipment_list.keys():
+            for x in getattr(self.image, f'{klass}_2').all():
+                equipment_list[klass].append(item_data(x, 'NEW'))
+
+            for x in getattr(self.image, klass).all():
+                equipment_list[klass].append(item_data(x, 'LEGACY'))
+
+        for x in getattr(self.image, 'focal_reducers').all():
+            equipment_list['accessories'].append(item_data(x, 'LEGACY'))
+
+        return equipment_list
+
     @staticmethod
     def get_constellation(solution):
         if solution is None or solution.ra is None or solution.dec is None:
             return None
 
         ra = solution.advanced_ra if solution.advanced_ra else solution.ra
-        ra_hms = decimal_to_hours_minutes_seconds_string(ra, hour_symbol='', minute_symbol='', second_symbol='',
-                                                         precision=0)
+        ra_hms = decimal_to_hours_minutes_seconds_string(
+            ra, hour_symbol='', minute_symbol='', second_symbol='',
+            precision=0
+        )
 
         dec = solution.advanced_dec if solution.advanced_dec else solution.dec
         dec_dms = decimal_to_degrees_minutes_seconds_string(dec, degree_symbol='', minute_symbol='', second_symbol='',

@@ -1,0 +1,282 @@
+{% load common_tags %}{% load astrobin_apps_equipment_tags %}{% load astrobin_apps_premium_tags %}{% load astrobin_apps_platesolving_tags %}{% load astrobin_apps_remote_source_affiliation_tags %}{% load i18n %}{% load tags %}
+
+{% if image|can_add_technical_details %}
+
+    <div class="row-fluid technical-card-acquisition">
+        <div class="span12">
+            <div class="subtle-container">
+                <div class="header">
+                    <h4>
+                        <i class="icon-list-alt"></i> {% trans "Acquisition details" %}
+                    </h4>
+                </div>
+
+                {% if deep_sky_data or ssa %}
+                    <div class="acquisition">
+                        <div class="acquisition-inner">
+                            {% if image_type == 'deep_sky' %}
+                                <dl class="dl-horizontal">
+                                    {% for data in deep_sky_data %}
+                                        {% if request.user|can_view_technical_card_item:data %}
+                                            <dt>{{ data.0 }}:</dt>
+                                            <dd>
+                                                {% if data.0 == dates_label %}
+                                                    {% for date in data.1 %}
+                                                        <a href="/search/{% query_string "q=, date_acquired_min=date, date_acquired_max=date, d=i, t=all" "plate_solving_started, r, mod" %}">{{ date|date:"DATE_FORMAT" }}</a>
+                                                        {% if not forloop.last %} &middot;&nbsp;{% endif %}
+                                                    {% endfor %}
+                                                {% else %}
+                                                    {{ data.1|safe|linebreaksbr }}
+                                                {% endif %}
+                                            </dd>
+                                        {% endif %}
+                                    {% endfor %}
+                                </dl>
+                            {% else %}
+                                {% if request.user|can_view_full_technical_card %}
+                                    {% if ssa.date %}
+                                        <p>
+                                            <strong class="card-label">{% trans "Date" %}:</strong>
+                                            <a href="/search/{% query_string "q=, start_date=ssa.date, end_date=ssa.date" "plate_solving_started, r, mod" %}">
+                                                {{ ssa.date|date:"DATE_FORMAT" }}
+                                            </a>
+                                        </p>
+                                    {% endif %}
+                                    {% if ssa.time %}
+                                        <p><strong class="card-label">{% trans "Time" %}:</strong> {{ ssa.time }}</p>
+                                    {% endif %}
+                                    {% if ssa.frames %}
+                                        <p>
+                                            <strong class="card-label">{% trans "Frames" %}:</strong>
+                                            <div class="frames">
+                                                {{ ssa.frames }}
+                                            </div>
+                                        </p>
+                                    {% endif %}
+                                    {% if ssa.fps %}
+                                        <p><strong class="card-label">{% trans "FPS" %}:</strong> {{ ssa.fps }}</p>
+                                    {% endif %}
+                                    {% if ssa.focal_length %}
+                                        <p>
+                                            <strong class="card-label">{% trans "Focal length" %}:</strong>
+                                            {{ ssa.focal_length }}
+                                        </p>
+                                    {% endif %}
+                                    {% if ssa.cmi %}
+                                        <p><strong class="card-label">{% trans "CMI" %}:</strong> {{ ssa.cmi }}</p>
+                                    {% endif %}
+                                    {% if ssa.cmii %}
+                                        <p><strong class="card-label">{% trans "CMII" %}:</strong> {{ ssa.cmii }}</p>
+                                    {% endif %}
+                                    {% if ssa.cmiii %}
+                                        <p><strong class="card-label">{% trans "CMIII" %}:</strong> {{ ssa.cmiii }}</p>
+                                    {% endif %}
+                                    {% if ssa.seeing %}
+                                        <p>
+                                            <strong class="card-label">{% trans "Seeing" %}:</strong> {{ ssa.seeing }}
+                                        </p>
+                                    {% endif %}
+                                    {% if ssa.transparency %}
+                                        <p>
+                                            <strong class="card-label">{% trans "Transparency" %}:</strong>
+                                            {{ ssa.transparency }}
+                                        </p>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+
+                            {% if instance_to_platesolve.solution and request.user|can_view_full_technical_card %}
+                                <hr />
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if instance_to_platesolve.solution and request.user|can_view_full_technical_card %}
+                    {% if not instance_to_platesolve.solution|has_started_advanced_platesolving %}
+                        <div class="astrometry-header basic">{% trans "Basic astrometry details" %}</div>
+
+                        <p>
+                            <strong class="card-label">Astrometry.net job:</strong>
+                            <a href="http://nova.astrometry.net/status/{{ instance_to_platesolve.solution.submission_id }}"
+                               target="_blank">
+                                {{ instance_to_platesolve.solution.submission_id }}
+                            </a>
+                        </p>
+                    {% endif %}
+
+                    {% if instance_to_platesolve.solution.ra is not None or instance_to_platesolve.solution.advanced_ra is not None %}
+                        <p>
+                            <strong class="card-label">{% trans "RA center" %}:</strong>
+
+                            {% if instance_to_platesolve.solution.advanced_ra is not None %}
+                                <abbr title="{{ instance_to_platesolve.solution.advanced_ra }} {% trans "degrees" %}"
+                                      class="ra-coordinates">
+                                    {{ instance_to_platesolve.solution.advanced_ra | ra_to_hms:instance_to_platesolve.solution.advanced_pixscale }}
+                                </abbr>
+                            {% else %}
+                                <abbr title="{{ instance_to_platesolve.solution.ra }} {% trans "degrees" %}"
+                                      class="ra-coordinates">
+                                    {{ instance_to_platesolve.solution.ra | ra_to_hms }}
+                                </abbr>
+                            {% endif %}
+                        </p>
+                    {% endif %}
+
+                    {% if instance_to_platesolve.solution.dec is not None or instance_to_platesolve.solution.advanced_dec is not None %}
+                        <p>
+                            <strong class="card-label">{% trans "DEC center" %}:</strong>
+
+                            {% if instance_to_platesolve.solution.advanced_dec is not None %}
+                                <abbr title="{{ instance_to_platesolve.solution.advanced_dec }} {% trans "degrees" %}"
+                                      class="dec-coordinates">
+                                    {{ instance_to_platesolve.solution.advanced_dec | dec_to_dms:instance_to_platesolve.solution.advanced_pixscale }}
+                                </abbr>
+                            {% else %}
+                                <abbr title="{{ instance_to_platesolve.solution.dec }} {% trans "degrees" %}"
+                                      class="dec-coordinates">
+                                    {{ instance_to_platesolve.solution.dec | dec_to_dms }}
+                                </abbr>
+                            {% endif %}
+                        </p>
+                    {% endif %}
+
+                    {% if instance_to_platesolve.solution.pixscale is not None or instance_to_platesolve.solution.advanced_pixscale is not None %}
+                        <p>
+                            <strong class="card-label">{% trans "Pixel scale" %}:</strong>
+
+                            {% if instance_to_platesolve.solution.advanced_pixscale is not None %}
+                                {{ instance_to_platesolve.solution.advanced_pixscale }}
+                            {% else %}
+                                {{ instance_to_platesolve.solution.pixscale }}
+                            {% endif %}
+                            {% trans "arcsec/pixel" %}
+                        </p>
+                    {% endif %}
+
+                    {% if instance_to_platesolve.solution.orientation is not None or instance_to_platesolve.solution.advanced_orientation is not None %}
+                        <p>
+                            <strong class="card-label">{% trans "Orientation" %}:</strong>
+
+                            {% if instance_to_platesolve.solution.advanced_orientation is not None %}
+                                {{ instance_to_platesolve.solution.advanced_orientation }} {% trans "degrees" %}
+                                {% if instance_to_platesolve.solution.advanced_flipped %}
+                                    {% trans "(flipped)" %}
+                                {% endif %}
+                            {% else %}
+                                {{ instance_to_platesolve.solution.orientation }} {% trans "degrees" %}
+                            {% endif %}
+                        </p>
+                    {% endif %}
+
+                    {% if instance_to_platesolve.solution.radius is not None or instance_to_platesolve.solution.advanced_radius is not None %}
+                        <p>
+                            <strong class="card-label">{% trans "Field radius" %}:</strong>
+
+                            {% if instance_to_platesolve.solution.advanced_radius is not None %}
+                                {{ instance_to_platesolve.solution.advanced_radius }}
+                            {% else %}
+                                {{ instance_to_platesolve.solution.radius }}
+                            {% endif %}
+                            {% trans "degrees" %}
+                        </p>
+                    {% endif %}
+
+                    {% if instance_to_platesolve.solution.advanced_wcs_transformation is not None %}
+                        <p>
+                            <strong class="card-label">{% trans "WCS transformation" %}:</strong>
+                            {{ instance_to_platesolve.solution.advanced_wcs_transformation }}
+                        </p>
+                    {% endif %}
+
+                    {% if instance_to_platesolve.solution.advanced_ra %}
+                        <p>
+                            <strong class="card-label">{% trans "More info" %}:</strong>
+                            <a href="#plate-solving-information-modal" data-toggle="modal">{% trans "Open" %}&nbsp;<i
+                                    class="icon-link"></i></a>
+                        </p>
+                    {% endif %}
+
+                    {% if instance_to_platesolve.solution and instance_to_platesolve.solution|supports_search_around %}
+                        <div class="dropdown search-around">
+                            <a class="dropdown-toggle btn btn-primary" data-toggle="dropdown" href="#">
+                                <i class="icon-search"></i> {% trans "Find images in the same area" %} <span
+                                    class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% for i in '12345'|make_list %}
+                                    <li>
+                                        <a
+                                                {% if request.user|can_access_full_search %}
+                                                    href="{{ instance_to_platesolve.solution|get_search_query_around:forloop.counter }}"
+                                                {% else %}
+                                                    href="#feature-restricted-modal"
+                                                {% endif %}
+                                                    data-toggle="modal">
+                                            {% blocktrans trimmed count n=forloop.counter %}Around <strong>1</strong>
+                                                degree{% plural %}Around <strong>{{ n }}</strong>
+                                                degrees{% endblocktrans %}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                {% if resolution %}
+                    <p><strong class="card-label">{% trans "Resolution" %}:</strong> {{ resolution }}</p>
+                {% endif %}
+
+                {% if locations %}
+                    <p>
+                        <strong class="card-label">{% trans "Locations" %}:</strong>
+                        {% highlight_text locations with search_query %}
+                    </p>
+                {% endif %}
+
+                {% if request.user == image.user and image.uncompressed_source_file %}
+                    <p>
+                        <strong class="card-label">{% trans "Uncompressed source file" %}:</strong>
+                        <a href="{{ image.uncompressed_source_file.url }}">
+                            {% private_abbr %} {% trans "Download" %}
+                        </a>
+                    </p>
+                {% endif %}
+
+                {% if request.user|can_view_full_technical_card or request.user == image.user %}
+                    {% if image.data_source and image.data_source != "OTHER" and image.data_source != "UNSET" %}
+                        <p>
+                            <strong class="card-label">{% trans "Data source" %}:</strong>
+                            {% if image.data_source == 'AMATEUR_HOSTING' or image.data_source == 'OWN_REMOTE' %}
+                                <a href="https://welcome.astrobin.com/remote-astrophotography" target="_blank">
+                                    {{ image.get_data_source }}
+                                </a>
+                            {% else %}
+                                {{ image.get_data_source }}
+                            {% endif %}
+                        </p>
+                    {% endif %}
+
+                    {% if image.remote_source and image.remote_source != "OTHER" %}
+                        <p>
+                            <strong class="card-label">{% trans "Remote source" %}:</strong>
+                            {% if image.remote_source|is_remote_source_affiliate %}
+                                <a href="{{ image.remote_source|remote_source_affiliate_url }}?{% remote_source_affiliate_utm_tags %}"
+                                   onclick="getOutboundLink('{{ image.remote_source|remote_source_affiliate_url }}', '{{ request.path }}')"
+                                   target="_blank">
+                                    {% highlight_text image.get_remote_source with search_query %}
+                                </a>
+                            {% else %}
+                                {% highlight_text image.get_remote_source with search_query %}
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                {% endif %}
+
+            </div> <!-- ./subtle-container -->
+        </div> <!-- ./span -->
+    </div> <!-- ./row acquisition -->
+
+{% endif %} {# image|can_add_technical_details #}
+

@@ -8,7 +8,10 @@ from subscription.models import Subscription, UserSubscription
 
 from astrobin.enums import SubjectType
 from astrobin.enums.display_image_download_menu import DownloadLimitation
-from astrobin.models import Image, ImageRevision, Telescope, Mount, Collection
+from astrobin.models import (
+    Accessory, Camera, Filter, FocalReducer, Image, ImageRevision, Software, Telescope, Mount,
+    Collection,
+)
 from toggleproperties.models import ToggleProperty
 
 
@@ -67,20 +70,64 @@ class Generators:
         )
 
     @staticmethod
-    def telescope():
+    def telescope(*args, **kwargs):
         return Telescope.objects.create(
-            make="Brand XYZ",
-            name="Telescope 100/1000",
-            aperture=100,
-            focal_length=1000,
-            type="REFR ACHRO",
+            make=kwargs.pop('make', 'Brand XYZ'),
+            name=kwargs.pop('name', 'Telescope 100/1000'),
+            aperture=kwargs.pop('aperture', 100),
+            focal_length=kwargs.pop('focal_length', 1000),
+            type=kwargs.pop('type', 'REFR_ACHRO'),
         )
 
     @staticmethod
-    def mount():
+    def camera(*args, **kwargs):
+        return Camera.objects.create(
+            make=kwargs.pop('make', 'Brand XYZ'),
+            name=kwargs.pop('name', 'Camera 123 Pro'),
+            pixel_size=kwargs.pop('pixel_size', 4),
+            sensor_width=kwargs.pop('sensor_width', 4),
+            sensor_height=kwargs.pop('sensor_height', 4),
+            type=kwargs.pop('type', 'CCD'),
+        )
+
+    @staticmethod
+    def mount(*args, **kwargs):
         return Mount.objects.create(
-            make="Brand XYZ",
-            name="Mount Pro 1000",
+            make=kwargs.pop('make', 'Brand XYZ'),
+            name=kwargs.pop('name', 'Mount Pro 1000'),
+            max_payload=kwargs.pop('max_payload', 40),
+            pe=kwargs.pop('pe', 1),
+        )
+
+    @staticmethod
+    def focal_reducer(*args, **kwargs):
+        return FocalReducer.objects.create(
+            make=kwargs.pop('make', 'Brand XYZ'),
+            name=kwargs.pop('name', 'Focal Reducer 0.75x'),
+        )
+
+    @staticmethod
+    def filter(*args, **kwargs):
+        return Filter.objects.create(
+            make=kwargs.pop('make', 'Brand XYZ'),
+            name=kwargs.pop('name', 'Luminance'),
+            type=kwargs.pop('type', 'CLEAR_OR_COLOR'),
+            bandwidth=kwargs.pop('bandwidth', 30),
+        )
+
+    @staticmethod
+    def accessory(*args, **kwargs):
+        return Accessory.objects.create(
+            make=kwargs.pop('make', 'Brand XYZ'),
+            name=kwargs.pop('name', 'Accessory 123'),
+        )
+
+    @staticmethod
+    def software(*args, **kwargs):
+        return Software.objects.create(
+            make=kwargs.pop('make', 'Brand XYZ'),
+            name=kwargs.pop('name', 'Software 123'),
+            type=kwargs.pop('type', 'OPEN_SOURCE_OR_FREEWARE'),
         )
 
     @staticmethod

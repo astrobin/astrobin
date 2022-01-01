@@ -1,14 +1,13 @@
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
 
-from annoying.functions import get_object_or_None
 from django.conf import settings
-from django.contrib.auth.models import Group, User
+from django.contrib.auth.models import User
 from django.core.cache import cache
-from django.db.models import Q, Count
+from django.db.models import Count
 
 from astrobin.enums import SubjectType
 from astrobin.fields import COUNTRIES
-from astrobin.models import Image, CameraRenameProposal
+from astrobin.models import CameraRenameProposal
 from astrobin.utils import get_client_country_code
 from astrobin_apps_images.services import ImageService
 from common.forms.abuse_report_form import AbuseReportForm

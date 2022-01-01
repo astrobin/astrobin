@@ -153,3 +153,15 @@ def has_matching_brand_request_query(gear: Gear, q) -> bool:
     return similarity > 85
 
 
+@register.filter
+def equipment_list_has_items(equipment_list) -> bool:
+    return (
+        len(equipment_list['imaging_telescopes']) > 0 or
+        len(equipment_list['imaging_cameras']) > 0 or
+        len(equipment_list['mounts']) > 0 or
+        len(equipment_list['filters']) > 0 or
+        len(equipment_list['accessories']) > 0 or
+        len(equipment_list['software']) > 0 or
+        len(equipment_list['guiding_telescopes']) > 0 or
+        len(equipment_list['guiding_cameras']) > 0
+    )

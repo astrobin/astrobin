@@ -8,6 +8,7 @@
 @import "badges.scss";
 @import "buttons";
 @import "ckeditor";
+@import "definition-lists";
 @import "forms";
 @import "meter";
 @import "modal";
@@ -1117,13 +1118,18 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
-.technical-card {
+.technical-card-equipment,
+.technical-card-acquisition {
+  dl {
+    margin: 0;
+  }
+
   .subtle-container {
     overflow: visible;
   }
 
   p {
-    margin: $spacer-small 0;
+    margin: 0 0 $spacer-medium;
   }
 
   .search-around {
@@ -1149,23 +1155,22 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     }
   }
 
-  .image-histogram {
-    margin-top: $spacer-xxlarge;
+  .icon-shopping-cart {
+    padding: 2px 4px;
+    margin-left: .25rem;
+    color: goldenrod;
+    text-shadow: 0 0 3px rgba(0, 0, 0, .33);
   }
 
-  .gear {
-    .icon-shopping-cart {
-      padding: 2px 4px;
-      margin-left: .25rem;
-      color: goldenrod;
-      text-shadow: 0 0 3px rgba(0, 0, 0, .33);
+  .frames {
+    @media (min-width: 980px) {
+      margin-top: 2rem;
+      margin-left: 1rem;
     }
   }
 
-  .acquisition {
-    .total-frame-integration {
-      color: darken($grey-4, 15%);
-    }
+  .total-frame-integration {
+    color: darken($grey-4, 15%);
   }
 }
 
@@ -1205,19 +1210,27 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 }
 
 .subtle-container {
-  background: url('../images/subtle-panel-tile.png');
+  background: $grey-5;
+  background-image: url('../images/subtle-panel-tile.png');
+  background-image: linear-gradient(
+                  -45deg,
+                  rgba(0, 0, 0, .15) 0%,
+                  rgba(0, 0, 0, 0) 90%,
+                  rgba(255, 255, 255, .01) 100%
+  ), url('../images/subtle-panel-tile.png');
   @include common-border;
-  @include rounded-corners;
-  padding: $spacer-large;
-  margin-bottom: $spacer-large;
+  @include rounded-corners(1.5rem);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
   overflow: hidden;
+  box-shadow: 1rem 1rem 2rem 0 rgba(0, 0, 0, .3), -.5rem -.5rem 2rem 0 rgba(255, 255, 255, .05);
 
   .header {
     background: $grey-6-dark url('../images/darker-panel-tile.png');
-    @include rounded-corners-top;
+    @include rounded-corners-top(1.5rem);
     border-bottom: #404040;
-    margin: -12px -12px 12px;
-    padding: $spacer-medium $spacer-large;
+    margin: -1.5rem -1.5rem 1.5rem;
+    padding: 1rem;
     position: relative;
 
     h4 {
@@ -1225,11 +1238,19 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       display: inline;
       text-overflow: clip;
       white-space: nowrap;
+      font-weight: normal;
+      font-size: 16px;
+      color: $grey-3;
+
+      > i:first-child {
+        color: $grey-2;
+        margin-right: $spacer-medium;
+      }
 
       .actions {
         a:not(:last-child),
         > i {
-          margin-right: 8px;
+          margin-right: $spacer-medium;
         }
       }
     }
@@ -2292,7 +2313,7 @@ form.avatar-delete {
       font-family: $regular-font;
       font-size: 14px;
       position: absolute;
-      top: 8px;
+      top: 16px;
       right: 12px;
     }
   }
@@ -3084,7 +3105,7 @@ table#private-shared-folders tr:hover a.delete-folder {
   }
 
   .user-card {
-    width: 142px;
+    width: 140px;
     padding: 0 12px;
     border-radius: 0;
 
@@ -3194,9 +3215,14 @@ ul.astrobin-users {
 
 .user-card {
   position: relative;
+  padding: 12px;
 
-  > .header > h4 {
-    white-space: normal;
+  > .header {
+    margin: -1rem -1rem 1rem;
+
+    > h4 {
+      white-space: normal;
+    }
   }
 
   .avatar {
@@ -3322,7 +3348,7 @@ ul.astrobin-users {
 .pixinsight-finding-chart {
   .image {
     text-align: center;
-    margin: -12px;
+    margin: -21px;
 
     img {
       @media screen and (min-width: 768px) {

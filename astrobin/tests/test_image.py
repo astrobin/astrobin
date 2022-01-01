@@ -389,8 +389,6 @@ class ImageTest(TestCase):
         self.assertEqual(acquisition.number, 10)
         self.assertEqual(acquisition.duration, 1200)
 
-        image.delete()
-
     @patch("astrobin.signals.push_notification")
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_upload_process_view_skip_notifications(self, push_notification):
@@ -434,45 +432,37 @@ class ImageTest(TestCase):
 
     def test_image_upload_process_view_image_too_large_lite(self):
         self.client.login(username='test', password='password')
-        us = Generators.premium_subscription(self.user, "AstroBin Lite")
+        Generators.premium_subscription(self.user, "AstroBin Lite")
 
         with self.settings(PREMIUM_MAX_IMAGE_SIZE_LITE_2020=1):
             response = self._do_upload('astrobin/fixtures/test.jpg')
             self.assertNotContains(response, "this image is too large")
 
-        us.delete()
-
     def test_image_upload_process_view_image_too_large_lite_2020(self):
         self.client.login(username='test', password='password')
-        us = Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+        Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
 
         with self.settings(PREMIUM_MAX_IMAGE_SIZE_LITE_2020=10 * 1024):
             response = self._do_upload('astrobin/fixtures/test.jpg')
             self.assertContains(response, "this image is too large")
             self.assertContains(response, "maximum allowed image size is 10.0")
 
-        us.delete()
-
     def test_image_upload_process_view_image_too_large_premium(self):
         self.client.login(username='test', password='password')
-        us = Generators.premium_subscription(self.user, "AstroBin Premium")
+        Generators.premium_subscription(self.user, "AstroBin Premium")
 
         with self.settings(PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020=1):
             response = self._do_upload('astrobin/fixtures/test.jpg')
             self.assertNotContains(response, "this image is too large")
 
-        us.delete()
-
     def test_image_upload_process_view_image_too_large_premium_2020(self):
         self.client.login(username='test', password='password')
-        us = Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+        Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
 
         with self.settings(PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020=10 * 1024):
             response = self._do_upload('astrobin/fixtures/test.jpg')
             self.assertContains(response, "this image is too large")
             self.assertContains(response, "maximum allowed image size is 10.0")
-
-        us.delete()
 
     def test_image_upload_process_view_inactive_subscription(self):
         self.client.login(username='test', password='password')
@@ -499,13 +489,11 @@ class ImageTest(TestCase):
 
     def test_image_upload_process_view_image_too_large_ultimate_2020(self):
         self.client.login(username='test', password='password')
-        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
 
         with self.settings(PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020=1):
             response = self._do_upload('astrobin/fixtures/test.jpg')
             self.assertNotContains(response, "this image is too large")
-
-        us.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     @override_settings(PREMIUM_MAX_IMAGE_SIZE_FREE_2020=sys.maxsize)
@@ -526,13 +514,11 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Lite")
+        Generators.premium_subscription(self.user, "AstroBin Lite")
 
         with self.settings(PREMIUM_MAX_IMAGE_SIZE_LITE_2020=10 * 1024):
             response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
             self.assertNotContains(response, "this image is too large")
-
-        us.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     @override_settings(PREMIUM_MAX_IMAGE_SIZE_FREE_2020=sys.maxsize)
@@ -541,13 +527,11 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+        Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
 
         with self.settings(PREMIUM_MAX_IMAGE_SIZE_LITE_2020=10 * 1024):
             response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
             self.assertContains(response, "this image is too large")
-
-        us.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     @override_settings(PREMIUM_MAX_IMAGE_SIZE_FREE_2020=sys.maxsize)
@@ -556,13 +540,11 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Premium")
+        Generators.premium_subscription(self.user, "AstroBin Premium")
 
         with self.settings(PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020=10 * 1024):
             response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
             self.assertNotContains(response, "this image is too large")
-
-        us.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     @override_settings(PREMIUM_MAX_IMAGE_SIZE_FREE_2020=sys.maxsize)
@@ -571,13 +553,11 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+        Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
 
         with self.settings(PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020=10 * 1024):
             response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
             self.assertContains(response, "this image is too large")
-
-        us.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     @override_settings(PREMIUM_MAX_IMAGE_SIZE_FREE_2020=sys.maxsize)
@@ -586,13 +566,11 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
 
         with self.settings(PREMIUM_MAX_IMAGE_SIZE_PREMIUM_2020=10 * 1024):
             response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
             self.assertNotContains(response, "this image is too large")
-
-        us.delete()
 
     def test_image_upload_revision_process_view_too_many_revisions_free(self):
         self.client.login(username='test', password='password')
@@ -608,19 +586,17 @@ class ImageTest(TestCase):
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Premium")
+        Generators.premium_subscription(self.user, "AstroBin Premium")
 
         response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
         self.assertContains(response, "Image uploaded. Thank you!")
-
-        us.delete()
 
     def test_image_upload_revision_process_view_too_many_revisions_lite_2020(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+        Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
 
         response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
         self.assertContains(response, "Image uploaded. Thank you!")
@@ -629,14 +605,12 @@ class ImageTest(TestCase):
         self.assertContains(response, "you have reached the maximum amount of allowed image revisions")
         self.assertContains(response, "Under your current subscription, the limit is 1 revision per image")
 
-        us.delete()
-
     def test_image_upload_revision_process_view_too_many_revisions_premium_2020(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+        Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
 
         response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
         self.assertContains(response, "Image uploaded. Thank you!")
@@ -645,8 +619,6 @@ class ImageTest(TestCase):
             response = self._do_upload_revision(image, 'astrobin/fixtures/test.jpg')
             self.assertContains(response, "you have reached the maximum amount of allowed image revisions")
             self.assertContains(response, "Under your current subscription, the limit is 1 revision per image")
-
-        us.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_detail_view_original_revision_overlay(self):
@@ -669,9 +641,6 @@ class ImageTest(TestCase):
         self.assertContains(response, "hover-overlay-original-revision")
         self.assertNotContains(response, "hover-overlay-solution")
 
-        image.delete()
-        self.client.logout()
-
     def test_image_detail_view_original_solution_overlay(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -684,9 +653,6 @@ class ImageTest(TestCase):
 
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "hover-overlay-solution")
-
-        image.delete()
-        self.client.logout()
 
     def test_image_detail_view_original_inverted_overlay(self):
         self.client.login(username='test', password='password')
@@ -704,9 +670,6 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "hover-overlay-original-inverted")
         self.assertNotContains(response, "hover-overlay-solution")
-
-        image.delete()
-        self.client.logout()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_detail_view_revision_original_overlay(self):
@@ -729,9 +692,6 @@ class ImageTest(TestCase):
         self.assertContains(response, "hover-overlay-revision-original")
         self.assertNotContains(response, "hover-overlay-solution")
 
-        image.delete()
-        self.client.logout()
-
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_detail_view_revision_solution_overlay(self):
         self.client.login(username='test', password='password')
@@ -748,9 +708,6 @@ class ImageTest(TestCase):
 
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), "r": revision.label}))
         self.assertContains(response, "hover-overlay-solution")
-
-        image.delete()
-        self.client.logout()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_detail_view_revision_revision_overlay(self):
@@ -776,9 +733,6 @@ class ImageTest(TestCase):
         self.assertContains(response, "hover-overlay-revision-revision")
         self.assertNotContains(response, "hover-overlay-solution")
 
-        image.delete()
-        self.client.logout()
-
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_detail_view_revision_inverted_overlay(self):
         self.client.login(username='test', password='password')
@@ -789,7 +743,7 @@ class ImageTest(TestCase):
         revision = self._get_last_image_revision()
 
         self._do_upload_revision(image, 'astrobin/fixtures/test.jpg', "Test revision description")
-        revision2 = self._get_last_image_revision()
+        self._get_last_image_revision()
 
         Solution.objects.create(
             status=Solver.SUCCESS,
@@ -802,9 +756,6 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id(), "r": revision.label}))
         self.assertContains(response, "hover-overlay-revision-inverted")
         self.assertNotContains(response, "hover-overlay-solution")
-
-        image.delete()
-        self.client.logout()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_detail_view(self):
@@ -1000,7 +951,7 @@ class ImageTest(TestCase):
         image.save(keep_deleted=True)
         today = time.strftime('%Y-%m-%d')
 
-        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
 
         # DSA data
         dsa, created = DeepSky_Acquisition.objects.get_or_create(
@@ -1014,10 +965,6 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "(gain: 12345.67)")
 
-        dsa.delete()
-        image.delete()
-        us.delete()
-
     def test_image_0_gain(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -1026,7 +973,7 @@ class ImageTest(TestCase):
         image.save(keep_deleted=True)
         today = time.strftime('%Y-%m-%d')
 
-        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
 
         # DSA data
         dsa, created = DeepSky_Acquisition.objects.get_or_create(
@@ -1040,10 +987,6 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "(gain: 0.00)")
 
-        dsa.delete()
-        image.delete()
-        us.delete()
-
     def test_image_no_binning(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -1052,7 +995,7 @@ class ImageTest(TestCase):
         image.save(keep_deleted=True)
         today = time.strftime('%Y-%m-%d')
 
-        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
 
         # DSA data
         dsa, created = DeepSky_Acquisition.objects.get_or_create(
@@ -1065,10 +1008,6 @@ class ImageTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '10x1200"')
         self.assertNotContains(response, 'bin 0x0')
-
-        dsa.delete()
-        image.delete()
-        us.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_flag_thumbs_view(self):
@@ -1091,12 +1030,6 @@ class ImageTest(TestCase):
             status_code=302,
             target_status_code=200)
 
-        revision.delete()
-        image.delete()
-        self.client.logout()
-        self.user.is_superuser = False
-        self.user.save()
-
     @patch("astrobin.tasks.retrieve_thumbnail")
     def test_image_thumb_view(self, retrieve_thumbnail):
         self.client.login(username='test', password='password')
@@ -1108,7 +1041,6 @@ class ImageTest(TestCase):
                 'alias': 'regular'
             }))
         self.assertEqual(response.status_code, 200)
-        image.delete()
 
     @patch("astrobin.tasks.retrieve_thumbnail")
     def test_image_rawthumb_view(self, retrieve_thumbnail):
@@ -1137,8 +1069,6 @@ class ImageTest(TestCase):
         image = Image.objects.get(pk=image.pk)
         response = self.client.get(reverse('image_rawthumb', kwargs=opts), follow=True)
         self.assertRedirects(response, get_expected_url(image))
-
-        image.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_full_view(self):
@@ -1182,8 +1112,6 @@ class ImageTest(TestCase):
             re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "hd_inverted"), response.content.decode(
                 'utf-8')))
 
-        image.delete()
-
     def test_image_real_view_owner(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -1195,8 +1123,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
 
     def test_image_real_view_owner_limitation_everybody(self):
         self.client.login(username='test', password='password')
@@ -1213,8 +1139,6 @@ class ImageTest(TestCase):
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
 
-        image.delete()
-
     def test_image_real_view_owner_limitation_paying(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -1229,8 +1153,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
 
     def test_image_real_view_owner_limitation_members(self):
         self.client.login(username='test', password='password')
@@ -1247,8 +1169,6 @@ class ImageTest(TestCase):
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
 
-        image.delete()
-
     def test_image_real_view_owner_limitation_me(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -1263,8 +1183,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
 
     def test_image_real_view_owner_limitation_nobody(self):
         self.client.login(username='test', password='password')
@@ -1281,8 +1199,6 @@ class ImageTest(TestCase):
         self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
 
-        image.delete()
-
     def test_image_real_view_visitor(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -1295,8 +1211,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
 
     def test_image_real_view_visitor_limitation_everybody(self):
         self.client.login(username='test', password='password')
@@ -1332,8 +1246,6 @@ class ImageTest(TestCase):
         self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
 
-        image.delete()
-
     def test_image_real_view_visitor_limitation_members(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -1349,8 +1261,6 @@ class ImageTest(TestCase):
         self.assertNotEqual('real', response.context[0]['alias'])
         self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
 
     def test_image_real_view_visitor_limitation_me(self):
         self.client.login(username='test', password='password')
@@ -1368,8 +1278,6 @@ class ImageTest(TestCase):
         self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
 
-        image.delete()
-
     def test_image_real_view_visitor_limitation_nobody(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -1386,8 +1294,6 @@ class ImageTest(TestCase):
         self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
 
-        image.delete()
-
     def test_image_real_view_free(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -1402,8 +1308,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
 
     def test_image_real_view_free_limitation_everybody(self):
         self.client.login(username='test', password='password')
@@ -1423,8 +1327,6 @@ class ImageTest(TestCase):
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
 
-        image.delete()
-
     def test_image_real_view_free_limitation_paying(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -1442,8 +1344,6 @@ class ImageTest(TestCase):
         self.assertNotEqual('real', response.context[0]['alias'])
         self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
 
     def test_image_real_view_free_limitation_members(self):
         self.client.login(username='test', password='password')
@@ -1482,8 +1382,6 @@ class ImageTest(TestCase):
         self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
 
-        image.delete()
-
     def test_image_real_view_free_limitation_nobody(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -1502,8 +1400,6 @@ class ImageTest(TestCase):
         self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
 
-        image.delete()
-
     def test_image_real_view_lite(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -1511,7 +1407,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user2, "AstroBin Lite")
+        Generators.premium_subscription(self.user2, "AstroBin Lite")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1520,9 +1416,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
-        us.delete()
 
     def test_image_real_view_lite_limitation_everybody(self):
         self.client.login(username='test', password='password')
@@ -1534,7 +1427,7 @@ class ImageTest(TestCase):
         image.full_size_display_limitation = FullSizeDisplayLimitation.EVERYBODY
         image.save()
 
-        us = Generators.premium_subscription(self.user2, "AstroBin Lite")
+        Generators.premium_subscription(self.user2, "AstroBin Lite")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1543,9 +1436,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
-        us.delete()
 
     def test_image_real_view_lite_limitation_paying(self):
         self.client.login(username='test', password='password')
@@ -1557,7 +1447,7 @@ class ImageTest(TestCase):
         image.full_size_display_limitation = FullSizeDisplayLimitation.PAYING_MEMBERS_ONLY
         image.save()
 
-        us = Generators.premium_subscription(self.user2, "AstroBin Lite")
+        Generators.premium_subscription(self.user2, "AstroBin Lite")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1566,10 +1456,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
-        us.delete()
-
     def test_image_real_view_lite_limitation_members(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -1580,7 +1466,7 @@ class ImageTest(TestCase):
         image.full_size_display_limitation = FullSizeDisplayLimitation.MEMBERS_ONLY
         image.save()
 
-        us = Generators.premium_subscription(self.user2, "AstroBin Lite")
+        Generators.premium_subscription(self.user2, "AstroBin Lite")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1589,9 +1475,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
-        us.delete()
 
     def test_image_real_view_lite_limitation_me(self):
         self.client.login(username='test', password='password')
@@ -1603,7 +1486,7 @@ class ImageTest(TestCase):
         image.full_size_display_limitation = FullSizeDisplayLimitation.ME_ONLY
         image.save()
 
-        us = Generators.premium_subscription(self.user2, "AstroBin Lite")
+        Generators.premium_subscription(self.user2, "AstroBin Lite")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1612,9 +1495,6 @@ class ImageTest(TestCase):
         self.assertNotEqual('real', response.context[0]['alias'])
         self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
-        us.delete()
 
     def test_image_real_view_lite_limitation_nobody(self):
         self.client.login(username='test', password='password')
@@ -1626,7 +1506,7 @@ class ImageTest(TestCase):
         image.full_size_display_limitation = FullSizeDisplayLimitation.NOBODY
         image.save()
 
-        us = Generators.premium_subscription(self.user2, "AstroBin Lite")
+        Generators.premium_subscription(self.user2, "AstroBin Lite")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1636,9 +1516,6 @@ class ImageTest(TestCase):
         self.assertIsNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
 
-        image.delete()
-        us.delete()
-
     def test_image_real_view_lite_autorenew(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -1646,7 +1523,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user2, "AstroBin Lite (autorenew)")
+        Generators.premium_subscription(self.user2, "AstroBin Lite (autorenew)")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1655,9 +1532,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
-        us.delete()
 
     def test_image_real_view_lite_2020(self):
         self.client.login(username='test', password='password')
@@ -1665,7 +1539,7 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         self.client.logout()
 
-        us = Generators.premium_subscription(self.user2, "AstroBin Lite 2020+")
+        Generators.premium_subscription(self.user2, "AstroBin Lite 2020+")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1674,9 +1548,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
-        us.delete()
 
     def test_image_real_view_premium(self):
         self.client.login(username='test', password='password')
@@ -1685,7 +1556,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user2, "AstroBin Premium")
+        Generators.premium_subscription(self.user2, "AstroBin Premium")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1694,9 +1565,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
-        us.delete()
 
     def test_image_real_view_premium_autorenew(self):
         self.client.login(username='test', password='password')
@@ -1705,7 +1573,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user2, "AstroBin Premium (autorenew)")
+        Generators.premium_subscription(self.user2, "AstroBin Premium (autorenew)")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1714,9 +1582,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
-        us.delete()
 
     def test_image_real_view_premium_2020(self):
         self.client.login(username='test', password='password')
@@ -1725,7 +1590,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user2, "AstroBin Premium 2020+")
+        Generators.premium_subscription(self.user2, "AstroBin Premium 2020+")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1734,9 +1599,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
-        us.delete()
 
     def test_image_real_view_ultimate_2020(self):
         self.client.login(username='test', password='password')
@@ -1745,7 +1607,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user2, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user2, "AstroBin Ultimate 2020+")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1754,9 +1616,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
-        us.delete()
 
     def test_image_real_view_ultimate_2020_owner(self):
         self.client.login(username='test', password='password')
@@ -1765,7 +1624,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1774,9 +1633,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
-        us.delete()
 
     def test_image_real_view_premium_owner(self):
         self.client.login(username='test', password='password')
@@ -1785,7 +1641,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Premium")
+        Generators.premium_subscription(self.user, "AstroBin Premium")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1794,9 +1650,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
-        us.delete()
 
     def test_image_real_view_premium_autorenew_owner(self):
         self.client.login(username='test', password='password')
@@ -1805,7 +1658,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Premium (autorenew)")
+        Generators.premium_subscription(self.user, "AstroBin Premium (autorenew)")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1814,9 +1667,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
-        us.delete()
 
     def test_image_real_view_lite_owner(self):
         self.client.login(username='test', password='password')
@@ -1825,7 +1675,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Lite")
+        Generators.premium_subscription(self.user, "AstroBin Lite")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1834,9 +1684,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
-        us.delete()
 
     def test_image_real_view_lite_autorenew_owner(self):
         self.client.login(username='test', password='password')
@@ -1845,7 +1692,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Lite (autorenew)")
+        Generators.premium_subscription(self.user, "AstroBin Lite (autorenew)")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1854,9 +1701,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
-        us.delete()
 
     def test_image_real_view_lite_2020_owner(self):
         self.client.login(username='test', password='password')
@@ -1865,7 +1709,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+        Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1874,9 +1718,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
-        us.delete()
 
     def test_image_real_view_premium_2020_owner(self):
         self.client.login(username='test', password='password')
@@ -1885,7 +1726,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
 
-        us = Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+        Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
 
         self.client.login(username='test2', password='password')
         response = self.client.get(
@@ -1894,9 +1735,6 @@ class ImageTest(TestCase):
         self.assertEqual('real', response.context[0]['alias'])
         self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "real"), response.content.decode(
             'utf-8')))
-
-        image.delete()
-        us.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_upload_revision_process_view(self):
@@ -1958,9 +1796,6 @@ class ImageTest(TestCase):
         self.assertEqual(1, image.revisions.count())
         self.assertEqual('C', revision.label)
 
-        revision.delete()
-        image.delete()
-
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_edit_make_final_view(self):
         self.client.login(username='test', password='password')
@@ -1991,9 +1826,6 @@ class ImageTest(TestCase):
         response = self.client.get(
             reverse('image_edit_make_final', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 403)
-        self.client.logout()
-
-        image.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_edit_revision_make_final_view(self):
@@ -2041,10 +1873,6 @@ class ImageTest(TestCase):
         response = self.client.get(
             reverse('image_edit_revision_make_final', kwargs={'id': b.id}))
         self.assertEqual(response.status_code, 403)
-        self.client.logout()
-
-        b.delete()
-        image.delete()
 
     def test_image_edit_basic_view(self):
         def post_data(image):
@@ -2178,8 +2006,6 @@ class ImageTest(TestCase):
             status_code=302,
             target_status_code=200)
 
-        image.delete()
-
     def test_image_edit_basic_view_replacing_image_deletes_solution(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -2297,8 +2123,6 @@ class ImageTest(TestCase):
             status_code=302,
             target_status_code=200)
 
-        image.delete()
-
     def test_image_edit_gear_view(self):
         def post_data(image):
             return {
@@ -2415,9 +2239,6 @@ class ImageTest(TestCase):
             '/accounts/login/?next=' + get_url((image.get_id(),)),
             status_code=302,
             target_status_code=200)
-
-        image.delete()
-
     def test_image_edit_acquisition_view(self):
         today = time.strftime('%Y-%m-%d')
 
@@ -2651,9 +2472,6 @@ class ImageTest(TestCase):
         self.assertEqual(ssa.transparency, post_data['transparency'])
         self.assertEqual(ssa.time, post_data['time'])
 
-        self.client.logout()
-        image.delete()
-
     def test_image_edit_license_view(self):
         def post_data(image):
             return {
@@ -2711,8 +2529,6 @@ class ImageTest(TestCase):
         image = Image.objects.get(pk=image.pk)
         self.assertEqual(image.license, License.ATTRIBUTION_NO_DERIVS)
 
-        self.client.logout()
-
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_edit_revision_view(self):
         def post_data():
@@ -2763,8 +2579,6 @@ class ImageTest(TestCase):
         self._assert_message(response, "success unread", "Form saved")
         revision = ImageRevision.objects.get(pk=revision.pk)
         self.assertEqual(revision.description, "Updated revision description")
-
-        self.client.logout()
 
     def test_image_revision_keeps_mouse_hover_from_image(self):
         image = Generators.image(user=self.user)
@@ -2869,7 +2683,6 @@ class ImageTest(TestCase):
             status_code=302,
             target_status_code=200)
         self.assertEqual(Image.objects_including_wip.filter(pk=image.pk).count(), 0)
-        self.client.logout()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_delete_revision_view(self):
@@ -2908,9 +2721,6 @@ class ImageTest(TestCase):
         self.assertEqual(ImageRevision.objects.filter(pk=revision.pk).count(), 0)
         self.assertTrue(image.is_final)
         self.assertFalse(ImageRevision.deleted_objects.get(pk=revision.pk).is_final)
-        self.client.logout()
-
-        image.delete()
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_delete_original_view(self):
@@ -2966,9 +2776,6 @@ class ImageTest(TestCase):
             status_code=302,
             target_status_code=200)
         self.assertEqual(ImageRevision.objects.filter(image=image).count(), 0)
-        image.delete()
-
-        self.client.logout()
 
     def test_image_delete_other_versions_view_wrong_user(self):
         self.client.login(username='test', password='password')
@@ -3182,10 +2989,6 @@ class ImageTest(TestCase):
         image = Image.objects.get(pk=image.pk)
         self.assertEqual(published, image.published)
 
-        image.delete()
-
-        self.client.logout()
-
     def test_image_demote_view(self):
         def post_url(args=None):
             return reverse('image_demote', args=args)
@@ -3215,9 +3018,6 @@ class ImageTest(TestCase):
 
         # Test that we can't get the image via the regular manager
         self.assertEqual(Image.objects.filter(pk=image.pk).count(), 0)
-
-        self.client.logout()
-        image.delete()
 
     @patch('astrobin.models.UserProfile.get_scores')
     def test_image_moderation(self, get_scores):
@@ -3265,9 +3065,6 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         self.assertNotEqual(updated, image.updated)
 
-        image.delete()
-        self.client.logout()
-
     def test_image_updated_after_acquisition_saved(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -3293,9 +3090,6 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         self.assertNotEqual(updated, image.updated)
 
-        image.delete()
-        self.client.logout()
-
     def test_image_updated_after_comment(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
@@ -3312,10 +3106,7 @@ class ImageTest(TestCase):
 
         image = self._get_last_image()
         self.assertNotEqual(updated, image.updated)
-
-        image.delete()
-        self.client.logout()
-
+        
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_softdelete(self):
         self.client.login(username='test', password='password')
@@ -3350,65 +3141,58 @@ class ImageTest(TestCase):
         image.save()
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertNotContains(response, "id=\"platesolving-status\"")
-        image.delete()
 
     def test_image_platesolving_available_on_lite(self):
         image = Generators.image()
         image.user = self.user
         image.subject_type = SubjectType.DEEP_SKY
         image.save()
-        us = Generators.premium_subscription(self.user, "AstroBin Lite")
+        Generators.premium_subscription(self.user, "AstroBin Lite")
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "id=\"platesolving-status\"")
-        image.delete()
 
     def test_image_platesolving_available_on_premium(self):
         image = Generators.image()
         image.user = self.user
         image.subject_type = SubjectType.DEEP_SKY
         image.save()
-        us = Generators.premium_subscription(self.user, "AstroBin Premium")
+        Generators.premium_subscription(self.user, "AstroBin Premium")
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "id=\"platesolving-status\"")
-        image.delete()
 
     def test_image_platesolving_available_on_lite_2020(self):
         image = Generators.image()
         image.user = self.user
         image.subject_type = SubjectType.DEEP_SKY
         image.save()
-        us = Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
+        Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "id=\"platesolving-status\"")
-        image.delete()
 
     def test_image_platesolving_available_on_premium_2020(self):
         image = Generators.image()
         image.user = self.user
         image.subject_type = SubjectType.DEEP_SKY
         image.save()
-        us = Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
+        Generators.premium_subscription(self.user, "AstroBin Premium 2020+")
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "id=\"platesolving-status\"")
-        image.delete()
 
     def test_image_platesolving_available_on_ultimate_2020(self):
         image = Generators.image()
         image.user = self.user
         image.subject_type = SubjectType.DEEP_SKY
         image.save()
-        us = Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "id=\"platesolving-status\"")
-        image.delete()
 
-    def test_image_gear_list_is_hidden(self):
+    def test_image_equipment_list_is_hidden(self):
         image = Generators.image()
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertNotContains(response, "<div class=\"gear\">")
-        image.delete()
+        self.assertNotContains(response, "<div class=\"subtle-container technical-card-equipment\">")
 
-    def test_image_gear_list_is_shown(self):
+    def test_image_equipment_list_is_shown(self):
         image = Generators.image()
         telescope = Generators.telescope()
 
@@ -3417,10 +3201,7 @@ class ImageTest(TestCase):
         image.save()
 
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
-        self.assertContains(response, "<div class=\"gear\">")
-
-        telescope.delete()
-        image.delete()
+        self.assertContains(response, "<div class=\"subtle-container technical-card-equipment\">")
 
     @patch('django.contrib.auth.models.User.is_authenticated', new_callable=mock.PropertyMock)
     def test_image_designated_iotd_submitters(self, is_authenticated):
