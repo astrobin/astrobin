@@ -542,12 +542,18 @@ def humanize_image_acquisition_type(type):
 
 @register.filter
 def ra_to_hms(degrees, pixel_scale=0):
+    if pixel_scale is None:
+        pixel_scale = 0
+
     precision = ra_decimal_precision_from_pixel_scale(pixel_scale)
     return mark_safe(decimal_to_hours_minutes_seconds_html(degrees, precision=precision))
 
 
 @register.filter
 def dec_to_dms(degrees, pixel_scale=0):
+    if pixel_scale is None:
+        pixel_scale = 0
+
     precision = dec_decimal_precision_from_pixel_scale(pixel_scale)
     return mark_safe(decimal_to_degrees_minutes_seconds_html(degrees, precision=precision))
 
