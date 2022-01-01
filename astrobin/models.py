@@ -907,6 +907,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         (SubjectType.WIDE_FIELD, _("Extremely wide field")),
         (SubjectType.STAR_TRAILS, _("Star trails")),
         (SubjectType.NORTHERN_LIGHTS, _("Northern lights")),
+        (SubjectType.NOCTILUCENT_CLOUDS, _("Noctilucent clouds")),
         (SubjectType.GEAR, _("Gear")),
         (SubjectType.OTHER, _("Other")),
     )
@@ -1102,7 +1103,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     subject_type = models.CharField(
         verbose_name=_("Subject type"),
         choices=SUBJECT_TYPE_CHOICES,
-        max_length=16,
+        max_length=18,
         null=False,
     )
 
