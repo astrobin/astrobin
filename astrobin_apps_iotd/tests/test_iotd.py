@@ -1,8 +1,5 @@
-from datetime import datetime, timedelta, date
+from datetime import date, datetime, timedelta
 
-import simplejson as json
-from bs4 import BeautifulSoup as BS
-from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core.cache import cache
 from django.core.management import call_command
