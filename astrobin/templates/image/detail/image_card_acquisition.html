@@ -224,10 +224,6 @@
                     {% endif %}
                 {% endif %}
 
-                {% if request.user|can_view_full_technical_card or request.user == image.user %}
-                    <hr />
-                {% endif %}
-
                 {% if resolution %}
                     <p><strong class="card-label">{% trans "Resolution" %}:</strong> {{ resolution }}</p>
                 {% endif %}
