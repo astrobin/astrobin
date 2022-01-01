@@ -107,15 +107,26 @@ th.forum-name {
 }
 
 .post {
-  margin-bottom: 2.5rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+  margin-bottom: 3rem;
+  box-shadow: 1rem 1rem 2rem 0 rgba(0, 0, 0, .3), -.5rem -.5rem 2rem 0 rgba(255, 255, 255, .05);
+  border-radius: 1.5rem;
 
   &.even .post-content {
-    background: rgba(255, 255, 255, .02);
+    background-image: linear-gradient(
+                    -45deg,
+                    rgba(0, 0, 0, .05) 0%,
+                    rgba(0, 0, 0, 0) 80%,
+                    rgba(255, 255, 255, .01) 100%
+    );
   }
 
   &.odd .post-content {
-    background: rgba(0, 0, 0, .05);
+    background-image: linear-gradient(
+                    -45deg,
+                    rgba(0, 0, 0, .05) 0%,
+                    rgba(0, 0, 0, 0) 80%,
+                    rgba(255, 255, 255, .05) 100%
+    );
   }
 
   &.highlighted .post-content {
@@ -135,12 +146,14 @@ th.forum-name {
     height: 60px;
     vertical-align: middle !important;
     border-bottom-color: $grey-5 !important;
+    border-radius: 1.5rem 1.5rem 0 0;
   }
 
   img {
     position: absolute;
     top: 0;
     right: 0;
+    border-radius: 0 1.5rem 0 0;
   }
 
   .contribution-index {
@@ -197,7 +210,8 @@ th.forum-name {
 .post-content {
   font-size: 14.5px;
   line-height: 20px !important;
-  padding: 1.5rem 18px !important;
+  padding: 2rem 1.5rem !important;
+  border-radius: 0 0 1.5rem 1.5rem;
 
   /* These are technically the same, but use both */
   overflow-wrap: break-word;
