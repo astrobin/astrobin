@@ -185,6 +185,7 @@ SOLAR_SYSTEM_SUBJECT_CHOICES = (
     (SolarSystemSubject.PARTIAL_SOLAR_ECLIPSE, _("Partial solar eclipse")),
     (SolarSystemSubject.ANULAR_SOLAR_ECLIPSE, _("Anular solar eclipse")),
     (SolarSystemSubject.TOTAL_SOLAR_ECLIPSE, _("Total solar eclipse")),
+    (SolarSystemSubject.METEOR_SHOWER, _("Meteor shower")),
     (SolarSystemSubject.OTHER, _("Other")),
 )
 
