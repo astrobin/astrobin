@@ -17,7 +17,7 @@
                         <label for="sharing_mode">{% trans "Sharing mode" %}:</label>
                         <select id="sharing_mode" name="sharing_mode">
                             <option selected="selected" value="0">{% trans "Simple link" %}</option>
-                            <option value="1">{% trans "Forums" %}</option>
+                            <option value="1">{% trans "Forums" %} (BBCode)</option>
                             <option value="2">HTML</option>
                         </select>
                     </div>
@@ -25,10 +25,12 @@
 
                 <div class="span6">
                     <div class="control-group">
-                        <label for="sharing_thumbnail">{% trans "Thumbnail" %}:</label>
+                        <label for="sharing_thumbnail">{% trans "Thumbnail size" %}:</label>
                         <select id="sharing_thumbnail" name="sharing_thumbnail" disabled="disabled">
-                            <option selected="selected" value="0">{% trans "Yes" %}</option>
-                            <option value="1">{% trans "No" %}</option>
+                            <option>{% trans "Off" %}</option>
+                            <option selected="selected" value="1">{% trans "Small" %}</option>
+                            <option value="2">{% trans "Medium" %}</option>
+                            <option value="3">{% trans "Large" %}</option>
                         </select>
                     </div>
                 </div>
@@ -37,11 +39,11 @@
             <div class="row-fluid">
                 <div class="span6">
                     <div class="control-group">
-                        <label for="sharing_image_size">{% trans "Image size" %}:</label>
+                        <label for="sharing_image_size">{% trans "Link destination" %}:</label>
                         <select id="sharing_image_size" name="sharing_image_size">
-                            <option selected="selected" value="0">{% trans "Regular" %}</option>
-                            <option value="1">{% trans "Full" %}</option>
-                            <option value="2">{% trans "Real" %}</option>
+                            <option selected="selected" value="0">{% trans "Page with technical card" %}</option>
+                            <option value="1">{% trans "Large view" %}</option>
+                            <option value="2">{% trans "Full resolution" %}</option>
                         </select>
                     </div>
                 </div>
@@ -61,8 +63,12 @@
                 <div class="span12">
                     <div class="control-group">
                         <label for="sharing_code">{% trans "Copy this" %}:</label>
-                        <textarea id="sharing_code" name="sharing_code"
-                                  rows=6>{{ SHARE_PATH }}{% get_image_url image revision_label %}</textarea>
+                        <textarea
+                            id="sharing_code"
+                            name="sharing_code"
+                            rows=6
+                        >{{ SHARE_PATH }}{% get_image_url image revision_label %}
+                        </textarea>
                     </div>
                 </div>
             </div>

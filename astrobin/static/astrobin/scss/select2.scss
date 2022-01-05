@@ -19,6 +19,11 @@ $flat-theme-dark-color: $grey-6;
     font-size: .85rem;
     float: right;
   }
+
+  &--disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
 }
 
 .select2-container--open .select2-dropdown--below,

@@ -94,86 +94,117 @@ $(document).ready(function() {
         }
     }
 
-    $('form.copy select').change(function() {
-        var sharing_mode = parseInt($('select[name=sharing_mode] option:selected').val());
-        var image_size = parseInt($('select[name=sharing_image_size] option:selected').val());
-        var image_mode = parseInt($('select[name=sharing_image_mode] option:selected').val());
-        var thumbnail = parseInt($('select[name=sharing_thumbnail] option:selected').val());
-        var textarea = $('form.copy textarea');
-        var content = '';
+    $('form.copy select').change(function () {
+        const SHARING_MODE_SIMPLE = 0;
+        const SHARING_MODE_FORUMS = 1;
+        const SHARING_MODE_HTML = 2;
 
-        if (sharing_mode == 0) {
-            $('select[name=sharing_thumbnail]').attr('disabled', 'disabled');
-            $('select[name=sharing_thumbnail]').closest('.selector').addClass('disabled');
+        const THUMBNAIL_SIZE_OFF = 0;
+        const THUMBNAIL_SIZE_SMALL = 1;
+        const THUMBNAIL_SIZE_MEDIUM = 2;
+        const THUMBNAIL_SIZE_LARGE = 3;
+
+        const LINKED_IMAGE_SIZE_PAGE = 0;
+        const LINKED_IMAGE_SIZE_LARGE = 1;
+        const LINKED_IMAGE_SIZE_FULL = 2;
+
+        const IMAGE_MODE_NORMAL = 0;
+        const IMAGE_MODE_INVERTED = 1;
+
+        const sharingMode = parseInt($('select[name=sharing_mode] option:selected').val());
+        const thumbnailSize = parseInt($('select[name=sharing_thumbnail] option:selected').val());
+        const linkedImageSize = parseInt($('select[name=sharing_image_size] option:selected').val());
+        const imageMode = parseInt($('select[name=sharing_image_mode] option:selected').val());
+
+        const $textarea = $('form.copy textarea');
+        const $sharingMode = $('select[name=sharing_thumbnail]');
+
+        let content = '';
+
+        if (sharingMode === SHARING_MODE_SIMPLE) {
+            $sharingMode.attr('disabled', 'disabled');
+            $sharingMode.closest('.selector').addClass('disabled');
         } else {
-            $('select[name=sharing_thumbnail]').removeAttr('disabled');
-            $('select[name=sharing_thumbnail]').closest('.selector').removeClass('disabled');
+            $sharingMode.removeAttr('disabled');
+            $sharingMode.closest('.selector').removeClass('disabled');
         }
 
-        /* Make thumbnail url */
-        var thumbnail_alias = 'gallery';
-        if (image_mode === 1)
-            thumbnail_alias = 'gallery_inverted';
-        var thumbnail_url = '{{SHARE_PATH}}/{{image.get_id}}/{{revision_label}}/rawthumb/' + thumbnail_alias + '/get.jpg?insecure';
+        // Build thumbnail URL.
+        let thumbnailAlias;
+        let thumbnailUrl;
 
-        /* Make link url */
-        var qs = '';
-        if (image_mode === 1)
-           qs += "{% query_string "mod='inverted'" "" %}";
+        switch (thumbnailSize) {
+            case THUMBNAIL_SIZE_OFF:
+                break;
+            case THUMBNAIL_SIZE_SMALL:
+                thumbnailAlias = 'gallery';
+                break;
+            case THUMBNAIL_SIZE_MEDIUM:
+                thumbnailAlias = 'regular';
+                break;
+            case THUMBNAIL_SIZE_LARGE:
+                thumbnailAlias = 'hd';
+                break;
+        }
 
-        var sharing_url = '{{SHARE_PATH}}';
-        if (image_size === 0) { /* regular */
-            sharing_url += "{% get_image_url image revision_label %}";
-        } else if (image_size === 1) { /* full */
-            sharing_url += "{% get_image_url image revision_label 'full' %}";
-        } else if (image_size === 2) { /* real */
-            if(qs.length > 0)
-                qs += "&real=";
+        if (!!thumbnailAlias && imageMode === IMAGE_MODE_INVERTED) {
+            thumbnailAlias += '_inverted';
+        }
+
+        if (!!thumbnailAlias) {
+            thumbnailUrl = '{{SHARE_PATH}}/{{image.get_id}}/{{revision_label}}/rawthumb/' + thumbnailAlias + '/get.jpg?insecure';
+        }
+
+        // Build link URL.
+        let queryString = '';
+        if (imageMode === IMAGE_MODE_INVERTED)
+            queryString += "{% query_string "mod='inverted'" "" %}";
+
+        let sharingUrl = '{{SHARE_PATH}}';
+        if (linkedImageSize === LINKED_IMAGE_SIZE_PAGE) {
+            sharingUrl += "{% get_image_url image revision_label %}";
+        } else if (linkedImageSize === LINKED_IMAGE_SIZE_LARGE) {
+            sharingUrl += "{% get_image_url image revision_label 'full' %}";
+        } else if (linkedImageSize === LINKED_IMAGE_SIZE_FULL) {
+            if (queryString.length > 0)
+                queryString += "&real=";
             else
-                qs = "{% query_string "mod=mod,real=''" ""%}";
+                queryString = "{% query_string "mod=mod,real=''" ""%}";
 
-            sharing_url += "{% get_image_url image revision_label 'full' %}";
+            sharingUrl += "{% get_image_url image revision_label 'full' %}";
         }
 
-        sharing_url += qs;
-        sharing_url = sharing_url.replace(/&amp;/g, '&');
+        sharingUrl += queryString;
+        sharingUrl = sharingUrl.replace(/&amp;/g, '&');
 
 
-        /* Make text */
-        var text = "{{image.title}}";
-        if (thumbnail === 0)
-            text = thumbnail_url;
+        // Build text.
+        let text = "{{image.title}}";
+
+        if (thumbnailUrl) {
+            text = thumbnailUrl;
+        }
 
         /*************
-        * SIMPLE URL *
-        *************/
-        if (sharing_mode === 0) {
-            content = sharing_url;
-        } else
-
-        /********
-        * FORUM *
-        ********/
-        if (sharing_mode === 1) {
-            content = "[URL=" + sharing_url + "]";
-            if (thumbnail === 0) content += "[IMG]";
+         * SIMPLE URL *
+         *************/
+        if (sharingMode === SHARING_MODE_SIMPLE) {
+            content = sharingUrl;
+        } else if (sharingMode === SHARING_MODE_FORUMS) {
+            content = "[URL=" + sharingUrl + "]";
+            if (thumbnailSize === THUMBNAIL_SIZE_OFF) content += "[IMG]";
             content += text
-            if (thumbnail === 0) content += "[/IMG]";
+            if (thumbnailSize === THUMBNAIL_SIZE_OFF) content += "[/IMG]";
             content += "[/URL]"
-        } else
-
-        /*******
-        * HTML *
-        *******/
-        if (sharing_mode === 2) {
-            content = "<a href=\"" + sharing_url + "\">";
-            if (thumbnail === 0) content += "<img src=\"";
+        } else if (sharingMode === SHARING_MODE_HTML) {
+            content = "<a href=\"" + sharingUrl + "\">";
+            if (thumbnailSize === THUMBNAIL_SIZE_OFF) content += "<img src=\"";
             content += text;
-            if (thumbnail === 0) content += "\"/>";
+            if (thumbnailSize === THUMBNAIL_SIZE_OFF) content += "\"/>";
             content += "</a>"
         }
 
-        textarea.val(content);
+        $textarea.val(content);
     });
 
     showProperImageSize();
@@ -182,7 +213,7 @@ $(document).ready(function() {
     astrobin_common.setup_gear_popovers();
     astrobin_common.setup_subject_popovers();
 
-    $('#upload-revision-modal form input[type=submit]').click(function(e) {
+    $('#upload-revision-modal form input[type=submit]').click(function (e) {
         $(this).addClass('disabled');
         $(this).siblings('.spinner').show();
     });
