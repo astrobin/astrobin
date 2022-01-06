@@ -7,4 +7,4 @@ then
     exit 1
 fi
 
-find $1 -type f -name '*' -mmin +$2 -exec rm {} \;
+find $1 -type f -name '*' -mmin +$2 -exec rm -f {} \;
