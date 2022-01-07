@@ -24,153 +24,173 @@
         {% random_id %}
 
         {% if alias != 'histogram' %}
-            {% if link %}
-            <a {% if instant %}data-instant{% endif %}
-               href="{{url}}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,page,recent_images_page,public,staging,trash,image_list_page,sub,s,t,d,license,camera_type,telescope_type,subject_type,pixel_scale_min,pixel_scale_max,field_radius_min,field_radius_max,integration_time_min,integration_time_max,moon_phase_min,moon_phase_max,country,award,subject,coord_ra_min,coord_ra_max,coord_dec_min,coord_dec_max,start_date,end_date,forceClassicRevisionUploader" %}">
+            {% if link or fancybox%}
+                <a
+                    {% if fancybox %}
+                        class="fancybox"
+                        href="{{fancybox_url}}"
+                        rel="{{rel}}"
+                        data-url="{{url}}"
+                        data-url-hd="{{url_hd}}"
+                        {% if is_revision %}
+                            data-caption="{% blocktrans trimmed %}Revision {{ revision }}{% endblocktrans %}{% if revision_title %}: {{ revision_title }}{% endif %}"
+                        {% else %}
+                            data-caption="{% trans 'Original revision' %}: {{ image.title }}"
+                        {% endif %}
+                    {% else %}
+                        {% if instant %}
+                            data-instant
+                        {% endif %}
+
+                        href="{{url}}{% query_string "mod=mod,nc=nav_ctx,nce=nav_ctx_extra" "querystring_key,page,recent_images_page,public,staging,trash,image_list_page,sub,s,t,d,license,camera_type,telescope_type,subject_type,pixel_scale_min,pixel_scale_max,field_radius_min,field_radius_max,integration_time_min,integration_time_max,moon_phase_min,moon_phase_max,country,award,subject,coord_ra_min,coord_ra_max,coord_dec_min,coord_dec_max,start_date,end_date,forceClassicRevisionUploader" %}"
+                    {% endif %}
+                >
             {% endif %}
 
-                {% if badges %}
-                    <ul class="badges">
-                        {% for badge in badges %}
-                            {% if badge == 'iotd' and alias != 'regular' and alias != 'regular_sharpened' and alias != 'regular_large' and alias != 'regular_large_sharpened' %}
-                                <li>
-                                    <i class="icon-trophy iotd-badge badge"></i>
-                                </li>
-                            {% endif %}
-
-                            {% if badge == 'top-pick' %}
-                                <li>
-                                    <i class="icon-star top-pick-badge badge"></i>
-                                </li>
-                            {% endif %}
-
-                            {% if badge == 'top-pick-nomination' %}
-                                <li>
-                                    <i class="icon-arrow-up top-pick-nomination-badge badge"></i>
-                                </li>
-                            {% endif %}
-
-                            {% if badge == 'wip' %}
-                                <li>
-                                    <i class="icon-lock wip-badge badge"
-                                       rel="tooltip" data-placement="right" title="{% trans "Staging area" %}"></i>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                {% endif %} {# badges #}
-        {% endif %} {# not histogram #}
-            <figure>
-                <img
-                    {% if thumb_url %}
-                         src="{{thumb_url}}"
-                         data-preloaded="true"
-                         data-loaded="true"
-                    {% else %}
-                         {% if alias == 'gallery' %}
-                            src="{% static 'astrobin/images/placeholder-gallery.png' %}"
-                         {% else %}
-                            {% if alias == 'story' %}
-                                src="{% static 'astrobin/images/placeholder-stories.jpg' %}"
-                            {% else %}
-                                src="https://via.placeholder.com/{{placehold_size}}/222/333&text={% trans "Loading" %}"
-                            {% endif %}
-                         {% endif %}
-                         data-preloaded="false"
-                         data-loaded="false"
-                    {% endif %}
-
-                     class="astrobin-image{% if real %} real{% endif %}"
-
-                     {% if provide_size %}
-                         width="{{size_x}}"
-                         height="{{size_y}}"
-                     {% endif %}
-
-                     data-id="{{image.id}}"
-                     data-alias="{{alias}}"
-                     data-revision="{{revision}}"
-                     {% if is_revision %}
-                        data-revision-id="{{ revision_id }}"
-                     {% endif %}
-                     data-get-thumb-url="{{get_thumb_url}}"
-
-                     {% if 'regular' in alias and 'regular_large' not in alias %}
-                         data-regular-large-loaded="false"
-                         {% if regular_large_thumb_url %}
-                            data-regular-large-thumb-url="{{ regular_large_thumb_url }}"
-                         {% endif %}
-
-                         {% if get_regular_large_thumb_url %}
-                            data-get-regular-large-thumb-url="{{ get_regular_large_thumb_url }}"
-                         {% endif %}
-                     {% endif %}
-                     
-                     data-hires-loaded="false"
-                     {% if enhanced_thumb_url %}
-                         data-enhanced-thumb-url="{{enhanced_thumb_url}}"
-                     {% endif %}
-                     {% if get_enhanced_thumb_url %}
-                         data-get-enhanced-thumb-url="{{get_enhanced_thumb_url}}"
-                     {% endif %}
-
-                     alt="{{image.title|escape}}, {% astrobin_username image.user link=False %}"
-                />
-
-                {% if show_tooltip %}
-                    <figcaption>
-                        <h3>{{ image.title | escape | default:_("(no title)") }}</h3>
-                        <h4>{% astrobin_username image.user link=False %}</h4>
-                        {% if alias == 'gallery' %}
-                            {% cache 300 astrobin_image_caption caption_cache_key %}
-                            <table class="table table-condensed">
-                                <tr>
-                                    <th><i class="icon-calendar"></i></th>
-                                    {% if image.published %}
-                                        <td colspan="3">{% timestamp image.published %}</td>
-                                    {% else %}
-                                        <td colspan="3">{% timestamp image.uploaded %}</td>
-                                    {% endif %}
-                                </tr>
-
-                                <tr>
-                                    <th><i class="icon-thumbs-up"></i></th>
-                                    <td>{{image.likes}}</td>
-                                    <th><i class="icon-bookmark"></i></th>
-                                    <td>{{ image.bookmarks }}</td>
-                                </tr>
-
-                                <tr>
-                                    <th><i class="icon-comments-alt"></i></th>
-                                    <td>{{ image.comments }}</td>
-                                    <th><i class="icon-th"></i></th>
-                                    <td>{{ image.revisions.count }}</td>
-                                </tr>
-
-                                {% if badges %}
-                                    <tr>
-                                        <th class="caption-badge">
-                                            {% if 'iotd' in badges %}<i class="icon-trophy"></i>
-                                            {% elif 'top-pick' in badges %}<i class="icon-star"></i>
-                                            {% elif 'top-pick-nomination' in badges %}<i class="icon-arrow-up"></i>
-                                            {% elif 'wip' in badges %}<i class="icon-lock"></i>{% endif %}
-                                        </th>
-                                        <td colspan="3" class="caption-badge">
-                                            {% if 'iotd' in badges %}{% trans "Image of the day" %}
-                                            {% elif 'top-pick' in badges %}{% trans "Top pick" %}
-                                            {% elif 'top-pick-nomination' in badges %}{% trans "Top pick nomination" %}
-                                            {% elif 'wip' in badges %}{% trans "Staging area" %}{% endif %}
-                                        </td>
-                                    </tr>
-                                {% endif %}
-                            </table>
-                            {% endcache %}
+            {% if badges %}
+                <ul class="badges">
+                    {% for badge in badges %}
+                        {% if badge == 'iotd' and alias != 'regular' and alias != 'regular_sharpened' and alias != 'regular_large' and alias != 'regular_large_sharpened' %}
+                            <li>
+                                <i class="icon-trophy iotd-badge badge"></i>
+                            </li>
                         {% endif %}
-                    </figcaption>
+
+                        {% if badge == 'top-pick' %}
+                            <li>
+                                <i class="icon-star top-pick-badge badge"></i>
+                            </li>
+                        {% endif %}
+
+                        {% if badge == 'top-pick-nomination' %}
+                            <li>
+                                <i class="icon-arrow-up top-pick-nomination-badge badge"></i>
+                            </li>
+                        {% endif %}
+
+                        {% if badge == 'wip' %}
+                            <li>
+                                <i class="icon-lock wip-badge badge"
+                                   rel="tooltip" data-placement="right" title="{% trans "Staging area" %}"></i>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endif %} {# badges #}
+        {% endif %} {# histogram #}
+
+        <figure>
+            <img
+                {% if thumb_url %}
+                     src="{{thumb_url}}"
+                     data-preloaded="true"
+                     data-loaded="true"
+                {% else %}
+                     {% if alias == 'gallery' %}
+                        src="{% static 'astrobin/images/placeholder-gallery.png' %}"
+                     {% else %}
+                        {% if alias == 'story' %}
+                            src="{% static 'astrobin/images/placeholder-stories.jpg' %}"
+                        {% else %}
+                            src="https://via.placeholder.com/{{placehold_size}}/222/333&text={% trans "Loading" %}"
+                        {% endif %}
+                     {% endif %}
+                     data-preloaded="false"
+                     data-loaded="false"
                 {% endif %}
-            </figure>
-        {% if alias != 'histogram' and link %}
-        </a>
+
+                 class="astrobin-image{% if real %} real{% endif %}"
+
+                 {% if provide_size %}
+                     width="{{size_x}}"
+                     height="{{size_y}}"
+                 {% endif %}
+
+                 data-id="{{image.id}}"
+                 data-alias="{{alias}}"
+                 data-revision="{{revision}}"
+                 {% if is_revision %}
+                    data-revision-id="{{ revision_id }}"
+                 {% endif %}
+                 data-get-thumb-url="{{get_thumb_url}}"
+
+                 {% if 'regular' in alias and 'regular_large' not in alias %}
+                     data-regular-large-loaded="false"
+                     {% if regular_large_thumb_url %}
+                        data-regular-large-thumb-url="{{ regular_large_thumb_url }}"
+                     {% endif %}
+
+                     {% if get_regular_large_thumb_url %}
+                        data-get-regular-large-thumb-url="{{ get_regular_large_thumb_url }}"
+                     {% endif %}
+                 {% endif %}
+
+                 data-hires-loaded="false"
+                 {% if enhanced_thumb_url %}
+                     data-enhanced-thumb-url="{{enhanced_thumb_url}}"
+                 {% endif %}
+                 {% if get_enhanced_thumb_url %}
+                     data-get-enhanced-thumb-url="{{get_enhanced_thumb_url}}"
+                 {% endif %}
+
+                 alt="{{image.title|escape}}, {% astrobin_username image.user link=False %}"
+            />
+
+            {% if show_tooltip %}
+                <figcaption>
+                    <h3>{{ image.title | escape | default:_("(no title)") }}</h3>
+                    <h4>{% astrobin_username image.user link=False %}</h4>
+                    {% if alias == 'gallery' %}
+                        {% cache 300 astrobin_image_caption caption_cache_key %}
+                        <table class="table table-condensed">
+                            <tr>
+                                <th><i class="icon-calendar"></i></th>
+                                {% if image.published %}
+                                    <td colspan="3">{% timestamp image.published %}</td>
+                                {% else %}
+                                    <td colspan="3">{% timestamp image.uploaded %}</td>
+                                {% endif %}
+                            </tr>
+
+                            <tr>
+                                <th><i class="icon-thumbs-up"></i></th>
+                                <td>{{image.likes}}</td>
+                                <th><i class="icon-bookmark"></i></th>
+                                <td>{{ image.bookmarks }}</td>
+                            </tr>
+
+                            <tr>
+                                <th><i class="icon-comments-alt"></i></th>
+                                <td>{{ image.comments }}</td>
+                                <th><i class="icon-th"></i></th>
+                                <td>{{ image.revisions.count }}</td>
+                            </tr>
+
+                            {% if badges %}
+                                <tr>
+                                    <th class="caption-badge">
+                                        {% if 'iotd' in badges %}<i class="icon-trophy"></i>
+                                        {% elif 'top-pick' in badges %}<i class="icon-star"></i>
+                                        {% elif 'top-pick-nomination' in badges %}<i class="icon-arrow-up"></i>
+                                        {% elif 'wip' in badges %}<i class="icon-lock"></i>{% endif %}
+                                    </th>
+                                    <td colspan="3" class="caption-badge">
+                                        {% if 'iotd' in badges %}{% trans "Image of the day" %}
+                                        {% elif 'top-pick' in badges %}{% trans "Top pick" %}
+                                        {% elif 'top-pick-nomination' in badges %}{% trans "Top pick nomination" %}
+                                        {% elif 'wip' in badges %}{% trans "Staging area" %}{% endif %}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        </table>
+                        {% endcache %}
+                    {% endif %}
+                </figcaption>
+            {% endif %}
+        </figure>
+
+        {% if link or fancybox %}
+            </a>
         {% endif %}
     </div>
 {% endif %}

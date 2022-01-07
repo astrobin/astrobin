@@ -29,7 +29,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.encoding import iri_to_uri, smart_text as smart_unicode
 from django.utils.translation import ugettext as _
-from django.views.decorators.cache import cache_control, never_cache
+from django.views.decorators.cache import cache_control
 from django.views.decorators.http import last_modified
 from django.views.decorators.vary import vary_on_cookie
 from django.views.generic import (
@@ -205,6 +205,7 @@ class ImageRawThumbView(ImageDetailViewBase):
         url = image.thumbnail(
             alias, revision_label, animated='animated' in self.request.GET, insecure='insecure' in self.request.GET,
             sync=request.GET.get('sync') is not None)
+
         return redirect(smart_unicode(url))
 
 
