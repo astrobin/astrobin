@@ -94,17 +94,20 @@
             loop: false,
             beforeLoad: function () {
                 const $element = $(this.element);
-                this.title = `
-                    <div style="margin-top: .5rem">${$element.data("caption")}</div>
-                    <div style="display: block; margin: 1rem 0;">
-                        <a href="${$element.data('url')}" class="btn btn-primary" style="margin-right: .5rem">
-                            {% trans 'View page' %}
-                        </a>
-                        <a href="${$element.data('url-hd')}" class="btn btn-secondary">
-                            {% trans 'View large' %}
-                        </a>
-                    </div>
-                `;
+
+                if ($element.attr("rel") === "revisions") {
+                    this.title = `
+                        <div style="margin-top: .5rem">${$element.data("caption")}</div>
+                        <div style="display: block; margin: 1rem 0;">
+                            <a href="${$element.data('url')}" class="btn btn-primary" style="margin-right: .5rem">
+                                {% trans 'View page' %}
+                            </a>
+                            <a href="${$element.data('url-hd')}" class="btn btn-secondary">
+                                {% trans 'View large' %}
+                            </a>
+                        </div>
+                    `;
+                }
             }
         });
 
