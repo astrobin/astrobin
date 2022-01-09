@@ -189,8 +189,10 @@
             {% endif %}
         </figure>
 
-        {% if link or fancybox %}
-            </a>
-        {% endif %}
+        {% if alias != 'histogram' %}
+            {% if link or fancybox %}
+                </a>
+            {% endif %}
+        {% endif %} {# histogram #}
     </div>
 {% endif %}
