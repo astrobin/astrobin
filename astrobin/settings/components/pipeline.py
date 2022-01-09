@@ -14,7 +14,6 @@ THIRD_PARTY_STYLESHEETS = (
     'astrobin/css/bootstrap.css',
     'astrobin/css/bootstrap-responsive.css',
 
-    'common/fancybox/jquery.fancybox.css',
     'common/css/ldbtn.min.css',
     'common/css/loading.min.css',
 )
@@ -27,8 +26,6 @@ PIPELINE = {
     'JAVASCRIPT': {
         'scripts': {
             'source_filenames': (
-                'common/fancybox/jquery.fancybox.js',
-
                 'astrobin_apps_images/js/astrobin_apps_images.js',
 
                 'astrobin/js/jquery.i18n.js',
@@ -47,7 +44,6 @@ PIPELINE = {
                 'astrobin/js/jquery.flot.js',
                 'astrobin/js/jquery.flot.pie.min.js',
                 'astrobin/js/jquery.cycle.all.js',
-                'astrobin/js/jquery.easing.1.3.js',
                 'astrobin/js/jquery.multiselect.js',
                 'astrobin/js/jquery.qtip.js',
                 'astrobin/js/jquery.stickytableheaders.js',

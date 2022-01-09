@@ -51,6 +51,8 @@ def astrobin_image(context, image, alias, **kwargs):
     nav_ctx_extra = kwargs.get('nav_ctx_extra', request.GET.get('nce', context.get('nav_ctx_extra')))
     classes = kwargs.get('classes', '')
     instant = kwargs.get('instant', False)
+    fancybox = kwargs.get('fancybox', False)
+    rel = kwargs.get('rel', '')
 
     if nav_ctx == 'user':
         # None is considered to be default for 'user'
@@ -76,6 +78,7 @@ def astrobin_image(context, image, alias, **kwargs):
             'image': '',
             'alias': alias,
             'revision': revision,
+            'revision_title': None,
             'size_x': size[0],
             'size_y': size[1],
             'caption_cache_key': 'astrobin_image_no_image',
@@ -83,7 +86,10 @@ def astrobin_image(context, image, alias, **kwargs):
             'nav_ctx_extra': nav_ctx_extra,
             'classes': classes,
             'is_revision': False,
-            'instant': False
+            'instant': False,
+            'fancybox': False,
+            'fancybox_url': None,
+            'rel': rel,
         }
 
     # Old images might not have a size in the database, let's fix it.
@@ -155,6 +161,7 @@ def astrobin_image(context, image, alias, **kwargs):
                    'real')
 
     url = get_image_url(image, url_revision, url_size)
+    url_hd = get_image_url(image, url_revision, 'full')
 
     show_tooltip = tooltip and (alias in (
         'gallery', 'gallery_inverted',
@@ -229,7 +236,7 @@ def astrobin_image(context, image, alias, **kwargs):
     get_enhanced_thumb_url, enhanced_thumb_url = ImageService(image).get_enhanced_thumb_url(
         field, alias, revision, animated, request.is_secure(), 'hd')
 
-
+    # noinspection PyTypeChecker
     return dict(list(response_dict.items()) + list({
         'status': 'success',
         'image': image,
@@ -241,6 +248,7 @@ def astrobin_image(context, image, alias, **kwargs):
         'placehold_size': "%sx%s" % (placehold_size[0], placehold_size[1]),
         'real': alias in ('real', 'real_inverted'),
         'url': url,
+        'url_hd': url_hd,
         'show_tooltip': show_tooltip,
         'request': request,
         'caption_cache_key': "%d_%s_%s_%s" % (
@@ -259,9 +267,17 @@ def astrobin_image(context, image, alias, **kwargs):
         'get_regular_large_thumb_url': get_regular_large_thumb_url,
         'is_revision': hasattr(image_revision, 'label'),
         'revision_id': image_revision.pk,
+        'revision_title': image_revision.title if hasattr(image_revision, 'label') else None,
         'w': w,
         'h': h,
         'instant': instant,
+        'fancybox': fancybox,
+        'fancybox_url': reverse('image_rawthumb', kwargs={
+            'id': image.get_id(),
+            'alias': 'hd',
+            'r': revision,
+        }) + '?sync',
+        'rel': rel,
     }.items()))
 
 

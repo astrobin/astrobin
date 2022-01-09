@@ -88,7 +88,24 @@
         );
 
         $('.fancybox').fancybox({
-            type: 'image'
+            type: "image",
+            padding: 0,
+            overlayColor: "#0a0a0a",
+            loop: false,
+            beforeLoad: function () {
+                const $element = $(this.element);
+                this.title = `
+                    <div style="margin-top: .5rem">${$element.data("caption")}</div>
+                    <div style="display: block; margin: 1rem 0;">
+                        <a href="${$element.data('url')}" class="btn btn-primary">
+                            {% trans 'View page' %}
+                        </a>
+                        <a href="${$element.data('url-hd')}" class="btn btn-secondary">
+                            {% trans 'View large' %}
+                        </a>
+                    </div>
+                `;
+            }
         });
 
         $("form:not(.ajax) [type='submit']").one("click", function (event) {
