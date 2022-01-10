@@ -192,15 +192,15 @@ $(document).ready(function() {
             content = sharingUrl;
         } else if (sharingMode === SHARING_MODE_FORUMS) {
             content = "[URL=" + sharingUrl + "]";
-            if (thumbnailSize === THUMBNAIL_SIZE_OFF) content += "[IMG]";
+            if (thumbnailSize !== THUMBNAIL_SIZE_OFF) content += "[IMG]";
             content += text
-            if (thumbnailSize === THUMBNAIL_SIZE_OFF) content += "[/IMG]";
+            if (thumbnailSize !== THUMBNAIL_SIZE_OFF) content += "[/IMG]";
             content += "[/URL]"
         } else if (sharingMode === SHARING_MODE_HTML) {
             content = "<a href=\"" + sharingUrl + "\">";
-            if (thumbnailSize === THUMBNAIL_SIZE_OFF) content += "<img src=\"";
+            if (thumbnailSize !== THUMBNAIL_SIZE_OFF) content += "<img src=\"";
             content += text;
-            if (thumbnailSize === THUMBNAIL_SIZE_OFF) content += "\"/>";
+            if (thumbnailSize !== THUMBNAIL_SIZE_OFF) content += "\"/>";
             content += "</a>"
         }
 
