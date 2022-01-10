@@ -8,7 +8,7 @@ describe("Forum polls", () => {
     });
 
 
-    it("should post", () => {
+    it.skip("should post", () => {
         cy.visit("/forum/c/astrobin/announcements/");
         cy.get("a").contains("New topic").click();
         cy.url().should("contain", "/topic/add/");
@@ -41,7 +41,7 @@ describe("Forum polls", () => {
         cy.get("[for='id_answers_2']").contains("Third answer").should("exist");
     });
 
-    it("should vote", () => {
+    it.skip("should vote", () => {
         cy.get("[for='id_answers_0']").contains("First answer").click();
         cy.get(".poll-form .btn").contains("Submit").click();
 
@@ -53,7 +53,7 @@ describe("Forum polls", () => {
         cy.get(".poll-answer td").contains("Third answer").should("exist");
     });
 
-    it("should cancel vote", () => {
+    it.skip("should cancel vote", () => {
         cy.get(".btn").contains("Cancel my poll vote").click();
 
         cy.url().should("contain", "/forum/c/astrobin/announcements/test-topic");
