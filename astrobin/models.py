@@ -2684,36 +2684,6 @@ class UserProfile(SafeDeleteModel):
         help_text=_("The license you select here is automatically applied to all your new images."),
     )
 
-    default_watermark_text = models.CharField(
-        max_length=128,
-        null=True,
-        blank=True,
-        editable=False,
-    )
-
-    default_watermark = models.BooleanField(
-        default=False,
-        editable=False,
-    )
-
-    default_watermark_size = models.CharField(
-        max_length=1,
-        default='M',
-        choices=WATERMARK_SIZE_CHOICES,
-        editable=False,
-    )
-
-    default_watermark_position = models.IntegerField(
-        default=0,
-        choices=WATERMARK_POSITION_CHOICES,
-        editable=False,
-    )
-
-    default_watermark_opacity = models.IntegerField(
-        default=10,
-        editable=False,
-    )
-
     accept_tos = models.BooleanField(
         editable=False,
         default=False
