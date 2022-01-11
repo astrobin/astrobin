@@ -41,9 +41,9 @@ def gallery_thumbnail_inverted(image, revision_label):
 def astrobin_image(context, image, alias, **kwargs):
     request = kwargs.get('request', context['request'])
 
-    revision = kwargs.get('revision', 'final')
+    revision_label = kwargs.get('revision', 'final')
     url_size = kwargs.get('url_size', 'regular')
-    url_revision = kwargs.get('url_revision', revision)
+    url_revision = kwargs.get('url_revision', revision_label)
     link = kwargs.get('link', True)
     link_alias = kwargs.get('link_alias', alias)
     tooltip = kwargs.get('tooltip', True)
@@ -77,7 +77,7 @@ def astrobin_image(context, image, alias, **kwargs):
             'status': 'failure',
             'image': '',
             'alias': alias,
-            'revision': revision,
+            'revision': revision_label,
             'revision_title': None,
             'size_x': size[0],
             'size_y': size[1],
@@ -94,9 +94,9 @@ def astrobin_image(context, image, alias, **kwargs):
 
     # Old images might not have a size in the database, let's fix it.
     image_revision = image
-    if revision not in [0, '0', 'final']:
+    if revision_label not in [0, '0', 'final']:
         try:
-            image_revision = image.revisions.get(label=revision)
+            image_revision = image.revisions.get(label=revision_label)
         except ImageRevision.DoesNotExist:
             # Image revision was deleted
             pass
@@ -149,7 +149,7 @@ def astrobin_image(context, image, alias, **kwargs):
         placehold_size[1] = h
 
     # Determine whether this is an animated gif, and we should show it as such
-    field = image.get_thumbnail_field(revision)
+    field = image.get_thumbnail_field(revision_label)
     if not field.name.startswith('images/'):
         field.name = 'images/' + field.name
 
@@ -200,7 +200,7 @@ def astrobin_image(context, image, alias, **kwargs):
             badges.append('top100')
         """
 
-    cache_key = image.thumbnail_cache_key(field, alias)
+    cache_key = image.thumbnail_cache_key(field, alias, revision_label)
     if animated:
         cache_key += '_animated'
     thumb_url = cache.get(cache_key)
@@ -212,7 +212,7 @@ def astrobin_image(context, image, alias, **kwargs):
     # If we're testing, we want to bypass the placeholder thing and force-get
     # the thumb url.
     if thumb_url is None and settings.TESTING:
-        thumb = image.thumbnail_raw(alias, revision)
+        thumb = image.thumbnail_raw(alias, revision_label)
         if thumb:
             thumb_url = thumb.url
 
@@ -223,18 +223,18 @@ def astrobin_image(context, image, alias, **kwargs):
             'alias': alias,
         }
 
-        if revision is None or revision != 'final':
-            get_thumb_kwargs['r'] = revision
+        if revision_label is None or revision_label != 'final':
+            get_thumb_kwargs['r'] = revision_label
 
         get_thumb_url = reverse('image_thumb', kwargs=get_thumb_kwargs)
         if animated:
             get_thumb_url += '?animated'
 
     get_regular_large_thumb_url, regular_large_thumb_url = ImageService(image).get_enhanced_thumb_url(
-        field, alias, revision, animated, request.is_secure(), 'regular_large')
+        field, alias, revision_label, animated, request.is_secure(), 'regular_large')
 
     get_enhanced_thumb_url, enhanced_thumb_url = ImageService(image).get_enhanced_thumb_url(
-        field, alias, revision, animated, request.is_secure(), 'hd')
+        field, alias, revision_label, animated, request.is_secure(), 'hd')
 
     # noinspection PyTypeChecker
     return dict(list(response_dict.items()) + list({
@@ -242,7 +242,7 @@ def astrobin_image(context, image, alias, **kwargs):
         'image': image,
         'alias': alias,
         'mod': mod,
-        'revision': revision,
+        'revision': revision_label,
         'size_x': size[0],
         'size_y': size[1],
         'placehold_size': "%sx%s" % (placehold_size[0], placehold_size[1]),
@@ -252,7 +252,7 @@ def astrobin_image(context, image, alias, **kwargs):
         'show_tooltip': show_tooltip,
         'request': request,
         'caption_cache_key': "%d_%s_%s_%s" % (
-            image.id, revision, alias, request.LANGUAGE_CODE if hasattr(request, "LANGUAGE_CODE") else "en"),
+            image.id, revision_label, alias, request.LANGUAGE_CODE if hasattr(request, "LANGUAGE_CODE") else "en"),
         'badges': badges,
         'animated': animated,
         'get_thumb_url': get_thumb_url,
@@ -275,7 +275,7 @@ def astrobin_image(context, image, alias, **kwargs):
         'fancybox_url': reverse('image_rawthumb', kwargs={
             'id': image.get_id(),
             'alias': 'hd',
-            'r': revision,
+            'r': revision_label,
         }) + '?sync',
         'rel': rel,
     }.items()))

@@ -1663,14 +1663,15 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         return thumb
 
-    def thumbnail_cache_key(self, field, alias):
+    def thumbnail_cache_key(self, field, alias, revision_label):
         app_model = "{0}.{1}".format(
             self._meta.app_label,
             self._meta.object_name).lower()
-        cache_key = 'easy_thumb_alias_cache_%s.%s_%s_%s' % (
+        cache_key = 'easy_thumb_alias_cache_%s.%s_%s_%s_%s' % (
             app_model,
             unicodedata.normalize('NFKD', str(field)).encode('ascii', 'ignore'),
             alias,
+            revision_label,
             self.square_cropping)
 
         from hashlib import sha256
@@ -1703,7 +1704,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
 
         options = self.get_thumbnail_options(alias, revision_label, thumbnail_settings)
 
-        cache_key = self.thumbnail_cache_key(field, alias)
+        cache_key = self.thumbnail_cache_key(field, alias, revision_label)
 
         # If this is an animated gif, let's just return the full size URL
         # because right now we can't thumbnail gifs preserving animation
@@ -1774,7 +1775,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         from astrobin_apps_images.models import ThumbnailGroup
 
         for alias, thumbnail_settings in settings.THUMBNAIL_ALIASES[''].items():
-            cache_key = self.thumbnail_cache_key(field, alias)
+            cache_key = self.thumbnail_cache_key(field, alias, revision_label)
             if cache.get(cache_key):
                 cache.delete(cache_key)
                 cache.delete('%s.retrieve' % cache_key)

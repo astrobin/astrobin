@@ -30,6 +30,7 @@ from subscription.signals import paid, signed_up
 
 from astrobin.tasks import process_camera_rename_proposal
 from astrobin_apps_groups.models import Group
+from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_notifications.services import NotificationsService
@@ -101,6 +102,15 @@ def image_pre_save(sender, instance, **kwargs):
         current_mentions = MentionsService.get_mentions(instance.description_bbcode)
         mentions = [item for item in current_mentions if item not in previous_mentions]
         cache.set("image.%d.image_pre_save_mentions" % instance.pk, mentions, 2)
+
+        if (
+                instance.watermark_text != image.watermark_text or
+                instance.watermark != image.watermark or
+                instance.watermark_position != image.watermark_position or
+                instance.watermark_size != image.watermark_size or
+                instance.watermark_opacity != image.watermark_opacity
+        ):
+            ImageService(image).invalidate_all_thumbnails()
 
 
 pre_save.connect(image_pre_save, sender=Image)

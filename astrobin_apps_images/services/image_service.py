@@ -7,8 +7,9 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
 from django.core.files.images import get_image_dimensions
-from django.db.models import Q
+from django.db.models import Q, QuerySet
 from django.urls import reverse
 from hitcount.models import HitCount
 from hitcount.views import HitCountMixin
@@ -69,8 +70,7 @@ class ImageService:
 
         return self.get_revision(label)
 
-    def get_revisions(self, include_deleted=False):
-        # type: (bool, bool) -> QuerySet
+    def get_revisions(self, include_deleted=False) -> QuerySet:
         manager = ImageRevision.all_objects if include_deleted else ImageRevision.objects
         return manager.filter(image=self.image)
 
@@ -238,11 +238,9 @@ class ImageService:
 
         return Image.HEMISPHERE_TYPE_NORTHERN if solution.dec >= 0 else Image.HEMISPHERE_TYPE_SOUTHERN
 
-    def set_thumb(self, alias, revision_label, url):
-        # type: (str, str, str) -> None
-
+    def set_thumb(self, alias: str, revision_label: str, url: str) -> None:
         field = self.image.get_thumbnail_field(revision_label)
-        cache_key = self.image.thumbnail_cache_key(field, alias)
+        cache_key = self.image.thumbnail_cache_key(field, alias, revision_label)
         cache.set(cache_key, url, 60 * 60 * 24)
 
         thumbnails, created = ThumbnailGroup.objects.get_or_create(image=self.image, revision=revision_label)
@@ -292,13 +290,13 @@ class ImageService:
         image.thumbnails.filter(revision=new_original.label).update(revision='0')
         new_original.delete()
 
-    def get_enhanced_thumb_url(self, field, alias, revision, animated, secure, target_alias):
+    def get_enhanced_thumb_url(self, field, alias, revision_label, animated, secure, target_alias):
         get_enhanced_thumb_url = None
         enhanced_thumb_url = None
 
         if alias == 'regular' or alias == 'regular_sharpened':
             enhanced_alias = target_alias if alias == 'regular' else '%s_sharpened' % target_alias
-            cache_key = self.image.thumbnail_cache_key(field, enhanced_alias)
+            cache_key = self.image.thumbnail_cache_key(field, enhanced_alias, revision_label)
             if animated:
                 cache_key += '_animated'
             enhanced_thumb_url = cache.get(cache_key)
@@ -309,7 +307,7 @@ class ImageService:
             # If we're testing, we want to bypass the placeholder thing and force-get
             # the enhanced thumb url.
             if enhanced_thumb_url is None and settings.TESTING:
-                enhanced_thumb = self.image.thumbnail_raw(enhanced_alias, revision)
+                enhanced_thumb = self.image.thumbnail_raw(enhanced_alias, revision_label)
                 if enhanced_thumb:
                     enhanced_thumb_url = enhanced_thumb.url
 
@@ -319,8 +317,8 @@ class ImageService:
                     'alias': enhanced_alias,
                 }
 
-                if revision is None or revision != 'final':
-                    get_enhanced_thumb_kwargs['r'] = revision
+                if revision_label is None or revision_label != 'final':
+                    get_enhanced_thumb_kwargs['r'] = revision_label
 
                 get_enhanced_thumb_url = reverse('image_thumb', kwargs=get_enhanced_thumb_kwargs)
                 if animated:
@@ -399,6 +397,13 @@ class ImageService:
             equipment_list['accessories'].append(item_data(x, 'LEGACY'))
 
         return equipment_list
+
+    def invalidate_all_thumbnails(self):
+        self.image.thumbnail_invalidate()
+
+        revision: ImageRevision
+        for revision in self.get_revisions().iterator():
+            revision.thumbnail_invalidate()
 
     @staticmethod
     def get_constellation(solution):

@@ -950,12 +950,6 @@ def image_edit_save_watermark(request):
         return HttpResponseRedirect(
             reverse('image_edit_basic', kwargs={'id': image.get_id()}) + "?upload")
 
-    # Force new thumbnails
-    image.thumbnail_invalidate()
-    revision: ImageRevision
-    for revision in ImageService(image).get_revisions():
-        revision.thumbnail_invalidate()
-
     return HttpResponseRedirect(image.get_absolute_url())
 
 
