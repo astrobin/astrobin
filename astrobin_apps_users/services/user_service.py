@@ -7,7 +7,7 @@ from django.contrib.auth.models import User, Group
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
-from django.db.models import QuerySet, Q
+from django.db.models import QuerySet
 from django.utils import timezone
 from pybb.models import Post
 

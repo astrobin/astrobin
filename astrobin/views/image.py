@@ -111,9 +111,7 @@ class ImageFlagThumbsView(
 
     def post(self, request, *args, **kwargs):
         image = self.get_object()
-        image.thumbnail_invalidate()
-        for r in image.revisions.all():
-            r.thumbnail_invalidate()
+        ImageService(image).invalidate_all_thumbnails()
         messages.success(self.request, _("Thanks for reporting the problem. All thumbnails will be generated again."))
         return super(ImageFlagThumbsView, self).post(self.request, args, kwargs)
 
@@ -799,9 +797,7 @@ class ImageDeleteView(LoginRequiredMixin, ImageDeleteViewBase):
     def post(self, *args, **kwargs):
         image = self.get_object()
 
-        image.thumbnail_invalidate()
-        for revision in image.revisions.all():
-            revision.thumbnail_invalidate()
+        ImageService(image).invalidate_all_thumbnails()
 
         messages.success(self.request, _("Image deleted."))
         return super(ImageDeleteView, self).post(args, kwargs)

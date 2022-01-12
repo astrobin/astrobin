@@ -48,27 +48,6 @@ class ImageSerializer(serializers.ModelSerializer):
         validated_data['user'] = self.context['request'].user
         return super().create(validated_data)
 
-    def update(self, instance, validated_data):
-        validated_data['user'] = self.context['request'].user
-
-        instance: Image = super().update(instance, validated_data)
-
-        profile = instance.user.userprofile  # type: UserProfile
-
-        if instance.watermark != profile.default_watermark or \
-                instance.watermark_text != profile.default_watermark_text or \
-                instance.watermark_position != profile.default_watermark_position or \
-                instance.watermark_size != profile.default_watermark_size or \
-                instance.watermark_opacity != profile.default_watermark_opacity:
-            profile.default_watermark = instance.watermark
-            profile.default_watermark_text = instance.watermark_text
-            profile.default_watermark_position = instance.watermark_position
-            profile.default_watermark_size = instance.watermark_size
-            profile.default_watermark_opacity = instance.watermark_opacity
-            profile.save(keep_deleted=True)
-
-        return instance
-
     def to_representation(self, instance: Image):
         representation = super().to_representation(instance)
         representation.update({

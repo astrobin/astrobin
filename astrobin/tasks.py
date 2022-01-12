@@ -125,7 +125,7 @@ def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
 
     def drop_retrieval_cache():
         field = image.get_thumbnail_field(revision_label)
-        cache_key = image.thumbnail_cache_key(field, alias)
+        cache_key = image.thumbnail_cache_key(field, alias, revision_label)
         cache.delete('%s.retrieve' % cache_key)
 
     def set_thumb():

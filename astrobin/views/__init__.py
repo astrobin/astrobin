@@ -605,22 +605,9 @@ def image_edit_watermark(request, id):
             )
         )
 
-    profile = image.user.userprofile
-    if not profile.default_watermark_text or profile.default_watermark_text == '':
-        profile.default_watermark_text = "Copyright %s" % image.user.username
-        profile.save(keep_deleted=True)
-
-    image.watermark = profile.default_watermark
-    image.watermark_text = profile.default_watermark_text
-    image.watermark_position = profile.default_watermark_position
-    image.watermark_size = profile.default_watermark_size
-    image.watermark_opacity = profile.default_watermark_opacity
-
-    form = ImageEditWatermarkForm(instance=image)
-
     return render(request, 'image/edit/watermark.html', {
         'image': image,
-        'form': form,
+        'form': ImageEditWatermarkForm(instance=image),
     })
 
 
@@ -959,24 +946,9 @@ def image_edit_save_watermark(request):
 
     form.save()
 
-    # Save defaults in profile
-    profile: UserProfile = image.user.userprofile
-    profile.default_watermark = form.cleaned_data['watermark']
-    profile.default_watermark_text = form.cleaned_data['watermark_text']
-    profile.default_watermark_position = form.cleaned_data['watermark_position']
-    profile.default_watermark_size = form.cleaned_data['watermark_size']
-    profile.default_watermark_opacity = form.cleaned_data['watermark_opacity']
-    profile.save(keep_deleted=True)
-
     if in_upload_wizard(image, request):
         return HttpResponseRedirect(
             reverse('image_edit_basic', kwargs={'id': image.get_id()}) + "?upload")
-
-    # Force new thumbnails
-    image.thumbnail_invalidate()
-    revision: ImageRevision
-    for revision in ImageService(image).get_revisions():
-        revision.thumbnail_invalidate()
 
     return HttpResponseRedirect(image.get_absolute_url())
 

@@ -30,6 +30,7 @@ from subscription.signals import paid, signed_up
 
 from astrobin.tasks import process_camera_rename_proposal
 from astrobin_apps_groups.models import Group
+from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_notifications.services import NotificationsService
@@ -70,6 +71,17 @@ def image_pre_save(sender, instance, **kwargs):
     try:
         image = sender.objects_including_wip.get(pk=instance.pk)
     except sender.DoesNotExist:
+        # Image is being created.
+
+        last_image: Image = Image.objects_including_wip.filter(user=instance.user).order_by('-pk').first()
+        if last_image:
+            instance.watermark = last_image.watermark
+            instance.watermark_text = last_image.watermark_text
+            instance.watermark_position = last_image.watermark_position
+            instance.watermark_size = last_image.watermark_size
+            instance.watermark_opacity = last_image.watermark_opacity
+
+
         user_scores_index = instance.user.userprofile.get_scores()['user_scores_index'] or 0
         if user_scores_index >= 1.00 or \
                 is_any_premium_subscription(instance.user) or \
@@ -90,6 +102,15 @@ def image_pre_save(sender, instance, **kwargs):
         current_mentions = MentionsService.get_mentions(instance.description_bbcode)
         mentions = [item for item in current_mentions if item not in previous_mentions]
         cache.set("image.%d.image_pre_save_mentions" % instance.pk, mentions, 2)
+
+        if (
+                instance.watermark_text != image.watermark_text or
+                instance.watermark != image.watermark or
+                instance.watermark_position != image.watermark_position or
+                instance.watermark_size != image.watermark_size or
+                instance.watermark_opacity != image.watermark_opacity
+        ):
+            ImageService(image).invalidate_all_thumbnails()
 
 
 pre_save.connect(image_pre_save, sender=Image)
