@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 18:39+0000\n"
+"POT-Creation-Date: 2022-01-14 13:02+0000\n"
 "PO-Revision-Date: 2014-01-24 09:40+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1152,6 +1152,9 @@ msgstr ""
 msgid "Total solar eclipse"
 msgstr ""
 
+msgid "Meteor shower"
+msgstr ""
+
 msgid "Other"
 msgstr "Άλλο"
 
@@ -1463,6 +1466,9 @@ msgid "Star trails"
 msgstr "Αστρικά ίχνη"
 
 msgid "Northern lights"
+msgstr ""
+
+msgid "Noctilucent clouds"
 msgstr ""
 
 msgid "Gear"
@@ -3015,6 +3021,12 @@ msgstr "Δεν επιλέχθηκε αρχείο"
 msgid "Choose file"
 msgstr "Επιλέξτε αρχείο"
 
+msgid "View page"
+msgstr "Προβολή σελίδας"
+
+msgid "View large"
+msgstr ""
+
 msgid "Help with translations!"
 msgstr "Βοήθεια με τις μεταφράσεις!"
 
@@ -3416,29 +3428,8 @@ msgstr ""
 msgid "Declination"
 msgstr ""
 
-msgid "Technical card"
-msgstr "Τεχνική κάρτα"
-
-msgid "Sponsored brands"
-msgstr ""
-
-#, python-format
-msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
-msgstr ""
-
-msgid "Sponsored items"
-msgstr ""
-
-msgid "Disable retailer integration"
-msgstr ""
-
-#, python-format
-msgid "Shop %(name)s at %(retailer)s"
-msgstr ""
-
-#, python-format
-msgid "Shop %(name)s at AstroBin's partners"
-msgstr ""
+msgid "Acquisition details"
+msgstr "Λεπτομέρειες λήψης"
 
 msgid "Frames"
 msgstr "Καρέ"
@@ -3498,6 +3489,27 @@ msgid "Download"
 msgstr ""
 
 msgid "Remote source"
+msgstr ""
+
+msgid "Sponsored brands"
+msgstr ""
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr ""
+
+msgid "Sponsored items"
+msgstr ""
+
+msgid "Disable retailer integration"
+msgstr ""
+
+#, python-format
+msgid "Shop %(name)s at %(retailer)s"
+msgstr ""
+
+#, python-format
+msgid "Shop %(name)s at AstroBin's partners"
 msgstr ""
 
 msgid "Revision title"
@@ -3593,17 +3605,20 @@ msgstr ""
 msgid "Original file"
 msgstr ""
 
-msgid "Thumbnails"
+msgid "Basic information"
+msgstr "Βασικές πληροφορίες"
+
+msgid "Content"
 msgstr ""
+
+msgid "Thumbnail"
+msgstr "Μικρογραφία"
 
 msgid "Watermark"
 msgstr ""
 
-msgid "Basic information"
-msgstr "Βασικές πληροφορίες"
-
-msgid "Acquisition details"
-msgstr "Λεπτομέρειες λήψης"
+msgid "Thumbnails"
+msgstr ""
 
 msgid "Plate-solving settings"
 msgstr ""
@@ -3857,23 +3872,23 @@ msgstr "Απλός σύνδεσμος"
 msgid "Forums"
 msgstr "Forums"
 
-msgid "Thumbnail"
-msgstr "Μικρογραφία"
-
-msgid "Yes"
-msgstr "Ναι"
-
-msgid "No"
-msgstr "Όχι"
-
-msgid "Image size"
-msgstr "Μέγεθος εικόνας"
-
-msgid "Full"
-msgstr "Πλήρης"
-
-msgid "Real"
+msgid "Thumbnail size"
 msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "Link destination"
+msgstr ""
+
+msgid "Page with technical card"
+msgstr ""
+
+msgid "Large view"
+msgstr ""
+
+msgid "Full resolution"
+msgstr "Πλήρης ανάλυση"
 
 msgid "Image mode"
 msgstr "Εμφάνιση εικόνας"
@@ -3989,11 +4004,9 @@ msgstr ""
 #, python-format
 msgid ""
 "Is this too much data for you to handle? Go to the <a class=\"button\" href="
-"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
+"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\" data-no-instant> "
+"basic form</a>."
 msgstr ""
-"Είναι πολλά αυτά τα δεδομένα για να τα χειριστείτε; Πηγαίνετε στην <a class="
-"\"button\" href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false"
-"\">βασική φόρμα</a>."
 
 msgid "Acquisition session"
 msgstr "Συνεδρία λήψης"
@@ -4009,13 +4022,8 @@ msgid ""
 "With this form you can input the basic details for the acquisition of your "
 "image. If you want to be more thorough or fill in separate details for each "
 "filter, go to the <a class=\"button\" href=\"%(advanced_form_url)s?"
-"edit_type=deep_sky&advanced=true\">advanced form</a>."
+"edit_type=deep_sky&advanced=true\" data-no-instant>advanced form</a>."
 msgstr ""
-"Με αυτή την φόρμα μπορείτε να εισάγετε τις βασικές λεπτομέρειες για την λήψη "
-"της εικόνας σας. Αν θέλετε να είστε πιο λεπτομερής ή να εισάγετε "
-"διαφορετικές λεπτομέρειες για κάθε φίλτρο, πηγαίνετε στην <a class=\"button"
-"\" href=\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true"
-"\">προχωρημένη φόρμα</a>."
 
 msgid "What kind of image is this?"
 msgstr "Τι είδους εικόνα είναι;"
@@ -4147,9 +4155,6 @@ msgstr "Επόμενο βήμα: βασικές πληροφορίες"
 msgid "This operation might take several seconds."
 msgstr ""
 
-msgid "Full resolution"
-msgstr "Πλήρης ανάλυση"
-
 #, python-format
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "από τον/την <a href=\"%(the_url)s\">%(user)s</a>"
@@ -4159,6 +4164,9 @@ msgstr ""
 
 msgid "Fit to window"
 msgstr "Περιορισμός στο παράθυρο"
+
+msgid "Technical card"
+msgstr "Τεχνική κάρτα"
 
 msgid "Loading click-and-drag zoom..."
 msgstr ""
@@ -4908,6 +4916,22 @@ msgid "%(user)s commented on your edit proposal"
 msgstr ""
 
 #, python-format
+msgid "<a href=\"%(user_url)s\">%(user)s</a> commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "<strong>%(user)s</strong> commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your scheduled IOTD"
+msgstr ""
+
+#, python-format
 msgid ""
 "User <a href=\"%(object_url)s\">%(object)s</a> is now following you. They "
 "will be notified when you publish new images."
@@ -5356,9 +5380,6 @@ msgstr "RA (ορθή αναφορά)"
 msgid "Dec"
 msgstr "Dec (απόκλιση)"
 
-msgid "View page"
-msgstr "Προβολή σελίδας"
-
 msgid "Member since"
 msgstr "Μέλος από τις"
 
@@ -5427,9 +5448,6 @@ msgid "No forums created"
 msgstr ""
 
 msgid "You are not a member of any groups"
-msgstr ""
-
-msgid "These are the forums in the groups you have access to."
 msgstr ""
 
 msgid "Topics"
@@ -6349,6 +6367,9 @@ msgstr ""
 msgid "Add filter:"
 msgstr ""
 
+msgid "Yes"
+msgstr "Ναι"
+
 msgid "Top pick"
 msgstr ""
 
@@ -6623,9 +6644,6 @@ msgid ""
 "redirected you to the revision currently marked as final."
 msgstr ""
 
-msgid "Accessory"
-msgstr ""
-
 msgid "Dates"
 msgstr "Ημερομηνίες"
 
@@ -6673,6 +6691,37 @@ msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid "No"
+#~ msgstr "Όχι"
+
+#~ msgid "Image size"
+#~ msgstr "Μέγεθος εικόνας"
+
+#~ msgid "Full"
+#~ msgstr "Πλήρης"
+
+#~ msgid ""
+#~ "Is this too much data for you to handle? Go to the <a class=\"button\" "
+#~ "href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</"
+#~ "a>."
+#~ msgstr ""
+#~ "Είναι πολλά αυτά τα δεδομένα για να τα χειριστείτε; Πηγαίνετε στην <a "
+#~ "class=\"button\" href=\"%(basic_form_url)s?"
+#~ "edit_type=deep_sky&advanced=false\">βασική φόρμα</a>."
+
+#~ msgid ""
+#~ "With this form you can input the basic details for the acquisition of "
+#~ "your image. If you want to be more thorough or fill in separate details "
+#~ "for each filter, go to the <a class=\"button\" href="
+#~ "\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">advanced form</"
+#~ "a>."
+#~ msgstr ""
+#~ "Με αυτή την φόρμα μπορείτε να εισάγετε τις βασικές λεπτομέρειες για την "
+#~ "λήψη της εικόνας σας. Αν θέλετε να είστε πιο λεπτομερής ή να εισάγετε "
+#~ "διαφορετικές λεπτομέρειες για κάθε φίλτρο, πηγαίνετε στην <a class="
+#~ "\"button\" href=\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true"
+#~ "\">προχωρημένη φόρμα</a>."
 
 #~ msgid "Integration hours, yearly"
 #~ msgstr "Ώρες ολοκλήρωσης, ετησίως"

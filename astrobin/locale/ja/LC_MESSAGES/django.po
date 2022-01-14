@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 18:39+0000\n"
+"POT-Creation-Date: 2022-01-14 13:02+0000\n"
 "PO-Revision-Date: 2020-11-27 01:58+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1162,6 +1162,9 @@ msgstr ""
 msgid "Total solar eclipse"
 msgstr ""
 
+msgid "Meteor shower"
+msgstr ""
+
 msgid "Other"
 msgstr "その他"
 
@@ -1471,6 +1474,9 @@ msgstr "星の軌跡"
 
 msgid "Northern lights"
 msgstr "オーロラ"
+
+msgid "Noctilucent clouds"
+msgstr ""
 
 msgid "Gear"
 msgstr "機材"
@@ -3045,6 +3051,12 @@ msgstr "ファイルが選択されていません"
 msgid "Choose file"
 msgstr "ファイルを選択"
 
+msgid "View page"
+msgstr "ページを表示"
+
+msgid "View large"
+msgstr ""
+
 msgid "Help with translations!"
 msgstr "ローカライゼーションを助けてください!"
 
@@ -3479,29 +3491,8 @@ msgstr "赤経"
 msgid "Declination"
 msgstr "赤緯"
 
-msgid "Technical card"
-msgstr "Technical card"
-
-msgid "Sponsored brands"
-msgstr "スポンサーのブランド"
-
-#, python-format
-msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
-msgstr "%(retailer)sの<strong>%(name)s</strong>"
-
-msgid "Sponsored items"
-msgstr "スポンサーの商品"
-
-msgid "Disable retailer integration"
-msgstr "小売店との連携を無効にする"
-
-#, python-format
-msgid "Shop %(name)s at %(retailer)s"
-msgstr "%(retailer)sの%(name)s"
-
-#, python-format
-msgid "Shop %(name)s at AstroBin's partners"
-msgstr ""
+msgid "Acquisition details"
+msgstr "撮影詳細"
 
 msgid "Frames"
 msgstr "撮影フレーム"
@@ -3561,6 +3552,27 @@ msgstr "ダウンロード"
 
 msgid "Remote source"
 msgstr "リモート撮影のソース"
+
+msgid "Sponsored brands"
+msgstr "スポンサーのブランド"
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr "%(retailer)sの<strong>%(name)s</strong>"
+
+msgid "Sponsored items"
+msgstr "スポンサーの商品"
+
+msgid "Disable retailer integration"
+msgstr "小売店との連携を無効にする"
+
+#, python-format
+msgid "Shop %(name)s at %(retailer)s"
+msgstr "%(retailer)sの%(name)s"
+
+#, python-format
+msgid "Shop %(name)s at AstroBin's partners"
+msgstr ""
 
 msgid "Revision title"
 msgstr ""
@@ -3655,17 +3667,20 @@ msgstr ""
 msgid "Original file"
 msgstr ""
 
-msgid "Thumbnails"
+msgid "Basic information"
+msgstr "基本情報"
+
+msgid "Content"
+msgstr ""
+
+msgid "Thumbnail"
 msgstr "サムネイル"
 
 msgid "Watermark"
 msgstr "ウォーターマーク"
 
-msgid "Basic information"
-msgstr "基本情報"
-
-msgid "Acquisition details"
-msgstr "撮影詳細"
+msgid "Thumbnails"
+msgstr "サムネイル"
 
 msgid "Plate-solving settings"
 msgstr "Plate-solvingの設定"
@@ -3916,23 +3931,23 @@ msgstr "シンプルリンク"
 msgid "Forums"
 msgstr "フォーラム"
 
-msgid "Thumbnail"
-msgstr "サムネイル"
+msgid "Thumbnail size"
+msgstr ""
 
-msgid "Yes"
-msgstr "はい"
+msgid "Off"
+msgstr ""
 
-msgid "No"
-msgstr "いいえ"
+msgid "Link destination"
+msgstr ""
 
-msgid "Image size"
-msgstr "画像サイズ"
+msgid "Page with technical card"
+msgstr ""
 
-msgid "Full"
-msgstr "すべて"
+msgid "Large view"
+msgstr ""
 
-msgid "Real"
-msgstr "本名"
+msgid "Full resolution"
+msgstr "最大解像度"
 
 msgid "Image mode"
 msgstr "画像モード"
@@ -4049,11 +4064,9 @@ msgstr ""
 #, python-format
 msgid ""
 "Is this too much data for you to handle? Go to the <a class=\"button\" href="
-"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
+"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\" data-no-instant> "
+"basic form</a>."
 msgstr ""
-"これは、あなたが扱うのに大量のデータであるのであれば、<a class=\"button\" "
-"href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">基本情報登録</"
-"a>に行ってください。"
 
 msgid "Acquisition session"
 msgstr "撮影セッション"
@@ -4069,12 +4082,8 @@ msgid ""
 "With this form you can input the basic details for the acquisition of your "
 "image. If you want to be more thorough or fill in separate details for each "
 "filter, go to the <a class=\"button\" href=\"%(advanced_form_url)s?"
-"edit_type=deep_sky&advanced=true\">advanced form</a>."
+"edit_type=deep_sky&advanced=true\" data-no-instant>advanced form</a>."
 msgstr ""
-"画像を撮影したときの基本的な詳細情報をこの入力フォームで登録できます。もっと"
-"完璧に、もしくは、フィルターごとに詳細情報を記入したいのであれば、<a class="
-"\"button\" href=\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">高"
-"度なフォーム</a>をクリックしてください。"
 
 msgid "What kind of image is this?"
 msgstr "この画像の種類はなんでしょうか？"
@@ -4209,9 +4218,6 @@ msgstr "次のステップは基本情報"
 msgid "This operation might take several seconds."
 msgstr "この操作には数秒かかります。"
 
-msgid "Full resolution"
-msgstr "最大解像度"
-
 #, python-format
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "by <a href=\"%(the_url)s\">%(user)s</a>"
@@ -4221,6 +4227,9 @@ msgstr ""
 
 msgid "Fit to window"
 msgstr "ウィンドウに合わせる"
+
+msgid "Technical card"
+msgstr "Technical card"
 
 msgid "Loading click-and-drag zoom..."
 msgstr ""
@@ -4993,6 +5002,22 @@ msgid "%(user)s commented on your edit proposal"
 msgstr ""
 
 #, python-format
+msgid "<a href=\"%(user_url)s\">%(user)s</a> commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "<strong>%(user)s</strong> commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your scheduled IOTD"
+msgstr ""
+
+#, python-format
 msgid ""
 "User <a href=\"%(object_url)s\">%(object)s</a> is now following you. They "
 "will be notified when you publish new images."
@@ -5458,9 +5483,6 @@ msgstr "赤経"
 msgid "Dec"
 msgstr "赤緯"
 
-msgid "View page"
-msgstr "ページを表示"
-
 msgid "Member since"
 msgstr "メンバー登録日"
 
@@ -5529,9 +5551,6 @@ msgid "No forums created"
 msgstr "フォーラムは作られていません"
 
 msgid "You are not a member of any groups"
-msgstr ""
-
-msgid "These are the forums in the groups you have access to."
 msgstr ""
 
 msgid "Topics"
@@ -6460,6 +6479,9 @@ msgstr ""
 msgid "Add filter:"
 msgstr ""
 
+msgid "Yes"
+msgstr "はい"
+
 msgid "Top pick"
 msgstr ""
 
@@ -6733,9 +6755,6 @@ msgid ""
 "redirected you to the revision currently marked as final."
 msgstr ""
 
-msgid "Accessory"
-msgstr ""
-
 msgid "Dates"
 msgstr "日付"
 
@@ -6783,6 +6802,40 @@ msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid "No"
+#~ msgstr "いいえ"
+
+#~ msgid "Image size"
+#~ msgstr "画像サイズ"
+
+#~ msgid "Full"
+#~ msgstr "すべて"
+
+#~ msgid "Real"
+#~ msgstr "本名"
+
+#~ msgid ""
+#~ "Is this too much data for you to handle? Go to the <a class=\"button\" "
+#~ "href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</"
+#~ "a>."
+#~ msgstr ""
+#~ "これは、あなたが扱うのに大量のデータであるのであれば、<a class=\"button\" "
+#~ "href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">基本情報登録"
+#~ "</a>に行ってください。"
+
+#~ msgid ""
+#~ "With this form you can input the basic details for the acquisition of "
+#~ "your image. If you want to be more thorough or fill in separate details "
+#~ "for each filter, go to the <a class=\"button\" href="
+#~ "\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">advanced form</"
+#~ "a>."
+#~ msgstr ""
+#~ "画像を撮影したときの基本的な詳細情報をこの入力フォームで登録できます。もっ"
+#~ "と完璧に、もしくは、フィルターごとに詳細情報を記入したいのであれば、<a "
+#~ "class=\"button\" href=\"%(advanced_form_url)s?"
+#~ "edit_type=deep_sky&advanced=true\">高度なフォーム</a>をクリックしてくださ"
+#~ "い。"
 
 #~ msgid "Integration hours, yearly"
 #~ msgstr "露出時間（何年）"

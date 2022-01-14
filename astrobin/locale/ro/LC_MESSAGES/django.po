@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 18:39+0000\n"
+"POT-Creation-Date: 2022-01-14 13:02+0000\n"
 "PO-Revision-Date: 2013-11-11 19:27+0000\n"
 "Last-Translator: gamangabriel <gamangabriel@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1155,6 +1155,9 @@ msgstr ""
 msgid "Total solar eclipse"
 msgstr ""
 
+msgid "Meteor shower"
+msgstr ""
+
 msgid "Other"
 msgstr "Altul"
 
@@ -1465,6 +1468,9 @@ msgid "Star trails"
 msgstr "Trasee stelare"
 
 msgid "Northern lights"
+msgstr ""
+
+msgid "Noctilucent clouds"
 msgstr ""
 
 msgid "Gear"
@@ -3005,6 +3011,12 @@ msgstr "Nici un fişier selectat"
 msgid "Choose file"
 msgstr "Alege fişier"
 
+msgid "View page"
+msgstr "Vizualizati pagina"
+
+msgid "View large"
+msgstr ""
+
 msgid "Help with translations!"
 msgstr "Ajutati cu translatii !"
 
@@ -3406,29 +3418,8 @@ msgstr ""
 msgid "Declination"
 msgstr ""
 
-msgid "Technical card"
-msgstr "Carte tehnică"
-
-msgid "Sponsored brands"
-msgstr ""
-
-#, python-format
-msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
-msgstr ""
-
-msgid "Sponsored items"
-msgstr ""
-
-msgid "Disable retailer integration"
-msgstr ""
-
-#, python-format
-msgid "Shop %(name)s at %(retailer)s"
-msgstr ""
-
-#, python-format
-msgid "Shop %(name)s at AstroBin's partners"
-msgstr ""
+msgid "Acquisition details"
+msgstr "Detalii de achizitie"
 
 msgid "Frames"
 msgstr "Cadre"
@@ -3489,6 +3480,27 @@ msgid "Download"
 msgstr ""
 
 msgid "Remote source"
+msgstr ""
+
+msgid "Sponsored brands"
+msgstr ""
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr ""
+
+msgid "Sponsored items"
+msgstr ""
+
+msgid "Disable retailer integration"
+msgstr ""
+
+#, python-format
+msgid "Shop %(name)s at %(retailer)s"
+msgstr ""
+
+#, python-format
+msgid "Shop %(name)s at AstroBin's partners"
 msgstr ""
 
 msgid "Revision title"
@@ -3584,17 +3596,20 @@ msgstr ""
 msgid "Original file"
 msgstr ""
 
-msgid "Thumbnails"
+msgid "Basic information"
+msgstr "Informații de bază"
+
+msgid "Content"
 msgstr ""
+
+msgid "Thumbnail"
+msgstr "Imagine iconita"
 
 msgid "Watermark"
 msgstr ""
 
-msgid "Basic information"
-msgstr "Informații de bază"
-
-msgid "Acquisition details"
-msgstr "Detalii de achizitie"
+msgid "Thumbnails"
+msgstr ""
 
 msgid "Plate-solving settings"
 msgstr ""
@@ -3846,23 +3861,23 @@ msgstr "Link simplu"
 msgid "Forums"
 msgstr "Forumuri"
 
-msgid "Thumbnail"
-msgstr "Imagine iconita"
-
-msgid "Yes"
-msgstr "Da"
-
-msgid "No"
-msgstr "Nu"
-
-msgid "Image size"
-msgstr "Dimensiunea imaginii"
-
-msgid "Full"
-msgstr "Plin"
-
-msgid "Real"
+msgid "Thumbnail size"
 msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "Link destination"
+msgstr ""
+
+msgid "Page with technical card"
+msgstr ""
+
+msgid "Large view"
+msgstr ""
+
+msgid "Full resolution"
+msgstr "Rezolutie maxima"
 
 msgid "Image mode"
 msgstr "Mod imagine"
@@ -3973,7 +3988,8 @@ msgstr ""
 #, python-format
 msgid ""
 "Is this too much data for you to handle? Go to the <a class=\"button\" href="
-"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
+"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\" data-no-instant> "
+"basic form</a>."
 msgstr ""
 
 msgid "Acquisition session"
@@ -3990,7 +4006,7 @@ msgid ""
 "With this form you can input the basic details for the acquisition of your "
 "image. If you want to be more thorough or fill in separate details for each "
 "filter, go to the <a class=\"button\" href=\"%(advanced_form_url)s?"
-"edit_type=deep_sky&advanced=true\">advanced form</a>."
+"edit_type=deep_sky&advanced=true\" data-no-instant>advanced form</a>."
 msgstr ""
 
 msgid "What kind of image is this?"
@@ -4115,9 +4131,6 @@ msgstr "Pasul urmator: informatii de baza"
 msgid "This operation might take several seconds."
 msgstr ""
 
-msgid "Full resolution"
-msgstr "Rezolutie maxima"
-
 #, python-format
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "de catre <a href=\"%(the_url)s\">%(user)s</a>"
@@ -4127,6 +4140,9 @@ msgstr ""
 
 msgid "Fit to window"
 msgstr "Potriviti in fereastra"
+
+msgid "Technical card"
+msgstr "Carte tehnică"
 
 msgid "Loading click-and-drag zoom..."
 msgstr ""
@@ -4870,6 +4886,22 @@ msgid "%(user)s commented on your edit proposal"
 msgstr ""
 
 #, python-format
+msgid "<a href=\"%(user_url)s\">%(user)s</a> commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "<strong>%(user)s</strong> commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your scheduled IOTD"
+msgstr ""
+
+#, python-format
 msgid ""
 "User <a href=\"%(object_url)s\">%(object)s</a> is now following you. They "
 "will be notified when you publish new images."
@@ -5313,9 +5345,6 @@ msgstr "Ascensia Dreapta (RA)"
 msgid "Dec"
 msgstr "Declinatia"
 
-msgid "View page"
-msgstr "Vizualizati pagina"
-
 msgid "Member since"
 msgstr "Membru incepand din"
 
@@ -5384,9 +5413,6 @@ msgid "No forums created"
 msgstr ""
 
 msgid "You are not a member of any groups"
-msgstr ""
-
-msgid "These are the forums in the groups you have access to."
 msgstr ""
 
 msgid "Topics"
@@ -6299,6 +6325,9 @@ msgstr ""
 msgid "Add filter:"
 msgstr ""
 
+msgid "Yes"
+msgstr "Da"
+
 msgid "Top pick"
 msgstr ""
 
@@ -6571,9 +6600,6 @@ msgid ""
 "redirected you to the revision currently marked as final."
 msgstr ""
 
-msgid "Accessory"
-msgstr ""
-
 msgid "Dates"
 msgstr "Date"
 
@@ -6621,6 +6647,15 @@ msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid "No"
+#~ msgstr "Nu"
+
+#~ msgid "Image size"
+#~ msgstr "Dimensiunea imaginii"
+
+#~ msgid "Full"
+#~ msgstr "Plin"
 
 #~ msgid "Integration hours, yearly"
 #~ msgstr "Ore de integrare, anual"

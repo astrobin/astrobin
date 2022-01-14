@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 18:39+0000\n"
+"POT-Creation-Date: 2022-01-14 13:02+0000\n"
 "PO-Revision-Date: 2014-02-05 12:48+0000\n"
 "Last-Translator: Omar <thekingosm168@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1148,6 +1148,9 @@ msgstr ""
 msgid "Total solar eclipse"
 msgstr ""
 
+msgid "Meteor shower"
+msgstr ""
+
 msgid "Other"
 msgstr "أخرى"
 
@@ -1454,6 +1457,9 @@ msgid "Star trails"
 msgstr "العنوان"
 
 msgid "Northern lights"
+msgstr ""
+
+msgid "Noctilucent clouds"
 msgstr ""
 
 msgid "Gear"
@@ -2989,6 +2995,12 @@ msgstr "لم يُحدَّد أي ملف"
 msgid "Choose file"
 msgstr "اختيار ملف"
 
+msgid "View page"
+msgstr "عرض الصفحة"
+
+msgid "View large"
+msgstr ""
+
 msgid "Help with translations!"
 msgstr "المساعدة في الترجمة!"
 
@@ -3390,29 +3402,8 @@ msgstr ""
 msgid "Declination"
 msgstr ""
 
-msgid "Technical card"
-msgstr "البيانات التقنية"
-
-msgid "Sponsored brands"
-msgstr ""
-
-#, python-format
-msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
-msgstr ""
-
-msgid "Sponsored items"
-msgstr ""
-
-msgid "Disable retailer integration"
-msgstr ""
-
-#, python-format
-msgid "Shop %(name)s at %(retailer)s"
-msgstr ""
-
-#, python-format
-msgid "Shop %(name)s at AstroBin's partners"
-msgstr ""
+msgid "Acquisition details"
+msgstr "تفاصيل الالتقاط"
 
 msgid "Frames"
 msgstr "الإطارات"
@@ -3476,6 +3467,27 @@ msgid "Download"
 msgstr ""
 
 msgid "Remote source"
+msgstr ""
+
+msgid "Sponsored brands"
+msgstr ""
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr ""
+
+msgid "Sponsored items"
+msgstr ""
+
+msgid "Disable retailer integration"
+msgstr ""
+
+#, python-format
+msgid "Shop %(name)s at %(retailer)s"
+msgstr ""
+
+#, python-format
+msgid "Shop %(name)s at AstroBin's partners"
 msgstr ""
 
 msgid "Revision title"
@@ -3571,17 +3583,20 @@ msgstr ""
 msgid "Original file"
 msgstr ""
 
-msgid "Thumbnails"
+msgid "Basic information"
+msgstr "المعلومات الرئيسية"
+
+msgid "Content"
 msgstr ""
+
+msgid "Thumbnail"
+msgstr "صورة مصغرة"
 
 msgid "Watermark"
 msgstr ""
 
-msgid "Basic information"
-msgstr "المعلومات الرئيسية"
-
-msgid "Acquisition details"
-msgstr "تفاصيل الالتقاط"
+msgid "Thumbnails"
+msgstr ""
 
 msgid "Plate-solving settings"
 msgstr ""
@@ -3831,23 +3846,23 @@ msgstr "رابط بسيط"
 msgid "Forums"
 msgstr "منتديات"
 
-msgid "Thumbnail"
-msgstr "صورة مصغرة"
-
-msgid "Yes"
-msgstr "نعم"
-
-msgid "No"
-msgstr "لا"
-
-msgid "Image size"
-msgstr "قياسات الصور"
-
-msgid "Full"
-msgstr "كاملة"
-
-msgid "Real"
+msgid "Thumbnail size"
 msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "Link destination"
+msgstr ""
+
+msgid "Page with technical card"
+msgstr ""
+
+msgid "Large view"
+msgstr ""
+
+msgid "Full resolution"
+msgstr "دقة كاملة"
 
 msgid "Image mode"
 msgstr "نوع الصورة"
@@ -3962,11 +3977,9 @@ msgstr ""
 #, python-format
 msgid ""
 "Is this too much data for you to handle? Go to the <a class=\"button\" href="
-"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
+"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\" data-no-instant> "
+"basic form</a>."
 msgstr ""
-"هل هذه كثير من البيانات علي قدرتك؟ اذهب إلي <a class=\"button\" href="
-"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">الاستمارة الرئيسية</"
-"a>."
 
 msgid "Acquisition session"
 msgstr "جلسة الالتقاط"
@@ -3982,12 +3995,8 @@ msgid ""
 "With this form you can input the basic details for the acquisition of your "
 "image. If you want to be more thorough or fill in separate details for each "
 "filter, go to the <a class=\"button\" href=\"%(advanced_form_url)s?"
-"edit_type=deep_sky&advanced=true\">advanced form</a>."
+"edit_type=deep_sky&advanced=true\" data-no-instant>advanced form</a>."
 msgstr ""
-"باستخدام هذه الاستمارة يمكنك كتابة تفاصيل الالتقاط الأساسية. إذا أردت أن "
-"تكون أكثر تعمقاً أو أن تكتب تفاصيل منفصلة لكل مرشِّح ، اذهب إلي <a class="
-"\"button\" href=\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true"
-"\">الاستمارة المتطورة</a>."
 
 msgid "What kind of image is this?"
 msgstr "ما نوع هذه الصورة؟"
@@ -4110,9 +4119,6 @@ msgstr "الخطوة التالية: المعلومات الأساسية"
 msgid "This operation might take several seconds."
 msgstr ""
 
-msgid "Full resolution"
-msgstr "دقة كاملة"
-
 #, python-format
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "عن طريق <a href=\"%(the_url)s\">%(user)s</a>"
@@ -4122,6 +4128,9 @@ msgstr ""
 
 msgid "Fit to window"
 msgstr "ملاءمة للإطار"
+
+msgid "Technical card"
+msgstr "البيانات التقنية"
 
 msgid "Loading click-and-drag zoom..."
 msgstr ""
@@ -4866,6 +4875,22 @@ msgid "%(user)s commented on your edit proposal"
 msgstr ""
 
 #, python-format
+msgid "<a href=\"%(user_url)s\">%(user)s</a> commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "<strong>%(user)s</strong> commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your scheduled IOTD"
+msgstr ""
+
+#, python-format
 msgid ""
 "User <a href=\"%(object_url)s\">%(object)s</a> is now following you. They "
 "will be notified when you publish new images."
@@ -5311,9 +5336,6 @@ msgstr "المطلع المستقيم"
 msgid "Dec"
 msgstr "الميل"
 
-msgid "View page"
-msgstr "عرض الصفحة"
-
 msgid "Member since"
 msgstr "عضو منذ"
 
@@ -5382,9 +5404,6 @@ msgid "No forums created"
 msgstr ""
 
 msgid "You are not a member of any groups"
-msgstr ""
-
-msgid "These are the forums in the groups you have access to."
 msgstr ""
 
 msgid "Topics"
@@ -6289,6 +6308,9 @@ msgstr ""
 msgid "Add filter:"
 msgstr ""
 
+msgid "Yes"
+msgstr "نعم"
+
 msgid "Top pick"
 msgstr ""
 
@@ -6559,9 +6581,6 @@ msgid ""
 "redirected you to the revision currently marked as final."
 msgstr ""
 
-msgid "Accessory"
-msgstr ""
-
 msgid "Dates"
 msgstr "التّواريخ"
 
@@ -6609,6 +6628,36 @@ msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid "No"
+#~ msgstr "لا"
+
+#~ msgid "Image size"
+#~ msgstr "قياسات الصور"
+
+#~ msgid "Full"
+#~ msgstr "كاملة"
+
+#~ msgid ""
+#~ "Is this too much data for you to handle? Go to the <a class=\"button\" "
+#~ "href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</"
+#~ "a>."
+#~ msgstr ""
+#~ "هل هذه كثير من البيانات علي قدرتك؟ اذهب إلي <a class=\"button\" href="
+#~ "\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">الاستمارة "
+#~ "الرئيسية</a>."
+
+#~ msgid ""
+#~ "With this form you can input the basic details for the acquisition of "
+#~ "your image. If you want to be more thorough or fill in separate details "
+#~ "for each filter, go to the <a class=\"button\" href="
+#~ "\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">advanced form</"
+#~ "a>."
+#~ msgstr ""
+#~ "باستخدام هذه الاستمارة يمكنك كتابة تفاصيل الالتقاط الأساسية. إذا أردت أن "
+#~ "تكون أكثر تعمقاً أو أن تكتب تفاصيل منفصلة لكل مرشِّح ، اذهب إلي <a class="
+#~ "\"button\" href=\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true"
+#~ "\">الاستمارة المتطورة</a>."
 
 #~ msgid "Integration hours, yearly"
 #~ msgstr "ساعات تعريض الضوء ، سنوياً"
