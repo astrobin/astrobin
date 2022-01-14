@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Plate-solving\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 18:40+0000\n"
-"PO-Revision-Date: 2021-12-09 17:50+0100\n"
+"POT-Creation-Date: 2022-01-14 13:02+0000\n"
+"PO-Revision-Date: 2022-01-04 14:43+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108448\n"
-"X-Loco-Api-Version: 1.0.25 20211027-1\n"
+"X-Loco-Api-Version: 1.0.26 20220113-1\n"
 
 msgid "Small"
 msgstr "Petit"
@@ -94,10 +94,12 @@ msgstr "Afficher les objets Barnard"
 msgid ""
 "Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
 msgstr ""
+"Afficher les objets du catalogue LBN 1965 (nébuleuses en émission ou en "
+"réflexion)"
 
 msgid ""
 "Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
-msgstr ""
+msgstr "Afficher les objets du catalogue LDN 1962 (nébuleuses obscures)"
 
 msgid "Show PGC objects"
 msgstr "Afficher les objets PGC"
@@ -128,7 +130,7 @@ msgid "Show CGPN objects"
 msgstr "Afficher les objets CGPN"
 
 msgid "Show quasars"
-msgstr ""
+msgstr "Afficher les quasars"
 
 msgid "Perform a blind solve"
 msgstr "Effectuer une réduction astrométrique à l'aveugle"
@@ -187,25 +189,25 @@ msgstr ""
 "limites (en degrés) par rapport aux coordonnées AD et Déc. données du centre."
 
 msgid "Missing"
-msgstr ""
+msgstr "Manquant"
 
 msgid "Basic pending"
-msgstr ""
+msgstr "Résolution astrométrique basique en cours"
 
 msgid "Basic failed"
-msgstr ""
+msgstr "Echec de la réduction astrométrique basique."
 
 msgid "Basic success"
-msgstr ""
+msgstr "Succès de la réduction astrométrique basique"
 
 msgid "Advanced pending"
-msgstr ""
+msgstr "Réduction astrométrique avancée en cours"
 
 msgid "Advanced failed"
-msgstr ""
+msgstr "Echec de la réduction astrométrique avancée"
 
 msgid "Advanced success"
-msgstr ""
+msgstr "Succès de la réduction astrométrique avancée"
 
 msgid "Getting plate-solving status, please wait..."
 msgstr "Statut de la réduction astrométrique en cours, merci de patienter..."
@@ -267,84 +269,93 @@ msgstr ""
 msgid ""
 "AstroBin could not plate-solve this image because of an unexpected error."
 msgstr ""
+"AstroBin ne peut pas effectuer la réduction astrométrique de cette image car "
+"une erreur s'est produite."
 
 msgid "n/a"
-msgstr ""
+msgstr "n/a"
 
 msgid "Starting task..."
-msgstr ""
+msgstr "Tâche en cours de démarrage..."
 
 msgid "Downloading image..."
-msgstr ""
+msgstr "Téléchargement de l'image..."
 
 msgid "Plate-solving image..."
-msgstr ""
+msgstr "Réduction astrométrique en cours..."
 
 msgid "Generating image annotations..."
-msgstr ""
+msgstr "Génération des annotations..."
 
 msgid "Processing SVG documents..."
-msgstr ""
+msgstr "Traitement des fichiers SVG..."
 
 msgid "Generating finding charts..."
-msgstr ""
+msgstr "Génération de la carte..."
 
 msgid "Uploading results..."
-msgstr ""
+msgstr "Transfert des résultats..."
 
 msgid "Task completed"
-msgstr ""
+msgstr "Tâche terminée"
 
 msgid "Plate-solving information"
-msgstr ""
+msgstr "Informations astrométriques"
 
 msgid "Status"
-msgstr ""
+msgstr "Statut"
 
 msgid "Started"
-msgstr ""
+msgstr "Débuté"
 
 msgid "Astrometry.net job"
-msgstr ""
+msgstr "Astrometry.net"
 
 msgid "PixInsight job"
-msgstr ""
+msgstr "PixInsight"
 
 msgid "PixInsight queue size"
-msgstr ""
+msgstr "File d'attente PixInsight"
 
 msgid "PixInsight stage"
-msgstr ""
+msgstr "Etape PixInsight"
 
 msgid "PixInsight log"
-msgstr ""
+msgstr "Log PixInsight"
 
 msgid "RA"
-msgstr ""
+msgstr "AD"
 
 msgid "center"
-msgstr ""
+msgstr "centre"
 
 msgid "degrees"
-msgstr ""
+msgstr "degrés"
 
 msgid "top/left"
-msgstr ""
+msgstr "Haut/Gauche"
 
 msgid "top/right"
-msgstr ""
+msgstr "Haut/Droite"
 
 msgid "bottom/right"
-msgstr ""
+msgstr "Bas/Droite"
 
 msgid "bottom/left"
-msgstr ""
+msgstr "Bas/Gauche"
 
 msgid "Dec"
-msgstr ""
+msgstr "Déc"
 
 msgid "Close"
-msgstr ""
+msgstr "Fermer"
 
 msgid "Invalid"
-msgstr ""
+msgstr "Invalide"
+
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because nova.astrometry.net "
+#~ "reported an unepexted error."
+#~ msgstr ""
+#~ "AstroBin n'a pas pu réaliser la réduction astrométrique de cette image en "
+#~ "raison d'une erreur rapportée par nova.astrometry.net."

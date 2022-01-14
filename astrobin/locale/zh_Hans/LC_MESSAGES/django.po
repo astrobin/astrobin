@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 18:39+0000\n"
-"PO-Revision-Date: 2021-12-09 19:38+0100\n"
+"POT-Creation-Date: 2022-01-14 13:02+0000\n"
+"PO-Revision-Date: 2022-01-05 14:55+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Simplified Chinese\n"
 "Language: zh-Hans\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.25 20211027-1\n"
+"X-Loco-Api-Version: 1.0.26 20220113-1\n"
 
 msgid "United Kingdom"
 msgstr "英国（大不列颠及北爱尔兰联合王国）"
@@ -1145,6 +1145,9 @@ msgstr "日环食"
 msgid "Total solar eclipse"
 msgstr "日全食"
 
+msgid "Meteor shower"
+msgstr ""
+
 msgid "Other"
 msgstr "其他"
 
@@ -1451,6 +1454,9 @@ msgstr "星轨"
 
 msgid "Northern lights"
 msgstr "北极光"
+
+msgid "Noctilucent clouds"
+msgstr ""
 
 msgid "Gear"
 msgstr "器材"
@@ -3008,6 +3014,12 @@ msgstr "没有选中文件"
 msgid "Choose file"
 msgstr "选择文件"
 
+msgid "View page"
+msgstr "查看页面"
+
+msgid "View large"
+msgstr ""
+
 msgid "Help with translations!"
 msgstr "帮助改进翻译！"
 
@@ -3436,29 +3448,8 @@ msgstr "赤纬"
 msgid "Declination"
 msgstr "赤纬"
 
-msgid "Technical card"
-msgstr "技术数据卡"
-
-msgid "Sponsored brands"
-msgstr "赞助品牌"
-
-#, python-format
-msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
-msgstr "<strong>%(name)s</strong> at %(retailer)s的商店"
-
-msgid "Sponsored items"
-msgstr "赞助商品"
-
-msgid "Disable retailer integration"
-msgstr "禁用零售商聚合"
-
-#, python-format
-msgid "Shop %(name)s at %(retailer)s"
-msgstr "%(name)s at %(retailer)s的商店"
-
-#, python-format
-msgid "Shop %(name)s at AstroBin's partners"
-msgstr ""
+msgid "Acquisition details"
+msgstr "拍摄详情"
 
 msgid "Frames"
 msgstr "帧数"
@@ -3518,6 +3509,27 @@ msgstr "下载"
 
 msgid "Remote source"
 msgstr "远程数据来源"
+
+msgid "Sponsored brands"
+msgstr "赞助品牌"
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr "<strong>%(name)s</strong> at %(retailer)s的商店"
+
+msgid "Sponsored items"
+msgstr "赞助商品"
+
+msgid "Disable retailer integration"
+msgstr "禁用零售商聚合"
+
+#, python-format
+msgid "Shop %(name)s at %(retailer)s"
+msgstr "%(name)s at %(retailer)s的商店"
+
+#, python-format
+msgid "Shop %(name)s at AstroBin's partners"
+msgstr ""
 
 msgid "Revision title"
 msgstr ""
@@ -3612,17 +3624,20 @@ msgstr ""
 msgid "Original file"
 msgstr ""
 
-msgid "Thumbnails"
+msgid "Basic information"
+msgstr "基本信息"
+
+msgid "Content"
+msgstr ""
+
+msgid "Thumbnail"
 msgstr "缩略图"
 
 msgid "Watermark"
 msgstr "水印"
 
-msgid "Basic information"
-msgstr "基本信息"
-
-msgid "Acquisition details"
-msgstr "拍摄详情"
+msgid "Thumbnails"
+msgstr "缩略图"
 
 msgid "Plate-solving settings"
 msgstr "解析选项"
@@ -3884,23 +3899,23 @@ msgstr "简单链接"
 msgid "Forums"
 msgstr "社区"
 
-msgid "Thumbnail"
-msgstr "缩略图"
+msgid "Thumbnail size"
+msgstr ""
 
-msgid "Yes"
-msgstr "是"
+msgid "Off"
+msgstr ""
 
-msgid "No"
-msgstr "否"
+msgid "Link destination"
+msgstr ""
 
-msgid "Image size"
-msgstr "图像大小"
+msgid "Page with technical card"
+msgstr ""
 
-msgid "Full"
-msgstr "铺满窗口"
+msgid "Large view"
+msgstr ""
 
-msgid "Real"
-msgstr "实际大小"
+msgid "Full resolution"
+msgstr "全尺寸"
 
 msgid "Image mode"
 msgstr "图像模式"
@@ -4024,10 +4039,9 @@ msgstr ""
 #, python-format
 msgid ""
 "Is this too much data for you to handle? Go to the <a class=\"button\" href="
-"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
+"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\" data-no-instant> "
+"basic form</a>."
 msgstr ""
-"太多数据不知道怎么填？跳转到 <a class=\"button\" href=\"%(basic_form_url)s?"
-"edit_type=deep_sky&advanced=false\">基础表单</a>."
 
 msgid "Acquisition session"
 msgstr "拍摄信息表单"
@@ -4043,11 +4057,8 @@ msgid ""
 "With this form you can input the basic details for the acquisition of your "
 "image. If you want to be more thorough or fill in separate details for each "
 "filter, go to the <a class=\"button\" href=\"%(advanced_form_url)s?"
-"edit_type=deep_sky&advanced=true\">advanced form</a>."
+"edit_type=deep_sky&advanced=true\" data-no-instant>advanced form</a>."
 msgstr ""
-"使用此表单，您可以输入获取这张作品的基础细节信息。如果您想更彻底或为每个筛选"
-"器分别填写详细信息，请转到 <a class=\"button\" href=\"%(advanced_form_url)s?"
-"edit_type=deep_sky&advanced=true\">高级表单</a>。"
 
 msgid "What kind of image is this?"
 msgstr "这是哪一类作品？"
@@ -4178,9 +4189,6 @@ msgstr "下一步：基础信息"
 msgid "This operation might take several seconds."
 msgstr "此操作将花费数秒。"
 
-msgid "Full resolution"
-msgstr "全尺寸"
-
 #, python-format
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "by <a href=\"%(the_url)s\">%(user)s</a>"
@@ -4190,6 +4198,9 @@ msgstr "覆盖解析信息"
 
 msgid "Fit to window"
 msgstr "适应窗口"
+
+msgid "Technical card"
+msgstr "技术数据卡"
 
 msgid "Loading click-and-drag zoom..."
 msgstr "单击拖动/缩放加载中..."
@@ -4992,6 +5003,22 @@ msgid "%(user)s commented on your edit proposal"
 msgstr ""
 
 #, python-format
+msgid "<a href=\"%(user_url)s\">%(user)s</a> commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "<strong>%(user)s</strong> commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your scheduled IOTD"
+msgstr ""
+
+#, python-format
 msgid ""
 "User <a href=\"%(object_url)s\">%(object)s</a> is now following you. They "
 "will be notified when you publish new images."
@@ -5474,9 +5501,6 @@ msgstr "赤经"
 msgid "Dec"
 msgstr "赤纬"
 
-msgid "View page"
-msgstr "查看页面"
-
 msgid "Member since"
 msgstr "注册时间"
 
@@ -5552,9 +5576,6 @@ msgstr "板块未被建立"
 
 msgid "You are not a member of any groups"
 msgstr "您目前不属于任何小组"
-
-msgid "These are the forums in the groups you have access to."
-msgstr "这些是您所在的小组有权访问板块。"
 
 msgid "Topics"
 msgstr "主题"
@@ -6497,6 +6518,9 @@ msgstr "选择"
 msgid "Add filter:"
 msgstr "添加筛选器："
 
+msgid "Yes"
+msgstr "是"
+
 msgid "Top pick"
 msgstr "热门精选"
 
@@ -6764,9 +6788,6 @@ msgid ""
 "redirected you to the revision currently marked as final."
 msgstr ""
 "您请求访问的修订版是 %s，但它不存在或已被删除。我们为您跳转至最终修订版。"
-
-msgid "Accessory"
-msgstr "配件"
 
 msgid "Dates"
 msgstr "日期"
@@ -7067,6 +7088,18 @@ msgstr "抱歉，用户名已经存在，大小写不同。"
 #~ "%(_1)s. Thanks!"
 #~ msgstr "希望了解更多关于作品指数的信息，请访问 %(_0)sFAQ%(_1)s。 谢谢！"
 
+#~ msgid "No"
+#~ msgstr "否"
+
+#~ msgid "Image size"
+#~ msgstr "图像大小"
+
+#~ msgid "Full"
+#~ msgstr "铺满窗口"
+
+#~ msgid "Real"
+#~ msgstr "实际大小"
+
 #~ msgid "Oh no!"
 #~ msgstr "哦，不！"
 
@@ -7078,6 +7111,25 @@ msgstr "抱歉，用户名已经存在，大小写不同。"
 
 #~ msgid "Revision uploaded"
 #~ msgstr "修订版已上传"
+
+#~ msgid ""
+#~ "Is this too much data for you to handle? Go to the <a class=\"button\" "
+#~ "href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</"
+#~ "a>."
+#~ msgstr ""
+#~ "太多数据不知道怎么填？跳转到 <a class=\"button\" href="
+#~ "\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">基础表单</a>."
+
+#~ msgid ""
+#~ "With this form you can input the basic details for the acquisition of "
+#~ "your image. If you want to be more thorough or fill in separate details "
+#~ "for each filter, go to the <a class=\"button\" href="
+#~ "\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">advanced form</"
+#~ "a>."
+#~ msgstr ""
+#~ "使用此表单，您可以输入获取这张作品的基础细节信息。如果您想更彻底或为每个筛"
+#~ "选器分别填写详细信息，请转到 <a class=\"button\" href="
+#~ "\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">高级表单</a>。"
 
 #~ msgid ""
 #~ "You are about to open a large file of about %(size)s. Depending on your "
@@ -7175,6 +7227,9 @@ msgstr "抱歉，用户名已经存在，大小写不同。"
 
 #~ msgid "%(user)s joined the public group: \"%(group_name)s\""
 #~ msgstr "%(user)s 加入了公开小组： \"%(group_name)s\""
+
+#~ msgid "These are the forums in the groups you have access to."
+#~ msgstr "这些是您所在的小组有权访问板块。"
 
 #~ msgid "Please note: this post will be published only after moderation."
 #~ msgstr "请注意：这篇文章只有经过审核才能发布。"
@@ -7327,3 +7382,6 @@ msgstr "抱歉，用户名已经存在，大小写不同。"
 
 #~ msgid "Last login"
 #~ msgstr "最近登录"
+
+#~ msgid "Accessory"
+#~ msgstr "配件"

@@ -37,12 +37,6 @@
         </div>
     {% endif %}
 
-    {% if category and category.slug == 'group-forums' %}
-        <div class="alert alert-warning">
-            {% trans "These are the forums in the groups you have access to." %}
-        </div>
-    {% endif %}
-
     {% if categories %}
         <table class="forums table {% if category %}category-table{% elif parent_forum %}child-forums-table{% endif %}">
         {% for category in categories %}

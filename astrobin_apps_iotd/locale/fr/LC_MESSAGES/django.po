@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: IOTD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 18:40+0000\n"
-"PO-Revision-Date: 2021-12-09 17:54+0100\n"
+"POT-Creation-Date: 2022-01-14 13:02+0000\n"
+"PO-Revision-Date: 2022-01-04 15:29+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108442\n"
-"X-Loco-Api-Version: 1.0.25 20211027-1\n"
+"X-Loco-Api-Version: 1.0.26 20220113-1\n"
 
 msgid "Sorry, it's now too late to retract this submission."
 msgstr "Désolé, il est trop tard pour annuler cette sélection."
@@ -23,10 +23,10 @@ msgid "Sorry, it's now too late to retract this vote."
 msgstr "Désolé, il est trop tard pour annuler ce vote."
 
 msgid "Newest first"
-msgstr ""
+msgstr "Plus récentes en premier"
 
 msgid "Oldest first"
-msgstr ""
+msgstr "Plus anciennes en premier"
 
 msgid "You are not a member of the IOTD Submitters board."
 msgstr ""
@@ -46,20 +46,21 @@ msgstr "Cet utilisateur a été exclu des concours."
 
 msgid "You cannot submit an image that you already dismissed."
 msgstr ""
+"Vous ne pouvez pas soumettre une image que vous avez préalablement rejetée."
 
 #, python-format
 msgid ""
 "You cannot submit an image that has been dismissed by %(number)s members of "
 "the IOTD Staff."
 msgstr ""
+"Vous ne pouvez pas soumettre une image qui a été rejetée par %(number)s "
+"membres de l'équipe IOTD."
 
 #, python-format
 msgid ""
-"You cannot submit an image that was published more than %(max_days)s days "
+"You cannot submit an image that was published more than %(max_days)s day(s) "
 "ago."
 msgstr ""
-"Vous ne pouvez pas sélectionner une image qui a été publiée il y a plus de "
-"%(max_days)s jours."
 
 msgid "Users with a Free membership cannot participate in the IOTD."
 msgstr ""
@@ -70,8 +71,8 @@ msgid "This image has already been an IOTD in the past"
 msgstr "Cette image a déjà été Image du Jour par le passé."
 
 #, python-format
-msgid "You have already submitted %(max_allowed)s images today."
-msgstr "Vous avez déjà sélectionné %(max_allowed)s images aujourd'hui."
+msgid "You have already submitted %(max_allowed)s image(s) today."
+msgstr ""
 
 msgid "You are not a member of the IOTD Reviewers board."
 msgstr "Vous n'êtes pas membre du groupe \"Examinateurs\" de l'Image du Jour."
@@ -84,12 +85,15 @@ msgstr "Les images en Zone privée ne peuvent pas être promues."
 
 msgid "You cannot vote for an image that you already dismissed."
 msgstr ""
+"Vous ne pouvez pas voter pour une image que vous avez préalablement rejetée."
 
 #, python-format
 msgid ""
 "You cannot vote for an image that has been dismissed by %(number)s members "
 "of the IOTD Staff."
 msgstr ""
+"Vous ne pouvez pas voter pour une image rejetée par %(number)s membres de "
+"l'équipe IOTD."
 
 msgid "You cannot vote for an image that has not been submitted."
 msgstr ""
@@ -103,15 +107,19 @@ msgstr ""
 
 #, python-format
 msgid ""
-"You cannot vote for an image that has been in the submission queue for more "
-"than %(max_days)s days."
+"You cannot vote for an image that has not been submitted at least %(num)s "
+"times."
 msgstr ""
-"Vous ne pouvez pas promouvoir une image sélectionnée depuis plus de "
-"%(max_days)s jours."
 
 #, python-format
-msgid "You have already voted for %(max_allowed)s images today."
-msgstr "Vous avez déjà voté pour %(max_allowed)s images aujourd'hui."
+msgid ""
+"You cannot vote for an image that has been in the review queue for more than "
+"%(max_days)s day(s)."
+msgstr ""
+
+#, python-format
+msgid "You have already voted for %(max_allowed)s image(s) today."
+msgstr ""
 
 msgid "You are not a member of the IOTD Judges board."
 msgstr "Vous n'êtes pas membre du groupe \"Juges\" de l'mage du Jour."
@@ -121,6 +129,12 @@ msgstr "Vous ne pouvez pas élire votre propre image."
 
 msgid "Images in the staging area cannot be elected."
 msgstr "Les images en Zone privée ne peuvent pas être élues."
+
+#, python-format
+msgid ""
+"You cannot submit an image that has been dismissed by %(number)s member(s) "
+"of the IOTD Staff."
+msgstr ""
 
 msgid "You cannot elect an image that has not been voted."
 msgstr ""
@@ -137,18 +151,21 @@ msgstr ""
 #, python-format
 msgid ""
 "You cannot elect an image that has been in the review queue for more than "
-"%(max_days)s days."
+"%(max_days)s day(s)."
 msgstr ""
-"Vous ne pouvez pas élire une image qui a été examinée depuis plus de "
-"%(max_days)s jours."
 
 #, python-format
-msgid "You have already elected %(max_allowed)s images today."
-msgstr "Vous avez déjà élu %(max_allowed)s image(s) aujourd'hui."
+msgid "You have already elected %(max_allowed)s image(s) today."
+msgstr ""
 
 #, python-format
-msgid "You have already scheduled %(max_allowed)s IOTDs."
-msgstr "Vous avez déjà élu %(max_allowed)s Images du Jour."
+msgid "You have already scheduled %(max_allowed)s IOTD(s)."
+msgstr ""
+
+#, python-format
+msgid ""
+"You cannot elect for an image that has not been voted at least %(num)s times."
+msgstr ""
 
 msgid "You cannot unelect your own submission."
 msgstr "Vous ne pouvez pas écarter votre propre sélection."
@@ -165,46 +182,90 @@ msgid "You cannot unelect a past or current IOTD."
 msgstr "Vous ne pouvez pas écarter une Image du Jour actuelle ou passée."
 
 #, python-format
-msgid "you already selected %s IOTD today (UTC)"
-msgstr "Vous avez déjà sélectionné %s Images du Jour aujourd'hui."
+msgid "you already selected %s IOTD(s) today (UTC)"
+msgstr ""
 
 #, python-format
-msgid "you already selected %s scheduled IOTDs"
-msgstr "Vous avez déjà élu %s Images du Jour."
+msgid "you already selected %s scheduled IOTD(s)"
+msgstr ""
 
 #, python-format
-msgid "there are already %s scheduled IOTDs"
-msgstr "Vous avez déjà élu %s Images du Jour."
+msgid "there are already %s scheduled IOTD(s)"
+msgstr ""
 
 msgid "Image of the day"
 msgstr "Image du Jour"
 
-msgid "IOTD Judgement Queue"
-msgstr "Tableau de bord des Juges"
+#~ msgid ""
+#~ "You cannot submit an image that was published more than %(max_days)s days "
+#~ "ago."
+#~ msgstr ""
+#~ "Vous ne pouvez pas sélectionner une image qui a été publiée il y a plus "
+#~ "de %(max_days)s jours."
 
-msgid ""
-"Please select the images that you want to elect to IOTD by clicking on them."
-msgstr ""
-"Sélectionnez les images que vous souhaitez élire Image du Jour en cliquant "
-"dessus."
+#~ msgid "You have already submitted %(max_allowed)s images today."
+#~ msgstr "Vous avez déjà sélectionné %(max_allowed)s images aujourd'hui."
 
-#, python-format
-msgid ""
-"Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
-"<strong>%(time)s</strong>."
-msgstr ""
-"Désolé, vous ne pouvez pas sélectionner une Image du Jour pour le moment : "
-"%(reason)s. Merci d'essayer de nouveau dans <strong>%(time)s</strong>."
+#~ msgid ""
+#~ "You cannot vote for an image that has been in the submission queue for "
+#~ "more than %(max_days)s days."
+#~ msgstr ""
+#~ "Vous ne pouvez pas promouvoir une image sélectionnée depuis plus de "
+#~ "%(max_days)s jours."
 
-msgid "This queue is currently empty."
-msgstr "La liste est actuellement vide."
+#~ msgid "You have already voted for %(max_allowed)s images today."
+#~ msgstr "Vous avez déjà voté pour %(max_allowed)s images aujourd'hui."
 
-msgid "Error"
-msgstr "Erreur"
+#~ msgid ""
+#~ "You cannot elect an image that has been in the review queue for more than "
+#~ "%(max_days)s days."
+#~ msgstr ""
+#~ "Vous ne pouvez pas élire une image qui a été examinée depuis plus de "
+#~ "%(max_days)s jours."
 
-msgid "You cannot unelect an IOTD elected by another judge."
-msgstr "Vous ne pouvez pas écarter une Image du Jour élue par un autre juge."
+#~ msgid "You have already elected %(max_allowed)s images today."
+#~ msgstr "Vous avez déjà élu %(max_allowed)s image(s) aujourd'hui."
 
-#, python-format
-msgid "All IOTD slots for the next %(days)s days are already filled."
-msgstr "Les Images du Jour des %(days)s prochains jours sont déjà désignées."
+#~ msgid "You have already scheduled %(max_allowed)s IOTDs."
+#~ msgstr "Vous avez déjà élu %(max_allowed)s Images du Jour."
+
+#~ msgid "you already selected %s IOTD today (UTC)"
+#~ msgstr "Vous avez déjà sélectionné %s Images du Jour aujourd'hui."
+
+#~ msgid "you already selected %s scheduled IOTDs"
+#~ msgstr "Vous avez déjà élu %s Images du Jour."
+
+#~ msgid "there are already %s scheduled IOTDs"
+#~ msgstr "Vous avez déjà élu %s Images du Jour."
+
+#~ msgid "IOTD Judgement Queue"
+#~ msgstr "Tableau de bord des Juges"
+
+#~ msgid ""
+#~ "Please select the images that you want to elect to IOTD by clicking on "
+#~ "them."
+#~ msgstr ""
+#~ "Sélectionnez les images que vous souhaitez élire Image du Jour en "
+#~ "cliquant dessus."
+
+#~ msgid ""
+#~ "Sorry, you cannot select an IOTD right now: %(reason)s. Please try again "
+#~ "in <strong>%(time)s</strong>."
+#~ msgstr ""
+#~ "Désolé, vous ne pouvez pas sélectionner une Image du Jour pour le "
+#~ "moment : %(reason)s. Merci d'essayer de nouveau dans <strong>%(time)s</"
+#~ "strong>."
+
+#~ msgid "This queue is currently empty."
+#~ msgstr "La liste est actuellement vide."
+
+#~ msgid "Error"
+#~ msgstr "Erreur"
+
+#~ msgid "You cannot unelect an IOTD elected by another judge."
+#~ msgstr ""
+#~ "Vous ne pouvez pas écarter une Image du Jour élue par un autre juge."
+
+#~ msgid "All IOTD slots for the next %(days)s days are already filled."
+#~ msgstr ""
+#~ "Les Images du Jour des %(days)s prochains jours sont déjà désignées."

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 18:39+0000\n"
-"PO-Revision-Date: 2021-12-09 19:38+0100\n"
+"POT-Creation-Date: 2022-01-14 13:02+0000\n"
+"PO-Revision-Date: 2022-01-05 14:55+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.25 20211027-1\n"
+"X-Loco-Api-Version: 1.0.26 20220113-1\n"
 
 msgid "United Kingdom"
 msgstr "Великобритания"
@@ -1167,6 +1167,9 @@ msgstr "Кольцевое солнечное затмение"
 msgid "Total solar eclipse"
 msgstr "Полное солнечное затмение"
 
+msgid "Meteor shower"
+msgstr ""
+
 msgid "Other"
 msgstr "Иное"
 
@@ -1480,6 +1483,9 @@ msgstr "Треки звезд"
 
 msgid "Northern lights"
 msgstr "Полярное сияние"
+
+msgid "Noctilucent clouds"
+msgstr ""
 
 msgid "Gear"
 msgstr "Оборудование"
@@ -3092,6 +3098,12 @@ msgstr "Не выбран файл"
 msgid "Choose file"
 msgstr "Выбрать файл"
 
+msgid "View page"
+msgstr "Подробнее"
+
+msgid "View large"
+msgstr ""
+
 msgid "Help with translations!"
 msgstr "Помощь в переводе!"
 
@@ -3529,29 +3541,8 @@ msgstr "Прямое восхождение"
 msgid "Declination"
 msgstr "Наклонение"
 
-msgid "Technical card"
-msgstr "Техническая карточка"
-
-msgid "Sponsored brands"
-msgstr "Спонсируемые фирмы"
-
-#, python-format
-msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
-msgstr "Закупайтесь <strong>%(name)s</strong> в %(retailer)s"
-
-msgid "Sponsored items"
-msgstr "Спонсируемые товары"
-
-msgid "Disable retailer integration"
-msgstr "Отключить интеграцию с розничным продавцом"
-
-#, python-format
-msgid "Shop %(name)s at %(retailer)s"
-msgstr "Закупайтесь %(name)s в %(retailer)s"
-
-#, python-format
-msgid "Shop %(name)s at AstroBin's partners"
-msgstr ""
+msgid "Acquisition details"
+msgstr "Детали съёмки"
 
 msgid "Frames"
 msgstr "Кадры"
@@ -3613,6 +3604,27 @@ msgstr "Загрузить"
 
 msgid "Remote source"
 msgstr "Удаленный источник"
+
+msgid "Sponsored brands"
+msgstr "Спонсируемые фирмы"
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr "Закупайтесь <strong>%(name)s</strong> в %(retailer)s"
+
+msgid "Sponsored items"
+msgstr "Спонсируемые товары"
+
+msgid "Disable retailer integration"
+msgstr "Отключить интеграцию с розничным продавцом"
+
+#, python-format
+msgid "Shop %(name)s at %(retailer)s"
+msgstr "Закупайтесь %(name)s в %(retailer)s"
+
+#, python-format
+msgid "Shop %(name)s at AstroBin's partners"
+msgstr ""
 
 msgid "Revision title"
 msgstr ""
@@ -3707,17 +3719,20 @@ msgstr ""
 msgid "Original file"
 msgstr ""
 
-msgid "Thumbnails"
-msgstr "Эскиз"
+msgid "Basic information"
+msgstr "Основная информация"
+
+msgid "Content"
+msgstr ""
+
+msgid "Thumbnail"
+msgstr "Миниатюра"
 
 msgid "Watermark"
 msgstr "\"Водяной знак\""
 
-msgid "Basic information"
-msgstr "Основная информация"
-
-msgid "Acquisition details"
-msgstr "Детали съёмки"
+msgid "Thumbnails"
+msgstr "Эскиз"
 
 msgid "Plate-solving settings"
 msgstr "Определение по координатам"
@@ -3988,23 +4003,23 @@ msgstr "Простая ссылка"
 msgid "Forums"
 msgstr "Форумы"
 
-msgid "Thumbnail"
-msgstr "Миниатюра"
+msgid "Thumbnail size"
+msgstr ""
 
-msgid "Yes"
-msgstr "Да"
+msgid "Off"
+msgstr ""
 
-msgid "No"
-msgstr "Нет"
+msgid "Link destination"
+msgstr ""
 
-msgid "Image size"
-msgstr "Размер изображения"
+msgid "Page with technical card"
+msgstr ""
 
-msgid "Full"
-msgstr "Полный"
+msgid "Large view"
+msgstr ""
 
-msgid "Real"
-msgstr "Настоящий"
+msgid "Full resolution"
+msgstr "Полное разрешение"
 
 msgid "Image mode"
 msgstr "Режим изображения"
@@ -4136,11 +4151,9 @@ msgstr ""
 #, python-format
 msgid ""
 "Is this too much data for you to handle? Go to the <a class=\"button\" href="
-"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
+"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\" data-no-instant> "
+"basic form</a>."
 msgstr ""
-"Слишком много информации, чтобы в ней разобраться? Перейдите на <a class="
-"\"button\" href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false"
-"\">базовую форму</a>."
 
 msgid "Acquisition session"
 msgstr "Съёмочная сессия"
@@ -4156,12 +4169,8 @@ msgid ""
 "With this form you can input the basic details for the acquisition of your "
 "image. If you want to be more thorough or fill in separate details for each "
 "filter, go to the <a class=\"button\" href=\"%(advanced_form_url)s?"
-"edit_type=deep_sky&advanced=true\">advanced form</a>."
+"edit_type=deep_sky&advanced=true\" data-no-instant>advanced form</a>."
 msgstr ""
-"В этой форме вы указываете основные детали получения вашего изображения. "
-"Если вы хотите добавить больше деталей к каждому фильтру, перейдите к <a "
-"class=\"button\" href=\"%(advanced_form_url)s?"
-"edit_type=deep_sky&advanced=true\">расширенной форме</a>."
 
 msgid "What kind of image is this?"
 msgstr "Какого рода это изображение?"
@@ -4303,9 +4312,6 @@ msgstr "Следующий шаг: основная информация"
 msgid "This operation might take several seconds."
 msgstr "Эта операция может занять несколько секунд."
 
-msgid "Full resolution"
-msgstr "Полное разрешение"
-
 #, python-format
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "от <a href=\"%(the_url)s\">%(user)s</a>"
@@ -4315,6 +4321,9 @@ msgstr "Наложение распознавания"
 
 msgid "Fit to window"
 msgstr "Под размеры окна"
+
+msgid "Technical card"
+msgstr "Техническая карточка"
 
 msgid "Loading click-and-drag zoom..."
 msgstr "Загрузка масштабирования щелчком и перетаскиванием..."
@@ -5166,6 +5175,22 @@ msgid "%(user)s commented on your edit proposal"
 msgstr ""
 
 #, python-format
+msgid "<a href=\"%(user_url)s\">%(user)s</a> commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "<strong>%(user)s</strong> commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your scheduled IOTD"
+msgstr ""
+
+#, python-format
 msgid ""
 "User <a href=\"%(object_url)s\">%(object)s</a> is now following you. They "
 "will be notified when you publish new images."
@@ -5673,9 +5698,6 @@ msgstr "П.В."
 msgid "Dec"
 msgstr "Скл"
 
-msgid "View page"
-msgstr "Подробнее"
-
 msgid "Member since"
 msgstr "Давность регистрации"
 
@@ -5757,9 +5779,6 @@ msgstr "Форумы не созданы"
 
 msgid "You are not a member of any groups"
 msgstr "Вы не являетесь участником ни одной группы"
-
-msgid "These are the forums in the groups you have access to."
-msgstr "Это форумы в группах, к которым у вас есть доступ."
 
 msgid "Topics"
 msgstr "Темы"
@@ -6744,6 +6763,9 @@ msgstr "Выбрать"
 msgid "Add filter:"
 msgstr "Добавить фильтр:"
 
+msgid "Yes"
+msgstr "Да"
+
 msgid "Top pick"
 msgstr "Лучшее изображение"
 
@@ -7020,9 +7042,6 @@ msgid ""
 msgstr ""
 "Вы запросили версию %s, но она не существует или была удалена. Мы "
 "перенаправили вас к ревизии, которая сейчас помечена как окончательная."
-
-msgid "Accessory"
-msgstr "Аксессуар"
 
 msgid "Dates"
 msgstr "Даты"
@@ -7345,6 +7364,18 @@ msgstr "Извините, это имя пользователя уже суще
 #~ "Чтобы узнать больше об индексе изображений, посетите %(_0)sthe FAQ page"
 #~ "%(_1)s. Спасибо!"
 
+#~ msgid "No"
+#~ msgstr "Нет"
+
+#~ msgid "Image size"
+#~ msgstr "Размер изображения"
+
+#~ msgid "Full"
+#~ msgstr "Полный"
+
+#~ msgid "Real"
+#~ msgstr "Настоящий"
+
 #~ msgid "Oh no!"
 #~ msgstr "О, нет!"
 
@@ -7356,6 +7387,27 @@ msgstr "Извините, это имя пользователя уже суще
 
 #~ msgid "Revision uploaded"
 #~ msgstr "Версия закачана"
+
+#~ msgid ""
+#~ "Is this too much data for you to handle? Go to the <a class=\"button\" "
+#~ "href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</"
+#~ "a>."
+#~ msgstr ""
+#~ "Слишком много информации, чтобы в ней разобраться? Перейдите на <a class="
+#~ "\"button\" href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false"
+#~ "\">базовую форму</a>."
+
+#~ msgid ""
+#~ "With this form you can input the basic details for the acquisition of "
+#~ "your image. If you want to be more thorough or fill in separate details "
+#~ "for each filter, go to the <a class=\"button\" href="
+#~ "\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">advanced form</"
+#~ "a>."
+#~ msgstr ""
+#~ "В этой форме вы указываете основные детали получения вашего изображения. "
+#~ "Если вы хотите добавить больше деталей к каждому фильтру, перейдите к <a "
+#~ "class=\"button\" href=\"%(advanced_form_url)s?"
+#~ "edit_type=deep_sky&advanced=true\">расширенной форме</a>."
 
 #~ msgid ""
 #~ "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it "
@@ -7437,6 +7489,9 @@ msgstr "Извините, это имя пользователя уже суще
 
 #~ msgid "%(user)s joined the public group: \"%(group_name)s\""
 #~ msgstr "%(user)s вступил в открытую группу: \"%(group_name)s\""
+
+#~ msgid "These are the forums in the groups you have access to."
+#~ msgstr "Это форумы в группах, к которым у вас есть доступ."
 
 #~ msgid "Please note: this post will be published only after moderation."
 #~ msgstr ""
@@ -7607,3 +7662,6 @@ msgstr "Извините, это имя пользователя уже суще
 
 #~ msgid "Last login"
 #~ msgstr "Последнее посещение"
+
+#~ msgid "Accessory"
+#~ msgstr "Аксессуар"

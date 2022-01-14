@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: IOTD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 18:40+0000\n"
-"PO-Revision-Date: 2021-12-09 17:54+0100\n"
+"POT-Creation-Date: 2022-01-14 13:02+0000\n"
+"PO-Revision-Date: 2022-01-04 15:29+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Simplified Chinese\n"
 "Language: zh-Hans\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108442\n"
-"X-Loco-Api-Version: 1.0.25 20211027-1\n"
+"X-Loco-Api-Version: 1.0.26 20220113-1\n"
 
 msgid "Sorry, it's now too late to retract this submission."
 msgstr "抱歉，现在撤消此提名为时已晚。"
@@ -54,9 +54,9 @@ msgstr ""
 
 #, python-format
 msgid ""
-"You cannot submit an image that was published more than %(max_days)s days "
+"You cannot submit an image that was published more than %(max_days)s day(s) "
 "ago."
-msgstr "您提名的作品不能晚于 %(max_days)s 天前发布。"
+msgstr ""
 
 msgid "Users with a Free membership cannot participate in the IOTD."
 msgstr "免费用户不能参加“今日最佳”评选。"
@@ -65,8 +65,8 @@ msgid "This image has already been an IOTD in the past"
 msgstr "该作品过去已经获得过“今日最佳”"
 
 #, python-format
-msgid "You have already submitted %(max_allowed)s images today."
-msgstr "您今天已经提名了%(max_allowed)s张作品。"
+msgid "You have already submitted %(max_allowed)s image(s) today."
+msgstr ""
 
 msgid "You are not a member of the IOTD Reviewers board."
 msgstr "您不是“今日最佳”审查委员会成员。"
@@ -94,13 +94,19 @@ msgstr "您不能为自己提名的作品投票。"
 
 #, python-format
 msgid ""
-"You cannot vote for an image that has been in the submission queue for more "
-"than %(max_days)s days."
-msgstr "您不能为已提名名单中已超过 %(max_days)s天的作品进行投票。"
+"You cannot vote for an image that has not been submitted at least %(num)s "
+"times."
+msgstr ""
 
 #, python-format
-msgid "You have already voted for %(max_allowed)s images today."
-msgstr "您今天已经为 %(max_allowed)s 张作品投票了。"
+msgid ""
+"You cannot vote for an image that has been in the review queue for more than "
+"%(max_days)s day(s)."
+msgstr ""
+
+#, python-format
+msgid "You have already voted for %(max_allowed)s image(s) today."
+msgstr ""
 
 msgid "You are not a member of the IOTD Judges board."
 msgstr "您不是“今日最佳”评审委员会的成员。"
@@ -110,6 +116,12 @@ msgstr "您不能票选自己的作品。"
 
 msgid "Images in the staging area cannot be elected."
 msgstr "暂存区域中的作品无法被票选。"
+
+#, python-format
+msgid ""
+"You cannot submit an image that has been dismissed by %(number)s member(s) "
+"of the IOTD Staff."
+msgstr ""
 
 msgid "You cannot elect an image that has not been voted."
 msgstr "您不能票选一张还未经过投票的作品。"
@@ -123,16 +135,21 @@ msgstr "您不能票选您自己投票的作品。"
 #, python-format
 msgid ""
 "You cannot elect an image that has been in the review queue for more than "
-"%(max_days)s days."
-msgstr "您不能票选已经在审核名单中超过 %(max_days)s 天的作品。"
+"%(max_days)s day(s)."
+msgstr ""
 
 #, python-format
-msgid "You have already elected %(max_allowed)s images today."
-msgstr "您今天已经票选了 %(max_allowed)s 张作品。"
+msgid "You have already elected %(max_allowed)s image(s) today."
+msgstr ""
 
 #, python-format
-msgid "You have already scheduled %(max_allowed)s IOTDs."
-msgstr "您已经安排了 %(max_allowed)s 个“今日最佳”。"
+msgid "You have already scheduled %(max_allowed)s IOTD(s)."
+msgstr ""
+
+#, python-format
+msgid ""
+"You cannot elect for an image that has not been voted at least %(num)s times."
+msgstr ""
 
 msgid "You cannot unelect your own submission."
 msgstr "您不能不票选自己的提名。"
@@ -147,44 +164,79 @@ msgid "You cannot unelect a past or current IOTD."
 msgstr "您不能不票选一个过去或者现在的“今日最佳”。"
 
 #, python-format
-msgid "you already selected %s IOTD today (UTC)"
-msgstr "您今天（UTC）已经选择了 %s 个“今日最佳”"
+msgid "you already selected %s IOTD(s) today (UTC)"
+msgstr ""
 
 #, python-format
-msgid "you already selected %s scheduled IOTDs"
-msgstr "您已经选择了%s个预定的“今日最佳”"
+msgid "you already selected %s scheduled IOTD(s)"
+msgstr ""
 
 #, python-format
-msgid "there are already %s scheduled IOTDs"
-msgstr "您已经预定了 %s 个“今日最佳”。"
+msgid "there are already %s scheduled IOTD(s)"
+msgstr ""
 
 msgid "Image of the day"
 msgstr "今日最佳"
 
-msgid "IOTD Judgement Queue"
-msgstr "“今日最佳”评审列队"
+#~ msgid ""
+#~ "You cannot submit an image that was published more than %(max_days)s days "
+#~ "ago."
+#~ msgstr "您提名的作品不能晚于 %(max_days)s 天前发布。"
 
-msgid ""
-"Please select the images that you want to elect to IOTD by clicking on them."
-msgstr "请通过单击选择要票选为“今日最佳”的作品。"
+#~ msgid "You have already submitted %(max_allowed)s images today."
+#~ msgstr "您今天已经提名了%(max_allowed)s张作品。"
 
-#, python-format
-msgid ""
-"Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
-"<strong>%(time)s</strong>."
-msgstr ""
-"抱歉，您现在无法选择“今日最佳”：%(reason)s。 请在<strong>%(time)s</strong>后"
-"重试。"
+#~ msgid ""
+#~ "You cannot vote for an image that has been in the submission queue for "
+#~ "more than %(max_days)s days."
+#~ msgstr "您不能为已提名名单中已超过 %(max_days)s天的作品进行投票。"
 
-msgid "This queue is currently empty."
-msgstr "此列队现在是空的。"
+#~ msgid "You have already voted for %(max_allowed)s images today."
+#~ msgstr "您今天已经为 %(max_allowed)s 张作品投票了。"
 
-msgid "Error"
-msgstr "错误"
+#~ msgid ""
+#~ "You cannot elect an image that has been in the review queue for more than "
+#~ "%(max_days)s days."
+#~ msgstr "您不能票选已经在审核名单中超过 %(max_days)s 天的作品。"
 
-msgid "You cannot unelect an IOTD elected by another judge."
-msgstr "您不能不票选由另一位评审选出的“今日最佳”。"
+#~ msgid "You have already elected %(max_allowed)s images today."
+#~ msgstr "您今天已经票选了 %(max_allowed)s 张作品。"
 
-#, python-format
-msgid "All IOTD slots for the next %(days)s days are already filled."
-msgstr "接下来的 %(days)s 天的所有“今日最佳”席位已填满。"
+#~ msgid "You have already scheduled %(max_allowed)s IOTDs."
+#~ msgstr "您已经安排了 %(max_allowed)s 个“今日最佳”。"
+
+#~ msgid "you already selected %s IOTD today (UTC)"
+#~ msgstr "您今天（UTC）已经选择了 %s 个“今日最佳”"
+
+#~ msgid "you already selected %s scheduled IOTDs"
+#~ msgstr "您已经选择了%s个预定的“今日最佳”"
+
+#~ msgid "there are already %s scheduled IOTDs"
+#~ msgstr "您已经预定了 %s 个“今日最佳”。"
+
+#~ msgid "IOTD Judgement Queue"
+#~ msgstr "“今日最佳”评审列队"
+
+#~ msgid ""
+#~ "Please select the images that you want to elect to IOTD by clicking on "
+#~ "them."
+#~ msgstr "请通过单击选择要票选为“今日最佳”的作品。"
+
+#~ msgid ""
+#~ "Sorry, you cannot select an IOTD right now: %(reason)s. Please try again "
+#~ "in <strong>%(time)s</strong>."
+#~ msgstr ""
+#~ "抱歉，您现在无法选择“今日最佳”：%(reason)s。 请在<strong>%(time)s</strong>"
+#~ "后重试。"
+
+#~ msgid "This queue is currently empty."
+#~ msgstr "此列队现在是空的。"
+
+#~ msgid "Error"
+#~ msgstr "错误"
+
+#~ msgid "You cannot unelect an IOTD elected by another judge."
+#~ msgstr "您不能不票选由另一位评审选出的“今日最佳”。"
+
+#~ msgid "All IOTD slots for the next %(days)s days are already filled."
+#~ msgstr "接下来的 %(days)s 天的所有“今日最佳”席位已填满。"

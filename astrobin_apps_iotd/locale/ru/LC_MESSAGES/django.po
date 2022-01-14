@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: IOTD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 18:40+0000\n"
-"PO-Revision-Date: 2021-12-09 17:54+0100\n"
+"POT-Creation-Date: 2022-01-14 13:02+0000\n"
+"PO-Revision-Date: 2022-01-04 15:29+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108442\n"
-"X-Loco-Api-Version: 1.0.25 20211027-1\n"
+"X-Loco-Api-Version: 1.0.26 20220113-1\n"
 
 msgid "Sorry, it's now too late to retract this submission."
 msgstr "Извините, уже слишком поздно отменять эту заявку."
@@ -55,11 +55,9 @@ msgstr ""
 
 #, python-format
 msgid ""
-"You cannot submit an image that was published more than %(max_days)s days "
+"You cannot submit an image that was published more than %(max_days)s day(s) "
 "ago."
 msgstr ""
-"Вы не можете номинировать изображения которые были опубликованы более, чем "
-"%(max_days)s дней назад."
 
 msgid "Users with a Free membership cannot participate in the IOTD."
 msgstr "Пользователи с бесплатной подпиской не могут участвовать в IOTD."
@@ -68,8 +66,8 @@ msgid "This image has already been an IOTD in the past"
 msgstr "Это изображение уже было Изображением Дня в прошлом"
 
 #, python-format
-msgid "You have already submitted %(max_allowed)s images today."
-msgstr "Вы уже номинировали %(max_allowed)s изображений на сегодня."
+msgid "You have already submitted %(max_allowed)s image(s) today."
+msgstr ""
 
 msgid "You are not a member of the IOTD Reviewers board."
 msgstr "Вы не участник списка Рецензентов Изображения Дня."
@@ -97,15 +95,19 @@ msgstr "Вы не можете голосовать за свою заявку."
 
 #, python-format
 msgid ""
-"You cannot vote for an image that has been in the submission queue for more "
-"than %(max_days)s days."
+"You cannot vote for an image that has not been submitted at least %(num)s "
+"times."
 msgstr ""
-"Вы не можете голосовать за изображение, которое находилось в очереди "
-"отправки более %(max_days)s дней."
 
 #, python-format
-msgid "You have already voted for %(max_allowed)s images today."
-msgstr "Вы уже проголосовали за %(max_allowed)s изображений на сегодня."
+msgid ""
+"You cannot vote for an image that has been in the review queue for more than "
+"%(max_days)s day(s)."
+msgstr ""
+
+#, python-format
+msgid "You have already voted for %(max_allowed)s image(s) today."
+msgstr ""
 
 msgid "You are not a member of the IOTD Judges board."
 msgstr "Вы не участника списка судей для Изображения Дня."
@@ -115,6 +117,12 @@ msgstr "Вы не можете выбирать собственные изоб�
 
 msgid "Images in the staging area cannot be elected."
 msgstr "Изображения в студии не могут быть выбраны."
+
+#, python-format
+msgid ""
+"You cannot submit an image that has been dismissed by %(number)s member(s) "
+"of the IOTD Staff."
+msgstr ""
 
 msgid "You cannot elect an image that has not been voted."
 msgstr "Вы не можете выбирать изображения за которые нет голосов."
@@ -128,18 +136,21 @@ msgstr "Вы не можете выбрать изображение за кот
 #, python-format
 msgid ""
 "You cannot elect an image that has been in the review queue for more than "
-"%(max_days)s days."
+"%(max_days)s day(s)."
 msgstr ""
-"Вы не можете выбирать изображение которое находится в очереди рецензий более "
-"чем %(max_days)s дней."
 
 #, python-format
-msgid "You have already elected %(max_allowed)s images today."
-msgstr "Вы уже выбрали %(max_allowed)s изображений на сегодня."
+msgid "You have already elected %(max_allowed)s image(s) today."
+msgstr ""
 
 #, python-format
-msgid "You have already scheduled %(max_allowed)s IOTDs."
-msgstr "Вы уже запланировали %(max_allowed)s Изображений Дня."
+msgid "You have already scheduled %(max_allowed)s IOTD(s)."
+msgstr ""
+
+#, python-format
+msgid ""
+"You cannot elect for an image that has not been voted at least %(num)s times."
+msgstr ""
 
 msgid "You cannot unelect your own submission."
 msgstr "Вы не можете отозвать свою заявку."
@@ -154,46 +165,87 @@ msgid "You cannot unelect a past or current IOTD."
 msgstr "Вы не можете переизбрать прошлые или текущие Изображения Дня."
 
 #, python-format
-msgid "you already selected %s IOTD today (UTC)"
-msgstr "вы уже выбрали %s IOTD сегодня (UTC)"
+msgid "you already selected %s IOTD(s) today (UTC)"
+msgstr ""
 
 #, python-format
-msgid "you already selected %s scheduled IOTDs"
-msgstr "Вы уже выбрали %s запланированных Изображений Дня"
+msgid "you already selected %s scheduled IOTD(s)"
+msgstr ""
 
 #, python-format
-msgid "there are already %s scheduled IOTDs"
-msgstr "Уже есть %s запланированных Изображений Дня"
+msgid "there are already %s scheduled IOTD(s)"
+msgstr ""
 
 msgid "Image of the day"
 msgstr "Изображение Дня"
 
-msgid "IOTD Judgement Queue"
-msgstr "IOTD Очередь Решения"
+#~ msgid ""
+#~ "You cannot submit an image that was published more than %(max_days)s days "
+#~ "ago."
+#~ msgstr ""
+#~ "Вы не можете номинировать изображения которые были опубликованы более, "
+#~ "чем %(max_days)s дней назад."
 
-msgid ""
-"Please select the images that you want to elect to IOTD by clicking on them."
-msgstr ""
-"Пожалуйста отметьте изображения, которые вы хотите выбрать для ИД, нажимая "
-"на них."
+#~ msgid "You have already submitted %(max_allowed)s images today."
+#~ msgstr "Вы уже номинировали %(max_allowed)s изображений на сегодня."
 
-#, python-format
-msgid ""
-"Sorry, you cannot select an IOTD right now: %(reason)s. Please try again in "
-"<strong>%(time)s</strong>."
-msgstr ""
-"К сожалению, вы не можете выбрать IOTD прямо сейчас: %(reason)s. Повторите "
-"попытку через <strong>%(time)s</strong>."
+#~ msgid ""
+#~ "You cannot vote for an image that has been in the submission queue for "
+#~ "more than %(max_days)s days."
+#~ msgstr ""
+#~ "Вы не можете голосовать за изображение, которое находилось в очереди "
+#~ "отправки более %(max_days)s дней."
 
-msgid "This queue is currently empty."
-msgstr "Пока эта очередь пуста."
+#~ msgid "You have already voted for %(max_allowed)s images today."
+#~ msgstr "Вы уже проголосовали за %(max_allowed)s изображений на сегодня."
 
-msgid "Error"
-msgstr "Ошибка"
+#~ msgid ""
+#~ "You cannot elect an image that has been in the review queue for more than "
+#~ "%(max_days)s days."
+#~ msgstr ""
+#~ "Вы не можете выбирать изображение которое находится в очереди рецензий "
+#~ "более чем %(max_days)s дней."
 
-msgid "You cannot unelect an IOTD elected by another judge."
-msgstr "Вы не можете отменить выбор ИД от другого судьи."
+#~ msgid "You have already elected %(max_allowed)s images today."
+#~ msgstr "Вы уже выбрали %(max_allowed)s изображений на сегодня."
 
-#, python-format
-msgid "All IOTD slots for the next %(days)s days are already filled."
-msgstr "Все места для ИД на следующие %(days)s дней уже заполнены."
+#~ msgid "You have already scheduled %(max_allowed)s IOTDs."
+#~ msgstr "Вы уже запланировали %(max_allowed)s Изображений Дня."
+
+#~ msgid "you already selected %s IOTD today (UTC)"
+#~ msgstr "вы уже выбрали %s IOTD сегодня (UTC)"
+
+#~ msgid "you already selected %s scheduled IOTDs"
+#~ msgstr "Вы уже выбрали %s запланированных Изображений Дня"
+
+#~ msgid "there are already %s scheduled IOTDs"
+#~ msgstr "Уже есть %s запланированных Изображений Дня"
+
+#~ msgid "IOTD Judgement Queue"
+#~ msgstr "IOTD Очередь Решения"
+
+#~ msgid ""
+#~ "Please select the images that you want to elect to IOTD by clicking on "
+#~ "them."
+#~ msgstr ""
+#~ "Пожалуйста отметьте изображения, которые вы хотите выбрать для ИД, "
+#~ "нажимая на них."
+
+#~ msgid ""
+#~ "Sorry, you cannot select an IOTD right now: %(reason)s. Please try again "
+#~ "in <strong>%(time)s</strong>."
+#~ msgstr ""
+#~ "К сожалению, вы не можете выбрать IOTD прямо сейчас: %(reason)s. "
+#~ "Повторите попытку через <strong>%(time)s</strong>."
+
+#~ msgid "This queue is currently empty."
+#~ msgstr "Пока эта очередь пуста."
+
+#~ msgid "Error"
+#~ msgstr "Ошибка"
+
+#~ msgid "You cannot unelect an IOTD elected by another judge."
+#~ msgstr "Вы не можете отменить выбор ИД от другого судьи."
+
+#~ msgid "All IOTD slots for the next %(days)s days are already filled."
+#~ msgstr "Все места для ИД на следующие %(days)s дней уже заполнены."

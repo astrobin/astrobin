@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 18:39+0000\n"
-"PO-Revision-Date: 2021-12-09 19:38+0100\n"
+"POT-Creation-Date: 2022-01-14 13:02+0000\n"
+"PO-Revision-Date: 2022-01-05 14:55+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.25 20211027-1\n"
+"X-Loco-Api-Version: 1.0.26 20220113-1\n"
 
 msgid "United Kingdom"
 msgstr "Regno Unito"
@@ -1165,6 +1165,9 @@ msgstr "Eclisse anulare di Sole"
 msgid "Total solar eclipse"
 msgstr "Eclisse totale di Sole"
 
+msgid "Meteor shower"
+msgstr ""
+
 msgid "Other"
 msgstr "Altro"
 
@@ -1481,6 +1484,9 @@ msgstr "Tracce stellari"
 
 msgid "Northern lights"
 msgstr "Aurora boreale"
+
+msgid "Noctilucent clouds"
+msgstr ""
 
 msgid "Gear"
 msgstr "Strumentazione"
@@ -3125,6 +3131,12 @@ msgstr "Nessun file"
 msgid "Choose file"
 msgstr "Scegli file"
 
+msgid "View page"
+msgstr "Vedi pagina"
+
+msgid "View large"
+msgstr ""
+
 msgid "Help with translations!"
 msgstr "Aiuta con le traduzioni!"
 
@@ -3589,29 +3601,8 @@ msgstr "Ascensione retta"
 msgid "Declination"
 msgstr "Declinazione"
 
-msgid "Technical card"
-msgstr "Scheda tecnica"
-
-msgid "Sponsored brands"
-msgstr "Marchi sponsorizzati"
-
-#, python-format
-msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
-msgstr "Compra <strong>%(name)s</strong> da %(retailer)s"
-
-msgid "Sponsored items"
-msgstr "Elementi sponsorizzati"
-
-msgid "Disable retailer integration"
-msgstr "Disabilita integrazione negozianti"
-
-#, python-format
-msgid "Shop %(name)s at %(retailer)s"
-msgstr "Compra %(name)s da %(retailer)s"
-
-#, python-format
-msgid "Shop %(name)s at AstroBin's partners"
-msgstr "Compra %(name)s presso un partner di AstroBin"
+msgid "Acquisition details"
+msgstr "Dettagli d'acquisizione"
 
 msgid "Frames"
 msgstr "Pose"
@@ -3672,6 +3663,27 @@ msgstr "Scarica"
 
 msgid "Remote source"
 msgstr "Origine dei dati remoti"
+
+msgid "Sponsored brands"
+msgstr "Marchi sponsorizzati"
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr "Compra <strong>%(name)s</strong> da %(retailer)s"
+
+msgid "Sponsored items"
+msgstr "Elementi sponsorizzati"
+
+msgid "Disable retailer integration"
+msgstr "Disabilita integrazione negozianti"
+
+#, python-format
+msgid "Shop %(name)s at %(retailer)s"
+msgstr "Compra %(name)s da %(retailer)s"
+
+#, python-format
+msgid "Shop %(name)s at AstroBin's partners"
+msgstr "Compra %(name)s presso un partner di AstroBin"
 
 msgid "Revision title"
 msgstr "Titolo della versione"
@@ -3768,17 +3780,20 @@ msgstr "Annotazioni avanzate"
 msgid "Original file"
 msgstr "File originale"
 
-msgid "Thumbnails"
-msgstr "Miniature"
+msgid "Basic information"
+msgstr "Informazioni di base"
+
+msgid "Content"
+msgstr ""
+
+msgid "Thumbnail"
+msgstr "Miniatura"
 
 msgid "Watermark"
 msgstr "Watermark"
 
-msgid "Basic information"
-msgstr "Informazioni di base"
-
-msgid "Acquisition details"
-msgstr "Dettagli d'acquisizione"
+msgid "Thumbnails"
+msgstr "Miniature"
 
 msgid "Plate-solving settings"
 msgstr "Impostazioni riduzione astrometrica"
@@ -4081,23 +4096,23 @@ msgstr "Link semplice"
 msgid "Forums"
 msgstr "Forum"
 
-msgid "Thumbnail"
-msgstr "Miniatura"
+msgid "Thumbnail size"
+msgstr ""
 
-msgid "Yes"
-msgstr "Sì"
+msgid "Off"
+msgstr ""
 
-msgid "No"
-msgstr "No"
+msgid "Link destination"
+msgstr ""
 
-msgid "Image size"
-msgstr "Dimensione immagine"
+msgid "Page with technical card"
+msgstr ""
 
-msgid "Full"
+msgid "Large view"
+msgstr ""
+
+msgid "Full resolution"
 msgstr "Piena risoluzione"
-
-msgid "Real"
-msgstr "Reale"
 
 msgid "Image mode"
 msgstr "Modalità immagine"
@@ -4234,10 +4249,9 @@ msgstr ""
 #, python-format
 msgid ""
 "Is this too much data for you to handle? Go to the <a class=\"button\" href="
-"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
+"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\" data-no-instant> "
+"basic form</a>."
 msgstr ""
-"Questi dati ti sembrano troppi? Vai al <a class=\"button\" href="
-"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">modulo di base</a>."
 
 msgid "Acquisition session"
 msgstr "Sessione di acquisizione"
@@ -4253,12 +4267,8 @@ msgid ""
 "With this form you can input the basic details for the acquisition of your "
 "image. If you want to be more thorough or fill in separate details for each "
 "filter, go to the <a class=\"button\" href=\"%(advanced_form_url)s?"
-"edit_type=deep_sky&advanced=true\">advanced form</a>."
+"edit_type=deep_sky&advanced=true\" data-no-instant>advanced form</a>."
 msgstr ""
-"In questo modulo puoi inserire i dettagli di base dell'acquisizione della "
-"tua immagine. Se vuoi essere più dettagliato oppure inserire valori diversi "
-"per ogni filtro, allora vai <a class=\"button\" href=\"%(advanced_form_url)s?"
-"edit_type=deep_sky&advanced=true\">modulo avanzato</a>."
 
 msgid "What kind of image is this?"
 msgstr "Di che tipo di immagine si tratta?"
@@ -4396,9 +4406,6 @@ msgstr "Prossimo passo: informazioni di base"
 msgid "This operation might take several seconds."
 msgstr "Questa operazione potrebbe richiedere vari secondi."
 
-msgid "Full resolution"
-msgstr "Piena risoluzione"
-
 #, python-format
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "da <a href=\"%(the_url)s\">%(user)s</a>"
@@ -4408,6 +4415,9 @@ msgstr "Sovrapposizione riduzione astrometrica"
 
 msgid "Fit to window"
 msgstr "Adatta alla finestra"
+
+msgid "Technical card"
+msgstr "Scheda tecnica"
 
 msgid "Loading click-and-drag zoom..."
 msgstr "Caricamento dello zoom clicca-e-trascina..."
@@ -5322,6 +5332,22 @@ msgid "%(user)s commented on your edit proposal"
 msgstr "%(user)s ha commentato la tua proposta di modifica"
 
 #, python-format
+msgid "<a href=\"%(user_url)s\">%(user)s</a> commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "<strong>%(user)s</strong> commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your scheduled IOTD"
+msgstr ""
+
+#, python-format
 msgid ""
 "User <a href=\"%(object_url)s\">%(object)s</a> is now following you. They "
 "will be notified when you publish new images."
@@ -5866,9 +5892,6 @@ msgstr "AR"
 msgid "Dec"
 msgstr "Dec"
 
-msgid "View page"
-msgstr "Vedi pagina"
-
 msgid "Member since"
 msgstr "Utente da"
 
@@ -5952,9 +5975,6 @@ msgstr "Nessun forum creato"
 
 msgid "You are not a member of any groups"
 msgstr "Non sei membro di alcun gruppo"
-
-msgid "These are the forums in the groups you have access to."
-msgstr "Questi sono i forum dei gruppi a cui hai accesso."
 
 msgid "Topics"
 msgstr "Argomenti"
@@ -6953,6 +6973,9 @@ msgstr "Seleziona"
 msgid "Add filter:"
 msgstr "Aggiungi filtro:"
 
+msgid "Yes"
+msgstr "Sì"
+
 msgid "Top pick"
 msgstr "Top pick"
 
@@ -7237,9 +7260,6 @@ msgid ""
 msgstr ""
 "Hai richiesto la revisione %s, ma non esiste oppure è stata cancellata. Ti "
 "abbiamo rediretto alla versione che è segnata come finale."
-
-msgid "Accessory"
-msgstr "Accessorio"
 
 msgid "Dates"
 msgstr "Date"
@@ -7569,6 +7589,18 @@ msgstr ""
 #~ "Per scoprire di più sull'Indice delle Immagini, visita %(_0)sla pagina "
 #~ "delle domande frequenti%(_1)s. Grazie!"
 
+#~ msgid "No"
+#~ msgstr "No"
+
+#~ msgid "Image size"
+#~ msgstr "Dimensione immagine"
+
+#~ msgid "Full"
+#~ msgstr "Piena risoluzione"
+
+#~ msgid "Real"
+#~ msgstr "Reale"
+
 #~ msgid "Oh no!"
 #~ msgstr "Oh, no!"
 
@@ -7600,6 +7632,28 @@ msgstr ""
 
 #~ msgid "Revision uploaded"
 #~ msgstr "Versine caricata"
+
+#~ msgid ""
+#~ "Is this too much data for you to handle? Go to the <a class=\"button\" "
+#~ "href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</"
+#~ "a>."
+#~ msgstr ""
+#~ "Questi dati ti sembrano troppi? Vai al <a class=\"button\" href="
+#~ "\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">modulo di base</"
+#~ "a>."
+
+#~ msgid ""
+#~ "With this form you can input the basic details for the acquisition of "
+#~ "your image. If you want to be more thorough or fill in separate details "
+#~ "for each filter, go to the <a class=\"button\" href="
+#~ "\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">advanced form</"
+#~ "a>."
+#~ msgstr ""
+#~ "In questo modulo puoi inserire i dettagli di base dell'acquisizione della "
+#~ "tua immagine. Se vuoi essere più dettagliato oppure inserire valori "
+#~ "diversi per ogni filtro, allora vai <a class=\"button\" href="
+#~ "\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">modulo "
+#~ "avanzato</a>."
 
 #~ msgid ""
 #~ "You are about to open a large file of about %(size)s. Depending on your "
@@ -7701,6 +7755,9 @@ msgstr ""
 
 #~ msgid "%(user)s joined the public group: \"%(group_name)s\""
 #~ msgstr "%(user)s si è aggiunto al gruppo pubblico: \"%(group_name)s\""
+
+#~ msgid "These are the forums in the groups you have access to."
+#~ msgstr "Questi sono i forum dei gruppi a cui hai accesso."
 
 #~ msgid "Please note: this post will be published only after moderation."
 #~ msgstr "Nota bene: questo post sarà pubblicato solo dopo la moderazione."
@@ -7898,6 +7955,9 @@ msgstr ""
 
 #~ msgid "Last login"
 #~ msgstr "Ultimo login"
+
+#~ msgid "Accessory"
+#~ msgstr "Accessorio"
 
 #~ msgid "Publication time"
 #~ msgstr "Data di pubblicazione"

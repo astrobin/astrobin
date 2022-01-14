@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Images\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 18:40+0000\n"
+"POT-Creation-Date: 2022-01-14 13:02+0000\n"
 "PO-Revision-Date: 2021-12-09 17:48+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: German\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108439\n"
-"X-Loco-Api-Version: 1.0.25 20211027-1\n"
+"X-Loco-Api-Version: 1.0.26 20220113-1\n"
 
 msgid "Conflict."
 msgstr "Konflikt."
@@ -35,6 +35,13 @@ msgstr ""
 
 msgid "Error!"
 msgstr "Fehler!"
+
+#, python-format
+msgid "Revision %(revision)s"
+msgstr ""
+
+msgid "Original revision"
+msgstr ""
 
 msgid "Staging area"
 msgstr "Staging-Bereich"

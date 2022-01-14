@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 18:39+0000\n"
+"POT-Creation-Date: 2022-01-14 13:02+0000\n"
 "PO-Revision-Date: 2015-11-10 11:53+0000\n"
 "Last-Translator: Xavier <bufote@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1149,6 +1149,9 @@ msgstr ""
 msgid "Total solar eclipse"
 msgstr ""
 
+msgid "Meteor shower"
+msgstr ""
+
 msgid "Other"
 msgstr "Un altre"
 
@@ -1456,6 +1459,9 @@ msgid "Star trails"
 msgstr "Traces d'estels"
 
 msgid "Northern lights"
+msgstr ""
+
+msgid "Noctilucent clouds"
 msgstr ""
 
 msgid "Gear"
@@ -2994,6 +3000,12 @@ msgstr "No s'ha seleccionat cap arxiu"
 msgid "Choose file"
 msgstr "Triar arxiu"
 
+msgid "View page"
+msgstr ""
+
+msgid "View large"
+msgstr ""
+
 msgid "Help with translations!"
 msgstr "Ajuda amb les traduccions!"
 
@@ -3395,28 +3407,7 @@ msgstr ""
 msgid "Declination"
 msgstr ""
 
-msgid "Technical card"
-msgstr "Fitxa tècnica"
-
-msgid "Sponsored brands"
-msgstr ""
-
-#, python-format
-msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
-msgstr ""
-
-msgid "Sponsored items"
-msgstr ""
-
-msgid "Disable retailer integration"
-msgstr ""
-
-#, python-format
-msgid "Shop %(name)s at %(retailer)s"
-msgstr ""
-
-#, python-format
-msgid "Shop %(name)s at AstroBin's partners"
+msgid "Acquisition details"
 msgstr ""
 
 msgid "Frames"
@@ -3477,6 +3468,27 @@ msgid "Download"
 msgstr ""
 
 msgid "Remote source"
+msgstr ""
+
+msgid "Sponsored brands"
+msgstr ""
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr ""
+
+msgid "Sponsored items"
+msgstr ""
+
+msgid "Disable retailer integration"
+msgstr ""
+
+#, python-format
+msgid "Shop %(name)s at %(retailer)s"
+msgstr ""
+
+#, python-format
+msgid "Shop %(name)s at AstroBin's partners"
 msgstr ""
 
 msgid "Revision title"
@@ -3572,16 +3584,19 @@ msgstr ""
 msgid "Original file"
 msgstr ""
 
-msgid "Thumbnails"
+msgid "Basic information"
+msgstr "Informació bàsica"
+
+msgid "Content"
+msgstr ""
+
+msgid "Thumbnail"
 msgstr ""
 
 msgid "Watermark"
 msgstr ""
 
-msgid "Basic information"
-msgstr "Informació bàsica"
-
-msgid "Acquisition details"
+msgid "Thumbnails"
 msgstr ""
 
 msgid "Plate-solving settings"
@@ -3828,22 +3843,22 @@ msgstr ""
 msgid "Forums"
 msgstr ""
 
-msgid "Thumbnail"
+msgid "Thumbnail size"
 msgstr ""
 
-msgid "Yes"
+msgid "Off"
 msgstr ""
 
-msgid "No"
+msgid "Link destination"
 msgstr ""
 
-msgid "Image size"
+msgid "Page with technical card"
 msgstr ""
 
-msgid "Full"
+msgid "Large view"
 msgstr ""
 
-msgid "Real"
+msgid "Full resolution"
 msgstr ""
 
 msgid "Image mode"
@@ -3955,7 +3970,8 @@ msgstr ""
 #, python-format
 msgid ""
 "Is this too much data for you to handle? Go to the <a class=\"button\" href="
-"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
+"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\" data-no-instant> "
+"basic form</a>."
 msgstr ""
 
 msgid "Acquisition session"
@@ -3972,7 +3988,7 @@ msgid ""
 "With this form you can input the basic details for the acquisition of your "
 "image. If you want to be more thorough or fill in separate details for each "
 "filter, go to the <a class=\"button\" href=\"%(advanced_form_url)s?"
-"edit_type=deep_sky&advanced=true\">advanced form</a>."
+"edit_type=deep_sky&advanced=true\" data-no-instant>advanced form</a>."
 msgstr ""
 
 msgid "What kind of image is this?"
@@ -4093,9 +4109,6 @@ msgstr ""
 msgid "This operation might take several seconds."
 msgstr ""
 
-msgid "Full resolution"
-msgstr ""
-
 #, python-format
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr ""
@@ -4105,6 +4118,9 @@ msgstr ""
 
 msgid "Fit to window"
 msgstr ""
+
+msgid "Technical card"
+msgstr "Fitxa tècnica"
 
 msgid "Loading click-and-drag zoom..."
 msgstr ""
@@ -4835,6 +4851,22 @@ msgid "%(user)s commented on your edit proposal"
 msgstr ""
 
 #, python-format
+msgid "<a href=\"%(user_url)s\">%(user)s</a> commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "<strong>%(user)s</strong> commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your scheduled IOTD"
+msgstr ""
+
+#, python-format
 msgid ""
 "User <a href=\"%(object_url)s\">%(object)s</a> is now following you. They "
 "will be notified when you publish new images."
@@ -5278,9 +5310,6 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-msgid "View page"
-msgstr ""
-
 msgid "Member since"
 msgstr "Membre des de"
 
@@ -5349,9 +5378,6 @@ msgid "No forums created"
 msgstr ""
 
 msgid "You are not a member of any groups"
-msgstr ""
-
-msgid "These are the forums in the groups you have access to."
 msgstr ""
 
 msgid "Topics"
@@ -6234,6 +6260,9 @@ msgstr ""
 msgid "Add filter:"
 msgstr ""
 
+msgid "Yes"
+msgstr ""
+
 msgid "Top pick"
 msgstr ""
 
@@ -6504,9 +6533,6 @@ msgstr ""
 msgid ""
 "You requested revision %s, but it doesn't exist or it was deleted. We "
 "redirected you to the revision currently marked as final."
-msgstr ""
-
-msgid "Accessory"
 msgstr ""
 
 msgid "Dates"

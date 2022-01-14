@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-09 18:39+0000\n"
+"POT-Creation-Date: 2022-01-14 13:02+0000\n"
 "PO-Revision-Date: 2021-03-23 01:39+0000\n"
 "Last-Translator: mustastum <scriptyper@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1148,6 +1148,9 @@ msgstr ""
 msgid "Total solar eclipse"
 msgstr ""
 
+msgid "Meteor shower"
+msgstr ""
+
 msgid "Other"
 msgstr "Diğer"
 
@@ -1452,6 +1455,9 @@ msgid "Star trails"
 msgstr "Yıldız izleri"
 
 msgid "Northern lights"
+msgstr ""
+
+msgid "Noctilucent clouds"
 msgstr ""
 
 msgid "Gear"
@@ -2988,6 +2994,12 @@ msgstr "Dosya seçilmedi"
 msgid "Choose file"
 msgstr "Dosya seçiniz"
 
+msgid "View page"
+msgstr "Sayfaya gözat"
+
+msgid "View large"
+msgstr ""
+
 msgid "Help with translations!"
 msgstr "Çeviri yardımı!"
 
@@ -3392,29 +3404,8 @@ msgstr "Sağ açıklık"
 msgid "Declination"
 msgstr "Dik açıklık"
 
-msgid "Technical card"
-msgstr "Teknik kart"
-
-msgid "Sponsored brands"
-msgstr ""
-
-#, python-format
-msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
-msgstr ""
-
-msgid "Sponsored items"
-msgstr ""
-
-msgid "Disable retailer integration"
-msgstr ""
-
-#, python-format
-msgid "Shop %(name)s at %(retailer)s"
-msgstr ""
-
-#, python-format
-msgid "Shop %(name)s at AstroBin's partners"
-msgstr ""
+msgid "Acquisition details"
+msgstr "Çekim detayları"
 
 msgid "Frames"
 msgstr "Kareler"
@@ -3474,6 +3465,27 @@ msgid "Download"
 msgstr ""
 
 msgid "Remote source"
+msgstr ""
+
+msgid "Sponsored brands"
+msgstr ""
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr ""
+
+msgid "Sponsored items"
+msgstr ""
+
+msgid "Disable retailer integration"
+msgstr ""
+
+#, python-format
+msgid "Shop %(name)s at %(retailer)s"
+msgstr ""
+
+#, python-format
+msgid "Shop %(name)s at AstroBin's partners"
 msgstr ""
 
 msgid "Revision title"
@@ -3569,17 +3581,20 @@ msgstr ""
 msgid "Original file"
 msgstr ""
 
-msgid "Thumbnails"
+msgid "Basic information"
+msgstr "Temel bilgiler"
+
+msgid "Content"
 msgstr ""
+
+msgid "Thumbnail"
+msgstr "Küçük resim"
 
 msgid "Watermark"
 msgstr ""
 
-msgid "Basic information"
-msgstr "Temel bilgiler"
-
-msgid "Acquisition details"
-msgstr "Çekim detayları"
+msgid "Thumbnails"
+msgstr ""
 
 msgid "Plate-solving settings"
 msgstr ""
@@ -3831,23 +3846,23 @@ msgstr "Temel bağlantı"
 msgid "Forums"
 msgstr "Forumlar"
 
-msgid "Thumbnail"
-msgstr "Küçük resim"
-
-msgid "Yes"
-msgstr "Evet"
-
-msgid "No"
-msgstr "Hayır"
-
-msgid "Image size"
-msgstr "Resim boyutu"
-
-msgid "Full"
-msgstr "Dolu"
-
-msgid "Real"
+msgid "Thumbnail size"
 msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "Link destination"
+msgstr ""
+
+msgid "Page with technical card"
+msgstr ""
+
+msgid "Large view"
+msgstr ""
+
+msgid "Full resolution"
+msgstr "Tam çözünürlük"
 
 msgid "Image mode"
 msgstr "Resim modu"
@@ -3965,11 +3980,9 @@ msgstr ""
 #, python-format
 msgid ""
 "Is this too much data for you to handle? Go to the <a class=\"button\" href="
-"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</a>."
+"\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\" data-no-instant> "
+"basic form</a>."
 msgstr ""
-"Bu kadar çok veri ile başa çıkamıyor musunuz? O halde <a class=\"button\" "
-"href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">temel form</"
-"a>'a gidin."
 
 msgid "Acquisition session"
 msgstr "Çekim oturumu"
@@ -3985,13 +3998,8 @@ msgid ""
 "With this form you can input the basic details for the acquisition of your "
 "image. If you want to be more thorough or fill in separate details for each "
 "filter, go to the <a class=\"button\" href=\"%(advanced_form_url)s?"
-"edit_type=deep_sky&advanced=true\">advanced form</a>."
+"edit_type=deep_sky&advanced=true\" data-no-instant>advanced form</a>."
 msgstr ""
-"Bu formda, fotoğrafınızın çekim bilgileri ile ilgili temel detayları "
-"girebilirsiniz. Eğer daha fazla detay girmek ya da her bir filtre için "
-"detayları ayrı ayrı yazmak istiyorsanız, <a class=\"button\" href="
-"\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">gelişmiş form</"
-"a>'a gidin."
 
 msgid "What kind of image is this?"
 msgstr "Bu ne tür bir fotoğraf?"
@@ -4126,9 +4134,6 @@ msgstr "Sonraki adım: temel bilgiler"
 msgid "This operation might take several seconds."
 msgstr ""
 
-msgid "Full resolution"
-msgstr "Tam çözünürlük"
-
 #, python-format
 msgid "by <a href=\"%(the_url)s\">%(user)s</a>"
 msgstr "<a href=\"%(the_url)s\">%(user)s</a> kullanıcısı tarafından"
@@ -4138,6 +4143,9 @@ msgstr ""
 
 msgid "Fit to window"
 msgstr "Pencereye sığdır"
+
+msgid "Technical card"
+msgstr "Teknik kart"
 
 msgid "Loading click-and-drag zoom..."
 msgstr ""
@@ -4925,6 +4933,22 @@ msgid "%(user)s commented on your edit proposal"
 msgstr ""
 
 #, python-format
+msgid "<a href=\"%(user_url)s\">%(user)s</a> commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "<strong>%(user)s</strong> commented on your scheduled IOTD."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your scheduled IOTD"
+msgstr ""
+
+#, python-format
 msgid ""
 "User <a href=\"%(object_url)s\">%(object)s</a> is now following you. They "
 "will be notified when you publish new images."
@@ -5372,9 +5396,6 @@ msgstr "RA"
 msgid "Dec"
 msgstr "Dec"
 
-msgid "View page"
-msgstr "Sayfaya gözat"
-
 msgid "Member since"
 msgstr "Tarihinden beri üye"
 
@@ -5443,9 +5464,6 @@ msgid "No forums created"
 msgstr ""
 
 msgid "You are not a member of any groups"
-msgstr ""
-
-msgid "These are the forums in the groups you have access to."
 msgstr ""
 
 msgid "Topics"
@@ -6342,6 +6360,9 @@ msgstr ""
 msgid "Add filter:"
 msgstr ""
 
+msgid "Yes"
+msgstr "Evet"
+
 msgid "Top pick"
 msgstr ""
 
@@ -6612,9 +6633,6 @@ msgid ""
 "redirected you to the revision currently marked as final."
 msgstr ""
 
-msgid "Accessory"
-msgstr ""
-
 msgid "Dates"
 msgstr "Tarihler"
 
@@ -6662,6 +6680,37 @@ msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid "No"
+#~ msgstr "Hayır"
+
+#~ msgid "Image size"
+#~ msgstr "Resim boyutu"
+
+#~ msgid "Full"
+#~ msgstr "Dolu"
+
+#~ msgid ""
+#~ "Is this too much data for you to handle? Go to the <a class=\"button\" "
+#~ "href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">basic form</"
+#~ "a>."
+#~ msgstr ""
+#~ "Bu kadar çok veri ile başa çıkamıyor musunuz? O halde <a class=\"button\" "
+#~ "href=\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\">temel form</"
+#~ "a>'a gidin."
+
+#~ msgid ""
+#~ "With this form you can input the basic details for the acquisition of "
+#~ "your image. If you want to be more thorough or fill in separate details "
+#~ "for each filter, go to the <a class=\"button\" href="
+#~ "\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">advanced form</"
+#~ "a>."
+#~ msgstr ""
+#~ "Bu formda, fotoğrafınızın çekim bilgileri ile ilgili temel detayları "
+#~ "girebilirsiniz. Eğer daha fazla detay girmek ya da her bir filtre için "
+#~ "detayları ayrı ayrı yazmak istiyorsanız, <a class=\"button\" href="
+#~ "\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">gelişmiş form</"
+#~ "a>'a gidin."
 
 #~ msgid "Integration hours, yearly"
 #~ msgstr "Poz süresi, yıllık"
