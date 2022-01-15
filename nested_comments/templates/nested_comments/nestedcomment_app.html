@@ -27,24 +27,41 @@
 </div>
 
 <script type="application/javascript">
+    {% trans "Error" as i18nError %}
+    {% trans "Cancel" as i18nCancel %}
+    {% trans "Add a comment" as i18nAddAComment %}
+    {% trans "There are no comments yet." as i18nThereAreNoCommentsYet %}
+    {% trans "The comment cannot be empty." as i18nTheCommentCannotBeEmpty %}
+    {% trans "(deleted)" as i18nDeleted %}
+    {% trans "Delete" as i18nDelete %}
+    {% trans "Undelete" as i18nUndelete %}
+    {% trans "Edit" as i18nEdit %}
+    {% trans "Link" as i18nLink %}
+    {% trans "likes" context "Noun, e.g. 'This element has 10 likes'" as i18nLikesNoun %}
+    {% trans "Like" context 'Verb (imperative)' as i18nLike %}
+    {% trans "Unlike" context 'Verb (imperative)' as i18nUnlike %}
+    {% trans "Reply" context 'Verb (imperative)' as i18nReply %}
+    {% trans "Approve" context 'Verb (imperative)' as i18nApprove %}
+    {% trans "Report a use" as i18nReportAbuse %}
+
     window.astrobin_nestedcomments_i18n = {
-        error: "{{ _('Error') | escapejs }}",
-        cancel: "{{ _('Cancel') | escapejs }}",
-        addAComment: "{{ _('Add a comment') | escapejs }}",
-        noCommentsYet: "{{ _('There are no comments yet.') | escapejs }}",
-        theCommentCannotBeEmpty: "{{ _('The comment cannot be empty.') | escapejs }}",
-        deleted: "{{ _('(deleted)') | escapejs }}",
-        delete: "{{ _('Delete') | escapejs }}",
-        undelete: "{{ _('Undelete') | escapejs }}",
-        edit: "{{ _('Edit') | escapejs }}",
-        link: "{{ _('Link') | escapejs }}",
-        likes: "{% trans 'likes' context "Noun, e.g. 'This element has 10 likes'" %}",
-        like: "{% trans 'like' context "Noun, e.g. 'This element has 1 like'" %}",
-        likeVerb: "{% trans 'Like' context "Verb (imperative)" %}",
-        unlikeVerb: "{% trans 'Unlike' context "Verb (imperative)" %}",
-        replyVerb: "{% trans 'Reply' context "Verb (imperative)" %}",
-        approveVerb: "{% trans 'Approve' context "Verb (imperative)" %}",
-        reportAbuse: "{% trans 'Report abuse' %}"
+        error: '{{ i18nError | escapejs }}',
+        cancel: '{{ i18nCancel | escapejs }}',
+        addAComment: '{{ i18nAddAComment | escapejs }}',
+        noCommentsYet: '{{ i18nThereAreNoCommentsYet | escapejs }}',
+        theCommentCannotBeEmpty: '{{ i18nTheCommentCannotBeEmpty | escapejs }}',
+        deleted: '{{ i18nDeleted | escapejs }}',
+        delete: '{{ i18nDelete | escapejs }}',
+        undelete: '{{ i18nUndelete | escapejs }}',
+        edit: '{{ i18nEdit | escapejs }}',
+        link: '{{ i18nLink | escapejs }}',
+        likes: '{{ i18nLikesNoun | escapejs }}',
+        like: '{{ i18nLike | escapejs }}',
+        likeVerb: '{{ i18nLike | escapejs }}',
+        unlikeVerb: '{{ i18nUnlike | escapejs }}',
+        replyVerb: '{{ i18nReply | escapejs }}',
+        approveVerb: '{{ i18nApprove | escapejs }}',
+        reportAbuse: '{{ i18nReportAbuse | escapejs }}'
     };
 </script>
 
