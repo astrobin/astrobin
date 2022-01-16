@@ -390,3 +390,12 @@ select.cke_dialog_ui_input_select {
 .cke_combo__fontsize .cke_combo_text {
   overflow: visible !important;
 }
+
+.simpleuploads-tmpwrapper {
+  width: 100% !important;
+
+  svg {
+    width: 100% !important;
+    height: auto;
+  }
+}

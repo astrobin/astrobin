@@ -2179,6 +2179,11 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=454832
 			}
 		*/
 		}
+
+		if (textValue === '100%') {
+			textValue = editor.lang.simpleuploads.processing;
+		}
+
 		if (rect) {
 			rect.setAttribute('width', value);
 			rect.style.width = value;
