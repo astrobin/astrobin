@@ -11,37 +11,38 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="{{ request.path }}{% query_string "source='backyard'" "" %}">
+                    <a href="{{ request.path }}{% query_string "source='backyard'" "" %}" class="with-bg-icon">
                         <span class="bg-icon{% if source == 'backyard' %} icon-ok{% endif %}"></span>
                         {% trans "Backyard" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{{ request.path }}{% query_string "source='traveller'" "" %}">
+                    <a href="{{ request.path }}{% query_string "source='traveller'" "" %}" class="with-bg-icon">
                         <span class="bg-icon{% if source == 'traveller' %} icon-ok{% endif %}"></span>
                         {% trans "Traveller" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{{ request.path }}{% query_string "source='own-remote'" "" %}">
+                    <a href="{{ request.path }}{% query_string "source='own-remote'" "" %}" class="with-bg-icon">
                         <span class="bg-icon{% if source == 'own-remote' %} icon-ok{% endif %}"></span>
                         {% trans "Own remote observatory" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{{ request.path }}{% query_string "source='amateur-hosting'" "" %}">
+                    <a href="{{ request.path }}{% query_string "source='amateur-hosting'" "" %}" class="with-bg-icon"
                         <span class="bg-icon{% if source == 'amateur-hosting' %} icon-ok{% endif %}"></span>
                         {% trans "Amateur hosting facility" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{{ request.path }}{% query_string "source='public-amateur-data'" "" %}">
+                    <a href="{{ request.path }}{% query_string "source='public-amateur-data'" "" %}"
+                       class="with-bg-icon">
                         <span class="bg-icon{% if source == 'public-amateur-data' %} icon-ok{% endif %}"></span>
                         {% trans "Public amateur data" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{{ request.path }}{% query_string "source='pro-data'" "" %}">
+                    <a href="{{ request.path }}{% query_string "source='pro-data'" "" %}" class="with-bg-icon">
                         <span class="bg-icon{% if source == 'pro-data' %} icon-ok{% endif %}"></span>
                         {% trans "Professional, scientific grade data" %}
                     </a>
@@ -49,7 +50,7 @@
 
                 <li class="divider"></li>
 
-                <li class="bg-icon">
+                <li>
                     <a href="{{ request.path }}{% query_string "" "source" %}">{% trans "All" %}</a>
                 </li>
             </ul>
@@ -62,31 +63,31 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="{{ request.path }}{% query_string "acquisition_type='regular'" "" %}">
+                    <a href="{{ request.path }}{% query_string "acquisition_type='regular'" "" %}" class="with-bg-icon">
                         <span class="bg-icon{% if acquisition_type == 'regular' %} icon-ok{% endif %}"></span>
                         {% trans "Regular" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{{ request.path }}{% query_string "acquisition_type='eaa'" "" %}">
+                    <a href="{{ request.path }}{% query_string "acquisition_type='eaa'" "" %}" class="with-bg-icon">
                         <span class="bg-icon{% if acquisition_type == 'eaa' %} icon-ok{% endif %}"></span>
                         {% trans "Electronically-Assisted Astronomy (EAA)" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{{ request.path }}{% query_string "acquisition_type='lucky'" "" %}">
+                    <a href="{{ request.path }}{% query_string "acquisition_type='lucky'" "" %}" class="with-bg-icon">
                         <span class="bg-icon{% if acquisition_type == 'lucky' %} icon-ok{% endif %}"></span>
                         {% trans "Lucky imaging" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{{ request.path }}{% query_string "acquisition_type='drawing'" "" %}">
+                    <a href="{{ request.path }}{% query_string "acquisition_type='drawing'" "" %}" class="with-bg-icon">
                         <span class="bg-icon{% if acquisition_type == 'drawing' %} icon-ok{% endif %}"></span>
                         {% trans "Drawing/Sketch" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{{ request.path }}{% query_string "acquisition_type='other'" "" %}">
+                    <a href="{{ request.path }}{% query_string "acquisition_type='other'" "" %}" class="with-bg-icon">
                         <span class="bg-icon{% if acquisition_type == 'other' %} icon-ok{% endif %}"></span>
                         {% trans "Other/Unknown" %}
                     </a>
@@ -94,7 +95,7 @@
 
                 <li class="divider"></li>
 
-                <li class="bg-icon">
+                <li>
                     <a href="{{ request.path }}{% query_string "" "acquisition_type" %}">{% trans "All" %}</a>
                 </li>
             </ul>

@@ -48,7 +48,6 @@ class GroupsTest(TestCase):
     def test_group_list_view(self):
         response = self.client.get(reverse('group_list'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<h1>Public groups<small>Open to the whole community.</small></h1>', html=True)
         self.assertContains(response, '<td class="group-name"><a href="' + reverse('group_detail', args=(
             self.group.pk, self.group.slug)) + '">Test group</a></td>', html=True)
         self.assertContains(response, '<td class="group-members hidden-phone">1</td>', html=True)

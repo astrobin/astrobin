@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_groups_tags %}
+{% load common_tags %}
 
 {% block title %}{% trans "Groups" %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
@@ -46,36 +47,56 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="{% url 'group_list' %}?sort=name">
+                        <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=name" class="with-bg-icon">
+                            <span class="bg-icon{% if request.GET.sort == 'name' %} icon-ok{% endif %}"></span>
                             <i class="icon icon-sort-by-alphabet"></i>
                             {% trans "Name" %}
                         </a>
                     </li>
 
                     <li>
-                        <a href="{% url 'group_list' %}?sort=category">
+                        <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=category" class="with-bg-icon">
+                            <span class="bg-icon{% if request.GET.sort == 'category' %} icon-ok{% endif %}"></span>
                             <i class="icon icon-folder-open-alt"></i>
                             {% trans "Category" %}
                         </a>
                     </li>
 
                     <li>
-                        <a href="{% url 'group_list' %}?sort=activity">
+                        <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=activity" class="with-bg-icon">
+                            <span class="bg-icon{% if request.GET.sort == 'activity' or request.GET.sort is None %} icon-ok{% endif %}"></span>
                             <i class="icon icon-bolt"></i>
                             {% trans "Last activity" %}
                         </a>
                     </li>
 
-
                     <li>
-                        <a href="{% url 'group_list' %}?sort=created">
+                        <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=created" class="with-bg-icon">
+                            <span class="bg-icon{% if request.GET.sort == 'created' %} icon-ok{% endif %}"></span>
                             <i class="icon icon-calendar"></i>
                             {% trans "Date created" %}
                         </a>
                     </li>
 
                     <li>
-                        <a href="{% url 'group_list' %}?sort=posts">
+                        <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=members" class="with-bg-icon">
+                            <span class="bg-icon{% if request.GET.sort == 'members' %} icon-ok{% endif %}"></span>
+                            <i class="icon icon-group"></i>
+                            {% trans "Members" %}
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=images" class="with-bg-icon">
+                            <span class="bg-icon{% if request.GET.sort == 'images' %} icon-ok{% endif %}"></span>
+                            <i class="icon icon-picture"></i>
+                            {% trans "Images" %}
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=posts" class="with-bg-icon">
+                            <span class="bg-icon{% if request.GET.sort == 'posts' %} icon-ok{% endif %}"></span>
                             <i class="icon icon-comments-alt"></i>
                             {% trans "Forum posts" %}
                         </a>
@@ -85,69 +106,173 @@
         </ul> <!-- nav -->
     </div> <!-- subnav -->
 
-    {% if private_groups %}
-        <div class="group-list">
-            <div class="row-fluid header">
-                <div class="span9">
-                    <h1>
-                        {% trans "Your private groups" %}
-                        <small>
-                            {% trans "You own, or are a member of, or were invited to, these private groups." %}
-                        </small>
-                    </h1>
-                </div>
-                <div class="span3 text-right hidden-phone">
-                    <a
-                            {% if request.user|has_access_to_premium_group_features %}
-                                href="{% url 'group_create' %}"
-                            {% else %}
-                                href="#feature-restricted-modal" data-toggle="modal"
-                            {% endif %}
-                            class="btn btn-primary btn-large create-group">
-                        <i class="icon icon-plus-sign"></i>
-                        {% trans "Create private group" context "group" %}
-                    </a>
-                </div>
-            </div>
+    <form class="group-list-search-form" action="{% url 'group_list' %}" method="get" autocomplete="off">
+        <input id="q" name="q" type="text" value="{{ request.GET.q }}" placeholder="{% trans 'Search' %}" />
 
-            {% with groups=private_groups show_group_search=False %}
-                {% include 'astrobin_apps_groups/_group_list_table.html' %}
-            {% endwith %}
+        {% if request.GET.sort %}
+            <input type="hidden" name="sort" value="{{ request.GET.sort }}" />
+        {% endif %}
+    </form>
+
+    {% if object_list %}
+        <div class="accordion" id="groups-accordion">
+            {% if owned_private_groups %}
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <h3>
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#groups-accordion"
+                               href="#private-groups-you-own">
+                                <i class="icon-lock"></i> {% trans "Private groups you own" %}
+                            </a>
+                        </h3>
+                    </div>
+                    <div id="private-groups-you-own" class="accordion-body">
+                        <div class="accordion-inner">
+                            <div class="group-list">
+                                {% with groups=owned_private_groups %}
+                                    {% include 'astrobin_apps_groups/_group_list_table.html' %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if member_private_groups %}
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <h3>
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#groups-accordion"
+                               href="#private-groups-you-are-a-member-of">
+                                <i class="icon-lock"></i> {% trans "Private groups you are a member of" %}
+                            </a>
+                        </h3>
+                    </div>
+                    <div id="private-groups-you-are-a-member-of" class="accordion-body">
+                        <div class="accordion-inner">
+                            <div class="group-list">
+                                {% with groups=member_private_groups %}
+                                    {% include 'astrobin_apps_groups/_group_list_table.html' %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if invited_private_groups %}
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <h3>
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#groups-accordion"
+                               href="#private-groups-you-are-invited-to">
+                                <i class="icon-lock"></i> {% trans "Private groups you are invited to" %}
+                            </a>
+                        </h3>
+                    </div>
+                    <div id="private-groups-you-are-invited-to" class="accordion-body">
+                        <div class="accordion-inner">
+                            <div class="group-list">
+                                {% with groups=invited_private_groups %}
+                                    {% include 'astrobin_apps_groups/_group_list_table.html' %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <hr/>
+
+            {% if owned_public_groups %}
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <h3>
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#groups-accordion"
+                               href="#public-groups-you-own">
+                                <i class="icon-unlock"></i> {% trans "Public groups you own" %}
+                            </a>
+                        </h3>
+                    </div>
+                    <div id="public-groups-you-own" class="accordion-body">
+                        <div class="accordion-inner">
+                            <div class="group-list">
+                                {% with groups=owned_public_groups %}
+                                    {% include 'astrobin_apps_groups/_group_list_table.html' %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if member_public_groups %}
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <h3>
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#groups-accordion"
+                               href="#public-groups-you-are-a-member-of">
+                                <i class="icon-unlock"></i> {% trans "Public groups you are a member of" %}
+                            </a>
+                        </h3>
+                    </div>
+                    <div id="public-groups-you-are-a-member-of" class="accordion-body">
+                        <div class="accordion-inner">
+                            <div class="group-list">
+                                {% with groups=member_public_groups %}
+                                    {% include 'astrobin_apps_groups/_group_list_table.html' %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if invited_public_groups %}
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <h3>
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#groups-accordion"
+                               href="#public-groups-you-are-invited-to">
+                                <i class="icon-unlock"></i> {% trans "Public groups you are invited to" %}
+                            </a>
+                        </h3>
+                    </div>
+                    <div id="public-groups-you-are-invited-to" class="accordion-body">
+                        <div class="accordion-inner">
+                            <div class="group-list">
+                                {% with groups=invited_public_groups %}
+                                    {% include 'astrobin_apps_groups/_group_list_table.html' %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if public_groups %}
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <h3>
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#groups-accordion"
+                               href="#public-groups">
+                                <i class="icon-unlock"></i> {% trans "Public groups" %}
+                            </a>
+                        </h3>
+                    </div>
+                    <div id="public-groups" class="accordion-body">
+                        <div class="accordion-inner">
+                            <div class="group-list">
+                                {% with groups=public_groups %}
+                                    {% include 'astrobin_apps_groups/_group_list_table.html' %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
         </div>
-    {% endif %}
-
-    {% if public_groups %}
-        <div class="group-list">
-            <div class="row-fluid">
-                <div class="span9">
-                    <h1>
-                        {% trans "Public groups" %}
-                        <small>
-                            {% trans "Open to the whole community." %}
-                        </small>
-                    </h1>
-                </div>
-                <div class="span3 text-right hidden-phone">
-                    <a
-                            {% if request.user|has_access_to_premium_group_features %}
-                                href="{% url 'group_create' %}?public=True"
-                            {% else %}
-                                href="#feature-restricted-modal" data-toggle="modal"
-                            {% endif %}
-                            class="btn btn-primary btn-large create-group">
-                        <i class="icon icon-plus-sign"></i>
-                        {% trans "Create public group" context "group" %}
-                    </a>
-                </div>
-            </div>
-
-            {% with groups=public_groups show_group_search=True %}
-                {% include 'astrobin_apps_groups/_group_list_table.html' %}
-            {% endwith %}
-        </div>
-    {% endif %}
-
-    {% if not object_list %}
+    {% else %}
         <p>{% trans "No groups available." %}</p>
     {% endif %}
 {% endblock %}

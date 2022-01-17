@@ -3661,49 +3661,59 @@ pre {
   }
 }
 
-div.group-list {
-  margin-bottom: 60px;
+#groups-accordion {
+  hr {
+    margin: 3rem 0;
+  }
+  .accordion-group {
+    margin: 0;
+  }
 
+  .accordion-heading {
+    h3 {
+      margin-top: 0;
+      margin-bottom: 0;
+
+      i {
+        margin-right: .75rem;
+      }
+
+      a {
+        color: $white;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .accordion-body:not(.collapse) {
+    margin-bottom: 1rem;
+  }
+
+  .accordion-inner {
+    padding: 0;
+  }
+}
+
+div.group-list {
   a.create-group {
     margin-top: 14px;
   }
+}
+
+.group-list-search-form #q {
+  width: calc(100% - 2rem - 2px);
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
 }
 
 .group-detail .join-group {
   margin-top: 14px;
 }
 
-.group-list-tools {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-
-  @media screen and (max-width: 579px) {
-    flex-direction: column;
-  }
-
-  @media screen and (max-width: 767px) {
-    padding: 0 1rem;
-  }
-
-  .group-list-search-form {
-    margin-bottom: 0;
-
-    @media screen and (min-width: 579px) {
-      min-width: 300px;
-    }
-
-    input[type="text"] {
-      width: calc(100% - 1rem);
-    }
-  }
-}
-
 table.group-list, table.group-member-list {
-  & + .pagination {
-    margin-top: 3rem;
-  }
-
   td {
     white-space: nowrap;
   }
