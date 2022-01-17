@@ -10,7 +10,7 @@
     <thead>
         <th class="group-membership"></th>
         <th class="group-name">
-            <a href="{% url 'group_list' %}?sort=name">
+            <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=name">
                 {% trans "Name" %}
                 {% if request.GET.sort == 'name' %}
                     <i class="icon-sort-down"></i>
@@ -18,7 +18,7 @@
             </a>
         </th>
         <th class="group-category hidden-phone hidden-tablet">
-            <a href="{% url 'group_list' %}?sort=category">
+            <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=category">
                 {% trans "Category" %}
                 {% if request.GET.sort == 'category' %}
                     <i class="icon-sort-down"></i>
@@ -26,7 +26,7 @@
             </a>
         </th>
         <th class="group-last-activity hidden-phone hidden-tablet">
-            <a href="{% url 'group_list' %}?sort=activity">
+            <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=activity">
                 {% trans "Last activity" %}
                 {% if request.GET.sort == 'activity' or request.GET.sort is None %}
                     <i class="icon-sort-down"></i>
@@ -34,7 +34,7 @@
             </a>
         </th>
         <th class="group-last-activity hidden-phone hidden-tablet">
-            <a href="{% url 'group_list' %}?sort=created">
+            <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=created">
                 {% trans "Date created" %}
                 {% if request.GET.sort == 'created' %}
                     <i class="icon-sort-down"></i>
@@ -42,7 +42,7 @@
             </a>
         </th>
         <th class="group-members hidden-phone">
-            <a href="{% url 'group_list' %}?sort=members">
+            <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=members">
                 {% trans "Members" %}
                 {% if request.GET.sort == 'members' %}
                     <i class="icon-sort-down"></i>
@@ -51,7 +51,7 @@
         </th>
 
         <th class="group-images hidden-phone">
-            <a href="{% url 'group_list' %}?sort=images">
+            <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=images">
                 {% trans "Images" %}
                 {% if request.GET.sort == 'images' %}
                     <i class="icon-sort-down"></i>
@@ -60,7 +60,7 @@
         </th>
 
         <th class="group-forum-posts hidden-phone">
-            <a href="{% url 'group_list' %}?sort=posts">
+            <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=posts">
                 {% trans "Forum posts" %}
                 {% if request.GET.sort == 'posts' %}
                     <i class="icon-sort-down"></i>
@@ -104,8 +104,6 @@
     </tbody>
 </table>
 
-{% if groups|length > 25 %}
-    <div class="pagination pagination-centered">
-        {% show_pages %}
-    </div>
-{% endif %}
+<div class="pagination pagination-centered">
+    {% show_pages %}
+</div>

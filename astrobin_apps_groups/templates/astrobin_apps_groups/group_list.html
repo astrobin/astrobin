@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load django_bootstrap_breadcrumbs %}
 {% load astrobin_apps_groups_tags %}
+{% load common_tags %}
 
 {% block title %}{% trans "Groups" %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
@@ -46,7 +47,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="{% url 'group_list' %}?sort=name" class="with-bg-icon">
+                        <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=name" class="with-bg-icon">
                             <span class="bg-icon{% if request.GET.sort == 'name' %} icon-ok{% endif %}"></span>
                             <i class="icon icon-sort-by-alphabet"></i>
                             {% trans "Name" %}
@@ -54,7 +55,7 @@
                     </li>
 
                     <li>
-                        <a href="{% url 'group_list' %}?sort=category" class="with-bg-icon">
+                        <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=category" class="with-bg-icon">
                             <span class="bg-icon{% if request.GET.sort == 'category' %} icon-ok{% endif %}"></span>
                             <i class="icon icon-folder-open-alt"></i>
                             {% trans "Category" %}
@@ -62,7 +63,7 @@
                     </li>
 
                     <li>
-                        <a href="{% url 'group_list' %}?sort=activity" class="with-bg-icon">
+                        <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=activity" class="with-bg-icon">
                             <span class="bg-icon{% if request.GET.sort == 'activity' or request.GET.sort is None %} icon-ok{% endif %}"></span>
                             <i class="icon icon-bolt"></i>
                             {% trans "Last activity" %}
@@ -70,7 +71,7 @@
                     </li>
 
                     <li>
-                        <a href="{% url 'group_list' %}?sort=created" class="with-bg-icon">
+                        <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=created" class="with-bg-icon">
                             <span class="bg-icon{% if request.GET.sort == 'created' %} icon-ok{% endif %}"></span>
                             <i class="icon icon-calendar"></i>
                             {% trans "Date created" %}
@@ -78,7 +79,7 @@
                     </li>
 
                     <li>
-                        <a href="{% url 'group_list' %}?sort=members" class="with-bg-icon">
+                        <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=members" class="with-bg-icon">
                             <span class="bg-icon{% if request.GET.sort == 'members' %} icon-ok{% endif %}"></span>
                             <i class="icon icon-group"></i>
                             {% trans "Members" %}
@@ -86,7 +87,7 @@
                     </li>
 
                     <li>
-                        <a href="{% url 'group_list' %}?sort=images" class="with-bg-icon">
+                        <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=images" class="with-bg-icon">
                             <span class="bg-icon{% if request.GET.sort == 'images' %} icon-ok{% endif %}"></span>
                             <i class="icon icon-picture"></i>
                             {% trans "Images" %}
@@ -94,7 +95,7 @@
                     </li>
 
                     <li>
-                        <a href="{% url 'group_list' %}?sort=posts" class="with-bg-icon">
+                        <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=posts" class="with-bg-icon">
                             <span class="bg-icon{% if request.GET.sort == 'posts' %} icon-ok{% endif %}"></span>
                             <i class="icon icon-comments-alt"></i>
                             {% trans "Forum posts" %}
@@ -252,7 +253,7 @@
                     <div class="accordion-heading">
                         <h3>
                             <a class="accordion-toggle" data-toggle="collapse" data-parent="#groups-accordion"
-                               href="#public-groupso">
+                               href="#public-groups">
                                 {% trans "Public groups" %}
                             </a>
                         </h3>

@@ -3673,6 +3673,10 @@ pre {
 
       a {
         color: $white;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
@@ -3703,10 +3707,6 @@ div.group-list {
 }
 
 table.group-list, table.group-member-list {
-  & + .pagination {
-    margin-top: 3rem;
-  }
-
   td {
     white-space: nowrap;
   }
