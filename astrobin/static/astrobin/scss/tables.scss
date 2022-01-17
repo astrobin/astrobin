@@ -64,6 +64,10 @@
   color: $strong-text-color;
   vertical-align: middle;
 
+  a {
+    color: $white;
+  }
+
   a, button {
     font-weight: normal;
   }

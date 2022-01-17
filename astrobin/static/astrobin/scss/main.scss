@@ -3661,42 +3661,45 @@ pre {
   }
 }
 
-div.group-list {
-  margin-bottom: 60px;
+#groups-accordion {
+  .accordion-group {
+    margin: 0rem;
+  }
 
+  .accordion-heading {
+    h3 {
+      margin-top: 0;
+      margin-bottom: 0;
+
+      a {
+        color: $white;
+      }
+    }
+  }
+
+  .accordion-body:not(.collapse) {
+    margin-bottom: 1rem;
+  }
+
+  .accordion-inner {
+    padding: 0;
+  }
+}
+
+div.group-list {
   a.create-group {
     margin-top: 14px;
   }
 }
 
-.group-detail .join-group {
-  margin-top: 14px;
+.group-list-search-form #q {
+  width: calc(100% - 2rem - 2px);
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
 }
 
-.group-list-tools {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-
-  @media screen and (max-width: 579px) {
-    flex-direction: column;
-  }
-
-  @media screen and (max-width: 767px) {
-    padding: 0 1rem;
-  }
-
-  .group-list-search-form {
-    margin-bottom: 0;
-
-    @media screen and (min-width: 579px) {
-      min-width: 300px;
-    }
-
-    input[type="text"] {
-      width: calc(100% - 1rem);
-    }
-  }
+.group-detail .join-group {
+  margin-top: 14px;
 }
 
 table.group-list, table.group-member-list {

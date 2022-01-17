@@ -244,9 +244,11 @@
             </div>
         </div>
 
-        <div class="well">
-            {{object.description|strip_html|safe|linebreaks}}
-        </div>
+        {% if object.description %}
+            <div class="well">
+                {{object.description|strip_html|safe|linebreaks}}
+            </div>
+        {% endif %}
 
         <div class="group-forum">
             <h2>

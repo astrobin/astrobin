@@ -6,32 +6,67 @@
 
 {% lazy_paginate 25 groups using "page" %}
 
-{% if show_group_search %}
-    <div class="group-list-tools">
-        <form class="group-list-search-form" action="{% url 'group_list' %}" method="get" autocomplete="off">
-            <input
-                id="q"
-                name="q"
-                class="tbox"
-                type="text"
-                value="{{ request.GET.q }}"
-                placeholder="{% trans 'Search' %}" />
-            {% if request.GET.sort %}
-                <input type="hidden" name="sort" value="{{ request.GET.sort }}" />
-            {% endif %}
-        </form>
-    </div>
-{% endif %}
-
 <table class="table group-list">
     <thead>
         <th class="group-membership"></th>
-        <th class="group-name">{% trans "Name" %}</th>
-        <th class="group-category hidden-phone hidden-tablet">{% trans "Category" %}</th>
-        <th class="group-last-activity hidden-phone hidden-tablet">{% trans "Last activity" %}</th>
-        <th class="group-members hidden-phone">{% trans "Members" %}</th>
-        <th class="group-images hidden-phone">{% trans "Images" %}</th>
-        <th class="group-forum-posts hidden-phone">{% trans "Forum posts" %}</th>
+        <th class="group-name">
+            <a href="{% url 'group_list' %}?sort=name">
+                {% trans "Name" %}
+                {% if request.GET.sort == 'name' %}
+                    <i class="icon-sort-down"></i>
+                {% endif %}
+            </a>
+        </th>
+        <th class="group-category hidden-phone hidden-tablet">
+            <a href="{% url 'group_list' %}?sort=category">
+                {% trans "Category" %}
+                {% if request.GET.sort == 'category' %}
+                    <i class="icon-sort-down"></i>
+                {% endif %}
+            </a>
+        </th>
+        <th class="group-last-activity hidden-phone hidden-tablet">
+            <a href="{% url 'group_list' %}?sort=activity">
+                {% trans "Last activity" %}
+                {% if request.GET.sort == 'activity' or request.GET.sort is None %}
+                    <i class="icon-sort-down"></i>
+                {% endif %}
+            </a>
+        </th>
+        <th class="group-last-activity hidden-phone hidden-tablet">
+            <a href="{% url 'group_list' %}?sort=created">
+                {% trans "Date created" %}
+                {% if request.GET.sort == 'created' %}
+                    <i class="icon-sort-down"></i>
+                {% endif %}
+            </a>
+        </th>
+        <th class="group-members hidden-phone">
+            <a href="{% url 'group_list' %}?sort=members">
+                {% trans "Members" %}
+                {% if request.GET.sort == 'members' %}
+                    <i class="icon-sort-down"></i>
+                {% endif %}
+            </a>
+        </th>
+
+        <th class="group-images hidden-phone">
+            <a href="{% url 'group_list' %}?sort=images">
+                {% trans "Images" %}
+                {% if request.GET.sort == 'images' %}
+                    <i class="icon-sort-down"></i>
+                {% endif %}
+            </a>
+        </th>
+
+        <th class="group-forum-posts hidden-phone">
+            <a href="{% url 'group_list' %}?sort=posts">
+                {% trans "Forum posts" %}
+                {% if request.GET.sort == 'posts' %}
+                    <i class="icon-sort-down"></i>
+                {% endif %}
+            </a>
+        </th>
     </thead>
     <tbody>
         {% for group in groups %}
@@ -59,6 +94,7 @@
                 </td>
                 <td class="group-name"><a href="{% url 'group_detail' group.pk group.slug %}">{{group.name}}</a></td>
                 <td class="group-category hidden-phone hidden-tablet">{{group.category_humanized}}</td>
+                <td class="group-last-activity hidden-phone hidden-tablet">{% timestamp group.date_created %}</td>
                 <td class="group-last-activity hidden-phone hidden-tablet">{% timestamp group.date_updated %}</td>
                 <td class="group-members hidden-phone">{{group.members_count}}</td>
                 <td class="group-images hidden-phone">{{group.images_count}}</td>
@@ -68,6 +104,8 @@
     </tbody>
 </table>
 
-<div class="pagination pagination-centered">
-    {% show_pages %}
-</div>
+{% if groups|length > 25 %}
+    <div class="pagination pagination-centered">
+        {% show_pages %}
+    </div>
+{% endif %}
