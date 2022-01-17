@@ -42,21 +42,11 @@
             </a>
         </th>
         <th class="group-members hidden-phone">
-            <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=members">
-                {% trans "Members" %}
-                {% if request.GET.sort == 'members' %}
-                    <i class="icon-sort-down"></i>
-                {% endif %}
-            </a>
+            {% trans "Members" %}
         </th>
 
         <th class="group-images hidden-phone">
-            <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=images">
-                {% trans "Images" %}
-                {% if request.GET.sort == 'images' %}
-                    <i class="icon-sort-down"></i>
-                {% endif %}
-            </a>
+            {% trans "Images" %}
         </th>
 
         <th class="group-forum-posts hidden-phone">

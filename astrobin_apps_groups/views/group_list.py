@@ -19,15 +19,13 @@ class GroupListView(ListView):
                 'category': 'category',
                 'created': '-date_created',
                 'activity': '-date_updated',
-                'members': '-num_members',
-                'images': '-num_images',
                 'posts': '-forum__post_count',
             }[sort]
         except KeyError:
             sort = '-date_updated'
 
         q = self.request.GET.get('q')
-        queryset = self.get_queryset().annotate(num_images=Count('images'), num_members=Count('members'))
+        queryset = self.get_queryset()
 
         if self.request.user.is_authenticated:
             context['owned_private_groups'] = queryset.filter(

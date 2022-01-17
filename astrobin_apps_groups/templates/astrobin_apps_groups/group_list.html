@@ -79,22 +79,6 @@
                     </li>
 
                     <li>
-                        <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=members" class="with-bg-icon">
-                            <span class="bg-icon{% if request.GET.sort == 'members' %} icon-ok{% endif %}"></span>
-                            <i class="icon icon-group"></i>
-                            {% trans "Members" %}
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=images" class="with-bg-icon">
-                            <span class="bg-icon{% if request.GET.sort == 'images' %} icon-ok{% endif %}"></span>
-                            <i class="icon icon-picture"></i>
-                            {% trans "Images" %}
-                        </a>
-                    </li>
-
-                    <li>
                         <a href="{% url 'group_list' %}?q={{ request.GET.q }}&sort=posts" class="with-bg-icon">
                             <span class="bg-icon{% if request.GET.sort == 'posts' %} icon-ok{% endif %}"></span>
                             <i class="icon icon-comments-alt"></i>
