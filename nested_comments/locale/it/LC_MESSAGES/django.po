@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Comments\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-14 13:02+0000\n"
-"PO-Revision-Date: 2022-01-04 16:59+0100\n"
+"POT-Creation-Date: 2022-01-19 08:02+0000\n"
+"PO-Revision-Date: 2022-01-17 16:37+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108457\n"
-"X-Loco-Api-Version: 1.0.26 20220113-1\n"
+"X-Loco-Api-Version: 1.0.26 20220118-1\n"
 
 msgid "Type your comment here..."
 msgstr "Scrivi qui il tuo commento..."
@@ -53,10 +53,6 @@ msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr "Mi piace"
 
-msgctxt "Noun, e.g. 'This element has 1 like'"
-msgid "like"
-msgstr "Mi piace"
-
 msgctxt "Verb (imperative)"
 msgid "Like"
 msgstr "Mi piace"
@@ -73,8 +69,8 @@ msgctxt "Verb (imperative)"
 msgid "Approve"
 msgstr "Approva"
 
-msgid "Report abuse"
-msgstr "Segnala abuso"
+msgid "Report a use"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -198,6 +194,10 @@ msgstr "Non puoi segnalare lo stesso elemento più di una volta."
 #~ "spam automaticamente! Se non vuoi più ricevere email da AstroBin, usa il "
 #~ "link che c'è in fondo ad ogni email. Grazie!"
 
+#~ msgctxt "Noun, e.g. 'This element has 1 like'"
+#~ msgid "like"
+#~ msgstr "Mi piace"
+
 #~ msgid "Reply"
 #~ msgstr "Rispondi"
 
@@ -206,6 +206,9 @@ msgstr "Non puoi segnalare lo stesso elemento più di una volta."
 
 #~ msgid "Unlike"
 #~ msgstr "Non mi piace più"
+
+#~ msgid "Report abuse"
+#~ msgstr "Segnala abuso"
 
 #~ msgid "You many not report the same item more than once."
 #~ msgstr "Non puoi segnalare lo stesso elemento più di una volta."

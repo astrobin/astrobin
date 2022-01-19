@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Groups\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-14 13:02+0000\n"
-"PO-Revision-Date: 2022-01-04 16:43+0100\n"
+"POT-Creation-Date: 2022-01-19 08:02+0000\n"
+"PO-Revision-Date: 2022-01-14 14:03+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108436\n"
-"X-Loco-Api-Version: 1.0.26 20220113-1\n"
+"X-Loco-Api-Version: 1.0.26 20220118-1\n"
 
 msgid ""
 "Only the following category support autosubmission: Professional network, "
@@ -137,11 +137,11 @@ msgstr ""
 "Группы без автодобавления содержат только те изображения, которые были "
 "добавлены вручную."
 
-msgid "Search"
-msgstr ""
-
 msgid "Last activity"
 msgstr "Последние действия"
+
+msgid "Date created"
+msgstr "Дата создания"
 
 msgid "Members"
 msgstr "Участники"
@@ -339,28 +339,29 @@ msgstr "Группы"
 msgid "Sort"
 msgstr "Упорядочить"
 
-msgid "Date created"
-msgstr "Дата создания"
+msgid "Search"
+msgstr ""
 
-msgid "Your private groups"
-msgstr "Ваши закрытые группы"
+msgid "Private groups you own"
+msgstr ""
 
-msgid "You own, or are a member of, or were invited to, these private groups."
-msgstr "Вы владеете/участвуете/приглашены в эти закрытые группы."
+msgid "Private groups you are a member of"
+msgstr ""
 
-msgctxt "group"
-msgid "Create private group"
-msgstr "Создать закрытую группу"
+msgid "Private groups you are invited to"
+msgstr ""
+
+msgid "Public groups you own"
+msgstr ""
+
+msgid "Public groups you are a member of"
+msgstr ""
+
+msgid "Public groups you are invited to"
+msgstr ""
 
 msgid "Public groups"
 msgstr "Открытые группы"
-
-msgid "Open to the whole community."
-msgstr "Открыто для всего сообщества."
-
-msgctxt "group"
-msgid "Create public group"
-msgstr "Создать открытую группу"
 
 msgid "No groups available."
 msgstr "Нет доступных групп."
@@ -461,3 +462,21 @@ msgstr "Форма сохранена"
 
 #~ msgid "Please join the group to view its forum."
 #~ msgstr "Добавьтесь в группу, чтобы читать этот форум."
+
+#~ msgid "Your private groups"
+#~ msgstr "Ваши закрытые группы"
+
+#~ msgid ""
+#~ "You own, or are a member of, or were invited to, these private groups."
+#~ msgstr "Вы владеете/участвуете/приглашены в эти закрытые группы."
+
+#~ msgctxt "group"
+#~ msgid "Create private group"
+#~ msgstr "Создать закрытую группу"
+
+#~ msgid "Open to the whole community."
+#~ msgstr "Открыто для всего сообщества."
+
+#~ msgctxt "group"
+#~ msgid "Create public group"
+#~ msgstr "Создать открытую группу"

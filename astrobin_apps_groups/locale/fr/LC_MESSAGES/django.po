@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Groups\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-14 13:02+0000\n"
-"PO-Revision-Date: 2022-01-04 16:43+0100\n"
+"POT-Creation-Date: 2022-01-19 08:02+0000\n"
+"PO-Revision-Date: 2022-01-14 14:03+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108436\n"
-"X-Loco-Api-Version: 1.0.26 20220113-1\n"
+"X-Loco-Api-Version: 1.0.26 20220118-1\n"
 
 msgid ""
 "Only the following category support autosubmission: Professional network, "
@@ -147,11 +147,11 @@ msgstr ""
 "contiennent uniquement les images que les membres choisissent spécifiquement "
 "de soumettre."
 
-msgid "Search"
-msgstr "Chercher"
-
 msgid "Last activity"
 msgstr "Activité récente"
+
+msgid "Date created"
+msgstr "Date de création"
 
 msgid "Members"
 msgstr "Membres"
@@ -353,29 +353,29 @@ msgstr "Groupes"
 msgid "Sort"
 msgstr "Trier"
 
-msgid "Date created"
-msgstr "Date de création"
+msgid "Search"
+msgstr "Chercher"
 
-msgid "Your private groups"
-msgstr "Vos groupes privés"
-
-msgid "You own, or are a member of, or were invited to, these private groups."
+msgid "Private groups you own"
 msgstr ""
-"Vous êtes créateur ou membre de ces groupes privés, ou y avez été invité."
 
-msgctxt "group"
-msgid "Create private group"
-msgstr "Créer un groupe privé"
+msgid "Private groups you are a member of"
+msgstr ""
+
+msgid "Private groups you are invited to"
+msgstr ""
+
+msgid "Public groups you own"
+msgstr ""
+
+msgid "Public groups you are a member of"
+msgstr ""
+
+msgid "Public groups you are invited to"
+msgstr ""
 
 msgid "Public groups"
 msgstr "Groupes publics"
-
-msgid "Open to the whole community."
-msgstr "Ouverts à l'ensemble de la communauté."
-
-msgctxt "group"
-msgid "Create public group"
-msgstr "Créer un groupe public"
 
 msgid "No groups available."
 msgstr "Aucun groupe disponible."
@@ -476,3 +476,22 @@ msgstr "Formulaire sauvegardé"
 
 #~ msgid "Please join the group to view its forum."
 #~ msgstr "Veuillez adhérer au groupe pour consulter son forum."
+
+#~ msgid "Your private groups"
+#~ msgstr "Vos groupes privés"
+
+#~ msgid ""
+#~ "You own, or are a member of, or were invited to, these private groups."
+#~ msgstr ""
+#~ "Vous êtes créateur ou membre de ces groupes privés, ou y avez été invité."
+
+#~ msgctxt "group"
+#~ msgid "Create private group"
+#~ msgstr "Créer un groupe privé"
+
+#~ msgid "Open to the whole community."
+#~ msgstr "Ouverts à l'ensemble de la communauté."
+
+#~ msgctxt "group"
+#~ msgid "Create public group"
+#~ msgstr "Créer un groupe public"

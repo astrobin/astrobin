@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Groups\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-14 13:02+0000\n"
-"PO-Revision-Date: 2022-01-04 16:43+0100\n"
+"POT-Creation-Date: 2022-01-19 08:02+0000\n"
+"PO-Revision-Date: 2022-01-14 14:03+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Simplified Chinese\n"
 "Language: zh-Hans\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108436\n"
-"X-Loco-Api-Version: 1.0.26 20220113-1\n"
+"X-Loco-Api-Version: 1.0.26 20220118-1\n"
 
 msgid ""
 "Only the following category support autosubmission: Professional network, "
@@ -132,11 +132,11 @@ msgstr ""
 "开启了自动提交的小组，将始终显示来自组成员提交的所有作品。没有开启自动提交的"
 "小组，将仅显示被正式提交到小组的作品。"
 
-msgid "Search"
-msgstr ""
-
 msgid "Last activity"
 msgstr "最近活跃"
+
+msgid "Date created"
+msgstr "创建日期"
 
 msgid "Members"
 msgstr "成员"
@@ -322,28 +322,29 @@ msgstr "小组"
 msgid "Sort"
 msgstr "排序"
 
-msgid "Date created"
-msgstr "创建日期"
+msgid "Search"
+msgstr ""
 
-msgid "Your private groups"
-msgstr "您的私密小组"
+msgid "Private groups you own"
+msgstr ""
 
-msgid "You own, or are a member of, or were invited to, these private groups."
-msgstr "您拥有、被邀请、或是这些私密小组中的一员。"
+msgid "Private groups you are a member of"
+msgstr ""
 
-msgctxt "group"
-msgid "Create private group"
-msgstr "创建私密小组"
+msgid "Private groups you are invited to"
+msgstr ""
+
+msgid "Public groups you own"
+msgstr ""
+
+msgid "Public groups you are a member of"
+msgstr ""
+
+msgid "Public groups you are invited to"
+msgstr ""
 
 msgid "Public groups"
 msgstr "公开小组"
-
-msgid "Open to the whole community."
-msgstr "向整个社区开放。"
-
-msgctxt "group"
-msgid "Create public group"
-msgstr "创建公开小组"
 
 msgid "No groups available."
 msgstr "无可用小组。"
@@ -442,3 +443,21 @@ msgstr "表单已保存"
 
 #~ msgid "Please join the group to view its forum."
 #~ msgstr "请先加入小组再浏览它的板块。"
+
+#~ msgid "Your private groups"
+#~ msgstr "您的私密小组"
+
+#~ msgid ""
+#~ "You own, or are a member of, or were invited to, these private groups."
+#~ msgstr "您拥有、被邀请、或是这些私密小组中的一员。"
+
+#~ msgctxt "group"
+#~ msgid "Create private group"
+#~ msgstr "创建私密小组"
+
+#~ msgid "Open to the whole community."
+#~ msgstr "向整个社区开放。"
+
+#~ msgctxt "group"
+#~ msgid "Create public group"
+#~ msgstr "创建公开小组"
