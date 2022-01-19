@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Comments\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-14 13:02+0000\n"
-"PO-Revision-Date: 2022-01-04 16:59+0100\n"
+"POT-Creation-Date: 2022-01-19 08:02+0000\n"
+"PO-Revision-Date: 2022-01-17 16:37+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108457\n"
-"X-Loco-Api-Version: 1.0.26 20220113-1\n"
+"X-Loco-Api-Version: 1.0.26 20220118-1\n"
 
 msgid "Type your comment here..."
 msgstr "Geben Sie hier Ihren Kommentar ein..."
@@ -53,10 +53,6 @@ msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr "Likes"
 
-msgctxt "Noun, e.g. 'This element has 1 like'"
-msgid "like"
-msgstr "like"
-
 msgctxt "Verb (imperative)"
 msgid "Like"
 msgstr "Like"
@@ -73,8 +69,8 @@ msgctxt "Verb (imperative)"
 msgid "Approve"
 msgstr "Genehmigen"
 
-msgid "Report abuse"
-msgstr "Missbrauch melden"
+msgid "Report a use"
+msgstr ""
 
 #, python-format
 msgid ""
@@ -201,6 +197,10 @@ msgstr "Sie können denselben Gegenstand nicht mehrmals melden."
 #~ "erhalten möchten, verwenden Sie den Link für die Einstellungen, der sich "
 #~ "am Ende jeder E-Mail befindet. Danke!"
 
+#~ msgctxt "Noun, e.g. 'This element has 1 like'"
+#~ msgid "like"
+#~ msgstr "like"
+
 #~ msgid "Reply"
 #~ msgstr "Antworten"
 
@@ -209,6 +209,9 @@ msgstr "Sie können denselben Gegenstand nicht mehrmals melden."
 
 #~ msgid "Unlike"
 #~ msgstr "Unlike"
+
+#~ msgid "Report abuse"
+#~ msgstr "Missbrauch melden"
 
 #~ msgid "You many not report the same item more than once."
 #~ msgstr "Sie können denselben Artikel nicht mehrmals melden."
