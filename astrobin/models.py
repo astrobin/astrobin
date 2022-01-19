@@ -983,6 +983,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("SLO", "Slooh"),
         ("SSLLC", "Stellar Skies LLC"),
         ("TELI", "Telescope Live"),
+        ("YUNLING", "Yunling Observatory"),
 
         ("OTHER", _("None of the above"))
     )
