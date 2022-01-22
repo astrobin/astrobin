@@ -5,6 +5,7 @@ from django.test import TestCase
 from django.utils import timezone
 from mock import patch, PropertyMock
 
+from astrobin.models import Image
 from astrobin.tests.generators import Generators
 from astrobin_apps_users.services import UserService
 from nested_comments.tests.nested_comments_generators import NestedCommentsGenerators
@@ -333,3 +334,26 @@ class TestUserService(TestCase):
 
         self.assertFalse(UserService(a).shadow_bans(b))
         self.assertFalse(UserService(b).shadow_bans(a))
+
+    def test_empty_trash(self):
+        user = Generators.user()
+        user2 = Generators.user()
+
+        image = Generators.image(user=user)
+        Generators.image(user=user2)
+
+        UserService(user).empty_trash()
+
+        self.assertEqual(1, Image.objects.filter(user=user).count())
+        self.assertEqual(1, Image.objects.filter(user=user2).count())
+
+        image.delete()
+
+        self.assertEqual(0, Image.objects.filter(user=user).count())
+        self.assertEqual(1, Image.objects.filter(user=user2).count())
+        self.assertEqual(1, Image.deleted_objects.filter(user=user).count())
+
+        UserService(user).empty_trash()
+
+        self.assertEqual(0, Image.deleted_objects.filter(user=user).count())
+        self.assertEqual(1, Image.objects.filter(user=user2).count())

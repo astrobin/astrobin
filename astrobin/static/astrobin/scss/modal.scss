@@ -44,6 +44,10 @@
 
     p {
       margin-bottom: $spacer-xlarge;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
 
     .form-vertical {
