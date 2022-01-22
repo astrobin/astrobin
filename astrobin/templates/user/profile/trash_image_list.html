@@ -2,6 +2,7 @@
 {% load static %}
 {% load astrobin_apps_images_tags %}
 {% load astrobin_apps_users_tags %}
+{% load common_tags %}
 
 <h3>{% trans "Trash"%}</h3>
 
@@ -31,12 +32,20 @@
 
 <form class="form">
     <div class="form-actions">
-        <button id="restore-from-trash" class="btn btn-primary btn-block-mobile" disabled="disabled">
+        <button id="restore-from-trash" class="btn btn-primary btn-block-mobile {% button_loading_class %}" disabled="disabled">
+            <i class="icon-refresh"></i>
             {% trans "Restore selected" %} (<span id="restore-from-trash-number">0</span>)
+            {% button_loading_indicator %}
         </button>
-        <img
-                class="loading hide"
-                src="{% static 'astrobin/images/ajax-loader.gif' %}"
-                alt="{% trans "Loading" %}" />
+
+        <button id="empty-trash" class="btn btn-danger btn-block-mobile {% button_loading_class %}"
+            {% if image_list|length == 0 %}
+                disabled="disabled"
+            {% endif %}
+        >
+            <i class="icon-warning-sign"></i>
+            {% trans "Empty trash" %}
+            {% button_loading_indicator %}
+        </button>
     </div>
 </form>

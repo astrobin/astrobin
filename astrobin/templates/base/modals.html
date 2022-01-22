@@ -234,6 +234,26 @@
     </div>
 </div>
 
+<div class="modal hide fade" id="this-operation-cannot-be-undone-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3><i class="icon-warning-sign"></i> {% trans "Warning!" %}</h3>
+    </div>
+    <div class="modal-body">
+        <p>
+            {% blocktrans trimmed %}This operation cannot be undone!{% endblocktrans %}
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary btn-block-mobile" data-dismiss="modal">{% trans "Cancel" %}</button>
+        <button class="btn btn-danger btn-continue btn-block-mobile {% button_loading_class %}">
+            <i class="icon-warning-sign"></i>
+            {% trans 'Continue' %}
+            {% button_loading_indicator %}
+        </button>
+    </div>
+</div>
+
 <div class="modal hide fade" id="report-abuse-modal">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">&times;</a>

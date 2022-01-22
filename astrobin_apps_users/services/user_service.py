@@ -3,13 +3,15 @@ from datetime import timedelta
 
 import numpy as np
 from django.conf import settings
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.db.models import QuerySet
 from django.utils import timezone
 from pybb.models import Post
+from safedelete import HARD_DELETE
+from safedelete.queryset import SafeDeleteQueryset
 
 from astrobin.models import Image
 from nested_comments.models import NestedComment
@@ -187,7 +189,8 @@ class UserService:
         def _do_clear(language, section, subsection, view):
             key = make_template_fragment_key(
                 'user_gallery_image_list2',
-                [self.user.pk, language, section, subsection, view])
+                [self.user.pk, language, section, subsection, view]
+            )
             cache.delete(key)
 
         for language in languages:
@@ -195,3 +198,11 @@ class UserService:
                 for subsection in subsections:
                     for view in views:
                         _do_clear(language[0], section, subsection, view)
+
+    def empty_trash(self) -> int:
+        images: SafeDeleteQueryset = Image.deleted_objects.filter(user=self.user)
+        count: int = images.count()
+
+        images.delete(force_policy=HARD_DELETE)
+
+        return count
