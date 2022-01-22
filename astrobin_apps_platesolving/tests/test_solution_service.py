@@ -190,3 +190,32 @@ class SolutionServiceTest(TestCase):
 
         self.assertEqual(['Merope nebula'], SolutionService(solution).get_objects_in_field(clean=False))
         self.assertEqual(['Merope nebula'], SolutionService(solution).get_objects_in_field())
+
+    def test_duplicate_objects_in_field_by_catalog_space(self):
+        basic = "Orion Nebula, M 42, M 43"
+        advanced = \
+            "Label,1,2,3,M42\n" \
+            "Label,1,2,3,M43\n" \
+            "Label,1,2,3,LDN123\n" \
+            "Label,1,2,3,LBN456\n"
+
+        image = Generators.image()
+        solution = PlateSolvingGenerators.solution(image)
+        solution.objects_in_field = basic
+        solution.advanced_annotations = advanced
+
+        objects = SolutionService(solution).duplicate_objects_in_field_by_catalog_space()
+
+        self.assertTrue("Orion Nebula" in objects)
+
+        self.assertTrue("M42" in objects)
+        self.assertTrue("M 42" in objects)
+
+        self.assertTrue("M43" in objects)
+        self.assertTrue("M 43" in objects)
+
+        self.assertTrue("LDN123" in objects)
+        self.assertTrue("LDN 123" in objects)
+
+        self.assertTrue("LBN456" in objects)
+        self.assertTrue("LBN 456" in objects)
