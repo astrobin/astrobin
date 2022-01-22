@@ -10,6 +10,8 @@ Cypress.Commands.add('login', (opts={}) => {
     cy.acceptCookies();
     cy.fillInLogin(opts);
 
+    cy.wait(2000);
+
     cy.url().should(
         "contain",
         (!opts.next || opts.next === "/me/") ? "/users/" + (opts.username || "astrobin_dev" + "/") : opts.next
