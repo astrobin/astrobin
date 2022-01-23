@@ -1,4 +1,6 @@
 import re
+from typing import List
+
 from django.db.models import QuerySet
 from django.urls import reverse
 
@@ -35,9 +37,7 @@ class SolutionService:
 
         self.solution = solution
 
-    def get_objects_in_field(self, clean=True):
-        # type: () -> List[str]
-
+    def get_objects_in_field(self, clean=True) -> List[str]:
         objects = []
         if self.solution.objects_in_field:
             objects = [x.strip() for x in self.solution.objects_in_field.split(',')]
@@ -52,7 +52,7 @@ class SolutionService:
                 advanced_annotation = line.split(',')[-1]
 
                 if clean:
-                    regex = r"^(?P<catalog>M|NGC|IC)(?P<id>\d+)$"
+                    regex = r"^(?P<catalog>M|NGC|IC|LDN|LBN|PGC)(?P<id>\d+)$"
                     matches = re.findall(regex, advanced_annotation)
                     if len(matches) == 1:
                         catalog = matches[0][0]
@@ -63,6 +63,23 @@ class SolutionService:
                     objects.append(advanced_annotation)
 
         return sorted(objects)
+
+    def duplicate_objects_in_field_by_catalog_space(self) -> List[str]:
+        value = []
+        objects = self.get_objects_in_field()
+        regex = r"^(?P<catalog>M|NGC|IC|LDN|LBN|PGC) (?P<id>\d+)$"
+
+        for obj in objects:
+            matches = re.findall(regex, obj)
+            if len(matches) == 1:
+                catalog = matches[0][0]
+                number = matches[0][1]
+                value.append(f'{catalog}{number}')
+                value.append(f'{catalog} {number}')
+            else:
+                value.append(obj)
+
+        return sorted(value)
 
     def get_search_query_around(self, degrees):
         # type: (int) -> str
