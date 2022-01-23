@@ -196,7 +196,9 @@ class SolutionServiceTest(TestCase):
         advanced = \
             "Label,1,2,3,M42\n" \
             "Label,1,2,3,M43\n" \
+            "Label,1,2,3,M 45\n" \
             "Label,1,2,3,LDN123\n" \
+            "Label,1,2,3,LDN 999\n" \
             "Label,1,2,3,LBN456\n"
 
         image = Generators.image()
@@ -214,8 +216,14 @@ class SolutionServiceTest(TestCase):
         self.assertTrue("M43" in objects)
         self.assertTrue("M 43" in objects)
 
+        self.assertTrue("M45" in objects)
+        self.assertTrue("M 45" in objects)
+
         self.assertTrue("LDN123" in objects)
         self.assertTrue("LDN 123" in objects)
+
+        self.assertTrue("LDN999" in objects)
+        self.assertTrue("LDN 999" in objects)
 
         self.assertTrue("LBN456" in objects)
         self.assertTrue("LBN 456" in objects)
