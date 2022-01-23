@@ -39,9 +39,10 @@ class SolutionService:
 
     def get_objects_in_field(self, clean=True) -> List[str]:
         objects = []
-        if self.solution.objects_in_field:
+
+        if self.solution and self.solution.objects_in_field:
             objects = [x.strip() for x in self.solution.objects_in_field.split(',')]
-        if self.solution.advanced_annotations:
+        if self.solution and self.solution.advanced_annotations:
             advanced_annotations_lines = self.solution.advanced_annotations.split('\n')
             for line in advanced_annotations_lines:
                 header = line.split(',')[0]

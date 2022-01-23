@@ -1,3 +1,5 @@
+from typing import List
+
 from django.contrib.contenttypes.models import ContentType
 from django.template import Library
 from django.utils.translation import ugettext_lazy as _
@@ -69,3 +71,8 @@ def humanize_solution_status(solution: Solution) -> str:
         if solution.status == status[0]:
             return status[1]
     return _("Invalid")
+
+
+@register.filter
+def duplicate_objects_in_field_by_catalog_space(solution: Solution) -> List[str]:
+    return SolutionService(solution).duplicate_objects_in_field_by_catalog_space()
