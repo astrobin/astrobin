@@ -6,7 +6,7 @@
     <form class="forum-search" action="{% url 'haystack_search' %}" method="get" autocomplete="off">
         <input id="q" class="tbox" type="text" name="q" value="{{ request.GET.q }}"
                placeholder="{% trans "Search all forums and comments" %}" />
-        <input type="hidden" name="d" value="cf" />
+        <input type="hidden" name="d" value="f" />
     </form>
 
     {% if forum %}

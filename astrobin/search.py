@@ -139,8 +139,10 @@ class AstroBinSearchForm(SearchForm):
             results = results.models(Image)
         elif d == "u":
             results = results.models(User)
-        elif d == "cf":
-            results = results.models(NestedComment, Post, Topic)
+        elif d == "f":
+            results = results.models(Post, Topic)
+        elif d == "c":
+            results = results.models(NestedComment)
 
         return results
 

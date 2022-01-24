@@ -8,6 +8,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.template import Library, Node
 from django.template.defaultfilters import urlencode
 from django.utils.encoding import force_text
+from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 
 from common.services import AppRedirectionService, DateTimeService
@@ -254,22 +255,56 @@ def ensure_url_protocol(url: str) -> str:
 
 
 class HighlightTextNode(template.Node):
-
-    def __init__(self, text, terms):
+    def __init__(self, text, terms, html_tag=None, css_class=None, max_length=None, dialect=None):
         self.text = template.Variable(text)
         self.terms = template.Variable(terms)
+        self.html_tag = html_tag
+        self.css_class = css_class
+        self.max_length = max_length
+        self.dialect = dialect
+
+        if html_tag is not None:
+            self.html_tag = template.Variable(html_tag)
+
+        if css_class is not None:
+            self.css_class = template.Variable(css_class)
+
+        if max_length is not None:
+            self.max_length = template.Variable(max_length)
+
+        if dialect is not None:
+            self.dialect = template.Variable(dialect)
 
     def render(self, context):
-        text = str(self.text.resolve(context))
+        text = strip_tags(self.text.resolve(context))
         terms = str(self.terms.resolve(context))
+        kwargs = {}
 
-        return HighlightingService(text, terms).render_html()
+        if self.html_tag is not None:
+            kwargs['html_tag'] = self.html_tag.resolve(context)
+
+        if self.css_class is not None:
+            kwargs['css_class'] = self.css_class.resolve(context)
+
+        if self.max_length is not None:
+            kwargs['max_length'] = self.max_length.resolve(context)
+
+        if self.dialect is not None:
+            kwargs['dialect'] = self.dialect.resolve(context)
+
+        return HighlightingService(text, terms, **kwargs).render_html()
 
 
 @register.tag
 def highlight_text(parser, token):
     bits = token.split_contents()
     tag_name = bits[0]
+
+    if not len(bits) % 2 == 0:
+        raise template.TemplateSyntaxError(
+            "'%s' tag requires valid pairings arguments." % tag_name
+        )
+
     text = bits[1]
 
     if len(bits) < 4:
@@ -284,7 +319,23 @@ def highlight_text(parser, token):
 
     query = bits[3]
 
-    return HighlightTextNode(text, query)
+    arg_bits = iter(bits[4:])
+    kwargs = {}
+
+    for bit in arg_bits:
+        if bit == 'css_class':
+            kwargs['css_class'] = next(arg_bits)
+
+        if bit == 'html_tag':
+            kwargs['html_tag'] = next(arg_bits)
+
+        if bit == 'max_length':
+            kwargs['max_length'] = next(arg_bits)
+
+        if bit == 'dialect':
+            kwargs['dialect'] = next(arg_bits)
+
+    return HighlightTextNode(text, query, **kwargs)
 
 
 @register.filter

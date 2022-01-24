@@ -4146,23 +4146,42 @@ table.api-examples {
 .search-results {
   position: relative;
   z-index: 1;
+  width: 100%;
 
   &__text {
     margin-left: 0;
 
     &__single {
-      margin-bottom: 20px;
-      padding: 10px 20px;
-      border-bottom: 1px dashed #555;
+      margin-bottom: 1.5rem;
+      padding: .75rem 1.5rem;
       overflow: hidden;
+      border-radius: 1.5rem;
+      background-color: rgba(0, 0, 0, .1);
+
+      &:nth-child(even) {
+        background-image: linear-gradient(
+                        -45deg,
+                        rgba(0, 0, 0, .05) 0%,
+                        rgba(0, 0, 0, 0) 80%,
+                        rgba(255, 255, 255, .01) 100%
+        );
+      }
 
       &:nth-child(odd) {
-        background: rgba(0, 0, 0, 0.1);
+        background-image: linear-gradient(
+                        -45deg,
+                        rgba(0, 0, 0, .05) 0%,
+                        rgba(0, 0, 0, 0) 80%,
+                        rgba(255, 255, 255, .05) 100%
+        );
       }
     }
 
     &__meta {
-      margin-bottom: 10px;
+      background: #222;
+      padding: 1.5rem 1rem;
+      margin: -1rem -1.5rem 2rem;
+      border-bottom-color: $grey-5 !important;
     }
 
     &__author {
@@ -4170,8 +4189,11 @@ table.api-examples {
     }
 
     &__links {
-      margin-top: 15px;
-      margin-bottom: 5px;
+      margin-top: 1.5rem;
+      margin-bottom: .5rem;
+      padding-top: 1rem;
+      border-top: 1px solid $grey-6;
+      text-align: right;
     }
   }
 
