@@ -475,7 +475,7 @@ class AstroBinSearchForm(SearchForm):
             order_by = ('-published', '-uploaded')
 
         # Default to updated/created order for comments/forums.
-        if domain == 'cf':
+        if domain in ('c', 'f'):
             order_by = ('-updated', '-created')
 
         # Prefer user's choice of course.
