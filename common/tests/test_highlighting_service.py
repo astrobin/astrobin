@@ -25,9 +25,9 @@ class HighlightingServiceTest(TestCase):
     def test_render_html_single_term_ignore_punctuation(self):
         self.assertEquals('<span class="highlighted-text">Test</span>.', HighlightingService('Test.', 'Test').render_html())
 
-    def test_render_html_single_term_URL(self):
+    def test_render_html_single_term_URL_is_stripped(self):
         self.assertEquals(
-            '<a href="https://www.test.com?foo=a%20test">test</a>',
+            '<span class="highlighted-text">test</span>',
             HighlightingService('<a href="https://www.test.com?foo=a%20test">test</a>', 'Test').render_html()
         )
 

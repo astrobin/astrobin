@@ -8,7 +8,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.template import Library, Node
 from django.template.defaultfilters import urlencode
 from django.utils.encoding import force_text
-from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 
 from common.services import AppRedirectionService, DateTimeService
@@ -276,7 +275,7 @@ class HighlightTextNode(template.Node):
             self.dialect = template.Variable(dialect)
 
     def render(self, context):
-        text = strip_tags(self.text.resolve(context))
+        text = self.text.resolve(context)
         terms = str(self.terms.resolve(context))
         kwargs = {}
 

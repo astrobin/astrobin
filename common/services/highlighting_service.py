@@ -1,7 +1,7 @@
 import math
 import string
 
-from django.template.defaultfilters import safe
+from django.utils.html import strip_tags
 from precise_bbcode.templatetags.bbcode_tags import bbcode
 
 from astrobin.settings.components.forum import SANITIZER_ALLOWED_TAGS
@@ -55,10 +55,12 @@ class HighlightingService:
             start = 0
             end = len(self.text)
 
-        result = self.text[start:end]
-
         if self.dialect == 'bbcode':
-            result = safe(bbcode(result))
+            result = strip_tags(bbcode(self.text))
+        else:
+            result = strip_tags(self.text)
+
+        result = result[start:end]
 
         if start > 0:
             result = f'...{result}'
