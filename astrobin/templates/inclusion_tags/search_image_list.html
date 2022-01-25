@@ -152,7 +152,7 @@
 
                         <div class="search-results__text__content">
                             {% if request.GET.q %}
-                                {% highlight_text item.object.body with request.GET.q css_class 'search-results__highlight' max_length 500 %}
+                                {% highlight_text item.object.body with request.GET.q css_class 'search-results__highlight' max_length 500 dialect 'bbcode' %}
                             {% else %}
                                 {{ item.object.body_html }}
                             {% endif %}
@@ -176,7 +176,7 @@
 
                         <div class="search-results__text__content">
                             {% if request.GET.q %}
-                                {% highlight_text item.object.name with request.GET.q css_class 'search-results__highlight' max_length 500 %}
+                                {% highlight_text item.object.name with request.GET.q css_class 'search-results__highlight' max_length 500 dialect 'bbcode' %}
                             {% else %}
                                 {{ item.object.name }}
                             {% endif %}

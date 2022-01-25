@@ -72,15 +72,15 @@ class HighlightingServiceTest(TestCase):
         )
 
     def test_render_html_single_term_max_length_larger_than_text(self):
-        text = 'This message is a very, very long message of test that will cause the appearance of ellipses'
+        text = 'This message is a very, very long message of test but will not cause the appearance of ellipses'
         self.assertEquals(
-            'This message is a very, very long message of <span class="highlighted-text">test</span> that will cause '
+            'This message is a very, very long message of <span class="highlighted-text">test</span> but will not cause '
             'the appearance of ellipses',
             HighlightingService(text, 'test', max_length=500).render_html()
         )
 
     def test_render_html_single_term_max_length_but_term_not_found(self):
-        text = 'This message is a very, very long message of test that will cause the appearance of ellipses'
+        text = 'This message is a very very long message of test that will cause the appearance of ellipses'
         self.assertEquals(
             'This message is a v...',
             HighlightingService(text, 'foo', max_length=20).render_html()
