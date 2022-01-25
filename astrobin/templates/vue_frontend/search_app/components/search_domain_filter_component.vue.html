@@ -36,14 +36,18 @@
                         label: "{% trans "Users" %}"
                     },
                     {
-                        id: "cf",
-                        label: "{% trans "Comments & forums" %}"
+                        id: "f",
+                        label: "{% trans "Forums" %}"
+                    },
+                    {
+                        id: "c",
+                        label: "{% trans "Comments" %}"
                     }
                 ]
             }
         },
         created: function () {
-            for (var i = 0; i < this.options.length; i++) {
+            for (let i = 0; i < this.options.length; i++) {
                 if (this.options[i].id === this.searchDomain) {
                     this.value = this.options[i];
                     return;

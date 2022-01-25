@@ -1,4 +1,3 @@
-# Django
 import logging
 
 from django.contrib.auth.models import User
@@ -6,13 +5,10 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.template import Library
 from django.utils.translation import ugettext_lazy as _
-# AstroBin apps
 from haystack.query import SearchQuerySet
 
 from astrobin.models import Image, UserProfile
 from astrobin_apps_premium.utils import premium_user_has_valid_subscription
-# Third party apps
-from astrobin_apps_users.services import UserService
 from toggleproperties.models import ToggleProperty
 
 log = logging.getLogger('apps')

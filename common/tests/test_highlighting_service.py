@@ -56,3 +56,38 @@ class HighlightingServiceTest(TestCase):
             '<span class="highlighted-text">Test</span> is <span class="highlighted-text">fine</span>',
             HighlightingService('Test is fine', 'Test fine').render_html()
         )
+
+    def test_render_html_single_term_max_length_too_short(self):
+        # This max_length is ignored because 20 is the minimum.
+        self.assertEquals(
+            'this <span class="highlighted-text">test</span> rules',
+            HighlightingService('this test rules', 'test', max_length=2).render_html()
+        )
+
+    def test_render_html_single_term_max_length(self):
+        text = 'This message is a very, very long message of test that will cause the appearance of ellipses'
+        self.assertEquals(
+            '...ery long message of <span class="highlighted-text">test</span> that will cause...',
+            HighlightingService(text, 'test', max_length=20).render_html()
+        )
+
+    def test_render_html_single_term_max_length_larger_than_text(self):
+        text = 'This message is a very, very long message of test that will cause the appearance of ellipses'
+        self.assertEquals(
+            'This message is a very, very long message of <span class="highlighted-text">test</span> that will cause '
+            'the appearance of ellipses',
+            HighlightingService(text, 'test', max_length=500).render_html()
+        )
+
+    def test_render_html_single_term_max_length_but_term_not_found(self):
+        text = 'This message is a very, very long message of test that will cause the appearance of ellipses'
+        self.assertEquals(
+            'This message is a v...',
+            HighlightingService(text, 'foo', max_length=20).render_html()
+        )
+
+    def test_render_html_single_term_max_length_short_text(self):
+        self.assertEquals(
+            'hello <span class="highlighted-text">test</span>',
+            HighlightingService('hello test', 'test', max_length=50).render_html()
+        )

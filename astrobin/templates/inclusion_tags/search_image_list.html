@@ -7,6 +7,7 @@
 {% load avatar_tags %}
 {% load common_tags %}
 {% load tags %}
+{% load bbcode_tags %}
 
 {% if paginator.object_list %}
 
@@ -130,85 +131,101 @@
         </ul>
     {% endif %}
 
-    {% if search_domain == 'cf' %}
+    {% if search_domain == 'f' %}
         <ul class="search-results__text">
-            {% for text in page_obj.object_list %}
+            {% for item in page_obj.object_list %}
+                <li class="search-results__text__single">
+                    {% if item.model_name == "post" %}
+                        <div class="search-results__text__meta">
+                            <span class="search-results__text__author">
+                                {% astrobin_username item.object.user %}
+                            </span>
+
+                            <span class="search-results__text__date">
+                                {% if item.object.updated %}
+                                    {% timestamp item.object.updated %}
+                                {% elif item.object.created %}
+                                    {% timestamp item.object.created %}
+                                {% endif %}
+                            </span>
+                        </div>
+
+                        <div class="search-results__text__content">
+                            {% if request.GET.q %}
+                                {% highlight_text item.object.body_text with request.GET.q css_class 'search-results__highlight' max_length 50 %}
+                            {% else %}
+                                {{ item.object.body_html }}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    {% if item.model_name == "topic" %}
+                        <div class="search-results__text__meta">
+                            <span class="search-results__text__author">
+                                {% astrobin_username item.object.user %}
+                            </span>
+
+                            <span class="search-results__text__date">
+                                {% if item.object.updated %}
+                                    {% timestamp item.object.updated %}
+                                {% elif item.object.created %}
+                                    {% timestamp item.object.created %}
+                                {% endif %}
+                            </span>
+                        </div>
+
+                        <div class="search-results__text__content">
+                            {% if request.GET.q %}
+                                {% highlight_text item.object.name with request.GET.q css_class 'search-results__highlight' max_length 50 %}
+                            {% else %}
+                                {{ item.object.name }}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    <div class="search-results__text__links">
+                        <a href="{{ item.object.get_absolute_url }}" class="btn">
+                            {% trans "View" %}
+                        </a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if search_domain == 'c' %}
+        <ul class="search-results__text">
+            {% for item in page_obj.object_list %}
                 <li class="search-results__text__single">
 
-                    {% if text.model_name == "nestedcomment" %}
-                        {% if text.object.image.count > 0 %}
-                            <div class="search-results__text__meta">
-                                <span class="search-results__text__author">
-                                    {% astrobin_username text.object.author %}
-                                </span>
-                                <span class="search-results__text__date">
-                                    {% timestamp text.object.updated %}
-                                </span>
-                            </div>
-                            <div class="search-results__text__content">
-                                {% if request.GET.q %}
-                                    {% highlight text.text with request.GET.q css_class 'search-results__highlight' max_length 500 %}
-                                {% else %}
-                                    {{ text.text }}
-                                {% endif %}
-                            </div>
-                            <div class="search-results__text__links">
-                                <a href="{{ text.object.get_absolute_url }}">{% trans "link" %}</a>
-                            </div>
-                        {% else %}
-                            <em>{% trans "Comment of deleted image not shown." %}</em>
-                        {% endif %}
-                    {% endif %}
-
-                    {% if text.model_name == "post" %}
+                    {% if item.object.image.count > 0 %}
                         <div class="search-results__text__meta">
-                    <span class="search-results__text__author">
-                        {% astrobin_username text.object.user %}
-                    </span>
+                            <span class="search-results__text__author">
+                                {% astrobin_username item.object.author %}
+                            </span>
+
                             <span class="search-results__text__date">
-                        {% if text.object.updated %}
-                            {% timestamp text.object.updated %}
-                        {% elif text.object.created %}
-                            {% timestamp text.object.created %}
-                        {% endif %}
-                    </span>
+                                {% timestamp item.object.updated %}
+                            </span>
                         </div>
+
                         <div class="search-results__text__content">
                             {% if request.GET.q %}
-                                {% highlight text.text with request.GET.q css_class 'search-results__highlight' max_length 500 %}
+                                {% highlight_text item.object.text with request.GET.q css_class 'search-results__highlight' max_length 500 dialect 'bbcode' %}
                             {% else %}
-                                {{ text.text }}
+                                {{ item.object.text | bbcode | safe}}
                             {% endif %}
                         </div>
+
                         <div class="search-results__text__links">
-                            <a href="{{ text.object.get_absolute_url }}">{% trans "link" %}</a>
+                            <a href="{{ item.object.get_absolute_url }}" class="btn">
+                                {% trans "View" %}
+                            </a>
                         </div>
+                    {% else %}
+                        <em>{% trans "Comment of deleted image not shown." %}</em>
                     {% endif %}
 
-                    {% if text.model_name == "topic" %}
-                        <div class="search-results__text__meta">
-                    <span class="search-results__text__author">
-                        {% astrobin_username text.object.user %}
-                    </span>
-                            <span class="search-results__text__date">
-                        {% if text.object.updated %}
-                            {% timestamp text.object.updated %}
-                        {% elif text.object.created %}
-                            {% timestamp text.object.created %}
-                        {% endif %}
-                    </span>
-                        </div>
-                        <div class="search-results__text__content">
-                            {% if request.GET.q %}
-                                {% highlight text.text with request.GET.q css_class 'search-results__highlight' max_length 500 %}
-                            {% else %}
-                                {{ text.text }}
-                            {% endif %}
-                        </div>
-                        <div class="search-results__text__links">
-                            <a href="{{ text.object.get_absolute_url }}">{% trans "link" %}</a>
-                        </div>
-                    {% endif %}
                 </li>
             {% endfor %}
         </ul>
