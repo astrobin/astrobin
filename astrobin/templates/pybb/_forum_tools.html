@@ -5,7 +5,7 @@
 <div class="forum-tools">
     <form class="forum-search" action="{% url 'haystack_search' %}" method="get" autocomplete="off">
         <input id="q" class="tbox" type="text" name="q" value="{{ request.GET.q }}"
-               placeholder="{% trans "Search all forums and comments" %}" />
+               placeholder="{% trans "Search all forums" %}" />
         <input type="hidden" name="d" value="f" />
     </form>
 
