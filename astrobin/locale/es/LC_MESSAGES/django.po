@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-21 09:56+0000\n"
-"PO-Revision-Date: 2022-01-19 09:02+0100\n"
+"POT-Creation-Date: 2022-01-26 10:13+0000\n"
+"PO-Revision-Date: 2022-01-21 10:58+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -3179,6 +3179,9 @@ msgid ""
 "next page navigation."
 msgstr ""
 
+msgid "This operation cannot be undone!"
+msgstr ""
+
 msgid "Report abuse"
 msgstr ""
 
@@ -4348,9 +4351,6 @@ msgstr "Fecha anexada"
 
 msgid "Views"
 msgstr "Número de visitas"
-
-msgid "link"
-msgstr "Enlace"
 
 msgid "Comment of deleted image not shown."
 msgstr "Comentario no mostrado de imagen eliminada."
@@ -5583,7 +5583,7 @@ msgstr "Dec"
 msgid "Member since"
 msgstr "Registrado desde"
 
-msgid "Search all forums and comments"
+msgid "Search all forums"
 msgstr ""
 
 msgid "New topic"
@@ -6485,6 +6485,9 @@ msgstr ""
 msgid "Restore selected"
 msgstr "Restaurar seleccionados"
 
+msgid "Empty trash"
+msgstr ""
+
 msgid ""
 "Click on the images to include them in this collection (and click again to "
 "exclude them). Then click on the Save button down below."
@@ -6697,9 +6700,6 @@ msgstr "Telescopio guiado"
 
 msgid "What kind of search results do you want?"
 msgstr ""
-
-msgid "Comments & forums"
-msgstr "Comentarios y foros"
 
 msgid "What are you looking for? Use this field to perform a free-text search."
 msgstr ""
@@ -7250,6 +7250,9 @@ msgstr ""
 #~ "\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">Formulario "
 #~ "Avanzado</a>."
 
+#~ msgid "link"
+#~ msgstr "Enlace"
+
 #~ msgid ""
 #~ "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it "
 #~ "out at the following url: <a href=\"%(url)s\">%(url)s</a>"
@@ -7407,6 +7410,9 @@ msgstr ""
 
 #~ msgid "Reset"
 #~ msgstr "Reiniciar"
+
+#~ msgid "Comments & forums"
+#~ msgstr "Comentarios y foros"
 
 #~ msgid "Last login"
 #~ msgstr "Último acceso"

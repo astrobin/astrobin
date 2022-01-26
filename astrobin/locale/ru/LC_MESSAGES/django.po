@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-21 09:56+0000\n"
-"PO-Revision-Date: 2022-01-19 09:02+0100\n"
+"POT-Creation-Date: 2022-01-26 10:13+0000\n"
+"PO-Revision-Date: 2022-01-21 10:58+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
@@ -3218,6 +3218,9 @@ msgid ""
 "next page navigation."
 msgstr ""
 
+msgid "This operation cannot be undone!"
+msgstr ""
+
 msgid "Report abuse"
 msgstr ""
 
@@ -4401,9 +4404,6 @@ msgstr "Дата присоединения"
 
 msgid "Views"
 msgstr "Просмотры"
-
-msgid "link"
-msgstr "ссылка"
 
 msgid "Comment of deleted image not shown."
 msgstr "Комментарий к удаленному изображению не отображается."
@@ -5701,8 +5701,8 @@ msgstr "Скл"
 msgid "Member since"
 msgstr "Давность регистрации"
 
-msgid "Search all forums and comments"
-msgstr "Искать по всем форумам и комментариям"
+msgid "Search all forums"
+msgstr ""
 
 msgid "New topic"
 msgstr "Создать тему"
@@ -6621,6 +6621,9 @@ msgstr ""
 msgid "Restore selected"
 msgstr "Восстановить выбранное"
 
+msgid "Empty trash"
+msgstr ""
+
 msgid ""
 "Click on the images to include them in this collection (and click again to "
 "exclude them). Then click on the Save button down below."
@@ -6834,9 +6837,6 @@ msgstr "Гид"
 
 msgid "What kind of search results do you want?"
 msgstr ""
-
-msgid "Comments & forums"
-msgstr "Комментарии и форумы"
 
 msgid "What are you looking for? Use this field to perform a free-text search."
 msgstr ""
@@ -7409,6 +7409,9 @@ msgstr "Извините, это имя пользователя уже суще
 #~ "class=\"button\" href=\"%(advanced_form_url)s?"
 #~ "edit_type=deep_sky&advanced=true\">расширенной форме</a>."
 
+#~ msgid "link"
+#~ msgstr "ссылка"
+
 #~ msgid ""
 #~ "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it "
 #~ "out at the following url: <a href=\"%(url)s\">%(url)s</a>"
@@ -7489,6 +7492,9 @@ msgstr "Извините, это имя пользователя уже суще
 
 #~ msgid "%(user)s joined the public group: \"%(group_name)s\""
 #~ msgstr "%(user)s вступил в открытую группу: \"%(group_name)s\""
+
+#~ msgid "Search all forums and comments"
+#~ msgstr "Искать по всем форумам и комментариям"
 
 #~ msgid "These are the forums in the groups you have access to."
 #~ msgstr "Это форумы в группах, к которым у вас есть доступ."
@@ -7659,6 +7665,9 @@ msgstr "Извините, это имя пользователя уже суще
 
 #~ msgid "There are no images to recover."
 #~ msgstr "Нет изображений для восстановления."
+
+#~ msgid "Comments & forums"
+#~ msgstr "Комментарии и форумы"
 
 #~ msgid "Last login"
 #~ msgstr "Последнее посещение"

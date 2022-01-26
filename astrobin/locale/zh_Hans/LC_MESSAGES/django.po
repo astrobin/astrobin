@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-21 09:56+0000\n"
-"PO-Revision-Date: 2022-01-19 09:02+0100\n"
+"POT-Creation-Date: 2022-01-26 10:13+0000\n"
+"PO-Revision-Date: 2022-01-21 10:58+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Simplified Chinese\n"
 "Language: zh-Hans\n"
@@ -3130,6 +3130,9 @@ msgid ""
 "next page navigation."
 msgstr ""
 
+msgid "This operation cannot be undone!"
+msgstr ""
+
 msgid "Report abuse"
 msgstr ""
 
@@ -4278,9 +4281,6 @@ msgstr "日期已被加入"
 
 msgid "Views"
 msgstr "视图"
-
-msgid "link"
-msgstr "链接"
 
 msgid "Comment of deleted image not shown."
 msgstr "已删除作品的评论未显示。"
@@ -5504,8 +5504,8 @@ msgstr "赤纬"
 msgid "Member since"
 msgstr "注册时间"
 
-msgid "Search all forums and comments"
-msgstr "搜索所有板块和评论"
+msgid "Search all forums"
+msgstr ""
 
 msgid "New topic"
 msgstr "新建主题"
@@ -6383,6 +6383,9 @@ msgstr ""
 msgid "Restore selected"
 msgstr "恢复选中的"
 
+msgid "Empty trash"
+msgstr ""
+
 msgid ""
 "Click on the images to include them in this collection (and click again to "
 "exclude them). Then click on the Save button down below."
@@ -6589,9 +6592,6 @@ msgstr "导星镜"
 
 msgid "What kind of search results do you want?"
 msgstr ""
-
-msgid "Comments & forums"
-msgstr "评论和论坛"
 
 msgid "What are you looking for? Use this field to perform a free-text search."
 msgstr ""
@@ -7139,6 +7139,9 @@ msgstr "抱歉，用户名已经存在，大小写不同。"
 #~ "您正在打开一个%(size)s的大文件。根据您的下载速度，查看该文件可能需要几秒至"
 #~ "几分钟。"
 
+#~ msgid "link"
+#~ msgstr "链接"
+
 #~ msgid ""
 #~ "As a new user on AstroBin, your first 3 comments will go through a "
 #~ "moderation queue, to prevent spam."
@@ -7227,6 +7230,9 @@ msgstr "抱歉，用户名已经存在，大小写不同。"
 
 #~ msgid "%(user)s joined the public group: \"%(group_name)s\""
 #~ msgstr "%(user)s 加入了公开小组： \"%(group_name)s\""
+
+#~ msgid "Search all forums and comments"
+#~ msgstr "搜索所有板块和评论"
 
 #~ msgid "These are the forums in the groups you have access to."
 #~ msgstr "这些是您所在的小组有权访问板块。"
@@ -7379,6 +7385,9 @@ msgstr "抱歉，用户名已经存在，大小写不同。"
 
 #~ msgid "There are no images to recover."
 #~ msgstr "没有图像需要被修复。"
+
+#~ msgid "Comments & forums"
+#~ msgstr "评论和论坛"
 
 #~ msgid "Last login"
 #~ msgstr "最近登录"

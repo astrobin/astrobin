@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-21 09:56+0000\n"
-"PO-Revision-Date: 2022-01-19 09:02+0100\n"
+"POT-Creation-Date: 2022-01-26 10:13+0000\n"
+"PO-Revision-Date: 2022-01-21 10:58+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -3280,6 +3280,9 @@ msgstr ""
 "Sie können dieses Fenster auch schließen, und Ihre Operation wird mit der "
 "nächsten Seitennavigation übernommen."
 
+msgid "This operation cannot be undone!"
+msgstr ""
+
 msgid "Report abuse"
 msgstr "Missbrauch melden"
 
@@ -4540,9 +4543,6 @@ msgstr "Mitglied seit"
 
 msgid "Views"
 msgstr "Angezeigt"
-
-msgid "link"
-msgstr "Link"
 
 msgid "Comment of deleted image not shown."
 msgstr "Kommentar des gelöschten Bildes wird nicht angezeigt."
@@ -5947,8 +5947,8 @@ msgstr "Dec"
 msgid "Member since"
 msgstr "Mitglied seit"
 
-msgid "Search all forums and comments"
-msgstr "Alle Foren und Kommentare durchsuchen"
+msgid "Search all forums"
+msgstr ""
 
 msgid "New topic"
 msgstr "Neues Thema"
@@ -6898,6 +6898,9 @@ msgstr "Überlagerungen"
 msgid "Restore selected"
 msgstr "Ausgewählte wiederherstellen"
 
+msgid "Empty trash"
+msgstr ""
+
 msgid ""
 "Click on the images to include them in this collection (and click again to "
 "exclude them). Then click on the Save button down below."
@@ -7117,9 +7120,6 @@ msgstr "Leitende Teleskope"
 
 msgid "What kind of search results do you want?"
 msgstr "Welche Art von Suchergebnissen wünschen Sie?"
-
-msgid "Comments & forums"
-msgstr "Kommentare und Foren"
 
 msgid "What are you looking for? Use this field to perform a free-text search."
 msgstr ""
@@ -7751,6 +7751,9 @@ msgstr ""
 #~ "Ihrer Download-Geschwindigkeit kann es einige Sekunden oder sogar Minuten "
 #~ "dauern, bis das Bild angezeigt wird."
 
+#~ msgid "link"
+#~ msgstr "Link"
+
 #~ msgid ""
 #~ "As a new user on AstroBin, your first 3 comments will go through a "
 #~ "moderation queue, to prevent spam."
@@ -7847,6 +7850,9 @@ msgstr ""
 #~ msgid "%(user)s joined the public group: \"%(group_name)s\""
 #~ msgstr ""
 #~ "%(user)s ist der öffentlichen Gruppe beigetreten: \"%(group_name)s\""
+
+#~ msgid "Search all forums and comments"
+#~ msgstr "Alle Foren und Kommentare durchsuchen"
 
 #~ msgid "These are the forums in the groups you have access to."
 #~ msgstr "Dies sind die Foren der Gruppen, zu denen Du Zugang hast."
@@ -8052,6 +8058,9 @@ msgstr ""
 
 #~ msgid "There are no images to recover."
 #~ msgstr "Es gibt keine Bilder zum Wiederherstellen."
+
+#~ msgid "Comments & forums"
+#~ msgstr "Kommentare und Foren"
 
 #~ msgid "Last login"
 #~ msgstr "Letzter Login"

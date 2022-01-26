@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-21 09:56+0000\n"
-"PO-Revision-Date: 2022-01-19 09:02+0100\n"
+"POT-Creation-Date: 2022-01-26 10:13+0000\n"
+"PO-Revision-Date: 2022-01-21 10:58+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -3279,6 +3279,9 @@ msgstr ""
 "Vous pouvez également fermer cette fenêtre, et cette opération sera prise en "
 "compte lors de la navigation sur la prochaine page."
 
+msgid "This operation cannot be undone!"
+msgstr ""
+
 msgid "Report abuse"
 msgstr "Signaler un abus"
 
@@ -4541,9 +4544,6 @@ msgstr "Date d'inscription"
 
 msgid "Views"
 msgstr "Vues"
-
-msgid "link"
-msgstr "lien"
 
 msgid "Comment of deleted image not shown."
 msgstr "Le commentaire de l'image supprimée n'est pas affiché."
@@ -5939,8 +5939,8 @@ msgstr "Déc"
 msgid "Member since"
 msgstr "Membre depuis"
 
-msgid "Search all forums and comments"
-msgstr "Chercher dans tous les forums et commentaires"
+msgid "Search all forums"
+msgstr ""
 
 msgid "New topic"
 msgstr "Nouveau sujet"
@@ -6894,6 +6894,9 @@ msgstr "Overlay"
 msgid "Restore selected"
 msgstr "Restaurer les images sélectionnées"
 
+msgid "Empty trash"
+msgstr ""
+
 msgid ""
 "Click on the images to include them in this collection (and click again to "
 "exclude them). Then click on the Save button down below."
@@ -7111,9 +7114,6 @@ msgstr "Instrument de guidage"
 
 msgid "What kind of search results do you want?"
 msgstr "Quels types de résultats de recherche souhaitez-vous ?"
-
-msgid "Comments & forums"
-msgstr "Forum et commentaires"
 
 msgid "What are you looking for? Use this field to perform a free-text search."
 msgstr ""
@@ -7749,6 +7749,9 @@ msgstr ""
 #~ "fonction de la qualité de votre connexion internet, cela peut prendre "
 #~ "plusieurs secondes voire plusieurs minutes."
 
+#~ msgid "link"
+#~ msgstr "lien"
+
 #~ msgid ""
 #~ "As a new user on AstroBin, your first 3 comments will go through a "
 #~ "moderation queue, to prevent spam."
@@ -7840,6 +7843,9 @@ msgstr ""
 
 #~ msgid "%(user)s joined the public group: \"%(group_name)s\""
 #~ msgstr "%(user)s  a rejoint le groupe public : \"%(group_name)s"
+
+#~ msgid "Search all forums and comments"
+#~ msgstr "Chercher dans tous les forums et commentaires"
 
 #~ msgid "These are the forums in the groups you have access to."
 #~ msgstr "Voici les forums des groupes auxquels vous avez accès."
@@ -8041,6 +8047,9 @@ msgstr ""
 
 #~ msgid "There are no images to recover."
 #~ msgstr "Il n'y a aucune image à restaurer."
+
+#~ msgid "Comments & forums"
+#~ msgstr "Forum et commentaires"
 
 #~ msgid "Last login"
 #~ msgstr "Dernière connexion"
