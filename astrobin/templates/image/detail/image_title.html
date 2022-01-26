@@ -7,7 +7,9 @@
         <div class="span12">
             <h3 class="image-title">
                 {% if image.title %}
-                    {% highlight_text image.title with search_query %}
+                    {% with image.title|strip_html as cleaned_title %}
+                        {% highlight_text cleaned_title with search_query %}
+                    {% endwith %}
                 {% else %}
                     {% trans "(no title)" %}
                 {% endif %}
@@ -16,7 +18,9 @@
             {% if revision_image and revision_image.title %}
                 <h4 class="revision-title">
                     <span class="title-heading">{% trans "Revision title" %}: </span>
-                    {% highlight_text revision_image.title with search_query %}
+                    {% with revision_image.title|strip_html as cleaned_title %}
+                        {% highlight_text cleaned_title with search_query %}
+                    {% endwith %}
                 </h4>
             {% endif %}
         </div>
