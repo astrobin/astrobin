@@ -29,8 +29,6 @@ if TESTING:
         }
     }
 
-    CACHALOT_ENABLED = False
-
     MIDDLEWARE = [
         'django.middleware.common.CommonMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',

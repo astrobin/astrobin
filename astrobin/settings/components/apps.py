@@ -69,7 +69,6 @@ INSTALLED_APPS += [
     'corsheaders',
     'image_cropping',
     'django_extensions',
-    'cachalot',
     'captcha',
     'django_celery_monitor',
 
