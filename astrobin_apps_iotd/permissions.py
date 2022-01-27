@@ -4,6 +4,7 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
+from common.services import DateTimeService
 
 
 def may_toggle_submission_image(user, image):
@@ -229,7 +230,10 @@ def may_unelect_iotd(user, image):
     if Iotd.objects.filter(image=image).exclude(judge=user).exists():
         return False, _("You cannot unelect an image elected by another judge.")
 
-    if Iotd.objects.filter(image=image, date__lte=datetime.now().date()).exists():
+    if Iotd.objects.filter(image=image, date__lte=DateTimeService.today()).exists():
         return False, _("You cannot unelect a past or current IOTD.")
+
+    if Iotd.objects.filter(image=image, date__lte=DateTimeService.today() + timedelta(1)).exists():
+        return False, _("You cannot unelect an IOTD that is due tomorrow (UTC).")
 
     return True, None
