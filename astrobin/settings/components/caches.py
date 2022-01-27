@@ -27,5 +27,3 @@ else:
             'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
         }
     }
-
-CACHALOT_ENABLED = os.environ.get('CACHALOT_ENABLED', 'false').strip() == 'true'
