@@ -163,7 +163,10 @@
 
                     {% if r.description %}
                         <p>
-                            <strong>{% trans "Description" %}:</strong> {{r.description|strip_html|highlight_text_filter:search_query|safe}}
+                            <strong>{% trans "Description" %}:</strong>
+                            {% with r.description|strip_html as cleaned_description %}
+                                {% highlight_text cleaned_description with search_query %}
+                            {% endwith %}
                         </p>
                     {% endif %}
 

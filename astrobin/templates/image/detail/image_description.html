@@ -14,9 +14,11 @@
 
                 <div class="body">
                     {% if image.description_bbcode %}
-                        {{ image.description_bbcode|bbcode|highlight_text_filter:search_query|safe }}
+                        {% highlight_text image.description_bbcode with search_query dialect 'bbcode' %}
                     {% else %}
-                        {{ image.description|strip_html|highlight_text_filter:search_query|safe|linebreaks }}
+                        {% with image.description|strip_html as cleaned_description %}
+                            {% highlight_text cleaned_description with search_query %}
+                        {% endwith %}
                     {% endif %}
                 </div>
             </div>

@@ -1,4 +1,5 @@
 import math
+import regex
 import string
 
 from django.utils.html import strip_tags
@@ -38,11 +39,9 @@ class HighlightingService:
         else:
             result = self.text
 
-        result = strip_tags(result.replace('<br />', ' '))
-
         text_words = [
             word.translate(str.maketrans('', '', string.punctuation))
-            for word in list(dict.fromkeys(result.split()))
+            for word in list(dict.fromkeys(strip_tags(result).split()))
         ]
 
         terms_words = [
@@ -77,6 +76,10 @@ class HighlightingService:
 
         for word in text_words:
             if word.lower() in terms_words:
-                result = result.replace(word, f'<{self.html_tag} class="{self.css_class}">{word}</{self.html_tag}>')
+                result = regex.sub(
+                    f'\<(?:[^<>]++|(?0))++\>(*SKIP)(*F)|{word}',
+                    f'<{self.html_tag} class="{self.css_class}">{word}</{self.html_tag}>',
+                    result
+                )
 
         return result
