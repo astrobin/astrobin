@@ -60,57 +60,99 @@
                 )
             );
 
-            $('.bb-quote-link').on('click', function (e) {
-                e.preventDefault();
-                var self = this;
-                var url = $(this).attr('href');
-                $(this).addClass("running");
-                $.ajax({
-                    url: url,
-                    timeout: 2000,
-                    success: function (data) {
-                        var instance = CKEDITOR.instances[textarea.attr("id")];
+            $('.bb-quote-link')
+                .removeClass("running")
+                .removeAttr("disabled")
+                .on('click', function (e) {
+                    e.preventDefault();
 
-                        if (instance.mode === 'source') {
-                            window.alert("{% trans "Please first exit 'Source' mode to quote a message." %}");
-                        } else {
-                            instance.setData(instance.getData() + '\n' + data + '\n{% trans "*** Type your reply here ***" %}')
-                            $([document.documentElement, document.body]).animate({
-                                scrollTop: $("#cke_id_body").offset().top
-                            }, 750);
+                    const self = this;
+                    const url = $(this).data('url');
+
+                    $(this).addClass("running");
+
+                    $.ajax({
+                        url: url,
+                        timeout: 4000,
+                        success: function (data) {
+                            const instance = CKEDITOR.instances[textarea.attr("id")];
+
+                            if (!instance) {
+                                window.alert(
+                                    '{{ _("Text editor not ready. ") | escapejs }} {{ _("Please try again.") | escapejs }}'
+                                );
+                                return;
+                            }
+
+                            if (instance.mode === 'source') {
+                                window.alert('{{ _("Please first exit 'Source' mode to quote a message.") | escapejs }}');
+                            } else {
+                                instance.setData(
+                                    instance.getData() +
+                                    '\n' +
+                                    data +
+                                    '\n{{ _("*** Type your reply here ***") | escapejs }}'
+                                );
+
+                                const $ckeIdBody = $("#cke_id_body");
+
+                                if (!!$ckeIdBody) {
+                                    $([document.documentElement, document.body]).animate({
+                                        scrollTop: $ckeIdBody.offset().top
+                                    }, 750);
+                                }
+
+                                $(self).removeClass("running");
+                            }
+                        },
+                        error: function () {
                             $(self).removeClass("running");
+                            alert('{{ _("Something went wrong, sorry! Please try again.") | escapejs }}');
                         }
-                    },
-                    error: function () {
-                        $(self).removeClass("running");
-                        alert("{% trans "Something went wrong, sorry! Please try again." %}");
-                    }
+                    });
                 });
-            });
 
             $('.bb-quote-selected-link').on('click', function (e) {
                 if (!window.pybb.markup) {
                     return true;
                 }
+
                 e.preventDefault();
-                var selectedText = astrobin_common.get_selected_text();
+
+                const selectedText = astrobin_common.get_selected_text();
                 if (selectedText !== '') {
-                    var username = '';
-                    var instance = CKEDITOR.instances[textarea.attr("id")];
+                    let username = '';
+                    const instance = CKEDITOR.instances[textarea.attr("id")];
+
+                    if (!instance) {
+                        window.alert(
+                            '{{ _("Text editor not ready. ") | escapejs }} {{ _("Please try again.") | escapejs }}'
+                        );
+                        return;
+                    }
 
                     if (instance.mode === 'source') {
-                        window.alert("{% trans "Please first exit 'Source' mode to quote a message." %}");
+                        window.alert('{{ _("Please first exit 'Source' mode to quote a message.") | escapejs }}');
                     } else {
                         if ($(this).closest('.post').length === 1 &&
                             $(this).closest('.post').find('.post-author a').length === 1) {
                             username = $.trim($(this).closest('.post').find('.post-author a').text());
                         }
-                        instance.setData(
-                            instance.getData() + '\n' + window.pybb.markup.quote(selectedText, username) + '\n{% trans "*** Type your reply here ***" %}');
 
-                        $([document.documentElement, document.body]).animate({
-                            scrollTop: $("#cke_id_body").offset().top
-                        }, 750);
+                        instance.setData(
+                            instance.getData() +
+                            '\n' +
+                            window.pybb.markup.quote(selectedText, username) +
+                            '\n{{ _("*** Type your reply here ***") | escapejs }}'
+                        );
+
+                        const $ckeIdBody = $("#cke_id_body");
+
+                        if (!!$ckeIdBody) {
+                            $([document.documentElement, document.body]).animate({
+                                scrollTop: $ckeIdBody.offset().top
+                            }, 750);
+                        }
                     }
                 }
             });
