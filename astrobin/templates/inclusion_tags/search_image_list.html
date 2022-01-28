@@ -134,61 +134,63 @@
     {% if search_domain == 'f' %}
         <ul class="search-results__text">
             {% for item in page_obj.object_list %}
-                <li class="search-results__text__single">
-                    {% if item.model_name == "post" %}
-                        <div class="search-results__text__meta">
-                            <span class="search-results__text__author">
-                                {% astrobin_username item.object.user %}
-                            </span>
+                {% if item.object %}
+                    <li class="search-results__text__single">
+                        {% if item.model_name == "post" %}
+                            <div class="search-results__text__meta">
+                                <span class="search-results__text__author">
+                                    {% astrobin_username item.object.user %}
+                                </span>
 
-                            <span class="search-results__text__date">
-                                {% if item.object.updated %}
-                                    {% timestamp item.object.updated %}
-                                {% elif item.object.created %}
-                                    {% timestamp item.object.created %}
+                                <span class="search-results__text__date">
+                                    {% if item.object.updated %}
+                                        {% timestamp item.object.updated %}
+                                    {% elif item.object.created %}
+                                        {% timestamp item.object.created %}
+                                    {% endif %}
+                                </span>
+                            </div>
+
+                            <div class="search-results__text__content">
+                                {% if request.GET.q %}
+                                    {% highlight_text item.object.body with request.GET.q css_class 'search-results__highlight' max_length 500 dialect 'bbcode' %}
+                                {% else %}
+                                    {{ item.object.body_html }}
                                 {% endif %}
-                            </span>
-                        </div>
+                            </div>
+                        {% endif %}
 
-                        <div class="search-results__text__content">
-                            {% if request.GET.q %}
-                                {% highlight_text item.object.body with request.GET.q css_class 'search-results__highlight' max_length 500 dialect 'bbcode' %}
-                            {% else %}
-                                {{ item.object.body_html }}
-                            {% endif %}
-                        </div>
-                    {% endif %}
+                        {% if item.model_name == "topic" %}
+                            <div class="search-results__text__meta">
+                                <span class="search-results__text__author">
+                                    {% astrobin_username item.object.user %}
+                                </span>
 
-                    {% if item.model_name == "topic" %}
-                        <div class="search-results__text__meta">
-                            <span class="search-results__text__author">
-                                {% astrobin_username item.object.user %}
-                            </span>
+                                <span class="search-results__text__date">
+                                    {% if item.object.updated %}
+                                        {% timestamp item.object.updated %}
+                                    {% elif item.object.created %}
+                                        {% timestamp item.object.created %}
+                                    {% endif %}
+                                </span>
+                            </div>
 
-                            <span class="search-results__text__date">
-                                {% if item.object.updated %}
-                                    {% timestamp item.object.updated %}
-                                {% elif item.object.created %}
-                                    {% timestamp item.object.created %}
+                            <div class="search-results__text__content">
+                                {% if request.GET.q %}
+                                    {% highlight_text item.object.name with request.GET.q css_class 'search-results__highlight' max_length 500 dialect 'bbcode' %}
+                                {% else %}
+                                    {{ item.object.name }}
                                 {% endif %}
-                            </span>
-                        </div>
+                            </div>
+                        {% endif %}
 
-                        <div class="search-results__text__content">
-                            {% if request.GET.q %}
-                                {% highlight_text item.object.name with request.GET.q css_class 'search-results__highlight' max_length 500 dialect 'bbcode' %}
-                            {% else %}
-                                {{ item.object.name }}
-                            {% endif %}
+                        <div class="search-results__text__links">
+                            <a href="{{ item.object.get_absolute_url }}" class="btn">
+                                {% trans "View" %}
+                            </a>
                         </div>
-                    {% endif %}
-
-                    <div class="search-results__text__links">
-                        <a href="{{ item.object.get_absolute_url }}" class="btn">
-                            {% trans "View" %}
-                        </a>
-                    </div>
-                </li>
+                    </li>
+                {% endif %}
             {% endfor %}
         </ul>
     {% endif %}
