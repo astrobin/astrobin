@@ -81,4 +81,5 @@ class HighlightingService:
                         result
                     )
 
-        return mark_safe(result)
+        from common.templatetags.common_tags import strip_html
+        return mark_safe(strip_html(result))
