@@ -1,9 +1,8 @@
-from datetime import timedelta
+from datetime import date, timedelta
 
 from rest_framework import serializers
 
 from astrobin_apps_iotd.models import Iotd
-from common.services import DateTimeService
 
 
 class IotdSerializer(serializers.ModelSerializer):
@@ -13,11 +12,11 @@ class IotdSerializer(serializers.ModelSerializer):
         if 'judge' not in validated_data:
             validated_data['judge'] = self.context['request'].user
 
-        latest_iotd = self.Meta.model.objects.first()
+        day = date.today()
+        while self.Meta.model.objects.filter(date=day).exists():
+            day = day + timedelta(1)
 
-        validated_data['date'] = latest_iotd.date + timedelta(1) \
-            if latest_iotd \
-            else DateTimeService.today()
+        validated_data['date'] = day
 
         return super().create(validated_data)
 
