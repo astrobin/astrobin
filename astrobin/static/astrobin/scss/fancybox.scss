@@ -1,0 +1,17 @@
+.fancybox-wrap {
+  transform: unset !important;
+  -webkit-transform: unset !important;
+
+  .fancybox-nav {
+    position: fixed;
+    width: 33.33%;
+
+    &.fancybox-next span {
+      right: 50px;
+    }
+
+    &.fancybox-prev span {
+      left: 50px;
+    }
+  }
+}

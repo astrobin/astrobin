@@ -52,6 +52,7 @@ def astrobin_image(context, image, alias, **kwargs):
     classes = kwargs.get('classes', '')
     instant = kwargs.get('instant', False)
     fancybox = kwargs.get('fancybox', False)
+    fancybox_tooltip = kwargs.get('fancybox_tooltip', False)
     rel = kwargs.get('rel', '')
 
     if nav_ctx == 'user':
@@ -88,6 +89,7 @@ def astrobin_image(context, image, alias, **kwargs):
             'is_revision': False,
             'instant': False,
             'fancybox': False,
+            'fancybox_tooltip': False,
             'fancybox_url': None,
             'rel': rel,
         }
@@ -272,6 +274,7 @@ def astrobin_image(context, image, alias, **kwargs):
         'h': h,
         'instant': instant,
         'fancybox': fancybox,
+        'fancybox_tooltip': fancybox_tooltip,
         'fancybox_url': reverse('image_rawthumb', kwargs={
             'id': image.get_id(),
             'alias': 'hd',
