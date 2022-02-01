@@ -1,3 +1,4 @@
+import logging
 from datetime import date, datetime, timedelta
 from typing import List
 
@@ -19,6 +20,8 @@ from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 from astrobin_apps_users.services import UserService
 from common.services import DateTimeService
+
+log = logging.getLogger('apps')
 
 
 class IotdService:
@@ -282,6 +285,7 @@ class IotdService:
                         image=image,
                         published=image.published
                     )
+                    log.debug(f'Image {image.get_id()} "{image.title}" assigned to submitter {submitter.pk} "{submitter.username}".')
 
     def update_review_queues(self):
         def _compute_queue(reviewer: User):
@@ -321,6 +325,9 @@ class IotdService:
                     image=image,
                     last_submission_timestamp=last_submission.date
                 )
+                log.debug(
+                    f'Image {image.get_id()} "{image.title}" assigned to reviewer {reviewer.pk} "{reviewer.username}".'
+                )
 
     def update_judgement_queues(self):
         def _compute_queue(judge: User):
@@ -354,6 +361,9 @@ class IotdService:
                     judge=judge,
                     image=image,
                     last_vote_timestamp=last_vote.date
+                )
+                log.debug(
+                    f'Image {image.get_id()} "{image.title}" assigned to judge {judge.pk} "{judge.username}".'
                 )
 
     def get_inactive_submitter_and_reviewers(self, days):
