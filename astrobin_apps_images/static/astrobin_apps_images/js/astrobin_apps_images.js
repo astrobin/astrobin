@@ -93,7 +93,7 @@ $(document).ready(function () {
     }
 
     function loadEnhanced($img) {
-        var tries = {},
+        const tries = {},
             devicePixelRatio = window.devicePixelRatio,
             randomTimeout = Math.floor(Math.random() * 100) + 100, // 100-200 ms
             id = $img.data('id'),
@@ -111,28 +111,43 @@ $(document).ready(function () {
             return;
         }
 
+        const onLoaded = (url) => {
+            $img.one('load', () => {
+                $enhancementLoadingIndicator.hide();
+            });
+
+            $img.attr('data-loaded', 'true')
+                .attr('data-hires-loaded', true)
+                .attr('src', url);
+
+            if (!window.bowser) {
+                return;
+            }
+
+            const browserParser = window.bowser.getParser(window.navigator.userAgent);
+
+            if (!browserParser) {
+                return;
+            }
+
+            const browser = browserParser.getBrowser();
+
+            if (browser.name === 'Chrome') {
+                $img.css('image-rendering', '-webkit-optimize-contrast');
+            }
+        }
+
         $enhancementLoadingIndicator.show();
 
         if (enhancedThumbnailUrl !== undefined) {
-            $img.attr('data-hires-loaded', true);
-            $img.one('load', function() {
-                $enhancementLoadingIndicator.hide();
-            });
-            $img.attr('src', enhancedThumbnailUrl);
-            return;
+            onLoaded(enhancedThumbnailUrl);
         }
 
         if (getEnhancedThumbnailUrl !== undefined) {
             $img.attr('data-hires-loaded', false);
+
             setTimeout(function () {
-                load(getEnhancedThumbnailUrl, id, revision, alias, tries, true, randomTimeout, false).then(function(url) {
-                    $img.one('load', function () {
-                        $enhancementLoadingIndicator.hide();
-                    });
-                    $img.attr('data-loaded', 'true')
-                        .attr('data-hires-loaded', true)
-                        .attr('src', url);
-                });
+                load(getEnhancedThumbnailUrl, id, revision, alias, tries, true, randomTimeout, false).then(url => onLoaded(url));
             }, randomTimeout);
         }
     }

@@ -473,15 +473,22 @@
     };
 
     Platesolving.advancedSvgLoaded = function () {
-        const isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
-            navigator.userAgent &&
-            navigator.userAgent.indexOf('CriOS') === -1 &&
-            navigator.userAgent.indexOf('FxiOS') === -1;
-        const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
-        const isFirefox92 = navigator.userAgent.toLowerCase().indexOf('rv:92') > -1;
+        if (!window.bowser) {
+            return;
+        }
 
+        const browserParser = window.bowser.getParser(window.navigator.userAgent);
 
-        if (isSafari || (isFirefox && isFirefox92)) {
+        if (!browserParser) {
+            return;
+        }
+
+        const browser = browserParser.getBrowser();
+        const isSafari = browser.name === 'Safari';
+        const isFirefox = browser.name === 'Firefox';
+        const isFirefox92 = isFirefox && browser.version.indexOf('92') === 0;
+
+        if (isSafari || isFirefox92) {
             var contentDocument = document.getElementById("advanced-plate-solution-svg").contentDocument;
             contentDocument.querySelector("svg > g").removeAttribute("filter");
         }
