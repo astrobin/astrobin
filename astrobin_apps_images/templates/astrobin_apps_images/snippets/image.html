@@ -102,7 +102,9 @@
                          height="{{size_y}}"
                      {% endif %}
 
+                     data-user-id="{{image.user.id}}"
                      data-id="{{image.id}}"
+                     data-id-or-hash="{{image.get_id}}"
                      data-alias="{{alias}}"
                      data-revision="{{revision}}"
                      {% if is_revision %}

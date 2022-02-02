@@ -834,6 +834,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         padding: 12px;
         border-top-left-radius: 24px;
         border-top-right-radius: 24px;
+
+        @media screen and (max-width: 767px) {
+          height: 100%;
+        }
       }
 
       h3 {
@@ -905,6 +909,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         border-radius: 0 0 24px 24px;
         background: $link-color;
         line-height: 35px;
+
+        @media screen and (max-width: 767px) {
+          display: none;
+        }
 
         a {
           color: white;

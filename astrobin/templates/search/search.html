@@ -127,6 +127,11 @@
 
 {% endblock %}
 
+{% block modals %}
+    {% include 'cant_like_generic.html' %}
+    {% include 'cant_unlike_generic.html' %}
+{% endblock %}
+
 {% block extra_js %}
     {% include "js/vue.html" %}
     {% include "vue_frontend/search_app/index.html" %}
