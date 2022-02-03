@@ -10,20 +10,37 @@
   transform: unset !important;
   -webkit-transform: unset !important;
 
+  .fancybox-skin {
+    background: $grey-8;
+  }
+
   .fancybox-nav {
     position: fixed;
     width: 33.33%;
+    z-index: 1041;
 
-    &.fancybox-next span {
+    &.fancybox-next > span {
       right: 50px;
     }
 
-    &.fancybox-prev span {
+    &.fancybox-prev > span {
       left: 50px;
+    }
+
+    > span {
+      @media screen and (min-width: 1024px) {
+        visibility: visible;
+      }
     }
   }
 
   .fancybox-title {
+    @media screen and (max-width: 567px) {
+      position: fixed;
+      top: 0;
+      max-width: 100vw;
+    }
+
     .fancybox-title-caption {
       margin-top: .5rem;
     }
@@ -42,6 +59,8 @@
       font-style: italic;
       opacity: .5;
       font-size: .8rem;
+      max-width: 80vw;
+      white-space: normal;
     }
   }
 }

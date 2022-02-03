@@ -1664,7 +1664,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   @include text-shadow;
   @include rounded-corners(6px);
   @include box-shadow;
-  z-index: 1049;
+  z-index: 1040;
 }
 
 .message-container {
