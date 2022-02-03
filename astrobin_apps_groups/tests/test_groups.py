@@ -96,7 +96,7 @@ class GroupsTest(TestCase):
         self.group.members.add(self.user1)
         response = self.client.get(reverse('group_detail', kwargs={'pk': self.group.pk, 'slug': self.group.slug}))
         self.assertEqual(response.status_code, 200)
-        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-alias="%s"' % (image.pk, "gallery"), response.content.decode(
+        self.assertIsNotNone(re.search(r'data-id="%d"\s+data-id-or-hash="%s"\s+data-alias="%s"' % (image.pk, image.get_id(), "gallery"), response.content.decode(
             'utf-8')))
 
         # Test that WIP images are not rendered here
