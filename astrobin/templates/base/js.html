@@ -90,6 +90,7 @@
 
         {% trans "Like" context 'Verb (imperative)' as i18nLike %}
         {% trans "Unlike" context 'Verb (imperative)' as i18nUnlike %}
+        {% trans "Browse images currently visible on the page (spacebar to start/stop autoplay)." as i18nFancyboxHelp %}
 
         $('.fancybox').fancybox({
             type: "image",
@@ -129,6 +130,9 @@
                             {% trans 'View large' %}
                         </a>
                         ${likeButton}
+                    </div>
+                    <div class="fancybox-title-help">
+                        {{ i18nFancyboxHelp | escapejs }}
                     </div>
                 `;
             },
@@ -241,6 +245,12 @@
             }
         });
 
+
+        $('#start-image-slideshow').click(function (e) {
+            e.preventDefault();
+            $('.astrobin-thumbnail').first().find('.fancybox').click();
+        });
+
         $('.astrobin-thumbnail .astrobin-image-container figcaption').each(function () {
             if (!window.bowser) {
                 return;
@@ -255,7 +265,9 @@
             const os = browserParser.getOS();
 
             if (os.name === 'iOS') {
-                $(this).remove();
+                $(this)
+                    .css('display', 'none')
+                    .find('.image-slideshow-button').remove();
             }
         });
 

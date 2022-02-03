@@ -935,8 +935,8 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       }
 
       figcaption {
-        opacity: 1;
-        visibility: visible;
+        opacity: 1 !important;
+        visibility: visible !important;
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#aa000000, endColorstr=#aa000000);
       }
     }
