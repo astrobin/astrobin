@@ -349,7 +349,7 @@ class ImageResource(ModelResource):
             'data_source': ALL,
             'remote_source': ALL,
         }
-        ordering = ['uploaded']
+        ordering = ['published', 'uploaded', 'title']
 
     def dehydrate_url_thumb(self, bundle):
         return '%s/%s/0/rawthumb/thumb/' % (settings.BASE_URL, bundle.obj.get_id())
