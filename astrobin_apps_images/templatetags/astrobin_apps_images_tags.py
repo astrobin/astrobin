@@ -54,6 +54,7 @@ def astrobin_image(context, image, alias, **kwargs):
     fancybox = kwargs.get('fancybox', False)
     fancybox_tooltip = kwargs.get('fancybox_tooltip', False)
     rel = kwargs.get('rel', '')
+    slug = kwargs.get('slug', '')
 
     if nav_ctx == 'user':
         # None is considered to be default for 'user'
@@ -92,6 +93,7 @@ def astrobin_image(context, image, alias, **kwargs):
             'fancybox_tooltip': False,
             'fancybox_url': None,
             'rel': rel,
+            'slug': slug,
         }
 
     # Old images might not have a size in the database, let's fix it.
@@ -219,6 +221,7 @@ def astrobin_image(context, image, alias, **kwargs):
             thumb_url = thumb.url
 
     get_thumb_url = None
+    get_raw_thumb_url = None
     if thumb_url is None:
         get_thumb_kwargs = {
             'id': image.hash if image.hash else image.id,
@@ -231,6 +234,10 @@ def astrobin_image(context, image, alias, **kwargs):
         get_thumb_url = reverse('image_thumb', kwargs=get_thumb_kwargs)
         if animated:
             get_thumb_url += '?animated'
+
+        get_raw_thumb_url = reverse('image_rawthumb', kwargs=get_thumb_kwargs)
+        if animated:
+            get_raw_thumb_url += '?animated'
 
     get_regular_large_thumb_url, regular_large_thumb_url = ImageService(image).get_enhanced_thumb_url(
         field, alias, revision_label, animated, request.is_secure(), 'regular_large')
@@ -258,6 +265,7 @@ def astrobin_image(context, image, alias, **kwargs):
         'badges': badges,
         'animated': animated,
         'get_thumb_url': get_thumb_url,
+        'get_raw_thumb_url': get_raw_thumb_url,
         'thumb_url': thumb_url,
         'link': link,
         'nav_ctx': nav_ctx,
@@ -281,6 +289,7 @@ def astrobin_image(context, image, alias, **kwargs):
             'r': revision_label,
         }) + '?sync',
         'rel': rel,
+        'slug': slug,
     }.items()))
 
 

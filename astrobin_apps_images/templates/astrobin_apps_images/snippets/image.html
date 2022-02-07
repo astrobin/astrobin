@@ -58,11 +58,11 @@
             {% if link or fancybox %}
                 <a
                         {% if fancybox %}
-                            class="fancybox"
+                            data-fancybox="{{ rel }}"
                             href="{{ fancybox_url }}"
-                            rel="{{ rel }}"
                             data-url="{{ url }}"
                             data-url-hd="{{ url_hd }}"
+                            data-slug="{{ slug }}"
                             {% if is_revision %}
                                 data-caption="{% blocktrans trimmed %}Revision {{ revision }}{% endblocktrans %}{% if revision_title %}: {{ revision_title }}{% endif %}"
                             {% else %}
@@ -200,14 +200,15 @@
                     {% if fancybox_tooltip %}
                         <div class="image-slideshow-button">
                             <a
-                                class="fancybox"
+                                data-fancybox="{{ rel }}"
                                 href="{{ fancybox_url }}"
-                                rel="{{ rel }}"
                                 data-url="{{ url }}"
                                 data-url-hd="{{ url_hd }}"
                                 data-caption='{% astrobin_username image.user link=False %}: "{{ image.title | escape | default:_("(no title)") }}"'
+                                data-slug="{{ slug }}"
+                                data-thumb="{% if thumb_url %}{{ thumb_url }}{% else %}{{ get_raw_thumb_url }}{% endif %}"
                             >
-                                <i class="icon-zoom-in"></i>
+                                <i class="icon-play"></i>
                             </a>
                         </div>
                     {% endif %}

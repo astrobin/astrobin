@@ -1,66 +1,92 @@
-.fancybox-overlay {
-  z-index: 1040;
+a[data-fancybox] img {
+  cursor: zoom-in;
 }
 
-.fancybox-opened {
-  z-index: 1041;
+.fancybox__backdrop::after {
+  content: "";
+  position: absolute;
+  width: 10%;
+  height: 10%;
+  filter: blur(2px);
+  left: 50%;
+  top: 50%;
+  transform: scale(11);
+  opacity: 0.3;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
-.fancybox-wrap {
-  transform: unset !important;
-  -webkit-transform: unset !important;
+.fancybox__container {
+  --fancybox-bg: #000;
 
-  .fancybox-skin {
-    background: $grey-8;
+  --fancybox-thumbs-width: 4rem;
+  --fancybox-thumbs-ratio: 1;
+
+  --carousel-button-bg: rgba(91, 78, 76, .74);
+
+  --carousel-button-svg-width: 1.5rem;
+  --carousel-button-svg-height: 1.5rem;
+
+  --carousel-button-svg-stroke-width: 2.5;
+
+  z-index: 1049;
+
+  .carousel__button {
+    margin-left: .75rem;
+  }
+}
+
+.fancybox__nav {
+  --carousel-button-svg-width: 1.5rem;
+  --carousel-button-svg-height: 1.5rem;
+}
+
+.fancybox__nav .carousel__button.is-prev {
+  left: 1rem;
+}
+
+.fancybox__nav .carousel__button.is-next {
+  right: 1rem;
+}
+
+.carousel__button.is-close {
+  right: auto;
+  top: 1.5rem;
+  left: 1.5rem;
+}
+
+.fancybox__slide {
+  padding: .5rem 6rem;
+}
+
+.fancybox__caption {
+  text-align: center;
+
+  @media screen and (max-width: 567px) {
+    bottom: 0;
+    width: 100vw;
   }
 
-  .fancybox-nav {
-    position: fixed;
-    width: 33.33%;
-    z-index: 1041;
+  .fancybox__caption__text {
+    margin-top: .5rem;
+  }
 
-    &.fancybox-next > span {
-      right: 50px;
-    }
+  .fancybox__caption__buttons {
+    display: block;
+    margin: 1rem 0;
 
-    &.fancybox-prev > span {
-      left: 50px;
-    }
-
-    > span {
-      @media screen and (min-width: 1024px) {
-        visibility: visible;
-      }
+    .btn:not(:last-child) {
+      margin-right: .5rem;
     }
   }
 
-  .fancybox-title {
-    @media screen and (max-width: 567px) {
-      position: fixed;
-      top: 0;
-      max-width: 100vw;
-    }
-
-    .fancybox-title-caption {
-      margin-top: .5rem;
-    }
-
-    .fancybox-title-buttons {
-      display: block;
-      margin: 1rem 0;
-
-      .btn:not(:last-child) {
-        margin-right: .5rem;
-      }
-    }
-
-    .fancybox-title-help {
-      margin-bottom: .5rem;
-      font-style: italic;
-      opacity: .5;
-      font-size: .8rem;
-      max-width: 80vw;
-      white-space: normal;
-    }
+  .fancybox__caption__help {
+    margin-bottom: .5rem;
+    font-style: italic;
+    opacity: .5;
+    font-size: .8rem;
+    white-space: normal;
   }
 }

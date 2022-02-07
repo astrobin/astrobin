@@ -900,15 +900,8 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
       .image-slideshow-button {
         position: absolute;
-        bottom: 0;
-        text-align: center;
-        width: 100%;
-        font-size: 1.25rem;
-        left: 0;
-        height: 35px;
-        border-radius: 0 0 24px 24px;
-        background: $link-color;
-        line-height: 35px;
+        bottom: .75rem;
+        right: .75rem;
 
         @media screen and (max-width: 767px) {
           display: none;
@@ -917,8 +910,13 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         a {
           color: white;
           display: block;
-          width: 100%;
-          height: 100%;
+          text-align: center;
+          width: 2.25rem;
+          height: 2.25rem;
+          font-size: .85rem;
+          line-height: 2.25rem;
+          border-radius: 50%;
+          background: $link-color;
         }
       }
     }
