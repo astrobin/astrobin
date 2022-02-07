@@ -25,22 +25,43 @@ a[data-fancybox] img {
   --fancybox-thumbs-ratio: 1;
 
   --carousel-button-bg: rgba(91, 78, 76, .74);
-
-  --carousel-button-svg-width: 1.5rem;
-  --carousel-button-svg-height: 1.5rem;
-
   --carousel-button-svg-stroke-width: 2.5;
 
   z-index: 1049;
+}
+
+.fancybox__toolbar {
+  padding: .5rem !important;
+
+  --carousel-button-svg-width: 1rem;
+  --carousel-button-svg-height: 1rem;
 
   .carousel__button {
-    margin-left: .75rem;
+    margin: 0 .25rem;
+
+    i {
+      font-size: 1rem;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    --carousel-button-width: 2rem;
+    --carousel-button-height: 2rem;
+
+    &__items--center:not(:last-child) {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    &__items--center:not(:last-child) {
+      display: flex;
+    }
   }
 }
 
 .fancybox__nav {
-  --carousel-button-svg-width: 1.5rem;
-  --carousel-button-svg-height: 1.5rem;
+  display: none;
 }
 
 .fancybox__nav .carousel__button.is-prev {
@@ -58,7 +79,8 @@ a[data-fancybox] img {
 }
 
 .fancybox__slide {
-  padding: .5rem 6rem;
+  padding: 0;
+  margin-top: 5rem;
 }
 
 .fancybox__caption {
@@ -89,4 +111,8 @@ a[data-fancybox] img {
     font-size: .8rem;
     white-space: normal;
   }
+}
+
+.fancybox__button--toggleProperty i {
+  pointer-events: none;
 }

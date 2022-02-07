@@ -59,6 +59,7 @@
                 <a
                         {% if fancybox %}
                             data-fancybox="{{ rel }}"
+                            data-rel="{{ rel }}"
                             href="{{ fancybox_url }}"
                             data-url="{{ url }}"
                             data-url-hd="{{ url_hd }}"
@@ -201,12 +202,16 @@
                         <div class="image-slideshow-button">
                             <a
                                 data-fancybox="{{ rel }}"
+                                data-rel="{{ rel }}"
                                 href="{{ fancybox_url }}"
                                 data-url="{{ url }}"
                                 data-url-hd="{{ url_hd }}"
-                                data-caption='{% astrobin_username image.user link=False %}: "{{ image.title | escape | default:_("(no title)") }}"'
+                                data-caption='{% astrobin_username image.user link=False %} - "{{ image.title | escape | default:_("(no title)") }}"'
                                 data-slug="{{ slug }}"
                                 data-thumb="{% if thumb_url %}{{ thumb_url }}{% else %}{{ get_raw_thumb_url }}{% endif %}"
+                                data-user-id="{{ image.user.id }}"
+                                data-id="{{ image.id }}"
+                                data-id-or-hash="{{ image.get_id }}"
                             >
                                 <i class="icon-play"></i>
                             </a>

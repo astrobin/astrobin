@@ -903,10 +903,6 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         bottom: .75rem;
         right: .75rem;
 
-        @media screen and (max-width: 767px) {
-          display: none;
-        }
-
         a {
           color: white;
           display: block;
@@ -2444,6 +2440,17 @@ form.avatar-delete {
           color: $white;
           font-weight: bold;
           width: 100%;
+        }
+      }
+
+      figure:hover {
+        img[data-alias='gallery'] {
+          -webkit-transform: none;
+          -moz-transform: none;
+          -ms-transform: none;
+          -o-transform: none;
+          transform: none;
+          z-index: 1;
         }
       }
 

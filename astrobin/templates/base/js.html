@@ -74,7 +74,7 @@
     });
 
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         astrobin_common.init({
             is_authenticated: {{ request.user.is_authenticated|yesno:"true,false" }},
             open_notifications_in_new_tab: {{ request.user.userprofile.open_notifications_in_new_tab|yesno:"true,false" }}
@@ -83,14 +83,172 @@
         astrobin_common.setup_user_popovers();
 
         $('input:checkbox, input:radio, input:file').uniform(
-            {fileDefaultText: '{% trans "No file selected" %}',
-             fileBtnText: '{% trans "Choose file" %}'
+            {
+                fileDefaultText: '{% trans "No file selected" %}',
+                fileBtnText: '{% trans "Choose file" %}'
             }
         );
 
         {% trans "Like" context 'Verb (imperative)' as i18nLike %}
         {% trans "Unlike" context 'Verb (imperative)' as i18nUnlike %}
         {% trans "Browse images currently visible on the page." as i18nFancyboxHelp %}
+
+        Fancybox.Plugins.Toolbar.defaults.items.viewImagePage = {
+            type: "button",
+            class: "fancybox__button--viewImagePage",
+            label: "{{ _('View page') | escapejs }}",
+            html: '<i class="icon-link"></i>',
+            click: function (event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                const slide = Fancybox.getInstance().getSlide();
+                const url = slide.url;
+                const link = document.createElement('a');
+
+                link.href = url;
+                document.body.appendChild(link);
+
+                link.click();
+            },
+        };
+
+        Fancybox.Plugins.Toolbar.defaults.items.viewImagePageInNewTab = {
+            type: "button",
+            class: "fancybox__button--viewImagePageInNewTab",
+            label: "{{ _('View page in new tab') | escapejs }}",
+            html: '<i class="icon-external-link"></i>',
+            click: function (event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                const slide = Fancybox.getInstance().getSlide();
+                const url = slide.url;
+                const link = document.createElement('a');
+
+                link.href = url;
+                link.target = '_blank';
+                document.body.appendChild(link);
+
+                link.click();
+            },
+        };
+
+        Fancybox.Plugins.Toolbar.defaults.items.like = {
+            type: "button",
+            class: "fancybox__button--toggleProperty",
+            label: "{{ i18nLike | escapejs }}",
+            html: '<i class="icon-spinner"></i>'
+        };
+
+        function initFancyBoxToolbarTogglePropertyButton(fancybox) {
+            const slide = fancybox.getSlide();
+            const rel = slide.rel;
+            const imageId = slide.id;
+            const imageIdOrHash = slide.idOrHash;
+            const userId = slide.userId;
+            const requestUserId = {% if request.user.is_authenticated %}{{ request.user.id }}{% else %}0{% endif %};
+
+            const waitIcon = 'icon-spinner';
+            const likeIcon = 'icon-thumbs-up';
+
+            setTimeout(() => {
+                const $button = $(fancybox.plugins.Toolbar.$container).find('.fancybox__button--toggleProperty');
+                const $icon = $button.find('i');
+
+                if (rel !== 'image-list' || requestUserId === userId || requestUserId === 0) {
+                    $button.remove();
+                    return;
+                }
+
+                $icon
+                    .addClass(waitIcon)
+                    .removeClass(likeIcon);
+                $button
+                    .attr('disabled', 'disabled');
+
+                $.ajax({
+                    type: 'get',
+                    url: '/api/v2/common/contenttypes/?app_label=astrobin&model=image',
+                    dataType: 'json',
+                    success: (contentTypeResponse) => {
+                        const contentType = contentTypeResponse[0];
+
+                        $.ajax({
+                            type: 'get',
+                            url: `/api/v2/common/toggleproperties?content_type=${contentType.id}&property_type=like&user_id=${requestUserId}&object_id=${imageId}`,
+                            dataType: 'json',
+                            success: (togglePropertyResponse) => {
+                                const liked = togglePropertyResponse.count > 0;
+
+                                if (liked) {
+                                    $icon
+                                        .removeClass(waitIcon)
+                                        .addClass(likeIcon);
+                                    $button
+                                        .attr('disabled', 'disabled');
+                                    return;
+                                }
+
+                                $button
+                                    .html(`<i class="${likeIcon}"></i>`)
+                                    .removeAttr('disabled')
+                                    .data('content-type', contentType.id)
+                                    .data('object-id', imageId)
+                                    .one('click', function (e) {
+                                        e.preventDefault();
+
+                                        $icon
+                                            .removeClass(likeIcon)
+                                            .addClass(waitIcon);
+                                        $button
+                                            .attr('disabled', 'disabled');
+
+                                        $.ajax({
+                                            type: 'post',
+                                            url: '/api/v2/common/toggleproperties/',
+                                            data: {
+                                                property_type: 'like',
+                                                content_type: contentType.id,
+                                                object_id: imageId,
+                                                user: {{ request.user.id }}
+                                            },
+                                            timeout: 5000,
+                                            success: function (response) {
+                                                togglePropertyResponse = {
+                                                    results: [
+                                                        response
+                                                    ]
+                                                };
+
+                                                $icon
+                                                    .removeClass(waitIcon)
+                                                    .addClass(likeIcon);
+                                                $button
+                                                    .attr('disabled', 'disabled');
+                                            },
+                                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                                if (XMLHttpRequest.status === 401) {
+                                                    window.location.href = `/accounts/login/?next=/${imageIdOrHash}`;
+                                                    return;
+                                                } else {
+                                                    $('#cant-like').modal('show');
+                                                }
+
+                                                $icon
+                                                    .removeClass(waitIcon)
+                                                    .addClass(likeIcon);
+                                                $button
+                                                    .removeAttr('disabled');
+                                            }
+                                        });
+                                    })
+                            }
+                        })
+                    }
+                });
+            }, 250);
+        }
 
         Fancybox.bind("[data-fancybox]", {
             infinite: false,
@@ -115,6 +273,8 @@
                         "--bg-image",
                         `url("${slide.src}")`
                     );
+
+                    initFancyBoxToolbarTogglePropertyButton(fancybox);
                 },
                 "Carousel.change": (fancybox, carousel, to, from) => {
                     const slide = carousel.slides[to];
@@ -123,149 +283,9 @@
                         "--bg-image",
                         `url("${slide.src}")`
                     );
+
+                    initFancyBoxToolbarTogglePropertyButton(fancybox);
                 },
-            },
-            caption: function (fancybox, carousel, slide) {
-                const $element = $(slide.$trigger);
-                const $img = $element.closest('figure').find('.astrobin-image');
-                const userId = $img.data('user-id');
-                const imageId = $img.data('id');
-                const imageIdOrHash = $img.data('id-or-hash');
-
-
-                let likeButton = '';
-
-                {% if request.user.is_authenticated %}
-                    if ($element.data('fancybox') === 'image-list' && {{ request.user.id }} !== userId) {
-                        likeButton = `
-                            <a
-                                href="#"
-                                class="btn btn-primary toggleproperty-button {% button_loading_class %} running"
-                                disabled="disabled"
-                            >
-                                {{ i18nLike | escapejs }}
-                                {% button_loading_indicator %}
-                            </a>
-                        `;
-                    }
-
-                    setTimeout(function () {
-                        if ($element.data('fancybox') === 'image-list' && {{ request.user.id }} !== userId) {
-                            $.ajax({
-                                type: 'get',
-                                url: '/api/v2/common/contenttypes/?app_label=astrobin&model=image',
-                                dataType: 'json',
-                                success: (contentTypeResponse) => {
-                                    const contentType = contentTypeResponse[0];
-
-                                    $.ajax({
-                                        type: 'get',
-                                        url: `/api/v2/common/toggleproperties?content_type=${contentType.id}&property_type=like&user_id={{ request.user.pk }}&object_id=${imageId}`,
-                                        dataType: 'json',
-                                        success: (togglepropertyResponse) => {
-                                            const liked = togglepropertyResponse.count > 0;
-
-                                            const likeButtonLabel = liked ? '{{ i18nUnlike | escapejs }}' : '{{ i18nLike | escapejs }}';
-
-                                            const $likeButton = $(`
-                                                <a
-                                                    href="#"
-                                                    class="btn btn-${liked ? 'secondary' : 'primary'} toggleproperty-button {% button_loading_class %}"
-                                                    data-content-type="${contentType.id}"
-                                                    data-object-id=${imageId}"
-                                                    data-liked="${liked}"
-                                                >
-                                                    ${likeButtonLabel}
-                                                    {% button_loading_indicator %}
-                                                </a>
-                                            `);
-
-                                            $likeButton.click(function (e) {
-                                                e.preventDefault();
-
-                                                const self = this;
-
-                                                $(self).addClass('running');
-                                                if ($(self).data("liked")) {
-                                                    $.ajax({
-                                                        type: 'delete',
-                                                        url: `/api/v2/common/toggleproperties/${togglepropertyResponse.results[0].pk}`,
-                                                        timeout: 5000,
-                                                        success: function (response) {
-                                                            $(self)
-                                                                .removeClass('running btn-secondary')
-                                                                .addClass('btn-primary')
-                                                                .data("liked", false)
-                                                                .html('{{ i18nLike | escapejs }} {% button_loading_indicator %}');
-                                                        },
-                                                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                                            $('#cant-unlike').modal('show');
-                                                            $(self).removeClass('running');
-                                                        }
-                                                    });
-                                                } else {
-                                                    $.ajax({
-                                                        type: 'post',
-                                                        url: '/api/v2/common/toggleproperties/',
-                                                        data: {
-                                                            property_type: 'like',
-                                                            content_type: contentType.id,
-                                                            object_id: imageId,
-                                                            user: {{ request.user.id }}
-                                                        },
-                                                        timeout: 5000,
-                                                        success: function (response) {
-                                                            togglepropertyResponse = {
-                                                                results: [
-                                                                    response
-                                                                ]
-                                                            };
-
-                                                            $(self)
-                                                                .removeClass('running btn-primary')
-                                                                .addClass('btn-secondary')
-                                                                .data("liked", true)
-                                                                .html('{{ i18nUnlike | escapejs }} {% button_loading_indicator %}');
-                                                        },
-                                                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                                            if (XMLHttpRequest.status === 401) {
-                                                                window.location.href = `/accounts/login/?next=/${imageIdOrHash}`;
-                                                                return;
-                                                            } else {
-                                                                $('#cant-like').modal('show');
-                                                            }
-
-                                                            $(self).removeClass('running');
-                                                        }
-                                                    });
-                                                }
-                                            })
-
-                                            $('.fancybox__caption__buttons').find('.toggleproperty-button').remove();
-                                            $('.fancybox__caption__buttons').append($likeButton);
-                                        }
-                                    })
-                                }
-                            })
-                        }
-                    }, 250);
-                {% endif %} {# authenticated #}
-
-                return `
-                    <div class="fancybox__caption__text">${$element.data("caption")}</div>
-                    <div class="fancybox__caption__buttons">
-                        <a href="${$element.data('url')}" class="btn btn-primary view-page-button">
-                            {% trans 'View page' %}
-                        </a>
-                        <a href="${$element.data('url-hd')}" class="btn btn-secondary view-large-button">
-                            {% trans 'View large' %}
-                        </a>
-                        ${likeButton}
-                    </div>
-                    <div class="fancybox__caption__help">
-                        {{ i18nFancyboxHelp | escapejs }}
-                    </div>
-                `;
             },
             Thumbs: {
                 Carousel: {
@@ -273,6 +293,21 @@
                     center: true,
                 },
             },
+            Toolbar: {
+                display: [
+                    {id: "viewImagePage", position: "left"},
+                    {id: "viewImagePageInNewTab", position: "left"},
+                    {id: "like", position: "left"},
+                    {id: "prev", position: "center"},
+                    {id: "counter", position: "center"},
+                    {id: "next", position: "center"},
+                    "zoom",
+                    "slideshow",
+                    "fullscreen",
+                    "thumbs",
+                    "close",
+                ],
+            }
         });
 
         $('.astrobin-thumbnail .astrobin-image-container figcaption').each(function () {
@@ -289,9 +324,7 @@
             const os = browserParser.getOS();
 
             if (os.name === 'iOS') {
-                $(this)
-                    .css('display', 'none')
-                    .find('.image-slideshow-button').remove();
+                $(this).css('display', 'none');
             }
         });
 
