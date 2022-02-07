@@ -165,6 +165,7 @@
                     .addClass(waitIcon)
                     .removeClass(likeIcon);
                 $button
+                    .off('click')
                     .attr('disabled', 'disabled');
 
                 $.ajax({
