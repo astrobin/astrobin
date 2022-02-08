@@ -287,7 +287,7 @@ def astrobin_image(context, image, alias, **kwargs):
             'id': image.get_id(),
             'alias': 'hd',
             'r': revision_label,
-        }) + '?sync',
+        }) + '?sync' + ('&animated' if field.name.lower().endswith('.gif') else ''),
         'rel': rel,
         'slug': slug,
     }.items()))
