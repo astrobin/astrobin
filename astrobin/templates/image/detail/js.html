@@ -77,11 +77,38 @@ $(document).ready(function() {
     }
 
     function setupSmallerThanRegularAttribute() {
-        var containerWidth = $(".astrobin-image-container").width();
-        var imageWidth = {{ w }};
+        const $img = $(".main-image img");
+        const $advancedPlatesolvingObject = $("#advanced-plate-solution-svg");
 
-        if (imageWidth < containerWidth) {
-            $(".main-image img").attr("data-smaller-than-regular", "true");
+        function _do() {
+            const containerWidth = $(".astrobin-image-container").width();
+            const imageWidth = {{ w }};
+
+            if (imageWidth < containerWidth) {
+                $img.attr("data-smaller-than-regular", "true");
+            }
+
+            if ($advancedPlatesolvingObject) {
+                $advancedPlatesolvingObject.attr('width', imageWidth);
+            }
+        }
+
+        if (
+            $img.attr('data-loaded') === 'true' &&
+            (
+                $img.attr('data-regular-large-load-bypassed') === 'true' ||
+                $img.attr('data-regular-large-loaded') === 'true'
+            ) &&
+            (
+                $img.attr('data-hires-load-bypassed') === 'true' ||
+                $img.attr('data-hires-loaded') === 'true'
+            )
+        ) {
+            _do();
+        } else {
+            setTimeout(() => {
+                setupSmallerThanRegularAttribute();
+            }, 100);
         }
     }
 
