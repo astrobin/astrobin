@@ -86,10 +86,10 @@ $(document).ready(function() {
 
             if (imageWidth < containerWidth) {
                 $img.attr("data-smaller-than-regular", "true");
-            }
 
-            if ($advancedPlatesolvingObject) {
-                $advancedPlatesolvingObject.attr('width', imageWidth);
+                if ($advancedPlatesolvingObject) {
+                    $advancedPlatesolvingObject.attr('width', imageWidth);
+                }
             }
         }
 
