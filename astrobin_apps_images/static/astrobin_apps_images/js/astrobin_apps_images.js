@@ -47,7 +47,7 @@ $(document).ready(function () {
     }
 
     function loadRegularLarge($img) {
-        var tries = {},
+        const tries = {},
             devicePixelRatio = window.devicePixelRatio,
             randomTimeout = Math.floor(Math.random() * 100) + 100, // 100-200 ms
             id = $img.data('id'),
@@ -62,6 +62,7 @@ $(document).ready(function () {
         }
 
         if ($img.width() <= 620 || $img.width() >= 744 || devicePixelRatio > 1) {
+            $img.attr('data-regular-large-load-bypassed', 'true');
             return;
         }
 
@@ -108,6 +109,7 @@ $(document).ready(function () {
         }
 
         if ($img.width() < 744 && devicePixelRatio <= 1) {
+            $img.attr('data-hires-load-bypassed', 'true');
             return;
         }
 
