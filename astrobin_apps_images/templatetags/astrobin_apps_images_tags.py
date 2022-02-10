@@ -285,7 +285,7 @@ def astrobin_image(context, image, alias, **kwargs):
         'instant': instant,
         'fancybox': fancybox,
         'fancybox_tooltip': fancybox_tooltip,
-        'fancybox_url': reverse('image_rawthumb', kwargs={
+        'fancybox_url': settings.BASE_URL + reverse('image_rawthumb', kwargs={
             'id': image.get_id(),
             'alias': 'qhd',
             'r': revision_label,
