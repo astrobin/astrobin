@@ -1,3 +1,7 @@
 .icon-arrow-up {
   transform: rotate(25deg);
 }
+
+.icon-spinner {
+  animation: spin 2s linear infinite;
+}

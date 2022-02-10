@@ -11,7 +11,10 @@ $(document).ready(function() {
             $('#show-gallery-mouse-hovers').show();
 
             $('#show-gallery-mouse-hovers input').change(function () {
-                $('.astrobin-thumbnail figcaption').css('opacity', $(this).prop('checked') ? 1 : '');
+                $('.astrobin-thumbnail figcaption')
+                    .css('opacity', $(this).prop('checked') ? 1 : '')
+                    .css('visibility', $(this).prop('checked') ? 'visible' : 'hidden')
+                    .css('display', $(this).prop('checked') ? 'block' : 'none');
             });
         }
     {% endifequal %}

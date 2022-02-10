@@ -109,6 +109,11 @@
                     </ul>
                 </li>
 
+                <li class="pull-right">
+                    <a href="javascript:;" data-fancybox-trigger="image-list">
+                        <i class="icon-play"></i>
+                    </a>
+                </li>
             </ul> <!-- nav -->
         </div> <!-- subnav -->
     {% endif %}
@@ -125,6 +130,11 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block modals %}
+    {% include 'cant_like_generic.html' %}
+    {% include 'cant_unlike_generic.html' %}
 {% endblock %}
 
 {% block extra_js %}

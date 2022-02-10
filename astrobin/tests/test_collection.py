@@ -5,8 +5,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 
-from astrobin.models import Collection
-from astrobin.models import Image
+from astrobin.models import Collection, Image
 from astrobin_apps_images.models import KeyValueTag
 
 
@@ -102,7 +101,11 @@ class CollectionTest(TestCase):
             reverse('user_collections_list', args=(self.user.username,))
         )
         self.assertIsNotNone(
-            re.search(r'data-id="%d"\s+data-alias="%s"' % (image2.pk, "collection"), response.content.decode('utf-8')))
+            re.search(
+                r'data-id="%d"\s+data-id-or-hash="%s"\s+data-alias="%s"' % (image2.pk, image2.get_id(), "collection"),
+                response.content.decode('utf-8')
+            )
+        )
 
         response = self.client.post(
             reverse('user_collections_update', args=(self.user.username, collection.pk)),
@@ -119,7 +122,11 @@ class CollectionTest(TestCase):
             reverse('user_collections_list', args=(self.user.username,))
         )
         self.assertIsNotNone(
-            re.search(r'data-id="%d"\s+data-alias="%s"' % (image1.pk, "collection"), response.content.decode('utf-8')))
+            re.search(
+                r'data-id="%d"\s+data-id-or-hash="%s"\s+data-alias="%s"' % (image1.pk, image1.get_id(), "collection"),
+                response.content.decode('utf-8')
+            )
+        )
 
     def test_collection_delete_view(self):
         self.client.login(username='test', password='password')

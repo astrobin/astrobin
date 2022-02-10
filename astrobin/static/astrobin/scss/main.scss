@@ -9,6 +9,7 @@
 @import "buttons";
 @import "ckeditor";
 @import "definition-lists";
+@import "fancybox";
 @import "forms";
 @import "meter";
 @import "modal";
@@ -795,32 +796,49 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   figure {
     margin: 0;
     position: relative;
-    overflow: hidden;
 
     img {
-      -webkit-transition: all .3s ease-in-out;
-      -moz-transition: all .3s ease-in-out;
-      -o-transition: all .3s ease-in-out;
-      transition: all .3s ease-in-out;
+      -webkit-transition: all .2s ease-in-out;
+      -moz-transition: all .2s ease-in-out;
+      -o-transition: all .2s ease-in-out;
+      transition: all .2s ease-in-out;
     }
 
     figcaption {
       z-index: 3;
       position: absolute;
-      left: 0;
-      bottom: 0;
+      left: -17px;
+      bottom: -17px;
       padding: 12px;
-      height: calc(100% - 24px);
-      width: calc(100% - 24px);
+      height: 107.5%;
+      width: 107.5%;
       font-size: .7em;
       color: $white;
-      background-color: rgba(0, 0, 0, .7);
+      background-color: rgba(0, 0, 0, .85);
       opacity: 0;
+      visibility: hidden;
       filter: alpha(opacity=0);
-      -webkit-transition: opacity .5s ease-in-out;
-      -moz-transition: opacity .5s ease-in-out;
-      -o-transition: opacity .5s ease-in-out;
-      transition: opacity .5s ease-in-out;
+      -webkit-transition: opacity .2s ease-in-out;
+      -moz-transition: opacity .2s ease-in-out;
+      -o-transition: opacity .2s ease-in-out;
+      transition: opacity .2s ease-in-out;
+      border-radius: 24px;
+
+
+      > a {
+        display: block;
+        height: 105px;
+        width: 100%;
+        margin-left: -12px;
+        margin-top: -12px;
+        padding: 12px;
+        border-top-left-radius: 24px;
+        border-top-right-radius: 24px;
+
+        @media screen and (max-width: 767px) {
+          height: 100%;
+        }
+      }
 
       h3 {
         // Image title
@@ -879,6 +897,24 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       .table-condensed th, .table-condensed td {
         padding: 0 2px;
       }
+
+      .image-slideshow-button {
+        position: absolute;
+        bottom: .75rem;
+        right: .75rem;
+
+        a {
+          color: white;
+          display: block;
+          text-align: center;
+          width: 2.25rem;
+          height: 2.25rem;
+          font-size: .85rem;
+          line-height: 2.25rem;
+          border-radius: 50%;
+          background: $link-color;
+        }
+      }
     }
 
     &:hover {
@@ -888,10 +924,13 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
         -ms-transform: scale(1.25); /* IE 9 */
         -o-transform: scale(1.25); /* Opera */
         transform: scale(1.25);
+        position: relative;
+        z-index: 2;
       }
 
       figcaption {
-        opacity: 1;
+        opacity: 1 !important;
+        visibility: visible !important;
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#aa000000, endColorstr=#aa000000);
       }
     }
@@ -1619,7 +1658,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   @include text-shadow;
   @include rounded-corners(6px);
   @include box-shadow;
-  z-index: 1049;
+  z-index: 1040;
 }
 
 .message-container {
@@ -2401,6 +2440,17 @@ form.avatar-delete {
           color: $white;
           font-weight: bold;
           width: 100%;
+        }
+      }
+
+      figure:hover {
+        img[data-alias='gallery'] {
+          -webkit-transform: none;
+          -moz-transform: none;
+          -ms-transform: none;
+          -o-transform: none;
+          transform: none;
+          z-index: 1;
         }
       }
 

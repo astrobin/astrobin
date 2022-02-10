@@ -658,7 +658,7 @@ astrobin_common = {
             }, 10);
         });
 
-        $('a:not(.no-page-loader):not(.fancybox)').live('click', function (event) {
+        $('a:not(.no-page-loader):not([data-fancybox])').live('click', function (event) {
             var url = $(this).attr('href');
 
             if (!url) {

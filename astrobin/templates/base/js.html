@@ -2,6 +2,7 @@
 {% load static %}
 {% load cache %}
 {% load astrobin_apps_premium_tags %}
+{% load common_tags %}
 
 <!-- javascript -->
 <script type="text/javascript">
@@ -73,7 +74,7 @@
     });
 
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         astrobin_common.init({
             is_authenticated: {{ request.user.is_authenticated|yesno:"true,false" }},
             open_notifications_in_new_tab: {{ request.user.userprofile.open_notifications_in_new_tab|yesno:"true,false" }}
@@ -82,32 +83,249 @@
         astrobin_common.setup_user_popovers();
 
         $('input:checkbox, input:radio, input:file').uniform(
-            {fileDefaultText: '{% trans "No file selected" %}',
-             fileBtnText: '{% trans "Choose file" %}'
+            {
+                fileDefaultText: '{% trans "No file selected" %}',
+                fileBtnText: '{% trans "Choose file" %}'
             }
         );
 
-        $('.fancybox').fancybox({
-            type: "image",
-            padding: 0,
-            overlayColor: "#0a0a0a",
-            loop: false,
-            beforeLoad: function () {
-                const $element = $(this.element);
+        {% trans "Like" context 'Verb (imperative)' as i18nLike %}
+        {% trans "Unlike" context 'Verb (imperative)' as i18nUnlike %}
+        {% trans "Browse images currently visible on the page." as i18nFancyboxHelp %}
 
-                if ($element.attr("rel") === "revisions") {
-                    this.title = `
-                        <div style="margin-top: .5rem">${$element.data("caption")}</div>
-                        <div style="display: block; margin: 1rem 0;">
-                            <a href="${$element.data('url')}" class="btn btn-primary" style="margin-right: .5rem">
-                                {% trans 'View page' %}
-                            </a>
-                            <a href="${$element.data('url-hd')}" class="btn btn-secondary">
-                                {% trans 'View large' %}
-                            </a>
-                        </div>
-                    `;
+        Fancybox.Plugins.Toolbar.defaults.items.viewImagePage = {
+            type: "button",
+            class: "fancybox__button--viewImagePage",
+            label: "{{ _('View page') | escapejs }}",
+            html: '<i class="icon-link"></i>',
+            click: function (event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                const slide = Fancybox.getInstance().getSlide();
+                const url = slide.url;
+                const link = document.createElement('a');
+
+                link.href = url;
+                document.body.appendChild(link);
+
+                link.click();
+            },
+        };
+
+        Fancybox.Plugins.Toolbar.defaults.items.viewImagePageInNewTab = {
+            type: "button",
+            class: "fancybox__button--viewImagePageInNewTab",
+            label: "{{ _('View page in new tab') | escapejs }}",
+            html: '<i class="icon-external-link"></i>',
+            click: function (event) {
+                event.stopPropagation();
+                event.preventDefault();
+
+                const slide = Fancybox.getInstance().getSlide();
+                const url = slide.url;
+                const link = document.createElement('a');
+
+                link.href = url;
+                link.target = '_blank';
+                document.body.appendChild(link);
+
+                link.click();
+            },
+        };
+
+        Fancybox.Plugins.Toolbar.defaults.items.like = {
+            type: "button",
+            class: "fancybox__button--toggleProperty",
+            label: "{{ i18nLike | escapejs }}",
+            html: '<i class="icon-spinner"></i>'
+        };
+
+        function initFancyBoxToolbarTogglePropertyButton(fancybox) {
+            const slide = fancybox.getSlide();
+            const rel = slide.rel;
+            const imageId = slide.id;
+            const imageIdOrHash = slide.idOrHash;
+            const userId = slide.userId;
+            const requestUserId = {% if request.user.is_authenticated %}{{ request.user.id }}{% else %}0{% endif %};
+
+            const waitIcon = 'icon-spinner';
+            const likeIcon = 'icon-thumbs-up';
+
+            setTimeout(() => {
+                const $button = $(fancybox.plugins.Toolbar.$container).find('.fancybox__button--toggleProperty');
+                const $icon = $button.find('i');
+
+                if (rel !== 'image-list' || requestUserId === userId || requestUserId === 0) {
+                    $button.remove();
+                    return;
                 }
+
+                $icon
+                    .addClass(waitIcon)
+                    .removeClass(likeIcon);
+                $button
+                    .off('click')
+                    .attr('disabled', 'disabled');
+
+                $.ajax({
+                    type: 'get',
+                    url: '/api/v2/common/contenttypes/?app_label=astrobin&model=image',
+                    dataType: 'json',
+                    success: (contentTypeResponse) => {
+                        const contentType = contentTypeResponse[0];
+
+                        $.ajax({
+                            type: 'get',
+                            url: `/api/v2/common/toggleproperties?content_type=${contentType.id}&property_type=like&user_id=${requestUserId}&object_id=${imageId}`,
+                            dataType: 'json',
+                            success: (togglePropertyResponse) => {
+                                const liked = togglePropertyResponse.count > 0;
+
+                                if (liked) {
+                                    $icon
+                                        .removeClass(waitIcon)
+                                        .addClass(likeIcon);
+                                    $button
+                                        .attr('disabled', 'disabled');
+                                    return;
+                                }
+
+                                $button
+                                    .html(`<i class="${likeIcon}"></i>`)
+                                    .removeAttr('disabled')
+                                    .data('content-type', contentType.id)
+                                    .data('object-id', imageId)
+                                    .one('click', function (e) {
+                                        e.preventDefault();
+
+                                        $icon
+                                            .removeClass(likeIcon)
+                                            .addClass(waitIcon);
+                                        $button
+                                            .attr('disabled', 'disabled');
+
+                                        $.ajax({
+                                            type: 'post',
+                                            url: '/api/v2/common/toggleproperties/',
+                                            data: {
+                                                property_type: 'like',
+                                                content_type: contentType.id,
+                                                object_id: imageId,
+                                                user: {{ request.user.id }}
+                                            },
+                                            timeout: 5000,
+                                            success: function (response) {
+                                                togglePropertyResponse = {
+                                                    results: [
+                                                        response
+                                                    ]
+                                                };
+
+                                                $icon
+                                                    .removeClass(waitIcon)
+                                                    .addClass(likeIcon);
+                                                $button
+                                                    .attr('disabled', 'disabled');
+                                            },
+                                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                                if (XMLHttpRequest.status === 401) {
+                                                    window.location.href = `/accounts/login/?next=/${imageIdOrHash}`;
+                                                    return;
+                                                } else {
+                                                    $('#cant-like').modal('show');
+                                                }
+
+                                                $icon
+                                                    .removeClass(waitIcon)
+                                                    .addClass(likeIcon);
+                                                $button
+                                                    .removeAttr('disabled');
+                                            }
+                                        });
+                                    })
+                            }
+                        })
+                    }
+                });
+            }, 250);
+        }
+
+        Fancybox.bind("[data-fancybox]", {
+            infinite: false,
+            autoFocus: false,
+            i10n: {
+                CLOSE: "{{ _("Close") | escapejs }}",
+                NEXT: "{{ _("Next") | escapejs }}",
+                PREV: "{{ _("Previous") | escapejs }}",
+                MODAL: "{{ _("You can close this modal content with the ESC key") | escapejs }}",
+                ERROR: "{{ _("Something went wrong, Please try again later.") | escapejs }}",
+                IMAGE_ERROR: "{{ _("Image not found") | escapejs }}",
+                ELEMENT_NOT_FOUND: "{{ _("HTML Element not found") | escapejs }}",
+                AJAX_NOT_FOUND: "{{ _("Error loading AJAX : Not Found") | escapejs }}",
+                AJAX_FORBIDDEN: "{{ _("Error loading AJAX : Forbidden") | escapejs }}",
+                IFRAME_ERROR: "{{ _("Error loading page") | escapejs }}",
+            },
+            on: {
+                initCarousel: (fancybox) => {
+                    const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
+
+                    fancybox.$container.style.setProperty(
+                        "--bg-image",
+                        `url("${slide.src}")`
+                    );
+
+                    initFancyBoxToolbarTogglePropertyButton(fancybox);
+                },
+                "Carousel.change": (fancybox, carousel, to, from) => {
+                    const slide = carousel.slides[to];
+
+                    fancybox.$container.style.setProperty(
+                        "--bg-image",
+                        `url("${slide.src}")`
+                    );
+
+                    initFancyBoxToolbarTogglePropertyButton(fancybox);
+                },
+            },
+            Thumbs: {
+                Carousel: {
+                    fill: false,
+                    center: true,
+                },
+            },
+            Toolbar: {
+                display: [
+                    {id: "viewImagePage", position: "left"},
+                    {id: "viewImagePageInNewTab", position: "left"},
+                    {id: "like", position: "left"},
+                    {id: "prev", position: "center"},
+                    {id: "counter", position: "center"},
+                    {id: "next", position: "center"},
+                    "zoom",
+                    "slideshow",
+                    "fullscreen",
+                    "thumbs",
+                    "close",
+                ],
+            }
+        });
+
+        $('.astrobin-thumbnail .astrobin-image-container figcaption').each(function () {
+            if (!window.bowser) {
+                return;
+            }
+
+            const browserParser = window.bowser.getParser(window.navigator.userAgent);
+
+            if (!browserParser) {
+                return;
+            }
+
+            const os = browserParser.getOS();
+
+            if (os.name === 'iOS') {
+                $(this).css('display', 'none');
             }
         });
 

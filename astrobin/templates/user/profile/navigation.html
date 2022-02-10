@@ -249,6 +249,14 @@
             </li>
         {% endif %}
 
+        {% ifequal request.GET.view None %}
+            <li class="pull-right">
+                <a href="javascript:;" data-fancybox-trigger="image-list">
+                    <i class="icon-play"></i>
+                </a>
+            </li>
+        {% endifequal %}
+
         <li class="pull-right">
             {% ifequal request.GET.view 'table' %}
                 <a href="{{ request.path }}{% query_string "" "view" %}">
