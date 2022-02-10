@@ -29,6 +29,14 @@
         </li>
 
         <li>
+            <a href="{% url 'image_download' image.get_id revision_label 'qhd' %}"
+               data-loading-text="{% trans "AstroBin is preparing your download. Please wait..." %}">
+                <i class="icon-check-empty"></i>
+                {% trans "Extra-large size" %}
+            </a>
+        </li>
+
+        <li>
             <a href="{% url 'image_download' image.get_id revision_label 'real' %}"
                data-loading-text="{% trans "AstroBin is preparing your download. Please wait..." %}"
             >

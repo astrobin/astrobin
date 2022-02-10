@@ -80,6 +80,44 @@ THUMBNAIL_ALIASES = {
             'quality': 80
         },
 
+        'qhd': {
+            'size': (2560, 0),
+            'crop': 'smart',
+            'watermark': True,
+            'keep_icc_profile': True,
+            'quality': 95,
+        },
+        'qhd_anonymized': {
+            'size': (2560, 0),
+            'crop': 'smart',
+            'watermark': False,
+            'keep_icc_profile': True,
+            'quality': 80,
+        },
+        'qhd_inverted': {
+            'size': (2560, 0),
+            'crop': 'smart',
+            'invert': True,
+            'watermark': True,
+            'quality': 80,
+        },
+        'qhd_sharpened': {
+            'size': (2560, 0),
+            'crop': 'smart',
+            'watermark': True,
+            'detail': True,
+            'keep_icc_profile': True,
+            'quality': 80,
+        },
+        'qhd_sharpened_inverted': {
+            'size': (2569, 0),
+            'crop': 'smart',
+            'watermark': True,
+            'detail': True,
+            'invert': True,
+            'quality': 80
+        },
+
         'regular': {
             'size': (620, 0),
             'crop': 'smart',

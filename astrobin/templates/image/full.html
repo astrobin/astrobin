@@ -175,8 +175,8 @@
         <div
                 class="astrobin-image-container hover-overlay hover-overlay-solution advanced-plate-solution show-ra-dec-coordinates"
                 style="
-                    max-width: {{ instance_to_platesolve | thumbnail_width:'hd' }}px;
-                    max-height: {{ instance_to_platesolve | thumbnail_height:'hd' }}px;
+                    max-width: {{ instance_to_platesolve | thumbnail_width:'qhd' }}px;
+                    max-height: {{ instance_to_platesolve | thumbnail_height:'qhd' }}px;
                 ">
             <a href="#">
                 <object
@@ -185,8 +185,8 @@
                         type="image/svg+xml"
                         data="{% url 'astrobin_apps_platesolving.serve_svg' instance_to_platesolve.solution.pk 'hd' %}"
                         style="
-                                max-width: {{ instance_to_platesolve | thumbnail_width:'hd' }}px;
-                                max-height: {{ instance_to_platesolve | thumbnail_height:'hd' }}px;
+                                max-width: {{ instance_to_platesolve | thumbnail_width:'qhd' }}px;
+                                max-height: {{ instance_to_platesolve | thumbnail_height:'qhd' }}px;
                         ">
                 </object>
                 <div id="x-ruler"></div>
@@ -322,8 +322,8 @@
                 '{{ instance_to_platesolve.solution.advanced_dec_matrix }}'.split(',').map(parseFloat),
                 '{{ instance_to_platesolve.solution.advanced_matrix_rect }}'.split(',').map(parseFloat),
                 parseFloat('{{ instance_to_platesolve.solution.advanced_matrix_delta }}'),
-                {{ instance_to_platesolve | thumbnail_width:'hd' }},
-                {{ instance_to_platesolve | thumbnail_height:'hd' }}
+                {{ instance_to_platesolve | thumbnail_width:'qhd' }},
+                {{ instance_to_platesolve | thumbnail_height:'qhd' }}
             );
         {% endif %}
     }

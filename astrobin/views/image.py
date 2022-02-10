@@ -757,7 +757,7 @@ class ImageFullView(ImageDetailView):
         if real:
             alias = 'real'
         else:
-            alias = 'hd' if not image.sharpen_thumbnails else 'hd_sharpened'
+            alias = 'qhd' if not image.sharpen_thumbnails else 'qhd_sharpened'
 
         if mod in settings.AVAILABLE_IMAGE_MODS:
             alias += "_%s" % mod
@@ -1313,7 +1313,7 @@ class ImageDownloadView(View):
             local_svg.close()
 
             # Download HD thumbnail
-            thumbnail_url = image.thumbnail('hd', revision_label, sync=True)
+            thumbnail_url = image.thumbnail('qhd', revision_label, sync=True)
             response = requests.get(
                 thumbnail_url,
                 allow_redirects=True,

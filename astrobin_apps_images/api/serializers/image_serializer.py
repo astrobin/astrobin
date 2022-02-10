@@ -57,7 +57,7 @@ class ImageSerializer(serializers.ModelSerializer):
                     'id': instance.pk,
                     'revision': 'final',
                     'url': instance.thumbnail(alias, None, sync=True)
-                } for alias in ('story', 'regular', 'hd')
+                } for alias in ('story', 'regular', 'hd', 'qhd')
             ]
         })
         return representation

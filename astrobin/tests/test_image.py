@@ -1102,10 +1102,10 @@ class ImageTest(TestCase):
         image = self._get_last_image()
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context[0]['alias'], 'hd')
+        self.assertEqual(response.context[0]['alias'], 'qhd')
         self.assertIsNotNone(
             re.search(
-                r'data-id="%d"\s+data-id-or-hash="%s"\s+data-alias="%s"' % (image.pk, image.get_id(), "hd"),
+                r'data-id="%d"\s+data-id-or-hash="%s"\s+data-alias="%s"' % (image.pk, image.get_id(), "qhd"),
                 response.content.decode('utf-8')
             )
         )
@@ -1126,14 +1126,14 @@ class ImageTest(TestCase):
         self.assertIsNotNone(
             re.search(
                 r'data-id="%d"\s+data-id-or-hash="%s"\s+data-alias="%s"\s+data-revision="%s"' % (
-                image.pk, image.get_id(), "hd", "B"),
+                image.pk, image.get_id(), "qhd", "B"),
                 response.content.decode('utf-8')
             )
         )
         response = self.client.get(reverse('image_full', kwargs={'id': image.get_id(), 'r': '0'}))
         self.assertIsNotNone(
             re.search(
-                r'data-id="%d"\s+data-id-or-hash="%s"\s+data-alias="%s"' % (image.pk, image.get_id(), "hd"),
+                r'data-id="%d"\s+data-id-or-hash="%s"\s+data-alias="%s"' % (image.pk, image.get_id(), "qhd"),
                 response.content.decode('utf-8')
             )
         )
@@ -1146,9 +1146,9 @@ class ImageTest(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context[0]['mod'], 'inverted')
-        self.assertEqual(response.context[0]['alias'], 'hd_inverted')
+        self.assertEqual(response.context[0]['alias'], 'qhd_inverted')
         self.assertIsNotNone(
-            re.search(r'data-id="%d"\s+data-id-or-hash="%s"\s+data-alias="%s"' % (image.pk, image.get_id(), "hd_inverted"), response.content.decode(
+            re.search(r'data-id="%d"\s+data-id-or-hash="%s"\s+data-alias="%s"' % (image.pk, image.get_id(), "qhd_inverted"), response.content.decode(
                 'utf-8')))
 
     def test_image_real_view_owner(self):
