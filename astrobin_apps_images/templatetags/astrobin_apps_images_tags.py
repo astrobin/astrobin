@@ -137,7 +137,8 @@ def astrobin_image(context, image, alias, **kwargs):
     if alias in (
             'regular', 'regular_inverted', 'regular_sharpened',
             'regular_large', 'regular_large_inverted', 'regular_large_sharpened',
-            'hd', 'hd_inverted', 'hd_sharpened',
+            'hd', 'hd_anonymized', 'hd_inverted', 'hd_sharpened',
+            'qhd', 'qhd_anonymized', 'qhd_inverted', 'qhd_sharpened',
             'real', 'real_inverted'
     ):
         size = (size[0], int(size[0] / (w / float(h))))
@@ -162,6 +163,7 @@ def astrobin_image(context, image, alias, **kwargs):
                    'regular', 'regular_sharpened',
                    'regular_large', 'regular_large_sharpened',
                    'hd', 'hd_sharpened',
+                   'qhd', 'qhd_sharpened',
                    'real')
 
     url = get_image_url(image, url_revision, url_size)
@@ -285,7 +287,7 @@ def astrobin_image(context, image, alias, **kwargs):
         'fancybox_tooltip': fancybox_tooltip,
         'fancybox_url': reverse('image_rawthumb', kwargs={
             'id': image.get_id(),
-            'alias': 'hd',
+            'alias': 'qhd',
             'r': revision_label,
         }) + '?sync' + ('&animated' if field.name.lower().endswith('.gif') else ''),
         'rel': rel,

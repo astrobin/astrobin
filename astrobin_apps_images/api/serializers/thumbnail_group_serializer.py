@@ -14,6 +14,7 @@ class ThumbnailGroupSerializer(serializers.HyperlinkedModelSerializer):
             'revision',
             'real',
             'hd',
+            'qhd',
             'regular',
             'gallery',
             'thumb',

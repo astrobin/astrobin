@@ -18,6 +18,12 @@ class ThumbnailGroup(models.Model):
     real = models.CharField(max_length=512, null=True, blank=True)
     real_anonymized = models.CharField(max_length=512, null=True, blank=True)
     real_inverted = models.CharField(max_length=512, null=True, blank=True)
+
+    qhd = models.CharField(max_length=512, null=True, blank=True)
+    qhd_anonymized = models.CharField(max_length=512, null=True, blank=True)
+    qhd_inverted = models.CharField(max_length=512, null=True, blank=True)
+    qhd_sharpened = models.CharField(max_length=512, null=True, blank=True)
+    qhd_sharpened_inverted = models.CharField(max_length=512, null=True, blank=True)
     
     hd = models.CharField(max_length=512, null=True, blank=True)
     hd_anonymized = models.CharField(max_length=512, null=True, blank=True)
