@@ -322,8 +322,8 @@
                 '{{ instance_to_platesolve.solution.advanced_dec_matrix }}'.split(',').map(parseFloat),
                 '{{ instance_to_platesolve.solution.advanced_matrix_rect }}'.split(',').map(parseFloat),
                 parseFloat('{{ instance_to_platesolve.solution.advanced_matrix_delta }}'),
-                {{ instance_to_platesolve | thumbnail_width:'qhd' }},
-                {{ instance_to_platesolve | thumbnail_height:'qhd' }}
+                {{ instance_to_platesolve | thumbnail_width:'hd' }},
+                {{ instance_to_platesolve | thumbnail_height:'hd' }}
             );
         {% endif %}
     }
