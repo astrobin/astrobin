@@ -30,7 +30,7 @@ a[data-fancybox] img {
   z-index: 1049;
 
   .fancybox__content {
-    .hover-overlay-solution {
+    .fancybox__overlaySolution {
       position: absolute;
       width: 100%;
       pointer-events: none;
@@ -38,7 +38,7 @@ a[data-fancybox] img {
       transition: opacity .25s ease-out;
     }
 
-    &:hover .hover-overlay-solution {
+    &:hover .fancybox__overlaySolution {
       opacity: 1;
     }
   }

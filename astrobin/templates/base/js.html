@@ -259,7 +259,7 @@
                         return;
                     }
 
-                    const $solution = $(fancybox.$carousel).find('.fancybox__slide.is-selected .hover-overlay-solution');
+                    const $solution = $(fancybox.$carousel).find('.fancybox__slide.is-selected .fancybox__overlaySolution');
 
                     mutations.forEach(function () {
                         $solution.attr('style', $img.attr('style'));
@@ -273,7 +273,7 @@
 
                 window.astroBinFancyBoxMutationObserver = new MutationObserver(function (mutations) {
                     window.astroBinFancyBoxLastMutation = new Date().getTime();
-                    const $solution = $(fancybox.$carousel).find('.fancybox__slide.is-selected .hover-overlay-solution');
+                    const $solution = $(fancybox.$carousel).find('.fancybox__slide.is-selected .fancybox__overlaySolution');
                     $solution.css('display', 'none');
                     setTimeout(() => applyMutations(mutations), delay + 1);
                 });
@@ -284,7 +284,7 @@
                 });
             }
 
-            if ($(fancybox.$carousel).find('.hover-overlay-solution').length > 0) {
+            if ($(fancybox.$carousel).find('.fancybox__overlaySolution').length > 0) {
                 observeImageMutations($(fancybox.$carousel).find('.fancybox__slide.is-selected .fancybox__image'));
                 return;
             }
@@ -314,7 +314,7 @@
                             if (solution.pixinsight_svg_annotation_hd) {
                                 $element = $(
                                     `
-                                        <div class="hover-overlay-solution">
+                                        <div class="fancybox__overlaySolution">
                                             <object
                                                 id="advanced-plate-solution-svg"
                                                 onload="AstroBinPlatesolving.advancedSvgLoaded()"
@@ -327,7 +327,7 @@
                             } else if (solution.image_file) {
                                 $element = $(
                                     `
-                                        <div class="hover-overlay-solution">
+                                        <div class="fancybox__overlaySolution">
                                             <img src="${solution.image_file}" />
                                         </div>
                                     `
