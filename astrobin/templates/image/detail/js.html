@@ -61,7 +61,23 @@ $(document).ready(function() {
 
         {% if instance_to_platesolve.solution|is_advanced_success_status %}
             $(document).ready(function () {
+                let $image = $('.show-ra-dec-coordinates').first();
+                let pickFirst = true;
+
+                if ($image.outerWidth() === 0) {
+                    $image = $('.show-ra-dec-coordinates').last();
+                    pickFirst = false;
+                }
+
+                const $tooltip = pickFirst ? $('#ra-dec-coordinates').first() : $('#ra-dec-coordinates').last();
+                const $xRuler = pickFirst ? $('#x-ruler').first() : $('#x-ruler').last();
+                const $yRuler = pickFirst ? $('#y-ruler').first() : $('#y-ruler').last();
+
                 new AstroBinPlatesolvingMouseMove(
+                    $image,
+                    $tooltip,
+                    $xRuler,
+                    $yRuler,
                     '{{ instance_to_platesolve.solution.advanced_ra_matrix }}'.split(',').map(parseFloat),
                     '{{ instance_to_platesolve.solution.advanced_dec_matrix }}'.split(',').map(parseFloat),
                     '{{ instance_to_platesolve.solution.advanced_matrix_rect }}'.split(',').map(parseFloat),

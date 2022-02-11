@@ -1,29 +1,27 @@
 (function (win) {
-    function PlatesolvingMouseMove(raMatrix, decMatrix, matrixRect, matrixDelta, solvedSizeX, solvedSizeY, scale) {
+    function PlatesolvingMouseMove(
+        $image,
+        $tooltip,
+        $xRuler,
+        $yRuler,
+        raMatrix,
+        decMatrix,
+        matrixRect,
+        matrixDelta,
+        solvedSizeX,
+        solvedSizeY,
+        scale
+    ) {
         var self = this;
-
-        // On detail view, there probably are two versions of the image (one for full width view, one for the narrower
-        // view, and only one is shown at a time.
-        var pickFirst = true;
-
-        self.$image = $('.show-ra-dec-coordinates').first();
-        if (self.$image.outerWidth() === 0) {
-            self.$image = $('.show-ra-dec-coordinates').last();
-            pickFirst = false;
-
-        }
-        self.$tooltip = pickFirst ? $('#ra-dec-coordinates').first() : $('#ra-dec-coordinates').last();
-        self.$xRuler = pickFirst ? $('#x-ruler').first() : $('#x-ruler').last();
-        self.$yRuler = pickFirst ? $('#y-ruler').first() : $('#y-ruler').last();
 
         self.enableCall = true;
 
-        self.$tooltip.mousemove(function (e) {
-            self.$tooltip.show();
+        $tooltip.mousemove(function (e) {
+            $tooltip.show();
         });
 
-        self.$image.mousemove(function (e) {
-            if (!self.$tooltip.hasClass('hover-overlay-disabled')) {
+        $image.mousemove(function (e) {
+            if (!$tooltip.hasClass('hover-overlay-disabled')) {
 
                 if (!self.enableCall) return;
 
@@ -31,8 +29,8 @@
 
                 var x = e.offsetX;
                 var y = e.offsetY;
-                var scaledX = x * solvedSizeX / self.$image.outerWidth();
-                var scaledY = y * solvedSizeY / self.$image.outerHeight();
+                var scaledX = x * solvedSizeX / $image.outerWidth();
+                var scaledY = y * solvedSizeY / $image.outerHeight();
 
                 var interpolation = new CoordinateInterpolation(
                     raMatrix,
@@ -47,43 +45,43 @@
                 var interpolationText = interpolation.interpolateAsText(
                     scaledX, scaledY, false, true, true);
 
-                self.$tooltip.show();
+                $tooltip.show();
 
-                if (self.$tooltip.hasClass('full')) {
-                    self.$tooltip.css({
-                        right: 'calc(50% - ' + self.$tooltip.outerWidth() / 2 + 'px)'
+                if ($tooltip.hasClass('full')) {
+                    $tooltip.css({
+                        right: 'calc(50% - ' + $tooltip.outerWidth() / 2 + 'px)'
                     });
                 }
 
-                self.$xRuler.css({top: y}).show();
-                self.$yRuler.css({left: x}).show();
+                $xRuler.css({top: y}).show();
+                $yRuler.css({left: x}).show();
 
-                if (self.$tooltip.find('.image-coordinates') && x !== undefined) {
-                    self.$tooltip.find('.x').text('x: ' + x);
-                    self.$tooltip.find('.y').text('y: ' + y);
-                    self.$tooltip.find('.image-coordinates').show();
-                    self.$tooltip.find('.image-coordinates abbr').css('display', 'inline-block');
+                if ($tooltip.find('.image-coordinates') && x !== undefined) {
+                    $tooltip.find('.x').text('x: ' + x);
+                    $tooltip.find('.y').text('y: ' + y);
+                    $tooltip.find('.image-coordinates').show();
+                    $tooltip.find('.image-coordinates abbr').css('display', 'inline-block');
                 }
 
-                if (self.$tooltip.find('.equatorial-coordinates') && interpolationText.alpha !== undefined) {
-                    self.$tooltip.find('.alpha').text('α: ' + interpolationText.alpha);
-                    self.$tooltip.find('.delta').text('δ: ' + interpolationText.delta);
-                    self.$tooltip.find('.equatorial-coordinates').show();
-                    self.$tooltip.find('.equatorial-coordinates abbr').css('display', 'inline-block');
+                if ($tooltip.find('.equatorial-coordinates') && interpolationText.alpha !== undefined) {
+                    $tooltip.find('.alpha').text('α: ' + interpolationText.alpha);
+                    $tooltip.find('.delta').text('δ: ' + interpolationText.delta);
+                    $tooltip.find('.equatorial-coordinates').show();
+                    $tooltip.find('.equatorial-coordinates abbr').css('display', 'inline-block');
                 }
 
-                if (self.$tooltip.find('.galactic-coordinates') && interpolationText.l !== undefined) {
-                    self.$tooltip.find('.l').text('l: ' + interpolationText.l);
-                    self.$tooltip.find('.b').text('b: ' + interpolationText.b);
-                    self.$tooltip.find('.galactic-coordinates').show();
-                    self.$tooltip.find('.galactic-coordinates abbr').css('display', 'inline-block');
+                if ($tooltip.find('.galactic-coordinates') && interpolationText.l !== undefined) {
+                    $tooltip.find('.l').text('l: ' + interpolationText.l);
+                    $tooltip.find('.b').text('b: ' + interpolationText.b);
+                    $tooltip.find('.galactic-coordinates').show();
+                    $tooltip.find('.galactic-coordinates abbr').css('display', 'inline-block');
                 }
 
-                if (self.$tooltip.find('.ecliptic-coordinates') && interpolationText.lambda !== undefined) {
-                    self.$tooltip.find('.lambda').text('λ: ' + interpolationText.lambda);
-                    self.$tooltip.find('.beta').text('β: ' + interpolationText.beta);
-                    self.$tooltip.find('.ecliptic-coordinates').show();
-                    self.$tooltip.find('.ecliptic-coordinates abbr').css('display', 'inline-block');
+                if ($tooltip.find('.ecliptic-coordinates') && interpolationText.lambda !== undefined) {
+                    $tooltip.find('.lambda').text('λ: ' + interpolationText.lambda);
+                    $tooltip.find('.beta').text('β: ' + interpolationText.beta);
+                    $tooltip.find('.ecliptic-coordinates').show();
+                    $tooltip.find('.ecliptic-coordinates abbr').css('display', 'inline-block');
                 }
             }
 
@@ -91,9 +89,9 @@
                 self.enableCall = true;
             }, 10);
         }).mouseleave(function () {
-            self.$tooltip.hide();
-            self.$xRuler.hide();
-            self.$yRuler.hide();
+            $tooltip.hide();
+            $xRuler.hide();
+            $yRuler.hide();
         });
     }
 
