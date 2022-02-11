@@ -369,7 +369,9 @@
                     );
 
                     initFancyBoxToolbarTogglePropertyButton(fancybox, slide);
-                    initFancyBoxPlateSolution(fancybox, slide);
+                    setTimeout(() => {
+                        initFancyBoxPlateSolution(fancybox, slide);
+                    }, 100);
                 },
                 "Carousel.change": (fancybox, carousel, to, from) => {
                     const slide = carousel.slides[to];
@@ -380,7 +382,9 @@
                     );
 
                     initFancyBoxToolbarTogglePropertyButton(fancybox, slide);
-                    initFancyBoxPlateSolution(fancybox, slide);
+                    setTimeout(() => {
+                        initFancyBoxPlateSolution(fancybox, slide);
+                    }, 100);
                 }
             },
             Thumbs: {
