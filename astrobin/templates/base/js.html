@@ -141,8 +141,7 @@
             html: '<i class="icon-spinner"></i>'
         };
 
-        function initFancyBoxToolbarTogglePropertyButton(fancybox) {
-            const slide = fancybox.getSlide();
+        function initFancyBoxToolbarTogglePropertyButton(fancybox, slide) {
             const rel = slide.rel;
             const imageId = slide.id;
             const imageIdOrHash = slide.idOrHash;
@@ -251,6 +250,100 @@
             }, 250);
         }
 
+        function initFancyBoxPlateSolution(fancybox, slide) {
+            function observeImageMutations($img) {
+                const delay = 100;
+
+                function applyMutations(mutations) {
+                    if (window.astroBinFancyBoxLastMutation && new Date().getTime() - window.astroBinFancyBoxLastMutation < delay) {
+                        return;
+                    }
+
+                    const $solution = $(fancybox.$carousel).find('.fancybox__slide.is-selected .fancybox__overlaySolution');
+
+                    mutations.forEach(function () {
+                        $solution.attr('style', $img.attr('style'));
+                        $solution.css('display', 'block');
+                    });
+                }
+
+                if (!!window.astroBinFancyBoxMutationObserver) {
+                    window.astroBinFancyBoxMutationObserver.disconnect();
+                }
+
+                window.astroBinFancyBoxMutationObserver = new MutationObserver(function (mutations) {
+                    window.astroBinFancyBoxLastMutation = new Date().getTime();
+                    const $solution = $(fancybox.$carousel).find('.fancybox__slide.is-selected .fancybox__overlaySolution');
+                    $solution.css('display', 'none');
+                    setTimeout(() => applyMutations(mutations), delay + 1);
+                });
+
+                window.astroBinFancyBoxMutationObserver.observe($img[0], {
+                    attributes: true,
+                    attributeFilter: ['style']
+                });
+            }
+
+            if ($(slide.$image).siblings('.fancybox__overlaySolution').length > 0) {
+                observeImageMutations($(fancybox.$carousel).find('.fancybox__slide.is-selected .fancybox__image'));
+                return;
+            }
+
+            $.ajax({
+                type: 'get',
+                url: '/api/v2/common/contenttypes/?app_label=astrobin&model=image',
+                dataType: 'json',
+                success: (contentTypeResponse) => {
+                    const contentType = contentTypeResponse[0];
+                    const imageId = slide.id;
+
+                    $.ajax({
+                        type: 'get',
+                        url: `/api/v2/platesolving/solutions/?content_type=${contentType.id}&object_id=${imageId}`,
+                        dataType: 'json',
+                        success: (response) => {
+                            if (response.length === 0) {
+                                return;
+                            }
+
+                            const solution = response[0];
+
+                            const $image = $(slide.$image);
+                            let $element = null;
+
+                            if (solution.pixinsight_svg_annotation_hd) {
+                                $element = $(
+                                    `
+                                        <div class="fancybox__overlaySolution">
+                                            <object
+                                                id="advanced-plate-solution-svg"
+                                                onload="AstroBinPlatesolving.advancedSvgLoaded()"
+                                                type="image/svg+xml"
+                                                data="/platesolving/solution/${solution.id}/svg/hd/">
+                                            </object>
+                                        </div>
+                                    `
+                                )
+                            } else if (solution.image_file) {
+                                $element = $(
+                                    `
+                                        <div class="fancybox__overlaySolution">
+                                            <img src="${solution.image_file}" />
+                                        </div>
+                                    `
+                                )
+                            }
+
+                            if ($element !== null) {
+                                observeImageMutations($image);
+                                $image.after($element);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
         Fancybox.bind("[data-fancybox]", {
             infinite: false,
             autoFocus: false,
@@ -275,7 +368,10 @@
                         `url("${slide.src}")`
                     );
 
-                    initFancyBoxToolbarTogglePropertyButton(fancybox);
+                    initFancyBoxToolbarTogglePropertyButton(fancybox, slide);
+                    setTimeout(() => {
+                        initFancyBoxPlateSolution(fancybox, slide);
+                    }, 100);
                 },
                 "Carousel.change": (fancybox, carousel, to, from) => {
                     const slide = carousel.slides[to];
@@ -285,8 +381,11 @@
                         `url("${slide.src}")`
                     );
 
-                    initFancyBoxToolbarTogglePropertyButton(fancybox);
-                },
+                    initFancyBoxToolbarTogglePropertyButton(fancybox, slide);
+                    setTimeout(() => {
+                        initFancyBoxPlateSolution(fancybox, slide);
+                    }, 100);
+                }
             },
             Thumbs: {
                 Carousel: {

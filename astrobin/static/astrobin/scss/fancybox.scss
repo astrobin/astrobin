@@ -28,6 +28,24 @@ a[data-fancybox] img {
   --carousel-button-svg-stroke-width: 2.5;
 
   z-index: 1049;
+
+  .fancybox__content {
+    .fancybox__overlaySolution {
+      position: absolute;
+      width: 100%;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .25s ease-out;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &:hover .fancybox__overlaySolution {
+      opacity: 1;
+    }
+  }
 }
 
 .fancybox__toolbar {

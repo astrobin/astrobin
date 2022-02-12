@@ -317,7 +317,16 @@
                 {% endif %}
             });
 
+            const $image = $('.show-ra-dec-coordinates');
+            const $tooltip = $('#ra-dec-coordinates');
+            const $xRuler = $('#x-ruler');
+            const $yRuler = $('#y-ruler');
+
             new AstroBinPlatesolvingMouseMove(
+                $image,
+                $tooltip,
+                $xRuler,
+                $yRuler,
                 '{{ instance_to_platesolve.solution.advanced_ra_matrix }}'.split(',').map(parseFloat),
                 '{{ instance_to_platesolve.solution.advanced_dec_matrix }}'.split(',').map(parseFloat),
                 '{{ instance_to_platesolve.solution.advanced_matrix_rect }}'.split(',').map(parseFloat),
