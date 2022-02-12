@@ -36,6 +36,10 @@ a[data-fancybox] img {
       pointer-events: none;
       opacity: 0;
       transition: opacity .25s ease-out;
+
+      img {
+        width: 100%;
+      }
     }
 
     &:hover .fancybox__overlaySolution {
