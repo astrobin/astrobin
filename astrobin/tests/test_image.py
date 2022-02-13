@@ -3407,6 +3407,12 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "Test description")
 
+    def test_image_description_with_line_breaksin_view(self):
+        image = Generators.image(description="Test\ndescription")
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        print(response.content)
+        self.assertContains(response, "Test<br>description")
+
     def test_image_description_bbcode_in_view(self):
         image = Generators.image(
             description="Test HTML description",
@@ -3415,6 +3421,13 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "Test BBCode description")
         self.assertNotContains(response, "Test HTML description")
+
+    def test_image_description_bbcode_with_linebreaks_in_view(self):
+        image = Generators.image(
+            description_bbcode="Test BBCode description\nOK"
+        )
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "Test BBCode description<br>OK")
 
     def test_navigation_context_after_revision_redirect(self):
         image = Generators.image()
