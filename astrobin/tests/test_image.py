@@ -3407,6 +3407,11 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "Test description")
 
+    def test_image_description_with_link_in_view(self):
+        image = Generators.image(description="Test <a href='/'>description</a>")
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, "Test <a href=\"/\">description</a>")
+
     def test_image_description_with_line_breaks_in_view(self):
         image = Generators.image(description="Test\ndescription")
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
@@ -3425,6 +3430,13 @@ class ImageTest(TestCase):
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertContains(response, "Test BBCode description")
         self.assertNotContains(response, "Test HTML description")
+
+    def test_image_description_bbcode_with_link_in_view(self):
+        image = Generators.image(
+            description_bbcode="Test [url=https://wwww.bbcode.com]BBCode[/url] description"
+        )
+        response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
+        self.assertContains(response, '<p>Test <a href="https://wwww.bbcode.com">BBCode</a> description</p>')
 
     def test_image_description_bbcode_with_line_breaks_in_view(self):
         image = Generators.image(

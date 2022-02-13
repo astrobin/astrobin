@@ -164,9 +164,7 @@
                     {% if r.description %}
                         <p>
                             <strong>{% trans "Description" %}:</strong>
-                            {% with r.description|strip_html|linebreaks as cleaned_description %}
-                                {% highlight_text cleaned_description with search_query %}
-                            {% endwith %}
+                            {% highlight_text r.description with search_query %}
                         </p>
                     {% endif %}
 

@@ -16,9 +16,7 @@
                     {% if image.description_bbcode %}
                         {% highlight_text image.description_bbcode with search_query dialect 'bbcode' %}
                     {% else %}
-                        {% with image.description|strip_html|linebreaks as cleaned_description %}
-                            {% highlight_text cleaned_description with search_query %}
-                        {% endwith %}
+                        {% highlight_text image.description with search_query %}
                     {% endif %}
                 </div>
             </div>
