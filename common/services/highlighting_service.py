@@ -2,7 +2,7 @@ import math
 import regex
 import string
 
-from django.utils.html import linebreaks, strip_tags
+from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from precise_bbcode.templatetags.bbcode_tags import bbcode
 
@@ -82,4 +82,4 @@ class HighlightingService:
                     )
 
         from common.templatetags.common_tags import strip_html
-        return mark_safe(linebreaks(strip_html(result)))
+        return mark_safe(strip_html('<br />'.join(result.splitlines())))

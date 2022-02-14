@@ -1172,7 +1172,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 
   .search-around {
-    margin-top: 1rem;
+    margin: 1rem 0;
 
     @media screen and (max-width: 767px) {
       margin-left: 12px;
