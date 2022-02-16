@@ -100,6 +100,6 @@ def pybb_premoderation(user, post_content, forum):
 PYBB_PREMODERATION = pybb_premoderation
 
 SANITIZER_ALLOWED_TAGS = ['b', 'i', 'strong', 'em', 'a', 'img', 'br', 'span', 'p']
-SANITIZER_ALLOWED_ATTRIBUTES = ['href', 'target', 'src', 'class']
+SANITIZER_ALLOWED_ATTRIBUTES = ['href', 'target', 'src', 'class', 'alt', 'width', 'height']
 
 
