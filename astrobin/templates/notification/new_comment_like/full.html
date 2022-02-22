@@ -1,5 +1,9 @@
 {% load i18n %}
 
-{% blocktrans trimmed with comment=comment|truncatechars:100 %}
-    <a href="{{user_url}}">{{user}}</a> likes your comment: <a href="{{url}}">{{comment}}</a>.
+{% blocktrans trimmed %}
+    <a href="{{ user_url }}">{{ user }}</a> likes your comment on <a href="{{ target_url }}">{{ target }}</a>!
 {% endblocktrans %}
+
+<br/><br/>
+
+<a href="{{ url }}" class="btn btn-primary">{% trans "View comment" %}</a>

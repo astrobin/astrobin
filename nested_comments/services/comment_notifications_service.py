@@ -70,6 +70,10 @@ class CommentNotificationsService:
                         'user_url': settings.BASE_URL + reverse(
                             'user_page', kwargs={'username': instance.author.username}
                         ),
+                        'target': str(instance.content_object),
+                        'target_url': build_notification_url(
+                            settings.BASE_URL + instance.content_object.get_absolute_url(), instance.author
+                        ),
                     }
                 )
 
@@ -93,6 +97,10 @@ class CommentNotificationsService:
                             'user': instance.author.userprofile.get_display_name(),
                             'user_url': settings.BASE_URL + reverse(
                                 'user_page', kwargs={'username': instance.author.username}
+                            ),
+                            'target': str(self.comment.content_object),
+                            'target_url': build_notification_url(
+                                settings.BASE_URL + self.comment.content_object.get_absolute_url(), self.comment.author
                             ),
                         }
                     )

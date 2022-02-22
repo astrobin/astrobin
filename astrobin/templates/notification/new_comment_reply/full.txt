@@ -1,5 +1,9 @@
 {% load i18n %}
 
 {% blocktrans trimmed %}
-    {{user}} replied to your comment. Check it out at the following url: {{url}}
+    {{user}} replied to your comment on "{{ target }}"!
 {% endblocktrans %}
+
+
+{% trans "View comment" %}
+{{ url }}

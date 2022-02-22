@@ -1,3 +1,5 @@
 {% load i18n %}
 
-{% blocktrans %}{{user}} replied to your comment.{% endblocktrans %}
+{% blocktrans trimmed %}
+    {{ user }} replied to your comment on "{{ target }}"!
+{% endblocktrans %}

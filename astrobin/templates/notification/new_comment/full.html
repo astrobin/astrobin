@@ -1,2 +1,9 @@
 {% load i18n %}
-{% blocktrans %}{{user}} commented on your image! Check it out at the following url: <a href="{{url}}">{{url}}</a>{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    {{user}} commented on your image <a href="{{ target_url }}">{{ target }}</a>!
+{% endblocktrans %}
+
+<br /><br />
+
+<a href="{{ url }}" class="btn btn-primary">{% trans "View comment" %}</a>

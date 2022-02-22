@@ -1,2 +1,5 @@
 {% load i18n %}
-{% blocktrans %}{{user}} commented on your image!{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    {{ user }} commented on your image "{{ target }}"!
+{% endblocktrans %}

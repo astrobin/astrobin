@@ -1,7 +1,8 @@
 {% load i18n %}
 
 {% blocktrans trimmed %}
-    {{user}} likes your comment: {{url}}
-
-    {{comment}}
+    {{ user }} likes your comment on "{{ target }}"!
 {% endblocktrans %}
+
+{% trans "View comment" %}:
+{{ url }}

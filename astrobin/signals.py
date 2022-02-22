@@ -329,7 +329,12 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                         'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.author),
                         'user': instance.author.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse_url(
-                            'user_page', kwargs={'username': instance.author}),
+                            'user_page', kwargs={'username': instance.author}
+                        ),
+                        'target': str(instance.content_object),
+                        'target_url': build_notification_url(
+                            settings.BASE_URL + instance.content_object.get_absolute_url(), instance.author
+                        ),
                     }
                 )
 
@@ -395,11 +400,18 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                     [instance.content_object.author], instance.user, 'new_comment_like',
                     {
                         'url': build_notification_url(
-                            settings.BASE_URL + instance.content_object.get_absolute_url(), instance.user),
+                            settings.BASE_URL + instance.content_object.get_absolute_url(), instance.user
+                        ),
                         'user': instance.user.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse_url(
-                            'user_page', kwargs={'username': instance.user.username}),
-                        'comment': instance.content_object.text
+                            'user_page', kwargs={'username': instance.user.username}
+                        ),
+                        'comment': instance.content_object.text,
+                        'target': str(instance.content_object.content_object),
+                        'target_url': build_notification_url(
+                            settings.BASE_URL + instance.content_object.content_object.get_absolute_url(),
+                            instance.user
+                        ),
                     })
 
                 UserProfile.all_objects.filter(user=instance.content_object.author).update(updated=timezone.now())

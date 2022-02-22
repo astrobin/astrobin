@@ -1,5 +1,9 @@
 {% load i18n %}
 
 {% blocktrans trimmed %}
-    <a href="{{user_url}}">{{user}}</a> mentioned you in a comment: <a href="{{url}}">{{url}}</a>.
+    <a href="{{ user_url }}">{{ user }}</a> mentioned you in a comment on <a href="{{ target_url }}">{{ target }}</a>!
 {% endblocktrans %}
+
+<br /><br />
+
+<a href="{{ url }}" class="btn btn-primary">{% trans "View comment" %}</a>
