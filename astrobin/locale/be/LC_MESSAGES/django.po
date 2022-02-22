@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-26 10:13+0000\n"
+"POT-Creation-Date: 2022-02-22 08:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2953,10 +2953,51 @@ msgstr ""
 msgid "Choose file"
 msgstr ""
 
+msgctxt "Verb (imperative)"
+msgid "Like"
+msgstr ""
+
+msgctxt "Verb (imperative)"
+msgid "Unlike"
+msgstr ""
+
+msgid "Browse images currently visible on the page."
+msgstr ""
+
 msgid "View page"
 msgstr ""
 
-msgid "View large"
+msgid "View page in new tab"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid "You can close this modal content with the ESC key"
+msgstr ""
+
+msgid "Something went wrong, Please try again later."
+msgstr ""
+
+msgid "Image not found"
+msgstr ""
+
+msgid "HTML Element not found"
+msgstr ""
+
+msgid "Error loading AJAX : Not Found"
+msgstr ""
+
+msgid "Error loading AJAX : Forbidden"
+msgstr ""
+
+msgid "Error loading page"
 msgstr ""
 
 msgid "Help with translations!"
@@ -3210,6 +3251,9 @@ msgstr ""
 
 #, python-format
 msgid "You cannot like this item. Reason: \"%(reason)s\"."
+msgstr ""
+
+msgid "You cannot like this item."
 msgstr ""
 
 msgid "You cannot remove a like that you gave more than one hour ago."
@@ -3528,6 +3572,9 @@ msgstr ""
 msgid "Large size"
 msgstr ""
 
+msgid "Extra-large size"
+msgstr ""
+
 msgid "Original size"
 msgstr ""
 
@@ -3714,9 +3761,6 @@ msgstr ""
 msgid ""
 "This will trigger the regeneration of all thumbnails for this image and all "
 "its revisions."
-msgstr ""
-
-msgid "Close"
 msgstr ""
 
 msgid "The following people like this image"
@@ -4710,76 +4754,64 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(user)s commented on your image! Check it out at the following url: <a href="
-"\"%(url)s\">%(url)s</a>"
+"%(user)s commented on your image <a href=\"%(target_url)s\">%(target)s</a>!"
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your image \"%(target)s\"!"
 msgstr ""
 
 #, python-format
 msgid ""
-"%(user)s commented on your image! Check it out at the following url: %(url)s"
+"<a href=\"%(url)s\"><strong>%(user)s</strong> commented on your image "
+"<strong>%(target)s</strong>!</a>"
 msgstr ""
 
 #, python-format
 msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> commented on your image!</a>"
+"<a href=\"%(user_url)s\">%(user)s</a> likes your comment on <a href="
+"\"%(target_url)s\">%(target)s</a>!"
 msgstr ""
 
 #, python-format
-msgid "%(user)s commented on your image!"
-msgstr ""
-
-#, python-format
-msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> likes your comment: <a href=\"%(url)s"
-"\">%(comment)s</a>."
-msgstr ""
-
-#, python-format
-msgid "%(user)s likes your comment: %(url)s %(comment)s"
-msgstr ""
-
-#, python-format
-msgid "<strong>%(user)s</strong> likes your comment!"
-msgstr ""
-
-#, python-format
-msgid "%(user)s likes your comment!"
+msgid "%(user)s likes your comment on \"%(target)s\"!"
 msgstr ""
 
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a comment: <a href="
-"\"%(url)s\">%(url)s</a>."
-msgstr ""
-
-#, python-format
-msgid "%(user)s mentioned you in a comment: %(url)s"
-msgstr ""
-
-#, python-format
-msgid "<strong>%(user)s</strong> mentioned you in a comment!"
-msgstr ""
-
-#, python-format
-msgid "%(user)s mentioned you in a comment!"
-msgstr ""
-
-#, python-format
-msgid "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment."
+"<strong>%(user)s</strong> likes your comment on <strong>%(target)s</strong>!"
 msgstr ""
 
 #, python-format
 msgid ""
-"%(user)s replied to your comment. Check it out at the following url: %(url)s"
+"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a comment on <a href="
+"\"%(target_url)s\">%(target)s</a>!"
+msgstr ""
+
+#, python-format
+msgid "%(user)s mentioned you in a comment on \"%(target)s\"!"
 msgstr ""
 
 #, python-format
 msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> replied to your comment.</a>"
+"<strong>%(user)s</strong> mentioned you in a comment on <strong>%(target)s</"
+"strong>!"
 msgstr ""
 
 #, python-format
-msgid "%(user)s replied to your comment."
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> replied to your comment on <a href="
+"\"%(target_url)s\">%(target)s</a>!"
+msgstr ""
+
+#, python-format
+msgid "%(user)s replied to your comment on \"%(target)s\"!"
+msgstr ""
+
+#, python-format
+msgid ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> replied to your comment on "
+"<strong>%(target)s</strong>!</a>"
 msgstr ""
 
 #, python-format
@@ -4851,6 +4883,12 @@ msgid "%(user)s likes your post on this forum topic: %(url)s"
 msgstr ""
 
 #, python-format
+msgid ""
+"<strong>%(user)s</strong> likes your forum post in the topic: <em>%(post)s</"
+"em>"
+msgstr ""
+
+#, python-format
 msgid "<strong>%(user)s</strong> likes your forum post!"
 msgstr ""
 
@@ -4869,6 +4907,12 @@ msgid "%(user)s mentioned you in a post on this forum topic: %(url)s"
 msgstr ""
 
 #, python-format
+msgid ""
+"<strong>%(user)s</strong> mentioned you in a forum post in the topic: <em>"
+"%(post)s</em>"
+msgstr ""
+
+#, python-format
 msgid "<strong>%(user)s</strong> mentioned you in a forum post!"
 msgstr ""
 
@@ -4878,7 +4922,7 @@ msgstr ""
 
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> replied in topic to which you are "
+"<a href=\"%(user_url)s\">%(user)s</a> replied in a topic to which you are "
 "subscribed."
 msgstr ""
 
@@ -4892,6 +4936,12 @@ msgstr ""
 msgid ""
 "If you don't want to receive notifications on new posts in this topic visit "
 "<a href=\"%(unsubscribe_url)s\">this link.</a>"
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> replied in a topic to which you are subscribed: "
+"<em>%(topic_name)s</em>"
 msgstr ""
 
 #, python-format
@@ -5381,6 +5431,12 @@ msgid "Include a poll"
 msgstr ""
 
 msgid "Type your forum post here..."
+msgstr ""
+
+msgid "Text editor not ready. "
+msgstr ""
+
+msgid "Please try again."
 msgstr ""
 
 msgid "Please first exit 'Source' mode to quote a message."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-26 10:14+0000\n"
+"POT-Creation-Date: 2022-02-22 08:09+0000\n"
 "PO-Revision-Date: 2020-11-24 02:29+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -165,6 +165,9 @@ msgstr "他の審査員に選ばれた画像を無選挙にすることはでき
 
 msgid "You cannot unelect a past or current IOTD."
 msgstr "過去や現在のIOTDを無投票にすることはできません。"
+
+msgid "You cannot unelect an IOTD that is due tomorrow (UTC)."
+msgstr ""
 
 #, python-format
 msgid "you already selected %s IOTD(s) today (UTC)"
