@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-26 10:13+0000\n"
-"PO-Revision-Date: 2022-01-21 10:58+0100\n"
+"POT-Creation-Date: 2022-02-22 09:06+0000\n"
+"PO-Revision-Date: 2022-02-22 10:04+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.26 20220118-1\n"
+"X-Loco-Api-Version: 1.0.26 20220207-1\n"
 
 msgid "United Kingdom"
 msgstr "Reino Unido"
@@ -3059,10 +3059,51 @@ msgstr "Ninguno"
 msgid "Choose file"
 msgstr "Examinar"
 
+msgctxt "Verb (imperative)"
+msgid "Like"
+msgstr ""
+
+msgctxt "Verb (imperative)"
+msgid "Unlike"
+msgstr ""
+
+msgid "Browse images currently visible on the page."
+msgstr ""
+
 msgid "View page"
 msgstr "Ver página"
 
-msgid "View large"
+msgid "View page in new tab"
+msgstr ""
+
+msgid "Close"
+msgstr "Cerrar"
+
+msgid "Next"
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid "You can close this modal content with the ESC key"
+msgstr ""
+
+msgid "Something went wrong, Please try again later."
+msgstr ""
+
+msgid "Image not found"
+msgstr ""
+
+msgid "HTML Element not found"
+msgstr ""
+
+msgid "Error loading AJAX : Not Found"
+msgstr ""
+
+msgid "Error loading AJAX : Forbidden"
+msgstr ""
+
+msgid "Error loading page"
 msgstr ""
 
 msgid "Help with translations!"
@@ -3324,6 +3365,9 @@ msgstr "Disculpa"
 
 #, python-format
 msgid "You cannot like this item. Reason: \"%(reason)s\"."
+msgstr ""
+
+msgid "You cannot like this item."
 msgstr ""
 
 msgid "You cannot remove a like that you gave more than one hour ago."
@@ -3668,6 +3712,9 @@ msgstr ""
 msgid "Large size"
 msgstr "Tamaño grande"
 
+msgid "Extra-large size"
+msgstr ""
+
 msgid "Original size"
 msgstr ""
 
@@ -3872,9 +3919,6 @@ msgid ""
 msgstr ""
 "Esto dará lugar a la regeneración de todas las imágenes en miniatura para "
 "esta imagen y todas sus revisiones."
-
-msgid "Close"
-msgstr "Cerrar"
 
 msgid "The following people like this image"
 msgstr "Las siguientes personas votaron Me gusta a esta imagen"
@@ -4989,86 +5033,65 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(user)s commented on your image! Check it out at the following url: <a href="
-"\"%(url)s\">%(url)s</a>"
-msgstr ""
-"%(user)s ha comentado tu imagen. Échale un vistazo en el siguiente enlace: "
-"<a href=\"%(url)s\">%(url)s</a>"
-
-#, python-format
-msgid ""
-"%(user)s commented on your image! Check it out at the following url: %(url)s"
-msgstr ""
-"%(user)s ha comentado tu imagen. Échale un vistazo en el siguiente enlace: "
-"%(url)s"
-
-#, python-format
-msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> commented on your image!</a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> ha comentado tu imagen.</a>"
-
-#, python-format
-msgid "%(user)s commented on your image!"
-msgstr "%(user)s ha comentado tu imagen."
-
-#, python-format
-msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> likes your comment: <a href=\"%(url)s"
-"\">%(comment)s</a>."
+"%(user)s commented on your image <a href=\"%(target_url)s\">%(target)s</a>!"
 msgstr ""
 
 #, python-format
-msgid "%(user)s likes your comment: %(url)s %(comment)s"
-msgstr ""
-
-#, python-format
-msgid "<strong>%(user)s</strong> likes your comment!"
-msgstr ""
-
-#, python-format
-msgid "%(user)s likes your comment!"
+msgid "%(user)s commented on your image \"%(target)s\"!"
 msgstr ""
 
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a comment: <a href="
-"\"%(url)s\">%(url)s</a>."
-msgstr ""
-
-#, python-format
-msgid "%(user)s mentioned you in a comment: %(url)s"
-msgstr ""
-
-#, python-format
-msgid "<strong>%(user)s</strong> mentioned you in a comment!"
-msgstr "<strong>%(user)s</strong> ha publicado una nueva imagen"
-
-#, python-format
-msgid "%(user)s mentioned you in a comment!"
-msgstr ""
-
-#, python-format
-msgid "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment."
+"<a href=\"%(url)s\"><strong>%(user)s</strong> commented on your image "
+"<strong>%(target)s</strong>!</a>"
 msgstr ""
 
 #, python-format
 msgid ""
-"%(user)s replied to your comment. Check it out at the following url: %(url)s"
+"<a href=\"%(user_url)s\">%(user)s</a> likes your comment on <a href="
+"\"%(target_url)s\">%(target)s</a>!"
 msgstr ""
-"%(user)s ha respondido a tu comentario. Echa un vistazo en el siguiente "
-"enlace: %(url)s"
+
+#, python-format
+msgid "%(user)s likes your comment on \"%(target)s\"!"
+msgstr ""
 
 #, python-format
 msgid ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> replied to your comment.</a>"
+"<strong>%(user)s</strong> likes your comment on <strong>%(target)s</strong>!"
 msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> ha respondido a tu comentario."
-"</a>"
 
 #, python-format
-msgid "%(user)s replied to your comment."
-msgstr "%(user)s ha respondido a tu comentario."
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a comment on <a href="
+"\"%(target_url)s\">%(target)s</a>!"
+msgstr ""
+
+#, python-format
+msgid "%(user)s mentioned you in a comment on \"%(target)s\"!"
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> mentioned you in a comment on <strong>%(target)s</"
+"strong>!"
+msgstr ""
+
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> replied to your comment on <a href="
+"\"%(target_url)s\">%(target)s</a>!"
+msgstr ""
+
+#, python-format
+msgid "%(user)s replied to your comment on \"%(target)s\"!"
+msgstr ""
+
+#, python-format
+msgid ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> replied to your comment on "
+"<strong>%(target)s</strong>!</a>"
+msgstr ""
 
 #, python-format
 msgid "<a href=\"%(user_url)s\">%(user)s</a> commented on your edit proposal."
@@ -5144,6 +5167,12 @@ msgid "%(user)s likes your post on this forum topic: %(url)s"
 msgstr ""
 
 #, python-format
+msgid ""
+"<strong>%(user)s</strong> likes your forum post in the topic: <em>%(post)s</"
+"em>"
+msgstr ""
+
+#, python-format
 msgid "<strong>%(user)s</strong> likes your forum post!"
 msgstr ""
 
@@ -5162,6 +5191,12 @@ msgid "%(user)s mentioned you in a post on this forum topic: %(url)s"
 msgstr ""
 
 #, python-format
+msgid ""
+"<strong>%(user)s</strong> mentioned you in a forum post in the topic: <em>"
+"%(post)s</em>"
+msgstr ""
+
+#, python-format
 msgid "<strong>%(user)s</strong> mentioned you in a forum post!"
 msgstr ""
 
@@ -5171,7 +5206,7 @@ msgstr ""
 
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> replied in topic to which you are "
+"<a href=\"%(user_url)s\">%(user)s</a> replied in a topic to which you are "
 "subscribed."
 msgstr ""
 
@@ -5185,6 +5220,12 @@ msgstr ""
 msgid ""
 "If you don't want to receive notifications on new posts in this topic visit "
 "<a href=\"%(unsubscribe_url)s\">this link.</a>"
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> replied in a topic to which you are subscribed: "
+"<em>%(topic_name)s</em>"
 msgstr ""
 
 #, python-format
@@ -5702,6 +5743,12 @@ msgid "Include a poll"
 msgstr ""
 
 msgid "Type your forum post here..."
+msgstr ""
+
+msgid "Text editor not ready. "
+msgstr ""
+
+msgid "Please try again."
 msgstr ""
 
 msgid "Please first exit 'Source' mode to quote a message."
@@ -7254,11 +7301,52 @@ msgstr ""
 #~ msgstr "Enlace"
 
 #~ msgid ""
+#~ "%(user)s commented on your image! Check it out at the following url: <a "
+#~ "href=\"%(url)s\">%(url)s</a>"
+#~ msgstr ""
+#~ "%(user)s ha comentado tu imagen. Échale un vistazo en el siguiente "
+#~ "enlace: <a href=\"%(url)s\">%(url)s</a>"
+
+#~ msgid ""
+#~ "%(user)s commented on your image! Check it out at the following url: "
+#~ "%(url)s"
+#~ msgstr ""
+#~ "%(user)s ha comentado tu imagen. Échale un vistazo en el siguiente "
+#~ "enlace: %(url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> commented on your image!</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> ha comentado tu imagen.</a>"
+
+#~ msgid "%(user)s commented on your image!"
+#~ msgstr "%(user)s ha comentado tu imagen."
+
+#~ msgid "<strong>%(user)s</strong> mentioned you in a comment!"
+#~ msgstr "<strong>%(user)s</strong> ha publicado una nueva imagen"
+
+#~ msgid ""
 #~ "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment. Check it "
 #~ "out at the following url: <a href=\"%(url)s\">%(url)s</a>"
 #~ msgstr ""
 #~ "<a href=\"%(user_url)s\">%(user)s</a> ha respondido a tu comentario. Echa "
 #~ "un vistazo en el siguiente enlace: <a href=\"%(url)s\">%(url)s</a>"
+
+#~ msgid ""
+#~ "%(user)s replied to your comment. Check it out at the following url: "
+#~ "%(url)s"
+#~ msgstr ""
+#~ "%(user)s ha respondido a tu comentario. Echa un vistazo en el siguiente "
+#~ "enlace: %(url)s"
+
+#~ msgid ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> replied to your comment.</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> ha respondido a tu "
+#~ "comentario.</a>"
+
+#~ msgid "%(user)s replied to your comment."
+#~ msgstr "%(user)s ha respondido a tu comentario."
 
 #~ msgid ""
 #~ "%(originator)s has published a new image revision! Check it out at the "

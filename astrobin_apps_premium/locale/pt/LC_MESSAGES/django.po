@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Premium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-26 10:14+0000\n"
-"PO-Revision-Date: 2022-01-21 10:58+0100\n"
+"POT-Creation-Date: 2022-02-22 09:06+0000\n"
+"PO-Revision-Date: 2022-02-22 09:53+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Portuguese\n"
 "Language: pt\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108451\n"
-"X-Loco-Api-Version: 1.0.26 20220118-1\n"
+"X-Loco-Api-Version: 1.0.26 20220207-1\n"
 
 msgid "Your migration data"
 msgstr "Seus dados de migração"
@@ -295,3 +295,233 @@ msgstr ""
 #~ "Your preference has been recorded and it has already been applied. Thank "
 #~ "you!"
 #~ msgstr "Sua preferência foi registrada e já foi aplicada. Obrigado!"
+
+#~ msgid "Images"
+#~ msgstr "Imagens"
+
+#~ msgid "Followers"
+#~ msgstr "Seguidores"
+
+#~ msgid "Following"
+#~ msgstr "Seguindo"
+
+#~ msgid "User"
+#~ msgstr "Usuário"
+
+#~ msgid "No users."
+#~ msgstr "Sem usuários."
+
+#~ msgid "Administrator"
+#~ msgstr "Administrador"
+
+#~ msgid "Image moderator"
+#~ msgstr "Moderador de imagem"
+
+#~ msgid "IOTD Submitter"
+#~ msgstr "Remetente de IDD"
+
+#~ msgid "IOTD Reviewer"
+#~ msgstr "Revisor de IDD"
+
+#~ msgid "IOTD Judge"
+#~ msgstr "Juiz de IDD"
+
+#~ msgid "Premium member"
+#~ msgstr "Membro Premium"
+
+#~ msgid "Perform a blind solve"
+#~ msgstr "Executar uma solução cega"
+
+#~ msgid ""
+#~ "Attempt to solve with no hints. In most cases this will work, but it will "
+#~ "take longer."
+#~ msgstr ""
+#~ "Tente resolver sem dicas. Na maioria dos casos, isso funcionará, mas "
+#~ "levará mais tempo."
+
+#~ msgid "Width of the field in degrees"
+#~ msgstr "Largura do campo em graus"
+
+#~ msgid "Width of the field in arcminutes"
+#~ msgstr "Largura do campo em minutos de arco"
+
+#~ msgid "Resolution of the field in arcseconds/pixel"
+#~ msgstr "Resolução do campo em arco-segundos/pixel"
+
+#~ msgid "Field size units"
+#~ msgstr "Unidades de tamanho de campo"
+
+#~ msgid "Min field size"
+#~ msgstr "Tamanho mínimo do campo"
+
+#~ msgid "Estimate the lower bound for the width of this field."
+#~ msgstr "Estime o limite inferior para a largura deste campo."
+
+#~ msgid "Max field size"
+#~ msgstr "Tamanho máximo do campo"
+
+#~ msgid "Estimate the upper bound for the width of this field."
+#~ msgstr "Estime o limite superior para a largura deste campo."
+
+#~ msgid "Center RA"
+#~ msgstr "RA central "
+
+#~ msgid "Center RA of the field in degrees, 0.000 to 360.000"
+#~ msgstr "RA central do campo em graus, 0,000 a 360.000"
+
+#~ msgid "Center dec"
+#~ msgstr "Dec central "
+
+#~ msgid "Center dec of the field in degrees, -90.000 to +90.000"
+#~ msgstr "Dec central do campo em graus, -90.000 a +90.000"
+
+#~ msgid "Radius"
+#~ msgstr "Raio"
+
+#~ msgid ""
+#~ "Tells the plate-solving engine to look within these many degrees of the "
+#~ "given center RA and dec position."
+#~ msgstr ""
+#~ "Diz ao mecanismo de resolução de placas para olhar dentro desses muitos "
+#~ "graus do RA central especificado e da posição dec."
+
+#~ msgid "Small"
+#~ msgstr "Pequeno"
+
+#~ msgid "Medium"
+#~ msgstr "Médio"
+
+#~ msgid "Large"
+#~ msgstr "Grande"
+
+#~ msgid "Sample raw frame (max 100 MB)"
+#~ msgstr "Amostra de quadro sem processar (máx. 100 MB)"
+
+#~ msgid ""
+#~ "To improve the accuracy of your plate-solution even further, please "
+#~ "upload one of the XISF or FITS files from your data set. Such files "
+#~ "normally have date and time headers that will allow AstroBin to calculate "
+#~ "solar system body ephemerides and find planets and asteroids in your "
+#~ "image (provided you also add location information to it).<br/><br/>For "
+#~ "maximum accuracy, it's recommended that you use PixInsight's native and "
+#~ "open format XISF. Learn more about XISF here:<br/><br/><a href=\"https://"
+#~ "pixinsight.com/xisf/\" target=\"_blank\">https://pixinsight.com/xisf/</"
+#~ "a><br/><br/> <strong>Please note:</strong> it's very important that the "
+#~ "XISF or FITS file you upload is aligned to your processed image, "
+#~ "otherwise the object annotations will not match. To improve your chances "
+#~ "at a successful accurate plate-solution, calibrate your file the usual "
+#~ "way (dark/bias/flats) but do not stretch it."
+#~ msgstr ""
+#~ "Para melhorar ainda mais a precisão da sua solução de placa, faça o "
+#~ "upload de um dos arquivos XISF ou FITS do seu conjunto de dados. Esses "
+#~ "arquivos normalmente têm cabeçalhos de data e hora que permitem ao "
+#~ "AstroBin calcular efemérides do corpo do sistema solar e encontrar "
+#~ "planetas e asteroides em sua imagem (desde que você também adicione "
+#~ "informações de localização).<br/><br/> Para máxima precisão, é "
+#~ "recomendado que você use o XISF nativo e aberto do PixInsight. Saiba mais "
+#~ "sobre o XISF aqui: :<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
+#~ "target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> "
+#~ "<strong>Observe:</strong> é muito importante que o arquivo XISF ou FITS "
+#~ "que você carrega esteja alinhado à sua imagem processada, caso contrário "
+#~ "as anotações do objeto não corresponderão. Para melhorar suas chances de "
+#~ "uma solução precisa e bem-sucedida de placa, calibre seu arquivo da "
+#~ "maneira usual (escuro/bias/plano), mas não o estique."
+
+#~ msgid "Scaled font size"
+#~ msgstr "Tamanho da fonte em escala"
+
+#~ msgid "Font size of the annotations on your main image page"
+#~ msgstr "Tamanho da fonte das anotações na página principal da imagem"
+
+#~ msgid "Show equatorial grid"
+#~ msgstr "Mostrar grade equatorial"
+
+#~ msgid "Show constellation borders"
+#~ msgstr "Mostrar bordas da constelação"
+
+#~ msgid "Show constellation lines"
+#~ msgstr "Mostrar linhas de constelação"
+
+#~ msgid "Show named stars"
+#~ msgstr "Mostrar estrelas nomeadas"
+
+#~ msgid "Show Messier objects"
+#~ msgstr "Mostrar objetos Messier"
+
+#~ msgid "Show NGC and IC objects"
+#~ msgstr "Mostrar objetos NGC e IC"
+
+#~ msgid "Show VdB objects"
+#~ msgstr "Mostrar objetos VdB"
+
+#~ msgid "Show Sharpless objects"
+#~ msgstr "Mostrar objetos Sharpless"
+
+#~ msgid "Show Barnard objects"
+#~ msgstr "Mostrar objetos Barnard"
+
+#~ msgid "Show PGC objects"
+#~ msgstr "Mostrar objetos PGC"
+
+#~ msgid "Show planets"
+#~ msgstr "Mostrar planetas"
+
+#~ msgid ""
+#~ "Only available if your image at least an acquisition time and an accurate "
+#~ "location"
+#~ msgstr ""
+#~ "Disponível apenas se a sua imagem tiver pelo menos um tempo de aquisição "
+#~ "e um local preciso"
+
+#~ msgid "Show asteroids"
+#~ msgstr "Mostrar asteroides"
+
+#~ msgid "Show GCVS stars"
+#~ msgstr "Mostrar estrelas do GCVS"
+
+#~ msgid "General Catalog of Variable Stars"
+#~ msgstr "Catálogo Geral de Estrelas Variáveis"
+
+#~ msgid "Show Tycho-2 catalog"
+#~ msgstr "Mostrar catálogo Tycho-2"
+
+#~ msgid "Show CGPN objects"
+#~ msgstr "Mostrar objetos CGPN"
+
+#~ msgid "Getting plate-solving status, please wait..."
+#~ msgstr "Para obter o status de solução de placas, aguarde, por favor..."
+
+#~ msgid "Plate-solving starting, please do not leave this page..."
+#~ msgstr ""
+#~ "Iniciando a resolução de placas, não deixe esta página, por favor..."
+
+#~ msgid "Advanced plate-solving starting, please do not leave this page..."
+#~ msgstr ""
+#~ "Início avançado da solução de placas, não deixe esta página, por favor..."
+
+#~ msgid "Plate-solving started. You may leave this page."
+#~ msgstr "A solução de placas começou. Você pode sair desta página."
+
+#~ msgid "Advanced plate-solving started. You may leave this page."
+#~ msgstr "Solução avançada de placas iniciada. Você pode sair desta página."
+
+#~ msgid "Plate-solving almost ready, please do not leave this page..."
+#~ msgstr ""
+#~ "Resolução de placas quase pronta, por favor não deixe esta página..."
+
+#~ msgid "This image could not be plate-solved."
+#~ msgstr "Não foi possível resolver esta imagem em placa."
+
+#~ msgid "The advanced plate-solving failed."
+#~ msgstr "A solução avançada de placas falhou."
+
+#~ msgid "This image has been plate-solved. Refresh the page to see new data!"
+#~ msgstr ""
+#~ "Esta imagem foi resolvida em placa. Atualize a página para ver novos "
+#~ "dados!"
+
+#~ msgid ""
+#~ "The advanced plate-solved finished. Refresh the page to see new data!"
+#~ msgstr ""
+#~ "O avançado placa-resolvido terminou. Atualize a página para ver novos "
+#~ "dados!"

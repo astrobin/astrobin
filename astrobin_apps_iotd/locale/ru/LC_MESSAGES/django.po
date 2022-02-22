@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: IOTD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-26 10:14+0000\n"
-"PO-Revision-Date: 2022-01-21 10:58+0100\n"
+"POT-Creation-Date: 2022-02-22 09:06+0000\n"
+"PO-Revision-Date: 2022-02-22 09:52+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108442\n"
-"X-Loco-Api-Version: 1.0.26 20220118-1\n"
+"X-Loco-Api-Version: 1.0.26 20220207-1\n"
 
 msgid "Sorry, it's now too late to retract this submission."
 msgstr "Извините, уже слишком поздно отменять эту заявку."
@@ -163,6 +163,9 @@ msgstr "Вы не можете отменить выбор изображени�
 
 msgid "You cannot unelect a past or current IOTD."
 msgstr "Вы не можете переизбрать прошлые или текущие Изображения Дня."
+
+msgid "You cannot unelect an IOTD that is due tomorrow (UTC)."
+msgstr ""
 
 #, python-format
 msgid "you already selected %s IOTD(s) today (UTC)"
