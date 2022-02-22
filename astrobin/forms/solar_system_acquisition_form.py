@@ -36,6 +36,7 @@ class SolarSystem_AcquisitionForm(forms.ModelForm):
             'time',
             'frames',
             'fps',
+            'exposure_per_frame',
             'focal_length',
             'cmi',
             'cmii',

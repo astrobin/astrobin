@@ -47,14 +47,14 @@
                                     {% endif %}
                                     {% if ssa.frames %}
                                         <p>
-                                            <strong class="card-label">{% trans "Frames" %}:</strong>
-                                            <div class="frames">
-                                                {{ ssa.frames }}
-                                            </div>
+                                            <strong class="card-label">{% trans "Frames" %}:</strong> {{ ssa.frames }}
                                         </p>
                                     {% endif %}
                                     {% if ssa.fps %}
-                                        <p><strong class="card-label">{% trans "FPS" %}:</strong> {{ ssa.fps }}</p>
+                                        <p><strong class="card-label">{% trans "FPS" %}:</strong> {{ ssa.fps|floatformat:"-3" }}</p>
+                                    {% endif %}
+                                    {% if ssa.exposure_per_frame %}
+                                        <p><strong class="card-label">{% trans "Exposure per frame" %}:</strong> {{ ssa.exposure_per_frame }} ms</p>
                                     {% endif %}
                                     {% if ssa.focal_length %}
                                         <p>

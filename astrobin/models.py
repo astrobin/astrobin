@@ -2291,6 +2291,12 @@ class SolarSystem_Acquisition(Acquisition):
         blank=True,
     )
 
+    exposure_per_frame = models.PositiveIntegerField(
+        verbose_name=_("Exposure per frame") + " (ms)",
+        null=True,
+        blank=True,
+    )
+
     focal_length = models.IntegerField(
         verbose_name=_("Focal length"),
         help_text=_("The focal length of the whole optical train, including barlow lenses or other components."),
