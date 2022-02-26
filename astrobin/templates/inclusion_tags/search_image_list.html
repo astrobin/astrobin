@@ -15,7 +15,7 @@
         {% if equipment_brand_listings %}
             <div class="equipment-listing-search-result alert alert-info">
                 <a class="close" data-toggle="modal" title="{% trans "Remove ads" %}"
-                        {% if request.user|can_remove_ads %}
+                        {% if valid_usersubscription|can_remove_ads %}
                    href="#remove-ads-modal"
                         {% else %}
                    href="#feature-restricted-modal"

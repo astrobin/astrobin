@@ -7,7 +7,7 @@ from django.test import TestCase
 from subscription.models import Subscription, UserSubscription
 
 from astrobin.tests.generators import Generators
-from astrobin_apps_premium.utils import premium_get_valid_usersubscription
+from astrobin_apps_premium.services.premium_service import PremiumService
 
 
 class CommandsTest(TestCase):
@@ -58,12 +58,12 @@ class CommandsTest(TestCase):
 
     def test_upgrade_free_to_premium_dry_run(self):
         call_command('upgrade_free_and_lite_to_premium', dry_run=True)
-        user_subscription = premium_get_valid_usersubscription(self.user)
+        user_subscription = PremiumService(self.user).get_valid_usersubscription()
         self.assertIsNone(user_subscription)
 
     def test_upgrade_free_to_premium(self):
         call_command('upgrade_free_and_lite_to_premium')
-        user_subscription = premium_get_valid_usersubscription(self.user)
+        user_subscription = PremiumService(self.user).get_valid_usersubscription()
         self.assertEqual("AstroBin Premium", user_subscription.subscription.name)
         self.assertEqual(date.today() + relativedelta(years=1), user_subscription.expires)
 
@@ -72,7 +72,7 @@ class CommandsTest(TestCase):
 
         call_command('upgrade_free_and_lite_to_premium')
 
-        user_subscription = premium_get_valid_usersubscription(self.user)
+        user_subscription = PremiumService(self.user).get_valid_usersubscription()
         self.assertIsNone(user_subscription)
 
     def test_upgrade_free_to_premium_when_no_images(self):
@@ -80,7 +80,7 @@ class CommandsTest(TestCase):
 
         call_command('upgrade_free_and_lite_to_premium')
 
-        user_subscription = premium_get_valid_usersubscription(self.user)
+        user_subscription = PremiumService(self.user).get_valid_usersubscription()
         self.assertIsNone(user_subscription)
 
     def test_upgrade_lite_to_premium(self):
@@ -93,7 +93,7 @@ class CommandsTest(TestCase):
 
         call_command('upgrade_free_and_lite_to_premium')
 
-        user_subscription = premium_get_valid_usersubscription(self.user)
+        user_subscription = PremiumService(self.user).get_valid_usersubscription()
         self.assertEqual("AstroBin Premium", user_subscription.subscription.name)
         self.assertEqual(date.today() + relativedelta(years=1), user_subscription.expires)
 
@@ -107,7 +107,7 @@ class CommandsTest(TestCase):
 
         call_command('upgrade_free_and_lite_to_premium')
 
-        user_subscription = premium_get_valid_usersubscription(self.user)
+        user_subscription = PremiumService(self.user).get_valid_usersubscription()
         self.assertEqual("AstroBin Premium", user_subscription.subscription.name)
         self.assertEqual(date.today() + relativedelta(years=1), user_subscription.expires)
 
@@ -121,7 +121,7 @@ class CommandsTest(TestCase):
 
         call_command('upgrade_free_and_lite_to_premium')
 
-        user_subscription = premium_get_valid_usersubscription(self.user)
+        user_subscription = PremiumService(self.user).get_valid_usersubscription()
         self.assertEqual("AstroBin Premium", user_subscription.subscription.name)
         self.assertEqual(date.today() + relativedelta(years=1), user_subscription.expires)
 
@@ -135,7 +135,7 @@ class CommandsTest(TestCase):
 
         call_command('upgrade_free_and_lite_to_premium')
 
-        user_subscription = premium_get_valid_usersubscription(self.user)
+        user_subscription = PremiumService(self.user).get_valid_usersubscription()
         self.assertEqual("AstroBin Premium", user_subscription.subscription.name)
         self.assertEqual(date.today() + relativedelta(years=1), user_subscription.expires)
 
@@ -149,7 +149,7 @@ class CommandsTest(TestCase):
 
         call_command('upgrade_free_and_lite_to_premium')
 
-        user_subscription = premium_get_valid_usersubscription(self.user)
+        user_subscription = PremiumService(self.user).get_valid_usersubscription()
         self.assertEqual("AstroBin Premium", user_subscription.subscription.name)
         self.assertEqual(date.today() + relativedelta(years=1), user_subscription.expires)
 
@@ -163,7 +163,7 @@ class CommandsTest(TestCase):
 
         call_command('upgrade_free_and_lite_to_premium')
 
-        user_subscription = premium_get_valid_usersubscription(self.user)
+        user_subscription = PremiumService(self.user).get_valid_usersubscription()
         self.assertEqual("AstroBin Premium", user_subscription.subscription.name)
         self.assertEqual(date.today() + relativedelta(months=1), user_subscription.expires)
 
@@ -177,7 +177,7 @@ class CommandsTest(TestCase):
 
         call_command('upgrade_free_and_lite_to_premium')
 
-        user_subscription = premium_get_valid_usersubscription(self.user)
+        user_subscription = PremiumService(self.user).get_valid_usersubscription()
         self.assertEqual("AstroBin Premium", user_subscription.subscription.name)
         self.assertEqual(date.today() + relativedelta(years=1), user_subscription.expires)
 
@@ -191,7 +191,7 @@ class CommandsTest(TestCase):
 
         call_command('upgrade_free_and_lite_to_premium')
 
-        user_subscription = premium_get_valid_usersubscription(self.user)
+        user_subscription = PremiumService(self.user).get_valid_usersubscription()
         self.assertEqual("AstroBin Premium (autorenew)", user_subscription.subscription.name)
         self.assertEqual(date.today() + relativedelta(months=1), user_subscription.expires)
 
@@ -212,6 +212,6 @@ class CommandsTest(TestCase):
 
         call_command('upgrade_free_and_lite_to_premium')
 
-        user_subscription = premium_get_valid_usersubscription(self.user)
+        user_subscription = PremiumService(self.user).get_valid_usersubscription()
         self.assertEqual("AstroBin Premium", user_subscription.subscription.name)
         self.assertEqual(date.today() + relativedelta(years=1), user_subscription.expires)

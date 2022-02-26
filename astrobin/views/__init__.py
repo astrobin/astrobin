@@ -62,13 +62,10 @@ from astrobin_apps_images.services import ImageService
 from astrobin_apps_platesolving.forms import PlateSolvingAdvancedSettingsForm, PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
 from astrobin_apps_platesolving.services import SolutionService
+from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     can_perform_advanced_platesolving,
     can_restore_from_trash,
-)
-from astrobin_apps_premium.utils import (
-    premium_get_max_allowed_image_size, premium_get_max_allowed_revisions,
-    premium_user_has_valid_subscription,
 )
 from astrobin_apps_users.services import UserService
 from common.services import AppRedirectionService, DateTimeService
@@ -497,23 +494,17 @@ def image_upload(request):
     if not settings.TESTING and "forceClassicUploader" not in request.GET:
         return redirect(AppRedirectionService.redirect("/uploader"))
 
-    from astrobin_apps_premium.utils import (
-        premium_used_percent,
-        premium_progress_class,
-        premium_user_has_subscription,
-        premium_user_has_invalid_subscription,
-    )
+    valid_subscription = PremiumService(request.user).get_valid_usersubscription()
 
-    tmpl_premium_used_percent = premium_used_percent(request.user)
-    tmpl_premium_progress_class = premium_progress_class(tmpl_premium_used_percent)
-    tmpl_premium_has_inactive_subscription = \
-        premium_user_has_subscription(request.user) and \
-        premium_user_has_invalid_subscription(request.user) and \
-        not premium_user_has_valid_subscription(request.user)
+    tmpl_premium_used_percent = PremiumService.get_image_quota_usage_percentage(
+        request.user.userprofile, valid_subscription
+    )
+    tmpl_premium_progress_class = PremiumService.get_image_quota_usage_class(tmpl_premium_used_percent)
+    tmpl_premium_has_inactive_subscription = valid_subscription is None
 
     response_dict = {
-        'premium_used_percent': tmpl_premium_used_percent,
-        'premium_progress_class': tmpl_premium_progress_class,
+        'get_image_quota_usage_percentage': tmpl_premium_used_percent,
+        'get_image_quota_usage_class': tmpl_premium_progress_class,
         'premium_has_inactive_subscription': tmpl_premium_has_inactive_subscription,
     }
 
@@ -527,20 +518,23 @@ def image_upload(request):
 @login_required
 @require_POST
 def image_upload_process(request):
-    """Process the form"""
-
-    from astrobin_apps_premium.utils import premium_used_percent
-
     log.info("Classic uploader (%d): submitted" % request.user.pk)
 
-    used_percent = premium_used_percent(request.user)
+    used_percent = PremiumService.get_image_quota_usage_percentage(
+        request.user.userprofile,
+        PremiumService(request.user).get_valid_usersubscription()
+    )
+
     if used_percent >= 100:
         messages.error(request, _("You have reached your image count limit. Please upgrade!"))
         return HttpResponseRedirect('/upload/?forceClassicUploader')
 
     if settings.READONLY_MODE:
-        messages.error(request, _(
-            "AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"))
+        messages.error(
+            request, _(
+                "AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"
+            )
+        )
         return HttpResponseRedirect('/upload/?forceClassicUploader')
 
     if 'image_file' not in request.FILES:
@@ -557,7 +551,8 @@ def image_upload_process(request):
     if ext not in settings.ALLOWED_IMAGE_EXTENSIONS:
         return upload_error(request)
 
-    max_size = premium_get_max_allowed_image_size(request.user)
+    valid_subscription = PremiumService(request.user).get_valid_usersubscription()
+    max_size = PremiumService.get_max_allowed_image_size(valid_subscription)
     if image_file.size > max_size:
         return upload_size_error(request, max_size)
 
@@ -812,7 +807,8 @@ def image_edit_platesolving_settings(request, id, revision_label):
 def image_edit_platesolving_advanced_settings(request, id, revision_label):
     image = get_image_or_404(Image.objects_including_wip, id)
     if request.user != image.user and not request.user.is_superuser and not can_perform_advanced_platesolving(
-            image.user):
+            PremiumService(image.user).get_valid_usersubscription()
+    ):
         return HttpResponseForbidden()
 
     if revision_label in (None, 'None', '0'):
@@ -1143,6 +1139,7 @@ def user_page(request, username):
             raise Http404
 
     user_ct = ContentType.objects.get_for_model(User)
+    valid_subscription = PremiumService(request.user).get_valid_usersubscription()
 
     section = 'public'
     subsection = request.GET.get('sub')
@@ -1187,7 +1184,7 @@ def user_page(request, username):
         section = 'staging'
         subsection = None
     elif 'trash' in request.GET:
-        if request.user != user or not can_restore_from_trash(request.user) and not request.user.is_superuser:
+        if request.user != user or not can_restore_from_trash(valid_subscription) and not request.user.is_superuser:
             return HttpResponseForbidden()
         qs = Image.deleted_objects.filter(user=user)
         section = 'trash'
@@ -1911,7 +1908,9 @@ def user_profile_flickr_import(request):
 
     log.debug("Flickr import (user %d): accessed view" % request.user.pk)
 
-    if not request.user.is_superuser and is_free(request.user) or settings.READONLY_MODE:
+    valid_subscription = PremiumService(request.user).get_valid_usersubscription()
+
+    if not request.user.is_superuser and is_free(valid_subscription) or settings.READONLY_MODE:
         return render(request, "user/profile/flickr_import.html", response_dict)
 
     flickr_token = None
@@ -2224,8 +2223,11 @@ def image_revision_upload_process(request):
     log.info("Classic uploader (revision) (%d) (%d): submitted" % (request.user.pk, image.pk))
 
     if settings.READONLY_MODE:
-        messages.error(request, _(
-            "AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"))
+        messages.error(
+            request, _(
+                "AstroBin is currently in read-only mode, because of server maintenance. Please try again soon!"
+            )
+        )
         return HttpResponseRedirect(image.get_absolute_url())
 
     form = ImageRevisionUploadForm(request.POST, request.FILES)
@@ -2233,7 +2235,9 @@ def image_revision_upload_process(request):
     if not form.is_valid():
         return upload_error(request, image, form.errors)
 
-    max_revisions = premium_get_max_allowed_revisions(request.user)
+    valid_subscription = PremiumService(request.user).get_valid_usersubscription()
+
+    max_revisions = PremiumService.get_max_allowed_revisions(valid_subscription)
     if image.revisions.count() >= max_revisions:
         return upload_max_revisions_error(request, max_revisions, image)
 
@@ -2243,7 +2247,7 @@ def image_revision_upload_process(request):
     if ext not in settings.ALLOWED_IMAGE_EXTENSIONS:
         return upload_error(request, image)
 
-    max_size = premium_get_max_allowed_image_size(request.user)
+    max_size = PremiumService.get_max_allowed_image_size(valid_subscription)
     if image_file.size > max_size:
         return upload_size_error(request, max_size, image)
 

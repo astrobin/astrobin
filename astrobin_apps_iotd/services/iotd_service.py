@@ -17,6 +17,7 @@ from astrobin_apps_iotd.models import (
     TopPickNominationsArchive,
 )
 from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 from astrobin_apps_users.services import UserService
 from common.services import DateTimeService
@@ -241,7 +242,8 @@ class IotdService:
     def update_submission_queues(self):
         def _can_add(image: Image) -> bool:
             # Since the introduction of the 2020 plans, Free users cannot participate in the IOTD/TP.
-            user_is_free: bool = is_free(image.user)
+            valid_subscription = PremiumService(image.user).get_valid_usersubscription()
+            user_is_free: bool = is_free(valid_subscription)
 
             return not user_is_free
 
@@ -423,7 +425,7 @@ class IotdService:
         if user != image.user:
             return False, 'NOT_OWNER'
 
-        if is_free(user):
+        if is_free(PremiumService(user).get_valid_usersubscription()):
             return False, 'IS_FREE'
 
         if image.is_wip:

@@ -543,7 +543,7 @@
 
             this.enabledFilters.push(this.getFilterByName("q"));
 
-            {% if request.user|can_access_advanced_search %}
+            {% if valid_usersubscription|can_access_advanced_search %}
                 if (this.isImageSearch()) {
                     this.enabledFilters.push(this.getFilterByName("subject"));
                     this.enabledFilters.push(this.getFilterByName("telescope"));

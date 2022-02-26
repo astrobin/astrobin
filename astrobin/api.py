@@ -16,7 +16,7 @@ from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_platesolving.solver import Solver
-from astrobin_apps_premium.utils import premium_get_valid_usersubscription
+from astrobin_apps_premium.services.premium_service import PremiumService
 from toggleproperties.models import ToggleProperty
 
 
@@ -749,11 +749,11 @@ class UserProfileResource(ModelResource):
         return Message.objects.filter(user=bundle.obj.user, read=False).count()
 
     def dehydrate_premium_subscription(self, bundle):
-        user_subscription = premium_get_valid_usersubscription(bundle.obj.user)
+        user_subscription = PremiumService(bundle.obj.user).get_valid_usersubscription()
         return user_subscription.subscription.name if user_subscription else None
 
     def dehydrate_premium_subscription_expiration(self, bundle):
-        user_subscription = premium_get_valid_usersubscription(bundle.obj.user)
+        user_subscription = PremiumService(bundle.obj.user).get_valid_usersubscription()
         return user_subscription.expires if user_subscription else None
 
     def build_filters(self, filters=None, ignore_bad_filters=False):

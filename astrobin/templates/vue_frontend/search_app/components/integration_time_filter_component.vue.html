@@ -2,7 +2,7 @@
 {% load i18n %}
 
 <script type="text/x-template" id="integration-time-filter-template">
-    {% if request.user|can_access_full_search %}
+    {% if valid_usersubscription|can_access_full_search %}
         <div class="form-group search-integration-time-form-group slider-form-group" :class="{highlighted: highlighted}">
             <div id="integration-time-slider" class="slider-filter"></div>
 

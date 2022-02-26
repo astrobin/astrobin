@@ -12,7 +12,7 @@ from astrobin.models import Gear, GearUserInfo, Telescope, \
 from astrobin.services.gear_service import GearService
 from astrobin.tasks import send_broadcast_email
 from astrobin.utils import inactive_accounts
-from astrobin_apps_premium.utils import premium_get_valid_usersubscription
+from astrobin_apps_premium.services.premium_service import PremiumService
 
 
 class ImageAdmin(admin.ModelAdmin):
@@ -208,7 +208,7 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
             Q(premium_offer_sent__lt=datetime.now() - timedelta(days=30))
         )
 
-        profiles = [x for x in profiles if premium_get_valid_usersubscription(x.user) is None]
+        profiles = [x for x in profiles if PremiumService(x.user).get_valid_usersubscription() is None]
 
         recipients = UserProfile.objects.filter(pk__in=[x.pk for x in profiles])
         self.submit_email(request, obj, recipients.values_list("user__email", flat=True))

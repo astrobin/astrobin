@@ -43,9 +43,8 @@ from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
-    is_any_premium_subscription, is_any_ultimate, is_free, is_lite, is_lite_2020, is_premium, is_premium_2020,
+    is_any_paid_subscription, is_any_ultimate, is_free, is_lite, is_lite_2020, is_premium, is_premium_2020,
 )
-from astrobin_apps_premium.utils import premium_get_valid_usersubscription
 from astrobin_apps_users.services import UserService
 from common.models import ABUSE_REPORT_DECISION_OVERRULED, AbuseReport
 from common.services import DateTimeService
@@ -84,7 +83,7 @@ def image_pre_save(sender, instance, **kwargs):
 
         user_scores_index = instance.user.userprofile.get_scores()['user_scores_index'] or 0
         if user_scores_index >= 1.00 or \
-                is_any_premium_subscription(instance.user) or \
+                is_any_paid_subscription(PremiumService(instance.user).get_valid_usersubscription()) or \
                 ModerationService.auto_approve(instance.user):
             instance.moderated_when = datetime.date.today()
             instance.moderator_decision = 1
@@ -195,19 +194,21 @@ def image_post_delete(sender, instance, **kwargs):
     ImageIndex().remove_object(instance)
     UserService(instance.user).clear_gallery_image_list_cache()
 
+    valid_subscription = PremiumService(instance.user).get_valid_usersubscription()
+
     try:
         if instance.uploaded > datetime.datetime.now() - relativedelta(hours=24):
             decrease_counter(instance.user)
-        elif is_lite(instance.user):
-            usersub = premium_get_valid_usersubscription(instance.user)
-            usersub_created = usersub.expires - relativedelta(years=1)
-            dt = instance.uploaded.date() - usersub_created
+        elif is_lite(valid_subscription):
+            user_subscription = PremiumService(instance.user).get_valid_usersubscription()
+            user_subscription_created = user_subscription.expires - relativedelta(years=1)
+            dt = instance.uploaded.date() - user_subscription_created
             if dt.days >= 0:
                 decrease_counter(instance.user)
-        elif is_lite_2020(instance.user) or \
-                is_premium(instance.user) or \
-                is_premium_2020(instance.user) or \
-                is_any_ultimate(instance.user):
+        elif is_lite_2020(valid_subscription) or \
+                is_premium(valid_subscription) or \
+                is_premium_2020(valid_subscription) or \
+                is_any_ultimate(valid_subscription):
             decrease_counter(instance.user)
     except IntegrityError:
         # Possibly the user is being deleted
@@ -271,7 +272,8 @@ def nested_comment_pre_save(sender, instance, **kwargs):
     else:
         insufficient_index = instance.author.userprofile.get_scores()['user_scores_index'] is not None and \
                              instance.author.userprofile.get_scores()['user_scores_index'] < 1.00
-        free_account = is_free(instance.author)
+        valid_subscription = PremiumService(instance.author).get_valid_usersubscription()
+        free_account = is_free(valid_subscription)
         insufficient_previous_approvals = NestedComment.objects.filter(
             Q(author=instance.author) & ~Q(pending_moderation=True)
         ).count() < 3
@@ -519,7 +521,7 @@ def subscription_paid(sender, **kwargs):
     profile = user.userprofile
 
     UserProfile.all_objects.filter(user=user).update(updated=timezone.now())
-    PremiumService.clear_subscription_status_cache_keys(user.pk)
+    PremiumService(user).clear_subscription_status_cache_keys()
 
     if subscription.group.name == 'astrobin_lite':
         profile.premium_counter = 0
@@ -546,7 +548,7 @@ def subscription_signed_up(sender, **kwargs):
     user = kwargs.get('user')
 
     UserProfile.all_objects.filter(user=user).update(updated=timezone.now())
-    PremiumService.clear_subscription_status_cache_keys(user.pk)
+    PremiumService(user).clear_subscription_status_cache_keys()
 
     if 'premium' in subscription.category:
         today = DateTimeService.today()
@@ -575,7 +577,7 @@ signed_up.connect(subscription_signed_up)
 
 
 def user_subscription_post_delete(sender, instance, **kwargs):
-    PremiumService.clear_subscription_status_cache_keys(instance.user.pk)
+    PremiumService(instance.user).clear_subscription_status_cache_keys()
 
 
 post_delete.connect(user_subscription_post_delete, sender=UserSubscription)

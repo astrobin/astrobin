@@ -1,36 +1,40 @@
 # -*- coding: utf-8 -*-
 import math
-from datetime import datetime, date
+from datetime import date, datetime
 
 import dateutil
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.postgres.search import TrigramDistance
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.template import Library
 from django.template.defaultfilters import timesince
-from django.utils.safestring import mark_safe, SafeString
+from django.utils.safestring import SafeString, mark_safe
 from django.utils.translation import ugettext as _
 from pybb.models import Post, Topic
-from subscription.models import UserSubscription, Subscription
+from subscription.models import Subscription, UserSubscription
 from threaded_messages.models import Participant
 
 from astrobin import utils
 from astrobin.enums import SubjectType
 from astrobin.enums.license import License
-from astrobin.gear import is_gear_complete, get_correct_gear
-from astrobin.models import GearUserInfo, UserProfile, Image, LICENSE_CHOICES
+from astrobin.gear import get_correct_gear, is_gear_complete
+from astrobin.models import GearUserInfo, Image, LICENSE_CHOICES, UserProfile
 from astrobin.services.utils_service import UtilsService
-from astrobin.utils import get_image_resolution, get_client_country_code, decimal_to_hours_minutes_seconds_html, \
-    decimal_to_degrees_minutes_seconds_html, dec_decimal_precision_from_pixel_scale, \
-    ra_decimal_precision_from_pixel_scale
+from astrobin.utils import (
+    dec_decimal_precision_from_pixel_scale, decimal_to_degrees_minutes_seconds_html,
+    decimal_to_hours_minutes_seconds_html, get_client_country_code, get_image_resolution,
+    ra_decimal_precision_from_pixel_scale,
+)
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
 from astrobin_apps_equipment.models import EquipmentBrandListing
-from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_premium_2020, is_premium, is_ultimate_2020, \
-    is_lite, is_any_ultimate, is_free, is_lite_2020
-from astrobin_apps_premium.utils import premium_get_valid_usersubscription
+from astrobin_apps_premium.services.premium_service import PremiumService
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
+    is_any_ultimate, is_free, is_lite,
+    is_lite_2020, is_premium, is_premium_2020, is_ultimate_2020,
+)
 from astrobin_apps_remote_source_affiliation.services.remote_source_affiliation_service import \
     RemoteSourceAffiliationService
 from astrobin_apps_users.services import UserService
@@ -263,17 +267,18 @@ def gear_type(gear):
 
 
 @register.filter
-def show_ads(user):
+def show_ads(user: User, user_subscription: UserSubscription):
     if not settings.ADS_ENABLED:
         return False
 
     if is_donor(user) and not user.userprofile.allow_astronomy_ads:
         return False
 
-    if is_lite(user) or is_premium(user):
+    if is_lite(user_subscription) or is_premium(user_subscription):
         return False
 
-    if (is_premium_2020(user) or is_ultimate_2020(user)) and not user.userprofile.allow_astronomy_ads:
+    if (is_premium_2020(user_subscription) or is_ultimate_2020(user_subscription)) and not \
+            user.userprofile.allow_astronomy_ads:
         return False
 
     return True
@@ -283,13 +288,16 @@ def show_ads(user):
 def show_ads_on_page(context):
     request = context['request']
 
-    if not show_ads(request.user):
+    valid_subscription = context.context_processors['astrobin.context_processors.user_profile']['valid_usersubscription']
+
+    if not show_ads(request.user, valid_subscription):
         return False
 
     if context.template_name == 'image/detail.html':
         for data in context.dicts:
             if 'image' in data:
-                return not is_any_ultimate(data['image'].user)
+                image_owner_valid_user_subscription = PremiumService(data['image'].user).get_valid_usersubscription()
+                return not is_any_ultimate(image_owner_valid_user_subscription)
     elif context.template_name in (
             'user/profile.html',
             'user_collections_list.html',
@@ -304,7 +312,7 @@ def show_ads_on_page(context):
             if 'requested_user' in data:
                 return not is_any_ultimate(data['requested_user'])
     elif context.template_name == 'index/root.html':
-        return show_ads(request.user) and is_free(request.user)
+        return show_ads(request.user, valid_subscription) and is_free(request.user)
     elif context.template_name in (
             'search/search.html',
             'top_picks.html',
@@ -319,7 +327,9 @@ def show_ads_on_page(context):
 def show_secondary_ad_on_page(context):
     request = context['request']
 
-    if not show_ads(request.user):
+    valid_subscription = context.context_processors['astrobin.context_processors.user_profile']['valid_usersubscription']
+
+    if not show_ads(request.user, valid_subscription):
         return False
 
     country = utils.get_client_country_code(request)
@@ -329,8 +339,11 @@ def show_secondary_ad_on_page(context):
     if context.template_name == 'image/detail.html':
         for data in context.dicts:
             if 'image' in data:
-                return (not request.user.is_authenticated or is_free(request.user)) and \
-                       not is_any_ultimate(data['image'].user)
+                image_owner_valid_user_subscription = PremiumService(data['image'].user).get_valid_usersubscription()
+                return (
+                        (not request.user.is_authenticated or is_free(valid_subscription)) and
+                        not is_any_ultimate(image_owner_valid_user_subscription)
+                )
     elif context.template_name in (
             'user/profile.html',
             'user_collections_list.html',
@@ -343,8 +356,13 @@ def show_secondary_ad_on_page(context):
     ):
         for data in context.dicts:
             if 'requested_user' in data:
-                return (not request.user.is_authenticated or is_free(request.user)) and \
-                       not is_any_ultimate(data['requested_user'])
+                image_owner_valid_user_subscription = PremiumService(
+                    data['requested_user']
+                ).get_valid_usersubscription()
+                return (
+                        (not request.user.is_authenticated or is_free(valid_subscription)) and
+                        not is_any_ultimate(image_owner_valid_user_subscription)
+                )
 
     return False
 
@@ -353,7 +371,9 @@ def show_secondary_ad_on_page(context):
 def show_skyscraper_ads_on_page(context):
     request = context['request']
 
-    if not show_ads(request.user):
+    valid_subscription = context.context_processors['astrobin.context_processors.user_profile']['valid_usersubscription']
+
+    if not show_ads(request.user, valid_subscription):
         return False
 
     country = utils.get_client_country_code(request)
@@ -368,7 +388,8 @@ def show_skyscraper_ads_on_page(context):
     elif context.template_name == 'image/detail.html':
         for data in context.dicts:
             if 'image' in data:
-                image_owner_is_ultimate = is_any_ultimate(data['image'].user)
+                image_owner_valid_user_subscription = PremiumService(data['image'].user).get_valid_usersubscription()
+                image_owner_is_ultimate = is_any_ultimate(image_owner_valid_user_subscription)
     elif context.template_name in (
             'user/profile.html',
             'user_collections_list.html',
@@ -381,7 +402,8 @@ def show_skyscraper_ads_on_page(context):
     ):
         for data in context.dicts:
             if 'requested_user' in data:
-                image_owner_is_ultimate = is_any_ultimate(data['requested_user'])
+                image_owner_valid_user_subscription = PremiumService(data['image'].user).get_valid_usersubscription()
+                image_owner_is_ultimate = is_any_ultimate(image_owner_valid_user_subscription)
 
     return (is_anon or is_free(request.user)) and not image_owner_is_ultimate and \
            (context["COOKIELAW_ACCEPTED"] is not False or not show_cookie_banner(context.request))
@@ -447,12 +469,14 @@ def has_valid_subscription_in_category(user, category):
 
 
 @register.filter
-def get_premium_subscription_expiration(user):
-    if user.is_anonymous:
+def get_paid_subscription_expiration(user_subscription: UserSubscription):
+    if not user_subscription:
         return None
 
-    us = premium_get_valid_usersubscription(user)
-    return us.expires if us else None
+    if user_subscription and user_subscription.user.is_anonymous:
+        return None
+
+    return user_subscription.expires
 
 
 @register.filter
@@ -753,7 +777,7 @@ def get_actstream_action_template_fragment_cache_key(action, language_code):
 @register.filter
 def show_click_and_drag_zoom(request, image):
     return (not 'real' in request.GET and
-            not is_free(request.user) and
+            not is_free(PremiumService(request.user).get_valid_usersubscription()) and
             not (request.user_agent.is_touch_capable or
                  request.user_agent.is_mobile or
                  request.user_agent.is_tablet))
@@ -766,13 +790,13 @@ def show_10_year_anniversary_logo():
 
 
 @register.filter
-def show_images_used(user):
-    return is_lite_2020(user)
+def show_images_used(user_subscription: UserSubscription) -> bool:
+    return is_lite_2020(user_subscription)
 
 
 @register.filter
-def show_uploads_used(user):
-    return is_free(user) or is_lite(user)
+def show_uploads_used(user_subscription: UserSubscription):
+    return is_free(user_subscription) or is_lite(user_subscription)
 
 
 @register.filter

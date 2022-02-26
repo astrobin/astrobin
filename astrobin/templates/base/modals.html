@@ -154,7 +154,7 @@
     </div>
 </div>
 
-{% if request.user|can_remove_ads %}
+{% if valid_usersubscription|can_remove_ads %}
     <div class="modal hide fade" id="remove-ads-modal">
         <div class="modal-header">
             <a class="close" data-dismiss="modal">&times;</a>

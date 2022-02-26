@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic.base import View
 
 from astrobin_apps_json_api.common.forms.CkEditorUploadForm import CkEditorUploadForm
+from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_any_lite, is_any_premium, \
     is_any_ultimate
 
@@ -36,11 +37,13 @@ class CkEditorUpload(CsrfExemptMixin, LoginRequiredMixin, JSONResponseMixin, Vie
 
         MB = 1024 * 1024
 
-        if is_any_lite(request.user):
+        valid_subscription = PremiumService(request.user).get_valid_usersubscription()
+
+        if is_any_lite(valid_subscription):
             max_size = MB * 5
-        elif is_any_premium(request.user):
+        elif is_any_premium(valid_subscription):
             max_size = MB * 10
-        elif is_any_ultimate(request.user):
+        elif is_any_ultimate(valid_subscription):
             max_size = MB * 20
         else:
             max_size = MB * 1

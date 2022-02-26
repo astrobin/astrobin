@@ -18,6 +18,7 @@
 </style>
 
 <div class="profile-meta{% if mobile_header_background %} mobile-header-background{% endif %}">
+    {% setvar requested_user|get_valid_usersubscription as requested_user_valid_usersubscription %}
     {% astrobin_user requested_user view='default'%}
 
     {% if requested_user.userprofile.about %}
@@ -66,25 +67,25 @@
             <p>
                 {% trans "Type" %}<br/>
                 <strong data-test="subscription-type">
-                    {% if requested_user|is_free %}AstroBin Free{% endif %}
-                    {% if requested_user|is_any_lite %}AstroBin Lite{% endif %}
-                    {% if requested_user|is_any_premium %}AstroBin Premium{% endif %}
-                    {% if requested_user|is_any_ultimate %}AstroBin Ultimate{% endif %}
+                    {% if requested_user_valid_usersubscription|is_free %}AstroBin Free{% endif %}
+                    {% if requested_user_valid_usersubscription|is_any_lite %}AstroBin Lite{% endif %}
+                    {% if requested_user_valid_usersubscription|is_any_premium %}AstroBin Premium{% endif %}
+                    {% if requested_user_valid_usersubscription|is_any_ultimate %}AstroBin Ultimate{% endif %}
                 </strong>
             </p>
 
-            {% if not requested_user|is_free %}
+            {% if not requested_user_valid_usersubscription|is_free %}
             <p>
                 {% trans "Expiration date" %}<br/>
                 <strong data-test="expiration-date">
-                    {% with expiration=requested_user|get_premium_subscription_expiration %}
+                    {% with expiration=requested_user_valid_usersubscription|get_paid_subscription_expiration %}
                         {% timestamp expiration %}
                     {% endwith %}
                 </strong>
             </p>
             {% endif %}
 
-            {% if requested_user|show_images_used %}
+            {% if requested_user_valid_usersubscription|show_images_used %}
                 <p>
                     {% trans "Images used" %}<br />
                     <strong data-test="images-used">
@@ -94,19 +95,19 @@
                 </p>
             {% endif %}
 
-            {% if requested_user|show_uploads_used %}
+            {% if requested_user_valid_usersubscription|show_uploads_used %}
                 <p>
                     {% trans "Images used" %}<br />
                     <strong data-test="uploads-used">
                         {# Free and old Lite are the only accounts with a limit on upload count #}
                         {{ requested_user.userprofile.premium_counter }} /
-                        {% if requested_user|is_free %}{{ PREMIUM_MAX_IMAGES_FREE_2020 }}{% endif %}
-                        {% if requested_user|is_lite %}{{ PREMIUM_MAX_IMAGES_LITE }}{% endif %}
+                        {% if requested_user_valid_usersubscription|is_free %}{{ PREMIUM_MAX_IMAGES_FREE_2020 }}{% endif %}
+                        {% if requested_user_valid_usersubscription|is_lite %}{{ PREMIUM_MAX_IMAGES_LITE }}{% endif %}
                     </strong>
                 </p>
             {% endif %}
 
-            {% if requested_user|is_any_premium_subscription %}
+            {% if requested_user_valid_usersubscription|is_any_paid_subscription %}
                 <p class="small">
                     <em>{% trans "Thanks for your support!" %}</em>
                 </p>

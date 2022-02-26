@@ -2,7 +2,7 @@
 {% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="constellation-filter-template">
-    {% if request.user|can_access_advanced_search %}
+    {% if valid_usersubscription|can_access_advanced_search %}
         <div class="form-group" :class="{highlighted: highlighted}">
             <v-multiselect v-model="value" :options="options" track-by="id" label="label"
                            selectLabel="" deselectLabel="" selectedLabel=""

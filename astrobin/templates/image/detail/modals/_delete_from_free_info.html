@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load astrobin_apps_premium_tags %}
 
-{% if request.user|is_free %}
+{% if valid_usersubscription|is_free %}
     <p class="alert alert-info">
         <strong>{% trans "Please note" %}</strong>:
         {% blocktrans trimmed with url="https://welcome.astrobin.com/pricing" %}

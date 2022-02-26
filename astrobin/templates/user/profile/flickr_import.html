@@ -23,7 +23,7 @@
             {% if READONLY_MODE %}
                 {% include 'readonly_mode.html' %}
             {% else %}
-                {% if request.user|is_any_premium or request.user|is_any_ultimate %}
+                {% if valid_usersubscription|is_any_premium or valid_usersubscription|is_any_ultimate %}
                     {% if readonly %}
                         <div class="alert alert-error">
                             {% blocktrans trimmed %}AstroBin is currently in read-only mode, because of server maintenance.

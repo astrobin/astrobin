@@ -12,7 +12,7 @@
         {% include "./_delete_from_free_info.html" %}
 
         <p>
-            {% if request.user|can_restore_from_trash %}
+            {% if valid_usersubscription|can_restore_from_trash %}
                 {% trans "The image will be moved to the trash, and it can be restored later. All its revisions will be there too. Continue?" %}
             {% else %}
                 {% trans "The image will be permanently deleted and cannot be recovered. All its revisions will be deleted too. Are you sure?" %}

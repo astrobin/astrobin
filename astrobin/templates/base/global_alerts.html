@@ -4,7 +4,7 @@
 
 <div id="global-alerts">
 
-{% if request.user.is_authenticated and request.user|has_an_expired_premium_subscription %}
+{% if request.user.is_authenticated and request.user|has_expired_paid_subscription %}
 
     <div class="accordion container" id="expired-subscription-accordion">
         <div class="accordion-group">
@@ -46,7 +46,7 @@
 
 {% endif %}
 
-{% if request.user.is_authenticated and request.user|has_premium_subscription_near_expiration:7 %}
+{% if request.user.is_authenticated and request.user|has_paid_subscription_near_expiration:7 %}
 
     <div class="accordion container" id="expired-subscription-accordion">
         <div class="accordion-group">

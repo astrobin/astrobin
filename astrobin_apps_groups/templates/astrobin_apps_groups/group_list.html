@@ -26,7 +26,7 @@
                 <ul class="dropdown-menu">
                     <li>
                         <a
-                                {% if request.user|has_access_to_premium_group_features %}
+                                {% if valid_usersubscription|has_access_to_premium_group_features %}
                                     href="{% url 'group_create' %}"
                                 {% else %}
                                     href="#feature-restricted-modal" data-toggle="modal"

@@ -89,7 +89,10 @@ def pybb_premoderation(user, post_content, forum):
 
     # Paying members always approved
     from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
-    if not is_free(user):
+    from astrobin_apps_premium.services.premium_service import PremiumService
+
+    valid_subscription = PremiumService(user).get_valid_usersubscription()
+    if not is_free(valid_subscription):
         return True
 
     from pybb.models import Post
