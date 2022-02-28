@@ -402,7 +402,7 @@ def show_skyscraper_ads_on_page(context):
     ):
         for data in context.dicts:
             if 'requested_user' in data:
-                image_owner_valid_user_subscription = PremiumService(data['requested_user'].user).get_valid_usersubscription()
+                image_owner_valid_user_subscription = PremiumService(data['requested_user']).get_valid_usersubscription()
                 image_owner_is_ultimate = is_any_ultimate(image_owner_valid_user_subscription)
 
     return (is_anon or is_free(request.user)) and not image_owner_is_ultimate and \
