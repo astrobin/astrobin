@@ -503,6 +503,8 @@ def image_upload(request):
     tmpl_premium_has_inactive_subscription = valid_subscription is None
 
     response_dict = {
+        'premium_used_percent': tmpl_premium_used_percent,
+        'premium_progress_class': tmpl_premium_progress_class,
         'get_image_quota_usage_percentage': tmpl_premium_used_percent,
         'get_image_quota_usage_class': tmpl_premium_progress_class,
         'premium_has_inactive_subscription': tmpl_premium_has_inactive_subscription,
