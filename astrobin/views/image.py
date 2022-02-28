@@ -148,9 +148,12 @@ class ImageThumbView(JSONResponseMixin, ImageDetailViewBase):
         if revision_label is None:
             revision_label = 'final'
 
-        url = image.thumbnail(
-            alias, revision_label, animated='animated' in self.request.GET, insecure='insecure' in self.request.GET,
-            sync=request.GET.get('sync') is not None)
+        try:
+            url = image.thumbnail(
+                alias, revision_label, animated='animated' in self.request.GET, insecure='insecure' in self.request.GET,
+                sync=request.GET.get('sync') is not None)
+        except FileNotFoundError:
+           url = ImageService(image).get_error_thumbnail(revision_label, alias)
 
         return self.render_json_response({
             'id': image.pk,
@@ -201,9 +204,12 @@ class ImageRawThumbView(ImageDetailViewBase):
 
             return HttpResponse(status=500)
 
-        url = image.thumbnail(
-            alias, revision_label, animated='animated' in self.request.GET, insecure='insecure' in self.request.GET,
-            sync=request.GET.get('sync') is not None)
+        try:
+            url = image.thumbnail(
+                alias, revision_label, animated='animated' in self.request.GET, insecure='insecure' in self.request.GET,
+                sync=request.GET.get('sync') is not None)
+        except FileNotFoundError:
+            url = ImageService(image).get_error_thumbnail(revision_label, alias)
 
         return redirect(smart_unicode(url))
 

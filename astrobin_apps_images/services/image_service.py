@@ -1,4 +1,5 @@
 import logging
+import math
 from collections import namedtuple
 from datetime import timedelta
 
@@ -7,7 +8,6 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
-from django.core.cache.utils import make_template_fragment_key
 from django.core.files.images import get_image_dimensions
 from django.db.models import Q, QuerySet
 from django.urls import reverse
@@ -406,6 +406,24 @@ class ImageService:
         revision: ImageRevision
         for revision in self.get_revisions().iterator():
             revision.thumbnail_invalidate()
+
+    def get_error_thumbnail(self, revision_label, alias):
+        w, h = self.image.w, self.image.h
+        thumb_w, thumb_h = w, h
+        if revision_label not in (0, '0'):
+            try:
+                revision = self.get_revision(revision_label)
+                w, h = revision.w, revision.h
+            except ImageRevision.DoesNotExist:
+                pass
+
+            thumb_w = min(settings.THUMBNAIL_ALIASES[''][alias]['size'][0], w)
+            thumb_h = min(settings.THUMBNAIL_ALIASES[''][alias]['size'][0], h)
+
+            if thumb_h == 0:
+                thumb_h = math.floor(thumb_h * (w / float(thumb_w)))
+
+        return f'https://via.placeholder.com/{thumb_w}x{thumb_h}/222/333&text=ERROR'
 
     @staticmethod
     def get_constellation(solution):
