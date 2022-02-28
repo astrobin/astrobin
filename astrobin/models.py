@@ -1729,14 +1729,14 @@ class Image(HasSolutionMixin, SafeDeleteModel):
             return normalize_url_security(url, thumbnail_settings)
 
         url = cache.get(cache_key)
-        if url:
+        if url and not 'ERROR' in url:
             return normalize_url_security(url, thumbnail_settings)
 
         # Not found in cache, attempt to fetch from database
         try:
             thumbnails = self.thumbnails.get(revision=revision_label)
             url = getattr(thumbnails, alias)
-            if url:
+            if url and not 'ERROR' in url:
                 cache.set(cache_key, url, 60 * 60 * 24)
                 return normalize_url_security(url, thumbnail_settings)
         except ThumbnailGroup.DoesNotExist:

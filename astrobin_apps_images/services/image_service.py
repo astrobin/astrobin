@@ -240,6 +240,9 @@ class ImageService:
         return Image.HEMISPHERE_TYPE_NORTHERN if solution.dec >= 0 else Image.HEMISPHERE_TYPE_SOUTHERN
 
     def set_thumb(self, alias: str, revision_label: str, url: str) -> None:
+        if 'ERROR' in url:
+            return
+
         field = self.image.get_thumbnail_field(revision_label)
         cache_key = self.image.thumbnail_cache_key(field, alias, revision_label)
         cache.set(cache_key, url, 60 * 60 * 24)
