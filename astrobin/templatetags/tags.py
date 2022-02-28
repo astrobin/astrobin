@@ -405,7 +405,7 @@ def show_skyscraper_ads_on_page(context):
                 image_owner_valid_user_subscription = PremiumService(data['requested_user']).get_valid_usersubscription()
                 image_owner_is_ultimate = is_any_ultimate(image_owner_valid_user_subscription)
 
-    return (is_anon or is_free(request.user)) and not image_owner_is_ultimate and \
+    return (is_anon or is_free(valid_subscription)) and not image_owner_is_ultimate and \
            (context["COOKIELAW_ACCEPTED"] is not False or not show_cookie_banner(context.request))
 
 
