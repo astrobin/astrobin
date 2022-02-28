@@ -310,7 +310,10 @@ def show_ads_on_page(context):
     ):
         for data in context.dicts:
             if 'requested_user' in data:
-                return not is_any_ultimate(data['requested_user'])
+                requested_user_valid_usersubscription = PremiumService(
+                    data['requested_user']
+                ).get_valid_usersubscription()
+                return not is_any_ultimate(requested_user_valid_usersubscription)
     elif context.template_name == 'index/root.html':
         return show_ads(request.user, valid_subscription) and is_free(valid_subscription)
     elif context.template_name in (
@@ -356,12 +359,12 @@ def show_secondary_ad_on_page(context):
     ):
         for data in context.dicts:
             if 'requested_user' in data:
-                image_owner_valid_user_subscription = PremiumService(
+                requested_user_valid_usersubscription = PremiumService(
                     data['requested_user']
                 ).get_valid_usersubscription()
                 return (
                         (not request.user.is_authenticated or is_free(valid_subscription)) and
-                        not is_any_ultimate(image_owner_valid_user_subscription)
+                        not is_any_ultimate(requested_user_valid_usersubscription)
                 )
 
     return False
@@ -402,8 +405,8 @@ def show_skyscraper_ads_on_page(context):
     ):
         for data in context.dicts:
             if 'requested_user' in data:
-                image_owner_valid_user_subscription = PremiumService(data['requested_user']).get_valid_usersubscription()
-                image_owner_is_ultimate = is_any_ultimate(image_owner_valid_user_subscription)
+                requested_user_valid_usersubscription = PremiumService(data['requested_user']).get_valid_usersubscription()
+                image_owner_is_ultimate = is_any_ultimate(requested_user_valid_usersubscription)
 
     return (is_anon or is_free(valid_subscription)) and not image_owner_is_ultimate and \
            (context["COOKIELAW_ACCEPTED"] is not False or not show_cookie_banner(context.request))
