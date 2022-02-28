@@ -1,7 +1,7 @@
 {% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="date-acquired-filter-template">
-    {% if request.user|can_access_advanced_search %}
+    {% if valid_usersubscription|can_access_advanced_search %}
         <div class="form-group date-acquired-filter" :class="{highlighted: highlighted}">
             <input id="date-acquired-min-value" name="date_acquired_min" autocomplete="off" class="datepickerclass"
                    type="text" :value="dateAcquiredMin" />

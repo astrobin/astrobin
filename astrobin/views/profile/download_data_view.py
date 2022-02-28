@@ -9,6 +9,7 @@ from django.views.generic import CreateView
 from astrobin.forms.download_data_form import DownloadDataForm
 from astrobin.models import DataDownloadRequest
 from astrobin.tasks import prepare_download_data_archive
+from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_download_data
 
 
@@ -18,7 +19,8 @@ class DownloadDataView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     success_url = reverse_lazy("profile_download_data")
 
     def test_func(self, user):
-        return can_download_data(user)
+        valid_usersubscription = PremiumService(user).get_valid_usersubscription()
+        return can_download_data(valid_usersubscription)
 
     def form_valid(self, form):
         form.instance.user = self.request.user

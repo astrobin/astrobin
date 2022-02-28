@@ -60,6 +60,7 @@ from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_notifications.tasks import push_notification_for_new_image
 from astrobin_apps_platesolving.models import PlateSolvingAdvancedLiveLogEntry, Solution
 from astrobin_apps_platesolving.services import SolutionService
+from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
 from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService

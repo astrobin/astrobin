@@ -53,7 +53,7 @@
             </a>
         </li>
         <li class="{% current request '^/profile/download-data/' %}">
-            {% if request.user|can_download_data %}
+            {% if valid_usersubscription|can_download_data %}
                 <a href="{% url 'profile_download_data' %}">
             {% else %}
                 <a href="#feature-restricted-modal" data-toggle="modal">

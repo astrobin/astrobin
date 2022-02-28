@@ -51,11 +51,13 @@
         <ul class="dropdown-menu">
             <li>
                 <a class="upload-uncompressed-source"
-                   {% if image.user|can_upload_uncompressed_source %}
-                       href="#upload-uncompressed-source-modal"
-                   {% else %}
-                       href="#feature-restricted-modal"
-                   {% endif  %}
+                   {% with image.user|get_valid_usersubscription as image_user_valid_usersubscription %}
+                       {% if image_user_valid_usersubscription|can_upload_uncompressed_source %}
+                           href="#upload-uncompressed-source-modal"
+                       {% else %}
+                           href="#feature-restricted-modal"
+                       {% endif  %}
+                    {% endwith %}
                    data-toggle="modal">
                     <i class="icon-upload"></i>
                     {% trans "Upload uncompressed source (XISF/FITS/PSD/TIFF)" %}

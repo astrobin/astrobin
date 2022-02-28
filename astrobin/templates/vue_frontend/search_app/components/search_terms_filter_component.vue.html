@@ -11,7 +11,7 @@
                 {% endblocktrans %}
             </p>
 
-            {% if request.user|can_access_advanced_search %}
+            {% if valid_usersubscription|can_access_advanced_search %}
                 <p>
                     {% blocktrans trimmed %}
                         Alternatively, you can use the Subject/Telescope/Camera filters or any other advanced filters to

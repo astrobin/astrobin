@@ -77,6 +77,7 @@ class ImageRetailerAffiliatesWhenOwnerIsLite2020Test(TestCase):
         user.userprofile.save()
 
         response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
+
         self.assertNotContains(response, "dropdown retailer-affiliate-products-lite")
         self.assertNotContains(response, "retailer-affiliate-cart-link")
 

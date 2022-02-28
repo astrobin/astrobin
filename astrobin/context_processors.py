@@ -10,6 +10,7 @@ from astrobin.fields import COUNTRIES
 from astrobin.models import CameraRenameProposal
 from astrobin.utils import get_client_country_code
 from astrobin_apps_images.services import ImageService
+from astrobin_apps_premium.services.premium_service import PremiumService
 from common.forms.abuse_report_form import AbuseReportForm
 
 
@@ -27,6 +28,7 @@ def user_language(request):
 def user_profile(request):
     d = {
         'userprofile': None,
+        'valid_usersubscription': PremiumService(request.user).get_valid_usersubscription(),
     }
 
     if request.user.is_authenticated:

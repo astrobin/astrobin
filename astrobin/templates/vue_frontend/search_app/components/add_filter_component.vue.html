@@ -10,9 +10,9 @@
                                selectLabel="" deselectLabel="" :searchable="true" placeholder="{% trans "Select" %}">
 
                     <template slot="option" slot-scope="props">
-                        {% if not request.user|can_access_advanced_search %}
+                        {% if not valid_usersubscription|can_access_advanced_search %}
                             <i class="icon-lock" v-if="props.option.restricted"></i>
-                        {% elif not request.user|can_access_full_search %}
+                        {% elif not valid_usersubscription|can_access_full_search %}
                             <i class="icon-lock" v-if="props.option.restricted === 'FULL'"></i>
                         {% endif %}
 

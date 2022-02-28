@@ -1,6 +1,7 @@
 from rest_framework import permissions
 
-from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_any_ultimate, is_premium
+from astrobin_apps_premium.services.premium_service import PremiumService
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_any_ultimate
 
 
 class HasUncompressedSourceUploaderAccessOrReadOnly(permissions.BasePermission):
@@ -8,4 +9,6 @@ class HasUncompressedSourceUploaderAccessOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return is_any_ultimate(request.user)
+        valid_subscription = PremiumService(request.user).get_valid_usersubscription()
+
+        return is_any_ultimate(valid_subscription)

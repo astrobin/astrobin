@@ -25,6 +25,7 @@ from astrobin_apps_equipment.models import EquipmentBrandListing
 from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
+from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 from common.services import DateTimeService
 from common.services.constellations_service import ConstellationException, ConstellationsService
@@ -327,9 +328,10 @@ class ImageService:
         return get_enhanced_thumb_url, enhanced_thumb_url
 
     def needs_premium_subscription_to_platesolve(self):
+        valid_subscription = PremiumService(self.image.user).get_valid_usersubscription()
         return self.is_platesolvable() and \
                not self.is_platesolving_attempted() and \
-               is_free(self.image.user)
+               is_free(valid_subscription)
 
     def is_platesolvable(self):
         return \

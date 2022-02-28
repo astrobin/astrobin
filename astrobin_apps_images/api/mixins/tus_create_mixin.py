@@ -10,7 +10,7 @@ from astrobin_apps_images.api import constants, signals
 from astrobin_apps_images.api.mixins import TusCacheMixin
 from astrobin_apps_images.api.utils import has_required_tus_header, add_expiry_header, decode_upload_metadata, \
     apply_headers_to_response
-from astrobin_apps_premium.utils import premium_get_max_allowed_image_size
+from astrobin_apps_premium.services.premium_service import PremiumService
 
 log = logging.getLogger('apps')
 
@@ -35,8 +35,9 @@ class TusCreateMixin(TusCacheMixin, mixins.CreateModelMixin):
         log.info("Chunked uploader (%d): initiated upload of file with size %d" % (request.user.pk, upload_length))
 
         # Validate upload_length
+        valid_subscription = PremiumService(request.user).get_valid_usersubscription()
         max_file_size = min(
-            premium_get_max_allowed_image_size(request.user),
+            PremiumService.get_max_allowed_image_size(valid_subscription),
             getattr(self, 'max_file_size', constants.TUS_MAX_FILE_SIZE))
         if upload_length > max_file_size:
             msg = 'Invalid "Upload-Length". Maximum value: {}.'.format(max_file_size)

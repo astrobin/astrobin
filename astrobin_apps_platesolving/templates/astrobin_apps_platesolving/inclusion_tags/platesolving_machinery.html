@@ -28,54 +28,56 @@
                 return $img.attr('data-loaded') === 'true';
             }
 
-            if (shouldProcess()) {
-                var solving = new AstroBinPlatesolving({
-                    object_id: {{object_id}},
-                    content_type_id: {{content_type_id}},
-                    solution_id: {{solution_id}},
-                    solution_status: {{solution_status}},
-                    perform_advanced: "{{ user|can_perform_advanced_platesolving }}",
+            {% with user|get_valid_usersubscription as image_user_valid_usersubscription %}
+                if (shouldProcess()) {
+                    var solving = new AstroBinPlatesolving({
+                        object_id: {{object_id}},
+                        content_type_id: {{content_type_id}},
+                        solution_id: {{solution_id}},
+                        solution_status: {{solution_status}},
+                        perform_advanced: "{{ image_user_valid_usersubscription|can_perform_advanced_platesolving }}",
 
-                    beforeSolveMsg: "{% trans "Plate-solving starting, please do not leave this page..." %}",
-                    beforeSolveAdvancedMsg: "{% trans "Advanced plate-solving starting, please do not leave this page..." %}",
-                    solveStartedMsg: "{% trans "Plate-solving started. You may leave this page." %}",
-                    solveAdvancedStartedMsg: "{% trans "Advanced plate-solving started. You may leave this page." %}",
-                    solveFinalizingMsg: "{% trans "Plate-solving almost ready, please do not leave this page..." %}",
-                    solveFailedMsg: "{% trans "This image could not be plate-solved." %}",
-                    solveAdvancedFailedMsg: "{% trans "The advanced plate-solving failed." %}",
-                    solveSuccessMsg: "{% trans "This image has been plate-solved. Refresh the page to see new data!" %}",
-                    solveAdvancedSuccessMsg: "{% trans "The advanced plate-solved finished. Refresh the page to see new data!" %}",
+                        beforeSolveMsg: "{% trans "Plate-solving starting, please do not leave this page..." %}",
+                        beforeSolveAdvancedMsg: "{% trans "Advanced plate-solving starting, please do not leave this page..." %}",
+                        solveStartedMsg: "{% trans "Plate-solving started. You may leave this page." %}",
+                        solveAdvancedStartedMsg: "{% trans "Advanced plate-solving started. You may leave this page." %}",
+                        solveFinalizingMsg: "{% trans "Plate-solving almost ready, please do not leave this page..." %}",
+                        solveFailedMsg: "{% trans "This image could not be plate-solved." %}",
+                        solveAdvancedFailedMsg: "{% trans "The advanced plate-solving failed." %}",
+                        solveSuccessMsg: "{% trans "This image has been plate-solved. Refresh the page to see new data!" %}",
+                        solveAdvancedSuccessMsg: "{% trans "The advanced plate-solved finished. Refresh the page to see new data!" %}",
 
-                    i18n: {
-                        error: "{% trans 'Error' %}",
-                        connectionRefused: "{% trans 'AstroBin could not plate-solve this image because it was not possible to establish a connection to nova.astrometry.net. Please try again later!' %}",
-                        internalError: "{% trans 'AstroBin could not plate-solve this image because nova.astrometry.net reported an internal server error.' %}",
-                        unexpectedError: "{% trans 'AstroBin could not plate-solve this image because of an unexpected error.' %}",
-                        statusMissing: "{% trans 'Missing' %}",
-                        statusPending: "{% trans 'Basic pending' %}",
-                        statusSuccess: "{% trans 'Basic success' %}",
-                        statusFailed: "{% trans 'Basic failed' %}",
-                        statusAdvancedPending: "{% trans 'Advanced pending' %}",
-                        statusAdvancedSuccess: "{% trans 'Advanced success' %}",
-                        statusAdvancedFailed: "{% trans 'Advanced failed' %}",
-                        na: "{% trans 'n/a' %}",
-                        pixInsightStageStartTask: "{% trans 'Starting task...' %}",
-                        pixInsightStageDownloadingImage: "{% trans 'Downloading image...' %}",
-                        pixInsightStagePlateSolvingImage: "{% trans 'Plate-solving image...' %}",
-                        pixInsightStageGeneratingImageAnnotations: "{% trans 'Generating image annotations...' %}",
-                        pixInsightStageProcessingSvgDocuments: "{% trans 'Processing SVG documents...' %}",
-                        pixInsightStageGeneratingFindingCharts: "{% trans 'Generating finding charts...' %}",
-                        pixInsightStageUploadingResults: "{% trans 'Uploading results...' %}",
-                        pixInsightStageEndTask: "{% trans 'Task completed' %}",
-                    }
-                });
+                        i18n: {
+                            error: "{% trans 'Error' %}",
+                            connectionRefused: "{% trans 'AstroBin could not plate-solve this image because it was not possible to establish a connection to nova.astrometry.net. Please try again later!' %}",
+                            internalError: "{% trans 'AstroBin could not plate-solve this image because nova.astrometry.net reported an internal server error.' %}",
+                            unexpectedError: "{% trans 'AstroBin could not plate-solve this image because of an unexpected error.' %}",
+                            statusMissing: "{% trans 'Missing' %}",
+                            statusPending: "{% trans 'Basic pending' %}",
+                            statusSuccess: "{% trans 'Basic success' %}",
+                            statusFailed: "{% trans 'Basic failed' %}",
+                            statusAdvancedPending: "{% trans 'Advanced pending' %}",
+                            statusAdvancedSuccess: "{% trans 'Advanced success' %}",
+                            statusAdvancedFailed: "{% trans 'Advanced failed' %}",
+                            na: "{% trans 'n/a' %}",
+                            pixInsightStageStartTask: "{% trans 'Starting task...' %}",
+                            pixInsightStageDownloadingImage: "{% trans 'Downloading image...' %}",
+                            pixInsightStagePlateSolvingImage: "{% trans 'Plate-solving image...' %}",
+                            pixInsightStageGeneratingImageAnnotations: "{% trans 'Generating image annotations...' %}",
+                            pixInsightStageProcessingSvgDocuments: "{% trans 'Processing SVG documents...' %}",
+                            pixInsightStageGeneratingFindingCharts: "{% trans 'Generating finding charts...' %}",
+                            pixInsightStageUploadingResults: "{% trans 'Uploading results...' %}",
+                            pixInsightStageEndTask: "{% trans 'Task completed' %}",
+                        }
+                    });
 
-                solving.process();
-            } else {
-                setTimeout(function() {
-                    attemptPlatesolving()
-                }, 1000);
-            }
+                    solving.process();
+                } else {
+                    setTimeout(function() {
+                        attemptPlatesolving()
+                    }, 1000);
+                }
+            {% endwith %}
         }
 
         window.attemptPlatesolving = attemptPlatesolving;

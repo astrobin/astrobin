@@ -9,10 +9,11 @@ from astrobin.templatetags.tags import (
     valid_subscriptions,
     has_valid_subscription,
     has_valid_subscription_in_category,
-    get_premium_subscription_expiration,
+    get_paid_subscription_expiration,
     has_subscription_by_name,
     get_usersubscription_by_name)
 from astrobin.tests.generators import Generators
+from astrobin_apps_premium.services.premium_service import PremiumService
 
 
 class SubscriptionsTest(TestCase):
@@ -32,10 +33,12 @@ class SubscriptionsTest(TestCase):
 
             us.subscribe()
 
+            valid_subscription = PremiumService(u).get_valid_usersubscription()
+
             self.assertEqual(valid_subscriptions(u), [s])
             self.assertEqual(has_valid_subscription(u, s.pk), True)
             self.assertEqual(has_valid_subscription_in_category(u, "premium"), True)
-            self.assertEqual(get_premium_subscription_expiration(u), us.expires)
+            self.assertEqual(get_paid_subscription_expiration(valid_subscription), us.expires)
             self.assertEqual(has_subscription_by_name(u, "AstroBin Premium"), True)
             self.assertEqual(get_usersubscription_by_name(u, "AstroBin Premium"), us)
 
@@ -72,7 +75,9 @@ class SubscriptionsTest(TestCase):
             self.assertEqual(valid_subscriptions(u), [s])
             self.assertEqual(has_valid_subscription(u, s.pk), True)
             self.assertEqual(has_valid_subscription_in_category(u, "premium"), True)
-            self.assertEqual(get_premium_subscription_expiration(u), us.expires)
+            self.assertEqual(
+                get_paid_subscription_expiration(PremiumService(u).get_valid_usersubscription()), us.expires
+            )
             self.assertEqual(has_subscription_by_name(u, "AstroBin Premium 20% discount"), True)
             self.assertEqual(get_usersubscription_by_name(u, "AstroBin Premium 20% discount"), us)
 

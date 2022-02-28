@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from haystack.query import SearchQuerySet
 
 from astrobin.models import Image, UserProfile
-from astrobin_apps_premium.utils import premium_user_has_valid_subscription
+from astrobin_apps_premium.services.premium_service import PremiumService
 from toggleproperties.models import ToggleProperty
 
 log = logging.getLogger('apps')
@@ -35,7 +35,7 @@ def astrobin_username(context, user, **kwargs):
         user_metadata['is_iotd_submitter'] = user.userprofile.is_iotd_submitter()
         user_metadata['is_iotd_reviewer'] = user.userprofile.is_iotd_reviewer()
         user_metadata['is_iotd_judge'] = user.userprofile.is_iotd_judge()
-        user_metadata['is_premium'] = premium_user_has_valid_subscription(user)
+        user_metadata['is_premium'] = PremiumService(user).get_valid_usersubscription() is not None,
         cache.set(cache_key, user_metadata, 300)
     else:
         display_name = user_metadata['display_name']

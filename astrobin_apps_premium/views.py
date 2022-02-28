@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from django.views.generic.edit import FormView, CreateView
 from subscription.models import Transaction, Subscription, UserSubscription
 
+import astrobin_apps_premium.services.premium_service
 from . import utils as premium_utils
 from astrobin_apps_donations import utils as donation_utils
 from .forms import MigrateDonationsForm
@@ -44,7 +45,8 @@ class MigrateDonationsView(FormView):
             try:
                 us = UserSubscription.objects.get(
                     user=self.request.user,
-                    subscription__name__in=premium_utils.SUBSCRIPTION_NAMES)
+                    subscription__name__in=astrobin_apps_premium.services.premium_service.SUBSCRIPTION_NAMES
+                )
             except UserSubscription.DoesNotExist:
                 us = None
 

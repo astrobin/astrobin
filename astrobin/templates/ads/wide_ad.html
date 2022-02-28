@@ -10,7 +10,7 @@
             <h4><i class="icon-bullhorn hidden-phone"></i></h4>
 
             <a class="remove" data-toggle="modal"
-                    {% if request.user|can_remove_ads %}
+                    {% if valid_usersubscription|can_remove_ads %}
                href="#remove-ads-modal"
                     {% else %}
                href="#feature-restricted-modal"

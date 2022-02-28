@@ -1721,7 +1721,7 @@
    usersubscription
  * (uploads) Consider deleted revisions when computing new label
  * (premium) is_lite/premium tags always return false for anon user
- * (subscription) Make premium_get_valid_usersubscription really only look for
+ * (subscription) Make get_valid_usersubscription really only look for
    valid ones
 
 2018-03-02 Salvatore Iovene <salvatore@iovene.com>

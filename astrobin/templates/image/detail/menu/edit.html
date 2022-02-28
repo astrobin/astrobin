@@ -111,7 +111,7 @@
                 <li class="divider"></li>
 
                 <li>
-                    {% if request.user|can_perform_basic_platesolving %}
+                    {% if valid_usersubscription|can_perform_basic_platesolving %}
                         {% if is_revision %}
                             <a href="{% url 'image_edit_platesolving_settings' image.get_id revision_image.label %}">
                         {% else %}
@@ -126,7 +126,7 @@
                     </a>
                 </li>
 
-                {% if request.user|can_perform_basic_platesolving %}
+                {% if valid_usersubscription|can_perform_basic_platesolving %}
                     <li>
                         <a href="
                             {% if is_revision %}
@@ -141,7 +141,7 @@
                     </li>
                 {% endif %}
 
-                {% if request.user|can_perform_advanced_platesolving %}
+                {% if valid_usersubscription|can_perform_advanced_platesolving %}
                     <li class="divider"></li>
 
                     <li>

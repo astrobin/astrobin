@@ -5,6 +5,7 @@ from django.views import View
 
 from astrobin_apps_groups.models import Group
 from astrobin_apps_groups.utils import has_access_to_premium_group_features
+from astrobin_apps_premium.services.premium_service import PremiumService
 
 
 class RestrictToGroupMembersMixin(View):
@@ -41,7 +42,8 @@ class RestrictToGroupModeratorsMixin(View):
 
 class RestrictToPremiumMembersMixin(View):
     def dispatch(self, request, *args, **kwargs):
-        if not has_access_to_premium_group_features(request.user):
+        valid_usersubscription = PremiumService(request.user).get_valid_usersubscription()
+        if not has_access_to_premium_group_features(valid_usersubscription):
             return HttpResponseForbidden()
         return super(RestrictToPremiumMembersMixin, self).dispatch(request, *args, **kwargs)
 

@@ -207,7 +207,7 @@
                                 {% for i in '12345'|make_list %}
                                     <li>
                                         <a
-                                                {% if request.user|can_access_full_search %}
+                                                {% if valid_usersubscription|can_access_full_search %}
                                                     href="{{ instance_to_platesolve.solution|get_search_query_around:forloop.counter }}"
                                                 {% else %}
                                                     href="#feature-restricted-to-ultimate-modal"
@@ -244,7 +244,7 @@
                     </p>
                 {% endif %}
 
-                {% if request.user|can_view_full_technical_card or request.user == image.user %}
+                {% if valid_usersubscription|can_view_full_technical_card or request.user == image.user %}
                     {% if image.data_source and image.data_source != "OTHER" and image.data_source != "UNSET" %}
                         <p>
                             <strong class="card-label">{% trans "Data source" %}:</strong>

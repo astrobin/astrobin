@@ -1,14 +1,15 @@
 from datetime import date, timedelta
 
 from dateutil.relativedelta import relativedelta
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from django.urls import reverse
 from django.test import TestCase, override_settings
 from subscription.models import Subscription
 
 from astrobin.models import Image, UserProfile
+from astrobin_apps_premium.services.premium_service import PremiumService
+
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import *
-from astrobin_apps_premium.utils import *
 
 
 class PremiumTest(TestCase):
@@ -99,36 +100,32 @@ class PremiumTest(TestCase):
 
             self.assertEqual(False, premium_us.cancelled)
 
-            self.assertEqual(premium_us, premium_get_usersubscription(self.user))
-            self.assertEqual(premium_us, premium_get_valid_usersubscription(self.user))
+            self.assertEqual(premium_us, PremiumService(self.user).get_valid_usersubscription())
 
             premium_autorenew_us, created = UserSubscription.objects.get_or_create(
                 user=self.user, subscription=self.premium_autorenew_sub, cancelled=False,
                 expires=date.today() + timedelta(1))
             premium_autorenew_us.subscribe()
 
-            self.assertEqual(premium_us, premium_get_usersubscription(self.user))
-            self.assertEqual(premium_us, premium_get_valid_usersubscription(self.user))
+            self.assertEqual(premium_us, PremiumService(self.user).get_valid_usersubscription())
 
             lite_us, created = UserSubscription.objects.get_or_create(
                 user=self.user, subscription=self.lite_sub, cancelled=False,
                 expires=date.today() + timedelta(1))
             lite_us.subscribe()
 
-            self.assertEqual(premium_us, premium_get_usersubscription(self.user))
-            self.assertEqual(premium_us, premium_get_valid_usersubscription(self.user))
+            self.assertEqual(premium_us, PremiumService(self.user).get_valid_usersubscription())
 
             lite_autorenew_us, created = UserSubscription.objects.get_or_create(
                 user=self.user, subscription=self.lite_autorenew_sub, cancelled=False,
                 expires=date.today() + timedelta(1))
             lite_autorenew_us.subscribe()
 
-            self.assertEqual(premium_us, premium_get_usersubscription(self.user))
-            self.assertEqual(premium_us, premium_get_valid_usersubscription(self.user))
+            self.assertEqual(premium_us, PremiumService(self.user).get_valid_usersubscription())
 
             premium_us.expires = date.today() - timedelta(1)
             premium_us.save()
-            self.assertEqual(premium_autorenew_us, premium_get_valid_usersubscription(self.user))
+            self.assertEqual(premium_autorenew_us, PremiumService(self.user).get_valid_usersubscription())
 
     def test_premium_get_usersubscription_premium_2020_priority(self):
         with self.settings(PREMIUM_ENABLED=True):
@@ -137,43 +134,38 @@ class PremiumTest(TestCase):
                 expires=date.today() + timedelta(1))
             premium_2020_us.subscribe()
 
-            self.assertEqual(premium_2020_us, premium_get_usersubscription(self.user))
-            self.assertEqual(premium_2020_us, premium_get_valid_usersubscription(self.user))
+            self.assertEqual(premium_2020_us, PremiumService(self.user).get_valid_usersubscription())
 
             premium_us, created = UserSubscription.objects.get_or_create(
                 user=self.user, subscription=self.premium_sub, cancelled=False,
                 expires = date.today() + timedelta(1))
             premium_us.subscribe()
 
-            self.assertEqual(premium_2020_us, premium_get_usersubscription(self.user))
-            self.assertEqual(premium_2020_us, premium_get_valid_usersubscription(self.user))
+            self.assertEqual(premium_2020_us, PremiumService(self.user).get_valid_usersubscription())
 
             premium_autorenew_us, created = UserSubscription.objects.get_or_create(
                 user=self.user, subscription=self.premium_autorenew_sub, cancelled=False,
                 expires = date.today() + timedelta(1))
             premium_autorenew_us.subscribe()
 
-            self.assertEqual(premium_2020_us, premium_get_usersubscription(self.user))
-            self.assertEqual(premium_2020_us, premium_get_valid_usersubscription(self.user))
+            self.assertEqual(premium_2020_us, PremiumService(self.user).get_valid_usersubscription())
 
             lite_us, created = UserSubscription.objects.get_or_create(
                 user=self.user, subscription=self.lite_sub, cancelled=False,
                 expires = date.today() + timedelta(1))
             lite_us.subscribe()
 
-            self.assertEqual(premium_2020_us, premium_get_usersubscription(self.user))
-            self.assertEqual(premium_2020_us, premium_get_valid_usersubscription(self.user))
+            self.assertEqual(premium_2020_us, PremiumService(self.user).get_valid_usersubscription())
 
             lite_autorenew_us, created = UserSubscription.objects.get_or_create(
                 user=self.user, subscription=self.lite_autorenew_sub, cancelled=False)
             lite_autorenew_us.subscribe()
 
-            self.assertEqual(premium_2020_us, premium_get_usersubscription(self.user))
-            self.assertEqual(premium_2020_us, premium_get_valid_usersubscription(self.user))
+            self.assertEqual(premium_2020_us, PremiumService(self.user).get_valid_usersubscription())
 
             premium_2020_us.expires = date.today() - timedelta(1)
             premium_2020_us.save()
-            self.assertEqual(premium_us, premium_get_valid_usersubscription(self.user))
+            self.assertEqual(premium_us, PremiumService(self.user).get_valid_usersubscription())
 
     def test_premium_get_usersubscription_ultimate_2020_priority(self):
         with self.settings(PREMIUM_ENABLED=True):
@@ -182,52 +174,46 @@ class PremiumTest(TestCase):
                 expires=date.today() + timedelta(1))
             ultimate_2020_us.subscribe()
 
-            self.assertEqual(ultimate_2020_us, premium_get_usersubscription(self.user))
-            self.assertEqual(ultimate_2020_us, premium_get_valid_usersubscription(self.user))
+            self.assertEqual(ultimate_2020_us, PremiumService(self.user).get_valid_usersubscription())
 
             premium_2020_us, created = UserSubscription.objects.get_or_create(
                 user=self.user, subscription=self.premium_2020_sub, cancelled=False,
                 expires=date.today() + timedelta(1))
             premium_2020_us.subscribe()
 
-            self.assertEqual(ultimate_2020_us, premium_get_usersubscription(self.user))
-            self.assertEqual(ultimate_2020_us, premium_get_valid_usersubscription(self.user))
+            self.assertEqual(ultimate_2020_us, PremiumService(self.user).get_valid_usersubscription())
 
             premium_us, created = UserSubscription.objects.get_or_create(
                 user=self.user, subscription=self.premium_sub, cancelled=False,
                 expires=date.today() + timedelta(1))
             premium_us.subscribe()
 
-            self.assertEqual(ultimate_2020_us, premium_get_usersubscription(self.user))
-            self.assertEqual(ultimate_2020_us, premium_get_valid_usersubscription(self.user))
+            self.assertEqual(ultimate_2020_us, PremiumService(self.user).get_valid_usersubscription())
 
             premium_autorenew_us, created = UserSubscription.objects.get_or_create(
                 user=self.user, subscription=self.premium_autorenew_sub, cancelled=False,
                 expires=date.today() + timedelta(1))
             premium_autorenew_us.subscribe()
 
-            self.assertEqual(ultimate_2020_us, premium_get_usersubscription(self.user))
-            self.assertEqual(ultimate_2020_us, premium_get_valid_usersubscription(self.user))
+            self.assertEqual(ultimate_2020_us, PremiumService(self.user).get_valid_usersubscription())
 
             lite_us, created = UserSubscription.objects.get_or_create(
                 user=self.user, subscription=self.lite_sub, cancelled=False,
                 expires=date.today() + timedelta(1))
             lite_us.subscribe()
 
-            self.assertEqual(ultimate_2020_us, premium_get_usersubscription(self.user))
-            self.assertEqual(ultimate_2020_us, premium_get_valid_usersubscription(self.user))
+            self.assertEqual(ultimate_2020_us, PremiumService(self.user).get_valid_usersubscription())
 
             lite_autorenew_us, created = UserSubscription.objects.get_or_create(
                 user=self.user, subscription=self.lite_autorenew_sub, cancelled=False,
                 expires=date.today() + timedelta(1))
             lite_autorenew_us.subscribe()
 
-            self.assertEqual(ultimate_2020_us, premium_get_usersubscription(self.user))
-            self.assertEqual(ultimate_2020_us, premium_get_valid_usersubscription(self.user))
+            self.assertEqual(ultimate_2020_us, PremiumService(self.user).get_valid_usersubscription())
 
             ultimate_2020_us.expires = date.today() - timedelta(1)
             ultimate_2020_us.save()
-            self.assertEqual(premium_2020_us, premium_get_valid_usersubscription(self.user))
+            self.assertEqual(premium_2020_us, PremiumService(self.user).get_valid_usersubscription())
 
     def test_subscription_validity_lite(self):
         with self.settings(PREMIUM_ENABLED=True):
@@ -238,17 +224,11 @@ class PremiumTest(TestCase):
                 expires=date.today() + timedelta(1))
             us.subscribe()
 
-            self.assertEqual(premium_get_usersubscription(self.user), us)
-            self.assertEqual(premium_get_valid_usersubscription(self.user), us)
-            self.assertEqual(premium_get_invalid_usersubscription(self.user), None)
-            self.assertEqual(premium_user_has_subscription(self.user), True)
-            self.assertEqual(premium_user_has_valid_subscription(self.user), True)
-            self.assertEqual(premium_user_has_invalid_subscription(self.user), False)
+            valid_usersubscription = PremiumService(self.user).get_valid_usersubscription()
+            
+            self.assertEqual(us, valid_usersubscription)
+            self.assertTrue(is_lite(valid_usersubscription))
 
-            self.assertEqual(is_lite(self.user), True)
-
-            us.unsubscribe()
-            us.delete()
 
     def test_subscription_validity_premium(self):
         with self.settings(PREMIUM_ENABLED=True):
@@ -259,17 +239,11 @@ class PremiumTest(TestCase):
                 expires=date.today() + timedelta(1))
             us.subscribe()
 
-            self.assertEqual(premium_get_usersubscription(self.user), us)
-            self.assertEqual(premium_get_valid_usersubscription(self.user), us)
-            self.assertEqual(premium_get_invalid_usersubscription(self.user), None)
-            self.assertEqual(premium_user_has_subscription(self.user), True)
-            self.assertEqual(premium_user_has_valid_subscription(self.user), True)
-            self.assertEqual(premium_user_has_invalid_subscription(self.user), False)
+            valid_usersubscription = PremiumService(self.user).get_valid_usersubscription()
 
-            self.assertEqual(is_premium(self.user), True)
+            self.assertEqual(us, valid_usersubscription)
+            self.assertTrue(is_premium(valid_usersubscription))
 
-            us.unsubscribe()
-            us.delete()
 
     def test_subscription_validity_lite_2020(self):
         with self.settings(PREMIUM_ENABLED=True):
@@ -280,15 +254,11 @@ class PremiumTest(TestCase):
                 expires=date.today() + timedelta(1))
             us.subscribe()
 
-            self.assertEqual(premium_get_usersubscription(self.user), us)
-            self.assertEqual(premium_get_valid_usersubscription(self.user), us)
-            self.assertEqual(premium_get_invalid_usersubscription(self.user), None)
-            self.assertEqual(premium_user_has_subscription(self.user), True)
-            self.assertEqual(premium_user_has_valid_subscription(self.user), True)
-            self.assertEqual(premium_user_has_invalid_subscription(self.user), False)
+            valid_subscription = PremiumService(self.user).get_valid_usersubscription()
+            self.assertEqual(valid_subscription, us)
 
-            self.assertEqual(is_lite(self.user), False)
-            self.assertEqual(is_lite_2020(self.user), True)
+            self.assertFalse(is_lite(valid_subscription))
+            self.assertTrue(is_lite_2020(valid_subscription))
 
             us.unsubscribe()
             us.delete()
@@ -302,15 +272,11 @@ class PremiumTest(TestCase):
                 expires=date.today() + timedelta(1))
             us.subscribe()
 
-            self.assertEqual(premium_get_usersubscription(self.user), us)
-            self.assertEqual(premium_get_valid_usersubscription(self.user), us)
-            self.assertEqual(premium_get_invalid_usersubscription(self.user), None)
-            self.assertEqual(premium_user_has_subscription(self.user), True)
-            self.assertEqual(premium_user_has_valid_subscription(self.user), True)
-            self.assertEqual(premium_user_has_invalid_subscription(self.user), False)
+            valid_subscription = PremiumService(self.user).get_valid_usersubscription()
+            self.assertEqual(us, valid_subscription)
 
-            self.assertEqual(is_premium(self.user), False)
-            self.assertEqual(is_premium_2020(self.user), True)
+            self.assertFalse(is_premium(valid_subscription))
+            self.assertTrue(is_premium_2020(valid_subscription))
 
             us.unsubscribe()
             us.delete()
@@ -324,14 +290,10 @@ class PremiumTest(TestCase):
                 expires=date.today() + timedelta(1))
             us.subscribe()
 
-            self.assertEqual(premium_get_usersubscription(self.user), us)
-            self.assertEqual(premium_get_valid_usersubscription(self.user), us)
-            self.assertEqual(premium_get_invalid_usersubscription(self.user), None)
-            self.assertEqual(premium_user_has_subscription(self.user), True)
-            self.assertEqual(premium_user_has_valid_subscription(self.user), True)
-            self.assertEqual(premium_user_has_invalid_subscription(self.user), False)
+            valid_subscription = PremiumService(self.user).get_valid_usersubscription()
 
-            self.assertEqual(is_ultimate_2020(self.user), True)
+            self.assertEqual(us, valid_subscription)
+            self.assertTrue(is_ultimate_2020(valid_subscription))
 
             us.unsubscribe()
             us.delete()
@@ -358,8 +320,7 @@ class PremiumTest(TestCase):
 
         self.assertTrue(premium.valid())
 
-        self.assertEqual(premium_get_valid_usersubscription(self.user), premium)
-        self.assertEqual(premium_get_invalid_usersubscription(self.user), expired_ultimate)
+        self.assertEqual(PremiumService(self.user).get_valid_usersubscription(), premium)
 
 
     def test_upload_limits_free_recent_upload(self):
@@ -423,7 +384,7 @@ class PremiumTest(TestCase):
             # Set the upload time to 2 days ago because images uploaded less than 24h ago never decrease the counter,
             # regardless of the user subscription.
             image = Image.objects_including_wip.all().last()
-            image.uploaded = datetime.now() - relativedelta(days=2)
+            image.uploaded = DateTimeService.now() - relativedelta(days=2)
             image.save(keep_deleted=True)
 
             # Deleting an image that was uploaded more than 24h ago decreases the counter.
@@ -469,7 +430,7 @@ class PremiumTest(TestCase):
             # Set the upload time to 2 days ago because images uploaded less than 24h ago never decrease the counter,
             # regardless of the user subscription.
             image = Image.objects_including_wip.all().last()
-            image.uploaded = datetime.now() - relativedelta(days=2)
+            image.uploaded = DateTimeService.now() - relativedelta(days=2)
             image.save(keep_deleted=True)
 
             # Deleting an image uploaded this year should decrease the counter.
@@ -521,7 +482,7 @@ class PremiumTest(TestCase):
             # Set the upload time to 2 days ago because images uploaded less than 24h ago never decrease the counter,
             # regardless of the user subscription.
             image = Image.objects_including_wip.all().last()
-            image.uploaded = datetime.now() - relativedelta(days=2)
+            image.uploaded = DateTimeService.now() - relativedelta(days=2)
             image.save(keep_deleted=True)
 
             # Deleting an image uploaded this year should decrease the counter.
@@ -577,7 +538,7 @@ class PremiumTest(TestCase):
             # Set the upload time to 2 days ago because images uploaded less than 24h ago never decrease the counter,
             # regardless of the user subscription.
             image = Image.objects_including_wip.all().last()
-            image.uploaded = datetime.now() - relativedelta(days=2)
+            image.uploaded = DateTimeService.now() - relativedelta(days=2)
             image.save(keep_deleted=True)
 
             # Deleting an image uploaded this year should decrease the counter.
@@ -629,7 +590,7 @@ class PremiumTest(TestCase):
             # Set the upload time to 2 days ago because images uploaded less than 24h ago never decrease the counter,
             # regardless of the user subscription.
             image = Image.objects_including_wip.all().last()
-            image.uploaded = datetime.now() - relativedelta(days=2)
+            image.uploaded = DateTimeService.now() - relativedelta(days=2)
             image.save(keep_deleted=True)
 
             # Deleting an image uploaded this year should decrease the counter.
@@ -685,7 +646,7 @@ class PremiumTest(TestCase):
             # Set the upload time to 2 days ago because images uploaded less than 24h ago never decrease the counter,
             # regardless of the user subscription.
             image = Image.objects_including_wip.all().last()
-            image.uploaded = datetime.now() - relativedelta(days=2)
+            image.uploaded = DateTimeService.now() - relativedelta(days=2)
             image.save(keep_deleted=True)
 
             # Deleting an image uploaded this year should decrease the counter.
@@ -735,7 +696,7 @@ class PremiumTest(TestCase):
         # Set the upload time to 2 days ago because images uploaded less than 24h ago never decrease the counter,
         # regardless of the user subscription.
         image = Image.objects_including_wip.all().last()
-        image.uploaded = datetime.now() - relativedelta(days=2)
+        image.uploaded = DateTimeService.now() - relativedelta(days=2)
         image.save(keep_deleted=True)
 
         # Deleting an image uploaded this year should decrease the counter.
@@ -787,7 +748,7 @@ class PremiumTest(TestCase):
             # Set the upload time to 2 days ago because images uploaded less than 24h ago never decrease the counter,
             # regardless of the user subscription.
             image = Image.objects_including_wip.all().last()
-            image.uploaded = datetime.now() - relativedelta(days=2)
+            image.uploaded = DateTimeService.now() - relativedelta(days=2)
             image.save(keep_deleted=True)
 
             # Deleting an image uploaded this year should decrease the counter.

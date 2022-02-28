@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
+from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 from common.services import DateTimeService
 
@@ -41,7 +42,8 @@ def may_toggle_submission_image(user, image):
         }
 
     if settings.PREMIUM_RESTRICTS_IOTD:
-        if is_free(image.user):
+        valid_subscription = PremiumService(image.user).get_valid_usersubscription()
+        if is_free(valid_subscription):
             return False, _("Users with a Free membership cannot participate in the IOTD.")
 
     # Import here to avoid circular dependency
@@ -126,7 +128,8 @@ def may_toggle_vote_image(user, image):
         }
 
     if settings.PREMIUM_RESTRICTS_IOTD:
-        if is_free(image.user):
+        valid_subscription = PremiumService(image.user).get_valid_usersubscription()
+        if is_free(valid_subscription):
             return False, _("Users with a Free membership cannot participate in the IOTD.")
 
     return True, None
@@ -157,7 +160,8 @@ def may_elect_iotd(user, image):
                }
 
     if settings.PREMIUM_RESTRICTS_IOTD:
-        if is_free(image.user):
+        valid_subscription = PremiumService(image.user).get_valid_usersubscription()
+        if is_free(valid_subscription):
             return False, _("Users with a Free membership cannot participate in the IOTD.")
 
     # Import here to avoid circular dependency

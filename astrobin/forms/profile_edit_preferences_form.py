@@ -4,6 +4,7 @@ from django.forms import SelectMultiple
 from django.utils.translation import ugettext_lazy as _
 
 from astrobin.models import UserProfile
+from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     can_remove_ads,
     can_remove_retailer_integration,
@@ -40,10 +41,12 @@ class UserProfileEditPreferencesForm(forms.ModelForm):
         super(UserProfileEditPreferencesForm, self).__init__(**kwargs)
         profile = getattr(self, 'instance', None)
 
-        if not can_remove_ads(profile.user):
+        valid_usersubscription = PremiumService(profile.user).get_valid_usersubscription()
+
+        if not can_remove_ads(valid_usersubscription):
             self.fields['allow_astronomy_ads'].widget.attrs['disabled'] = True
 
-        if not can_remove_retailer_integration(profile.user):
+        if not can_remove_retailer_integration(valid_usersubscription):
             self.fields['allow_retailer_integration'].widget.attrs['disabled'] = True
 
     def clean_other_languages(self):
