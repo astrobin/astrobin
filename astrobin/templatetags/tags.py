@@ -312,13 +312,13 @@ def show_ads_on_page(context):
             if 'requested_user' in data:
                 return not is_any_ultimate(data['requested_user'])
     elif context.template_name == 'index/root.html':
-        return show_ads(request.user, valid_subscription) and is_free(request.user)
+        return show_ads(request.user, valid_subscription) and is_free(valid_subscription)
     elif context.template_name in (
             'search/search.html',
             'top_picks.html',
             'astrobin_apps_iotd/iotd_archive.html'
     ):
-        return not request.user.is_authenticated or is_free(request.user)
+        return not request.user.is_authenticated or is_free(valid_subscription)
 
     return False
 
