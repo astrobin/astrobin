@@ -185,7 +185,7 @@ $(document).ready(function () {
 
                         tries[key] += 1;
 
-                        if (data.url === undefined || data.url === null || data.url.indexOf("placeholder") > -1) {
+                        if (data.url === undefined || data.url === null || (data.url.indexOf("placeholder") > -1) && data.url.indexOf("ERROR") === -1) {
                             setTimeout(function () {
                                 load(url, id, revision, alias, tries, hires, randomTimeout, true).then(function(url) {
                                     resolve(url);
