@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-transport-https \
     curl \
     git \
-    libc6-dev \
+    libc6-dev=2.31-0ubuntu9.2 \
     build-essential \
     python3-dev \
     pkg-config \
