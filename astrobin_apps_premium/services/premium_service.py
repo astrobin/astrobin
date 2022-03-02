@@ -5,7 +5,6 @@ from datetime import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
-from django.db.models import Q
 from subscription.models import UserSubscription
 
 from astrobin.models import UserProfile
@@ -29,7 +28,7 @@ SUBSCRIPTION_NAMES = (
 
 
 def _compareValidity(a, b):
-    return a.valid() - b.valid()
+    return b.valid() - a.valid()
 
 
 def _compareNames(a, b):
