@@ -5,9 +5,9 @@ MAINTAINER Salvatore Iovene <salvatore@astrobin.com>
 ARG DEBIAN_FRONTEND=noninteractive
 ARG APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 
-COPY docker/patch-uname.sh /usr/bin/astrobin-patch-uname.sh
-RUN sh /usr/bin/astrobin-patch-uname.sh
-RUN echo `uname -r`
+# AWS CodeBuild now ships with a Linux Kernel 4 with patch version > 255, and libc7 does not support that.
+# Holding it will prevent attempting to upgrade it and will simply keep what's already in the base image.
+RUN apt-mark hold libc6
 
 # Install build prerequisites
 RUN apt-get update && apt-get install -y --no-install-recommends \
