@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-transport-https \
     curl \
     git \
+    libc6-dev \
     build-essential \
     python3-dev \
     pkg-config \
