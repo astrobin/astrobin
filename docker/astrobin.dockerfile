@@ -5,6 +5,10 @@ MAINTAINER Salvatore Iovene <salvatore@astrobin.com>
 ARG DEBIAN_FRONTEND=noninteractive
 ARG APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 
+COPY docker/patch-uname.sh /usr/bin/astrobin-patch-uname.sh
+RUN sh /usr/bin/astrobin-patch-uname.sh
+RUN echo `uname -r`
+
 # Install build prerequisites
 RUN apt-get update && apt-get install -y --no-install-recommends \
     locales \
