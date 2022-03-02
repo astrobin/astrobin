@@ -5,6 +5,7 @@ MAINTAINER Salvatore Iovene <salvatore@astrobin.com>
 ARG DEBIAN_FRONTEND=noninteractive
 ARG APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 
+RUN sh ./patch-uname.sh
 RUN echo `uname -r`
 
 # Install build prerequisites
