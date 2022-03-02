@@ -1,5 +1,5 @@
 # Get the base
-FROM ubuntu:20.04
+FROM ubuntu:21.10
 MAINTAINER Salvatore Iovene <salvatore@astrobin.com>
 
 ARG DEBIAN_FRONTEND=noninteractive
