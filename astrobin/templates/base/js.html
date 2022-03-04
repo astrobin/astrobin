@@ -141,6 +141,20 @@
             html: '<i class="icon-spinner"></i>'
         };
 
+        function initFancyBoxToolbarLinkButtons(fancybox, slide) {
+            const rel = slide.rel;
+
+            setTimeout(() => {
+                const $linkButton = $(fancybox.plugins.Toolbar.$container).find('.fancybox__button--viewImagePage');
+                const $linkInNewTabButton = $(fancybox.plugins.Toolbar.$container).find('.fancybox__button--viewImagePageInNewTab');
+
+                if (rel !== 'image-list' && rel !== 'revisions') {
+                    $linkButton.remove();
+                    $linkInNewTabButton.remove();
+                }
+            })
+        }
+
         function initFancyBoxToolbarTogglePropertyButton(fancybox, slide) {
             const rel = slide.rel;
             const imageId = slide.id;
@@ -368,6 +382,7 @@
                         `url("${slide.src}")`
                     );
 
+                    initFancyBoxToolbarLinkButtons(fancybox, slide);
                     initFancyBoxToolbarTogglePropertyButton(fancybox, slide);
                     setTimeout(() => {
                         initFancyBoxPlateSolution(fancybox, slide);
@@ -381,6 +396,7 @@
                         `url("${slide.src}")`
                     );
 
+                    initFancyBoxToolbarLinkButtons(fancybox, slide);
                     initFancyBoxToolbarTogglePropertyButton(fancybox, slide);
                     setTimeout(() => {
                         initFancyBoxPlateSolution(fancybox, slide);

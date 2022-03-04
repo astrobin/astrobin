@@ -5,7 +5,7 @@
         <div class="header"><h4><i class="icon-hand-up"></i> {% trans "Sky plot" %}</h4></div>
         <div class="image">
             {% if pixinsight_finding_chart_small %}
-                <a href="{{ IMAGES_URL }}{{ pixinsight_finding_chart }}" class="fancybox">
+                <a href="{{ IMAGES_URL }}{{ pixinsight_finding_chart }}" data-fancybox="sky-plot" data-rel="sky-plot">
                   <img src="{{ IMAGES_URL }}{{ pixinsight_finding_chart_small }}" alt="{% trans "Sky plot" %}" />
                 </a>
             {% else %}
