@@ -101,7 +101,7 @@ class CommentNotificationsService:
                             'target': str(self.comment.content_object),
                             'target_url': build_notification_url(
                                 settings.BASE_URL + self.comment.content_object.get_absolute_url(), self.comment.author
-                            ),
+                            ) if hasattr(self.comment.content_object, 'get_absolute_url') else None
                         }
                     )
 
