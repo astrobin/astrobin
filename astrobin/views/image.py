@@ -1089,7 +1089,7 @@ class ImageEditGearView(ImageEditBaseView):
         profile = user.userprofile
 
         context['no_gear'] = profile.telescopes.count() == 0 and profile.cameras.count() == 0
-        context['copy_gear_form'] = CopyGearForm(user)
+        context['copy_gear_form'] = CopyGearForm(user, context['image'])
         return context
 
     def get_success_url(self):

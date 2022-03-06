@@ -8,6 +8,6 @@ class CopyGearForm(forms.Form):
         queryset=None,
     )
 
-    def __init__(self, user, **kwargs):
+    def __init__(self, user, image, **kwargs):
         super(CopyGearForm, self).__init__(**kwargs)
-        self.fields['image'].queryset = Image.objects_including_wip.filter(user=user)[:100]
+        self.fields['image'].queryset = Image.objects_including_wip.filter(user=user).exclude(pk=image.pk)[:100]
