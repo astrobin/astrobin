@@ -7,18 +7,44 @@
 
 
 {% ifequal view "table" %}
-    <table class="table table-condensed table-striped image-list">
+    <table class="table table-condensed table-striped image-list sortable-theme-dark" data-sortable>
         <thead>
             <tr>
                 {% if requested_user %}
                     <th class="user hidden-phone">{% trans "User" %}</th>
                 {% endif %}
+
                 <th class="title">{% trans "Title" %}</th>
-                <th class="published hidden-phone"><i class="icon-calendar"></i></th>
-                <th class="views hidden-phone"><i class="icon-eye-open"></i></th>
-                <th class="likes hidden-phone"><i class="icon-thumbs-up"></i></th>
-                <th class="bookmarks hidden-phone"><i class="icon-bookmark"></i></th>
-                <th class="comments hidden-phone"><i class="icon-comments-alt"></i></th>
+
+                <th class="published" data-sorted="true" data-sorted-direction="descending">
+                    <i class="icon-unlock" title="{% trans 'Published' %}" rel="tooltip"></i>
+                </th>
+
+                <th class="views hidden-phone">
+                    <i class="icon-eye-open" title="{% trans 'Views' %}" rel="tooltip"></i>
+                </th>
+
+                <th class="likes hidden-phone">
+                    <i class="icon-thumbs-up"
+                       title="{% trans 'Likes' context "Noun, e.g. 'This element has 10 likes'" %}"
+                       rel="tooltip">
+                    </i>
+                </th>
+
+                <th class="bookmarks hidden-phone">
+                    <i class="icon-bookmark"
+                       title="{% trans 'Bookmarks' context "Noun, e.g. 'This element has 10 bookmarks'" %}"
+                       rel="tooltip">
+
+                    </i>
+                </th>
+
+                <th class="comments hidden-phone">
+                    <i class="icon-comments-alt"
+                       title="{% trans 'Comments' context "Noun, e.g. 'This element has 10 comments'" %}"
+                       rel="tooltip">
+                    </i>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -33,16 +59,19 @@
                     <td class="title">
                         <a href="{% get_image_url image %} ">{{image.title|escape|default:_("(no title)")}}</a>
                     </td>
-                    <td class="published hidden-phone">
+
+                    <td class="published" data-value="{{ image.published|date:"U" }}">
                         {% if image.published %}
                             {% timestamp image.published %}
-                        {% else %}
-                            {% timestamp image.uploaded %}
                         {% endif %}
                     </td>
+
                     <td class="views hidden-phone">{% get_hit_count for image %}</td>
+
                     <td class="likes hidden-phone">{{image.likes}}</td>
+
                     <td class="bookmarks hidden-phone">{{image.bookmarks}}</td>
+
                     <td class="comments hidden-phone">{{image.comments}}</td>
                 </tr>
             {% endfor %}

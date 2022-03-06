@@ -1172,6 +1172,7 @@ def user_page(request, username):
         qs = UserService(user).get_all_images()
     else:
         qs = UserService(user).get_public_images()
+
     wip_qs = UserService(user).get_wip_images()
 
     if request.user != user:
