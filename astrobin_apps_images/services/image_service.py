@@ -350,7 +350,7 @@ class ImageService:
         if self.image.download_limitation == DownloadLimitation.EVERYBODY:
             return True
 
-        return user == self.image.user
+        return user == self.image.user or user.is_superuser
 
     def record_hit(self, request):
         if request.user != self.image.user:
