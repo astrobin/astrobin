@@ -1336,7 +1336,14 @@ class ImageDownloadView(View):
 
             # Build image
             local_result: NamedTemporaryFile = NamedTemporaryFile('w+b', suffix='.png', delete=False)
-            svg2png(url=local_svg.name, write_to=local_result.name)
+            parent_width = min(settings.THUMBNAIL_ALIASES['']['qhd']['size'][0], image.w)
+            parent_height = int(image.h / (image.w / float(parent_width)))
+            svg2png(
+                url=local_svg.name,
+                write_to=local_result.name,
+                parent_width=parent_width,
+                parent_height=parent_height
+            )
             local_result.seek(0)
             local_result.close()
 
