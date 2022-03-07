@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AnonymousUser
+from django.contrib.auth.models import AnonymousUser, User
 from django.test import TestCase
 from mock import patch
 
@@ -406,6 +406,11 @@ class TestImageService(TestCase):
         self.assertTrue(ImageService(image).display_download_menu(image.user))
         self.assertFalse(ImageService(image).display_download_menu(Generators.user()))
         self.assertFalse(ImageService(image).display_download_menu(AnonymousUser))
+
+    def test_display_download_menu_me_only_but_superuser(self):
+        image = Generators.image(download_limitations=DownloadLimitation.ME_ONLY)
+        superuser = User.objects.create_superuser('superuser', 'superuser@test.com', 'password')
+        self.assertTrue(ImageService(image).display_download_menu(superuser))
 
     def test_display_download_menu_null(self):
         image = Generators.image(download_limitations=None)
