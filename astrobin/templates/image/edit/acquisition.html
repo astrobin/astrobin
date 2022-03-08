@@ -141,7 +141,7 @@
                            data-no-instant>advanced form</a>.{% endblocktrans %}
                 </div>
                 <form class="form-horizontal" id="image_acquisition" action="{% url 'image_edit_save_acquisition' %}"
-                      method="post">{% csrf_token %}
+                      method="post" novalidate>{% csrf_token %}
                     {{ deep_sky_acquisition_basic_form|as_bootstrap }}
 
                     <input type="hidden" name="image_id" value="{{ image.get_id }}" />
@@ -167,7 +167,7 @@
             {% endif %}
         {% else %}
             <div class="well">{% trans "What kind of image is this?" %}</div>
-            <form class="form-horizontal">{% csrf_token %}
+            <form class="form-horizontal" novalidate>{% csrf_token %}
                 <div class="form-actions">
                     <a class="btn btn-primary btn-block-mobile"
                        href="{% url 'image_edit_acquisition' image.get_id %}?edit_type=solar_system" data-no-instant>
