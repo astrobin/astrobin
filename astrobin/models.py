@@ -2161,21 +2161,21 @@ class DeepSky_Acquisition(Acquisition):
         verbose_name=_("Binning"),
     )
 
-    number = models.IntegerField(
+    number = models.PositiveIntegerField(
         _("Number"),
         null=True,
         blank=True,
         help_text=_("The number of sub-frames."),
     )
 
-    duration = models.IntegerField(
+    duration = models.PositiveIntegerField(
         _("Duration"),
         null=True,
         blank=True,
         help_text=_("Duration of each sub-frame, in seconds."),
     )
 
-    iso = models.IntegerField(
+    iso = models.PositiveIntegerField(
         _("ISO"),
         null=True,
         blank=True,
@@ -2196,35 +2196,35 @@ class DeepSky_Acquisition(Acquisition):
         help_text=_("The temperature of the chip. E.g.: -20."),
     )
 
-    darks = models.IntegerField(
+    darks = models.PositiveIntegerField(
         _("Darks"),
         null=True,
         blank=True,
         help_text=_("The number of dark frames."),
     )
 
-    flats = models.IntegerField(
+    flats = models.PositiveIntegerField(
         _("Flats"),
         null=True,
         blank=True,
         help_text=_("The number of flat frames."),
     )
 
-    flat_darks = models.IntegerField(
+    flat_darks = models.PositiveIntegerField(
         _("Flat darks"),
         null=True,
         blank=True,
         help_text=_("The number of dark flat frames."),
     )
 
-    bias = models.IntegerField(
+    bias = models.PositiveIntegerField(
         _("Bias"),
         null=True,
         blank=True,
         help_text=_("The number of bias/offset frames."),
     )
 
-    bortle = models.IntegerField(
+    bortle = models.PositiveIntegerField(
         verbose_name=_("Bortle Dark-Sky Scale"),
         null=True,
         blank=True,
