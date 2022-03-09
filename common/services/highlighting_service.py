@@ -1,7 +1,7 @@
 import math
-import regex
 import string
 
+import regex
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from precise_bbcode.templatetags.bbcode_tags import bbcode
@@ -49,37 +49,46 @@ class HighlightingService:
                 if not word.startswith("-") and len(word) > 2 and word not in SANITIZER_ALLOWED_TAGS
             ]
 
-            half_length = self.max_length / 2
-            padding = max(self.max_length / 10, 20)
-            first_match_index = int(max(
-                min([result.lower().find(x.lower()) for x in self.terms.split() if not x.startswith('-')]) - padding,
-                0
-            ))
-            last_match_index = int(min(
-                max(
-                    [result.lower().find(x.lower()) for x in self.terms.split() if not x.startswith('-')]
-                ) + padding,
-                len(self.text)
-            ))
-
-            middle = (first_match_index + last_match_index) / 2
-
-            if self.max_length > 0:
-                start = max(min(math.floor(middle - half_length) - 1, first_match_index), 0)
-                end = min(math.ceil(middle + max(half_length, last_match_index - first_match_index)), last_match_index)
-            else:
-                start = 0
-                end = len(result)
-
-            result = f'{"..." if start > 0 else ""}{result[start:end]}{"..." if end < len(result) else ""}'
-
-            for word in text_words:
-                if word.lower() in terms_words:
-                    result = regex.sub(
-                        f'\<(?:[^<>]++|(?0))++\>(*SKIP)(*F)|{word}',
-                        f'<{self.html_tag} class="{self.css_class}">{word}</{self.html_tag}>',
-                        result
+            if len(terms_words) > 0:
+                half_length = self.max_length / 2
+                padding = max(self.max_length / 10, 20)
+                first_match_index = int(
+                    max(
+                        min(
+                            [result.lower().find(x.lower()) for x in self.terms.split() if not x.startswith('-')]
+                        ) - padding,
+                        0
                     )
+                )
+                last_match_index = int(
+                    min(
+                        max(
+                            [result.lower().find(x.lower()) for x in self.terms.split() if not x.startswith('-')]
+                        ) + padding,
+                        len(self.text)
+                    )
+                )
+
+                middle = (first_match_index + last_match_index) / 2
+
+                if self.max_length > 0:
+                    start = max(min(math.floor(middle - half_length) - 1, first_match_index), 0)
+                    end = min(
+                        math.ceil(middle + max(half_length, last_match_index - first_match_index)), last_match_index
+                    )
+                else:
+                    start = 0
+                    end = len(result)
+
+                result = f'{"..." if start > 0 else ""}{result[start:end]}{"..." if end < len(result) else ""}'
+
+                for word in text_words:
+                    if word.lower() in terms_words:
+                        result = regex.sub(
+                            f'\<(?:[^<>]++|(?0))++\>(*SKIP)(*F)|{word}',
+                            f'<{self.html_tag} class="{self.css_class}">{word}</{self.html_tag}>',
+                            result
+                        )
 
         from common.templatetags.common_tags import strip_html
         return mark_safe(strip_html('<br />'.join(result.splitlines())))
