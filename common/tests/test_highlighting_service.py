@@ -36,6 +36,18 @@ class HighlightingServiceTest(TestCase):
             ).render_html()
         )
 
+    def test_render_html_no_terms(self):
+        self.assertEquals(
+            'Test test',
+            HighlightingService('Test test', '').render_html()
+        )
+
+    def test_render_html_excluded_term(self):
+        self.assertEquals(
+            'Test test',
+            HighlightingService('Test test', '-foo').render_html()
+        )
+
     def test_render_html_single_term_multiple_matches(self):
         self.assertEquals(
             '<span class="highlighted-text">Test</span> <span class="highlighted-text">test</span>',
