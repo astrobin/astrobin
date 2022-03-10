@@ -281,6 +281,18 @@ class TestImageService(TestCase):
         self.assertEqual('Foo\nBar', image.description)
         self.assertEqual(1, Image.objects.all().count())
 
+    def test_delete_original_when_new_title_is_too_long(self):
+        original_title = Generators.randomString(128)
+        revision_title = Generators.randomString(10)
+        image = Generators.image(image_file='original.jpg', title=original_title)
+        Generators.imageRevision(image=image, image_file='revision.jpg', title=revision_title)
+
+        ImageService(image).delete_original()
+
+        image = Image.objects.get(pk=image.pk)
+        self.assertEqual('revision.jpg', image.image_file)
+        self.assertEqual(f'{original_title[:112]}... ({revision_title})', image.title)
+
     def test_delete_original_preserves_title_and_description_when_original_has_none(self):
         image = Generators.image(image_file='original.jpg', title='Foo')
         revision = Generators.imageRevision(image=image, image_file='revision.jpg', title='Bar', description='Bar')

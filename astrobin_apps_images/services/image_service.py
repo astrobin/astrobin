@@ -273,7 +273,14 @@ class ImageService:
         image.is_final = image.is_final or new_original.is_final
 
         if new_original.title:
-            image.title = f'{image.title} ({new_original.title})'
+            old_title = image.title
+            appended_title = f' ({new_original.title})'
+            ellipsis = '...'
+            if len(old_title) > Image._meta.get_field('title').max_length - len(appended_title):
+                old_title = old_title[:(Image._meta.get_field('title').max_length - len(appended_title)) - len(
+                    ellipsis
+                )] + ellipsis
+            image.title = old_title + appended_title
 
         if image.description:
             image.description = f'{image.description}\n{new_original.description}' \
