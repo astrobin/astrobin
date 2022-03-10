@@ -2189,6 +2189,18 @@ class DeepSky_Acquisition(Acquisition):
         decimal_places=2,
     )
 
+    f_number = models.DecimalField(
+        _("f-number"),
+        null=True,
+        blank=True,
+        max_digits=4,
+        decimal_places=2,
+        help_text=_(
+            "If you used a camera lens, please specify the f-number (also known as f-ratio or f-stop) that you used "
+            "for this acquisition session."
+        )
+    )
+
     sensor_cooling = models.IntegerField(
         _("Sensor cooling"),
         null=True,

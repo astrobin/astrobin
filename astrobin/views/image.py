@@ -349,6 +349,8 @@ class ImageDetailView(ImageDetailViewBase):
                         key += '-ISO(%d)' % a.iso
                     if a.gain is not None:
                         key += '-gain(%.2f)' % a.gain
+                    if a.f_number is not None:
+                        key += '-f_number(%.2f)' % a.f_number
                     if a.sensor_cooling is not None:
                         key += '-temp(%d)' % a.sensor_cooling
                     if a.binning is not None:
@@ -368,8 +370,9 @@ class ImageDetailView(ImageDetailViewBase):
                     dsa_data['frames'][key]['filter'] = a.filter if a.filter is not None else ''
                     dsa_data['frames'][key]['iso'] = 'ISO%d' % a.iso if a.iso is not None else ''
                     dsa_data['frames'][key]['gain'] = '(gain: %.2f)' % a.gain if a.gain is not None else ''
+                    dsa_data['frames'][key]['f_number'] = f'f/{a.f_number}'.rstrip('0').rstrip('.') if a.f_number is not None else ''
                     dsa_data['frames'][key][
-                        'sensor_cooling'] = '%dC' % a.sensor_cooling if a.sensor_cooling is not None else ''
+                        'sensor_cooling'] = '%d&deg;C' % a.sensor_cooling if a.sensor_cooling is not None else ''
                     dsa_data['frames'][key]['binning'] = 'bin %sx%s' % (a.binning, a.binning) if a.binning else ''
                     dsa_data['frames'][key]['integration'] = \
                         '%sx%s" <span class="total-frame-integration">(%s)</span>' % (
@@ -411,8 +414,14 @@ class ImageDetailView(ImageDetailViewBase):
                  '<div class="frames">' +
                  '\n'.join("%s %s" % (
                      "<a href=\"%s\">%s</a>:" % (f[1]['filter_url'], f[1]['filter']) if f[1]['filter'] else '',
-                     "%s %s %s %s %s" % (
-                         f[1]['integration'], f[1]['iso'], f[1]['gain'], f[1]['sensor_cooling'], f[1]['binning']),
+                     "%s %s %s %s %s %s" % (
+                         f[1]['integration'],
+                         f[1]['iso'],
+                         f[1]['gain'],
+                         f[1]['f_number'],
+                         f[1]['sensor_cooling'],
+                         f[1]['binning']
+                     ),
                  ) for f in frames_list) +
                  '</div>'),
                 (_('Integration'), DateTimeService.human_time_duration(dsa_data['integration'])),
