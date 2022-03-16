@@ -7,7 +7,7 @@ from astrobin.api2.serializers.focal_reducer_serializer import FocalReducerSeria
 from astrobin.api2.serializers.mount_serializer import MountSerializer
 from astrobin.api2.serializers.software_serializer import SoftwareSerializer
 from astrobin.api2.serializers.telescope_serializer import TelescopeSerializer
-from astrobin.models import Image, UserProfile
+from astrobin.models import Image
 from astrobin_apps_equipment.api.serializers.accessory_serializer import AccessorySerializer as AccessorySerializer2
 from astrobin_apps_equipment.api.serializers.camera_serializer import CameraSerializer as CameraSerializer2
 from astrobin_apps_equipment.api.serializers.filter_serializer import FilterSerializer as FilterSerializer2

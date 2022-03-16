@@ -6,17 +6,93 @@ $(document).ready(function() {
 
     {% ifequal request.GET.view None %}
         if (astrobin_common.utils.isTouchDevice() && window.innerWidth >= 375) {
-            $('#show-gallery-mouse-hovers input').bootstrapToggle('off');
-            $('#show-gallery-mouse-hovers .toggle').css('height', '18px');
-            $('#show-gallery-mouse-hovers').show();
+            const $showGalleryMouseHovers = $('#show-gallery-mouse-hovers');
+            $showGalleryMouseHovers.find('input').bootstrapToggle('off');
+            $showGalleryMouseHovers.find('.toggle').css('height', '18px');
+            $showGalleryMouseHovers.show();
 
-            $('#show-gallery-mouse-hovers input').change(function () {
+            $showGalleryMouseHovers.find('input').change(function () {
                 $('.astrobin-thumbnail figcaption')
                     .css('opacity', $(this).prop('checked') ? 1 : '')
                     .css('visibility', $(this).prop('checked') ? 'visible' : 'hidden')
                     .css('display', $(this).prop('checked') ? 'block' : 'none');
             });
         }
+
+        $.ajax({
+            type: 'get',
+            url: '/api/v2/users/fancybox-list/',
+            data: {
+                user: {{ requested_user.pk }},
+                staging: '{% if 'staging' in request.GET %}1{% else %}0{% endif %}',
+                subsection: '{{ request.GET.sub }}',
+                active: '{{ request.GET.active }}',
+                collection:
+                    window.location.href.indexOf('/collections/') > -1
+                        ? window.location.href.match(new RegExp(/\/collections\/(\d+)\//))[1]
+                        : null
+            },
+            success: function (data) {
+                $('.image-slideshow-button .ld').remove();
+
+                if (data && data.length > 0) {
+                    $('.image-slideshow-button .icon-play').css({'display': 'inline-block'});
+
+                    const fancyboxData = data.map(item => ({
+                        url: item.url,
+                        src: item.src,
+                        thumb: item.thumb,
+                        caption: item.caption,
+                        type: 'image',
+                        slug: item.slug,
+                        rel: 'image-list',
+                        userId: item.userId,
+                        id: item.pk,
+                        idOrHash: item.slug
+                    }));
+
+                    window.astrobinFancyboxOptions.Toolbar.display.splice(
+                        window.astrobinFancyboxOptions.Toolbar.display.length - 1,
+                        0,
+                        'settings'
+                    );
+
+                    for (const item of data) {
+                        const $img = $(`img[data-id="${item.pk}"]`);
+                        const $figcaption = $img.closest('figure').find('figcaption');
+                        const $html = $(`
+                            <div class='image-slideshow-button'>
+                                <a href='#'><i class='icon-play'></i></a>
+                            </div>
+                        `);
+
+                        $html.find('a').click(e => {
+                            e.preventDefault();
+                            astrobin_common.start_fancybox(fancyboxData, window.astrobinFancyboxOptions, item.slug)
+                        });
+
+                        $figcaption.append($html);
+                    }
+
+                    $('[data-fancybox-trigger="image-list"]').click(e => {
+                        e.preventDefault();
+                        astrobin_common.start_fancybox(fancyboxData, window.astrobinFancyboxOptions);
+                    });
+
+                    const queryString = window.location.search;
+                    const urlParams = new URLSearchParams(queryString);
+                    const slideshow = urlParams.get('slideshow');
+
+                    if (slideshow === 'true') {
+                        astrobin_common.start_fancybox(
+                            fancyboxData,
+                            window.astrobinFancyboxOptions,
+                            window.location.hash.replace('#', '')
+                        );
+                    }
+                }
+            }
+        });
     {% endifequal %}
 });
 </script>

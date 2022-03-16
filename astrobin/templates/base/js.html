@@ -92,6 +92,7 @@
         {% trans "Like" context 'Verb (imperative)' as i18nLike %}
         {% trans "Unlike" context 'Verb (imperative)' as i18nUnlike %}
         {% trans "Browse images currently visible on the page." as i18nFancyboxHelp %}
+        {% trans "Settings" as i18nSettings %}
 
         Fancybox.Plugins.Toolbar.defaults.items.viewImagePage = {
             type: "button",
@@ -141,226 +142,49 @@
             html: '<i class="icon-spinner"></i>'
         };
 
-        function initFancyBoxToolbarLinkButtons(fancybox, slide) {
-            const rel = slide.rel;
 
-            setTimeout(() => {
-                const $linkButton = $(fancybox.plugins.Toolbar.$container).find('.fancybox__button--viewImagePage');
-                const $linkInNewTabButton = $(fancybox.plugins.Toolbar.$container).find('.fancybox__button--viewImagePageInNewTab');
+        Fancybox.Plugins.Toolbar.defaults.items.settings = {
+            type: "button",
+            class: "fancybox__button--settings",
+            label: "{{ i18nSettings | escapejs }}",
+            html: "<i class='icon-cog'></i>",
+            click: function (event) {
+                event.preventDefault();
 
-                if (rel !== 'image-list' && rel !== 'revisions') {
-                    $linkButton.remove();
-                    $linkInNewTabButton.remove();
-                }
-            })
-        }
+                const $modal = $("#fancybox-settings-modal");
 
-        function initFancyBoxToolbarTogglePropertyButton(fancybox, slide) {
-            const rel = slide.rel;
-            const imageId = slide.id;
-            const imageIdOrHash = slide.idOrHash;
-            const userId = slide.userId;
-            const requestUserId = {% if request.user.is_authenticated %}{{ request.user.id }}{% else %}0{% endif %};
+                $modal.on('shown', function () {
+                    $(".fancybox__container").css("visibility", "hidden");
 
-            const waitIcon = 'icon-spinner';
-            const likeIcon = 'icon-thumbs-up';
+                    const queryString = window.location.search;
+                    const urlParams = new URLSearchParams(queryString);
+                    const autoplay = urlParams.get('autoplay');
+                    const speed = parseInt(urlParams.get('speed'), 10) || 5000;
 
-            setTimeout(() => {
-                const $button = $(fancybox.plugins.Toolbar.$container).find('.fancybox__button--toggleProperty');
-                const $icon = $button.find('i');
+                    $modal.find('#id_slideshow_autoplay').prop('checked', autoplay === 'true');
+                    $modal.find('#id_slideshow_play_speed').val(speed);
 
-                if (rel !== 'image-list' || requestUserId === userId || requestUserId === 0) {
-                    $button.remove();
-                    return;
-                }
+                    $.uniform.update();
 
-                $icon
-                    .addClass(waitIcon)
-                    .removeClass(likeIcon);
-                $button
-                    .off('click')
-                    .attr('disabled', 'disabled');
+                    astrobin_common.update_fancybox_share_links();
 
-                $.ajax({
-                    type: 'get',
-                    url: '/api/v2/common/contenttypes/?app_label=astrobin&model=image',
-                    dataType: 'json',
-                    success: (contentTypeResponse) => {
-                        const contentType = contentTypeResponse[0];
-
-                        $.ajax({
-                            type: 'get',
-                            url: `/api/v2/common/toggleproperties?content_type=${contentType.id}&property_type=like&user_id=${requestUserId}&object_id=${imageId}`,
-                            dataType: 'json',
-                            success: (togglePropertyResponse) => {
-                                const liked = togglePropertyResponse.count > 0;
-
-                                if (liked) {
-                                    $icon
-                                        .removeClass(waitIcon)
-                                        .addClass(likeIcon);
-                                    $button
-                                        .attr('disabled', 'disabled');
-                                    return;
-                                }
-
-                                $button
-                                    .html(`<i class="${likeIcon}"></i>`)
-                                    .removeAttr('disabled')
-                                    .data('content-type', contentType.id)
-                                    .data('object-id', imageId)
-                                    .one('click', function (e) {
-                                        e.preventDefault();
-
-                                        $icon
-                                            .removeClass(likeIcon)
-                                            .addClass(waitIcon);
-                                        $button
-                                            .attr('disabled', 'disabled');
-
-                                        $.ajax({
-                                            type: 'post',
-                                            url: '/api/v2/common/toggleproperties/',
-                                            data: {
-                                                property_type: 'like',
-                                                content_type: contentType.id,
-                                                object_id: imageId,
-                                                user: {{ request.user.id }}
-                                            },
-                                            timeout: 5000,
-                                            success: function (response) {
-                                                togglePropertyResponse = {
-                                                    results: [
-                                                        response
-                                                    ]
-                                                };
-
-                                                $icon
-                                                    .removeClass(waitIcon)
-                                                    .addClass(likeIcon);
-                                                $button
-                                                    .attr('disabled', 'disabled');
-                                            },
-                                            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                                if (XMLHttpRequest.status === 401) {
-                                                    window.location.href = `/accounts/login/?next=/${imageIdOrHash}`;
-                                                    return;
-                                                } else {
-                                                    $('#cant-like').modal('show');
-                                                }
-
-                                                $icon
-                                                    .removeClass(waitIcon)
-                                                    .addClass(likeIcon);
-                                                $button
-                                                    .removeAttr('disabled');
-                                            }
-                                        });
-                                    })
-                            }
-                        })
-                    }
-                });
-            }, 250);
-        }
-
-        function initFancyBoxPlateSolution(fancybox, slide) {
-            function observeImageMutations($img) {
-                const delay = 100;
-
-                function applyMutations(mutations) {
-                    if (window.astroBinFancyBoxLastMutation && new Date().getTime() - window.astroBinFancyBoxLastMutation < delay) {
-                        return;
-                    }
-
-                    const $solution = $(fancybox.$carousel).find('.fancybox__slide.is-selected .fancybox__overlaySolution');
-
-                    mutations.forEach(function () {
-                        $solution.attr('style', $img.attr('style'));
-                        $solution.css('display', 'block');
-                    });
-                }
-
-                if (!!window.astroBinFancyBoxMutationObserver) {
-                    window.astroBinFancyBoxMutationObserver.disconnect();
-                }
-
-                window.astroBinFancyBoxMutationObserver = new MutationObserver(function (mutations) {
-                    window.astroBinFancyBoxLastMutation = new Date().getTime();
-                    const $solution = $(fancybox.$carousel).find('.fancybox__slide.is-selected .fancybox__overlaySolution');
-                    $solution.css('display', 'none');
-                    setTimeout(() => applyMutations(mutations), delay + 1);
+                    Fancybox.getInstance().plugins.Toolbar.Slideshow.deactivate();
                 });
 
-                window.astroBinFancyBoxMutationObserver.observe($img[0], {
-                    attributes: true,
-                    attributeFilter: ['style']
+                $modal.on('hidden', function () {
+                    $(".fancybox__container").css("visibility", "visible");
                 });
+
+                $modal.modal("show");
             }
+        };
 
-            if ($(slide.$image).siblings('.fancybox__overlaySolution').length > 0) {
-                observeImageMutations($(fancybox.$carousel).find('.fancybox__slide.is-selected .fancybox__image'));
-                return;
-            }
-
-            $.ajax({
-                type: 'get',
-                url: '/api/v2/common/contenttypes/?app_label=astrobin&model=image',
-                dataType: 'json',
-                success: (contentTypeResponse) => {
-                    const contentType = contentTypeResponse[0];
-                    const imageId = slide.id;
-
-                    $.ajax({
-                        type: 'get',
-                        url: `/api/v2/platesolving/solutions/?content_type=${contentType.id}&object_id=${imageId}`,
-                        dataType: 'json',
-                        success: (response) => {
-                            if (response.length === 0) {
-                                return;
-                            }
-
-                            const solution = response[0];
-
-                            const $image = $(slide.$image);
-                            let $element = null;
-
-                            if (solution.pixinsight_svg_annotation_hd) {
-                                $element = $(
-                                    `
-                                        <div class="fancybox__overlaySolution">
-                                            <object
-                                                id="advanced-plate-solution-svg"
-                                                onload="AstroBinPlatesolving.advancedSvgLoaded()"
-                                                type="image/svg+xml"
-                                                data="/platesolving/solution/${solution.id}/svg/hd/">
-                                            </object>
-                                        </div>
-                                    `
-                                )
-                            } else if (solution.image_file) {
-                                $element = $(
-                                    `
-                                        <div class="fancybox__overlaySolution">
-                                            <img src="${solution.image_file}" />
-                                        </div>
-                                    `
-                                )
-                            }
-
-                            if ($element !== null) {
-                                observeImageMutations($image);
-                                $image.after($element);
-                            }
-                        }
-                    });
-                }
-            });
-        }
-
-        Fancybox.bind("[data-fancybox]", {
-            infinite: false,
+        window.astrobinFancyboxOptions = {
+            infinite: true,
             autoFocus: false,
+            slideshow: {
+                delay: 5000
+            },
             i10n: {
                 CLOSE: "{{ _("Close") | escapejs }}",
                 NEXT: "{{ _("Next") | escapejs }}",
@@ -382,10 +206,14 @@
                         `url("${slide.src}")`
                     );
 
-                    initFancyBoxToolbarLinkButtons(fancybox, slide);
-                    initFancyBoxToolbarTogglePropertyButton(fancybox, slide);
+                    astrobin_common.init_fancybox_toolbar_link_buttons(fancybox, slide);
+                    astrobin_common.init_fancybox_toolbar_toggle_property_button(
+                        fancybox,
+                        slide,
+                        {% if request.user.is_authenticated %}{{ request.user.id }}{% else %}0{% endif %}
+                    );
                     setTimeout(() => {
-                        initFancyBoxPlateSolution(fancybox, slide);
+                        astrobin_common.init_fancybox_plate_solution(fancybox, slide);
                     }, 100);
                 },
                 "Carousel.change": (fancybox, carousel, to, from) => {
@@ -396,11 +224,23 @@
                         `url("${slide.src}")`
                     );
 
-                    initFancyBoxToolbarLinkButtons(fancybox, slide);
-                    initFancyBoxToolbarTogglePropertyButton(fancybox, slide);
+                    astrobin_common.init_fancybox_toolbar_link_buttons(fancybox, slide);
+                    astrobin_common.init_fancybox_toolbar_toggle_property_button(
+                        fancybox,
+                        slide,
+                        {% if request.user.is_authenticated %}{{ request.user.id }}{% else %}0{% endif %}
+                    );
                     setTimeout(() => {
-                        initFancyBoxPlateSolution(fancybox, slide);
+                        astrobin_common.init_fancybox_plate_solution(fancybox, slide);
                     }, 100);
+                },
+                destroy: (fancybox) => {
+                    let url = astrobin_common.remove_url_param(window.location.href, 'slideshow');
+                    url = astrobin_common.remove_url_param(url, 'autoplay');
+                    url = astrobin_common.remove_url_param(url, 'loop');
+                    url = astrobin_common.remove_url_param(url, 'speed');
+
+                    window.history.pushState({path: url}, '', url);
                 }
             },
             Thumbs: {
@@ -424,6 +264,45 @@
                     "close",
                 ],
             }
+        }
+
+        Fancybox.bind("[data-fancybox]", window.astrobinFancyboxOptions);
+
+        $('#fancybox-settings-modal #id_slideshow_autoplay').change(function () {
+            let url = astrobin_common.add_or_update_url_param(window.location.href, 'autoplay', this.checked);
+            window.history.pushState({path: url}, '', url);
+
+            astrobin_common.update_fancybox_share_links();
+        });
+
+        $('#fancybox-settings-modal #id_slideshow_play_speed').change(function () {
+            let url = astrobin_common.add_or_update_url_param(window.location.href, 'speed', $(this).val());
+            window.history.pushState({path: url}, '', url);
+
+            astrobin_common.update_fancybox_share_links();
+        });
+
+        $('#fancybox-settings-modal .btn-primary').click(function () {
+            const instance = Fancybox.getInstance();
+            const slideshow = instance.plugins.Toolbar.Slideshow;
+
+            const autoplay = $('#fancybox-settings-modal #id_slideshow_autoplay')[0].checked;
+            const speed = parseInt($('#fancybox-settings-modal #id_slideshow_play_speed').val(), 10);
+
+            let url = astrobin_common.add_or_update_url_param(window.location.href, 'autoplay', autoplay);
+            url = astrobin_common.add_or_update_url_param(url, 'speed', speed);
+            window.history.pushState({path: url}, '', url);
+
+            instance.options.slideshow = instance.options.slideshow || {};
+            instance.options.slideshow.delay = speed;
+
+            if (autoplay) {
+                slideshow.activate();
+            } else {
+                slideshow.deactivate();
+            }
+
+            $('#fancybox-settings-modal').modal('hide');
         });
 
         $('.astrobin-thumbnail .astrobin-image-container figcaption').each(function () {

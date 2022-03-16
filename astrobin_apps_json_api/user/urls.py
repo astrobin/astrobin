@@ -1,9 +1,10 @@
 from django.conf.urls import url
 from django.views.decorators.cache import never_cache
 
-from astrobin_apps_json_api.user.views import RestoreDeletedImages, \
-    DeleteImages, PlateSolutionOverlayOnFullDisabled, MarkClickAndDragToastAsSeen, \
-    MarkForumUsageModalAsSeen, ToggleUseHighContrastThemeCookie
+from astrobin_apps_json_api.user.views import (
+    DeleteImages, MarkClickAndDragToastAsSeen, MarkForumUsageModalAsSeen,
+    PlateSolutionOverlayOnFullDisabled, RestoreDeletedImages, ToggleUseHighContrastThemeCookie,
+)
 from astrobin_apps_json_api.user.views.delete_revisions import DeleteRevisions
 from astrobin_apps_json_api.user.views.empty_trash import EmptyTrash
 

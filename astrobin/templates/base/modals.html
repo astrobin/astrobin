@@ -312,3 +312,54 @@
     </div>
 </div>
 
+<div class="modal hide fade" id="fancybox-settings-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3><i class="icon-cog"></i> {% trans "Slideshow settings" %}</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="control-group">
+                <div class="controls">
+                    <label for="id_slideshow_autoplay" class="checkbox">
+                        <input type="checkbox" id="id_slideshow_autoplay" />
+                        {% trans "Autoplay" %}
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="id_slideshow_play_speed" class="control-label">
+                    {% trans "Play speed" %} (ms)
+                </label>
+                <div class="controls">
+                    <input type="number" step="1" id="id_slideshow_play_speed" />
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="id_slideshow_share" class="control-label">
+                    {% trans "Share (current image)" %}
+                </label>
+                <div class="controls">
+                    <pre id="id_slideshow_share"></pre>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="id_slideshow_share_beginning" class="control-label">
+                    {% trans "Share (beginning)" %}
+                </label>
+                <div class="controls">
+                    <pre id="id_slideshow_share_beginning"></pre>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary btn-block-mobile" data-dismiss="modal">{% trans "Cancel" %}</button>
+        <button class="btn btn-primary btn-block-mobile">
+            {% trans 'Apply' %}
+        </button>
+    </div>
+</div>

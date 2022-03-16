@@ -128,6 +128,7 @@ def image_list(context, object_list, **kwargs):
     alias = kwargs.get('alias', 'gallery')
     nav_ctx = kwargs.get('nav_ctx', None)
     nav_ctx_extra = kwargs.get('nav_ctx_extra', None)
+    fancybox = kwargs.get('fancybox', True)
 
     view = kwargs.get('view')
     if view is None and 'view' in context:
@@ -143,6 +144,7 @@ def image_list(context, object_list, **kwargs):
         'view': view,
         'nav_ctx': nav_ctx,
         'nav_ctx_extra': nav_ctx_extra,
+        'fancybox': fancybox,
     }
 
 

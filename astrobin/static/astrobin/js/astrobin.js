@@ -637,24 +637,49 @@ astrobin_common = {
         });
     },
 
-    init_page_loading_indicator: function () {
-        var $pageLoadingIndicator = $('#page-loading-indicator');
-        var $pageLoadingText = $('#page-loading-text');
-        var $pageLoadingBackdrop = $('#page-loading-indicator-backdrop');
+    show_page_loading_indicator: function (loadingText) {
+        const $pageLoadingIndicator = $('#page-loading-indicator');
+        const $pageLoadingText = $('#page-loading-text');
+        const $pageLoadingBackdrop = $('#page-loading-indicator-backdrop');
 
+        $pageLoadingBackdrop.css('width', '100%');
+        $pageLoadingBackdrop.css('height', '100%');
+        $pageLoadingBackdrop.css('opacity', .65);
+
+        $pageLoadingIndicator.css('width', '100%');
+        $pageLoadingIndicator.css('height', '100%');
+        $pageLoadingIndicator.css('opacity', 1);
+
+        if (loadingText) {
+            $pageLoadingText.html($(this).data('loading-text'));
+            $pageLoadingText.css('width', '100%');
+            $pageLoadingText.css('height', '100%');
+            $pageLoadingText.css('opacity', 1);
+        }
+    },
+
+    hide_page_loading_indicator: function () {
+        const $pageLoadingIndicator = $('#page-loading-indicator');
+        const $pageLoadingText = $('#page-loading-text');
+        const $pageLoadingBackdrop = $('#page-loading-indicator-backdrop');
+
+        $pageLoadingBackdrop.css('width', 0);
+        $pageLoadingBackdrop.css('height', 0);
+        $pageLoadingBackdrop.css('opacity', 0);
+
+        $pageLoadingIndicator.css('width', 0);
+        $pageLoadingIndicator.css('height', 0);
+        $pageLoadingIndicator.css('opacity', 0);
+
+        $pageLoadingText.css('width', 0);
+        $pageLoadingText.css('height', 0);
+        $pageLoadingText.css('opacity', 0);
+    },
+
+    init_page_loading_indicator: function () {
         $(window).bind("pagehide", function () {
             setTimeout(function () {
-                $pageLoadingBackdrop.css('width', 0);
-                $pageLoadingBackdrop.css('height', 0);
-                $pageLoadingBackdrop.css('opacity', 0);
-
-                $pageLoadingIndicator.css('width', 0);
-                $pageLoadingIndicator.css('height', 0);
-                $pageLoadingIndicator.css('opacity', 0);
-
-                $pageLoadingText.css('width', 0);
-                $pageLoadingText.css('height', 0);
-                $pageLoadingText.css('opacity', 0);
+                astrobin_common.hide_page_loading_indicator();
             }, 10);
         });
 
@@ -695,20 +720,7 @@ astrobin_common = {
                 return;
             }
 
-            $pageLoadingBackdrop.css('width', '100%');
-            $pageLoadingBackdrop.css('height', '100%');
-            $pageLoadingBackdrop.css('opacity', .65);
-
-            $pageLoadingIndicator.css('width', '100%');
-            $pageLoadingIndicator.css('height', '100%');
-            $pageLoadingIndicator.css('opacity', 1);
-
-            if ($(this).data('loading-text')) {
-                $pageLoadingText.html($(this).data('loading-text'));
-                $pageLoadingText.css('width', '100%');
-                $pageLoadingText.css('height', '100%');
-                $pageLoadingText.css('opacity', 1);
-            }
+            astrobin_common.show_page_loading_indicator($(this).data('loading-text'));
 
             return true;
         });
@@ -884,18 +896,21 @@ astrobin_common = {
     },
 
     add_or_update_url_param: function (url, name, value) {
-        var regex = new RegExp("[&\\?]" + name + "=");
+        const i = url.indexOf('#');
+        const hash = i === -1 ? '' : url.substr(i);
 
-        if (regex.test(url)) {
-            regex = new RegExp("([&\\?])" + name + "=\\S+");
-            return url.replace(regex, "$1" + name + "=" + value);
+        url = i === -1 ? url : url.substr(0, i);
+
+        const re = new RegExp("([?&])" + name + "=.*?(&|$)", "i");
+        const separator = url.indexOf('?') !== -1 ? "&" : "?";
+
+        if (url.match(re)) {
+            url = url.replace(re, '$1' + name + "=" + value + '$2');
+        } else {
+            url = url + separator + name + "=" + value;
         }
 
-        if (url.indexOf("?") > -1) {
-            return url + "&" + name + "=" + value;
-        }
-
-        return url + "?" + name + "=" + value;
+        return url + hash;
     },
 
     remove_url_param: function (url, parameter) {
@@ -1020,6 +1035,249 @@ astrobin_common = {
 
         $reportAbuseButton.attr('disabled', 'disabled');
         $reportAbuseButton.addClass('running');
+    },
+
+    init_fancybox_toolbar_link_buttons: function (fancybox, slide) {
+        const rel = slide.rel;
+
+        setTimeout(() => {
+            const $linkButton = $(fancybox.plugins.Toolbar.$container).find('.fancybox__button--viewImagePage');
+            const $linkInNewTabButton = $(fancybox.plugins.Toolbar.$container).find('.fancybox__button--viewImagePageInNewTab');
+
+            if (rel !== 'image-list' && rel !== 'revisions') {
+                $linkButton.remove();
+                $linkInNewTabButton.remove();
+            }
+        })
+    },
+
+    init_fancybox_toolbar_toggle_property_button: function (fancybox, slide, requestUserId) {
+        const rel = slide.rel;
+        const imageId = slide.id;
+        const imageIdOrHash = slide.idOrHash;
+        const userId = slide.userId;
+
+        const waitIcon = 'icon-spinner';
+        const likeIcon = 'icon-thumbs-up';
+
+        setTimeout(() => {
+            const $button = $(fancybox.plugins.Toolbar.$container).find('.fancybox__button--toggleProperty');
+            const $icon = $button.find('i');
+
+            if (rel !== 'image-list' || requestUserId === userId || requestUserId === 0) {
+                $button.remove();
+                return;
+            }
+
+            $icon
+                .addClass(waitIcon)
+                .removeClass(likeIcon);
+            $button
+                .off('click')
+                .attr('disabled', 'disabled');
+
+            $.ajax({
+                type: 'get',
+                url: '/api/v2/common/contenttypes/?app_label=astrobin&model=image',
+                dataType: 'json',
+                success: (contentTypeResponse) => {
+                    const contentType = contentTypeResponse[0];
+
+                    $.ajax({
+                        type: 'get',
+                        url: `/api/v2/common/toggleproperties?content_type=${contentType.id}&property_type=like&user_id=${requestUserId}&object_id=${imageId}`,
+                        dataType: 'json',
+                        success: (togglePropertyResponse) => {
+                            const liked = togglePropertyResponse.count > 0;
+
+                            if (liked) {
+                                $icon
+                                    .removeClass(waitIcon)
+                                    .addClass(likeIcon);
+                                $button
+                                    .attr('disabled', 'disabled');
+                                return;
+                            }
+
+                            $button
+                                .html(`<i class="${likeIcon}"></i>`)
+                                .removeAttr('disabled')
+                                .data('content-type', contentType.id)
+                                .data('object-id', imageId)
+                                .one('click', function (e) {
+                                    e.preventDefault();
+
+                                    $icon
+                                        .removeClass(likeIcon)
+                                        .addClass(waitIcon);
+                                    $button
+                                        .attr('disabled', 'disabled');
+
+                                    $.ajax({
+                                        type: 'post',
+                                        url: '/api/v2/common/toggleproperties/',
+                                        data: {
+                                            property_type: 'like',
+                                            content_type: contentType.id,
+                                            object_id: imageId,
+                                            user: requestUserId
+                                        },
+                                        timeout: 5000,
+                                        success: function (response) {
+                                            togglePropertyResponse = {
+                                                results: [
+                                                    response
+                                                ]
+                                            };
+
+                                            $icon
+                                                .removeClass(waitIcon)
+                                                .addClass(likeIcon);
+                                            $button
+                                                .attr('disabled', 'disabled');
+                                        },
+                                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                            if (XMLHttpRequest.status === 401) {
+                                                window.location.href = `/accounts/login/?next=/${imageIdOrHash}`;
+                                                return;
+                                            } else {
+                                                $('#cant-like').modal('show');
+                                            }
+
+                                            $icon
+                                                .removeClass(waitIcon)
+                                                .addClass(likeIcon);
+                                            $button
+                                                .removeAttr('disabled');
+                                        }
+                                    });
+                                })
+                        }
+                    })
+                }
+            });
+        }, 250);
+    },
+
+    init_fancybox_plate_solution: function (fancybox, slide) {
+        function observeImageMutations($img) {
+            const delay = 100;
+
+            function applyMutations(mutations) {
+                if (window.astroBinFancyBoxLastMutation && new Date().getTime() - window.astroBinFancyBoxLastMutation < delay) {
+                    return;
+                }
+
+                const $solution = $(fancybox.$carousel).find('.fancybox__slide.is-selected .fancybox__overlaySolution');
+
+                mutations.forEach(function () {
+                    $solution.attr('style', $img.attr('style'));
+                    $solution.css('display', 'block');
+                });
+            }
+
+            if (!!window.astroBinFancyBoxMutationObserver) {
+                window.astroBinFancyBoxMutationObserver.disconnect();
+            }
+
+            window.astroBinFancyBoxMutationObserver = new MutationObserver(function (mutations) {
+                window.astroBinFancyBoxLastMutation = new Date().getTime();
+                const $solution = $(fancybox.$carousel).find('.fancybox__slide.is-selected .fancybox__overlaySolution');
+                $solution.css('display', 'none');
+                setTimeout(() => applyMutations(mutations), delay + 1);
+            });
+
+            window.astroBinFancyBoxMutationObserver.observe($img[0], {
+                attributes: true,
+                attributeFilter: ['style']
+            });
+        }
+
+        if ($(slide.$image).siblings('.fancybox__overlaySolution').length > 0) {
+            observeImageMutations($(fancybox.$carousel).find('.fancybox__slide.is-selected .fancybox__image'));
+            return;
+        }
+
+        $.ajax({
+            type: 'get',
+            url: '/api/v2/common/contenttypes/?app_label=astrobin&model=image',
+            dataType: 'json',
+            success: (contentTypeResponse) => {
+                const contentType = contentTypeResponse[0];
+                const imageId = slide.id;
+
+                $.ajax({
+                    type: 'get',
+                    url: `/api/v2/platesolving/solutions/?content_type=${contentType.id}&object_id=${imageId}`,
+                    dataType: 'json',
+                    success: (response) => {
+                        if (response.length === 0) {
+                            return;
+                        }
+
+                        const solution = response[0];
+
+                        const $image = $(slide.$image);
+                        let $element = null;
+
+                        if (solution.pixinsight_svg_annotation_hd) {
+                            $element = $(
+                                `
+                                            <div class="fancybox__overlaySolution">
+                                                <object
+                                                    id="advanced-plate-solution-svg"
+                                                    onload="AstroBinPlatesolving.advancedSvgLoaded()"
+                                                    type="image/svg+xml"
+                                                    data="/platesolving/solution/${solution.id}/svg/hd/">
+                                                </object>
+                                            </div>
+                                        `
+                            )
+                        } else if (solution.image_file) {
+                            $element = $(
+                                `
+                                            <div class="fancybox__overlaySolution">
+                                                <img src="${solution.image_file}" />
+                                            </div>
+                                        `
+                            )
+                        }
+
+                        if ($element !== null) {
+                            observeImageMutations($image);
+                            $image.after($element);
+                        }
+                    }
+                });
+            }
+        });
+    },
+
+    start_fancybox: function (items, options, jumpToSlug) {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const autoplay = urlParams.get('autoplay');
+        const speed = urlParams.get('speed') || 5000;
+
+        const fancybox = new window.Fancybox(items, Object.assign(options, {slideshow: {delay: speed}}));
+
+        if (autoplay === 'true') {
+            fancybox.plugins.Toolbar.Slideshow.activate();
+        }
+
+        const url = astrobin_common.add_or_update_url_param(window.location.href, 'slideshow', true);
+
+        window.history.pushState({path: url}, '', url);
+
+        if (!!jumpToSlug) {
+            const index = items.map(item => item.slug).indexOf(jumpToSlug);
+            fancybox.jumpTo(index);
+        }
+    },
+
+    update_fancybox_share_links: function () {
+        $('#fancybox-settings-modal #id_slideshow_share').text(window.location.href);
+        $('#fancybox-settings-modal #id_slideshow_share_beginning').text(window.location.href.split('#')[0]);
     },
 
     init: function (config) {

@@ -1,5 +1,7 @@
+import logging
 import math
 from datetime import timedelta
+from typing import List, Tuple
 
 import numpy as np
 from django.conf import settings
@@ -7,15 +9,21 @@ from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
-from django.db.models import QuerySet
+from django.db.models import Q, QuerySet
 from django.utils import timezone
+from django.utils.translation import ugettext as _
 from pybb.models import Post
 from safedelete import HARD_DELETE
 from safedelete.queryset import SafeDeleteQueryset
 
-from astrobin.models import Image
+from astrobin.enums import SubjectType
+from astrobin.models import Acquisition, Image
+from astrobin_apps_images.services import ImageService
+from common.services.constellations_service import ConstellationsService
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
+
+log = logging.getLogger('apps')
 
 
 class UserService:
@@ -61,25 +69,21 @@ class UserService:
         # type: () -> QuerySet
         return Image.objects_including_wip.filter(user=self.user)
 
-    def get_public_images(self):
-        # type: () -> QuerySet
+    def get_public_images(self) -> QuerySet:
         return Image.objects.filter(user=self.user)
 
-    def get_wip_images(self):
-        # type: () -> QuerySet
+    def get_wip_images(self) -> QuerySet:
         return Image.wip.filter(user=self.user)
 
-    def get_deleted_images(self):
-        # type: () -> QuerySet
+    def get_deleted_images(self) -> QuerySet:
         return Image.deleted_objects.filter(user=self.user)
 
-    def get_bookmarked_images(self):
-        # type: () -> QuerySet
+    def get_bookmarked_images(self) -> QuerySet:
         image_ct = ContentType.objects.get_for_model(Image)  # type: ContentType
-        bookmarked_pks = [x.object_id for x in \
+        bookmarked_pks: List[int] = [x.object_id for x in \
                           ToggleProperty.objects.toggleproperties_for_user("bookmark", self.user).filter(
                               content_type=image_ct)
-                          ]  # type: List[int]
+                          ]
 
         return Image.objects.filter(pk__in=bookmarked_pks)
 
@@ -141,10 +145,10 @@ class UserService:
         if not self.user.is_authenticated:
             return False, "ANONYMOUS"
 
-        property = ToggleProperty.objects.toggleproperties_for_object('like', obj, self.user)  # type: QuerySet
-        if property.exists():
+        toggle_properties = ToggleProperty.objects.toggleproperties_for_object('like', obj, self.user)
+        if toggle_properties.exists():
             one_hour_ago = timezone.now() - timedelta(hours=1)
-            if property.first().created_on > one_hour_ago:
+            if toggle_properties.first().created_on > one_hour_ago:
                 return True, None
             return False, "TOO_LATE"
 
@@ -186,10 +190,10 @@ class UserService:
         views = ('default', 'table',)
         languages = settings.LANGUAGES
 
-        def _do_clear(language, section, subsection, view):
+        def _do_clear(language_to_clear, section_to_clear, subsection_to_clear, view_to_clear):
             key = make_template_fragment_key(
                 'user_gallery_image_list2',
-                [self.user.pk, language, section, subsection, view]
+                [self.user.pk, language_to_clear, section_to_clear, subsection_to_clear, view_to_clear]
             )
             cache.delete(key)
 
@@ -206,3 +210,246 @@ class UserService:
         images.delete(force_policy=HARD_DELETE)
 
         return count
+
+    def display_wip_images_on_public_gallery(self) -> bool:
+        return self.user.userprofile.display_wip_images_on_public_gallery in (None, True)
+
+    def sort_gallery_by(self, queryset: QuerySet, subsection: str, active: str) -> Tuple[QuerySet, List[str]]:
+        menu = []
+
+        #########
+        # TITLE #
+        #########
+        if subsection == 'title':
+            queryset = queryset.order_by('title')
+
+        ############
+        # UPLOADED #
+        ############
+        if subsection == 'uploaded':
+            queryset = queryset.order_by('-published', '-uploaded')
+
+        ############
+        # ACQUIRED #
+        ############
+        elif subsection == 'acquired':
+            last_acquisition_date_sql = 'SELECT date FROM astrobin_acquisition ' \
+                                        'WHERE date IS NOT NULL AND image_id = astrobin_image.id ' \
+                                        'ORDER BY date DESC ' \
+                                        'LIMIT 1'
+            queryset = queryset \
+                .filter(acquisition__isnull=False) \
+                .extra(
+                select={'last_acquisition_date': last_acquisition_date_sql},
+                order_by=['-last_acquisition_date', '-published']
+            ) \
+                .distinct()
+
+        ########
+        # YEAR #
+        ########
+        elif subsection == 'year':
+            acquisitions = Acquisition.objects.filter(
+                image__user=self.user,
+                image__is_wip=False,
+                image__deleted=None
+            )
+            if acquisitions:
+                distinct_years = sorted(list(set([a.date.year for a in acquisitions if a.date])), reverse=True)
+                no_date_message = _("No date specified")
+                menu = [(str(year), str(year)) for year in distinct_years] + [('0', no_date_message)]
+
+                if active == '0':
+                    queryset = queryset.filter(
+                        Q(
+                            subject_type__in=(
+                                SubjectType.DEEP_SKY,
+                                SubjectType.SOLAR_SYSTEM,
+                                SubjectType.WIDE_FIELD,
+                                SubjectType.STAR_TRAILS,
+                                SubjectType.NORTHERN_LIGHTS,
+                                SubjectType.NOCTILUCENT_CLOUDS,
+                                SubjectType.OTHER
+                            )
+                        ) &
+                        Q(acquisition=None) | Q(acquisition__date=None)
+                    ).distinct()
+                else:
+                    if active in (None, '') and distinct_years:
+                        active = str(distinct_years[0])
+
+                    if active:
+                        queryset = queryset.filter(acquisition__date__year=active).order_by('-published').distinct()
+
+        ########
+        # GEAR #
+        ########
+        elif subsection == 'gear':
+            telescopes = self.user.userprofile.telescopes.all()
+            cameras = self.user.userprofile.cameras.all()
+
+            no_date_message = _("No imaging telescopes or lenses, or no imaging cameras specified")
+            gear_images_message = _("Gear images")
+
+            menu += [(x.id, str(x)) for x in telescopes]
+            menu += [(x.id, str(x)) for x in cameras]
+            menu += [(0, no_date_message)]
+            menu += [(-1, gear_images_message)]
+
+            if active == '0':
+                queryset = queryset.filter(
+                    (Q(subject_type=SubjectType.DEEP_SKY) | Q(subject_type=SubjectType.SOLAR_SYSTEM)) &
+                    (Q(imaging_telescopes=None) | Q(imaging_cameras=None))
+                ).distinct()
+            elif active == '-1':
+                queryset = queryset.filter(Q(subject_type=SubjectType.GEAR)).distinct()
+            else:
+                if active in (None, ''):
+                    if telescopes:
+                        active = telescopes[0].id
+                elif active:
+                    queryset = queryset.filter(
+                        Q(imaging_telescopes__id=active) |
+                        Q(imaging_cameras__id=active)
+                    ).distinct()
+
+        ###########
+        # SUBJECT #
+        ###########
+        elif subsection == 'subject':
+            menu += [('DEEP', _("Deep sky"))]
+            menu += [('SOLAR', _("Solar system"))]
+            menu += [('WIDE', _("Extremely wide field"))]
+            menu += [('TRAILS', _("Star trails"))]
+            menu += [('NORTHERN_LIGHTS', _("Northern lights"))]
+            menu += [('NOCTILUCENT_CLOUDS', _("Noctilucent clouds"))]
+            menu += [('GEAR', _("Gear"))]
+            menu += [('OTHER', _("Other"))]
+
+            if active in (None, ''):
+                active = 'DEEP'
+
+            if active == 'DEEP':
+                queryset = queryset.filter(subject_type=SubjectType.DEEP_SKY)
+
+            elif active == 'SOLAR':
+                queryset = queryset.filter(subject_type=SubjectType.SOLAR_SYSTEM)
+
+            elif active == 'WIDE':
+                queryset = queryset.filter(subject_type=SubjectType.WIDE_FIELD)
+
+            elif active == 'TRAILS':
+                queryset = queryset.filter(subject_type=SubjectType.STAR_TRAILS)
+
+            elif active == 'NORTHERN_LIGHTS':
+                queryset = queryset.filter(subject_type=SubjectType.NORTHERN_LIGHTS)
+
+            elif active == 'NOCTILUCENT_CLOUDS':
+                queryset = queryset.filter(subject_type=SubjectType.NOCTILUCENT_CLOUDS)
+
+            elif active == 'GEAR':
+                queryset = queryset.filter(subject_type=SubjectType.GEAR)
+
+            elif active == 'OTHER':
+                queryset = queryset.filter(subject_type=SubjectType.OTHER)
+
+        #################
+        # CONSTELLATION #
+        #################
+        elif subsection == 'constellation':
+            queryset = queryset.filter(subject_type=SubjectType.DEEP_SKY)
+
+            images_by_constellation = {
+                'n/a': []
+            }
+
+            for image in queryset.iterator():
+                image_constellation = ImageService.get_constellation(image.solution)
+                if image_constellation:
+                    if not images_by_constellation.get(image_constellation.get('abbreviation')):
+                        images_by_constellation[image_constellation.get('abbreviation')] = []
+                    images_by_constellation.get(image_constellation.get('abbreviation')).append(image)
+                else:
+                    images_by_constellation.get('n/a').append(image)
+
+            menu += [('ALL', _('All'))]
+            for constellation in ConstellationsService.constellation_table:
+                if images_by_constellation.get(constellation[0]):
+                    menu += [(
+                        constellation[0],
+                        constellation[1] + ' (%d)' % len(images_by_constellation.get(constellation[0]))
+                    )]
+            if images_by_constellation.get('n/a') and len(images_by_constellation.get('n/a')) > 0:
+                menu += [('n/a', _('n/a') + ' (%d)' % len(images_by_constellation.get('n/a')))]
+
+            if active in (None, ''):
+                active = 'ALL'
+
+            if active != 'ALL':
+                try:
+                    queryset = queryset.filter(pk__in=[x.pk for x in images_by_constellation[active]])
+                except KeyError:
+                    log.warning("Requested missing constellation %s for user %d" % (active, self.user.pk))
+                    queryset = Image.objects.none()
+
+        ###########
+        # NO DATA #
+        ###########
+        elif subsection == 'nodata':
+            menu += [('SUB', _("No subjects specified"))]
+            menu += [('GEAR', _("No imaging telescopes or lenses, or no imaging cameras specified"))]
+            menu += [('ACQ', _("No acquisition details specified"))]
+
+            if active is None:
+                active = 'SUB'
+
+            if active == 'SUB':
+                queryset = queryset.filter(
+                    (
+                            Q(subject_type=SubjectType.DEEP_SKY) |
+                            Q(subject_type=SubjectType.SOLAR_SYSTEM) |
+                            Q(subject_type=SubjectType.WIDE_FIELD) |
+                            Q(subject_type=SubjectType.STAR_TRAILS) |
+                            Q(subject_type=SubjectType.NORTHERN_LIGHTS) |
+                            Q(subject_type=SubjectType.NOCTILUCENT_CLOUDS)
+                    ) &
+                    (Q(solar_system_main_subject=None))
+                )
+                queryset = [x for x in queryset if (x.solution is None or x.solution.objects_in_field is None)]
+                for i in queryset:
+                    for r in i.revisions.all():
+                        if r.solution and r.solution.objects_in_field:
+                            if i in queryset:
+                                queryset.remove(i)
+
+            elif active == 'GEAR':
+                queryset = queryset.filter(
+                    Q(
+                        subject_type__in=(
+                            SubjectType.DEEP_SKY,
+                            SubjectType.SOLAR_SYSTEM,
+                            SubjectType.WIDE_FIELD,
+                            SubjectType.STAR_TRAILS,
+                            SubjectType.NORTHERN_LIGHTS,
+                            SubjectType.NOCTILUCENT_CLOUDS,
+                        )
+                    ) &
+                    (Q(imaging_telescopes=None) | Q(imaging_cameras=None))
+                )
+
+            elif active == 'ACQ':
+                queryset = queryset.filter(
+                    Q(
+                        subject_type__in=(
+                            SubjectType.DEEP_SKY,
+                            SubjectType.SOLAR_SYSTEM,
+                            SubjectType.WIDE_FIELD,
+                            SubjectType.STAR_TRAILS,
+                            SubjectType.NORTHERN_LIGHTS,
+                            SubjectType.NOCTILUCENT_CLOUDS,
+                        )
+                    ) &
+                    Q(acquisition=None)
+                )
+
+        return queryset, menu
