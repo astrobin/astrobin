@@ -54,7 +54,10 @@
                                         <p><strong class="card-label">{% trans "FPS" %}:</strong> {{ ssa.fps|floatformat:"-3" }}</p>
                                     {% endif %}
                                     {% if ssa.exposure_per_frame %}
-                                        <p><strong class="card-label">{% trans "Exposure per frame" %}:</strong> {{ ssa.exposure_per_frame }} ms</p>
+                                        <p>
+                                            <strong class="card-label">{% trans "Exposure per frame" %}:</strong>
+                                            {{ ssa.exposure_per_frame|floatformat:"-2" }} ms
+                                        </p>
                                     {% endif %}
                                     {% if ssa.focal_length %}
                                         <p>
