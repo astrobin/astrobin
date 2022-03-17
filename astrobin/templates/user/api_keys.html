@@ -54,5 +54,11 @@
 {% endblock %}
 
 {% block extra_js %}
-{% include 'user/profile/js.html' %}
+    {% include 'user/profile/js.html' %}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.image-slideshow-button').remove();
+        });
+    </script>
 {% endblock %}

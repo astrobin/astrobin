@@ -98,10 +98,10 @@
                     {% cache_image_list as cache_image_list %}
                     {% if cache_image_list %}
                         {% cache 43200 user_gallery_image_list2 requested_user.pk LANGUAGE_CODE section subsection view %}
-                            {% image_list image_list paginate_by=paginate_by nav_ctx='user' %}
+                            {% image_list image_list paginate_by=paginate_by nav_ctx='user' fancybox=False %}
                         {% endcache %}
                     {% else %}
-                        {% image_list image_list paginate_by=paginate_by nav_ctx='user' %}
+                        {% image_list image_list paginate_by=paginate_by nav_ctx='user' fancybox=False %}
                     {% endif %}
                 </div>
             {% endif %}

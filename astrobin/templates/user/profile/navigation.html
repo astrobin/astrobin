@@ -251,8 +251,9 @@
 
         {% ifequal request.GET.view None %}
             <li class="pull-right">
-                <a href="javascript:;" data-fancybox-trigger="image-list">
-                    <i class="icon-play"></i>
+                <a href="javascript:;" class="image-slideshow-button" data-fancybox-trigger="image-list">
+                    <i class="icon-play" style="display: none"></i>
+                    <div class="ld ld-ring ld-spin"></div>
                 </a>
             </li>
         {% endifequal %}

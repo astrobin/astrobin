@@ -5,6 +5,7 @@
   border: none;
   @include box-shadow;
   @include rounded-corners;
+  z-index: 1051;
 
   .modal-header {
     background: $grey-6-dark url('../images/darker-panel-tile.png');
@@ -74,4 +75,8 @@
   form {
     margin-bottom: 0;
   }
+}
+
+.modal-backdrop {
+  z-index: 1050;
 }

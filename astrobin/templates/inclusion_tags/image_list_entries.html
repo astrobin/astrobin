@@ -5,7 +5,7 @@
 {% lazy_paginate paginate_by image_list using "image_list_page" %}
 {% for image in image_list %}
     <li class="thumbnail astrobin-thumbnail">
-        {% astrobin_image image alias nav_ctx=nav_ctx nav_ctx_extra=nav_ctx_extra fancybox_tooltip=True rel='image-list' slug=image.get_id %}
+        {% astrobin_image image alias nav_ctx=nav_ctx nav_ctx_extra=nav_ctx_extra fancybox_tooltip=fancybox rel='image-list' slug=image.get_id %}
     </li>
 {% empty %}
     <li>{% include 'inclusion_tags/no_images.html' %}</li>

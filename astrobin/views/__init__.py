@@ -39,7 +39,6 @@ from haystack.query import SearchQuerySet
 from silk.profiling.profiler import silk_profile
 
 from astrobin.context_processors import common_variables, user_language
-from astrobin.enums import SubjectType
 from astrobin.forms import (
     AccessoryEditForm, AccessoryEditNewForm, CameraEditForm, CameraEditNewForm,
     DeepSky_AcquisitionBasicForm, DeepSky_AcquisitionForm, DefaultImageLicenseForm, DeleteAccountForm, FilterEditForm,
@@ -51,7 +50,7 @@ from astrobin.forms import (
 from astrobin.forms.profile_edit_privacy_form import UserProfileEditPrivacyForm
 from astrobin.gear import get_correct_gear, is_gear_complete
 from astrobin.models import (
-    Accessory, Acquisition, App, Camera, DeepSky_Acquisition, Filter, FocalReducer, Gear,
+    Accessory, App, Camera, DeepSky_Acquisition, Filter, FocalReducer, Gear,
     GearUserInfo, Image, ImageRevision, Location, Mount, Software, SolarSystem_Acquisition, Telescope, UserProfile,
 )
 from astrobin.shortcuts import ajax_response, ajax_success
@@ -70,7 +69,6 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
 from astrobin_apps_users.services import UserService
 from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService
-from common.services.constellations_service import ConstellationsService
 from toggleproperties.models import ToggleProperty
 
 log = logging.getLogger('apps')
@@ -1168,15 +1166,12 @@ def user_page(request, username):
     active = request.GET.get('active')
     menu = []
 
-    if user.userprofile.display_wip_images_on_public_gallery in (None, True):
+    if UserService(user).display_wip_images_on_public_gallery() and request.user == user:
         qs = UserService(user).get_all_images()
     else:
         qs = UserService(user).get_public_images()
 
     wip_qs = UserService(user).get_wip_images()
-
-    if request.user != user:
-        qs = qs.exclude(is_wip=True)
 
     if 'staging' in request.GET:
         if request.user != user and not request.user.is_superuser:
@@ -1191,222 +1186,7 @@ def user_page(request, username):
         section = 'trash'
         subsection = None
     else:
-        #########
-        # TITLE #
-        #########
-        if subsection == 'title':
-            qs = qs.order_by('title')
-
-        ############
-        # UPLOADED #
-        ############
-        if subsection == 'uploaded':
-            qs = qs.order_by('-published', '-uploaded')
-
-        ############
-        # ACQUIRED #
-        ############
-        elif subsection == 'acquired':
-            last_acquisition_date_sql = 'SELECT date FROM astrobin_acquisition ' \
-                                        'WHERE date IS NOT NULL AND image_id = astrobin_image.id ' \
-                                        'ORDER BY date DESC ' \
-                                        'LIMIT 1'
-            qs = qs \
-                .filter(acquisition__isnull=False) \
-                .extra(
-                select={'last_acquisition_date': last_acquisition_date_sql},
-                order_by=['-last_acquisition_date', '-published']) \
-                .distinct()
-
-        ########
-        # YEAR #
-        ########
-        elif subsection == 'year':
-            acquisitions = Acquisition.objects.filter(
-                image__user=user,
-                image__is_wip=False,
-                image__deleted=None)
-            if acquisitions:
-                distinct_years = sorted(list(set([a.date.year for a in acquisitions if a.date])), reverse=True)
-                no_date_message = _("No date specified")
-                menu = [(str(year), str(year)) for year in distinct_years] + [('0', no_date_message)]
-
-                if active == '0':
-                    qs = qs.filter(
-                        Q(subject_type__in=(
-                            SubjectType.DEEP_SKY,
-                            SubjectType.SOLAR_SYSTEM,
-                            SubjectType.WIDE_FIELD,
-                            SubjectType.STAR_TRAILS,
-                            SubjectType.NORTHERN_LIGHTS,
-                            SubjectType.NOCTILUCENT_CLOUDS,
-                            SubjectType.OTHER
-                        )) &
-                        Q(acquisition=None) | Q(acquisition__date=None)).distinct()
-                else:
-                    if active is None and distinct_years:
-                        active = str(distinct_years[0])
-
-                    if active:
-                        qs = qs.filter(acquisition__date__year=active).order_by('-published').distinct()
-
-        ########
-        # GEAR #
-        ########
-        elif subsection == 'gear':
-            telescopes = profile.telescopes.all()
-            cameras = profile.cameras.all()
-
-            no_date_message = _("No imaging telescopes or lenses, or no imaging cameras specified")
-            gi = _("Gear images")
-
-            menu += [(x.id, str(x)) for x in telescopes]
-            menu += [(x.id, str(x)) for x in cameras]
-            menu += [(0, no_date_message)]
-            menu += [(-1, gi)]
-
-            if active == '0':
-                qs = qs.filter(
-                    (Q(subject_type=SubjectType.DEEP_SKY) | Q(subject_type=SubjectType.SOLAR_SYSTEM)) &
-                    (Q(imaging_telescopes=None) | Q(imaging_cameras=None))).distinct()
-            elif active == '-1':
-                qs = qs.filter(Q(subject_type=SubjectType.GEAR)).distinct()
-            else:
-                if active is None:
-                    if telescopes:
-                        active = telescopes[0].id
-                if active:
-                    qs = qs.filter(Q(imaging_telescopes__id=active) |
-                                   Q(imaging_cameras__id=active)).distinct()
-
-        ###########
-        # SUBJECT #
-        ###########
-        elif subsection == 'subject':
-            menu += [('DEEP', _("Deep sky"))]
-            menu += [('SOLAR', _("Solar system"))]
-            menu += [('WIDE', _("Extremely wide field"))]
-            menu += [('TRAILS', _("Star trails"))]
-            menu += [('NORTHERN_LIGHTS', _("Northern lights"))]
-            menu += [('NOCTILUCENT_CLOUDS', _("Noctilucent clouds"))]
-            menu += [('GEAR', _("Gear"))]
-            menu += [('OTHER', _("Other"))]
-
-            if active is None:
-                active = 'DEEP'
-
-            if active == 'DEEP':
-                qs = qs.filter(subject_type=SubjectType.DEEP_SKY)
-
-            elif active == 'SOLAR':
-                qs = qs.filter(subject_type=SubjectType.SOLAR_SYSTEM)
-
-            elif active == 'WIDE':
-                qs = qs.filter(subject_type=SubjectType.WIDE_FIELD)
-
-            elif active == 'TRAILS':
-                qs = qs.filter(subject_type=SubjectType.STAR_TRAILS)
-
-            elif active == 'NORTHERN_LIGHTS':
-                qs = qs.filter(subject_type=SubjectType.NORTHERN_LIGHTS)
-
-            elif active == 'NOCTILUCENT_CLOUDS':
-                qs = qs.filter(subject_type=SubjectType.NOCTILUCENT_CLOUDS)
-
-            elif active == 'GEAR':
-                qs = qs.filter(subject_type=SubjectType.GEAR)
-
-            elif active == 'OTHER':
-                qs = qs.filter(subject_type=SubjectType.OTHER)
-
-        elif subsection == 'constellation':
-            qs = qs.filter(subject_type=SubjectType.DEEP_SKY)
-
-            images_by_constellation = {
-                'n/a': []
-            }
-
-            for image in qs.iterator():
-                image_constellation = ImageService.get_constellation(image.solution)
-                if image_constellation:
-                    if not images_by_constellation.get(image_constellation.get('abbreviation')):
-                        images_by_constellation[image_constellation.get('abbreviation')] = []
-                    images_by_constellation.get(image_constellation.get('abbreviation')).append(image)
-                else:
-                    images_by_constellation.get('n/a').append(image)
-
-            menu += [('ALL', _('All'))]
-            for constellation in ConstellationsService.constellation_table:
-                if images_by_constellation.get(constellation[0]):
-                    menu += [(
-                        constellation[0],
-                        constellation[1] + ' (%d)' % len(images_by_constellation.get(constellation[0]))
-                    )]
-            if images_by_constellation.get('n/a') and len(images_by_constellation.get('n/a')) > 0:
-                menu += [('n/a', _('n/a') + ' (%d)' % len(images_by_constellation.get('n/a')))]
-
-            if active is None:
-                active = 'ALL'
-
-            if active != 'ALL':
-                try:
-                    qs = qs.filter(pk__in=[x.pk for x in images_by_constellation[active]])
-                except KeyError:
-                    log.warning("Requested missing constellation %s for user %d" % (active, user.pk))
-                    qs = Image.objects.none()
-
-        ###########
-        # NO DATA #
-        ###########
-        elif subsection == 'nodata':
-            menu += [('SUB', _("No subjects specified"))]
-            menu += [('GEAR', _("No imaging telescopes or lenses, or no imaging cameras specified"))]
-            menu += [('ACQ', _("No acquisition details specified"))]
-
-            if active is None:
-                active = 'SUB'
-
-            if active == 'SUB':
-                qs = qs.filter(
-                    (
-                            Q(subject_type=SubjectType.DEEP_SKY) |
-                            Q(subject_type=SubjectType.SOLAR_SYSTEM) |
-                            Q(subject_type=SubjectType.WIDE_FIELD) |
-                            Q(subject_type=SubjectType.STAR_TRAILS) |
-                            Q(subject_type=SubjectType.NORTHERN_LIGHTS) |
-                            Q(subject_type=SubjectType.NOCTILUCENT_CLOUDS)
-                    ) &
-                    (Q(solar_system_main_subject=None)))
-                qs = [x for x in qs if (x.solution is None or x.solution.objects_in_field is None)]
-                for i in qs:
-                    for r in i.revisions.all():
-                        if r.solution and r.solution.objects_in_field:
-                            if i in qs:
-                                qs.remove(i)
-
-            elif active == 'GEAR':
-                qs = qs.filter(
-                    Q(subject_type__in=(
-                        SubjectType.DEEP_SKY,
-                        SubjectType.SOLAR_SYSTEM,
-                        SubjectType.WIDE_FIELD,
-                        SubjectType.STAR_TRAILS,
-                        SubjectType.NORTHERN_LIGHTS,
-                        SubjectType.NOCTILUCENT_CLOUDS,
-                    )) &
-                    (Q(imaging_telescopes=None) | Q(imaging_cameras=None)))
-
-            elif active == 'ACQ':
-                qs = qs.filter(
-                    Q(subject_type__in=(
-                        SubjectType.DEEP_SKY,
-                        SubjectType.SOLAR_SYSTEM,
-                        SubjectType.WIDE_FIELD,
-                        SubjectType.STAR_TRAILS,
-                        SubjectType.NORTHERN_LIGHTS,
-                        SubjectType.NOCTILUCENT_CLOUDS,
-                    )) &
-                    Q(acquisition=None))
+        qs, menu = UserService(user).sort_gallery_by(qs, subsection, active)
 
     # Calculate some stats
 
