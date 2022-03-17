@@ -49,3 +49,11 @@
         </button>
     </div>
 </form>
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.image-slideshow-button').remove();
+        });
+    </script>
+{% endblock %}
