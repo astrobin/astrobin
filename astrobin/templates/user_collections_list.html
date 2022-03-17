@@ -130,6 +130,8 @@
 {% block extra_js %}
     <script type="text/javascript">
         $(document).ready(function() {
+            $('.image-slideshow-button').remove();
+
             $('a.delete-modal-toggle').click(function(e) {
                 var $modal = $('#delete-modal'),
                     $form = $modal.find('form'),
