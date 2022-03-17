@@ -2304,8 +2304,10 @@ class SolarSystem_Acquisition(Acquisition):
         blank=True,
     )
 
-    exposure_per_frame = models.PositiveIntegerField(
+    exposure_per_frame = models.DecimalField(
         verbose_name=_("Exposure per frame") + " (ms)",
+        max_digits=7,
+        decimal_places=2,
         null=True,
         blank=True,
     )
