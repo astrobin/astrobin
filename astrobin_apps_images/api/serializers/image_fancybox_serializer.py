@@ -13,10 +13,10 @@ class ImageFancyboxSerializer(serializers.ModelSerializer):
         representation.update(
             {
                 'url': instance.get_absolute_url(),
-                'src': reverse('image_rawthumb', kwargs={'id': instance.get_id(), 'r': 'final', 'alias': 'qhd'}),
+                'src': reverse('image_rawthumb', kwargs={'id': instance.get_id(), 'r': 'final', 'alias': 'qhd'}) + '?sync',
                 'thumb': reverse(
                     'image_rawthumb', kwargs={'id': instance.get_id(), 'r': 'final', 'alias': 'gallery'}
-                ),
+                ) + '?sync',
                 'caption': f'{instance.user.userprofile.get_display_name()} - "{instance.title}"',
                 'slug': instance.get_id(),
                 'userId': instance.user.pk,
