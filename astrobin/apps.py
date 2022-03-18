@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image, ImageOps
 from django.apps import AppConfig
 
 Image.MAX_IMAGE_PIXELS = 16536 * 16536
@@ -29,5 +29,17 @@ class AstroBinAppConfig(AppConfig):
         from astrobin import signals  # noqa
         from astrobin_apps_notifications import signals  # noqa
         from astrobin.locale_extras import LOCALE_EXTRAS  # noqa
+        from avatar.models import Avatar
 
         self.registerActStreamModels()
+
+        # See: https://github.com/grantmcconnaughey/django-avatar/issues/207
+        def _transpose_image(self, image):
+            EXIF_ORIENTATION = 0x0112
+            code = image.getexif().get(EXIF_ORIENTATION, 1)
+            if code and code != 1:
+                image = ImageOps.exif_transpose(image)
+
+            return image
+
+        Avatar.transpose_image = _transpose_image
