@@ -1,7 +1,9 @@
 from PIL import Image, ImageOps
+from PIL.ImageFile import ImageFile
 from django.apps import AppConfig
 
 Image.MAX_IMAGE_PIXELS = 16536 * 16536
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
 class AstroBinAppConfig(AppConfig):
