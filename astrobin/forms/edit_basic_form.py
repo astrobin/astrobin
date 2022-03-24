@@ -1,9 +1,9 @@
 from django import forms
-from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import ugettext as __
+from django.utils.translation import ugettext as __, ugettext_lazy as _
 
 from astrobin.forms.utils import parseKeyValueTags
-from astrobin.models import Location, Image
+from astrobin.models import Image, Location
+from astrobin.widgets.select_with_disabled_choices import SelectWithDisabledChoices
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.models import KeyValueTag
 
@@ -37,9 +37,12 @@ class ImageEditBasicForm(forms.ModelForm):
     mouse_hover_image = forms.ChoiceField(
         required=False,
         label=_("Mouse hover image"),
-        help_text=_("Choose what will be displayed when somebody hovers the mouse over this image. Please note: only "
-                    "revisions with the same width and height of your original image can be considered."),
-        choices=Image.MOUSE_HOVER_CHOICES
+        help_text=_(
+            "Choose what will be displayed when somebody hovers the mouse over this image. Please note: only "
+            "revisions with the same width and height of your original image can be considered."
+        ),
+        choices=Image.MOUSE_HOVER_CHOICES,
+        widget=SelectWithDisabledChoices(attrs={'class': 'form-control'}),
     )
 
     keyvaluetags = forms.CharField(
@@ -85,12 +88,18 @@ class ImageEditBasicForm(forms.ModelForm):
 
     def __initRevisions(self):
         revisions = self.instance.revisions
-        if revisions.count() > 0:
-            for revision in revisions.all():
-                if revision.w == self.instance.w and revision.h == self.instance.h:
-                    self.fields['mouse_hover_image'].choices = self.fields['mouse_hover_image'].choices + [
-                        ("REVISION__%s" % revision.label, "%s %s" % (__("Revision"), revision.label))
-                    ]
+
+        def does_not_match_label(matches: bool):
+            return "" if matches else " (" + __("pixel resolution does not match") + ")"
+
+        for revision in revisions.all():
+            matches_resolution: bool = revision.w == self.instance.w and revision.h == self.instance.h
+            self.fields['mouse_hover_image'].choices = self.fields['mouse_hover_image'].choices + [
+                (
+                    f'REVISION__{revision.label}' if matches_resolution else '__DISABLED__',
+                    f'{__("Revision")} {revision.label}{does_not_match_label(matches_resolution)}',
+                )
+            ]
 
     def __initKeyValueTags(self):
         tags = self.instance.keyvaluetags.all()

@@ -49,6 +49,11 @@ $flat-theme-dark-color: $grey-6;
     opacity: .8;
   }
 
+  .select2-results__option[aria-disabled=true] {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+
   .select2-selection--single {
     border-radius: 0;
   }
