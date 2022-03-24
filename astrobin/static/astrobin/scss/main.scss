@@ -3831,7 +3831,12 @@ form#group-update-form .control-group:nth-child(8) {
 }
 
 .notification-item a {
-  color: $text-color;
+  color: $grey-3;
+
+  strong {
+    color: $strong-text-color;
+    font-weight: normal;
+  }
 }
 
 table.notifications-modal {
