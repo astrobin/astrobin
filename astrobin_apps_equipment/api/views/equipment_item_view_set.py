@@ -99,7 +99,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                     elif usage_type == 'guiding':
                         property = 'guiding_telescopes_2'
                     else:
-                        return Response("You need to specify a 'usage_type' with cameras", HTTP_400_BAD_REQUEST)
+                        return Response("You need to specify a 'usage_type' with telescopes", HTTP_400_BAD_REQUEST)
                 elif manager.model == Mount:
                     property = 'mounts_2'
                 elif manager.model == Filter:
