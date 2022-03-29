@@ -14,6 +14,7 @@ class BlockNonPayingUsersFromRussiaMiddleware(MiddlewareParentClass):
         return (
                 hasattr(request, 'user') and
                 country_code.lower() == 'ru' and
+                not request.path.startswith('/accounts/') and
                 (
                         not request.user.is_authenticated or
                         is_free(PremiumService(request.user).get_valid_usersubscription())
