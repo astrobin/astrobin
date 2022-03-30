@@ -10,16 +10,27 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_fre
 class BlockNonPayingUsersFromRussiaMiddleware(MiddlewareParentClass):
     def _process(self, request):
         country_code = get_client_country_code(request)
+        excluded_paths = [
+            '/accounts',
+            '/json-api/',
+            '/thumb/',
+            '/rawthumb/',
+        ]
 
-        return (
-                hasattr(request, 'user') and
-                country_code.lower() == 'ru' and
-                not request.path.startswith('/accounts/') and
-                (
-                        not request.user.is_authenticated or
-                        is_free(PremiumService(request.user).get_valid_usersubscription())
-                )
-        )
+        if not hasattr(request, 'user'):
+            return False
+
+        for excluded_path in excluded_paths:
+            if excluded_path in request.path:
+                return False
+
+        if country_code != 'ru':
+            return False
+
+        if request.user.is_authenticated and not is_free(PremiumService(request.user).get_valid_usersubscription()):
+            return False
+
+        return True
 
     def process_response(self, request, response):
         if self._process(request):
