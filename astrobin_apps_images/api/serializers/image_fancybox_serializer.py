@@ -2,6 +2,7 @@ from django.urls import reverse
 from rest_framework import serializers
 
 from astrobin.models import Image
+from astrobin_apps_images.services import ImageService
 
 
 class ImageFancyboxSerializer(serializers.ModelSerializer):
@@ -9,6 +10,7 @@ class ImageFancyboxSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance: Image):
         representation = super().to_representation(instance)
+        final_revision = ImageService(instance).get_final_revision()
 
         representation.update(
             {
@@ -20,6 +22,8 @@ class ImageFancyboxSerializer(serializers.ModelSerializer):
                 'caption': f'{instance.user.userprofile.get_display_name()} - "{instance.title}"',
                 'slug': instance.get_id(),
                 'userId': instance.user.pk,
+                'finalRevisionLabel': '0' if final_revision == instance else final_revision.label,
+                'finalRevisionId': None if final_revision == instance else final_revision.id,
             }
         )
 

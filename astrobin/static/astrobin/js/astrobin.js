@@ -1187,10 +1187,12 @@ astrobin_common = {
                 setTimeout(() => applyMutations(mutations), delay + 1);
             });
 
-            window.astroBinFancyBoxMutationObserver.observe($img[0], {
-                attributes: true,
-                attributeFilter: ['style']
-            });
+            if (!!$img && !!$img[0]) {
+                window.astroBinFancyBoxMutationObserver.observe($img[0], {
+                    attributes: true,
+                    attributeFilter: ['style']
+                });
+            }
         }
 
         if ($(slide.$image).siblings('.fancybox__overlaySolution').length > 0) {
@@ -1198,17 +1200,27 @@ astrobin_common = {
             return;
         }
 
+        let contentTypeModel;
+        let objectId;
+
+        if (slide.finalRevisionLabel === '0') {
+            contentTypeModel = 'image';
+            objectId = slide.id;
+        } else {
+            contentTypeModel = 'imagerevision'
+            objectId = slide.finalRevisionId;
+        }
+
         $.ajax({
             type: 'get',
-            url: '/api/v2/common/contenttypes/?app_label=astrobin&model=image',
+            url: `/api/v2/common/contenttypes/?app_label=astrobin&model=${contentTypeModel}`,
             dataType: 'json',
             success: (contentTypeResponse) => {
                 const contentType = contentTypeResponse[0];
-                const imageId = slide.id;
 
                 $.ajax({
                     type: 'get',
-                    url: `/api/v2/platesolving/solutions/?content_type=${contentType.id}&object_id=${imageId}`,
+                    url: `/api/v2/platesolving/solutions/?content_type=${contentType.id}&object_id=${objectId}`,
                     dataType: 'json',
                     success: (response) => {
                         if (response.length === 0) {

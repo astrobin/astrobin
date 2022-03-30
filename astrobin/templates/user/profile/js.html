@@ -49,7 +49,9 @@ $(document).ready(function() {
                             rel: 'image-list',
                             userId: item.userId,
                             id: item.pk,
-                            idOrHash: item.slug
+                            idOrHash: item.slug,
+                            finalRevisionLabel: item.finalRevisionLabel,
+                            finalRevisionId: item.finalRevisionId
                         }));
 
                         window.astrobinFancyboxOptions.Toolbar.display.splice(
