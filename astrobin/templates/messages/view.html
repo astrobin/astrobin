@@ -64,7 +64,7 @@
                         {% button_loading_indicator %}
                     </button>
 
-                    <a href="{% url 'messages_delete' thread.pk %}" class="btn btn-danger">
+                    <a href="#are-you-sure-modal" class="btn btn-danger" data-toggle="modal">
                         <i class="icon-trash icon-white"></i>
                         {% trans "Delete conversation" %}
                     </a>
@@ -116,7 +116,18 @@
                     $('.reply-form .submit-button .text')
                         .text("{% trans "Reply" %}");
                 }
-            })
-        })
+            });
+
+            $('#are-you-sure-modal').on('show', function () {
+                $(this).find('.modal-body p').text(
+                    '{{ _("Do you really want to delete this conversation?") | escapejs }}'
+                );
+            });
+
+            $('#are-you-sure-modal .btn-i-am-sure').live('click', function () {
+               $(this).addClass('running');
+               window.location.assign('{% url "messages_delete" thread.pk %}');
+            });
+        });
     </script>
 {% endblock %}
