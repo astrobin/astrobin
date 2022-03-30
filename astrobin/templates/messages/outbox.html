@@ -8,13 +8,13 @@
 {% load astrobin_apps_users_tags %}
 {% load tags %}
 
-{% block title %}{% trans "My messages" %} - {% trans "Received" %}{% endblock %}
+{% block title %}{% trans "My messages" %} - {% trans "Sent" %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb 'Messages' None %}
-    {% breadcrumb 'Received' 'messages_inbox' %}
+    {% breadcrumb 'Sent' 'messages_outbox' %}
 {% endblock %}
 
 {% block content %}
@@ -34,7 +34,6 @@
 
     <div class="row-fluid">
         {% include 'messages/navigation.html' %}
-
         <div class="span9">
             <table class="table table-striped inbox-table">
                 <thead>

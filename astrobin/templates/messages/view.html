@@ -6,10 +6,10 @@
 {% load astrobin_apps_users_tags %}
 {% load static %}
 {% load common_tags %}
+{% load tags %}
 
 
 {% block title %}{{ thread.subject }}{% endblock %}
-{% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
@@ -18,17 +18,6 @@
 {% endblock %}
 
 {% block content %}
-    <div class="subnav subnav-fixed">
-        <ul class="nav nav-pills">
-            <li>
-                <a href="{% url 'messages_inbox' %}">
-                    <i class="icon-arrow-left icon-white"></i>
-                    <span class="hidden-phone">{% trans "Back" %}</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-
     <div class="subtitle">
         <i class="icon icon-info-sign"></i>
         {% url 'user_page' participant.user as sender_url %}
@@ -66,7 +55,11 @@
 
                     <a href="#are-you-sure-modal" class="btn btn-danger" data-toggle="modal">
                         <i class="icon-trash icon-white"></i>
-                        {% trans "Delete conversation" %}
+                        {% if thread|participation_is_deleted:request.user %}
+                            {% trans "Undelete conversation" %}
+                        {% else %}
+                            {% trans "Delete conversation" %}
+                        {% endif %}
                     </a>
                 </div>
             </form>
@@ -102,8 +95,8 @@
                     }
                 },
                 success: function (data) {
-                    var $new_message = $(data);
-                    var $container = $('<div/>').addClass('message-container own');
+                    const $new_message = $(data);
+                    const $container = $('<div/>').addClass('message-container own');
 
                     $container.append($new_message);
                     $('.message-list').append($container);
@@ -120,13 +113,23 @@
 
             $('#are-you-sure-modal').on('show', function () {
                 $(this).find('.modal-body p').text(
-                    '{{ _("Do you really want to delete this conversation?") | escapejs }}'
+                    {% if thread|participation_is_deleted:request.user %}
+                        '{{ _("Do you really want to undelete this conversation?") | escapejs }}'
+                    {% else %}
+                        '{{ _("Do you really want to delete this conversation?") | escapejs }}'
+                    {% endif %}
                 );
             });
 
             $('#are-you-sure-modal .btn-i-am-sure').live('click', function () {
                $(this).addClass('running');
-               window.location.assign('{% url "messages_delete" thread.pk %}');
+               window.location.assign(
+                   {% if thread|participation_is_deleted:request.user %}
+                       '{% url "messages_undelete" thread.pk %}'
+                   {% else %}
+                       '{% url "messages_delete" thread.pk %}'
+                   {% endif %}
+               );
             });
         });
     </script>

@@ -15,8 +15,8 @@
         {% trans "Upload" %}
     </a>
 </li>
-<li class="nav-header">{% trans "My places" %}</li>
 
+<li class="nav-header">{% trans "My places" %}</li>
 
 <li>
     <a href="{% url 'user_page' request.user.username %}">
@@ -39,21 +39,30 @@
     </a>
 </li>
 
-<li>
-    <a href="{% url 'user_page_plots' request.user.username %}">
-        <i class="icon-bar-chart"></i>
-        {% trans "Plots" %}
-    </a>
-</li>
-
-<li class="divider"></li>
+<li class="nav-header">{% trans "My messages" %}</li>
 
 <li>
     <a href="{% url 'messages_inbox' %}">
         <i class="icon-inbox"></i>
-        {% trans "My messages" %}
+        {% trans "Received" %}
     </a>
 </li>
+
+<li>
+    <a href="{% url 'messages_outbox' %}">
+        <i class="icon-mail-forward"></i>
+        {% trans "Sent" %}
+    </a>
+</li>
+
+<li>
+    <a href="{% url 'messages_trash' %}">
+        <i class="icon-trash"></i>
+        {% trans "Deleted" %}
+    </a>
+</li>
+
+<li class="divider"></li>
 
 <li>
     <a href="{% url 'user_page_api_keys' request.user.username %}">

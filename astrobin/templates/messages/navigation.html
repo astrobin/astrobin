@@ -1,0 +1,30 @@
+{% load i18n %}
+{% load tags %}
+
+<div class="span3">
+    <ul class="nav nav-pills nav-stacked">
+
+        <li class="{% current request '^/messages/inbox/$' %}">
+            <a href="{% url 'messages_inbox' %}">
+                <i class="icon-inbox"></i> {% trans "Received" %}
+                <i class="icon-chevron-right"></i>
+            </a>
+        </li>
+
+        <li class="{% current request '^/messages/outbox/$' %}">
+            <a href="{% url 'messages_outbox' %}">
+                <i class="icon-mail-forward"></i> {% trans "Sent" %}
+                <i class="icon-chevron-right"></i>
+            </a>
+        </li>
+
+        <li class="{% current request '^/messages/trash/$' %}">
+            <a href="{% url 'messages_trash' %}">
+                <i class="icon-trash"></i> {% trans "Deleted" %}
+                <i class="icon-chevron-right"></i>
+            </a>
+        </li>
+
+    </ul>
+</div>
+

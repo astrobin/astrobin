@@ -8,33 +8,19 @@
 {% load astrobin_apps_users_tags %}
 {% load tags %}
 
-{% block title %}{% trans "My messages" %} - {% trans "Received" %}{% endblock %}
-{% block container_extra_classes %}has-subnav{% endblock %}
+{% block title %}{% trans "My messages" %} - {% trans "Deleted" %}{% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb 'Messages' None %}
-    {% breadcrumb 'Received' 'messages_inbox' %}
+    {% breadcrumb 'Deleted' 'messages_trash' %}
 {% endblock %}
 
 {% block content %}
-    {% setvar thread_list|skip_thread_list_shadow_bans:request.user as filtered_thread_list %}
-    {% paginate 50 filtered_thread_list %}
-
-    <div class="subnav subnav-fixed">
-        <ul class="nav nav-pills">
-            <li>
-                <a href="{% url 'messages_compose' %}{% query_string "next=request.path" "" %}">
-                    <i class="icon-pencil icon-white"></i>
-                    <span class="hidden-phone">{% trans "Compose message" %}</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+    {% paginate 50 message_list %}
 
     <div class="row-fluid">
         {% include 'messages/navigation.html' %}
-
         <div class="span9">
             <table class="table table-striped inbox-table">
                 <thead>
@@ -46,7 +32,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for message in filtered_thread_list %}
+                {% for message in message_list %}
                     <tr>
                         <td class="message-state{% if message.new %} message-unread{% endif %}">
                             <div class="state-indicator"></div>
