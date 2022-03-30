@@ -10,8 +10,9 @@ from django.views.static import serve
 from rest_framework.authtoken.views import obtain_auth_token
 from tastypie.api import Api
 from threaded_messages.views import (
-    batch_update as messages_batch_update, delete as messages_delete,
-    inbox as messages_inbox, message_ajax_reply as messages_message_ajax_reply, view as messages_view,
+    batch_update as messages_batch_update, delete as messages_delete, undelete as messages_undelete,
+    inbox as messages_inbox, outbox as messages_outbox, trash as messages_trash,
+    message_ajax_reply as messages_message_ajax_reply, view as messages_view,
 )
 
 from astrobin import lookups
@@ -313,7 +314,10 @@ urlpatterns += [
     url(r'^messages/compose/(?P<recipient>[\w.@+-]+)/$', messages_compose, {'template_name': 'messages/compose.html'},
         name='messages_compose_to'),
     url(r'^messages/delete/(?P<thread_id>[\d]+)/$', messages_delete, name='messages_delete'),
+    url(r'^messages/undelete/(?P<thread_id>[\d]+)/$', messages_undelete, name='messages_undelete'),
     url(r'^messages/inbox/$', messages_inbox, {'template_name': 'messages/inbox.html'}, name='messages_inbox'),
+    url(r'^messages/outbox/$', messages_outbox, {'template_name': 'messages/outbox.html'}, name='messages_outbox'),
+    url(r'^messages/trash/$', messages_trash, {'template_name': 'messages/trash.html'}, name='messages_trash'),
     url(r'^messages/message-reply/(?P<thread_id>[\d]+)/$', messages_message_ajax_reply,
         {'template_name': 'messages/message_list_view.html'}, name="message_reply"),
     url(r'^messages/view/(?P<thread_id>[\d]+)/$', messages_view, {'template_name': 'messages/view.html'},

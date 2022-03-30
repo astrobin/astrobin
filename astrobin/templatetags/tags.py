@@ -15,7 +15,7 @@ from django.utils.safestring import SafeString, mark_safe
 from django.utils.translation import ugettext as _
 from pybb.models import Post, Topic
 from subscription.models import Subscription, UserSubscription
-from threaded_messages.models import Participant
+from threaded_messages.models import Participant, Thread
 
 from astrobin import utils
 from astrobin.enums import SubjectType
@@ -884,3 +884,13 @@ def use_high_contrast_theme(context):
     request = context.get('request')
     cookie = request.COOKIES.get('astrobin_use_high_contrast_theme')
     return cookie is not None
+
+
+@register.filter
+def participation_is_deleted(thread: Thread, user: User) -> bool:
+    participations = Participant.objects.filter(thread=thread, user=user)
+
+    if not participations.exists():
+        return True
+
+    return participations[0].deleted_at != None

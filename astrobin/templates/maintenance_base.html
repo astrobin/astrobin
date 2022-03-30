@@ -181,6 +181,7 @@
                                                 {% trans "Upload" %}
                                             </a>
                                         </li>
+
                                         <li class="nav-header">{% trans "My places" %}</li>
 
                                         <li>
@@ -189,26 +190,46 @@
                                                 {% trans "Gallery" %}
                                             </a>
                                         </li>
+
+                                        <li>
+                                            <a href="{% url 'user_page' request.user.username %}?staging">
+                                                <i class="icon-lock"></i>
+                                                {% trans "Staging Area" %}
+                                            </a>
+                                        </li>
+
                                         <li>
                                             <a href="{% url 'user_page_bookmarks' request.user %}">
                                                 <i class="icon-bookmark"></i>
                                                 {% trans "Bookmarks" %}
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="{% url 'user_page_plots' request.user %}">
-                                                <i class="icon-bar-chart"></i>
-                                                {% trans "Plots" %}
-                                            </a>
-                                        </li>
-                                        <li class="divider"></li>
+
+                                        <li class="nav-header">{% trans "My messages" %}</li>
 
                                         <li>
                                             <a href="{% url 'messages_inbox' %}">
                                                 <i class="icon-inbox"></i>
-                                                {% trans "My messages" %}
+                                                {% trans "Received" %}
                                             </a>
                                         </li>
+
+                                        <li>
+                                            <a href="{% url 'messages_outbox' %}">
+                                                <i class="icon-mail-forward"></i>
+                                                {% trans "Sent" %}
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{% url 'messages_trash' %}">
+                                                <i class="icon-trash"></i>
+                                                {% trans "Deleted" %}
+                                            </a>
+                                        </li>
+
+                                        <li class="divider"></li>
+
                                         <li>
                                             <a href="{% url 'user_page_api_keys' request.user %}">
                                                 <i class="icon-key"></i>
@@ -216,45 +237,15 @@
                                             </a>
                                         </li>
 
-                                        <li class="nav-header">{% trans "My settings" %}</li>
                                         <li>
                                             <a href="{% url 'profile_edit_basic' %}">
                                                 <i class="icon-edit"></i>
-                                                {% trans "Basic information" %}
+                                                {% trans "My settings" %}
                                             </a>
                                         </li>
-
-                                        <li>
-                                            <a href="{% url 'profile_edit_gear' %}">
-                                                <i class="icon-cog"></i>
-                                                {% trans "Gear" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'profile_edit_locations' %}">
-                                                <i class="icon-globe"></i>
-                                                {% trans "Locations" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'profile_edit_license' %}">
-                                                <i class="icon-legal"></i>
-                                                {% trans "Default license" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'profile_edit_preferences' %}">
-                                                <i class="icon-wrench"></i>
-                                                {% trans "Preferences" %}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'avatar_change' %}">
-                                                <i class="icon-user"></i>
-                                                {% trans "Avatar" %}
-                                            </a>
-                                        </li>
+                                        
                                         <li class="divider"></li>
+
                                         <li>
                                             <a href="{% url 'auth_logout' %}">
                                                 <i class="icon-signout"></i>
