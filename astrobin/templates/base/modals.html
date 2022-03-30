@@ -280,6 +280,25 @@
     </div>
 </div>
 
+<div class="modal hide fade" id="are-you-sure-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3><i class="icon-warning-sign"></i> {% trans "Are you sure?" %}</h3>
+    </div>
+    <div class="modal-body">
+        <p>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary btn-block-mobile" data-dismiss="modal">{% trans "Cancel" %}</button>
+        <button class="btn btn-danger btn-i-am-sure btn-block-mobile {% button_loading_class %}">
+            <i class="icon-warning-sign"></i>
+            {% trans 'Yes, I am sure' %}
+            {% button_loading_indicator %}
+        </button>
+    </div>
+</div>
+
 <div class="modal hide fade" id="report-abuse-modal">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">&times;</a>
