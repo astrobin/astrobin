@@ -6,6 +6,7 @@ from django.core.cache import cache
 from django.db.models import Count
 
 from astrobin.enums import SubjectType
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.fields import COUNTRIES
 from astrobin.models import CameraRenameProposal
 from astrobin.utils import get_client_country_code
@@ -144,6 +145,11 @@ def common_variables(request):
             if request.user.is_authenticated \
             else CameraRenameProposal.objects.none(),
         'HAS_UNMIGRATED_LEGACY_GEAR_ITEMS': has_unmigrated_legacy_gear_items(request.user),
+
+        'MODERATOR_DECISION_UNDECIDED': ModeratorDecision.UNDECIDED,
+        'MODERATOR_DECISION_APPROVED': ModeratorDecision.APPROVED,
+        'MODERATOR_DECISION_REJECTED': ModeratorDecision.REJECTED,
+
         'enums': {
             'SubjectType': SubjectType,
         },

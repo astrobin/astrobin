@@ -16,6 +16,7 @@ from hitcount.views import HitCountMixin
 
 from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin.enums.display_image_download_menu import DownloadLimitation
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
 from astrobin.utils import (
     base26_decode, base26_encode, decimal_to_degrees_minutes_seconds_string,
@@ -216,7 +217,7 @@ class ImageService:
 
     def get_images_pending_moderation(self):
         return Image.objects_including_wip.filter(
-            moderator_decision=0,
+            moderator_decision=ModeratorDecision.UNDECIDED,
             uploaded__lt=DateTimeService.now() - timedelta(minutes=10))
 
     def get_hemisphere(self, revision_label=None):

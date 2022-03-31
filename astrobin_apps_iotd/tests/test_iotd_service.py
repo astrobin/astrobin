@@ -5,6 +5,7 @@ from django.test import TestCase, override_settings
 from mock import PropertyMock, patch
 
 from astrobin.enums import SubjectType
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.tests.generators import Generators
 from astrobin_apps_iotd.models import (
     Iotd, IotdDismissedImage, IotdQueueSortOrder, IotdStaffMemberSettings, IotdSubmission, IotdVote,
@@ -528,7 +529,7 @@ class IotdServiceTest(TestCase):
         submitter = Generators.user(groups=['iotd_submitters'])
         image = Generators.image(user=user)
         image.designated_iotd_submitters.add(submitter)
-        image.moderator_decision = 2
+        image.moderator_decision = ModeratorDecision.REJECTED
         image.save()
 
         self.assertEqual(0, len(IotdService().get_submission_queue(submitter)))

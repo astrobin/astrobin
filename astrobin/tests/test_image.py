@@ -17,6 +17,7 @@ from mock import patch
 from astrobin.enums import SubjectType
 from astrobin.enums.full_size_display_limitation import FullSizeDisplayLimitation
 from astrobin.enums.license import License
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.models import (
     Accessory, Camera, DeepSky_Acquisition, Filter, FocalReducer, Image, ImageRevision, Location, Mount, Software,
@@ -915,7 +916,7 @@ class ImageTest(TestCase):
         self.assertEqual(response.context[0]['user_can_like'], True)
 
         # Spam images should be 404
-        image.moderator_decision = 2
+        image.moderator_decision = ModeratorDecision.REJECTED
         image.save(keep_deleted=True)
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 404)
@@ -3071,7 +3072,7 @@ class ImageTest(TestCase):
 
         # As the test user does not have a high enough Image Index, the
         # image should be in the moderation queue.
-        self.assertEqual(image.moderator_decision, 0)
+        self.assertEqual(image.moderator_decision, ModeratorDecision.UNDECIDED)
         self.assertEqual(image.moderated_when, None)
         self.assertEqual(image.moderated_by, None)
 
@@ -3081,6 +3082,22 @@ class ImageTest(TestCase):
         self.assertNotContains(response, image.title)
 
         # TODO: test image promotion
+
+    @patch('astrobin.models.UserProfile.get_scores')
+    def test_image_moderation_for_russian_users(self, get_scores):
+        get_scores.return_value = {'user_scores_index': 10}
+        user = Generators.user()
+        Generators.premium_subscription(user, 'AstroBin Premium 2020+')
+        image = Generators.image(user=user)
+
+        self.assertEqual(ModeratorDecision.APPROVED, image.moderator_decision)
+
+        user.userprofile.last_seen_in_country = 'ru'
+        user.userprofile.save()
+
+        image = Generators.image(user=user)
+
+        self.assertEqual(ModeratorDecision.UNDECIDED, image.moderator_decision)
 
     def test_image_updated_after_toggleproperty(self):
         self.client.login(username='test', password='password')

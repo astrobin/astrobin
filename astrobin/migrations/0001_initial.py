@@ -9,6 +9,8 @@ import django.core.validators
 from django.db import migrations, models
 import django.db.models.deletion
 
+from astrobin.enums.moderator_decision import ModeratorDecision
+
 
 class Migration(migrations.Migration):
 
@@ -200,7 +202,7 @@ class Migration(migrations.Migration):
                 ('license', models.IntegerField(choices=[(0, 'None (All rights reserved)'), (1, 'Attribution-NonCommercial-ShareAlike Creative Commons'), (2, 'Attribution-NonCommercial Creative Commons'), (3, 'Attribution-NonCommercial-NoDerivs Creative Commons'), (4, 'Attribution Creative Commons'), (5, 'Attribution-ShareAlike Creative Commons'), (6, 'Attribution-NoDerivs Creative Commons')], default=0, verbose_name='License')),
                 ('is_final', models.BooleanField(default=True, editable=False)),
                 ('allow_comments', models.BooleanField(default=True, verbose_name='Allow comments')),
-                ('moderator_decision', models.PositiveIntegerField(default=0, editable=False)),
+                ('moderator_decision', models.PositiveIntegerField(default=ModeratorDecision.UNDECIDED, editable=False)),
                 ('moderated_when', models.DateTimeField(default=None, editable=False, null=True)),
             ],
             options={

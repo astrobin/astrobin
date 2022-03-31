@@ -8,6 +8,7 @@ from django.contrib.auth.models import User, Group
 from django.urls import reverse_lazy
 from django.test import TestCase, override_settings
 
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin_apps_iotd.models import IotdSubmission, IotdVote
 
 from astrobin.models import Image
@@ -39,7 +40,7 @@ class ExploreTest(TestCase):
         self.image = Image.objects_including_wip.first()
 
         # Approve the image and set a title
-        self.image.moderator_decision = 1
+        self.image.moderator_decision = ModeratorDecision.APPROVED
         self.image.title = "IOTD TEST IMAGE"
         self.image.data_source = "BACKYARD"
         self.image.save(keep_deleted=True)

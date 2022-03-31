@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.test import TestCase
 from mock import patch
 
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Image
 
 
@@ -83,15 +84,15 @@ class ModerationTest(TestCase):
         response = self.client.post(reverse('image_moderation_mark_as_ham'), {'ids[]': [image.pk]})
         self.assertEqual(response.status_code, 200)
         image = Image.objects_including_wip.get(pk=image.pk)
-        self.assertEqual(image.moderator_decision, 1)
+        self.assertEqual(image.moderator_decision, ModeratorDecision.APPROVED)
 
         # Moderator can mark it as spam
-        image.moderator_decision = 0
+        image.moderator_decision = ModeratorDecision.UNDECIDED
         image.save(keep_deleted=True)
         response = self.client.post(reverse('image_moderation_mark_as_spam'), {'ids[]': [image.pk]})
         self.assertEqual(response.status_code, 200)
         image = Image.objects_including_wip.get(pk=image.pk)
-        self.assertEqual(image.moderator_decision, 2)
+        self.assertEqual(image.moderator_decision, ModeratorDecision.REJECTED)
 
     def test_spam_user_gallery(self):
         self.client.login(username='user', password='password')
@@ -100,7 +101,7 @@ class ModerationTest(TestCase):
 
         self._do_upload('astrobin/fixtures/test.jpg')
         image = self._get_last_image()
-        image.moderator_decision = 2
+        image.moderator_decision = ModeratorDecision.REJECTED
         image.save(keep_deleted=True)
 
         # Same user gets 404

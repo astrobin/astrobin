@@ -6,6 +6,7 @@ from django.core.management import call_command
 from django.test import TestCase, override_settings
 
 from astrobin.enums import SubjectType
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.tests.generators import Generators
 from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_iotd.models import *
@@ -44,7 +45,7 @@ class IotdTest(TestCase):
         self.client.logout()
         self.image = Image.objects_including_wip.first()
 
-        self.image.moderator_decision = 1
+        self.image.moderator_decision = ModeratorDecision.APPROVED
         self.image.title = "IOTD TEST IMAGE"
         self.image.subject_type = SubjectType.DEEP_SKY
         self.image.save(keep_deleted=True)

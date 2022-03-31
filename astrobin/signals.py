@@ -53,6 +53,7 @@ from common.services.moderation_service import ModerationService
 from nested_comments.models import NestedComment
 from nested_comments.services.comment_notifications_service import CommentNotificationsService
 from toggleproperties.models import ToggleProperty
+from .enums.moderator_decision import ModeratorDecision
 from .models import CameraRenameProposal, Image, ImageRevision, UserProfile
 from .search_indexes import ImageIndex, UserIndex
 from .stories import add_story
@@ -80,15 +81,17 @@ def image_pre_save(sender, instance, **kwargs):
             instance.watermark_size = last_image.watermark_size
             instance.watermark_opacity = last_image.watermark_opacity
 
-
         user_scores_index = instance.user.userprofile.get_scores()['user_scores_index'] or 0
-        if user_scores_index >= 1.00 or \
-                is_any_paid_subscription(PremiumService(instance.user).get_valid_usersubscription()) or \
-                ModerationService.auto_approve(instance.user):
+        from_russia = instance.user.userprofile.last_seen_in_country and instance.user.userprofile.last_seen_in_country.lower() == 'ru'
+        if not from_russia and (
+                user_scores_index >= 1.00 or
+                is_any_paid_subscription(PremiumService(instance.user).get_valid_usersubscription()) or
+                ModerationService.auto_approve(instance.user)
+        ):
             instance.moderated_when = datetime.date.today()
-            instance.moderator_decision = 1
+            instance.moderator_decision = ModeratorDecision.APPROVED
     else:
-        if image.moderator_decision != 1 and instance.moderator_decision == 1:
+        if image.moderator_decision != ModeratorDecision.APPROVED and instance.moderator_decision == ModeratorDecision.APPROVED:
             # This image is being approved
             if not instance.is_wip:
                 add_story(instance.user, verb='VERB_UPLOADED_IMAGE', action_object=instance)
@@ -125,7 +128,7 @@ def image_post_save(sender, instance, created, **kwargs):
         if not instance.is_wip:
             if not instance.skip_notifications:
                 push_notification_for_new_image.apply_async(args=(instance.user.pk, instance.pk,))
-            if instance.moderator_decision == 1:
+            if instance.moderator_decision == ModeratorDecision.APPROVED:
                 add_story(instance.user, verb='VERB_UPLOADED_IMAGE', action_object=instance)
 
         if Image.all_objects.filter(user=instance.user).count() == 1:
@@ -274,6 +277,7 @@ def nested_comment_pre_save(sender, instance, **kwargs):
                              instance.author.userprofile.get_scores()['user_scores_index'] < 1.00
         valid_subscription = PremiumService(instance.author).get_valid_usersubscription()
         free_account = is_free(valid_subscription)
+        from_russia = instance.author.userprofile.last_seen_in_country and instance.author.userprofile.last_seen_in_country.lower() == 'ru'
         insufficient_previous_approvals = NestedComment.objects.filter(
             Q(author=instance.author) & ~Q(pending_moderation=True)
         ).count() < 3
@@ -283,7 +287,8 @@ def nested_comment_pre_save(sender, instance, **kwargs):
         if ct.model == 'image':
             is_content_owner = instance.author == instance.content_object.user
 
-        if insufficient_index and \
+        if from_russia or \
+                insufficient_index and \
                 free_account and \
                 insufficient_previous_approvals and \
                 not is_content_owner and \

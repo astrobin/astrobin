@@ -86,6 +86,39 @@ class CommentApprovalTest(TestCase):
         self.assertIsNone(comment.pending_moderation)
 
     @patch("astrobin.models.UserProfile.get_scores")
+    def test_mark_as_pending_due_russia_sanction(self, get_scores):
+        # Index:                  OK
+        # Membership:             OK
+        # Approved comments:      OK
+        # Content owner:          OK
+        # Auto approve:           OK
+
+        get_scores.return_value = {'user_scores_index': 10}
+
+        user = Generators.user(email='test@highpointscientific.com')
+        user.userprofile.last_seen_in_country = 'ru'
+        user.userprofile.save()
+
+        image = Generators.image(user=user)
+        author = image.user
+        Generators.premium_subscription(author, "AstroBin Premium 2020+")
+
+        for i in range(0, 3):
+            comment = NestedCommentsGenerators.comment(
+                author=author,
+                target=image,
+            )
+            comment.pending_moderation = None
+            comment.save()
+
+        comment = NestedCommentsGenerators.comment(
+            author=author,
+            target=image,
+        )
+
+        self.assertTrue(comment.pending_moderation)
+
+    @patch("astrobin.models.UserProfile.get_scores")
     def test_mark_as_pending_due_to_insufficient_previously_approved_comments(self, get_scores):
         # Index:             NOT OK
         # Membership:        NOT OK

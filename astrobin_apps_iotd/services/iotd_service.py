@@ -9,6 +9,7 @@ from django.db.models import Count, OuterRef, Q, Subquery
 from django.utils.translation import gettext
 
 from astrobin.enums import SubjectType
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Image
 from astrobin_apps_iotd.models import (
     Iotd, IotdJudgementQueueEntry, IotdQueueSortOrder, IotdReviewQueueEntry, IotdStaffMemberSettings, IotdSubmission,
@@ -257,7 +258,7 @@ class IotdService:
             ) \
                 .filter(
                 Q(
-                    Q(moderator_decision=1) &
+                    Q(moderator_decision=ModeratorDecision.APPROVED) &
                     Q(published__gte=cutoff) &
                     Q(designated_iotd_submitters=submitter) &
                     Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &

@@ -17,6 +17,7 @@ from django.views.generic import View
 from django.views.generic.list import ListView
 from pybb.models import Topic
 
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Image, UserProfile
 from astrobin.stories import add_story
 from astrobin_apps_images.services import ImageService
@@ -42,7 +43,7 @@ class ImageModerationSpamListView(LoginRequiredMixin, SuperuserRequiredMixin, Li
     template_name = "moderation/spam_list.html"
 
     def get_queryset(self):
-        return Image.objects_including_wip.filter(moderator_decision=2)
+        return Image.objects_including_wip.filter(moderator_decision=ModeratorDecision.REJECTED)
 
 
 class ImageModerationMarkAsSpamView(LoginRequiredMixin, GroupRequiredMixin, JSONResponseMixin, View):
@@ -53,7 +54,7 @@ class ImageModerationMarkAsSpamView(LoginRequiredMixin, GroupRequiredMixin, JSON
     def post(self, request):
         ids = request.POST.getlist('ids[]')
         Image.objects_including_wip.filter(pk__in=ids).update(
-            moderator_decision=2,
+            moderator_decision=ModeratorDecision.REJECTED,
             moderated_when=datetime.date.today(),
             moderated_by=request.user)
 
@@ -70,7 +71,7 @@ class ImageModerationMarkAsHamView(LoginRequiredMixin, GroupRequiredMixin, JSONR
     def post(self, request):
         ids = request.POST.getlist('ids[]')
         Image.objects_including_wip.filter(pk__in=ids).update(
-            moderator_decision=1,
+            moderator_decision=ModeratorDecision.APPROVED,
             moderated_when=datetime.date.today(),
             moderated_by=request.user)
 
@@ -99,7 +100,7 @@ class ImageModerationBanAllView(LoginRequiredMixin, SuperuserRequiredMixin, JSON
     raise_exception = True
 
     def post(self):
-        images = Image.objects_including_wip.filter(moderator_decision=2)
+        images = Image.objects_including_wip.filter(moderator_decision=ModeratorDecision.REJECTED)
         for i in images:
             i.user.userprofile.deleted_reason = UserProfile.DELETE_REASON_IMAGE_SPAM
             i.user.userprofile.save(keep_deleted=True)
