@@ -6,9 +6,11 @@ class ModerationService(object):
     @staticmethod
     def auto_enqueue_for_moderation(user: User) -> bool:
         moderate_countries = ['ru', 'cn']
-        return hasattr(
-            user, 'userprofile'
-        ) and user.userprofile.last_seen_in_country and user.userprofile.last_seen_in_country in moderate_countries
+        return (
+                hasattr(user, 'userprofile') and
+                user.userprofile.last_seen_in_country and
+                user.userprofile.last_seen_in_country.lower() in moderate_countries
+        )
 
     @staticmethod
     def auto_approve(user: User) -> bool:
