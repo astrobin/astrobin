@@ -82,8 +82,7 @@ def image_pre_save(sender, instance, **kwargs):
             instance.watermark_opacity = last_image.watermark_opacity
 
         user_scores_index = instance.user.userprofile.get_scores()['user_scores_index'] or 0
-        from_russia = instance.user.userprofile.last_seen_in_country and instance.user.userprofile.last_seen_in_country.lower() == 'ru'
-        if not from_russia and (
+        if not ModerationService.auto_enqueue_for_moderation(instance.user) and (
                 user_scores_index >= 1.00 or
                 is_any_paid_subscription(PremiumService(instance.user).get_valid_usersubscription()) or
                 ModerationService.auto_approve(instance.user)
@@ -277,7 +276,6 @@ def nested_comment_pre_save(sender, instance, **kwargs):
                              instance.author.userprofile.get_scores()['user_scores_index'] < 1.00
         valid_subscription = PremiumService(instance.author).get_valid_usersubscription()
         free_account = is_free(valid_subscription)
-        from_russia = instance.author.userprofile.last_seen_in_country and instance.author.userprofile.last_seen_in_country.lower() == 'ru'
         insufficient_previous_approvals = NestedComment.objects.filter(
             Q(author=instance.author) & ~Q(pending_moderation=True)
         ).count() < 3
@@ -287,7 +285,7 @@ def nested_comment_pre_save(sender, instance, **kwargs):
         if ct.model == 'image':
             is_content_owner = instance.author == instance.content_object.user
 
-        if from_russia or \
+        if ModerationService.auto_enqueue_for_moderation(instance.author) or \
                 insufficient_index and \
                 free_account and \
                 insufficient_previous_approvals and \
