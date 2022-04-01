@@ -9,6 +9,7 @@ from django.utils import timezone, formats
 from django_bouncy.models import Bounce
 
 from astrobin.enums import SubjectType
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import (
     Acquisition,
     Telescope,
@@ -448,7 +449,7 @@ class UserTest(TestCase):
         self.assertContains(response, image.title)
 
         # Users with at least one spam image should be 404
-        image.moderator_decision = 2
+        image.moderator_decision = ModeratorDecision.REJECTED
         image.save(keep_deleted=True)
         response = self.client.get(reverse('user_page', args=('user',)))
         self.assertEqual(response.status_code, 404)

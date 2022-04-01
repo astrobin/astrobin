@@ -5,6 +5,7 @@ import datetime
 from django.urls import reverse
 
 # AstroBin
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Image, ImageRevision
 
 
@@ -41,6 +42,6 @@ def test_utils_upload_revision(test, image, filename = 'astrobin/fixtures/test.j
 
 
 def test_utils_approve_image(image):
-    image.moderator_decision = 1
+    image.moderator_decision = ModeratorDecision.APPROVED
     image.moderated_when = datetime.date.today()
     image.save(keep_deleted=True)

@@ -86,6 +86,18 @@ class ForumTest(TestCase):
 
         self.assertEqual(post.on_moderation, False)
 
+    def test_create_post_premium_from_russia(self):
+        user = Generators.user()
+        user.userprofile.last_seen_in_country = 'ru'
+        user.userprofile.save()
+
+        Generators.premium_subscription(user, 'AstroBin Premium 2020+')
+
+        form = self._get_post_form()
+        post, topic = form.save(commit=False)
+
+        self.assertEqual(post.on_moderation, True)
+
     @patch('astrobin.models.UserProfile.get_scores')
     def test_create_post_high_index(self, get_scores):
         get_scores.return_value = {

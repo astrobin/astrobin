@@ -1,6 +1,6 @@
 {% load i18n %}
 
-{% if request.user == image.user and image.moderator_decision == 0 %}
+{% if request.user == image.user and image.moderator_decision == MODERATOR_DECISION_UNDECIDED %}
     <div class="alert alert-warning">
         <p>
         <strong><i class="icon icon-warning-sign"></i></strong>

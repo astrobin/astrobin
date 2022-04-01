@@ -82,6 +82,12 @@ def pybb_premoderation(user, post_content, forum):
     if forum and forum.name in ('Anything goes', 'Other'):
         return False
 
+    # Users from Russia are always moderated during sanctioning
+    if hasattr(user, 'userprofile') and \
+            user.userprofile.last_seen_in_country and \
+            user.userprofile.last_seen_in_country.lower() == 'ru':
+        return False
+
     # Users in auto-approve list always approved
     from common.services.moderation_service import ModerationService
     if ModerationService.auto_approve(user):

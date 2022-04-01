@@ -39,6 +39,7 @@ from haystack.query import SearchQuerySet
 from silk.profiling.profiler import silk_profile
 
 from astrobin.context_processors import common_variables, user_language
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.forms import (
     AccessoryEditForm, AccessoryEditNewForm, CameraEditForm, CameraEditNewForm,
     DeepSky_AcquisitionBasicForm, DeepSky_AcquisitionForm, DefaultImageLicenseForm, DeleteAccountForm, FilterEditForm,
@@ -346,7 +347,7 @@ def index(request, template='index/root.html', extra_context=None):
     user_ct = ContentType.objects.get_for_model(User)
 
     recent_images = Image.objects \
-        .filter(Q(~Q(title=None) & ~Q(title='') & Q(moderator_decision=1) & Q(published__isnull=False))) \
+        .filter(Q(~Q(title=None) & ~Q(title='') & Q(moderator_decision=ModeratorDecision.APPROVED) & Q(published__isnull=False))) \
         .order_by('-published')
 
     response_dict = {
@@ -1130,7 +1131,7 @@ def user_page(request, username):
     if profile.deleted:
         raise Http404
 
-    if Image.objects_including_wip.filter(user=user, moderator_decision=2).count() > 0:
+    if Image.objects_including_wip.filter(user=user, moderator_decision=ModeratorDecision.REJECTED).count() > 0:
         if (not request.user.is_authenticated or \
                 not request.user.is_superuser and \
                 not request.user.userprofile.is_image_moderator()):

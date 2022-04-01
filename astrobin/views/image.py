@@ -42,6 +42,7 @@ from django.views.generic.detail import SingleObjectMixin
 from silk.profiling.profiler import silk_profile
 
 from astrobin.enums import SubjectType
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.forms import (
     CopyGearForm, ImageDemoteForm, ImageEditBasicForm, ImageEditGearForm, ImageEditRevisionForm,
@@ -60,7 +61,6 @@ from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_notifications.tasks import push_notification_for_new_image
 from astrobin_apps_platesolving.models import PlateSolvingAdvancedLiveLogEntry, Solution
 from astrobin_apps_platesolving.services import SolutionService
-from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
 from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService
@@ -236,7 +236,7 @@ class ImageDetailView(ImageDetailViewBase):
         # Redirect to the correct revision
         image = self.get_object(Image.objects_including_wip)
 
-        if image.moderator_decision == 2:
+        if image.moderator_decision == ModeratorDecision.REJECTED:
             if not request.user.is_authenticated or \
                     not request.user.is_superuser and \
                     not request.user.userprofile.is_image_moderator():
@@ -731,7 +731,7 @@ class ImageFullView(ImageDetailView):
         # Redirect to the correct revision
         image = self.get_object()
 
-        if image.moderator_decision == 2:
+        if image.moderator_decision == ModeratorDecision.REJECTED:
             raise Http404
 
         self.revision_label = kwargs['r']

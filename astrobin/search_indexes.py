@@ -13,6 +13,7 @@ from hitcount.models import HitCount
 from pybb.models import Post, Topic
 
 from astrobin.enums.license import License
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import DeepSky_Acquisition
 from astrobin.models import Image
 from astrobin.models import SolarSystem_Acquisition
@@ -578,7 +579,7 @@ class ImageIndex(SearchIndex, Indexable):
     bortle_scale = FloatField()
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(moderator_decision=1)
+        return self.get_model().objects.filter(moderator_decision=ModeratorDecision.APPROVED)
 
     def get_model(self):
         return Image

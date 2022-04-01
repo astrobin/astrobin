@@ -16,6 +16,7 @@ from astrobin.enums import SubjectType, SolarSystemSubject
 from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.enums.full_size_display_limitation import FullSizeDisplayLimitation
 from astrobin.enums.license import License
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.fields import CountryField, get_country_name
 from astrobin.services import CloudflareService
@@ -1442,12 +1443,9 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         max_length=16,
     )
 
-    # 0 = undecided
-    # 1 = approved
-    # 2 = rejected
     moderator_decision = models.PositiveIntegerField(
         editable=False,
-        default=0,
+        default=ModeratorDecision.UNDECIDED,
     )
 
     moderated_when = models.DateTimeField(
