@@ -53,7 +53,7 @@
 
                 {% if image|can_add_technical_details %}
                     <li>
-                        <a href="{% app_redirection_service '/i/'|add:image.get_id|add:'/edit#5' %}">
+                        <a href="{% url 'image_edit_gear' image.get_id %}">
                             <i class="icon-camera"></i>
                             {% trans "Equipment" %}
                         </a>

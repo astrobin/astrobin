@@ -4,6 +4,7 @@ from fuzzywuzzy import fuzz
 from fuzzywuzzy.utils import asciidammit
 
 from astrobin.models import Gear, Image
+from astrobin.services.gear_service import GearService
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 
@@ -165,3 +166,8 @@ def equipment_list_has_items(equipment_list) -> bool:
         len(equipment_list['guiding_telescopes']) > 0 or
         len(equipment_list['guiding_cameras']) > 0
     )
+
+
+@register.filter
+def image_has_legacy_gear(image: Image) -> bool:
+    return GearService.has_legacy_gear(image)

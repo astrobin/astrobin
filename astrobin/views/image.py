@@ -50,6 +50,7 @@ from astrobin.forms import (
 )
 from astrobin.forms.uncompressed_source_upload_form import UncompressedSourceUploadForm
 from astrobin.models import (Collection, DeepSky_Acquisition, Image, ImageRevision, LANGUAGES, SolarSystem_Acquisition)
+from astrobin.services.gear_service import GearService
 from astrobin.stories import add_story
 from astrobin.templatetags.tags import can_like
 from astrobin.utils import get_client_country_code, get_image_resolution
@@ -1123,7 +1124,7 @@ class ImageEditGearView(ImageEditBaseView):
     def dispatch(self, request, *args, **kwargs):
         image = self.get_object()
 
-        if can_access_basic_equipment_functions(request.user):
+        if can_access_basic_equipment_functions(request.user) and not GearService.has_legacy_gear(image):
             return redirect(
                 AppRedirectionService.redirect(
                     f'/i/{image.get_id()}/edit#5'
