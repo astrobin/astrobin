@@ -4,7 +4,7 @@ from annoying.functions import get_object_or_None
 from django.contrib.auth.models import User
 from django.utils import timezone
 
-from astrobin.models import CameraRenameProposal, Gear, GearMigrationStrategy, GearRenameRecord
+from astrobin.models import CameraRenameProposal, Gear, GearMigrationStrategy, GearRenameRecord, Image
 from astrobin_apps_equipment.models import Camera, EquipmentBrand, Sensor
 from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_notifications.utils import push_notification
@@ -155,3 +155,17 @@ class GearService:
                     'item': camera,
                 }
             )
+
+    @staticmethod
+    def has_legacy_gear(image: Image) -> bool:
+        return (
+            image.imaging_telescopes.exists() or
+            image.guiding_telescopes.exists() or
+            image.mounts.exists() or
+            image.imaging_cameras.exists() or
+            image.guiding_cameras.exists() or
+            image.focal_reducers.exists() or
+            image.software.exists() or
+            image.filters.exists() or
+            image.accessories.exists()
+        )
