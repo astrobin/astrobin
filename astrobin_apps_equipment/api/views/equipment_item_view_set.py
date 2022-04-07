@@ -18,6 +18,7 @@ from rest_framework.status import HTTP_400_BAD_REQUEST
 from astrobin.models import GearMigrationStrategy, Image
 from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_read_only import IsEquipmentModeratorOrReadOnly
 from astrobin_apps_equipment.models import EquipmentItem
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
@@ -46,7 +47,13 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 full_name=Concat('brand__name', Value(' '), 'name'),
                 distance=TrigramDistance('full_name', q)
             ).filter(
-                Q(distance__lte=.8) | Q(full_name__icontains=q)
+                Q(
+                    Q(distance__lte=.8) | Q(full_name__icontains=q)
+                ) &
+                Q(
+                    Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
+                    Q(created_by=self.request.user)
+                )
             ).order_by(
                 'distance'
             )[:10]
@@ -171,7 +178,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         item.reviewed_by = request.user
         item.reviewed_timestamp = timezone.now()
-        item.reviewer_decision = 'APPROVED'
+        item.reviewer_decision = EquipmentItemReviewerDecision.APPROVED
         item.reviewer_comment = request.data.get('comment')
 
         if item.created_by and item.created_by != request.user:
@@ -213,7 +220,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         model = self.get_serializer().Meta.model
         item: EquipmentItem = get_object_or_404(model.objects, pk=pk)
 
-        if item.reviewed_by is not None and item.reviewer_decision == 'APPROVED':
+        if item.reviewed_by is not None and item.reviewer_decision == EquipmentItemReviewerDecision.APPROVED:
             return Response("This item was already approved", HTTP_400_BAD_REQUEST)
 
         if item.created_by == request.user:
@@ -221,7 +228,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         item.reviewed_by = request.user
         item.reviewed_timestamp = timezone.now()
-        item.reviewer_decision = 'REJECTED'
+        item.reviewer_decision = EquipmentItemReviewerDecision.REJECTED
         item.reviewer_rejection_reason = request.data.get('reason')
         item.reviewer_comment = request.data.get('comment')
 
