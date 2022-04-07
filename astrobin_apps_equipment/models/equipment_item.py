@@ -15,6 +15,11 @@ def image_upload_path(instance, filename):
     return upload_path('equipment_item_images', instance.created_by.pk if instance.created_by else 0, filename)
 
 
+class EquipmentItemReviewerDecision:
+    APPROVED = 'APPROVED'
+    REJECTED = 'REJECTED'
+
+
 class EquipmentItem(SafeDeleteModel):
     klass = models.CharField(
         max_length=16,
@@ -48,8 +53,8 @@ class EquipmentItem(SafeDeleteModel):
     reviewer_decision = models.CharField(
         max_length=8,
         choices=[
-            ('APPROVED', _('Approved')),
-            ('REJECTED', _('Rejected')),
+            (EquipmentItemReviewerDecision.APPROVED, _('Approved')),
+            (EquipmentItemReviewerDecision.REJECTED, _('Rejected')),
         ],
         null=True,
         editable=False,
