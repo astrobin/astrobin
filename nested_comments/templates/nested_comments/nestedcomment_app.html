@@ -10,6 +10,7 @@
 <div id="nested-comments-language-code" data-value="{{ LANGUAGE_CODE }}"></div>
 <div id="nested-comments-user-id" data-value="{{ request.user.id }}"></div>
 <div id="nested-comments-user-name" data-value="{{ request.user.username }}"></div>
+<div id="nested-comments-user-real-name" data-value="{{ request.user.userprofile.real_name|default:'' }}"></div>
 <div id="nested-comments-user-is-authenticated" data-value="{{ request.user.is_authenticated }}"></div>
 <div id="nested-comments-user-is-superuser" data-value="{{ request.user.is_superuser }}"></div>
 <div id="nested-comments-comments-content-type-id" data-value="{% nestedcomments_content_type_id %}"></div>

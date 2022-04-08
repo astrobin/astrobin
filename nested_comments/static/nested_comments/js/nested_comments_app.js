@@ -23,6 +23,7 @@ $(function () {
             this.languagecode = languageCode;
             this.userId = parseInt($('#nested-comments-user-id').attr('data-value'));
             this.username = $('#nested-comments-user-name').attr('data-value');
+            this.realName = $('#nested-comments-user-real-name').attr('data-value');
             this.userIsAuthenticated = $('#nested-comments-user-is-authenticated').attr('data-value') == "True";
             this.userIsSuperuser = $('#nested-comments-user-is-superuser').attr('data-value') == "True";
             this.shadowBans = JSON.parse($('#nested-comments-shadow-bans').attr('data-value'));
@@ -568,8 +569,8 @@ $(function () {
         },
 
         saveReply: function (comment, parent) {
-            var self = this,
-                data = self.dump(comment);
+            const self = this,
+                  data = self.dump(comment);
 
             data['created'] = '1970-01-01';
             data['updated'] = '1970-01-01';
@@ -585,8 +586,8 @@ $(function () {
                     parent.set('replying', false);
                     parent.set('submitting', false);
 
-                    var new_comment = nc_app.Comment.create(response);
-                    new_comment.set('author_username', nc_app.username);
+                    const new_comment = nc_app.Comment.create(response);
+                    new_comment.set('author_username', nc_app.realName || nc_app.username);
                     new_comment.set('author_url', nc_app.usersUrl + nc_app.username);
                     new_comment.set('authorIsRequestingUser', true);
                     self.addComment(new_comment);
@@ -734,8 +735,8 @@ $(function () {
         },
 
         saveNewComment: function (comment) {
-            var self = this,
-                data = self.dump(comment);
+            const self = this,
+                  data = self.dump(comment);
 
             // Some fake data to work around some djangorestframework
             // deficiencies.
@@ -754,8 +755,8 @@ $(function () {
                 success: function (response) {
                     comment.set('submitting', false);
 
-                    var new_comment = nc_app.Comment.create(response);
-                    new_comment.set('author_username', nc_app.username);
+                    const new_comment = nc_app.Comment.create(response);
+                    new_comment.set('author_username', nc_app.realName || nc_app.username);
                     new_comment.set('author_url', nc_app.usersUrl + nc_app.username);
                     new_comment.set('authorIsRequestingUser', true);
                     self.addComment(new_comment);
