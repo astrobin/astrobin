@@ -2,102 +2,70 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Users\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-11 08:17+0000\n"
-"PO-Revision-Date: 2022-02-22 09:53+0100\n"
+"POT-Creation-Date: 2021-04-05 16:18+0200\n"
+"PO-Revision-Date: 2022-04-11 11:33+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
-"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108454\n"
-"X-Loco-Api-Version: 1.0.26 20220207-1\n"
+"X-Loco-Api-Version: 1.0.26 20220328-1"
 
-msgid "No date specified"
-msgstr ""
-
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr ""
-
-msgid "Gear images"
-msgstr ""
-
-msgid "Deep sky"
-msgstr ""
-
-msgid "Solar system"
-msgstr ""
-
-msgid "Extremely wide field"
-msgstr ""
-
-msgid "Star trails"
-msgstr ""
-
-msgid "Northern lights"
-msgstr ""
-
-msgid "Noctilucent clouds"
-msgstr ""
-
-msgid "Gear"
-msgstr ""
-
-msgid "Other"
-msgstr ""
-
-msgid "All"
-msgstr ""
-
-msgid "n/a"
-msgstr ""
-
-msgid "No subjects specified"
-msgstr ""
-
-msgid "No acquisition details specified"
-msgstr ""
-
+#: loco:606b76b5384e151fc32def92
 msgid "You follow each other"
 msgstr "Вы подписаны друг к другу"
 
+#: loco:606b76b5384e151fc32def93
 msgid "Images"
 msgstr "Изображения"
 
+#: loco:606b76b5384e151fc32def94
 msgid "Followers"
 msgstr "Подписчики"
 
+#: loco:606b76b5384e151fc32def95
 msgid "Following"
 msgstr "Подписан"
 
+#: loco:606b76b5384e151fc32def96
 msgid "User"
 msgstr "Пользователь"
 
+#: loco:606b76b5384e151fc32def97
 msgid "No users."
 msgstr "Нет пользователей."
 
+#: loco:606b76b5384e151fc32def98
 msgid "Administrator"
 msgstr "Администратор"
 
+#: loco:606b76b5384e151fc32def99
 msgid "Image moderator"
 msgstr "Модератор изобр."
 
+#: loco:606b76b5384e151fc32def9a
 msgid "IOTD Submitter"
 msgstr "ИД Номинирующий"
 
+#: loco:606b76b5384e151fc32def9b
 msgid "IOTD Reviewer"
 msgstr "ИД Рецензент"
 
+#: loco:606b76b5384e151fc32def9c
 msgid "IOTD Judge"
 msgstr "ИД Судья"
 
+#: loco:606b76b5384e151fc32def9d
 msgid "Premium member"
 msgstr "Премиум участник"
 
+#: loco:606b76b5384e151fc32def9e
 msgid ""
 "Your email bounce reports have been removed from AstroBin. Please make sure "
 "that your email works well or you will get the same warning message again. "
@@ -107,6 +75,7 @@ msgstr ""
 "ваша электронная почта работает нормально, иначе вы снова получите то же "
 "предупреждение. Спасибо!"
 
+#: loco:606b76b5384e151fc32def9f
 msgid ""
 "Your spam reports have been removed from AstroBin. Please make sure you "
 "don't have a filter or rule to always mark AstroBin's emails as spam! If you "
@@ -119,281 +88,343 @@ msgstr ""
 "ссылку настроек, которая находится внизу каждого электронного письма. "
 "Спасибо!"
 
-#~ msgid "I wasn't really affected by the data loss"
-#~ msgstr "Меня не очень коснулась потеря данных"
+#: loco:6214a1e16e7c1d3dff1b700e
+msgid "I wasn't really affected by the data loss"
+msgstr "Меня не очень коснулась потеря данных"
 
-#~ msgid "I don't require compensation: I want to support AstroBin"
-#~ msgstr "Мне не нужна компенсация: Я хочу поддержать AstroBin"
+#: loco:6214a1e16e7c1d3dff1b700f
+msgid "I don't require compensation: I want to support AstroBin"
+msgstr "Мне не нужна компенсация: Я хочу поддержать AstroBin"
 
-#~ msgid "I would like to try AstroBin Ultimate for free for 1 month"
-#~ msgstr "Я хочу попробовать подписку AstroBin Ultimate бесплатно на 1 месяц"
+#: loco:6214a1e16e7c1d3dff1b7010
+msgid "I would like to try AstroBin Ultimate for free for 1 month"
+msgstr "Я хочу попробовать подписку AstroBin Ultimate бесплатно на 1 месяц"
 
-#~ msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
-#~ msgstr ""
-#~ "Я чувствую себя получившим право на AstroBin Ultimate бесплатно на 3 "
-#~ "месяца"
+#: loco:6214a1e16e7c1d3dff1b7011
+msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
+msgstr ""
+"Я чувствую себя получившим право на AstroBin Ultimate бесплатно на 3 месяца"
 
-#~ msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
-#~ msgstr ""
-#~ "Я чувствую себя получившим право на AstroBin Ultimate бесплатно на 6 "
-#~ "месяцев"
+#: loco:6214a1e16e7c1d3dff1b7012
+msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
+msgstr ""
+"Я чувствую себя получившим право на AstroBin Ultimate бесплатно на 6 месяцев"
 
-#~ msgid "Requested compensation"
-#~ msgstr "Запрашиваемая компенсация"
+#: loco:6214a1e16e7c1d3dff1b7013
+msgid "Requested compensation"
+msgstr "Запрашиваемая компенсация"
 
-#~ msgid "Please indicate if and how much you would like to be compensated."
-#~ msgstr ""
-#~ "Пожалуйста укажите нужна ли вам компенсация и, если да, то каким образом."
+#: loco:6214a1e16e7c1d3dff1b7014
+msgid "Please indicate if and how much you would like to be compensated."
+msgstr ""
+"Пожалуйста укажите нужна ли вам компенсация и, если да, то каким образом."
 
-#~ msgid "Your migration data"
-#~ msgstr "Ваши данные для миграции"
+#: loco:6214a1e16e7c1d3dff1b7015
+msgid "Your migration data"
+msgstr "Ваши данные для миграции"
 
-#~ msgid "Total amount donated last year"
-#~ msgstr "Всего внесено за последний год"
+#: loco:6214a1e16e7c1d3dff1b7016
+msgid "Total amount donated last year"
+msgstr "Всего внесено за последний год"
 
-#~ msgid "First payment"
-#~ msgstr "Первый платёж"
+#: loco:6214a1e16e7c1d3dff1b7017
+msgid "First payment"
+msgstr "Первый платёж"
 
-#~ msgid "Price for Premium"
-#~ msgstr "Цена за Premium"
+#: loco:6214a1e16e7c1d3dff1b7018
+msgid "Price for Premium"
+msgstr "Цена за Premium"
 
-#~ msgid "Days covered"
-#~ msgstr "Дней покрыто"
+#: loco:6214a1e16e7c1d3dff1b7019
+msgid "Days covered"
+msgstr "Дней покрыто"
 
-#~ msgid "Premium expiration"
-#~ msgstr "Premium истекает"
+#: loco:6214a1e16e7c1d3dff1b701a
+msgid "Premium expiration"
+msgstr "Premium истекает"
 
-#~ msgid "Your donations last year"
-#~ msgstr "Ваши взносы за последний год"
+#: loco:6214a1e16e7c1d3dff1b701b
+msgid "Your donations last year"
+msgstr "Ваши взносы за последний год"
 
-#~ msgid "Amount"
-#~ msgstr "Количество"
+#: loco:6214a1e16e7c1d3dff1b701c
+msgid "Amount"
+msgstr "Количество"
 
-#~ msgid "Date"
-#~ msgstr "Дата"
+#: loco:6214a1e16e7c1d3dff1b701d
+msgid "Date"
+msgstr "Дата"
 
-#~ msgid "Subscription"
-#~ msgstr "Подписка"
+#: loco:6214a1e16e7c1d3dff1b701e
+msgid "Subscription"
+msgstr "Подписка"
 
-#~ msgid "Data loss compensation request"
-#~ msgstr "Запрос на компенсацию потери изображений"
+#: loco:6214a1e16e7c1d3dff1b701f
+msgid "Data loss compensation request"
+msgstr "Запрос на компенсацию потери изображений"
 
-#~ msgid ""
-#~ "You are eligible for compensation due to the data loss that happened on "
-#~ "February 16th, 2020."
-#~ msgstr ""
-#~ "Вы имеете право на компенсацию за потерю информации которая произошла 16-"
-#~ "го Февраля 2020-го."
+#: loco:6214a1e16e7c1d3dff1b7020
+msgid ""
+"You are eligible for compensation due to the data loss that happened on "
+"February 16th, 2020."
+msgstr ""
+"Вы имеете право на компенсацию за потерю информации которая произошла 16-го "
+"Февраля 2020-го."
 
-#~ msgid ""
-#~ "If you haven't had the chance, please take a minute to read what happened "
-#~ "at the following page:"
-#~ msgstr ""
-#~ "Если у вас ещё не было возможности, пожалуйста уделите минуту на "
-#~ "прочтение того что произошло на след. странице:"
+#: loco:6214a1e16e7c1d3dff1b7021
+msgid ""
+"If you haven't had the chance, please take a minute to read what happened at "
+"the following page:"
+msgstr ""
+"Если у вас ещё не было возможности, пожалуйста уделите минуту на прочтение "
+"того что произошло на след. странице:"
 
-#~ msgid "Official statement and post-mortem"
-#~ msgstr "Официальное заявление и последствия"
+#: loco:6214a1e16e7c1d3dff1b7022
+msgid "Official statement and post-mortem"
+msgstr "Официальное заявление и последствия"
 
-#~ msgid "Please accept our apology once more."
-#~ msgstr "Пожалуйста примите наше извинение ещё раз."
+#: loco:6214a1e16e7c1d3dff1b7023
+msgid "Please accept our apology once more."
+msgstr "Пожалуйста примите наше извинение ещё раз."
 
-#~ msgid "Please chooce your compensation from the list below"
-#~ msgstr "Пожалуйста выберите ваш метод компенсации из списка ниже"
+#: loco:6214a1e16e7c1d3dff1b7024
+msgid "Please chooce your compensation from the list below"
+msgstr "Пожалуйста выберите ваш метод компенсации из списка ниже"
 
-#~ msgid ""
-#~ "Compensation is offered in the form of free time on the new AstroBin "
-#~ "subscription tier called \"Ultimate\"."
-#~ msgstr ""
-#~ "Компенсация предлагается в форме бесплатного времени в новой подписке "
-#~ "AstroBin которая называется \"Ultimate\"."
+#: loco:6214a1e16e7c1d3dff1b7025
+msgid ""
+"Compensation is offered in the form of free time on the new AstroBin "
+"subscription tier called \"Ultimate\"."
+msgstr ""
+"Компенсация предлагается в форме бесплатного времени в новой подписке "
+"AstroBin которая называется \"Ultimate\"."
 
-#~ msgid ""
-#~ "To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
-#~ "target=\"_blank\">the pricing page</a>."
-#~ msgstr ""
-#~ "Чтобы узнать больше про AstroBin Ultimate, пожалуйста посетите <a href="
-#~ "\"%(url)s\" target=\"_blank\">страницу цен</a>"
+#: loco:6214a1e16e7c1d3dff1b7026
+#, python-format
+msgid ""
+"To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
+"target=\"_blank\">the pricing page</a>."
+msgstr ""
+"Чтобы узнать больше про AstroBin Ultimate, пожалуйста посетите <a "
+"href=\"%(url)s\" target=\"_blank\">страницу цен</a>"
 
-#~ msgid "Submit"
-#~ msgstr "Отправить"
+#: loco:6214a1e16e7c1d3dff1b7027
+msgid "Submit"
+msgstr "Отправить"
 
-#~ msgid "Data loss compensation reauest"
-#~ msgstr "Заявка на компенсацию за потерю информации"
+#: loco:6214a1e16e7c1d3dff1b7028
+msgid "Data loss compensation reauest"
+msgstr "Заявка на компенсацию за потерю информации"
 
-#~ msgid "Already done"
-#~ msgstr "Уже выполнено"
+#: loco:6214a1e16e7c1d3dff1b7029
+msgid "Already done"
+msgstr "Уже выполнено"
 
-#~ msgid "Sorry, you can't do this again."
-#~ msgstr "Извините, вы не можете сделать это ещё раз."
+#: loco:6214a1e16e7c1d3dff1b702a
+msgid "Sorry, you can't do this again."
+msgstr "Извините, вы не можете сделать это ещё раз."
 
-#~ msgid "Your preference was already recorded and cannot be changed."
-#~ msgstr "Ваше предпочтение уже сохранено и не может быть изменено."
+#: loco:6214a1e16e7c1d3dff1b702b
+msgid "Your preference was already recorded and cannot be changed."
+msgstr "Ваше предпочтение уже сохранено и не может быть изменено."
 
-#~ msgid "Not eligible"
-#~ msgstr "Не имеет права"
+#: loco:6214a1e16e7c1d3dff1b702c
+msgid "Not eligible"
+msgstr "Не имеет права"
 
-#~ msgid "It looks like you're not eligible"
-#~ msgstr "Кажется вы не имеете права"
+#: loco:6214a1e16e7c1d3dff1b702d
+msgid "It looks like you're not eligible"
+msgstr "Кажется вы не имеете права"
 
-#~ msgid ""
-#~ "Sorry, but this page is for people who were on AstroBin Premium on the "
-#~ "day that the data loss incident happened, and it looks like you aren't "
-#~ "among them."
-#~ msgstr ""
-#~ "Извините, но эта страница для пользователей у которых был AstroBin "
-#~ "Premium в день когда случилась потеря информации, и кажется вы не один из "
-#~ "них."
+#: loco:6214a1e16e7c1d3dff1b702e
+msgid ""
+"Sorry, but this page is for people who were on AstroBin Premium on the day "
+"that the data loss incident happened, and it looks like you aren't among "
+"them."
+msgstr ""
+"Извините, но эта страница для пользователей у которых был AstroBin Premium в "
+"день когда случилась потеря информации, и кажется вы не один из них."
 
-#~ msgid "Success"
-#~ msgstr "Успешно"
+#: loco:6214a1e16e7c1d3dff1b702f
+msgid "Success"
+msgstr "Успешно"
 
-#~ msgid "All done!"
-#~ msgstr "Всё готово!"
+#: loco:6214a1e16e7c1d3dff1b7030
+msgid "All done!"
+msgstr "Всё готово!"
 
-#~ msgid ""
-#~ "Your preference has been recorded and it has already been applied. Thank "
-#~ "you!"
-#~ msgstr "Ваше предпочтение было записано и уже применено. Спасибо!"
+#: loco:6214a1e16e7c1d3dff1b7031
+msgid ""
+"Your preference has been recorded and it has already been applied. Thank you!"
+msgstr "Ваше предпочтение было записано и уже применено. Спасибо!"
 
-#~ msgid "Migrate donations"
-#~ msgstr "Перевод взносов"
+#: loco:6214a1e16e7c1d3dff1b7032
+msgid "Migrate donations"
+msgstr "Перевод взносов"
 
-#~ msgid "Error!"
-#~ msgstr "Ошибка!"
+#: loco:6214a1e16e7c1d3dff1b7033
+msgid "Error!"
+msgstr "Ошибка!"
 
-#~ msgid ""
-#~ "Sorry, but it looks like you cannot migrate your donations to a Premium "
-#~ "membership."
-#~ msgstr ""
-#~ "Извините, но кажется, что вы не можете перенести ваши взносы в Premium "
-#~ "членство."
+#: loco:6214a1e16e7c1d3dff1b7034
+msgid ""
+"Sorry, but it looks like you cannot migrate your donations to a Premium "
+"membership."
+msgstr ""
+"Извините, но кажется, что вы не можете перенести ваши взносы в Premium "
+"членство."
 
-#~ msgid "You already have a paid membership."
-#~ msgstr "Вы уже оплатили членство."
+#: loco:6214a1e16e7c1d3dff1b7035
+msgid "You already have a paid membership."
+msgstr "Вы уже оплатили членство."
 
-#~ msgid "We could not find any donations from you last year."
-#~ msgstr "Не получается найти каких-либо взносов от вас за последний год."
+#: loco:6214a1e16e7c1d3dff1b7036
+msgid "We could not find any donations from you last year."
+msgstr "Не получается найти каких-либо взносов от вас за последний год."
 
-#~ msgid ""
-#~ "Your donations last year were not enough to cover a Premium subscription "
-#~ "for this year."
-#~ msgstr ""
-#~ "Ваши взносы за последний год недостаточны для покрытия подписки Premium "
-#~ "членства в этом году."
+#: loco:6214a1e16e7c1d3dff1b7037
+msgid ""
+"Your donations last year were not enough to cover a Premium subscription for "
+"this year."
+msgstr ""
+"Ваши взносы за последний год недостаточны для покрытия подписки Premium "
+"членства в этом году."
 
-#~ msgid "View the subscription plans"
-#~ msgstr "Посмотреть планы подписки"
+#: loco:6214a1e16e7c1d3dff1b7038
+msgid "View the subscription plans"
+msgstr "Посмотреть планы подписки"
 
-#~ msgid ""
-#~ "As you  have made donations during the last year, you may choose to "
-#~ "transfer the amount you donated towards an AstroBin Premium membership. "
-#~ "The membership will have an expiration date proportionate to the amount "
-#~ "you donated."
-#~ msgstr ""
-#~ "Так как вы    делали взносы за последний год, вы можете выбрать значение "
-#~ "для перевода во взнос членства Premium AstroBin. Время истечения членства "
-#~ "будет пропорционально зависеть от значения взноса."
+#: loco:6214a1e16e7c1d3dff1b7039
+msgid ""
+"As you  have made donations during the last year, you may choose to transfer "
+"the amount you donated towards an AstroBin Premium membership. The "
+"membership will have an expiration date proportionate to the amount you "
+"donated."
+msgstr ""
+"Так как вы    делали взносы за последний год, вы можете выбрать значение для "
+"перевода во взнос членства Premium AstroBin. Время истечения членства будет "
+"пропорционально зависеть от значения взноса."
 
-#~ msgid ""
-#~ "If you are feeling particularly cool and generous, you may choose to "
-#~ "consider your past donations as a contribution to support past efforts, "
-#~ "and pay again for a Premium plan. Up to you!"
-#~ msgstr ""
-#~ "Если вам хочется расщедриться, можете рассмотреть ваши прошлые "
-#~ "пожертвования в качестве вклада в поддержку прошлых усилий и снова "
-#~ "оплатить за план Premium. Решать вам!"
+#: loco:6214a1e16e7c1d3dff1b703a
+msgid ""
+"If you are feeling particularly cool and generous, you may choose to "
+"consider your past donations as a contribution to support past efforts, and "
+"pay again for a Premium plan. Up to you!"
+msgstr ""
+"Если вам хочется расщедриться, можете рассмотреть ваши прошлые пожертвования "
+"в качестве вклада в поддержку прошлых усилий и снова оплатить за план "
+"Premium. Решать вам!"
 
-#~ msgid "No, I want to pay for Premium"
-#~ msgstr "Нет, я хочу оплатить Premium"
+#: loco:6214a1e16e7c1d3dff1b703b
+msgid "No, I want to pay for Premium"
+msgstr "Нет, я хочу оплатить Premium"
 
-#~ msgid "Your migration was successful."
-#~ msgstr "Ваш перенос прошел успешно."
+#: loco:6214a1e16e7c1d3dff1b703c
+msgid "Your migration was successful."
+msgstr "Ваш перенос прошел успешно."
 
-#~ msgid "Thanks for supporting AstroBin!"
-#~ msgstr "Спасибо за поддержку AstroBin!"
+#: loco:6214a1e16e7c1d3dff1b703d
+msgid "Thanks for supporting AstroBin!"
+msgstr "Спасибо за поддержку AstroBin!"
 
-#~ msgid ""
-#~ "Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
-#~ msgstr ""
-#~ "Ваша \"%(subscription_name)s\" подписка на AstroBin только что истекла."
+#: loco:6214a1e16e7c1d3dff1b703e
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
+msgstr ""
+"Ваша \"%(subscription_name)s\" подписка на AstroBin только что истекла."
 
-#~ msgid ""
-#~ "When a subscription on AstroBin expires, nothing happens to your images "
-#~ "or any of your content. You are reverted to AstroBin Free and will not be "
-#~ "able to upload new images until you renew, but you may continue to use "
-#~ "AstroBin in all other aspects if you do not have any new images to share "
-#~ "at the moment."
-#~ msgstr ""
-#~ "Когда на AstroBin истекает подписка, с вашими изображениями или любым "
-#~ "содержимым ничего не случается. Вы возвращаетесь на AstroBin Free и не "
-#~ "сможете загружать новые изображения пока не обновитесь, но вы сможете "
-#~ "продолжить пользоваться AstroBin в других аспектах, если у вас нет новых "
-#~ "изображений на данный момент."
+#: loco:6214a1e16e7c1d3dff1b703f
+msgid ""
+"When a subscription on AstroBin expires, nothing happens to your images or "
+"any of your content. You are reverted to AstroBin Free and will not be able "
+"to upload new images until you renew, but you may continue to use AstroBin "
+"in all other aspects if you do not have any new images to share at the "
+"moment."
+msgstr ""
+"Когда на AstroBin истекает подписка, с вашими изображениями или любым "
+"содержимым ничего не случается. Вы возвращаетесь на AstroBin Free и не "
+"сможете загружать новые изображения пока не обновитесь, но вы сможете "
+"продолжить пользоваться AstroBin в других аспектах, если у вас нет новых "
+"изображений на данный момент."
 
-#~ msgid ""
-#~ "When you are ready to renew your subscription, please visit the following "
-#~ "page:"
-#~ msgstr ""
-#~ "Когда вы готовы обновить вашу подписку, пожалуйста посетите эту страницу:"
+#: loco:6214a1e16e7c1d3dff1b7040
+msgid ""
+"When you are ready to renew your subscription, please visit the following "
+"page:"
+msgstr ""
+"Когда вы готовы обновить вашу подписку, пожалуйста посетите эту страницу:"
 
-#~ msgid "Your AstroBin subscription has just expired"
-#~ msgstr "Ваша AstroBin подписка только что истекла"
+#: loco:6214a1e16e7c1d3dff1b7041
+msgid "Your AstroBin subscription has just expired"
+msgstr "Ваша AstroBin подписка только что истекла"
 
-#~ msgid ""
-#~ "Your \"%(subscription_name)s\" subscription on AstroBin will expire in "
-#~ "one week."
-#~ msgstr ""
-#~ "Ваша \"%(subscription_name)s\" подписка на AstroBin истекает на неделе."
+#: loco:6214a1e16e7c1d3dff1b7042
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
+"week."
+msgstr ""
+"Ваша \"%(subscription_name)s\" подписка на AstroBin истекает на неделе."
 
-#~ msgid ""
-#~ "PLEASE NOTE! At the moment, you cannot renew a subscription while it is "
-#~ "still ongoing. Please wait until it is expired. Thank you!"
-#~ msgstr ""
-#~ "ПОЖАЛУЙСТА УЧТИТЕ! Вы не можете обновить подписку пока она активна. "
-#~ "Пожалуйста дождитесь пока она не истечёт. Спасибо!"
+#: loco:6214a1e16e7c1d3dff1b7043
+msgid ""
+"PLEASE NOTE! At the moment, you cannot renew a subscription while it is "
+"still ongoing. Please wait until it is expired. Thank you!"
+msgstr ""
+"ПОЖАЛУЙСТА УЧТИТЕ! Вы не можете обновить подписку пока она активна. "
+"Пожалуйста дождитесь пока она не истечёт. Спасибо!"
 
-#~ msgid "Your AstroBin subscription will expire in one week"
-#~ msgstr "Ваша AstroBin подписка истекает на неделе"
+#: loco:6214a1e16e7c1d3dff1b7044
+msgid "Your AstroBin subscription will expire in one week"
+msgstr "Ваша AstroBin подписка истекает на неделе"
 
-#~ msgid ""
-#~ "Your \"%(subscription_name)s\" subscription on AstroBin will be "
-#~ "automatically renewed in one week."
-#~ msgstr ""
-#~ "Ваша \"%(subscription_name)s\" подписка на AstroBin будет автоматически "
-#~ "обновлена на неделе."
+#: loco:6214a1e16e7c1d3dff1b7045
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will be "
+"automatically renewed in one week."
+msgstr ""
+"Ваша \"%(subscription_name)s\" подписка на AstroBin будет автоматически "
+"обновлена на неделе."
 
-#~ msgid ""
-#~ "You have an automatically renewing subscription on AstroBin, and we will "
-#~ "attempt to renew it automatically. If your subscription was created the "
-#~ "regular way, via PayPal, then PayPal will attempt to charge your credit "
-#~ "card or retrieve funds that are available in your account."
-#~ msgstr ""
-#~ "У вас автоматически обновляемая подписка на AstroBin, и мы будем "
-#~ "стараться обновлять её автоматически. Если ваша подписка выполнена через "
-#~ "PayPal, тогда PayPal будет стараться списать с вашей карты или со средств "
-#~ "доступных на вашем аккаунте."
+#: loco:6214a1e16e7c1d3dff1b7046
+msgid ""
+"You have an automatically renewing subscription on AstroBin, and we will "
+"attempt to renew it automatically. If your subscription was created the "
+"regular way, via PayPal, then PayPal will attempt to charge your credit card "
+"or retrieve funds that are available in your account."
+msgstr ""
+"У вас автоматически обновляемая подписка на AstroBin, и мы будем стараться "
+"обновлять её автоматически. Если ваша подписка выполнена через PayPal, тогда "
+"PayPal будет стараться списать с вашей карты или со средств доступных на "
+"вашем аккаунте."
 
-#~ msgid ""
-#~ "If your subscription was created manually via a bank transfer, please get "
-#~ "in touch for a new payment."
-#~ msgstr ""
-#~ "Если ваша подписка оплачена вручную, через банковский перевод, пожалуйста "
-#~ "создайте новый платёж."
+#: loco:6214a1e16e7c1d3dff1b7047
+msgid ""
+"If your subscription was created manually via a bank transfer, please get in "
+"touch for a new payment."
+msgstr ""
+"Если ваша подписка оплачена вручную, через банковский перевод, пожалуйста "
+"создайте новый платёж."
 
-#~ msgid "Thank you!"
-#~ msgstr "Благодарим!"
+#: loco:6214a1e16e7c1d3dff1b7048
+msgid "Thank you!"
+msgstr "Благодарим!"
 
-#~ msgid "Your AstroBin subscription will be automatically renewed in one week"
-#~ msgstr "Ваша AstroBin подписка будет автоматически обновлена на неделе"
+#: loco:6214a1e16e7c1d3dff1b7049
+msgid "Your AstroBin subscription will be automatically renewed in one week"
+msgstr "Ваша AstroBin подписка будет автоматически обновлена на неделе"
 
-#~ msgid ""
-#~ "Your \"%(subscription_name)s\" subscription on AstroBin will be "
-#~ "automatically renewed in 30 days."
-#~ msgstr ""
-#~ "Ваша \"%(subscription_name)s\" подписка на AstroBin будет автоматически "
-#~ "обновлена в течении 30 дней."
+#: loco:6214a1e16e7c1d3dff1b704a
+#, python-format
+msgid ""
+"Your \"%(subscription_name)s\" subscription on AstroBin will be "
+"automatically renewed in 30 days."
+msgstr ""
+"Ваша \"%(subscription_name)s\" подписка на AstroBin будет автоматически "
+"обновлена в течении 30 дней."
 
-#~ msgid "Your AstroBin subscription will be automatically renewed in 30 days"
-#~ msgstr ""
-#~ "Ваша AstroBin подписка будет автоматически обновлена в течении 30 дней"
+#: loco:6214a1e16e7c1d3dff1b704b
+msgid "Your AstroBin subscription will be automatically renewed in 30 days"
+msgstr "Ваша AstroBin подписка будет автоматически обновлена в течении 30 дней"
