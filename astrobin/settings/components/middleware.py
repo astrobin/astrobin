@@ -6,7 +6,6 @@ MIDDLEWARE = [
     'silk.middleware.SilkyMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'astrobin.middleware.RequestLanguageMiddleware',
     'astrobin.middleware.LastSeenMiddleware',
     'astrobin.middleware.BlockNonPayingUsersFromRussiaMiddleware',
     'astrobin.middleware.LogoutDeletedUserMiddleware',
@@ -20,6 +19,7 @@ MIDDLEWARE = [
 if not TESTING:
     MIDDLEWARE += [
         'django.middleware.locale.LocaleMiddleware',
+        'astrobin.middleware.LocaleMiddleware',
     ]
 
 if not DEBUG:

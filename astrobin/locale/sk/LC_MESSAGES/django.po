@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-22 09:06+0000\n"
+"POT-Creation-Date: 2022-04-11 09:37+0000\n"
 "PO-Revision-Date: 2020-09-25 11:30+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -866,9 +866,6 @@ msgid ""
 "one can be considered."
 msgstr ""
 
-msgid "Original image"
-msgstr ""
-
 msgid "Opacity"
 msgstr "Nepriehľadnosť"
 
@@ -1062,6 +1059,9 @@ msgstr ""
 
 msgid "Greek"
 msgstr "Grécky"
+
+msgid "Ukrainian"
+msgstr ""
 
 msgid "Russian"
 msgstr "Rusky"
@@ -1719,6 +1719,14 @@ msgstr "ISO"
 msgid "Gain"
 msgstr "Gain"
 
+msgid "f-number"
+msgstr ""
+
+msgid ""
+"If you used a camera lens, please specify the f-number (also known as f-"
+"ratio or f-stop) that you used for this acquisition session."
+msgstr ""
+
 msgid "Sensor cooling"
 msgstr "Chladenie snímača"
 
@@ -1785,6 +1793,9 @@ msgstr "FPS"
 
 msgid "Frames per second."
 msgstr "Snímky za sekundu"
+
+msgid "Exposure per frame"
+msgstr ""
 
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
@@ -2586,9 +2597,6 @@ msgstr ""
 msgid "Uighur / Uyghur"
 msgstr ""
 
-msgid "Ukrainian"
-msgstr ""
-
 msgid "Urdu"
 msgstr ""
 
@@ -3011,6 +3019,9 @@ msgstr ""
 msgid "Browse images currently visible on the page."
 msgstr ""
 
+msgid "Settings"
+msgstr ""
+
 msgid "View page"
 msgstr ""
 
@@ -3062,9 +3073,6 @@ msgstr ""
 msgid "View all"
 msgstr ""
 
-msgid "Settings"
-msgstr ""
-
 msgid "Mark all as read"
 msgstr ""
 
@@ -3089,6 +3097,9 @@ msgid "No, thanks"
 msgstr ""
 
 msgid "Tell me more!"
+msgstr ""
+
+msgid "This feature is only offered at the AstroBin Ultimate membership level."
 msgstr ""
 
 msgid "Only group members can post in a group's forum."
@@ -3156,6 +3167,12 @@ msgstr ""
 msgid "This operation cannot be undone!"
 msgstr ""
 
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure"
+msgstr ""
+
 msgid "Report abuse"
 msgstr ""
 
@@ -3166,6 +3183,24 @@ msgid ""
 msgstr ""
 
 msgid "Please specify a reason for this abuse report."
+msgstr ""
+
+msgid "Slideshow settings"
+msgstr ""
+
+msgid "Autoplay"
+msgstr ""
+
+msgid "Play speed"
+msgstr ""
+
+msgid "Share (current image)"
+msgstr ""
+
+msgid "Share (beginning)"
+msgstr ""
+
+msgid "Apply"
 msgstr ""
 
 msgid "Quick search"
@@ -3272,10 +3307,16 @@ msgstr ""
 msgid "Bookmarks"
 msgstr ""
 
-msgid "Plots"
+msgid "My messages"
 msgstr ""
 
-msgid "My messages"
+msgid "Received"
+msgstr ""
+
+msgid "Sent"
+msgstr ""
+
+msgid "Deleted"
 msgstr ""
 
 msgid "API Keys"
@@ -3363,9 +3404,6 @@ msgid "Forum posts"
 msgstr "Články na fóre"
 
 msgid "Written"
-msgstr ""
-
-msgid "Received"
 msgstr ""
 
 msgid "Cookie consent"
@@ -4210,6 +4248,24 @@ msgstr ""
 msgid "Click-and-drag zoom not available"
 msgstr ""
 
+msgid "Published"
+msgstr ""
+
+msgid "Views"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "Likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 bookmarks'"
+msgid "Bookmarks"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 comments'"
+msgid "Comments"
+msgstr ""
+
 msgid "No gear yet."
 msgstr ""
 
@@ -4240,9 +4296,6 @@ msgid "Integration"
 msgstr "Expozícia"
 
 msgid "Date joined"
-msgstr ""
-
-msgid "Views"
 msgstr ""
 
 msgid "Comment of deleted image not shown."
@@ -4290,12 +4343,6 @@ msgstr "O čom je táto stránka?"
 msgid "Gallery"
 msgstr ""
 
-msgid "Preferences"
-msgstr ""
-
-msgid "Avatar"
-msgstr ""
-
 msgid "Compose message"
 msgstr ""
 
@@ -4311,19 +4358,16 @@ msgstr ""
 msgid "Searching"
 msgstr ""
 
-msgid "Messages"
-msgstr ""
-
 msgid "Participants"
 msgstr ""
 
 msgid "Last message"
 msgstr ""
 
-msgid "No messages"
+msgid "n/a"
 msgstr ""
 
-msgid "Back"
+msgid "No messages"
 msgstr ""
 
 #, python-format
@@ -4333,10 +4377,19 @@ msgstr ""
 msgid "Reply"
 msgstr ""
 
+msgid "Undelete conversation"
+msgstr ""
+
 msgid "Delete conversation"
 msgstr ""
 
 msgid "Sending..."
+msgstr ""
+
+msgid "Do you really want to undelete this conversation?"
+msgstr ""
+
+msgid "Do you really want to delete this conversation?"
 msgstr ""
 
 msgid "Moderate"
@@ -5129,10 +5182,6 @@ msgstr ""
 
 #, python-format
 msgid "%(user)s likes your image: %(url)s"
-msgstr ""
-
-#, python-format
-msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
 msgstr ""
 
 #, python-format
@@ -6044,7 +6093,13 @@ msgstr ""
 msgid "Import from Flickr"
 msgstr ""
 
+msgid "Preferences"
+msgstr ""
+
 msgid "Privacy"
+msgstr ""
+
+msgid "Avatar"
 msgstr ""
 
 msgid "Change your username"
@@ -6155,6 +6210,9 @@ msgid "Trash"
 msgstr ""
 
 msgid "Liked images"
+msgstr ""
+
+msgid "Plots"
 msgstr ""
 
 msgid "Following"
@@ -6526,24 +6584,6 @@ msgstr ""
 msgid "Fill in one session, before adding more."
 msgstr "Vyplňte jednu ???, pred pridaním ďalšej."
 
-msgid "No date specified"
-msgstr "Nebol zadaný dátum"
-
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr "Nebol vybraný ďalekohľad, objektív alebo kamera"
-
-msgid "Gear images"
-msgstr "Obrázky príslušenstva"
-
-msgid "n/a"
-msgstr ""
-
-msgid "No subjects specified"
-msgstr "Nebol zadaný názov"
-
-msgid "No acquisition details specified"
-msgstr "Neboli zadané detaily snímania."
-
 msgid "Last seen online"
 msgstr ""
 
@@ -6640,6 +6680,21 @@ msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid "No date specified"
+#~ msgstr "Nebol zadaný dátum"
+
+#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+#~ msgstr "Nebol vybraný ďalekohľad, objektív alebo kamera"
+
+#~ msgid "Gear images"
+#~ msgstr "Obrázky príslušenstva"
+
+#~ msgid "No subjects specified"
+#~ msgstr "Nebol zadaný názov"
+
+#~ msgid "No acquisition details specified"
+#~ msgstr "Neboli zadané detaily snímania."
 
 #~ msgid "Integration hours, yearly"
 #~ msgstr "Integračné hodiny, ročne"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-22 09:06+0000\n"
+"POT-Creation-Date: 2022-04-11 09:37+0000\n"
 "PO-Revision-Date: 2014-01-24 09:40+0000\n"
 "Last-Translator: kookoo_gr <kookoo_gr@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -868,9 +868,6 @@ msgid ""
 "one can be considered."
 msgstr ""
 
-msgid "Original image"
-msgstr ""
-
 msgid "Opacity"
 msgstr "Αδιαφάνεια"
 
@@ -1067,6 +1064,9 @@ msgstr ""
 
 msgid "Greek"
 msgstr "Ελληνικά"
+
+msgid "Ukrainian"
+msgstr ""
 
 msgid "Russian"
 msgstr ""
@@ -1727,6 +1727,14 @@ msgstr "ISO"
 msgid "Gain"
 msgstr "Gain"
 
+msgid "f-number"
+msgstr ""
+
+msgid ""
+"If you used a camera lens, please specify the f-number (also known as f-"
+"ratio or f-stop) that you used for this acquisition session."
+msgstr ""
+
 msgid "Sensor cooling"
 msgstr "Ψύξη αισθητήρα"
 
@@ -1793,6 +1801,9 @@ msgstr "FPS"
 
 msgid "Frames per second."
 msgstr "Καρέ ανά δευτερόλεπτο"
+
+msgid "Exposure per frame"
+msgstr ""
 
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
@@ -2606,9 +2617,6 @@ msgstr ""
 msgid "Uighur / Uyghur"
 msgstr ""
 
-msgid "Ukrainian"
-msgstr ""
-
 msgid "Urdu"
 msgstr ""
 
@@ -3032,6 +3040,9 @@ msgstr ""
 msgid "Browse images currently visible on the page."
 msgstr ""
 
+msgid "Settings"
+msgstr ""
+
 msgid "View page"
 msgstr "Προβολή σελίδας"
 
@@ -3083,9 +3094,6 @@ msgstr ""
 msgid "View all"
 msgstr ""
 
-msgid "Settings"
-msgstr ""
-
 msgid "Mark all as read"
 msgstr ""
 
@@ -3110,6 +3118,9 @@ msgid "No, thanks"
 msgstr ""
 
 msgid "Tell me more!"
+msgstr ""
+
+msgid "This feature is only offered at the AstroBin Ultimate membership level."
 msgstr ""
 
 msgid "Only group members can post in a group's forum."
@@ -3177,6 +3188,12 @@ msgstr ""
 msgid "This operation cannot be undone!"
 msgstr ""
 
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure"
+msgstr ""
+
 msgid "Report abuse"
 msgstr ""
 
@@ -3187,6 +3204,24 @@ msgid ""
 msgstr ""
 
 msgid "Please specify a reason for this abuse report."
+msgstr ""
+
+msgid "Slideshow settings"
+msgstr ""
+
+msgid "Autoplay"
+msgstr ""
+
+msgid "Play speed"
+msgstr ""
+
+msgid "Share (current image)"
+msgstr ""
+
+msgid "Share (beginning)"
+msgstr ""
+
+msgid "Apply"
 msgstr ""
 
 msgid "Quick search"
@@ -3293,11 +3328,17 @@ msgstr "Περιοχή Επεξεργασίας"
 msgid "Bookmarks"
 msgstr "Αγαπημένα"
 
-msgid "Plots"
-msgstr "Διαγράμματα"
-
 msgid "My messages"
 msgstr "Μηνύματα"
+
+msgid "Received"
+msgstr ""
+
+msgid "Sent"
+msgstr ""
+
+msgid "Deleted"
+msgstr ""
 
 msgid "API Keys"
 msgstr "Κλειδιά ΑΡΙ"
@@ -3384,9 +3425,6 @@ msgid "Forum posts"
 msgstr ""
 
 msgid "Written"
-msgstr ""
-
-msgid "Received"
 msgstr ""
 
 msgid "Cookie consent"
@@ -4255,6 +4293,24 @@ msgstr ""
 msgid "Click-and-drag zoom not available"
 msgstr ""
 
+msgid "Published"
+msgstr ""
+
+msgid "Views"
+msgstr "Προβολές"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "Likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 bookmarks'"
+msgid "Bookmarks"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 comments'"
+msgid "Comments"
+msgstr ""
+
 msgid "No gear yet."
 msgstr "Δεν υπάρχει εξοπλισμός ακόμα"
 
@@ -4286,9 +4342,6 @@ msgstr "Ολοκλήρωση"
 
 msgid "Date joined"
 msgstr "Ημερομηνία εγγραφής"
-
-msgid "Views"
-msgstr "Προβολές"
 
 msgid "Comment of deleted image not shown."
 msgstr ""
@@ -4337,12 +4390,6 @@ msgstr "Τι είναι αυτός ο ιστότοπος;"
 msgid "Gallery"
 msgstr "Έκθεση εικόνων"
 
-msgid "Preferences"
-msgstr "Προτιμήσεις"
-
-msgid "Avatar"
-msgstr "Avatar"
-
 msgid "Compose message"
 msgstr "Νέο μήνυμα"
 
@@ -4358,20 +4405,17 @@ msgstr "Δεν βρέθηκαν αποτελέσματα"
 msgid "Searching"
 msgstr "Γίνεται αναζήτηση"
 
-msgid "Messages"
-msgstr "Μηνύματα"
-
 msgid "Participants"
 msgstr "Συμμετέχοντες"
 
 msgid "Last message"
 msgstr ""
 
+msgid "n/a"
+msgstr ""
+
 msgid "No messages"
 msgstr "Κανένα μήνυμα"
-
-msgid "Back"
-msgstr ""
 
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
@@ -4380,11 +4424,20 @@ msgstr "Μία συζήτηση μεταξύ <a href=\"%(sender_url)s\">εσάς
 msgid "Reply"
 msgstr "Απάντηση"
 
+msgid "Undelete conversation"
+msgstr ""
+
 msgid "Delete conversation"
 msgstr "Διαγραφή συζήτησης"
 
 msgid "Sending..."
 msgstr "Γίνεται αποστολή..."
+
+msgid "Do you really want to undelete this conversation?"
+msgstr ""
+
+msgid "Do you really want to delete this conversation?"
+msgstr ""
 
 msgid "Moderate"
 msgstr ""
@@ -5191,12 +5244,6 @@ msgstr ""
 #, python-format
 msgid "%(user)s likes your image: %(url)s"
 msgstr "Ο/Η %(user)s προτιμάει την εικόνα σας: %(url)s"
-
-#, python-format
-msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
-msgstr ""
-"Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> προτιμάει την εικόνα σας!</"
-"a>"
 
 #, python-format
 msgid "%(user)s likes your image: %(title)s"
@@ -6139,8 +6186,14 @@ msgstr ""
 msgid "Import from Flickr"
 msgstr "Εισάγετε φωτογραφίες από το Flickr"
 
+msgid "Preferences"
+msgstr "Προτιμήσεις"
+
 msgid "Privacy"
 msgstr ""
+
+msgid "Avatar"
+msgstr "Avatar"
 
 msgid "Change your username"
 msgstr ""
@@ -6256,6 +6309,9 @@ msgstr ""
 
 msgid "Liked images"
 msgstr ""
+
+msgid "Plots"
+msgstr "Διαγράμματα"
 
 msgid "Following"
 msgstr "Ακολουθείτε"
@@ -6627,24 +6683,6 @@ msgstr ""
 msgid "Fill in one session, before adding more."
 msgstr "Εισάγετε μια συνεδρίαση, προτού προσθέσετε άλλη."
 
-msgid "No date specified"
-msgstr "Δεν καθορίστηκε ημερομηνία"
-
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr "Δεν έχουν οριστεί, τηλεσκόπια, φακοί ή κάμερες απεικόνισης"
-
-msgid "Gear images"
-msgstr "Εικόνες εξοπλισμού"
-
-msgid "n/a"
-msgstr ""
-
-msgid "No subjects specified"
-msgstr "Δεν έχουν οριστεί θέματα"
-
-msgid "No acquisition details specified"
-msgstr "Δεν έχουν οριστεί λεπτομέρειες λήψης"
-
 msgid "Last seen online"
 msgstr ""
 
@@ -6741,6 +6779,29 @@ msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid "Messages"
+#~ msgstr "Μηνύματα"
+
+#~ msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+#~ msgstr ""
+#~ "Ο/Η <a href=\"%(url)s\"><strong>%(user)s</strong> προτιμάει την εικόνα "
+#~ "σας!</a>"
+
+#~ msgid "No date specified"
+#~ msgstr "Δεν καθορίστηκε ημερομηνία"
+
+#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+#~ msgstr "Δεν έχουν οριστεί, τηλεσκόπια, φακοί ή κάμερες απεικόνισης"
+
+#~ msgid "Gear images"
+#~ msgstr "Εικόνες εξοπλισμού"
+
+#~ msgid "No subjects specified"
+#~ msgstr "Δεν έχουν οριστεί θέματα"
+
+#~ msgid "No acquisition details specified"
+#~ msgstr "Δεν έχουν οριστεί λεπτομέρειες λήψης"
 
 #~ msgid ""
 #~ "%(user)s commented on your image! Check it out at the following url: "

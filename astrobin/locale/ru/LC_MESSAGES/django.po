@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-22 09:06+0000\n"
-"PO-Revision-Date: 2022-02-22 10:04+0100\n"
+"POT-Creation-Date: 2022-04-11 09:37+0000\n"
+"PO-Revision-Date: 2022-04-11 11:32+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.26 20220207-1\n"
+"X-Loco-Api-Version: 1.0.26 20220328-1\n"
 
 msgid "United Kingdom"
 msgstr "Великобритания"
@@ -879,9 +879,6 @@ msgstr ""
 "версию изображения. Пожалуйста, учтите: необходимо использовать версии с той "
 "же шириной и высотой."
 
-msgid "Original image"
-msgstr "Оригинал"
-
 msgid "Opacity"
 msgstr "Непрозрачность"
 
@@ -1082,6 +1079,9 @@ msgstr "Португальский"
 
 msgid "Greek"
 msgstr "Греческий"
+
+msgid "Ukrainian"
+msgstr ""
 
 msgid "Russian"
 msgstr "Русский"
@@ -1752,6 +1752,14 @@ msgstr "ISO"
 msgid "Gain"
 msgstr "Усиление"
 
+msgid "f-number"
+msgstr ""
+
+msgid ""
+"If you used a camera lens, please specify the f-number (also known as f-"
+"ratio or f-stop) that you used for this acquisition session."
+msgstr ""
+
 msgid "Sensor cooling"
 msgstr "Охлаждение сенсора"
 
@@ -1818,6 +1826,9 @@ msgstr "к/сек"
 
 msgid "Frames per second."
 msgstr "Кадров в секунду."
+
+msgid "Exposure per frame"
+msgstr ""
 
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
@@ -2647,9 +2658,6 @@ msgstr ""
 msgid "Uighur / Uyghur"
 msgstr ""
 
-msgid "Ukrainian"
-msgstr ""
-
 msgid "Urdu"
 msgstr ""
 
@@ -3109,6 +3117,9 @@ msgstr ""
 msgid "Browse images currently visible on the page."
 msgstr ""
 
+msgid "Settings"
+msgstr "Настройки"
+
 msgid "View page"
 msgstr "Подробнее"
 
@@ -3160,9 +3171,6 @@ msgstr ""
 msgid "View all"
 msgstr "Смотреть все"
 
-msgid "Settings"
-msgstr "Настройки"
-
 msgid "Mark all as read"
 msgstr "Отметить все прочитанным"
 
@@ -3190,6 +3198,9 @@ msgstr "Нет, спасибо"
 
 msgid "Tell me more!"
 msgstr "Расскажи подробнее!"
+
+msgid "This feature is only offered at the AstroBin Ultimate membership level."
+msgstr ""
 
 msgid "Only group members can post in a group's forum."
 msgstr ""
@@ -3262,6 +3273,12 @@ msgstr ""
 msgid "This operation cannot be undone!"
 msgstr ""
 
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure"
+msgstr ""
+
 msgid "Report abuse"
 msgstr ""
 
@@ -3272,6 +3289,24 @@ msgid ""
 msgstr ""
 
 msgid "Please specify a reason for this abuse report."
+msgstr ""
+
+msgid "Slideshow settings"
+msgstr ""
+
+msgid "Autoplay"
+msgstr ""
+
+msgid "Play speed"
+msgstr ""
+
+msgid "Share (current image)"
+msgstr ""
+
+msgid "Share (beginning)"
+msgstr ""
+
+msgid "Apply"
 msgstr ""
 
 msgid "Quick search"
@@ -3384,11 +3419,17 @@ msgstr "Студия"
 msgid "Bookmarks"
 msgstr "Закладки"
 
-msgid "Plots"
-msgstr "Графики"
-
 msgid "My messages"
 msgstr "Мои сообщения"
+
+msgid "Received"
+msgstr "Получено"
+
+msgid "Sent"
+msgstr ""
+
+msgid "Deleted"
+msgstr "Удалено"
 
 msgid "API Keys"
 msgstr "API-ключи"
@@ -3493,9 +3534,6 @@ msgstr "Сообщения на форуме"
 
 msgid "Written"
 msgstr "Написано"
-
-msgid "Received"
-msgstr "Получено"
 
 msgid "Cookie consent"
 msgstr "Согласие на использование куки"
@@ -4412,6 +4450,24 @@ msgstr ""
 msgid "Click-and-drag zoom not available"
 msgstr ""
 
+msgid "Published"
+msgstr ""
+
+msgid "Views"
+msgstr "Просмотры"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "Likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 bookmarks'"
+msgid "Bookmarks"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 comments'"
+msgid "Comments"
+msgstr ""
+
 msgid "No gear yet."
 msgstr "Ещё нет оборудования."
 
@@ -4445,9 +4501,6 @@ msgstr "Накопление"
 
 msgid "Date joined"
 msgstr "Дата присоединения"
-
-msgid "Views"
-msgstr "Просмотры"
 
 msgid "Comment of deleted image not shown."
 msgstr "Комментарий к удаленному изображению не отображается."
@@ -4495,12 +4548,6 @@ msgstr "Что это за сайт?"
 msgid "Gallery"
 msgstr "Галерея"
 
-msgid "Preferences"
-msgstr "Настройки"
-
-msgid "Avatar"
-msgstr "Аватар"
-
 msgid "Compose message"
 msgstr "Создать сообщение"
 
@@ -4516,20 +4563,17 @@ msgstr "Нет результатов"
 msgid "Searching"
 msgstr "Ищется"
 
-msgid "Messages"
-msgstr "Сообщения"
-
 msgid "Participants"
 msgstr "Участники"
 
 msgid "Last message"
 msgstr "Последнее сообщение"
 
+msgid "n/a"
+msgstr "н/д"
+
 msgid "No messages"
 msgstr "Нет сообщений"
-
-msgid "Back"
-msgstr "Назад"
 
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
@@ -4538,11 +4582,20 @@ msgstr "Разговор между <a href=\"%(sender_url)s\">вами</a> и"
 msgid "Reply"
 msgstr "Ответить"
 
+msgid "Undelete conversation"
+msgstr ""
+
 msgid "Delete conversation"
 msgstr "Удалить разговор"
 
 msgid "Sending..."
 msgstr "Отправка..."
+
+msgid "Do you really want to undelete this conversation?"
+msgstr ""
+
+msgid "Do you really want to delete this conversation?"
+msgstr ""
 
 msgid "Moderate"
 msgstr "Модерировать"
@@ -5472,11 +5525,6 @@ msgstr ""
 #, python-format
 msgid "%(user)s likes your image: %(url)s"
 msgstr "%(user)s нравится ваше изображение: %(url)s"
-
-#, python-format
-msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> нравится ваше изображение!</a>"
 
 #, python-format
 msgid "%(user)s likes your image: %(title)s"
@@ -6519,8 +6567,14 @@ msgstr "AstroBin не делится вашим местоположением �
 msgid "Import from Flickr"
 msgstr "Импортировать из Flickr"
 
+msgid "Preferences"
+msgstr "Настройки"
+
 msgid "Privacy"
 msgstr ""
+
+msgid "Avatar"
+msgstr "Аватар"
 
 msgid "Change your username"
 msgstr "Изменить вашего пользователя"
@@ -6639,6 +6693,9 @@ msgstr "Корзина"
 
 msgid "Liked images"
 msgstr "Понравившиеся изображения"
+
+msgid "Plots"
+msgstr "Графики"
 
 msgid "Following"
 msgstr "Подписки"
@@ -7019,26 +7076,6 @@ msgstr "Форма сохранена. Новое продвинутое опр�
 msgid "Fill in one session, before adding more."
 msgstr "Закончите одну, прежде чем добавлять очередную."
 
-msgid "No date specified"
-msgstr "Дата не указана."
-
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr ""
-"Не указан телескоп или объектив для съёмки, а также не указана камера для "
-"съёмки."
-
-msgid "Gear images"
-msgstr "Изображения оборудования"
-
-msgid "n/a"
-msgstr "н/д"
-
-msgid "No subjects specified"
-msgstr "Не указаны темы"
-
-msgid "No acquisition details specified"
-msgstr "Не указаны данные съёмки"
-
 msgid "Last seen online"
 msgstr ""
 
@@ -7139,6 +7176,9 @@ msgstr "Код реферала (опционально)"
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr "Извините, это имя пользователя уже существует с другим регистром."
+
+#~ msgid "Original image"
+#~ msgstr "Оригинал"
 
 #~ msgid "Timezone"
 #~ msgstr "Часовой пояс"
@@ -7458,6 +7498,12 @@ msgstr "Извините, это имя пользователя уже суще
 #~ msgid "link"
 #~ msgstr "ссылка"
 
+#~ msgid "Messages"
+#~ msgstr "Сообщения"
+
+#~ msgid "Back"
+#~ msgstr "Назад"
+
 #~ msgid ""
 #~ "%(user)s commented on your image! Check it out at the following url: <a "
 #~ "href=\"%(url)s\">%(url)s</a>"
@@ -7557,6 +7603,11 @@ msgstr "Извините, это имя пользователя уже суще
 
 #~ msgid "New image revision by %(originator)s"
 #~ msgstr "Новая версия изображения от %(originator)s"
+
+#~ msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> нравится ваше изображение!</"
+#~ "a>"
 
 #~ msgid ""
 #~ "%(user)s posted a new topic to the group: \"%(group_name)s\"\n"
@@ -7763,9 +7814,6 @@ msgstr "Извините, это имя пользователя уже суще
 #~ msgid "Staging area"
 #~ msgstr "Студия"
 
-#~ msgid "Deleted"
-#~ msgstr "Удалено"
-
 #~ msgid "Recover all"
 #~ msgstr "Восстановить всё"
 
@@ -7783,6 +7831,23 @@ msgstr "Извините, это имя пользователя уже суще
 
 #~ msgid "Comments & forums"
 #~ msgstr "Комментарии и форумы"
+
+#~ msgid "No date specified"
+#~ msgstr "Дата не указана."
+
+#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+#~ msgstr ""
+#~ "Не указан телескоп или объектив для съёмки, а также не указана камера для "
+#~ "съёмки."
+
+#~ msgid "Gear images"
+#~ msgstr "Изображения оборудования"
+
+#~ msgid "No subjects specified"
+#~ msgstr "Не указаны темы"
+
+#~ msgid "No acquisition details specified"
+#~ msgstr "Не указаны данные съёмки"
 
 #~ msgid "Last login"
 #~ msgstr "Последнее посещение"

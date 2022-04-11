@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-22 09:06+0000\n"
-"PO-Revision-Date: 2022-02-22 10:04+0100\n"
+"POT-Creation-Date: 2022-04-11 09:37+0000\n"
+"PO-Revision-Date: 2022-04-11 11:32+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.26 20220207-1\n"
+"X-Loco-Api-Version: 1.0.26 20220328-1\n"
 
 msgid "United Kingdom"
 msgstr "Großbritannien"
@@ -883,9 +883,6 @@ msgstr ""
 "Bildrevision fährt. Bitte beachte: nur Revisionen mit der gleichen Breite "
 "und Höhe wie diese können berücksichtigt werden."
 
-msgid "Original image"
-msgstr "Originalbild"
-
 msgid "Opacity"
 msgstr "Deckkraft"
 
@@ -1087,6 +1084,9 @@ msgstr "Portugiesisch"
 
 msgid "Greek"
 msgstr "Griechisch"
+
+msgid "Ukrainian"
+msgstr "Ukrainisch"
 
 msgid "Russian"
 msgstr "Russisch"
@@ -1765,6 +1765,14 @@ msgstr "ISO"
 msgid "Gain"
 msgstr "Empfindlichkeit (Gain)"
 
+msgid "f-number"
+msgstr ""
+
+msgid ""
+"If you used a camera lens, please specify the f-number (also known as f-"
+"ratio or f-stop) that you used for this acquisition session."
+msgstr ""
+
 msgid "Sensor cooling"
 msgstr "Chipkühlung"
 
@@ -1831,6 +1839,9 @@ msgstr "FPS"
 
 msgid "Frames per second."
 msgstr "Bilder pro Sekunde."
+
+msgid "Exposure per frame"
+msgstr ""
 
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
@@ -2680,9 +2691,6 @@ msgstr "Tahitianisch"
 msgid "Uighur / Uyghur"
 msgstr "Uigurisch"
 
-msgid "Ukrainian"
-msgstr "Ukrainisch"
-
 msgid "Urdu"
 msgstr "Urdu"
 
@@ -3148,50 +3156,54 @@ msgstr "Datei auswählen"
 
 msgctxt "Verb (imperative)"
 msgid "Like"
-msgstr ""
+msgstr "Gefällt mir"
 
 msgctxt "Verb (imperative)"
 msgid "Unlike"
-msgstr ""
+msgstr "Gefällt mir nicht mehr"
 
 msgid "Browse images currently visible on the page."
-msgstr ""
+msgstr "Blättern Sie durch die derzeit auf der Seite sichtbaren Bilder."
+
+msgid "Settings"
+msgstr "Einstellungen"
 
 msgid "View page"
 msgstr "Seite anzeigen"
 
 msgid "View page in new tab"
-msgstr ""
+msgstr "Seite in neuem Tab anzeigen"
 
 msgid "Close"
 msgstr "Schließen"
 
 msgid "Next"
-msgstr ""
+msgstr "Weiter"
 
 msgid "Previous"
-msgstr ""
+msgstr "Vorherige"
 
 msgid "You can close this modal content with the ESC key"
-msgstr ""
+msgstr "Sie können diesen modalen Inhalt mit der ESC-Taste schließen"
 
 msgid "Something went wrong, Please try again later."
 msgstr ""
+"Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal."
 
 msgid "Image not found"
-msgstr ""
+msgstr "Bild nicht gefunden"
 
 msgid "HTML Element not found"
-msgstr ""
+msgstr "HTML-Element nicht gefunden"
 
 msgid "Error loading AJAX : Not Found"
-msgstr ""
+msgstr "Fehler beim Laden von AJAX : Nicht gefunden"
 
 msgid "Error loading AJAX : Forbidden"
-msgstr ""
+msgstr "Fehler beim Laden von AJAX : Unzulässig"
 
 msgid "Error loading page"
-msgstr ""
+msgstr "Fehler beim Laden der Seite"
 
 msgid "Help with translations!"
 msgstr "Helfe mit beim Übersetzen!"
@@ -3207,9 +3219,6 @@ msgstr "Sie haben keine neuen Benachrichtigungen."
 
 msgid "View all"
 msgstr "Alle anzeigen"
-
-msgid "Settings"
-msgstr "Einstellungen"
 
 msgid "Mark all as read"
 msgstr "Alle als gelesen markieren"
@@ -3238,6 +3247,9 @@ msgstr "Nein, danke"
 
 msgid "Tell me more!"
 msgstr "Erzähl mir mehr!"
+
+msgid "This feature is only offered at the AstroBin Ultimate membership level."
+msgstr ""
 
 msgid "Only group members can post in a group's forum."
 msgstr "Nur Gruppenmitglieder können im Forum einer Gruppe Beiträge schreiben."
@@ -3324,6 +3336,12 @@ msgstr ""
 msgid "This operation cannot be undone!"
 msgstr "Dieser Vorgang kann nicht rückgängig gemacht werden!"
 
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure"
+msgstr ""
+
 msgid "Report abuse"
 msgstr "Missbrauch melden"
 
@@ -3338,6 +3356,24 @@ msgstr ""
 
 msgid "Please specify a reason for this abuse report."
 msgstr "Bitte geben Sie einen Grund für diese Missbrauchsmeldung an."
+
+msgid "Slideshow settings"
+msgstr ""
+
+msgid "Autoplay"
+msgstr ""
+
+msgid "Play speed"
+msgstr ""
+
+msgid "Share (current image)"
+msgstr ""
+
+msgid "Share (beginning)"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
 
 msgid "Quick search"
 msgstr "Schnellsuche"
@@ -3450,11 +3486,17 @@ msgstr "Staging-Bereich"
 msgid "Bookmarks"
 msgstr "Lesezeichen"
 
-msgid "Plots"
-msgstr "Graphen"
-
 msgid "My messages"
 msgstr "Meine Nachrichten"
+
+msgid "Received"
+msgstr "Empfangen"
+
+msgid "Sent"
+msgstr ""
+
+msgid "Deleted"
+msgstr "Gelöscht"
 
 msgid "API Keys"
 msgstr "API-Keys"
@@ -3479,7 +3521,7 @@ msgid "You cannot like this item. Reason: \"%(reason)s\"."
 msgstr "Sie können diesen Beitrag nicht liken. Grund: \"%(reason)s\"."
 
 msgid "You cannot like this item."
-msgstr ""
+msgstr "Sie können dieses Element nicht liken."
 
 msgid "You cannot remove a like that you gave more than one hour ago."
 msgstr ""
@@ -3563,9 +3605,6 @@ msgstr "Forums Beitrag"
 
 msgid "Written"
 msgstr "Geschrieben"
-
-msgid "Received"
-msgstr "Empfangen"
 
 msgid "Cookie consent"
 msgstr "Cookie-Zustimmung"
@@ -3838,7 +3877,7 @@ msgid "Large size"
 msgstr "Groß"
 
 msgid "Extra-large size"
-msgstr ""
+msgstr "Extragroß"
 
 msgid "Original size"
 msgstr "Original Größe"
@@ -4549,6 +4588,24 @@ msgstr ""
 msgid "Click-and-drag zoom not available"
 msgstr "Click-and-Drag-Zoom nicht verfügbar"
 
+msgid "Published"
+msgstr ""
+
+msgid "Views"
+msgstr "Angezeigt"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "Likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 bookmarks'"
+msgid "Bookmarks"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 comments'"
+msgid "Comments"
+msgstr ""
+
 msgid "No gear yet."
 msgstr "Bisher keine Ausrüstung eingetragen."
 
@@ -4584,9 +4641,6 @@ msgstr "Aufnahmedauer"
 
 msgid "Date joined"
 msgstr "Mitglied seit"
-
-msgid "Views"
-msgstr "Angezeigt"
 
 msgid "Comment of deleted image not shown."
 msgstr "Kommentar des gelöschten Bildes wird nicht angezeigt."
@@ -4634,12 +4688,6 @@ msgstr "Was ist auf dieser Seite?"
 msgid "Gallery"
 msgstr "Galerie"
 
-msgid "Preferences"
-msgstr "Einstellungen"
-
-msgid "Avatar"
-msgstr "Profilbild"
-
 msgid "Compose message"
 msgstr "Nachricht verfassen"
 
@@ -4655,20 +4703,17 @@ msgstr "Keine Ergebnisse"
 msgid "Searching"
 msgstr "Suche"
 
-msgid "Messages"
-msgstr "Nachrichten"
-
 msgid "Participants"
 msgstr "Teilnehmer"
 
 msgid "Last message"
 msgstr "Letzte Nachricht"
 
+msgid "n/a"
+msgstr "n.a."
+
 msgid "No messages"
 msgstr "Keine Nachrichten"
-
-msgid "Back"
-msgstr "Zurück"
 
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
@@ -4677,11 +4722,20 @@ msgstr "Eine Unterhaltung zwischen <a href=\"%(sender_url)s\">Ihnen</a> und"
 msgid "Reply"
 msgstr "Antworten"
 
+msgid "Undelete conversation"
+msgstr ""
+
 msgid "Delete conversation"
 msgstr "Unterhaltung löschen"
 
 msgid "Sending..."
 msgstr "Sende ..."
+
+msgid "Do you really want to undelete this conversation?"
+msgstr ""
+
+msgid "Do you really want to delete this conversation?"
+msgstr ""
 
 msgid "Moderate"
 msgstr "Moderieren"
@@ -5302,63 +5356,78 @@ msgstr ""
 msgid ""
 "%(user)s commented on your image <a href=\"%(target_url)s\">%(target)s</a>!"
 msgstr ""
+"%(user)s hat Ihr Bild <a href=\"%(target_url)s\">%(target)s</a> kommentiert!"
 
 #, python-format
 msgid "%(user)s commented on your image \"%(target)s\"!"
-msgstr ""
+msgstr "%(user)s hat Ihr Bild „%(target)s“ kommentiert!"
 
 #, python-format
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> commented on your image "
 "<strong>%(target)s</strong>!</a>"
 msgstr ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> hat Ihr Bild kommentiert "
+"<strong>%(target)s</strong>!</a>"
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> likes your comment on <a href="
 "\"%(target_url)s\">%(target)s</a>!"
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> gefällt Ihr Kommentar zu <a href="
+"\"%(target_url)s\">%(target)s</a>!"
 
 #, python-format
 msgid "%(user)s likes your comment on \"%(target)s\"!"
-msgstr ""
+msgstr "%(user)s gefällt Ihr Kommentar zu \"%(target)s\"!"
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> likes your comment on <strong>%(target)s</strong>!"
 msgstr ""
+"<strong>%(user)s</strong> gefällt Ihr Kommentar auf <strong>%(target)s</"
+"strong>!"
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> mentioned you in a comment on <a href="
 "\"%(target_url)s\">%(target)s</a>!"
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> hat Sie in einem Kommentar zu <a href="
+"\"%(target_url)s\">%(target)s</a> erwähnt!"
 
 #, python-format
 msgid "%(user)s mentioned you in a comment on \"%(target)s\"!"
-msgstr ""
+msgstr "%(user)s hat Sie in einem Kommentar zu \"%(target)s\" erwähnt!"
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> mentioned you in a comment on <strong>%(target)s</"
 "strong>!"
 msgstr ""
+"<strong>%(user)s</strong> hat Sie in einem Kommentar zu <strong>%(target)s</"
+"strong> erwähnt!"
 
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment on <a href="
 "\"%(target_url)s\">%(target)s</a>!"
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> hat auf Ihren Kommentar zu <a href="
+"\"%(target_url)s\">%(target)s</a> geantwortet!"
 
 #, python-format
 msgid "%(user)s replied to your comment on \"%(target)s\"!"
-msgstr ""
+msgstr "%(user)s hat auf Ihren Kommentar zu „%(target)s“ geantwortet!"
 
 #, python-format
 msgid ""
 "<a href=\"%(url)s\"><strong>%(user)s</strong> replied to your comment on "
 "<strong>%(target)s</strong>!</a>"
 msgstr ""
+"<a href=\"%(url)s\"><strong>%(user)s</strong> hat auf Ihren Kommentar zu "
+"<strong>%(target)s</strong> geantwortet!</a>"
 
 #, python-format
 msgid "<a href=\"%(user_url)s\">%(user)s</a> commented on your edit proposal."
@@ -5447,6 +5516,8 @@ msgid ""
 "<strong>%(user)s</strong> likes your forum post in the topic: <em>%(post)s</"
 "em>"
 msgstr ""
+"<strong>%(user)s</strong> gefällt Ihr Forumsbeitrag im Thema: <em>%(post)s</"
+"em>"
 
 #, python-format
 msgid "<strong>%(user)s</strong> likes your forum post!"
@@ -5474,6 +5545,8 @@ msgid ""
 "<strong>%(user)s</strong> mentioned you in a forum post in the topic: <em>"
 "%(post)s</em>"
 msgstr ""
+"<strong>%(user)s</strong> erwähnte Sie in einem Forenbeitrag im Thema: <em>"
+"%(post)s</em>"
 
 #, python-format
 msgid "<strong>%(user)s</strong> mentioned you in a forum post!"
@@ -5488,6 +5561,8 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> replied in a topic to which you are "
 "subscribed."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> hat auf ein Thema geantwortet, das Sie "
+"abonniert haben."
 
 #, python-format
 msgid ""
@@ -5510,6 +5585,8 @@ msgid ""
 "<strong>%(user)s</strong> replied in a topic to which you are subscribed: "
 "<em>%(topic_name)s</em>"
 msgstr ""
+"<strong>%(user)s</strong> hat in einem Thema geantwortet, das Sie abonniert "
+"haben: <em>%(topic_name)s</em>"
 
 #, python-format
 msgid "<strong>%(user)s</strong> replied in topic to which you are subscribed"
@@ -5687,10 +5764,6 @@ msgstr ""
 #, python-format
 msgid "%(user)s likes your image: %(url)s"
 msgstr "%(user)s mag Dein Bild: %(url)s"
-
-#, python-format
-msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
-msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> mag Dein Bild!</a>"
 
 #, python-format
 msgid "%(user)s likes your image: %(title)s"
@@ -6121,10 +6194,10 @@ msgid "Type your forum post here..."
 msgstr "Geben Sie hier Ihren Forumsbeitrag ein..."
 
 msgid "Text editor not ready. "
-msgstr ""
+msgstr "Texteditor nicht bereit. "
 
 msgid "Please try again."
-msgstr ""
+msgstr "Bitte versuchen Sie es erneut."
 
 msgid "Please first exit 'Source' mode to quote a message."
 msgstr ""
@@ -6789,8 +6862,14 @@ msgstr ""
 msgid "Import from Flickr"
 msgstr "Aus Flickr importieren"
 
+msgid "Preferences"
+msgstr "Einstellungen"
+
 msgid "Privacy"
 msgstr "Datenschutz"
+
+msgid "Avatar"
+msgstr "Profilbild"
 
 msgid "Change your username"
 msgstr "Ändere deinen Benutzernamen"
@@ -6911,6 +6990,9 @@ msgstr "Papierkorb"
 
 msgid "Liked images"
 msgstr "Liked Bilder"
+
+msgid "Plots"
+msgstr "Graphen"
 
 msgid "Following"
 msgstr "Abonnements"
@@ -7305,24 +7387,6 @@ msgstr ""
 msgid "Fill in one session, before adding more."
 msgstr "Bitte zuerst eine Session ausfüllen, bevor Du weitere hinzufügst."
 
-msgid "No date specified"
-msgstr "Kein Datum definiert"
-
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr "Kein Teleskop / Objektiv oder keine Kamera definiert"
-
-msgid "Gear images"
-msgstr "Bilder der Ausrüstung"
-
-msgid "n/a"
-msgstr "n.a."
-
-msgid "No subjects specified"
-msgstr "Kein Objekt angegeben"
-
-msgid "No acquisition details specified"
-msgstr "Keine Aufnahmedetails angegeben"
-
 msgid "Last seen online"
 msgstr "Zuletzt online"
 
@@ -7427,6 +7491,9 @@ msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
 "Sorry, dieser Benutzername existiert bereits mit abweichender Groß/Klein-"
 "Schreibung."
+
+#~ msgid "Original image"
+#~ msgstr "Originalbild"
 
 #~ msgid "Timezone"
 #~ msgstr "Zeitzone"
@@ -7795,6 +7862,12 @@ msgstr ""
 #~ msgid "link"
 #~ msgstr "Link"
 
+#~ msgid "Messages"
+#~ msgstr "Nachrichten"
+
+#~ msgid "Back"
+#~ msgstr "Zurück"
+
 #~ msgid ""
 #~ "As a new user on AstroBin, your first 3 comments will go through a "
 #~ "moderation queue, to prevent spam."
@@ -7909,6 +7982,9 @@ msgstr ""
 
 #~ msgid "New image revision by %(originator)s"
 #~ msgstr "Neue Bild-Version durch %(originator)s"
+
+#~ msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+#~ msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> mag Dein Bild!</a>"
 
 #~ msgid ""
 #~ "%(user)s posted a new topic to the group: \"%(group_name)s\"\n"
@@ -8153,9 +8229,6 @@ msgstr ""
 #~ msgid "Staging area"
 #~ msgstr "Staging-Bereich"
 
-#~ msgid "Deleted"
-#~ msgstr "Gelöscht"
-
 #~ msgid "Recover all"
 #~ msgstr "Alle wiederherstellen"
 
@@ -8173,6 +8246,21 @@ msgstr ""
 
 #~ msgid "Comments & forums"
 #~ msgstr "Kommentare und Foren"
+
+#~ msgid "No date specified"
+#~ msgstr "Kein Datum definiert"
+
+#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+#~ msgstr "Kein Teleskop / Objektiv oder keine Kamera definiert"
+
+#~ msgid "Gear images"
+#~ msgstr "Bilder der Ausrüstung"
+
+#~ msgid "No subjects specified"
+#~ msgstr "Kein Objekt angegeben"
+
+#~ msgid "No acquisition details specified"
+#~ msgstr "Keine Aufnahmedetails angegeben"
 
 #~ msgid "Last login"
 #~ msgstr "Letzter Login"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-22 09:06+0000\n"
+"POT-Creation-Date: 2022-04-11 09:37+0000\n"
 "PO-Revision-Date: 2015-12-30 10:50+0000\n"
 "Last-Translator: Samuli <samuli.vuorinen@iki.fi>\n"
 "Language-Team: Finnish <tanja@iovene.com>\n"
@@ -865,9 +865,6 @@ msgid ""
 "one can be considered."
 msgstr ""
 
-msgid "Original image"
-msgstr ""
-
 msgid "Opacity"
 msgstr "Läpinäkyvyys"
 
@@ -1062,6 +1059,9 @@ msgstr ""
 
 msgid "Greek"
 msgstr "Kreikka"
+
+msgid "Ukrainian"
+msgstr ""
 
 msgid "Russian"
 msgstr "Venäläinen"
@@ -1715,6 +1715,14 @@ msgstr "ISO"
 msgid "Gain"
 msgstr "Vahvistus (Gain)"
 
+msgid "f-number"
+msgstr ""
+
+msgid ""
+"If you used a camera lens, please specify the f-number (also known as f-"
+"ratio or f-stop) that you used for this acquisition session."
+msgstr ""
+
 msgid "Sensor cooling"
 msgstr "Kennon jäähdytys"
 
@@ -1782,6 +1790,9 @@ msgstr "Kuvataajuus"
 
 msgid "Frames per second."
 msgstr "Kuvanopeus (fps)."
+
+msgid "Exposure per frame"
+msgstr ""
 
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
@@ -2581,9 +2592,6 @@ msgstr ""
 msgid "Uighur / Uyghur"
 msgstr ""
 
-msgid "Ukrainian"
-msgstr ""
-
 msgid "Urdu"
 msgstr ""
 
@@ -3006,6 +3014,9 @@ msgstr ""
 msgid "Browse images currently visible on the page."
 msgstr ""
 
+msgid "Settings"
+msgstr ""
+
 msgid "View page"
 msgstr "Katso sivu"
 
@@ -3057,9 +3068,6 @@ msgstr ""
 msgid "View all"
 msgstr ""
 
-msgid "Settings"
-msgstr ""
-
 msgid "Mark all as read"
 msgstr ""
 
@@ -3084,6 +3092,9 @@ msgid "No, thanks"
 msgstr ""
 
 msgid "Tell me more!"
+msgstr ""
+
+msgid "This feature is only offered at the AstroBin Ultimate membership level."
 msgstr ""
 
 msgid "Only group members can post in a group's forum."
@@ -3151,6 +3162,12 @@ msgstr ""
 msgid "This operation cannot be undone!"
 msgstr ""
 
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure"
+msgstr ""
+
 msgid "Report abuse"
 msgstr ""
 
@@ -3161,6 +3178,24 @@ msgid ""
 msgstr ""
 
 msgid "Please specify a reason for this abuse report."
+msgstr ""
+
+msgid "Slideshow settings"
+msgstr ""
+
+msgid "Autoplay"
+msgstr ""
+
+msgid "Play speed"
+msgstr ""
+
+msgid "Share (current image)"
+msgstr ""
+
+msgid "Share (beginning)"
+msgstr ""
+
+msgid "Apply"
 msgstr ""
 
 msgid "Quick search"
@@ -3267,11 +3302,17 @@ msgstr "Tilapäinen alue"
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-msgid "Plots"
-msgstr "Tilastot"
-
 msgid "My messages"
 msgstr "Viestini"
+
+msgid "Received"
+msgstr ""
+
+msgid "Sent"
+msgstr ""
+
+msgid "Deleted"
+msgstr ""
 
 msgid "API Keys"
 msgstr "Rajapinta-avaimet"
@@ -3358,9 +3399,6 @@ msgid "Forum posts"
 msgstr "Foorumiviestit"
 
 msgid "Written"
-msgstr ""
-
-msgid "Received"
 msgstr ""
 
 msgid "Cookie consent"
@@ -4221,6 +4259,24 @@ msgstr ""
 msgid "Click-and-drag zoom not available"
 msgstr ""
 
+msgid "Published"
+msgstr ""
+
+msgid "Views"
+msgstr "Katselukerrat"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "Likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 bookmarks'"
+msgid "Bookmarks"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 comments'"
+msgid "Comments"
+msgstr ""
+
 msgid "No gear yet."
 msgstr ""
 
@@ -4252,9 +4308,6 @@ msgstr "Valotusaika"
 
 msgid "Date joined"
 msgstr "Liittymispäivämäärä"
-
-msgid "Views"
-msgstr "Katselukerrat"
 
 msgid "Comment of deleted image not shown."
 msgstr ""
@@ -4303,12 +4356,6 @@ msgstr "Mikä on AstroBin?"
 msgid "Gallery"
 msgstr "Galleria"
 
-msgid "Preferences"
-msgstr "Asetukset"
-
-msgid "Avatar"
-msgstr "Profiilikuva"
-
 msgid "Compose message"
 msgstr "Kirjoita viesti"
 
@@ -4324,20 +4371,17 @@ msgstr "Ei tuloksia"
 msgid "Searching"
 msgstr "Etsitään"
 
-msgid "Messages"
-msgstr "Viestit"
-
 msgid "Participants"
 msgstr "Osallistujat"
 
 msgid "Last message"
 msgstr ""
 
+msgid "n/a"
+msgstr ""
+
 msgid "No messages"
 msgstr "Ei viestejä"
-
-msgid "Back"
-msgstr ""
 
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
@@ -4346,11 +4390,20 @@ msgstr "Keskustelijat: <a href=\"%(sender_url)s\">sinä</a> ja"
 msgid "Reply"
 msgstr "Vastaa"
 
+msgid "Undelete conversation"
+msgstr ""
+
 msgid "Delete conversation"
 msgstr "Poista keskustelu"
 
 msgid "Sending..."
 msgstr "Lähetetään..."
+
+msgid "Do you really want to undelete this conversation?"
+msgstr ""
+
+msgid "Do you really want to delete this conversation?"
+msgstr ""
 
 msgid "Moderate"
 msgstr ""
@@ -5160,10 +5213,6 @@ msgstr ""
 #, python-format
 msgid "%(user)s likes your image: %(url)s"
 msgstr ""
-
-#, python-format
-msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
-msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> tykkäsi kuvastasi!</a>"
 
 #, python-format
 msgid "%(user)s likes your image: %(title)s"
@@ -6100,8 +6149,14 @@ msgstr "AstroBin ei jaa sijaintitietojasi muiden käyttäjien kanssa."
 msgid "Import from Flickr"
 msgstr "Tuo Flickristä"
 
+msgid "Preferences"
+msgstr "Asetukset"
+
 msgid "Privacy"
 msgstr ""
+
+msgid "Avatar"
+msgstr "Profiilikuva"
 
 msgid "Change your username"
 msgstr ""
@@ -6216,6 +6271,9 @@ msgstr ""
 
 msgid "Liked images"
 msgstr ""
+
+msgid "Plots"
+msgstr "Tilastot"
 
 msgid "Following"
 msgstr ""
@@ -6590,24 +6648,6 @@ msgstr ""
 msgid "Fill in one session, before adding more."
 msgstr "Täytä tämä sessio ennen seuraavien lisäämistä."
 
-msgid "No date specified"
-msgstr "Päivämäärää ei annettu"
-
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr "Kaukoputkea, objektiivia tai kameraa ei määritetty"
-
-msgid "Gear images"
-msgstr "Kalustokuvia"
-
-msgid "n/a"
-msgstr ""
-
-msgid "No subjects specified"
-msgstr "Kohteita ei määritetty"
-
-msgid "No acquisition details specified"
-msgstr "Kuvaustietoja ei määritelty"
-
 msgid "Last seen online"
 msgstr ""
 
@@ -6703,6 +6743,28 @@ msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid "Messages"
+#~ msgstr "Viestit"
+
+#~ msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> tykkäsi kuvastasi!</a>"
+
+#~ msgid "No date specified"
+#~ msgstr "Päivämäärää ei annettu"
+
+#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+#~ msgstr "Kaukoputkea, objektiivia tai kameraa ei määritetty"
+
+#~ msgid "Gear images"
+#~ msgstr "Kalustokuvia"
+
+#~ msgid "No subjects specified"
+#~ msgstr "Kohteita ei määritetty"
+
+#~ msgid "No acquisition details specified"
+#~ msgstr "Kuvaustietoja ei määritelty"
 
 #~ msgid ""
 #~ "%(user)s commented on your image! Check it out at the following url: "

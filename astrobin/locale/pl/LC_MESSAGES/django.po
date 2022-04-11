@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-22 09:06+0000\n"
+"POT-Creation-Date: 2022-04-11 09:37+0000\n"
 "PO-Revision-Date: 2020-10-26 10:36+0000\n"
 "Last-Translator: Łukasz Sujka <lukasz.sujka83@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -872,9 +872,6 @@ msgid ""
 "one can be considered."
 msgstr ""
 
-msgid "Original image"
-msgstr "Oryginalne zdjęcie"
-
 msgid "Opacity"
 msgstr "Stopień pokrycia"
 
@@ -1069,6 +1066,9 @@ msgstr "Portugalski"
 
 msgid "Greek"
 msgstr "Grecki"
+
+msgid "Ukrainian"
+msgstr ""
 
 msgid "Russian"
 msgstr "Rosyjski"
@@ -1728,6 +1728,14 @@ msgstr "ISO"
 msgid "Gain"
 msgstr "Wzmocnienie"
 
+msgid "f-number"
+msgstr ""
+
+msgid ""
+"If you used a camera lens, please specify the f-number (also known as f-"
+"ratio or f-stop) that you used for this acquisition session."
+msgstr ""
+
 msgid "Sensor cooling"
 msgstr "Chłodzenie sensora"
 
@@ -1794,6 +1802,9 @@ msgstr "FPS"
 
 msgid "Frames per second."
 msgstr "Klatki na sekundę."
+
+msgid "Exposure per frame"
+msgstr ""
 
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
@@ -2603,9 +2614,6 @@ msgstr ""
 msgid "Uighur / Uyghur"
 msgstr ""
 
-msgid "Ukrainian"
-msgstr ""
-
 msgid "Urdu"
 msgstr ""
 
@@ -3033,6 +3041,9 @@ msgstr ""
 msgid "Browse images currently visible on the page."
 msgstr ""
 
+msgid "Settings"
+msgstr "Ustawienia"
+
 msgid "View page"
 msgstr "Zobacz stronę"
 
@@ -3084,9 +3095,6 @@ msgstr ""
 msgid "View all"
 msgstr "Zobacz wszystkie"
 
-msgid "Settings"
-msgstr "Ustawienia"
-
 msgid "Mark all as read"
 msgstr "Oznacz wszystko jako przeczytane"
 
@@ -3111,6 +3119,9 @@ msgid "No, thanks"
 msgstr "Nie, dziękuję"
 
 msgid "Tell me more!"
+msgstr ""
+
+msgid "This feature is only offered at the AstroBin Ultimate membership level."
 msgstr ""
 
 msgid "Only group members can post in a group's forum."
@@ -3178,6 +3189,12 @@ msgstr ""
 msgid "This operation cannot be undone!"
 msgstr ""
 
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure"
+msgstr ""
+
 msgid "Report abuse"
 msgstr ""
 
@@ -3188,6 +3205,24 @@ msgid ""
 msgstr ""
 
 msgid "Please specify a reason for this abuse report."
+msgstr ""
+
+msgid "Slideshow settings"
+msgstr ""
+
+msgid "Autoplay"
+msgstr ""
+
+msgid "Play speed"
+msgstr ""
+
+msgid "Share (current image)"
+msgstr ""
+
+msgid "Share (beginning)"
+msgstr ""
+
+msgid "Apply"
 msgstr ""
 
 msgid "Quick search"
@@ -3295,11 +3330,17 @@ msgstr "Przechowalnia"
 msgid "Bookmarks"
 msgstr "Zakładki"
 
-msgid "Plots"
-msgstr "Wykresy"
-
 msgid "My messages"
 msgstr "Moje wiadomości"
+
+msgid "Received"
+msgstr ""
+
+msgid "Sent"
+msgstr ""
+
+msgid "Deleted"
+msgstr ""
 
 msgid "API Keys"
 msgstr "Klucze API"
@@ -3404,9 +3445,6 @@ msgid "Forum posts"
 msgstr "Posty na froum"
 
 msgid "Written"
-msgstr ""
-
-msgid "Received"
 msgstr ""
 
 msgid "Cookie consent"
@@ -4289,6 +4327,24 @@ msgstr ""
 msgid "Click-and-drag zoom not available"
 msgstr ""
 
+msgid "Published"
+msgstr ""
+
+msgid "Views"
+msgstr "Wyświetleń"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "Likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 bookmarks'"
+msgid "Bookmarks"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 comments'"
+msgid "Comments"
+msgstr ""
+
 msgid "No gear yet."
 msgstr "Brak sprzętu"
 
@@ -4320,9 +4376,6 @@ msgstr "Naświetlanie"
 
 msgid "Date joined"
 msgstr "Dołączył"
-
-msgid "Views"
-msgstr "Wyświetleń"
 
 msgid "Comment of deleted image not shown."
 msgstr ""
@@ -4371,12 +4424,6 @@ msgstr "Czym jest AstroBin?"
 msgid "Gallery"
 msgstr "Galeria"
 
-msgid "Preferences"
-msgstr "Ustawienia"
-
-msgid "Avatar"
-msgstr "Avatar"
-
 msgid "Compose message"
 msgstr "Napisz wiadomość"
 
@@ -4392,20 +4439,17 @@ msgstr "Brak wyników"
 msgid "Searching"
 msgstr "Szuka"
 
-msgid "Messages"
-msgstr "Wiadomości"
-
 msgid "Participants"
 msgstr "Uczestnicy"
 
 msgid "Last message"
 msgstr "Ostatnia wiadomość"
 
+msgid "n/a"
+msgstr "Nie dotyczy"
+
 msgid "No messages"
 msgstr "Brak wiadomości"
-
-msgid "Back"
-msgstr "Wstecz"
 
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
@@ -4414,11 +4458,20 @@ msgstr "Konwersacja pomiędzy <a href=\"%(sender_url)s\">Tobą</a> i"
 msgid "Reply"
 msgstr "Odpowiedz"
 
+msgid "Undelete conversation"
+msgstr ""
+
 msgid "Delete conversation"
 msgstr "Usuń konwersację"
 
 msgid "Sending..."
 msgstr "Wysyłanie..."
+
+msgid "Do you really want to undelete this conversation?"
+msgstr ""
+
+msgid "Do you really want to delete this conversation?"
+msgstr ""
 
 msgid "Moderate"
 msgstr "Przeglądaj"
@@ -5275,10 +5328,6 @@ msgstr ""
 #, python-format
 msgid "%(user)s likes your image: %(url)s"
 msgstr "%(user)s polubił Twoje zdjęcie: %(url)s"
-
-#, python-format
-msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
-msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> lubi Twoje zdjęcie!</a>"
 
 #, python-format
 msgid "%(user)s likes your image: %(title)s"
@@ -6247,8 +6296,14 @@ msgstr "AstroBin nie ujawni Twojej lokalizacji innym użytkownikom."
 msgid "Import from Flickr"
 msgstr "Importuj z Flickr'a"
 
+msgid "Preferences"
+msgstr "Ustawienia"
+
 msgid "Privacy"
 msgstr ""
+
+msgid "Avatar"
+msgstr "Avatar"
 
 msgid "Change your username"
 msgstr ""
@@ -6362,6 +6417,9 @@ msgstr ""
 
 msgid "Liked images"
 msgstr ""
+
+msgid "Plots"
+msgstr "Wykresy"
 
 msgid "Following"
 msgstr "Obserwujesz"
@@ -6737,24 +6795,6 @@ msgstr ""
 msgid "Fill in one session, before adding more."
 msgstr "Wypełnij jedną sesję zanim dodasz kolejną."
 
-msgid "No date specified"
-msgstr "Data nieokreślona"
-
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr "Brak zdefiniowanych teleskopów, obiektywów lub kamer."
-
-msgid "Gear images"
-msgstr "Zdjęcia sprzętu"
-
-msgid "n/a"
-msgstr "Nie dotyczy"
-
-msgid "No subjects specified"
-msgstr "Nie podano żadnych obiektów"
-
-msgid "No acquisition details specified"
-msgstr "Brak szczegółów naświetlania"
-
 msgid "Last seen online"
 msgstr ""
 
@@ -6851,6 +6891,34 @@ msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid "Original image"
+#~ msgstr "Oryginalne zdjęcie"
+
+#~ msgid "Messages"
+#~ msgstr "Wiadomości"
+
+#~ msgid "Back"
+#~ msgstr "Wstecz"
+
+#~ msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> lubi Twoje zdjęcie!</a>"
+
+#~ msgid "No date specified"
+#~ msgstr "Data nieokreślona"
+
+#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+#~ msgstr "Brak zdefiniowanych teleskopów, obiektywów lub kamer."
+
+#~ msgid "Gear images"
+#~ msgstr "Zdjęcia sprzętu"
+
+#~ msgid "No subjects specified"
+#~ msgstr "Nie podano żadnych obiektów"
+
+#~ msgid "No acquisition details specified"
+#~ msgstr "Brak szczegółów naświetlania"
 
 #~ msgid ""
 #~ "%(user)s commented on your image! Check it out at the following url: <a "
