@@ -11,5 +11,6 @@ class LocaleMiddleware(MiddlewareParentClass):
         if is_authenticated(request.user) and \
                 hasattr(request.user, 'userprofile') and \
                 request.user.userprofile.language:
-            translation.activate(request.user.userprofile.language)
-            request.LANGUAGE_CODE = request.user.userprofile.language
+            lang: str = request.user.userprofile.language.lower()
+            translation.activate(lang)
+            request.LANGUAGE_CODE = lang
