@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-22 09:06+0000\n"
+"POT-Creation-Date: 2022-04-11 09:37+0000\n"
 "PO-Revision-Date: 2022-04-07 00:49+0300\n"
 "Last-Translator: DikovSky <dikovsky@me.com>\n"
 "Language-Team: DikovSky\n"
@@ -881,9 +881,6 @@ msgstr ""
 "зображення. Будь ласка, врахуйте: необхідно використовувати версії з тією "
 "самою шириною та висотою."
 
-msgid "Original image"
-msgstr "Оригінальне зображення"
-
 msgid "Opacity"
 msgstr "Непрозорість"
 
@@ -1080,6 +1077,9 @@ msgstr "Португальська"
 
 msgid "Greek"
 msgstr "Грецька"
+
+msgid "Ukrainian"
+msgstr "Українська"
 
 msgid "Russian"
 msgstr "Російська"
@@ -1753,6 +1753,14 @@ msgstr "ISO"
 msgid "Gain"
 msgstr "Посилення"
 
+msgid "f-number"
+msgstr ""
+
+msgid ""
+"If you used a camera lens, please specify the f-number (also known as f-"
+"ratio or f-stop) that you used for this acquisition session."
+msgstr ""
+
 msgid "Sensor cooling"
 msgstr "Охолодження сенсору"
 
@@ -1819,6 +1827,9 @@ msgstr "к/сек"
 
 msgid "Frames per second."
 msgstr "Кадрів в секунду."
+
+msgid "Exposure per frame"
+msgstr ""
 
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
@@ -2655,9 +2666,6 @@ msgstr "Таїтянська"
 msgid "Uighur / Uyghur"
 msgstr "Уйгур"
 
-msgid "Ukrainian"
-msgstr "Українська"
-
 msgid "Urdu"
 msgstr "Урду"
 
@@ -3123,6 +3131,9 @@ msgstr "Дизлайк"
 msgid "Browse images currently visible on the page."
 msgstr "Перегляньте зображення, які зараз видно на сторінці."
 
+msgid "Settings"
+msgstr "Налаштування"
+
 msgid "View page"
 msgstr "Переглянути сторінку"
 
@@ -3174,9 +3185,6 @@ msgstr "У Вас немає нових сповіщень."
 msgid "View all"
 msgstr "Дивитись все"
 
-msgid "Settings"
-msgstr "Налаштування"
-
 msgid "Mark all as read"
 msgstr "Позначити все прочитаним"
 
@@ -3204,6 +3212,9 @@ msgstr "Ні, дякую"
 
 msgid "Tell me more!"
 msgstr "Розкажи мені більше!"
+
+msgid "This feature is only offered at the AstroBin Ultimate membership level."
+msgstr ""
 
 msgid "Only group members can post in a group's forum."
 msgstr "Лише учасники групи можуть писати на форумі."
@@ -3286,6 +3297,12 @@ msgstr ""
 msgid "This operation cannot be undone!"
 msgstr "Цю операцію неможливо скасувати у майбутньому!"
 
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure"
+msgstr ""
+
 msgid "Report abuse"
 msgstr "Повідомити про зловживання"
 
@@ -3300,6 +3317,24 @@ msgstr ""
 
 msgid "Please specify a reason for this abuse report."
 msgstr "Будь ласка, укажіть причину повідомлення про порушення."
+
+msgid "Slideshow settings"
+msgstr ""
+
+msgid "Autoplay"
+msgstr ""
+
+msgid "Play speed"
+msgstr ""
+
+msgid "Share (current image)"
+msgstr ""
+
+msgid "Share (beginning)"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
 
 msgid "Quick search"
 msgstr "Швидкий пошук"
@@ -3411,11 +3446,17 @@ msgstr "Студія"
 msgid "Bookmarks"
 msgstr "Закладки"
 
-msgid "Plots"
-msgstr "Графіки"
-
 msgid "My messages"
 msgstr "Мої повідомлення"
+
+msgid "Received"
+msgstr "Отримано"
+
+msgid "Sent"
+msgstr ""
+
+msgid "Deleted"
+msgstr "Удалено"
 
 msgid "API Keys"
 msgstr "API-ключі"
@@ -3519,9 +3560,6 @@ msgstr "Повідомлення на форумі"
 
 msgid "Written"
 msgstr "Написано"
-
-msgid "Received"
-msgstr "Отримано"
 
 msgid "Cookie consent"
 msgstr "Згода на використання файлів cookie"
@@ -4494,6 +4532,24 @@ msgstr ""
 msgid "Click-and-drag zoom not available"
 msgstr "Наближення у \"клацніть і перетягніть\" недоступне"
 
+msgid "Published"
+msgstr ""
+
+msgid "Views"
+msgstr "Перегляди"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "Likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 bookmarks'"
+msgid "Bookmarks"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 comments'"
+msgid "Comments"
+msgstr ""
+
 msgid "No gear yet."
 msgstr "Обладнання ще немає."
 
@@ -4528,9 +4584,6 @@ msgstr "Інтеграція"
 
 msgid "Date joined"
 msgstr "Дата приєднання"
-
-msgid "Views"
-msgstr "Перегляди"
 
 msgid "Comment of deleted image not shown."
 msgstr "Коментар до віддаленого зображення не відображається."
@@ -4578,12 +4631,6 @@ msgstr "Що це за сайт?"
 msgid "Gallery"
 msgstr "Галерея"
 
-msgid "Preferences"
-msgstr "Налаштування"
-
-msgid "Avatar"
-msgstr "Аватар"
-
 msgid "Compose message"
 msgstr "Створити повідомлення"
 
@@ -4599,20 +4646,17 @@ msgstr "Немає результатів"
 msgid "Searching"
 msgstr "Шукаємо"
 
-msgid "Messages"
-msgstr "Повідомлення"
-
 msgid "Participants"
 msgstr "Учасники"
 
 msgid "Last message"
 msgstr "Останнє повідомлення"
 
+msgid "n/a"
+msgstr "н/д"
+
 msgid "No messages"
 msgstr "Повідомлень немає"
-
-msgid "Back"
-msgstr "Назад"
 
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
@@ -4621,11 +4665,20 @@ msgstr "Бесіда між <a href=\"%(sender_url)s\">Вами</a> і"
 msgid "Reply"
 msgstr "Відповідь"
 
+msgid "Undelete conversation"
+msgstr ""
+
 msgid "Delete conversation"
 msgstr "Видалити розмову"
 
 msgid "Sending..."
 msgstr "Надсилання…"
+
+msgid "Do you really want to undelete this conversation?"
+msgstr ""
+
+msgid "Do you really want to delete this conversation?"
+msgstr ""
 
 msgid "Moderate"
 msgstr "Модерувати"
@@ -5629,12 +5682,6 @@ msgstr ""
 #, python-format
 msgid "%(user)s likes your image: %(url)s"
 msgstr "%(user)s подобається Ваше зображення: %(url)s"
-
-#, python-format
-msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
-msgstr ""
-"<a href=\"%(url)s\"><strong>%(user)s</strong> подобається ваше зображення!</"
-"a>"
 
 #, python-format
 msgid "%(user)s likes your image: %(title)s"
@@ -6706,8 +6753,14 @@ msgstr ""
 msgid "Import from Flickr"
 msgstr "Імпорт із Flickr"
 
+msgid "Preferences"
+msgstr "Налаштування"
+
 msgid "Privacy"
 msgstr "Конфіденційність"
+
+msgid "Avatar"
+msgstr "Аватар"
 
 msgid "Change your username"
 msgstr "Змініть своє ім’я користувача"
@@ -6825,6 +6878,9 @@ msgstr "Кошик"
 
 msgid "Liked images"
 msgstr "Вподобані зображення"
+
+msgid "Plots"
+msgstr "Графіки"
 
 msgid "Following"
 msgstr "Підписки"
@@ -7214,24 +7270,6 @@ msgstr "Форму збережено. Нове розширене визнач�
 msgid "Fill in one session, before adding more."
 msgstr "Заповніть один сеанс, перш ніж додати інший."
 
-msgid "No date specified"
-msgstr "Дата не вказана"
-
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr "Телескопи, об’єктиви або камери для обробки зображень не вказані"
-
-msgid "Gear images"
-msgstr "Зображення обладнання"
-
-msgid "n/a"
-msgstr "н/д"
-
-msgid "No subjects specified"
-msgstr "Теми не вказані"
-
-msgid "No acquisition details specified"
-msgstr "Не вказано дані зйомки"
-
 msgid "Last seen online"
 msgstr "Востаннє був онлайн"
 
@@ -7331,6 +7369,35 @@ msgstr "Код рефералу (опціонально)"
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr "Вибачте, це ім’я користувача вже існує з іншим регістром."
+
+#~ msgid "Original image"
+#~ msgstr "Оригінальне зображення"
+
+#~ msgid "Messages"
+#~ msgstr "Повідомлення"
+
+#~ msgid "Back"
+#~ msgstr "Назад"
+
+#~ msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> подобається ваше зображення!"
+#~ "</a>"
+
+#~ msgid "No date specified"
+#~ msgstr "Дата не вказана"
+
+#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+#~ msgstr "Телескопи, об’єктиви або камери для обробки зображень не вказані"
+
+#~ msgid "Gear images"
+#~ msgstr "Зображення обладнання"
+
+#~ msgid "No subjects specified"
+#~ msgstr "Теми не вказані"
+
+#~ msgid "No acquisition details specified"
+#~ msgstr "Не вказано дані зйомки"
 
 #~ msgid "Timezone"
 #~ msgstr "Часовой пояс"
@@ -7954,9 +8021,6 @@ msgstr "Вибачте, це ім’я користувача вже існує 
 
 #~ msgid "Staging area"
 #~ msgstr "Студия"
-
-#~ msgid "Deleted"
-#~ msgstr "Удалено"
 
 #~ msgid "Recover all"
 #~ msgstr "Восстановить всё"
