@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-22 09:06+0000\n"
+"POT-Creation-Date: 2022-04-11 08:17+0000\n"
 "PO-Revision-Date: 2022-02-22 10:04+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Simplified Chinese\n"
@@ -870,9 +870,6 @@ msgstr ""
 "选择当鼠标悬停在此作品上时，将显示的内容。请注意：只有修订作品与原始作品具有"
 "相同宽度和高度时可用。"
 
-msgid "Original image"
-msgstr "原始作品"
-
 msgid "Opacity"
 msgstr "透明度"
 
@@ -1060,6 +1057,9 @@ msgstr "葡萄要语"
 
 msgid "Greek"
 msgstr "希腊语"
+
+msgid "Ukrainian"
+msgstr "乌克兰语"
 
 msgid "Russian"
 msgstr "俄国的"
@@ -1714,6 +1714,14 @@ msgstr "ISO感光度"
 msgid "Gain"
 msgstr "增益"
 
+msgid "f-number"
+msgstr ""
+
+msgid ""
+"If you used a camera lens, please specify the f-number (also known as f-"
+"ratio or f-stop) that you used for this acquisition session."
+msgstr ""
+
 msgid "Sensor cooling"
 msgstr "芯片制冷"
 
@@ -1780,6 +1788,9 @@ msgstr "帧率FPS"
 
 msgid "Frames per second."
 msgstr "每秒帧数"
+
+msgid "Exposure per frame"
+msgstr ""
 
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
@@ -2590,9 +2601,6 @@ msgstr "塔希提語"
 msgid "Uighur / Uyghur"
 msgstr "维吾尔语"
 
-msgid "Ukrainian"
-msgstr "乌克兰语"
-
 msgid "Urdu"
 msgstr "乌尔都语"
 
@@ -3025,6 +3033,9 @@ msgstr ""
 msgid "Browse images currently visible on the page."
 msgstr ""
 
+msgid "Settings"
+msgstr "设置"
+
 msgid "View page"
 msgstr "查看页面"
 
@@ -3076,9 +3087,6 @@ msgstr ""
 msgid "View all"
 msgstr "查看全部"
 
-msgid "Settings"
-msgstr "设置"
-
 msgid "Mark all as read"
 msgstr "全部标记为已读"
 
@@ -3104,6 +3112,9 @@ msgstr "不需要，谢谢！"
 
 msgid "Tell me more!"
 msgstr "告诉我！"
+
+msgid "This feature is only offered at the AstroBin Ultimate membership level."
+msgstr ""
 
 msgid "Only group members can post in a group's forum."
 msgstr ""
@@ -3174,6 +3185,12 @@ msgstr ""
 msgid "This operation cannot be undone!"
 msgstr ""
 
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure"
+msgstr ""
+
 msgid "Report abuse"
 msgstr ""
 
@@ -3184,6 +3201,24 @@ msgid ""
 msgstr ""
 
 msgid "Please specify a reason for this abuse report."
+msgstr ""
+
+msgid "Slideshow settings"
+msgstr ""
+
+msgid "Autoplay"
+msgstr ""
+
+msgid "Play speed"
+msgstr ""
+
+msgid "Share (current image)"
+msgstr ""
+
+msgid "Share (beginning)"
+msgstr ""
+
+msgid "Apply"
 msgstr ""
 
 msgid "Quick search"
@@ -3294,11 +3329,17 @@ msgstr "暂存区"
 msgid "Bookmarks"
 msgstr "收藏夹"
 
-msgid "Plots"
-msgstr "统计"
-
 msgid "My messages"
 msgstr "我的消息"
+
+msgid "Received"
+msgstr "收到"
+
+msgid "Sent"
+msgstr ""
+
+msgid "Deleted"
+msgstr "删除"
 
 msgid "API Keys"
 msgstr "API Keys"
@@ -3400,9 +3441,6 @@ msgstr "论坛帖子"
 
 msgid "Written"
 msgstr "发表"
-
-msgid "Received"
-msgstr "收到"
 
 msgid "Cookie consent"
 msgstr "Cookie许可"
@@ -4289,6 +4327,24 @@ msgstr ""
 msgid "Click-and-drag zoom not available"
 msgstr ""
 
+msgid "Published"
+msgstr ""
+
+msgid "Views"
+msgstr "视图"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "Likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 bookmarks'"
+msgid "Bookmarks"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 comments'"
+msgid "Comments"
+msgstr ""
+
 msgid "No gear yet."
 msgstr "暂无设备信息。"
 
@@ -4322,9 +4378,6 @@ msgstr "累计曝光"
 
 msgid "Date joined"
 msgstr "日期已被加入"
-
-msgid "Views"
-msgstr "视图"
 
 msgid "Comment of deleted image not shown."
 msgstr "已删除作品的评论未显示。"
@@ -4371,12 +4424,6 @@ msgstr "了解 AstroBin"
 msgid "Gallery"
 msgstr "图库"
 
-msgid "Preferences"
-msgstr "首选项"
-
-msgid "Avatar"
-msgstr "头像"
-
 msgid "Compose message"
 msgstr "写消息"
 
@@ -4392,20 +4439,17 @@ msgstr "无结果"
 msgid "Searching"
 msgstr "正在查找"
 
-msgid "Messages"
-msgstr "消息"
-
 msgid "Participants"
 msgstr "参与者"
 
 msgid "Last message"
 msgstr "最后一条消息"
 
+msgid "n/a"
+msgstr "无"
+
 msgid "No messages"
 msgstr "无消息"
-
-msgid "Back"
-msgstr "返回"
 
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
@@ -4414,11 +4458,20 @@ msgstr "用户 <a href=\"%(sender_url)s\">和您</a> 的对话"
 msgid "Reply"
 msgstr "回复"
 
+msgid "Undelete conversation"
+msgstr ""
+
 msgid "Delete conversation"
 msgstr "删除对话"
 
 msgid "Sending..."
 msgstr "正在发送..."
+
+msgid "Do you really want to undelete this conversation?"
+msgstr ""
+
+msgid "Do you really want to delete this conversation?"
+msgstr ""
 
 msgid "Moderate"
 msgstr "有限制的"
@@ -5298,10 +5351,6 @@ msgstr ""
 #, python-format
 msgid "%(user)s likes your image: %(url)s"
 msgstr "%(user)s 赞了您的作品： %(url)s"
-
-#, python-format
-msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
-msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> 赞了您的作品！</a>"
 
 #, python-format
 msgid "%(user)s likes your image: %(title)s"
@@ -6297,8 +6346,14 @@ msgstr "AstroBin 不会和其他用户共享您的所在地详细信息。"
 msgid "Import from Flickr"
 msgstr "从Flicker导入"
 
+msgid "Preferences"
+msgstr "首选项"
+
 msgid "Privacy"
 msgstr ""
+
+msgid "Avatar"
+msgstr "头像"
 
 msgid "Change your username"
 msgstr "修改您的用户名"
@@ -6407,6 +6462,9 @@ msgstr "回收站"
 
 msgid "Liked images"
 msgstr "赞的作品"
+
+msgid "Plots"
+msgstr "统计"
 
 msgid "Following"
 msgstr "关注的人"
@@ -6776,24 +6834,6 @@ msgstr "表单已保存。即将开始新的高级解析。"
 msgid "Fill in one session, before adding more."
 msgstr "填完此字段后再添加新的。"
 
-msgid "No date specified"
-msgstr "未指定日期"
-
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr "未指定望远镜/镜头或主相机"
-
-msgid "Gear images"
-msgstr "设备照"
-
-msgid "n/a"
-msgstr "无"
-
-msgid "No subjects specified"
-msgstr "未指定主题"
-
-msgid "No acquisition details specified"
-msgstr "未指定拍摄细节"
-
 msgid "Last seen online"
 msgstr ""
 
@@ -6890,6 +6930,33 @@ msgstr "邀请码（可选）"
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr "抱歉，用户名已经存在，大小写不同。"
+
+#~ msgid "Original image"
+#~ msgstr "原始作品"
+
+#~ msgid "Messages"
+#~ msgstr "消息"
+
+#~ msgid "Back"
+#~ msgstr "返回"
+
+#~ msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+#~ msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> 赞了您的作品！</a>"
+
+#~ msgid "No date specified"
+#~ msgstr "未指定日期"
+
+#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+#~ msgstr "未指定望远镜/镜头或主相机"
+
+#~ msgid "Gear images"
+#~ msgstr "设备照"
+
+#~ msgid "No subjects specified"
+#~ msgstr "未指定主题"
+
+#~ msgid "No acquisition details specified"
+#~ msgstr "未指定拍摄细节"
 
 #~ msgid "Timezone"
 #~ msgstr "时区"
@@ -7481,9 +7548,6 @@ msgstr "抱歉，用户名已经存在，大小写不同。"
 
 #~ msgid "Staging area"
 #~ msgstr "暂存区"
-
-#~ msgid "Deleted"
-#~ msgstr "删除"
 
 #~ msgid "Recover all"
 #~ msgstr "全部恢复"

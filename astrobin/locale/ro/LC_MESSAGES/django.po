@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-22 09:06+0000\n"
+"POT-Creation-Date: 2022-04-11 08:17+0000\n"
 "PO-Revision-Date: 2013-11-11 19:27+0000\n"
 "Last-Translator: gamangabriel <gamangabriel@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -869,9 +869,6 @@ msgid ""
 "one can be considered."
 msgstr ""
 
-msgid "Original image"
-msgstr ""
-
 msgid "Opacity"
 msgstr "Opacitate"
 
@@ -1070,6 +1067,9 @@ msgstr ""
 
 msgid "Greek"
 msgstr "Greacă"
+
+msgid "Ukrainian"
+msgstr ""
 
 msgid "Russian"
 msgstr ""
@@ -1729,6 +1729,14 @@ msgstr "ISO"
 msgid "Gain"
 msgstr "Câștig"
 
+msgid "f-number"
+msgstr ""
+
+msgid ""
+"If you used a camera lens, please specify the f-number (also known as f-"
+"ratio or f-stop) that you used for this acquisition session."
+msgstr ""
+
 msgid "Sensor cooling"
 msgstr "Răcirea senzorului"
 
@@ -1795,6 +1803,9 @@ msgstr "FPS"
 
 msgid "Frames per second."
 msgstr "Cadre pe secundă."
+
+msgid "Exposure per frame"
+msgstr ""
 
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
@@ -2601,9 +2612,6 @@ msgstr ""
 msgid "Uighur / Uyghur"
 msgstr ""
 
-msgid "Ukrainian"
-msgstr ""
-
 msgid "Urdu"
 msgstr ""
 
@@ -3022,6 +3030,9 @@ msgstr ""
 msgid "Browse images currently visible on the page."
 msgstr ""
 
+msgid "Settings"
+msgstr ""
+
 msgid "View page"
 msgstr "Vizualizati pagina"
 
@@ -3073,9 +3084,6 @@ msgstr ""
 msgid "View all"
 msgstr ""
 
-msgid "Settings"
-msgstr ""
-
 msgid "Mark all as read"
 msgstr ""
 
@@ -3100,6 +3108,9 @@ msgid "No, thanks"
 msgstr ""
 
 msgid "Tell me more!"
+msgstr ""
+
+msgid "This feature is only offered at the AstroBin Ultimate membership level."
 msgstr ""
 
 msgid "Only group members can post in a group's forum."
@@ -3167,6 +3178,12 @@ msgstr ""
 msgid "This operation cannot be undone!"
 msgstr ""
 
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure"
+msgstr ""
+
 msgid "Report abuse"
 msgstr ""
 
@@ -3177,6 +3194,24 @@ msgid ""
 msgstr ""
 
 msgid "Please specify a reason for this abuse report."
+msgstr ""
+
+msgid "Slideshow settings"
+msgstr ""
+
+msgid "Autoplay"
+msgstr ""
+
+msgid "Play speed"
+msgstr ""
+
+msgid "Share (current image)"
+msgstr ""
+
+msgid "Share (beginning)"
+msgstr ""
+
+msgid "Apply"
 msgstr ""
 
 msgid "Quick search"
@@ -3283,11 +3318,17 @@ msgstr ""
 msgid "Bookmarks"
 msgstr ""
 
-msgid "Plots"
-msgstr ""
-
 msgid "My messages"
 msgstr "Mesajele mele"
+
+msgid "Received"
+msgstr ""
+
+msgid "Sent"
+msgstr ""
+
+msgid "Deleted"
+msgstr ""
 
 msgid "API Keys"
 msgstr "Chei API"
@@ -3374,9 +3415,6 @@ msgid "Forum posts"
 msgstr ""
 
 msgid "Written"
-msgstr ""
-
-msgid "Received"
 msgstr ""
 
 msgid "Cookie consent"
@@ -4231,6 +4269,24 @@ msgstr ""
 msgid "Click-and-drag zoom not available"
 msgstr ""
 
+msgid "Published"
+msgstr ""
+
+msgid "Views"
+msgstr "Vizionari"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "Likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 bookmarks'"
+msgid "Bookmarks"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 comments'"
+msgid "Comments"
+msgstr ""
+
 msgid "No gear yet."
 msgstr "Fara echipament, inca."
 
@@ -4262,9 +4318,6 @@ msgstr "Integrare"
 
 msgid "Date joined"
 msgstr "Data cand a intrat"
-
-msgid "Views"
-msgstr "Vizionari"
 
 msgid "Comment of deleted image not shown."
 msgstr ""
@@ -4311,12 +4364,6 @@ msgstr "Ce este acest site?"
 msgid "Gallery"
 msgstr "Galerie"
 
-msgid "Preferences"
-msgstr "Preferințe"
-
-msgid "Avatar"
-msgstr "Avatar"
-
 msgid "Compose message"
 msgstr "Compune mesaj"
 
@@ -4332,20 +4379,17 @@ msgstr "Nu sunt rezultate"
 msgid "Searching"
 msgstr "Căutare"
 
-msgid "Messages"
-msgstr "Mesaje"
-
 msgid "Participants"
 msgstr ""
 
 msgid "Last message"
 msgstr ""
 
+msgid "n/a"
+msgstr ""
+
 msgid "No messages"
 msgstr "Nu sunt mesaje"
-
-msgid "Back"
-msgstr ""
 
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
@@ -4354,11 +4398,20 @@ msgstr ""
 msgid "Reply"
 msgstr "Raspuns"
 
+msgid "Undelete conversation"
+msgstr ""
+
 msgid "Delete conversation"
 msgstr "Stergeti conversatia"
 
 msgid "Sending..."
 msgstr "Se trimite..."
+
+msgid "Do you really want to undelete this conversation?"
+msgstr ""
+
+msgid "Do you really want to delete this conversation?"
+msgstr ""
 
 msgid "Moderate"
 msgstr ""
@@ -5162,10 +5215,6 @@ msgstr ""
 
 #, python-format
 msgid "%(user)s likes your image: %(url)s"
-msgstr ""
-
-#, python-format
-msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
 msgstr ""
 
 #, python-format
@@ -6102,8 +6151,14 @@ msgstr "AstroBin nu va împărtăşi locaţia ta altor utilizatori."
 msgid "Import from Flickr"
 msgstr "Importa din Flickr"
 
+msgid "Preferences"
+msgstr "Preferințe"
+
 msgid "Privacy"
 msgstr ""
+
+msgid "Avatar"
+msgstr "Avatar"
 
 msgid "Change your username"
 msgstr ""
@@ -6218,6 +6273,9 @@ msgid "Trash"
 msgstr ""
 
 msgid "Liked images"
+msgstr ""
+
+msgid "Plots"
 msgstr ""
 
 msgid "Following"
@@ -6590,26 +6648,6 @@ msgstr ""
 msgid "Fill in one session, before adding more."
 msgstr "Completati o sesiune inainte de a mai adauga ceva."
 
-msgid "No date specified"
-msgstr "Nici o dată specificată"
-
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr ""
-"Nu s-a specificat nici un telescop, lentila sau camera pentru producerea "
-"imaginii."
-
-msgid "Gear images"
-msgstr "Imagini cu echipamentul"
-
-msgid "n/a"
-msgstr ""
-
-msgid "No subjects specified"
-msgstr "Nu sunt subiecte specificate"
-
-msgid "No acquisition details specified"
-msgstr "N-ati specificat detaliile de achizitie"
-
 msgid "Last seen online"
 msgstr ""
 
@@ -6702,6 +6740,26 @@ msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid "Messages"
+#~ msgstr "Mesaje"
+
+#~ msgid "No date specified"
+#~ msgstr "Nici o dată specificată"
+
+#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+#~ msgstr ""
+#~ "Nu s-a specificat nici un telescop, lentila sau camera pentru producerea "
+#~ "imaginii."
+
+#~ msgid "Gear images"
+#~ msgstr "Imagini cu echipamentul"
+
+#~ msgid "No subjects specified"
+#~ msgstr "Nu sunt subiecte specificate"
+
+#~ msgid "No acquisition details specified"
+#~ msgstr "N-ati specificat detaliile de achizitie"
 
 #~ msgid "%(user)s commented on your image!"
 #~ msgstr "%(user)s a comentat imaginea ta!"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-22 09:06+0000\n"
+"POT-Creation-Date: 2022-04-11 08:17+0000\n"
 "PO-Revision-Date: 2022-02-22 10:04+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Spanish\n"
@@ -880,9 +880,6 @@ msgstr ""
 "imagen. Tenga en cuenta: sólo las revisiones con el mismo ancho y alto que "
 "esta se pueden considerar."
 
-msgid "Original image"
-msgstr "Imagen original"
-
 msgid "Opacity"
 msgstr "Opacidad"
 
@@ -1080,6 +1077,9 @@ msgstr "Portugués"
 
 msgid "Greek"
 msgstr "Griego"
+
+msgid "Ukrainian"
+msgstr ""
 
 msgid "Russian"
 msgstr "Ruso"
@@ -1751,6 +1751,14 @@ msgstr "ISO"
 msgid "Gain"
 msgstr "Ganancia"
 
+msgid "f-number"
+msgstr ""
+
+msgid ""
+"If you used a camera lens, please specify the f-number (also known as f-"
+"ratio or f-stop) that you used for this acquisition session."
+msgstr ""
+
 msgid "Sensor cooling"
 msgstr "Enfriado del sensor"
 
@@ -1817,6 +1825,9 @@ msgstr "FPS"
 
 msgid "Frames per second."
 msgstr "Cuadros por segundo."
+
+msgid "Exposure per frame"
+msgstr ""
 
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
@@ -2639,9 +2650,6 @@ msgstr ""
 msgid "Uighur / Uyghur"
 msgstr ""
 
-msgid "Ukrainian"
-msgstr ""
-
 msgid "Urdu"
 msgstr ""
 
@@ -3070,6 +3078,9 @@ msgstr ""
 msgid "Browse images currently visible on the page."
 msgstr ""
 
+msgid "Settings"
+msgstr "Configuración"
+
 msgid "View page"
 msgstr "Ver página"
 
@@ -3121,9 +3132,6 @@ msgstr ""
 msgid "View all"
 msgstr "Ver todas"
 
-msgid "Settings"
-msgstr "Configuración"
-
 msgid "Mark all as read"
 msgstr "Marcar todos como leídos"
 
@@ -3151,6 +3159,9 @@ msgstr "No, gracias"
 
 msgid "Tell me more!"
 msgstr "¡Dime más!"
+
+msgid "This feature is only offered at the AstroBin Ultimate membership level."
+msgstr ""
 
 msgid "Only group members can post in a group's forum."
 msgstr ""
@@ -3223,6 +3234,12 @@ msgstr ""
 msgid "This operation cannot be undone!"
 msgstr ""
 
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure"
+msgstr ""
+
 msgid "Report abuse"
 msgstr ""
 
@@ -3233,6 +3250,24 @@ msgid ""
 msgstr ""
 
 msgid "Please specify a reason for this abuse report."
+msgstr ""
+
+msgid "Slideshow settings"
+msgstr ""
+
+msgid "Autoplay"
+msgstr ""
+
+msgid "Play speed"
+msgstr ""
+
+msgid "Share (current image)"
+msgstr ""
+
+msgid "Share (beginning)"
+msgstr ""
+
+msgid "Apply"
 msgstr ""
 
 msgid "Quick search"
@@ -3339,11 +3374,17 @@ msgstr "Área de Pruebas"
 msgid "Bookmarks"
 msgstr "Favoritos"
 
-msgid "Plots"
-msgstr "Gráficas"
-
 msgid "My messages"
 msgstr "Mis mensajes"
+
+msgid "Received"
+msgstr ""
+
+msgid "Sent"
+msgstr ""
+
+msgid "Deleted"
+msgstr ""
 
 msgid "API Keys"
 msgstr "Llaves API"
@@ -3450,9 +3491,6 @@ msgid "Forum posts"
 msgstr "Entradas del forum"
 
 msgid "Written"
-msgstr ""
-
-msgid "Received"
 msgstr ""
 
 msgid "Cookie consent"
@@ -4361,6 +4399,24 @@ msgstr ""
 msgid "Click-and-drag zoom not available"
 msgstr ""
 
+msgid "Published"
+msgstr ""
+
+msgid "Views"
+msgstr "Número de visitas"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "Likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 bookmarks'"
+msgid "Bookmarks"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 comments'"
+msgid "Comments"
+msgstr ""
+
 msgid "No gear yet."
 msgstr "No hay instrumental aun."
 
@@ -4392,9 +4448,6 @@ msgstr "Tiempo de integración"
 
 msgid "Date joined"
 msgstr "Fecha anexada"
-
-msgid "Views"
-msgstr "Número de visitas"
 
 msgid "Comment of deleted image not shown."
 msgstr "Comentario no mostrado de imagen eliminada."
@@ -4443,12 +4496,6 @@ msgstr "¿Qué es este sitio?"
 msgid "Gallery"
 msgstr "Galería"
 
-msgid "Preferences"
-msgstr "Preferencias"
-
-msgid "Avatar"
-msgstr "Avatar"
-
 msgid "Compose message"
 msgstr "Redacta un mensaje"
 
@@ -4464,20 +4511,17 @@ msgstr "Sin resultados"
 msgid "Searching"
 msgstr "Buscando"
 
-msgid "Messages"
-msgstr "Mensajes"
-
 msgid "Participants"
 msgstr "Participantes"
 
 msgid "Last message"
 msgstr "Último mensaje"
 
+msgid "n/a"
+msgstr "n/a"
+
 msgid "No messages"
 msgstr "Sin mensajes"
-
-msgid "Back"
-msgstr "Anterior"
 
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
@@ -4486,11 +4530,20 @@ msgstr "Una conversación entre <a href=\"%(sender_url)s\">tí</a> y"
 msgid "Reply"
 msgstr "Responder"
 
+msgid "Undelete conversation"
+msgstr ""
+
 msgid "Delete conversation"
 msgstr "Borrar conversación"
 
 msgid "Sending..."
 msgstr "Enviando..."
+
+msgid "Do you really want to undelete this conversation?"
+msgstr ""
+
+msgid "Do you really want to delete this conversation?"
+msgstr ""
 
 msgid "Moderate"
 msgstr "Moderado"
@@ -5382,10 +5435,6 @@ msgstr ""
 #, python-format
 msgid "%(user)s likes your image: %(url)s"
 msgstr "%(user)s ha votado tu imagen como Me Gusta: %(url)s"
-
-#, python-format
-msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
-msgstr "<a href=\"%(url)s\"><strong>%(user)s</strong> ha votado tu imagen!</a>"
 
 #, python-format
 msgid "%(user)s likes your image: %(title)s"
@@ -6386,8 +6435,14 @@ msgstr ""
 msgid "Import from Flickr"
 msgstr "Importar desde Flickr"
 
+msgid "Preferences"
+msgstr "Preferencias"
+
 msgid "Privacy"
 msgstr ""
+
+msgid "Avatar"
+msgstr "Avatar"
 
 msgid "Change your username"
 msgstr ""
@@ -6504,6 +6559,9 @@ msgstr "Papelera"
 
 msgid "Liked images"
 msgstr "Imágenes que te gustaron"
+
+msgid "Plots"
+msgstr "Gráficas"
 
 msgid "Following"
 msgstr "Siguiendo"
@@ -6886,25 +6944,6 @@ msgstr ""
 msgid "Fill in one session, before adding more."
 msgstr "Completar una sesión antes de añadir más."
 
-msgid "No date specified"
-msgstr "Sin fecha especificada"
-
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr ""
-"No hay telescopios u objetivos, o no hay cámaras fotográficas especificadas"
-
-msgid "Gear images"
-msgstr "Imágenes de equipamiento"
-
-msgid "n/a"
-msgstr "n/a"
-
-msgid "No subjects specified"
-msgstr "No hay objetos especificados"
-
-msgid "No acquisition details specified"
-msgstr "No hay detalles de adquisición especificados"
-
 msgid "Last seen online"
 msgstr ""
 
@@ -7003,6 +7042,36 @@ msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid "Original image"
+#~ msgstr "Imagen original"
+
+#~ msgid "Messages"
+#~ msgstr "Mensajes"
+
+#~ msgid "Back"
+#~ msgstr "Anterior"
+
+#~ msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
+#~ msgstr ""
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> ha votado tu imagen!</a>"
+
+#~ msgid "No date specified"
+#~ msgstr "Sin fecha especificada"
+
+#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+#~ msgstr ""
+#~ "No hay telescopios u objetivos, o no hay cámaras fotográficas "
+#~ "especificadas"
+
+#~ msgid "Gear images"
+#~ msgstr "Imágenes de equipamiento"
+
+#~ msgid "No subjects specified"
+#~ msgstr "No hay objetos especificados"
+
+#~ msgid "No acquisition details specified"
+#~ msgstr "No hay detalles de adquisición especificados"
 
 #~ msgid "Timezone"
 #~ msgstr "Zona Horaria"

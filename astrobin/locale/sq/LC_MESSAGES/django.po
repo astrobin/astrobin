@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-22 09:06+0000\n"
+"POT-Creation-Date: 2022-04-11 08:17+0000\n"
 "PO-Revision-Date: 2015-01-20 21:30+0000\n"
 "Last-Translator: jordi <jordi.inyigo@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -869,9 +869,6 @@ msgid ""
 "one can be considered."
 msgstr ""
 
-msgid "Original image"
-msgstr ""
-
 msgid "Opacity"
 msgstr "Patejdukshmeria"
 
@@ -1066,6 +1063,9 @@ msgid "Portuguese"
 msgstr ""
 
 msgid "Greek"
+msgstr ""
+
+msgid "Ukrainian"
 msgstr ""
 
 msgid "Russian"
@@ -1718,6 +1718,14 @@ msgstr "ISO"
 msgid "Gain"
 msgstr "Permiresimi i drites"
 
+msgid "f-number"
+msgstr ""
+
+msgid ""
+"If you used a camera lens, please specify the f-number (also known as f-"
+"ratio or f-stop) that you used for this acquisition session."
+msgstr ""
+
 msgid "Sensor cooling"
 msgstr "Ftohja e sensorit"
 
@@ -1784,6 +1792,9 @@ msgstr "FPS"
 
 msgid "Frames per second."
 msgstr "Foto per sekond."
+
+msgid "Exposure per frame"
+msgstr ""
 
 msgid ""
 "The focal length of the whole optical train, including barlow lenses or "
@@ -2587,9 +2598,6 @@ msgstr ""
 msgid "Uighur / Uyghur"
 msgstr ""
 
-msgid "Ukrainian"
-msgstr ""
-
 msgid "Urdu"
 msgstr ""
 
@@ -3000,6 +3008,9 @@ msgstr ""
 msgid "Browse images currently visible on the page."
 msgstr ""
 
+msgid "Settings"
+msgstr ""
+
 msgid "View page"
 msgstr ""
 
@@ -3051,9 +3062,6 @@ msgstr ""
 msgid "View all"
 msgstr ""
 
-msgid "Settings"
-msgstr ""
-
 msgid "Mark all as read"
 msgstr ""
 
@@ -3078,6 +3086,9 @@ msgid "No, thanks"
 msgstr ""
 
 msgid "Tell me more!"
+msgstr ""
+
+msgid "This feature is only offered at the AstroBin Ultimate membership level."
 msgstr ""
 
 msgid "Only group members can post in a group's forum."
@@ -3145,6 +3156,12 @@ msgstr ""
 msgid "This operation cannot be undone!"
 msgstr ""
 
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Yes, I am sure"
+msgstr ""
+
 msgid "Report abuse"
 msgstr ""
 
@@ -3155,6 +3172,24 @@ msgid ""
 msgstr ""
 
 msgid "Please specify a reason for this abuse report."
+msgstr ""
+
+msgid "Slideshow settings"
+msgstr ""
+
+msgid "Autoplay"
+msgstr ""
+
+msgid "Play speed"
+msgstr ""
+
+msgid "Share (current image)"
+msgstr ""
+
+msgid "Share (beginning)"
+msgstr ""
+
+msgid "Apply"
 msgstr ""
 
 msgid "Quick search"
@@ -3261,10 +3296,16 @@ msgstr "Zona Punës"
 msgid "Bookmarks"
 msgstr ""
 
-msgid "Plots"
-msgstr "Grafiket"
-
 msgid "My messages"
+msgstr ""
+
+msgid "Received"
+msgstr ""
+
+msgid "Sent"
+msgstr ""
+
+msgid "Deleted"
 msgstr ""
 
 msgid "API Keys"
@@ -3352,9 +3393,6 @@ msgid "Forum posts"
 msgstr ""
 
 msgid "Written"
-msgstr ""
-
-msgid "Received"
 msgstr ""
 
 msgid "Cookie consent"
@@ -4216,6 +4254,24 @@ msgstr ""
 msgid "Click-and-drag zoom not available"
 msgstr ""
 
+msgid "Published"
+msgstr ""
+
+msgid "Views"
+msgstr "Shikime"
+
+msgctxt "Noun, e.g. 'This element has 10 likes'"
+msgid "Likes"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 bookmarks'"
+msgid "Bookmarks"
+msgstr ""
+
+msgctxt "Noun, e.g. 'This element has 10 comments'"
+msgid "Comments"
+msgstr ""
+
 msgid "No gear yet."
 msgstr ""
 
@@ -4247,9 +4303,6 @@ msgstr "Integrimi"
 
 msgid "Date joined"
 msgstr ""
-
-msgid "Views"
-msgstr "Shikime"
 
 msgid "Comment of deleted image not shown."
 msgstr ""
@@ -4296,12 +4349,6 @@ msgstr "Cfarë është ky sit?"
 msgid "Gallery"
 msgstr "Galeri"
 
-msgid "Preferences"
-msgstr "Preferencat"
-
-msgid "Avatar"
-msgstr ""
-
 msgid "Compose message"
 msgstr "Shkruani meseazh"
 
@@ -4317,20 +4364,17 @@ msgstr "Asnje rezultat"
 msgid "Searching"
 msgstr "Duke kerkuar"
 
-msgid "Messages"
-msgstr "Mesazhe"
-
 msgid "Participants"
 msgstr ""
 
 msgid "Last message"
 msgstr ""
 
+msgid "n/a"
+msgstr ""
+
 msgid "No messages"
 msgstr "Asnje mesazh"
-
-msgid "Back"
-msgstr ""
 
 #, python-format
 msgid "A conversation between <a href=\"%(sender_url)s\">you</a> and"
@@ -4339,11 +4383,20 @@ msgstr "Nje bisede midis <a href=\"%(sender_url)s\">juve</a> dhe"
 msgid "Reply"
 msgstr "Pergjigju"
 
+msgid "Undelete conversation"
+msgstr ""
+
 msgid "Delete conversation"
 msgstr "Fshini biiseden"
 
 msgid "Sending..."
 msgstr "Duke derguar..."
+
+msgid "Do you really want to undelete this conversation?"
+msgstr ""
+
+msgid "Do you really want to delete this conversation?"
+msgstr ""
 
 msgid "Moderate"
 msgstr ""
@@ -5149,10 +5202,6 @@ msgstr ""
 
 #, python-format
 msgid "%(user)s likes your image: %(url)s"
-msgstr ""
-
-#, python-format
-msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
 msgstr ""
 
 #, python-format
@@ -6076,7 +6125,13 @@ msgstr "AstroBin nuk do shperndaje vendndodhjet e juaja me perdorues te tjere."
 msgid "Import from Flickr"
 msgstr "Imposto nga Flickr"
 
+msgid "Preferences"
+msgstr "Preferencat"
+
 msgid "Privacy"
+msgstr ""
+
+msgid "Avatar"
 msgstr ""
 
 msgid "Change your username"
@@ -6190,6 +6245,9 @@ msgstr ""
 
 msgid "Liked images"
 msgstr ""
+
+msgid "Plots"
+msgstr "Grafiket"
 
 msgid "Following"
 msgstr ""
@@ -6557,25 +6615,6 @@ msgstr ""
 msgid "Fill in one session, before adding more."
 msgstr "Ploteso ne nje seance, para se te shtoni me shume."
 
-msgid "No date specified"
-msgstr "Asnje datë e specifikuar"
-
-msgid "No imaging telescopes or lenses, or no imaging cameras specified"
-msgstr ""
-"Asnje teleskop per foto apo lente, ose asnje aparat apo kamer e specifikuar"
-
-msgid "Gear images"
-msgstr ""
-
-msgid "n/a"
-msgstr ""
-
-msgid "No subjects specified"
-msgstr "Asnje subjekt i specifikuar"
-
-msgid "No acquisition details specified"
-msgstr "Asnje detaj filmimi i specifikuar"
-
 msgid "Last seen online"
 msgstr ""
 
@@ -6668,6 +6707,23 @@ msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid "Messages"
+#~ msgstr "Mesazhe"
+
+#~ msgid "No date specified"
+#~ msgstr "Asnje datë e specifikuar"
+
+#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+#~ msgstr ""
+#~ "Asnje teleskop per foto apo lente, ose asnje aparat apo kamer e "
+#~ "specifikuar"
+
+#~ msgid "No subjects specified"
+#~ msgstr "Asnje subjekt i specifikuar"
+
+#~ msgid "No acquisition details specified"
+#~ msgstr "Asnje detaj filmimi i specifikuar"
 
 #~ msgid ""
 #~ "%(user)s commented on your image! Check it out at the following url: "

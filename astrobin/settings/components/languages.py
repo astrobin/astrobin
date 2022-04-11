@@ -19,6 +19,7 @@ LANGUAGES = (
     ('pl', gettext('Polish')),
     ('pt', gettext('Portuguese')),
     ('el', gettext('Greek')),
+    ('uk', gettext('Ukrainian')),
     ('ru', gettext('Russian')),
     ('ar', gettext('Arabic')),
     ('ja', gettext('Japanese')),

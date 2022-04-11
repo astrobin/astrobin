@@ -661,6 +661,7 @@ def get_other_languages():
         'ja',
         'nl',
         'pl',
+        'uk',
         'ru',
         'sq',
         'tr',
@@ -687,6 +688,7 @@ def get_language_name(language_code):
         'pl': 'Polski',
         'pt': 'Português',
         'pt-br': 'Português',
+        'uk': 'Українська',
         'ru': 'Русский',
         'sq': 'Shqipe',
         'tr': 'Türkçe',
@@ -722,6 +724,7 @@ def get_language_code_display(language_code):
         'ru': 'RU',
         'sq': 'SQ',
         'tr': 'TR',
+        'uk': 'UK',
         'zh-hans': 'ZH (CN)',
     }
 
