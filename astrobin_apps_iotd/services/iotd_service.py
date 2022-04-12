@@ -241,13 +241,6 @@ class IotdService:
                 continue
 
     def update_submission_queues(self):
-        def _can_add(image: Image) -> bool:
-            # Since the introduction of the 2020 plans, Free users cannot participate in the IOTD/TP.
-            valid_subscription = PremiumService(image.user).get_valid_usersubscription()
-            user_is_free: bool = is_free(valid_subscription)
-
-            return not user_is_free
-
         def _compute_queue(submitter: User):
             days = settings.IOTD_SUBMISSION_WINDOW_DAYS
             cutoff = datetime.now() - timedelta(days)
@@ -282,13 +275,12 @@ class IotdService:
         for submitter in User.objects.filter(groups__name='iotd_submitters'):
             IotdSubmissionQueueEntry.objects.filter(submitter=submitter).delete()
             for image in _compute_queue(submitter).iterator():
-                if _can_add(image):
-                    IotdSubmissionQueueEntry.objects.create(
-                        submitter=submitter,
-                        image=image,
-                        published=image.published
-                    )
-                    log.debug(f'Image {image.get_id()} "{image.title}" assigned to submitter {submitter.pk} "{submitter.username}".')
+                IotdSubmissionQueueEntry.objects.create(
+                    submitter=submitter,
+                    image=image,
+                    published=image.published
+                )
+                log.debug(f'Image {image.get_id()} "{image.title}" assigned to submitter {submitter.pk} "{submitter.username}".')
 
     def update_review_queues(self):
         def _compute_queue(reviewer: User):

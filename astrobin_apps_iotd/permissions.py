@@ -41,11 +41,6 @@ def may_toggle_submission_image(user, image):
             'max_days': days
         }
 
-    if settings.PREMIUM_RESTRICTS_IOTD:
-        valid_subscription = PremiumService(image.user).get_valid_usersubscription()
-        if is_free(valid_subscription):
-            return False, _("Users with a Free membership cannot participate in the IOTD.")
-
     # Import here to avoid circular dependency
     from astrobin_apps_iotd.models import IotdSubmission, Iotd
 
@@ -127,11 +122,6 @@ def may_toggle_vote_image(user, image):
             'max_allowed': max_allowed
         }
 
-    if settings.PREMIUM_RESTRICTS_IOTD:
-        valid_subscription = PremiumService(image.user).get_valid_usersubscription()
-        if is_free(valid_subscription):
-            return False, _("Users with a Free membership cannot participate in the IOTD.")
-
     return True, None
 
 
@@ -158,11 +148,6 @@ def may_elect_iotd(user, image):
             "You cannot submit an image that has been dismissed by %(number)s member(s) of the IOTD Staff.") % {
                    'number': settings.IOTD_MAX_DISMISSALS
                }
-
-    if settings.PREMIUM_RESTRICTS_IOTD:
-        valid_subscription = PremiumService(image.user).get_valid_usersubscription()
-        if is_free(valid_subscription):
-            return False, _("Users with a Free membership cannot participate in the IOTD.")
 
     # Import here to avoid circular dependency
     from astrobin_apps_iotd.models import IotdSubmission, IotdVote, Iotd

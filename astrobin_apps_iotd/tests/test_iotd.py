@@ -681,7 +681,6 @@ class IotdTest(TestCase):
 
     # Views
 
-    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_group_sync(self):
         group_creator = User.objects.create_user('group_creator', 'group_creator@test.com', 'password')
 
@@ -831,7 +830,6 @@ class IotdTest(TestCase):
     @override_settings(
         IOTD_SUBMISSION_MIN_PROMOTIONS=1,
         IOTD_REVIEW_MIN_PROMOTIONS=1,
-        PREMIUM_RESTRICTS_IOTD=False
     )
     def test_iotd_deleted_images(self):
         """Deleted images should not appear in the IOTD archive"""
