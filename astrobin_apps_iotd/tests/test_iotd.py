@@ -175,12 +175,6 @@ class IotdTest(TestCase):
         self.image.user = self.user
         self.image.save(keep_deleted=True)
 
-    def test_submission_model_cannot_submit_image_of_free_account(self):
-        with self.assertRaisesRegex(ValidationError, "a Free membership"):
-            IotdSubmission.objects.create(
-                submitter=self.submitter_1,
-                image=self.image)
-
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1, IOTD_REVIEW_MIN_PROMOTIONS=1)
     def test_submission_model_image_cannot_be_past_iotd(self):
         Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
@@ -246,12 +240,6 @@ class IotdTest(TestCase):
         with self.assertRaisesRegex(ValidationError, "not been submitted"):
             IotdVote.objects.create(
                 reviewer=self.reviewer_1,
-                image=self.image)
-
-    def test_vote_model_cannot_vote_image_by_free_account(self):
-        with self.assertRaisesRegex(ValidationError, "a Free membership"):
-            IotdSubmission.objects.create(
-                submitter=self.submitter_1,
                 image=self.image)
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=1)
@@ -520,14 +508,7 @@ class IotdTest(TestCase):
                 image=self.image,
                 date=datetime.now().date())
 
-        # Cannot elect an image authored by:
-        # - a free account
-        with self.assertRaisesRegex(ValidationError, "a Free membership"):
-            IotdSubmission.objects.create(
-                submitter=self.submitter_1,
-                image=self.image)
-
-        image_author_us = Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
 
         # Image must have been voted
         with self.assertRaisesRegex(ValidationError, "has not been voted"):
@@ -681,7 +662,6 @@ class IotdTest(TestCase):
 
     # Views
 
-    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     def test_group_sync(self):
         group_creator = User.objects.create_user('group_creator', 'group_creator@test.com', 'password')
 
@@ -831,7 +811,6 @@ class IotdTest(TestCase):
     @override_settings(
         IOTD_SUBMISSION_MIN_PROMOTIONS=1,
         IOTD_REVIEW_MIN_PROMOTIONS=1,
-        PREMIUM_RESTRICTS_IOTD=False
     )
     def test_iotd_deleted_images(self):
         """Deleted images should not appear in the IOTD archive"""

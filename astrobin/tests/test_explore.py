@@ -45,7 +45,6 @@ class ExploreTest(TestCase):
         self.image.data_source = "BACKYARD"
         self.image.save(keep_deleted=True)
 
-    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_top_picks_data_source_filter(self):
@@ -103,7 +102,6 @@ class ExploreTest(TestCase):
         response = self.client.get(reverse_lazy('top_picks') + '?source=public-amateur-data')
         self.assertNotContains(response, self.image.title)
 
-    @override_settings(PREMIUM_RESTRICTS_IOTD=False)
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
     @override_settings(IOTD_REVIEW_MIN_PROMOTIONS=2)
     def test_top_picks_acquisition_type_filter(self):
