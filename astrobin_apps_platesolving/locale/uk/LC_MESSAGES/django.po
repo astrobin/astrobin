@@ -2,109 +2,33 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Plate-solving\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 16:17+0200\n"
+"POT-Creation-Date: 2022-04-14 07:54+0000\n"
 "PO-Revision-Date: 2022-04-13 20:43+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
-"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
+"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108448\n"
-"X-Loco-Api-Version: 1.0.26 20220328-1"
+"X-Loco-Api-Version: 1.0.26 20220328-1\n"
 
-#: loco:606b765229f20946c1545c55
-msgid "Perform a blind solve"
-msgstr "Виконати сліпе розпізнавання"
-
-#: loco:606b765229f20946c1545c56
-msgid ""
-"Attempt to solve with no hints. In most cases this will work, but it will "
-"take longer."
-msgstr ""
-"Намагатися визначити без підказок. Найчастіше спрацьовує, але займає більше "
-"часу."
-
-#: loco:606b765229f20946c1545c57
-msgid "Width of the field in degrees"
-msgstr "Field width in degrees"
-
-#: loco:606b765229f20946c1545c58
-msgid "Width of the field in arcminutes"
-msgstr "Ширина поля у кут. хвилинах"
-
-#: loco:606b765229f20946c1545c59
-msgid "Resolution of the field in arcseconds/pixel"
-msgstr "Роздільна здатність поля в секундах дуги/піксель"
-
-#: loco:606b765229f20946c1545c5a
-msgid "Field size units"
-msgstr "Значення розміру поля"
-
-#: loco:606b765229f20946c1545c5b
-msgid "Min field size"
-msgstr "Мінімальне значення поля"
-
-#: loco:606b765229f20946c1545c5c
-msgid "Estimate the lower bound for the width of this field."
-msgstr "Визначте нижню межу ширини поля."
-
-#: loco:606b765229f20946c1545c5d
-msgid "Max field size"
-msgstr "Максимальний розмір поля"
-
-#: loco:606b765229f20946c1545c5e
-msgid "Estimate the upper bound for the width of this field."
-msgstr "Визначте верхню межу ширини поля."
-
-#: loco:606b765229f20946c1545c5f
-msgid "Center RA"
-msgstr "Центр RA"
-
-#: loco:606b765229f20946c1545c60
-msgid "Center RA of the field in degrees, 0.000 to 360.000"
-msgstr "Центр RA у градусах, від 0.000 до 360.000"
-
-#: loco:606b765229f20946c1545c61
-msgid "Center dec"
-msgstr "Центр dec"
-
-#: loco:606b765229f20946c1545c62
-msgid "Center dec of the field in degrees, -90.000 to +90.000"
-msgstr "Центр dec у градусах, від -90.000 до +90.000"
-
-#: loco:606b765229f20946c1545c63
-msgid "Radius"
-msgstr "Радіус"
-
-#: loco:606b765229f20946c1545c64
-msgid ""
-"Tells the plate-solving engine to look within these many degrees of the "
-"given center RA and dec position."
-msgstr ""
-"Повідомляє визначнику по координатах дивитися в межах даного центру RA i Dec."
-
-#: loco:606b765229f20946c1545c65
 msgid "Small"
 msgstr "Маленький"
 
-#: loco:606b765229f20946c1545c66
 msgid "Medium"
 msgstr "Середній"
 
-#: loco:606b765229f20946c1545c67
 msgid "Large"
 msgstr "Великий"
 
-#: loco:606b765229f20946c1545c68
 msgid "Sample raw frame (max 100 MB)"
 msgstr "Зразок необробленого RAW кадру (макс. 100 МБ)"
 
-#: loco:606b765229f20946c1545c69
 msgid ""
 "To improve the accuracy of your plate-solution even further, please upload "
 "one of the XISF or FITS files from your data set. Such files normally have "
@@ -125,67 +49,63 @@ msgstr ""
 "системи та знаходити планети й астероїди на вашому зображенні (за умови, що "
 "ви також додаєте інформацію про місцезнаходження до свого зображення). <br/> "
 "<br/> Для максимальної точності рекомендується використовувати власний та "
-"відкритий формат PixInsight XISF. Дізнайтесь більше про XISF тут: <br/> <br/>"
-" <a href=\"https://pixinsight.com/xisf/\" target=\"_blank\"> https:"
-"//pixinsight.com/xisf/ </a> <br/> <br/> <strong> Зверніть увагу: </strong> "
+"відкритий формат PixInsight XISF. Дізнайтесь більше про XISF тут: <br/> <br/"
+"> <a href=\"https://pixinsight.com/xisf/\" target=\"_blank\"> https://"
+"pixinsight.com/xisf/ </a> <br/> <br/> <strong> Зверніть увагу: </strong> "
 "дуже важливо, щоб завантажуваний файл XISF або FITS був вирівняний з "
 "обробленим зображенням, інакше анотації об'єктів не збігатимуться. Щоб "
 "підвищити Ваші шанси отримати точне розпізнавання, відкалібруйте файл "
 "звичайним способом (dark/bias/flats), але не розтягуйте його гістограму."
 
-#: loco:606b765229f20946c1545c6a
 msgid "Scaled font size"
 msgstr "Масштабований розмір шрифту"
 
-#: loco:606b765229f20946c1545c6b
 msgid "Font size of the annotations on your main image page"
 msgstr "Розмір шрифту анотацій на головній сторінці зображення"
 
-#: loco:606b765229f20946c1545c6c
 msgid "Show equatorial grid"
 msgstr "Показувати екваторіальну сітку"
 
-#: loco:606b765229f20946c1545c6d
 msgid "Show constellation borders"
 msgstr "Показувати межі сузір'їв"
 
-#: loco:606b765229f20946c1545c6e
 msgid "Show constellation lines"
 msgstr "Показувати лінії сузір'їв"
 
-#: loco:606b765229f20946c1545c6f
 msgid "Show named stars"
 msgstr "Показувати названі зірки"
 
-#: loco:606b765229f20946c1545c70
 msgid "Show Messier objects"
 msgstr "Показувати об'єкти Месьє"
 
-#: loco:606b765229f20946c1545c71
 msgid "Show NGC and IC objects"
 msgstr "Показувати NGC та IC об'єкти"
 
-#: loco:606b765229f20946c1545c72
 msgid "Show VdB objects"
 msgstr "Показувати VdB об'єкти"
 
-#: loco:606b765229f20946c1545c73
 msgid "Show Sharpless objects"
 msgstr "Показати Безгострі(Sharpless) об'єкти"
 
-#: loco:606b765229f20946c1545c74
 msgid "Show Barnard objects"
 msgstr "Показувати об'єкти Барнарда"
 
-#: loco:606b765229f20946c1545c75
+msgid ""
+"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
+msgstr ""
+"Показати об'єкти з Каталогу яскравих туманностей Ліндса (LBN) (Ліндс, 1965)"
+
+msgid ""
+"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+msgstr ""
+"Показати об’єкти з Каталогу темних туманностей Ліндса (LDN) (Lynds 1962)"
+
 msgid "Show PGC objects"
 msgstr "Показувати PGC об'єкти"
 
-#: loco:606b765229f20946c1545c76
 msgid "Show planets"
 msgstr "Показувати планети"
 
-#: loco:606b765229f20946c1545c77
 msgid ""
 "Only available if your image at least an acquisition time and an accurate "
 "location"
@@ -193,77 +113,139 @@ msgstr ""
 "Доступно лише в тому випадку, якщо у Вашого зображення є час отримання та "
 "точне розташування"
 
-#: loco:606b765229f20946c1545c78
 msgid "Show asteroids"
 msgstr "Показувати астероїди"
 
-#: loco:606b765229f20946c1545c79
 msgid "Show GCVS stars"
 msgstr "GCVS зірки"
 
-#: loco:606b765229f20946c1545c7a
 msgid "General Catalog of Variable Stars"
 msgstr "Загальний Каталог Змінних Зірок (CGVS)"
 
-#: loco:606b765229f20946c1545c7b
 msgid "Show Tycho-2 catalog"
 msgstr "Показувати Tycho-2 каталог"
 
-#: loco:606b765229f20946c1545c7c
 msgid "Show CGPN objects"
 msgstr "Показувати CGPN об'єкти"
 
-#: loco:606b765229f20946c1545c7d
+msgid "Show quasars"
+msgstr "Показувати квазари"
+
+msgid "Perform a blind solve"
+msgstr "Виконати сліпе розпізнавання"
+
+msgid ""
+"Attempt to solve with no hints. In most cases this will work, but it will "
+"take longer."
+msgstr ""
+"Намагатися визначити без підказок. Найчастіше спрацьовує, але займає більше "
+"часу."
+
+msgid "Width of the field in degrees"
+msgstr "Field width in degrees"
+
+msgid "Width of the field in arcminutes"
+msgstr "Ширина поля у кут. хвилинах"
+
+msgid "Resolution of the field in arcseconds/pixel"
+msgstr "Роздільна здатність поля в секундах дуги/піксель"
+
+msgid "Field size units"
+msgstr "Значення розміру поля"
+
+msgid "Min field size"
+msgstr "Мінімальне значення поля"
+
+msgid "Estimate the lower bound for the width of this field."
+msgstr "Визначте нижню межу ширини поля."
+
+msgid "Max field size"
+msgstr "Максимальний розмір поля"
+
+msgid "Estimate the upper bound for the width of this field."
+msgstr "Визначте верхню межу ширини поля."
+
+msgid "Center RA"
+msgstr "Центр RA"
+
+msgid "Center RA of the field in degrees, 0.000 to 360.000"
+msgstr "Центр RA у градусах, від 0.000 до 360.000"
+
+msgid "Center dec"
+msgstr "Центр dec"
+
+msgid "Center dec of the field in degrees, -90.000 to +90.000"
+msgstr "Центр dec у градусах, від -90.000 до +90.000"
+
+msgid "Radius"
+msgstr "Радіус"
+
+msgid ""
+"Tells the plate-solving engine to look within these many degrees of the "
+"given center RA and dec position."
+msgstr ""
+"Повідомляє визначнику по координатах дивитися в межах даного центру RA i Dec."
+
+msgid "Missing"
+msgstr "Відсутнє"
+
+msgid "Basic pending"
+msgstr "Базове очікує"
+
+msgid "Basic failed"
+msgstr "Базове не вдалося"
+
+msgid "Basic success"
+msgstr "Базове успішне"
+
+msgid "Advanced pending"
+msgstr "Розширене розпізнавання очікується"
+
+msgid "Advanced failed"
+msgstr "Розширене розпізнавання не вдалося"
+
+msgid "Advanced success"
+msgstr "Розширене вдалося"
+
 msgid "Getting plate-solving status, please wait..."
 msgstr "Отримання статусу розпізнавання поля, зачекайте..."
 
-#: loco:606b765229f20946c1545c7e
 msgid "Plate-solving starting, please do not leave this page..."
 msgstr ""
 "Розпізнавання поля починається, будь ласка, не залишайте цю сторінку..."
 
-#: loco:606b765229f20946c1545c7f
 msgid "Advanced plate-solving starting, please do not leave this page..."
 msgstr ""
 "Розширене розпізнавання починається, будь ласка, не залишайте цю сторінку..."
 
-#: loco:606b765229f20946c1545c80
 msgid "Plate-solving started. You may leave this page."
 msgstr "Почалося розпізнавання поля. Ви можете залишити цю сторінку."
 
-#: loco:606b765229f20946c1545c81
 msgid "Advanced plate-solving started. You may leave this page."
 msgstr "Розширене розпізнавання розпочалося. Ви можете покинути цю сторінку."
 
-#: loco:606b765229f20946c1545c82
 msgid "Plate-solving almost ready, please do not leave this page..."
 msgstr "Розпізнавання поля майже готове, не залишайте цю сторінку..."
 
-#: loco:606b765229f20946c1545c83
 msgid "This image could not be plate-solved."
 msgstr "Це зображення не може бути розпізнано по координатам."
 
-#: loco:606b765229f20946c1545c84
 msgid "The advanced plate-solving failed."
 msgstr "Розширене розпізнавання не вдалося."
 
-#: loco:606b765229f20946c1545c85
 msgid "This image has been plate-solved. Refresh the page to see new data!"
 msgstr ""
 "Розпізнавання цього зображення проведено успішно. Будь ласка, оновіть "
 "сторінку, щоб побачити нові дані!"
 
-#: loco:606b765229f20946c1545c86
 msgid "The advanced plate-solved finished. Refresh the page to see new data!"
 msgstr ""
 "Розширене розпізнавання цього зображення завершено. Будь ласка, оновіть "
 "сторінку, щоб побачити нові дані!"
 
-#: loco:606b765229f20946c1545c87
 msgid "Error"
 msgstr "Помилка"
 
-#: loco:606b765229f20946c1545c88
 msgid ""
 "AstroBin could not plate-solve this image because it was not possible to "
 "establish a connection to nova.astrometry.net. Please try again later!"
@@ -271,180 +253,6 @@ msgstr ""
 "AstroBin не зміг розпізнати зображення, тому що не вдалося встановити "
 "з'єднання з nova.astrometry.net. Будь ласка, спробуйте ще раз!"
 
-#: loco:606b765229f20946c1545c89
-msgid ""
-"AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an internal server error."
-msgstr ""
-"AstroBin не зміг розгадати це зображення, оскільки nova.astrometry.net "
-"повідомила про внутрішню помилку сервера."
-
-#: loco:60c889c5b70acb3d1a1c74d2
-msgid ""
-"AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an unepexted error."
-msgstr ""
-"AstroBin не зміг розпізнати це зображення, оскільки nova.astrometry.net "
-"повідомив про несподівану помилку."
-
-#: loco:616be31ce8c08b526e123ef2
-msgid ""
-"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
-msgstr ""
-"Показати об'єкти з Каталогу яскравих туманностей Ліндса (LBN) (Ліндс, 1965)"
-
-#: loco:616be31ce8c08b526e123ef3
-msgid ""
-"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
-msgstr ""
-"Показати об’єкти з Каталогу темних туманностей Ліндса (LDN) (Lynds 1962)"
-
-#: loco:616be31ce8c08b526e123ef4
-msgid "Show quasars"
-msgstr "Показувати квазари"
-
-#: loco:616be31ce8c08b526e123ef5
-msgid "Missing"
-msgstr "Відсутнє"
-
-#: loco:616be31ce8c08b526e123ef6
-msgid "Basic pending"
-msgstr "Базове очікує"
-
-#: loco:616be31ce8c08b526e123ef7
-msgid "Basic failed"
-msgstr "Базове не вдалося"
-
-#: loco:616be31ce8c08b526e123ef8
-msgid "Basic success"
-msgstr "Базове успішне"
-
-#: loco:616be31ce8c08b526e123ef9
-msgid "Advanced pending"
-msgstr "Розширене розпізнавання очікується"
-
-#: loco:616be31ce8c08b526e123efa
-msgid "Advanced failed"
-msgstr "Розширене розпізнавання не вдалося"
-
-#: loco:616be31ce8c08b526e123efb
-msgid "Advanced success"
-msgstr "Розширене вдалося"
-
-#: loco:616be31ce8c08b526e123efc
-msgid ""
-"AstroBin could not plate-solve this image because of an unexpected error."
-msgstr "AstroBin не зміг розв’язати це зображення через неочікувану помилку."
-
-#: loco:616be31ce8c08b526e123efd
-msgid "n/a"
-msgstr "н/д"
-
-#: loco:616be31ce8c08b526e123efe
-msgid "Starting task..."
-msgstr "Завдання стартувало..."
-
-#: loco:616be31ce8c08b526e123eff
-msgid "Downloading image..."
-msgstr "Завантаження зображення..."
-
-#: loco:616be31ce8c08b526e123f00
-msgid "Plate-solving image..."
-msgstr "Розпізнавання поля зображення..."
-
-#: loco:616be31ce8c08b526e123f01
-msgid "Generating image annotations..."
-msgstr "Створення анотацій до зображень..."
-
-#: loco:616be31ce8c08b526e123f02
-msgid "Processing SVG documents..."
-msgstr "Обробка документів SVG..."
-
-#: loco:616be31ce8c08b526e123f03
-msgid "Uploading results..."
-msgstr "Завантаження результатів..."
-
-#: loco:616be31ce8c08b526e123f04
-msgid "Task completed"
-msgstr "Завдання виконано"
-
-#: loco:616be31ce8c08b526e123f05
-msgid "Plate-solving information"
-msgstr "Інформація про розпізнавання поля"
-
-#: loco:616be31ce8c08b526e123f06
-msgid "Status"
-msgstr "Статус"
-
-#: loco:616be31ce8c08b526e123f07
-msgid "Started"
-msgstr "Почалося"
-
-#: loco:616be31ce8c08b526e123f08
-msgid "Astrometry.net job"
-msgstr "Робота Astrometry.net"
-
-#: loco:616be31ce8c08b526e123f09
-msgid "PixInsight job"
-msgstr "Робота PixInsight"
-
-#: loco:616be31ce8c08b526e123f0a
-msgid "PixInsight queue size"
-msgstr "Розмір черги PixInsight"
-
-#: loco:616be31ce8c08b526e123f0b
-msgid "PixInsight stage"
-msgstr "Етап PixInsight"
-
-#: loco:616be31ce8c08b526e123f0c
-msgid "PixInsight log"
-msgstr "PixInsight лог"
-
-#: loco:616be31ce8c08b526e123f0d
-msgid "RA"
-msgstr "RA"
-
-#: loco:616be31ce8c08b526e123f0e
-msgid "center"
-msgstr "центр"
-
-#: loco:616be31ce8c08b526e123f0f
-msgid "degrees"
-msgstr "градуси"
-
-#: loco:616be31ce8c08b526e123f10
-msgid "top/left"
-msgstr "вгорі/ліворуч"
-
-#: loco:616be31ce8c08b526e123f11
-msgid "top/right"
-msgstr "вгорі/праворуч"
-
-#: loco:616be31ce8c08b526e123f12
-msgid "bottom/right"
-msgstr "внизу/праворуч"
-
-#: loco:616be31ce8c08b526e123f13
-msgid "bottom/left"
-msgstr "внизу/ліворуч"
-
-#: loco:616be31ce8c08b526e123f14
-msgid "Dec"
-msgstr "Dec"
-
-#: loco:616be31ce8c08b526e123f15
-msgid "Close"
-msgstr "Закрити"
-
-#: loco:616be31ce8c08b526e123f16
-msgid "Invalid"
-msgstr "Недійсний"
-
-#: loco:61b23360b7f02550896dd8d2
-msgid "Generating finding charts..."
-msgstr "Створення діаграм пошуку..."
-
-#: loco:6253f72e115f41346408eab3
 msgid ""
 "AstroBin could not plate-solve this image because nova.astrometry.net "
 "reported an internal server error. Please try again later!"
@@ -452,10 +260,109 @@ msgstr ""
 "AstroBin не зміг розпізнати це зображення, оскільки nova.astrometry.net "
 "повідомила про внутрішню помилку сервера. Будь-ласка спробуйте пізніше!"
 
-#: loco:6253f72e115f41346408eab4
 msgid ""
 "AstroBin could not plate-solve this image because of an unexpected error. "
 "Please try again later!"
 msgstr ""
 "AstroBin не зміг розпізнати це зображення через неочікувану помилку. Будь-"
 "ласка спробуйте пізніше!"
+
+msgid "n/a"
+msgstr "н/д"
+
+msgid "Starting task..."
+msgstr "Завдання стартувало..."
+
+msgid "Downloading image..."
+msgstr "Завантаження зображення..."
+
+msgid "Plate-solving image..."
+msgstr "Розпізнавання поля зображення..."
+
+msgid "Generating image annotations..."
+msgstr "Створення анотацій до зображень..."
+
+msgid "Processing SVG documents..."
+msgstr "Обробка документів SVG..."
+
+msgid "Generating finding charts..."
+msgstr "Створення діаграм пошуку..."
+
+msgid "Uploading results..."
+msgstr "Завантаження результатів..."
+
+msgid "Task completed"
+msgstr "Завдання виконано"
+
+msgid "Plate-solving information"
+msgstr "Інформація про розпізнавання поля"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Started"
+msgstr "Почалося"
+
+msgid "Astrometry.net job"
+msgstr "Робота Astrometry.net"
+
+msgid "PixInsight job"
+msgstr "Робота PixInsight"
+
+msgid "PixInsight queue size"
+msgstr "Розмір черги PixInsight"
+
+msgid "PixInsight stage"
+msgstr "Етап PixInsight"
+
+msgid "PixInsight log"
+msgstr "PixInsight лог"
+
+msgid "RA"
+msgstr "RA"
+
+msgid "center"
+msgstr "центр"
+
+msgid "degrees"
+msgstr "градуси"
+
+msgid "top/left"
+msgstr "вгорі/ліворуч"
+
+msgid "top/right"
+msgstr "вгорі/праворуч"
+
+msgid "bottom/right"
+msgstr "внизу/праворуч"
+
+msgid "bottom/left"
+msgstr "внизу/ліворуч"
+
+msgid "Dec"
+msgstr "Dec"
+
+msgid "Close"
+msgstr "Закрити"
+
+msgid "Invalid"
+msgstr "Недійсний"
+
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because nova.astrometry.net "
+#~ "reported an internal server error."
+#~ msgstr ""
+#~ "AstroBin не зміг розгадати це зображення, оскільки nova.astrometry.net "
+#~ "повідомила про внутрішню помилку сервера."
+
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because nova.astrometry.net "
+#~ "reported an unepexted error."
+#~ msgstr ""
+#~ "AstroBin не зміг розпізнати це зображення, оскільки nova.astrometry.net "
+#~ "повідомив про несподівану помилку."
+
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because of an unexpected error."
+#~ msgstr ""
+#~ "AstroBin не зміг розв’язати це зображення через неочікувану помилку."

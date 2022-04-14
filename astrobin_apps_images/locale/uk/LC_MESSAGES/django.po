@@ -2,30 +2,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Images\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 16:13+0200\n"
+"POT-Creation-Date: 2022-04-14 07:54+0000\n"
 "PO-Revision-Date: 2022-04-11 11:40+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
-"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
+"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108439\n"
-"X-Loco-Api-Version: 1.0.26 20220328-1"
+"X-Loco-Api-Version: 1.0.26 20220328-1\n"
 
-#: loco:606b7621ace1a219c563e013
 msgid "Conflict."
 msgstr "Конфлікт."
 
-#: loco:606b7621ace1a219c563e014
 msgid "Uncompressed source (max 100 MB)"
 msgstr "Джерело без стиснення (макс. 100 Мб)"
 
-#: loco:606b7621ace1a219c563e015
 msgid ""
 "You can store the final processed image that came out of your favorite image "
 "editor (e.g. PixInsight, Adobe Photoshop, etc) here on AstroBin, for "
@@ -37,43 +34,33 @@ msgstr ""
 "AstroBin, для архівних цілей. Цей файл зберігається приватно, і тільки Ви "
 "матимете до нього доступ."
 
-#: loco:606b7621ace1a219c563e016
 msgid "Error!"
 msgstr "Помилка!"
 
-#: loco:606b7621ace1a219c563e017
 msgid "Staging area"
 msgstr "Студія"
 
-#: loco:606b7621ace1a219c563e018
-msgid "Loading"
-msgstr "Завантаження"
-
-#: loco:606b7621ace1a219c563e019
-msgid "(no title)"
-msgstr "(без назви)"
-
-#: loco:606b7621ace1a219c563e01a
-msgid "Image of the day"
-msgstr "Зображення Дня"
-
-#: loco:606b7621ace1a219c563e01b
-msgid "Top pick"
-msgstr "Топ Зображення"
-
-#: loco:606b7621ace1a219c563e01c
-msgid "Top pick nomination"
-msgstr "Номінація на Топ Зображення"
-
-#: loco:606b7621ace1a219c563e01d
-msgid "Data corruption. Please upload this image again. Sorry!"
-msgstr "Дані пошкоджено. Завантажте це зображення знову. Вибачте!"
-
-#: loco:61e174aa62ce1859801a0c73
 #, python-format
 msgid "Revision %(revision)s"
 msgstr "Версія %(revision)s"
 
-#: loco:61e174aa62ce1859801a0c74
 msgid "Original revision"
 msgstr "Оригінальна версія"
+
+msgid "Loading"
+msgstr "Завантаження"
+
+msgid "(no title)"
+msgstr "(без назви)"
+
+msgid "Image of the day"
+msgstr "Зображення Дня"
+
+msgid "Top pick"
+msgstr "Топ Зображення"
+
+msgid "Top pick nomination"
+msgstr "Номінація на Топ Зображення"
+
+msgid "Data corruption. Please upload this image again. Sorry!"
+msgstr "Дані пошкоджено. Завантажте це зображення знову. Вибачте!"

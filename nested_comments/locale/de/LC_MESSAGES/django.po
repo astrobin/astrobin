@@ -2,200 +2,84 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Comments\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 16:19+0200\n"
+"POT-Creation-Date: 2022-04-14 07:54+0000\n"
 "PO-Revision-Date: 2022-04-13 02:05+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: German\n"
 "Language: de\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108457\n"
-"X-Loco-Api-Version: 1.0.26 20220328-1"
+"X-Loco-Api-Version: 1.0.26 20220328-1\n"
 
-#: loco:606b7673febdde060052b5e2
-msgid "You follow each other"
-msgstr "Sie folgen sich gegenseitig"
-
-#: loco:606b7673febdde060052b5e3
-msgid "Images"
-msgstr "Bilder"
-
-#: loco:606b7673febdde060052b5e4
-msgid "Followers"
-msgstr "Followers"
-
-#: loco:606b7673febdde060052b5e5
-msgid "Following"
-msgstr "Abonnements"
-
-#: loco:606b7673febdde060052b5e6
-msgid "User"
-msgstr "Benutzer"
-
-#: loco:606b7673febdde060052b5e7
-msgid "No users."
-msgstr "Keine Nutzer."
-
-#: loco:606b7673febdde060052b5e8
-msgid "Administrator"
-msgstr "Administrator"
-
-#: loco:606b7673febdde060052b5e9
-msgid "Image moderator"
-msgstr "Bild-Moderator"
-
-#: loco:606b7673febdde060052b5ea
-msgid "IOTD Submitter"
-msgstr "IOTD-Einreicher"
-
-#: loco:606b7673febdde060052b5eb
-msgid "IOTD Reviewer"
-msgstr "IOTD-Rezensent"
-
-#: loco:606b7673febdde060052b5ec
-msgid "IOTD Judge"
-msgstr "IOTD-Richter"
-
-#: loco:606b7673febdde060052b5ed
-msgid "Premium member"
-msgstr "Premiummitglied"
-
-#: loco:606b7673febdde060052b5ee
-msgid ""
-"Your email bounce reports have been removed from AstroBin. Please make sure "
-"that your email works well or you will get the same warning message again. "
-"Thanks!"
-msgstr ""
-"Ihre E-Mail-Bounce-Reporte wurden aus AstroBin entfernt. Bitte stellen Sie "
-"sicher, dass Ihre E-Mail gut funktioniert, sonst erhalten Sie die gleiche "
-"Warnmeldung erneut. Danke!"
-
-#: loco:606b7673febdde060052b5ef
-msgid ""
-"Your spam reports have been removed from AstroBin. Please make sure you "
-"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
-"don't want to receive emails from AstroBin, look for the settings link "
-"that's at the bottom of every email. Thanks!"
-msgstr ""
-"Ihre Spam-Meldungen wurden von AstroBin entfernt. Bitte stellen Sie sicher, "
-"dass Sie keinen Filter oder eine Regel haben, die AstroBin-E-Mails immer als "
-"Spam markiert! Wenn Sie keine E-Mails von AstroBin erhalten möchten, "
-"verwenden Sie den Link für die Einstellungen, der sich am Ende jeder E-Mail "
-"befindet. Danke!"
-
-#: loco:606b76b7d0c7060d4277e6b8
 msgid "Type your comment here..."
 msgstr "Geben Sie hier Ihren Kommentar ein..."
 
-#: loco:606b76b7d0c7060d4277e6b9
+msgid "Error"
+msgstr "Fehler"
+
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: loco:606b76b7d0c7060d4277e6ba
 msgid "Add a comment"
 msgstr "Kommentar hinzufügen"
 
-#: loco:606b76b7d0c7060d4277e6bb
-#, python-format
-msgid ""
-"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s\">"
-"sign up</a> to leave a comment."
-msgstr ""
-"Bitte <a href=\"%(login_url)s\">einloggen</a> oder <a href=\"%(signup_url)"
-"s\">registrieren</a> um einen Kommentar zu hinterlassen."
-
-#: loco:606b76b7d0c7060d4277e6bc
 msgid "There are no comments yet."
 msgstr "Keine Kommentare bis jetzt."
 
-#: loco:606b76b7d0c7060d4277e6bd
-msgid "This comment is pending moderation and will be reviewed shortly."
-msgstr ""
-"Dieser Kommentar befindet sich in der Moderation und wird in Kürze geprüft."
+msgid "The comment cannot be empty."
+msgstr "Der Kommentar kann nicht leer sein."
 
-#: loco:606b76b7d0c7060d4277e6be
 msgid "(deleted)"
 msgstr "(gelöscht)"
 
-#: loco:606b76b7d0c7060d4277e6bf
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Undelete"
+msgstr "Wiederherstellen"
+
+msgid "Edit"
+msgstr "Editieren"
+
+msgid "Link"
+msgstr "Link"
+
 msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
 msgstr "Likes"
 
-#: loco:606b76b7d0c7060d4277e6c0
-msgctxt "Noun, e.g. 'This element has 1 like'"
-msgid "like"
-msgstr "like"
-
-#: loco:606b76b7d0c7060d4277e6c1
-msgid "Link"
-msgstr "Link"
-
-#: loco:606b76b7d0c7060d4277e6c2
-msgid "Undelete"
-msgstr "Wiederherstellen"
-
-#: loco:606b76b7d0c7060d4277e6c3
-msgid "Delete"
-msgstr "Löschen"
-
-#: loco:606b76b7d0c7060d4277e6c4
-msgid "Edit"
-msgstr "Editieren"
-
-#: loco:606b76b7d0c7060d4277e6c5
-msgid "Reply"
-msgstr "Antworten"
-
-#: loco:606b76b7d0c7060d4277e6c6
-msgid "Like"
-msgstr "Like"
-
-#: loco:606b76b7d0c7060d4277e6c7
-msgid "Unlike"
-msgstr "Unlike"
-
-#: loco:606b76b7d0c7060d4277e6c8
-msgid "The comment cannot be empty."
-msgstr "Der Kommentar kann nicht leer sein."
-
-#: loco:606b76b7d0c7060d4277e6c9
-msgid "Submit"
-msgstr "Absenden"
-
-#: loco:616be328c4a14262d43819c2
-msgid "Error"
-msgstr "Fehler"
-
-#: loco:616be328c4a14262d43819c3
 msgctxt "Verb (imperative)"
 msgid "Like"
 msgstr "Like"
 
-#: loco:616be328c4a14262d43819c4
 msgctxt "Verb (imperative)"
 msgid "Unlike"
 msgstr "Unlike"
 
-#: loco:616be328c4a14262d43819c5
 msgctxt "Verb (imperative)"
 msgid "Reply"
 msgstr "Antwort"
 
-#: loco:616be328c4a14262d43819c6
 msgctxt "Verb (imperative)"
 msgid "Approve"
 msgstr "Genehmigen"
 
-#: loco:616be328c4a14262d43819c7
 msgid "Report abuse"
 msgstr "Missbrauch melden"
 
-#: loco:616be328c4a14262d43819c8
+#, python-format
+msgid ""
+"Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
+"\">sign up</a> to leave a comment."
+msgstr ""
+"Bitte <a href=\"%(login_url)s\">einloggen</a> oder <a href=\"%(signup_url)s"
+"\">registrieren</a> um einen Kommentar zu hinterlassen."
+
 msgid ""
 "This comment is pending moderation. Please approve it or report an abuse "
 "using the buttons below."
@@ -203,17 +87,14 @@ msgstr ""
 "Dieser Kommentar muss noch moderiert werden. Bitte genehmigen Sie ihn oder "
 "melden Sie einen Missbrauch mit den Schaltflächen unten."
 
-#: loco:616be328c4a14262d43819c9
 msgid "Thank you for your cooperation!"
 msgstr "Vielen Dank für Ihre Mitarbeit!"
 
-#: loco:616be328c4a14262d43819ca
 msgid "This comment was already moderated by you or an AstroBin moderator."
 msgstr ""
 "Dieser Kommentar wurde bereits von Ihnen oder einem AstroBin-Moderator "
 "moderiert."
 
-#: loco:616be328c4a14262d43819cb
 msgid ""
 "Your comment is pending moderation and should be reviewed shortly by the "
 "author or owner of the content object that you commented on. If they do not "
@@ -225,15 +106,19 @@ msgstr ""
 "werden. Wenn diese nicht innerhalb von 24 Stunden tätig werden, wird ein "
 "AstroBin-Moderator Ihren Kommentar in ihrem Namen überprüfen."
 
-#: loco:616be328c4a14262d43819cc
 msgid "This process is necessary to prevent spam on AstroBin."
 msgstr "Dieser Vorgang ist notwendig, um Spam auf AstroBin zu verhindern."
 
-#: loco:616be328c4a14262d43819cd
 msgid "Thank you for understanding!"
 msgstr "Vielen Dank für Ihr Verständnis!"
 
-#: loco:616be328c4a14262d43819ce
+msgid "This comment is pending moderation and will be reviewed shortly."
+msgstr ""
+"Dieser Kommentar befindet sich in der Moderation und wird in Kürze geprüft."
+
+msgid "Submit"
+msgstr "Absenden"
+
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
@@ -243,25 +128,84 @@ msgstr ""
 "bestätigte oder ausstehende Missbrauchsmeldung. Wenn Sie der Meinung sind, "
 "dass Ihr Kommentar zu Unrecht gemeldet wurde, kontaktieren Sie uns bitte."
 
-#: loco:616be328c4a14262d43819cf
 msgid "You have reached your abuse report quota."
 msgstr "Sie haben Ihre Quote für Missbrauchsmeldungen erreicht."
 
-#: loco:616be328c4a14262d43819d0
 msgid ""
 "This item cannot be reported again because it was approved by a moderator."
 msgstr ""
 "Dieser Artikel kann nicht erneut gemeldet werden, da er von einem Moderator "
 "genehmigt wurde."
 
-#: loco:616be328c4a14262d43819d1
-msgid "You many not report the same item more than once."
-msgstr "Sie können denselben Artikel nicht mehrmals melden."
-
-#: loco:61b2336ba758f15c4e184e22
 msgid "You may not report the same item more than once."
 msgstr "Sie können denselben Gegenstand nicht mehrmals melden."
 
-#: loco:61e7c5b9647eb133e502d709
-msgid "Report a use"
-msgstr "Eine Verwendung melden"
+#~ msgid "You follow each other"
+#~ msgstr "Sie folgen sich gegenseitig"
+
+#~ msgid "Images"
+#~ msgstr "Bilder"
+
+#~ msgid "Followers"
+#~ msgstr "Followers"
+
+#~ msgid "Following"
+#~ msgstr "Abonnements"
+
+#~ msgid "User"
+#~ msgstr "Benutzer"
+
+#~ msgid "No users."
+#~ msgstr "Keine Nutzer."
+
+#~ msgid "Administrator"
+#~ msgstr "Administrator"
+
+#~ msgid "Image moderator"
+#~ msgstr "Bild-Moderator"
+
+#~ msgid "IOTD Submitter"
+#~ msgstr "IOTD-Einreicher"
+
+#~ msgid "IOTD Reviewer"
+#~ msgstr "IOTD-Rezensent"
+
+#~ msgid "IOTD Judge"
+#~ msgstr "IOTD-Richter"
+
+#~ msgid "Premium member"
+#~ msgstr "Premiummitglied"
+
+#~ msgid ""
+#~ "Your email bounce reports have been removed from AstroBin. Please make "
+#~ "sure that your email works well or you will get the same warning message "
+#~ "again. Thanks!"
+#~ msgstr ""
+#~ "Ihre E-Mail-Bounce-Reporte wurden aus AstroBin entfernt. Bitte stellen "
+#~ "Sie sicher, dass Ihre E-Mail gut funktioniert, sonst erhalten Sie die "
+#~ "gleiche Warnmeldung erneut. Danke!"
+
+#~ msgid ""
+#~ "Your spam reports have been removed from AstroBin. Please make sure you "
+#~ "don't have a filter or rule to always mark AstroBin's emails as spam! If "
+#~ "you don't want to receive emails from AstroBin, look for the settings "
+#~ "link that's at the bottom of every email. Thanks!"
+#~ msgstr ""
+#~ "Ihre Spam-Meldungen wurden von AstroBin entfernt. Bitte stellen Sie "
+#~ "sicher, dass Sie keinen Filter oder eine Regel haben, die AstroBin-E-"
+#~ "Mails immer als Spam markiert! Wenn Sie keine E-Mails von AstroBin "
+#~ "erhalten möchten, verwenden Sie den Link für die Einstellungen, der sich "
+#~ "am Ende jeder E-Mail befindet. Danke!"
+
+#~ msgctxt "Noun, e.g. 'This element has 1 like'"
+#~ msgid "like"
+#~ msgstr "like"
+
+#~ msgid "Reply"
+#~ msgstr "Antworten"
+
+#~ msgid "Like"
+#~ msgstr "Like"
+
+#~ msgid "Unlike"
+#~ msgstr "Unlike"
