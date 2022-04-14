@@ -2,57 +2,200 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Premium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-11 09:38+0000\n"
-"PO-Revision-Date: 2022-04-11 11:33+0200\n"
+"POT-Creation-Date: 2021-04-05 16:17+0200\n"
+"PO-Revision-Date: 2022-04-13 01:50+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
-"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108451\n"
-"X-Loco-Api-Version: 1.0.26 20220328-1\n"
+"X-Loco-Api-Version: 1.0.26 20220328-1"
 
+#: loco:606b766378f4e75f8e0830ed
+msgid "I wasn't really affected by the data loss"
+msgstr "Меня не очень коснулась потеря данных"
+
+#: loco:606b766378f4e75f8e0830ee
+msgid "I don't require compensation: I want to support AstroBin"
+msgstr "Мне не нужна компенсация: Я хочу поддержать AstroBin"
+
+#: loco:606b766378f4e75f8e0830ef
+msgid "I would like to try AstroBin Ultimate for free for 1 month"
+msgstr "Я хочу попробовать подписку AstroBin Ultimate бесплатно на 1 месяц"
+
+#: loco:606b766378f4e75f8e0830f0
+msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
+msgstr ""
+"Я чувствую себя получившим право на AstroBin Ultimate бесплатно на 3 месяца"
+
+#: loco:606b766378f4e75f8e0830f1
+msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
+msgstr ""
+"Я чувствую себя получившим право на AstroBin Ultimate бесплатно на 6 месяцев"
+
+#: loco:606b766378f4e75f8e0830f2
+msgid "Requested compensation"
+msgstr "Запрашиваемая компенсация"
+
+#: loco:606b766378f4e75f8e0830f3
+msgid "Please indicate if and how much you would like to be compensated."
+msgstr ""
+"Пожалуйста укажите нужна ли вам компенсация и, если да, то каким образом."
+
+#: loco:606b766378f4e75f8e0830f4
 msgid "Your migration data"
 msgstr "Ваши данные для миграции"
 
+#: loco:606b766378f4e75f8e0830f5
 msgid "Total amount donated last year"
 msgstr "Всего внесено за последний год"
 
+#: loco:606b766378f4e75f8e0830f6
 msgid "First payment"
 msgstr "Первый платёж"
 
+#: loco:606b766378f4e75f8e0830f7
 msgid "Price for Premium"
 msgstr "Цена за Premium"
 
+#: loco:606b766378f4e75f8e0830f8
 msgid "Days covered"
 msgstr "Дней покрыто"
 
+#: loco:606b766378f4e75f8e0830f9
 msgid "Premium expiration"
 msgstr "Premium истекает"
 
+#: loco:606b766378f4e75f8e0830fa
 msgid "Your donations last year"
 msgstr "Ваши взносы за последний год"
 
+#: loco:606b766378f4e75f8e0830fb
 msgid "Amount"
 msgstr "Количество"
 
+#: loco:606b766378f4e75f8e0830fc
 msgid "Date"
 msgstr "Дата"
 
+#: loco:606b766378f4e75f8e0830fd
 msgid "Subscription"
 msgstr "Подписка"
 
+#: loco:606b766378f4e75f8e0830fe
+msgid "Data loss compensation request"
+msgstr "Запрос на компенсацию потери изображений"
+
+#: loco:606b766378f4e75f8e0830ff
+msgid ""
+"You are eligible for compensation due to the data loss that happened on "
+"February 16th, 2020."
+msgstr ""
+"Вы имеете право на компенсацию за потерю информации которая произошла 16-го "
+"Февраля 2020-го."
+
+#: loco:606b766378f4e75f8e083100
+msgid ""
+"If you haven't had the chance, please take a minute to read what happened at "
+"the following page:"
+msgstr ""
+"Если у вас ещё не было возможности, пожалуйста уделите минуту на прочтение "
+"того что произошло на след. странице:"
+
+#: loco:606b766378f4e75f8e083101
+msgid "Official statement and post-mortem"
+msgstr "Официальное заявление и последствия"
+
+#: loco:606b766378f4e75f8e083102
+msgid "Please accept our apology once more."
+msgstr "Пожалуйста примите наше извинение ещё раз."
+
+#: loco:606b766378f4e75f8e083103
+msgid "Please chooce your compensation from the list below"
+msgstr "Пожалуйста выберите ваш метод компенсации из списка ниже"
+
+#: loco:606b766378f4e75f8e083104
+msgid ""
+"Compensation is offered in the form of free time on the new AstroBin "
+"subscription tier called \"Ultimate\"."
+msgstr ""
+"Компенсация предлагается в форме бесплатного времени в новой подписке "
+"AstroBin которая называется \"Ultimate\"."
+
+#: loco:606b766378f4e75f8e083105
+#, python-format
+msgid ""
+"To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
+"target=\"_blank\">the pricing page</a>."
+msgstr ""
+"Чтобы узнать больше про AstroBin Ultimate, пожалуйста посетите <a "
+"href=\"%(url)s\" target=\"_blank\">страницу цен</a>"
+
+#: loco:606b766378f4e75f8e083106
+msgid "Submit"
+msgstr "Отправить"
+
+#: loco:606b766378f4e75f8e083107
+msgid "Data loss compensation reauest"
+msgstr "Заявка на компенсацию за потерю информации"
+
+#: loco:606b766378f4e75f8e083108
+msgid "Already done"
+msgstr "Уже выполнено"
+
+#: loco:606b766378f4e75f8e083109
+msgid "Sorry, you can't do this again."
+msgstr "Извините, вы не можете сделать это ещё раз."
+
+#: loco:606b766378f4e75f8e08310a
+msgid "Your preference was already recorded and cannot be changed."
+msgstr "Ваше предпочтение уже сохранено и не может быть изменено."
+
+#: loco:606b766378f4e75f8e08310b
+msgid "Not eligible"
+msgstr "Не имеет права"
+
+#: loco:606b766378f4e75f8e08310c
+msgid "It looks like you're not eligible"
+msgstr "Кажется вы не имеете права"
+
+#: loco:606b766378f4e75f8e08310d
+msgid ""
+"Sorry, but this page is for people who were on AstroBin Premium on the day "
+"that the data loss incident happened, and it looks like you aren't among "
+"them."
+msgstr ""
+"Извините, но эта страница для пользователей у которых был AstroBin Premium в "
+"день когда случилась потеря информации, и кажется вы не один из них."
+
+#: loco:606b766378f4e75f8e08310e
+msgid "Success"
+msgstr "Успешно"
+
+#: loco:606b766378f4e75f8e08310f
+msgid "All done!"
+msgstr "Всё готово!"
+
+#: loco:606b766378f4e75f8e083110
+msgid ""
+"Your preference has been recorded and it has already been applied. Thank you!"
+msgstr "Ваше предпочтение было записано и уже применено. Спасибо!"
+
+#: loco:606b766378f4e75f8e083111
 msgid "Migrate donations"
 msgstr "Перевод взносов"
 
+#: loco:606b766378f4e75f8e083112
 msgid "Error!"
 msgstr "Ошибка!"
 
+#: loco:606b766378f4e75f8e083113
 msgid ""
 "Sorry, but it looks like you cannot migrate your donations to a Premium "
 "membership."
@@ -60,12 +203,15 @@ msgstr ""
 "Извините, но кажется, что вы не можете перенести ваши взносы в Premium "
 "членство."
 
+#: loco:606b766378f4e75f8e083114
 msgid "You already have a paid membership."
 msgstr "Вы уже оплатили членство."
 
+#: loco:606b766378f4e75f8e083115
 msgid "We could not find any donations from you last year."
 msgstr "Не получается найти каких-либо взносов от вас за последний год."
 
+#: loco:606b766378f4e75f8e083116
 msgid ""
 "Your donations last year were not enough to cover a Premium subscription for "
 "this year."
@@ -73,9 +219,11 @@ msgstr ""
 "Ваши взносы за последний год недостаточны для покрытия подписки Premium "
 "членства в этом году."
 
+#: loco:606b766378f4e75f8e083117
 msgid "View the subscription plans"
 msgstr "Посмотреть планы подписки"
 
+#: loco:606b766378f4e75f8e083118
 msgid ""
 "As you  have made donations during the last year, you may choose to transfer "
 "the amount you donated towards an AstroBin Premium membership. The "
@@ -86,6 +234,7 @@ msgstr ""
 "перевода во взнос членства Premium AstroBin. Время истечения членства будет "
 "пропорционально зависеть от значения взноса."
 
+#: loco:606b766378f4e75f8e083119
 msgid ""
 "If you are feeling particularly cool and generous, you may choose to "
 "consider your past donations as a contribution to support past efforts, and "
@@ -95,24 +244,26 @@ msgstr ""
 "в качестве вклада в поддержку прошлых усилий и снова оплатить за план "
 "Premium. Решать вам!"
 
+#: loco:606b766378f4e75f8e08311a
 msgid "No, I want to pay for Premium"
 msgstr "Нет, я хочу оплатить Premium"
 
-msgid "Success"
-msgstr "Успешно"
-
+#: loco:606b766378f4e75f8e08311b
 msgid "Your migration was successful."
 msgstr "Ваш перенос прошел успешно."
 
+#: loco:606b766378f4e75f8e08311c
 msgid "Thanks for supporting AstroBin!"
 msgstr "Спасибо за поддержку AstroBin!"
 
+#: loco:606b766378f4e75f8e08311d
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
 msgstr ""
 "Ваша \"%(subscription_name)s\" подписка на AstroBin только что истекла."
 
+#: loco:606b766378f4e75f8e08311e
 msgid ""
 "When a subscription on AstroBin expires, nothing happens to your images or "
 "any of your content. You are reverted to AstroBin Free and will not be able "
@@ -126,15 +277,18 @@ msgstr ""
 "продолжить пользоваться AstroBin в других аспектах, если у вас нет новых "
 "изображений на данный момент."
 
+#: loco:606b766378f4e75f8e08311f
 msgid ""
 "When you are ready to renew your subscription, please visit the following "
 "page:"
 msgstr ""
 "Когда вы готовы обновить вашу подписку, пожалуйста посетите эту страницу:"
 
+#: loco:606b766378f4e75f8e083120
 msgid "Your AstroBin subscription has just expired"
 msgstr "Ваша AstroBin подписка только что истекла"
 
+#: loco:606b766378f4e75f8e083121
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
@@ -142,6 +296,7 @@ msgid ""
 msgstr ""
 "Ваша \"%(subscription_name)s\" подписка на AstroBin истекает на неделе."
 
+#: loco:606b766378f4e75f8e083122
 msgid ""
 "PLEASE NOTE! At the moment, you cannot renew a subscription while it is "
 "still ongoing. Please wait until it is expired. Thank you!"
@@ -149,9 +304,11 @@ msgstr ""
 "ПОЖАЛУЙСТА УЧТИТЕ! Вы не можете обновить подписку пока она активна. "
 "Пожалуйста дождитесь пока она не истечёт. Спасибо!"
 
+#: loco:606b766378f4e75f8e083123
 msgid "Your AstroBin subscription will expire in one week"
 msgstr "Ваша AstroBin подписка истекает на неделе"
 
+#: loco:606b766378f4e75f8e083124
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin will be "
@@ -160,6 +317,7 @@ msgstr ""
 "Ваша \"%(subscription_name)s\" подписка на AstroBin будет автоматически "
 "обновлена на неделе."
 
+#: loco:606b766378f4e75f8e083125
 msgid ""
 "You have an automatically renewing subscription on AstroBin, and we will "
 "attempt to renew it automatically. If your subscription was created the "
@@ -171,6 +329,7 @@ msgstr ""
 "PayPal будет стараться списать с вашей карты или со средств доступных на "
 "вашем аккаунте."
 
+#: loco:606b766378f4e75f8e083126
 msgid ""
 "If your subscription was created manually via a bank transfer, please get in "
 "touch for a new payment."
@@ -178,12 +337,15 @@ msgstr ""
 "Если ваша подписка оплачена вручную, через банковский перевод, пожалуйста "
 "создайте новый платёж."
 
+#: loco:606b766378f4e75f8e083127
 msgid "Thank you!"
 msgstr "Благодарим!"
 
+#: loco:606b766378f4e75f8e083128
 msgid "Your AstroBin subscription will be automatically renewed in one week"
 msgstr "Ваша AstroBin подписка будет автоматически обновлена на неделе"
 
+#: loco:606b766378f4e75f8e083129
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin will be "
@@ -192,381 +354,504 @@ msgstr ""
 "Ваша \"%(subscription_name)s\" подписка на AstroBin будет автоматически "
 "обновлена в течении 30 дней."
 
+#: loco:606b766378f4e75f8e08312a
 msgid "Your AstroBin subscription will be automatically renewed in 30 days"
 msgstr "Ваша AstroBin подписка будет автоматически обновлена в течении 30 дней"
 
-#~ msgid "I wasn't really affected by the data loss"
-#~ msgstr "Меня не очень коснулась потеря данных"
-
-#~ msgid "I don't require compensation: I want to support AstroBin"
-#~ msgstr "Мне не нужна компенсация: Я хочу поддержать AstroBin"
-
-#~ msgid "I would like to try AstroBin Ultimate for free for 1 month"
-#~ msgstr "Я хочу попробовать подписку AstroBin Ultimate бесплатно на 1 месяц"
-
-#~ msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
-#~ msgstr ""
-#~ "Я чувствую себя получившим право на AstroBin Ultimate бесплатно на 3 "
-#~ "месяца"
-
-#~ msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
-#~ msgstr ""
-#~ "Я чувствую себя получившим право на AstroBin Ultimate бесплатно на 6 "
-#~ "месяцев"
-
-#~ msgid "Requested compensation"
-#~ msgstr "Запрашиваемая компенсация"
-
-#~ msgid "Please indicate if and how much you would like to be compensated."
-#~ msgstr ""
-#~ "Пожалуйста укажите нужна ли вам компенсация и, если да, то каким образом."
-
-#~ msgid "Data loss compensation request"
-#~ msgstr "Запрос на компенсацию потери изображений"
-
-#~ msgid ""
-#~ "You are eligible for compensation due to the data loss that happened on "
-#~ "February 16th, 2020."
-#~ msgstr ""
-#~ "Вы имеете право на компенсацию за потерю информации которая произошла 16-"
-#~ "го Февраля 2020-го."
-
-#~ msgid ""
-#~ "If you haven't had the chance, please take a minute to read what happened "
-#~ "at the following page:"
-#~ msgstr ""
-#~ "Если у вас ещё не было возможности, пожалуйста уделите минуту на "
-#~ "прочтение того что произошло на след. странице:"
-
-#~ msgid "Official statement and post-mortem"
-#~ msgstr "Официальное заявление и последствия"
-
-#~ msgid "Please accept our apology once more."
-#~ msgstr "Пожалуйста примите наше извинение ещё раз."
-
-#~ msgid "Please chooce your compensation from the list below"
-#~ msgstr "Пожалуйста выберите ваш метод компенсации из списка ниже"
-
-#~ msgid ""
-#~ "Compensation is offered in the form of free time on the new AstroBin "
-#~ "subscription tier called \"Ultimate\"."
-#~ msgstr ""
-#~ "Компенсация предлагается в форме бесплатного времени в новой подписке "
-#~ "AstroBin которая называется \"Ultimate\"."
-
-#~ msgid ""
-#~ "To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
-#~ "target=\"_blank\">the pricing page</a>."
-#~ msgstr ""
-#~ "Чтобы узнать больше про AstroBin Ultimate, пожалуйста посетите <a href="
-#~ "\"%(url)s\" target=\"_blank\">страницу цен</a>"
-
-#~ msgid "Submit"
-#~ msgstr "Отправить"
-
-#~ msgid "Data loss compensation reauest"
-#~ msgstr "Заявка на компенсацию за потерю информации"
-
-#~ msgid "Already done"
-#~ msgstr "Уже выполнено"
-
-#~ msgid "Sorry, you can't do this again."
-#~ msgstr "Извините, вы не можете сделать это ещё раз."
-
-#~ msgid "Your preference was already recorded and cannot be changed."
-#~ msgstr "Ваше предпочтение уже сохранено и не может быть изменено."
-
-#~ msgid "Not eligible"
-#~ msgstr "Не имеет права"
-
-#~ msgid "It looks like you're not eligible"
-#~ msgstr "Кажется вы не имеете права"
-
-#~ msgid ""
-#~ "Sorry, but this page is for people who were on AstroBin Premium on the "
-#~ "day that the data loss incident happened, and it looks like you aren't "
-#~ "among them."
-#~ msgstr ""
-#~ "Извините, но эта страница для пользователей у которых был AstroBin "
-#~ "Premium в день когда случилась потеря информации, и кажется вы не один из "
-#~ "них."
-
-#~ msgid "All done!"
-#~ msgstr "Всё готово!"
-
-#~ msgid ""
-#~ "Your preference has been recorded and it has already been applied. Thank "
-#~ "you!"
-#~ msgstr "Ваше предпочтение было записано и уже применено. Спасибо!"
-
-#~ msgid "You follow each other"
-#~ msgstr "Вы подписаны друг к другу"
-
-#~ msgid "Images"
-#~ msgstr "Изображения"
-
-#~ msgid "Followers"
-#~ msgstr "Подписчики"
-
-#~ msgid "Following"
-#~ msgstr "Подписан"
-
-#~ msgid "User"
-#~ msgstr "Пользователь"
-
-#~ msgid "No users."
-#~ msgstr "Нет пользователей."
-
-#~ msgid "Administrator"
-#~ msgstr "Администратор"
-
-#~ msgid "Image moderator"
-#~ msgstr "Модератор изобр."
-
-#~ msgid "IOTD Submitter"
-#~ msgstr "ИД Номинирующий"
-
-#~ msgid "IOTD Reviewer"
-#~ msgstr "ИД Рецензент"
-
-#~ msgid "IOTD Judge"
-#~ msgstr "ИД Судья"
-
-#~ msgid "Premium member"
-#~ msgstr "Премиум участник"
-
-#~ msgid ""
-#~ "Your email bounce reports have been removed from AstroBin. Please make "
-#~ "sure that your email works well or you will get the same warning message "
-#~ "again. Thanks!"
-#~ msgstr ""
-#~ "Отчеты о сбоях электронной почты были удалены из AstroBin. Убедитесь, что "
-#~ "ваша электронная почта работает нормально, иначе вы снова получите то же "
-#~ "предупреждение. Спасибо!"
-
-#~ msgid ""
-#~ "Your spam reports have been removed from AstroBin. Please make sure you "
-#~ "don't have a filter or rule to always mark AstroBin's emails as spam! If "
-#~ "you don't want to receive emails from AstroBin, look for the settings "
-#~ "link that's at the bottom of every email. Thanks!"
-#~ msgstr ""
-#~ "Ваши сообщения о спаме были удалены из AstroBin. Убедитесь, что у вас нет "
-#~ "фильтра или правила, чтобы всегда отмечать электронные письма AstroBin "
-#~ "как спам! Если вы не хотите получать электронные письма от AstroBin, "
-#~ "найдите ссылку настроек, которая находится внизу каждого электронного "
-#~ "письма. Спасибо!"
-
-#~ msgid "Perform a blind solve"
-#~ msgstr "Выполнить определение \"вслепую\""
-
-#~ msgid ""
-#~ "Attempt to solve with no hints. In most cases this will work, but it will "
-#~ "take longer."
-#~ msgstr ""
-#~ "Попытаться определить без подсказок. В большинстве случаев срабатывает, "
-#~ "но занимает больше времени."
-
-#~ msgid "Width of the field in degrees"
-#~ msgstr "Ширина поля в градусах"
-
-#~ msgid "Width of the field in arcminutes"
-#~ msgstr "Ширина поля в угл. минутах"
-
-#~ msgid "Resolution of the field in arcseconds/pixel"
-#~ msgstr "Разрешение поля в угл. минутах/пкс"
-
-#~ msgid "Field size units"
-#~ msgstr "Значения размера поля"
-
-#~ msgid "Min field size"
-#~ msgstr "Минимальное значение поля"
-
-#~ msgid "Estimate the lower bound for the width of this field."
-#~ msgstr "Определите нижнюю границу ширины этого поля."
-
-#~ msgid "Max field size"
-#~ msgstr "Максимальный размер поля"
-
-#~ msgid "Estimate the upper bound for the width of this field."
-#~ msgstr "Определите верхнюю границу ширины этого поля."
-
-#~ msgid "Center RA"
-#~ msgstr "Центр П.В."
-
-#~ msgid "Center RA of the field in degrees, 0.000 to 360.000"
-#~ msgstr "Центр П.В. поля в градусах, 0.000 до 360.000"
-
-#~ msgid "Center dec"
-#~ msgstr "Центр скл"
-
-#~ msgid "Center dec of the field in degrees, -90.000 to +90.000"
-#~ msgstr "Центр склонения поля в градусах, -90.000 до +90.000"
-
-#~ msgid "Radius"
-#~ msgstr "Радиус"
-
-#~ msgid ""
-#~ "Tells the plate-solving engine to look within these many degrees of the "
-#~ "given center RA and dec position."
-#~ msgstr ""
-#~ "Сообщает определителю по координатам смотреть в пределах данного центра "
-#~ "по прямому восхождению и склонению."
-
-#~ msgid "Small"
-#~ msgstr "Маленький"
-
-#~ msgid "Medium"
-#~ msgstr "Средний"
-
-#~ msgid "Large"
-#~ msgstr "Большой"
-
-#~ msgid "Sample raw frame (max 100 MB)"
-#~ msgstr "Пример сырого кадра (макс. 100 Мб)"
-
-#~ msgid ""
-#~ "To improve the accuracy of your plate-solution even further, please "
-#~ "upload one of the XISF or FITS files from your data set. Such files "
-#~ "normally have date and time headers that will allow AstroBin to calculate "
-#~ "solar system body ephemerides and find planets and asteroids in your "
-#~ "image (provided you also add location information to it).<br/><br/>For "
-#~ "maximum accuracy, it's recommended that you use PixInsight's native and "
-#~ "open format XISF. Learn more about XISF here:<br/><br/><a href=\"https://"
-#~ "pixinsight.com/xisf/\" target=\"_blank\">https://pixinsight.com/xisf/</"
-#~ "a><br/><br/> <strong>Please note:</strong> it's very important that the "
-#~ "XISF or FITS file you upload is aligned to your processed image, "
-#~ "otherwise the object annotations will not match. To improve your chances "
-#~ "at a successful accurate plate-solution, calibrate your file the usual "
-#~ "way (dark/bias/flats) but do not stretch it."
-#~ msgstr ""
-#~ "Чтобы еще больше повысить точность плейтсолва, загрузите один из файлов "
-#~ "XISF или FITS из своего набора данных. Такие файлы обычно имеют заголовки "
-#~ "даты и времени, которые позволяют AstroBin вычислять эфемериды тел "
-#~ "Солнечной системы и находить планеты и астероиды на вашем изображении "
-#~ "(при условии, что вы также добавляете к нему информацию о "
-#~ "местоположении). <br/> <br/> Для максимальной точности рекомендуется "
-#~ "использовать собственный и открытый формат PixInsight XISF. Узнайте "
-#~ "больше о XISF здесь: <br/> <br/> <a href=\"https://pixinsight.com/xisf/\" "
-#~ "target=\"_blank\"> https://pixinsight.com/xisf/ </a> <br/> <br/> <strong> "
-#~ "Обратите внимание: </strong> очень важно, чтобы загружаемый файл XISF или "
-#~ "FITS был выровнен с обработанным изображением, в противном случае "
-#~ "аннотации объектов не будут совпадать. Чтобы повысить ваши шансы на "
-#~ "получение точного раствора для планшета, откалибруйте файл обычным "
-#~ "способом (темный / смещенный / плоский), но не растягивайте его."
-
-#~ msgid "Scaled font size"
-#~ msgstr "Масштабированный размер шрифта"
-
-#~ msgid "Font size of the annotations on your main image page"
-#~ msgstr "Размер шрифта аннотаций на главной странице изображения"
-
-#~ msgid "Show equatorial grid"
-#~ msgstr "Показывать экваториальную сетку"
-
-#~ msgid "Show constellation borders"
-#~ msgstr "Показывать границы созвездий"
-
-#~ msgid "Show constellation lines"
-#~ msgstr "Показывать линии созвездий"
-
-#~ msgid "Show named stars"
-#~ msgstr "Показывать названные звёзды"
-
-#~ msgid "Show Messier objects"
-#~ msgstr "Показывать объекты Мессье"
-
-#~ msgid "Show NGC and IC objects"
-#~ msgstr "Показывать NGC и IC объекты"
-
-#~ msgid "Show VdB objects"
-#~ msgstr "Показывать VdB объекты"
-
-#~ msgid "Show Sharpless objects"
-#~ msgstr "Показывать Sharpless объекты"
-
-#~ msgid "Show Barnard objects"
-#~ msgstr "Показывать Barnard объекты"
-
-#~ msgid "Show PGC objects"
-#~ msgstr "Показывать PGC объекты"
-
-#~ msgid "Show planets"
-#~ msgstr "Показывать планеты"
-
-#~ msgid ""
-#~ "Only available if your image at least an acquisition time and an accurate "
-#~ "location"
-#~ msgstr ""
-#~ "Доступно только в том случае, если у вашего изображения хотя бы время "
-#~ "получения и точное местоположение"
-
-#~ msgid "Show asteroids"
-#~ msgstr "Показывать астероиды"
-
-#~ msgid "Show GCVS stars"
-#~ msgstr "Показывать GCVS звёзды"
-
-#~ msgid "General Catalog of Variable Stars"
-#~ msgstr "Общий каталог переменных звёзд"
-
-#~ msgid "Show Tycho-2 catalog"
-#~ msgstr "Показывать Tycho-2 каталог"
-
-#~ msgid "Show CGPN objects"
-#~ msgstr "Показывать CGPN объекты"
-
-#~ msgid "Getting plate-solving status, please wait..."
-#~ msgstr "Получение статуса для размещения координат, пожалуйста ждите..."
-
-#~ msgid "Plate-solving starting, please do not leave this page..."
-#~ msgstr "Плейтсолв начинается, пожалуйста не покидайте эту страницу..."
-
-#~ msgid "Advanced plate-solving starting, please do not leave this page..."
-#~ msgstr ""
-#~ "Продвинутый плейтсолв начинается, пожалуйста не покидайте эту страницу..."
-
-#~ msgid "Plate-solving started. You may leave this page."
-#~ msgstr "Плейтсолв начался. Вы можете покинуть эту страницу."
-
-#~ msgid "Advanced plate-solving started. You may leave this page."
-#~ msgstr "Продвинутый плейтсолв начался. Вы можете покинуть эту страницу."
-
-#~ msgid "Plate-solving almost ready, please do not leave this page..."
-#~ msgstr ""
-#~ "Размещение по координатам почти готово, пожалуйста не покидайте эту "
-#~ "страницу..."
-
-#~ msgid "This image could not be plate-solved."
-#~ msgstr "Это изображение не может быть размещено по координатам."
-
-#~ msgid "The advanced plate-solving failed."
-#~ msgstr "Продвинутый плейтсолв провалился."
-
-#~ msgid "This image has been plate-solved. Refresh the page to see new data!"
-#~ msgstr ""
-#~ "Плейтсолв этого изображения проведено успешно. Пожалуйста обновите "
-#~ "страницу, чтобы увидеть новые данные."
-
-#~ msgid ""
-#~ "The advanced plate-solved finished. Refresh the page to see new data!"
-#~ msgstr ""
-#~ "Продвинутый плейтсолв этого изображения завершено. Пожалуйста обновите "
-#~ "страницу, чтобы увидеть новые данные!"
-
-#~ msgid "Error"
-#~ msgstr "Ошибка"
-
-#~ msgid ""
-#~ "AstroBin could not plate-solve this image because it was not possible to "
-#~ "establish a connection to nova.astrometry.net. Please try again later!"
-#~ msgstr ""
-#~ "AstroBin не смог распознать это изображение, потому что не удалось "
-#~ "установить соединение с nova.astrometry.net. Пожалуйста, повторите "
-#~ "попытку позже!"
-
-#~ msgid ""
-#~ "AstroBin could not plate-solve this image because nova.astrometry.net "
-#~ "reported an internal server error."
-#~ msgstr ""
-#~ "AstroBin не смог распознать это изображение, потому что nova.astrometry."
-#~ "net сообщила о внутренней ошибке сервера."
+#: loco:62149fafddeeb54b7a38c9e2
+msgid "You follow each other"
+msgstr "Вы подписаны друг к другу"
+
+#: loco:62149fafddeeb54b7a38c9e3
+msgid "Images"
+msgstr "Изображения"
+
+#: loco:62149fafddeeb54b7a38c9e4
+msgid "Followers"
+msgstr "Подписчики"
+
+#: loco:62149fafddeeb54b7a38c9e5
+msgid "Following"
+msgstr "Подписан"
+
+#: loco:62149fafddeeb54b7a38c9e6
+msgid "User"
+msgstr "Пользователь"
+
+#: loco:62149fafddeeb54b7a38c9e7
+msgid "No users."
+msgstr "Нет пользователей."
+
+#: loco:62149fafddeeb54b7a38c9e8
+msgid "Administrator"
+msgstr "Администратор"
+
+#: loco:62149fafddeeb54b7a38c9e9
+msgid "Image moderator"
+msgstr "Модератор изобр."
+
+#: loco:62149fafddeeb54b7a38c9ea
+msgid "IOTD Submitter"
+msgstr "ИД Номинирующий"
+
+#: loco:62149fafddeeb54b7a38c9eb
+msgid "IOTD Reviewer"
+msgstr "ИД Рецензент"
+
+#: loco:62149fafddeeb54b7a38c9ec
+msgid "IOTD Judge"
+msgstr "ИД Судья"
+
+#: loco:62149fafddeeb54b7a38c9ed
+msgid "Premium member"
+msgstr "Премиум участник"
+
+#: loco:62149fafddeeb54b7a38c9ee
+msgid ""
+"Your email bounce reports have been removed from AstroBin. Please make sure "
+"that your email works well or you will get the same warning message again. "
+"Thanks!"
+msgstr ""
+"Отчеты о сбоях электронной почты были удалены из AstroBin. Убедитесь, что "
+"ваша электронная почта работает нормально, иначе вы снова получите то же "
+"предупреждение. Спасибо!"
+
+#: loco:62149fafddeeb54b7a38c9ef
+msgid ""
+"Your spam reports have been removed from AstroBin. Please make sure you "
+"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
+"don't want to receive emails from AstroBin, look for the settings link "
+"that's at the bottom of every email. Thanks!"
+msgstr ""
+"Ваши сообщения о спаме были удалены из AstroBin. Убедитесь, что у вас нет "
+"фильтра или правила, чтобы всегда отмечать электронные письма AstroBin как "
+"спам! Если вы не хотите получать электронные письма от AstroBin, найдите "
+"ссылку настроек, которая находится внизу каждого электронного письма. "
+"Спасибо!"
+
+#: loco:6214a1deaafe2c507c005362
+msgid "Perform a blind solve"
+msgstr "Выполнить определение \"вслепую\""
+
+#: loco:6214a1deaafe2c507c005363
+msgid ""
+"Attempt to solve with no hints. In most cases this will work, but it will "
+"take longer."
+msgstr ""
+"Попытаться определить без подсказок. В большинстве случаев срабатывает, но "
+"занимает больше времени."
+
+#: loco:6214a1deaafe2c507c005364
+msgid "Width of the field in degrees"
+msgstr "Ширина поля в градусах"
+
+#: loco:6214a1deaafe2c507c005365
+msgid "Width of the field in arcminutes"
+msgstr "Ширина поля в угл. минутах"
+
+#: loco:6214a1deaafe2c507c005366
+msgid "Resolution of the field in arcseconds/pixel"
+msgstr "Разрешение поля в угл. минутах/пкс"
+
+#: loco:6214a1deaafe2c507c005367
+msgid "Field size units"
+msgstr "Значения размера поля"
+
+#: loco:6214a1deaafe2c507c005368
+msgid "Min field size"
+msgstr "Минимальное значение поля"
+
+#: loco:6214a1deaafe2c507c005369
+msgid "Estimate the lower bound for the width of this field."
+msgstr "Определите нижнюю границу ширины этого поля."
+
+#: loco:6214a1deaafe2c507c00536a
+msgid "Max field size"
+msgstr "Максимальный размер поля"
+
+#: loco:6214a1deaafe2c507c00536b
+msgid "Estimate the upper bound for the width of this field."
+msgstr "Определите верхнюю границу ширины этого поля."
+
+#: loco:6214a1deaafe2c507c00536c
+msgid "Center RA"
+msgstr "Центр П.В."
+
+#: loco:6214a1deaafe2c507c00536d
+msgid "Center RA of the field in degrees, 0.000 to 360.000"
+msgstr "Центр П.В. поля в градусах, 0.000 до 360.000"
+
+#: loco:6214a1deaafe2c507c00536e
+msgid "Center dec"
+msgstr "Центр скл"
+
+#: loco:6214a1deaafe2c507c00536f
+msgid "Center dec of the field in degrees, -90.000 to +90.000"
+msgstr "Центр склонения поля в градусах, -90.000 до +90.000"
+
+#: loco:6214a1deaafe2c507c005370
+msgid "Radius"
+msgstr "Радиус"
+
+#: loco:6214a1deaafe2c507c005371
+msgid ""
+"Tells the plate-solving engine to look within these many degrees of the "
+"given center RA and dec position."
+msgstr ""
+"Сообщает определителю по координатам смотреть в пределах данного центра по "
+"прямому восхождению и склонению."
+
+#: loco:6214a1deaafe2c507c005372
+msgid "Small"
+msgstr "Маленький"
+
+#: loco:6214a1deaafe2c507c005373
+msgid "Medium"
+msgstr "Средний"
+
+#: loco:6214a1deaafe2c507c005374
+msgid "Large"
+msgstr "Большой"
+
+#: loco:6214a1deaafe2c507c005375
+msgid "Sample raw frame (max 100 MB)"
+msgstr "Пример сырого кадра (макс. 100 Мб)"
+
+#: loco:6214a1deaafe2c507c005376
+msgid ""
+"To improve the accuracy of your plate-solution even further, please upload "
+"one of the XISF or FITS files from your data set. Such files normally have "
+"date and time headers that will allow AstroBin to calculate solar system "
+"body ephemerides and find planets and asteroids in your image (provided you "
+"also add location information to it).<br/><br/>For maximum accuracy, it's "
+"recommended that you use PixInsight's native and open format XISF. Learn "
+"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
+"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
+"note:</strong> it's very important that the XISF or FITS file you upload is "
+"aligned to your processed image, otherwise the object annotations will not "
+"match. To improve your chances at a successful accurate plate-solution, "
+"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
+msgstr ""
+"Чтобы еще больше повысить точность плейтсолва, загрузите один из файлов XISF "
+"или FITS из своего набора данных. Такие файлы обычно имеют заголовки даты и "
+"времени, которые позволяют AstroBin вычислять эфемериды тел Солнечной "
+"системы и находить планеты и астероиды на вашем изображении (при условии, "
+"что вы также добавляете к нему информацию о местоположении). <br/> <br/> Для "
+"максимальной точности рекомендуется использовать собственный и открытый "
+"формат PixInsight XISF. Узнайте больше о XISF здесь: <br/> <br/> <a "
+"href=\"https://pixinsight.com/xisf/\" target=\"_blank\"> https://pixinsight."
+"com/xisf/ </a> <br/> <br/> <strong> Обратите внимание: </strong> очень важно,"
+" чтобы загружаемый файл XISF или FITS был выровнен с обработанным "
+"изображением, в противном случае аннотации объектов не будут совпадать. "
+"Чтобы повысить ваши шансы на получение точного раствора для планшета, "
+"откалибруйте файл обычным способом (темный / смещенный / плоский), но не "
+"растягивайте его."
+
+#: loco:6214a1deaafe2c507c005377
+msgid "Scaled font size"
+msgstr "Масштабированный размер шрифта"
+
+#: loco:6214a1deaafe2c507c005378
+msgid "Font size of the annotations on your main image page"
+msgstr "Размер шрифта аннотаций на главной странице изображения"
+
+#: loco:6214a1deaafe2c507c005379
+msgid "Show equatorial grid"
+msgstr "Показывать экваториальную сетку"
+
+#: loco:6214a1deaafe2c507c00537a
+msgid "Show constellation borders"
+msgstr "Показывать границы созвездий"
+
+#: loco:6214a1deaafe2c507c00537b
+msgid "Show constellation lines"
+msgstr "Показывать линии созвездий"
+
+#: loco:6214a1deaafe2c507c00537c
+msgid "Show named stars"
+msgstr "Показывать названные звёзды"
+
+#: loco:6214a1deaafe2c507c00537d
+msgid "Show Messier objects"
+msgstr "Показывать объекты Мессье"
+
+#: loco:6214a1deaafe2c507c00537e
+msgid "Show NGC and IC objects"
+msgstr "Показывать NGC и IC объекты"
+
+#: loco:6214a1deaafe2c507c00537f
+msgid "Show VdB objects"
+msgstr "Показывать VdB объекты"
+
+#: loco:6214a1deaafe2c507c005380
+msgid "Show Sharpless objects"
+msgstr "Показывать Sharpless объекты"
+
+#: loco:6214a1deaafe2c507c005381
+msgid "Show Barnard objects"
+msgstr "Показывать Barnard объекты"
+
+#: loco:6214a1deaafe2c507c005382
+msgid "Show PGC objects"
+msgstr "Показывать PGC объекты"
+
+#: loco:6214a1deaafe2c507c005383
+msgid "Show planets"
+msgstr "Показывать планеты"
+
+#: loco:6214a1deaafe2c507c005384
+msgid ""
+"Only available if your image at least an acquisition time and an accurate "
+"location"
+msgstr ""
+"Доступно только в том случае, если у вашего изображения хотя бы время "
+"получения и точное местоположение"
+
+#: loco:6214a1deaafe2c507c005385
+msgid "Show asteroids"
+msgstr "Показывать астероиды"
+
+#: loco:6214a1deaafe2c507c005386
+msgid "Show GCVS stars"
+msgstr "Показывать GCVS звёзды"
+
+#: loco:6214a1deaafe2c507c005387
+msgid "General Catalog of Variable Stars"
+msgstr "Общий каталог переменных звёзд"
+
+#: loco:6214a1deaafe2c507c005388
+msgid "Show Tycho-2 catalog"
+msgstr "Показывать Tycho-2 каталог"
+
+#: loco:6214a1deaafe2c507c005389
+msgid "Show CGPN objects"
+msgstr "Показывать CGPN объекты"
+
+#: loco:6214a1deaafe2c507c00538a
+msgid "Getting plate-solving status, please wait..."
+msgstr "Получение статуса для размещения координат, пожалуйста ждите..."
+
+#: loco:6214a1deaafe2c507c00538b
+msgid "Plate-solving starting, please do not leave this page..."
+msgstr "Плейтсолв начинается, пожалуйста не покидайте эту страницу..."
+
+#: loco:6214a1deaafe2c507c00538c
+msgid "Advanced plate-solving starting, please do not leave this page..."
+msgstr ""
+"Продвинутый плейтсолв начинается, пожалуйста не покидайте эту страницу..."
+
+#: loco:6214a1deaafe2c507c00538d
+msgid "Plate-solving started. You may leave this page."
+msgstr "Плейтсолв начался. Вы можете покинуть эту страницу."
+
+#: loco:6214a1deaafe2c507c00538e
+msgid "Advanced plate-solving started. You may leave this page."
+msgstr "Продвинутый плейтсолв начался. Вы можете покинуть эту страницу."
+
+#: loco:6214a1deaafe2c507c00538f
+msgid "Plate-solving almost ready, please do not leave this page..."
+msgstr ""
+"Размещение по координатам почти готово, пожалуйста не покидайте эту страницу."
+".."
+
+#: loco:6214a1deaafe2c507c005390
+msgid "This image could not be plate-solved."
+msgstr "Это изображение не может быть размещено по координатам."
+
+#: loco:6214a1deaafe2c507c005391
+msgid "The advanced plate-solving failed."
+msgstr "Продвинутый плейтсолв провалился."
+
+#: loco:6214a1deaafe2c507c005392
+msgid "This image has been plate-solved. Refresh the page to see new data!"
+msgstr ""
+"Плейтсолв этого изображения проведено успешно. Пожалуйста обновите страницу, "
+"чтобы увидеть новые данные."
+
+#: loco:6214a1deaafe2c507c005393
+msgid "The advanced plate-solved finished. Refresh the page to see new data!"
+msgstr ""
+"Продвинутый плейтсолв этого изображения завершено. Пожалуйста обновите "
+"страницу, чтобы увидеть новые данные!"
+
+#: loco:6214a1deaafe2c507c005394
+msgid "Error"
+msgstr "Ошибка"
+
+#: loco:6214a1deaafe2c507c005395
+msgid ""
+"AstroBin could not plate-solve this image because it was not possible to "
+"establish a connection to nova.astrometry.net. Please try again later!"
+msgstr ""
+"AstroBin не смог распознать это изображение, потому что не удалось "
+"установить соединение с nova.astrometry.net. Пожалуйста, повторите попытку "
+"позже!"
+
+#: loco:6214a1deaafe2c507c005396
+msgid ""
+"AstroBin could not plate-solve this image because nova.astrometry.net "
+"reported an internal server error."
+msgstr ""
+"AstroBin не смог распознать это изображение, потому что nova.astrometry.net "
+"сообщила о внутренней ошибке сервера."
+
+#: loco:6214a1deaafe2c507c005397
+msgid ""
+"AstroBin could not plate-solve this image because nova.astrometry.net "
+"reported an unepexted error."
+msgstr ""
+
+#: loco:6214a1deaafe2c507c005398
+msgid ""
+"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c005399
+msgid ""
+"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c00539a
+msgid "Show quasars"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c00539b
+msgid "Missing"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c00539c
+msgid "Basic pending"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c00539d
+msgid "Basic failed"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c00539e
+msgid "Basic success"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c00539f
+msgid "Advanced pending"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a0
+msgid "Advanced failed"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a1
+msgid "Advanced success"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a2
+msgid ""
+"AstroBin could not plate-solve this image because of an unexpected error."
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a3
+msgid "n/a"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a4
+msgid "Starting task..."
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a5
+msgid "Downloading image..."
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a6
+msgid "Plate-solving image..."
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a7
+msgid "Generating image annotations..."
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a8
+msgid "Processing SVG documents..."
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a9
+msgid "Uploading results..."
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053aa
+msgid "Task completed"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053ab
+msgid "Plate-solving information"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053ac
+msgid "Status"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053ad
+msgid "Started"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053ae
+msgid "Astrometry.net job"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053af
+msgid "PixInsight job"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b0
+msgid "PixInsight queue size"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b1
+msgid "PixInsight stage"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b2
+msgid "PixInsight log"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b3
+msgid "RA"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b4
+msgid "center"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b5
+msgid "degrees"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b6
+msgid "top/left"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b7
+msgid "top/right"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b8
+msgid "bottom/right"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b9
+msgid "bottom/left"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053ba
+msgid "Dec"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053bb
+msgid "Close"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053bc
+msgid "Invalid"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053bd
+msgid "Generating finding charts..."
+msgstr ""
