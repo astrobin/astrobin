@@ -73,7 +73,7 @@ class CommentNotificationsService:
                         'target': str(instance.content_object),
                         'target_url': build_notification_url(
                             settings.BASE_URL + instance.content_object.get_absolute_url(), instance.author
-                        ),
+                        ) if hasattr(instance.content_object, 'get_absolute_url') else None,
                     }
                 )
 
