@@ -88,19 +88,19 @@ def send_notifications_when_promoted_image_becomes_iotd():
     })
 
 
-@shared_task(time_limit=120)
+@shared_task(time_limit=840)
 def update_submission_queues():
     IotdService().update_submission_queues()
     logger.info("update_submission_queues completed")
 
 
-@shared_task(time_limit=120)
+@shared_task(time_limit=840)
 def update_review_queues():
     IotdService().update_review_queues()
     logger.info("update_review_queues completed")
 
 
-@shared_task(time_limit=120)
+@shared_task(time_limit=840)
 def update_judgement_queues():
     IotdService().update_judgement_queues()
     logger.info("update_judgement_queues completed")
