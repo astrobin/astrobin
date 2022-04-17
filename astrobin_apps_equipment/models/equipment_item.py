@@ -67,6 +67,7 @@ class EquipmentItem(SafeDeleteModel):
             ('WRONG_BRAND', 'The item was assigned to the wrong brand'),
             ('INACCURATE_DATA', 'Some data is inaccurate'),
             ('INSUFFICIENT_DATA', 'Some important data is missing'),
+            ('DUPLICATE', 'This item already exists in the database'),
             ('OTHER', _('Other'))
         ],
         null=True,
