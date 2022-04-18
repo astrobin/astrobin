@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    Equipment item "{{ item }}" was removed from your image "{{ image_title }}"
+{% endblocktrans %}

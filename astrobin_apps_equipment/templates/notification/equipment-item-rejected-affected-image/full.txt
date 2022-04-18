@@ -1,0 +1,33 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+       Equipment item "{{ item }}" was removed from your image "{{ image_title }}"
+{% endblocktrans %}.
+
+{% blocktrans trimmed %}
+    This happened because somebody rejected the creation of this equipment item. Please remember that the AstroBin
+    equipment database is collectively maintained by the community in order to keep a clean and orderly set of data.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Please edit your image and try adding the relevant equipment item again. If possible, use one of the offered
+    suggestions to avoid creating a duplicate.
+{% endblocktrans %}
+
+{% if reject_reason %}
+    {% blocktrans trimmed %}
+        The reviewer cited the following code as the reason for the rejection:
+    {% endblocktrans %}
+
+    {{ reject_reason }}
+{% endif %}
+
+{% if comment %}
+    {% blocktrans trimmed %}
+        The reviewer left the following comment:
+    {% endblocktrans %}
+
+    {{ comment }}
+{% endif %}
+
+{{ image_url }}

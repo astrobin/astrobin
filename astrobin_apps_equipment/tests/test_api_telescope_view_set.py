@@ -1,8 +1,10 @@
+import mock
 from django.test import TestCase
 from django.urls import reverse
 from rest_framework.test import APIClient
 
 from astrobin.tests.generators import Generators
+from astrobin_apps_equipment.models import EquipmentBrand, Telescope
 from astrobin_apps_equipment.models.telescope_base_model import TelescopeType
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 
@@ -142,3 +144,31 @@ class TestApiTelescopeViewSet(TestCase):
         )
 
         self.assertEquals(0, len(response.data))
+
+    @mock.patch("astrobin_apps_equipment.api.views.equipment_item_view_set.push_notification")
+    def test_reject(self, push_notification):
+        user = Generators.user()
+        moderator = Generators.user()
+        telescope = EquipmentGenerators.telescope(created_by=user)
+        image = Generators.image(user=user)
+        image.imaging_telescopes_2.add(telescope)
+
+        client = APIClient()
+        client.force_authenticate(user=moderator)
+
+        push_notification.reset_mock()
+
+        client.post(
+            reverse('astrobin_apps_equipment:telescope-detail', args=(telescope.pk,)) + 'reject/'
+        )
+
+        self.assertFalse(Telescope.objects.filter(pk=telescope.pk).exists())
+
+        self.assertFalse(EquipmentBrand.objects.filter(pk=telescope.brand.pk).exists())
+
+        push_notification.assert_has_calls(
+            [
+                mock.call([user], moderator, 'equipment-item-rejected', mock.ANY),
+                mock.call([user], moderator, 'equipment-item-rejected-affected-image', mock.ANY),
+            ], any_order=True
+        )

@@ -248,6 +248,46 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 }
             )
 
+        affected_images = []
+        for property in (
+            'imaging_telescopes_2',
+            'imaging_cameras_2',
+            'mounts_2',
+            'guiding_telescopes_2',
+            'guiding_cameras_2',
+            'filters_2',
+            'accessories_2',
+            'software_2',
+        ):
+            try:
+                images = Image.objects_including_wip.filter(**{property: item})
+            except ValueError:
+                images = None
+
+            if images is not None and images.count() > 0:
+                for image in images.iterator():
+                    affected_images.append(image)
+
+        for image in affected_images:
+            push_notification(
+                [item.created_by],
+                request.user,
+                'equipment-item-rejected-affected-image',
+                {
+                    'user': request.user.userprofile.get_display_name(),
+                    'user_url': build_notification_url(
+                        settings.BASE_URL + reverse('user_page', args=(request.user.username,))
+                    ),
+                    'item': f'{item.brand.name if item.brand else _("(DIY)")} {item.name}',
+                    'reject_reason': item.reviewer_rejection_reason,
+                    'comment': item.reviewer_comment,
+                    'image_url': build_notification_url(
+                        settings.BASE_URL + reverse('image_detail', args=(image.get_id(),))
+                    ),
+                    'image_title': image.title,
+                }
+            )
+
         if item.klass == EquipmentItemKlass.SENSOR:
             Camera.all_objects.filter(sensor=item).update(sensor=None)
             CameraEditProposal.all_objects.filter(sensor=item).update(sensor=None)
