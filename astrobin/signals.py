@@ -849,7 +849,9 @@ def forum_post_pre_save(sender, instance, **kwargs):
             if Post.objects.filter(pk=instance.pk, on_moderation=True).exists():
                 mentions = current_mentions
             else:
-                mentions = [item for item in current_mentions if item not in previous_mentions]
+                mentions = [
+                    item for item in current_mentions if item not in previous_mentions and item != instance.user
+                ]
         except sender.DoesNotExist:
             mentions = []
 
@@ -946,7 +948,7 @@ def forum_post_post_save(sender, instance, created, **kwargs):
                 perms.may_subscribe_topic(instance.user, instance.topic):
             instance.topic.subscribers.add(instance.user)
 
-        mentions = MentionsService.get_mentions(instance.body)
+        mentions = [x for x in MentionsService.get_mentions(instance.body) if x != instance.user]
         if not instance.on_moderation:
             notify_subscribers(mentions)
             notify_mentioned(mentions)
@@ -955,7 +957,6 @@ def forum_post_post_save(sender, instance, created, **kwargs):
                 'New forum post needs moderation',
                 '%s%s' % (settings.BASE_URL, instance.get_absolute_url())
             )
-
     else:
         mentions = cache.get("post.%d.forum_post_pre_save_mentions" % instance.pk, [])
         cache.delete("post.%d.forum_post_pre_save_mentions" % instance.pk)
