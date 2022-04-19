@@ -7,16 +7,14 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.db.models.functions import Length
 from haystack.constants import Indexable
-from haystack.fields import CharField, IntegerField, FloatField, DateTimeField, BooleanField, MultiValueField
+from haystack.fields import BooleanField, CharField, DateTimeField, FloatField, IntegerField, MultiValueField
 from haystack.indexes import SearchIndex
 from hitcount.models import HitCount
 from pybb.models import Post, Topic
 
 from astrobin.enums.license import License
 from astrobin.enums.moderator_decision import ModeratorDecision
-from astrobin.models import DeepSky_Acquisition
-from astrobin.models import Image
-from astrobin.models import SolarSystem_Acquisition
+from astrobin.models import DeepSky_Acquisition, Image, SolarSystem_Acquisition
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_platesolving.services import SolutionService
@@ -510,11 +508,19 @@ class ImageIndex(SearchIndex, Indexable):
     description = CharField(null=True)
     published = DateTimeField(model_attr='published')
     uploaded = DateTimeField(model_attr='uploaded')
+
     imaging_telescopes = CharField()
     guiding_telescopes = CharField()
     mounts = CharField()
     imaging_cameras = CharField()
     guiding_cameras = CharField()
+
+    imaging_telescopes_2 = CharField()
+    guiding_telescopes_2 = CharField()
+    mounts_2 = CharField()
+    imaging_cameras_2 = CharField()
+    guiding_cameras_2 = CharField()
+
     coord_ra_min = FloatField()
     coord_ra_max = FloatField()
     coord_dec_min = FloatField()
@@ -592,9 +598,7 @@ class ImageIndex(SearchIndex, Indexable):
 
     def prepare_imaging_telescopes(self, obj):
         return [
-            f"{x.get('make')} {x.get('name')} {x.get('type')}" for x in obj.imaging_telescopes \
-                .all() \
-                .values('make', 'name', 'type')
+            f"{x.get('make')} {x.get('name')}" for x in obj.imaging_telescopes.all().values('make', 'name')
         ]
 
     def prepare_guiding_telescopes(self, obj):
@@ -605,13 +609,38 @@ class ImageIndex(SearchIndex, Indexable):
 
     def prepare_imaging_cameras(self, obj):
         return [
-            f"{x.get('make')} {x.get('name')} {x.get('type')}" for x in obj.imaging_cameras \
-                .all() \
-                .values('make', 'name', 'type')
+            f"{x.get('make')} {x.get('name')}" for x in obj.imaging_cameras.all().values('make', 'name', 'type')
         ]
 
     def prepare_guiding_cameras(self, obj):
         return [f"{x.get('make')} {x.get('name')}" for x in obj.guiding_cameras.all().values('make', 'name')]
+
+    def prepare_imaging_telescopes_2(self, obj):
+        return [
+            f"{x.get('brand__name')} {x.get('name')}" for x in
+            obj.imaging_telescopes_2.all().values('brand__name', 'name')
+        ]
+
+    def prepare_guiding_telescopes_2(self, obj):
+        return [
+            f"{x.get('brand__name')} {x.get('name')}" for x in
+            obj.guiding_telescopes_2.all().values('brand__name', 'name')
+        ]
+
+    def prepare_mounts_2(self, obj):
+        return [f"{x.get('brand__name')} {x.get('name')}" for x in obj.mounts_2.all().values('brand__name', 'name')]
+
+    def prepare_imaging_cameras_2(self, obj):
+        return [
+            f"{x.get('brand__name')} {x.get('name')}" for x in
+            obj.imaging_cameras_2.all().values('brand__name', 'name')
+        ]
+
+    def prepare_guiding_cameras_2(self, obj):
+        return [
+            f"{x.get('brand__name')} {x.get('name')}" for x in
+            obj.guiding_cameras_2.all().values('brand__name', 'name')]
+
 
     def prepare_coord_ra_min(self, obj):
         if obj.solution is not None and obj.solution.ra is not None and obj.solution.radius is not None:
