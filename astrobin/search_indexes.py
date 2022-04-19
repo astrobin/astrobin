@@ -279,11 +279,11 @@ def _prepare_max_pixel_size(obj):
 
 
 def _prepare_telescope_types(obj):
-    return [x.type for x in obj.imaging_telescopes.all()]
+    return list(set([x.type for x in obj.imaging_telescopes.all()] + [x.type for x in obj.imaging_telescopes_2.all()]))
 
 
 def _prepare_camera_types(obj):
-    return [x.type for x in obj.imaging_cameras.all()]
+    return list(set([x.type for x in obj.imaging_cameras.all()] + [x.type for x in obj.imaging_cameras_2.all()]))
 
 
 def _prepare_comments(obj):
