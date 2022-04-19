@@ -57,6 +57,7 @@ FIELDS = (
     'camera',
     'bortle_scale_min',
     'bortle_scale_max',
+    'topic',
 
     # Sorting
     'sort'
@@ -123,6 +124,7 @@ class AstroBinSearchForm(SearchForm):
     camera = forms.CharField(required=False)
     bortle_scale_min = forms.FloatField(required=False)
     bortle_scale_max = forms.FloatField(required=False)
+    topic = forms.IntegerField(required=False)
 
     def __init__(self, *args, **kwargs):
         super(AstroBinSearchForm, self).__init__(args, kwargs)
@@ -466,6 +468,14 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filter_by_forum_topic(self, results):
+        topic = self.cleaned_data.get("topic")
+
+        if topic is not None and topic != "":
+            results = results.models(Post).filter(topic_id=topic)
+
+        return results
+
     def sort(self, results):
         order_by = None
         domain = self.cleaned_data.get('d', 'i')
@@ -541,6 +551,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_telescope(sqs)
         sqs = self.filter_by_camera(sqs)
         sqs = self.filter_by_bortle_scale(sqs)
+        sqs = self.filter_by_forum_topic(sqs)
 
         sqs = self.sort(sqs)
 

@@ -748,6 +748,7 @@ class ForumPostIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
     created = DateTimeField(model_attr='created')
     updated = DateTimeField(model_attr='updated', null=True)
+    topic_id = IntegerField(model_attr='topic__pk', null=False)
 
     def get_model(self):
         return Post

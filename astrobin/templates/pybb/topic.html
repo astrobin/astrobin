@@ -71,6 +71,15 @@
         {% endif %}
     {% endif %} {# not  READONLY #}
 
+    <div class="forum-tools">
+        <form class="forum-search" action="{% url 'haystack_search' %}" method="get" autocomplete="off">
+            <input id="q" class="tbox" type="text" name="q" value="{{ request.GET.q }}"
+                   placeholder="{% trans "Search this topic" %}" />
+            <input type="hidden" name="d" value="f" />
+            <input type="hidden" name="topic" value="{{ topic.pk }}" />
+        </form>
+    </div>
+
     <div class="topic">
         <h1>{{ topic.name }}</h1>
 
