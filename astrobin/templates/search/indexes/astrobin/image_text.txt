@@ -24,11 +24,11 @@
 {{object.solution | duplicate_objects_in_field_by_catalog_space}}
 
 {% for i in object.imaging_telescopes.all %}
-    {{i}} {{i.type}}
+    {{i}} {{i.type_label}}
 {% endfor %}
 
 {% for i in object.imaging_cameras.all %}
-    {{i}} {{i.type}}
+    {{i}} {{i.type_label}}
 {% endfor %}
 
 {% for i in object.guiding_telescopes.all %}
@@ -56,5 +56,37 @@
 {% endfor %}
 
 {% for i in object.accessories.all %}
+    {{i}}
+{% endfor %}
+
+{% for i in object.imaging_telescopes_2.all %}
+    {{i}} {{i.type_label}}
+{% endfor %}
+
+{% for i in object.imaging_cameras_2.all %}
+    {{i}} {{i.type_label}}
+{% endfor %}
+
+{% for i in object.guiding_telescopes_2.all %}
+    {{i}}
+{% endfor %}
+
+{% for i in object.guiding_cameras_2.all %}
+    {{i}}
+{% endfor %}
+
+{% for i in object.mounts_2.all %}
+    {{i}}
+{% endfor %}
+
+{% for i in object.filters_2.all %}
+    {{i}}
+{% endfor %}
+
+{% for i in object.software_2.all %}
+    {{i}}
+{% endfor %}
+
+{% for i in object.accessories_2.all %}
     {{i}}
 {% endfor %}
