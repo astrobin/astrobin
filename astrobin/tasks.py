@@ -5,18 +5,8 @@ import subprocess
 import tempfile
 import uuid
 import zipfile
-
-from django.db import IntegrityError
-from django.db.models import OuterRef, Exists
-from django.template.defaultfilters import filesizeformat
-from hitcount.models import HitCount
-from pybb.models import Post
-
-from astrobin.services.gear_service import GearService
-from common.services import DateTimeService
-
-from io import StringIO
 from datetime import datetime, timedelta
+from io import StringIO
 from time import sleep
 from zipfile import ZipFile
 
@@ -29,19 +19,28 @@ from django.core.cache import cache
 from django.core.files import File
 from django.core.mail import EmailMultiAlternatives
 from django.core.management import call_command
+from django.db import IntegrityError
+from django.db.models import Exists, OuterRef
+from django.template.defaultfilters import filesizeformat
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
 from django_bouncy.models import Bounce
 from haystack.query import SearchQuerySet
+from hitcount.models import HitCount
+from pybb.models import Post
 from registration.backends.hmac.views import RegistrationView
 from requests import Response
 
-from astrobin.models import BroadcastEmail, Image, DataDownloadRequest, ImageRevision, Gear, CameraRenameProposal, \
-    GearMigrationStrategy
+from astrobin.models import (
+    BroadcastEmail, CameraRenameProposal, DataDownloadRequest, Gear, GearMigrationStrategy,
+    Image, ImageRevision,
+)
+from astrobin.services.gear_service import GearService
 from astrobin.utils import inactive_accounts, never_activated_accounts, never_activated_accounts_to_be_deleted
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_notifications.utils import push_notification
+from common.services import DateTimeService
 from nested_comments.models import NestedComment
 
 logger = get_task_logger(__name__)
@@ -372,15 +371,73 @@ def prepare_download_data_archive(request_id):
                 image.watermark,
                 str(image.watermark_text).encode('utf-8'),
                 image.watermark_opacity,
-                ';'.join([str(x) for x in image.imaging_telescopes.all()]),
-                ';'.join([str(x) for x in image.guiding_telescopes.all()]),
-                ';'.join([str(x) for x in image.mounts.all()]),
-                ';'.join([str(x) for x in image.imaging_cameras.all()]),
-                ';'.join([str(x) for x in image.guiding_cameras.all()]),
-                ';'.join([str(x) for x in image.focal_reducers.all()]),
-                ';'.join([str(x) for x in image.software.all()]),
-                ';'.join([str(x) for x in image.filters.all()]),
-                ';'.join([str(x) for x in image.accessories.all()]),
+                ';'.join(
+                    list(
+                        set(
+                            [str(x) for x in image.imaging_telescopes.all()] +
+                            [str(x) for x in image.imaging_telescopes_2.all()]
+                        )
+                    )
+                ),
+                ';'.join(
+                    list(
+                        set(
+                            [str(x) for x in image.guiding_telescopes.all()] +
+                            [str(x) for x in image.guiding_telescopes_2.all()]
+                        )
+                    )
+                ),
+                ';'.join(
+                    list(
+                        set(
+                            [str(x) for x in image.mounts.all()] +
+                            [str(x) for x in image.mounts_2.all()]
+                        )
+                    )
+                ),
+                ';'.join(
+                    list(
+                        set(
+                            [str(x) for x in image.imaging_cameras.all()] +
+                            [str(x) for x in image.imaging_cameras_2.all()]
+                        )
+                    )
+                ),
+                ';'.join(
+                    list(
+                        set(
+                            [str(x) for x in image.guiding_cameras.all()] +
+                            [str(x) for x in image.guiding_cameras_2.all()]
+                        )
+                    )
+                ),
+                ';'.join(
+                    [str(x) for x in image.focal_reducers.all()]
+                ),
+                ';'.join(
+                    list(
+                        set(
+                            [str(x) for x in image.software.all()] +
+                            [str(x) for x in image.software_2.all()]
+                        )
+                    )
+                ),
+                ';'.join(
+                    list(
+                        set(
+                            [str(x) for x in image.filters.all()] +
+                            [str(x) for x in image.filters_2.all()]
+                        )
+                    )
+                ),
+                ';'.join(
+                    list(
+                        set(
+                            [str(x) for x in image.accessories.all()] +
+                            [str(x) for x in image.accessories_2.all()]
+                        )
+                    )
+                ),
                 image.is_wip,
                 image.w,
                 image.h,
