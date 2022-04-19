@@ -442,7 +442,10 @@ class AstroBinSearchForm(SearchForm):
         telescope = self.cleaned_data.get("telescope")
 
         if telescope is not None and telescope != "":
-            results = results.filter(imaging_telescopes=CustomContain(telescope))
+            results = results.filter(
+                SQ(imaging_telescopes=CustomContain(telescope)) |
+                SQ(imaging_telescopes_2=CustomContain(telescope))
+            )
 
         return results
 
@@ -450,7 +453,10 @@ class AstroBinSearchForm(SearchForm):
         camera = self.cleaned_data.get("camera")
 
         if camera is not None and camera != "":
-            results = results.filter(imaging_cameras=CustomContain(camera))
+            results = results.filter(
+                SQ(imaging_cameras=CustomContain(camera)) |
+                SQ(imaging_cameras_2=CustomContain(camera))
+            )
 
         return results
 
