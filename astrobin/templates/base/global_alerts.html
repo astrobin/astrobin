@@ -208,22 +208,4 @@
     
 {% endif %}
 
-{% if HAS_UNMIGRATED_LEGACY_GEAR_ITEMS %}
-    <div class="container">
-        <div class="global-alert alert alert-info">
-            <h4 class="alert-heading">
-                {% trans "AstroBin is rebuilding its equipment database!" %}
-            </h4>
-
-            <p>
-                {% trans "Please migrate your gear." %}
-            </p>
-
-            <a class="btn btn-small btn-primary" href="{% app_redirection_service '/equipment/migration-tool' %}">
-                {% trans "Begin migration" %}&hellip;
-            </a>
-       </div>
-    </div>
-{% endif %}
-
 </div>

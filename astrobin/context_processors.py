@@ -75,17 +75,6 @@ def common_variables(request):
             complained = Complaint.objects.filter(address=request.user.email).exists()
             cache.set(cache_key, complained, 3600)
 
-    def has_unmigrated_legacy_gear_items(user: User) -> bool:
-        if user.groups.filter(name='own_equipment_migrators').exists():
-            for klass in ('telescopes', 'cameras', 'mounts', 'filters', 'focal_reducers', 'accessories', 'software'):
-                if getattr(user.userprofile, klass)\
-                        .annotate(count=Count('migration_strategies'))\
-                        .filter(count=0)\
-                        .exists():
-                    return True
-
-        return False
-
     d = {
         'True': True,
         'False': False,
@@ -144,7 +133,6 @@ def common_variables(request):
         'HAS_CAMERA_RENAME_PROPOSALS': CameraRenameProposal.objects.filter(user=request.user, status="PENDING") \
             if request.user.is_authenticated \
             else CameraRenameProposal.objects.none(),
-        'HAS_UNMIGRATED_LEGACY_GEAR_ITEMS': has_unmigrated_legacy_gear_items(request.user),
 
         'MODERATOR_DECISION_UNDECIDED': ModeratorDecision.UNDECIDED,
         'MODERATOR_DECISION_APPROVED': ModeratorDecision.APPROVED,
