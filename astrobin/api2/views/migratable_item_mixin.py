@@ -3,15 +3,15 @@ from typing import List
 from annoying.functions import get_object_or_None
 from django.contrib.auth.models import User
 from django.contrib.postgres.search import TrigramDistance
-from django.db.models import Q, QuerySet, Count
-from django.http import HttpResponseBadRequest, HttpRequest
+from django.db.models import Count, Q, QuerySet
+from django.http import HttpRequest, HttpResponseBadRequest
 from django.utils import timezone
 from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 
-from astrobin.models import Gear, Filter, UserProfile, GearMigrationStrategy
-from astrobin_apps_equipment.models import Camera, Telescope, Mount, Accessory, Software
+from astrobin.models import Gear, GearMigrationStrategy, UserProfile
+from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Software, Telescope
 
 
 class MigratableItemMixin:
