@@ -467,12 +467,20 @@ class ImageResource(ModelResource):
         return None
 
     def dehydrate_imaging_telescopes(self, bundle):
-        telescopes = bundle.obj.imaging_telescopes.all()
-        return [str(x) for x in telescopes]
+        return list(
+            set(
+                [str(x) for x in bundle.obj.imaging_telescopes.all()] +
+                [str(x) for x in bundle.obj.imaging_telescopes_2.all()]
+            )
+        )
 
     def dehydrate_imaging_cameras(self, bundle):
-        cameras = bundle.obj.imaging_cameras.all()
-        return [str(x) for x in cameras]
+        return list(
+            set(
+                [str(x) for x in bundle.obj.imaging_cameras.all()] +
+                [str(x) for x in bundle.obj.imaging_cameras_2.all()]
+            )
+        )
 
     def dehydrate_description(self, bundle):
         if bundle.obj.description_bbcode:

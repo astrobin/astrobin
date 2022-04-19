@@ -703,6 +703,14 @@ class Telescope(Gear):
         return super(Telescope, self).attributes() + \
                [('aperture', _("mm")), ('focal_length', _("mm"))]
 
+    def type_label(self):
+        if self.type is not None:
+            for i in self.TELESCOPE_TYPES:
+                if self.type == i[0]:
+                    return i[1]
+
+        return _("Unknown")
+
     class Meta:
         app_label = 'astrobin'
 
@@ -782,6 +790,14 @@ class Camera(Gear):
     def attributes(self):
         return super(Camera, self).attributes() + \
                [('sensor_width', _("mm")), ('sensor_height', _("mm")), ('pixel_size', _("&mu;m"))]
+
+    def type_label(self):
+        if self.type is not None:
+            for i in self.CAMERA_TYPES:
+                if self.type == i[0]:
+                    return i[1]
+
+        return _("Unknown")
 
     class Meta:
         app_label = 'astrobin'

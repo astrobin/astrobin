@@ -7,6 +7,7 @@ from operator import or_
 from django import forms
 from django.contrib.auth.models import User
 from django.db.models import Q
+from haystack.backends import SQ
 from haystack.forms import SearchForm
 from haystack.generic_views import SearchView
 from haystack.inputs import Clean, BaseInput
@@ -295,9 +296,9 @@ class AstroBinSearchForm(SearchForm):
 
             for data in minimum:
                 if data == 't':
-                    results = results.exclude(_missing_="imaging_telescopes")
+                    results = results.exclude(SQ(_missing_="imaging_telescopes") & SQ(_missing_="imaging_telescopes_2"))
                 if data == "c":
-                    results = results.exclude(_missing_="imaging_cameras")
+                    results = results.exclude(SQ(_missing_="imaging_cameras") & SQ(_missing_="imaging_cameras_2"))
                 if data == "a":
                     results = results.exclude(_missing_="first_acquisition_date")
                 if data == "s":
@@ -441,7 +442,10 @@ class AstroBinSearchForm(SearchForm):
         telescope = self.cleaned_data.get("telescope")
 
         if telescope is not None and telescope != "":
-            results = results.filter(imaging_telescopes=CustomContain(telescope))
+            results = results.filter(
+                SQ(imaging_telescopes=CustomContain(telescope)) |
+                SQ(imaging_telescopes_2=CustomContain(telescope))
+            )
 
         return results
 
@@ -449,7 +453,10 @@ class AstroBinSearchForm(SearchForm):
         camera = self.cleaned_data.get("camera")
 
         if camera is not None and camera != "":
-            results = results.filter(imaging_cameras=CustomContain(camera))
+            results = results.filter(
+                SQ(imaging_cameras=CustomContain(camera)) |
+                SQ(imaging_cameras_2=CustomContain(camera))
+            )
 
         return results
 

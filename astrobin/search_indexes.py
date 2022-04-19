@@ -7,16 +7,14 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.db.models.functions import Length
 from haystack.constants import Indexable
-from haystack.fields import CharField, IntegerField, FloatField, DateTimeField, BooleanField, MultiValueField
+from haystack.fields import BooleanField, CharField, DateTimeField, FloatField, IntegerField, MultiValueField
 from haystack.indexes import SearchIndex
 from hitcount.models import HitCount
 from pybb.models import Post, Topic
 
 from astrobin.enums.license import License
 from astrobin.enums.moderator_decision import ModeratorDecision
-from astrobin.models import DeepSky_Acquisition
-from astrobin.models import Image
-from astrobin.models import SolarSystem_Acquisition
+from astrobin.models import DeepSky_Acquisition, Image, SolarSystem_Acquisition
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_platesolving.services import SolutionService
@@ -223,45 +221,69 @@ def _prepare_views(obj, content_type):
 
 
 def _prepare_min_aperture(obj):
-    d = 0
-    for telescope in obj.imaging_telescopes.all():
-        if telescope.aperture is not None and (d == 0 or telescope.aperture < d):
-            d = int(telescope.aperture)
-    return d
+    value = 0
+
+    for telescope in obj.imaging_telescopes.filter(aperture__isnull=False):
+        if value == 0 or telescope.aperture < value:
+            value = int(telescope.aperture)
+
+    for telescope in obj.imaging_telescopes_2.filter(aperture__isnull=False):
+        if value == 0 or telescope.aperture < value:
+            value = int(telescope.aperture)
+
+    return value
 
 
 def _prepare_max_aperture(obj):
     import sys
-    d = sys.maxsize
-    for telescope in obj.imaging_telescopes.all():
-        if telescope.aperture is not None and (d == sys.maxsize or telescope.aperture > d):
-            d = int(telescope.aperture)
-    return d
+    value = sys.maxsize
+
+    for telescope in obj.imaging_telescopes.filter(aperture__isnull=False):
+        if value == sys.maxsize or telescope.aperture > value:
+            value = int(telescope.aperture)
+
+    for telescope in obj.imaging_telescopes_2.filter(aperture__isnull=False):
+        if value == sys.maxsize or telescope.aperture > value:
+            value = int(telescope.aperture)
+
+    return value
 
 
 def _prepare_min_pixel_size(obj):
-    s = 0
-    for camera in obj.imaging_cameras.all():
-        if camera.pixel_size is not None and (s == 0 or camera.pixel_size < s):
-            s = int(camera.pixel_size)
-    return s
+    value = 0
+
+    for camera in obj.imaging_cameras.filter(pixel_size__isnull=False):
+        if value == 0 or camera.pixel_size < value:
+            value = int(camera.pixel_size)
+
+    for camera in obj.imaging_cameras_2.filter(sensor__isnull=False, sensor__pixel_size__isnull=False):
+        if value == 0 or camera.sensor.pixel_size < value:
+            value = int(camera.sensor.pixel_size)
+
+    return value
 
 
 def _prepare_max_pixel_size(obj):
     import sys
-    s = sys.maxsize
-    for camera in obj.imaging_cameras.all():
-        if camera.pixel_size is not None and (s == sys.maxsize or camera.pixel_size > s):
-            s = int(camera.pixel_size)
-    return s
+    value = sys.maxsize
+
+    for camera in obj.imaging_cameras.filter(pixel_size__isnull=False):
+        if value == sys.maxsize or camera.pixel_size > value:
+            value = int(camera.pixel_size)
+
+    for camera in obj.imaging_cameras_2.filter(sensor__isnull=False, sensor__pixel_size__isnull=False):
+        if value == sys.maxsize or camera.sensor.pixel_size > value:
+            value = int(camera.sensorpixel_size)
+
+    return value
 
 
 def _prepare_telescope_types(obj):
-    return [x.type for x in obj.imaging_telescopes.all()]
+    return list(set([x.type for x in obj.imaging_telescopes.all()] + [x.type for x in obj.imaging_telescopes_2.all()]))
 
 
 def _prepare_camera_types(obj):
-    return [x.type for x in obj.imaging_cameras.all()]
+    return list(set([x.type for x in obj.imaging_cameras.all()] + [x.type for x in obj.imaging_cameras_2.all()]))
 
 
 def _prepare_comments(obj):
@@ -510,11 +532,19 @@ class ImageIndex(SearchIndex, Indexable):
     description = CharField(null=True)
     published = DateTimeField(model_attr='published')
     uploaded = DateTimeField(model_attr='uploaded')
+
     imaging_telescopes = CharField()
     guiding_telescopes = CharField()
     mounts = CharField()
     imaging_cameras = CharField()
     guiding_cameras = CharField()
+
+    imaging_telescopes_2 = CharField()
+    guiding_telescopes_2 = CharField()
+    mounts_2 = CharField()
+    imaging_cameras_2 = CharField()
+    guiding_cameras_2 = CharField()
+
     coord_ra_min = FloatField()
     coord_ra_max = FloatField()
     coord_dec_min = FloatField()
@@ -592,9 +622,7 @@ class ImageIndex(SearchIndex, Indexable):
 
     def prepare_imaging_telescopes(self, obj):
         return [
-            f"{x.get('make')} {x.get('name')} {x.get('type')}" for x in obj.imaging_telescopes \
-                .all() \
-                .values('make', 'name', 'type')
+            f"{x.get('make')} {x.get('name')}" for x in obj.imaging_telescopes.all().values('make', 'name')
         ]
 
     def prepare_guiding_telescopes(self, obj):
@@ -605,13 +633,38 @@ class ImageIndex(SearchIndex, Indexable):
 
     def prepare_imaging_cameras(self, obj):
         return [
-            f"{x.get('make')} {x.get('name')} {x.get('type')}" for x in obj.imaging_cameras \
-                .all() \
-                .values('make', 'name', 'type')
+            f"{x.get('make')} {x.get('name')}" for x in obj.imaging_cameras.all().values('make', 'name', 'type')
         ]
 
     def prepare_guiding_cameras(self, obj):
         return [f"{x.get('make')} {x.get('name')}" for x in obj.guiding_cameras.all().values('make', 'name')]
+
+    def prepare_imaging_telescopes_2(self, obj):
+        return [
+            f"{x.get('brand__name')} {x.get('name')}" for x in
+            obj.imaging_telescopes_2.all().values('brand__name', 'name')
+        ]
+
+    def prepare_guiding_telescopes_2(self, obj):
+        return [
+            f"{x.get('brand__name')} {x.get('name')}" for x in
+            obj.guiding_telescopes_2.all().values('brand__name', 'name')
+        ]
+
+    def prepare_mounts_2(self, obj):
+        return [f"{x.get('brand__name')} {x.get('name')}" for x in obj.mounts_2.all().values('brand__name', 'name')]
+
+    def prepare_imaging_cameras_2(self, obj):
+        return [
+            f"{x.get('brand__name')} {x.get('name')}" for x in
+            obj.imaging_cameras_2.all().values('brand__name', 'name')
+        ]
+
+    def prepare_guiding_cameras_2(self, obj):
+        return [
+            f"{x.get('brand__name')} {x.get('name')}" for x in
+            obj.guiding_cameras_2.all().values('brand__name', 'name')]
+
 
     def prepare_coord_ra_min(self, obj):
         if obj.solution is not None and obj.solution.ra is not None and obj.solution.radius is not None:

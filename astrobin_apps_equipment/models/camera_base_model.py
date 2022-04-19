@@ -15,18 +15,20 @@ class CameraType:
     OTHER = 'OTHER'
 
 class CameraBaseModel(EquipmentItem):
+    CAMERA_TYPES = (
+        (CameraType.DEDICATED_DEEP_SKY, _('Dedicated deep-sky camera')),
+        (CameraType.DSLR_MIRRORLESS, _('General purpose DSLR or mirrorless camera')),
+        (CameraType.GUIDER_PLANETARY, _('Guider/Planetary camera')),
+        (CameraType.VIDEO, _('General purpose video camera')),
+        (CameraType.FILM, _('Film camera')),
+        (CameraType.OTHER, _('Other')),
+    )
+
     type = models.CharField(
         verbose_name=_('Type'),
         null=False,
         max_length=64,
-        choices=(
-            (CameraType.DEDICATED_DEEP_SKY, _('Dedicated deep-sky camera')),
-            (CameraType.DSLR_MIRRORLESS, _('General purpose DSLR or mirrorless camera')),
-            (CameraType.GUIDER_PLANETARY, _('Guider/Planetary camera')),
-            (CameraType.VIDEO, _('General purpose video camera')),
-            (CameraType.FILM, _('Film camera')),
-            (CameraType.OTHER, _('Other')),
-        ),
+        choices=CAMERA_TYPES,
     )
 
     sensor = models.ForeignKey(
@@ -56,6 +58,14 @@ class CameraBaseModel(EquipmentItem):
     def save(self, keep_deleted=False, **kwargs):
         self.klass = EquipmentItemKlass.CAMERA
         super().save(keep_deleted, **kwargs)
+
+    def type_label(self):
+        if self.type is not None:
+            for i in self.CAMERA_TYPES:
+                if self.type == i[0]:
+                    return i[1]
+
+        return _("Unknown")
 
     class Meta(EquipmentItem.Meta):
         abstract = True
