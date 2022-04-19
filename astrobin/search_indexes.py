@@ -221,37 +221,61 @@ def _prepare_views(obj, content_type):
 
 
 def _prepare_min_aperture(obj):
-    d = 0
-    for telescope in obj.imaging_telescopes.all():
-        if telescope.aperture is not None and (d == 0 or telescope.aperture < d):
-            d = int(telescope.aperture)
-    return d
+    value = 0
+
+    for telescope in obj.imaging_telescopes.filter(aperture__isnull=False):
+        if value == 0 or telescope.aperture < value:
+            value = int(telescope.aperture)
+
+    for telescope in obj.imaging_telescopes_2.filter(aperture__isnull=False):
+        if value == 0 or telescope.aperture < value:
+            value = int(telescope.aperture)
+
+    return value
 
 
 def _prepare_max_aperture(obj):
     import sys
-    d = sys.maxsize
-    for telescope in obj.imaging_telescopes.all():
-        if telescope.aperture is not None and (d == sys.maxsize or telescope.aperture > d):
-            d = int(telescope.aperture)
-    return d
+    value = sys.maxsize
+
+    for telescope in obj.imaging_telescopes.filter(aperture__isnull=False):
+        if value == sys.maxsize or telescope.aperture > value:
+            value = int(telescope.aperture)
+
+    for telescope in obj.imaging_telescopes_2.filter(aperture__isnull=False):
+        if value == sys.maxsize or telescope.aperture > value:
+            value = int(telescope.aperture)
+
+    return value
 
 
 def _prepare_min_pixel_size(obj):
-    s = 0
-    for camera in obj.imaging_cameras.all():
-        if camera.pixel_size is not None and (s == 0 or camera.pixel_size < s):
-            s = int(camera.pixel_size)
-    return s
+    value = 0
+
+    for camera in obj.imaging_cameras.filter(pixel_size__isnull=False):
+        if value == 0 or camera.pixel_size < value:
+            value = int(camera.pixel_size)
+
+    for camera in obj.imaging_cameras_2.filter(sensor__isnull=False, sensor__pixel_size__isnull=False):
+        if value == 0 or camera.sensor.pixel_size < value:
+            value = int(camera.sensor.pixel_size)
+
+    return value
 
 
 def _prepare_max_pixel_size(obj):
     import sys
-    s = sys.maxsize
-    for camera in obj.imaging_cameras.all():
-        if camera.pixel_size is not None and (s == sys.maxsize or camera.pixel_size > s):
-            s = int(camera.pixel_size)
-    return s
+    value = sys.maxsize
+
+    for camera in obj.imaging_cameras.filter(pixel_size__isnull=False):
+        if value == sys.maxsize or camera.pixel_size > value:
+            value = int(camera.pixel_size)
+
+    for camera in obj.imaging_cameras_2.filter(sensor__isnull=False, sensor__pixel_size__isnull=False):
+        if value == sys.maxsize or camera.sensor.pixel_size > value:
+            value = int(camera.sensorpixel_size)
+
+    return value
 
 
 def _prepare_telescope_types(obj):
