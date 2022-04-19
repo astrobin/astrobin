@@ -2,6 +2,7 @@ import math
 
 from annoying.functions import get_object_or_None
 from django.contrib.auth.models import User
+from django.db.models import Count
 from django.utils import timezone
 
 from astrobin.models import CameraRenameProposal, Gear, GearMigrationStrategy, GearRenameRecord, Image
@@ -169,3 +170,15 @@ class GearService:
             image.filters.exists() or
             image.accessories.exists()
         )
+
+    @staticmethod
+    def has_unmigrated_legacy_gear_items(user: User) -> bool:
+        if user.groups.filter(name='own_equipment_migrators').exists():
+            for klass in ('telescopes', 'cameras', 'mounts', 'filters', 'focal_reducers', 'accessories', 'software'):
+                if getattr(user.userprofile, klass) \
+                        .annotate(count=Count('migration_strategies')) \
+                        .filter(count=0) \
+                        .exists():
+                    return True
+
+        return False

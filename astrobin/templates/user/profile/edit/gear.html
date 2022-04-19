@@ -22,9 +22,24 @@
             {% if READONLY_MODE %}
                 {% include 'readonly_mode.html' %}
             {% else %}
-                {% for label, gear_items in prefill.items %}
-                    {% list_gear label gear_items.0 gear_items.1 request.user %}
-                {% endfor %}
+                {% if is_own_equipment_moderator %}
+                    <div class="alert alert-info">
+                        <h4 class="alert-heading">
+                            {% trans "AstroBin is rebuilding its equipment database!" %}
+                        </h4>
+
+                        <p>
+                            {% blocktrans trimmed %}
+                                This page is no longer necessary, as you can add new equipment items directly during
+                                the image upload or editing process.
+                            {% endblocktrans %}
+                        </p>
+                    </div>
+                {% else %}
+                    {% for label, gear_items in prefill.items %}
+                        {% list_gear label gear_items.0 gear_items.1 request.user %}
+                    {% endfor %}
+                {% endif %}
             {% endif %} {# READONLY #}
         </div> <!-- span9 -->
     </div> <!-- row -->
