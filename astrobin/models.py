@@ -355,7 +355,7 @@ class GearMigrationStrategy(models.Model):
         null=True,
         blank=True,
         on_delete=models.CASCADE,
-        related_name='gear_migration_strateogies',
+        related_name='gear_migration_strategies',
     )
 
     migration_flag = models.CharField(
