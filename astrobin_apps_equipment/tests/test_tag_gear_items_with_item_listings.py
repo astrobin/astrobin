@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from astrobin.tests.generators import Generators
-from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import gear_items_with_brand_listings, \
+from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import legacy_gear_items_with_brand_listings, \
     gear_items_with_item_listings
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 

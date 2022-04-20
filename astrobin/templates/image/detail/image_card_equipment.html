@@ -18,7 +18,7 @@
                         {% with image.user|get_valid_usersubscription as image_user_valid_usersubscription_for_dropdown %}
                             {% if valid_usersubscription|allow_lite_retailer_integration:image_user_valid_usersubscription_for_dropdown %}
                                 {# Lighter retailer integration for those who disabled ads. #}
-                                {% with gear_with_brand_listings=image|gear_items_with_brand_listings:REQUEST_COUNTRY gear_with_item_listings=image|gear_items_with_item_listings:REQUEST_COUNTRY %}
+                                {% with gear_with_brand_listings=image|legacy_gear_items_with_brand_listings:REQUEST_COUNTRY gear_with_item_listings=image|gear_items_with_item_listings:REQUEST_COUNTRY %}
                                     <div class="actions">
                                         {% if gear_with_brand_listings|length or gear_with_item_listings|length %}
                                             <div class="dropdown retailer-affiliate-products-lite">
