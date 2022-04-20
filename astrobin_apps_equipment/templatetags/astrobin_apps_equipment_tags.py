@@ -12,7 +12,7 @@ register = Library()
 
 
 @register.filter
-def equipment_brand_listings(gear, country):
+def equipment_brand_listings_for_legacy_gear(gear, country):
     # type: (Gear, str) -> QuerySet
 
     if country is None:
@@ -69,7 +69,7 @@ def gear_items_with_brand_listings(image, country):
             'software'
     ):
         for gear_item in getattr(image, gear_type).all():
-            if equipment_brand_listings(gear_item, country).exists():
+            if equipment_brand_listings_for_legacy_gear(gear_item, country).exists():
                 pks.append(gear_item.pk)
 
     return Gear.objects.filter(pk__in=pks)
@@ -107,7 +107,7 @@ def unique_equipment_brand_listings(image, country):
     gear_items = gear_items_with_brand_listings(image, country)
 
     for gear_item in gear_items:
-        for listing in equipment_brand_listings(gear_item, country):
+        for listing in equipment_brand_listings_for_legacy_gear(gear_item, country):
             pks.append(listing.pk)
 
     return EquipmentBrandListing.objects.filter(pk__in=pks)

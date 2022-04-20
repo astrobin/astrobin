@@ -126,8 +126,8 @@
                                                                     "></i>
                                                             </a>
                                                         {% endwith %}
-                                                    {% elif item.object|equipment_brand_listings:REQUEST_COUNTRY|length %}
-                                                        {% with item.object|equipment_brand_listings:REQUEST_COUNTRY as listings %}
+                                                    {% elif item.object|equipment_brand_listings_for_legacy_gear:REQUEST_COUNTRY|length %}
+                                                        {% with item.object|equipment_brand_listings_for_legacy_gear:REQUEST_COUNTRY as listings %}
                                                             {% if listings|length == 1 %}
                                                                 {% equipment_listing_url_with_tags listings.all.0 'card' as url_with_tags %}
                                                                 <a class="retailer-affiliate-cart-link"
@@ -158,7 +158,7 @@
                                                 {% endif %}
                                             {% endwith %}
                                             {# ./Shopping cart #}
-                                        {% else %}
+                                        {% else %} {# NEW equipment items #}
                                             {% with url='/equipment/explorer/'|add:item.type|add:'/'|add:item.id %}
                                                 <a href="{% app_redirection_service url %}">
                                                     {% highlight_text item.label with search_query %}
