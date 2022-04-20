@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from astrobin.tests.generators import Generators
-from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import unique_equipment_item_listings
+from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import unique_equipment_item_listings_for_legacy_gear
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 
 
@@ -9,7 +9,7 @@ class TestTagUniqueEquipmentItemListings(TestCase):
     def test_no_listings(self):
         image = Generators.image()
 
-        self.assertEqual(0, unique_equipment_item_listings(image, 'us').count())
+        self.assertEqual(0, unique_equipment_item_listings_for_legacy_gear(image, 'us').count())
 
     def test_with_gear_but_no_listings(self):
         telescope = Generators.telescope()
@@ -17,7 +17,7 @@ class TestTagUniqueEquipmentItemListings(TestCase):
         image = Generators.image()
         image.imaging_telescopes.add(telescope)
 
-        self.assertEqual(0, unique_equipment_item_listings(image, 'us').count())
+        self.assertEqual(0, unique_equipment_item_listings_for_legacy_gear(image, 'us').count())
 
     def test_with_gear_and_listing_in_wrong_country(self):
         listing = EquipmentGenerators.equipment_item_listing()
@@ -30,7 +30,7 @@ class TestTagUniqueEquipmentItemListings(TestCase):
         image = Generators.image()
         image.imaging_telescopes.add(telescope)
 
-        self.assertEqual(0, unique_equipment_item_listings(image, 'us').count())
+        self.assertEqual(0, unique_equipment_item_listings_for_legacy_gear(image, 'us').count())
 
     def test_with_gear_and_listing_in_no_country(self):
         listing = EquipmentGenerators.equipment_item_listing()
@@ -41,7 +41,7 @@ class TestTagUniqueEquipmentItemListings(TestCase):
         image = Generators.image()
         image.imaging_telescopes.add(telescope)
 
-        self.assertEqual(1, unique_equipment_item_listings(image, 'us').count())
+        self.assertEqual(1, unique_equipment_item_listings_for_legacy_gear(image, 'us').count())
 
     def test_with_gear_and_listing_in_right_country(self):
         listing = EquipmentGenerators.equipment_item_listing()
@@ -54,7 +54,7 @@ class TestTagUniqueEquipmentItemListings(TestCase):
         image = Generators.image()
         image.imaging_telescopes.add(telescope)
 
-        self.assertEqual(1, unique_equipment_item_listings(image, 'us').count())
+        self.assertEqual(1, unique_equipment_item_listings_for_legacy_gear(image, 'us').count())
 
     def test_with_gear_and_two_unique_listings_on_same_gear_in_right_country(self):
         listing1 = EquipmentGenerators.equipment_item_listing()
@@ -72,7 +72,7 @@ class TestTagUniqueEquipmentItemListings(TestCase):
         image = Generators.image()
         image.imaging_telescopes.add(telescope)
 
-        self.assertEqual(2, unique_equipment_item_listings(image, 'us').count())
+        self.assertEqual(2, unique_equipment_item_listings_for_legacy_gear(image, 'us').count())
 
     def test_with_gear_and_two_unique_listings_on_different_gear_in_right_country(self):
         listing1 = EquipmentGenerators.equipment_item_listing()
@@ -93,7 +93,7 @@ class TestTagUniqueEquipmentItemListings(TestCase):
         image.imaging_telescopes.add(telescope)
         image.mounts.add(mount)
 
-        self.assertEqual(2, unique_equipment_item_listings(image, 'us').count())
+        self.assertEqual(2, unique_equipment_item_listings_for_legacy_gear(image, 'us').count())
 
     def test_with_gear_and_two_unique_listings_on_different_gear_from_same_retailer_in_right_country(self):
         listing1 = EquipmentGenerators.equipment_item_listing()
@@ -114,7 +114,7 @@ class TestTagUniqueEquipmentItemListings(TestCase):
         image.imaging_telescopes.add(telescope)
         image.mounts.add(mount)
 
-        self.assertEqual(2, unique_equipment_item_listings(image, 'us').count())
+        self.assertEqual(2, unique_equipment_item_listings_for_legacy_gear(image, 'us').count())
 
     def test_with_gear_and_two_non_unique_listings_on_different_gear_in_right_country(self):
         listing = EquipmentGenerators.equipment_item_listing()
@@ -131,4 +131,4 @@ class TestTagUniqueEquipmentItemListings(TestCase):
         image.imaging_telescopes.add(telescope)
         image.mounts.add(mount)
 
-        self.assertEqual(1, unique_equipment_item_listings(image, 'us').count())
+        self.assertEqual(1, unique_equipment_item_listings_for_legacy_gear(image, 'us').count())

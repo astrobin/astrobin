@@ -25,7 +25,7 @@ def equipment_brand_listings_for_legacy_gear(gear, country):
 
 
 @register.filter
-def equipment_item_listings(gear, country):
+def equipment_item_listings_for_legacy_gear(gear, country):
     # type: (Gear, str) -> QuerySet
 
     if country is None:
@@ -93,7 +93,7 @@ def gear_items_with_item_listings(image, country):
             'software'
     ):
         for gear_item in getattr(image, gear_type).all():
-            if equipment_item_listings(gear_item, country).exists():
+            if equipment_item_listings_for_legacy_gear(gear_item, country).exists():
                 pks.append(gear_item.pk)
 
     return Gear.objects.filter(pk__in=pks)
@@ -114,14 +114,14 @@ def unique_equipment_brand_listings(image, country):
 
 
 @register.filter
-def unique_equipment_item_listings(image, country):
+def unique_equipment_item_listings_for_legacy_gear(image, country):
     # type: (Image, str) -> QuerySet
 
     pks = []
     gear_items = gear_items_with_item_listings(image, country)
 
     for gear_item in gear_items:
-        for listing in equipment_item_listings(gear_item, country):
+        for listing in equipment_item_listings_for_legacy_gear(gear_item, country):
             pks.append(listing.pk)
 
     return EquipmentItemListing.objects.filter(pk__in=pks)
