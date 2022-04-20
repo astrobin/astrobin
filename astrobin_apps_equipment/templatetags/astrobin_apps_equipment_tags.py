@@ -100,7 +100,7 @@ def gear_items_with_item_listings(image, country):
 
 
 @register.filter
-def unique_equipment_brand_listings(image, country):
+def unique_equipment_brand_listings_for_legacy_gear(image, country):
     # type: (Image, str) -> QuerySet
 
     pks = []

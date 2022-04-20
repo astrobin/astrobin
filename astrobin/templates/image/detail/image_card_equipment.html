@@ -28,7 +28,7 @@
                                                 <ul class="dropdown-menu pull-right">
                                                     {% if gear_with_brand_listings|length %}
                                                         <li class="nav-header">{% trans "Sponsored brands" %}</li>
-                                                        {% with image|unique_equipment_brand_listings:REQUEST_COUNTRY as listings %}
+                                                        {% with image|unique_equipment_brand_listings_for_legacy_gear:REQUEST_COUNTRY as listings %}
                                                             {% for listing in listings %}
                                                                 <li>
                                                                     {% equipment_listing_url_with_tags listing 'card' as url_with_tags %}

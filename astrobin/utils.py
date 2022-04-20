@@ -77,6 +77,8 @@ def get_client_ip(request):
 
 
 def get_client_country_code(request):
+    return 'ch'
+
     try:
         DEBUG_COUNTRY = request.GET.get('DEBUG_COUNTRY', None)
         if DEBUG_COUNTRY:
