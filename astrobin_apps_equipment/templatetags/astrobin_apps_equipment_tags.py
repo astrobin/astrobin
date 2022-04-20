@@ -76,7 +76,7 @@ def legacy_gear_items_with_brand_listings(image, country):
 
 
 @register.filter
-def gear_items_with_item_listings(image, country):
+def legacy_gear_items_with_item_listings(image, country):
     # type: (Image, str) -> QuerySet
 
     pks = []
@@ -118,7 +118,7 @@ def unique_equipment_item_listings_for_legacy_gear(image, country):
     # type: (Image, str) -> QuerySet
 
     pks = []
-    gear_items = gear_items_with_item_listings(image, country)
+    gear_items = legacy_gear_items_with_item_listings(image, country)
 
     for gear_item in gear_items:
         for listing in equipment_item_listings_for_legacy_gear(gear_item, country):
