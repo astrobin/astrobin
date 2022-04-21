@@ -2,24 +2,26 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Donations\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-21 07:34+0000\n"
-"PO-Revision-Date: 2022-04-14 09:55+0200\n"
+"POT-Creation-Date: 2021-04-05 15:49+0200\n"
+"PO-Revision-Date: 2022-04-21 09:36+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
-"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108431\n"
-"X-Loco-Api-Version: 1.0.26 20220328-1\n"
+"X-Loco-Api-Version: 1.0.26 20220328-1"
 
+#: loco:606b76000c067b67fd307a72
 msgid "Your recurring donation has been canceled"
 msgstr "Ваші регулярні пожертвування скасовані"
 
+#: loco:606b76000c067b67fd307a73
 msgid ""
 "I am very grateful for your support so far! Your contribution has helped "
 "AstroBin with its ever increasing hosting costs, and served an incentive for "
@@ -29,18 +31,23 @@ msgstr ""
 "зростаючими витратами на хостинг і служить для нас стимулом для подальшого "
 "його покращення."
 
+#: loco:606b76000c067b67fd307a74
 msgid "Wishing you clear skies and excellent seeing!"
 msgstr "Бажаю Вам чистого неба та чудового сіінгу!"
 
+#: loco:606b76000c067b67fd307a75
 msgid "Founder of AstroBin"
 msgstr "Засновник AstroBin"
 
+#: loco:606b76000c067b67fd307a76
 msgid "Donate"
 msgstr "Зробити пожертвування"
 
+#: loco:606b76000c067b67fd307a77
 msgid "Thank you in advance for your support"
 msgstr "Наперед дякую за підтримку"
 
+#: loco:606b76000c067b67fd307a78
 msgid ""
 "Please donate any amount you want, selecting from the options below and "
 "subscribing with\n"
@@ -53,52 +60,65 @@ msgstr ""
 "            регулярний щомісячний платіж. Ви зможете будь-коли скасувати "
 "підписку."
 
+#: loco:606b76000c067b67fd307a79
 msgid ""
 "If ended up on this page and are not sure what this is about, please read "
 "everything about it\n"
-"        <a href=\"https://welcome.astrobin.com/voluntary-donations\" target="
-"\"_blank\">here</a>."
+"        <a href=\"https://welcome.astrobin.com/voluntary-donations\" "
+"target=\"_blank\">here</a>."
 msgstr ""
 "Якщо ви опинилися на цій сторінці і не впевнені, про що йдеться, прочитайте "
 "про це\n"
-"        <a href=\"https://welcome.astrobin.com/voluntary-donations\" target="
-"\"_blank\">тут</a>."
+"        <a href=\"https://welcome.astrobin.com/voluntary-donations\" "
+"target=\"_blank\">тут</a>."
 
+#: loco:606b76000c067b67fd307a7a
 msgid "Thanks!"
 msgstr "Дякуємо!"
 
+#: loco:606b76000c067b67fd307a7b
 msgid "Edit your recurring donation settings"
 msgstr "Редагувати Ваші регулярні пожертвування"
 
+#: loco:606b76000c067b67fd307a7c
 msgid "Monthly contributions"
 msgstr "Щомісячні внески"
 
+#: loco:606b76000c067b67fd307a7d
 msgid "Bronze"
 msgstr "Бронза"
 
+#: loco:606b76000c067b67fd307a7e
 #, python-format
 msgid "CHF %(amount)s / month"
 msgstr "CHF %(amount)s / місяць"
 
+#: loco:606b76000c067b67fd307a7f
 msgid "Silver"
 msgstr "Срібло"
 
+#: loco:606b76000c067b67fd307a80
 msgid "Gold"
 msgstr "Золото"
 
+#: loco:606b76000c067b67fd307a81
 msgid "Platinum"
 msgstr "Платина"
 
+#: loco:606b76000c067b67fd307a82
 msgid "Yearly contributions (cheaper)"
 msgstr "Щорічні внески (дешевше)"
 
+#: loco:606b76000c067b67fd307a83
 #, python-format
 msgid "CHF %(amount)s / year"
 msgstr "CHF %(amount)s / рік"
 
+#: loco:606b76000c067b67fd307a84
 msgid "IMPORTANT"
 msgstr "ВАЖЛИВО"
 
+#: loco:606b76000c067b67fd307a85
 msgid ""
 "Please note: if you are already a donor, the Subscribe button will update "
 "your existing subscription, not create a new one."
@@ -106,9 +126,11 @@ msgstr ""
 "Зверніть увагу: якщо у Вас вже є підписка, кнопка «Підписатися» лише оновить "
 "Вашу наявну підписку, а не створить нову."
 
+#: loco:606b76000c067b67fd307a86
 msgid "Pay with a bank transfer"
 msgstr "Сплатити банківським переказом"
 
+#: loco:606b76000c067b67fd307a87
 msgid ""
 "\n"
 "            Prefer to donate via bank transfer? Please make a deposit of the "
@@ -122,9 +144,11 @@ msgstr ""
 "            за реквізитами банку. Дякуємо!\n"
 "        "
 
+#: loco:606b76000c067b67fd307a88
 msgid "Cancel your recurring donation"
 msgstr "Скасувати Ваші регулярні пожертвування"
 
+#: loco:606b76000c067b67fd307a89
 msgid ""
 "Thank you so much for your donations so far! I, and the whole AstroBin "
 "community, really appreciate your support."
@@ -132,6 +156,7 @@ msgstr ""
 "Щиро дякуємо за Ваші пожертви! Я та вся спільнота AstroBin дуже цінуємо Вашу "
 "підтримку."
 
+#: loco:606b76000c067b67fd307a8a
 msgid ""
 "Are you sure you want to cancel your subscription? AstroBin is a resource "
 "hungry website, and every small donation helps with the hosting costs."
@@ -140,6 +165,7 @@ msgstr ""
 "веб-сайт, і навіть невелика пожертва допомагає нам вирішувати проблему "
 "розміщення."
 
+#: loco:606b76000c067b67fd307a8b
 msgid ""
 "If you really have made up your mind about it, use the button below to "
 "cancel your PayPal subscription."
@@ -147,15 +173,19 @@ msgstr ""
 "Якщо Ви дійсно вирішили, натисніть кнопку нижче, щоб скасувати PayPal-"
 "підписки."
 
+#: loco:606b76000c067b67fd307a8c
 msgid "Thank you for your donations!"
 msgstr "Дякуємо за Ваші внески!"
 
+#: loco:606b76000c067b67fd307a8d
 msgid "Want to cancel?"
 msgstr "Бажаєте скасувати?"
 
+#: loco:606b76000c067b67fd307a8e
 msgid "Thank you for your donation!"
 msgstr "Дякуємо за Ваш внесок!"
 
+#: loco:606b76000c067b67fd307a8f
 msgid ""
 "I am very grateful for your support! Your contribution will help AstroBin "
 "with its ever increasing hosting costs, and will serve an incentive for me "

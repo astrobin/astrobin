@@ -2,109 +2,245 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Premium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-21 07:34+0000\n"
-"PO-Revision-Date: 2022-04-14 09:55+0200\n"
+"POT-Creation-Date: 2021-04-05 16:17+0200\n"
+"PO-Revision-Date: 2022-04-21 09:37+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Simplified Chinese\n"
 "Language: zh-Hans\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108451\n"
-"X-Loco-Api-Version: 1.0.26 20220328-1\n"
+"X-Loco-Api-Version: 1.0.26 20220328-1"
 
+#: loco:606b766378f4e75f8e0830ed
+msgid "I wasn't really affected by the data loss"
+msgstr "我并没有真正受到数据丢失的影响"
+
+#: loco:606b766378f4e75f8e0830ee
+msgid "I don't require compensation: I want to support AstroBin"
+msgstr "我不需要补偿：我想支持 AstroBin"
+
+#: loco:606b766378f4e75f8e0830ef
+msgid "I would like to try AstroBin Ultimate for free for 1 month"
+msgstr "我想免费试用1个月的 AstroBin Ultimate"
+
+#: loco:606b766378f4e75f8e0830f0
+msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
+msgstr "我觉得有资格免费使用 AstroBin Ultimate 3个月"
+
+#: loco:606b766378f4e75f8e0830f1
+msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
+msgstr "我觉得有资格免费使用 AstroBin Ultimate 6个月"
+
+#: loco:606b766378f4e75f8e0830f2
+msgid "Requested compensation"
+msgstr "要求补偿"
+
+#: loco:606b766378f4e75f8e0830f3
+msgid "Please indicate if and how much you would like to be compensated."
+msgstr "请提出您否希望获得多少补偿。"
+
+#: loco:606b766378f4e75f8e0830f4
 msgid "Your migration data"
 msgstr "您迁移的数据"
 
+#: loco:606b766378f4e75f8e0830f5
 msgid "Total amount donated last year"
 msgstr "去年捐赠总额"
 
+#: loco:606b766378f4e75f8e0830f6
 msgid "First payment"
 msgstr "首次付款"
 
+#: loco:606b766378f4e75f8e0830f7
 msgid "Price for Premium"
 msgstr "Premium价格"
 
+#: loco:606b766378f4e75f8e0830f8
 msgid "Days covered"
 msgstr "覆盖天数"
 
+#: loco:606b766378f4e75f8e0830f9
 msgid "Premium expiration"
 msgstr "Premium到期日"
 
+#: loco:606b766378f4e75f8e0830fa
 msgid "Your donations last year"
 msgstr "您去年的捐赠"
 
+#: loco:606b766378f4e75f8e0830fb
 msgid "Amount"
 msgstr "金额"
 
+#: loco:606b766378f4e75f8e0830fc
 msgid "Date"
 msgstr "日期"
 
+#: loco:606b766378f4e75f8e0830fd
 msgid "Subscription"
 msgstr "订阅"
 
+#: loco:606b766378f4e75f8e0830fe
+msgid "Data loss compensation request"
+msgstr "数据丢失补偿请求"
+
+#: loco:606b766378f4e75f8e0830ff
+msgid ""
+"You are eligible for compensation due to the data loss that happened on "
+"February 16th, 2020."
+msgstr "由于2020年2月16日发生的数据丢失，您有资格获得补偿。"
+
+#: loco:606b766378f4e75f8e083100
+msgid ""
+"If you haven't had the chance, please take a minute to read what happened at "
+"the following page:"
+msgstr "如果您不能获得补偿，请花一点时间阅读下一页上发生的情况："
+
+#: loco:606b766378f4e75f8e083101
+msgid "Official statement and post-mortem"
+msgstr "官方声明和事后调查"
+
+#: loco:606b766378f4e75f8e083102
+msgid "Please accept our apology once more."
+msgstr "请再次接受我们的道歉。"
+
+#: loco:606b766378f4e75f8e083103
+msgid "Please chooce your compensation from the list below"
+msgstr "请从下面的列表中选择您的补偿"
+
+#: loco:606b766378f4e75f8e083104
+msgid ""
+"Compensation is offered in the form of free time on the new AstroBin "
+"subscription tier called \"Ultimate\"."
+msgstr "用免费“Ulitmate”AstroBin 订阅进行补偿"
+
+#: loco:606b766378f4e75f8e083105
+#, python-format
+msgid ""
+"To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
+"target=\"_blank\">the pricing page</a>."
+msgstr ""
+"要了解有关 AstroBin Ultimate的更多信息，请访问 <a href=\"%(url)s\" target=\"_blank\">"
+"定价页面</a>。"
+
+#: loco:606b766378f4e75f8e083106
+msgid "Submit"
+msgstr "提交"
+
+#: loco:606b766378f4e75f8e083107
+msgid "Data loss compensation reauest"
+msgstr "数据丢失补偿请求"
+
+#: loco:606b766378f4e75f8e083108
+msgid "Already done"
+msgstr "已完成"
+
+#: loco:606b766378f4e75f8e083109
+msgid "Sorry, you can't do this again."
+msgstr "抱歉，您无法再次执行此操作。"
+
+#: loco:606b766378f4e75f8e08310a
+msgid "Your preference was already recorded and cannot be changed."
+msgstr "您的偏好已被记录，无法更改。"
+
+#: loco:606b766378f4e75f8e08310b
+msgid "Not eligible"
+msgstr "不具备资格"
+
+#: loco:606b766378f4e75f8e08310c
+msgid "It looks like you're not eligible"
+msgstr "看来您没有资格"
+
+#: loco:606b766378f4e75f8e08310d
+msgid ""
+"Sorry, but this page is for people who were on AstroBin Premium on the day "
+"that the data loss incident happened, and it looks like you aren't among "
+"them."
+msgstr "抱歉，此页面适用于发生数据丢失事件当天，正在使用 AstroBin Premium的用户，好像您不在其中。"
+
+#: loco:606b766378f4e75f8e08310e
+msgid "Success"
+msgstr "成功"
+
+#: loco:606b766378f4e75f8e08310f
+msgid "All done!"
+msgstr "全部完成！"
+
+#: loco:606b766378f4e75f8e083110
+msgid ""
+"Your preference has been recorded and it has already been applied. Thank you!"
+msgstr "您的首选项已被记录并应用。 谢谢！"
+
+#: loco:606b766378f4e75f8e083111
 msgid "Migrate donations"
 msgstr "迁移捐赠"
 
+#: loco:606b766378f4e75f8e083112
 msgid "Error!"
 msgstr "错误！"
 
+#: loco:606b766378f4e75f8e083113
 msgid ""
 "Sorry, but it looks like you cannot migrate your donations to a Premium "
 "membership."
 msgstr "抱歉，您似乎无法将捐赠迁移为Premium会员。"
 
+#: loco:606b766378f4e75f8e083114
 msgid "You already have a paid membership."
 msgstr "您已经是付费会员。"
 
+#: loco:606b766378f4e75f8e083115
 msgid "We could not find any donations from you last year."
 msgstr "我们找不到您过去一年中任何的捐赠记录。"
 
+#: loco:606b766378f4e75f8e083116
 msgid ""
 "Your donations last year were not enough to cover a Premium subscription for "
 "this year."
 msgstr "您去年的捐赠不足以支付今年的Premium订阅费用。"
 
+#: loco:606b766378f4e75f8e083117
 msgid "View the subscription plans"
 msgstr "查看订阅计划"
 
+#: loco:606b766378f4e75f8e083118
 msgid ""
 "As you  have made donations during the last year, you may choose to transfer "
 "the amount you donated towards an AstroBin Premium membership. The "
 "membership will have an expiration date proportionate to the amount you "
 "donated."
-msgstr ""
-"由于您在去年进行了捐赠，您可以选择将捐赠的金额转为 AstroBin Premium会员资"
-"格。 会员资格的到期日与您捐赠的金额成正比。"
+msgstr "由于您在去年进行了捐赠，您可以选择将捐赠的金额转为 AstroBin Premium会员资格。 会员资格的到期日与您捐赠的金额成正比。"
 
+#: loco:606b766378f4e75f8e083119
 msgid ""
 "If you are feeling particularly cool and generous, you may choose to "
 "consider your past donations as a contribution to support past efforts, and "
 "pay again for a Premium plan. Up to you!"
-msgstr ""
-"如果您感到特别酷而且为人慷慨，还可以选择将过去的捐款视为对我们过去努力的支"
-"持，然后再次支付Premium计划。您说了算！"
+msgstr "如果您感到特别酷而且为人慷慨，还可以选择将过去的捐款视为对我们过去努力的支持，然后再次支付Premium计划。您说了算！"
 
+#: loco:606b766378f4e75f8e08311a
 msgid "No, I want to pay for Premium"
 msgstr "不，我要为Premium付费"
 
-msgid "Success"
-msgstr "成功"
-
+#: loco:606b766378f4e75f8e08311b
 msgid "Your migration was successful."
 msgstr "您的迁移成功完成。"
 
+#: loco:606b766378f4e75f8e08311c
 msgid "Thanks for supporting AstroBin!"
 msgstr "感谢您支持 AstroBin！"
 
+#: loco:606b766378f4e75f8e08311d
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
 msgstr "您在 Astrobin 的 \"%(subscription_name)s\" 订阅计划 已到期。"
 
+#: loco:606b766378f4e75f8e08311e
 msgid ""
 "When a subscription on AstroBin expires, nothing happens to your images or "
 "any of your content. You are reverted to AstroBin Free and will not be able "
@@ -112,408 +248,540 @@ msgid ""
 "in all other aspects if you do not have any new images to share at the "
 "moment."
 msgstr ""
-"当 AstroBin 的订阅到期时，您的作品或任何内容都不会发生任何变化。 您将恢复为 "
-"AstroBin Free，并且只有在续订之后才能上传新作品，但是如果您目前没有分享的作"
-"品，则可以继续在其他地方使用 AstroBin。"
+"当 AstroBin 的订阅到期时，您的作品或任何内容都不会发生任何变化。 您将恢复为 AstroBin "
+"Free，并且只有在续订之后才能上传新作品，但是如果您目前没有分享的作品，则可以继续在其他地方使用 AstroBin。"
 
+#: loco:606b766378f4e75f8e08311f
 msgid ""
 "When you are ready to renew your subscription, please visit the following "
 "page:"
 msgstr "当您准备续订时，请访问以下页面："
 
+#: loco:606b766378f4e75f8e083120
 msgid "Your AstroBin subscription has just expired"
 msgstr "您的 Astrobin 订阅已到期"
 
+#: loco:606b766378f4e75f8e083121
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
 "week."
 msgstr "您在 AstroBin 的 \"%(subscription_name)s\" 订阅将在一周内到期"
 
+#: loco:606b766378f4e75f8e083122
 msgid ""
 "PLEASE NOTE! At the moment, you cannot renew a subscription while it is "
 "still ongoing. Please wait until it is expired. Thank you!"
-msgstr ""
-"请注意！目前，您无法在先前的订阅仍然有效的情况下进行续订。请等待订阅到期，谢"
-"谢！"
+msgstr "请注意！目前，您无法在先前的订阅仍然有效的情况下进行续订。请等待订阅到期，谢谢！"
 
+#: loco:606b766378f4e75f8e083123
 msgid "Your AstroBin subscription will expire in one week"
 msgstr "您的 AstroBin 订阅将在一周内到期"
 
+#: loco:606b766378f4e75f8e083124
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin will be "
 "automatically renewed in one week."
 msgstr "您在 AstroBin \"%(subscription_name)s\" 上的订阅将在一周内自动续订。"
 
+#: loco:606b766378f4e75f8e083125
 msgid ""
 "You have an automatically renewing subscription on AstroBin, and we will "
 "attempt to renew it automatically. If your subscription was created the "
 "regular way, via PayPal, then PayPal will attempt to charge your credit card "
 "or retrieve funds that are available in your account."
 msgstr ""
-"您在 AstroBin 上开通了自动续订，我们将尝试自动续订。如果您的订阅是在 PayPal "
-"中常规创建的，则 PayPal 会尝试从您的信用卡中扣款或扣除您帐户中可用的资金。"
+"您在 AstroBin 上开通了自动续订，我们将尝试自动续订。如果您的订阅是在 PayPal 中常规创建的，则 PayPal "
+"会尝试从您的信用卡中扣款或扣除您帐户中可用的资金。"
 
+#: loco:606b766378f4e75f8e083126
 msgid ""
 "If your subscription was created manually via a bank transfer, please get in "
 "touch for a new payment."
 msgstr "如果您的订阅是通过银行转帐手动创建的，请与我们联系以进行新的付款。"
 
+#: loco:606b766378f4e75f8e083127
 msgid "Thank you!"
 msgstr "谢谢！"
 
+#: loco:606b766378f4e75f8e083128
 msgid "Your AstroBin subscription will be automatically renewed in one week"
 msgstr "您的 AstroBin 订阅将在一周内自动续订"
 
+#: loco:606b766378f4e75f8e083129
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin will be "
 "automatically renewed in 30 days."
 msgstr "您在 AstroBin 上的\"%(subscription_name)s\" 订阅将在30天内自动续订。"
 
+#: loco:606b766378f4e75f8e08312a
 msgid "Your AstroBin subscription will be automatically renewed in 30 days"
 msgstr "您的 AstroBin 订阅将在30天内自动续订"
 
-#~ msgid "I wasn't really affected by the data loss"
-#~ msgstr "我并没有真正受到数据丢失的影响"
-
-#~ msgid "I don't require compensation: I want to support AstroBin"
-#~ msgstr "我不需要补偿：我想支持 AstroBin"
-
-#~ msgid "I would like to try AstroBin Ultimate for free for 1 month"
-#~ msgstr "我想免费试用1个月的 AstroBin Ultimate"
-
-#~ msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
-#~ msgstr "我觉得有资格免费使用 AstroBin Ultimate 3个月"
-
-#~ msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
-#~ msgstr "我觉得有资格免费使用 AstroBin Ultimate 6个月"
-
-#~ msgid "Requested compensation"
-#~ msgstr "要求补偿"
-
-#~ msgid "Please indicate if and how much you would like to be compensated."
-#~ msgstr "请提出您否希望获得多少补偿。"
-
-#~ msgid "Data loss compensation request"
-#~ msgstr "数据丢失补偿请求"
-
-#~ msgid ""
-#~ "You are eligible for compensation due to the data loss that happened on "
-#~ "February 16th, 2020."
-#~ msgstr "由于2020年2月16日发生的数据丢失，您有资格获得补偿。"
-
-#~ msgid ""
-#~ "If you haven't had the chance, please take a minute to read what happened "
-#~ "at the following page:"
-#~ msgstr "如果您不能获得补偿，请花一点时间阅读下一页上发生的情况："
-
-#~ msgid "Official statement and post-mortem"
-#~ msgstr "官方声明和事后调查"
-
-#~ msgid "Please accept our apology once more."
-#~ msgstr "请再次接受我们的道歉。"
-
-#~ msgid "Please chooce your compensation from the list below"
-#~ msgstr "请从下面的列表中选择您的补偿"
-
-#~ msgid ""
-#~ "Compensation is offered in the form of free time on the new AstroBin "
-#~ "subscription tier called \"Ultimate\"."
-#~ msgstr "用免费“Ulitmate”AstroBin 订阅进行补偿"
-
-#~ msgid ""
-#~ "To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
-#~ "target=\"_blank\">the pricing page</a>."
-#~ msgstr ""
-#~ "要了解有关 AstroBin Ultimate的更多信息，请访问 <a href=\"%(url)s\" target="
-#~ "\"_blank\">定价页面</a>。"
-
-#~ msgid "Submit"
-#~ msgstr "提交"
-
-#~ msgid "Data loss compensation reauest"
-#~ msgstr "数据丢失补偿请求"
-
-#~ msgid "Already done"
-#~ msgstr "已完成"
-
-#~ msgid "Sorry, you can't do this again."
-#~ msgstr "抱歉，您无法再次执行此操作。"
-
-#~ msgid "Your preference was already recorded and cannot be changed."
-#~ msgstr "您的偏好已被记录，无法更改。"
-
-#~ msgid "Not eligible"
-#~ msgstr "不具备资格"
-
-#~ msgid "It looks like you're not eligible"
-#~ msgstr "看来您没有资格"
-
-#~ msgid ""
-#~ "Sorry, but this page is for people who were on AstroBin Premium on the "
-#~ "day that the data loss incident happened, and it looks like you aren't "
-#~ "among them."
-#~ msgstr ""
-#~ "抱歉，此页面适用于发生数据丢失事件当天，正在使用 AstroBin Premium的用户，"
-#~ "好像您不在其中。"
-
-#~ msgid "All done!"
-#~ msgstr "全部完成！"
-
-#~ msgid ""
-#~ "Your preference has been recorded and it has already been applied. Thank "
-#~ "you!"
-#~ msgstr "您的首选项已被记录并应用。 谢谢！"
-
-#~ msgid "You follow each other"
-#~ msgstr "互相关注"
-
-#~ msgid "Images"
-#~ msgstr "作品"
-
-#~ msgid "Followers"
-#~ msgstr "粉丝"
-
-#~ msgid "Following"
-#~ msgstr "关注的人"
-
-#~ msgid "User"
-#~ msgstr "用户"
-
-#~ msgid "No users."
-#~ msgstr "没有用户。"
-
-#~ msgid "Administrator"
-#~ msgstr "管理员"
-
-#~ msgid "Image moderator"
-#~ msgstr "作品审核者"
-
-#~ msgid "IOTD Submitter"
-#~ msgstr "“今日最佳”提名人"
-
-#~ msgid "IOTD Reviewer"
-#~ msgstr "“今日最佳”审查委员"
-
-#~ msgid "IOTD Judge"
-#~ msgstr "“今日最佳”评审"
-
-#~ msgid "Premium member"
-#~ msgstr "Premium会员"
-
-#~ msgid ""
-#~ "Your email bounce reports have been removed from AstroBin. Please make "
-#~ "sure that your email works well or you will get the same warning message "
-#~ "again. Thanks!"
-#~ msgstr ""
-#~ "您的电子邮件退回报告已从 AstroBin 中删除。请确保您的邮箱一切正常，否则您将"
-#~ "再次收到相同的警告消息。谢谢！"
-
-#~ msgid ""
-#~ "Your spam reports have been removed from AstroBin. Please make sure you "
-#~ "don't have a filter or rule to always mark AstroBin's emails as spam! If "
-#~ "you don't want to receive emails from AstroBin, look for the settings "
-#~ "link that's at the bottom of every email. Thanks!"
-#~ msgstr ""
-#~ "您的垃圾邮件报告已从 AstroBin 中删除。请确保您没有自动过滤，或在规则中将 "
-#~ "AstroBin 的电子邮件标记为垃圾邮件！ 如果您不想接收来自 AstroBin 的电子邮"
-#~ "件，请在任意一封电子邮件的底部查找设置链接。谢谢！"
-
-#~ msgid "Perform a blind solve"
-#~ msgstr "执行盲解"
-
-#~ msgid ""
-#~ "Attempt to solve with no hints. In most cases this will work, but it will "
-#~ "take longer."
-#~ msgstr ""
-#~ "尝试在无任何提示的情况下解析。在大多数情况下，这可以正常工作，但是会花费更"
-#~ "长的时间。"
-
-#~ msgid "Width of the field in degrees"
-#~ msgstr "视场宽度，以度为单位"
-
-#~ msgid "Width of the field in arcminutes"
-#~ msgstr "视场宽度，以角秒为单位"
-
-#~ msgid "Resolution of the field in arcseconds/pixel"
-#~ msgstr "视场分辨率，以弧秒/像素为单位"
-
-#~ msgid "Field size units"
-#~ msgstr "视场大小单位"
-
-#~ msgid "Min field size"
-#~ msgstr "最小视场大小"
-
-#~ msgid "Estimate the lower bound for the width of this field."
-#~ msgstr "估计视场宽度的下限"
-
-#~ msgid "Max field size"
-#~ msgstr "最大视场尺寸"
-
-#~ msgid "Estimate the upper bound for the width of this field."
-#~ msgstr "估计视场宽度的上限"
-
-#~ msgid "Center RA"
-#~ msgstr "中心赤经"
-
-#~ msgid "Center RA of the field in degrees, 0.000 to 360.000"
-#~ msgstr "视场中心赤经，以度为单位，0.000~360.000°"
-
-#~ msgid "Center dec"
-#~ msgstr "中心赤纬"
-
-#~ msgid "Center dec of the field in degrees, -90.000 to +90.000"
-#~ msgstr "视场中心赤纬，以度为单位，-90.000~+90.000°"
-
-#~ msgid "Radius"
-#~ msgstr "半径"
-
-#~ msgid ""
-#~ "Tells the plate-solving engine to look within these many degrees of the "
-#~ "given center RA and dec position."
-#~ msgstr "告知解析引擎，在指定中心赤经/赤纬多少度的范围内搜索。"
-
-#~ msgid "Small"
-#~ msgstr "小"
-
-#~ msgid "Medium"
-#~ msgstr "中"
-
-#~ msgid "Large"
-#~ msgstr "大"
-
-#~ msgid "Sample raw frame (max 100 MB)"
-#~ msgstr "原始帧样本（最大100 MB）"
-
-#~ msgid ""
-#~ "To improve the accuracy of your plate-solution even further, please "
-#~ "upload one of the XISF or FITS files from your data set. Such files "
-#~ "normally have date and time headers that will allow AstroBin to calculate "
-#~ "solar system body ephemerides and find planets and asteroids in your "
-#~ "image (provided you also add location information to it).<br/><br/>For "
-#~ "maximum accuracy, it's recommended that you use PixInsight's native and "
-#~ "open format XISF. Learn more about XISF here:<br/><br/><a href=\"https://"
-#~ "pixinsight.com/xisf/\" target=\"_blank\">https://pixinsight.com/xisf/</"
-#~ "a><br/><br/> <strong>Please note:</strong> it's very important that the "
-#~ "XISF or FITS file you upload is aligned to your processed image, "
-#~ "otherwise the object annotations will not match. To improve your chances "
-#~ "at a successful accurate plate-solution, calibrate your file the usual "
-#~ "way (dark/bias/flats) but do not stretch it."
-#~ msgstr ""
-#~ "为了进一步提解析精度，请从数据中上传 XISF 或 FITS 文件之一。 此类文件通常"
-#~ "具有日期和时间文件头，这些文件头将使 AstroBin 能够计算出太阳系星历，并在作"
-#~ "品中找到行星和小行星（前提是您还向其中添加了位置信息）。<br/><br/>为了获得"
-#~ "最大的准确性，建议您使用 PixInsight 源生、未压缩加密的 XISF。点击这里了解"
-#~ "有关 XISF 的更多信息：<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
-#~ "target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>请注"
-#~ "意：</strong> 将您上传的 XISF 或 FITS 文件与处理后的作品对齐，是非常重要"
-#~ "的，否则标注将不匹配。 为了提高解析成功率，请以常规方式（暗场/偏置/平场）"
-#~ "校准文件，但不要拉伸。"
-
-#~ msgid "Scaled font size"
-#~ msgstr "缩放字体大小"
-
-#~ msgid "Font size of the annotations on your main image page"
-#~ msgstr "主作品页面上标注的字体大小"
-
-#~ msgid "Show equatorial grid"
-#~ msgstr "显示赤道网格"
-
-#~ msgid "Show constellation borders"
-#~ msgstr "显示星座边界"
-
-#~ msgid "Show constellation lines"
-#~ msgstr "显示星座连线"
-
-#~ msgid "Show named stars"
-#~ msgstr "显示知名恒星"
-
-#~ msgid "Show Messier objects"
-#~ msgstr "显示梅西耶天体"
-
-#~ msgid "Show NGC and IC objects"
-#~ msgstr "显示NGC和IC天体"
-
-#~ msgid "Show VdB objects"
-#~ msgstr "显示VdB天体"
-
-#~ msgid "Show Sharpless objects"
-#~ msgstr "显示Sharpless天体"
-
-#~ msgid "Show Barnard objects"
-#~ msgstr "显示Barnard天体"
-
-#~ msgid "Show PGC objects"
-#~ msgstr "显示PGC天体"
-
-#~ msgid "Show planets"
-#~ msgstr "显示行星"
-
-#~ msgid ""
-#~ "Only available if your image at least an acquisition time and an accurate "
-#~ "location"
-#~ msgstr "仅在您的作品有拍摄日期和准确位置时可用"
-
-#~ msgid "Show asteroids"
-#~ msgstr "显示小行星"
-
-#~ msgid "Show GCVS stars"
-#~ msgstr "显示GCVS恒星"
-
-#~ msgid "General Catalog of Variable Stars"
-#~ msgstr "变星总目录"
-
-#~ msgid "Show Tycho-2 catalog"
-#~ msgstr "显示Tycho-2目录"
-
-#~ msgid "Show CGPN objects"
-#~ msgstr "显示CGPN天体"
-
-#~ msgid "Getting plate-solving status, please wait..."
-#~ msgstr "正在获取解析状态，请稍后..."
-
-#~ msgid "Plate-solving starting, please do not leave this page..."
-#~ msgstr "解析正在启动，请不要离开此页面..."
-
-#~ msgid "Advanced plate-solving starting, please do not leave this page..."
-#~ msgstr "高级解析正在启动，请不要离开此页面..."
-
-#~ msgid "Plate-solving started. You may leave this page."
-#~ msgstr "解析已开始，您可以离开此页面。"
-
-#~ msgid "Advanced plate-solving started. You may leave this page."
-#~ msgstr "高级解析已开始，您可以离开此页面。"
-
-#~ msgid "Plate-solving almost ready, please do not leave this page..."
-#~ msgstr "解析已即将完成，请不要离开此页面..."
-
-#~ msgid "This image could not be plate-solved."
-#~ msgstr "这张作品无法被解析。"
-
-#~ msgid "The advanced plate-solving failed."
-#~ msgstr "高级解析失败。"
-
-#~ msgid "This image has been plate-solved. Refresh the page to see new data!"
-#~ msgstr "这张作品已完成解析。请刷新页面查看新数据！"
-
-#~ msgid ""
-#~ "The advanced plate-solved finished. Refresh the page to see new data!"
-#~ msgstr "这张作品已完成高级解析。请刷新页面查看新数据！"
-
-#~ msgid "Error"
-#~ msgstr "错误"
-
-#~ msgid ""
-#~ "AstroBin could not plate-solve this image because it was not possible to "
-#~ "establish a connection to nova.astrometry.net. Please try again later!"
-#~ msgstr ""
-#~ "AstroBin 无法解析这张作品，因为无法建立到 nova.astrometry.net 的连接。 请"
-#~ "稍后重试！"
-
-#~ msgid ""
-#~ "AstroBin could not plate-solve this image because nova.astrometry.net "
-#~ "reported an internal server error."
-#~ msgstr ""
-#~ "AstroBin 无法解析这张作品，因为 nova.astrometry.net 内部服务器错误。"
+#: loco:62149fafddeeb54b7a38c9e2
+msgid "You follow each other"
+msgstr "互相关注"
+
+#: loco:62149fafddeeb54b7a38c9e3
+msgid "Images"
+msgstr "作品"
+
+#: loco:62149fafddeeb54b7a38c9e4
+msgid "Followers"
+msgstr "粉丝"
+
+#: loco:62149fafddeeb54b7a38c9e5
+msgid "Following"
+msgstr "关注的人"
+
+#: loco:62149fafddeeb54b7a38c9e6
+msgid "User"
+msgstr "用户"
+
+#: loco:62149fafddeeb54b7a38c9e7
+msgid "No users."
+msgstr "没有用户。"
+
+#: loco:62149fafddeeb54b7a38c9e8
+msgid "Administrator"
+msgstr "管理员"
+
+#: loco:62149fafddeeb54b7a38c9e9
+msgid "Image moderator"
+msgstr "作品审核者"
+
+#: loco:62149fafddeeb54b7a38c9ea
+msgid "IOTD Submitter"
+msgstr "“今日最佳”提名人"
+
+#: loco:62149fafddeeb54b7a38c9eb
+msgid "IOTD Reviewer"
+msgstr "“今日最佳”审查委员"
+
+#: loco:62149fafddeeb54b7a38c9ec
+msgid "IOTD Judge"
+msgstr "“今日最佳”评审"
+
+#: loco:62149fafddeeb54b7a38c9ed
+msgid "Premium member"
+msgstr "Premium会员"
+
+#: loco:62149fafddeeb54b7a38c9ee
+msgid ""
+"Your email bounce reports have been removed from AstroBin. Please make sure "
+"that your email works well or you will get the same warning message again. "
+"Thanks!"
+msgstr "您的电子邮件退回报告已从 AstroBin 中删除。请确保您的邮箱一切正常，否则您将再次收到相同的警告消息。谢谢！"
+
+#: loco:62149fafddeeb54b7a38c9ef
+msgid ""
+"Your spam reports have been removed from AstroBin. Please make sure you "
+"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
+"don't want to receive emails from AstroBin, look for the settings link "
+"that's at the bottom of every email. Thanks!"
+msgstr ""
+"您的垃圾邮件报告已从 AstroBin 中删除。请确保您没有自动过滤，或在规则中将 AstroBin 的电子邮件标记为垃圾邮件！ 如果您不想接收来自 "
+"AstroBin 的电子邮件，请在任意一封电子邮件的底部查找设置链接。谢谢！"
+
+#: loco:6214a1deaafe2c507c005362
+msgid "Perform a blind solve"
+msgstr "执行盲解"
+
+#: loco:6214a1deaafe2c507c005363
+msgid ""
+"Attempt to solve with no hints. In most cases this will work, but it will "
+"take longer."
+msgstr "尝试在无任何提示的情况下解析。在大多数情况下，这可以正常工作，但是会花费更长的时间。"
+
+#: loco:6214a1deaafe2c507c005364
+msgid "Width of the field in degrees"
+msgstr "视场宽度，以度为单位"
+
+#: loco:6214a1deaafe2c507c005365
+msgid "Width of the field in arcminutes"
+msgstr "视场宽度，以角秒为单位"
+
+#: loco:6214a1deaafe2c507c005366
+msgid "Resolution of the field in arcseconds/pixel"
+msgstr "视场分辨率，以弧秒/像素为单位"
+
+#: loco:6214a1deaafe2c507c005367
+msgid "Field size units"
+msgstr "视场大小单位"
+
+#: loco:6214a1deaafe2c507c005368
+msgid "Min field size"
+msgstr "最小视场大小"
+
+#: loco:6214a1deaafe2c507c005369
+msgid "Estimate the lower bound for the width of this field."
+msgstr "估计视场宽度的下限"
+
+#: loco:6214a1deaafe2c507c00536a
+msgid "Max field size"
+msgstr "最大视场尺寸"
+
+#: loco:6214a1deaafe2c507c00536b
+msgid "Estimate the upper bound for the width of this field."
+msgstr "估计视场宽度的上限"
+
+#: loco:6214a1deaafe2c507c00536c
+msgid "Center RA"
+msgstr "中心赤经"
+
+#: loco:6214a1deaafe2c507c00536d
+msgid "Center RA of the field in degrees, 0.000 to 360.000"
+msgstr "视场中心赤经，以度为单位，0.000~360.000°"
+
+#: loco:6214a1deaafe2c507c00536e
+msgid "Center dec"
+msgstr "中心赤纬"
+
+#: loco:6214a1deaafe2c507c00536f
+msgid "Center dec of the field in degrees, -90.000 to +90.000"
+msgstr "视场中心赤纬，以度为单位，-90.000~+90.000°"
+
+#: loco:6214a1deaafe2c507c005370
+msgid "Radius"
+msgstr "半径"
+
+#: loco:6214a1deaafe2c507c005371
+msgid ""
+"Tells the plate-solving engine to look within these many degrees of the "
+"given center RA and dec position."
+msgstr "告知解析引擎，在指定中心赤经/赤纬多少度的范围内搜索。"
+
+#: loco:6214a1deaafe2c507c005372
+msgid "Small"
+msgstr "小"
+
+#: loco:6214a1deaafe2c507c005373
+msgid "Medium"
+msgstr "中"
+
+#: loco:6214a1deaafe2c507c005374
+msgid "Large"
+msgstr "大"
+
+#: loco:6214a1deaafe2c507c005375
+msgid "Sample raw frame (max 100 MB)"
+msgstr "原始帧样本（最大100 MB）"
+
+#: loco:6214a1deaafe2c507c005376
+msgid ""
+"To improve the accuracy of your plate-solution even further, please upload "
+"one of the XISF or FITS files from your data set. Such files normally have "
+"date and time headers that will allow AstroBin to calculate solar system "
+"body ephemerides and find planets and asteroids in your image (provided you "
+"also add location information to it).<br/><br/>For maximum accuracy, it's "
+"recommended that you use PixInsight's native and open format XISF. Learn "
+"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
+"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
+"note:</strong> it's very important that the XISF or FITS file you upload is "
+"aligned to your processed image, otherwise the object annotations will not "
+"match. To improve your chances at a successful accurate plate-solution, "
+"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
+msgstr ""
+"为了进一步提解析精度，请从数据中上传 XISF 或 FITS 文件之一。 此类文件通常具有日期和时间文件头，这些文件头将使 AstroBin "
+"能够计算出太阳系星历，并在作品中找到行星和小行星（前提是您还向其中添加了位置信息）。<br/><br/>为了获得最大的准确性，建议您使用 "
+"PixInsight 源生、未压缩加密的 XISF。点击这里了解有关 XISF 的更多信息：<br/><br/><a href=\"https:"
+"//pixinsight.com/xisf/\" target=\"_blank\">https://pixinsight.com/xisf/</a>"
+"<br/><br/> <strong>请注意：</strong> 将您上传的 XISF 或 FITS "
+"文件与处理后的作品对齐，是非常重要的，否则标注将不匹配。 为了提高解析成功率，请以常规方式（暗场/偏置/平场）校准文件，但不要拉伸。"
+
+#: loco:6214a1deaafe2c507c005377
+msgid "Scaled font size"
+msgstr "缩放字体大小"
+
+#: loco:6214a1deaafe2c507c005378
+msgid "Font size of the annotations on your main image page"
+msgstr "主作品页面上标注的字体大小"
+
+#: loco:6214a1deaafe2c507c005379
+msgid "Show equatorial grid"
+msgstr "显示赤道网格"
+
+#: loco:6214a1deaafe2c507c00537a
+msgid "Show constellation borders"
+msgstr "显示星座边界"
+
+#: loco:6214a1deaafe2c507c00537b
+msgid "Show constellation lines"
+msgstr "显示星座连线"
+
+#: loco:6214a1deaafe2c507c00537c
+msgid "Show named stars"
+msgstr "显示知名恒星"
+
+#: loco:6214a1deaafe2c507c00537d
+msgid "Show Messier objects"
+msgstr "显示梅西耶天体"
+
+#: loco:6214a1deaafe2c507c00537e
+msgid "Show NGC and IC objects"
+msgstr "显示NGC和IC天体"
+
+#: loco:6214a1deaafe2c507c00537f
+msgid "Show VdB objects"
+msgstr "显示VdB天体"
+
+#: loco:6214a1deaafe2c507c005380
+msgid "Show Sharpless objects"
+msgstr "显示Sharpless天体"
+
+#: loco:6214a1deaafe2c507c005381
+msgid "Show Barnard objects"
+msgstr "显示Barnard天体"
+
+#: loco:6214a1deaafe2c507c005382
+msgid "Show PGC objects"
+msgstr "显示PGC天体"
+
+#: loco:6214a1deaafe2c507c005383
+msgid "Show planets"
+msgstr "显示行星"
+
+#: loco:6214a1deaafe2c507c005384
+msgid ""
+"Only available if your image at least an acquisition time and an accurate "
+"location"
+msgstr "仅在您的作品有拍摄日期和准确位置时可用"
+
+#: loco:6214a1deaafe2c507c005385
+msgid "Show asteroids"
+msgstr "显示小行星"
+
+#: loco:6214a1deaafe2c507c005386
+msgid "Show GCVS stars"
+msgstr "显示GCVS恒星"
+
+#: loco:6214a1deaafe2c507c005387
+msgid "General Catalog of Variable Stars"
+msgstr "变星总目录"
+
+#: loco:6214a1deaafe2c507c005388
+msgid "Show Tycho-2 catalog"
+msgstr "显示Tycho-2目录"
+
+#: loco:6214a1deaafe2c507c005389
+msgid "Show CGPN objects"
+msgstr "显示CGPN天体"
+
+#: loco:6214a1deaafe2c507c00538a
+msgid "Getting plate-solving status, please wait..."
+msgstr "正在获取解析状态，请稍后..."
+
+#: loco:6214a1deaafe2c507c00538b
+msgid "Plate-solving starting, please do not leave this page..."
+msgstr "解析正在启动，请不要离开此页面..."
+
+#: loco:6214a1deaafe2c507c00538c
+msgid "Advanced plate-solving starting, please do not leave this page..."
+msgstr "高级解析正在启动，请不要离开此页面..."
+
+#: loco:6214a1deaafe2c507c00538d
+msgid "Plate-solving started. You may leave this page."
+msgstr "解析已开始，您可以离开此页面。"
+
+#: loco:6214a1deaafe2c507c00538e
+msgid "Advanced plate-solving started. You may leave this page."
+msgstr "高级解析已开始，您可以离开此页面。"
+
+#: loco:6214a1deaafe2c507c00538f
+msgid "Plate-solving almost ready, please do not leave this page..."
+msgstr "解析已即将完成，请不要离开此页面..."
+
+#: loco:6214a1deaafe2c507c005390
+msgid "This image could not be plate-solved."
+msgstr "这张作品无法被解析。"
+
+#: loco:6214a1deaafe2c507c005391
+msgid "The advanced plate-solving failed."
+msgstr "高级解析失败。"
+
+#: loco:6214a1deaafe2c507c005392
+msgid "This image has been plate-solved. Refresh the page to see new data!"
+msgstr "这张作品已完成解析。请刷新页面查看新数据！"
+
+#: loco:6214a1deaafe2c507c005393
+msgid "The advanced plate-solved finished. Refresh the page to see new data!"
+msgstr "这张作品已完成高级解析。请刷新页面查看新数据！"
+
+#: loco:6214a1deaafe2c507c005394
+msgid "Error"
+msgstr "错误"
+
+#: loco:6214a1deaafe2c507c005395
+msgid ""
+"AstroBin could not plate-solve this image because it was not possible to "
+"establish a connection to nova.astrometry.net. Please try again later!"
+msgstr "AstroBin 无法解析这张作品，因为无法建立到 nova.astrometry.net 的连接。 请稍后重试！"
+
+#: loco:6214a1deaafe2c507c005396
+msgid ""
+"AstroBin could not plate-solve this image because nova.astrometry.net "
+"reported an internal server error."
+msgstr "AstroBin 无法解析这张作品，因为 nova.astrometry.net 内部服务器错误。"
+
+#: loco:6214a1deaafe2c507c005397
+msgid ""
+"AstroBin could not plate-solve this image because nova.astrometry.net "
+"reported an unepexted error."
+msgstr ""
+
+#: loco:6214a1deaafe2c507c005398
+msgid ""
+"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c005399
+msgid ""
+"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c00539a
+msgid "Show quasars"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c00539b
+msgid "Missing"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c00539c
+msgid "Basic pending"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c00539d
+msgid "Basic failed"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c00539e
+msgid "Basic success"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c00539f
+msgid "Advanced pending"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a0
+msgid "Advanced failed"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a1
+msgid "Advanced success"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a2
+msgid ""
+"AstroBin could not plate-solve this image because of an unexpected error."
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a3
+msgid "n/a"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a4
+msgid "Starting task..."
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a5
+msgid "Downloading image..."
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a6
+msgid "Plate-solving image..."
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a7
+msgid "Generating image annotations..."
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a8
+msgid "Processing SVG documents..."
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053a9
+msgid "Uploading results..."
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053aa
+msgid "Task completed"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053ab
+msgid "Plate-solving information"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053ac
+msgid "Status"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053ad
+msgid "Started"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053ae
+msgid "Astrometry.net job"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053af
+msgid "PixInsight job"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b0
+msgid "PixInsight queue size"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b1
+msgid "PixInsight stage"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b2
+msgid "PixInsight log"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b3
+msgid "RA"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b4
+msgid "center"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b5
+msgid "degrees"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b6
+msgid "top/left"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b7
+msgid "top/right"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b8
+msgid "bottom/right"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053b9
+msgid "bottom/left"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053ba
+msgid "Dec"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053bb
+msgid "Close"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053bc
+msgid "Invalid"
+msgstr ""
+
+#: loco:6214a1deaafe2c507c0053bd
+msgid "Generating finding charts..."
+msgstr ""

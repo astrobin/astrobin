@@ -2,38 +2,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Groups\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-21 07:34+0000\n"
-"PO-Revision-Date: 2022-04-14 09:55+0200\n"
+"POT-Creation-Date: 2021-04-05 16:11+0200\n"
+"PO-Revision-Date: 2022-04-21 09:36+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
-"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108436\n"
-"X-Loco-Api-Version: 1.0.26 20220328-1\n"
+"X-Loco-Api-Version: 1.0.26 20220328-1"
 
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
-"Автоматичне подання підтримують лише такі категорії: Професійна мережа, Клуб "
-"чи асоціація, Інтернет-спільнота, Друзі чи партнери, Географічний регіон"
-
+#: loco:606b76100e5269297c75c362
 msgid "Autosubmission deactivation strategy"
 msgstr "Варіанти відключення автододавання зображень"
 
+#: loco:606b76100e5269297c75c363
 msgid "Keep all images currently auto-submitted"
 msgstr "Залишити всі автододані зображення"
 
+#: loco:606b76100e5269297c75c364
 msgid "Remove all images and start over"
 msgstr "Видаліть усі зображення та почніть спочатку"
 
+#: loco:606b76100e5269297c75c365
 msgid ""
 "When changing your group from autosubmission to non-autosubmission, you need "
 "to think of what to do with the images currently in the group."
@@ -41,97 +37,95 @@ msgstr ""
 "У разі відключення автододавання в групі, ви повинні вирішити, що робити із "
 "зображеннями в групі."
 
+#: loco:606b76100e5269297c75c366
 msgid "Invite users"
 msgstr "Запросити користувачів"
 
+#: loco:606b76100e5269297c75c367
 msgid "Users will receive a notification and will be able to join the group"
 msgstr "Користувачі отримають повідомлення та зможуть вступити до групи"
 
+#: loco:606b76100e5269297c75c368
 msgid "Professional network"
 msgstr "Професійна мережа"
 
+#: loco:606b76100e5269297c75c369
 msgid "Club or association"
 msgstr "Клуб або асоціація"
 
+#: loco:606b76100e5269297c75c36a
 msgid "Internet community"
 msgstr "Інтернет-спільнота"
 
+#: loco:606b76100e5269297c75c36b
 msgid "Friends or partners"
 msgstr "Друзі чи партнери"
 
+#: loco:606b76100e5269297c75c36c
 msgid "Geographical area"
 msgstr "Географічна територія"
 
+#: loco:606b76100e5269297c75c36d
 msgid "Ad-hoc collaboration"
 msgstr "Спеціальна співпраця"
 
+#: loco:606b76100e5269297c75c36e
 msgid "Specific to an imaging technique"
 msgstr "Специфічне для технології зйомки"
 
+#: loco:606b76100e5269297c75c36f
 msgid "Specific to an astrophotography target"
 msgstr "Специфічні для астрофотографії цілі"
 
+#: loco:606b76100e5269297c75c370
 msgid "Specific to certain equipment"
 msgstr "Специфічне для певного обладнання"
 
+#: loco:606b76100e5269297c75c371
 msgid "Other"
 msgstr "Інше"
 
-msgid "Publication"
-msgstr "Публікація"
-
-msgid "Title"
-msgstr "Назва"
-
-msgid "Key/value tag"
-msgstr "Тег ключ/значення"
-
+#: loco:606b76100e5269297c75c372
 msgid "Name"
 msgstr "Назва"
 
+#: loco:606b76100e5269297c75c373
 msgid "Description"
 msgstr "Опис"
 
+#: loco:606b76100e5269297c75c374
 msgid "HTML tags are allowed."
 msgstr "Дозволено HTML теги."
 
+#: loco:606b76100e5269297c75c375
 msgid "Category"
 msgstr "Категорія"
 
-msgid "Default image sorting"
-msgstr "Сортування зображень за замовчуванням"
-
-msgid "Image key/value tag sorting"
-msgstr "Сортування зображень ключ/значення"
-
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
-"Якщо зображення відсортовано за тегом ключ/значення, укажіть, яким саме. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/"
-"groups'>Докладніше.</a>"
-
+#: loco:606b76100e5269297c75c376
 msgid "Public group"
 msgstr "Публічна група"
 
+#: loco:606b76100e5269297c75c377
 msgid ""
 "Public groups can be searched by anyone, and all their content is public."
 msgstr "У відкритих групах можна шукати всім охочим, їхній вміст відкритий."
 
+#: loco:606b76100e5269297c75c378
 msgid "Moderated group"
 msgstr "Модерована група"
 
+#: loco:606b76100e5269297c75c379
 msgid ""
 "Moderated groups have a moderation queue for posted images and join requests."
 msgstr ""
 "У групах, що модеруються, існує черга, в яку потрапляють зображення і запити "
 "на вступ для подальшої модерації."
 
+#: loco:606b76100e5269297c75c37a
 msgid "Automatic submission"
 msgstr "Автододавання"
 
+#: loco:606b76100e5269297c75c37b
 msgid ""
 "Groups with automatic submissions always contain all public images from all "
 "members. Groups without automatic submission only contain images that are "
@@ -140,39 +134,47 @@ msgstr ""
 "Групи з автододаванням завжди містять усі зображення всіх учасників. Групи "
 "без додавання містять лише ті зображення, які були додані вручну."
 
+#: loco:606b76100e5269297c75c37c
 msgid "Last activity"
 msgstr "Останні дії"
 
-msgid "Date created"
-msgstr "Дата створення"
-
+#: loco:606b76100e5269297c75c37d
 msgid "Members"
 msgstr "Учасники"
 
+#: loco:606b76100e5269297c75c37e
 msgid "Images"
 msgstr "Зображення"
 
+#: loco:606b76100e5269297c75c37f
 msgid "Forum posts"
 msgstr "Повідомлення на форумі"
 
+#: loco:606b76100e5269297c75c380
 msgid "Owner"
 msgstr "Власник"
 
+#: loco:606b76100e5269297c75c381
 msgid "Moderator"
 msgstr "Модератор"
 
+#: loco:606b76100e5269297c75c382
 msgid "Member"
 msgstr "Учасник"
 
+#: loco:606b76100e5269297c75c383
 msgid "Invited"
 msgstr "Запрошений"
 
+#: loco:606b76100e5269297c75c384
 msgid "Join request pending approval"
 msgstr "Запит на вступ чекає на затвердження"
 
+#: loco:606b76100e5269297c75c385
 msgid "Add/remove images"
 msgstr "Додати/видалити зображення"
 
+#: loco:606b76100e5269297c75c386
 msgid ""
 "Click on the images to include them in this group (and click again to "
 "exclude them). Then click on the Save button down below."
@@ -180,21 +182,23 @@ msgstr ""
 "Натисніть на зображення, щоб вибрати ті, які потрібно додати до групи "
 "(повторне натискання скасовує вибір). Потім натисніть кнопку Зберегти."
 
+#: loco:606b76100e5269297c75c387
 msgid "(no title)"
 msgstr "(без назви)"
 
+#: loco:606b76100e5269297c75c388
 msgid "Save"
 msgstr "Зберегти"
 
+#: loco:606b76100e5269297c75c389
 msgid "Cancel"
 msgstr "Скасувати"
 
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr "Будь ласка, не додавайте більше 100 зображень за один раз, дякую!"
-
+#: loco:606b76100e5269297c75c38a
 msgid "Delete group?"
 msgstr "Видалити групу?"
 
+#: loco:606b76100e5269297c75c38b
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone!"
@@ -202,85 +206,109 @@ msgstr ""
 "Обережно! Ви дійсно бажаєте видалити цю групу? Цю операцію неможливо "
 "скасувати!"
 
+#: loco:606b76100e5269297c75c38c
 msgid "Delete group"
 msgstr "Видалити групу"
 
+#: loco:606b76100e5269297c75c38d
 msgid "Create new group"
 msgstr "Створити нову групу"
 
+#: loco:606b76100e5269297c75c38e
 msgid "Admin"
 msgstr "Адміністратор"
 
+#: loco:606b76100e5269297c75c38f
 msgid "Edit group"
 msgstr "Редагувати групу"
 
+#: loco:606b76100e5269297c75c390
 msgid "Manage members"
 msgstr "Керувати учасниками"
 
+#: loco:606b76100e5269297c75c391
 msgid "Actions"
 msgstr "Дії"
 
+#: loco:606b76100e5269297c75c392
 msgid "Join group"
 msgstr "Приєднатись до групи"
 
+#: loco:606b76100e5269297c75c393
 msgid "Leave group"
 msgstr "Залишити групу"
 
+#: loco:606b76100e5269297c75c394
 msgid "Moderate join requests"
 msgstr "Модерувати запити на вступ"
 
-msgid "Sort images"
-msgstr "Впорядкувати зображення"
-
+#: loco:606b76100e5269297c75c395
 msgid "This group is public"
 msgstr "Ця група відкрита"
 
+#: loco:606b76100e5269297c75c396
 msgid "This group is private"
 msgstr "Це закрита група"
 
+#: loco:606b76100e5269297c75c397
 msgid "This group is moderated"
 msgstr "Це модерована група"
 
+#: loco:606b76100e5269297c75c398
 msgid "This group is not moderated"
 msgstr "Це немодерована група"
 
+#: loco:606b76100e5269297c75c399
 msgid "This group has automatic submission"
 msgstr "Це група з автододаванням"
 
+#: loco:606b76100e5269297c75c39a
 msgid "This group does not have automatic submission"
 msgstr "Це група без автодоповнення"
 
+#: loco:606b76100e5269297c75c39b
 msgid "Invited users"
 msgstr "Запросити користувачів"
 
+#: loco:606b76100e5269297c75c39c
 msgid "Join requests"
 msgstr "Запити на вступ"
 
+#: loco:606b76100e5269297c75c39d
 #, python-format
 msgid ""
 "A group created on %(date_created)s, owned by <a href=\"%(owner_url)s\">"
 "%(owner)s</a>, categorized as <strong>%(category)s</strong>."
 msgstr ""
-"Група, створена %(date_created)s, належить <a href=\"%(owner_url)s\">"
-"%(owner)s</a>, класифікується як <strong>%(category)s</strong>."
+"Група, створена %(date_created)s, належить <a href=\"%(owner_url)s\">%(owner)"
+"s</a>, класифікується як <strong>%(category)s</strong>."
 
+#: loco:606b76100e5269297c75c39e
 msgid "Group forum"
 msgstr "Форум групи"
 
+#: loco:606b76100e5269297c75c39f
 #, python-format
 msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
 "topics"
 msgstr ""
-"<strong>%(post_count)s</strong> повідомлень у <strong>%(topic_count)s</"
-"strong> темах"
+"<strong>%(post_count)s</strong> повідомлень у <strong>%(topic_count)"
+"s</strong> темах"
 
+#: loco:606b76100e5269297c75c3a0
 msgid "View all"
 msgstr "Подивитись всі"
 
+#: loco:606b76100e5269297c75c3a1
 msgid "New topic"
 msgstr "Нова тема"
 
+#: loco:606b76100e5269297c75c3a2
+msgid "Please join the group to view its forum."
+msgstr "Будь ласка, приєднайтеся до групи, щоб переглянути її на форумі."
+
+#: loco:606b76100e5269297c75c3a3
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
 "undone and the group's forum and all its topics will be irreversibly deleted!"
@@ -288,18 +316,22 @@ msgstr ""
 "Обережно! Ви дійсно бажаєте видалити цю групу? Це незворотня операція, форум "
 "групи та всі теми будуть безповоротно видалені!"
 
+#: loco:606b76100e5269297c75c3a4
 msgid "Join group?"
 msgstr "Приєднатись до групи?"
 
+#: loco:606b76100e5269297c75c3a5
 msgid ""
 "This is a public group: all content, including the members list, is "
 "available to non-members."
 msgstr ""
 "Це відкрита група: весь контент, включаючи список учасників, доступний всім."
 
+#: loco:606b76100e5269297c75c3a6
 msgid "This is a private group: only members have access to its contents."
 msgstr "Це закрита група: лише учасники мають доступ до її вмісту."
 
+#: loco:606b76100e5269297c75c3a7
 msgid ""
 "This is a moderated group, join requests, images and forum posts might go "
 "through a moderation queue."
@@ -307,9 +339,11 @@ msgstr ""
 "Це модерована група, запити на вступ, зображення та повідомлення на форумі "
 "повинні проходити модерацію."
 
+#: loco:606b76100e5269297c75c3a8
 msgid "This is a non-moderated group."
 msgstr "Це немодерована група."
 
+#: loco:606b76100e5269297c75c3a9
 msgid ""
 "This is an automatic submission group: all of your images will instantly "
 "appear here without any need for action."
@@ -317,6 +351,7 @@ msgstr ""
 "Це група автододавання: всі Ваші зображення будуть автоматично з'являтися "
 "тут."
 
+#: loco:606b76100e5269297c75c3aa
 msgid ""
 "This is a non-automatic submission group: you will pick and choose which "
 "images you want to submit."
@@ -324,9 +359,11 @@ msgstr ""
 "Це група без автододавання: Вам потрібно буде самостійно вказати, які "
 "зображення ви хочете додати."
 
+#: loco:606b76100e5269297c75c3ab
 msgid "Leave group?"
 msgstr "Залишити групу?"
 
+#: loco:606b76100e5269297c75c3ac
 msgid ""
 "By leaving this group, your image submissions will no longer be visible to "
 "group members, while your forum posts will remain. Are you sure?"
@@ -334,150 +371,243 @@ msgstr ""
 "Залишаючи цю групу, Ви видаляєте всі свої зображення, при цьому Ваші "
 "повідомлення залишаться. Ви впевнені?"
 
+#: loco:606b76100e5269297c75c3ad
 msgid "Groups"
 msgstr "Групи"
 
+#: loco:606b76100e5269297c75c3ae
 msgid "Sort"
 msgstr "Впорядкувати"
 
-msgid "Search"
-msgstr "Пошук"
+#: loco:606b76100e5269297c75c3af
+msgid "Date created"
+msgstr "Дата створення"
 
-msgid "Private groups you own"
-msgstr "Приватні групи, якими Ви володієте"
+#: loco:606b76100e5269297c75c3b0
+msgid "Your private groups"
+msgstr "Ваші приватні групи"
 
-msgid "Private groups you are a member of"
-msgstr "Приватні групи, до яких Ви входите"
+#: loco:606b76100e5269297c75c3b1
+msgid "You own, or are a member of, or were invited to, these private groups."
+msgstr ""
+"Ви є власником цих приватних груп або є членом цих приватних груп чи були "
+"запрошені до них."
 
-msgid "Private groups you are invited to"
-msgstr "Приватні групи, до яких вас запрошують"
+#: loco:606b76100e5269297c75c3b2
+msgctxt "group"
+msgid "Create private group"
+msgstr "Створити приватну групу"
 
-msgid "Public groups you own"
-msgstr "Публічні групи, якими Ви володієте"
-
-msgid "Public groups you are a member of"
-msgstr "Публічні групи, до яких Ви входите"
-
-msgid "Public groups you are invited to"
-msgstr "Публічні групи, до яких Ви запрошені"
-
+#: loco:606b76100e5269297c75c3b3
 msgid "Public groups"
 msgstr "Відкриті групи"
 
+#: loco:606b76100e5269297c75c3b4
+msgid "Open to the whole community."
+msgstr "Відкрито для всієї громади."
+
+#: loco:606b76100e5269297c75c3b5
+msgctxt "group"
+msgid "Create public group"
+msgstr "Створити публічну групу"
+
+#: loco:606b76100e5269297c75c3b6
 msgid "No groups available."
 msgstr "Немає доступних груп."
 
+#: loco:606b76100e5269297c75c3b7
 msgid "Revoke?"
 msgstr "Відкликати?"
 
+#: loco:606b76100e5269297c75c3b8
 msgid "Revoke invitation"
 msgstr "Відкликати запрошення"
 
+#: loco:606b76100e5269297c75c3b9
 msgid "This group has no active invitations."
 msgstr "У цій групі нема активних запрошень."
 
+#: loco:606b76100e5269297c75c3ba
 msgid "Moderators"
 msgstr "Модератори"
 
+#: loco:606b76100e5269297c75c3bb
 msgid "Remove moderator status"
 msgstr "Прибрати статус модератора"
 
+#: loco:606b76100e5269297c75c3bc
 msgid "This group has no moderators."
 msgstr "У цій групі немає модераторів."
 
+#: loco:606b76100e5269297c75c3bd
 msgid "Make moderator"
 msgstr "Зробити модератором"
 
+#: loco:606b76100e5269297c75c3be
 msgid "Remove member"
 msgstr "Видалити учасника"
 
+#: loco:606b76100e5269297c75c3bf
 msgid "This group has no members."
 msgstr "У цій групі немає учасників."
 
+#: loco:606b76100e5269297c75c3c0
 msgid "Type in a search term"
 msgstr "Введіть слово для пошуку"
 
+#: loco:606b76100e5269297c75c3c1
 msgid "No results"
 msgstr "Немає результатів"
 
+#: loco:606b76100e5269297c75c3c2
 msgid "Searching"
 msgstr "Виконується пошук"
 
+#: loco:606b76100e5269297c75c3c3
 msgid "members list"
 msgstr "список учасників"
 
+#: loco:606b76100e5269297c75c3c4
 msgid "Back to group"
 msgstr "Назад до групи"
 
+#: loco:606b76100e5269297c75c3c5
 msgid "Full list of the group members"
 msgstr "Повний перелік учасників групи"
 
+#: loco:606b76100e5269297c75c3c6
 msgid "Images in group"
 msgstr "Зображення у групі"
 
+#: loco:606b76100e5269297c75c3c7
 msgid "Forum posts in group"
 msgstr "Сообщения на форуме группы"
 
+#: loco:606b76100e5269297c75c3c8
 msgid "Approve"
 msgstr "Підтвердити"
 
+#: loco:606b76100e5269297c75c3c9
 msgid "Reject"
 msgstr "Відхилити"
 
+#: loco:606b76100e5269297c75c3ca
 msgid "This group has no join requests."
 msgstr "У цій групі немає запитів на вступ."
 
+#: loco:606b76100e5269297c75c3cb
 msgid "You cannot add images that are not yours!"
 msgstr "Ви не можете додати чужі зображення!"
 
+#: loco:606b76100e5269297c75c3cc
 msgid "Your image was added to the group."
 msgstr "Ваше зображення додано до групи."
 
+#: loco:606b76100e5269297c75c3cd
 msgid "Group updated with your selection of images."
 msgstr "Група поповнена Вашою вибіркою зображень."
 
+#: loco:606b76100e5269297c75c3ce
 msgid "Your new group was created successfully"
 msgstr "Ваша нова група успішно створена"
 
+#: loco:606b76100e5269297c75c3cf
 msgid "Group deleted"
 msgstr "Група видалена"
 
+#: loco:606b76100e5269297c75c3d0
 msgid "You have joined the group"
 msgstr "Ви вступили до групи"
 
+#: loco:606b76100e5269297c75c3d1
 msgid "You already were a member of this group"
 msgstr "Ви вже були учасником цієї групи"
 
+#: loco:606b76100e5269297c75c3d2
 msgid ""
 "This is a moderated group, and your join request will be reviewed by a "
 "moderator"
 msgstr "Ця група модерована, і Ваш запит на вступ буде розглянутий модератором"
 
+#: loco:606b76100e5269297c75c3d3
 msgid "You have left the group"
 msgstr "Ви вийшли з групи"
 
+#: loco:606b76100e5269297c75c3d4
 msgid "Form saved"
 msgstr "Форма зберажена"
 
-#~ msgid "Please join the group to view its forum."
-#~ msgstr "Будь ласка, приєднайтеся до групи, щоб переглянути її на форумі."
+#: loco:60c889be3896cc05b71c59c2
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
+msgstr ""
+"Автоматичне подання підтримують лише такі категорії: Професійна мережа, Клуб "
+"чи асоціація, Інтернет-спільнота, Друзі чи партнери, Географічний регіон"
 
-#~ msgid "Your private groups"
-#~ msgstr "Ваші приватні групи"
+#: loco:61b233508cd2755360049f52
+msgid "Publication"
+msgstr "Публікація"
 
-#~ msgid ""
-#~ "You own, or are a member of, or were invited to, these private groups."
-#~ msgstr ""
-#~ "Ви є власником цих приватних груп або є членом цих приватних груп чи були "
-#~ "запрошені до них."
+#: loco:61b233508cd2755360049f53
+msgid "Title"
+msgstr "Назва"
 
-#~ msgctxt "group"
-#~ msgid "Create private group"
-#~ msgstr "Створити приватну групу"
+#: loco:61b233508cd2755360049f54
+msgid "Key/value tag"
+msgstr "Тег ключ/значення"
 
-#~ msgid "Open to the whole community."
-#~ msgstr "Відкрито для всієї громади."
+#: loco:61b233508cd2755360049f55
+msgid "Default image sorting"
+msgstr "Сортування зображень за замовчуванням"
 
-#~ msgctxt "group"
-#~ msgid "Create public group"
-#~ msgstr "Створити публічну групу"
+#: loco:61b233508cd2755360049f56
+msgid "Image key/value tag sorting"
+msgstr "Сортування зображень ключ/значення"
+
+#: loco:61b233508cd2755360049f57
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+"Якщо зображення відсортовано за тегом ключ/значення, укажіть, яким саме. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>"
+"Докладніше.</a>"
+
+#: loco:61b233508cd2755360049f58
+msgid "Search"
+msgstr "Пошук"
+
+#: loco:61b233508cd2755360049f59
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr "Будь ласка, не додавайте більше 100 зображень за один раз, дякую!"
+
+#: loco:61b233508cd2755360049f5a
+msgid "Sort images"
+msgstr "Впорядкувати зображення"
+
+#: loco:61e7c5a9441380406834c45c
+msgid "Private groups you own"
+msgstr "Приватні групи, якими Ви володієте"
+
+#: loco:61e7c5a9441380406834c45d
+msgid "Private groups you are a member of"
+msgstr "Приватні групи, до яких Ви входите"
+
+#: loco:61e7c5a9441380406834c45e
+msgid "Private groups you are invited to"
+msgstr "Приватні групи, до яких вас запрошують"
+
+#: loco:61e7c5a9441380406834c45f
+msgid "Public groups you own"
+msgstr "Публічні групи, якими Ви володієте"
+
+#: loco:61e7c5a9441380406834c460
+msgid "Public groups you are a member of"
+msgstr "Публічні групи, до яких Ви входите"
+
+#: loco:61e7c5a9441380406834c461
+msgid "Public groups you are invited to"
+msgstr "Публічні групи, до яких Ви запрошені"
