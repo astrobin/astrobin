@@ -2,45 +2,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Premium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 16:17+0200\n"
+"POT-Creation-Date: 2022-04-21 20:35+0000\n"
 "PO-Revision-Date: 2022-04-21 09:41+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
-"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
+"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108451\n"
-"X-Loco-Api-Version: 1.0.26 20220328-1"
-
-msgid "I wasn't really affected by the data loss"
-msgstr "На мене втрата даних особливо не вплинула"
-
-msgid "I don't require compensation: I want to support AstroBin"
-msgstr "Мені не потрібна компенсація: я хочу підтримати AstroBin"
-
-msgid "I would like to try AstroBin Ultimate for free for 1 month"
-msgstr "Я хотів би спробувати AstroBin Ultimate безкоштовно протягом 1 місяця"
-
-msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
-msgstr ""
-"Я відчуваю, що маю право на безкоштовний доступ до AstroBin Ultimate "
-"протягом 3 місяців"
-
-msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
-msgstr ""
-"Я відчуваю, що маю право на безкоштовний доступ до AstroBin Ultimate "
-"протягом 6 місяців"
-
-msgid "Requested compensation"
-msgstr "Запрошена компенсація"
-
-msgid "Please indicate if and how much you would like to be compensated."
-msgstr "Будь ласка, вкажіть, чи бажаєте Ви отримати компенсацію та скільки."
+"X-Loco-Api-Version: 1.0.26 20220328-1\n"
 
 msgid "Your migration data"
 msgstr "Ваші дані для міграції"
@@ -71,86 +46,6 @@ msgstr "Дата"
 
 msgid "Subscription"
 msgstr "Підписка"
-
-msgid "Data loss compensation request"
-msgstr "Запит на компенсацію втрати даних"
-
-msgid ""
-"You are eligible for compensation due to the data loss that happened on "
-"February 16th, 2020."
-msgstr ""
-"Ви маєте право на компенсацію через втрату даних, яка сталася 16 лютого 2020 "
-"року."
-
-msgid ""
-"If you haven't had the chance, please take a minute to read what happened at "
-"the following page:"
-msgstr ""
-"Якщо у Вас не було можливості, будь ласка, знайдіть хвилинку, щоб прочитати, "
-"що сталося на наступній сторінці:"
-
-msgid "Official statement and post-mortem"
-msgstr "Офіційна заява та посмертне"
-
-msgid "Please accept our apology once more."
-msgstr "Прийміть наші вибачення ще раз."
-
-msgid "Please chooce your compensation from the list below"
-msgstr "Будь ласка, виберіть свою компенсацію зі списку нижче"
-
-msgid ""
-"Compensation is offered in the form of free time on the new AstroBin "
-"subscription tier called \"Ultimate\"."
-msgstr ""
-"Компенсація пропонується у вигляді вільного часу на новому рівні підписки "
-"AstroBin під назвою «Ultimate»."
-
-#, python-format
-msgid ""
-"To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
-"target=\"_blank\">the pricing page</a>."
-msgstr ""
-"Щоб дізнатися більше про AstroBin Ultimate, відвідайте <a href=\"%(url)s\" "
-"target=\"_blank\">сторінку цін</a>."
-
-msgid "Submit"
-msgstr "Надіслати"
-
-msgid "Data loss compensation reauest"
-msgstr "Запит на відшкодування втрати даних"
-
-msgid "Already done"
-msgstr "Вже зроблено"
-
-msgid "Sorry, you can't do this again."
-msgstr "Вибачте, ви не можете зробити це знову."
-
-msgid "Your preference was already recorded and cannot be changed."
-msgstr "Ваші налаштування вже записані і не можуть бути змінені."
-
-msgid "Not eligible"
-msgstr "Не відповідає вимогам"
-
-msgid "It looks like you're not eligible"
-msgstr "Схоже, ви не відповідаєте вимогам"
-
-msgid ""
-"Sorry, but this page is for people who were on AstroBin Premium on the day "
-"that the data loss incident happened, and it looks like you aren't among "
-"them."
-msgstr ""
-"Вибачте, але ця сторінка призначена для людей, які були на AstroBin Premium "
-"у той день, коли сталася втрата даних, і, схоже, Вас немає серед них."
-
-msgid "Success"
-msgstr "Успішно"
-
-msgid "All done!"
-msgstr "Готово!"
-
-msgid ""
-"Your preference has been recorded and it has already been applied. Thank you!"
-msgstr "Ваші налаштування були записані й уже застосовані. Дякую!"
 
 msgid "Migrate donations"
 msgstr "Переказ внесків"
@@ -202,6 +97,9 @@ msgstr ""
 
 msgid "No, I want to pay for Premium"
 msgstr "Ні, я хочу сплатити Premium"
+
+msgid "Success"
+msgstr "Успішно"
 
 msgid "Your migration was successful."
 msgstr "Ваша міграція пройшла успішно."
@@ -297,391 +195,502 @@ msgstr ""
 msgid "Your AstroBin subscription will be automatically renewed in 30 days"
 msgstr "Ваша AstroBin підписка буде автоматично оновлена ​​протягом 30 днів"
 
-msgid "You follow each other"
-msgstr "Ви підписані один на одного"
+#~ msgid "I wasn't really affected by the data loss"
+#~ msgstr "На мене втрата даних особливо не вплинула"
+
+#~ msgid "I don't require compensation: I want to support AstroBin"
+#~ msgstr "Мені не потрібна компенсація: я хочу підтримати AstroBin"
+
+#~ msgid "I would like to try AstroBin Ultimate for free for 1 month"
+#~ msgstr ""
+#~ "Я хотів би спробувати AstroBin Ultimate безкоштовно протягом 1 місяця"
+
+#~ msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
+#~ msgstr ""
+#~ "Я відчуваю, що маю право на безкоштовний доступ до AstroBin Ultimate "
+#~ "протягом 3 місяців"
+
+#~ msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
+#~ msgstr ""
+#~ "Я відчуваю, що маю право на безкоштовний доступ до AstroBin Ultimate "
+#~ "протягом 6 місяців"
 
-msgid "Images"
-msgstr "Зображення"
+#~ msgid "Requested compensation"
+#~ msgstr "Запрошена компенсація"
 
-msgid "Followers"
-msgstr "Підписники"
+#~ msgid "Please indicate if and how much you would like to be compensated."
+#~ msgstr "Будь ласка, вкажіть, чи бажаєте Ви отримати компенсацію та скільки."
 
-msgid "Following"
-msgstr "Підписки"
+#~ msgid "Data loss compensation request"
+#~ msgstr "Запит на компенсацію втрати даних"
 
-msgid "User"
-msgstr "Користувач"
+#~ msgid ""
+#~ "You are eligible for compensation due to the data loss that happened on "
+#~ "February 16th, 2020."
+#~ msgstr ""
+#~ "Ви маєте право на компенсацію через втрату даних, яка сталася 16 лютого "
+#~ "2020 року."
 
-msgid "No users."
-msgstr "Немає користувачів."
+#~ msgid ""
+#~ "If you haven't had the chance, please take a minute to read what happened "
+#~ "at the following page:"
+#~ msgstr ""
+#~ "Якщо у Вас не було можливості, будь ласка, знайдіть хвилинку, щоб "
+#~ "прочитати, що сталося на наступній сторінці:"
 
-msgid "Administrator"
-msgstr "Адміністратор"
+#~ msgid "Official statement and post-mortem"
+#~ msgstr "Офіційна заява та посмертне"
 
-msgid "Image moderator"
-msgstr "Модератор зображень"
+#~ msgid "Please accept our apology once more."
+#~ msgstr "Прийміть наші вибачення ще раз."
 
-msgid "IOTD Submitter"
-msgstr "Відправник IOTD"
+#~ msgid "Please chooce your compensation from the list below"
+#~ msgstr "Будь ласка, виберіть свою компенсацію зі списку нижче"
 
-msgid "IOTD Reviewer"
-msgstr "Рецензент IOTD"
+#~ msgid ""
+#~ "Compensation is offered in the form of free time on the new AstroBin "
+#~ "subscription tier called \"Ultimate\"."
+#~ msgstr ""
+#~ "Компенсація пропонується у вигляді вільного часу на новому рівні підписки "
+#~ "AstroBin під назвою «Ultimate»."
+
+#~ msgid ""
+#~ "To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
+#~ "target=\"_blank\">the pricing page</a>."
+#~ msgstr ""
+#~ "Щоб дізнатися більше про AstroBin Ultimate, відвідайте <a href=\"%(url)s"
+#~ "\" target=\"_blank\">сторінку цін</a>."
+
+#~ msgid "Submit"
+#~ msgstr "Надіслати"
+
+#~ msgid "Data loss compensation reauest"
+#~ msgstr "Запит на відшкодування втрати даних"
+
+#~ msgid "Already done"
+#~ msgstr "Вже зроблено"
+
+#~ msgid "Sorry, you can't do this again."
+#~ msgstr "Вибачте, ви не можете зробити це знову."
+
+#~ msgid "Your preference was already recorded and cannot be changed."
+#~ msgstr "Ваші налаштування вже записані і не можуть бути змінені."
+
+#~ msgid "Not eligible"
+#~ msgstr "Не відповідає вимогам"
+
+#~ msgid "It looks like you're not eligible"
+#~ msgstr "Схоже, ви не відповідаєте вимогам"
+
+#~ msgid ""
+#~ "Sorry, but this page is for people who were on AstroBin Premium on the "
+#~ "day that the data loss incident happened, and it looks like you aren't "
+#~ "among them."
+#~ msgstr ""
+#~ "Вибачте, але ця сторінка призначена для людей, які були на AstroBin "
+#~ "Premium у той день, коли сталася втрата даних, і, схоже, Вас немає серед "
+#~ "них."
 
-msgid "IOTD Judge"
-msgstr "Суддя IOTD"
+#~ msgid "All done!"
+#~ msgstr "Готово!"
 
-msgid "Premium member"
-msgstr "Учасник Преміум"
+#~ msgid ""
+#~ "Your preference has been recorded and it has already been applied. Thank "
+#~ "you!"
+#~ msgstr "Ваші налаштування були записані й уже застосовані. Дякую!"
 
-msgid ""
-"Your email bounce reports have been removed from AstroBin. Please make sure "
-"that your email works well or you will get the same warning message again. "
-"Thanks!"
-msgstr ""
-"Ваші звіти про відмову електронної пошти видалено з AstroBin. Переконайтеся, "
-"що Ваша електронна пошта працює добре, інакше Ви знову отримаєте те саме "
-"попередження. Дякуємо!"
-
-msgid ""
-"Your spam reports have been removed from AstroBin. Please make sure you "
-"don't have a filter or rule to always mark AstroBin's emails as spam! If you "
-"don't want to receive emails from AstroBin, look for the settings link "
-"that's at the bottom of every email. Thanks!"
-msgstr ""
-"Ваші повідомлення про спам видалено з AstroBin. Будь ласка, переконайтеся, "
-"що у Вас немає фільтра або правила, щоб завжди позначати електронні листи "
-"AstroBin як спам! Якщо Ви не хочете отримувати електронні листи від AstroBin,"
-" знайдіть посилання на налаштування внизу кожного листа. Дякуємо!"
-
-msgid "Perform a blind solve"
-msgstr "Виконайте сліпе розпізнавання"
-
-msgid ""
-"Attempt to solve with no hints. In most cases this will work, but it will "
-"take longer."
-msgstr ""
-"Спробуйте розпізнання без підказок. У більшості випадків це спрацює, але це "
-"займе більше часу."
-
-msgid "Width of the field in degrees"
-msgstr "Ширина поля в градусах"
-
-msgid "Width of the field in arcminutes"
-msgstr "Ширина поля в дугових хвилинах"
-
-msgid "Resolution of the field in arcseconds/pixel"
-msgstr "Роздільна здатність поля в секундах дуги/піксель"
-
-msgid "Field size units"
-msgstr "Одиниці розміру поля"
-
-msgid "Min field size"
-msgstr "Мінімальний розмір поля"
-
-msgid "Estimate the lower bound for the width of this field."
-msgstr "Оцініть нижню межу ширини цього поля."
-
-msgid "Max field size"
-msgstr "Максимальний розмір поля"
-
-msgid "Estimate the upper bound for the width of this field."
-msgstr "Оцініть верхню межу ширини цього поля."
-
-msgid "Center RA"
-msgstr "Центр RA"
+#~ msgid "You follow each other"
+#~ msgstr "Ви підписані один на одного"
 
-msgid "Center RA of the field in degrees, 0.000 to 360.000"
-msgstr "Центр РА в градусах, від 0,000 до 360,000"
-
-msgid "Center dec"
-msgstr "Центр Dec"
-
-msgid "Center dec of the field in degrees, -90.000 to +90.000"
-msgstr "Центр Dec в градусах, від -90 000 до +90 000"
-
-msgid "Radius"
-msgstr "Радіус"
-
-msgid ""
-"Tells the plate-solving engine to look within these many degrees of the "
-"given center RA and dec position."
-msgstr ""
-"Вказує механізму розпізнавання поля дивитися в межах заданого RA та Dec."
-
-msgid "Small"
-msgstr "Маленький"
-
-msgid "Medium"
-msgstr "Середній"
-
-msgid "Large"
-msgstr "Великий"
-
-msgid "Sample raw frame (max 100 MB)"
-msgstr "Зразок необробленого кадру (макс. 100 МБ)"
-
-msgid ""
-"To improve the accuracy of your plate-solution even further, please upload "
-"one of the XISF or FITS files from your data set. Such files normally have "
-"date and time headers that will allow AstroBin to calculate solar system "
-"body ephemerides and find planets and asteroids in your image (provided you "
-"also add location information to it).<br/><br/>For maximum accuracy, it's "
-"recommended that you use PixInsight's native and open format XISF. Learn "
-"more about XISF here:<br/><br/><a href=\"https://pixinsight.com/xisf/\" "
-"target=\"_blank\">https://pixinsight.com/xisf/</a><br/><br/> <strong>Please "
-"note:</strong> it's very important that the XISF or FITS file you upload is "
-"aligned to your processed image, otherwise the object annotations will not "
-"match. To improve your chances at a successful accurate plate-solution, "
-"calibrate your file the usual way (dark/bias/flats) but do not stretch it."
-msgstr ""
-"Щоб ще більше підвищити точність визначення поля, завантажте один із файлів "
-"XISF або FITS зі свого набору даних. Такі файли зазвичай мають заголовки "
-"дати та часу, які дозволяють AstroBin обчислювати ефемериди тіла Сонячної "
-"системи та знаходити планети й астероїди на вашому зображенні (за умови, що "
-"ви також додаєте інформацію про місцезнаходження до свого зображення). <br/> "
-"<br/> Для максимальної точності рекомендується використовувати власний та "
-"відкритий формат PixInsight XISF. Дізнайтесь більше про XISF тут: <br/> <br/>"
-" <a href=\"https://pixinsight.com/xisf/\" target=\"_blank\"> https:"
-"//pixinsight.com/xisf/ </a> <br/> <br/> <strong> Зверніть увагу: </strong> "
-"дуже важливо, щоб завантажуваний файл XISF або FITS був вирівняний з "
-"обробленим зображенням, інакше анотації об'єктів не збігатимуться. Щоб "
-"підвищити Ваші шанси отримати точне розпізнавання, відкалібруйте файл "
-"звичайним способом (dark/bias/flats), але не розтягуйте його гістограму."
+#~ msgid "Images"
+#~ msgstr "Зображення"
 
-msgid "Scaled font size"
-msgstr "Масштабований розмір шрифту"
-
-msgid "Font size of the annotations on your main image page"
-msgstr "Розмір шрифту анотацій на головній сторінці зображення"
+#~ msgid "Followers"
+#~ msgstr "Підписники"
 
-msgid "Show equatorial grid"
-msgstr "Показати екваторіальну сітку"
-
-msgid "Show constellation borders"
-msgstr "Показати межі сузір'їв"
-
-msgid "Show constellation lines"
-msgstr "Показати лінії сузір'їв"
-
-msgid "Show named stars"
-msgstr "Показати зірки з іменами"
-
-msgid "Show Messier objects"
-msgstr "Показати об'єкти Мессьє"
-
-msgid "Show NGC and IC objects"
-msgstr "Покажіть об’єкти NGC та IC"
-
-msgid "Show VdB objects"
-msgstr "Показати об'єкти VdB"
-
-msgid "Show Sharpless objects"
-msgstr "Показати Безгострі об'єкти"
-
-msgid "Show Barnard objects"
-msgstr "Показати об’єкти Барнарда"
-
-msgid "Show PGC objects"
-msgstr "Показати об'єкти PGC"
-
-msgid "Show planets"
-msgstr "Показати планети"
-
-msgid ""
-"Only available if your image at least an acquisition time and an accurate "
-"location"
-msgstr ""
-"Доступно лише за умови, що Ваше зображення має принаймні час отримання та "
-"точне місцезнаходження"
-
-msgid "Show asteroids"
-msgstr "Показати астероїди"
-
-msgid "Show GCVS stars"
-msgstr "Показати зірки GCVS"
-
-msgid "General Catalog of Variable Stars"
-msgstr "Загальний Каталог Змінних Зірок(GCVS)"
-
-msgid "Show Tycho-2 catalog"
-msgstr "Показати каталог Tycho-2"
+#~ msgid "Following"
+#~ msgstr "Підписки"
 
-msgid "Show CGPN objects"
-msgstr "Показати об'єкти CGPN"
+#~ msgid "User"
+#~ msgstr "Користувач"
 
-msgid "Getting plate-solving status, please wait..."
-msgstr "Отримання статусу розпізнавання, зачекайте..."
+#~ msgid "No users."
+#~ msgstr "Немає користувачів."
 
-msgid "Plate-solving starting, please do not leave this page..."
-msgstr ""
-"Розпізнавання поля починається, будь ласка, не залишайте цю сторінку..."
+#~ msgid "Administrator"
+#~ msgstr "Адміністратор"
 
-msgid "Advanced plate-solving starting, please do not leave this page..."
-msgstr "Розпочато розширене роспізнавання поля, не покидайте сторінку…"
+#~ msgid "Image moderator"
+#~ msgstr "Модератор зображень"
 
-msgid "Plate-solving started. You may leave this page."
-msgstr "Почалося розпізнавання поля. Ви можете залишити цю сторінку."
+#~ msgid "IOTD Submitter"
+#~ msgstr "Відправник IOTD"
 
-msgid "Advanced plate-solving started. You may leave this page."
-msgstr ""
-"Розпочато розширене роспізнавання поля. Ви можете залишити цю сторінку."
+#~ msgid "IOTD Reviewer"
+#~ msgstr "Рецензент IOTD"
 
-msgid "Plate-solving almost ready, please do not leave this page..."
-msgstr "Розпізнавання поля майже готове, не залишайте цю сторінку..."
+#~ msgid "IOTD Judge"
+#~ msgstr "Суддя IOTD"
 
-msgid "This image could not be plate-solved."
-msgstr "Це зображення не може бути розпізнано."
+#~ msgid "Premium member"
+#~ msgstr "Учасник Преміум"
 
-msgid "The advanced plate-solving failed."
-msgstr "Розширене розпізнавання не вдалося."
+#~ msgid ""
+#~ "Your email bounce reports have been removed from AstroBin. Please make "
+#~ "sure that your email works well or you will get the same warning message "
+#~ "again. Thanks!"
+#~ msgstr ""
+#~ "Ваші звіти про відмову електронної пошти видалено з AstroBin. "
+#~ "Переконайтеся, що Ваша електронна пошта працює добре, інакше Ви знову "
+#~ "отримаєте те саме попередження. Дякуємо!"
+
+#~ msgid ""
+#~ "Your spam reports have been removed from AstroBin. Please make sure you "
+#~ "don't have a filter or rule to always mark AstroBin's emails as spam! If "
+#~ "you don't want to receive emails from AstroBin, look for the settings "
+#~ "link that's at the bottom of every email. Thanks!"
+#~ msgstr ""
+#~ "Ваші повідомлення про спам видалено з AstroBin. Будь ласка, "
+#~ "переконайтеся, що у Вас немає фільтра або правила, щоб завжди позначати "
+#~ "електронні листи AstroBin як спам! Якщо Ви не хочете отримувати "
+#~ "електронні листи від AstroBin, знайдіть посилання на налаштування внизу "
+#~ "кожного листа. Дякуємо!"
+
+#~ msgid "Perform a blind solve"
+#~ msgstr "Виконайте сліпе розпізнавання"
+
+#~ msgid ""
+#~ "Attempt to solve with no hints. In most cases this will work, but it will "
+#~ "take longer."
+#~ msgstr ""
+#~ "Спробуйте розпізнання без підказок. У більшості випадків це спрацює, але "
+#~ "це займе більше часу."
+
+#~ msgid "Width of the field in degrees"
+#~ msgstr "Ширина поля в градусах"
+
+#~ msgid "Width of the field in arcminutes"
+#~ msgstr "Ширина поля в дугових хвилинах"
+
+#~ msgid "Resolution of the field in arcseconds/pixel"
+#~ msgstr "Роздільна здатність поля в секундах дуги/піксель"
+
+#~ msgid "Field size units"
+#~ msgstr "Одиниці розміру поля"
+
+#~ msgid "Min field size"
+#~ msgstr "Мінімальний розмір поля"
+
+#~ msgid "Estimate the lower bound for the width of this field."
+#~ msgstr "Оцініть нижню межу ширини цього поля."
+
+#~ msgid "Max field size"
+#~ msgstr "Максимальний розмір поля"
+
+#~ msgid "Estimate the upper bound for the width of this field."
+#~ msgstr "Оцініть верхню межу ширини цього поля."
+
+#~ msgid "Center RA"
+#~ msgstr "Центр RA"
+
+#~ msgid "Center RA of the field in degrees, 0.000 to 360.000"
+#~ msgstr "Центр РА в градусах, від 0,000 до 360,000"
+
+#~ msgid "Center dec"
+#~ msgstr "Центр Dec"
+
+#~ msgid "Center dec of the field in degrees, -90.000 to +90.000"
+#~ msgstr "Центр Dec в градусах, від -90 000 до +90 000"
+
+#~ msgid "Radius"
+#~ msgstr "Радіус"
+
+#~ msgid ""
+#~ "Tells the plate-solving engine to look within these many degrees of the "
+#~ "given center RA and dec position."
+#~ msgstr ""
+#~ "Вказує механізму розпізнавання поля дивитися в межах заданого RA та Dec."
+
+#~ msgid "Small"
+#~ msgstr "Маленький"
+
+#~ msgid "Medium"
+#~ msgstr "Середній"
+
+#~ msgid "Large"
+#~ msgstr "Великий"
 
-msgid "This image has been plate-solved. Refresh the page to see new data!"
-msgstr ""
-"Це зображення було розпізнано. Оновіть сторінку, щоб побачити нові дані!"
+#~ msgid "Sample raw frame (max 100 MB)"
+#~ msgstr "Зразок необробленого кадру (макс. 100 МБ)"
 
-msgid "The advanced plate-solved finished. Refresh the page to see new data!"
-msgstr ""
-"Розпізнавання поля закінчено. Оновіть сторінку, щоб побачити нові дані!"
+#~ msgid ""
+#~ "To improve the accuracy of your plate-solution even further, please "
+#~ "upload one of the XISF or FITS files from your data set. Such files "
+#~ "normally have date and time headers that will allow AstroBin to calculate "
+#~ "solar system body ephemerides and find planets and asteroids in your "
+#~ "image (provided you also add location information to it).<br/><br/>For "
+#~ "maximum accuracy, it's recommended that you use PixInsight's native and "
+#~ "open format XISF. Learn more about XISF here:<br/><br/><a href=\"https://"
+#~ "pixinsight.com/xisf/\" target=\"_blank\">https://pixinsight.com/xisf/</"
+#~ "a><br/><br/> <strong>Please note:</strong> it's very important that the "
+#~ "XISF or FITS file you upload is aligned to your processed image, "
+#~ "otherwise the object annotations will not match. To improve your chances "
+#~ "at a successful accurate plate-solution, calibrate your file the usual "
+#~ "way (dark/bias/flats) but do not stretch it."
+#~ msgstr ""
+#~ "Щоб ще більше підвищити точність визначення поля, завантажте один із "
+#~ "файлів XISF або FITS зі свого набору даних. Такі файли зазвичай мають "
+#~ "заголовки дати та часу, які дозволяють AstroBin обчислювати ефемериди "
+#~ "тіла Сонячної системи та знаходити планети й астероїди на вашому "
+#~ "зображенні (за умови, що ви також додаєте інформацію про місцезнаходження "
+#~ "до свого зображення). <br/> <br/> Для максимальної точності "
+#~ "рекомендується використовувати власний та відкритий формат PixInsight "
+#~ "XISF. Дізнайтесь більше про XISF тут: <br/> <br/> <a href=\"https://"
+#~ "pixinsight.com/xisf/\" target=\"_blank\"> https://pixinsight.com/xisf/ </"
+#~ "a> <br/> <br/> <strong> Зверніть увагу: </strong> дуже важливо, щоб "
+#~ "завантажуваний файл XISF або FITS був вирівняний з обробленим "
+#~ "зображенням, інакше анотації об'єктів не збігатимуться. Щоб підвищити "
+#~ "Ваші шанси отримати точне розпізнавання, відкалібруйте файл звичайним "
+#~ "способом (dark/bias/flats), але не розтягуйте його гістограму."
 
-msgid "Error"
-msgstr "Помилка"
+#~ msgid "Scaled font size"
+#~ msgstr "Масштабований розмір шрифту"
 
-msgid ""
-"AstroBin could not plate-solve this image because it was not possible to "
-"establish a connection to nova.astrometry.net. Please try again later!"
-msgstr ""
-"AstroBin не зміг розпізнати це зображення, оскільки не вдалося встановити "
-"з’єднання з nova.astrometry.net. Будь-ласка спробуйте пізніше!"
+#~ msgid "Font size of the annotations on your main image page"
+#~ msgstr "Розмір шрифту анотацій на головній сторінці зображення"
 
-msgid ""
-"AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an internal server error."
-msgstr ""
-"AstroBin не зміг розпізнати це зображення, оскільки nova.astrometry.net "
-"повідомила про внутрішню помилку сервера."
+#~ msgid "Show equatorial grid"
+#~ msgstr "Показати екваторіальну сітку"
 
-msgid ""
-"AstroBin could not plate-solve this image because nova.astrometry.net "
-"reported an unepexted error."
-msgstr ""
-"AstroBin не зміг розпізнати це зображення, оскільки nova.astrometry.net "
-"повідомив про несподівану помилку."
+#~ msgid "Show constellation borders"
+#~ msgstr "Показати межі сузір'їв"
+
+#~ msgid "Show constellation lines"
+#~ msgstr "Показати лінії сузір'їв"
 
-msgid ""
-"Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
-msgstr ""
-"Показати об’єкти з Каталогу яскравих туманностей Ліндса (LBN) (Ліндс, 1965)"
+#~ msgid "Show named stars"
+#~ msgstr "Показати зірки з іменами"
+
+#~ msgid "Show Messier objects"
+#~ msgstr "Показати об'єкти Мессьє"
+
+#~ msgid "Show NGC and IC objects"
+#~ msgstr "Покажіть об’єкти NGC та IC"
+
+#~ msgid "Show VdB objects"
+#~ msgstr "Показати об'єкти VdB"
+
+#~ msgid "Show Sharpless objects"
+#~ msgstr "Показати Безгострі об'єкти"
+
+#~ msgid "Show Barnard objects"
+#~ msgstr "Показати об’єкти Барнарда"
+
+#~ msgid "Show PGC objects"
+#~ msgstr "Показати об'єкти PGC"
+
+#~ msgid "Show planets"
+#~ msgstr "Показати планети"
+
+#~ msgid ""
+#~ "Only available if your image at least an acquisition time and an accurate "
+#~ "location"
+#~ msgstr ""
+#~ "Доступно лише за умови, що Ваше зображення має принаймні час отримання та "
+#~ "точне місцезнаходження"
+
+#~ msgid "Show asteroids"
+#~ msgstr "Показати астероїди"
+
+#~ msgid "Show GCVS stars"
+#~ msgstr "Показати зірки GCVS"
+
+#~ msgid "General Catalog of Variable Stars"
+#~ msgstr "Загальний Каталог Змінних Зірок(GCVS)"
 
-msgid ""
-"Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
-msgstr ""
-"Показати об’єкти з Каталогу темних туманностей Ліндса (LDN) (Lynds 1962)"
+#~ msgid "Show Tycho-2 catalog"
+#~ msgstr "Показати каталог Tycho-2"
 
-msgid "Show quasars"
-msgstr "Показати квазари"
+#~ msgid "Show CGPN objects"
+#~ msgstr "Показати об'єкти CGPN"
+
+#~ msgid "Getting plate-solving status, please wait..."
+#~ msgstr "Отримання статусу розпізнавання, зачекайте..."
+
+#~ msgid "Plate-solving starting, please do not leave this page..."
+#~ msgstr ""
+#~ "Розпізнавання поля починається, будь ласка, не залишайте цю сторінку..."
 
-msgid "Missing"
-msgstr "Відсутнє"
+#~ msgid "Advanced plate-solving starting, please do not leave this page..."
+#~ msgstr "Розпочато розширене роспізнавання поля, не покидайте сторінку…"
 
-msgid "Basic pending"
-msgstr "Базове очікується"
+#~ msgid "Plate-solving started. You may leave this page."
+#~ msgstr "Почалося розпізнавання поля. Ви можете залишити цю сторінку."
 
-msgid "Basic failed"
-msgstr "Базове не вдалося"
+#~ msgid "Advanced plate-solving started. You may leave this page."
+#~ msgstr ""
+#~ "Розпочато розширене роспізнавання поля. Ви можете залишити цю сторінку."
 
-msgid "Basic success"
-msgstr "Базове успішне"
+#~ msgid "Plate-solving almost ready, please do not leave this page..."
+#~ msgstr "Розпізнавання поля майже готове, не залишайте цю сторінку..."
 
-msgid "Advanced pending"
-msgstr "Розширене очікується"
+#~ msgid "This image could not be plate-solved."
+#~ msgstr "Це зображення не може бути розпізнано."
 
-msgid "Advanced failed"
-msgstr "Розширене не вдалося"
+#~ msgid "The advanced plate-solving failed."
+#~ msgstr "Розширене розпізнавання не вдалося."
 
-msgid "Advanced success"
-msgstr "Розширене успішне"
+#~ msgid "This image has been plate-solved. Refresh the page to see new data!"
+#~ msgstr ""
+#~ "Це зображення було розпізнано. Оновіть сторінку, щоб побачити нові дані!"
 
-msgid ""
-"AstroBin could not plate-solve this image because of an unexpected error."
-msgstr "AstroBin не зміг розв’язати це зображення через неочікувану помилку."
+#~ msgid ""
+#~ "The advanced plate-solved finished. Refresh the page to see new data!"
+#~ msgstr ""
+#~ "Розпізнавання поля закінчено. Оновіть сторінку, щоб побачити нові дані!"
 
-msgid "n/a"
-msgstr "н/д"
+#~ msgid "Error"
+#~ msgstr "Помилка"
 
-msgid "Starting task..."
-msgstr "Початок завдання..."
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because it was not possible to "
+#~ "establish a connection to nova.astrometry.net. Please try again later!"
+#~ msgstr ""
+#~ "AstroBin не зміг розпізнати це зображення, оскільки не вдалося встановити "
+#~ "з’єднання з nova.astrometry.net. Будь-ласка спробуйте пізніше!"
 
-msgid "Downloading image..."
-msgstr "Завантаження зображення..."
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because nova.astrometry.net "
+#~ "reported an internal server error."
+#~ msgstr ""
+#~ "AstroBin не зміг розпізнати це зображення, оскільки nova.astrometry.net "
+#~ "повідомила про внутрішню помилку сервера."
 
-msgid "Plate-solving image..."
-msgstr "Розпізнавання зображення…"
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because nova.astrometry.net "
+#~ "reported an unepexted error."
+#~ msgstr ""
+#~ "AstroBin не зміг розпізнати це зображення, оскільки nova.astrometry.net "
+#~ "повідомив про несподівану помилку."
 
-msgid "Generating image annotations..."
-msgstr "Створення анотацій до зображень..."
+#~ msgid ""
+#~ "Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds "
+#~ "1965)"
+#~ msgstr ""
+#~ "Показати об’єкти з Каталогу яскравих туманностей Ліндса (LBN) (Ліндс, "
+#~ "1965)"
 
-msgid "Processing SVG documents..."
-msgstr "Обробка документів SVG..."
+#~ msgid ""
+#~ "Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+#~ msgstr ""
+#~ "Показати об’єкти з Каталогу темних туманностей Ліндса (LDN) (Lynds 1962)"
 
-msgid "Uploading results..."
-msgstr "Завантаження результатів..."
+#~ msgid "Show quasars"
+#~ msgstr "Показати квазари"
 
-msgid "Task completed"
-msgstr "Завдання виконано"
+#~ msgid "Missing"
+#~ msgstr "Відсутнє"
 
-msgid "Plate-solving information"
-msgstr "Інформація про розпізнавання поля"
+#~ msgid "Basic pending"
+#~ msgstr "Базове очікується"
 
-msgid "Status"
-msgstr "Статус"
+#~ msgid "Basic failed"
+#~ msgstr "Базове не вдалося"
 
-msgid "Started"
-msgstr "Почалося"
+#~ msgid "Basic success"
+#~ msgstr "Базове успішне"
 
-msgid "Astrometry.net job"
-msgstr "Робота Astrometry.net"
+#~ msgid "Advanced pending"
+#~ msgstr "Розширене очікується"
 
-msgid "PixInsight job"
-msgstr "Робота PixInsight"
+#~ msgid "Advanced failed"
+#~ msgstr "Розширене не вдалося"
 
-msgid "PixInsight queue size"
-msgstr "Розмір черги PixInsight"
+#~ msgid "Advanced success"
+#~ msgstr "Розширене успішне"
 
-msgid "PixInsight stage"
-msgstr "Етап PixInsight"
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because of an unexpected error."
+#~ msgstr ""
+#~ "AstroBin не зміг розв’язати це зображення через неочікувану помилку."
 
-msgid "PixInsight log"
-msgstr "PixInsight лог"
+#~ msgid "n/a"
+#~ msgstr "н/д"
 
-msgid "RA"
-msgstr "RA"
+#~ msgid "Starting task..."
+#~ msgstr "Початок завдання..."
 
-msgid "center"
-msgstr "центр"
+#~ msgid "Downloading image..."
+#~ msgstr "Завантаження зображення..."
 
-msgid "degrees"
-msgstr "градуси"
+#~ msgid "Plate-solving image..."
+#~ msgstr "Розпізнавання зображення…"
 
-msgid "top/left"
-msgstr "вгорі ліворуч"
+#~ msgid "Generating image annotations..."
+#~ msgstr "Створення анотацій до зображень..."
 
-msgid "top/right"
-msgstr "вгорі праворуч"
+#~ msgid "Processing SVG documents..."
+#~ msgstr "Обробка документів SVG..."
 
-msgid "bottom/right"
-msgstr "унизу праворуч"
+#~ msgid "Uploading results..."
+#~ msgstr "Завантаження результатів..."
 
-msgid "bottom/left"
-msgstr "унизу ліворуч"
+#~ msgid "Task completed"
+#~ msgstr "Завдання виконано"
 
-msgid "Dec"
-msgstr "Dec"
+#~ msgid "Plate-solving information"
+#~ msgstr "Інформація про розпізнавання поля"
 
-msgid "Close"
-msgstr "Закрити"
+#~ msgid "Status"
+#~ msgstr "Статус"
 
-msgid "Invalid"
-msgstr "Недійсне"
+#~ msgid "Started"
+#~ msgstr "Почалося"
 
-msgid "Generating finding charts..."
-msgstr "Створення діаграм пошуку..."
+#~ msgid "Astrometry.net job"
+#~ msgstr "Робота Astrometry.net"
+
+#~ msgid "PixInsight job"
+#~ msgstr "Робота PixInsight"
+
+#~ msgid "PixInsight queue size"
+#~ msgstr "Розмір черги PixInsight"
+
+#~ msgid "PixInsight stage"
+#~ msgstr "Етап PixInsight"
+
+#~ msgid "PixInsight log"
+#~ msgstr "PixInsight лог"
+
+#~ msgid "RA"
+#~ msgstr "RA"
+
+#~ msgid "center"
+#~ msgstr "центр"
+
+#~ msgid "degrees"
+#~ msgstr "градуси"
+
+#~ msgid "top/left"
+#~ msgstr "вгорі ліворуч"
+
+#~ msgid "top/right"
+#~ msgstr "вгорі праворуч"
+
+#~ msgid "bottom/right"
+#~ msgstr "унизу праворуч"
+
+#~ msgid "bottom/left"
+#~ msgstr "унизу ліворуч"
+
+#~ msgid "Dec"
+#~ msgstr "Dec"
+
+#~ msgid "Close"
+#~ msgstr "Закрити"
+
+#~ msgid "Invalid"
+#~ msgstr "Недійсне"
+
+#~ msgid "Generating finding charts..."
+#~ msgstr "Створення діаграм пошуку..."
