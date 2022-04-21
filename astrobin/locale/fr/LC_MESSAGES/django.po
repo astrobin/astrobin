@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-14 07:54+0000\n"
-"PO-Revision-Date: 2022-04-13 22:41+0200\n"
+"POT-Creation-Date: 2022-04-21 07:40+0000\n"
+"PO-Revision-Date: 2022-04-21 09:36+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -1353,6 +1353,9 @@ msgstr "Type"
 msgid "mm"
 msgstr "mm"
 
+msgid "Unknown"
+msgstr "Inconnu(e)"
+
 msgid "Max. payload"
 msgstr "Charge max."
 
@@ -1524,9 +1527,6 @@ msgstr "Mélange de sources multiples"
 
 msgid "None of the above"
 msgstr "Rien de ce qui précède"
-
-msgid "Unknown"
-msgstr "Inconnu(e)"
 
 msgid "Non-commercial independent facility"
 msgstr "Établissement indépendant non-commercial"
@@ -3136,15 +3136,6 @@ msgstr ""
 msgid "Resume emails"
 msgstr "Courriels"
 
-msgid "AstroBin is rebuilding its equipment database!"
-msgstr "AstroBin est en pleine refonte de sa base de données de matériels !"
-
-msgid "Please migrate your gear."
-msgstr "Merci de migrer votre matériel."
-
-msgid "Begin migration"
-msgstr "Migration débutée"
-
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -3809,11 +3800,9 @@ msgstr "Actions"
 #, python-format
 msgid ""
 "Submission for %(_0)sIOTD/TP%(_1)s consideration is not automatic anymore. "
-"Please use the <strong>Actions</strong> menu from now on, if you want to submit."
+"Please use the <strong>Actions</strong> menu from now on, if you want to "
+"submit."
 msgstr ""
-"La soumission automatique au concours %(_0)sIOTD/TP%(_1)s n'est plus active. "
-"Merci d'utiliser le menu <strong>Actions</strong> de l'image pour la "
-"soumettre à partir de maintenant."
 
 msgid "If you want, you can set up auto-submission in your preferences."
 msgstr ""
@@ -4420,23 +4409,40 @@ msgstr "Insérer la description de votre image ici..."
 msgid "Edit your image: gear used"
 msgstr "Modifier votre image : matériel utilisé"
 
+msgid "AstroBin is rebuilding its equipment database!"
+msgstr "AstroBin est en pleine refonte de sa base de données de matériels !"
+
+msgid ""
+"Using this form to edit the equipment used for this image is no longer "
+"possible, because it interfaces with the legacy equipment database on "
+"AstroBin."
+msgstr ""
+
+msgid ""
+"To begin using the new and improved equipment database for this image, "
+"please migrate your gear."
+msgstr ""
+
+msgid ""
+"Please note: the migration process goes thru a review stage. If you have "
+"completed your migration but still see this notice, it could because your "
+"migration proposals haven't been approved yet."
+msgstr ""
+
+msgid "Begin migration"
+msgstr "Migration débutée"
+
 #, python-format
 msgid ""
 "Can't see anything here? Perhaps you should first add some gear in your\n"
-"                <a href=\"%(the_url)s\">profile</a>!"
+"                    <a href=\"%(the_url)s\">profile</a>!"
 msgstr ""
-"Aucun matériel disponible ici ? Vous devriez commencer par ajouter du "
-"matériel depuis votre\n"
-"              <a href=\"%(the_url)s\">profil</a> !"
 
 msgid ""
 "To choose the gear used for this image, drag items from the right side to "
 "left side, or\n"
-"                click the plus sign."
+"                    click the plus sign."
 msgstr ""
-"Pour sélectionner le matériel utilisé pour cette image, faites glisser les "
-"éléments du côté droit vers le côté gauche, ou\n"
-"                cliquez sur le signe \"plus\"."
 
 msgid ""
 "Use this button to import the gear settings from another image of yours."
@@ -6281,6 +6287,9 @@ msgstr "Se désabonner"
 msgid "Subscribe"
 msgstr "S'abonner"
 
+msgid "Search this topic"
+msgstr ""
+
 msgid "The posts below are new since your last visit to this topic."
 msgstr "Ci-dessous les nouveaux messages depuis votre dernière visite."
 
@@ -6798,6 +6807,11 @@ msgstr ""
 
 msgid "Edit your astrophotography gear"
 msgstr "Modifier votre matériel d'astrophotographie"
+
+msgid ""
+"This page is no longer necessary, as you can add new equipment items "
+"directly during the image upload or editing process."
+msgstr ""
 
 msgid "Edit gear item"
 msgstr "Modifier le matériel"
@@ -7851,6 +7865,23 @@ msgstr ""
 #~ "\">formulaire avancé</a>."
 
 #~ msgid ""
+#~ "Can't see anything here? Perhaps you should first add some gear in your\n"
+#~ "                <a href=\"%(the_url)s\">profile</a>!"
+#~ msgstr ""
+#~ "Aucun matériel disponible ici ? Vous devriez commencer par ajouter du "
+#~ "matériel depuis votre\n"
+#~ "              <a href=\"%(the_url)s\">profil</a> !"
+
+#~ msgid ""
+#~ "To choose the gear used for this image, drag items from the right side to "
+#~ "left side, or\n"
+#~ "                click the plus sign."
+#~ msgstr ""
+#~ "Pour sélectionner le matériel utilisé pour cette image, faites glisser "
+#~ "les éléments du côté droit vers le côté gauche, ou\n"
+#~ "                cliquez sur le signe \"plus\"."
+
+#~ msgid ""
 #~ "You are about to open a large file of about %(size)s. Depending on your "
 #~ "download speed, it might take several seconds or even minutes to view the "
 #~ "file."
@@ -8295,6 +8326,18 @@ msgstr ""
 
 #~ msgid "New image revision by %(user)s on \"%(title)s\""
 #~ msgstr "Nouvelle version de l'image \"%(title)s\" par %(user)s"
+
+#~ msgid "Please migrate your gear."
+#~ msgstr "Merci de migrer votre matériel."
+
+#~ msgid ""
+#~ "Submission for %(_0)sIOTD/TP%(_1)s consideration is not automatic "
+#~ "anymore. Please use the <strong>Actions</strong> from now on, if you want "
+#~ "to submit."
+#~ msgstr ""
+#~ "La soumission automatique au concours %(_0)sIOTD/TP%(_1)s n'est plus "
+#~ "active. Merci d'utiliser le menu <strong>Actions</strong> de l'image pour "
+#~ "la soumettre à partir de maintenant."
 
 #~ msgid "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment."
 #~ msgstr ""

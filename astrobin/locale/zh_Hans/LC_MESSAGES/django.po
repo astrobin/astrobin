@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-14 07:54+0000\n"
-"PO-Revision-Date: 2022-04-13 22:41+0200\n"
+"POT-Creation-Date: 2022-04-21 07:40+0000\n"
+"PO-Revision-Date: 2022-04-21 09:36+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Simplified Chinese\n"
 "Language: zh-Hans\n"
@@ -1319,6 +1319,9 @@ msgstr "类别"
 msgid "mm"
 msgstr "毫米"
 
+msgid "Unknown"
+msgstr "未知的"
+
 msgid "Max. payload"
 msgstr "最大载重量"
 
@@ -1490,9 +1493,6 @@ msgstr "多种素材来源"
 
 msgid "None of the above"
 msgstr "以上都不是"
-
-msgid "Unknown"
-msgstr "未知的"
 
 msgid "Non-commercial independent facility"
 msgstr "非商业性独立机构"
@@ -3004,15 +3004,6 @@ msgstr ""
 msgid "Resume emails"
 msgstr "恢复电子邮件"
 
-msgid "AstroBin is rebuilding its equipment database!"
-msgstr ""
-
-msgid "Please migrate your gear."
-msgstr ""
-
-msgid "Begin migration"
-msgstr ""
-
 msgid "Cancel"
 msgstr "取消"
 
@@ -3634,7 +3625,8 @@ msgstr "操作"
 #, python-format
 msgid ""
 "Submission for %(_0)sIOTD/TP%(_1)s consideration is not automatic anymore. "
-"Please use the <strong>Actions</strong> menu from now on, if you want to submit."
+"Please use the <strong>Actions</strong> menu from now on, if you want to "
+"submit."
 msgstr ""
 
 msgid "If you want, you can set up auto-submission in your preferences."
@@ -4172,21 +4164,40 @@ msgstr ""
 msgid "Edit your image: gear used"
 msgstr "编辑您的作品：使用的设备"
 
+msgid "AstroBin is rebuilding its equipment database!"
+msgstr ""
+
+msgid ""
+"Using this form to edit the equipment used for this image is no longer "
+"possible, because it interfaces with the legacy equipment database on "
+"AstroBin."
+msgstr ""
+
+msgid ""
+"To begin using the new and improved equipment database for this image, "
+"please migrate your gear."
+msgstr ""
+
+msgid ""
+"Please note: the migration process goes thru a review stage. If you have "
+"completed your migration but still see this notice, it could because your "
+"migration proposals haven't been approved yet."
+msgstr ""
+
+msgid "Begin migration"
+msgstr ""
+
 #, python-format
 msgid ""
 "Can't see anything here? Perhaps you should first add some gear in your\n"
-"                <a href=\"%(the_url)s\">profile</a>!"
+"                    <a href=\"%(the_url)s\">profile</a>!"
 msgstr ""
-"这里什么都没有？也许您应该尝试在                \n"
-"<a href=\"%(the_url)s\"> 个人资料</a> 中添加一些设备！"
 
 msgid ""
 "To choose the gear used for this image, drag items from the right side to "
 "left side, or\n"
-"                click the plus sign."
+"                    click the plus sign."
 msgstr ""
-"将这个项目从右边拖到左边，\n"
-"或者点击“+”号"
 
 msgid ""
 "Use this button to import the gear settings from another image of yours."
@@ -5814,6 +5825,9 @@ msgstr "退订"
 msgid "Subscribe"
 msgstr "订阅"
 
+msgid "Search this topic"
+msgstr ""
+
 msgid "The posts below are new since your last visit to this topic."
 msgstr ""
 
@@ -6292,6 +6306,11 @@ msgstr ""
 
 msgid "Edit your astrophotography gear"
 msgstr "编辑您的天文摄影设备"
+
+msgid ""
+"This page is no longer necessary, as you can add new equipment items "
+"directly during the image upload or editing process."
+msgstr ""
 
 msgid "Edit gear item"
 msgstr "编辑设备项目"
@@ -7225,6 +7244,21 @@ msgstr "抱歉，用户名已经存在，大小写不同。"
 #~ "使用此表单，您可以输入获取这张作品的基础细节信息。如果您想更彻底或为每个筛"
 #~ "选器分别填写详细信息，请转到 <a class=\"button\" href="
 #~ "\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">高级表单</a>。"
+
+#~ msgid ""
+#~ "Can't see anything here? Perhaps you should first add some gear in your\n"
+#~ "                <a href=\"%(the_url)s\">profile</a>!"
+#~ msgstr ""
+#~ "这里什么都没有？也许您应该尝试在                \n"
+#~ "<a href=\"%(the_url)s\"> 个人资料</a> 中添加一些设备！"
+
+#~ msgid ""
+#~ "To choose the gear used for this image, drag items from the right side to "
+#~ "left side, or\n"
+#~ "                click the plus sign."
+#~ msgstr ""
+#~ "将这个项目从右边拖到左边，\n"
+#~ "或者点击“+”号"
 
 #~ msgid ""
 #~ "You are about to open a large file of about %(size)s. Depending on your "

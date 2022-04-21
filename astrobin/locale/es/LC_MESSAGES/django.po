@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-14 07:54+0000\n"
-"PO-Revision-Date: 2022-04-13 22:41+0200\n"
+"POT-Creation-Date: 2022-04-21 07:40+0000\n"
+"PO-Revision-Date: 2022-04-21 09:36+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -1343,6 +1343,9 @@ msgstr "Tipo"
 msgid "mm"
 msgstr "mm."
 
+msgid "Unknown"
+msgstr "Desconocido"
+
 msgid "Max. payload"
 msgstr "Carga máxima"
 
@@ -1514,9 +1517,6 @@ msgstr "Mezcla de varias fuentes"
 
 msgid "None of the above"
 msgstr "Ninguna de las anteriores"
-
-msgid "Unknown"
-msgstr "Desconocido"
 
 msgid "Non-commercial independent facility"
 msgstr "Instalación independiente no comercial"
@@ -3049,15 +3049,6 @@ msgstr ""
 msgid "Resume emails"
 msgstr ""
 
-msgid "AstroBin is rebuilding its equipment database!"
-msgstr ""
-
-msgid "Please migrate your gear."
-msgstr ""
-
-msgid "Begin migration"
-msgstr ""
-
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -3687,7 +3678,8 @@ msgstr "Acciones"
 #, python-format
 msgid ""
 "Submission for %(_0)sIOTD/TP%(_1)s consideration is not automatic anymore. "
-"Please use the <strong>Actions</strong> menu from now on, if you want to submit."
+"Please use the <strong>Actions</strong> menu from now on, if you want to "
+"submit."
 msgstr ""
 
 msgid "If you want, you can set up auto-submission in your preferences."
@@ -4240,21 +4232,40 @@ msgstr ""
 msgid "Edit your image: gear used"
 msgstr "Editar tu imagen: equipo usado"
 
+msgid "AstroBin is rebuilding its equipment database!"
+msgstr ""
+
+msgid ""
+"Using this form to edit the equipment used for this image is no longer "
+"possible, because it interfaces with the legacy equipment database on "
+"AstroBin."
+msgstr ""
+
+msgid ""
+"To begin using the new and improved equipment database for this image, "
+"please migrate your gear."
+msgstr ""
+
+msgid ""
+"Please note: the migration process goes thru a review stage. If you have "
+"completed your migration but still see this notice, it could because your "
+"migration proposals haven't been approved yet."
+msgstr ""
+
+msgid "Begin migration"
+msgstr ""
+
 #, python-format
 msgid ""
 "Can't see anything here? Perhaps you should first add some gear in your\n"
-"                <a href=\"%(the_url)s\">profile</a>!"
+"                    <a href=\"%(the_url)s\">profile</a>!"
 msgstr ""
-"¿No ves nada aquí? ¡Quizá deberías primero añadir algún instrumento en tu <a "
-"href=\"%(the_url)s\">Perfil</a>!"
 
 msgid ""
 "To choose the gear used for this image, drag items from the right side to "
 "left side, or\n"
-"                click the plus sign."
+"                    click the plus sign."
 msgstr ""
-"Para elegir el equipo utilizado en esta imagen, arrastra los elementos del "
-"lado derecho al izquierdo, o haz clic en el signo \"más\"."
 
 msgid ""
 "Use this button to import the gear settings from another image of yours."
@@ -5884,6 +5895,9 @@ msgstr "Borrar subscripción"
 msgid "Subscribe"
 msgstr "Suscribirse"
 
+msgid "Search this topic"
+msgstr ""
+
 msgid "The posts below are new since your last visit to this topic."
 msgstr ""
 
@@ -6374,6 +6388,11 @@ msgstr ""
 
 msgid "Edit your astrophotography gear"
 msgstr "Edita tu equipo astrofotográfico"
+
+msgid ""
+"This page is no longer necessary, as you can add new equipment items "
+"directly during the image upload or editing process."
+msgstr ""
 
 msgid "Edit gear item"
 msgstr "Edita elemento de instrumental"
@@ -7338,6 +7357,21 @@ msgstr ""
 #~ "según filtros, días, etc., cambia al <a class=\"button\" href="
 #~ "\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">Formulario "
 #~ "Avanzado</a>."
+
+#~ msgid ""
+#~ "Can't see anything here? Perhaps you should first add some gear in your\n"
+#~ "                <a href=\"%(the_url)s\">profile</a>!"
+#~ msgstr ""
+#~ "¿No ves nada aquí? ¡Quizá deberías primero añadir algún instrumento en tu "
+#~ "<a href=\"%(the_url)s\">Perfil</a>!"
+
+#~ msgid ""
+#~ "To choose the gear used for this image, drag items from the right side to "
+#~ "left side, or\n"
+#~ "                click the plus sign."
+#~ msgstr ""
+#~ "Para elegir el equipo utilizado en esta imagen, arrastra los elementos "
+#~ "del lado derecho al izquierdo, o haz clic en el signo \"más\"."
 
 #~ msgid "link"
 #~ msgstr "Enlace"

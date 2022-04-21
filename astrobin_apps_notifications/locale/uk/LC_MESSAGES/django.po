@@ -2,185 +2,241 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Notifications\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-14 07:54+0000\n"
-"PO-Revision-Date: 2022-04-13 01:52+0200\n"
+"POT-Creation-Date: 2021-04-05 16:16+0200\n"
+"PO-Revision-Date: 2022-04-21 09:35+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
-"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108445\n"
-"X-Loco-Api-Version: 1.0.26 20220328-1\n"
+"X-Loco-Api-Version: 1.0.26 20220328-1"
 
+#: loco:606b76429c83b8364f3f0a42
+msgid "Notifications"
+msgstr "Сповіщення"
+
+#: loco:606b76429c83b8364f3f0a43
+msgid "You have no notifications."
+msgstr "У вас немає сповіщень."
+
+#: loco:606b76429c83b8364f3f0a44
+msgid "Settings"
+msgstr "Налаштування"
+
+#: loco:606b76429c83b8364f3f0a45
+msgid "Mark all as read"
+msgstr "Позначити все прочитаним"
+
+#: loco:606b76429c83b8364f3f0a46
+msgid "You have no new notifications."
+msgstr "У Вас немає нових сповіщень."
+
+#: loco:606b76429c83b8364f3f0a47
 msgid "You have a new follower"
 msgstr "У Вас новий підписник"
 
+#: loco:606b76429c83b8364f3f0a48
 msgid "New image from a user you follow"
 msgstr "Нове зображення від користувача, на якого Ви підписані"
 
+#: loco:606b76429c83b8364f3f0a49
 msgid "New image revision from a user you follow"
 msgstr "Нова версія зображення від користувача, на якого Ви підписані"
 
+#: loco:606b76429c83b8364f3f0a4a
 msgid "Your image was plate-solved"
 msgstr "Ваше зображення визначено за координатами"
 
+#: loco:606b76429c83b8364f3f0a4b
 msgid "Your image could not be plate-solved"
 msgstr "Ваше зображення не може бути визначене за координатами"
 
-msgid "Your image was plate-solved (advanced)"
-msgstr "Ваше зображення визначено за координатами (розширено)"
-
-msgid "Your image could not be plate-solved (advanced)"
-msgstr "Ваше зображення не можна розшифрувати (розширено)"
-
+#: loco:606b76429c83b8364f3f0a4c
 msgid "Your image received a new comment"
 msgstr "У Вашого зображення коментар"
 
-msgid "Your edit proposal received a new comment"
-msgstr "Ваша пропозиція редагування отримала новий коментар"
-
-msgid "Your scheduled IOTD received a new comment"
-msgstr "Ваш запланований IOTD отримав новий коментар"
-
+#: loco:606b76429c83b8364f3f0a4d
 msgid "There was a reply to your comment"
 msgstr "Відповідь на Ваш коментар"
 
-msgid "A new comment on your image requires moderation"
-msgstr "Новий коментар до Вашого зображення вимагає модерації"
-
+#: loco:606b76429c83b8364f3f0a4e
 msgid "Your comment was approved"
 msgstr "Ваш коментар схвалено"
 
+#: loco:606b76429c83b8364f3f0a4f
 msgid "Your image was bookmarked"
 msgstr "Ваше зображення у закладках"
 
+#: loco:606b76429c83b8364f3f0a50
 msgid "Your image was liked"
 msgstr "Ваше зображення сподобалось"
 
+#: loco:606b76429c83b8364f3f0a51
 msgid "Your comment was liked"
 msgstr "Ваш коментар сподобався"
 
+#: loco:606b76429c83b8364f3f0a52
 msgid "Your forum post was liked"
 msgstr "Ваше повідомлення на форумі сподобалось"
 
-msgid "Your forum post was approved"
-msgstr "Ваше повідомлення на форумі схвалено"
-
+#: loco:606b76429c83b8364f3f0a53
 msgid "Your API Key request has been approved"
 msgstr "Ваш запит на API ключ схвалений"
 
+#: loco:606b76429c83b8364f3f0a54
 msgid "A user you follow joined a public group"
 msgstr "Користувач, на якого Ви підписані вступив до відкритої групи"
 
+#: loco:606b76429c83b8364f3f0a55
 msgid "You are invited to a group"
 msgstr "Вас запросили до групи"
 
+#: loco:606b76429c83b8364f3f0a56
 msgid "A user requested to join a group you moderate"
 msgstr "Користувач запитує доступ до Вашої групи"
 
+#: loco:606b76429c83b8364f3f0a57
 msgid "A group moderator approved your request to join"
 msgstr "Власник групи схвалив Ваш запит на вступ"
 
+#: loco:606b76429c83b8364f3f0a58
 msgid "A group moderator rejected your request to join"
 msgstr "Власник групи відхилив Ваш запит на вступ"
 
+#: loco:606b76429c83b8364f3f0a59
 msgid "A user you follow created a new public group"
 msgstr "Користувач, на якого Ви підписані, створив нову відкриту групу"
 
+#: loco:606b76429c83b8364f3f0a5a
 msgid "New forum topic in a group you are a member of"
 msgstr "Нова тема у групі, учасником якої Ви є"
 
+#: loco:606b76429c83b8364f3f0a5b
 msgid "You have received a new private message"
 msgstr "Ви маєте нове особисте повідомлення"
 
+#: loco:606b76429c83b8364f3f0a5c
 msgid "Your premium subscription will expire in one week"
 msgstr "Ваша Преміум передплата закінчується через тиждень"
 
+#: loco:606b76429c83b8364f3f0a5d
 msgid "Your premium subscription has just expired"
 msgstr "Ваша Преміум передплата щойно закінчилася"
 
+#: loco:606b76429c83b8364f3f0a5e
 msgid "Your subscription will be renewed in one week"
 msgstr "Вашу передплату буде подовжено протягом тижня"
 
+#: loco:606b76429c83b8364f3f0a5f
 msgid "Your subscription will be renewed in one 30 days"
 msgstr "Вашу передплату буде подовжено протягом 30 днів"
 
+#: loco:606b76429c83b8364f3f0a60
 msgid "You have images with a missing \"Data source\""
 msgstr "У Вас є зображення без даних"
 
+#: loco:606b76429c83b8364f3f0a61
 msgid "You have images with a missing \"Remote source\""
 msgstr "У вас є зображення без інформації \"Видалене джерело\""
 
+#: loco:606b76429c83b8364f3f0a62
 msgid "Would you like to activate your account?"
 msgstr "Ви хочете активувати Ваш обліковий запис?"
 
-msgid "New reply in a subscribed forum topic"
-msgstr "Нова відповідь у темі форуму, на яку Ви підписалися"
-
+#: loco:606b76429c83b8364f3f0a63
 msgid "You were mentioned in a forum post"
 msgstr "Ви були згадані у повідомленні на форумі"
 
+#: loco:606b76429c83b8364f3f0a64
 msgid "You were mentioned in a comment"
 msgstr "Вас згадали у коментарі"
 
+#: loco:606b76429c83b8364f3f0a65
 msgid "Welcome to AstroBin!"
 msgstr "Ласкаво просимо до AstroBin!"
 
+#: loco:606b76429c83b8364f3f0a66
 msgid "Congratulations for your first image on AstroBin!"
 msgstr "Вітаємо з першим зображенням на AstroBin!"
 
-msgid "Your image was submitted for IOTD/TP consideration"
-msgstr "Ваше зображення було подано на розгляд IOTD/TP"
-
+#: loco:606b76429c83b8364f3f0a67
 msgid "Thank you for getting a subscription!"
 msgstr "Дякую за підписку!"
 
+#: loco:606b76429c83b8364f3f0a68
 msgid "Thank you for your payment!"
 msgstr "Дякуємо за оплату!"
 
+#: loco:606b76429c83b8364f3f0a69
 msgid "You were removed from the IOTD staff"
 msgstr "Вас виключили зі штату IOTD"
 
+#: loco:606b76429c83b8364f3f0a6a
 msgid "You have been inactive as an IOTD staff member"
 msgstr "Ви були неактивними як співробітник IOTD"
 
+#: loco:606b76429c83b8364f3f0a6b
 msgid "An image you promoted made it to Top Pick"
 msgstr "Зображення, яке Ви просували, потрапило до Топ Зображень"
 
+#: loco:606b76429c83b8364f3f0a6c
 msgid "An image you promoted made it to IOTD"
 msgstr "Зображення, яке Ви просували, потрапило до IOTD"
 
+#: loco:6090590758412530564c1e12
+msgid "New reply in a subscribed forum topic"
+msgstr "Нова відповідь у темі форуму, на яку Ви підписалися"
+
+#: loco:60c889c343f9ba3aa7242383
 msgid "Your image was nominated to be a Top Pick"
 msgstr "Ваше зображення було номіновано на Топ Зображення"
 
+#: loco:60c889c343f9ba3aa7242384
 msgid "Your image was voted Top Pick"
 msgstr "Ваше зображення було визнано Топ Зображенням"
 
+#: loco:60c889c343f9ba3aa7242385
 msgid "Your image was voted Image of the Day"
 msgstr "Ваше зображення було визнано Зображенням Дня"
 
+#: loco:616be318c632cc6d7f34bac2
+msgid "Your image was plate-solved (advanced)"
+msgstr "Ваше зображення визначено за координатами (розширено)"
+
+#: loco:616be318c632cc6d7f34bac3
+msgid "Your image could not be plate-solved (advanced)"
+msgstr "Ваше зображення не можна розшифрувати (розширено)"
+
+#: loco:616be318c632cc6d7f34bac4
+msgid "A new comment on your image requires moderation"
+msgstr "Новий коментар до Вашого зображення вимагає модерації"
+
+#: loco:616be318c632cc6d7f34bac5
+msgid "Your forum post was approved"
+msgstr "Ваше повідомлення на форумі схвалено"
+
+#: loco:616be318c632cc6d7f34bac6
 msgid "You were mentioned in an image description"
 msgstr "Вас згадали в описі зображення"
 
+#: loco:61b2335c0391ff4b4a554732
+msgid "Your edit proposal received a new comment"
+msgstr "Ваша пропозиція редагування отримала новий коментар"
+
+#: loco:61b2335c0391ff4b4a554733
+msgid "Your image was submitted for IOTD/TP consideration"
+msgstr "Ваше зображення було подано на розгляд IOTD/TP"
+
+#: loco:61b2335c0391ff4b4a554734
 msgid "A gear item that you used was renamed"
 msgstr "Елемент спорядження, який Ви використовували, було перейменовано"
 
-#~ msgid "Notifications"
-#~ msgstr "Сповіщення"
-
-#~ msgid "You have no notifications."
-#~ msgstr "У вас немає сповіщень."
-
-#~ msgid "Settings"
-#~ msgstr "Налаштування"
-
-#~ msgid "Mark all as read"
-#~ msgstr "Позначити все прочитаним"
-
-#~ msgid "You have no new notifications."
-#~ msgstr "У Вас немає нових сповіщень."
+#: loco:61e174b061077f40ef18b564
+msgid "Your scheduled IOTD received a new comment"
+msgstr "Ваш запланований IOTD отримав новий коментар"

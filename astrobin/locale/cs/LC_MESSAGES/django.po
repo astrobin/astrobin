@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-14 07:54+0000\n"
+"POT-Creation-Date: 2022-04-21 07:40+0000\n"
 "PO-Revision-Date: 2015-10-16 09:15+0000\n"
 "Last-Translator: VojtechKudela <vojtiik@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1314,6 +1314,9 @@ msgstr ""
 msgid "mm"
 msgstr ""
 
+msgid "Unknown"
+msgstr ""
+
 msgid "Max. payload"
 msgstr "Maximální zatížení"
 
@@ -1484,9 +1487,6 @@ msgid "Mix of multiple sources"
 msgstr ""
 
 msgid "None of the above"
-msgstr ""
-
-msgid "Unknown"
 msgstr ""
 
 msgid "Non-commercial independent facility"
@@ -2959,15 +2959,6 @@ msgstr ""
 msgid "Resume emails"
 msgstr ""
 
-msgid "AstroBin is rebuilding its equipment database!"
-msgstr ""
-
-msgid "Please migrate your gear."
-msgstr ""
-
-msgid "Begin migration"
-msgstr ""
-
 msgid "Cancel"
 msgstr ""
 
@@ -3564,7 +3555,8 @@ msgstr ""
 #, python-format
 msgid ""
 "Submission for %(_0)sIOTD/TP%(_1)s consideration is not automatic anymore. "
-"Please use the <strong>Actions</strong> menu from now on, if you want to submit."
+"Please use the <strong>Actions</strong> menu from now on, if you want to "
+"submit."
 msgstr ""
 
 msgid "If you want, you can set up auto-submission in your preferences."
@@ -4073,16 +4065,39 @@ msgstr ""
 msgid "Edit your image: gear used"
 msgstr ""
 
+msgid "AstroBin is rebuilding its equipment database!"
+msgstr ""
+
+msgid ""
+"Using this form to edit the equipment used for this image is no longer "
+"possible, because it interfaces with the legacy equipment database on "
+"AstroBin."
+msgstr ""
+
+msgid ""
+"To begin using the new and improved equipment database for this image, "
+"please migrate your gear."
+msgstr ""
+
+msgid ""
+"Please note: the migration process goes thru a review stage. If you have "
+"completed your migration but still see this notice, it could because your "
+"migration proposals haven't been approved yet."
+msgstr ""
+
+msgid "Begin migration"
+msgstr ""
+
 #, python-format
 msgid ""
 "Can't see anything here? Perhaps you should first add some gear in your\n"
-"                <a href=\"%(the_url)s\">profile</a>!"
+"                    <a href=\"%(the_url)s\">profile</a>!"
 msgstr ""
 
 msgid ""
 "To choose the gear used for this image, drag items from the right side to "
 "left side, or\n"
-"                click the plus sign."
+"                    click the plus sign."
 msgstr ""
 
 msgid ""
@@ -5587,6 +5602,9 @@ msgstr ""
 msgid "Subscribe"
 msgstr ""
 
+msgid "Search this topic"
+msgstr ""
+
 msgid "The posts below are new since your last visit to this topic."
 msgstr ""
 
@@ -6014,6 +6032,11 @@ msgid ""
 msgstr ""
 
 msgid "Edit your astrophotography gear"
+msgstr ""
+
+msgid ""
+"This page is no longer necessary, as you can add new equipment items "
+"directly during the image upload or editing process."
 msgstr ""
 
 msgid "Edit gear item"
