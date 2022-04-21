@@ -423,10 +423,13 @@
             } else {
                 $(".warning-full-resolution-link").attr("style", "display: block !important;");
 
+                {% trans "The full resolution version of this image is too large to offer the the click-and-drag zoom." as i18nFullResolutionTooLarge %}
+                {% trans "Click-and-drag zoom not available" as i18nClickAndDragZoomNotAvailable %}
+
                 if (showClickAndDragZoom({{ image.w }})) {
                     $.toast({
-                        text: "{% trans "The full resolution version of this image is too large to offer the the click-and-drag zoom." %}",
-                        heading: "{% trans "Click-and-drag zoom not available" %}",
+                        text: "{{ i18nFullResolutionTooLarge | escapejs }}",
+                        heading: "{{ i18nClickAndDragZoomNotAvailable | escapejs }}",
                         showHideTransition: 'slide',
                         allowToastClose: true,
                         hideAfter: 10000,
