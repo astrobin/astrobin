@@ -1163,6 +1163,8 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
 .technical-card-equipment,
 .technical-card-acquisition {
+  overflow: visible !important;
+
   dl {
     margin: 0;
   }
@@ -2565,7 +2567,7 @@ form.avatar-delete {
   }
 }
 
-.gear-popover, .user-popover, .subject-popover {
+.gear-popover, .user-popover, .subject-popover, .equipment-item-popover {
   .thumbnail {
     border: 0;
   }

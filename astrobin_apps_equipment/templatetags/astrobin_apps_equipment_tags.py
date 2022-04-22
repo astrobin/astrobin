@@ -5,6 +5,7 @@ from fuzzywuzzy.utils import asciidammit
 
 from astrobin.models import Gear, Image
 from astrobin.services.gear_service import GearService
+from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 
@@ -12,13 +13,22 @@ register = Library()
 
 
 @register.filter
-def equipment_brand_listings_for_legacy_gear(gear, country):
-    # type: (Gear, str) -> QuerySet
-
+def equipment_brand_listings_for_legacy_gear(gear: Gear, country: str) -> QuerySet:
     if country is None:
         return EquipmentBrandListing.objects.none()
 
     return gear.equipment_brand_listings.filter(
+        Q(retailer__countries__icontains=country) |
+        Q(retailer__countries=None)
+    )
+
+
+@register.filter
+def equipment_brand_listings(brand: EquipmentBrand, country: str) -> QuerySet:
+    if country is None or brand is None:
+        return EquipmentBrandListing.objects.none()
+
+    return brand.listings.filter(
         Q(retailer__countries__icontains=country) |
         Q(retailer__countries=None)
     )
@@ -143,13 +153,11 @@ def can_access_basic_equipment_functions(user) -> bool:
 
 
 @register.filter
-def has_matching_brand_request_query(gear: Gear, q) -> bool:
-    brand = gear.make
-
-    if brand in (None, '') or q in (None, ''):
+def has_matching_brand_request_query(brand_name: str, q: str) -> bool:
+    if brand_name in (None, '') or q in (None, ''):
         return False
 
-    similarity = fuzz.partial_ratio(asciidammit(q.lower()), asciidammit(brand.lower()))
+    similarity = fuzz.partial_ratio(asciidammit(q.lower()), asciidammit(brand_name.lower()))
 
     return similarity > 85
 

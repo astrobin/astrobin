@@ -41,11 +41,14 @@ class CameraBaseModel(EquipmentItem):
 
     cooled = models.BooleanField(
         default=False,
+        verbose_name=_('Cooled'),
     )
 
     max_cooling = models.PositiveSmallIntegerField(
         null=True,
         blank=True,
+        verbose_name=_('Max. cooling (C)'),
+
     )
 
     back_focus = models.DecimalField(
@@ -53,6 +56,7 @@ class CameraBaseModel(EquipmentItem):
         decimal_places=2,
         null=True,
         blank=True,
+        verbose_name=_('Back focus (mm)'),
     )
 
     def save(self, keep_deleted=False, **kwargs):
@@ -66,6 +70,21 @@ class CameraBaseModel(EquipmentItem):
                     return i[1]
 
         return _("Unknown")
+
+    def properties(self):
+        properties = []
+
+        for item_property in ('type', 'sensor', 'cooled', 'max_cooling', 'back_focus'):
+            property_label = self._meta.get_field(item_property).verbose_name
+            if item_property == 'type':
+                property_value = self.type_label()
+            else:
+                property_value = getattr(self, item_property)
+
+            if property_value is not None:
+                properties.append({'label': property_label, 'value': property_value})
+
+        return properties
 
     class Meta(EquipmentItem.Meta):
         abstract = True

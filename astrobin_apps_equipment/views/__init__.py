@@ -1,0 +1,1 @@
+from .equipment_item_popover import EquipmentItemPopover

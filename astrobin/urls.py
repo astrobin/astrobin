@@ -189,6 +189,7 @@ urlpatterns += [
     url(r'^groups/', include('astrobin_apps_groups.urls')),
     url(r'^iotd/', include('astrobin_apps_iotd.urls')),
     url(r'^payments/', include('astrobin_apps_payments.urls')),
+    url(r'^equipment/', include('astrobin_apps_equipment.urls', namespace='equipment')),
 
     ###########################################################################
     ### HOME VIEWS                                                          ###

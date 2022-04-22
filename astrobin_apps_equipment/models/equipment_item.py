@@ -128,11 +128,15 @@ class EquipmentItem(SafeDeleteModel):
         return EquipmentItemService(self).get_type()
 
     @property
+    def item_type_label(self):
+        return EquipmentItemService(self).get_type_label()
+
+    @property
     def slug(self):
         return slugify(f'{self.brand.name if self.brand else "diy"} {self.name}').replace('_', '-')
 
     def __str__(self):
-        return '%s %s' % (self.brand.name if self.brand else "DIY", self.name)
+        return '%s %s' % (self.brand.name if self.brand else _("DIY"), self.name)
 
     class Meta:
         abstract = True
