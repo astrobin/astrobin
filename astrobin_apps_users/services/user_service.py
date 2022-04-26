@@ -17,7 +17,8 @@ from safedelete import HARD_DELETE
 from safedelete.queryset import SafeDeleteQueryset
 
 from astrobin.enums import SubjectType
-from astrobin.models import Acquisition, Image
+from astrobin.models import Acquisition, Camera, Image, Telescope
+from astrobin_apps_equipment.models import Camera as CameraV2, Telescope as TelescopeV2
 from astrobin_apps_images.services import ImageService
 from common.services.constellations_service import ConstellationsService
 from nested_comments.models import NestedComment
@@ -285,14 +286,20 @@ class UserService:
         # GEAR #
         ########
         elif subsection == 'gear':
-            telescopes = self.user.userprofile.telescopes.all()
-            cameras = self.user.userprofile.cameras.all()
+            telescopes = Telescope.objects.filter(images_using_for_imaging__user=self.user).distinct()
+            cameras = Camera.objects.filter(images_using_for_imaging__user=self.user).distinct()
+
+            telescopes_2 = TelescopeV2.objects.filter(images_using_for_imaging__user=self.user).distinct()
+            cameras_2 = CameraV2.objects.filter(images_using_for_imaging__user=self.user).distinct()
 
             no_date_message = _("No imaging telescopes or lenses, or no imaging cameras specified")
             gear_images_message = _("Gear images")
 
-            menu += [(x.id, str(x)) for x in telescopes]
-            menu += [(x.id, str(x)) for x in cameras]
+            # L = LEGACY, N = NEW
+            menu += [(f'L{x.id}', str(x)) for x in telescopes]
+            menu += [(f'N{x.id}', str(x)) for x in telescopes_2]
+            menu += [(f'L{x.id}', str(x)) for x in cameras]
+            menu += [(f'N{x.id}', str(x)) for x in cameras_2]
             menu += [(0, no_date_message)]
             menu += [(-1, gear_images_message)]
 
@@ -306,12 +313,27 @@ class UserService:
             else:
                 if active in (None, ''):
                     if telescopes:
-                        active = telescopes[0].id
-                elif active:
-                    queryset = queryset.filter(
-                        Q(imaging_telescopes__id=active) |
-                        Q(imaging_cameras__id=active)
-                    ).distinct()
+                        active = f'L{telescopes[0].id}'
+                    elif telescopes_2:
+                        active = f'N{telescopes_2[0].id}'
+                    elif cameras:
+                        active = f'L{cameras[0].id}'
+                    elif cameras_2:
+                        active = f'N{cameras_2[0].id}'
+
+                if active:
+                    if active.startswith('L'):
+                        active = active.replace('L', '')
+                        queryset = queryset.filter(
+                            Q(imaging_telescopes__id=active) |
+                            Q(imaging_cameras__id=active)
+                        ).distinct()
+                    elif active.startswith('N'):
+                        active = active.replace('N', '')
+                        queryset = queryset.filter(
+                            Q(imaging_telescopes_2__id=active) |
+                            Q(imaging_cameras_2__id=active)
+                        ).distinct()
 
         ###########
         # SUBJECT #

@@ -116,5 +116,20 @@ class TelescopeBaseModel(EquipmentItem):
 
         return _("Unknown")
 
+    def properties(self):
+        properties = []
+
+        for item_property in ('type', 'aperture', 'min_focal_length', 'max_focal_length', 'weight'):
+            property_label = self._meta.get_field(item_property).verbose_name
+            if item_property == 'type':
+                property_value = self.type_label()
+            else:
+                property_value = getattr(self, item_property)
+
+            if property_value is not None:
+                properties.append({'label': property_label, 'value': property_value})
+
+        return properties
+
     class Meta(EquipmentItem.Meta):
         abstract = True

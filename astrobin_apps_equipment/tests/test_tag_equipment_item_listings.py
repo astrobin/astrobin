@@ -1,15 +1,15 @@
 from django.test import TestCase
 
 from astrobin.tests.generators import Generators
-from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import equipment_brand_listings, \
-    equipment_item_listings
+from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import equipment_brand_listings_for_legacy_gear, \
+    equipment_item_listings_for_legacy_gear
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 
 
 class TestTagEquipmentItemListings(TestCase):
     def test_no_listings(self):
         telescope = Generators.telescope()
-        self.assertEqual(0, equipment_item_listings(telescope, 'us').count())
+        self.assertEqual(0, equipment_item_listings_for_legacy_gear(telescope, 'us').count())
 
     def test_listing_in_wrong_country(self):
         listing = EquipmentGenerators.equipment_item_listing()
@@ -19,7 +19,7 @@ class TestTagEquipmentItemListings(TestCase):
         telescope = Generators.telescope()
         telescope.equipment_item_listings.add(listing)
 
-        self.assertEqual(0, equipment_item_listings(telescope, 'us').count())
+        self.assertEqual(0, equipment_item_listings_for_legacy_gear(telescope, 'us').count())
 
     def test_listing_correct_country(self):
         listing = EquipmentGenerators.equipment_item_listing()
@@ -29,7 +29,7 @@ class TestTagEquipmentItemListings(TestCase):
         telescope = Generators.telescope()
         telescope.equipment_item_listings.add(listing)
 
-        self.assertEqual(1, equipment_item_listings(telescope, 'us').count())
+        self.assertEqual(1, equipment_item_listings_for_legacy_gear(telescope, 'us').count())
 
     def test_listing_no_country(self):
         listing = EquipmentGenerators.equipment_item_listing()
@@ -37,7 +37,7 @@ class TestTagEquipmentItemListings(TestCase):
         telescope = Generators.telescope()
         telescope.equipment_item_listings.add(listing)
 
-        self.assertEqual(1, equipment_item_listings(telescope, 'us').count())
+        self.assertEqual(1, equipment_item_listings_for_legacy_gear(telescope, 'us').count())
 
     def test_listing_country_is_none(self):
         listing = EquipmentGenerators.equipment_item_listing()
@@ -45,4 +45,4 @@ class TestTagEquipmentItemListings(TestCase):
         telescope = Generators.telescope()
         telescope.equipment_item_listings.add(listing)
 
-        self.assertEqual(0, equipment_item_listings(telescope, None).count())
+        self.assertEqual(0, equipment_item_listings_for_legacy_gear(telescope, None).count())

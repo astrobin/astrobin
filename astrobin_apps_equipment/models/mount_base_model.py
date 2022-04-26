@@ -75,6 +75,29 @@ class MountBaseModel(EquipmentItem):
         blank=True,
     )
 
+    def type_label(self):
+        if self.type is not None:
+            for i in self.MOUNT_TYPES:
+                if self.type == i[0]:
+                    return i[1]
+
+        return _("Unknown")
+
+    def properties(self):
+        properties = []
+
+        for item_property in ('type', 'max_payload', 'computerized', 'tracking_accuracy', 'pec', 'slew_speed'):
+            property_label = self._meta.get_field(item_property).verbose_name
+            if item_property == 'type':
+                property_value = self.type_label()
+            else:
+                property_value = getattr(self, item_property)
+
+            if property_value is not None:
+                properties.append({'label': property_label, 'value': property_value})
+
+        return properties
+
     def save(self, keep_deleted=False, **kwargs):
         self.klass = EquipmentItemKlass.MOUNT
         super().save(keep_deleted, **kwargs)

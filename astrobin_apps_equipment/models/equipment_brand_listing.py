@@ -33,6 +33,7 @@ class EquipmentBrandListing(SafeDeleteModel):
 
     brand = models.ForeignKey(
         EquipmentBrand,
+        related_name='listings',
         on_delete=CASCADE,
         null=False
     )

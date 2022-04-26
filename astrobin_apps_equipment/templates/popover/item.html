@@ -1,0 +1,91 @@
+{% load i18n %}
+{% load astrobin_apps_premium_tags %}
+{% load astrobin_apps_equipment_tags %}
+{% load common_tags %}
+{% load toggleproperty_tags %}
+
+<div class="equipment-item-popover">
+    <div class="header">
+        <h3>{{ item }}</h3>
+        <p>{{ item.item_type_label }}</p>
+    </div>
+
+    {% if item.properties %}
+        <div class="data">
+            {% for property in item.properties %}
+                <p>
+                    <strong>{{ property.label }}</strong>: {{ property.value }}
+                </p>
+            {% empty %}
+                <p>
+                    {% trans "No additional information available for this item." %}
+                </p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if item.brand %}
+        {% with item.brand|equipment_brand_listings:REQUEST_COUNTRY as brand_listings %}
+            {% if brand_listings %}
+                {% setvar image.user|get_valid_usersubscription as image_user_valid_usersubscription %}
+
+                {% if valid_usersubscription|allow_lite_retailer_integration:image_user_valid_usersubscription or valid_usersubscription|allow_full_retailer_integration:image_user_valid_usersubscription or item.brand.name|has_matching_brand_request_query:search_query %}
+                    <div class="equipment-brand-listings">
+                        {% if brand_listings|length %}
+                            <p class="alert alert-info">
+                                <i class="icon-heart" style="color:red"></i>
+                                {% blocktrans trimmed with brand=brand_listings.0.brand %}
+                                    Please support AstroBin by shopping <strong>{{ brand }}</strong> at one of our partners!
+                                {% endblocktrans %}
+                            </p>
+
+                            {% for listing in brand_listings %}
+                                <div class="equipment-brand-listing">
+                                    <a class="close" data-toggle="modal" title="{% trans "Disable retailer integration" %}"
+                                            {% if valid_usersubscription|can_remove_ads %}
+                                       href="#remove-ads-modal"
+                                            {% else %}
+                                       href="#feature-restricted-modal"
+                                            {% endif %}
+                                    >
+                                        &times;
+                                    </a>
+
+                                    {% equipment_listing_url_with_tags listing 'card' as url_with_tags %}
+
+                                    {% if valid_usersubscription|allow_full_retailer_integration:image_user_valid_usersubscription and listing.retailer.logo %}
+                                        <a href="{{ url_with_tags }}"
+                                           onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')"
+                                           target="_blank">
+                                            <img class="logo" src="{{ listing.retailer.logo.url }}"
+                                                 alt="{{ listing.retailer }}">
+                                        </a>
+                                    {% endif %}
+
+                                    <a href="{{ url_with_tags }}"
+                                       onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')"
+                                       target="_blank" class="shop-button btn btn-block">
+                                        <i class="icon-shopping-cart"></i>
+                                        {% blocktrans trimmed with name=listing.brand retailer=listing.retailer %}
+                                            Shop <strong>{{ name }}</strong> at {{ retailer }}
+                                        {% endblocktrans %}
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endwith %}
+    {% endif %}
+
+    <div class="actions">
+        {% if request.user.is_authenticated %}
+            {% add_remove_toggleproperty "follow" item request.user %}
+        {% endif %}
+
+        <a class="btn btn-primary" href="/search/?q={{ item|iriencode }}">
+            {% trans "Find images" %}
+        </a>
+    </div>
+</div>
