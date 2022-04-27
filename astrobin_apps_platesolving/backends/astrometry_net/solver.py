@@ -16,7 +16,7 @@ from astrobin_apps_platesolving.backends.base import AbstractPlateSolvingBackend
 from .errors import RequestError
 from .utils import json2python, python2json
 
-base_url = 'http://nova.astrometry.net'
+base_url = 'https://nova.astrometry.net'
 default_url = base_url + '/api/'
 
 log = logging.getLogger('apps')
@@ -28,7 +28,7 @@ class Solver(AbstractPlateSolvingBackend):
         self.api_url = api_url
 
     def get_url(self, service):
-        return 'http://nova.astrometry.net/api/' + service
+        return 'https://nova.astrometry.net/api/' + service
 
     def send_request(self, service, args={}, file_args=None):
         if self.session is not None:
