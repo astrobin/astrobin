@@ -1,16 +1,15 @@
 import random
 import string
-from datetime import timedelta, date
+from datetime import date, timedelta
 
-from django.contrib.auth.models import User, Group
-from pybb.models import Post, Category, Forum, Topic
+from django.contrib.auth.models import Group, User
+from pybb.models import Category, Forum, Post, Topic
 from subscription.models import Subscription, UserSubscription
 
 from astrobin.enums import SubjectType
 from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.models import (
-    Accessory, Camera, Filter, FocalReducer, Image, ImageRevision, Software, Telescope, Mount,
-    Collection,
+    Accessory, Camera, Collection, Filter, FocalReducer, Image, ImageRevision, Mount, Software, Telescope,
 )
 from toggleproperties.models import ToggleProperty
 
@@ -186,7 +185,7 @@ class Generators:
             forum=kwargs.pop('forum', Generators.forum()),
             name=kwargs.pop('name', Generators.randomString()),
             user=kwargs.pop('user', Generators.user()),
-
+            on_moderation=kwargs.pop('on_moderation', False),
         )
 
     @staticmethod

@@ -865,14 +865,17 @@ def forum_latest_topics(context, cnt=5, user=None):
     if not user:
         user = context['user']
 
-    if user:
+    if user and user.is_authenticated:
         qs = Topic.objects.filter(
             Q(forum__group=None) |
             Q(forum__group__owner=user) |
             Q(forum__group__members=user)
         )
+
+        if not is_forum_moderator(user):
+            qs = qs.filter(on_moderation=False)
     else:
-        qs = Topic.objects.filter(forum__group=None)
+        qs = Topic.objects.filter(forum__group=None, on_moderation=False)
 
     qs = qs.distinct().select_related()
 
