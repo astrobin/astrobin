@@ -1,5 +1,5 @@
 import mock
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import AnonymousUser, User, Group
 from django.urls import reverse
 from django.test import TestCase, override_settings
 from mock import patch
@@ -10,7 +10,8 @@ from subscription.models import Subscription, UserSubscription
 from astrobin.models import UserProfile
 from astrobin.permissions import CustomForumPermissions
 from astrobin.templatetags.tags import (
-    has_valid_subscription)
+    forum_latest_topics, has_valid_subscription,
+)
 from astrobin.tests.generators import Generators
 from astrobin_apps_groups.models import Group as AstroBinGroup
 
@@ -376,3 +377,20 @@ class ForumTest(TestCase):
 
         with self.assertRaises(AssertionError):
             push_notification.assert_called_with([mentioned], post.user, 'new_forum_post_mention', mock.ANY)
+
+    def test_forum_latest_topics(self):
+        Generators.forum_topic(on_moderation=True)
+        user = Generators.user()
+
+        self.assertEqual(0, forum_latest_topics({}, 1, user).count())
+
+        g, _ = Group.objects.get_or_create(name="forum_moderators")
+        g.user_set.add(user)
+
+        self.assertEqual(1, forum_latest_topics({}, 1, user).count())
+
+    def test_forum_latest_topics_anon(self):
+        Generators.forum_topic(on_moderation=True)
+        user = AnonymousUser()
+
+        self.assertEqual(0, forum_latest_topics({}, 1, user).count())
