@@ -850,7 +850,8 @@ def forum_post_pre_save(sender, instance, **kwargs):
                 mentions = current_mentions
             else:
                 mentions = [
-                    item for item in current_mentions if item not in previous_mentions and item != instance.user
+                    item for item in current_mentions
+                    if item not in previous_mentions and item != instance.user.username
                 ]
         except sender.DoesNotExist:
             mentions = []
@@ -948,7 +949,7 @@ def forum_post_post_save(sender, instance, created, **kwargs):
                 perms.may_subscribe_topic(instance.user, instance.topic):
             instance.topic.subscribers.add(instance.user)
 
-        mentions = [x for x in MentionsService.get_mentions(instance.body) if x != instance.user]
+        mentions = [x for x in MentionsService.get_mentions(instance.body) if x != instance.user.username]
         if not instance.on_moderation:
             notify_subscribers(mentions)
             notify_mentioned(mentions)
