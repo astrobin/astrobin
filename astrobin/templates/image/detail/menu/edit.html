@@ -134,7 +134,8 @@
                             {% else %}
                                 {% url 'image_restart_platesolving' image.get_id %}
                             {% endif %}
-                        ">
+                        "
+                        data-no-instant>
                             <i class="icon-repeat"></i>
                             {% trans "Restart plate-solving" %}
                         </a>
@@ -163,7 +164,8 @@
                             {% else %}
                                 {% url 'image_restart_advanced_platesolving' image.get_id %}
                             {% endif %}
-                        ">
+                        "
+                        data-no-instant>
                             <i class="icon-repeat"></i>
                             {% trans "Restart advanced plate-solving" %}
                         </a>

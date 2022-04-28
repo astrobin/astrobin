@@ -795,9 +795,8 @@ def image_edit_platesolving_settings(request, id, revision_label):
         form.save()
         solution.clear()
 
-        messages.success(
-            request,
-            _("Form saved. A new plate-solving process will start now."))
+        messages.success(request, _("Form saved. A new plate-solving process will start now."))
+
         return HttpResponseRedirect(return_url)
 
 
