@@ -23,7 +23,7 @@ class Generators:
         return ''.join(random.choice(string.ascii_lowercase) for i in range(stringLength))
 
     @staticmethod
-    def user(**kwargs):
+    def user(**kwargs) -> User:
         user = User.objects.create_user(
             email=kwargs.pop('email', "%s@%s.com" % (Generators.randomString(), Generators.randomString())),
             username=kwargs.pop('username', Generators.randomString()),

@@ -369,14 +369,34 @@ class ForumTest(TestCase):
     @patch("astrobin.signals.MentionsService.get_mentions")
     @patch("astrobin.signals.push_notification")
     def test_does_not_send_self_mention_notification(self, push_notification, get_mentions):
-        mentioned = Generators.user()
+        mentioned: User = Generators.user()
 
-        get_mentions.return_value = [mentioned]
+        get_mentions.return_value = [mentioned.username]
 
         post = Generators.forum_post(user=mentioned)
 
         with self.assertRaises(AssertionError):
             push_notification.assert_called_with([mentioned], post.user, 'new_forum_post_mention', mock.ANY)
+
+    @override_settings(
+        CACHES={
+            'default': {
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            }
+        }
+    )
+    @patch("astrobin.signals.MentionsService.get_mentions")
+    @patch("astrobin.signals.push_notification")
+    def test_does_not_send_self_mention_notification_on_edit(self, push_notification, get_mentions):
+        mentioned: User = Generators.user()
+        post = Generators.forum_post(user=mentioned)
+
+        get_mentions.return_value = [mentioned.username]
+        post.save()
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with([mentioned], post.user, 'new_forum_post_mention', mock.ANY)
+
 
     def test_forum_latest_topics(self):
         Generators.forum_topic(on_moderation=True)
