@@ -1,9 +1,7 @@
 from datetime import datetime, timedelta
 
 from django.conf import settings
-from django.contrib.auth.models import User
 from django.core.cache import cache
-from django.db.models import Count
 
 from astrobin.enums import SubjectType
 from astrobin.enums.moderator_decision import ModeratorDecision
