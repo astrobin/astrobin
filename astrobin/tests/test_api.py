@@ -1,11 +1,10 @@
-# Django
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 
-# AstroBin
 from astrobin.models import App, AppApiKeyRequest
 
+DESCRIPTION = 'cfLMsRg334UgGPlaEyyiscyN2FruVrogOnhOC7v4If20zmLDpO4hFwoiTW1B3iqJ7zJG9MrOaefG5ZAS8ia6IE8A9RC738dHDvhM'
 
 class APITest(TestCase):
     def setUp(self):
@@ -32,11 +31,11 @@ class APITest(TestCase):
 
         response = self.client.post(reverse('app_api_key_request'), {
             'name': 'Test',
-            'description': 'Description'
+            'description': DESCRIPTION
         }, follow=True)
         self.assertEqual(response.status_code, 200)
         requests = AppApiKeyRequest.objects.filter(
-            name='Test', description='Description')
+            name='Test', description=DESCRIPTION)
         self.assertEqual(requests.count(), 1)
 
     def test_app_api_keys_list_view(self):
@@ -52,7 +51,7 @@ class APITest(TestCase):
         self.client.login(username='test', password='password')
         response = self.client.post(reverse('app_api_key_request'), {
             'name': 'Test',
-            'description': 'Description'
+            'description': DESCRIPTION,
         }, follow=True)
         self.assertEqual(response.status_code, 200)
 
