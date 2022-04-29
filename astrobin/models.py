@@ -9,10 +9,10 @@ from urllib.parse import urlparse
 
 import boto3
 from django.core.files.images import get_image_dimensions
-from django.core.validators import MinLengthValidator, MaxLengthValidator, RegexValidator
+from django.core.validators import MaxLengthValidator, MinLengthValidator, RegexValidator
 from image_cropping import ImageRatioField
 
-from astrobin.enums import SubjectType, SolarSystemSubject
+from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.enums.full_size_display_limitation import FullSizeDisplayLimitation
 from astrobin.enums.license import License
@@ -24,7 +24,7 @@ from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBran
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_notifications.services import NotificationsService
 from common.services import DateTimeService
-from common.upload_paths import uncompressed_source_upload_path, image_upload_path, data_download_upload_path
+from common.upload_paths import data_download_upload_path, image_upload_path, uncompressed_source_upload_path
 from common.utils import get_sentinel_user
 from common.validators import FileValidator
 
@@ -3087,21 +3087,30 @@ class AppApiKeyRequest(models.Model):
         verbose_name=_("Name"),
         help_text=_("The name of the website or app that wishes to use the APIs."),
         max_length=256,
-        blank=False)
+        blank=False,
+        null=False
+    )
 
     description = models.TextField(
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
         verbose_name=_("Description"),
-        help_text=_("Please explain the purpose of your application, and how you intend to use the API."))
+        help_text=_("Please explain the purpose of your application, and how you intend to use the API."),
+        validators=[
+            MinLengthValidator(100),
+            MaxLengthValidator(500),
+        ]
+    )
 
     approved = models.BooleanField(
         editable=False,
-        default=False)
+        default=False,
+    )
 
     created = models.DateTimeField(
         editable=False,
-        auto_now_add=True)
+        auto_now_add=True,
+    )
 
     class Meta:
         ordering = ['-created']
