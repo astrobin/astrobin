@@ -89,6 +89,11 @@ class CameraRenameProposalAdmin(admin.ModelAdmin):
     list_filter = ('status',)
 
 
+class GearRenameRecordAdmin(admin.ModelAdmin):
+    list_display = ('id', 'gear', 'old_make', 'old_name', 'new_make', 'new_name',)
+    search_fields = ('old_name',)
+
+
 class MountAdmin(admin.ModelAdmin):
     list_display = ('id', 'make', 'name', 'master', 'updated',)
     list_editable = ('make', 'name',)
@@ -256,7 +261,7 @@ class BroadcastEmailAdmin(admin.ModelAdmin):
 admin.site.register(Gear, GearAdmin)
 admin.site.register(GearMigrationStrategy, GearMigrationStrategyAdmin)
 admin.site.register(GearUserInfo)
-admin.site.register(GearRenameRecord)
+admin.site.register(GearRenameRecord, GearRenameRecordAdmin)
 admin.site.register(Telescope)
 admin.site.register(Mount, MountAdmin)
 admin.site.register(Camera)
