@@ -78,11 +78,15 @@ class EmailBackendTest(TransactionTestCase):
 
         self.assertFalse(EmailBackend(1).can_send(self.user, self.notice_type))
 
-
     def test_can_send_to_deleted_user(self):
         self.user.userprofile.deleted = datetime.datetime.now()
         self.assertFalse(EmailBackend(1).can_send(self.user, self.notice_type))
         self.user.userprofile.deleted = None
+
+    def test_can_send_inactive_user(self):
+        self.user.userprofile.last_seen = datetime.datetime.now() - datetime.timedelta(days=91)
+        self.assertFalse(EmailBackend(1).can_send(self.user, self.notice_type))
+        self.user.userprofile.last_seen = datetime.datetime.now()
 
     def test_can_send(self):
         self.assertTrue(EmailBackend(1).can_send(self.user, self.notice_type))
