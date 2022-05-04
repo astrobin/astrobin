@@ -8,14 +8,15 @@ from rest_framework.response import Response
 
 from astrobin.api2.serializers.gear_serializer import GearSerializer
 from astrobin.api2.views.migratable_item_mixin import MigratableItemMixin
-from astrobin.models import Gear, Telescope, Camera, FocalReducer, Mount, Accessory, Software, Filter
-from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_read_only import IsEquipmentModeratorOrReadOnly
+from astrobin.models import Accessory, Camera, Filter, FocalReducer, Gear, Mount, Software, Telescope
+from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_own_migrator_or_readonly import \
+    IsEquipmentModeratorOrOwnMigratorOrReadOnly
 
 
 class GearViewSet(MigratableItemMixin, viewsets.ModelViewSet):
     serializer_class = GearSerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
-    permission_classes = [IsEquipmentModeratorOrReadOnly]
+    permission_classes = [IsEquipmentModeratorOrOwnMigratorOrReadOnly]
     http_method_names = ['get', 'post', 'head', 'put', 'patch']
 
     def get_queryset(self):

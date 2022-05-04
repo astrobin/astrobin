@@ -148,7 +148,7 @@ class TestApiTelescopeViewSet(TestCase):
     @mock.patch("astrobin_apps_equipment.api.views.equipment_item_view_set.push_notification")
     def test_reject(self, push_notification):
         user = Generators.user()
-        moderator = Generators.user()
+        moderator = Generators.user(groups=['equipment_moderators'])
         telescope = EquipmentGenerators.telescope(created_by=user)
         image = Generators.image(user=user)
         image.imaging_telescopes_2.add(telescope)

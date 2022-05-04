@@ -10,13 +10,15 @@ from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import get_object_or_404
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
 
 from astrobin.models import GearMigrationStrategy, Image
-from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_read_only import IsEquipmentModeratorOrReadOnly
+from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_own_migrator_or_readonly import \
+    IsEquipmentModeratorOrOwnMigratorOrReadOnly
 from astrobin_apps_equipment.models import EquipmentItem
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
@@ -28,7 +30,7 @@ from common.services import AppRedirectionService
 class EquipmentItemViewSet(viewsets.ModelViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [CamelCaseJSONParser]
-    permission_classes = [IsEquipmentModeratorOrReadOnly]
+    permission_classes = [IsEquipmentModeratorOrOwnMigratorOrReadOnly]
     http_method_names = ['get', 'post', 'head']
 
     def get_queryset(self):
@@ -36,11 +38,14 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         sort = self.request.GET.get('sort')
 
         manager = self.get_serializer().Meta.model.objects
+        queryset = manager.all()
 
-        if self.request.user.is_authenticated:
-            queryset = manager.filter(Q(brand__isnull=False) | Q(created_by=self.request.user))
-        else:
-            queryset = manager.filter(brand__isnull=False)
+        if 'EditProposal' not in str(self.get_serializer().Meta.model):
+            if self.request.user.is_authenticated:
+                if not self.request.user.groups.filter(name='equipment_moderators').exists():
+                    queryset = manager.filter(Q(brand__isnull=False) | Q(created_by=self.request.user))
+            else:
+                queryset = manager.filter(brand__isnull=False)
 
         if q:
             queryset = queryset.annotate(
@@ -168,6 +173,9 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['POST'])
     def approve(self, request, pk):
+        if not request.user.groups.filter(name='equipment_moderators').exists():
+            raise PermissionDenied(request.user)
+
         item = get_object_or_404(self.get_serializer().Meta.model.objects, pk=pk)
 
         if item.reviewed_by is not None:
@@ -216,6 +224,9 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         from astrobin_apps_equipment.models import Filter
         from astrobin_apps_equipment.models import Accessory
         from astrobin_apps_equipment.models import Software
+
+        if not request.user.groups.filter(name='equipment_moderators').exists():
+            raise PermissionDenied(request.user)
 
         model = self.get_serializer().Meta.model
         item: EquipmentItem = get_object_or_404(model.objects, pk=pk)

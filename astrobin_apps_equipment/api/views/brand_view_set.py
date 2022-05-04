@@ -3,13 +3,14 @@ from django.db.models import Q
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.decorators import action
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
 
 from astrobin_apps_equipment.api.filters.equipment_brand_filter import EquipmentBrandFilter
-from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_read_only import IsEquipmentModeratorOrReadOnly
+from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_own_migrator_or_readonly import \
+    IsEquipmentModeratorOrOwnMigratorOrReadOnly
 from astrobin_apps_equipment.api.serializers.brand_image_serializer import BrandImageSerializer
 from astrobin_apps_equipment.api.serializers.brand_serializer import BrandSerializer
 
@@ -17,7 +18,7 @@ from astrobin_apps_equipment.api.serializers.brand_serializer import BrandSerial
 class BrandViewSet(viewsets.ModelViewSet):
     serializer_class = BrandSerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
-    permission_classes = [IsEquipmentModeratorOrReadOnly]
+    permission_classes = [IsEquipmentModeratorOrOwnMigratorOrReadOnly]
     filter_class = EquipmentBrandFilter
     http_method_names = ['get', 'post', 'head']
 
