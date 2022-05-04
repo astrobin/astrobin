@@ -6,8 +6,7 @@
 
 <br /><br />
 
-{% trans "Old brand" %}: <strong>{{ gear.make }}</strong><br />
-{% trans "Old name" %}: {{ gear.name }}
+{% trans "Old name" %}: {{ gear_display_name }}
 
 <br /><br />
 
@@ -19,6 +18,12 @@
 {% blocktrans trimmed %}
     This operation was performed because at least 5 owners of this equipment item (or more than half, whichever is
     greatest), approved it, while nobody rejected it.
+{% endblocktrans %}
+
+<br /><br />
+
+{% blocktrans trimmed %}
+    If this item is a camera that has been modified for astrophotography, this information will not be lost.
 {% endblocktrans %}
 
 <br /><br />

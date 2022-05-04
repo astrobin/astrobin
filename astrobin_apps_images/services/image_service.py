@@ -18,6 +18,7 @@ from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
+from astrobin.services.gear_service import GearService
 from astrobin.utils import (
     base26_decode, base26_encode, decimal_to_degrees_minutes_seconds_string,
     decimal_to_hours_minutes_seconds_string,
@@ -373,7 +374,7 @@ class ImageService:
                 'id': str(item.id),
                 'object': item,
                 'type': item.__class__.__name__.lower(),
-                'label': str(item),
+                'label': str(item) if version == 'NEW' else GearService(item).display_name(self.image.user),
                 'version': version,
             }
 

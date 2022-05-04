@@ -44,7 +44,7 @@ from django.db import IntegrityError, models
 from django.db.models.signals import post_save
 from django.template.defaultfilters import slugify
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext, ugettext_lazy as _
 from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
 
 from celery.result import AsyncResult
@@ -334,7 +334,12 @@ class GearUserInfo(models.Model):
     )
 
     def __str__(self):
-        return "%s (%s)" % (self.alias, self.gear.name)
+        name: str = f'{self.alias} ({str(self.gear)})'
+
+        if self.modded:
+            name = f'{name} ({pgettext("Pertaining to cameras, e.g. a modified Canon", "modified")})'
+
+        return name
 
     class Meta:
         app_label = 'astrobin'
