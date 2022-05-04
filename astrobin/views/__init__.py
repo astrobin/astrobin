@@ -54,6 +54,7 @@ from astrobin.models import (
     Accessory, App, Camera, DeepSky_Acquisition, Filter, FocalReducer, Gear,
     GearUserInfo, Image, ImageRevision, Location, Mount, Software, SolarSystem_Acquisition, Telescope, UserProfile,
 )
+from astrobin.services.gear_service import GearService
 from astrobin.shortcuts import ajax_response, ajax_success
 from astrobin.templatetags.tags import in_upload_wizard
 from astrobin.utils import get_client_country_code
@@ -1557,7 +1558,8 @@ def user_profile_edit_gear(request):
             uniq([x.get_name() for x in Gear.objects.exclude(name=None).exclude(name='')])),
         'is_own_equipment_moderator': request.user.groups.filter(
             name__in=['equipment_moderators', 'own_equipment_migrators']
-        ).exists()
+        ).exists(),
+        'has_unmigrated_legacy_gear_items': GearService.has_unmigrated_legacy_gear_items(request.user),
     }
 
     prefill = {}

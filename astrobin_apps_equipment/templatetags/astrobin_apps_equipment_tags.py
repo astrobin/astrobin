@@ -213,4 +213,4 @@ def equipment_list_has_items(equipment_list) -> bool:
 
 @register.filter
 def image_has_legacy_gear(image: Image) -> bool:
-    return GearService.has_legacy_gear(image)
+    return GearService.image_has_legacy_gear(image)

@@ -1094,15 +1094,12 @@ class ImageEditGearView(ImageEditBaseView):
 
     def get_context_data(self, **kwargs):
         context = super(ImageEditGearView, self).get_context_data(**kwargs)
-        image = self.get_object()
-        has_legacy_gear = GearService.has_legacy_gear(image)
 
         user = self.get_object().user
         profile = user.userprofile
 
         context['no_gear'] = profile.telescopes.count() == 0 and profile.cameras.count() == 0
         context['copy_gear_form'] = CopyGearForm(user, context['image'])
-        context['has_legacy_gear'] = has_legacy_gear
         context['is_own_equipment_migrator'] = user.groups.filter(
             name__in=['equipment_moderators', 'own_equipment_migrators']
         ).exists()
@@ -1130,7 +1127,7 @@ class ImageEditGearView(ImageEditBaseView):
 
     def dispatch(self, request, *args, **kwargs):
         image = self.get_object()
-        has_legacy_gear = GearService.has_legacy_gear(image)
+        has_legacy_gear = GearService.image_has_legacy_gear(image)
 
         if can_access_basic_equipment_functions(request.user) and not has_legacy_gear:
             return redirect(

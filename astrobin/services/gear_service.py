@@ -158,7 +158,7 @@ class GearService:
             )
 
     @staticmethod
-    def has_legacy_gear(image: Image) -> bool:
+    def image_has_legacy_gear(image: Image) -> bool:
         return (
             image.imaging_telescopes.exists() or
             image.guiding_telescopes.exists() or
@@ -173,12 +173,11 @@ class GearService:
 
     @staticmethod
     def has_unmigrated_legacy_gear_items(user: User) -> bool:
-        if user.groups.filter(name='own_equipment_migrators').exists():
-            for klass in ('telescopes', 'cameras', 'mounts', 'filters', 'focal_reducers', 'accessories', 'software'):
-                if getattr(user.userprofile, klass) \
-                        .annotate(count=Count('migration_strategies')) \
-                        .filter(count=0) \
-                        .exists():
-                    return True
+        for klass in ('telescopes', 'cameras', 'mounts', 'filters', 'focal_reducers', 'accessories', 'software'):
+            if getattr(user.userprofile, klass) \
+                    .annotate(count=Count('migration_strategies')) \
+                    .filter(count=0) \
+                    .exists():
+                return True
 
         return False
