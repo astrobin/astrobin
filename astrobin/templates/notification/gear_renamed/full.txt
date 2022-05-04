@@ -4,11 +4,19 @@
     A gear item that you used was renamed
 {% endblocktrans %}:
 
-{% trans "Old brand" %}: {{ gear.make }}
-{% trans "Old name" %}: {{ gear.name }}
+{% trans "Old name" %}: {{ gear_display_name }}
 
 {% trans "New brand" %}: {{ item.brand.name }}
 {% trans "New name" %}: {{ item.name }}
+
+{% blocktrans trimmed %}
+    This operation was performed because at least 5 owners of this equipment item (or more than half, whichever is
+    greatest), approved it, while nobody rejected it.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    If this item is a camera that has been modified for astrophotography, this information will not be lost.
+{% endblocktrans %}
 
 {% blocktrans trimmed %}
     If you think this operation was incorrect, please get in touch and let us know why!

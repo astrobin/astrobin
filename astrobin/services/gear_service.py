@@ -151,15 +151,16 @@ class GearService:
                         reviewer_decision='APPROVED',
                     )
 
-            push_notification(
-                list(set(list(User.objects.filter(userprofile__cameras__pk=proposal.gear.pk)))),
-                None,
-                'gear_renamed',
-                {
-                    'gear': proposal.gear,
-                    'item': camera,
-                }
-            )
+            for user in list(set(list(User.objects.filter(userprofile__cameras__pk=proposal.gear.pk)))):
+                push_notification(
+                    [user],
+                    None,
+                    'gear_renamed',
+                    {
+                        'gear_display_name': GearService(proposal.gear).display_name(for_user=user),
+                        'item': camera,
+                    }
+                )
 
     @staticmethod
     def image_has_legacy_gear(image: Image) -> bool:
