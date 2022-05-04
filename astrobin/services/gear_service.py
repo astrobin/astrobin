@@ -191,7 +191,7 @@ class GearService:
         if for_user is None:
             return str(self.gear)
 
-        gear_user_info: GearUserInfo = get_object_or_None(GearUserInfo, gear=self.gear)
+        gear_user_info: GearUserInfo = get_object_or_None(GearUserInfo, gear=self.gear, user=for_user)
         if gear_user_info is None:
             return str(self.gear)
 
