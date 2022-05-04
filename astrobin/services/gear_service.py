@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.db.models import Count
 from django.utils import timezone
 
-from astrobin.models import CameraRenameProposal, Gear, GearMigrationStrategy, GearRenameRecord, Image
+from astrobin.models import CameraRenameProposal, Gear, GearMigrationStrategy, GearRenameRecord, GearUserInfo, Image
 from astrobin_apps_equipment.models import Camera, EquipmentBrand, Sensor
 from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_notifications.utils import push_notification
@@ -13,6 +13,10 @@ from astrobin_apps_notifications.utils import push_notification
 
 class GearService:
     """ Service related to the legacy models.Gear object """
+    gear = None
+
+    def __init__(self, gear=None):
+        self.gear = gear
 
     @staticmethod
     def reset_migration_fields(queryset):
@@ -181,3 +185,13 @@ class GearService:
                 return True
 
         return False
+
+    def display_name(self, for_user: User = None):
+        if for_user is None:
+            return str(self.gear)
+
+        gear_user_info: GearUserInfo = get_object_or_None(GearUserInfo, gear=self.gear)
+        if gear_user_info is None:
+            return str(self.gear)
+
+        return str(gear_user_info)
