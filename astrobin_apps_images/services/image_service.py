@@ -374,7 +374,7 @@ class ImageService:
                 'id': str(item.id),
                 'object': item,
                 'type': item.__class__.__name__.lower(),
-                'label': str(item) if version == 'NEW' else GearService(item).display_name(self.image.user) ,
+                'label': str(item) if version == 'NEW' else GearService(item).display_name(self.image.user),
                 'version': version,
             }
 
