@@ -14,7 +14,8 @@ from rest_framework.response import Response
 
 from astrobin.api2.serializers.gear_migration_strategy_serializer import GearMigrationStrategySerializer
 from astrobin.models import GearMigrationStrategy
-from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_read_only import IsEquipmentModeratorOrReadOnly
+from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_own_migrator_or_readonly import \
+    IsEquipmentModeratorOrOwnMigratorOrReadOnly
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.services import AppRedirectionService
 
@@ -22,7 +23,7 @@ from common.services import AppRedirectionService
 class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
     serializer_class = GearMigrationStrategySerializer
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
-    permission_classes = [IsEquipmentModeratorOrReadOnly]
+    permission_classes = [IsEquipmentModeratorOrOwnMigratorOrReadOnly]
     http_method_names = ['get', 'head', 'options', 'put']
 
     def get_queryset(self) -> QuerySet:

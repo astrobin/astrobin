@@ -1,4 +1,5 @@
 import django_filters
+from django.db.models import QuerySet
 from django_filters.rest_framework import FilterSet
 
 
@@ -6,17 +7,23 @@ class EquipmentItemFilter(FilterSet):
     pending_review = django_filters.BooleanFilter(method='has_pending_review')
     pending_edit = django_filters.BooleanFilter(method='has_pending_edit_proposals')
 
-    def has_pending_review(self, queryset, value, *args, **kwargs):
+    def has_pending_review(self, queryset: QuerySet, value, *args, **kwargs):
         condition = args[0]
+
+        is_authenticated: bool = self.request.user.is_authenticated
+        is_moderator: bool = is_authenticated and self.request.user.groups.filter(name='equipment_moderators').exists()
+
+        if not is_authenticated or not is_moderator:
+            return queryset.none()
+
+        queryset = queryset.exclude(created_by=self.request.user)
 
         if condition:
             queryset = queryset.filter(reviewer_decision__isnull=True)
-            if self.request.user.is_authenticated:
-                queryset = queryset.exclude(created_by=self.request.user)
 
         return queryset
 
-    def has_pending_edit_proposals(self, queryset, value, *args, **kwargs):
+    def has_pending_edit_proposals(self, queryset: QuerySet, value, *args, **kwargs):
         condition = args[0]
 
         if condition:
