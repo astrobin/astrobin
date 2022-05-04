@@ -19,102 +19,68 @@
 {% block content %}
     {% include 'image/edit/menu.html' %}
 
-    {% if is_own_equipment_migrator and has_legacy_gear %}
-        <div class="alert alert-info">
-            <h4 class="alert-heading">
-                {% trans "AstroBin is rebuilding its equipment database!" %}
-            </h4>
-
-            <p>
-                {% blocktrans trimmed %}
-                    Using this form to edit the equipment used for this image is no longer possible, because it
-                    interfaces with the legacy equipment database on AstroBin.
-                {% endblocktrans %}
-            </p>
-
-            <p>
-                {% blocktrans trimmed %}
-                    To begin using the new and improved equipment database for this image, please migrate your gear.
-                {% endblocktrans %}
-            </p>
-
-            <p>
-                {% blocktrans trimmed %}
-                    Please note: the migration process goes thru a review stage. If you have completed your migration
-                    but still see this notice, it could because your migration proposals haven't been approved yet.
-                {% endblocktrans %}
-            </p>
-
-            <div class="alert-actions">
-                <a class="btn btn-primary" href="{% app_redirection_service '/equipment/migration-tool' %}">
-                    {% trans "Begin migration" %}&hellip;
-                </a>
-            </div>
+    {% if no_gear %}
+        <div class="alert alert-warning">
+            {% url 'profile_edit_gear' as the_url %}
+            {% blocktrans %}Can't see anything here? Perhaps you should first add some gear in your
+                <a href="{{ the_url }}">profile</a>!{% endblocktrans %}
         </div>
     {% else %}
-        {% if no_gear %}
-            <div class="alert alert-warning">
-                {% url 'profile_edit_gear' as the_url %}
-                {% blocktrans %}Can't see anything here? Perhaps you should first add some gear in your
-                    <a href="{{ the_url }}">profile</a>!{% endblocktrans %}
-            </div>
-        {% else %}
-            <div class="subtitle">
-                <i class="icon icon-info-sign"></i>
-                {% blocktrans %}To choose the gear used for this image, drag items from the right side to left side, or
-                    click the plus sign.{% endblocktrans %}
-            </div>
+        <div class="subtitle">
+            <i class="icon icon-info-sign"></i>
+            {% blocktrans %}To choose the gear used for this image, drag items from the right side to left side, or
+                click the plus sign.{% endblocktrans %}
+        </div>
 
-            <form class="form-horizontal">
-                <div class="form-actions">
-                    <a class="btn btn-primary btn-block-mobile" href="#copy-gear-modal" rel="tooltip"
-                       title="{% trans "Use this button to import the gear settings from another image of yours." %}"
-                       data-toggle="modal">{% trans "Copy from another image" %}</a>
-                </div>
-            </form>
-        {% endif %}
-
-        <form
-                class="form-horizontal"
-                id="gear"
-                method="post"
-                action=""
-                novalidate>
-            {% csrf_token %}
-
-            {{ form.non_field_errors }}
-
-            {% for field in form %}
-                <div class="control-group">
-                    <label class="control-label" for="id_{{ field.name }}">{{ field.label }}:</label>
-                    <div class="loading"><img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="" /></div>
-                    <div class="controls">
-                        {{ field }}
-                    </div>
-                    {{ field.errors }}
-                </div>
-            {% endfor %}
-
-            <input type="hidden" name="image_id" value="{{ image.get_id }}" />
-
+        <form class="form-horizontal">
             <div class="form-actions">
-                <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit">
-                    {% trans "Save" %}
-                    {% button_loading_indicator %}
-                </button>
-
-                {% if image|in_upload_wizard:request %}
-                    <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit"
-                            name="submit_acquisition">
-                        {% trans "Edit acquisition details" %} &rarr; {% button_loading_indicator %}
-                    </button>
-                    <input type="hidden" name="upload" value="true" />
-                {% else %}
-                    <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">{% trans "Cancel" %}</a>
-                {% endif %}
+                <a class="btn btn-primary btn-block-mobile" href="#copy-gear-modal" rel="tooltip"
+                   title="{% trans "Use this button to import the gear settings from another image of yours." %}"
+                   data-toggle="modal">{% trans "Copy from another image" %}</a>
             </div>
         </form>
-    {% endif %} {# is_own_equipment_migrator and has_legacy_gear #}
+    {% endif %}
+
+    <form
+            class="form-horizontal"
+            id="gear"
+            method="post"
+            action=""
+            novalidate>
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+        {% for field in form %}
+            <div class="control-group">
+                <label class="control-label" for="id_{{ field.name }}">{{ field.label }}:</label>
+                <div class="loading"><img src="{% static 'astrobin/images/ajax-loader.gif' %}" alt="" /></div>
+                <div class="controls">
+                    {{ field }}
+                </div>
+                {{ field.errors }}
+            </div>
+        {% endfor %}
+
+        <input type="hidden" name="image_id" value="{{ image.get_id }}" />
+
+        <div class="form-actions">
+            <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit">
+                {% trans "Save" %}
+                {% button_loading_indicator %}
+            </button>
+
+            {% if image|in_upload_wizard:request %}
+                <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit"
+                        name="submit_acquisition">
+                    {% trans "Edit acquisition details" %} &rarr; {% button_loading_indicator %}
+                </button>
+                <input type="hidden" name="upload" value="true" />
+            {% else %}
+                <a class="btn btn-block-mobile" href="{{ image.get_absolute_url }}">{% trans "Cancel" %}</a>
+            {% endif %}
+        </div>
+    </form>
 {% endblock %}
 
 {% block modals %}

@@ -10,7 +10,7 @@ from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 
-from astrobin.models import Gear, GearMigrationStrategy, UserProfile
+from astrobin.models import Gear, GearMigrationStrategy, UserProfile, Telescope as LegacyTelescope, Camera as LegacyCamera, Mount as LegacyMount, Filter as LegacyFilter, Accessory as LegacyAccessory, Software as LegacySoftware, FocalReducer as LegacyFocalReducer
 from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Software, Telescope
 
 
@@ -28,18 +28,18 @@ class MigratableItemMixin:
 
 
     def __filter_by_user_items(self, queryset: QuerySet, user: User) -> QuerySet:
-        profile: UserProfile = user.userprofile
-
         itemPks: List[int] = []
-        itemPks.extend([x.pk for x in profile.telescopes.all()])
-        itemPks.extend([x.pk for x in profile.cameras.all()])
-        itemPks.extend([x.pk for x in profile.mounts.all()])
-        itemPks.extend([x.pk for x in profile.filters.all()])
-        itemPks.extend([x.pk for x in profile.accessories.all()])
-        itemPks.extend([x.pk for x in profile.focal_reducers.all()])
-        itemPks.extend([x.pk for x in profile.software.all()])
+        itemPks.extend([x.pk for x in LegacyTelescope.objects.filter(images_using_for_imaging__user=user).distinct()])
+        itemPks.extend([x.pk for x in LegacyTelescope.objects.filter(images_using_for_guiding__user=user).distinct()])
+        itemPks.extend([x.pk for x in LegacyCamera.objects.filter(images_using_for_imaging__user=user).distinct()])
+        itemPks.extend([x.pk for x in LegacyCamera.objects.filter(images_using_for_guiding__user=user).distinct()])
+        itemPks.extend([x.pk for x in LegacyMount.objects.filter(images_using__user=user).distinct()])
+        itemPks.extend([x.pk for x in LegacyFilter.objects.filter(images_using__user=user).distinct()])
+        itemPks.extend([x.pk for x in LegacyAccessory.objects.filter(images_using__user=user).distinct()])
+        itemPks.extend([x.pk for x in LegacyFocalReducer.objects.filter(images_using__user=user).distinct()])
+        itemPks.extend([x.pk for x in LegacyFocalReducer.objects.filter(images_using__user=user).distinct()])
 
-        return queryset.filter(pk__in=itemPks)
+        return queryset.filter(pk__in=list(set(itemPks)))
 
     def __random_non_migrated_queryset(self, user: User, global_results: bool) -> QuerySet:
         if global_results and not user.groups.filter(name='equipment_moderators').exists():
