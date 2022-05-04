@@ -334,7 +334,12 @@ class GearUserInfo(models.Model):
     )
 
     def __str__(self):
-        name: str = f'{self.alias} ({str(self.gear)})'
+        name: str
+
+        if self.alias:
+            name = f'{self.alias} ({str(self.gear)})'
+        else:
+            name = str(self.gear)
 
         if self.modded:
             name = f'{name} ({pgettext("Pertaining to cameras, e.g. a modified Canon", "modified")})'
