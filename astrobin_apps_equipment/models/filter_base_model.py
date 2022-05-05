@@ -107,8 +107,10 @@ class FilterBaseModel(EquipmentItem):
         choices=FILTER_TYPES,
     )
 
-    bandwidth = models.PositiveSmallIntegerField(
+    bandwidth = models.DecimalField(
         verbose_name=_("Bandwidth (nm)"),
+        max_digits=5,
+        decimal_places=2,
         null=True,
         blank=True,
     )
