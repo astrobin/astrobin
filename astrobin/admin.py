@@ -83,8 +83,8 @@ class GearMigrationStrategyAdmin(admin.ModelAdmin):
 
 
 class CameraRenameProposalAdmin(admin.ModelAdmin):
-    list_display = ('id', 'old_make', 'old_name', 'new_make', 'new_name', 'status', 'reject_reason',)
-    list_editable = ('new_make', 'new_name', 'status',)
+    list_display = ('id', 'old_make', 'old_name', 'new_make', 'new_name', 'modified', 'status', 'reject_reason',)
+    list_editable = ('new_make', 'new_name', 'modified', 'status',)
     search_fields = ('old_name',)
     list_filter = ('status',)
 
