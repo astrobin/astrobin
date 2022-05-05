@@ -24,6 +24,7 @@ class FilterType:
     SKY_GLOW = 'SKY_GLOW'
     SOLAR = 'SOLAR'
     LUNAR = 'LUNAR'
+    PLANETARY = 'PLANETARY'
     COMETARY = 'COMETARY'
     PHOTOMETRIC_U = 'PHOTOMETRIC_U'
     PHOTOMETRIC_B = 'PHOTOMETRIC_B'
@@ -53,6 +54,7 @@ class FilterBaseModel(EquipmentItem):
         (FilterType.SKY_GLOW, _("Sky glow")),
         (FilterType.SOLAR, _("Solar")),
         (FilterType.LUNAR, _("Lunar")),
+        (FilterType.PLANETARY, _("Planetary")),
         (FilterType.COMETARY, _("Cometary")),
         (FilterType.PHOTOMETRIC_U, _("Photometric Ultraviolet")),
         (FilterType.PHOTOMETRIC_B, _("Photometric Blue")),
