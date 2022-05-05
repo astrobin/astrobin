@@ -34,6 +34,23 @@ class FilterType:
     OTHER = 'OTHER'
 
 
+class FilterSize:
+    ROUND_1_25_IN = 'ROUND_1_25_IN'
+    ROUND_2_IN = 'ROUND_2_IN'
+    ROUND_31_MM = 'ROUND_31_MM'
+    ROUND_36_MM = 'ROUND_36_MM'
+    ROUND_50_MM = 'ROUND_50_MM'
+    SQUARE_50_MM = 'SQUARE_50_MM'
+    SQUARE_65_MM = 'SQUARE_65_MM'
+    EOS_APC_C = 'EOS_APC_C'
+    EOS_FULL = 'EOS_FULL'
+    EOS_R = 'EOS_R'
+    SONY = 'SONY'
+    T_THREAD_CELL_M42 = 'T_THREAD_CELL_M42'
+    M_52 = 'M52'
+    SC_CELL = 'SC_CELL'
+    OTHER = 'OTHER'
+
 class FilterBaseModel(EquipmentItem):
     FILTER_TYPES = (
         (FilterType.H_ALPHA, _("Hydrogen-alpha (Hα)")),
@@ -64,6 +81,24 @@ class FilterBaseModel(EquipmentItem):
         (FilterType.OTHER, _("Other")),
     )
 
+    FILTER_SIZES = (
+        (FilterSize.ROUND_1_25_IN, _('Round') + ' 1.25"'),
+        (FilterSize.ROUND_2_IN, _('Round') + ' 2"'),
+        (FilterSize.ROUND_31_MM, _('Round') + ' 31 mm'),
+        (FilterSize.ROUND_36_MM, _('Round') + ' 36 mm"'),
+        (FilterSize.ROUND_50_MM, _('Round') + ' 50 mm"'),
+        (FilterSize.SQUARE_50_MM, _('Square') + ' 50x50 mm"'),
+        (FilterSize.SQUARE_65_MM, _('Square') + ' 65x65 mm'),
+        (FilterSize.EOS_APC_C, 'EOS APC C'),
+        (FilterSize.EOS_FULL, 'EOS Full'),
+        (FilterSize.EOS_R, 'EOS R'),
+        (FilterSize.SONY, 'Sony'),
+        (FilterSize.T_THREAD_CELL_M42, 'T-thread cell (M42 x 0.75)'),
+        (FilterSize.M_52, 'M52'),
+        (FilterSize.SC_CELL, 'SC-cell'),
+        (FilterSize.OTHER, _('Other')),
+    )
+
     type = models.CharField(
         verbose_name=_('Type'),
         null=False,
@@ -78,7 +113,15 @@ class FilterBaseModel(EquipmentItem):
         blank=True,
     )
 
-    size = models.DecimalField(
+    size = models.CharField(
+        verbose_name=_('Size'),
+        null=True,
+        blank=True,
+        max_length=32,
+        choices=FILTER_SIZES,
+    )
+
+    other_size = models.DecimalField(
         verbose_name=_('Size (mm)'),
         max_digits=4,
         decimal_places=2,
