@@ -10,5 +10,4 @@ class EquipmentItemEditProposalFilter(FilterSet):
         fields = {
             'edit_proposal_target': ["exact"],
             'edit_proposal_review_status': ["exact"],
-
         }
