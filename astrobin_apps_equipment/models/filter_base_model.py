@@ -42,7 +42,7 @@ class FilterSize:
     ROUND_50_MM = 'ROUND_50_MM'
     SQUARE_50_MM = 'SQUARE_50_MM'
     SQUARE_65_MM = 'SQUARE_65_MM'
-    EOS_APC_C = 'EOS_APC_C'
+    EOS_APS_C = 'EOS_APS_C'
     EOS_FULL = 'EOS_FULL'
     EOS_R = 'EOS_R'
     SONY = 'SONY'
@@ -89,7 +89,7 @@ class FilterBaseModel(EquipmentItem):
         (FilterSize.ROUND_50_MM, _('Round') + ' 50 mm"'),
         (FilterSize.SQUARE_50_MM, _('Square') + ' 50x50 mm'),
         (FilterSize.SQUARE_65_MM, _('Square') + ' 65x65 mm'),
-        (FilterSize.EOS_APC_C, 'EOS APC C'),
+        (FilterSize.EOS_APS_C, 'EOS APS-C'),
         (FilterSize.EOS_FULL, 'EOS Full'),
         (FilterSize.EOS_R, 'EOS R'),
         (FilterSize.SONY, 'Sony'),
