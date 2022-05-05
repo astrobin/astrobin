@@ -87,7 +87,7 @@ class FilterBaseModel(EquipmentItem):
         (FilterSize.ROUND_31_MM, _('Round') + ' 31 mm'),
         (FilterSize.ROUND_36_MM, _('Round') + ' 36 mm"'),
         (FilterSize.ROUND_50_MM, _('Round') + ' 50 mm"'),
-        (FilterSize.SQUARE_50_MM, _('Square') + ' 50x50 mm"'),
+        (FilterSize.SQUARE_50_MM, _('Square') + ' 50x50 mm'),
         (FilterSize.SQUARE_65_MM, _('Square') + ' 65x65 mm'),
         (FilterSize.EOS_APC_C, 'EOS APC C'),
         (FilterSize.EOS_FULL, 'EOS Full'),
@@ -136,6 +136,7 @@ class FilterBaseModel(EquipmentItem):
                     return i[1]
 
         return _("Unknown")
+
 
     def properties(self):
         properties = []
