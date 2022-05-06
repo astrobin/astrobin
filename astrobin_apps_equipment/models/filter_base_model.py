@@ -44,7 +44,11 @@ class FilterSize:
     ROUND_46_MM = 'ROUND_46_MM'
     ROUND_50_MM = 'ROUND_50_MM'
     ROUND_52_MM = 'ROUND_52_MM'
+    ROUND_62_MM = 'ROUND_62_MM'
+    ROUND_67_MM = 'ROUND_67_MM'
     ROUND_72_MM = 'ROUND_72_MM'
+    ROUND_77_MM = 'ROUND_77_MM'
+    ROUND_82_MM = 'ROUND_82_MM'
     SQUARE_50_MM = 'SQUARE_50_MM'
     SQUARE_65_MM = 'SQUARE_65_MM'
     SQUARE_100_MM = 'SQUARE_100_MM'
@@ -104,7 +108,11 @@ class FilterBaseModel(EquipmentItem):
         (FilterSize.ROUND_46_MM, _('Round') + ' 46 mm"'),
         (FilterSize.ROUND_50_MM, _('Round') + ' 50 mm"'),
         (FilterSize.ROUND_52_MM, _('Round') + ' 52 mm"'),
+        (FilterSize.ROUND_62_MM, _('Round') + ' 62 mm"'),
+        (FilterSize.ROUND_67_MM, _('Round') + ' 67 mm"'),
         (FilterSize.ROUND_72_MM, _('Round') + ' 72 mm"'),
+        (FilterSize.ROUND_77_MM, _('Round') + ' 77 mm"'),
+        (FilterSize.ROUND_82_MM, _('Round') + ' 82 mm"'),
         (FilterSize.SQUARE_50_MM, _('Square') + ' 50x50 mm'),
         (FilterSize.SQUARE_65_MM, _('Square') + ' 65x65 mm'),
         (FilterSize.SQUARE_100_MM, _('Square') + ' 100x100 mm'),
