@@ -45,6 +45,7 @@ class FilterSize:
     ROUND_50_MM = 'ROUND_50_MM'
     ROUND_52_MM = 'ROUND_52_MM'
     ROUND_62_MM = 'ROUND_62_MM'
+    ROUND_65_MM = 'ROUND_65_MM'
     ROUND_67_MM = 'ROUND_67_MM'
     ROUND_72_MM = 'ROUND_72_MM'
     ROUND_77_MM = 'ROUND_77_MM'
@@ -109,6 +110,7 @@ class FilterBaseModel(EquipmentItem):
         (FilterSize.ROUND_50_MM, _('Round') + ' 50 mm"'),
         (FilterSize.ROUND_52_MM, _('Round') + ' 52 mm"'),
         (FilterSize.ROUND_62_MM, _('Round') + ' 62 mm"'),
+        (FilterSize.ROUND_65_MM, _('Round') + ' 65 mm"'),
         (FilterSize.ROUND_67_MM, _('Round') + ' 67 mm"'),
         (FilterSize.ROUND_72_MM, _('Round') + ' 72 mm"'),
         (FilterSize.ROUND_77_MM, _('Round') + ' 77 mm"'),
