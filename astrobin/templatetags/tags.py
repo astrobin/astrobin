@@ -3,6 +3,7 @@ import math
 from datetime import date, datetime
 
 import dateutil
+from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.postgres.search import TrigramDistance
@@ -228,6 +229,15 @@ def gear_alias(gear, user):
         pass
 
     return default
+
+
+@register.filter
+def gear_modded(gear, user):
+    gear_user_info: GearUserInfo = get_object_or_None(GearUserInfo, gear=gear, user=user)
+    if gear_user_info:
+        return gear_user_info.modded
+
+    return False
 
 
 @register.simple_tag

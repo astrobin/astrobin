@@ -10,7 +10,13 @@
             <div id="{{item.id}}" class="btn btn-gear {% gear_complete_class item %}">
                 <div class="labels">
                     <div class="make">{{item.make}}</div>
-                    <div class="name">{{item.name}}</div>
+                    <div class="name">
+                        {{item.name}}
+                        {% if item|gear_modded:user %}
+                            {% trans "modified" context "Pertaining to cameras, e.g. a modified Canon" as i18nModified %}
+                            ({{ i18nModified }}
+                        {% endif %}
+                    </div>
                     <div class="alias">({% gear_alias item user %})</div>
                 </div>
                 <div class="actions">
