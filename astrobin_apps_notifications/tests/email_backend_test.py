@@ -14,6 +14,8 @@ class EmailBackendTest(TransactionTestCase):
             username="user",
             email="user@test.com",
             password="password")
+        self.user.userprofile.last_seen = datetime.datetime.now()
+        self.user.userprofile.save()
         self.notice_type = NoticeType.objects.get(label="test_notification")
 
     def tearDown(self):

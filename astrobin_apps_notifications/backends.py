@@ -59,7 +59,8 @@ class EmailBackend(BaseEmailBackend):
             address=user.email)
         deleted = user.userprofile.deleted is not None
         ignored = 'ASTROBIN_IGNORE' in user.email
-        inactive = user.userprofile.last_seen and user.userprofile.last_seen < datetime.now() - timedelta(days=90)
+        last_seen = user.userprofile.last_seen or user.last_login
+        inactive = last_seen is None or last_seen < datetime.now() - timedelta(days=90)
 
         if deleted or hard_bounces.exists() or soft_bounces.count() > 2 or complaints or ignored or inactive:
             return False
