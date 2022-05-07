@@ -1,10 +1,108 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+from astrobin.fields import GearItemChoiceField
 from astrobin.models import Image
 
 
 class ImageEditGearForm(forms.ModelForm):
+    imaging_telescopes = GearItemChoiceField(
+        None,
+        required=False,
+        widget=forms.SelectMultiple(
+            attrs={
+                'multiple': True
+            }
+        )
+    )
+    imaging_cameras = GearItemChoiceField(
+        None,
+        required=False,
+        widget=forms.SelectMultiple(
+            attrs={
+                'multiple': True
+            }
+        )
+    )
+
+    guiding_telescopes = GearItemChoiceField(
+        None,
+        required=False,
+        widget=forms.SelectMultiple(
+            attrs={
+                'multiple': True
+            }
+        )
+    )
+    guiding_cameras = GearItemChoiceField(
+        None,
+        required=False,
+        widget=forms.SelectMultiple(
+            attrs={
+                'multiple': True
+            }
+        )
+    )
+    mounts = GearItemChoiceField(
+        None,
+        required=False,
+        widget=forms.SelectMultiple(
+            attrs={
+                'multiple': True
+            }
+        )
+    )
+    filters = GearItemChoiceField(
+        None,
+        required=False,
+        widget=forms.SelectMultiple(
+            attrs={
+                'multiple': True
+            }
+        )
+    )
+    accessories = GearItemChoiceField(
+        None,
+        required=False,
+        widget=forms.SelectMultiple(
+            attrs={
+                'multiple': True
+            }
+        )
+    )
+    software = GearItemChoiceField(
+        None,
+        required=False,
+        widget=forms.SelectMultiple(
+            attrs={
+                'multiple': True
+            }
+        )
+    )
+    focal_reducers = GearItemChoiceField(
+        None,
+        required=False,
+        widget=forms.SelectMultiple(
+            attrs={
+                'multiple': True
+            }
+        )
+    )
+
+    def __init_fields__(self, user):
+        for field in (
+                'imaging_telescopes',
+                'imaging_cameras',
+                'mounts',
+                'focal_reducers',
+                'software',
+                'filters',
+                'accessories',
+                'guiding_telescopes',
+                'guiding_cameras',
+        ):
+            self.fields[field].user = user
+
     def __init__(self, user=None, **kwargs):
         super(ImageEditGearForm, self).__init__(**kwargs)
         profile = user.userprofile
@@ -31,6 +129,8 @@ class ImageEditGearForm(forms.ModelForm):
         self.fields['software'].label = _("Software")
         self.fields['filters'].label = _("Filters")
         self.fields['accessories'].label = _("Accessories")
+
+        self.__init_fields__(user)
 
     class Meta:
         model = Image
