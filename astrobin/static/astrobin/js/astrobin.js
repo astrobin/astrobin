@@ -821,7 +821,7 @@ astrobin_common = {
         return new Promise(function (resolve) {
             $.ajax({
                 url: '/api/v2/notifications/notification/mark_all_as_read/',
-                type: 'post',
+                type: 'put',
                 dataType: 'json',
                 success: function () {
                     $btn.removeClass('running');

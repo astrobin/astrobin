@@ -39,12 +39,12 @@ class NotificationViewSet(viewsets.ModelViewSet):
     def get_unread_count(self, request):
         return Response(status=200, data=self.get_queryset().filter(read=False).count())
 
-    @action(detail=False, methods=['post'])
+    @action(detail=False, methods=['put'])
     def mark_all_as_read(self, request):
         self.get_queryset().filter(read=False).update(read=True, modified=timezone.now())
         return Response(status=200)
 
-    @action(detail=False, methods=['post'], url_path='mark-as-read-by-path-and-user')
+    @action(detail=False, methods=['put'], url_path='mark-as-read-by-path-and-user')
     def mark_as_read_by_path_and_user(self, request):
         path: str = request.data.get('path')
         from_user_pk: int = request.data.get('fromUserPk')
