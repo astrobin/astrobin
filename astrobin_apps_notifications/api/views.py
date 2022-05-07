@@ -30,7 +30,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [CamelCaseJSONParser]
-    http_method_names = ['get', 'post', 'head', 'put']
+    http_method_names = ['get', 'options', 'head', 'put']
 
     def get_queryset(self):
         return Message.objects.filter(user=self.request.user).order_by('-created')
@@ -61,6 +61,13 @@ class NotificationViewSet(viewsets.ModelViewSet):
 
         return Response(status=200)
 
+    @action(detail=True, methods=['put'], url_path='mark-as-read')
+    def mark_as_read(self, request, pk):
+        notification: Message = self.get_object()
+        read: bool = request.data.get('read')
+        notification.read = read
+        notification.save()
+        return Response(status=200)
 
 class NoticeTypeViewSet(viewsets.ModelViewSet):
     serializer_class = NoticeTypeSerializer

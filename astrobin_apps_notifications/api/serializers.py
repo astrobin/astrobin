@@ -20,12 +20,31 @@ class NotificationSerializer(serializers.HyperlinkedModelSerializer):
             'expires',
             'close_timeout',
         ]
+        read_only_fields = [
+            'id',
+            'user',
+            'from_user',
+            'subject',
+            'message',
+            'level',
+            'extra_tags',
+            'created',
+            'modified',
+            'expires',
+            'close_timeout',
+        ]
 
 
 class NoticeTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = NoticeType
         fields = [
+            'id',
+            'label',
+            'display',
+            'description'
+        ]
+        read_only_fields = [
             'id',
             'label',
             'display',
@@ -42,4 +61,10 @@ class NoticeSettingSerializers(serializers.ModelSerializer):
             'notice_type',
             'medium',
             'send'
+        ]
+        read_only_fields = [
+            'id',
+            'user',
+            'notice_type',
+            'medium',
         ]
