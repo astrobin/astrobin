@@ -7,14 +7,18 @@ from astrobin.models import Image
 
 class ImageEditGearForm(forms.ModelForm):
     imaging_telescopes = GearItemChoiceField(
-        None, widget=forms.SelectMultiple(
+        None,
+        required=False,
+        widget=forms.SelectMultiple(
             attrs={
                 'multiple': True
             }
         )
     )
     imaging_cameras = GearItemChoiceField(
-        None, widget=forms.SelectMultiple(
+        None,
+        required=False,
+        widget=forms.SelectMultiple(
             attrs={
                 'multiple': True
             }
@@ -22,49 +26,63 @@ class ImageEditGearForm(forms.ModelForm):
     )
 
     guiding_telescopes = GearItemChoiceField(
-        None, widget=forms.SelectMultiple(
+        None,
+        required=False,
+        widget=forms.SelectMultiple(
             attrs={
                 'multiple': True
             }
         )
     )
     guiding_cameras = GearItemChoiceField(
-        None, widget=forms.SelectMultiple(
+        None,
+        required=False,
+        widget=forms.SelectMultiple(
             attrs={
                 'multiple': True
             }
         )
     )
     mounts = GearItemChoiceField(
-        None, widget=forms.SelectMultiple(
+        None,
+        required=False,
+        widget=forms.SelectMultiple(
             attrs={
                 'multiple': True
             }
         )
     )
     filters = GearItemChoiceField(
-        None, widget=forms.SelectMultiple(
+        None,
+        required=False,
+        widget=forms.SelectMultiple(
             attrs={
                 'multiple': True
             }
         )
     )
     accessories = GearItemChoiceField(
-        None, widget=forms.SelectMultiple(
+        None,
+        required=False,
+        widget=forms.SelectMultiple(
             attrs={
                 'multiple': True
             }
         )
     )
     software = GearItemChoiceField(
-        None, widget=forms.SelectMultiple(
+        None,
+        required=False,
+        widget=forms.SelectMultiple(
             attrs={
                 'multiple': True
             }
         )
     )
     focal_reducers = GearItemChoiceField(
-        None, widget=forms.SelectMultiple(
+        None,
+        required=False,
+        widget=forms.SelectMultiple(
             attrs={
                 'multiple': True
             }

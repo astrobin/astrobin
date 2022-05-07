@@ -2219,11 +2219,11 @@ class ImageTest(TestCase):
 
         # Check that the user's other images are available to copy from
         self._do_upload('astrobin/fixtures/test.jpg')
-        other_1 = self._get_last_image();
+        other_1 = self._get_last_image()
         other_1.title = "Other 1";
         other_1.save(keep_deleted=True)
         self._do_upload('astrobin/fixtures/test.jpg', wip=True);
-        other_2 = self._get_last_image();
+        other_2 = self._get_last_image()
         other_2.title = "Other 2";
         other_2.save(keep_deleted=True)
         response = self.client.get(get_url((image.get_id(),)))
