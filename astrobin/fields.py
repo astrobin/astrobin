@@ -1,5 +1,5 @@
 from django.db import models
-from django.forms import ModelChoiceField
+from django.forms import ModelMultipleChoiceField
 from django.utils.translation import ugettext_lazy as _
 
 # ISO 3166-1 country names and codes adapted from http://opencountrycodes.appspot.com/python/
@@ -273,7 +273,7 @@ class CountryField(models.CharField):
         return "CharField"
 
 
-class GearItemChoiceField(ModelChoiceField):
+class GearItemChoiceField(ModelMultipleChoiceField):
     def label_from_instance(self, obj):
         from astrobin.services.gear_service import GearService
         return GearService(obj).display_name(self.user)
