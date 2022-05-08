@@ -12,6 +12,7 @@ class TelescopeType:
     REFRACTOR_NON_ACHROMATIC_GALILEAN = 'REFRACTOR_NON_ACHROMATIC_GALILEAN'
     REFRACTOR_NON_ACHROMATIC_KEPLERIAN = 'REFRACTOR_NON_ACHROMATIC_KEPLERIAN'
     REFRACTOR_SUPERACHROMAT = 'REFRACTOR_SUPERACHROMAT'
+    REFRACTOR_PETZVAL = 'REFRACTOR_PETZVAL'
 
     REFLECTOR_DALL_KIRKHAM = 'REFLECTOR_DALL_KIRKHAM'
     REFLECTOR_NASMYTH = 'REFLECTOR_NASMYTH'
@@ -44,6 +45,7 @@ class TelescopeBaseModel(EquipmentItem):
         (TelescopeType.REFRACTOR_NON_ACHROMATIC_GALILEAN, _("Refractor: non-achromatic Galilean")),
         (TelescopeType.REFRACTOR_NON_ACHROMATIC_KEPLERIAN, _("Refractor: non-achromatic Keplerian")),
         (TelescopeType.REFRACTOR_SUPERACHROMAT, _("Refractor: superachromat")),
+        (TelescopeType.REFRACTOR_PETZVAL, _("Refractor: Petzval")),
 
         (TelescopeType.REFLECTOR_DALL_KIRKHAM, _("Reflector: Dall-Kirkham")),
         (TelescopeType.REFLECTOR_NASMYTH, _("Reflector: Nasmyth")),
