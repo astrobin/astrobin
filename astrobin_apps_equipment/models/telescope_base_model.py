@@ -33,6 +33,7 @@ class TelescopeType:
     CATADIOPTRIC_ACF_SCHMIDT_CASSEGRAIN = 'CATADIOPTRIC_ACF_SCHMIDT_CASSEGRAIN'
     CATADIOPTRIC_ROWE_ACKERMAN_SCHMIDT = 'CATADIOPTRIC_ROWE_ACKERMAN_SCHMIDT'
     CATADIOPTRIC_RICCARDI_HONDERS = 'CATADIOPTRIC_RICCARDI_HONDERS'
+    CATADIOPTRIC_MODIFIED_HARMER_WYNNE = 'CATADIOPTRIC_MODIFIED_HARMER_WYNNE'
 
     CAMERA_LENS = 'CAMERA_LENS'
     BINOCULARS = 'BINOCULARS'
@@ -67,6 +68,8 @@ class TelescopeBaseModel(EquipmentItem):
         (TelescopeType.CATADIOPTRIC_ACF_SCHMIDT_CASSEGRAIN, _("Catadioptric: ACF Schmidt-Cassegrain")),
         (TelescopeType.CATADIOPTRIC_ROWE_ACKERMAN_SCHMIDT, _("Catadioptric: Rowe-Atkinson Schmidt astrograph")),
         (TelescopeType.CATADIOPTRIC_RICCARDI_HONDERS, _("Catadioptric: Riccardi-Honders")),
+        (TelescopeType.CATADIOPTRIC_MODIFIED_HARMER_WYNNE, _("Catadioptric: modified Harmer-Wynne")),
+
         (TelescopeType.CAMERA_LENS, _("Camera lens")),
         (TelescopeType.BINOCULARS, _("Binoculars"))
     )
