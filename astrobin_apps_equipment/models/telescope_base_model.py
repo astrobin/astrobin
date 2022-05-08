@@ -39,6 +39,8 @@ class TelescopeType:
     CAMERA_LENS = 'CAMERA_LENS'
     BINOCULARS = 'BINOCULARS'
 
+    OTHER = 'OTHER'
+
 
 class TelescopeBaseModel(EquipmentItem):
     TELESCOPE_TYPES = (
@@ -73,7 +75,9 @@ class TelescopeBaseModel(EquipmentItem):
         (TelescopeType.CATADIOPTRIC_MODIFIED_HARMER_WYNNE, _("Catadioptric: modified Harmer-Wynne")),
 
         (TelescopeType.CAMERA_LENS, _("Camera lens")),
-        (TelescopeType.BINOCULARS, _("Binoculars"))
+        (TelescopeType.BINOCULARS, _("Binoculars")),
+
+        (TelescopeType.OTHER, _("Other"))
     )
 
     type = models.CharField(
