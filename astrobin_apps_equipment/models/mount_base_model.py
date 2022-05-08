@@ -43,8 +43,18 @@ class MountBaseModel(EquipmentItem):
         choices=MOUNT_TYPES,
     )
 
-    max_payload = models.PositiveSmallIntegerField(
+    weight = models.DecimalField(
+        verbose_name=_("Weight (kg)"),
+        null=True,
+        blank=True,
+        max_digits=6,
+        decimal_places=2
+    )
+
+    max_payload = models.DecimalField(
         verbose_name=_("Payload (kg)"),
+        max_digits=6,
+        decimal_places=2,
         null=True,
         blank=True,
     )
@@ -86,7 +96,9 @@ class MountBaseModel(EquipmentItem):
     def properties(self):
         properties = []
 
-        for item_property in ('type', 'max_payload', 'computerized', 'tracking_accuracy', 'pec', 'slew_speed'):
+        for item_property in (
+                'type', 'weight', 'max_payload', 'computerized', 'tracking_accuracy', 'pec', 'slew_speed'
+        ):
             property_label = self._meta.get_field(item_property).verbose_name
             if item_property == 'type':
                 property_value = self.type_label()
