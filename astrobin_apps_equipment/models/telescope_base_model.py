@@ -21,6 +21,7 @@ class TelescopeType:
     REFLECTOR_HERSCHELLIAN = 'REFLECTOR_HERSCHELLIAN'
     REFLECTOR_NEWTONIAN = 'REFLECTOR_NEWTONIAN'
     REFLECTOR_DOBSONIAN = 'REFLECTOR_DOBSONIAN'
+    REFLECTOR_CLASSICAL_CASSEGRAIN = 'REFLECTOR_CLASSICAL_CASSEGRAIN'
 
     CATADIOPTRIC_ARGUNOV_CASSEGRAIN = 'CATADIOPTRIC_ARGUNOV_CASSEGRAIN'
     CATADIOPTRIC_KLEVTSOV_CASSEGRAIN = 'CATADIOPTRIC_KLEVTSOV_CASSEGRAIN'
@@ -56,6 +57,7 @@ class TelescopeBaseModel(EquipmentItem):
         (TelescopeType.REFLECTOR_HERSCHELLIAN, _("Reflector: Herschellian")),
         (TelescopeType.REFLECTOR_NEWTONIAN, _("Reflector: Newtonian")),
         (TelescopeType.REFLECTOR_DOBSONIAN, _("Reflector: Dobsonian")),
+        (TelescopeType.REFLECTOR_CLASSICAL_CASSEGRAIN, _("Reflector: classical Cassegrain")),
 
         (TelescopeType.CATADIOPTRIC_ARGUNOV_CASSEGRAIN, _("Catadioptric: Argunov-Cassegrain")),
         (TelescopeType.CATADIOPTRIC_KLEVTSOV_CASSEGRAIN, _("Catadioptric: Klevtsov-Cassegrain")),
