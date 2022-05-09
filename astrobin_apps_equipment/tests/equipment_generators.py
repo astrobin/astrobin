@@ -96,6 +96,7 @@ class EquipmentGenerators:
             type=kwargs.get('type', MountType.GERMAN_EQUATORIAL),
             tracking_accuracy=kwargs.get('tracking_accuracy', 1),
             pec=kwargs.get('pec', True),
+            weight=kwargs.get('weight', 40),
             max_payload=kwargs.get('max_payload', 50),
             computerized=kwargs.get('computerized', True),
             slew_speed=kwargs.get('slew_speed', 10),

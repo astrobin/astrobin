@@ -10,6 +10,7 @@ class MountEditProposalSerializer(EquipmentItemEditProposalSerializer):
             'type': target.type,
             'tracking_accuracy': target.tracking_accuracy,
             'pec': target.pec,
+            'weight': target.weight,
             'max_payload': target.max_payload,
             'computerized': target.computerized,
             'slew_speed': target.slew_speed,
