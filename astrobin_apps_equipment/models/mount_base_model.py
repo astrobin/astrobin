@@ -17,6 +17,8 @@ class MountType:
     ALT_ALT = 'ALT_ALT'
     TRANSIT = 'TRANSIT'
     HEXAPOD = 'HEXAPOD'
+    DUAL_ALT_AZ_EQ = 'DUAL_ALT_AZ_EQ'
+    TRIPOD = 'TRIPOD'
     OTHER = 'OTHER'
 
 
@@ -33,6 +35,8 @@ class MountBaseModel(EquipmentItem):
         (MountType.ALT_ALT, _("Alt-Alt (altitude-altitude)")),
         (MountType.TRANSIT, _("Transit")),
         (MountType.HEXAPOD, _("Hexapod")),
+        (MountType.TRIPOD, _("Tripod")),
+        (MountType.DUAL_ALT_AZ_EQ, _("Dual Alt-Az / Equatorial")),
         (MountType.OTHER, _("Other")),
     )
 
