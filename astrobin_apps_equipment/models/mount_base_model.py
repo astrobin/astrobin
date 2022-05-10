@@ -69,8 +69,10 @@ class MountBaseModel(EquipmentItem):
         blank=True,
     )
 
-    tracking_accuracy = models.PositiveSmallIntegerField(
-        verbose_name=_("Tracking accuracy (arcsec)"),
+    periodic_error = models.DecimalField(
+        verbose_name=_("Periodic error (arcsec)"),
+        max_digits=6,
+        decimal_places=2,
         null=True,
         blank=True,
     )
@@ -101,7 +103,7 @@ class MountBaseModel(EquipmentItem):
         properties = []
 
         for item_property in (
-                'type', 'weight', 'max_payload', 'computerized', 'tracking_accuracy', 'pec', 'slew_speed'
+                'type', 'weight', 'max_payload', 'computerized', 'periodic_error', 'pec', 'slew_speed'
         ):
             property_label = self._meta.get_field(item_property).verbose_name
             if item_property == 'type':

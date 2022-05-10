@@ -33,7 +33,7 @@ class MountEditProposalViewSet(EquipmentItemEditProposalViewSet):
 
         mount = edit_proposal.edit_proposal_target
         mount.type = edit_proposal.type
-        mount.tracking_accuracy = edit_proposal.tracking_accuracy
+        mount.periodic_error = edit_proposal.periodic_error
         mount.pec = edit_proposal.pec
         mount.weight = edit_proposal.weight
         mount.max_payload = edit_proposal.max_payload
