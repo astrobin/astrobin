@@ -8,7 +8,7 @@ class MountEditProposalSerializer(EquipmentItemEditProposalSerializer):
     def get_original_properties(self, target: Mount):
         return {
             'type': target.type,
-            'tracking_accuracy': target.tracking_accuracy,
+            'periodic_error': target.periodic_error,
             'pec': target.pec,
             'weight': target.weight,
             'max_payload': target.max_payload,

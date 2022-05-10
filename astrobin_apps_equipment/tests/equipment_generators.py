@@ -94,7 +94,7 @@ class EquipmentGenerators:
             name=kwargs.get('name', 'Test mount %s' % random_name),
             website=kwargs.get('website', 'https://www.test-mount-%s.com/' % random_name),
             type=kwargs.get('type', MountType.GERMAN_EQUATORIAL),
-            tracking_accuracy=kwargs.get('tracking_accuracy', 1),
+            periodic_error=kwargs.get('periodic_error', 1),
             pec=kwargs.get('pec', True),
             weight=kwargs.get('weight', 40),
             max_payload=kwargs.get('max_payload', 50),
