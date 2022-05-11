@@ -45,3 +45,10 @@ class SignalsTest(TestCase):
         camera.delete()
 
         self.assertFalse(Camera.objects.filter(pk=modified.pk).exists())
+
+    def test_remove_sensor_from_cameras_after_deletion(self):
+        camera = EquipmentGenerators.camera()
+        camera.sensor.delete()
+        camera = Camera.objects.get(pk=camera.pk)
+
+        self.assertIsNone(camera.sensor)

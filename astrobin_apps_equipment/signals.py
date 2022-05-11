@@ -67,6 +67,10 @@ def rename_equipment_item_after_deletion(sender, instance, **kwargs):
         instance.save(keep_deleted=True)
 
 
+@receiver(post_softdelete, sender=Sensor)
+def remove_sensor_from_cameras_after_deletion(sender, instance, **kwargs):
+    Camera.objects.filter(sensor=instance).update(sensor=None)
+
 @receiver(post_softdelete, sender=Camera)
 def remove_camera_from_presets_after_deletion(sender, instance, **kwargs):
     preset: EquipmentPreset
