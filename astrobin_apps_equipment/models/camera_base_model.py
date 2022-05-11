@@ -40,7 +40,8 @@ class CameraBaseModel(EquipmentItem):
     )
 
     cooled = models.BooleanField(
-        default=False,
+        null=True,
+        blank=True,
         verbose_name=_('Cooled'),
     )
 
