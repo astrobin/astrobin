@@ -1,5 +1,5 @@
 import django_filters
-from django.db.models import QuerySet
+from django.db.models import Q, QuerySet
 from django_filters.rest_framework import FilterSet
 
 
@@ -16,7 +16,7 @@ class EquipmentItemFilter(FilterSet):
         if not is_authenticated or not is_moderator:
             return queryset.none()
 
-        queryset = queryset.exclude(created_by=self.request.user)
+        queryset = queryset.exclude(Q(created_by=self.request.user) | Q(brand__isnull=True))
 
         if condition:
             queryset = queryset.filter(reviewer_decision__isnull=True)
