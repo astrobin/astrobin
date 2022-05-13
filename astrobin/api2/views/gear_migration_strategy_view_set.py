@@ -31,7 +31,8 @@ class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
 
         if self.request.query_params.get('pending-review', 'false').lower() in ('1', 'true', 'yes'):
             queryset = queryset.filter(
-                Q(migration_flag_reviewer=None) &
+                Q(user__isnull=True) &
+                Q(migration_flag_reviewer__isnull=True) &
                 Q(
                     Q(migration_flag_reviewer_lock__isnull=True) |
                     Q(migration_flag_reviewer_lock=self.request.user)
