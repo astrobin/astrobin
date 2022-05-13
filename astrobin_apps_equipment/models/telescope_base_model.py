@@ -134,14 +134,25 @@ class TelescopeBaseModel(EquipmentItem):
     def properties(self):
         properties = []
 
-        for item_property in ('type', 'aperture', 'min_focal_length', 'max_focal_length', 'weight'):
-            property_label = self._meta.get_field(item_property).verbose_name
+        for item_property in ('type', 'aperture', 'focal_length', 'weight'):
+            if item_property == 'focal_length':
+                property_label = _('Focal length (mm)')
+            else:
+                property_label = self._meta.get_field(item_property).verbose_name
+
             if item_property == 'type':
                 property_value = self.type_label()
+            elif item_property == 'focal_length':
+                if self.min_focal_length == self.max_focal_length:
+                    property_value = '%g' % self.min_focal_length
+                else:
+                    property_value = '%g - %g' % (self.min_focal_length, self.max_focal_length)
             else:
                 property_value = getattr(self, item_property)
 
             if property_value is not None:
+                if property_value.__class__.__name__ == 'Decimal':
+                    property_value = '%g' % property_value
                 properties.append({'label': property_label, 'value': property_value})
 
         return properties

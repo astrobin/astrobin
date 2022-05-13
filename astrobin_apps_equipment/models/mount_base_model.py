@@ -112,6 +112,9 @@ class MountBaseModel(EquipmentItem):
                 property_value = getattr(self, item_property)
 
             if property_value is not None:
+                if property_value is not None:
+                    if property_value.__class__.__name__ == 'Decimal':
+                        property_value = '%g' % property_value
                 properties.append({'label': property_label, 'value': property_value})
 
         return properties
