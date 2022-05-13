@@ -793,7 +793,7 @@ def get_actstream_action_template_fragment_cache_key(action, language_code):
 
 
 @register.filter
-def show_click_and_drag_zoom(request, image):
+def show_click_and_drag_zoom(request) -> bool:
     return (not 'real' in request.GET and
             not (request.user_agent.is_touch_capable or
                  request.user_agent.is_mobile or
