@@ -53,7 +53,7 @@ class MigratableItemMixin:
                     Q(count=0) |
                     Q(
                         Q(count__gt=0) &
-                        Q(migration_strategies__user__isnull=True)
+                        Q(migration_strategies__user__isnull=False)
                     )
                 ) &
                 Q(
