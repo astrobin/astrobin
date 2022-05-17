@@ -54,8 +54,9 @@ from nested_comments.models import NestedComment
 from nested_comments.services.comment_notifications_service import CommentNotificationsService
 from toggleproperties.models import ToggleProperty
 from .enums.moderator_decision import ModeratorDecision
-from .models import CameraRenameProposal, Image, ImageRevision, UserProfile
+from .models import CameraRenameProposal, GearMigrationStrategy, Image, ImageRevision, UserProfile
 from .search_indexes import ImageIndex, UserIndex
+from .services.gear_service import GearService
 from .stories import add_story
 
 log = logging.getLogger('apps')
@@ -764,6 +765,28 @@ def group_images_changed(sender, instance, **kwargs):
 m2m_changed.connect(group_images_changed, sender=Group.images.through)
 
 
+def equipment_changed(sender, instance: Image, **kwargs):
+    if kwargs.get('action') in ['post_add', 'post_remove', 'post_clear']:
+        Image.all_objects.filter(pk=instance.pk).update(updated=timezone.now())
+
+m2m_changed.connect(equipment_changed, sender=Image.imaging_telescopes.through)
+m2m_changed.connect(equipment_changed, sender=Image.imaging_cameras.through)
+m2m_changed.connect(equipment_changed, sender=Image.mounts.through)
+m2m_changed.connect(equipment_changed, sender=Image.filters.through)
+m2m_changed.connect(equipment_changed, sender=Image.focal_reducers.through)
+m2m_changed.connect(equipment_changed, sender=Image.accessories.through)
+m2m_changed.connect(equipment_changed, sender=Image.software.through)
+m2m_changed.connect(equipment_changed, sender=Image.guiding_telescopes.through)
+m2m_changed.connect(equipment_changed, sender=Image.guiding_cameras.through)
+m2m_changed.connect(equipment_changed, sender=Image.imaging_telescopes_2.through)
+m2m_changed.connect(equipment_changed, sender=Image.imaging_cameras_2.through)
+m2m_changed.connect(equipment_changed, sender=Image.mounts_2.through)
+m2m_changed.connect(equipment_changed, sender=Image.filters_2.through)
+m2m_changed.connect(equipment_changed, sender=Image.accessories_2.through)
+m2m_changed.connect(equipment_changed, sender=Image.software_2.through)
+m2m_changed.connect(equipment_changed, sender=Image.guiding_telescopes_2.through)
+m2m_changed.connect(equipment_changed, sender=Image.guiding_cameras_2.through)
+
 def group_post_delete(sender, instance, **kwargs):
     try:
         instance.forum.delete()
@@ -1089,3 +1112,11 @@ def camera_rename_proposal_post_save(sender, instance: CameraRenameProposal, cre
 
 
 post_save.connect(camera_rename_proposal_post_save, sender=CameraRenameProposal)
+
+
+def gear_migration_strategy_post_save(sender, instance: GearMigrationStrategy, created: bool, **kwargs):
+    if created and instance.user:
+        GearService.approve_migration_strategy(instance, instance.user)
+
+
+post_save.connect(gear_migration_strategy_post_save, sender=GearMigrationStrategy)

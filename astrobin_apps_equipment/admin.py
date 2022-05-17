@@ -5,9 +5,11 @@ from django.contrib import admin
 from safedelete import HARD_DELETE
 
 from astrobin_apps_equipment.models import (
-    EquipmentPreset, Sensor, Camera, Telescope, CameraEditProposal, Mount,
+    AccessoryMigrationRecord, CameraMigrationRecord, EquipmentPreset, FilterMigrationRecord, MountMigrationRecord,
+    Sensor, Camera, SoftwareMigrationRecord, Telescope,
+    CameraEditProposal, Mount,
     Filter, Accessory,
-    Software, EquipmentItemGroup,
+    Software, EquipmentItemGroup, TelescopeMigrationRecord,
 )
 from astrobin_apps_equipment.models.accessory_edit_proposal import AccessoryEditProposal
 from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
@@ -183,6 +185,11 @@ class EquipmentItemGroupAdmin(admin.ModelAdmin):
         'name',
     )
 
+class EquipmentItemMigrationRecordAdmin(admin.ModelAdmin):
+    list_display = (
+        'image', 'from_gear', 'to_item', 'created'
+    )
+
 
 admin.site.register(EquipmentBrand, EquipmentBrandAdmin)
 admin.site.register(EquipmentRetailer, EquipmentRetailerAdmin)
@@ -204,3 +211,9 @@ admin.site.register(Software, SoftwareAdmin)
 admin.site.register(SoftwareEditProposal, SoftwareEditProposalAdmin)
 admin.site.register(EquipmentItemGroup, EquipmentItemGroupAdmin)
 admin.site.register(EquipmentPreset)
+admin.site.register(TelescopeMigrationRecord, EquipmentItemMigrationRecordAdmin)
+admin.site.register(CameraMigrationRecord, EquipmentItemMigrationRecordAdmin)
+admin.site.register(MountMigrationRecord, EquipmentItemMigrationRecordAdmin)
+admin.site.register(FilterMigrationRecord, EquipmentItemMigrationRecordAdmin)
+admin.site.register(AccessoryMigrationRecord, EquipmentItemMigrationRecordAdmin)
+admin.site.register(SoftwareMigrationRecord, EquipmentItemMigrationRecordAdmin)

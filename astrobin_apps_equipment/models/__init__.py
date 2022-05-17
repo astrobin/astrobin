@@ -13,3 +13,14 @@ from .filter import Filter
 from .accessory import Accessory
 from .software import Software
 from .equipment_preset import EquipmentPreset
+
+from .migration_record_base_model import MigrationRecordBaseModel
+from .migration_usage_type import MigrationUsageType
+from .migration_usage_type import MIGRATION_USAGE_TYPE_CHOICES
+from .telescope_migration_record import TelescopeMigrationRecord
+from .camera_migration_record import CameraMigrationRecord
+from .mount_migration_record import MountMigrationRecord
+from .filter_migration_record import FilterMigrationRecord
+from .accessory_migration_record import AccessoryMigrationRecord
+from .focal_reducer_migration_record import FocalReducerMigrationRecord
+from .software_migration_record import SoftwareMigrationRecord
