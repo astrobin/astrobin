@@ -37,10 +37,26 @@
                         </p>
 
                         {% if has_unmigrated_legacy_gear_items %}
-                            {% blocktrans trimmed %}
-                                Please migrate your equipment on AstroBin to the new database, as this helps consolidate
-                                the data and improve the search engine results.
-                            {% endblocktrans %}
+                            <hr/>
+
+                            <p>
+                                {% blocktrans trimmed %}
+                                    You are seeing this message because you have images on AstroBin associated with
+                                    equipment items in the legacy database.
+                                {% endblocktrans %}
+
+                                {% blocktrans trimmed %}
+                                    Please migrate your equipment on AstroBin to the new database, as this helps
+                                    consolidate the data and improve the search engine results.
+                                {% endblocktrans %}
+
+                                <a href="https://welcome.astrobin.com/blog/the-great-equipment-database-migration-of-2021"
+                                   target="_blank">
+                                    {% trans "Learn more." %}
+                                </a>
+                            </p>
+
+                            <br/>
 
                             <a class="btn btn-primary" href="{% app_redirection_service '/equipment/migration-tool' %}">
                                 {% trans "Begin migration" %}&hellip;

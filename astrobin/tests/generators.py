@@ -3,13 +3,15 @@ import string
 from datetime import date, timedelta
 
 from django.contrib.auth.models import Group, User
+from django.utils import timezone
 from pybb.models import Category, Forum, Post, Topic
 from subscription.models import Subscription, UserSubscription
 
 from astrobin.enums import SubjectType
 from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.models import (
-    Accessory, Camera, Collection, Filter, FocalReducer, Image, ImageRevision, Mount, Software, Telescope,
+    Accessory, Camera, Collection, Filter, FocalReducer, GearMigrationStrategy, Image, ImageRevision, Mount, Software,
+    Telescope,
 )
 from toggleproperties.models import ToggleProperty
 
@@ -69,7 +71,7 @@ class Generators:
         )
 
     @staticmethod
-    def telescope(*args, **kwargs):
+    def telescope(*args, **kwargs) -> Telescope:
         return Telescope.objects.create(
             make=kwargs.pop('make', 'Brand XYZ'),
             name=kwargs.pop('name', 'Telescope 100/1000'),
@@ -79,7 +81,7 @@ class Generators:
         )
 
     @staticmethod
-    def camera(*args, **kwargs):
+    def camera(*args, **kwargs) -> Camera:
         return Camera.objects.create(
             make=kwargs.pop('make', 'Brand XYZ'),
             name=kwargs.pop('name', 'Camera 123 Pro'),
@@ -90,7 +92,7 @@ class Generators:
         )
 
     @staticmethod
-    def mount(*args, **kwargs):
+    def mount(*args, **kwargs) -> Mount:
         return Mount.objects.create(
             make=kwargs.pop('make', 'Brand XYZ'),
             name=kwargs.pop('name', 'Mount Pro 1000'),
@@ -99,14 +101,14 @@ class Generators:
         )
 
     @staticmethod
-    def focal_reducer(*args, **kwargs):
+    def focal_reducer(*args, **kwargs) -> FocalReducer:
         return FocalReducer.objects.create(
             make=kwargs.pop('make', 'Brand XYZ'),
             name=kwargs.pop('name', 'Focal Reducer 0.75x'),
         )
 
     @staticmethod
-    def filter(*args, **kwargs):
+    def filter(*args, **kwargs) -> Filter:
         return Filter.objects.create(
             make=kwargs.pop('make', 'Brand XYZ'),
             name=kwargs.pop('name', 'Luminance'),
@@ -115,18 +117,31 @@ class Generators:
         )
 
     @staticmethod
-    def accessory(*args, **kwargs):
+    def accessory(*args, **kwargs) -> Accessory:
         return Accessory.objects.create(
             make=kwargs.pop('make', 'Brand XYZ'),
             name=kwargs.pop('name', 'Accessory 123'),
         )
 
     @staticmethod
-    def software(*args, **kwargs):
+    def software(*args, **kwargs) -> Software:
         return Software.objects.create(
             make=kwargs.pop('make', 'Brand XYZ'),
             name=kwargs.pop('name', 'Software 123'),
             type=kwargs.pop('type', 'OPEN_SOURCE_OR_FREEWARE'),
+        )
+
+    @staticmethod
+    def gear_migration_strategy(*args, **kwargs) -> GearMigrationStrategy:
+        return GearMigrationStrategy.objects.create(
+            gear=kwargs.pop('gear', Generators.telescope()),
+            user=kwargs.pop('user', None),
+            migration_flag=kwargs.pop('migration_flag', 'WRONG_TYPE'),
+            migration_flag_timestamp=kwargs.pop('migration_flag_timestamp', timezone.now()),
+            migration_content_object=kwargs.pop('migration_content_object', None),
+            migration_flag_moderator=kwargs.pop('migration_flag_moderator', Generators.user()),
+            migration_flag_reviewer=kwargs.pop('migration_flag_reviewer', None),
+            migration_flag_reviewer_decision=kwargs.pop('migration_flat_reviewer_decision', None),
         )
 
     @staticmethod

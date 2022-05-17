@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-from django.conf import settings
 from django.db.models import Q, QuerySet
 from django.http import HttpRequest
-from django.urls import reverse
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
 from rest_framework.decorators import action
@@ -14,10 +11,9 @@ from rest_framework.response import Response
 
 from astrobin.api2.serializers.gear_migration_strategy_serializer import GearMigrationStrategySerializer
 from astrobin.models import GearMigrationStrategy
+from astrobin.services.gear_service import GearService
 from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_own_migrator_or_readonly import \
     IsEquipmentModeratorOrOwnMigratorOrReadOnly
-from astrobin_apps_notifications.utils import build_notification_url, push_notification
-from common.services import AppRedirectionService
 
 
 class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
@@ -92,42 +88,8 @@ class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
         if request.user == strategy.migration_flag_moderator:
             raise PermissionDenied
 
-        strategy.migration_flag_reviewer = request.user
-        strategy.migration_flag_reviewer_decision = 'APPROVED'
-        strategy.migration_flag_reviewer_rejection_comment = None
-        strategy.migration_flag_reviewer_lock = None
-        strategy.migration_flag_reviewer_lock_timestamp = None
-        strategy.save()
-
-        strategy.gear.migration_flag_moderator_lock = None
-        strategy.gear.migration_flag_moderator_lock_timestamp = None
-        strategy.gear.save()
-
-        target = strategy.migration_content_object
-
-        push_notification(
-            [strategy.migration_flag_moderator],
-            request.user,
-            'equipment-item-migration-approved',
-            {
-                'user': request.user.userprofile.get_display_name(),
-                'user_url': build_notification_url(
-                    settings.BASE_URL + reverse('user_page', args=(request.user.username,))
-                ),
-                'migration_flag': strategy.migration_flag,
-                'reason': request.data.get('reason'),
-                'comment': request.data.get('comment'),
-                'legacy_item': strategy.gear,
-                'target_item': f'{target.brand.name if target.brand else _("(DIY)")} {target.name}' if target else None,
-                'target_url': build_notification_url(
-                    AppRedirectionService.redirect(
-                        f'/equipment'
-                        f'/explorer'
-                        f'/{target.item_type}/{target.pk}'
-                        f'/{target.slug}'
-                    )
-                ) if target else None,
-            }
+        strategy = GearService.approve_migration_strategy(
+            strategy, request.user, request.data.get('reason'), request.data.get('comment')
         )
 
         serializer = self.get_serializer(strategy)
@@ -146,44 +108,9 @@ class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
         if request.user == strategy.migration_flag_moderator:
             raise PermissionDenied
 
-        target = strategy.migration_content_object
-
-        push_notification(
-            [strategy.migration_flag_moderator],
-            request.user,
-            'equipment-item-migration-rejected',
-            {
-                'user': request.user.userprofile.get_display_name(),
-                'user_url': build_notification_url(
-                    settings.BASE_URL + reverse('user_page', args=(request.user.username,))
-                ),
-                'migration_flag': strategy.migration_flag,
-                'reason': request.data.get('reason'),
-                'comment': request.data.get('comment'),
-                'legacy_item': strategy.gear,
-                'target_item': f'{target.brand.name if target.brand else _("(DIY)")} {target.name}' if target else None,
-                'target_url': build_notification_url(
-                    AppRedirectionService.redirect(
-                        f'/equipment'
-                        f'/explorer'
-                        f'/{target.item_type}/{target.pk}'
-                        f'/{target.slug}'
-                    )
-                ) if target else None,
-                'migration_tool_url': build_notification_url(
-                    AppRedirectionService.redirect(
-                        f'/equipment'
-                        f'/migration-tool'
-                    )
-                ) if target else None,
-            }
+        strategy = GearService.reject_migration_strategy(
+            strategy, request.user, request.data.get('reason'), request.data.get('comment')
         )
-
-        strategy.gear.migration_flag_moderator_lock = None
-        strategy.gear.migration_flag_moderator_lock_timestamp = None
-        strategy.gear.save()
-
-        strategy.delete()
 
         serializer = self.get_serializer(strategy)
         return Response(serializer.data)

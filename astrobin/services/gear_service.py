@@ -1,14 +1,19 @@
 import math
 
 from annoying.functions import get_object_or_None
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models import Count
+from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import gettext
 
 from astrobin.models import CameraRenameProposal, Gear, GearMigrationStrategy, GearRenameRecord, GearUserInfo, Image
 from astrobin_apps_equipment.models import Camera, EquipmentBrand, Sensor
 from astrobin_apps_equipment.models.camera_base_model import CameraType
-from astrobin_apps_notifications.utils import push_notification
+from astrobin_apps_equipment.services import EquipmentService
+from astrobin_apps_notifications.utils import build_notification_url, push_notification
+from common.services import AppRedirectionService
 
 
 class GearService:
@@ -27,6 +32,98 @@ class GearService:
             migration_flag_moderator_lock=None,
             migration_flag_moderator_lock_timestamp=None,
         )
+
+    @staticmethod
+    def approve_migration_strategy(
+            strategy: GearMigrationStrategy, reviewer: User, reason: str = None, comment: str = None
+    ) -> GearMigrationStrategy:
+        strategy.migration_flag_reviewer = reviewer
+        strategy.migration_flag_reviewer_decision = 'APPROVED'
+        strategy.migration_flag_reviewer_lock = None
+        strategy.migration_flag_reviewer_lock_timestamp = None
+        strategy.save()
+
+        strategy.gear.migration_flag_moderator_lock = None
+        strategy.gear.migration_flag_moderator_lock_timestamp = None
+        strategy.gear.save()
+
+        EquipmentService.apply_migration_strategy(strategy)
+
+        target = strategy.migration_content_object
+
+        if strategy.migration_flag_moderator and strategy.migration_flag_moderator != reviewer:
+            push_notification(
+                [strategy.migration_flag_moderator],
+                reviewer,
+                'equipment-item-migration-approved',
+                {
+                    'user': reviewer.userprofile.get_display_name(),
+                    'user_url': build_notification_url(
+                        settings.BASE_URL + reverse('user_page', args=(reviewer.username,))
+                    ),
+                    'migration_flag': strategy.migration_flag,
+                    'reason': reason,
+                    'comment': comment,
+                    'legacy_item': strategy.gear,
+                    'target_item': f'{target.brand.name if target.brand else gettext("(DIY)")} {target.name}' if target else None,
+                    'target_url': build_notification_url(
+                        AppRedirectionService.redirect(
+                            f'/equipment'
+                            f'/explorer'
+                            f'/{target.item_type}/{target.pk}'
+                            f'/{target.slug}'
+                        )
+                    ) if target else None,
+                }
+            )
+
+        return strategy
+
+    @staticmethod
+    def reject_migration_strategy(
+            strategy: GearMigrationStrategy, reviewer: User, reason: str, comment: str
+    ) -> GearMigrationStrategy:
+        target = strategy.migration_content_object
+
+        if strategy.migration_flag_moderator and strategy.migration_flag_moderator != reviewer:
+            push_notification(
+                [strategy.migration_flag_moderator],
+                reviewer,
+                'equipment-item-migration-rejected',
+                {
+                    'user': reviewer.userprofile.get_display_name(),
+                    'user_url': build_notification_url(
+                        settings.BASE_URL + reverse('user_page', args=(reviewer.username,))
+                    ),
+                    'migration_flag': strategy.migration_flag,
+                    'reason': reason,
+                    'comment': comment,
+                    'legacy_item': strategy.gear,
+                    'target_item': f'{target.brand.name if target.brand else gettext("(DIY)")} {target.name}' if target else None,
+                    'target_url': build_notification_url(
+                        AppRedirectionService.redirect(
+                            f'/equipment'
+                            f'/explorer'
+                            f'/{target.item_type}/{target.pk}'
+                            f'/{target.slug}'
+                        )
+                    ) if target else None,
+                    'migration_tool_url': build_notification_url(
+                        AppRedirectionService.redirect(
+                            f'/equipment'
+                            f'/migration-tool'
+                        )
+                    ) if target else None,
+                }
+            )
+
+        strategy.gear.migration_flag_moderator_lock = None
+        strategy.gear.migration_flag_moderator_lock_timestamp = None
+        strategy.gear.save()
+
+        strategy.delete()
+
+        return strategy
 
     @staticmethod
     def process_camera_rename_proposal(proposal: CameraRenameProposal):
