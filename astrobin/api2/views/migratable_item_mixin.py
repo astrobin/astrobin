@@ -10,7 +10,11 @@ from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 
-from astrobin.models import Gear, GearMigrationStrategy, UserProfile, Telescope as LegacyTelescope, Camera as LegacyCamera, Mount as LegacyMount, Filter as LegacyFilter, Accessory as LegacyAccessory, Software as LegacySoftware, FocalReducer as LegacyFocalReducer
+from astrobin.models import (
+    Accessory as LegacyAccessory, Camera as LegacyCamera, Filter as LegacyFilter,
+    FocalReducer as LegacyFocalReducer, Gear, GearMigrationStrategy, Mount as LegacyMount, Software as LegacySoftware,
+    Telescope as LegacyTelescope,
+)
 from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Software, Telescope
 
 
@@ -37,7 +41,7 @@ class MigratableItemMixin:
         itemPks.extend([x.pk for x in LegacyFilter.objects.filter(images_using__user=user).distinct()])
         itemPks.extend([x.pk for x in LegacyAccessory.objects.filter(images_using__user=user).distinct()])
         itemPks.extend([x.pk for x in LegacyFocalReducer.objects.filter(images_using__user=user).distinct()])
-        itemPks.extend([x.pk for x in LegacyFocalReducer.objects.filter(images_using__user=user).distinct()])
+        itemPks.extend([x.pk for x in LegacySoftware.objects.filter(images_using__user=user).distinct()])
 
         return queryset.filter(pk__in=list(set(itemPks)))
 
