@@ -10,6 +10,7 @@ from astrobin.services.gear_service import GearService
 from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
+from astrobin_apps_equipment.services import EquipmentService
 
 register = Library()
 
@@ -214,3 +215,8 @@ def equipment_list_has_items(equipment_list) -> bool:
 @register.filter
 def image_has_legacy_gear(image: Image) -> bool:
     return GearService.image_has_legacy_gear(image)
+
+
+@register.filter
+def image_has_equipment_items(image: Image) -> bool:
+    return EquipmentService.image_has_equipment_items(image)

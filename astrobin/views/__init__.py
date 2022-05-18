@@ -1556,9 +1556,7 @@ def user_profile_edit_gear(request):
             uniq([x.get_make() for x in Gear.objects.exclude(make=None).exclude(make='')])),
         'all_gear_names': simplejson.dumps(
             uniq([x.get_name() for x in Gear.objects.exclude(name=None).exclude(name='')])),
-        'is_own_equipment_moderator': request.user.groups.filter(
-            name__in=['equipment_moderators', 'own_equipment_migrators']
-        ).exists(),
+        'is_own_equipment_migrator': request.user.groups.filter(name='own_equipment_migrators').exists(),
         'has_unmigrated_legacy_gear_items': GearService.has_unmigrated_legacy_gear_items(request.user),
     }
 

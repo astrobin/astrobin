@@ -1,5 +1,18 @@
 class EquipmentService:
     @staticmethod
+    def image_has_equipment_items(image) -> bool:
+        return (
+                image.imaging_telescopes_2.exists() or
+                image.guiding_telescopes_2.exists() or
+                image.mounts_2.exists() or
+                image.imaging_cameras_2.exists() or
+                image.guiding_cameras_2.exists() or
+                image.software_2.exists() or
+                image.filters_2.exists() or
+                image.accessories_2.exists()
+        )
+
+    @staticmethod
     def apply_migration_strategy(migration_strategy):
         from astrobin.models import Gear, GearMigrationStrategy, Image, Telescope, Camera, Mount, Filter, FocalReducer, Accessory, Software
         from astrobin_apps_equipment.models import (
