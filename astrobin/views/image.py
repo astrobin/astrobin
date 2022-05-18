@@ -28,6 +28,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.encoding import iri_to_uri, smart_text as smart_unicode
+from django.utils.http import urlencode
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import last_modified
@@ -367,8 +368,15 @@ class ImageDetailView(ImageDetailViewBase):
                     current_number = int(integration_re.group(1))
 
                     dsa_data['frames'][key] = {}
-                    dsa_data['frames'][key]['filter_url'] = a.filter.get_absolute_url() if a.filter is not None else '#'
-                    dsa_data['frames'][key]['filter'] = a.filter if a.filter is not None else ''
+                    if a.filter_2:
+                        dsa_data['frames'][key]['filter_url'] = f'/search/?{urlencode({"q": str(a.filter_2)})}'
+                        dsa_data['frames'][key]['filter'] = str(a.filter_2)
+                    elif a.filter:
+                        dsa_data['frames'][key]['filter_url'] = a.filter.get_absolute_url()
+                        dsa_data['frames'][key]['filter'] = a.filter
+                    else:
+                        dsa_data['frames'][key]['filter_url'] = '#'
+                        dsa_data['frames'][key]['filter'] = ''
                     dsa_data['frames'][key]['iso'] = 'ISO%d' % a.iso if a.iso is not None else ''
                     dsa_data['frames'][key]['gain'] = '(gain: %.2f)' % a.gain if a.gain is not None else ''
                     dsa_data['frames'][key]['f_number'] = f'f/{a.f_number}'.rstrip('0').rstrip('.') if a.f_number is not None else ''

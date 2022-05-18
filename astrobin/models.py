@@ -2105,6 +2105,15 @@ class DeepSky_Acquisition(Acquisition):
         related_name='deep_sky_acquisitions',
     )
 
+    filter_2 = models.ForeignKey(
+        FilterV2,
+        null=True,
+        blank=True,
+        verbose_name=_("Filter"),
+        on_delete=models.SET_NULL,
+        related_name='deep_sky_acquisitions',
+    )
+
     binning = models.IntegerField(
         null=True,
         blank=True,
