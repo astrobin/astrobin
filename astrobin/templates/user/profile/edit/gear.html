@@ -23,7 +23,7 @@
             {% if READONLY_MODE %}
                 {% include 'readonly_mode.html' %}
             {% else %}
-                {% if is_own_equipment_moderator %}
+                {% if is_own_equipment_migrator %}
                     <div class="alert alert-info">
                         <h4 class="alert-heading">
                             {% trans "AstroBin is rebuilding its equipment database!" %}

@@ -5,6 +5,7 @@
 {% load django_bootstrap_breadcrumbs %}
 {% load static %}
 {% load common_tags %}
+{% load astrobin_apps_equipment_tags %}
 
 {% block title %}{% trans "Edit your image: gear used" %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
@@ -19,7 +20,7 @@
 {% block content %}
     {% include 'image/edit/menu.html' %}
 
-    {% if no_gear %}
+    {% if no_gear and not request.user|is_own_equipment_migrator %}
         <div class="alert alert-warning">
             {% url 'profile_edit_gear' as the_url %}
             {% blocktrans %}Can't see anything here? Perhaps you should first add some gear in your
@@ -31,6 +32,31 @@
             {% blocktrans %}To choose the gear used for this image, drag items from the right side to left side, or
                 click the plus sign.{% endblocktrans %}
         </div>
+
+        {% if image|image_has_legacy_gear and image|image_has_equipment_items %}
+            <div class="alert alert-warning">
+                <p>
+                    <strong>{% trans "Warning!" %}</strong>
+                    {% blocktrans trimmed %}
+                        Your image features a mix of items from the legacy AstroBin equipment database and from the new
+                        equipment database. In order to edit the equipment items used for this image properly, please
+                        complete
+                        the migration of your legacy equipment items.
+                    {% endblocktrans %}
+
+                    <a href="https://welcome.astrobin.com/blog/the-great-equipment-database-migration-of-2021"
+                       target="_blank">
+                        {% trans "Learn more." %}
+                    </a>
+                </p>
+
+                <br />
+
+                <a class="btn btn-primary" href="{% app_redirection_service '/equipment/migration-tool' %}">
+                    {% trans "Begin migration" %}&hellip;
+                </a>
+            </div>
+        {% endif %}
 
         <form class="form-horizontal">
             <div class="form-actions">
