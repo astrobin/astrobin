@@ -15,6 +15,7 @@ class EquipmentService:
     @staticmethod
     def apply_migration_strategy(migration_strategy):
         from astrobin.models import Gear, GearMigrationStrategy, Image, Telescope, Camera, Mount, Filter, FocalReducer, Accessory, Software
+        from astrobin.models import DeepSky_Acquisition
         from astrobin_apps_equipment.models import (
             TelescopeMigrationRecord, CameraMigrationRecord,
             MountMigrationRecord, FilterMigrationRecord, FocalReducerMigrationRecord, AccessoryMigrationRecord,
@@ -65,6 +66,11 @@ class EquipmentService:
             for image in images.iterator():
                 getattr(image, usage).remove(classed_gear)
                 getattr(image, new_usage).add(migration_strategy.migration_content_object)
+
+                if usage == 'filters':
+                    deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image, filter=classed_gear)
+                    deep_sky_acquisitions.update(filter=None, filter_2=migration_strategy.migration_content_object)
+
                 params = dict(
                     image=image,
                     from_gear=classed_gear,

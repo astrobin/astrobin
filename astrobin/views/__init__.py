@@ -650,7 +650,7 @@ def image_edit_acquisition(request, id):
             )
             deep_sky_acquisition_formset = DSAFormSet(
                 instance=image,
-                form_kwargs={'user': request.user},
+                form_kwargs={'user': request.user, 'image': image},
                 queryset=DeepSky_Acquisition.objects.filter(image=image).order_by('pk')
             )
         else:
@@ -1021,7 +1021,7 @@ def image_edit_save_acquisition(request):
             deep_sky_acquisition_formset = DSAFormSet(
                 saving_data,
                 instance=image,
-                form_kwargs={'user': request.user},
+                form_kwargs={'user': request.user, 'image': image},
                 queryset=DeepSky_Acquisition.objects.filter(image=image).order_by('pk')
             )
             response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
@@ -1035,7 +1035,7 @@ def image_edit_save_acquisition(request):
                     )
                     deep_sky_acquisition_formset = DSAFormSet(
                         instance=image,
-                        form_kwargs={'user': request.user},
+                        form_kwargs={'user': request.user, 'image': image},
                         queryset=DeepSky_Acquisition.objects.filter(image=image).order_by('pk')
                     )
                     response_dict['deep_sky_acquisitions'] = deep_sky_acquisition_formset
