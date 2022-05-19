@@ -25,7 +25,7 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
             return False, Response('This edit proposal was already reviewed', HTTP_400_BAD_REQUEST)
 
         if edit_proposal.edit_proposal_by == request.user:
-            return False, Response('You cannot review nd edit proposal that you proposed', HTTP_400_BAD_REQUEST)
+            return False, Response('You cannot review an edit proposal that you proposed', HTTP_400_BAD_REQUEST)
 
         return True, None
 
