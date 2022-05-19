@@ -8,10 +8,15 @@ from .sensor import Sensor
 from .camera import Camera
 from .camera_edit_proposal import CameraEditProposal
 from .telescope import Telescope
+from .telescope_edit_proposal import TelescopeEditProposal
 from .mount import Mount
+from .mount_edit_proposal import MountEditProposal
 from .filter import Filter
+from .filter_edit_proposal import FilterEditProposal
 from .accessory import Accessory
+from .accessory_edit_proposal import AccessoryEditProposal
 from .software import Software
+from .software_edit_proposal import SoftwareEditProposal
 from .equipment_preset import EquipmentPreset
 
 from .migration_record_base_model import MigrationRecordBaseModel
