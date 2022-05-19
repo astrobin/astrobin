@@ -31,7 +31,7 @@ from subscription.signals import paid, signed_up
 from astrobin.tasks import process_camera_rename_proposal
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
-from astrobin_apps_iotd.models import IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
+from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_notifications.services import NotificationsService
 from astrobin_apps_notifications.tasks import push_notification_for_new_image, push_notification_for_new_image_revision
@@ -47,7 +47,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
 )
 from astrobin_apps_users.services import UserService
 from common.models import ABUSE_REPORT_DECISION_OVERRULED, AbuseReport
-from common.services import DateTimeService
+from common.services import AppRedirectionService, DateTimeService
 from common.services.mentions_service import MentionsService
 from common.services.moderation_service import ModerationService
 from nested_comments.models import NestedComment
@@ -319,6 +319,18 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
         mentions = cache.get("user.%d.comment_pre_save_mentions" % instance.author.pk, [])
 
     if not instance.pending_moderation:
+        model_class = instance.content_type.model_class()
+        if model_class == Image:
+            target_url = settings.BASE_URL + instance.content_object.get_absolute_url()
+            url = settings.BASE_URL + instance.get_absolute_url()
+        elif hasattr(model_class, 'edit_proposal_by'):
+            target_url = instance.content_object.get_absolute_url()
+            url = instance.get_absolute_url()
+        elif model_class == Iotd:
+            target_url = AppRedirectionService.redirect(f'/iotd/judgement-queue#comments-{instance.content_type.get_object_for_this_type(id=instance.object_id).pk}-{instance.pk}')
+            url = target_url
+        else:
+            return
         for username in mentions:
             user = get_object_or_None(User, username=username)
             if not user:
@@ -332,15 +344,13 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
                 push_notification(
                     [user], instance.author, 'new_comment_mention',
                     {
-                        'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.author),
+                        'url': build_notification_url(url, instance.author),
                         'user': instance.author.userprofile.get_display_name(),
                         'user_url': settings.BASE_URL + reverse_url(
                             'user_page', kwargs={'username': instance.author}
                         ),
                         'target': str(instance.content_object),
-                        'target_url': build_notification_url(
-                            settings.BASE_URL + instance.content_object.get_absolute_url(), instance.author
-                        ),
+                        'target_url': build_notification_url(target_url, instance.author),
                     }
                 )
 
