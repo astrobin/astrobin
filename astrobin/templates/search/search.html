@@ -30,11 +30,18 @@
         <div class="subnav subnav-fixed">
             <ul class="nav nav-pills">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="icon-sort icon-white"></i>
-                        {% trans "Sort" %}
-                        <span class="caret"></span>
-                    </a>
+                    {% if valid_usersubscription|can_access_advanced_search %}
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="icon-sort icon-white"></i>
+                            {% trans "Sort" %}
+                            <span class="caret"></span>
+                        </a>
+                    {% else %}
+                        <a data-toggle="modal" href="#feature-restricted-modal">
+                            <i class="icon-sort icon-white"></i>
+                            {% trans "Sort" %}
+                        </a>
+                    {% endif %}
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#">{% trans "The Sort options have moved to the filters sidebar." %}</a>
