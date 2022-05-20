@@ -109,6 +109,17 @@
                                                    :bortle-scale-max="bortleScaleMax"></bortle-scale-filter>
                             </div>
 
+                            {% if request.GET.d == "i" or request.GET.d == None %}
+                                <div class="search-filter">
+                                    <div class="search-filter-title">{% trans "Sort results" %}</div>
+                                    {% if valid_usersubscription|can_access_advanced_search %}
+                                        <sort-options :sort="sort"></sort-options>
+                                    {% else %}
+                                        {% include "./components/_filter_requires_lite_or_premium_or_ultimate.html" %}
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+
                             <add-filter v-if="availableFilters().length > 0 && isImageSearch()"
                                         :availableFilters="availableFilters()" @onAddFilter="onAddFilter"></add-filter>
                         </div>
@@ -361,6 +372,13 @@
                     {{ request.GET.bortle_scale_max }}
                 {% else %}
                     9
+                {% endif %},
+
+            sort:
+                {% if "sort" in request.GET and request.GET.sort %}
+                    "{{ request.GET.sort }}"
+                {% else %}
+                    undefined
                 {% endif %},
 
             allFilters: [

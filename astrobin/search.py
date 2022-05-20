@@ -505,7 +505,7 @@ class AstroBinSearchForm(SearchForm):
             elif order_by.endswith('pixel_scale'):
                 results = results.exclude(_missing_='pixel_scale')
 
-        if order_by is not None:
+        if order_by not in ('', None):
             if type(order_by) is list or type(order_by) is tuple:
                 results = results.order_by(*order_by)
             else:
