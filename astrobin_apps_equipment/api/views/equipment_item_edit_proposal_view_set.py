@@ -21,7 +21,7 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def check_edit_proposal_permissions(self, request, edit_proposal):
-        if edit_proposal.edit_proposal_reviewed_by != request.user:
+        if edit_proposal.edit_proposal_reviewed_by not in (None, request.user):
             return False, Response('This edit proposal was already reviewed by someone else', HTTP_400_BAD_REQUEST)
 
         if edit_proposal.edit_proposal_by == request.user:
