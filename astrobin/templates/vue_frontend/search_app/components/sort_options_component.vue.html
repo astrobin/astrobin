@@ -1,0 +1,83 @@
+{% load i18n %}
+
+<script type="text/x-template" id="sort-options-template">
+    <div class="form-group" :class="{highlighted: highlighted}">
+        <v-multiselect v-model="value" :options="options" track-by="id" label="label"
+                       selectLabel="" deselectLabel="" selectedLabel=""
+                       :searchable="true" placeholder="{% trans "Select" %}">
+        </v-multiselect>
+        <input type="hidden" name="sort" :value="getValue()">
+    </div>
+</script>
+
+<script>
+    Vue.component("sort-options", {
+        template: "#sort-options-template",
+        props: [
+            "sort"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        data: function () {
+            return {
+                value: null,
+                options: [
+                    {
+                        id: undefined,
+                        label: "{% trans "Relevance" %}",
+                    },
+                    {
+                        id: "-published",
+                        label: "{% trans "Publication" %}",
+                    },
+                    {
+                        id: "-likes",
+                        label: "{% trans "Likes" %}",
+                    },
+                    {
+                        id: "-integration",
+                        label: "{% trans "Integration" %}",
+                    },
+                    {
+                        id: "-views",
+                        label: "{% trans "Views" %}",
+                    },
+                    {
+                        id: "-field_radius",
+                        label: "{% trans "Field radius" %} ({% trans "decreasing" %})",
+                    },
+                    {
+                        id: "field_radius",
+                        label: "{% trans "Field radius" %} ({% trans "increasing" %})",
+                    },
+                    {
+                        id: "-pixel_scale",
+                        label: "{% trans "Pixel scale" %} ({% trans "decreasing" %})",
+                    },
+                    {
+                        id: "pixel_scale",
+                        label: "{% trans "Pixel scale" %} ({% trans "increasing" %})",
+                    },
+                ]
+            }
+        },
+        created: function () {
+            for (var i = 0; i < this.options.length; i++) {
+                if (this.options[i].id === this.sort) {
+                    this.value = this.options[i];
+                    return;
+                }
+            }
+        },
+        methods: {
+            getValue: function () {
+                if (this.value) {
+                    return this.value.id;
+                }
+
+                return null;
+            }
+        }
+    });
+</script>
