@@ -61,7 +61,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 )
             ).order_by(
                 'distance'
-            )[:10]
+            )
         elif sort == "az":
             queryset = queryset.order_by(Lower('brand__name'), Lower('name'))
 
