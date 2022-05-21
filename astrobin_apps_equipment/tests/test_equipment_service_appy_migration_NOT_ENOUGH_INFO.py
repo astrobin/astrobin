@@ -10,7 +10,7 @@ from astrobin_apps_equipment.services import EquipmentService
 
 
 class EquipmentServiceApplyMigrationMigrateTest(TestCase):
-    def testDIY_telescopeDIY_imaging(self):
+    def test_telescope_imaging(self):
         image = Generators.image()
         telescope = Generators.telescope()
 
@@ -26,7 +26,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
         self.assertFalse(TelescopeMigrationRecord.objects.filter(from_gear=telescope, image=image).exists())
         self.assertTrue(image.imaging_telescopes.filter(pk=telescope.pk).exists())
 
-    def testDIY_telescopeDIY_guiding(self):
+    def test_telescope_guiding(self):
         image = Generators.image()
         telescope = Generators.telescope()
 
@@ -42,7 +42,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
         self.assertFalse(TelescopeMigrationRecord.objects.filter(from_gear=telescope, image=image).exists())
         self.assertTrue(image.guiding_telescopes.filter(pk=telescope.pk).exists())
 
-    def testDIY_cameraDIY_imaging(self):
+    def test_camera_imaging(self):
         image = Generators.image()
         camera = Generators.camera()
 
@@ -58,7 +58,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
         self.assertFalse(CameraMigrationRecord.objects.filter(from_gear=camera, image=image).exists())
         self.assertTrue(image.imaging_cameras.filter(pk=camera.pk).exists())
 
-    def testDIY_cameraDIY_guiding(self):
+    def test_camera_guiding(self):
         image = Generators.image()
         camera = Generators.camera()
 
@@ -74,7 +74,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
         self.assertFalse(CameraMigrationRecord.objects.filter(from_gear=camera, image=image).exists())
         self.assertTrue(image.guiding_cameras.filter(pk=camera.pk).exists())
 
-    def testDIY_mount(self):
+    def test_mount(self):
         image = Generators.image()
         mount = Generators.mount()
 
@@ -90,7 +90,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
         self.assertFalse(MountMigrationRecord.objects.filter(from_gear=mount, image=image).exists())
         self.assertTrue(image.mounts.filter(pk=mount.pk).exists())
 
-    def testDIY_filter(self):
+    def test_filter(self):
         image = Generators.image()
         filter = Generators.filter()
 
@@ -106,7 +106,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
         self.assertFalse(FilterMigrationRecord.objects.filter(from_gear=filter, image=image).exists())
         self.assertTrue(image.filters.filter(pk=filter.pk).exists())
 
-    def testDIY_accessory(self):
+    def test_accessory(self):
         image = Generators.image()
         accessory = Generators.accessory()
 
@@ -122,7 +122,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
         self.assertFalse(AccessoryMigrationRecord.objects.filter(from_gear=accessory, image=image).exists())
         self.assertTrue(image.accessories.filter(pk=accessory.pk).exists())
 
-    def testDIY_focal_reducer(self):
+    def test_focal_reducer(self):
         image = Generators.image()
         focal_reducer = Generators.focal_reducer()
 
@@ -138,7 +138,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
         self.assertFalse(FocalReducerMigrationRecord.objects.filter(from_gear=focal_reducer, image=image).exists())
         self.assertTrue(image.focal_reducers.filter(pk=focal_reducer.pk).exists())
 
-    def testDIY_software(self):
+    def test_software(self):
         image = Generators.image()
         software = Generators.software()
 
