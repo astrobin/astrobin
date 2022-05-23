@@ -60,7 +60,9 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                     Q(created_by=self.request.user)
                 )
             ).order_by(
-                'distance'
+                'distance',
+                Lower('brand__name'),
+                Lower('name'),
             )
         elif sort == "az":
             queryset = queryset.order_by(Lower('brand__name'), Lower('name'))
