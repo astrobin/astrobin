@@ -1,3 +1,4 @@
+from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
@@ -19,7 +20,7 @@ from rest_framework.status import HTTP_400_BAD_REQUEST
 from astrobin.models import GearMigrationStrategy, Image
 from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_own_migrator_or_readonly import \
     IsEquipmentModeratorOrOwnMigratorOrReadOnly
-from astrobin_apps_equipment.models import EquipmentItem
+from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
@@ -48,22 +49,26 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 queryset = manager.filter(brand__isnull=False)
 
         if q:
-            queryset = queryset.annotate(
-                full_name=Concat('brand__name', Value(' '), 'name'),
-                distance=TrigramDistance('full_name', q)
-            ).filter(
-                Q(
-                    Q(distance__lte=.8) | Q(full_name__icontains=q)
-                ) &
-                Q(
-                    Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
-                    Q(created_by=self.request.user)
+            brand = get_object_or_None(EquipmentBrand, name__iexact=q)
+            if brand:
+                queryset = queryset.filter(brand=brand).order_by(Lower('name'))
+            else:
+                queryset = queryset.annotate(
+                    full_name=Concat('brand__name', Value(' '), 'name'),
+                    distance=TrigramDistance('full_name', q)
+                ).filter(
+                    Q(
+                        Q(distance__lte=.8) | Q(full_name__icontains=q)
+                    ) &
+                    Q(
+                        Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
+                        Q(created_by=self.request.user)
+                    )
+                ).order_by(
+                    'distance',
+                    Lower('brand__name'),
+                    Lower('name'),
                 )
-            ).order_by(
-                'distance',
-                Lower('brand__name'),
-                Lower('name'),
-            )
         elif sort == "az":
             queryset = queryset.order_by(Lower('brand__name'), Lower('name'))
 
