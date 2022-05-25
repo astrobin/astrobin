@@ -14,6 +14,7 @@ from astrobin_apps_equipment.api.serializers.camera_serializer import CameraSeri
 from astrobin_apps_equipment.api.views.equipment_item_view_set import EquipmentItemViewSet
 from astrobin_apps_equipment.models import Camera
 from astrobin_apps_equipment.models.camera_base_model import CameraType
+from astrobin_apps_equipment.services.camera_service import CameraService
 
 
 class CameraViewSet(EquipmentItemViewSet):
@@ -25,7 +26,7 @@ class CameraViewSet(EquipmentItemViewSet):
         queryset = super().get_queryset()
 
         if not include_variants:
-            queryset = queryset.exclude(Q(cooled=True) | Q(modified=True))
+            queryset = queryset.filter(CameraService.variant_exclusion_query())
 
         return queryset
 
@@ -70,12 +71,7 @@ class CameraViewSet(EquipmentItemViewSet):
                     Q(brand=int(brand)) &
                     Q(Q(distance__lte=.7) | Q(name__icontains=q)) &
                     ~Q(name=q) &
-                    Q(
-                        Q(
-                            Q(type=CameraType.DSLR_MIRRORLESS) & ~Q(modified=True) & ~Q(cooled=True)
-                        ) |
-                        ~Q(type=CameraType.DSLR_MIRRORLESS)
-                    )
+                    CameraService.variant_exclusion_query()
                 ).order_by('distance')[:10]
 
         serializer = self.serializer_class(objects, many=True)
@@ -93,15 +89,7 @@ class CameraViewSet(EquipmentItemViewSet):
         objects = manager.none()
 
         if brand:
-            objects = manager.filter(
-                Q(brand=int(brand)) &
-                Q(
-                    Q(
-                        Q(type=CameraType.DSLR_MIRRORLESS) & ~Q(modified=True) & ~Q(cooled=True)
-                    ) |
-                    ~Q(type=CameraType.DSLR_MIRRORLESS)
-                )
-            ).order_by('name')
+            objects = manager.filter(Q(brand=int(brand)) & CameraService.variant_exclusion_query()).order_by('name')
 
         serializer = self.serializer_class(objects, many=True)
         return Response(serializer.data)
