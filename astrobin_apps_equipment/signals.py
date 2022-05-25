@@ -15,6 +15,7 @@ from astrobin_apps_equipment.models import (
     Software, Telescope,
 )
 from astrobin_apps_equipment.models.accessory_edit_proposal import AccessoryEditProposal
+from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_equipment.models.filter_edit_proposal import FilterEditProposal
 from astrobin_apps_equipment.models.mount_edit_proposal import MountEditProposal
 from astrobin_apps_equipment.models.sensor_edit_proposal import SensorEditProposal
@@ -32,26 +33,44 @@ def create_notice_types(sender, **kwargs):
         notification.create_notice_type(notice_type[0], notice_type[1], notice_type[2], default=notice_type[3])
 
 
+@receiver(post_save, sender=Camera)
+def create_DSLR_mirrorless_camera_variants(sender, instance: Camera, created: bool, **kwargs):
+    if not created or instance.type != CameraType.DSLR_MIRRORLESS:
+        return
+
+    properties = dict(
+        brand = instance.brand,
+        name = instance.name,
+        image = instance.image,
+        type = instance.type,
+        sensor = instance.sensor,
+        cooled = False,
+        max_cooling = instance.max_cooling,
+        back_focus = instance.back_focus,
+    )
+
+    Camera.objects.get_or_create(**{**properties, 'modified': True, 'cooled': False})
+    Camera.objects.get_or_create(**{**properties, 'modified': True, 'cooled': True})
+    Camera.objects.get_or_create(**{**properties, 'modified': False, 'cooled': True})
+
+
 @receiver(pre_save, sender=Camera)
-def mirror_modified_camera_update(sender, instance: Camera, **kwargs):
-    if not instance.modified:
-        before_saving = get_object_or_None(Camera, pk=instance.pk)
-        if before_saving:
-            Camera.objects.filter(brand=before_saving.brand, name=before_saving.name, modified=True).update(
-                name=instance.name,
-                image=instance.image,
-                type=instance.type,
-                sensor=instance.sensor,
-                cooled=instance.cooled,
-                max_cooling=instance.max_cooling,
-                back_focus=instance.back_focus
-            )
+def mirror_camera_update_to_variants(sender, instance: Camera, **kwargs):
+    before_saving = get_object_or_None(Camera, pk=instance.pk)
+    if before_saving:
+        Camera.objects.filter(brand=before_saving.brand, name=before_saving.name).exclude(pk=instance.pk).update(
+            name=instance.name,
+            image=instance.image,
+            type=instance.type,
+            sensor=instance.sensor,
+            max_cooling=instance.max_cooling,
+            back_focus=instance.back_focus
+        )
 
 
 @receiver(post_softdelete, sender=Camera)
-def mirror_modified_camera_softdelete(sender, instance: Camera, **kwargs):
-    if not instance.modified:
-        Camera.objects.filter(brand=instance.brand, name=instance.name, modified=True).delete()
+def mirror_camera_softdelete_to_variants(sender, instance: Camera, **kwargs):
+    Camera.objects.filter(brand=instance.brand, name=instance.name).exclude(pk=instance.pk).delete()
 
 
 @receiver(post_softdelete, sender=Sensor)

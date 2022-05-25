@@ -42,6 +42,7 @@ class CameraBaseModel(EquipmentItem):
     cooled = models.BooleanField(
         null=True,
         blank=True,
+        default=None,
         verbose_name=_('Cooled'),
     )
 
@@ -95,5 +96,5 @@ class CameraBaseModel(EquipmentItem):
         unique_together = [
             'brand',
             'name',
-            'modified',
+            'cooled',
         ]
