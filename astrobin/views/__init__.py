@@ -1216,9 +1216,11 @@ def user_page(request, username):
                      "%.1f %s" % (user_sqs[0].integration, _("hours")) if user_sqs[0].integration else None),
                     (_('Average integration time'),
                      "%.1f %s" % (user_sqs[0].avg_integration, _("hours")) if user_sqs[0].avg_integration else None),
-                    (_('Forum posts'), "%d" % user_sqs[0].forum_posts if user_sqs[0].forum_posts else 0),
-                    (_('Comments'), "%d" % user_sqs[0].comments if user_sqs[0].comments else 0),
-                    (_('Likes'), "%d" % user_sqs[0].total_likes_received if user_sqs[0].total_likes_received else 0),
+                    (_('Forum posts written'), "%d" % user_sqs[0].forum_posts if user_sqs[0].forum_posts else 0),
+                    (_('Comments written'), "%d" % user_sqs[0].comments_written if user_sqs[0].comments_written else 0),
+                    (_('Comments received'), "%d" % user_sqs[0].comments if user_sqs[0].comments else 0),
+                    (_('Likes received'), "%d" % user_sqs[0].total_likes_received if user_sqs[0].total_likes_received else 0),
+                    (_('Views received'), "%d" % user_sqs[0].views if user_sqs[0].views else 0),
                 )
             except Exception as e:
                 log.error("User page (%d): unable to get stats from search index: %s" % (user.pk, str(e)))
