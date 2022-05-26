@@ -212,7 +212,7 @@ def _prepare_last_acquisition_date(obj):
 
 def _prepare_views(obj, content_type):
     try:
-        result = HitCount.objects.get(object_pk=obj.pk, content_type__name=content_type).hits
+        result = HitCount.objects.get(object_pk=obj.pk, content_type__model=content_type).hits
     except Exception as e:
         result = 0
 
