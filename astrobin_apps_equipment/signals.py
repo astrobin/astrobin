@@ -63,6 +63,12 @@ def mirror_camera_update_to_variants(sender, instance: Camera, **kwargs):
     before_saving = get_object_or_None(Camera, pk=instance.pk)
     if before_saving:
         Camera.objects.filter(brand=before_saving.brand, name=before_saving.name).exclude(pk=instance.pk).update(
+            reviewed_by=instance.reviewed_by,
+            reviewed_timestamp=instance.reviewed_timestamp,
+            reviewer_decision=instance.reviewer_decision,
+            reviewer_rejection_reason=instance.reviewer_rejection_reason,
+            reviewer_comment=instance.reviewer_comment,
+            brand=instance.brand,
             name=instance.name,
             website=instance.website,
             group=instance.group,
