@@ -3,7 +3,7 @@ import re
 from django.contrib.postgres.search import TrigramDistance
 from django.db.models import Q
 from rest_framework.decorators import action
-from rest_framework.exceptions import ParseError
+from rest_framework.exceptions import ParseError, ValidationError
 from rest_framework.generics import get_object_or_404
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
@@ -93,3 +93,24 @@ class CameraViewSet(EquipmentItemViewSet):
 
         serializer = self.serializer_class(objects, many=True)
         return Response(serializer.data)
+
+    @action(detail=True, methods=['POST'])
+    def approve(self, request, pk):
+        camera: Camera = self.get_object()
+        if camera.modified or (camera.type == CameraType.DSLR_MIRRORLESS and camera.cooled):
+            raise ValidationError(
+                'Modified and/or cooled variants of DSLR or mirrorless cameras cannot be edited/approved/rejected '
+                'directly. Please find the regular version of this camera and perform this action there.'
+            )
+        return super().approve(request, pk)
+
+
+    @action(detail=True, methods=['POST'])
+    def reject(self, request, pk):
+        camera: Camera = self.get_object()
+        if camera.modified or (camera.type == CameraType.DSLR_MIRRORLESS and camera.cooled):
+            raise ValidationError(
+                'Modified and/or cooled variants of DSLR or mirrorless cameras cannot be edited/approved/rejected '
+                'directly. Please find the regular version of this camera and perform this action there.'
+            )
+        return super().approve(request, pk)

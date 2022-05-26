@@ -1,15 +1,13 @@
-from annoying.functions import get_object_or_None
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
-from rest_framework.exceptions import ValidationError
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import FormParser, MultiPartParser
 
 from astrobin_apps_equipment.api.filters.camera_edit_proposal_filter import CameraEditProposalFilter
 from astrobin_apps_equipment.api.serializers.camera_edit_proposal_image_serializer import \
     CameraEditProposalImageSerializer
 from astrobin_apps_equipment.api.serializers.camera_edit_proposal_serializer import CameraEditProposalSerializer
 from astrobin_apps_equipment.api.views.equipment_item_edit_proposal_view_set import EquipmentItemEditProposalViewSet
-from astrobin_apps_equipment.models import CameraEditProposal, Camera
+from astrobin_apps_equipment.models import CameraEditProposal
 
 
 class CameraEditProposalViewSet(EquipmentItemEditProposalViewSet):

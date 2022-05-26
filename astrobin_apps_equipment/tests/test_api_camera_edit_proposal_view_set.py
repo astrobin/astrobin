@@ -23,4 +23,8 @@ class TestApiCameraEditProposalViewSet(TestCase):
             'type': CameraType.DEDICATED_DEEP_SKY,
         }, format='json')
 
-        self.assertContains(response, "Modified cameras do not support edit proposals", status_code=400)
+        self.assertContains(
+            response,
+            "Modified and/or cooled DSLR or mirrorless cameras do not support edit proposals",
+            status_code=400
+        )
