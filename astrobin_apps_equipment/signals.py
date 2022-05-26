@@ -39,8 +39,12 @@ def create_DSLR_mirrorless_camera_variants(sender, instance: Camera, created: bo
         return
 
     properties = dict(
+        klass = instance.klass,
+        created_by = instance.created_by,
         brand = instance.brand,
         name = instance.name,
+        website = instance.website,
+        group = instance.group,
         image = instance.image,
         type = instance.type,
         sensor = instance.sensor,
