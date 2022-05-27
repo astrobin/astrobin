@@ -135,3 +135,28 @@ class TestApiCameraViewSet(TestCase):
         )
 
         self.assertEquals(0, len(response.data))
+
+    def test_modified_camera_cannot_be_approved(self):
+        camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, modified=True)
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'approve/', format='json'
+        )
+
+        self.assertEquals(400, response.status_code)
+
+    def test_modified_camera_cannot_be_rejected(self):
+        camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, modified=True)
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'reject/', format='json'
+        )
+
+        self.assertEquals(400, response.status_code)
+

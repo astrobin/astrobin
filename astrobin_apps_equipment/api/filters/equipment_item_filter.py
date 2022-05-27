@@ -38,4 +38,4 @@ class EquipmentItemFilter(FilterSet):
 
     class Meta:
         abstract = True
-        fields = ['name', 'pending_review', 'pending_edit']
+        fields = ['brand', 'name', 'pending_review', 'pending_edit']
