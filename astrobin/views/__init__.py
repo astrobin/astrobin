@@ -1197,37 +1197,7 @@ def user_page(request, username):
         user=user,
         content_type=user_ct).count()
 
-    key = "User.%d.Stats.%s" % (user.pk, getattr(request, 'LANGUAGE_CODE', 'en'))
-    data = cache.get(key)
-    if not data:
-        user_sqs = SearchQuerySet().models(User).filter(django_id=user.pk)
-        data = {}
-
-        if user_sqs.count():
-            try:
-                data['stats'] = (
-                    (_('Member since'), user.date_joined \
-                        if user.userprofile.display_member_since \
-                        else None, 'datetime'),
-                    (_('Last seen online'), user.userprofile.last_seen or user.last_login \
-                        if user.userprofile.display_last_seen \
-                        else None, 'datetime'),
-                    (_('Total integration time'),
-                     "%.1f %s" % (user_sqs[0].integration, _("hours")) if user_sqs[0].integration else None),
-                    (_('Average integration time'),
-                     "%.1f %s" % (user_sqs[0].avg_integration, _("hours")) if user_sqs[0].avg_integration else None),
-                    (_('Forum posts written'), "%d" % user_sqs[0].forum_posts if user_sqs[0].forum_posts else 0),
-                    (_('Comments written'), "%d" % user_sqs[0].comments_written if user_sqs[0].comments_written else 0),
-                    (_('Comments received'), "%d" % user_sqs[0].comments if user_sqs[0].comments else 0),
-                    (_('Likes received'), "%d" % user_sqs[0].total_likes_received if user_sqs[0].total_likes_received else 0),
-                    (_('Views received'), "%d" % user_sqs[0].views if user_sqs[0].views else 0),
-                )
-            except Exception as e:
-                log.error("User page (%d): unable to get stats from search index: %s" % (user.pk, str(e)))
-
-            cache.set(key, data, 300)
-        else:
-            log.error("User page (%d): unable to get user's SearchQuerySet" % user.pk)
+    stats_data = UserService(user).get_profile_stats(getattr(request, 'LANGUAGE_CODE', 'en'))
 
     response_dict = {
         'paginate_by': settings.PAGINATE_USER_PAGE_BY,
@@ -1242,7 +1212,7 @@ def user_page(request, username):
         'subsection': subsection,
         'active': active,
         'menu': menu,
-        'stats': data['stats'] if 'stats' in data else None,
+        'stats': stats_data['stats'] if 'stats' in stats_data else None,
         'alias': 'gallery',
         'public_images_without_acquisition': UserService(user).get_public_images().filter(acquisition__isnull=True),
     }
