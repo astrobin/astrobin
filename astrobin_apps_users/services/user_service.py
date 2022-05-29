@@ -1,7 +1,7 @@
 import logging
 import math
 from datetime import timedelta
-from typing import List, Tuple
+from typing import List, Optional, Tuple
 
 import numpy as np
 from django.conf import settings
@@ -12,6 +12,7 @@ from django.core.cache.utils import make_template_fragment_key
 from django.db.models import Q, QuerySet
 from django.utils import timezone
 from django.utils.translation import ugettext as _
+from haystack.query import SearchQuerySet
 from pybb.models import Post
 from safedelete import HARD_DELETE
 from safedelete.queryset import SafeDeleteQueryset
@@ -28,10 +29,9 @@ log = logging.getLogger('apps')
 
 
 class UserService:
-    user = None  # type: User
+    user: Optional[User] = None
 
-    def __init__(self, user):
-        # type: (User) -> None
+    def __init__(self, user: Optional[User]):
         self.user = user
 
     @staticmethod
@@ -107,6 +107,51 @@ class UserService:
             'wip_images_no': wip.count(),
             'deleted_images_no': self.get_deleted_images().count(),
         }
+
+    def get_profile_stats(self, request_language: str):
+        if not self.user:
+            return {}
+        
+        user = self.user
+        key = f'User.{self.user.pk}.Stats.{request_language}'
+        data = cache.get(key)
+        if not data:
+            user_sqs = SearchQuerySet().models(User).filter(django_id=self.user.pk)
+            data = {}
+
+            if user_sqs.count() > 0:
+                result = user_sqs[0]
+                
+                try:
+                    data['stats'] = (
+                        (_('Member since'), user.date_joined \
+                            if user.userprofile.display_member_since \
+                            else None, 'datetime'),
+                        (_('Last seen online'), user.userprofile.last_seen or user.last_login \
+                            if user.userprofile.display_last_seen \
+                            else None, 'datetime'),
+                        (_('Total integration time'),
+                         "%.1f %s" % (result.integration, _("hours")) if result.integration else None),
+                        (_('Average integration time'),
+                         "%.1f %s" % (result.avg_integration, _("hours")) if user_sqs[
+                             0].avg_integration else None),
+                        (_('Forum posts written'), "%d" % result.forum_posts if result.forum_posts else 0),
+                        (_('Comments written'),
+                         "%d" % result.comments_written if result.comments_written else 0),
+                        (_('Comments received'), "%d" % result.comments if result.comments else 0),
+                        (_('Likes received'),
+                         "%d" % result.total_likes_received if result.total_likes_received else 0),
+                        (_('Views received'), "%d" % result.views if result.views else 0),
+                    )
+                except Exception as e:
+                    log.error("User page (%d): unable to get stats from search index: %s" % (user.pk, str(e)))
+                else:
+                    cache.set(key, data, 300)
+            else:
+                log.error("User page (%d): unable to get user's SearchQuerySet" % user.pk)
+                data = {}
+
+        return data
 
     def shadow_bans(self, other):
         # type: (User) -> bool

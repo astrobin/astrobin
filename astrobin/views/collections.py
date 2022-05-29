@@ -71,7 +71,8 @@ class UserCollectionsBase(View):
         except IOError:
             context['mobile_header_background'] = None
 
-        # TODO: stats
+        stats_data = UserService(user).get_profile_stats(getattr(self.request, 'LANGUAGE_CODE', 'en'))
+        context['stats'] = stats_data['stats'] if 'stats' in stats_data else None
 
         return context
 
