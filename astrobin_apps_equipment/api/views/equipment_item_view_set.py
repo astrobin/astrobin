@@ -20,6 +20,7 @@ from rest_framework.status import HTTP_400_BAD_REQUEST
 from astrobin.models import GearMigrationStrategy, Image
 from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_own_migrator_or_readonly import \
     IsEquipmentModeratorOrOwnMigratorOrReadOnly
+from astrobin_apps_equipment.api.throttle import EquipmentCreateThrottle
 from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
@@ -33,6 +34,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
     parser_classes = [CamelCaseJSONParser]
     permission_classes = [IsEquipmentModeratorOrOwnMigratorOrReadOnly]
     http_method_names = ['get', 'post', 'head']
+    throttle_classes = [EquipmentCreateThrottle]
 
     def get_queryset(self):
         q = self.request.GET.get('q')

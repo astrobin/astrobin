@@ -13,6 +13,7 @@ from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_own_migra
     IsEquipmentModeratorOrOwnMigratorOrReadOnly
 from astrobin_apps_equipment.api.serializers.brand_image_serializer import BrandImageSerializer
 from astrobin_apps_equipment.api.serializers.brand_serializer import BrandSerializer
+from astrobin_apps_equipment.api.throttle import EquipmentCreateThrottle
 
 
 class BrandViewSet(viewsets.ModelViewSet):
@@ -21,6 +22,7 @@ class BrandViewSet(viewsets.ModelViewSet):
     permission_classes = [IsEquipmentModeratorOrOwnMigratorOrReadOnly]
     filter_class = EquipmentBrandFilter
     http_method_names = ['get', 'post', 'head']
+    throttle_classes = [EquipmentCreateThrottle]
 
     def get_queryset(self):
         q = self.request.GET.get('q')
