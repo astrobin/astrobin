@@ -1909,7 +1909,7 @@ class IotdServiceTest(TestCase):
 
         image = Generators.image(submitted_for_iotd_tp_consideration = datetime.now())
         Generators.premium_subscription(image.user, "AstroBin Ultimate 2020+")
-        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS + 1)
+        image.published = datetime.now() - timedelta(days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS + 1)
         image.save(keep_deleted=True)
 
         self.assertEqual(
