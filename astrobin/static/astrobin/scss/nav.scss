@@ -146,6 +146,14 @@ body.full {
     right: .5rem;
     top: .5rem;
   }
+
+  .muted {
+    margin-top: .25rem;
+
+    &.with-icon {
+      margin-left: 1.5rem;
+    }
+  }
 }
 
 .dropdown-menu > li > a:hover,
