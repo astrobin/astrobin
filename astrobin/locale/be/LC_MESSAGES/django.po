@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-21 20:35+0000\n"
+"POT-Creation-Date: 2022-06-02 08:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3183,9 +3183,6 @@ msgstr ""
 msgid "Explore"
 msgstr ""
 
-msgid "The Big Wall"
-msgstr ""
-
 msgid "Advanced search"
 msgstr ""
 
@@ -4048,39 +4045,26 @@ msgstr ""
 msgid "Edit your image: gear used"
 msgstr ""
 
-msgid "AstroBin is rebuilding its equipment database!"
-msgstr ""
-
-msgid ""
-"Using this form to edit the equipment used for this image is no longer "
-"possible, because it interfaces with the legacy equipment database on "
-"AstroBin."
-msgstr ""
-
-msgid ""
-"To begin using the new and improved equipment database for this image, "
-"please migrate your gear."
-msgstr ""
-
-msgid ""
-"Please note: the migration process goes thru a review stage. If you have "
-"completed your migration but still see this notice, it could because your "
-"migration proposals haven't been approved yet."
-msgstr ""
-
-msgid "Begin migration"
-msgstr ""
-
 #, python-format
 msgid ""
 "Can't see anything here? Perhaps you should first add some gear in your\n"
-"                    <a href=\"%(the_url)s\">profile</a>!"
+"                <a href=\"%(the_url)s\">profile</a>!"
 msgstr ""
 
 msgid ""
 "To choose the gear used for this image, drag items from the right side to "
 "left side, or\n"
-"                    click the plus sign."
+"                click the plus sign."
+msgstr ""
+
+msgid ""
+"Your image features a mix of items from the legacy AstroBin equipment "
+"database and from the new equipment database. In order to edit the equipment "
+"items used for this image properly, please complete the migration of your "
+"legacy equipment items."
+msgstr ""
+
+msgid "Begin migration"
 msgstr ""
 
 msgid ""
@@ -4231,6 +4215,10 @@ msgstr ""
 
 msgctxt "Noun, e.g. 'This element has 10 comments'"
 msgid "Comments"
+msgstr ""
+
+msgctxt "Pertaining to cameras, e.g. a modified Canon"
+msgid "modified"
 msgstr ""
 
 msgid "No gear yet."
@@ -4537,9 +4525,6 @@ msgstr ""
 msgid "A gear item that you used was renamed"
 msgstr ""
 
-msgid "Old brand"
-msgstr ""
-
 msgid "Old name"
 msgstr ""
 
@@ -4553,6 +4538,11 @@ msgid ""
 "This operation was performed because at least 5 owners of this equipment "
 "item (or more than half, whichever is greatest), approved it, while nobody "
 "rejected it."
+msgstr ""
+
+msgid ""
+"If this item is a camera that has been modified for astrophotography, this "
+"information will not be lost."
 msgstr ""
 
 #, python-format
@@ -5740,19 +5730,7 @@ msgstr ""
 msgid "Sort"
 msgstr ""
 
-msgid "Relevance"
-msgstr ""
-
-msgid "Large field radius"
-msgstr ""
-
-msgid "Small field radius"
-msgstr ""
-
-msgid "Large pixel scale"
-msgstr ""
-
-msgid "Small pixel scale"
+msgid "The Sort options have moved to the filters sidebar."
 msgstr ""
 
 msgid "This list is currently empty."
@@ -6017,9 +5995,22 @@ msgstr ""
 msgid "Edit your astrophotography gear"
 msgstr ""
 
+msgid "AstroBin is rebuilding its equipment database!"
+msgstr ""
+
 msgid ""
 "This page is no longer necessary, as you can add new equipment items "
 "directly during the image upload or editing process."
+msgstr ""
+
+msgid ""
+"You are seeing this message because you have images on AstroBin associated "
+"with equipment items in the legacy database."
+msgstr ""
+
+msgid ""
+"Please migrate your equipment on AstroBin to the new database, as this helps "
+"consolidate the data and improve the search engine results."
 msgstr ""
 
 msgid "Edit gear item"
@@ -6276,6 +6267,9 @@ msgstr ""
 msgid "${filter.label}"
 msgstr ""
 
+msgid "Sort results"
+msgstr ""
+
 msgid "Results"
 msgstr ""
 
@@ -6335,8 +6329,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Lite or Premium</"
-"a> subscription."
+"Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Lite, Premium, "
+"or Ultimate</a> subscription."
 msgstr ""
 
 #, python-format
@@ -6429,6 +6423,15 @@ msgstr ""
 msgid ""
 "Alternatively, you can use the Subject/Telescope/Camera filters or any other "
 "advanced filters to fine-tune your search."
+msgstr ""
+
+msgid "Relevance"
+msgstr ""
+
+msgid "decreasing"
+msgstr ""
+
+msgid "increasing"
 msgstr ""
 
 msgid ""
@@ -6552,18 +6555,6 @@ msgid "Form saved. A new advanced plate-solving process will start now."
 msgstr ""
 
 msgid "Fill in one session, before adding more."
-msgstr ""
-
-msgid "Last seen online"
-msgstr ""
-
-msgid "Total integration time"
-msgstr ""
-
-msgid "hours"
-msgstr ""
-
-msgid "Average integration time"
 msgstr ""
 
 msgid ""

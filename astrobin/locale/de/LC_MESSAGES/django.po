@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-21 20:35+0000\n"
-"PO-Revision-Date: 2022-04-21 22:02+0200\n"
+"POT-Creation-Date: 2022-06-02 08:06+0000\n"
+"PO-Revision-Date: 2022-05-31 23:47+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -3405,9 +3405,6 @@ msgstr "Abonnierte Themen"
 msgid "Explore"
 msgstr "Durchsuchen"
 
-msgid "The Big Wall"
-msgstr "Die Grosse Mauer"
-
 msgid "Advanced search"
 msgstr "Erweiterte Suche"
 
@@ -3806,6 +3803,9 @@ msgid ""
 "Please use the <strong>Actions</strong> menu from now on, if you want to "
 "submit."
 msgstr ""
+"Die Einreichung zur %(_0)sIOTD/TP%(_1)s Berücksichtigung erfolgt nicht mehr "
+"automatisch. Bitte verwenden Sie ab jetzt das Menü <strong>Actions</strong>, "
+"wenn Sie einreichen möchten."
 
 msgid "If you want, you can set up auto-submission in your preferences."
 msgstr ""
@@ -4409,40 +4409,33 @@ msgstr "Fügen Sie hier Ihre Bildbeschreibung ein..."
 msgid "Edit your image: gear used"
 msgstr "Bild bearbeiten: verwendete Ausrüstung"
 
-msgid "AstroBin is rebuilding its equipment database!"
-msgstr "AstroBin erneuert seine Ausrüstungsdatenbank!"
-
-msgid ""
-"Using this form to edit the equipment used for this image is no longer "
-"possible, because it interfaces with the legacy equipment database on "
-"AstroBin."
-msgstr ""
-
-msgid ""
-"To begin using the new and improved equipment database for this image, "
-"please migrate your gear."
-msgstr ""
-
-msgid ""
-"Please note: the migration process goes thru a review stage. If you have "
-"completed your migration but still see this notice, it could because your "
-"migration proposals haven't been approved yet."
-msgstr ""
-
-msgid "Begin migration"
-msgstr "Start der Migration"
-
 #, python-format
 msgid ""
 "Can't see anything here? Perhaps you should first add some gear in your\n"
-"                    <a href=\"%(the_url)s\">profile</a>!"
+"                <a href=\"%(the_url)s\">profile</a>!"
 msgstr ""
+"Kannst Du hier nichts sehen? Vielleicht solltest Du zuerst etwas Ausrüstung "
+"zu Deinem\n"
+"               <a href=\"%(the_url)s\"> Profil hinzufügen</a>!"
 
 msgid ""
 "To choose the gear used for this image, drag items from the right side to "
 "left side, or\n"
-"                    click the plus sign."
+"                click the plus sign."
 msgstr ""
+"Um die für dieses Bild verwendete Ausrüstung zu wählen, ziehe Elemente von "
+"der rechten Seite auf die linke Seite, oder\n"
+"                klicke auf das Plus-Zeichen."
+
+msgid ""
+"Your image features a mix of items from the legacy AstroBin equipment "
+"database and from the new equipment database. In order to edit the equipment "
+"items used for this image properly, please complete the migration of your "
+"legacy equipment items."
+msgstr ""
+
+msgid "Begin migration"
+msgstr "Start der Migration"
 
 msgid ""
 "Use this button to import the gear settings from another image of yours."
@@ -4614,6 +4607,10 @@ msgstr "Lesezeichen"
 msgctxt "Noun, e.g. 'This element has 10 comments'"
 msgid "Comments"
 msgstr "Kommentare"
+
+msgctxt "Pertaining to cameras, e.g. a modified Canon"
+msgid "modified"
+msgstr ""
 
 msgid "No gear yet."
 msgstr "Bisher keine Ausrüstung eingetragen."
@@ -4977,9 +4974,6 @@ msgstr "Forumsbeitrag anzeigen"
 msgid "A gear item that you used was renamed"
 msgstr "Ein Ausrüstungsgegenstand, den Sie benutzt haben, wurde umbenannt"
 
-msgid "Old brand"
-msgstr "Alte Bezeichnung"
-
 msgid "Old name"
 msgstr "Alter Name"
 
@@ -4997,6 +4991,11 @@ msgstr ""
 "Dies wurde durchgeführt, weil mindestens 5 Besitzer dieses "
 "Ausrüstungsgegenstandes (oder mehr als die Hälfte, je nachdem, was größer "
 "ist) zugestimmt haben, während niemand abgelehnt hat."
+
+msgid ""
+"If this item is a camera that has been modified for astrophotography, this "
+"information will not be lost."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -6297,7 +6296,7 @@ msgid "Subscribe"
 msgstr "Abonnieren"
 
 msgid "Search this topic"
-msgstr ""
+msgstr "Dieses Thema durchsuchen"
 
 msgid "The posts below are new since your last visit to this topic."
 msgstr ""
@@ -6471,20 +6470,8 @@ msgstr ""
 msgid "Sort"
 msgstr "Sortieren nach"
 
-msgid "Relevance"
-msgstr "Relevanz"
-
-msgid "Large field radius"
-msgstr "Großer Feldradius"
-
-msgid "Small field radius"
-msgstr "Kleiner Feldradius"
-
-msgid "Large pixel scale"
-msgstr "Großer Pixelmaßstab"
-
-msgid "Small pixel scale"
-msgstr "Kleiner Pixelmaßstab"
+msgid "The Sort options have moved to the filters sidebar."
+msgstr ""
 
 msgid "This list is currently empty."
 msgstr "Diese Liste ist derzeit leer."
@@ -6814,9 +6801,25 @@ msgstr ""
 msgid "Edit your astrophotography gear"
 msgstr "Astrofotografie Ausrüstung bearbeiten"
 
+msgid "AstroBin is rebuilding its equipment database!"
+msgstr "AstroBin erneuert seine Ausrüstungsdatenbank!"
+
 msgid ""
 "This page is no longer necessary, as you can add new equipment items "
 "directly during the image upload or editing process."
+msgstr ""
+"Diese Seite wird nicht mehr benötigt, da Sie neue Ausrüstungsgegenstände "
+"direkt während des Bild-Uploads oder -Bearbeitungsprozesses hinzufügen "
+"können."
+
+msgid ""
+"You are seeing this message because you have images on AstroBin associated "
+"with equipment items in the legacy database."
+msgstr ""
+
+msgid ""
+"Please migrate your equipment on AstroBin to the new database, as this helps "
+"consolidate the data and improve the search engine results."
 msgstr ""
 
 msgid "Edit gear item"
@@ -7108,6 +7111,9 @@ msgstr "Filter ausblenden"
 msgid "${filter.label}"
 msgstr "${filter.label}"
 
+msgid "Sort results"
+msgstr ""
+
 msgid "Results"
 msgstr "Ergebnisse"
 
@@ -7169,11 +7175,9 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Lite or Premium</"
-"a> subscription."
+"Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Lite, Premium, "
+"or Ultimate</a> subscription."
 msgstr ""
-"Entschuldigung, dieser Filter erfordert ein <a href=\"%(url)s\">AstroBin "
-"Lite oder Premium</a> Abonnement."
 
 #, python-format
 msgid ""
@@ -7272,6 +7276,15 @@ msgid ""
 msgstr ""
 "Alternativ können Sie die Filter Motiv/Teleskop/Kamera oder andere "
 "erweiterte Filter verwenden, um Ihre Suche zu verfeinern."
+
+msgid "Relevance"
+msgstr "Relevanz"
+
+msgid "decreasing"
+msgstr ""
+
+msgid "increasing"
+msgstr ""
 
 msgid ""
 "What deep-sky astronomical subject are you looking for? E.g. M 31, NGC 2976, "
@@ -7403,18 +7416,6 @@ msgstr ""
 
 msgid "Fill in one session, before adding more."
 msgstr "Bitte zuerst eine Session ausfüllen, bevor Du weitere hinzufügst."
-
-msgid "Last seen online"
-msgstr "Zuletzt online"
-
-msgid "Total integration time"
-msgstr "Gesamtaufnahmedauer"
-
-msgid "hours"
-msgstr "Stunden"
-
-msgid "Average integration time"
-msgstr "Durchschnittliche Aufnahmedauer"
 
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
@@ -7595,6 +7596,9 @@ msgstr ""
 #~ "Sie sind im Begriff, den shadow-ban von diesem User zu entfernen. Damit "
 #~ "werden dessen Kommentare, Nachrichten etc. auf Ihren Inhalten wieder "
 #~ "sichtbar."
+
+#~ msgid "The Big Wall"
+#~ msgstr "Die Grosse Mauer"
 
 #~ msgid "Instructions and examples"
 #~ msgstr "Anleitung und Beispiele"
@@ -7868,23 +7872,6 @@ msgstr ""
 #~ "Formular</a>."
 
 #~ msgid ""
-#~ "Can't see anything here? Perhaps you should first add some gear in your\n"
-#~ "                <a href=\"%(the_url)s\">profile</a>!"
-#~ msgstr ""
-#~ "Kannst Du hier nichts sehen? Vielleicht solltest Du zuerst etwas "
-#~ "Ausrüstung zu Deinem\n"
-#~ "               <a href=\"%(the_url)s\"> Profil hinzufügen</a>!"
-
-#~ msgid ""
-#~ "To choose the gear used for this image, drag items from the right side to "
-#~ "left side, or\n"
-#~ "                click the plus sign."
-#~ msgstr ""
-#~ "Um die für dieses Bild verwendete Ausrüstung zu wählen, ziehe Elemente "
-#~ "von der rechten Seite auf die linke Seite, oder\n"
-#~ "                klicke auf das Plus-Zeichen."
-
-#~ msgid ""
 #~ "You are about to open a large file of about %(size)s. Depending on your "
 #~ "download speed, it might take several seconds or even minutes to view the "
 #~ "file."
@@ -8086,6 +8073,18 @@ msgstr ""
 
 #~ msgid "Reset password at %(site_name)s"
 #~ msgstr "Passwort für %(site_name)s zurücksetzen"
+
+#~ msgid "Large field radius"
+#~ msgstr "Großer Feldradius"
+
+#~ msgid "Small field radius"
+#~ msgstr "Kleiner Feldradius"
+
+#~ msgid "Large pixel scale"
+#~ msgstr "Großer Pixelmaßstab"
+
+#~ msgid "Small pixel scale"
+#~ msgstr "Kleiner Pixelmaßstab"
 
 #~ msgid "Search for celestial objects, equipment items, users, etc..."
 #~ msgstr ""
@@ -8299,6 +8298,15 @@ msgstr ""
 #~ msgid "Last login"
 #~ msgstr "Letzter Login"
 
+#~ msgid "Total integration time"
+#~ msgstr "Gesamtaufnahmedauer"
+
+#~ msgid "hours"
+#~ msgstr "Stunden"
+
+#~ msgid "Average integration time"
+#~ msgstr "Durchschnittliche Aufnahmedauer"
+
 #~ msgid "Accessory"
 #~ msgstr "Zubehör"
 
@@ -8340,6 +8348,16 @@ msgstr ""
 #~ msgid "New image revision by %(user)s on \"%(title)s\""
 #~ msgstr "Neue Bildrevision von %(user)s auf \"%(title)s\""
 
+#~ msgid ""
+#~ "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Lite or "
+#~ "Premium</a> subscription."
+#~ msgstr ""
+#~ "Entschuldigung, dieser Filter erfordert ein <a href=\"%(url)s\">AstroBin "
+#~ "Lite oder Premium</a> Abonnement."
+
+#~ msgid "Last seen online"
+#~ msgstr "Zuletzt online"
+
 #~ msgid "Please migrate your gear."
 #~ msgstr "Bitte migrieren Sie Ihre Ausrüstung."
 
@@ -8352,9 +8370,55 @@ msgstr ""
 #~ "automatisch. Bitte benutzt von nun an die <strong>Actions</strong>, wenn "
 #~ "ihr etwas einreichen wollt."
 
+#~ msgid "Old brand"
+#~ msgstr "Alte Bezeichnung"
+
 #~ msgid "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment."
 #~ msgstr ""
 #~ "<a href=\"%(user_url)s\">%(user)s</a> hat auf Ihren Kommentar geantwortet."
 
 #~ msgid "View large"
 #~ msgstr "Großansicht"
+
+#~ msgid ""
+#~ "Using this form to edit the equipment used for this image is no longer "
+#~ "possible, because it interfaces with the legacy equipment database on "
+#~ "AstroBin."
+#~ msgstr ""
+#~ "Die Verwendung dieses Formulars zur Bearbeitung der für dieses Bild "
+#~ "verwendeten Ausrüstung ist nicht mehr möglich, da es mit der alten "
+#~ "Ausrüstungsdatenbank von AstroBin verbunden ist."
+
+#~ msgid ""
+#~ "To begin using the new and improved equipment database for this image, "
+#~ "please migrate your gear."
+#~ msgstr ""
+#~ "Um die neue und verbesserte Ausrüstungsdatenbank für dieses Bild nutzen "
+#~ "zu können, migrieren Sie bitte Ihre Ausrüstung."
+
+#~ msgid ""
+#~ "Please note: the migration process goes thru a review stage. If you have "
+#~ "completed your migration but still see this notice, it could because your "
+#~ "migration proposals haven't been approved yet."
+#~ msgstr ""
+#~ "Bitte beachten Sie: Der Migrationsprozess durchläuft eine Prüfungsphase. "
+#~ "Wenn Sie Ihre Migration abgeschlossen haben, aber immer noch diesen "
+#~ "Hinweis sehen, könnte es daran liegen, dass Ihre Migrationsvorschläge "
+#~ "noch nicht genehmigt wurden."
+
+#~ msgid ""
+#~ "Can't see anything here? Perhaps you should first add some gear in your\n"
+#~ "                    <a href=\"%(the_url)s\">profile</a>!"
+#~ msgstr ""
+#~ "Sie können hier nichts sehen? Dann sollten Sie zuerst Ausrüstung zu "
+#~ "Ihrem\n"
+#~ "                    <a href=\"%(the_url)s\">profile</a> hinzufügen!"
+
+#~ msgid ""
+#~ "To choose the gear used for this image, drag items from the right side to "
+#~ "left side, or\n"
+#~ "                    click the plus sign."
+#~ msgstr ""
+#~ "Um die für dieses Bild verwendete Ausrüstung auszuwählen, ziehen Sie die "
+#~ "Elemente von der rechten Seite auf die linke Seite, oder klicken Sie auf "
+#~ "das Pluszeichen."

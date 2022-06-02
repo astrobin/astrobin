@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-21 20:35+0000\n"
-"PO-Revision-Date: 2022-04-21 22:02+0200\n"
+"POT-Creation-Date: 2022-06-02 08:06+0000\n"
+"PO-Revision-Date: 2022-05-31 23:47+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Simplified Chinese\n"
 "Language: zh-Hans\n"
@@ -3248,9 +3248,6 @@ msgstr "已订阅主题"
 msgid "Explore"
 msgstr "浏览"
 
-msgid "The Big Wall"
-msgstr "作品墙"
-
 msgid "Advanced search"
 msgstr "高级搜索"
 
@@ -4164,39 +4161,30 @@ msgstr ""
 msgid "Edit your image: gear used"
 msgstr "编辑您的作品：使用的设备"
 
-msgid "AstroBin is rebuilding its equipment database!"
-msgstr ""
-
-msgid ""
-"Using this form to edit the equipment used for this image is no longer "
-"possible, because it interfaces with the legacy equipment database on "
-"AstroBin."
-msgstr ""
-
-msgid ""
-"To begin using the new and improved equipment database for this image, "
-"please migrate your gear."
-msgstr ""
-
-msgid ""
-"Please note: the migration process goes thru a review stage. If you have "
-"completed your migration but still see this notice, it could because your "
-"migration proposals haven't been approved yet."
-msgstr ""
-
-msgid "Begin migration"
-msgstr ""
-
 #, python-format
 msgid ""
 "Can't see anything here? Perhaps you should first add some gear in your\n"
-"                    <a href=\"%(the_url)s\">profile</a>!"
+"                <a href=\"%(the_url)s\">profile</a>!"
 msgstr ""
+"这里什么都没有？也许您应该尝试在                \n"
+"<a href=\"%(the_url)s\"> 个人资料</a> 中添加一些设备！"
 
 msgid ""
 "To choose the gear used for this image, drag items from the right side to "
 "left side, or\n"
-"                    click the plus sign."
+"                click the plus sign."
+msgstr ""
+"将这个项目从右边拖到左边，\n"
+"或者点击“+”号"
+
+msgid ""
+"Your image features a mix of items from the legacy AstroBin equipment "
+"database and from the new equipment database. In order to edit the equipment "
+"items used for this image properly, please complete the migration of your "
+"legacy equipment items."
+msgstr ""
+
+msgid "Begin migration"
 msgstr ""
 
 msgid ""
@@ -4354,6 +4342,10 @@ msgstr ""
 
 msgctxt "Noun, e.g. 'This element has 10 comments'"
 msgid "Comments"
+msgstr ""
+
+msgctxt "Pertaining to cameras, e.g. a modified Canon"
+msgid "modified"
 msgstr ""
 
 msgid "No gear yet."
@@ -4690,9 +4682,6 @@ msgstr ""
 msgid "A gear item that you used was renamed"
 msgstr ""
 
-msgid "Old brand"
-msgstr ""
-
 msgid "Old name"
 msgstr ""
 
@@ -4706,6 +4695,11 @@ msgid ""
 "This operation was performed because at least 5 owners of this equipment "
 "item (or more than half, whichever is greatest), approved it, while nobody "
 "rejected it."
+msgstr ""
+
+msgid ""
+"If this item is a camera that has been modified for astrophotography, this "
+"information will not be lost."
 msgstr ""
 
 #, python-format
@@ -5986,20 +5980,8 @@ msgstr ""
 msgid "Sort"
 msgstr "排序"
 
-msgid "Relevance"
-msgstr "相关性"
-
-msgid "Large field radius"
-msgstr "大视场"
-
-msgid "Small field radius"
-msgstr "小视场"
-
-msgid "Large pixel scale"
-msgstr "大像素分辨率"
-
-msgid "Small pixel scale"
-msgstr "小像素分辨率"
+msgid "The Sort options have moved to the filters sidebar."
+msgstr ""
 
 msgid "This list is currently empty."
 msgstr "此列表当前为空。"
@@ -6307,9 +6289,22 @@ msgstr ""
 msgid "Edit your astrophotography gear"
 msgstr "编辑您的天文摄影设备"
 
+msgid "AstroBin is rebuilding its equipment database!"
+msgstr ""
+
 msgid ""
 "This page is no longer necessary, as you can add new equipment items "
 "directly during the image upload or editing process."
+msgstr ""
+
+msgid ""
+"You are seeing this message because you have images on AstroBin associated "
+"with equipment items in the legacy database."
+msgstr ""
+
+msgid ""
+"Please migrate your equipment on AstroBin to the new database, as this helps "
+"consolidate the data and improve the search engine results."
 msgstr ""
 
 msgid "Edit gear item"
@@ -6575,6 +6570,9 @@ msgstr "隐藏筛选器"
 msgid "${filter.label}"
 msgstr "${filter.label}"
 
+msgid "Sort results"
+msgstr ""
+
 msgid "Results"
 msgstr "结果"
 
@@ -6634,8 +6632,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Lite or Premium</"
-"a> subscription."
+"Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Lite, Premium, "
+"or Ultimate</a> subscription."
 msgstr ""
 
 #, python-format
@@ -6728,6 +6726,15 @@ msgstr ""
 msgid ""
 "Alternatively, you can use the Subject/Telescope/Camera filters or any other "
 "advanced filters to fine-tune your search."
+msgstr ""
+
+msgid "Relevance"
+msgstr "相关性"
+
+msgid "decreasing"
+msgstr ""
+
+msgid "increasing"
 msgstr ""
 
 msgid ""
@@ -6852,18 +6859,6 @@ msgstr "表单已保存。即将开始新的高级解析。"
 
 msgid "Fill in one session, before adding more."
 msgstr "填完此字段后再添加新的。"
-
-msgid "Last seen online"
-msgstr ""
-
-msgid "Total integration time"
-msgstr "总曝光时间"
-
-msgid "hours"
-msgstr "小时"
-
-msgid "Average integration time"
-msgstr "平均曝光时间"
 
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
@@ -7032,6 +7027,9 @@ msgstr "抱歉，用户名已经存在，大小写不同。"
 #~ "messages, etc, will appear again on your content."
 #~ msgstr ""
 #~ "您将取消对该用户的悄悄屏蔽，他的评论、消息等将重新出现在您的内容上。"
+
+#~ msgid "The Big Wall"
+#~ msgstr "作品墙"
 
 #~ msgid "Instructions and examples"
 #~ msgstr "说明和示例"
@@ -7246,21 +7244,6 @@ msgstr "抱歉，用户名已经存在，大小写不同。"
 #~ "\"%(advanced_form_url)s?edit_type=deep_sky&advanced=true\">高级表单</a>。"
 
 #~ msgid ""
-#~ "Can't see anything here? Perhaps you should first add some gear in your\n"
-#~ "                <a href=\"%(the_url)s\">profile</a>!"
-#~ msgstr ""
-#~ "这里什么都没有？也许您应该尝试在                \n"
-#~ "<a href=\"%(the_url)s\"> 个人资料</a> 中添加一些设备！"
-
-#~ msgid ""
-#~ "To choose the gear used for this image, drag items from the right side to "
-#~ "left side, or\n"
-#~ "                click the plus sign."
-#~ msgstr ""
-#~ "将这个项目从右边拖到左边，\n"
-#~ "或者点击“+”号"
-
-#~ msgid ""
 #~ "You are about to open a large file of about %(size)s. Depending on your "
 #~ "download speed, it might take several seconds or even minutes to view the "
 #~ "file."
@@ -7443,6 +7426,18 @@ msgstr "抱歉，用户名已经存在，大小写不同。"
 #~ msgid "Reset password at %(site_name)s"
 #~ msgstr "密码重置于 %(site_name)s"
 
+#~ msgid "Large field radius"
+#~ msgstr "大视场"
+
+#~ msgid "Small field radius"
+#~ msgstr "小视场"
+
+#~ msgid "Large pixel scale"
+#~ msgstr "大像素分辨率"
+
+#~ msgid "Small pixel scale"
+#~ msgstr "小像素分辨率"
+
 #~ msgid "Search for celestial objects, equipment items, users, etc..."
 #~ msgstr "按目标、望远镜、镜头、相机、滤镜等等来搜索..."
 
@@ -7603,6 +7598,15 @@ msgstr "抱歉，用户名已经存在，大小写不同。"
 
 #~ msgid "Last login"
 #~ msgstr "最近登录"
+
+#~ msgid "Total integration time"
+#~ msgstr "总曝光时间"
+
+#~ msgid "hours"
+#~ msgstr "小时"
+
+#~ msgid "Average integration time"
+#~ msgstr "平均曝光时间"
 
 #~ msgid "Accessory"
 #~ msgstr "配件"
