@@ -445,7 +445,7 @@ class IotdService:
         if image.user.userprofile.banned_from_competitions:
             return False, 'BANNED_FROM_COMPETITIONS'
 
-        if image.submitted_for_iotd_tp_consideration < (
+        if image.published < (
                 DateTimeService.now() - timedelta(days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS)
         ):
             return False, 'TOO_LATE'
