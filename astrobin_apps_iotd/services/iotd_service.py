@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.db.models import Count, OuterRef, Q, Subquery
+from django.utils import timezone
 from django.utils.translation import gettext
 
 from astrobin.enums import SubjectType
@@ -70,7 +71,9 @@ class IotdService:
             member_settings.save()
 
         order_by = [
-            '-published' if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST else 'published'
+            '-published' \
+                if member_settings.queue_sort_order == IotdQueueSortOrder.NEWEST_FIRST \
+                else 'published'
         ]
 
         return [
@@ -199,14 +202,16 @@ class IotdService:
                 Q(num_submissions__gte=settings.IOTD_SUBMISSION_MIN_PROMOTIONS) |
                 Q(
                     Q(num_submissions__gt=0) &
-                    Q(published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
+                    Q(submitted_for_iotd_tp_consideration__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
                 )
             ) &
-            Q(published__lt=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS))
-        ).order_by('-published')
+            Q(submitted_for_iotd_tp_consideration__lt=datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS))
+        ).order_by('-submitted_for_iotd_tp_consideration')
 
         if latest:
-            items = items.filter(published__gt=latest.image.published)
+            items = items.filter(
+                submitted_for_iotd_tp_consideration__gt=latest.image.submitted_for_iotd_tp_consideration
+            )
 
         for item in items.iterator():
             try:
@@ -220,19 +225,21 @@ class IotdService:
         items = Image.objects.annotate(
             num_votes=Count('iotdvote', distinct=True)
         ).filter(
-            Q(published__lt=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)) &
+            Q(submitted_for_iotd_tp_consideration__lt=datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS)) &
             Q(Q(iotd=None) | Q(iotd__date__gt=datetime.now().date())) &
             Q(
                 Q(num_votes__gte=settings.IOTD_REVIEW_MIN_PROMOTIONS) |
                 Q(
                     Q(num_votes__gt=0) &
-                    Q(published__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
+                    Q(submitted_for_iotd_tp_consideration__lt=settings.IOTD_MULTIPLE_PROMOTIONS_REQUIREMENT_START)
                 )
             )
-        ).order_by('-published')
+        ).order_by('-submitted_for_iotd_tp_consideration')
 
         if latest:
-            items = items.filter(published__gt=latest.image.published)
+            items = items.filter(
+                submitted_for_iotd_tp_consideration__gt=latest.image.submitted_for_iotd_tp_consideration
+            )
 
         for item in items.iterator():
             try:
@@ -252,7 +259,7 @@ class IotdService:
                 .filter(
                 Q(
                     Q(moderator_decision=ModeratorDecision.APPROVED) &
-                    Q(published__gte=cutoff) &
+                    Q(submitted_for_iotd_tp_consideration__gte=cutoff) &
                     Q(designated_iotd_submitters=submitter) &
                     Q(num_dismissals__lt=settings.IOTD_MAX_DISMISSALS) &
                     Q(
@@ -278,7 +285,7 @@ class IotdService:
                 IotdSubmissionQueueEntry.objects.create(
                     submitter=submitter,
                     image=image,
-                    published=image.published
+                    published=image.submitted_for_iotd_tp_consideration
                 )
                 log.debug(f'Image {image.get_id()} "{image.title}" assigned to submitter {submitter.pk} "{submitter.username}".')
 
@@ -402,6 +409,8 @@ class IotdService:
                 )
             )
 
+            Image.objects_including_wip.filter(pk=image.pk).update(submitted_for_iotd_tp_consideration=timezone.now())
+
             if auto_submit:
                 image.user.userprofile.auto_submit_to_iotd_tp_process = True
                 image.user.userprofile.save(keep_deleted=True)
@@ -436,7 +445,9 @@ class IotdService:
         if image.user.userprofile.banned_from_competitions:
             return False, 'BANNED_FROM_COMPETITIONS'
 
-        if image.published < DateTimeService.now() - timedelta(days=settings.IOTD_SUBMISSION_WINDOW_DAYS):
+        if image.submitted_for_iotd_tp_consideration < (
+                DateTimeService.now() - timedelta(days=settings.IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS)
+        ):
             return False, 'TOO_LATE'
 
         return True, None

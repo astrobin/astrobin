@@ -3,8 +3,6 @@ from datetime import datetime, timedelta
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
-from astrobin_apps_premium.services.premium_service import PremiumService
-from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 from common.services import DateTimeService
 
 
@@ -36,10 +34,10 @@ def may_toggle_submission_image(user, image):
                }
 
     days = settings.IOTD_SUBMISSION_WINDOW_DAYS
-    if image.published < datetime.now() - timedelta(days):
-        return False, _("You cannot submit an image that was published more than %(max_days)s day(s) ago.") % {
-            'max_days': days
-        }
+    if image.submitted_for_iotd_tp_consideration < datetime.now() - timedelta(days):
+        return False, _(
+            "You cannot submit an image that was submitted for consideration more than %(max_days)s day(s) ago."
+        ) % {'max_days': days}
 
     # Import here to avoid circular dependency
     from astrobin_apps_iotd.models import IotdSubmission, Iotd
