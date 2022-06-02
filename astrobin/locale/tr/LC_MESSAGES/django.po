@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-21 20:35+0000\n"
+"POT-Creation-Date: 2022-06-02 08:06+0000\n"
 "PO-Revision-Date: 2021-03-23 01:39+0000\n"
 "Last-Translator: mustastum <scriptyper@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3224,9 +3224,6 @@ msgstr ""
 msgid "Explore"
 msgstr "Araştır"
 
-msgid "The Big Wall"
-msgstr "Çoklu gösterim"
-
 msgid "Advanced search"
 msgstr "Gelişmiş arama"
 
@@ -4105,39 +4102,29 @@ msgstr ""
 msgid "Edit your image: gear used"
 msgstr "Resminizi düzenleyin: kullanılan donanımlar"
 
-msgid "AstroBin is rebuilding its equipment database!"
-msgstr ""
-
-msgid ""
-"Using this form to edit the equipment used for this image is no longer "
-"possible, because it interfaces with the legacy equipment database on "
-"AstroBin."
-msgstr ""
-
-msgid ""
-"To begin using the new and improved equipment database for this image, "
-"please migrate your gear."
-msgstr ""
-
-msgid ""
-"Please note: the migration process goes thru a review stage. If you have "
-"completed your migration but still see this notice, it could because your "
-"migration proposals haven't been approved yet."
-msgstr ""
-
-msgid "Begin migration"
-msgstr ""
-
 #, python-format
 msgid ""
 "Can't see anything here? Perhaps you should first add some gear in your\n"
-"                    <a href=\"%(the_url)s\">profile</a>!"
+"                <a href=\"%(the_url)s\">profile</a>!"
 msgstr ""
 
 msgid ""
 "To choose the gear used for this image, drag items from the right side to "
 "left side, or\n"
-"                    click the plus sign."
+"                click the plus sign."
+msgstr ""
+"Bu fotoğrafta kullanılan donanımları seçmek için, parçaları sağ taraftan sol "
+"tarafa sürükleyin ya da\n"
+"artı işaretine tıklayın."
+
+msgid ""
+"Your image features a mix of items from the legacy AstroBin equipment "
+"database and from the new equipment database. In order to edit the equipment "
+"items used for this image properly, please complete the migration of your "
+"legacy equipment items."
+msgstr ""
+
+msgid "Begin migration"
 msgstr ""
 
 msgid ""
@@ -4300,6 +4287,10 @@ msgstr ""
 
 msgctxt "Noun, e.g. 'This element has 10 comments'"
 msgid "Comments"
+msgstr ""
+
+msgctxt "Pertaining to cameras, e.g. a modified Canon"
+msgid "modified"
 msgstr ""
 
 msgid "No gear yet."
@@ -4622,9 +4613,6 @@ msgstr ""
 msgid "A gear item that you used was renamed"
 msgstr ""
 
-msgid "Old brand"
-msgstr ""
-
 msgid "Old name"
 msgstr ""
 
@@ -4638,6 +4626,11 @@ msgid ""
 "This operation was performed because at least 5 owners of this equipment "
 "item (or more than half, whichever is greatest), approved it, while nobody "
 "rejected it."
+msgstr ""
+
+msgid ""
+"If this item is a camera that has been modified for astrophotography, this "
+"information will not be lost."
 msgstr ""
 
 #, python-format
@@ -5858,19 +5851,7 @@ msgstr ""
 msgid "Sort"
 msgstr "Sırala"
 
-msgid "Relevance"
-msgstr "İlişki"
-
-msgid "Large field radius"
-msgstr ""
-
-msgid "Small field radius"
-msgstr ""
-
-msgid "Large pixel scale"
-msgstr ""
-
-msgid "Small pixel scale"
+msgid "The Sort options have moved to the filters sidebar."
 msgstr ""
 
 msgid "This list is currently empty."
@@ -6144,9 +6125,22 @@ msgstr ""
 msgid "Edit your astrophotography gear"
 msgstr "Astrofotoğrafi ekipmanlarınızı düzenleyin"
 
+msgid "AstroBin is rebuilding its equipment database!"
+msgstr ""
+
 msgid ""
 "This page is no longer necessary, as you can add new equipment items "
 "directly during the image upload or editing process."
+msgstr ""
+
+msgid ""
+"You are seeing this message because you have images on AstroBin associated "
+"with equipment items in the legacy database."
+msgstr ""
+
+msgid ""
+"Please migrate your equipment on AstroBin to the new database, as this helps "
+"consolidate the data and improve the search engine results."
 msgstr ""
 
 msgid "Edit gear item"
@@ -6410,6 +6404,9 @@ msgstr ""
 msgid "${filter.label}"
 msgstr ""
 
+msgid "Sort results"
+msgstr ""
+
 msgid "Results"
 msgstr ""
 
@@ -6469,8 +6466,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Lite or Premium</"
-"a> subscription."
+"Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Lite, Premium, "
+"or Ultimate</a> subscription."
 msgstr ""
 
 #, python-format
@@ -6563,6 +6560,15 @@ msgstr ""
 msgid ""
 "Alternatively, you can use the Subject/Telescope/Camera filters or any other "
 "advanced filters to fine-tune your search."
+msgstr ""
+
+msgid "Relevance"
+msgstr "İlişki"
+
+msgid "decreasing"
+msgstr ""
+
+msgid "increasing"
 msgstr ""
 
 msgid ""
@@ -6690,18 +6696,6 @@ msgstr ""
 msgid "Fill in one session, before adding more."
 msgstr "Daha fazla eklemeden önce bir oturum ile ilgili bilgileri doldurun."
 
-msgid "Last seen online"
-msgstr ""
-
-msgid "Total integration time"
-msgstr "Poz Toplamı"
-
-msgid "hours"
-msgstr "saat"
-
-msgid "Average integration time"
-msgstr "Ortalama poz süresi"
-
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
@@ -6783,14 +6777,17 @@ msgstr ""
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
 
-#~ msgid ""
-#~ "To choose the gear used for this image, drag items from the right side to "
-#~ "left side, or\n"
-#~ "                click the plus sign."
-#~ msgstr ""
-#~ "Bu fotoğrafta kullanılan donanımları seçmek için, parçaları sağ taraftan "
-#~ "sol tarafa sürükleyin ya da\n"
-#~ "artı işaretine tıklayın."
+#~ msgid "The Big Wall"
+#~ msgstr "Çoklu gösterim"
+
+#~ msgid "Total integration time"
+#~ msgstr "Poz Toplamı"
+
+#~ msgid "hours"
+#~ msgstr "saat"
+
+#~ msgid "Average integration time"
+#~ msgstr "Ortalama poz süresi"
 
 #~ msgid "Messages"
 #~ msgstr "Mesajlar"

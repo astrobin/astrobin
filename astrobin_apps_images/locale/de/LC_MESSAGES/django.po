@@ -2,19 +2,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Images\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 16:13+0200\n"
+"POT-Creation-Date: 2022-06-02 08:06+0000\n"
 "PO-Revision-Date: 2022-05-04 04:05+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: German\n"
 "Language: de\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108439\n"
-"X-Loco-Api-Version: 1.0.26 20220328-1"
+"X-Loco-Api-Version: 1.0.26 20220328-1\n"
 
 msgid "Conflict."
 msgstr "Konflikt."
@@ -39,6 +39,13 @@ msgstr "Fehler!"
 msgid "Staging area"
 msgstr "Staging-Bereich"
 
+#, python-format
+msgid "Revision %(revision)s"
+msgstr "Revision %(revision)s"
+
+msgid "Original revision"
+msgstr "Original Version"
+
 msgid "Loading"
 msgstr "Laden"
 
@@ -56,10 +63,3 @@ msgstr "Top Pick Nominiert"
 
 msgid "Data corruption. Please upload this image again. Sorry!"
 msgstr "Beschädigte Daten. Bitte lade das Bild erneut hoch. Entschuldigung!"
-
-#, python-format
-msgid "Revision %(revision)s"
-msgstr "Revision %(revision)s"
-
-msgid "Original revision"
-msgstr "Original Version"
