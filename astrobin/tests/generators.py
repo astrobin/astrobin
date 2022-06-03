@@ -53,6 +53,7 @@ class Generators:
             download_limitation=kwargs.pop('download_limitations', DownloadLimitation.ME_ONLY),
             subject_type=kwargs.pop('subject_type', SubjectType.DEEP_SKY),
             published=kwargs.pop('published', None),
+            submitted_for_iotd_tp_consideration=kwargs.pop('submitted_for_iotd_tp_consideration', None),
         )
 
     @staticmethod

@@ -16,7 +16,7 @@ class IotdPermissionsTest(TestCase):
     def test_may_unelect_iotd_yesterday(self):
         user = Generators.user()
         Generators.premium_subscription(user, 'AstroBin Ultimate 2020+')
-        image = Generators.image(user=user)
+        image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.datetime.now())
 
         IotdGenerators.submission(image=image)
         IotdGenerators.vote(image=image)
@@ -29,7 +29,7 @@ class IotdPermissionsTest(TestCase):
     def test_may_unelect_iotd_today(self):
         user = Generators.user()
         Generators.premium_subscription(user, 'AstroBin Ultimate 2020+')
-        image = Generators.image(user=user)
+        image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.datetime.now())
 
         IotdGenerators.submission(image=image)
         IotdGenerators.vote(image=image)
@@ -40,7 +40,7 @@ class IotdPermissionsTest(TestCase):
     def test_may_unelect_iotd_tomorrow(self):
         user = Generators.user()
         Generators.premium_subscription(user, 'AstroBin Ultimate 2020+')
-        image = Generators.image(user=user)
+        image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.datetime.now())
 
         IotdGenerators.submission(image=image)
         IotdGenerators.vote(image=image)
@@ -53,7 +53,7 @@ class IotdPermissionsTest(TestCase):
     def test_may_unelect_iotd_day_after_tomorrow(self):
         user = Generators.user()
         Generators.premium_subscription(user, 'AstroBin Ultimate 2020+')
-        image = Generators.image(user=user)
+        image = Generators.image(user=user, submitted_for_iotd_tp_consideration=datetime.datetime.now())
 
         IotdGenerators.submission(image=image)
         IotdGenerators.vote(image=image)

@@ -43,6 +43,7 @@ class ExploreTest(TestCase):
         self.image.moderator_decision = ModeratorDecision.APPROVED
         self.image.title = "IOTD TEST IMAGE"
         self.image.data_source = "BACKYARD"
+        self.image.submitted_for_iotd_tp_consideration = datetime.now()
         self.image.save(keep_deleted=True)
 
     @override_settings(IOTD_SUBMISSION_MIN_PROMOTIONS=2)
@@ -53,7 +54,7 @@ class ExploreTest(TestCase):
         IotdVote.objects.create(reviewer=self.reviewer, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer2, image=self.image)
 
-        self.image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
         self.image.save()
 
         IotdService().update_top_pick_archive()
@@ -110,7 +111,7 @@ class ExploreTest(TestCase):
         IotdVote.objects.create(reviewer=self.reviewer, image=self.image)
         IotdVote.objects.create(reviewer=self.reviewer2, image=self.image)
 
-        self.image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
         self.image.save()
 
         IotdService().update_top_pick_archive()

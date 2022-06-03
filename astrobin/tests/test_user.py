@@ -481,6 +481,8 @@ class UserTest(TestCase):
         judge = User.objects.create_user('judge', 'judge_1@test.com', 'password')
         judges = Group.objects.create(name='iotd_judges')
         judges.user_set.add(judge)
+        Image.objects.filter(pk=image.pk).update(submitted_for_iotd_tp_consideration=datetime.now())
+        image.refresh_from_db()
         submission = IotdSubmission.objects.create(submitter=submitter, image=image)
         vote = IotdVote.objects.create(reviewer=reviewer, image=image)
         iotd = Iotd.objects.create(judge=judge, image=image, date=datetime.now().date())
@@ -490,7 +492,7 @@ class UserTest(TestCase):
         profile.save(keep_deleted=True)
         image = Image.objects_including_wip.get(pk=image.pk)
 
-        image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
 
         # Check that the IOTD banner is not visible
         response = self.client.get(reverse('image_detail', args=(image.get_id(),)))
@@ -536,13 +538,15 @@ class UserTest(TestCase):
         judge = User.objects.create_user('judge', 'judge_1@test.com', 'password')
         judges = Group.objects.create(name='iotd_judges')
         judges.user_set.add(judge)
+        Image.objects.filter(pk=image.pk).update(submitted_for_iotd_tp_consideration=datetime.now())
+        image.refresh_from_db()
         IotdSubmission.objects.create(submitter=submitter, image=image)
         IotdSubmission.objects.create(submitter=submitter2, image=image)
         IotdVote.objects.create(reviewer=reviewer, image=image)
         vote = IotdVote.objects.create(reviewer=reviewer2, image=image)
         iotd = Iotd.objects.create(judge=judge, image=image, date=datetime.now().date())
 
-        image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
         image.save()
 
         profile = self.user.userprofile

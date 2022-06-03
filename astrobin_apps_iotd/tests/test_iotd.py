@@ -48,6 +48,7 @@ class IotdTest(TestCase):
         self.image.moderator_decision = ModeratorDecision.APPROVED
         self.image.title = "IOTD TEST IMAGE"
         self.image.subject_type = SubjectType.DEEP_SKY
+        self.image.submitted_for_iotd_tp_consideration = datetime.now()
         self.image.save(keep_deleted=True)
 
 
@@ -63,7 +64,7 @@ class IotdTest(TestCase):
         self.assertEqual(submission.submitter, self.submitter_1)
         self.assertEqual(submission.image, self.image)
 
-        self.image.published = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(hours=1)
         self.image.save()
 
         IotdService().update_top_pick_nomination_archive()
@@ -77,14 +78,14 @@ class IotdTest(TestCase):
         self.assertNotContains(response, self.image.title)
         cache.clear()
 
-        self.image.published = datetime.now()
+        self.image.submitted_for_iotd_tp_consideration = datetime.now()
         self.image.save()
 
         IotdSubmission.objects.create(
             submitter=self.submitter_2,
             image=self.image)
 
-        self.image.published = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS) - timedelta(hours=1)
         self.image.save()
 
         IotdService().update_top_pick_nomination_archive()
@@ -107,6 +108,8 @@ class IotdTest(TestCase):
         # Test max daily
         with self.assertRaisesRegex(ValidationError, "already submitted.*today"):
             image2 = Image.objects.create(user=self.user)
+            image2.submitted_for_iotd_tp_consideration = datetime.now()
+            image2.save()
             with self.settings(IOTD_SUBMISSION_MAX_PER_DAY=1):
                 IotdSubmission.objects.create(
                     submitter=self.submitter_1,
@@ -121,18 +124,18 @@ class IotdTest(TestCase):
 
     def test_submission_model_image_must_be_recent(self):
         Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
-        self.image.published = \
+        self.image.submitted_for_iotd_tp_consideration = \
             datetime.now() - \
             timedelta(settings.IOTD_SUBMISSION_WINDOW_DAYS + 1)
         self.image.save(keep_deleted=True)
-        with self.assertRaisesRegex(ValidationError, "published more than"):
+        with self.assertRaisesRegex(ValidationError, "submitted for consideration more than"):
             IotdSubmission.objects.create(
                 submitter=self.submitter_1,
                 image=self.image)
 
     def test_submission_model_image_must_be_public(self):
         Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
-        self.image.published = datetime.now()
+        self.image.submitted_for_iotd_tp_consideration = datetime.now()
         self.image.is_wip = True
         self.image.save(keep_deleted=True)
         with self.assertRaisesRegex(ValidationError, "staging area"):
@@ -389,7 +392,7 @@ class IotdTest(TestCase):
         self.assertEqual(vote.reviewer, self.reviewer_1)
         self.assertEqual(vote.image, submission_1.image)
 
-        self.image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
         self.image.save()
 
         IotdService().update_top_pick_archive()
@@ -403,14 +406,14 @@ class IotdTest(TestCase):
         self.assertNotContains(response, self.image.title)
         cache.clear()
 
-        self.image.published = datetime.now()
+        self.image.submitted_for_iotd_tp_consideration = datetime.now()
         self.image.save()
 
         IotdVote.objects.create(
             reviewer=self.reviewer_2,
             image=submission_1.image)
 
-        self.image.published = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
+        self.image.submitted_for_iotd_tp_consideration = datetime.now() - timedelta(settings.IOTD_REVIEW_WINDOW_DAYS) - timedelta(hours=1)
         self.image.save()
 
         IotdService().update_top_pick_archive()
@@ -486,6 +489,8 @@ class IotdTest(TestCase):
 
         # Test max daily
         image2 = Image.objects.create(user=self.user)
+        image2.submitted_for_iotd_tp_consideration = datetime.now()
+        image2.save()
         submission_2 = IotdSubmission.objects.create(
             submitter=self.submitter_2,
             image=image2)
@@ -637,6 +642,8 @@ class IotdTest(TestCase):
                 IOTD_JUDGEMENT_MAX_PER_DAY=3,
                 IOTD_JUDGEMENT_MAX_FUTURE_PER_JUDGE=1):
             image2 = Image.objects.create(user=self.user)
+            image2.submitted_for_iotd_tp_consideration = datetime.now()
+            image2.save()
             submission_2 = IotdSubmission.objects.create(
                 submitter=self.submitter_2,
                 image=image2)
@@ -649,6 +656,8 @@ class IotdTest(TestCase):
                 date=datetime.now().date() + timedelta(1))
 
             image3 = Image.objects.create(user=self.user)
+            image3.submitted_for_iotd_tp_consideration = datetime.now()
+            image3.save()
             submission_3 = IotdSubmission.objects.create(
                 submitter=self.submitter_3,
                 image=image3)
