@@ -139,11 +139,13 @@
                             {% if reason == 'ALREADY_SUBMITTED' %}
                                 <i class="status-icon status-icon-success icon-ok"></i>
                             {% else %}
-                                {% with image.published|add_days:IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS as deadline %}
-                                    <div class="muted with-icon">
-                                        {% trans "Deadline" %}: {% timestamp deadline %}
-                                    </div>
-                                {% endwith %}
+                                {% if image.published %}
+                                    {% with image.published|add_days:IOTD_SUBMISSION_FOR_CONSIDERATION_WINDOW_DAYS as deadline %}
+                                        <div class="muted with-icon">
+                                            {% trans "Deadline" %}: {% timestamp deadline %}
+                                        </div>
+                                    {% endwith %}
+                                {% endif %}
                             {% endif %}
                         </a>
                     {% endwith %}
