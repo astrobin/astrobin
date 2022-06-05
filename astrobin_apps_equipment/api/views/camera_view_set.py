@@ -113,4 +113,4 @@ class CameraViewSet(EquipmentItemViewSet):
                 'Modified and/or cooled variants of DSLR or mirrorless cameras cannot be edited/approved/rejected '
                 'directly. Please find the regular version of this camera and perform this action there.'
             )
-        return super().approve(request, pk)
+        return super().reject(request, pk)
