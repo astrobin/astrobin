@@ -70,6 +70,27 @@ class PlateSolvingAdvancedSettings(models.Model):
         verbose_name=_("Show named stars"),
     )
 
+    show_hd = models.BooleanField(
+        default=True,
+        verbose_name=_("Show HD stars"),
+        help_text=_(
+            "This catalog uses data from the All-sky Compiled Catalogue of 2.5 million stars (Kharchenko+ 2009), "
+            "VizieR catalog: I/280B."
+        )
+    )
+
+    hd_max_magnitude = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=4,
+        decimal_places=2,
+        verbose_name=_("Max. magnitude"),
+        help_text=_(
+            "Only HD stars up to this magnitude will be rendered. If left empty, the catalog's default value will be "
+            "used."
+        ),
+    )
+
     show_messier = models.BooleanField(
         default=True,
         verbose_name=_("Show Messier objects"),
@@ -128,11 +149,35 @@ class PlateSolvingAdvancedSettings(models.Model):
         help_text=_("General Catalog of Variable Stars"),
     )
 
+    gcvs_max_magnitude = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=4,
+        decimal_places=2,
+        verbose_name=_("Max. magnitude"),
+        help_text=_(
+            "Only GCVS stars up to this magnitude will be rendered. If left empty, the catalog's default value will be "
+            "used."
+        ),
+    )
+
     show_tycho_2 = models.BooleanField(
         default=False,
         verbose_name=_("Show Tycho-2 catalog"),
         help_text=mark_safe(
             '<a href="https://wikipedia.org/wiki/Tycho-2_Catalogue" target="_blank">https://wikipedia.org/wiki/Tycho-2_Catalogue</a>'),
+    )
+
+    tycho_2_max_magnitude = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=4,
+        decimal_places=2,
+        verbose_name=_("Max. magnitude"),
+        help_text=_(
+            "Only Tycho-2 stars up to this magnitude will be rendered. If left empty, the catalog's default value will "
+            "be used."
+        ),
     )
 
     show_cgpn = models.BooleanField(

@@ -66,6 +66,8 @@ class Solver(AbstractPlateSolvingBackend):
                 layers.append('Constellation Lines')
             if advanced_settings.show_named_stars:
                 layers.append('NamedStars')
+            if advanced_settings.show_hd:
+                layers.append('HD Cross-Reference')
             if advanced_settings.show_messier:
                 layers.append('Messier')
             if advanced_settings.show_ngc_ic:
@@ -107,6 +109,20 @@ class Solver(AbstractPlateSolvingBackend):
 
         if len(layers) > 0:
             task_params.append('layers=%s' % '|'.join(layers))
+
+        layerMaxMagnitudes = []
+        for layer in layers:
+            if layer == 'HD Cross-Reference' and advanced_settings.hd_max_magnitude is not None:
+                layerMaxMagnitudes.append(f',{advanced_settings.hd_max_magnitude}')
+            elif layer == 'GCVS' and advanced_settings.gcvs_max_magnitude is not None:
+                layerMaxMagnitudes.append(f',{advanced_settings.gcvs_max_magnitude}')
+            elif layer == 'TYCHO-2' and advanced_settings.tycho_2_max_magnitude is not None:
+                layerMaxMagnitudes.append(f',{advanced_settings.tycho_2_max_magnitude}')
+            else:
+                layerMaxMagnitudes.append("")
+
+        if len(layerMaxMagnitudes) > 0:
+            task_params.append(f'layerMaxMagnitudes={"|".join(layerMaxMagnitudes)}')
 
         task = PlateSolvingAdvancedTask.objects.create(
             serial_number=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(32)),
