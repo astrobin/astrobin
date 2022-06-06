@@ -166,7 +166,7 @@ class SolveAdvancedView(base.View):
                 solution.save()
             except Exception as e:
                 log.error("Error during advanced plate-solving: %s" % str(e))
-                solution.status = Solver.MISSING
+                solution.status = Solver.SUCCESS
                 solution.submission_id = None
                 solution.save()
 

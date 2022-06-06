@@ -113,16 +113,16 @@ class Solver(AbstractPlateSolvingBackend):
         layerMaxMagnitudes = []
         for layer in layers:
             if layer == 'HD Cross-Reference' and advanced_settings.hd_max_magnitude is not None:
-                layerMaxMagnitudes.append(f',{advanced_settings.hd_max_magnitude}')
+                layerMaxMagnitudes.append(str(advanced_settings.hd_max_magnitude))
             elif layer == 'GCVS' and advanced_settings.gcvs_max_magnitude is not None:
-                layerMaxMagnitudes.append(f',{advanced_settings.gcvs_max_magnitude}')
+                layerMaxMagnitudes.append(str(advanced_settings.gcvs_max_magnitude))
             elif layer == 'TYCHO-2' and advanced_settings.tycho_2_max_magnitude is not None:
-                layerMaxMagnitudes.append(f',{advanced_settings.tycho_2_max_magnitude}')
+                layerMaxMagnitudes.append(str(advanced_settings.tycho_2_max_magnitude))
             else:
                 layerMaxMagnitudes.append("")
 
         if len(layerMaxMagnitudes) > 0:
-            task_params.append(f'layerMaxMagnitudes={"|".join(layerMaxMagnitudes)}')
+            task_params.append(f'layerMagnitudeLimits={"|".join(layerMaxMagnitudes)}')
 
         task = PlateSolvingAdvancedTask.objects.create(
             serial_number=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(32)),
