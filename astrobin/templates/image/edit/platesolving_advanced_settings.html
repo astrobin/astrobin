@@ -42,3 +42,50 @@
         </div>
     </form>
 {% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        function showHideHDMaxMagnitudeFields() {
+            const showHd = $("#id_show_hd").is(":checked");
+            const $hdMaxMagnitudeGroup = $("#id_hd_max_magnitude").closest(".control-group")
+
+            if (showHd) {
+                $hdMaxMagnitudeGroup.show();
+            } else {
+                $hdMaxMagnitudeGroup.hide();
+            }
+        }
+
+        function showHideGCVsMaxMagnitudeFields() {
+            const showGCVs = $("#id_show_gcvs").is(":checked");
+            const $gcvsMaxMagnitudeGroup = $("#id_gcvs_max_magnitude").closest(".control-group")
+
+            if (showGCVs) {
+                $gcvsMaxMagnitudeGroup.show();
+            } else {
+                $gcvsMaxMagnitudeGroup.hide();
+            }
+        }
+
+        function showHideTycho2MaxMagnitudeFields() {
+            const showTycho2 = $("#id_show_tycho_2").is(":checked");
+            const $tycho2MaxMagnitudeGroup = $("#id_tycho_2_max_magnitude").closest(".control-group")
+
+            if (showTycho2) {
+                $tycho2MaxMagnitudeGroup.show();
+            } else {
+                $tycho2MaxMagnitudeGroup.hide();
+            }
+        }
+
+        $(document).ready(function () {
+            showHideHDMaxMagnitudeFields();
+            showHideGCVsMaxMagnitudeFields();
+            showHideTycho2MaxMagnitudeFields();
+
+            $(document).on("change", "#id_show_hd", showHideHDMaxMagnitudeFields);
+            $(document).on("change", "#id_show_gcvs", showHideGCVsMaxMagnitudeFields);
+            $(document).on("change", "#id_show_tycho_2", showHideTycho2MaxMagnitudeFields);
+        });
+    </script>
+{% endblock %}

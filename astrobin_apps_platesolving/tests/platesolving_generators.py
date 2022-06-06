@@ -36,6 +36,8 @@ class PlateSolvingGenerators:
             show_constellation_borders=kwargs.get('show_constellation_borders', True),
             show_constellation_lines=kwargs.get('show_constellation_lines', True),
             show_named_stars=kwargs.get('show_named_stars', True),
+            show_hd=kwargs.get('show_hd', True),
+            hd_max_magnitude=kwargs.get('hd_max_magnitude', None),
             show_messier=kwargs.get('show_messier', True),
             show_ngc_ic=kwargs.get('show_ngc_ic', True),
             show_vdb=kwargs.get('show_vdb', True),
@@ -47,7 +49,9 @@ class PlateSolvingGenerators:
             show_planets=kwargs.get('show_planets', True),
             show_asteroids=kwargs.get('show_asteroids', True),
             show_gcvs=kwargs.get('show_gcvs', False),
+            gcvs_max_magnitude=kwargs.get('gcvs_max_magnitude', None),
             show_tycho_2=kwargs.get('show_tycho_2', False),
+            tycho_2_max_magnitude=kwargs.get('tycho_2_max_magnitude', None),
             show_cgpn=kwargs.get('show_cgpn', False),
             show_quasars=kwargs.get('show_quasars', False),
         )
