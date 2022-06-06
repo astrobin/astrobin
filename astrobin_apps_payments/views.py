@@ -43,7 +43,7 @@ def create_checkout_session(request, user_pk, product, currency):
         log.error("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, "Invalid currency"))
         return HttpResponseBadRequest()
 
-    if product not in ('lite', 'premium', 'ultimate'):
+    if product not in ('lite', 'lite-recurring', 'premium', 'premium-recurring', 'ultimate', 'ultimate-recurring'):
         log.error("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, "Invalid product"))
         return HttpResponseBadRequest()
 
@@ -62,8 +62,11 @@ def create_checkout_session(request, user_pk, product, currency):
 
     stripe_products = {
         'lite': settings.STRIPE_PRODUCT_LITE,
+        'lite-recurring': settings.STRIPE_PRODUCT_LITE_RECURRING,
         'premium': settings.STRIPE_PRODUCT_PREMIUM,
-        'ultimate': settings.STRIPE_PRODUCT_ULTIMATE
+        'premium-recurring': settings.STRIPE_PRODUCT_PREMIUM_RECURRING,
+        'ultimate': settings.STRIPE_PRODUCT_ULTIMATE,
+        'ultimate-recurring': settings.STRIPE_PRODUCT_ULTIMATE_RECURRING
     }
 
     price = PricingService.get_full_price(product, currency.upper())
