@@ -49,4 +49,5 @@ class BaseQueueSerializer(serializers.ModelSerializer):
             'imaging_telescopes_2',
             'imaging_cameras_2',
             'published',
+            'submitted_for_iotd_tp_consideration',
         )

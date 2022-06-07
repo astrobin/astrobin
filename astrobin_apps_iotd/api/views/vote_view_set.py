@@ -42,7 +42,7 @@ class VoteViewSet(viewsets.ModelViewSet):
         if vote.reviewer != request.user:
             return HttpResponseForbidden(["You cannot delete another user's vote."])
 
-        if vote.date < deadline or vote.image.published < deadline:
+        if vote.date < deadline or vote.image.submitted_for_iotd_tp_consideration < deadline:
             return HttpResponseForbidden([_("Sorry, it's now too late to retract this vote.")])
 
         return super(viewsets.ModelViewSet, self).destroy(request, *args, **kwargs)
