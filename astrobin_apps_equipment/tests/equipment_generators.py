@@ -113,7 +113,6 @@ class EquipmentGenerators:
             website=kwargs.get('website', 'https://www.test-filter-%s.com/' % random_name),
             type=kwargs.get('type', FilterType.L),
             bandwidth=kwargs.get('bandwidth', 12),
-            size=kwargs.get('size', 31),
         )
 
     @staticmethod

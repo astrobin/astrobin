@@ -9,8 +9,6 @@ class FilterEditProposalSerializer(EquipmentItemEditProposalSerializer):
         return {
             'type': target.type,
             'bandwidth': target.bandwidth,
-            'size': target.size,
-            'other_size': target.other_size,
         }
 
     class Meta(EquipmentItemEditProposalSerializer.Meta):
