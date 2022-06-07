@@ -16,9 +16,10 @@ from haystack.query import SearchQuerySet
 from pybb.models import Post
 from safedelete import HARD_DELETE
 from safedelete.queryset import SafeDeleteQueryset
+from subscription.models import Subscription
 
 from astrobin.enums import SubjectType
-from astrobin.models import Acquisition, Camera, Image, Telescope
+from astrobin.models import Acquisition, Camera, Image, Telescope, UserProfile
 from astrobin_apps_equipment.models import Camera as CameraV2, Telescope as TelescopeV2
 from astrobin_apps_images.services import ImageService
 from common.services.constellations_service import ConstellationsService
@@ -520,3 +521,13 @@ class UserService:
                 )
 
         return queryset, menu
+
+    def update_premium_counter_on_subscription(self, subscription: Subscription):
+        profile: UserProfile = self.user.userprofile
+
+        if subscription.group.name == 'astrobin_lite':
+            profile.premium_counter = 0
+            profile.save(keep_deleted=True)
+        elif subscription.group.name == 'astrobin_lite_2020':
+            profile.premium_counter = Image.objects_including_wip.filter(user=user).count()
+            profile.save(keep_deleted=True)

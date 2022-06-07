@@ -532,17 +532,10 @@ pre_save.connect(solution_pre_save, sender=Solution)
 def subscription_paid(sender, **kwargs):
     subscription = kwargs.get('subscription')
     user = kwargs.get('user')
-    profile = user.userprofile
 
     UserProfile.all_objects.filter(user=user).update(updated=timezone.now())
     PremiumService(user).clear_subscription_status_cache_keys()
-
-    if subscription.group.name == 'astrobin_lite':
-        profile.premium_counter = 0
-        profile.save(keep_deleted=True)
-    elif subscription.group.name == 'astrobin_lite_2020':
-        profile.premium_counter = Image.objects_including_wip.filter(user=user).count()
-        profile.save(keep_deleted=True)
+    UserService(user).update_premium_counter_on_subscription(subscription)
 
     if 'premium' in subscription.category and Transaction.objects.filter(
             user=user,
@@ -563,6 +556,7 @@ def subscription_signed_up(sender, **kwargs):
 
     UserProfile.all_objects.filter(user=user).update(updated=timezone.now())
     PremiumService(user).clear_subscription_status_cache_keys()
+    UserService(user).update_premium_counter_on_subscription(subscription)
 
     if 'premium' in subscription.category:
         today = DateTimeService.today()
