@@ -42,7 +42,7 @@ class SubmissionViewSet(viewsets.ModelViewSet):
         if submission.submitter != request.user:
             return HttpResponseForbidden(["You cannot delete another user's submission."])
 
-        if submission.date < deadline or submission.image.published < deadline:
+        if submission.date < deadline or submission.image.submitted_for_iotd_tp_consideration < deadline:
             return HttpResponseForbidden([_("Sorry, it's now too late to retract this submission.")])
 
         return super(viewsets.ModelViewSet, self).destroy(request, *args, **kwargs)
