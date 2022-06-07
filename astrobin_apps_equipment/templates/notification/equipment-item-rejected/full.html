@@ -36,3 +36,17 @@
     "<em>{{ comment }}</em>"
 {% endif %}
 
+{% if duplicate_of %}
+    <br /><br />
+
+    {% blocktrans trimmed %}
+        Your equipment item was marked as a duplicate of <a href="{{ duplicate_of_url }}">{{ duplicate_of }}</a>. If
+        you added it to any images, they will have been updated accordingly.
+    {% endblocktrans %}
+{% endif %}
+
+<br /><br />
+
+{% blocktrans trimmed %}
+    Thank you for your understanding.
+{% endblocktrans %}

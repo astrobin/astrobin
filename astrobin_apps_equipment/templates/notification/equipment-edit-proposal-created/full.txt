@@ -4,9 +4,17 @@
     {{ user }} proposed an edit to the equipment item "{{ item }}".
 {% endblocktrans %}
 
-{% blocktrans trimmed %}
-    Please review it as soon as possible.
-{% endblocktrans %}
+{% if item.reviewer_decision == None %}
+    {% trans "Please note" %}:
+    {% blocktrans trimmed %}
+        This item has not been approved yet, therefore is not yet officially part of AstroBin's equipment database.
+        Please review this edit proposal as soon as possible to prevent the possibility that this item be rejected.
+    {% endblocktrans %}
+{% else %}
+    {% blocktrans trimmed %}
+        Please review it as soon as possible.
+    {% endblocktrans %}
+{% endif %}
 
 {% blocktrans trimmed %}
     You received this notification because you created this equipment item, or you created/approved/rejected/commented

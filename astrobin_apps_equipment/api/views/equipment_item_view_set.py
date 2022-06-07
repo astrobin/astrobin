@@ -251,6 +251,15 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         item.reviewer_decision = EquipmentItemReviewerDecision.REJECTED
         item.reviewer_rejection_reason = request.data.get('reason')
         item.reviewer_comment = request.data.get('comment')
+        item.reviewer_rejection_duplicate_of = request.data.get('duplicate_of')
+
+        duplicate_of = None
+        if item.reviewer_rejection_duplicate_of:
+            try:
+                duplicate_of = model.objects.get(pk=item.reviewer_rejection_duplicate_of)
+            except model.DoesNotExist:
+                duplicate_of = None
+                item.reviewer_rejection_duplicate_of = None
 
         if item.created_by and item.created_by != request.user:
             push_notification(
@@ -265,11 +274,20 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                     'item': f'{item.brand.name if item.brand else _("(DIY)")} {item.name}',
                     'reject_reason': item.reviewer_rejection_reason,
                     'comment': item.reviewer_comment,
+                    'duplicate_of': duplicate_of,
+                    'duplicate_of_url': build_notification_url(
+                        AppRedirectionService.redirect(
+                            f'/equipment'
+                            f'/explorer'
+                            f'/{duplicate_of.item_type}/{duplicate_of.pk}'
+                            f'/{duplicate_of.slug}'
+                        )
+                    ) if duplicate_of else None,
                 }
             )
 
         affected_images = []
-        for property in (
+        for prop in (
             'imaging_telescopes_2',
             'imaging_cameras_2',
             'mounts_2',
@@ -280,15 +298,21 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             'software_2',
         ):
             try:
-                images = Image.objects_including_wip.filter(**{property: item})
+                images = Image.objects_including_wip.filter(**{prop: item})
             except ValueError:
                 images = None
 
             if images is not None and images.count() > 0:
                 for image in images.iterator():
-                    affected_images.append(image)
+                    affected_images.append(dict(image=image, prop=prop))
 
-        for image in affected_images:
+        for affected in affected_images:
+            image: Image = affected.get("image")
+            prop: str = affected.get("prop")
+
+            if duplicate_of:
+                getattr(image, prop).add(duplicate_of)
+
             push_notification(
                 [item.created_by],
                 request.user,
@@ -301,6 +325,15 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                     'item': f'{item.brand.name if item.brand else _("(DIY)")} {item.name}',
                     'reject_reason': item.reviewer_rejection_reason,
                     'comment': item.reviewer_comment,
+                    'duplicate_of': duplicate_of,
+                    'duplicate_of_url': build_notification_url(
+                        AppRedirectionService.redirect(
+                            f'/equipment'
+                            f'/explorer'
+                            f'/{duplicate_of.item_type}/{duplicate_of.pk}'
+                            f'/{duplicate_of.slug}'
+                        )
+                    ) if duplicate_of else None,
                     'image_url': build_notification_url(
                         settings.BASE_URL + reverse('image_detail', args=(image.get_id(),))
                     ),
@@ -314,11 +347,20 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         item.delete()
 
-        GearMigrationStrategy.objects.filter(
-            migration_flag='MIGRATE',
-            migration_content_type=ContentType.objects.get_for_model(model),
-            migration_object_id=item.id,
-        ).delete()
+        if duplicate_of:
+            GearMigrationStrategy.objects.filter(
+                migration_flag='MIGRATE',
+                migration_content_type=ContentType.objects.get_for_model(model),
+                migration_object_id=item.id,
+            ).update(
+                migration_object_id=duplicate_of.pk
+            )
+        else:
+            GearMigrationStrategy.objects.filter(
+                migration_flag='MIGRATE',
+                migration_content_type=ContentType.objects.get_for_model(model),
+                migration_object_id=item.id,
+            ).delete()
 
         if item.brand:
             brand_has_items = False

@@ -8,9 +8,17 @@
 </p>
 
 <p>
-    {% blocktrans trimmed %}
-        Please review it as soon as possible.
-    {% endblocktrans %}
+    {% if item.reviewer_decision == None %}
+        <strong>{% trans "Please note" %}</strong>:
+        {% blocktrans trimmed %}
+            This item has not been approved yet, therefore is not yet officially part of AstroBin's equipment database.
+            Please review this edit proposal as soon as possible to prevent the possibility that this item be rejected.
+        {% endblocktrans %}
+    {% else %}
+        {% blocktrans trimmed %}
+            Please review it as soon as possible.
+        {% endblocktrans %}
+    {% endif %}
 </p>
 
 <p>
