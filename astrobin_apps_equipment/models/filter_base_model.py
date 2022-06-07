@@ -13,6 +13,7 @@ class FilterType:
     NII = 'NII'
     UV = 'UV'
     IR = 'IR'
+    UV_IR_CUT = 'UV/IR Cut'
     MULTIBAND = 'MULTIBAND'
     LP = 'LP'
     L = 'L'
@@ -78,6 +79,7 @@ class FilterBaseModel(EquipmentItem):
         (FilterType.NII, _("Nitrogen-II (NII)")),
         (FilterType.UV, _("Ultraviolet (UV)")),
         (FilterType.IR, _("Infrared (IR)")),
+        (FilterType.UV_IR_CUT, 'UV/IR Cut'),
         (FilterType.MULTIBAND, _("Multiband")),
         (FilterType.LP, _("Light pollution suppression")),
         (FilterType.L, _("Luminance/clear (L)")),
