@@ -74,6 +74,12 @@ class EquipmentItem(SafeDeleteModel):
         editable=False,
     )
 
+    reviewer_rejection_duplicate_of = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
     reviewer_comment = models.TextField(
         null=True,
         editable=False,

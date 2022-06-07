@@ -16,6 +16,15 @@
     {{ reject_reason }}
 {% endif %}
 
+{% if duplicate_of %}
+    {% blocktrans trimmed %}
+        Your equipment item was marked as a duplicate of "{{ duplicate_of }}". If you added it to any images, they will
+        have been updated accordingly.
+    {% endblocktrans %}
+
+    {{ duplicate_of_url }}
+{% endif %}
+
 {% if comment %}
     {% blocktrans trimmed %}
         The reviewer left the following comment:
@@ -23,3 +32,7 @@
 
     {{ comment }}
 {% endif %}
+
+{% blocktrans trimmed %}
+    Thank you for your understanding.
+{% endblocktrans %}
