@@ -27,8 +27,14 @@ class AvatarField(serializers.Field):
         return avatar_url(user, 40)
 
 
+class LargeAvatarField(serializers.Field):
+    def to_representation(self, user):
+        return avatar_url(user, 200)
+
+
 class UserSerializer(serializers.ModelSerializer):
     avatar = AvatarField(source='*')
+    large_avatar = LargeAvatarField(source='*')
     userprofile = PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
