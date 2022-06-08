@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
+from django.core.cache import cache
 from django.db.models import Q, QuerySet, Value
 from django.db.models.functions import Concat, Lower
 from django.urls import reverse
@@ -383,27 +384,38 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['GET'], url_name='users')
     def users(self, request, pk: int) -> Response:
-        user_ids: List[int] = []
+        cache_key: str = f'equipment_item_view_set_{self.get_object().__class__.__name__}_{pk}_users'
+        data = cache.get(cache_key)
 
-        sqs: SearchQuerySet = SearchQuerySet().models(self.get_serializer().Meta.model).filter(django_id=pk)
-        if sqs.count() == 1:
-            user_ids = sqs[0].users
+        if data is None:
+            user_ids: List[int] = []
+            sqs: SearchQuerySet = SearchQuerySet().models(self.get_serializer().Meta.model).filter(django_id=pk)
+            if sqs.count() == 1:
+                user_ids = sqs[0].users
+            users: QuerySet[User] = User.objects.filter(pk__in=user_ids)
+            data = UserSerializer(users, many=True).data
+            cache.set(cache_key, data, 60*60*12)
 
-        users: QuerySet[User] = User.objects.filter(pk__in=user_ids)
-        return Response(UserSerializer(users, many=True).data)
+        return Response(data)
 
     @action(detail=True, methods=['GET'], url_name='images')
     def images(self, request, pk: int) -> Response:
-        image_ids: List[int] = []
+        cache_key: str = f'equipment_item_view_set_{self.get_object().__class__.__name__}_{pk}_images'
+        data = cache.get(cache_key)
 
-        sqs: SearchQuerySet = SearchQuerySet().models(self.get_serializer().Meta.model).filter(
-            django_id=pk
-        )
-        if sqs.count() == 1:
-            image_ids = sqs[0].images
+        if data is None:
+            image_ids: List[int] = []
+            sqs: SearchQuerySet = SearchQuerySet().models(self.get_serializer().Meta.model).filter(
+                django_id=pk
+            )
+            if sqs.count() == 1:
+                image_ids = sqs[0].images
 
-        images: QuerySet[Image] = Image.objects.filter(pk__in=image_ids)
-        return Response(ImageSerializer(images, many=True).data)
+            images: QuerySet[Image] = Image.objects.filter(pk__in=image_ids)
+            data = ImageSerializer(images, many=True).data
+            cache.set(cache_key, data, 60 * 60 * 12)
+
+        return Response(data)
 
     def image_upload(self, request, pk):
         obj = self.get_object()
