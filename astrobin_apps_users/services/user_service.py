@@ -529,5 +529,5 @@ class UserService:
             profile.premium_counter = 0
             profile.save(keep_deleted=True)
         elif subscription.group.name == 'astrobin_lite_2020':
-            profile.premium_counter = Image.objects_including_wip.filter(user=user).count()
+            profile.premium_counter = Image.objects_including_wip.filter(user=self.user).count()
             profile.save(keep_deleted=True)
