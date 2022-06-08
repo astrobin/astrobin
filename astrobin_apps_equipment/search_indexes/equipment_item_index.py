@@ -28,18 +28,19 @@ class EquipmentItemIndex(SearchIndex, Indexable):
         return self.get_model().objects.all()
 
     def _prepare_images_cache(self, obj):
-        images = cache.get(PREPARED_IMAGES_CACHE_KEY)
+        images = cache.get(PREPARED_IMAGES_CACHE_KEY % (obj.__class__.__name__, obj.pk))
         images_and_likes: List[Dict[str, Union[Image, int]]] = []
         if images is None:
             images: QuerySet = Image.objects.filter(self.image_queryset(obj))
+            count: int = images.count()
             image: Image
 
-            for image in images.iterator():
-                likes: int = image.likes()
-                images_and_likes.append(dict(image=image, likes=likes))
+            if count > 0:
+                for image in images.iterator():
+                    likes: int = image.likes()
+                    images_and_likes.append(dict(image=image, likes=likes))
 
             images_and_likes = sorted(images_and_likes, key=lambda x: x.get('likes'), reverse=True)
-
             cache.set(
                 PREPARED_IMAGES_CACHE_KEY % (obj.__class__.__name__, obj.pk),
                 [x.get('image') for x in images_and_likes],
@@ -50,9 +51,9 @@ class EquipmentItemIndex(SearchIndex, Indexable):
     # noinspection PyMethodMayBeStatic
     def prepare_images(self, obj):
         images = self._prepare_images_cache(obj)
-        return list(set(images.values_list('pk', flat=True)))[:50]
+        return list(set([x.pk for x in images]))[:50]
 
     # noinspection PyMethodMayBeStatic
     def prepare_users(self, obj):
         images = self._prepare_images_cache(obj)
-        return list(set(images.values_list('user__pk', flat=True)[:10]))
+        return list(set([x.user.pk for x in images]))[:10]
