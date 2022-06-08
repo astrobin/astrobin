@@ -1,5 +1,8 @@
+from typing import List
+
 from annoying.functions import get_object_or_None
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
 from django.db.models import Q, QuerySet, Value
@@ -9,6 +12,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
+from haystack.query import SearchQuerySet
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
@@ -25,7 +29,9 @@ from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
+from astrobin_apps_images.api.serializers import ImageSerializer
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
+from common.serializers import UserSerializer
 from common.services import AppRedirectionService
 
 
@@ -374,6 +380,30 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         serializer = self.serializer_class(item)
         return Response(serializer.data)
+
+    @action(detail=True, methods=['GET'], url_name='users')
+    def users(self, request, pk: int) -> Response:
+        user_ids: List[int] = []
+
+        sqs: SearchQuerySet = SearchQuerySet().models(self.get_serializer().Meta.model).filter(django_id=pk)
+        if sqs.count() == 1:
+            user_ids = sqs[0].users
+
+        users: QuerySet[User] = User.objects.filter(pk__in=user_ids)
+        return Response(UserSerializer(users, many=True).data)
+
+    @action(detail=True, methods=['GET'], url_name='images')
+    def images(self, request, pk: int) -> Response:
+        image_ids: List[int] = []
+
+        sqs: SearchQuerySet = SearchQuerySet().models(self.get_serializer().Meta.model).filter(
+            django_id=pk
+        )
+        if sqs.count() == 1:
+            image_ids = sqs[0].images
+
+        images: QuerySet[Image] = Image.objects.filter(pk__in=image_ids)
+        return Response(ImageSerializer(images, many=True).data)
 
     def image_upload(self, request, pk):
         obj = self.get_object()
