@@ -2,7 +2,7 @@ import datetime
 import logging
 import re
 from itertools import chain
-from typing import List
+from typing import List, Set
 
 from annoying.functions import get_object_or_None
 from dateutil.relativedelta import relativedelta
@@ -13,7 +13,7 @@ from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import MultipleObjectsReturned
 from django.db import IntegrityError, transaction
-from django.db.models import Q
+from django.db.models import Manager, Q
 from django.db.models.signals import (m2m_changed, post_delete, post_save, pre_save)
 from django.urls import reverse as reverse_url
 from django.utils import timezone
@@ -770,8 +770,18 @@ m2m_changed.connect(group_images_changed, sender=Group.images.through)
 
 
 def equipment_changed(sender, instance: Image, **kwargs):
-    if kwargs.get('action') in ['post_add', 'post_remove', 'post_clear']:
+    model: Manager = kwargs.pop('model')
+    pk_set: Set[int] = kwargs.pop('pk_set')
+    action = kwargs.pop('action')
+
+    if action in ['post_add', 'post_remove', 'post_clear']:
         Image.all_objects.filter(pk=instance.pk).update(updated=timezone.now())
+        if pk_set:
+            for pk in pk_set:
+                item = get_object_or_None(model, pk=pk)
+                if item is not None and hasattr(item, 'last_added_or_removed_from_image'):
+                    model.objects.filter(pk=pk).update(last_added_or_removed_from_image=timezone.now())
+
 
 m2m_changed.connect(equipment_changed, sender=Image.imaging_telescopes.through)
 m2m_changed.connect(equipment_changed, sender=Image.imaging_cameras.through)
