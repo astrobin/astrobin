@@ -135,6 +135,25 @@ class EquipmentItem(SafeDeleteModel):
         blank=True,
     )
 
+    ####################################################################################################################
+    # This items are synced back from the search index.                                                                #
+    ####################################################################################################################
+
+    user_count = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    image_count = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    ####################################################################################################################
+    ####################################################################################################################
+
     @property
     def item_type(self):
         return EquipmentItemService(self).get_type()
