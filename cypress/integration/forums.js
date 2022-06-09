@@ -68,7 +68,8 @@ describe("Forums", () => {
         cy.get(".post blockquote a[href='/users/astrobin_dev/']").should("exist");
     });
 
-    it("should quote with non-ASCII characters", () => {
+    // Skip temporarily because too flaky.
+    it.skip("should quote with non-ASCII characters", () => {
         cy.get(".post-related").last().contains("quote").click();
         cy.wait(1000);
         cy.get("#cke_id_body .cke_wysiwyg_div").type("你好");
