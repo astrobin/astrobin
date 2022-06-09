@@ -97,6 +97,12 @@ class EquipmentItem(SafeDeleteModel):
         editable=False
     )
 
+    last_added_or_removed_from_image = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
     brand = models.ForeignKey(
         EquipmentBrand,
         related_name='%(app_label)s_brand_%(class)ss',

@@ -57,3 +57,7 @@ class EquipmentItemIndex(SearchIndex, Indexable):
     def prepare_users(self, obj):
         images = self._prepare_images_cache(obj)
         return list(set([x.user.pk for x in images]))[:10]
+
+    # noinspection PyMethodMayBeStatic
+    def get_updated_field(self):
+        return 'last_added_or_removed_from_image'
