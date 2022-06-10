@@ -80,7 +80,17 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 )
         elif sort == "az":
             queryset = queryset.order_by(Lower('brand__name'), Lower('name'))
-
+        elif sort == "-az":
+            queryset = queryset.order_by(Lower('brand__name'), Lower('name')).reverse()
+        elif sort == "users":
+            queryset = queryset.order_by('user_count')
+        elif sort == "-users":
+            queryset = queryset.order_by('-user_count')
+        elif sort == "images":
+            queryset = queryset.order_by('image_count')
+        elif sort == "-images":
+            queryset = queryset.order_by('-image_count')
+            
         return queryset
 
     @action(
