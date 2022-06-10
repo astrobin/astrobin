@@ -2,6 +2,7 @@
 
 from typing import Dict, List, Union
 
+import simplejson
 from django.core.cache import cache
 from django.db.models import QuerySet
 from haystack import fields
@@ -9,6 +10,8 @@ from haystack.constants import Indexable
 from haystack.indexes import SearchIndex
 
 from astrobin.models import Image
+from astrobin_apps_images.api.serializers import ImageSerializer
+from common.serializers import UserSerializer
 
 PREPARED_FIELD_CACHE_EXPIRATION = 60
 PREPARED_IMAGES_CACHE_KEY = 'astrobin_apps_equipment_search_indexed_images_%s_%d'
@@ -17,13 +20,13 @@ class EquipmentItemIndex(SearchIndex, Indexable):
     text = fields.CharField(document=True, use_template=True)
 
     # Top 10 users (by AstroBin Index) who have this item in at least one of their public images.
-    users = fields.MultiValueField()
+    users = fields.CharField()
 
     # Number of users who have used this item.
     user_count = fields.IntegerField()
 
     # Top 50 images (by likes) that feature this item.
-    images = fields.MultiValueField()
+    images = fields.CharField()
 
     # Number of images that feature this item.
     image_count = fields.IntegerField()
@@ -57,8 +60,9 @@ class EquipmentItemIndex(SearchIndex, Indexable):
         return images
 
     def prepare_users(self, obj) -> List[int]:
-        images: List[Image] = self._prepare_images_cache(obj)
-        return list(set([x.user.pk for x in images]))[:10]
+        images: List[Image] = self._prepare_images_cache(obj)[:10]
+        data: str = UserSerializer(list(set([x.user for x in images])), many=True).data
+        return simplejson.dumps(data)
 
     def prepare_user_count(self, obj) -> int:
         images: List[Image] = self._prepare_images_cache(obj)
@@ -67,8 +71,9 @@ class EquipmentItemIndex(SearchIndex, Indexable):
         return count
 
     def prepare_images(self, obj) -> List[int]:
-        images: List[Image] = self._prepare_images_cache(obj)
-        return list(set([x.pk for x in images]))[:50]
+        images: List[Image] = self._prepare_images_cache(obj)[:50]
+        data: str = ImageSerializer(images, many=True).data
+        return simplejson.dumps(data)
 
     def prepare_image_count(self, obj) -> int:
         images: List[Image] = self._prepare_images_cache(obj)
