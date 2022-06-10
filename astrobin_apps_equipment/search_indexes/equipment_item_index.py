@@ -20,16 +20,16 @@ class EquipmentItemIndex(SearchIndex, Indexable):
     text = fields.CharField(document=True, use_template=True)
 
     # Top 10 users (by AstroBin Index) who have this item in at least one of their public images.
-    users = fields.CharField()
+    equipment_item_users = fields.CharField()
 
     # Number of users who have used this item.
-    user_count = fields.IntegerField()
+    equipment_item_user_count = fields.IntegerField()
 
     # Top 50 images (by likes) that feature this item.
-    images = fields.CharField()
+    equipment_item_images = fields.CharField()
 
     # Number of images that feature this item.
-    image_count = fields.IntegerField()
+    equipment_item_image_count = fields.IntegerField()
 
     def image_queryset(self, obj):
         raise NotImplemented
@@ -59,23 +59,23 @@ class EquipmentItemIndex(SearchIndex, Indexable):
             )
         return images
 
-    def prepare_users(self, obj) -> List[int]:
+    def prepare_equipment_item_users(self, obj) -> List[int]:
         images: List[Image] = self._prepare_images_cache(obj)[:10]
         data: str = UserSerializer(list(set([x.user for x in images])), many=True).data
         return simplejson.dumps(data)
 
-    def prepare_user_count(self, obj) -> int:
+    def prepare_equipment_item_user_count(self, obj) -> int:
         images: List[Image] = self._prepare_images_cache(obj)
         count = len(set([x.user for x in images]))
         self.get_model().objects.filter(pk=obj.pk).update(user_count=count)
         return count
 
-    def prepare_images(self, obj) -> List[int]:
+    def prepare_equipment_item_images(self, obj) -> List[int]:
         images: List[Image] = self._prepare_images_cache(obj)[:50]
         data: str = ImageSerializer(images, many=True).data
         return simplejson.dumps(data)
 
-    def prepare_image_count(self, obj) -> int:
+    def prepare_equipment_item_image_count(self, obj) -> int:
         images: List[Image] = self._prepare_images_cache(obj)
         count: int = len(images)
         self.get_model().objects.filter(pk=obj.pk).update(image_count=count)
