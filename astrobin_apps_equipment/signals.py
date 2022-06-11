@@ -217,6 +217,7 @@ def send_edit_proposal_created_notification(sender, instance, created, **kwargs)
                             f'/{target.slug}'
                         )
                     ),
+                    'unapproved': target.reviewer_decision is None,
                     'edit_proposal_url': build_notification_url(
                         AppRedirectionService.redirect(
                             f'/equipment'
