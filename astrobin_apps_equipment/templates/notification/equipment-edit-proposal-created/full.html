@@ -8,7 +8,7 @@
 </p>
 
 <p>
-    {% if item.reviewer_decision == None %}
+    {% if unapproved %}
         <strong>{% trans "Please note" %}</strong>:
         {% blocktrans trimmed %}
             This item has not been approved yet, therefore is not yet officially part of AstroBin's equipment database.
