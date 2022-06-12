@@ -196,9 +196,10 @@ def send_edit_proposal_created_notification(sender, instance, created, **kwargs)
         recipients.extend(list(previous_proposals_reviewed))
         recipients.extend(list(commenters))
         recipients = list(set(recipients))
-        recipients.remove(user)
+        if user in recipients:
+            recipients.remove(user)
 
-        if len(recipients) > 0:
+        if len(recipients) > 0 and user:
             push_notification(
                 recipients,
                 user,

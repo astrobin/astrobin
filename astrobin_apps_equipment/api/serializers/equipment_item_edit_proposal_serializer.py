@@ -1,4 +1,5 @@
 from rest_framework import fields
+from rest_framework.exceptions import ValidationError
 
 from astrobin_apps_equipment.api.serializers.equipment_item_serializer import EquipmentItemSerializer
 
@@ -25,11 +26,26 @@ class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
             'website',
             'image',
         ]
-        read_only_fields = ['image']
+        read_only_fields = ['brand', 'image']
         abstract = True
 
     def create(self, validated_data):
         target = validated_data['edit_proposal_target']
+
+        already_has_pending = self.Meta.model.objects.filter(
+            edit_proposal_review_status__isnull=True, edit_proposal_target=target.pk
+        ).exists()
+        if already_has_pending:
+            raise ValidationError("This item already has a pending edit proposal")
+
+        if 'brand' in validated_data and validated_data['brand'] != target.brand:
+            raise ValidationError("Edit proposals cannot be used to change an item's brand")
+
+        if 'klass' not in validated_data or validated_data['klass'] != target.klass:
+            raise ValidationError("The klass property must match that of the target item")
+
+        if 'edit_proposal_review_status' in validated_data and validated_data['edit_proposal_review_status'] is not None:
+            raise ValidationError("The edit_proposal_review_status must be null")
 
         validated_data['edit_proposal_by'] = self.context['request'].user
         validated_data['edit_proposal_ip'] = self.context['request'].META.get("REMOTE_ADDR")
