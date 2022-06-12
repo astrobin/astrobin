@@ -395,8 +395,12 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         if data is None:
             sqs: SearchQuerySet = SearchQuerySet().models(self.get_serializer().Meta.model).filter(django_id=pk)
-            if sqs.count() == 1:
+
+            if sqs.count() > 0:
                 data = sqs[0].equipment_item_users
+            else:
+                data = '[]'
+
             cache.set(cache_key, data, 60*60*12)
 
         return Response(simplejson.loads(data))
@@ -407,11 +411,13 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         data = cache.get(cache_key)
 
         if data is None:
-            sqs: SearchQuerySet = SearchQuerySet().models(self.get_serializer().Meta.model).filter(
-                django_id=pk
-            )
-            if sqs.count() == 1:
+            sqs: SearchQuerySet = SearchQuerySet().models(self.get_serializer().Meta.model).filter(django_id=pk)
+
+            if sqs.count() > 0:
                 data = sqs[0].equipment_item_images
+            else:
+                data = '[]'
+
             cache.set(cache_key, data, 60 * 60 * 12)
 
         return Response(simplejson.loads(data))
