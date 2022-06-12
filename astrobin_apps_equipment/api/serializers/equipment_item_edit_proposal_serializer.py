@@ -26,7 +26,7 @@ class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
             'website',
             'image',
         ]
-        read_only_fields = ['brand', 'image']
+        read_only_fields = ['image']
         abstract = True
 
     def create(self, validated_data):
