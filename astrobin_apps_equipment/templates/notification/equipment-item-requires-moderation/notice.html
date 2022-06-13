@@ -1,0 +1,7 @@
+{% load i18n %}
+
+<a href="{{ item_url }}">
+    {% blocktrans trimmed %}
+        <strong>{{ user }}</strong> created the equipment item <strong>{{ item }}</strong> and it requires moderation.
+    {% endblocktrans %}
+</a>
