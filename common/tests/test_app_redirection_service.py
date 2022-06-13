@@ -23,6 +23,12 @@ class AppRedirectionServiceTest(TestCase):
         service = AppRedirectionService()
         self.assertEqual('https://app.astrobin.com/foo', service.redirect('/foo'))
 
+    @override_settings(APP_URL='https://app.astrobin.com')
+    @override_settings(BASE_URL='https://www.astrobin.com')
+    def test_redirects_cuts_off_base_url(self):
+        service = AppRedirectionService()
+        self.assertEqual('https://app.astrobin.com/foo', service.redirect('https://www.astrobin.com/foo'))
+
     def test_contact_redirect(self):
         request = self.request_factory.get('/contact')
         request.user = AnonymousUser()

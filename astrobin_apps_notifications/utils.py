@@ -38,6 +38,11 @@ def get_notification_url_params_for_email(from_user=None, additional_query_args=
 
 
 def build_notification_url(url, from_user=None, additional_query_args=None):
+    # Prevent presence of both BASE_URL and APP_URL, and remove BASE_URL if that's the case.
+    # This can happen when an object's get_absolute_url includes the APP_URL, but the code that calls
+    # build_notification_url doesn't know that.
+    url = url.replace(f'{settings.BASE_URL}{settings.APP_URL}', settings.APP_URL)
+
     params = get_notification_url_params_for_email(from_user, additional_query_args)
     url_parse = urlparse(url)
     query = url_parse.query
