@@ -55,8 +55,11 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         if q:
             brand = get_object_or_None(EquipmentBrand, name__iexact=q)
+            brand_queryset: QuerySet = queryset.none()
             if brand:
-                queryset = queryset.filter(brand=brand).order_by(Lower('name'))
+                brand_queryset = queryset.filter(brand=brand).order_by(Lower('name'))
+            if brand_queryset.exists():
+                queryset = brand_queryset
             else:
                 queryset = queryset.annotate(
                     full_name=Concat('brand__name', Value(' '), 'name'),
