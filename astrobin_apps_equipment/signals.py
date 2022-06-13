@@ -1,3 +1,5 @@
+from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
+
 from annoying.functions import get_object_or_None
 from django.apps import apps
 from django.conf import settings
@@ -245,3 +247,37 @@ def rename_equipment_preset_after_deletion(sender, instance: EquipmentPreset, **
     if '[DELETED] ' not in instance.name:
         instance.name = f'[DELETED] {instance.name} ({instance.pk}'
         instance.save(keep_deleted=True)
+
+
+@receiver(post_save, sender=Sensor)
+@receiver(post_save, sender=Camera)
+@receiver(post_save, sender=Telescope)
+@receiver(post_save, sender=Mount)
+@receiver(post_save, sender=Filter)
+@receiver(post_save, sender=Accessory)
+@receiver(post_save, sender=Software)
+def send_equipment_item_requires_moderation_notification(sender, instance, created: bool, **kwargs):
+    if not created:
+        return
+
+    url: str = build_notification_url(instance.get_absolute_url())
+    parsed = urlparse(url)
+    url_dict = dict(parse_qsl(parsed.query))
+    url_dict.update({'request-review': 'true'})
+    new_query = urlencode(url_dict)
+    parsed = parsed._replace(query=new_query)
+    url = urlunparse(parsed)
+
+    push_notification(
+        User.objects.filter(groups__name='equipment_moderators'),
+        None,
+        'equipment-item-requires-moderation',
+        {
+            'user': instance.created_by.userprofile.get_display_name(),
+            'user_url': build_notification_url(
+                settings.BASE_URL + reverse('user_page', args=(instance.created_by.username,))
+            ),
+            'item': instance,
+            'url': url
+        }
+    )
