@@ -8,6 +8,7 @@ from safedelete.models import SafeDeleteModel
 from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemGroup, EQUIPMENT_ITEM_KLASS_CHOICES
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
+from common.services import AppRedirectionService
 from common.upload_paths import upload_path
 
 
@@ -168,6 +169,9 @@ class EquipmentItem(SafeDeleteModel):
 
     def __str__(self):
         return '%s %s' % (self.brand.name if self.brand else _("DIY"), self.name)
+
+    def get_absolute_url(self):
+        return AppRedirectionService.redirect(f'/equipment/explorer/{self.klass.lower()}/{self.pk}')
 
     class Meta:
         abstract = True

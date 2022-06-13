@@ -1,8 +1,5 @@
 from django.contrib.auth.models import User
-from django.urls import reverse
-from django.test import TestCase
-
-from astrobin_apps_notifications.templatetags.astrobin_apps_notifications_tags import *
+from django.test import TestCase, override_settings
 from astrobin_apps_notifications.utils import *
 
 
@@ -23,17 +20,26 @@ class NotificationsTest(TestCase):
 
     def test_build_notification_url_no_other_params(self):
         url = build_notification_url('www.astrobin.com')
-        url_parse = urlparse.urlparse(url)
-        query = url_parse.query
+        parsed = urlparse(url)
+        query = parsed.query
         self.assertTrue('utm_source=astrobin' in query)
         self.assertTrue('utm_medium=email' in query)
         self.assertTrue('utm_campaign=notification' in query)
 
     def test_build_notification_url_with_other_params(self):
         url = build_notification_url('www.astrobin.com?foo=bar')
-        url_parse = urlparse.urlparse(url)
-        query = url_parse.query
+        parsed = urlparse(url)
+        query = parsed.query
         self.assertTrue('utm_source=astrobin' in query)
         self.assertTrue('utm_medium=email' in query)
         self.assertTrue('utm_campaign=notification' in query)
         self.assertTrue('foo=bar' in query)
+
+    @override_settings(
+        BASE_URL="https://www.astrobin.com",
+        APP_URL="https://app.astrobin.com"
+    )
+    def test_build_notification_url_base_url_and_app_url(self):
+        url = build_notification_url(f'{settings.BASE_URL}{settings.APP_URL}/foo')
+        self.assertFalse(settings.BASE_URL in url)
+        self.assertTrue(settings.APP_URL in url)

@@ -1,0 +1,15 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    <a href="{{user_url}}">{{user}}</a> commented on your unapproved equipment item <strong>{{ target }}</strong>.
+{% endblocktrans %}
+
+<p>
+    <em>
+        {% blocktrans trimmed %}
+            You received this notification because you created this item.
+        {% endblocktrans %}
+    </em>
+</p>
+
+<a href="{{ url }}" class="btn btn-primary">{% trans "View comment" %}</a>

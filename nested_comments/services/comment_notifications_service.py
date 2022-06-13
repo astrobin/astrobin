@@ -8,6 +8,7 @@ from django.urls import reverse
 
 from astrobin.models import Image
 from astrobin.stories import add_story
+from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Software, Telescope
 from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_notifications.services import NotificationsService
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
@@ -49,6 +50,18 @@ class CommentNotificationsService:
             object_owner = obj.judge
             notification = 'new_comment_to_scheduled_iotd'
             url = AppRedirectionService.redirect(f'/iotd/judgement-queue#comments-{obj.pk}-{instance.pk}')
+        elif model_class in (
+            Camera,
+            Telescope,
+            Filter,
+            Mount,
+            Accessory,
+            Software
+        ):
+            object_owner = obj.created_by
+            notification = 'new_comment_to_unapproved_equipment_item'
+            url = AppRedirectionService.redirect(f'/equipment/explorer/{model_class.__name__.lower()}/{obj.pk}#c{self.comment.id}')
+            pass
 
         if UserService(object_owner).shadow_bans(instance.author):
             log.info("Skipping notification for comment because %d shadow-bans %d" % (

@@ -12,6 +12,9 @@ class AppRedirectionService:
 
     @staticmethod
     def redirect(path: str) -> str:
+        if settings.BASE_URL in path:
+            path = path.replace(settings.BASE_URL,  '')
+
         return f'{settings.APP_URL}{path}'
 
     @staticmethod

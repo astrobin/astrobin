@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    {{user}} commented on your unapproved equipment item "{{ target }}".
+{% endblocktrans %}
