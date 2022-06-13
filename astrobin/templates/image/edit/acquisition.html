@@ -5,6 +5,7 @@
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
 {% load common_tags %}
+{% load astrobin_apps_equipment_tags %}
 
 {% block title %}{% trans "Edit your image: acquisition details" %}{% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
@@ -68,6 +69,16 @@
                 <form class="form-horizontal" id="image_acquisition" action="{% url 'image_edit_save_acquisition' %}"
                       method="post" novalidate>{% csrf_token %}
                     {% for form in deep_sky_acquisitions %}
+                        {% if request.user|is_own_equipment_migrator and form.filter_2.field.queryset.count == 0 %}
+                            <div class="alert alert-warning">
+                                <i class="icon-warning-sign"></i>
+                                {% blocktrans trimmed %}
+                                    Filters are not available because you didn't add any to the equipment list of this
+                                    image.
+                                {% endblocktrans %}
+                            </div>
+                        {% endif %}
+
                         <div id="acquisition-session-{{ forloop.counter0 }}" class="acquisition-session">
                             <h3>
                                 {% trans "Acquisition session" %}
