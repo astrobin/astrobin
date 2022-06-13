@@ -1605,13 +1605,13 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         if not field.name.startswith('images/'):
             field.name = 'images/' + field.name
 
-        if settings.AWS_S3_ENABLED:
-            thumbnailer = get_thumbnailer(field.file, field.name)
-        else:
-            storage = OverwritingFileSystemStorage(location=os.path.join(settings.UPLOADS_DIRECTORY))
-            thumbnailer = get_thumbnailer(storage, field.name)
-
         try:
+            if settings.AWS_S3_ENABLED:
+                thumbnailer = get_thumbnailer(field.file, field.name)
+            else:
+                storage = OverwritingFileSystemStorage(location=os.path.join(settings.UPLOADS_DIRECTORY))
+                thumbnailer = get_thumbnailer(storage, field.name)
+
             thumb = thumbnailer.get_thumbnail(self.get_thumbnail_options(alias, revision_label, thumbnail_settings))
         except Exception as e:
             log.error("Image %d: unable to generate thumbnail: %s." % (self.id, str(e)))
