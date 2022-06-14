@@ -60,8 +60,8 @@ class EquipmentItemIndex(SearchIndex, Indexable):
         return images
 
     def prepare_equipment_item_users(self, obj) -> List[int]:
-        images: List[Image] = self._prepare_images_cache(obj)[:10]
-        data: str = UserSerializer(list(set([x.user for x in images])), many=True).data
+        images: List[Image] = self._prepare_images_cache(obj)
+        data: str = UserSerializer(list(set([x.user for x in images][:10])), many=True).data
         return simplejson.dumps(data)
 
     def prepare_equipment_item_user_count(self, obj) -> int:
