@@ -345,8 +345,8 @@ class ImageDetailView(ImageDetailViewBase):
 
                 if a.number and a.duration:
                     key = ""
-                    if a.filter is not None:
-                        key = "filter(%s)" % a.filter
+                    if a.filter is not None or a.filter_2 is not None:
+                        key = "filter(%s)" % (a.filter or a.filter_2)
                     if a.iso is not None:
                         key += '-ISO(%d)' % a.iso
                     if a.gain is not None:
