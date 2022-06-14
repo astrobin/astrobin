@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 08:06+0000\n"
+"POT-Creation-Date: 2022-06-14 10:01+0000\n"
 "PO-Revision-Date: 2020-11-25 03:08+0000\n"
 "Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,6 +75,22 @@ msgstr "星座線を表示"
 msgid "Show named stars"
 msgstr "星の名前を表示"
 
+msgid "Show HD stars"
+msgstr ""
+
+msgid ""
+"This catalog uses data from the All-sky Compiled Catalogue of 2.5 million "
+"stars (Kharchenko+ 2009), VizieR catalog: I/280B."
+msgstr ""
+
+msgid "Max. magnitude"
+msgstr ""
+
+msgid ""
+"Only HD stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
+
 msgid "Show Messier objects"
 msgstr "メシエ天体を表示"
 
@@ -118,8 +134,18 @@ msgstr "GCVSスターを表示"
 msgid "General Catalog of Variable Stars"
 msgstr "変更星の一般カタログ"
 
+msgid ""
+"Only GCVS stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
+
 msgid "Show Tycho-2 catalog"
 msgstr "Tycho-2カタログを表示"
+
+msgid ""
+"Only Tycho-2 stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
 
 msgid "Show CGPN objects"
 msgstr "CGPN天体を表示"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 08:06+0000\n"
+"POT-Creation-Date: 2022-06-14 10:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,6 +57,22 @@ msgstr ""
 msgid "Show named stars"
 msgstr ""
 
+msgid "Show HD stars"
+msgstr ""
+
+msgid ""
+"This catalog uses data from the All-sky Compiled Catalogue of 2.5 million "
+"stars (Kharchenko+ 2009), VizieR catalog: I/280B."
+msgstr ""
+
+msgid "Max. magnitude"
+msgstr ""
+
+msgid ""
+"Only HD stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
+
 msgid "Show Messier objects"
 msgstr ""
 
@@ -100,7 +116,17 @@ msgstr ""
 msgid "General Catalog of Variable Stars"
 msgstr ""
 
+msgid ""
+"Only GCVS stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
+
 msgid "Show Tycho-2 catalog"
+msgstr ""
+
+msgid ""
+"Only Tycho-2 stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
 msgstr ""
 
 msgid "Show CGPN objects"
