@@ -2,25 +2,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Groups\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 08:06+0000\n"
-"PO-Revision-Date: 2022-05-09 01:49+0200\n"
+"POT-Creation-Date: 2021-04-05 16:11+0200\n"
+"PO-Revision-Date: 2022-06-02 10:08+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108436\n"
-"X-Loco-Api-Version: 1.0.26 20220328-1\n"
-
-msgid ""
-"Only the following category support autosubmission: Professional network, "
-"Club or association, Internet community, Friends or partners, Geographical "
-"area"
-msgstr ""
+"X-Loco-Api-Version: 1.0.26 20220328-1"
 
 msgid "Autosubmission deactivation strategy"
 msgstr "Estrategia de desactivación de envío automático"
@@ -74,15 +68,6 @@ msgstr "Específico a cierto equipo"
 msgid "Other"
 msgstr "Otro"
 
-msgid "Publication"
-msgstr ""
-
-msgid "Title"
-msgstr ""
-
-msgid "Key/value tag"
-msgstr ""
-
 msgid "Name"
 msgstr "Nombre"
 
@@ -94,18 +79,6 @@ msgstr "Etiquetas HTML están permitidas."
 
 msgid "Category"
 msgstr "Categoría"
-
-msgid "Default image sorting"
-msgstr ""
-
-msgid "Image key/value tag sorting"
-msgstr ""
-
-msgid ""
-"If images are sorted by a key/value tag, please specify which one. <a "
-"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
-"more.</a>"
-msgstr ""
 
 msgid "Public group"
 msgstr "Grupo público"
@@ -139,9 +112,6 @@ msgstr ""
 
 msgid "Last activity"
 msgstr "Última actividad:"
-
-msgid "Date created"
-msgstr "Fecha de creación"
 
 msgid "Members"
 msgstr "Miembros"
@@ -186,9 +156,6 @@ msgstr "Guardar"
 msgid "Cancel"
 msgstr "Cancelar"
 
-msgid "Please don't add more than 100 images in one go, thanks!"
-msgstr ""
-
 msgid "Delete group?"
 msgstr "¿Eliminar grupo?"
 
@@ -225,9 +192,6 @@ msgstr "Abandonar el grupo"
 
 msgid "Moderate join requests"
 msgstr "Moderar solicitudes de unión"
-
-msgid "Sort images"
-msgstr ""
 
 msgid "This group is public"
 msgstr "Este grupo es público"
@@ -269,14 +233,17 @@ msgid ""
 "<strong>%(post_count)s</strong> posts in <strong>%(topic_count)s</strong> "
 "topics"
 msgstr ""
-"<strong>%(post_count)s</strong> publicaciones en <strong>%(topic_count)s</"
-"strong> temas"
+"<strong>%(post_count)s</strong> publicaciones en <strong>%(topic_count)"
+"s</strong> temas"
 
 msgid "View all"
 msgstr "Ver todas"
 
 msgid "New topic"
 msgstr "Nuevo tema"
+
+msgid "Please join the group to view its forum."
+msgstr "Por favor únase al grupo para ver su foro"
 
 msgid ""
 "Careful! Do you really want to delete this group? This operation cannot be "
@@ -293,8 +260,8 @@ msgid ""
 "This is a public group: all content, including the members list, is "
 "available to non-members."
 msgstr ""
-"Este es un grupo público: todo el contenido, incluyendo la lista de "
-"miembros, está disponible para los que no son miembros."
+"Este es un grupo público: todo el contenido, incluyendo la lista de miembros,"
+" está disponible para los que no son miembros."
 
 msgid "This is a private group: only members have access to its contents."
 msgstr ""
@@ -341,29 +308,29 @@ msgstr "Grupos"
 msgid "Sort"
 msgstr "Ordenar"
 
-msgid "Search"
-msgstr ""
+msgid "Date created"
+msgstr "Fecha de creación"
 
-msgid "Private groups you own"
-msgstr ""
+msgid "Your private groups"
+msgstr "Sus grupos privados "
 
-msgid "Private groups you are a member of"
+msgid "You own, or are a member of, or were invited to, these private groups."
 msgstr ""
+"Usted es dueño de, o es miembro de, o fue invitado a estos grupos privados."
 
-msgid "Private groups you are invited to"
-msgstr ""
-
-msgid "Public groups you own"
-msgstr ""
-
-msgid "Public groups you are a member of"
-msgstr ""
-
-msgid "Public groups you are invited to"
-msgstr ""
+msgctxt "group"
+msgid "Create private group"
+msgstr "Crear grupos privados "
 
 msgid "Public groups"
 msgstr "Grupos públicos"
+
+msgid "Open to the whole community."
+msgstr "Abrir a toda la comunidad"
+
+msgctxt "group"
+msgid "Create public group"
+msgstr "Crear grupo público"
 
 msgid "No groups available."
 msgstr "No hay grupos disponibles."
@@ -462,25 +429,56 @@ msgstr "Ha dejado este grupo"
 msgid "Form saved"
 msgstr "Formulario guardado"
 
-#~ msgid "Please join the group to view its forum."
-#~ msgstr "Por favor únase al grupo para ver su foro"
+msgid ""
+"Only the following category support autosubmission: Professional network, "
+"Club or association, Internet community, Friends or partners, Geographical "
+"area"
+msgstr ""
 
-#~ msgid "Your private groups"
-#~ msgstr "Sus grupos privados "
+msgid "Publication"
+msgstr ""
 
-#~ msgid ""
-#~ "You own, or are a member of, or were invited to, these private groups."
-#~ msgstr ""
-#~ "Usted es dueño de, o es miembro de, o fue invitado a estos grupos "
-#~ "privados."
+msgid "Title"
+msgstr ""
 
-#~ msgctxt "group"
-#~ msgid "Create private group"
-#~ msgstr "Crear grupos privados "
+msgid "Key/value tag"
+msgstr ""
 
-#~ msgid "Open to the whole community."
-#~ msgstr "Abrir a toda la comunidad"
+msgid "Default image sorting"
+msgstr ""
 
-#~ msgctxt "group"
-#~ msgid "Create public group"
-#~ msgstr "Crear grupo público"
+msgid "Image key/value tag sorting"
+msgstr ""
+
+msgid ""
+"If images are sorted by a key/value tag, please specify which one. <a "
+"target='_blank' href='https://welcome.astrobin.com/features/groups'>Learn "
+"more.</a>"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Please don't add more than 100 images in one go, thanks!"
+msgstr ""
+
+msgid "Sort images"
+msgstr ""
+
+msgid "Private groups you own"
+msgstr ""
+
+msgid "Private groups you are a member of"
+msgstr ""
+
+msgid "Private groups you are invited to"
+msgstr ""
+
+msgid "Public groups you own"
+msgstr ""
+
+msgid "Public groups you are a member of"
+msgstr ""
+
+msgid "Public groups you are invited to"
+msgstr ""
