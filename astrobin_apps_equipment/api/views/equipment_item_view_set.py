@@ -1,3 +1,5 @@
+from collections import Counter
+
 import simplejson
 from annoying.functions import get_object_or_None
 from django.conf import settings
@@ -29,6 +31,8 @@ from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerD
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
+from astrobin_apps_premium.services.premium_service import PremiumService
+from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_access_full_search
 from common.services import AppRedirectionService
 
 
@@ -391,7 +395,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(item)
         return Response(serializer.data)
 
-    @action(detail=True, methods=['GET'], url_name='users')
+    @action(detail=True, methods=['GET'], url_path='users')
     def users(self, request, pk: int) -> Response:
         cache_key: str = f'equipment_item_view_set_{self.get_object().__class__.__name__}_{pk}_users'
         data = cache.get(cache_key)
@@ -408,7 +412,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         return Response(simplejson.loads(data))
 
-    @action(detail=True, methods=['GET'], url_name='images')
+    @action(detail=True, methods=['GET'], url_path='images')
     def images(self, request, pk: int) -> Response:
         cache_key: str = f'equipment_item_view_set_{self.get_object().__class__.__name__}_{pk}_images'
         data = cache.get(cache_key)
@@ -420,6 +424,30 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 data = sqs[0].equipment_item_images
             else:
                 data = '[]'
+
+            cache.set(cache_key, data, 60 * 60 * 12)
+
+        return Response(simplejson.loads(data))
+
+    @action(detail=True, methods=['GET'], url_path='most-often-used-with')
+    def most_often_used_with(self, request, pk: int) -> Response:
+        valid_subscription = PremiumService(request.user).get_valid_usersubscription()
+        can_access = can_access_full_search(valid_subscription)
+        cache_key: str = f'equipment_item_view_set_{self.get_object().__class__.__name__}_{pk}_most_often_used_with_{can_access}'
+        data = cache.get(cache_key)
+
+        if data is None:
+            sqs: SearchQuerySet = SearchQuerySet().models(self.get_serializer().Meta.model).filter(django_id=pk)
+
+            if sqs.count() > 0:
+                data = sqs[0].equipment_item_most_often_used_with
+            else:
+                data = '{}'
+
+            if not can_access:
+                # Restrict to the top item.
+                parsed = dict(Counter(simplejson.loads(data)).most_common(1))
+                data = simplejson.dumps(parsed)
 
             cache.set(cache_key, data, 60 * 60 * 12)
 

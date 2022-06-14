@@ -1,5 +1,5 @@
 # noinspection PyMethodMayBeStatic
-
+from collections import Counter
 from typing import Dict, List, Union
 
 import simplejson
@@ -10,6 +10,8 @@ from haystack.constants import Indexable
 from haystack.indexes import SearchIndex
 
 from astrobin.models import Image
+from astrobin_apps_equipment.models import EquipmentItem
+from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_images.api.serializers import ImageSerializer
 from common.serializers import UserSerializer
 
@@ -30,6 +32,26 @@ class EquipmentItemIndex(SearchIndex, Indexable):
 
     # Number of images that feature this item.
     equipment_item_image_count = fields.IntegerField()
+
+    # This fields is a dictionary of the items that this items is most often used with, and it's only valid for certain
+    # combinations:
+    #
+    # Camera -> Telescope, Filter
+    # Telescope -> Camera, Mount
+    # Mount -> Telescope
+    # Filter -> Camera
+    # Accessory -> None
+    # Software -> None
+    #
+    # The dictionary is limited to the top 10 items and is a JSON string  representation of the following object:
+    # {
+    #   str: number
+    # }
+    #
+    # where:
+    #  the key is a a string built with the item's klass and its id, e.g. "CAMERA-1234"
+    #  the value is the number of images that this item has in common with it
+    equipment_item_most_often_used_with = fields.CharField()
 
     def image_queryset(self, obj):
         raise NotImplemented
@@ -80,6 +102,48 @@ class EquipmentItemIndex(SearchIndex, Indexable):
         count: int = len(images)
         self.get_model().objects.filter(pk=obj.pk).update(image_count=count)
         return count
+
+    def prepare_equipment_item_most_often_used_with(self, obj):
+        data: Dict[str, int] = {}
+        image: Image
+        processing_list = [
+            {
+                'klass': EquipmentItemKlass.CAMERA,
+                'lookup_property': 'imaging_cameras_2',
+                'match_properties': ('imaging_telescopes_2', 'filters_2',)
+            },
+            {
+                'klass': EquipmentItemKlass.TELESCOPE,
+                'lookup_property': 'imaging_telescopes_2',
+                'match_properties': ('imaging_cameras_2', 'mounts_2',)
+            },
+            {
+                'klass': EquipmentItemKlass.MOUNT,
+                'lookup_property': 'mounts_2',
+                'match_properties': ('imaging_telescopes_2',)
+            },
+            {
+                'klass': EquipmentItemKlass.FILTER,
+                'lookup_property': 'filters_2',
+                'match_properties': ('imaging_cameras_2',)
+            },
+        ]
+
+        def _update_data(item: EquipmentItem):
+            key: str = f'{item.klass}-{item.id}'
+            value: int = data.get(key, 0)
+            data[key] = value + 1
+
+        for processing_item in processing_list:
+            if processing_item.get('klass') == obj.klass:
+                for image in Image.objects.filter(**{processing_item.get('lookup_property'): obj}).iterator():
+                    for x in processing_item.get('match_properties'):
+                        for item in getattr(image, x).all().iterator():
+                            _update_data(item)
+
+        data = dict(Counter(data).most_common(10))
+
+        return simplejson.dumps(data)
 
     def get_updated_field(self):
         return 'last_added_or_removed_from_image'
