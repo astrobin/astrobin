@@ -81,6 +81,5 @@ class EquipmentItemIndex(SearchIndex, Indexable):
         self.get_model().objects.filter(pk=obj.pk).update(image_count=count)
         return count
 
-
     def get_updated_field(self):
         return 'last_added_or_removed_from_image'
