@@ -141,6 +141,10 @@ class EquipmentItemIndex(SearchIndex, Indexable):
                         for item in getattr(image, x).all().iterator():
                             _update_data(item)
 
+        # Only keep those with more than one match.
+        data = dict(filter(lambda x: x[1] > 1, data.items()))
+
+        # Limit to 10.
         data = dict(Counter(data).most_common(10))
 
         return simplejson.dumps(data)
