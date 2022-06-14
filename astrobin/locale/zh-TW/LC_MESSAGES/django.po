@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 08:06+0000\n"
+"POT-Creation-Date: 2022-06-14 10:01+0000\n"
 "PO-Revision-Date: 2015-12-30 10:07+0000\n"
 "Last-Translator: marmotstar <marmot.subaru@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3577,6 +3577,9 @@ msgstr ""
 msgid "Submit for IOTD/TP consideration"
 msgstr ""
 
+msgid "Deadline"
+msgstr ""
+
 msgid "Delete image and all revisions"
 msgstr ""
 
@@ -4010,6 +4013,11 @@ msgid ""
 "Is this too much data for you to handle? Go to the <a class=\"button\" href="
 "\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\" data-no-instant> "
 "basic form</a>."
+msgstr ""
+
+msgid ""
+"Filters are not available because you didn't add any to the equipment list "
+"of this image."
 msgstr ""
 
 msgid "Acquisition session"
@@ -4918,6 +4926,31 @@ msgstr ""
 
 #, python-format
 msgid "%(user)s commented on your scheduled IOTD"
+msgstr ""
+
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> commented on your unapproved equipment "
+"item <strong>%(target)s</strong>."
+msgstr ""
+
+msgid "You received this notification because you created this item."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your unapproved equipment item \"%(target)s\"."
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> commented on your unapproved equiment item <strong>"
+"%(target)s</strong>"
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> commented on your unapproved equipment item "
+"<strong>%(target)s</strong>."
 msgstr ""
 
 #, python-format

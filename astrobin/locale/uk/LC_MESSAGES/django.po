@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 08:06+0000\n"
-"PO-Revision-Date: 2022-05-31 23:47+0200\n"
+"POT-Creation-Date: 2022-06-14 10:01+0000\n"
+"PO-Revision-Date: 2022-06-12 19:48+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -3790,6 +3790,9 @@ msgstr "Надіслати у групу"
 msgid "Submit for IOTD/TP consideration"
 msgstr "Подати на розгляд IOTD/TP"
 
+msgid "Deadline"
+msgstr ""
+
 msgid "Delete image and all revisions"
 msgstr "Видалити зображення та всі версії"
 
@@ -4306,6 +4309,11 @@ msgstr ""
 "\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\" data-no-instant> "
 "базової форми</a>."
 
+msgid ""
+"Filters are not available because you didn't add any to the equipment list "
+"of this image."
+msgstr ""
+
 msgid "Acquisition session"
 msgstr "Знімальна сесія"
 
@@ -4378,6 +4386,10 @@ msgid ""
 "items used for this image properly, please complete the migration of your "
 "legacy equipment items."
 msgstr ""
+"Ваше зображення містить поєднання елементів із застарілої бази даних "
+"обладнання AstroBin та з нової бази даних обладнання. Щоб правильно "
+"відредагувати елементи обладнання, які використовуються для цього "
+"зображення, завершите переміщення застарілих елементів обладнання."
 
 msgid "Begin migration"
 msgstr "Почати міграцію"
@@ -4553,7 +4565,7 @@ msgstr "Коментарі"
 
 msgctxt "Pertaining to cameras, e.g. a modified Canon"
 msgid "modified"
-msgstr ""
+msgstr "модифікована"
 
 msgid "No gear yet."
 msgstr "Обладнання ще немає."
@@ -4936,6 +4948,8 @@ msgid ""
 "If this item is a camera that has been modified for astrophotography, this "
 "information will not be lost."
 msgstr ""
+"Якщо цей елемент є камерою, яка була модифікована для астрофотографії, ця "
+"інформація не буде втрачена."
 
 #, python-format
 msgid ""
@@ -5405,6 +5419,31 @@ msgstr "<strong>%(user)s</strong> прокоментував ваш заплан
 #, python-format
 msgid "%(user)s commented on your scheduled IOTD"
 msgstr "%(user)s прокоментував Ваш запланований IOTD"
+
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> commented on your unapproved equipment "
+"item <strong>%(target)s</strong>."
+msgstr ""
+
+msgid "You received this notification because you created this item."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your unapproved equipment item \"%(target)s\"."
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> commented on your unapproved equiment item <strong>"
+"%(target)s</strong>"
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> commented on your unapproved equipment item "
+"<strong>%(target)s</strong>."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -6365,7 +6404,7 @@ msgid "Sort"
 msgstr "Сорувати"
 
 msgid "The Sort options have moved to the filters sidebar."
-msgstr ""
+msgstr "Параметри сортування переміщено на бічну панель фільтрів."
 
 msgid "This list is currently empty."
 msgstr "Цей список поки що порожній."
@@ -6707,11 +6746,15 @@ msgid ""
 "You are seeing this message because you have images on AstroBin associated "
 "with equipment items in the legacy database."
 msgstr ""
+"Ви бачите це повідомлення, оскільки у Вас є зображення в AstroBin, пов’язані "
+"з елементами обладнання в старій базі даних."
 
 msgid ""
 "Please migrate your equipment on AstroBin to the new database, as this helps "
 "consolidate the data and improve the search engine results."
 msgstr ""
+"Будь ласка, перенесіть своє обладнання на AstroBin до нової бази даних, "
+"оскільки це допомагає консолідувати дані та покращувати результати пошуку."
 
 msgid "Edit gear item"
 msgstr "Редагувати елемент обладнання"
@@ -6995,7 +7038,7 @@ msgid "${filter.label}"
 msgstr "${filter.label}"
 
 msgid "Sort results"
-msgstr ""
+msgstr "Сортувати результати"
 
 msgid "Results"
 msgstr "Результати"
@@ -7061,6 +7104,8 @@ msgid ""
 "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Lite, Premium, "
 "or Ultimate</a> subscription."
 msgstr ""
+"На жаль, для цього фільтра потрібна підписка <a href=\"%(url)s\">AstroBin "
+"Lite, Premium або Ultimate</a>."
 
 #, python-format
 msgid ""
@@ -7162,10 +7207,10 @@ msgid "Relevance"
 msgstr "Релевантність"
 
 msgid "decreasing"
-msgstr ""
+msgstr "зменшується"
 
 msgid "increasing"
-msgstr ""
+msgstr "збільшується"
 
 msgid ""
 "What deep-sky astronomical subject are you looking for? E.g. M 31, NGC 2976, "

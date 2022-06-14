@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 08:06+0000\n"
-"PO-Revision-Date: 2022-05-31 23:47+0200\n"
+"POT-Creation-Date: 2022-06-14 10:01+0000\n"
+"PO-Revision-Date: 2022-06-12 19:48+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -3835,6 +3835,9 @@ msgstr "An Gruppe senden"
 msgid "Submit for IOTD/TP consideration"
 msgstr "Für IOTD/TP einreichen"
 
+msgid "Deadline"
+msgstr ""
+
 msgid "Delete image and all revisions"
 msgstr "Bild und alle Revisionen löschen"
 
@@ -4360,6 +4363,11 @@ msgstr ""
 "\"%(basic_form_url)s?edit_type=deep_sky&advanced=false\" data-no-"
 "instant>Basisformular</a>."
 
+msgid ""
+"Filters are not available because you didn't add any to the equipment list "
+"of this image."
+msgstr ""
+
 msgid "Acquisition session"
 msgstr "Aufnahme Session"
 
@@ -4433,6 +4441,10 @@ msgid ""
 "items used for this image properly, please complete the migration of your "
 "legacy equipment items."
 msgstr ""
+"Ihr Bild hat eine Mischung aus Elementen aus der alten AstroBin-"
+"Ausrüstungsdatenbank und aus der neuen Ausrüstungsdatenbank. Um die für "
+"dieses Bild verwendeten Ausrüstungsgegenstände richtig zu bearbeiten, "
+"schließen Sie bitte die Migration Ihrer alten Ausrüstungsgegenstände ab."
 
 msgid "Begin migration"
 msgstr "Start der Migration"
@@ -4610,7 +4622,7 @@ msgstr "Kommentare"
 
 msgctxt "Pertaining to cameras, e.g. a modified Canon"
 msgid "modified"
-msgstr ""
+msgstr "geändert"
 
 msgid "No gear yet."
 msgstr "Bisher keine Ausrüstung eingetragen."
@@ -4996,6 +5008,8 @@ msgid ""
 "If this item is a camera that has been modified for astrophotography, this "
 "information will not be lost."
 msgstr ""
+"Wenn es sich bei diesem Artikel um eine Kamera handelt, die für die "
+"Astrofotografie modifiziert wurde, gehen diese Informationen nicht verloren."
 
 #, python-format
 msgid ""
@@ -5479,6 +5493,31 @@ msgstr "<strong>%(user)s</strong>hat dein geplantes IOTD kommentiert."
 #, python-format
 msgid "%(user)s commented on your scheduled IOTD"
 msgstr "%(user)s hat dein geplantes IOTD kommentiert."
+
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> commented on your unapproved equipment "
+"item <strong>%(target)s</strong>."
+msgstr ""
+
+msgid "You received this notification because you created this item."
+msgstr ""
+
+#, python-format
+msgid "%(user)s commented on your unapproved equipment item \"%(target)s\"."
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> commented on your unapproved equiment item <strong>"
+"%(target)s</strong>"
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> commented on your unapproved equipment item "
+"<strong>%(target)s</strong>."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -6471,7 +6510,7 @@ msgid "Sort"
 msgstr "Sortieren nach"
 
 msgid "The Sort options have moved to the filters sidebar."
-msgstr ""
+msgstr "Die Sortieroptionen wurden in die Seitenleiste verschoben."
 
 msgid "This list is currently empty."
 msgstr "Diese Liste ist derzeit leer."
@@ -6816,11 +6855,16 @@ msgid ""
 "You are seeing this message because you have images on AstroBin associated "
 "with equipment items in the legacy database."
 msgstr ""
+"Sie sehen diese Meldung, weil Sie Bilder auf AstroBin haben, die mit "
+"Ausrüstungsgegenständen in der alten Datenbank verknüpft sind."
 
 msgid ""
 "Please migrate your equipment on AstroBin to the new database, as this helps "
 "consolidate the data and improve the search engine results."
 msgstr ""
+"Bitte migrieren Sie Ihre Geräte auf AstroBin auf die neue Datenbank, da dies "
+"zur Konsolidierung der Daten und zur Verbesserung der "
+"Suchmaschinenergebnisse beiträgt."
 
 msgid "Edit gear item"
 msgstr "Ausrüstung bearbeiten"
@@ -7112,7 +7156,7 @@ msgid "${filter.label}"
 msgstr "${filter.label}"
 
 msgid "Sort results"
-msgstr ""
+msgstr "Ergebnisse sortieren"
 
 msgid "Results"
 msgstr "Ergebnisse"
@@ -7178,6 +7222,8 @@ msgid ""
 "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Lite, Premium, "
 "or Ultimate</a> subscription."
 msgstr ""
+"Für diesen Filter ist ein Abonnement von <a href=\"%(url)s\">AstroBin Lite, "
+"Premium oder Ultimate</a> erforderlich."
 
 #, python-format
 msgid ""
@@ -7281,10 +7327,10 @@ msgid "Relevance"
 msgstr "Relevanz"
 
 msgid "decreasing"
-msgstr ""
+msgstr "abnehmend"
 
 msgid "increasing"
-msgstr ""
+msgstr "zunehmend"
 
 msgid ""
 "What deep-sky astronomical subject are you looking for? E.g. M 31, NGC 2976, "

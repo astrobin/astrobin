@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Plate-solving\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-02 08:06+0000\n"
-"PO-Revision-Date: 2022-05-01 19:12+0200\n"
+"POT-Creation-Date: 2022-06-14 10:01+0000\n"
+"PO-Revision-Date: 2022-06-02 10:08+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -75,6 +75,22 @@ msgstr "Mostra linee costellazioni"
 msgid "Show named stars"
 msgstr "Mostra stelle con nomi"
 
+msgid "Show HD stars"
+msgstr ""
+
+msgid ""
+"This catalog uses data from the All-sky Compiled Catalogue of 2.5 million "
+"stars (Kharchenko+ 2009), VizieR catalog: I/280B."
+msgstr ""
+
+msgid "Max. magnitude"
+msgstr ""
+
+msgid ""
+"Only HD stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
+
 msgid "Show Messier objects"
 msgstr "Mostra oggetti Messier"
 
@@ -120,8 +136,18 @@ msgstr "Mostra stelle GCVS"
 msgid "General Catalog of Variable Stars"
 msgstr "Catalogo generale di stelle variabili"
 
+msgid ""
+"Only GCVS stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
+
 msgid "Show Tycho-2 catalog"
 msgstr "Mostra catalogo Tycho-2"
+
+msgid ""
+"Only Tycho-2 stars up to this magnitude will be rendered. If left empty, the "
+"catalog's default value will be used."
+msgstr ""
 
 msgid "Show CGPN objects"
 msgstr "Mostra oggetti CGPN"
