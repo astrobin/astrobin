@@ -27,7 +27,7 @@ class EquipmentItemIndex(SearchIndex, Indexable):
     # Number of users who have used this item.
     equipment_item_user_count = fields.IntegerField()
 
-    # Top 50 images (by likes) that feature this item.
+    # Top 25 images (by likes) that feature this item.
     equipment_item_images = fields.CharField()
 
     # Number of images that feature this item.
@@ -93,7 +93,7 @@ class EquipmentItemIndex(SearchIndex, Indexable):
         return count
 
     def prepare_equipment_item_images(self, obj) -> List[int]:
-        images: List[Image] = self._prepare_images_cache(obj)[:50]
+        images: List[Image] = self._prepare_images_cache(obj)[:25]
         data: str = ImageSerializer(images, many=True).data
         return simplejson.dumps(data)
 
