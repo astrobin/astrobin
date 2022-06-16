@@ -81,3 +81,88 @@ class EquipmentService:
                     params['usage_type'] = usage_type
 
                 RecordKlass.objects.get_or_create(**params)
+
+    @staticmethod
+    def undo_migration_strategy(migration_strategy):
+        from astrobin.models import (
+            Gear, GearMigrationStrategy, DeepSky_Acquisition, Telescope as LegacyTelescope, Camera as LegacyCamera,
+            Mount as LegacyMount, Filter as LegacyFilter, Accessory as LegacyAccessory, Software as LegacySoftware
+        )
+        from astrobin_apps_equipment.models import (
+            AccessoryMigrationRecord, CameraMigrationRecord, FilterMigrationRecord, MigrationUsageType,
+            MountMigrationRecord, SoftwareMigrationRecord, TelescopeMigrationRecord, FocalReducerMigrationRecord,
+        )
+
+        migration_strategy: GearMigrationStrategy = migration_strategy
+        if migration_strategy.migration_flag == 'MIGRATE':
+            for RecordClass in (
+                    (TelescopeMigrationRecord, 'telescopes', LegacyTelescope),
+                    (CameraMigrationRecord, 'cameras', LegacyCamera),
+                    (MountMigrationRecord, 'mounts', LegacyMount),
+                    (FilterMigrationRecord, 'filters', LegacyFilter),
+                    (AccessoryMigrationRecord, 'accessories', LegacyAccessory),
+                    (SoftwareMigrationRecord, 'software', LegacySoftware),
+            ):
+                try:
+                    records = RecordClass[0].objects.filter(
+                        from_gear=migration_strategy.gear, image__user=migration_strategy.user
+                    )
+                except ValueError:
+                    continue
+
+                for record in records:
+                    legacy_item = RecordClass[2].objects.get(pk=migration_strategy.gear.pk)
+                    if hasattr(record, 'usage_type'):
+                        if record.usage_type == MigrationUsageType.IMAGING:
+                            getattr(record.image, f'imaging_{RecordClass[1]}_2').remove(
+                                migration_strategy.migration_content_object
+                            )
+                            getattr(record.image, f'imaging_{RecordClass[1]}').add(
+                                legacy_item
+                            )
+                        elif record.usage_type == MigrationUsageType.GUIDING:
+                            getattr(record.image, f'guiding_{RecordClass[1]}_2').remove(
+                                migration_strategy.migration_content_object
+                            )
+                            getattr(record.image, f'guiding_{RecordClass[1]}').add(
+                                legacy_item
+                            )
+                    else:
+                        getattr(record.image, f'{RecordClass[1]}_2').remove(
+                            migration_strategy.migration_content_object
+                        )
+                        getattr(record.image, f'{RecordClass[1]}').add(
+                            legacy_item
+                        )
+
+                    if RecordClass[0] == FilterMigrationRecord:
+                        DeepSky_Acquisition.objects.filter(
+                            image=record.image,
+                            filter_2=migration_strategy.migration_content_object
+                        ).update(
+                            filter_2=None,
+                            filter=migration_strategy.gear
+                        )
+
+                records.delete()
+
+            # Handle focal reducers separately because they are Accessories in the new equipment database.
+            try:
+                records = FocalReducerMigrationRecord.objects.filter(
+                    from_gear=migration_strategy.gear, image__user=migration_strategy.user
+                )
+
+                for record in records:
+                    getattr(record.image, 'accessories_2').remove(migration_strategy.migration_content_object)
+                    getattr(record.image, 'focal_reducers').add(migration_strategy.gear)
+
+                records.delete()
+            except ValueError:
+                pass
+
+        Gear.objects.filter(pk=migration_strategy.gear.pk).update(
+            migration_flag_moderator_lock=None,
+            migration_flag_moderator_lock_timestamp=None
+        )
+
+        migration_strategy.delete()

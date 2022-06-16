@@ -226,4 +226,5 @@ class MigratableItemMixin:
         obj.save()
 
         serializer = self.get_serializer(obj)
+
         return Response(serializer.data)

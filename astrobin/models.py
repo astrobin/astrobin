@@ -446,6 +446,7 @@ class GearMigrationStrategy(models.Model):
             'gear',
             'user',
         )
+        ordering=('-pk',)
 
 
 class GearRenameProposal(models.Model):

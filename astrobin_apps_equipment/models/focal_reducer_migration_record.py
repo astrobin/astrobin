@@ -19,4 +19,5 @@ class FocalReducerMigrationRecord(MigrationRecordBaseModel):
     )
 
     class Meta(MigrationRecordBaseModel.Meta):
-        pass
+        abstract = False
+        unique_together = ('image', 'from_gear', 'deleted')

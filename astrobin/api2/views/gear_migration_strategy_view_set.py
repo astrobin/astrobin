@@ -14,6 +14,7 @@ from astrobin.models import GearMigrationStrategy
 from astrobin.services.gear_service import GearService
 from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_own_migrator_or_readonly import \
     IsEquipmentModeratorOrOwnMigratorOrReadOnly
+from astrobin_apps_equipment.services import EquipmentService
 
 
 class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
@@ -35,6 +36,9 @@ class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
                 ) &
                 ~Q(migration_flag_moderator=self.request.user)
             )
+
+        if not self.request.user.groups.filter(name='equipment_moderators').exists():
+            queryset = queryset.filter(user=self.request.user)
 
         return queryset
 
@@ -114,3 +118,21 @@ class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
 
         serializer = self.get_serializer(strategy)
         return Response(serializer.data)
+
+    @action(detail=True, methods=['put'])
+    def undo(self, request, pk):
+        strategy: GearMigrationStrategy = self.get_object()
+
+        if strategy.migration_flag is None:
+            return Response(status=409)
+
+        if strategy.user is None:
+            return Response("Global user strategies cannot be undone", status=400)
+
+        if strategy.user != request.user and request.user.is_superuser:
+            raise PermissionDenied(request.user)
+
+        EquipmentService.undo_migration_strategy(strategy)
+
+        return Response(status=200)
+
