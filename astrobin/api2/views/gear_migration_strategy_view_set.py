@@ -38,7 +38,7 @@ class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
             )
 
         if not self.request.user.groups.filter(name='equipment_moderators').exists():
-            queryset = queryset.filter(user=self.request.user)
+            queryset = queryset.filter(user=self.request.user, migration_flag__isnull=False)
 
         return queryset
 
