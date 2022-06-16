@@ -5,7 +5,6 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('astrobin', '0157_various_userprofile_migrations'),
         ('astrobin_apps_equipment', '0074_add_user_and_image_counts_to_equipment_items'),
     ]
 
