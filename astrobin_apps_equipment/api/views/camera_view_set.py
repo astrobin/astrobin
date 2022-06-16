@@ -2,7 +2,7 @@ import re
 
 import simplejson
 from django.contrib.postgres.search import TrigramDistance
-from django.db.models import Q
+from django.db.models import Q, QuerySet
 from rest_framework.decorators import action
 from rest_framework.exceptions import ParseError, ValidationError
 from rest_framework.generics import get_object_or_404
@@ -22,7 +22,7 @@ class CameraViewSet(EquipmentItemViewSet):
     serializer_class = CameraSerializer
     filter_class = CameraFilter
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         include_variants = bool(re.search(r'/equipment/camera/\d+/', self.request.path))
         queryset = super().get_queryset()
 

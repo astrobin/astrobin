@@ -43,7 +43,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'post', 'head']
     throttle_classes = [EquipmentCreateThrottle]
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         q = self.request.GET.get('q')
         sort = self.request.GET.get('sort')
 
