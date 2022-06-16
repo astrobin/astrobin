@@ -28,4 +28,4 @@ class TelescopeMigrationRecord(MigrationRecordBaseModel):
 
     class Meta(MigrationRecordBaseModel.Meta):
         abstract = False
-        unique_together = ('image', 'from_gear', 'usage_type')
+        unique_together = ('image', 'from_gear', 'usage_type', 'deleted')
