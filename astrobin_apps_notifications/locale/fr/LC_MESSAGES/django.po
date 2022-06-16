@@ -2,34 +2,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Notifications\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 16:16+0200\n"
+"POT-Creation-Date: 2022-06-16 18:08+0000\n"
 "PO-Revision-Date: 2022-06-14 12:05+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: French\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108445\n"
-"X-Loco-Api-Version: 1.0.26 20220328-1"
-
-msgid "Notifications"
-msgstr "Notifications"
-
-msgid "You have no notifications."
-msgstr "Vous n'avez pas de nouvelle notification. "
-
-msgid "Settings"
-msgstr "Réglages"
-
-msgid "Mark all as read"
-msgstr "Tout marquer comme lu"
-
-msgid "You have no new notifications."
-msgstr "Vous n'avez aucune nouvelle notification."
+"X-Loco-Api-Version: 1.0.26 20220328-1\n"
 
 msgid "You have a new follower"
 msgstr "Vous avez un nouvel abonné"
@@ -46,11 +31,29 @@ msgstr "La réduction astrométrique de votre image a été réalisée"
 msgid "Your image could not be plate-solved"
 msgstr "La réduction astrométrique de votre image a échoué"
 
+msgid "Your image was plate-solved (advanced)"
+msgstr "La réduction astrométrique avancée de votre image a été réalisée"
+
+msgid "Your image could not be plate-solved (advanced)"
+msgstr "La réduction astrométrique avancée de votre image a échoué"
+
 msgid "Your image received a new comment"
 msgstr "Votre image a reçu un nouveau commentaire"
 
+msgid "Your edit proposal received a new comment"
+msgstr "Votre proposition de modification a reçu un nouveau commentaire"
+
+msgid "Your scheduled IOTD received a new comment"
+msgstr "Votre choix pour l'Image du Jour a reçu un nouveau commentaire"
+
+msgid "Your unapproved equipment item received a comment"
+msgstr ""
+
 msgid "There was a reply to your comment"
 msgstr "Quelqu'un a répondu à votre commentaire"
+
+msgid "A new comment on your image requires moderation"
+msgstr "Un nouveau commentaire sur votre image nécessite une modération"
 
 msgid "Your comment was approved"
 msgstr "Votre commentaire a été approuvé"
@@ -66,6 +69,9 @@ msgstr "Un utilisateur a aimé votre commentaire"
 
 msgid "Your forum post was liked"
 msgstr "Un utilisateur a aimé votre message"
+
+msgid "Your forum post was approved"
+msgstr "Votre message dans le forum a été approuvé"
 
 msgid "Your API Key request has been approved"
 msgstr "Votre demande de clé API a été acceptée"
@@ -116,6 +122,9 @@ msgstr ""
 msgid "Would you like to activate your account?"
 msgstr "Souhaitez-vous activer votre compte ?"
 
+msgid "New reply in a subscribed forum topic"
+msgstr "Nouvelle réponse dans une discussion que vous suivez"
+
 msgid "You were mentioned in a forum post"
 msgstr "Vous avez été mentionné dans un message"
 
@@ -127,6 +136,9 @@ msgstr "Bienvenue sur AstroBin !"
 
 msgid "Congratulations for your first image on AstroBin!"
 msgstr "Félicitations pour votre première image sur AstroBin !"
+
+msgid "Your image was submitted for IOTD/TP consideration"
+msgstr "Votre image a été soumise pour l'IOTD/TP"
 
 msgid "Thank you for getting a subscription!"
 msgstr "Merci d'avoir souscrit à un abonnement !"
@@ -147,9 +159,6 @@ msgstr "Une image que vous avez promue a été nommée Top Pick"
 msgid "An image you promoted made it to IOTD"
 msgstr "Une image que vous avez promue a été élue Image du Jour"
 
-msgid "New reply in a subscribed forum topic"
-msgstr "Nouvelle réponse dans une discussion que vous suivez"
-
 msgid "Your image was nominated to be a Top Pick"
 msgstr "Votre image a été nominée Top Pick"
 
@@ -159,32 +168,23 @@ msgstr "Votre image a été élue Top Pick"
 msgid "Your image was voted Image of the Day"
 msgstr "Votre image a été élue Image du Jour (IOTD)"
 
-msgid "Your image was plate-solved (advanced)"
-msgstr "La réduction astrométrique avancée de votre image a été réalisée"
-
-msgid "Your image could not be plate-solved (advanced)"
-msgstr "La réduction astrométrique avancée de votre image a échoué"
-
-msgid "A new comment on your image requires moderation"
-msgstr "Un nouveau commentaire sur votre image nécessite une modération"
-
-msgid "Your forum post was approved"
-msgstr "Votre message dans le forum a été approuvé"
-
 msgid "You were mentioned in an image description"
 msgstr "Vous avez été mentionné dans la description d'une image"
-
-msgid "Your edit proposal received a new comment"
-msgstr "Votre proposition de modification a reçu un nouveau commentaire"
-
-msgid "Your image was submitted for IOTD/TP consideration"
-msgstr "Votre image a été soumise pour l'IOTD/TP"
 
 msgid "A gear item that you used was renamed"
 msgstr "Un équipement que vous utilisez a été renommé"
 
-msgid "Your scheduled IOTD received a new comment"
-msgstr "Votre choix pour l'Image du Jour a reçu un nouveau commentaire"
+#~ msgid "Notifications"
+#~ msgstr "Notifications"
 
-msgid "Your unapproved equipment item received a comment"
-msgstr ""
+#~ msgid "You have no notifications."
+#~ msgstr "Vous n'avez pas de nouvelle notification. "
+
+#~ msgid "Settings"
+#~ msgstr "Réglages"
+
+#~ msgid "Mark all as read"
+#~ msgstr "Tout marquer comme lu"
+
+#~ msgid "You have no new notifications."
+#~ msgstr "Vous n'avez aucune nouvelle notification."
