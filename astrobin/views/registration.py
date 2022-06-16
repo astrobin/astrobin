@@ -4,7 +4,7 @@ from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 from django import forms
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, User
 from django.utils.translation import ugettext_lazy as _
 from registration.backends.hmac.views import RegistrationView
 from registration.forms import (
@@ -67,6 +67,8 @@ class AstroBinRegistrationView(RegistrationView):
 def user_created(sender, user, request, **kwargs):
     form = AstroBinRegistrationForm(request.POST)
     profile, created = UserProfile.objects.get_or_create(user=user)
+    group, created = Group.objects.get_or_create(name='own_equipment_migrators')
+    user.groups.add(group)
     changed = False
 
     if 'referral_code' in form.data and form.data['referral_code'] != '':
