@@ -29,6 +29,7 @@ from astrobin_apps_equipment.api.throttle import EquipmentCreateThrottle
 from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
+from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from astrobin_apps_premium.services.premium_service import PremiumService
@@ -312,6 +313,21 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 }
             )
 
+        migration_strategies: QuerySet = GearMigrationStrategy.objects.filter(
+            user=item.created_by,
+            migration_flag='MIGRATE',
+            migration_content_type=ContentType.objects.get_for_model(model),
+            migration_object_id=item.id,
+        )
+
+        if duplicate_of:
+            migration_strategies.update(
+                migration_object_id=duplicate_of.pk
+            )
+        else:
+            for migration_strategy in migration_strategies:
+                EquipmentService.undo_migration_strategy(migration_strategy)
+
         affected_images = []
         for prop in (
             'imaging_telescopes_2',
@@ -372,21 +388,6 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             CameraEditProposal.all_objects.filter(sensor=item).update(sensor=None)
 
         item.delete()
-
-        if duplicate_of:
-            GearMigrationStrategy.objects.filter(
-                migration_flag='MIGRATE',
-                migration_content_type=ContentType.objects.get_for_model(model),
-                migration_object_id=item.id,
-            ).update(
-                migration_object_id=duplicate_of.pk
-            )
-        else:
-            GearMigrationStrategy.objects.filter(
-                migration_flag='MIGRATE',
-                migration_content_type=ContentType.objects.get_for_model(model),
-                migration_object_id=item.id,
-            ).delete()
 
         if item.brand:
             brand_has_items = False
