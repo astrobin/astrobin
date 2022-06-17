@@ -1,6 +1,10 @@
+import simplejson
 from django.contrib.postgres.search import TrigramDistance
+from django.core.cache import cache
 from django.db.models import Q
+from django.db.models.functions import Lower
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
+from haystack.query import SearchQuerySet
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.parsers import FormParser, MultiPartParser
@@ -26,14 +30,28 @@ class BrandViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         q = self.request.GET.get('q')
+        sort = self.request.GET.get('sort', 'az')
+
         manager = self.get_serializer().Meta.model.objects
+        queryset = manager.all()
 
-        if not q:
-            return manager.all()
-
-        return manager.annotate(
-            distance=TrigramDistance('name', q)
-        ).filter(Q(distance__lte=.7) | Q(name__icontains=q)).order_by('distance')
+        if q:
+            queryset =  manager.annotate(
+                distance=TrigramDistance('name', q)
+            ).filter(Q(distance__lte=.7) | Q(name__icontains=q)).order_by('distance')
+        elif sort == 'az':
+            queryset = queryset.order_by(Lower('name'))
+        elif sort == '-az':
+            queryset = queryset.order_by(Lower('name')).reverse()
+        elif sort == 'users':
+            queryset = queryset.order_by('user_count', Lower('name'))
+        elif sort == '-users':
+            queryset = queryset.order_by('-user_count', Lower('name'))
+        elif sort == 'images':
+            queryset = queryset.order_by('image_count', Lower('name'))
+        elif sort == '-images':
+            queryset = queryset.order_by('-image_count', Lower('name'))
+        return queryset
 
     @action(
         detail=True,
@@ -50,3 +68,37 @@ class BrandViewSet(viewsets.ModelViewSet):
             return Response(serializer.data)
 
         return Response(serializer.errors, HTTP_400_BAD_REQUEST)
+
+    @action(detail=True, methods=['GET'], url_path='users')
+    def users(self, request, pk: int) -> Response:
+        cache_key: str = f'equipment_brand_view_set_{pk}_users'
+        data = cache.get(cache_key)
+
+        if data is None:
+            sqs: SearchQuerySet = SearchQuerySet().models(self.get_serializer().Meta.model).filter(django_id=pk)
+
+            if sqs.count() > 0:
+                data = sqs[0].equipment_brand_users
+            else:
+                data = '[]'
+
+            cache.set(cache_key, data, 60 * 60 * 12)
+
+        return Response(simplejson.loads(data))
+
+    @action(detail=True, methods=['GET'], url_path='images')
+    def images(self, request, pk: int) -> Response:
+        cache_key: str = f'equipment_brand_view_set_{pk}_images'
+        data = cache.get(cache_key)
+
+        if data is None:
+            sqs: SearchQuerySet = SearchQuerySet().models(self.get_serializer().Meta.model).filter(django_id=pk)
+
+            if sqs.count() > 0:
+                data = sqs[0].equipment_brand_images
+            else:
+                data = '[]'
+
+            cache.set(cache_key, data, 60 * 60 * 12)
+
+        return Response(simplejson.loads(data))

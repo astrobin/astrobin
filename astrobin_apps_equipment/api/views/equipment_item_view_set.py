@@ -81,18 +81,18 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                     Lower('brand__name'),
                     Lower('name'),
                 )
-        elif sort == "az":
+        elif sort == 'az':
             queryset = queryset.order_by(Lower('brand__name'), Lower('name'))
-        elif sort == "-az":
+        elif sort == '-az':
             queryset = queryset.order_by(Lower('brand__name'), Lower('name')).reverse()
-        elif sort == "users":
-            queryset = queryset.order_by('user_count')
-        elif sort == "-users":
-            queryset = queryset.order_by('-user_count')
-        elif sort == "images":
-            queryset = queryset.order_by('image_count')
-        elif sort == "-images":
-            queryset = queryset.order_by('-image_count')
+        elif sort == 'users':
+            queryset = queryset.order_by('user_count', Lower('brand__name'), Lower('name'))
+        elif sort == '-users':
+            queryset = queryset.order_by('-user_count', Lower('brand__name'), Lower('name'))
+        elif sort == 'images':
+            queryset = queryset.order_by('image_count', Lower('brand__name'), Lower('name'))
+        elif sort == '-images':
+            queryset = queryset.order_by('-image_count', Lower('brand__name'), Lower('name'))
             
         return queryset
 

@@ -34,6 +34,12 @@ class EquipmentBrand(SafeDeleteModel):
         editable=False
     )
 
+    last_added_or_removed_from_image = models.DateTimeField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
     name = models.CharField(
         max_length=128,
         null=False,
@@ -50,6 +56,22 @@ class EquipmentBrand(SafeDeleteModel):
         upload_to=logo_upload_path,
         null=True,
         blank=True,
+    )
+
+    ####################################################################################################################
+    # This items are synced back from the search index.                                                                #
+    ####################################################################################################################
+
+    user_count = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
+    )
+
+    image_count = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
+        editable=False,
     )
 
     def __str__(self):
