@@ -783,7 +783,7 @@ def equipment_changed(sender, instance: Image, **kwargs):
                 if item is not None:
                     if hasattr(item, 'last_added_or_removed_from_image'):
                         model.objects.filter(pk=pk).update(last_added_or_removed_from_image=timezone.now())
-                    if hasattr(item.brand):
+                    if hasattr(item, 'brand'):
                         EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=timezone.now())
 
 
