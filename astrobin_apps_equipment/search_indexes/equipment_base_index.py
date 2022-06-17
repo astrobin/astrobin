@@ -28,7 +28,7 @@ class EquipmentBaseIndex(SearchIndex):
         images: List[Image] = cache.get(PREPARED_IMAGES_CACHE_KEY % (obj.__class__.__name__, obj.pk))
         images_and_likes: List[Dict[str, Union[Image, int]]] = []
         if images is None:
-            qs: QuerySet = Image.objects.filter(self.image_queryset(obj))
+            qs: QuerySet = Image.objects.filter(self.image_queryset(obj)).distinct()
             count: int = qs.count()
             image: Image
 
