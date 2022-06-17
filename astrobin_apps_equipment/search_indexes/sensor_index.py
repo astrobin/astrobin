@@ -1,10 +1,11 @@
 from django.db.models import Q
+from haystack.constants import Indexable
 
 from astrobin_apps_equipment.models import Sensor
 from astrobin_apps_equipment.search_indexes.equipment_item_index import EquipmentItemIndex
 
 
-class SensorIndex(EquipmentItemIndex):
+class SensorIndex(EquipmentItemIndex, Indexable):
     def get_model(self):
         return Sensor
 

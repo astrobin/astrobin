@@ -29,6 +29,7 @@ from subscription.models import Transaction, UserSubscription
 from subscription.signals import paid, signed_up
 
 from astrobin.tasks import process_camera_rename_proposal
+from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
@@ -779,8 +780,11 @@ def equipment_changed(sender, instance: Image, **kwargs):
         if pk_set:
             for pk in pk_set:
                 item = get_object_or_None(model, pk=pk)
-                if item is not None and hasattr(item, 'last_added_or_removed_from_image'):
-                    model.objects.filter(pk=pk).update(last_added_or_removed_from_image=timezone.now())
+                if item is not None:
+                    if hasattr(item, 'last_added_or_removed_from_image'):
+                        model.objects.filter(pk=pk).update(last_added_or_removed_from_image=timezone.now())
+                    if hasattr(item, 'brand'):
+                        EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=timezone.now())
 
 
 m2m_changed.connect(equipment_changed, sender=Image.imaging_telescopes.through)

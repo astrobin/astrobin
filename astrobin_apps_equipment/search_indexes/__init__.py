@@ -5,3 +5,4 @@ from .mount_index import MountIndex
 from .sensor_index import SensorIndex
 from .software_index import SoftwareIndex
 from .telelscope_index import TelescopeIndex
+from .equipment_brand_index import EquipmentBrandIndex
