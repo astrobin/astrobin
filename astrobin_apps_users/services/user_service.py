@@ -332,11 +332,27 @@ class UserService:
         # GEAR #
         ########
         elif subsection == 'gear':
-            telescopes = Telescope.objects.filter(images_using_for_imaging__user=self.user).distinct()
-            cameras = Camera.objects.filter(images_using_for_imaging__user=self.user).distinct()
+            telescopes = Telescope.objects.filter(
+                images_using_for_imaging__user=self.user,
+                images_using_for_imaging__deleted__isnull=True,
+                images_using_for_imaging__is_wip=False,
+            ).distinct()
+            cameras = Camera.objects.filter(
+                images_using_for_imaging__user=self.user,
+                images_using_for_imaging__deleted__isnull=True,
+                images_using_for_imaging__is_wip=False,
+            ).distinct()
 
-            telescopes_2 = TelescopeV2.objects.filter(images_using_for_imaging__user=self.user).distinct()
-            cameras_2 = CameraV2.objects.filter(images_using_for_imaging__user=self.user).distinct()
+            telescopes_2 = TelescopeV2.objects.filter(
+                images_using_for_imaging__user=self.user,
+                images_using_for_imaging__deleted__isnull=True,
+                images_using_for_imaging__is_wip=False,
+            ).distinct()
+            cameras_2 = CameraV2.objects.filter(
+                images_using_for_imaging__user=self.user,
+                images_using_for_imaging__deleted__isnull=True,
+                images_using_for_imaging__is_wip=False,
+            ).distinct()
 
             no_date_message = _("No imaging telescopes or lenses, or no imaging cameras specified")
             gear_images_message = _("Gear images")
