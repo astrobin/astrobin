@@ -38,6 +38,19 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
         self.assertFalse(image.imaging_telescopes.filter(pk=telescope.pk).exists())
         self.assertTrue(image.imaging_telescopes_2.filter(pk=new_telescope.pk).exists())
 
+        EquipmentService.apply_migration_strategy(migration_strategy)
+
+        self.assertEquals(
+            1,
+            TelescopeMigrationRecord.objects.filter(
+                from_gear=telescope, to_item=new_telescope, image=image, usage_type=MigrationUsageType.IMAGING
+            ).count()
+        )
+        self.assertFalse(image.imaging_telescopes.filter(pk=telescope.pk).exists())
+        self.assertTrue(image.imaging_telescopes_2.filter(pk=new_telescope.pk).exists())
+
+        # Test idempotency
+
         EquipmentService.undo_migration_strategy(migration_strategy)
 
         self.assertFalse(

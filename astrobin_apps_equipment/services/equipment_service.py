@@ -27,9 +27,6 @@ class EquipmentService:
         if migration_strategy.migration_flag != 'MIGRATE':
             return
 
-        if migration_strategy.migration_flag_reviewer_decision != 'APPROVED':
-            return
-
         gear: Gear = migration_strategy.gear
 
         for usage_data in (
