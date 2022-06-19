@@ -24,28 +24,28 @@
         <ul class="dropdown-menu">
             {% if request.user|can_access_basic_equipment_functions %}
                 <li>
-                    <a href="{% app_redirection_service '/i/'|add:image.get_id|add:'/edit#1' %}">
+                    <a href="{% app_redirection_service '/i/' %}{{ image.get_id }}/edit#1">
                         <i class="icon-info"></i>
                         {% trans "Basic information" %}
                     </a>
                 </li>
 
                 <li>
-                    <a href="{% app_redirection_service '/i/'|add:image.get_id|add:'/edit#2' %}">
+                    <a href="{% app_redirection_service '/i/' %}{{ image.get_id }}/edit#2">
                         <i class="icon-align-justify"></i>
                         {% trans "Content" %}
                     </a>
                 </li>
 
                 <li>
-                    <a href="{% app_redirection_service '/i/'|add:image.get_id|add:'/edit#3' %}">
+                    <a href="{% app_redirection_service '/i/' %}{{ image.get_id }}/edit#3">
                         <i class="icon-check-empty"></i>
                         {% trans "Thumbnail" %}
                     </a>
                 </li>
 
                 <li>
-                    <a href="{% app_redirection_service '/i/'|add:image.get_id|add:'/edit#4' %}">
+                    <a href="{% app_redirection_service '/i/' %}{{ image.get_id }}/edit#4">
                         <i class="icon-tint"></i>
                         {% trans "Watermark" %}
                     </a>
