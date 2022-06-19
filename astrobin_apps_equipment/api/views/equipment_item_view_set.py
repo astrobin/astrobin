@@ -28,7 +28,7 @@ from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_own_migra
 from astrobin_apps_equipment.api.throttle import EquipmentCreateThrottle
 from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
-from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
+from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
 from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
@@ -278,15 +278,28 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         item.reviewer_decision = EquipmentItemReviewerDecision.REJECTED
         item.reviewer_rejection_reason = request.data.get('reason')
         item.reviewer_comment = request.data.get('comment')
+        item.reviewer_rejection_duplicate_of_klass = request.data.get('duplicate_of_klass', item.klass)
+        item.reviewer_rejection_duplicate_of_usage_type = request.data.get('duplicate_of_usage_type')
         item.reviewer_rejection_duplicate_of = request.data.get('duplicate_of')
 
         duplicate_of = None
+        duplicate_model = {
+            EquipmentItemKlass.TELESCOPE: Telescope,
+            EquipmentItemKlass.CAMERA: Camera,
+            EquipmentItemKlass.MOUNT: Mount,
+            EquipmentItemKlass.FILTER: Filter,
+            EquipmentItemKlass.ACCESSORY: Accessory,
+            EquipmentItemKlass.SOFTWARE: Software
+        }.get(item.reviewer_rejection_duplicate_of_klass)
+
         if item.reviewer_rejection_duplicate_of:
             try:
-                duplicate_of = model.objects.get(pk=item.reviewer_rejection_duplicate_of)
+                duplicate_of = duplicate_model.objects.get(pk=item.reviewer_rejection_duplicate_of)
             except model.DoesNotExist:
                 duplicate_of = None
                 item.reviewer_rejection_duplicate_of = None
+                item.reviewer_rejection_duplicate_of_klass = None
+                item.reviewer_rejection_duplicate_of_klass_usage_type = None
 
         if item.created_by and item.created_by != request.user:
             push_notification(
@@ -322,7 +335,8 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         if duplicate_of:
             migration_strategies.update(
-                migration_object_id=duplicate_of.pk
+                migration_object_id=duplicate_of.pk,
+                migration_content_type=ContentType.objects.get_for_model(duplicate_model)
             )
         else:
             for migration_strategy in migration_strategies:
@@ -353,7 +367,22 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             prop: str = affected.get("prop")
 
             if duplicate_of:
-                getattr(image, prop).add(duplicate_of)
+                if model == duplicate_model:
+                    getattr(image, prop).add(duplicate_of)
+                else:
+                    destination_map = {
+                        EquipmentItemKlass.TELESCOPE: 'imaging_telescopes_2' \
+                            if item.reviewer_rejection_duplicate_of_usage_type == EquipmentItemUsageType.IMAGING \
+                            else 'guiding_telescopes_2',
+                        EquipmentItemKlass.CAMERA: 'imaging_cameras_2' \
+                            if item.reviewer_rejection_duplicate_of_usage_type == EquipmentItemUsageType.IMAGING \
+                            else 'guiding_cameras_2',
+                        EquipmentItemKlass.MOUNT: 'mounts_2',
+                        EquipmentItemKlass.FILTER: 'filters_2',
+                        EquipmentItemKlass.ACCESSORY: 'accessories_2',
+                        EquipmentItemKlass.SOFTWARE: 'software_2',
+                    }
+                    getattr(image, destination_map.get(duplicate_of.klass)).add(duplicate_of)
 
             push_notification(
                 [item.created_by],
