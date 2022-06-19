@@ -1246,12 +1246,6 @@ class ImageEditThumbnailsView(ImageEditBaseView):
 
         return super().dispatch(request, args, kwargs)
 
-    def post(self, request, *args, **kwargs):
-        image: Image = self.get_object()
-        image.thumbnail_invalidate()
-
-        return super(ImageEditThumbnailsView, self).post(request, *args, **kwargs)
-
 
 class ImageUploadUncompressedSource(ImageEditBaseView):
     form_class = UncompressedSourceUploadForm

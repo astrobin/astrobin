@@ -119,6 +119,19 @@ def image_pre_save(sender, instance, **kwargs):
 pre_save.connect(image_pre_save, sender=Image)
 
 
+def image_pre_save_invalidate_thumbnails(sender, instance: Image, **kwargs):
+    try:
+        image_before_saving: Image = sender.objects_including_wip.get(pk=instance.pk)
+    except sender.DoesNotExist:
+        return
+
+    if image_before_saving.square_cropping != instance.square_cropping:
+        instance.thumbnail_invalidate()
+
+
+pre_save.connect(image_pre_save_invalidate_thumbnails, sender=Image)
+
+
 def image_post_save(sender, instance, created, **kwargs):
     # type: (object, Image, bool, object) -> None
 
