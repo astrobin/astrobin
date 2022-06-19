@@ -6,7 +6,10 @@ from django.utils.translation import ugettext_lazy as _
 from safedelete.models import SafeDeleteModel
 
 from astrobin_apps_equipment.models import EquipmentBrand
-from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemGroup, EQUIPMENT_ITEM_KLASS_CHOICES
+from astrobin_apps_equipment.models.equipment_item_group import (
+    EQUIPMENT_ITEM_USAGE_TYPE_CHOICES, EquipmentItemGroup,
+    EQUIPMENT_ITEM_KLASS_CHOICES,
+)
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
 from common.services import AppRedirectionService
 from common.upload_paths import upload_path
@@ -73,6 +76,20 @@ class EquipmentItem(SafeDeleteModel):
         ],
         null=True,
         editable=False,
+    )
+
+    reviewer_rejection_duplicate_of_klass = models.CharField(
+        max_length=16,
+        null=True,
+        blank=False,
+        choices=EQUIPMENT_ITEM_KLASS_CHOICES
+    )
+
+    reviewer_rejection_duplicate_of_usage_type = models.CharField(
+        max_length=16,
+        null=True,
+        blank=False,
+        choices=EQUIPMENT_ITEM_USAGE_TYPE_CHOICES
     )
 
     reviewer_rejection_duplicate_of = models.PositiveIntegerField(

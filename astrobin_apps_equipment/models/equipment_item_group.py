@@ -13,6 +13,11 @@ class EquipmentItemKlass:
     SOFTWARE = "SOFTWARE"
 
 
+class EquipmentItemUsageType:
+    IMAGING = "IMAGING"
+    GUIDING = "GUIDING"
+
+
 EQUIPMENT_ITEM_KLASS_CHOICES = (
     (EquipmentItemKlass.SENSOR, _("Sensor")),
     (EquipmentItemKlass.CAMERA, _("Camera")),
@@ -21,6 +26,11 @@ EQUIPMENT_ITEM_KLASS_CHOICES = (
     (EquipmentItemKlass.FILTER, _("Filter")),
     (EquipmentItemKlass.ACCESSORY, _("Accessory")),
     (EquipmentItemKlass.SOFTWARE, _("Software")),
+)
+
+EQUIPMENT_ITEM_USAGE_TYPE_CHOICES = (
+    (EquipmentItemUsageType.IMAGING, _("Imaging")),
+    (EquipmentItemUsageType.GUIDING, _("Guiding")),
 )
 
 
