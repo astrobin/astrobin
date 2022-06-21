@@ -138,7 +138,7 @@ class EquipmentService:
                             filter_2=migration_strategy.migration_content_object
                         ).update(
                             filter_2=None,
-                            filter=migration_strategy.gear
+                            filter=legacy_item
                         )
 
                 records.delete()
@@ -151,7 +151,7 @@ class EquipmentService:
 
                 for record in records:
                     getattr(record.image, 'accessories_2').remove(migration_strategy.migration_content_object)
-                    getattr(record.image, 'focal_reducers').add(migration_strategy.gear)
+                    getattr(record.image, 'focal_reducers').add(legacy_item)
 
                 records.delete()
             except ValueError:
