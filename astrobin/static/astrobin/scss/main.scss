@@ -261,17 +261,23 @@ li.astrobin-thumbnail {
   display: inline-block;
 
   &.spam-thumbnail img {
-    border: 1px solid $red;
+    border: 2px solid $red;
     @include rounded-corners(20px);
   }
 
   &.ham-thumbnail img {
-    border: 1px solid $green;
+    border: 2px solid $green;
+    @include rounded-corners(20px);
+  }
+
+  &.undecided-thumbnail img {
+    border: 2px solid $orange;
     @include rounded-corners(20px);
   }
 
   .spam-thumbnail-overlay,
   .ham-thumbnail-overlay,
+  .undecided-thumbnail-overlay,
   .restore-thumbnail-overlay {
     position: absolute;
     top: 11px;
@@ -279,7 +285,6 @@ li.astrobin-thumbnail {
     width: 130px;
     height: 130px;
     @include rounded-corners(20px);
-    background-color: rgba(255, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -296,8 +301,19 @@ li.astrobin-thumbnail {
     }
   }
 
-  .ham-thumbnail-overlay {
-    background-color: rgba(0, 255, 0, 0.5);
+  &:not(:hover) {
+    .spam-thumbnail-overlay {
+      background-color: rgba(0, 255, 0, 0.05);
+    }
+
+    .ham-thumbnail-overlay {
+      background-color: rgba(0, 255, 0, 0.05);
+      visibility: visible;
+    }
+
+    .undecided-thumbnail-overlay {
+      background-color: rgba(255, 165, 0, 0.05);
+    }
   }
 
   .restore-thumbnail-overlay {

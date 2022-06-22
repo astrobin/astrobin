@@ -28,13 +28,23 @@
                     {% for image in image_list %}
                         <li class="thumbnail astrobin-thumbnail top-title ham-thumbnail">
                             <a href="#" rel="tooltip" title="{{image.title|escape|default:_("(no title)")}}, {% astrobin_username image.user link=False %}">
-                                {% astrobin_image image 'gallery' link=False tooltip=False %}
+                                {% astrobin_image image 'gallery' link=False tooltip=False classes='ham' %}
                                 <div class="image-title">
                                     {{image.title|escape|default:_("(no title)")}}
                                 </div>
                                 <div class="spam-thumbnail-overlay hide">
                                     <span>
                                         SPAM
+                                    </span>
+                                </div>
+                                <div class="undecided-thumbnail-overlay hide">
+                                    <span>
+                                        ?
+                                    </span>
+                                </div>
+                                <div class="ham-thumbnail-overlay">
+                                    <span>
+                                        OK
                                     </span>
                                 </div>
                             </a>
@@ -70,21 +80,42 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('.astrobin-thumbnail > a').click(function(e) {
-                var $spam;
-
                 e.preventDefault();
 
-                $(this).closest('li.astrobin-thumbnail').toggleClass('ham-thumbnail');
-                $(this).closest('li.astrobin-thumbnail').toggleClass('spam-thumbnail');
-                $(this).find('img').toggleClass('spam');
+                const $thumbnail = $(this).closest('li.astrobin-thumbnail')
+                const $imgContainer = $(this).find('.astrobin-image-container');
+                const $spamOverlay = $(this).find('.spam-thumbnail-overlay');
+                const $hamOverlay = $(this).find('.ham-thumbnail-overlay');
+                const $undecidedOverlay = $(this).find('.undecided-thumbnail-overlay');
 
-                $spam = $(this).find('.spam-thumbnail-overlay');
-                if ($spam.css('visibility') == 'hidden') {
-                    $spam.css('visibility', 'visible');
-                } else {
-                    $spam.css('visibility', 'hidden');
+                if ($thumbnail.hasClass('spam-thumbnail')) {
+                    $thumbnail.removeClass('spam-thumbnail')
+                    $thumbnail.addClass('undecided-thumbnail');
+                    $imgContainer.removeClass('spam');
+                    $imgContainer.addClass('undecided');
+
+                    $spamOverlay.css('visibility', 'hidden');
+                    $hamOverlay.css('visibility', 'hidden');
+                    $undecidedOverlay.css('visibility', 'visible');
+                } else if ($thumbnail.hasClass('undecided-thumbnail')) {
+                    $thumbnail.removeClass('undecided-thumbnail')
+                    $thumbnail.addClass('ham-thumbnail');
+                    $imgContainer.removeClass('undecided');
+                    $imgContainer.addClass('ham');
+
+                    $spamOverlay.css('visibility', 'hidden');
+                    $hamOverlay.css('visibility', 'visible');
+                    $undecidedOverlay.css('visibility', 'hidden');
+                } else if ($thumbnail.hasClass('ham-thumbnail')) {
+                    $thumbnail.removeClass('ham-thumbnail')
+                    $thumbnail.addClass('spam-thumbnail');
+                    $imgContainer.removeClass('ham');
+                    $imgContainer.addClass('spam');
+
+                    $spamOverlay.css('visibility', 'visible');
+                    $hamOverlay.css('visibility', 'hidden');
+                    $undecidedOverlay.css('visibility', 'hidden');
                 }
-
             });
 
             $('#finish-button').click(function(e) {
@@ -96,11 +127,11 @@
                 $btn.addClass('disabled');
                 $btn.siblings('.loading').removeClass('hide');
 
-                spam_ids = $('.astrobin-thumbnails img.spam').map(function() {
+                spam_ids = $('.astrobin-thumbnails .astrobin-image-container.spam img').map(function() {
                     return $(this).data('id');
                 }).get();
 
-                ham_ids = $('.astrobin-thumbnails img:not(.spam)').map(function() {
+                ham_ids = $('.astrobin-thumbnails .astrobin-image-container.ham img').map(function() {
                     return $(this).data('id');
                 }).get();
 
