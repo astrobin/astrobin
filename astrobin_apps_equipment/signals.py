@@ -55,10 +55,13 @@ def create_DSLR_mirrorless_camera_variants(sender, instance: Camera, created: bo
         back_focus = instance.back_focus,
     )
 
-    Camera.objects.get_or_create(**{**properties, 'modified': True, 'cooled': False})
-    Camera.objects.get_or_create(**{**properties, 'modified': True, 'cooled': True})
-    Camera.objects.get_or_create(**{**properties, 'modified': False, 'cooled': True})
+    just_modified, created = Camera.objects.get_or_create(**{**properties, 'modified': True, 'cooled': False})
+    modified_and_cooled, created = Camera.objects.get_or_create(**{**properties, 'modified': True, 'cooled': True})
+    just_cooled, created = Camera.objects.get_or_create(**{**properties, 'modified': False, 'cooled': True})
 
+    Camera.objects.filter(
+        pk__in=[x.pk for x in [just_modified, modified_and_cooled, just_cooled]]
+    ).update(variant_of=instance)
 
 @receiver(pre_save, sender=Camera)
 def mirror_camera_update_to_variants(sender, instance: Camera, **kwargs):

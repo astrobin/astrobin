@@ -32,6 +32,14 @@ class EquipmentItem(SafeDeleteModel):
         choices=EQUIPMENT_ITEM_KLASS_CHOICES
     )
 
+    variant_of = models.ForeignKey(
+        'self',
+        null=True,
+        blank=True,
+        related_name='variants',
+        on_delete=models.SET_NULL
+    )
+
     created_by = models.ForeignKey(
         User,
         related_name='%(app_label)s_%(class)ss_created',

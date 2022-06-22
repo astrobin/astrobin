@@ -1,1 +1,5 @@
 {{ obj }}
+
+{% for variant in obj.variants %}
+  {{ variant }}
+{% endfor %}

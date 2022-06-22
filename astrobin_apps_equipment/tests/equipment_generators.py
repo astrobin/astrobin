@@ -59,6 +59,7 @@ class EquipmentGenerators:
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
             name=kwargs.get('name', 'Test camera %s' % random_name),
+            variant_of=kwargs.get('variant_of', None),
             website=kwargs.get('website', 'https://www.test-camera-%s.com/' % random_name),
             type=kwargs.get('type', CameraType.DEDICATED_DEEP_SKY),
             sensor=kwargs.get('sensor', EquipmentGenerators.sensor()),
@@ -76,6 +77,7 @@ class EquipmentGenerators:
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
             name=kwargs.get('name', 'Test telescope %s' % random_name),
+            variant_of=kwargs.get('variant_of', None),
             website=kwargs.get('website', 'https://www.test-telescope-%s.com/' % random_name),
             type=kwargs.get('type', TelescopeType.REFRACTOR_ACHROMATIC),
             aperture=kwargs.get('aperture', 75),
@@ -92,6 +94,7 @@ class EquipmentGenerators:
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
             name=kwargs.get('name', 'Test mount %s' % random_name),
+            variant_of=kwargs.get('variant_of', None),
             website=kwargs.get('website', 'https://www.test-mount-%s.com/' % random_name),
             type=kwargs.get('type', MountType.GERMAN_EQUATORIAL),
             periodic_error=kwargs.get('periodic_error', 1),
@@ -110,6 +113,7 @@ class EquipmentGenerators:
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
             name=kwargs.get('name', 'Test filter %s' % random_name),
+            variant_of=kwargs.get('variant_of', None),
             website=kwargs.get('website', 'https://www.test-filter-%s.com/' % random_name),
             type=kwargs.get('type', FilterType.L),
             bandwidth=kwargs.get('bandwidth', 12),
@@ -123,6 +127,7 @@ class EquipmentGenerators:
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
             name=kwargs.get('name', 'Test software %s' % random_name),
+            variant_of=kwargs.get('variant_of', None),
             website=kwargs.get('website', 'https://www.test-accessory-%s.com/' % random_name),
         )
 
@@ -134,6 +139,7 @@ class EquipmentGenerators:
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
             name=kwargs.get('name', 'Test software %s' % random_name),
+            variant_of=kwargs.get('variant_of', None),
             website=kwargs.get('website', 'https://www.test-software-%s.com/' % random_name),
         )
 

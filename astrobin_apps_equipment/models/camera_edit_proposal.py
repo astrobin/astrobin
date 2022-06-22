@@ -8,6 +8,15 @@ from astrobin_apps_equipment.models.equipment_item_edit_proposal_mixin import Eq
 class CameraEditProposal(CameraBaseModel, EquipmentItemEditProposalMixin):
     edit_proposal_target = models.ForeignKey(Camera, on_delete=models.CASCADE, related_name="edit_proposals")
 
+    # We need to override this, lest 'self' refers to the *EditProposal model instead of the actual model
+    variant_of = models.ForeignKey(
+        Camera,
+        null=True,
+        blank=True,
+        related_name='variants_in_edit_proposals',
+        on_delete=models.SET_NULL
+    )
+
     def get_absolute_url(self):
         return self.get_absolute_url_base('camera')
 

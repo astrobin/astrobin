@@ -3,6 +3,7 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 
 from astrobin.tests.generators import Generators
+from astrobin_apps_equipment.models import Camera
 from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 
@@ -137,26 +138,85 @@ class TestApiCameraViewSet(TestCase):
         self.assertEquals(0, len(response.data))
 
     def test_modified_camera_cannot_be_approved(self):
-        camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, modified=True)
+        camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS)
+        modified = Camera.objects.get(brand=camera.brand, name=camera.name, modified=True, cooled=False)
 
         client = APIClient()
         client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
 
         response = client.post(
-            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'approve/', format='json'
+            reverse('astrobin_apps_equipment:camera-detail', args=(modified.pk,)) + 'approve/', format='json'
         )
 
         self.assertEquals(400, response.status_code)
 
     def test_modified_camera_cannot_be_rejected(self):
-        camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, modified=True)
+        camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS)
+        modified = Camera.objects.get(brand=camera.brand, name=camera.name, modified=True, cooled=False)
 
         client = APIClient()
         client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
 
         response = client.post(
-            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'reject/', format='json'
+            reverse('astrobin_apps_equipment:camera-detail', args=(modified.pk,)) + 'reject/', format='json'
         )
 
         self.assertEquals(400, response.status_code)
 
+    def test_brand_and_variant_of_brand_mismatch(self):
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+
+        brand1 = EquipmentGenerators.brand()
+        brand2 = EquipmentGenerators.brand()
+        camera = EquipmentGenerators.camera(brand=brand1)
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-list'), {
+                'brand': brand2.pk,
+                'type': CameraType.DEDICATED_DEEP_SKY,
+                'name': 'Test',
+                'variant_of': camera.brand.pk
+            },
+            format='json'
+        )
+
+        self.assertContains(response, "The variant needs to be in the same brand as the item", status_code=400)
+
+    def test_diy_does_not_allow_variants(self):
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+
+        camera = EquipmentGenerators.camera()
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-list'), {
+                'brand': None,
+                'type': CameraType.DEDICATED_DEEP_SKY,
+                'name': 'Test',
+                'variant_of': camera.brand.pk
+            },
+            format='json'
+        )
+
+        self.assertContains(response, "DIY items do not support variants", status_code=400)
+
+    def test_circular_variants(self):
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+
+        brand = EquipmentGenerators.brand()
+        camera = EquipmentGenerators.camera(brand=brand)
+        variant = EquipmentGenerators.camera(brand=brand, variant_of=camera)
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-list'), {
+                'brand': brand.pk,
+                'type': CameraType.DEDICATED_DEEP_SKY,
+                'name': 'Test',
+                'variant_of': variant.pk
+            },
+            format='json'
+        )
+
+        self.assertContains(response, "Variants do not support variants", status_code=400)
