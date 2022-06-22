@@ -3,6 +3,7 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 
 from astrobin.tests.generators import Generators
+from astrobin_apps_equipment.models import Camera
 from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 
@@ -137,25 +138,27 @@ class TestApiCameraViewSet(TestCase):
         self.assertEquals(0, len(response.data))
 
     def test_modified_camera_cannot_be_approved(self):
-        camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, modified=True)
+        camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS)
+        modified = Camera.objects.get(brand=camera.brand, name=camera.name, modified=True, cooled=False)
 
         client = APIClient()
         client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
 
         response = client.post(
-            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'approve/', format='json'
+            reverse('astrobin_apps_equipment:camera-detail', args=(modified.pk,)) + 'approve/', format='json'
         )
 
         self.assertEquals(400, response.status_code)
 
     def test_modified_camera_cannot_be_rejected(self):
-        camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, modified=True)
+        camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS)
+        modified = Camera.objects.get(brand=camera.brand, name=camera.name, modified=True, cooled=False)
 
         client = APIClient()
         client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
 
         response = client.post(
-            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'reject/', format='json'
+            reverse('astrobin_apps_equipment:camera-detail', args=(modified.pk,)) + 'reject/', format='json'
         )
 
         self.assertEquals(400, response.status_code)
