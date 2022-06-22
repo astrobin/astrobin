@@ -33,7 +33,7 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
         user = self.context['request'].user
-        EquipmentItemService.validate_data(user, attrs)
+        EquipmentItemService.validate(user, attrs)
         return super().validate(attrs)
 
     def create(self, validated_data):

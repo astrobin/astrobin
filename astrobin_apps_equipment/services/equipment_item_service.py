@@ -26,12 +26,12 @@ class EquipmentItemService:
         return type_map.get(item_type)
 
     @staticmethod
-    def validate_data(user: User, validated_data):
+    def validate(user: User, attrs):
         if not user.groups.filter(name__in=['equipment_moderators', 'own_equipment_migrators']).exists():
             raise PermissionDenied("You don't have permission to create  or edit equipment items")
 
-        brand = validated_data['brand'] if 'brand' in validated_data else None
-        variant_of = validated_data['variant_of'] if 'variant_of' in validated_data else None
+        brand = attrs['brand'] if 'brand' in attrs else None
+        variant_of = attrs['variant_of'] if 'variant_of' in attrs else None
 
         if brand and variant_of and brand != variant_of.brand:
             raise ValidationError("The variant needs to be in the same brand as the item")
