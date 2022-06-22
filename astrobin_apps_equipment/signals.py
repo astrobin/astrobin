@@ -53,6 +53,7 @@ def create_DSLR_mirrorless_camera_variants(sender, instance: Camera, created: bo
         cooled = False,
         max_cooling = instance.max_cooling,
         back_focus = instance.back_focus,
+        variant_of = instance,
     )
 
     Camera.objects.get_or_create(**{**properties, 'modified': True, 'cooled': False})
