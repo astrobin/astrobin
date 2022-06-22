@@ -83,7 +83,8 @@ class EquipmentService:
     def undo_migration_strategy(migration_strategy):
         from astrobin.models import (
             Gear, GearMigrationStrategy, DeepSky_Acquisition, Telescope as LegacyTelescope, Camera as LegacyCamera,
-            Mount as LegacyMount, Filter as LegacyFilter, Accessory as LegacyAccessory, Software as LegacySoftware
+            Mount as LegacyMount, Filter as LegacyFilter, Accessory as LegacyAccessory, Software as LegacySoftware,
+            FocalReducer
         )
         from astrobin_apps_equipment.models import (
             AccessoryMigrationRecord, CameraMigrationRecord, FilterMigrationRecord, MigrationUsageType,
@@ -150,6 +151,7 @@ class EquipmentService:
                 )
 
                 for record in records:
+                    legacy_item = FocalReducer.objects.get(pk=migration_strategy.gear.pk)
                     getattr(record.image, 'accessories_2').remove(migration_strategy.migration_content_object)
                     getattr(record.image, 'focal_reducers').add(legacy_item)
 
