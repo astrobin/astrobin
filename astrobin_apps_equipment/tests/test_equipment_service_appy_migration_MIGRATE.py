@@ -7,6 +7,7 @@ from astrobin_apps_equipment.models import (
     MigrationUsageType, MountMigrationRecord,
     SoftwareMigrationRecord, TelescopeMigrationRecord,
 )
+from astrobin_apps_equipment.models.deep_sky_acquisition_migration_record import DeepSkyAcquisitionMigrationRecord
 from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 
@@ -208,51 +209,101 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
     def test_filter(self):
         user = Generators.user()
         image = Generators.image(user=user)
-        filter = Generators.filter()
 
-        image.filters.add(filter)
+        filter_1 = Generators.filter()
+        filter_2 = Generators.filter()
 
-        deep_sky_acquisition = DeepSky_Acquisition.objects.create(
+        image.filters.add(filter_1)
+        image.filters.add(filter_2)
+
+        deep_sky_acquisition_1 = DeepSky_Acquisition.objects.create(
             image=image,
-            filter=filter,
+            filter=filter_1,
+            duration=300,
+            number=10,
+        )
+
+        deep_sky_acquisition_2 = DeepSky_Acquisition.objects.create(
+            image=image,
+            filter=filter_2,
             duration=300,
             number=10,
         )
 
         new_filter = EquipmentGenerators.filter()
-        migration_strategy = Generators.gear_migration_strategy(
-            gear=filter,
+
+        migration_strategy_1 = Generators.gear_migration_strategy(
+            gear=filter_1,
             user=user,
             migration_flag='MIGRATE',
             migration_content_object=new_filter,
             migration_flat_reviewer_decision='APPROVED'
         )
 
-        EquipmentService.apply_migration_strategy(migration_strategy)
+        # In this test scenario, filter_2 was migrated to new_filter by mistake. When undoing it, we will test that
+        # only deep_sky_acquisition_2 gets the filters changed.
+        migration_strategy_2 = Generators.gear_migration_strategy(
+            gear=filter_2,
+            user=user,
+            migration_flag='MIGRATE',
+            migration_content_object=new_filter,
+            migration_flat_reviewer_decision='APPROVED'
+        )
+
+        EquipmentService.apply_migration_strategy(migration_strategy_2)
 
         self.assertTrue(
             FilterMigrationRecord.objects.filter(
-                from_gear=filter, to_item=new_filter, image=image
+                from_gear=filter_2, to_item=new_filter, image=image
             ).exists()
         )
-        self.assertFalse(image.filters.filter(pk=filter.pk).exists())
+        self.assertFalse(image.filters.filter(pk=filter_2.pk).exists())
         self.assertTrue(image.filters_2.filter(pk=new_filter.pk).exists())
-        deep_sky_acquisition.refresh_from_db()
-        self.assertTrue(new_filter, deep_sky_acquisition.filter_2)
-        self.assertIsNone(deep_sky_acquisition.filter)
+        deep_sky_acquisition_2.refresh_from_db()
+        self.assertTrue(new_filter, deep_sky_acquisition_2.filter_2)
+        self.assertIsNone(deep_sky_acquisition_2.filter)
+        self.assertTrue(DeepSkyAcquisitionMigrationRecord.objects.filter(from_gear=filter_2, to_item=new_filter).exists())
 
-        EquipmentService.undo_migration_strategy(migration_strategy)
+        EquipmentService.apply_migration_strategy(migration_strategy_1)
+
+        self.assertTrue(
+            FilterMigrationRecord.objects.filter(
+                from_gear=filter_1, to_item=new_filter, image=image
+            ).exists()
+        )
+        self.assertFalse(image.filters.filter(pk=filter_1.pk).exists())
+        self.assertTrue(image.filters_2.filter(pk=new_filter.pk).exists())
+        deep_sky_acquisition_1.refresh_from_db()
+        self.assertTrue(new_filter, deep_sky_acquisition_1.filter_2)
+        self.assertIsNone(deep_sky_acquisition_1.filter)
+        self.assertTrue(
+            DeepSkyAcquisitionMigrationRecord.objects.filter(from_gear=filter_1, to_item=new_filter).exists()
+        )
+
+        EquipmentService.undo_migration_strategy(migration_strategy_2)
 
         self.assertFalse(
             FilterMigrationRecord.objects.filter(
-                from_gear=filter, to_item=new_filter, image=image
+                from_gear=filter_2, to_item=new_filter, image=image
             ).exists()
         )
-        self.assertTrue(image.filters.filter(pk=filter.pk).exists())
+        self.assertTrue(image.filters.filter(pk=filter_2.pk).exists())
         self.assertFalse(image.filters_2.filter(pk=new_filter.pk).exists())
-        deep_sky_acquisition.refresh_from_db()
-        self.assertTrue(filter, deep_sky_acquisition.filter)
-        self.assertIsNone(deep_sky_acquisition.filter_2)
+        deep_sky_acquisition_2.refresh_from_db()
+        self.assertTrue(filter_2, deep_sky_acquisition_2.filter)
+        self.assertIsNone(deep_sky_acquisition_2.filter_2)
+
+        self.assertTrue(
+            FilterMigrationRecord.objects.filter(
+                from_gear=filter_1, to_item=new_filter, image=image
+            ).exists()
+        )
+        deep_sky_acquisition_1.refresh_from_db()
+        self.assertTrue(new_filter, deep_sky_acquisition_1.filter_2)
+        self.assertIsNone(deep_sky_acquisition_1.filter)
+        self.assertTrue(
+            DeepSkyAcquisitionMigrationRecord.objects.filter(from_gear=filter_1, to_item=new_filter).exists()
+        )
 
     def test_accessory(self):
         user = Generators.user()

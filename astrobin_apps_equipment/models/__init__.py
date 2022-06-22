@@ -29,3 +29,4 @@ from .filter_migration_record import FilterMigrationRecord
 from .accessory_migration_record import AccessoryMigrationRecord
 from .focal_reducer_migration_record import FocalReducerMigrationRecord
 from .software_migration_record import SoftwareMigrationRecord
+from .deep_sky_acquisition_migration_record import DeepSkyAcquisitionMigrationRecord

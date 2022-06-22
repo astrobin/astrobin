@@ -1,3 +1,8 @@
+from annoying.functions import get_object_or_None
+
+from astrobin_apps_equipment.models.deep_sky_acquisition_migration_record import DeepSkyAcquisitionMigrationRecord
+
+
 class EquipmentService:
     @staticmethod
     def image_has_equipment_items(image) -> bool:
@@ -66,7 +71,16 @@ class EquipmentService:
 
                 if usage == 'filters':
                     deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image, filter=classed_gear)
-                    deep_sky_acquisitions.update(filter=None, filter_2=migration_strategy.migration_content_object)
+                    deep_sky_acquisition: DeepSky_Acquisition
+                    for deep_sky_acquisition in deep_sky_acquisitions.iterator():
+                        deep_sky_acquisition.filter = None
+                        deep_sky_acquisition.filter_2 = migration_strategy.migration_content_object
+                        deep_sky_acquisition.save()
+                        DeepSkyAcquisitionMigrationRecord.objects.get_or_create(
+                            deep_sky_acquisition=deep_sky_acquisition,
+                            from_gear=Filter.objects.get(pk=gear.pk),
+                            to_item=migration_strategy.migration_content_object
+                        )
 
                 params = dict(
                     image=image,
@@ -108,6 +122,7 @@ class EquipmentService:
                 except ValueError:
                     continue
 
+                record: RecordClass[0]
                 for record in records:
                     legacy_item = RecordClass[2].objects.get(pk=migration_strategy.gear.pk)
                     if hasattr(record, 'usage_type'):
@@ -134,13 +149,18 @@ class EquipmentService:
                         )
 
                     if RecordClass[0] == FilterMigrationRecord:
-                        DeepSky_Acquisition.objects.filter(
-                            image=record.image,
-                            filter_2=migration_strategy.migration_content_object
-                        ).update(
-                            filter_2=None,
-                            filter=legacy_item
+                        deep_sky_acquisition_migration_record: DeepSkyAcquisitionMigrationRecord = get_object_or_None(
+                            DeepSkyAcquisitionMigrationRecord,
+                            deep_sky_acquisition__image=record.image,
+                            from_gear=migration_strategy.gear,
+                            to_item=migration_strategy.migration_content_object
                         )
+                        if deep_sky_acquisition_migration_record:
+                            deep_sky_acquisition: DeepSky_Acquisition = deep_sky_acquisition_migration_record.deep_sky_acquisition
+                            deep_sky_acquisition.filter = legacy_item
+                            deep_sky_acquisition.filter_2 = None
+                            deep_sky_acquisition.save()
+                            deep_sky_acquisition_migration_record.delete()
 
                 records.delete()
 
