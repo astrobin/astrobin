@@ -25,12 +25,13 @@ class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
             'name',
             'website',
             'image',
+            'variant_of',
         ]
         read_only_fields = ['image']
         abstract = True
 
-    def create(self, validated_data):
-        target = validated_data['edit_proposal_target']
+    def validate(self, attrs):
+        target = attrs['edit_proposal_target']
 
         already_has_pending = self.Meta.model.objects.filter(
             edit_proposal_review_status__isnull=True, edit_proposal_target=target.pk
@@ -38,25 +39,29 @@ class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
         if already_has_pending:
             raise ValidationError("This item already has a pending edit proposal")
 
-        if 'brand' in validated_data and validated_data['brand'] != target.brand:
-            raise ValidationError("Edit proposals cannot be used to change an item's brand")
-
-        if 'klass' not in validated_data or validated_data['klass'] != target.klass:
+        if 'klass' not in attrs or attrs['klass'] != target.klass:
             raise ValidationError("The klass property must match that of the target item")
 
-        if 'edit_proposal_review_status' in validated_data and validated_data['edit_proposal_review_status'] is not None:
+        if 'edit_proposal_review_status' in attrs and attrs[
+            'edit_proposal_review_status'] is not None:
             raise ValidationError("The edit_proposal_review_status must be null")
 
+        return super().validate(attrs)
+
+    def create(self, validated_data):
         validated_data['edit_proposal_by'] = self.context['request'].user
         validated_data['edit_proposal_ip'] = self.context['request'].META.get("REMOTE_ADDR")
 
+        target = validated_data['edit_proposal_target']
+
         original_properties = {
             'name': target.name.replace('=', '\='),
+            'variant_of': target.variant_of,
             'website': target.website,
             'image': target.image,
         }
 
-        if self.get_original_properties:
+        if hasattr(self, 'original_properties') and hasattr(self, 'get_original_properties'):
             original_properties.update(self.get_original_properties(target))
 
         validated_data['edit_proposal_original_properties'] = ','.join([

@@ -8,6 +8,15 @@ from astrobin_apps_equipment.models.telescope_base_model import TelescopeBaseMod
 class TelescopeEditProposal(TelescopeBaseModel, EquipmentItemEditProposalMixin):
     edit_proposal_target = models.ForeignKey(Telescope, on_delete=models.CASCADE, related_name="edit_proposals")
 
+    # We need to override this, lest 'self' refers to the *EditProposal model instead of the actual model
+    variant_of = models.ForeignKey(
+        Telescope,
+        null=True,
+        blank=True,
+        related_name='variants_in_edit_proposals',
+        on_delete=models.SET_NULL
+    )
+
     def get_absolute_url(self):
         return self.get_absolute_url_base('telescope')
 

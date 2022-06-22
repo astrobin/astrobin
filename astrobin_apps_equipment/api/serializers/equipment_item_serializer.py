@@ -1,11 +1,15 @@
 from rest_framework import serializers
-from rest_framework.exceptions import PermissionDenied
 
-from astrobin_apps_equipment.models import EquipmentBrand
+from astrobin_apps_equipment.services import EquipmentItemService
 
 
 class EquipmentItemSerializer(serializers.ModelSerializer):
-    # brand = serializers.PrimaryKeyRelatedField(required=False, queryset=EquipmentBrand.objects.all)
+    variants = serializers.SerializerMethodField(read_only=True)
+
+    def get_variants(self, item):
+        ModelClass = self.__class__.Meta.model
+        variants = ModelClass.objects.filter(variant_of__pk=item.pk)
+        return self.__class__(variants, many=True).data
 
     class Meta:
         fields = [
@@ -22,15 +26,17 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
             'name',
             'website',
             'image',
+            'variant_of'
         ]
         read_only_fields = ['image']
         abstract = True
 
+    def validate(self, attrs):
+        user = self.context['request'].user
+        EquipmentItemService.validate_data(user, attrs)
+        return super().validate(attrs)
+
     def create(self, validated_data):
         user = self.context['request'].user
-
-        if not user.groups.filter(name__in=['equipment_moderators', 'own_equipment_migrators']).exists():
-            raise PermissionDenied('You don\'t have permission to create an equipment item')
-
         validated_data['created_by'] = user
         return super(EquipmentItemSerializer, self).create(validated_data)

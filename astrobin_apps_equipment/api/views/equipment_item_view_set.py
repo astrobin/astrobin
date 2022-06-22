@@ -45,18 +45,23 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
     throttle_classes = [EquipmentCreateThrottle]
 
     def get_queryset(self) -> QuerySet:
-        q = self.request.GET.get('q')
-        sort = self.request.GET.get('sort')
+        q = self.request.query_params.get('q')
+        sort = self.request.query_params.get('sort')
 
         manager = self.get_serializer().Meta.model.objects
         queryset = manager.all()
 
+        if 'include-variants' in self.request.query_params and self.request.query_params.get(
+                'include-variants'
+        ).lower() == 'false':
+            queryset = queryset.filter(variant_of__isnull=True)
+
         if 'EditProposal' not in str(self.get_serializer().Meta.model):
             if self.request.user.is_authenticated:
                 if not self.request.user.groups.filter(name='equipment_moderators').exists():
-                    queryset = manager.filter(Q(brand__isnull=False) | Q(created_by=self.request.user))
+                    queryset = queryset.filter(Q(brand__isnull=False) | Q(created_by=self.request.user))
             else:
-                queryset = manager.filter(brand__isnull=False)
+                queryset = queryset.filter(brand__isnull=False)
 
         if q:
             brand = get_object_or_None(EquipmentBrand, name__iexact=q)
@@ -100,8 +105,20 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             queryset = queryset.order_by('image_count', Lower('brand__name'), Lower('name'))
         elif sort == '-images':
             queryset = queryset.order_by('-image_count', Lower('brand__name'), Lower('name'))
-            
+
         return queryset
+
+    @action(
+        detail=True,
+        methods=['get'],
+    )
+    def variants(self, request, pk):
+        manager = self.get_serializer().Meta.model.objects
+        item: EquipmentItem = get_object_or_404(manager, pk=pk)
+
+        queryset = item.variants.all()
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
 
     @action(
         detail=False,
@@ -178,14 +195,15 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         objects = manager.none()
 
         if brand and q:
-            objects = manager \
-                          .annotate(distance=TrigramDistance('name', q)) \
-                          .filter(
+            objects = manager.annotate(
+                distance=TrigramDistance('name', q)
+            ).filter(
                 Q(brand=int(brand)) &
                 Q(Q(distance__lte=.7) | Q(name__icontains=q)) &
                 ~Q(name=q)
-            ) \
-                          .order_by('distance')[:10]
+            ).order_by(
+                'distance'
+            )[:10]
 
         serializer = self.serializer_class(objects, many=True)
         return Response(serializer.data)
