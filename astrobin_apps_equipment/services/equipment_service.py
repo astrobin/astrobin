@@ -90,6 +90,8 @@ class EquipmentService:
                 deep_sky_acquisition.filter = None
                 deep_sky_acquisition.filter_2 = migration_strategy.migration_content_object
                 deep_sky_acquisition.save()
+                if not deep_sky_acquisition.image.filters_2.filter(pk=migration_strategy.migration_content_object.pk).exists():
+                    deep_sky_acquisition.image.filters_2.add(migration_strategy.migration_content_object)
                 DeepSkyAcquisitionMigrationRecord.objects.get_or_create(
                     deep_sky_acquisition=deep_sky_acquisition,
                     from_gear=Filter.objects.get(pk=gear.pk),
@@ -171,15 +173,18 @@ class EquipmentService:
                 pass
 
             try:
+                legacy_filter: LegacyFilter = LegacyFilter.objects.get(pk=migration_strategy.gear.pk)
                 for deep_sky_acquisition_migration_record in DeepSkyAcquisitionMigrationRecord.objects.filter(
                         deep_sky_acquisition__image__user=migration_strategy.user,
-                        from_gear=LegacyFilter.objects.get(pk=migration_strategy.gear.pk),
+                        from_gear=legacy_filter,
                         to_item=migration_strategy.migration_content_object
                 ):
                     deep_sky_acquisition: DeepSky_Acquisition = deep_sky_acquisition_migration_record.deep_sky_acquisition
-                    deep_sky_acquisition.filter = LegacyFilter.objects.get(pk=migration_strategy.gear.pk)
+                    deep_sky_acquisition.filter = legacy_filter
                     deep_sky_acquisition.filter_2 = None
                     deep_sky_acquisition.save()
+                    if not deep_sky_acquisition.image.filters_2.filter(pk=legacy_filter.pk).exists():
+                        deep_sky_acquisition.image.filters.add(legacy_filter)
                     deep_sky_acquisition_migration_record.delete()
             except LegacyFilter.DoesNotExist:
                 pass
