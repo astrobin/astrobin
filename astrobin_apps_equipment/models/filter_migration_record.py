@@ -20,4 +20,4 @@ class FilterMigrationRecord(MigrationRecordBaseModel):
 
     class Meta(MigrationRecordBaseModel.Meta):
         abstract = False
-        unique_together = ('image', 'from_gear')
+        unique_together = ('image', 'from_gear', 'deleted')
