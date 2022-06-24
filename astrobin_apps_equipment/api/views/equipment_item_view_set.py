@@ -214,13 +214,16 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         url_path='others-in-brand',
     )
     def others_in_brand(self, request):
-        brand = request.GET.get('brand')
+        brand = request.query_params.get('brand')
+        name = request.query_params.get('name')
 
         manager = self.get_serializer().Meta.model.objects
         objects = manager.none()
 
         if brand:
             objects = manager.filter(brand=int(brand)).order_by('name')
+            if name:
+                objects = objects.exclude(name__iexact=name)
 
         serializer = self.serializer_class(objects, many=True)
         return Response(serializer.data)
