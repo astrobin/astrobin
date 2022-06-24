@@ -75,6 +75,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                     )
                 ).order_by(Lower('name'))
             if brand_queryset.exists():
+                self.paginator.page_size = brand_queryset.count()
                 queryset = brand_queryset
             else:
                 queryset = queryset.annotate(
