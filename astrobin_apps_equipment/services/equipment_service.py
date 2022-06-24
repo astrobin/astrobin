@@ -69,19 +69,6 @@ class EquipmentService:
                 getattr(image, usage).remove(classed_gear)
                 getattr(image, new_usage).add(migration_strategy.migration_content_object)
 
-                if usage == 'filters':
-                    deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(image=image, filter=classed_gear)
-                    deep_sky_acquisition: DeepSky_Acquisition
-                    for deep_sky_acquisition in deep_sky_acquisitions.iterator():
-                        deep_sky_acquisition.filter = None
-                        deep_sky_acquisition.filter_2 = migration_strategy.migration_content_object
-                        deep_sky_acquisition.save()
-                        DeepSkyAcquisitionMigrationRecord.objects.get_or_create(
-                            deep_sky_acquisition=deep_sky_acquisition,
-                            from_gear=Filter.objects.get(pk=gear.pk),
-                            to_item=migration_strategy.migration_content_object
-                        )
-
                 params = dict(
                     image=image,
                     from_gear=classed_gear,
@@ -92,6 +79,24 @@ class EquipmentService:
                     params['usage_type'] = usage_type
 
                 RecordKlass.objects.get_or_create(**params)
+
+        try:
+            deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(
+                image__user=migration_strategy.user,
+                filter=Filter.objects.get(pk=gear.pk)
+            )
+            deep_sky_acquisition: DeepSky_Acquisition
+            for deep_sky_acquisition in deep_sky_acquisitions.iterator():
+                deep_sky_acquisition.filter = None
+                deep_sky_acquisition.filter_2 = migration_strategy.migration_content_object
+                deep_sky_acquisition.save()
+                DeepSkyAcquisitionMigrationRecord.objects.get_or_create(
+                    deep_sky_acquisition=deep_sky_acquisition,
+                    from_gear=Filter.objects.get(pk=gear.pk),
+                    to_item=migration_strategy.migration_content_object
+                )
+        except Filter.DoesNotExist:
+            pass
 
     @staticmethod
     def undo_migration_strategy(migration_strategy):
@@ -148,20 +153,6 @@ class EquipmentService:
                             legacy_item
                         )
 
-                    if RecordClass[0] == FilterMigrationRecord:
-                        deep_sky_acquisition_migration_record: DeepSkyAcquisitionMigrationRecord = get_object_or_None(
-                            DeepSkyAcquisitionMigrationRecord,
-                            deep_sky_acquisition__image=record.image,
-                            from_gear=migration_strategy.gear,
-                            to_item=migration_strategy.migration_content_object
-                        )
-                        if deep_sky_acquisition_migration_record:
-                            deep_sky_acquisition: DeepSky_Acquisition = deep_sky_acquisition_migration_record.deep_sky_acquisition
-                            deep_sky_acquisition.filter = legacy_item
-                            deep_sky_acquisition.filter_2 = None
-                            deep_sky_acquisition.save()
-                            deep_sky_acquisition_migration_record.delete()
-
                 records.delete()
 
             # Handle focal reducers separately because they are Accessories in the new equipment database.
@@ -177,6 +168,20 @@ class EquipmentService:
 
                 records.delete()
             except ValueError:
+                pass
+
+            try:
+                for deep_sky_acquisition_migration_record in DeepSkyAcquisitionMigrationRecord.objects.filter(
+                        deep_sky_acquisition__image__user=migration_strategy.user,
+                        from_gear=LegacyFilter.objects.get(pk=migration_strategy.gear.pk),
+                        to_item=migration_strategy.migration_content_object
+                ):
+                    deep_sky_acquisition: DeepSky_Acquisition = deep_sky_acquisition_migration_record.deep_sky_acquisition
+                    deep_sky_acquisition.filter = LegacyFilter.objects.get(pk=migration_strategy.gear.pk)
+                    deep_sky_acquisition.filter_2 = None
+                    deep_sky_acquisition.save()
+                    deep_sky_acquisition_migration_record.delete()
+            except LegacyFilter.DoesNotExist:
                 pass
 
         Gear.objects.filter(pk=migration_strategy.gear.pk).update(
