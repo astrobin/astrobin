@@ -61,7 +61,7 @@ class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
             'image': target.image,
         }
 
-        if hasattr(self, 'original_properties') and hasattr(self, 'get_original_properties'):
+        if hasattr(self, 'get_original_properties'):
             original_properties.update(self.get_original_properties(target))
 
         validated_data['edit_proposal_original_properties'] = ','.join([
