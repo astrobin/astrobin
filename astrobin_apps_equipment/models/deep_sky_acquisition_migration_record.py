@@ -29,4 +29,4 @@ class DeepSkyAcquisitionMigrationRecord(SafeDeleteModel):
     )
 
     class Meta:
-        unique_together = ('deep_sky_acquisition', 'from_gear')
+        unique_together = ('deep_sky_acquisition', 'from_gear', 'deleted')
