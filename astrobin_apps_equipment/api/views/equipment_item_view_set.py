@@ -83,7 +83,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                     distance=TrigramDistance('full_name', q)
                 ).filter(
                     Q(
-                        Q(distance__lte=.8) | Q(full_name__icontains=q)
+                        Q(distance__lte=.8) | Q(full_name__icontains=q) | Q(variants__name__icontains=q)
                     ) &
                     Q(
                         Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
