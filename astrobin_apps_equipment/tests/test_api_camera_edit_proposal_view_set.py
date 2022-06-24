@@ -165,3 +165,24 @@ class TestApiCameraEditProposalViewSet(TestCase):
         )
 
         self.assertContains(response, "Variants do not support variants", status_code=400)
+
+    def test_self_variant(self):
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+
+        brand = EquipmentGenerators.brand()
+        camera = EquipmentGenerators.camera(brand=brand)
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list'), {
+                'editProposalTarget': camera.pk,
+                'brand': camera.brand.pk,
+                'name': camera.name,
+                'type': camera.type,
+                'klass': camera.klass,
+                'variant_of': camera.pk
+            },
+            format='json'
+        )
+
+        self.assertContains(response, "An item cannot be a variant of itself", status_code=400)

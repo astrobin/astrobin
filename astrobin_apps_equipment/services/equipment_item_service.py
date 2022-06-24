@@ -32,6 +32,10 @@ class EquipmentItemService:
 
         brand = attrs['brand'] if 'brand' in attrs else None
         variant_of = attrs['variant_of'] if 'variant_of' in attrs else None
+        edit_proposal_target = attrs['edit_proposal_target'] if 'edit_proposal_target' in attrs else None
+
+        if variant_of and edit_proposal_target and variant_of == edit_proposal_target:
+            raise ValidationError("An item cannot be a variant of itself")
 
         if brand and variant_of and brand != variant_of.brand:
             raise ValidationError("The variant needs to be in the same brand as the item")
