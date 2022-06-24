@@ -5,7 +5,6 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('astrobin', '0158_add_ordering_to_gear_migration_strategy'),
         ('astrobin_apps_equipment', '0080_fix_unique_constraint_of_filter_migration_record'),
     ]
 
