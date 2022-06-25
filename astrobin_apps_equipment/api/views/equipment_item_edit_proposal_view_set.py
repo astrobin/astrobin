@@ -38,7 +38,7 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
         edit_proposal: EquipmentItemEditProposalMixin = self.get_object()
 
         if edit_proposal.edit_proposal_review_lock and edit_proposal.edit_proposal_review_lock != request.user:
-            return Response(status=HTTP_409_CONFLICT)
+            return self._conflict_response()
 
         edit_proposal.edit_proposal_review_lock = request.user
         edit_proposal.edit_proposal_review_lock_timestamp = timezone.now()
@@ -63,7 +63,7 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
         )
 
         if edit_proposal.edit_proposal_review_lock and edit_proposal.edit_proposal_review_lock != request.user:
-            return Response(status=HTTP_409_CONFLICT)
+            return self._conflict_response()
 
         check_permissions, response = self.check_edit_proposal_permissions(request, edit_proposal)
         if not check_permissions:
@@ -124,7 +124,7 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
         edit_proposal: EquipmentItemEditProposalMixin = get_object_or_404(self.get_serializer().Meta.model, pk=pk)
 
         if edit_proposal.edit_proposal_review_lock and edit_proposal.edit_proposal_review_lock != request.user:
-            return Response(status=HTTP_409_CONFLICT)
+            return self._conflict_response()
 
         check_permissions, response = self.check_edit_proposal_permissions(request, edit_proposal)
         if not check_permissions:
