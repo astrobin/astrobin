@@ -40,6 +40,19 @@ class EquipmentItemEditProposalMixin(models.Model):
         blank=True,
     )
 
+    edit_proposal_review_lock = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='%(app_label)s_%(class)s_edit_proposal_review_locks',
+    )
+
+    edit_proposal_review_lock_timestamp = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
     edit_proposal_reviewed_by = models.ForeignKey(
         User,
         null=True,

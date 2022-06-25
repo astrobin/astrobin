@@ -13,6 +13,7 @@ BROKER_TRANSPORT_OPTIONS = {
 CELERY_RESULT_BACKEND = BROKER_URL
 CELERY_IMPORTS = (
     'astrobin.tasks',
+    'astrobin_apps_equipment.tasks',
     'astrobin_apps_iotd.tasks',
     'astrobin_apps_notifications.tasks',
     'astrobin_apps_payments.tasks',

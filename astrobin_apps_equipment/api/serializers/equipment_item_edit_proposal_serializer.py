@@ -2,6 +2,8 @@ from rest_framework import fields
 from rest_framework.exceptions import ValidationError
 
 from astrobin_apps_equipment.api.serializers.equipment_item_serializer import EquipmentItemSerializer
+from astrobin_apps_equipment.models import EquipmentItem
+from common.exceptions import Conflict
 
 
 class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
@@ -31,7 +33,10 @@ class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
         abstract = True
 
     def validate(self, attrs):
-        target = attrs['edit_proposal_target']
+        target: EquipmentItem = attrs['edit_proposal_target']
+
+        if target.edit_proposal_lock and target.edit_proposal_lock != self.context.get('request').user:
+            raise Conflict()
 
         already_has_pending = self.Meta.model.objects.filter(
             edit_proposal_review_status__isnull=True, edit_proposal_target=target.pk
