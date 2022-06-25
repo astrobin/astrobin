@@ -48,6 +48,19 @@ class EquipmentItem(SafeDeleteModel):
         editable=False,
     )
 
+    reviewer_lock = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='%(app_label)s_%(class)s_reviewer_locks',
+    )
+
+    reviewer_timestamp = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
     reviewed_by = models.ForeignKey(
         User,
         related_name='%(app_label)s_%(class)ss_reviewed',
@@ -127,6 +140,19 @@ class EquipmentItem(SafeDeleteModel):
         null=True,
         blank=True,
         editable=False,
+    )
+
+    edit_proposal_lock = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='%(app_label)s_%(class)s_edit_proposal_locks',
+    )
+
+    edit_proposal_lock_timestamp = models.DateTimeField(
+        null=True,
+        blank=True,
     )
 
     brand = models.ForeignKey(

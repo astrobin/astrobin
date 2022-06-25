@@ -20,7 +20,7 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import get_object_or_404
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
-from rest_framework.status import HTTP_400_BAD_REQUEST
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_409_CONFLICT
 
 from astrobin.models import GearMigrationStrategy, Image
 from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_own_migrator_or_readonly import \
@@ -229,12 +229,69 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(objects, many=True)
         return Response(serializer.data)
 
+    @action(detail=True, methods=['POST'], url_path='acquire-reviewer-lock')
+    def acquire_reviewer_lock(self, request, pk):
+        if not request.user.groups.filter(name='equipment_moderators').exists():
+            raise PermissionDenied(request.user)
+
+        item: EquipmentItem = self.get_object()
+
+        if item.reviewer_lock and item.reviewer_lock != request.user:
+            return Response(status=HTTP_409_CONFLICT)
+
+        item.reviewer_lock_lock = request.user
+        item.reviewer_lock_lock_timestamp = timezone.now()
+        item.save(keep_deleted=True)
+
+        return Response(status=HTTP_200_OK)
+
+    @action(detail=True, methods=['POST'], url_path='release-reviewer-lock')
+    def release_reviewer_lock(self, request, pk):
+        item: EquipmentItem = self.get_object()
+
+        if item.reviewer_lock == request.user:
+            item.reviewer_lock_lock = None
+            item.reviewer_lock_lock_timestamp = None
+            item.save(keep_deleted=True)
+
+        return Response(status=HTTP_200_OK)
+
+    @action(detail=True, methods=['POST'], url_path='acquire-edit-proposal-lock')
+    def acquire_edit_proposal_lock(self, request, pk):
+        if not request.user.groups.filter(name='own_equipment_migrators').exists():
+            raise PermissionDenied(request.user)
+
+        item: EquipmentItem = self.get_object()
+
+        if item.edit_proposal_lock and item.edit_proposal_lock != request.user:
+            return Response(status=HTTP_409_CONFLICT)
+
+        item.edit_proposal_lock = request.user
+        item.edit_proposal_lock_timestamp = timezone.now()
+        item.save(keep_deleted=True)
+
+        return Response(status=HTTP_200_OK)
+
+    @action(detail=True, methods=['POST'], url_path='release-edit-proposal-lock')
+    def release_edit_proposal_lock(self, request, pk):
+        item: EquipmentItem = self.get_object()
+
+        if item.edit_proposal_lock == request.user:
+            item.edit_proposal_lock = None
+            item.edit_proposal_lock_timestamp = None
+            item.save(keep_deleted=True)
+
+        return Response(status=HTTP_200_OK)
+
     @action(detail=True, methods=['POST'])
     def approve(self, request, pk):
         if not request.user.groups.filter(name='equipment_moderators').exists():
             raise PermissionDenied(request.user)
 
-        item = get_object_or_404(self.get_serializer().Meta.model.objects, pk=pk)
+        item: EquipmentItem = get_object_or_404(self.get_serializer().Meta.model.objects, pk=pk)
+
+        if item.reviewer_lock and item.reviewer_lock != request.user:
+            return Response(status=HTTP_409_CONFLICT)
 
         if item.reviewed_by is not None:
             return Response("This item was already reviewed", HTTP_400_BAD_REQUEST)
@@ -288,6 +345,9 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         model = self.get_serializer().Meta.model
         item: EquipmentItem = get_object_or_404(model.objects, pk=pk)
+
+        if item.reviewer_lock and item.reviewer_lock != request.user:
+            return Response(status=HTTP_409_CONFLICT)
 
         if item.reviewed_by is not None and item.reviewer_decision == EquipmentItemReviewerDecision.APPROVED:
             return Response("This item was already approved", HTTP_400_BAD_REQUEST)

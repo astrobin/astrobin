@@ -5,10 +5,11 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from rest_framework.decorators import action
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
-from rest_framework.status import HTTP_400_BAD_REQUEST
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_409_CONFLICT
 
 from astrobin_apps_equipment.api.views.equipment_item_view_set import EquipmentItemViewSet
 from astrobin_apps_equipment.models import EquipmentItem
@@ -29,10 +30,40 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
 
         return True, None
 
+    @action(detail=True, methods=['POST'], url_path='acquire-review-lock')
+    def acquire_review_lock(self, request, pk):
+        if not request.user.groups.filter(name='own_equipment_migrators').exists():
+            raise PermissionDenied(request.user)
+
+        edit_proposal: EquipmentItemEditProposalMixin = self.get_object()
+
+        if edit_proposal.edit_proposal_review_lock and edit_proposal.edit_proposal_review_lock != request.user:
+            return Response(status=HTTP_409_CONFLICT)
+
+        edit_proposal.edit_proposal_review_lock = request.user
+        edit_proposal.edit_proposal_review_lock_timestamp = timezone.now()
+        edit_proposal.save(keep_deleted=True)
+
+        return Response(status=HTTP_200_OK)
+
+    @action(detail=True, methods=['POST'], url_path='release-review-lock')
+    def release_review_lock(self, request, pk):
+        edit_proposal: EquipmentItemEditProposalMixin = self.get_object()
+
+        if edit_proposal.edit_proposal_review_lock == request.user:
+            edit_proposal.edit_proposal_review_lock = None
+            edit_proposal.edit_proposal_review_lock_timestamp = None
+            edit_proposal.save(keep_deleted=True)
+
+        return Response(status=HTTP_200_OK)
+
     def approve(self, request, pk):
         edit_proposal: (EquipmentItemEditProposalMixin | EquipmentItem) = get_object_or_404(
             self.get_serializer().Meta.model, pk=pk
         )
+
+        if edit_proposal.edit_proposal_review_lock and edit_proposal.edit_proposal_review_lock != request.user:
+            return Response(status=HTTP_409_CONFLICT)
 
         check_permissions, response = self.check_edit_proposal_permissions(request, edit_proposal)
         if not check_permissions:
@@ -91,6 +122,9 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
     @action(detail=True, methods=['POST'])
     def reject(self, request, pk):
         edit_proposal: EquipmentItemEditProposalMixin = get_object_or_404(self.get_serializer().Meta.model, pk=pk)
+
+        if edit_proposal.edit_proposal_review_lock and edit_proposal.edit_proposal_review_lock != request.user:
+            return Response(status=HTTP_409_CONFLICT)
 
         check_permissions, response = self.check_edit_proposal_permissions(request, edit_proposal)
         if not check_permissions:

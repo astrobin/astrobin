@@ -11,11 +11,11 @@ from safedelete.models import SafeDeleteModel
 
 from astrobin_apps_images.api import constants, signals
 from astrobin_apps_images.api.constants import TUS_API_CHECKSUM_ALGORITHMS
-from astrobin_apps_images.api.exceptions import Conflict
 from astrobin_apps_images.api.mixins import TusCacheMixin
 from astrobin_apps_images.api.parsers import TusUploadStreamParser
 from astrobin_apps_images.api.utils import has_required_tus_header, checksum_matches, add_expiry_header, write_data, \
     get_or_create_temporary_file, apply_headers_to_response
+from common.exceptions import Conflict
 
 log = logging.getLogger('apps')
 
