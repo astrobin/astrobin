@@ -44,6 +44,12 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'post', 'head']
     throttle_classes = [EquipmentCreateThrottle]
 
+    def _conflict_response(self):
+        return Response(
+            data=_('Someone else is working on this item right now. Please try again later.'),
+            status=HTTP_409_CONFLICT
+        )
+
     def get_queryset(self) -> QuerySet:
         q = self.request.query_params.get('q')
         sort = self.request.query_params.get('sort')
@@ -237,10 +243,10 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         item: EquipmentItem = self.get_object()
 
         if item.reviewer_lock and item.reviewer_lock != request.user:
-            return Response(status=HTTP_409_CONFLICT)
+            return self._conflict_response()
 
-        item.reviewer_lock_lock = request.user
-        item.reviewer_lock_lock_timestamp = timezone.now()
+        item.reviewer_lock = request.user
+        item.reviewer_lock_timestamp = timezone.now()
         item.save(keep_deleted=True)
 
         return Response(status=HTTP_200_OK)
@@ -250,8 +256,8 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         item: EquipmentItem = self.get_object()
 
         if item.reviewer_lock == request.user:
-            item.reviewer_lock_lock = None
-            item.reviewer_lock_lock_timestamp = None
+            item.reviewer_lock = None
+            item.reviewer_lock_timestamp = None
             item.save(keep_deleted=True)
 
         return Response(status=HTTP_200_OK)
@@ -264,7 +270,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         item: EquipmentItem = self.get_object()
 
         if item.edit_proposal_lock and item.edit_proposal_lock != request.user:
-            return Response(status=HTTP_409_CONFLICT)
+            return self._conflict_response()
 
         item.edit_proposal_lock = request.user
         item.edit_proposal_lock_timestamp = timezone.now()
@@ -291,7 +297,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         item: EquipmentItem = get_object_or_404(self.get_serializer().Meta.model.objects, pk=pk)
 
         if item.reviewer_lock and item.reviewer_lock != request.user:
-            return Response(status=HTTP_409_CONFLICT)
+            return self._conflict_response()
 
         if item.reviewed_by is not None:
             return Response("This item was already reviewed", HTTP_400_BAD_REQUEST)
@@ -347,7 +353,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         item: EquipmentItem = get_object_or_404(model.objects, pk=pk)
 
         if item.reviewer_lock and item.reviewer_lock != request.user:
-            return Response(status=HTTP_409_CONFLICT)
+            return self._conflict_response()
 
         if item.reviewed_by is not None and item.reviewer_decision == EquipmentItemReviewerDecision.APPROVED:
             return Response("This item was already approved", HTTP_400_BAD_REQUEST)
