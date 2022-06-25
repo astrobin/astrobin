@@ -2,19 +2,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Notifications\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-14 10:01+0000\n"
-"PO-Revision-Date: 2022-06-02 10:08+0200\n"
+"POT-Creation-Date: 2021-04-05 16:16+0200\n"
+"PO-Revision-Date: 2022-06-25 21:55+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108445\n"
-"X-Loco-Api-Version: 1.0.26 20220328-1\n"
+"X-Loco-Api-Version: 1.0.26 20220622-1"
+
+msgid "Notifications"
+msgstr "Notificaciones"
+
+msgid "You have no notifications."
+msgstr "No tiene notificaciones."
+
+msgid "Settings"
+msgstr "Configuración"
+
+msgid "Mark all as read"
+msgstr "Marcar todos como leídos"
+
+msgid "You have no new notifications."
+msgstr "No tiene notificaciones nuevas."
 
 msgid "You have a new follower"
 msgstr "Tiene un un nuevo seguidor"
@@ -31,29 +46,11 @@ msgstr "Su imagen pasó por plate-solving"
 msgid "Your image could not be plate-solved"
 msgstr "Su imagen no pudo ser tratada por plate-solving"
 
-msgid "Your image was plate-solved (advanced)"
-msgstr ""
-
-msgid "Your image could not be plate-solved (advanced)"
-msgstr ""
-
 msgid "Your image received a new comment"
 msgstr "Su imagen recibió un nuevo comentario"
 
-msgid "Your edit proposal received a new comment"
-msgstr ""
-
-msgid "Your scheduled IOTD received a new comment"
-msgstr ""
-
-msgid "Your unapproved equipment item received a comment"
-msgstr ""
-
 msgid "There was a reply to your comment"
 msgstr "Hubo una respuesta a su comentario"
-
-msgid "A new comment on your image requires moderation"
-msgstr ""
 
 msgid "Your comment was approved"
 msgstr ""
@@ -68,9 +65,6 @@ msgid "Your comment was liked"
 msgstr ""
 
 msgid "Your forum post was liked"
-msgstr ""
-
-msgid "Your forum post was approved"
 msgstr ""
 
 msgid "Your API Key request has been approved"
@@ -121,9 +115,6 @@ msgstr "Tiene imágenes con una \"Fuente remota\" faltante"
 msgid "Would you like to activate your account?"
 msgstr ""
 
-msgid "New reply in a subscribed forum topic"
-msgstr ""
-
 msgid "You were mentioned in a forum post"
 msgstr ""
 
@@ -134,9 +125,6 @@ msgid "Welcome to AstroBin!"
 msgstr ""
 
 msgid "Congratulations for your first image on AstroBin!"
-msgstr ""
-
-msgid "Your image was submitted for IOTD/TP consideration"
 msgstr ""
 
 msgid "Thank you for getting a subscription!"
@@ -157,6 +145,9 @@ msgstr ""
 msgid "An image you promoted made it to IOTD"
 msgstr ""
 
+msgid "New reply in a subscribed forum topic"
+msgstr ""
+
 msgid "Your image was nominated to be a Top Pick"
 msgstr ""
 
@@ -166,23 +157,32 @@ msgstr ""
 msgid "Your image was voted Image of the Day"
 msgstr ""
 
+msgid "Your image was plate-solved (advanced)"
+msgstr ""
+
+msgid "Your image could not be plate-solved (advanced)"
+msgstr ""
+
+msgid "A new comment on your image requires moderation"
+msgstr ""
+
+msgid "Your forum post was approved"
+msgstr ""
+
 msgid "You were mentioned in an image description"
+msgstr ""
+
+msgid "Your edit proposal received a new comment"
+msgstr ""
+
+msgid "Your image was submitted for IOTD/TP consideration"
 msgstr ""
 
 msgid "A gear item that you used was renamed"
 msgstr ""
 
-#~ msgid "Notifications"
-#~ msgstr "Notificaciones"
+msgid "Your scheduled IOTD received a new comment"
+msgstr ""
 
-#~ msgid "You have no notifications."
-#~ msgstr "No tiene notificaciones."
-
-#~ msgid "Settings"
-#~ msgstr "Configuración"
-
-#~ msgid "Mark all as read"
-#~ msgstr "Marcar todos como leídos"
-
-#~ msgid "You have no new notifications."
-#~ msgstr "No tiene notificaciones nuevas."
+msgid "Your unapproved equipment item received a comment"
+msgstr ""
