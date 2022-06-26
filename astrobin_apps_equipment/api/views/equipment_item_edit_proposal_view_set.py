@@ -58,8 +58,10 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
         return Response(status=HTTP_200_OK)
 
     def approve(self, request, pk):
+        EditProposalModelClass = self.get_serializer().Meta.model
+
         edit_proposal: (EquipmentItemEditProposalMixin | EquipmentItem) = get_object_or_404(
-            self.get_serializer().Meta.model, pk=pk
+            EditProposalModelClass, pk=pk
         )
 
         if edit_proposal.edit_proposal_review_lock and edit_proposal.edit_proposal_review_lock != request.user:
@@ -69,13 +71,20 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
         if not check_permissions:
             return response
 
+        target: EquipmentItem = edit_proposal.edit_proposal_target
+        TargetModelClass = type(target)
+        if TargetModelClass.objects.filter(brand=target.brand, name=edit_proposal.name).exists():
+            return Response(
+                _("This edit proposal cannot be approved because an item with this brand and name already exists. Please reject it."),
+                status=HTTP_409_CONFLICT
+            )
+
         edit_proposal.edit_proposal_reviewed_by = request.user
         edit_proposal.edit_proposal_review_ip = request.META.get('REMOTE_ADDR')
         edit_proposal.edit_proposal_review_timestamp = timezone.now()
         edit_proposal.edit_proposal_review_comment = request.data.get('comment')
         edit_proposal.edit_proposal_review_status = 'APPROVED'
 
-        target = edit_proposal.edit_proposal_target
         target.name = edit_proposal.name
         target.variant_of = edit_proposal.variant_of
         target.website = edit_proposal.website
