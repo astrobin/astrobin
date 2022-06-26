@@ -12,7 +12,7 @@ from astrobin_apps_equipment.models import (
 
 @shared_task(time_limit=30)
 def expire_equipment_locks():
-    expiration_minutes = 10
+    expiration_minutes = 30
 
     for Model in (Telescope, Camera, Mount, Filter, Accessory, Software):
         Model.objects.filter(

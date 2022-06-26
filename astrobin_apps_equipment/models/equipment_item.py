@@ -169,6 +169,11 @@ class EquipmentItem(SafeDeleteModel):
         blank=False,
     )
 
+    community_notes = models.TextField(
+        null=True,
+        blank=True,
+    )
+
     website = models.URLField(
         blank=True,
         null=True,

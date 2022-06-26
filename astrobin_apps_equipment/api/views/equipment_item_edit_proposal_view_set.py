@@ -86,6 +86,7 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
         edit_proposal.edit_proposal_review_status = 'APPROVED'
 
         target.name = edit_proposal.name
+        target.community_notes = edit_proposal.community_notes
         target.variant_of = edit_proposal.variant_of
         target.website = edit_proposal.website
         target.image = edit_proposal.image
