@@ -73,7 +73,7 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
 
         target: EquipmentItem = edit_proposal.edit_proposal_target
         TargetModelClass = type(target)
-        if TargetModelClass.objects.filter(brand=target.brand, name=edit_proposal.name).exists():
+        if edit_proposal.name != target.name and TargetModelClass.objects.filter(brand=target.brand, name=edit_proposal.name).exclude(pk=target.pk).exists():
             return Response(
                 _("This edit proposal cannot be approved because an item with this brand and name already exists. Please reject it."),
                 status=HTTP_409_CONFLICT
