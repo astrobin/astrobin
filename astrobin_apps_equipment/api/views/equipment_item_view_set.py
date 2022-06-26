@@ -336,6 +336,31 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['POST'])
+    def unapprove(self, request, pk):
+        if not request.user.groups.filter(name='equipment_moderators').exists():
+            raise PermissionDenied(request.user)
+
+        item: EquipmentItem = get_object_or_404(self.get_serializer().Meta.model.objects, pk=pk)
+
+        if item.reviewer_lock and item.reviewer_lock != request.user:
+            return self._conflict_response()
+
+        if item.reviewed_by is None:
+            return Response("This item was not already reviewed", HTTP_400_BAD_REQUEST)
+
+        if item.created_by == request.user:
+            return Response("You cannot review an item that you created", HTTP_400_BAD_REQUEST)
+
+        item.reviewed_by = None
+        item.reviewed_timestamp = None
+        item.reviewer_decision = None
+        item.reviewer_comment = None
+        item.save()
+
+        serializer = self.serializer_class(item)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['POST'])
     def reject(self, request, pk):
         from astrobin_apps_equipment.models import Sensor
         from astrobin_apps_equipment.models import Camera
