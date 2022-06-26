@@ -28,7 +28,7 @@ class EquipmentItemService:
     @staticmethod
     def validate(user: User, attrs):
         if not user.groups.filter(name__in=['equipment_moderators', 'own_equipment_migrators']).exists():
-            raise PermissionDenied("You don't have permission to create  or edit equipment items")
+            raise PermissionDenied("You don't have permission to create or edit equipment items")
 
         brand = attrs['brand'] if 'brand' in attrs else None
         variant_of = attrs['variant_of'] if 'variant_of' in attrs else None

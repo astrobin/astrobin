@@ -186,3 +186,24 @@ class TestApiCameraEditProposalViewSet(TestCase):
         )
 
         self.assertContains(response, "An item cannot be a variant of itself", status_code=400)
+
+    def test_dslr_mirrorless_does_not_allow_variants(self):
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+
+        camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS)
+        camera2 = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS)
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list'), {
+                'editProposalTarget': camera.pk,
+                'brand': camera.brand.pk,
+                'type': camera.type,
+                'name': camera.name,
+                'klass': camera.klass,
+                'variant_of': camera2.pk
+            },
+            format='json'
+        )
+
+        self.assertContains(response, "DSLR/Mirrorless cameras do not support variants", status_code=400)

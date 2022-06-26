@@ -4,6 +4,7 @@ from astrobin_apps_equipment.api.serializers.equipment_item_edit_proposal_serial
     EquipmentItemEditProposalSerializer
 from astrobin_apps_equipment.models import Camera, CameraEditProposal
 from astrobin_apps_equipment.models.camera_base_model import CameraType
+from astrobin_apps_equipment.services.camera_service import CameraService
 
 
 class CameraEditProposalSerializer(EquipmentItemEditProposalSerializer):
@@ -18,6 +19,8 @@ class CameraEditProposalSerializer(EquipmentItemEditProposalSerializer):
         }
 
     def validate(self, attrs):
+        CameraService.validate(attrs)
+
         target = attrs['edit_proposal_target']
         if target.modified or (target.type == CameraType.DSLR_MIRRORLESS and target.cooled):
             raise ValidationError(
