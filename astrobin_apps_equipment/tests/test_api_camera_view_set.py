@@ -220,3 +220,21 @@ class TestApiCameraViewSet(TestCase):
         )
 
         self.assertContains(response, "Variants do not support variants", status_code=400)
+
+    def test_dslr_mirrorless_does_not_allow_variants(self):
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+
+        camera = EquipmentGenerators.camera()
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-list'), {
+                'brand': EquipmentGenerators.brand().id,
+                'type': CameraType.DSLR_MIRRORLESS,
+                'name': 'Test',
+                'variant_of': camera.pk
+            },
+            format='json'
+        )
+
+        self.assertContains(response, "DSLR/Mirrorless cameras do not support variants", status_code=400)

@@ -1,4 +1,5 @@
 from django.db.models import Q
+from rest_framework.exceptions import ValidationError
 
 from astrobin_apps_equipment.models.camera_base_model import CameraType
 
@@ -21,3 +22,11 @@ class CameraService:
             ) |
             ~Q(type=CameraType.DSLR_MIRRORLESS)
         )
+
+    @staticmethod
+    def validate(attrs):
+        variant_of = attrs['variant_of'] if 'variant_of' in attrs else None
+        camera_type = attrs['type']
+
+        if camera_type == CameraType.DSLR_MIRRORLESS and variant_of:
+            raise ValidationError("DSLR/Mirrorless cameras do not support variants")
