@@ -23,7 +23,15 @@ class EquipmentContributorsViewSet(views.APIView):
                     contributions= \
                         Count(f'astrobin_apps_equipment_{klass.lower()}editproposals_created', distinct=True) +
                         Count(f'astrobin_apps_equipment_{klass.lower()}editproposals_reviewed', distinct=True)
-                ).filter(contributions__gt=0).order_by('-contributions').values_list('id', 'contributions') \
+                ).filter(
+                    contributions__gt=0
+                ).exclude(
+                    is_superuser=True
+                ).order_by(
+                    '-contributions'
+                ).values_list(
+                    'id', 'contributions'
+                ) \
                 for klass in [
                     EquipmentItemKlass.TELESCOPE,
                     EquipmentItemKlass.CAMERA,
