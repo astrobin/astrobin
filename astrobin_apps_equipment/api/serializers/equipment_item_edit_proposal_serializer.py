@@ -25,6 +25,7 @@ class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
             'edit_proposal_review_status',
             'brand',
             'name',
+            'community_notes',
             'website',
             'image',
             'variant_of',
@@ -61,6 +62,7 @@ class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
 
         original_properties = {
             'name': target.name.replace('=', '\='),
+            'community_notes': target.community_notes.replace('=', '\=') if target.community_notes else None,
             'variant_of': target.variant_of,
             'website': target.website,
             'image': target.image,
