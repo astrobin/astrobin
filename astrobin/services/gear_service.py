@@ -3,7 +3,7 @@ import math
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext
@@ -277,7 +277,7 @@ class GearService:
     def has_unmigrated_legacy_gear_items(user: User) -> bool:
         for klass in ('telescopes', 'cameras', 'mounts', 'filters', 'focal_reducers', 'accessories', 'software'):
             if getattr(user.userprofile, klass) \
-                    .annotate(count=Count('migration_strategies')) \
+                    .annotate(count=Count('migration_strategies', filter=Q(migration_strategies__user=user))) \
                     .filter(count=0) \
                     .exists():
                 return True
