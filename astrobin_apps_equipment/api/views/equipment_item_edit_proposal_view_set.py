@@ -73,13 +73,20 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
 
         target: EquipmentItem = edit_proposal.edit_proposal_target
         TargetModelClass = type(target)
-        if edit_proposal.name != target.name and TargetModelClass.objects.filter(brand=target.brand, name=edit_proposal.name).exclude(pk=target.pk).exists():
+        if edit_proposal.name != target.name and TargetModelClass.objects.filter(
+                brand=target.brand, name=edit_proposal.name
+        ).exclude(pk=target.pk).exists():
             return Response(
-                _("This edit proposal cannot be approved because an item with this brand and name already exists. Please reject it."),
+                _(
+                    "This edit proposal cannot be approved because an item with this brand and name already exists. Please reject it."
+                ),
                 status=HTTP_409_CONFLICT
             )
 
-        if target.name != edit_proposal.name and not request.user.groups.filter(name="equipment_moderators").exists():
+        if target.name != edit_proposal.name and \
+                not request.user.groups.filter(name="equipment_moderators").exists() and \
+                not edit_proposal.created_by.groups.filter(name="equipment_moderators") and \
+                not target.reviewer_decision is None:
             return Response(
                 _(
                     "This edit proposal needs to be approved by a moderator because it changes the name of the item."

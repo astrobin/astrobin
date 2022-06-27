@@ -67,6 +67,7 @@ class EquipmentGenerators:
             max_cooling=kwargs.get('max_cooling', 40),
             back_focus=kwargs.get('back_focus', 18),
             modified=kwargs.get('modified', False),
+            reviewer_decision=kwargs.get('reviewer_decision', None),
         )
 
     @staticmethod

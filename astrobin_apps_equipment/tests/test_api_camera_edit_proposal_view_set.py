@@ -4,6 +4,7 @@ from rest_framework.test import APIClient
 
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.models.camera_base_model import CameraType
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 
@@ -212,7 +213,10 @@ class TestApiCameraEditProposalViewSet(TestCase):
         client = APIClient()
         client.force_authenticate(user=Generators.user(groups=['own_equipment_migrators']))
 
-        camera = EquipmentGenerators.camera(type=CameraType.DEDICATED_DEEP_SKY)
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED
+        )
 
         client.post(
             reverse('astrobin_apps_equipment:camera-edit-proposal-list'), {
@@ -234,6 +238,59 @@ class TestApiCameraEditProposalViewSet(TestCase):
         self.assertContains(response, "This edit proposal needs to be approved by a moderator", status_code=403)
 
         client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list') + '1/approve/', {}, format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+
+    def test_name_change_does_not_moderator_when_created_by_moderator(self):
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED
+        )
+
+        client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list'), {
+                'editProposalTarget': camera.pk,
+                'brand': camera.brand.pk,
+                'type': camera.type,
+                'name': camera.name + " 2",
+                'klass': camera.klass,
+            },
+            format='json'
+        )
+
+        client.force_authenticate(user=Generators.user(groups=['own_equipment_migrators']))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list') + '1/approve/', {}, format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+
+    def test_name_change_does_not_moderator_when_item_is_unapproved(self):
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=['own_equipment_migrators']))
+
+        camera = EquipmentGenerators.camera(type=CameraType.DEDICATED_DEEP_SKY, reviewer_decision=None)
+
+        client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list'), {
+                'editProposalTarget': camera.pk,
+                'brand': camera.brand.pk,
+                'type': camera.type,
+                'name': camera.name + " 2",
+                'klass': camera.klass,
+            },
+            format='json'
+        )
+
+        client.force_authenticate(user=Generators.user(groups=['own_equipment_migrators']))
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-edit-proposal-list') + '1/approve/', {}, format='json'
