@@ -346,6 +346,9 @@ astrobin_common = {
                     change: function () {
                         this.updateElement();
                     },
+                    "simpleuploads.finishedUpload": function () {
+                        this.updateElement()
+                    },
                     beforeCommandExec: function (event) {
                         // Show the paste dialog for the paste buttons and right-click paste
                         if (event.data.name === "paste") {
