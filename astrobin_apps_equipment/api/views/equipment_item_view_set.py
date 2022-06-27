@@ -95,6 +95,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                         Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
                         Q(created_by=self.request.user)
                     )
+                ).distinct(
                 ).order_by(
                     'distance',
                     Lower('brand__name'),
