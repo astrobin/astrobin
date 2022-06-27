@@ -9,7 +9,7 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_409_CONFLICT
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_403_FORBIDDEN, HTTP_409_CONFLICT
 
 from astrobin_apps_equipment.api.views.equipment_item_view_set import EquipmentItemViewSet
 from astrobin_apps_equipment.models import EquipmentItem
@@ -77,6 +77,14 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
             return Response(
                 _("This edit proposal cannot be approved because an item with this brand and name already exists. Please reject it."),
                 status=HTTP_409_CONFLICT
+            )
+
+        if target.name != edit_proposal.name and not request.user.groups.filter(name="equipment_moderators").exists():
+            return Response(
+                _(
+                    "This edit proposal needs to be approved by a moderator because it changes the name of the item."
+                ),
+                status=HTTP_403_FORBIDDEN
             )
 
         edit_proposal.edit_proposal_reviewed_by = request.user

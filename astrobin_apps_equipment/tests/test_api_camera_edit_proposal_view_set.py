@@ -207,3 +207,36 @@ class TestApiCameraEditProposalViewSet(TestCase):
         )
 
         self.assertContains(response, "DSLR/Mirrorless cameras do not support variants", status_code=400)
+
+    def test_name_change_requires_moderator(self):
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=['own_equipment_migrators']))
+
+        camera = EquipmentGenerators.camera(type=CameraType.DEDICATED_DEEP_SKY)
+
+        client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list'), {
+                'editProposalTarget': camera.pk,
+                'brand': camera.brand.pk,
+                'type': camera.type,
+                'name': camera.name + " 2",
+                'klass': camera.klass,
+            },
+            format='json'
+        )
+
+        client.force_authenticate(user=Generators.user(groups=['own_equipment_migrators']))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list') + '1/approve/', {}, format='json'
+        )
+
+        self.assertContains(response, "This edit proposal needs to be approved by a moderator", status_code=403)
+
+        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list') + '1/approve/', {}, format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
