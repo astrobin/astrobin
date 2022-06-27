@@ -18,6 +18,7 @@ from astrobin_apps_equipment.models import (
 )
 from astrobin_apps_equipment.models.accessory_edit_proposal import AccessoryEditProposal
 from astrobin_apps_equipment.models.camera_base_model import CameraType
+from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.models.filter_edit_proposal import FilterEditProposal
 from astrobin_apps_equipment.models.mount_edit_proposal import MountEditProposal
 from astrobin_apps_equipment.models.sensor_edit_proposal import SensorEditProposal
@@ -264,6 +265,13 @@ def send_equipment_item_requires_moderation_notification(sender, instance, creat
         return
 
     if instance.brand is None:
+        return
+
+    if (
+            instance.klass == EquipmentItemKlass.CAMERA and
+            instance.type == CameraType.DSLR_MIRRORLESS and
+            (instance.modified or instance.cooled)
+    ):
         return
 
     url: str = build_notification_url(instance.get_absolute_url())
