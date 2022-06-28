@@ -56,7 +56,7 @@ class EquipmentItem(SafeDeleteModel):
         related_name='%(app_label)s_%(class)s_reviewer_locks',
     )
 
-    reviewer_timestamp = models.DateTimeField(
+    reviewer_lock_timestamp = models.DateTimeField(
         null=True,
         blank=True,
     )
