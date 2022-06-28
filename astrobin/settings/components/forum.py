@@ -11,7 +11,7 @@ PYBB_SMILES = {
     '&gt;_&lt;': 'angry.png',
     ':.(': 'sad.png',
     'o_O': 'smart.png',
-    '8)': 'cool.png',
+    '8-)': 'cool.png',
     ':D': 'laughing.png',
     ':(': 'sad.png',
     ':O': 'surprised.png',
