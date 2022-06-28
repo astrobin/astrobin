@@ -224,7 +224,16 @@ class EquipmentItem(SafeDeleteModel):
         return slugify(f'{self.brand.name if self.brand else "diy"} {self.name}').replace('_', '-')
 
     def __str__(self):
-        return '%s %s' % (self.brand.name if self.brand else _("DIY"), self.name)
+        if not self.brand:
+            return f'{_("DIY")} {self.name}'
+
+        if self.brand.name == 'Unspecified/unknown company':
+            return self.name
+
+        if self.brand.name == self.name:
+            return self.name
+
+        return f'{self.brand.name} {self.name}'
 
     def get_absolute_url(self):
         return AppRedirectionService.redirect(f'/equipment/explorer/{self.klass.lower()}/{self.pk}')
