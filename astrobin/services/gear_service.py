@@ -275,12 +275,22 @@ class GearService:
 
     @staticmethod
     def has_unmigrated_legacy_gear_items(user: User) -> bool:
-        for klass in ('telescopes', 'cameras', 'mounts', 'filters', 'focal_reducers', 'accessories', 'software'):
-            if getattr(user.userprofile, klass) \
-                    .annotate(count=Count('migration_strategies', filter=Q(migration_strategies__user=user))) \
-                    .filter(count=0) \
-                    .exists():
-                return True
+        for image in Image.objects_including_wip.filter(user=user):
+            for usage_class in (
+                    'imaging_telescopes',
+                    'imaging_cameras',
+                    'mounts',
+                    'filters',
+                    'focal_reducers',
+                    'accessories',
+                    'software',
+                    'guiding_telescopes',
+                    'guiding_cameras'):
+                if getattr(image, usage_class) \
+                        .annotate(count=Count('migration_strategies', filter=Q(migration_strategies__user=user))) \
+                        .filter(count=0) \
+                        .exists():
+                    return True
 
         return False
 
