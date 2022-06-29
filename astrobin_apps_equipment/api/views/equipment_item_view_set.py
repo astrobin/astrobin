@@ -27,6 +27,7 @@ from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_own_migra
     IsEquipmentModeratorOrOwnMigratorOrReadOnly
 from astrobin_apps_equipment.api.throttle import EquipmentCreateThrottle
 from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
+from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
 from astrobin_apps_equipment.services import EquipmentService
@@ -375,8 +376,8 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         if not request.user.groups.filter(name='equipment_moderators').exists():
             raise PermissionDenied(request.user)
 
-        model = self.get_serializer().Meta.model
-        item: EquipmentItem = get_object_or_404(model.objects, pk=pk)
+        ModelClass = self.get_serializer().Meta.model
+        item: EquipmentItem = get_object_or_404(ModelClass.objects, pk=pk)
 
         if item.reviewer_lock and item.reviewer_lock != request.user:
             return self._conflict_response()
@@ -397,7 +398,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         item.reviewer_rejection_duplicate_of = request.data.get('duplicate_of')
 
         duplicate_of = None
-        duplicate_model = {
+        DuplicateModelClass = {
             EquipmentItemKlass.TELESCOPE: Telescope,
             EquipmentItemKlass.CAMERA: Camera,
             EquipmentItemKlass.MOUNT: Mount,
@@ -408,8 +409,8 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         if item.reviewer_rejection_duplicate_of:
             try:
-                duplicate_of = duplicate_model.objects.get(pk=item.reviewer_rejection_duplicate_of)
-            except model.DoesNotExist:
+                duplicate_of = DuplicateModelClass.objects.get(pk=item.reviewer_rejection_duplicate_of)
+            except ModelClass.DoesNotExist:
                 duplicate_of = None
                 item.reviewer_rejection_duplicate_of = None
                 item.reviewer_rejection_duplicate_of_klass = None
@@ -443,88 +444,102 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         migration_strategies: QuerySet = GearMigrationStrategy.objects.filter(
             user=item.created_by,
             migration_flag='MIGRATE',
-            migration_content_type=ContentType.objects.get_for_model(model),
+            migration_content_type=ContentType.objects.get_for_model(ModelClass),
             migration_object_id=item.id,
         )
 
         if duplicate_of:
             migration_strategies.update(
                 migration_object_id=duplicate_of.pk,
-                migration_content_type=ContentType.objects.get_for_model(duplicate_model)
+                migration_content_type=ContentType.objects.get_for_model(DuplicateModelClass)
             )
         else:
             for migration_strategy in migration_strategies:
                 EquipmentService.undo_migration_strategy(migration_strategy)
 
-        affected_images = []
-        for prop in (
-            'imaging_telescopes_2',
-            'imaging_cameras_2',
-            'mounts_2',
-            'guiding_telescopes_2',
-            'guiding_cameras_2',
-            'filters_2',
-            'accessories_2',
-            'software_2',
-        ):
-            try:
-                images = Image.objects_including_wip.filter(**{prop: item})
-            except ValueError:
-                images = None
+        # This will catch DSLR/Mirrorless variants
+        affected_items = ModelClass.objects.filter(brand=item.brand, name=item.name)
+        for affected_item in affected_items.iterator():
+            replace_with: DuplicateModelClass = duplicate_of
 
-            if images is not None and images.count() > 0:
-                for image in images.iterator():
-                    affected_images.append(dict(image=image, prop=prop))
+            if affected_item.klass == EquipmentItemKlass.CAMERA and affected_item.type == CameraType.DSLR_MIRRORLESS:
+                # Fetch the corresponding modified/cooled target of duplication
+                replace_with = Camera.objects.get(
+                    brand=duplicate_of.brand,
+                    name=duplicate_of.name,
+                    modified=affected_item.modified,
+                    cooled=affected_item.cooled,
+                )
 
-        for affected in affected_images:
-            image: Image = affected.get("image")
-            prop: str = affected.get("prop")
+            affected_images = []
+            for prop in (
+                    'imaging_telescopes_2',
+                    'imaging_cameras_2',
+                    'mounts_2',
+                    'guiding_telescopes_2',
+                    'guiding_cameras_2',
+                    'filters_2',
+                    'accessories_2',
+                    'software_2',
+            ):
+                try:
+                    images = Image.objects_including_wip.filter(**{prop: affected_item})
+                except ValueError:
+                    images = None
 
-            if duplicate_of:
-                if model == duplicate_model:
-                    getattr(image, prop).add(duplicate_of)
-                else:
-                    destination_map = {
-                        EquipmentItemKlass.TELESCOPE: 'imaging_telescopes_2' \
-                            if item.reviewer_rejection_duplicate_of_usage_type == EquipmentItemUsageType.IMAGING \
-                            else 'guiding_telescopes_2',
-                        EquipmentItemKlass.CAMERA: 'imaging_cameras_2' \
-                            if item.reviewer_rejection_duplicate_of_usage_type == EquipmentItemUsageType.IMAGING \
-                            else 'guiding_cameras_2',
-                        EquipmentItemKlass.MOUNT: 'mounts_2',
-                        EquipmentItemKlass.FILTER: 'filters_2',
-                        EquipmentItemKlass.ACCESSORY: 'accessories_2',
-                        EquipmentItemKlass.SOFTWARE: 'software_2',
+                if images is not None and images.count() > 0:
+                    for image in images.iterator():
+                        affected_images.append(dict(image=image, prop=prop))
+
+            for affected in affected_images:
+                image: Image = affected.get("image")
+                prop: str = affected.get("prop")
+
+                if duplicate_of:
+                    if ModelClass == DuplicateModelClass:
+                        getattr(image, prop).add(replace_with)
+                    else:
+                        destination_map = {
+                            EquipmentItemKlass.TELESCOPE: 'imaging_telescopes_2' \
+                                if item.reviewer_rejection_duplicate_of_usage_type == EquipmentItemUsageType.IMAGING \
+                                else 'guiding_telescopes_2',
+                            EquipmentItemKlass.CAMERA: 'imaging_cameras_2' \
+                                if item.reviewer_rejection_duplicate_of_usage_type == EquipmentItemUsageType.IMAGING \
+                                else 'guiding_cameras_2',
+                            EquipmentItemKlass.MOUNT: 'mounts_2',
+                            EquipmentItemKlass.FILTER: 'filters_2',
+                            EquipmentItemKlass.ACCESSORY: 'accessories_2',
+                            EquipmentItemKlass.SOFTWARE: 'software_2',
+                        }
+                        getattr(image, destination_map.get(duplicate_of.klass)).add(replace_with)
+
+                push_notification(
+                    [affected_item.created_by],
+                    request.user,
+                    'equipment-item-rejected-affected-image',
+                    {
+                        'user': request.user.userprofile.get_display_name(),
+                        'user_url': build_notification_url(
+                            settings.BASE_URL + reverse('user_page', args=(request.user.username,))
+                        ),
+                        'item': str(item),
+                        'reject_reason': item.reviewer_rejection_reason,
+                        'comment': item.reviewer_comment,
+                        'duplicate_of': replace_with,
+                        'duplicate_of_url': build_notification_url(
+                            AppRedirectionService.redirect(
+                                f'/equipment'
+                                f'/explorer'
+                                f'/{replace_with.item_type}/{replace_with.pk}'
+                                f'/{replace_with.slug}'
+                            )
+                        ) if duplicate_of else None,
+                        'image_url': build_notification_url(
+                            settings.BASE_URL + reverse('image_detail', args=(image.get_id(),))
+                        ),
+                        'image_title': image.title,
                     }
-                    getattr(image, destination_map.get(duplicate_of.klass)).add(duplicate_of)
-
-            push_notification(
-                [item.created_by],
-                request.user,
-                'equipment-item-rejected-affected-image',
-                {
-                    'user': request.user.userprofile.get_display_name(),
-                    'user_url': build_notification_url(
-                        settings.BASE_URL + reverse('user_page', args=(request.user.username,))
-                    ),
-                    'item': f'{item.brand.name if item.brand else _("(DIY)")} {item.name}',
-                    'reject_reason': item.reviewer_rejection_reason,
-                    'comment': item.reviewer_comment,
-                    'duplicate_of': duplicate_of,
-                    'duplicate_of_url': build_notification_url(
-                        AppRedirectionService.redirect(
-                            f'/equipment'
-                            f'/explorer'
-                            f'/{duplicate_of.item_type}/{duplicate_of.pk}'
-                            f'/{duplicate_of.slug}'
-                        )
-                    ) if duplicate_of else None,
-                    'image_url': build_notification_url(
-                        settings.BASE_URL + reverse('image_detail', args=(image.get_id(),))
-                    ),
-                    'image_title': image.title,
-                }
-            )
+                )
 
         if item.klass == EquipmentItemKlass.SENSOR:
             Camera.all_objects.filter(sensor=item).update(sensor=None)

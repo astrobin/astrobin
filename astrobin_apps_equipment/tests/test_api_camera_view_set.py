@@ -5,6 +5,7 @@ from rest_framework.test import APIClient
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.models import Camera
 from astrobin_apps_equipment.models.camera_base_model import CameraType
+from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 
 
@@ -238,3 +239,128 @@ class TestApiCameraViewSet(TestCase):
         )
 
         self.assertContains(response, "DSLR/Mirrorless cameras do not support variants", status_code=400)
+
+    def test_reject_as_duplicate(self):
+        client = APIClient()
+
+        user = Generators.user(groups=['own_equipment_migrators'])
+        camera = EquipmentGenerators.camera(type=CameraType.DEDICATED_DEEP_SKY)
+        duplicate = EquipmentGenerators.camera(type=CameraType.DEDICATED_DEEP_SKY)
+        image = Generators.image(user=user)
+        image.imaging_cameras_2.add(duplicate)
+
+        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(duplicate.id,)) + 'reject/', {
+                'reason': 'DUPLICATE',
+                'duplicate_of_klass': EquipmentItemKlass.CAMERA,
+                'duplicate_of_usage_type': EquipmentItemUsageType.IMAGING,
+                'duplicate_of': camera.id,
+            }, format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertFalse(Camera.objects.filter(id=duplicate.id).exists())
+        self.assertTrue(camera in image.imaging_cameras_2.all())
+
+    def test_reject_as_duplicate_dslr(self):
+        client = APIClient()
+
+        user = Generators.user(groups=['own_equipment_migrators'])
+        camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, modified=False, cooled=False)
+        duplicate = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, modified=False, cooled=False)
+        image = Generators.image(user=user)
+        image.imaging_cameras_2.add(duplicate)
+
+        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(duplicate.id,)) + 'reject/', {
+                'reason': 'DUPLICATE',
+                'duplicate_of_klass': EquipmentItemKlass.CAMERA,
+                'duplicate_of_usage_type': EquipmentItemUsageType.IMAGING,
+                'duplicate_of': camera.id,
+            }, format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertFalse(Camera.objects.filter(brand=duplicate.brand, name=duplicate.name))
+        self.assertTrue(camera in image.imaging_cameras_2.all())
+
+    def test_reject_as_duplicate_modified_dslr(self):
+        client = APIClient()
+
+        user = Generators.user(groups=['own_equipment_migrators'])
+        camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, modified=False, cooled=False)
+        modified = Camera.objects.get(brand=camera.brand, name=camera.name, modified=True, cooled=False)
+        duplicate = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, cooled=False)
+        modified_duplicate = Camera.objects.get(brand=duplicate.brand, name=duplicate.name, modified=True, cooled=False)
+        image = Generators.image(user=user)
+        image.imaging_cameras_2.add(modified_duplicate)
+
+        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(duplicate.id,)) + 'reject/', {
+                'reason': 'DUPLICATE',
+                'duplicate_of_klass': EquipmentItemKlass.CAMERA,
+                'duplicate_of_usage_type': EquipmentItemUsageType.IMAGING,
+                'duplicate_of': modified.id,
+            }, format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertFalse(Camera.objects.filter(brand=duplicate.brand, name=duplicate.name))
+        self.assertTrue(modified in image.imaging_cameras_2.all())
+
+    def test_reject_as_duplicate_modified_dslr_matches_attributes(self):
+        client = APIClient()
+
+        user = Generators.user(groups=['own_equipment_migrators'])
+        camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, modified=False, cooled=False)
+        modified = Camera.objects.get(brand=camera.brand, name=camera.name, modified=True, cooled=False)
+        duplicate = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, cooled=False)
+        modified_duplicate = Camera.objects.get(brand=duplicate.brand, name=duplicate.name, modified=True, cooled=False)
+        image = Generators.image(user=user)
+        image.imaging_cameras_2.add(modified_duplicate)
+
+        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(duplicate.id,)) + 'reject/', {
+                'reason': 'DUPLICATE',
+                'duplicate_of_klass': EquipmentItemKlass.CAMERA,
+                'duplicate_of_usage_type': EquipmentItemUsageType.IMAGING,
+                'duplicate_of': camera.id,
+            }, format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertFalse(Camera.objects.filter(brand=duplicate.brand, name=duplicate.name))
+        self.assertTrue(modified in image.imaging_cameras_2.all())
+
+    def test_reject_as_duplicate_of_modified_dslr(self):
+        client = APIClient()
+
+        user = Generators.user(groups=['own_equipment_migrators'])
+        camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, modified=False, cooled=False)
+        modified = Camera.objects.get(brand=camera.brand, name=camera.name, modified=True, cooled=False)
+        duplicate = EquipmentGenerators.camera(type=CameraType.DEDICATED_DEEP_SKY)
+        image = Generators.image(user=user)
+        image.imaging_cameras_2.add(duplicate)
+
+        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(duplicate.id,)) + 'reject/', {
+                'reason': 'DUPLICATE',
+                'duplicate_of_klass': EquipmentItemKlass.CAMERA,
+                'duplicate_of_usage_type': EquipmentItemUsageType.IMAGING,
+                'duplicate_of': modified.id,
+            }, format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertFalse(Camera.objects.filter(brand=duplicate.brand, name=duplicate.name))
+        self.assertTrue(modified in image.imaging_cameras_2.all())
