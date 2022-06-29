@@ -462,7 +462,12 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         for affected_item in affected_items.iterator():
             replace_with: DuplicateModelClass = duplicate_of
 
-            if affected_item.klass == EquipmentItemKlass.CAMERA and affected_item.type == CameraType.DSLR_MIRRORLESS:
+            if (
+                    affected_item.klass == EquipmentItemKlass.CAMERA and
+                    affected_item.type == CameraType.DSLR_MIRRORLESS and
+                    duplicate_of.klass == EquipmentItemKlass.CAMERA and
+                    duplicate_of.type == CameraType.DSLR_MIRRORLESS
+            ):
                 # Fetch the corresponding modified/cooled target of duplication
                 replace_with = Camera.objects.get(
                     brand=duplicate_of.brand,
