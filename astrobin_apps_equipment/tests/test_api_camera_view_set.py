@@ -364,3 +364,28 @@ class TestApiCameraViewSet(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertFalse(Camera.objects.filter(brand=duplicate.brand, name=duplicate.name))
         self.assertTrue(modified in image.imaging_cameras_2.all())
+
+    def test_reject_as_modified_dslr_duplicate_of_non_dslr(self):
+        client = APIClient()
+
+        user = Generators.user(groups=['own_equipment_migrators'])
+        camera = EquipmentGenerators.camera(type=CameraType.DEDICATED_DEEP_SKY)
+        duplicate = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, modified=False, cooled=False)
+        modified_duplicate = Camera.objects.get(brand=duplicate.brand, name=duplicate.name, modified=True, cooled=False)
+        image = Generators.image(user=user)
+        image.imaging_cameras_2.add(modified_duplicate)
+
+        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(duplicate.id,)) + 'reject/', {
+                'reason': 'DUPLICATE',
+                'duplicate_of_klass': EquipmentItemKlass.CAMERA,
+                'duplicate_of_usage_type': EquipmentItemUsageType.IMAGING,
+                'duplicate_of': camera.id,
+            }, format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertFalse(Camera.objects.filter(brand=duplicate.brand, name=duplicate.name))
+        self.assertTrue(camera in image.imaging_cameras_2.all())
