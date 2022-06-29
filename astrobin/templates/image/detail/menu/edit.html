@@ -59,6 +59,15 @@
                         </a>
                     </li>
                 {% endif %}
+
+                {% if image|can_add_technical_details %}
+                    <li>
+                        <a href="{% app_redirection_service '/i/' %}{{ image.get_id }}/edit#6">
+                        <i class="icon-cog"></i>
+                            {% trans "Settings" %}
+                        </a>
+                    </li>
+                {% endif %}
             {% else %}
                 <li>
                     <a href="{% url 'image_edit_thumbnails' image.get_id %}">
