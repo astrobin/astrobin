@@ -1,3 +1,4 @@
+import random
 from typing import List
 
 from annoying.functions import get_object_or_None
@@ -52,14 +53,10 @@ class MigratableItemMixin:
             )
 
         if global_results:
-            return self.get_queryset().annotate(count=Count('migration_strategies')).filter(
-                Q(
-                    Q(count=0) |
-                    Q(
-                        Q(count__gt=0) &
-                        Q(migration_strategies__user__isnull=False)
-                    )
-                ) &
+            return self.get_queryset().annotate(
+                count=Count('migration_strategies', filter=Q(migration_strategies__user__isnull=True))
+            ).filter(
+                Q(count=0) &
                 Q(
                     Q(migration_flag_moderator_lock__isnull=True) |
                     Q(migration_flag_moderator_lock=user)
@@ -107,8 +104,16 @@ class MigratableItemMixin:
     @action(detail=False, methods=['get'], url_path='random-non-migrated')
     def random_non_migrated(self, request):
         self.__check_permissions(request.user, allow_own_equipment_migrators=True)
-        queryset = self.__random_non_migrated_queryset(request.user, 'global' in request.GET).order_by('?')[:1]
-        serializer = self.get_serializer(queryset, many=True, context=self.get_serializer_context())
+        queryset = self.__random_non_migrated_queryset(request.user, 'global' in request.GET)
+
+        count = queryset.count()
+
+        if count > 0:
+            item = [queryset[random.randint(0, count - 1)]]
+        else:
+            item = []
+
+        serializer = self.get_serializer(item, many=True, context=self.get_serializer_context())
         return Response(serializer.data)
 
     @action(detail=False, methods=['get'], url_path='non-migrated-count')
@@ -212,14 +217,26 @@ class MigratableItemMixin:
             else:
                 return HttpResponseBadRequest('Bad item type')
 
-        GearMigrationStrategy.objects.create(
-            gear=obj,
-            user=None if global_migration else request.user,
-            migration_flag=migration_flag,
-            migration_flag_moderator=request.user,
-            migration_flag_timestamp=timezone.now(),
-            migration_content_object=item,
-        )
+        if global_migration:
+            GearMigrationStrategy.objects.create(
+                gear=obj,
+                user=None,
+                migration_flag=migration_flag,
+                migration_flag_moderator=request.user,
+                migration_flag_timestamp=timezone.now(),
+                migration_content_object=item,
+                migration_flag_reviewer=request.user,
+                migration_flag_reviewer_decision='APPROVED',
+            )
+        else:
+            GearMigrationStrategy.objects.create(
+                gear=obj,
+                user=request.user,
+                migration_flag=migration_flag,
+                migration_flag_moderator=request.user,
+                migration_flag_timestamp=timezone.now(),
+                migration_content_object=item,
+            )
 
         obj.migration_flag_moderator_lock = None
         obj.migration_flag_moderator_lock_timestamp = None

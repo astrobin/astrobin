@@ -55,7 +55,12 @@ from nested_comments.models import NestedComment
 from nested_comments.services.comment_notifications_service import CommentNotificationsService
 from toggleproperties.models import ToggleProperty
 from .enums.moderator_decision import ModeratorDecision
-from .models import CameraRenameProposal, GearMigrationStrategy, Image, ImageRevision, UserProfile
+from .models import (
+    Accessory, Camera, CameraRenameProposal, Filter, FocalReducer, Gear, GearMigrationStrategy, Image, ImageRevision,
+    Mount,
+    Software, Telescope,
+    UserProfile,
+)
 from .search_indexes import ImageIndex, UserIndex
 from .services.gear_service import GearService
 from .stories import add_story
@@ -1146,8 +1151,45 @@ post_save.connect(camera_rename_proposal_post_save, sender=CameraRenameProposal)
 
 
 def gear_migration_strategy_post_save(sender, instance: GearMigrationStrategy, created: bool, **kwargs):
-    if created and instance.user:
+    if not created:
+        return
+
+    if instance.user:
         GearService.approve_migration_strategy(instance, instance.user)
+    else:
+        gear: Gear = instance.gear
+        for usage_data in (
+                ('imaging_telescopes', Telescope),
+                ('imaging_cameras', Camera),
+                ('mounts', Mount),
+                ('filters', Filter),
+                ('focal_reducers', FocalReducer),
+                ('accessories', Accessory),
+                ('software', Software),
+                ('guiding_telescopes', Telescope),
+                ('guiding_cameras', Camera),
+        ):
+            usage_class = usage_data[0]
+            GearKlass = usage_data[1]
+            gear_item = get_object_or_None(GearKlass, pk=gear.pk)
+            if not gear_item:
+                continue
+            user_ids = set(
+                Image.objects.filter(
+                    user__groups__name="own_equipment_migrators",
+                    **{usage_class: gear_item}
+                ).values_list('user', flat=True)
+            )
+            for user_id in user_ids:
+                user = User.objects.get(id=user_id)
+                GearMigrationStrategy.objects.create(
+                    gear=gear,
+                    user=user,
+                    migration_flag=instance.migration_flag,
+                    migration_flag_moderator=instance.migration_flag_moderator,
+                    migration_flag_timestamp=timezone.now(),
+                    migration_content_object=instance.migration_content_object,
+                )
 
 
 post_save.connect(gear_migration_strategy_post_save, sender=GearMigrationStrategy)

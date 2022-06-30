@@ -37,11 +37,13 @@ class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
                 ~Q(migration_flag_moderator=self.request.user)
             )
 
-        if not self.request.user.groups.filter(name='equipment_moderators').exists():
-            queryset = queryset.filter(
-                user=self.request.user,
-                migration_flag__in=['WRONG_TYPE', 'MULTIPLE_ITEMS', 'NOT_ENOUGH_INFO', 'MIGRATE']
+        queryset = queryset.filter(
+            Q(migration_flag__in=['WRONG_TYPE', 'MULTIPLE_ITEMS', 'NOT_ENOUGH_INFO', 'MIGRATE']) &
+            Q(
+                Q(migration_flag_moderator=self.request.user) |
+                Q(user=self.request.user)
             )
+        )
 
         return queryset
 
@@ -129,10 +131,11 @@ class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
         if strategy.migration_flag is None:
             return Response(status=409)
 
-        if strategy.user is None:
-            return Response("Global user strategies cannot be undone", status=400)
-
-        if strategy.user != request.user and request.user.is_superuser:
+        if (
+                strategy.user != request.user and
+                strategy.migration_flag_moderator != request.user and
+                not request.user.is_superuser
+        ):
             raise PermissionDenied(request.user)
 
         EquipmentService.undo_migration_strategy(strategy)
