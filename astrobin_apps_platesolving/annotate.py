@@ -112,7 +112,7 @@ class Annotator:
         annotations.sort(key=lambda x: x['radius'])
         for annotation in annotations:
             if annotation['type'] in supported_types:
-                if annotation['type'] == 'bright' and 'vmag' in annotation and annotation['vmag'] > 2:
+                if annotation['type'] == 'bright' and 'vmag' in annotation and annotation['vmag'] > 5:
                     continue
                 x = annotation['pixelx'] = annotation['pixelx'] * self.resampling_factor
                 y = annotation['pixely'] = annotation['pixely'] * self.resampling_factor
