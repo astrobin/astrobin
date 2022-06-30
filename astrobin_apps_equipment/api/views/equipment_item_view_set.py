@@ -463,6 +463,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             replace_with: DuplicateModelClass = duplicate_of
 
             if (
+                    duplicate_of and
                     affected_item.klass == EquipmentItemKlass.CAMERA and
                     affected_item.type == CameraType.DSLR_MIRRORLESS and
                     duplicate_of.klass == EquipmentItemKlass.CAMERA and
