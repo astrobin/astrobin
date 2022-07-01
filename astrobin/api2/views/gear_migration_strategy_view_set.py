@@ -45,7 +45,10 @@ class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
             )
         )
 
-        return queryset
+        if self.request.user.groups.filter(name='equipment_moderators').exists():
+            queryset = queryset.filter(user__isnull=True)
+
+        return queryset.distinct()
 
     @action(detail=True, methods=['put'], url_path='lock-for-migration-review')
     def lock_for_migration_review(self, request: HttpRequest, pk: int) -> Response:
