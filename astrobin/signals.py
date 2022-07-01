@@ -30,6 +30,7 @@ from subscription.signals import paid, signed_up
 
 from astrobin.tasks import process_camera_rename_proposal
 from astrobin_apps_equipment.models import EquipmentBrand
+from astrobin_apps_equipment.tasks import approve_migration_strategy
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
@@ -62,7 +63,6 @@ from .models import (
     UserProfile,
 )
 from .search_indexes import ImageIndex, UserIndex
-from .services.gear_service import GearService
 from .stories import add_story
 
 log = logging.getLogger('apps')
@@ -1155,7 +1155,7 @@ def gear_migration_strategy_post_save(sender, instance: GearMigrationStrategy, c
         return
 
     if instance.user:
-        GearService.approve_migration_strategy(instance, instance.user)
+        approve_migration_strategy.delay(instance.id, instance.migration_flag_moderator.id)
     else:
         gear: Gear = instance.gear
         for usage_data in (
