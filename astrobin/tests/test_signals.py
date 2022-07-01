@@ -75,18 +75,6 @@ class SignalsTest(TestCase):
 
         self.assertTrue(add_story.called)
 
-    @patch('astrobin.signals.GearService.approve_migration_strategy')
-    def test_gear_migration_strategy_post_save_with_user(self, approve_migration_strategy):
-        Generators.gear_migration_strategy(user=Generators.user())
-
-        self.assertTrue(approve_migration_strategy.called)
-
-    @patch('astrobin.signals.GearService.approve_migration_strategy')
-    def test_gear_migration_strategy_post_save_without_user(self, approve_migration_strategy):
-        Generators.gear_migration_strategy()
-
-        self.assertFalse(approve_migration_strategy.called)
-
     def test_imaging_telescope_change_causes_image_to_be_saved(self):
         image = Generators.image()
         telescope = Generators.telescope()
