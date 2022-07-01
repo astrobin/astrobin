@@ -63,7 +63,7 @@ class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
         original_properties = {
             'name': target.name.replace('=', '\='),
             'community_notes': target.community_notes.replace('=', '\=') if target.community_notes else None,
-            'variant_of': target.variant_of,
+            'variant_of': target.variant_of.pk if target.variant_of else None,
             'website': target.website,
             'image': target.image,
         }

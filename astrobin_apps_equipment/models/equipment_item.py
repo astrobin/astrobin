@@ -102,14 +102,14 @@ class EquipmentItem(SafeDeleteModel):
     reviewer_rejection_duplicate_of_klass = models.CharField(
         max_length=16,
         null=True,
-        blank=False,
+        blank=True,
         choices=EQUIPMENT_ITEM_KLASS_CHOICES
     )
 
     reviewer_rejection_duplicate_of_usage_type = models.CharField(
         max_length=16,
         null=True,
-        blank=False,
+        blank=True,
         choices=EQUIPMENT_ITEM_USAGE_TYPE_CHOICES
     )
 
