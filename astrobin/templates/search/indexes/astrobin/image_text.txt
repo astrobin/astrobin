@@ -1,92 +1,93 @@
 {% load astrobin_apps_platesolving_tags %}
+{% load common_tags %}
 
-{{object.user.username}}
-{{object.user.userprofile.real_name}}
-{{object.title}}
+{{ object.user.username | asciify }}
+{{ object.user.userprofile.real_name | asciify }}
+{{ object.title | asciify }}
 
 {% for r in object.revisions.all %}
-    {{r.title}}
-    {{r.description}}
+    {{ r.title | asciify }}
+    {{ r.description | asciify }}
 {% endfor %}
 
 {% if object.description_bbcode %}
-    {{object.description_bbcode}}
+    {{ object.description_bbcode  | asciify }}
 {% else %}
-    {{object.description}}
+    {{ object.description | asciify }}
 {% endif %}
 
-{{object.get_remote_source}}
+{{ object.get_remote_source | asciify }}
 
 {% for i in object.locations.all %}
-    {{i.city}}
+    {{ i.city | asciify }}
 {% endfor %}
 
-{{object.solution | duplicate_objects_in_field_by_catalog_space}}
+{{ object.solution | duplicate_objects_in_field_by_catalog_space }}
 
 {% for i in object.imaging_telescopes.all %}
-    {{i}} {{i.type_label}}
+    {{ i | asciify }} {{ i.type_label }}
 {% endfor %}
 
 {% for i in object.imaging_cameras.all %}
-    {{i}} {{i.type_label}}
+    {{ i | asciify }} {{ i.type_label }}
 {% endfor %}
 
 {% for i in object.guiding_telescopes.all %}
-    {{i}}
+    {{ i | asciify }}
 {% endfor %}
 
 {% for i in object.guiding_cameras.all %}
-    {{i}}
+    {{ i | asciify }}
 {% endfor %}
 
 {% for i in object.mounts.all %}
-    {{i}}
+    {{ i | asciify }}
 {% endfor %}
 
 {% for i in object.filters.all %}
-    {{i}}
+    {{ i | asciify }}
 {% endfor %}
 
 {% for i in object.focal_reducers.all %}
-    {{i}}
+    {{ i | asciify }}
 {% endfor %}
 
 {% for i in object.software.all %}
-    {{i}}
+    {{ i | asciify }}
 {% endfor %}
 
 {% for i in object.accessories.all %}
-    {{i}}
+    {{ i | asciify }}
 {% endfor %}
 
 {% for i in object.imaging_telescopes_2.all %}
-    {{i}} {{i.type_label}}
+    {{ i | asciify }} {{ i.type_label }}
 {% endfor %}
 
 {% for i in object.imaging_cameras_2.all %}
-    {{i}} {{i.type_label}}
+    {{ i | asciify }} {{ i.type_label }}
 {% endfor %}
 
 {% for i in object.guiding_telescopes_2.all %}
-    {{i}}
+    {{ i | asciify }}
 {% endfor %}
 
 {% for i in object.guiding_cameras_2.all %}
-    {{i}}
+    {{ i | asciify }}
 {% endfor %}
 
 {% for i in object.mounts_2.all %}
-    {{i}}
+    {{ i | asciify }}
 {% endfor %}
 
 {% for i in object.filters_2.all %}
-    {{i}}
+    {{ i | asciify }}
 {% endfor %}
 
 {% for i in object.software_2.all %}
-    {{i}}
+    {{ i | asciify }}
 {% endfor %}
 
 {% for i in object.accessories_2.all %}
-    {{i}}
+    {{ i | asciify }}
 {% endfor %}

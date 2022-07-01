@@ -1,2 +1,4 @@
-{{object.make}} {{object.name}}
+{% load common_tags %}
+
+{{object.make | ascify }} {{object.name | asciify }}
 

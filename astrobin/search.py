@@ -16,6 +16,7 @@ from pybb.models import Post, Topic
 
 from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin_apps_groups.models import Group
+from common.templatetags.common_tags import asciify
 from nested_comments.models import NestedComment
 from .models import Image
 
@@ -517,10 +518,7 @@ class AstroBinSearchForm(SearchForm):
         q = self.cleaned_data.get('q')
         domain = self.cleaned_data.get('d')
 
-        try:
-            q = unicodedata.normalize('NFKD', q).encode('ascii', 'ignore').decode('utf-8')
-        except:
-            pass
+        q = asciify(q)
 
         if q is None or q == "":
             sqs = SearchQuerySet().all()

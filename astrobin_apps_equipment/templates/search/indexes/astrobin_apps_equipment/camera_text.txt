@@ -1,5 +1,7 @@
-{{ obj }}
+{% load common_tags %}
+
+{{ obj | asciify }}
 
 {% for variant in obj.variants %}
-  {{ variant }}
+  {{ variant | asciify }}
 {% endfor %}

@@ -1,1 +1,3 @@
-{{ object.brand.name }}
+{% load common_tags %}
+
+{{ object.brand.name | asciify }}

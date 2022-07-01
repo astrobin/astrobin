@@ -1,1 +1,3 @@
-{{object.text}}
+{% load common_tags %}
+
+{{ object.text | asciify }}

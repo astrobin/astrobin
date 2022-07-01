@@ -1,4 +1,5 @@
 import datetime
+import unicodedata
 
 import bleach
 from dateutil import parser
@@ -344,3 +345,10 @@ def get_verbose_field_name(instance, field_name):
 @register.filter
 def add_days(value, days):
     return value + datetime.timedelta(days=days)
+
+@register.filter
+def asciify(value):
+    try:
+        return unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('utf-8')
+    except:
+        return value

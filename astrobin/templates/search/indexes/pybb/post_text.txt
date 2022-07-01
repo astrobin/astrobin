@@ -1,1 +1,3 @@
-{{object.body|truncatechars:10000}}
+{% load common_tags %}
+
+{{object.body | truncatechars:10000 | asciify }}

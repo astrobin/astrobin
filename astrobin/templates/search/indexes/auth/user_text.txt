@@ -1,4 +1,6 @@
-{{object.username}}
-{{object.real_name}}
+{% load common_tags %}
 
-{{object.userprofile.real_name}}
+{{object.username | asciify }}
+{{object.real_name | asciify }}
+
+{{object.userprofile.real_name | asciify }}
