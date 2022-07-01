@@ -440,6 +440,11 @@ class GearMigrationStrategy(models.Model):
         ],
     )
 
+    applied = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
     class Meta:
         app_label = 'astrobin'
         unique_together = (

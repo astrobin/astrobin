@@ -1,5 +1,6 @@
 from annoying.functions import get_object_or_None
 from django.db.models import QuerySet
+from django.utils import timezone
 
 from astrobin_apps_equipment.models.deep_sky_acquisition_migration_record import DeepSkyAcquisitionMigrationRecord
 
@@ -124,6 +125,8 @@ class EquipmentService:
                 migration_flag_moderator_lock=None,
                 migration_flag_moderator_lock_timestamp=None
             )
+
+            GearMigrationStrategy.objects.filter(pk=migration_strategy_to_apply.pk).update(applied=timezone.now())
 
         migration_strategy: GearMigrationStrategy = migration_strategy
         if migration_strategy.user:
