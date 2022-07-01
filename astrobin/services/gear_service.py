@@ -51,9 +51,9 @@ class GearService:
 
         target = strategy.migration_content_object
 
-        if strategy.migration_flag_moderator and strategy.migration_flag_moderator != reviewer:
+        if strategy.user and strategy.user != reviewer:
             push_notification(
-                [strategy.migration_flag_moderator],
+                [strategy.user],
                 reviewer,
                 'equipment-item-migration-approved',
                 {
