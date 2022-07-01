@@ -14,22 +14,21 @@ from astrobin_apps_equipment.models import (
 )
 
 
-@shared_task(time_limit=30)
+@shared_task(time_limit=300)
 def expire_equipment_locks():
     expiration_minutes = 30
 
     for Model in (Telescope, Camera, Mount, Filter, Accessory, Software):
         Model.objects.filter(
             reviewer_lock__isnull=False,
-            reviewer_lock_timestamp_lt=timezone.now() - timedelta(minutes=expiration_minutes)
+            reviewer_lock_timestamp__lt=timezone.now() - timedelta(minutes=expiration_minutes)
         ).update(
             reviewer_lock=None,
             reviewer_lock_timestamp=None
         )
-
         Model.objects.filter(
             edit_proposal_lock__isnull=False,
-            edit_proposal_lock_timestamp_lt=timezone.now() - timedelta(minutes=expiration_minutes)
+            edit_proposal_lock_timestamp__lt=timezone.now() - timedelta(minutes=expiration_minutes)
         ).update(
             edit_proposal_lock=None,
             edit_proposal_lock_timestamp=None
@@ -45,7 +44,7 @@ def expire_equipment_locks():
     ):
         Model.objects.filter(
             edit_proposal_review_lock__isnull=False,
-            edit_proposal_review_lock_timestamp_lt=timezone.now() - timedelta(minutes=expiration_minutes)
+            edit_proposal_review_lock_timestamp__lt=timezone.now() - timedelta(minutes=expiration_minutes)
         ).update(
             edit_proposal_review_lock=None,
             edit_proposal_review_lock_timestamp=None
