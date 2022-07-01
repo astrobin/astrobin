@@ -1182,14 +1182,15 @@ def gear_migration_strategy_post_save(sender, instance: GearMigrationStrategy, c
             )
             for user_id in user_ids:
                 user = User.objects.get(id=user_id)
-                GearMigrationStrategy.objects.create(
-                    gear=gear,
-                    user=user,
-                    migration_flag=instance.migration_flag,
-                    migration_flag_moderator=instance.migration_flag_moderator,
-                    migration_flag_timestamp=timezone.now(),
-                    migration_content_object=instance.migration_content_object,
-                )
+                if not get_object_or_None(GearMigrationStrategy, gear=gear, user=user):
+                    GearMigrationStrategy.objects.create(
+                        gear=gear,
+                        user=user,
+                        migration_flag=instance.migration_flag,
+                        migration_flag_moderator=instance.migration_flag_moderator,
+                        migration_flag_timestamp=timezone.now(),
+                        migration_content_object=instance.migration_content_object,
+                    )
 
 
 post_save.connect(gear_migration_strategy_post_save, sender=GearMigrationStrategy)
