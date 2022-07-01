@@ -1,28 +1,50 @@
 {% load i18n %}
 
 <p>
-    {% blocktrans trimmed with user=user make=legacy_item.make name=legacy_item.name %}
-        <a href="{{ user_url }}">{{ user }}</a> approved the equipment item for
-        <em><strong>{{ make }}</strong> {{ name }}</em>
-        that you created.
-    {% endblocktrans %}
+    {% if migration_flag == 'MIGRATE' %}
+        {% blocktrans trimmed with user=user make=legacy_item.make name=legacy_item.name %}
+            <em><strong>{{ make }}</strong> {{ name }}</em>, an equipment item that you have used on some of your images
+            on AstroBin, has been migrated to the new AstroBin Equipment Database.
+        {% endblocktrans %}
+    {% else %}
+        {% blocktrans trimmed with user=user make=legacy_item.make name=legacy_item.name %}
+            <em><strong>{{ make }}</strong> {{ name }}</em>, an equipment item that you have used on some of your images
+            on AstroBin, could not be migrated to the new AstroBin Equipment Database.
+        {% endblocktrans %}
+
+        <br/>
+        <br/>
+
+        {% blocktrans %}Reason{% endblocktrans %}: <strong>{{ migration_flag }}</strong>
+    {% endif %}
 </p>
 
-<p>
-    {% blocktrans trimmed %}
-        The migrations is now staged for execution and will be applied at a later time.
-    {% endblocktrans %}
-</p>
-
-<p>
-    {% blocktrans %}Proposed strategy{% endblocktrans %}: <strong>{{ migration_flag }}</strong>
-</p>
 
 {% if target_item %}
     <p>
         {% blocktrans %}Target item{% endblocktrans %}: <a href="{{ target_url }}">{{ target_item }}</a>
     </p>
 {% endif %}
+
+<p>
+    {% blocktrans trimmed %}
+        If you don't know what this means, please read this:
+    {% endblocktrans %}
+
+    <a href="https://welcome.astrobin.com/blog/the-great-equipment-database-migration-of-2021">
+        https://welcome.astrobin.com/blog/the-great-equipment-database-migration-of-2021
+    </a>
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        You can see all your migrations and undo any mistakes on the following page:
+    {% endblocktrans %}
+
+    <a href="https://app.astrobin.com/equipment/migration-tool">
+        https://app.astrobin.com/equipment/migration-tool
+    </a>
+</p>
 
 <p>
     {% blocktrans trimmed %}

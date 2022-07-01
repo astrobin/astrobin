@@ -1,5 +1,5 @@
 {% load i18n %}
 
 {% blocktrans trimmed with user=user make=legacy_item.make name=legacy_item.name %}
-    {{ user }} approved the equipment item migration that you created for "{{ make }} {{ name }}"
+    "{{ make }} {{ name }}" has been migrated to the new AstroBin Equipment Database
 {% endblocktrans %}

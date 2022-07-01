@@ -1,19 +1,33 @@
 {% load i18n %}
 
-{% blocktrans trimmed with user=user make=legacy_item.make name=legacy_item.name %}
-    {{ user }} approved the equipment item for "{{ make }} {{ name }}" that you created.
-{% endblocktrans %}
+{% if migration_flag == 'MIGRATE' %}
+    {% blocktrans trimmed with user=user make=legacy_item.make name=legacy_item.name %}
+        "{{ make }} {{ name }}", an equipment item that you have used on some of your images on AstroBin, has been
+        migrated to the new AstroBin Equipment Database.
+    {% endblocktrans %}
+{% else %}
+    {% blocktrans trimmed with user=user make=legacy_item.make name=legacy_item.name %}
+        "{{ make }} {{ name }}", an equipment item that you have used on some of your images on AstroBin, could not be
+        migrated to the new AstroBin Equipment Database.
+    {% endblocktrans %}
 
-{% blocktrans trimmed %}
-    The migrations is now staged for execution and will be applied at a later time.
-{% endblocktrans %}
-
-{% blocktrans %}Proposed strategy{% endblocktrans %}: {{ migration_flag }}
+    {% blocktrans %}Reason{% endblocktrans %}: {{ migration_flag }}
+{% endif %}
 
 {% if target_item %}
     {% blocktrans %}Target item{% endblocktrans %}:
     {{ target_item }} ({{ target_url }})
 {% endif %}
+
+{% blocktrans trimmed %}
+    If you don't know what this means, please read this:
+{% endblocktrans %}
+https://welcome.astrobin.com/blog/the-great-equipment-database-migration-of-2021
+
+{% blocktrans trimmed %}
+    You can see all your migrations and undo any mistakes on the following page:
+{% endblocktrans %}
+https://app.astrobin.com/equipment/migration-tool
 
 {% blocktrans trimmed %}
     Thanks for your cooperation!
