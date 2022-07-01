@@ -34,6 +34,8 @@ class EquipmentItemFilter(FilterSet):
         return queryset.filter(
             edit_proposals__deleted__isnull=True,
             edit_proposals__edit_proposal_review_status__isnull=True
+        ).exclude(
+            edit_proposals__edit_proposal_by=self.request.user
         ).distinct()
 
     class Meta:
