@@ -82,8 +82,9 @@ class GearServiceTest(TestCase):
     def test_approve_migration_strategy(self, push_notification, apply_migration_strategy):
         moderator: User = Generators.user()
         reviewer: User = Generators.user()
+        user: User = Generators.user()
         strategy: GearMigrationStrategy = GearService.approve_migration_strategy(
-            Generators.gear_migration_strategy(migration_flag_moderator=moderator),
+            Generators.gear_migration_strategy(migration_flag_moderator=moderator, user=user),
             reviewer,
             'reason',
             'comment'
@@ -100,7 +101,7 @@ class GearServiceTest(TestCase):
 
         push_notification.assert_has_calls(
             [
-                mock.call([moderator], reviewer, 'equipment-item-migration-approved', mock.ANY),
+                mock.call([user], reviewer, 'equipment-item-migration-approved', mock.ANY),
             ], any_order=True
         )
 
