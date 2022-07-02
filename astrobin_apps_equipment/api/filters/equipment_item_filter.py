@@ -2,6 +2,8 @@ import django_filters
 from django.db.models import Q, QuerySet
 from django_filters.rest_framework import FilterSet
 
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
+
 
 class EquipmentItemFilter(FilterSet):
     pending_review = django_filters.BooleanFilter(method='has_pending_review')
@@ -33,7 +35,8 @@ class EquipmentItemFilter(FilterSet):
 
         return queryset.filter(
             edit_proposals__deleted__isnull=True,
-            edit_proposals__edit_proposal_review_status__isnull=True
+            edit_proposals__edit_proposal_review_status__isnull=True,
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
         ).exclude(
             edit_proposals__edit_proposal_by=self.request.user
         ).distinct()
