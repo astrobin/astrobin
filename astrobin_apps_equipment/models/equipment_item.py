@@ -196,13 +196,13 @@ class EquipmentItem(SafeDeleteModel):
     # This items are synced back from the search index.                                                                #
     ####################################################################################################################
 
-    user_count = models.PositiveSmallIntegerField(
+    user_count = models.PositiveIntegerField(
         null=True,
         blank=True,
         editable=False,
     )
 
-    image_count = models.PositiveSmallIntegerField(
+    image_count = models.PositiveIntegerField(
         null=True,
         blank=True,
         editable=False,
