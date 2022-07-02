@@ -4,8 +4,8 @@ from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
 
 
-class EquipmentCreateThrottle(throttling.UserRateThrottle):
-    rate = '50/day'
+class EquipmentEditProposalThrottle(throttling.UserRateThrottle):
+    rate = '100/day'
 
     def allow_request(self, request, view):
         if request.method != "POST":

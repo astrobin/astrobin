@@ -11,6 +11,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_403_FORBIDDEN, HTTP_409_CONFLICT
 
+from astrobin_apps_equipment.api.throttle.equipment_edit_proposal_throttle import EquipmentEditProposalThrottle
 from astrobin_apps_equipment.api.views.equipment_item_view_set import EquipmentItemViewSet
 from astrobin_apps_equipment.models import EquipmentItem
 from astrobin_apps_equipment.models.equipment_item_edit_proposal_mixin import EquipmentItemEditProposalMixin
@@ -20,6 +21,7 @@ from common.services import AppRedirectionService
 
 class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
+    throttle_classes = [EquipmentEditProposalThrottle]
 
     def check_edit_proposal_permissions(self, request, edit_proposal):
         if edit_proposal.edit_proposal_reviewed_by not in (None, request.user):
