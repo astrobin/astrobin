@@ -469,13 +469,16 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                     duplicate_of.klass == EquipmentItemKlass.CAMERA and
                     duplicate_of.type == CameraType.DSLR_MIRRORLESS
             ):
-                # Fetch the corresponding modified/cooled target of duplication
-                replace_with = Camera.objects.get(
-                    brand=duplicate_of.brand,
-                    name=duplicate_of.name,
-                    modified=affected_item.modified,
-                    cooled=affected_item.cooled,
-                )
+                # Try and fetch the corresponding modified/cooled target of duplication
+                try:
+                    replace_with = Camera.objects.get(
+                        brand=duplicate_of.brand,
+                        name=duplicate_of.name,
+                        modified=affected_item.modified,
+                        cooled=affected_item.cooled,
+                    )
+                except Camera.DoesNotExist:
+                    replace_with = duplicate_of
 
             affected_images = []
             for prop in (
