@@ -3,7 +3,6 @@ from collections import Counter
 import simplejson
 from annoying.functions import get_object_or_None
 from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.search import TrigramDistance
 from django.core.cache import cache
 from django.db.models import Q, QuerySet, Value
@@ -22,16 +21,14 @@ from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_409_CONFLICT
 
-from astrobin.models import GearMigrationStrategy, Image
+from astrobin.models import Image
 from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_own_migrator_or_readonly import \
     IsEquipmentModeratorOrOwnMigratorOrReadOnly
 from astrobin_apps_equipment.api.throttle import EquipmentCreateThrottle
 from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
-from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
-from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
-from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
+from astrobin_apps_equipment.tasks import reject_item
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_access_full_search
@@ -364,15 +361,6 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['POST'])
     def reject(self, request, pk):
-        from astrobin_apps_equipment.models import Sensor
-        from astrobin_apps_equipment.models import Camera
-        from astrobin_apps_equipment.models import CameraEditProposal
-        from astrobin_apps_equipment.models import Telescope
-        from astrobin_apps_equipment.models import Mount
-        from astrobin_apps_equipment.models import Filter
-        from astrobin_apps_equipment.models import Accessory
-        from astrobin_apps_equipment.models import Software
-
         if not request.user.groups.filter(name='equipment_moderators').exists():
             raise PermissionDenied(request.user)
 
@@ -388,183 +376,16 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         if item.created_by == request.user:
             return Response("You cannot review an item that you created", HTTP_400_BAD_REQUEST)
 
-        item.reviewed_by = request.user
-        item.reviewed_timestamp = timezone.now()
-        item.reviewer_decision = EquipmentItemReviewerDecision.REJECTED
-        item.reviewer_rejection_reason = request.data.get('reason')
-        item.reviewer_comment = request.data.get('comment')
-        item.reviewer_rejection_duplicate_of_klass = request.data.get('duplicate_of_klass', item.klass)
-        item.reviewer_rejection_duplicate_of_usage_type = request.data.get('duplicate_of_usage_type')
-        item.reviewer_rejection_duplicate_of = request.data.get('duplicate_of')
-
-        duplicate_of = None
-        DuplicateModelClass = {
-            EquipmentItemKlass.TELESCOPE: Telescope,
-            EquipmentItemKlass.CAMERA: Camera,
-            EquipmentItemKlass.MOUNT: Mount,
-            EquipmentItemKlass.FILTER: Filter,
-            EquipmentItemKlass.ACCESSORY: Accessory,
-            EquipmentItemKlass.SOFTWARE: Software
-        }.get(item.reviewer_rejection_duplicate_of_klass)
-
-        if item.reviewer_rejection_duplicate_of:
-            try:
-                duplicate_of = DuplicateModelClass.objects.get(pk=item.reviewer_rejection_duplicate_of)
-            except ModelClass.DoesNotExist:
-                duplicate_of = None
-                item.reviewer_rejection_duplicate_of = None
-                item.reviewer_rejection_duplicate_of_klass = None
-                item.reviewer_rejection_duplicate_of_klass_usage_type = None
-
-        if item.created_by and item.created_by != request.user:
-            push_notification(
-                [item.created_by],
-                request.user,
-                'equipment-item-rejected',
-                {
-                    'user': request.user.userprofile.get_display_name(),
-                    'user_url': build_notification_url(
-                        settings.BASE_URL + reverse('user_page', args=(request.user.username,))
-                    ),
-                    'item': f'{item.brand.name if item.brand else _("(DIY)")} {item.name}',
-                    'reject_reason': item.reviewer_rejection_reason,
-                    'comment': item.reviewer_comment,
-                    'duplicate_of': duplicate_of,
-                    'duplicate_of_url': build_notification_url(
-                        AppRedirectionService.redirect(
-                            f'/equipment'
-                            f'/explorer'
-                            f'/{duplicate_of.item_type}/{duplicate_of.pk}'
-                            f'/{duplicate_of.slug}'
-                        )
-                    ) if duplicate_of else None,
-                }
-            )
-
-        migration_strategies: QuerySet = GearMigrationStrategy.objects.filter(
-            user=item.created_by,
-            migration_flag='MIGRATE',
-            migration_content_type=ContentType.objects.get_for_model(ModelClass),
-            migration_object_id=item.id,
+        reject_item.delay(
+            item.id,
+            item.klass,
+            request.user.id,
+            request.data.get('reason'),
+            request.data.get('comment'),
+            request.data.get('duplicate_of_klass'),
+            request.data.get('duplicate_of_usage_type'),
+            request.data.get('duplicate_of')
         )
-
-        if duplicate_of:
-            migration_strategies.update(
-                migration_object_id=duplicate_of.pk,
-                migration_content_type=ContentType.objects.get_for_model(DuplicateModelClass)
-            )
-        else:
-            for migration_strategy in migration_strategies:
-                EquipmentService.undo_migration_strategy(migration_strategy)
-
-        # This will catch DSLR/Mirrorless variants
-        affected_items = ModelClass.objects.filter(brand=item.brand, name=item.name)
-        for affected_item in affected_items.iterator():
-            replace_with: DuplicateModelClass = duplicate_of
-
-            if (
-                    duplicate_of and
-                    affected_item.klass == EquipmentItemKlass.CAMERA and
-                    affected_item.type == CameraType.DSLR_MIRRORLESS and
-                    duplicate_of.klass == EquipmentItemKlass.CAMERA and
-                    duplicate_of.type == CameraType.DSLR_MIRRORLESS
-            ):
-                # Try and fetch the corresponding modified/cooled target of duplication
-                try:
-                    replace_with = Camera.objects.get(
-                        brand=duplicate_of.brand,
-                        name=duplicate_of.name,
-                        modified=affected_item.modified,
-                        cooled=affected_item.cooled,
-                    )
-                except Camera.DoesNotExist:
-                    replace_with = duplicate_of
-
-            affected_images = []
-            for prop in (
-                    'imaging_telescopes_2',
-                    'imaging_cameras_2',
-                    'mounts_2',
-                    'guiding_telescopes_2',
-                    'guiding_cameras_2',
-                    'filters_2',
-                    'accessories_2',
-                    'software_2',
-            ):
-                try:
-                    images = Image.objects_including_wip.filter(**{prop: affected_item})
-                except ValueError:
-                    images = None
-
-                if images is not None and images.count() > 0:
-                    for image in images.iterator():
-                        affected_images.append(dict(image=image, prop=prop))
-
-            for affected in affected_images:
-                image: Image = affected.get("image")
-                prop: str = affected.get("prop")
-
-                if duplicate_of:
-                    if ModelClass == DuplicateModelClass:
-                        getattr(image, prop).add(replace_with)
-                    else:
-                        destination_map = {
-                            EquipmentItemKlass.TELESCOPE: 'imaging_telescopes_2' \
-                                if item.reviewer_rejection_duplicate_of_usage_type == EquipmentItemUsageType.IMAGING \
-                                else 'guiding_telescopes_2',
-                            EquipmentItemKlass.CAMERA: 'imaging_cameras_2' \
-                                if item.reviewer_rejection_duplicate_of_usage_type == EquipmentItemUsageType.IMAGING \
-                                else 'guiding_cameras_2',
-                            EquipmentItemKlass.MOUNT: 'mounts_2',
-                            EquipmentItemKlass.FILTER: 'filters_2',
-                            EquipmentItemKlass.ACCESSORY: 'accessories_2',
-                            EquipmentItemKlass.SOFTWARE: 'software_2',
-                        }
-                        getattr(image, destination_map.get(duplicate_of.klass)).add(replace_with)
-
-                push_notification(
-                    [affected_item.created_by],
-                    request.user,
-                    'equipment-item-rejected-affected-image',
-                    {
-                        'user': request.user.userprofile.get_display_name(),
-                        'user_url': build_notification_url(
-                            settings.BASE_URL + reverse('user_page', args=(request.user.username,))
-                        ),
-                        'item': str(item),
-                        'reject_reason': item.reviewer_rejection_reason,
-                        'comment': item.reviewer_comment,
-                        'duplicate_of': replace_with,
-                        'duplicate_of_url': build_notification_url(
-                            AppRedirectionService.redirect(
-                                f'/equipment'
-                                f'/explorer'
-                                f'/{replace_with.item_type}/{replace_with.pk}'
-                                f'/{replace_with.slug}'
-                            )
-                        ) if duplicate_of else None,
-                        'image_url': build_notification_url(
-                            settings.BASE_URL + reverse('image_detail', args=(image.get_id(),))
-                        ),
-                        'image_title': image.title,
-                    }
-                )
-
-        if item.klass == EquipmentItemKlass.SENSOR:
-            Camera.all_objects.filter(sensor=item).update(sensor=None)
-            CameraEditProposal.all_objects.filter(sensor=item).update(sensor=None)
-
-        item.delete()
-
-        if item.brand:
-            brand_has_items = False
-            for klass in (Sensor, Camera, Telescope, Mount, Filter, Accessory, Software):
-                if klass.objects.filter(brand=item.brand).exists():
-                    brand_has_items = True
-                    break
-
-            if not brand_has_items:
-                item.brand.delete()
 
         serializer = self.serializer_class(item)
         return Response(serializer.data)
