@@ -561,9 +561,9 @@ class ImageIndex(SearchIndex, Indexable):
     first_acquisition_date = DateTimeField()
     last_acquisition_date = DateTimeField()
     views = IntegerField()
-    w = IntegerField(model_attr='w')
-    h = IntegerField(model_attr='h')
-    size = IntegerField(model_attr='size')
+    w = IntegerField(model_attr='w', null=True)
+    h = IntegerField(model_attr='h', null=True)
+    size = IntegerField(model_attr='uploader_upload_length', null=True)
 
     solar_system_main_subject_char = CharField(model_attr='solar_system_main_subject', null=True)
 
