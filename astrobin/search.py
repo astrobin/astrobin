@@ -59,6 +59,12 @@ FIELDS = (
     'camera',
     'bortle_scale_min',
     'bortle_scale_max',
+    'w_min',
+    'w_max',
+    'h_min',
+    'h_max',
+    'size_min',
+    'size_max',
     'topic',
 
     # Sorting
@@ -126,6 +132,12 @@ class AstroBinSearchForm(SearchForm):
     camera = forms.CharField(required=False)
     bortle_scale_min = forms.FloatField(required=False)
     bortle_scale_max = forms.FloatField(required=False)
+    w_min = forms.IntegerField(required=False)
+    w_max = forms.IntegerField(required=False)
+    h_min = forms.IntegerField(required=False)
+    h_max = forms.IntegerField(required=False)
+    size_min = forms.IntegerField(required=False)
+    size_max = forms.IntegerField(required=False)
     topic = forms.IntegerField(required=False)
 
     def __init__(self, *args, **kwargs):
@@ -476,6 +488,51 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filter_by_w(self, results):
+        try:
+            min = int(self.cleaned_data.get("w_min"))
+            results = results.filter(w__gte=min)
+        except TypeError:
+            pass
+
+        try:
+            max = int(self.cleaned_data.get("w_max"))
+            results = results.filter(w__lte=max)
+        except TypeError:
+            pass
+
+        return results
+
+    def filter_by_h(self, results):
+        try:
+            min = int(self.cleaned_data.get("h_min"))
+            results = results.filter(h__gte=min)
+        except TypeError:
+            pass
+
+        try:
+            max = int(self.cleaned_data.get("h_max"))
+            results = results.filter(h__lte=max)
+        except TypeError:
+            pass
+
+        return results
+
+    def filter_by_size(self, results):
+        try:
+            min = int(self.cleaned_data.get("size_min")) * 1024 * 1024
+            results = results.filter(size__gte=min)
+        except TypeError:
+            pass
+
+        try:
+            max = int(self.cleaned_data.get("size_max")) * 1024 * 1024
+            results = results.filter(size__lte=max)
+        except TypeError:
+            pass
+
+        return results
+
     def filter_by_forum_topic(self, results):
         topic = self.cleaned_data.get("topic")
 
@@ -556,6 +613,9 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_telescope(sqs)
         sqs = self.filter_by_camera(sqs)
         sqs = self.filter_by_bortle_scale(sqs)
+        sqs = self.filter_by_w(sqs)
+        sqs = self.filter_by_h(sqs)
+        sqs = self.filter_by_size(sqs)
         sqs = self.filter_by_forum_topic(sqs)
 
         sqs = self.sort(sqs)

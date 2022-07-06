@@ -167,7 +167,10 @@ body#search {
 
         &.slider-form-group {
           .min-max {
-            margin-top: 3.5rem;
+            &:not(.no-slider) {
+              margin-top: 3.5rem;
+            }
+
             display: flex;
             justify-content: space-between;
 
