@@ -156,23 +156,11 @@ class FilterBaseModel(EquipmentItem):
 
     size = models.CharField(
         verbose_name=_('Size'),
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
         max_length=32,
         choices=FILTER_SIZES,
     )
-
-    def __str__(self):
-        base_name = super().__str__()
-        type_label = f' {self.type_label()}' if self.type else ""
-        bandwidth_label = f' {self.bandwidth} nm' if self.bandwidth else ""
-        size_label = f' {self.size_label()}' if self.size else ""
-
-        type_label = type_label if type_label not in base_name else ""
-        bandwidth_label = bandwidth_label if bandwidth_label not in base_name else ""
-        size_label = size_label if size_label not in base_name else ""
-
-        return base_name + type_label + bandwidth_label + size_label
 
     def type_label(self) -> str:
         if self.type is not None:
