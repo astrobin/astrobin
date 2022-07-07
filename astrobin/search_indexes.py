@@ -563,6 +563,7 @@ class ImageIndex(SearchIndex, Indexable):
     views = IntegerField()
     w = IntegerField(model_attr='w', null=True)
     h = IntegerField(model_attr='h', null=True)
+    pixel_count = IntegerField(null=True)
     size = IntegerField(model_attr='uploader_upload_length', null=True)
 
     solar_system_main_subject_char = CharField(model_attr='solar_system_main_subject', null=True)
@@ -712,6 +713,11 @@ class ImageIndex(SearchIndex, Indexable):
 
     def prepare_views(self, obj):
         return _prepare_views(obj, 'image')
+
+    def prepare_pixel_count(self, obj):
+        if obj.w and obj.h:
+            return obj.w * obj.h
+        return None
 
     def prepare_license(self, obj):
         return License.to_deprecated_integer(obj.license)
