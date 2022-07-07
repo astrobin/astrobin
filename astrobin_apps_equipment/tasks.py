@@ -64,16 +64,7 @@ def approve_migration_strategy(migration_strategy_id: int, moderator_id: int):
 
 
 @shared_task(time_limit=30 * 60, acks_late=True)
-def reject_item(
-        item_id: int,
-        klass: EquipmentItemKlass,
-        reviewer_id: int,
-        reason: str,
-        comment: str,
-        duplicate_of_klass: EquipmentItemKlass,
-        duplicate_of_usage_type: EquipmentItemUsageType,
-        duplicate_of: int
-):
+def reject_item(item_id: int, klass: EquipmentItemKlass):
     ModelClass = {
         EquipmentItemKlass.TELESCOPE: Telescope,
         EquipmentItemKlass.CAMERA: Camera,
@@ -85,20 +76,5 @@ def reject_item(
 
     item: ModelClass = get_object_or_None(ModelClass, id=item_id)
 
-    if item is None:
-        return
-
-    reviewer = get_object_or_None(User, id=reviewer_id)
-
-    if reviewer is None:
-        return
-
-    EquipmentService.reject_item(
-        item,
-        reviewer,
-        reason,
-        comment,
-        duplicate_of_klass,
-        duplicate_of_usage_type,
-        duplicate_of,
-    )
+    if item:
+        EquipmentService.reject_item(item)

@@ -376,16 +376,17 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         if item.created_by == request.user:
             return Response("You cannot review an item that you created", HTTP_400_BAD_REQUEST)
 
-        reject_item.delay(
-            item.id,
-            item.klass,
-            request.user.id,
-            request.data.get('reason'),
-            request.data.get('comment'),
-            request.data.get('duplicate_of_klass'),
-            request.data.get('duplicate_of_usage_type'),
-            request.data.get('duplicate_of')
-        )
+        item.reviewed_by = request.user
+        item.reviewed_timestamp = timezone.now()
+        item.reviewer_decision = EquipmentItemReviewerDecision.REJECTED
+        item.reviewer_rejection_reason = request.data.get('reason')
+        item.reviewer_comment = request.data.get('comment')
+        item.reviewer_rejection_duplicate_of_klass = request.data.get('duplicate_of_klass', item.klass)
+        item.reviewer_rejection_duplicate_of_usage_type = request.data.get('duplicate_of_usage_type')
+        item.reviewer_rejection_duplicate_of = request.data.get('duplicate_of')
+        item.save(keep_deleted=True)
+
+        reject_item.delay(item.id, item.klass)
 
         serializer = self.serializer_class(item)
         return Response(serializer.data)

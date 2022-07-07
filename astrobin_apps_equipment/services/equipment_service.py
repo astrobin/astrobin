@@ -263,9 +263,7 @@ class EquipmentService:
             migration_strategy.delete()
 
     @staticmethod
-    def reject_item(
-            item, reviewer, reason, comment, duplicate_of_klass, duplicate_of_usage_type, duplicate_of
-    ):
+    def reject_item(item):
         from astrobin_apps_equipment.models import Sensor
         from astrobin_apps_equipment.models import Camera
         from astrobin_apps_equipment.models.camera_base_model import CameraType
@@ -276,16 +274,8 @@ class EquipmentService:
         from astrobin_apps_equipment.models import Accessory
         from astrobin_apps_equipment.models import Software
         from astrobin.models import GearMigrationStrategy, Image
-        from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 
-        item.reviewed_by = reviewer
-        item.reviewed_timestamp = timezone.now()
-        item.reviewer_decision = EquipmentItemReviewerDecision.REJECTED
-        item.reviewer_rejection_reason = reason
-        item.reviewer_comment = comment
-        item.reviewer_rejection_duplicate_of_klass = duplicate_of_klass or item.klass
-        item.reviewer_rejection_duplicate_of_usage_type = duplicate_of_usage_type
-        item.reviewer_rejection_duplicate_of = duplicate_of
+        reviewer = item.reviewed_by
 
         duplicate_of = None
         DuplicateModelClass = {
