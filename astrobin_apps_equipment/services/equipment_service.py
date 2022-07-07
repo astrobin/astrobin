@@ -93,19 +93,22 @@ class EquipmentService:
                             target = modified_camera
 
                 for image in images.iterator():
-                    getattr(image, usage).remove(classed_gear)
-                    getattr(image, new_usage).add(target)
+                    try:
+                        getattr(image, new_usage).add(target)
+                        getattr(image, usage).remove(classed_gear)
 
-                    params = dict(
-                        image=image,
-                        from_gear=classed_gear,
-                        to_item=target
-                    )
+                        params = dict(
+                            image=image,
+                            from_gear=classed_gear,
+                            to_item=target
+                        )
 
-                    if usage_type:
-                        params['usage_type'] = usage_type
+                        if usage_type:
+                            params['usage_type'] = usage_type
 
-                    RecordKlass.objects.get_or_create(**params)
+                        RecordKlass.objects.get_or_create(**params)
+                    except TypeError:
+                        continue
 
             try:
                 deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(
