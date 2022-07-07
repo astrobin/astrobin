@@ -21,7 +21,7 @@ class EquipmentItemFilter(FilterSet):
         queryset = queryset.exclude(Q(created_by=self.request.user) | Q(brand__isnull=True))
 
         if condition:
-            queryset = queryset.filter(reviewer_decision__isnull=True)
+            queryset = queryset.filter(reviewer_decision__isnull=True).order_by('-created')
 
         return queryset
 
@@ -39,7 +39,10 @@ class EquipmentItemFilter(FilterSet):
             reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
         ).exclude(
             edit_proposals__edit_proposal_by=self.request.user
-        ).distinct()
+        ).distinct(
+        ).order_by(
+            '-created'
+        )
 
     class Meta:
         abstract = True
