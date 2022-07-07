@@ -145,7 +145,7 @@ class TestApiTelescopeViewSet(TestCase):
 
         self.assertEquals(0, len(response.data))
 
-    @mock.patch("astrobin_apps_equipment.api.views.equipment_item_view_set.push_notification")
+    @mock.patch("astrobin_apps_equipment.services.equipment_service.push_notification")
     def test_reject(self, push_notification):
         user = Generators.user()
         moderator = Generators.user(groups=['equipment_moderators'])
