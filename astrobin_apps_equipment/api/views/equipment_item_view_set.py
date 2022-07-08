@@ -75,7 +75,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                     Q(brand=brand) &
                     Q(
                         Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
-                        Q(created_by=self.request.user)
+                        (Q(created_by=self.request.user) if self.request.user.is_authenticated else Q(pk=None))
                     )
                 ).order_by(Lower('name'))
             if brand_queryset.exists():
@@ -91,7 +91,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                     ) &
                     Q(
                         Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
-                        Q(created_by=self.request.user)
+                        (Q(created_by=self.request.user) if self.request.user.is_authenticated else Q(pk=None))
                     )
                 ).distinct(
                 ).order_by(
