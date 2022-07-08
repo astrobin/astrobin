@@ -107,6 +107,12 @@
                                 
                                 <bortle-scale-filter v-if="filter.name === 'bortle_scale'" :bortle-scale-min="bortleScaleMin"
                                                    :bortle-scale-max="bortleScaleMax"></bortle-scale-filter>
+
+                                <w-filter v-if="filter.name === 'w'" :w-min="wMin" :w-max="wMax"></w-filter>
+
+                                <h-filter v-if="filter.name === 'h'" :h-min="hMin" :h-max="hMax"></h-filter>
+
+                                <size-filter v-if="filter.name === 'size'" :size-min="sizeMin" :size-max="sizeMax"></size-filter>
                             </div>
 
                             {% if request.GET.d == "i" or request.GET.d == None %}
@@ -373,6 +379,42 @@
                 {% else %}
                     9
                 {% endif %},
+            wMin:
+                {% if "w_min" in request.GET and request.GET.w_min %}
+                    {{ request.GET.w_min }}
+                {% else %}
+                    1
+                {% endif %},
+            wMax:
+                {% if "w_max" in request.GET and request.GET.w_max %}
+                    {{ request.GET.w_max }}
+                {% else %}
+                    99999
+                {% endif %},
+            hMin:
+                {% if "h_min" in request.GET and request.GET.h_min %}
+                    {{ request.GET.h_min }}
+                {% else %}
+                    1
+                {% endif %},
+            hMax:
+                {% if "h_max" in request.GET and request.GET.h_max %}
+                    {{ request.GET.h_max }}
+                {% else %}
+                    99999
+                {% endif %},
+            sizeMin:
+                {% if "size_min" in request.GET and request.GET.size_min %}
+                    {{ request.GET.size_min }}
+                {% else %}
+                    1
+                {% endif %},
+            sizeMax:
+                {% if "size_max" in request.GET and request.GET.size_max %}
+                    {{ request.GET.size_max }}
+                {% else %}
+                    999
+                {% endif %},
 
             sort:
                 {% if "sort" in request.GET and request.GET.sort %}
@@ -547,6 +589,21 @@
                     removable: true,
                     restricted: "FULL"
                 },
+                {
+                    name: "w",
+                    label: "{% trans "Width (pixels)" %}",
+                    removable: true,
+                },
+                {
+                    name: "h",
+                    label: "{% trans "Height (pixels)" %}",
+                    removable: true,
+                },
+                {
+                    name: "size",
+                    label: "{% trans "Size (MB)" %}",
+                    removable: true,
+                },
             ],
             enabledFilters: []
         },
@@ -663,6 +720,18 @@
 
             {% if "bortle_scale_min" in request.GET or "bortle_scale_max" in request.GET %}
                 this.enabledFilters.push(this.getFilterByName("bortle_scale"));
+            {% endif %}
+
+            {% if "w_min" in request.GET or "w_max" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("w"));
+            {% endif %}
+
+            {% if "h_min" in request.GET or "h_max" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("h"));
+            {% endif %}
+
+            {% if "size_min" in request.GET or "size_max" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("size"));
             {% endif %}
         },
         methods: {

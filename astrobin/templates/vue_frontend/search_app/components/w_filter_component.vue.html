@@ -1,0 +1,32 @@
+{% load i18n %}
+
+<script type="text/x-template" id="w-filter-template">
+    <div class="form-group slider-form-group" :class="{highlighted: highlighted}">
+        <div class="min-max no-slider">
+            <div class="min">
+                <input class="slider-input" id="w-min-value" name="w_min" type="number"
+                       min="0" step="1" :value="wMin" />
+                <label for="w-min-value">{% trans 'Min' %}</label>
+            </div>
+
+            <div class="max">
+                <label for="w-max-value">{% trans 'Max' %}</label>
+                <input class="slider-input" id="w-max-value" name="w_max" type="number"
+                       min="0" step="1" :value="wMax" />
+            </div>
+        </div>
+    </div>
+</script>
+
+<script>
+    Vue.component("w-filter", {
+        template: "#w-filter-template",
+        props: [
+            "wMin",
+            "wMax"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ]
+    });
+</script>
