@@ -12,6 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 from notification import models as notification
 from safedelete.signals import post_softdelete
 
+from astrobin.services.utils_service import UtilsService
 from astrobin_apps_equipment.models import (
     Accessory, Camera, CameraEditProposal, EquipmentBrand, EquipmentPreset, Filter, Mount, Sensor,
     Software, Telescope,
@@ -295,3 +296,102 @@ def send_equipment_item_requires_moderation_notification(sender, instance, creat
             'url': url
         }
     )
+
+
+@receiver(pre_save, sender=Sensor)
+def set_search_friendly_name_for_sensor(sender, instance, **kwargs):
+    search_friendly_name = ""
+
+    if instance.brand:
+        search_friendly_name += f' {instance.brand.name}'
+
+    instance.search_friendly_name = search_friendly_name
+
+
+@receiver(pre_save, sender=Camera)
+def set_search_friendly_name_for_camera(sender, instance, **kwargs):
+    search_friendly_name = ""
+
+    if instance.brand:
+        search_friendly_name += f' {instance.brand.name}'
+
+    if instance.sensor and instance.sensor.color_or_mono == 'C':
+        search_friendly_name += f' color'
+
+    if instance.sensor and instance.sensor.color_or_mono == 'M':
+        search_friendly_name += f' mono'
+
+    instance.search_friendly_name = search_friendly_name
+
+
+@receiver(pre_save, sender=Telescope)
+def set_search_friendly_name_for_telescope(sender, instance, **kwargs):
+    search_friendly_name = ""
+
+    if instance.brand:
+        search_friendly_name += f' {instance.brand.name}'
+
+    search_friendly_name += f' {" ".join(UtilsService.split_text_alphanumerically(instance.name))}'
+
+    if instance.aperture:
+        search_friendly_name += f' {instance.aperture} mm'
+
+        if instance.aperture in range(140, 160):
+            search_friendly_name += ' 6"'
+        elif instance.aperture in range(190, 210):
+            search_friendly_name += ' 8"'
+        elif instance.aperture in range(240, 260):
+            search_friendly_name += ' 10"'
+        elif instance.aperture in range(290, 310):
+            search_friendly_name += ' 12"'
+        elif instance.aperture in range(340, 360):
+            search_friendly_name += ' 14"'
+        elif instance.aperture in range(390, 410):
+            search_friendly_name += ' 16"'
+
+    instance.search_friendly_name = search_friendly_name
+
+
+@receiver(pre_save, sender=Mount)
+def set_search_friendly_name_for_mount(sender, instance, **kwargs):
+    search_friendly_name = ""
+
+    if instance.brand:
+        search_friendly_name += f' {instance.brand.name}'
+
+    instance.search_friendly_name = search_friendly_name
+
+
+@receiver(pre_save, sender=Filter)
+def set_search_friendly_name_for_filter(sender, instance, **kwargs):
+    search_friendly_name = ""
+
+    if instance.brand:
+        search_friendly_name += f' {instance.brand.name}'
+
+    if instance.bandwidth:
+        search_friendly_name += f' {instance.bandwidth} nm'
+
+    instance.search_friendly_name = search_friendly_name
+
+
+@receiver(pre_save, sender=Accessory)
+def set_search_friendly_name_for_accessory(sender, instance, **kwargs):
+    search_friendly_name = ""
+
+    if instance.brand:
+        search_friendly_name += f' {instance.brand.name}'
+
+    instance.search_friendly_name = search_friendly_name
+
+
+@receiver(pre_save, sender=Software)
+def set_search_friendly_name_for_software(sender, instance, **kwargs):
+    search_friendly_name = ""
+
+    if instance.brand:
+        search_friendly_name += f' {instance.brand.name}'
+
+    instance.search_friendly_name = search_friendly_name
+
+

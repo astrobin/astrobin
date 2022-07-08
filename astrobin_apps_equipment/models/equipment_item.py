@@ -169,6 +169,13 @@ class EquipmentItem(SafeDeleteModel):
         blank=False,
     )
 
+    search_friendly_name = models.CharField(
+        max_length=256,
+        null=False,
+        blank=False,
+        editable=False,
+    )
+
     community_notes = models.TextField(
         null=True,
         blank=True,
