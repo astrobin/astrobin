@@ -697,6 +697,7 @@ class ImageDetailView(ImageDetailViewBase):
                 if revision_image \
                 else ImageService.get_constellation(image.solution),
             'resolution': '%dx%d' % (w, h) if (w and h) else None,
+            'file_size': revision_image.uploader_upload_length if revision_image else image.uploader_upload_length,
             'locations': locations,
             'solar_system_main_subject': ImageService(image).get_solar_system_main_subject_label(),
             'content_type': ContentType.objects.get(app_label='astrobin', model='image'),
