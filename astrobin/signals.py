@@ -140,6 +140,9 @@ pre_save.connect(image_pre_save_invalidate_thumbnails, sender=Image)
 def image_post_save(sender, instance, created, **kwargs):
     # type: (object, Image, bool, object) -> None
 
+    if instance.deleted:
+        return
+
     if created:
         instance.user.userprofile.premium_counter += 1
         instance.user.userprofile.save(keep_deleted=True)
