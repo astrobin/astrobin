@@ -946,6 +946,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
         ("TAIYUGE", "TaiYuge Observatory"),
         ("TELI", "Telescope Live"),
         ("WTO", "West Texas Observatory (WTO)"),
+        ("YINHE", "YinHe Observatory"),
         ("YUNLING", "Yunling Observatory"),
 
         ("OTHER", _("None of the above"))
