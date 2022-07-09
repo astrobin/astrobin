@@ -305,7 +305,9 @@ def set_search_friendly_name_for_sensor(sender, instance, **kwargs):
     if instance.brand:
         search_friendly_name += f' {instance.brand.name}'
 
-    instance.search_friendly_name = search_friendly_name
+    search_friendly_name += f' {" ".join(UtilsService.split_text_alphanumerically(instance.name))}'
+
+    instance.search_friendly_name = search_friendly_name.strip()
 
 
 @receiver(pre_save, sender=Camera)
@@ -315,13 +317,15 @@ def set_search_friendly_name_for_camera(sender, instance, **kwargs):
     if instance.brand:
         search_friendly_name += f' {instance.brand.name}'
 
+    search_friendly_name += f' {" ".join(UtilsService.split_text_alphanumerically(instance.name))}'
+
     if instance.sensor and instance.sensor.color_or_mono == 'C':
         search_friendly_name += f' color'
 
     if instance.sensor and instance.sensor.color_or_mono == 'M':
         search_friendly_name += f' mono'
 
-    instance.search_friendly_name = search_friendly_name
+    instance.search_friendly_name = search_friendly_name.strip()
 
 
 @receiver(pre_save, sender=Telescope)
@@ -349,7 +353,7 @@ def set_search_friendly_name_for_telescope(sender, instance, **kwargs):
         elif instance.aperture in range(390, 410):
             search_friendly_name += ' 16"'
 
-    instance.search_friendly_name = search_friendly_name
+    instance.search_friendly_name = search_friendly_name.strip()
 
 
 @receiver(pre_save, sender=Mount)
@@ -359,7 +363,9 @@ def set_search_friendly_name_for_mount(sender, instance, **kwargs):
     if instance.brand:
         search_friendly_name += f' {instance.brand.name}'
 
-    instance.search_friendly_name = search_friendly_name
+    search_friendly_name += f' {" ".join(UtilsService.split_text_alphanumerically(instance.name))}'
+
+    instance.search_friendly_name = search_friendly_name.strip()
 
 
 @receiver(pre_save, sender=Filter)
@@ -369,10 +375,12 @@ def set_search_friendly_name_for_filter(sender, instance, **kwargs):
     if instance.brand:
         search_friendly_name += f' {instance.brand.name}'
 
+    search_friendly_name += f' {" ".join(UtilsService.split_text_alphanumerically(instance.name))}'
+
     if instance.bandwidth:
         search_friendly_name += f' {instance.bandwidth} nm'
 
-    instance.search_friendly_name = search_friendly_name
+    instance.search_friendly_name = search_friendly_name.strip()
 
 
 @receiver(pre_save, sender=Accessory)
@@ -382,7 +390,9 @@ def set_search_friendly_name_for_accessory(sender, instance, **kwargs):
     if instance.brand:
         search_friendly_name += f' {instance.brand.name}'
 
-    instance.search_friendly_name = search_friendly_name
+    search_friendly_name += f' {" ".join(UtilsService.split_text_alphanumerically(instance.name))}'
+
+    instance.search_friendly_name = search_friendly_name.strip()
 
 
 @receiver(pre_save, sender=Software)
@@ -392,6 +402,8 @@ def set_search_friendly_name_for_software(sender, instance, **kwargs):
     if instance.brand:
         search_friendly_name += f' {instance.brand.name}'
 
-    instance.search_friendly_name = search_friendly_name
+    search_friendly_name += f' {" ".join(UtilsService.split_text_alphanumerically(instance.name))}'
+
+    instance.search_friendly_name = search_friendly_name.strip()
 
 
