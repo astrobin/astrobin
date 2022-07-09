@@ -88,10 +88,10 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                     search_friendly_distance=TrigramDistance('search_friendly_name', q),
                 ).filter(
                     Q(
-                        Q(search_friendly_distance__lte=.6) |
+                        Q(search_friendly_distance__lte=.85) |
                         Q(search_friendly_name__icontains=q) |
                         Q(variants__search_friendly_name__icontains=q) |
-                        Q(full_name_distance__lte=.6) |
+                        Q(full_name_distance__lte=.85) |
                         Q(full_name__icontains=q) |
                         Q(variants__full_name__icontains=q)
                     ) &
