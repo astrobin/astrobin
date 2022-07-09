@@ -84,10 +84,16 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             else:
                 queryset = queryset.annotate(
                     full_name=Concat('brand__name', Value(' '), 'name'),
-                    distance=TrigramDistance('full_name', q)
+                    full_name_distance=TrigramDistance('full_name', q),
+                    search_friendly_distance=TrigramDistance('search_friendly_name', q),
                 ).filter(
                     Q(
-                        Q(distance__lte=.8) | Q(full_name__icontains=q) | Q(variants__name__icontains=q)
+                        Q(search_friendly_distance__lte=.6) |
+                        Q(search_friendly_name__icontains=q) |
+                        Q(variants__search_friendly_name__icontains=q) |
+                        Q(full_name_distance__lte=.6) |
+                        Q(full_name__icontains=q) |
+                        Q(variants__full_name__icontains=q)
                     ) &
                     Q(
                         Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
@@ -95,9 +101,9 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                     )
                 ).distinct(
                 ).order_by(
-                    'distance',
-                    Lower('brand__name'),
-                    Lower('name'),
+                    'search_friendly_distance',
+                    'full_name_distance',
+                    Lower('full_name'),
                 )
         elif sort == 'az':
             queryset = queryset.order_by(Lower('brand__name'), Lower('name'))
