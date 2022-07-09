@@ -4,7 +4,14 @@ from astrobin_apps_equipment.services import EquipmentItemService
 
 
 class EquipmentItemSerializer(serializers.ModelSerializer):
+    brand_name = serializers.SerializerMethodField(read_only=True)
     variants = serializers.SerializerMethodField(read_only=True)
+
+    def get_brand_name(self, item):
+        if item.brand:
+            return item.brand.name
+
+        return ""
 
     def get_variants(self, item):
         ModelClass = self.__class__.Meta.model
@@ -23,6 +30,7 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
             'created',
             'updated',
             'brand',
+            'brand_name',
             'name',
             'website',
             'image',
