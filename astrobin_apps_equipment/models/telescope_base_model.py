@@ -143,7 +143,9 @@ class TelescopeBaseModel(EquipmentItem):
             if item_property == 'type':
                 property_value = self.type_label()
             elif item_property == 'focal_length':
-                if self.min_focal_length == self.max_focal_length:
+                if self.min_focal_length is None or self.max_focal_length is None:
+                    property_value = None
+                elif self.min_focal_length == self.max_focal_length:
                     property_value = '%g' % self.min_focal_length
                 else:
                     property_value = '%g - %g' % (self.min_focal_length, self.max_focal_length)
