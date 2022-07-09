@@ -207,7 +207,7 @@ def image_post_save(sender, instance, created, **kwargs):
 post_save.connect(image_post_save, sender=Image)
 
 
-def image_post_delete(sender, instance, **kwargs):
+def image_post_softdelete(sender, instance, **kwargs):
     def decrease_counter(user):
         user.userprofile.premium_counter -= 1
         with transaction.atomic():
@@ -237,9 +237,7 @@ def image_post_delete(sender, instance, **kwargs):
         pass
 
 
-post_softdelete.connect(image_post_delete, sender=Image)
-post_delete.connect(image_post_delete, sender=Image)
-
+post_softdelete.connect(image_post_softdelete, sender=Image)
 
 def imagerevision_pre_save(sender, instance, **kwargs):
     if instance.pk:
