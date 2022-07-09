@@ -33,16 +33,16 @@ class EquipmentItemFilter(FilterSet):
         else:
             queryset = queryset.exclude(edit_proposals__gt=0)
 
-        return queryset.filter(
+        queryset = queryset.filter(
             edit_proposals__deleted__isnull=True,
             edit_proposals__edit_proposal_review_status__isnull=True,
             reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
-        ).exclude(
-            edit_proposals__edit_proposal_by=self.request.user
-        ).distinct(
-        ).order_by(
-            '-created'
         )
+
+        if self.request.user.is_authenticated:
+            queryset = queryset.exclude(edit_proposals__edit_proposal_by=self.request.user)
+
+        return queryset.distinct().order_by('-created')
 
     class Meta:
         abstract = True

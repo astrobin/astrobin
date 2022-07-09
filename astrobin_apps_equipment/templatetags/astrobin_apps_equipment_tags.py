@@ -185,7 +185,7 @@ def is_own_equipment_migrator(user) -> bool:
 
 @register.filter
 def can_access_basic_equipment_functions(user) -> bool:
-    return is_equipment_moderator(user) or is_own_equipment_migrator(user)
+    return True
 
 
 @register.filter
