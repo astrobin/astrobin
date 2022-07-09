@@ -83,17 +83,13 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 queryset = brand_queryset
             else:
                 queryset = queryset.annotate(
-                    full_name=Concat('brand__name', Value(' '), 'name'),
-                    full_name_distance=TrigramDistance('full_name', q),
                     search_friendly_distance=TrigramDistance('search_friendly_name', q),
                 ).filter(
                     Q(
                         Q(search_friendly_distance__lte=.85) |
                         Q(search_friendly_name__icontains=q) |
                         Q(variants__search_friendly_name__icontains=q) |
-                        Q(full_name_distance__lte=.85) |
-                        Q(full_name__icontains=q) |
-                        Q(variants__full_name__icontains=q)
+                        Q(variants__name__icontains=q)
                     ) &
                     Q(
                         Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
@@ -102,21 +98,20 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 ).distinct(
                 ).order_by(
                     'search_friendly_distance',
-                    'full_name_distance',
-                    Lower('full_name'),
-                )
+                    Lower('search_friendly_name'),
+                )[:50]
         elif sort == 'az':
-            queryset = queryset.order_by(Lower('brand__name'), Lower('name'))
+            queryset = queryset.order_by(Lower('search_friendly_name'))
         elif sort == '-az':
-            queryset = queryset.order_by(Lower('brand__name'), Lower('name')).reverse()
+            queryset = queryset.order_by(Lower('search_friendly_name')).reverse()
         elif sort == 'users':
-            queryset = queryset.order_by('user_count', Lower('brand__name'), Lower('name'))
+            queryset = queryset.order_by('user_count', Lower('search_friendly_name'))
         elif sort == '-users':
-            queryset = queryset.order_by('-user_count', Lower('brand__name'), Lower('name'))
+            queryset = queryset.order_by('-user_count', Lower('search_friendly_name'))
         elif sort == 'images':
-            queryset = queryset.order_by('image_count', Lower('brand__name'), Lower('name'))
+            queryset = queryset.order_by('image_count', Lower('search_friendly_name'))
         elif sort == '-images':
-            queryset = queryset.order_by('-image_count', Lower('brand__name'), Lower('name'))
+            queryset = queryset.order_by('-image_count', Lower('search_friendly_name'))
 
         return queryset
 
