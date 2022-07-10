@@ -7,6 +7,7 @@ from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.models import EquipmentBrand, Telescope
 from astrobin_apps_equipment.models.telescope_base_model import TelescopeType
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
+from common.constants import GroupName
 
 
 class TestApiTelescopeViewSet(TestCase):
@@ -35,7 +36,7 @@ class TestApiTelescopeViewSet(TestCase):
         )
         self.assertEquals(405, response.status_code)
 
-        user = Generators.user(groups=['equipment_moderators'])
+        user = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
         client.login(username=user.username, password=user.password)
         client.force_authenticate(user=user)
 
@@ -72,7 +73,7 @@ class TestApiTelescopeViewSet(TestCase):
     def test_created_by(self):
         client = APIClient()
 
-        user = Generators.user(groups=['equipment_moderators'])
+        user = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
         client.login(username=user.username, password=user.password)
         client.force_authenticate(user=user)
 
@@ -148,7 +149,7 @@ class TestApiTelescopeViewSet(TestCase):
     @mock.patch("astrobin_apps_equipment.services.equipment_service.push_notification")
     def test_reject(self, push_notification):
         user = Generators.user()
-        moderator = Generators.user(groups=['equipment_moderators'])
+        moderator = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
         telescope = EquipmentGenerators.telescope(created_by=user)
         image = Generators.image(user=user)
         image.imaging_telescopes_2.add(telescope)

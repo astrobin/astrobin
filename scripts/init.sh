@@ -9,6 +9,7 @@ python manage.py migrate --run-syncdb --noinput
 
 # Create initial data
 python manage.py shell << EOF
+from astrobin.constants import GroupName
 from django.contrib.auth.models import Group, User
 from django.contrib.sites.models import Site
 
@@ -244,7 +245,9 @@ except Subscription.DoesNotExist:
 Group.objects.get_or_create(name='auto_approve_content')
 Group.objects.get_or_create(name='content_moderators')
 Group.objects.get_or_create(name='image_moderators')
-Group.objects.get_or_create(name='equipment_moderators')
+Group.objects.get_or_create(name=GroupName.OWN_EQUIPMENT_MIGRATORS)
+Group.objects.get_or_create(name=GroupName.GLOBAL_EQUIPMENT_MIGRATORS)
+Group.objects.get_or_create(name=GroupName.EQUIPMENT_MODERATORS)
 Group.objects.get_or_create(name='iotd_staff')
 Group.objects.get_or_create(name='iotd_submitters')
 Group.objects.get_or_create(name='iotd_reviewers')

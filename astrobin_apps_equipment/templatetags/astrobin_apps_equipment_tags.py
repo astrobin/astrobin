@@ -11,6 +11,7 @@ from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_equipment.services import EquipmentService
+from common.constants import GroupName
 
 register = Library()
 
@@ -175,12 +176,12 @@ def unique_equipment_item_listings_for_legacy_gear(image, country):
 
 @register.filter
 def is_equipment_moderator(user) -> bool:
-    return user.is_authenticated and user.groups.filter(name='equipment_moderators').exists()
+    return user.is_authenticated and user.groups.filter(name=GroupName.EQUIPMENT_MODERATORS).exists()
 
 
 @register.filter
 def is_own_equipment_migrator(user) -> bool:
-    return user.is_authenticated and user.groups.filter(name='own_equipment_migrators').exists()
+    return user.is_authenticated and user.groups.filter(name=GroupName.OWN_EQUIPMENT_MIGRATORS).exists()
 
 
 @register.filter

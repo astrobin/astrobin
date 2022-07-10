@@ -59,6 +59,7 @@ from astrobin.shortcuts import ajax_response, ajax_success
 from astrobin.templatetags.tags import in_upload_wizard
 from astrobin.utils import get_client_country_code
 from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import can_access_basic_equipment_functions
+from common.constants import GroupName
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_platesolving.forms import PlateSolvingAdvancedSettingsForm, PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
@@ -1528,7 +1529,7 @@ def user_profile_edit_gear(request):
             uniq([x.get_make() for x in Gear.objects.exclude(make=None).exclude(make='')])),
         'all_gear_names': simplejson.dumps(
             uniq([x.get_name() for x in Gear.objects.exclude(name=None).exclude(name='')])),
-        'is_own_equipment_migrator': request.user.groups.filter(name='own_equipment_migrators').exists(),
+        'is_own_equipment_migrator': request.user.groups.filter(name=GroupName.OWN_EQUIPMENT_MIGRATORS).exists(),
         'has_unmigrated_legacy_gear_items': GearService.has_unmigrated_legacy_gear_items(request.user),
     }
 
