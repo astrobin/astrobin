@@ -17,6 +17,7 @@ from astrobin_apps_equipment.models.deep_sky_acquisition_migration_record import
 from astrobin_apps_equipment.models import Filter as Filter2
 from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
+from common.constants import GroupName
 
 
 class EquipmentServiceApplyMigrationMigrateTest(TestCase):
@@ -72,9 +73,9 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
         self.assertFalse(image.imaging_telescopes_2.filter(pk=new_telescope.pk).exists())
 
     def test_telescope_imaging_global_migration(self):
-        moderator = Generators.user(groups=["equipment_moderators"])
-        user_1 = Generators.user(groups=["own_equipment_migrators"])
-        user_2 = Generators.user(groups=["own_equipment_migrators"])
+        moderator = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+        user_1 = Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS])
+        user_2 = Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS])
         telescope = Generators.telescope()
         new_telescope = EquipmentGenerators.telescope()
 
@@ -169,9 +170,9 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
         self.assertFalse(image.imaging_cameras_2.filter(pk=new_camera.pk).exists())
 
     def test_camera_imaging_global_migration(self):
-        moderator = Generators.user(groups=["equipment_moderators"])
-        user_1 = Generators.user(groups=["own_equipment_migrators"])
-        user_2 = Generators.user(groups=["own_equipment_migrators"])
+        moderator = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+        user_1 = Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS])
+        user_2 = Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS])
 
         image_1 = Generators.image(user=user_1)
         image_2 = Generators.image(user=user_2)
@@ -233,9 +234,9 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
         self.assertFalse(image_2.imaging_cameras_2.filter(pk=new_camera.pk).exists())
 
     def test_camera_imaging_global_migration_non_dslr(self):
-        moderator = Generators.user(groups=["equipment_moderators"])
-        user_1 = Generators.user(groups=["own_equipment_migrators"])
-        user_2 = Generators.user(groups=["own_equipment_migrators"])
+        moderator = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+        user_1 = Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS])
+        user_2 = Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS])
 
         image_1 = Generators.image(user=user_1)
         image_2 = Generators.image(user=user_2)
@@ -512,9 +513,9 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
         )
 
     def test_filter_global_migration(self):
-        moderator = Generators.user(groups=["equipment_moderators"])
-        user_1 = Generators.user(groups=["own_equipment_migrators"])
-        user_2 = Generators.user(groups=["own_equipment_migrators"])
+        moderator = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+        user_1 = Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS])
+        user_2 = Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS])
         user_3 = Generators.user() # This user will not receive the migrations
 
         filter = Generators.filter()

@@ -5,6 +5,7 @@ from rest_framework.test import APIClient
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
+from common.constants import GroupName
 
 
 class TestApiEquipmentItemGroupViewSet(TestCase):
@@ -40,7 +41,7 @@ class TestApiEquipmentItemGroupViewSet(TestCase):
         response = client.delete(reverse('astrobin_apps_equipment:equipment-item-group-detail', args=(group.pk,)), format='json')
         self.assertEquals(401, response.status_code)
 
-        user = Generators.user(groups=['equipment_moderators'])
+        user = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
         client.login(username=user.username, password=user.password)
         client.force_authenticate(user=user)
 

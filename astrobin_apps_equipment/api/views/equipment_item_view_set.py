@@ -29,6 +29,7 @@ from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
 from astrobin_apps_equipment.tasks import reject_item
+from common.constants import GroupName
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_access_full_search
@@ -62,7 +63,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         if 'EditProposal' not in str(self.get_serializer().Meta.model):
             if self.request.user.is_authenticated:
-                if not self.request.user.groups.filter(name='equipment_moderators').exists():
+                if not self.request.user.groups.filter(name=GroupName.EQUIPMENT_MODERATORS).exists():
                     queryset = queryset.filter(Q(brand__isnull=False) | Q(created_by=self.request.user))
             else:
                 queryset = queryset.filter(brand__isnull=False)
@@ -237,7 +238,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['POST'], url_path='acquire-reviewer-lock')
     def acquire_reviewer_lock(self, request, pk):
-        if not request.user.groups.filter(name='equipment_moderators').exists():
+        if not request.user.groups.filter(name=GroupName.EQUIPMENT_MODERATORS).exists():
             raise PermissionDenied(request.user)
 
         item: EquipmentItem = self.get_object()
@@ -264,7 +265,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['POST'], url_path='acquire-edit-proposal-lock')
     def acquire_edit_proposal_lock(self, request, pk):
-        if not request.user.groups.filter(name='own_equipment_migrators').exists():
+        if not request.user.groups.filter(name=GroupName.OWN_EQUIPMENT_MIGRATORS).exists():
             raise PermissionDenied(request.user)
 
         item: EquipmentItem = self.get_object()
@@ -291,7 +292,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['POST'])
     def approve(self, request, pk):
-        if not request.user.groups.filter(name='equipment_moderators').exists():
+        if not request.user.groups.filter(name=GroupName.EQUIPMENT_MODERATORS).exists():
             raise PermissionDenied(request.user)
 
         item: EquipmentItem = get_object_or_404(self.get_serializer().Meta.model.objects, pk=pk)
@@ -337,7 +338,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['POST'])
     def unapprove(self, request, pk):
-        if not request.user.groups.filter(name='equipment_moderators').exists():
+        if not request.user.groups.filter(name=GroupName.EQUIPMENT_MODERATORS).exists():
             raise PermissionDenied(request.user)
 
         item: EquipmentItem = get_object_or_404(self.get_serializer().Meta.model.objects, pk=pk)
@@ -362,7 +363,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['POST'])
     def reject(self, request, pk):
-        if not request.user.groups.filter(name='equipment_moderators').exists():
+        if not request.user.groups.filter(name=GroupName.EQUIPMENT_MODERATORS).exists():
             raise PermissionDenied(request.user)
 
         ModelClass = self.get_serializer().Meta.model

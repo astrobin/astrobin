@@ -26,6 +26,7 @@ from astrobin_apps_equipment.models.sensor_edit_proposal import SensorEditPropos
 from astrobin_apps_equipment.models.software_edit_proposal import SoftwareEditProposal
 from astrobin_apps_equipment.models.telescope_edit_proposal import TelescopeEditProposal
 from astrobin_apps_equipment.notice_types import EQUIPMENT_NOTICE_TYPES
+from common.constants import GroupName
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.services import AppRedirectionService
 from nested_comments.models import NestedComment
@@ -284,7 +285,7 @@ def send_equipment_item_requires_moderation_notification(sender, instance, creat
     url = urlunparse(parsed)
 
     push_notification(
-        User.objects.filter(groups__name='equipment_moderators'),
+        User.objects.filter(groups__name=GroupName.EQUIPMENT_MODERATORS),
         None,
         'equipment-item-requires-moderation',
         {
