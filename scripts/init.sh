@@ -9,7 +9,7 @@ python manage.py migrate --run-syncdb --noinput
 
 # Create initial data
 python manage.py shell << EOF
-from astrobin.constants import GroupName
+from common.constants import GroupName
 from django.contrib.auth.models import Group, User
 from django.contrib.sites.models import Site
 
