@@ -3,6 +3,7 @@ from django.db.models import Q, QuerySet
 from django_filters.rest_framework import FilterSet
 
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
+from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 
 
@@ -14,7 +15,7 @@ class EquipmentItemFilter(FilterSet):
         condition = args[0]
 
         is_authenticated: bool = self.request.user.is_authenticated
-        is_moderator: bool = is_authenticated and self.request.user.groups.filter(name=GroupName.EQUIPMENT_MODERATORS).exists()
+        is_moderator: bool = UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS)
 
         if not is_authenticated or not is_moderator:
             return queryset.none()

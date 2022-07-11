@@ -529,27 +529,15 @@ def get_subscription_url_by_name(name):
 
 @register.filter
 def is_content_moderator(user):
-    if not user.is_authenticated:
-        return False
-
-    return user.groups.filter(name='content_moderators').count() > 0
-
+    return UserService(user).is_in_group('content_moderators')
 
 @register.filter
 def is_image_moderator(user):
-    if not user.is_authenticated:
-        return False
-
-    return user.groups.filter(name='image_moderators').count() > 0
-
+    return UserService(user).is_in_group('image_moderators')
 
 @register.filter
 def is_forum_moderator(user):
-    if not user.is_authenticated:
-        return False
-
-    return user.groups.filter(name='forum_moderators').count() > 0
-
+    return UserService(user).is_in_group('forum_moderators')
 
 @register.filter
 def can_like(user, target):

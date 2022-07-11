@@ -6,23 +6,24 @@ from django.template import Library
 from astrobin.models import Image
 from astrobin_apps_iotd.models import Iotd
 from astrobin_apps_iotd.services import IotdService
+from astrobin_apps_users.services import UserService
 
 register = Library()
 
 
 @register.filter
 def is_iotd_submitter(user):
-    return user.groups.filter(name='iotd_submitters').exists()
+    return UserService(user).is_in_group('iotd_submitters')
 
 
 @register.filter
 def is_iotd_reviewer(user):
-    return user.groups.filter(name='iotd_reviewers').exists()
+    return UserService(user).is_in_group('iotd_reviewers')
 
 
 @register.filter
 def is_iotd_judge(user):
-    return user.groups.filter(name='iotd_judges').exists()
+    return UserService(user).is_in_group('iotd_judges')
 
 
 @register.filter

@@ -1,5 +1,6 @@
 from rest_framework import permissions
 
+from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 
 
@@ -8,6 +9,6 @@ class IsEquipmentModeratorOrOwnMigratorOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return request.user.groups.filter(
-            name__in=[GroupName.EQUIPMENT_MODERATORS, GroupName.OWN_EQUIPMENT_MIGRATORS]
-        ).exists()
+        return UserService(request.user).is_in_group(
+            [GroupName.EQUIPMENT_MODERATORS, GroupName.OWN_EQUIPMENT_MIGRATORS]
+        )

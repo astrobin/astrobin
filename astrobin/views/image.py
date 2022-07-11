@@ -58,6 +58,7 @@ from astrobin.utils import get_client_country_code, get_image_resolution
 from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import can_access_basic_equipment_functions
 from astrobin_apps_groups.forms import AutoSubmitToIotdTpProcessForm, GroupSelectForm
 from astrobin_apps_groups.models import Group
+from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
@@ -1110,9 +1111,9 @@ class ImageEditGearView(ImageEditBaseView):
 
         context['no_gear'] = profile.telescopes.count() == 0 and profile.cameras.count() == 0
         context['copy_gear_form'] = CopyGearForm(user, context['image'])
-        context['is_own_equipment_migrator'] = user.groups.filter(
-            name__in=[GroupName.EQUIPMENT_MODERATORS, GroupName.OWN_EQUIPMENT_MIGRATORS]
-        ).exists()
+        context['is_own_equipment_migrator'] = UserService(user).is_in_group(
+            [GroupName.EQUIPMENT_MODERATORS. GroupName.OWN_EQUIPMENT_MIGRATORS]
+        )
 
         return context
 

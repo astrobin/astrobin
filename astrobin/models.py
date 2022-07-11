@@ -23,6 +23,7 @@ from astrobin.services import CloudflareService
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_notifications.services import NotificationsService
+from astrobin_apps_users.services import UserService
 from common.services import DateTimeService
 from common.upload_paths import data_download_upload_path, image_upload_path, uncompressed_source_upload_path
 from common.utils import get_sentinel_user
@@ -2863,22 +2864,22 @@ class UserProfile(SafeDeleteModel):
         return scores
 
     def is_moderator(self):
-        return self.user.groups.filter(name='content_moderators')
+        return UserService(self.user).is_in_group('content_moderators')
 
     def is_image_moderator(self):
-        return self.user.groups.filter(name='image_moderators')
+        return UserService(self.user).is_in_group('image_moderators')
 
     def is_iotd_staff(self):
-        return self.user.groups.filter(name='iotd_staff')
+        return UserService(self.user).is_in_group('iotd_staff')
 
     def is_iotd_submitter(self):
-        return self.user.groups.filter(name='iotd_submitters')
+        return UserService(self.user).is_in_group('iotd_submitters')
 
     def is_iotd_reviewer(self):
-        return self.user.groups.filter(name='iotd_reviewers')
+        return UserService(self.user).is_in_group('iotd_reviewers')
 
     def is_iotd_judge(self):
-        return self.user.groups.filter(name='iotd_judges')
+        return UserService(self.user).is_in_group('iotd_judges')
 
     class Meta:
         app_label = 'astrobin'
