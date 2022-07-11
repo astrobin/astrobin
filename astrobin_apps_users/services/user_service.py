@@ -64,20 +64,25 @@ class UserService:
         except Group.DoesNotExist:
             return []
 
-    def get_all_images(self):
-        # type: () -> QuerySet
+    def get_all_images(self) -> QuerySet:
+        from astrobin.models import Image
         return Image.objects_including_wip.filter(user=self.user)
 
     def get_public_images(self) -> QuerySet:
+        from astrobin.models import Image
         return Image.objects.filter(user=self.user)
 
     def get_wip_images(self) -> QuerySet:
+        from astrobin.models import Image
         return Image.wip.filter(user=self.user)
 
     def get_deleted_images(self) -> QuerySet:
+        from astrobin.models import Image
         return Image.deleted_objects.filter(user=self.user)
 
     def get_bookmarked_images(self) -> QuerySet:
+        from astrobin.models import Image
+
         image_ct = ContentType.objects.get_for_model(Image)  # type: ContentType
         bookmarked_pks: List[int] = [x.object_id for x in \
                           ToggleProperty.objects.toggleproperties_for_user("bookmark", self.user).filter(
@@ -86,8 +91,9 @@ class UserService:
 
         return Image.objects.filter(pk__in=bookmarked_pks)
 
-    def get_liked_images(self):
-        # type: () -> QuerySet
+    def get_liked_images(self) -> QuerySet:
+        from astrobin.models import Image
+
         image_ct = ContentType.objects.get_for_model(Image)  # type: ContentType
         liked_pks = [
             x.object_id for x in \
@@ -248,6 +254,8 @@ class UserService:
                         _do_clear(language[0], section, subsection, view)
 
     def empty_trash(self) -> int:
+        from astrobin.models import Image
+
         images: SafeDeleteQueryset = Image.deleted_objects.filter(user=self.user)
         count: int = images.count()
 
