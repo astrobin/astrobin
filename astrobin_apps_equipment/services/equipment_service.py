@@ -405,7 +405,7 @@ class EquipmentService:
                         getattr(image, destination_map.get(duplicate_of.klass)).add(replace_with)
 
                 push_notification(
-                    [affected_item.created_by],
+                    [image.user],
                     reviewer,
                     'equipment-item-rejected-affected-image',
                     {
