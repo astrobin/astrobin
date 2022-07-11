@@ -540,7 +540,7 @@ class UserService:
         return queryset, menu
 
     def update_premium_counter_on_subscription(self, subscription: Subscription):
-        from astrobin.models import UserProfile
+        from astrobin.models import Image, UserProfile
 
         profile: UserProfile = self.user.userprofile
 
