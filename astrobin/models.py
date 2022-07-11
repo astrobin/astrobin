@@ -1085,7 +1085,7 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     remote_source = models.CharField(
         verbose_name=_("Remote data source"),
         help_text=_("Which remote hosting facility did you use to acquire data for this image?"),
-        max_length=8,
+        max_length=10,
         choices=REMOTE_OBSERVATORY_CHOICES,
         null=True,
         blank=True,

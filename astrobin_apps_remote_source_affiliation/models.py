@@ -6,7 +6,7 @@ from safedelete.models import SafeDeleteModel
 
 
 class RemoteSourceAffiliate(SafeDeleteModel):
-    code = models.CharField(max_length=8)
+    code = models.CharField(max_length=10)
     name = models.CharField(max_length=64)
     url = models.CharField(max_length=256)
     affiliation_start = models.DateTimeField(null=True, blank=True)

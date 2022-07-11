@@ -29,7 +29,7 @@ class EquipmentPreset(SafeDeleteModel):
 
     remote_source = models.CharField(
         verbose_name=_('Remote data source'),
-        max_length=8,
+        max_length=10,
         null=True,
         blank=True,
     )
