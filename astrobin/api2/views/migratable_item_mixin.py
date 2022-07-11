@@ -17,6 +17,7 @@ from astrobin.models import (
     Telescope as LegacyTelescope,
 )
 from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Software, Telescope
+from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 
 
@@ -26,10 +27,10 @@ class MigratableItemMixin:
             raise PermissionDenied
 
         if allow_own_equipment_migrators:
-            if not user.groups.filter(name__in=[GroupName.EQUIPMENT_MODERATORS, GroupName.OWN_EQUIPMENT_MIGRATORS]).exists():
+            if not UserService(user).is_in_group([GroupName.EQUIPMENT_MODERATORS, GroupName.OWN_EQUIPMENT_MIGRATORS]):
                 raise PermissionDenied
         else:
-            if not user.groups.filter(name=GroupName.EQUIPMENT_MODERATORS).exists():
+            if not UserService(user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
                 raise PermissionDenied
 
 
@@ -48,7 +49,7 @@ class MigratableItemMixin:
         return queryset.filter(pk__in=list(set(itemPks)))
 
     def __random_non_migrated_queryset(self, user: User, global_results: bool) -> QuerySet:
-        if global_results and not user.groups.filter(name=GroupName.EQUIPMENT_MODERATORS).exists():
+        if global_results and not UserService(user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
             raise PermissionDenied(
                 f'You are not part of the {GroupName.EQUIPMENT_MODERATORS} group and cannot access the global non-migrated items'
             )
@@ -144,7 +145,7 @@ class MigratableItemMixin:
         self.__check_permissions(request.user, allow_own_equipment_migrators=True)
 
         obj: Gear = self.get_object()
-        global_migration = request.user.groups.filter(name=GroupName.EQUIPMENT_MODERATORS).exists()
+        global_migration = UserService(user).is_in_group(GroupName.EQUIPMENT_MODERATORS)
 
         if global_migration and GearMigrationStrategy.objects.filter(gear=obj, user__isnull=True).exists():
             return Response(status=409)
@@ -183,7 +184,7 @@ class MigratableItemMixin:
         self.__check_permissions(request.user, allow_own_equipment_migrators=True)
 
         obj: Gear = self.get_object()
-        global_migration = request.user.groups.filter(name=GroupName.EQUIPMENT_MODERATORS).exists()
+        global_migration = UserService(request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS)
 
         if global_migration and GearMigrationStrategy.objects.filter(gear=obj, user__isnull=True).exists():
             return Response(status=409)

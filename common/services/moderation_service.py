@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 
+from astrobin_apps_users.services import UserService
+
 
 class ModerationService(object):
     @staticmethod
@@ -18,7 +20,7 @@ class ModerationService(object):
             if user.email.endswith(domain):
                 return True
 
-        if user.groups.filter(name="auto_approve_content").exists():
+        if UserService(user).is_in_group('auto_approve_content'):
             return True
 
         return False

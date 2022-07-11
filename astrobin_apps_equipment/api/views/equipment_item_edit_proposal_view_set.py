@@ -15,6 +15,7 @@ from astrobin_apps_equipment.api.throttle.equipment_edit_proposal_throttle impor
 from astrobin_apps_equipment.api.views.equipment_item_view_set import EquipmentItemViewSet
 from astrobin_apps_equipment.models import EquipmentItem
 from astrobin_apps_equipment.models.equipment_item_edit_proposal_mixin import EquipmentItemEditProposalMixin
+from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.services import AppRedirectionService
@@ -35,7 +36,7 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
 
     @action(detail=True, methods=['POST'], url_path='acquire-review-lock')
     def acquire_review_lock(self, request, pk):
-        if not request.user.groups.filter(name=GroupName.OWN_EQUIPMENT_MIGRATORS).exists():
+        if not UserService(request.user).is_in_group(GroupName.OWN_EQUIPMENT_MIGRATORS):
             raise PermissionDenied(request.user)
 
         edit_proposal: EquipmentItemEditProposalMixin = self.get_object()
@@ -87,8 +88,8 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
             )
 
         if target.name != edit_proposal.name and \
-                not request.user.groups.filter(name=GroupName.EQUIPMENT_MODERATORS).exists() and \
-                not edit_proposal.created_by.groups.filter(name=GroupName.EQUIPMENT_MODERATORS) and \
+                not UserService(request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS) and \
+                not UserService(edit_proposal.created_by).is_in_group(GroupName.EQUIPMENT_MODERATORS) and \
                 not target.reviewer_decision is None:
             return Response(
                 _(

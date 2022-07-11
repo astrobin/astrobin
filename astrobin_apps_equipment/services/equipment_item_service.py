@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from rest_framework.exceptions import PermissionDenied, ValidationError
 
+from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 
 
@@ -29,7 +30,7 @@ class EquipmentItemService:
 
     @staticmethod
     def validate(user: User, attrs):
-        if not user.groups.filter(name__in=[GroupName.EQUIPMENT_MODERATORS, GroupName.OWN_EQUIPMENT_MIGRATORS]).exists():
+        if not UserService(user).is_in_group([GroupName.EQUIPMENT_MODERATORS, GroupName.OWN_EQUIPMENT_MIGRATORS]):
             raise PermissionDenied("You don't have permission to create or edit equipment items")
 
         brand = attrs['brand'] if 'brand' in attrs else None

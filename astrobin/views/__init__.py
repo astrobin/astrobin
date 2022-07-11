@@ -1529,7 +1529,7 @@ def user_profile_edit_gear(request):
             uniq([x.get_make() for x in Gear.objects.exclude(make=None).exclude(make='')])),
         'all_gear_names': simplejson.dumps(
             uniq([x.get_name() for x in Gear.objects.exclude(name=None).exclude(name='')])),
-        'is_own_equipment_migrator': request.user.groups.filter(name=GroupName.OWN_EQUIPMENT_MIGRATORS).exists(),
+        'is_own_equipment_migrator': UserService(request.user).is_in_group(GroupName.OWN_EQUIPMENT_MIGRATORS),
         'has_unmigrated_legacy_gear_items': GearService.has_unmigrated_legacy_gear_items(request.user),
     }
 
