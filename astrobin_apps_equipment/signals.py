@@ -26,8 +26,8 @@ from astrobin_apps_equipment.models.sensor_edit_proposal import SensorEditPropos
 from astrobin_apps_equipment.models.software_edit_proposal import SoftwareEditProposal
 from astrobin_apps_equipment.models.telescope_edit_proposal import TelescopeEditProposal
 from astrobin_apps_equipment.notice_types import EQUIPMENT_NOTICE_TYPES
-from common.constants import GroupName
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
+from common.constants import GroupName
 from common.services import AppRedirectionService
 from nested_comments.models import NestedComment
 
@@ -392,6 +392,19 @@ def set_search_friendly_name_for_accessory(sender, instance, **kwargs):
         search_friendly_name += f' {instance.brand.name}'
 
     search_friendly_name += f' {" ".join(UtilsService.split_text_alphanumerically(instance.name))}'
+
+    if (
+            "off" in search_friendly_name.lower() and
+            "axis" in search_friendly_name.lower() and
+            "oag" not in search_friendly_name.lower()
+    ):
+        search_friendly_name += ' oag'
+
+    if (
+        "oag" in search_friendly_name.lower() and
+        "axis" not in search_friendly_name.lower()
+    ):
+        search_friendly_name += ' off axis guider'
 
     instance.search_friendly_name = search_friendly_name.strip()
 
