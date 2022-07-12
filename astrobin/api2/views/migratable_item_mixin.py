@@ -145,7 +145,7 @@ class MigratableItemMixin:
         self.__check_permissions(request.user, allow_own_equipment_migrators=True)
 
         obj: Gear = self.get_object()
-        global_migration = UserService(user).is_in_group(GroupName.EQUIPMENT_MODERATORS)
+        global_migration = UserService(request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS)
 
         if global_migration and GearMigrationStrategy.objects.filter(gear=obj, user__isnull=True).exists():
             return Response(status=409)
