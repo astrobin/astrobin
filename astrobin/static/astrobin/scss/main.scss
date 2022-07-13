@@ -1166,6 +1166,17 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 }
 
+.image-description .subtle-container .body {
+  ul, ol {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+  }
+
+  li {
+    list-style: initial;
+  }
+}
+
 .image-basic-data {
   img.license {
     padding: 0 0 2px 2px;
