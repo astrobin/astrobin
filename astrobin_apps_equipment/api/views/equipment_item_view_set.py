@@ -64,10 +64,18 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         if 'EditProposal' not in str(self.get_serializer().Meta.model):
             if self.request.user.is_authenticated:
-                if not UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
-                    queryset = queryset.filter(Q(brand__isnull=False) | Q(created_by=self.request.user))
+                if UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
+                    queryset = queryset.filter(
+                        Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) | Q(created_by=self.request.user)
+                    )
+                else:
+                    queryset = queryset.filter(
+                        Q(brand__isnull=False) | Q(created_by=self.request.user)
+                    )
             else:
-                queryset = queryset.filter(brand__isnull=False)
+                queryset = queryset.filter(
+                    brand__isnull=False,
+                    reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
 
         if q:
             brand = get_object_or_None(EquipmentBrand, name__iexact=q)
@@ -92,10 +100,6 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                         Q(search_friendly_name__icontains=q) |
                         Q(variants__search_friendly_name__icontains=q) |
                         Q(variants__name__icontains=q)
-                    ) &
-                    Q(
-                        Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
-                        (Q(created_by=self.request.user) if self.request.user.is_authenticated else Q(pk=None))
                     )
                 ).distinct(
                 ).order_by(
