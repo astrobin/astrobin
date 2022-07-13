@@ -3,6 +3,7 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 
 from astrobin.tests.generators import Generators
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.filter_base_model import FilterType
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from common.constants import GroupName
@@ -18,7 +19,7 @@ class TestApiFilterViewSet(TestCase):
     def test_list_with_items(self):
         client = APIClient()
 
-        filter = EquipmentGenerators.filter()
+        filter = EquipmentGenerators.filter(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
 
         response = client.get(reverse('astrobin_apps_equipment:filter-list'), format='json')
         self.assertEquals(1, response.data['count'])

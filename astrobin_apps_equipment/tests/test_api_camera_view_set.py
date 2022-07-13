@@ -5,6 +5,7 @@ from rest_framework.test import APIClient
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.models import Camera
 from astrobin_apps_equipment.models.camera_base_model import CameraType
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from common.constants import GroupName
@@ -20,7 +21,7 @@ class TestApiCameraViewSet(TestCase):
     def test_list_with_items(self):
         client = APIClient()
 
-        camera = EquipmentGenerators.camera()
+        camera = EquipmentGenerators.camera(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
 
         response = client.get(reverse('astrobin_apps_equipment:camera-list'), format='json')
         self.assertEquals(1, response.data['count'])

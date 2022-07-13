@@ -64,13 +64,11 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         if 'EditProposal' not in str(self.get_serializer().Meta.model):
             if self.request.user.is_authenticated:
-                if UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
+                if not UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
                     queryset = queryset.filter(
-                        Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) | Q(created_by=self.request.user)
-                    )
-                else:
-                    queryset = queryset.filter(
-                        Q(brand__isnull=False) | Q(created_by=self.request.user)
+                        Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
+                        Q(brand__isnull=False) |
+                        Q(created_by=self.request.user)
                     )
             else:
                 queryset = queryset.filter(

@@ -5,6 +5,7 @@ from rest_framework.test import APIClient
 
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.models import EquipmentBrand, Telescope
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.telescope_base_model import TelescopeType
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from common.constants import GroupName
@@ -20,7 +21,7 @@ class TestApiTelescopeViewSet(TestCase):
     def test_list_with_items(self):
         client = APIClient()
 
-        telescope = EquipmentGenerators.telescope()
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
 
         response = client.get(reverse('astrobin_apps_equipment:telescope-list'), format='json')
         self.assertEquals(1, response.data['count'])

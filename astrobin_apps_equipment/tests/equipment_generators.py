@@ -49,6 +49,7 @@ class EquipmentGenerators:
             frame_rate=kwargs.get('frame_rate', 60),
             adc=kwargs.get('adc', 12),
             color_or_mono=kwargs.get('color_or_mono', 'M'),
+            reviewer_decision=kwargs.get('reviewer_decision', None),
         )
 
     @staticmethod
@@ -85,6 +86,7 @@ class EquipmentGenerators:
             min_focal_length=kwargs.get('min_focal_length', 50),
             max_focal_length=kwargs.get('max_focal_length', 200),
             weight=kwargs.get('weight', 200),
+            reviewer_decision=kwargs.get('reviewer_decision', None),
         )
 
     @staticmethod
@@ -104,6 +106,7 @@ class EquipmentGenerators:
             max_payload=kwargs.get('max_payload', 50),
             computerized=kwargs.get('computerized', True),
             slew_speed=kwargs.get('slew_speed', 10),
+            reviewer_decision=kwargs.get('reviewer_decision', None),
         )
 
     @staticmethod
@@ -118,6 +121,7 @@ class EquipmentGenerators:
             website=kwargs.get('website', 'https://www.test-filter-%s.com/' % random_name),
             type=kwargs.get('type', FilterType.L),
             bandwidth=kwargs.get('bandwidth', 12),
+            reviewer_decision=kwargs.get('reviewer_decision', None),
         )
 
     @staticmethod
@@ -130,6 +134,7 @@ class EquipmentGenerators:
             name=kwargs.get('name', 'Test software %s' % random_name),
             variant_of=kwargs.get('variant_of', None),
             website=kwargs.get('website', 'https://www.test-accessory-%s.com/' % random_name),
+            reviewer_decision=kwargs.get('reviewer_decision', None),
         )
 
     @staticmethod
@@ -142,6 +147,7 @@ class EquipmentGenerators:
             name=kwargs.get('name', 'Test software %s' % random_name),
             variant_of=kwargs.get('variant_of', None),
             website=kwargs.get('website', 'https://www.test-software-%s.com/' % random_name),
+            reviewer_decision=kwargs.get('reviewer_decision', None),
         )
 
     @staticmethod
