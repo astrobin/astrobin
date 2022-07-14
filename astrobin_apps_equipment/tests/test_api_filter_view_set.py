@@ -4,7 +4,7 @@ from rest_framework.test import APIClient
 
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
-from astrobin_apps_equipment.models.filter_base_model import FilterType
+from astrobin_apps_equipment.models.filter_base_model import FilterSize, FilterType
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from common.constants import GroupName
 
@@ -47,6 +47,7 @@ class TestApiFilterViewSet(TestCase):
             'brand': EquipmentGenerators.brand().pk,
             'name': 'filter Foo',
             'type': FilterType.L,
+            'size': FilterSize.ROUND_50_MM
         }, format='json')
         self.assertEquals(403, response.status_code)
 
@@ -58,6 +59,7 @@ class TestApiFilterViewSet(TestCase):
             'brand': EquipmentGenerators.brand().pk,
             'name': 'filter Foo',
             'type': FilterType.L,
+            'size': FilterSize.ROUND_50_MM
         }, format='json')
         self.assertEquals(403, response.status_code)
 
@@ -72,6 +74,7 @@ class TestApiFilterViewSet(TestCase):
             'brand': EquipmentGenerators.brand().pk,
             'name': 'filter Foo',
             'type': FilterType.L,
+            'size': FilterSize.ROUND_50_MM
         }, format='json')
         self.assertEquals(201, response.status_code)
         self.assertEquals(user.pk, response.data['created_by'])

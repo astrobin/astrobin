@@ -34,6 +34,7 @@ class FilterEditProposalViewSet(EquipmentItemEditProposalViewSet):
         filter = edit_proposal.edit_proposal_target
         filter.type = edit_proposal.type
         filter.bandwidth = edit_proposal.bandwidth
+        filter.size = edit_proposal.size
 
         filter.save()
 
