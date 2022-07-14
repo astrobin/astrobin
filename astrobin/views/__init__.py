@@ -54,12 +54,10 @@ from astrobin.models import (
     Accessory, App, Camera, DeepSky_Acquisition, Filter, FocalReducer, Gear,
     GearUserInfo, Image, ImageRevision, Location, Mount, Software, SolarSystem_Acquisition, Telescope, UserProfile,
 )
-from astrobin.services.gear_service import GearService
 from astrobin.shortcuts import ajax_response, ajax_success
 from astrobin.templatetags.tags import in_upload_wizard
 from astrobin.utils import get_client_country_code
 from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import can_access_basic_equipment_functions
-from common.constants import GroupName
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_platesolving.forms import PlateSolvingAdvancedSettingsForm, PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
@@ -1527,7 +1525,7 @@ def user_profile_edit_gear(request):
     values = ['id', 'brand__name', 'name', 'num_images']
 
     telescopes2 = Telescope2.objects.annotate(
-        num_images=Count('images_using_for_imaging', distinct=True)
+        num_images=Count('images_using_for_imaging', filter=Q(images_using_for_imaging__user=profile.user), distinct=True)
     ).filter(
         images_using_for_imaging__deleted__isnull=True,
         images_using_for_imaging__user=profile.user
@@ -1537,7 +1535,7 @@ def user_profile_edit_gear(request):
     )
 
     cameras2 = Camera2.objects.annotate(
-        num_images=Count('images_using_for_imaging', distinct=True)
+        num_images=Count('images_using_for_imaging', filter=Q(images_using_for_imaging__user=profile.user), distinct=True)
     ).filter(
         images_using_for_imaging__deleted__isnull=True,
         images_using_for_imaging__user=profile.user
@@ -1547,7 +1545,7 @@ def user_profile_edit_gear(request):
     )
 
     mounts2 = Mount2.objects.annotate(
-        num_images=Count('images_using', distinct=True)
+        num_images=Count('images_using', filter=Q(images_using__user=profile.user), distinct=True)
     ).filter(
         images_using__deleted__isnull=True,
         images_using__user=profile.user
@@ -1557,7 +1555,7 @@ def user_profile_edit_gear(request):
     )
 
     filters2 = Filter2.objects.annotate(
-        num_images=Count('images_using', distinct=True)
+        num_images=Count('images_using', filter=Q(images_using__user=profile.user), distinct=True)
     ).filter(
         images_using__deleted__isnull=True,
         images_using__user=profile.user
@@ -1567,7 +1565,7 @@ def user_profile_edit_gear(request):
     )
 
     accessories2 = Accessory2.objects.annotate(
-        num_images=Count('images_using', distinct=True)
+        num_images=Count('images_using', filter=Q(images_using__user=profile.user), distinct=True)
     ).filter(
         images_using__deleted__isnull=True,
         images_using__user=profile.user
@@ -1577,7 +1575,7 @@ def user_profile_edit_gear(request):
     )
 
     software2 = Software2.objects.annotate(
-        num_images=Count('images_using', distinct=True)
+        num_images=Count('images_using', filter=Q(images_using__user=profile.user), distinct=True)
     ).filter(
         images_using__deleted__isnull=True,
         images_using__user=profile.user
