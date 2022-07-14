@@ -266,7 +266,7 @@ class UserService:
     def display_wip_images_on_public_gallery(self) -> bool:
         return self.user.userprofile.display_wip_images_on_public_gallery in (None, True)
 
-    def sort_gallery_by(self, queryset: QuerySet, subsection: str, active: str) -> Tuple[QuerySet, List[str]]:
+    def sort_gallery_by(self, queryset: QuerySet, subsection: str, active: str, klass: str) -> Tuple[QuerySet, List[str]]:
         from astrobin.models import Acquisition, Camera, Image, Telescope
         from astrobin_apps_equipment.models import Camera as CameraV2, Telescope as TelescopeV2
         from astrobin_apps_images.services import ImageService
@@ -401,10 +401,13 @@ class UserService:
                         ).distinct()
                     elif active.startswith('N'):
                         active = active.replace('N', '')
-                        queryset = queryset.filter(
-                            Q(imaging_telescopes_2__id=active) |
-                            Q(imaging_cameras_2__id=active)
-                        ).distinct()
+                        if klass in (None, 'telescope'):
+                            queryset = queryset.filter(imaging_telescopes_2__id=active).distinct()
+                        elif klass == 'camera':
+                            queryset = queryset.filter(imaging_cameras_2__id=active).distinct()
+                        else:
+                            queryset = queryset.none()
+
 
         ###########
         # SUBJECT #

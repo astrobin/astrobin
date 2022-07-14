@@ -45,6 +45,7 @@ class UserFancyboxListViewSet(viewsets.ModelViewSet):
         return user_service.sort_gallery_by(
             images,
             self.request.GET.get('subsection') or 'uploaded',
-            self.request.GET.get('active')
+            self.request.GET.get('active'),
+            self.request.GET.get('klass')
         )[0]
 
