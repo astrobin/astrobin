@@ -25,11 +25,11 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     throttle_classes = [EquipmentEditProposalThrottle]
 
-    def check_edit_proposal_permissions(self, request, edit_proposal):
+    def check_edit_proposal_permissions(self, request, edit_proposal, allow_self=False):
         if edit_proposal.edit_proposal_reviewed_by not in (None, request.user):
             return False, Response('This edit proposal was already reviewed by someone else', HTTP_400_BAD_REQUEST)
 
-        if edit_proposal.edit_proposal_by == request.user:
+        if edit_proposal.edit_proposal_by == request.user and not allow_self:
             return False, Response('You cannot review an edit proposal that you proposed', HTTP_400_BAD_REQUEST)
 
         return True, None
@@ -155,7 +155,7 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
         if edit_proposal.edit_proposal_review_lock and edit_proposal.edit_proposal_review_lock != request.user:
             return self._conflict_response()
 
-        check_permissions, response = self.check_edit_proposal_permissions(request, edit_proposal)
+        check_permissions, response = self.check_edit_proposal_permissions(request, edit_proposal, allow_self=True)
         if not check_permissions:
             return response
 
