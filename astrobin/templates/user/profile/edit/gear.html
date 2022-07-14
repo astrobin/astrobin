@@ -29,16 +29,16 @@
                         <th>{% trans "Telescopes or lenses" %}</th>
                         <th>{% trans "Images" %}</th>
                     </tr>
-                    {% for x in telescopes2 %}
+                    {% for key, value in telescopes.items %}
                         <tr>
                             <td>
-                                <a href="{% app_redirection_service '/equipment/explorer' %}/telescope/{{ x.0 }}">
-                                    <strong>{{ x.1 }}</strong> {{ x.2 }}
+                                <a href="{% app_redirection_service '/equipment/explorer' %}/telescope/{{ value.id }}">
+                                    {{ value.name }}
                                 </a>
                             </td>
                             <td>
-                                <a href="{% url 'user_page' request.user %}?public=&sub=gear&klass=telescope&active=N{{ x.0 }}">
-                                 {{ x.3 }}
+                                <a href="{% url 'user_page' request.user %}?public=&sub=gear&klass=telescope&active=N{{ value.id }}">
+                                 {{ value.image_count }}
                                 </a>
                             </td>
                         </tr>
@@ -50,16 +50,16 @@
                         <th>{% trans "Cameras" %}</th>
                         <th>{% trans "Images" %}</th>
                     </tr>
-                    {% for x in cameras2 %}
+                    {% for key, value in cameras.items %}
                         <tr>
                             <td>
-                                <a href="{% app_redirection_service '/equipment/explorer' %}/camera/{{ x.0 }}">
-                                <strong>{{ x.1 }}</strong> {{ x.2 }}
+                                <a href="{% app_redirection_service '/equipment/explorer' %}/camera/{{ value.id }}">
+                                {{ value.name }}
                                 </a>
                             </td>
                             <td>
-                                <a href="{% url 'user_page' request.user %}?public=&sub=gear&klass=camera&active=N{{ x.0 }}">
-                                    {{ x.3 }}
+                                <a href="{% url 'user_page' request.user %}?public=&sub=gear&klass=camera&active=N{{ value.id }}">
+                                    {{ value.image_count }}
                                 </a>
                             </td>
                         </tr>
@@ -71,14 +71,14 @@
                         <th>{% trans "Mounts" %}</th>
                         <th>{% trans "Images" %}</th>
                     </tr>
-                    {% for x in mounts2 %}
+                    {% for key, value in mounts.items %}
                         <tr>
                             <td>
-                                <a href="{% app_redirection_service '/equipment/explorer' %}/mount/{{ x.0 }}">
-                                    <strong>{{ x.1 }}</strong> {{ x.2 }}
+                                <a href="{% app_redirection_service '/equipment/explorer' %}/mount/{{ value.id }}">
+                                    {{ value.name }}
                                 </a>
                             </td>
-                            <td>{{ x.3 }}</td>
+                            <td>{{ value.image_count }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -88,14 +88,14 @@
                         <th>{% trans "Filters" %}</th>
                         <th>{% trans "Images" %}</th>
                     </tr>
-                    {% for x in filters2 %}
+                    {% for key, value in filters.items %}
                         <tr>
                             <td>
-                                <a href="{% app_redirection_service '/equipment/explorer' %}/filter/{{ x.0 }}">
-                                    <strong>{{ x.1 }}</strong> {{ x.2 }}
+                                <a href="{% app_redirection_service '/equipment/explorer' %}/filter/{{ value.id }}">
+                                    {{ value.name }}
                                 </a>
                             </td>
-                            <td>{{ x.3 }}</td>
+                            <td>{{ value.image_count }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -105,14 +105,14 @@
                         <th>{% trans "Accessories" %}</th>
                         <th>{% trans "Images" %}</th>
                     </tr>
-                    {% for x in accessories2 %}
+                    {% for key, value in accessories.items %}
                         <tr>
                             <td>
-                                <a href="{% app_redirection_service '/equipment/explorer' %}/accessory/{{ x.0 }}">
-                                    <strong>{{ x.1 }}</strong> {{ x.2 }}
+                                <a href="{% app_redirection_service '/equipment/explorer' %}/accessory/{{ value.id }}">
+                                    {{ value.name }}
                                 </a>
                             </td>
-                            <td>{{ x.3 }}</td>
+                            <td>{{ value.image_count }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -122,14 +122,20 @@
                         <th>{% trans "Software" %}</th>
                         <th>{% trans "Images" %}</th>
                     </tr>
-                    {% for x in software2 %}
+                    {% for key, value in software.items %}
                         <tr>
                             <td>
-                                <a href="{% app_redirection_service '/equipment/explorer' %}/software/{{ x.0 }}">
-                                    <strong>{{ x.1 }}</strong> {{ x.2 }}
+                                <a href="{% app_redirection_service '/equipment/explorer' %}/software/{{ value.id }}">
+                                    {{ value.name }}
                                 </a>
                             </td>
-                            <td>{{ x.3 }}</td>
+                            <td>{{ value.image_count }}</td>
+                        </tr>
+                    {%  empty %}
+                        <tr>
+                            <td colspan="2">
+                                {% trans "There doesn't seem to be anything here." %
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

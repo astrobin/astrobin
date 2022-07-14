@@ -1512,86 +1512,36 @@ def user_profile_save_license(request):
 @login_required
 @require_GET
 def user_profile_edit_gear(request):
-    from astrobin_apps_equipment.models import (
-        Telescope as Telescope2,
-        Camera as Camera2,
-        Mount as Mount2,
-        Filter as Filter2,
-        Accessory as Accessory2,
-        Software as Software2
-    )
+    images = Image.objects_including_wip.filter(user=request.user)
 
-    profile = request.user.userprofile
-    values = ['id', 'brand__name', 'name', 'num_images']
+    data = {
+        'telescopes': {},
+        'cameras': {},
+        'mounts': {},
+        'filters': {},
+        'accessories': {},
+        'software': {},
+    }
 
-    telescopes2 = Telescope2.objects.annotate(
-        num_images=Count('images_using_for_imaging', filter=Q(images_using_for_imaging__user=profile.user), distinct=True)
-    ).filter(
-        images_using_for_imaging__deleted__isnull=True,
-        images_using_for_imaging__user=profile.user
-    ).distinct(
-    ).values_list(
-        *values
-    )
+    for i in images.iterator():
+        for usage in (
+                ('imaging_telescopes_2', 'telescopes'),
+                ('imaging_cameras_2', 'cameras'),
+                ('mounts_2', 'mounts'),
+                ('filters_2', 'filters'),
+                ('accessories_2', 'accessories'),
+                ('software_2', 'software'),
+                ('guiding_telescopes_2', 'telescopes'),
+                ('guiding_cameras_2', 'cameras'),
+        ):
+            for x in getattr(i, usage[0]).all():
+                try:
+                    entry = data[usage[1]][x.id]
+                    entry['image_count'] += 1
+                except KeyError:
+                    data[usage[1]][x.id] = dict(id=x.id, name=str(x), image_count=1)
 
-    cameras2 = Camera2.objects.annotate(
-        num_images=Count('images_using_for_imaging', filter=Q(images_using_for_imaging__user=profile.user), distinct=True)
-    ).filter(
-        images_using_for_imaging__deleted__isnull=True,
-        images_using_for_imaging__user=profile.user
-    ).distinct(
-    ).values_list(
-        *values
-    )
-
-    mounts2 = Mount2.objects.annotate(
-        num_images=Count('images_using', filter=Q(images_using__user=profile.user), distinct=True)
-    ).filter(
-        images_using__deleted__isnull=True,
-        images_using__user=profile.user
-    ).distinct(
-    ).values_list(
-        *values
-    )
-
-    filters2 = Filter2.objects.annotate(
-        num_images=Count('images_using', filter=Q(images_using__user=profile.user), distinct=True)
-    ).filter(
-        images_using__deleted__isnull=True,
-        images_using__user=profile.user
-    ).distinct(
-    ).values_list(
-        *values
-    )
-
-    accessories2 = Accessory2.objects.annotate(
-        num_images=Count('images_using', filter=Q(images_using__user=profile.user), distinct=True)
-    ).filter(
-        images_using__deleted__isnull=True,
-        images_using__user=profile.user
-    ).distinct(
-    ).values_list(
-        *values
-    )
-
-    software2 = Software2.objects.annotate(
-        num_images=Count('images_using', filter=Q(images_using__user=profile.user), distinct=True)
-    ).filter(
-        images_using__deleted__isnull=True,
-        images_using__user=profile.user
-    ).distinct(
-    ).values_list(
-        *values
-    )
-
-    return render(request, 'user/profile/edit/gear.html', {
-        'telescopes2': telescopes2,
-        'cameras2': cameras2,
-        'mounts2': mounts2,
-        'filters2': filters2,
-        'accessories2': accessories2,
-        'software2': software2
-    })
+    return render(request, 'user/profile/edit/gear.html', data)
 
 
 @never_cache
