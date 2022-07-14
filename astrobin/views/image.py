@@ -1112,7 +1112,7 @@ class ImageEditGearView(ImageEditBaseView):
         context['no_gear'] = profile.telescopes.count() == 0 and profile.cameras.count() == 0
         context['copy_gear_form'] = CopyGearForm(user, context['image'])
         context['is_own_equipment_migrator'] = UserService(user).is_in_group(
-            [GroupName.EQUIPMENT_MODERATORS. GroupName.OWN_EQUIPMENT_MIGRATORS]
+            [GroupName.EQUIPMENT_MODERATORS, GroupName.OWN_EQUIPMENT_MIGRATORS]
         )
 
         return context
