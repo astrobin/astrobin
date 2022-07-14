@@ -11,6 +11,8 @@ from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 from astrobin_apps_equipment.models.equipment_item_listing import EquipmentItemListing
 from astrobin_apps_equipment.services import EquipmentService
+from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 
 register = Library()
 
@@ -175,17 +177,17 @@ def unique_equipment_item_listings_for_legacy_gear(image, country):
 
 @register.filter
 def is_equipment_moderator(user) -> bool:
-    return user.is_authenticated and user.groups.filter(name='equipment_moderators').exists()
+    return UserService(user).is_in_group(GroupName.EQUIPMENT_MODERATORS)
 
 
 @register.filter
 def is_own_equipment_migrator(user) -> bool:
-    return user.is_authenticated and user.groups.filter(name='own_equipment_migrators').exists()
+    return UserService(user).is_in_group(GroupName.OWN_EQUIPMENT_MIGRATORS)
 
 
 @register.filter
 def can_access_basic_equipment_functions(user) -> bool:
-    return is_equipment_moderator(user) or is_own_equipment_migrator(user)
+    return True
 
 
 @register.filter

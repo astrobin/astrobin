@@ -5,8 +5,10 @@ from rest_framework.test import APIClient
 
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.models import EquipmentBrand, Telescope
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.telescope_base_model import TelescopeType
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
+from common.constants import GroupName
 
 
 class TestApiTelescopeViewSet(TestCase):
@@ -19,7 +21,7 @@ class TestApiTelescopeViewSet(TestCase):
     def test_list_with_items(self):
         client = APIClient()
 
-        telescope = EquipmentGenerators.telescope()
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
 
         response = client.get(reverse('astrobin_apps_equipment:telescope-list'), format='json')
         self.assertEquals(1, response.data['count'])
@@ -35,7 +37,7 @@ class TestApiTelescopeViewSet(TestCase):
         )
         self.assertEquals(405, response.status_code)
 
-        user = Generators.user(groups=['equipment_moderators'])
+        user = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
         client.login(username=user.username, password=user.password)
         client.force_authenticate(user=user)
 
@@ -72,7 +74,7 @@ class TestApiTelescopeViewSet(TestCase):
     def test_created_by(self):
         client = APIClient()
 
-        user = Generators.user(groups=['equipment_moderators'])
+        user = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
         client.login(username=user.username, password=user.password)
         client.force_authenticate(user=user)
 
@@ -145,10 +147,10 @@ class TestApiTelescopeViewSet(TestCase):
 
         self.assertEquals(0, len(response.data))
 
-    @mock.patch("astrobin_apps_equipment.api.views.equipment_item_view_set.push_notification")
+    @mock.patch("astrobin_apps_equipment.services.equipment_service.push_notification")
     def test_reject(self, push_notification):
         user = Generators.user()
-        moderator = Generators.user(groups=['equipment_moderators'])
+        moderator = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
         telescope = EquipmentGenerators.telescope(created_by=user)
         image = Generators.image(user=user)
         image.imaging_telescopes_2.add(telescope)

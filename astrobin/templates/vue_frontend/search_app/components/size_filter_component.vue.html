@@ -1,0 +1,32 @@
+{% load i18n %}
+
+<script type="text/x-template" id="size-filter-template">
+    <div class="form-group slider-form-group" :class="{highlighted: highlighted}">
+        <div class="min-max no-slider">
+            <div class="min">
+                <input class="slider-input" id="size-min-value" name="size_min" type="number"
+                       min="0" step="1" :value="sizeMin" />
+                <label for="size-min-value">{% trans 'Min' %}</label>
+            </div>
+
+            <div class="max">
+                <label for="size-max-value">{% trans 'Max' %}</label>
+                <input class="slider-input" id="size-max-value" name="size_max" type="number"
+                       min="0" step="1" :value="sizeMax" />
+            </div>
+        </div>
+    </div>
+</script>
+
+<script>
+    Vue.component("size-filter", {
+        template: "#size-filter-template",
+        props: [
+            "sizeMin",
+            "sizeMax"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ]
+    });
+</script>

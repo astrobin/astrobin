@@ -3,6 +3,8 @@ from django.db.models import Q, QuerySet
 from django_filters.rest_framework import FilterSet
 
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
+from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 
 
 class EquipmentItemFilter(FilterSet):
@@ -13,7 +15,7 @@ class EquipmentItemFilter(FilterSet):
         condition = args[0]
 
         is_authenticated: bool = self.request.user.is_authenticated
-        is_moderator: bool = is_authenticated and self.request.user.groups.filter(name='equipment_moderators').exists()
+        is_moderator: bool = UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS)
 
         if not is_authenticated or not is_moderator:
             return queryset.none()
@@ -21,7 +23,7 @@ class EquipmentItemFilter(FilterSet):
         queryset = queryset.exclude(Q(created_by=self.request.user) | Q(brand__isnull=True))
 
         if condition:
-            queryset = queryset.filter(reviewer_decision__isnull=True)
+            queryset = queryset.filter(reviewer_decision__isnull=True).order_by('-created')
 
         return queryset
 
@@ -33,13 +35,16 @@ class EquipmentItemFilter(FilterSet):
         else:
             queryset = queryset.exclude(edit_proposals__gt=0)
 
-        return queryset.filter(
+        queryset = queryset.filter(
             edit_proposals__deleted__isnull=True,
             edit_proposals__edit_proposal_review_status__isnull=True,
             reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
-        ).exclude(
-            edit_proposals__edit_proposal_by=self.request.user
-        ).distinct()
+        )
+
+        if self.request.user.is_authenticated:
+            queryset = queryset.exclude(edit_proposals__edit_proposal_by=self.request.user)
+
+        return queryset.distinct().order_by('-created')
 
     class Meta:
         abstract = True

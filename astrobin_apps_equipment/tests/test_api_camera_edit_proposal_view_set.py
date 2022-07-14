@@ -7,11 +7,12 @@ from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
+from common.constants import GroupName
 
 
 class TestApiCameraEditProposalViewSet(TestCase):
     def test_not_allowed_for_modified_camera(self):
-        user = Generators.user(groups=['equipment_moderators'])
+        user = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
         client = APIClient()
         client.force_authenticate(user=user)
 
@@ -34,7 +35,7 @@ class TestApiCameraEditProposalViewSet(TestCase):
 
     def test_klass_mismatch(self):
         client = APIClient()
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         camera = EquipmentGenerators.camera()
 
@@ -53,7 +54,7 @@ class TestApiCameraEditProposalViewSet(TestCase):
 
     def test_edit_proposal_review_status_must_be_null(self):
         client = APIClient()
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         camera = EquipmentGenerators.camera()
 
@@ -73,7 +74,7 @@ class TestApiCameraEditProposalViewSet(TestCase):
 
     def test_already_has_pending(self):
         client = APIClient()
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         camera = EquipmentGenerators.camera()
 
@@ -105,7 +106,7 @@ class TestApiCameraEditProposalViewSet(TestCase):
 
     def test_brand_and_variant_of_brand_mismatch(self):
         client = APIClient()
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         brand1 = EquipmentGenerators.brand()
         brand2 = EquipmentGenerators.brand()
@@ -127,7 +128,7 @@ class TestApiCameraEditProposalViewSet(TestCase):
 
     def test_diy_does_not_allow_variants(self):
         client = APIClient()
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         camera = EquipmentGenerators.camera(brand=None)
 
@@ -147,7 +148,7 @@ class TestApiCameraEditProposalViewSet(TestCase):
 
     def test_circular_variants(self):
         client = APIClient()
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         brand = EquipmentGenerators.brand()
         camera = EquipmentGenerators.camera(brand=brand)
@@ -169,7 +170,7 @@ class TestApiCameraEditProposalViewSet(TestCase):
 
     def test_self_variant(self):
         client = APIClient()
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         brand = EquipmentGenerators.brand()
         camera = EquipmentGenerators.camera(brand=brand)
@@ -190,7 +191,7 @@ class TestApiCameraEditProposalViewSet(TestCase):
 
     def test_dslr_mirrorless_does_not_allow_variants(self):
         client = APIClient()
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS)
         camera2 = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS)
@@ -211,7 +212,7 @@ class TestApiCameraEditProposalViewSet(TestCase):
 
     def test_name_change_requires_moderator(self):
         client = APIClient()
-        client.force_authenticate(user=Generators.user(groups=['own_equipment_migrators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS]))
 
         camera = EquipmentGenerators.camera(
             type=CameraType.DEDICATED_DEEP_SKY,
@@ -229,7 +230,7 @@ class TestApiCameraEditProposalViewSet(TestCase):
             format='json'
         )
 
-        client.force_authenticate(user=Generators.user(groups=['own_equipment_migrators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS]))
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-edit-proposal-list') + '1/approve/', {}, format='json'
@@ -237,7 +238,7 @@ class TestApiCameraEditProposalViewSet(TestCase):
 
         self.assertContains(response, "This edit proposal needs to be approved by a moderator", status_code=403)
 
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-edit-proposal-list') + '1/approve/', {}, format='json'
@@ -247,7 +248,7 @@ class TestApiCameraEditProposalViewSet(TestCase):
 
     def test_name_change_does_not_moderator_when_created_by_moderator(self):
         client = APIClient()
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         camera = EquipmentGenerators.camera(
             type=CameraType.DEDICATED_DEEP_SKY,
@@ -265,7 +266,7 @@ class TestApiCameraEditProposalViewSet(TestCase):
             format='json'
         )
 
-        client.force_authenticate(user=Generators.user(groups=['own_equipment_migrators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS]))
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-edit-proposal-list') + '1/approve/', {}, format='json'
@@ -275,7 +276,7 @@ class TestApiCameraEditProposalViewSet(TestCase):
 
     def test_name_change_does_not_moderator_when_item_is_unapproved(self):
         client = APIClient()
-        client.force_authenticate(user=Generators.user(groups=['own_equipment_migrators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS]))
 
         camera = EquipmentGenerators.camera(type=CameraType.DEDICATED_DEEP_SKY, reviewer_decision=None)
 
@@ -290,7 +291,7 @@ class TestApiCameraEditProposalViewSet(TestCase):
             format='json'
         )
 
-        client.force_authenticate(user=Generators.user(groups=['own_equipment_migrators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS]))
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-edit-proposal-list') + '1/approve/', {}, format='json'

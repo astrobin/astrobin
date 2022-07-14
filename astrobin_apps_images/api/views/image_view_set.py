@@ -50,7 +50,7 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
         for klass in equipment_classes:
             getattr(instance, klass[0]).clear()
             for item in data[klass[0]]:
-                obj = get_object_or_None(klass[1], id=item.get('id'))
+                obj = get_object_or_None(klass[1], id=item if type(item) == int else item.get('id'))
                 if obj:
                     getattr(instance, klass[0]).add(obj)
 

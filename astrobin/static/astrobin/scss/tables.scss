@@ -117,3 +117,13 @@ table td.empty-table {
 .table-striped tbody > tr:nth-child(odd) > td, .table-striped tbody > tr:nth-child(odd) > th {
   background-color: rgba(0, 0, 0, 0.075);
 }
+
+table tbody + tbody {
+  border-top: 0 !important;
+
+  &::before {
+    content: '';
+    display: block;
+    height: 2rem;
+  }
+}

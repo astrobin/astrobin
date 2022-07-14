@@ -12,6 +12,7 @@ from registration.forms import (
 from registration.signals import user_registered
 
 from astrobin.models import UserProfile
+from common.constants import GroupName
 from astrobin_apps_notifications.utils import push_notification
 
 
@@ -67,7 +68,7 @@ class AstroBinRegistrationView(RegistrationView):
 def user_created(sender, user, request, **kwargs):
     form = AstroBinRegistrationForm(request.POST)
     profile, created = UserProfile.objects.get_or_create(user=user)
-    group, created = Group.objects.get_or_create(name='own_equipment_migrators')
+    group, created = Group.objects.get_or_create(name=GroupName.OWN_EQUIPMENT_MIGRATORS)
     user.groups.add(group)
     changed = False
 

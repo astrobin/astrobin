@@ -2,6 +2,8 @@ from rest_framework import serializers
 from rest_framework.exceptions import PermissionDenied
 
 from astrobin_apps_equipment.models import EquipmentBrand
+from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 
 
 class BrandSerializer(serializers.ModelSerializer):
@@ -13,7 +15,7 @@ class BrandSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = self.context['request'].user
 
-        if not user.groups.filter(name__in=['equipment_moderators', 'own_equipment_migrators']).exists():
+        if not UserService(user).is_in_group([GroupName.EQUIPMENT_MODERATORS, GroupName.OWN_EQUIPMENT_MIGRATORS]):
             raise PermissionDenied('You don\'t have permission to create a brand')
 
         validated_data['created_by'] = user

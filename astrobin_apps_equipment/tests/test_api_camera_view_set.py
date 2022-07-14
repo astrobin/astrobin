@@ -5,8 +5,10 @@ from rest_framework.test import APIClient
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.models import Camera
 from astrobin_apps_equipment.models.camera_base_model import CameraType
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
+from common.constants import GroupName
 
 
 class TestApiCameraViewSet(TestCase):
@@ -19,7 +21,7 @@ class TestApiCameraViewSet(TestCase):
     def test_list_with_items(self):
         client = APIClient()
 
-        camera = EquipmentGenerators.camera()
+        camera = EquipmentGenerators.camera(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
 
         response = client.get(reverse('astrobin_apps_equipment:camera-list'), format='json')
         self.assertEquals(1, response.data['count'])
@@ -33,7 +35,7 @@ class TestApiCameraViewSet(TestCase):
         response = client.delete(reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)), format='json')
         self.assertEquals(405, response.status_code)
 
-        user = Generators.user(groups=['equipment_moderators'])
+        user = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
         client.login(username=user.username, password=user.password)
         client.force_authenticate(user=user)
 
@@ -66,7 +68,7 @@ class TestApiCameraViewSet(TestCase):
     def test_created_by(self):
         client = APIClient()
 
-        user = Generators.user(groups=['equipment_moderators'])
+        user = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
         client.login(username=user.username, password=user.password)
         client.force_authenticate(user=user)
 
@@ -143,7 +145,7 @@ class TestApiCameraViewSet(TestCase):
         modified = Camera.objects.get(brand=camera.brand, name=camera.name, modified=True, cooled=False)
 
         client = APIClient()
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-detail', args=(modified.pk,)) + 'approve/', format='json'
@@ -156,7 +158,7 @@ class TestApiCameraViewSet(TestCase):
         modified = Camera.objects.get(brand=camera.brand, name=camera.name, modified=True, cooled=False)
 
         client = APIClient()
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-detail', args=(modified.pk,)) + 'reject/', format='json'
@@ -166,7 +168,7 @@ class TestApiCameraViewSet(TestCase):
 
     def test_brand_and_variant_of_brand_mismatch(self):
         client = APIClient()
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         brand1 = EquipmentGenerators.brand()
         brand2 = EquipmentGenerators.brand()
@@ -186,7 +188,7 @@ class TestApiCameraViewSet(TestCase):
 
     def test_diy_does_not_allow_variants(self):
         client = APIClient()
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         camera = EquipmentGenerators.camera()
 
@@ -204,7 +206,7 @@ class TestApiCameraViewSet(TestCase):
 
     def test_circular_variants(self):
         client = APIClient()
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         brand = EquipmentGenerators.brand()
         camera = EquipmentGenerators.camera(brand=brand)
@@ -224,7 +226,7 @@ class TestApiCameraViewSet(TestCase):
 
     def test_dslr_mirrorless_does_not_allow_variants(self):
         client = APIClient()
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         camera = EquipmentGenerators.camera()
 
@@ -243,13 +245,13 @@ class TestApiCameraViewSet(TestCase):
     def test_reject_as_duplicate(self):
         client = APIClient()
 
-        user = Generators.user(groups=['own_equipment_migrators'])
+        user = Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS])
         camera = EquipmentGenerators.camera(type=CameraType.DEDICATED_DEEP_SKY)
         duplicate = EquipmentGenerators.camera(type=CameraType.DEDICATED_DEEP_SKY)
         image = Generators.image(user=user)
         image.imaging_cameras_2.add(duplicate)
 
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-detail', args=(duplicate.id,)) + 'reject/', {
@@ -267,13 +269,13 @@ class TestApiCameraViewSet(TestCase):
     def test_reject_as_duplicate_dslr(self):
         client = APIClient()
 
-        user = Generators.user(groups=['own_equipment_migrators'])
+        user = Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS])
         camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, modified=False, cooled=False)
         duplicate = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, modified=False, cooled=False)
         image = Generators.image(user=user)
         image.imaging_cameras_2.add(duplicate)
 
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-detail', args=(duplicate.id,)) + 'reject/', {
@@ -291,7 +293,7 @@ class TestApiCameraViewSet(TestCase):
     def test_reject_as_duplicate_modified_dslr(self):
         client = APIClient()
 
-        user = Generators.user(groups=['own_equipment_migrators'])
+        user = Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS])
         camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, modified=False, cooled=False)
         modified = Camera.objects.get(brand=camera.brand, name=camera.name, modified=True, cooled=False)
         duplicate = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, cooled=False)
@@ -299,7 +301,7 @@ class TestApiCameraViewSet(TestCase):
         image = Generators.image(user=user)
         image.imaging_cameras_2.add(modified_duplicate)
 
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-detail', args=(duplicate.id,)) + 'reject/', {
@@ -317,7 +319,7 @@ class TestApiCameraViewSet(TestCase):
     def test_reject_as_duplicate_modified_dslr_matches_attributes(self):
         client = APIClient()
 
-        user = Generators.user(groups=['own_equipment_migrators'])
+        user = Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS])
         camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, modified=False, cooled=False)
         modified = Camera.objects.get(brand=camera.brand, name=camera.name, modified=True, cooled=False)
         duplicate = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, cooled=False)
@@ -325,7 +327,7 @@ class TestApiCameraViewSet(TestCase):
         image = Generators.image(user=user)
         image.imaging_cameras_2.add(modified_duplicate)
 
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-detail', args=(duplicate.id,)) + 'reject/', {
@@ -343,14 +345,14 @@ class TestApiCameraViewSet(TestCase):
     def test_reject_as_duplicate_of_modified_dslr(self):
         client = APIClient()
 
-        user = Generators.user(groups=['own_equipment_migrators'])
+        user = Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS])
         camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, modified=False, cooled=False)
         modified = Camera.objects.get(brand=camera.brand, name=camera.name, modified=True, cooled=False)
         duplicate = EquipmentGenerators.camera(type=CameraType.DEDICATED_DEEP_SKY)
         image = Generators.image(user=user)
         image.imaging_cameras_2.add(duplicate)
 
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-detail', args=(duplicate.id,)) + 'reject/', {
@@ -368,14 +370,14 @@ class TestApiCameraViewSet(TestCase):
     def test_reject_as_modified_dslr_duplicate_of_non_dslr(self):
         client = APIClient()
 
-        user = Generators.user(groups=['own_equipment_migrators'])
+        user = Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS])
         camera = EquipmentGenerators.camera(type=CameraType.DEDICATED_DEEP_SKY)
         duplicate = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS, modified=False, cooled=False)
         modified_duplicate = Camera.objects.get(brand=duplicate.brand, name=duplicate.name, modified=True, cooled=False)
         image = Generators.image(user=user)
         image.imaging_cameras_2.add(modified_duplicate)
 
-        client.force_authenticate(user=Generators.user(groups=['equipment_moderators']))
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-detail', args=(duplicate.id,)) + 'reject/', {

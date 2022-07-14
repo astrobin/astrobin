@@ -231,6 +231,10 @@
                     <p><strong class="card-label">{% trans "Resolution" %}:</strong> {{ resolution }}</p>
                 {% endif %}
 
+                {% if file_size %}
+                    <p><strong class="card-label">{% trans "File size" %}:</strong> {{ file_size | filesizeformat }}</p>
+                {% endif %}
+
                 {% if locations %}
                     <p>
                         <strong class="card-label">{% trans "Locations" %}:</strong>

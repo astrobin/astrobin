@@ -15,6 +15,8 @@ from astrobin_apps_equipment.api.throttle.equipment_edit_proposal_throttle impor
 from astrobin_apps_equipment.api.views.equipment_item_view_set import EquipmentItemViewSet
 from astrobin_apps_equipment.models import EquipmentItem
 from astrobin_apps_equipment.models.equipment_item_edit_proposal_mixin import EquipmentItemEditProposalMixin
+from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.services import AppRedirectionService
 
@@ -23,18 +25,18 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     throttle_classes = [EquipmentEditProposalThrottle]
 
-    def check_edit_proposal_permissions(self, request, edit_proposal):
+    def check_edit_proposal_permissions(self, request, edit_proposal, allow_self=False):
         if edit_proposal.edit_proposal_reviewed_by not in (None, request.user):
             return False, Response('This edit proposal was already reviewed by someone else', HTTP_400_BAD_REQUEST)
 
-        if edit_proposal.edit_proposal_by == request.user:
+        if edit_proposal.edit_proposal_by == request.user and not allow_self:
             return False, Response('You cannot review an edit proposal that you proposed', HTTP_400_BAD_REQUEST)
 
         return True, None
 
     @action(detail=True, methods=['POST'], url_path='acquire-review-lock')
     def acquire_review_lock(self, request, pk):
-        if not request.user.groups.filter(name='own_equipment_migrators').exists():
+        if not UserService(request.user).is_in_group(GroupName.OWN_EQUIPMENT_MIGRATORS):
             raise PermissionDenied(request.user)
 
         edit_proposal: EquipmentItemEditProposalMixin = self.get_object()
@@ -86,8 +88,8 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
             )
 
         if target.name != edit_proposal.name and \
-                not request.user.groups.filter(name="equipment_moderators").exists() and \
-                not edit_proposal.created_by.groups.filter(name="equipment_moderators") and \
+                not UserService(request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS) and \
+                not UserService(edit_proposal.created_by).is_in_group(GroupName.EQUIPMENT_MODERATORS) and \
                 not target.reviewer_decision is None:
             return Response(
                 _(
@@ -153,7 +155,7 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
         if edit_proposal.edit_proposal_review_lock and edit_proposal.edit_proposal_review_lock != request.user:
             return self._conflict_response()
 
-        check_permissions, response = self.check_edit_proposal_permissions(request, edit_proposal)
+        check_permissions, response = self.check_edit_proposal_permissions(request, edit_proposal, allow_self=True)
         if not check_permissions:
             return response
 

@@ -3,8 +3,10 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 
 from astrobin.tests.generators import Generators
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.mount_base_model import MountType
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
+from common.constants import GroupName
 
 
 class TestApiMountViewSet(TestCase):
@@ -17,7 +19,7 @@ class TestApiMountViewSet(TestCase):
     def test_list_with_items(self):
         client = APIClient()
 
-        mount = EquipmentGenerators.mount()
+        mount = EquipmentGenerators.mount(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
 
         response = client.get(reverse('astrobin_apps_equipment:mount-list'), format='json')
         self.assertEquals(1, response.data['count'])
@@ -31,7 +33,7 @@ class TestApiMountViewSet(TestCase):
         response = client.delete(reverse('astrobin_apps_equipment:mount-detail', args=(mount.pk,)), format='json')
         self.assertEquals(405, response.status_code)
 
-        user = Generators.user(groups=['equipment_moderators'])
+        user = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
         client.login(username=user.username, password=user.password)
         client.force_authenticate(user=user)
 
@@ -62,7 +64,7 @@ class TestApiMountViewSet(TestCase):
     def test_created_by(self):
         client = APIClient()
 
-        user = Generators.user(groups=['equipment_moderators'])
+        user = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
         client.login(username=user.username, password=user.password)
         client.force_authenticate(user=user)
 

@@ -1,0 +1,32 @@
+{% load i18n %}
+
+<script type="text/x-template" id="h-filter-template">
+    <div class="form-group slider-form-group" :class="{highlighted: highlighted}">
+        <div class="min-max no-slider">
+            <div class="min">
+                <input class="slider-input" id="h-min-value" name="h_min" type="number"
+                       min="0" step="1" :value="hMin" />
+                <label for="h-min-value">{% trans 'Min' %}</label>
+            </div>
+
+            <div class="max">
+                <label for="h-max-value">{% trans 'Max' %}</label>
+                <input class="slider-input" id="h-max-value" name="h_max" type="number"
+                       min="0" step="1" :value="hMax" />
+            </div>
+        </div>
+    </div>
+</script>
+
+<script>
+    Vue.component("h-filter", {
+        template: "#h-filter-template",
+        props: [
+            "hMin",
+            "hMax"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ]
+    });
+</script>

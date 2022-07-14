@@ -1,7 +1,7 @@
 import logging
 import math
 from datetime import timedelta
-from typing import List, Optional, Tuple
+from typing import List, Optional, Tuple, Union
 
 import numpy as np
 from django.conf import settings
@@ -19,9 +19,6 @@ from safedelete.queryset import SafeDeleteQueryset
 from subscription.models import Subscription
 
 from astrobin.enums import SubjectType
-from astrobin.models import Acquisition, Camera, Image, Telescope, UserProfile
-from astrobin_apps_equipment.models import Camera as CameraV2, Telescope as TelescopeV2
-from astrobin_apps_images.services import ImageService
 from common.services.constellations_service import ConstellationsService
 from nested_comments.models import NestedComment
 from toggleproperties.models import ToggleProperty
@@ -67,20 +64,25 @@ class UserService:
         except Group.DoesNotExist:
             return []
 
-    def get_all_images(self):
-        # type: () -> QuerySet
+    def get_all_images(self) -> QuerySet:
+        from astrobin.models import Image
         return Image.objects_including_wip.filter(user=self.user)
 
     def get_public_images(self) -> QuerySet:
+        from astrobin.models import Image
         return Image.objects.filter(user=self.user)
 
     def get_wip_images(self) -> QuerySet:
+        from astrobin.models import Image
         return Image.wip.filter(user=self.user)
 
     def get_deleted_images(self) -> QuerySet:
+        from astrobin.models import Image
         return Image.deleted_objects.filter(user=self.user)
 
     def get_bookmarked_images(self) -> QuerySet:
+        from astrobin.models import Image
+
         image_ct = ContentType.objects.get_for_model(Image)  # type: ContentType
         bookmarked_pks: List[int] = [x.object_id for x in \
                           ToggleProperty.objects.toggleproperties_for_user("bookmark", self.user).filter(
@@ -89,8 +91,9 @@ class UserService:
 
         return Image.objects.filter(pk__in=bookmarked_pks)
 
-    def get_liked_images(self):
-        # type: () -> QuerySet
+    def get_liked_images(self) -> QuerySet:
+        from astrobin.models import Image
+
         image_ct = ContentType.objects.get_for_model(Image)  # type: ContentType
         liked_pks = [
             x.object_id for x in \
@@ -251,6 +254,8 @@ class UserService:
                         _do_clear(language[0], section, subsection, view)
 
     def empty_trash(self) -> int:
+        from astrobin.models import Image
+
         images: SafeDeleteQueryset = Image.deleted_objects.filter(user=self.user)
         count: int = images.count()
 
@@ -261,7 +266,11 @@ class UserService:
     def display_wip_images_on_public_gallery(self) -> bool:
         return self.user.userprofile.display_wip_images_on_public_gallery in (None, True)
 
-    def sort_gallery_by(self, queryset: QuerySet, subsection: str, active: str) -> Tuple[QuerySet, List[str]]:
+    def sort_gallery_by(self, queryset: QuerySet, subsection: str, active: str, klass: str) -> Tuple[QuerySet, List[str]]:
+        from astrobin.models import Acquisition, Camera, Image, Telescope
+        from astrobin_apps_equipment.models import Camera as CameraV2, Telescope as TelescopeV2
+        from astrobin_apps_images.services import ImageService
+
         menu = []
 
         #########
@@ -392,10 +401,13 @@ class UserService:
                         ).distinct()
                     elif active.startswith('N'):
                         active = active.replace('N', '')
-                        queryset = queryset.filter(
-                            Q(imaging_telescopes_2__id=active) |
-                            Q(imaging_cameras_2__id=active)
-                        ).distinct()
+                        if klass in (None, 'telescope'):
+                            queryset = queryset.filter(imaging_telescopes_2__id=active).distinct()
+                        elif klass == 'camera':
+                            queryset = queryset.filter(imaging_cameras_2__id=active).distinct()
+                        else:
+                            queryset = queryset.none()
+
 
         ###########
         # SUBJECT #
@@ -539,6 +551,8 @@ class UserService:
         return queryset, menu
 
     def update_premium_counter_on_subscription(self, subscription: Subscription):
+        from astrobin.models import Image, UserProfile
+
         profile: UserProfile = self.user.userprofile
 
         if subscription.group.name == 'astrobin_lite':
@@ -547,3 +561,12 @@ class UserService:
         elif subscription.group.name == 'astrobin_lite_2020':
             profile.premium_counter = Image.objects_including_wip.filter(user=self.user).count()
             profile.save(keep_deleted=True)
+
+    def is_in_group(self, group_name: Union[str, List[str]]) -> bool:
+        if not self.user or not self.user.is_authenticated:
+            return False
+
+        if type(group_name) is list:
+            return self.user.groups.filter(name__in=group_name)
+
+        return self.user.groups.filter(name=group_name)

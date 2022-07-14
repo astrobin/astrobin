@@ -3,8 +3,10 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 
 from astrobin.tests.generators import Generators
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.filter_base_model import FilterType
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
+from common.constants import GroupName
 
 
 class TestApiFilterViewSet(TestCase):
@@ -17,7 +19,7 @@ class TestApiFilterViewSet(TestCase):
     def test_list_with_items(self):
         client = APIClient()
 
-        filter = EquipmentGenerators.filter()
+        filter = EquipmentGenerators.filter(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
 
         response = client.get(reverse('astrobin_apps_equipment:filter-list'), format='json')
         self.assertEquals(1, response.data['count'])
@@ -31,7 +33,7 @@ class TestApiFilterViewSet(TestCase):
         response = client.delete(reverse('astrobin_apps_equipment:filter-detail', args=(filter.pk,)), format='json')
         self.assertEquals(405, response.status_code)
 
-        user = Generators.user(groups=['equipment_moderators'])
+        user = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
         client.login(username=user.username, password=user.password)
         client.force_authenticate(user=user)
 
@@ -62,7 +64,7 @@ class TestApiFilterViewSet(TestCase):
     def test_created_by(self):
         client = APIClient()
 
-        user = Generators.user(groups=['equipment_moderators'])
+        user = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
         client.login(username=user.username, password=user.password)
         client.force_authenticate(user=user)
 

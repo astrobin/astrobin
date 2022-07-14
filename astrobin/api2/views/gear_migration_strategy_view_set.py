@@ -15,6 +15,8 @@ from astrobin.services.gear_service import GearService
 from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_own_migrator_or_readonly import \
     IsEquipmentModeratorOrOwnMigratorOrReadOnly
 from astrobin_apps_equipment.services import EquipmentService
+from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 
 
 class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
@@ -45,14 +47,14 @@ class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
             )
         )
 
-        if self.request.user.groups.filter(name='equipment_moderators').exists():
+        if not UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
             queryset = queryset.filter(user__isnull=True)
 
         return queryset.distinct()
 
     @action(detail=True, methods=['put'], url_path='lock-for-migration-review')
-    def lock_for_migration_review(self, request: HttpRequest, pk: int) -> Response:
-        if not request.user.groups.filter(name='equipment_moderators').exists():
+    def lock_for_migration_review(self, request, pk: int) -> Response:
+        if not UserService(request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
             raise PermissionDenied(request.user)
 
         strategy: GearMigrationStrategy = self.get_object()
@@ -71,8 +73,8 @@ class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(detail=True, methods=['put'], url_path='release-lock-for-migration-review')
-    def release_lock_for_migration_review(self, request: HttpRequest, pk: int) -> Response:
-        if not request.user.groups.filter(name='equipment_moderators').exists():
+    def release_lock_for_migration_review(self, request, pk: int) -> Response:
+        if not UserService(request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
             raise PermissionDenied(request.user)
 
         strategy: GearMigrationStrategy = self.get_object()
@@ -89,7 +91,7 @@ class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['put'])
     def approve(self, request, pk):
-        if not request.user.groups.filter(name='equipment_moderators').exists():
+        if not UserService(request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
             raise PermissionDenied(request.user)
 
         strategy: GearMigrationStrategy = self.get_object()
@@ -109,7 +111,7 @@ class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['put'])
     def reject(self, request, pk):
-        if not request.user.groups.filter(name='equipment_moderators').exists():
+        if not UserService(request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
             raise PermissionDenied(request.user)
 
         strategy: GearMigrationStrategy = self.get_object()

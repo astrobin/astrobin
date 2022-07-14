@@ -19,7 +19,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.exceptions import MultipleObjectsReturned
 from django.core.paginator import InvalidPage, Paginator
-from django.db.models import Q
+from django.db.models import Count, Q
 from django.forms.models import inlineformset_factory
 from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
@@ -54,7 +54,6 @@ from astrobin.models import (
     Accessory, App, Camera, DeepSky_Acquisition, Filter, FocalReducer, Gear,
     GearUserInfo, Image, ImageRevision, Location, Mount, Software, SolarSystem_Acquisition, Telescope, UserProfile,
 )
-from astrobin.services.gear_service import GearService
 from astrobin.shortcuts import ajax_response, ajax_success
 from astrobin.templatetags.tags import in_upload_wizard
 from astrobin.utils import get_client_country_code
@@ -1165,6 +1164,7 @@ def user_page(request, username):
         return HttpResponseRedirect(reverse('user_collections_list', args=(username,)))
 
     active = request.GET.get('active')
+    klass = request.GET.get('klass')
     menu = []
 
     if UserService(user).display_wip_images_on_public_gallery() and request.user == user:
@@ -1187,7 +1187,7 @@ def user_page(request, username):
         section = 'trash'
         subsection = None
     else:
-        qs, menu = UserService(user).sort_gallery_by(qs, subsection, active)
+        qs, menu = UserService(user).sort_gallery_by(qs, subsection, active, klass)
 
     # Calculate some stats
 
@@ -1512,54 +1512,86 @@ def user_profile_save_license(request):
 @login_required
 @require_GET
 def user_profile_edit_gear(request):
-    """Edits own profile"""
+    from astrobin_apps_equipment.models import (
+        Telescope as Telescope2,
+        Camera as Camera2,
+        Mount as Mount2,
+        Filter as Filter2,
+        Accessory as Accessory2,
+        Software as Software2
+    )
+
     profile = request.user.userprofile
+    values = ['id', 'brand__name', 'name', 'num_images']
 
-    def uniq(seq):
-        # Not order preserving
-        keys = {}
-        for e in seq:
-            keys[e] = 1
-        return list(keys.keys())
+    telescopes2 = Telescope2.objects.annotate(
+        num_images=Count('images_using_for_imaging', filter=Q(images_using_for_imaging__user=profile.user), distinct=True)
+    ).filter(
+        images_using_for_imaging__deleted__isnull=True,
+        images_using_for_imaging__user=profile.user
+    ).distinct(
+    ).values_list(
+        *values
+    )
 
-    response_dict = {
-        'initial': 'initial' in request.GET,
-        'all_gear_makes': simplejson.dumps(
-            uniq([x.get_make() for x in Gear.objects.exclude(make=None).exclude(make='')])),
-        'all_gear_names': simplejson.dumps(
-            uniq([x.get_name() for x in Gear.objects.exclude(name=None).exclude(name='')])),
-        'is_own_equipment_migrator': request.user.groups.filter(name='own_equipment_migrators').exists(),
-        'has_unmigrated_legacy_gear_items': GearService.has_unmigrated_legacy_gear_items(request.user),
-    }
+    cameras2 = Camera2.objects.annotate(
+        num_images=Count('images_using_for_imaging', filter=Q(images_using_for_imaging__user=profile.user), distinct=True)
+    ).filter(
+        images_using_for_imaging__deleted__isnull=True,
+        images_using_for_imaging__user=profile.user
+    ).distinct(
+    ).values_list(
+        *values
+    )
 
-    prefill = {}
-    for attr, label, klass in (
-            ['telescopes', _("Telescopes and lenses"), 'Telescope'],
-            ['cameras', _("Cameras"), 'Camera'],
-            ['mounts', _("Mounts"), 'Mount'],
-            ['focal_reducers', _("Focal reducers"), 'FocalReducer'],
-            ['software', _("Software"), 'Software'],
-            ['filters', _("Filters"), 'Filter'],
-            ['accessories', _("Accessories"), 'Accessory']):
-        all_gear = getattr(profile, attr).all()
-        prefill[label] = [all_gear, klass]
+    mounts2 = Mount2.objects.annotate(
+        num_images=Count('images_using', filter=Q(images_using__user=profile.user), distinct=True)
+    ).filter(
+        images_using__deleted__isnull=True,
+        images_using__user=profile.user
+    ).distinct(
+    ).values_list(
+        *values
+    )
 
-    response_dict['prefill'] = prefill
-    return render(request, "user/profile/edit/gear.html", response_dict)
+    filters2 = Filter2.objects.annotate(
+        num_images=Count('images_using', filter=Q(images_using__user=profile.user), distinct=True)
+    ).filter(
+        images_using__deleted__isnull=True,
+        images_using__user=profile.user
+    ).distinct(
+    ).values_list(
+        *values
+    )
 
+    accessories2 = Accessory2.objects.annotate(
+        num_images=Count('images_using', filter=Q(images_using__user=profile.user), distinct=True)
+    ).filter(
+        images_using__deleted__isnull=True,
+        images_using__user=profile.user
+    ).distinct(
+    ).values_list(
+        *values
+    )
 
-@never_cache
-@login_required
-@require_POST
-def user_profile_edit_gear_remove(request, id):
-    profile = request.user.userprofile
-    gear, gear_type = get_correct_gear(id)
-    if not gear:
-        raise Http404
+    software2 = Software2.objects.annotate(
+        num_images=Count('images_using', filter=Q(images_using__user=profile.user), distinct=True)
+    ).filter(
+        images_using__deleted__isnull=True,
+        images_using__user=profile.user
+    ).distinct(
+    ).values_list(
+        *values
+    )
 
-    profile.remove_gear(gear, gear_type)
-
-    return ajax_success()
+    return render(request, 'user/profile/edit/gear.html', {
+        'telescopes2': telescopes2,
+        'cameras2': cameras2,
+        'mounts2': mounts2,
+        'filters2': filters2,
+        'accessories2': accessories2,
+        'software2': software2
+    })
 
 
 @never_cache

@@ -58,6 +58,8 @@ from astrobin.utils import get_client_country_code, get_image_resolution
 from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import can_access_basic_equipment_functions
 from astrobin_apps_groups.forms import AutoSubmitToIotdTpProcessForm, GroupSelectForm
 from astrobin_apps_groups.models import Group
+from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_notifications.tasks import push_notification_for_new_image
@@ -697,6 +699,7 @@ class ImageDetailView(ImageDetailViewBase):
                 if revision_image \
                 else ImageService.get_constellation(image.solution),
             'resolution': '%dx%d' % (w, h) if (w and h) else None,
+            'file_size': revision_image.uploader_upload_length if revision_image else image.uploader_upload_length,
             'locations': locations,
             'solar_system_main_subject': ImageService(image).get_solar_system_main_subject_label(),
             'content_type': ContentType.objects.get(app_label='astrobin', model='image'),
@@ -1108,9 +1111,9 @@ class ImageEditGearView(ImageEditBaseView):
 
         context['no_gear'] = profile.telescopes.count() == 0 and profile.cameras.count() == 0
         context['copy_gear_form'] = CopyGearForm(user, context['image'])
-        context['is_own_equipment_migrator'] = user.groups.filter(
-            name__in=['equipment_moderators', 'own_equipment_migrators']
-        ).exists()
+        context['is_own_equipment_migrator'] = UserService(user).is_in_group(
+            [GroupName.EQUIPMENT_MODERATORS. GroupName.OWN_EQUIPMENT_MIGRATORS]
+        )
 
         return context
 

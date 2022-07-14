@@ -3,11 +3,12 @@ from datetime import datetime, timedelta
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
+from astrobin_apps_users.services import UserService
 from common.services import DateTimeService
 
 
 def may_toggle_submission_image(user, image):
-    if not user.groups.filter(name='iotd_submitters').exists():
+    if not UserService(user).is_in_group('iotd_submitters'):
         return False, _("You are not a member of the IOTD Submitters board.")
 
     if user == image.user:
@@ -59,7 +60,7 @@ def may_toggle_submission_image(user, image):
 
 
 def may_toggle_vote_image(user, image):
-    if not user.groups.filter(name='iotd_reviewers').exists():
+    if not UserService(user).is_in_group('iotd_reviewers'):
         return False, _("You are not a member of the IOTD Reviewers board.")
 
     if user == image.user:
@@ -124,7 +125,7 @@ def may_toggle_vote_image(user, image):
 
 
 def may_elect_iotd(user, image):
-    if not user.groups.filter(name='iotd_judges').exists():
+    if not UserService(user).is_in_group('iotd_judges'):
         return False, _("You are not a member of the IOTD Judges board.")
 
     if user == image.user:
@@ -202,7 +203,7 @@ def may_elect_iotd(user, image):
 
 
 def may_unelect_iotd(user, image):
-    if not user.groups.filter(name='iotd_judges').exists():
+    if not UserService(user).is_in_group('iotd_judges'):
         return False, _("You are not a member of the IOTD Judges board.")
 
     # Import here to avoid circular dependency
