@@ -4,6 +4,8 @@ import requests
 from braces.views import JSONResponseMixin
 from django.views.generic.base import View
 
+from common.tls_adapter import TLSAdapter
+
 log = logging.getLogger('apps')
 
 
@@ -16,9 +18,11 @@ class UrlIsAvailable(JSONResponseMixin, View):
             if not '://' in url:
                 url = f'http://{url}'
             try:
-                requests.head(url, timeout=5)
+                session = requests.session()
+                session.mount('https://', TLSAdapter())
+                session.request('HEAD', url, timeout=5)
                 available = True
-            except requests.ConnectionError:
-                pass
+            except requests.ConnectionError as e:
+                log.debug(f'Unable to connect to {url}: {str(e)}')
 
         return self.render_json_response({'available': available})
