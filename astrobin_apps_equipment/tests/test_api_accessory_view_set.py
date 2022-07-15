@@ -57,6 +57,7 @@ class TestApiAccessoryViewSet(TestCase):
         response = client.post(reverse('astrobin_apps_equipment:accessory-list'), {
             'brand': EquipmentGenerators.brand().pk,
             'name': 'Accessory Foo',
+            'type': AccessoryType.OTHER,
         }, format='json')
         self.assertEquals(403, response.status_code)
 
