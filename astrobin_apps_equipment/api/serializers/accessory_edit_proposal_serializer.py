@@ -7,7 +7,9 @@ from astrobin_apps_equipment.models import Accessory
 
 class AccessoryEditProposalSerializer(EquipmentItemEditProposalSerializer):
     def get_original_properties(self, target: Accessory):
-        return {}
+        return {
+            'type': target.type,
+        }
 
     class Meta(EquipmentItemEditProposalSerializer.Meta):
         model = AccessoryEditProposal

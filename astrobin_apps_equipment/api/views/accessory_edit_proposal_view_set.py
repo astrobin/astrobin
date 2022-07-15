@@ -31,6 +31,11 @@ class AccessoryEditProposalViewSet(EquipmentItemEditProposalViewSet):
         if not check_permissions:
             return response
 
+        accessory = edit_proposal.edit_proposal_target
+        accessory.type = edit_proposal.type
+
+        accessory.save()
+
         return super().approve(request, pk)
 
     class Meta(EquipmentItemEditProposalViewSet.Meta):
