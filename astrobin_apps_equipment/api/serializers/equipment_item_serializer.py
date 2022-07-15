@@ -1,6 +1,10 @@
+from django.db.models import Q
 from rest_framework import serializers
 
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.services import EquipmentItemService
+from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 
 
 class EquipmentItemSerializer(serializers.ModelSerializer):
@@ -14,8 +18,33 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
         return ""
 
     def get_variants(self, item):
+        user = None
+        request = self.context.get("request")
+        if request and hasattr(request, "user"):
+            user = request.user
+
         ModelClass = self.__class__.Meta.model
+
         variants = ModelClass.objects.filter(variant_of__pk=item.pk)
+
+        if user and user.is_authenticated:
+            if not UserService(user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
+                variants = variants.filter(
+                    Q(
+                        Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
+                        Q(created_by=user)
+                    ) &
+                    Q(
+                        Q(brand__isnull=False) |
+                        Q(created_by=user)
+                    )
+                )
+        else:
+            variants = variants.filter(
+                reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+                brand__isnull=False
+            )
+
         return self.__class__(variants, many=True).data
 
     class Meta:
