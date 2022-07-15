@@ -11,7 +11,7 @@ class AccessoryType:
     FIELD_DEROTATOR = 'FIELD_DEROTATOR'
     FILTER_WHEEL = 'FILTER_WHEEL'
     FLAT_BOX = 'FLAT_BOX'
-    FOCAL_MODIFIED_FIELD_CORRECTOR = 'FOCAL_MODIFIED_FIELD_CORRECTOR'
+    FOCAL_MODIFIER_FIELD_CORRECTOR = 'FOCAL_MODIFIER_FIELD_CORRECTOR'
     FOCUSER = 'FOCUSER'
     OAG = 'OAG'
     OBSERVATORY_CONTROL = 'OBSERVATORY_CONTROL'
@@ -28,7 +28,7 @@ class AccessoryBaseModel(EquipmentItem):
         (AccessoryType.FIELD_DEROTATOR, _('Field derotator')),
         (AccessoryType.FILTER_WHEEL, _('Filter wheel')),
         (AccessoryType.FLAT_BOX, _('Flat box')),
-        (AccessoryType.FOCAL_MODIFIED_FIELD_CORRECTOR, _('Focal modified / field corrector')),
+        (AccessoryType.FOCAL_MODIFIER_FIELD_CORRECTOR, _('Focal modifier / field corrector')),
         (AccessoryType.FOCUSER, _('Focuser')),
         (AccessoryType.OAG, _('Off-axis guider')),
         (AccessoryType.OBSERVATORY_CONTROL, _('Observatory control')),
