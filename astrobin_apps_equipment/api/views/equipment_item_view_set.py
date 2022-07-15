@@ -66,9 +66,14 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             if self.request.user.is_authenticated:
                 if not UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
                     queryset = queryset.filter(
-                        Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
-                        Q(brand__isnull=False) |
-                        Q(created_by=self.request.user)
+                        Q(
+                            Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
+                            Q(created_by=self.request.user)
+                        ) &
+                        Q(
+                            Q(brand__isnull=False) |
+                            Q(created_by=self.request.user)
+                        )
                     )
             else:
                 queryset = queryset.filter(
