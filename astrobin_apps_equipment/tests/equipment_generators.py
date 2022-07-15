@@ -3,6 +3,7 @@ from django.template.defaultfilters import slugify
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.models import Camera, Sensor, Telescope, Mount, Filter, Accessory, Software, \
     EquipmentItemGroup
+from astrobin_apps_equipment.models.accessory_base_model import AccessoryType
 from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
@@ -133,6 +134,7 @@ class EquipmentGenerators:
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
             name=kwargs.get('name', 'Test software %s' % random_name),
+            type=kwargs.get('type', AccessoryType.OTHER),
             variant_of=kwargs.get('variant_of', None),
             website=kwargs.get('website', 'https://www.test-accessory-%s.com/' % random_name),
             reviewer_decision=kwargs.get('reviewer_decision', None),

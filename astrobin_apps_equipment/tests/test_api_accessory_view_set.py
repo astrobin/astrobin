@@ -3,6 +3,7 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 
 from astrobin.tests.generators import Generators
+from astrobin_apps_equipment.models.accessory_base_model import AccessoryType
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from common.constants import GroupName
@@ -45,6 +46,7 @@ class TestApiAccessoryViewSet(TestCase):
         response = client.post(reverse('astrobin_apps_equipment:accessory-list'), {
             'brand': EquipmentGenerators.brand().pk,
             'name': 'Accessory Foo',
+            'type': AccessoryType.OTHER,
         }, format='json')
         self.assertEquals(403, response.status_code)
 
@@ -68,6 +70,7 @@ class TestApiAccessoryViewSet(TestCase):
         response = client.post(reverse('astrobin_apps_equipment:accessory-list'), {
             'brand': EquipmentGenerators.brand().pk,
             'name': 'Accessory Foo',
+            'type': AccessoryType.OTHER,
         }, format='json')
         self.assertEquals(201, response.status_code)
         self.assertEquals(user.pk, response.data['created_by'])
