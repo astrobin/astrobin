@@ -31,6 +31,12 @@ class FilterViewSet(EquipmentItemViewSet):
                 bandwidth__gte=bandwidth_object.get('from'),
                 bandwidth__lte=bandwidth_object.get('to')
             )
+
+        filter_size_filter = self.request.GET.get('filter-size')
+        if filter_size_filter and filter_size_filter != 'null':
+            queryset = queryset.filter(
+                size=filter_size_filter,
+            )
         
         return queryset
 
