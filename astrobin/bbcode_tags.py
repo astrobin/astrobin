@@ -41,7 +41,6 @@ class CodeBBCodeTag(BBCodeTag):
 
     class Options:
         strip = True
-        escape_html = False
 
     def render(self, value, option=None, parent=None):
         content = str(value)
@@ -59,7 +58,6 @@ class PreBBCodeTag(BBCodeTag):
 
     class Options:
         strip = True
-        escape_html = False
 
     def render(self, value, option=None, parent=None):
         content = str(value)

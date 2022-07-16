@@ -337,7 +337,7 @@ select.cke_dialog_ui_input_select {
     color: $link-color !important;
   }
 
-  img {
+  img:not(.cke_reset) {
     max-width: 100%;
     height: auto !important;
     margin-top: 10px;

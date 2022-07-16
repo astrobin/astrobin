@@ -772,7 +772,7 @@ $(function () {
 
         highlightCode: function (comment) {
             setTimeout(() => {
-                const $elements = document.getElementById(`c${comment.id}`).querySelectorAll("pre");
+                const $elements = document.getElementById(`c${comment.id}`).querySelectorAll("pre code");
                 for (const $element of $elements) {
                     astrobin_common.highlightCodeForElement($element);
                 }

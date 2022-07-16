@@ -367,8 +367,8 @@
 					return;
 
 				// Upcast <code> with text only: https://dev.ckeditor.com/ticket/11926#comment:4
-				if ( code.children.length != 1 || code.children[ 0 ].type != CKEDITOR.NODE_TEXT )
-					return;
+				// if ( code.children.length != 1 || code.children[ 0 ].type != CKEDITOR.NODE_TEXT )
+				// 	return;
 
 				// Read language-* from <code> class attribute.
 				var matchResult = editor._.codesnippet.langsRegex.exec( code.attributes[ 'class' ] );
@@ -396,7 +396,7 @@
 				code.removeClass( codeClass );
 
 				// Set raw text inside <code>...</code>.
-				code.add( new CKEDITOR.htmlParser.text( CKEDITOR.tools.htmlEncode( this.data.code ) ) );
+				code.add( new CKEDITOR.htmlParser.text( this.data.code ) );
 
 				return el;
 			}
