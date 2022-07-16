@@ -11,6 +11,7 @@
 @import "definition-lists";
 @import "fancybox";
 @import "forms";
+@import "highlightjs";
 @import "meter";
 @import "modal";
 @import "multiselect";
@@ -3520,8 +3521,9 @@ img.flickr-photo-to-import-selected {
 }
 
 pre {
-  background-color: #191919;
+  background-color: #0d1117;
   color: $grey-1;
+  margin: 1rem 0;
 }
 
 .table.migrate-donations {

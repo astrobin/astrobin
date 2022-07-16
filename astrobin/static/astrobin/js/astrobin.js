@@ -115,6 +115,7 @@ astrobin_common = {
                     'blockquote,' +
                     'button,' +
                     'clipboard,' +
+                    'codesnippet,' +
                     'dialog,' +
                     'dialogui,' +
                     'divarea,' +
@@ -184,7 +185,7 @@ astrobin_common = {
                     },
                     {
                         name: 'insert',
-                        items: ['addFile', 'addImage']
+                        items: ['addFile', 'addImage', 'CodeSnippet']
                     },
                     {
                         name: 'special',
@@ -342,6 +343,27 @@ astrobin_common = {
                     '&trade;', '&#9658;', '&bull;', '&rarr;', '&rArr;', '&hArr;', '&diams;', '&asymp;'
                 ],
                 fontSize_sizes: "50%/50%;100%/100%;200%/200%",
+                codeSnippet_languages: {
+                    bash: 'Bash',
+                    coffeescript: 'CoffeeScript',
+                    cpp: 'C++',
+                    cs: 'C#',
+                    css: 'CSS',
+                    diff: 'Diff',
+                    html: 'HTML',
+                    java: 'Java',
+                    javascript: 'JavaScript',
+                    json: 'JSON',
+                    objectivec: 'Objective-C',
+                    perl: 'Perl',
+                    php: 'PHP',
+                    python: 'Python',
+                    ruby: 'Ruby',
+                    sql: 'SQL',
+                    vbscript: 'VBScript',
+                    xhtml: 'XHTML',
+                    xml: 'XML'
+                },
                 on: {
                     change: function () {
                         this.updateElement();
@@ -1362,6 +1384,44 @@ astrobin_common = {
         }
 
         astrobin_common.init_toggle_high_contrast_theme();
+    },
+
+    highlightCodePrepare: function () {
+        if (typeof hljs !== "undefined") {
+            const brPlugin = {
+                "before:highlightBlock": ({block}) => {
+                    block.innerHTML = block.innerHTML.replace(/<br[ /]*>/g, '\n');
+                },
+                "after:highlightBlock": ({result}) => {
+                    result.value = result.value.replace(/\n/g, "<br>");
+                }
+            };
+
+            hljs.addPlugin(brPlugin);
+            hljs.addPlugin(new CopyButtonPlugin());
+        }
+    },
+
+    highlightCodeFinalize: function () {
+        if (typeof hljs !== "undefined") {
+            hljs.initLineNumbersOnLoad();
+        }
+    },
+
+    highlightCode: function () {
+        if (typeof hljs !== "undefined") {
+            astrobin_common.highlightCodePrepare();
+            hljs.highlightAll();
+            astrobin_common.highlightCodeFinalize();
+
+        }
+    },
+
+    highlightCodeForElement: function ($element) {
+        if (typeof hljs !== "undefined") {
+            hljs.highlightElement($element);
+            hljs.lineNumbersBlock($element);
+        }
     }
 };
 
@@ -1445,7 +1505,6 @@ astrobin_stats = {
             }
         });
     },
-
 
     init: function (config) {
         /* Init */

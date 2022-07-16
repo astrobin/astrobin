@@ -38,6 +38,7 @@
             center: 'div',
             justify: 'div',
             quote: 'blockquote',
+            pre: 'pre',
             code: 'code',
             url: 'a',
             email: 'span',
@@ -45,7 +46,7 @@
             '*': 'li',
             list: 'ol'
         },
-        convertMap = {strong: 'b', b: 'b', u: 'u', em: 'i', i: 'i', s: 's', code: 'code', li: '*'},
+        convertMap = {strong: 'b', b: 'b', u: 'u', em: 'i', i: 'i', s: 's', pre: 'pre', code: 'code', li: '*'},
         tagnameMap = {
             strong: 'b',
             em: 'i',
@@ -54,6 +55,7 @@
             li: '*',
             ul: 'list',
             ol: 'list',
+            pre: 'pre',
             code: 'code',
             a: 'link',
             img: 'img',
@@ -67,7 +69,7 @@
             right: 'text-align',
             justify: 'text-align'
         },
-        attributesMap = {url: 'href', email: 'mailhref', quote: 'cite', list: 'listType'};
+        attributesMap = {url: 'href', email: 'mailhref', quote: 'cite', list: 'listType', code: 'class'};
 
     // List of block-like tags.
     var dtd = CKEDITOR.dtd,
@@ -585,7 +587,15 @@
             },
 
             attribute: function (name, val) {
-                if (name == 'option') {
+                if (name === 'option') {
+                    // Force simply ampersand in attributes.
+                    if (typeof val == 'string') {
+                        val = val.replace(/&amp;/g, '&');
+                    }
+                    this.write('=', val);
+                }
+
+                if (name === 'class') {
                     this.write('=', val);
                 }
             },

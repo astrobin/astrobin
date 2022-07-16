@@ -90,7 +90,6 @@
                     return $(this).data('id');
                 }).get();
 
-                console.log(added_ids);
                 $.ajax({
                     url: '{% url 'user_collections_add_remove_images' requested_user.username collection.pk %}',
                     type: 'POST',

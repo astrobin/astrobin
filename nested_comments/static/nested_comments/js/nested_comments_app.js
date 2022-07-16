@@ -354,7 +354,7 @@ $(function () {
         },
 
         addComment: function (comment) {
-            var self = this;
+            const self = this;
 
             if (comment.get('parent') == null) {
                 self.pushObject(comment);
@@ -365,6 +365,8 @@ $(function () {
                 } else
                     self.pushObject(comment);
             }
+
+            self.highlightCode(comment);
         },
 
         createComment: function () {
@@ -541,10 +543,12 @@ $(function () {
         cancelEditing: function (comment) {
             comment.set('text', comment.get('original_text'));
             comment.set('editing', false);
+            this.highlightCode(comment);
         },
 
         saveEdit: function (comment) {
-            var data = this.dump(comment);
+            const data = this.dump(comment);
+            const self = this;
 
             comment.set('submitting', true);
             $.ajax({
@@ -555,6 +559,7 @@ $(function () {
                 success: function () {
                     comment.set('editing', false);
                     comment.set('submitting', false);
+                    self.highlightCode(comment);
                 }
             });
         },
@@ -763,6 +768,15 @@ $(function () {
                     self.set('firstCommentAdded', true);
                 }
             });
+        },
+
+        highlightCode: function (comment) {
+            setTimeout(() => {
+                const $elements = document.getElementById(`c${comment.id}`).querySelectorAll("pre");
+                for (const $element of $elements) {
+                    astrobin_common.highlightCodeForElement($element);
+                }
+            }, 500);
         }
     });
 
