@@ -222,6 +222,10 @@ select.cke_dialog_ui_input_select {
   }
 }
 
+select.cke_dialog_ui_input_select {
+  height: auto !important;
+}
+
 .cke_dialog_background_cover {
   background: $black !important;
   opacity: .8 !important;
@@ -326,14 +330,14 @@ select.cke_dialog_ui_input_select {
 .cke_wysiwyg_div {
   background-color: $grey-5 !important;
   color: $grey-1 !important;
-  padding: 8px !important;
+  padding: 1rem !important;
   min-height: 20rem;
 
   a {
     color: $link-color !important;
   }
 
-  img {
+  img:not(.cke_reset) {
     max-width: 100%;
     height: auto !important;
     margin-top: 10px;

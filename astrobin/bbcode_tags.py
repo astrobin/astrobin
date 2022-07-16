@@ -36,4 +36,34 @@ class QuoteBBCodeTag(BBCodeTag):
         return '<blockquote>{}</blockquote>'.format(content)
 
 
+class CodeBBCodeTag(BBCodeTag):
+    name = 'code'
+
+    class Options:
+        strip = True
+
+    def render(self, value, option=None, parent=None):
+        content = str(value)
+
+        if option:
+            klass = str(option).replace('"', '')
+            if klass:
+                return f'<code class="{klass}">{content}</code>'
+
+        return f'<code>{content}</code>'
+
+
+class PreBBCodeTag(BBCodeTag):
+    name = 'pre'
+
+    class Options:
+        strip = True
+
+    def render(self, value, option=None, parent=None):
+        content = str(value)
+        return f'<pre>{content}</pre>'
+
+
 tag_pool.register_tag(QuoteBBCodeTag)
+tag_pool.register_tag(CodeBBCodeTag)
+tag_pool.register_tag(PreBBCodeTag)
