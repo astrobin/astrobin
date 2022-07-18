@@ -63,15 +63,13 @@ class EquipmentBrand(SafeDeleteModel):
     ####################################################################################################################
 
     user_count = models.PositiveSmallIntegerField(
-        null=True,
-        blank=True,
         editable=False,
+        default=0
     )
 
     image_count = models.PositiveSmallIntegerField(
-        null=True,
-        blank=True,
         editable=False,
+        default=0
     )
 
     def __str__(self):
