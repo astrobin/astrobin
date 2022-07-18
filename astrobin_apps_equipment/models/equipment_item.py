@@ -204,15 +204,13 @@ class EquipmentItem(SafeDeleteModel):
     ####################################################################################################################
 
     user_count = models.PositiveIntegerField(
-        null=True,
-        blank=True,
         editable=False,
+        default=0
     )
 
     image_count = models.PositiveIntegerField(
-        null=True,
-        blank=True,
         editable=False,
+        default=0
     )
 
     ####################################################################################################################
