@@ -5,6 +5,7 @@ from .equipment_item_listing import EquipmentItemListing
 from .equipment_item import EquipmentItem
 from .equipment_item_group import EquipmentItemGroup
 from .sensor import Sensor
+from .sensor_edit_proposal import SensorEditProposal
 from .camera import Camera
 from .camera_edit_proposal import CameraEditProposal
 from .telescope import Telescope
