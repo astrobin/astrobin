@@ -69,7 +69,7 @@
                 <form class="form-horizontal" id="image_acquisition" action="{% url 'image_edit_save_acquisition' %}"
                       method="post" novalidate>{% csrf_token %}
                     {% for form in deep_sky_acquisitions %}
-                        {% if request.user|is_own_equipment_migrator and form.filter_2.field.queryset.count == 0 %}
+                        {% if image.user|is_own_equipment_migrator and form.filter_2.field.queryset.count == 0 %}
                             <div class="alert alert-warning">
                                 <i class="icon-warning-sign"></i>
                                 {% blocktrans trimmed %}
