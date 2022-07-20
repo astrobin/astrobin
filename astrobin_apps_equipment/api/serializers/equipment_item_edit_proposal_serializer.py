@@ -1,8 +1,11 @@
+from annoying.functions import get_object_or_None
+from django.contrib.auth.models import User
 from rest_framework import fields
 from rest_framework.exceptions import ValidationError
 
 from astrobin_apps_equipment.api.serializers.equipment_item_serializer import EquipmentItemSerializer
 from astrobin_apps_equipment.models import EquipmentItem
+from common.constants import GroupName
 from common.exceptions import Conflict
 
 
@@ -23,6 +26,7 @@ class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
             'edit_proposal_review_ip',
             'edit_proposal_review_comment',
             'edit_proposal_review_status',
+            'edit_proposal_assignee',
             'brand',
             'name',
             'community_notes',
@@ -51,6 +55,11 @@ class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
         if 'edit_proposal_review_status' in attrs and attrs[
             'edit_proposal_review_status'] is not None:
             raise ValidationError("The edit_proposal_review_status must be null")
+
+        if 'edit_proposal_assignee' in attrs and attrs['edit_proposal_assignee'] is not None:
+            assignee = attrs['edit_proposal_assignee']
+            if assignee != target.created_by or not assignee.groups.filter(name=GroupName.EQUIPMENT_MODERATORS).exists():
+                raise ValidationError("An edit proposal can only be assigned to a moderator or the item's creator")
 
         return super().validate(attrs)
 

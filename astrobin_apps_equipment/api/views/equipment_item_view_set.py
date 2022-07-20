@@ -314,6 +314,9 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         if item.created_by == request.user:
             return Response("You cannot review an item that you created", HTTP_400_BAD_REQUEST)
 
+        if item.assignee and item.assignee != request.user:
+            return Response("You cannot review an item that is not assigned to you", HTTP_400_BAD_REQUEST)
+
         item.reviewed_by = request.user
         item.reviewed_timestamp = timezone.now()
         item.reviewer_decision = EquipmentItemReviewerDecision.APPROVED
@@ -385,6 +388,9 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         if item.created_by == request.user:
             return Response("You cannot review an item that you created", HTTP_400_BAD_REQUEST)
+
+        if item.assignee and item.assignee != request.user:
+            return Response("You cannot review an item that is not assigned to you", HTTP_400_BAD_REQUEST)
 
         item.reviewed_by = request.user
         item.reviewed_timestamp = timezone.now()

@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import SET_NULL
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
@@ -85,6 +86,14 @@ class EquipmentItemEditProposalMixin(models.Model):
             ('REJECTED', _("Rejected")),
             ('SUPERSEDED', _("Superseded"))
         ],
+    )
+
+    edit_proposal_assignee = models.ForeignKey(
+        User,
+        on_delete=SET_NULL,
+        related_name='%(app_label)s_%(class)ss_assigned_edit_proposal_for_review',
+        null=True,
+        blank=True
     )
 
     def get_absolute_url_base(self, type: str) -> str:

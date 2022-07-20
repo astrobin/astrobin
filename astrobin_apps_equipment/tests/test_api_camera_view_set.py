@@ -391,3 +391,63 @@ class TestApiCameraViewSet(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertFalse(Camera.objects.filter(brand=duplicate.brand, name=duplicate.name))
         self.assertTrue(camera in image.imaging_cameras_2.all())
+
+    def test_unassigned_camera_can_be_approved(self):
+        camera = EquipmentGenerators.camera(type=CameraType.DEDICATED_DEEP_SKY)
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'approve/', format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+
+        camera.refresh_from_db()
+
+        self.assertEquals(EquipmentItemReviewerDecision.APPROVED, camera.reviewer_decision)
+
+    def test_assigned_camera_cannot_be_approved_by_others(self):
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+            assignee=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]),
+        )
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'approve/', format='json'
+        )
+
+        self.assertEquals(400, response.status_code)
+
+    def test_unassigned_camera_can_be_rejected(self):
+        camera = EquipmentGenerators.camera(type=CameraType.DEDICATED_DEEP_SKY)
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'reject/', format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertFalse(Camera.objects.filter(pk=camera.pk).exists())
+
+    def test_assigned_camera_cannot_be_rejected_by_others(self):
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+            assignee=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]),
+        )
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'approve/', format='json'
+        )
+
+        self.assertEquals(400, response.status_code)
+        self.assertTrue(Camera.objects.filter(pk=camera.pk).exists())

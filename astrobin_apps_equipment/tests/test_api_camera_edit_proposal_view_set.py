@@ -298,3 +298,105 @@ class TestApiCameraEditProposalViewSet(TestCase):
         )
 
         self.assertEquals(200, response.status_code)
+
+    def test_assigned_edit_proposal_cannot_be_approved_by_others(self):
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+        )
+
+        client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list'), {
+                'editProposalTarget': camera.pk,
+                'brand': camera.brand.pk,
+                'type': camera.type,
+                'name': camera.name + " 2",
+                'klass': camera.klass,
+                'edit_proposal_assignee': Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]).pk
+            },
+            format='json'
+        )
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list') + '1/approve/', {}, format='json'
+        )
+
+        self.assertEquals(400, response.status_code)
+
+    def test_assigned_edit_proposal_cannot_be_rejected_by_others(self):
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+        )
+
+        client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list'), {
+                'editProposalTarget': camera.pk,
+
+                'brand': camera.brand.pk,
+                'type': camera.type,
+                'name': camera.name + " 2",
+                'klass': camera.klass,
+                'edit_proposal_assignee': Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]).pk
+            },
+            format='json'
+        )
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list') + '1/reject/', {}, format='json'
+        )
+
+        self.assertEquals(400, response.status_code)
+
+    def test_edit_proposal_assignee_does_not_exist(self):
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+        )
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list'), {
+                'editProposalTarget': camera.pk,
+                'brand': EquipmentGenerators.brand().pk,
+                'sensor': EquipmentGenerators.sensor().pk,
+                'name': 'Camera Foo',
+                'type': CameraType.DEDICATED_DEEP_SKY,
+                'klass': camera.klass,
+                'editProposalAssignee': 999
+            }, format='json'
+        )
+
+        print(response.content)
+        self.assertContains(response, "Invalid pk", status_code=400)
+
+    def test_edit_proposal_assignee_is_not_creator_or_moderator(self):
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+        )
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list'), {
+                'editProposalTarget': camera.pk,
+                'brand': EquipmentGenerators.brand().pk,
+                'sensor': EquipmentGenerators.sensor().pk,
+                'name': 'Camera Foo',
+                'type': CameraType.DEDICATED_DEEP_SKY,
+                'klass': camera.klass,
+                'editProposalAssignee': Generators.user().pk
+            }, format='json'
+        )
+
+        self.assertContains(response, "An edit proposal can only be assigned", status_code=400)

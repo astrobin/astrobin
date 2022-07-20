@@ -32,6 +32,9 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
         if edit_proposal.edit_proposal_by == request.user and not allow_self:
             return False, Response('You cannot review an edit proposal that you proposed', HTTP_400_BAD_REQUEST)
 
+        if edit_proposal.edit_proposal_assignee and edit_proposal.edit_proposal_assignee != request.user:
+            return False, Response('You cannot review an edit proposal that is not assigned to you', HTTP_400_BAD_REQUEST)
+
         return True, None
 
     @action(detail=True, methods=['POST'], url_path='acquire-review-lock')
