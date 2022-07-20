@@ -299,6 +299,22 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         return Response(status=HTTP_200_OK)
 
+    @action(detail=True, methods=['GET'], url_path='possible-assignees')
+    def possible_assignees(self, request, pk):
+        if not UserService(request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
+            raise PermissionDenied(request.user)
+
+        item: EquipmentItem = get_object_or_404(self.get_serializer().Meta.model.objects, pk=pk)
+        value = []
+
+        if item.created_by:
+            value.append(dict(key=item.created_by.pk, value=item.created_by.userprofile.get_display_name()))
+
+        for moderator in User.objects.filter(groups__name=GroupName.EQUIPMENT_MODERATORS):
+            value.append(dict(key=moderator.pk, value=moderator.userprofile.get_display_name()))
+
+        return Response(status=200, data=simplejson.dumps(value))
+
     @action(detail=True, methods=['POST'])
     def assign(self, request, pk):
         if not UserService(request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
