@@ -3,6 +3,7 @@ from collections import Counter
 import simplejson
 from annoying.functions import get_object_or_None
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.contrib.postgres.search import TrigramDistance
 from django.core.cache import cache
 from django.db.models import Q, QuerySet, Value
@@ -297,6 +298,54 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             item.save(keep_deleted=True)
 
         return Response(status=HTTP_200_OK)
+
+    @action(detail=True, methods=['POST'])
+    def assign(self, request, pk):
+        if not UserService(request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
+            raise PermissionDenied(request.user)
+
+        item: EquipmentItem = get_object_or_404(self.get_serializer().Meta.model.objects, pk=pk)
+        assignee_pk = request.data.get('assignee')
+        assignee = None
+
+        if assignee_pk:
+            assignee = get_object_or_None(User, pk=assignee_pk)
+            if assignee is None:
+                return Response("User not found", HTTP_400_BAD_REQUEST)
+
+            if not UserService(assignee).is_in_group(GroupName.EQUIPMENT_MODERATORS):
+                return Response("Assignee is not a moderator", HTTP_400_BAD_REQUEST)
+
+        if item.assignee is not None:
+            if assignee:
+                return Response("This item has already been assigned", HTTP_400_BAD_REQUEST)
+            elif item.assignee != request.user:
+                return Response("You cannot unassign from another moderator", HTTP_400_BAD_REQUEST)
+
+        item.assignee = assignee
+        item.save(keep_deleted=True)
+
+        if assignee and assignee != request.user:
+            push_notification(
+                [item.created_by],
+                request.user,
+                'equipment-item-assigned',
+                {
+                    'user': request.user.userprofile.get_display_name(),
+                    'user_url': build_notification_url(
+                        settings.BASE_URL + reverse('user_page', args=(request.user.username,))
+                    ),
+                    'item': f'{item.brand.name if item.brand else _("(DIY)")} {item.name}',
+                    'item_url': build_notification_url(
+                        AppRedirectionService.redirect(
+                            f'/equipment/explorer/{EquipmentItemService(item).get_type()}/{item.pk}'
+                        )
+                    ),
+                }
+            )
+
+        serializer = self.serializer_class(item)
+        return Response(serializer.data)
 
     @action(detail=True, methods=['POST'])
     def approve(self, request, pk):
