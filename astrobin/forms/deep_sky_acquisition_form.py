@@ -26,7 +26,7 @@ class DeepSky_AcquisitionForm(forms.ModelForm):
     def __init__(self, user: User = None, image: Image = None, **kwargs):
         super().__init__(**kwargs)
 
-        if is_own_equipment_migrator(user):
+        if image.filters_2.count() > 0:
             filter_2_queryset = image.filters_2.all() if image else FilterV2.objects.none()
             self.fields['filter_2'].queryset = filter_2_queryset
             self.fields.pop('filter')
