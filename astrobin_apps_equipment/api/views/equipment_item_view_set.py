@@ -6,8 +6,8 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.postgres.search import TrigramDistance
 from django.core.cache import cache
-from django.db.models import Q, QuerySet, Value
-from django.db.models.functions import Concat, Lower
+from django.db.models import Q, QuerySet
+from django.db.models.functions import Lower
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -30,11 +30,11 @@ from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
 from astrobin_apps_equipment.tasks import reject_item
-from astrobin_apps_users.services import UserService
-from common.constants import GroupName
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_access_full_search
+from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 from common.services import AppRedirectionService
 
 
@@ -308,12 +308,21 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         value = []
 
         if item.created_by:
-            value.append(dict(key=item.created_by.pk, value=item.created_by.userprofile.get_display_name()))
+            value.append(dict(
+                key=item.created_by.pk,
+                value=item.created_by.userprofile.get_display_name(),
+                role='CREATOR'
+            ))
 
         for moderator in User.objects.filter(groups__name=GroupName.EQUIPMENT_MODERATORS):
-            value.append(dict(key=moderator.pk, value=moderator.userprofile.get_display_name()))
+            if moderator.pk not in [x.get('key') for x in value]:
+                value.append(dict(
+                    key=moderator.pk,
+                    value=moderator.userprofile.get_display_name(),
+                    role='MODERATOR'
+                ))
 
-        return Response(status=200, data=simplejson.dumps(value))
+        return Response(status=200, data=value)
 
     @action(detail=True, methods=['POST'])
     def assign(self, request, pk):

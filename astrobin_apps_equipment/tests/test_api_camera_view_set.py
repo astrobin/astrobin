@@ -585,3 +585,16 @@ class TestApiCameraViewSet(TestCase):
         self.assertEquals(200, response.status_code)
         camera.refresh_from_db()
         self.assertIsNone(camera.assignee)
+
+    def test_possible_assignees_does_not_have_duplicates(self):
+        creator = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+        camera = EquipmentGenerators.camera(created_by=creator)
+
+        client = APIClient()
+        client.force_authenticate(creator)
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'possible-assignees/',
+        )
+
+        self.assertEquals(1, len(response.data))
