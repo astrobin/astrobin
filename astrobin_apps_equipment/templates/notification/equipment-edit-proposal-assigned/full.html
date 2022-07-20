@@ -1,0 +1,21 @@
+{% load i18n %}
+
+
+<p>
+    {% blocktrans trimmed %}
+        <a href="{{ user_url }}">{{ user }}</a> assigned an edit proposal on the equipment item
+        <a href="{{ item_url }}">{{ item }}</a> to you for review.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        Please review it as soon as possible, thank you!
+    {% endblocktrans %}
+</p>
+
+<p>
+    <a href="{{ edit_proposal_url }}" class="btn btn-primary">
+        {% trans "View edit proposal" %}
+    </a>
+</p>

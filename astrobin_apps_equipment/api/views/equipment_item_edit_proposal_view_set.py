@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+from annoying.functions import get_object_or_None
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -15,9 +17,10 @@ from astrobin_apps_equipment.api.throttle.equipment_edit_proposal_throttle impor
 from astrobin_apps_equipment.api.views.equipment_item_view_set import EquipmentItemViewSet
 from astrobin_apps_equipment.models import EquipmentItem
 from astrobin_apps_equipment.models.equipment_item_edit_proposal_mixin import EquipmentItemEditProposalMixin
+from astrobin_apps_equipment.services import EquipmentItemService
+from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
-from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.services import AppRedirectionService
 
 
@@ -63,6 +66,79 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
             edit_proposal.save(keep_deleted=True)
 
         return Response(status=HTTP_200_OK)
+
+    @action(detail=True, methods=['GET'], url_path='possible-assignees')
+    def possible_assignees(self, request, pk):
+        EditProposalModelClass = self.get_serializer().Meta.model
+        edit_proposal: (EquipmentItemEditProposalMixin | EquipmentItem) = get_object_or_404(
+            EditProposalModelClass, pk=pk
+        )
+        target_created_by: User = edit_proposal.edit_proposal_target.created_by
+
+        value = [dict(key=target_created_by.id, value=target_created_by.userprofile.get_display_name())]
+
+        for moderator in User.objects.filter(groups__name=GroupName.EQUIPMENT_MODERATORS):
+            if moderator != edit_proposal.edit_proposal_by and moderator.pk not in [x.get('key') for x in value]:
+                value.append(
+                    dict(
+                        key=moderator.pk,
+                        value=moderator.userprofile.get_display_name(),
+                    )
+                )
+
+        return Response(status=200, data=value)
+
+    @action(detail=True, methods=['POST'])
+    def assign(self, request, pk):
+        EditProposalModelClass = self.get_serializer().Meta.model
+        edit_proposal: (EquipmentItemEditProposalMixin | EquipmentItem) = get_object_or_404(
+            EditProposalModelClass, pk=pk
+        )
+        item = edit_proposal.edit_proposal_target
+        new_assignee_pk = request.data.get('assignee')
+        new_assignee = None
+
+        if new_assignee_pk:
+            new_assignee = get_object_or_None(User, pk=new_assignee_pk)
+            if new_assignee is None:
+                return Response("User not found", HTTP_400_BAD_REQUEST)
+            if new_assignee == edit_proposal.edit_proposal_by:
+                return Response("An edit proposal cannot be assigned to its creator", HTTP_400_BAD_REQUEST)
+            if new_assignee != item.created_by and not new_assignee.groups.filter(
+                    name=GroupName.EQUIPMENT_MODERATORS
+            ).exists():
+                return Response("Assignee is not a moderator nor the creator of the item", HTTP_400_BAD_REQUEST)
+
+        if edit_proposal.edit_proposal_assignee is not None and edit_proposal.edit_proposal_assignee != request.user:
+            if new_assignee:
+                return Response("This edit proposal has already been assigned", HTTP_400_BAD_REQUEST)
+            else:
+                return Response("You cannot unassign from another user", HTTP_400_BAD_REQUEST)
+
+        edit_proposal.edit_proposal_assignee = new_assignee
+        edit_proposal.save(keep_deleted=True)
+
+        if new_assignee and new_assignee != request.user:
+            push_notification(
+                [new_assignee],
+                request.user,
+                'equipment-edit-proposal-assigned',
+                {
+                    'user': request.user.userprofile.get_display_name(),
+                    'user_url': build_notification_url(
+                        settings.BASE_URL + reverse('user_page', args=(request.user.username,))
+                    ),
+                    'item': f'{item.brand.name if item.brand else _("(DIY)")} {item.name}',
+                    'item_url': build_notification_url(
+                        AppRedirectionService.redirect(
+                            f'/equipment/explorer/{EquipmentItemService(item).get_type()}/{item.pk}'
+                        )
+                    ),
+                }
+            )
+
+        serializer = self.serializer_class(edit_proposal)
+        return Response(serializer.data)
 
     def approve(self, request, pk):
         EditProposalModelClass = self.get_serializer().Meta.model

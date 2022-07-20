@@ -58,7 +58,10 @@ class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
 
         if 'edit_proposal_assignee' in attrs and attrs['edit_proposal_assignee'] is not None:
             assignee = attrs['edit_proposal_assignee']
-            if assignee != target.created_by or not assignee.groups.filter(name=GroupName.EQUIPMENT_MODERATORS).exists():
+            if assignee == self.context['request'].user:
+                raise ValidationError("An edit proposal cannot be assigned to its creator")
+
+            if assignee != target.created_by and not assignee.groups.filter(name=GroupName.EQUIPMENT_MODERATORS).exists():
                 raise ValidationError("An edit proposal can only be assigned to a moderator or the item's creator")
 
         return super().validate(attrs)

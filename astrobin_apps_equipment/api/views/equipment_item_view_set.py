@@ -344,7 +344,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         if new_assignee and new_assignee != request.user:
             push_notification(
-                [item.created_by],
+                [new_assignee],
                 request.user,
                 'equipment-item-assigned',
                 {
