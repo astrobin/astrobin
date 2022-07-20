@@ -307,19 +307,11 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         item: EquipmentItem = get_object_or_404(self.get_serializer().Meta.model.objects, pk=pk)
         value = []
 
-        if item.created_by:
-            value.append(dict(
-                key=item.created_by.pk,
-                value=item.created_by.userprofile.get_display_name(),
-                role='CREATOR'
-            ))
-
         for moderator in User.objects.filter(groups__name=GroupName.EQUIPMENT_MODERATORS):
-            if moderator.pk not in [x.get('key') for x in value]:
+            if moderator != item.created_by and moderator.pk not in [x.get('key') for x in value]:
                 value.append(dict(
                     key=moderator.pk,
                     value=moderator.userprofile.get_display_name(),
-                    role='MODERATOR'
                 ))
 
         return Response(status=200, data=value)
@@ -330,27 +322,27 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             raise PermissionDenied(request.user)
 
         item: EquipmentItem = get_object_or_404(self.get_serializer().Meta.model.objects, pk=pk)
-        assignee_pk = request.data.get('assignee')
-        assignee = None
+        new_assignee_pk = request.data.get('assignee')
+        new_assignee = None
 
-        if assignee_pk:
-            assignee = get_object_or_None(User, pk=assignee_pk)
-            if assignee is None:
+        if new_assignee_pk:
+            new_assignee = get_object_or_None(User, pk=new_assignee_pk)
+            if new_assignee is None:
                 return Response("User not found", HTTP_400_BAD_REQUEST)
 
-            if not UserService(assignee).is_in_group(GroupName.EQUIPMENT_MODERATORS):
+            if not UserService(new_assignee).is_in_group(GroupName.EQUIPMENT_MODERATORS):
                 return Response("Assignee is not a moderator", HTTP_400_BAD_REQUEST)
 
-        if item.assignee is not None:
-            if assignee:
+        if item.assignee is not None and item.assignee != request.user:
+            if new_assignee:
                 return Response("This item has already been assigned", HTTP_400_BAD_REQUEST)
-            elif item.assignee != request.user:
+            else:
                 return Response("You cannot unassign from another moderator", HTTP_400_BAD_REQUEST)
 
-        item.assignee = assignee
+        item.assignee = new_assignee
         item.save(keep_deleted=True)
 
-        if assignee and assignee != request.user:
+        if new_assignee and new_assignee != request.user:
             push_notification(
                 [item.created_by],
                 request.user,

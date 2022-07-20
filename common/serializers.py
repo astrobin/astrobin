@@ -36,6 +36,10 @@ class UserSerializer(serializers.ModelSerializer):
     avatar = AvatarField(source='*')
     large_avatar = LargeAvatarField(source='*')
     userprofile = PrimaryKeyRelatedField(read_only=True)
+    display_name = serializers.SerializerMethodField(read_only=True)
+
+    def get_display_name(self, user: User) -> str:
+        return user.userprofile.get_display_name()
 
     class Meta:
         model = User

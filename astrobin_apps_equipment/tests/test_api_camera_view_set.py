@@ -546,6 +546,28 @@ class TestApiCameraViewSet(TestCase):
         camera.refresh_from_db()
         self.assertEquals(original_assignee, camera.assignee)
 
+    def test_assign_when_already_assigned_to_self(self):
+        original_assignee = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+            assignee=original_assignee
+        )
+        assignee = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+
+        client = APIClient()
+        client.force_authenticate(user=original_assignee)
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'assign/',
+            {'assignee': assignee.pk},
+            format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        camera.refresh_from_db()
+        self.assertEquals(assignee, camera.assignee)
+
+
     def test_unassign_from_other(self):
         assignee = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
         camera = EquipmentGenerators.camera(
@@ -586,7 +608,7 @@ class TestApiCameraViewSet(TestCase):
         camera.refresh_from_db()
         self.assertIsNone(camera.assignee)
 
-    def test_possible_assignees_does_not_have_duplicates(self):
+    def test_possible_assignees_does_not_have_item_creator(self):
         creator = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
         camera = EquipmentGenerators.camera(created_by=creator)
 
@@ -597,4 +619,4 @@ class TestApiCameraViewSet(TestCase):
             reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'possible-assignees/',
         )
 
-        self.assertEquals(1, len(response.data))
+        self.assertEquals(0, len(response.data))
