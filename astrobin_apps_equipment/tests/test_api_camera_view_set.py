@@ -391,3 +391,232 @@ class TestApiCameraViewSet(TestCase):
         self.assertEquals(200, response.status_code)
         self.assertFalse(Camera.objects.filter(brand=duplicate.brand, name=duplicate.name))
         self.assertTrue(camera in image.imaging_cameras_2.all())
+
+    def test_unassigned_camera_can_be_approved(self):
+        camera = EquipmentGenerators.camera(type=CameraType.DEDICATED_DEEP_SKY)
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'approve/', format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+
+        camera.refresh_from_db()
+
+        self.assertEquals(EquipmentItemReviewerDecision.APPROVED, camera.reviewer_decision)
+
+    def test_assigned_camera_cannot_be_approved_by_others(self):
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+            assignee=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]),
+        )
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'approve/', format='json'
+        )
+
+        self.assertEquals(400, response.status_code)
+
+    def test_unassigned_camera_can_be_rejected(self):
+        camera = EquipmentGenerators.camera(type=CameraType.DEDICATED_DEEP_SKY)
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'reject/', format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        self.assertFalse(Camera.objects.filter(pk=camera.pk).exists())
+
+    def test_assigned_camera_cannot_be_rejected_by_others(self):
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+            assignee=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]),
+        )
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'approve/', format='json'
+        )
+
+        self.assertEquals(400, response.status_code)
+        self.assertTrue(Camera.objects.filter(pk=camera.pk).exists())
+
+    def test_assign_as_non_moderator(self):
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+        )
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'assign/',
+            {'assignee': None},
+            format='json'
+        )
+
+        self.assertEquals(403, response.status_code)
+        camera.refresh_from_db()
+        self.assertIsNone(camera.assignee)
+
+    def test_assign_to_unexistant_user(self):
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+        )
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'assign/',
+            {'assignee': 999},
+            format='json'
+        )
+
+        self.assertContains(response, "User not found", status_code=400)
+        camera.refresh_from_db()
+        self.assertIsNone(camera.assignee)
+
+    def test_assign_to_non_moderator(self):
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+        )
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'assign/',
+            {'assignee': Generators.user().pk},
+            format='json'
+        )
+
+        self.assertContains(response, "Assignee is not a moderator", status_code=400)
+        camera.refresh_from_db()
+        self.assertIsNone(camera.assignee)
+
+    def test_assign_works(self):
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+        )
+        assignee = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'assign/',
+            {'assignee': assignee.pk},
+            format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        camera.refresh_from_db()
+        self.assertEquals(assignee, camera.assignee)
+
+    def test_assign_when_already_assigned(self):
+        original_assignee = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+            assignee=original_assignee
+        )
+        assignee = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'assign/',
+            {'assignee': assignee.pk},
+            format='json'
+        )
+
+        self.assertContains(response, "This item has already been assigned", status_code=400)
+        camera.refresh_from_db()
+        self.assertEquals(original_assignee, camera.assignee)
+
+    def test_assign_when_already_assigned_to_self(self):
+        original_assignee = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+            assignee=original_assignee
+        )
+        assignee = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+
+        client = APIClient()
+        client.force_authenticate(user=original_assignee)
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'assign/',
+            {'assignee': assignee.pk},
+            format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        camera.refresh_from_db()
+        self.assertEquals(assignee, camera.assignee)
+
+
+    def test_unassign_from_other(self):
+        assignee = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+            assignee=assignee,
+        )
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'assign/',
+            {'assignee': None},
+            format='json'
+        )
+
+        self.assertContains(response, "You cannot unassign from another moderator", status_code=400)
+        camera.refresh_from_db()
+        self.assertEquals(assignee, camera.assignee)
+
+    def test_unassign_from_self(self):
+        assignee = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+            assignee=assignee
+        )
+
+        client = APIClient()
+        client.force_authenticate(assignee)
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'assign/',
+            {'assignee': None},
+            format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+        camera.refresh_from_db()
+        self.assertIsNone(camera.assignee)
+
+    def test_possible_assignees_does_not_have_item_creator(self):
+        creator = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+        camera = EquipmentGenerators.camera(created_by=creator)
+
+        client = APIClient()
+        client.force_authenticate(creator)
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'possible-assignees/',
+        )
+
+        self.assertEquals(0, len(response.data))

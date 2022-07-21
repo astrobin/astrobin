@@ -1,0 +1,12 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    {{ user }} assigned the equipment item "{{ item }}" to you for review.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    Please review it as soon as possible, thank you!
+{% endblocktrans %}
+
+{% trans "View item" %}:
+{{ item_url }}

@@ -51,6 +51,7 @@ class EquipmentGenerators:
             adc=kwargs.get('adc', 12),
             color_or_mono=kwargs.get('color_or_mono', 'M'),
             reviewer_decision=kwargs.get('reviewer_decision', None),
+            assignee=kwargs.get('assignee', None),
         )
 
     @staticmethod
@@ -70,6 +71,7 @@ class EquipmentGenerators:
             back_focus=kwargs.get('back_focus', 18),
             modified=kwargs.get('modified', False),
             reviewer_decision=kwargs.get('reviewer_decision', None),
+            assignee=kwargs.get('assignee', None),
         )
 
     @staticmethod
@@ -88,6 +90,7 @@ class EquipmentGenerators:
             max_focal_length=kwargs.get('max_focal_length', 200),
             weight=kwargs.get('weight', 200),
             reviewer_decision=kwargs.get('reviewer_decision', None),
+            assignee=kwargs.get('assignee', None),
         )
 
     @staticmethod
@@ -108,6 +111,7 @@ class EquipmentGenerators:
             computerized=kwargs.get('computerized', True),
             slew_speed=kwargs.get('slew_speed', 10),
             reviewer_decision=kwargs.get('reviewer_decision', None),
+            assignee=kwargs.get('assignee', None),
         )
 
     @staticmethod
@@ -124,6 +128,7 @@ class EquipmentGenerators:
             bandwidth=kwargs.get('bandwidth', 12),
             size=kwargs.get('size', FilterSize.ROUND_50_MM),
             reviewer_decision=kwargs.get('reviewer_decision', None),
+            assignee=kwargs.get('assignee', None),
         )
 
     @staticmethod
@@ -138,6 +143,7 @@ class EquipmentGenerators:
             variant_of=kwargs.get('variant_of', None),
             website=kwargs.get('website', 'https://www.test-accessory-%s.com/' % random_name),
             reviewer_decision=kwargs.get('reviewer_decision', None),
+            assignee=kwargs.get('assignee', None),
         )
 
     @staticmethod
@@ -151,6 +157,7 @@ class EquipmentGenerators:
             variant_of=kwargs.get('variant_of', None),
             website=kwargs.get('website', 'https://www.test-software-%s.com/' % random_name),
             reviewer_decision=kwargs.get('reviewer_decision', None),
+            assignee=kwargs.get('assignee', None),
         )
 
     @staticmethod

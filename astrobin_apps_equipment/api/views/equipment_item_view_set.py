@@ -3,10 +3,11 @@ from collections import Counter
 import simplejson
 from annoying.functions import get_object_or_None
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.contrib.postgres.search import TrigramDistance
 from django.core.cache import cache
-from django.db.models import Q, QuerySet, Value
-from django.db.models.functions import Concat, Lower
+from django.db.models import Q, QuerySet
+from django.db.models.functions import Lower
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -29,11 +30,11 @@ from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
 from astrobin_apps_equipment.tasks import reject_item
-from astrobin_apps_users.services import UserService
-from common.constants import GroupName
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_access_full_search
+from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 from common.services import AppRedirectionService
 
 
@@ -298,6 +299,71 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         return Response(status=HTTP_200_OK)
 
+    @action(detail=True, methods=['GET'], url_path='possible-assignees')
+    def possible_assignees(self, request, pk):
+        if not UserService(request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
+            raise PermissionDenied(request.user)
+
+        item: EquipmentItem = get_object_or_404(self.get_serializer().Meta.model.objects, pk=pk)
+        value = []
+
+        for moderator in User.objects.filter(groups__name=GroupName.EQUIPMENT_MODERATORS):
+            if moderator != item.created_by and moderator.pk not in [x.get('key') for x in value]:
+                value.append(dict(
+                    key=moderator.pk,
+                    value=moderator.userprofile.get_display_name(),
+                ))
+
+        return Response(status=200, data=value)
+
+    @action(detail=True, methods=['POST'])
+    def assign(self, request, pk):
+        if not UserService(request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
+            raise PermissionDenied(request.user)
+
+        item: EquipmentItem = get_object_or_404(self.get_serializer().Meta.model.objects, pk=pk)
+        new_assignee_pk = request.data.get('assignee')
+        new_assignee = None
+
+        if new_assignee_pk:
+            new_assignee = get_object_or_None(User, pk=new_assignee_pk)
+            if new_assignee is None:
+                return Response("User not found", HTTP_400_BAD_REQUEST)
+
+            if not UserService(new_assignee).is_in_group(GroupName.EQUIPMENT_MODERATORS):
+                return Response("Assignee is not a moderator", HTTP_400_BAD_REQUEST)
+
+        if item.assignee is not None and item.assignee != request.user:
+            if new_assignee:
+                return Response("This item has already been assigned", HTTP_400_BAD_REQUEST)
+            else:
+                return Response("You cannot unassign from another moderator", HTTP_400_BAD_REQUEST)
+
+        item.assignee = new_assignee
+        item.save(keep_deleted=True)
+
+        if new_assignee and new_assignee != request.user:
+            push_notification(
+                [new_assignee],
+                request.user,
+                'equipment-item-assigned',
+                {
+                    'user': request.user.userprofile.get_display_name(),
+                    'user_url': build_notification_url(
+                        settings.BASE_URL + reverse('user_page', args=(request.user.username,))
+                    ),
+                    'item': f'{item.brand.name if item.brand else _("(DIY)")} {item.name}',
+                    'item_url': build_notification_url(
+                        AppRedirectionService.redirect(
+                            f'/equipment/explorer/{EquipmentItemService(item).get_type()}/{item.pk}'
+                        )
+                    ),
+                }
+            )
+
+        serializer = self.serializer_class(item)
+        return Response(serializer.data)
+
     @action(detail=True, methods=['POST'])
     def approve(self, request, pk):
         if not UserService(request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
@@ -313,6 +379,9 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         if item.created_by == request.user:
             return Response("You cannot review an item that you created", HTTP_400_BAD_REQUEST)
+
+        if item.assignee and item.assignee != request.user:
+            return Response("You cannot review an item that is not assigned to you", HTTP_400_BAD_REQUEST)
 
         item.reviewed_by = request.user
         item.reviewed_timestamp = timezone.now()
@@ -385,6 +454,9 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         if item.created_by == request.user:
             return Response("You cannot review an item that you created", HTTP_400_BAD_REQUEST)
+
+        if item.assignee and item.assignee != request.user:
+            return Response("You cannot review an item that is not assigned to you", HTTP_400_BAD_REQUEST)
 
         item.reviewed_by = request.user
         item.reviewed_timestamp = timezone.now()

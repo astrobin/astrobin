@@ -48,6 +48,14 @@ class EquipmentItem(SafeDeleteModel):
         editable=False,
     )
 
+    assignee = models.ForeignKey(
+        User,
+        on_delete=SET_NULL,
+        related_name='%(app_label)s_%(class)ss_assigned_for_review',
+        null=True,
+        blank=True
+    )
+
     reviewer_lock = models.ForeignKey(
         User,
         null=True,
