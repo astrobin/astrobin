@@ -5,6 +5,7 @@ from rest_framework.exceptions import ValidationError
 
 from astrobin_apps_equipment.api.serializers.equipment_item_serializer import EquipmentItemSerializer
 from astrobin_apps_equipment.models import EquipmentItem
+from astrobin_apps_equipment.services import EquipmentItemService
 from common.constants import GroupName
 from common.exceptions import Conflict
 
@@ -38,32 +39,7 @@ class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
         abstract = True
 
     def validate(self, attrs):
-        target: EquipmentItem = attrs['edit_proposal_target']
-
-        if target.edit_proposal_lock and target.edit_proposal_lock != self.context.get('request').user:
-            raise Conflict()
-
-        already_has_pending = self.Meta.model.objects.filter(
-            edit_proposal_review_status__isnull=True, edit_proposal_target=target.pk
-        ).exists()
-        if already_has_pending:
-            raise ValidationError("This item already has a pending edit proposal")
-
-        if 'klass' not in attrs or attrs['klass'] != target.klass:
-            raise ValidationError("The klass property must match that of the target item")
-
-        if 'edit_proposal_review_status' in attrs and attrs[
-            'edit_proposal_review_status'] is not None:
-            raise ValidationError("The edit_proposal_review_status must be null")
-
-        if 'edit_proposal_assignee' in attrs and attrs['edit_proposal_assignee'] is not None:
-            assignee = attrs['edit_proposal_assignee']
-            if assignee == self.context['request'].user:
-                raise ValidationError("An edit proposal cannot be assigned to its creator")
-
-            if assignee != target.created_by and not assignee.groups.filter(name=GroupName.EQUIPMENT_MODERATORS).exists():
-                raise ValidationError("An edit proposal can only be assigned to a moderator or the item's creator")
-
+        EquipmentItemService.validate_edit_proposal(self.context['request'].user, self.Meta.model, attrs)
         return super().validate(attrs)
 
     def create(self, validated_data):

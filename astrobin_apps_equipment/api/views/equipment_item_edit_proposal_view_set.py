@@ -96,18 +96,18 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
         )
         item = edit_proposal.edit_proposal_target
         new_assignee_pk = request.data.get('assignee')
-        new_assignee = None
+        new_assignee = get_object_or_None(User, pk=new_assignee_pk) if new_assignee_pk else None
 
-        if new_assignee_pk:
-            new_assignee = get_object_or_None(User, pk=new_assignee_pk)
-            if new_assignee is None:
-                return Response("User not found", HTTP_400_BAD_REQUEST)
-            if new_assignee == edit_proposal.edit_proposal_by:
-                return Response("An edit proposal cannot be assigned to its creator", HTTP_400_BAD_REQUEST)
-            if new_assignee != item.created_by and not new_assignee.groups.filter(
-                    name=GroupName.EQUIPMENT_MODERATORS
-            ).exists():
-                return Response("Assignee is not a moderator nor the creator of the item", HTTP_400_BAD_REQUEST)
+        if new_assignee_pk and not new_assignee:
+            return Response(f"Invalid pk: '{new_assignee_pk}'", HTTP_400_BAD_REQUEST)
+
+        EquipmentItemService.validate_edit_proposal_assignee(
+            request.user,
+            dict(
+                edit_proposal_target=item,
+                edit_proposal_assignee=new_assignee
+            ),
+        )
 
         if edit_proposal.edit_proposal_assignee is not None and edit_proposal.edit_proposal_assignee != request.user:
             if new_assignee:

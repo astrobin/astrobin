@@ -1,9 +1,11 @@
 from django.contrib.auth.models import User
+from django.db.models import Model
 from django.utils.translation import ugettext_lazy as _
 from rest_framework.exceptions import PermissionDenied, ValidationError
 
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
+from common.exceptions import Conflict
 
 
 class EquipmentItemService:
@@ -48,3 +50,43 @@ class EquipmentItemService:
 
         if variant_of and variant_of.variant_of:
             raise ValidationError("Variants do not support variants")
+
+    @staticmethod
+    def validate_edit_proposal(user: User, model: Model, attrs):
+        from astrobin_apps_equipment.models import EquipmentItem
+
+        target: EquipmentItem = attrs['edit_proposal_target']
+
+        if target.edit_proposal_lock and target.edit_proposal_lock != user:
+            raise Conflict()
+
+        already_has_pending = model.objects.filter(
+            edit_proposal_review_status__isnull=True, edit_proposal_target=target.pk
+        ).exists()
+        if already_has_pending:
+            raise ValidationError("This item already has a pending edit proposal")
+
+        if 'klass' not in attrs or attrs['klass'] != target.klass:
+            raise ValidationError("The klass property must match that of the target item")
+
+        if 'edit_proposal_review_status' in attrs and attrs[
+            'edit_proposal_review_status'] is not None:
+            raise ValidationError("The edit_proposal_review_status must be null")
+
+        EquipmentItemService.validate_edit_proposal_assignee(user, attrs)
+
+    @staticmethod
+    def validate_edit_proposal_assignee(user: User, attrs):
+        from astrobin_apps_equipment.models import EquipmentItem
+
+        target: EquipmentItem = attrs['edit_proposal_target']
+
+        if 'edit_proposal_assignee' in attrs and attrs['edit_proposal_assignee'] is not None:
+            assignee = attrs['edit_proposal_assignee']
+            if assignee == user:
+                raise ValidationError("An edit proposal cannot be assigned to its creator")
+
+            if assignee != target.created_by and not assignee.groups.filter(
+                    name=GroupName.EQUIPMENT_MODERATORS
+            ).exists():
+                raise ValidationError("An edit proposal can only be assigned to a moderator or the item's creator")
