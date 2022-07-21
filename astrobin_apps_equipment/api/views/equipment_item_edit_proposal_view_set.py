@@ -134,6 +134,16 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
                             f'/equipment/explorer/{EquipmentItemService(item).get_type()}/{item.pk}'
                         )
                     ),
+                    'edit_proposal_url': build_notification_url(
+                        AppRedirectionService.redirect(
+                            f'/equipment'
+                            f'/explorer'
+                            f'/{item.item_type}/{item.pk}'
+                            f'/{item.slug}'
+                            f'/edit-proposals'
+                            f'/{edit_proposal.pk}/'
+                        )
+                    ),
                 }
             )
 
