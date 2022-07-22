@@ -66,24 +66,13 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         if 'EditProposal' not in str(self.get_serializer().Meta.model):
             if self.request.user.is_authenticated:
                 if not UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
-                    queryset = queryset.filter(
-                        Q(
-                            Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
-                            Q(created_by=self.request.user)
-                        ) &
-                        Q(
-                            Q(brand__isnull=False) |
-                            Q(created_by=self.request.user)
-                        ) &
-                        Q(
-                            Q(frozen_as_ambiguous__isnull=True) |
-                            Q(created_by=self.request.user)
-                        )
-                    )
+                    queryset = queryset.filter(EquipmentItemService.non_moderator_queryset(self.request.user))
             else:
                 queryset = queryset.filter(
                     brand__isnull=False,
-                    reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+                    reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+                    frozen_as_ambiguous__isnull=True
+                )
 
         if q:
             brand = get_object_or_None(EquipmentBrand, name__iexact=q)
@@ -151,7 +140,18 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         manager = self.get_serializer().Meta.model.objects
         item: EquipmentItem = get_object_or_404(manager, pk=pk)
 
-        queryset = item.variants.all()
+        if self.request.user.is_authenticated:
+            if not UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
+                queryset = item.variants.filter(EquipmentItemService.non_moderator_queryset(request.user))
+            else:
+                queryset = item.variants.all()
+        else:
+            queryset = item.variants.filter(
+                brand__isnull=False,
+                reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+                frozen_as_ambiguous__isnull=True
+            )
+
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
 
@@ -229,20 +229,27 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         q = request.GET.get('q')
 
         manager = self.get_serializer().Meta.model.objects
-        objects = manager.none()
+        queryset = manager.none()
 
         if brand and q:
-            objects = manager.annotate(
+            queryset = manager.annotate(
                 distance=TrigramDistance('name', q)
             ).filter(
                 Q(brand=int(brand)) &
                 Q(Q(distance__lte=.7) | Q(name__icontains=q)) &
                 ~Q(name=q)
-            ).order_by(
+            )
+
+            if not request.user.is_authenticated or not UserService(request.user).is_in_group(
+                    GroupName.EQUIPMENT_MODERATORS
+            ):
+                queryset = queryset.filter(EquipmentItemService.non_moderator_queryset(request.user))
+
+            queryset = queryset.order_by(
                 'distance'
             )[:10]
 
-        serializer = self.serializer_class(objects, many=True)
+        serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
 
     @action(
@@ -255,14 +262,19 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         name = request.query_params.get('name')
 
         manager = self.get_serializer().Meta.model.objects
-        objects = manager.none()
+        queryset = manager.none()
 
         if brand:
-            objects = manager.filter(brand=int(brand)).order_by('name')
+            queryset = manager.filter(brand=int(brand)).order_by('name')
             if name:
-                objects = objects.exclude(name__iexact=name)
+                queryset = queryset.exclude(name__iexact=name)
 
-        serializer = self.serializer_class(objects, many=True)
+            if not request.user.is_authenticated or not UserService(request.user).is_in_group(
+                    GroupName.EQUIPMENT_MODERATORS
+            ):
+                queryset = queryset.filter(EquipmentItemService.non_moderator_queryset(request.user))
+
+        serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
 
     @action(detail=True, methods=['POST'], url_path='acquire-reviewer-lock')
@@ -507,6 +519,8 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         if not item.frozen_as_ambiguous:
             item.frozen_as_ambiguous = True
             item.save(keep_deleted=True)
+
+            ModelClass.objects.filter(variant_of=item).update(variant_of=None)
 
         serializer = self.serializer_class(item)
         return Response(serializer.data)
