@@ -25,7 +25,7 @@ class AccessoryBaseModel(EquipmentItem):
     ACCESSORY_TYPES = (
         (AccessoryType.COMPUTER, _('Computer')),
         (AccessoryType.DEW_MITIGATION, _('Dew mitigation')),
-        (AccessoryType.FIELD_DEROTATOR, _('Field derotator')),
+        (AccessoryType.FIELD_DEROTATOR, _('Field derotator / camera rotator')),
         (AccessoryType.FILTER_WHEEL, _('Filter wheel')),
         (AccessoryType.FLAT_BOX, _('Flat box')),
         (AccessoryType.FOCAL_MODIFIER_FIELD_CORRECTOR, _('Focal modifier / field corrector')),
