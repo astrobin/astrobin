@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.db.models import Model
+from django.db.models import Model, Q
 from django.utils.translation import ugettext_lazy as _
 from rest_framework.exceptions import PermissionDenied, ValidationError
 
@@ -29,6 +29,22 @@ class EquipmentItemService:
         }
 
         return type_map.get(item_type)
+
+    @staticmethod
+    def non_moderator_queryset(user) -> Q:
+        from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
+
+        return \
+            Q(
+                Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
+                Q(created_by=user)
+            ) & \
+            Q(
+                Q(brand__isnull=False) |
+                Q(created_by=user)
+            ) & \
+            Q(frozen_as_ambiguous__isnull=True)
+
 
     @staticmethod
     def validate(user: User, attrs):

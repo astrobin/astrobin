@@ -29,20 +29,12 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
 
         if user and user.is_authenticated:
             if not UserService(user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
-                variants = variants.filter(
-                    Q(
-                        Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
-                        Q(created_by=user)
-                    ) &
-                    Q(
-                        Q(brand__isnull=False) |
-                        Q(created_by=user)
-                    )
-                )
+                variants = variants.filter(EquipmentItemService.non_moderator_queryset(user))
         else:
             variants = variants.filter(
                 reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
-                brand__isnull=False
+                brand__isnull=False,
+                frozen_as_ambiguous__isnull=True,
             )
 
         return self.__class__(variants, many=True).data

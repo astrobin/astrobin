@@ -79,12 +79,14 @@ def mirror_camera_update_to_variants(sender, instance: Camera, **kwargs):
             brand=instance.brand,
             name=instance.name,
             website=instance.website,
+            community_notes=instance.community_notes,
             group=instance.group,
             image=instance.image,
             type=instance.type,
             sensor=instance.sensor,
             max_cooling=instance.max_cooling,
-            back_focus=instance.back_focus
+            back_focus=instance.back_focus,
+            frozen_as_ambiguous=instance.frozen_as_ambiguous
         )
 
 

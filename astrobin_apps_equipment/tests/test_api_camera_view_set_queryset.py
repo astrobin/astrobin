@@ -95,7 +95,15 @@ class TestApiCameraViewSetQueryset(TestCase):
         response = client.get(reverse('astrobin_apps_equipment:camera-list'), format='json')
         self.assertEquals(1, response.data['count'])
 
-    def test_approved_item_not_returned_if_frozen(self):
+    def test_approved_item_not_returned_if_frozen_and_anon(self):
+        client = APIClient()
+
+        EquipmentGenerators.camera(frozen_as_ambiguous=True, reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+
+        response = client.get(reverse('astrobin_apps_equipment:camera-list'), format='json')
+        self.assertEquals(0, response.data['count'])
+
+    def test_approved_item_not_returned_if_frozen_and_non_moderator(self):
         client = APIClient()
 
         EquipmentGenerators.camera(frozen_as_ambiguous=True, reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
@@ -115,7 +123,7 @@ class TestApiCameraViewSetQueryset(TestCase):
         response = client.get(reverse('astrobin_apps_equipment:camera-list'), format='json')
         self.assertEquals(1, response.data['count'])
 
-    def test_approved_item_returned_if_frozen_and_cresator(self):
+    def test_approved_item_not_returned_if_frozen_and_creator(self):
         client = APIClient()
 
         creator = Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS])
@@ -124,7 +132,7 @@ class TestApiCameraViewSetQueryset(TestCase):
         client.force_authenticate(user=creator)
 
         response = client.get(reverse('astrobin_apps_equipment:camera-list'), format='json')
-        self.assertEquals(1, response.data['count'])
+        self.assertEquals(0, response.data['count'])
 
     def test_variants_are_included(self):
         client = APIClient()
