@@ -523,7 +523,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             return self._conflict_response()
 
         if item.frozen_as_ambiguous:
-            item.frozen_as_ambiguous = False
+            item.frozen_as_ambiguous = None
             item.save(keep_deleted=True)
 
         serializer = self.serializer_class(item)
