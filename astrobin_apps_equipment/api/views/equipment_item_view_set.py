@@ -96,20 +96,34 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 self.paginator.page_size = brand_queryset.count()
                 queryset = brand_queryset
             else:
-                queryset = queryset.annotate(
-                    search_friendly_distance=TrigramDistance('search_friendly_name', q),
-                ).filter(
-                    Q(
-                        Q(search_friendly_distance__lte=.85) |
-                        Q(search_friendly_name__icontains=q) |
-                        Q(variants__search_friendly_name__icontains=q) |
-                        Q(variants__name__icontains=q)
+                if 'postgresql' in settings.DATABASES['default']['ENGINE']:
+                    queryset = queryset.annotate(
+                        search_friendly_distance=TrigramDistance('search_friendly_name', q),
+                    ).filter(
+                        Q(
+                            Q(search_friendly_distance__lte=.85) |
+                            Q(search_friendly_name__icontains=q) |
+                            Q(variants__search_friendly_name__icontains=q) |
+                            Q(variants__name__icontains=q)
+                        )
+                    ).distinct(
+                    ).order_by(
+                        'search_friendly_distance',
+                        Lower('search_friendly_name'),
                     )
-                ).distinct(
-                ).order_by(
-                    'search_friendly_distance',
-                    Lower('search_friendly_name'),
-                )[:50]
+                else:
+                    queryset = queryset.filter(
+                        Q(
+                            Q(search_friendly_name__icontains=q) |
+                            Q(variants__search_friendly_name__icontains=q) |
+                            Q(variants__name__icontains=q)
+                        )
+                    ).distinct(
+                    ).order_by(
+                        Lower('search_friendly_name'),
+                    )
+
+                queryset = queryset[:50]
         elif sort == 'az':
             queryset = queryset.order_by(Lower('search_friendly_name'))
         elif sort == '-az':

@@ -12,21 +12,6 @@ from common.constants import GroupName
 
 
 class TestApiCameraViewSet(TestCase):
-    def test_list_with_no_items(self):
-        client = APIClient()
-
-        response = client.get(reverse('astrobin_apps_equipment:camera-list'), format='json')
-        self.assertEquals(0, response.data['count'])
-
-    def test_list_with_items(self):
-        client = APIClient()
-
-        camera = EquipmentGenerators.camera(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
-
-        response = client.get(reverse('astrobin_apps_equipment:camera-list'), format='json')
-        self.assertEquals(1, response.data['count'])
-        self.assertEquals(camera.name, response.data['results'][0]['name'])
-
     def test_deleting_not_allowed(self):
         client = APIClient()
 
