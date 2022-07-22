@@ -125,6 +125,25 @@ class TestApiCameraViewSet(TestCase):
 
         self.assertEquals(0, len(response.data))
 
+    def test_find_recently_used_frozen_item(self):
+        user = Generators.user()
+        camera = EquipmentGenerators.camera(
+            created_by=user,
+            frozen_as_ambiguous=True,
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+        )
+        image = Generators.image(user=user)
+        image.imaging_cameras_2.add(camera)
+
+        client = APIClient()
+        client.force_authenticate(user=user)
+
+        response = client.get(
+            reverse('astrobin_apps_equipment:camera-list') + 'recently-used/?usage-type=imaging', format='json'
+        )
+
+        self.assertEquals(0, len(response.data))
+
     def test_modified_camera_cannot_be_approved(self):
         camera = EquipmentGenerators.camera(type=CameraType.DSLR_MIRRORLESS)
         modified = Camera.objects.get(brand=camera.brand, name=camera.name, modified=True, cooled=False)
@@ -605,3 +624,93 @@ class TestApiCameraViewSet(TestCase):
         )
 
         self.assertEquals(0, len(response.data))
+
+    def test_freeze_as_ambiguous_as_anon(self):
+        camera = EquipmentGenerators.camera()
+
+        client = APIClient()
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'freeze-as-ambiguous/',
+            {},
+            format='json',
+        )
+
+        self.assertEquals(403, response.status_code)
+
+    def test_freeze_as_ambiguous_as_non_morderator(self):
+        camera = EquipmentGenerators.camera()
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'freeze-as-ambiguous/',
+            {},
+            format='json',
+        )
+
+        self.assertEquals(403, response.status_code)
+
+    def test_freeze_as_ambiguous_as_morderator(self):
+        camera = EquipmentGenerators.camera()
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'freeze-as-ambiguous/',
+            {},
+            format='json',
+        )
+
+        self.assertEquals(200, response.status_code)
+        camera.refresh_from_db()
+        self.assertTrue(camera.frozen_as_ambiguous)
+
+    def test_unfreeze_as_ambiguous_as_anon(self):
+        camera = EquipmentGenerators.camera(frozen_as_ambiguous=True)
+
+        client = APIClient()
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'unfreeze-as-ambiguous/',
+            {},
+            format='json',
+        )
+
+        self.assertEquals(403, response.status_code)
+        camera.refresh_from_db()
+        self.assertTrue(camera.frozen_as_ambiguous)
+
+    def test_unfreeze_as_ambiguous_as_non_morderator(self):
+        camera = EquipmentGenerators.camera(frozen_as_ambiguous=True)
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'unfreeze-as-ambiguous/',
+            {},
+            format='json',
+        )
+
+        self.assertEquals(403, response.status_code)
+        camera.refresh_from_db()
+        self.assertTrue(camera.frozen_as_ambiguous)
+
+    def test_unfreeze_as_ambiguous_as_morderator(self):
+        camera = EquipmentGenerators.camera(frozen_as_ambiguous=True)
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'unfreeze-as-ambiguous/',
+            {},
+            format='json',
+        )
+
+        self.assertEquals(200, response.status_code)
+        camera.refresh_from_db()
+        self.assertFalse(camera.frozen_as_ambiguous)
