@@ -74,6 +74,10 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                         Q(
                             Q(brand__isnull=False) |
                             Q(created_by=self.request.user)
+                        ) &
+                        Q(
+                            Q(frozen_as_ambiguous__isnull=True) |
+                            Q(created_by=self.request.user)
                         )
                     )
             else:
@@ -205,8 +209,10 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 elif manager.model == Software:
                     property = 'software_2'
 
+                x: EquipmentItem
                 for x in getattr(image, property).all():
-                    recent_items.append(x.pk)
+                    if not x.frozen_as_ambiguous:
+                        recent_items.append(x.pk)
 
             objects = manager.filter(pk__in=recent_items)
 
@@ -483,6 +489,36 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         item.save(keep_deleted=True)
 
         reject_item.delay(item.id, item.klass)
+
+        serializer = self.serializer_class(item)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['POST'], url_path='freeze-as-ambiguous')
+    def freeze_as_ambiguous(self, request, pk):
+        if not UserService(request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
+            raise PermissionDenied(request.user)
+
+        ModelClass = self.get_serializer().Meta.model
+        item: EquipmentItem = get_object_or_404(ModelClass.objects, pk=pk)
+
+        if not item.frozen_as_ambiguous:
+            item.frozen_as_ambiguous = True
+            item.save(keep_deleted=True)
+
+        serializer = self.serializer_class(item)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['POST'], url_path='unfreeze-as-ambiguous')
+    def unfreeze_as_ambiguous(self, request, pk):
+        if not UserService(request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
+            raise PermissionDenied(request.user)
+
+        ModelClass = self.get_serializer().Meta.model
+        item: EquipmentItem = get_object_or_404(ModelClass.objects, pk=pk)
+
+        if item.frozen_as_ambiguous:
+            item.frozen_as_ambiguous = False
+            item.save(keep_deleted=True)
 
         serializer = self.serializer_class(item)
         return Response(serializer.data)

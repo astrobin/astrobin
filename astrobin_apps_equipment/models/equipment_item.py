@@ -207,6 +207,11 @@ class EquipmentItem(SafeDeleteModel):
         blank=True,
     )
 
+    frozen_as_ambiguous = models.BooleanField(
+        null=True,
+        blank=True,
+    )
+
     ####################################################################################################################
     # This items are synced back from the search index.                                                                #
     ####################################################################################################################

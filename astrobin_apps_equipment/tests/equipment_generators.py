@@ -52,6 +52,7 @@ class EquipmentGenerators:
             color_or_mono=kwargs.get('color_or_mono', 'M'),
             reviewer_decision=kwargs.get('reviewer_decision', None),
             assignee=kwargs.get('assignee', None),
+            frozen_as_ambiguous=kwargs.get('frozen_as_ambiguous', None),
         )
 
     @staticmethod
@@ -72,6 +73,7 @@ class EquipmentGenerators:
             modified=kwargs.get('modified', False),
             reviewer_decision=kwargs.get('reviewer_decision', None),
             assignee=kwargs.get('assignee', None),
+            frozen_as_ambiguous=kwargs.get('frozen_as_ambiguous', None),
         )
 
     @staticmethod
@@ -91,6 +93,7 @@ class EquipmentGenerators:
             weight=kwargs.get('weight', 200),
             reviewer_decision=kwargs.get('reviewer_decision', None),
             assignee=kwargs.get('assignee', None),
+            frozen_as_ambiguous=kwargs.get('frozen_as_ambiguous', None),
         )
 
     @staticmethod
@@ -112,6 +115,7 @@ class EquipmentGenerators:
             slew_speed=kwargs.get('slew_speed', 10),
             reviewer_decision=kwargs.get('reviewer_decision', None),
             assignee=kwargs.get('assignee', None),
+            frozen_as_ambiguous=kwargs.get('frozen_as_ambiguous', None),
         )
 
     @staticmethod
@@ -129,6 +133,7 @@ class EquipmentGenerators:
             size=kwargs.get('size', FilterSize.ROUND_50_MM),
             reviewer_decision=kwargs.get('reviewer_decision', None),
             assignee=kwargs.get('assignee', None),
+            frozen_as_ambiguous=kwargs.get('frozen_as_ambiguous', None),
         )
 
     @staticmethod
@@ -144,6 +149,7 @@ class EquipmentGenerators:
             website=kwargs.get('website', 'https://www.test-accessory-%s.com/' % random_name),
             reviewer_decision=kwargs.get('reviewer_decision', None),
             assignee=kwargs.get('assignee', None),
+            frozen_as_ambiguous=kwargs.get('frozen_as_ambiguous', None),
         )
 
     @staticmethod
@@ -158,6 +164,7 @@ class EquipmentGenerators:
             website=kwargs.get('website', 'https://www.test-software-%s.com/' % random_name),
             reviewer_decision=kwargs.get('reviewer_decision', None),
             assignee=kwargs.get('assignee', None),
+            frozen_as_ambiguous=kwargs.get('frozen_as_ambiguous', None),
         )
 
     @staticmethod
