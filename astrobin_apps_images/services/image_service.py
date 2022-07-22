@@ -29,7 +29,7 @@ from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import is_free
-from common.services import DateTimeService
+from common.services import AppRedirectionService, DateTimeService
 from common.services.constellations_service import ConstellationException, ConstellationsService
 
 logger = logging.getLogger("apps")
@@ -369,13 +369,16 @@ class ImageService:
             return hit_count_response
 
     def get_equipment_list(self, country=None):
-        def item_data(item, version):
+        def item_data(item, version, explorer_url=None, unapproved=False, creator_id=None):
             data = {
                 'id': str(item.id),
                 'object': item,
                 'type': item.__class__.__name__.lower(),
                 'label': str(item) if version == 'NEW' else GearService(item).display_name(self.image.user),
                 'version': version,
+                'explorer_url': explorer_url,
+                'unapproved': unapproved,
+                'creator_id': creator_id
             }
 
             if version == 'LEGACY':
@@ -402,7 +405,15 @@ class ImageService:
 
         for klass in equipment_list.keys():
             for x in getattr(self.image, f'{klass}_2').all():
-                equipment_list[klass].append(item_data(x, 'NEW'))
+                equipment_list[klass].append(
+                    item_data(
+                        x,
+                        'NEW',
+                        AppRedirectionService.redirect(f'/equipment/explorer/{x.klass.lower()}/{x.id}/{x.slug}'),
+                        x.reviewer_decision is None,
+                        x.created_by.id,
+                    )
+                )
 
             for x in getattr(self.image, klass).all():
                 equipment_list[klass].append(item_data(x, 'LEGACY'))

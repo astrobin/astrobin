@@ -1245,6 +1245,20 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   .total-frame-integration {
     color: darken($grey-4, 15%);
   }
+
+  .icon-exclamation-sign {
+    color: $red;
+    background: $white;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    height: 1.2rem;
+    width: 1.2rem;
+    display: inline-block;
+    text-align: center;
+    animation: half-opacity-pulse 1.5s infinite ease-in-out;
+    box-shadow: 0 0 .75rem rgba(255, 255, 255, .5);
+    vertical-align: text-bottom;
+  }
 }
 
 .card-label {

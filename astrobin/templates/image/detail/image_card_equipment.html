@@ -184,6 +184,16 @@
                                                 {% highlight_text item.label with search_query %}
                                             </span>
 
+                                            {% if item.unapproved and item.creator_id == request.user.id %}
+                                                <a
+                                                        href="{{ item.explorer_url }}"
+                                                        rel="tooltip"
+                                                        title="{% trans 'This item is unapproved and it might require your attention.' %}"
+                                                >
+                                                    <i class="icon-exclamation-sign"></i>
+                                                </a>
+                                            {% endif %}
+
                                             {# Shopping cart #}
                                             {% with image.user|get_valid_usersubscription as image_user_valid_usersubscription_for_link %}
                                                 {% if valid_usersubscription|allow_full_retailer_integration:image_user_valid_usersubscription_for_link or item.brand.name|has_matching_brand_request_query:search_query %}
