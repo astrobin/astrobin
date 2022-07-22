@@ -501,6 +501,9 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         ModelClass = self.get_serializer().Meta.model
         item: EquipmentItem = get_object_or_404(ModelClass.objects, pk=pk)
 
+        if item.reviewer_lock and item.reviewer_lock != request.user:
+            return self._conflict_response()
+
         if not item.frozen_as_ambiguous:
             item.frozen_as_ambiguous = True
             item.save(keep_deleted=True)
@@ -515,6 +518,9 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         ModelClass = self.get_serializer().Meta.model
         item: EquipmentItem = get_object_or_404(ModelClass.objects, pk=pk)
+
+        if item.reviewer_lock and item.reviewer_lock != request.user:
+            return self._conflict_response()
 
         if item.frozen_as_ambiguous:
             item.frozen_as_ambiguous = False
