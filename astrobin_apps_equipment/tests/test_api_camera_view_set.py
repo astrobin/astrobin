@@ -652,8 +652,25 @@ class TestApiCameraViewSet(TestCase):
 
         self.assertEquals(403, response.status_code)
 
-    def test_freeze_as_ambiguous_as_morderator(self):
+    def test_freeze_as_ambiguous_as_morderator_when_no_variants(self):
         camera = EquipmentGenerators.camera()
+
+        client = APIClient()
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'freeze-as-ambiguous/',
+            {},
+            format='json',
+        )
+
+        self.assertEquals(400, response.status_code)
+        camera.refresh_from_db()
+        self.assertFalse(camera.frozen_as_ambiguous)
+
+    def test_freeze_as_ambiguous_as_morderator_when_variants(self):
+        camera = EquipmentGenerators.camera()
+        EquipmentGenerators.camera(variant_of=camera)
 
         client = APIClient()
         client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
@@ -667,6 +684,7 @@ class TestApiCameraViewSet(TestCase):
         self.assertEquals(200, response.status_code)
         camera.refresh_from_db()
         self.assertTrue(camera.frozen_as_ambiguous)
+
 
     def test_unfreeze_as_ambiguous_as_anon(self):
         camera = EquipmentGenerators.camera(frozen_as_ambiguous=True)

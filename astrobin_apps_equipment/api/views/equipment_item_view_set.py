@@ -516,6 +516,9 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         if item.reviewer_lock and item.reviewer_lock != request.user:
             return self._conflict_response()
 
+        if not item.variants.all().exists():
+            return Response("You cannot freeze as ambiguous an item with no variants", HTTP_400_BAD_REQUEST)
+
         if not item.frozen_as_ambiguous:
             item.frozen_as_ambiguous = True
             item.save(keep_deleted=True)
