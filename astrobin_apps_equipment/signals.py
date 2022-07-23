@@ -286,8 +286,12 @@ def send_equipment_item_requires_moderation_notification(sender, instance, creat
     parsed = parsed._replace(query=new_query)
     url = urlunparse(parsed)
 
+    if instance.assignee:
+        recipients = [instance.assignee] if instance.assignee != instance.created_by else []
+    else:
+        recipients = User.objects.filter(groups__name=GroupName.EQUIPMENT_MODERATORS).exclude(pk=instance.created_by.pk),
     push_notification(
-        User.objects.filter(groups__name=GroupName.EQUIPMENT_MODERATORS),
+        recipients,
         None,
         'equipment-item-requires-moderation',
         {
