@@ -520,8 +520,6 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             item.frozen_as_ambiguous = True
             item.save(keep_deleted=True)
 
-            ModelClass.objects.filter(variant_of=item).update(variant_of=None)
-
         serializer = self.serializer_class(item)
         return Response(serializer.data)
 
