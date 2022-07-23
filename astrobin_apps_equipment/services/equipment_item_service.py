@@ -42,8 +42,7 @@ class EquipmentItemService:
             Q(
                 Q(brand__isnull=False) |
                 Q(created_by=user)
-            ) & \
-            Q(frozen_as_ambiguous__isnull=True)
+            )
 
 
     @staticmethod
