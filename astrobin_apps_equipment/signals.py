@@ -289,7 +289,7 @@ def send_equipment_item_requires_moderation_notification(sender, instance, creat
     if instance.assignee:
         recipients = [instance.assignee] if instance.assignee != instance.created_by else []
     else:
-        recipients = User.objects.filter(groups__name=GroupName.EQUIPMENT_MODERATORS).exclude(pk=instance.created_by.pk),
+        recipients = User.objects.filter(groups__name=GroupName.EQUIPMENT_MODERATORS).exclude(pk=instance.created_by.pk)
     push_notification(
         recipients,
         None,
