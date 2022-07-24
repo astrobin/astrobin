@@ -62,12 +62,12 @@ class EquipmentBrand(SafeDeleteModel):
     # This items are synced back from the search index.                                                                #
     ####################################################################################################################
 
-    user_count = models.PositiveSmallIntegerField(
+    user_count = models.PositiveIntegerField(
         editable=False,
         default=0
     )
 
-    image_count = models.PositiveSmallIntegerField(
+    image_count = models.PositiveIntegerField(
         editable=False,
         default=0
     )
