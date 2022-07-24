@@ -10,7 +10,9 @@ from django.db.models import Q, QuerySet
 from django.db.models.functions import Lower
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
+from django.views.decorators.cache import cache_page
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from haystack.query import SearchQuerySet
@@ -131,6 +133,11 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             queryset = queryset.order_by('-image_count', Lower('search_friendly_name'))
 
         return queryset
+
+    @method_decorator(cache_page(60*60))
+    @action(detail=False, methods=['get'])
+    def count(self, request):
+        return Response(self.get_queryset().count())
 
     @action(
         detail=True,
