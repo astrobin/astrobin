@@ -319,6 +319,16 @@ pre_save.connect(nested_comment_pre_save, sender=NestedComment)
 
 
 def nested_comment_post_save(sender, instance, created, **kwargs):
+    from astrobin_apps_equipment.models import (
+        Accessory as Accessory2,
+        Camera as Camera2,
+        Filter as Filter2,
+        Mount as Mount2,
+        Sensor as Sensor2,
+        Software as Software2,
+        Telescope as Telescope2
+    )
+
     if created:
         mentions = MentionsService.get_mentions(instance.text)
 
@@ -349,8 +359,19 @@ def nested_comment_post_save(sender, instance, created, **kwargs):
         elif model_class == Iotd:
             target_url = AppRedirectionService.redirect(f'/iotd/judgement-queue#comments-{instance.content_type.get_object_for_this_type(id=instance.object_id).pk}-{instance.pk}')
             url = target_url
-        else:
-            return
+        elif model_class in (
+                Sensor2,
+                Camera2,
+                Telescope2,
+                Filter2,
+                Mount2,
+                Accessory2,
+                Software2
+        ):
+            target_url = AppRedirectionService.redirect(
+                f'/equipment/explorer/{model_class.__name__.lower()}/{instance.content_object.pk}'
+            )
+            url = target_url + f'#c{instance.id}'
         for username in mentions:
             user = get_object_or_None(User, username=username)
             if not user:
