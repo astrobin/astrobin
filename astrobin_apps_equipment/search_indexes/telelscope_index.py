@@ -11,4 +11,7 @@ class TelescopeIndex(EquipmentItemIndex, Indexable):
 
     # noinspection PyMethodMayBeStatic
     def image_queryset(self, obj: Telescope) -> Q:
-        return Q(imaging_telescopes_2=obj) | Q(guiding_telescopes_2=obj)
+        return Q(imaging_telescopes_2=obj) |\
+               Q(guiding_telescopes_2=obj) |\
+               Q(imaging_telescopes_2__in=obj.variants.all()) |\
+               Q(guiding_telescopes_2__in=obj.variants.all())

@@ -11,4 +11,4 @@ class FilterIndex(EquipmentItemIndex, Indexable):
 
     # noinspection PyMethodMayBeStatic
     def image_queryset(self, obj: Filter) -> Q:
-        return Q(filters_2=obj)
+        return Q(filters_2=obj) | Q(filters_2__in=obj.variants.all())

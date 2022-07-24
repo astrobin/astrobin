@@ -11,4 +11,7 @@ class SensorIndex(EquipmentItemIndex, Indexable):
 
     # noinspection PyMethodMayBeStatic
     def image_queryset(self, obj: Sensor) -> Q:
-        return Q(imaging_cameras_2__sensor=obj) | Q(guiding_cameras_2__sensor=obj)
+        return Q(imaging_cameras_2__sensor=obj) | \
+               Q(guiding_cameras_2__sensor=obj) | \
+               Q(imaging_cameras_2__sensor__in=obj.variants.all()) | \
+               Q(guiding_cameras_2__sensor__in=obj.variants.all())

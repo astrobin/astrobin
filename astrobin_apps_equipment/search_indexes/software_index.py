@@ -11,4 +11,4 @@ class SoftwareIndex(EquipmentItemIndex, Indexable):
 
     # noinspection PyMethodMayBeStatic
     def image_queryset(self, obj: Software) -> Q:
-        return Q(software_2=obj)
+        return Q(software_2=obj) | Q(software_2__in=obj.variants.all())
