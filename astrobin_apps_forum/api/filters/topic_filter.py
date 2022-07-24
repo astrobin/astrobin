@@ -1,12 +1,13 @@
 from django_filters.rest_framework import FilterSet
-from pybb.models import Post
+from pybb.models import Topic
 
 
-class PostFilter(FilterSet):
+class TopicFilter(FilterSet):
     class Meta:
-        model = Post
+        model = Topic
         fields = [
             'user',
             'on_moderation',
-            'topic',
+            'forum',
+            'name',
         ]

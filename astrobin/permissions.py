@@ -22,6 +22,21 @@ class CustomForumPermissions(DefaultPermissionHandler):
 
         return may
 
+    def filter_posts(self, user, qs):
+        f = super(CustomForumPermissions, self).filter_posts(user, qs)
+
+        if user.is_authenticated:
+            f = f.filter(
+                Q(topic__forum__group=None) |
+                Q(topic__forum__group__public=True) |
+                Q(topic__forum__group__owner=user) |
+                Q(topic__forum__group__members=user)
+            ).distinct()
+        else:
+            f = f.filter(Q(topic__forum__group=None) | Q(topic__forum__group__public=True))
+
+        return f
+
     def filter_forums(self, user, qs):
         f = super(CustomForumPermissions, self).filter_forums(user, qs)
 
