@@ -22,4 +22,4 @@ class LatestTopicsView(PaginatorMixin, generic.ListView):
 
         qs = qs.distinct().select_related()
 
-        return qs.order_by('-updated', '-id')[:settings.PYBB_TOPIC_PAGE_SIZE * 2]
+        return qs.order_by('-updated', '-id')
