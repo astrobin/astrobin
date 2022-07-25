@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('pybb', '0007_auto_20170111_1504'),
         ('astrobin_apps_equipment', '0101_make_brand_user_and_image_counts_non_small'),
     ]
 

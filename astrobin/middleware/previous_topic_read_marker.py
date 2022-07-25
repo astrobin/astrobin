@@ -1,7 +1,7 @@
 from pybb.models import Topic
 
 from astrobin.middleware.mixins import MiddlewareParentClass
-from common.services.forum_service import ForumService
+from astrobin_apps_forum.services import ForumService
 
 
 class PreviousTopicReadMarkerMiddleware(MiddlewareParentClass):

@@ -175,6 +175,12 @@ NOTICE_TYPES = (
         2,
     ),
     (
+        'new_topic_for_equipment_you_use',
+        _('New forum topic for an equipment item you use'),
+        '',
+        2,
+    ),
+    (
         'received_email',
         _('You have received a new private message'),
         '',

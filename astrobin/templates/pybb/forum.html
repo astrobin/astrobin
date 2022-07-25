@@ -20,27 +20,27 @@
 
 {% block content %}
     {% if forum.category.slug == 'group-forums' or forum.category.slug == 'equipment-forums' %}
-    <div class="subnav subnav-fixed">
-        <ul class="nav nav-pills">
-            {% if forum.category.slug == 'group-forums' %}
-                <li>
-                    <a href="{% url 'group_detail' forum.group.pk %}">
-                        <i class="icon-arrow-left icon-white"></i>
-                        <span class="hidden-phone">{% trans "Back to group" %}</span>
-                    </a>
-                </li>
-            {% endif %}
+        <div class="subnav subnav-fixed">
+            <ul class="nav nav-pills">
+                {% if forum.category.slug == 'group-forums' %}
+                    <li>
+                        <a href="{% url 'group_detail' forum.group.pk %}">
+                            <i class="icon-arrow-left icon-white"></i>
+                            <span class="hidden-phone">{% trans "Back to group" %}</span>
+                        </a>
+                    </li>
+                {% endif %}
 
-            {% if forum.category.slug == 'equipment-forums' %}
-                <li>
-                    <a href="{% forum_equipment_item_url forum %}">
-                        <i class="icon-arrow-left icon-white"></i>
-                        <span class="hidden-phone">{% trans "Back to equipment item" %}</span>
-                    </a>
-                </li>
-            {% endif %}
-        </ul>
-    </div>
+                {% if forum.category.slug == 'equipment-forums' %}
+                    <li>
+                        <a href="{% forum_equipment_item_url forum %}">
+                            <i class="icon-arrow-left icon-white"></i>
+                            <span class="hidden-phone">{% trans "Back to equipment item" %}</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
     {% endif %}
 
     {% include 'pybb/_forum_tools.html' %}
@@ -49,6 +49,17 @@
         {% if forum.headline %}
             <div class="forum-headline alert alert-block">
                 {{ forum.headline|safe }}
+            </div>
+        {% endif %}
+
+        {% if forum.category.slug == 'equipment-forums' %}
+            <div class="forum-description">
+                {% blocktrans trimmed with _0='<a href="https://welcome.astrobin.com/features/equipment-database" target="_blank">' _1='</a>' %}
+                    Every equipment item on AstroBin has a forum associated with it. Anybody who used an
+                    equipment item is notified of new topics in its forum, unless they opt out. Below, you
+                    can see a list of equipment item forums that have at least one discussion topic.
+                    {{ _0 }}Learn more about the AstroBin equipment database{{ _1 }}!
+                {% endblocktrans %}
             </div>
         {% endif %}
 

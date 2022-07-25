@@ -68,6 +68,24 @@ table.forums, table.topic-list {
   }
 }
 
+table.forums,
+.forum {
+  .category-description,
+  .forum-description {
+    padding: 1rem 2.5rem;
+    font-style: italic;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    background: $grey-8;
+  }
+
+  td .forum-description,
+  td .category-description {
+    margin: -.5rem;
+  }
+}
+
 th.forum-name {
   font-size: 18px;
   line-height: 32px;

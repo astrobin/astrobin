@@ -40,6 +40,7 @@
     {% if categories %}
         <table class="forums table {% if category %}category-table{% elif parent_forum %}child-forums-table{% endif %}">
         {% for category in categories %}
+            <tbody>
             <tr class="forum-row head-row">
                 <th class="forum-status">
                     &nbsp;
@@ -57,7 +58,36 @@
                     {% trans "Last posts" %}
                 </th>
             </tr>
+            {% if category.slug == 'group-forums' %}
+                <tr>
+                    <td colspan="5">
+                        <p class="category-description">
+                            {% blocktrans trimmed with _0='<a href="https://welcome.astrobin.com/features/groups" target="_blank">' _1='</a>' %}
+                                Every AstroBin group has a forum associated with it. Group members are notified of new
+                                topics unless they opt out. {{ _0 }}Learn more about AstroBin Groups{{ _1 }}!
+                            {% endblocktrans %}
+                        </p>
+                    </td>
+                </tr>
+            {% endif %}
+
+            {% if category.slug == 'equipment-forums' %}
+                <tr>
+                    <td colspan="5">
+                        <p class="category-description">
+                            {% blocktrans trimmed with _0='<a href="https://welcome.astrobin.com/features/equipment-database" target="_blank">' _1='</a>' %}
+                                Every equipment item on AstroBin has a forum associated with it. Anybody who used an
+                                equipment item is notified of new topics in its forum, unless they opt out. Below, you
+                                can see a list of equipment item forums that have at least one discussion topic.
+                                {{ _0 }}Learn more about the AstroBin equipment database{{ _1 }}!
+                            {% endblocktrans %}
+                        </p>
+                    </td>
+                </tr>
+            {% endif %}
+
             {% include 'pybb/forum_list.html' with forum_list=category.forums_accessed category=category parent_forum='' %}
+            </tbody>
         {% endfor %}
         </table>
     {% else %}
