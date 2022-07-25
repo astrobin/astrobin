@@ -64,7 +64,7 @@
                         <p class="category-description">
                             {% blocktrans trimmed with _0='<a href="https://welcome.astrobin.com/features/groups" target="_blank">' _1='</a>' %}
                                 Every AstroBin group has a forum associated with it. Group members are notified of new
-                                topics unless they opt out. {{ _0 }}Learn more about AstroBin Groups{{ _1 }}!
+                                topics unless they opt out. {{ _0 }}Learn more about AstroBin Groups!{{ _1 }}
                             {% endblocktrans %}
                         </p>
                     </td>
@@ -75,12 +75,23 @@
                 <tr>
                     <td colspan="5">
                         <p class="category-description">
-                            {% blocktrans trimmed with _0='<a href="https://welcome.astrobin.com/features/equipment-database" target="_blank">' _1='</a>' %}
-                                Every equipment item on AstroBin has a forum associated with it. Anybody who used an
-                                equipment item is notified of new topics in its forum, unless they opt out. Below, you
-                                can see a list of equipment item forums that have at least one discussion topic.
-                                {{ _0 }}Learn more about the AstroBin equipment database{{ _1 }}!
+                            {% trans "Every equipment item on AstroBin has a forum associated with it." %}
+
+                            {% blocktrans trimmed %}
+                                Anybody who used an equipment item is notified of new topics in its forum, unless they
+                                opt out.
                             {% endblocktrans %}
+
+                            {% blocktrans trimmed %}
+                                Below, you can see a list of equipment item forums that have at least one discussion
+                                topic.
+                            {% endblocktrans %}
+
+                            <a href="https://welcome.astrobin.com/features/equipment-database" target="_blank">
+                                {% blocktrans trimmed %}
+                                    Learn more about the AstroBin equipment database!
+                                {% endblocktrans %}
+                            </a>
                         </p>
                     </td>
                 </tr>
