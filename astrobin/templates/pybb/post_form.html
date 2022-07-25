@@ -5,6 +5,13 @@
     {% include 'readonly_mode.html' %}
 {% else %}
     <img class="post-form-loading" src="{% static "astrobin/images/ajax-loader.gif" %}" alt="{% trans "Loading" %}" />
+
+    {% if forum and forum.slug == 'equipment' %}
+        <div class="forum">
+            {% include './_equipment_forum_notice.html' %}
+        </div>
+    {% endif %}
+
     <form novalidate class="post-form" action="
         {% if forum %}
             {% url 'pybb:add_topic' forum.pk %}
@@ -24,11 +31,10 @@
                 {% if form.slug %} {% include "pybb/form_field.html" with field=form.slug %} {% endif %}
                 {% if form.login %} {% include "pybb/form_field.html" with field=form.login %} {% endif %}
 
-                {% include '_contribution_index_alert.html' %}
-
                 {% if form.body %}
                     {% include "pybb/form_field.html" with field=form.body %}
                     {% include '_rich_content_editor_help.html' %}
+                    {% include '_contribution_index_alert.html' %}
                 {% endif %}
 
                 {% if request.user|pybb_may_create_poll and form.poll_type %}

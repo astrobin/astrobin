@@ -54,13 +54,26 @@
 
         {% if forum.category.slug == 'equipment-forums' %}
             <div class="forum-description">
-                {% blocktrans trimmed with _0='<a href="https://welcome.astrobin.com/features/equipment-database" target="_blank">' _1='</a>' %}
-                    Every equipment item on AstroBin has a forum associated with it. Anybody who used an
-                    equipment item is notified of new topics in its forum, unless they opt out. Below, you
-                    can see a list of equipment item forums that have at least one discussion topic.
-                    {{ _0 }}Learn more about the AstroBin equipment database{{ _1 }}!
+                {% trans "Every equipment item on AstroBin has a forum associated with it." %}
+
+                {% blocktrans trimmed %}
+                    Anybody who used an equipment item is notified of new topics in its forum, unless they opt out.
                 {% endblocktrans %}
+
+                {% blocktrans trimmed %}
+                    Below, you can see a list of equipment item forums that have at least one discussion topic.
+                {% endblocktrans %}
+
+                <a href="https://welcome.astrobin.com/features/equipment-database" target="_blank">
+                    {% blocktrans trimmed %}
+                        Learn more about the AstroBin equipment database!
+                    {% endblocktrans %}
+                </a>
             </div>
+        {% endif %}
+
+        {% if forum.slug == 'equipment' %}
+            {% include './_equipment_forum_notice.html' %}
         {% endif %}
 
         {% include 'pybb/forum_list.html' with forum_list=forum.forums_accessed category='' parent_forum=forum %}

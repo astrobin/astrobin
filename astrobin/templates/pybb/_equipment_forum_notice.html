@@ -1,0 +1,22 @@
+{% load i18n %}
+
+<div class="forum-description">
+    <strong>{% trans "Please note" %}:</strong>
+
+    {% trans "Every equipment item on AstroBin has a forum associated with it." %}
+
+    {% blocktrans trimmed with _0='<a href="https://app.astrobin.com/equipment/explorer">' _1='</a>' %}
+        If you want to post a new topic about a specific equipment item, we recommend finding it in the
+        {{ _0 }}equipment database{{ _1 }} and posting in its dedicated forum.
+    {% endblocktrans %}
+
+    {% blocktrans trimmed %}
+        This will maximize your chances of getting relevant replies.
+    {% endblocktrans %}
+
+    <a href="https://welcome.astrobin.com/features/equipment-database" target="_blank">
+        {% blocktrans trimmed %}
+            Learn more about the AstroBin equipment database!
+        {% endblocktrans %}
+    </a>
+</div>
