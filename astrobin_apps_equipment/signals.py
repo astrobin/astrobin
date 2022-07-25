@@ -429,18 +429,21 @@ def set_search_friendly_name_for_software(sender, instance, **kwargs):
     instance.search_friendly_name = search_friendly_name.strip()
 
 
-@receiver(post_save, sender=Sensor)
-@receiver(post_save, sender=Camera)
-@receiver(post_save, sender=Telescope)
-@receiver(post_save, sender=Mount)
-@receiver(post_save, sender=Filter)
-@receiver(post_save, sender=Accessory)
-@receiver(post_save, sender=Software)
-def create_equipment_item_forum(sender, instance: EquipmentItem, created: bool, **kwargs):
+@receiver(pre_save, sender=Sensor)
+@receiver(pre_save, sender=Camera)
+@receiver(pre_save, sender=Telescope)
+@receiver(pre_save, sender=Mount)
+@receiver(pre_save, sender=Filter)
+@receiver(pre_save, sender=Accessory)
+@receiver(pre_save, sender=Software)
+def create_equipment_item_forum(sender, instance: EquipmentItem, **kwargs):
     if not instance.brand:
         return
 
     if instance.reviewer_decision != EquipmentItemReviewerDecision.APPROVED:
+        return
+
+    if instance.forum:
         return
 
     category, created = Category.objects.get_or_create(
