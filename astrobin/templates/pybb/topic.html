@@ -30,17 +30,17 @@
                     {% if user.is_superuser %}
                         <li class="hidden-phone">
                             {% if topic.sticky %}
-                                <a href="{% url 'pybb:unstick_topic' topic.id %}">{% trans "Unstick topic" %}</a>
+                                <a data-no-instant href="{% url 'pybb:unstick_topic' topic.id %}">{% trans "Unstick topic" %}</a>
                             {% else %}
-                                <a href="{% url 'pybb:stick_topic' topic.id %}">{% trans "Stick topic" %}</a>
+                                <a data-no-instant href="{% url 'pybb:stick_topic' topic.id %}">{% trans "Stick topic" %}</a>
                             {% endif %}
                         </li>
 
                         <li class="hidden-phone">
                             {% if topic.closed %}
-                                <a href="{% url 'pybb:open_topic' topic.id %}">{% trans "Open topic" %}</a>
+                                <a data-no-instant href="{% url 'pybb:open_topic' topic.id %}">{% trans "Open topic" %}</a>
                             {% else %}
-                                <a href="{% url 'pybb:close_topic' topic.id %}">{% trans "Close topic" %}</a>
+                                <a data-no-instant href="{% url 'pybb:close_topic' topic.id %}">{% trans "Close topic" %}</a>
                             {% endif %}
                         </li>
 
@@ -53,14 +53,14 @@
 
                     {% if user.is_subscribed %}
                         <li>
-                            <a href="{% url 'pybb:delete_subscription' topic.id %}?from_topic">
+                            <a data-no-instant href="{% url 'pybb:delete_subscription' topic.id %}?from_topic">
                                 <i class="icon-eye-close"></i>
                                 {% trans "Unsubscribe" %}
                             </a>
                         </li>
                     {% elif user|pybb_may_subscribe_topic:topic %}
                         <li>
-                            <a href="{% url 'pybb:add_subscription' topic.id %}">
+                            <a data-no-instant href="{% url 'pybb:add_subscription' topic.id %}">
                                 <i class="icon-eye-open"></i>
                                 {% trans "Subscribe" %}
                             </a>
