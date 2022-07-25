@@ -916,7 +916,8 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
                 },
             )
         elif instance.forum.category.slug == 'equipment-forums':
-            notify_equipment_users.delay(instance.pk)
+            if not instance.on_moderation:
+                notify_equipment_users.delay(instance.pk)
 
     cache_key = make_template_fragment_key(
         'home_page_latest_from_forums',
