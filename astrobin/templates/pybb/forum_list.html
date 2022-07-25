@@ -1,7 +1,8 @@
 {% load i18n %}
 {% load pybb_tags %}
+{% load astrobin_apps_forum_tags %}
 
-{% for forum in forum_list|pybb_forum_unread:user %}
+{% for forum in forum_list|exclude_empty_forums_in_category:"equipment-forums"|pybb_forum_unread:user %}
     <tr class="forum-row">
         <td class="forum-status {% if forum.unread %} forum-unread{% endif %}">
             <div class="state-indicator"></div>

@@ -2,7 +2,6 @@
 
 
 {% load i18n %}
-{% load astrobin_apps_forum_tags %}
 
 {% block title %}{{ PYBB_DEFAULT_TITLE }}{% endblock title %}
 
@@ -40,7 +39,7 @@
 
     {% if categories %}
         <table class="forums table {% if category %}category-table{% elif parent_forum %}child-forums-table{% endif %}">
-        {% for category in categories|exclude_category:"Equipment forums" %}
+        {% for category in categories %}
             <tr class="forum-row head-row">
                 <th class="forum-status">
                     &nbsp;

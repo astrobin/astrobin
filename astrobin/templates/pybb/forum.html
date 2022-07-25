@@ -1,10 +1,13 @@
 {% extends 'pybb/base.html' %}
-{% load pybb_tags i18n %}
+
+{% load pybb_tags %}
+{% load i18n %}
+{% load astrobin_apps_forum_tags %}
 
 {% block title %}{{ forum.name }}{% endblock title %}
 
 {% block container_extra_classes %}
-    {% if forum.category.slug == 'group-forums' %}
+    {% if forum.category.slug == 'group-forums' or forum.category.slug == 'equipment-forums' %}
         has-subnav
     {% endif %}
 {% endblock %}
@@ -16,7 +19,7 @@
 {% endblock %}
 
 {% block content %}
-    {% if forum.category.slug == 'group-forums' %}
+    {% if forum.category.slug == 'group-forums' or forum.category.slug == 'equipment-forums' %}
     <div class="subnav subnav-fixed">
         <ul class="nav nav-pills">
             {% if forum.category.slug == 'group-forums' %}
@@ -24,6 +27,15 @@
                     <a href="{% url 'group_detail' forum.group.pk %}">
                         <i class="icon-arrow-left icon-white"></i>
                         <span class="hidden-phone">{% trans "Back to group" %}</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            {% if forum.category.slug == 'equipment-forums' %}
+                <li>
+                    <a href="{% forum_equipment_item_url forum %}">
+                        <i class="icon-arrow-left icon-white"></i>
+                        <span class="hidden-phone">{% trans "Back to equipment item" %}</span>
                     </a>
                 </li>
             {% endif %}
