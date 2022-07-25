@@ -1,10 +1,9 @@
 from typing import List
 
-from annoying.functions import get_object_or_None
 from django.template import Library
 from pybb.models import Forum
 
-from astrobin_apps_equipment.models import Accessory, Camera, EquipmentItem, Filter, Mount, Sensor, Software, Telescope
+from astrobin_apps_equipment.models import EquipmentItem
 from astrobin_apps_forum.services import ForumService
 from common.services import AppRedirectionService
 
