@@ -4,7 +4,8 @@ from annoying.functions import get_object_or_None
 from django.template import Library
 from pybb.models import Forum
 
-from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Sensor, Software, Telescope
+from astrobin_apps_equipment.models import Accessory, Camera, EquipmentItem, Filter, Mount, Sensor, Software, Telescope
+from astrobin_apps_forum.services import ForumService
 from common.services import AppRedirectionService
 
 register = Library()
@@ -17,15 +18,6 @@ def exclude_empty_forums_in_category(forums: List[Forum], category_slug: str) ->
 
 @register.simple_tag
 def forum_equipment_item_url(forum: Forum) -> str:
-    for ModelClass in (
-            Sensor,
-            Camera,
-            Telescope,
-            Mount,
-            Filter,
-            Accessory,
-            Software
-    ):
-        item: ModelClass = get_object_or_None(ModelClass, forum=forum)
-        if item:
-            return AppRedirectionService.redirect(f'/equipment/explorer/{item.klass.lower()}/{item.id}/{item.slug}');
+    item: EquipmentItem = ForumService(forum).get_equipment_item()
+    if item:
+        return AppRedirectionService.redirect(f'/equipment/explorer/{item.klass.lower()}/{item.id}/{item.slug}');
