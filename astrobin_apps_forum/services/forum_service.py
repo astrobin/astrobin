@@ -44,7 +44,7 @@ class ForumService:
         if not item:
             return
 
-        recipients: QuerySet = EquipmentItemService(item).get_users()
+        recipients: QuerySet = EquipmentItemService(item).get_users().exclude(pk=topic.user.pk)
 
         if recipients.exists():
             push_notification(

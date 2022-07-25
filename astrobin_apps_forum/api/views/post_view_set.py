@@ -36,7 +36,7 @@ class PostViewSet(viewsets.ModelViewSet):
     def hit(self, request, pk):
         UpdateHitCountResponse = namedtuple('UpdateHitCountResponse', 'hit_counted hit_message')
 
-        post: Post = get_object_or_None(self.queryset, pk=pk)
+        post: Post = get_object_or_None(self.get_queryset(), pk=pk)
 
         if post and request.user != post.user:
             hit_count: HitCount = HitCount.objects.get_for_object(post)

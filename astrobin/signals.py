@@ -31,7 +31,7 @@ from subscription.signals import paid, signed_up
 from astrobin.tasks import process_camera_rename_proposal
 from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.tasks import approve_migration_strategy
-from astrobin_apps_forum.services import ForumService
+from astrobin_apps_forum.tasks import notify_equipment_users
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
@@ -884,7 +884,7 @@ def forum_topic_pre_save(sender, instance, **kwargs):
                 },
             )
         elif instance.forum.category.slug == 'equipment-forums':
-            ForumService.notify_equipment_users(instance)
+            notify_equipment_users.delay(instance.pk)
 
 pre_save.connect(forum_topic_pre_save, sender=Topic)
 
@@ -916,7 +916,7 @@ def forum_topic_post_save(sender, instance, created, **kwargs):
                 },
             )
         elif instance.forum.category.slug == 'equipment-forums':
-            ForumService.notify_equipment_users(instance)
+            notify_equipment_users.delay(instance.pk)
 
     cache_key = make_template_fragment_key(
         'home_page_latest_from_forums',

@@ -30,3 +30,16 @@ class TestTopicSaveSignals(TestCase):
                 mock.call([user1], topic.user, 'new_topic_for_equipment_you_use', mock.ANY),
             ], any_order=True
         )
+
+    @mock.patch('astrobin_apps_forum.services.forum_service.push_notification')
+    def test_notification_for_equipment_item_topics_doesnt_send_to_post_user(self, push_notification):
+        user = Generators.user()
+        image = Generators.image(user=user)
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        image.imaging_telescopes_2.add(telescope)
+
+        forum = telescope.forum
+        Generators.forum_topic(forum=forum, user=user)
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_called_with(mock.ANY, user, 'new_topic_for_equipment_you_use', mock.ANY)
