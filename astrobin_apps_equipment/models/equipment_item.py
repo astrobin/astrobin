@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models import SET_NULL, PROTECT
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
+from pybb.models import Forum
 from safedelete.models import SafeDeleteModel
 
 from astrobin_apps_equipment.models import EquipmentBrand
@@ -212,6 +213,14 @@ class EquipmentItem(SafeDeleteModel):
         blank=True,
     )
 
+    forum = models.OneToOneField(
+        Forum,
+        null=True,
+        blank=True,
+        editable=False,
+        related_name='%(app_label)s_%(class)s_equipment_item',
+        on_delete=models.SET_NULL
+    )
     ####################################################################################################################
     # This items are synced back from the search index.                                                                #
     ####################################################################################################################

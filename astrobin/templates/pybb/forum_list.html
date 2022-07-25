@@ -1,4 +1,5 @@
-{% load pybb_tags i18n %}
+{% load i18n %}
+{% load pybb_tags %}
 
 {% for forum in forum_list|pybb_forum_unread:user %}
     <tr class="forum-row">
