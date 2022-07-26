@@ -73,7 +73,6 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 queryset = queryset.filter(
                     brand__isnull=False,
                     reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
-                    frozen_as_ambiguous__isnull=True
                 )
 
         if q:
@@ -156,7 +155,6 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             queryset = item.variants.filter(
                 brand__isnull=False,
                 reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
-                frozen_as_ambiguous__isnull=True
             )
 
         serializer = self.serializer_class(queryset, many=True)

@@ -33,7 +33,6 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
             variants = variants.filter(
                 reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
                 brand__isnull=False,
-                frozen_as_ambiguous__isnull=True,
             )
 
         return self.__class__(variants, many=True).data
