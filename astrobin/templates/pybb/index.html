@@ -27,7 +27,7 @@
                 </li>
                 {% if not READONLY_MODE %}
                 <li>
-                    <a href='{% url 'pybb:mark_all_as_read' %}'>
+                    <a data-no-instant href='{% url 'pybb:mark_all_as_read' %}'>
                         <i class="icon-check icon-white"></i>
                         <span class="hidden-phone">{% trans "Mark all as read" %}</span>
                     </a>
