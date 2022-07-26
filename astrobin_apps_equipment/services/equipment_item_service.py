@@ -33,33 +33,40 @@ class EquipmentItemService:
 
     def get_users(self) -> QuerySet:
         queryset = None
+        
+        items = [self.item]
+        
+        if self.item.variant_of:
+            items.append(self.item.variant_of)
+            
+        items += list(self.item.variants.all())
 
         if self.item.klass == EquipmentItemKlass.SENSOR:
             queryset = User.objects.filter(
-                Q(image__imaging_cameras_2__sensor=self.item) |
-                Q(image__guiding_cameras_2__sensor=self.item)
+                Q(image__imaging_cameras_2__sensor__in=items) |
+                Q(image__guiding_cameras_2__sensor__in=items)
             )
         elif self.item.klass == EquipmentItemKlass.CAMERA:
             queryset = User.objects.filter(
-                Q(image__imaging_cameras_2=self.item) |
-                Q(image__guiding_cameras_2=self.item)
+                Q(image__imaging_cameras_2__in=items) |
+                Q(image__guiding_cameras_2__in=items)
             )
         elif self.item.klass == EquipmentItemKlass.TELESCOPE:
             queryset = User.objects.filter(
-                Q(image__imaging_telescopes_2=self.item) |
-                Q(image__guiding_telescopes_2=self.item)
+                Q(image__imaging_telescopes_2__in=items) |
+                Q(image__guiding_telescopes_2__in=items)
             )
         elif self.item.klass == EquipmentItemKlass.MOUNT:
-            queryset = User.objects.filter(image__mounts_2=self.item)
+            queryset = User.objects.filter(image__mounts_2__in=items)
         elif self.item.klass == EquipmentItemKlass.FILTER:
-            queryset = User.objects.filter(image__filters_2=self.item)
+            queryset = User.objects.filter(image__filters_2__in=items)
         elif self.item.klass == EquipmentItemKlass.ACCESSORY:
-            queryset = User.objects.filter(image__accessories_2=self.item)
+            queryset = User.objects.filter(image__accessories_2__in=items)
         elif self.item.klass == EquipmentItemKlass.SOFTWARE:
-            queryset = User.objects.filter(image__software_2=self.item)
+            queryset = User.objects.filter(image__software_2__in=items)
 
         if queryset:
-            return queryset.distinct()
+            return queryset.distinct().order_by('pk')
 
     @staticmethod
     def non_moderator_queryset(user) -> Q:

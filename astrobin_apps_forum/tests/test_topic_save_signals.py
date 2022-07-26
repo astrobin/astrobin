@@ -32,6 +32,56 @@ class TestTopicSaveSignals(TestCase):
         )
 
     @mock.patch('astrobin_apps_forum.services.forum_service.push_notification')
+    def test_notification_for_equipment_item_topics_for_users_of_variants(self, push_notification):
+        user1 = Generators.user()
+        user2 = Generators.user()
+
+        image1 = Generators.image(user=user1)
+        image2 = Generators.image(user=user2)
+
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        variant = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED, variant_of=telescope, brand=telescope.brand)
+
+        image1.imaging_telescopes_2.add(telescope)
+        image2.imaging_telescopes_2.add(variant)
+
+        forum = telescope.forum
+
+        topic = Generators.forum_topic(forum=forum)
+
+        push_notification.assert_has_calls(
+            [
+                mock.call([user1, user2], topic.user, 'new_topic_for_equipment_you_use', mock.ANY),
+            ], any_order=True
+        )
+
+    @mock.patch('astrobin_apps_forum.services.forum_service.push_notification')
+    def test_notification_for_equipment_item_topics_for_users_of_variants_reverse(self, push_notification):
+        user1 = Generators.user()
+        user2 = Generators.user()
+
+        image1 = Generators.image(user=user1)
+        image2 = Generators.image(user=user2)
+
+        telescope = EquipmentGenerators.telescope(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        variant = EquipmentGenerators.telescope(
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED, variant_of=telescope, brand=telescope.brand
+        )
+
+        image1.imaging_telescopes_2.add(telescope)
+        image2.imaging_telescopes_2.add(variant)
+
+        forum = variant.forum
+
+        topic = Generators.forum_topic(forum=forum)
+
+        push_notification.assert_has_calls(
+            [
+                mock.call([user1, user2], topic.user, 'new_topic_for_equipment_you_use', mock.ANY),
+            ], any_order=True
+        )
+
+    @mock.patch('astrobin_apps_forum.services.forum_service.push_notification')
     def test_notification_for_equipment_item_topics_doesnt_send_to_post_user(self, push_notification):
         user = Generators.user()
         image = Generators.image(user=user)
