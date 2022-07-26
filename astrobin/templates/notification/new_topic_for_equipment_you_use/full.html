@@ -1,0 +1,16 @@
+{% load i18n %}
+
+<p>
+{% blocktrans trimmed %}
+    <a href="{{ user_url }}">{{ user }}</a> posted a new topic in the forum for equipment item
+    <a href="{{ item_url }}">{{ item }}</a> that you have used.
+{% endblocktrans %}
+</p>
+
+<p>
+    <strong>{{ topic_name }}</strong>
+</p>
+
+<p>
+    <a href="{{ topic_url }}" class="btn btn-primary">{% trans "View topic" %}</a>
+</p>

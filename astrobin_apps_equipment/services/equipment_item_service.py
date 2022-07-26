@@ -1,8 +1,9 @@
 from django.contrib.auth.models import User
-from django.db.models import Model, Q
+from django.db.models import Model, Q, QuerySet
 from django.utils.translation import ugettext_lazy as _
 from rest_framework.exceptions import PermissionDenied, ValidationError
 
+from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 from common.exceptions import Conflict
@@ -29,6 +30,36 @@ class EquipmentItemService:
         }
 
         return type_map.get(item_type)
+
+    def get_users(self) -> QuerySet:
+        queryset = None
+
+        if self.item.klass == EquipmentItemKlass.SENSOR:
+            queryset = User.objects.filter(
+                Q(image__imaging_cameras_2__sensor=self.item) |
+                Q(image__guiding_cameras_2__sensor=self.item)
+            )
+        elif self.item.klass == EquipmentItemKlass.CAMERA:
+            queryset = User.objects.filter(
+                Q(image__imaging_cameras_2=self.item) |
+                Q(image__guiding_cameras_2=self.item)
+            )
+        elif self.item.klass == EquipmentItemKlass.TELESCOPE:
+            queryset = User.objects.filter(
+                Q(image__imaging_telescopes_2=self.item) |
+                Q(image__guiding_telescopes_2=self.item)
+            )
+        elif self.item.klass == EquipmentItemKlass.MOUNT:
+            queryset = User.objects.filter(image__mounts_2=self.item)
+        elif self.item.klass == EquipmentItemKlass.FILTER:
+            queryset = User.objects.filter(image__filters_2=self.item)
+        elif self.item.klass == EquipmentItemKlass.ACCESSORY:
+            queryset = User.objects.filter(image__accessories_2=self.item)
+        elif self.item.klass == EquipmentItemKlass.SOFTWARE:
+            queryset = User.objects.filter(image__software_2=self.item)
+
+        if queryset:
+            return queryset.distinct()
 
     @staticmethod
     def non_moderator_queryset(user) -> Q:

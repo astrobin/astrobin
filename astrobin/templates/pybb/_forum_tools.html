@@ -16,10 +16,17 @@
                 {% trans "New topic" %}
             </a>
         {% else %}
+            {% if forum.group %}
             <a class="btn btn-primary" data-toggle="modal" href="#posting-restricted-to-members-modal">
                 <i class="icon-plus-sign icon-white"></i>
                 {% trans "New topic" %}
             </a>
+            {% else %}
+                <a class="btn btn-primary" href="{% url 'auth_login' %}?next={{ request.path }}">
+                    <i class="icon-plus icon-white"></i>
+                    {% trans "New topic" %}
+                </a>
+            {% endif %}
         {% endif %}
     {% else %}
         <a class="btn btn-primary" href="#select-forum-modal" data-toggle="modal">

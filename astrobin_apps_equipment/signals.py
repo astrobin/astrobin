@@ -10,15 +10,17 @@ from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from notification import models as notification
+from pybb.models import Category, Forum
 from safedelete.signals import post_softdelete
 
 from astrobin.services.utils_service import UtilsService
 from astrobin_apps_equipment.models import (
-    Accessory, Camera, CameraEditProposal, EquipmentBrand, EquipmentPreset, Filter, Mount, Sensor,
+    Accessory, Camera, CameraEditProposal, EquipmentBrand, EquipmentItem, EquipmentPreset, Filter, Mount, Sensor,
     Software, Telescope,
 )
 from astrobin_apps_equipment.models.accessory_edit_proposal import AccessoryEditProposal
 from astrobin_apps_equipment.models.camera_base_model import CameraType
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.models.filter_edit_proposal import FilterEditProposal
 from astrobin_apps_equipment.models.mount_edit_proposal import MountEditProposal
@@ -427,3 +429,29 @@ def set_search_friendly_name_for_software(sender, instance, **kwargs):
     instance.search_friendly_name = search_friendly_name.strip()
 
 
+@receiver(pre_save, sender=Sensor)
+@receiver(pre_save, sender=Camera)
+@receiver(pre_save, sender=Telescope)
+@receiver(pre_save, sender=Mount)
+@receiver(pre_save, sender=Filter)
+@receiver(pre_save, sender=Accessory)
+@receiver(pre_save, sender=Software)
+def create_equipment_item_forum(sender, instance: EquipmentItem, **kwargs):
+    if not instance.brand:
+        return
+
+    if instance.reviewer_decision != EquipmentItemReviewerDecision.APPROVED:
+        return
+
+    if instance.forum:
+        return
+
+    category, created = Category.objects.get_or_create(
+        name='Equipment forums',
+        slug='equipment-forums',
+    )
+
+    instance.forum, created = Forum.objects.get_or_create(
+        category=category,
+        name=f'{instance}',
+    )

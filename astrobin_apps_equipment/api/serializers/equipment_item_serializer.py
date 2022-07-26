@@ -1,4 +1,3 @@
-from django.db.models import Q
 from rest_framework import serializers
 
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision

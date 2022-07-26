@@ -1,15 +1,22 @@
-{% load pybb_tags i18n %}
+{% load i18n %}
+{% load pybb_tags %}
+{% load astrobin_apps_forum_tags %}
 
-{% for forum in forum_list|pybb_forum_unread:user %}
+{% for forum in forum_list|exclude_empty_forums_in_category:"equipment-forums"|pybb_forum_unread:user %}
     <tr class="forum-row">
         <td class="forum-status {% if forum.unread %} forum-unread{% endif %}">
             <div class="state-indicator"></div>
         </td>
         <td class="forum-name {% if forum.unread %} forum-unread{% endif %}">
-            <a href="{{ forum.get_absolute_url }}">{{ forum.name }}</a> {% if forum.hidden %}[{% trans "Hidden" %}]{% endif %}
-            <div class="forum-description">
-                {{ forum.description|safe }}
-            </div>
+            <a href="{{ forum.get_absolute_url }}">
+                {{ forum.name }}
+            </a> {% if forum.hidden %}[{% trans "Hidden" %}]{% endif %}
+
+            {% if forum.description %}
+                <div class="forum-description">
+                    {{ forum.description|safe }}
+                </div>
+            {% endif %}
         </td>
         <td class="forum-topic-count hidden-tablet hidden-phone">
             {{ forum.topic_count }}

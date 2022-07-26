@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    {{user}} posted a new topic in the forum for equipment item "{{item}}" that you have used: "{{topic_name}}"
+{% endblocktrans %}

@@ -31,6 +31,7 @@ from subscription.signals import paid, signed_up
 from astrobin.tasks import process_camera_rename_proposal
 from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.tasks import approve_migration_strategy
+from astrobin_apps_forum.tasks import notify_equipment_users
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.models import Iotd, IotdSubmission, IotdVote, TopPickArchive, TopPickNominationsArchive
@@ -855,17 +856,17 @@ def group_post_delete(sender, instance, **kwargs):
 post_delete.connect(group_post_delete, sender=Group)
 
 
+# TODO: move these and other related signal handlers to astrobin_apps_forum
 def forum_topic_pre_save(sender, instance, **kwargs):
-    if not hasattr(instance.forum, 'group'):
-        return
-
     try:
         topic = sender.objects.get(pk=instance.pk)
     except sender.DoesNotExist:
-        pass
-    else:
-        if topic.on_moderation == True and instance.on_moderation == False:
-            # This topic is being approved
+        return
+
+    if topic.on_moderation and not instance.on_moderation:
+        # This topic is being approved
+
+        if hasattr(instance.forum, 'group'):
             group = instance.forum.group
             push_notification(
                 [x for x in group.members.all() if x != instance.user],
@@ -882,36 +883,41 @@ def forum_topic_pre_save(sender, instance, **kwargs):
                     'topic_title': instance.name,
                 },
             )
-
+        elif instance.forum.category.slug == 'equipment-forums':
+            notify_equipment_users.delay(instance.pk)
 
 pre_save.connect(forum_topic_pre_save, sender=Topic)
 
 
 def forum_topic_post_save(sender, instance, created, **kwargs):
-    if created and hasattr(instance.forum, 'group'):
-        group = instance.forum.group
+    if created:
+        if hasattr(instance.forum, 'group'):
+            group = instance.forum.group
 
-        if instance.on_moderation:
-            recipients = group.moderators.all()
-        else:
-            recipients = group.members.all()
-        recipients = [x for x in recipients if x != instance.user]
+            if instance.on_moderation:
+                recipients = group.moderators.all()
+            else:
+                recipients = group.members.all()
+            recipients = [x for x in recipients if x != instance.user]
 
-        push_notification(
-            recipients,
-            instance.user,
-            'new_topic_in_group',
-            {
-                'user_url': build_notification_url(
-                    settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user})),
-                'user': instance.user.userprofile.get_display_name(),
-                'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
-                'group_url': build_notification_url(
-                    settings.BASE_URL + reverse_url('group_detail', kwargs={'pk': group.pk}), instance.user),
-                'group_name': group.name,
-                'topic_title': instance.name,
-            },
-        )
+            push_notification(
+                recipients,
+                instance.user,
+                'new_topic_in_group',
+                {
+                    'user_url': build_notification_url(
+                        settings.BASE_URL + reverse_url('user_page', kwargs={'username': instance.user})),
+                    'user': instance.user.userprofile.get_display_name(),
+                    'url': build_notification_url(settings.BASE_URL + instance.get_absolute_url(), instance.user),
+                    'group_url': build_notification_url(
+                        settings.BASE_URL + reverse_url('group_detail', kwargs={'pk': group.pk}), instance.user),
+                    'group_name': group.name,
+                    'topic_title': instance.name,
+                },
+            )
+        elif instance.forum.category.slug == 'equipment-forums':
+            if not instance.on_moderation:
+                notify_equipment_users.delay(instance.pk)
 
     cache_key = make_template_fragment_key(
         'home_page_latest_from_forums',
@@ -967,8 +973,7 @@ pre_save.connect(forum_post_pre_save, sender=Post)
 
 
 def forum_post_post_save(sender, instance, created, **kwargs):
-    def notify_subscribers(mentions):
-        # type: (List[str]) -> None
+    def notify_subscribers(mentions: List[str]) -> None:
         recipients = list(instance.topic.subscribers.exclude(
             pk__in=list(set(
                 [instance.user.pk] +
@@ -997,8 +1002,7 @@ def forum_post_post_save(sender, instance, created, **kwargs):
                 }
             )
 
-    def notify_mentioned(mentions):
-        # type: (List[str]) -> None
+    def notify_mentioned(mentions: List[str]) -> None:
         for username in mentions:
             user = get_object_or_None(User, username=username)
             if user is None:

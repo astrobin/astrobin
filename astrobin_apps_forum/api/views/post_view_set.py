@@ -2,6 +2,7 @@ from collections import namedtuple
 
 import simplejson
 from annoying.functions import get_object_or_None
+from django.db.models import QuerySet
 from django.http import HttpResponse
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
@@ -10,33 +11,32 @@ from hitcount.views import HitCountMixin
 from pybb.models import Post
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.permissions import AllowAny
 from rest_framework.renderers import BrowsableAPIRenderer
 
+from astrobin.permissions import CustomForumPermissions
 from astrobin_apps_forum.api.filters.post_filter import PostFilter
 from astrobin_apps_forum.api.serializers.post_serializer import PostSerializer
-from common.permissions import IsObjectUserOrReadOnly
+from common.permissions import ReadOnly
 
 
 class PostViewSet(viewsets.ModelViewSet):
     renderer_classes = [BrowsableAPIRenderer, CamelCaseJSONRenderer]
     parser_classes = [CamelCaseJSONParser]
     serializer_class = PostSerializer
-    permission_classes = [IsObjectUserOrReadOnly]
+    permission_classes = [ReadOnly]
     filter_class = PostFilter
-    http_method_names = ['get', 'post', 'put', 'head']
-    queryset = Post.objects.filter(on_moderation=False)
+    http_method_names = ['get', 'put', 'head']
 
-    def perform_create(self, serializer):
-        serializer.save(
-            user=self.request.user,
-            user_ip=self.request.META.get('REMOTE_ADDR'),
-        )
+    def get_queryset(self) -> QuerySet:
+        queryset = Post.objects.filter(on_moderation=False)
+        return CustomForumPermissions().filter_posts(self.request.user, queryset)
 
-    @action(detail=True, methods=['put'])
+    @action(detail=True, methods=['put'], permission_classes=[AllowAny])
     def hit(self, request, pk):
         UpdateHitCountResponse = namedtuple('UpdateHitCountResponse', 'hit_counted hit_message')
 
-        post: Post = get_object_or_None(self.queryset, pk=pk)
+        post: Post = get_object_or_None(self.get_queryset(), pk=pk)
 
         if post and request.user != post.user:
             hit_count: HitCount = HitCount.objects.get_for_object(post)
