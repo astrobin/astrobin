@@ -4,6 +4,7 @@
 python manage.py collectstatic --noinput
 
 # Migrate
+python manage.py migrate pybb --noinput
 python manage.py migrate --noinput
 python manage.py migrate --run-syncdb --noinput
 
