@@ -29,7 +29,7 @@ from subscription.models import Transaction, UserSubscription
 from subscription.signals import paid, signed_up
 
 from astrobin.tasks import process_camera_rename_proposal
-from astrobin_apps_equipment.models import EquipmentBrand
+from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
 from astrobin_apps_equipment.tasks import approve_migration_strategy
 from astrobin_apps_forum.tasks import notify_equipment_users
 from astrobin_apps_groups.models import Group
@@ -812,20 +812,27 @@ m2m_changed.connect(group_images_changed, sender=Group.images.through)
 
 
 def equipment_changed(sender, instance: Image, **kwargs):
-    model: Manager = kwargs.pop('model')
+    ModelClass: EquipmentItem = kwargs.pop('model')
     pk_set: Set[int] = kwargs.pop('pk_set')
     action = kwargs.pop('action')
+    now = timezone.now()
 
-    if action in ['post_add', 'post_remove', 'post_clear']:
-        Image.all_objects.filter(pk=instance.pk).update(updated=timezone.now())
-        if pk_set:
-            for pk in pk_set:
-                item = get_object_or_None(model, pk=pk)
-                if item is not None:
-                    if hasattr(item, 'last_added_or_removed_from_image'):
-                        model.objects.filter(pk=pk).update(last_added_or_removed_from_image=timezone.now())
-                    if hasattr(item, 'brand') and item.brand is not None:
-                        EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=timezone.now())
+    Image.all_objects.filter(pk=instance.pk).update(updated=timezone.now())
+
+    if action == 'pre_clear':
+        if (hasattr(ModelClass, 'images_using_for_imaging')):
+            ModelClass.objects.filter(images_using_for_imaging=instance.pk).update(last_added_or_removed_from_image=now)
+            ModelClass.objects.filter(images_using_for_guiding=instance.pk).update(last_added_or_removed_from_image=now)
+        else:
+            ModelClass.objects.filter(images_using=instance.pk).update(last_added_or_removed_from_image=now)
+    elif action in ['post_add']:
+        for pk in pk_set:
+            item = get_object_or_None(ModelClass, pk=pk)
+            if item is not None:
+                if hasattr(item, 'last_added_or_removed_from_image'):
+                    ModelClass.objects.filter(pk=pk).update(last_added_or_removed_from_image=now)
+                if hasattr(item, 'brand') and item.brand is not None:
+                    EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
 
 
 m2m_changed.connect(equipment_changed, sender=Image.imaging_telescopes.through)
