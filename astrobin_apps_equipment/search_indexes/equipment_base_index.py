@@ -57,11 +57,6 @@ class EquipmentBaseIndex(SearchIndex):
         self.get_model().objects.filter(pk=obj.pk).update(user_count=count)
         return count
 
-    def _prepare_images(self, obj) -> List[int]:
-        images: List[Image] = self._prepare_images_cache(obj)[:25]
-        data: str = ImageSerializer(images, many=True).data
-        return simplejson.dumps(data)
-
     def _prepare_image_count(self, obj) -> int:
         images: List[Image] = self._prepare_images_cache(obj)
         count: int = len(images)
