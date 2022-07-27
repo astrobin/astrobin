@@ -550,6 +550,15 @@ class ImageIndex(SearchIndex, Indexable):
     imaging_cameras_2 = CharField()
     guiding_cameras_2 = CharField()
 
+    imaging_telescopes_2_id = CharField()
+    guiding_telescopes_2_id = CharField()
+    mounts_2_id = CharField()
+    filters_2_id = CharField()
+    accessories_2_id = CharField()
+    software_2_id = CharField()
+    imaging_cameras_2_id = CharField()
+    guiding_cameras_2_id = CharField()
+
     coord_ra_min = FloatField()
     coord_ra_max = FloatField()
     coord_dec_min = FloatField()
@@ -673,6 +682,30 @@ class ImageIndex(SearchIndex, Indexable):
 
     def prepare_guiding_cameras_2(self, obj):
         return [f"{x}" for x in obj.guiding_cameras_2.all()]
+
+    def prepare_imaging_telescopes_2_id(self, obj):
+        return [f"{x.id}" for x in obj.imaging_telescopes_2.all()]
+
+    def prepare_imaging_cameras_2_id(self, obj):
+        return [f"{x.id}" for x in obj.imaging_cameras_2.all()]
+
+    def prepare_mounts_2_id(self, obj):
+        return [f"{x.id}" for x in obj.mounts_2.all()]
+
+    def prepare_filters_2_id(self, obj):
+        return [f"{x.id}" for x in obj.filters_2.all()]
+
+    def prepare_accessories_2_id(self, obj):
+        return [f"{x.id}" for x in obj.accessories_2.all()]
+
+    def prepare_software_2_id(self, obj):
+        return [f"{x.id}" for x in obj.software_2.all()]
+
+    def prepare_guiding_telescopes_2_id(self, obj):
+        return [f"{x.id}" for x in obj.guiding_telescopes_2.all()]
+
+    def prepare_guiding_cameras_2_id(self, obj):
+        return [f"{x.id}" for x in obj.guiding_cameras_2.all()]
 
     def prepare_coord_ra_min(self, obj):
         if obj.solution is not None and obj.solution.ra is not None and obj.solution.radius is not None:
