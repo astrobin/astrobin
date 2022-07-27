@@ -27,6 +27,7 @@ class ImageSearchSerializer(HaystackSerializer):
         index_classes = [ImageIndex]
         fields = [
             'object_id',
+            'text',
             'hash',
             'published',
             'title',
