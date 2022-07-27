@@ -528,6 +528,8 @@ class UserIndex(SearchIndex, Indexable):
 class ImageIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
 
+    object_id = CharField(model_attr='id')
+    hash = CharField(null=True, model_attr='hash')
     title = CharField(model_attr='title')
     description = CharField(null=True)
     published = DateTimeField(model_attr='published')
@@ -542,6 +544,9 @@ class ImageIndex(SearchIndex, Indexable):
     imaging_telescopes_2 = CharField()
     guiding_telescopes_2 = CharField()
     mounts_2 = CharField()
+    filters_2 = CharField()
+    accessories_2 = CharField()
+    software_2 = CharField()
     imaging_cameras_2 = CharField()
     guiding_cameras_2 = CharField()
 
@@ -612,6 +617,8 @@ class ImageIndex(SearchIndex, Indexable):
 
     bortle_scale = FloatField()
 
+    gallery_thumbnail = CharField()
+
     def index_queryset(self, using=None):
         return self.get_model().objects.filter(moderator_decision=ModeratorDecision.APPROVED)
 
@@ -641,34 +648,31 @@ class ImageIndex(SearchIndex, Indexable):
         ]
 
     def prepare_guiding_cameras(self, obj):
-        return [f"{x.get('make')} {x.get('name')}" for x in obj.guiding_cameras.all().values('make', 'name')]
+        return [f"{x}" for x in obj.guiding_cameras.all()]
 
     def prepare_imaging_telescopes_2(self, obj):
-        return [
-            f"{x.get('brand__name')} {x.get('name')}" for x in
-            obj.imaging_telescopes_2.all().values('brand__name', 'name')
-        ]
-
-    def prepare_guiding_telescopes_2(self, obj):
-        return [
-            f"{x.get('brand__name')} {x.get('name')}" for x in
-            obj.guiding_telescopes_2.all().values('brand__name', 'name')
-        ]
-
-    def prepare_mounts_2(self, obj):
-        return [f"{x.get('brand__name')} {x.get('name')}" for x in obj.mounts_2.all().values('brand__name', 'name')]
+        return [f"{x}" for x in obj.imaging_telescopes_2.all()]
 
     def prepare_imaging_cameras_2(self, obj):
-        return [
-            f"{x.get('brand__name')} {x.get('name')}" for x in
-            obj.imaging_cameras_2.all().values('brand__name', 'name')
-        ]
+        return [f"{x}" for x in obj.imaging_cameras_2.all()]
+
+    def prepare_mounts_2(self, obj):
+        return [f"{x}" for x in obj.mounts_2.all()]
+
+    def prepare_filters_2(self, obj):
+        return [f"{x}" for x in obj.filters_2.all()]
+
+    def prepare_accessories_2(self, obj):
+        return [f"{x}" for x in obj.accessories_2.all()]
+
+    def prepare_software_2(self, obj):
+        return [f"{x}" for x in obj.software_2.all()]
+
+    def prepare_guiding_telescopes_2(self, obj):
+        return [f"{x}" for x in obj.guiding_telescopes_2.all()]
 
     def prepare_guiding_cameras_2(self, obj):
-        return [
-            f"{x.get('brand__name')} {x.get('name')}" for x in
-            obj.guiding_cameras_2.all().values('brand__name', 'name')]
-
+        return [f"{x}" for x in obj.guiding_cameras_2.all()]
 
     def prepare_coord_ra_min(self, obj):
         if obj.solution is not None and obj.solution.ra is not None and obj.solution.radius is not None:
@@ -770,6 +774,9 @@ class ImageIndex(SearchIndex, Indexable):
             return sum([x.bortle for x in deep_sky_acquisitions]) / float(deep_sky_acquisitions.count())
 
         return None
+
+    def prepare_gallery_thumbnail(self, obj: Image):
+        return obj.thumbnail('gallery', 'final', sync=True)
 
 
 class NestedCommentIndex(SearchIndex, Indexable):

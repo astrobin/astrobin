@@ -1,4 +1,5 @@
 from .image_view_set import ImageViewSet
+from .image_search_view import ImageSearchView
 from .image_upload_view_set import ImageUploadViewSet
 from .image_revision_view_set import ImageRevisionViewSet
 from .image_revision_upload_view_set import ImageRevisionUploadViewSet
