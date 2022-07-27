@@ -1,8 +1,7 @@
+import ast
 import logging
 
-import simplejson
 from drf_haystack.serializers import HaystackSerializer
-from simplejson import JSONDecodeError
 
 from astrobin.search_indexes import ImageIndex
 
@@ -24,10 +23,7 @@ class ImageSearchSerializer(HaystackSerializer):
             'guiding_cameras_2',
         ):
             if ret[prop]:
-                try:
-                    ret[prop] = simplejson.loads(ret[prop].replace('"', '\\"').replace('\'', '"'))
-                except JSONDecodeError as e:
-                    log.warning(f'{ret[prop]} failed to parse as JSON')
+                ret[prop] = ast.literal_eval(ret[prop])
 
         return ret
 
