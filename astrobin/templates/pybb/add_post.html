@@ -1,6 +1,9 @@
 {% extends 'pybb/base.html' %}
 
-{% load i18n pybb_tags static %}
+{% load i18n %}
+{% load pybb_tags %}
+{% load static %}
+{% load common_tags %}
 
 {% block title %}
     {% if forum %}
@@ -39,6 +42,12 @@
                     else {
                         $('#forum-usage-modal .btn-primary').attr('disabled', 'disabled');
                     }
+                });
+            } else if ("{{ forum.name }}" === "Equipment") {
+                $('#equipment-forum-usage-modal').modal({
+                    backdrop: 'static',
+                    show: true,
+                    keyboard: false
                 });
             }
         });
@@ -106,6 +115,34 @@
                 <label for="i-have-read">{% trans "I have read the text above" %}</label>
             </div>
             <button data-dismiss="modal" class="btn btn-primary" disabled="disabled">{% trans "I understand" %}</button>
+        </div>
+    </div>
+
+    <div class="modal hide fade" id="equipment-forum-usage-modal">
+        <div class="modal-header">
+            <h3>{% trans "Please note" %}</h3>
+        </div>
+
+        <div class="modal-body">
+            <p>
+                {% blocktrans trimmed with _0='<a href="https://app.astrobin.com/equipment/explorer">' _1='</a>' %}
+                    If you want to post a new topic about a specific equipment item, we recommend finding it in the
+                    {{ _0 }}equipment database{{ _1 }} and posting in its dedicated forum.
+                {% endblocktrans %}
+            </p>
+
+            <p>
+                {% blocktrans trimmed %}
+                    This will maximize your chances of getting relevant replies because all active AstroBin users who
+                    have used that specific equipment item will be notified of your post, unless they opted out of that
+                    particular notification.
+                {% endblocktrans %}
+            </p>
+        </div>
+
+        <div class="modal-footer">
+            <button data-dismiss="modal" class="btn btn-secondary">{% trans "Ignore" %}</button>
+            <a class="btn btn-primary" href="{% app_redirection_service '/equipment/explorer' %}">{% trans "Browse equipment" %}</a>
         </div>
     </div>
 {% endblock %}

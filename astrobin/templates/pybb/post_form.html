@@ -6,12 +6,6 @@
 {% else %}
     <img class="post-form-loading" src="{% static "astrobin/images/ajax-loader.gif" %}" alt="{% trans "Loading" %}" />
 
-    {% if forum and forum.slug == 'equipment' %}
-        <div class="forum">
-            {% include './_equipment_forum_notice.html' %}
-        </div>
-    {% endif %}
-
     <form novalidate class="post-form" action="
         {% if forum %}
             {% url 'pybb:add_topic' forum.pk %}
