@@ -18,7 +18,8 @@ class ImageSearchSerializer(HaystackSerializer):
             'guiding_telescopes_2',
             'guiding_cameras_2',
         ):
-            ret[prop] = simplejson.loads(ret[prop].replace('"', '\\"').replace('\'', '"'))
+            if ret[prop]:
+                ret[prop] = simplejson.loads(ret[prop].replace('"', '\\"').replace('\'', '"'))
 
         return ret
 
