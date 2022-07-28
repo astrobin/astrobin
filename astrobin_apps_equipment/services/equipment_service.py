@@ -1,3 +1,5 @@
+import logging
+
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
@@ -10,6 +12,8 @@ from astrobin_apps_equipment.models.deep_sky_acquisition_migration_record import
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from common.services import AppRedirectionService
+
+log = logging.getLogger('apps')
 
 
 class EquipmentService:
@@ -279,6 +283,7 @@ class EquipmentService:
 
         duplicate_of = None
         DuplicateModelClass = {
+            EquipmentItemKlass.SENSOR: Sensor,
             EquipmentItemKlass.TELESCOPE: Telescope,
             EquipmentItemKlass.CAMERA: Camera,
             EquipmentItemKlass.MOUNT: Mount,
@@ -289,10 +294,15 @@ class EquipmentService:
 
         ModelClass = type(item)
 
+        log.debug(f'reject_item: going to reject {item.klass}/{item.id}')
+
         if item.reviewer_rejection_duplicate_of:
             try:
                 duplicate_of = DuplicateModelClass.objects.get(pk=item.reviewer_rejection_duplicate_of)
             except ModelClass.DoesNotExist:
+                log.warning(
+                    f'reject_item: duplicate {item.reviewer_rejection_duplicate_of_klass}/'
+                    f'{item.reviewer_rejection_duplicate_of} or {item.klass}/{item.id} does not exist')
                 duplicate_of = None
                 item.reviewer_rejection_duplicate_of = None
                 item.reviewer_rejection_duplicate_of_klass = None
@@ -330,6 +340,8 @@ class EquipmentService:
             migration_object_id=item.id,
         )
 
+        log.debug(f'reject_item: found {migration_strategies.count()} migration strategies for {item.klass}/{item.id}')
+
         if duplicate_of:
             migration_strategies.update(
                 migration_object_id=duplicate_of.pk,
@@ -337,11 +349,13 @@ class EquipmentService:
             )
         else:
             for migration_strategy in migration_strategies:
+                log.debug(f'reject_item: undoing migration strategy {migration_strategy.id} for {item.klass}/{item.id}')
                 EquipmentService.undo_migration_strategy(migration_strategy)
 
         # This will catch DSLR/Mirrorless variants
         affected_items = ModelClass.objects.filter(brand=item.brand, name=item.name)
         for affected_item in affected_items.iterator():
+            log.debug(f'reject_item: processing affected item {affected_item.id} for {item.klass}/{item.id}')
             replace_with: DuplicateModelClass = duplicate_of
 
             if (
@@ -386,7 +400,12 @@ class EquipmentService:
                 image: Image = affected.get("image")
                 prop: str = affected.get("prop")
 
+                log.debug(f'reject_item: processing affected image {image.id} for {item.klass}/{item.id}')
+
                 if duplicate_of:
+                    log.debug(
+                        f'reject_item: adding duplicate item to affected image {image.id} for {item.klass}/{item.id}'
+                    )
                     if ModelClass == DuplicateModelClass:
                         getattr(image, prop).add(replace_with)
                     else:
@@ -433,9 +452,11 @@ class EquipmentService:
                 )
 
         if item.klass == EquipmentItemKlass.SENSOR:
+            log.debug(f'reject_item: removing rejected sensor from cameras for {item.klass}/{item.id}')
             Camera.all_objects.filter(sensor=item).update(sensor=None)
             CameraEditProposal.all_objects.filter(sensor=item).update(sensor=None)
 
+        log.debug(f'reject_item: deleting item {item.klass}/{item.id}')
         item.delete()
 
         if item.brand:
@@ -446,6 +467,7 @@ class EquipmentService:
                     break
 
             if not brand_has_items:
+                log.debug(f'reject_item: deleting brand for item {item.klass}/{item.id}')
                 item.brand.delete()
 
         return item

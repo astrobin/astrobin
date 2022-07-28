@@ -1,3 +1,4 @@
+import logging
 from collections import Counter
 
 import simplejson
@@ -38,6 +39,8 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_ac
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 from common.services import AppRedirectionService
+
+log = logging.getLogger('apps')
 
 
 class EquipmentItemViewSet(viewsets.ModelViewSet):
@@ -494,6 +497,8 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
         if item.assignee and item.assignee != request.user:
             return Response("You cannot review an item that is not assigned to you", HTTP_400_BAD_REQUEST)
+
+        log.debug(f'{request.user.pk} requested rejection of item {ModelClass}/{pk}')
 
         item.reviewed_by = request.user
         item.reviewed_timestamp = timezone.now()

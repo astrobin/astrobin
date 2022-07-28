@@ -1,3 +1,4 @@
+import logging
 from datetime import timedelta
 
 from annoying.functions import get_object_or_None
@@ -10,11 +11,13 @@ from astrobin.services.gear_service import GearService
 from astrobin_apps_equipment.models import (
     Accessory, AccessoryEditProposal, Camera, CameraEditProposal, Filter, FilterEditProposal, Mount,
     MountEditProposal,
-    Software, SoftwareEditProposal, Telescope,
+    Sensor, Software, SoftwareEditProposal, Telescope,
     TelescopeEditProposal,
 )
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
 from astrobin_apps_equipment.services import EquipmentService
+
+log = logging.getLogger('apps')
 
 
 @shared_task(time_limit=300)
@@ -66,6 +69,7 @@ def approve_migration_strategy(migration_strategy_id: int, moderator_id: int):
 @shared_task(time_limit=30 * 60, acks_late=True)
 def reject_item(item_id: int, klass: EquipmentItemKlass):
     ModelClass = {
+        EquipmentItemKlass.SENSOR: Sensor,
         EquipmentItemKlass.TELESCOPE: Telescope,
         EquipmentItemKlass.CAMERA: Camera,
         EquipmentItemKlass.MOUNT: Mount,
@@ -77,4 +81,5 @@ def reject_item(item_id: int, klass: EquipmentItemKlass):
     item: ModelClass = get_object_or_None(ModelClass, id=item_id)
 
     if item:
+        log.debug(f'reject_item task beginning rejection of {klass}/{item_id}')
         EquipmentService.reject_item(item)
