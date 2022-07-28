@@ -13,6 +13,9 @@ class ImageSearchSerializer(HaystackSerializer):
         ret = super().to_representation(instance)
 
         for prop in (
+                'all_sensors',
+                'imaging_sensors',
+                'guiding_sensors',
                 'all_telescopes_2',
                 'imaging_telescopes_2',
                 'all_cameras_2',
@@ -24,6 +27,9 @@ class ImageSearchSerializer(HaystackSerializer):
                 'guiding_telescopes_2',
                 'guiding_cameras_2',
 
+                'all_sensors_id',
+                'imaging_sensors_id',
+                'guiding_sensors_id',
                 'all_telescopes_2_id',
                 'imaging_telescopes_2_id',
                 'all_cameras_2_id',
@@ -50,6 +56,9 @@ class ImageSearchSerializer(HaystackSerializer):
             'title',
             'description',
 
+            'all_sensors',
+            'imaging_sensors',
+            'guiding_sensors',
             'all_telescopes_2',
             'imaging_telescopes_2',
             'all_cameras_2',
@@ -61,6 +70,9 @@ class ImageSearchSerializer(HaystackSerializer):
             'guiding_telescopes_2',
             'guiding_cameras_2',
 
+            'all_sensors_id',
+            'imaging_sensors_id',
+            'guiding_sensors_id',
             'all_telescopes_2_id',
             'imaging_telescopes_2_id',
             'all_cameras_2_id',
