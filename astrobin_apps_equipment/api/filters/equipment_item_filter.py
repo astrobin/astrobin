@@ -20,7 +20,7 @@ class EquipmentItemFilter(FilterSet):
         if not is_authenticated or not is_moderator:
             return queryset.none()
 
-        queryset = queryset.exclude(Q(created_by=self.request.user) | Q(brand__isnull=True))
+        queryset = queryset.exclude(Q(created_by=self.request.user))
 
         if condition:
             queryset = queryset.filter(reviewer_decision__isnull=True).order_by('-created')
