@@ -535,33 +535,45 @@ class ImageIndex(SearchIndex, Indexable):
     published = DateTimeField(model_attr='published')
     uploaded = DateTimeField(model_attr='uploaded')
 
+    # Old DB
     imaging_telescopes = CharField()
     guiding_telescopes = CharField()
     mounts = CharField()
     imaging_cameras = CharField()
     guiding_cameras = CharField()
 
-    all_telescopes_2 = CharField() # Includes guiding and imaging
-    imaging_telescopes_2 = CharField()
-    guiding_telescopes_2 = CharField()
-    mounts_2 = CharField()
-    filters_2 = CharField()
-    accessories_2 = CharField()
-    software_2 = CharField()
-    all_cameras_2 = CharField() # Includes guiding and imaging
+    all_sensors = CharField()  # Includes guiding and imaging
+    imaging_sensors = CharField()
+    guiding_sensors = CharField()
+    all_sensors_id = CharField()
+    imaging_sensors_id = CharField()
+    guiding_sensors_id = CharField()
+
+    all_cameras_2 = CharField()  # Includes guiding and imaging
     imaging_cameras_2 = CharField()
     guiding_cameras_2 = CharField()
-
-    all_telescopes_2_id = CharField()
-    imaging_telescopes_2_id = CharField()
-    guiding_telescopes_2_id = CharField()
-    mounts_2_id = CharField()
-    filters_2_id = CharField()
-    accessories_2_id = CharField()
-    software_2_id = CharField()
     all_cameras_2_id = CharField()
     imaging_cameras_2_id = CharField()
     guiding_cameras_2_id = CharField()
+
+    all_telescopes_2 = CharField() # Includes guiding and imaging
+    imaging_telescopes_2 = CharField()
+    guiding_telescopes_2 = CharField()
+    all_telescopes_2_id = CharField()
+    imaging_telescopes_2_id = CharField()
+    guiding_telescopes_2_id = CharField()
+
+    mounts_2 = CharField()
+    mounts_2_id = CharField()
+
+    filters_2 = CharField()
+    filters_2_id = CharField()
+
+    accessories_2 = CharField()
+    accessories_2_id = CharField()
+
+    software_2 = CharField()
+    software_2_id = CharField()
 
     coord_ra_min = FloatField()
     coord_ra_max = FloatField()
@@ -644,6 +656,12 @@ class ImageIndex(SearchIndex, Indexable):
     def prepare_description(self, obj):
         return obj.description_bbcode or obj.description
 
+    ###################################################################################################################
+    ###################################################################################################################
+    ### OLD DB                                                                                                      ###
+    ###################################################################################################################
+    ###################################################################################################################
+
     def prepare_imaging_telescopes(self, obj):
         return [
             f"{x.get('make')} {x.get('name')}" for x in obj.imaging_telescopes.all().values('make', 'name')
@@ -663,81 +681,103 @@ class ImageIndex(SearchIndex, Indexable):
     def prepare_guiding_cameras(self, obj):
         return [f"{x}" for x in obj.guiding_cameras.all()]
 
-    def prepare_all_telescopes_2(self, obj):
-        return list(
-            set(
-                [f"{x}" for x in obj.imaging_telescopes_2.all()] + [f"{x}" for x in obj.guiding_telescopes_2.all()]
-            )
-        )
+    ###################################################################################################################
+    ###################################################################################################################
+    ### NEW DB                                                                                                      ###
+    ###################################################################################################################
+    ###################################################################################################################
+
+    def prepare_imaging_sensors(self, obj):
+        return list(set([f"{x.sensor}" for x in obj.imaging_cameras_2.all() if x.sensor]))
+
+    def prepare_guiding_sensors(self, obj):
+        return list(set([f"{x.sensor}" for x in obj.guiding_cameras_2.all() if x.sensor]))
+
+    def prepare_all_sensors(self, obj):
+        return list(set(self.prepare_imaging_sensors(obj) + self.prepare_guiding_sensors(obj)))
+
+    def prepare_imaging_sensors_id(self, obj):
+        return list(set([f"{x.sensor.id}" for x in obj.imaging_cameras_2.all() if x.sensor]))
+
+    def prepare_guiding_sensors_id(self, obj):
+        return list(set([f"{x.sensor.id}" for x in obj.guiding_cameras_2.all() if x.sensor]))
+
+    def prepare_all_sensors_id(self, obj):
+        return list(set(self.prepare_imaging_sensors_id(obj) + self.prepare_guiding_sensors_id(obj)))
+
+    ###################################################################################################################
 
     def prepare_imaging_telescopes_2(self, obj):
         return [f"{x}" for x in obj.imaging_telescopes_2.all()]
 
-    def prepare_all_cameras_2(self, obj):
-        return list(
-            set(
-                [f"{x}" for x in obj.imaging_cameras_2.all()] + [f"{x}" for x in obj.guiding_cameras_2.all()]
-            )
-        )
-
-    def prepare_imaging_cameras_2(self, obj):
-        return [f"{x}" for x in obj.imaging_cameras_2.all()]
-
-    def prepare_mounts_2(self, obj):
-        return [f"{x}" for x in obj.mounts_2.all()]
-
-    def prepare_filters_2(self, obj):
-        return [f"{x}" for x in obj.filters_2.all()]
-
-    def prepare_accessories_2(self, obj):
-        return [f"{x}" for x in obj.accessories_2.all()]
-
-    def prepare_software_2(self, obj):
-        return [f"{x}" for x in obj.software_2.all()]
-
     def prepare_guiding_telescopes_2(self, obj):
         return [f"{x}" for x in obj.guiding_telescopes_2.all()]
 
-    def prepare_guiding_cameras_2(self, obj):
-        return [f"{x}" for x in obj.guiding_cameras_2.all()]
-
-    def prepare_all_telescopes_2_id(self, obj):
-        return list(
-            set(
-                [f"{x.id}" for x in obj.imaging_telescopes_2.all()] + [f"{x.id}" for x in obj.guiding_telescopes_2.all()]
-            )
-        )
+    def prepare_all_telescopes_2(self, obj):
+        return list(set(self.prepare_imaging_telescopes_2(obj) + self.prepare_guiding_telescopes_2(obj)))
 
     def prepare_imaging_telescopes_2_id(self, obj):
         return [f"{x.id}" for x in obj.imaging_telescopes_2.all()]
 
-    def prepare_all_cameras_2_id(self, obj):
-        return list(
-            set(
-                [f"{x.id}" for x in obj.imaging_cameras_2.all()] + [f"{x.id}" for x in obj.guiding_cameras_2.all()]
-            )
-        )
+    def prepare_guiding_telescopes_2_id(self, obj):
+        return [f"{x.id}" for x in obj.guiding_telescopes_2.all()]
+
+    def prepare_all_telescopes_2_id(self, obj):
+        return list(set(self.prepare_imaging_telescopes_2_id(obj) + self.prepare_guiding_telescopes_2_id(obj)))
+
+    ###################################################################################################################
+
+    def prepare_imaging_cameras_2(self, obj):
+        return [f"{x}" for x in obj.imaging_cameras_2.all()]
+
+    def prepare_guiding_cameras_2(self, obj):
+        return [f"{x}" for x in obj.guiding_cameras_2.all()]
+
+    def prepare_all_cameras_2(self, obj):
+        return list(set(self.prepare_imaging_cameras_2(obj) + self.prepare_guiding_cameras_2(obj)))
 
     def prepare_imaging_cameras_2_id(self, obj):
         return [f"{x.id}" for x in obj.imaging_cameras_2.all()]
 
+    def prepare_guiding_cameras_2_id(self, obj):
+        return [f"{x.id}" for x in obj.guiding_cameras_2.all()]
+
+    def prepare_all_cameras_2_id(self, obj):
+        return list(set(self.prepare_imaging_cameras_2_id(obj) + self.prepare_guiding_cameras_2_id(obj)))
+
+    ###################################################################################################################
+
+    def prepare_mounts_2(self, obj):
+        return [f"{x}" for x in obj.mounts_2.all()]
+
     def prepare_mounts_2_id(self, obj):
         return [f"{x.id}" for x in obj.mounts_2.all()]
+
+    ###################################################################################################################
+
+    def prepare_filters_2(self, obj):
+        return [f"{x}" for x in obj.filters_2.all()]
 
     def prepare_filters_2_id(self, obj):
         return [f"{x.id}" for x in obj.filters_2.all()]
 
+    ###################################################################################################################
+
+    def prepare_accessories_2(self, obj):
+        return [f"{x}" for x in obj.accessories_2.all()]
+
     def prepare_accessories_2_id(self, obj):
         return [f"{x.id}" for x in obj.accessories_2.all()]
+
+    ###################################################################################################################
+
+    def prepare_software_2(self, obj):
+        return [f"{x}" for x in obj.software_2.all()]
 
     def prepare_software_2_id(self, obj):
         return [f"{x.id}" for x in obj.software_2.all()]
 
-    def prepare_guiding_telescopes_2_id(self, obj):
-        return [f"{x.id}" for x in obj.guiding_telescopes_2.all()]
-
-    def prepare_guiding_cameras_2_id(self, obj):
-        return [f"{x.id}" for x in obj.guiding_cameras_2.all()]
+    ###################################################################################################################
 
     def prepare_coord_ra_min(self, obj):
         if obj.solution is not None and obj.solution.ra is not None and obj.solution.radius is not None:
