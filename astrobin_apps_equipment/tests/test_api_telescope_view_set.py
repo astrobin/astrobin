@@ -1,11 +1,13 @@
 import mock
 from django.test import TestCase
 from django.urls import reverse
+from pybb.models import Topic
 from rest_framework.test import APIClient
 
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.models import EquipmentBrand, Telescope
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
+from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
 from astrobin_apps_equipment.models.telescope_base_model import TelescopeType
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from common.constants import GroupName
@@ -174,3 +176,25 @@ class TestApiTelescopeViewSet(TestCase):
                 mock.call([user], moderator, 'equipment-item-rejected-affected-image', mock.ANY),
             ], any_order=True
         )
+
+    def test_reject_approved_move_forum_topics(self):
+        user = Generators.user()
+        moderator = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+        telescope1 = EquipmentGenerators.telescope(created_by=user, reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        telescope2 = EquipmentGenerators.telescope(created_by=user, reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        topic = Generators.forum_topic(forum=telescope1.forum)
+
+        client = APIClient()
+        client.force_authenticate(user=moderator)
+
+        client.post(
+            reverse('astrobin_apps_equipment:telescope-detail', args=(telescope1.pk,)) + 'reject/', {
+                'reason': 'DUPLICATE',
+                'duplicate_of_klass': EquipmentItemKlass.TELESCOPE,
+                'duplicate_of_usage_type': EquipmentItemUsageType.IMAGING,
+                'duplicate_of': telescope2.id,
+            }, format='json'
+        )
+
+        telescope2.refresh_from_db()
+        self.assertEquals(topic, Topic.objects.filter(forum=telescope2.forum).first())
