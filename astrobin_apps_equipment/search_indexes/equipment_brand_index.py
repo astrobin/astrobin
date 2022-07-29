@@ -19,9 +19,6 @@ class EquipmentBrandIndex(EquipmentBaseIndex, Indexable):
     # Number of users who have used this brand.
     equipment_brand_user_count = fields.IntegerField()
 
-    # Top 25 images (by likes) that feature this brand.
-    equipment_brand_images = fields.CharField()
-
     # Number of images that feature this brand.
     equipment_brand_image_count = fields.IntegerField()
 
@@ -44,9 +41,6 @@ class EquipmentBrandIndex(EquipmentBaseIndex, Indexable):
 
     def prepare_equipment_brand_user_count(self, obj) -> int:
         return self._prepare_user_count(obj)
-
-    def prepare_equipment_brand_images(self, obj) -> List[int]:
-        return self._prepare_images(obj)
 
     def prepare_equipment_brand_image_count(self, obj) -> int:
         return self._prepare_image_count(obj)

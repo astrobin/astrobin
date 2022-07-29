@@ -21,9 +21,6 @@ class EquipmentItemIndex(EquipmentBaseIndex):
     # Number of users who have used this item.
     equipment_item_user_count = fields.IntegerField()
 
-    # Top 25 images (by likes) that feature this item.
-    equipment_item_images = fields.CharField()
-
     # Number of images that feature this item.
     equipment_item_image_count = fields.IntegerField()
 
