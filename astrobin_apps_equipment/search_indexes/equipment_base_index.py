@@ -26,19 +26,8 @@ class EquipmentBaseIndex(SearchIndex):
 
     def _prepare_images_cache(self, obj) -> List[Image]:
         images: List[Image] = cache.get(PREPARED_IMAGES_CACHE_KEY % (obj.__class__.__name__, obj.pk))
-        images_and_likes: List[Dict[str, Union[Image, int]]] = []
         if images is None:
             qs: QuerySet = Image.objects.filter(self.image_queryset(obj)).distinct()
-            count: int = qs.count()
-            image: Image
-
-            if count > 0:
-                for image in qs.iterator():
-                    likes: int = image.likes()
-                    images_and_likes.append(dict(image=image, likes=likes))
-
-            images_and_likes = sorted(images_and_likes, key=lambda x: x.get('likes'), reverse=True)
-            images = [x.get('image') for x in images_and_likes]
             cache.set(
                 PREPARED_IMAGES_CACHE_KEY % (obj.__class__.__name__, obj.pk),
                 images,
@@ -46,20 +35,15 @@ class EquipmentBaseIndex(SearchIndex):
             )
         return images
 
-    def _prepare_users(self, obj) -> List[int]:
-        images: List[Image] = self._prepare_images_cache(obj)
-        data: str = UserSerializer(list(set([x.user for x in images]))[:10], many=True).data
-        return simplejson.dumps(data)
-
     def _prepare_user_count(self, obj) -> int:
-        images: List[Image] = self._prepare_images_cache(obj)
+        images: QuerySet = Image.objects.filter(self.image_queryset(obj)).distinct()
         count = len(set([x.user for x in images]))
         self.get_model().objects.filter(pk=obj.pk).update(user_count=count)
         return count
 
     def _prepare_image_count(self, obj) -> int:
-        images: List[Image] = self._prepare_images_cache(obj)
-        count: int = len(images)
+        images: QuerySet = Image.objects.filter(self.image_queryset(obj)).distinct()
+        count: int = images.count()
         self.get_model().objects.filter(pk=obj.pk).update(image_count=count)
         return count
 
