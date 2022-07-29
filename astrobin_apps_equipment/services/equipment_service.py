@@ -7,6 +7,7 @@ from django.db.models import QuerySet
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from pybb.models import Category, Forum, Topic
 
 from astrobin_apps_equipment.models.deep_sky_acquisition_migration_record import DeepSkyAcquisitionMigrationRecord
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
@@ -347,6 +348,18 @@ class EquipmentService:
                 migration_object_id=duplicate_of.pk,
                 migration_content_type=ContentType.objects.get_for_model(DuplicateModelClass)
             )
+
+            category, created = Category.objects.get_or_create(
+                name='Equipment forums',
+                slug='equipment-forums',
+            )
+
+            duplicate_of.forum, created = Forum.objects.get_or_create(
+                category=category,
+                name=f'{duplicate_of}',
+            )
+
+            Topic.objects.filter(forum=item.forum).update(forum=duplicate_of.forum)
         else:
             for migration_strategy in migration_strategies:
                 log.debug(f'reject_item: undoing migration strategy {migration_strategy.id} for {item.klass}/{item.id}')
