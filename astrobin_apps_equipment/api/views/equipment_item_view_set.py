@@ -554,23 +554,6 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(item)
         return Response(serializer.data)
 
-    @action(detail=True, methods=['GET'], url_path='users')
-    def users(self, request, pk: int) -> Response:
-        cache_key: str = f'equipment_item_view_set_{self.get_object().__class__.__name__}_{pk}_users'
-        data = cache.get(cache_key)
-
-        if data is None:
-            sqs: SearchQuerySet = SearchQuerySet().models(self.get_serializer().Meta.model).filter(django_id=pk)
-
-            if sqs.count() > 0:
-                data = sqs[0].equipment_item_users
-            else:
-                data = '[]'
-
-            cache.set(cache_key, data, 60*60*12)
-
-        return Response(simplejson.loads(data))
-
     @action(detail=True, methods=['GET'], url_path='images')
     def images(self, request, pk: int) -> Response:
         cache_key: str = f'equipment_item_view_set_{self.get_object().__class__.__name__}_{pk}_images'

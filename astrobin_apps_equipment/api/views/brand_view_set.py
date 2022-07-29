@@ -68,37 +68,3 @@ class BrandViewSet(viewsets.ModelViewSet):
             return Response(serializer.data)
 
         return Response(serializer.errors, HTTP_400_BAD_REQUEST)
-
-    @action(detail=True, methods=['GET'], url_path='users')
-    def users(self, request, pk: int) -> Response:
-        cache_key: str = f'equipment_brand_view_set_{pk}_users'
-        data = cache.get(cache_key)
-
-        if data is None:
-            sqs: SearchQuerySet = SearchQuerySet().models(self.get_serializer().Meta.model).filter(django_id=pk)
-
-            if sqs.count() > 0:
-                data = sqs[0].equipment_brand_users
-            else:
-                data = '[]'
-
-            cache.set(cache_key, data, 60 * 60 * 12)
-
-        return Response(simplejson.loads(data))
-
-    @action(detail=True, methods=['GET'], url_path='images')
-    def images(self, request, pk: int) -> Response:
-        cache_key: str = f'equipment_brand_view_set_{pk}_images'
-        data = cache.get(cache_key)
-
-        if data is None:
-            sqs: SearchQuerySet = SearchQuerySet().models(self.get_serializer().Meta.model).filter(django_id=pk)
-
-            if sqs.count() > 0:
-                data = sqs[0].equipment_brand_images
-            else:
-                data = '[]'
-
-            cache.set(cache_key, data, 60 * 60 * 12)
-
-        return Response(simplejson.loads(data))
