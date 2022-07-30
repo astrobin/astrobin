@@ -26,11 +26,14 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_409_CONFLICT
 
 from astrobin.models import Image
+from astrobin.utils import get_client_country_code
 from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_own_migrator_or_readonly import \
     IsEquipmentModeratorOrOwnMigratorOrReadOnly
+from astrobin_apps_equipment.api.serializers.brand_listing_serializer import BrandListingSerializer
 from astrobin_apps_equipment.api.throttle import EquipmentCreateThrottle
 from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
+from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_equipment.services.equipment_item_service import EquipmentItemService
 from astrobin_apps_equipment.tasks import reject_item
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
@@ -577,6 +580,35 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             cache.set(cache_key, data, 60 * 60 * 12)
 
         return Response(simplejson.loads(data))
+
+    @action(detail=True, methods=['GET'])
+    def listings(self, request, pk: int) -> Response:
+        ModelClass = self.get_serializer().Meta.model
+        item: EquipmentItem = get_object_or_404(ModelClass.objects, pk=pk)
+
+        valid_user_subscription = PremiumService(request.user).get_valid_usersubscription()
+        allow_lite_retailer_integration = PremiumService.allow_lite_retailer_integration(valid_user_subscription, None)
+        allow_full_retailer_integration = PremiumService.allow_full_retailer_integration(valid_user_subscription, None)
+
+        if not item.brand:
+            # Nothing to do for DIY items
+            return Response(dict(
+                brand_listings=[],
+                item_listings=[],
+                allow_lite_retailer_integration=allow_lite_retailer_integration,
+                allow_full_retailer_integration=allow_full_retailer_integration,
+            ))
+
+        brand_listings = EquipmentService.equipment_brand_listings(item.brand, get_client_country_code(request))
+
+        return Response(
+            dict(
+                brand_listings=BrandListingSerializer(brand_listings, many=True).data,
+                item_listings=[],
+                allow_lite_retailer_integration=allow_lite_retailer_integration,
+                allow_full_retailer_integration=allow_full_retailer_integration,
+            )
+        )
 
     def image_upload(self, request, pk):
         obj = self.get_object()

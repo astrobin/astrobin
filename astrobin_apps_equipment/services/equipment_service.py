@@ -3,12 +3,15 @@ import logging
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import QuerySet
+from django.db.models import Q, QuerySet
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from fuzzywuzzy import fuzz
+from fuzzywuzzy.utils import asciidammit
 from pybb.models import Category, Forum, Topic
 
+from astrobin_apps_equipment.models import EquipmentBrand, EquipmentBrandListing
 from astrobin_apps_equipment.models.deep_sky_acquisition_migration_record import DeepSkyAcquisitionMigrationRecord
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
@@ -18,6 +21,25 @@ log = logging.getLogger('apps')
 
 
 class EquipmentService:
+    @staticmethod
+    def equipment_brand_listings(brand: EquipmentBrand, country: str) -> QuerySet:
+        if country is None or brand is None:
+            return EquipmentBrandListing.objects.none()
+
+        return brand.listings.filter(
+            Q(retailer__countries__icontains=country) |
+            Q(retailer__countries=None)
+        )
+
+    @staticmethod
+    def has_matching_brand_request_query(brand_name: str, q: str) -> bool:
+        if brand_name in (None, '') or q in (None, ''):
+            return False
+
+        similarity = fuzz.partial_ratio(asciidammit(q.lower()), asciidammit(brand_name.lower()))
+
+        return similarity > 85
+
     @staticmethod
     def image_has_equipment_items(image) -> bool:
         return (

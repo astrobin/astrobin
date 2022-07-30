@@ -30,13 +30,7 @@ def equipment_brand_listings_for_legacy_gear(gear: Gear, country: str) -> QueryS
 
 @register.filter
 def equipment_brand_listings(brand: EquipmentBrand, country: str) -> QuerySet:
-    if country is None or brand is None:
-        return EquipmentBrandListing.objects.none()
-
-    return brand.listings.filter(
-        Q(retailer__countries__icontains=country) |
-        Q(retailer__countries=None)
-    )
+    return EquipmentService.equipment_brand_listings(brand, country)
 
 
 @register.filter
@@ -192,12 +186,7 @@ def can_access_basic_equipment_functions(user) -> bool:
 
 @register.filter
 def has_matching_brand_request_query(brand_name: str, q: str) -> bool:
-    if brand_name in (None, '') or q in (None, ''):
-        return False
-
-    similarity = fuzz.partial_ratio(asciidammit(q.lower()), asciidammit(brand_name.lower()))
-
-    return similarity > 85
+    return EquipmentService.has_matching_brand_request_query(brand_name, q)
 
 
 @register.filter
