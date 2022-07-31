@@ -114,21 +114,24 @@ class PremiumService:
         if not settings.ADS_ENABLED:
             return False
 
-        if PremiumService.is_ultimate_2020(viewer_user_subscription) or (
-                owner_user_subscription and PremiumService.is_ultimate_2020(owner_user_subscription)):
+        if owner_user_subscription and PremiumService.is_ultimate_2020(owner_user_subscription):
             return False
 
-        if PremiumService.is_free(viewer_user_subscription) or PremiumService.is_lite_2020(viewer_user_subscription):
-            return True
+        if viewer_user_subscription and PremiumService.is_ultimate_2020(viewer_user_subscription):
+            return False
 
         if (
-                PremiumService.is_lite(viewer_user_subscription) or
-                PremiumService.is_premium(viewer_user_subscription) or
-                PremiumService.is_premium_2020(viewer_user_subscription)
+                PremiumService.is_free(viewer_user_subscription) or
+                PremiumService.is_lite_2020(viewer_user_subscription)
         ):
-            return viewer_user_subscription and viewer_user_subscription.user.userprofile.allow_retailer_integration
+            return True
 
-        return True
+        return (
+                       PremiumService.is_lite(viewer_user_subscription) or
+                       PremiumService.is_premium(viewer_user_subscription) or
+                       PremiumService.is_premium_2020(viewer_user_subscription) or
+                       PremiumService.is_any_ultimate(viewer_user_subscription)
+               ) and viewer_user_subscription.user.userprofile.allow_retailer_integration
 
     @staticmethod
     def allow_lite_retailer_integration(
@@ -138,35 +141,21 @@ class PremiumService:
         if not settings.ADS_ENABLED:
             return False
 
-        if (
-                PremiumService.is_lite(viewer_user_subscription) or
-                PremiumService.is_premium(viewer_user_subscription) or
-                PremiumService.is_premium_2020(viewer_user_subscription)
-        ):
-            return (
-                    viewer_user_subscription.user.userprofile.allow_retailer_integration and
-                    (owner_user_subscription and PremiumService.is_ultimate_2020(owner_user_subscription))
-            )
-
-        if PremiumService.is_lite_2020(viewer_user_subscription):
-            if owner_user_subscription and PremiumService.is_ultimate_2020(owner_user_subscription):
-                return owner_user_subscription.user.userprofile.allow_retailer_integration
-            return False
-
-        if PremiumService.is_ultimate_2020(viewer_user_subscription):
-            return viewer_user_subscription.user.userprofile.allow_retailer_integration
-
         if owner_user_subscription and PremiumService.is_ultimate_2020(owner_user_subscription):
-            return owner_user_subscription and owner_user_subscription.user.userprofile.allow_retailer_integration
+            return owner_user_subscription.user.userprofile.allow_retailer_integration
 
         if (
-                PremiumService.is_free(viewer_user_subscription) or
-                not viewer_user_subscription and
-                viewer_user_subscription.user.is_authenticated
+            PremiumService.is_free(viewer_user_subscription) or
+            PremiumService.is_lite_2020(viewer_user_subscription)
         ):
-            return False
+            return True
 
-        return True
+        return (
+                       PremiumService.is_lite(viewer_user_subscription) or
+                       PremiumService.is_premium(viewer_user_subscription) or
+                       PremiumService.is_premium_2020(viewer_user_subscription) or
+                       PremiumService.is_any_ultimate(viewer_user_subscription)
+               ) and viewer_user_subscription.user.userprofile.allow_retailer_integration
 
     @staticmethod
     def get_image_quota_usage_percentage(user_profile: UserProfile, user_subscription: UserSubscription):
@@ -413,20 +402,18 @@ class PremiumService:
         if not settings.ADS_ENABLED:
             return False
 
-        if (
+        return (
                 PremiumService.is_lite(user_subscription) or
                 PremiumService.is_any_premium(user_subscription) or
                 PremiumService.is_any_ultimate(user_subscription)
-        ):
-            return True
-
-        return False
+        )
 
     @staticmethod
     def can_remove_retailer_integration(user_subscription: UserSubscription) -> bool:
         return (
                 PremiumService.is_lite(user_subscription) or
                 PremiumService.is_premium(user_subscription) or
+                PremiumService.is_premium_2020(user_subscription) or
                 PremiumService.is_any_ultimate(user_subscription)
         )
 
