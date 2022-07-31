@@ -38,6 +38,7 @@ class ForumService:
 
         return None
 
+    @staticmethod
     def notify_equipment_users(topic: Topic) -> None:
         item: EquipmentItem = ForumService(topic.forum).get_equipment_item()
 
