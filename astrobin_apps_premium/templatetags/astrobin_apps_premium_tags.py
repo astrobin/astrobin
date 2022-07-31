@@ -132,12 +132,6 @@ def allow_full_retailer_integration(
 ) -> bool:
     return PremiumService.allow_full_retailer_integration(viewer_user_subscription, owner_user_subscription)
 
-@register.filter
-def allow_lite_retailer_integration(
-        viewer_user_subscription: UserSubscription, owner_user_subscription: UserSubscription
-) -> bool:
-    return PremiumService.allow_lite_retailer_integration(viewer_user_subscription, owner_user_subscription)
-
 
 @register.filter
 def can_remove_retailer_integration(user_subscription: UserSubscription) -> bool:

@@ -587,7 +587,6 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         item: EquipmentItem = get_object_or_404(ModelClass.objects, pk=pk)
 
         valid_user_subscription = PremiumService(request.user).get_valid_usersubscription()
-        allow_lite_retailer_integration = PremiumService.allow_lite_retailer_integration(valid_user_subscription, None)
         allow_full_retailer_integration = PremiumService.allow_full_retailer_integration(valid_user_subscription, None)
 
         if not item.brand:
@@ -595,7 +594,6 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             return Response(dict(
                 brand_listings=[],
                 item_listings=[],
-                allow_lite_retailer_integration=allow_lite_retailer_integration,
                 allow_full_retailer_integration=allow_full_retailer_integration,
             ))
 
@@ -605,7 +603,6 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             dict(
                 brand_listings=BrandListingSerializer(brand_listings, many=True).data,
                 item_listings=[],
-                allow_lite_retailer_integration=allow_lite_retailer_integration,
                 allow_full_retailer_integration=allow_full_retailer_integration,
             )
         )

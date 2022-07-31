@@ -60,7 +60,6 @@ class BrandViewSet(viewsets.ModelViewSet):
         brand: EquipmentBrand = self.get_object()
 
         valid_user_subscription = PremiumService(request.user).get_valid_usersubscription()
-        allow_lite_retailer_integration = PremiumService.allow_lite_retailer_integration(valid_user_subscription, None)
         allow_full_retailer_integration = PremiumService.allow_full_retailer_integration(valid_user_subscription, None)
 
         brand_listings = EquipmentService.equipment_brand_listings(brand, get_client_country_code(request))
@@ -69,7 +68,6 @@ class BrandViewSet(viewsets.ModelViewSet):
             dict(
                 brand_listings=BrandListingSerializer(brand_listings, many=True).data,
                 item_listings=[],
-                allow_lite_retailer_integration=allow_lite_retailer_integration,
                 allow_full_retailer_integration=allow_full_retailer_integration,
             )
         )
