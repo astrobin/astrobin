@@ -1,6 +1,7 @@
 from datetime import date, timedelta
 
 from dateutil.relativedelta import relativedelta
+from django.conf import settings
 from django.contrib.auth.models import Group
 from django.urls import reverse
 from django.test import TestCase, override_settings
@@ -10,6 +11,7 @@ from astrobin.models import Image, UserProfile
 from astrobin_apps_premium.services.premium_service import PremiumService
 
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import *
+from common.services import DateTimeService
 
 
 class PremiumTest(TestCase):
