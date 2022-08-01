@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-01 08:56+0000\n"
-"PO-Revision-Date: 2022-08-01 10:22+0200\n"
+"POT-Creation-Date: 2022-08-01 17:02+0000\n"
+"PO-Revision-Date: 2022-08-01 19:01+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -3262,7 +3262,7 @@ msgid "Sent"
 msgstr ""
 
 msgid "Deleted"
-msgstr ""
+msgstr "削除した"
 
 msgid "API Keys"
 msgstr ""
@@ -3491,7 +3491,7 @@ msgid "Resolution"
 msgstr ""
 
 msgid "File size"
-msgstr ""
+msgstr "ファイルサイズ"
 
 msgid "Uncompressed source file"
 msgstr ""
@@ -3710,7 +3710,7 @@ msgid ""
 msgstr ""
 
 msgid "There doesn't seem to be anything here."
-msgstr ""
+msgstr "ここには何もないようです。"
 
 msgid "Associate XISF/FITS file"
 msgstr ""
@@ -4656,7 +4656,7 @@ msgid ""
 msgstr ""
 
 msgid "Image of the Day"
-msgstr ""
+msgstr "Image of the Day"
 
 msgid "An image you promoted made it to IOTD"
 msgstr ""
@@ -5421,13 +5421,13 @@ msgid ""
 "partners!"
 msgstr ""
 
-msgid "Find images"
-msgstr ""
-
 msgid "RA"
 msgstr ""
 
 msgid "Dec"
+msgstr ""
+
+msgid "Find images"
 msgstr ""
 
 msgid "Member since"
@@ -5995,19 +5995,23 @@ msgstr ""
 
 #, python-format
 msgid "%(user)s's gallery"
-msgstr ""
+msgstr "%(user)s のギャラリー"
 
 msgid ""
 "These are your \"work in progress\" images: only you can see this list. You "
 "can show people individual images by sharing them using the <em>Share</em> "
 "menu."
 msgstr ""
+"これらは処理中の画像であり、あなたしか見ることができません。個々の画像は、[共"
+"有]メニューを使用して共有することで、他の人に見せることができます。"
 
 msgid ""
 "These are your \"deleted\" images: only you can see this list. Click the "
 "images you want to\n"
 "            restore, and then use the button below to confirm."
 msgstr ""
+"これらは、あなたの「削除済み」画像です。このリストは、あなただけが見ることが"
+"できます。復元したい画像をクリックし、下のボタンで確定してください。"
 
 msgid ""
 "Images without an acquisition date are not shown when sorting by acquisition "
@@ -6015,16 +6019,18 @@ msgid ""
 msgstr ""
 
 msgid "These images don't have enough data. It's a shame..."
-msgstr ""
+msgstr "この画像はデータが足りません。残念です...。"
 
 msgid ""
 "If you want your images to be categorized in albums, you should really fill "
 "in some data. Imaging telescopes, imaging cameras and subjects are the bare "
 "minimum. Dates of acquisitions are very important too."
 msgstr ""
+"自分の画像をアルバムに分類したい場合は、ぜひデータを記入してください。撮影用"
+"望遠鏡、撮影用カメラ、主題は最低限必要なものです。撮影日時も重要です。"
 
 msgid "Can't find your images?"
-msgstr ""
+msgstr "画像が見つかりませんか？"
 
 #, python-format
 msgid ""
@@ -6032,6 +6038,9 @@ msgid ""
 "\">Visit your Staging Area</a> to find them, or <a href="
 "\"%(staging_area_learn_more_link)s\">learn more</a>."
 msgstr ""
+"あなたの画像はすべて未公開のままです。<a href=\"%(user_page)s?staging\">未公"
+"開領域</a>を訪問して、それらを見つけるか、<a href="
+"\"%(staging_area_learn_more_link)s\">詳細をご覧ください</a>。"
 
 msgid ""
 "AstroBin would like to rename some of your cameras in order to be more "
@@ -6043,46 +6052,53 @@ msgid "Review proposals"
 msgstr ""
 
 msgid "Delete account"
-msgstr ""
+msgstr "アカウントを削除する"
 
 msgid ""
 "Are you sure you want to delete your account? This operation is irreversible "
 "and immediate. All traces of your activity on AstroBin will be erased "
 "forever!"
 msgstr ""
+"本当にアカウントを削除しますか？この操作は不可逆的で即時実行されます。"
+"AstroBinでのあなたの活動の痕跡は、すべて永遠に消去されます。"
 
 msgid "Account deleted"
-msgstr ""
+msgstr "アカウント削除"
 
 msgid "Your account was deleted. Thanks for using AstroBin until now!"
 msgstr ""
+"お客様のアカウントは削除されました。今までAstroBinをご利用いただきありがとう"
+"ございました。"
 
 msgid "Edit your basic information"
-msgstr ""
+msgstr "基本情報を編集する"
 
 msgid "Download your data"
-msgstr ""
+msgstr "データをダウンロードする"
 
 msgid ""
 "You can download all your data off AstroBin, including original uploads, all "
 "revisions, and information such as description, gear used, acquisition "
 "details, and so on."
 msgstr ""
+"AstroBinから、アップロードされたオリジナルデータ、すべてのリビジョン、説明、"
+"使用機材、撮影の詳細などの情報を含む、すべてのデータをダウンロードすることが"
+"できます。"
 
 msgid "Request download"
-msgstr ""
+msgstr "ダウンロードを申し込む"
 
 msgid "Your past requests"
-msgstr ""
+msgstr "過去のリクエスト"
 
 msgid "Request time"
-msgstr ""
+msgstr "リクエスト時間"
 
 msgid "Status"
-msgstr ""
+msgstr "状態"
 
 msgid "Quota exceeded"
-msgstr ""
+msgstr "制限を超えた"
 
 msgid ""
 "To prevent excessive usage of server resources, you can only request one "
@@ -6090,40 +6106,51 @@ msgid ""
 "please email us at <a href=\"mailto:astrobin@astrobin.com"
 "\">astrobin@astrobin.com</a>."
 msgstr ""
+"サーバーリソースの過度な使用を防ぐため、データのダウンロードは24時間に1回のみ"
+"リクエストできます。ダウンロードが止まっていると思われる場合は、<a href="
+"\"mailto:astrobin@astrobin.com\">astrobin@astrobin.com</a> までメールでご連絡"
+"ください。"
 
 msgid ""
 "Please keep in mind that it could take several hours for your download to be "
 "ready, depending on the number and size of your images, and how busy the "
 "servers are at the moment."
 msgstr ""
+"画像の枚数やサイズ、サーバーの混雑状況によっては、ダウンロードが可能になるま"
+"でに数時間かかる場合があります。"
 
 msgid "Edit your astrophotography gear"
-msgstr ""
+msgstr "天体写真機材の編集"
 
 msgid "Telescopes or lenses"
 msgstr ""
 
 msgid "Set your default image license"
-msgstr ""
+msgstr "デフォルトの画像ライセンスを設定する"
 
 msgid ""
 "You can set a default type of license for everything you upload into "
 "AstroBin. Change your default here."
 msgstr ""
+"AstroBinにアップロードするすべてのものに対して、デフォルトのライセンスタイプ"
+"を設定することができます。ここでデフォルトを変更してください。"
 
 msgid "Edit your locations"
-msgstr ""
+msgstr "位置情報の編集"
 
 msgid ""
 "Use the form below to add a new location. After you add one, a new empty "
 "form will be created at the bottom, in case you want to add more."
 msgstr ""
+"新しい場所を追加するには、以下のフォームを使用します。追加した後、さらに追加"
+"したい場合に備えて、一番下に新しい空のフォームが作成されます。"
 
 msgid "AstroBin will not share your location details with other users."
 msgstr ""
+"AstroBinは、お客様の位置情報の詳細を他のユーザーと共有することはありません。"
 
 msgid "Import from Flickr"
-msgstr ""
+msgstr "Flickrからインポートする"
 
 msgid "Preferences"
 msgstr ""
@@ -6135,10 +6162,10 @@ msgid "Avatar"
 msgstr ""
 
 msgid "Change your username"
-msgstr ""
+msgstr "ユーザー名を変更する"
 
 msgid "Edit your site preferences"
-msgstr ""
+msgstr "ウェブサイトの設定を変更する"
 
 msgid "Privacy settings"
 msgstr ""
@@ -6147,51 +6174,60 @@ msgid ""
 "AstroBin is currently in read-only mode, because of server maintenance. "
 "Please try again soon!"
 msgstr ""
+"サーバーメンテナンスのため、AstroBinは現在読み取り専用モードになっています。"
+"しばらくしてから、もう一度お試しください。"
 
 msgid ""
 "Please note: when importing from Flickr, automatic watermarking of the "
 "images it not supported."
 msgstr ""
+"Flickrからインポートする場合、画像に自動で透かしを入れることはできませんので"
+"お気をつけください。"
 
 msgid "Which set"
-msgstr ""
+msgstr "どのセットですか"
 
 msgid "Import photos"
-msgstr ""
+msgstr "写真をインポートする"
 
 msgid "Authenticate with Flickr"
-msgstr ""
+msgstr "Flickrで認証する"
 
 msgid ""
 "Unfortunately you need to enable Javascript to be able to import photos from "
 "Flickr at this time."
 msgstr ""
+"現在、Flickrから写真をインポートするには、Javascriptを有効にする必要がありま"
+"す。"
 
 msgid ""
 "Sorry, but importing from Flickr is reserved to AstroBin Premium and "
 "Ultimate users."
 msgstr ""
+"申し訳ありませんが、FlickrからのインポートはAstroBin PremiumとUltimateのユー"
+"ザーにのみ許可されています。"
 
 msgid "Would you like to upgrade?"
-msgstr ""
+msgstr "アップグレードをご希望ですか？"
 
 msgid "Click to select the photos you want to import"
-msgstr ""
+msgstr "インポートする写真をクリックして選択します"
 
 msgid "Select all"
-msgstr ""
+msgstr "全てを選択"
 
 msgid "Select none"
-msgstr ""
+msgstr "選択なし"
 
 msgid "Import selected photos"
-msgstr ""
+msgstr "選択した写真をインポートする"
 
 msgid "Importing images."
-msgstr ""
+msgstr "インポートされた画像"
 
 msgid "Do not navigate away from this window: this might take a while!"
 msgstr ""
+"このウィンドウから離れないでください。※しばらく時間がかかるかもしれません。"
 
 msgid "(read more)"
 msgstr ""
@@ -6200,19 +6236,19 @@ msgid "Add about section"
 msgstr ""
 
 msgid "Subscription"
-msgstr ""
+msgstr "会員登録"
 
 msgid "Expiration date"
-msgstr ""
+msgstr "有効期限"
 
 msgid "Images used"
-msgstr ""
+msgstr "使用した画像"
 
 msgid "Thanks for your support!"
-msgstr ""
+msgstr "ご支援ありがとうございました。"
 
 msgid "Your payments"
-msgstr ""
+msgstr "お支払いについて"
 
 msgid "Stats"
 msgstr ""
@@ -6224,53 +6260,53 @@ msgid "To change the visibility of these fields, edit your privacy settings."
 msgstr ""
 
 msgid "This data is currently not available and will be recalculated shortly."
-msgstr ""
+msgstr "このデータは現在入手不可能であり、近日中に再計算される予定です。"
 
 msgid "Please check again in a bit, thanks!"
-msgstr ""
+msgstr "少ししたらまた確認してください！"
 
 #, python-format
 msgid "About %(user)s"
 msgstr ""
 
 msgid "Public Area"
-msgstr ""
+msgstr "公開領域"
 
 msgid "Trash"
-msgstr ""
+msgstr "ゴミ"
 
 msgid "Liked images"
-msgstr ""
+msgstr "いいね！した画像"
 
 msgid "Plots"
 msgstr ""
 
 msgid "Following"
-msgstr ""
+msgstr "フォロー"
 
 msgid "Friends"
-msgstr ""
+msgstr "友達"
 
 msgid "Lacking data"
-msgstr ""
+msgstr "データ欠落"
 
 msgid "Collection tools"
-msgstr ""
+msgstr "コレクション・ツール"
 
 msgid "Add/remove images"
-msgstr ""
+msgstr "画像を追加／削除"
 
 msgid "Quick edit"
-msgstr ""
+msgstr "クイック編集"
 
 msgid "Key/value pairs"
-msgstr ""
+msgstr "Key/value ペア"
 
 msgid "Overlays"
 msgstr ""
 
 msgid "Restore selected"
-msgstr ""
+msgstr "選択したものを復元する"
 
 msgid "Empty trash"
 msgstr ""
@@ -6279,68 +6315,74 @@ msgid ""
 "Click on the images to include them in this collection (and click again to "
 "exclude them). Then click on the Save button down below."
 msgstr ""
+"このコレクションに含めるには画像をクリックします（除外するにはもう一度クリッ"
+"クします）。その後、下の保存ボタンをクリックしてください。"
 
 msgid "Create new collection"
-msgstr ""
+msgstr "新しいコレクションを作成する"
 
 msgid "Delete collection?"
-msgstr ""
+msgstr "コレクションを削除しますか？"
 
 msgid ""
 "The collection will be permanently deleted and cannot be recovered. The "
 "images it contains, though, are not going to be deleted. Are you sure?"
 msgstr ""
+"コレクションは永久に削除され、復元することはできません。しかし、その中に含ま"
+"れる画像は削除されません。本当ですか？"
 
 msgid ""
 "The following images do not have the key/value tag chosen to order this "
 "collection, so they are shown as unsorted here."
 msgstr ""
+"以下の画像は、このコレクションを表示するために選んだkey/valueタグがないため、"
+"ここでは未ソートとして表示されています。"
 
 msgid "This collection contains no images."
-msgstr ""
+msgstr "このコレクションには画像が含まれていません。"
 
 msgid "Would you like to add some images?"
-msgstr ""
+msgstr "画像を追加したいですか？"
 
 msgid "Collection"
-msgstr ""
+msgstr "コレクション"
 
 msgid "Tools"
-msgstr ""
+msgstr "ツール"
 
 msgid "You do not have any collections."
-msgstr ""
+msgstr "コレクションがないのでは？"
 
 msgid "Do you want to create a collection now?"
-msgstr ""
+msgstr "今すぐコレクションを作りたいですか？"
 
 msgid "This user does not have any collections."
-msgstr ""
+msgstr "このユーザーには、コレクションがありません。"
 
 msgid "Quick edit: key/value tags"
-msgstr ""
+msgstr "クイック編集 : key/value tags"
 
 msgid "Edit collection"
-msgstr ""
+msgstr "コレクションを編集する"
 
 msgid "Show filters"
-msgstr ""
+msgstr "フィルターを表示する"
 
 msgid "Hide filters"
-msgstr ""
+msgstr "フィルターを隠す"
 
 #, python-brace-format
 msgid "${filter.label}"
-msgstr ""
+msgstr "${filter.label}"
 
 msgid "Sort results"
 msgstr ""
 
 msgid "Results"
-msgstr ""
+msgstr "結果"
 
 msgid "Search terms"
-msgstr ""
+msgstr "検索キーワード"
 
 msgid "Telescope"
 msgstr ""
@@ -6349,44 +6391,44 @@ msgid "Camera"
 msgstr ""
 
 msgid "Search domain"
-msgstr ""
+msgstr "検索ドメイン"
 
 msgid "Search by"
-msgstr ""
+msgstr "で検索"
 
 msgid "Only animated"
-msgstr ""
+msgstr "アニメーションのみ"
 
 msgid "Award"
-msgstr ""
+msgstr "Award"
 
 msgid "Publication date range"
-msgstr ""
+msgstr "公開日の指定"
 
 msgid "Acquisition date range"
-msgstr ""
+msgstr "撮影日の指定"
 
 msgid "Camera type"
-msgstr ""
+msgstr "カメラの種類"
 
 msgid "Field radius (deg)"
-msgstr ""
+msgstr "視野半径（度）"
 
 msgid "Minimum data"
-msgstr ""
+msgstr "最小限のデータ"
 
 #, python-format
 msgid "Moon phase (%%)"
-msgstr ""
+msgstr "月齢 (%%)"
 
 msgid "Pixel scale (arcsec/pixel)"
-msgstr ""
+msgstr "画素サイズ (arcsec/pixel)"
 
 msgid "Telescope type"
-msgstr ""
+msgstr "望遠鏡の種"
 
 msgid "Integration time (hours)"
-msgstr ""
+msgstr "合成時間（○時間）"
 
 msgid "Width (pixels)"
 msgstr ""
@@ -6413,27 +6455,29 @@ msgid ""
 "Sorry, this filter requires an <a href=\"%(url)s\">AstroBin Ultimate</a> "
 "subscription."
 msgstr ""
+"このフィルターを使用するには、<a href=\"%(url)s\">AstroBin Ultimate</a> の契"
+"約が必要です。"
 
 msgid "Select"
-msgstr ""
+msgstr "選択"
 
 msgid "Add filter:"
-msgstr ""
+msgstr "フィルターを追加："
 
 msgid "Yes"
 msgstr ""
 
 msgid "Top pick"
-msgstr ""
+msgstr "Top pick"
 
 msgid "Top pick nomination"
-msgstr ""
+msgstr "Top pick nomination"
 
 msgid "Min"
-msgstr ""
+msgstr "最小"
 
 msgid "Max"
-msgstr ""
+msgstr "最大"
 
 msgid "What camera was used in the acquisition of the image?"
 msgstr ""
@@ -6463,31 +6507,31 @@ msgid "Current year"
 msgstr ""
 
 msgid "Imaging telescopes"
-msgstr ""
+msgstr "撮影用望遠鏡"
 
 msgid "Astrometry"
-msgstr ""
+msgstr "天体"
 
 msgid "In which data field should we look for your search terms?"
 msgstr ""
 
 msgid "Everything"
-msgstr ""
+msgstr "すべて"
 
 msgid "By basic information"
-msgstr ""
+msgstr "基本情報別"
 
 msgid "By astrometry details"
-msgstr ""
+msgstr "天体別"
 
 msgid "Objects in field"
-msgstr ""
+msgstr "フィールド内の対象"
 
 msgid "By gear used"
-msgstr ""
+msgstr "使用機材別"
 
 msgid "Guiding telescopes"
-msgstr ""
+msgstr "ガイド用望遠鏡"
 
 msgid "What kind of search results do you want?"
 msgstr ""
@@ -6518,10 +6562,10 @@ msgid ""
 msgstr ""
 
 msgid "Earth's moon"
-msgstr ""
+msgstr "月"
 
 msgid "Other solar system object"
-msgstr ""
+msgstr "他の太陽系天体"
 
 msgid "What telescope was used in the acquisition of the image?"
 msgstr ""
@@ -6530,89 +6574,89 @@ msgid "Refractor"
 msgstr ""
 
 msgid "Achromatic"
-msgstr ""
+msgstr "アクロマート"
 
 msgid "Semi-apochromatic"
-msgstr ""
+msgstr "セミアポクロマート"
 
 msgid "Apochromatic"
-msgstr ""
+msgstr "アポクロマート"
 
 msgid "Non-achromatic Galilean"
-msgstr ""
+msgstr "Non-achromatic Galilean"
 
 msgid "Non-achromatic Keplerian"
-msgstr ""
+msgstr "Non-achromatic Keplerian"
 
 msgid "Superchromat"
-msgstr ""
+msgstr "Superchromat"
 
 msgid "Reflector"
 msgstr ""
 
 msgid "Dall-Kirkham"
-msgstr ""
+msgstr "ドール・カーカム"
 
 msgid "Nasmyth"
-msgstr ""
+msgstr "Nasmyth"
 
 msgid "Ritchey Chretien"
-msgstr ""
+msgstr "リッチー・クレチアン"
 
 msgid "Gregorian"
-msgstr ""
+msgstr "Gregorian"
 
 msgid "Herschellian"
-msgstr ""
+msgstr "Herschellian"
 
 msgid "Newtonian"
-msgstr ""
+msgstr "ニュートン式"
 
 msgid "Catadioptric"
 msgstr ""
 
 msgid "Argunov-Cassegrain"
-msgstr ""
+msgstr "Argunov-Cassegrain"
 
 msgid "Klevtsov-Cassegrain"
-msgstr ""
+msgstr "カタディオプトリックカセグレン"
 
 msgid "Lurie-Houghton"
-msgstr ""
+msgstr "ルリーホートン"
 
 msgid "Maksutov"
-msgstr ""
+msgstr "マクストフ"
 
 msgid "Maksutov-Cassegrain"
-msgstr ""
+msgstr "マクストフカセグレン"
 
 msgid "Modified Dall-Kirkham"
-msgstr ""
+msgstr "ドール・カーカム"
 
 msgid "Schmidt camera"
-msgstr ""
+msgstr "シュミットカメラ"
 
 msgid "Schmidt-Cassegrain"
-msgstr ""
+msgstr "シュミット・カセクレイン"
 
 msgid "ACF Schmidt-Cassegrain"
-msgstr ""
+msgstr "ACF Schmidt-Cassegrain"
 
 msgid "Rowe-Ackermann Schmidt astrograph"
-msgstr ""
+msgstr "ROWE-ACKERMANN SCHMIDT ASTROGRAPH (RASA)"
 
 msgid "minutes"
-msgstr ""
+msgstr "分"
 
 msgid "seconds ago"
-msgstr ""
+msgstr "秒前"
 
 #, python-format
 msgid "%s ago"
-msgstr ""
+msgstr "%s 前"
 
 msgid "no alias"
-msgstr ""
+msgstr "別名なし"
 
 msgid ""
 "Invalid image or no image provided. Allowed formats are JPG, PNG and GIF."
@@ -6642,7 +6686,7 @@ msgid "Fill in one session, before adding more."
 msgstr "１回分を埋めてから、さらに追加する。"
 
 msgid "Form saved. Thank you!"
-msgstr ""
+msgstr "フォームが保存されました。"
 
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
@@ -6735,6 +6779,152 @@ msgstr "紹介コード（オプション）"
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
 "申し訳ありませんが、このユーザーネームは既に別の大文字で登録されています。"
+
+#~ msgid ""
+#~ "We are very, very sorry, but it appears that some of your images suffered "
+#~ "a catastrophic data corruption, and cannot be retrieved. Please read more "
+#~ "<a href=\"%(data_corruption_url)s\">here</a>."
+#~ msgstr ""
+#~ "大変申し訳ございませんが、一部の画像が壊滅的なデータ破損に見舞われ、復元す"
+#~ "ることができなくなりました。詳しくは<a href=\"%(data_corruption_url)s\">こ"
+#~ "ちら</a>をご覧ください。"
+
+#~ msgid ""
+#~ "Please click on the thumbnails stuck with the hourglass icon to upload "
+#~ "the image files that you still have on your computer or backups to their "
+#~ "pages again."
+#~ msgstr ""
+#~ "砂時計のアイコンで貼り付けられたサムネイルをクリックして、パソコンに残って"
+#~ "いる画像ファイルやバックアップを、再度それぞれのページにアップロードしてく"
+#~ "ださい。"
+
+#~ msgid ""
+#~ "The data associated to your affected images, such as title, description, "
+#~ "equipment used, acquisition details, comments, likes, bookmarks, and so "
+#~ "on, is still intact and safe."
+#~ msgstr ""
+#~ "タイトル、説明文、使用機材、撮影内容、コメント、「いいね！」、ブックマーク"
+#~ "など、影響を受けた画像に関連するデータはそのままで、安全です。"
+
+#~ msgid "AstroBin would like to offer you its sincerest apologies. :("
+#~ msgstr "アストロビンは、心からお詫び申し上げます。"
+
+#~ msgid "Edit gear item"
+#~ msgstr "機材を編集する"
+
+#~ msgid "Please note!"
+#~ msgstr "ご注意ください。"
+
+#~ msgid ""
+#~ "When you add or edit the make, the name, and the properties of this "
+#~ "product, the data is global and shared between all AstroBin users. Do not "
+#~ "write any information in there that refers to your personal copy of this "
+#~ "product, like \"modded\", \"sold\", \"broken\", \"a present from my aunt"
+#~ "\" and so on. "
+#~ msgstr ""
+#~ "この製品のメーカー、名前、詳細を追加または編集すると、そのデータはグローバ"
+#~ "ルとなり、すべてのAstroBinユーザー間で共有されます。「改造した」「売った」"
+#~ "「壊れた」「叔母からのプレゼント」など、この製品について、あなたの個人的な"
+#~ "ものに言及するような情報は、そこに書き込まないでください。"
+
+#~ msgid ""
+#~ "The following information, instead, is personal, and may refer to your "
+#~ "copy of this product."
+#~ msgstr ""
+#~ "以下の情報は個人的なものであり、この製品について、あなたのものを参照するこ"
+#~ "とがあります。"
+
+#~ msgid "Add gear item"
+#~ msgstr "機材を追加する"
+
+#~ msgid "Corrupted"
+#~ msgstr "破損した"
+
+#~ msgid "Recovered"
+#~ msgstr "回収済み"
+
+#~ msgid "Please confirm your recovered images"
+#~ msgstr "復旧した画像をご確認ください"
+
+#~ msgid ""
+#~ "Following the <a href=\"%(url)s\" target=\"_blank\">data loss incident in "
+#~ "February 2020</a>, these images <strong>were automatically recovered</"
+#~ "strong>."
+#~ msgstr ""
+#~ "<a href=\"%(url)s\" target=\"_blank\">2020年2月のデータ消失事故</a>を受け"
+#~ "て、これらの画像は自動的に復旧されました。"
+
+#~ msgid "Now you need to <strong>manually confirm or reject</strong> them."
+#~ msgstr "あとは <strong>手動で確認・拒否</strong>する必要があります。"
+
+#~ msgid "Instructions"
+#~ msgstr "使用方法"
+
+#~ msgid ""
+#~ "Below, you see the list of all your images impacted by the automatic "
+#~ "recovery process."
+#~ msgstr ""
+#~ "下には、自動リカバリーの対象となるすべての画像のリストが表示されます。"
+
+#~ msgid ""
+#~ "The big thumbnail represents the original upload, and the small "
+#~ "thumbnails represent revisions."
+#~ msgstr "大きなサムネイルが原版、小さなサムネイルが修正版を表しています。"
+
+#~ msgid ""
+#~ "Click on a thumbnail once to mark it for recovery, again to mark it for "
+#~ "deletion, once more to return to the \"do nothing\" state."
+#~ msgstr ""
+#~ "サムネイルを1回クリックすると復元、2回クリックすると削除、もう1回クリック"
+#~ "すると「何もしない」状態に戻ります。"
+
+#~ msgid ""
+#~ "You can also use the \"Recover all\" and \"Delete all\" buttons at the "
+#~ "bottom."
+#~ msgstr "また、下部の「すべて復元」「すべて削除」ボタンも利用できます。"
+
+#~ msgid ""
+#~ "When you are ready, click on the \"Submit selected\" button to confirm "
+#~ "your selection."
+#~ msgstr ""
+#~ "準備ができたら、\"選択したものを送信\"ボタンをクリックして、選択を確定して"
+#~ "ください。"
+
+#~ msgid ""
+#~ "You will return to this page, and the images for which you didn't make a "
+#~ "selection will still be here."
+#~ msgstr "このページに戻ると、選択しなかった画像はまだここに残っています。"
+
+#~ msgid ""
+#~ "The recovered images will return to your gallery (public or staging, "
+#~ "depending on where they were before the data loss)."
+#~ msgstr ""
+#~ "復元された画像は、ギャラリー（公開またはステージング、データ損失前の場所に"
+#~ "応じて）に戻ります。"
+
+#~ msgid "Original upload"
+#~ msgstr "原版をアップロード"
+
+#~ msgid "Staging area"
+#~ msgstr "非公開領域"
+
+#~ msgid "Recover all"
+#~ msgstr "全てを復活させる"
+
+#~ msgid "Delete all"
+#~ msgstr "全てを削除"
+
+#~ msgid "Reset"
+#~ msgstr "リセット"
+
+#~ msgid "Submit selected"
+#~ msgstr "選択したものを送信"
+
+#~ msgid "There are no images to recover."
+#~ msgstr "復元する画像はありません。"
+
+#~ msgid "Comments & forums"
+#~ msgstr "Comments & forums"
 
 #~ msgid "No date specified"
 #~ msgstr "日付の指定が必要"

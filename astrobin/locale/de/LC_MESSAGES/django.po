@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-01 08:56+0000\n"
-"PO-Revision-Date: 2022-08-01 10:22+0200\n"
+"POT-Creation-Date: 2022-08-01 17:02+0000\n"
+"PO-Revision-Date: 2022-08-01 19:01+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -3774,6 +3774,8 @@ msgstr "Kaufen Sie %(name)s bei AstroBin's Partnern"
 
 msgid "This item is unapproved and it might require your attention."
 msgstr ""
+"Dieser Artikel ist nicht genehmigt und erfordert möglicherweise Ihre "
+"Aufmerksamkeit."
 
 msgid "Revision title"
 msgstr "Titel der Revision"
@@ -3829,7 +3831,7 @@ msgid "Submit for IOTD/TP consideration"
 msgstr "Für IOTD/TP einreichen"
 
 msgid "Deadline"
-msgstr ""
+msgstr "Frist"
 
 msgid "Delete image and all revisions"
 msgstr "Bild und alle Revisionen löschen"
@@ -4360,6 +4362,8 @@ msgid ""
 "Filters are not available because you didn't add any to the equipment list "
 "of this image."
 msgstr ""
+"Filter sind nicht verfügbar, weil Sie keine zur Ausrüstungsliste dieses "
+"Bildes hinzugefügt haben."
 
 msgid "Acquisition session"
 msgstr "Aufnahme Session"
@@ -5492,25 +5496,35 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> commented on your unapproved equipment "
 "item <strong>%(target)s</strong>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> hat Ihren nicht genehmigten "
+"Ausrüstungsgegenstand <strong>%(target)s</strong> kommentiert."
 
 msgid "You received this notification because you created this item."
 msgstr ""
+"Sie haben diese Benachrichtigung erhalten, weil Sie dieses Element erstellt "
+"haben."
 
 #, python-format
 msgid "%(user)s commented on your unapproved equipment item \"%(target)s\"."
 msgstr ""
+"%(user)s hat Ihren nicht genehmigten Ausrüstungsgegenstand \"%(target)s\" "
+"kommentiert."
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> commented on your unapproved equiment item <strong>"
 "%(target)s</strong>"
 msgstr ""
+"<strong>%(user)s</strong> hat Ihren nicht genehmigten Ausrüstungsgegenstand "
+"<strong>%(target)s</strong> kommentiert"
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> commented on your unapproved equipment item "
 "<strong>%(target)s</strong>."
 msgstr ""
+"<strong>%(user)s</strong> hat Ihren nicht genehmigten Ausrüstungsgegenstand "
+"<strong>%(target)s</strong> kommentiert"
 
 #, python-format
 msgid ""
@@ -5869,6 +5883,9 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> posted a new topic in the forum for "
 "equipment item <a href=\"%(item_url)s\">%(item)s</a> that you have used."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> hat ein neues Thema im Forum zum "
+"Ausrüstungsgegenstand <a href=\"%(item_url)s\">%(item)s</a> gepostet. a>, "
+"die Sie verwendet haben."
 
 msgid "View topic"
 msgstr "Thema anzeigen"
@@ -5878,24 +5895,31 @@ msgid ""
 "%(user)s posted a new topic in the forum for equipment item \"%(item)s\" "
 "that you have used"
 msgstr ""
+"%(user)s hat im Forum ein neues Thema zum Ausrüstungsgegenstand \"%(item)s\" "
+"gepostet, den Sie verwendet haben"
 
 msgid "View the topic"
 msgstr "Das Thema anzeigen"
 
 msgid "View the equipment item"
-msgstr ""
+msgstr "Sehen Sie sich den Ausrüstungsgegenstand an"
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> posted a new topic in the forum for equipment item "
 "<strong>%(item)s</strong> that you have used: <em>%(topic_name)s</em>"
 msgstr ""
+"<strong>%(user)s</strong> hat im Forum ein neues Thema für den "
+"Ausrüstungsgegenstand <strong>%(item)s</strong> gepostet, den Sie verwendet "
+"haben: <em>%(topic_name)s</em >"
 
 #, python-format
 msgid ""
 "%(user)s posted a new topic in the forum for equipment item \"%(item)s\" "
 "that you have used: \"%(topic_name)s\""
 msgstr ""
+"%(user)s hat im Forum ein neues Thema zum Ausrüstungsgegenstand \"%(item)s\" "
+"gepostet, das Sie verwendet haben: \"%(topic_name)s\""
 
 #, python-format
 msgid ""
@@ -6117,20 +6141,20 @@ msgstr ""
 "Bitte unterstützen Sie AstroBin, indem Sie <strong>%(brand)s</strong> bei "
 "einem unserer Partner einkaufen!"
 
-msgid "Find images"
-msgstr "Bilder finden"
-
 msgid "RA"
 msgstr "RA"
 
 msgid "Dec"
 msgstr "Dec"
 
+msgid "Find images"
+msgstr "Bilder finden"
+
 msgid "Member since"
 msgstr "Mitglied seit"
 
 msgid "Every equipment item on AstroBin has a forum associated with it."
-msgstr ""
+msgstr "Jedem Ausrüstungsgegenstand auf AstroBin ist ein Forum zugeordnet."
 
 #, python-format
 msgid ""
@@ -6138,15 +6162,22 @@ msgid ""
 "recommend finding it in the %(_0)sequipment database%(_1)s and posting in "
 "its dedicated forum."
 msgstr ""
+"Wenn Sie ein neues Thema zu einem bestimmten Ausrüstungsgegenstand posten "
+"möchten, empfehlen wir, es in der %(_0)sequipment database%(_1)s zu finden "
+"und im zugehörigen Forum zu posten."
 
 msgid ""
 "This will maximize your chances of getting relevant replies because all "
 "active AstroBin users who have used that specific equipment item will be "
 "notified of your post, unless they opted out of that particular notification."
 msgstr ""
+"Dadurch maximieren Sie Ihre Chancen, relevante Antworten zu erhalten, da "
+"alle aktiven AstroBin-Benutzer, die diesen bestimmten Ausrüstungsgegenstand "
+"verwendet haben, über Ihren Beitrag benachrichtigt werden, es sei denn, sie "
+"haben diese bestimmten Benachrichtigung deaktiviert."
 
 msgid "Learn more about the AstroBin equipment database!"
-msgstr ""
+msgstr "Erfahren Sie mehr über die AstroBin Gerätedatenbank!"
 
 msgid "Search all forums"
 msgstr "Suche in allen Foren"
@@ -6219,26 +6250,30 @@ msgid "I understand"
 msgstr "Ich habe verstanden."
 
 msgid "Ignore"
-msgstr ""
+msgstr "Ignorieren"
 
 msgid "Browse equipment"
-msgstr ""
+msgstr "Ausrüstung durchsuchen"
 
 msgid "Back to group"
 msgstr "Zurück zur Gruppe"
 
 msgid "Back to equipment item"
-msgstr ""
+msgstr "Zurück zum Ausrüstungsgegenstand"
 
 msgid ""
 "Anybody who used an equipment item is notified of new topics in its forum, "
 "unless they opt out."
 msgstr ""
+"Jeder, der einen Ausrüstungsgegenstand verwendet hat, wird über neue Themen "
+"in seinem Forum benachrichtigt, sofern er sich nicht abmeldet."
 
 msgid ""
 "Below, you can see a list of equipment item forums that have at least one "
 "discussion topic."
 msgstr ""
+"Unten sehen Sie eine Liste von Foren für Ausrüstungsgegenstände, die "
+"mindestens ein Diskussionsthema haben."
 
 msgid "Hidden"
 msgstr "Verborgen"
@@ -6264,6 +6299,9 @@ msgid ""
 "notified of new topics unless they opt out. %(_0)sLearn more about AstroBin "
 "Groups!%(_1)s"
 msgstr ""
+"Jeder AstroBin-Gruppe ist ein Forum zugeordnet. Gruppenmitglieder werden "
+"über neue Themen benachrichtigt, sofern sie sich nicht abmelden. "
+"%(_0)sErfahren Sie mehr über AstroBin-Gruppen!%(_1)s"
 
 msgid "Forum categories are not created"
 msgstr "Forum-Kategorien werden nicht erstellt"
@@ -6910,7 +6948,7 @@ msgid "Edit your astrophotography gear"
 msgstr "Astrofotografie Ausrüstung bearbeiten"
 
 msgid "Telescopes or lenses"
-msgstr ""
+msgstr "Teleskope oder Objektive"
 
 msgid "Set your default image license"
 msgstr "Bitte setze die Default-Bildlizenz"
@@ -7226,13 +7264,13 @@ msgid "Integration time (hours)"
 msgstr "Aufnahmedauer (Stunden)"
 
 msgid "Width (pixels)"
-msgstr ""
+msgstr "Breite (Pixel)"
 
 msgid "Height (pixels)"
-msgstr ""
+msgstr "Höhe (Pixel)"
 
 msgid "Size (MB)"
-msgstr ""
+msgstr "Größe (MB)"
 
 msgid ""
 "However, you can still perform a similar search using the free text search "
@@ -7357,7 +7395,7 @@ msgid "increasing"
 msgstr "zunehmend"
 
 msgid "Pixel count"
-msgstr ""
+msgstr "Anzahl der Pixel"
 
 msgid ""
 "What deep-sky astronomical subject are you looking for? E.g. M 31, NGC 2976, "
