@@ -1,35 +1,32 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: AstroBin Apps: Plate-solving\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-25 19:45+0000\n"
-"PO-Revision-Date: 2020-11-25 03:08+0000\n"
-"Last-Translator: ohmishonin <kasuzen@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2022-08-01 08:56+0000\n"
+"PO-Revision-Date: 2022-07-30 11:52+0200\n"
+"Last-Translator: Salvatore Iovene\n"
+"Language-Team: Japanese\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Pootle 2.8\n"
-"X-POOTLE-MTIME: 1606273722.000000\n"
+"X-Generator: Loco https://localise.biz\n"
+"X-Loco-Source-Locale: en\n"
+"X-Loco-Project-Id: 108448\n"
+"X-Loco-Api-Version: 1.0.26 20220711-1\n"
 
 msgid "Small"
-msgstr "小"
+msgstr ""
 
 msgid "Medium"
-msgstr "中"
+msgstr ""
 
 msgid "Large"
-msgstr "大"
+msgstr ""
 
 msgid "Sample raw frame (max 100 MB)"
-msgstr "サンプルのRawフレーム（最大100MByte）"
+msgstr ""
 
 msgid ""
 "To improve the accuracy of your plate-solution even further, please upload "
@@ -45,35 +42,24 @@ msgid ""
 "match. To improve your chances at a successful accurate plate-solution, "
 "calibrate your file the usual way (dark/bias/flats) but do not stretch it."
 msgstr ""
-"星図化の精度をさらに向上させるには、データセットからXISFまたはFITSファイルを"
-"アップロードしてください。これらのファイルには通常、日付と時刻のヘッダが含ま"
-"れており、AstroBinで太陽系の天体歴を計算したり、画像内の惑星や小惑星を検出し"
-"たりすることができます (位置情報も追加してください)。<br/><br/>精度を最大限に"
-"高めるには、PixInsight のネイティブ形式およびオープン形式の XISF を使用するこ"
-"とをお勧めします。XISF の詳細については、ここを参照してください:<br/><br/><a "
-"href=\"https://pixinsight.com/xisf/\" target=\"_blank\">https://pixinsight."
-"com/xisf/</a><br/><br/><strong>注意事項:</strong>アップロードする XISF ファイ"
-"ルまたは FITS ファイルが処理された画像と一致していないと、オブジェクトの注釈"
-"が一致しません。正確なプレート解析を成功させるためには、通常の方法 (Dark/"
-"Bias/Flat) でファイルをキャリブレーションしてください。"
 
 msgid "Scaled font size"
-msgstr "フォントサイズを拡大"
+msgstr ""
 
 msgid "Font size of the annotations on your main image page"
-msgstr "メイン画像ページの注釈のフォントサイズ"
+msgstr ""
 
 msgid "Show equatorial grid"
-msgstr "赤経/赤緯グリッドを表示"
+msgstr ""
 
 msgid "Show constellation borders"
-msgstr "星座境界を表示"
+msgstr ""
 
 msgid "Show constellation lines"
-msgstr "星座線を表示"
+msgstr ""
 
 msgid "Show named stars"
-msgstr "星の名前を表示"
+msgstr ""
 
 msgid "Show HD stars"
 msgstr ""
@@ -92,19 +78,19 @@ msgid ""
 msgstr ""
 
 msgid "Show Messier objects"
-msgstr "メシエ天体を表示"
+msgstr ""
 
 msgid "Show NGC and IC objects"
-msgstr "NGCとIC天体を表示"
+msgstr ""
 
 msgid "Show VdB objects"
-msgstr "VdB天体を表示"
+msgstr ""
 
 msgid "Show Sharpless objects"
-msgstr "Sharpless天体を表示"
+msgstr ""
 
 msgid "Show Barnard objects"
-msgstr "バーナード天体を表示"
+msgstr ""
 
 msgid ""
 "Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
@@ -115,24 +101,24 @@ msgid ""
 msgstr ""
 
 msgid "Show PGC objects"
-msgstr "PGC天体を表示"
+msgstr ""
 
 msgid "Show planets"
-msgstr "惑星を表示"
+msgstr ""
 
 msgid ""
 "Only available if your image at least an acquisition time and an accurate "
 "location"
-msgstr "少なくとも画像の取得時間と正確な位置が必要な場合にのみ利用可能"
+msgstr ""
 
 msgid "Show asteroids"
-msgstr "小惑星を表示"
+msgstr ""
 
 msgid "Show GCVS stars"
-msgstr "GCVSスターを表示"
+msgstr ""
 
 msgid "General Catalog of Variable Stars"
-msgstr "変更星の一般カタログ"
+msgstr ""
 
 msgid ""
 "Only GCVS stars up to this magnitude will be rendered. If left empty, the "
@@ -140,7 +126,7 @@ msgid ""
 msgstr ""
 
 msgid "Show Tycho-2 catalog"
-msgstr "Tycho-2カタログを表示"
+msgstr ""
 
 msgid ""
 "Only Tycho-2 stars up to this magnitude will be rendered. If left empty, the "
@@ -148,66 +134,62 @@ msgid ""
 msgstr ""
 
 msgid "Show CGPN objects"
-msgstr "CGPN天体を表示"
+msgstr ""
 
 msgid "Show quasars"
 msgstr ""
 
 msgid "Perform a blind solve"
-msgstr "ブラインド解析が実施されました"
+msgstr ""
 
 msgid ""
 "Attempt to solve with no hints. In most cases this will work, but it will "
 "take longer."
 msgstr ""
-"ノーヒントで実行しようとしています。ほとんどの場合、これはうまくいきますが、"
-"時間がかかります。"
 
 msgid "Width of the field in degrees"
-msgstr "度数によるフィールドの大きさ"
+msgstr ""
 
 msgid "Width of the field in arcminutes"
-msgstr "分角によるフィールドの大きさ"
+msgstr ""
 
 msgid "Resolution of the field in arcseconds/pixel"
-msgstr "秒角/ピクセルによるフィールドの解像度"
+msgstr ""
 
 msgid "Field size units"
-msgstr "フィールドサイズの単位"
+msgstr ""
 
 msgid "Min field size"
-msgstr "最小のフィールドサイズ"
+msgstr ""
 
 msgid "Estimate the lower bound for the width of this field."
-msgstr "このフィールドの幅の下限を推定します。"
+msgstr ""
 
 msgid "Max field size"
-msgstr "最大フィールドサイズ"
+msgstr ""
 
 msgid "Estimate the upper bound for the width of this field."
-msgstr "このフィールドの幅の上限を推定します。"
+msgstr ""
 
 msgid "Center RA"
-msgstr "赤経座標の中心"
+msgstr ""
 
 msgid "Center RA of the field in degrees, 0.000 to 360.000"
-msgstr "赤経座標の中心を0から360の角度で指定"
+msgstr ""
 
 msgid "Center dec"
-msgstr "赤緯座標の中心"
+msgstr ""
 
 msgid "Center dec of the field in degrees, -90.000 to +90.000"
-msgstr "赤緯座標の中心を-90から90の角度で指定"
+msgstr ""
 
 msgid "Radius"
-msgstr "角度"
+msgstr ""
 
 msgid ""
 "Tells the plate-solving engine to look within these many degrees of the "
 "given center RA and dec position."
 msgstr ""
-"星図化エンジンに与えられた赤経中心座標と赤緯中心座標から大きい角度があると"
-"言っています。"
 
 msgid "Missing"
 msgstr ""
@@ -231,38 +213,34 @@ msgid "Advanced success"
 msgstr ""
 
 msgid "Getting plate-solving status, please wait..."
-msgstr "図版化を実施中です。しばらくお待ちください。"
+msgstr ""
 
 msgid "Plate-solving starting, please do not leave this page..."
-msgstr "星図化を開始したので、このページを離れないでください。"
+msgstr ""
 
 msgid "Advanced plate-solving starting, please do not leave this page..."
-msgstr "高度な星図化を開始したので、このページを離れないでください。"
+msgstr ""
 
 msgid "Plate-solving started. You may leave this page."
-msgstr "星図化を開始しました。このページを離れてもかまいません。"
+msgstr ""
 
 msgid "Advanced plate-solving started. You may leave this page."
-msgstr "高度な星図化を開始しました。このページを離れてもかまいません。"
+msgstr ""
 
 msgid "Plate-solving almost ready, please do not leave this page..."
-msgstr "図版化の準備ができました。このページを離れないでください。"
+msgstr ""
 
 msgid "This image could not be plate-solved."
-msgstr "この画像は図版化ができませんでした。"
+msgstr ""
 
 msgid "The advanced plate-solving failed."
-msgstr "高度な星図化が失敗しました。"
+msgstr ""
 
 msgid "This image has been plate-solved. Refresh the page to see new data!"
 msgstr ""
-"この画像の星図化が成功しました。新しいデータをみるために、このページをリロー"
-"ドしてください。"
 
 msgid "The advanced plate-solved finished. Refresh the page to see new data!"
 msgstr ""
-"この画像の高度な星図化が成功しました。新しいデータをみるために、このページを"
-"リロードしてください。"
 
 msgid "Error"
 msgstr ""
