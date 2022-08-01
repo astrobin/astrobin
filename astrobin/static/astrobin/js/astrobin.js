@@ -534,8 +534,12 @@ astrobin_common = {
                 position: {
                     viewport: $(window)
                 },
-                show: "click",
-                hide: "unfocus",
+                show: {
+                    event: "mouseenter",
+                    solo: true,
+                    delay: 250
+                },
+                hide: "mouseleave",
                 style: {
                     tip: {
                         width: 16,

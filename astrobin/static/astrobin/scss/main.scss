@@ -2600,13 +2600,17 @@ form.avatar-delete {
 }
 
 .gear-popover-label {
-  padding: 0;
-  color: $link-color;
-  cursor: pointer;
+  padding: 0 .334rem;
 
-  &:hover {
-    border-bottom: 1px dotted $link-color;
+  &.shopping-cart {
+    padding: 0 0.334rem 0 0;
+    margin-left: -0.667rem;
   }
+}
+
+.retailer-affiliate-cart-link {
+  padding: 0 0.334rem 0 0;
+  margin-left: -0.667rem;
 }
 
 .gear-popover, .user-popover, .subject-popover, .equipment-item-popover {

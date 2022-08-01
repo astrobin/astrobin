@@ -25,13 +25,14 @@
                                 <dd>
                                     {% for item in items %}
                                         {% if item.version == 'LEGACY' %}
-                                            <span
+                                            <a
                                                 rel="popover"
                                                 class="gear-popover-label"
                                                 data-load="{% url 'gear_popover_ajax' item.id image.id %}?q={{ search_query|urlencode }}{% if 'DEBUG_COUNTRY' in request.GET %}&DEBUG_COUNTRY={{ request.GET|get_item:'DEBUG_COUNTRY' }}{% endif %}"
+                                                href='{% url "haystack_search" %}?q="{% gear_name_iriencoded item.label %}"'
                                             >
                                                 {% highlight_text item.label with search_query %}
-                                            </span>
+                                            </a>
 
                                             {# Shopping cart #}
                                             {% with request.user|get_valid_usersubscription as request_user_valid_usersubscription_for_link %}
@@ -86,10 +87,21 @@
                                             {% endwith %}
                                             {# ./Shopping cart #}
                                         {% else %} {# NEW equipment items #}
-                                            <span rel="popover" class="gear-popover-label"
-                                                  data-load="{% url 'equipment:item-popover' item.type item.id image.get_id %}?q={{ search_query|urlencode }}{% if 'DEBUG_COUNTRY' in request.GET %}&DEBUG_COUNTRY={{ request.GET|get_item:'DEBUG_COUNTRY' }}{% endif %}">
+                                            {% if item.object.brand %}
+                                                <a href={{ item.explorer_url }}
+                                            {% else %}
+                                                <span
+                                            {% endif %}
+                                                rel="popover"
+                                                class="gear-popover-label"
+                                                data-load="{% url 'equipment:item-popover' item.type item.id image.get_id %}?q={{ search_query|urlencode }}{% if 'DEBUG_COUNTRY' in request.GET %}&DEBUG_COUNTRY={{ request.GET|get_item:'DEBUG_COUNTRY' }}{% endif %}"
+                                            >
                                                 {% highlight_text item.label with search_query %}
-                                            </span>
+                                            {% if item.object.brand %}
+                                                </a>
+                                            {% else %}
+                                                </span>
+                                            {% endif %}
 
                                             {% if item.unapproved and item.creator_id == request.user.id %}
                                                 <a
@@ -121,7 +133,7 @@
                                                                         "></i>
                                                                     </a>
                                                                 {% else %}
-                                                                    <span rel="popover" class="gear-popover-label"
+                                                                    <span rel="popover" class="gear-popover-label shopping-cart"
                                                                           data-load="{% url 'equipment:item-popover' item.type item.id image.get_id %}?q={{ search_query|urlencode }}{% if 'DEBUG_COUNTRY' in request.GET %}&DEBUG_COUNTRY={{ request.GET|get_item:'DEBUG_COUNTRY' }}{% endif %}">
                                                                         <i class="icon-shopping-cart" rel="tooltip"
                                                                            data-placement="bottom"
