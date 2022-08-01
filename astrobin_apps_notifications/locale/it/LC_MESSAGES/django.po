@@ -2,34 +2,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Notifications\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 16:16+0200\n"
-"PO-Revision-Date: 2022-06-25 21:55+0200\n"
+"POT-Creation-Date: 2022-08-01 08:56+0000\n"
+"PO-Revision-Date: 2022-07-30 11:52+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Italian\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108445\n"
-"X-Loco-Api-Version: 1.0.26 20220622-1"
-
-msgid "Notifications"
-msgstr "Notifiche"
-
-msgid "You have no notifications."
-msgstr "Non hai notifiche."
-
-msgid "Settings"
-msgstr "Impostazioni"
-
-msgid "Mark all as read"
-msgstr "Segna tutte come già lette"
-
-msgid "You have no new notifications."
-msgstr "Non hai nuove notifiche."
+"X-Loco-Api-Version: 1.0.26 20220711-1\n"
 
 msgid "You have a new follower"
 msgstr "Hai un nuovo follower"
@@ -46,11 +31,29 @@ msgstr "La tua immagine è stata risolta astrometricamente"
 msgid "Your image could not be plate-solved"
 msgstr "Non è stato possibile risolvere astrometricamente la tua immagine"
 
+msgid "Your image was plate-solved (advanced)"
+msgstr "La tua immagine è stata risolta (avanzata)"
+
+msgid "Your image could not be plate-solved (advanced)"
+msgstr "La tua immagine non è stata risolta (avanzata) "
+
 msgid "Your image received a new comment"
 msgstr "La tua immagine ha ricevuto un nuovo commento"
 
+msgid "Your edit proposal received a new comment"
+msgstr "La tua proposta di modifica ha ricevuto un nuovo commento"
+
+msgid "Your scheduled IOTD received a new comment"
+msgstr "La IOTD che hai programmato ha ricevuto un commento"
+
+msgid "Your unapproved equipment item received a comment"
+msgstr "Il tuo oggetto di strumentazione non approvato ha ricevuto un commento"
+
 msgid "There was a reply to your comment"
 msgstr "C'è stata una risposta ad un tuo commento"
+
+msgid "A new comment on your image requires moderation"
+msgstr "Un nuovo commento alla tua immagine richiede la tua moderazione"
 
 msgid "Your comment was approved"
 msgstr "Il tuo commento è stato approvato"
@@ -66,6 +69,9 @@ msgstr "A qualcuno è piaciuta la tua immagine"
 
 msgid "Your forum post was liked"
 msgstr "A qualcuno è piaciuto il tuo messaggio sul forum"
+
+msgid "Your forum post was approved"
+msgstr "Il tuo post sul forum è stato approvato"
 
 msgid "Your API Key request has been approved"
 msgstr "La tua richiesta di una API Key è stata approvata"
@@ -91,6 +97,9 @@ msgstr "Un utente che segui ha creato un nuovo gruppo di dati pubblici"
 msgid "New forum topic in a group you are a member of"
 msgstr "Nuovo argomento nel forum di un gruppo di cui sei membro"
 
+msgid "New forum topic for an equipment item you use"
+msgstr ""
+
 msgid "You have received a new private message"
 msgstr "Hai ricevuto un nuovo messaggio privato"
 
@@ -115,6 +124,9 @@ msgstr "Hai immagini a cui manca la \"origine dei dati remoti\""
 msgid "Would you like to activate your account?"
 msgstr "Vorresti attivare il tuo account?"
 
+msgid "New reply in a subscribed forum topic"
+msgstr "Nuova risposta ad un topic del forum a cui sei abbonato"
+
 msgid "You were mentioned in a forum post"
 msgstr "Sei stato menzionato su un messaggio sul forum"
 
@@ -126,6 +138,9 @@ msgstr "Benvenuto/a su AstroBin!"
 
 msgid "Congratulations for your first image on AstroBin!"
 msgstr "Congratulazioni per la tua prima immagine su AstroBin!"
+
+msgid "Your image was submitted for IOTD/TP consideration"
+msgstr "La tua immagine verrà considerata nella selezione IOTD/TP"
 
 msgid "Thank you for getting a subscription!"
 msgstr "Grazie per aver comprato un abbonamento!"
@@ -145,9 +160,6 @@ msgstr "Un'immagine per cui hai votato è diventata Top Pick"
 msgid "An image you promoted made it to IOTD"
 msgstr "Un'immagine per cui hai votato è diventata Foto del Giorno"
 
-msgid "New reply in a subscribed forum topic"
-msgstr "Nuova risposta ad un topic del forum a cui sei abbonato"
-
 msgid "Your image was nominated to be a Top Pick"
 msgstr "La tua immagine è stata nominata come Top Pick"
 
@@ -157,32 +169,23 @@ msgstr "La tua immagine è stata votata come Top Pick"
 msgid "Your image was voted Image of the Day"
 msgstr "La tua immagine è stata votata come Foto del Giorno"
 
-msgid "Your image was plate-solved (advanced)"
-msgstr "La tua immagine è stata risolta (avanzata)"
-
-msgid "Your image could not be plate-solved (advanced)"
-msgstr "La tua immagine non è stata risolta (avanzata) "
-
-msgid "A new comment on your image requires moderation"
-msgstr "Un nuovo commento alla tua immagine richiede la tua moderazione"
-
-msgid "Your forum post was approved"
-msgstr "Il tuo post sul forum è stato approvato"
-
 msgid "You were mentioned in an image description"
 msgstr "Sei stato menzionato in una descrizione d'immagine"
-
-msgid "Your edit proposal received a new comment"
-msgstr "La tua proposta di modifica ha ricevuto un nuovo commento"
-
-msgid "Your image was submitted for IOTD/TP consideration"
-msgstr "La tua immagine verrà considerata nella selezione IOTD/TP"
 
 msgid "A gear item that you used was renamed"
 msgstr "Un elemento di strumentazione che tu hai usato è stato rinominato"
 
-msgid "Your scheduled IOTD received a new comment"
-msgstr "La IOTD che hai programmato ha ricevuto un commento"
+#~ msgid "Notifications"
+#~ msgstr "Notifiche"
 
-msgid "Your unapproved equipment item received a comment"
-msgstr "Il tuo oggetto di strumentazione non approvato ha ricevuto un commento"
+#~ msgid "You have no notifications."
+#~ msgstr "Non hai notifiche."
+
+#~ msgid "Settings"
+#~ msgstr "Impostazioni"
+
+#~ msgid "Mark all as read"
+#~ msgstr "Segna tutte come già lette"
+
+#~ msgid "You have no new notifications."
+#~ msgstr "Non hai nuove notifiche."

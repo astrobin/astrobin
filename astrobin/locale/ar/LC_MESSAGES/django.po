@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-25 19:45+0000\n"
+"POT-Creation-Date: 2022-08-01 08:56+0000\n"
 "PO-Revision-Date: 2014-02-05 12:48+0000\n"
 "Last-Translator: Omar <thekingosm168@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3228,9 +3228,6 @@ msgstr "استعراض"
 msgid "Advanced search"
 msgstr "بحث متقدّم"
 
-msgid "(beta)"
-msgstr ""
-
 msgid "Constellations"
 msgstr ""
 
@@ -3244,6 +3241,9 @@ msgid "Remote astrophotography"
 msgstr ""
 
 msgid "Contributors list"
+msgstr ""
+
+msgid "(beta)"
 msgstr ""
 
 msgid "Help"
@@ -3533,6 +3533,9 @@ msgstr[5] ""
 msgid "Resolution"
 msgstr "الدقة"
 
+msgid "File size"
+msgstr ""
+
 msgid "Uncompressed source file"
 msgstr ""
 
@@ -3542,25 +3545,15 @@ msgstr ""
 msgid "Remote source"
 msgstr ""
 
-msgid "Sponsored brands"
-msgstr ""
-
-#, python-format
-msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
-msgstr ""
-
-msgid "Sponsored items"
-msgstr ""
-
-msgid "Disable retailer integration"
-msgstr ""
-
 #, python-format
 msgid "Shop %(name)s at %(retailer)s"
 msgstr ""
 
 #, python-format
 msgid "Shop %(name)s at AstroBin's partners"
+msgstr ""
+
+msgid "This item is unapproved and it might require your attention."
 msgstr ""
 
 msgid "Revision title"
@@ -5289,18 +5282,45 @@ msgstr ""
 
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> posted a new topic to the group <a "
-"href=\"%(group_url)s\">%(group_name)s</a>."
+"<a href=\"%(user_url)s\">%(user)s</a> posted a new topic in the forum for "
+"equipment item <a href=\"%(item_url)s\">%(item)s</a> that you have used."
 msgstr ""
 
 msgid "View topic"
 msgstr ""
 
 #, python-format
-msgid "%(user)s posted a new topic to the following group: %(group_name)s."
+msgid ""
+"%(user)s posted a new topic in the forum for equipment item \"%(item)s\" "
+"that you have used"
 msgstr ""
 
 msgid "View the topic"
+msgstr ""
+
+msgid "View the equipment item"
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> posted a new topic in the forum for equipment item "
+"<strong>%(item)s</strong> that you have used: <em>%(topic_name)s</em>"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user)s posted a new topic in the forum for equipment item \"%(item)s\" "
+"that you have used: \"%(topic_name)s\""
+msgstr ""
+
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> posted a new topic to the group <a "
+"href=\"%(group_url)s\">%(group_name)s</a>."
+msgstr ""
+
+#, python-format
+msgid "%(user)s posted a new topic to the following group: %(group_name)s."
 msgstr ""
 
 msgid "View the group"
@@ -5457,6 +5477,13 @@ msgid ""
 "Please support AstroBin by shopping for this item at one of our partners!"
 msgstr ""
 
+msgid "Disable retailer integration"
+msgstr ""
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr ""
+
 #, python-format
 msgid ""
 "Please support AstroBin by shopping <strong>%(brand)s</strong> at one of our "
@@ -5474,6 +5501,25 @@ msgstr "الميل"
 
 msgid "Member since"
 msgstr "عضو منذ"
+
+msgid "Every equipment item on AstroBin has a forum associated with it."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you want to post a new topic about a specific equipment item, we "
+"recommend finding it in the %(_0)sequipment database%(_1)s and posting in "
+"its dedicated forum."
+msgstr ""
+
+msgid ""
+"This will maximize your chances of getting relevant replies because all "
+"active AstroBin users who have used that specific equipment item will be "
+"notified of your post, unless they opted out of that particular notification."
+msgstr ""
+
+msgid "Learn more about the AstroBin equipment database!"
+msgstr ""
 
 msgid "Search all forums"
 msgstr ""
@@ -5530,7 +5576,26 @@ msgstr ""
 msgid "I understand"
 msgstr ""
 
+msgid "Ignore"
+msgstr ""
+
+msgid "Browse equipment"
+msgstr ""
+
 msgid "Back to group"
+msgstr ""
+
+msgid "Back to equipment item"
+msgstr ""
+
+msgid ""
+"Anybody who used an equipment item is notified of new topics in its forum, "
+"unless they opt out."
+msgstr ""
+
+msgid ""
+"Below, you can see a list of equipment item forums that have at least one "
+"discussion topic."
 msgstr ""
 
 msgid "Hidden"
@@ -5549,6 +5614,13 @@ msgid "Posts"
 msgstr ""
 
 msgid "Last posts"
+msgstr ""
+
+#, python-format
+msgid ""
+"Every AstroBin group has a forum associated with it. Group members are "
+"notified of new topics unless they opt out. %(_0)sLearn more about AstroBin "
+"Groups!%(_1)s"
 msgstr ""
 
 msgid "Forum categories are not created"
@@ -6088,9 +6160,6 @@ msgstr ""
 msgid "Status"
 msgstr "الحالة"
 
-msgid "File size"
-msgstr ""
-
 msgid "Quota exceeded"
 msgstr ""
 
@@ -6110,52 +6179,8 @@ msgstr ""
 msgid "Edit your astrophotography gear"
 msgstr "تعديل أجهزتك للتصوير الفلكي"
 
-msgid "AstroBin is rebuilding its equipment database!"
+msgid "Telescopes or lenses"
 msgstr ""
-
-msgid ""
-"This page is no longer necessary, as you can add new equipment items "
-"directly during the image upload or editing process."
-msgstr ""
-
-msgid ""
-"You are seeing this message because you have images on AstroBin associated "
-"with equipment items in the legacy database."
-msgstr ""
-
-msgid ""
-"Please migrate your equipment on AstroBin to the new database, as this helps "
-"consolidate the data and improve the search engine results."
-msgstr ""
-
-msgid "Edit gear item"
-msgstr "تعديل الجهاز"
-
-msgid "Please note!"
-msgstr "لاحظ من فضلك!"
-
-msgid ""
-"When you add or edit the make, the name, and the properties of this product, "
-"the data is global and shared between all AstroBin users. Do not write any "
-"information in there that refers to your personal copy of this product, like "
-"\"modded\", \"sold\", \"broken\", \"a present from my aunt\" and so on. "
-msgstr ""
-"عند إضافة أو تعديل اسم المُصَنّع أو الطراز أو خصائص المُنتَج ، تكون البيانات عامة "
-"و يتشاركها جميع مستخدمي AstroBin. لا تكتب أي معلومات خاصة بنسختك الشخصية من "
-"هذا المُنتَج. مثل \"معدلة\" أو \" تم بيعها\" أو \"تحطمت\" أو \"هدية من عمتي\" "
-"إلخ. "
-
-msgid ""
-"The following information, instead, is personal, and may refer to your copy "
-"of this product."
-msgstr ""
-"علي العكس ، المعلومات التالية شخصية و يمكن أن تشير إلي نسختك من هذا المُنتج."
-
-msgid "Add gear item"
-msgstr "إضافة جهاز"
-
-msgid "Form saved. Thank you!"
-msgstr "تم حفظ الاستمارة. شكرا لك!"
 
 msgid "Set your default image license"
 msgstr "ضبط الرخصة الافتراضية لصورك"
@@ -6451,6 +6476,15 @@ msgstr "نوع التلسكوب"
 msgid "Integration time (hours)"
 msgstr ""
 
+msgid "Width (pixels)"
+msgstr ""
+
+msgid "Height (pixels)"
+msgstr ""
+
+msgid "Size (MB)"
+msgstr ""
+
 msgid ""
 "However, you can still perform a similar search using the free text search "
 "terms field."
@@ -6561,6 +6595,9 @@ msgid "decreasing"
 msgstr ""
 
 msgid "increasing"
+msgstr ""
+
+msgid "Pixel count"
 msgstr ""
 
 msgid ""
@@ -6688,6 +6725,9 @@ msgstr ""
 msgid "Fill in one session, before adding more."
 msgstr "املأ بيانات جلسة واحدة قبل إضافة أخرى."
 
+msgid "Form saved. Thank you!"
+msgstr "تم حفظ الاستمارة. شكرا لك!"
+
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
 "count to 256 in order to work with it."
@@ -6770,6 +6810,34 @@ msgstr ""
 
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr ""
+
+#~ msgid "Edit gear item"
+#~ msgstr "تعديل الجهاز"
+
+#~ msgid "Please note!"
+#~ msgstr "لاحظ من فضلك!"
+
+#~ msgid ""
+#~ "When you add or edit the make, the name, and the properties of this "
+#~ "product, the data is global and shared between all AstroBin users. Do not "
+#~ "write any information in there that refers to your personal copy of this "
+#~ "product, like \"modded\", \"sold\", \"broken\", \"a present from my aunt"
+#~ "\" and so on. "
+#~ msgstr ""
+#~ "عند إضافة أو تعديل اسم المُصَنّع أو الطراز أو خصائص المُنتَج ، تكون البيانات "
+#~ "عامة و يتشاركها جميع مستخدمي AstroBin. لا تكتب أي معلومات خاصة بنسختك "
+#~ "الشخصية من هذا المُنتَج. مثل \"معدلة\" أو \" تم بيعها\" أو \"تحطمت\" أو "
+#~ "\"هدية من عمتي\" إلخ. "
+
+#~ msgid ""
+#~ "The following information, instead, is personal, and may refer to your "
+#~ "copy of this product."
+#~ msgstr ""
+#~ "علي العكس ، المعلومات التالية شخصية و يمكن أن تشير إلي نسختك من هذا "
+#~ "المُنتج."
+
+#~ msgid "Add gear item"
+#~ msgstr "إضافة جهاز"
 
 #~ msgid "The Big Wall"
 #~ msgstr "الحائط الكبير"

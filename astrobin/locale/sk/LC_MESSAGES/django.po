@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin 1.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-25 19:45+0000\n"
+"POT-Creation-Date: 2022-08-01 08:56+0000\n"
 "PO-Revision-Date: 2020-09-25 11:30+0000\n"
 "Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3233,9 +3233,6 @@ msgstr "Preskúmať"
 msgid "Advanced search"
 msgstr ""
 
-msgid "(beta)"
-msgstr ""
-
 msgid "Constellations"
 msgstr ""
 
@@ -3249,6 +3246,9 @@ msgid "Remote astrophotography"
 msgstr ""
 
 msgid "Contributors list"
+msgstr ""
+
+msgid "(beta)"
 msgstr ""
 
 msgid "Help"
@@ -3535,6 +3535,9 @@ msgstr[2] ""
 msgid "Resolution"
 msgstr "Rozlíšenie"
 
+msgid "File size"
+msgstr ""
+
 msgid "Uncompressed source file"
 msgstr ""
 
@@ -3544,25 +3547,15 @@ msgstr ""
 msgid "Remote source"
 msgstr ""
 
-msgid "Sponsored brands"
-msgstr ""
-
-#, python-format
-msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
-msgstr ""
-
-msgid "Sponsored items"
-msgstr ""
-
-msgid "Disable retailer integration"
-msgstr ""
-
 #, python-format
 msgid "Shop %(name)s at %(retailer)s"
 msgstr ""
 
 #, python-format
 msgid "Shop %(name)s at AstroBin's partners"
+msgstr ""
+
+msgid "This item is unapproved and it might require your attention."
 msgstr ""
 
 msgid "Revision title"
@@ -5265,18 +5258,45 @@ msgstr ""
 
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> posted a new topic to the group <a "
-"href=\"%(group_url)s\">%(group_name)s</a>."
+"<a href=\"%(user_url)s\">%(user)s</a> posted a new topic in the forum for "
+"equipment item <a href=\"%(item_url)s\">%(item)s</a> that you have used."
 msgstr ""
 
 msgid "View topic"
 msgstr ""
 
 #, python-format
-msgid "%(user)s posted a new topic to the following group: %(group_name)s."
+msgid ""
+"%(user)s posted a new topic in the forum for equipment item \"%(item)s\" "
+"that you have used"
 msgstr ""
 
 msgid "View the topic"
+msgstr ""
+
+msgid "View the equipment item"
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> posted a new topic in the forum for equipment item "
+"<strong>%(item)s</strong> that you have used: <em>%(topic_name)s</em>"
+msgstr ""
+
+#, python-format
+msgid ""
+"%(user)s posted a new topic in the forum for equipment item \"%(item)s\" "
+"that you have used: \"%(topic_name)s\""
+msgstr ""
+
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user)s</a> posted a new topic to the group <a "
+"href=\"%(group_url)s\">%(group_name)s</a>."
+msgstr ""
+
+#, python-format
+msgid "%(user)s posted a new topic to the following group: %(group_name)s."
 msgstr ""
 
 msgid "View the group"
@@ -5433,6 +5453,13 @@ msgid ""
 "Please support AstroBin by shopping for this item at one of our partners!"
 msgstr ""
 
+msgid "Disable retailer integration"
+msgstr ""
+
+#, python-format
+msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
+msgstr ""
+
 #, python-format
 msgid ""
 "Please support AstroBin by shopping <strong>%(brand)s</strong> at one of our "
@@ -5450,6 +5477,25 @@ msgstr ""
 
 msgid "Member since"
 msgstr "Členom od"
+
+msgid "Every equipment item on AstroBin has a forum associated with it."
+msgstr ""
+
+#, python-format
+msgid ""
+"If you want to post a new topic about a specific equipment item, we "
+"recommend finding it in the %(_0)sequipment database%(_1)s and posting in "
+"its dedicated forum."
+msgstr ""
+
+msgid ""
+"This will maximize your chances of getting relevant replies because all "
+"active AstroBin users who have used that specific equipment item will be "
+"notified of your post, unless they opted out of that particular notification."
+msgstr ""
+
+msgid "Learn more about the AstroBin equipment database!"
+msgstr ""
 
 msgid "Search all forums"
 msgstr ""
@@ -5506,7 +5552,26 @@ msgstr ""
 msgid "I understand"
 msgstr ""
 
+msgid "Ignore"
+msgstr ""
+
+msgid "Browse equipment"
+msgstr ""
+
 msgid "Back to group"
+msgstr ""
+
+msgid "Back to equipment item"
+msgstr ""
+
+msgid ""
+"Anybody who used an equipment item is notified of new topics in its forum, "
+"unless they opt out."
+msgstr ""
+
+msgid ""
+"Below, you can see a list of equipment item forums that have at least one "
+"discussion topic."
 msgstr ""
 
 msgid "Hidden"
@@ -5525,6 +5590,13 @@ msgid "Posts"
 msgstr ""
 
 msgid "Last posts"
+msgstr ""
+
+#, python-format
+msgid ""
+"Every AstroBin group has a forum associated with it. Group members are "
+"notified of new topics unless they opt out. %(_0)sLearn more about AstroBin "
+"Groups!%(_1)s"
 msgstr ""
 
 msgid "Forum categories are not created"
@@ -6054,9 +6126,6 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-msgid "File size"
-msgstr ""
-
 msgid "Quota exceeded"
 msgstr ""
 
@@ -6076,47 +6145,8 @@ msgstr ""
 msgid "Edit your astrophotography gear"
 msgstr ""
 
-msgid "AstroBin is rebuilding its equipment database!"
+msgid "Telescopes or lenses"
 msgstr ""
-
-msgid ""
-"This page is no longer necessary, as you can add new equipment items "
-"directly during the image upload or editing process."
-msgstr ""
-
-msgid ""
-"You are seeing this message because you have images on AstroBin associated "
-"with equipment items in the legacy database."
-msgstr ""
-
-msgid ""
-"Please migrate your equipment on AstroBin to the new database, as this helps "
-"consolidate the data and improve the search engine results."
-msgstr ""
-
-msgid "Edit gear item"
-msgstr ""
-
-msgid "Please note!"
-msgstr ""
-
-msgid ""
-"When you add or edit the make, the name, and the properties of this product, "
-"the data is global and shared between all AstroBin users. Do not write any "
-"information in there that refers to your personal copy of this product, like "
-"\"modded\", \"sold\", \"broken\", \"a present from my aunt\" and so on. "
-msgstr ""
-
-msgid ""
-"The following information, instead, is personal, and may refer to your copy "
-"of this product."
-msgstr ""
-
-msgid "Add gear item"
-msgstr ""
-
-msgid "Form saved. Thank you!"
-msgstr "Formulár bol uložený. Ďakujeme!"
 
 msgid "Set your default image license"
 msgstr ""
@@ -6405,6 +6435,15 @@ msgstr "Typ ďalekohľadu"
 msgid "Integration time (hours)"
 msgstr ""
 
+msgid "Width (pixels)"
+msgstr ""
+
+msgid "Height (pixels)"
+msgstr ""
+
+msgid "Size (MB)"
+msgstr ""
+
 msgid ""
 "However, you can still perform a similar search using the free text search "
 "terms field."
@@ -6515,6 +6554,9 @@ msgid "decreasing"
 msgstr ""
 
 msgid "increasing"
+msgstr ""
+
+msgid "Pixel count"
 msgstr ""
 
 msgid ""
@@ -6642,6 +6684,9 @@ msgstr ""
 
 msgid "Fill in one session, before adding more."
 msgstr "Vyplňte jednu ???, pred pridaním ďalšej."
+
+msgid "Form saved. Thank you!"
+msgstr "Formulár bol uložený. Ďakujeme!"
 
 msgid ""
 "You uploaded an Indexed PNG file. AstroBin will need to lower the color "
