@@ -1,171 +1,64 @@
 # -*- coding: UTF-8
 
-from django.urls import reverse
 from django.test import TestCase, override_settings
-from mock import patch
 
+from astrobin.models import UserProfile
 from astrobin.tests.generators import Generators
-from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
+from astrobin_apps_premium.services.premium_service import PremiumService
 
 
+@override_settings(ADS_ENABLED=True)
 class ImageRetailerAffiliatesWhenOwnerIsUltimate2020AndAllowsTest(TestCase):
-    def setUp(self):
-        self.image = Generators.image()
-        Generators.premium_subscription(self.image.user, "AstroBin Ultimate 2020+")
+    def setUp(self) -> None:
+        owner = Generators.user()
+        self.owner_us = Generators.premium_subscription(owner, "AstroBin Ultimate 2020+")
 
-        telescope = Generators.telescope()
-        equipment_brand_listing = EquipmentGenerators.equipment_brand_listing()
-        telescope.equipment_brand_listings.add(equipment_brand_listing)
-
-        self.image.user.userprofile.telescopes.add(telescope)
-        self.image.imaging_telescopes.add(telescope)
-
-    @override_settings(ADS_ENABLED=True)
-
-    def test_anon(self):
-        response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
-        self.assertContains(response, "dropdown retailer-affiliate-products-lite")
-        self.assertNotContains(response, "retailer-affiliate-cart-link")
-
-    @override_settings(ADS_ENABLED=True)
-
-    def test_free(self):
-        user = Generators.user()
-        self.client.login(username=user.username, password="password")
-
-        response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
-        self.assertContains(response, "dropdown retailer-affiliate-products-lite")
-        self.assertNotContains(response, "retailer-affiliate-cart-link")
-
-        user.userprofile.allow_retailer_integration = False
-        user.userprofile.save()
-
-        response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
-        self.assertContains(response, "dropdown retailer-affiliate-products-lite")
-        self.assertNotContains(response, "retailer-affiliate-cart-link")
-
-    @override_settings(ADS_ENABLED=True)
+    def test_anon_and_free(self):
+        self.assertTrue(PremiumService.allow_full_retailer_integration(None, self.owner_us))
 
     def test_lite_2020(self):
         user = Generators.user()
-        self.client.login(username=user.username, password="password")
-        Generators.premium_subscription(user, "AstroBin Lite 2020+")
+        us = Generators.premium_subscription(user, "AstroBin Lite 2020+")
 
-        response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
-        self.assertContains(response, "dropdown retailer-affiliate-products-lite")
-        self.assertNotContains(response, "retailer-affiliate-cart-link")
-
-        user.userprofile.allow_retailer_integration = False
-        user.userprofile.save()
-
-        response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
-        self.assertContains(response, "dropdown retailer-affiliate-products-lite")
-        self.assertNotContains(response, "retailer-affiliate-cart-link")
-
-    @override_settings(ADS_ENABLED=True)
+        self.assertTrue(PremiumService.allow_full_retailer_integration(us, self.owner_us))
 
     def test_lite(self):
         user = Generators.user()
-        self.client.login(username=user.username, password="password")
-        Generators.premium_subscription(user, "AstroBin Lite")
+        us = Generators.premium_subscription(user, "AstroBin Lite")
 
-        response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
-        self.assertContains(response, "dropdown retailer-affiliate-products-lite")
-        self.assertNotContains(response, "retailer-affiliate-cart-link")
-
-        user.userprofile.allow_retailer_integration = False
-        user.userprofile.save()
-
-        response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
-        self.assertNotContains(response, "dropdown retailer-affiliate-products-lite")
-        self.assertNotContains(response, "retailer-affiliate-cart-link")
-
-    @override_settings(ADS_ENABLED=True)
+        self.assertTrue(PremiumService.allow_full_retailer_integration(us, self.owner_us))
 
     def test_lite_autorenew(self):
         user = Generators.user()
-        self.client.login(username=user.username, password="password")
-        Generators.premium_subscription(user, "AstroBin Lite (autorenew)")
+        us = Generators.premium_subscription(user, "AstroBin Lite (autorenew)")
 
-        response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
-        self.assertContains(response, "dropdown retailer-affiliate-products-lite")
-        self.assertNotContains(response, "retailer-affiliate-cart-link")
-
-        user.userprofile.allow_retailer_integration = False
-        user.userprofile.save()
-
-        response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
-        self.assertNotContains(response, "dropdown retailer-affiliate-products-lite")
-        self.assertNotContains(response, "retailer-affiliate-cart-link")
-
-    @override_settings(ADS_ENABLED=True)
+        self.assertTrue(PremiumService.allow_full_retailer_integration(us, self.owner_us))
 
     def test_premium_2020(self):
         user = Generators.user()
-        self.client.login(username=user.username, password="password")
-        Generators.premium_subscription(user, "AstroBin Premium 2020+")
+        us = Generators.premium_subscription(user, "AstroBin Premium 2020+")
 
-        response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
-        self.assertContains(response, "dropdown retailer-affiliate-products-lite")
-        self.assertNotContains(response, "retailer-affiliate-cart-link")
-
-        user.userprofile.allow_retailer_integration = False
-        user.userprofile.save()
-
-        response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
-        self.assertNotContains(response, "dropdown retailer-affiliate-products-lite")
-        self.assertNotContains(response, "retailer-affiliate-cart-link")
-
-    @override_settings(ADS_ENABLED=True)
+        self.assertTrue(PremiumService.allow_full_retailer_integration(us, self.owner_us))
 
     def test_premium(self):
         user = Generators.user()
-        self.client.login(username=user.username, password="password")
-        Generators.premium_subscription(user, "AstroBin Premium")
+        us = Generators.premium_subscription(user, "AstroBin Premium")
 
-        response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
-        self.assertContains(response, "dropdown retailer-affiliate-products-lite")
-        self.assertNotContains(response, "retailer-affiliate-cart-link")
-
-        user.userprofile.allow_retailer_integration = False
-        user.userprofile.save()
-
-        response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
-        self.assertNotContains(response, "dropdown retailer-affiliate-products-lite")
-        self.assertNotContains(response, "retailer-affiliate-cart-link")
-
-    @override_settings(ADS_ENABLED=True)
+        self.assertTrue(PremiumService.allow_full_retailer_integration(us, self.owner_us))
 
     def test_premium_autorenew(self):
         user = Generators.user()
-        self.client.login(username=user.username, password="password")
-        Generators.premium_subscription(user, "AstroBin Premium (autorenew)")
+        us = Generators.premium_subscription(user, "AstroBin Premium (autorenew)")
 
-        response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
-        self.assertContains(response, "dropdown retailer-affiliate-products-lite")
-        self.assertNotContains(response, "retailer-affiliate-cart-link")
-
-        user.userprofile.allow_retailer_integration = False
-        user.userprofile.save()
-
-        response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
-        self.assertNotContains(response, "dropdown retailer-affiliate-products-lite")
-        self.assertNotContains(response, "retailer-affiliate-cart-link")
-
-    @override_settings(ADS_ENABLED=True)
+        self.assertTrue(PremiumService.allow_full_retailer_integration(us, self.owner_us))
 
     def test_ultimate_2020(self):
         user = Generators.user()
-        self.client.login(username=user.username, password="password")
-        Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
+        us = Generators.premium_subscription(user, "AstroBin Ultimate 2020+")
 
-        response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
-        self.assertContains(response, "dropdown retailer-affiliate-products-lite")
-        self.assertNotContains(response, "retailer-affiliate-cart-link")
+        self.assertTrue(PremiumService.allow_full_retailer_integration(us, self.owner_us))
 
-        user.userprofile.allow_retailer_integration = False
-        user.userprofile.save()
+        UserProfile.objects.filter(user=user).update(allow_retailer_integration=False)
+        us.refresh_from_db()
 
-        response = self.client.get(reverse('image_detail', kwargs={'id': self.image.get_id()}))
-        self.assertNotContains(response, "dropdown retailer-affiliate-products-lite")
-        self.assertNotContains(response, "retailer-affiliate-cart-link")
+        self.assertFalse(PremiumService.allow_full_retailer_integration(us, self.owner_us))
