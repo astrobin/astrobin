@@ -163,14 +163,4 @@
             {% endif %}
         {% endif %}
     {% endwith %}
-
-    <div class="actions">
-        {% if is_authenticated %}
-            {% add_remove_toggleproperty "follow" gear request.user %}
-        {% endif %}
-
-        <a class="btn btn-primary" href="/search/?q={% gear_name_iriencoded gear %}">
-            {% trans "Find images" %}
-        </a>
-    </div>
 </div>
