@@ -29,13 +29,13 @@
     <meta property="og:type" content="object" />
 {% endblock %}
 
-{% block title %}{{image.title|strip_html}} ({% astrobin_username image.user link=False %}){% endblock %}
+{% block title %}{{image.title|escape}} ({% astrobin_username image.user link=False %}){% endblock %}
 {% block container_extra_classes %}has-subnav{% endblock %}
 
 {% block breadcrumbs %}
     {{ block.super }}
     {% breadcrumb 'Image' None %}
-    {% breadcrumb image.title|strip_html|default:_("(no title)") None %}
+    {% breadcrumb image.title|default:_("(no title)") None %}
 {% endblock %}
 
 {% block extra_alerts %}
