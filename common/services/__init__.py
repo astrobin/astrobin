@@ -1,2 +1,3 @@
 from .app_redirection_service import AppRedirectionService
 from .datetime_service import DateTimeService
+from .search_index_update_service import SearchIndexUpdateService

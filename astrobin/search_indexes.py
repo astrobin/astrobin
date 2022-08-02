@@ -8,7 +8,7 @@ from django.core.cache import cache
 from django.db.models.functions import Length
 from haystack.constants import Indexable
 from haystack.fields import BooleanField, CharField, DateTimeField, FloatField, IntegerField, MultiValueField
-from haystack.indexes import SearchIndex
+from celery_haystack.indexes import CelerySearchIndex
 from hitcount.models import HitCount
 from pybb.models import Post, Topic
 
@@ -296,7 +296,7 @@ def _prepare_comments(obj):
     return result
 
 
-class UserIndex(SearchIndex, Indexable):
+class UserIndex(CelerySearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
 
     username = CharField(model_attr='username')
@@ -525,7 +525,7 @@ class UserIndex(SearchIndex, Indexable):
         return IotdService().get_iotds().filter(image__user=obj).count()
 
 
-class ImageIndex(SearchIndex, Indexable):
+class ImageIndex(CelerySearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
 
     object_id = CharField(model_attr='id')
@@ -884,7 +884,7 @@ class ImageIndex(SearchIndex, Indexable):
         return obj.thumbnail('gallery', 'final', sync=True)
 
 
-class NestedCommentIndex(SearchIndex, Indexable):
+class NestedCommentIndex(CelerySearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
     created = DateTimeField(model_attr='created')
     updated = DateTimeField(model_attr='updated')
@@ -899,7 +899,7 @@ class NestedCommentIndex(SearchIndex, Indexable):
         return "updated"
 
 
-class ForumTopicIndex(SearchIndex, Indexable):
+class ForumTopicIndex(CelerySearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
     created = DateTimeField(model_attr='created')
     updated = DateTimeField(model_attr='updated', null=True)
@@ -918,7 +918,7 @@ class ForumTopicIndex(SearchIndex, Indexable):
         return "updated"
 
 
-class ForumPostIndex(SearchIndex, Indexable):
+class ForumPostIndex(CelerySearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
     created = DateTimeField(model_attr='created')
     updated = DateTimeField(model_attr='updated', null=True)

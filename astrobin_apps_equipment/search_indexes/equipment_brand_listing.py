@@ -1,11 +1,11 @@
 from haystack import fields
 from haystack.constants import Indexable
-from haystack.indexes import SearchIndex
+from celery_haystack.indexes import CelerySearchIndex
 
 from astrobin_apps_equipment.models.equipment_brand_listing import EquipmentBrandListing
 
 
-class EquipmentBrandListingIndex(SearchIndex, Indexable):
+class EquipmentBrandListingIndex(CelerySearchIndex, Indexable):
     text = fields.CharField(document=True, use_template=True)
     countries = fields.CharField(model_attr="retailer__countries", null=True)
 

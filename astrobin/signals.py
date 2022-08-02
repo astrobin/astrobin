@@ -6,6 +6,7 @@ from typing import List, Set
 
 from annoying.functions import get_object_or_None
 from dateutil.relativedelta import relativedelta
+from django.apps import apps
 from django.conf import settings
 from django.contrib.auth.models import Group as DjangoGroup, User
 from django.contrib.contenttypes.models import ContentType
@@ -13,7 +14,7 @@ from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import MultipleObjectsReturned
 from django.db import IntegrityError, transaction
-from django.db.models import Manager, Q
+from django.db.models import Q
 from django.db.models.signals import (m2m_changed, post_delete, post_save, pre_save)
 from django.urls import reverse as reverse_url
 from django.utils import timezone
@@ -53,6 +54,7 @@ from common.models import ABUSE_REPORT_DECISION_OVERRULED, AbuseReport
 from common.services import AppRedirectionService, DateTimeService
 from common.services.mentions_service import MentionsService
 from common.services.moderation_service import ModerationService
+from common.services.search_index_update_service import SearchIndexUpdateService
 from nested_comments.models import NestedComment
 from nested_comments.services.comment_notifications_service import CommentNotificationsService
 from toggleproperties.models import ToggleProperty
@@ -812,28 +814,40 @@ m2m_changed.connect(group_images_changed, sender=Group.images.through)
 
 
 def equipment_changed(sender, instance: Image, **kwargs):
-    ModelClass: EquipmentItem = kwargs.pop('model')
+    model_class: EquipmentItem = kwargs.pop('model')
     pk_set: Set[int] = kwargs.pop('pk_set')
     action = kwargs.pop('action')
     now = timezone.now()
 
     Image.all_objects.filter(pk=instance.pk).update(updated=timezone.now())
 
+    signal_processor = apps.get_app_config('haystack').signal_processor
+
     if action == 'pre_clear':
-        if (hasattr(ModelClass, 'images_using_for_imaging')):
-            ModelClass.objects.filter(images_using_for_imaging=instance.pk).update(last_added_or_removed_from_image=now)
-            ModelClass.objects.filter(images_using_for_guiding=instance.pk).update(last_added_or_removed_from_image=now)
+        if (hasattr(model_class, 'images_using_for_imaging')):
+            items = model_class.objects.filter(
+                Q(images_using_for_imaging=instance.pk) | Q(images_using_for_guiding=instance.pk)
+            ).distinct()
         else:
-            ModelClass.objects.filter(images_using=instance.pk).update(last_added_or_removed_from_image=now)
+            items = model_class.objects.filter(images_using=instance.pk)
+
+        if items:
+            items.update(last_added_or_removed_from_image=now)
+            for item in items.iterator():
+                SearchIndexUpdateService.update_index(model_class, item)
+                if item.brand:
+                    SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
     elif action in ['post_add']:
         for pk in pk_set:
-            item = get_object_or_None(ModelClass, pk=pk)
+            item = get_object_or_None(model_class, pk=pk)
             if item is not None:
                 if hasattr(item, 'last_added_or_removed_from_image'):
-                    ModelClass.objects.filter(pk=pk).update(last_added_or_removed_from_image=now)
+                    model_class.objects.filter(pk=pk).update(last_added_or_removed_from_image=now)
                 if hasattr(item, 'brand') and item.brand is not None:
                     EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
-
+                SearchIndexUpdateService.update_index(model_class, item)
+                if item.brand:
+                    SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
 
 m2m_changed.connect(equipment_changed, sender=Image.imaging_telescopes.through)
 m2m_changed.connect(equipment_changed, sender=Image.imaging_cameras.through)

@@ -5,7 +5,7 @@ import simplejson
 from django.core.cache import cache
 from django.db.models import QuerySet
 from haystack import fields
-from haystack.indexes import SearchIndex
+from celery_haystack.indexes import CelerySearchIndex
 
 from astrobin.models import Image
 from astrobin_apps_images.api.serializers import ImageSerializer
@@ -15,7 +15,7 @@ PREPARED_FIELD_CACHE_EXPIRATION = 60
 PREPARED_IMAGES_CACHE_KEY = 'astrobin_apps_equipment_search_indexed_images_%s_%d'
 
 
-class EquipmentBaseIndex(SearchIndex):
+class EquipmentBaseIndex(CelerySearchIndex):
     text = fields.CharField(document=True, use_template=True)
 
     def image_queryset(self, obj):

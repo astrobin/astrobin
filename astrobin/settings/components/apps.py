@@ -71,6 +71,7 @@ INSTALLED_APPS += [
     'django_extensions',
     'captcha',
     'django_celery_monitor',
+    'celery_haystack',
 
     'astrobin.apps.AstroBinAppConfig',
 ]
