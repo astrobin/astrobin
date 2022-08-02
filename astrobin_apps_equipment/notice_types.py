@@ -12,4 +12,5 @@ EQUIPMENT_NOTICE_TYPES = (
     ('equipment-edit-proposal-rejected', _('Your edit proposal was rejected'), '', 2),
     ('equipment-item-migration-approved', _('Approved migration proposal of an equipment item'), '', 2),
     ('equipment-item-migration-rejected', _('Rejected migration proposal of an equipment item'), '', 2),
+    ('ambiguous-item-removed-from-presets', _('Ambiguous equipment item removed from presets'), '', 2),
 )

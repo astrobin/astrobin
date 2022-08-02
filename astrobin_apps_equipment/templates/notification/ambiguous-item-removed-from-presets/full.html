@@ -1,0 +1,38 @@
+{% load i18n %}
+
+<p>
+{% blocktrans trimmed %}
+    Equipment item <strong>{{ item }}</strong>  has been marked as ambiguous by a moderator, and removed from your
+    presets.
+{% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        This happened because "{{ item }}" is not specific enough, and unambiguous variants already exist in the
+        database.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        New images cannot be associated with this item anymore, but your past images have not been modified.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        Next time you upload an image that needs "{{ item }}", please select an unambiguous version from the database
+        instead, and then feel free to update your affected preset by saving it again.
+    {% endblocktrans %}
+</p>
+
+<p>
+    <a href="{{ item_url }}" class="btn btn-primary">{% trans "View item" %}</a>
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        Thank you for your understanding.
+    {% endblocktrans %}
+</p>

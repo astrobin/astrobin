@@ -1,0 +1,9 @@
+{% load i18n %}
+
+<a href="{{ item_url }}">
+    {% blocktrans trimmed %}
+        Equipment item <strong>{{ item }}</strong> has been marked as ambiguous by a moderator, and removed from your
+        presets.
+    {% endblocktrans %}
+</a>
+
