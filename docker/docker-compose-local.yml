@@ -4,7 +4,7 @@ version: '3'
 
 services:
   redis:
-    image: redis:6.2.6-alpine
+    image: redis:6.2.7-alpine
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
       interval: 1s
