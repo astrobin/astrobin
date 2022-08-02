@@ -151,20 +151,6 @@ def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     logger.debug('retrieve_thumbnail task is already running')
 
 
-@shared_task(time_limit=1800, acks_late=True)
-def update_index(model, age_in_minutes, batch_size):
-    start = datetime.now() - timedelta(minutes=age_in_minutes)
-    end = datetime.now()
-
-    call_command(
-        'update_index',
-        model,
-        '-b %d' % batch_size,
-        '--start=%s' % start.strftime("%Y-%m-%dT%H:%M:%S"),
-        '--end=%s' % end.strftime("%Y-%m-%dT%H:%M:%S")
-    )
-
-
 @shared_task(time_limit=60)
 def send_missing_data_source_notifications():
     call_command("send_missing_data_source_notifications")

@@ -43,10 +43,6 @@ CELERY_ROUTES = {
         'queue': 'email',
         'routing_key': 'email',
     },
-    'astrobin.tasks.update_index': {
-        'queue': 'haystack',
-        'routing_key': 'haystack',
-    },
     'djcelery_email_send_multiple': {
         'queue': 'email',
         'routing_key': 'email',
