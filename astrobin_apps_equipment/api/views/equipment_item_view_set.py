@@ -532,9 +532,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         if not item.variants.all().exists():
             return Response("You cannot freeze as ambiguous an item with no variants", HTTP_400_BAD_REQUEST)
 
-        if not item.frozen_as_ambiguous:
-            item.frozen_as_ambiguous = True
-            item.save(keep_deleted=True)
+        EquipmentItemService(item).freeze_as_ambiguous()
 
         serializer = self.serializer_class(item)
         return Response(serializer.data)

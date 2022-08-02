@@ -1,10 +1,13 @@
+import mock
 from django.test import TestCase
 from django.urls import reverse
 from rest_framework.test import APIClient
 
 from astrobin.tests.generators import Generators
+from astrobin_apps_equipment.models import EquipmentPreset
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.filter_base_model import FilterSize, FilterType
+from astrobin_apps_equipment.services import EquipmentItemService
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from common.constants import GroupName
 
@@ -19,25 +22,25 @@ class TestApiFilterViewSet(TestCase):
     def test_list_with_items(self):
         client = APIClient()
 
-        filter = EquipmentGenerators.filter(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        filter_ = EquipmentGenerators.filter(reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
 
         response = client.get(reverse('astrobin_apps_equipment:filter-list'), format='json')
         self.assertEquals(1, response.data['count'])
-        self.assertEquals(filter.name, response.data['results'][0]['name'])
+        self.assertEquals(filter_.name, response.data['results'][0]['name'])
 
     def test_deleting_not_allowed(self):
         client = APIClient()
 
-        filter = EquipmentGenerators.filter()
+        filter_ = EquipmentGenerators.filter()
 
-        response = client.delete(reverse('astrobin_apps_equipment:filter-detail', args=(filter.pk,)), format='json')
+        response = client.delete(reverse('astrobin_apps_equipment:filter-detail', args=(filter_.pk,)), format='json')
         self.assertEquals(405, response.status_code)
 
         user = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
         client.login(username=user.username, password=user.password)
         client.force_authenticate(user=user)
 
-        response = client.delete(reverse('astrobin_apps_equipment:filter-detail', args=(filter.pk,)), format='json')
+        response = client.delete(reverse('astrobin_apps_equipment:filter-detail', args=(filter_.pk,)), format='json')
         self.assertEquals(405, response.status_code)
 
     def test_post_not_allowed(self):
@@ -110,9 +113,9 @@ class TestApiFilterViewSet(TestCase):
 
     def test_find_recently_used_one_usage(self):
         user = Generators.user()
-        filter = EquipmentGenerators.filter(created_by=user)
+        filter_ = EquipmentGenerators.filter(created_by=user)
         image = Generators.image(user=user)
-        image.filters_2.add(filter)
+        image.filters_2.add(filter_)
 
         client = APIClient()
         client.force_authenticate(user=user)
@@ -123,4 +126,14 @@ class TestApiFilterViewSet(TestCase):
 
         self.assertEquals(1, len(response.data))
 
+    @mock.patch('astrobin_apps_equipment.services.equipment_item_service.push_notification')
+    def test_freeze_as_ambiguous_removes_from_presets(self, push_notification):
+        filter_ = EquipmentGenerators.filter()
+        user = Generators.user()
+        preset = EquipmentPreset.objects.create(user=user, name='Test')
+        preset.filters.add(filter_)
 
+        EquipmentItemService(filter_).freeze_as_ambiguous()
+
+        self.assertFalse(EquipmentPreset.objects.filter(filters=filter_).exists())
+        push_notification.assert_called_with([user], None, 'ambiguous-item-removed-from-presets', mock.ANY)

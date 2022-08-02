@@ -1,3 +1,4 @@
+import mock
 from django.test import TestCase
 from django.urls import reverse
 from rest_framework.test import APIClient
@@ -5,6 +6,7 @@ from rest_framework.test import APIClient
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.models.accessory_base_model import AccessoryType
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
+from astrobin_apps_equipment.services import EquipmentItemService
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from common.constants import GroupName
 
@@ -120,4 +122,17 @@ class TestApiAccessoryViewSet(TestCase):
 
         self.assertEquals(1, len(response.data))
 
+    @mock.patch('astrobin_apps_equipment.services.equipment_item_service.push_notification')
+    def test_freeze_as_ambiguous_removes_from_presets(self, push_notification):
+        from astrobin_apps_equipment.models import EquipmentPreset
+
+        accessory = EquipmentGenerators.accessory()
+        user = Generators.user()
+        preset = EquipmentPreset.objects.create(user=user, name='Test')
+        preset.accessories.add(accessory)
+
+        EquipmentItemService(accessory).freeze_as_ambiguous()
+
+        self.assertFalse(EquipmentPreset.objects.filter(accessories=accessory).exists())
+        push_notification.assert_called_with([user], None, 'ambiguous-item-removed-from-presets', mock.ANY)
 

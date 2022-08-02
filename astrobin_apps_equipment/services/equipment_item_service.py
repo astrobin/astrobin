@@ -4,9 +4,11 @@ from django.utils.translation import ugettext_lazy as _
 from rest_framework.exceptions import PermissionDenied, ValidationError
 
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
+from astrobin_apps_notifications.utils import build_notification_url, push_notification
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 from common.exceptions import Conflict
+from common.services import AppRedirectionService
 
 
 class EquipmentItemService:
@@ -67,6 +69,63 @@ class EquipmentItemService:
 
         if queryset:
             return queryset.distinct().order_by('pk')
+
+    def freeze_as_ambiguous(self):
+        from astrobin_apps_equipment.models import EquipmentPreset
+
+        if not self.item.frozen_as_ambiguous:
+            self.item.frozen_as_ambiguous = True
+            self.item.save(keep_deleted=True)
+
+            query = None
+
+            if self.item.klass == EquipmentItemKlass.CAMERA:
+                query = Q(imaging_cameras=self.item) | Q(guiding_cameras=self.item)
+            elif self.item.klass == EquipmentItemKlass.TELESCOPE:
+                query = Q(imaging_telescopes=self.item) | Q(guiding_telescopes=self.item)
+            elif self.item.klass == EquipmentItemKlass.MOUNT:
+                query = Q(mounts=self.item)
+            elif self.item.klass == EquipmentItemKlass.FILTER:
+                query = Q(filters=self.item)
+            elif self.item.klass == EquipmentItemKlass.ACCESSORY:
+                query = Q(accessories=self.item)
+            elif self.item.klass == EquipmentItemKlass.SOFTWARE:
+                query = Q(software=self.item)
+
+            if query:
+                presets = EquipmentPreset.objects.filter(query).distinct()
+                user_ids = presets.values_list('user', flat=True)
+                users = list(User.objects.filter(id__in=user_ids))
+
+                for preset in presets:
+                    if self.item.klass == EquipmentItemKlass.CAMERA:
+                        preset.imaging_cameras.remove(self.item)
+                        preset.guiding_cameras.remove(self.item)
+                    elif self.item.klass == EquipmentItemKlass.TELESCOPE:
+                        preset.imaging_telescopes.remove(self.item)
+                        preset.guiding_telescopes.remove(self.item)
+                    elif self.item.klass == EquipmentItemKlass.MOUNT:
+                        preset.mounts.remove(self.item)
+                    elif self.item.klass == EquipmentItemKlass.FILTER:
+                        preset.filters.remove(self.item)
+                    elif self.item.klass == EquipmentItemKlass.ACCESSORY:
+                        preset.accessories.remove(self.item)
+                    elif self.item.klass == EquipmentItemKlass.SOFTWARE:
+                        preset.software.remove(self.item)
+
+                push_notification(
+                    users,
+                    None,
+                    'ambiguous-item-removed-from-presets',
+                    {
+                        'item': str(self.item),
+                        'item_url': build_notification_url(
+                            AppRedirectionService.redirect(
+                                f'/equipment/explorer/{EquipmentItemService(self.item).get_type()}/{self.item.pk}'
+                            )
+                        ),
+                    }
+                )
 
     @staticmethod
     def non_moderator_queryset(user) -> Q:

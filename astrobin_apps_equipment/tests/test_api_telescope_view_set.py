@@ -9,6 +9,7 @@ from astrobin_apps_equipment.models import EquipmentBrand, Telescope
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
 from astrobin_apps_equipment.models.telescope_base_model import TelescopeType
+from astrobin_apps_equipment.services import EquipmentItemService
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from common.constants import GroupName
 
@@ -198,3 +199,17 @@ class TestApiTelescopeViewSet(TestCase):
 
         telescope2.refresh_from_db()
         self.assertEquals(topic, Topic.objects.filter(forum=telescope2.forum).first())
+
+    @mock.patch('astrobin_apps_equipment.services.equipment_item_service.push_notification')
+    def test_freeze_as_ambiguous_removes_from_presets(self, push_notification):
+        from astrobin_apps_equipment.models import EquipmentPreset
+
+        telescope = EquipmentGenerators.telescope()
+        user = Generators.user()
+        preset = EquipmentPreset.objects.create(user=user, name='Test')
+        preset.imaging_telescopes.add(telescope)
+
+        EquipmentItemService(telescope).freeze_as_ambiguous()
+
+        self.assertFalse(EquipmentPreset.objects.filter(imaging_telescopes=telescope).exists())
+        push_notification.assert_called_with([user], None, 'ambiguous-item-removed-from-presets', mock.ANY)

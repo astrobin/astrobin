@@ -1,3 +1,4 @@
+import mock
 from django.test import TestCase
 from django.urls import reverse
 from rest_framework.test import APIClient
@@ -7,6 +8,7 @@ from astrobin_apps_equipment.models import Camera
 from astrobin_apps_equipment.models.camera_base_model import CameraType
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
+from astrobin_apps_equipment.services import EquipmentItemService
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from common.constants import GroupName
 
@@ -638,7 +640,7 @@ class TestApiCameraViewSet(TestCase):
 
         self.assertEquals(403, response.status_code)
 
-    def test_freeze_as_ambiguous_as_non_morderator(self):
+    def test_freeze_as_ambiguous_as_non_moderator(self):
         camera = EquipmentGenerators.camera()
 
         client = APIClient()
@@ -652,7 +654,7 @@ class TestApiCameraViewSet(TestCase):
 
         self.assertEquals(403, response.status_code)
 
-    def test_freeze_as_ambiguous_as_morderator_when_no_variants(self):
+    def test_freeze_as_ambiguous_as_moderator_when_no_variants(self):
         camera = EquipmentGenerators.camera()
 
         client = APIClient()
@@ -668,7 +670,7 @@ class TestApiCameraViewSet(TestCase):
         camera.refresh_from_db()
         self.assertFalse(camera.frozen_as_ambiguous)
 
-    def test_freeze_as_ambiguous_as_morderator_when_variants(self):
+    def test_freeze_as_ambiguous_as_moderator_when_variants(self):
         camera = EquipmentGenerators.camera()
         EquipmentGenerators.camera(variant_of=camera)
 
@@ -685,6 +687,19 @@ class TestApiCameraViewSet(TestCase):
         camera.refresh_from_db()
         self.assertTrue(camera.frozen_as_ambiguous)
 
+    @mock.patch('astrobin_apps_equipment.services.equipment_item_service.push_notification')
+    def test_freeze_as_ambiguous_removes_from_presets(self, push_notification):
+        from astrobin_apps_equipment.models import EquipmentPreset
+
+        camera = EquipmentGenerators.camera()
+        user = Generators.user()
+        preset = EquipmentPreset.objects.create(user=user, name='Test')
+        preset.imaging_cameras.add(camera)
+
+        EquipmentItemService(camera).freeze_as_ambiguous()
+
+        self.assertFalse(EquipmentPreset.objects.filter(imaging_cameras=camera).exists())
+        push_notification.assert_called_with([user], None, 'ambiguous-item-removed-from-presets', mock.ANY)
 
     def test_unfreeze_as_ambiguous_as_anon(self):
         camera = EquipmentGenerators.camera(frozen_as_ambiguous=True)
@@ -701,7 +716,7 @@ class TestApiCameraViewSet(TestCase):
         camera.refresh_from_db()
         self.assertTrue(camera.frozen_as_ambiguous)
 
-    def test_unfreeze_as_ambiguous_as_non_morderator(self):
+    def test_unfreeze_as_ambiguous_as_non_moderator(self):
         camera = EquipmentGenerators.camera(frozen_as_ambiguous=True)
 
         client = APIClient()
@@ -717,7 +732,7 @@ class TestApiCameraViewSet(TestCase):
         camera.refresh_from_db()
         self.assertTrue(camera.frozen_as_ambiguous)
 
-    def test_unfreeze_as_ambiguous_as_morderator(self):
+    def test_unfreeze_as_ambiguous_as_moderator(self):
         camera = EquipmentGenerators.camera(frozen_as_ambiguous=True)
 
         client = APIClient()
