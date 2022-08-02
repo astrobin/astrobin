@@ -22,6 +22,7 @@ services:
       - POSTGRES_USER=astrobin
     volumes:
       - media:/media
+      - /astrobin-temporary-files:/astrobin-temporary-files
 
 
   celery_email:
