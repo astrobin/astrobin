@@ -6,6 +6,10 @@ class SearchIndexUpdateService:
     @staticmethod
     def update_index(model_class, instance):
         signal_processor = apps.get_app_config('haystack').signal_processor
+
+        if not hasattr(signal_processor, 'enqueue_save'):
+            return
+
         cache_key = f'astrobin_common_search_index_update_service_{model_class.__name__}_{instance.pk}'
 
         if cache.get(cache_key):
