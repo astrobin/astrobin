@@ -47,4 +47,12 @@ CELERY_ROUTES = {
         'queue': 'email',
         'routing_key': 'email',
     },
+    'celery_haystack.tasks.CeleryHaystackSignalHandler': {
+        'queue': 'haystack',
+        'routing_key': 'haystack',
+    },
+    'celery_haystack.tasks.CeleryHaystackUpdateIndex': {
+        'queue': 'haystack',
+        'routing_key': 'haystack',
+    },
 }
