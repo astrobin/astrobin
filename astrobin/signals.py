@@ -6,7 +6,6 @@ from typing import List, Set
 
 from annoying.functions import get_object_or_None
 from dateutil.relativedelta import relativedelta
-from django.apps import apps
 from django.conf import settings
 from django.contrib.auth.models import Group as DjangoGroup, User
 from django.contrib.contenttypes.models import ContentType
@@ -814,17 +813,15 @@ m2m_changed.connect(group_images_changed, sender=Group.images.through)
 
 
 def equipment_changed(sender, instance: Image, **kwargs):
-    model_class: EquipmentItem = kwargs.pop('model')
+    model_class = kwargs.pop('model')
     pk_set: Set[int] = kwargs.pop('pk_set')
     action = kwargs.pop('action')
     now = timezone.now()
 
     Image.all_objects.filter(pk=instance.pk).update(updated=timezone.now())
 
-    signal_processor = apps.get_app_config('haystack').signal_processor
-
     if action == 'pre_clear':
-        if (hasattr(model_class, 'images_using_for_imaging')):
+        if hasattr(model_class, 'images_using_for_imaging'):
             items = model_class.objects.filter(
                 Q(images_using_for_imaging=instance.pk) | Q(images_using_for_guiding=instance.pk)
             ).distinct()
@@ -834,8 +831,10 @@ def equipment_changed(sender, instance: Image, **kwargs):
         if items:
             items.update(last_added_or_removed_from_image=now)
             for item in items.iterator():
-                SearchIndexUpdateService.update_index(model_class, item)
-                if item.brand:
+                if hasattr(item, 'last_added_or_removed_from_image'):
+                    SearchIndexUpdateService.update_index(model_class, item)
+                if hasattr(item, 'brand') and item.brand is not None:
+                    EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
                     SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
     elif action in ['post_add']:
         for pk in pk_set:
@@ -843,10 +842,9 @@ def equipment_changed(sender, instance: Image, **kwargs):
             if item is not None:
                 if hasattr(item, 'last_added_or_removed_from_image'):
                     model_class.objects.filter(pk=pk).update(last_added_or_removed_from_image=now)
+                    SearchIndexUpdateService.update_index(model_class, item)
                 if hasattr(item, 'brand') and item.brand is not None:
                     EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
-                SearchIndexUpdateService.update_index(model_class, item)
-                if item.brand:
                     SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
 
 m2m_changed.connect(equipment_changed, sender=Image.imaging_telescopes.through)
