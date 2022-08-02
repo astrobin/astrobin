@@ -151,7 +151,7 @@ def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     logger.debug('retrieve_thumbnail task is already running')
 
 
-@shared_task(time_limit=900, acks_late=True)
+@shared_task(time_limit=1800, acks_late=True)
 def update_index(model, age_in_minutes, batch_size):
     start = datetime.now() - timedelta(minutes=age_in_minutes)
     end = datetime.now()
