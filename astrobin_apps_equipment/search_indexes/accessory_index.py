@@ -12,3 +12,7 @@ class AccessoryIndex(EquipmentItemIndex, Indexable):
     # noinspection PyMethodMayBeStatic
     def image_queryset(self, obj: Accessory) -> Q:
         return Q(accessories_2=obj) | Q(accessories_2__in=obj.variants.all())
+
+    # noinspection PyMethodMayBeStatic
+    def user_queryset(self, obj: Accessory) -> Q:
+        return Q(image__accessories_2=obj) | Q(image__accessories_2__in=obj.variants.all())

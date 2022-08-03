@@ -829,23 +829,27 @@ def equipment_changed(sender, instance: Image, **kwargs):
             items = model_class.objects.filter(images_using=instance.pk)
 
         if items:
-            items.update(last_added_or_removed_from_image=now)
             for item in items.iterator():
                 if hasattr(item, 'last_added_or_removed_from_image'):
-                    SearchIndexUpdateService.update_index(model_class, item)
+                    if item.last_added_or_removed_from_image < timezone.now() - datetime.timedelta(hours=1):
+                        SearchIndexUpdateService.update_index(model_class, item)
                 if hasattr(item, 'brand') and item.brand is not None:
+                    if item.brand.last_added_or_removed_from_image < timezone.now() - datetime.timedelta(hours=1):
+                        SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
                     EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
-                    SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
+            items.update(last_added_or_removed_from_image=now)
     elif action in ['post_add']:
         for pk in pk_set:
             item = get_object_or_None(model_class, pk=pk)
             if item is not None:
                 if hasattr(item, 'last_added_or_removed_from_image'):
+                    if item.last_added_or_removed_from_image < timezone.now() - datetime.timedelta(hours=1):
+                        SearchIndexUpdateService.update_index(model_class, item)
                     model_class.objects.filter(pk=pk).update(last_added_or_removed_from_image=now)
-                    SearchIndexUpdateService.update_index(model_class, item)
                 if hasattr(item, 'brand') and item.brand is not None:
+                    if item.brand.last_added_or_removed_from_image < timezone.now() - datetime.timedelta(hours=1):
+                        SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
                     EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
-                    SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
 
 m2m_changed.connect(equipment_changed, sender=Image.imaging_telescopes.through)
 m2m_changed.connect(equipment_changed, sender=Image.imaging_cameras.through)

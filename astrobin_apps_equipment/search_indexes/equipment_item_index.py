@@ -3,6 +3,7 @@ from collections import Counter
 from typing import Dict, List
 
 import simplejson
+from django.core.cache import cache
 from haystack import fields
 
 from astrobin.models import Image
@@ -10,8 +11,7 @@ from astrobin_apps_equipment.models import EquipmentItem
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.search_indexes.equipment_base_index import EquipmentBaseIndex
 
-PREPARED_FIELD_CACHE_EXPIRATION = 60
-PREPARED_IMAGES_CACHE_KEY = 'astrobin_apps_equipment_search_indexed_images_%s_%d'
+PREPARED_MOST_OFTEN_USED_KEY_CACHE_KEY = 'astrobin_apps_equipment_search_indexed_most_often_used_with_%s_%d'
 
 
 class EquipmentItemIndex(EquipmentBaseIndex):
@@ -51,6 +51,11 @@ class EquipmentItemIndex(EquipmentBaseIndex):
         return self._prepare_image_count(obj)
 
     def prepare_equipment_item_most_often_used_with(self, obj):
+        key = PREPARED_MOST_OFTEN_USED_KEY_CACHE_KEY % (obj.__class__.__name__, obj.pk)
+        data = cache.get(key)
+        if data:
+            return simplejson.dumps(data)
+
         data: Dict[str, int] = {}
         image: Image
         processing_list = [
@@ -93,5 +98,7 @@ class EquipmentItemIndex(EquipmentBaseIndex):
 
         # Limit to 10.
         data = dict(Counter(data).most_common(10))
+
+        cache.set(key, data, 60*60*24)
 
         return simplejson.dumps(data)

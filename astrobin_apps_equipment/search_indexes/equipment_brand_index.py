@@ -33,6 +33,17 @@ class EquipmentBrandIndex(EquipmentBaseIndex, Indexable):
             Q(guiding_telescopes_2__brand=obj) | \
             Q(guiding_cameras_2__brand=obj)
 
+    def user_queryset(self, obj: EquipmentBrand) -> Q:
+        return \
+            Q(image__imaging_telescopes_2__brand=obj) | \
+            Q(image__imaging_cameras_2__brand=obj) | \
+            Q(image__mounts_2__brand=obj) | \
+            Q(image__filters_2__brand=obj) | \
+            Q(image__accessories_2__brand=obj) | \
+            Q(image__software_2__brand=obj) | \
+            Q(image__guiding_telescopes_2__brand=obj) | \
+            Q(image__guiding_cameras_2__brand=obj)
+
     def prepare_equipment_brand_user_count(self, obj) -> int:
         return self._prepare_user_count(obj)
 

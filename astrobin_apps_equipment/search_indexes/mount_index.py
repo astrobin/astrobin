@@ -12,3 +12,7 @@ class MountIndex(EquipmentItemIndex, Indexable):
     # noinspection PyMethodMayBeStatic
     def image_queryset(self, obj: Mount) -> Q:
         return Q(mounts_2=obj) | Q(mounts_2__in=obj.variants.all())
+
+    # noinspection PyMethodMayBeStatic
+    def user_queryset(self, obj: Mount) -> Q:
+        return Q(image__mounts_2=obj) | Q(image__mounts_2__in=obj.variants.all())

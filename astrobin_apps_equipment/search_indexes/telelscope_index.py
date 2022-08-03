@@ -15,3 +15,10 @@ class TelescopeIndex(EquipmentItemIndex, Indexable):
                Q(guiding_telescopes_2=obj) |\
                Q(imaging_telescopes_2__in=obj.variants.all()) |\
                Q(guiding_telescopes_2__in=obj.variants.all())
+
+    # noinspection PyMethodMayBeStatic
+    def user_queryset(self, obj: Telescope) -> Q:
+        return Q(image__imaging_telescopes_2=obj) | \
+               Q(image__guiding_telescopes_2=obj) | \
+               Q(image__imaging_telescopes_2__in=obj.variants.all()) | \
+               Q(image__guiding_telescopes_2__in=obj.variants.all())
