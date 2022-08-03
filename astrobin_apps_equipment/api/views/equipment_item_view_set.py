@@ -1,5 +1,6 @@
 import logging
 from collections import Counter
+from typing import Optional
 
 import simplejson
 from annoying.functions import get_object_or_None
@@ -193,37 +194,38 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
 
             image: Image
             for image in images.iterator():
-                if len(recent_items) > 5:
+                if len(recent_items) > 10:
                     break
 
-                property: str
+                prop: str = Optional[None]
                 if manager.model == Camera:
                     if usage_type == 'imaging':
-                        property = 'imaging_cameras_2'
+                        prop = 'imaging_cameras_2'
                     elif usage_type == 'guiding':
-                        property = 'guiding_cameras_2'
+                        prop = 'guiding_cameras_2'
                     else:
                         return Response("You need to specify a 'usage_type' with cameras", HTTP_400_BAD_REQUEST)
                 elif manager.model == Telescope:
                     if usage_type == 'imaging':
-                        property = 'imaging_telescopes_2'
+                        prop = 'imaging_telescopes_2'
                     elif usage_type == 'guiding':
-                        property = 'guiding_telescopes_2'
+                        prop = 'guiding_telescopes_2'
                     else:
                         return Response("You need to specify a 'usage_type' with telescopes", HTTP_400_BAD_REQUEST)
                 elif manager.model == Mount:
-                    property = 'mounts_2'
+                    prop = 'mounts_2'
                 elif manager.model == Filter:
-                    property = 'filters_2'
+                    prop = 'filters_2'
                 elif manager.model == Accessory:
-                    property = 'accessories_2'
+                    prop = 'accessories_2'
                 elif manager.model == Software:
-                    property = 'software_2'
+                    prop = 'software_2'
 
-                x: EquipmentItem
-                for x in getattr(image, property).all():
-                    if not x.frozen_as_ambiguous:
-                        recent_items.append(x.pk)
+                if prop:
+                    x: EquipmentItem
+                    for x in getattr(image, prop).all():
+                        if not x.frozen_as_ambiguous and x.pk not in recent_items:
+                            recent_items.append(x.pk)
 
             objects = manager.filter(pk__in=recent_items)
 
