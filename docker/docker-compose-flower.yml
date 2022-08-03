@@ -8,8 +8,6 @@ services:
       - -c
       - |
         LOCAL_STATIC_STORAGE=true python manage.py collectstatic --noinput && \
-        python manage.py migrate --noinput && \
-        python manage.py migrate --run-syncdb --noinput && \
         flower -A astrobin --port=5555
     ports:
       - "5555:5555"
