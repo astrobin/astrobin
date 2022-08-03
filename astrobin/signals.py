@@ -29,7 +29,7 @@ from subscription.models import Transaction, UserSubscription
 from subscription.signals import paid, signed_up
 
 from astrobin.tasks import process_camera_rename_proposal
-from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
+from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.tasks import approve_migration_strategy
 from astrobin_apps_forum.tasks import notify_equipment_users
 from astrobin_apps_groups.models import Group
@@ -831,10 +831,12 @@ def equipment_changed(sender, instance: Image, **kwargs):
         if items:
             for item in items.iterator():
                 if hasattr(item, 'last_added_or_removed_from_image'):
-                    if item.last_added_or_removed_from_image < timezone.now() - datetime.timedelta(hours=1):
+                    if not item.last_added_or_removed_from_image or \
+                            item.last_added_or_removed_from_image < timezone.now() - datetime.timedelta(hours=1):
                         SearchIndexUpdateService.update_index(model_class, item)
                 if hasattr(item, 'brand') and item.brand is not None:
-                    if item.brand.last_added_or_removed_from_image < timezone.now() - datetime.timedelta(hours=1):
+                    if not item.brand.last_added_or_removed_from_image or \
+                            item.brand.last_added_or_removed_from_image < timezone.now() - datetime.timedelta(hours=1):
                         SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
                     EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
             items.update(last_added_or_removed_from_image=now)
@@ -843,11 +845,13 @@ def equipment_changed(sender, instance: Image, **kwargs):
             item = get_object_or_None(model_class, pk=pk)
             if item is not None:
                 if hasattr(item, 'last_added_or_removed_from_image'):
-                    if item.last_added_or_removed_from_image < timezone.now() - datetime.timedelta(hours=1):
+                    if not item.last_added_or_removed_from_image or \
+                            item.last_added_or_removed_from_image < timezone.now() - datetime.timedelta(hours=1):
                         SearchIndexUpdateService.update_index(model_class, item)
                     model_class.objects.filter(pk=pk).update(last_added_or_removed_from_image=now)
                 if hasattr(item, 'brand') and item.brand is not None:
-                    if item.brand.last_added_or_removed_from_image < timezone.now() - datetime.timedelta(hours=1):
+                    if not item.brand.last_added_or_removed_from_image or \
+                            item.brand.last_added_or_removed_from_image < timezone.now() - datetime.timedelta(hours=1):
                         SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
                     EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
 
