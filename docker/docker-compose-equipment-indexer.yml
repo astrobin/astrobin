@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  equipment-indexer:
+    image: ${DOCKER_REGISTRY}/astrobin-${ARCH}:${ASTROBIN_BUILD}
+    command:
+      - bash
+      - -c
+      - |
+        LOCAL_STATIC_STORAGE=true python manage.py collectstatic --noinput && \
+        ./manage.py update_index astrobin_apps_equipment -k 1 -b 1 -v 3
+    env_file:
+      - ./astrobin.env
+    environment:
+      - PYTHONPATH=/usr/lib/python3/dist-packages
+      - DJANGO_SETTINGS_MODULE=astrobin.settings
+      - POSTGRES_DB=astrobin
+      - POSTGRES_USER=astrobin
+    volumes:
+      - media:/media
+      - tmp:/tmp
+      - /astrobin-temporary-files:/astrobin-temporary-files
+    deploy:
+      resources:
+        limits:
+          memory: 4g
+
+
+volumes:
+  media: { }
+  tmp: { }
