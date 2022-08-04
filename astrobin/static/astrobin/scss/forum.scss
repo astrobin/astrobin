@@ -452,6 +452,7 @@ th.forum-name {
 
   .btn {
     white-space: nowrap;
+    margin-right: 1rem;
 
     @media screen and (max-width: 579px) {
       width: calc(100% - 2rem);
@@ -459,7 +460,7 @@ th.forum-name {
   }
 
   .pagination {
-    margin: 0 0 0 1rem;
+    margin: 0;
     text-align: right !important;
     display: inline-flex;
     min-width: 74px;

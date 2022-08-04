@@ -78,6 +78,8 @@
             <input type="hidden" name="d" value="f" />
             <input type="hidden" name="topic" value="{{ topic.pk }}" />
         </form>
+
+        {% include "pagination_numbered.html" %}
     </div>
 
     <div class="topic">
@@ -107,9 +109,8 @@
             {% endfor %}
         </div>
         <div>&nbsp;</div>
-        {% with _('Posts') as label %}
-            {% include "pagination_numbered.html" %}
-        {% endwith %}
+
+        {% include "pagination_numbered.html" %}
 
         {% if user|pybb_may_create_post:topic %}
             <h3 class="reply-header">{% trans "Reply" %}</h3>
