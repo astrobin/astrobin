@@ -29,7 +29,6 @@ from subscription.models import Transaction, UserSubscription
 from subscription.signals import paid, signed_up
 
 from astrobin.tasks import process_camera_rename_proposal
-from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.tasks import approve_migration_strategy
 from astrobin_apps_forum.tasks import notify_equipment_users
 from astrobin_apps_groups.models import Group
@@ -53,7 +52,6 @@ from common.models import ABUSE_REPORT_DECISION_OVERRULED, AbuseReport
 from common.services import AppRedirectionService, DateTimeService
 from common.services.mentions_service import MentionsService
 from common.services.moderation_service import ModerationService
-from common.services.search_index_update_service import SearchIndexUpdateService
 from nested_comments.models import NestedComment
 from nested_comments.services.comment_notifications_service import CommentNotificationsService
 from toggleproperties.models import ToggleProperty
@@ -813,13 +811,7 @@ m2m_changed.connect(group_images_changed, sender=Group.images.through)
 
 
 def legacy_equipment_changed(sender, instance: Image, **kwargs):
-    action = kwargs.pop('action')
-
-    # AstroBin always clears items first before setting them again, at least on the API/UI side, so it's enough to
-    # update on pre_clear.
-    # See ImageViewSet.
-    if action == 'pre_clear':
-        Image.all_objects.filter(pk=instance.pk).update(updated=timezone.now())
+    Image.all_objects.filter(pk=instance.pk).update(updated=timezone.now())
 
 
 m2m_changed.connect(legacy_equipment_changed, sender=Image.imaging_telescopes.through)
