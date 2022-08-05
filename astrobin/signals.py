@@ -826,10 +826,10 @@ m2m_changed.connect(legacy_equipment_changed, sender=Image.guiding_cameras.throu
 
 
 def new_equipment_changed(sender, instance: Image, **kwargs):
-    # model_class = kwargs.pop('model')
-    # pk_set: Set[int] = kwargs.pop('pk_set')
-    # action = kwargs.pop('action')
-    # now = timezone.now()
+    model_class = kwargs.pop('model')
+    pk_set: Set[int] = kwargs.pop('pk_set')
+    action = kwargs.pop('action')
+    now = timezone.now()
     # update_deadline = now - datetime.timedelta(hours=12)
 
     Image.all_objects.filter(pk=instance.pk).update(updated=timezone.now())
@@ -854,20 +854,20 @@ def new_equipment_changed(sender, instance: Image, **kwargs):
     #         #             SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
     #         #         EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
     #         items.update(last_added_or_removed_from_image=now)
-    # elif action in ['post_add']:
-    #     for pk in pk_set:
-    #         item = get_object_or_None(model_class, pk=pk)
-    #         if item is not None:
-    #             # if hasattr(item, 'last_added_or_removed_from_image'):
-    #             #     if not item.last_added_or_removed_from_image or \
-    #             #             item.last_added_or_removed_from_image < update_deadline:
-    #             #         SearchIndexUpdateService.update_index(model_class, item)
-    #             # if hasattr(item, 'brand') and item.brand is not None:
-    #             #     if not item.brand.last_added_or_removed_from_image or \
-    #             #             item.brand.last_added_or_removed_from_image < update_deadline:
-    #             #         SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
-    #             #     EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
-    #             model_class.objects.filter(pk=pk).update(last_added_or_removed_from_image=now)
+    if action == 'post_add':
+        for pk in pk_set:
+            item = get_object_or_None(model_class, pk=pk)
+            if item is not None:
+                # if hasattr(item, 'last_added_or_removed_from_image'):
+                #     if not item.last_added_or_removed_from_image or \
+                #             item.last_added_or_removed_from_image < update_deadline:
+                #         SearchIndexUpdateService.update_index(model_class, item)
+                # if hasattr(item, 'brand') and item.brand is not None:
+                #     if not item.brand.last_added_or_removed_from_image or \
+                #             item.brand.last_added_or_removed_from_image < update_deadline:
+                #         SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
+                #     EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
+                model_class.objects.filter(pk=pk).update(last_added_or_removed_from_image=now)
 
 
 m2m_changed.connect(new_equipment_changed, sender=Image.imaging_telescopes_2.through)
