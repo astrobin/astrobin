@@ -1,5 +1,4 @@
 # noinspection PyMethodMayBeStatic
-from typing import List
 
 from django.db.models import Q
 from haystack import fields
@@ -7,9 +6,6 @@ from haystack.constants import Indexable
 
 from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.search_indexes.equipment_base_index import EquipmentBaseIndex
-
-PREPARED_FIELD_CACHE_EXPIRATION = 60
-PREPARED_IMAGES_CACHE_KEY = 'astrobin_apps_equipment_search_indexed_images_%s_%d'
 
 
 class EquipmentBrandIndex(EquipmentBaseIndex, Indexable):

@@ -29,7 +29,6 @@ from subscription.models import Transaction, UserSubscription
 from subscription.signals import paid, signed_up
 
 from astrobin.tasks import process_camera_rename_proposal
-from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.tasks import approve_migration_strategy
 from astrobin_apps_forum.tasks import notify_equipment_users
 from astrobin_apps_groups.models import Group
@@ -53,7 +52,6 @@ from common.models import ABUSE_REPORT_DECISION_OVERRULED, AbuseReport
 from common.services import AppRedirectionService, DateTimeService
 from common.services.mentions_service import MentionsService
 from common.services.moderation_service import ModerationService
-from common.services.search_index_update_service import SearchIndexUpdateService
 from nested_comments.models import NestedComment
 from nested_comments.services.comment_notifications_service import CommentNotificationsService
 from toggleproperties.models import ToggleProperty
@@ -812,66 +810,75 @@ def group_images_changed(sender, instance, **kwargs):
 m2m_changed.connect(group_images_changed, sender=Group.images.through)
 
 
-def equipment_changed(sender, instance: Image, **kwargs):
-    # model_class = kwargs.pop('model')
-    # pk_set: Set[int] = kwargs.pop('pk_set')
-    # action = kwargs.pop('action')
-    # now = timezone.now()
+def legacy_equipment_changed(sender, instance: Image, **kwargs):
+    Image.all_objects.filter(pk=instance.pk).update(updated=timezone.now())
+
+
+m2m_changed.connect(legacy_equipment_changed, sender=Image.imaging_telescopes.through)
+m2m_changed.connect(legacy_equipment_changed, sender=Image.imaging_cameras.through)
+m2m_changed.connect(legacy_equipment_changed, sender=Image.mounts.through)
+m2m_changed.connect(legacy_equipment_changed, sender=Image.filters.through)
+m2m_changed.connect(legacy_equipment_changed, sender=Image.focal_reducers.through)
+m2m_changed.connect(legacy_equipment_changed, sender=Image.accessories.through)
+m2m_changed.connect(legacy_equipment_changed, sender=Image.software.through)
+m2m_changed.connect(legacy_equipment_changed, sender=Image.guiding_telescopes.through)
+m2m_changed.connect(legacy_equipment_changed, sender=Image.guiding_cameras.through)
+
+
+def new_equipment_changed(sender, instance: Image, **kwargs):
+    model_class = kwargs.pop('model')
+    pk_set: Set[int] = kwargs.pop('pk_set')
+    action = kwargs.pop('action')
+    now = timezone.now()
+    # update_deadline = now - datetime.timedelta(hours=12)
 
     Image.all_objects.filter(pk=instance.pk).update(updated=timezone.now())
 
-    # if action == 'pre_clear':
-    #     if hasattr(model_class, 'images_using_for_imaging'):
-    #         items = model_class.objects.filter(
-    #             Q(images_using_for_imaging=instance.pk) | Q(images_using_for_guiding=instance.pk)
-    #         ).distinct()
-    #     else:
-    #         items = model_class.objects.filter(images_using=instance.pk)
-    #
-    #     if items:
-    #         for item in items.iterator():
-    #             if hasattr(item, 'last_added_or_removed_from_image'):
-    #                 if not item.last_added_or_removed_from_image or \
-    #                         item.last_added_or_removed_from_image < timezone.now() - datetime.timedelta(hours=1):
-    #                     SearchIndexUpdateService.update_index(model_class, item)
-    #             if hasattr(item, 'brand') and item.brand is not None:
-    #                 if not item.brand.last_added_or_removed_from_image or \
-    #                         item.brand.last_added_or_removed_from_image < timezone.now() - datetime.timedelta(hours=1):
-    #                     SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
-    #                 EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
-    #         items.update(last_added_or_removed_from_image=now)
-    # elif action in ['post_add']:
-    #     for pk in pk_set:
-    #         item = get_object_or_None(model_class, pk=pk)
-    #         if item is not None:
-    #             if hasattr(item, 'last_added_or_removed_from_image'):
-    #                 if not item.last_added_or_removed_from_image or \
-    #                         item.last_added_or_removed_from_image < timezone.now() - datetime.timedelta(hours=1):
-    #                     SearchIndexUpdateService.update_index(model_class, item)
-    #                 model_class.objects.filter(pk=pk).update(last_added_or_removed_from_image=now)
-    #             if hasattr(item, 'brand') and item.brand is not None:
-    #                 if not item.brand.last_added_or_removed_from_image or \
-    #                         item.brand.last_added_or_removed_from_image < timezone.now() - datetime.timedelta(hours=1):
-    #                     SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
-    #                 EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
+    if action == 'pre_clear':
+        if hasattr(model_class, 'images_using_for_imaging'):
+            items = model_class.objects.filter(
+                Q(images_using_for_imaging=instance.pk) | Q(images_using_for_guiding=instance.pk)
+            ).distinct()
+        else:
+            items = model_class.objects.filter(images_using=instance.pk)
 
-m2m_changed.connect(equipment_changed, sender=Image.imaging_telescopes.through)
-m2m_changed.connect(equipment_changed, sender=Image.imaging_cameras.through)
-m2m_changed.connect(equipment_changed, sender=Image.mounts.through)
-m2m_changed.connect(equipment_changed, sender=Image.filters.through)
-m2m_changed.connect(equipment_changed, sender=Image.focal_reducers.through)
-m2m_changed.connect(equipment_changed, sender=Image.accessories.through)
-m2m_changed.connect(equipment_changed, sender=Image.software.through)
-m2m_changed.connect(equipment_changed, sender=Image.guiding_telescopes.through)
-m2m_changed.connect(equipment_changed, sender=Image.guiding_cameras.through)
-m2m_changed.connect(equipment_changed, sender=Image.imaging_telescopes_2.through)
-m2m_changed.connect(equipment_changed, sender=Image.imaging_cameras_2.through)
-m2m_changed.connect(equipment_changed, sender=Image.mounts_2.through)
-m2m_changed.connect(equipment_changed, sender=Image.filters_2.through)
-m2m_changed.connect(equipment_changed, sender=Image.accessories_2.through)
-m2m_changed.connect(equipment_changed, sender=Image.software_2.through)
-m2m_changed.connect(equipment_changed, sender=Image.guiding_telescopes_2.through)
-m2m_changed.connect(equipment_changed, sender=Image.guiding_cameras_2.through)
+        if items:
+            # for item in items.iterator():
+            #     if hasattr(item, 'last_added_or_removed_from_image'):
+            #         if not item.last_added_or_removed_from_image or \
+            #                 item.last_added_or_removed_from_image < update_deadline:
+            #             SearchIndexUpdateService.update_index(model_class, item)
+            #     if hasattr(item, 'brand') and item.brand is not None:
+            #         if not item.brand.last_added_or_removed_from_image or \
+            #                 item.brand.last_added_or_removed_from_image < update_deadline:
+            #             SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
+            #         EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
+            items.update(last_added_or_removed_from_image=now)
+    elif action in ['post_add']:
+        for pk in pk_set:
+            item = get_object_or_None(model_class, pk=pk)
+            if item is not None:
+                # if hasattr(item, 'last_added_or_removed_from_image'):
+                #     if not item.last_added_or_removed_from_image or \
+                #             item.last_added_or_removed_from_image < update_deadline:
+                #         SearchIndexUpdateService.update_index(model_class, item)
+                # if hasattr(item, 'brand') and item.brand is not None:
+                #     if not item.brand.last_added_or_removed_from_image or \
+                #             item.brand.last_added_or_removed_from_image < update_deadline:
+                #         SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
+                #     EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
+                model_class.objects.filter(pk=pk).update(last_added_or_removed_from_image=now)
+
+
+m2m_changed.connect(new_equipment_changed, sender=Image.imaging_telescopes_2.through)
+m2m_changed.connect(new_equipment_changed, sender=Image.imaging_cameras_2.through)
+m2m_changed.connect(new_equipment_changed, sender=Image.mounts_2.through)
+m2m_changed.connect(new_equipment_changed, sender=Image.filters_2.through)
+m2m_changed.connect(new_equipment_changed, sender=Image.accessories_2.through)
+m2m_changed.connect(new_equipment_changed, sender=Image.software_2.through)
+m2m_changed.connect(new_equipment_changed, sender=Image.guiding_telescopes_2.through)
+m2m_changed.connect(new_equipment_changed, sender=Image.guiding_cameras_2.through)
+
 
 def group_post_delete(sender, instance, **kwargs):
     try:

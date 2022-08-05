@@ -1,6 +1,7 @@
 # noinspection PyMethodMayBeStatic
+import logging
 from collections import Counter
-from typing import Dict, List
+from typing import Dict
 
 import simplejson
 from django.core.cache import cache
@@ -11,7 +12,9 @@ from astrobin_apps_equipment.models import EquipmentItem
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.search_indexes.equipment_base_index import EquipmentBaseIndex
 
-PREPARED_MOST_OFTEN_USED_KEY_CACHE_KEY = 'astrobin_apps_equipment_search_indexed_most_often_used_with_%s_%d'
+log = logging.getLogger('apps')
+
+PREPARED_MOST_OFTEN_USED_WITH_CACHE_KEY = 'equipment_indexes_most_often_used_with_%s_%d'
 
 
 class EquipmentItemIndex(EquipmentBaseIndex):
@@ -51,10 +54,12 @@ class EquipmentItemIndex(EquipmentBaseIndex):
         return self._prepare_image_count(obj)
 
     def prepare_equipment_item_most_often_used_with(self, obj):
-        key = PREPARED_MOST_OFTEN_USED_KEY_CACHE_KEY % (obj.__class__.__name__, obj.pk)
+        key = PREPARED_MOST_OFTEN_USED_WITH_CACHE_KEY % (obj.__class__.__name__, obj.pk)
         data = cache.get(key)
+
         if data:
-            return simplejson.dumps(data)
+            log.debug(f'{key} found in cache')
+            return data
 
         data: Dict[str, int] = {}
         image: Image
@@ -97,8 +102,8 @@ class EquipmentItemIndex(EquipmentBaseIndex):
         data = dict(filter(lambda x: x[1] > 1, data.items()))
 
         # Limit to 10.
-        data = dict(Counter(data).most_common(10))
+        data = simplejson.dumps(dict(Counter(data).most_common(10)))
 
-        cache.set(key, data, 60*60*24)
+        cache.set(key, data, 60 * 60 * 24)
 
-        return simplejson.dumps(data)
+        return data
