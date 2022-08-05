@@ -29,6 +29,7 @@ from subscription.models import Transaction, UserSubscription
 from subscription.signals import paid, signed_up
 
 from astrobin.tasks import process_camera_rename_proposal
+from astrobin_apps_equipment.models import EquipmentBrand
 from astrobin_apps_equipment.tasks import approve_migration_strategy
 from astrobin_apps_forum.tasks import notify_equipment_users
 from astrobin_apps_groups.models import Group
@@ -49,7 +50,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
 )
 from astrobin_apps_users.services import UserService
 from common.models import ABUSE_REPORT_DECISION_OVERRULED, AbuseReport
-from common.services import AppRedirectionService, DateTimeService
+from common.services import AppRedirectionService, DateTimeService, SearchIndexUpdateService
 from common.services.mentions_service import MentionsService
 from common.services.moderation_service import ModerationService
 from nested_comments.models import NestedComment
@@ -831,7 +832,16 @@ def new_equipment_changed(sender, instance: Image, **kwargs):
     action = kwargs.pop('action')
     now = timezone.now()
     update_deadline = now - datetime.timedelta(seconds=3)
-    # index_update_deadline = now - datetime.timedelta(hours=12)
+    index_update_deadline = now - datetime.timedelta(hours=12)
+
+    def update_indexes(item):
+        if not item.last_added_or_removed_from_image or item.last_added_or_removed_from_image < index_update_deadline:
+            SearchIndexUpdateService.update_index(model_class, item)
+            if item.brand is not None:
+                if not item.brand.last_added_or_removed_from_image or \
+                        item.brand.last_added_or_removed_from_image < index_update_deadline:
+                    SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
+                EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
 
     if not instance.updated or instance.updated < update_deadline:
         Image.all_objects.filter(pk=instance.pk).update(updated=timezone.now())
@@ -840,29 +850,13 @@ def new_equipment_changed(sender, instance: Image, **kwargs):
         item_ids = sender.objects.filter(image=instance).values_list(model_class.__name__.lower(), flat=True)
         items = model_class.objects.filter(pk__in=list(item_ids))
         # for item in items.iterator():
-        #     if hasattr(item, 'last_added_or_removed_from_image'):
-        #         if not item.last_added_or_removed_from_image or \
-        #                 item.last_added_or_removed_from_image < index_update_deadline:
-        #             SearchIndexUpdateService.update_index(model_class, item)
-        #     if hasattr(item, 'brand') and item.brand is not None:
-        #         if not item.brand.last_added_or_removed_from_image or \
-        #                 item.brand.last_added_or_removed_from_image < index_update_deadline:
-        #             SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
-        #         EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
+        #     update_indexes(item)
         items.update(last_added_or_removed_from_image=now)
     elif action == 'post_add':
         for pk in pk_set:
             item = get_object_or_None(model_class, pk=pk)
             if item is not None:
-                # if hasattr(item, 'last_added_or_removed_from_image'):
-                #     if not item.last_added_or_removed_from_image or \
-                #             item.last_added_or_removed_from_image < index_update_deadline:
-                #         SearchIndexUpdateService.update_index(model_class, item)
-                # if hasattr(item, 'brand') and item.brand is not None:
-                #     if not item.brand.last_added_or_removed_from_image or \
-                #             item.brand.last_added_or_removed_from_image < index_update_deadline:
-                #         SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
-                #     EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
+                update_indexes(item)
                 if not item.last_added_or_removed_from_image or item.last_added_or_removed_from_image < update_deadline:
                     model_class.objects.filter(pk=pk).update(last_added_or_removed_from_image=now)
 
