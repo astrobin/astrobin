@@ -840,9 +840,9 @@ def new_equipment_changed(sender, instance: Image, **kwargs):
     now = timezone.now()
     # update_deadline = now - datetime.timedelta(hours=12)
 
-    if action == 'pre_clear':
-        Image.all_objects.filter(pk=instance.pk).update(updated=timezone.now())
+    Image.all_objects.filter(pk=instance.pk).update(updated=timezone.now())
 
+    if action == 'pre_clear':
         if hasattr(model_class, 'images_using_for_imaging'):
             items = model_class.objects.filter(
                 Q(images_using_for_imaging=instance.pk) | Q(images_using_for_guiding=instance.pk)

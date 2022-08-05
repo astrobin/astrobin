@@ -1,7 +1,7 @@
 # noinspection PyMethodMayBeStatic
 import logging
 from collections import Counter
-from typing import Dict, List
+from typing import Dict
 
 import simplejson
 from django.core.cache import cache
@@ -104,6 +104,6 @@ class EquipmentItemIndex(EquipmentBaseIndex):
         # Limit to 10.
         data = simplejson.dumps(dict(Counter(data).most_common(10)))
 
-        cache.set(key, data, 60*60*24)
+        cache.set(key, data, 60 * 60 * 24)
 
         return data
