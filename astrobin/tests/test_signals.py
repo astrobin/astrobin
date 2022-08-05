@@ -1,8 +1,11 @@
 import time
+from datetime import timedelta
 
 from django.test import TestCase
+from django.utils import timezone
 from mock import patch
 
+from astrobin.models import Image
 from astrobin.signals import imagerevision_post_save
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
@@ -196,6 +199,9 @@ class SignalsTest(TestCase):
         image = Generators.image()
         telescope = EquipmentGenerators.telescope()
 
+        Image.objects.filter(pk=image.pk).update(updated=timezone.now() - timedelta(minutes=1))
+        image.refresh_from_db()
+
         before = image.updated
         time.sleep(0.01)
 
@@ -208,6 +214,9 @@ class SignalsTest(TestCase):
     def test_guiding_telescope_2_change_causes_image_to_be_saved(self):
         image = Generators.image()
         telescope = EquipmentGenerators.telescope()
+
+        Image.objects.filter(pk=image.pk).update(updated=timezone.now() - timedelta(minutes=1))
+        image.refresh_from_db()
 
         before = image.updated
         time.sleep(0.01)
@@ -222,6 +231,9 @@ class SignalsTest(TestCase):
         image = Generators.image()
         camera = EquipmentGenerators.camera()
 
+        Image.objects.filter(pk=image.pk).update(updated=timezone.now() - timedelta(minutes=1))
+        image.refresh_from_db()
+
         before = image.updated
         time.sleep(0.01)
 
@@ -234,6 +246,9 @@ class SignalsTest(TestCase):
     def test_guiding_camera_2_change_causes_image_to_be_saved(self):
         image = Generators.image()
         camera = EquipmentGenerators.camera()
+
+        Image.objects.filter(pk=image.pk).update(updated=timezone.now() - timedelta(minutes=1))
+        image.refresh_from_db()
 
         before = image.updated
         time.sleep(0.01)
@@ -248,6 +263,9 @@ class SignalsTest(TestCase):
         image = Generators.image()
         mount = EquipmentGenerators.mount()
 
+        Image.objects.filter(pk=image.pk).update(updated=timezone.now() - timedelta(minutes=1))
+        image.refresh_from_db()
+
         before = image.updated
         time.sleep(0.01)
 
@@ -260,6 +278,9 @@ class SignalsTest(TestCase):
     def test_filter_2_change_causes_image_to_be_saved(self):
         image = Generators.image()
         filter = EquipmentGenerators.filter()
+
+        Image.objects.filter(pk=image.pk).update(updated=timezone.now() - timedelta(minutes=1))
+        image.refresh_from_db()
 
         before = image.updated
         time.sleep(0.01)
@@ -275,6 +296,9 @@ class SignalsTest(TestCase):
         image = Generators.image()
         accessory = EquipmentGenerators.accessory()
 
+        Image.objects.filter(pk=image.pk).update(updated=timezone.now() - timedelta(minutes=1))
+        image.refresh_from_db()
+
         before = image.updated
         time.sleep(0.01)
 
@@ -287,6 +311,9 @@ class SignalsTest(TestCase):
     def test_software_2_change_causes_image_to_be_saved(self):
         image = Generators.image()
         software = EquipmentGenerators.software()
+
+        Image.objects.filter(pk=image.pk).update(updated=timezone.now() - timedelta(minutes=1))
+        image.refresh_from_db()
 
         before = image.updated
         time.sleep(0.01)
