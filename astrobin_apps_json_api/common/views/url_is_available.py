@@ -20,7 +20,7 @@ class UrlIsAvailable(JSONResponseMixin, View):
             try:
                 session = requests.session()
                 session.mount('https://', TLSAdapter())
-                session.request('HEAD', url, timeout=5)
+                session.request('HEAD', url, timeout=5, allow_redirects=False)
                 available = True
             except requests.ConnectionError as e:
                 log.debug(f'Unable to connect to {url}: {str(e)}')
