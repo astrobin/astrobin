@@ -2138,10 +2138,12 @@ class DeepSky_Acquisition(Acquisition):
         help_text=_("The number of sub-frames."),
     )
 
-    duration = models.PositiveIntegerField(
+    duration = models.DecimalField(
         _("Duration"),
         null=True,
         blank=True,
+        max_digits=10,
+        decimal_places=2,
         help_text=_("Duration of each sub-frame, in seconds."),
     )
 

@@ -3,12 +3,6 @@ from datetime import datetime, date, timedelta
 
 
 class DateTimeService:
-    TIME_DURATION_UNITS = (
-        ('h', 60 * 60),
-        ('\'', 60),
-        ('"', 1)
-    )
-
     @staticmethod
     def today():
         # type: () -> date
@@ -36,10 +30,22 @@ class DateTimeService:
         if seconds is None or seconds == 0:
             return '0'
 
+        hours, reminder = divmod(seconds, 60 * 60)
+        minutes, reminder = divmod(reminder, 60)
+        seconds, reminder = divmod(reminder, 1)
+
         parts = []
-        for unit, div in DateTimeService.TIME_DURATION_UNITS:
-            amount, seconds = divmod(int(seconds), div)
-            if amount > 0:
-                parts.append('{}{}'.format(amount, unit))
+
+        if hours > 0:
+            parts.append('{}{}'.format(hours, 'h'))
+
+        if minutes > 0:
+            parts.append('{}{}'.format(minutes, '&prime;'))
+
+        if seconds > 0:
+            parts.append('{}{}'.format(seconds, '&Prime;'))
+
+        if reminder > 0:
+            parts.append('{}'.format(reminder).replace('0.', '.'))
 
         return ' '.join(parts)

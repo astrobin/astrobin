@@ -1240,6 +1240,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       margin-top: 2rem;
       margin-left: 1rem;
     }
+
+    .times-separator {
+      color: $grey-4;
+      padding: 0 2px;
+    }
   }
 
   .total-frame-integration {
