@@ -680,7 +680,7 @@ def image_edit_acquisition_reset(request, id):
 
     DeepSky_Acquisition.objects.filter(image=image).delete()
     SolarSystem_Acquisition.objects.filter(image=image).delete()
-    Image.objects_including_wip.filter(id=id).update(updated=timezone.now())
+    Image.objects_including_wip.filter(id=image.id).update(updated=timezone.now())
 
     response_dict = {
         'image': image,
