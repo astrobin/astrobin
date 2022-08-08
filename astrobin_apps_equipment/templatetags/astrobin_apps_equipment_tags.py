@@ -2,8 +2,6 @@ from typing import List
 
 from django.db.models import QuerySet, Q
 from django.template import Library
-from fuzzywuzzy import fuzz
-from fuzzywuzzy.utils import asciidammit
 
 from astrobin.models import Gear, Image
 from astrobin.services.gear_service import GearService

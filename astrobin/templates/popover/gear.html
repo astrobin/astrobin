@@ -81,7 +81,7 @@
                         {% for listing in item_listings %}
                             <div class="equipment-brand-listing">
                                 <a class="close" data-toggle="modal" title="{% trans "Disable retailer integration" %}"
-                                        {% if valid_usersubscription|can_remove_ads %}
+                                        {% if valid_usersubscription|can_remove_retailer_integration %}
                                    href="#remove-ads-modal"
                                         {% else %}
                                    href="#feature-restricted-modal"
@@ -125,7 +125,7 @@
                                     class="close"
                                     data-toggle="modal"
                                     title="{% trans "Disable retailer integration" %}"
-                                    {% if valid_usersubscription|can_remove_ads %}
+                                    {% if valid_usersubscription|can_remove_retailer_integration %}
                                         href="#remove-ads-modal"
                                     {% else %}
                                         href="#feature-restricted-modal"

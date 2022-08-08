@@ -1233,6 +1233,22 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     margin-left: .25rem;
     color: goldenrod;
     text-shadow: 0 0 3px rgba(0, 0, 0, .33);
+    cursor: pointer;
+  }
+
+  .retailer-affiliate-cart-link {
+    cursor: pointer;
+
+    + .close {
+      float: none;
+      color: goldenrod;
+      text-shadow: none;
+      font-size: .95rem;
+      padding: .25rem;
+      font-weight: normal;
+      opacity: 1;
+      margin-left: -.5rem;
+    }
   }
 
   .frames {

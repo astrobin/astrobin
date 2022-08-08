@@ -52,6 +52,13 @@
                                                                            {% endblocktrans %}
                                                                         "></i>
                                                                 </a>
+                                                                {% if request_user_valid_usersubscription_for_link|can_remove_retailer_integration %}
+                                                                    <a class="close" data-toggle="modal"
+                                                                       title="{% trans "Disable retailer integration" %}"
+                                                                       href="#remove-ads-modal">
+                                                                        &times;
+                                                                    </a>
+                                                                {% endif %}
                                                             {% endwith %}
                                                         {% elif item.object|equipment_brand_listings_for_legacy_gear:REQUEST_COUNTRY|length %}
                                                             {% with item.object|equipment_brand_listings_for_legacy_gear:REQUEST_COUNTRY as listings %}
@@ -69,15 +76,11 @@
                                                                         "></i>
                                                                     </a>
                                                                 {% else %}
-                                                                    <span rel="popover"
-                                                                          class="gear-popover-label"
-                                                                          data-load="{% url 'gear_popover_ajax' item.id image.id %}{% if 'DEBUG_COUNTRY' in request.GET %}?DEBUG_COUNTRY={{ request.GET|get_item:'DEBUG_COUNTRY' }}{% endif %}">
-                                                                        <i class="icon-shopping-cart"
-                                                                           rel="tooltip"
-                                                                           data-placement="bottom"
-                                                                           title="{% blocktrans trimmed with name=listings.all.0.brand %}Shop {{ name }} at AstroBin's partners{% endblocktrans %}"
-                                                                        >
-                                                                        </i>
+                                                                    <span
+                                                                        rel="popover"
+                                                                        class="gear-popover-label"
+                                                                        data-load="{% url 'gear_popover_ajax' item.id image.id %}{% if 'DEBUG_COUNTRY' in request.GET %}?DEBUG_COUNTRY={{ request.GET|get_item:'DEBUG_COUNTRY' }}{% endif %}">
+                                                                        <i class="icon-shopping-cart"></i>
                                                                     </span>
                                                                 {% endif %}
                                                             {% endwith %}
@@ -132,13 +135,17 @@
                                                                            {% endblocktrans %}
                                                                         "></i>
                                                                     </a>
+                                                                    {% if request_user_valid_usersubscription_for_link|can_remove_retailer_integration %}
+                                                                        <a class="close" data-toggle="modal"
+                                                                           title="{% trans "Disable retailer integration" %}"
+                                                                           href="#remove-ads-modal">
+                                                                            &times;
+                                                                        </a>
+                                                                    {% endif %}
                                                                 {% else %}
                                                                     <span rel="popover" class="gear-popover-label shopping-cart"
                                                                           data-load="{% url 'equipment:item-popover' item.type item.id image.get_id %}?q={{ search_query|urlencode }}{% if 'DEBUG_COUNTRY' in request.GET %}&DEBUG_COUNTRY={{ request.GET|get_item:'DEBUG_COUNTRY' }}{% endif %}">
-                                                                        <i class="icon-shopping-cart" rel="tooltip"
-                                                                           data-placement="bottom"
-                                                                           title="{% blocktrans trimmed with name=listings.all.0.brand %}Shop {{ name }} at AstroBin's partners{% endblocktrans %}">
-                                                                        </i>
+                                                                        <i class="icon-shopping-cart"></i>
                                                                     </span>
                                                                 {% endif %}
                                                             {% endwith %}
