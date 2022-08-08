@@ -489,8 +489,8 @@ class ImageTest(TestCase):
         image = Generators.image(title='Test\'1')
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         soup = BeautifulSoup(response.content, 'lxml')
-        self.assertEqual(1, len(soup.select('.breadcrumb li:last-child:contains("Test\'1")')))
-        self.assertEqual(0, len(soup.select('.breadcrumb li:last-child:contains("Test&#39;1")')))
+        self.assertEqual(1, len(soup.select('.breadcrumb li:last-child:-soup-contains("Test\'1")')))
+        self.assertEqual(0, len(soup.select('.breadcrumb li:last-child:-soup-contains("Test&#39;1")')))
 
     def test_image_7_digit_gain(self):
         self.client.login(username='test', password='password')
