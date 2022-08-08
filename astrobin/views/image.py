@@ -25,6 +25,7 @@ from django.db.models import Q
 from django.db.models.query import QuerySet
 from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import redirect, render
+from django.template.defaultfilters import floatformat
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.encoding import iri_to_uri, smart_text as smart_unicode
@@ -58,14 +59,14 @@ from astrobin.utils import get_client_country_code, get_image_resolution
 from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import can_access_basic_equipment_functions
 from astrobin_apps_groups.forms import AutoSubmitToIotdTpProcessForm, GroupSelectForm
 from astrobin_apps_groups.models import Group
-from astrobin_apps_users.services import UserService
-from common.constants import GroupName
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_notifications.tasks import push_notification_for_new_image
 from astrobin_apps_platesolving.models import PlateSolvingAdvancedLiveLogEntry, Solution
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
+from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService
 from nested_comments.models import NestedComment
@@ -359,14 +360,14 @@ class ImageDetailView(ImageDetailViewBase):
                         key += '-temp(%d)' % a.sensor_cooling
                     if a.binning is not None:
                         key += '-bin(%d)' % a.binning
-                    key += '-duration(%d)' % a.duration
+                    key += '-duration(%s)' % floatformat(a.duration, -2)
 
                     try:
-                        current_frames = dsa_data['frames'][key]['integration']
+                        current_frames = dsa_data['frames'][key]['integration_raw']
                     except KeyError:
                         current_frames = '0x0"'
 
-                    integration_re = re.match(r'^(\d+)x(\d+)"', current_frames)
+                    integration_re = re.match(r'^(\d+)x(\d+)', current_frames)
                     current_number = int(integration_re.group(1))
 
                     dsa_data['frames'][key] = {}
@@ -381,16 +382,22 @@ class ImageDetailView(ImageDetailViewBase):
                         dsa_data['frames'][key]['filter'] = ''
                     dsa_data['frames'][key]['iso'] = 'ISO%d' % a.iso if a.iso is not None else ''
                     dsa_data['frames'][key]['gain'] = '(gain: %.2f)' % a.gain if a.gain is not None else ''
-                    dsa_data['frames'][key]['f_number'] = f'f/{a.f_number}'.rstrip('0').rstrip('.') if a.f_number is not None else ''
+                    dsa_data['frames'][key]['f_number'] = f'f/{a.f_number}'.rstrip('0').rstrip(
+                        '.'
+                    ) if a.f_number is not None else ''
                     dsa_data['frames'][key][
                         'sensor_cooling'] = '%d&deg;C' % a.sensor_cooling if a.sensor_cooling is not None else ''
-                    dsa_data['frames'][key]['binning'] = 'bin %sx%s' % (a.binning, a.binning) if a.binning else ''
+                    dsa_data['frames'][key]['binning'] = \
+                        'bin %s<span class="times-separator">&times;</span>%s' % (a.binning, a.binning) \
+                            if a.binning else ''
                     dsa_data['frames'][key]['integration'] = \
-                        '%sx%s" <span class="total-frame-integration">(%s)</span>' % (
-                            current_number + a.number,
-                            a.duration,
-                            DateTimeService.human_time_duration((current_number + a.number) * a.duration)
-                        )
+                        f'<span class="number">{current_number + a.number}</span>' + \
+                        '<span class="times-separator">&times;</span>' + \
+                        f'<span class="duration">{floatformat(a.duration, -2)}</span>' + \
+                        '<span class="seconds-symbol">&Prime;</span> ' + \
+                        f'<span class="total-frame-integration">({DateTimeService.human_time_duration((current_number + a.number) * a.duration)})</span>'
+                    dsa_data['frames'][key]['integration_raw'] = \
+                        f'{current_number + a.number}x{floatformat(a.duration, -2)}'
 
                     dsa_data['integration'] += a.duration * a.number
 
