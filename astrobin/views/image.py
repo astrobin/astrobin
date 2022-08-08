@@ -363,11 +363,11 @@ class ImageDetailView(ImageDetailViewBase):
                     key += '-duration(%s)' % floatformat(a.duration, -2)
 
                     try:
-                        current_frames = dsa_data['frames'][key]['integration']
+                        current_frames = dsa_data['frames'][key]['integration_raw']
                     except KeyError:
                         current_frames = '0x0"'
 
-                    integration_re = re.match(r'^(\d+)x(\d+)"', current_frames)
+                    integration_re = re.match(r'^(\d+)x(\d+)', current_frames)
                     current_number = int(integration_re.group(1))
 
                     dsa_data['frames'][key] = {}
@@ -396,6 +396,8 @@ class ImageDetailView(ImageDetailViewBase):
                         f'<span class="duration">{floatformat(a.duration, -2)}</span>' + \
                         '<span class="seconds-symbol">&Prime;</span> ' + \
                         f'<span class="total-frame-integration">({DateTimeService.human_time_duration((current_number + a.number) * a.duration)})</span>'
+                    dsa_data['frames'][key]['integration_raw'] = \
+                        f'{current_number + a.number}x{floatformat(a.duration, -2)}'
 
                     dsa_data['integration'] += a.duration * a.number
 
