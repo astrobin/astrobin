@@ -394,7 +394,7 @@ class ImageDetailView(ImageDetailViewBase):
                         f'<span class="number">{current_number + a.number}</span>' + \
                         '<span class="times-separator">&times;</span>' + \
                         f'<span class="duration">{floatformat(a.duration, -2)}</span>' + \
-                        '<span class="seconds-symbol">&Prime;</span> ' + \
+                        '<span class="seconds-symbol">&Prime;</span>' + \
                         f'<span class="total-frame-integration">({DateTimeService.human_time_duration((current_number + a.number) * a.duration)})</span>'
                     dsa_data['frames'][key]['integration_raw'] = \
                         f'{current_number + a.number}x{floatformat(a.duration, -2)}'
