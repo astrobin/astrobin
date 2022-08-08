@@ -27,6 +27,7 @@ from django.template import RequestContext, loader
 from django.template.defaultfilters import filesizeformat
 from django.template.loader import render_to_string
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.translation import ngettext as _n, ugettext as _
 from django.views.decorators.cache import cache_control, cache_page, never_cache
@@ -636,7 +637,7 @@ def image_edit_acquisition(request, id):
     deep_sky_acquisition_basic_form = None
     advanced = False
     if edit_type == 'deep_sky' or (image.solution and image.solution.status != Solver.FAILED):
-        advanced = request.GET.get('advanced', 'false') == 'true' or dsa_qs.count() > 0
+        advanced = request.GET.get('advanced', 'false') == 'true' or dsa_qs.count() > 1
 
         if advanced:
             extra = 0
@@ -679,6 +680,7 @@ def image_edit_acquisition_reset(request, id):
 
     DeepSky_Acquisition.objects.filter(image=image).delete()
     SolarSystem_Acquisition.objects.filter(image=image).delete()
+    Image.objects_including_wip.filter(id=id).update(updated=timezone.now())
 
     response_dict = {
         'image': image,
@@ -1071,6 +1073,8 @@ def image_edit_save_acquisition(request):
                 "There was one or more errors processing the form. You may need to scroll down to see them."))
             return render(request, 'image/edit/acquisition.html', response_dict)
         form.save()
+
+    Image.objects_including_wip.filter(id=image.id).update(updated=timezone.now())
 
     messages.success(request, _("Form saved. Thank you!"))
     return HttpResponseRedirect(image.get_absolute_url())
