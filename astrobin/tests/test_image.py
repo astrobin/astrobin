@@ -547,7 +547,7 @@ class ImageTest(TestCase):
         Generators.premium_subscription(self.user, "AstroBin Ultimate 2020+")
 
         # DSA data
-        dsa, created = DeepSky_Acquisition.objects.get_or_create(
+        DeepSky_Acquisition.objects.get_or_create(
             image=image,
             date=today,
             number=10,
@@ -555,8 +555,13 @@ class ImageTest(TestCase):
         )
         response = self.client.get(reverse('image_detail', kwargs={'id': image.get_id()}))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '10x1200"')
-        self.assertNotContains(response, 'bin 0x0')
+        self.assertContains(
+            response,
+            '<span class="number">10</span>'
+            '<span class="times-separator">&times;</span>'
+            '<span class="duration">1200</span>'
+        )
+        self.assertNotContains(response, 'bin 0<span class="times-separator">&times;</span>0')
 
     @override_settings(PREMIUM_MAX_REVISIONS_FREE_2020=sys.maxsize)
     def test_image_flag_thumbs_view(self):
