@@ -394,8 +394,7 @@ class PremiumService:
     def can_remove_retailer_integration(user_subscription: UserSubscription) -> bool:
         return (
                 PremiumService.is_lite(user_subscription) or
-                PremiumService.is_premium(user_subscription) or
-                PremiumService.is_premium_2020(user_subscription) or
+                PremiumService.is_any_premium(user_subscription) or
                 PremiumService.is_any_ultimate(user_subscription)
         )
 
