@@ -18,6 +18,7 @@ class AccessoryType:
     OBSERVATORY_DOME = 'OBSERVATORY_DOME'
     POWER_DISTRIBUTION = 'POWER_DISTRIBUTION'
     WEATHER_MONITORING = 'WEATHER_MONITORING'
+    MOUNT_CONTROL = 'MOUNT_CONTROL'
     OTHER = 'OTHER'
 
 
@@ -35,6 +36,7 @@ class AccessoryBaseModel(EquipmentItem):
         (AccessoryType.OBSERVATORY_DOME, _('Observatory dome')),
         (AccessoryType.POWER_DISTRIBUTION, _('Power distribution')),
         (AccessoryType.WEATHER_MONITORING, _('Weather monitoring')),
+        (AccessoryType.MOUNT_CONTROL, _('Mount control')),
         (AccessoryType.OTHER, _('Other')),
     )
 
