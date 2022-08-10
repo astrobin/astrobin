@@ -401,27 +401,18 @@ post_save.connect(nested_comment_post_save, sender=NestedComment)
 
 
 def toggleproperty_post_delete(sender, instance, **kwargs):
-    if hasattr(instance.content_object, "updated"):
-        # This will trigger the auto_now fields in the content_object
-        try:
-            kwargs = {}
-            if issubclass(type(instance.content_object), SafeDeleteModel):
-                kwargs['keep_deleted'] = True
-            instance.content_object.save(**kwargs)
-        except instance.content_object.DoesNotExist:
-            pass
+    if isinstance(instance.content_object, Image):
+        SearchIndexUpdateService.update_index(Image, instance.content_object)
+        SearchIndexUpdateService.update_index(User, instance.content_object.user, 3600)
 
 
 post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
 
 
 def toggleproperty_post_save(sender, instance, created, **kwargs):
-    if hasattr(instance.content_object, "updated"):
-        # This will trigger the auto_now fields in the content_object
-        kwargs = {}
-        if issubclass(type(instance.content_object), SafeDeleteModel):
-            kwargs['keep_deleted'] = True
-        instance.content_object.save(**kwargs)
+    if isinstance(instance.content_object, Image):
+        SearchIndexUpdateService.update_index(Image, instance.content_object)
+        SearchIndexUpdateService.update_index(User, instance.content_object.user, 3600)
 
     if created:
         verb = None
