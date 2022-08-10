@@ -5,6 +5,7 @@ from astrobin.api2.serializers.telescope_serializer import TelescopeSerializer
 from astrobin.models import Image
 from astrobin_apps_equipment.api.serializers.camera_serializer import CameraSerializer as CameraSerializer2
 from astrobin_apps_equipment.api.serializers.telescope_serializer import TelescopeSerializer as TelescopeSerializer2
+from astrobin_apps_images.services import ImageService
 
 
 class BaseQueueSerializer(serializers.ModelSerializer):
@@ -20,6 +21,7 @@ class BaseQueueSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance: Image):
         representation = super().to_representation(instance)
+        final_revision = ImageService(instance).get_final_revision()
         representation.update(
             {
                 'thumbnails': [
@@ -27,9 +29,11 @@ class BaseQueueSerializer(serializers.ModelSerializer):
                         'alias': alias,
                         'id': instance.pk,
                         'revision': 'final',
-                        'url': instance.thumbnail(alias, None, sync=True)
+                        'url': instance.thumbnail(alias, 'final', sync=True)
                     } for alias in ('story', 'regular', 'hd', 'hd_anonymized')
-                ]
+                ],
+                'w': final_revision.w,
+                'h': final_revision.h,
             }
         )
         return representation
