@@ -2262,28 +2262,17 @@ class ImageTest(TestCase):
 
         self.assertEqual(ModeratorDecision.UNDECIDED, image.moderator_decision)
 
-    def test_image_updated_after_toggleproperty(self):
-        self.client.login(username='test', password='password')
-        self._do_upload('astrobin/fixtures/test.jpg')
-        image = self._get_last_image()
-        image.title = "TEST IMAGE"
-        image.save(keep_deleted=True)
+    @patch('astrobin.signals.SearchIndexUpdateService.update_index')
+    def test_image_updated_after_toggleproperty(self, update_index):
+        image = Generators.image()
+        ToggleProperty.objects.create_toggleproperty('like', image, Generators.user())
 
-        updated = image.updated
-
-        prop = ToggleProperty.objects.create_toggleproperty('like', image, self.user2)
-        image = self._get_last_image()
-        self.assertNotEqual(updated, image.updated)
-
-        updated = image.updated
-        prop = ToggleProperty.objects.create_toggleproperty('bookmark', image, self.user2)
-        image = self._get_last_image()
-        self.assertNotEqual(updated, image.updated)
-
-        updated = image.updated
-        prop.delete()
-        image = self._get_last_image()
-        self.assertNotEqual(updated, image.updated)
+        update_index.assert_has_calls(
+            [
+                mock.call(Image, image),
+                mock.call(User, image.user, mock.ANY),
+            ], any_order=True
+        )
 
     def test_image_updated_after_acquisition_saved(self):
         self.client.login(username='test', password='password')
