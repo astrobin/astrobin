@@ -352,3 +352,8 @@ def asciify(value):
         return unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('utf-8')
     except:
         return value
+
+
+@register.filter
+def has_group(user, group_name):
+    return user.groups.filter(name=group_name).exists()
