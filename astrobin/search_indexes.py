@@ -62,7 +62,7 @@ def _prepare_integration(obj):
         integration = 0
 
     cache.set(PREPARED_INTEGRATION_CACHE_KEY % obj.pk, integration, PREPARED_FIELD_CACHE_EXPIRATION)
-    return integration
+    return float(integration)
 
 
 def _prepare_comment_contribution_index(comments):
