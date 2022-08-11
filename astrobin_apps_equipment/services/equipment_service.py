@@ -32,15 +32,6 @@ class EquipmentService:
         )
 
     @staticmethod
-    def has_matching_brand_request_query(brand_name: str, q: str) -> bool:
-        if brand_name in (None, '') or q in (None, ''):
-            return False
-
-        similarity = fuzz.partial_ratio(asciidammit(q.lower()), asciidammit(brand_name.lower()))
-
-        return similarity > 85
-
-    @staticmethod
     def image_has_equipment_items(image) -> bool:
         return (
                 image.imaging_telescopes_2.exists() or

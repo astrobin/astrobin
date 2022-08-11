@@ -181,12 +181,6 @@ def is_own_equipment_migrator(user) -> bool:
 def can_access_basic_equipment_functions(user) -> bool:
     return True
 
-
-@register.filter
-def has_matching_brand_request_query(brand_name: str, q: str) -> bool:
-    return EquipmentService.has_matching_brand_request_query(brand_name, q)
-
-
 @register.filter
 def equipment_list_has_items(equipment_list) -> bool:
     return (

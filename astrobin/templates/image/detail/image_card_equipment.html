@@ -37,7 +37,7 @@
                                             {# Shopping cart #}
                                             {% with request.user|get_valid_usersubscription as request_user_valid_usersubscription_for_link %}
                                                 {% with image.user|get_valid_usersubscription as image_user_valid_usersubscription_for_link %}
-                                                    {% if request_user_valid_usersubscription_for_link|allow_full_retailer_integration:image_user_valid_usersubscription_for_link or item.object.make|has_matching_brand_request_query:search_query %}
+                                                    {% if request_user_valid_usersubscription_for_link|allow_full_retailer_integration:image_user_valid_usersubscription_for_link %}
                                                         {% if item.object|equipment_item_listings_for_legacy_gear:REQUEST_COUNTRY|length %}
                                                             {% with item.object|equipment_item_listings_for_legacy_gear:REQUEST_COUNTRY as listings %}
                                                                 {% equipment_listing_url_with_tags listings.all.0 'card' as url_with_tags %}
@@ -119,7 +119,7 @@
                                             {# Shopping cart #}
                                             {% with request.user|get_valid_usersubscription as request_user_valid_usersubscription_for_link %}
                                                 {% with image.user|get_valid_usersubscription as image_user_valid_usersubscription_for_link %}
-                                                    {% if request_user_valid_usersubscription_for_link|allow_full_retailer_integration:image_user_valid_usersubscription_for_link or item.brand.name|has_matching_brand_request_query:search_query %}
+                                                    {% if request_user_valid_usersubscription_for_link|allow_full_retailer_integration:image_user_valid_usersubscription_for_link %}
                                                         {% if item.object.brand|equipment_brand_listings:REQUEST_COUNTRY|length %}
                                                             {% with item.object.brand|equipment_brand_listings:REQUEST_COUNTRY as listings %}
                                                                 {% if listings|length == 1 %}
