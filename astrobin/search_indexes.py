@@ -61,7 +61,7 @@ def _prepare_integration(obj):
     elif solar_system_acquisition:
         integration = 0
 
-    cache.set(PREPARED_INTEGRATION_CACHE_KEY % obj.pk, integration, PREPARED_FIELD_CACHE_EXPIRATION)
+    cache.set(PREPARED_INTEGRATION_CACHE_KEY % obj.pk, float(integration), PREPARED_FIELD_CACHE_EXPIRATION)
     return float(integration)
 
 
