@@ -47,7 +47,7 @@ class GearMigrationStrategyViewSet(viewsets.ModelViewSet):
             )
         )
 
-        if not UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
+        if UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
             queryset = queryset.filter(user__isnull=True)
 
         return queryset.distinct()
