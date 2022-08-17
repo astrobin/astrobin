@@ -44,9 +44,11 @@ class SensorBaseModel(EquipmentItem):
         decimal_places=2,
     )
 
-    full_well_capacity = models.PositiveIntegerField(
+    full_well_capacity = models.DecimalField(
         null=True,
         blank=True,
+        max_digits=6,
+        decimal_places=2
     )
 
     read_noise = models.DecimalField(
