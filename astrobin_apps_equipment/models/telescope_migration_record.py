@@ -17,6 +17,8 @@ class TelescopeMigrationRecord(MigrationRecordBaseModel):
         editable=False,
         on_delete=models.CASCADE,
         related_name='migration_records_as_to',
+        null=True,
+        blank=True,
     )
 
     usage_type = models.CharField(

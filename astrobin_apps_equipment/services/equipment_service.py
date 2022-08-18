@@ -62,37 +62,68 @@ class EquipmentService:
                 return
 
             gear: Gear = migration_strategy_to_apply.gear
+            classed_gear = None
+            target = migration_strategy_to_apply.migration_content_object
+            record_class = None
+            
+            gear_usages = []
+            
+            if hasattr(gear, 'camera'):
+                gear_usages = ['imaging_cameras', 'guiding_cameras']
+                record_class = CameraMigrationRecord
+                classed_gear = gear.camera
+            elif hasattr(gear, 'telescope'):
+                gear_usages = ['imaging_telescopes', 'guiding_telescopes']
+                record_class = TelescopeMigrationRecord
+                classed_gear = gear.telescope
+            elif hasattr(gear, 'mount'):
+                gear_usages = ['mounts']
+                record_class = MountMigrationRecord
+                classed_gear = gear.mount
+            elif hasattr(gear, 'filter'):
+                gear_usages = ['filters']
+                record_class = FilterMigrationRecord
+                classed_gear = gear.filter
+            elif hasattr(gear, 'accessory'):
+                gear_usages = ['accessories']
+                record_class = AccessoryMigrationRecord
+                classed_gear = gear.accessory
+            elif hasattr(gear, 'focalreducer'):
+                gear_usages = ['focal_reducers']
+                record_class = FocalReducerMigrationRecord
+                classed_gear = gear.focalreducer
+            elif hasattr(gear, 'software'):
+                gear_usages = ['software']
+                record_class = SoftwareMigrationRecord
+                classed_gear = gear.software
 
-            for usage_data in (
-                    ('imaging_telescopes', 'imaging_telescopes_2', Telescope, TelescopeMigrationRecord,
-                     MigrationUsageType.IMAGING),
-                    ('guiding_telescopes', 'guiding_telescopes_2', Telescope, TelescopeMigrationRecord,
-                     MigrationUsageType.GUIDING),
-                    ('imaging_cameras', 'imaging_cameras_2', Camera, CameraMigrationRecord, MigrationUsageType.IMAGING),
-                    ('guiding_cameras', 'guiding_cameras_2', Camera, CameraMigrationRecord, MigrationUsageType.GUIDING),
-                    ('mounts', 'mounts_2', Mount, MountMigrationRecord, None),
-                    ('filters', 'filters_2', Filter, FilterMigrationRecord, None),
-                    ('focal_reducers', 'accessories_2', FocalReducer, FocalReducerMigrationRecord, None),
-                    ('accessories', 'accessories_2', Accessory, AccessoryMigrationRecord, None),
-                    ('software', 'software_2', Software, SoftwareMigrationRecord, None),
-            ):
-                usage = usage_data[0]
-                new_usage = usage_data[1]
-                GearKlass = usage_data[2]
-                RecordKlass = usage_data[3]
-                usage_type = usage_data[4]
+            target_usages = []
 
-                try:
-                    images = Image.objects_including_wip.filter(**{usage: gear}, user=migration_strategy_to_apply.user)
-                except ValueError:
-                    continue
+            if target.__class__.__name__ == 'Camera':
+                target_usages = ['imaging_cameras_2', 'guiding_cameras_2']
+            elif target.__class__.__name__ == 'Telescope':
+                target_usages = ['imaging_telescopes_2', 'guiding_telescopes_2']
+            elif target.__class__.__name__ == 'Mount':
+                target_usages = ['mounts_2']
+            elif target.__class__.__name__ == 'Filter':
+                target_usages = ['filters_2']
+            elif target.__class__.__name__ == 'Accessory':
+                target_usages = ['accessories_2']
+            elif target.__class__.__name__ == 'Software':
+                target_usages = ['software_2']
+
+            for index, gear_usage in enumerate(gear_usages):
+                images = Image.objects_including_wip.filter(**{gear_usage: gear}, user=migration_strategy_to_apply.user)
 
                 if not images.exists():
                     continue
 
-                classed_gear = GearKlass.objects.get(pk=gear.pk)
-                target = migration_strategy_to_apply.migration_content_object
-                if GearKlass == Camera:
+                try:
+                    target_usage = target_usages[index]
+                except IndexError:
+                    target_usage = target_usages[0]
+
+                if '_cameras' in target_usage:
                     gear_user_info = get_object_or_None(
                         GearUserInfo,
                         gear=gear,
@@ -111,22 +142,21 @@ class EquipmentService:
                             target = modified_camera
 
                 for image in images.iterator():
-                    try:
-                        getattr(image, new_usage).add(target)
-                        getattr(image, usage).remove(classed_gear)
+                    getattr(image, target_usage).add(target)
+                    getattr(image, gear_usage).remove(classed_gear)
+                    params = dict(
+                        image=image,
+                        from_gear=classed_gear,
+                        to_item_content_type=ContentType.objects.get_for_model(target.__class__),
+                        to_item_object_id=target.pk,
+                    )
 
-                        params = dict(
-                            image=image,
-                            from_gear=classed_gear,
-                            to_item=target
-                        )
+                    if 'imaging_' in gear_usage:
+                        params['usage_type'] = MigrationUsageType.IMAGING
+                    elif 'guiding_' in gear_usage:
+                        params['usage_type'] = MigrationUsageType.GUIDING
 
-                        if usage_type:
-                            params['usage_type'] = usage_type
-
-                        RecordKlass.objects.get_or_create(**params)
-                    except TypeError:
-                        continue
+                    record_class.objects.get_or_create(**params)
 
             try:
                 deep_sky_acquisitions = DeepSky_Acquisition.objects.filter(
@@ -181,53 +211,106 @@ class EquipmentService:
             MountMigrationRecord, SoftwareMigrationRecord, TelescopeMigrationRecord, FocalReducerMigrationRecord,
         )
 
-        def _perform_undo(migration_strategy_to_undo):
+        def _perform_undo(migration_strategy_to_undo: GearMigrationStrategy):
             if migration_strategy_to_undo.migration_flag == 'MIGRATE':
-                for RecordClass in (
-                        (TelescopeMigrationRecord, 'telescopes', LegacyTelescope),
-                        (CameraMigrationRecord, 'cameras', LegacyCamera),
-                        (MountMigrationRecord, 'mounts', LegacyMount),
-                        (FilterMigrationRecord, 'filters', LegacyFilter),
-                        (AccessoryMigrationRecord, 'accessories', LegacyAccessory),
-                        (SoftwareMigrationRecord, 'software', LegacySoftware),
-                ):
-                    try:
-                        records = RecordClass[0].objects.filter(
-                            from_gear=migration_strategy_to_undo.gear, image__user=migration_strategy_to_undo.user
-                        )
-                    except ValueError:
-                        continue
+                source_class_name = migration_strategy_to_undo.gear.__class__.__name__.lower()
+                if hasattr(migration_strategy_to_undo.gear, 'camera'):
+                    source_class = LegacyCamera
+                    source_class_name = 'camera'
+                    migration_record_class = CameraMigrationRecord
+                    source_usage = 'cameras'
+                elif hasattr(migration_strategy_to_undo.gear, 'telescope'):
+                    source_class = LegacyTelescope
+                    source_class_name = 'telescope'
+                    source_usage = 'telescopes'
+                    migration_record_class = TelescopeMigrationRecord
+                elif hasattr(migration_strategy_to_undo.gear, 'mount'):
+                    source_class = LegacyMount
+                    source_class_name = 'mount'
+                    migration_record_class = MountMigrationRecord
+                    source_usage = 'mounts'
+                elif hasattr(migration_strategy_to_undo.gear, 'filter'):
+                    source_class = LegacyFilter
+                    source_class_name = 'filter'
+                    source_usage = 'filters'
+                    migration_record_class = FilterMigrationRecord
+                elif hasattr(migration_strategy_to_undo.gear, 'accessory'):
+                    source_class = LegacyAccessory
+                    source_class_name = 'accessory'
+                    migration_record_class = AccessoryMigrationRecord
+                    source_usage = 'accessories'
+                elif hasattr(migration_strategy_to_undo.gear, 'focalreducer'):
+                    source_class_name = 'focalreducer'
+                    # No need for other properties as we handle focal reducers separately later.
+                elif hasattr(migration_strategy_to_undo.gear, 'software'):
+                    source_class = LegacySoftware
+                    source_class_name = 'software'
+                    migration_record_class = SoftwareMigrationRecord
+                    source_usage = 'software'
 
-                    record: RecordClass[0]
+                target_class_name = migration_strategy_to_undo.migration_content_type.name
+                if target_class_name == 'telescope':
+                    target_usage = 'telescopes_2'
+                elif target_class_name == 'camera':
+                    target_usage = 'cameras_2'
+                elif target_class_name == 'mount':
+                    target_usage = 'mounts_2'
+                elif target_class_name == 'filter':
+                    target_usage = 'filters_2'
+                elif target_class_name == 'accessory':
+                    target_usage = 'accessories_2'
+                elif target_class_name == 'software':
+                    target_usage = 'software_2'
+
+                if source_class_name != 'focalreducer':
+                    records = migration_record_class.objects.filter(
+                        from_gear=migration_strategy_to_undo.gear, image__user=migration_strategy_to_undo.user
+                    )
+                    record: migration_record_class
                     for record in records:
-                        legacy_item = RecordClass[2].objects.get(pk=migration_strategy_to_undo.gear.pk)
+                        legacy_item = source_class.objects.get(pk=migration_strategy_to_undo.gear.pk)
                         if hasattr(record, 'usage_type'):
-                            if record.usage_type == MigrationUsageType.IMAGING:
-                                getattr(record.image, f'imaging_{RecordClass[1]}_2').remove(
+                            # If the target supports the usage type...
+                            if target_class_name in ('camera', 'telescope'):
+                                if record.usage_type == MigrationUsageType.IMAGING:
+                                    getattr(record.image, f'imaging_{target_usage}').remove(
+                                        migration_strategy_to_undo.migration_content_object
+                                    )
+                                elif record.usage_type == MigrationUsageType.GUIDING:
+                                    getattr(record.image, f'guiding_{target_usage}').remove(
+                                        migration_strategy_to_undo.migration_content_object
+                                    )
+                            else:
+                                getattr(record.image, f'{target_usage}').remove(
                                     migration_strategy_to_undo.migration_content_object
                                 )
-                                getattr(record.image, f'imaging_{RecordClass[1]}').add(
-                                    legacy_item
-                                )
-                            elif record.usage_type == MigrationUsageType.GUIDING:
-                                getattr(record.image, f'guiding_{RecordClass[1]}_2').remove(
-                                    migration_strategy_to_undo.migration_content_object
-                                )
-                                getattr(record.image, f'guiding_{RecordClass[1]}').add(
-                                    legacy_item
-                                )
+
+                            # If the source supports the usage type
+                            if source_class_name in ('camera', 'telescope'):
+                                if record.usage_type == MigrationUsageType.IMAGING:
+                                    getattr(record.image, f'imaging_{source_usage}').add(legacy_item)
+                                elif record.usage_type == MigrationUsageType.GUIDING:
+                                    getattr(record.image, f'guiding_{source_usage}').add(legacy_item)
+                            else:
+                                getattr(record.image, f'{source_usage}').add(legacy_item)
                         else:
-                            getattr(record.image, f'{RecordClass[1]}_2').remove(
-                                migration_strategy_to_undo.migration_content_object
-                            )
-                            getattr(record.image, f'{RecordClass[1]}').add(
-                                legacy_item
-                            )
+                            # Target might still need a usage type, so we'll default to IMAGING
+                            if target_class_name in ('camera', 'telescope'):
+                                getattr(record.image, f'imaging_{target_usage}').remove(
+                                    migration_strategy_to_undo.migration_content_object
+                                )
+                            else:
+                                getattr(record.image, f'{target_usage}').remove(
+                                    migration_strategy_to_undo.migration_content_object
+                                )
 
-                    records.delete()
-
-                # Handle focal reducers separately because they are Accessories in the new equipment database.
-                try:
+                            # Source might still need a usage type, so we'll default to IMAGING
+                            if source_class_name in ('camera', 'telescope'):
+                                getattr(record.image, f'imaging_{source_usage}').add(legacy_item)
+                            else:
+                                getattr(record.image, f'{source_usage}').add(legacy_item)
+                else:
+                    # Handle focal reducers separately because they are Accessories in the new equipment database.
                     records = FocalReducerMigrationRecord.objects.filter(
                         from_gear=migration_strategy_to_undo.gear, image__user=migration_strategy_to_undo.user
                     )
@@ -237,9 +320,7 @@ class EquipmentService:
                         getattr(record.image, 'accessories_2').remove(migration_strategy_to_undo.migration_content_object)
                         getattr(record.image, 'focal_reducers').add(legacy_item)
 
-                    records.delete()
-                except ValueError:
-                    pass
+                records.delete()
 
                 try:
                     legacy_filter: LegacyFilter = LegacyFilter.objects.get(pk=migration_strategy_to_undo.gear.pk)

@@ -16,6 +16,8 @@ class FocalReducerMigrationRecord(MigrationRecordBaseModel):
         editable=False,
         on_delete=models.CASCADE,
         related_name='migration_records_from_focal_reducers_as_to',
+        null=True,
+        blank=True,
     )
 
     class Meta(MigrationRecordBaseModel.Meta):

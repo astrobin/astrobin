@@ -41,7 +41,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertTrue(
             TelescopeMigrationRecord.objects.filter(
-                from_gear=telescope, to_item=new_telescope, image=image, usage_type=MigrationUsageType.IMAGING
+                from_gear=telescope, to_item_object_id=new_telescope.pk, image=image, usage_type=MigrationUsageType.IMAGING
             ).exists()
         )
         self.assertFalse(image.imaging_telescopes.filter(pk=telescope.pk).exists())
@@ -54,7 +54,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
         self.assertEquals(
             1,
             TelescopeMigrationRecord.objects.filter(
-                from_gear=telescope, to_item=new_telescope, image=image, usage_type=MigrationUsageType.IMAGING
+                from_gear=telescope, to_item_object_id=new_telescope.pk, image=image, usage_type=MigrationUsageType.IMAGING
             ).count()
         )
         self.assertFalse(image.imaging_telescopes.filter(pk=telescope.pk).exists())
@@ -101,7 +101,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertTrue(
             TelescopeMigrationRecord.objects.filter(
-                from_gear=telescope, to_item=new_telescope, image=image_1, usage_type=MigrationUsageType.IMAGING
+                from_gear=telescope, to_item_object_id=new_telescope.pk, image=image_1, usage_type=MigrationUsageType.IMAGING
             ).exists()
         )
         self.assertFalse(image_1.imaging_telescopes.filter(pk=telescope.pk).exists())
@@ -109,7 +109,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertTrue(
             TelescopeMigrationRecord.objects.filter(
-                from_gear=telescope, to_item=new_telescope, image=image_2, usage_type=MigrationUsageType.IMAGING
+                from_gear=telescope, to_item_object_id=new_telescope.pk, image=image_2, usage_type=MigrationUsageType.IMAGING
             ).exists()
         )
         self.assertFalse(image_2.imaging_telescopes.filter(pk=telescope.pk).exists())
@@ -119,7 +119,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertFalse(
             TelescopeMigrationRecord.objects.filter(
-                from_gear=telescope, to_item=new_telescope, image=image_1, usage_type=MigrationUsageType.IMAGING
+                from_gear=telescope, to_item_object_id=new_telescope.pk, image=image_1, usage_type=MigrationUsageType.IMAGING
             ).exists()
         )
         self.assertTrue(image_1.imaging_telescopes.filter(pk=telescope.pk).exists())
@@ -127,7 +127,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertFalse(
             TelescopeMigrationRecord.objects.filter(
-                from_gear=telescope, to_item=new_telescope, image=image_2, usage_type=MigrationUsageType.IMAGING
+                from_gear=telescope, to_item_object_id=new_telescope.pk, image=image_2, usage_type=MigrationUsageType.IMAGING
             ).exists()
         )
         self.assertTrue(image_2.imaging_telescopes.filter(pk=telescope.pk).exists())
@@ -153,7 +153,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertTrue(
             CameraMigrationRecord.objects.filter(
-                from_gear=camera, to_item=new_camera, image=image, usage_type=MigrationUsageType.IMAGING
+                from_gear=camera, to_item_object_id=new_camera.pk, image=image, usage_type=MigrationUsageType.IMAGING
             ).exists()
         )
         self.assertFalse(image.imaging_cameras.filter(pk=camera.pk).exists())
@@ -163,7 +163,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertFalse(
             CameraMigrationRecord.objects.filter(
-                from_gear=camera, to_item=new_camera, image=image, usage_type=MigrationUsageType.IMAGING
+                from_gear=camera, to_item_object_id=new_camera.pk, image=image, usage_type=MigrationUsageType.IMAGING
             ).exists()
         )
         self.assertTrue(image.imaging_cameras.filter(pk=camera.pk).exists())
@@ -201,7 +201,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertTrue(
             CameraMigrationRecord.objects.filter(
-                from_gear=camera, to_item=new_camera, image=image_1, usage_type=MigrationUsageType.IMAGING
+                from_gear=camera, to_item_object_id=new_camera.pk, image=image_1, usage_type=MigrationUsageType.IMAGING
             ).exists()
         )
         self.assertFalse(image_1.imaging_cameras.filter(pk=camera.pk).exists())
@@ -209,7 +209,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertTrue(
             CameraMigrationRecord.objects.filter(
-                from_gear=camera, to_item=modified, image=image_2, usage_type=MigrationUsageType.IMAGING
+                from_gear=camera, to_item_object_id=modified.pk, image=image_2, usage_type=MigrationUsageType.IMAGING
             ).exists()
         )
         self.assertFalse(image_2.imaging_cameras.filter(pk=camera.pk).exists())
@@ -219,7 +219,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertFalse(
             CameraMigrationRecord.objects.filter(
-                from_gear=camera, to_item=new_camera, image=image_1, usage_type=MigrationUsageType.IMAGING
+                from_gear=camera, to_item_object_id=new_camera.pk, image=image_1, usage_type=MigrationUsageType.IMAGING
             ).exists()
         )
         self.assertTrue(image_1.imaging_cameras.filter(pk=camera.pk).exists())
@@ -227,7 +227,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertFalse(
             CameraMigrationRecord.objects.filter(
-                from_gear=camera, to_item=new_camera, image=image_2, usage_type=MigrationUsageType.IMAGING
+                from_gear=camera, to_item_object_id=modified.pk, image=image_2, usage_type=MigrationUsageType.IMAGING
             ).exists()
         )
         self.assertTrue(image_2.imaging_cameras.filter(pk=camera.pk).exists())
@@ -263,7 +263,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertTrue(
             CameraMigrationRecord.objects.filter(
-                from_gear=camera, to_item=new_camera, image=image_1, usage_type=MigrationUsageType.IMAGING
+                from_gear=camera, to_item_object_id=new_camera.pk, image=image_1, usage_type=MigrationUsageType.IMAGING
             ).exists()
         )
         self.assertFalse(image_1.imaging_cameras.filter(pk=camera.pk).exists())
@@ -271,7 +271,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertTrue(
             CameraMigrationRecord.objects.filter(
-                from_gear=camera, to_item=new_camera, image=image_2, usage_type=MigrationUsageType.IMAGING
+                from_gear=camera, to_item_object_id=new_camera.pk, image=image_2, usage_type=MigrationUsageType.IMAGING
             ).exists()
         )
         self.assertFalse(image_2.imaging_cameras.filter(pk=camera.pk).exists())
@@ -281,7 +281,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertFalse(
             CameraMigrationRecord.objects.filter(
-                from_gear=camera, to_item=new_camera, image=image_1, usage_type=MigrationUsageType.IMAGING
+                from_gear=camera, to_item_object_id=new_camera.pk, image=image_1, usage_type=MigrationUsageType.IMAGING
             ).exists()
         )
         self.assertTrue(image_1.imaging_cameras.filter(pk=camera.pk).exists())
@@ -289,7 +289,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertFalse(
             CameraMigrationRecord.objects.filter(
-                from_gear=camera, to_item=new_camera, image=image_2, usage_type=MigrationUsageType.IMAGING
+                from_gear=camera, to_item_object_id=new_camera.pk, image=image_2, usage_type=MigrationUsageType.IMAGING
             ).exists()
         )
         self.assertTrue(image_2.imaging_cameras.filter(pk=camera.pk).exists())
@@ -315,7 +315,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertTrue(
             TelescopeMigrationRecord.objects.filter(
-                from_gear=telescope, to_item=new_telescope, image=image, usage_type=MigrationUsageType.GUIDING
+                from_gear=telescope, to_item_object_id=new_telescope.pk, image=image, usage_type=MigrationUsageType.GUIDING
             ).exists()
         )
         self.assertFalse(image.guiding_telescopes.filter(pk=telescope.pk).exists())
@@ -325,7 +325,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertFalse(
             TelescopeMigrationRecord.objects.filter(
-                from_gear=telescope, to_item=new_telescope, image=image, usage_type=MigrationUsageType.GUIDING
+                from_gear=telescope, to_item_object_id=new_telescope.pk, image=image, usage_type=MigrationUsageType.GUIDING
             ).exists()
         )
         self.assertTrue(image.guiding_telescopes.filter(pk=telescope.pk).exists())
@@ -351,7 +351,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertTrue(
             CameraMigrationRecord.objects.filter(
-                from_gear=camera, to_item=new_camera, image=image, usage_type=MigrationUsageType.GUIDING
+                from_gear=camera, to_item_object_id=new_camera.pk, image=image, usage_type=MigrationUsageType.GUIDING
             ).exists()
         )
         self.assertFalse(image.guiding_cameras.filter(pk=camera.pk).exists())
@@ -361,7 +361,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertFalse(
             CameraMigrationRecord.objects.filter(
-                from_gear=camera, to_item=new_camera, image=image, usage_type=MigrationUsageType.GUIDING
+                from_gear=camera, to_item_object_id=new_camera.pk, image=image, usage_type=MigrationUsageType.GUIDING
             ).exists()
         )
         self.assertTrue(image.guiding_cameras.filter(pk=camera.pk).exists())
@@ -387,7 +387,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertTrue(
             MountMigrationRecord.objects.filter(
-                from_gear=mount, to_item=new_mount, image=image
+                from_gear=mount, to_item_object_id=new_mount.pk, image=image
             ).exists()
         )
         self.assertFalse(image.mounts.filter(pk=mount.pk).exists())
@@ -397,7 +397,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertFalse(
             MountMigrationRecord.objects.filter(
-                from_gear=mount, to_item=new_mount, image=image
+                from_gear=mount, to_item_object_id=new_mount.pk, image=image
             ).exists()
         )
         self.assertTrue(image.mounts.filter(pk=mount.pk).exists())
@@ -451,7 +451,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertTrue(
             FilterMigrationRecord.objects.filter(
-                from_gear=filter_2, to_item=new_filter, image=image
+                from_gear=filter_2, to_item_object_id=new_filter.pk, image=image
             ).exists()
         )
         self.assertFalse(image.filters.filter(pk=filter_2.pk).exists())
@@ -471,7 +471,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertTrue(
             FilterMigrationRecord.objects.filter(
-                from_gear=filter_1, to_item=new_filter, image=image
+                from_gear=filter_1, to_item_object_id=new_filter.pk, image=image
             ).exists()
         )
         self.assertFalse(image.filters.filter(pk=filter_1.pk).exists())
@@ -491,7 +491,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertFalse(
             FilterMigrationRecord.objects.filter(
-                from_gear=filter_2, to_item=new_filter, image=image
+                from_gear=filter_2, to_item_object_id=new_filter.pk, image=image
             ).exists()
         )
         self.assertTrue(image.filters.filter(pk=filter_2.pk).exists())
@@ -502,7 +502,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertTrue(
             FilterMigrationRecord.objects.filter(
-                from_gear=filter_1, to_item=new_filter, image=image
+                from_gear=filter_1, to_item_object_id=new_filter.pk, image=image
             ).exists()
         )
         deep_sky_acquisition_1.refresh_from_db()
@@ -569,7 +569,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
         # Check user_1
         self.assertTrue(
             FilterMigrationRecord.objects.filter(
-                from_gear=filter, to_item=new_filter, image=image_1
+                from_gear=filter, to_item_object_id=new_filter.pk, image=image_1
             ).exists()
         )
         self.assertFalse(image_1.filters.filter(pk=filter.pk).exists())
@@ -588,7 +588,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
         # Check user_2
         self.assertTrue(
             FilterMigrationRecord.objects.filter(
-                from_gear=filter, to_item=new_filter, image=image_2
+                from_gear=filter, to_item_object_id=new_filter.pk, image=image_2
             ).exists()
         )
         self.assertFalse(image_2.filters.filter(pk=filter.pk).exists())
@@ -607,7 +607,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
         # Check user_3
         self.assertFalse(
             FilterMigrationRecord.objects.filter(
-                from_gear=filter, to_item=new_filter, image=image_3
+                from_gear=filter, to_item_object_id=new_filter.pk, image=image_3
             ).exists()
         )
         self.assertTrue(image_3.filters.filter(pk=filter.pk).exists())
@@ -627,7 +627,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertFalse(
             FilterMigrationRecord.objects.filter(
-                from_gear=filter, to_item=new_filter, image=image_1
+                from_gear=filter, to_item_object_id=new_filter.pk, image=image_1
             ).exists()
         )
         self.assertTrue(image_1.filters.filter(pk=filter.pk).exists())
@@ -645,7 +645,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertFalse(
             FilterMigrationRecord.objects.filter(
-                from_gear=filter, to_item=new_filter, image=image_2
+                from_gear=filter, to_item_object_id=new_filter.pk, image=image_2
             ).exists()
         )
         self.assertTrue(image_2.filters.filter(pk=filter.pk).exists())
@@ -1141,7 +1141,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertTrue(
             AccessoryMigrationRecord.objects.filter(
-                from_gear=accessory, to_item=new_accessory, image=image
+                from_gear=accessory, to_item_object_id=new_accessory.pk, image=image
             ).exists()
         )
         self.assertFalse(image.accessories.filter(pk=accessory.pk).exists())
@@ -1151,7 +1151,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertFalse(
             AccessoryMigrationRecord.objects.filter(
-                from_gear=accessory, to_item=new_accessory, image=image
+                from_gear=accessory, to_item_object_id=new_accessory.pk, image=image
             ).exists()
         )
         self.assertTrue(image.accessories.filter(pk=accessory.pk).exists())
@@ -1177,7 +1177,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertTrue(
             FocalReducerMigrationRecord.objects.filter(
-                from_gear=focal_reducer, to_item=new_accessory, image=image
+                from_gear=focal_reducer, to_item_object_id=new_accessory.pk, image=image
             ).exists()
         )
         self.assertFalse(image.focal_reducers.filter(pk=focal_reducer.pk).exists())
@@ -1187,7 +1187,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertFalse(
             FocalReducerMigrationRecord.objects.filter(
-                from_gear=focal_reducer, to_item=new_accessory, image=image
+                from_gear=focal_reducer, to_item_object_id=new_accessory.pk, image=image
             ).exists()
         )
         self.assertTrue(image.focal_reducers.filter(pk=focal_reducer.pk).exists())
@@ -1213,7 +1213,7 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertTrue(
             SoftwareMigrationRecord.objects.filter(
-                from_gear=software, to_item=new_software, image=image
+                from_gear=software, to_item_object_id=new_software.pk, image=image
             ).exists()
         )
         self.assertFalse(image.software.filter(pk=software.pk).exists())
@@ -1223,8 +1223,60 @@ class EquipmentServiceApplyMigrationMigrateTest(TestCase):
 
         self.assertFalse(
             SoftwareMigrationRecord.objects.filter(
-                from_gear=software, to_item=new_software, image=image
+                from_gear=software, to_item_object_id=new_software.pk, image=image
             ).exists()
         )
         self.assertTrue(image.software.filter(pk=software.pk).exists())
         self.assertFalse(image.software_2.filter(pk=new_software.pk).exists())
+
+    def test_camera_to_accessory(self):
+        user = Generators.user()
+        image = Generators.image(user=user)
+        camera = Generators.camera()
+
+        image.imaging_cameras.add(camera)
+
+        accessory = EquipmentGenerators.accessory()
+        migration_strategy = Generators.gear_migration_strategy(
+            gear=camera,
+            user=user,
+            migration_flag='MIGRATE',
+            migration_content_object=accessory,
+            migration_flag_reviewer_decision='APPROVED',
+        )
+
+        EquipmentService.apply_migration_strategy(migration_strategy)
+
+        self.assertFalse(image.imaging_cameras.filter(pk=camera.pk).exists())
+        self.assertTrue(image.accessories_2.filter(pk=accessory.pk).exists())
+
+        EquipmentService.undo_migration_strategy(migration_strategy)
+
+        self.assertTrue(image.imaging_cameras.filter(pk=camera.pk).exists())
+        self.assertFalse(image.accessories_2.filter(pk=accessory.pk).exists())
+
+    def test_accessory_to_camera(self):
+        user = Generators.user()
+        image = Generators.image(user=user)
+        accessory = Generators.accessory()
+
+        image.accessories.add(accessory)
+
+        camera = EquipmentGenerators.camera()
+        migration_strategy = Generators.gear_migration_strategy(
+            gear=accessory,
+            user=user,
+            migration_flag='MIGRATE',
+            migration_content_object=camera,
+            migration_flag_reviewer_decision='APPROVED',
+        )
+
+        EquipmentService.apply_migration_strategy(migration_strategy)
+
+        self.assertFalse(image.accessories.filter(pk=accessory.pk).exists())
+        self.assertTrue(image.imaging_cameras_2.filter(pk=camera.pk).exists())
+
+        EquipmentService.undo_migration_strategy(migration_strategy)
+
+        self.assertTrue(image.accessories.filter(pk=accessory.pk).exists())
+        self.assertFalse(image.imaging_cameras_2.filter(pk=camera.pk).exists())

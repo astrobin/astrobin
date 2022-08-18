@@ -142,7 +142,7 @@ class Generators:
             migration_content_object=kwargs.pop('migration_content_object', None),
             migration_flag_moderator=kwargs.pop('migration_flag_moderator', Generators.user()),
             migration_flag_reviewer=kwargs.pop('migration_flag_reviewer', None),
-            migration_flag_reviewer_decision=kwargs.pop('migration_flat_reviewer_decision', None),
+            migration_flag_reviewer_decision=kwargs.pop('migration_flag_reviewer_decision', None),
         )
 
     @staticmethod
