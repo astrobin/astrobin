@@ -23,6 +23,7 @@ from astrobin.enums import SubjectType
 from astrobin.enums.license import License
 from astrobin.gear import get_correct_gear, is_gear_complete
 from astrobin.models import GearUserInfo, Image, LICENSE_CHOICES, UserProfile
+from astrobin.services.gear_service import GearService
 from astrobin.services.utils_service import UtilsService
 from astrobin.utils import (
     dec_decimal_precision_from_pixel_scale, decimal_to_degrees_minutes_seconds_html,
@@ -897,3 +898,8 @@ def participation_is_deleted(thread: Thread, user: User) -> bool:
         return True
 
     return participations[0].deleted_at != None
+
+
+@register.filter
+def has_unmigrated_legacy_gear_items(user: User) -> bool:
+    return GearService.has_unmigrated_legacy_gear_items(user)

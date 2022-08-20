@@ -23,6 +23,46 @@
             {% if READONLY_MODE %}
                 {% include 'readonly_mode.html' %}
             {% else %}
+                <div class="alert alert-info">
+                    <p>
+                    <i class="icon-info-sign"></i>
+
+                    {% blocktrans trimmed %}
+                        This is a dynamically generated list of equipment items that you have used on AstroBin.
+                    {% endblocktrans %}
+
+                    {% blocktrans trimmed %}
+                        You cannot edit directly, as equipment items are associated directly to images when uploading
+                        them, or later via the Edit menu on the image's page.
+                    {% endblocktrans %}
+                    </p>
+                </div>
+
+                {% if request.user|has_unmigrated_legacy_gear_items %}
+                    <div class="alert alert-info">
+                        <p>
+                        <i class="icon-info-sign"></i>
+
+                        {% blocktrans %}
+                            Some of your images are still on the legacy equipment database. Please migrate your legacy
+                            equipment to help consolidate AstroBin's equipment database.
+                        {% endblocktrans %}
+                        </p>
+
+                        <hr>
+
+                        <a class="btn btn-secondary"
+                           href="https://welcome.astrobin.com/blog/the-great-equipment-database-migration-of-2021"
+                           target="_blank">
+                            {% trans "Learn more." %}..
+                        </a>
+
+                        <a class="btn btn-primary" href="{% app_redirection_service '/equipment/migration-tool' %}">
+                            {% trans "Begin migration" %}&hellip;
+                        </a>
+                    </div>
+                {% endif %}
+
                 <table class="table table-striped">
                     <tbody>
                     <tr>
@@ -40,6 +80,12 @@
                                 <a href="{% url 'user_page' request.user %}?public=&sub=gear&klass=telescope&active=N{{ value.id }}">
                                  {{ value.image_count }}
                                 </a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="2">
+                                {% trans "There doesn't seem to be anything here." %}
                             </td>
                         </tr>
                     {% endfor %}
@@ -63,6 +109,12 @@
                                 </a>
                             </td>
                         </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="2">
+                                {% trans "There doesn't seem to be anything here." %}
+                            </td>
+                        </tr>
                     {% endfor %}
                     </tbody>
 
@@ -79,6 +131,12 @@
                                 </a>
                             </td>
                             <td>{{ value.image_count }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="2">
+                                {% trans "There doesn't seem to be anything here." %}
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -97,6 +155,12 @@
                             </td>
                             <td>{{ value.image_count }}</td>
                         </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="2">
+                                {% trans "There doesn't seem to be anything here." %}
+                            </td>
+                        </tr>
                     {% endfor %}
                     </tbody>
 
@@ -113,6 +177,12 @@
                                 </a>
                             </td>
                             <td>{{ value.image_count }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="2">
+                                {% trans "There doesn't seem to be anything here." %}
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -134,7 +204,7 @@
                     {%  empty %}
                         <tr>
                             <td colspan="2">
-                                {% trans "There doesn't seem to be anything here." %
+                                {% trans "There doesn't seem to be anything here." %}
                             </td>
                         </tr>
                     {% endfor %}
