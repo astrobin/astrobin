@@ -143,7 +143,7 @@ class EquipmentGenerators:
         return Accessory.objects.create(
             created_by=kwargs.get('created_by', Generators.user()),
             brand=kwargs.get('brand', EquipmentGenerators.brand()),
-            name=kwargs.get('name', 'Test software %s' % random_name),
+            name=kwargs.get('name', 'Test accessory %s' % random_name),
             type=kwargs.get('type', AccessoryType.OTHER),
             variant_of=kwargs.get('variant_of', None),
             website=kwargs.get('website', 'https://www.test-accessory-%s.com/' % random_name),
