@@ -18,6 +18,7 @@ class EquipmentServiceRejectItemTest(TestCase):
         image.filters_2.add(duplicate)
         DeepSky_Acquisition.objects.create(image=image, filter_2=duplicate, number=10, duration=300)
 
+        duplicate.reviewed_by = Generators.user()
         duplicate.reviewer_decision = EquipmentItemReviewerDecision.REJECTED
         duplicate.reviewer_rejection_reason = EquipmentItemRejectionReason.DUPLICATE
         duplicate.reviewer_rejection_duplicate_of_klass = EquipmentItemKlass.FILTER
