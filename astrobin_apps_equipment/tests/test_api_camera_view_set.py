@@ -6,7 +6,7 @@ from rest_framework.test import APIClient
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.models import Camera
 from astrobin_apps_equipment.models.camera_base_model import CameraType
-from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemRejectionReason, EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
 from astrobin_apps_equipment.services import EquipmentItemService
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
@@ -261,7 +261,7 @@ class TestApiCameraViewSet(TestCase):
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-detail', args=(duplicate.id,)) + 'reject/', {
-                'reason': 'DUPLICATE',
+                'reason': EquipmentItemRejectionReason.DUPLICATE,
                 'duplicate_of_klass': EquipmentItemKlass.CAMERA,
                 'duplicate_of_usage_type': EquipmentItemUsageType.IMAGING,
                 'duplicate_of': camera.id,
@@ -285,7 +285,7 @@ class TestApiCameraViewSet(TestCase):
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-detail', args=(duplicate.id,)) + 'reject/', {
-                'reason': 'DUPLICATE',
+                'reason': EquipmentItemRejectionReason.DUPLICATE,
                 'duplicate_of_klass': EquipmentItemKlass.CAMERA,
                 'duplicate_of_usage_type': EquipmentItemUsageType.IMAGING,
                 'duplicate_of': camera.id,
@@ -311,7 +311,7 @@ class TestApiCameraViewSet(TestCase):
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-detail', args=(duplicate.id,)) + 'reject/', {
-                'reason': 'DUPLICATE',
+                'reason': EquipmentItemRejectionReason.DUPLICATE,
                 'duplicate_of_klass': EquipmentItemKlass.CAMERA,
                 'duplicate_of_usage_type': EquipmentItemUsageType.IMAGING,
                 'duplicate_of': modified.id,
@@ -337,7 +337,7 @@ class TestApiCameraViewSet(TestCase):
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-detail', args=(duplicate.id,)) + 'reject/', {
-                'reason': 'DUPLICATE',
+                'reason': EquipmentItemRejectionReason.DUPLICATE,
                 'duplicate_of_klass': EquipmentItemKlass.CAMERA,
                 'duplicate_of_usage_type': EquipmentItemUsageType.IMAGING,
                 'duplicate_of': camera.id,
@@ -362,7 +362,7 @@ class TestApiCameraViewSet(TestCase):
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-detail', args=(duplicate.id,)) + 'reject/', {
-                'reason': 'DUPLICATE',
+                'reason': EquipmentItemRejectionReason.DUPLICATE,
                 'duplicate_of_klass': EquipmentItemKlass.CAMERA,
                 'duplicate_of_usage_type': EquipmentItemUsageType.IMAGING,
                 'duplicate_of': modified.id,
@@ -387,7 +387,7 @@ class TestApiCameraViewSet(TestCase):
 
         response = client.post(
             reverse('astrobin_apps_equipment:camera-detail', args=(duplicate.id,)) + 'reject/', {
-                'reason': 'DUPLICATE',
+                'reason': EquipmentItemRejectionReason.DUPLICATE,
                 'duplicate_of_klass': EquipmentItemKlass.CAMERA,
                 'duplicate_of_usage_type': EquipmentItemUsageType.IMAGING,
                 'duplicate_of': camera.id,
