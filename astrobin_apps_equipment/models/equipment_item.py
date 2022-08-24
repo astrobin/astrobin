@@ -25,6 +25,15 @@ class EquipmentItemReviewerDecision:
     REJECTED = 'REJECTED'
 
 
+class EquipmentItemRejectionReason:
+    TYPO = 'TYPO'
+    WRONG_BRAND = 'WRONG_BRAND'
+    INACCURATE_DATA = 'INACCURATE_DATA'
+    INSUFFICIENT_DATA = 'INSUFFICIENT_DATA'
+    DUPLICATE = 'DUPLICATE'
+    OTHER = 'OTHER'
+
+
 class EquipmentItem(SafeDeleteModel):
     klass = models.CharField(
         max_length=16,
@@ -97,12 +106,12 @@ class EquipmentItem(SafeDeleteModel):
     reviewer_rejection_reason = models.CharField(
         max_length=32,
         choices=[
-            ('TYPO', 'There\'s a typo in the name of the item'),
-            ('WRONG_BRAND', 'The item was assigned to the wrong brand'),
-            ('INACCURATE_DATA', 'Some data is inaccurate'),
-            ('INSUFFICIENT_DATA', 'Some important data is missing'),
-            ('DUPLICATE', 'This item already exists in the database'),
-            ('OTHER', _('Other'))
+            (EquipmentItemRejectionReason.TYPO, 'There\'s a typo in the name of the item'),
+            (EquipmentItemRejectionReason.WRONG_BRAND, 'The item was assigned to the wrong brand'),
+            (EquipmentItemRejectionReason.INACCURATE_DATA, 'Some data is inaccurate'),
+            (EquipmentItemRejectionReason.INSUFFICIENT_DATA, 'Some important data is missing'),
+            (EquipmentItemRejectionReason.DUPLICATE, 'This item already exists in the database'),
+            (EquipmentItemRejectionReason.OTHER, _('Other'))
         ],
         null=True,
         editable=False,

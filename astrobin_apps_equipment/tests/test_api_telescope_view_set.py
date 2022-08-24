@@ -6,7 +6,7 @@ from rest_framework.test import APIClient
 
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.models import EquipmentBrand, Telescope
-from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
+from astrobin_apps_equipment.models.equipment_item import EquipmentItemRejectionReason, EquipmentItemReviewerDecision
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
 from astrobin_apps_equipment.models.telescope_base_model import TelescopeType
 from astrobin_apps_equipment.services import EquipmentItemService
@@ -190,7 +190,7 @@ class TestApiTelescopeViewSet(TestCase):
 
         client.post(
             reverse('astrobin_apps_equipment:telescope-detail', args=(telescope1.pk,)) + 'reject/', {
-                'reason': 'DUPLICATE',
+                'reason': EquipmentItemRejectionReason.DUPLICATE,
                 'duplicate_of_klass': EquipmentItemKlass.TELESCOPE,
                 'duplicate_of_usage_type': EquipmentItemUsageType.IMAGING,
                 'duplicate_of': telescope2.id,

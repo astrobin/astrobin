@@ -7,8 +7,6 @@ from django.db.models import Q, QuerySet
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from fuzzywuzzy import fuzz
-from fuzzywuzzy.utils import asciidammit
 from pybb.models import Category, Forum, Topic
 
 from astrobin_apps_equipment.models import EquipmentBrand, EquipmentBrandListing
@@ -529,6 +527,15 @@ class EquipmentService:
                             EquipmentItemKlass.SOFTWARE: 'software_2',
                         }
                         getattr(image, destination_map.get(duplicate_of.klass)).add(replace_with)
+
+
+                if ModelClass == Filter:
+                    from astrobin.models import DeepSky_Acquisition
+                    for acquisition in DeepSky_Acquisition.objects.filter(image=image, filter_2=item):
+                        acquisition.filter_2 = None
+                        if DuplicateModelClass == Filter:
+                            acquisition.filter_2 = duplicate_of
+                        acquisition.save()
 
                 push_notification(
                     [image.user],
