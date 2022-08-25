@@ -86,13 +86,13 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             brand = get_object_or_None(EquipmentBrand, name__iexact=q)
             brand_queryset: QuerySet = queryset.none()
             if brand:
-                brand_queryset = queryset.filter(
-                    Q(brand=brand) &
-                    Q(
+                query = Q(brand=brand)
+                if not UserService(self.request.user).is_in_group(GroupName.EQUIPMENT_MODERATORS):
+                    query &= Q(
                         Q(reviewer_decision=EquipmentItemReviewerDecision.APPROVED) |
                         (Q(created_by=self.request.user) if self.request.user.is_authenticated else Q(pk=None))
                     )
-                ).order_by(Lower('name'))
+                brand_queryset = queryset.filter(query).order_by(Lower('name'))
             if brand_queryset.exists():
                 self.paginator.page_size = brand_queryset.count()
                 queryset = brand_queryset

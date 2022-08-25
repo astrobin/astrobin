@@ -179,13 +179,14 @@ class TestApiCameraViewSetQueryset(TestCase):
         brand2 = EquipmentGenerators.brand(name="bar")
 
         EquipmentGenerators.camera(brand=brand1)
+        EquipmentGenerators.camera(brand=brand1, reviewer_decision = EquipmentItemReviewerDecision.APPROVED)
         EquipmentGenerators.camera(brand=brand2, reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
 
         client.force_authenticate(user=Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS]))
 
         response = client.get(reverse('astrobin_apps_equipment:camera-list') + f'?q={brand1.name}', format='json')
 
-        self.assertEquals(0, response.data['count'])
+        self.assertEquals(1, response.data['count'])
 
     def test_query_with_exact_brand_only_shows_items_from_that_brand_except_if_unapproved_except_if_moderator(self):
         client = APIClient()
@@ -193,12 +194,14 @@ class TestApiCameraViewSetQueryset(TestCase):
         brand1 = EquipmentGenerators.brand(name="foo")
         brand2 = EquipmentGenerators.brand(name="bar")
 
-        camera1 = EquipmentGenerators.camera(brand=brand1)
-        EquipmentGenerators.camera(brand=brand2, reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        camera1 = EquipmentGenerators.camera(brand=brand1, name="a")
+        camera2 = EquipmentGenerators.camera(brand=brand1, name="b", reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
+        EquipmentGenerators.camera(brand=brand2, name="c", reviewer_decision=EquipmentItemReviewerDecision.APPROVED)
 
         client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
 
         response = client.get(reverse('astrobin_apps_equipment:camera-list') + f'?q={brand1.name}', format='json')
 
-        self.assertEquals(1, response.data['count'])
+        self.assertEquals(2, response.data['count'])
         self.assertEquals(camera1.id, response.data['results'][0]['id'])
+        self.assertEquals(camera2.id, response.data['results'][1]['id'])
