@@ -94,7 +94,8 @@ def mirror_camera_update_to_variants(sender, instance: Camera, **kwargs):
 
 @receiver(post_softdelete, sender=Camera)
 def mirror_camera_softdelete_to_variants(sender, instance: Camera, **kwargs):
-    Camera.objects.filter(brand=instance.brand, name=instance.name).exclude(pk=instance.pk).delete()
+    if instance.variant_of is None:
+        Camera.objects.filter(brand=instance.brand, name=instance.name).exclude(pk=instance.pk).delete()
 
 
 @receiver(post_softdelete, sender=Sensor)
