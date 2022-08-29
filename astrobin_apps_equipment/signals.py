@@ -280,6 +280,9 @@ def send_equipment_item_requires_moderation_notification(sender, instance, creat
     ):
         return
 
+    if instance.migration_flag_reviewer_decision is not None:
+        return
+
     url: str = build_notification_url(instance.get_absolute_url())
     parsed = urlparse(url)
     url_dict = dict(parse_qsl(parsed.query))
