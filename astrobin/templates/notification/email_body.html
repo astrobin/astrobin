@@ -323,7 +323,11 @@
                                         <tr>
                                             <td class="content-block">
                                                 <h2>
-                                                    {% trans "You have a new notification on AstroBin" %}
+                                                    {% blocktrans with name=recipient.userprofile.get_display_name.split.0 %}
+                                                        Hey, {{ name }}!
+                                                    {% endblocktrans %}
+
+                                                    {% trans "You have a new notification on AstroBin" %}.
                                                 </h2>
                                             </td>
                                         </tr>

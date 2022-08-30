@@ -19,7 +19,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.exceptions import MultipleObjectsReturned
 from django.core.paginator import InvalidPage, Paginator
-from django.db.models import Count, Q
+from django.db.models import Q
 from django.forms.models import inlineformset_factory
 from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
@@ -1135,9 +1135,11 @@ def user_page(request, username):
         raise Http404
 
     if Image.objects_including_wip.filter(user=user, moderator_decision=ModeratorDecision.REJECTED).count() > 0:
-        if (not request.user.is_authenticated or \
-                not request.user.is_superuser and \
-                not request.user.userprofile.is_image_moderator()):
+        if (
+                not request.user.is_authenticated or
+                not request.user.is_superuser and
+                not request.user.userprofile.is_image_moderator()
+        ):
             raise Http404
 
     user_ct = ContentType.objects.get_for_model(User)

@@ -149,7 +149,12 @@
                         >
                     {% endif %}
                         <h3>{{ image.title | escape | default:_("(no title)") }}</h3>
-                        <h4>{% astrobin_username image.user link=False %}</h4>
+                        <h4>
+                            {% astrobin_username image.user link=False %}
+                            {% for collaborator in image.collaborators.all %}
+                                &middot; {% astrobin_username collaborator link=False %}
+                            {% endfor %}
+                        </h4>
 
                         {% cache 300 astrobin_image_caption caption_cache_key %}
                         <table class="table table-condensed">

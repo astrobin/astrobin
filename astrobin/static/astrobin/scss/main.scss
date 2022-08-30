@@ -1381,6 +1381,14 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     }
   }
 
+  .footer {
+    background: $grey-6-dark url('../images/darker-panel-tile.png');
+    @include rounded-corners-bottom(1.5rem);
+    border-top: #404040;
+    margin: 1.5rem -1.5rem -1.5rem -1.5rem;
+    padding: 1rem;
+  }
+
   .col {
     float: left;
     width: 50%;
@@ -1462,62 +1470,63 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 
   .avatar {
-    float: left;
-  }
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-around;
 
-  .avatar img {
-    @include rounded-corners(20px);
-  }
-
-  .username {
-    font-size: 1.5em;
-    margin-left: 120px;
-    margin-top: $spacer-small;
-
-    a.astrobin-username {
-      font-size: 80%;
-      display: inline-block;
-      margin-bottom: 1rem;
-    }
-
-    .data {
+    a {
       display: block;
-      font-size: 60%;
-      color: darken($text-color, 10%);
-      margin-top: $spacer-small;
-      margin-bottom: $spacer-medium;
+      position: relative;
 
-      .license {
-        margin-right: $spacer-small;
+      &:not(:first-child) {
+        margin-left: .5rem;
       }
     }
 
-    .views, .bookmarks, .likes {
-      font-size: 85%;
-      color: darken($text-color, 15%);
-      margin-right: $spacer-medium;
+    .property-follow {
+      top: .25rem;
+      right: 1px;
 
-      .number {
-        color: $strong-text-color;
-        font-weight: bold;
-        margin-left: $spacer-small;
+      .btn {
+        width: 1.5rem;
+        height: 1.5rem;
+        padding: 0;
       }
     }
 
-    .likes a, .bookmarks a {
-      color: darken($text-color, 15%);
-      border-bottom: 1px dotted #646464;
+    img {
+      @include rounded-corners(20px);
     }
+  }
 
-    .property-bookmark {
-      margin: 0;
-      width: 30px;
+  .data {
+    display: flex;
+    font-size: small;
+    justify-content: space-between;
+    align-items: center;
+    color: darken($text-color, 10%);
 
-      button, a {
-        font-size: 12px;
-        line-height: initial;
-      }
+    .license {
+      margin-right: $spacer-small;
     }
+  }
+
+  .views, .bookmarks, .likes {
+    font-size: 85%;
+    color: darken($text-color, 15%);
+    margin-right: $spacer-medium;
+
+    .number {
+      color: $strong-text-color;
+      font-weight: bold;
+      margin-left: $spacer-small;
+    }
+  }
+
+  .likes a, .bookmarks a {
+    color: darken($text-color, 15%);
+    border-bottom: 1px dotted #646464;
   }
 }
 
@@ -3279,30 +3288,31 @@ table#private-shared-folders tr:hover a.delete-folder {
   }
 }
 
-.toggleproperty-add-remove.property-like {
-  display: inline-block;
-  width: calc(70% - 6px);
-  margin: 16px 0;
-  margin-right: 2px;
+.image-like-and-bookmark-buttons {
+  .toggleproperty-add-remove.property-like {
+    display: inline-block;
+    width: calc(70% - 6px);
+    margin: 0 2px 1rem 0;
 
-  button, a {
-    width: 100%;
-    font-size: 16px;
-    line-height: 48px;
-    padding: 4px 0;
+    button, a {
+      width: 100%;
+      font-size: 16px;
+      line-height: 48px;
+      padding: 4px 0;
+    }
   }
-}
 
-.toggleproperty-add-remove.property-bookmark {
-  display: inline-block;
-  width: calc(30% - 2px);
-  margin: 16px 0;
+  .toggleproperty-add-remove.property-bookmark {
+    display: inline-block;
+    width: calc(30% - 2px);
+    margin-bottom: 1rem;
 
-  button, a {
-    width: 100%;
-    font-size: 16px;
-    line-height: 48px;
-    padding: 4px 0;
+    button, a {
+      width: 100%;
+      font-size: 16px;
+      line-height: 48px;
+      padding: 4px 0;
+    }
   }
 }
 

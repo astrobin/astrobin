@@ -1,35 +1,35 @@
-{% load avatar_tags %}
-{% load astrobin_apps_donations_tags %}
-{% load astrobin_apps_premium_tags %}
-{% load astrobin_apps_users_tags %}
 {% load common_tags %}
 {% load i18n %}
 {% load hitcount_tags %}
 {% load tags %} {% comment %} TODO: rename tags to astrobin_tags {% endcomment %}
-{% load toggleproperty_tags %}
 {% load static %}
 
 <div class="subtle-container avatar-block">
     <div class="header">
-        <h4 class="visible-phone"><i class="icon-user"></i> {% trans "Author" %}</h4>
-        <h4 class="hidden-phone">{% astrobin_username image.user %}</h4>
+        <h4>
+            {% if image.collaborators.all|length > 0 %}
+                <i class="icon-group"></i>
+                {% trans "Collaborators" %}
+            {% else %}
+                <i class="icon-user"></i>
+                {% trans "Photographer" %}
+            {% endif %}
+        </h4>
     </div>
 
     <div class="avatar">
-        <a data-instant href="{% url 'user_page' image.user %}">
-            {% avatar image.user 106 %}
+        {% with image.user as user %}
+            {% include "./_avatar.html" %}
+        {% endwith %}
 
-            {% if DONATIONS_ENABLED %}
-                {% donor_badge image.user 'medium' %}
-            {% endif %}
-
-            {% if PREMIUM_ENABLED %}
-                {% premium_badge image.user 'medium' %}
-            {% endif %}
-        </a>
+        {% for collaborator in image.collaborators.all %}
+            {% with collaborator as user %}
+                {% include "./_avatar.html" %}
+            {% endwith %}
+        {% endfor %}
     </div>
-    <div class="username">
-        <span class="visible-phone">{% astrobin_username image.user %}</span>
+
+    <div class="footer">
         <div class="data">
             <div>
                 {% license_logo image %}
@@ -43,29 +43,23 @@
             <div>
                 <span class="views">
                     {% get_hit_count for image as hit_count %}
-                    <i class="icon-eye-open"></i> <span class="number">{{hit_count}}</span>
+                    <i class="icon-eye-open"></i> <span class="number">{{ hit_count }}</span>
                 </span>
 
                 <span class="bookmarks">
                     <a href="#people-bookmarked-this-modal" data-toggle="modal">
                         <i class="icon-bookmark"></i>
-                        <span class="number">{{bookmarked_this|length}}</span>
+                        <span class="number">{{ bookmarked_this|length }}</span>
                     </a>
                 </span>
 
                 <span class="likes">
                     <a href="#people-like-this-modal" data-toggle="modal">
                         <i class="icon-thumbs-up"></i>
-                        <span class="number">{{like_this|length}}</span>
+                        <span class="number">{{ like_this|length }}</span>
                     </a>
                 </span>
             </div>
         </div>
-
-        {% if request.user != image.user %}
-            {% add_remove_toggleproperty "follow" image.user request.user %}
-        {% endif %}
     </div>
 </div>
-
-

@@ -23,7 +23,7 @@ def purge_old_notifications():
 
 
 @shared_task(time_limit=1800)
-def push_notification_for_new_image(user_pk, image_pk):
+def push_notification_for_new_image(image_pk):
     try:
         image = Image.objects_including_wip.get(pk=image_pk)
     except Image.DoesNotExist:
@@ -34,12 +34,13 @@ def push_notification_for_new_image(user_pk, image_pk):
         logger.error('push_notification_for_new_image called for image that is wip: %d' % image_pk)
         return
 
-    followers = [
-        x.user for x in
-        ToggleProperty.objects.toggleproperties_for_object(
-            "follow",
-            UserProfile.objects.get(user__pk=user_pk).user)
-    ]
+    user_pks = [image.user.pk] + list(image.collaborators.all().values_list('pk', flat=True))
+
+    followers = [x.user for x in ToggleProperty.objects.filter(
+        property_type="follow",
+        content_type=ContentType.objects.get_for_model(User),
+        object_id__in=user_pks
+    ).order_by('object_id')]
 
     if len(followers) > 0:
         thumb = image.thumbnail_raw('gallery', None, sync=True)
@@ -49,7 +50,7 @@ def push_notification_for_new_image(user_pk, image_pk):
         })
     else:
         logger.info('push_notification_for_new_image called for image %d whose author %d has no followers' % (
-            image_pk, user_pk)
+            image.pk, image.user.pk)
         )
 
 
@@ -65,10 +66,12 @@ def push_notification_for_new_image_revision(revision_pk):
         logger.error('push_notification_for_new_image called for revision of image that is wip: %d' % revision_pk)
         return
 
+    user_pks = [revision.image.user.pk] + list(revision.image.collaborators.all().values_list('pk', flat=True))
+
     followers = [x.user for x in ToggleProperty.objects.filter(
         property_type="follow",
         content_type=ContentType.objects.get_for_model(User),
-        object_id=revision.image.user.pk)]
+        object_id__in=user_pks).order_by('object_id')]
 
     if len(followers) > 0:
         previous_revision = ImageRevision.objects \

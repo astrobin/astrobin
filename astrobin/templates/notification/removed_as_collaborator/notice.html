@@ -1,0 +1,11 @@
+{% load i18n %}
+
+<a href="{{ base_url }}{% url 'image_detail' image.get_id %}">
+    {% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
+        <strong>{{ user }}</strong> removed you as a collaborator to an image
+    {% endblocktrans %}
+</a>
+
+{% if image.title %}
+    : {{ image.title }}
+{% endif %}

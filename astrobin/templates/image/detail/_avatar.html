@@ -1,0 +1,27 @@
+{% load avatar_tags %}
+{% load astrobin_apps_donations_tags %}
+{% load astrobin_apps_premium_tags %}
+{% load astrobin_apps_users_tags %}
+{% load toggleproperty_tags %}
+
+<a
+    data-instant
+    href="{% url 'user_page' user %}"
+    rel="tooltip"
+    data-placement="bottom"
+    title="{{ user.userprofile.get_display_name }}"
+>
+    {% avatar user 106 %}
+
+    {% if request.user != user %}
+        {% add_remove_toggleproperty "follow" user request.user %}
+    {% endif %}
+
+    {% if DONATIONS_ENABLED %}
+        {% donor_badge user 'medium' %}
+    {% endif %}
+
+    {% if PREMIUM_ENABLED %}
+        {% premium_badge user 'medium' %}
+    {% endif %}
+</a>

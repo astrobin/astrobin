@@ -5,7 +5,7 @@ from django.test import TestCase, override_settings
 from django_bouncy.models import Bounce
 
 from astrobin.models import DataDownloadRequest
-from astrobin.tasks import expire_download_data_requests, delete_inactive_bounced_accounts
+from astrobin.tasks import delete_inactive_bounced_accounts, expire_download_data_requests
 from astrobin.tests.generators import Generators
 
 

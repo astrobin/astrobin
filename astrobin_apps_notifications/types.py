@@ -330,4 +330,16 @@ NOTICE_TYPES = (
         '',
         2
     ),
+    (
+        'added_as_collaborator',
+        _("You were added as a collaborator to an image"),
+        '',
+        2
+    ),
+    (
+        'removed_as_collaborator',
+        _("You were removed as a collaborator to an image"),
+        '',
+        2
+    ),
 )

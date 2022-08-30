@@ -1,5 +1,6 @@
 {% load astrobin_apps_premium_tags %}
 {% load common_tags %}
+{% load i18n %}
 
 {% if request.user == user %}
     {# Takes valid_usersubscription from user_profile context #}
@@ -9,7 +10,11 @@
 {% endif %}
 
 {% if user_valid_usersubscription|is_any_paid_subscription %}
-    <div class="badge badge-success badge-premium badge-premium-{{size}}">
+    <div
+        class="badge badge-success badge-premium badge-premium-{{size}}"
+        rel="tooltip"
+        title="{% trans 'Paying member' %}"
+    >
         <i class="icon-asterisk"></i>
     </div>
 {% endif %}
