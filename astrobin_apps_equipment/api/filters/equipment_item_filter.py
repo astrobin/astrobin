@@ -38,7 +38,6 @@ class EquipmentItemFilter(FilterSet):
         queryset = queryset.filter(
             edit_proposals__deleted__isnull=True,
             edit_proposals__edit_proposal_review_status__isnull=True,
-            reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
         )
 
         if self.request.user.is_authenticated:
