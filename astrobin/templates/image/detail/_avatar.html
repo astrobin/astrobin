@@ -7,9 +7,6 @@
 <a
     data-instant
     href="{% url 'user_page' user %}"
-    rel="tooltip"
-    data-placement="bottom"
-    title="{{ user.userprofile.get_display_name }}"
 >
     {% avatar user 106 %}
 

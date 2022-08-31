@@ -1482,8 +1482,23 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       margin: .5rem;
       text-align: center;
 
+      img {
+        transition: all .1s ease-in-out;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+
       .username {
-        margin-top: .5rem;
+        margin-top: .75rem;
+        font-size: 1.15rem;
+        font-weight: bold;
+        color: $grey-2;
+
+        &:hover {
+          color: $link-color;
+        }
       }
     }
 
@@ -1505,7 +1520,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
   .data {
     display: flex;
-    font-size: small;
+    font-size: .95rem;
     justify-content: space-between;
     align-items: center;
     color: darken($text-color, 10%);
