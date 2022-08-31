@@ -370,12 +370,12 @@ class UserIndex(CelerySearchIndex, Indexable):
 
     def prepare_images(self, obj):
         logger.info('Updating UserIndex: %d' % obj.pk)
-        return Image.objects.filter(Q(user=obj) | Q(collaborators=obj)).count()
+        return Image.objects.filter(Q(user=obj) | Q(collaborators=obj)).distinct().count()
 
     def prepare_avg_integration(self, obj):
         integration = 0
         images = 0
-        for i in Image.objects.filter(Q(user=obj) | Q(collaborators=obj)):
+        for i in Image.objects.filter(Q(user=obj) | Q(collaborators=obj)).distinct():
             cached = cache.get(PREPARED_INTEGRATION_CACHE_KEY % i.pk)
             image_integration = cached if cached is not None else _prepare_integration(i)
             if image_integration:
@@ -386,7 +386,7 @@ class UserIndex(CelerySearchIndex, Indexable):
 
     def prepare_likes(self, obj):
         likes = 0
-        for i in Image.objects.filter(Q(user=obj) | Q(collaborators=obj)):
+        for i in Image.objects.filter(Q(user=obj) | Q(collaborators=obj)).distinct():
             cached = cache.get(PREPARED_LIKES_CACHE_KEY % i.pk)
             likes += cached if cached is not None else _prepare_likes(i)
         return likes
@@ -413,7 +413,7 @@ class UserIndex(CelerySearchIndex, Indexable):
 
         normalized = []
 
-        for i in Image.objects.filter(Q(user=obj) | Q(collaborators=obj)).iterator():
+        for i in Image.objects.filter(Q(user=obj) | Q(collaborators=obj)).distinct().iterator():
             cached = cache.get(PREPARED_LIKES_CACHE_KEY % i.pk)
             likes = cached if cached is not None else i.likes()
             if likes >= average:
@@ -474,7 +474,7 @@ class UserIndex(CelerySearchIndex, Indexable):
 
     def prepare_integration(self, obj):
         integration = 0
-        for i in Image.objects.filter(Q(user=obj) | Q(collaborators=obj)):
+        for i in Image.objects.filter(Q(user=obj) | Q(collaborators=obj)).distinct():
             cached = cache.get(PREPARED_INTEGRATION_CACHE_KEY % i.pk)
             integration += cached if cached is not None else _prepare_integration(i)
 
@@ -482,7 +482,7 @@ class UserIndex(CelerySearchIndex, Indexable):
 
     def prepare_moon_phase(self, obj):
         l = []
-        for i in Image.objects.filter(Q(user=obj) | Q(collaborators=obj)):
+        for i in Image.objects.filter(Q(user=obj) | Q(collaborators=obj)).distinct():
             cached = cache.get(PREPARED_MOON_PHASE_CACHE_KEY % i.pk)
             l.append(cached if cached is not None else _prepare_moon_phase(i))
         if len(l) == 0:
@@ -491,7 +491,7 @@ class UserIndex(CelerySearchIndex, Indexable):
 
     def prepare_views(self, obj):
         views = 0
-        for i in Image.objects.filter(Q(user=obj) | Q(collaborators=obj)):
+        for i in Image.objects.filter(Q(user=obj) | Q(collaborators=obj)).distinct():
             cached = cache.get(PREPARED_VIEWS_CACHE_KEY % i.pk)
             views += cached if cached is not None else _prepare_views(i, 'image')
         return views
@@ -505,7 +505,7 @@ class UserIndex(CelerySearchIndex, Indexable):
 
     def prepare_comments(self, obj):
         comments = 0
-        for i in Image.objects.filter(Q(user=obj) | Q(collaborators=obj)):
+        for i in Image.objects.filter(Q(user=obj) | Q(collaborators=obj)).distinct():
             cached = cache.get(PREPARED_COMMENTS_CACHE_KEY % i.pk)
             comments += cached if cached is not None else _prepare_comments(i)
         return comments
