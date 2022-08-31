@@ -1006,18 +1006,11 @@ class ImagePromoteView(LoginRequiredMixin, ImageUpdateViewBase):
 
     def post(self, request, *args, **kwargs):
         image = self.get_object()
-        if image.is_wip:
-            skip_notifications = request.POST.get('skip_notifications', 'off').lower() == 'on'
-            previously_published = image.published
-            image.is_wip = False
-            image.save(keep_deleted=True)
 
-            if not previously_published:
-                if not skip_notifications:
-                    push_notification_for_new_image.apply_async(args=(request.user.pk, image.pk,), countdown=10)
-                add_story(image.user, verb='VERB_UPLOADED_IMAGE', action_object=image)
+        skip_notifications = request.POST.get('skip_notifications', 'off').lower() == 'on'
+        ImageService(image).promote_to_public_area(skip_notifications)
 
-            messages.success(request, _("Image moved to the public area."))
+        messages.success(request, _("Image moved to the public area."))
 
         return super(ImagePromoteView, self).post(request, args, kwargs)
 

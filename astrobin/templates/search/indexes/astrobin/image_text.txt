@@ -3,6 +3,12 @@
 
 {{ object.user.username | asciify }}
 {{ object.user.userprofile.real_name | asciify }}
+
+{% for collaborator in object.collaborators.all %}
+    {{ collaborator.username | asciify }}
+    {{ collaborator.userprofile.real_name | asciify }}
+{% endfor %}
+
 {{ object.title | asciify }}
 
 {% for r in object.revisions.all %}

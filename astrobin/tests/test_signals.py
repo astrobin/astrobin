@@ -1,7 +1,8 @@
 import time
 from datetime import timedelta
 
-from django.test import TestCase
+import mock
+from django.test import TestCase, override_settings
 from django.utils import timezone
 from mock import patch
 
@@ -9,6 +10,7 @@ from astrobin.models import Image
 from astrobin.signals import imagerevision_post_save
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
+from toggleproperties.models import ToggleProperty
 
 
 class SignalsTest(TestCase):
@@ -323,3 +325,130 @@ class SignalsTest(TestCase):
         image.refresh_from_db()
 
         self.assertGreater(image.updated, before)
+
+    @override_settings(CELERY_TASK_ALWAYS_EAGER=True)
+    @mock.patch('astrobin.signals.push_notification')
+    def test_like_notification(self, push_notification):
+        image = Generators.image()
+        user = Generators.user()
+
+        ToggleProperty.objects.create(
+            property_type='like',
+            user=user,
+            content_object=image
+        )
+
+        push_notification.assert_has_calls(
+            [
+                mock.call([image.user], user, 'new_like', mock.ANY),
+            ]
+        )
+
+    @override_settings(CELERY_TASK_ALWAYS_EAGER=True)
+    @mock.patch('astrobin.signals.push_notification')
+    def test_like_notification_for_collaborators(self, push_notification):
+        image = Generators.image()
+        user = Generators.user()
+        collaborator = Generators.user()
+
+        image.collaborators.add(collaborator)
+
+        ToggleProperty.objects.create(
+            property_type='like',
+            user=user,
+            content_object=image
+        )
+
+        push_notification.assert_has_calls(
+            [
+                mock.call([image.user, collaborator], user, 'new_like', mock.ANY),
+            ]
+        )
+
+    @override_settings(CELERY_TASK_ALWAYS_EAGER=True)
+    @mock.patch('astrobin.signals.push_notification')
+    def test_bookmark_notification(self, push_notification):
+        image = Generators.image()
+        user = Generators.user()
+
+        ToggleProperty.objects.create(
+            property_type='bookmark',
+            user=user,
+            content_object=image
+        )
+
+        push_notification.assert_has_calls(
+            [
+                mock.call([image.user], user, 'new_bookmark', mock.ANY),
+            ]
+        )
+
+    @override_settings(CELERY_TASK_ALWAYS_EAGER=True)
+    @mock.patch('astrobin.signals.push_notification')
+    def test_bookmark_notification_for_collaborators(self, push_notification):
+        image = Generators.image()
+        user = Generators.user()
+        collaborator = Generators.user()
+
+        image.collaborators.add(collaborator)
+
+        ToggleProperty.objects.create(
+            property_type='bookmark',
+            user=user,
+            content_object=image
+        )
+
+        push_notification.assert_has_calls(
+            [
+                mock.call([image.user, collaborator], user, 'new_bookmark', mock.ANY),
+            ]
+        )
+
+    @mock.patch('astrobin.signals.push_notification')
+    def test_image_collaborators_changed_sends_added_notification(self, push_notification):
+        image = Generators.image()
+        collaborator1 = Generators.user()
+        collaborator2 = Generators.user()
+
+        image.collaborators.add(collaborator1, collaborator2)
+
+        push_notification.assert_has_calls(
+            [
+                mock.call(
+                    [collaborator1, collaborator2], image.user, 'added_as_collaborator', mock.ANY
+                ),
+            ]
+        )
+
+        push_notification.reset_mock()
+
+        # Adding a second time without removing doesn't send the notification again.
+
+        image.collaborators.add(collaborator1, collaborator2)
+
+        with self.assertRaises(AssertionError):
+            push_notification.assert_has_calls(
+                [
+                    mock.call(
+                        [collaborator1, collaborator2], image.user, 'added_as_collaborator', mock.ANY
+                    ),
+                ]
+            )
+
+    @mock.patch('astrobin.signals.push_notification')
+    def test_image_collaborators_changed_sends_removed_notification(self, push_notification):
+        image = Generators.image()
+        collaborator1 = Generators.user()
+        collaborator2 = Generators.user()
+
+        image.collaborators.add(collaborator1, collaborator2)
+
+        image.collaborators.remove(collaborator2)
+
+        push_notification.assert_has_calls(
+            [
+                mock.call(
+                    [collaborator2], image.user, 'removed_as_collaborator', mock.ANY
+                ),
+            ]
+        )

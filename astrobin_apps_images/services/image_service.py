@@ -19,12 +19,14 @@ from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
 from astrobin.services.gear_service import GearService
+from astrobin.stories import add_story
 from astrobin.utils import (
     base26_decode, base26_encode, decimal_to_degrees_minutes_seconds_string,
     decimal_to_hours_minutes_seconds_string,
 )
 from astrobin_apps_equipment.models import EquipmentBrandListing
 from astrobin_apps_images.models import ThumbnailGroup
+from astrobin_apps_notifications.tasks import push_notification_for_new_image
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.services.premium_service import PremiumService
@@ -447,6 +449,17 @@ class ImageService:
                 thumb_h = math.floor(thumb_h * (w / float(thumb_w)))
 
         return f'https://via.placeholder.com/{thumb_w}x{thumb_h}/222/333&text=ERROR'
+
+    def promote_to_public_area(self, skip_notifications):
+        if self.image.is_wip:
+            previously_published = self.image.published
+            self.image.is_wip = False
+            self.image.save(keep_deleted=True)
+
+            if not previously_published:
+                if not skip_notifications:
+                    push_notification_for_new_image.apply_async(args=(self.image.pk,), countdown=10)
+                add_story(self.image.user, verb='VERB_UPLOADED_IMAGE', action_object=self.image)
 
     @staticmethod
     def get_constellation(solution):

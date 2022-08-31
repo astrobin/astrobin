@@ -94,8 +94,15 @@
 
                             {% url 'user_page' image.user.username as the_url %}
                             {% blocktrans trimmed with user=image.user.userprofile %}
-                                by <a href="{{ the_url }}">{{ user }}</a>
+                                by
+                                <a href="{{ the_url }}">{{ user }}</a>
                             {% endblocktrans %}
+
+                            {% for collaborator in image.collaborators.all %}
+                                {% url 'user_page' collaborator.username as the_url %}
+                                &middot;
+                                <a href="{{ the_url }}">{{ collaborator }}</a>
+                            {% endfor %}
                         </span>
                     </div>
                 </li>

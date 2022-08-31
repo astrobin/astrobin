@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
 
 from astrobin.api2.serializers.accessory_serializer import AccessorySerializer
 from astrobin.api2.serializers.camera_serializer import CameraSerializer
@@ -62,10 +63,17 @@ class ImageSerializer(serializers.ModelSerializer):
         })
         return representation
 
+    def validate_collaborators(self, collaborators):
+        if collaborators and self.initial_data.get('user') in [x.id for x in collaborators]:
+            raise ValidationError("Please do not include the image's user as a collaborator")
+
+        return collaborators
+
     class Meta:
         model = Image
         fields = (
             'user',
+            'collaborators',
             'pk',
             'hash',
             'title',

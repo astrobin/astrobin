@@ -1,9 +1,10 @@
 import simplejson
+from annoying.functions import get_object_or_None
 from braces.views import JSONResponseMixin
 from braces.views import LoginRequiredMixin
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.db import IntegrityError
 from django.forms.utils import ErrorList
@@ -57,11 +58,11 @@ class UserCollectionsBase(View):
         except UserProfile.DoesNotExist:
             raise Http404
 
-        image_ct = ContentType.objects.get_for_model(Image)
-
         context['requested_user'] = user
-        context['public_images_no'] = Image.objects.filter(user=user).count()
-        context['wip_images_no'] = Image.wip.filter(user=user).count()
+
+        numbers = UserService(user).get_image_numbers()
+        context['public_images_no'] = numbers['public_images_no']
+        context['wip_images_no'] = numbers['wip_images_no']
 
         try:
             context['mobile_header_background'] = \
@@ -146,7 +147,8 @@ class UserCollectionsAddRemoveImages(
 
     def get_context_data(self, **kwargs):
         context = super(UserCollectionsAddRemoveImages, self).get_context_data(**kwargs)
-        context['images'] = Image.objects.filter(user__username=self.kwargs['username'])
+        user = get_object_or_None(User, username=self.kwargs.get('username'))
+        context['images'] = UserService(user).get_public_images()
         context['images_pk_in_collection'] = [x.pk for x in self.get_object().images.all()]
         return context
 

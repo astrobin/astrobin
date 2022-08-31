@@ -73,6 +73,8 @@ class TogglePropertySerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    username = CharField(read_only=True, source="user.username")
+
     def update(self, instance, validated_data):
         return super(serializers.ModelSerializer, self).update(instance, validated_data)
 

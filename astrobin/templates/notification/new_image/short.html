@@ -4,9 +4,5 @@
     {% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
         <strong>{{ user }}</strong> has published a new image
     {% endblocktrans %}
-</a>
-
-{% if image.title %}
-    : {{ image.title }}
-{% endif %}
+</a>{% if image.title %}: {{ image.title }}{% endif %}
 

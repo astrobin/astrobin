@@ -137,9 +137,11 @@
 
                     {% if request.user_agent.is_mobile %}
                         <div class="visible-phone">
+                            <div class="image-like-and-bookmark-buttons">
+                                {% include 'image/detail/like.html' %}
+                                {% include 'image/detail/bookmark.html' %}
+                            </div>
                             {% include 'image/detail/info.html' %}
-                            {% include 'image/detail/like.html' %}
-                            {% include 'image/detail/bookmark.html' %}
                         </div>
                     {% endif %}
 
@@ -152,9 +154,11 @@
                 <div class="span4 image-page-right-pane"> <!-- right pane -->
                     {% if request.user_agent.is_pc or request.user_agent.is_tablet or TESTING %}
                         <div class="hidden-phone">
+                            <div class="image-like-and-bookmark-buttons">
+                                {% include 'image/detail/like.html' %}
+                                {% include 'image/detail/bookmark.html' %}
+                            </div>
                             {% include 'image/detail/info.html' %}
-                            {% include 'image/detail/like.html' %}
-                            {% include 'image/detail/bookmark.html' %}
                         </div>
 
                         {% with ad_container_classes='hidden-phone' %}

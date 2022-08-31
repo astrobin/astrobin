@@ -53,6 +53,14 @@ class TestUserService(TestCase):
         self.assertTrue(image in UserService(user).get_public_images())
         self.assertFalse(wip in UserService(user).get_public_images())
 
+    def test_get_public_images_has_collaborations(self):
+        user = Generators.user()
+        image = Generators.image()
+
+        image.collaborators.add(user)
+
+        self.assertTrue(image in UserService(user).get_public_images())
+
     def test_get_wip_images(self):
         user = Generators.user()
         image = Generators.image(user=user)

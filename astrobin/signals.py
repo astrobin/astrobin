@@ -150,7 +150,7 @@ def image_post_save(sender, instance, created, **kwargs):
 
         if not instance.is_wip:
             if not instance.skip_notifications:
-                push_notification_for_new_image.apply_async(args=(instance.user.pk, instance.pk,))
+                push_notification_for_new_image.apply_async(args=(instance.pk,))
             if instance.moderator_decision == ModeratorDecision.APPROVED:
                 add_story(instance.user, verb='VERB_UPLOADED_IMAGE', action_object=instance)
 
@@ -433,8 +433,13 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
                 else:
                     return
 
+                collaborators = [instance.content_object.user] + list(instance.content_object.collaborators.all())
+
+                if instance.user in collaborators:
+                    return
+
                 push_notification(
-                    [instance.content_object.user], instance.user, 'new_' + instance.property_type,
+                    collaborators, instance.user, 'new_' + instance.property_type,
                     {
                         'url': build_notification_url(
                             settings.BASE_URL + instance.content_object.get_absolute_url(), instance.user),
@@ -1236,3 +1241,29 @@ def gear_migration_strategy_post_save(sender, instance: GearMigrationStrategy, c
 
 
 post_save.connect(gear_migration_strategy_post_save, sender=GearMigrationStrategy)
+
+
+def image_collaborators_changed(sender, instance: Image, **kwargs):
+    action = kwargs.pop('action')
+    pk_set = kwargs.pop('pk_set')
+    thumb = instance.thumbnail_raw('gallery', None, sync=True)
+
+    if action == 'pre_add':
+        users = User.objects.filter(pk__in=pk_set)
+        push_notification(
+            list(users), instance.user, 'added_as_collaborator', {
+                'image': instance,
+                'image_thumbnail': thumb.url if thumb else None
+            }
+        )
+    elif action == 'pre_remove':
+        users = User.objects.filter(pk__in=pk_set)
+        push_notification(
+            list(users), instance.user, 'removed_as_collaborator', {
+                'image': instance,
+                'image_thumbnail': thumb.url if thumb else None
+            }
+        )
+
+
+m2m_changed.connect(image_collaborators_changed, sender=Image.collaborators.through)
