@@ -5,8 +5,8 @@
 {{ object.user.userprofile.real_name | asciify }}
 
 {% for collaborator in object.collaborators.all %}
-    {{ collaborator | asciify }}
-    {{ collaborator.real_name | asciify }}
+    {{ collaborator.username | asciify }}
+    {{ collaborator.userprofile.real_name | asciify }}
 {% endfor %}
 
 {{ object.title | asciify }}
