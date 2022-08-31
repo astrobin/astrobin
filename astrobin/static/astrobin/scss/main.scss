@@ -1478,10 +1478,8 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
     a {
       display: block;
       position: relative;
-
-      &:not(:first-child) {
-        margin-left: .5rem;
-      }
+      flex-basis: calc(50% - 1rem);
+      margin: .5rem;
     }
 
     .property-follow {

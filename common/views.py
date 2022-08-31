@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.db.models import Q, QuerySet
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page, cache_control
 from django.views.decorators.http import last_modified
@@ -100,7 +101,17 @@ class UserProfileList(generics.ListAPIView):
     serializer_class = UserProfileSerializer
     permission_classes = (ReadOnly,)
     pagination_class = None
-    queryset = UserProfile.objects.all()
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('user',)
+
+    def get_queryset(self) -> QuerySet:
+        if 'q' in self.request.query_params:
+            q = self.request.query_params.get('q')
+            return UserProfile.objects.filter(
+                Q(real_name__icontains=q) | Q(user__username__icontains=q)
+            ).distinct()[:20]
+
+        return UserProfile.objects.all()
 
 
 class UserProfileDetail(generics.RetrieveAPIView):
