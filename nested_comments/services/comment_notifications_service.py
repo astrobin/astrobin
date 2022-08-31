@@ -99,10 +99,11 @@ class CommentNotificationsService:
                           target=obj)
 
         if object_owner and notification:
-            if instance.author not in [object_owner] + list(obj.collaborators.all()) and \
+            collaborators = [object_owner] + list(obj.collaborators.all()) if hasattr(obj, 'collaborators') else [object.owner]
+            if instance.author not in collaborators and \
                     (instance.parent is None or instance.parent.author != object_owner) and \
                     not instance.pending_moderation:
-                recipients = [x for x in [object_owner] + list(obj.collaborators.all()) if x not in exclude]
+                recipients = [x for x in collaborators if x not in exclude]
                 if recipients:
                     push_notification(
                         recipients, instance.author, notification,
