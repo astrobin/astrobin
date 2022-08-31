@@ -24,4 +24,8 @@
     {% if PREMIUM_ENABLED %}
         {% premium_badge user 'medium' %}
     {% endif %}
+
+    <div class="username">
+        {% astrobin_username user link=False %}
+    </div>
 </a>

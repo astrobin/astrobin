@@ -1480,6 +1480,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       position: relative;
       flex-basis: calc(50% - 1rem);
       margin: .5rem;
+      text-align: center;
+
+      .username {
+        margin-top: .5rem;
+      }
     }
 
     .property-follow {
