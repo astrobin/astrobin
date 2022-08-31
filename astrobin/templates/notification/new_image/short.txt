@@ -2,8 +2,4 @@
 
 {% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
     New image by {{user}}
-{% endblocktrans %}
-
-{% if image.title %}
-    : {{image.title}}
-{% endif %}
+{% endblocktrans %}{% if image.title %}: {{image.title}}{% endif %}
