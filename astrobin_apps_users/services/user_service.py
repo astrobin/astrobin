@@ -68,7 +68,6 @@ class UserService:
         from astrobin.models import Image
         return Image.objects_including_wip.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
 
-
     def get_public_images(self) -> QuerySet:
         from astrobin.models import Image
         return Image.objects.filter(Q(user=self.user) | Q(collaborators=self.user)).distinct()
