@@ -1484,7 +1484,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       text-align: center;
 
       @media screen and (min-width: 768px) and (max-width: 979px) {
-        max-width: calc(50% - 1rem - -1px);
+        max-width: calc(70% - 1rem);
 
         &:not(:last-child) {
           margin-bottom: 1.5rem;
