@@ -20,7 +20,17 @@ def toggleproperties_for_object(property_type, target):
 
 
 @register.inclusion_tag("toggleproperties/toggleproperty_add_remove.html", takes_context=True)
-def add_remove_toggleproperty(context, property_type, target, user, can_add=True, can_remove=True):
+def add_remove_toggleproperty(
+        context,
+        property_type,
+        target,
+        user,
+        can_add=True,
+        can_remove=True,
+        hide_label=False,
+        hide_icon=False,
+        btn_class="btn btn-primary"
+):
     toggle_property = None
     content_type = ContentType.objects.get_for_model(target)
 
@@ -38,6 +48,7 @@ def add_remove_toggleproperty(context, property_type, target, user, can_add=True
     return {"object_id": target.pk,
             "content_type_id": content_type.pk,
             "property_type": property_type,
+            "btn_class": btn_class,
             "is_toggled": toggle_property is not None,
             "disabled": (toggle_property is None and not can_add) or (toggle_property is not None and not can_remove),
             "count": count,
@@ -47,7 +58,9 @@ def add_remove_toggleproperty(context, property_type, target, user, can_add=True
 
             "property_label_on": settings_dict.get('property_label_on'),
             "property_label_off": settings_dict.get('property_label_off'),
+            "hide_label": hide_label,
 
             "property_icon": settings_dict.get('property_icon'),
+            "hide_icon": hide_icon,
 
             "request": context['request']}

@@ -23,7 +23,7 @@
 
         <div class="actions">
             {% if is_authenticated %}
-                {% add_remove_toggleproperty "follow" user request.user %}
+                {% add_remove_toggleproperty "follow" user request.user hide_label=True %}
             {% endif %}
             <a class="btn btn-primary" href="{% url 'user_page' user %}">
                 <i class="icon-picture"></i>

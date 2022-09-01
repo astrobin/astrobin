@@ -39,7 +39,7 @@
             </a>
 
             {% if request.user != user %}
-                {% add_remove_toggleproperty "follow" user request_user %}
+                {% add_remove_toggleproperty "follow" user request_user hide_label=True %}
 
                 {% if request.user.is_authenticated and request.user|is_mutual_follower:user %}
                     <div
@@ -107,7 +107,7 @@
 
     <td class="user-list-follow-action">
         {% if request.user != user %}
-            {% add_remove_toggleproperty "follow" user request_user %}
+            {% add_remove_toggleproperty "follow" user request_use hide_label=True %}
         {% endif %}
     </td>
 {% endif %}

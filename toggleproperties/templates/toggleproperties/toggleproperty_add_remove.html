@@ -1,5 +1,5 @@
 <span class="toggleproperty-add-remove property-{{ property_type }}">
-    <button class="btn btn-primary{% if is_toggled %} active{% endif %}"
+    <button class="{{ btn_class }}{% if is_toggled %} active{% endif %}"
             data-toggle="button"
             id="toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}"
 
@@ -13,18 +13,20 @@
             {% endif %}
     >
 
-        {% if property_icon %}
+        {% if property_icon and not hide_icon %}
             <i class="{{ property_icon }}"></i>
         {% endif %}
 
-        {% if property_label_on or property_label_off %}
-            <span class="toggleproperties-label">
-                {% if is_toggled %}
-                    {{ property_label_on | safe }}
-                {% else %}
-                    {{ property_label_off | safe }}
-                {% endif %}
-            </span>
+        {% if not hide_label %}
+            {% if property_label_on or property_label_off %}
+                <span class="toggleproperties-label">
+                    {% if is_toggled %}
+                        {{ property_label_on | safe }}
+                    {% else %}
+                        {{ property_label_off | safe }}
+                    {% endif %}
+                </span>
+            {% endif %}
         {% endif %}
 
         {% if show_count %}
@@ -39,9 +41,11 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}").click(function () {
+            const $btn = $(this);
+
             {% if request.user and request.user.is_authenticated %}
                 $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }} .toggleproperties-label").text("...");
-                if ($(this).hasClass("active")) {
+                if ($btn.hasClass("active")) {
                     $.ajax({
                         url: "{% url 'toggleproperty_ajax_remove' %}",
                         type: "POST",
@@ -61,6 +65,7 @@
                                     .tooltip('show');
                             {% endif %}
                             $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }} .toggleproperties-label").text("{{ property_label_off | safe }}");
+                            $btn.removeClass("active");
                             if (data['count'] !== undefined)
                                 $('#count-{{ property_type }}-{{ content_type_id }}-{{ object_id }}').text(data.count);
                         }
@@ -85,6 +90,7 @@
                                     .tooltip('show');
                             {% endif %}
                             $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }} .toggleproperties-label").text("{{ property_label_on | safe }}");
+                            $btn.addClass("active");
                             if (data['count'] !== undefined)
                                 $('#count-{{ property_type }}-{{ content_type_id }}-{{ object_id }}').text(data.count);
                         }

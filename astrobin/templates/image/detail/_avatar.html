@@ -4,25 +4,27 @@
 {% load astrobin_apps_users_tags %}
 {% load toggleproperty_tags %}
 
-<a
-    data-instant
-    href="{% url 'user_page' user %}"
->
-    {% avatar user 106 %}
+<div class="avatar-content">
+    <a
+        data-instant
+        href="{% url 'user_page' user %}"
+    >
+        {% avatar user 194 %}
+
+        {% if DONATIONS_ENABLED %}
+            {% donor_badge user 'medium' %}
+        {% endif %}
+
+        {% if PREMIUM_ENABLED %}
+            {% premium_badge user 'medium' %}
+        {% endif %}
+
+        <div class="username">
+            {% astrobin_username user link=False %}
+        </div>
+    </a>
 
     {% if request.user != user %}
-        {% add_remove_toggleproperty "follow" user request.user %}
+        {% add_remove_toggleproperty "follow" user request.user btn_class="btn-link" hide_icon=True %}
     {% endif %}
-
-    {% if DONATIONS_ENABLED %}
-        {% donor_badge user 'medium' %}
-    {% endif %}
-
-    {% if PREMIUM_ENABLED %}
-        {% premium_badge user 'medium' %}
-    {% endif %}
-
-    <div class="username">
-        {% astrobin_username user link=False %}
-    </div>
-</a>
+</div>

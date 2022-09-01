@@ -4,7 +4,7 @@
 {% load tags %} {% comment %} TODO: rename tags to astrobin_tags {% endcomment %}
 {% load static %}
 
-<div class="subtle-container avatar-block">
+<div class="subtle-container avatar-block{% if image.collaborators.all|length > 0 %} with-collaborators{% endif %}">
     <div class="header">
         <h4>
             {% if image.collaborators.all|length > 0 %}
