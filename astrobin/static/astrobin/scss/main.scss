@@ -1480,7 +1480,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
       display: block;
       position: relative;
       max-width: calc(50% - 1rem);
-      margin: .5rem;
+      margin: .5rem .5rem 1rem .5rem;
       text-align: center;
 
       @media screen and (min-width: 768px) and (max-width: 979px) {
@@ -1517,6 +1517,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 
     .property-follow {
       position: initial;
+      top: unset;
+      right: unset;
+      margin-top: .25rem;
+      display: block;
     }
 
     img {
