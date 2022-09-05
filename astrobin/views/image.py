@@ -50,6 +50,7 @@ from astrobin.forms import (
     CopyGearForm, ImageDemoteForm, ImageEditBasicForm, ImageEditGearForm, ImageEditRevisionForm,
     ImageEditThumbnailsForm, ImageFlagThumbsForm, ImagePromoteForm, ImageRevisionUploadForm,
 )
+from astrobin.forms.remove_as_collaborator_form import ImageRemoveAsCollaboratorForm
 from astrobin.forms.uncompressed_source_upload_form import UncompressedSourceUploadForm
 from astrobin.models import (Collection, DeepSky_Acquisition, Image, ImageRevision, LANGUAGES, SolarSystem_Acquisition)
 from astrobin.services.gear_service import GearService
@@ -120,6 +121,32 @@ class ImageFlagThumbsView(
         ImageService(image).invalidate_all_thumbnails()
         messages.success(self.request, _("Thanks for reporting the problem. All thumbnails will be generated again."))
         return super(ImageFlagThumbsView, self).post(self.request, args, kwargs)
+
+
+class ImageRemoveAsCollaboratorView(
+    LoginRequiredMixin, ImageUpdateViewBase):
+    form_class = ImageRemoveAsCollaboratorForm
+    model = Image
+    pk_url_kwarg = 'id'
+    http_method_names = ('post',)
+
+    def get_queryset(self):
+        return Image.objects_including_wip.all()
+
+    def get_success_url(self):
+        return self.object.get_absolute_url()
+
+    def post(self, request, *args, **kwargs):
+        image = self.get_object()
+
+        if self.request.user not in image.collaborators.all():
+            messages.error(self.request, _("You are not a collaborator to this image."))
+
+        ImageService(image).remove_as_collaborator(self.request.user)
+
+        messages.success(self.request, _("You have been removed as a collaborator to this image."))
+
+        return super().post(self.request, args, kwargs)
 
 
 @method_decorator(

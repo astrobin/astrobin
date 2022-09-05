@@ -1513,6 +1513,10 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
           color: $link-color;
         }
       }
+
+      .btn-remove-as-collaborator {
+        margin-top: .5rem;
+      }
     }
 
     .property-follow {

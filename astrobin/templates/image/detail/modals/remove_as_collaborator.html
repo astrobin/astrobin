@@ -1,0 +1,25 @@
+{% load i18n %}
+{% load common_tags %}
+
+<div class="modal hide fade" id="remove-as-collaborator-modal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>{% trans "Remove yourself as a collaborator" %}</h3>
+    </div>
+
+    <div class="modal-body">
+        {% trans "Are you sure you want to be removed as a collaborator to this image?" %}
+    </div>
+
+    <div class="modal-footer">
+        <form class="form-horizontal" action="{% url 'image_remove_as_collaborator' image.get_id %}" method="post">{% csrf_token %}
+            <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit">
+                {% trans "Remove me" %}
+                {% button_loading_indicator %}
+            </button>
+            <button class="btn btn-secondary" data-dismiss="modal">
+                {% trans "Cancel" %}
+            </button>
+        </form>
+    </div>
+</div>

@@ -23,7 +23,7 @@
         {% endwith %}
 
         {% for collaborator in image.collaborators.all %}
-            {% with collaborator as user %}
+            {% with user=collaborator as_collaborator=True %}
                 {% include "./_avatar.html" %}
             {% endwith %}
         {% endfor %}
