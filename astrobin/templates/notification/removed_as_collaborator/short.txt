@@ -1,9 +1,5 @@
 {% load i18n %}
 
-{% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
-    {{ user }} removed you as a collaborator to an image
-{% endblocktrans %}
-
-{% if image.title %}
-    : {{image.title}}
-{% endif %}
+{% blocktrans trimmed %}
+    You were removed as a collaborator to an image
+{% endblocktrans %}{% if image.title %}: {{image.title}}{% endif %}

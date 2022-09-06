@@ -27,6 +27,7 @@ from astrobin.utils import (
 from astrobin_apps_equipment.models import EquipmentBrandListing
 from astrobin_apps_images.models import ThumbnailGroup
 from astrobin_apps_notifications.tasks import push_notification_for_new_image
+from astrobin_apps_notifications.utils import push_notification
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_premium.services.premium_service import PremiumService
@@ -431,6 +432,22 @@ class ImageService:
         revision: ImageRevision
         for revision in self.get_revisions().iterator():
             revision.thumbnail_invalidate()
+
+    def remove_as_collaborator(self, user: User):
+        self.image.collaborators.remove(user)
+
+        thumb = self.image.thumbnail_raw('gallery', None, sync=True)
+
+        push_notification(
+            [self.image.user],
+            user,
+            'removed_self_as_collaborator',
+            {
+                'user': user,
+                'image': self.image,
+                'image_thumbnail': thumb.url if thumb else None,
+            }
+        )
 
     def get_error_thumbnail(self, revision_label, alias):
         w, h = self.image.w, self.image.h

@@ -415,6 +415,11 @@ urlpatterns += [
     url(r'^full/(?P<id>\w+)/(?:(?P<r>\w+)/)?$', image_views.ImageFullView.as_view(), name='image_full'),
     url(r'^(?P<id>\w+)/flagthumbs/$', never_cache(image_views.ImageFlagThumbsView.as_view()), name='image_flag_thumbs'),
     url(
+        r'^(?P<id>\w+)/remove-as-collaborator/$',
+        never_cache(image_views.ImageRemoveAsCollaboratorView.as_view()),
+        name='image_remove_as_collaborator'
+    ),
+    url(
         r'^(?P<id>\w+)/submit-to-iotd-tp/$', never_cache(image_views.ImageSubmitToIotdTpProcessView.as_view()),
         name='image_submit_to_iotd_tp'
     ),

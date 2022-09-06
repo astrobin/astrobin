@@ -3,6 +3,7 @@
 {% load astrobin_apps_premium_tags %}
 {% load astrobin_apps_users_tags %}
 {% load toggleproperty_tags %}
+{% load i18n %}
 
 <div class="avatar-content">
     <a
@@ -26,5 +27,11 @@
 
     {% if request.user != user %}
         {% add_remove_toggleproperty "follow" user request.user btn_class="btn-link" hide_icon=True %}
+    {% endif %}
+
+    {% if request.user == user and as_collaborator == True %}
+        <a href="#remove-as-collaborator-modal" data-toggle="modal" class="btn btn-mini btn-danger btn-remove-as-collaborator">
+            {% trans "Remove me" %}
+        </a>
     {% endif %}
 </div>

@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% blocktrans trimmed with user.userprofile.get_display_name as user %}
+    {{ user }} removed themselves as a collaborator to your image
+{% endblocktrans %}{% if image.title %}: {{image.title}}{% endif %}

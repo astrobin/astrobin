@@ -5,14 +5,16 @@
     {% blocktrans trimmed with image.user.userprofile.get_display_name as user %}
         <strong>{{ user }}</strong> added you as a collaborator to an image
     {% endblocktrans %}
-</a>
-
-{% if image.title %}
-    : {{ image.title }}
-{% endif %}
+</a>{% if image.title %}: {{ image.title }}{% endif %}
 
 <br /><br />
 
 <a href="{{ base_url }}{% url 'image_detail' image.get_id %}?{% notification_url_params_for_email image.user %}">
     <img src="{{ image_thumbnail }}" />
 </a>
+
+<br /><br />
+
+{% blocktrans trimmed %}
+    If you want to remove yourself, click on the "Remove me" button underneath your avatar.
+{% endblocktrans %}

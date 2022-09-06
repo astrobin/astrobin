@@ -50,6 +50,13 @@
                                rel="tooltip" data-placement="right" title="{% trans "Staging area" %}"></i>
                         </li>
                     {% endif %}
+
+                    {% if badge == 'collaboration' %}
+                        <li>
+                            <i class="icon-group collaboration-badge badge" rel="tooltip" data-placement="right"
+                               title="{% trans "Collaboration" %}"></i>
+                        </li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         {% endif %} {# not histogram and badges #}

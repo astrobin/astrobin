@@ -342,4 +342,10 @@ NOTICE_TYPES = (
         '',
         2
     ),
+    (
+        'removed_self_as_collaborator',
+        _("User removed self as a collaborator to your image"),
+        '',
+        2
+    ),
 )
