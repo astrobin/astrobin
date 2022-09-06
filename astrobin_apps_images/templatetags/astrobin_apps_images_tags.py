@@ -195,6 +195,9 @@ def astrobin_image(context, image, alias, **kwargs):
         elif image.is_wip:
             badges.append('wip')
 
+        if image.collaborators.exists():
+            badges.append('collaboration')
+
         # Temporarily disable this because it hogs the default celery queue.
         """
         cache_key = 'top100_ids'
