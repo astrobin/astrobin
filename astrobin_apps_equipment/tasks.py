@@ -1,5 +1,5 @@
 import logging
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 from annoying.functions import get_object_or_None
 from celery import shared_task
@@ -83,3 +83,14 @@ def reject_item(item_id: int, klass: EquipmentItemKlass):
     if item:
         log.debug(f'reject_item task beginning rejection of {klass}/{item_id}')
         EquipmentService.reject_item(item)
+
+
+@shared_task(time_limit=30*60, acks_late=True)
+def reject_stuck_items():
+    cutoff = datetime.now() - timedelta(hours=1)
+
+    for model_class in (Sensor, Telescope, Camera, Mount, Filter, Accessory, Software):
+        stuck_items = model_class.objects.filter(reviewer_decision='REJECTED', reviewed_timestamp__lt=cutoff)
+        for item in stuck_items.iterator():
+            log.debug(f'reject_stuck_items task beginning rejection of {model_class}/{item.id}')
+            EquipmentService.reject_item(item)
