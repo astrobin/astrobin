@@ -278,7 +278,7 @@ class UserService:
     def display_wip_images_on_public_gallery(self) -> bool:
         return self.user.userprofile.display_wip_images_on_public_gallery in (None, True)
 
-    def sort_gallery_by(self, queryset: QuerySet, subsection: str, active: str, klass: str) -> Tuple[QuerySet, List[str]]:
+    def sort_gallery_by(self, queryset: QuerySet, subsection: str, active: str, klass: str):
         from astrobin.models import Acquisition, Camera, Image, Telescope
         from astrobin_apps_equipment.models import Camera as CameraV2, Telescope as TelescopeV2
         from astrobin_apps_images.services import ImageService
@@ -324,8 +324,8 @@ class UserService:
             )
             if acquisitions:
                 distinct_years = sorted(list(set([a.date.year for a in acquisitions if a.date])), reverse=True)
-                no_date_message = _("No date specified")
-                menu = [(str(year), str(year)) for year in distinct_years] + [('0', no_date_message)]
+                no_data_message = _("No date specified")
+                menu = [(str(year), str(year)) for year in distinct_years] + [('0', no_data_message)]
 
                 if active == '0':
                     queryset = queryset.filter(
@@ -375,7 +375,7 @@ class UserService:
                 images_using_for_imaging__is_wip=False,
             ).distinct()
 
-            no_date_message = _("No imaging telescopes or lenses, or no imaging cameras specified")
+            no_data_message = _("No imaging telescopes or lenses, or no imaging cameras specified")
             gear_images_message = _("Gear images")
 
             # L = LEGACY, N = NEW
@@ -383,7 +383,7 @@ class UserService:
             menu += [(f'N{x.id}', str(x)) for x in telescopes_2]
             menu += [(f'L{x.id}', str(x)) for x in cameras]
             menu += [(f'N{x.id}', str(x)) for x in cameras_2]
-            menu += [(0, no_date_message)]
+            menu += [(0, no_data_message)]
             menu += [(-1, gear_images_message)]
 
             if active == '0':
@@ -504,33 +504,13 @@ class UserService:
         # NO DATA #
         ###########
         elif subsection == 'nodata':
-            menu += [('SUB', _("No subjects specified"))]
             menu += [('GEAR', _("No imaging telescopes or lenses, or no imaging cameras specified"))]
             menu += [('ACQ', _("No acquisition details specified"))]
 
             if active is None:
-                active = 'SUB'
+                active = 'GEAR'
 
-            if active == 'SUB':
-                queryset = queryset.filter(
-                    (
-                            Q(subject_type=SubjectType.DEEP_SKY) |
-                            Q(subject_type=SubjectType.SOLAR_SYSTEM) |
-                            Q(subject_type=SubjectType.WIDE_FIELD) |
-                            Q(subject_type=SubjectType.STAR_TRAILS) |
-                            Q(subject_type=SubjectType.NORTHERN_LIGHTS) |
-                            Q(subject_type=SubjectType.NOCTILUCENT_CLOUDS)
-                    ) &
-                    (Q(solar_system_main_subject=None))
-                )
-                queryset = [x for x in queryset if (x.solution is None or x.solution.objects_in_field is None)]
-                for i in queryset:
-                    for r in i.revisions.all():
-                        if r.solution and r.solution.objects_in_field:
-                            if i in queryset:
-                                queryset.remove(i)
-
-            elif active == 'GEAR':
+            if active == 'GEAR':
                 queryset = queryset.filter(
                     Q(
                         subject_type__in=(
@@ -542,8 +522,11 @@ class UserService:
                             SubjectType.NOCTILUCENT_CLOUDS,
                         )
                     ) &
-                    (Q(imaging_telescopes=None) | Q(imaging_cameras=None))
-                )
+                    (
+                            Q(Q(imaging_telescopes=None) | Q(imaging_cameras=None)) &
+                            Q(Q(imaging_telescopes_2=None) | Q(imaging_cameras_2=None))
+                    )
+                ).distinct()
 
             elif active == 'ACQ':
                 queryset = queryset.filter(
@@ -560,7 +543,7 @@ class UserService:
                     Q(acquisition=None)
                 )
 
-        return queryset, menu
+        return queryset, menu, active
 
     def update_premium_counter_on_subscription(self, subscription: Subscription):
         from astrobin.models import Image, UserProfile

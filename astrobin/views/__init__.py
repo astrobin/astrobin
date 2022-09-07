@@ -1193,7 +1193,7 @@ def user_page(request, username):
         section = 'trash'
         subsection = None
     else:
-        qs, menu = UserService(user).sort_gallery_by(qs, subsection, active, klass)
+        qs, menu, active = UserService(user).sort_gallery_by(qs, subsection, active, klass)
 
     # Calculate some stats
 
