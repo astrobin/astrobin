@@ -8,8 +8,8 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.postgres.search import TrigramDistance
 from django.core.cache import cache
-from django.db.models import Q, QuerySet
-from django.db.models.functions import Lower
+from django.db.models import IntegerField, Q, QuerySet, Value
+from django.db.models.functions import Concat, Lower
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.decorators import method_decorator
@@ -98,30 +98,52 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 queryset = brand_queryset
             else:
                 if 'postgresql' in settings.DATABASES['default']['ENGINE']:
-                    queryset = queryset.annotate(
+                    contains_queryset = queryset.annotate(
+                        full_name=Concat('brand__name', Value(' '), 'name'),
                         search_friendly_distance=TrigramDistance('search_friendly_name', q),
+                        full_name_distance=TrigramDistance('full_name', q),
+                        custom_order=Value(1, IntegerField()),
+                    ).filter(
+                        Q(
+                            Q(search_friendly_name__icontains=q) |
+                            Q(variants__search_friendly_name__icontains=q) |
+                            Q(full_name__icontains=q) |
+                            Q(variants__name__icontains=q)
+                        )
+                    ).distinct()
+
+                    distance_queryset = queryset.annotate(
+                        full_name=Concat('brand__name', Value(' '), 'name'),
+                        search_friendly_distance=TrigramDistance('search_friendly_name', q),
+                        full_name_distance=TrigramDistance('full_name', q),
+                        custom_order=Value(2, IntegerField()),
                     ).filter(
                         Q(
                             Q(search_friendly_distance__lte=.85) |
-                            Q(search_friendly_name__icontains=q) |
-                            Q(variants__search_friendly_name__icontains=q) |
-                            Q(variants__name__icontains=q)
-                        )
-                    ).distinct(
-                    ).order_by(
+                            Q(full_name_distance__lte=.85)
+                        ) &
+                        ~Q(pk__in=contains_queryset.values_list('pk', flat=True))
+                    ).distinct()
+
+                    queryset = contains_queryset.union(distance_queryset).order_by(
+                        'custom_order',
                         'search_friendly_distance',
-                        Lower('search_friendly_name'),
+                        'full_name_distance',
                     )
                 else:
-                    queryset = queryset.filter(
+                    queryset = queryset.annotate(
+                        full_name=Concat('brand__name', Value(' '), 'name')
+                    ).filter(
                         Q(
                             Q(search_friendly_name__icontains=q) |
                             Q(variants__search_friendly_name__icontains=q) |
+                            Q(full_name__icontains=q) |
                             Q(variants__name__icontains=q)
                         )
                     ).distinct(
                     ).order_by(
                         Lower('search_friendly_name'),
+                        Lower('full_name'),
                     )
 
                 queryset = queryset[:50]
