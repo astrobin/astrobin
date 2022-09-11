@@ -13,8 +13,10 @@ from zipfile import ZipFile
 import requests
 from celery import shared_task
 from celery.utils.log import get_task_logger
+from django.apps import apps
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.core.files import File
 from django.core.mail import EmailMultiAlternatives
@@ -670,12 +672,33 @@ def expire_gear_migration_locks():
 
     GearMigrationStrategy.objects \
         .filter(migration_flag_reviewer_lock__isnull=False,
-                migration_flag_reviewer_lock_timestamp__lt=timezone.now() - timedelta(hours=1)) \
-        .update(migration_flag_reviewer_lock=None,
-                migration_flag_reviewer_lock_timestamp=None)
+        migration_flag_reviewer_lock_timestamp__lt=timezone.now() - timedelta(hours=1)
+    ) \
+        .update(
+        migration_flag_reviewer_lock=None,
+        migration_flag_reviewer_lock_timestamp=None
+    )
 
 
 @shared_task(time_limit=600, acks_late=True)
 def process_camera_rename_proposal(gear_rename_proposal_pk: int):
     proposal = CameraRenameProposal.objects.get(pk=gear_rename_proposal_pk)
     GearService.process_camera_rename_proposal(proposal)
+
+
+@shared_task(time_limit=600, acks_late=True)
+def update_index(content_type_pk, object_pk):
+    signal_processor = apps.get_app_config('haystack').signal_processor
+
+    if not hasattr(signal_processor, 'enqueue_save'):
+        return
+
+    cache_key = f'astrobin_common_search_index_update_service_{content_type_pk}_{object_pk}'
+
+    if cache.get(cache_key):
+        return
+
+    content_type = ContentType.objects.get(pk=content_type_pk)
+    model_class = content_type.model_class()
+    instance = model_class.objects.get(pk=object_pk)
+    signal_processor.enqueue_save(model_class, instance)

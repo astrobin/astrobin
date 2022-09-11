@@ -402,8 +402,8 @@ post_save.connect(nested_comment_post_save, sender=NestedComment)
 
 def toggleproperty_post_delete(sender, instance, **kwargs):
     if isinstance(instance.content_object, Image):
-        SearchIndexUpdateService.update_index(Image, instance.content_object)
-        SearchIndexUpdateService.update_index(User, instance.content_object.user, 3600)
+        SearchIndexUpdateService.update_index(instance.content_object)
+        SearchIndexUpdateService.update_index(instance.content_object.user, 3600)
 
 
 post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
@@ -411,8 +411,8 @@ post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
 
 def toggleproperty_post_save(sender, instance, created, **kwargs):
     if isinstance(instance.content_object, Image):
-        SearchIndexUpdateService.update_index(Image, instance.content_object)
-        SearchIndexUpdateService.update_index(User, instance.content_object.user, 3600)
+        SearchIndexUpdateService.update_index(instance.content_object)
+        SearchIndexUpdateService.update_index(instance.content_object.user, 3600)
 
     if created:
         verb = None
@@ -832,15 +832,16 @@ def new_equipment_changed(sender, instance: Image, **kwargs):
 
     def update_indexes(item):
         if not item.last_added_or_removed_from_image or item.last_added_or_removed_from_image < index_update_deadline:
-            SearchIndexUpdateService.update_index(model_class, item)
+            SearchIndexUpdateService.update_index(item)
             if item.brand is not None:
                 if not item.brand.last_added_or_removed_from_image or \
                         item.brand.last_added_or_removed_from_image < index_update_deadline:
-                    SearchIndexUpdateService.update_index(EquipmentBrand, item.brand)
+                    SearchIndexUpdateService.update_index(item.brand)
                 EquipmentBrand.objects.filter(pk=item.brand.pk).update(last_added_or_removed_from_image=now)
 
-    if not instance.updated or instance.updated < update_deadline:
-        Image.all_objects.filter(pk=instance.pk).update(updated=timezone.now())
+    Image.all_objects.filter(pk=instance.pk).update(updated=timezone.now())
+    SearchIndexUpdateService.update_index(instance)
+    SearchIndexUpdateService.update_index(instance.user)
 
     if action == 'pre_clear':
         item_ids = sender.objects.filter(image=instance).values_list(model_class.__name__.lower(), flat=True)

@@ -656,6 +656,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return 'updated'
 
     def prepare_description(self, obj):
+        logger.info('Updating ImageIndex: %d' % obj.pk)
         return obj.description_bbcode or obj.description
 
     ###################################################################################################################
