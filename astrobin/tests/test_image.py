@@ -2269,8 +2269,8 @@ class ImageTest(TestCase):
 
         update_index.assert_has_calls(
             [
-                mock.call(Image, image),
-                mock.call(User, image.user, mock.ANY),
+                mock.call(image),
+                mock.call(image.user, mock.ANY),
             ], any_order=True
         )
 
