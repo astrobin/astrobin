@@ -5,6 +5,8 @@
 {% load toggleproperty_tags %}
 {% load i18n %}
 
+{% is_toggled 'follow' image.user request.user as already_follows %}
+
 <div class="avatar-content">
     <a
         data-instant
@@ -22,10 +24,23 @@
 
         <div class="username">
             {% astrobin_username user link=False %}
+
+            {% if already_follows %}
+                <span class="contextual-menu">
+                    <button class="dropdown-toggle btn-link" data-toggle="dropdown">
+                        <i class="icon-ellipsis-vertical icon-white"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            {% add_remove_toggleproperty "follow" user request.user btn_class="btn-link" hide_icon=True %}
+                        </li>
+                    </ul>
+                </span>
+            {% endif %}
         </div>
     </a>
 
-    {% if request.user != user %}
+    {% if request.user != user and not already_follows %}
         {% add_remove_toggleproperty "follow" user request.user btn_class="btn-link" hide_icon=True %}
     {% endif %}
 
