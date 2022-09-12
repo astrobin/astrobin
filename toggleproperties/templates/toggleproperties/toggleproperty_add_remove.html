@@ -40,8 +40,11 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}").click(function () {
+        $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}").click(function (e) {
             const $btn = $(this);
+
+            e.stopPropagation();
+            e.preventDefault();
 
             {% if request.user and request.user.is_authenticated %}
                 $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }} .toggleproperties-label").text("...");
@@ -99,6 +102,8 @@
             {% else %} {# Anonymous user #}
                 window.location = '/accounts/login/?next={{request.path}}'
             {% endif %}
+
+            return false;
         });
     });
 </script>
