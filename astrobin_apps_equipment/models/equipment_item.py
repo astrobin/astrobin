@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.db.models import SET_NULL, PROTECT
 from django.utils.text import slugify
@@ -6,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from pybb.models import Forum
 from safedelete.models import SafeDeleteModel
 
-from astrobin_apps_equipment.models import EquipmentBrand
+from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItemListing
 from astrobin_apps_equipment.models.equipment_item_group import (
     EQUIPMENT_ITEM_USAGE_TYPE_CHOICES, EquipmentItemGroup,
     EQUIPMENT_ITEM_KLASS_CHOICES,
@@ -230,6 +231,9 @@ class EquipmentItem(SafeDeleteModel):
         related_name='%(app_label)s_%(class)s_equipment_item',
         on_delete=models.SET_NULL
     )
+
+    listings = GenericRelation(EquipmentItemListing)
+
     ####################################################################################################################
     # This items are synced back from the search index.                                                                #
     ####################################################################################################################

@@ -2,11 +2,12 @@
 
 
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import CASCADE, SET_NULL
 from safedelete.models import SafeDeleteModel
 
-from astrobin_apps_equipment.models.equipment_brand import EquipmentBrand
 from astrobin_apps_equipment.models.equipment_retailer import EquipmentRetailer
 
 
@@ -61,6 +62,10 @@ class EquipmentItemListing(SafeDeleteModel):
         null=True,
         blank=True,
     )
+
+    item_content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    item_object_id = models.PositiveIntegerField()
+    item_content_object = GenericForeignKey('item_content_type', 'item_object_id')
 
     def __str__(self):
         return "%s by %s" % (self.name, self.retailer)
