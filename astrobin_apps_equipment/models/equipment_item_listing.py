@@ -56,6 +56,12 @@ class EquipmentItemListing(SafeDeleteModel):
         blank=True,
     )
 
+    sku = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True,
+    )
+
     def __str__(self):
         return "%s by %s" % (self.name, self.retailer)
 
