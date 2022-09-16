@@ -370,7 +370,6 @@ class UserIndex(CelerySearchIndex, Indexable):
         return "userprofile__updated"
 
     def prepare_images(self, obj):
-        logger.info('Updating UserIndex: %d' % obj.pk)
         return UserService(obj).get_public_images().count()
 
     def prepare_avg_integration(self, obj):
@@ -427,6 +426,8 @@ class UserIndex(CelerySearchIndex, Indexable):
 
         if obj.userprofile.astrobin_index_bonus is not None:
             result += obj.userprofile.astrobin_index_bonus
+
+        logger.info(f'Updating UserIndex: {obj.pk} (AstroBin Index: {result})')
 
         return result
 
