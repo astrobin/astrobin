@@ -93,6 +93,16 @@
                             $btn.addClass("active");
                             if (data['count'] !== undefined)
                                 $('#count-{{ property_type }}-{{ content_type_id }}-{{ object_id }}').text(data.count);
+                        },
+                        error: function() {
+                            {% if property_tooltip_on and property_tooltip_off %}
+                                $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }}")
+                                    .tooltip('hide')
+                                    .attr('data-original-title', "{{ property_tooltip_off | safe }}")
+                                    .tooltip('fixTitle')
+                                    .tooltip('show');
+                            {% endif %}
+                            $("#toggleproperty-{{ property_type }}-{{ content_type_id }}-{{ object_id }} .toggleproperties-label").text("{{ property_label_off | safe }}");
                         }
                     });
                 }

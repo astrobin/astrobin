@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.utils.translation import ugettext as _
 
 from astrobin_apps_images.services import ImageService
 from .models import ToggleProperty
@@ -20,6 +21,10 @@ def ajax_add_toggleproperty(request):
         content_type = get_object_or_404(ContentType, pk=request.POST.get("content_type_id"))
         property_type = request.POST.get("property_type")
         obj = content_type.get_object_for_this_type(pk=object_id)
+
+        if hasattr(obj, 'deleted') and obj.deleted is not None and obj.deleted != False:
+            return HttpResponse(_('Sorry, this object was already deleted.'), status=404)
+
         response_dict = {}
 
         if ToggleProperty.objects.filter(

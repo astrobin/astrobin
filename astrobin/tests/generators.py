@@ -9,6 +9,7 @@ from subscription.models import Subscription, UserSubscription
 
 from astrobin.enums import SubjectType
 from astrobin.enums.display_image_download_menu import DownloadLimitation
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import (
     Accessory, Camera, Collection, Filter, FocalReducer, GearMigrationStrategy, Image, ImageRevision, Mount, Software,
     Telescope,
@@ -54,6 +55,7 @@ class Generators:
             subject_type=kwargs.pop('subject_type', SubjectType.DEEP_SKY),
             published=kwargs.pop('published', None),
             submitted_for_iotd_tp_consideration=kwargs.pop('submitted_for_iotd_tp_consideration', None),
+            moderator_decision=kwargs.pop('moderator_decision', ModeratorDecision.UNDECIDED),
         )
 
     @staticmethod
