@@ -1,9 +1,11 @@
+from actstream.models import Action
 from django.contrib.auth.models import AnonymousUser, User
 from django.test import TestCase
 from mock import patch
 
 from astrobin.enums import SubjectType
 from astrobin.enums.display_image_download_menu import DownloadLimitation
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Image
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
@@ -669,3 +671,16 @@ class TestImageService(TestCase):
         self.assertTrue('id' in equipment_list['guiding_cameras'][1])
         self.assertEqual('My make My guiding camera', equipment_list['guiding_cameras'][1]['label'])
         self.assertEqual('LEGACY', equipment_list['guiding_cameras'][1]['version'])
+
+    def test_delete_stories(self):
+        image = Generators.image(moderator_decision=ModeratorDecision.APPROVED)
+
+        self.assertEquals(1, Action.objects.action_object(image).count())
+
+        Generators.like(image)
+
+        self.assertEquals(1, Action.objects.action_object(image).count())
+
+        image.delete()
+
+        self.assertEquals(0, Action.objects.action_object(image).count())

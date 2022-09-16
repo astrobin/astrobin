@@ -219,6 +219,7 @@ def image_post_softdelete(sender, instance, **kwargs):
 
     ImageIndex().remove_object(instance)
     UserService(instance.user).clear_gallery_image_list_cache()
+    ImageService(instance).delete_stories()
 
     valid_subscription = PremiumService(instance.user).get_valid_usersubscription()
 

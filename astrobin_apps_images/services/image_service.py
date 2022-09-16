@@ -3,6 +3,7 @@ import math
 from collections import namedtuple
 from datetime import timedelta
 
+from actstream.models import Action
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -477,6 +478,10 @@ class ImageService:
                 if not skip_notifications:
                     push_notification_for_new_image.apply_async(args=(self.image.pk,), countdown=10)
                 add_story(self.image.user, verb='VERB_UPLOADED_IMAGE', action_object=self.image)
+
+    def delete_stories(self):
+        Action.objects.target(self.image).delete()
+        Action.objects.action_object(self.image).delete()
 
     @staticmethod
     def get_constellation(solution):
