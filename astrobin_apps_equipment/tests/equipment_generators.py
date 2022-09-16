@@ -207,9 +207,11 @@ class EquipmentGenerators:
     def equipment_item_listing(**kwargs):
         brand = kwargs.get('brand', EquipmentGenerators.equipment_brand())
         retailer = kwargs.get('retailer', EquipmentGenerators.equipment_retailer())
+        item_content_object = kwargs.get('item_content_object', EquipmentGenerators.telescope())
 
         return EquipmentItemListing.objects.create(
             name=kwargs.get('name', Generators.randomString()),
             retailer=retailer,
+            item_content_object=item_content_object,
             url=kwargs.get('url', "%s/shop/%s" % (retailer.website, slugify(brand))),
         )
