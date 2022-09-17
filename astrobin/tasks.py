@@ -693,12 +693,8 @@ def update_index(content_type_pk, object_pk):
     if not hasattr(signal_processor, 'enqueue_save'):
         return
 
-    cache_key = f'astrobin_common_search_index_update_service_{content_type_pk}_{object_pk}'
-
-    if cache.get(cache_key):
-        return
-
     content_type = ContentType.objects.get(pk=content_type_pk)
     model_class = content_type.model_class()
     instance = model_class.objects.get(pk=object_pk)
+
     signal_processor.enqueue_save(model_class, instance)
