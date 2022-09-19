@@ -161,6 +161,7 @@ def search_image_list(context, paginate=True, **kwargs):
     camera = request.GET.get('camera')
     country = get_client_country_code(request)
     equipment_brand_listings = None
+    equipment_item_listings = None
 
     if telescope or camera or q:
         equipment_brand_listings = EquipmentBrandListing.objects \
