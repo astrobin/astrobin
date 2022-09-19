@@ -31,6 +31,7 @@ from astrobin.utils import get_client_country_code
 from astrobin_apps_equipment.api.permissions.is_equipment_moderator_or_own_migrator_or_readonly import \
     IsEquipmentModeratorOrOwnMigratorOrReadOnly
 from astrobin_apps_equipment.api.serializers.brand_listing_serializer import BrandListingSerializer
+from astrobin_apps_equipment.api.serializers.item_listing_serializer import ItemListingSerializer
 from astrobin_apps_equipment.api.throttle import EquipmentCreateThrottle
 from astrobin_apps_equipment.models import EquipmentBrand, EquipmentItem
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
@@ -619,12 +620,14 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
                 allow_full_retailer_integration=allow_full_retailer_integration,
             ))
 
-        brand_listings = EquipmentService.equipment_brand_listings(item.brand, get_client_country_code(request))
+        country_code = get_client_country_code(request)
+        brand_listings = EquipmentService.equipment_brand_listings(item.brand, country_code)
+        item_listings = EquipmentService.equipment_item_listings(item, country_code)
 
         return Response(
             dict(
                 brand_listings=BrandListingSerializer(brand_listings, many=True).data,
-                item_listings=[],
+                item_listings=ItemListingSerializer(item_listings, many=True).data,
                 allow_full_retailer_integration=allow_full_retailer_integration,
             )
         )

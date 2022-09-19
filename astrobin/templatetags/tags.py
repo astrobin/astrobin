@@ -31,7 +31,7 @@ from astrobin.utils import (
     ra_decimal_precision_from_pixel_scale,
 )
 from astrobin_apps_donations.templatetags.astrobin_apps_donations_tags import is_donor
-from astrobin_apps_equipment.models import EquipmentBrandListing
+from astrobin_apps_equipment.models import EquipmentBrandListing, EquipmentItemListing
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     is_any_ultimate, is_free, is_lite,
@@ -166,12 +166,16 @@ def search_image_list(context, paginate=True, **kwargs):
         equipment_brand_listings = EquipmentBrandListing.objects \
             .annotate(distance=TrigramDistance('brand__name', telescope or camera or q)) \
             .filter(distance__lte=.85, retailer__countries__icontains=country)
+        equipment_item_listings = EquipmentItemListing.objects \
+            .annotate(distance=TrigramDistance('name', telescope or camera or q)) \
+            .filter(distance__lte=.5, retailer__countries__icontains=country)
 
     context.update({
         'paginate': paginate,
         'search_domain': context['request'].GET.get('d'),
         'sort': context['request'].GET.get('sort'),
-        'equipment_brand_listings': equipment_brand_listings
+        'equipment_brand_listings': equipment_brand_listings,
+        'equipment_item_listings': equipment_item_listings,
     })
 
     return context

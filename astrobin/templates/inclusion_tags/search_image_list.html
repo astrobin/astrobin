@@ -12,7 +12,7 @@
 {% if paginator.object_list %}
 
     {% if search_domain == None or search_domain == 'i' %}
-        {% if equipment_brand_listings %}
+        {% if equipment_item_listings or equipment_brand_listings %}
             <div class="equipment-listing-search-result alert alert-info">
                 <a class="close" data-toggle="modal" title="{% trans "Remove ads" %}"
                         {% if valid_usersubscription|can_remove_ads %}
@@ -24,8 +24,50 @@
                     &times;
                 </a>
 
-                {% with equipment_brand_listings_count=equipment_brand_listings|length %}
-                    {% if equipment_brand_listings_count == 1 %}
+                {% with equipment_item_listings_count=equipment_item_listings|length equipment_brand_listings_count=equipment_brand_listings|length %}
+                    {% if equipment_item_listings_count == 1 %}
+                        <span class="text">
+                            <i class="icon-bullhorn"></i>
+                            {% blocktrans trimmed with name=equipment_item_listings.0.name retailer=equipment_item_listings.0.retailer %}
+                                Interested in <strong>{{ name }}</strong>? Our sponsor
+                                <strong>{{ retailer }}</strong> sells this product!
+                            {% endblocktrans %}
+                        </span>
+
+                        {% equipment_item_listing_url_with_tags equipment_item_listings.0 'search' as url_with_tags %}
+                        <a class="btn btn-primary" href="{{ url_with_tags }}"
+                           onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')" target="_blank">
+                            <i class="icon-shopping-cart"></i>
+                            {% trans "Shop now" %}
+                        </a>
+                    {% elif equipment_item_listings_count > 1 %}
+                        <span class="text">
+                            <i class="icon-bullhorn"></i>
+                            {% blocktrans trimmed with name=equipment_item_listings.0.name %}
+                                Interested in <strong>{{ name }}</strong>? Our sponsors sells this product!
+                            {% endblocktrans %}
+                        </span>
+
+                        <div class="btn-group">
+                            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="icon-shopping-cart"></i>
+                                {% trans "Shop now" %}
+                                <span class="caret hidden-phone"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% for listing in equipment_item_listings %}
+                                    <li>
+                                        {% equipment_item_listing_url_with_tags listing 'search' as url_with_tags %}
+                                        <a href="{{ url_with_tags }}"
+                                           onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')"
+                                           target="_blank">
+                                            {{ listing.retailer }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% elif equipment_brand_listings_count == 1 %}
                         <span class="text">
                             <i class="icon-bullhorn"></i>
                             {% blocktrans trimmed with brand=equipment_brand_listings.0.brand retailer=equipment_brand_listings.0.retailer %}
@@ -34,7 +76,7 @@
                             {% endblocktrans %}
                         </span>
 
-                        {% equipment_listing_url_with_tags equipment_brand_listings.0 'search' as url_with_tags %}
+                        {% equipment_brand_listing_url_with_tags equipment_brand_listings.0 'search' as url_with_tags %}
                         <a class="btn btn-primary" href="{{ url_with_tags }}"
                            onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')" target="_blank">
                             <i class="icon-shopping-cart"></i>
@@ -57,7 +99,7 @@
                             <ul class="dropdown-menu">
                                 {% for listing in equipment_brand_listings %}
                                     <li>
-                                        {% equipment_listing_url_with_tags listing 'search' as url_with_tags %}
+                                        {% equipment_brand_listing_url_with_tags listing 'search' as url_with_tags %}
                                         <a href="{{ url_with_tags }}"
                                            onclick="getOutboundLink('{{ url_with_tags }}', '{{ request.path }}')" target="_blank">
                                             {{ listing.retailer }}

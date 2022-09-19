@@ -1,11 +1,19 @@
 .ui-tooltip {
   width: auto !important;
   z-index: 1049 !important;
+
+  @media screen and (max-width: 525px) {
+    max-width: 400px !important;
+  }
+
+  @media screen and (min-width: 526px) {
+    max-width: 500px !important;
+  }
 }
 
 .ui-tooltip-default .ui-tooltip-titlebar,
 .ui-tooltip-default .ui-tooltip-content {
-  background: $grey-8;
+  background: $grey-6 url(../images/background-tile.png);
   border-color: $grey-7;
   @include box-shadow-subtle;
   color: $text-color;

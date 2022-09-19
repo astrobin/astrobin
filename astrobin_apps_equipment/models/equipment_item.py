@@ -232,7 +232,11 @@ class EquipmentItem(SafeDeleteModel):
         on_delete=models.SET_NULL
     )
 
-    listings = GenericRelation(EquipmentItemListing)
+    listings = GenericRelation(
+        EquipmentItemListing,
+        object_id_field='item_object_id',
+        content_type_field='item_content_type',
+    )
 
     ####################################################################################################################
     # This items are synced back from the search index.                                                                #
