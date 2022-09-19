@@ -120,7 +120,14 @@
                                             {% with request.user|get_valid_usersubscription as request_user_valid_usersubscription_for_link %}
                                                 {% with image.user|get_valid_usersubscription as image_user_valid_usersubscription_for_link %}
                                                     {% if request_user_valid_usersubscription_for_link|allow_full_retailer_integration:image_user_valid_usersubscription_for_link %}
-                                                        {% if item.object|equipment_item_listings:REQUEST_COUNTRY|length %}
+                                                        {% if item.object|equipment_item_listings:REQUEST_COUNTRY|length and item.object.brand|equipment_brand_listings:REQUEST_COUNTRY|length %}
+                                                            <span
+                                                                rel="popover" class="gear-popover-label shopping-cart"
+                                                                data-load="{% url 'equipment:item-popover' item.type item.id image.get_id %}?q={{ search_query|urlencode }}{% if 'DEBUG_COUNTRY' in request.GET %}&DEBUG_COUNTRY={{ request.GET|get_item:'DEBUG_COUNTRY' }}{% endif %}"
+                                                            >
+                                                                <i class="icon-shopping-cart"></i>
+                                                            </span>
+                                                        {% elif item.object|equipment_item_listings:REQUEST_COUNTRY|length %}
                                                             {% with item.object|equipment_item_listings:REQUEST_COUNTRY as listings %}
                                                                 {% if listings|length == 1 %}
                                                                     {% equipment_item_listing_url_with_tags listings.all.0 'card' as url_with_tags %}

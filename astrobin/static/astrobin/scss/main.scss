@@ -2709,21 +2709,24 @@ form.avatar-delete {
     border-color: $grey-8;
   }
 
-  .equipment-item-listings,
-  .equipment-brand-listings {
-    border-top: 1px solid $grey-7;
-    background: $grey-6 url(../images/background-tile.png);
+  .alert {
+    line-height: 1.1rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+
+  .equipment-listings {
     margin: 0 -1rem;
     padding: 1rem;
 
-    .alert {
-      line-height: 1.1rem;
+    [class*="span"] {
+      margin-left: 0;
     }
 
-    .equipment-item-listing,
-    .equipment-brand-listing {
+    .equipment-listing {
       position: relative;
       padding: .5rem;
+      margin: .5rem;
       background: $white;
       border: 1px solid $grey-7;
       box-shadow: 0 0 1rem rgba(0, 0, 0, .5);
