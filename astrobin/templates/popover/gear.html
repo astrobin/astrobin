@@ -92,7 +92,7 @@
                                     &times;
                                 </a>
 
-                                {% equipment_listing_url_with_tags listing 'card' as url_with_tags %}
+                                {% equipment_brand_listing_url_with_tags listing 'card' as url_with_tags %}
 
                                 {% if request_user_valid_usersubscription|allow_full_retailer_integration:image_user_valid_usersubscription and listing.retailer.logo %}
                                     <a href="{{ url_with_tags }}"
@@ -135,7 +135,7 @@
                                     &times;
                                 </a>
 
-                                {% equipment_listing_url_with_tags listing 'card' as url_with_tags %}
+                                {% equipment_brand_listing_url_with_tags listing 'card' as url_with_tags %}
 
                                 {% if request_user_valid_usersubscription|allow_full_retailer_integration:image_user_valid_usersubscription and listing.retailer.logo %}
                                     <a

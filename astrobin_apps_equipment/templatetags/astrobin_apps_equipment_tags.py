@@ -32,6 +32,11 @@ def equipment_brand_listings(brand: EquipmentBrand, country: str) -> QuerySet:
 
 
 @register.filter
+def equipment_item_listings(item, country: str) -> QuerySet:
+    return EquipmentService.equipment_item_listings(item, country)
+
+
+@register.filter
 def equipment_item_listings_for_legacy_gear(gear, country):
     # type: (Gear, str) -> QuerySet
 
@@ -45,7 +50,7 @@ def equipment_item_listings_for_legacy_gear(gear, country):
 
 
 @register.simple_tag
-def equipment_listing_url_with_tags(listing: EquipmentBrandListing, source: str) -> str:
+def equipment_brand_listing_url_with_tags(listing: EquipmentBrandListing, source: str) -> str:
     url = listing.url
 
     if 'brand' in url or 'retailer' in url or 'source' in url:
@@ -56,6 +61,20 @@ def equipment_listing_url_with_tags(listing: EquipmentBrandListing, source: str)
         tags_separator = '&'
 
     return f'{url}{tags_separator}brand={listing.brand.name}&retailer={listing.retailer.name}&source={source}'
+
+
+@register.simple_tag
+def equipment_item_listing_url_with_tags(listing: EquipmentItemListing, source: str) -> str:
+    url = listing.url
+
+    if 'brand' in url or 'name' in url or 'retailer' in url or 'source' in url:
+        return url
+
+    tags_separator = '?'
+    if tags_separator in url:
+        tags_separator = '&'
+
+    return f'{url}{tags_separator}brand={listing.item_content_object.brand.name}&name={listing.item_content_object.name}&retailer={listing.retailer.name}&source={source}'
 
 
 @register.filter

@@ -2709,6 +2709,7 @@ form.avatar-delete {
     border-color: $grey-8;
   }
 
+  .equipment-item-listings,
   .equipment-brand-listings {
     border-top: 1px solid $grey-7;
     background: $grey-6 url(../images/background-tile.png);
@@ -2719,6 +2720,7 @@ form.avatar-delete {
       line-height: 1.1rem;
     }
 
+    .equipment-item-listing,
     .equipment-brand-listing {
       position: relative;
       padding: .5rem;

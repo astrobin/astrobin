@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from pybb.models import Category, Forum, Topic
 
-from astrobin_apps_equipment.models import EquipmentBrand, EquipmentBrandListing
+from astrobin_apps_equipment.models import EquipmentBrand, EquipmentBrandListing, EquipmentItemListing
 from astrobin_apps_equipment.models.deep_sky_acquisition_migration_record import DeepSkyAcquisitionMigrationRecord
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
 from astrobin_apps_notifications.utils import build_notification_url, push_notification
@@ -19,6 +19,16 @@ log = logging.getLogger('apps')
 
 
 class EquipmentService:
+    @staticmethod
+    def equipment_item_listings(item, country: str) -> QuerySet:
+        if country is None or item is None:
+            return EquipmentItemListing.objects.none()
+
+        return item.listings.filter(
+            Q(retailer__countries__icontains=country) |
+            Q(retailer__countries=None)
+        )
+
     @staticmethod
     def equipment_brand_listings(brand: EquipmentBrand, country: str) -> QuerySet:
         if country is None or brand is None:
