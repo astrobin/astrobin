@@ -434,17 +434,17 @@ class AstroBinSearchForm(SearchForm):
         if subject is not None and subject != "":
             catalog_entries = []
 
-            regex = r"(?P<catalog>M|NGC|IC)(?P<id>\d+)"
+            regex = r"(?P<catalog>M|NGC|IC|PGC|LDN|LBN)\s?(?P<id>\d+)"
             matches = re.finditer(regex, subject, re.IGNORECASE)
 
             for matchNum, match in enumerate(matches, start=1):
                 catalog_entries.append(match.string)
 
                 groups = match.groups()
-                catalog_entries.append("%s %s" % (groups[0], groups[1]))
+                catalog_entries.append("%s%s" % (groups[0], groups[1]))
 
             if catalog_entries:
-                query = reduce(or_, (Q(objects_in_field=x) for x in catalog_entries))
+                query = reduce(or_, (Q(objects_in_field=x) for x in set(catalog_entries)))
                 results = results.filter(query)
             else:
                 results = results.filter(objects_in_field=CustomContain(subject))
