@@ -44,6 +44,10 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
 
     def get_listings(self, item):
         request = self.context.get("request")
+
+        if request is None:
+            return dict()
+
         country_code = get_client_country_code(request)
 
         valid_user_subscription = PremiumService(request.user).get_valid_usersubscription()
