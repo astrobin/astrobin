@@ -1,7 +1,11 @@
 from rest_framework import serializers
 
+from astrobin.utils import get_client_country_code
+from astrobin_apps_equipment.api.serializers.brand_listing_serializer import BrandListingSerializer
+from astrobin_apps_equipment.api.serializers.item_listing_serializer import ItemListingSerializer
 from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
-from astrobin_apps_equipment.services import EquipmentItemService
+from astrobin_apps_equipment.services import EquipmentItemService, EquipmentService
+from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 
@@ -9,6 +13,7 @@ from common.constants import GroupName
 class EquipmentItemSerializer(serializers.ModelSerializer):
     brand_name = serializers.SerializerMethodField(read_only=True)
     variants = serializers.SerializerMethodField(read_only=True)
+    listings = serializers.SerializerMethodField(read_only=True)
 
     def get_brand_name(self, item):
         if item.brand:
@@ -36,6 +41,25 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
             )
 
         return self.__class__(variants, many=True).data
+
+    def get_listings(self, item):
+        request = self.context.get("request")
+
+        if request is None:
+            return dict()
+
+        country_code = get_client_country_code(request)
+
+        valid_user_subscription = PremiumService(request.user).get_valid_usersubscription()
+        allow_full_retailer_integration = PremiumService.allow_full_retailer_integration(valid_user_subscription, None)
+
+        item_listings = EquipmentService.equipment_item_listings(item, country_code)
+        brand_listings = EquipmentService.equipment_brand_listings_by_item(item, country_code)
+        return dict(
+            brand_listings=BrandListingSerializer(brand_listings, many=True).data,
+            item_listings=ItemListingSerializer(item_listings, many=True).data,
+            allow_full_retailer_integration=allow_full_retailer_integration,
+        )
 
     class Meta:
         fields = [
