@@ -27,8 +27,8 @@ def equipment_brand_listings_for_legacy_gear(gear: Gear, country: str) -> QueryS
 
 
 @register.filter
-def equipment_brand_listings(brand: EquipmentBrand, country: str) -> QuerySet:
-    return EquipmentService.equipment_brand_listings(brand, country)
+def equipment_brand_listings_by_item(item, country: str) -> QuerySet:
+    return EquipmentService.equipment_brand_listings_by_item(item, country)
 
 
 @register.filter
