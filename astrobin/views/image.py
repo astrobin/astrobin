@@ -1193,7 +1193,7 @@ class ImageEditRevisionView(LoginRequiredMixin, UpdateView):
 
         return {
             'square_cropping': square_cropping,
-            'mouse_hover_image': revision.image.mouse_hover_image
+            'mouse_hover_image': revision.mouse_hover_image
         }
 
     def get_success_url(self):
