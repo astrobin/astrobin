@@ -1784,17 +1784,6 @@ class ImageTest(TestCase):
         revision = ImageRevision.objects.get(pk=revision.pk)
         self.assertEqual(revision.description, "Updated revision description")
 
-    def test_image_revision_keeps_mouse_hover_from_image(self):
-        image = Generators.image(user=self.user)
-        image.mouse_hover_image = MouseHoverImage.INVERTED
-        image.save(keep_deleted=True)
-
-        revision = Generators.imageRevision(image=image)
-
-        self.client.login(username='test', password='password')
-        response = self.client.get(reverse('image_edit_revision', args=(revision.pk,)))
-        self.assertContains(response, '<option value="' + MouseHoverImage.INVERTED + '" selected>')
-
     def test_image_revision_keeps_plate_solving_settings_from_image(self):
         image = Generators.image(user=self.user)
         solution = PlateSolvingGenerators.solution(image)
