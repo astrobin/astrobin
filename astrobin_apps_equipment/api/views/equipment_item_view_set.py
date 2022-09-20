@@ -621,7 +621,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
             ))
 
         country_code = get_client_country_code(request)
-        brand_listings = EquipmentService.equipment_brand_listings(item.brand, country_code)
+        brand_listings = EquipmentService.equipment_brand_listings_by_item(item, country_code)
         item_listings = EquipmentService.equipment_item_listings(item, country_code)
 
         return Response(

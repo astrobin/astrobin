@@ -24,7 +24,7 @@
         </div>
     {% endif %}
 
-    {% with item_listings=item|equipment_item_listings:REQUEST_COUNTRY brand_listings=item.brand|equipment_brand_listings:REQUEST_COUNTRY %}
+    {% with item_listings=item|equipment_item_listings:REQUEST_COUNTRY brand_listings=item|equipment_brand_listings_by_item:REQUEST_COUNTRY %}
         {% setvar image.user|get_valid_usersubscription as image_user_valid_usersubscription %}
         {% setvar request.user|get_valid_usersubscription as request_user_valid_usersubscription %}
 

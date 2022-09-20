@@ -62,7 +62,7 @@ class BrandViewSet(viewsets.ModelViewSet):
         valid_user_subscription = PremiumService(request.user).get_valid_usersubscription()
         allow_full_retailer_integration = PremiumService.allow_full_retailer_integration(valid_user_subscription, None)
 
-        brand_listings = EquipmentService.equipment_brand_listings(brand, get_client_country_code(request))
+        brand_listings = EquipmentService.equipment_brand_listings_by_brand(brand, get_client_country_code(request))
 
         return Response(
             dict(
