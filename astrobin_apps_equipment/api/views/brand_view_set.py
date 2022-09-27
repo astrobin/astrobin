@@ -1,5 +1,5 @@
 from django.contrib.postgres.search import TrigramDistance
-from django.db.models import Q
+from django.db.models import Count, Q
 from django.db.models.functions import Lower
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import viewsets
@@ -18,6 +18,7 @@ from astrobin_apps_equipment.api.serializers.brand_listing_serializer import Bra
 from astrobin_apps_equipment.api.serializers.brand_serializer import BrandSerializer
 from astrobin_apps_equipment.api.throttle import EquipmentCreateThrottle
 from astrobin_apps_equipment.models import EquipmentBrand
+from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass
 from astrobin_apps_equipment.services import EquipmentService
 from astrobin_apps_premium.services.premium_service import PremiumService
 
@@ -33,14 +34,27 @@ class BrandViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         q = self.request.GET.get('q')
         sort = self.request.GET.get('sort', 'az')
+        type_ = self.request.GET.get('type')
 
         manager = self.get_serializer().Meta.model.objects
         queryset = manager.all()
+
+        if type_ and type_.upper() not in [i for i in EquipmentItemKlass.__dict__.keys() if i[:1] != '_']:
+            return manager.none()
 
         if q:
             queryset =  manager.annotate(
                 distance=TrigramDistance('name', q)
             ).filter(Q(distance__lte=.7) | Q(name__icontains=q)).order_by('distance')
+        elif type_:
+            queryset = manager.annotate(
+                count=Count(f'astrobin_apps_equipment_brand_{type_}s')
+            ).filter(
+                count__gt=0
+            ).order_by(
+                Lower('name')
+            )
+            self.paginator.page_size = queryset.count()
         elif sort == 'az':
             queryset = queryset.order_by(Lower('name'))
         elif sort == '-az':
