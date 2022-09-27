@@ -1,7 +1,9 @@
+import sys
+
 import simplejson
 from django.db.models import QuerySet
 from rest_framework.decorators import action
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import FormParser, MultiPartParser
 
 from astrobin_apps_equipment.api.filters.telescope_filter import TelescopeFilter
 from astrobin_apps_equipment.api.serializers.telescope_image_serializer import TelescopeImageSerializer
@@ -27,8 +29,8 @@ class TelescopeViewSet(EquipmentItemViewSet):
             aperture_object = simplejson.loads(telescope_aperture_filter)
             queryset = queryset.filter(
                 aperture__isnull=False,
-                aperture__gte=aperture_object.get('from'),
-                aperture__lte=aperture_object.get('to')
+                aperture__gte=float(aperture_object.get('from')) if aperture_object.get('from') is not None else 0,
+                aperture__lte=float(aperture_object.get('to')) if aperture_object.get('to') is not None else sys.maxsize
             )
 
         telescope_focal_length_filter = self.request.GET.get('telescope-focal-length')
@@ -37,8 +39,12 @@ class TelescopeViewSet(EquipmentItemViewSet):
             queryset = queryset.filter(
                 min_focal_length__isnull=False,
                 max_focal_length__isnull=False,
-                min_focal_length__gte=focal_length_object.get('from'),
+                min_focal_length__gte=focal_length_object.get('from')
+                if focal_length_object.get('from') is not None
+                else 0,
                 max_focal_length__lte=focal_length_object.get('to')
+                if focal_length_object.get('to') is not None
+                else sys.maxsize
             )
 
         telescope_weight_filter = self.request.GET.get('telescope-weight')
