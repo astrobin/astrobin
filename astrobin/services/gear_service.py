@@ -3,7 +3,7 @@ import math
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.db.models import Count, Q
+from django.db.models import Count
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext
@@ -287,7 +287,7 @@ class GearService:
                     'guiding_telescopes',
                     'guiding_cameras'):
                 if getattr(image, usage_class) \
-                        .annotate(count=Count('migration_strategies', filter=Q(migration_strategies__user=user))) \
+                        .annotate(count=Count('migration_strategies')) \
                         .filter(count=0) \
                         .exists():
                     return True
