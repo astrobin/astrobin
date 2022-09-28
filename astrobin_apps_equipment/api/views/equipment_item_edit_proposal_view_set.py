@@ -166,7 +166,7 @@ class EquipmentItemEditProposalViewSet(EquipmentItemViewSet):
 
         target: EquipmentItem = edit_proposal.edit_proposal_target
         TargetModelClass = type(target)
-        if edit_proposal.name != target.name and TargetModelClass.objects.filter(
+        if edit_proposal.name != target.name and target.brand is not None and TargetModelClass.objects.filter(
                 brand=target.brand, name=edit_proposal.name
         ).exclude(pk=target.pk).exists():
             return Response(

@@ -300,6 +300,96 @@ class TestApiCameraEditProposalViewSet(TestCase):
 
         self.assertEquals(200, response.status_code)
 
+    def test_name_change_will_lead_to_conflict(self):
+        client = APIClient()
+
+        brand = EquipmentGenerators.brand()
+
+        EquipmentGenerators.camera(
+            brand=brand,
+            name="Foo",
+            type=CameraType.DEDICATED_DEEP_SKY,
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+        )
+
+        camera_2 = EquipmentGenerators.camera(
+            brand=brand,
+            name='Bar',
+            type=CameraType.DEDICATED_DEEP_SKY,
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+        )
+
+        client.force_authenticate(user=Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS]))
+
+        client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list'), {
+                'editProposalTarget': camera_2.pk,
+                'brand': camera_2.brand.pk,
+                'type': camera_2.type,
+                'name': 'Foo',
+                'klass': camera_2.klass,
+            },
+            format='json'
+        )
+
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list') + '1/approve/', {}, format='json'
+        )
+
+        self.assertContains(
+            response,
+            'This edit proposal cannot be approved because an item with this brand and name already exists',
+            status_code=409,
+        )
+
+        camera_2.refresh_from_db()
+
+        self.assertEquals('Bar', camera_2.name)
+
+    def test_name_change_will_not_lead_to_conflict_for_diy(self):
+        client = APIClient()
+
+        EquipmentGenerators.camera(
+            brand=None,
+            name="Foo",
+            type=CameraType.DEDICATED_DEEP_SKY,
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+        )
+
+        camera_2 = EquipmentGenerators.camera(
+            brand=None,
+            name="Bar",
+            type=CameraType.DEDICATED_DEEP_SKY,
+            reviewer_decision=EquipmentItemReviewerDecision.APPROVED,
+        )
+
+        client.force_authenticate(user=Generators.user(groups=[GroupName.OWN_EQUIPMENT_MIGRATORS]))
+
+        client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list'), {
+                'editProposalTarget': camera_2.pk,
+                'brand': None,
+                'type': camera_2.type,
+                'name': 'Foo',
+                'klass': camera_2.klass,
+            },
+            format='json'
+        )
+
+        client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-edit-proposal-list') + '1/approve/', {}, format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+
+        camera_2.refresh_from_db()
+
+        self.assertEquals('Foo', camera_2.name)
+
     def test_assigned_edit_proposal_cannot_be_approved_by_others(self):
         client = APIClient()
         client.force_authenticate(user=Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS]))
