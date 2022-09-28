@@ -42,6 +42,8 @@ class UserFancyboxListViewSet(viewsets.ModelViewSet):
                     .filter(keyvaluetags__key=collection.order_by_tag) \
                     .order_by("keyvaluetags__value")
 
+            return images
+
         return user_service.sort_gallery_by(
             images,
             self.request.GET.get('subsection') or 'uploaded',
