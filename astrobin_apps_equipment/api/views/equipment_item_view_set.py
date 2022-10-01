@@ -64,7 +64,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
     def get_queryset(self) -> QuerySet:
         q = self.request.query_params.get('q')
         sort = self.request.query_params.get('sort')
-        brand = self.request.query_params.get('brand')
+        brand_from_query = self.request.query_params.get('brand')
 
         manager = self.get_serializer().Meta.model.objects
         queryset = manager.all()
@@ -162,8 +162,8 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         elif sort == '-images':
             queryset = queryset.order_by('-image_count', Lower('search_friendly_name'))
 
-        if brand is not None:
-            queryset = queryset.filter(brand=brand)
+        if brand_from_query is not None:
+            queryset = queryset.filter(brand=brand_from_query)
 
         return queryset
 
