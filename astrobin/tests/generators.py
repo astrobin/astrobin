@@ -10,6 +10,7 @@ from subscription.models import Subscription, UserSubscription
 from astrobin.enums import SubjectType
 from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.enums.moderator_decision import ModeratorDecision
+from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.models import (
     Accessory, Camera, Collection, Filter, FocalReducer, GearMigrationStrategy, Image, ImageRevision, Mount, Software,
     Telescope,
@@ -71,6 +72,7 @@ class Generators:
             label=kwargs.pop('label', 'B'),
             title=kwargs.pop('title', None),
             description=kwargs.pop('description', None),
+            mouse_hover_image=kwargs.pop('mouse_hover_image', MouseHoverImage.SOLUTION),
         )
 
     @staticmethod

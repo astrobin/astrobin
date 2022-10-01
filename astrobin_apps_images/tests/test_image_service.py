@@ -6,7 +6,7 @@ from mock import patch
 from astrobin.enums import SubjectType
 from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.enums.moderator_decision import ModeratorDecision
-from astrobin.models import Image
+from astrobin.models import Image, ImageRevision
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
 from astrobin_apps_images.services import ImageService
@@ -377,6 +377,21 @@ class TestImageService(TestCase):
         ImageService(image).delete_original()
 
         self.assertEqual('revision_b.jpg', image.image_file)
+        self.assertFalse(image.is_final)
+        self.assertEqual(1, ImageService(image).get_revisions().count())
+        self.assertEqual('C', ImageService(image).get_revisions().first().label)
+
+    def test_delete_original_preserves_mouse_hover_settings(self):
+        image = Generators.image(image_file='original.jpg', is_final=False)
+        b = Generators.imageRevision(image=image, image_file='revision_b.jpg', is_final=False, label='B')
+        c = Generators.imageRevision(image=image, image_file='revision_c.jpg', is_final=True, label='C')
+
+        ImageRevision.objects.filter(id=b.id).update(mouse_hover_image=f'REVISION__{c.label}')
+
+        ImageService(image).delete_original()
+
+        self.assertEqual('revision_b.jpg', image.image_file)
+        self.assertEqual(f'REVISION__{c.label}', image.mouse_hover_image)
         self.assertFalse(image.is_final)
         self.assertEqual(1, ImageService(image).get_revisions().count())
         self.assertEqual('C', ImageService(image).get_revisions().first().label)
