@@ -24,6 +24,8 @@ CORS_ALLOW_HEADERS = [
     'upload-metadata',
     'upload-offset',
     'location',
+    'sentry-trace',
+    'baggage',
 ]
 CORS_EXPOSE_HEADERS = CORS_ALLOW_HEADERS
 CORS_ALLOW_CREDENTIALS = True
