@@ -419,7 +419,7 @@ class ImageService:
                         'NEW',
                         AppRedirectionService.redirect(f'/equipment/explorer/{x.klass.lower()}/{x.id}/{x.slug}'),
                         x.reviewer_decision is None,
-                        x.created_by.id,
+                        x.created_by.id if x.created_by else None,
                     )
                 )
 
