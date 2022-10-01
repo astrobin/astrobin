@@ -18,6 +18,7 @@ from hitcount.views import HitCountMixin
 from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin.enums.display_image_download_menu import DownloadLimitation
 from astrobin.enums.moderator_decision import ModeratorDecision
+from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.models import Image, ImageRevision, SOLAR_SYSTEM_SUBJECT_CHOICES
 from astrobin.services.gear_service import GearService
 from astrobin.stories import add_story
@@ -277,6 +278,9 @@ class ImageService:
         image.w = new_original.w
         image.h = new_original.h
         image.is_final = image.is_final or new_original.is_final
+        image.mouse_hover_image = new_original.mouse_hover_image\
+            if new_original.mouse_hover_image != 'ORIGINAL'\
+            else MouseHoverImage.SOLUTION
 
         if new_original.title:
             old_title = image.title

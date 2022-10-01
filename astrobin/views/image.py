@@ -919,7 +919,8 @@ class ImageDeleteOriginalView(ImageDeleteView):
             return HttpResponseBadRequest()
 
         ImageService(self.image).delete_original()
-        messages.success(self.request, _("Original version deleted!"));
+        messages.success(self.request, _("Original version deleted!"))
+
         # We do not call super, because that would delete the Image
         return HttpResponseRedirect(self.get_success_url())
 
@@ -948,6 +949,9 @@ class ImageDeleteOtherVersionsView(LoginRequiredMixin, View):
             image.updated = revision.uploaded
             image.w = revision.w
             image.h = revision.h
+            image.mouse_hover_image = revision.mouse_hover_image\
+                if revision.mouse_hover_image == MouseHoverImage.NOTHING\
+                else MouseHoverImage.SOLUTION
 
             if revision.title:
                 image.title = f'{image.title} ({revision.title})'
