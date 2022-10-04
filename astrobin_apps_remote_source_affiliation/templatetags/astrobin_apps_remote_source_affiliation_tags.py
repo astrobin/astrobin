@@ -1,3 +1,5 @@
+from typing import Union
+
 from annoying.functions import get_object_or_None
 from django.template import Library
 from django.utils.safestring import mark_safe
@@ -21,15 +23,16 @@ def is_remote_source_affiliate(code):
 
 
 @register.filter
-def remote_source_affiliate_url(code):
-    # type: (unicode) -> unicode|None
-
-    remote_source = get_object_or_None(RemoteSourceAffiliate, code=code)  # type: RemoteSourceAffiliate
+def remote_source_affiliate_url(code: str) -> Union[str, None]:
+    remote_source: Union[RemoteSourceAffiliate, None] = get_object_or_None(RemoteSourceAffiliate, code=code)
 
     if remote_source is None:
         return None
 
-    return remote_source.url
+    if '?' in remote_source.url:
+        return remote_source.url
+
+    return f'{remote_source.url}?utm_source=astrobin&utm_medium=technical-card&utm_campaign=hosting-facility'
 
 
 @register.filter
@@ -45,8 +48,3 @@ def remote_source_affiliate_image(code):
         return remote_source.image_file.url
     except ValueError:
         return None
-
-
-@register.simple_tag
-def remote_source_affiliate_utm_tags():
-    return "utm_source=astrobin&utm_medium=technical-card&utm_campaign=hosting-facility"
