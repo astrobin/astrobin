@@ -50,11 +50,14 @@ class EquipmentItemListing(SafeDeleteModel):
         null=False
     )
 
-    url = models.URLField()
+    url = models.URLField(
+        max_length=512,
+    )
 
     url_de = models.URLField(
         null=True,
         blank=True,
+        max_length=512,
     )
 
     sku = models.CharField(
