@@ -53,4 +53,19 @@ class RemoteSourceAffiliateTest(TestCase):
             name="doo",
             url="http://example.com"
         ).save()
-        self.assertEqual(remote_source_affiliate_url("foo"), "http://example.com")
+        self.assertEqual(
+            remote_source_affiliate_url("foo"),
+            "http://example.com?utm_source=astrobin&utm_medium=technical-card&utm_campaign=hosting-facility"
+        )
+
+    def test_remote_source_affiliate_url_with_url_params(self):
+        RemoteSourceAffiliate(
+            code="foo",
+            name="doo",
+            url="http://example.com?foo"
+        ).save()
+        self.assertEqual(
+            remote_source_affiliate_url("foo"),
+            "http://example.com?foo"
+        )
+

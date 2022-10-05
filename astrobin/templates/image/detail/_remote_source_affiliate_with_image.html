@@ -18,7 +18,7 @@
         </a>
     </div>
 
-    <a href="{{ image.remote_source|remote_source_affiliate_url }}?{% remote_source_affiliate_utm_tags %}"
+    <a href="{{ image.remote_source|remote_source_affiliate_url }}"
        onclick="getOutboundLink('{{ image.remote_source|remote_source_affiliate_url }}', '{{ request.path }}')"
        target="_blank">
         <img src="{{ image.remote_source|remote_source_affiliate_image }}" />
