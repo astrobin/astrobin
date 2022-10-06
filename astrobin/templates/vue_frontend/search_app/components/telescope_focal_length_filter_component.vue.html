@@ -1,0 +1,54 @@
+{% load astrobin_apps_premium_tags %}
+
+<script type="text/x-template" id="telescope-focal-length-filter-template">
+    {% if valid_usersubscription|can_access_full_search %}
+        <div class="form-group" :class="{highlighted: highlighted}">
+            <div id="telescope-focal-length-slider" class="slider-filter tooltip-fixed"></div>
+
+            <input id="telescope-focal-length-min-value" name="telescope_focal_length_min" type="hidden" :value="telescopeFocalLengthMin" />
+            <input id="telescope-focal-length-max-value" name="telescope_focal_length_max" type="hidden" :value="telescopeFocalLengthMax" />
+        </div>
+    {% else %}
+        {% include "./_filter_requires_ultimate.html" %}
+    {% endif %}
+</script>
+
+<script>
+    Vue.component("telescope-focal-length-filter", {
+        template: "#telescope-focal-length-filter-template",
+        props: [
+            "telescopeFocalLengthMin",
+            "telescopeFocalLengthMax"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        mounted() {
+            var slider = noUiSlider.create($('#telescope-focal-length-slider')[0], {
+                start: [this.telescopeFocalLengthMin, this.telescopeFocalLengthMax],
+                range: {min: 0, max: 10000},
+                step: 1,
+                tooltips: true,
+                connect: true,
+                behaviour: 'tap-drag',
+                format: {
+                    to: (v) => parseFloat(v).toFixed(0),
+                    from: (v) => parseFloat(v).toFixed(0)
+                }
+            });
+
+            slider.on("change", function () {
+                $("#telescope-focal-length-min-value").val(slider.get()[0]);
+                $("#telescope-focal-length-max-value").val(slider.get()[1]);
+            });
+
+            $("#telescope-focal-length-min-value").on("change", function () {
+                slider.set([$("#telescope-focal-lengthr-min-value").val(), $("#telescope-focal-length-max-value").val()]);
+            });
+
+            $("#telescope-focal-length-max-value").on("change", function () {
+                slider.set([$("#telescope-focal-length-min-value").val(), $("#telescope-focal-length-max-value").val()]);
+            });
+        }
+    });
+</script>

@@ -1,6 +1,5 @@
 import re
-import unicodedata
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
 from functools import reduce
 from operator import or_
 
@@ -10,7 +9,7 @@ from django.db.models import Q
 from haystack.backends import SQ
 from haystack.forms import SearchForm
 from haystack.generic_views import SearchView
-from haystack.inputs import Clean, BaseInput
+from haystack.inputs import BaseInput, Clean
 from haystack.query import SearchQuerySet
 from pybb.models import Post, Topic
 
@@ -51,6 +50,14 @@ FIELDS = (
     'remote_source',
     'subject_type',
     'telescope_type',
+    'telescope_diameter_min',
+    'telescope_diameter_max',
+    'telescope_weight_min',
+    'telescope_weight_max',
+    'telescope_focal_length_min',
+    'telescope_focal_length_max',
+    'mount_weight_min',
+    'mount_weight_max',
     'integration_time_min',
     'integration_time_max',
     'constellation',
@@ -65,6 +72,7 @@ FIELDS = (
     'h_max',
     'size_min',
     'size_max',
+    'modified_camera',
     'topic',
 
     # Sorting
@@ -124,6 +132,14 @@ class AstroBinSearchForm(SearchForm):
     remote_source = forms.CharField(required=False)
     subject_type = forms.CharField(required=False)
     telescope_type = forms.CharField(required=False)
+    telescope_diameter_min = forms.IntegerField(required=False)
+    telescope_diameter_max = forms.IntegerField(required=False)
+    telescope_weight_min = forms.FloatField(required=False)
+    telescope_weight_max = forms.FloatField(required=False)
+    telescope_focal_length_min = forms.IntegerField(required=False)
+    telescope_focal_length_max = forms.IntegerField(required=False)
+    mount_weight_min = forms.FloatField(required=False)
+    mount_weight_max = forms.FloatField(required=False)
     integration_time_min = forms.FloatField(required=False)
     integration_time_max = forms.FloatField(required=False)
     constellation = forms.CharField(required=False)
@@ -138,6 +154,7 @@ class AstroBinSearchForm(SearchForm):
     h_max = forms.IntegerField(required=False)
     size_min = forms.IntegerField(required=False)
     size_max = forms.IntegerField(required=False)
+    modified_camera = forms.CharField(required=False)
     topic = forms.IntegerField(required=False)
 
     def __init__(self, *args, **kwargs):
@@ -177,7 +194,7 @@ class AstroBinSearchForm(SearchForm):
         t = self.cleaned_data.get("animated")
 
         if t:
-            results = results.filter(animated=True)
+            results = results.filter(animated=1)
 
         return results
 
@@ -405,6 +422,66 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filter_by_telescope_diameter(self, results):
+        try:
+            min = int(self.cleaned_data.get("telescope_diameter_min"))
+            results = results.filter(min_aperture__gte=min)
+        except TypeError:
+            pass
+
+        try:
+            max = int(self.cleaned_data.get("telescope_diameter_max"))
+            results = results.filter(max_aperture__lte=max)
+        except TypeError:
+            pass
+
+        return results
+
+    def filter_by_telescope_weight(self, results):
+        try:
+            min = int(self.cleaned_data.get("telescope_weight_min"))
+            results = results.filter(min_telescope_weight__gte=min)
+        except TypeError:
+            pass
+
+        try:
+            max = int(self.cleaned_data.get("telescope_weight_max"))
+            results = results.filter(max_telescope_weight__lte=max)
+        except TypeError:
+            pass
+
+        return results
+
+    def filter_by_mount_weight(self, results):
+        try:
+            min = int(self.cleaned_data.get("mount_weight_min"))
+            results = results.filter(min_mount_weight__gte=min)
+        except TypeError:
+            pass
+
+        try:
+            max = int(self.cleaned_data.get("mount_weight_max"))
+            results = results.filter(max_mount_weight__lte=max)
+        except TypeError:
+            pass
+
+        return results
+
+    def filter_by_telescope_focal_length(self, results):
+        try:
+            min = int(self.cleaned_data.get("telescope_focal_length_min"))
+            results = results.filter(min_focal_length__gte=min)
+        except TypeError:
+            pass
+
+        try:
+            max = int(self.cleaned_data.get("telescope_focal_length_max"))
+            results = results.filter(max_focal_length__lte=max)
+        except TypeError:
+            pass
+
+        return results
+
     def filter_by_integration_time(self, results):
         try:
             min = float(self.cleaned_data.get("integration_time_min"))
@@ -533,6 +610,18 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filter_by_modified_camera(self, results):
+        value: str = self.cleaned_data.get("modified_camera")
+
+        if value.upper() == 'Y':
+            modified = 1
+        elif value.upper() == 'N':
+            modified = 0
+        else:
+            return results
+
+        return results.filter(has_modified_camera=modified)
+
     def filter_by_forum_topic(self, results):
         topic = self.cleaned_data.get("topic")
 
@@ -607,6 +696,10 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_remote_source(sqs)
         sqs = self.filter_by_subject_type(sqs)
         sqs = self.filter_by_telescope_type(sqs)
+        sqs = self.filter_by_telescope_diameter(sqs)
+        sqs = self.filter_by_telescope_weight(sqs)
+        sqs = self.filter_by_telescope_focal_length(sqs)
+        sqs = self.filter_by_mount_weight(sqs)
         sqs = self.filter_by_integration_time(sqs)
         sqs = self.filter_by_constellation(sqs)
         sqs = self.filter_by_subject(sqs)
@@ -616,6 +709,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_w(sqs)
         sqs = self.filter_by_h(sqs)
         sqs = self.filter_by_size(sqs)
+        sqs = self.filter_by_modified_camera(sqs)
         sqs = self.filter_by_forum_topic(sqs)
 
         sqs = self.sort(sqs)

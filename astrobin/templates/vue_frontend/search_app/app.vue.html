@@ -98,6 +98,23 @@
                                 <telescope-type-filter v-if="filter.name === 'telescope_type'"
                                                        :telescope-type="telescopeType"></telescope-type-filter>
 
+
+                                <telescope-diameter-filter v-if="filter.name === 'telescope_diameter'"
+                                                    :telescope-diameter-min="telescopeDiameterMin"
+                                                    :telescope-diameter-max="telescopeDiameterMax"></telescope-diameter-filter>
+
+                                <telescope-weight-filter v-if="filter.name === 'telescope_weight'"
+                                                           :telescope-weight-min="telescopeWeightMin"
+                                                           :telescope-weight-max="telescopeWeightMax"></telescope-weight-filter>
+                                
+                                <telescope-focal-length-filter v-if="filter.name === 'telescope_focal_length'"
+                                                           :telescope-focal-length-min="telescopeFocalLengthMin"
+                                                           :telescope-focal-length-max="telescopeFocalLengthMax"></telescope-focal-length-filter>
+
+                                <mount-weight-filter v-if="filter.name === 'mount_weight'"
+                                                         :mount-weight-min="mountWeightMin"
+                                                         :mount-weight-max="mountWeightMax"></mount-weight-filter>
+
                                 <integration-time-filter v-if="filter.name === 'integration_time'"
                                                          :integration-time-min="integrationTimeMin"
                                                          :integration-time-max="integrationTimeMax"></integration-time-filter>
@@ -113,6 +130,8 @@
                                 <h-filter v-if="filter.name === 'h'" :h-min="hMin" :h-max="hMax"></h-filter>
 
                                 <size-filter v-if="filter.name === 'size'" :size-min="sizeMin" :size-max="sizeMax"></size-filter>
+
+                                <modified-camera-filter v-if="filter.name === 'modified_camera'" :modified-camera="modifiedCamera"></modified-camera-filter>
                             </div>
 
                             {% if request.GET.d == "i" or request.GET.d == None %}
@@ -349,6 +368,54 @@
                 {% else %}
                     undefined
                 {% endif %},
+            telescopeDiameterMin:
+                {% if "telescope_diameter_min" in request.GET and request.GET.telescope_diameter_min %}
+                    {{ request.GET.telescope_diameter_min }}
+                {% else %}
+                    0
+                {% endif %},
+            telescopeDiameterMax:
+                {% if "telescope_diameter_max" in request.GET and request.GET.telescope_diameter_max %}
+                    {{ request.GET.telescope_diameter_max }}
+                {% else %}
+                    1000
+                {% endif %},
+            telescopeWeightMin:
+                {% if "telescope_weight_min" in request.GET and request.GET.telescope_weight_min %}
+                    {{ request.GET.telescope_weight_min }}
+                {% else %}
+                    0
+                {% endif %},
+            telescopeWeightMax:
+                {% if "telescope_weight_max" in request.GET and request.GET.telescope_weight_max %}
+                    {{ request.GET.telescope_weight_max }}
+                {% else %}
+                    200
+                {% endif %},
+            mountWeightMin:
+                {% if "mount_weight_min" in request.GET and request.GET.mount_weight_min %}
+                    {{ request.GET.mount_weight_min }}
+                {% else %}
+                    0
+                {% endif %},
+            mountWeightMax:
+                {% if "mount_weight_max" in request.GET and request.GET.mount_weight_max %}
+                    {{ request.GET.mount_weight_max }}
+                {% else %}
+                    200
+                {% endif %},
+            telescopeFocalLengthMin:
+                {% if "telescope_focal_length_min" in request.GET and request.GET.telescope_focal_length_min %}
+                    {{ request.GET.telescope_focal_length_min }}
+                {% else %}
+                    0
+                {% endif %},
+            telescopeFocalLengthMax:
+                {% if "telescope_focal_length_max" in request.GET and request.GET.telescope_focal_length_max %}
+                    {{ request.GET.telescope_focal_length_max }}
+                {% else %}
+                    10000
+                {% endif %},
             integrationTimeMin:
                 {% if "integration_time_min" in request.GET and request.GET.integration_time_min %}
                     {{ request.GET.integration_time_min }}
@@ -414,6 +481,12 @@
                     {{ request.GET.size_max }}
                 {% else %}
                     999
+                {% endif %},
+            modifiedCamera:
+                {% if "modified_camera" in request.GET and request.GET.modified_camera %}
+                    "{{ request.GET.modified_camera }}"
+                {% else %}
+                    undefined
                 {% endif %},
 
             sort:
@@ -572,6 +645,30 @@
                     restricted: "ADVANCED"
                 },
                 {
+                    name: "telescope_diameter",
+                    label: "{% trans "Telescope diameter (mm)" %}",
+                    removable: true,
+                    restricted: "FULL"
+                },
+                {
+                    name: "telescope_weight",
+                    label: "{% trans "Telescope weight (kg)" %}",
+                    removable: true,
+                    restricted: "FULL"
+                },
+                {
+                    name: "mount_weight",
+                    label: "{% trans "Mount weight (kg)" %}",
+                    removable: true,
+                    restricted: "FULL"
+                },
+                {
+                    name: "telescope_focal_length",
+                    label: "{% trans "Telescope/lens focal length (mm)" %}",
+                    removable: true,
+                    restricted: "FULL"
+                },
+                {
                     name: "integration_time",
                     label: "{% trans "Integration time (hours)" %}",
                     removable: true,
@@ -603,6 +700,12 @@
                     name: "size",
                     label: "{% trans "Size (MB)" %}",
                     removable: true,
+                },
+                {
+                    name: "modified_camera",
+                    label: "{% trans "Acquired with a modified camera" %}",
+                    removable: true,
+                    restricted: "FULL"
                 },
             ],
             enabledFilters: []
@@ -714,6 +817,22 @@
                 this.enabledFilters.push(this.getFilterByName("telescope_type"));
             }
 
+            {% if "telescope_diameter_min" in request.GET or "telescope_diameter_max" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("telescope_diameter"));
+            {% endif %}
+
+            {% if "telescope_weight_min" in request.GET or "telescope_weight_max" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("telescope_weight"));
+            {% endif %}
+
+            {% if "telescope_focal_length_min" in request.GET or "telescope_focal_length_max" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("telescope_focal_length"));
+            {% endif %}
+
+            {% if "mount_weight_min" in request.GET or "mount_weight_max" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("mount_weight"));
+            {% endif %}
+
             if (this.constellation) {
                 this.enabledFilters.push(this.getFilterByName("constellation"));
             }
@@ -732,6 +851,10 @@
 
             {% if "size_min" in request.GET or "size_max" in request.GET %}
                 this.enabledFilters.push(this.getFilterByName("size"));
+            {% endif %}
+
+            {% if "modified_camera" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("modified_camera"));
             {% endif %}
         },
         methods: {

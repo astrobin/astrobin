@@ -1,0 +1,54 @@
+{% load astrobin_apps_premium_tags %}
+
+<script type="text/x-template" id="telescope-diameter-filter-template">
+    {% if valid_usersubscription|can_access_full_search %}
+        <div class="form-group" :class="{highlighted: highlighted}">
+            <div id="telescope-diameter-slider" class="slider-filter tooltip-fixed"></div>
+
+            <input id="telescope-diameter-min-value" name="telescope_diameter_min" type="hidden" :value="telescopeDiameterMin" />
+            <input id="telescope-diameter-max-value" name="telescope_diameter_max" type="hidden" :value="telescopeDiameterMax" />
+        </div>
+    {% else %}
+        {% include "./_filter_requires_ultimate.html" %}
+    {% endif %}
+</script>
+
+<script>
+    Vue.component("telescope-diameter-filter", {
+        template: "#telescope-diameter-filter-template",
+        props: [
+            "telescopeDiameterMin",
+            "telescopeDiameterMax"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        mounted() {
+            var slider = noUiSlider.create($('#telescope-diameter-slider')[0], {
+                start: [this.telescopeDiameterMin, this.telescopeDiameterMax],
+                range: {min: 0, max: 1000},
+                step: 1,
+                tooltips: true,
+                connect: true,
+                behaviour: 'tap-drag',
+                format: {
+                    to: (v) => parseFloat(v).toFixed(0),
+                    from: (v) => parseFloat(v).toFixed(0)
+                }
+            });
+
+            slider.on("change", function () {
+                $("#telescope-diameter-min-value").val(slider.get()[0]);
+                $("#telescope-diameter-max-value").val(slider.get()[1]);
+            });
+
+            $("#telescope-diameter-min-value").on("change", function () {
+                slider.set([$("#telescope-diameter-min-value").val(), $("#telescope-diameter-max-value").val()]);
+            });
+
+            $("#telescope-diameter-max-value").on("change", function () {
+                slider.set([$("#telescope-diameter-min-value").val(), $("#telescope-diameter-max-value").val()]);
+            });
+        }
+    });
+</script>

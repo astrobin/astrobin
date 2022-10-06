@@ -1,0 +1,62 @@
+{% load i18n %}
+{% load astrobin_apps_premium_tags %}
+
+<script type="text/x-template" id="telescope-weight-filter-template">
+    {% if valid_usersubscription|can_access_full_search %}
+        <div class="form-group slider-form-group" :class="{highlighted: highlighted}">
+            <div id="telescope-weight-slider" class="slider-filter tooltip-fixed"></div>
+
+            <div class="min-max">
+                <div class="min">
+                    <input class="slider-input" id="telescope-weight-min-value" name="telescope_weight_min" type="number"
+                           min="0" max="200" step=".1" :value="telescopeWeightMin" />
+                    <label for="telescope-weight-min-value">{% trans 'Min' %}</label>
+                </div>
+
+                <div class="max">
+                    <label for="telescope-weight-max-value">{% trans 'Max' %}</label>
+                    <input class="slider-input" id="telescope-weight-max-value" name="telescope_weight_max" type="number"
+                           min="0" max="200" step=".1" :value="telescopeWeightMax" />
+                </div>
+            </div>
+       </div>
+    {% else %}
+        {% include "./_filter_requires_ultimate.html" %}
+    {% endif %}
+</script>
+
+<script>
+    Vue.component("telescope-weight-filter", {
+        template: "#telescope-weight-filter-template",
+        props: [
+            "telescopeWeightMin",
+            "telescopeWeightMax"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        mounted() {
+            var slider = noUiSlider.create($('#telescope-weight-slider')[0], {
+                start: [this.telescopeWeightMin, this.telescopeWeightMax],
+                range: {min: 0, max: 200},
+                step: .1,
+                tooltips: true,
+                connect: true,
+                behaviour: 'tap-drag'
+            });
+
+            slider.on("change", function () {
+                $("#telescope-weight-min-value").val(slider.get()[0]);
+                $("#telescope-weight-max-value").val(slider.get()[1]);
+            });
+
+            $("#telescope-weight-min-value").on("change", function () {
+                slider.set([$("#telescope-weight-min-value").val(), $("#telescope-weight-max-value").val()]);
+            });
+
+            $("#telescope-weight-max-value").on("change", function () {
+                slider.set([$("#telescope-weight-min-value").val(), $("#telescope-weight-max-value").val()]);
+            });
+        }
+    });
+</script>

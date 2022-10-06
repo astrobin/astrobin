@@ -1,5 +1,6 @@
 import datetime
 import logging
+import sys
 from functools import reduce
 
 from django.contrib.auth.models import User
@@ -15,7 +16,8 @@ from pybb.models import Post, Topic
 
 from astrobin.enums.license import License
 from astrobin.enums.moderator_decision import ModeratorDecision
-from astrobin.models import DeepSky_Acquisition, Image, SolarSystem_Acquisition
+from astrobin.models import DeepSky_Acquisition, GearUserInfo, Image, SolarSystem_Acquisition, Camera as LegacyCamera
+from astrobin_apps_equipment.models import Camera
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
 from astrobin_apps_platesolving.services import SolutionService
@@ -247,6 +249,35 @@ def _prepare_max_aperture(obj):
     for telescope in obj.imaging_telescopes_2.filter(aperture__isnull=False):
         if value == sys.maxsize or telescope.aperture > value:
             value = int(telescope.aperture)
+
+    return value
+
+
+def _prepare_min_focal_length(obj):
+    value = 0
+
+    for telescope in obj.imaging_telescopes.filter(focal_length__isnull=False):
+        if value == 0 or telescope.focal_length < value:
+            value = int(telescope.focal_length)
+
+    for telescope in obj.imaging_telescopes_2.filter(min_focal_length__isnull=False):
+        if value == 0 or telescope.min_focal_length < value:
+            value = int(telescope.min_focal_length)
+
+    return value
+
+
+def _prepare_max_focal_length(obj):
+    import sys
+    value = sys.maxsize
+
+    for telescope in obj.imaging_telescopes.filter(focal_length__isnull=False):
+        if value == sys.maxsize or telescope.focal_length > value:
+            value = int(telescope.focal_length)
+
+    for telescope in obj.imaging_telescopes_2.filter(max_focal_length__isnull=False):
+        if value == sys.maxsize or telescope.max_focal_length > value:
+            value = int(telescope.max_focal_length)
 
     return value
 
@@ -578,6 +609,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
     software_2 = CharField()
     software_2_id = CharField()
 
+    has_modified_camera = BooleanField()
+
     coord_ra_min = FloatField()
     coord_ra_max = FloatField()
     coord_dec_min = FloatField()
@@ -618,6 +651,15 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     min_aperture = IntegerField()
     max_aperture = IntegerField()
+
+    min_telescope_weight = FloatField()
+    max_telescope_weight = FloatField()
+
+    min_mount_weight = FloatField()
+    max_mount_weight = FloatField()
+
+    min_focal_length = IntegerField()
+    max_focal_length = IntegerField()
 
     min_pixel_size = IntegerField()
     max_pixel_size = IntegerField()
@@ -782,6 +824,70 @@ class ImageIndex(CelerySearchIndex, Indexable):
         return [f"{x.id}" for x in obj.software_2.all()]
 
     ###################################################################################################################
+
+    def prepare_has_modified_camera(self, obj):
+        legacy_camera: LegacyCamera
+        for legacy_camera in obj.imaging_cameras.all().iterator():
+            try:
+                info: GearUserInfo = GearUserInfo.objects.get(gear=legacy_camera, user=obj.user)
+                if info.modded:
+                    return True
+            except GearUserInfo.DoesNotExist:
+                continue
+        camera: Camera
+        for camera in obj.imaging_cameras_2.all().iterator():
+            if camera.modified:
+                return True
+
+        return False
+
+    def prepare_min_aperture(self, obj):
+        return _prepare_min_aperture(obj)
+
+    def prepare_max_aperture(self, obj):
+        return _prepare_max_aperture(obj)
+    
+    def prepare_min_telescope_weight(self, obj):
+        value = 0
+
+        for telescope in obj.imaging_telescopes_2.filter(weight__isnull=False):
+            if value == 0 or telescope.weight < value:
+                value = telescope.weight
+
+        return value
+
+    def prepare_max_telescope_weight(self, obj):
+        value = sys.maxsize
+
+        for telescope in obj.imaging_telescopes_2.filter(weight__isnull=False):
+            if value == sys.maxsize or telescope.weight > value:
+                value = int(telescope.weight)
+
+        return value
+
+    def prepare_min_mount_weight(self, obj):
+        value = 0
+
+        for mount in obj.mounts.filter(weight__isnull=False):
+            if value == 0 or mount.weight < value:
+                value = mount.weight
+
+        return value
+
+    def prepare_max_mount_weight(self, obj):
+        value = sys.maxsize
+
+        for mount in obj.mounts_2.filter(weight__isnull=False):
+            if value == sys.maxsize or mount.weight > value:
+                value = int(mount.weight)
+
+        return value
+    
+    def prepare_min_focal_length(self, obj):
+        return _prepare_min_focal_length(obj)
+
+    def prepare_max_focal_length(self, obj):
+        return _prepare_max_focal_length(obj)
 
     def prepare_coord_ra_min(self, obj):
         if obj.solution is not None and obj.solution.ra is not None and obj.solution.radius is not None:
