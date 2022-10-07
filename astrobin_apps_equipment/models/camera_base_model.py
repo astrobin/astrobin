@@ -37,6 +37,7 @@ class CameraBaseModel(EquipmentItem):
         related_name='%(app_label)s_sensor_%(class)ss',
         null=True,
         blank=True,
+        verbose_name=_('Sensor'),
     )
 
     cooled = models.BooleanField(
@@ -88,6 +89,9 @@ class CameraBaseModel(EquipmentItem):
                     if property_value.__class__.__name__ == 'Decimal':
                         property_value = '%g' % property_value
                 properties.append({'label': property_label, 'value': property_value})
+
+        if self.sensor:
+            properties += self.sensor.properties()
 
         return properties
 

@@ -58,7 +58,11 @@
 
                                 <camera-type-filter v-if="filter.name === 'camera_type'"
                                                     :camera-type="cameraType"></camera-type-filter>
-
+                                
+                                <camera-pixel-size-filter v-if="filter.name === 'camera_pixel_size'"
+                                                          :camera-pixel-size-min="cameraPixelSizeMin"
+                                                          :camera-pixel-size-max="cameraPixelSizeMax"></camera-pixel-size-filter>
+                                
                                 <country-filter v-if="filter.name === 'country'" :country="country"></country-filter>
 
                                 <acquisition-type-filter v-if="filter.name === 'acquisition_type'"
@@ -263,6 +267,18 @@
                     "{{ request.GET.camera_type }}"
                 {% else %}
                     undefined
+                {% endif %},
+            cameraPixelSizeMin:
+                {% if "camera_pixel_size_min" in request.GET and request.GET.camera_pixel_size_min %}
+                    {{ request.GET.camera_pixel_size_min }}
+                {% else %}
+                    0
+                {% endif %},
+            cameraPixelSizeMax:
+                {% if "camera_pixel_size_max" in request.GET and request.GET.camera_pixel_size_max %}
+                    {{ request.GET.camera_pixel_size_max }}
+                {% else %}
+                    200
                 {% endif %},
             country:
                 {% if "country" in request.GET and request.GET.country %}
@@ -583,6 +599,12 @@
                     restricted: "ADVANCED"
                 },
                 {
+                    name: "camera_pixel_size",
+                    label: "{% trans "Camera pixel size (μm)" %}",
+                    removable: true,
+                    restricted: "FULL"
+                },
+                {
                     name: "country",
                     label: "{% trans "Country" %}",
                     removable: true,
@@ -782,6 +804,10 @@
             if (this.cameraType) {
                 this.enabledFilters.push(this.getFilterByName("camera_type"));
             }
+
+            {% if "camera_pixel_size_min" in request.GET or "camera_pixel_size_max" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("camera_pixel_size"));
+            {% endif %}
 
             if (this.country) {
                 this.enabledFilters.push(this.getFilterByName("country"));

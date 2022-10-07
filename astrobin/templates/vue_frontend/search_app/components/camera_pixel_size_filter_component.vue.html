@@ -1,0 +1,62 @@
+{% load i18n %}
+{% load astrobin_apps_premium_tags %}
+
+<script type="text/x-template" id="camera-pixel-size-filter-template">
+    {% if valid_usersubscription|can_access_full_search %}
+        <div class="form-group slider-form-group" :class="{highlighted: highlighted}">
+            <div id="camera-pixel-size-slider" class="slider-filter tooltip-fixed"></div>
+
+            <div class="min-max">
+                <div class="min">
+                    <input class="slider-input" id="camera-pixel-size-min-value" name="camera_pixel_size_min" type="number"
+                           min="0" max="20" step=".01" :value="cameraPixelSizeMin" />
+                    <label for="camera-pixel-size-min-value">{% trans 'Min' %}</label>
+                </div>
+
+                <div class="max">
+                    <label for="camera-pixel-size-max-value">{% trans 'Max' %}</label>
+                    <input class="slider-input" id="camera-pixel-size-max-value" name="camera_pixel_size_max" type="number"
+                           min="0" max="20" step=".01" :value="cameraPixelSizeMax" />
+                </div>
+            </div>
+       </div>
+    {% else %}
+        {% include "./_filter_requires_ultimate.html" %}
+    {% endif %}
+</script>
+
+<script>
+    Vue.component("camera-pixel-size-filter", {
+        template: "#camera-pixel-size-filter-template",
+        props: [
+            "cameraPixelSizeMin",
+            "cameraPixelSizeMax"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        mounted() {
+            var slider = noUiSlider.create($('#camera-pixel-size-slider')[0], {
+                start: [this.cameraPixelSizeMin, this.cameraPixelSizeMax],
+                range: {min: 0, max: 20},
+                step: .01,
+                tooltips: true,
+                connect: true,
+                behaviour: 'tap-drag'
+            });
+
+            slider.on("change", function () {
+                $("#camera-pixel-size-min-value").val(slider.get()[0]);
+                $("#camera-pixel-size-max-value").val(slider.get()[1]);
+            });
+
+            $("#camera-pixel-size-min-value").on("change", function () {
+                slider.set([$("#camera-pixel-size-min-value").val(), $("#camera-pixel-size-max-value").val()]);
+            });
+
+            $("#mount-max-paylaod-max-value").on("change", function () {
+                slider.set([$("#camera-pixel-size-min-value").val(), $("#camera-pixel-size-max-value").val()]);
+            });
+        }
+    });
+</script>

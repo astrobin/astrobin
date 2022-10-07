@@ -28,6 +28,8 @@ FIELDS = (
     'award',
     'groups',
     'camera_type',
+    'camera_pixel_size_min',
+    'camera_pixel_size_max',
     'country',
     'acquisition_type',
     'data_source',
@@ -112,6 +114,8 @@ class AstroBinSearchForm(SearchForm):
     award = forms.CharField(required=False)
     groups = forms.CharField(required=False)
     camera_type = forms.CharField(required=False)
+    camera_pixel_size_min = forms.FloatField(required=False)
+    camera_pixel_size_max = forms.FloatField(required=False)
     country = forms.CharField(required=False)
     acquisition_type = forms.CharField(required=False)
     data_source = forms.CharField(required=False)
@@ -249,6 +253,21 @@ class AstroBinSearchForm(SearchForm):
 
         return results
 
+    def filter_by_camera_pixel_size(self, results):
+        try:
+            min = float(self.cleaned_data.get("camera_pixel_size_min"))
+            results = results.filter(min_camera_pixel_size__gte=min)
+        except TypeError:
+            pass
+
+        try:
+            max = float(self.cleaned_data.get("camera_pixel_size_max"))
+            results = results.filter(max_camera_pixel_size__lte=max)
+        except TypeError:
+            pass
+
+        return results
+    
     def filter_by_country(self, results):
         country = self.cleaned_data.get("country")
 
@@ -701,6 +720,7 @@ class AstroBinSearchForm(SearchForm):
         sqs = self.filter_by_award(sqs)
         sqs = self.filter_by_groups(sqs)
         sqs = self.filter_by_camera_type(sqs)
+        sqs = self.filter_by_camera_pixel_size(sqs)
         sqs = self.filter_by_country(sqs)
         sqs = self.filter_by_acquisition_type(sqs)
         sqs = self.filter_by_data_source(sqs)

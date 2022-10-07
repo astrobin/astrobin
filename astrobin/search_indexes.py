@@ -282,31 +282,31 @@ def _prepare_max_focal_length(obj):
     return value
 
 
-def _prepare_min_pixel_size(obj):
+def _prepare_min_camera_pixel_size(obj):
     value = 0
 
     for camera in obj.imaging_cameras.filter(pixel_size__isnull=False):
         if value == 0 or camera.pixel_size < value:
-            value = int(camera.pixel_size)
+            value = float(camera.pixel_size)
 
     for camera in obj.imaging_cameras_2.filter(sensor__isnull=False, sensor__pixel_size__isnull=False):
         if value == 0 or camera.sensor.pixel_size < value:
-            value = int(camera.sensor.pixel_size)
+            value = float(camera.sensor.pixel_size)
 
     return value
 
 
-def _prepare_max_pixel_size(obj):
+def _prepare_max_camera_pixel_size(obj):
     import sys
     value = sys.maxsize
 
     for camera in obj.imaging_cameras.filter(pixel_size__isnull=False):
         if value == sys.maxsize or camera.pixel_size > value:
-            value = int(camera.pixel_size)
+            value = float(camera.pixel_size)
 
     for camera in obj.imaging_cameras_2.filter(sensor__isnull=False, sensor__pixel_size__isnull=False):
         if value == sys.maxsize or camera.sensor.pixel_size > value:
-            value = int(camera.sensorpixel_size)
+            value = float(camera.sensor.pixel_size)
 
     return value
 
@@ -664,8 +664,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
     min_focal_length = IntegerField()
     max_focal_length = IntegerField()
 
-    min_pixel_size = IntegerField()
-    max_pixel_size = IntegerField()
+    min_camera_pixel_size = FloatField()
+    max_camera_pixel_size = FloatField()
 
     bookmarks = IntegerField()
 
@@ -843,6 +843,12 @@ class ImageIndex(CelerySearchIndex, Indexable):
                 return True
 
         return False
+
+    def prepare_min_camera_pixel_size(self, obj):
+        return _prepare_min_camera_pixel_size(obj)
+
+    def prepare_max_camera_pixel_size(self, obj):
+        return _prepare_max_camera_pixel_size(obj)
 
     def prepare_min_aperture(self, obj):
         return _prepare_min_aperture(obj)
