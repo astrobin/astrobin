@@ -115,6 +115,10 @@
                                                          :mount-weight-min="mountWeightMin"
                                                          :mount-weight-max="mountWeightMax"></mount-weight-filter>
 
+                                <mount-max-payload-filter v-if="filter.name === 'mount_max_payload'"
+                                                     :mount-max-payload-min="mountMaxPayloadMin"
+                                                     :mount-max-payload-max="mountMaxPayloadMax"></mount-max-payload-filter>
+
                                 <integration-time-filter v-if="filter.name === 'integration_time'"
                                                          :integration-time-min="integrationTimeMin"
                                                          :integration-time-max="integrationTimeMax"></integration-time-filter>
@@ -404,6 +408,18 @@
                 {% else %}
                     200
                 {% endif %},
+            mountMaxPayloadMin:
+                {% if "mount_max_payload_min" in request.GET and request.GET.mount_max_payload_min %}
+                    {{ request.GET.mount_max_payload_min }}
+                {% else %}
+                    0
+                {% endif %},
+            mountMaxPayloadMax:
+                {% if "mount_max_payload_max" in request.GET and request.GET.mount_max_payload_max %}
+                    {{ request.GET.mount_max_payload_max }}
+                {% else %}
+                    200
+                {% endif %},
             telescopeFocalLengthMin:
                 {% if "telescope_focal_length_min" in request.GET and request.GET.telescope_focal_length_min %}
                     {{ request.GET.telescope_focal_length_min }}
@@ -663,6 +679,12 @@
                     restricted: "FULL"
                 },
                 {
+                    name: "mount_max_payload",
+                    label: "{% trans "Mount max. payload (kg)" %}",
+                    removable: true,
+                    restricted: "FULL"
+                },
+                {
                     name: "telescope_focal_length",
                     label: "{% trans "Telescope/lens focal length (mm)" %}",
                     removable: true,
@@ -831,6 +853,10 @@
 
             {% if "mount_weight_min" in request.GET or "mount_weight_max" in request.GET %}
                 this.enabledFilters.push(this.getFilterByName("mount_weight"));
+            {% endif %}
+
+            {% if "mount_max_payload_min" in request.GET or "mount_max_payload_max" in request.GET %}
+                this.enabledFilters.push(this.getFilterByName("mount_max_payload"));
             {% endif %}
 
             if (this.constellation) {

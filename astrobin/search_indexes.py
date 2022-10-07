@@ -658,6 +658,9 @@ class ImageIndex(CelerySearchIndex, Indexable):
     min_mount_weight = FloatField()
     max_mount_weight = FloatField()
 
+    min_mount_max_payload = FloatField()
+    max_mount_max_payload = FloatField()
+
     min_focal_length = IntegerField()
     max_focal_length = IntegerField()
 
@@ -868,7 +871,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
     def prepare_min_mount_weight(self, obj):
         value = 0
 
-        for mount in obj.mounts.filter(weight__isnull=False):
+        for mount in obj.mounts_2.filter(weight__isnull=False):
             if value == 0 or mount.weight < value:
                 value = mount.weight
 
@@ -882,7 +885,33 @@ class ImageIndex(CelerySearchIndex, Indexable):
                 value = int(mount.weight)
 
         return value
-    
+
+    def prepare_min_mount_max_payload(self, obj):
+        value = 0
+
+        for mount in obj.mounts.filter(max_payload__isnull=False):
+            if value == 0 or mount.max_payload < value:
+                value = mount.max_payload
+
+        for mount in obj.mounts_2.filter(max_payload__isnull=False):
+            if value == 0 or mount.max_payload < value:
+                value = mount.max_payload
+
+        return value
+
+    def prepare_max_mount_max_payload(self, obj):
+        value = sys.maxsize
+
+        for mount in obj.mounts.filter(max_payload__isnull=False):
+            if value == sys.maxsize or mount.max_payload > value:
+                value = int(mount.max_payload)
+
+        for mount in obj.mounts_2.filter(max_payload__isnull=False):
+            if value == sys.maxsize or mount.max_payload > value:
+                value = int(mount.max_payload)
+
+        return value
+
     def prepare_min_focal_length(self, obj):
         return _prepare_min_focal_length(obj)
 
