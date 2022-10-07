@@ -1,0 +1,62 @@
+{% load i18n %}
+{% load astrobin_apps_premium_tags %}
+
+<script type="text/x-template" id="mount-weight-filter-template">
+    {% if valid_usersubscription|can_access_full_search %}
+        <div class="form-group slider-form-group" :class="{highlighted: highlighted}">
+            <div id="mount-weight-slider" class="slider-filter tooltip-fixed"></div>
+
+            <div class="min-max">
+                <div class="min">
+                    <input class="slider-input" id="mount-weight-min-value" name="mount_weight_min" type="number"
+                           min="0" max="200" step=".1" :value="mountWeightMin" />
+                    <label for="mount-weight-min-value">{% trans 'Min' %}</label>
+                </div>
+
+                <div class="max">
+                    <label for="mount-weight-max-value">{% trans 'Max' %}</label>
+                    <input class="slider-input" id="mount-weight-max-value" name="mount_weight_max" type="number"
+                           min="0" max="200" step=".1" :value="mountWeightMax" />
+                </div>
+            </div>
+       </div>
+    {% else %}
+        {% include "./_filter_requires_ultimate.html" %}
+    {% endif %}
+</script>
+
+<script>
+    Vue.component("mount-weight-filter", {
+        template: "#mount-weight-filter-template",
+        props: [
+            "mountWeightMin",
+            "mountWeightMax"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        mounted() {
+            var slider = noUiSlider.create($('#mount-weight-slider')[0], {
+                start: [this.mountWeightMin, this.mountWeightMax],
+                range: {min: 0, max: 200},
+                step: .1,
+                tooltips: true,
+                connect: true,
+                behaviour: 'tap-drag'
+            });
+
+            slider.on("change", function () {
+                $("#mount-weight-min-value").val(slider.get()[0]);
+                $("#mount-weight-max-value").val(slider.get()[1]);
+            });
+
+            $("#mount-weight-min-value").on("change", function () {
+                slider.set([$("#mount-weight-min-value").val(), $("#mount-weight-max-value").val()]);
+            });
+
+            $("#mount-weight-max-value").on("change", function () {
+                slider.set([$("#mount-weight-min-value").val(), $("#mount-weight-max-value").val()]);
+            });
+        }
+    });
+</script>

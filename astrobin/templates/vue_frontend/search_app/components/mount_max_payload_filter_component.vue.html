@@ -1,0 +1,62 @@
+{% load i18n %}
+{% load astrobin_apps_premium_tags %}
+
+<script type="text/x-template" id="mount-max-payload-filter-template">
+    {% if valid_usersubscription|can_access_full_search %}
+        <div class="form-group slider-form-group" :class="{highlighted: highlighted}">
+            <div id="mount-max-payload-slider" class="slider-filter tooltip-fixed"></div>
+
+            <div class="min-max">
+                <div class="min">
+                    <input class="slider-input" id="mount-max-payload-min-value" name="mount_max_payload_min" type="number"
+                           min="0" max="200" step=".1" :value="mountMaxPayloadMin" />
+                    <label for="mount-max-payload-min-value">{% trans 'Min' %}</label>
+                </div>
+
+                <div class="max">
+                    <label for="mount-max-payload-max-value">{% trans 'Max' %}</label>
+                    <input class="slider-input" id="mount-max-payload-max-value" name="mount_max_payload_max" type="number"
+                           min="0" max="200" step=".1" :value="mountMaxPayloadMax" />
+                </div>
+            </div>
+       </div>
+    {% else %}
+        {% include "./_filter_requires_ultimate.html" %}
+    {% endif %}
+</script>
+
+<script>
+    Vue.component("mount-max-payload-filter", {
+        template: "#mount-max-payload-filter-template",
+        props: [
+            "mountMaxPayloadMin",
+            "mountMaxPayloadMax"
+        ],
+        mixins: [
+            FilterComponentMixin
+        ],
+        mounted() {
+            var slider = noUiSlider.create($('#mount-max-payload-slider')[0], {
+                start: [this.mountMaxPayloadMin, this.mountMaxPayloadMax],
+                range: {min: 0, max: 200},
+                step: .1,
+                tooltips: true,
+                connect: true,
+                behaviour: 'tap-drag'
+            });
+
+            slider.on("change", function () {
+                $("#mount-max-payload-min-value").val(slider.get()[0]);
+                $("#mount-max-payload-max-value").val(slider.get()[1]);
+            });
+
+            $("#mount-max-payload-min-value").on("change", function () {
+                slider.set([$("#mount-max-payload-min-value").val(), $("#mount-max-payload-max-value").val()]);
+            });
+
+            $("#mount-max-payload-max-value").on("change", function () {
+                slider.set([$("#mount-max-payload-min-value").val(), $("#mount-max-payload-max-value").val()]);
+            });
+        }
+    });
+</script>
