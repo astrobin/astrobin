@@ -282,7 +282,13 @@ def prepare_download_data_archive(request_id):
             'license',
             'is_final',
             'allow_comments',
-            'mouse_hover_image'
+            'mouse_hover_image',
+            'ra',
+            'dec',
+            'pixel_scale',
+            'orientation',
+            'field_radius',
+
         ])
 
         images = Image.objects_including_wip.filter(user=data_download_request.user)
@@ -339,25 +345,25 @@ def prepare_download_data_archive(request_id):
                 logger.debug("prepare_download_data_archive: skipping image %s" % id)
                 continue
 
-            csv_writer.writerow([
+            row_data = [
                 image.get_id(),
-                str(image.title).encode('utf-8'),
+                str(image.title).encode('utf-8').decode() if image.title else '',
                 image.acquisition_type,
                 ImageService(image).get_subject_type_label(),
                 image.data_source,
                 image.remote_source,
                 image.solar_system_main_subject,
                 ';'.join([str(x) for x in image.locations.all()]),
-                str(image.description_bbcode if image.description_bbcode else image.description).encode('utf-8'),
-                str(image.link).encode('utf-8'),
-                str(image.link_to_fits).encode('utf-8'),
+                str(image.description_bbcode if image.description_bbcode else image.description).encode('utf-8').decode() if image.description_bbcode or image.description else '',
+                str(image.link).encode('utf-8').decode() if image.link else '',
+                str(image.link_to_fits).encode('utf-8').decode() if image.link_to_fits else '',
                 image.image_file.url,
-                image.uncompressed_source_file.url if image.uncompressed_source_file else "",
+                image.uncompressed_source_file.url if image.uncompressed_source_file else '',
                 image.uploaded,
-                image.published,
+                image.published if image.published else '',
                 image.updated,
-                image.watermark,
-                str(image.watermark_text).encode('utf-8'),
+                image.watermark if image.watermark else '',
+                str(image.watermark_text).encode('utf-8').decode() if image.watermark_text else '',
                 image.watermark_opacity,
                 ';'.join(
                     list(
@@ -434,7 +440,19 @@ def prepare_download_data_archive(request_id):
                 image.is_final,
                 image.allow_comments,
                 image.mouse_hover_image
-            ])
+            ]
+
+            if image.solution:
+                row_data +=\
+                    [
+                        image.solution.advanced_ra if image.solution.advanced_ra is not None else image.solution.ra,
+                        image.solution.advanced_dec if image.solution.advanced_dec is not None else image.solution.dec,
+                        image.solution.advanced_pixscale if image.solution.advanced_pixscale is not None else image.solution.pixscale,
+                        image.solution.advanced_orientation if image.solution.advanced_orientation is not None else image.solution.orientation,
+                        image.solution.radius,
+                    ]
+
+            csv_writer.writerow(row_data)
 
         csv_value = temp_csv.getvalue()
         archive.writestr("data.csv", csv_value)
