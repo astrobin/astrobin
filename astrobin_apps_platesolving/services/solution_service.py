@@ -68,15 +68,22 @@ class SolutionService:
     def duplicate_objects_in_field_by_catalog_space(self) -> List[str]:
         value = []
         objects = self.get_objects_in_field()
-        regex = r"^(?P<catalog>M|NGC|IC|LDN|LBN|PGC) (?P<id>\d+)$"
+        space_regex = r"^(?P<catalog>M|NGC|IC|PGC|LDN|LBN|PGC) (?P<id>\d+)$"
+        dash_regex = r"^(?P<catalog>Sh2|TYC)(?P<id>.*)$"
 
         for obj in objects:
-            matches = re.findall(regex, obj)
-            if len(matches) == 1:
-                catalog = matches[0][0]
-                number = matches[0][1]
-                value.append(f'{catalog}{number}')
-                value.append(f'{catalog} {number}')
+            space_matches = re.findall(space_regex, obj)
+            dash_matches = re.findall(dash_regex, obj)
+
+            if len(space_matches) >= 1 or len(dash_matches) >= 1:
+                if len(space_matches) >= 1:
+                    catalog = space_matches[0][0]
+                    number = space_matches[0][1]
+                    value.append(f'{catalog}{number}')
+                    value.append(f'{catalog} {number}')
+                elif len(dash_matches) >= 1:
+                    value.append(obj)
+                    value.append(obj.replace('-', '_'))
             else:
                 value.append(obj)
 

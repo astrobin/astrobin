@@ -548,6 +548,7 @@ class AstroBinSearchForm(SearchForm):
 
         if subject is not None and subject != "":
             catalog_entries = []
+            subject = subject.lower().replace('sh2-', 'sh2_').replace('sh2 ', 'sh2_').strip()
 
             regex = r"(?P<catalog>M|NGC|IC|PGC|LDN|LBN)\s?(?P<id>\d+)"
             matches = re.finditer(regex, subject, re.IGNORECASE)

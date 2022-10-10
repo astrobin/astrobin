@@ -199,7 +199,9 @@ class SolutionServiceTest(TestCase):
             "Label,1,2,3,M 45\n" \
             "Label,1,2,3,LDN123\n" \
             "Label,1,2,3,LDN 999\n" \
-            "Label,1,2,3,LBN456\n"
+            "Label,1,2,3,LBN456\n" \
+            "Label,1,2,3,Sh2-129\n" \
+            "Label,1,2,3,TYC5403-2132-1\n"
 
         image = Generators.image()
         solution = PlateSolvingGenerators.solution(image)
@@ -227,3 +229,9 @@ class SolutionServiceTest(TestCase):
 
         self.assertTrue("LBN456" in objects)
         self.assertTrue("LBN 456" in objects)
+
+        self.assertTrue("Sh2-129" in objects)
+        self.assertTrue("Sh2_129" in objects)
+
+        self.assertTrue("TYC5403-2132-1" in objects)
+        self.assertTrue("TYC5403_2132_1" in objects)
