@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: IOTD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-04 14:04+0000\n"
-"PO-Revision-Date: 2022-08-01 19:59+0200\n"
+"POT-Creation-Date: 2022-10-12 11:37+0200\n"
+"PO-Revision-Date: 2022-10-12 11:23+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108442\n"
-"X-Loco-Api-Version: 1.0.26 20220711-1\n"
+"X-Loco-Api-Version: 1.0.26 20220820-1\n"
 
 msgid "Sorry, it's now too late to retract this submission."
 msgstr "Spiacenti, è troppo tardi per ritirare questa proposta."
@@ -59,13 +59,15 @@ msgid ""
 "You cannot submit an image that was submitted for consideration more than "
 "%(max_days)s day(s) ago."
 msgstr ""
+"Non puoi proporre un'immagine che è stata proposta alla considerazione più "
+"di %(max_days)s giorno/i fa."
 
 msgid "This image has already been an IOTD in the past"
 msgstr "Questa immagine è già stata Foto del Giorno in passato"
 
 #, python-format
 msgid "You have already submitted %(max_allowed)s image(s) today."
-msgstr ""
+msgstr "Hai già proposto %(max_allowed)s immagine/i oggi."
 
 msgid "You are not a member of the IOTD Reviewers board."
 msgstr "Non sei un membro del gruppo dei reviewer Foto del Giorno."
@@ -98,16 +100,19 @@ msgid ""
 "You cannot vote for an image that has not been submitted at least %(num)s "
 "times."
 msgstr ""
+"Non puoi votare per un'immagine che ha ricevuto almeno %(num)s proposte."
 
 #, python-format
 msgid ""
 "You cannot vote for an image that has been in the review queue for more than "
 "%(max_days)s day(s)."
 msgstr ""
+"Non puoi votare per un'immagine che è stata nella coda di revisione per più "
+"di %(max_days)s giorno/i."
 
 #, python-format
 msgid "You have already voted for %(max_allowed)s image(s) today."
-msgstr ""
+msgstr "Hai già votato per %(max_allowed)s immagine/i oggi."
 
 msgid "You are not a member of the IOTD Judges board."
 msgstr "Non sei um membro del gruppo giudici Foto del Giorno."
@@ -123,6 +128,8 @@ msgid ""
 "You cannot submit an image that has been dismissed by %(number)s member(s) "
 "of the IOTD Staff."
 msgstr ""
+"Non puoi proporre un'immagine che è stata respinta da %(number)s membro/i "
+"dello staff IOTD."
 
 msgid "You cannot elect an image that has not been voted."
 msgstr "Non puoi eleggere una immagine che non è stata votata."
@@ -138,19 +145,22 @@ msgid ""
 "You cannot elect an image that has been in the review queue for more than "
 "%(max_days)s day(s)."
 msgstr ""
+"Non puoi selezionare un'immagine che è stata nella coda di revisione per più "
+"di %(max_days)s giorno/i."
 
 #, python-format
 msgid "You have already elected %(max_allowed)s image(s) today."
-msgstr ""
+msgstr "Hai già selezionato %(max_allowed)s immagine/i oggi."
 
 #, python-format
 msgid "You have already scheduled %(max_allowed)s IOTD(s)."
-msgstr ""
+msgstr "Hai già programmato %(max_allowed)s IOTD."
 
 #, python-format
 msgid ""
 "You cannot elect for an image that has not been voted at least %(num)s times."
 msgstr ""
+"Non puoi selezionare un'immagine che non è stata votata almeno %(num)s volte."
 
 msgid "You cannot unelect your own submission."
 msgstr "Non puoi rimuovere l'elezione della tua proposta."
@@ -167,19 +177,19 @@ msgstr ""
 "Non puoi rimuovere l'elezione di una Foto del Giorno passata o corrente."
 
 msgid "You cannot unelect an IOTD that is due tomorrow (UTC)."
-msgstr ""
+msgstr "Non puoi deselezionare una IOTD programmata per domani (UTC)."
 
 #, python-format
 msgid "you already selected %s IOTD(s) today (UTC)"
-msgstr ""
+msgstr "hai già selezionato %s IOTD oggi (UTC)"
 
 #, python-format
 msgid "you already selected %s scheduled IOTD(s)"
-msgstr ""
+msgstr "hai già selezionato %s IOTD programmate"
 
 #, python-format
 msgid "there are already %s scheduled IOTD(s)"
-msgstr ""
+msgstr "ci sono già %s IOTD programmate"
 
 msgid "Image of the day"
 msgstr "Foto del Giorno"
@@ -259,3 +269,10 @@ msgstr "Foto del Giorno"
 #~ msgstr ""
 #~ "Tutte le posizioni per Foto del Giorno per i prossimi %(days)s sono state "
 #~ "occupate."
+
+#~ msgid ""
+#~ "You cannot submit an image that was published more than %(max_days)s "
+#~ "day(s) ago."
+#~ msgstr ""
+#~ "Non puoi proporre un'immagine che è stata pubblicata più di %(max_days)s "
+#~ "giorno/i fa."

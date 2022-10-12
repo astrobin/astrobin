@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: IOTD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-04 14:04+0000\n"
-"PO-Revision-Date: 2022-08-01 19:59+0200\n"
+"POT-Creation-Date: 2022-10-12 11:37+0200\n"
+"PO-Revision-Date: 2022-10-12 11:23+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -14,43 +14,43 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108442\n"
-"X-Loco-Api-Version: 1.0.26 20220711-1\n"
+"X-Loco-Api-Version: 1.0.26 20220820-1\n"
 
 msgid "Sorry, it's now too late to retract this submission."
-msgstr ""
+msgstr "申し訳ありませんが、この応募を撤回するのはもう遅いです。"
 
 msgid "Sorry, it's now too late to retract this vote."
-msgstr ""
+msgstr "申し訳ありませんが、この応募を撤回するのはもう遅いです。"
 
 msgid "Newest first"
-msgstr ""
+msgstr "最新順"
 
 msgid "Oldest first"
-msgstr ""
+msgstr "古い順"
 
 msgid "You are not a member of the IOTD Submitters board."
-msgstr ""
+msgstr "あなたはIOTD推薦者のメンバーではありません。"
 
 msgid "You cannot submit your own image."
-msgstr ""
+msgstr "ご自身の画像を応募することはできません。"
 
 msgid "Images in the staging area cannot be submitted."
-msgstr ""
+msgstr "ステージングエリア内の画像は応募できません。"
 
 msgid "This user has chosen to be excluded from competitions."
-msgstr ""
+msgstr "このユーザーは、コンペの参加を拒否することを選択しました。"
 
 msgid "This user has been banned from competitions."
-msgstr ""
+msgstr "このユーザーはコンペへの出場を禁止されています。"
 
 msgid "You cannot submit an image that you already dismissed."
-msgstr ""
+msgstr "すでに削除した画像を応募することはできません。"
 
 #, python-format
 msgid ""
 "You cannot submit an image that has been dismissed by %(number)s members of "
 "the IOTD Staff."
-msgstr ""
+msgstr "IOTDスタッフの%(number)s人によって却下された画像は応募できません。"
 
 #, python-format
 msgid ""
@@ -59,121 +59,197 @@ msgid ""
 msgstr ""
 
 msgid "This image has already been an IOTD in the past"
-msgstr ""
+msgstr "この画像は、過去にすでにIOTDになっています"
 
 #, python-format
 msgid "You have already submitted %(max_allowed)s image(s) today."
-msgstr ""
+msgstr "あなたは今日、すでに %(max_allowed)s つの画像を投稿しました。"
 
 msgid "You are not a member of the IOTD Reviewers board."
-msgstr ""
+msgstr "あなたはIOTDレビュアーのメンバーではありません。"
 
 msgid "You cannot vote for your own image."
-msgstr ""
+msgstr "自分の画像に投票することはできません。"
 
 msgid "Images in the staging area cannot be voted for."
-msgstr ""
+msgstr "ステージングエリア内の画像は投票できません。"
 
 msgid "You cannot vote for an image that you already dismissed."
-msgstr ""
+msgstr "すでに削除された画像に投票することはできません。"
 
 #, python-format
 msgid ""
 "You cannot vote for an image that has been dismissed by %(number)s members "
 "of the IOTD Staff."
 msgstr ""
+"IOTDスタッフの%(number)s人のメンバーによって却下された画像に投票することはで"
+"きません。"
 
 msgid "You cannot vote for an image that has not been submitted."
-msgstr ""
+msgstr "未投稿の画像に投票することはできません。"
 
 msgid "You cannot vote for your own submission."
-msgstr ""
+msgstr "ご自身の応募作品に投票することはできません。"
 
 #, python-format
 msgid ""
 "You cannot vote for an image that has not been submitted at least %(num)s "
 "times."
-msgstr ""
+msgstr "少なくとも%(num)s回投稿されていない画像には投票できません。"
 
 #, python-format
 msgid ""
 "You cannot vote for an image that has been in the review queue for more than "
 "%(max_days)s day(s)."
 msgstr ""
+"レビュー待ちに %(max_days)s 日以上保存されている画像には投票できません。"
 
 #, python-format
 msgid "You have already voted for %(max_allowed)s image(s) today."
-msgstr ""
+msgstr "あなたは今日、%(max_allowed)sつの画像にすでに投票しました。"
 
 msgid "You are not a member of the IOTD Judges board."
-msgstr ""
+msgstr "あなたはIOTD審査員のメンバーではありません。"
 
 msgid "You cannot elect your own image."
-msgstr ""
+msgstr "自分自身の画像を選出することはできません。"
 
 msgid "Images in the staging area cannot be elected."
-msgstr ""
+msgstr "ステージングエリア内の画像は、選出できません。"
 
 #, python-format
 msgid ""
 "You cannot submit an image that has been dismissed by %(number)s member(s) "
 "of the IOTD Staff."
-msgstr ""
+msgstr "IOTDスタッフの%(number)s人によって却下された画像は応募できません。"
 
 msgid "You cannot elect an image that has not been voted."
-msgstr ""
+msgstr "投票されていない画像を選出することはできません。"
 
 msgid "You cannot elect your own submission."
-msgstr ""
+msgstr "自分自身の応募を選択することはできません。"
 
 msgid "You cannot elect an image you voted for."
-msgstr ""
+msgstr "自分が投票した画像を選出することはできません。"
 
 #, python-format
 msgid ""
 "You cannot elect an image that has been in the review queue for more than "
 "%(max_days)s day(s)."
-msgstr ""
+msgstr "レビュー待ちに %(max_days)s 日以上入っている画像は選択できません。"
 
 #, python-format
 msgid "You have already elected %(max_allowed)s image(s) today."
-msgstr ""
+msgstr "あなたは今日、%(max_allowed)sつの画像を既に選択しました。"
 
 #, python-format
 msgid "You have already scheduled %(max_allowed)s IOTD(s)."
-msgstr ""
+msgstr "%(max_allowed)s つの IOTD を既にスケジュールしています。"
 
 #, python-format
 msgid ""
 "You cannot elect for an image that has not been voted at least %(num)s times."
-msgstr ""
+msgstr "少なくとも%(num)s回投票されていない画像は選出できない。"
 
 msgid "You cannot unelect your own submission."
-msgstr ""
+msgstr "自分の応募を選外にすることはできません。"
 
 msgid "You cannot unelect an image you voted for."
-msgstr ""
+msgstr "自分が投票した画像を落選にすることはできない。"
 
 msgid "You cannot unelect an image elected by another judge."
-msgstr ""
+msgstr "他の審査員によって選出された画像を落選させることはできません。"
 
 msgid "You cannot unelect a past or current IOTD."
-msgstr ""
+msgstr "過去または現在のIOTDを落選にすることはできません。"
 
 msgid "You cannot unelect an IOTD that is due tomorrow (UTC)."
-msgstr ""
+msgstr "明日（UTC）締め切りのIOTDを落選にすることはできません。"
 
 #, python-format
 msgid "you already selected %s IOTD(s) today (UTC)"
-msgstr ""
+msgstr "あなたは今日すでに %sをIOTDに選ばれました (UTC)"
 
 #, python-format
 msgid "you already selected %s scheduled IOTD(s)"
-msgstr ""
+msgstr "IOTDのスケジュールで既に%sが選ばれています。"
 
 #, python-format
 msgid "there are already %s scheduled IOTD(s)"
-msgstr ""
+msgstr "既に %s の IOTD が予定されています。"
 
 msgid "Image of the day"
-msgstr ""
+msgstr "Image of the day"
+
+#~ msgid ""
+#~ "You cannot submit an image that was published more than %(max_days)s days "
+#~ "ago."
+#~ msgstr "公開から %(max_days)s 日以上経過した画像は応募できません。"
+
+#~ msgid "Users with a Free membership cannot participate in the IOTD."
+#~ msgstr "無料会員のユーザーは、IOTDに参加することはできません。"
+
+#~ msgid "You have already submitted %(max_allowed)s images today."
+#~ msgstr "あなたは今日、すでに%(max_allowed)s つの画像を応募しました。"
+
+#~ msgid ""
+#~ "You cannot vote for an image that has been in the submission queue for "
+#~ "more than %(max_days)s days."
+#~ msgstr ""
+#~ "応募作品リストに %(max_days)s 日以上入っている画像には投票できません。"
+
+#~ msgid "You have already voted for %(max_allowed)s images today."
+#~ msgstr "あなたは今日、すでに%(max_allowed)sつの画像に投票しました。"
+
+#~ msgid ""
+#~ "You cannot elect an image that has been in the review queue for more than "
+#~ "%(max_days)s days."
+#~ msgstr ""
+#~ "レビュー待ちに %(max_days)s 日以上ある画像を選出することはできません。"
+
+#~ msgid "You have already elected %(max_allowed)s images today."
+#~ msgstr "あなたは今日、すでに%(max_allowed)sつの画像を選択しました。"
+
+#~ msgid "You have already scheduled %(max_allowed)s IOTDs."
+#~ msgstr "%(max_allowed)s つの IOTD を既にスケジュールしています。"
+
+#~ msgid "you already selected %s IOTD today (UTC)"
+#~ msgstr "あなたは今日すでに %sをIOTDに選択しました (UTC)"
+
+#~ msgid "you already selected %s scheduled IOTDs"
+#~ msgstr "IOTDのスケジュールで既に%sが選択されています。"
+
+#~ msgid "there are already %s scheduled IOTDs"
+#~ msgstr "既に %s の IOTD が予定されています。"
+
+#~ msgid "IOTD Judgement Queue"
+#~ msgstr "IOTDの審査員待ち"
+
+#~ msgid ""
+#~ "Please select the images that you want to elect to IOTD by clicking on "
+#~ "them."
+#~ msgstr "IOTDに選出したい画像をクリックで選択してください。"
+
+#~ msgid ""
+#~ "Sorry, you cannot select an IOTD right now: %(reason)s. Please try again "
+#~ "in <strong>%(time)s</strong>."
+#~ msgstr ""
+#~ "申し訳ございませんが、現在IOTDを選ぶことはできません：%(reason)s。<strong>"
+#~ "%(time)s</strong>に再試行してください。"
+
+#~ msgid "This queue is currently empty."
+#~ msgstr "このキューは現在は空です。"
+
+#~ msgid "Error"
+#~ msgstr "エラー"
+
+#~ msgid "You cannot unelect an IOTD elected by another judge."
+#~ msgstr "他の審査員によって選出されたIOTDを落選させることはできません。"
+
+#~ msgid "All IOTD slots for the next %(days)s days are already filled."
+#~ msgstr "次の%(days)s 日間のIOTDの枠はすべて埋まっています。"
+
+#~ msgid ""
+#~ "You cannot submit an image that was published more than %(max_days)s "
+#~ "day(s) ago."
+#~ msgstr "公開から %(max_days)s 日以上経過した画像は投稿できません。"

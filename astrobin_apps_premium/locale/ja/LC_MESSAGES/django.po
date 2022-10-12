@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Premium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-04 14:04+0000\n"
-"PO-Revision-Date: 2022-08-01 19:05+0200\n"
+"POT-Creation-Date: 2022-10-12 11:37+0200\n"
+"PO-Revision-Date: 2022-10-12 11:18+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -14,62 +14,69 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108451\n"
-"X-Loco-Api-Version: 1.0.26 20220711-1\n"
+"X-Loco-Api-Version: 1.0.26 20220820-1\n"
 
 msgid "Your migration data"
-msgstr ""
+msgstr "移行済みデータ"
 
 msgid "Total amount donated last year"
-msgstr ""
+msgstr "昨年度の総寄付金額"
 
 msgid "First payment"
-msgstr ""
+msgstr "最初の支払い"
 
 msgid "Price for Premium"
-msgstr ""
+msgstr "プレミアムに対しての価格"
 
 msgid "Days covered"
-msgstr ""
+msgstr "対象期間"
 
 msgid "Premium expiration"
-msgstr ""
+msgstr "プレミアムの期限切れ"
 
 msgid "Your donations last year"
-msgstr ""
+msgstr "あなたの昨年の寄付金額"
 
 msgid "Amount"
-msgstr ""
+msgstr "金額"
 
 msgid "Date"
-msgstr ""
+msgstr "日付"
 
 msgid "Subscription"
+msgstr "定期契約"
+
+msgid "Paying member"
 msgstr ""
 
 msgid "Migrate donations"
-msgstr ""
+msgstr "寄付金を利用する"
 
 msgid "Error!"
-msgstr ""
+msgstr "エラー"
 
 msgid ""
 "Sorry, but it looks like you cannot migrate your donations to a Premium "
 "membership."
 msgstr ""
+"申し訳ございませんが、寄付金をプレミアム会員用に流用することはできないようで"
+"す。"
 
 msgid "You already have a paid membership."
-msgstr ""
+msgstr "あなたは既に有料会員です。"
 
 msgid "We could not find any donations from you last year."
-msgstr ""
+msgstr "昨年においてあなたからの寄付は見つかりませんでした。"
 
 msgid ""
 "Your donations last year were not enough to cover a Premium subscription for "
 "this year."
 msgstr ""
+"あなたの昨年の寄付金では、今年度のプレミアム会員になるには十分ではありません"
+"でした。"
 
 msgid "View the subscription plans"
-msgstr ""
+msgstr "定期契約プランをみる"
 
 msgid ""
 "As you  have made donations during the last year, you may choose to transfer "
@@ -77,29 +84,34 @@ msgid ""
 "membership will have an expiration date proportionate to the amount you "
 "donated."
 msgstr ""
+"昨年、寄付をされた方は、寄付された金額をAstroBinプレミアム会員に利用すること"
+"ができます。会員資格の有効期限は、寄付した金額に比例します。"
 
 msgid ""
 "If you are feeling particularly cool and generous, you may choose to "
 "consider your past donations as a contribution to support past efforts, and "
 "pay again for a Premium plan. Up to you!"
 msgstr ""
+"特にクールで寛大な心をもった方は、過去の寄付を過去の取り組みを支援するための"
+"寄付と考え、プレミアムプラン向けにもう一度、お支払いいただくことも可能です。"
+"それは、あなた次第です。"
 
 msgid "No, I want to pay for Premium"
-msgstr ""
+msgstr "いいえ、プレミアム向けに払いたくありません"
 
 msgid "Success"
-msgstr ""
+msgstr "成功"
 
 msgid "Your migration was successful."
-msgstr ""
+msgstr "あなたの寄付金の利用は成功しました。"
 
 msgid "Thanks for supporting AstroBin!"
-msgstr ""
+msgstr "AstroBinをサポートいただきありがとうございました。"
 
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin has just expired."
-msgstr ""
+msgstr "あなたのAstroBinでの\"%(subscription_name)s\" 定期契約は期限切れです。"
 
 msgid ""
 "When a subscription on AstroBin expires, nothing happens to your images or "
@@ -108,34 +120,44 @@ msgid ""
 "in all other aspects if you do not have any new images to share at the "
 "moment."
 msgstr ""
+"AstroBinの定期契約が終了しても、お客様の画像やコンテンツには何も起こりませ"
+"ん。新たに更新するまではAstroBin Freeに戻り、新しい画像をアップロードすること"
+"ができなくなります。しかし、現在新しく共有したい画像がない場合は、他のすべて"
+"の機能面においてAstroBinを使い続けることができます。"
 
 msgid ""
 "When you are ready to renew your subscription, please visit the following "
 "page:"
-msgstr ""
+msgstr "更新のお手続きをされる場合は、以下のページをご覧ください："
 
 msgid "Your AstroBin subscription has just expired"
-msgstr ""
+msgstr "あなたのAstroBinでの定期契約は期限が切れています。"
 
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin will expire in one "
 "week."
 msgstr ""
+"あなたのAstroBinでの\"%(subscription_name)s\" 定期契約はあと１週間で切れま"
+"す。"
 
 msgid ""
 "PLEASE NOTE! At the moment, you cannot renew a subscription while it is "
 "still ongoing. Please wait until it is expired. Thank you!"
 msgstr ""
+"ご注意ください。現在、契約期間中は更新することができません。有効期限が切れる"
+"までお待ちください。ありがとうございました。"
 
 msgid "Your AstroBin subscription will expire in one week"
-msgstr ""
+msgstr "あなたのAstroBinでの定期契約はあと１週間で切れます。"
 
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin will be "
 "automatically renewed in one week."
 msgstr ""
+"あなたのAstroBinでの\"%(subscription_name)s\" 定期契約はあと１週間で自動更新"
+"されます。"
 
 msgid ""
 "You have an automatically renewing subscription on AstroBin, and we will "
@@ -143,23 +165,527 @@ msgid ""
 "regular way, via PayPal, then PayPal will attempt to charge your credit card "
 "or retrieve funds that are available in your account."
 msgstr ""
+"AstroBinで自動更新の定期契約をされているので、自動更新を試みます。お客様の定"
+"期契約がPayPalを通じて通常の方法で作成された場合、PayPalはお客様のクレジット"
+"カードに課金するか、お客様のアカウントにある資金を回収しようとします。"
 
 msgid ""
 "If your subscription was created manually via a bank transfer, please get in "
 "touch for a new payment."
 msgstr ""
+"銀行振り込みで手動で作成された定期購入の場合は、新たにお支払いいただく必要が"
+"ありますので、ご連絡ください。"
 
 msgid "Thank you!"
-msgstr ""
+msgstr "ありがとうございました。"
 
 msgid "Your AstroBin subscription will be automatically renewed in one week"
-msgstr ""
+msgstr "あなたのAstroBinでの定期契約はあと１週間で自動更新されます。"
 
 #, python-format
 msgid ""
 "Your \"%(subscription_name)s\" subscription on AstroBin will be "
 "automatically renewed in 30 days."
 msgstr ""
+"あなたのAstroBinでの\"%(subscription_name)s\" 定期契約はあと30日で自動更新さ"
+"れます。"
 
 msgid "Your AstroBin subscription will be automatically renewed in 30 days"
-msgstr ""
+msgstr "あなたのAstroBinでの定期契約はあと30日で自動更新されます。"
+
+#~ msgid "I wasn't really affected by the data loss"
+#~ msgstr "データ消失の影響をあまり受けていませんでした"
+
+#~ msgid "I don't require compensation: I want to support AstroBin"
+#~ msgstr "補償は求めない：AstroBinをサポートしたい"
+
+#~ msgid "I would like to try AstroBin Ultimate for free for 1 month"
+#~ msgstr "AstroBin Ultimateを1ヶ月間無料で試用したい。"
+
+#~ msgid "I feel entitled to AstroBin Ultimate for free for 3 months"
+#~ msgstr "AstroBin Ultimateを3ヶ月間無料で試用したい。"
+
+#~ msgid "I feel entitled to AstroBin Ultimate for free for 6 months"
+#~ msgstr "AstroBin Ultimateを6ヶ月間無料で試用したい。"
+
+#~ msgid "Requested compensation"
+#~ msgstr "補償を要求する"
+
+#~ msgid "Please indicate if and how much you would like to be compensated."
+#~ msgstr "補償の有無と金額をご記入ください。"
+
+#~ msgid "Data loss compensation request"
+#~ msgstr "データ損失についての補償を要求"
+
+#~ msgid ""
+#~ "You are eligible for compensation due to the data loss that happened on "
+#~ "February 16th, 2020."
+#~ msgstr ""
+#~ "2020年2月16日に発生したデータ消失により、あなたは補償の対象となります。"
+
+#~ msgid ""
+#~ "If you haven't had the chance, please take a minute to read what happened "
+#~ "at the following page:"
+#~ msgstr ""
+#~ "まだご覧になっていない方は、以下のページでその時の状況をご覧ください。"
+
+#~ msgid "Official statement and post-mortem"
+#~ msgstr "公式声明と事後報告"
+
+#~ msgid "Please accept our apology once more."
+#~ msgstr "改めてお詫び申し上げます。"
+
+#~ msgid "Please chooce your compensation from the list below"
+#~ msgstr "下記より補償内容をお選びください。"
+
+#~ msgid ""
+#~ "Compensation is offered in the form of free time on the new AstroBin "
+#~ "subscription tier called \"Ultimate\"."
+#~ msgstr ""
+#~ "補償は、AstroBinの新しいサブスクリプション層である「Ultimate」のフリータイ"
+#~ "ムという形で提供されます。"
+
+#~ msgid ""
+#~ "To learn more about AstroBin Ultimate, please visit <a href=\"%(url)s\" "
+#~ "target=\"_blank\">the pricing page</a>."
+#~ msgstr ""
+#~ "AstroBin Ultimateの詳細については<a href=\"%(url)s\" target=\"_blank\">価"
+#~ "格ページ</a>をご覧ください。"
+
+#~ msgid "Submit"
+#~ msgstr "送信する"
+
+#~ msgid "Data loss compensation reauest"
+#~ msgstr "データ損失についての補償を要求"
+
+#~ msgid "Already done"
+#~ msgstr "既に実施済み"
+
+#~ msgid "Sorry, you can't do this again."
+#~ msgstr "申し訳ありませんが、もうできません。"
+
+#~ msgid "Your preference was already recorded and cannot be changed."
+#~ msgstr "あなたの希望はすでに記録されており、変更することはできません。"
+
+#~ msgid "Not eligible"
+#~ msgstr "対象外です"
+
+#~ msgid "It looks like you're not eligible"
+#~ msgstr "あなたは対象外のようです"
+
+#~ msgid ""
+#~ "Sorry, but this page is for people who were on AstroBin Premium on the "
+#~ "day that the data loss incident happened, and it looks like you aren't "
+#~ "among them."
+#~ msgstr ""
+#~ "申し訳ありませんが、このページはデータ消失事故が起きた日にAstroBin Premium"
+#~ "をご利用になっていた方のためのもので、その中にあなたは含まれていないようで"
+#~ "す。"
+
+#~ msgid "All done!"
+#~ msgstr "すべて完了です。"
+
+#~ msgid ""
+#~ "Your preference has been recorded and it has already been applied. Thank "
+#~ "you!"
+#~ msgstr ""
+#~ "あなたの希望は記録され、すでに適用されています。ありがとうございました。"
+
+#~ msgid "You follow each other"
+#~ msgstr "相互フォロー"
+
+#~ msgid "Images"
+#~ msgstr "画像"
+
+#~ msgid "Followers"
+#~ msgstr "フォロワー数"
+
+#~ msgid "Following"
+#~ msgstr "フォロー人数"
+
+#~ msgid "User"
+#~ msgstr "ユーザー"
+
+#~ msgid "No users."
+#~ msgstr "ユーザーなし"
+
+#~ msgid "Administrator"
+#~ msgstr "管理者"
+
+#~ msgid "Image moderator"
+#~ msgstr "画像のモデレーター"
+
+#~ msgid "IOTD Submitter"
+#~ msgstr "IOTD 投稿者"
+
+#~ msgid "IOTD Reviewer"
+#~ msgstr "IOTD レビュアー"
+
+#~ msgid "IOTD Judge"
+#~ msgstr "IOTD審査員"
+
+#~ msgid "Premium member"
+#~ msgstr "プレミアム会員"
+
+#~ msgid ""
+#~ "Your email bounce reports have been removed from AstroBin. Please make "
+#~ "sure that your email works well or you will get the same warning message "
+#~ "again. Thanks!"
+#~ msgstr ""
+#~ "お客様のメールバウンスレポートは、AstroBinから削除されました。メールが正常"
+#~ "に動作しない場合、再度同じ警告メッセージが表示されますので、ご確認くださ"
+#~ "い。ありがとうございました。"
+
+#~ msgid ""
+#~ "Your spam reports have been removed from AstroBin. Please make sure you "
+#~ "don't have a filter or rule to always mark AstroBin's emails as spam! If "
+#~ "you don't want to receive emails from AstroBin, look for the settings "
+#~ "link that's at the bottom of every email. Thanks!"
+#~ msgstr ""
+#~ "あなたのスパム報告はAstroBinから削除されました。フィルターやルールで、"
+#~ "AstroBinのメールを常にスパムとしてマークしていないか、ご確認ください "
+#~ "AstroBinからのメールを受け取りたくない場合は、すべてのメールの一番下にある"
+#~ "設定リンクを探してください。ありがとうございました。"
+
+#~ msgid "Perform a blind solve"
+#~ msgstr "ブラインドソルビングの実行"
+
+#~ msgid ""
+#~ "Attempt to solve with no hints. In most cases this will work, but it will "
+#~ "take longer."
+#~ msgstr ""
+#~ "ノーヒントでやってみましょう。ほとんどの場合、これでうまくいくかもしれませ"
+#~ "んが、時間がかかります。"
+
+#~ msgid "Width of the field in degrees"
+#~ msgstr "写野幅（度）"
+
+#~ msgid "Width of the field in arcminutes"
+#~ msgstr "写野幅（秒角）"
+
+#~ msgid "Resolution of the field in arcseconds/pixel"
+#~ msgstr "写野の分解能（秒角）"
+
+#~ msgid "Field size units"
+#~ msgstr "写野の大きさの単位"
+
+#~ msgid "Min field size"
+#~ msgstr "最小写野の大きさ"
+
+#~ msgid "Estimate the lower bound for the width of this field."
+#~ msgstr "この写野の幅の最小値を推定する"
+
+#~ msgid "Max field size"
+#~ msgstr "最大写野の大きさ"
+
+#~ msgid "Estimate the upper bound for the width of this field."
+#~ msgstr "この写野の幅の最大値を推定する"
+
+#~ msgid "Center RA"
+#~ msgstr "RA中心"
+
+#~ msgid "Center RA of the field in degrees, 0.000 to 360.000"
+#~ msgstr "この写野の中心のRAの度数を0.000から 360.000で記す"
+
+#~ msgid "Center dec"
+#~ msgstr "DEC中心"
+
+#~ msgid "Center dec of the field in degrees, -90.000 to +90.000"
+#~ msgstr "この写野の中心のDECの度数を0.000から 360.000で記す"
+
+#~ msgid "Radius"
+#~ msgstr "半径"
+
+#~ msgid ""
+#~ "Tells the plate-solving engine to look within these many degrees of the "
+#~ "given center RA and dec position."
+#~ msgstr ""
+#~ "プレートソルビングのエンジンに、RA中心とDec位置から何度以内を検索するかを"
+#~ "指示してください。"
+
+#~ msgid "Small"
+#~ msgstr "小"
+
+#~ msgid "Medium"
+#~ msgstr "中"
+
+#~ msgid "Large"
+#~ msgstr "大"
+
+#~ msgid "Sample raw frame (max 100 MB)"
+#~ msgstr "サンプルのRawファイル（最大100MB）"
+
+#~ msgid ""
+#~ "To improve the accuracy of your plate-solution even further, please "
+#~ "upload one of the XISF or FITS files from your data set. Such files "
+#~ "normally have date and time headers that will allow AstroBin to calculate "
+#~ "solar system body ephemerides and find planets and asteroids in your "
+#~ "image (provided you also add location information to it).<br/><br/>For "
+#~ "maximum accuracy, it's recommended that you use PixInsight's native and "
+#~ "open format XISF. Learn more about XISF here:<br/><br/><a href=\"https://"
+#~ "pixinsight.com/xisf/\" target=\"_blank\">https://pixinsight.com/xisf/</"
+#~ "a><br/><br/> <strong>Please note:</strong> it's very important that the "
+#~ "XISF or FITS file you upload is aligned to your processed image, "
+#~ "otherwise the object annotations will not match. To improve your chances "
+#~ "at a successful accurate plate-solution, calibrate your file the usual "
+#~ "way (dark/bias/flats) but do not stretch it."
+#~ msgstr ""
+#~ "プレートソルビングの精度をさらに高めるために、あなたのデータセットからXISF"
+#~ "ファイルまたはFITSファイルのいずれかをアップロードしてください。このような"
+#~ "ファイルには通常、日付と時間のヘッダーがあり、AstroBinが太陽系天体暦を計算"
+#~ "し、画像内の惑星や小惑星を見つけることができます（位置情報も追加している場"
+#~ "合）。<br/><br/>最高の精度を得るためには、PixInsightのネイティブかつオープ"
+#~ "ンなフォーマットであるXISFを使用することをお勧めします。 XISFファイルにつ"
+#~ "いてはこちら:<br/><br/><a href=\"https://pixinsight.com/xisf/\" target="
+#~ "\"_blank\">https://pixinsight.com/xisf/</a><br/><br/><strong>注意:</"
+#~ "strong> アップロードするXISFまたはFITSファイルが処理された画像と整合してい"
+#~ "ることが非常に重要で、さもなければ対象の注釈が一致しません。正確なプレート"
+#~ "ソルビングの可能性を高めるために、ファイルを通常の方法でキャリブレーション"
+#~ "してください(ダーク/バイアス/フラット)。"
+
+#~ msgid "Scaled font size"
+#~ msgstr "フォントサイズの拡大縮小"
+
+#~ msgid "Font size of the annotations on your main image page"
+#~ msgstr "メイン画像ページでの注釈のフォントサイズ"
+
+#~ msgid "Show equatorial grid"
+#~ msgstr "緯度のグリッドを表示する"
+
+#~ msgid "Show constellation borders"
+#~ msgstr "星座の境界線を表示する"
+
+#~ msgid "Show constellation lines"
+#~ msgstr "星座ラインを表示する"
+
+#~ msgid "Show named stars"
+#~ msgstr "星の名前を表示する"
+
+#~ msgid "Show Messier objects"
+#~ msgstr "メシエ天体を表示する"
+
+#~ msgid "Show NGC and IC objects"
+#~ msgstr "NGCもしくはIC天体を表示する"
+
+#~ msgid "Show VdB objects"
+#~ msgstr "VdB天体を表示する"
+
+#~ msgid "Show Sharpless objects"
+#~ msgstr "Sh2天体を表示する"
+
+#~ msgid "Show Barnard objects"
+#~ msgstr "バーナード天体を表示する"
+
+#~ msgid "Show PGC objects"
+#~ msgstr "PGC天体を表示する"
+
+#~ msgid "Show planets"
+#~ msgstr "惑星を表示する"
+
+#~ msgid ""
+#~ "Only available if your image at least an acquisition time and an accurate "
+#~ "location"
+#~ msgstr "撮影時間と正確な位置がわかっている場合のみ利用可能です"
+
+#~ msgid "Show asteroids"
+#~ msgstr "小惑星を表示する"
+
+#~ msgid "Show GCVS stars"
+#~ msgstr "GCVSの変光星を表示する"
+
+#~ msgid "General Catalog of Variable Stars"
+#~ msgstr "変光星総合カタログ"
+
+#~ msgid "Show Tycho-2 catalog"
+#~ msgstr "Tycho-2カタログを表示する"
+
+#~ msgid "Show CGPN objects"
+#~ msgstr "CGPN天体を表示する"
+
+#~ msgid "Getting plate-solving status, please wait..."
+#~ msgstr "プレートソルビングの状況を取得します。お待ちください"
+
+#~ msgid "Plate-solving starting, please do not leave this page..."
+#~ msgstr "プレートソルビングを開始しました。このページを離れないでください。"
+
+#~ msgid "Advanced plate-solving starting, please do not leave this page..."
+#~ msgstr ""
+#~ "高度なプレートソルビングを開始しました。このページを離れないでください。"
+
+#~ msgid "Plate-solving started. You may leave this page."
+#~ msgstr ""
+#~ "プレートソルビングを開始しました。このページを離れてもかまいません。"
+
+#~ msgid "Advanced plate-solving started. You may leave this page."
+#~ msgstr ""
+#~ "プレートソルビングを開始しました。このページを離れてもかまいません。"
+
+#~ msgid "Plate-solving almost ready, please do not leave this page..."
+#~ msgstr ""
+#~ "高度なプレートソルビングをたぶん開始しました。このページを離れないでくださ"
+#~ "い。"
+
+#~ msgid "This image could not be plate-solved."
+#~ msgstr "この画像はプレートソルビングできませんでした。"
+
+#~ msgid "The advanced plate-solving failed."
+#~ msgstr "この画像は高度なプレートソルビングに失敗しました。"
+
+#~ msgid "This image has been plate-solved. Refresh the page to see new data!"
+#~ msgstr ""
+#~ "この画像はプレートソルビングできました。新しいデータをみるためにページをリ"
+#~ "ロードしてください。"
+
+#~ msgid ""
+#~ "The advanced plate-solved finished. Refresh the page to see new data!"
+#~ msgstr ""
+#~ "高度なプレートソルビングできました。新しいデータをみるためにページをリロー"
+#~ "ドしてください。"
+
+#~ msgid "Error"
+#~ msgstr "エラー"
+
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because it was not possible to "
+#~ "establish a connection to nova.astrometry.net. Please try again later!"
+#~ msgstr ""
+#~ "nova.astrometry.netへの接続ができなかったため、AstroBinはこの画像をプレー"
+#~ "トソルビングすることができませんでした。後で再試行してください"
+
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because nova.astrometry.net "
+#~ "reported an internal server error."
+#~ msgstr ""
+#~ "nova.astrometry.netが内部サーバーエラーをレポートしたため、AstroBinはこの"
+#~ "画像をプレートソルビングすることができませんでした。"
+
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because nova.astrometry.net "
+#~ "reported an unepexted error."
+#~ msgstr ""
+#~ "nova.astrometry.netが予期せぬエラーをレポートしたため、AstroBinはこの画像"
+#~ "をプレートソルビングすることができませんでした。"
+
+#~ msgid ""
+#~ "Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds "
+#~ "1965)"
+#~ msgstr ""
+#~ "Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965) に掲載されている天体"
+#~ "を表示する"
+
+#~ msgid ""
+#~ "Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
+#~ msgstr ""
+#~ "Lynds' Catalogue of Dark Nebulae (LDN)  (Lynds 1965) に掲載されている天体"
+#~ "を表示する"
+
+#~ msgid "Show quasars"
+#~ msgstr "クオーサーを表示する"
+
+#~ msgid "Missing"
+#~ msgstr "失敗"
+
+#~ msgid "Basic pending"
+#~ msgstr "基本的にペンディング"
+
+#~ msgid "Basic failed"
+#~ msgstr "基本的に失敗"
+
+#~ msgid "Basic success"
+#~ msgstr "基本的に成功"
+
+#~ msgid "Advanced pending"
+#~ msgstr "高度なペンディング"
+
+#~ msgid "Advanced failed"
+#~ msgstr "高度な失敗"
+
+#~ msgid "Advanced success"
+#~ msgstr "高度な成功"
+
+#~ msgid ""
+#~ "AstroBin could not plate-solve this image because of an unexpected error."
+#~ msgstr ""
+#~ "AstroBinは予期せぬエラーが発生したため、この画像をプレートソルビングするこ"
+#~ "とができませんでした。"
+
+#~ msgid "n/a"
+#~ msgstr "n/a"
+
+#~ msgid "Starting task..."
+#~ msgstr "タスクを開始しました"
+
+#~ msgid "Downloading image..."
+#~ msgstr "画像をダウンロード中"
+
+#~ msgid "Plate-solving image..."
+#~ msgstr "画像をプレートソルビング中"
+
+#~ msgid "Generating image annotations..."
+#~ msgstr "画像への注釈を生成中"
+
+#~ msgid "Processing SVG documents..."
+#~ msgstr "SVGドキュメントを処理中"
+
+#~ msgid "Uploading results..."
+#~ msgstr "結果をアップロード中"
+
+#~ msgid "Task completed"
+#~ msgstr "タスクが完了しました"
+
+#~ msgid "Plate-solving information"
+#~ msgstr "プレートソルビング情報"
+
+#~ msgid "Status"
+#~ msgstr "ステータス"
+
+#~ msgid "Started"
+#~ msgstr "開始した"
+
+#~ msgid "Astrometry.net job"
+#~ msgstr "Astrometry.netの作業"
+
+#~ msgid "PixInsight job"
+#~ msgstr "Pixinsightの作業"
+
+#~ msgid "PixInsight queue size"
+#~ msgstr "PixInsightのキューサイズ"
+
+#~ msgid "PixInsight stage"
+#~ msgstr "PixInsightのステージ"
+
+#~ msgid "PixInsight log"
+#~ msgstr "PixInsightのログ"
+
+#~ msgid "RA"
+#~ msgstr "RA"
+
+#~ msgid "center"
+#~ msgstr "中心"
+
+#~ msgid "degrees"
+#~ msgstr "度"
+
+#~ msgid "top/left"
+#~ msgstr "左上"
+
+#~ msgid "top/right"
+#~ msgstr "右上"
+
+#~ msgid "bottom/right"
+#~ msgstr "右下"
+
+#~ msgid "bottom/left"
+#~ msgstr "左下"
+
+#~ msgid "Dec"
+#~ msgstr "Dec"
+
+#~ msgid "Close"
+#~ msgstr "閉じる"
+
+#~ msgid "Invalid"
+#~ msgstr "無効"
+
+#~ msgid "Generating finding charts..."
+#~ msgstr "ファインディングチャートを生成中"
