@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-04 14:04+0000\n"
-"PO-Revision-Date: 2022-08-04 08:47+0200\n"
+"POT-Creation-Date: 2022-10-12 11:36+0200\n"
+"PO-Revision-Date: 2022-10-12 11:34+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.26 20220711-1\n"
+"X-Loco-Api-Version: 1.0.26 20220820-1\n"
 
 msgid "United Kingdom"
 msgstr "Великобритания"
@@ -3574,6 +3574,9 @@ msgstr "Содержит"
 msgid "And %(count)s more."
 msgstr "И %(count)s дальше."
 
+msgid "Remove me"
+msgstr ""
+
 msgid "Acquired at"
 msgstr "Снято в"
 
@@ -3685,9 +3688,8 @@ msgstr "Удаленный источник"
 msgid "Shop %(name)s at %(retailer)s"
 msgstr "Закупайтесь %(name)s в %(retailer)s"
 
-#, python-format
-msgid "Shop %(name)s at AstroBin's partners"
-msgstr ""
+msgid "Disable retailer integration"
+msgstr "Отключить интеграцию с розничным продавцом"
 
 msgid "This item is unapproved and it might require your attention."
 msgstr ""
@@ -3698,8 +3700,11 @@ msgstr ""
 msgid "Download original file"
 msgstr "Скачать исходный файл"
 
-msgid "Author"
-msgstr "Автор"
+msgid "Collaborators"
+msgstr ""
+
+msgid "Photographer"
+msgstr ""
 
 msgid "chosen by"
 msgstr "выбрано"
@@ -4045,6 +4050,12 @@ msgid ""
 msgstr ""
 "Это переместит это изображение в вашу общедоступную зону, внесет его в "
 "список и при необходимости уведомит ваших подписчиков."
+
+msgid "Remove yourself as a collaborator"
+msgstr ""
+
+msgid "Are you sure you want to be removed as a collaborator to this image?"
+msgstr ""
 
 msgid ""
 "Sorry, you cannot send images from your Staging Area to a group. You need to "
@@ -4486,14 +4497,25 @@ msgstr "Только вы можете видеть это"
 
 #, python-format
 msgid ""
+"Interested in <strong>%(name)s</strong>? Our sponsor <strong>%(retailer)s</"
+"strong> sells this product!"
+msgstr ""
+
+msgid "Shop now"
+msgstr "Купить сейчас"
+
+#, python-format
+msgid ""
+"Interested in <strong>%(name)s</strong>? Our sponsors sells this product!"
+msgstr ""
+
+#, python-format
+msgid ""
 "Interested in <strong>%(brand)s</strong>? Our sponsor <strong>%(retailer)s</"
 "strong> sells this brand!"
 msgstr ""
 "Заинтересованы в <strong>%(brand)s</strong>? Наш спонсор <strong>"
 "%(retailer)s</strong> продает этот бренд!"
-
-msgid "Shop now"
-msgstr "Купить сейчас"
 
 #, python-format
 msgid ""
@@ -4633,6 +4655,19 @@ msgstr "Подтвердить выбранные и забанить остал
 msgid "There are no images in the spam list."
 msgstr "В спам листе пока нет изображений."
 
+#, python-format
+msgid "<strong>%(user)s</strong> added you as a collaborator to an image"
+msgstr ""
+
+msgid ""
+"If you want to remove yourself, click on the \"Remove me\" button underneath "
+"your avatar."
+msgstr ""
+
+#, python-format
+msgid "%(user)s added you as a collaborator to an image"
+msgstr ""
+
 msgid "Your request for an API Key has been approved!"
 msgstr "Ваш запрос на API-ключ был одобрен!"
 
@@ -4765,6 +4800,13 @@ msgstr "Или отправьте электронное письмо на ад�
 
 msgid "You have a new notification on AstroBin"
 msgstr "У вас новое уведомление"
+
+#, python-format
+msgid ""
+"\n"
+"                                                        Hey, %(name)s!\n"
+"                                                    "
+msgstr ""
 
 msgid "See all your notifications"
 msgstr "Все ваши уведомления"
@@ -5476,6 +5518,12 @@ msgstr ""
 msgid "<strong>%(user)s</strong> has published a new image"
 msgstr "<strong>%(user)s</strong> опубликовал новое изображение"
 
+msgid "This image is a group effort among the following collaborators:"
+msgstr ""
+
+msgid "This image is a group effort with the following collaborators:"
+msgstr ""
+
 #, python-format
 msgid "New image by %(user)s"
 msgstr "Новое изображение %(user)s"
@@ -5689,6 +5737,18 @@ msgstr ""
 msgid "You have received a new private message."
 msgstr "У вас новое личное сообщение."
 
+msgid "You were removed as a collaborator to an image"
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> removed themselves as a collaborator to your image"
+msgstr ""
+
+#, python-format
+msgid "%(user)s removed themselves as a collaborator to your image"
+msgstr ""
+
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> joined the public group: <strong>"
@@ -5825,22 +5885,12 @@ msgstr "След. стр."
 msgid "No additional information available for this item."
 msgstr "Дополнительная информация по этому элементу недоступна."
 
-msgid ""
-"Please support AstroBin by shopping for this item at one of our partners!"
+msgid "Please support AstroBin by shopping at one of our partners!"
 msgstr ""
-
-msgid "Disable retailer integration"
-msgstr "Отключить интеграцию с розничным продавцом"
 
 #, python-format
 msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
 msgstr "Закупайтесь <strong>%(name)s</strong> в %(retailer)s"
-
-#, python-format
-msgid ""
-"Please support AstroBin by shopping <strong>%(brand)s</strong> at one of our "
-"partners!"
-msgstr ""
 
 msgid "RA"
 msgstr "П.В."
@@ -6608,6 +6658,25 @@ msgstr ""
 msgid "Edit your astrophotography gear"
 msgstr "Править ваше астрофотографическое оборудование"
 
+msgid ""
+"This is a dynamically generated list of equipment items that you have used "
+"on AstroBin."
+msgstr ""
+
+msgid ""
+"You cannot edit directly, as equipment items are associated directly to "
+"images when uploading them, or later via the Edit menu on the image's page."
+msgstr ""
+
+msgid ""
+"\n"
+"                            Some of your images are still on the legacy "
+"equipment database. Please migrate your legacy\n"
+"                            equipment to help consolidate AstroBin's "
+"equipment database.\n"
+"                        "
+msgstr ""
+
 msgid "Telescopes or lenses"
 msgstr ""
 
@@ -6899,6 +6968,9 @@ msgstr "Диапазон дат публикаций"
 msgid "Camera type"
 msgstr "Тип камеры"
 
+msgid "Camera pixel size (μm)"
+msgstr ""
+
 msgid "Field radius (deg)"
 msgstr "Радиус поля (град)"
 
@@ -6915,6 +6987,21 @@ msgstr "Масштаб угл.сек/пиксель"
 msgid "Telescope type"
 msgstr "Тип телескопа"
 
+msgid "Telescope diameter (mm)"
+msgstr ""
+
+msgid "Telescope weight (kg)"
+msgstr ""
+
+msgid "Mount weight (kg)"
+msgstr ""
+
+msgid "Mount max. payload (kg)"
+msgstr ""
+
+msgid "Telescope/lens focal length (mm)"
+msgstr ""
+
 msgid "Integration time (hours)"
 msgstr ""
 
@@ -6925,6 +7012,9 @@ msgid "Height (pixels)"
 msgstr ""
 
 msgid "Size (MB)"
+msgstr ""
+
+msgid "Acquired with a modified camera"
 msgstr ""
 
 msgid ""
@@ -6999,6 +7089,9 @@ msgstr "Объектив"
 
 msgid "Astrometry"
 msgstr "Астрометрия"
+
+msgid "No"
+msgstr "Нет"
 
 msgid "In which data field should we look for your search terms?"
 msgstr ""
@@ -7203,6 +7296,12 @@ msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr ""
 "Спасибо за указание на проблему. Все эскизы будут заново сгенерированы."
+
+msgid "You are not a collaborator to this image."
+msgstr ""
+
+msgid "You have been removed as a collaborator to this image."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -7517,6 +7616,9 @@ msgstr "Извините, это имя пользователя уже суще
 #~ msgid "Sponsored items"
 #~ msgstr "Спонсируемые товары"
 
+#~ msgid "Author"
+#~ msgstr "Автор"
+
 #~ msgid ""
 #~ "We're really sorry, but giving likes requires an Image Index of <strong>"
 #~ "%(min_index_to_like)s</strong> or greater."
@@ -7544,9 +7646,6 @@ msgstr "Извините, это имя пользователя уже суще
 #~ msgstr ""
 #~ "Чтобы узнать больше об индексе изображений, посетите %(_0)sthe FAQ page"
 #~ "%(_1)s. Спасибо!"
-
-#~ msgid "No"
-#~ msgstr "Нет"
 
 #~ msgid "Image size"
 #~ msgstr "Размер изображения"

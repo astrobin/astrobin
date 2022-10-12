@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin Apps: Images\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-04 14:04+0000\n"
-"PO-Revision-Date: 2022-08-01 19:04+0200\n"
+"POT-Creation-Date: 2022-10-12 11:36+0200\n"
+"PO-Revision-Date: 2022-10-12 11:24+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -14,10 +14,10 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108439\n"
-"X-Loco-Api-Version: 1.0.26 20220711-1\n"
+"X-Loco-Api-Version: 1.0.26 20220820-1\n"
 
 msgid "Uncompressed source (max 100 MB)"
-msgstr ""
+msgstr "非圧縮ファイル（最大100MB）"
 
 msgid ""
 "You can store the final processed image that came out of your favorite image "
@@ -25,34 +25,45 @@ msgid ""
 "archival purposes. This file is stored privately and only you will have "
 "access to it."
 msgstr ""
+"お好きな画像編集ソフト（PixInsight、Adobe Photoshopなど）から出力された最終処"
+"理画像を、アーカイブ用としてこのAstroBinに保存することができます。このファイ"
+"ルはプライベート環境に保存され、あなただけがアクセスすることができます。"
 
 msgid "Error!"
-msgstr ""
+msgstr "エラー！"
 
 msgid "Staging area"
+msgstr "ステージング領域"
+
+msgid "Collaboration"
 msgstr ""
 
 #, python-format
 msgid "Revision %(revision)s"
-msgstr ""
+msgstr "バージョン %(revision)s"
 
 msgid "Original revision"
-msgstr ""
+msgstr "オリジナル版"
 
 msgid "Loading"
-msgstr ""
+msgstr "読み込み中"
 
 msgid "(no title)"
-msgstr ""
+msgstr "(no title)"
 
 msgid "Image of the day"
-msgstr ""
+msgstr "Image of the day"
 
 msgid "Top pick"
-msgstr ""
+msgstr "Top pick"
 
 msgid "Top pick nomination"
-msgstr ""
+msgstr "Top pickノミネート"
 
 msgid "Data corruption. Please upload this image again. Sorry!"
 msgstr ""
+"データが破損しています。この画像を再度アップロードしてください。申し訳ござい"
+"ません。"
+
+#~ msgid "Conflict."
+#~ msgstr "コンフリクトしています。"

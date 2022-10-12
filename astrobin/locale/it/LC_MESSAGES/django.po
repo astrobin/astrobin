@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-04 14:04+0000\n"
-"PO-Revision-Date: 2022-08-04 08:47+0200\n"
+"POT-Creation-Date: 2022-10-12 11:36+0200\n"
+"PO-Revision-Date: 2022-10-12 11:34+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Italian\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.26 20220711-1\n"
+"X-Loco-Api-Version: 1.0.26 20220820-1\n"
 
 msgid "United Kingdom"
 msgstr "Regno Unito"
@@ -3631,6 +3631,9 @@ msgstr "Contiene"
 msgid "And %(count)s more."
 msgstr "E %(count)s altre."
 
+msgid "Remove me"
+msgstr "Rimuovimi"
+
 msgid "Acquired at"
 msgstr "Acquisita a"
 
@@ -3747,9 +3750,8 @@ msgstr "Origine dei dati remoti"
 msgid "Shop %(name)s at %(retailer)s"
 msgstr "Compra %(name)s da %(retailer)s"
 
-#, python-format
-msgid "Shop %(name)s at AstroBin's partners"
-msgstr "Compra %(name)s presso un partner di AstroBin"
+msgid "Disable retailer integration"
+msgstr "Disabilita integrazione negozianti"
 
 msgid "This item is unapproved and it might require your attention."
 msgstr ""
@@ -3762,8 +3764,11 @@ msgstr "Titolo della versione"
 msgid "Download original file"
 msgstr "Scarica il file originale"
 
-msgid "Author"
-msgstr "Autore"
+msgid "Collaborators"
+msgstr "Collaboratori"
+
+msgid "Photographer"
+msgstr "Fotografo"
 
 msgid "chosen by"
 msgstr "scelta da"
@@ -4143,6 +4148,13 @@ msgid ""
 msgstr ""
 "Questa azione muoverà la tua immagine nell'area pubblica, rendendola listata "
 "e mandando una notifica ai tuoi follower."
+
+msgid "Remove yourself as a collaborator"
+msgstr "Rimuovi te stesso come collaboratore"
+
+msgid "Are you sure you want to be removed as a collaborator to this image?"
+msgstr ""
+"Sei sicuro di voler essere rimosso come collaboratore a questa immagine?"
 
 msgid ""
 "Sorry, you cannot send images from your Staging Area to a group. You need to "
@@ -4604,14 +4616,29 @@ msgstr "Solo tu puoi vederlo"
 
 #, python-format
 msgid ""
+"Interested in <strong>%(name)s</strong>? Our sponsor <strong>%(retailer)s</"
+"strong> sells this product!"
+msgstr ""
+"Interessato a <strong>%(name)s</strong> Il nostro sponsor <strong>"
+"%(retailer)s</strong> vende questo prodotto!"
+
+msgid "Shop now"
+msgstr "Compra adesso"
+
+#, python-format
+msgid ""
+"Interested in <strong>%(name)s</strong>? Our sponsors sells this product!"
+msgstr ""
+"Interessato a <strong>%(name)s</strong>? I nostri sponsor vendono questo "
+"prodotto!"
+
+#, python-format
+msgid ""
 "Interested in <strong>%(brand)s</strong>? Our sponsor <strong>%(retailer)s</"
 "strong> sells this brand!"
 msgstr ""
 "Interessato a <strong>%(brand)s</strong>? Il nostro sponsor <strong>"
 "%(retailer)s</strong> vende questo marchio!"
-
-msgid "Shop now"
-msgstr "Compra adesso"
 
 #, python-format
 msgid ""
@@ -4752,6 +4779,22 @@ msgstr "Approva selezione e banna il resto"
 msgid "There are no images in the spam list."
 msgstr "Non ci sono immagini nella lista dello spam."
 
+#, python-format
+msgid "<strong>%(user)s</strong> added you as a collaborator to an image"
+msgstr ""
+"<strong>%(user)s</strong> ti ha aggiunto come collaboratore ad un'immagine"
+
+msgid ""
+"If you want to remove yourself, click on the \"Remove me\" button underneath "
+"your avatar."
+msgstr ""
+"Se vuoi rimuovere te stesso, clicca sul bottone \"Rimuovimi\" sotto al tuo "
+"avatar."
+
+#, python-format
+msgid "%(user)s added you as a collaborator to an image"
+msgstr "%(user)s ti ha aggiunto come collaboratore ad un'immagine"
+
 msgid "Your request for an API Key has been approved!"
 msgstr "La tua richiesta per una API Key è stata approvata!"
 
@@ -4887,6 +4930,16 @@ msgstr ""
 
 msgid "You have a new notification on AstroBin"
 msgstr "Hai una nuova notifica su AstroBin"
+
+#, python-format
+msgid ""
+"\n"
+"                                                        Hey, %(name)s!\n"
+"                                                    "
+msgstr ""
+"\n"
+"                                                        Ehi, %(name)s!\n"
+"                                                    "
 
 msgid "See all your notifications"
 msgstr "Vedi tutte le tue notifiche"
@@ -5688,6 +5741,12 @@ msgstr ""
 msgid "<strong>%(user)s</strong> has published a new image"
 msgstr "<strong>%(user)s</strong> ha pubblicato una nuova immagine"
 
+msgid "This image is a group effort among the following collaborators:"
+msgstr "Questa immagine è un lavoro di gruppo tra i seguenti collaboratori:"
+
+msgid "This image is a group effort with the following collaborators:"
+msgstr "Quest immagine è un lavoro di gruppo con i seguenti collaboratori:"
+
 #, python-format
 msgid "New image by %(user)s"
 msgstr "Nuova immagine da %(user)s"
@@ -5935,6 +5994,20 @@ msgstr ""
 msgid "You have received a new private message."
 msgstr "Hai ricevuto un nuovo messaggio privato."
 
+msgid "You were removed as a collaborator to an image"
+msgstr "Sei stato rimosso come collaboratore ad un'immagine"
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> removed themselves as a collaborator to your image"
+msgstr ""
+"<strong>%(user)s</strong> ha rimosso se stesso come collaboratore alla tua "
+"immagine"
+
+#, python-format
+msgid "%(user)s removed themselves as a collaborator to your image"
+msgstr "%(user)s ha rimosso se stesso come collaboratore alla tua immagine"
+
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> joined the public group: <strong>"
@@ -6072,25 +6145,12 @@ msgstr "Pagina successiva"
 msgid "No additional information available for this item."
 msgstr "Non vi sono ulteriori informazioni per questo elemento."
 
-msgid ""
-"Please support AstroBin by shopping for this item at one of our partners!"
-msgstr ""
-"Supporta AstroBin acquistando questo prodotto presso uno dei nostro partner!"
-
-msgid "Disable retailer integration"
-msgstr "Disabilita integrazione negozianti"
+msgid "Please support AstroBin by shopping at one of our partners!"
+msgstr "Supporta AstroBin acquistando presso uno dei nostri partner!"
 
 #, python-format
 msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
 msgstr "Compra <strong>%(name)s</strong> da %(retailer)s"
-
-#, python-format
-msgid ""
-"Please support AstroBin by shopping <strong>%(brand)s</strong> at one of our "
-"partners!"
-msgstr ""
-"Supporta AstroBin acquistando prodotti <strong>%(brand)s</strong> presso uno "
-"dei nostri partner!"
 
 msgid "RA"
 msgstr "AR"
@@ -6887,6 +6947,35 @@ msgstr ""
 msgid "Edit your astrophotography gear"
 msgstr "Modifica la tua strumentazione"
 
+msgid ""
+"This is a dynamically generated list of equipment items that you have used "
+"on AstroBin."
+msgstr "Questa è una lista di strumentazione che hai usato su AstroBin."
+
+msgid ""
+"You cannot edit directly, as equipment items are associated directly to "
+"images when uploading them, or later via the Edit menu on the image's page."
+msgstr ""
+"Non puoi modificarla direttamente, perché l'associazione a strumentazione va "
+"fatta sulle immagini quando le carichi, oppure in seguito tramite il menù "
+"Modifica sulla pagina dell'immagine."
+
+msgid ""
+"\n"
+"                            Some of your images are still on the legacy "
+"equipment database. Please migrate your legacy\n"
+"                            equipment to help consolidate AstroBin's "
+"equipment database.\n"
+"                        "
+msgstr ""
+"\n"
+"                            Alcune delle tue immagini sono ancora con il "
+"vecchio database della strumentazione. Per favore fai la migrazione della "
+"vecchia\n"
+"                            strumentazione per aiutare a consolidare il "
+"database della strumentazione di AstroBin.\n"
+"                        "
+
 msgid "Telescopes or lenses"
 msgstr "Telescopi o lenti"
 
@@ -7177,6 +7266,9 @@ msgstr "Finestra di acquisizione"
 msgid "Camera type"
 msgstr "Tipo di camera"
 
+msgid "Camera pixel size (μm)"
+msgstr "Dimensione pixel della camera (μm)"
+
 msgid "Field radius (deg)"
 msgstr "Raggio del campo (gradi)"
 
@@ -7193,6 +7285,21 @@ msgstr "Campionamento (arcsec/pixel)"
 msgid "Telescope type"
 msgstr "Tipo di telescopio"
 
+msgid "Telescope diameter (mm)"
+msgstr "Diametro telescopio (mm)"
+
+msgid "Telescope weight (kg)"
+msgstr "Peso telescopio (kg)"
+
+msgid "Mount weight (kg)"
+msgstr "Peso montatura (kg)"
+
+msgid "Mount max. payload (kg)"
+msgstr "Portata montatura (kg)"
+
+msgid "Telescope/lens focal length (mm)"
+msgstr "Lunghezza focale telescopio/lente (mm)"
+
 msgid "Integration time (hours)"
 msgstr "Tempo d'integrazione (ore)"
 
@@ -7204,6 +7311,9 @@ msgstr "Altezza (pixel)"
 
 msgid "Size (MB)"
 msgstr "Dimenzione (MB)"
+
+msgid "Acquired with a modified camera"
+msgstr "Acquisito con camera modificata"
 
 msgid ""
 "However, you can still perform a similar search using the free text search "
@@ -7280,6 +7390,9 @@ msgstr "Telescopio o obiettivo di acquisizione"
 
 msgid "Astrometry"
 msgstr "Astrometria"
+
+msgid "No"
+msgstr "No"
 
 msgid "In which data field should we look for your search terms?"
 msgstr "In quali campi di dati dobbiamo cercare i tuoi termini di ricerca?"
@@ -7493,6 +7606,12 @@ msgid ""
 msgstr ""
 "Grazie per aver riportato il problema. Le miniature saranno generate di "
 "nuovo."
+
+msgid "You are not a collaborator to this image."
+msgstr "Non sei un collaboratore a questa immagine."
+
+msgid "You have been removed as a collaborator to this image."
+msgstr "Sei stato rimosso come collaboratore a questa immagine."
 
 #, python-format
 msgid ""
@@ -7815,6 +7934,9 @@ msgstr ""
 #~ msgid "Sponsored items"
 #~ msgstr "Elementi sponsorizzati"
 
+#~ msgid "Author"
+#~ msgstr "Autore"
+
 #~ msgid ""
 #~ "We're really sorry, but giving likes requires an Image Index of <strong>"
 #~ "%(min_index_to_like)s</strong> or greater."
@@ -7841,9 +7963,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Per scoprire di più sull'Indice delle Immagini, visita %(_0)sla pagina "
 #~ "delle domande frequenti%(_1)s. Grazie!"
-
-#~ msgid "No"
-#~ msgstr "No"
 
 #~ msgid "Image size"
 #~ msgstr "Dimensione immagine"
@@ -8411,6 +8530,22 @@ msgstr ""
 
 #~ msgid "Last seen online"
 #~ msgstr "Visto online l'ultima volta"
+
+#~ msgid "Shop %(name)s at AstroBin's partners"
+#~ msgstr "Compra %(name)s presso un partner di AstroBin"
+
+#~ msgid ""
+#~ "Please support AstroBin by shopping for this item at one of our partners!"
+#~ msgstr ""
+#~ "Supporta AstroBin acquistando questo prodotto presso uno dei nostro "
+#~ "partner!"
+
+#~ msgid ""
+#~ "Please support AstroBin by shopping <strong>%(brand)s</strong> at one of "
+#~ "our partners!"
+#~ msgstr ""
+#~ "Supporta AstroBin acquistando prodotti <strong>%(brand)s</strong> presso "
+#~ "uno dei nostri partner!"
 
 #~ msgid "AstroBin is rebuilding its equipment database!"
 #~ msgstr "AstroBin sta rifacendo il suo database della strumentazione!"

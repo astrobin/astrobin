@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-04 14:04+0000\n"
-"PO-Revision-Date: 2022-08-04 08:47+0200\n"
+"POT-Creation-Date: 2022-10-12 11:36+0200\n"
+"PO-Revision-Date: 2022-10-12 11:34+0200\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Simplified Chinese\n"
 "Language: zh-Hans\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.26 20220711-1\n"
+"X-Loco-Api-Version: 1.0.26 20220820-1\n"
 
 msgid "United Kingdom"
 msgstr "英国（大不列颠及北爱尔兰联合王国）"
@@ -3479,6 +3479,9 @@ msgstr "包含"
 msgid "And %(count)s more."
 msgstr "和 %(count)s 更多。"
 
+msgid "Remove me"
+msgstr ""
+
 msgid "Acquired at"
 msgstr "获取于"
 
@@ -3590,9 +3593,8 @@ msgstr "远程数据来源"
 msgid "Shop %(name)s at %(retailer)s"
 msgstr "%(name)s at %(retailer)s的商店"
 
-#, python-format
-msgid "Shop %(name)s at AstroBin's partners"
-msgstr ""
+msgid "Disable retailer integration"
+msgstr "禁用零售商聚合"
 
 msgid "This item is unapproved and it might require your attention."
 msgstr ""
@@ -3603,8 +3605,11 @@ msgstr ""
 msgid "Download original file"
 msgstr "下载原始文件"
 
-msgid "Author"
-msgstr "作者"
+msgid "Collaborators"
+msgstr ""
+
+msgid "Photographer"
+msgstr ""
 
 msgid "chosen by"
 msgstr "推荐者"
@@ -3942,6 +3947,12 @@ msgid ""
 "optionally notifying your followers."
 msgstr ""
 "这会将此作品移动到您的公开区域，使其出现在列表中，并选择性地通知您的粉丝。"
+
+msgid "Remove yourself as a collaborator"
+msgstr ""
+
+msgid "Are you sure you want to be removed as a collaborator to this image?"
+msgstr ""
 
 msgid ""
 "Sorry, you cannot send images from your Staging Area to a group. You need to "
@@ -4363,14 +4374,25 @@ msgstr "仅自己可见"
 
 #, python-format
 msgid ""
+"Interested in <strong>%(name)s</strong>? Our sponsor <strong>%(retailer)s</"
+"strong> sells this product!"
+msgstr ""
+
+msgid "Shop now"
+msgstr "现在购买"
+
+#, python-format
+msgid ""
+"Interested in <strong>%(name)s</strong>? Our sponsors sells this product!"
+msgstr ""
+
+#, python-format
+msgid ""
 "Interested in <strong>%(brand)s</strong>? Our sponsor <strong>%(retailer)s</"
 "strong> sells this brand!"
 msgstr ""
 "对<strong>%(brand)s</strong>感兴趣？我们的赞助商 <strong>%(retailer)s</"
 "strong> 处有售！"
-
-msgid "Shop now"
-msgstr "现在购买"
 
 #, python-format
 msgid ""
@@ -4507,6 +4529,19 @@ msgstr "批准已选择的，并屏蔽其他的"
 msgid "There are no images in the spam list."
 msgstr "垃圾信息中没有作品。"
 
+#, python-format
+msgid "<strong>%(user)s</strong> added you as a collaborator to an image"
+msgstr ""
+
+msgid ""
+"If you want to remove yourself, click on the \"Remove me\" button underneath "
+"your avatar."
+msgstr ""
+
+#, python-format
+msgid "%(user)s added you as a collaborator to an image"
+msgstr ""
+
 msgid "Your request for an API Key has been approved!"
 msgstr "您的API Key申请已被通过！"
 
@@ -4624,6 +4659,13 @@ msgstr "或向 support@astrobin.com 发送邮件。"
 
 msgid "You have a new notification on AstroBin"
 msgstr "您在 AstroBin 上有新提醒"
+
+#, python-format
+msgid ""
+"\n"
+"                                                        Hey, %(name)s!\n"
+"                                                    "
+msgstr ""
 
 msgid "See all your notifications"
 msgstr "查看所有通知"
@@ -5302,6 +5344,12 @@ msgstr "%(requester)s 申请加入小组： \"%(group_name)s\""
 msgid "<strong>%(user)s</strong> has published a new image"
 msgstr "<strong>%(user)s</strong> 发布了新的作品"
 
+msgid "This image is a group effort among the following collaborators:"
+msgstr ""
+
+msgid "This image is a group effort with the following collaborators:"
+msgstr ""
+
 #, python-format
 msgid "New image by %(user)s"
 msgstr "%(user)s的新图"
@@ -5509,6 +5557,18 @@ msgstr ""
 msgid "You have received a new private message."
 msgstr "您在 AstroBin 上收到了私信！"
 
+msgid "You were removed as a collaborator to an image"
+msgstr ""
+
+#, python-format
+msgid ""
+"<strong>%(user)s</strong> removed themselves as a collaborator to your image"
+msgstr ""
+
+#, python-format
+msgid "%(user)s removed themselves as a collaborator to your image"
+msgstr ""
+
 #, python-format
 msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> joined the public group: <strong>"
@@ -5635,22 +5695,12 @@ msgstr "下一页"
 msgid "No additional information available for this item."
 msgstr "没有可用于此项目的其他信息。"
 
-msgid ""
-"Please support AstroBin by shopping for this item at one of our partners!"
+msgid "Please support AstroBin by shopping at one of our partners!"
 msgstr ""
-
-msgid "Disable retailer integration"
-msgstr "禁用零售商聚合"
 
 #, python-format
 msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
 msgstr "<strong>%(name)s</strong> at %(retailer)s的商店"
-
-#, python-format
-msgid ""
-"Please support AstroBin by shopping <strong>%(brand)s</strong> at one of our "
-"partners!"
-msgstr ""
 
 msgid "RA"
 msgstr "赤经"
@@ -6391,6 +6441,25 @@ msgstr ""
 msgid "Edit your astrophotography gear"
 msgstr "编辑您的天文摄影设备"
 
+msgid ""
+"This is a dynamically generated list of equipment items that you have used "
+"on AstroBin."
+msgstr ""
+
+msgid ""
+"You cannot edit directly, as equipment items are associated directly to "
+"images when uploading them, or later via the Edit menu on the image's page."
+msgstr ""
+
+msgid ""
+"\n"
+"                            Some of your images are still on the legacy "
+"equipment database. Please migrate your legacy\n"
+"                            equipment to help consolidate AstroBin's "
+"equipment database.\n"
+"                        "
+msgstr ""
+
 msgid "Telescopes or lenses"
 msgstr ""
 
@@ -6666,6 +6735,9 @@ msgstr "拍摄日期范围"
 msgid "Camera type"
 msgstr "相机类型"
 
+msgid "Camera pixel size (μm)"
+msgstr ""
+
 msgid "Field radius (deg)"
 msgstr "视场半径（度）"
 
@@ -6682,6 +6754,21 @@ msgstr "像素分辨率（角秒/像素）"
 msgid "Telescope type"
 msgstr "望远镜类型"
 
+msgid "Telescope diameter (mm)"
+msgstr ""
+
+msgid "Telescope weight (kg)"
+msgstr ""
+
+msgid "Mount weight (kg)"
+msgstr ""
+
+msgid "Mount max. payload (kg)"
+msgstr ""
+
+msgid "Telescope/lens focal length (mm)"
+msgstr ""
+
 msgid "Integration time (hours)"
 msgstr "累计曝光时间（小时）"
 
@@ -6692,6 +6779,9 @@ msgid "Height (pixels)"
 msgstr ""
 
 msgid "Size (MB)"
+msgstr ""
+
+msgid "Acquired with a modified camera"
 msgstr ""
 
 msgid ""
@@ -6764,6 +6854,9 @@ msgstr "主镜"
 
 msgid "Astrometry"
 msgstr "天体测量"
+
+msgid "No"
+msgstr "否"
 
 msgid "In which data field should we look for your search terms?"
 msgstr ""
@@ -6962,6 +7055,12 @@ msgstr "选集已删除！"
 msgid ""
 "Thanks for reporting the problem. All thumbnails will be generated again."
 msgstr "感谢您报告此错误。将重新生成所有缩略图。"
+
+msgid "You are not a collaborator to this image."
+msgstr ""
+
+msgid "You have been removed as a collaborator to this image."
+msgstr ""
 
 #, python-format
 msgid ""
@@ -7258,6 +7357,9 @@ msgstr "抱歉，用户名已经存在，大小写不同。"
 #~ msgid "Sponsored items"
 #~ msgstr "赞助商品"
 
+#~ msgid "Author"
+#~ msgstr "作者"
+
 #~ msgid ""
 #~ "We're really sorry, but giving likes requires an Image Index of <strong>"
 #~ "%(min_index_to_like)s</strong> or greater."
@@ -7280,9 +7382,6 @@ msgstr "抱歉，用户名已经存在，大小写不同。"
 #~ "To learn more about the Image Index, please visit %(_0)sthe FAQ page"
 #~ "%(_1)s. Thanks!"
 #~ msgstr "希望了解更多关于作品指数的信息，请访问 %(_0)sFAQ%(_1)s。 谢谢！"
-
-#~ msgid "No"
-#~ msgstr "否"
 
 #~ msgid "Image size"
 #~ msgstr "图像大小"
