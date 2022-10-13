@@ -3,11 +3,9 @@
 import re
 import sys
 import time
-from datetime import date, timedelta
 
 import mock
 from bs4 import BeautifulSoup
-from django.conf import settings
 from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase, override_settings
@@ -20,11 +18,10 @@ from astrobin.enums.license import License
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.models import (
-    Accessory, Camera, DeepSky_Acquisition, Filter, FocalReducer, Image, ImageRevision, Location, Mount, Software,
+    Accessory, Camera, DeepSky_Acquisition, Filter, FocalReducer, Image, ImageRevision, Mount, Software,
     SolarSystem_Acquisition, Telescope,
 )
 from astrobin.tests.generators import Generators
-from astrobin_apps_groups.models import Group as AstroBinGroup
 from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_platesolving.tests.platesolving_generators import PlateSolvingGenerators
