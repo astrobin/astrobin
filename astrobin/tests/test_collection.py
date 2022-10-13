@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 
+from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.models import Collection, Image
 from astrobin_apps_images.models import KeyValueTag
 
@@ -259,10 +260,14 @@ class CollectionTest(TestCase):
 
         self._do_upload('astrobin/fixtures/test.jpg')
         image1 = self._get_last_image()
+        image1.moderator_decision = ModeratorDecision.APPROVED
+        image1.save()
         KeyValueTag.objects.create(image=image1, key="a", value=2)
 
         self._do_upload('astrobin/fixtures/test.jpg')
         image2 = self._get_last_image()
+        image2.moderator_decision = ModeratorDecision.APPROVED
+        image2.save()
         KeyValueTag.objects.create(image=image2, key="a", value=1)
 
         collection = self._get_last_collection()

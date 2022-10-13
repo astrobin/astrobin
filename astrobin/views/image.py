@@ -570,12 +570,19 @@ class ImageDetailView(ImageDetailViewBase):
             try:
                 # Always only lookup public images!
                 if nav_ctx == 'user':
-                    image_next = Image.objects \
-                                     .filter(user=image.user, published__isnull=False, published__gt=image.published) \
-                                     .order_by('published')[0:1]
-                    image_prev = Image.objects \
-                                     .filter(user=image.user, published__isnull=False, published__lt=image.published) \
-                                     .order_by('-published')[0:1]
+                    image_next = Image.objects.filter(
+                        user=image.user,
+                        published__isnull=False,
+                        published__gt=image.published,
+                        moderator_decision=ModeratorDecision.APPROVED,
+                    ).order_by('published')[0:1]
+
+                    image_prev = Image.objects.filter(
+                        user=image.user,
+                        published__isnull=False,
+                        published__lt=image.published,
+                        moderator_decision = ModeratorDecision.APPROVED,
+                    ).order_by('-published')[0:1]
                 elif nav_ctx == 'collection':
                     try:
                         try:
@@ -585,11 +592,12 @@ class ImageDetailView(ImageDetailViewBase):
                             collection = image.collections.all()[0]
 
                         if collection.order_by_tag:
-                            collection_images = Image.objects \
-                                .filter(user=image.user,
-                                        collections=collection,
-                                        keyvaluetags__key=collection.order_by_tag) \
-                                .order_by('keyvaluetags__value')
+                            collection_images = Image.objects.filter(
+                                user=image.user,
+                                collections=collection,
+                                keyvaluetags__key=collection.order_by_tag,
+                                moderator_decision=ModeratorDecision.APPROVED,
+                            ).order_by('keyvaluetags__value')
 
                             current_index = 0
                             for iter_image in collection_images.all():
@@ -604,12 +612,19 @@ class ImageDetailView(ImageDetailViewBase):
                                 if current_index > 0 \
                                 else None
                         else:
-                            image_next = Image.objects \
-                                             .filter(user=image.user, collections=collection,
-                                                     published__gt=image.published).order_by('published')[0:1]
-                            image_prev = Image.objects \
-                                             .filter(user=image.user, collections=collection,
-                                                     published__lt=image.published).order_by('-published')[0:1]
+                            image_next = Image.objects.filter(
+                                user=image.user,
+                                collections=collection,
+                                published__gt=image.published,
+                                moderator_decision=ModeratorDecision.APPROVED,
+                            ).order_by('published')[0:1]
+
+                            image_prev = Image.objects.filter(
+                                user=image.user,
+                                collections=collection,
+                                published__lt=image.published,
+                                moderator_decision=ModeratorDecision.APPROVED,
+                            ).order_by('-published')[0:1]
                     except Collection.DoesNotExist:
                         # image_prev and image_next will remain None
                         pass
@@ -617,26 +632,34 @@ class ImageDetailView(ImageDetailViewBase):
                     try:
                         group = image.part_of_group_set.get(pk=nav_ctx_extra)
                         if group.public:
-                            image_next = Image.objects \
-                                             .filter(part_of_group_set=group,
-                                                     published__isnull=False,
-                                                     published__gt=image.published) \
-                                             .order_by('published')[0:1]
-                            image_prev = Image.objects \
-                                             .filter(part_of_group_set=group,
-                                                     published__isnull=False,
-                                                     published__lt=image.published) \
-                                             .order_by('-published')[0:1]
+                            image_next = Image.objects.filter(
+                                part_of_group_set=group,
+                                published__isnull=False,
+                                published__gt=image.published,
+                                moderator_decision=ModeratorDecision.APPROVED,
+                            ).order_by('published')[0:1]
+
+                            image_prev = Image.objects.filter(
+                                part_of_group_set=group,
+                                published__isnull=False,
+                                published__lt=image.published,
+                                moderator_decision=ModeratorDecision.APPROVED,
+                            ).order_by('-published')[0:1]
                     except (Group.DoesNotExist, ValueError):
                         # image_prev and image_next will remain None
                         pass
                 elif nav_ctx == 'all':
-                    image_next = Image.objects \
-                                     .filter(published__isnull=False, published__gt=image.published) \
-                                     .order_by('published')[0:1]
-                    image_prev = Image.objects \
-                                     .filter(published__isnull=False, published__lt=image.published) \
-                                     .order_by('-published')[0:1]
+                    image_next = Image.objects.filter(
+                        published__isnull=False,
+                        published__gt=image.published,
+                        moderator_decision=ModeratorDecision.APPROVED,
+                    ).order_by('published')[0:1]
+
+                    image_prev = Image.objects.filter(
+                        published__isnull=False,
+                        published__lt=image.published,
+                        moderator_decision=ModeratorDecision.APPROVED,
+                    ).order_by('-published')[0:1]
             except Image.DoesNotExist:
                 image_next = None
                 image_prev = None
