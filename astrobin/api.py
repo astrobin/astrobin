@@ -532,10 +532,6 @@ class ImageResource(ModelResource):
         subjects = None
         ids = None
         user = None
-        ra__gt = None
-        ra__lt = None
-        dec__gt = None
-        dec__lt = None
 
         if filters is None:
             filters = {}
@@ -551,22 +547,6 @@ class ImageResource(ModelResource):
         if 'user' in filters:
             user = filters['user']
             del filters['user']
-            
-        if 'ra__gt' in filters:
-            ra__gt = filters['ra__gt']
-            del filters['ra__gt']
-
-        if 'ra__lt' in filters:
-            ra__lt = filters['ra__lt']
-            del filters['ra__lt']
-
-        if 'dec__gt' in filters:
-            dec__gt = filters['dec__gt']
-            del filters['dec__gt']
-
-        if 'dec__lt' in filters:
-            dec__lt = filters['dec__lt']
-            del filters['dec__lt']
 
         orm_filters = super(ImageResource, self).build_filters(filters, ignore_bad_filters)
 
@@ -601,18 +581,6 @@ class ImageResource(ModelResource):
 
         if user:
             orm_filters['user__username'] = user
-
-        if ra__gt:
-            orm_filters['solutions__ra__gt'] = float(ra__gt)
-
-        if ra__lt:
-            orm_filters['solutions__ra__lt'] = float(ra__lt)
-
-        if dec__gt:
-            orm_filters['solutions__dec__gt'] = float(dec__gt)
-
-        if dec__lt:
-            orm_filters['solutions__dec__lt'] = float(dec__lt)
 
         return orm_filters
 

@@ -42,7 +42,7 @@ class Solution(models.Model):
     )
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
+    object_id = models.TextField()
     content_object = fields.GenericForeignKey('content_type', 'object_id')
 
     image_file = models.ImageField(
