@@ -2618,3 +2618,28 @@ class ImageTest(TestCase):
                 kwargs={'id': image.get_id(), 'r': revision.label}
             ) + url_params
         )
+
+    def test_solution_deleted_if_image_deleted(self):
+        image = Generators.image()
+        PlateSolvingGenerators.solution(image)
+
+        self.assertIsNotNone(image.solution)
+
+        image.delete()
+
+        image = Image.deleted_objects.get(id=image.id)
+
+        self.assertIsNone(image.solution)
+
+    def test_solution_deleted_if_image_revision_deleted(self):
+        image = Generators.image()
+        revision = Generators.imageRevision(image=image)
+        PlateSolvingGenerators.solution(revision)
+
+        self.assertIsNotNone(revision.solution)
+
+        revision.delete()
+
+        revision = ImageRevision.deleted_objects.get(id=revision.id)
+
+        self.assertIsNone(revision.solution)
