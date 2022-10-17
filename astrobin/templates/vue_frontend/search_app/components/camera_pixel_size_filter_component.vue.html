@@ -26,6 +26,16 @@
 </script>
 
 <script>
+    const cameraPixelSizeTo = (v) => parseFloat(v).toFixed(2);
+    const cameraPixelSizeFrom = (v) => parseFloat(v).toFixed(2);
+
+    const setValues = (slider) => {
+        slider.set([
+            cameraPixelSizeFrom($("#camera-pixel-size-min-value").val()),
+            cameraPixelSizeFrom($("#camera-pixel-size-max-value").val())
+        ]);
+    }
+
     Vue.component("camera-pixel-size-filter", {
         template: "#camera-pixel-size-filter-template",
         props: [
@@ -42,7 +52,16 @@
                 step: .01,
                 tooltips: true,
                 connect: true,
-                behaviour: 'tap-drag'
+                behaviour: 'tap-drag',
+                pips: {
+                    mode: 'positions',
+                    values: [0, 20, 40, 60, 80, 100],
+                    density: 5
+                },
+                format: {
+                    to: cameraPixelSizeTo,
+                    from: cameraPixelSizeFrom,
+                }
             });
 
             slider.on("change", function () {
@@ -51,11 +70,11 @@
             });
 
             $("#camera-pixel-size-min-value").on("change", function () {
-                slider.set([$("#camera-pixel-size-min-value").val(), $("#camera-pixel-size-max-value").val()]);
+                setValues(slider);
             });
 
-            $("#mount-max-paylaod-max-value").on("change", function () {
-                slider.set([$("#camera-pixel-size-min-value").val(), $("#camera-pixel-size-max-value").val()]);
+            $("#mount-pixel-size-max-value").on("change", function () {
+                setValues(slider);
             });
         }
     });

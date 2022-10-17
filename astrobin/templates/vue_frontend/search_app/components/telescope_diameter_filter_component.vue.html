@@ -1,12 +1,26 @@
+{% load i18n %}
 {% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="telescope-diameter-filter-template">
     {% if valid_usersubscription|can_access_full_search %}
         <div class="form-group" :class="{highlighted: highlighted}">
-            <div id="telescope-diameter-slider" class="slider-filter tooltip-fixed"></div>
+            <div class="form-group slider-form-group" :class="{highlighted: highlighted}">
+                <div id="telescope-diameter-slider" class="slider-filter tooltip-fixed"></div>
 
-            <input id="telescope-diameter-min-value" name="telescope_diameter_min" type="hidden" :value="telescopeDiameterMin" />
-            <input id="telescope-diameter-max-value" name="telescope_diameter_max" type="hidden" :value="telescopeDiameterMax" />
+                <div class="min-max">
+                    <div class="min">
+                        <input class="slider-input" id="telescope-diameter-min-value" name="telescope_diameter_min"
+                               type="number" min="0" max="1000" step="1" :value="telescopeDiameterMin" />
+                        <label for="telescope-diameter-min-value">{% trans 'Min' %}</label>
+                    </div>
+
+                    <div class="max">
+                        <label for="telescope-diameter-max-value">{% trans 'Max' %}</label>
+                        <input class="slider-input" id="telescope-diameter-max-value" name="telescope_diameter_max"
+                               type="number" min="0" max="1000" step="1" :value="telescopeDiameterMax" />
+                    </div>
+                </div>
+            </div>
         </div>
     {% else %}
         {% include "./_filter_requires_ultimate.html" %}
@@ -31,9 +45,14 @@
                 tooltips: true,
                 connect: true,
                 behaviour: 'tap-drag',
+                pips: {
+                    mode: 'positions',
+                    values: [0, 10, 20, 30, 40, 50, 70, 100],
+                    density: 5,
+                },
                 format: {
                     to: (v) => parseFloat(v).toFixed(0),
-                    from: (v) => parseFloat(v).toFixed(0)
+                    from: (v) => parseFloat(v).toFixed(0),
                 }
             });
 

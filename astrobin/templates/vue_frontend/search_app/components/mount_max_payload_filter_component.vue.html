@@ -42,7 +42,16 @@
                 step: .1,
                 tooltips: true,
                 connect: true,
-                behaviour: 'tap-drag'
+                behaviour: 'tap-drag',
+                pips: {
+                    mode: 'positions',
+                    values: [0, 20, 40, 60, 80, 100],
+                    density: 5
+                },
+                format: {
+                    to: (v) => parseFloat(v).toFixed(2),
+                    from: (v) => parseFloat(v).toFixed(2),
+                }
             });
 
             slider.on("change", function () {
