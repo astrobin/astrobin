@@ -221,6 +221,10 @@ def image_post_softdelete(sender, instance, **kwargs):
     UserService(instance.user).clear_gallery_image_list_cache()
     ImageService(instance).delete_stories()
 
+    if instance.solution:
+        cache.delete(f'astrobin_solution_{instance.__class__.__name__}_{instance.pk}')
+        instance.solution.delete()
+
     valid_subscription = PremiumService(instance.user).get_valid_usersubscription()
 
     try:
@@ -278,6 +282,9 @@ post_save.connect(imagerevision_post_save, sender=ImageRevision)
 
 def imagerevision_post_delete(sender, instance, **kwargs):
     UserService(instance.image.user).clear_gallery_image_list_cache()
+    if instance.solution:
+        cache.delete(f'astrobin_solution_{instance.__class__.__name__}_{instance.pk}')
+        instance.solution.delete()
 
 
 post_softdelete.connect(imagerevision_post_delete, sender=ImageRevision)
