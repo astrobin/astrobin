@@ -430,7 +430,7 @@
                 newPendingInline = [],
                 candidate = currentNode;
 
-            while (candidate.type && candidate.name != tagName) {
+            while (!!candidate && !!candidate.type && candidate.name != tagName) {
                 // If this is an inline element, add it to the pending list, if we're
                 // really closing one of the parents element later, they will continue
                 // after it.
@@ -445,7 +445,7 @@
                 candidate = candidate.parent;
             }
 
-            if (candidate.type) {
+            if (!!candidate && !!candidate.type) {
                 // Add all elements that have been found in the above loop.
                 for (i = 0; i < pendingAdd.length; i++) {
                     var node = pendingAdd[i];
