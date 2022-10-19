@@ -3,7 +3,7 @@ from rest_framework import serializers
 from astrobin.utils import get_client_country_code
 from astrobin_apps_equipment.api.serializers.brand_listing_serializer import BrandListingSerializer
 from astrobin_apps_equipment.api.serializers.item_listing_serializer import ItemListingSerializer
-from astrobin_apps_equipment.models.equipment_item import EquipmentItemReviewerDecision
+from astrobin_apps_equipment.models.equipment_item import EquipmentItem, EquipmentItemReviewerDecision
 from astrobin_apps_equipment.services import EquipmentItemService, EquipmentService
 from astrobin_apps_premium.services.premium_service import PremiumService
 from astrobin_apps_users.services import UserService
@@ -60,6 +60,17 @@ class EquipmentItemSerializer(serializers.ModelSerializer):
             item_listings=ItemListingSerializer(item_listings, many=True).data,
             allow_full_retailer_integration=allow_full_retailer_integration,
         )
+
+    def to_representation(self, item: EquipmentItem):
+        ret = super().to_representation(item)
+
+        if item.variant_of:
+            if not item.website:
+                ret['website'] = item.variant_of.website
+            if not item.image:
+                ret['image'] = item.variant_of.image.url if item.variant_of.image else None
+
+        return ret
 
     class Meta:
         fields = [
