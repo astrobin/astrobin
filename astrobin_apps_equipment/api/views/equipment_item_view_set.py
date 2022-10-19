@@ -459,6 +459,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         item.reviewed_timestamp = timezone.now()
         item.reviewer_decision = EquipmentItemReviewerDecision.APPROVED
         item.reviewer_comment = request.data.get('comment')
+        item.assignee = None
 
         if item.created_by and item.created_by != request.user:
             push_notification(
@@ -540,6 +541,7 @@ class EquipmentItemViewSet(viewsets.ModelViewSet):
         item.reviewer_rejection_duplicate_of_klass = request.data.get('duplicate_of_klass', item.klass)
         item.reviewer_rejection_duplicate_of_usage_type = request.data.get('duplicate_of_usage_type')
         item.reviewer_rejection_duplicate_of = request.data.get('duplicate_of')
+        item.assignee = None
         item.save(keep_deleted=True)
 
         reject_item.delay(item.id, item.klass)
