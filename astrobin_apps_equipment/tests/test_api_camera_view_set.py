@@ -747,3 +747,41 @@ class TestApiCameraViewSet(TestCase):
         self.assertEquals(200, response.status_code)
         camera.refresh_from_db()
         self.assertFalse(camera.frozen_as_ambiguous)
+
+    def test_approving_removes_assignee(self):
+        reviewer = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+            assignee=reviewer,
+        )
+        client = APIClient()
+        client.force_authenticate(user=reviewer)
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'approve/', format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+
+        camera.refresh_from_db()
+
+        self.assertIsNone(camera.assignee)
+
+    def test_rejecting_removes_assignee(self):
+        reviewer = Generators.user(groups=[GroupName.EQUIPMENT_MODERATORS])
+        camera = EquipmentGenerators.camera(
+            type=CameraType.DEDICATED_DEEP_SKY,
+            assignee=reviewer,
+        )
+        client = APIClient()
+        client.force_authenticate(user=reviewer)
+
+        response = client.post(
+            reverse('astrobin_apps_equipment:camera-detail', args=(camera.pk,)) + 'reject/', format='json'
+        )
+
+        self.assertEquals(200, response.status_code)
+
+        camera.refresh_from_db()
+
+        self.assertIsNone(camera.assignee)
