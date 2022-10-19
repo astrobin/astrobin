@@ -243,6 +243,9 @@ class ImageRawThumbView(ImageDetailViewBase):
         except FileNotFoundError:
             url = ImageService(image).get_error_thumbnail(revision_label, alias)
 
+        if not url:
+            url = ImageService(image).get_error_thumbnail(revision_label, alias)
+
         return redirect(smart_unicode(url))
 
 
