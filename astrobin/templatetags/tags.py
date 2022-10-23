@@ -707,8 +707,15 @@ def get_language_name(language_code):
 
 @register.simple_tag
 def get_language_code_display(request):
-    language_code = request.LANGUAGE_CODE
-    is_mobile = request.user_agent.is_mobile
+    try:
+        language_code = request.LANGUAGE_CODE
+    except AttributeError:
+        language_code = 'en'
+
+    try:
+        is_mobile = request.user_agent.is_mobile
+    except AttributeError:
+        is_mobile = False
 
     if not is_mobile:
         return get_language_name(language_code)
