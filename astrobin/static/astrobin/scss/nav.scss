@@ -311,12 +311,6 @@ body.full {
   #donate-header-button {
     margin-left: $spacer-small;
   }
-
-  .language-switcher {
-    @media screen and (max-width: 360px) {
-      display: none;
-    }
-  }
 }
 
 /* Subnav */
