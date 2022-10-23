@@ -706,7 +706,13 @@ def get_language_name(language_code):
 
 
 @register.simple_tag
-def get_language_code_display(language_code):
+def get_language_code_display(request):
+    language_code = request.LANGUAGE_CODE
+    is_mobile = request.user_agent.is_mobile
+
+    if not is_mobile:
+        return get_language_name(language_code)
+
     languages = {
         '': 'EN',
         'en': 'EN',
