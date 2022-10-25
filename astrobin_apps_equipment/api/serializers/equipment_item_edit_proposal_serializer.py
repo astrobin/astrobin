@@ -53,7 +53,7 @@ class EquipmentItemEditProposalSerializer(EquipmentItemSerializer):
             'community_notes': target.community_notes.replace('=', '\=') if target.community_notes else None,
             'variant_of': target.variant_of.pk if target.variant_of else None,
             'website': target.website,
-            'image': target.image,
+            'image': target.image.url if target.image else None,
         }
 
         if hasattr(self, 'get_original_properties'):
