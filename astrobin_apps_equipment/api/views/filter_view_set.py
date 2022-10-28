@@ -1,3 +1,5 @@
+import sys
+
 import simplejson
 from django.db.models import QuerySet
 
@@ -26,11 +28,12 @@ class FilterViewSet(EquipmentItemViewSet):
         filter_bandwidth_filter = self.request.GET.get('filter-bandwidth')
         if filter_bandwidth_filter:
             bandwidth_object = simplejson.loads(filter_bandwidth_filter)
-            queryset = queryset.filter(
-                bandwidth__isnull=False,
-                bandwidth__gte=bandwidth_object.get('from'),
-                bandwidth__lte=bandwidth_object.get('to')
-            )
+            if bandwidth_object.get('from') is not None or bandwidth_object.get('to') is not None:
+                queryset = queryset.filter(
+                    bandwidth__isnull=False,
+                    bandwidth__gte=bandwidth_object.get('from') if bandwidth_object.get('from') is not None else 0,
+                    bandwidth__lte=bandwidth_object.get('to') if bandwidth_object.get('to') is not None else sys.maxsize
+                )
 
         filter_size_filter = self.request.GET.get('filter-size')
         if filter_size_filter and filter_size_filter != 'null':
