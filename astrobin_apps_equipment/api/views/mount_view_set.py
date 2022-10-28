@@ -1,3 +1,5 @@
+import sys
+
 import simplejson
 from django.db.models import QuerySet
 from rest_framework.decorators import action
@@ -25,20 +27,26 @@ class MountViewSet(EquipmentItemViewSet):
         mount_weight_filter = self.request.GET.get('mount-weight')
         if mount_weight_filter:
             weight_object = simplejson.loads(mount_weight_filter)
-            queryset = queryset.filter(
-                weight__isnull=False,
-                weight__gte=weight_object.get('from'),
-                weight__lte=weight_object.get('to')
-            )
+            if weight_object.get('from') is not None or weight_object.get('to') is not None:
+                queryset = queryset.filter(
+                    weight__isnull=False,
+                    weight__gte=weight_object.get('from') if weight_object.get('from') is not None else 0,
+                    weight__lte=weight_object.get('to') if weight_object.get('to') is not None else sys.maxsize
+                )
 
         mount_max_payload_filter = self.request.GET.get('mount-max-payload')
         if mount_max_payload_filter:
             max_payload_object = simplejson.loads(mount_max_payload_filter)
-            queryset = queryset.filter(
-                max_payload__isnull=False,
-                max_payload__gte=max_payload_object.get('from'),
-                max_payload__lte=max_payload_object.get('to')
-            )
+            if max_payload_object.get('from') is not None or max_payload_object.get('to') is not None:
+                queryset = queryset.filter(
+                    max_payload__isnull=False,
+                    max_payload__gte=max_payload_object.get('from')
+                    if max_payload_object.get('from') is not None
+                    else 0,
+                    max_payload__lte=max_payload_object.get('to')
+                    if max_payload_object.get('to') is not None
+                    else sys.maxsize
+                )
 
         mount_computerized_filter = self.request.GET.get('mount-computerized')
         if mount_computerized_filter:
@@ -47,11 +55,16 @@ class MountViewSet(EquipmentItemViewSet):
         mount_periodic_error_filter = self.request.GET.get('mount-periodic-error')
         if mount_periodic_error_filter:
             periodic_error_object = simplejson.loads(mount_periodic_error_filter)
-            queryset = queryset.filter(
-                periodic_error__isnull=False,
-                periodic_error__gte=periodic_error_object.get('from'),
-                periodic_error__lte=periodic_error_object.get('to')
-            )
+            if periodic_error_object.get('from') is not None or periodic_error_object.get('to') is not None:
+                queryset = queryset.filter(
+                    periodic_error__isnull=False,
+                    periodic_error__gte=periodic_error_object.get('from')
+                    if periodic_error_object.get('from') is not None
+                    else 0,
+                    periodic_error__lte=periodic_error_object.get('to')
+                    if periodic_error_object.get('to') is not None
+                    else sys.maxsize
+                )
 
         mount_pec_filter = self.request.GET.get('mount-pec')
         if mount_pec_filter:
@@ -60,11 +73,16 @@ class MountViewSet(EquipmentItemViewSet):
         mount_slew_speed_filter = self.request.GET.get('mount-slew-speed')
         if mount_slew_speed_filter:
             slew_speed_object = simplejson.loads(mount_slew_speed_filter)
-            queryset = queryset.filter(
-                slew_speed__isnull=False,
-                slew_speed__gte=slew_speed_object.get('from'),
-                slew_speed__lte=slew_speed_object.get('to')
-            )
+            if slew_speed_object.get('from') is not None or slew_speed_object.get('to') is not None:
+                queryset = queryset.filter(
+                    slew_speed__isnull=False,
+                    slew_speed__gte=slew_speed_object.get('from')
+                    if slew_speed_object.get('from') is not None
+                    else 0,
+                    slew_speed__lte=slew_speed_object.get('to')
+                    if slew_speed_object.get('to') is not None
+                    else sys.maxsize
+                )
             
         return queryset
     
