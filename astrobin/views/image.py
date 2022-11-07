@@ -54,7 +54,6 @@ from astrobin.forms.remove_as_collaborator_form import ImageRemoveAsCollaborator
 from astrobin.forms.uncompressed_source_upload_form import UncompressedSourceUploadForm
 from astrobin.models import (Collection, DeepSky_Acquisition, Image, ImageRevision, LANGUAGES, SolarSystem_Acquisition)
 from astrobin.services.gear_service import GearService
-from astrobin.stories import add_story
 from astrobin.templatetags.tags import can_like
 from astrobin.utils import get_client_country_code, get_image_resolution
 from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import can_access_basic_equipment_functions
@@ -62,7 +61,6 @@ from astrobin_apps_groups.forms import AutoSubmitToIotdTpProcessForm, GroupSelec
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_iotd.services import IotdService
-from astrobin_apps_notifications.tasks import push_notification_for_new_image
 from astrobin_apps_platesolving.models import PlateSolvingAdvancedLiveLogEntry, Solution
 from astrobin_apps_platesolving.services import SolutionService
 from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import can_see_real_resolution
