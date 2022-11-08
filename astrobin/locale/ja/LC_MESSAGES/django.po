@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-12 11:36+0200\n"
-"PO-Revision-Date: 2022-10-12 11:34+0200\n"
+"POT-Creation-Date: 2022-11-08 13:04+0000\n"
+"PO-Revision-Date: 2022-11-08 13:54+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.26 20220820-1\n"
+"X-Loco-Api-Version: 1.0.26 20221028-1\n"
 
 msgid "United Kingdom"
 msgstr "イギリス"
@@ -1088,6 +1088,9 @@ msgstr "日本語"
 
 msgid "Chinese (Simplified)"
 msgstr "中国語（簡体字）"
+
+msgid "Hungarian"
+msgstr "ハンガリー語"
 
 msgid "Pulsars"
 msgstr "パルサー"
@@ -2341,9 +2344,6 @@ msgstr "\tヒンディー語"
 msgid "Hiri Motu"
 msgstr "ヒリモトゥ語"
 
-msgid "Hungarian"
-msgstr "ハンガリー語"
-
 msgid "Interlingua"
 msgstr "インターリング"
 
@@ -3555,8 +3555,8 @@ msgstr ""
 msgid "Return to image"
 msgstr "画像に戻る"
 
-msgid "Hemisphere"
-msgstr "半球"
+msgid "Celestial hemisphere"
+msgstr ""
 
 msgid "Northern"
 msgstr "北"
@@ -3572,7 +3572,7 @@ msgid "And %(count)s more."
 msgstr "あと %(count)s つ"
 
 msgid "Remove me"
-msgstr ""
+msgstr "自分を削除する"
 
 msgid "Acquired at"
 msgstr "撮影方法"
@@ -3701,10 +3701,10 @@ msgid "Download original file"
 msgstr "オリジナルファイルをダウンロード"
 
 msgid "Collaborators"
-msgstr ""
+msgstr "コラボレーター"
 
 msgid "Photographer"
-msgstr ""
+msgstr "撮影者"
 
 msgid "chosen by"
 msgstr "に選ばれた"
@@ -4073,10 +4073,10 @@ msgstr ""
 "なたのフォロワーに通知されます。"
 
 msgid "Remove yourself as a collaborator"
-msgstr ""
+msgstr "あなた自身をコラボレーターから削除する"
 
 msgid "Are you sure you want to be removed as a collaborator to this image?"
-msgstr ""
+msgstr "この画像のコラボレーターから削除されたいのは本当ですか？"
 
 msgid ""
 "Sorry, you cannot send images from your Staging Area to a group. You need to "
@@ -4528,6 +4528,8 @@ msgid ""
 "Interested in <strong>%(name)s</strong>? Our sponsor <strong>%(retailer)s</"
 "strong> sells this product!"
 msgstr ""
+"<strong>%(name)s</strong> に興味がありますか？この商品は我々のスポンサー "
+"<strong>%(retailer)s</strong> で販売しています！"
 
 msgid "Shop now"
 msgstr "販売中"
@@ -4536,6 +4538,8 @@ msgstr "販売中"
 msgid ""
 "Interested in <strong>%(name)s</strong>? Our sponsors sells this product!"
 msgstr ""
+"<strong>%(name)s</strong> に興味がありますか？この商品は我々のスポンサーで販"
+"売しています！"
 
 #, python-format
 msgid ""
@@ -4689,15 +4693,18 @@ msgstr "スパムリストに画像がありません。"
 #, python-format
 msgid "<strong>%(user)s</strong> added you as a collaborator to an image"
 msgstr ""
+"<strong>%(user)s</strong> は画像のコラボレーターとしてあなたを追加しました"
 
 msgid ""
 "If you want to remove yourself, click on the \"Remove me\" button underneath "
 "your avatar."
 msgstr ""
+"自分を削除したい場合は、自分のサムネイル画像の下にある「私を削除する」ボタン"
+"をクリックしてください。"
 
 #, python-format
 msgid "%(user)s added you as a collaborator to an image"
-msgstr ""
+msgstr "%(user)s は画像のコラボレーターとしてあなたを追加しました"
 
 msgid "Your request for an API Key has been approved!"
 msgstr "APIキーのリクエストは承認されました。"
@@ -4832,6 +4839,8 @@ msgid ""
 "                                                        Hey, %(name)s!\n"
 "                                                    "
 msgstr ""
+"\n"
+"Hey, %(name)s!"
 
 msgid "See all your notifications"
 msgstr "すべての通知を見る"
@@ -5618,10 +5627,10 @@ msgid "<strong>%(user)s</strong> has published a new image"
 msgstr "<strong>%(user)s</strong> は新しい画像を公開しました。"
 
 msgid "This image is a group effort among the following collaborators:"
-msgstr ""
+msgstr "この画像は、以下のコラボレーターとの共同作品です。"
 
 msgid "This image is a group effort with the following collaborators:"
-msgstr ""
+msgstr "この画像は、以下のコラボレーターとの共同作品です。"
 
 #, python-format
 msgid "New image by %(user)s"
@@ -5861,16 +5870,18 @@ msgid "You have received a new private message."
 msgstr "新しいプライベートメッセージが届いています。"
 
 msgid "You were removed as a collaborator to an image"
-msgstr ""
+msgstr "あなたは画像のコラボレーターから削除されました"
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> removed themselves as a collaborator to your image"
 msgstr ""
+"<strong>%(user)s</strong> があなたの画像のコラボレーターとして、自分自身を削"
+"除しました"
 
 #, python-format
 msgid "%(user)s removed themselves as a collaborator to your image"
-msgstr ""
+msgstr "%(user)s があなたの画像のコラボレーターとして、自分自身を削除しました"
 
 #, python-format
 msgid ""
@@ -6008,7 +6019,7 @@ msgid "No additional information available for this item."
 msgstr "この項目に関する追加情報はありません。"
 
 msgid "Please support AstroBin by shopping at one of our partners!"
-msgstr ""
+msgstr "パートナー企業でお買い物をして、AstroBinを応援してください。"
 
 #, python-format
 msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
@@ -6787,12 +6798,15 @@ msgstr "天体写真機材の編集"
 msgid ""
 "This is a dynamically generated list of equipment items that you have used "
 "on AstroBin."
-msgstr ""
+msgstr "AstroBinで使用したことのある機材アイテムのリストが動的に生成されます。"
 
 msgid ""
 "You cannot edit directly, as equipment items are associated directly to "
 "images when uploading them, or later via the Edit menu on the image's page."
 msgstr ""
+"機材の項目は、画像をアップロードする際に直接関連させるか、後で画像のページに"
+"ある編集メニューから関連させることができるため、直接編集することはできませ"
+"ん。"
 
 msgid ""
 "\n"
@@ -6802,6 +6816,9 @@ msgid ""
 "equipment database.\n"
 "                        "
 msgstr ""
+"\n"
+"あなたの画像の一部は、まだ過去の機材データベースを利用しています。過去の機器"
+"データベースからの移行をお願いします。"
 
 msgid "Telescopes or lenses"
 msgstr "望遠鏡もしくはレンズ"
@@ -7094,7 +7111,7 @@ msgid "Camera type"
 msgstr "カメラの種類"
 
 msgid "Camera pixel size (μm)"
-msgstr ""
+msgstr "カメラのピクセルサイズ (μm)"
 
 msgid "Field radius (deg)"
 msgstr "視野半径（度）"
@@ -7113,19 +7130,19 @@ msgid "Telescope type"
 msgstr "望遠鏡の種類"
 
 msgid "Telescope diameter (mm)"
-msgstr ""
+msgstr "望遠鏡の直径 (mm)"
 
 msgid "Telescope weight (kg)"
-msgstr ""
+msgstr "望遠鏡の重量 (kg)"
 
 msgid "Mount weight (kg)"
-msgstr ""
+msgstr "赤道儀の重量 (kg)"
 
 msgid "Mount max. payload (kg)"
-msgstr ""
+msgstr "赤道儀の最大積載量 (kg)"
 
 msgid "Telescope/lens focal length (mm)"
-msgstr ""
+msgstr "望遠鏡やレンズの焦点距離 (mm)"
 
 msgid "Integration time (hours)"
 msgstr "総撮影時間（○時間）"
@@ -7140,7 +7157,7 @@ msgid "Size (MB)"
 msgstr "ファイルサイズ (MB)"
 
 msgid "Acquired with a modified camera"
-msgstr ""
+msgstr "改造カメラによる撮影"
 
 msgid ""
 "However, you can still perform a similar search using the free text search "
@@ -7438,10 +7455,10 @@ msgstr ""
 "ります。"
 
 msgid "You are not a collaborator to this image."
-msgstr ""
+msgstr "あなたは、この画像のコラボレーターではありません。"
 
 msgid "You have been removed as a collaborator to this image."
-msgstr ""
+msgstr "あなたは、この画像のコラボレーターから削除されました。"
 
 #, python-format
 msgid ""
@@ -7745,6 +7762,9 @@ msgstr ""
 #~ "grateful."
 #~ msgstr ""
 #~ "あなたの貢献は非常に重要であり、AstroBinコミュニティ全体が感謝しています。"
+
+#~ msgid "Hemisphere"
+#~ msgstr "半球"
 
 #~ msgid "Sponsored brands"
 #~ msgstr "スポンサー名"

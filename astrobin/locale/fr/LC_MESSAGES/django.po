@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-12 11:36+0200\n"
-"PO-Revision-Date: 2022-10-12 11:34+0200\n"
+"POT-Creation-Date: 2022-11-08 13:04+0000\n"
+"PO-Revision-Date: 2022-11-08 13:54+0100\n"
 "Last-Translator: Salvatore Iovene\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 108427\n"
-"X-Loco-Api-Version: 1.0.26 20220820-1\n"
+"X-Loco-Api-Version: 1.0.26 20221028-1\n"
 
 msgid "United Kingdom"
 msgstr "Royaume-Uni"
@@ -1098,6 +1098,9 @@ msgstr "Japonais"
 
 msgid "Chinese (Simplified)"
 msgstr "Chinois (simplifié)"
+
+msgid "Hungarian"
+msgstr "Hongrois"
 
 msgid "Pulsars"
 msgstr "Pulsars"
@@ -2393,9 +2396,6 @@ msgstr "Hindi"
 msgid "Hiri Motu"
 msgstr "Hiri motu"
 
-msgid "Hungarian"
-msgstr "Hongrois"
-
 msgid "Interlingua"
 msgstr "Interlingua"
 
@@ -3632,8 +3632,8 @@ msgstr ""
 msgid "Return to image"
 msgstr "Retour à l'image"
 
-msgid "Hemisphere"
-msgstr "Hémisphère"
+msgid "Celestial hemisphere"
+msgstr ""
 
 msgid "Northern"
 msgstr "Nord"
@@ -3649,7 +3649,7 @@ msgid "And %(count)s more."
 msgstr "Et %(count)s de plus."
 
 msgid "Remove me"
-msgstr ""
+msgstr "Me retirer"
 
 msgid "Acquired at"
 msgstr "Acquisitions réalisées à"
@@ -3781,10 +3781,10 @@ msgid "Download original file"
 msgstr "Télécharger le fichier original"
 
 msgid "Collaborators"
-msgstr ""
+msgstr "Collaborateurs"
 
 msgid "Photographer"
-msgstr ""
+msgstr "Photographe"
 
 msgid "chosen by"
 msgstr "choisi par"
@@ -4170,10 +4170,12 @@ msgstr ""
 "seront notifiés le cas échéant."
 
 msgid "Remove yourself as a collaborator"
-msgstr ""
+msgstr "Me retirer de la liste des collaborateurs"
 
 msgid "Are you sure you want to be removed as a collaborator to this image?"
 msgstr ""
+"Confirmer que vous ne souhaitez pas être mentionné en qualité de "
+"collaborateur pour cette image ?"
 
 msgid ""
 "Sorry, you cannot send images from your Staging Area to a group. You need to "
@@ -4649,6 +4651,8 @@ msgid ""
 "Interested in <strong>%(name)s</strong>? Our sponsor <strong>%(retailer)s</"
 "strong> sells this product!"
 msgstr ""
+"Intéressé par <strong>%(name)s</strong> ? Notre sponsor <strong>"
+"%(retailer)s</strong> vend ce produit !"
 
 msgid "Shop now"
 msgstr "Acheter"
@@ -4657,6 +4661,7 @@ msgstr "Acheter"
 msgid ""
 "Interested in <strong>%(name)s</strong>? Our sponsors sells this product!"
 msgstr ""
+"Intéressé par <strong>%(name)s</strong> ? Nos sponsors vendent ce produit !"
 
 #, python-format
 msgid ""
@@ -4807,15 +4812,18 @@ msgstr "Aucune image dans la liste des spams."
 #, python-format
 msgid "<strong>%(user)s</strong> added you as a collaborator to an image"
 msgstr ""
+"<strong>%(user)s</strong> vous a ajouté en tant que collaborateur à une image"
 
 msgid ""
 "If you want to remove yourself, click on the \"Remove me\" button underneath "
 "your avatar."
 msgstr ""
+"Si vous souhaitez vous retirer, cliquez sur le bouton \"Retirez-moi\" sous "
+"votre avatar."
 
 #, python-format
 msgid "%(user)s added you as a collaborator to an image"
-msgstr ""
+msgstr "%(user)s vous a ajouté en tant que collaborateur à une image"
 
 msgid "Your request for an API Key has been approved!"
 msgstr "Votre demande de clé API a été acceptée !"
@@ -4957,6 +4965,8 @@ msgid ""
 "                                                        Hey, %(name)s!\n"
 "                                                    "
 msgstr ""
+"\n"
+"                                                        Hé, %(name)s!"
 
 msgid "See all your notifications"
 msgstr "Voir toutes les notifications"
@@ -5759,9 +5769,11 @@ msgstr "<strong>%(user)s</strong> a publié une nouvelle image"
 
 msgid "This image is a group effort among the following collaborators:"
 msgstr ""
+"Cette image est un travail collaboratif avec notamment les contributeurs "
+"suivants :"
 
 msgid "This image is a group effort with the following collaborators:"
-msgstr ""
+msgstr "Cette image est un travail collaboratif des contributeurs suivants :"
 
 #, python-format
 msgid "New image by %(user)s"
@@ -6012,16 +6024,18 @@ msgid "You have received a new private message."
 msgstr "Vous avez reçu un nouveau message privé."
 
 msgid "You were removed as a collaborator to an image"
-msgstr ""
+msgstr "Vous avez été retiré comme contributeur d'une image"
 
 #, python-format
 msgid ""
 "<strong>%(user)s</strong> removed themselves as a collaborator to your image"
 msgstr ""
+"<strong>%(user)s</strong> s'est retiré en tant que contributeur de votre "
+"image"
 
 #, python-format
 msgid "%(user)s removed themselves as a collaborator to your image"
-msgstr ""
+msgstr "%(user)s se sont retirés en tant que contributeurs de votre image"
 
 #, python-format
 msgid ""
@@ -6166,7 +6180,7 @@ msgid "No additional information available for this item."
 msgstr "Aucune information complémentaire disponible pour cet élément."
 
 msgid "Please support AstroBin by shopping at one of our partners!"
-msgstr ""
+msgstr "Soutenez AstroBin en achetant chez l'un de nos partenaires !"
 
 #, python-format
 msgid "Shop <strong>%(name)s</strong> at %(retailer)s"
@@ -6985,11 +6999,16 @@ msgid ""
 "This is a dynamically generated list of equipment items that you have used "
 "on AstroBin."
 msgstr ""
+"Il s'agit d'une liste générée dynamiquement des équipements que vous avez "
+"utilisés sur AstroBin."
 
 msgid ""
 "You cannot edit directly, as equipment items are associated directly to "
 "images when uploading them, or later via the Edit menu on the image's page."
 msgstr ""
+"Vous ne pouvez pas l'éditer directement, car les équipements sont associés "
+"aux images lors de leur téléchargement ou ultérieurement via le menu Edition "
+"sur la page de l'image."
 
 msgid ""
 "\n"
@@ -6999,6 +7018,11 @@ msgid ""
 "equipment database.\n"
 "                        "
 msgstr ""
+"\n"
+"                            Certaines de vos images figurent toujours dans "
+"l'ancienne base de données des équipements . Veuillez migrer vos \n"
+"                            équipements pour aider à consolider la base de "
+"données d'équipements d'AstroBin."
 
 msgid "Telescopes or lenses"
 msgstr "Télescopes et objectifs"
@@ -7296,7 +7320,7 @@ msgid "Camera type"
 msgstr "CCD/APN"
 
 msgid "Camera pixel size (μm)"
-msgstr ""
+msgstr "Taille des pixels de la caméra (µm)"
 
 msgid "Field radius (deg)"
 msgstr "Rayon du champ (deg)"
@@ -7315,19 +7339,19 @@ msgid "Telescope type"
 msgstr "Instrument optique"
 
 msgid "Telescope diameter (mm)"
-msgstr ""
+msgstr "Diamètre du télescope (mm)"
 
 msgid "Telescope weight (kg)"
-msgstr ""
+msgstr "Poids du télescope (kg)"
 
 msgid "Mount weight (kg)"
-msgstr ""
+msgstr "Poids de la monture (kg)"
 
 msgid "Mount max. payload (kg)"
-msgstr ""
+msgstr "Charge utile max de la monture (kg)"
 
 msgid "Telescope/lens focal length (mm)"
-msgstr ""
+msgstr "Longueur focale du télescope (mm)"
 
 msgid "Integration time (hours)"
 msgstr "Temps d'intégration (heures)"
@@ -7342,7 +7366,7 @@ msgid "Size (MB)"
 msgstr "Taille (MB)"
 
 msgid "Acquired with a modified camera"
-msgstr ""
+msgstr "Acquisitions avec une caméra modifiée"
 
 msgid ""
 "However, you can still perform a similar search using the free text search "
@@ -7644,10 +7668,10 @@ msgstr ""
 "régénérées."
 
 msgid "You are not a collaborator to this image."
-msgstr ""
+msgstr "Vous n'êtes pas contributeur de cette image."
 
 msgid "You have been removed as a collaborator to this image."
-msgstr ""
+msgstr "Vous avez été retiré en tant que contributeur de cette image."
 
 #, python-format
 msgid ""
@@ -7975,6 +7999,9 @@ msgstr ""
 #~ msgstr ""
 #~ "Votre contribution est très importante, et l'ensemble de la communauté "
 #~ "AstroBin vous remercie."
+
+#~ msgid "Hemisphere"
+#~ msgstr "Hémisphère"
 
 #~ msgid "Sponsored brands"
 #~ msgstr "Sponsors"
