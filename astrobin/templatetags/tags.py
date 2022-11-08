@@ -663,12 +663,13 @@ def get_other_languages():
         'el',
         'fi',
         'ja',
+        'hu',
         'nl',
         'pl',
-        'uk',
         'ru',
         'sq',
         'tr',
+        'uk',
     )
 
 
@@ -688,6 +689,7 @@ def get_language_name(language_code):
         'fr': 'Français',
         'it': 'Italiano',
         'ja': '日本語',
+        'hu': 'Magyar',
         'nl': 'Nederlands',
         'pl': 'Polski',
         'pt': 'Português',
@@ -734,6 +736,7 @@ def get_language_code_display(request):
         'fr': 'FR',
         'it': 'IT',
         'ja': 'JA',
+        'hu': 'HU',
         'nl': 'NL',
         'pl': 'PL',
         'pt': 'PT',

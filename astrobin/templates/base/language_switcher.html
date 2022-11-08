@@ -12,7 +12,7 @@
         {% get_native_languages as native_languages %}
         {% for lang in native_languages %}
             <li>
-                <a href="{% url 'set_language' lang %}" title="{% get_language_name lang %}">
+                <a data-no-instant href="{% url 'set_language' lang %}" title="{% get_language_name lang %}">
                     {% get_language_name lang %}
                 </a>
             </li>
@@ -23,7 +23,7 @@
         {% get_officially_supported_languages as supported_languages %}
         {% for lang in supported_languages %}
             <li>
-                <a href="{% url 'set_language' lang %}" title="{% get_language_name lang %}">
+                <a data-no-instant href="{% url 'set_language' lang %}" title="{% get_language_name lang %}">
                     {% get_language_name lang %}
                 </a>
             </li>
@@ -34,7 +34,7 @@
         {% get_other_languages as other_languages %}
         {% for lang in other_languages %}
             <li>
-                <a href="{% url 'set_language' lang %}" title="{% get_language_name lang %}">
+                <a data-no-instant href="{% url 'set_language' lang %}" title="{% get_language_name lang %}">
                     {% get_language_name lang %}
                 </a>
             </li>
@@ -45,7 +45,7 @@
             <li class="divider"></li>
 
             <li>
-                <a href="{% url 'contact' %}?subject=Help%20with%20translations" target="_blank">
+                <a data-no-instant href="{% url 'contact' %}?subject=Help%20with%20translations" target="_blank">
                     <i class="icon-tasks"></i>
                     {% trans "Help with translations!" %}
                 </a>

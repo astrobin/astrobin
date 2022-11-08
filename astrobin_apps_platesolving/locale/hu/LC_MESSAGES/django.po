@@ -1,29 +1,30 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-12 11:37+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2022-11-08 12:32+0000\n"
+"PO-Revision-Date: 2022-10-01 19:36+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu_HU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
 
 msgid "Small"
-msgstr ""
+msgstr "Kicsi"
 
 msgid "Medium"
-msgstr ""
+msgstr "Közepes"
 
 msgid "Large"
-msgstr ""
+msgstr "Nagy"
 
 msgid "Sample raw frame (max 100 MB)"
-msgstr ""
+msgstr "Minta nyers kép (max 100 MB)"
 
 msgid ""
 "To improve the accuracy of your plate-solution even further, please upload "
@@ -39,301 +40,342 @@ msgid ""
 "match. To improve your chances at a successful accurate plate-solution, "
 "calibrate your file the usual way (dark/bias/flats) but do not stretch it."
 msgstr ""
+"A plate-solving további pontosításához, kérjük töltsd fel az egyik XISF vagy "
+"FITS fájlodat az adatgyűjteményedből. Ezeknek a fájloknak általában vannak "
+"dátum és idő metaadatai, amikkel az AstroBin kiszámolhatja a naprendszeri "
+"testek eseményeit és megtalálhat bolygókat és aszteroidákat a képeden "
+"(feltéve, hogy hozzáadtál helyszíninformációt is).<br/><br/>A teljes "
+"pontosság érdekében ajánlott, hogy a PixInsight natív és nyílt formátumát, "
+"az XISF-et használd. Tudj meg többet az XISF-ről itt:<br/><br/><a href="
+"\"https://pixinsight.com/xisf/\" target=\"_blank\">https://pixinsight.com/"
+"xisf/</a><br/><br/> <strong>Vedd figyelembe:</strong> nagyon fontos, hogy a "
+"feltöltött XISF vagy FITS fájlok ugyanúgy legyenek igazítva, mint a "
+"szerkesztett kép, különben a megjelölések nem jó helyen lesznek. A sikeres "
+"és legpontosabb plate-solving érdekében kalibráld a fájlodat a szokásos "
+"módon (dark/bias/flats), de ne nyújtsd."
 
 msgid "Scaled font size"
-msgstr ""
+msgstr "Skálázott betűméret"
 
 msgid "Font size of the annotations on your main image page"
-msgstr ""
+msgstr "A fő képoldalon található megjelölések betűmérete"
 
 msgid "Show equatorial grid"
-msgstr ""
+msgstr "Egyenlítői háló mutatása"
 
 msgid "Show constellation borders"
-msgstr ""
+msgstr "Csillagképek határának mutatása"
 
 msgid "Show constellation lines"
-msgstr ""
+msgstr "Csillagképek vonalainak mutatása"
 
 msgid "Show named stars"
-msgstr ""
+msgstr "Elnevezett csillagok mutatása"
 
 msgid "Show HD stars"
-msgstr ""
+msgstr "HD csillagok mutatása"
 
 msgid ""
 "This catalog uses data from the All-sky Compiled Catalogue of 2.5 million "
 "stars (Kharchenko+ 2009), VizieR catalog: I/280B."
 msgstr ""
+"Ez a katalógus az All-sky Compiled Catalogue-ból használ adatokat 2,5 millió "
+"csillagból (Kharchenko+ 2009), VizieR katalógus: I/280B."
 
 msgid "Max. magnitude"
-msgstr ""
+msgstr "Max. magnitúdó"
 
 msgid ""
 "Only HD stars up to this magnitude will be rendered. If left empty, the "
 "catalog's default value will be used."
 msgstr ""
+"Csak a HD csillagok lesznek megjelenítve ezen magnitúdóig. Ha üresen hagyod, "
+"akkor a katalógus alapértelmezett értékét fogjuk használni."
 
 msgid "Show Messier objects"
-msgstr ""
+msgstr "Messier objektumok mutatása"
 
 msgid "Show NGC and IC objects"
-msgstr ""
+msgstr "NGC és IC objektumok mutatása"
 
 msgid "Show VdB objects"
-msgstr ""
+msgstr "VdB objektumok mutatása"
 
 msgid "Show Sharpless objects"
-msgstr ""
+msgstr "Sharpless objektumok mutatása"
 
 msgid "Show Barnard objects"
-msgstr ""
+msgstr "Barnard objektumok mutatása"
 
 msgid ""
 "Show objects from the Lynds' Catalogue of Bright Nebulae (LBN) (Lynds 1965)"
 msgstr ""
+"Objektumok mutatása a Lynds' Catalogue of Bright Nebulae-ból (LBN) (Lynds "
+"1965)"
 
 msgid ""
 "Show objects from the Lynds' Catalogue of Dark Nebulae (LDN) (Lynds 1962)"
 msgstr ""
+"Objektumok mutatása a Lynds' Catalogue of Dark Nebulae-ból (LDN) (Lynds 1962)"
 
 msgid "Show PGC objects"
-msgstr ""
+msgstr "PGC objektumok mutatása"
 
 msgid "Show planets"
-msgstr ""
+msgstr "Bolygók mutatása"
 
 msgid ""
 "Only available if your image at least an acquisition time and an accurate "
 "location"
 msgstr ""
+"Akkor elérhető, ha képedhez meg van adva a képkészítés ideje és pontos "
+"helyszín"
 
 msgid "Show asteroids"
-msgstr ""
+msgstr "Aszteroidák mutatása"
 
 msgid "Show GCVS stars"
-msgstr ""
+msgstr "GCVS csillagok mutatása"
 
 msgid "General Catalog of Variable Stars"
-msgstr ""
+msgstr "Változócsillagok Általános Katalógusa"
 
 msgid ""
 "Only GCVS stars up to this magnitude will be rendered. If left empty, the "
 "catalog's default value will be used."
 msgstr ""
+"Csak a GCVS csillagok lesznek megjelenítve ezen magnitúdóig. Üresen hagyva a "
+"katalógus alapértelmezett értéke lesz használva."
 
 msgid "Show Tycho-2 catalog"
-msgstr ""
+msgstr "Tycho-2 katalógus mutatása"
 
 msgid ""
 "Only Tycho-2 stars up to this magnitude will be rendered. If left empty, the "
 "catalog's default value will be used."
 msgstr ""
+"Csak a Tycho-2 csillagok lesznek megjelenítve ezen magnitúdóig. Üresen "
+"hagyva a katalógus alapértelmezett értéke lesz használva."
 
 msgid "Show CGPN objects"
-msgstr ""
+msgstr "CGPN objektumok mutatása"
 
 msgid "Show quasars"
-msgstr ""
+msgstr "Kvazárok mutatása"
 
 msgid "Perform a blind solve"
-msgstr ""
+msgstr "Blind solve elvégzése"
 
 msgid ""
 "Attempt to solve with no hints. In most cases this will work, but it will "
 "take longer."
 msgstr ""
+"Megoldás adatok megadása nélkül. A legtöbb esetben ez működni fog, de "
+"hosszabb ideig tart."
 
 msgid "Width of the field in degrees"
-msgstr ""
+msgstr "A mező szélessége fokban"
 
 msgid "Width of the field in arcminutes"
-msgstr ""
+msgstr "A mező szélessége ívpercben"
 
 msgid "Resolution of the field in arcseconds/pixel"
-msgstr ""
+msgstr "A mező felbontása ívmásodperc/pixelben"
 
 msgid "Field size units"
-msgstr ""
+msgstr "Mező méretegységek"
 
 msgid "Min field size"
-msgstr ""
+msgstr "Minimum területméret"
 
 msgid "Estimate the lower bound for the width of this field."
-msgstr ""
+msgstr "A terület szélessége alsó határának becslése."
 
 msgid "Max field size"
-msgstr ""
+msgstr "Maximum területméret"
 
 msgid "Estimate the upper bound for the width of this field."
-msgstr ""
+msgstr "A terület szélessége felső határának becslése."
 
 msgid "Center RA"
-msgstr ""
+msgstr "Közép RA"
 
 msgid "Center RA of the field in degrees, 0.000 to 360.000"
-msgstr ""
+msgstr "A terület közép RA-ja fokban, 0.000-360.000"
 
 msgid "Center dec"
-msgstr ""
+msgstr "Közép dec"
 
 msgid "Center dec of the field in degrees, -90.000 to +90.000"
-msgstr ""
+msgstr "A terület közép dec-je fokban, -90.000 - +90.000"
 
 msgid "Radius"
-msgstr ""
+msgstr "Sugár"
 
 msgid ""
 "Tells the plate-solving engine to look within these many degrees of the "
 "given center RA and dec position."
 msgstr ""
+"Megmondja a plate-solve motornak, hogy ennyi fokon belül keressen a megadott "
+"RA és dec pozíciók alapján."
 
 msgid "Missing"
-msgstr ""
+msgstr "Hiányzik"
 
 msgid "Basic pending"
-msgstr ""
+msgstr "Egyszerű tart"
 
 msgid "Basic failed"
-msgstr ""
+msgstr "Egyszerű sikertelen"
 
 msgid "Basic success"
-msgstr ""
+msgstr "Egyszerű sikeres"
 
 msgid "Advanced pending"
-msgstr ""
+msgstr "Fejlett tart"
 
 msgid "Advanced failed"
-msgstr ""
+msgstr "Fejlett sikertelen"
 
 msgid "Advanced success"
-msgstr ""
+msgstr "Fejlett sikeres"
 
 msgid "Getting plate-solving status, please wait..."
-msgstr ""
+msgstr "Plate-solve státusz lekérése, kérjük, várj..."
 
 msgid "Plate-solving starting, please do not leave this page..."
-msgstr ""
+msgstr "A plate-solve megkezdődik, kérjük, ne hagyd el azt az oldalt..."
 
 msgid "Advanced plate-solving starting, please do not leave this page..."
 msgstr ""
+"A fejlett plate-solve megkezdődik, kérjük, ne hagyd el azt az oldalt..."
 
 msgid "Plate-solving started. You may leave this page."
-msgstr ""
+msgstr "A plate-solving elkezdődött. Elhagyhatod az oldalt."
 
 msgid "Advanced plate-solving started. You may leave this page."
-msgstr ""
+msgstr "A fejlett plate-solving elkezdődött. Elhagyhatod az oldalt."
 
 msgid "Plate-solving almost ready, please do not leave this page..."
-msgstr ""
+msgstr "A plate-solve majdnem kész, kérjük, ne hagyd el azt az oldalt..."
 
 msgid "This image could not be plate-solved."
-msgstr ""
+msgstr "A képet nem lehetett megoldani."
 
 msgid "The advanced plate-solving failed."
-msgstr ""
+msgstr "A fejlett plate-solve sikertelen."
 
 msgid "This image has been plate-solved. Refresh the page to see new data!"
 msgstr ""
+"A kép meg lett oldva plate-solve segítségével. Frissítsd az oldalt, hogy "
+"megnézhesd az új adatokat!"
 
 msgid "The advanced plate-solved finished. Refresh the page to see new data!"
 msgstr ""
+"A fejlett plate-solve befejeződött. Frissítsd az oldalt, hogy megnézhesd az "
+"új adatokat!"
 
 msgid "Error"
-msgstr ""
+msgstr "Hiba"
 
 msgid ""
 "AstroBin could not plate-solve this image because it was not possible to "
 "establish a connection to nova.astrometry.net. Please try again later!"
 msgstr ""
+"Az AstroBin nem tudta megoldani ezt a képet, mert nem sikerült kapcsolatot "
+"létesíteni a nova.astrometry.net címmel. Kérjük, próbálkozz később!"
 
 msgid ""
 "AstroBin could not plate-solve this image because nova.astrometry.net "
 "reported an internal server error. Please try again later!"
 msgstr ""
+"Az AstroBin nem tudta megoldani ezt a képet, mert a nova.astrometry.net "
+"belső szerverhibát jelentett. Kérjük, próbálkozz később!"
 
 msgid ""
 "AstroBin could not plate-solve this image because of an unexpected error. "
 "Please try again later!"
 msgstr ""
+"Az AstroBin nem tudta megoldani ezt a képet egy váratlan hiba miatt. Kérjük, "
+"próbálkozz később!"
 
 msgid "n/a"
-msgstr ""
+msgstr "n/a"
 
 msgid "Starting task..."
-msgstr ""
+msgstr "Feladat indítása..."
 
 msgid "Downloading image..."
-msgstr ""
+msgstr "Kép letöltése..."
 
 msgid "Plate-solving image..."
-msgstr ""
+msgstr "Kép plate-solve megoldása..."
 
 msgid "Generating image annotations..."
-msgstr ""
+msgstr "Képmegjelölések generálása..."
 
 msgid "Processing SVG documents..."
-msgstr ""
+msgstr "SVG dokumentumok feldolgozása..."
 
 msgid "Generating finding charts..."
-msgstr ""
+msgstr "Találati táblázatok generálása..."
 
 msgid "Uploading results..."
-msgstr ""
+msgstr "Eredmények feltöltése..."
 
 msgid "Task completed"
-msgstr ""
+msgstr "Feladat elvégezve"
 
 msgid "Plate-solving information"
-msgstr ""
+msgstr "Plate-solving információ"
 
 msgid "Status"
-msgstr ""
+msgstr "Státusz"
 
 msgid "Started"
-msgstr ""
+msgstr "Elindítva"
 
 msgid "Astrometry.net job"
-msgstr ""
+msgstr "Astrometry.net munka"
 
 msgid "PixInsight job"
-msgstr ""
+msgstr "PixInsight munka"
 
 msgid "PixInsight queue size"
-msgstr ""
+msgstr "PixInsight várólista mérete"
 
 msgid "PixInsight stage"
-msgstr ""
+msgstr "PixInsight stage"
 
 msgid "PixInsight log"
-msgstr ""
+msgstr "PixInsight log"
 
 msgid "RA"
-msgstr ""
+msgstr "RA"
 
 msgid "center"
-msgstr ""
+msgstr "közép"
 
 msgid "degrees"
-msgstr ""
+msgstr "fok"
 
 msgid "top/left"
-msgstr ""
+msgstr "felső/bal"
 
 msgid "top/right"
-msgstr ""
+msgstr "felső/jobb"
 
 msgid "bottom/right"
-msgstr ""
+msgstr "alsó/jobb"
 
 msgid "bottom/left"
-msgstr ""
+msgstr "alsó/bal"
 
 msgid "Dec"
-msgstr ""
+msgstr "Dec"
 
 msgid "Close"
-msgstr ""
+msgstr "Bezárás"
 
 msgid "Invalid"
-msgstr ""
+msgstr "Érvénytelen"

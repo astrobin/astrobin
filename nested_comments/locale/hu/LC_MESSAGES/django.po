@@ -1,90 +1,95 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-12 11:36+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2022-11-08 12:32+0000\n"
+"PO-Revision-Date: 2022-09-30 16:35+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu_HU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
 
 msgid "Type your comment here..."
-msgstr ""
+msgstr "Írd ide a hozzászólásod..."
 
 msgid "Error"
-msgstr ""
+msgstr "Hiba"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Mégsem"
 
 msgid "Add a comment"
-msgstr ""
+msgstr "Hozzászólás hozzáadása"
 
 msgid "There are no comments yet."
-msgstr ""
+msgstr "Még nincsenek hozzászólások."
 
 msgid "The comment cannot be empty."
-msgstr ""
+msgstr "A hozzászólás nem lehet üres."
 
 msgid "(deleted)"
-msgstr ""
+msgstr "(törölve)"
 
 msgid "Delete"
-msgstr ""
+msgstr "Törlés"
 
 msgid "Undelete"
-msgstr ""
+msgstr "Törlés visszavonása"
 
 msgid "Edit"
-msgstr ""
+msgstr "Szerkesztés"
 
 msgid "Link"
-msgstr ""
+msgstr "Link"
 
 msgctxt "Noun, e.g. 'This element has 10 likes'"
 msgid "likes"
-msgstr ""
+msgstr "kedvelése van"
 
 msgctxt "Verb (imperative)"
 msgid "Like"
-msgstr ""
+msgstr "Kedvelés"
 
 msgctxt "Verb (imperative)"
 msgid "Unlike"
-msgstr ""
+msgstr "Kedvelés visszavonása"
 
 msgctxt "Verb (imperative)"
 msgid "Reply"
-msgstr ""
+msgstr "Válasz"
 
 msgctxt "Verb (imperative)"
 msgid "Approve"
-msgstr ""
+msgstr "Elfogadás"
 
 msgid "Report abuse"
-msgstr ""
+msgstr "Zaklatás bejelentése"
 
 #, python-format
 msgid ""
 "Please <a href=\"%(login_url)s\">log in</a> or <a href=\"%(signup_url)s"
 "\">sign up</a> to leave a comment."
 msgstr ""
+"Kérjük, <a href=\"%(login_url)s\">jelentkezz be</a> vagy <a href="
+"\"%(signup_url)s\">regisztrálj</a>, hogy hozzászólást hagyhass."
 
 msgid ""
 "This comment is pending moderation. Please approve it or report an abuse "
 "using the buttons below."
 msgstr ""
+"Ez a hozzászólás moderálásra vár. Kérjük, hagyd jóvá, vagy jelents "
+"visszaélést az alábbi gombok segítségével."
 
 msgid "Thank you for your cooperation!"
-msgstr ""
+msgstr "Köszönjük együttműködésedet!"
 
 msgid "This comment was already moderated by you or an AstroBin moderator."
-msgstr ""
+msgstr "Ezt a hozzászólást már moderáltad te vagy egy AstroBin moderátor."
 
 msgid ""
 "Your comment is pending moderation and should be reviewed shortly by the "
@@ -92,31 +97,39 @@ msgid ""
 "take action within 24 hours, an AstroBin moderator will take over and review "
 "your comment on their behalf."
 msgstr ""
+"A hozzászólásod moderálásra vár, és hamarosan a szerző vagy a hozzászólásod "
+"tárgyát képező tartalom tulajdonosa fogja átnézni. Ha 24 órán belül nem "
+"intézkednek, az AstroBin egyik moderátora átveszi a feladatot, és az ő "
+"nevükben felülvizsgálja a hozzászólásod."
 
 msgid "This process is necessary to prevent spam on AstroBin."
 msgstr ""
+"Ez a művelet azért szükséges, hogy megakadályozzuk a spameket az AstroBin-en."
 
 msgid "Thank you for understanding!"
-msgstr ""
+msgstr "Köszönjük megértésed!"
 
 msgid "This comment is pending moderation and will be reviewed shortly."
-msgstr ""
+msgstr "Ez a hozzászólás moderálásra vár, és hamarosan felülvizsgálják."
 
 msgid "Submit"
-msgstr ""
+msgstr "Beküldés"
 
 msgid ""
 "You cannot undeleted this comment: a confirmed or pending abuse reports "
 "exists for it. If you believe that your comment was reported unfairly please "
 "contact us."
 msgstr ""
+"Ezt a hozzászólást nem lehet törölni: megerősített vagy folyamatban lévő "
+"visszaélési jelentés van róla. Ha úgy gondolod, hogy a hozzászólásodat "
+"igazságtalanul jelentették, kérjük, vedd fel velünk a kapcsolatot."
 
 msgid "You have reached your abuse report quota."
-msgstr ""
+msgstr "Elérted a visszaélés jelentésének limitjét."
 
 msgid ""
 "This item cannot be reported again because it was approved by a moderator."
-msgstr ""
+msgstr "Ezt az elemet nem lehet újra jelenteni, mert egy moderátor jóváhagyta."
 
 msgid "You may not report the same item more than once."
-msgstr ""
+msgstr "Ugyanazt az elemet többször is bejelentheted."
