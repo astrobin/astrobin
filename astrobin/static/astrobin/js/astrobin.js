@@ -840,11 +840,9 @@ astrobin_common = {
     },
 
     mark_all_notifications_as_read: function () {
-        var $rows = $('#notifications-modal tr:not(.' +
-            'no-new-notifications)'),
-            $count_badge = $('#notifications-count');
-        
-        var $btn = $('#mark-all-notifications-as-read');
+        const $rows = $('#notifications-modal tr:not(.no-new-notifications)'),
+            $count_badge = $('#notifications-count'),
+            $btn = $('#mark-all-notifications-as-read');
         
         $btn.addClass('running');
         $btn.attr('disabled', 'disabled');
@@ -854,8 +852,9 @@ astrobin_common = {
                 url: '/api/v2/notifications/notification/mark_all_as_read/',
                 type: 'put',
                 dataType: 'json',
+                cache: false,
+                timeout: 10000,
                 success: function () {
-                    $btn.removeClass('running');
                     $rows.remove();
 
                     if ($count_badge.length > 0) {
@@ -863,6 +862,21 @@ astrobin_common = {
                     }
 
                     resolve();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.toast({
+                        heading: 'Error',
+                        text: textStatus,
+                        showHideTransition: 'slide',
+                        allowToastClose: true,
+                        position: 'top-right',
+                        loader: false,
+                        hideAfter: false,
+                        icon: 'error'
+                    });
+                },
+                complete: function () {
+                    $btn.removeClass('running');
                 }
             });
         });
