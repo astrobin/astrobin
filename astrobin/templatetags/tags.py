@@ -397,10 +397,6 @@ def show_skyscraper_ads_on_page(context):
     if not show_ads(request.user, valid_subscription):
         return False
 
-    country = utils.get_client_country_code(request)
-    if country.lower() not in ('us', 'ca'):
-        return False
-
     is_anon = not context['request'].user.is_authenticated
     image_owner_is_ultimate = False
 
