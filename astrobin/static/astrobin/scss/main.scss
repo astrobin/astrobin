@@ -3324,6 +3324,10 @@ table#private-shared-folders tr:hover a.delete-folder {
 
 .user-page {
   .profile-meta {
+    .about-content {
+      word-break: break-word;
+    }
+
     .add-about-section {
       display: block;
       text-align: center;
