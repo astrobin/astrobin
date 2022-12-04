@@ -30,6 +30,7 @@ THUMBNAIL_ALIASES = {
             'size': (16536, 0),
             'watermark': True,
             'keep_icc_profile': True,
+            'quality_fallback': 95,
         },
         'real_anonymized': {
             'size': (16536, 0),
@@ -49,12 +50,14 @@ THUMBNAIL_ALIASES = {
             'crop': 'smart',
             'watermark': True,
             'keep_icc_profile': True,
+            'quality_fallback': 95,
         },
         'hd_anonymized': {
             'size': (1824, 0),
             'crop': 'smart',
             'watermark': False,
             'keep_icc_profile': True,
+            'quality_fallback': 95,
         },
         'hd_inverted': {
             'size': (1824, 0),
@@ -84,12 +87,14 @@ THUMBNAIL_ALIASES = {
             'crop': 'smart',
             'watermark': True,
             'keep_icc_profile': True,
+            'quality_fallback': 95,
         },
         'qhd_anonymized': {
             'size': (2560, 0),
             'crop': 'smart',
             'watermark': False,
             'keep_icc_profile': True,
+            'quality_fallback': 95,
         },
         'qhd_inverted': {
             'size': (2560, 0),
@@ -104,6 +109,7 @@ THUMBNAIL_ALIASES = {
             'watermark': True,
             'detail': True,
             'keep_icc_profile': True,
+            'quality_fallback': 95,
         },
         'qhd_sharpened_inverted': {
             'size': (2569, 0),
@@ -119,14 +125,14 @@ THUMBNAIL_ALIASES = {
             'crop': 'smart',
             'watermark': True,
             'keep_icc_profile': True,
-            'quality': 95
+            'quality_fallback': 95,
         },
         'regular_anonymized': {
             'size': (620, 0),
             'crop': 'smart',
             'watermark': False,
             'keep_icc_profile': True,
-            'quality': 95
+            'quality_fallback': 95,
         },
         'regular_inverted': {
             'size': (620, 0),
@@ -141,7 +147,7 @@ THUMBNAIL_ALIASES = {
             'watermark': True,
             'detail': True,
             'keep_icc_profile': True,
-            'quality': 95
+            'quality_fallback': 95,
         },
         'regular_sharpened_inverted': {
             'size': (620, 0),
@@ -157,14 +163,14 @@ THUMBNAIL_ALIASES = {
             'crop': 'smart',
             'watermark': True,
             'keep_icc_profile': True,
-            'quality': 95
+            'quality_fallback': 95,
         },
         'regular_large_anonymized': {
             'size': (744, 0),
             'crop': 'smart',
             'watermark': False,
             'keep_icc_profile': True,
-            'quality': 95
+            'quality_fallback': 95,
         },
         'regular_large_inverted': {
             'size': (744, 0),
