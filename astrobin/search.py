@@ -636,13 +636,13 @@ class AstroBinSearchForm(SearchForm):
 
     def filter_by_size(self, results):
         try:
-            min = int(self.cleaned_data.get("size_min")) * 1024 * 1024
+            min = int(self.cleaned_data.get("size_min")) * 1000 * 1000
             results = results.filter(size__gte=min)
         except TypeError:
             pass
 
         try:
-            max = int(self.cleaned_data.get("size_max")) * 1024 * 1024
+            max = int(self.cleaned_data.get("size_max")) * 1000 * 1000
             results = results.filter(size__lte=max)
         except TypeError:
             pass
