@@ -23,7 +23,7 @@ class IotdFeed(Feed):
         return "%d" % item.image.pk
 
     def item_title(self, item):
-        return item.image.title.encode('ascii', 'ignore').decode('ascii')
+        return item.image.title
 
     def item_description(self, item):
         return self.item_thumbnail_url(item)
@@ -34,9 +34,9 @@ class IotdFeed(Feed):
         })
 
     def item_author_name(self, item):
-        name = item.image.user.userprofile.get_display_name().encode('ascii', 'ignore').decode('ascii')
-        if name == '':
-            name = item.image.user.username.encode('ascii', 'ignore').decode('ascii')
+        name = item.image.user.userprofile.get_display_name()
+        if name == '' or name is None:
+            name = item.image.user.username
 
         return name
 
@@ -76,7 +76,7 @@ class IotdFeed(Feed):
             self.item_title(item),
             reverse('user_page', args=(item.image.user.username,)),
             self.item_author_name(item),
-            item.image.description.encode('ascii', 'ignore').decode('ascii') if item.image.description else ''
+            item.image.description if item.image.description else ''
         )
 
     def item_extra_kwargs(self, item):
