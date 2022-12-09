@@ -42,7 +42,10 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
         )
 
         for klass in equipment_classes:
-            data[klass[0]] = request.data.pop(klass[0])
+            try:
+                data[klass[0]] = request.data.pop(klass[0])
+            except KeyError:
+                data[klass[0]] = []
 
         response: Response = super().update(request, *args, **kwargs)
         instance = self.get_object()
