@@ -12,7 +12,7 @@ import simplejson
 from actstream.models import Action
 from annoying.functions import get_object_or_None
 from django.conf import settings
-from django.contrib import auth, messages
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -1943,8 +1943,6 @@ def user_profile_delete(request):
                 request.user.userprofile.deleted_reason,
                 request.user.userprofile.deleted_reason_other,
             ))
-
-            auth.logout(request)
 
             return render(request, 'user/profile/deleted.html', {})
     elif request.method == 'GET':
