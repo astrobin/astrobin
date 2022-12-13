@@ -92,17 +92,15 @@ def hitcount_cleanup():
     call_command("hitcount_cleanup")
 
 
-@shared_task(time_limit=60, acks_late=True)
+@shared_task(time_limit=600, acks_late=True)
 def contain_temporary_files_size():
-    subprocess.call(['scripts/contain_directory_size.sh', '/astrobin-temporary-files/files', '120'])
+    subprocess.call(['scripts/contain_directory_size.sh', '/astrobin-temporary-files/files', '10080'])
 
 
 """
 This task will delete all inactive accounts with bounced email
 addresses.
 """
-
-
 @shared_task(time_limit=60, acks_late=True)
 def delete_inactive_bounced_accounts():
     bounces = Bounce.objects.filter(
@@ -241,7 +239,7 @@ def prepare_download_data_archive(request_id):
     data_download_request = DataDownloadRequest.objects.get(id=request_id)
 
     try:
-        temp_zip = tempfile.NamedTemporaryFile()
+        temp_zip = tempfile.NamedTemporaryFile(dir="/astrobin-temporary-files/files")
         temp_csv = StringIO()  # type: StringIO
         archive = zipfile.ZipFile(temp_zip, 'w', zipfile.ZIP_DEFLATED, allowZip64=True)  # type: ZipFile
 
