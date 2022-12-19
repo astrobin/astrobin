@@ -1,8 +1,8 @@
 import csv
 import json
 import ntpath
+import os
 import subprocess
-import tempfile
 import uuid
 import zipfile
 from datetime import datetime, timedelta
@@ -239,7 +239,11 @@ def prepare_download_data_archive(request_id):
     data_download_request = DataDownloadRequest.objects.get(id=request_id)
 
     try:
-        temp_zip = tempfile.NamedTemporaryFile(dir="/astrobin-temporary-files/files")
+        temp_filename = os.path.join('/astrobin-temporary-files/files', os.urandom(12).hex())
+        # Ensure the file is created
+        open(temp_filename, "x").close()
+
+        temp_zip = open(temp_filename, 'r+b')
         temp_csv = StringIO()  # type: StringIO
         archive = zipfile.ZipFile(temp_zip, 'w', zipfile.ZIP_DEFLATED, allowZip64=True)  # type: ZipFile
 
@@ -286,7 +290,6 @@ def prepare_download_data_archive(request_id):
             'pixel_scale',
             'orientation',
             'field_radius',
-
         ])
 
         images = Image.objects_including_wip.filter(user=data_download_request.user)
@@ -459,6 +462,8 @@ def prepare_download_data_archive(request_id):
         data_download_request.status = "READY"
         data_download_request.file_size = sum([x.file_size for x in archive.infolist()])
         data_download_request.zip_file.save("", File(temp_zip))
+
+        temp_zip.close()
 
         logger.info("prepare_download_data_archive: completed for request %d" % request_id)
     except Exception as e:
