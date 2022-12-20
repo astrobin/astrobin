@@ -2,7 +2,7 @@
 -e git+https://github.com/astrobin/django-hitcount.git@3acf5bdb9728ca8c38cd792dd746114c9076ae88#egg=django_hitcount
 -e git+https://github.com/astrobin/django-notification.git@9293ab2880b1b0a13bcd0aec267d74c92aff1421#egg=django_notification
 -e git+https://github.com/astrobin/django-persistent-messages.git@bf1911aeb61941156457fbf2082b4cfe9d379493#egg=django_persistent_messages
--e git+https://github.com/astrobin/django-subscription.git@1fa52045b32c8c4d468e4f04d38995101171bd0d#egg=django_subscription
+-e git+https://github.com/astrobin/django-subscription.git@730b26090860316836bc1b2f1db175ab262db9bf#egg=django_subscription
 -e git+https://github.com/astrobin/django-threaded-messages.git@9966694e8c92f4814ca4635dffadef5fdf70d37b#egg=django_threaded_messages
 -e git+https://github.com/astrobin/easy-thumbnails.git@814bd0215c03d68febc640101a101918322841c7#egg=easy-thumbnails
 -e git+https://github.com/nickhargreaves/django-bootstrap-toolkit.git@edbfafbd01705aed0580205a81323d1545e4d733#egg=django_bootstrap_toolkit
@@ -70,7 +70,7 @@ django-maintenancemode==0.11.7
 django-markup-deprecated==0.0.4
 django-model-utils==4.1.1
 django-multidb-router==0.10
-django-paypal==0.5.0
+django-paypal==2.0
 django-pipeline==2.0.8
 django-precise-bbcode==1.2.13
 django-recaptcha==2.0.6
