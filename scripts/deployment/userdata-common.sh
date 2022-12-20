@@ -64,3 +64,4 @@ done
 
 mkdir -p ${ASTROBIN_TEMPORARY_FILES}/files
 chown ${USER}:${GROUP} ${ASTROBIN_TEMPORARY_FILES}/files
+chmod 777 ${ASTROBIN_TEMPORARY_FILES}/files
