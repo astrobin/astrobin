@@ -12,6 +12,7 @@ from django.http import JsonResponse, HttpResponseBadRequest, HttpResponse, Http
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 from paypal.standard.ipn.models import PayPalIPN
+from paypal.standard.models import ST_PP_COMPLETED
 from subscription.models import Subscription, handle_payment_was_successful
 
 from astrobin_apps_payments.services.pricing_service import PricingService
@@ -140,7 +141,8 @@ def stripe_webhook(request):
             custom=user_pk,
             item_number=subscription.pk,
             mc_gross=subscription.price,
-            mc_currency=subscription.currency
+            mc_currency=subscription.currency,
+            payment_status=ST_PP_COMPLETED,
         )
 
         handle_payment_was_successful(payment)
