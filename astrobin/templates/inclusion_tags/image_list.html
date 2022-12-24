@@ -11,27 +11,27 @@
         <thead>
             <tr>
                 {% if requested_user %}
-                    <th class="user hidden-phone">{% trans "User" %}</th>
+                    <th class="user hidden-phone" data-sortable-type="alpha">{% trans "User" %}</th>
                 {% endif %}
 
-                <th class="title">{% trans "Title" %}</th>
+                <th class="title" data-sortable-type="alpha">{% trans "Title" %}</th>
 
-                <th class="published" data-sorted="true" data-sorted-direction="descending">
+                <th class="published" data-sortable-type="numeric" data-sorted="true" data-sorted-direction="descending">
                     <i class="icon-unlock" title="{% trans 'Published' %}" rel="tooltip"></i>
                 </th>
 
-                <th class="views hidden-phone">
+                <th class="views hidden-phone" data-sortable-type="numeric">
                     <i class="icon-eye-open" title="{% trans 'Views' %}" rel="tooltip"></i>
                 </th>
 
-                <th class="likes hidden-phone">
+                <th class="likes hidden-phone" data-sortable-type="numeric">
                     <i class="icon-thumbs-up"
                        title="{% trans 'Likes' context "Noun, e.g. 'This element has 10 likes'" %}"
                        rel="tooltip">
                     </i>
                 </th>
 
-                <th class="bookmarks hidden-phone">
+                <th class="bookmarks hidden-phone" data-sortable-type="numeric">
                     <i class="icon-bookmark"
                        title="{% trans 'Bookmarks' context "Noun, e.g. 'This element has 10 bookmarks'" %}"
                        rel="tooltip">
@@ -39,7 +39,7 @@
                     </i>
                 </th>
 
-                <th class="comments hidden-phone">
+                <th class="comments hidden-phone" data-sortable-type="numeric">
                     <i class="icon-comments-alt"
                        title="{% trans 'Comments' context "Noun, e.g. 'This element has 10 comments'" %}"
                        rel="tooltip">
@@ -51,16 +51,16 @@
             {% for image in image_list %}
                 <tr>
                     {% if requested_user %}
-                        <td class="user hidden-phone">
+                        <td class="user hidden-phone" data-value="image.user.userprofile.display_name">
                             {% astrobin_username image.user %}
                         </td>
                     {% endif %}
 
-                    <td class="title">
+                    <td class="title" data-value="{{ image.title|escape|default:_("(no title)") }}">
                         <a href="{% get_image_url image %} ">{{image.title|escape|default:_("(no title)")}}</a>
                     </td>
 
-                    <td class="published" data-value="{{ image.published|date:"U" }}">
+                    <td class="published" data-value="{{ image.published|date:"U"|default:0 }}">
                         {% if image.published %}
                             {% timestamp image.published %}
                         {% endif %}
