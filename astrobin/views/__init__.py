@@ -1195,6 +1195,11 @@ def user_page(request, username):
     else:
         qs, menu, active = UserService(user).sort_gallery_by(qs, subsection, active, klass)
 
+    view = request.GET.get('view', 'default')
+
+    if view == 'table':
+        qs = qs.order_by('-published')
+
     # Calculate some stats
 
     followers = ToggleProperty.objects.toggleproperties_for_object("follow", user).count()
@@ -1211,7 +1216,7 @@ def user_page(request, username):
         'following': following,
         'image_list': qs,
         'sort': request.GET.get('sort'),
-        'view': request.GET.get('view', 'default'),
+        'view': view,
         'requested_user': user,
         'profile': profile,
         'section': section,
