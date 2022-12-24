@@ -388,7 +388,7 @@
             if (contentLength < {{ max_file_size_before_warning }}) {
                 $(".real-full-resolution-link").attr("style", "display: block !important;");
 
-                {% if request|show_click_and_drag_zoom %}
+                {% if request|show_click_and_drag_zoom and request.user|can_see_real_resolution:image %}
                     if(showClickAndDragZoom({{ image.w }})) {
                         $('.loading-zoom').removeClass('hidden');
                         $('#full-size-image').zoom({
