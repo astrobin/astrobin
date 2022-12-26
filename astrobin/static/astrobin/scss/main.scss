@@ -1918,7 +1918,11 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
 }
 
 body.full {
-  .real-full-resolution-link,
+  .real-full-resolution-link .ld {
+    margin-bottom: -2px;
+    margin-left: 0.5rem;
+  }
+
   .warning-full-resolution-link {
     display: none !important;
   }
