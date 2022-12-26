@@ -136,7 +136,15 @@
                                 <span class="hidden-phone hidden-tablet">{% trans "Fit to window" %}</span>
                             </a>
                         {% elif request.user|can_see_real_resolution:image %}
-                            <a class="btn btn-primary disabled navbar-btn real-full-resolution-link"
+                            <a class="btn btn-primary disabled navbar-btn fake-full-resolution-link" href="#">
+                                <i class="icon-fullscreen"></i>
+                                <span class="hidden-phone hidden-tablet">
+                                    {% trans "Full resolution" %}
+                                    <span class="zoom-image-content-length"></span>
+                                </span>
+                                {% button_loading_indicator %}
+                            </a>
+                            <a class="btn btn-primary navbar-btn real-full-resolution-link"
                                href="{% get_image_url image revision_label 'full' %}{% query_string "mod=mod,real=''" "" %}"
                             >
                                 <i class="icon-fullscreen"></i>
@@ -144,7 +152,6 @@
                                     {% trans "Full resolution" %}
                                     <span class="zoom-image-content-length"></span>
                                 </span>
-                                {% button_loading_indicator %}
                             </a>
                             <a class="btn btn-primary navbar-btn warning-full-resolution-link"
                                data-toggle="modal"
@@ -387,9 +394,10 @@
             const url = result.url;
             const contentLength = result.contentLength;
 
+            $(".fake-full-resolution-link").remove();
+
             if (contentLength < {{ max_file_size_before_warning }}) {
-                $(".real-full-resolution-link").removeClass('disabled');
-                $(".real-full-resolution-link .ld").remove();
+                $(".real-full-resolution-link").attr("style", "display: block !important;");
 
                 {% if request|show_click_and_drag_zoom and request.user|can_see_real_resolution:image %}
                     if(showClickAndDragZoom({{ image.w }})) {
