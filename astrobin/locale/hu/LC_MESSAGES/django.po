@@ -1,22 +1,20 @@
-# ASTROBIN LOCALIZATION TEMPLATE
-# Copyright (C) 2010-2012 Salvatore Iovene
-# This file is distributed under the same license as the AstroBin package.
-# Salvatore Iovene <salvatore@iovene.com>, 2011
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: AstroBin 1.0\n"
+"Project-Id-Version: AstroBin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-08 13:04+0000\n"
-"PO-Revision-Date: 2022-10-01 19:18+0200\n"
-"Last-Translator: Salvatore Iovene <salvatore@iovene.com>\n"
-"Language-Team: Salvatore Iovene <salvatore@iovene.com>\n"
-"Language: hu_HU\n"
+"POT-Creation-Date: 2022-12-28 16:47+0000\n"
+"PO-Revision-Date: 2022-12-20 21:46+0100\n"
+"Last-Translator: Salvatore Iovene\n"
+"Language-Team: Hungarian\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Loco https://localise.biz\n"
+"X-Loco-Source-Locale: en\n"
+"X-Loco-Project-Id: 108427\n"
+"X-Loco-Api-Version: 1.0.27 20221112-1\n"
 
 msgid "United Kingdom"
 msgstr "Egyesült Királyság"
@@ -2954,7 +2952,7 @@ msgid "Error!"
 msgstr "Hiba!"
 
 msgid "About"
-msgstr "Rólam"
+msgstr "Rólunk"
 
 msgid ""
 "AstroBin is an image hosting platform and social network for amateur "
@@ -3583,7 +3581,7 @@ msgid "Return to image"
 msgstr "Vissza a képhez"
 
 msgid "Celestial hemisphere"
-msgstr ""
+msgstr "Égbolt"
 
 msgid "Northern"
 msgstr "Északi"
@@ -3599,7 +3597,7 @@ msgid "And %(count)s more."
 msgstr "És még %(count)s."
 
 msgid "Remove me"
-msgstr ""
+msgstr "Távolítsanak el engem"
 
 msgid "Acquired at"
 msgstr "Gyűjtve"
@@ -3731,10 +3729,10 @@ msgid "Download original file"
 msgstr "Eredeti fájl letöltése"
 
 msgid "Collaborators"
-msgstr ""
+msgstr "Hozzájárulók"
 
 msgid "Photographer"
-msgstr ""
+msgstr "Fotósok"
 
 msgid "chosen by"
 msgstr "kiválasztva általa:"
@@ -4116,10 +4114,11 @@ msgstr ""
 "értesíti a követőidet."
 
 msgid "Remove yourself as a collaborator"
-msgstr ""
+msgstr "Távolítsd el magad a hozzájárulók közül"
 
 msgid "Are you sure you want to be removed as a collaborator to this image?"
 msgstr ""
+"Biztos vagy benne, hogy el akarod magad távolítani e kép hozzájárulójaként?"
 
 msgid ""
 "Sorry, you cannot send images from your Staging Area to a group. You need to "
@@ -4583,6 +4582,8 @@ msgid ""
 "Interested in <strong>%(name)s</strong>? Our sponsor <strong>%(retailer)s</"
 "strong> sells this product!"
 msgstr ""
+"Érdekel e <strong>%(name)s</strong> nevű termék? A szponzorunk, <strong>"
+"%(retailer)s</strong> árulja ezt a terméket!"
 
 msgid "Shop now"
 msgstr "Vásárlás most"
@@ -4591,6 +4592,8 @@ msgstr "Vásárlás most"
 msgid ""
 "Interested in <strong>%(name)s</strong>? Our sponsors sells this product!"
 msgstr ""
+"Érdekel e <strong>%(name)s</strong> nevű termék? A szponzorunk árulja ezt a "
+"terméket!"
 
 #, python-format
 msgid ""
@@ -4743,12 +4746,14 @@ msgstr "Nincsenek képek a spam listában."
 
 #, python-format
 msgid "<strong>%(user)s</strong> added you as a collaborator to an image"
-msgstr ""
+msgstr "<strong>%(user)s</strong> hozzáadott téged egy kép hozzájárulójaként"
 
 msgid ""
 "If you want to remove yourself, click on the \"Remove me\" button underneath "
 "your avatar."
 msgstr ""
+"Ha el akarod távolítani magad, nyomj a \"Távolítsanak el engem\" gombra az "
+"avatárod alatt."
 
 #, python-format
 msgid "%(user)s added you as a collaborator to an image"
@@ -6234,7 +6239,7 @@ msgid "Posts"
 msgstr "Bejegyzések"
 
 msgid "Last posts"
-msgstr "Utolsó bejegyzéseka"
+msgstr "Utolsó bejegyzések"
 
 #, python-format
 msgid ""
@@ -7197,7 +7202,7 @@ msgid "Camera type"
 msgstr "Kamera típusa"
 
 msgid "Camera pixel size (μm)"
-msgstr ""
+msgstr "Kamera pixelmérete (μm)"
 
 msgid "Field radius (deg)"
 msgstr "Terület sugara (fok)"
@@ -7216,19 +7221,19 @@ msgid "Telescope type"
 msgstr "Távcső típusa"
 
 msgid "Telescope diameter (mm)"
-msgstr ""
+msgstr "Távcső átmérője (mm)"
 
 msgid "Telescope weight (kg)"
-msgstr ""
+msgstr "Távcső súlya (kg)"
 
 msgid "Mount weight (kg)"
-msgstr ""
+msgstr "Állvány súlya (kg)"
 
 msgid "Mount max. payload (kg)"
-msgstr ""
+msgstr "Állvány max. teherbírása (kg)"
 
 msgid "Telescope/lens focal length (mm)"
-msgstr ""
+msgstr "Távcső/lencse fókusztávolsága (mm)"
 
 msgid "Integration time (hours)"
 msgstr "Integrációs idő (óra)"
@@ -7243,7 +7248,7 @@ msgid "Size (MB)"
 msgstr "Méret (MB)"
 
 msgid "Acquired with a modified camera"
-msgstr ""
+msgstr "Átalakított kamerával készítve"
 
 msgid ""
 "However, you can still perform a similar search using the free text search "
@@ -7323,7 +7328,7 @@ msgid "Astrometry"
 msgstr "Asztrometria"
 
 msgid "No"
-msgstr ""
+msgstr "Nem"
 
 msgid "In which data field should we look for your search terms?"
 msgstr "Melyik adatmezőben keressünk a keresési feltételek alapján?"
@@ -7535,10 +7540,10 @@ msgstr ""
 "generálva."
 
 msgid "You are not a collaborator to this image."
-msgstr ""
+msgstr "Nem vagy hozzájáruló ennél a képnél."
 
 msgid "You have been removed as a collaborator to this image."
-msgstr ""
+msgstr "El lettél távolítva e kép hozzájárulójaként."
 
 #, python-format
 msgid ""
@@ -7598,24 +7603,244 @@ msgstr "Referral kód (nem kötelező)"
 msgid "Sorry, this username already exists with a different capitalization."
 msgstr "Sajnáljuk, ez a felhasználónév már létezik más írásmóddal."
 
-#~ msgid "Hemisphere"
-#~ msgstr "Félgömb"
+#~ msgid "Original image"
+#~ msgstr "Eredeti kép"
 
-#~ msgid "Shop %(name)s at AstroBin's partners"
-#~ msgstr "Vedd meg a(z) %(name)s-t az AstroBin partnereinél"
+#~ msgid "Timezone"
+#~ msgstr "Időzóna"
+
+#~ msgid ""
+#~ "By selecting this, you will see all the dates on AstroBin in your "
+#~ "timezone."
+#~ msgstr ""
+#~ "Ennek kiválasztásával az összes dátumot látni fogod az AstroBinen a te "
+#~ "időzónádban."
+
+#~ msgid "Upload time"
+#~ msgstr "Feltöltés ideje"
+
+#~ msgid "Acquisition time"
+#~ msgstr "Képkészítési idő"
+
+#~ msgid "Romanian / Moldavian / Moldovan"
+#~ msgstr "Román / Moldáviai / Moldovai"
+
+#~ msgid "Message sent"
+#~ msgstr "Üzenet elküldve"
+
+#~ msgid ""
+#~ "You will remove your shadow-ban on this user, and their comments, "
+#~ "messages, etc, will appear again on your content."
+#~ msgstr ""
+#~ "A felhasználóra vonatkozó shadow-bant feloldod, és a hozzászólásai, "
+#~ "üzenetei stb. ismét megjelennek a tartalmaidon."
+
+#~ msgid "The Big Wall"
+#~ msgstr "A Nagy Fal"
+
+#~ msgid ""
+#~ "Obviously, the user who created this mount in the database, has it on a "
+#~ "fixed pier. But this doesn't mean that SkyWatcher sells a NEQ-6 that you "
+#~ "can only buy on a pier! \"on a fixed pier\" should be removed."
+#~ msgstr ""
+#~ "Nyilvánvaló, hogy a felhasználó, aki ezt a mechanikát létrehozta az "
+#~ "adatbázisban, egy fix pilléren helyezte el. De ez nem jelenti azt, hogy a "
+#~ "SkyWatcher olyan NEQ-6-ot árul, amit csak pilléren lehet megvenni! A "
+#~ "\"fix pilléren\" szövegrészt el kell távolítani."
+
+#~ msgid "Already fixed:"
+#~ msgstr "Már javítva:"
+
+#~ msgid "Remaining:"
+#~ msgstr "Maradt:"
+
+#~ msgid "Fix"
+#~ msgstr "Fix"
+
+#~ msgid "Mark as good"
+#~ msgstr "Megjelölés jóként"
+
+#~ msgid "Skip"
+#~ msgstr "Átugrás"
+
+#~ msgid "Enough for now"
+#~ msgstr "Egyelőre elég"
+
+#~ msgid "Thanks!"
+#~ msgstr "Köszönjük!"
+
+#~ msgid ""
+#~ "Your contribute was very important, and the whole AstroBin community is "
+#~ "grateful."
+#~ msgstr ""
+#~ "A hozzájárulásod nagyon fontos, és az egész AstroBin közösség hálás lehet "
+#~ "neked."
+
+#~ msgid "Hemisphere"
+#~ msgstr "Féltek"
+
+#~ msgid "Sponsored brands"
+#~ msgstr "Szponzorált márkák"
+
+#~ msgid "Sponsored items"
+#~ msgstr "Szponzorált termékek"
 
 #~ msgid "Author"
 #~ msgstr "Szerző"
 
-#~ msgid ""
-#~ "Please support AstroBin by shopping for this item at one of our partners!"
+#~ msgid "Image size"
+#~ msgstr "Képméret"
+
+#~ msgid "Full"
+#~ msgstr "Teljes"
+
+#~ msgid "Real"
+#~ msgstr "Igazi"
+
+#~ msgid "Oh no!"
+#~ msgstr "Ó ne!"
+
+#~ msgid "Image uploaded"
+#~ msgstr "Kép feltöltve"
+
+#~ msgid "Revision uploaded"
+#~ msgstr "Átdolgozás feltöltve"
+
+#~ msgid "link"
+#~ msgstr "link"
+
+#~ msgid "Messages"
+#~ msgstr "Üzenetek"
+
+#~ msgid "Back"
+#~ msgstr "Vissza"
+
+#~ msgid "<a href=\"%(url)s\"><strong>%(user)s</strong> likes your image!</a>"
 #~ msgstr ""
-#~ "Kérjük, támogasd az AstroBin-t azzal, hogy ezt a cikket egyik "
-#~ "partnerünknél veszed meg!"
+#~ "<a href=\"%(url)s\"><strong>%(user)s</strong> kedveli a képedet!</a>"
+
+#~ msgid "Edit gear item"
+#~ msgstr "Felszerelési tárgy szerkesztése"
+
+#~ msgid "Please note!"
+#~ msgstr "Kérjük, vedd figyelembe!"
+
+#~ msgid "Add gear item"
+#~ msgstr "Felszerelési tárgy hozzáadása"
+
+#~ msgid "Corrupted"
+#~ msgstr "Korruptált"
+
+#~ msgid "Recovered"
+#~ msgstr "Visszaállított"
+
+#~ msgid "Please confirm your recovered images"
+#~ msgstr "Kérjük, erősítsd meg a visszaállított képeket"
 
 #~ msgid ""
-#~ "Please support AstroBin by shopping <strong>%(brand)s</strong> at one of "
-#~ "our partners!"
+#~ "Following the <a href=\"%(url)s\" target=\"_blank\">data loss incident in "
+#~ "February 2020</a>, these images <strong>were automatically recovered</"
+#~ "strong>."
 #~ msgstr ""
-#~ "Kérjük, támogasd az AstroBin-t azzal, hogy a(z) <strong>%(brand)s</"
-#~ "strong> nevű terméket egyik partnerünknél veszed meg!"
+#~ "A <a href=\"%(url)s\" target=\"_blank\">2020 februári adatincidenst "
+#~ "követően</a> ezek a képek <strong>automatikusan vissza lettek állítva</"
+#~ "strong>."
+
+#~ msgid "Now you need to <strong>manually confirm or reject</strong> them."
+#~ msgstr "Most <strong>el kell fogadnod vagy utasítanod</strong> őket."
+
+#~ msgid "Instructions"
+#~ msgstr "Utasítások"
+
+#~ msgid ""
+#~ "When you are ready, click on the \"Submit selected\" button to confirm "
+#~ "your selection."
+#~ msgstr ""
+#~ "Ha készen állsz, kattints a \"Beküldés kiválasztva\" gombra a kiválasztás "
+#~ "megerősítéséhez."
+
+#~ msgid ""
+#~ "You will return to this page, and the images for which you didn't make a "
+#~ "selection will still be here."
+#~ msgstr ""
+#~ "Visszatérsz erre az oldalra, és azok a képek, amelyeknél nem "
+#~ "választottál, még mindig itt lesznek."
+
+#~ msgid ""
+#~ "The recovered images will return to your gallery (public or staging, "
+#~ "depending on where they were before the data loss)."
+#~ msgstr ""
+#~ "A visszaállított képek visszakerülnek a galériádba (a nyilvános vagy az "
+#~ "előkészítési galériába, attól függően, hogy hol voltak az adatvesztés "
+#~ "előtt)."
+
+#~ msgid "Original upload"
+#~ msgstr "Eredeti feltöltés"
+
+#~ msgid "Staging area"
+#~ msgstr "Előkészítési Terület"
+
+#~ msgid "Recover all"
+#~ msgstr "Minden visszaállítása"
+
+#~ msgid "Delete all"
+#~ msgstr "Minden törlése"
+
+#~ msgid "Reset"
+#~ msgstr "Visszaállítás"
+
+#~ msgid "Submit selected"
+#~ msgstr "Beküldés kiválasztva"
+
+#~ msgid "There are no images to recover."
+#~ msgstr "Nincsenek visszaállítható képek"
+
+#~ msgid "Comments & forums"
+#~ msgstr "Kommentek és fórumok"
+
+#~ msgid "No date specified"
+#~ msgstr "Nincs dátum megadva"
+
+#~ msgid "No imaging telescopes or lenses, or no imaging cameras specified"
+#~ msgstr "Nincsenek távcsövek, lencsék, vagy képkészítő kamerák megadva"
+
+#~ msgid "Gear images"
+#~ msgstr "Felszerelés képek"
+
+#~ msgid "No subjects specified"
+#~ msgstr "Nincsenek tárgyak megadva"
+
+#~ msgid "No acquisition details specified"
+#~ msgstr "Nincsenek képkészítési részletek megadva"
+
+#~ msgid "Last login"
+#~ msgstr "Legutóbbi bejelentkezés"
+
+#~ msgid "Total integration time"
+#~ msgstr "Teljes integrációs idő"
+
+#~ msgid "hours"
+#~ msgstr "óra"
+
+#~ msgid "Average integration time"
+#~ msgstr "Átlag integrációs idő"
+
+#~ msgid "Accessory"
+#~ msgstr "Kiegészítők"
+
+#~ msgid "Publication time"
+#~ msgstr "Közzététel ideje"
+
+#~ msgid ""
+#~ "<a href=\"%(user_url)s\">%(user)s</a> replied in topic to which you are "
+#~ "subscribed."
+#~ msgstr ""
+#~ "<a href=\"%(user_url)s\">%(user)s</a> válaszolt egy témában, amire fel "
+#~ "vagy iratkozva."
+
+#~ msgid "Last seen online"
+#~ msgstr "Utoljára online"
+
+#~ msgid "<a href=\"%(user_url)s\">%(user)s</a> replied to your comment."
+#~ msgstr ""
+#~ "<a href=\"%(user_url)s\">%(user)s</a> válaszolt egy hozzászólásodra."
