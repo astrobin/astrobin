@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.translation import gettext_lazy
+from django.utils.translation import pgettext, gettext_lazy
 
 from astrobin_apps_equipment.models.camera_base_model import CameraBaseModel, CameraType
 
@@ -15,7 +15,7 @@ class Camera(CameraBaseModel):
         base = super().__str__()
 
         if self.type == CameraType.DSLR_MIRRORLESS:
-            modified = gettext_lazy('modified')
+            modified = pgettext("Pertaining to cameras, e.g. a modified Canon", "modified")
             cooled = gettext_lazy('cooled')
 
             if self.modified and self.cooled:
