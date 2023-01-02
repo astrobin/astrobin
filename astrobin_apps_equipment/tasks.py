@@ -11,7 +11,7 @@ from astrobin.services.gear_service import GearService
 from astrobin_apps_equipment.models import (
     Accessory, AccessoryEditProposal, Camera, CameraEditProposal, Filter, FilterEditProposal, Mount,
     MountEditProposal,
-    Sensor, Software, SoftwareEditProposal, Telescope,
+    Sensor, SensorEditProposal, Software, SoftwareEditProposal, Telescope,
     TelescopeEditProposal,
 )
 from astrobin_apps_equipment.models.equipment_item_group import EquipmentItemKlass, EquipmentItemUsageType
@@ -24,7 +24,7 @@ log = logging.getLogger('apps')
 def expire_equipment_locks():
     expiration_minutes = 30
 
-    for Model in (Telescope, Camera, Mount, Filter, Accessory, Software):
+    for Model in (Telescope, Camera, Sensor, Mount, Filter, Accessory, Software):
         Model.objects.filter(
             reviewer_lock__isnull=False,
             reviewer_lock_timestamp__lt=timezone.now() - timedelta(minutes=expiration_minutes)
@@ -43,6 +43,7 @@ def expire_equipment_locks():
     for Model in (
         TelescopeEditProposal,
         CameraEditProposal,
+        SensorEditProposal,
         MountEditProposal,
         FilterEditProposal,
         AccessoryEditProposal,
