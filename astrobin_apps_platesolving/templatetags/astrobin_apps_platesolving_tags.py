@@ -1,5 +1,6 @@
 from typing import List
 
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.template import Library
 from django.utils.translation import ugettext_lazy as _
@@ -76,3 +77,14 @@ def humanize_solution_status(solution: Solution) -> str:
 @register.filter
 def duplicate_objects_in_field_by_catalog_space(solution: Solution) -> List[str]:
     return SolutionService(solution).duplicate_objects_in_field_by_catalog_space()
+
+@register.filter
+def show_pixinsight_log(user: User, solution: Solution) -> bool:
+    content_object = solution.content_object
+
+    if hasattr(content_object, 'user'):
+        return user == content_object.user
+    elif hasattr(content_object, 'image') and hasattr(content_object.image, 'user'):
+        return user == content_object.image.user
+
+    return False
