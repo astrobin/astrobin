@@ -112,7 +112,7 @@ def delete_inactive_bounced_accounts():
     bounces.delete()
 
 
-@shared_task(time_limit=120, acks_late=True)
+@shared_task(time_limit=300, acks_late=True)
 def retrieve_thumbnail(pk, alias, revision_label, thumbnail_settings):
     from astrobin.models import Image
 
