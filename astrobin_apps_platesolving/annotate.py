@@ -16,7 +16,7 @@ log = logging.getLogger('apps')
 class Annotator:
     def __init__(self, solution):
         self.solution = solution
-        self.resampling_factor = solution.content_object.w / float(settings.THUMBNAIL_ALIASES['']['hd']['size'][0])
+        self.resampling_factor = 2 #solution.content_object.w / float(settings.THUMBNAIL_ALIASES['']['hd']['size'][0])
         self.line_thickness = 2 * int(round(self.resampling_factor))
         self.solver = Solver()
 
@@ -165,7 +165,7 @@ class Annotator:
         w, h = self.solution.content_object.w, self.solution.content_object.h
         if w:
             try:
-                base = Image.open(get_from_storage(self.solution.content_object, 'real')).convert('RGBA')
+                base = Image.open(get_from_storage(self.solution.content_object, 'hd')).convert('RGBA')
             except ThumbnailNotReadyException as e:
                 log.warning("annotate.py: ThumbnailNotReadyException when trying to open the image: %s" % str(e))
                 return None
@@ -173,7 +173,7 @@ class Annotator:
                 log.warning("annotate.py: IOError when trying to open the image: %s" % str(e))
                 return None
 
-            if self.resampling_factor != 1:
+            if self.resampling_factor < 1:
                 base = base.resize(
                     (int(round(w * self.resampling_factor)),
                      int(round(h * self.resampling_factor))),
