@@ -8,7 +8,7 @@ from astrobin.api2.serializers.focal_reducer_serializer import FocalReducerSeria
 from astrobin.api2.serializers.mount_serializer import MountSerializer
 from astrobin.api2.serializers.software_serializer import SoftwareSerializer
 from astrobin.api2.serializers.telescope_serializer import TelescopeSerializer
-from astrobin.models import Image
+from astrobin.models import DeepSky_Acquisition, Image, SolarSystem_Acquisition
 from astrobin_apps_equipment.api.serializers.accessory_serializer import AccessorySerializer as AccessorySerializer2
 from astrobin_apps_equipment.api.serializers.camera_serializer import CameraSerializer as CameraSerializer2
 from astrobin_apps_equipment.api.serializers.filter_serializer import FilterSerializer as FilterSerializer2
@@ -16,6 +16,8 @@ from astrobin_apps_equipment.api.serializers.mount_serializer import MountSerial
 from astrobin_apps_equipment.api.serializers.software_serializer import SoftwareSerializer as SoftwareSerializer2
 from astrobin_apps_equipment.api.serializers.telescope_serializer import TelescopeSerializer as TelescopeSerializer2
 from astrobin_apps_images.api.fields import KeyValueTagsSerializerField
+from astrobin_apps_images.api.serializers.deep_sky_acquisition_serializer import DeepSkyAcquisitionSerializer
+from astrobin_apps_images.api.serializers.solar_system_acquisition_serializer import SolarSystemAcquisitionSerializer
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -45,6 +47,9 @@ class ImageSerializer(serializers.ModelSerializer):
     accessories_2 = AccessorySerializer2(many=True, required=False)
     software_2 = SoftwareSerializer2(many=True, required=False)
 
+    deep_sky_acquisitions = DeepSkyAcquisitionSerializer(many=True, required=False, read_only=True)
+    solar_system_acquisitions = SolarSystemAcquisitionSerializer(many=True, required=False, read_only=True)
+
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user
         return super().create(validated_data)
@@ -59,7 +64,13 @@ class ImageSerializer(serializers.ModelSerializer):
                     'revision': 'final',
                     'url': instance.thumbnail(alias, None, sync=True)
                 } for alias in ('gallery', 'story', 'regular', 'hd', 'qhd')
-            ]
+            ],
+            'deep_sky_acquisitions': DeepSkyAcquisitionSerializer(
+                DeepSky_Acquisition.objects.filter(image=instance), many=True
+            ).data,
+            'solar_system_acquisitions': SolarSystemAcquisitionSerializer(
+                SolarSystem_Acquisition.objects.filter(image=instance), many=True
+            ).data,
         })
         return representation
 
@@ -105,6 +116,8 @@ class ImageSerializer(serializers.ModelSerializer):
             'link',
             'link_to_fits',
             'acquisition_type',
+            'deep_sky_acquisitions',
+            'solar_system_acquisitions',
             'subject_type',
             'solar_system_main_subject',
             'data_source',
