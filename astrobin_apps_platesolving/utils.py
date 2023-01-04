@@ -59,12 +59,4 @@ def get_solution(object_id, content_type_id):
 
 
 def corrected_pixscale(solution, pixscale):
-    # type: (Solution, float) -> float
-    if solution.content_object:
-        w = solution.content_object.w  # type: int
-        if w and pixscale:
-            hd_w = min(w, settings.THUMBNAIL_ALIASES['']['hd']['size'][0]) # type: int
-            ratio = hd_w / float(w)
-            return float(pixscale) * ratio
-        return pixscale
     return pixscale

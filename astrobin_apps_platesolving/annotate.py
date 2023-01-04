@@ -16,7 +16,7 @@ log = logging.getLogger('apps')
 class Annotator:
     def __init__(self, solution):
         self.solution = solution
-        self.resampling_factor = 2.0
+        self.resampling_factor = solution.content_object.w / float(settings.THUMBNAIL_ALIASES['']['hd']['size'][0])
         self.line_thickness = 2 * int(round(self.resampling_factor))
         self.solver = Solver()
 
@@ -156,7 +156,6 @@ class Annotator:
         if self.solution.annotations is None:
             return None
 
-        annotationsObj = None
         try:
             annotationsObj = simplejson.loads(self.solution.annotations)['annotations']
         except TypeError as e:
@@ -165,16 +164,8 @@ class Annotator:
 
         w, h = self.solution.content_object.w, self.solution.content_object.h
         if w:
-            hd_w = settings.THUMBNAIL_ALIASES['']['hd']['size'][0]
-            hd_h = int(round(h * hd_w / float(w)))
-            if hd_w > w:
-                hd_w = w
-                hd_h = h
-
             try:
-                base = Image.open(
-                    get_from_storage(self.solution.content_object, 'hd')
-                ).convert('RGBA')
+                base = Image.open(get_from_storage(self.solution.content_object, 'real')).convert('RGBA')
             except ThumbnailNotReadyException as e:
                 log.warning("annotate.py: ThumbnailNotReadyException when trying to open the image: %s" % str(e))
                 return None
@@ -184,8 +175,8 @@ class Annotator:
 
             if self.resampling_factor != 1:
                 base = base.resize(
-                    (int(round(hd_w * self.resampling_factor)),
-                     int(round(hd_h * self.resampling_factor))),
+                    (int(round(w * self.resampling_factor)),
+                     int(round(h * self.resampling_factor))),
                     Image.ANTIALIAS)
 
             overlay = Image.new('RGBA', base.size, (255, 255, 255, 0))
@@ -195,7 +186,7 @@ class Annotator:
 
             image_io = BytesIO()
             image = Image.alpha_composite(base, overlay)
-            image = image.resize((hd_w, hd_h), Image.ANTIALIAS)
+            image = image.resize((w, h), Image.ANTIALIAS)
             image = image.convert('RGB')
             image.save(image_io, 'JPEG', quality=90, icc_profile=base.info.get('icc_profile'))
 
