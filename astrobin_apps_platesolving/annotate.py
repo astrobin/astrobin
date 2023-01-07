@@ -16,8 +16,8 @@ log = logging.getLogger('apps')
 class Annotator:
     def __init__(self, solution):
         self.solution = solution
-        self.resampling_factor = 2 #solution.content_object.w / float(settings.THUMBNAIL_ALIASES['']['hd']['size'][0])
-        self.line_thickness = 2 * int(round(self.resampling_factor))
+        self.resampling_factor = settings.THUMBNAIL_ALIASES['']['hd']['size'][0] / float(solution.content_object.w)
+        self.line_thickness = 2
         self.solver = Solver()
 
     def drawAnnotations(self, draw, annotations):
@@ -26,15 +26,15 @@ class Annotator:
 
             radius = annotation['radius']
             if radius < 10 * self.resampling_factor:
-                size = 16
+                size = 32
             elif radius < 50 * self.resampling_factor:
-                size = 30
+                size = 60
             elif radius < 100 * self.resampling_factor:
-                size = 44
+                size = 88
             else:
-                size = 58
+                size = 116
 
-            if annotation['type'] in [ 'bright', 'hd']:
+            if annotation['type'] in ['bright', 'hd']:
                 size = size / 2
 
             return ImageFont.truetype(font_path, int(round(size * self.resampling_factor)))
@@ -173,12 +173,6 @@ class Annotator:
                 log.warning("annotate.py: IOError when trying to open the image: %s" % str(e))
                 return None
 
-            if self.resampling_factor < 1:
-                base = base.resize(
-                    (int(round(w * self.resampling_factor)),
-                     int(round(h * self.resampling_factor))),
-                    Image.ANTIALIAS)
-
             overlay = Image.new('RGBA', base.size, (255, 255, 255, 0))
             draw = ImageDraw.Draw(overlay)
             self.drawAnnotations(draw, annotationsObj)
@@ -186,7 +180,6 @@ class Annotator:
 
             image_io = BytesIO()
             image = Image.alpha_composite(base, overlay)
-            image = image.resize((w, h), Image.ANTIALIAS)
             image = image.convert('RGB')
             image.save(image_io, 'JPEG', quality=90, icc_profile=base.info.get('icc_profile'))
 

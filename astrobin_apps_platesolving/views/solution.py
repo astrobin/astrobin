@@ -273,7 +273,7 @@ class SolutionFinalizeView(CsrfExemptMixin, base.View):
                 return HttpResponse(simplejson.dumps(context), content_type='application/json')
 
             filename, ext = os.path.splitext(target.image_file.name)
-            annotated_filename = "%s-%d%s" % (filename, int(time.time()), ext)
+            annotated_filename = "%s-%d%s" % (filename, int(time.time()), '.jpg')
             if annotated_image:
                 solution.image_file.save(annotated_filename, annotated_image)
 
