@@ -66,7 +66,7 @@ class SolveView(base.View):
 
             try:
                 url = image.thumbnail(
-                    'hd_sharpened' if image.sharpen_thumbnails else 'hd',
+                    'real',
                     '0' if target._meta.model_name == 'image' else target.label,
                     sync=True)
 
@@ -246,7 +246,7 @@ class SolutionFinalizeView(CsrfExemptMixin, base.View):
             solution.dec = "%.3f" % info['calibration']['dec']
             solution.orientation = "%.3f" % info['calibration']['orientation']
             solution.radius = "%.3f" % info['calibration']['radius']
-            solution.pixscale = "%.3f" % corrected_pixscale(solution, info['calibration']['pixscale'])
+            solution.pixscale = "%.3f" % info['calibration']['pixscale']
 
             try:
                 target = solution.content_type.get_object_for_this_type(pk=solution.object_id)
@@ -273,7 +273,7 @@ class SolutionFinalizeView(CsrfExemptMixin, base.View):
                 return HttpResponse(simplejson.dumps(context), content_type='application/json')
 
             filename, ext = os.path.splitext(target.image_file.name)
-            annotated_filename = "%s-%d%s" % (filename, int(time.time()), ext)
+            annotated_filename = "%s-%d%s" % (filename, int(time.time()), '.jpg')
             if annotated_image:
                 solution.image_file.save(annotated_filename, annotated_image)
 
