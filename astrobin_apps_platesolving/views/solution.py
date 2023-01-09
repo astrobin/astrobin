@@ -129,7 +129,7 @@ class SolveAdvancedView(base.View):
                     url = solution.advanced_settings.sample_raw_frame_file.url
                 else:
                     url = image.thumbnail(
-                        'real',
+                        'hd_sharpened' if image.sharpen_thumbnails else 'hd',
                         '0' if target._meta.model_name == 'image' else target.label,
                         sync=True)
 
@@ -246,7 +246,7 @@ class SolutionFinalizeView(CsrfExemptMixin, base.View):
             solution.dec = "%.3f" % info['calibration']['dec']
             solution.orientation = "%.3f" % info['calibration']['orientation']
             solution.radius = "%.3f" % info['calibration']['radius']
-            solution.pixscale = "%.3f" % corrected_pixscale(solution, info['calibration']['pixscale'])
+            solution.pixscale = "%.3f" % info['calibration']['pixscale']
 
             try:
                 target = solution.content_type.get_object_for_this_type(pk=solution.object_id)

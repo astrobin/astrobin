@@ -18,11 +18,12 @@ class Solver(AbstractPlateSolvingBackend):
         advanced_settings = kwargs.pop('advanced_settings', None)  # type: PlateSolvingAdvancedSettings
         image_width = kwargs.pop('image_width')  # type: int
         image_height = kwargs.pop('image_height')  # type: int
-        small_size_ratio: float = max(1, image_width / float(settings.THUMBNAIL_ALIASES['']['regular']['size'][0]))
+        small_size_ratio: float = thumbnail_scale(image_width, 'hd', 'regular')
         pixscale = kwargs.pop('pixscale')  # type: float
-        hd_width = image_width
-        hd_height = image_height
-        settings_hd_width = image_width
+        hd_width = min(image_width, settings.THUMBNAIL_ALIASES['']['hd']['size'][0])  # type: int
+        hd_ratio = max(1, image_width / float(hd_width))  # type: float
+        hd_height = int(image_height / hd_ratio)  # type: int
+        settings_hd_width = settings.THUMBNAIL_ALIASES['']['hd']['size'][0]
 
         if image_width > settings_hd_width and advanced_settings and not advanced_settings.sample_raw_frame_file:
             ratio = image_width / float(settings_hd_width)
