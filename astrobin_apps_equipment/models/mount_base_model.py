@@ -115,6 +115,8 @@ class MountBaseModel(EquipmentItem):
                 if property_value is not None:
                     if property_value.__class__.__name__ == 'Decimal':
                         property_value = '%g' % property_value
+                    elif property_value.__class__.__name__ == 'bool':
+                        property_value = _("Yes") if property_value else _("No")
                 properties.append({'label': property_label, 'value': property_value})
 
         return properties
