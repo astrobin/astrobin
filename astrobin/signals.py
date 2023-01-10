@@ -1259,6 +1259,8 @@ def image_collaborators_changed(sender, instance: Image, **kwargs):
 
     if action == 'pre_add':
         users = User.objects.filter(pk__in=pk_set)
+        for user in users.iterator():
+            UserService(user).clear_gallery_image_list_cache()
         push_notification(
             list(users), instance.user, 'added_as_collaborator', {
                 'image': instance,
@@ -1267,6 +1269,8 @@ def image_collaborators_changed(sender, instance: Image, **kwargs):
         )
     elif action == 'pre_remove':
         users = User.objects.filter(pk__in=pk_set)
+        for user in users.iterator():
+            UserService(user).clear_gallery_image_list_cache()
         push_notification(
             list(users), instance.user, 'removed_as_collaborator', {
                 'image': instance,
