@@ -2,6 +2,12 @@
 {% load static %}
 
 {% blocktrans trimmed %}
+    You submitted your image for IOTD/TP consideration!
+{% endblocktrans %}
+
+"{{ image.title }}"
+
+{% blocktrans trimmed %}
     The “AstroBin Image of the Day and Top Picks” is a long-running system to promote beautiful,
     interesting, peculiar, or otherwise amazing astrophotographs, with a focus on technical
     excellence.
