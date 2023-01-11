@@ -278,7 +278,7 @@ class UserService:
     def display_wip_images_on_public_gallery(self) -> bool:
         return self.user.userprofile.display_wip_images_on_public_gallery in (None, True)
 
-    def sort_gallery_by(self, queryset: QuerySet, subsection: str, active: str, klass: str):
+    def sort_gallery_by(self, queryset: QuerySet, subsection: str, active: Optional[str], klass: Optional[str]):
         from astrobin.models import Acquisition, Camera, Image, Telescope
         from astrobin_apps_equipment.models import Camera as CameraV2, Telescope as TelescopeV2
         from astrobin_apps_images.services import ImageService
