@@ -1229,8 +1229,11 @@ def user_page(request, username):
     }
 
     try:
+        qs = UserService(user).get_public_images()
         response_dict['mobile_header_background'] = \
-            UserService(user).get_public_images().first().thumbnail('regular', None, sync=True) \
+            UserService(user).sort_gallery_by(qs, 'uploaded', None, None)[0] \
+                .first() \
+                .thumbnail('regular', None, sync=True) \
                 if UserService(user).get_public_images().exists() \
                 else None
     except IOError:
