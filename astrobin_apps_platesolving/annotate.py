@@ -7,6 +7,7 @@ from PIL import Image, ImageDraw, ImageFont
 from django.conf import settings
 from django.core.files.base import ContentFile
 
+from astrobin_apps_platesolving.models import Solution
 from astrobin_apps_platesolving.solver import Solver
 from astrobin_apps_platesolving.utils import get_from_storage, ThumbnailNotReadyException
 
@@ -14,9 +15,13 @@ log = logging.getLogger('apps')
 
 
 class Annotator:
-    def __init__(self, solution):
+    def __init__(self, solution: Solution):
         self.solution = solution
-        self.resampling_factor = settings.THUMBNAIL_ALIASES['']['hd']['size'][0] / float(solution.content_object.w)
+        self.resampling_factor = \
+            min(
+                settings.THUMBNAIL_ALIASES['']['hd']['size'][0],
+                solution.content_object.w
+            ) / float(solution.content_object.w)
         self.line_thickness = 2
         self.solver = Solver()
 
