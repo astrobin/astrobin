@@ -69,6 +69,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     can_restore_from_trash,
 )
 from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService
 from toggleproperties.models import ToggleProperty
@@ -614,62 +615,63 @@ def image_edit_acquisition(request, id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    return redirect(AppRedirectionService.redirect(f'/i/{image.get_id()}/edit#6'))
+    if image.user.groups.filter(name=GroupName.ACQUISITION_EDIT_TESTERS).exists():
+        return redirect(AppRedirectionService.redirect(f'/i/{image.get_id()}/edit#6'))
 
-    # from astrobin_apps_platesolving.solver import Solver
-    #
-    # dsa_qs = DeepSky_Acquisition.objects.filter(image=image)
-    # solar_system_acquisition = None
-    #
-    # try:
-    #     solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=image)
-    # except:
-    #     pass
-    #
-    # if dsa_qs:
-    #     edit_type = 'deep_sky'
-    # elif solar_system_acquisition:
-    #     edit_type = 'solar_system'
-    # elif 'edit_type' in request.GET:
-    #     edit_type = request.GET['edit_type']
-    # else:
-    #     edit_type = None
-    #
-    # deep_sky_acquisition_formset = None
-    # deep_sky_acquisition_basic_form = None
-    # advanced = False
-    # if edit_type == 'deep_sky' or (image.solution and image.solution.status != Solver.FAILED):
-    #     advanced = request.GET.get('advanced', 'false') == 'true' or dsa_qs.count() > 1
-    #
-    #     if advanced:
-    #         extra = 0
-    #         if 'add_more' in request.GET:
-    #             extra = 1
-    #         if not dsa_qs:
-    #             extra = 1
-    #         DSAFormSet = inlineformset_factory(
-    #             Image, DeepSky_Acquisition, extra=extra, form=DeepSky_AcquisitionForm
-    #         )
-    #         deep_sky_acquisition_formset = DSAFormSet(
-    #             instance=image,
-    #             form_kwargs={'user': image.user, 'image': image},
-    #             queryset=DeepSky_Acquisition.objects.filter(image=image).order_by('pk')
-    #         )
-    #     else:
-    #         dsa = dsa_qs[0] if dsa_qs else DeepSky_Acquisition({image: image, advanced: False})
-    #         deep_sky_acquisition_basic_form = DeepSky_AcquisitionBasicForm(instance=dsa)
-    #
-    # response_dict = {
-    #     'image': image,
-    #     'edit_type': edit_type,
-    #     'ssa_form': SolarSystem_AcquisitionForm(instance=solar_system_acquisition),
-    #     'deep_sky_acquisitions': deep_sky_acquisition_formset,
-    #     'deep_sky_acquisition_basic_form': deep_sky_acquisition_basic_form,
-    #     'advanced': advanced,
-    #     'solar_system_acquisition': solar_system_acquisition,
-    # }
-    #
-    # return render(request, 'image/edit/acquisition.html', response_dict)
+    from astrobin_apps_platesolving.solver import Solver
+
+    dsa_qs = DeepSky_Acquisition.objects.filter(image=image)
+    solar_system_acquisition = None
+
+    try:
+        solar_system_acquisition = SolarSystem_Acquisition.objects.get(image=image)
+    except:
+        pass
+
+    if dsa_qs:
+        edit_type = 'deep_sky'
+    elif solar_system_acquisition:
+        edit_type = 'solar_system'
+    elif 'edit_type' in request.GET:
+        edit_type = request.GET['edit_type']
+    else:
+        edit_type = None
+
+    deep_sky_acquisition_formset = None
+    deep_sky_acquisition_basic_form = None
+    advanced = False
+    if edit_type == 'deep_sky' or (image.solution and image.solution.status != Solver.FAILED):
+        advanced = request.GET.get('advanced', 'false') == 'true' or dsa_qs.count() > 1
+
+        if advanced:
+            extra = 0
+            if 'add_more' in request.GET:
+                extra = 1
+            if not dsa_qs:
+                extra = 1
+            DSAFormSet = inlineformset_factory(
+                Image, DeepSky_Acquisition, extra=extra, form=DeepSky_AcquisitionForm
+            )
+            deep_sky_acquisition_formset = DSAFormSet(
+                instance=image,
+                form_kwargs={'user': image.user, 'image': image},
+                queryset=DeepSky_Acquisition.objects.filter(image=image).order_by('pk')
+            )
+        else:
+            dsa = dsa_qs[0] if dsa_qs else DeepSky_Acquisition({image: image, advanced: False})
+            deep_sky_acquisition_basic_form = DeepSky_AcquisitionBasicForm(instance=dsa)
+
+    response_dict = {
+        'image': image,
+        'edit_type': edit_type,
+        'ssa_form': SolarSystem_AcquisitionForm(instance=solar_system_acquisition),
+        'deep_sky_acquisitions': deep_sky_acquisition_formset,
+        'deep_sky_acquisition_basic_form': deep_sky_acquisition_basic_form,
+        'advanced': advanced,
+        'solar_system_acquisition': solar_system_acquisition,
+    }
+
+    return render(request, 'image/edit/acquisition.html', response_dict)
 
 
 @never_cache

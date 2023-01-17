@@ -15,6 +15,8 @@ from astrobin_apps_images.api.permissions import IsImageOwnerOrReadOnly
 from astrobin_apps_images.api.serializers import ImageSerializer
 from astrobin_apps_images.api.serializers.deep_sky_acquisition_serializer import DeepSkyAcquisitionSerializer
 from astrobin_apps_images.api.serializers.solar_system_acquisition_serializer import SolarSystemAcquisitionSerializer
+from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 
 
 class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin,
@@ -63,6 +65,9 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
                     getattr(instance, klass[0]).add(obj)
 
     def _update_acquisition(self, request, instance: Image):
+        if not UserService(request.user).is_in_group([GroupName.ACQUISITION_EDIT_TESTERS]):
+            return
+
         DeepSky_Acquisition.objects.filter(image=instance).delete()
         for item in request.data.get('deep_sky_acquisitions'):
             if item.get('filter_2'):
