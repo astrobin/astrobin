@@ -415,7 +415,11 @@ class IotdService:
                 image.user.userprofile.auto_submit_to_iotd_tp_process = True
                 image.user.userprofile.save(keep_deleted=True)
 
-            push_notification([image.user], None, 'image_submitted_to_iotd_tp', {})
+            thumb = image.thumbnail_raw('gallery', None, sync=True)
+            push_notification([image.user], None, 'image_submitted_to_iotd_tp', {
+                'image': image,
+                'image_thumbnail': thumb.url if thumb else None
+            })
 
         return may, reason
 

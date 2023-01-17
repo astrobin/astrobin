@@ -260,7 +260,7 @@ NOTICE_TYPES = (
     ),
     (
         'image_submitted_to_iotd_tp',
-        _("Your image was submitted for IOTD/TP consideration"),
+        _("You submitted your image for IOTD/TP consideration"),
         '',
         2
     ),

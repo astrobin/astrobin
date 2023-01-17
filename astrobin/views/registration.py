@@ -51,14 +51,44 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
         )
     )
 
-    def clean(self):
-        username_value = self.cleaned_data.get(User.USERNAME_FIELD)
-        if username_value is not None and User.objects.filter(username__iexact=username_value).exists():
-            self.add_error(
-                User.USERNAME_FIELD,
-                _('Sorry, this username already exists with a different capitalization.'))
+    def clean_referral_code(self):
+        value:str = self.cleaned_data.get('referral_code')
 
-        super(AstroBinRegistrationForm, self).clean()
+        outdated_referral_codes_conversion_map = {
+            'NEBULAPHOTOS2021': 'NEBULAPHOTOS',
+            'ASTROBACKYARD2021': 'ASTROBACKYARD',
+            'ZELINKA2021': 'ZELINKA',
+            'INFINITALAVITA2021': 'INFINITALAVITA',
+        }
+
+        recognized_referral_codes = (
+            'NEBULAPHOTOS',
+            'ASTROBACKYARD',
+            'ZELINKA',
+            'INFINITALAVITA',
+            'SIMCUR',
+            'SHOTKIT',
+        )
+
+        if value.upper() in outdated_referral_codes_conversion_map:
+            value = outdated_referral_codes_conversion_map[value.upper()]
+        elif value.upper() not in recognized_referral_codes:
+            raise forms.ValidationError("This is not one of the recognized referral codes. Please check its spelling!")
+
+        self.data._mutable = True
+        self.data['referral_code'] = value.upper()
+        self.data._mutable = False
+
+        return value.upper()
+
+    def clean_username(self):
+        value: str = self.cleaned_data.get(User.USERNAME_FIELD)
+        if value is not None and User.objects.filter(username__iexact=value).exists():
+            raise forms.ValidationError(
+                _('Sorry, this username already exists with a different capitalization.')
+            )
+
+        return value
 
 
 class AstroBinRegistrationView(RegistrationView):

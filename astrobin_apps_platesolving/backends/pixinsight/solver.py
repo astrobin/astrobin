@@ -18,7 +18,7 @@ class Solver(AbstractPlateSolvingBackend):
         advanced_settings = kwargs.pop('advanced_settings', None)  # type: PlateSolvingAdvancedSettings
         image_width = kwargs.pop('image_width')  # type: int
         image_height = kwargs.pop('image_height')  # type: int
-        smallSizeRatio = thumbnail_scale(image_width, 'hd', 'regular')  # type: float
+        small_size_ratio: float = thumbnail_scale(image_width, 'hd', 'regular')
         pixscale = kwargs.pop('pixscale')  # type: float
         hd_width = min(image_width, settings.THUMBNAIL_ALIASES['']['hd']['size'][0])  # type: int
         hd_ratio = max(1, image_width / float(hd_width))  # type: float
@@ -34,7 +34,7 @@ class Solver(AbstractPlateSolvingBackend):
             'centerRA=%f' % kwargs.pop('ra'),
             'centerDec=%f' % kwargs.pop('dec'),
             'largeSize=%d' % max(hd_width, hd_height),
-            'smallSizeRatio=%f' % smallSizeRatio,
+            'smallSizeRatio=%f' % small_size_ratio,
             'imageResolution=%f' % pixscale,
             'fontsBaseURL=%s' % settings.STATIC_URL + 'astrobin/fonts',
             'liveLogURL=%s' % settings.BASE_URL + reverse('astrobin_apps_platesolving.pixinsight_live_log_webhook')

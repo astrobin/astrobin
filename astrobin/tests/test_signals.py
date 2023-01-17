@@ -452,3 +452,25 @@ class SignalsTest(TestCase):
                 ),
             ]
         )
+
+    @mock.patch('astrobin.signals.push_notification')
+    @mock.patch('astrobin.signals.UserService.clear_gallery_image_list_cache')
+    def test_image_collaborators_changed_clears_gallery_cache(self, clear_gallery_image_list_cache, push_notification):
+        image = Generators.image()
+        collaborator1 = Generators.user()
+        collaborator2 = Generators.user()
+
+        # First reset because this was called when generating the image in the first place.
+        clear_gallery_image_list_cache.reset_mock()
+
+        self.assertFalse(clear_gallery_image_list_cache.called)
+        image.collaborators.add(collaborator1, collaborator2)
+        self.assertTrue(clear_gallery_image_list_cache.called)
+        self.assertEquals(2, clear_gallery_image_list_cache.call_count)
+
+        clear_gallery_image_list_cache.reset_mock()
+
+        self.assertFalse(clear_gallery_image_list_cache.called)
+        image.collaborators.remove(collaborator2)
+        self.assertTrue(clear_gallery_image_list_cache.called)
+        self.assertEquals(1, clear_gallery_image_list_cache.call_count)

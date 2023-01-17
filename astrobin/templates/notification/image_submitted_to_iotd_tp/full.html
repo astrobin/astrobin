@@ -3,9 +3,23 @@
 
 <h1>
     {% blocktrans trimmed %}
-        Your image was submitted for IOTD/TP consideration!
+        You submitted your image for IOTD/TP consideration!
     {% endblocktrans %}
 </h1>
+
+<br /><br />
+
+<p>
+    {% if image_thumbnail %}
+        <a href="{{ url }}">
+            <img src="{{ image_thumbnail }}" alt="{{ title }}" />
+        </a>
+    {% endif %}
+
+    <br />
+
+    {{ image.title }}
+</p>
 
 <br/><br/>
 

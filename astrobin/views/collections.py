@@ -1,31 +1,24 @@
 import simplejson
 from annoying.functions import get_object_or_None
-from braces.views import JSONResponseMixin
-from braces.views import LoginRequiredMixin
+from braces.views import JSONResponseMixin, LoginRequiredMixin
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.urls import reverse_lazy
 from django.db import IntegrityError
 from django.forms.utils import ErrorList
 from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
 from django.utils.translation import ugettext as _
-from django.views.generic import CreateView
-from django.views.generic import DeleteView
-from django.views.generic import DetailView
-from django.views.generic import ListView
-from django.views.generic import UpdateView
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from django.views.generic.base import View
 
-from astrobin.forms import CollectionAddRemoveImagesForm
-from astrobin.forms import CollectionCreateForm
-from astrobin.forms import CollectionQuickEditKeyValueTagsForm
-from astrobin.forms import CollectionUpdateForm
+from astrobin.forms import (
+    CollectionAddRemoveImagesForm, CollectionCreateForm, CollectionQuickEditKeyValueTagsForm,
+    CollectionUpdateForm,
+)
 from astrobin.forms.utils import parseKeyValueTags
-from astrobin.models import Collection
-from astrobin.models import Image
-from astrobin.models import UserProfile
+from astrobin.models import Collection, Image, UserProfile
 from astrobin_apps_images.models import KeyValueTag
 from astrobin_apps_users.services import UserService
 
@@ -65,10 +58,13 @@ class UserCollectionsBase(View):
         context['wip_images_no'] = numbers['wip_images_no']
 
         try:
+            qs = UserService(user).get_public_images()
             context['mobile_header_background'] = \
-                    UserService(user).get_public_images().first().thumbnail('regular', None, sync=True) \
-                        if UserService(user).get_public_images().exists() \
-                        else None
+                UserService(user).sort_gallery_by(qs, 'uploaded', None, None)[0] \
+                    .first() \
+                    .thumbnail('regular', None, sync=True) \
+                    if UserService(user).get_public_images().exists() \
+                    else None
         except IOError:
             context['mobile_header_background'] = None
 

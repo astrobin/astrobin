@@ -77,7 +77,7 @@
                         {% endif %}
                     </td>
                 </tr>
-                {% if advanced_solution_last_live_log_entry and advanced_solution_last_live_log_entry.log %}
+                {% if request.user|show_pixinsight_log:instance_to_platesolve.solution and advanced_solution_last_live_log_entry and advanced_solution_last_live_log_entry.log %}
                     <tr>
                         <td colspan="2">{% trans "PixInsight log" %}</td>
                     </tr>
