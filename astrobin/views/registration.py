@@ -70,6 +70,9 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
             'SHOTKIT',
         )
 
+        if value in (None, ''):
+            return None
+
         if value.upper() in outdated_referral_codes_conversion_map:
             value = outdated_referral_codes_conversion_map[value.upper()]
         elif value.upper() not in recognized_referral_codes:
