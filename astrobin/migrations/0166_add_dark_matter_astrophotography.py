@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 choices=[(None, '---------'), ('OWN', 'Non-commercial independent facility'), (None, '---------'),
                          ('AC', 'AstroCamp'), ('AHK', 'Astro Hostel Krasnodar'),
                          ('AOWA', 'Astro Observatories Western Australia'), ('CS', 'ChileScope'),
-                         ('DMA', 'Dark Matter Astrophotography'), ('DSNM', 'Dark Sky New Mexico'),
+                         ('DMA', 'Dark Matters Astrophotography'), ('DSNM', 'Dark Sky New Mexico'),
                          ('DSP', 'Dark Sky Portal'), ('DSV', 'Deepsky Villa'), ('DSC', 'DeepSkyChile'),
                          ('DSW', 'DeepSkyWest'), ('eEyE', 'e-EyE Extremadura'), ('EITS', 'Eye In The Sky'),
                          ('GFA', 'Goldfield Astronomical Observatory'), ('GMO', 'Grand Mesa Observatory'),
