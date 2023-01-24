@@ -38,9 +38,19 @@ input:focus, textarea:focus {
 
 }
 
-.help-block, .help-inline {
+.help-block,
+.help-block + ul > li,
+.help-inline {
   margin-top: $spacer-medium;
   color: #866158;
+}
+
+.help-block + ul {
+  margin-left: 0;
+
+  & > li {
+    margin-top: 2px;
+  }
 }
 
 .form-actions {
@@ -58,6 +68,7 @@ input:focus, textarea:focus {
 
 .form-horizontal {
   input[type=text],
+  input[type=email],
   input[type=password],
   textarea,
   .cke,

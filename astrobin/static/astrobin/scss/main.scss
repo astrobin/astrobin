@@ -1399,6 +1399,7 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   }
 
   .form-horizontal input[type=text],
+  .form-horizontal input[type=email],
   .form-horizontal input[type=password],
   .form-horizontal textarea,
   .form-horizontal .help-block {

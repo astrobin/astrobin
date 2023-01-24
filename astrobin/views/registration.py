@@ -8,7 +8,8 @@ from django.contrib.auth.models import Group, User
 from django.utils.translation import ugettext_lazy as _
 from registration.backends.hmac.views import RegistrationView
 from registration.forms import (
-    RegistrationFormUniqueEmail, RegistrationFormTermsOfService)
+    RegistrationForm, RegistrationFormUniqueEmail, RegistrationFormTermsOfService,
+)
 from registration.signals import user_registered
 
 from astrobin.models import UserProfile
@@ -19,7 +20,7 @@ from astrobin_apps_notifications.utils import push_notification
 class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTermsOfService):
     referral_code = forms.fields.CharField(
         required=False,
-        label=_('Referral code (optional)'),
+        label=_('Referral code') + f' ({_("optional")})',
     )
 
     important_communications = forms.fields.BooleanField(
@@ -50,6 +51,13 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
             }
         )
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # For some reason, setting these in `labels` and `help_texts` before doesn't work only for `email`.
+        self.fields['email'].label = _('Email address')
+        self.fields['email'].help_text = _('AstroBin doesn\'t share your email address with anyone.')
 
     def clean_referral_code(self):
         value:str = self.cleaned_data.get('referral_code')
@@ -93,6 +101,43 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
 
         return value
 
+    field_order = [
+        'username',
+        'first_name',
+        'last_name',
+        'email',
+        'password1',
+        'password2',
+        'referral_code',
+        'tos',
+        'important_communications',
+        'newsletter',
+        'marketing_material',
+        'recaptcha',
+    ]
+
+    class Meta(RegistrationForm.Meta):
+        fields = [
+            User.USERNAME_FIELD,
+            'email',
+            'first_name',
+            'last_name',
+            'password1',
+            'password2'
+        ]
+
+        labels = {
+            'first_name': _('First name') + f' ({_("optional")})',
+            'last_name': _('Last name') + f' ({_("optional")})',
+        }
+
+        help_texts = {
+            'username': _(
+                'This is your handle on AstroBin and will be part of the URL to your gallery. If you do not specify a'
+                'first and last name below, it will also be how others see your name. Please use letters, digits, and '
+                'the special characters @/./+/-/_ only.'
+            ),
+        }
 
 class AstroBinRegistrationView(RegistrationView):
     form_class = AstroBinRegistrationForm
