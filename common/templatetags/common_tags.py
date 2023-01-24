@@ -346,6 +346,7 @@ def get_verbose_field_name(instance, field_name):
 def add_days(value, days):
     return value + datetime.timedelta(days=days)
 
+
 @register.filter
 def asciify(value):
     try:

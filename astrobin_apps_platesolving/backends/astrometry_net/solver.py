@@ -1,11 +1,7 @@
 import logging
-from email.encoders import encode_noop
-from email.mime.application import MIMEApplication
-from email.mime.base import MIMEBase
-from email.mime.multipart import MIMEMultipart
-from urllib.parse import urlencode
-from urllib.request import urlopen, Request
 from urllib.error import HTTPError
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 
 import requests
 from django.conf import settings

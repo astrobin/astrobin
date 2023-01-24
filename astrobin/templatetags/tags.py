@@ -602,9 +602,8 @@ def thumbnail_height(image, alias):
 
 
 @register.simple_tag
-def thumbnail_scale(w, from_alias, to_alias):
-    return min(settings.THUMBNAIL_ALIASES[''][to_alias]['size'][0], w) / \
-           float(min(settings.THUMBNAIL_ALIASES[''][from_alias]['size'][0], w))
+def thumbnail_scale(w, to_alias):
+    return min(settings.THUMBNAIL_ALIASES[''][to_alias]['size'][0], w) / float(w)
 
 
 @register.filter

@@ -84,7 +84,7 @@ $(document).ready(function() {
                     parseFloat('{{ instance_to_platesolve.solution.advanced_matrix_delta }}'),
                     {{ instance_to_platesolve | thumbnail_width:'hd' }},
                     {{ instance_to_platesolve | thumbnail_height:'hd' }},
-                    {% thumbnail_scale image.w 'hd' 'regular' %}
+                    {% thumbnail_scale image.w 'regular' %}
                 );
             });
         {% endif %}
