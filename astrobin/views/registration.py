@@ -1,5 +1,3 @@
-
-
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 from django import forms
@@ -7,14 +5,12 @@ from django.conf import settings
 from django.contrib.auth.models import Group, User
 from django.utils.translation import ugettext_lazy as _
 from registration.backends.hmac.views import RegistrationView
-from registration.forms import (
-    RegistrationForm, RegistrationFormUniqueEmail, RegistrationFormTermsOfService,
-)
+from registration.forms import (RegistrationForm, RegistrationFormTermsOfService, RegistrationFormUniqueEmail)
 from registration.signals import user_registered
 
 from astrobin.models import UserProfile
-from common.constants import GroupName
 from astrobin_apps_notifications.utils import push_notification
+from common.constants import GroupName
 
 
 class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTermsOfService):

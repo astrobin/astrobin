@@ -23,14 +23,16 @@ class HasSpecialCharactersValidator:
         if not any(c in string.punctuation for c in password):
             raise ValidationError(
                 gettext(
-                    f"This password doesn't contain any special characters. It must contain at least one of the "
-                    f"following {string.punctuation}",
+                    "This password doesn't contain any special characters. It must contain at least one of the "
+                    "following {}".format(string.punctuation),
                 ),
                 code='password_has_no_numbers',
             )
 
     def get_help_text(self):
-        return gettext(f"Your password must contain any of the following special characters: {string.punctuation}")
+        return gettext(
+            "Your password must contain any of the following special characters: {}".format(string.punctuation)
+        )
 
 
 LOGIN_REDIRECT_URL = '/'
