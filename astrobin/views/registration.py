@@ -1,5 +1,7 @@
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Fieldset, HTML, Layout, Submit
 from django import forms
 from django.conf import settings
 from django.contrib.auth.models import Group, User
@@ -11,6 +13,7 @@ from registration.signals import user_registered
 from astrobin.models import UserProfile
 from astrobin_apps_notifications.utils import push_notification
 from common.constants import GroupName
+from common.templatetags.common_tags import button_loading_class
 
 
 class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTermsOfService):
@@ -50,6 +53,41 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal form-crispy'
+        self.helper.form_method = 'post'
+        self.helper.form_action = ''
+        self.helper.attrs = {'novalidate': ''}
+        self.helper.error_text_inline = False
+        self.helper.help_text_inline = False
+        self.helper.layout = Layout(
+            Fieldset(
+                '',
+                'username',
+                'first_name',
+                'last_name',
+                'email',
+            ),
+            Fieldset(
+                '',
+                'password1',
+                'password2',
+            ),
+            Fieldset(
+                '',
+                'referral_code',
+                'tos',
+                'important_communications',
+                'newsletter',
+                'marketing_material',
+            ),
+            Fieldset(
+                '',
+                'recaptcha',
+            ),
+            Submit('submit', _('Submit'), css_class=f'btn btn-primary btn-block-mobile'),
+        )
 
         # For some reason, setting these in `labels` and `help_texts` before doesn't work only for `email`.
         self.fields['email'].label = _('Email address')

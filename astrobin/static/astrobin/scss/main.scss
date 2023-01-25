@@ -1402,7 +1402,8 @@ BODY:first-of-type ul.as-list, x:-moz-any-link, x:default { /* Target FF 3.5+ */
   .form-horizontal input[type=email],
   .form-horizontal input[type=password],
   .form-horizontal textarea,
-  .form-horizontal .help-block {
+  .form-horizontal .help-block,
+  .form-horizontal .help-inline {
     width: 584px;
     max-width: 96%;
   }
@@ -2533,20 +2534,6 @@ form.avatar-delete {
     background-color: #FADDD6;
   }
 }
-
-.help-block {
-  font-size: 90%;
-  font-style: italic;
-
-  + .help-block {
-    // Second help-block must be an error.
-    background: $red;
-    color: $strong-text-color !important;
-    padding: 4px;
-    @include rounded-corners(3px);
-  }
-}
-
 
 .revisions-container {
   overflow: visible;

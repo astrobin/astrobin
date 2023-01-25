@@ -1,3 +1,7 @@
+h1 + .well + form {
+  margin-top: 4rem;
+}
+
 input[type="text"],
 input[type="password"],
 input[type="datetime"],
@@ -39,17 +43,36 @@ input:focus, textarea:focus {
 }
 
 .help-block,
-.help-block + ul > li,
 .help-inline {
-  margin-top: $spacer-medium;
-  color: #866158;
-}
+  &,
+  > ul > li,
+  + ul > li,
+  > strong {
+    display: block !important;
+    padding-left: 0;
+    font-size: 90%;
+    font-style: italic;
+    margin-top: $spacer-medium;
+    color: #866158;
+    font-weight: normal;
+  }
 
-.help-block + ul {
-  margin-left: 0;
+  > ul,
+  + ul {
+    margin-left: 0;
 
-  & > li {
-    margin-top: 2px;
+    > li {
+      margin-top: 2px;
+    }
+  }
+
+  &[id*=error] {
+    > strong {
+      background: $red;
+      color: $strong-text-color !important;
+      padding: 4px;
+      @include rounded-corners(3px);
+    }
   }
 }
 
@@ -73,7 +96,8 @@ input:focus, textarea:focus {
   textarea,
   .cke,
   select,
-  .help-block {
+  .help-block,
+  .help-inline {
     max-width: 610px;
     width: calc(100% - 1rem);
   }
@@ -123,4 +147,10 @@ input:focus, textarea:focus {
   .loading {
     text-align: center;
   }
+}
+
+fieldset:not(:last-child) {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid $grey-5;
 }
