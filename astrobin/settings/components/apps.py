@@ -72,6 +72,7 @@ INSTALLED_APPS += [
     'captcha',
     'django_celery_monitor',
     'celery_haystack',
+    'django_pwnedpasswords_validator',
 
     'astrobin.apps.AstroBinAppConfig',
 ]

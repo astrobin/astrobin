@@ -13,7 +13,6 @@ from registration.signals import user_registered
 from astrobin.models import UserProfile
 from astrobin_apps_notifications.utils import push_notification
 from common.constants import GroupName
-from common.templatetags.common_tags import button_loading_class
 
 
 class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTermsOfService):

@@ -20,6 +20,9 @@ from astrobin.api import (
     CollectionResource, ImageOfTheDayResource, ImageResource, ImageRevisionResource, LocationResource,
     TopPickNominationResource, TopPickResource, UserProfileResource,
 )
+from astrobin.api2.views.custom_auth_token_view import CustomAuthTokenView
+from astrobin.forms.authentication_form import AuthenticationForm
+from astrobin.forms.password_change_form import PasswordChangeForm
 from astrobin.forms.password_reset_form import PasswordResetForm
 from astrobin.search import AstroBinSearchView
 from astrobin.views import (
@@ -80,7 +83,7 @@ urlpatterns += [
 
     url(
         r'^accounts/password/change/$',
-        auth_views.PasswordChangeView.as_view(),
+        auth_views.PasswordChangeView.as_view(form_class=PasswordChangeForm),
         name='password_change'
     ),
     url(
@@ -117,9 +120,7 @@ urlpatterns += [
     url(r'^accounts/email/', include('change_email.urls')),
     url(
         r'^accounts/login/$',
-        LoginView.as_view(
-            template_name='registration/login.html'
-        ),
+        LoginView.as_view(form_class=AuthenticationForm),
         name='auth_login'
     ),
     url(
@@ -159,7 +160,8 @@ urlpatterns += [
     url(r'^api/request-key/$', never_cache(api_views.AppApiKeyRequestView.as_view()), name='app_api_key_request'),
     url(r'^api/request-key/complete/$', never_cache(api_views.AppApiKeyRequestCompleteView.as_view()),
         name='app_api_key_request_complete'),
-    url(r'^api/v2/api-auth-token/', obtain_auth_token),
+
+    url(r'^api/v2/api-auth-token/', CustomAuthTokenView.as_view()),
     url(r'^api/v2/api-auth/', include(('rest_framework.urls', 'rest_framework'))),
     url(r'^api/v2/common/', include('common.api_urls')),
     url(r'^api/v2/astrobin/', include('astrobin.api2.urls')),

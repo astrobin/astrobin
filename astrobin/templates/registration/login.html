@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
-
+{% load common_tags %}
 
 {% block title %}{% trans "Log in" %}{% endblock %}
 
@@ -19,9 +19,14 @@
         {{ form | as_bootstrap }}
 
         <div class="form-actions">
-            <input class="btn btn-primary btn-block-mobile" type="submit" value="{% trans 'Log in' %}" />
+            <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit">
+                {% trans 'Log in' %}
+                {% button_loading_indicator %}
+            </button>
+
             <a class="btn btn-block-mobile" href="{% url 'auth_password_reset' %}">{% trans "Reset password" %}</a>
             <a class="btn btn-block-mobile" href="https://welcome.astrobin.com/pricing">{% trans "Register" %}</a>
+
             <input type="hidden" name="next" value="{{ next }}" />
         </div>
 
