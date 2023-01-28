@@ -118,7 +118,7 @@ urlpatterns += [
     url(r'^accounts/email/', include('change_email.urls')),
     url(
         r'^accounts/login/$',
-        RedirectView.as_view(url='/account/login/', permanent=True),
+        RedirectView.as_view(url='/account/login/', query_string=True, permanent=True),
         name='auth_login'
     ),
     url(
