@@ -412,6 +412,8 @@ def toggleproperty_post_delete(sender, instance, **kwargs):
     if isinstance(instance.content_object, Image):
         SearchIndexUpdateService.update_index(instance.content_object)
         SearchIndexUpdateService.update_index(instance.content_object.user, 3600)
+        for collaborator in instance.collaborators.all().iterator():
+            SearchIndexUpdateService.update_index(collaborator, 3600)
 
 
 post_delete.connect(toggleproperty_post_delete, sender=ToggleProperty)
@@ -421,6 +423,8 @@ def toggleproperty_post_save(sender, instance, created, **kwargs):
     if isinstance(instance.content_object, Image):
         SearchIndexUpdateService.update_index(instance.content_object)
         SearchIndexUpdateService.update_index(instance.content_object.user, 3600)
+        for collaborator in instance.collaborators.all().iterator():
+            SearchIndexUpdateService.update_index(collaborator, 3600)
 
     if created:
         verb = None
