@@ -3,13 +3,13 @@
 {% trans "Hey!" %}
 
 {% blocktrans trimmed %}
-    Here is your two-factor authentication code to log in to AstroBin:
+    Here is your two-factor authentication token to log in to AstroBin:
 {% endblocktrans %}
 
 {{ token }}
 
 {% blocktrans trimmed with n=5 %}
-    This code is valid for {{n}} minutes.
+    This token is valid for {{n}} minutes.
 {% endblocktrans %}
 
 {% blocktrans trimmed %}

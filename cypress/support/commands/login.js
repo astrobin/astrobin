@@ -1,11 +1,11 @@
 Cypress.Commands.add('fillInLogin', (opts = {}) => {
-    cy.get(".login-form input[name='username']").type(opts.username || "astrobin_dev");
-    cy.get(".login-form input[name='password']").type(opts.password || "astrobin_dev");
-    cy.get(".login-form input[type='submit']").click();
+    cy.get(".login-form input[name='auth-username']").type(opts.username || "astrobin_dev");
+    cy.get(".login-form input[name='auth-password']").type(opts.password || "astrobin_dev");
+    cy.get(".login-form button[type='submit']").click();
 });
 
 Cypress.Commands.add('login', (opts={}) => {
-    cy.visit("/accounts/login/?next=" + (opts.next || "/me/"));
+    cy.visit("/account/login/?next=" + (opts.next || "/me/"));
 
     cy.acceptCookies();
     cy.fillInLogin(opts);
