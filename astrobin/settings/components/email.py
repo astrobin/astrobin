@@ -38,7 +38,7 @@ elif SEND_EMAILS == 'dummy':
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
-SERVER_EMAIL = DEFAULT_FROM_EMAIL = os.environ.get('SERVER_EMAIL', 'noreply@astrobin.com').strip()
+SERVER_EMAIL = DEFAULT_FROM_EMAIL = OTP_EMAIL_SENDER = os.environ.get('SERVER_EMAIL', 'noreply@astrobin.com').strip()
 EMAIL_SUBJECT_PREFIX = os.environ.get('EMAIL_SUBJECT_PREFIX', '[AstroBin]').strip()
 
 

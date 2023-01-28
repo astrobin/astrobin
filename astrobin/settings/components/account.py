@@ -73,4 +73,3 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTHENTICATION_BACKENDS = ('astrobin.auth.CustomBackend', )
 
 OTP_EMAIL_SUBJECT = gettext_lazy("Your AstroBin authentication token")
-OTP_EMAIL_SENDER = DEFAULT_FROM_EMAIL
