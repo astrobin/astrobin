@@ -138,6 +138,13 @@ input:focus, textarea:focus {
 }
 
 .form-vertical {
+  .control-label {
+    font-size: 1.15rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    display: inline-block;
+  }
+
   .form-actions {
     padding-left: 0;
   }

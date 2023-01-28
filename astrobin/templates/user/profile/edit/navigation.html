@@ -74,6 +74,12 @@
 
     <ul class="nav nav-pills nav-stacked">
         <li>
+            <a href="{% url 'two_factor:profile' %}">
+                <i class="icon-qrcode"></i> {% trans "Two-factor authentication" %}
+                <i class="icon-chevron-right"></i>
+            </a>
+        </li>
+        <li>
             <a href="{% url 'password_change' %}">
                 <i class="icon-key"></i> {% trans "Change your password" %}
                 <i class="icon-chevron-right"></i>

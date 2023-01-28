@@ -1,0 +1,57 @@
+{% extends "two_factor/_base.html" %}
+
+{% load i18n %}
+
+{% block two_factor_content %}
+    {% if default_device %}
+        <h3>
+            {% trans "Backup Tokens" %}
+
+            <small>
+                {% blocktrans trimmed %}
+                    If you don't have any device with you, you can access your account using backup tokens.
+                {% endblocktrans %}
+
+                {% blocktrans trimmed count counter=backup_tokens %}
+                    You have only one backup token remaining.
+                {% plural %}
+                    You have {{ counter }} backup tokens remaining.
+                {% endblocktrans %}
+            </small>
+        </h3>
+
+        <p>
+            <a href="{% url 'two_factor:backup_tokens' %}" class="btn btn-primary btn-block-mobile">
+                {% trans "Show codes" %}
+            </a>
+        </p>
+
+        <h3>
+            {% trans "Disable Two-Factor Authentication" %}
+
+            <small>
+                {% blocktrans trimmed %}
+                    We strongly discourage you to do so, but you can disable two-factor authentication for your account.
+                {% endblocktrans %}
+            </small>
+        </h3>
+
+        <p>
+            <a class="btn btn-secondary btn-block-mobile" href="{% url 'two_factor:disable' %}">
+                {% trans "Disable Two-Factor Authentication" %}
+            </a>
+        </p>
+    {% else %}
+        <p>
+            {% blocktrans trimmed %}
+                Two-factor Authentication is not enabled for your account. Enable it for enhanced account security.
+            {% endblocktrans %}
+        </p>
+
+        <p>
+            <a href="{% url 'two_factor:setup' %}" class="btn btn-primary btn-block-mobile">
+                {% trans "Enable Two-Factor Authentication" %}
+            </a>
+        </p>
+    {% endif %}
+{% endblock %}

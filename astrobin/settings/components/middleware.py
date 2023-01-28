@@ -5,6 +5,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'silk.middleware.SilkyMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_otp.middleware.OTPMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'astrobin.middleware.LastSeenMiddleware',
     'astrobin.middleware.BlockNonPayingUsersFromRussiaMiddleware',

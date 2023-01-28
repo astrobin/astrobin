@@ -35,6 +35,7 @@ class HasSpecialCharactersValidator:
         )
 
 
+LOGIN_URL = 'two_factor:login'
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_ACTIVATION_DAYS = 7
 AUTH_PROFILE_MODULE = 'astrobin.UserProfile'
@@ -45,7 +46,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
         'OPTIONS': {
-            'min_length': 9,
+            'min_length': 8,
         }
     },
     {
@@ -71,3 +72,5 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 AUTHENTICATION_BACKENDS = ('astrobin.auth.CustomBackend', )
 
+OTP_EMAIL_SUBJECT = gettext_lazy("Your AstroBin authentication token")
+OTP_EMAIL_SENDER = DEFAULT_FROM_EMAIL

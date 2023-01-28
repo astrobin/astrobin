@@ -443,6 +443,14 @@ h2 {
   margin-top: $spacer-xxlarge;
 }
 
+h3 {
+  > small {
+    display: block;
+    font-size: 1.15rem;
+    margin-top: 0.25rem;
+  }
+}
+
 footer .container {
   -webkit-box-shadow: 0 0 12px black;
   -moz-box-shadow: 0 0 12px black;
