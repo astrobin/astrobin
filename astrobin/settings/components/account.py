@@ -72,4 +72,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 AUTHENTICATION_BACKENDS = ('astrobin.auth.CustomBackend', )
 
+TWO_FACTOR_QR_FACTORY = 'qrcode.image.pil.PilImage'
+TWO_FACTOR_REMEMBER_COOKIE_AGE = 60*60*24*30
+TWO_FACTOR_REMEMBER_COOKIE_PREFIX = 'astrobin-two-factor-remember-cookie_'
+TWO_FACTOR_REMEMBER_COOKIE_DOMAIN = '.astrobin.com'
+TWO_FACTOR_REMEMBER_COOKIE_SECURE = True
 OTP_EMAIL_SUBJECT = gettext_lazy("Your AstroBin authentication token")

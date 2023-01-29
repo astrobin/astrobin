@@ -2045,7 +2045,8 @@ p.small {
   position: relative;
 }
 
-.row.section {
+.row.section,
+.row-fluid.section {
   margin-bottom: $spacer-xlarge;
 }
 

@@ -15,7 +15,7 @@
         </small>
     </h3>
 
-    <form method="post">{% csrf_token %}
+    <form method="post" class="form-vertical" novalidate>{% csrf_token %}
         {{ form | as_bootstrap }}
 
         <div class="form-actions">

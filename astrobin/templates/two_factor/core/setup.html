@@ -3,7 +3,6 @@
 {% load i18n %}
 
 {% block two_factor_content %}
-    {{ wizard.steps.current }}
     <h3>
         {% block title %}{% trans "Enable Two-Factor Authentication" %}{% endblock %}
 
@@ -31,9 +30,22 @@
     </h3>
 
     {% if wizard.steps.current == 'generator' %}
-        <p>
-            <img src="{{ QR_URL }}" alt="QR Code" style="background: white;" />
-        </p>
+        <div class="row-fluid section">
+            <div class="span12">
+                <p>
+                    <img src="{{ QR_URL }}" alt="QR Code" style="background: white;" />
+                </p>
+
+                <p>
+                    {% blocktrans trimmed %}
+                        If you are unable to scan the QR code above, please use the following key instead:
+                    {% endblocktrans %}
+                </p>
+                <p>
+                    {{ secret_key }}
+                </p>
+            </div>
+        </div>
     {% elif wizard.steps.current == 'validation' %}
         {% if not challenge_succeeded %}
             <p class="alert alert-warning" role="alert">
@@ -46,7 +58,7 @@
         {% endif %}
     {% endif %}
 
-    <form action="" method="post" class="form form-vertical">{% csrf_token %}
+    <form action="" method="post" class="form form-vertical" novalidate>{% csrf_token %}
         {% include "two_factor/_wizard_forms.html" %}
 
         {# hidden submit button to enable [enter] key #}
