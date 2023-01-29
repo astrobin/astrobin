@@ -15,7 +15,7 @@ Cypress.Commands.add('register', (opts={}) => {
     cy.bypassReCAPTCHA();
     cy.wait(1500);
 
-    cy.get(".form-horizontal button").click();
+    cy.get(".form-horizontal input[name='submit']").click();
 
     cy.url().should("contain", "/accounts/register/complete/");
 });

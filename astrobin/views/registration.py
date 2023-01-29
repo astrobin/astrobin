@@ -1,7 +1,7 @@
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Fieldset, HTML, Layout, Submit
+from crispy_forms.layout import Div, Fieldset, Layout, Submit
 from django import forms
 from django.conf import settings
 from django.contrib.auth.models import Group, User
@@ -84,8 +84,11 @@ class AstroBinRegistrationForm(RegistrationFormUniqueEmail, RegistrationFormTerm
             Fieldset(
                 '',
                 'recaptcha',
-            ),
-            Submit('submit', _('Submit'), css_class=f'btn btn-primary btn-block-mobile'),
+            ) if not settings.TESTING else Fieldset(''),
+            Div(
+                Submit('submit', _('Submit'), css_class=f'btn btn-primary btn-block-mobile'),
+                css_class='form-actions',
+            )
         )
 
         # For some reason, setting these in `labels` and `help_texts` before doesn't work only for `email`.
