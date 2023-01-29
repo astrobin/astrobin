@@ -18,7 +18,10 @@ if TESTING:
     }
 
     MIGRATION_MODULES = {
-        app.split('.')[-1]: None for app in INSTALLED_APPS
+        app.split('.')[-1]: None for app in INSTALLED_APPS if app not in [
+            # https://stackoverflow.com/questions/73104958/no-such-table-two-factor-phonedevice-when-using-django-two-factor-auth-1-14-0
+            'two_factor'
+        ]
     }
 
     MIGRATION_MODULES['astrobin'] = None

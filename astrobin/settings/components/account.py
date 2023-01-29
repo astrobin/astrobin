@@ -3,6 +3,8 @@ import string
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy
 
+from astrobin.settings.components.basic import BASE_URL
+
 
 class HasNumbersValidator:
     def validate(self, password: str, user=None):
@@ -75,6 +77,6 @@ AUTHENTICATION_BACKENDS = ('astrobin.auth.CustomBackend', )
 TWO_FACTOR_QR_FACTORY = 'qrcode.image.pil.PilImage'
 TWO_FACTOR_REMEMBER_COOKIE_AGE = 60*60*24*30
 TWO_FACTOR_REMEMBER_COOKIE_PREFIX = 'astrobin-two-factor-remember-cookie_'
-TWO_FACTOR_REMEMBER_COOKIE_DOMAIN = '.astrobin.com'
+TWO_FACTOR_REMEMBER_COOKIE_DOMAIN = '.astrobin.com' if 'astrobin' in BASE_URL else 'localhost'
 TWO_FACTOR_REMEMBER_COOKIE_SECURE = True
 OTP_EMAIL_SUBJECT = gettext_lazy("Your AstroBin authentication token")
