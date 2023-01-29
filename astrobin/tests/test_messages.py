@@ -23,7 +23,7 @@ class MessagesTest(TestCase):
 
         self.assertRedirects(
             response,
-            '/accounts/login/?next=/messages/inbox/',
+            '/account/login/?next=/messages/inbox/',
             status_code=302, target_status_code=200)
 
     def test_messages_send(self):

@@ -884,25 +884,25 @@ class UserTest(TestCase):
     def test_user_can_access_data_download_free(self):
         self.client.login(username='user', password='password')
         response = self.client.get(reverse('profile_download_data'))
-        self.assertRedirects(response, '/accounts/login/?next=' + reverse('profile_download_data'))
+        self.assertRedirects(response, '/account/login/?next=' + reverse('profile_download_data'))
 
     def test_user_can_access_data_download_lite(self):
         Generators.premium_subscription(self.user, "AstroBin Lite")
         self.client.login(username='user', password='password')
         response = self.client.get(reverse('profile_download_data'))
-        self.assertRedirects(response, '/accounts/login/?next=' + reverse('profile_download_data'))
+        self.assertRedirects(response, '/account/login/?next=' + reverse('profile_download_data'))
 
     def test_user_can_access_data_download_lite_autorenew(self):
         Generators.premium_subscription(self.user, "AstroBin Lite (autorenew)")
         self.client.login(username='user', password='password')
         response = self.client.get(reverse('profile_download_data'))
-        self.assertRedirects(response, '/accounts/login/?next=' + reverse('profile_download_data'))
+        self.assertRedirects(response, '/account/login/?next=' + reverse('profile_download_data'))
 
     def test_user_can_access_data_download_lite_2020(self):
         Generators.premium_subscription(self.user, "AstroBin Lite 2020+")
         self.client.login(username='user', password='password')
         response = self.client.get(reverse('profile_download_data'))
-        self.assertRedirects(response, '/accounts/login/?next=' + reverse('profile_download_data'))
+        self.assertRedirects(response, '/account/login/?next=' + reverse('profile_download_data'))
 
     def test_user_can_access_data_download_premium(self):
         Generators.premium_subscription(self.user, "AstroBin Premium")

@@ -1841,7 +1841,7 @@ class ImageTest(TestCase):
         response = self.client.post(post_url((image.get_id(),)))
         self.assertRedirects(
             response,
-            '/accounts/login/?next=' + post_url((image.get_id(),)),
+            '/account/login/?next=' + post_url((image.get_id(),)),
             status_code=302,
             target_status_code=200)
 
@@ -1890,7 +1890,7 @@ class ImageTest(TestCase):
         response = self.client.post(post_url((revision.pk,)))
         self.assertRedirects(
             response,
-            '/accounts/login/?next=' + post_url((revision.pk,)),
+            '/account/login/?next=' + post_url((revision.pk,)),
             status_code=302,
             target_status_code=200)
 

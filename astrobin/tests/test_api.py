@@ -20,7 +20,7 @@ class APITest(TestCase):
         response = self.client.get(reverse('app_api_key_request'))
         self.assertRedirects(
             response,
-            '/accounts/login/?next=' + reverse('app_api_key_request'),
+            '/account/login/?next=' + reverse('app_api_key_request'),
             status_code=302,
             target_status_code=200)
 
@@ -43,7 +43,7 @@ class APITest(TestCase):
         response = self.client.get(reverse('app_api_key_request'))
         self.assertRedirects(
             response,
-            '/accounts/login/?next=' + reverse('app_api_key_request'),
+            '/account/login/?next=' + reverse('app_api_key_request'),
             status_code=302,
             target_status_code=200)
 

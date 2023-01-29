@@ -1183,7 +1183,7 @@ astrobin_common = {
                                         },
                                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                                             if (XMLHttpRequest.status === 401) {
-                                                window.location.href = `/accounts/login/?next=/${imageIdOrHash}`;
+                                                window.location.href = `/account/login/?next=/${imageIdOrHash}`;
                                                 return;
                                             } else {
                                                 $('#cant-like').modal('show');

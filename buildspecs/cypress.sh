@@ -53,7 +53,7 @@ ${compose} logs -f 2>&1 &
 
 astrobin_attempts=0
 astrobin_max_attempts=24
-while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://127.0.0.1:8083/accounts/login/)" != "200" ]]; do
+while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://127.0.0.1:8083/account/login/)" != "200" ]]; do
     [[ $astrobin_attempts -eq $astrobin_max_attempts ]] && echo "Failed!" && exit 1
     echo "Waiting for astrobin (attempt ${astrobin_attempts})..."
     sleep 5
