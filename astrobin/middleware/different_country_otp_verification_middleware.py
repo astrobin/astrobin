@@ -36,7 +36,10 @@ class DifferentCountryOtpVerificationMiddleware(MiddlewareParentClass):
             country_code = get_client_country_code(request)
             is_new_country = country_code != user.userprofile.last_seen_in_country
 
-            if not 'localhost' in request.get_host() and (is_new_country or country_code in (None, 'UNKNOWN')):
+            if \
+                    not 'localhost' in request.get_host() and \
+                    not '127.0.0.1' in request.get_host() and \
+                    (is_new_country or country_code in (None, 'UNKNOWN')):
                 device, created = EmailDevice.objects.get_or_create(
                     user=user, name="default", confirmed=True
                 )
