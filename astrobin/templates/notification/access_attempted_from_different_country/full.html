@@ -1,0 +1,49 @@
+{% load i18n %}
+
+<p>
+    {% blocktrans trimmed %}
+        You, or somebody on your behalf, attempted to log in to AstroBin from a different country than the one you
+        were seen in last time, or from a country that could not be detected.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        For your security, an additional confirmation token was sent in a separate email.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        If this was a legitimate login attempt, please use the token to complete the process.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        If you did not make this login attempt, please change your password and/or contact AstroBin immediately.
+    {% endblocktrans %}
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        For your security, following this event, AstroBin has automatically enabled email-based two-factor
+        authentication on your account. You can disable in your settings or using the link below.
+    {% endblocktrans %}
+</p>
+
+<p>
+    <a class="btn btn-primary" href="{{ base_url }}{% url 'two_factor:profile' %}">
+        {% trans "Two-factor Authentication" %}
+    </a>
+</p>
+
+<p>
+    {% blocktrans trimmed %}
+        Wishing you clear skies and excellent seeing!
+    {% endblocktrans %}
+</p>
+
+<p>
+    AstroBin
+</p>

@@ -15,6 +15,7 @@ from django.core.exceptions import MultipleObjectsReturned
 from django.db import IntegrityError, transaction
 from django.db.models import Q
 from django.db.models.signals import (m2m_changed, post_delete, post_save, pre_save)
+from django.dispatch import receiver
 from django.urls import reverse as reverse_url
 from django.utils import timezone
 from django.utils.translation import gettext, override
@@ -27,6 +28,7 @@ from safedelete.models import SafeDeleteModel
 from safedelete.signals import post_softdelete
 from subscription.models import Transaction, UserSubscription
 from subscription.signals import paid, signed_up
+from two_factor.signals import user_verified
 
 from astrobin.tasks import process_camera_rename_proposal
 from astrobin_apps_equipment.models import EquipmentBrand
@@ -65,6 +67,7 @@ from .models import (
 )
 from .search_indexes import ImageIndex, UserIndex
 from .stories import add_story
+from .utils import get_client_country_code
 
 log = logging.getLogger('apps')
 
@@ -1280,3 +1283,9 @@ def image_collaborators_changed(sender, instance: Image, **kwargs):
 
 
 m2m_changed.connect(image_collaborators_changed, sender=Image.collaborators.through)
+
+
+@receiver(user_verified)
+def on_user_verified(request, user, device, **kwargs):
+    country_code = get_client_country_code(request)
+    UserService(user).set_last_seen(country_code)

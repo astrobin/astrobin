@@ -348,4 +348,10 @@ NOTICE_TYPES = (
         '',
         2
     ),
+    (
+        'access_attempted_from_different_country',
+        _("Login attempt detected from a different country"),
+        '',
+        2
+    ),
 )
