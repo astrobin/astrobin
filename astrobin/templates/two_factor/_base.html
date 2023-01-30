@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block title %}{% trans "Account" %}{% endblock %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Accounts' None %}
+{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        {% include 'user/profile/edit/navigation.html' %}
+
+        <div class="span9">
+            {% if READONLY_MODE %}
+                {% include 'readonly_mode.html' %}
+            {% else %}
+                {% block two_factor_content %}
+                {% endblock %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

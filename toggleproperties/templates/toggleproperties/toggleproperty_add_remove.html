@@ -110,7 +110,7 @@
                     });
                 }
             {% else %} {# Anonymous user #}
-                window.location = '/accounts/login/?next={{request.path}}'
+                window.location = '/account/login/?next={{request.path}}'
             {% endif %}
 
             return false;

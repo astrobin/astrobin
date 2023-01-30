@@ -1,0 +1,28 @@
+{% extends "two_factor/_base.html" %}
+
+{% load i18n %}
+{% load bootstrap_toolkit %}
+{% load common_tags %}
+
+{% block two_factor_content %}
+    <h3>
+        {% block title %}{% trans "Disable Two-factor Authentication" %}{% endblock %}
+
+        <small>
+            {% blocktrans trimmed %}
+                You are about to disable two-factor authentication. This weakens your account's  security, are you sure?
+            {% endblocktrans %}
+        </small>
+    </h3>
+
+    <form method="post" class="form-vertical" novalidate>{% csrf_token %}
+        {{ form | as_bootstrap }}
+
+        <div class="form-actions">
+            <button class="btn btn-danger btn-block-mobile {% button_loading_class %}" type="submit">
+                {% trans "Disable" %}
+                {% button_loading_indicator %}
+            </button>
+        </div>
+    </form>
+{% endblock %}

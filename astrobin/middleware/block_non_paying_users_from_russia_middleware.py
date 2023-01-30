@@ -11,6 +11,7 @@ class BlockNonPayingUsersFromRussiaMiddleware(MiddlewareParentClass):
     def _process(self, request):
         country_code = get_client_country_code(request)
         excluded_paths = [
+            '/account',
             '/accounts',
             '/json-api/',
             '/thumb/',

@@ -628,7 +628,7 @@ $(function () {
                             }
                         });
                     } else if (XMLHttpRequest.status === 401) {
-                        window.location.href = "/accounts/login/?next=" + encodeURI(nc_app.path + '#c' + comment.id);
+                        window.location.href = "/account/login/?next=" + encodeURI(nc_app.path + '#c' + comment.id);
                         return;
                     }
 
@@ -871,7 +871,7 @@ $(function () {
         },
 
         loginAndGoToComment: function () {
-            window.location.href = '/accounts/login/?next={0}#{1}'.format(nc_app.path, this.get('node.cid'));
+            window.location.href = '/account/login/?next={0}#{1}'.format(nc_app.path, this.get('node.cid'));
         },
 
         link: function () {

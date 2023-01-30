@@ -7,10 +7,11 @@ class LoginTest(TestCase):
         User.objects.create_user('test', 'test@test.com', 'password')
 
         response = self.client.post(
-            '/accounts/login/',
+            '/account/login/',
             {
-                'username': 'test',
-                'password': 'password',
+                'auth-username': 'test',
+                'auth-password': 'password',
+                'login_view-current_step': 'auth',
             })
 
         self.assertRedirects(response, '/')
@@ -19,10 +20,11 @@ class LoginTest(TestCase):
         User.objects.create_user('test', 'test@test.com', 'password')
 
         response = self.client.post(
-            '/accounts/login/',
+            '/account/login/',
             {
-                'username': 'test@test.com',
-                'password': 'password',
+                'auth-username': 'test@test.com',
+                'auth-password': 'password',
+                'login_view-current_step': 'auth',
             })
 
         self.assertRedirects(response, '/')
@@ -32,10 +34,11 @@ class LoginTest(TestCase):
         User.objects.create_user('Test', 'test2@test.com', 'password2')
 
         response = self.client.post(
-            '/accounts/login/',
+            '/account/login/',
             {
-                'username': 'test',
-                'password': 'password',
+                'auth-username': 'test',
+                'auth-password': 'password',
+                'login_view-current_step': 'auth',
             })
 
         self.assertRedirects(response, '/')
@@ -43,10 +46,11 @@ class LoginTest(TestCase):
         self.client.logout()
 
         response = self.client.post(
-            '/accounts/login/',
+            '/account/login/',
             {
-                'username': 'Test',
-                'password': 'password2',
+                'auth-username': 'Test',
+                'auth-password': 'password2',
+                'login_view-current_step': 'auth',
             })
 
         self.assertRedirects(response, '/')
@@ -55,10 +59,11 @@ class LoginTest(TestCase):
         User.objects.create_user('test', 'test@test.com', 'password')
 
         response = self.client.post(
-            '/accounts/login/',
+            '/account/login/',
             {
-                'username': 'Test',
-                'password': 'password',
+                'auth-username': 'Test',
+                'auth-password': 'password',
+                'login_view-current_step': 'auth',
             })
 
         self.assertRedirects(response, '/')

@@ -1,0 +1,26 @@
+{% load i18n %}
+{% load common_tags %}
+
+<div class="form-actions">
+    {% if wizard.steps.prev %}
+        <button
+            name="wizard_goto_step"
+            type="submit"
+            value="{{ wizard.steps.prev }}"
+            class="btn btn-secondary btn-block-mobile {% button_loading_class %}"
+        >
+            {% trans "Back" %}
+            {% button_loading_indicator %}
+        </button>
+    {% endif %}
+
+    <button
+        type="submit"
+        class="btn btn-primary btn-block-mobile {% button_loading_class %}"
+    >
+        {% trans "Continue" %}
+        {% button_loading_indicator %}
+    </button>
+
+    <a class="btn btn-link btn-block-mobile" href="{% url 'auth_password_reset' %}">{% trans "Reset password" %}</a>
+</div>

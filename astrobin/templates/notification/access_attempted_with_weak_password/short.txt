@@ -1,0 +1,5 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    AstroBin detected that your password does not meet security requirements
+{% endblocktrans %}

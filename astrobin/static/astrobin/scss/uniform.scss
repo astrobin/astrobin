@@ -212,6 +212,7 @@ div.checker.disabled.active span.checked {
 
 label.radio {
   width: 100%;
+  margin-left: 20px;
 }
 
 div.radio {
@@ -476,16 +477,21 @@ div.uploader.disabled span.filename {
   -----------------------------------------------------
   */
 
-.selector,
-.checker,
-.button,
-.radio,
-.uploader {
+div.selector,
+div.checker,
+div.button,
+div.radio,
+div.uploader {
   display: -moz-inline-box;
   display: inline-block;
   vertical-align: middle;
   zoom: 1;
   display: inline;
+}
+
+div.radio,
+div.checker {
+  margin-left: -20px;
 }
 
 .selector select:focus, .radio input:focus, .checker input:focus, .uploader input:focus {

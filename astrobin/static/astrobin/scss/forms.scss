@@ -1,3 +1,7 @@
+h1 + .well + form {
+  margin-top: 4rem;
+}
+
 input[type="text"],
 input[type="password"],
 input[type="datetime"],
@@ -38,9 +42,38 @@ input:focus, textarea:focus {
 
 }
 
-.help-block, .help-inline {
-  margin-top: $spacer-medium;
-  color: #866158;
+.help-block,
+.help-inline {
+  &,
+  > ul > li,
+  + ul > li,
+  > strong {
+    display: block !important;
+    padding-left: 0;
+    font-size: 90%;
+    font-style: italic;
+    margin-top: $spacer-medium;
+    color: #866158;
+    font-weight: normal;
+  }
+
+  > ul,
+  + ul {
+    margin-left: 0;
+
+    > li {
+      margin-top: 2px;
+    }
+  }
+
+  &[id*=error] {
+    > strong {
+      background: $red;
+      color: $strong-text-color !important;
+      padding: 4px;
+      @include rounded-corners(3px);
+    }
+  }
 }
 
 .form-actions {
@@ -58,11 +91,13 @@ input:focus, textarea:focus {
 
 .form-horizontal {
   input[type=text],
+  input[type=email],
   input[type=password],
   textarea,
   .cke,
   select,
-  .help-block {
+  .help-block,
+  .help-inline {
     max-width: 610px;
     width: calc(100% - 1rem);
   }
@@ -85,11 +120,6 @@ input:focus, textarea:focus {
       padding-left: 0;
     }
   }
-
-  .radio,
-  .checkbox {
-    padding-left: 0 !important;
-  }
 }
 
 .form-inline {
@@ -103,6 +133,13 @@ input:focus, textarea:focus {
 }
 
 .form-vertical {
+  .control-label {
+    font-size: 1.15rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    display: inline-block;
+  }
+
   .form-actions {
     padding-left: 0;
   }
@@ -112,4 +149,10 @@ input:focus, textarea:focus {
   .loading {
     text-align: center;
   }
+}
+
+fieldset:not(:last-of-type) {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid $grey-5;
 }

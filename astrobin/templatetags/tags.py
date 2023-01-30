@@ -400,7 +400,7 @@ def show_skyscraper_ads_on_page(context):
     is_anon = not context['request'].user.is_authenticated
     image_owner_is_ultimate = False
 
-    if context.template_name.startswith('registration/'):
+    if request.path.startswith('/account'):
         return False
     elif context.template_name == 'image/detail.html':
         for data in context.dicts:

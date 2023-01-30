@@ -1,7 +1,7 @@
 import logging
 import math
-from datetime import timedelta
-from typing import List, Optional, Tuple, Union
+from datetime import datetime, timedelta
+from typing import List, Optional, Union
 
 import numpy as np
 from django.conf import settings
@@ -565,3 +565,22 @@ class UserService:
             return self.user.groups.filter(name__in=group_name)
 
         return self.user.groups.filter(name=group_name)
+
+    def set_last_seen(self, country_code):
+        from astrobin.models import UserProfile
+
+        try:
+            profile: UserProfile = UserProfile.objects.get(user=self.user)
+            profile.last_seen = datetime.now()
+
+            if country_code and country_code != 'UNKNOWN':
+                try:
+                    profile.last_seen_in_country = country_code.lower()[0:2]
+                except IndexError:
+                    profile.last_seen_in_country = None
+            else:
+                profile.last_seen_in_country = None
+
+            profile.save(keep_deleted=True)
+        except UserProfile.DoesNotExist:
+            pass

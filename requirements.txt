@@ -11,10 +11,12 @@
 amqp==2.6.1
 amqplib==1.0.2
 anyjson==0.3.3
+asgiref==3.6.0
 asn1crypto==1.4.0
 autopep8==1.7.0
 awscli==1.19.112
 backports-abc==0.5
+backports.zoneinfo==0.2.1
 bbcode==1.1.0
 beautifulsoup4==4.9.3
 billiard==3.6.4.0
@@ -55,13 +57,14 @@ django-classy-tags==2.0.0
 django-contrib-comments==2.1.0
 django-cookie-law==2.1.1
 django-cors-middleware==1.5.0
-django-crispy-forms==1.12.0
+django-crispy-forms==1.14.0
 django-debug-toolbar-template-timings==0.9
 django-debug-toolbar==3.2.1
 django-easysettings==2.0.1
 django-el-pagination==3.3.0
 django-extensions==3.1.3
 django-filter==2.4.0
+django-formtools===2.4
 django-haystack==3.1.1
 django-image-cropping==1.5.0
 django-keyedcache==1.5.1
@@ -70,9 +73,12 @@ django-maintenancemode==0.11.7
 django-markup-deprecated==0.0.4
 django-model-utils==4.2.0
 django-multidb-router==0.10
+django_otp==1.1.4
 django-paypal==2.0
+django-phonenumber-field==6.4.0
 django-pipeline==2.0.8
 django-precise-bbcode==1.2.13
+django-pwnedpasswords-validator==1.0.1
 django-recaptcha==2.0.6
 django-redis==5.0.0
 django-registration==2.5.2
@@ -85,6 +91,7 @@ django-tagging==0.5.0
 django-tastypie==0.14.4
 django-tinymce==3.4.0
 django-timezone-field==4.1.2
+django-two-factor-auth==1.14.0
 django-user-agents==0.4.0
 django-xmlrpc==0.1.8
 Django==2.2.24
@@ -143,6 +150,7 @@ Paste==3.5.2
 pathlib2==2.3.7.post1
 pbr==5.8.0
 pem==21.2.0
+phonenumbers==8.13.4
 Pillow==8.3.0
 ply==3.11
 prometheus-client==0.8.0
@@ -165,6 +173,8 @@ python-mimeparse==1.6.0
 python-modargs==1.7
 pytz==2021.3
 PyYAML==5.4.1
+qrcode==7.3.1
+pwnedpasswords==2.0.0
 rcssmin==1.1.1
 redis==3.5.3
 regex==2022.1.18

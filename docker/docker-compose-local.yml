@@ -36,7 +36,7 @@ services:
       context: ../
       dockerfile: docker/astrobin.dockerfile
     healthcheck:
-      test: curl --fail http://localhost:8083/accounts/login/ || exit 1
+      test: curl --fail http://localhost:8083/account/login/ || exit 1
       interval: 1s
       timeout: 3s
       retries: 120

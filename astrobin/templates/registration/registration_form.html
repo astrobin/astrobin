@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% load i18n %}
-{% load bootstrap_toolkit %}
 {% load django_bootstrap_breadcrumbs %}
 {% load common_tags %}
+{% load crispy_forms_tags %}
 
 {% block title %}{% trans "Register with AstroBin" %}{% endblock %}
 
@@ -22,16 +22,7 @@
             {% blocktrans %}By registering with AstroBin, you agree to our <a href="https://welcome.astrobin.com/terms-of-service">terms of service</a>.{% endblocktrans %}
         </div>
 
-        <form class="form-horizontal" method="post" action="">{% csrf_token %}
-            {{ form|as_bootstrap }}
-
-            <div class="form-actions">
-                <button class="btn btn-primary btn-block-mobile {% button_loading_class %}" type="submit">
-                    {% trans "Submit" %}
-                    {% button_loading_indicator %}
-                </button>
-            </div>
-        </form>
+        {% crispy form %}
     {% endif %}
 {% endblock %}
 

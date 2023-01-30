@@ -1,0 +1,29 @@
+{% load i18n %}
+
+{% trans "Hey!" %}
+
+{% blocktrans trimmed %}
+    Here is your two-factor authentication token to log in to AstroBin:
+{% endblocktrans %}
+
+{{ token }}
+
+{% blocktrans trimmed with n=5 %}
+    This token is valid for {{n}} minutes.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    If you did not make this login attempt, please change your password and/or contact AstroBin immediately.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    To change your two-factor authentication settings, please visit this page:
+{% endblocktrans %}
+https://www.astrobin.com{% url 'two_factor:profile' %}
+
+
+{% blocktrans trimmed %}
+    Wishing you clear skies and excellent seeing!
+{% endblocktrans %}
+
+AstroBin

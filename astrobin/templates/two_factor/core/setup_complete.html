@@ -1,0 +1,17 @@
+{% extends "two_factor/_base.html" %}
+
+{% load i18n %}
+
+{% block two_factor_content %}
+    <p>
+        {% blocktrans trimmed %}
+            Congratulations, you've successfully enabled two-factor authentication.
+        {% endblocktrans %}
+    </p>
+
+    <p>
+        <a href="{% url 'two_factor:profile' %}" class="btn btn-secondary btn-block-mobile">
+            {% trans "Back to Account Security" %}
+        </a>
+    </p>
+{% endblock %}

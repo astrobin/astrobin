@@ -7,19 +7,21 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.decorators.cache import never_cache
 from django.views.generic import RedirectView
 from django.views.static import serve
-from rest_framework.authtoken.views import obtain_auth_token
 from tastypie.api import Api
 from threaded_messages.views import (
-    batch_update as messages_batch_update, delete as messages_delete, undelete as messages_undelete,
-    inbox as messages_inbox, outbox as messages_outbox, trash as messages_trash,
-    message_ajax_reply as messages_message_ajax_reply, view as messages_view,
+    batch_update as messages_batch_update, delete as messages_delete, inbox as messages_inbox,
+    message_ajax_reply as messages_message_ajax_reply, outbox as messages_outbox, trash as messages_trash,
+    undelete as messages_undelete, view as messages_view,
 )
+from two_factor.urls import urlpatterns as tf_urls
 
 from astrobin import lookups
 from astrobin.api import (
     CollectionResource, ImageOfTheDayResource, ImageResource, ImageRevisionResource, LocationResource,
     TopPickNominationResource, TopPickResource, UserProfileResource,
 )
+from astrobin.api2.views.custom_auth_token_view import CustomAuthTokenView
+from astrobin.forms.password_change_form import PasswordChangeForm
 from astrobin.forms.password_reset_form import PasswordResetForm
 from astrobin.search import AstroBinSearchView
 from astrobin.views import (
@@ -40,7 +42,6 @@ from astrobin.views import (
     user_profile_save_locations, user_profile_save_preferences, user_profile_save_privacy,
     user_profile_seen_iotd_tp_is_explicit_submission, user_profile_seen_realname, user_profile_shadow_ban,
 )
-from astrobin.views.auth.login import LoginView
 from astrobin.views.auth.logout import LogoutView
 from astrobin.views.contact import ContactRedirectView
 from astrobin.views.forums import LatestTopicsView
@@ -80,7 +81,7 @@ urlpatterns += [
 
     url(
         r'^accounts/password/change/$',
-        auth_views.PasswordChangeView.as_view(),
+        auth_views.PasswordChangeView.as_view(form_class=PasswordChangeForm),
         name='password_change'
     ),
     url(
@@ -117,9 +118,7 @@ urlpatterns += [
     url(r'^accounts/email/', include('change_email.urls')),
     url(
         r'^accounts/login/$',
-        LoginView.as_view(
-            template_name='registration/login.html'
-        ),
+        RedirectView.as_view(url='/account/login/', query_string=True, permanent=True),
         name='auth_login'
     ),
     url(
@@ -130,7 +129,7 @@ urlpatterns += [
         name='auth_logout'
     ),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
-
+    url('', include(tf_urls)),
     ###########################################################################
     ### THIRD PARTY APPS VIEWS                                              ###
     ###########################################################################
@@ -159,7 +158,8 @@ urlpatterns += [
     url(r'^api/request-key/$', never_cache(api_views.AppApiKeyRequestView.as_view()), name='app_api_key_request'),
     url(r'^api/request-key/complete/$', never_cache(api_views.AppApiKeyRequestCompleteView.as_view()),
         name='app_api_key_request_complete'),
-    url(r'^api/v2/api-auth-token/', obtain_auth_token),
+
+    url(r'^api/v2/api-auth-token/', CustomAuthTokenView.as_view()),
     url(r'^api/v2/api-auth/', include(('rest_framework.urls', 'rest_framework'))),
     url(r'^api/v2/common/', include('common.api_urls')),
     url(r'^api/v2/astrobin/', include('astrobin.api2.urls')),
