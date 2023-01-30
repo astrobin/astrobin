@@ -354,4 +354,10 @@ NOTICE_TYPES = (
         '',
         2
     ),
+    (
+        'access_attempted_with_weak_password',
+        _("Login attempt with weak password"),
+        '',
+        2
+    ),
 )

@@ -1,0 +1,42 @@
+{% load i18n %}
+
+{% blocktrans trimmed %}
+    You, or somebody on your behalf, attempted to log in to AstroBin and we detected that your password does not meet
+    security requirements.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    For your security, an additional confirmation token was sent in a separate email.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    If this was a legitimate login attempt, please use the token to complete the process.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    If you did not make this login attempt, please change your password and/or contact AstroBin immediately.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}
+    For your security, following this event, AstroBin has automatically enabled email-based two-factor
+    authentication on your account. You can disable in your settings or using the link below.
+{% endblocktrans %}
+
+{{ base_url }}{% url 'two_factor:profile' %}
+
+{% blocktrans trimmed %}
+    We recommend that you change your password as soon as possible, for your security and the safety of the other
+    members of the AstroBin community.
+{% endblocktrans %}
+
+{% blocktrans trimmed %}Learn more about security standards on AstroBin:{% endblocktrans %}
+https://welcome.astrobin.com/faq#is-my-security-protected
+
+{% blocktrans trimmed %}Change your password:{% endblocktrans %}
+{{ base_url }}{% url 'password_change' %}
+
+{% blocktrans trimmed %}
+    Wishing you clear skies and excellent seeing!
+{% endblocktrans %}
+
+AstroBin

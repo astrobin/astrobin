@@ -17,6 +17,12 @@
 {% endblocktrans %}
 
 {% blocktrans trimmed %}
+    To change your two-factor authentication settings, please visit this page:
+{% endblocktrans %}
+https://www.astrobin.com{% url 'two_factor:profile' %}
+
+
+{% blocktrans trimmed %}
     Wishing you clear skies and excellent seeing!
 {% endblocktrans %}
 
