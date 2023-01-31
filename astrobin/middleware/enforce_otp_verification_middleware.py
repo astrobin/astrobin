@@ -56,7 +56,8 @@ class EnforceOtpVerificationMiddleware(MiddlewareParentClass):
                     push_notification([user], None, 'access_attempted_from_different_country', {})
             else:
                 try:
-                    validate_password(password, user)
+                    if user.check_password(password):
+                        validate_password(password, user)
                 except ValidationError as e:
                     device, created = self._create_email_device(user)
 
