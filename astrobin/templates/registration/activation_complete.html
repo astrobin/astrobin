@@ -22,11 +22,14 @@
 {% endblock %}
 
 {% block content %}
-    <p>
-        {% trans "Your profile is now active." %} {% trans "Thank you!" %}
-    </p>
+    <h1>
+        {% trans "Account activated" %}
+        <small>
+            {% trans "Your profile is now active." %} {% trans "Thank you!" %}
+        </small>
+    </h1>
 
-    <a class="btn btn-primary" href="{% url 'auth_login' %}">
-        {% trans "Login" %}.
+    <a class="btn btn-primary btn-block-mobile" href="{% url 'auth_login' %}">
+        {% trans "Log in" %}
     </a>
 {% endblock %}

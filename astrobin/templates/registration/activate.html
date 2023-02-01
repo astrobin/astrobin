@@ -14,9 +14,23 @@
 
 {% block content %}
     {% if account %}
-        <p>{% trans "Account successfully activated" %}</p>
-        <p><a class="btn btn-primary btn-block-mobile" href="{% url 'auth_login' %}">{% trans "Log in" %}</a></p>
+        <h1>{% trans "Account successfully activated" %}</h1>
     {% else %}
-        <p>{% trans "Account activation failed" %}</p>
+        <h1>
+            {% trans "Account activation failed" %}
+
+            <small>
+                {% blocktrans trimmed %}
+                    This could mean that your activation link expired, is invalid, or you clicked it more than once (in
+                    which case, please try to log in: your account could be already active).
+                {% endblocktrans %}
+            </small>
+        </h1>
     {% endif %}
+
+    <p>
+        <a class="btn btn-primary btn-block-mobile" href="{% url 'auth_login' %}">
+            {% trans "Log in" %}
+        </a>
+    </p>
 {% endblock %}
