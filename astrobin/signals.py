@@ -721,7 +721,7 @@ def group_members_changed(sender, instance, **kwargs):
                         ToggleProperty.objects.toggleproperties_for_object("follow", user)
                     ]
                     push_notification(
-                        followers + [instance.owner],
+                        sorted(list(set(followers + [instance.owner])), key=lambda x: x.pk),
                         user,
                         'user_joined_public_group',
                         {
