@@ -10,6 +10,7 @@ from astrobin.models import Image
 from astrobin.signals import imagerevision_post_save
 from astrobin.tests.generators import Generators
 from astrobin_apps_equipment.tests.equipment_generators import EquipmentGenerators
+from astrobin_apps_groups.models import Group
 from toggleproperties.models import ToggleProperty
 
 
@@ -474,3 +475,101 @@ class SignalsTest(TestCase):
         image.collaborators.remove(collaborator2)
         self.assertTrue(clear_gallery_image_list_cache.called)
         self.assertEquals(1, clear_gallery_image_list_cache.call_count)
+
+    @mock.patch('astrobin.signals.push_notification')
+    def test_user_joined_public_group_notification(self, push_notification):
+        user = Generators.user()
+        owner = Generators.user()
+        group = Group.objects.create(
+            name='test',
+            creator=owner,
+            owner=owner,
+            public=True,
+        )
+
+        group.members.add(user)
+
+        push_notification.assert_has_calls(
+            [
+                mock.call(
+                    [owner], user, 'user_joined_public_group', mock.ANY
+                ),
+            ]
+        )
+
+    @mock.patch('astrobin.signals.push_notification')
+    def test_user_joined_public_group_notification_creator(self, push_notification):
+        user = Generators.user()
+        creator = Generators.user()
+        owner = Generators.user()
+        group = Group.objects.create(
+            name='test',
+            creator=creator,
+            owner=owner,
+            public=True,
+        )
+
+        group.members.add(user)
+
+        push_notification.assert_has_calls(
+            [
+                mock.call(
+                    [owner], user, 'user_joined_public_group', mock.ANY
+                ),
+            ],
+        )
+
+    @mock.patch('astrobin.signals.push_notification')
+    def test_user_joined_public_group_notification_when_owner_follows(self, push_notification):
+        user = Generators.user()
+        owner = Generators.user()
+
+        ToggleProperty.objects.create(
+            property_type='follow',
+            user=owner,
+            content_object=user
+
+        )
+
+        group = Group.objects.create(
+            name='test',
+            creator=owner,
+            owner=owner,
+            public=True,
+        )
+
+        group.members.add(user)
+
+        push_notification.assert_has_calls(
+            [
+                mock.call(
+                    [owner], user, 'user_joined_public_group', mock.ANY
+                ),
+            ]
+        )
+
+    @mock.patch('astrobin.signals.push_notification')
+    def test_user_joined_public_group_notification_no_double_notification_for_member_and_owner(self, push_notification):
+        user = Generators.user()
+        owner = Generators.user()
+
+        group = Group.objects.create(
+            name='test',
+            creator=owner,
+            owner=owner,
+            public=True,
+        )
+
+        group.members.add(owner)
+
+        push_notification.reset_mock()
+
+        group.members.add(user)
+
+        push_notification.assert_has_calls(
+            [
+                mock.call(
+                    [owner], user, 'user_joined_public_group', mock.ANY
+                ),
+            ]
+        )
