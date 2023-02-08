@@ -10,74 +10,84 @@
         <span class="caret hidden-phone"></span>
     </a>
     <ul class="dropdown-menu">
-        <li>
-            <a href="{% url 'image_download' image.get_id revision_label 'regular' %}"
-               data-loading-text="{% trans "AstroBin is preparing your download. Please wait..." %}"
-            >
-                <i class="icon-check-empty"></i>
-                {% trans "Medium size" %}
-            </a>
-        </li>
-
-        <li>
-            <a href="{% url 'image_download' image.get_id revision_label 'hd' %}"
-               data-loading-text="{% trans "AstroBin is preparing your download. Please wait..." %}"
-            >
-                <i class="icon-check-empty"></i>
-                {% trans "Large size" %}
-            </a>
-        </li>
-
-        <li>
-            <a href="{% url 'image_download' image.get_id revision_label 'qhd' %}"
-               data-loading-text="{% trans "AstroBin is preparing your download. Please wait..." %}">
-                <i class="icon-check-empty"></i>
-                {% trans "Extra-large size" %}
-            </a>
-        </li>
-
-        <li>
-            <a href="{% url 'image_download' image.get_id revision_label 'real' %}"
-               data-loading-text="{% trans "AstroBin is preparing your download. Please wait..." %}"
-            >
-                <i class="icon-check-empty"></i>
-                {% trans "Original size" %}
-            </a>
-        </li>
-
-        {% if instance_to_platesolve.solution|is_basic_success_status or instance_to_platesolve.solution|is_advanced_success_status %}
-            <li class="divider"></li>
-
+        {% if image.animated %}
             <li>
-                <a href="{% url 'image_download' image.get_id revision_label 'basic_annotations' %}"
+                <a href="{% url 'image_download' image.get_id revision_label 'real' %}"
                    data-loading-text="{% trans "AstroBin is preparing your download. Please wait..." %}">
-                    <i class="icon-star-empty"></i>
-                    {% trans "Basic annotations" %}
+                    <i class="icon-check-empty"></i>
+                    {% trans "Original size" %}
+                </a>
+            </li>
+        {% else %}
+            <li>
+                <a href="{% url 'image_download' image.get_id revision_label 'regular' %}"
+                   data-loading-text="{% trans "AstroBin is preparing your download. Please wait..." %}"
+                >
+                    <i class="icon-check-empty"></i>
+                    {% trans "Medium size" %}
                 </a>
             </li>
 
-            {% if instance_to_platesolve.solution|is_advanced_success_status %}
+            <li>
+                <a href="{% url 'image_download' image.get_id revision_label 'hd' %}"
+                   data-loading-text="{% trans "AstroBin is preparing your download. Please wait..." %}"
+                >
+                    <i class="icon-check-empty"></i>
+                    {% trans "Large size" %}
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'image_download' image.get_id revision_label 'qhd' %}"
+                   data-loading-text="{% trans "AstroBin is preparing your download. Please wait..." %}">
+                    <i class="icon-check-empty"></i>
+                    {% trans "Extra-large size" %}
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'image_download' image.get_id revision_label 'real' %}"
+                   data-loading-text="{% trans "AstroBin is preparing your download. Please wait..." %}"
+                >
+                    <i class="icon-check-empty"></i>
+                    {% trans "Original size" %}
+                </a>
+            </li>
+
+            {% if instance_to_platesolve.solution|is_basic_success_status or instance_to_platesolve.solution|is_advanced_success_status %}
+                <li class="divider"></li>
+
                 <li>
-                    <a href="{% url 'image_download' image.get_id revision_label 'advanced_annotations' %}"
+                    <a href="{% url 'image_download' image.get_id revision_label 'basic_annotations' %}"
                        data-loading-text="{% trans "AstroBin is preparing your download. Please wait..." %}">
                         <i class="icon-star-empty"></i>
-                        {% trans "Advanced annotations" %}
+                        {% trans "Basic annotations" %}
+                    </a>
+                </li>
+
+                {% if instance_to_platesolve.solution|is_advanced_success_status %}
+                    <li>
+                        <a href="{% url 'image_download' image.get_id revision_label 'advanced_annotations' %}"
+                           data-loading-text="{% trans "AstroBin is preparing your download. Please wait..." %}">
+                            <i class="icon-star-empty"></i>
+                            {% trans "Advanced annotations" %}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endif %}
+
+            {% if image.user == request.user or request.user.is_superuser %}
+                <li class="divider"></li>
+
+                <li>
+                    <a href="{% url 'image_download' image.get_id revision_label 'original' %}"
+                       data-loading-text="{% trans "AstroBin is preparing your download. Please wait..." %}">
+                        <i class="icon-lock"></i>
+                        {% trans "Original file" %}
                     </a>
                 </li>
             {% endif %}
-        {% endif %}
-
-        {% if image.user == request.user or request.user.is_superuser %}
-            <li class="divider"></li>
-
-            <li>
-                <a href="{% url 'image_download' image.get_id revision_label 'original' %}"
-                   data-loading-text="{% trans "AstroBin is preparing your download. Please wait..." %}">
-                    <i class="icon-lock"></i>
-                    {% trans "Original file" %}
-                </a>
-            </li>
-        {% endif %}
+        {% endif %} {# animated #}
     </ul>
 </li>
 {% endif %}

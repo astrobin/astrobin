@@ -1453,7 +1453,11 @@ class ImageDownloadView(View):
 
             return response
 
-        thumbnail_url = image.thumbnail(version, revision_label, sync=True)
+        if image.animated:
+            thumbnail_url = revision.image_file.url if revision else image.image_file.url
+        else:
+            thumbnail_url = image.thumbnail(version, revision_label, sync=True)
+
         return self.download(thumbnail_url)
 
 
