@@ -518,6 +518,8 @@ def image_upload(request):
 @login_required
 @require_POST
 def image_upload_process(request):
+    from PIL import Image as PILImage
+
     log.info("Classic uploader (%d): submitted" % request.user.pk)
 
     used_percent = PremiumService.get_image_quota_usage_percentage(
@@ -558,7 +560,6 @@ def image_upload_process(request):
 
     if image_file.size < 1e+7:
         try:
-            from PIL import Image as PILImage
             trial_image = PILImage.open(image_file)
             trial_image.verify()
             image_file.file.seek(0)  # Because we opened it with PIL
@@ -579,6 +580,10 @@ def image_upload_process(request):
 
     if 'wip' in request.POST:
         image.is_wip = True
+
+    if ext == '.gif':
+        with PILImage.open(image_file) as trial_image:
+            image.animated = getattr(trial_image, 'is_animated', False)
 
     image.save(keep_deleted=True)
 

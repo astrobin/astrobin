@@ -1,6 +1,8 @@
 import logging
 import os
 
+from PIL import Image as PILImage
+
 import simplejson
 from django.core.files import File
 from django.http import HttpResponse
@@ -158,6 +160,10 @@ class TusPatchMixin(TusCacheMixin, mixins.UpdateModelMixin):
                     self.get_upload_path_function()(object, self.get_cached_property("name", object)),
                     File(open(temporary_file, 'rb'))
                 )
+
+                if hasattr(object, 'animated'):
+                    with PILImage.open(temporary_file) as image_file:
+                        object.animated = getattr(image_file, 'is_animated', False)
 
                 if hasattr(object, 'uploader_in_progress'):
                     object.uploader_in_progress = None
