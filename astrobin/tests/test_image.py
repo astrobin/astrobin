@@ -2260,6 +2260,48 @@ class ImageTest(TestCase):
             ], any_order=True
         )
 
+    @patch('astrobin.signals.SearchIndexUpdateService.update_index')
+    def test_image_collaborators_updated_after_toggleproperty(self, update_index):
+        image = Generators.image()
+        collaborator1 = Generators.user()
+        collaborator2 = Generators.user()
+
+        image.collaborators.add(collaborator1, collaborator2)
+
+        ToggleProperty.objects.create_toggleproperty('like', image, Generators.user())
+
+        update_index.assert_has_calls(
+            [
+                mock.call(image),
+                mock.call(image.user, mock.ANY),
+                mock.call(collaborator1, mock.ANY),
+                mock.call(collaborator2, mock.ANY),
+            ], any_order=True
+        )
+
+    @patch('astrobin.signals.SearchIndexUpdateService.update_index')
+    def test_image_collaborators_updated_after_toggleproperty_deleted(self, update_index):
+        image = Generators.image()
+        collaborator1 = Generators.user()
+        collaborator2 = Generators.user()
+
+        image.collaborators.add(collaborator1, collaborator2)
+
+        like = ToggleProperty.objects.create_toggleproperty('like', image, Generators.user())
+
+        update_index.reset_mock()
+
+        like.delete()
+
+        update_index.assert_has_calls(
+            [
+                mock.call(image),
+                mock.call(image.user, mock.ANY),
+                mock.call(collaborator1, mock.ANY),
+                mock.call(collaborator2, mock.ANY),
+            ], any_order=True
+        )
+
     def test_image_updated_after_acquisition_saved(self):
         self.client.login(username='test', password='password')
         self._do_upload('astrobin/fixtures/test.jpg')
