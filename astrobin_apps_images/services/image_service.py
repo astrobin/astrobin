@@ -481,7 +481,8 @@ class ImageService:
             if not previously_published:
                 if not skip_notifications:
                     push_notification_for_new_image.apply_async(args=(self.image.pk,), countdown=10)
-                add_story(self.image.user, verb='VERB_UPLOADED_IMAGE', action_object=self.image)
+                if self.image.moderator_decision == ModeratorDecision.APPROVED:
+                    add_story(self.image.user, verb='VERB_UPLOADED_IMAGE', action_object=self.image)
 
     def delete_stories(self):
         Action.objects.target(self.image).delete()
