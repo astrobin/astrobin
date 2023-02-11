@@ -61,6 +61,9 @@ class EnforceOtpVerificationMiddleware(MiddlewareParentClass):
             except User.DoesNotExist:
                 log.debug(f'enforce_otp_verification_middleware: user with email {handle} does not exist')
                 return
+            except User.MultipleObjectsReturned:
+                log.debug(f'enforce_otp_verification_middleware: user with email {handle}: multiple found')
+                return
 
         country_code = get_client_country_code(request)
         is_new_country = country_code.lower() != user.userprofile.last_seen_in_country
