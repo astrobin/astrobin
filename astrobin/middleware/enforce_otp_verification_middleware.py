@@ -42,50 +42,62 @@ class EnforceOtpVerificationMiddleware(MiddlewareParentClass):
         if not self._process(request):
             return
 
-        username = request.POST.get('auth-username')
+        handle = request.POST.get('auth-username')
         password = request.POST.get('auth-password')
+        user = None
 
-        if not username:
+        if not handle:
             log.warning('enforce_otp_verification_middleware: unable to find username in request')
             return
 
         try:
-            user = UserService.get_case_insensitive(username)
-            country_code = get_client_country_code(request)
-            is_new_country = country_code.lower() != user.userprofile.last_seen_in_country
+            user = UserService.get_case_insensitive(handle)
+        except User.DoesNotExist:
+            log.debug(f'enforce_otp_verification_middleware: user with username {handle} does not exist')
 
-            if is_new_country or country_code in (None, 'UNKNOWN'):
+        if not user:
+            try:
+                user = User.objects.get(email__iexact=handle)
+            except User.DoesNotExist:
+                log.debug(f'enforce_otp_verification_middleware: user with email {handle} does not exist')
+                return
+            except User.MultipleObjectsReturned:
+                log.debug(f'enforce_otp_verification_middleware: user with email {handle}: multiple found')
+                return
+
+        country_code = get_client_country_code(request)
+        is_new_country = country_code.lower() != user.userprofile.last_seen_in_country
+
+        if is_new_country or country_code in (None, 'UNKNOWN'):
+            log.debug(
+                f'enforce_otp_verification_code: user {handle} attempted to log in from new country '
+                f'{country_code}'
+            )
+
+            device, created = self._create_email_device(user)
+
+            log.debug(f'enforce_otp_verification_middleware: user {handle} -> email device created = {created}')
+
+            if created:
+                push_notification([user], None, 'access_attempted_from_different_country', {})
+        else:
+            try:
+                if user.check_password(password):
+                    validate_password(password, user)
+                    log.debug(f'enforce_otp_verification_code: user {handle} used a correct and valid password')
+                else:
+                    log.debug(f'enforce_otp_verification_code: user {handle} used an incorrect password')
+            except ValidationError as e:
+                device, created = self._create_email_device(user)
                 log.debug(
-                    f'enforce_otp_verification_code: user {username} attempted to log in from new country '
-                    f'{country_code}'
+                    f'enforce_otp_verification_code: user {handle} attempted to log in with password {password} '
+                    f'and it does not meet security standards'
                 )
 
-                device, created = self._create_email_device(user)
-
-                log.debug(f'enforce_otp_verification_middleware: user {username} -> email device created = {created}')
+                log.debug(
+                    f'enforce_otp_verification_middleware: user {handle} -> email device created = {created}'
+                )
 
                 if created:
-                    push_notification([user], None, 'access_attempted_from_different_country', {})
-            else:
-                try:
-                    if user.check_password(password):
-                        validate_password(password, user)
-                        log.debug(f'enforce_otp_verification_code: user {username} used a correct and valid password')
-                    else:
-                        log.debug(f'enforce_otp_verification_code: user {username} used an incorrect password')
-                except ValidationError as e:
-                    device, created = self._create_email_device(user)
-                    log.debug(
-                        f'enforce_otp_verification_code: user {username} attempted to log in with password {password} '
-                        f'and it does not meet security standards'
-                    )
+                    push_notification([user], None, 'access_attempted_with_weak_password', {})
 
-                    log.debug(
-                        f'enforce_otp_verification_middleware: user {username} -> email device created = {created}'
-                    )
-
-                    if created:
-                        push_notification([user], None, 'access_attempted_with_weak_password', {})
-        except User.DoesNotExist:
-            log.debug(f'enforce_otp_verification_middleware: user {username} does not exist')
-            pass
