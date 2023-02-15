@@ -69,6 +69,7 @@ from astrobin_apps_premium.templatetags.astrobin_apps_premium_tags import (
     can_restore_from_trash,
 )
 from astrobin_apps_users.services import UserService
+from common.constants import GroupName
 from common.services import AppRedirectionService, DateTimeService
 from common.services.caching_service import CachingService
 from toggleproperties.models import ToggleProperty
@@ -618,6 +619,9 @@ def image_edit_acquisition(request, id):
     image = get_image_or_404(Image.objects_including_wip, id)
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
+
+    if image.user.groups.filter(name=GroupName.ACQUISITION_EDIT_TESTERS).exists():
+        return redirect(AppRedirectionService.redirect(f'/i/{image.get_id()}/edit#6'))
 
     from astrobin_apps_platesolving.solver import Solver
 

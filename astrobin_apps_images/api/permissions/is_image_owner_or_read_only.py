@@ -7,9 +7,14 @@ class IsImageOwnerOrReadOnly(permissions.BasePermission):
             return True
 
         klass = obj.__class__.__name__
+
         if klass == 'Image':
             return obj.user == request.user
-        elif klass == 'ImageRevision' or klass == 'UncompressedSourceUpload':
+
+        elif klass in ('ImageRevision', 'UncompressedSourceUpload', 'DeepSky_Acquisition', 'SolarSystem_Acquisition'):
             return obj.image.user == request.user
 
-        raise ValueError("obj must be an Image or an ImageRevision")
+        raise ValueError(
+            "obj must be one of: "
+            "'Image', 'ImageRevision', 'UncompressedSourceUpload', 'DeepSky_Acquisition', 'SolarSystem_Acquisition'"
+        )
