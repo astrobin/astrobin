@@ -145,14 +145,12 @@
                     </a>
                 </li>
 
-                {% if request.user|can_access_basic_equipment_functions %}
-                    <li class="explore-menu-equipment">
-                        <a href="{% app_redirection_service '/equipment/explorer' %}">
-                            <i class="icon-camera"></i>
-                            {% trans "Equipment" %}
-                        </a>
-                    </li>
-                {% endif %}
+                <li class="explore-menu-equipment">
+                    <a href="{% app_redirection_service '/equipment/explorer' %}">
+                        <i class="icon-camera"></i>
+                        {% trans "Equipment" %}
+                    </a>
+                </li>
 
                 <li class="explore-menu-constellations">
                     <a href="{% app_redirection_service '/explore/constellations' %}">

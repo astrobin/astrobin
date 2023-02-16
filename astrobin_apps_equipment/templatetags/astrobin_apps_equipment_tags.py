@@ -197,10 +197,6 @@ def is_own_equipment_migrator(user) -> bool:
 
 
 @register.filter
-def can_access_basic_equipment_functions(user) -> bool:
-    return True
-
-@register.filter
 def equipment_list_has_items(equipment_list) -> bool:
     return (
         len(equipment_list['imaging_telescopes']) > 0 or

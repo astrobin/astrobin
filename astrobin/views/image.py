@@ -43,7 +43,7 @@ from django.views.generic.base import View
 from django.views.generic.detail import SingleObjectMixin
 from silk.profiling.profiler import silk_profile
 
-from astrobin.enums import SubjectType
+from astrobin.enums import ImageEditorStep, SubjectType
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.enums.mouse_hover_image import MouseHoverImage
 from astrobin.forms import (
@@ -56,7 +56,6 @@ from astrobin.models import (Collection, DeepSky_Acquisition, Image, ImageRevisi
 from astrobin.services.gear_service import GearService
 from astrobin.templatetags.tags import can_like
 from astrobin.utils import get_client_country_code, get_image_resolution
-from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import can_access_basic_equipment_functions
 from astrobin_apps_groups.forms import AutoSubmitToIotdTpProcessForm, GroupSelectForm
 from astrobin_apps_groups.models import Group
 from astrobin_apps_images.services import ImageService
@@ -1118,14 +1117,12 @@ class ImageEditBasicView(ImageEditBaseView):
     def dispatch(self, request, *args, **kwargs):
         image = self.get_object()
 
-        if can_access_basic_equipment_functions(request.user):
-            return redirect(
-                AppRedirectionService.redirect(
-                    f'/i/{image.get_id()}/edit#1'
-                )
+        return redirect(
+            AppRedirectionService.redirect(
+                f'/i/{image.get_id()}/edit#'
+                f'{AppRedirectionService.image_editor_step_number(request.user, ImageEditorStep.BASIC_INFORMATION)}'
             )
-
-        return super().dispatch(request, args, kwargs)
+        )
 
     def post(self, request, *args, **kwargs):
         image = self.get_object()  # type: Image
@@ -1195,10 +1192,11 @@ class ImageEditGearView(ImageEditBaseView):
         image = self.get_object()
         has_legacy_gear = GearService.image_has_legacy_gear(image)
 
-        if can_access_basic_equipment_functions(request.user) and not has_legacy_gear:
+        if not has_legacy_gear:
             return redirect(
                 AppRedirectionService.redirect(
-                    f'/i/{image.get_id()}/edit#5'
+                    f'/i/{image.get_id()}/edit#'
+                    f'{AppRedirectionService.image_editor_step_number(request.user, ImageEditorStep.EQUIPMENT)}'
                 )
             )
 
@@ -1295,14 +1293,12 @@ class ImageEditThumbnailsView(ImageEditBaseView):
     def dispatch(self, request, *args, **kwargs):
         image = self.get_object()
 
-        if can_access_basic_equipment_functions(request.user):
-            return redirect(
-                AppRedirectionService.redirect(
-                    f'/i/{image.get_id()}/edit#3'
-                )
+        return redirect(
+            AppRedirectionService.redirect(
+                f'/i/{image.get_id()}/edit#'
+                f'{AppRedirectionService.image_editor_step_number(request.user, ImageEditorStep.THUMBNAIL)}'
             )
-
-        return super().dispatch(request, args, kwargs)
+        )
 
 
 class ImageUploadUncompressedSource(ImageEditBaseView):
