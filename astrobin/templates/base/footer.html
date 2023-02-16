@@ -1,103 +1,104 @@
 {% load i18n %}
 
-<footer>
-    {% block footer %}
-    <div class="container">
-        <div class="row-fluid hidden-phone">
-            <div class="span3">
-                <h3>{% trans "About" %}</h3>
-                <p>
-                    {% blocktrans trimmed %}
-                        AstroBin is an image hosting platform and social network for amateur astronomers and
-                        astrophotographers.
-                    {% endblocktrans %}
-                </p>
-            </div>
-            <div class="span3">
-                <h3>{% trans "Site links" %}</h3>
-                <ul>
-                    <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
-                    <li><a href="{% url 'pybb:index' %}">{% trans "Forum" %}</a></li>
-                    <li><a href="https://welcome.astrobin.com/about" target="_blank">{% trans "About" %}</a></li>
-                    <li><a href="https://welcome.astrobin.com/faq" target="_blank">{% trans "FAQ" %}</a></li>
-                    <li><a href="https://welcome.astrobin.com/terms-of-service" target="_blank">{% trans "Terms of Service" %}</a></li>
-                    <li><a href="https://welcome.astrobin.com/community-guidelines" target="_blank">{% trans "Guidelines" %}</a></li>
-                    <li><a href="https://welcome.astrobin.com/sponsors-and-partners" target="_blank">{% trans "Sponsors" %}</a></li>
-                    <li>
-                        <a href="https://github.com/astrobin/astrobin" target="_blank">
-                            {% trans "Source code" %}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://twitter.com/astrobintech" target="_blank">
-                            {% trans "Platform updates" %}
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="span3">
-                <h3>{% trans "Thanks to" %}</h3>
-                <ul>
-                    <li>
-                        {% trans "The localization team" %}:
-                        <a href="/users/PepeChambo">Jos&eacute; J. Chamb&oacute;</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/Tannhauser">Jean-Charles Schmidt</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/OrionRider">Laurent Schmitz</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/Vostok/">Lauri Kangas</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/naavis/">Samuli Vuorinen</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/ketarax/">Jussi Kantola</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/KoenDierckens/">Koen Dierckens</a>&nbsp;&middot;&nbsp;
-                        <a href="http://lambermont.dyndns.org/astro/" target="_blank">Hans Lambermont</a>&nbsp;&middot;&nbsp;
-                        <a href="http://strehl1.de" target="_blank">Michael Wilk</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/stimpy/">Marc Demierre</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/kalle66/">Rinke Kallenkoot</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/leonh/">Leon Handreke</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/bilgebay/">Sedat Bilgebay</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/onuratilgan/">Onur Atilgan</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/guvenozkan/">Güven Özkan</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/castle/">Ahmet Kale</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/AstroAlb/">Ardian Xherrahi</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/milosz/">Milosz Wasilewski</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/GlaucoH/">Glauco Hass</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/kookoo_gr/">Konstantinos Stavropoulos</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/sypai/">Pavel Syrin</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/ohmishonin/">Ken-ichiro Tanaka</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/Lukasz83/">Łukasz Sujka</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/Jean-Baptiste_Paris/">Jean-Baptiste Auroux</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/leviathan/">Nadir Teymurov</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/Hartmuth_Kintzel/">Hartmuth Kintzel</a>&nbsp;&middot;&nbsp;
-                        <a href="/users/hackersb46/">雅痞张</a>
-                        <a href="/users/Marcell/">Marcell Németh</a>
-                    </li>
-                    
-                    <li>
-                        {% trans "Third party tools" %}:
-                        <a href="http://astrometry.net/" target="_blank">Astrometry.net</a>&nbsp;&middot;&nbsp;
-                        <a href="https://pixinsight.com/" target="_blank">PixInsight</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="span3">
-                <h3>{% trans "Copyright" %}</h3>
-                <p>
-                {% blocktrans %}The images on this websites are copyright of their respective owners.{% endblocktrans %}
-                </p>
-            </div>
-        </div> <!-- row -->
+{% if request.path != '/' %}
+    <footer>
+        {% block footer %}
+        <div class="container">
+            <div class="row-fluid hidden-phone">
+                <div class="span3">
+                    <h3>{% trans "About" %}</h3>
+                    <p>
+                        {% blocktrans trimmed %}
+                            AstroBin is an image hosting platform and social network for amateur astronomers and
+                            astrophotographers.
+                        {% endblocktrans %}
+                    </p>
+                </div>
+                <div class="span3">
+                    <h3>{% trans "Site links" %}</h3>
+                    <ul>
+                        <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+                        <li><a href="{% url 'pybb:index' %}">{% trans "Forum" %}</a></li>
+                        <li><a href="https://welcome.astrobin.com/about" target="_blank">{% trans "About" %}</a></li>
+                        <li><a href="https://welcome.astrobin.com/faq" target="_blank">{% trans "FAQ" %}</a></li>
+                        <li><a href="https://welcome.astrobin.com/terms-of-service" target="_blank">{% trans "Terms of Service" %}</a></li>
+                        <li><a href="https://welcome.astrobin.com/community-guidelines" target="_blank">{% trans "Guidelines" %}</a></li>
+                        <li><a href="https://welcome.astrobin.com/sponsors-and-partners" target="_blank">{% trans "Sponsors" %}</a></li>
+                        <li>
+                            <a href="https://github.com/astrobin/astrobin" target="_blank">
+                                {% trans "Source code" %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/astrobintech" target="_blank">
+                                {% trans "Platform updates" %}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="span3">
+                    <h3>{% trans "Thanks to" %}</h3>
+                    <ul>
+                        <li>
+                            {% trans "The localization team" %}:
+                            <a href="/users/PepeChambo">Jos&eacute; J. Chamb&oacute;</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/Tannhauser">Jean-Charles Schmidt</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/OrionRider">Laurent Schmitz</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/Vostok/">Lauri Kangas</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/naavis/">Samuli Vuorinen</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/ketarax/">Jussi Kantola</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/KoenDierckens/">Koen Dierckens</a>&nbsp;&middot;&nbsp;
+                            <a href="http://lambermont.dyndns.org/astro/" target="_blank">Hans Lambermont</a>&nbsp;&middot;&nbsp;
+                            <a href="http://strehl1.de" target="_blank">Michael Wilk</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/stimpy/">Marc Demierre</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/kalle66/">Rinke Kallenkoot</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/leonh/">Leon Handreke</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/bilgebay/">Sedat Bilgebay</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/onuratilgan/">Onur Atilgan</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/guvenozkan/">Güven Özkan</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/castle/">Ahmet Kale</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/AstroAlb/">Ardian Xherrahi</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/milosz/">Milosz Wasilewski</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/GlaucoH/">Glauco Hass</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/kookoo_gr/">Konstantinos Stavropoulos</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/sypai/">Pavel Syrin</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/ohmishonin/">Ken-ichiro Tanaka</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/Lukasz83/">Łukasz Sujka</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/Jean-Baptiste_Paris/">Jean-Baptiste Auroux</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/leviathan/">Nadir Teymurov</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/Hartmuth_Kintzel/">Hartmuth Kintzel</a>&nbsp;&middot;&nbsp;
+                            <a href="/users/hackersb46/">雅痞张</a>
+                            <a href="/users/Marcell/">Marcell Németh</a>
+                        </li>
 
-        <div class="row-fluid bottom">
-            <div class="span8">
-                <p>&copy; 2010-{% now "Y" %} <a href="/users/siovene/">Salvatore Iovene</a></p>
-            </div>
-            <div class="span4">
-                <a href="{% url 'index' %}">{% trans "Home" %}</a> /
-                <a href="https://facebook.com/astrobin" target="_blank">Facebook</a> /
-                <a href="https://instagram.com/astrobin_com" target="_blank">Instagram</a> /
-                <a href="https://twitter.com/astrobin_com" target="_blank">Twitter</a> /
-                <a href="#top" class="back-to-top">{% trans "Back to top" %}</a>
-            </div>
-        </div> <!-- row -->
-    </div> <!-- container -->
-    {% endblock %}
-</footer>
+                        <li>
+                            {% trans "Third party tools" %}:
+                            <a href="http://astrometry.net/" target="_blank">Astrometry.net</a>&nbsp;&middot;&nbsp;
+                            <a href="https://pixinsight.com/" target="_blank">PixInsight</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="span3">
+                    <h3>{% trans "Copyright" %}</h3>
+                    <p>
+                    {% blocktrans %}The images on this websites are copyright of their respective owners.{% endblocktrans %}
+                    </p>
+                </div>
+            </div> <!-- row -->
 
+            <div class="row-fluid bottom">
+                <div class="span8">
+                    <p>&copy; 2010-{% now "Y" %} <a href="/users/siovene/">Salvatore Iovene</a></p>
+                </div>
+                <div class="span4">
+                    <a href="{% url 'index' %}">{% trans "Home" %}</a> /
+                    <a href="https://facebook.com/astrobin" target="_blank">Facebook</a> /
+                    <a href="https://instagram.com/astrobin_com" target="_blank">Instagram</a> /
+                    <a href="https://twitter.com/astrobin_com" target="_blank">Twitter</a> /
+                    <a href="#top" class="back-to-top">{% trans "Back to top" %}</a>
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+        {% endblock %}
+    </footer>
+{% endif %}
