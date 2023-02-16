@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from django.conf import settings
 from django.core.cache import cache
 
-from astrobin.enums import SubjectType
+from astrobin.enums import ImageEditorStep, SubjectType
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.fields import COUNTRIES
 from astrobin.models import CameraRenameProposal
@@ -138,6 +138,7 @@ def common_variables(request):
         'MODERATOR_DECISION_REJECTED': ModeratorDecision.REJECTED,
 
         'enums': {
+            'ImageEditorStep': ImageEditorStep,
             'SubjectType': SubjectType,
         },
         'abuse_report_form': AbuseReportForm()

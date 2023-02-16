@@ -5,12 +5,15 @@ import bleach
 from dateutil import parser
 from django import template
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.template import Library, Node
 from django.template.defaultfilters import urlencode
 from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 
+from astrobin.enums import ImageEditorStep
+from astrobin.models import Image
 from common.services import AppRedirectionService, DateTimeService
 from common.services.highlighting_service import HighlightingService
 from common.services.pagination_service import PaginationService
@@ -223,6 +226,13 @@ def page_counter(counter, page_number, items_per_page):
 def app_redirection_service(path):
     return AppRedirectionService.redirect(path)
 
+
+@register.simple_tag
+def image_editor_redirection_service(image: Image, user: User, step: ImageEditorStep) -> str:
+    return AppRedirectionService.redirect(
+        f'/i/{image.get_id()}/edit#'
+        f'{AppRedirectionService.image_editor_step_number(user, step)}'
+    )
 
 @register.filter
 def is_future(dt):

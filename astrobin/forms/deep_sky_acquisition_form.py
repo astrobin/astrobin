@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 from astrobin.models import DeepSky_Acquisition, Filter, Image
-from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import is_own_equipment_migrator
 from astrobin_apps_equipment.models import Filter as FilterV2
 
 class DeepSky_AcquisitionForm(forms.ModelForm):

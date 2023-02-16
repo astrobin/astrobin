@@ -3,7 +3,11 @@ import urllib.parse
 import urllib.request
 
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.http import HttpRequest
+
+from astrobin.enums import ImageEditorStep
+from common.constants import GroupName
 
 
 class AppRedirectionService:
@@ -51,3 +55,33 @@ class AppRedirectionService:
             return '.astrobin.com'
 
         return 'localhost'
+
+    @staticmethod
+    def image_editor_step_number(user: User, step: ImageEditorStep) -> int:
+        from astrobin_apps_users.services import UserService
+
+        if UserService(user).is_in_group([GroupName.ACQUISITION_EDIT_TESTERS]):
+            step_map = {
+                ImageEditorStep.BASIC_INFORMATION: 1,
+                ImageEditorStep.CONTENT: 2,
+                ImageEditorStep.THUMBNAIL: 3,
+                ImageEditorStep.WATERMARK: 4,
+                ImageEditorStep.EQUIPMENT: 5,
+                ImageEditorStep.ACQUISITION: 6,
+                ImageEditorStep.SETTINGS: 7,
+            }
+        else:
+            step_map = {
+                ImageEditorStep.BASIC_INFORMATION: 1,
+                ImageEditorStep.CONTENT: 2,
+                ImageEditorStep.THUMBNAIL: 3,
+                ImageEditorStep.WATERMARK: 4,
+                ImageEditorStep.EQUIPMENT: 5,
+                ImageEditorStep.SETTINGS: 6,
+            }
+
+        try:
+            return step_map[step]
+        except IndexError:
+            return 1
+
