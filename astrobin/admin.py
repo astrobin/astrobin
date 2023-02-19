@@ -5,10 +5,13 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.utils import timezone
 
-from astrobin.models import Gear, GearUserInfo, Telescope, \
-    Mount, Camera, FocalReducer, Software, Filter, Accessory, DeepSky_Acquisition, SolarSystem_Acquisition, Image, \
-    ImageRevision, Request, ImageRequest, UserProfile, Location, AppApiKeyRequest, App, ImageOfTheDay, \
-    ImageOfTheDayCandidate, Collection, BroadcastEmail, CameraRenameProposal, GearRenameRecord, GearMigrationStrategy
+from astrobin.models import (
+    DeepSky_Acquisition_Preset, Gear, GearUserInfo, Telescope,
+    Mount, Camera, FocalReducer, Software, Filter, Accessory, DeepSky_Acquisition, SolarSystem_Acquisition, Image,
+    ImageRevision, Request, ImageRequest, UserProfile, Location, AppApiKeyRequest, App, ImageOfTheDay,
+    ImageOfTheDayCandidate, Collection, BroadcastEmail, CameraRenameProposal, GearRenameRecord, GearMigrationStrategy,
+    SolarSystem_Acquisition_Preset,
+)
 from astrobin.services.gear_service import GearService
 from astrobin.tasks import send_broadcast_email
 from astrobin.utils import inactive_accounts
@@ -284,3 +287,5 @@ admin.site.register(ImageOfTheDay, ImageOfTheDayAdmin)
 admin.site.register(ImageOfTheDayCandidate, ImageOfTheDayCandidateAdmin)
 admin.site.register(Collection, CollectionAdmin)
 admin.site.register(BroadcastEmail, BroadcastEmailAdmin)
+admin.site.register(DeepSky_Acquisition_Preset)
+admin.site.register(SolarSystem_Acquisition_Preset)

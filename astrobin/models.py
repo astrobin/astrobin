@@ -2087,7 +2087,24 @@ class Acquisition(models.Model):
         Image.objects_including_wip.filter(pk=self.image.pk).update(updated=DateTimeService.now())
 
 
-class DeepSky_Acquisition(Acquisition):
+class AcquisitionPresetMixin(models.Model):
+    user = models.ForeignKey(
+        User,
+        null=False,
+        on_delete=models.CASCADE
+    )
+
+    name = models.CharField(
+        max_length=128,
+        null=False,
+        blank=False,
+    )
+
+    class Meta:
+        abstract = True
+
+
+class DeepSky_Acquisition_Base(models.Model):
     BINNING_CHOICES = (
         (1, '1x1'),
         (2, '2x2'),
@@ -2118,7 +2135,7 @@ class DeepSky_Acquisition(Acquisition):
         blank=True,
         verbose_name=_("Filter"),
         on_delete=models.SET_NULL,
-        related_name='deep_sky_acquisitions',
+        related_name='%(class)ss',
     )
 
     filter_2 = models.ForeignKey(
@@ -2127,7 +2144,7 @@ class DeepSky_Acquisition(Acquisition):
         blank=True,
         verbose_name=_("Filter"),
         on_delete=models.SET_NULL,
-        related_name='deep_sky_acquisitions',
+        related_name='%(class)ss',
     )
 
     binning = models.IntegerField(
@@ -2262,11 +2279,21 @@ class DeepSky_Acquisition(Acquisition):
     )
 
     class Meta:
+        abstract = True
         app_label = 'astrobin'
-        ordering = ['saved_on']
 
 
-class SolarSystem_Acquisition(Acquisition):
+class DeepSky_Acquisition(Acquisition, DeepSky_Acquisition_Base):
+    class Meta(DeepSky_Acquisition_Base.Meta):
+        abstract = False
+
+
+class DeepSky_Acquisition_Preset(AcquisitionPresetMixin, DeepSky_Acquisition_Base):
+    class Meta(DeepSky_Acquisition_Base.Meta):
+        abstract = False
+
+
+class SolarSystem_Acquisition_Base(models.Model):
     frames = models.IntegerField(
         null=True,
         blank=True,
@@ -2347,8 +2374,25 @@ class SolarSystem_Acquisition(Acquisition):
         max_length=5,
     )
 
+    saved_on = models.DateTimeField(
+        editable=False,
+        auto_now=True,
+        null=True,
+    )
+
     class Meta:
+        abstract = True
         app_label = 'astrobin'
+
+
+class SolarSystem_Acquisition(Acquisition, SolarSystem_Acquisition_Base):
+    class Meta(SolarSystem_Acquisition_Base.Meta):
+        abstract = False
+
+
+class SolarSystem_Acquisition_Preset(AcquisitionPresetMixin, SolarSystem_Acquisition_Base):
+    class Meta(SolarSystem_Acquisition_Base.Meta):
+        abstract = False
 
 
 class Request(models.Model):

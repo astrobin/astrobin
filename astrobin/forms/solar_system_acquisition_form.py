@@ -31,19 +31,20 @@ class SolarSystem_AcquisitionForm(forms.ModelForm):
 
     class Meta:
         model = SolarSystem_Acquisition
-        fields = (
-            'date',
-            'time',
-            'frames',
-            'fps',
-            'exposure_per_frame',
-            'focal_length',
-            'cmi',
-            'cmii',
-            'cmiii',
-            'seeing',
-            'transparency',
-        )
+        # fields = (
+        #     'date',
+        #     'time',
+        #     'frames',
+        #     'fps',
+        #     'exposure_per_frame',
+        #     'focal_length',
+        #     'cmi',
+        #     'cmii',
+        #     'cmiii',
+        #     'seeing',
+        #     'transparency',
+        # )
+        fields = ()
         widgets = {
             'date': forms.TextInput(attrs={'class': 'datepickerclass', 'autocomplete': 'off'}),
             'time': forms.TextInput(attrs={'class': 'timepickerclass', 'autocomplete': 'off'}),

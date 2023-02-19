@@ -25,7 +25,8 @@ class DeepSky_AcquisitionBasicForm(forms.ModelForm):
 
     class Meta:
         model = DeepSky_Acquisition
-        fields = ('date', 'number', 'duration',)
+        # fields = ('date', 'number', 'duration',)
+        fields = ()
         widgets = {
             'date': forms.TextInput(attrs={'class': 'datepickerclass', 'autocomplete': 'off'}),
         }
