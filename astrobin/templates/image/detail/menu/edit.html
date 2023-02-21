@@ -22,82 +22,41 @@
             <span class="caret hidden-phone"></span>
         </a>
         <ul class="dropdown-menu">
-            {% if request.user|can_access_basic_equipment_functions %}
+            <li>
+                <a href="{% image_editor_redirection_service image request.user enums.ImageEditorStep.BASIC_INFORMATION %}">
+                    <i class="icon-info"></i>
+                    {% trans "Basic information" %}
+                </a>
+            </li>
+
+            <li>
+                <a href="{% image_editor_redirection_service image request.user enums.ImageEditorStep.CONTENT %}">
+                    <i class="icon-align-justify"></i>
+                    {% trans "Content" %}
+                </a>
+            </li>
+
+            <li>
+                <a href="{% image_editor_redirection_service image request.user enums.ImageEditorStep.THUMBNAIL %}">
+                    <i class="icon-check-empty"></i>
+                    {% trans "Thumbnail" %}
+                </a>
+            </li>
+
+            <li>
+                <a href="{% image_editor_redirection_service image request.user enums.ImageEditorStep.WATERMARK %}">
+                    <i class="icon-tint"></i>
+                    {% trans "Watermark" %}
+                </a>
+            </li>
+
+            {% if image|can_add_technical_details %}
                 <li>
-                    <a href="{% app_redirection_service '/i/' %}{{ image.get_id }}/edit#1">
-                        <i class="icon-info"></i>
-                        {% trans "Basic information" %}
+                    <a href="{% url 'image_edit_gear' image.get_id %}">
+                        <i class="icon-camera"></i>
+                        {% trans "Equipment" %}
                     </a>
                 </li>
-
-                <li>
-                    <a href="{% app_redirection_service '/i/' %}{{ image.get_id }}/edit#2">
-                        <i class="icon-align-justify"></i>
-                        {% trans "Content" %}
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% app_redirection_service '/i/' %}{{ image.get_id }}/edit#3">
-                        <i class="icon-check-empty"></i>
-                        {% trans "Thumbnail" %}
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% app_redirection_service '/i/' %}{{ image.get_id }}/edit#4">
-                        <i class="icon-tint"></i>
-                        {% trans "Watermark" %}
-                    </a>
-                </li>
-
-                {% if image|can_add_technical_details %}
-                    <li>
-                        <a href="{% url 'image_edit_gear' image.get_id %}">
-                            <i class="icon-camera"></i>
-                            {% trans "Equipment" %}
-                        </a>
-                    </li>
-                {% endif %}
-
-                {% if image|can_add_technical_details %}
-                    <li>
-                        <a href="{% app_redirection_service '/i/' %}{{ image.get_id }}/edit#6">
-                        <i class="icon-cog"></i>
-                            {% trans "Settings" %}
-                        </a>
-                    </li>
-                {% endif %}
-            {% else %}
-                <li>
-                    <a href="{% url 'image_edit_thumbnails' image.get_id %}">
-                        <i class="icon-check-empty"></i>
-                        {% trans "Thumbnails" %}
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% url 'image_edit_watermark' image.get_id %}">
-                        <i class="icon-tint"></i>
-                        {% trans "Watermark" %}
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% url 'image_edit_basic' image.get_id %}">
-                        <i class="icon-info"></i>
-                        {% trans "Basic information" %}
-                    </a>
-                </li>
-
-                {% if image|can_add_technical_details %}
-                    <li>
-                        <a href="{% url 'image_edit_gear' image.get_id %}">
-                            <i class="icon-cog"></i>
-                            {% trans "Equipment" %}
-                        </a>
-                    </li>
-                {% endif %}
             {% endif %}
 
             {% if image|can_add_technical_details %}
@@ -105,6 +64,15 @@
                     <a href="{% url 'image_edit_acquisition' image.get_id %}">
                         <i class="icon-time"></i>
                         {% trans "Acquisition details" %}
+                    </a>
+                </li>
+            {% endif %}
+
+            {% if image|can_add_technical_details %}
+                <li>
+                    <a href="{% image_editor_redirection_service image request.user enums.ImageEditorStep.SETTINGS %}">
+                    <i class="icon-cog"></i>
+                        {% trans "Settings" %}
                     </a>
                 </li>
             {% endif %}

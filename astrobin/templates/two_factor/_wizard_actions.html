@@ -22,5 +22,17 @@
         {% button_loading_indicator %}
     </button>
 
-    <a class="btn btn-link btn-block-mobile" href="{% url 'auth_password_reset' %}">{% trans "Reset password" %}</a>
+    {% if wizard.steps.current == 'token' %}
+        <a
+            class="btn btn-secondary btn-block-mobile"
+            href="https://welcome.astrobin.com/features/security"
+            target="_blank"
+        >
+            {% trans "Help" %}
+        </a>
+    {% endif %}
+
+    {% if wizard.steps.current == 'auth' %}
+        <a class="btn btn-link btn-block-mobile" href="{% url 'auth_password_reset' %}">{% trans "Reset password" %}</a>
+    {% endif %}
 </div>

@@ -638,7 +638,10 @@ signed_up.connect(subscription_signed_up)
 
 
 def user_subscription_post_delete(sender, instance, **kwargs):
-    PremiumService(instance.user).clear_subscription_status_cache_keys()
+    try:
+        PremiumService(instance.user).clear_subscription_status_cache_keys()
+    except (User.DoesNotExist, UserProfile.DoesNotExist):
+        pass
 
 
 post_delete.connect(user_subscription_post_delete, sender=UserSubscription)

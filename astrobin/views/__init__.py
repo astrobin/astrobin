@@ -40,6 +40,7 @@ from haystack.query import SearchQuerySet
 from silk.profiling.profiler import silk_profile
 
 from astrobin.context_processors import common_variables, user_language
+from astrobin.enums import ImageEditorStep
 from astrobin.enums.moderator_decision import ModeratorDecision
 from astrobin.forms import (
     AccessoryEditForm, AccessoryEditNewForm, CameraEditForm, CameraEditNewForm,
@@ -58,7 +59,6 @@ from astrobin.models import (
 from astrobin.shortcuts import ajax_response, ajax_success
 from astrobin.templatetags.tags import in_upload_wizard
 from astrobin.utils import get_client_country_code
-from astrobin_apps_equipment.templatetags.astrobin_apps_equipment_tags import can_access_basic_equipment_functions
 from astrobin_apps_images.services import ImageService
 from astrobin_apps_platesolving.forms import PlateSolvingAdvancedSettingsForm, PlateSolvingSettingsForm
 from astrobin_apps_platesolving.models import PlateSolvingSettings, Solution
@@ -599,17 +599,12 @@ def image_edit_watermark(request, id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    if can_access_basic_equipment_functions(request.user):
-        return redirect(
-            AppRedirectionService.redirect(
-                f'/i/{image.get_id()}/edit#4'
-            )
+    return redirect(
+        AppRedirectionService.redirect(
+            f'/i/{image.get_id()}/edit#'
+            f'{AppRedirectionService.image_editor_step_number(request.user, ImageEditorStep.WATERMARK)}'
         )
-
-    return render(request, 'image/edit/watermark.html', {
-        'image': image,
-        'form': ImageEditWatermarkForm(instance=image),
-    })
+    )
 
 
 @never_cache
@@ -620,8 +615,17 @@ def image_edit_acquisition(request, id):
     if request.user != image.user and not request.user.is_superuser:
         return HttpResponseForbidden()
 
-    if image.user.groups.filter(name=GroupName.ACQUISITION_EDIT_TESTERS).exists():
-        return redirect(AppRedirectionService.redirect(f'/i/{image.get_id()}/edit#6'))
+    if (
+            image.user.groups.filter(name=GroupName.ACQUISITION_EDIT_TESTERS).exists() and
+            not image.acquisition_set.filter(deepsky_acquisition__filter__isnull=False).exists()
+    ):
+        return redirect(
+            AppRedirectionService.redirect(
+                f'/i/{image.get_id()}/edit#'
+                f'{AppRedirectionService.image_editor_step_number(request.user, ImageEditorStep.ACQUISITION)}'
+
+            )
+        )
 
     from astrobin_apps_platesolving.solver import Solver
 
