@@ -85,14 +85,14 @@ class EnforceOtpVerificationMiddleware(MiddlewareParentClass):
             try:
                 if user.check_password(password):
                     validate_password(password, user)
-                    log.debug(f'enforce_otp_verification_code: user {handle} used a correct and valid password')
+                    log.debug(f'enforce_otp_verification_middleware: user {handle} used a correct and valid password')
                 else:
-                    log.debug(f'enforce_otp_verification_code: user {handle} used an incorrect password')
+                    log.debug(f'enforce_otp_verification_middleware: user {handle} used an incorrect password')
             except ValidationError as e:
                 device, created = self._create_email_device(user)
                 request.session['enforce_otp_middleware_invalid_password'] = 1
                 log.debug(
-                    f'enforce_otp_verification_code: user {handle} attempted to log in with password {password} '
+                    f'enforce_otp_verification_middleware: user {handle} attempted to log in with password {password} '
                     f'and it does not meet security standards'
                 )
 
