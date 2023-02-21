@@ -15,6 +15,7 @@ from paypal.standard.ipn.models import PayPalIPN
 from paypal.standard.models import ST_PP_COMPLETED
 from subscription.models import Subscription, handle_payment_was_successful
 
+from astrobin.models import Image
 from astrobin_apps_payments.services.pricing_service import PricingService
 from common.services import AppRedirectionService
 
@@ -43,6 +44,11 @@ def create_checkout_session(request, user_pk, product, currency):
 
     if product not in ('lite', 'premium', 'ultimate'):
         log.error("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, "Invalid product"))
+        return HttpResponseBadRequest()
+
+    image_count = Image.objects_including_wip.filter(user=user).count()
+    if product == 'lite' and image_count >= settings.PREMIUM_MAX_IMAGES_LITE_2020:
+        log.error("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, "Too many images for Lite"))
         return HttpResponseBadRequest()
 
     stripe_products = {
