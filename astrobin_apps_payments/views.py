@@ -121,7 +121,7 @@ def stripe_webhook(request):
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
 
-    def fulfull_payment(session):
+    def fulfill_payment(session):
         product = session['metadata']['product']
         user_pk = int(session['client_reference_id'])
 
@@ -166,7 +166,7 @@ def stripe_webhook(request):
         session = event['data']['object']
 
         if type == 'checkout.session.completed':
-            fulfull_payment(session)
+            fulfill_payment(session)
         elif event['type'] == 'checkout.session.async_payment_succeeded':
             log.info("stripe_webhook: payment succeeded for event %s" % event['id'])
         elif event['type'] == 'checkout.session.async_payment_failed':
