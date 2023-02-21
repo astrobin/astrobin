@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 from annoying.functions import get_object_or_None
+from django.contrib.auth.models import User
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import mixins
+from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND
 from rest_framework.viewsets import GenericViewSet
 
 from astrobin.models import DeepSky_Acquisition, Image, SolarSystem_Acquisition
@@ -13,8 +16,6 @@ from astrobin_apps_equipment.models import Accessory, Camera, Filter, Mount, Sof
 from astrobin_apps_images.api.filters import ImageFilter
 from astrobin_apps_images.api.permissions import IsImageOwnerOrReadOnly
 from astrobin_apps_images.api.serializers import ImageSerializer
-from astrobin_apps_images.api.serializers.deep_sky_acquisition_serializer import DeepSkyAcquisitionSerializer
-from astrobin_apps_images.api.serializers.solar_system_acquisition_serializer import SolarSystemAcquisitionSerializer
 from astrobin_apps_users.services import UserService
 from common.constants import GroupName
 
@@ -95,3 +96,19 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
         self._update_acquisition(request, instance)
 
         return response
+
+    @action(detail=False, methods=['get'], url_path='public-images-count')
+    def public_images_count(self, request):
+        if 'user' not in request.GET:
+            return Response("'user' argument is required", HTTP_400_BAD_REQUEST)
+
+        user_id = request.GET.get('user')
+
+        try:
+            user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            return Response(f"User with id {user_id} not found", HTTP_404_NOT_FOUND)
+
+        count = Image.objects_including_wip.filter(user=user).count()
+
+        return Response(count, HTTP_200_OK)
