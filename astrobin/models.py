@@ -2151,7 +2151,6 @@ class DeepSky_Acquisition_Base(models.Model):
         null=True,
         blank=True,
         choices=BINNING_CHOICES,
-        default=0,
         verbose_name=_("Binning"),
     )
 

@@ -6,6 +6,7 @@ class DeepSkyAcquisitionPresetSerializer(AcquisitionPresetSerializer):
     class Meta(AcquisitionPresetSerializer.Meta):
         abstract = False
         fields = [
+            'id',
             'name',
             'is_synthetic',
             'binning',

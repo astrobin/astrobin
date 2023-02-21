@@ -61,7 +61,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=128)),
                 ('is_synthetic', models.BooleanField(default=False, verbose_name='Synthetic channel')),
-                ('binning', models.IntegerField(blank=True, choices=[(1, '1x1'), (2, '2x2'), (3, '3x3'), (4, '4x4')], default=0, null=True, verbose_name='Binning')),
+                ('binning', models.IntegerField(blank=True, choices=[(1, '1x1'), (2, '2x2'), (3, '3x3'), (4, '4x4')], null=True, verbose_name='Binning')),
                 ('number', models.PositiveIntegerField(blank=True, help_text='The number of sub-frames.', null=True, verbose_name='Number')),
                 ('duration', models.DecimalField(blank=True, decimal_places=2, help_text='Duration of each sub-frame, in seconds.', max_digits=10, null=True, verbose_name='Duration')),
                 ('iso', models.PositiveIntegerField(blank=True, null=True, verbose_name='ISO')),
