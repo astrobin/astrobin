@@ -9,6 +9,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponse, Http404
+from django.utils.translation import gettext
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
 from paypal.standard.ipn.models import PayPalIPN
@@ -49,7 +50,15 @@ def create_checkout_session(request, user_pk, product, currency):
     image_count = Image.objects_including_wip.filter(user=user).count()
     if product == 'lite' and image_count >= settings.PREMIUM_MAX_IMAGES_LITE_2020:
         log.error("create_checkout_session: %d, %s, %s: %s" % (user.pk, product, currency, "Too many images for Lite"))
-        return HttpResponseBadRequest()
+        return HttpResponseBadRequest(
+            gettext(
+                'The Lite plan is capped at %(lite_max)s total images, and you currently have %(count)s images on '
+                'AstroBin.' % {
+                    'lite_max': settings.PREMIUM_MAX_IMAGES_LITE_2020,
+                    'count': image_count
+                },
+            )
+        )
 
     stripe_products = {
         'lite': settings.STRIPE_PRODUCT_LITE,
