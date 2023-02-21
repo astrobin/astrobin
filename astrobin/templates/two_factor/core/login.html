@@ -43,6 +43,51 @@
     </h1>
 
     <form action="" method="post" class="form-horizontal login-form" novalidate>{% csrf_token %}
+
+        {% if wizard.steps.current == 'token' %}
+            <div class="control-group">
+                <div class="controls">
+                    {% if request.session.enforce_otp_middleware_invalid_password %}
+                        <div class="alert alert-warning">
+                            <p>
+                                {% blocktrans trimmed %}
+                                    AstroBin detected that your password does not meet security requirements
+                                {% endblocktrans %}.
+
+                                {% blocktrans trimmed %}
+                                    To make sure that this is a legitimate login attempt, we just sent you a one-time
+                                    password token via e-mail.
+                                {% endblocktrans %}
+
+                                <a href="https://welcome.astrobin.com/features/security/#faq" target="_blank">
+                                    {% trans "Learn more." %}
+                                </a>
+                            </p>
+                        </div>
+                    {% endif %}
+
+                    {% if request.session.enforce_otp_middleware_new_country %}
+                        <div class="alert alert-warning">
+                            <p>
+                                {% blocktrans trimmed %}
+                                    AstroBin detected a login attempt from a different country
+                                {% endblocktrans %}.
+
+                                {% blocktrans trimmed %}
+                                    To make sure that this is a legitimate login attempt, we just sent you a one-time
+                                    password token via e-mail.
+                                {% endblocktrans %}
+
+                                <a href="https://welcome.astrobin.com/features/security/#faq" target="_blank">
+                                    {% trans "Learn more." %}
+                                </a>
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+
         {% include "two_factor/_wizard_forms.html" %}
 
         {# hidden submit button to enable [enter] key #}

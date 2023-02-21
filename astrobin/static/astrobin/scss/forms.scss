@@ -102,6 +102,12 @@ input:focus, textarea:focus {
     width: calc(100% - 1rem);
   }
 
+  .controls > .alert {
+    max-width: 570px;
+    width: calc(100% - 1rem);
+    margin-bottom: 0;
+  }
+
   .cke {
     max-width: 624px;
     width: calc(100% - 3px);
