@@ -1,5 +1,6 @@
 from django.contrib.postgres.search import SearchVector
 from django.db import models
+from django.db.models import QuerySet
 from django_filters import CharFilter, FilterSet, IsoDateTimeFilter
 
 from astrobin.models import Image
@@ -11,7 +12,7 @@ class ImageFilter(FilterSet):
     hash = ListFilter(field_name="hash", lookup_expr='in')
     q = CharFilter(method='search')
 
-    def search(self, queryset, name, value):
+    def search(self, queryset: QuerySet, name, value):
         return queryset.annotate(search=SearchVector('title', 'description')).filter(search=value)
 
     class Meta:

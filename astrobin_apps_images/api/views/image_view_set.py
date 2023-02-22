@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from annoying.functions import get_object_or_None
 from django.contrib.auth.models import User
+from django.db.models import Count
 from djangorestframework_camel_case.parser import CamelCaseJSONParser
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
 from rest_framework import mixins
@@ -85,6 +86,25 @@ class ImageViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.De
             if 'id' in data:
                 del data['id']
             SolarSystem_Acquisition.objects.create(**data)
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        has_deepsky_acquisitions_filter = self.request.GET.get('has-deepsky-acquisitions')
+        if has_deepsky_acquisitions_filter and has_deepsky_acquisitions_filter.lower() in ['1', 'true', 'yes']:
+            queryset = queryset.annotate(num_deepsky_acquisitions=Count('acquisition__deepsky_acquisition')).filter(
+                num_deepsky_acquisitions__gt=0
+            )
+
+        has_solarsystem_acquisitions_filter = self.request.GET.get('has-solarsystem-acquisitions')
+        if has_solarsystem_acquisitions_filter and has_solarsystem_acquisitions_filter.lower() in ['1', 'true', 'yes']:
+            queryset = queryset.annotate(
+                num_solarsystem_acquisitions=Count('acquisition__solarsystem_acquisition')
+            ).filter(
+                num_solarsystem_acquisitions__gt=0
+            )
+
+        return queryset
 
     def update(self, request, *args, **kwargs):
         equipment_data = self._prepare_equipment_data(request)
