@@ -14,6 +14,7 @@ from threaded_messages.views import (
     undelete as messages_undelete, view as messages_view,
 )
 from two_factor.urls import urlpatterns as tf_urls
+from two_factor.views import LoginView
 
 from astrobin import lookups
 from astrobin.api import (
@@ -129,7 +130,19 @@ urlpatterns += [
         name='auth_logout'
     ),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
+
+    ###########################################################################
+    ### TWO_FACTOR                                                          ###
+    ###########################################################################
+
+    # Override login in order to provide `redirect_authenticated_user`
+    url(
+        r'^account/login/$',
+        LoginView.as_view(redirect_authenticated_user=True),
+        name='two_factor:login'
+    ),
     url('', include(tf_urls)),
+
     ###########################################################################
     ### THIRD PARTY APPS VIEWS                                              ###
     ###########################################################################
