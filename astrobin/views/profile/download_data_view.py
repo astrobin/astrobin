@@ -17,6 +17,7 @@ class DownloadDataView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     form_class = DownloadDataForm
     template_name = "user/profile/edit/download_data.html"
     success_url = reverse_lazy("profile_download_data")
+    raise_exception = True
 
     def test_func(self, user):
         valid_usersubscription = PremiumService(user).get_valid_usersubscription()
