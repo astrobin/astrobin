@@ -721,11 +721,6 @@ astrobin_common = {
                 return;
             }
 
-            // Skip external links.
-            if (url.indexOf('astrobin.com') === -1 && url.indexOf('localhost') === -1 && url[0] !== '/') {
-                return;
-            }
-
             // Skip CKEditor attachments.
             if (url.indexOf('ckeditor-files') > -1) {
                 return;
@@ -748,6 +743,27 @@ astrobin_common = {
 
             // Skip links to new tab/window.
             if (($(this).attr('target') || '_self') !== '_self') {
+                return;
+            }
+
+            // Skip javascript: links.
+            if (url.indexOf('javascript:') === 0) {
+                return;
+            }
+
+            // Skip anchor links.
+            if (url[0] === '#') {
+                return;
+            }
+
+            // Open external links in new tab.
+            if (
+                url.indexOf('astrobin.com') === -1 &&
+                url.indexOf('localhost') === -1 &&
+                url[0] !== '/'
+            ) {
+                astrobin_common.open_link(url, true);
+                event.preventDefault();
                 return;
             }
 
@@ -887,10 +903,6 @@ astrobin_common = {
             var urlWithoutNid = astrobin_common.remove_url_param(window.location.href, "nid");
             window.history.replaceState('', document.title, urlWithoutNid);
 
-            function go(link, openInNewTab) {
-                window.open(link, openInNewTab ? "_blank" : "_self");
-            }
-
             $(".notifications-modal .notification-item .notification-content a").live('click', function (event) {
                 event.preventDefault();
 
@@ -906,16 +918,20 @@ astrobin_common = {
 
                     if (openInNewTab || event.metaKey || event.ctrlKey) {
                         astrobin_common.mark_notification_as_read(id).then(function () {
-                            go(link, true);
+                            astrobin_common.open_link(link, true);
                         });
                     } else {
                         $readMarker.hide();
                         $loading.show();
-                        go(link, false);
+                        astrobin_common.open_link(link, false);
                     }
                 }
             })
         });
+    },
+
+    open_link(link, openInNewTab) {
+        window.open(link, openInNewTab ? "_blank" : "_self");
     },
 
     get_links_in_text: function (text) {
