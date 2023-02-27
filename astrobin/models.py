@@ -2205,7 +2205,7 @@ class DeepSky_Acquisition(Acquisition):
         _("Flat darks"),
         null=True,
         blank=True,
-        help_text=_("The number of dark flat frames."),
+        help_text=_("The number of flat dark frames."),
     )
 
     bias = models.PositiveIntegerField(
