@@ -1169,8 +1169,10 @@ class Image(HasSolutionMixin, SafeDeleteModel):
     sharpen_thumbnails = models.BooleanField(
         default=False,
         verbose_name=_('Sharpen thumbnails'),
-        help_text=_('If selected, AstroBin will use a resizing algorithm that slightly sharpens the image\'s '
-                    'thumbnails. This setting applies to all revisions.'),
+        help_text=_(
+            'If selected, AstroBin will use a resizing algorithm that slightly sharpens all sizes of the image except '
+            'the full size version.')
+        ,
     )
 
     full_size_display_limitation = models.CharField(
