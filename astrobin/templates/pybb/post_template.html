@@ -4,6 +4,7 @@
 {% load pybb_tags %}
 {% load bbcode_tags %}
 {% load astrobin_apps_users_tags %}
+{% load astrobin_apps_premium_tags %}
 {% load common_tags %}
 {% load toggleproperty_tags %}
 {% load tags %}
@@ -128,7 +129,7 @@
                 {% endif %}
 
                 {% if post|pybb_posted_by:user or user.is_superuser %}
-                    {% if post.created|more_recent_than:86400 or user.is_superuser %}
+                    {% if post.created|more_recent_than:86400 or user.is_superuser or not valid_usersubscription|is_free %}
                         <a href="{% url 'pybb:edit_post' pk=post.id %}"
                            class="btn btn-mini btn-primary">
                             <i class="icon-pencil"></i> {% trans "Edit" %}
