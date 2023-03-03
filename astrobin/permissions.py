@@ -1,7 +1,10 @@
+import datetime
+
 from django.db.models import Q
 from pybb.permissions import DefaultPermissionHandler
 
 from astrobin_apps_groups.models import Group
+from astrobin_apps_premium.services.premium_service import PremiumService
 
 
 class CustomForumPermissions(DefaultPermissionHandler):
@@ -108,3 +111,18 @@ class CustomForumPermissions(DefaultPermissionHandler):
     def may_create_post(self, user, topic):
         may = super(CustomForumPermissions, self).may_create_post(user, topic)
         return may and self.may_create_topic(user, topic.forum)
+
+    def may_edit_post(self, user, post):
+        if user.is_superuser:
+            return True
+
+        if post.user != user:
+            return False
+
+        valid_subscription = PremiumService(user).get_valid_usersubscription()
+
+        return (
+                self.may_moderate_post(user, post) or
+                post.created < datetime.datetime.now() - datetime.timedelta(days=1) or
+                not PremiumService.is_free(valid_subscription)
+        )
