@@ -123,6 +123,7 @@ class CustomForumPermissions(DefaultPermissionHandler):
 
         return (
                 self.may_moderate_post(user, post) or
-                post.created < datetime.datetime.now() - datetime.timedelta(days=1) or
-                not PremiumService.is_free(valid_subscription)
+                post.created >= datetime.datetime.now() - datetime.timedelta(days=1) or
+                PremiumService.is_any_paid_subscription(valid_subscription) or
+                PremiumService.has_expired_paid_subscription(user)
         )
