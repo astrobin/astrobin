@@ -11,7 +11,7 @@
 
 {% if paginator.object_list %}
 
-    {% if search_domain == None or search_domain == 'i' %}
+    {% if search_domain == None or search_domain == 'i' or search_domain == 'b' or search_domain == 'l' %}
         {% with request.user|get_valid_usersubscription as request_user_valid_usersubscription %}
             {% if request_user_valid_usersubscription|allow_full_retailer_integration:None %}
                 {% if equipment_item_listings or equipment_brand_listings %}

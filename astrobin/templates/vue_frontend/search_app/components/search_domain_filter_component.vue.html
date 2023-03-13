@@ -29,8 +29,18 @@
                 options: [
                     {
                         id: "i",
-                        label: "{% trans "Images" %}"
+                        label: "{% trans "All images" %}"
                     },
+                    {% if request.user.is_authenticated %}
+                    {
+                        id: "b",
+                        label: "{% trans "Images bookmarked by you" %}"
+                    },
+                    {
+                        id: "l",
+                        label: "{% trans "Images liked by you" %}"
+                    },
+                    {% endif %}
                     {
                         id: "u",
                         label: "{% trans "Users" %}"

@@ -5,6 +5,8 @@ from operator import or_
 
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from haystack.backends import SQ
 from haystack.forms import SearchForm
@@ -17,6 +19,7 @@ from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin_apps_groups.models import Group
 from common.templatetags.common_tags import asciify
 from nested_comments.models import NestedComment
+from toggleproperties.models import ToggleProperty
 from .models import Image
 
 FIELDS = (
@@ -173,11 +176,36 @@ class AstroBinSearchForm(SearchForm):
     def filter_by_domain(self, results):
         d = self.cleaned_data.get("d")
 
+        # i = Images
+        # b = Bookmarked images
+        # l = Liked images
+        # u = Users
+        # f = Forums
+        # c = Comments
+
         if d is None or d == "":
             d = "i"
 
         if d == "i":
             results = results.models(Image)
+        elif d == "b":
+            if not self.request.user.is_authenticated:
+                raise PermissionDenied
+            bookmarked_image_ids = ToggleProperty.objects.filter(
+                property_type='bookmark',
+                content_type=ContentType.objects.get_for_model(Image),
+                user=self.request.user,
+            ).values_list('object_id', flat=True)
+            results = results.models(Image).filter(django_id__in=bookmarked_image_ids)
+        elif d == "l":
+            if not self.request.user.is_authenticated:
+                raise PermissionDenied
+            bookmarked_image_ids = ToggleProperty.objects.filter(
+                property_type='like',
+                content_type=ContentType.objects.get_for_model(Image),
+                user=self.request.user,
+            ).values_list('object_id', flat=True)
+            results = results.models(Image).filter(django_id__in=bookmarked_image_ids)
         elif d == "u":
             results = results.models(User)
         elif d == "f":
@@ -700,7 +728,7 @@ class AstroBinSearchForm(SearchForm):
         domain = self.cleaned_data.get('d', 'i')
 
         # Default to upload order for images.
-        if domain == 'i':
+        if domain in ('i', 'b', 'l'):
             order_by = ('-published', '-uploaded')
 
         # Default to updated/created order for comments/forums.
