@@ -189,11 +189,37 @@ class AstroBinSearchForm(SearchForm):
 
     def filter_by_type(self, results):
         t = self.cleaned_data.get("t")
+        q = self.cleaned_data.get('q')
 
         if t is None or t == "":
             t = "all"
 
-        if t != "all":
+        if t == 'imaging_cameras':
+            results = results.filter(
+                SQ(imaging_cameras=CustomContain(q)) |
+                SQ(imaging_cameras_2=CustomContain(q))
+            )
+        elif t == 'imaging_telescopes':
+            results = results.filter(
+                SQ(imaging_telescopes=CustomContain(q)) |
+                SQ(imaging_telescopes_2=CustomContain(q))
+            )
+        elif t == 'guiding_cameras':
+            results = results.filter(
+                SQ(guiding_cameras=CustomContain(q)) |
+                SQ(guiding_cameras_2=CustomContain(q))
+            )
+        elif t == 'guiding_telescopes':
+            results = results.filter(
+                SQ(guiding_telescopes=CustomContain(q)) |
+                SQ(guiding_telescopes_2=CustomContain(q))
+            )
+        elif t == 'mounts':
+            results = results.filter(
+                SQ(mounts=CustomContain(q)) |
+                SQ(mounts_2=CustomContain(q))
+            )
+        elif t != "all":
             results = results.filter(**{t: self.cleaned_data.get('q')})
 
         return results

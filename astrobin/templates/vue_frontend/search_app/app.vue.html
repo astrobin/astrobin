@@ -776,7 +776,7 @@
             {% else %}
                 this.enabledFilters.push(this.getFilterByName("d"));
 
-                if (this.searchDomain === "i") {
+                if (this.isImageSearch()) {
                     this.enabledFilters.push(this.getFilterByName("t"));
                 }
             {% endif %}
