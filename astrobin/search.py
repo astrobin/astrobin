@@ -5,7 +5,6 @@ from operator import or_
 
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from haystack.backends import SQ
@@ -19,7 +18,6 @@ from astrobin.enums import SolarSystemSubject, SubjectType
 from astrobin_apps_groups.models import Group
 from common.templatetags.common_tags import asciify
 from nested_comments.models import NestedComment
-from toggleproperties.models import ToggleProperty
 from .models import Image
 
 FIELDS = (
@@ -191,21 +189,11 @@ class AstroBinSearchForm(SearchForm):
         elif d == "b":
             if not self.request.user.is_authenticated:
                 raise PermissionDenied
-            bookmarked_image_ids = ToggleProperty.objects.filter(
-                property_type='bookmark',
-                content_type=ContentType.objects.get_for_model(Image),
-                user=self.request.user,
-            ).values_list('object_id', flat=True)
-            results = results.models(Image).filter(django_id__in=bookmarked_image_ids)
+            results = results.models(Image).filter(bookmarked_by=self.request.user.pk)
         elif d == "l":
             if not self.request.user.is_authenticated:
                 raise PermissionDenied
-            bookmarked_image_ids = ToggleProperty.objects.filter(
-                property_type='like',
-                content_type=ContentType.objects.get_for_model(Image),
-                user=self.request.user,
-            ).values_list('object_id', flat=True)
-            results = results.models(Image).filter(django_id__in=bookmarked_image_ids)
+            results = results.models(Image).filter(liked_by=self.request.user.pk)
         elif d == "u":
             results = results.models(User)
         elif d == "f":
