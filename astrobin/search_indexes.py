@@ -622,6 +622,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
     animated = BooleanField(model_attr='animated')
 
     likes = IntegerField()
+    liked_by = MultiValueField()
     integration = FloatField()
     moon_phase = FloatField()
     first_acquisition_date = DateTimeField()
@@ -668,6 +669,7 @@ class ImageIndex(CelerySearchIndex, Indexable):
     max_camera_pixel_size = FloatField()
 
     bookmarks = IntegerField()
+    bookmarked_by = MultiValueField()
 
     telescope_types = MultiValueField()
     camera_types = MultiValueField()
@@ -953,6 +955,10 @@ class ImageIndex(CelerySearchIndex, Indexable):
     def prepare_likes(self, obj):
         return _prepare_likes(obj)
 
+    def prepare_liked_by(self, obj):
+        likes = ToggleProperty.objects.toggleproperties_for_object("like", obj)
+        return [x.user.pk for x in likes.all()]
+
     def prepare_integration(self, obj):
         return _prepare_integration(obj)
 
@@ -981,6 +987,10 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     def prepare_bookmarks(self, obj):
         return _prepare_bookmarks(obj)
+
+    def prepare_bookmarked_by(self, obj):
+        bookmarks = ToggleProperty.objects.toggleproperties_for_object("bookmark", obj)
+        return [x.user.pk for x in bookmarks.all()]
 
     def prepare_constellation(self, obj):
         constellation = ImageService.get_constellation(obj.solution)
