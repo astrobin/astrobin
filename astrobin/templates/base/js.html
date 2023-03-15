@@ -48,7 +48,7 @@
                         "Is Lite": "{{ valid_usersubscription|is_any_lite }}" === "True",
                         "Is Premium": "{{ valid_usersubscription|is_any_premium }}" === "True",
                         "Is Ultimate": "{{ valid_usersubscription|is_any_ultimate }}" === "True",
-                        "Is IOTD Staff": "{{ request.user|has_group:"iotd_staff" }}" === "True"
+                        "Is IOTD Staff": "{{ request.user|is_in_group:"iotd_staff" }}" === "True"
                     });
                 } else {
                     setTimeout(function() {

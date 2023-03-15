@@ -142,7 +142,7 @@
                                 <modified-camera-filter v-if="filter.name === 'modified_camera'" :modified-camera="modifiedCamera"></modified-camera-filter>
                             </div>
 
-                            {% if request.GET.d == "i" or request.GET.d == None %}
+                            {% if request.GET.d == "i" or request.GET.d == "b" or request.GET.d == "l" or request.GET.d == None %}
                                 <div class="search-filter">
                                     <div class="search-filter-title">{% trans "Sort results" %}</div>
                                     {% if valid_usersubscription|can_access_advanced_search %}
@@ -764,18 +764,15 @@
             }
 
             this.enabledFilters.push(this.getFilterByName("q"));
+            this.enabledFilters.push(this.getFilterByName("d"));
 
             {% if valid_usersubscription|can_access_advanced_search %}
                 if (this.isImageSearch()) {
                     this.enabledFilters.push(this.getFilterByName("subject"));
                     this.enabledFilters.push(this.getFilterByName("telescope"));
                     this.enabledFilters.push(this.getFilterByName("camera"));
-                } else {
-                    this.enabledFilters.push(this.getFilterByName("d"));
                 }
             {% else %}
-                this.enabledFilters.push(this.getFilterByName("d"));
-
                 if (this.isImageSearch()) {
                     this.enabledFilters.push(this.getFilterByName("t"));
                 }
@@ -949,17 +946,14 @@
                 }
             },
             isImageSearch: function () {
-                return this.searchDomain === "i";
+                return [null, "i", "b", "l"].indexOf(this.searchDomain) > -1;
             },
 
             onSearchDomainChanged: function (val) {
                 this.searchDomain = val;
-                if (this.searchDomain !== "i") {
+                if (!this.isImageSearch()) {
                     this.enabledFilters = this.enabledFilters.filter(function (filter) {
-                        return [
-                            "q",
-                            "d"
-                        ].indexOf(filter.name) > -1
+                        return filter.name === "q" || filter.name === "d";
                     });
                 }
             }

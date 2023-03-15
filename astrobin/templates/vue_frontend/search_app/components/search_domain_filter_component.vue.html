@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load common_tags %}
 
 <script type="text/x-template" id="search-domain-filter-template">
     <div class="form-group">
@@ -29,8 +30,18 @@
                 options: [
                     {
                         id: "i",
-                        label: "{% trans "Images" %}"
+                        label: "{% trans "All images" %}"
                     },
+                    {% if request.user.is_authenticated and request.user|is_in_astrobin_group:constants.GroupName.BETA_TESTERS %}
+                    {
+                        id: "b",
+                        label: "{% trans "Images bookmarked by you" %}"
+                    },
+                    {
+                        id: "l",
+                        label: "{% trans "Images liked by you" %}"
+                    },
+                    {% endif %}
                     {
                         id: "u",
                         label: "{% trans "Users" %}"

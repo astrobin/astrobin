@@ -562,9 +562,24 @@ class UserService:
             return False
 
         if type(group_name) is list:
-            return self.user.groups.filter(name__in=group_name)
+            return self.user.groups.filter(name__in=group_name).exists()
 
-        return self.user.groups.filter(name=group_name)
+        return self.user.groups.filter(name=group_name).exists()
+
+    def is_in_astrobin_group(self, group_name: Union[str, List[str]]) -> bool:
+        if not self.user or not self.user.is_authenticated:
+            return False
+
+        if type(group_name) is list:
+            return (
+                    self.user.joined_group_set.filter(name__in=group_name).exists() or
+                    self.user.owned_group_set.filter(name__in=group_name).exists()
+            )
+
+        return (
+            self.user.joined_group_set.filter(name=group_name).exists() or
+            self.user.owned_group_set.filter(name=group_name).exists()
+        )
 
     def set_last_seen(self, country_code):
         from astrobin.models import UserProfile

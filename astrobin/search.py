@@ -5,6 +5,7 @@ from operator import or_
 
 from django import forms
 from django.contrib.auth.models import User
+from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from haystack.backends import SQ
 from haystack.forms import SearchForm
@@ -173,11 +174,26 @@ class AstroBinSearchForm(SearchForm):
     def filter_by_domain(self, results):
         d = self.cleaned_data.get("d")
 
+        # i = Images
+        # b = Bookmarked images
+        # l = Liked images
+        # u = Users
+        # f = Forums
+        # c = Comments
+
         if d is None or d == "":
             d = "i"
 
         if d == "i":
             results = results.models(Image)
+        elif d == "b":
+            if not self.request.user.is_authenticated:
+                raise PermissionDenied
+            results = results.models(Image).filter(bookmarked_by=self.request.user.pk)
+        elif d == "l":
+            if not self.request.user.is_authenticated:
+                raise PermissionDenied
+            results = results.models(Image).filter(liked_by=self.request.user.pk)
         elif d == "u":
             results = results.models(User)
         elif d == "f":
@@ -700,7 +716,7 @@ class AstroBinSearchForm(SearchForm):
         domain = self.cleaned_data.get('d', 'i')
 
         # Default to upload order for images.
-        if domain == 'i':
+        if domain in ('i', 'b', 'l'):
             order_by = ('-published', '-uploaded')
 
         # Default to updated/created order for comments/forums.
