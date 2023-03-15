@@ -1,5 +1,6 @@
 import datetime
 import unicodedata
+from typing import List, Union
 
 import bleach
 from dateutil import parser
@@ -14,6 +15,7 @@ from django.utils.safestring import mark_safe
 
 from astrobin.enums import ImageEditorStep
 from astrobin.models import Image
+from astrobin_apps_users.services import UserService
 from common.services import AppRedirectionService, DateTimeService
 from common.services.highlighting_service import HighlightingService
 from common.services.pagination_service import PaginationService
@@ -356,6 +358,7 @@ def get_verbose_field_name(instance, field_name):
 def add_days(value, days):
     return value + datetime.timedelta(days=days)
 
+
 @register.filter
 def asciify(value):
     try:
@@ -365,5 +368,10 @@ def asciify(value):
 
 
 @register.filter
-def has_group(user, group_name):
-    return user.groups.filter(name=group_name).exists()
+def is_in_group(user: User, group_name: Union[str, List[str]]) -> bool:
+    return UserService(user).is_in_group(group_name)
+
+
+@register.filter
+def is_in_astrobin_group(user: User, group_name: Union[str, List[str]]) -> bool:
+    return UserService(user).is_in_astrobin_group(group_name)

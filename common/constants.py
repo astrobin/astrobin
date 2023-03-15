@@ -3,3 +3,4 @@ class GroupName:
     GLOBAL_EQUIPMENT_MIGRATORS = 'global_equipment_migrators'
     EQUIPMENT_MODERATORS = 'equipment_moderators'
     ACQUISITION_EDIT_TESTERS = 'acquisition_edit_testers'
+    BETA_TESTERS = 'AstroBin Beta Testers'
