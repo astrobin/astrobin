@@ -694,6 +694,8 @@ class ImageIndex(CelerySearchIndex, Indexable):
 
     gallery_thumbnail = CharField()
 
+    user_followed_by = MultiValueField()
+
     def index_queryset(self, using=None):
         return self.get_model().objects.filter(moderator_decision=ModeratorDecision.APPROVED)
 
@@ -1038,6 +1040,9 @@ class ImageIndex(CelerySearchIndex, Indexable):
     def prepare_gallery_thumbnail(self, obj: Image):
         return obj.thumbnail('gallery', 'final', sync=True)
 
+    def prepare_user_followed_by(self, obj: Image):
+        follows = ToggleProperty.objects.toggleproperties_for_object("follow", obj.user)
+        return [x.user.pk for x in follows.all()]
 
 class NestedCommentIndex(CelerySearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
