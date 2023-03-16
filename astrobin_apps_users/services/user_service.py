@@ -379,10 +379,10 @@ class UserService:
             gear_images_message = _("Gear images")
 
             # L = LEGACY, N = NEW
-            menu += [(f'L{x.id}', str(x)) for x in telescopes]
-            menu += [(f'N{x.id}', str(x)) for x in telescopes_2]
-            menu += [(f'L{x.id}', str(x)) for x in cameras]
-            menu += [(f'N{x.id}', str(x)) for x in cameras_2]
+            menu += [(f'LT{x.id}', str(x)) for x in telescopes]
+            menu += [(f'NT{x.id}', str(x)) for x in telescopes_2]
+            menu += [(f'LC{x.id}', str(x)) for x in cameras]
+            menu += [(f'NC{x.id}', str(x)) for x in cameras_2]
             menu += [(0, no_data_message)]
             menu += [(-1, gear_images_message)]
 
@@ -396,27 +396,28 @@ class UserService:
             else:
                 if active in (None, ''):
                     if telescopes:
-                        active = f'L{telescopes[0].id}'
+                        active = f'LT{telescopes[0].id}'
                     elif telescopes_2:
-                        active = f'N{telescopes_2[0].id}'
+                        active = f'NT{telescopes_2[0].id}'
                     elif cameras:
-                        active = f'L{cameras[0].id}'
+                        active = f'LC{cameras[0].id}'
                     elif cameras_2:
-                        active = f'N{cameras_2[0].id}'
+                        active = f'NC{cameras_2[0].id}'
 
                 if active:
                     if active.startswith('L'):
-                        active = active.replace('L', '')
+                        active_id = active[2:]
                         queryset = queryset.filter(
-                            Q(imaging_telescopes__id=active) |
-                            Q(imaging_cameras__id=active)
+                            Q(imaging_telescopes__id=active_id) |
+                            Q(imaging_cameras__id=active_id)
                         ).distinct()
                     elif active.startswith('N'):
-                        active = active.replace('N', '')
-                        if klass in (None, 'telescope'):
-                            queryset = queryset.filter(imaging_telescopes_2__id=active).distinct()
-                        elif klass == 'camera':
-                            queryset = queryset.filter(imaging_cameras_2__id=active).distinct()
+                        klass = active[1]
+                        active_id = active[2:]
+                        if klass in (None, 'T', 'telescope'):
+                            queryset = queryset.filter(imaging_telescopes_2__id=active_id).distinct()
+                        elif klass in ('C', 'camera'):
+                            queryset = queryset.filter(imaging_cameras_2__id=active_id).distinct()
                         else:
                             queryset = queryset.none()
 
