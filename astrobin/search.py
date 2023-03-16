@@ -186,14 +186,18 @@ class AstroBinSearchForm(SearchForm):
 
         if d == "i":
             results = results.models(Image)
-        elif d == "b":
+        elif d == "ib":
             if not self.request.user.is_authenticated:
                 raise PermissionDenied
             results = results.models(Image).filter(bookmarked_by=self.request.user.pk)
-        elif d == "l":
+        elif d == "il":
             if not self.request.user.is_authenticated:
                 raise PermissionDenied
             results = results.models(Image).filter(liked_by=self.request.user.pk)
+        elif d == "if":
+            if not self.request.user.is_authenticated:
+                raise PermissionDenied
+            results = results.models(Image).filter(user_followed_by=self.request.user.pk)
         elif d == "u":
             results = results.models(User)
         elif d == "f":
@@ -716,7 +720,7 @@ class AstroBinSearchForm(SearchForm):
         domain = self.cleaned_data.get('d', 'i')
 
         # Default to upload order for images.
-        if domain in ('i', 'b', 'l'):
+        if domain.startswith('i'):
             order_by = ('-published', '-uploaded')
 
         # Default to updated/created order for comments/forums.

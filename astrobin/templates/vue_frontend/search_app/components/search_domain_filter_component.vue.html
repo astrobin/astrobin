@@ -34,12 +34,16 @@
                     },
                     {% if request.user.is_authenticated and request.user|is_in_astrobin_group:constants.GroupName.BETA_TESTERS %}
                     {
-                        id: "b",
+                        id: "ib",
                         label: "{% trans "Images bookmarked by you" %}"
                     },
                     {
-                        id: "l",
+                        id: "il",
                         label: "{% trans "Images liked by you" %}"
+                    },
+                    {
+                        id: "if",
+                        label: "{% trans "Images by users you follow" %}"
                     },
                     {% endif %}
                     {

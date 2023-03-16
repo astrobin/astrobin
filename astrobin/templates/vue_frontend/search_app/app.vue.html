@@ -1,4 +1,7 @@
-{% load i18n %}{% load common_tags %}{% load astrobin_apps_premium_tags %}
+{% load i18n %}
+{% load common_tags %}
+{% load tags %}
+{% load astrobin_apps_premium_tags %}
 
 <script type="text/x-template" id="app-template">
     <div class="accordion search-filters-app" :class="{collapsed: collapsed}">
@@ -142,7 +145,7 @@
                                 <modified-camera-filter v-if="filter.name === 'modified_camera'" :modified-camera="modifiedCamera"></modified-camera-filter>
                             </div>
 
-                            {% if request.GET.d == "i" or request.GET.d == "b" or request.GET.d == "l" or request.GET.d == None %}
+                            {% if request.GET.d == None or request.GET.d|startswith:'i' %}
                                 <div class="search-filter">
                                     <div class="search-filter-title">{% trans "Sort results" %}</div>
                                     {% if valid_usersubscription|can_access_advanced_search %}
@@ -946,7 +949,7 @@
                 }
             },
             isImageSearch: function () {
-                return [null, "i", "b", "l"].indexOf(this.searchDomain) > -1;
+                return !!this.searchDomain && this.searchDomain.length > 0 && this.searchDomain[0] === 'i';
             },
 
             onSearchDomainChanged: function (val) {
