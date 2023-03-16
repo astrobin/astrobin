@@ -383,7 +383,7 @@ class UserTest(TestCase):
         image2.save(keep_deleted=True)
 
         response = self.client.get(
-            reverse('user_page', args=('user',)) + "?sub=gear&active=L%d" % telescope1.pk)
+            reverse('user_page', args=('user',)) + "?sub=gear&active=LT%d" % telescope1.pk)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, image1.title)
         self.assertNotContains(response, image2.title)
@@ -391,7 +391,7 @@ class UserTest(TestCase):
         self.assertNotContains(response, image4.title)
 
         response = self.client.get(
-            reverse('user_page', args=('user',)) + "?sub=gear&active=L%d" % telescope2.pk)
+            reverse('user_page', args=('user',)) + "?sub=gear&active=LT%d" % telescope2.pk)
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, image1.title)
         self.assertContains(response, image2.title)
