@@ -32,7 +32,7 @@
                         id: "i",
                         label: "{% trans "All images" %}"
                     },
-                    {% if request.user.is_authenticated and request.user|is_in_astrobin_group:constants.GroupName.BETA_TESTERS %}
+                    {% if request.user.is_authenticated %}
                     {
                         id: "ib",
                         label: "{% trans "Images bookmarked by you" %}"
